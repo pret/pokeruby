@@ -45,6 +45,9 @@ extern u8 gUnknown_02024D26;
 extern u8 gUnknown_02024E60[];
 extern u8 gUnknown_02024E64[];
 extern u8 gUnknown_03004040[];
+extern u8 gUnknown_030041C0[];
+extern u8 gUnknown_03004290[];
+extern u8 gUnknown_030042B0[];
 extern void (*gUnknown_030042D4)(void);
 extern void (*gUnknown_03004330[])(void);
 
@@ -749,19 +752,21 @@ void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u
     dp01_prepare_buffer(a, gUnknown_03004040, 0x2C);
 }
 
-/*
+#ifdef NONMATCHING
 void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
 {
     int i;
+    //u16 *r12;
     
     gUnknown_03004040[0] = 16;
     gUnknown_03004040[1] = gUnknown_02024D26;
     gUnknown_03004040[2] = b;
-    gUnknown_03004040[3] = b >> 8;
-    //UB: alignment?
-    *((u16 *)(gUnknown_03004040 + 4)) = gUnknown_02024BE6;
-    *((u16 *)(gUnknown_03004040 + 6)) = gUnknown_02024BE8;
-    *((u16 *)(gUnknown_03004040 + 8)) = gUnknown_02024C04;
+    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
+    
+    *((u16 *)&gUnknown_03004040[4]) = gUnknown_02024BE6;
+    *((u16 *)&gUnknown_03004040[6]) = gUnknown_02024BE8;
+    *((u16 *)&gUnknown_03004040[8]) = gUnknown_02024C04;
+    
     gUnknown_03004040[10] = byte_2024C06;
     gUnknown_03004040[11] = unk_2000000[0x16000 + 3];
     gUnknown_03004040[12] = unk_2000000[0x16000 + 0x5E];
@@ -769,11 +774,268 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     gUnknown_03004040[14] = gUnknown_02024C0B;
     gUnknown_03004040[15] = gBattleMoves[gUnknown_02024BE6].type;
     for (i = 0; i < 4; i++)
+    {
         gUnknown_03004040[16 + i] = gBattleMons[i].ability;
+    }
     for (i = 0; i < 16; i++)
     {
         gUnknown_03004040[20 + i] = gUnknown_030041C0[i];
-        //Finish later
+        gUnknown_03004040[36 + i] = gUnknown_03004290[i];
+        gUnknown_03004040[52 + i] = gUnknown_030042B0[i];
     }
+    dp01_prepare_buffer(a, gUnknown_03004040, 0x44);
 }
-*/
+#else
+__attribute__((naked))
+void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r10, r0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    ldr r2, _0800CA2C @ =gUnknown_03004040\n\
+    movs r0, 0x10\n\
+    strb r0, [r2]\n\
+    ldr r0, _0800CA30 @ =gUnknown_02024D26\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r2, 0x1]\n\
+    strb r1, [r2, 0x2]\n\
+    lsrs r1, 8\n\
+    strb r1, [r2, 0x3]\n\
+    adds r0, r2, 0x4\n\
+    mov r12, r0\n\
+    ldr r4, _0800CA34 @ =gUnknown_02024BE6\n\
+    ldrh r0, [r4]\n\
+    strh r0, [r2, 0x4]\n\
+    ldr r0, _0800CA38 @ =gUnknown_02024BE8\n\
+    ldrh r0, [r0]\n\
+    mov r1, r12\n\
+    strh r0, [r1, 0x2]\n\
+    ldr r0, _0800CA3C @ =gUnknown_02024C04\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r1, 0x4]\n\
+    ldr r0, _0800CA40 @ =byte_2024C06\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1, 0x6]\n\
+    ldr r1, _0800CA44 @ =0x02000000\n\
+    ldr r3, _0800CA48 @ =0x00016003\n\
+    adds r0, r1, r3\n\
+    ldrb r0, [r0]\n\
+    mov r7, r12\n\
+    strb r0, [r7, 0x7]\n\
+    adds r3, 0x5B\n\
+    adds r0, r1, r3\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r7, 0x8]\n\
+    ldr r7, _0800CA4C @ =0x000160c1\n\
+    adds r1, r7\n\
+    ldrb r0, [r1]\n\
+    mov r1, r12\n\
+    strb r0, [r1, 0x9]\n\
+    ldr r0, _0800CA50 @ =gUnknown_02024C0B\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1, 0xA]\n\
+    ldr r3, _0800CA54 @ =gBattleMoves\n\
+    ldrh r1, [r4]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    ldrb r0, [r0, 0x2]\n\
+    mov r3, r12\n\
+    strb r0, [r3, 0xB]\n\
+    movs r3, 0\n\
+    mov r9, r2\n\
+    ldr r7, _0800CA58 @ =gUnknown_030042B0\n\
+    mov r8, r7\n\
+    adds r2, 0x10\n\
+    ldr r0, _0800CA5C @ =gBattleMons\n\
+    adds r4, r0, 0\n\
+    adds r4, 0x20\n\
+_0800C9D2:\n\
+    adds r1, r2, r3\n\
+    ldrb r0, [r4]\n\
+    strb r0, [r1]\n\
+    adds r4, 0x58\n\
+    adds r3, 0x1\n\
+    cmp r3, 0x3\n\
+    ble _0800C9D2\n\
+    movs r3, 0\n\
+    mov r5, r12\n\
+    adds r5, 0x10\n\
+    mov r4, r12\n\
+    adds r4, 0x20\n\
+    ldr r6, _0800CA60 @ =gUnknown_03004290\n\
+    mov r2, r12\n\
+    adds r2, 0x30\n\
+_0800C9F0:\n\
+    adds r1, r5, r3\n\
+    ldr r7, _0800CA64 @ =gUnknown_030041C0\n\
+    adds r0, r3, r7\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r1, r4, r3\n\
+    adds r0, r3, r6\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r1, r2, r3\n\
+    mov r7, r8\n\
+    adds r0, r3, r7\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r3, 0x1\n\
+    cmp r3, 0xF\n\
+    ble _0800C9F0\n\
+    mov r0, r10\n\
+    mov r1, r9\n\
+    movs r2, 0x44\n\
+    bl dp01_prepare_buffer\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0800CA2C: .4byte gUnknown_03004040\n\
+_0800CA30: .4byte gUnknown_02024D26\n\
+_0800CA34: .4byte gUnknown_02024BE6\n\
+_0800CA38: .4byte gUnknown_02024BE8\n\
+_0800CA3C: .4byte gUnknown_02024C04\n\
+_0800CA40: .4byte byte_2024C06\n\
+_0800CA44: .4byte 0x02000000\n\
+_0800CA48: .4byte 0x00016003\n\
+_0800CA4C: .4byte 0x000160c1\n\
+_0800CA50: .4byte gUnknown_02024C0B\n\
+_0800CA54: .4byte gBattleMoves\n\
+_0800CA58: .4byte gUnknown_030042B0\n\
+_0800CA5C: .4byte gBattleMons\n\
+_0800CA60: .4byte gUnknown_03004290\n\
+_0800CA64: .4byte gUnknown_030041C0\n\
+    .syntax divided\n");
+}
+#endif
+
+__attribute__((naked))
+void dp01_build_cmdbuf_x11_TODO()
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r10, r0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    ldr r2, _0800CB28 @ =gUnknown_03004040\n\
+    movs r0, 0x11\n\
+    strb r0, [r2]\n\
+    strb r0, [r2, 0x1]\n\
+    strb r1, [r2, 0x2]\n\
+    lsrs r1, 8\n\
+    strb r1, [r2, 0x3]\n\
+    adds r0, r2, 0x4\n\
+    mov r12, r0\n\
+    ldr r0, _0800CB2C @ =gUnknown_02024BE6\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r2, 0x4]\n\
+    ldr r0, _0800CB30 @ =gUnknown_02024BE8\n\
+    ldrh r0, [r0]\n\
+    mov r1, r12\n\
+    strh r0, [r1, 0x2]\n\
+    ldr r0, _0800CB34 @ =gUnknown_02024C04\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r1, 0x4]\n\
+    ldr r0, _0800CB38 @ =byte_2024C06\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1, 0x6]\n\
+    ldr r0, _0800CB3C @ =0x02000000\n\
+    ldr r3, _0800CB40 @ =0x00016003\n\
+    adds r1, r0, r3\n\
+    ldrb r1, [r1]\n\
+    mov r7, r12\n\
+    strb r1, [r7, 0x7]\n\
+    ldr r1, _0800CB44 @ =0x0001605e\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r7, 0x8]\n\
+    movs r3, 0\n\
+    mov r9, r2\n\
+    ldr r7, _0800CB48 @ =gUnknown_030042B0\n\
+    mov r8, r7\n\
+    mov r4, r9\n\
+    adds r4, 0x10\n\
+    ldr r0, _0800CB4C @ =gBattleMons\n\
+    adds r2, r0, 0\n\
+    adds r2, 0x20\n\
+_0800CACE:\n\
+    adds r1, r4, r3\n\
+    ldrb r0, [r2]\n\
+    strb r0, [r1]\n\
+    adds r2, 0x58\n\
+    adds r3, 0x1\n\
+    cmp r3, 0x3\n\
+    ble _0800CACE\n\
+    movs r3, 0\n\
+    mov r5, r12\n\
+    adds r5, 0x10\n\
+    mov r4, r12\n\
+    adds r4, 0x20\n\
+    ldr r6, _0800CB50 @ =gUnknown_03004290\n\
+    mov r2, r12\n\
+    adds r2, 0x30\n\
+_0800CAEC:\n\
+    adds r1, r5, r3\n\
+    ldr r7, _0800CB54 @ =gUnknown_030041C0\n\
+    adds r0, r3, r7\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r1, r4, r3\n\
+    adds r0, r3, r6\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r1, r2, r3\n\
+    mov r7, r8\n\
+    adds r0, r3, r7\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r3, 0x1\n\
+    cmp r3, 0xF\n\
+    ble _0800CAEC\n\
+    mov r0, r10\n\
+    mov r1, r9\n\
+    movs r2, 0x44\n\
+    bl dp01_prepare_buffer\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0800CB28: .4byte gUnknown_03004040\n\
+_0800CB2C: .4byte gUnknown_02024BE6\n\
+_0800CB30: .4byte gUnknown_02024BE8\n\
+_0800CB34: .4byte gUnknown_02024C04\n\
+_0800CB38: .4byte byte_2024C06\n\
+_0800CB3C: .4byte 0x02000000\n\
+_0800CB40: .4byte 0x00016003\n\
+_0800CB44: .4byte 0x0001605e\n\
+_0800CB48: .4byte gUnknown_030042B0\n\
+_0800CB4C: .4byte gBattleMons\n\
+_0800CB50: .4byte gUnknown_03004290\n\
+_0800CB54: .4byte gUnknown_030041C0\n\
+    .syntax divided\n");
+}
