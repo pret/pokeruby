@@ -197,7 +197,7 @@ SECTIONS {
         asm/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
-        asm/rom6.o(.text);
+        src/rom6.o(.text);
         asm/pokeblock.o(.text);
         asm/rom_810CBB4.o(.text);
         asm/battle_records.o(.text);
