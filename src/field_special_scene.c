@@ -1,15 +1,15 @@
 #include "global.h"
 #include "field_special_scene.h"
 #include "asm.h"
+#include "event_data.h"
+#include "field_camera.h"
 #include "palette.h"
-#include "task.h"
+#include "rom4.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
-#include "field_camera.h"
-#include "rom4.h"
-#include "event_data.h"
 #include "sprite.h"
+#include "task.h"
 
 extern s8 gTruckCamera_HorizontalTable[];
 

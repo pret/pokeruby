@@ -393,7 +393,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile) {
 	if (x >= 0 && x < gUnknown_03004870.width
 	 && y >= 0 && y < gUnknown_03004870.height) {
 		i = x + y * gUnknown_03004870.width;
-		gUnknown_03004870.map[i] = (gUnknown_03004870.map[i] & 0xf000) | (metatile & 0xfff); 
+		gUnknown_03004870.map[i] = (gUnknown_03004870.map[i] & 0xf000) | (metatile & 0xfff);
 	}
 }
 

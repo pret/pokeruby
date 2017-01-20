@@ -1,25 +1,26 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "asm.h"
-#include "safari_zone.h"
-#include "weather.h"
-#include "palette.h"
-#include "field_player_avatar.h"
-#include "rom4.h"
 #include "battle.h"
+#include "event_data.h"
+#include "field_message_box.h"
+#include "field_player_avatar.h"
 #include "main.h"
-#include "species.h"
+#include "metatile_behavior.h"
+#include "palette.h"
+#include "rng.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "script.h"
 #include "songs.h"
 #include "sound.h"
-#include "task.h"
-#include "string_util.h"
-#include "rng.h"
-#include "event_data.h"
-#include "script.h"
-#include "field_message_box.h"
-#include "trainer.h"
+#include "species.h"
 #include "starter_choose.h"
-#include "metatile_behavior.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
+#include "trainer.h"
+#include "weather.h"
 
 #define NUM_TRAINER_EYE_TRAINERS 56
 #define TRAINER_REMATCH_STEPS 255
@@ -116,8 +117,6 @@ extern struct TrainerBattleSpec gTrainerBattleSpecs_1[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_2[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_3[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_4[];
-
-extern u8 gStringVar4[];
 
 extern u8 gBattleTransitionTable_Wild[][2];
 extern u8 gBattleTransitionTable_Trainer[][2];
@@ -387,7 +386,7 @@ u16 GetSumOfPartyMonLevel(u8 numMons)
     for (i = 0; i < 6; i++)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        
+
         if (species != SPECIES_EGG && species != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
             sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);

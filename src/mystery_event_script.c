@@ -1,6 +1,7 @@
 #include "global.h"
 #include "script.h"
 #include "string_util.h"
+#include "text.h"
 
 #ifdef SAPPHIRE
 #define UNK_MASK 0x100

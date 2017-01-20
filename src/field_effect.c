@@ -1,7 +1,8 @@
 #include "global.h"
 #include "field_effect.h"
-#include "weather.h"
 #include "sprite.h"
+#include "text.h"
+#include "weather.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
 

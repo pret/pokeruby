@@ -1,14 +1,14 @@
 #include "global.h"
-#include "item.h"
-#include "task.h"
-#include "menu.h"
-#include "sound.h"
-#include "main.h"
-#include "script.h"
-#include "palette.h"
-#include "weather.h"
 #include "asm.h"
+#include "item.h"
+#include "main.h"
+#include "menu.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
 #include "string_util.h"
+#include "task.h"
+#include "weather.h"
 
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
 extern void ItemStorageMenuProcessInput(u8);
@@ -74,7 +74,7 @@ void NewGameInitPCItems(void)
 void BedroomPC(void)
 {
 	u8 taskId;
-	
+
 	gUnknown_02039314 = gUnknown_084062B8;
 	gUnknown_030007B4 = 4;
 	taskId = CreateTask(TaskDummy, 0);
@@ -84,7 +84,7 @@ void BedroomPC(void)
 void PlayerPC(void)
 {
 	u8 taskId;
-	
+
 	gUnknown_02039314 = gUnknown_084062BC;
 	gUnknown_030007B4 = 3;
 	taskId = CreateTask(TaskDummy, 0);
@@ -216,7 +216,7 @@ void ItemStorageMenuProcessInput(u8 var)
 		sub_8072DEC();
 		PlaySE(5);
 		gUnknown_084062C0[3].func(var);
-	}	
+	}
 }
 
 void Task_ItemStorage_Deposit(u8 taskId)
@@ -252,7 +252,7 @@ void ItemStorage_Withdraw(u8 taskId)
 {
 	u8 var;
 	u16 * data = gTasks[taskId].data;
-	
+
 	sub_8072DEC();
 	MenuZeroFillWindowRect(0, 0, 11, 9);
 	var = CountUsedPCItemSlots();
@@ -276,7 +276,7 @@ void ItemStorage_Toss(u8 taskId)
 {
 	u8 var;
 	u16 * data = gTasks[taskId].data;
-	
+
 	sub_8072DEC();
 	MenuZeroFillWindowRect(0, 0, 11, 9);
 	var = CountUsedPCItemSlots();
@@ -322,7 +322,7 @@ void sub_813A240(u8 taskId)
 void sub_813A280(u8 taskId)
 {
 	s16 *data = gTasks[taskId].data;
-	
+
 	if(gMain.newAndRepeatedKeys & 0x40)
 	{
 		if(data[0])
@@ -686,7 +686,7 @@ void sub_813A4B4(u8 taskId)
 
 	sub_80F996C(0);
 	sub_80F996C(1);
-	
+
 	if(data[6])
 	{
 		if(gSaveBlock1.pcItems[var].itemId == 1)

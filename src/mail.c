@@ -1,6 +1,7 @@
 #include "global.h"
 #include "mail.h"
 #include "asm.h"
+#include "items.h"
 #include "menu.h"
 #include "palette.h"
 #include "rom4.h"
@@ -8,7 +9,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "items.h"
 
 struct UnkMailStruct
 {

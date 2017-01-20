@@ -3,6 +3,7 @@
 #include "asm.h"
 #include "berry.h"
 #include "decompress.h"
+#include "items.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -13,7 +14,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "items.h"
 
 #define OFFSET_7B (123)
 #define FIRST_BERRY ITEM_CHERI_BERRY
@@ -30,7 +30,6 @@ struct BerryTagStatus
 };
 
 extern struct Struct2000000 unk_2000000;
-extern u16 gBGTilemapBuffers[4][0x400];
 extern u8 gUnknown_0203932C;
 extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gScriptItemId;
@@ -63,8 +62,8 @@ static void sub_8146600(u8 berry);
 // static void sub_81466A0(void);
 static void sub_81466E8(u8 taskId, s8 direction);
 // static void sub_8146798(u8 berry);
-// static void sub_8146810(u8 berry);
-// static void sub_81468BC(void);
+static void sub_8146810(s8 berry);
+static void sub_81468BC(void);
 
 static void sub_8146014(void)
 {
@@ -438,73 +437,27 @@ _0814678C:\n\
 	.syntax divided\n");
 }
 
-__attribute__((naked))
-void sub_8146798(u8 berry) {
-    asm(".syntax unified\n\
-	push {r4,r5,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	ldr r1, _08146800 @ =gTasks + 0x8\n\
-	adds r0, r1\n\
-	ldr r2, _08146804 @ =gUnknown_030041B4\n\
-	ldrh r1, [r0]\n\
-	ldrh r5, [r2]\n\
-	adds r3, r1, r5\n\
-	movs r1, 0xFF\n\
-	ands r3, r1\n\
-	strh r3, [r2]\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0\n\
-	ble _081467C2\n\
-	cmp r3, 0x90\n\
-	beq _081467CA\n\
-_081467C2:\n\
-	cmp r0, 0\n\
-	bge _081467E0\n\
-	cmp r3, 0x70\n\
-	bne _081467E0\n\
-_081467CA:\n\
-	ldr r0, _08146808 @ =gTasks\n\
-	lsls r1, r4, 2\n\
-	adds r1, r4\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	movs r0, 0xA\n\
-	ldrsb r0, [r1, r0]\n\
-	bl sub_8146810\n\
-	bl sub_81468BC\n\
-_081467E0:\n\
-	ldr r0, _08146804 @ =gUnknown_030041B4\n\
-	ldrh r2, [r0]\n\
-	cmp r2, 0\n\
-	bne _081467FA\n\
-	ldr r0, _08146808 @ =gTasks\n\
-	lsls r1, r4, 2\n\
-	adds r1, r4\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	strh r2, [r1, 0x8]\n\
-	strh r2, [r1, 0xA]\n\
-	ldr r0, _0814680C @ =sub_8146480\n\
-	str r0, [r1]\n\
-_081467FA:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08146800: .4byte gTasks + 0x8\n\
-_08146804: .4byte gUnknown_030041B4\n\
-_08146808: .4byte gTasks\n\
-_0814680C: .4byte sub_8146480\n\
-	.syntax divided\n");
+void sub_8146798(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+    
+    gUnknown_030041B4 = (gUnknown_030041B4 + taskData[0]) & 0xFF;
+    if ((taskData[0] > 0 && gUnknown_030041B4 == 144)
+     || (taskData[0] < 0 && gUnknown_030041B4 == 112))
+    {
+        sub_8146810(gTasks[taskId].data[1]);
+        sub_81468BC();
+    }
+    if (gUnknown_030041B4 == 0)
+    {
+        gTasks[taskId].data[0] = gUnknown_030041B4;
+        gTasks[taskId].data[1] = gUnknown_030041B4;
+        gTasks[taskId].func = sub_8146480;
+    }
 }
 
 __attribute__((naked))
-void sub_8146810(u8 berry) {
+static void sub_8146810(s8 berry) {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	lsls r0, 24\n\
@@ -592,7 +545,8 @@ _081468B8: .4byte gSprites\n\
 	.syntax divided\n");
 }
 
-void sub_81468BC(void) {
+static void sub_81468BC(void)
+{
     MenuZeroFillWindowRect(0, 4, 29, 19);
     sub_81464E4();
 

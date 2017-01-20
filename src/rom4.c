@@ -4,17 +4,19 @@
 #include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_map_obj.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "event_data.h"
+#include "field_special_scene.h"
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "metatile_behavior.h"
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
@@ -26,10 +28,8 @@
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
-#include "field_special_scene.h"
 #include "weather.h"
 #include "wild_encounter.h"
-#include "metatile_behavior.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -539,7 +539,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     DoCurrentWeather();
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
-    AddMapNamePopUpWindowTask();
+    ShowMapNamePopup();
 }
 
 void sub_8053994(u32 a1)
@@ -667,15 +667,15 @@ bool32 IsBikingAllowedByMap(void)
         return FALSE;
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         return FALSE;
-	
+
     // is player in SeafloorCavern_Room9?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 36)
         return FALSE;
-	
+
     // is player in CaveOfOrigin_B4F?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 42)
         return FALSE;
-	
+
     return TRUE;
 }
 
@@ -1029,7 +1029,7 @@ void c1_overworld_normal(u16 newKeys, u16 heldKeys)
         if (sub_8068024(&inputStruct) == 1)
         {
             ScriptContext2_Enable();
-            HideMapNamePopUpWindow();
+            HideMapNamePopup();
         }
         else
         {
@@ -1254,7 +1254,7 @@ void sub_80546F0(void)
 void sub_805470C(void)
 {
     if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-        AddMapNamePopUpWindowTask();
+        ShowMapNamePopup();
     sub_8080B60();
 }
 
@@ -1449,7 +1449,7 @@ bool32 sub_805493C(u8 *a1, u32 a2)
         break;
     case 11:
         if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-            AddMapNamePopUpWindowTask();
+            ShowMapNamePopup();
         (*a1)++;
         break;
     case 12:

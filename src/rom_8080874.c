@@ -1,9 +1,9 @@
 #include "global.h"
-#include "global.fieldmap.h"
 #include "gba/syscall.h"
-#include "weather.h"
-#include "task.h"
+#include "global.fieldmap.h"
 #include "script.h"
+#include "task.h"
+#include "weather.h"
 
 void palette_bg_fill_white(void);
 void palette_bg_fill_black(void);

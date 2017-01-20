@@ -1,10 +1,10 @@
 #include "global.h"
+#include "gba/gba.h"
 #include "save.h"
 #include "asm.h"
-#include "gba/gba.h"
+#include "gba/flash_internal.h"
 #include "load_save.h"
 #include "rom4.h"
-#include "gba/flash_internal.h"
 #include "save_failed_screen.h"
 
 extern struct SaveSection unk_2000000;

@@ -1,11 +1,11 @@
 #include "global.h"
 #include "sound.h"
 #include "asm.h"
-#include "gba/m4a_internal.h"
-#include "task.h"
-#include "songs.h"
-#include "m4a.h"
 #include "battle.h"
+#include "gba/m4a_internal.h"
+#include "m4a.h"
+#include "songs.h"
+#include "task.h"
 
 struct Fanfare
 {
@@ -526,7 +526,7 @@ void PlaySE(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
-void PlaySE12WithPanning(u16 songNum, u8 pan)
+void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
@@ -535,21 +535,21 @@ void PlaySE12WithPanning(u16 songNum, u8 pan)
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
 }
 
-void PlaySE1WithPanning(u16 songNum, u8 pan)
+void PlaySE1WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
     m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
 }
 
-void PlaySE2WithPanning(u16 songNum, u8 pan)
+void PlaySE2WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE2);
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
 }
 
-void SE12PanpotControl(u8 pan)
+void SE12PanpotControl(s8 pan)
 {
     m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);

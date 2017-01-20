@@ -1,21 +1,21 @@
 #include "global.h"
-#include "task.h"
-#include "item.h"
-#include "palette.h"
-#include "weather.h"
-#include "string_util.h"
-#include "menu.h"
-#include "mail.h"
 #include "asm.h"
-#include "rom4.h"
-#include "metatile_behavior.h"
-#include "field_player_avatar.h"
 #include "event_data.h"
-#include "map_obj_lock.h"
-#include "script.h"
 #include "field_player_avatar.h"
-#include "sound.h"
+#include "field_player_avatar.h"
+#include "item.h"
+#include "mail.h"
+#include "map_obj_lock.h"
+#include "menu.h"
+#include "metatile_behavior.h"
+#include "palette.h"
+#include "rom4.h"
+#include "script.h"
 #include "songs.h"
+#include "sound.h"
+#include "string_util.h"
+#include "task.h"
+#include "weather.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
@@ -91,7 +91,7 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *var3)
 {
 	StringExpandPlaceholders(gStringVar4, var3);
-	
+
 	switch(playerMenuStatus)
 	{
 		case 0: // Item Menu
@@ -146,10 +146,10 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 {
 	s16 x, y;
 	u8 tileBehavior;
-	
+
 	PlayerGetDestCoords(&x, &y);
 	tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-	
+
 	if(FlagGet(SYS_CYCLING_ROAD) == TRUE // on cycling road?
 		|| MetatileBehavior_IsVerticalRail(tileBehavior) == TRUE
 		|| MetatileBehavior_IsHorizontalRail(tileBehavior) == TRUE
@@ -176,7 +176,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
 		GetOnOffBike(2);
 	if(ItemId_GetSecondaryId(gScriptItemId) == 1)
 		GetOnOffBike(4);
-	
+
 	sub_8064E2C();
 	ScriptContext2_Disable();
 	DestroyTask(taskId);

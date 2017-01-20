@@ -74,7 +74,7 @@ bool8 IsPlayerSurfingNorth(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 // ClearPlayerAvatarInfo
 void SetPlayerAvatarStateMask(u8 a);
-// GetPlayerAvatarGraphicsIdByCurrentState
+u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 // SetPlayerAvatarExtraStateTransition
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 // sub_8059B88

@@ -1,14 +1,14 @@
 #include "global.h"
 #include "trainer_see.h"
 #include "asm.h"
-#include "battle_setup.h"
-#include "field_player_avatar.h"
-#include "field_map_obj.h"
 #include "asm_fieldmap.h"
-#include "task.h"
-#include "sprite.h"
+#include "battle_setup.h"
 #include "field_effect.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "script.h"
+#include "sprite.h"
+#include "task.h"
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);
@@ -395,7 +395,7 @@ u8 FldEff_ExclamationMarkIcon1(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 0, 0);
-    
+
     return 0;
 }
 
@@ -405,7 +405,7 @@ u8 FldEff_ExclamationMarkIcon2(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 33, 1);
-    
+
     return 0;
 }
 
@@ -415,7 +415,7 @@ u8 FldEff_HeartIcon(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 46, 0);
-    
+
     return 0;
 }
 
@@ -423,13 +423,13 @@ void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
 {
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;
-    
+
     sprite->data0 = gUnknown_0202FF84[0];
     sprite->data1 = gUnknown_0202FF84[1];
     sprite->data2 = gUnknown_0202FF84[2];
     sprite->data3 = -5;
     sprite->data7 = a2;
-    
+
     StartSpriteAnim(sprite, a3);
 }
 

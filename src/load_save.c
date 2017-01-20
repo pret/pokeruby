@@ -80,7 +80,7 @@ void LoadPlayerParty(void)
 static void SaveMapObjects(void)
 {
     int i;
-    
+
     for(i = 0; i < 16; i++)
         gSaveBlock1.mapObjects[i] = gMapObjects[i];
 }
@@ -88,7 +88,7 @@ static void SaveMapObjects(void)
 static void LoadMapObjects(void)
 {
     int i;
-    
+
     for(i = 0; i < 16; i++)
         gMapObjects[i] = gSaveBlock1.mapObjects[i];
 }

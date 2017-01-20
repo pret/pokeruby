@@ -7539,7 +7539,7 @@ _080A6D14:
 	thumb_func_start sub_80A6D1C
 sub_80A6D1C: @ 80A6D1C
 	push {r4,r5,lr}
-	bl HideMapNamePopUpWindow
+	bl HideMapNamePopup
 	ldr r0, _080A6D70 @ =gSaveBlock1
 	ldr r1, _080A6D74 @ =0x00000496
 	adds r4, r0, r1

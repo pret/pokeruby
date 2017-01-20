@@ -245,8 +245,8 @@ void sub_80A2B18(void);
 u16 sub_80A2D64(u16, u8 *);
 
 // asm/map_name_popup.o
-void AddMapNamePopUpWindowTask(void);
-void HideMapNamePopUpWindow();
+void ShowMapNamePopup(void);
+void HideMapNamePopup();
 
 // asm/item_menu.o
 void sub_80A3684(void);

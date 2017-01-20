@@ -484,65 +484,7 @@ gMPlay_PokemonCry: @ 202F79C
 gPokemonCryBGMDuckingCounter: @ 202F7A0
 	.space 0x4
 
-gUnknown_0202F7A4: @ 202F7A4
-	.space 0x4
-
-gUnknown_0202F7A8: @ 202F7A8
-	.space 0x4
-
-gUnknown_0202F7AC: @ 202F7AC
-	.space 0x4
-
-gUnknown_0202F7B0: @ 202F7B0
-	.space 0x1
-
-gUnknown_0202F7B1: @ 202F7B1
-	.space 0x1
-
-gUnknown_0202F7B2: @ 202F7B2
-	.space 0x1
-
-gUnknown_0202F7B3: @ 202F7B3
-	.space 0x1
-
-gUnknown_0202F7B4: @ 202F7B4
-	.space 0x4
-
-gUnknown_0202F7B8: @ 202F7B8
-	.space 0x4
-
-gUnknown_0202F7BC: @ 202F7BC
-	.space 0x2
-
-gUnknown_0202F7BE: @ 202F7BE
-	.space 0x2
-
-gUnknown_0202F7C0: @ 202F7C0
-	.space 0x2
-
-gUnknown_0202F7C2: @ 202F7C2
-	.space 0x2
-
-gUnknown_0202F7C4: @ 202F7C4
-	.space 0x1
-
-gUnknown_0202F7C5: @ 202F7C5
-	.space 0x1
-
-gUnknown_0202F7C6: @ 202F7C6
-	.space 0x2
-
-gUnknown_0202F7C8: @ 202F7C8
-	.space 0x1
-
-gUnknown_0202F7C9: @ 202F7C9
-	.space 0x1
-
-gUnknown_0202F7CA: @ 202F7CA
-	.space 0x8
-
-gUnknown_0202F7D2: @ 202F7D2
-	.space 0x2
+	.include "src/battle_anim.o"
 
 gUnknown_0202F7D4: @ 202F7D4
 	.space 0x10
@@ -667,9 +609,9 @@ gUnknown_020384F4: @ 20384F4
 gUnknown_020384F8: @ 20384F8
 	.space 0x40
 
-gUnknown_02038538: @ 2038538
-	.space 0x4
+	.include "src/map_name_popup.o"
 
+	.align 2
 gUnknown_0203853C: @ 203853C
 	.space 0x4
 

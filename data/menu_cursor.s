@@ -134,11 +134,11 @@ gUnknown_0842F1C0:: @ 842F1C0
 
 	.align 2
 gUnknown_0842F240:: @ 842F240
-	obj_pal 0x0203a360, 0xfff0
+	obj_pal gUnknown_0203A360, 0xfff0
 
 	.align 2
 gUnknown_0842F248:: @ 842F248
-	obj_pal 0x0203a360, 0xfff1
+	obj_pal gUnknown_0203A360, 0xfff1
 
 	.align 2
 gSpriteTemplate_842F250:: @ 842F250

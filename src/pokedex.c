@@ -1,18 +1,18 @@
 #include "global.h"
 #include "pokedex.h"
 #include "asm.h"
-#include "gba/m4a_internal.h"
-#include "string_util.h"
-#include "m4a.h"
 #include "decompress.h"
+#include "event_data.h"
+#include "gba/m4a_internal.h"
+#include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "rng.h"
 #include "songs.h"
 #include "sound.h"
+#include "string_util.h"
 #include "task.h"
-#include "event_data.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon
@@ -134,7 +134,7 @@ void DestroyCryMeterNeedleSprite();
 void sub_808C02C(void)
 {
     u16 i;
-    
+
     gUnknown_0202FFB8 = 0;
     gUnknown_0202FFBA = 0x40;
     gUnknown_03005CE8 = 0;
@@ -171,7 +171,7 @@ void sub_808C0B8(void)
 void ClearPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
-    
+
     for(i = 0; i <= 385; i++)
     {
         pokedexView->unk0[i].dexNum |= 0xFFFF;
@@ -228,7 +228,7 @@ void CB2_InitPokedex(void)
         {
             u8 *addr;
             u32 size;
-            
+
             SetVBlankCallback(NULL);
             sub_8091060(0);
             addr = (u8 *)VRAM;
@@ -303,7 +303,7 @@ void CB2_InitPokedex(void)
         case 3:
         {
             u16 savedIme;
-            
+
             savedIme = REG_IME;
             REG_IME = 0;
             REG_IE |= 1;
@@ -321,7 +321,7 @@ u8 unref_sub_808C540(void (*func)(u8))
 {
     u16 savedIme;
     u8 taskId;
-    
+
     SetVBlankCallback(NULL);
     sub_8091060(0x200);
     remove_some_task();
@@ -363,7 +363,7 @@ void Task_PokedexShowMainScreen(u8 taskId)
 void Task_PokedexMainScreen(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
-    
+
     //If menu is open, slide it down, off screen
     if(gPokedexView->menuY)
         gPokedexView->menuY -= 8;
@@ -429,7 +429,7 @@ void sub_808C898(u8 taskId)
 void Task_PokedexMainScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
-    
+
     //If menu is not open, slide it up, on screen
     if(gPokedexView->menuY != 80)
         gPokedexView->menuY += 8;
@@ -464,7 +464,7 @@ void Task_PokedexMainScreenMenu(u8 taskId)
                     break;
             }
         }
-        
+
         //Exit menu when Start or B is pressed
         if(gMain.newKeys & (START_BUTTON | B_BUTTON))
         {
@@ -518,7 +518,7 @@ void sub_808CAE4(u8 taskId)
 void sub_808CB8C(u8 taskId)
 {
     bool8 isActive = gTasks[gTasks[taskId].data[0]].isActive;
-    
+
     if(!isActive)
     {
         if(gPokedexView->unk64F)
@@ -564,7 +564,7 @@ void sub_808CCC4(u8 taskId)
 void Task_PokedexResultsScreen(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
-    
+
     if(gPokedexView->menuY)
         gPokedexView->menuY -= 8;
     else
@@ -572,7 +572,7 @@ void Task_PokedexResultsScreen(u8 taskId)
         if((gMain.newKeys & A_BUTTON) && gPokedexView->unk0[gPokedexView->selectedPokemon].seen)
         {
             u32 a;
-            
+
             sub_808E6BC();
             a = (1 << (gSprites[gPokedexView->unk626].oam.paletteNum + 16));
             gSprites[gPokedexView->unk626].callback = sub_808EDB8;
@@ -604,7 +604,7 @@ void Task_PokedexResultsScreen(u8 taskId)
         }
         else
         {
-            //Handle D-pad            
+            //Handle D-pad
             gPokedexView->selectedPokemon = sub_808E48C(gPokedexView->selectedPokemon, 0xE);
             if(gPokedexView->unk62E)
                 gTasks[taskId].func = sub_808CEF8;
@@ -621,7 +621,7 @@ void sub_808CEF8(u8 taskId)
 void Task_PokedexResultsScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
-    
+
     if(gPokedexView->menuY != 0x60)
         gPokedexView->menuY += 8;
     else
@@ -660,7 +660,7 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
                     break;
             }
         }
-        
+
         //Exit menu when Start or B is pressed
         if(gMain.newKeys & (START_BUTTON | B_BUTTON))
         {
@@ -837,9 +837,9 @@ void SortPokedex(u8 dexMode, u8 sortMode)
 {
     u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
     s16 i;
-    
+
     gPokedexView->unk60C = 0;
-    
+
     switch(dexMode)
     {
         default:
@@ -860,7 +860,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             }
             break;
     }
-    
+
     switch(sortMode)
     {
         case 0:
@@ -906,7 +906,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for(i = 0; i < 411; i++)
             {
                 vars[2] = gPokedexOrder_Alphabetical[i];
-                
+
                 if(NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 0))
                 {
                     gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
@@ -920,7 +920,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for(i = 385; i >= 0; i--)
             {
                 vars[2] = gPokedexOrder_Weight[i];
-                
+
                 if(NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
                 {
                     gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
@@ -934,7 +934,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for(i = 0; i < 386; i++)
             {
                 vars[2] = gPokedexOrder_Weight[i];
-                
+
                 if(NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
                 {
                     gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
@@ -948,7 +948,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for(i = 385; i >=0; i--)
             {
                 vars[2] = gPokedexOrder_Height[i];
-                
+
                 if(NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
                 {
                     gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
@@ -962,7 +962,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for(i = 0; i < 386; i++)
             {
                 vars[2] = gPokedexOrder_Height[i];
-                
+
                 if(NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
                 {
                     gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
@@ -971,7 +971,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
                     gPokedexView->unk60C++;
                 }
             }
-            break;        
+            break;
     }
     for(i = gPokedexView->unk60C; i < 386; i++)
     {
@@ -990,7 +990,7 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
         {
             u16 i;
             s16 _b = b - 5;
-            
+
             for(i = 0; i <= 10; i++)
             {
                 if((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
@@ -1018,7 +1018,7 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
         case 1:
         {
             s16 _b = b - 5;
-            
+
             if((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
                 sub_808E090(0x11, gPokedexView->unk630 * 2, c);
             else
@@ -1043,7 +1043,7 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
         {
             s16 _b = b + 5;
             u16 r2 = gPokedexView->unk630 + 10;
-            
+
             if(r2 > 15)
                 r2 -= 16;
             if((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
@@ -1074,7 +1074,7 @@ void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
     u8 text[4];
     u16 unk[2];
     u16 r7 = gPokedexView->unk0[a].dexNum;
-    
+
     if(gPokedexView->dexMode == DEX_MODE_HOENN)
         r7 = NationalToHoennOrder(r7);
     unk[0] = 0x3FC;
@@ -1091,7 +1091,7 @@ void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
 void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
 {
     u16 unk[2];
-    
+
     if(a)
     {
         unk[0] = 0x3FE;
@@ -1113,7 +1113,7 @@ u8 sub_808DFE4(u16 a, u8 b, u8 c)
     u8 text[10];
     u8 i;
     u32 species;
-    
+
     for(i = 0; i < 10; i++)
         text[i] = 0;
     text[i] = EOS;
@@ -1230,7 +1230,7 @@ _0808E070:\n\
 void sub_808E090(u8 a, u8 b, u16 c)
 {
     u8 i;
-    
+
     for(i = 0; i < 12; i++)
     {
         *(u16 *)(VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
@@ -1243,7 +1243,7 @@ void sub_808E0CC(u16 a, u16 b)
     u8 i;
     u16 unk;
     u8 spriteId;
-    
+
     for(i = 0; i < 4; i++)
         gPokedexView->unk61E[i] |= 0xFFFF;
     gPokedexView->unk626 = 0xFFFF;
@@ -1278,7 +1278,7 @@ bool8 sub_808E208(u8 a, u8 b, u8 c)
 {
     u16 i;
     u8 foo;
- 
+
     if(gPokedexView->unk62E)
     {
         gPokedexView->unk62E--;
@@ -1319,7 +1319,7 @@ void sub_808E398(u8 a, u16 b)
 {
     u16 unk;
     u8 spriteId;
-    
+
     gPokedexView->unk632 = gPokedexView->unk630;
     switch(a)
     {
@@ -1366,7 +1366,7 @@ u16 sub_808E48C(u16 a, u16 b)
     {
         u8 i;
         u16 r6;
-        
+
         //_0808E4B6
         if(gMain.heldKeys & 0x80)
         {
@@ -1374,7 +1374,7 @@ u16 sub_808E48C(u16 a, u16 b)
                 goto _0808E5C4;
         }
         //_0808E4CE
-        
+
         if((gMain.newKeys & 0x20) && a != 0)
         {
             r6 = a;
@@ -1383,7 +1383,7 @@ u16 sub_808E48C(u16 a, u16 b)
             {
                 a = sub_8091818(1, a, 0, gPokedexView->unk60C - 1);
             }
-            
+
             gPokedexView->unk62C += (a - r6) * 16;
             sub_808E82C();
             sub_808E0CC(a, 0xE);
@@ -1393,25 +1393,25 @@ u16 sub_808E48C(u16 a, u16 b)
         //_0808E53C
         if(!(gMain.newKeys & 0x10) || a >= gPokedexView->unk60C - 1)
             goto _0808E5A2;
-        
+
         r6 = a;
         for(i = 0; i < 7; i++)
         {
             a = sub_8091818(0, a, 0, gPokedexView->unk60C - 1);
         }
-        
+
         gPokedexView->unk62C += (a - r6) * 16;
         sub_808E82C();
         sub_808E0CC(a, 0xE);
         PlaySE(SE_Z_PAGE);
         goto _0808E5A2;
-        
+
        _0808E5A2:
         if(r10 != 0)
             goto _0808E628;
         gPokedexView->unk638 = r10;
         return a;
-        
+
        _0808E5C4:
         r10 = 2;
         a = sub_8091818(0, a, 0, gPokedexView->unk60C - 1);
@@ -1432,7 +1432,7 @@ u16 sub_808E48C(u16 a, u16 b)
     }
     //_0808E60E
     goto _0808E5A2;
-  
+
   _0808E628:
     r5 = gUnknown_083A05EC[gPokedexView->unk638 / 4];
     r3 = gUnknown_083A05F1[gPokedexView->unk638 / 4];
@@ -1719,11 +1719,11 @@ _0808E6B8: .4byte 0x0000062f\n\
 void sub_808E6BC(void)
 {
     u16 i;
-    
+
     for(i = 0; i < 4; i++)
     {
         u16 spriteId = gPokedexView->unk61E[i];
-        
+
         if(gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != 0xFFFF)
             gPokedexView->unk626 = spriteId;
     }
@@ -1733,21 +1733,21 @@ u8 sub_808E71C(void)
 {
     u16 r2;
     u16 r4 = gPokedexView->selectedPokemon;
-    
+
     if((gMain.newKeys & DPAD_UP) && r4)
     {
         r2 = r4;
         while(r2 != 0)
         {
             r2 = sub_8091818(1, r2, 0, gPokedexView->unk60C - 1);
-            
+
             if(gPokedexView->unk0[r2].seen)
             {
                 r4 = r2;
                 break;
             }
         }
-        
+
         if(gPokedexView->selectedPokemon == r4)
             return 0;
         else
@@ -1763,14 +1763,14 @@ u8 sub_808E71C(void)
         while(r2 < gPokedexView->unk60C - 1)
         {
             r2 = sub_8091818(0, r2, 0, gPokedexView->unk60C - 1);
-            
+
             if(gPokedexView->unk0[r2].seen)
             {
                 r4 = r2;
                 break;
             }
         }
-        
+
         if(gPokedexView->selectedPokemon == r4)
             return 0;
         else
@@ -1786,7 +1786,7 @@ u8 sub_808E71C(void)
 u8 sub_808E82C(void)
 {
     u16 i;
-    
+
     for(i = 0; i < 4; i++)
     {
         if(gPokedexView->unk61E[i] != 0xFFFF)
@@ -1811,13 +1811,13 @@ u16 sub_808E888(u16 a1)
 u32 sub_808E8C8(u16 a, u16 b, u16 c)
 {
     u8 i;
-    
+
     for(i = 0; i < 4; i++)
     {
         if(gPokedexView->unk61E[i] == 0xFFFF)
         {
             u8 spriteId = sub_80918EC(a, (s16)b, (s16)c, i);
-            
+
             gSprites[spriteId].oam.affineMode = 1;
             gSprites[spriteId].oam.priority = 3;
             gSprites[spriteId].data0 = 0;
@@ -1834,49 +1834,49 @@ void sub_808E978(u8 a)
 {
     u8 spriteId;
     u16 r5;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 4, 0);
     gSprites[spriteId].data1 = 0;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 0x9C, 0);
     gSprites[spriteId].data1 = 1;
     gSprites[spriteId].vFlip = 1;
-    
+
     CreateSprite(&gSpriteTemplate_83A0524, 0xEA, 0x14, 0);
     CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x8A, 0);
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x8A, 0);
     StartSpriteAnim(&gSprites[spriteId], 3);
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x9E, 0);
     StartSpriteAnim(&gSprites[spriteId], 2);
     gSprites[spriteId].data2 = 0x80;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x9E, 0);
     StartSpriteAnim(&gSprites[spriteId], 1);
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 30;
     gSprites[spriteId].data0 = 0x1E;
     gSprites[spriteId].data1 = 0;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 31;
     gSprites[spriteId].data0 = 0x1F;
     gSprites[spriteId].data1 = 0x80;
-    
+
     if(a == 0)
     {
         u32 _a;
-        
+
         CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x28, 1);
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x48, 1);
         StartSpriteAnim(&gSprites[spriteId], 1);
         _a = 0;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x30, 1);
         r5 = gPokedexView->unk61A / 100;
         StartSpriteAnim(&gSprites[spriteId], r5);
@@ -1884,19 +1884,19 @@ void sub_808E978(u8 a)
             _a = 1;
         else
             gSprites[spriteId].invisible = 1;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x30, 1);
         r5 = (gPokedexView->unk61A % 100) / 10;
         if(r5 != 0 || _a != 0)
             StartSpriteAnim(&gSprites[spriteId], r5);
         else
             gSprites[spriteId].invisible = 1;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x30, 1);
         r5 = (gPokedexView->unk61A % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], r5);
         _a = 0;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x50, 1);
         r5 = gPokedexView->unk61C / 100;
         StartSpriteAnim(&gSprites[spriteId], r5);
@@ -1904,18 +1904,18 @@ void sub_808E978(u8 a)
             _a = 1;
         else
             gSprites[spriteId].invisible = 1;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x50, 1);
         r5 = (gPokedexView->unk61C % 100) / 10;
         if(r5 != 0 || _a != 0)
             StartSpriteAnim(&gSprites[spriteId], r5);
         else
             gSprites[spriteId].invisible = 1;
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x50, 1);
         r5 = (gPokedexView->unk61C % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], r5);
-        
+
         spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 0x8C, 0x60, 1);
         gSprites[spriteId].invisible = 1;
     }
@@ -1962,7 +1962,7 @@ void sub_808EDB8(struct Sprite *sprite)
 void sub_808EE28(struct Sprite *sprite)
 {
     u8 data1 = sprite->data1;
-    
+
     if(gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
     {
         DestroySprite(sprite);
@@ -1972,14 +1972,14 @@ void sub_808EE28(struct Sprite *sprite)
     {
         //_0808EE58
         s32 var;
-        
+
         sprite->pos2.y = gSineTable[(u8)sprite->data5] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data5 + 0x40];
         if((u32)var > 0xFFFF)
             var = 0xFFFF;
         SetOamMatrix(sprite->data1 + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
-        
+
         //ToDo: clean up these inequalities
         if((u16)(sprite->data5 + 0x3F) <= 0x7E)
         {
@@ -2015,9 +2015,9 @@ void sub_808EF8C(struct Sprite *sprite)
     else
     {
         u8 r0;
-        
+
         if(sprite->data1 != 0)
-        {            
+        {
             if(gPokedexView->selectedPokemon == gPokedexView->unk60C - 1)
                 sprite->invisible = 1;
             else
@@ -2055,14 +2055,14 @@ void sub_808F0B4(struct Sprite *sprite)
     else
     {
         s16 r3;
-        
+
         u8 unk = gPokedexView->unk62C + sprite->data1;
         u16 foo = gSineTable[unk];
         //u8 unk2 = sprite->data0;
         //u16 bar = gSineTable[unk + 0x40];
-        
+
         SetOamMatrix(sprite->data0, foo, gSineTable[unk + 0x40], (-(u16)foo) >> 16, gSineTable[unk + 0x40]);
-        
+
         r3 = gSineTable[sprite->data1 + gPokedexView->unk62C];
         sprite->pos2.x = gSineTable[sprite->data1 + gPokedexView->unk62C + 0x40] * 5 / 256;
         sprite->pos2.y = r3 * 40 / 256;
@@ -2173,7 +2173,7 @@ void sub_808F168(struct Sprite *sprite)
     else
     {
         u16 r1 = gPokedexView->unk64A == 0 ? 0x50 : 0x60;
-        
+
         if(gPokedexView->menuIsOpen != 0 && gPokedexView->menuY == r1)
         {
             sprite->invisible = 0;
@@ -2189,7 +2189,7 @@ void sub_808F168(struct Sprite *sprite)
 u8 sub_808F210(struct PokedexListItem *item, u8 b)
 {
     u8 taskId;
-    
+
     gUnknown_0202FFBC = item;
     taskId = CreateTask(Task_InitPageScreenMultistep, 0);
     gTasks[taskId].data[0] = 0;
@@ -2227,7 +2227,7 @@ void Task_InitPageScreenMultistep(u8 taskId)
             if(!gPaletteFade.active)
             {
                 u16 r2;
-                
+
                 gPokedexView->unk64A = 1;
                 gPokedexView->unk64E = 0;
                 gUnknown_03005CEC = gMain.vblankCallback;
@@ -2296,7 +2296,7 @@ void Task_InitPageScreenMultistep(u8 taskId)
         case 6:
         {
             u32 r3 = 0;
-            
+
             if(gTasks[taskId].data[2] != 0)
                 r3 = 0x14;
             if(gTasks[taskId].data[1] != 0)
@@ -2523,7 +2523,7 @@ void Task_InitCryScreenMultistep(u8 taskId)
         case 6:
         {
             struct CryRelatedStruct sp8;
-            
+
             sp8.unk0 = 0x4020;
             sp8.unk2 = 0x1F;
             sp8.unk3 = 8;
@@ -2535,11 +2535,11 @@ void Task_InitCryScreenMultistep(u8 taskId)
                 gUnknown_03005E98 = 0;
             }
             break;
-        }     
+        }
         case 7:
         {
             struct CryRelatedStruct sp10;
-            
+
             sp10.unk0 = 0x3000;
             sp10.unk2 = 0xE;
             sp10.unk3 = 9;
@@ -2577,12 +2577,12 @@ void Task_InitCryScreenMultistep(u8 taskId)
 void Task_CryScreenProcessInput(u8 taskId)
 {
     sub_8119F88(0);
-    
+
     if (IsCryPlaying())
         sub_8090040(1);
     else
         sub_8090040(0);
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         sub_8090040(1);
@@ -2648,7 +2648,7 @@ void sub_808FFBC(u8 taskId)
 void sub_8090040(u8 a)
 {
     u16 unk;
-    
+
     if(a != 0)
         unk = 0x392;
     else
@@ -2659,7 +2659,7 @@ void sub_8090040(u8 a)
 void Task_InitSizeScreenMultistep(u8 taskId)
 {
     u8 spriteId;
-    
+
     switch(gMain.state)
     {
         default:
@@ -2688,7 +2688,7 @@ void Task_InitSizeScreenMultistep(u8 taskId)
         case 3:
         {
             u8 string[40];  //I hope this is the correct size
-            
+
             SetUpWindowConfig(&gWindowConfig_81E702C);
             InitMenuWindow(&gWindowConfig_81E702C);
             string[0] = EOS;
@@ -2802,15 +2802,15 @@ void sub_8090584(u8 a, u16 b)
     u8 j;   //r3
     u32 r6;
     register u8 r7;
-    
+
     for(i = 0; i < 4; i++)
     {
         r7 = i * 5 + 1;
         r6 = 0x4000;
-        
+
         if(i == a)
             r6 = 0x2000;
-        
+
         for(j = 0; j < 5; j++)
         {
             u32 r0 = b * 0x800 + (r7 + j) * 2;
@@ -2827,7 +2827,7 @@ void sub_8090584(u8 a, u16 b)
     {
         u32 r0 = b * 0x800 + j * 2;
         u8 *ptr;
-        
+
         ptr = VRAM + 0x32;
         *(u16 *)(ptr + r0) = *(u16 *)(ptr + r0) & 0xFFF | r6;
         ptr = VRAM + 0x72;
@@ -2946,32 +2946,32 @@ void sub_8090644(u8 a, u16 b)
 {
     u8 i;
     u8 j;
-    
+
     for(i = 0; i < 4; i++)
     {
         u8 r8 = i * 5 + 1;
         u32 r5;
-        
+
         if(i == a || i == 0)
             r5 = 0x2000;
         else if(a != 0)
             r5 = 0x4000;
-        
+
         for(j = 0; j < 5; j++)
         {
             u16 (*vramData)[0x400];
-            
+
             vramData = (u16 (*)[])VRAM;
             vramData[b][r8 + j] = vramData[b][r8 + j] & 0xFFF | r5;
             vramData = (u16 (*)[])(VRAM + 0x40);
             vramData[b][r8 + j] = vramData[b][r8 + j] & 0xFFF | r5;
         }
     }
-    
+
     for(j = 0; j < 5; j++)
     {
         u16 (*vramData)[0x400];
-        
+
         vramData = (u16 (*)[])(VRAM + 0x32);
         vramData[b][j] = vramData[b][j] & 0xFFF | 0x4000;
         vramData = (u16 (*)[])(VRAM + 0x72);
@@ -3093,7 +3093,7 @@ _08090708: .4byte 0x06000072\n\
 u8 sub_809070C(u16 dexNum, u32 b, u32 c)
 {
     u8 taskId = CreateTask(sub_8090750, 0);
-    
+
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = dexNum;
     gTasks[taskId].data[12] = b;
@@ -3107,7 +3107,7 @@ u8 sub_809070C(u16 dexNum, u32 b, u32 c)
 void sub_8090750(u8 taskId)
 {
     u16 dexNum = gTasks[taskId].data[1];
-    
+
     switch(gTasks[taskId].data[0])
     {
         default:
@@ -3123,7 +3123,7 @@ void sub_8090750(u8 taskId)
         case 1:
         {
             u16 i;
-            
+
             LZ77UnCompVram(gPokedexMenu_Gfx, (void *)(VRAM + 0x4000));
             LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
             for(i = 0; i < 0x280; i++)
@@ -3160,7 +3160,7 @@ void sub_8090750(u8 taskId)
         case 4:
         {
             u8 spriteId = sub_80918EC(dexNum, 0x30, 0x38, 0);
-            
+
             gSprites[spriteId].oam.priority = 0;
             BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
             SetVBlankCallback(gUnknown_03005CEC);
