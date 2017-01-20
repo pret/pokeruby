@@ -176,6 +176,7 @@ SECTIONS {
         src/item_use.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_80CA710.o(.text);
+        src/bike.o(.text);
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/pokenav.o(.text);
