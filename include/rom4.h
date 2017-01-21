@@ -84,7 +84,7 @@ void sub_8053D14(u16);
 // sav1_map_get_music
 // warp1_target_get_music
 // call_map_music_set_to_zero
-// sub_8053E90
+void sub_8053E90(void);
 void sav1_set_battle_music_maybe(u16);
 void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);

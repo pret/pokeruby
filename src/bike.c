@@ -7,6 +7,7 @@
 #include "metatile_behavior.h"
 #include "songs.h"
 #include "sound.h"
+#include "rom4.h"
 
 struct UnknownStruct1
 {
@@ -19,6 +20,10 @@ struct UnknownStruct1
     u32 unk18;
 };
 
+extern u8 gUnknown_02039250;
+extern u8 gUnknown_02039251;
+extern u8 gUnknown_0202E854;
+
 extern u8 gUnknown_0202E86C[];
 extern u8 gUnknown_0202E874[];
 extern void (*gUnknown_083DB594[])(u8);
@@ -28,10 +33,8 @@ extern u8 (*gUnknown_083DB5E4[])(u8 *, u16, u16);
 extern const struct UnknownStruct1 gUnknown_083DB608[];
 
 extern void sub_80E6024(void);
-extern u8 sub_80E5E70(u8, u8);
 extern u8 sub_80E5D34(u8);
 extern u8 sub_80608A4(u8);
-extern u8 sub_80E5EC0();
 extern u8 IsRunningDisallowedByMetatile(u8);
 
 void MovePlayerOnMachBike(u8, u16, u16);
@@ -47,6 +50,8 @@ static void sub_80E5CB8(u8);
 u8 sub_80E5C2C(void);
 u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior);
 void sub_80E5E4C();
+u8 sub_80E5E70(u8, u8);
+u8 sub_80E5EC0(u8, u8);
 
 void MovePlayerOnBike(u8 var1, u16 var2, u16 var3)
 {
@@ -736,18 +741,154 @@ u8 sub_80E5D34(u8 direction)
     return sub_80E5DA0(playerMapObj, x, y, direction, metatitleBehavior);
 }
 
-//Can't get this to match
-/*
 u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
 {
     u8 r4 = CheckForFieldObjectCollision(mapObject, x, y, direction, metatitleBehavior);
-    if (r4 <= 4)
-    {
-        if (r4 == 0 && IsRunningDisallowedByMetatile(metatitleBehavior))
-            r4 = 2;
-        if (r4 != 0)
-            sub_80E5E4C();
-    }
+
+    if (r4 > 4)
+        return r4;
+    if (r4 == 0 && IsRunningDisallowedByMetatile(metatitleBehavior))
+        r4 = 2;
+    if (r4 != 0)
+        sub_80E5E4C();
+
     return r4;
 }
+
+bool8 sub_80E5DEC(u8 tile)
+{
+	if(IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+bool8 IsRunningDisallowedByMetatile(u8 tile)
+{
+	if(MetatileBehavior_IsRunningDisallowed(tile) != FALSE)
+		return TRUE;
+	else if(MetatileBehavior_IsFortreeBridge(tile) == FALSE)
+		return FALSE;
+	else if((PlayerGetZCoord() & 1) != 0)
+		return FALSE;
+	else
+		return TRUE;
+}
+
+void sub_80E5E4C(void)
+{
+	if(gUnknown_02039250 != 0 && gUnknown_02039251 < 100)
+		gUnknown_02039251++;
+}
+
+bool8 sub_80E5E70(u8 var1, u8 var2)
+{
+    if (var1 > 2 && var1 < 5)
+    {
+        if (MetatileBehavior_IsIsolatedVerticalRail(var2)
+         || MetatileBehavior_IsVerticalRail(var2))
+            return FALSE;
+    }
+    else
+    {
+        if (MetatileBehavior_IsIsolatedHorizontalRail(var2)
+         || MetatileBehavior_IsHorizontalRail(var2))
+            return FALSE;
+        
+    }
+    return TRUE;
+}
+
+bool8 sub_80E5EC0(u8 var1, u8 var2)
+{
+	if((u8)(var2 - 1) < 2)
+	{
+		if(var1 == 10 || var1 == 12)
+			return FALSE;
+	}
+	else if(var1 == 11 || var1 == 13)
+		return FALSE;
+
+	return TRUE;
+}
+
+bool8 IsBikingDisallowedByPlayer(void)
+{
+	s16 x, y;
+	u8 tileBehavior;
+	
+	if(!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_4)))
+	{
+		PlayerGetDestCoords(&x, &y);
+		tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+		if(IsRunningDisallowedByMetatile(tileBehavior) == FALSE)
+			return FALSE;
+	}
+	return TRUE;
+}
+
+bool8 player_should_look_direction_be_enforced_upon_movement(void)
+{
+	if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) != FALSE)
+		return FALSE;
+	else
+		return TRUE;
+}
+
+void GetOnOffBike(u8 var)
+{
+	gUnknown_0202E854 = 0;
+	
+	if(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+	{
+		SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+		sav1_reset_battle_music_maybe();
+		sub_8053E90();
+	}
+	else
+	{
+		SetPlayerAvatarTransitionFlags(var);
+		sav1_set_battle_music_maybe(0x193);
+		sub_8053FB0(0x193);
+	}
+}
+
+void sub_80E5FCC(int var1, int var2)
+{
+	u8 i;
+
+	gPlayerAvatar.unk8 = 0;
+	gPlayerAvatar.unk9 = 0;
+	gPlayerAvatar.unkA = 0;
+	gPlayerAvatar.unkB = 0;
+	gPlayerAvatar.unkC = var1;
+	gPlayerAvatar.unk10 = var2;
+	
+	for(i = 0; i < 8; i++)
+		gPlayerAvatar.unk14[i] = 0;
+	
+	for(i = 0; i < 8; i++)
+		gPlayerAvatar.unk1C[i] = 0;
+}
+
+/*void sub_80E6010(u8 var, u32 var2)
+{
+	gPlayerAvatar.unkA = var;
+	gPlayerAvatar.unkB = var + (var2 >> 1); // lazy way of multiplying by 1.5?
+}*/
+
+/*
+	thumb_func_start sub_80E6010
+sub_80E6010: @ 80E6010
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r2, _080E6020 @ =gPlayerAvatar
+	strb r0, [r2, 0xA]
+	lsrs r1, r0, 1
+	adds r0, r1
+	strb r0, [r2, 0xB]
+	bx lr
+	.align 2, 0
+_080E6020: .4byte gPlayerAvatar
+	thumb_func_end sub_80E6010
 */
