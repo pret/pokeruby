@@ -6,59 +6,6 @@
 
 	.text
 
-	thumb_func_start npc_clear_ids_and_state
-npc_clear_ids_and_state: @ 805AA50
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0
-	movs r2, 0x24
-	bl memset
-	movs r0, 0xFF
-	strb r0, [r4, 0x8]
-	movs r0, 0x1
-	negs r0, r0
-	strb r0, [r4, 0x9]
-	strb r0, [r4, 0xA]
-	strb r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_clear_ids_and_state
-
-	thumb_func_start npcs_clear_ids_and_state
-npcs_clear_ids_and_state: @ 805AA70
-	push {r4,r5,lr}
-	movs r4, 0
-	ldr r5, _0805AA94 @ =gMapObjects
-_0805AA76:
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	adds r0, r5
-	bl npc_clear_ids_and_state
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0xF
-	bls _0805AA76
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805AA94: .4byte gMapObjects
-	thumb_func_end npcs_clear_ids_and_state
-
-	thumb_func_start sub_805AA98
-sub_805AA98: @ 805AA98
-	push {lr}
-	bl strange_npc_table_clear
-	bl npcs_clear_ids_and_state
-	bl ClearPlayerAvatarInfo
-	bl sub_805AAB0
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805AA98
-
 	thumb_func_start sub_805AAB0
 sub_805AAB0: @ 805AAB0
 	push {r4-r6,lr}
