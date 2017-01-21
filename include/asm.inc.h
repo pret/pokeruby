@@ -362,7 +362,7 @@ void sub_80E5B38(u16 i, u16 c);
 u8 sub_80E5DEC(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void sub_80E5FCC(int i, int i1);
-void sub_80E6010();
+void sub_80E6010(u8 i);
 s16 sub_80E6034(void);
 void sub_80E6084();
 

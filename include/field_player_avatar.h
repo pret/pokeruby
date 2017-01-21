@@ -80,7 +80,7 @@ void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 // sub_8059B88
 // sub_8059BF4
 // sub_8059C3C
-// sub_8059C94
+void sub_8059C94(u8);
 // sub_8059D08
 // sub_8059E84
 // sub_8059EA4
