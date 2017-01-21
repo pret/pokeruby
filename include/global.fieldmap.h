@@ -316,6 +316,10 @@ struct PlayerAvatar /* 0x202E858 */
 	u8 unk9;
 	u8 unkA;
 	u8 unkB;
+    u32 unkC;
+    u32 unk10;
+    u8 unk14[8];
+    u8 unk1C[8];
     // TODO: rest of struct
 };
 
