@@ -9,6 +9,8 @@
 #include "sound.h"
 #include "rom4.h"
 
+extern u8 sub_80608A4(u8);
+
 struct UnknownStruct1
 {
     u32 unk0;
@@ -23,7 +25,6 @@ struct UnknownStruct1
 extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u8 gUnknown_0202E854;
-
 extern u8 gUnknown_0202E86C[];
 extern u8 gUnknown_0202E874[];
 
@@ -61,29 +62,12 @@ static void sub_80E5C7C(u8);
 static void sub_80E5CB8(u8);
 static u8 sub_80E5CF4(u16);
 static u8 sub_80E5D34(u8);
-u8 sub_80E5DA0(struct MapObject *, s16, s16, u8, u8);
-
-extern void sub_80E5E4C();
-extern u8 sub_80E5E70(u8, u8);
-extern void sub_80E6024(void);
-extern u8 IsRunningDisallowedByMetatile(u8);
-extern u8 sub_80608A4(u8);
-
-void MovePlayerOnMachBike(u8, u16, u16);
-u8 CheckMovementInputMachBike(u8 *);
-u8 CheckMovementInputAcroBike(u8 *, u16, u16);
-void sub_80E5168(u8);
-void sub_80E5270(u8);
-void MovePlayerOnAcroBike(u8, u16, u16);
-void sub_80E5B60(u16, u16);
-u8 sub_80E5CF4(u16);
-static void sub_80E5C7C(u8);
-static void sub_80E5CB8(u8);
-u8 sub_80E5C2C(void);
-u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior);
-void sub_80E5E4C();
-u8 sub_80E5E70(u8, u8);
-u8 sub_80E5EC0(u8, u8);
+static u8 sub_80E5DA0(struct MapObject *, s16, s16, u8, u8);
+static bool8 IsRunningDisallowedByMetatile(u8);
+static void sub_80E5E4C();
+static u8 sub_80E5E70(u8, u8);
+static bool8 sub_80E5EC0(u8, u8);
+static void sub_80E6024(void);
 
 static void (*const gUnknown_083DB594[])(u8) =
 {
@@ -849,7 +833,7 @@ static u8 sub_80E5D34(u8 direction)
     return sub_80E5DA0(playerMapObj, x, y, direction, metatitleBehavior);
 }
 
-u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
+static u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
 {
     u8 r4 = CheckForFieldObjectCollision(mapObject, x, y, direction, metatitleBehavior);
 
@@ -873,7 +857,7 @@ bool8 sub_80E5DEC(u8 tile)
         return FALSE;
 }
 
-bool8 IsRunningDisallowedByMetatile(u8 tile)
+static bool8 IsRunningDisallowedByMetatile(u8 tile)
 {
     if (MetatileBehavior_IsRunningDisallowed(tile))
         return TRUE;
@@ -882,13 +866,13 @@ bool8 IsRunningDisallowedByMetatile(u8 tile)
     return FALSE;
 }
 
-void sub_80E5E4C(void)
+static void sub_80E5E4C(void)
 {
     if (gUnknown_02039250 != 0 && gUnknown_02039251 < 100)
         gUnknown_02039251++;
 }
 
-bool8 sub_80E5E70(u8 var1, u8 var2)
+static bool8 sub_80E5E70(u8 var1, u8 var2)
 {
     if (var1 > 2 && var1 < 5)
     {
@@ -906,7 +890,7 @@ bool8 sub_80E5E70(u8 var1, u8 var2)
     return TRUE;
 }
 
-bool8 sub_80E5EC0(u8 var1, u8 var2)
+static bool8 sub_80E5EC0(u8 var1, u8 var2)
 {
     if((u8)(var2 - 1) < 2)
     {
@@ -986,7 +970,7 @@ void sub_80E6010(u8 var)
     gPlayerAvatar.unkB = gPlayerAvatar.unkA + (gPlayerAvatar.unkA >> 1); // lazy way of multiplying by 1.5.
 }
 
-void sub_80E6024(void)
+static void sub_80E6024(void)
 {
     gPlayerAvatar.unkA = 0;
     gPlayerAvatar.unkB = 0;
