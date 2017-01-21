@@ -85,7 +85,7 @@ void sub_80E5E4C();
 u8 sub_80E5E70(u8, u8);
 u8 sub_80E5EC0(u8, u8);
 
-static void (*const gUnknown_083DB594[])(u8) = 
+static void (*const gUnknown_083DB594[])(u8) =
 {
     sub_80E5168,
     sub_80E517C,
@@ -141,7 +141,7 @@ static const struct UnknownStruct1 gUnknown_083DB608[] =
 
 void MovePlayerOnBike(u8 var1, u16 var2, u16 var3)
 {
-    if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         MovePlayerOnMachBike(var1, var2, var3);
     else
         MovePlayerOnAcroBike(var1, var2, var3);
@@ -149,7 +149,7 @@ void MovePlayerOnBike(u8 var1, u16 var2, u16 var3)
 
 static void MovePlayerOnMachBike(u8 var1, u16 var2, u16 var3)
 {
-    gUnknown_083DB594[CheckMovementInputMachBike(&var1) & 0x3FF](var1); // var2 and var3 arent used?
+    gUnknown_083DB594[CheckMovementInputMachBike(&var1)](var1); // var2 and var3 arent used?
 }
 
 static u8 CheckMovementInputMachBike(u8 *ptr)
@@ -196,23 +196,25 @@ static void sub_80E517C(u8 var)
 {
     struct MapObject *mapPtr = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if(sub_80E5E70(var, mapPtr->mapobj_unk_1E))
+    if (sub_80E5E70(var, mapPtr->mapobj_unk_1E))
     {
         PlayerTurnInPlace(var);
         sub_80E6024();
     }
     else
+    {
         sub_80E5168(mapPtr->mapobj_unk_18);
+    }
 }
 
 static void sub_80E51C4(u8 var)
 {
     struct MapObject *mapPtr = &gMapObjects[gPlayerAvatar.mapObjectId];
     u8 funcVar;
-    
-    if(sub_80E5E70(var, mapPtr->mapobj_unk_1E) == 0)
+
+    if (sub_80E5E70(var, mapPtr->mapobj_unk_1E) == 0)
     {
-        if(gPlayerAvatar.unkB)
+        if (gPlayerAvatar.unkB)
             sub_80E5270(mapPtr->placeholder18);
         else
             sub_80E5168(mapPtr->placeholder18);
@@ -222,8 +224,10 @@ static void sub_80E51C4(u8 var)
         funcVar = sub_80E5D34(var);
         if (funcVar > 0 && funcVar < 12)
         {
-            if(funcVar == 6)
+            if (funcVar == 6)
+            {
                 PlayerJumpLedge(var);
+            }
             else
             {
                 sub_80E6024();
@@ -235,7 +239,7 @@ static void sub_80E51C4(u8 var)
         {
             gUnknown_083DB5A4[gPlayerAvatar.unkA](var);
             gPlayerAvatar.unkB = gPlayerAvatar.unkA + (gPlayerAvatar.unkA >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-            if(gPlayerAvatar.unkA < 2)
+            if (gPlayerAvatar.unkA < 2)
                 gPlayerAvatar.unkA++;
         }
     }
@@ -245,15 +249,17 @@ static void sub_80E5270(u8 var)
 {
     u8 funcVar;
 
-    if(gPlayerAvatar.unkB != 0)
+    if (gPlayerAvatar.unkB != 0)
         gPlayerAvatar.unkA = --gPlayerAvatar.unkB;
 
     funcVar = sub_80E5D34(var);
 
     if (funcVar > 0 && funcVar < 12)
     {
-        if(funcVar == 6)
+        if (funcVar == 6)
+        {
             PlayerJumpLedge(var);
+        }
         else
         {
             sub_80E6024();
@@ -262,7 +268,9 @@ static void sub_80E5270(u8 var)
         }
     }
     else
+    {
         gUnknown_083DB5A4[gPlayerAvatar.unkA](var);
+    }
 }
 
 static void MovePlayerOnAcroBike(u8 var1, u16 var2, u16 var3)
@@ -278,7 +286,7 @@ static u8 CheckMovementInputAcroBike(u8 *ptr, u16 var1, u16 var2)
 static u8 CheckMovementInputAcroBikeNormal(u8 *ptr, u16 var1, u16 var2)
 {
     u8 direction = player_get_direction_upper_nybble();
-    
+
     gPlayerAvatar.unkA = 0;
     if (*ptr == 0)
     {
@@ -316,7 +324,7 @@ static u8 CheckMovementInputAcroBikeNormal(u8 *ptr, u16 var1, u16 var2)
 static u8 CheckMovementInputAcroBikeChangingDirection(u8 *ptr, u16 unused1, u16 unused2)
 {
     u8 direction;
-    
+
     *ptr = gPlayerAvatar.unk9;
     gPlayerAvatar.unkA++;
     if (gPlayerAvatar.unkA > 6)
@@ -351,7 +359,7 @@ static u8 CheckMovementInputAcroBikeStandingWheelie(u8 *ptr, u16 unused1, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
-    
+
     direction = player_get_direction_upper_nybble();
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     gPlayerAvatar.running2 = 0;
@@ -397,7 +405,7 @@ static u8 CheckMovementInputAcroBikeBunnyHop(u8 *ptr, u16 b, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
-    
+
     direction = player_get_direction_upper_nybble();
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!(c & 2))
@@ -432,7 +440,7 @@ static u8 CheckMovementInputAcroBikeMovingWheelie(u8 *ptr, u16 b, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
-    
+
     direction = player_get_direction_lower_nybble();
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!(c & 2))
@@ -478,7 +486,7 @@ static u8 CheckMovementInputAcroBikeMovingWheelie(u8 *ptr, u16 b, u16 c)
 static u8 CheckMovementInputAcroBikeUnknownMode5(u8 *ptr, u16 b, u16 c)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     playerMapObj->mapobj_bit_9 = 0;
     FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
     gPlayerAvatar.unk8 = 0;
@@ -499,7 +507,7 @@ static void sub_80E56F8(u8 direction)
 static void sub_80E5708(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
         direction = playerMapObj->placeholder18;
     PlayerFaceDirection(direction);
@@ -509,7 +517,7 @@ static void sub_80E5744(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
     {
         sub_80E56F8(playerMapObj->placeholder18);
@@ -532,7 +540,7 @@ static void sub_80E5744(u8 direction)
 static void sub_80E57BC(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
         direction = playerMapObj->placeholder18;
     sub_805951C(direction);
@@ -541,7 +549,7 @@ static void sub_80E57BC(u8 direction)
 static void sub_80E57F8(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
         direction = playerMapObj->placeholder18;
     sub_8059534(direction);
@@ -550,7 +558,7 @@ static void sub_80E57F8(u8 direction)
 static void sub_80E5834(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
         direction = playerMapObj->placeholder18;
     sub_8059504(direction);
@@ -559,7 +567,7 @@ static void sub_80E5834(u8 direction)
 static void sub_80E5870(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
         direction = playerMapObj->placeholder18;
     sub_805954C(direction);
@@ -569,7 +577,7 @@ static void sub_80E58AC(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
     {
         sub_80E5870(playerMapObj->placeholder18);
@@ -578,13 +586,19 @@ static void sub_80E58AC(u8 direction)
     var = sub_80E5D34(direction);
     //TODO: Try to get rid of this goto
     if (var == 0 || var == 9)
+    {
         goto derp;
+    }
     else if (var == 6)
+    {
         sub_8059594(direction);
+    }
     else if (var < 5 || var > 8)
     {
         if (var <= 11)
+        {
             sub_80E5870(direction);
+        }
         else
         {
           derp:
@@ -597,7 +611,7 @@ static void sub_80E5920(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj;
-    
+
     var = sub_80E5D34(direction);
     if (var != 0)
     {
@@ -629,7 +643,7 @@ static void sub_80E59A0(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
     {
         sub_8059504(playerMapObj->placeholder18);
@@ -639,9 +653,13 @@ static void sub_80E59A0(u8 direction)
     if (var > 0 && var < 12)
     {
         if (var == 6)
+        {
             sub_8059594(direction);
+        }
         else if (var == 9)
+        {
             sub_8059504(direction);
+        }
         else if (var <= 4)
         {
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
@@ -659,7 +677,7 @@ static void sub_80E5A30(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
     {
         sub_805951C(playerMapObj->placeholder18);
@@ -669,9 +687,13 @@ static void sub_80E5A30(u8 direction)
     if (var > 0 && var < 12)
     {
         if (var == 6)
+        {
             sub_8059594(direction);
+        }
         else if (var == 9)
+        {
             sub_8059504(direction);
+        }
         else if (var <= 4)
         {
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
@@ -689,7 +711,7 @@ static void sub_80E5AC0(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (sub_80E5E70(direction, playerMapObj->mapobj_unk_1E) == 0)
     {
         sub_8059534(playerMapObj->placeholder18);
@@ -728,7 +750,7 @@ static void sub_80E5B60(u16 unused, u16 b)
         sub_80E5C7C(var);
         gPlayerAvatar.unkB = 0;
     }
-    
+
     var = b & 0xF;
     if (var == (gPlayerAvatar.unk10 & 0xF))
     {
@@ -745,7 +767,7 @@ static void sub_80E5B60(u16 unused, u16 b)
 static bool8 sub_80E5BC8(const u8 *a, const u8 *b)
 {
     u8 i;
-    
+
     for (i = 0; a[i] != 0; i++)
     {
         if (gUnknown_0202E86C[i] > a[i])
@@ -762,13 +784,13 @@ static bool8 sub_80E5BC8(const u8 *a, const u8 *b)
 static u8 sub_80E5C2C(void)
 {
     u32 i;
-    
+
     for (i = 0; i < 4; i++)
     {
         const struct UnknownStruct1 *s = &gUnknown_083DB608[i];
         u32 r1 = gPlayerAvatar.unkC;
         u32 r2 = gPlayerAvatar.unk10;
-        
+
         r1 &= s->unk8;
         r2 &= s->unkC;
         if (r1 == s->unk0 && r2 == s->unk4
@@ -781,9 +803,9 @@ static u8 sub_80E5C2C(void)
 static void sub_80E5C7C(u8 a)
 {
     u8 i;
-    
+
     gPlayerAvatar.unkC = (gPlayerAvatar.unkC << 4) | (a & 0xF);
-    
+
     for (i = 7; i != 0; i--)
         gPlayerAvatar.unk14[i] = gPlayerAvatar.unk14[i - 1];
     gPlayerAvatar.unk14[0] = 1;
@@ -792,9 +814,9 @@ static void sub_80E5C7C(u8 a)
 static void sub_80E5CB8(u8 a)
 {
     u8 i;
-    
+
     gPlayerAvatar.unk10 = (gPlayerAvatar.unk10 << 4) | (a & 0xF);
-    
+
     for (i = 7; i != 0; i--)
         gPlayerAvatar.unk1C[i] = gPlayerAvatar.unk1C[i - 1];
     gPlayerAvatar.unk1C[0] = 1;
@@ -819,7 +841,7 @@ static u8 sub_80E5D34(u8 direction)
     s16 y;
     u8 metatitleBehavior;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     x = playerMapObj->coords2.x;
     y = playerMapObj->coords2.y;
     MoveCoords(direction, &x, &y);
@@ -845,7 +867,7 @@ u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metat
 
 bool8 sub_80E5DEC(u8 tile)
 {
-    if(IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
+    if (IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return TRUE;
     else
         return FALSE;
@@ -853,19 +875,16 @@ bool8 sub_80E5DEC(u8 tile)
 
 bool8 IsRunningDisallowedByMetatile(u8 tile)
 {
-    if(MetatileBehavior_IsRunningDisallowed(tile) != FALSE)
+    if (MetatileBehavior_IsRunningDisallowed(tile))
         return TRUE;
-    else if(MetatileBehavior_IsFortreeBridge(tile) == FALSE)
-        return FALSE;
-    else if((PlayerGetZCoord() & 1) != 0)
-        return FALSE;
-    else
+    if (MetatileBehavior_IsFortreeBridge(tile) && (PlayerGetZCoord() & 1) == 0)
         return TRUE;
+    return FALSE;
 }
 
 void sub_80E5E4C(void)
 {
-    if(gUnknown_02039250 != 0 && gUnknown_02039251 < 100)
+    if (gUnknown_02039250 != 0 && gUnknown_02039251 < 100)
         gUnknown_02039251++;
 }
 
@@ -882,7 +901,7 @@ bool8 sub_80E5E70(u8 var1, u8 var2)
         if (MetatileBehavior_IsIsolatedHorizontalRail(var2)
          || MetatileBehavior_IsHorizontalRail(var2))
             return FALSE;
-        
+
     }
     return TRUE;
 }
@@ -891,11 +910,13 @@ bool8 sub_80E5EC0(u8 var1, u8 var2)
 {
     if((u8)(var2 - 1) < 2)
     {
-        if(var1 == 10 || var1 == 12)
+        if (var1 == 10 || var1 == 12)
             return FALSE;
     }
-    else if(var1 == 11 || var1 == 13)
+    else if (var1 == 11 || var1 == 13)
+    {
         return FALSE;
+    }
 
     return TRUE;
 }
@@ -904,12 +925,12 @@ bool8 IsBikingDisallowedByPlayer(void)
 {
     s16 x, y;
     u8 tileBehavior;
-    
+
     if(!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_4)))
     {
         PlayerGetDestCoords(&x, &y);
         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-        if(IsRunningDisallowedByMetatile(tileBehavior) == FALSE)
+        if (IsRunningDisallowedByMetatile(tileBehavior) == FALSE)
             return FALSE;
     }
     return TRUE;
@@ -917,7 +938,7 @@ bool8 IsBikingDisallowedByPlayer(void)
 
 bool8 player_should_look_direction_be_enforced_upon_movement(void)
 {
-    if(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) != FALSE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) != FALSE)
         return FALSE;
     else
         return TRUE;
@@ -926,8 +947,8 @@ bool8 player_should_look_direction_be_enforced_upon_movement(void)
 void GetOnOffBike(u8 var)
 {
     gUnknown_0202E854 = 0;
-    
-    if(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+
+    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
         sav1_reset_battle_music_maybe();
@@ -951,10 +972,10 @@ void sub_80E5FCC(int var1, int var2)
     gPlayerAvatar.unkB = 0;
     gPlayerAvatar.unkC = var1;
     gPlayerAvatar.unk10 = var2;
-    
+
     for(i = 0; i < 8; i++)
         gPlayerAvatar.unk14[i] = 0;
-    
+
     for(i = 0; i < 8; i++)
         gPlayerAvatar.unk1C[i] = 0;
 }
@@ -992,11 +1013,11 @@ void sub_80E6084(void)
     s16 x, y;
     u8 tileBehavior;
 
-    if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
     {
         PlayerGetDestCoords(&x, &y);
         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-        if(MetatileBehavior_IsBumpySlope(tileBehavior) != FALSE)
+        if (MetatileBehavior_IsBumpySlope(tileBehavior) != FALSE)
         {
             gPlayerAvatar.unk8 = 2;
             sub_8059C94(player_get_direction_upper_nybble());
