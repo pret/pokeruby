@@ -807,18 +807,18 @@ static u8 sub_80E5D34(u8 direction)
     return sub_80E5DA0(playerMapObj, x, y, direction, metatitleBehavior);
 }
 
-//Can't get this to match
-/*
 u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
 {
     u8 r4 = CheckForFieldObjectCollision(mapObject, x, y, direction, metatitleBehavior);
-    if (r4 <= 4)
-    {
-        if (r4 == 0 && IsRunningDisallowedByMetatile(metatitleBehavior))
-            r4 = 2;
-        if (r4 != 0)
-            sub_80E5E4C();
-    }
+
+    if (r4 > 4)
+        return r4;
+
+    if (r4 == 0 && IsRunningDisallowedByMetatile(metatitleBehavior))
+        r4 = 2;
+
+    if (r4 != 0)
+        sub_80E5E4C();
+
     return r4;
 }
-*/

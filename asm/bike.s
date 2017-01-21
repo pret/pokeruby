@@ -6,47 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80E5DA0
-sub_80E5DA0: @ 80E5DA0
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r4, [sp, 0x10]
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	adds r5, r4, 0
-	lsls r1, 16
-	asrs r1, 16
-	lsls r2, 16
-	asrs r2, 16
-	str r5, [sp]
-	bl CheckForFieldObjectCollision
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x4
-	bhi _080E5DE0
-	cmp r4, 0
-	bne _080E5DDC
-	adds r0, r5, 0
-	bl IsRunningDisallowedByMetatile
-	lsls r0, 24
-	cmp r0, 0
-	beq _080E5DD8
-	movs r4, 0x2
-_080E5DD8:
-	cmp r4, 0
-	beq _080E5DE0
-_080E5DDC:
-	bl sub_80E5E4C
-_080E5DE0:
-	adds r0, r4, 0
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80E5DA0
-
 	thumb_func_start sub_80E5DEC
 sub_80E5DEC: @ 80E5DEC
 	push {lr}
