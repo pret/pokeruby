@@ -20,7 +20,7 @@ void npc_clear_ids_and_state(struct MapObject *mapObj)
 void npcs_clear_ids_and_state(void)
 {
     u8 i;
-    
+
     for(i = 0; i < 16; i++)
         npc_clear_ids_and_state(&gMapObjects[i]);
 }
@@ -33,21 +33,21 @@ void sub_805AA98(void)
     sub_805AAB0();
 }
 
-/*void sub_805AAB0(void)
+void sub_805AAB0(void)
 {
-    u8 spriteVar1;
-    u8 spriteVar2;
-    
-    spriteVar1 = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
+    u8 spriteId;
 
-    gSprites[spriteVar1].oam.affineMode = 1;
-    InitSpriteAffineAnim(&gSprites[spriteVar1]);
-    StartSpriteAffineAnim(&gSprites[spriteVar1], 0);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
 
-    spriteVar2 = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
+    gSprites[spriteId].oam.affineMode = 1;
+    InitSpriteAffineAnim(&gSprites[spriteId]);
+    StartSpriteAffineAnim(&gSprites[spriteId], 0);
+    gSprites[spriteId].invisible = 1;
 
-    gSprites[spriteVar2].oam.affineMode = 4;
-    InitSpriteAffineAnim(&gSprites[spriteVar2]);
-    StartSpriteAffineAnim(&gSprites[spriteVar2], 1);
-    gSprites[spriteVar2].coordOffsetEnabled = 1;
-}*/
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
+
+    gSprites[spriteId].oam.affineMode = 1;
+    InitSpriteAffineAnim(&gSprites[spriteId]);
+    StartSpriteAffineAnim(&gSprites[spriteId], 1);
+    gSprites[spriteId].invisible = 1;
+}
