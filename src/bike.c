@@ -14,39 +14,110 @@ struct UnknownStruct1
     u32 unk4;
     u32 unk8;
     u32 unkC;
-    u8 *unk10;
-    u8 *unk14;
+    const u8 *unk10;
+    const u8 *unk14;
     u32 unk18;
 };
 
 extern u8 gUnknown_0202E86C[];
 extern u8 gUnknown_0202E874[];
-extern void (*gUnknown_083DB594[])(u8);
-extern void (*gUnknown_083DB5A4[])(u8);
-extern void (*gUnknown_083DB5B0[])(u8);
-extern u8 (*gUnknown_083DB5E4[])(u8 *, u16, u16);
-extern const struct UnknownStruct1 gUnknown_083DB608[];
 
-extern void sub_80E6024(void);
-extern u8 sub_80E5E70(u8, u8);
-extern u8 sub_80E5D34(u8);
-extern u8 sub_80608A4(u8);
-extern u8 sub_80E5EC0();
-extern u8 IsRunningDisallowedByMetatile(u8);
-
-void MovePlayerOnMachBike(u8, u16, u16);
-u8 CheckMovementInputMachBike(u8 *);
-u8 CheckMovementInputAcroBike(u8 *, u16, u16);
-void sub_80E5168(u8);
-void sub_80E5270(u8);
-void MovePlayerOnAcroBike(u8, u16, u16);
-void sub_80E5B60(u16, u16);
-u8 sub_80E5CF4(u16);
+static void MovePlayerOnMachBike(u8, u16, u16);
+static u8 CheckMovementInputMachBike(u8 *);
+static void sub_80E5168(u8);
+static void sub_80E517C(u8);
+static void sub_80E51C4(u8);
+static void sub_80E5270(u8);
+static void MovePlayerOnAcroBike(u8, u16, u16);
+static u8 CheckMovementInputAcroBike(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeNormal(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeChangingDirection(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeStandingWheelie(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeBunnyHop(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeMovingWheelie(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeUnknownMode5(u8 *, u16, u16);
+static u8 CheckMovementInputAcroBikeUnknownMode6(u8 *, u16, u16);
+static void sub_80E56F8(u8);
+static void sub_80E5708(u8);
+static void sub_80E5744(u8);
+static void sub_80E57BC(u8);
+static void sub_80E57F8(u8);
+static void sub_80E5834(u8);
+static void sub_80E5870(u8);
+static void sub_80E58AC(u8);
+static void sub_80E5920(u8);
+static void sub_80E5990(u8);
+static void sub_80E59A0(u8);
+static void sub_80E5A30(u8);
+static void sub_80E5AC0(u8);
+static void sub_80E5B60(u16, u16);
+static u8 sub_80E5C2C(void);
 static void sub_80E5C7C(u8);
 static void sub_80E5CB8(u8);
-u8 sub_80E5C2C(void);
-u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior);
-void sub_80E5E4C();
+static u8 sub_80E5CF4(u16);
+static u8 sub_80E5D34(u8);
+u8 sub_80E5DA0(struct MapObject *, s16, s16, u8, u8);
+
+extern void sub_80E5E4C();
+extern u8 sub_80E5E70(u8, u8);
+extern void sub_80E6024(void);
+extern u8 sub_80E5EC0();
+extern u8 IsRunningDisallowedByMetatile(u8);
+extern u8 sub_80608A4(u8);
+
+static void (*const gUnknown_083DB594[])(u8) = 
+{
+    sub_80E5168,
+    sub_80E517C,
+    sub_80E51C4,
+    sub_80E5270,
+};
+
+static void (*const gUnknown_083DB5A4[])(u8) =
+{
+    PlayerGoSpeed0,
+    sub_80593C4,
+    sub_80593F4,
+};
+
+static void (*const gUnknown_083DB5B0[])(u8) =
+{
+    sub_80E56F8,
+    sub_80E5708,
+    sub_80E5744,
+    sub_80E57BC,
+    sub_80E57F8,
+    sub_80E5834,
+    sub_80E5870,
+    sub_80E58AC,
+    sub_80E5920,
+    sub_80E5990,
+    sub_80E59A0,
+    sub_80E5A30,
+    sub_80E5AC0,
+};
+
+static u8 (*const gUnknown_083DB5E4[])(u8 *, u16, u16) =
+{
+    CheckMovementInputAcroBikeNormal,
+    CheckMovementInputAcroBikeChangingDirection,
+    CheckMovementInputAcroBikeStandingWheelie,
+    CheckMovementInputAcroBikeBunnyHop,
+    CheckMovementInputAcroBikeMovingWheelie,
+    CheckMovementInputAcroBikeUnknownMode5,
+    CheckMovementInputAcroBikeUnknownMode6,
+};
+
+const u16 gUnknown_083DB600[] = {1, 2, 4};
+static const u8 Unknown_3DB606[] = {4, 0};
+
+static const struct UnknownStruct1 gUnknown_083DB608[] =
+{
+    {1, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 1},
+    {2, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 2},
+    {3, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 3},
+    {4, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 4},
+};
 
 void MovePlayerOnBike(u8 var1, u16 var2, u16 var3)
 {
@@ -56,12 +127,12 @@ void MovePlayerOnBike(u8 var1, u16 var2, u16 var3)
         MovePlayerOnAcroBike(var1, var2, var3);
 }
 
-void MovePlayerOnMachBike(u8 var1, u16 var2, u16 var3)
+static void MovePlayerOnMachBike(u8 var1, u16 var2, u16 var3)
 {
     gUnknown_083DB594[CheckMovementInputMachBike(&var1) & 0x3FF](var1); // var2 and var3 arent used?
 }
 
-u8 CheckMovementInputMachBike(u8 *ptr)
+static u8 CheckMovementInputMachBike(u8 *ptr)
 {
     u8 direction = player_get_direction_upper_nybble();
 
@@ -95,13 +166,13 @@ u8 CheckMovementInputMachBike(u8 *ptr)
     }
 }
 
-void sub_80E5168(u8 var)
+static void sub_80E5168(u8 var)
 {
     PlayerFaceDirection(var);
     sub_80E6024();
 }
 
-void sub_80E517C(u8 var)
+static void sub_80E517C(u8 var)
 {
     struct MapObject *mapPtr = &gMapObjects[gPlayerAvatar.mapObjectId];
 
@@ -114,7 +185,7 @@ void sub_80E517C(u8 var)
         sub_80E5168(mapPtr->mapobj_unk_18);
 }
 
-void sub_80E51C4(u8 var)
+static void sub_80E51C4(u8 var)
 {
     struct MapObject *mapPtr = &gMapObjects[gPlayerAvatar.mapObjectId];
     u8 funcVar;
@@ -150,7 +221,7 @@ void sub_80E51C4(u8 var)
     }
 }
 
-void sub_80E5270(u8 var)
+static void sub_80E5270(u8 var)
 {
     u8 funcVar;
 
@@ -174,17 +245,17 @@ void sub_80E5270(u8 var)
         gUnknown_083DB5A4[gPlayerAvatar.unkA](var);
 }
 
-void MovePlayerOnAcroBike(u8 var1, u16 var2, u16 var3)
+static void MovePlayerOnAcroBike(u8 var1, u16 var2, u16 var3)
 {
     gUnknown_083DB5B0[CheckMovementInputAcroBike(&var1, var2, var3)](var1);
 }
 
-u8 CheckMovementInputAcroBike(u8 *ptr, u16 var1, u16 var2)
+static u8 CheckMovementInputAcroBike(u8 *ptr, u16 var1, u16 var2)
 {
     return gUnknown_083DB5E4[gPlayerAvatar.unk8](ptr, var1, var2);
 }
 
-u8 CheckMovementInputAcroBikeNormal(u8 *ptr, u16 var1, u16 var2)
+static u8 CheckMovementInputAcroBikeNormal(u8 *ptr, u16 var1, u16 var2)
 {
     u8 direction = player_get_direction_upper_nybble();
     
@@ -222,7 +293,7 @@ u8 CheckMovementInputAcroBikeNormal(u8 *ptr, u16 var1, u16 var2)
     return 2;
 }
 
-u8 CheckMovementInputAcroBikeChangingDirection(u8 *ptr, u16 unused1, u16 unused2)
+static u8 CheckMovementInputAcroBikeChangingDirection(u8 *ptr, u16 unused1, u16 unused2)
 {
     u8 direction;
     
@@ -256,7 +327,7 @@ u8 CheckMovementInputAcroBikeChangingDirection(u8 *ptr, u16 unused1, u16 unused2
     return 0;
 }
 
-u8 CheckMovementInputAcroBikeStandingWheelie(u8 *ptr, u16 unused1, u16 c)
+static u8 CheckMovementInputAcroBikeStandingWheelie(u8 *ptr, u16 unused1, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -302,7 +373,7 @@ u8 CheckMovementInputAcroBikeStandingWheelie(u8 *ptr, u16 unused1, u16 c)
     return 5;
 }
 
-u8 CheckMovementInputAcroBikeBunnyHop(u8 *ptr, u16 b, u16 c)
+static u8 CheckMovementInputAcroBikeBunnyHop(u8 *ptr, u16 b, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -337,7 +408,7 @@ u8 CheckMovementInputAcroBikeBunnyHop(u8 *ptr, u16 b, u16 c)
     return 7;
 }
 
-u8 CheckMovementInputAcroBikeMovingWheelie(u8 *ptr, u16 b, u16 c)
+static u8 CheckMovementInputAcroBikeMovingWheelie(u8 *ptr, u16 b, u16 c)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -384,7 +455,7 @@ u8 CheckMovementInputAcroBikeMovingWheelie(u8 *ptr, u16 b, u16 c)
     return 10;
 }
 
-u8 CheckMovementInputAcroBikeUnknownMode5(u8 *ptr, u16 b, u16 c)
+static u8 CheckMovementInputAcroBikeUnknownMode5(u8 *ptr, u16 b, u16 c)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -394,18 +465,18 @@ u8 CheckMovementInputAcroBikeUnknownMode5(u8 *ptr, u16 b, u16 c)
     return CheckMovementInputAcroBike(ptr, b, c);
 }
 
-u8 CheckMovementInputAcroBikeUnknownMode6(u8 *ptr, u16 b, u16 c)
+static u8 CheckMovementInputAcroBikeUnknownMode6(u8 *ptr, u16 b, u16 c)
 {
     gPlayerAvatar.unk8 = 0;
     return CheckMovementInputAcroBike(ptr, b, c);
 }
 
-void sub_80E56F8(u8 direction)
+static void sub_80E56F8(u8 direction)
 {
     PlayerFaceDirection(direction);
 }
 
-void sub_80E5708(u8 direction)
+static void sub_80E5708(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -414,7 +485,7 @@ void sub_80E5708(u8 direction)
     PlayerFaceDirection(direction);
 }
 
-void sub_80E5744(u8 direction)
+static void sub_80E5744(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -438,7 +509,7 @@ void sub_80E5744(u8 direction)
     }
 }
 
-void sub_80E57BC(u8 direction)
+static void sub_80E57BC(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -447,7 +518,7 @@ void sub_80E57BC(u8 direction)
     sub_805951C(direction);
 }
 
-void sub_80E57F8(u8 direction)
+static void sub_80E57F8(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -456,7 +527,7 @@ void sub_80E57F8(u8 direction)
     sub_8059534(direction);
 }
 
-void sub_80E5834(u8 direction)
+static void sub_80E5834(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -465,7 +536,7 @@ void sub_80E5834(u8 direction)
     sub_8059504(direction);
 }
 
-void sub_80E5870(u8 direction)
+static void sub_80E5870(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     
@@ -474,7 +545,7 @@ void sub_80E5870(u8 direction)
     sub_805954C(direction);
 }
 
-void sub_80E58AC(u8 direction)
+static void sub_80E58AC(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -502,7 +573,7 @@ void sub_80E58AC(u8 direction)
     }
 }
 
-void sub_80E5920(u8 direction)
+static void sub_80E5920(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj;
@@ -529,12 +600,12 @@ void sub_80E5920(u8 direction)
     player_npc_set_state_and_x22_etc(sub_80608A4(direction), 2);
 }
 
-void sub_80E5990(u8 direction)
+static void sub_80E5990(u8 direction)
 {
     sub_80595B8(direction);
 }
 
-void sub_80E59A0(u8 direction)
+static void sub_80E59A0(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -564,7 +635,7 @@ void sub_80E59A0(u8 direction)
     gPlayerAvatar.running2 = 2;
 }
 
-void sub_80E5A30(u8 direction)
+static void sub_80E5A30(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -594,7 +665,7 @@ void sub_80E5A30(u8 direction)
     gPlayerAvatar.running2 = 2;
 }
 
-void sub_80E5AC0(u8 direction)
+static void sub_80E5AC0(u8 direction)
 {
     u8 var;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -622,7 +693,7 @@ void sub_80E5B38(u16 a, u16 b)
         sub_80E5B60(a, b);
 }
 
-void sub_80E5B60(u16 unused, u16 b)
+static void sub_80E5B60(u16 unused, u16 b)
 {
     u8 var;
 
@@ -651,7 +722,7 @@ void sub_80E5B60(u16 unused, u16 b)
     }
 }
 
-bool8 sub_80E5BC8(u8 *a, u8 *b)
+static bool8 sub_80E5BC8(const u8 *a, const u8 *b)
 {
     u8 i;
     
@@ -668,7 +739,7 @@ bool8 sub_80E5BC8(u8 *a, u8 *b)
     return TRUE;
 }
 
-u8 sub_80E5C2C(void)
+static u8 sub_80E5C2C(void)
 {
     u32 i;
     
@@ -709,7 +780,7 @@ static void sub_80E5CB8(u8 a)
     gPlayerAvatar.unk1C[0] = 1;
 }
 
-u8 sub_80E5CF4(u16 a)
+static u8 sub_80E5CF4(u16 a)
 {
     if (a & 0x40)
         return 2;
@@ -722,7 +793,7 @@ u8 sub_80E5CF4(u16 a)
     return 0;
 }
 
-u8 sub_80E5D34(u8 direction)
+static u8 sub_80E5D34(u8 direction)
 {
     s16 x;
     s16 y;
