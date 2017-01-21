@@ -248,17 +248,26 @@ void sub_80BE8C4(u16 arg0) {
 asm(".section .text_b");
 
 u8 sub_80BF4F4(u8 arg0) {
+    u8 langData[4];
     u32 species;
+
+    u8 *tmp;
 
     GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
 
-    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
-
-    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == FALSE) {
-        return FALSE;
+    tmp = langData;
+    tmp[0] = GetMonData(&gPlayerParty[arg0], MON_DATA_LANGUAGE, &langData);
+    if (tmp[0] != GAME_LANGUAGE) {
+        return TRUE;
     }
 
-    return TRUE;
+    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
+
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1)) {
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 asm(".section .text_c");

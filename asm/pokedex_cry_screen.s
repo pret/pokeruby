@@ -800,10 +800,8 @@ _0811A42C:
 	mov r9, r2
 _0811A446:
 	movs r3, 0
-	lsls r0, r5, 2
 	adds r7, r5, 0x1
-	adds r0, r5
-	lsls r6, r0, 1
+	lsls r6, r5, 5
 _0811A450:
 	ldrb r0, [r4, 0x5]
 	adds r0, r5, r0

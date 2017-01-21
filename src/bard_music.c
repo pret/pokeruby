@@ -47,9 +47,13 @@ static s16 sub_814A2B8(u32 arg0, u32 arg1)
 
 struct BardSound *sub_814A2D0(u16 arg0, u16 arg1)
 {
-    struct BardSound *sounds = gBardMusicTable[arg0];
+    u32 index;
+    struct BardSound *sounds;
 
-    return &sounds[arg1];
+    sounds = gBardMusicTable[arg0];
+    index = de_sub_80EB748(arg0, arg1);
+
+    return &sounds[index];
 }
 
 s32 sub_814A2EC(struct UnkBard2 *dest, struct UnkBard *src, u16 arg2)

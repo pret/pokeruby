@@ -32,7 +32,7 @@ RomHeaderGameCode:
 	.ifdef SAPPHIRE
 	.ascii "AXPE"
 	.else
-	.ascii "AXVE"
+	.ascii "AXVD"
 	.endif
 
 RomHeaderMakerCode:
@@ -57,7 +57,7 @@ RomHeaderChecksum:
 	.ifdef SAPPHIRE
 	.byte 0x55 - REVISION
 	.else
-	.byte 0x41 - REVISION
+	.byte 0x42
 	.endif
 
 RomHeaderReserved2:

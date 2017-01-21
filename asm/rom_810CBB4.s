@@ -1564,7 +1564,7 @@ _0810D780:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	movs r0, 0xAD
+	movs r0, 0xB8
 	strb r0, [r4, 0x2]
 	adds r5, r4, 0x3
 	adds r0, r7, 0

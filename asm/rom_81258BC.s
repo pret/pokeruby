@@ -1668,7 +1668,7 @@ _0812BB84:
 	bl get_battle_strings_
 	ldr r4, _0812BBD4 @ =gUnknown_03004210
 	ldr r1, _0812BBF8 @ =gUnknown_020238CC
-	movs r2, 0xDC
+	movs r2, 0xDE
 	lsls r2, 1
 	movs r0, 0x23
 	str r0, [sp]
@@ -16542,7 +16542,7 @@ _08132F58:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08132FD6
-	ldr r0, _08132F78 @ =gOtherText_ForgotOrDidNotLearnMove
+	ldr r0, _08132F78 @ =deuOtherText_ForgotAndLearned
 	bl sub_81328E8
 	ldr r0, _08132F7C @ =gUnknown_030007B0
 	ldr r1, [r0]
@@ -16552,7 +16552,7 @@ _08132F58:
 	bl PlayFanfare
 	b _08132FD6
 	.align 2, 0
-_08132F78: .4byte gOtherText_ForgotOrDidNotLearnMove
+_08132F78: .4byte deuOtherText_ForgotAndLearned
 _08132F7C: .4byte gUnknown_030007B0
 _08132F80: .4byte 0x0000016f
 _08132F84:
@@ -18453,9 +18453,9 @@ sub_8133E74: @ 8133E74
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08133EA4
-	movs r0, 0x3
+	movs r0, 0
 	movs r1, 0xE
-	movs r2, 0x1A
+	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	movs r0, 0x3
@@ -18526,9 +18526,9 @@ sub_8133EF8: @ 8133EF8
 	ldr r1, _08133F48 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
-	movs r0, 0x3
+	movs r0, 0
 	movs r1, 0xE
-	movs r2, 0x1A
+	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	movs r0, 0
@@ -21349,7 +21349,7 @@ sub_813545C: @ 813545C
 	ldr r0, _08135470 @ =gStringVar4
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_80EB544
+	bl de_sub_80EB8F8
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -22980,6 +22980,60 @@ _0813611E:
 	.align 2, 0
 _0813612C: .4byte gSaveBlock2 + 0x556
 	thumb_func_end sub_813610C
+
+	thumb_func_start de_sub_81364AC
+de_sub_81364AC: @ 81364AC
+	push {lr}
+	ldr r2, _DE_081364C0 @ =gSaveBlock2
+	ldr r0, _DE_081364C4 @ =0x00000564
+	adds r1, r2, r0
+	ldrb r0, [r1]
+	cmp r0, 0xC8
+	bne _DE_081364CC
+	ldr r1, _DE_081364C8 @ =0x00000499
+	adds r0, r2, r1
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364C0: .4byte gSaveBlock2
+_DE_081364C4: .4byte 0x00000564
+_DE_081364C8: .4byte 0x00000499
+_DE_081364CC:
+	cmp r0, 0x63
+	bhi _DE_081364E4
+	ldr r2, _DE_081364E0 @ =gBattleTowerTrainers
+	ldrb r1, [r1]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 3
+	adds r0, r2
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364E0: .4byte gBattleTowerTrainers
+_DE_081364E4:
+	ldrb r0, [r1]
+	subs r0, 0x64
+	movs r1, 0xA4
+	muls r0, r1
+	adds r0, r2
+	adds r1, 0xA9
+	adds r0, r1
+_DE_081364F2:
+	ldrb r0, [r0]
+	pop {r1}
+	bx r1
+	thumb_func_end de_sub_81364AC
+
+	thumb_func_start de_sub_81364F8
+de_sub_81364F8: @ 81364F8
+	ldr r0, _DE_08136504 @ =gSaveBlock2
+	ldr r1, _DE_08136508 @ =0x00000499
+	adds r0, r1
+	ldrb r0, [r0]
+	bx lr
+	.align 2, 0
+_DE_08136504: .4byte gSaveBlock2
+_DE_08136508: .4byte 0x00000499
+	thumb_func_end de_sub_81364F8
 
 	thumb_func_start sub_8136130
 sub_8136130: @ 8136130
@@ -29071,7 +29125,7 @@ _0813930C:
 	bl get_battle_strings_
 	ldr r4, _08139354 @ =gUnknown_03004210
 	ldr r1, _08139374 @ =gUnknown_020238CC
-	movs r2, 0xDC
+	movs r2, 0xDE
 	lsls r2, 1
 	movs r0, 0x23
 	str r0, [sp]

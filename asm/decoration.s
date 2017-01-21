@@ -1329,15 +1329,19 @@ sub_80FECE0: @ 80FECE0
 	push {lr}
 	sub sp, 0x8
 	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _080FED14 @ =gDecorations
-	ldr r1, _080FED18 @ =gUnknown_020388D0
-	ldr r1, [r1]
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 5
-	adds r2, 0x18
+	lsrs r2, r0, 24
+	ldr r0, _080FED18 @ =gUnknown_020388D5
+	ldrb r0, [r0]
+	cmp r2, r0
+	beq _080FED24
+	ldr r1, _080FED1C @ =gDecorations
+	ldr r0, _080FED20 @ =gUnknown_020388D0
+	ldr r0, [r0]
 	adds r0, r2
+	ldrb r0, [r0]
+	lsls r0, 5
+	adds r1, 0x18
+	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x30
 	str r1, [sp]
@@ -1347,12 +1351,18 @@ sub_80FECE0: @ 80FECE0
 	movs r2, 0x68
 	movs r3, 0x68
 	bl sub_8072AB0
-	add sp, 0x8
-	pop {r0}
-	bx r0
+	movs r0, 0x1
+	b _080FED26
 	.align 2, 0
-_080FED14: .4byte gDecorations
-_080FED18: .4byte gUnknown_020388D0
+_080FED18: .4byte gUnknown_020388D5
+_080FED1C: .4byte gDecorations
+_080FED20: .4byte gUnknown_020388D0
+_080FED24:
+	movs r0, 0
+_080FED26:
+	add sp, 0x8
+	pop {r1}
+	bx r1
 	thumb_func_end sub_80FECE0
 
 	thumb_func_start sub_80FED1C

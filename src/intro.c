@@ -19,7 +19,6 @@
 #include "trig.h"
 
 extern void *species_and_otid_get_pal(/*TODO: arg types*/);
-extern void sub_8143648(int, u8);
 extern void sub_8143680(int, u8);
 
 struct MonCoords

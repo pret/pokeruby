@@ -291,7 +291,7 @@ static void Task_StarterChoose6(u8 taskId)
     gTasks[taskId].func = Task_StarterChoose1;
 }
 
-static void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadowColor)
+void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadowColor)
 {
     *(string++) = EXT_CTRL_CODE_BEGIN;
     *(string++) = 4;
@@ -306,6 +306,7 @@ static void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadow
     *p = c;                     \
 }
 
+#ifdef NONMATCHING
 static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 {
     u8 labelText[72];
@@ -371,6 +372,162 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     REG_WIN0H = WIN_RANGE(labelLeft, labelRight);
     REG_WIN0V = WIN_RANGE(labelTop, labelBottom);
 }
+
+#else
+__attribute__((naked))
+static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x48\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r5, r1, 24\n\
+    cmp r0, 0xFF\n\
+    beq _0810A872\n\
+    ldr r1, _0810A960 @ =gStarterChoose_LabelCoords\n\
+    lsls r2, r0, 1\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    adds r1, 0x1\n\
+    adds r2, r1\n\
+    ldrb r1, [r2]\n\
+    adds r2, r0, 0\n\
+    adds r2, 0xD\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    adds r3, r1, 0x3\n\
+    lsls r3, 24\n\
+    lsrs r3, 24\n\
+    bl MenuZeroFillWindowRect\n\
+    ldr r0, _0810A964 @ =0x04000040\n\
+    movs r1, 0\n\
+    strh r1, [r0]\n\
+    adds r0, 0x4\n\
+    strh r1, [r0]\n\
+_0810A872:\n\
+    adds r0, r5, 0\n\
+    bl GetStarterPokemon\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    adds r0, r6, 0\n\
+    bl SpeciesToNationalPokedexNum\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl GetPokemonCategory\n\
+    adds r4, r0, 0\n\
+    mov r0, sp\n\
+    movs r1, 0\n\
+    movs r2, 0xF\n\
+    movs r3, 0x8\n\
+    bl AddTextColorCtrlCode\n\
+    movs r2, 0x8\n\
+    movs r3, 0\n\
+    ldrb r0, [r4]\n\
+    lsls r5, 1\n\
+    mov r7, sp\n\
+    adds r7, 0x5\n\
+    cmp r0, 0xFF\n\
+    beq _0810A8CA\n\
+_0810A8A8:\n\
+    mov r0, sp\n\
+    adds r1, r0, r2\n\
+    adds r0, r4, r3\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    adds r0, r4, r3\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0xFF\n\
+    beq _0810A8CA\n\
+    cmp r3, 0xA\n\
+    bls _0810A8A8\n\
+_0810A8CA:\n\
+    mov r0, sp\n\
+    adds r1, r0, r2\n\
+    movs r0, 0xFF\n\
+    strb r0, [r1]\n\
+    mov r1, sp\n\
+    movs r0, 0xFC\n\
+    strb r0, [r1, 0x5]\n\
+    movs r0, 0x11\n\
+    strb r0, [r1, 0x6]\n\
+    mov r2, sp\n\
+    lsls r1, r3, 1\n\
+    adds r1, r3\n\
+    lsls r1, 1\n\
+    movs r0, 0x70\n\
+    subs r0, r1\n\
+    asrs r0, 1\n\
+    strb r0, [r2, 0x7]\n\
+    ldr r0, _0810A960 @ =gStarterChoose_LabelCoords\n\
+    adds r1, r5, r0\n\
+    ldrb r4, [r1]\n\
+    adds r0, 0x1\n\
+    adds r0, r5, r0\n\
+    ldrb r5, [r0]\n\
+    mov r0, sp\n\
+    adds r1, r4, 0\n\
+    adds r2, r5, 0\n\
+    bl MenuPrint\n\
+    mov r0, sp\n\
+    movs r1, 0\n\
+    movs r2, 0xF\n\
+    movs r3, 0x8\n\
+    bl AddTextColorCtrlCode\n\
+    movs r0, 0xB\n\
+    adds r1, r6, 0\n\
+    muls r1, r0\n\
+    ldr r0, _0810A968 @ =gSpeciesNames\n\
+    adds r1, r0\n\
+    adds r0, r7, 0\n\
+    movs r2, 0x70\n\
+    movs r3, 0x2\n\
+    bl sub_8072C74\n\
+    adds r2, r5, 0x2\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    mov r0, sp\n\
+    adds r1, r4, 0\n\
+    bl MenuPrint\n\
+    lsls r0, r4, 3\n\
+    adds r0, 0x4\n\
+    lsls r0, 24\n\
+    adds r4, 0xD\n\
+    lsls r4, 3\n\
+    adds r4, 0x4\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r1, r5, 27\n\
+    adds r5, 0x4\n\
+    lsls r5, 27\n\
+    lsrs r5, 24\n\
+    ldr r2, _0810A964 @ =0x04000040\n\
+    lsrs r0, 16\n\
+    orrs r0, r4\n\
+    strh r0, [r2]\n\
+    ldr r0, _0810A96C @ =0x04000044\n\
+    lsrs r1, 16\n\
+    orrs r1, r5\n\
+    strh r1, [r0]\n\
+    add sp, 0x48\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0810A960: .4byte gStarterChoose_LabelCoords\n\
+_0810A964: .4byte 0x04000040\n\
+_0810A968: .4byte gSpeciesNames\n\
+_0810A96C: .4byte 0x04000044\n\
+    .syntax divided\n");
+}
+#endif
 
 void nullsub_72(struct Sprite *sprite)
 {

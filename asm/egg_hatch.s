@@ -122,7 +122,7 @@ _0804297C:
 	lsrs r4, r0, 24
 	cmp r4, 0x5
 	bls _0804297C
-	movs r0, 0x2
+	movs r0, 0x5
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r5, 0

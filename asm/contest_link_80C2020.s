@@ -2948,194 +2948,254 @@ _080C37DC: .4byte REG_WININ
 _080C37E0: .4byte 0x00003f3f
 	thumb_func_end sub_80C3764
 
-	thumb_func_start sub_80C37E4
-sub_80C37E4: @ 80C37E4
-	push {r4-r6,lr}
+	thumb_func_start de_sub_80C39A8
+de_sub_80C39A8: @ 80C39A8
+	push {r4,lr}
 	sub sp, 0x10
-	movs r5, 0x1
-	movs r4, 0
-	ldr r0, _080C3808 @ =gIsLinkContest
+	adds r1, r0, 0
+	ldr r0, _de_080C39DC @ =gIsLinkContest
 	ldrb r0, [r0]
-	adds r1, r5, 0
-	ands r1, r0
-	cmp r1, 0
-	beq _080C3814
-	ldr r0, _080C380C @ =0x0600e000
-	ldr r3, _080C3810 @ =gUnknown_08E964B8
-	movs r1, 0x9
-	str r1, [sp]
-	movs r2, 0x2
-	str r2, [sp, 0x4]
-	b _080C386A
-	.align 2, 0
-_080C3808: .4byte gIsLinkContest
-_080C380C: .4byte 0x0600e000
-_080C3810: .4byte gUnknown_08E964B8
-_080C3814:
-	ldr r0, _080C3830 @ =gScriptContestRank
-	ldrh r2, [r0]
-	cmp r2, 0
-	bne _080C383C
 	movs r4, 0x1
-	ldr r0, _080C3834 @ =0x0600e000
-	ldr r3, _080C3838 @ =gUnknown_08E964B8
+	ands r4, r0
+	cmp r4, 0
+	beq _de_080C39E8
+	ldr r0, _de_080C39E0 @ =0x0600e000
+	lsls r1, 16
+	lsrs r1, 16
+	ldr r3, _de_080C39E4 @ =gUnknown_08E964B8
+	movs r2, 0xB
 	str r2, [sp]
-	str r2, [sp, 0x4]
-	movs r1, 0x9
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	str r1, [sp, 0xC]
-	b _080C3870
-	.align 2, 0
-_080C3830: .4byte gScriptContestRank
-_080C3834: .4byte 0x0600e000
-_080C3838: .4byte gUnknown_08E964B8
-_080C383C:
-	cmp r2, 0x1
-	bne _080C385C
-	ldr r0, _080C3854 @ =0x0600e000
-	ldr r3, _080C3858 @ =gUnknown_08E964B8
-	movs r1, 0x9
-	str r1, [sp]
+	movs r4, 0x3
 	str r4, [sp, 0x4]
-	movs r1, 0x8
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	str r1, [sp, 0xC]
-	b _080C3870
-	.align 2, 0
-_080C3854: .4byte 0x0600e000
-_080C3858: .4byte gUnknown_08E964B8
-_080C385C:
-	cmp r2, 0x2
-	bne _080C3884
-	ldr r0, _080C387C @ =0x0600e000
-	ldr r3, _080C3880 @ =gUnknown_08E964B8
-	movs r1, 0x11
-	str r1, [sp]
-	str r4, [sp, 0x4]
-_080C386A:
-	movs r1, 0x8
-	str r1, [sp, 0x8]
-	str r2, [sp, 0xC]
-_080C3870:
-	movs r1, 0x5
-	movs r2, 0x1
+	movs r2, 0x8
+	str r2, [sp, 0x8]
+	str r4, [sp, 0xC]
+	movs r2, 0
 	bl sub_809D104
-	b _080C389E
+	movs r0, 0x8
+	b _de_080C3A74
 	.align 2, 0
-_080C387C: .4byte 0x0600e000
-_080C3880: .4byte gUnknown_08E964B8
-_080C3884:
-	movs r4, 0x1
-	ldr r0, _080C38C0 @ =0x0600e000
-	ldr r3, _080C38C4 @ =gUnknown_08E964B8
-	str r1, [sp]
-	movs r2, 0x2
-	str r2, [sp, 0x4]
-	movs r1, 0x9
-	str r1, [sp, 0x8]
-	str r2, [sp, 0xC]
-	movs r1, 0x5
-	movs r2, 0x1
-	bl sub_809D104
-_080C389E:
-	adds r4, 0xD
-	ldr r0, _080C38C8 @ =gScriptContestCategory
+_de_080C39DC: .4byte gIsLinkContest
+_de_080C39E0: .4byte 0x0600e000
+_de_080C39E4: .4byte gUnknown_08E964B8
+_de_080C39E8:
+	ldr r0, _de_080C3A08 @ =gScriptContestRank
 	ldrh r0, [r0]
 	cmp r0, 0
-	bne _080C38CC
-	movs r6, 0
-	ldr r0, _080C38C0 @ =0x0600e000
-	ldr r3, _080C38C4 @ =gUnknown_08E964B8
-	movs r1, 0x11
-	str r1, [sp]
-	movs r2, 0x2
-	str r2, [sp, 0x4]
-	movs r1, 0xA
-	str r1, [sp, 0x8]
+	bne _de_080C3A14
+	ldr r0, _de_080C3A0C @ =0x0600e000
+	lsls r1, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3A10 @ =gUnknown_08E964B8
+	str r4, [sp]
+	str r4, [sp, 0x4]
+	movs r2, 0xB
+	str r2, [sp, 0x8]
+	movs r2, 0x3
 	str r2, [sp, 0xC]
-	b _080C392A
+	b _de_080C3A6C
 	.align 2, 0
-_080C38C0: .4byte 0x0600e000
-_080C38C4: .4byte gUnknown_08E964B8
-_080C38C8: .4byte gScriptContestCategory
-_080C38CC:
+_de_080C3A08: .4byte gScriptContestRank
+_de_080C3A0C: .4byte 0x0600e000
+_de_080C3A10: .4byte gUnknown_08E964B8
+_de_080C3A14:
 	cmp r0, 0x1
-	bne _080C38EC
-	movs r6, 0x1
-	ldr r0, _080C38E4 @ =0x0600e000
-	ldr r3, _080C38E8 @ =gUnknown_08E964B8
-	movs r1, 0
-	str r1, [sp]
-	movs r1, 0x4
-	str r1, [sp, 0x4]
-	movs r1, 0xB
-	b _080C3924
+	bne _de_080C3A2C
+	ldr r0, _de_080C3A24 @ =0x0600e000
+	lsls r1, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3A28 @ =gUnknown_08E964B8
+	movs r2, 0xB
+	b _de_080C3A3A
 	.align 2, 0
-_080C38E4: .4byte 0x0600e000
-_080C38E8: .4byte gUnknown_08E964B8
-_080C38EC:
+_de_080C3A24: .4byte 0x0600e000
+_de_080C3A28: .4byte gUnknown_08E964B8
+_de_080C3A2C:
 	cmp r0, 0x2
-	bne _080C3910
-	movs r6, 0x2
-	ldr r0, _080C3908 @ =0x0600e000
-	ldr r3, _080C390C @ =gUnknown_08E964B8
-	movs r1, 0xB
-	str r1, [sp]
-	movs r1, 0x4
-	str r1, [sp, 0x4]
-	movs r1, 0xA
-	str r1, [sp, 0x8]
-	str r6, [sp, 0xC]
-	b _080C392A
-	.align 2, 0
-_080C3908: .4byte 0x0600e000
-_080C390C: .4byte gUnknown_08E964B8
-_080C3910:
-	cmp r0, 0x3
-	bne _080C393C
-	movs r6, 0x3
-	ldr r0, _080C3934 @ =0x0600e000
-	ldr r3, _080C3938 @ =gUnknown_08E964B8
-	movs r1, 0x15
-	str r1, [sp]
-	movs r1, 0x4
-	str r1, [sp, 0x4]
-	movs r1, 0xA
-_080C3924:
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	str r1, [sp, 0xC]
-_080C392A:
-	adds r1, r4, 0
-	adds r2, r5, 0
+	bne _de_080C3A58
+	ldr r0, _de_080C3A50 @ =0x0600e000
+	lsls r1, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3A54 @ =gUnknown_08E964B8
+	movs r2, 0x15
+_de_080C3A3A:
+	str r2, [sp]
+	str r4, [sp, 0x4]
+	movs r2, 0xA
+	str r2, [sp, 0x8]
+	movs r2, 0x3
+	str r2, [sp, 0xC]
+	movs r2, 0
 	bl sub_809D104
-	b _080C395A
+	movs r0, 0xA
+	b _de_080C3A74
 	.align 2, 0
-_080C3934: .4byte 0x0600e000
-_080C3938: .4byte gUnknown_08E964B8
-_080C393C:
-	movs r6, 0x4
-	ldr r0, _080C3984 @ =0x0600e000
-	ldr r3, _080C3988 @ =gUnknown_08E964B8
-	movs r1, 0
-	str r1, [sp]
-	movs r1, 0x6
-	str r1, [sp, 0x4]
-	movs r1, 0xA
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	str r1, [sp, 0xC]
-	adds r1, r4, 0
-	adds r2, r5, 0
+_de_080C3A50: .4byte 0x0600e000
+_de_080C3A54: .4byte gUnknown_08E964B8
+_de_080C3A58:
+	ldr r0, _de_080C3A7C @ =0x0600e000
+	lsls r1, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3A80 @ =gUnknown_08E964B8
+	str r4, [sp]
+	movs r4, 0x3
+	str r4, [sp, 0x4]
+	movs r2, 0xB
+	str r2, [sp, 0x8]
+	str r4, [sp, 0xC]
+_de_080C3A6C:
+	movs r2, 0
 	bl sub_809D104
-_080C395A:
-	ldr r5, _080C398C @ =0x00000fff
-	lsls r4, r6, 12
-	ldr r2, _080C3984 @ =0x0600e000
+	movs r0, 0xB
+_de_080C3A74:
+	add sp, 0x10
+	pop {r4}
+	pop {r1}
+	bx r1
+	.align 2, 0
+_de_080C3A7C: .4byte 0x0600e000
+_de_080C3A80: .4byte gUnknown_08E964B8
+	thumb_func_end de_sub_80C39A8
+
+	thumb_func_start de_sub_80C3A84
+de_sub_80C3A84: @ 80C3A84
+	push {r4,lr}
+	sub sp, 0x10
+	adds r2, r0, 0
+	ldr r0, _de_080C3AAC @ =gScriptContestCategory
+	ldrh r4, [r0]
+	cmp r4, 0
+	bne _de_080C3AB8
+	str r4, [r1]
+	ldr r0, _de_080C3AB0 @ =0x0600e000
+	lsls r1, r2, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3AB4 @ =gUnknown_08E964B8
+	movs r2, 0x13
+	str r2, [sp]
+	movs r4, 0x3
+	str r4, [sp, 0x4]
+	movs r2, 0x7
+	str r2, [sp, 0x8]
+	str r4, [sp, 0xC]
+	b _de_080C3AD6
+	.align 2, 0
+_de_080C3AAC: .4byte gScriptContestCategory
+_de_080C3AB0: .4byte 0x0600e000
+_de_080C3AB4: .4byte gUnknown_08E964B8
+_de_080C3AB8:
+	cmp r4, 0x1
+	bne _de_080C3AE8
+	str r4, [r1]
+	ldr r0, _de_080C3AE0 @ =0x0600e000
+	lsls r1, r2, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3AE4 @ =gUnknown_08E964B8
+	movs r2, 0
+	str r2, [sp]
+	movs r2, 0x6
+	str r2, [sp, 0x4]
+	movs r2, 0x7
+	str r2, [sp, 0x8]
+	movs r2, 0x3
+	str r2, [sp, 0xC]
+_de_080C3AD6:
+	movs r2, 0
+	bl sub_809D104
+	movs r0, 0x7
+	b _de_080C3B68
+	.align 2, 0
+_de_080C3AE0: .4byte 0x0600e000
+_de_080C3AE4: .4byte gUnknown_08E964B8
+_de_080C3AE8:
+	cmp r4, 0x2
+	bne _de_080C3B18
+	str r4, [r1]
+	ldr r0, _de_080C3B10 @ =0x0600e000
+	lsls r1, r2, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3B14 @ =gUnknown_08E964B8
+	movs r2, 0x7
+	str r2, [sp]
+	movs r2, 0x6
+	str r2, [sp, 0x4]
+	movs r2, 0x4
+	str r2, [sp, 0x8]
+	movs r2, 0x3
+	str r2, [sp, 0xC]
+	movs r2, 0
+	bl sub_809D104
+	movs r0, 0x4
+	b _de_080C3B68
+	.align 2, 0
+_de_080C3B10: .4byte 0x0600e000
+_de_080C3B14: .4byte gUnknown_08E964B8
+_de_080C3B18:
+	cmp r4, 0x3
+	bne _de_080C3B44
+	str r4, [r1]
+	ldr r0, _de_080C3B3C @ =0x0600e000
+	lsls r1, r2, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3B40 @ =gUnknown_08E964B8
+	movs r2, 0xB
+	str r2, [sp]
+	movs r2, 0x6
+	str r2, [sp, 0x4]
+	str r2, [sp, 0x8]
+	str r4, [sp, 0xC]
+	movs r2, 0
+	bl sub_809D104
+	movs r0, 0x6
+	b _de_080C3B68
+	.align 2, 0
+_de_080C3B3C: .4byte 0x0600e000
+_de_080C3B40: .4byte gUnknown_08E964B8
+_de_080C3B44:
+	movs r0, 0x4
+	str r0, [r1]
+	ldr r0, _de_080C3B70 @ =0x0600e000
+	lsls r1, r2, 16
+	lsrs r1, 16
+	ldr r3, _de_080C3B74 @ =gUnknown_08E964B8
+	movs r2, 0x11
+	str r2, [sp]
+	movs r2, 0x6
+	str r2, [sp, 0x4]
+	movs r2, 0x5
+	str r2, [sp, 0x8]
+	movs r2, 0x3
+	str r2, [sp, 0xC]
+	movs r2, 0
+	bl sub_809D104
+	movs r0, 0x5
+_de_080C3B68:
+	add sp, 0x10
+	pop {r4}
+	pop {r1}
+	bx r1
+	.align 2, 0
+_de_080C3B70: .4byte 0x0600e000
+_de_080C3B74: .4byte gUnknown_08E964B8
+	thumb_func_end de_sub_80C3A84
+
+	thumb_func_start sub_80C37E4
+sub_80C37E4: @ 80C37E4
+	push {r4,r5,lr}
+	sub sp, 0x4
+	movs r0, 0x6
+	bl de_sub_80C39A8
+	lsls r0, 16
+	asrs r0, 16
+	adds r0, 0x6
+	mov r1, sp
+	bl de_sub_80C3A84
+	ldr r5, _080C3824 @ =0x00000fff
+	ldr r0, [sp]
+	lsls r4, r0, 12
+	ldr r2, _080C3828 @ =0x0600e000
 	movs r3, 0x7F
-_080C3962:
+_080C3804:
 	ldrh r1, [r2]
 	adds r0, r5, 0
 	ands r0, r1
@@ -3147,15 +3207,14 @@ _080C3962:
 	adds r2, 0x2
 	subs r3, 0x1
 	cmp r3, 0
-	bge _080C3962
-	add sp, 0x10
-	pop {r4-r6}
+	bge _080C3804
+	add sp, 0x4
+	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C3984: .4byte 0x0600e000
-_080C3988: .4byte gUnknown_08E964B8
-_080C398C: .4byte 0x00000fff
+_080C3824: .4byte 0x00000fff
+_080C3828: .4byte 0x0600e000
 	thumb_func_end sub_80C37E4
 
 	thumb_func_start sub_80C3990

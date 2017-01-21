@@ -389,6 +389,8 @@ void BattleAI_SetupAIData(void)
         gAIThinkingSpace.aiFlags = 0x20000000;
     else if(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         gAIThinkingSpace.aiFlags = 0x80000000;
+    else if(gBattleTypeFlags & 0x900 || gTrainerBattleOpponent == 0x400)
+        gAIThinkingSpace.aiFlags = 7;
     else // otherwise, just set aiFlags to whatever flags the trainer has set in their data.
         gAIThinkingSpace.aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;
 }

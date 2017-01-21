@@ -1724,7 +1724,7 @@ sub_80BC190: @ 80BC190
 	strb r1, [r0]
 	ldr r1, _080BC1CC @ =gOtherText_PlayersBase
 	adds r0, r5, 0
-	bl StringAppend
+	bl de_sub_8073174
 	pop {r4,r5}
 	pop {r1}
 	bx r1

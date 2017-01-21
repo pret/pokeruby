@@ -7051,35 +7051,31 @@ _08104CA8: .4byte 0x0000ffff
 	thumb_func_start sub_8104CAC
 sub_8104CAC: @ 8104CAC
 	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
+	lsls r0, 24
+	lsrs r5, r0, 24
 	bl sub_8104DA4
-	ldr r0, _08104D24 @ =0x02000000
+	ldr r0, _08104D38 @ =0x02000000
 	adds r0, 0x3D
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _08104D28 @ =gTasks
-	adds r7, r0, r1
-	strh r4, [r7, 0xA]
-	movs r6, 0
-	ldr r1, _08104D2C @ =gUnknown_083ED048
-	lsls r5, r4, 2
-	adds r0, r5, r1
+	ldr r1, _08104D3C @ =gTasks
+	adds r6, r0, r1
+	strh r5, [r6, 0xA]
+	movs r4, 0
+	ldr r3, _08104D40 @ =gUnknown_083ED048
+	lsls r2, r5, 2
+	adds r0, r2, r3
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
-	beq _08104D18
-	mov r8, r1
-_08104CE0:
-	mov r0, r8
-	adds r4, r5, r0
-	ldr r0, [r4]
-	lsls r2, r6, 2
+	beq _08104D30
+	ldr r7, _08104D44 @ =gSprites
+_08104CDA:
+	adds r0, r2, r3
+	ldr r0, [r0]
+	lsls r2, r4, 2
 	adds r2, r0
 	ldrb r0, [r2]
 	ldrb r1, [r2, 0x1]
@@ -7087,32 +7083,48 @@ _08104CE0:
 	ldrsh r2, [r2, r3]
 	bl sub_8105BB4
 	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r6, 0x4
-	lsls r2, 1
-	adds r1, r7, 0
-	adds r1, 0x8
-	adds r1, r2
-	strh r0, [r1]
-	adds r0, r6, 0x1
+	lsrs r2, r0, 24
+	adds r1, r4, 0x4
+	lsls r1, 1
+	adds r0, r6, 0
+	adds r0, 0x8
+	adds r0, r1
+	strh r2, [r0]
+	cmp r5, 0x5
+	bne _08104D18
+	cmp r4, 0x2
+	bhi _08104D18
+	lsls r0, r2, 4
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r7
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	movs r2, 0x4
+	orrs r1, r2
+	strb r1, [r0]
+_08104D18:
+	adds r0, r4, 0x1
 	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, [r4]
-	lsls r0, r6, 2
+	lsrs r4, r0, 24
+	ldr r3, _08104D40 @ =gUnknown_083ED048
+	lsls r2, r5, 2
+	adds r0, r2, r3
+	ldr r1, [r0]
+	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r0, [r0]
 	cmp r0, 0xFF
-	bne _08104CE0
-_08104D18:
-	pop {r3}
-	mov r8, r3
+	bne _08104CDA
+_08104D30:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08104D24: .4byte 0x02000000
-_08104D28: .4byte gTasks
-_08104D2C: .4byte gUnknown_083ED048
+_08104D38: .4byte 0x02000000
+_08104D3C: .4byte gTasks
+_08104D40: .4byte gUnknown_083ED048
+_08104D44: .4byte gSprites
 	thumb_func_end sub_8104CAC
 
 	thumb_func_start sub_8104D30
@@ -10230,7 +10242,7 @@ sub_8106448: @ 8106448
 	bl sub_800D238
 	movs r3, 0xC0
 	lsls r3, 19
-	movs r5, 0xE9
+	movs r5, 0xEC
 	lsls r5, 5
 	ldr r1, _081064A8 @ =0x040000d4
 	ldr r6, _081064AC @ =0x80000800

@@ -39,6 +39,7 @@ extern const struct SpriteSheet gUnknown_083C1F74;
 extern const struct SpritePalette gUnknown_083C1F7C;
 
 extern u8 gOtherText_ThreeQuestions2[];
+extern u8 gOtherText_Berry2[];
 extern u8 gOtherText_Size[];
 extern u8 gOtherText_Firm[];
 extern u8 gContestStatsText_Unknown1[];
@@ -266,30 +267,25 @@ static void sub_8146480(u8 taskid)
 static void sub_81464E4(void)
 {
     struct Berry *berryInfo;
-    u32 size;
-    s32 sizeMajor;
-    s32 sizeMinor;
+    u8 buffer[16];
 
     berryInfo = GetBerryInfo(gScriptItemId + OFFSET_7B + 1);
 
     ConvertIntToDecimalStringN(gStringVar1, gScriptItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     MenuPrint(gStringVar1, 12, 4);
 
-    MenuPrint(berryInfo->name, 14, 4);
+    StringCopy(buffer, berryInfo->name);
+    StringAppend(buffer, gOtherText_Berry2);
+    MenuPrint(buffer, 14, 4);
+
     MenuPrint(berryInfo->description1, 4, 14);
     MenuPrint(berryInfo->description2, 4, 16);
-
-    size = (berryInfo->size * 1000) / 254;
-    if (size % 10 >= 5)
-        size += 10;
-    sizeMinor = (size % 100) / 10;
-    sizeMajor = size / 100;
 
     MenuPrint(gOtherText_Size, 11, 7);
     if (berryInfo->size != 0)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sizeMajor, STR_CONV_MODE_LEFT_ALIGN, 2);
-        ConvertIntToDecimalStringN(gStringVar2, sizeMinor, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar1, berryInfo->size / 10, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, berryInfo->size % 10, STR_CONV_MODE_LEFT_ALIGN, 2);
         MenuPrint(gContestStatsText_Unknown1, 16, 7);
     }
     else

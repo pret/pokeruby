@@ -12,8 +12,8 @@ extern u8 BattleText_Win[];
 extern u8 BattleText_Loss[];
 extern u8 BattleText_Tie[];
 
-#define LEFT_MESSAGE_X 6
-#define RIGHT_MESSAGE_X 21
+#define LEFT_MESSAGE_X 5
+#define RIGHT_MESSAGE_X 20
 #define CENTER_MESSAGE_X 13
 #define MESSAGE_Y 2
 
@@ -42,12 +42,12 @@ void sub_800DC24(void) {
             switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
                 case 0:
                 case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 172);
                     return;
 
                 case 1:
                 case 3: PRINT_MESSAGE_RIGHT(BattleText_Win, 160)
-                    PRINT_MESSAGE_LEFT(BattleText_Loss, 168)
+                    PRINT_MESSAGE_LEFT(BattleText_Loss, 172)
                     return;
             }
         } else {
@@ -55,12 +55,12 @@ void sub_800DC24(void) {
             switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
                 case 1:
                 case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 172);
                     return;
 
                 case 0:
                 case 2: PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-                    PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+                    PRINT_MESSAGE_LEFT(BattleText_Loss, 172);
                     return;
             }
         }
@@ -72,18 +72,18 @@ void sub_800DC24(void) {
     if (gUnknown_02024D26 == 1) {
         if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-            PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+            PRINT_MESSAGE_LEFT(BattleText_Loss, 172);
         } else {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-            PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            PRINT_MESSAGE_RIGHT(BattleText_Loss, 172);
         }
     } else {
         if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-            PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            PRINT_MESSAGE_RIGHT(BattleText_Loss, 172);
         } else {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-            PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+            PRINT_MESSAGE_LEFT(BattleText_Loss, 172);
         }
     }
 }

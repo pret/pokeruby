@@ -49,8 +49,8 @@ u8 sub_806E834(u8 *message, u8 arg1) {
 
     gUnknown_0202E8F6 = 1;
 
-    MenuDrawTextWindow(3, 14, 26, 19);
-    MenuPrintMessage(message, 4, 15);
+    MenuDrawTextWindow(0, 14, 29, 19);
+    MenuPrintMessage(message, 1, 15);
 
     taskId = CreateTask(sub_806E884, 1);
     gTasks[taskId].data[0] = arg1;
@@ -66,7 +66,7 @@ static void sub_806E884(u8 taskId) {
     gUnknown_0202E8F6 = 0;
 
     if (gTasks[taskId].data[0] == 0) {
-        MenuZeroFillWindowRect(3, 14, 26, 19);
+        MenuZeroFillWindowRect(0, 14, 29, 19);
     }
 
     DestroyTask(taskId);
@@ -99,7 +99,7 @@ void sub_8070088(u8 taskId) {
     }
 
     gUnknown_0202E8F4 = 1;
-    MenuZeroFillWindowRect(3, 14, 26, 19);
+    MenuZeroFillWindowRect(0, 14, 29, 19);
     PlaySE(SE_KAIFUKU);
     PartyMenuUpdateLevelOrStatus(unk_201C000.pokemon, unk_201C000.var05);
 
@@ -198,9 +198,9 @@ _08070134:\n\
 	ldr r1, _080701C0 @ =gUnknown_0202E8F4\n\
 	movs r0, 0x1\n\
 	strb r0, [r1]\n\
-	movs r0, 0x3\n\
+	movs r0, 0x0\n\
 	movs r1, 0xE\n\
-	movs r2, 0x1A\n\
+	movs r2, 0x1D\n\
 	movs r3, 0x13\n\
 	bl MenuZeroFillWindowRect\n\
 	movs r0, 0x1\n\
@@ -275,6 +275,7 @@ _080701D8: .4byte sub_806F8AC\n\
 
 asm(".section .text_c");
 
+#ifdef NONMATCHING
 void sub_8070848(u8 taskId) {
     u8 i;
 
@@ -285,6 +286,7 @@ void sub_8070848(u8 taskId) {
         u8 y;
         u32 stat;
         struct Pokemon **pokemon;
+        u8 *ptr;
 
         pokemon = &unk_201C000.pokemon;
         asm("" ::: "r0");
@@ -296,21 +298,148 @@ void sub_8070848(u8 taskId) {
         x = (i / 3) * 9 + 11;
         y = ((i % 3) << 1) + 1;
 
-        MenuPrint_PixelCoords(gUnknown_08376D04[i], (x + 1) * 8, y * 8, 1);
+        ptr = StringCopy(gStringVar1, gUnknown_08376D04[i]);
 
+        // {CLEAR_TO 46}
+        *ptr = 0xFC;
+        ptr++;
+        *ptr = 0x13;
+        ptr++;
+        *ptr = 46;
+        ptr++;
 
-        if (i == 2) {
-            MenuPrint_PixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 0);
-        } else {
-            MenuPrint_PixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 1);
-        }
+        ptr = StringCopy(ptr, gOtherText_TallPlusAndRightArrow);
 
-        gStringVar1[0] = 0xFC;
-        gStringVar1[1] = 0x14;
-        gStringVar1[2] = 0x06;
+        // {CLEAR_TO 52}
+        *ptr = 0xFC;
+        ptr++;
+        *ptr = 0x13;
+        ptr++;
+        *ptr = 52;
+        ptr++;
 
-        ConvertIntToDecimalStringN(gStringVar1 + 3, unk_201B260.var04[i], 1, 2);
+        ConvertIntToDecimalStringN(ptr, unk_201B260.var04[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
 
-        MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 12, y * 8, 0);
+        MenuPrint(gStringVar1, x + 1, y);
     }
 }
+#else
+__attribute__((naked))
+void sub_8070848(void) {
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	movs r0, 0xB\n\
+	movs r1, 0\n\
+	movs r2, 0x1D\n\
+	movs r3, 0x7\n\
+	bl MenuDrawTextWindow\n\
+	movs r7, 0\n\
+	ldr r0, _0807092C @ =gStringVar1\n\
+	mov r10, r0\n\
+	movs r1, 0xFC\n\
+	mov r9, r1\n\
+	movs r2, 0x13\n\
+	mov r8, r2\n\
+_0807086C:\n\
+	ldr r1, _08070930 @ =0x0201c000\n\
+	ldr r0, [r1]\n\
+	ldr r1, _08070934 @ =gUnknown_08376D1C\n\
+	adds r1, r7, r1\n\
+	ldrb r1, [r1]\n\
+	bl GetMonData\n\
+	adds r1, r7, 0x6\n\
+	lsls r1, 1\n\
+	ldr r2, _08070938 @ =0x0201b264\n\
+	adds r1, r2, r1\n\
+	strh r0, [r1]\n\
+	lsls r6, r7, 1\n\
+	adds r6, r2, r6\n\
+	ldrh r1, [r6]\n\
+	subs r0, r1\n\
+	strh r0, [r6]\n\
+	adds r0, r7, 0\n\
+	movs r1, 0x3\n\
+	bl __udivsi3\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r4, r0, 3\n\
+	adds r4, r0\n\
+	adds r4, 0xB\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	adds r0, r7, 0\n\
+	movs r1, 0x3\n\
+	bl __umodsi3\n\
+	adds r5, r0, 0\n\
+	lsls r5, 1\n\
+	adds r5, 0x1\n\
+	lsls r5, 24\n\
+	lsrs r5, 24\n\
+	ldr r1, _0807093C @ =gUnknown_08376D04\n\
+	lsls r0, r7, 2\n\
+	adds r0, r1\n\
+	ldr r1, [r0]\n\
+	mov r0, r10\n\
+	bl StringCopy\n\
+	adds r2, r0, 0\n\
+	mov r0, r9\n\
+	strb r0, [r2]\n\
+	adds r2, 0x1\n\
+	mov r1, r8\n\
+	strb r1, [r2]\n\
+	adds r2, 0x1\n\
+	movs r0, 0x2E\n\
+	strb r0, [r2]\n\
+	adds r2, 0x1\n\
+	adds r0, r2, 0\n\
+	ldr r1, _08070940 @ =gOtherText_TallPlusAndRightArrow\n\
+	bl StringCopy\n\
+	adds r2, r0, 0\n\
+	mov r0, r9\n\
+	strb r0, [r2]\n\
+	adds r2, 0x1\n\
+	mov r1, r8\n\
+	strb r1, [r2]\n\
+	adds r2, 0x1\n\
+	movs r0, 0x34\n\
+	strb r0, [r2]\n\
+	adds r2, 0x1\n\
+	movs r0, 0\n\
+	ldrsh r1, [r6, r0]\n\
+	adds r0, r2, 0\n\
+	movs r2, 0x1\n\
+	movs r3, 0x2\n\
+	bl ConvertIntToDecimalStringN\n\
+	adds r4, 0x1\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	mov r0, r10\n\
+	adds r1, r4, 0\n\
+	adds r2, r5, 0\n\
+	bl MenuPrint\n\
+	adds r0, r7, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	cmp r7, 0x5\n\
+	bls _0807086C\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_0807092C: .4byte gStringVar1\n\
+_08070930: .4byte 0x0201c000\n\
+_08070934: .4byte gUnknown_08376D1C\n\
+_08070938: .4byte 0x0201b264\n\
+_0807093C: .4byte gUnknown_08376D04\n\
+_08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
+    .syntax divided\n");
+}
+#endif
