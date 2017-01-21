@@ -7430,8 +7430,8 @@ sub_806E7D0: @ 806E7D0
 	bx r0
 	thumb_func_end sub_806E7D0
 
-	thumb_func_start sub_806E81C
-sub_806E81C: @ 806E81C
+	thumb_func_start PartyMenuGetPopupMenuFunc
+PartyMenuGetPopupMenuFunc: @ 806E81C
 	lsls r0, 24
 	lsls r3, 24
 	lsrs r3, 24
@@ -7444,7 +7444,7 @@ sub_806E81C: @ 806E81C
 	adds r0, r2
 	ldr r0, [r0, 0x4]
 	bx lr
-	thumb_func_end sub_806E81C
+	thumb_func_end PartyMenuGetPopupMenuFunc
 
     .section .text_806E884
 
