@@ -227,7 +227,7 @@ SECTIONS {
         src/player_pc.o(.text);
         asm/player_pc.o(.text);
         src/intro.o(.text);
-        asm/field_region_map.o(.text);
+        src/field_region_map.o(.text);
         asm/battle_anim_813F0F4.o(.text);
         asm/hall_of_fame.o(.text);
         src/credits.o(.text);
