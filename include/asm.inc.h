@@ -236,7 +236,7 @@ void sub_809D608(u16);
 u8 pokemon_ailments_get_primary(u32);
 
 // asm/script_movement.o
-u8 exec_movement(u8, u8, u8, void *);
+u8 exec_movement(u8, u8, u8, u8 *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 
