@@ -784,7 +784,7 @@ _0808A0A4:
 	ldr r0, _0808A0D4 @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -1648,7 +1648,7 @@ _0808A7B4:
 	ldr r0, _0808A7EC @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl _call_via_r1

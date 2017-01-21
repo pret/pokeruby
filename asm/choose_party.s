@@ -775,7 +775,7 @@ _081223F2:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r7, 0
 	bl _call_via_r1
@@ -2176,7 +2176,7 @@ _08122F12:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r7, 0
 	bl _call_via_r1

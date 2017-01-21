@@ -133,7 +133,6 @@ SECTIONS {
         src/rom_8094928.o(.text);
         asm/rom_8094928.o(.text);
         src/battle_party_menu.o(.text);
-        asm/battle_party_menu.o(.text);
         asm/pokemon_storage_system.o(.text);
         asm/pokemon_icon.o(.text);
         asm/pokemon_summary_screen.o(.text);
@@ -351,7 +350,7 @@ SECTIONS {
         data/option_menu.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
-        data/battle_party_menu.o(.rodata);
+        src/battle_party_menu.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         data/pokemon_icon.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
