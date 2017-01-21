@@ -38,7 +38,7 @@ void player_npc_set_state_and_x22_etc(u8 a, u8 b);
 void PlayerGoSpeed0(u8 a);
 void sub_80593C4(u8 a);
 void npc_use_some_d2s(u8 a);
-// sub_80593F4
+void sub_80593F4(u8 a);
 void sub_805940C(u8 a);
 void PlayerOnBikeCollide(u8);
 void PlayerFaceDirection(u8 a);
