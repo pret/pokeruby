@@ -97,13 +97,13 @@ static void MainCB2(void)
 
 static void Task_DiplomaFadeIn(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
         gTasks[taskId].func = Task_DiplomaWaitForKeyPress;
 }
 
 static void Task_DiplomaWaitForKeyPress(u8 taskId)
 {
-    if(gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_DiplomaFadeOut;
@@ -112,7 +112,7 @@ static void Task_DiplomaWaitForKeyPress(u8 taskId)
 
 static void Task_DiplomaFadeOut(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
         SetMainCallback2(sub_80546F0);
@@ -121,7 +121,7 @@ static void Task_DiplomaFadeOut(u8 taskId)
 
 static void DisplayDiplomaText(void)
 {
-    if(sub_8090FF4())
+    if (sub_8090FF4())
     {
         REG_BG3HOFS = 256;
         StringCopy(gStringVar1, gOtherText_NationalDex);

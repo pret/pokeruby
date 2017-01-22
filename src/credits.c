@@ -16,13 +16,15 @@ asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
 
 u32 NationalPokedexNumToSpecies(u16 nationalNum);
 
-struct MonCoords {
+struct MonCoords
+{
     u8 x, y;
 };
 
 extern void *species_and_otid_get_pal(u32, u16, u16);
 
-enum {
+enum
+{
     PAGE_TITLE,
     PAGE_DIRECTOR,
     PAGE_ART_DIRECTOR,
@@ -84,7 +86,8 @@ enum {
 #define COLOR_DARK_GREEN 0x1967
 #define COLOR_LIGHT_GREEN 0x328D
 
-enum {
+enum
+{
     TDA_0 = 0,
     TDA_TASK_C_ID = 1,
     TDA_TASK_E_ID = 2,
@@ -122,7 +125,8 @@ enum {
     TDE_TASK_A_ID = 2,
 };
 
-struct Unk201C000 {
+struct Unk201C000
+{
     u16 unk0[8];
     u8 pad_10[0x78];
     u16 unk88;
@@ -131,7 +135,8 @@ struct Unk201C000 {
     u16 unk8E;
 };
 
-struct CreditsEntry {
+struct CreditsEntry
+{
     u8 var_0;
     u8 *text;
 };
@@ -228,13 +233,15 @@ static void spritecb_rival_8145420(struct Sprite *sprite);
 u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3);
 void sub_81458DC(void);
 
-static void vblank_8143948(void) {
+static void vblank_8143948(void)
+{
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_814395C(void) {
+static void sub_814395C(void)
+{
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -263,7 +270,8 @@ static void sub_814395C(void) {
     gUnknown_02039325 = 1;
 }
 
-void sub_81439D0(void) {
+void sub_81439D0(void)
+{
     u8 taskIdA;
     s16 taskIdC;
     u8 taskIdB;
@@ -297,7 +305,7 @@ void sub_81439D0(void) {
     InitMenuWindow(&gWindowConfig_81E7208);
     LoadPalette(&gUnknown_0840B7BC, 0x80, sizeof(gUnknown_0840B7BC));
 
-    CpuCopy16(&gUnknown_0840B7FC, (void *) (VRAM + 0xBEE0), sizeof(gUnknown_0840B7FC));
+    CpuCopy16(&gUnknown_0840B7FC, (void *)(VRAM + 0xBEE0), sizeof(gUnknown_0840B7FC));
 
     REG_BG0VOFS = 0xFFFC;
 
@@ -331,7 +339,8 @@ void sub_81439D0(void) {
     gUnknown_02039322 = taskIdA;
 }
 
-static void task_a_8143B38(u8 taskIdA) {
+static void task_a_8143B38(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -340,7 +349,8 @@ static void task_a_8143B38(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143B68;
 }
 
-static void task_a_8143B68(u8 taskIdA) {
+static void task_a_8143B68(u8 taskIdA)
+{
     u16 data11;
 
     if (gTasks[taskIdA].data[TDA_4])
@@ -374,7 +384,8 @@ static void task_a_8143B68(u8 taskIdA) {
     }
 }
 
-static void task_a_8143BFC(u8 taskIdA) {
+static void task_a_8143BFC(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -385,7 +396,8 @@ static void task_a_8143BFC(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_80C9BFC;
 }
 
-static void task_a_80C9BFC(u8 taskIdA) {
+static void task_a_80C9BFC(u8 taskIdA)
+{
     u16 backup;
 
     SetVBlankCallback(NULL);
@@ -407,7 +419,8 @@ static void task_a_80C9BFC(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143B38;
 }
 
-static void task_a_8143CC0(u8 taskIdA) {
+static void task_a_8143CC0(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -430,8 +443,8 @@ void task_a_8143D04(u8 taskIdA)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
-        LZ77UnCompVram(&gBirchGrassTilemap, (void *) (VRAM + 0x3800));
+        LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
         LoadPalette(gBirchBagGrassPal + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
@@ -471,7 +484,8 @@ void task_a_8143D04(u8 taskIdA)
     }
 }
 
-static void task_a_8143EBC(u8 taskIdA) {
+static void task_a_8143EBC(u8 taskIdA)
+{
     if (gTasks[taskIdA].data[TDA_12])
     {
         gTasks[taskIdA].data[TDA_12] -= 1;
@@ -482,7 +496,8 @@ static void task_a_8143EBC(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143F04;
 }
 
-static void task_a_8143F04(u8 taskIdA) {
+static void task_a_8143F04(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -492,7 +507,8 @@ static void task_a_8143F04(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143F3C;
 }
 
-static void task_a_8143F3C(u8 taskIdA) {
+static void task_a_8143F3C(u8 taskIdA)
+{
     u16 backup;
 
     sub_8144130();
@@ -514,7 +530,8 @@ static void task_a_8143F3C(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143FDC;
 }
 
-static void task_a_8143FDC(u8 taskIdA) {
+static void task_a_8143FDC(u8 taskIdA)
+{
     if (gTasks[taskIdA].data[TDA_0])
     {
         gTasks[taskIdA].data[TDA_0] -= 1;
@@ -525,7 +542,8 @@ static void task_a_8143FDC(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8144024;
 }
 
-static void task_a_8144024(u8 taskIdA) {
+static void task_a_8144024(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -538,7 +556,8 @@ static void task_a_8144024(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8144080;
 }
 
-static void task_a_8144080(u8 taskIdA) {
+static void task_a_8144080(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -573,7 +592,8 @@ static void task_a_8144080(u8 taskIdA) {
     gTasks[taskIdA].data[TDA_0] -= 1;
 }
 
-static void task_a_8144114(u8 taskIdA) {
+static void task_a_8144114(u8 taskIdA)
+{
     if (gPaletteFade.active)
     {
         return;
@@ -582,7 +602,8 @@ static void task_a_8144114(u8 taskIdA) {
     SoftReset(0xFF);
 }
 
-static void sub_8144130(void) {
+static void sub_8144130(void)
+{
     REG_DISPCNT = 0;
 
     REG_BG3HOFS = 0;
@@ -598,12 +619,13 @@ static void sub_8144130(void) {
     REG_BLDALPHA = 0;
     REG_BLDY = 0;
 
-    DmaFill16(3, 0, (void *) VRAM, VRAM_SIZE);
-    DmaFill32(3, 0, (void *) OAM, OAM_SIZE);
-    DmaFill16(3, 0, (void *) (PLTT + 2), PLTT_SIZE - 2);
+    DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
+    DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 }
 
-static void task_b_81441B8(u8 taskIdB) {
+static void task_b_81441B8(u8 taskIdB)
+{
     u16 i;
 
     switch (gTasks[taskIdB].data[TDB_0])
@@ -645,7 +667,7 @@ static void task_b_81441B8(u8 taskIdB) {
                 for (i = 0; i < 5; i++)
                 {
                     sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 0,
-                                9 + i * 2, 240);
+                        9 + i * 2, 240);
                 }
 
                 gTasks[taskIdB].data[TDB_CURRENT_PAGE] += 1;
@@ -691,7 +713,7 @@ static void task_b_81441B8(u8 taskIdB) {
             return;
         }
 
-        if (sub_8144454((u8) gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8) gTasks[taskIdB].data[TDB_TASK_A_ID]))
+        if (sub_8144454((u8)gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8)gTasks[taskIdB].data[TDB_TASK_A_ID]))
         {
             gTasks[taskIdB].data[TDB_0] += 1;
             return;
@@ -729,7 +751,8 @@ static void task_b_81441B8(u8 taskIdB) {
 
 #define LAST_PAGE (PAGE_TEXT_EDITOR)
 
-static u8 sub_8144454(u8 page, u8 taskIdA) {
+static u8 sub_8144454(u8 page, u8 taskIdA)
+{
     // Starts with bike + ocean + morning
 
     if (page == PAGE_PROGRAMMERS_1)
@@ -844,7 +867,8 @@ static void task_d_8144514(u8 taskIdD)
 }
 
 __attribute__((naked))
-void task_c_8144664(u8 taskIdC) {
+void task_c_8144664(u8 taskIdC)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	lsls r0, 24\n\
@@ -1171,7 +1195,8 @@ _0814492C:\n\
 
 #define UNK_DEF_1F3 (499)
 
-void task_e_8144934(u8 taskIdE) {
+void task_e_8144934(u8 taskIdE)
+{
     s16 taskIdC;
 
     switch (gTasks[taskIdE].data[TDE_0])
@@ -1201,7 +1226,7 @@ void task_e_8144934(u8 taskIdE) {
             taskIdC = gTasks[gTasks[taskIdE].data[TDE_TASK_A_ID]].data[TDA_TASK_C_ID];
 
             // Floor to multiple of 128
-            if ((gTasks[taskIdC].data[TDC_5] & - 128) == 640)
+            if ((gTasks[taskIdC].data[TDC_5] & -128) == 640)
             {
                 gTasks[taskIdC].data[TDC_0] = 1;
                 gTasks[taskIdE].data[TDE_1] = 0x7FFF;
@@ -1236,7 +1261,8 @@ void task_e_8144934(u8 taskIdE) {
 
 #define UNK_DEFINE_45 (0x45)
 
-static void sub_8144A68(u8 data, u8 taskIdA) {
+static void sub_8144A68(u8 data, u8 taskIdA)
+{
     switch (data)
     {
     case 0:
@@ -1279,7 +1305,7 @@ static void sub_8144A68(u8 data, u8 taskIdA) {
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = 0;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = - 32;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = -32;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
@@ -1318,7 +1344,8 @@ static void sub_8144A68(u8 data, u8 taskIdA) {
     }
 }
 
-static bool8 sub_8144ECC(u8 data, u8 taskIdA) {
+static bool8 sub_8144ECC(u8 data, u8 taskIdA)
+{
     u8 spriteId;
 
     switch (gMain.state)
@@ -1395,7 +1422,8 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA) {
     return FALSE;
 }
 
-static void sub_81450AC(u8 taskIdA) {
+static void sub_81450AC(u8 taskIdA)
+{
     if (gTasks[taskIdA].data[TDA_0] != 0)
     {
         DestroyTask(gTasks[taskIdA].data[TDA_0]);
@@ -1424,7 +1452,8 @@ static void sub_81450AC(u8 taskIdA) {
 }
 
 __attribute__((naked))
-void sub_8145128(u16 arg0, u16 arg1, u16 arg2) {
+void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	adds r3, r0, 0\n\
@@ -1537,7 +1566,8 @@ _08145204: .4byte 0x06000348\n\
     .syntax divided\n");
 }
 
-u16 sub_8145208(u8 arg0) {
+u16 sub_8145208(u8 arg0)
+{
 
     u16 out = (arg0 & 0x3F) + 80;
 
@@ -1560,7 +1590,8 @@ u16 sub_8145208(u8 arg0) {
 }
 
 __attribute__((naked))
-void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4) {
+void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -1638,7 +1669,7 @@ static void sub_81452D0(u16 arg0, u16 arg1)
     u16 foo = arg1 / 16;
     u16 bar = foo * 4096;
 
-    for (i = 0; i < 0x400; i ++)
+    for (i = 0; i < 0x400; i++)
         ((u16 *)(VRAM + arg0))[i] = bar + 1;
 
     sub_814524C(&gUnknown_0840B83C, 3, 7, arg0, arg1);
@@ -1649,7 +1680,8 @@ static void sub_81452D0(u16 arg0, u16 arg1)
     sub_814524C(&gUnknown_0840B878, 24, 7, arg0, arg1);
 }
 
-static void spritecb_player_8145378(struct Sprite *sprite) {
+static void spritecb_player_8145378(struct Sprite *sprite)
+{
     if (gUnknown_0203935C != 0)
     {
         DestroySprite(sprite);
@@ -1664,7 +1696,7 @@ static void spritecb_player_8145378(struct Sprite *sprite) {
 
     case 1:
         StartSpriteAnimIfDifferent(sprite, 1);
-        if (sprite->pos1.x > - 32)
+        if (sprite->pos1.x > -32)
         {
             sprite->pos1.x -= 1;
         }
@@ -1688,7 +1720,7 @@ static void spritecb_player_8145378(struct Sprite *sprite) {
 
     case 5:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > - 32)
+        if (sprite->pos1.x > -32)
         {
             sprite->pos1.x -= 1;
         }
@@ -1696,7 +1728,8 @@ static void spritecb_player_8145378(struct Sprite *sprite) {
     }
 }
 
-static void spritecb_rival_8145420(struct Sprite *sprite) {
+static void spritecb_rival_8145420(struct Sprite *sprite)
+{
     if (gUnknown_0203935C != 0)
     {
         DestroySprite(sprite);
@@ -1720,12 +1753,12 @@ static void spritecb_rival_8145420(struct Sprite *sprite) {
             StartSpriteAnimIfDifferent(sprite, 2);
         }
 
-        if (sprite->pos1.x > - 32)
+        if (sprite->pos1.x > -32)
         {
             sprite->pos1.x -= 2;
         }
 
-        sprite->pos2.y = - gUnknown_0203935A;
+        sprite->pos2.y = -gUnknown_0203935A;
         break;
 
     case 2:
@@ -1741,7 +1774,7 @@ static void spritecb_rival_8145420(struct Sprite *sprite) {
     case 3:
         StartSpriteAnimIfDifferent(sprite, 0);
 
-        if (sprite->pos1.x > - 32)
+        if (sprite->pos1.x > -32)
         {
             sprite->pos1.x -= 1;
         }
@@ -1752,7 +1785,8 @@ static void spritecb_rival_8145420(struct Sprite *sprite) {
 }
 
 __attribute__((naked))
-void spritecb_81454E0(struct Sprite *sprite) {
+void spritecb_81454E0(struct Sprite *sprite)
+{
     asm(".syntax unified\n\
 	push {r4,r5,lr}\n\
 	sub sp, 0x4\n\
@@ -1991,7 +2025,8 @@ _081456B0: .4byte REG_BLDCNT\n\
 }
 
 #ifdef NONMATCHING
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3) {
+u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
+{
     u32 species;
     u32 personality;
     void *palette;
@@ -1999,7 +2034,8 @@ u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3) {
     u8 spriteId2;
 
     species = NationalPokedexNumToSpecies(nationalNum);
-    switch (species) {
+    switch (species)
+    {
     case SPECIES_UNOWN:
         personality = gSaveBlock2.pokedex.unownPersonality;
         break;
@@ -2014,14 +2050,14 @@ u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3) {
     }
 
     LoadSpecialPokePic(
-            &gMonFrontPicTable[species],
-            gMonFrontPicCoords[species].x,
-            gMonFrontPicCoords[species].y,
-            0x2000000,
-            gUnknown_0840B5A0[arg3],
-            species,
-            personality,
-            1
+        &gMonFrontPicTable[species],
+        gMonFrontPicCoords[species].x,
+        gMonFrontPicCoords[species].y,
+        0x2000000,
+        gUnknown_0840B5A0[arg3],
+        species,
+        personality,
+        1
     );
 
     palette = species_and_otid_get_pal(species, 0, 0xFFFF);
@@ -2044,7 +2080,8 @@ u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3) {
 }
 #else
 __attribute__((naked))
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3) {
+u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2208,7 +2245,8 @@ _08145808: .4byte gSpriteTemplate_840CAEC\n\
 }
 #endif
 
-void spritecb_814580C(struct Sprite *sprite) {
+void spritecb_814580C(struct Sprite *sprite)
+{
     if (gSprites[sprite->data0].data0 == 10 || gUnknown_0203935C)
     {
         DestroySprite(sprite);
@@ -2224,7 +2262,8 @@ void spritecb_814580C(struct Sprite *sprite) {
 }
 
 __attribute__((naked))
-void sub_81458DC(void) {
+void sub_81458DC(void)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\

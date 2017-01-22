@@ -410,7 +410,7 @@ static void CompactPCItems(void)
 
 void SwapRegisteredBike(void)
 {
-    switch(gSaveBlock1.registeredItem)
+    switch (gSaveBlock1.registeredItem)
     {
     case 0x103:
         gSaveBlock1.registeredItem = 0x110;

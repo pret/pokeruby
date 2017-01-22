@@ -114,7 +114,7 @@ s32 overworld_poison(void)
     u32 numFainting = 0;
     int i;
 
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
     {
         u32 hp;
 
@@ -123,20 +123,20 @@ s32 overworld_poison(void)
          && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
         {
             hp = GetMonData(pkmn, MON_DATA_HP);
-            if(hp != 0)
+            if (hp != 0)
                 hp--;
-            if(hp == 0)
+            if (hp == 0)
                 numFainting++; //Pokemon will now faint due to poison
             SetMonData(pkmn, MON_DATA_HP, (u8 *)&hp);
             numPoisoned++;
         }
         pkmn++;
     }
-    if(numFainting != 0 || numPoisoned != 0)
+    if (numFainting != 0 || numPoisoned != 0)
         DoFieldPoisonEffect();
-    if(numFainting != 0)
+    if (numFainting != 0)
         return 2;
-    if(numPoisoned != 0)
+    if (numPoisoned != 0)
         return 1;
     return 0;
 }

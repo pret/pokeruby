@@ -90,7 +90,7 @@ void sub_8057A58(void)
     *gBGHOffsetRegs[3] = gUnknown_03000590.unk0 + gUnknown_03000598;
     *gBGVOffsetRegs[3] = gUnknown_03000590.unk1 + gUnknown_0300059A + 8;
 
-    if(gUnknown_03000590.unk4)
+    if (gUnknown_03000590.unk4)
     {
         DmaCopy16(3, gBGTilemapBuffers[1], (void *)(VRAM + 0xE800), 0x800);
         DmaCopy16(3, gBGTilemapBuffers[2], (void *)(VRAM + 0xE000), 0x800);
@@ -118,16 +118,16 @@ static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
     u32 r6;
     u8 temp;
 
-    for(i = 0; i < 32; i += 2)
+    for (i = 0; i < 32; i += 2)
     {
         temp = gUnknown_03000590.unk3 + i;
-        if(temp >= 32)
+        if (temp >= 32)
             temp -= 32;
         r6 = temp * 32;
-        for(j = 0; j < 32; j += 2)
+        for (j = 0; j < 32; j += 2)
         {
             temp = gUnknown_03000590.unk2 + j;
-            if(temp >= 32)
+            if (temp >= 32)
                 temp -= 32;
             DrawMetatileAt(mapData, r6 + temp, x + j / 2, y + i / 2);
         }
@@ -138,13 +138,13 @@ static void RedrawMapSlicesForCameraUpdate(struct UnknownStruct *a, int x, int y
 {
     struct MapData *mapData = gMapHeader.mapData;
 
-    if(x > 0)
+    if (x > 0)
         RedrawMapSliceWest(a, mapData);
-    if(x < 0)
+    if (x < 0)
         RedrawMapSliceEast(a, mapData);
-    if(y > 0)
+    if (y > 0)
         RedrawMapSliceNorth(a, mapData);
-    if(y < 0)
+    if (y < 0)
         RedrawMapSliceSouth(a, mapData);
     a->unk4 = TRUE;
 }
@@ -156,13 +156,13 @@ static void RedrawMapSliceNorth(struct UnknownStruct *a, struct MapData *mapData
     u32 r7;
 
     temp = a->unk3 + 28;
-    if(temp >= 32)
+    if (temp >= 32)
         temp -= 32;
     r7 = temp * 32;
-    for(i = 0; i < 32; i += 2)
+    for (i = 0; i < 32; i += 2)
     {
         temp = a->unk2 + i;
-        if(temp >= 32)
+        if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y + 14);
     }
@@ -174,10 +174,10 @@ static void RedrawMapSliceSouth(struct UnknownStruct *a, struct MapData *mapData
     u8 temp;
     u32 r7 = a->unk3 * 32;
 
-    for(i = 0; i < 32; i += 2)
+    for (i = 0; i < 32; i += 2)
     {
         temp = a->unk2 + i;
-        if(temp >= 32)
+        if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y);
     }
@@ -189,10 +189,10 @@ static void RedrawMapSliceEast(struct UnknownStruct *a, struct MapData *mapData)
     u8 temp;
     u32 r6 = a->unk2;
 
-    for(i = 0; i < 32; i += 2)
+    for (i = 0; i < 32; i += 2)
     {
         temp = a->unk3 + i;
-        if(temp >= 32)
+        if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, temp * 32 + r6, gSaveBlock1.pos.x, gSaveBlock1.pos.y + i / 2);
     }
@@ -204,12 +204,12 @@ static void RedrawMapSliceWest(struct UnknownStruct *a, struct MapData *mapData)
     u8 temp;
     u8 r5 = a->unk2 + 28;
 
-    if(r5 >= 32)
+    if (r5 >= 32)
         r5 -= 32;
-    for(i = 0; i < 32; i += 2)
+    for (i = 0; i < 32; i += 2)
     {
         temp = a->unk3 + i;
-        if(temp >= 32)
+        if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, temp * 32 + r5, gSaveBlock1.pos.x + 14, gSaveBlock1.pos.y + i / 2);
     }
@@ -219,7 +219,7 @@ void CurrentMapDrawMetatileAt(int a, int b)
 {
     int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, a, b);
 
-    if(offset >= 0)
+    if (offset >= 0)
     {
         DrawMetatileAt(gMapHeader.mapData, offset, a, b);
         gUnknown_03000590.unk4 = TRUE;
@@ -230,7 +230,7 @@ void DrawDoorMetatileAt(int x, int y, u16 *arr)
 {
     int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, x, y);
 
-    if(offset >= 0)
+    if (offset >= 0)
     {
         DrawMetatile(1, arr, offset);
         gUnknown_03000590.unk4 = TRUE;
@@ -242,9 +242,9 @@ static void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
     u16 metatileId = MapGridGetMetatileIdAt(c, d);
     u16 *metatiles;
 
-    if(metatileId > 1024)
+    if (metatileId > 1024)
         metatileId = 0;
-    if(metatileId < 512)
+    if (metatileId < 512)
         metatiles = mapData->primaryTileset->metatiles;
     else
     {
@@ -256,7 +256,7 @@ static void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
 
 static void DrawMetatile(s32 a, u16 *b, u16 c)
 {
-    switch(a)
+    switch (a)
     {
         case 2:
             gBGTilemapBuffers[3][c] = b[0];
@@ -313,17 +313,17 @@ static s32 MapPosToBgTilemapOffset(struct UnknownStruct *a, s32 x, s32 y)
 {
     x -= gSaveBlock1.pos.x;
     x *= 2;
-    if(x >= 32 || x < 0)
+    if (x >= 32 || x < 0)
         return -1;
     x = x + a->unk2;
-    if(x >= 32)
+    if (x >= 32)
         x -= 32;
 
     y = (y - gSaveBlock1.pos.y) * 2;
-    if(y >= 32 || y < 0)
+    if (y >= 32 || y < 0)
         return -1;
     y = y + a->unk3;
-    if(y >= 32)
+    if (y >= 32)
         y -= 32;
 
     return y * 32 + x;
@@ -331,7 +331,7 @@ static s32 MapPosToBgTilemapOffset(struct UnknownStruct *a, s32 x, s32 y)
 
 static void CameraUpdateCallback(struct CameraSomething *a)
 {
-    if(a->unk4 != 0)
+    if (a->unk4 != 0)
     {
         a->unk8 = gSprites[a->unk4].data2;
         a->unkC = gSprites[a->unk4].data3;
@@ -350,7 +350,7 @@ void ResetCameraUpdateInfo(void)
 
 u32 InitCameraUpdateCallback(u8 a)
 {
-    if(gUnknown_03004880.unk4 != 0)
+    if (gUnknown_03004880.unk4 != 0)
         DestroySprite(&gSprites[gUnknown_03004880.unk4]);
     gUnknown_03004880.unk4 = AddCameraObject(a);
     gUnknown_03004880.callback = CameraUpdateCallback;
@@ -366,7 +366,7 @@ void CameraUpdate(void)
     int r7;
     int r8;
 
-    if(gUnknown_03004880.callback != NULL)
+    if (gUnknown_03004880.callback != NULL)
         gUnknown_03004880.callback(&gUnknown_03004880);
     r7 = gUnknown_03004880.unk8;
     r8 = gUnknown_03004880.unkC;
@@ -376,30 +376,30 @@ void CameraUpdate(void)
     r0 = gUnknown_03004880.unk14;
 
 
-    if(r1 == 0 && r7 != 0)
+    if (r1 == 0 && r7 != 0)
     {
-        if(r7 > 0)
+        if (r7 > 0)
             deltaX = 1;
         else
             deltaX = -1;
     }
-    if(r0 == 0 && r8 != 0)
+    if (r0 == 0 && r8 != 0)
     {
-        if(r8 > 0)
+        if (r8 > 0)
             deltaY = 1;
         else
             deltaY = -1;
     }
-    if(r1 != 0 && r1 == -r7)
+    if (r1 != 0 && r1 == -r7)
     {
-        if(r7 > 0)
+        if (r7 > 0)
             deltaX = 1;
         else
             deltaX = -1;
     }
-    if(r0 != 0 && r0 == -r8)
+    if (r0 != 0 && r0 == -r8)
     {
-        if(r8 > 0)
+        if (r8 > 0)
             deltaX = 1;
         else
             deltaX = -1;
@@ -410,7 +410,7 @@ void CameraUpdate(void)
     gUnknown_03004880.unk14 += r8;
     gUnknown_03004880.unk14 = gUnknown_03004880.unk14 - 16 * (gUnknown_03004880.unk14 / 16);
 
-    if(deltaX != 0 || deltaY != 0)
+    if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
         UpdateFieldObjectsForCameraUpdate(deltaX, deltaY);

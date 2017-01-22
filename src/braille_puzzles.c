@@ -28,13 +28,13 @@ void SealedChamberShakingEffect(u8 taskId);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
-    if(!FlagGet(SYS_BRAILLE_DIG) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x47))
+    if (!FlagGet(SYS_BRAILLE_DIG) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x47))
     {
-        if(gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
+        if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
             return TRUE;
-        else if(gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 3)
+        else if (gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 3)
             return TRUE;
-        else if(gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 3)
+        else if (gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 3)
             return TRUE;
     }
 
@@ -57,11 +57,11 @@ void DoBrailleDigEffect(void)
 
 bool8 CheckRelicanthWailord(void)
 {
-    if(GetMonData(&gPlayerParty, MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
+    if (GetMonData(&gPlayerParty, MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
     {
         CalculatePlayerPartyCount();
 
-        if(GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
+        if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
             return TRUE;
     }
     return FALSE;
@@ -69,13 +69,13 @@ bool8 CheckRelicanthWailord(void)
 
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if(!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x6))
+    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x6))
     {
-        if(gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
+        if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
-        else if(gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 23)
+        else if (gSaveBlock1.pos.x == 9 && gSaveBlock1.pos.y == 23)
             return TRUE;
-        else if(gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 23)
+        else if (gSaveBlock1.pos.x == 11 && gSaveBlock1.pos.y == 23)
             return TRUE;
     }
 
@@ -99,9 +99,9 @@ void DoBrailleStrengthEffect(void)
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if(!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x44))
+    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x44))
     {
-        if(gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
+        if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
     }
 
@@ -145,7 +145,7 @@ void UseFlyAncientTomb_Finish(void)
 
 void DoBrailleWait(void)
 {
-    if(!FlagGet(SYS_BRAILLE_WAIT))
+    if (!FlagGet(SYS_BRAILLE_WAIT))
         CreateTask(Task_BrailleWait, 0x50);
 }
 
@@ -153,14 +153,14 @@ void Task_BrailleWait(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    switch(data[0])
+    switch (data[0])
     {
         case 0:
             data[1] = 7200;
             data[0] = 1;
             break;
         case 1:
-            if(BrailleWait_CheckButtonPress() != FALSE)
+            if (BrailleWait_CheckButtonPress() != FALSE)
             {
                 MenuZeroFillScreen();
                 PlaySE(5);
@@ -169,7 +169,7 @@ void Task_BrailleWait(u8 taskId)
             else
             {
                 data[1] = data[1] - 1;
-                if(data[1] == 0)
+                if (data[1] == 0)
                 {
                     MenuZeroFillScreen();
                     data[0] = 3;
@@ -178,10 +178,10 @@ void Task_BrailleWait(u8 taskId)
             }
             break;
         case 2:
-            if(BrailleWait_CheckButtonPress() == FALSE)
+            if (BrailleWait_CheckButtonPress() == FALSE)
             {
                 data[1] = data[1] - 1;
-                if(data[1] == 0)
+                if (data[1] == 0)
                     data[0] = 4;
                 break;
             }
@@ -191,7 +191,7 @@ void Task_BrailleWait(u8 taskId)
             break;
         case 3:
             data[1] = data[1] - 1;
-            if(data[1] == 0)
+            if (data[1] == 0)
                 data[0] = 4;
             break;
         case 4:
@@ -206,12 +206,12 @@ bool32 BrailleWait_CheckButtonPress(void)
 {
     u16 var = 0xFF;
 
-    if(gSaveBlock2.optionsButtonMode == 1)
+    if (gSaveBlock2.optionsButtonMode == 1)
         var |= 0x300;
-    if(gSaveBlock2.optionsButtonMode == 2)
+    if (gSaveBlock2.optionsButtonMode == 2)
         var |= 0x200;
 
-    if((var & gMain.newKeys) != FALSE)
+    if ((var & gMain.newKeys) != FALSE)
         return TRUE;
     else
         return FALSE;
@@ -247,13 +247,13 @@ void SealedChamberShakingEffect(u8 taskId)
 
     task->data[1]++;
 
-    if(!(task->data[1] % task->data[5]))
+    if (!(task->data[1] % task->data[5]))
     {
         task->data[1] = 0;
         task->data[2]++;
         task->data[4] = -task->data[4];
         SetCameraPanning(0, task->data[4]);
-        if(task->data[2] == task->data[6])
+        if (task->data[2] == task->data[6])
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();

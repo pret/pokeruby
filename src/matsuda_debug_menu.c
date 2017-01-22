@@ -121,7 +121,7 @@ static bool8 sub_80A9B78(void)
 {
     s8 choice = ProcessMenuInput();
 
-    switch(choice)
+    switch (choice)
     {
     case -2:
         return FALSE;
@@ -143,11 +143,11 @@ s8 MatsudaDebugMenu_ContestResults(void)
 
 static void sub_80A9BE4(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
 
-        if(!(gIsLinkContest & 1))
+        if (!(gIsLinkContest & 1))
             sub_80AF668();
 
         sub_80C2358();
@@ -198,7 +198,7 @@ static void sub_80A9CDC(u8 taskId)
 
 static void sub_80A9CF8(u8 taskId)
 {
-    if(gReceivedRemoteLinkPlayers == FALSE)
+    if (gReceivedRemoteLinkPlayers == FALSE)
     {
         DestroyTask(gTasks[taskId].data[10]);
         DestroyTask(taskId);
@@ -217,7 +217,7 @@ static void sub_80A9D58(u8 taskId)
    int i;
    u8 dest[4];
 
-   for(i = 0; i < 4; i++)
+   for (i = 0; i < 4; i++)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gUnknown_0203869B = sub_80C4B34(dest);
@@ -240,7 +240,7 @@ static void sub_80A9DD8(u8 taskId)
 
 static void sub_80A9E04(u8 taskId)
 {
-    if(gMain.newKeys == 2)
+    if (gMain.newKeys == 2)
         gTasks[(u8)gTasks[taskId].data[10]].func = sub_80A9D30;
 }
 
@@ -250,7 +250,7 @@ static void sub_80A9E3C(u8 taskId)
 
     OpenLink();
 
-    for(i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
         gBlockRecvBuffer[i][0] = 255;
 
     gTasks[taskId].data[0] = 0;
@@ -261,15 +261,15 @@ static void sub_80A9E80(u8 taskId)
 {
     TaskFunc func;
 
-    if(gTasks[taskId].data[0] < 10)
+    if (gTasks[taskId].data[0] < 10)
         gTasks[taskId].data[0]++;
     else
     {
-        if(GetLinkPlayerCount_2() > 3)
+        if (GetLinkPlayerCount_2() > 3)
         {
             gTasks[taskId].data[0] = 0;
 
-            if(IsLinkMaster())
+            if (IsLinkMaster())
             {
                 func = sub_80A9ED8;
                 gTasks[taskId].func = (TaskFunc)func;
@@ -286,7 +286,7 @@ static void sub_80A9E80(u8 taskId)
 static void sub_80A9ED8(u8 taskId)
 {
     gTasks[taskId].data[0] = gTasks[taskId].data[0] + 1;
-    if((gTasks[taskId].data[0]) == 101)
+    if ((gTasks[taskId].data[0]) == 101)
     {
         sub_8007F4C();
         gTasks[taskId].data[0] = 0;
@@ -296,10 +296,10 @@ static void sub_80A9ED8(u8 taskId)
 
 static void sub_80A9F10(u8 taskId)
 {
-    if(gReceivedRemoteLinkPlayers)
+    if (gReceivedRemoteLinkPlayers)
     {
         gContestPlayerMonIndex = GetMultiplayerId();
-        if(GetLinkPlayerCount() == 4)
+        if (GetLinkPlayerCount() == 4)
         {
             gIsLinkContest = 1;
             SwitchTaskToFollowupFunc(taskId);
@@ -340,12 +340,12 @@ static void sub_80A9FE4(void)
     addr = (void *)VRAM;
     i = VRAM_SIZE;
 
-    while(1)
+    while (1)
     {
         DmaFill32(3, 0, addr, 0x1000);
         addr += 0x1000;
         i -= 0x1000;
-        if(i <= 0x1000)
+        if (i <= 0x1000)
         {
             DmaFill32(3, 0, addr, i);
             break;
@@ -361,7 +361,7 @@ static void sub_80AA064(void)
     BuildOamBuffer();
     RunTasks();
     UpdatePaletteFade();
-    if(gMain.newKeys == 4)
+    if (gMain.newKeys == 4)
         SetMainCallback2(sub_805469C);
 }
 
@@ -401,12 +401,12 @@ static void sub_80AA10C(void)
     gPaletteFade.bufferTransferDisabled = 0;
     gUnknown_02038694 = 0;
 
-    if(!(gContestMons[0].nickname[0]))
+    if (!(gContestMons[0].nickname[0]))
         sub_80AE398(0, 0);
 
     sub_80AE098(gUnknown_02038694);
 
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
     {
         sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i],
             (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0],
@@ -439,9 +439,9 @@ void sub_80AA280(u8 var)
     StringCopy(unk_2000000, gMatsudaDebugMenu_StartText);
     StringAppend(unk_2000000, &gUnknown_0203857D[var][0]);
 
-    for(i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
     {
-        if(var == i)
+        if (var == i)
         {
             sub_8003460(&gMenuWindow, unk_2000000, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         }
@@ -499,49 +499,49 @@ static void sub_80AA4F0(u8 var1, u8 var2)
 
 static void sub_80AA5BC(u8 var)
 {
-	sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList2[var], 0xC2, 3, 0x12);
+    sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList2[var], 0xC2, 3, 0x12);
 }
 
 void sub_80AA5E8(u8 var)
 {
-	sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList3[var], 0xE8, 3, 4);
+    sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList3[var], 0xE8, 3, 4);
 }
 
 static void sub_80AA614(u8 var1, u8 var2)
 {
-	u16 var = sub_80AE770(var1, var2);
+    u16 var = sub_80AE770(var1, var2);
 
-	ConvertIntToDecimalStringN(unk_2000000, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	sub_8003460(&gMenuWindow, unk_2000000, 0xE2, 3, 0xC);
+    ConvertIntToDecimalStringN(unk_2000000, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, unk_2000000, 0xE2, 3, 0xC);
 }
 
 void sub_80AA658(u8 var)
 {
-	u8 i;
+    u8 i;
 
-	sub_80AA340(var);
-	sub_80AA388(var);
-	sub_80AA3D0(var);
-	sub_80AA418(var);
-	sub_80AA460(var);
-	sub_80AA4A8(var);
+    sub_80AA340(var);
+    sub_80AA388(var);
+    sub_80AA3D0(var);
+    sub_80AA418(var);
+    sub_80AA460(var);
+    sub_80AA4A8(var);
 
-	for(i = 0; i < 4; i++)
-		sub_80AA4F0(var, i);
+    for (i = 0; i < 4; i++)
+        sub_80AA4F0(var, i);
 }
 
 void SetDebugMonForContest(void)
 {
-	SetMonData(&gPlayerParty[0], MON_DATA_COOL, &gContestMons[gContestPlayerMonIndex].cool);
-	SetMonData(&gPlayerParty[0], MON_DATA_CUTE, &gContestMons[gContestPlayerMonIndex].cute);
-	SetMonData(&gPlayerParty[0], MON_DATA_BEAUTY, &gContestMons[gContestPlayerMonIndex].beauty);
-	SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
-	SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
-	SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
-	SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
-	SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
-	SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
-	SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
+    SetMonData(&gPlayerParty[0], MON_DATA_COOL, &gContestMons[gContestPlayerMonIndex].cool);
+    SetMonData(&gPlayerParty[0], MON_DATA_CUTE, &gContestMons[gContestPlayerMonIndex].cute);
+    SetMonData(&gPlayerParty[0], MON_DATA_BEAUTY, &gContestMons[gContestPlayerMonIndex].beauty);
+    SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
+    SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
+    SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
 }
 
 void sub_80AA754(struct Sprite *sprite)
@@ -590,32 +590,32 @@ void sub_80AA754(struct Sprite *sprite)
 
 static void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)
 {
-	if(var1 == 1)
-	{
-		sprite->data2 = var2;
-		sub_80AA280(var2);
-		sub_80AA658(sprite->data2);
-	}
+    if (var1 == 1)
+    {
+        sprite->data2 = var2;
+        sub_80AA280(var2);
+        sub_80AA658(sprite->data2);
+    }
 }
 
 void sub_80AA8C8(struct Sprite *sprite, s8 var1)
 {
-	sub_80AA8A0(sprite, var1, 0);
+    sub_80AA8A0(sprite, var1, 0);
 }
 
 void sub_80AA8D8(struct Sprite *sprite, s8 var1)
 {
-	sub_80AA8A0(sprite, var1, 1);
+    sub_80AA8A0(sprite, var1, 1);
 }
 
 void sub_80AA8E8(struct Sprite *sprite, s8 var1)
 {
-	sub_80AA8A0(sprite, var1, 2);
+    sub_80AA8A0(sprite, var1, 2);
 }
 
 void sub_80AA8F8(struct Sprite *sprite, s8 var1)
 {
-	sub_80AA8A0(sprite, var1, 3);
+    sub_80AA8A0(sprite, var1, 3);
 }
 
 static u8 sub_80AA908(u32 a1, u8 a2, s8 a3) // first param is unused.
@@ -634,48 +634,48 @@ void sub_80AA930(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].cool = sub_80AA908(val, gContestMons[sprite->data2].cool, var2);
-   	sub_80AA340(sprite->data2);
+    gContestMons[sprite->data2].cool = sub_80AA908(val, gContestMons[sprite->data2].cool, var2);
+    sub_80AA340(sprite->data2);
 }
 
 void sub_80AA974(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].cute = sub_80AA908(val, gContestMons[sprite->data2].cute, var2);
-   	sub_80AA388(sprite->data2);
+    gContestMons[sprite->data2].cute = sub_80AA908(val, gContestMons[sprite->data2].cute, var2);
+    sub_80AA388(sprite->data2);
 }
 
 void sub_80AA9B8(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].beauty = sub_80AA908(val, gContestMons[sprite->data2].beauty, var2);
-   	sub_80AA3D0(sprite->data2);
+    gContestMons[sprite->data2].beauty = sub_80AA908(val, gContestMons[sprite->data2].beauty, var2);
+    sub_80AA3D0(sprite->data2);
 }
 
 void sub_80AA9FC(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].smart = sub_80AA908(val, gContestMons[sprite->data2].smart, var2);
-   	sub_80AA418(sprite->data2);
+    gContestMons[sprite->data2].smart = sub_80AA908(val, gContestMons[sprite->data2].smart, var2);
+    sub_80AA418(sprite->data2);
 }
 
 void sub_80AAA40(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].tough = sub_80AA908(val, gContestMons[sprite->data2].tough, var2);
-   	sub_80AA460(sprite->data2);
+    gContestMons[sprite->data2].tough = sub_80AA908(val, gContestMons[sprite->data2].tough, var2);
+    sub_80AA460(sprite->data2);
 }
 
 void sub_80AAA84(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].sheen = sub_80AA908(val, gContestMons[sprite->data2].sheen, var2);
-   	sub_80AA4A8(sprite->data2);
+    gContestMons[sprite->data2].sheen = sub_80AA908(val, gContestMons[sprite->data2].sheen, var2);
+    sub_80AA4A8(sprite->data2);
 }
 
 // a similar function is at 0x80AA908, however, it apparently returns the wrong type (u8 vs u16).
@@ -695,32 +695,32 @@ void sub_80AAAF0(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].moves[0] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[0], var2);
-   	sub_80AA4F0(sprite->data2, 0);
+    gContestMons[sprite->data2].moves[0] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[0], var2);
+    sub_80AA4F0(sprite->data2, 0);
 }
 
 void sub_80AAB30(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].moves[1] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[1], var2);
-   	sub_80AA4F0(sprite->data2, 1);
+    gContestMons[sprite->data2].moves[1] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[1], var2);
+    sub_80AA4F0(sprite->data2, 1);
 }
 
 void sub_80AAB70(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].moves[2] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[2], var2);
-   	sub_80AA4F0(sprite->data2, 2);
+    gContestMons[sprite->data2].moves[2] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[2], var2);
+    sub_80AA4F0(sprite->data2, 2);
 }
 
 void sub_80AABB0(struct Sprite *sprite, u8 var2)
 {
     u8 val = sprite->data2;
 
-	gContestMons[sprite->data2].moves[3] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[3], var2);
-   	sub_80AA4F0(sprite->data2, 3);
+    gContestMons[sprite->data2].moves[3] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[3], var2);
+    sub_80AA4F0(sprite->data2, 3);
 }
 
 void sub_80AABF0(struct Sprite *sprite, s8 var2)
@@ -1102,12 +1102,12 @@ void unref_sub_80AB084(u8 *text)
 
     addr = (void *)VRAM;
     size = 0x18000;
-    while(1)
+    while (1)
     {
         DmaFill32(3, 0, addr, 0x1000);
         addr += 0x1000;
         size -= 0x1000;
-        if(size <= 0x1000)
+        if (size <= 0x1000)
         {
             DmaFill32(3, 0, addr, size);
             break;

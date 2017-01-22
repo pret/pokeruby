@@ -71,7 +71,7 @@ void sub_80B92AC(void)
     memcpy(unk_2018000.filler10AC, gUnknown_083D0280, 0x78);
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
 
-    if(GetMultiplayerId() == 0)
+    if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = sub_8126338();
 }
 #else
@@ -199,7 +199,7 @@ void sub_80B93B0(u32 a)
 void sub_80B9450(u8 taskId)
 {
     gTasks[taskId].data[0]++;
-    if(gTasks[taskId].data[0] == 50)
+    if (gTasks[taskId].data[0] == 50)
     {
         PlaySE(SE_W213);
         gTasks[taskId].data[0] = 0;
@@ -212,7 +212,7 @@ void sub_80B9484(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    switch(taskData[TD_STATE])
+    switch (taskData[TD_STATE])
     {
     case 0:
         sub_8007270(gSpecialVar_0x8005);
@@ -225,7 +225,7 @@ void sub_80B9484(u8 taskId)
         taskData[15] = CreateTask(sub_80B9450, 0x51);
         break;
     case 1:
-        if(!gTasks[taskData[10]].isActive)
+        if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 2;
             FlagSet(SYS_MIX_RECORD);
@@ -239,7 +239,7 @@ void sub_80B9484(u8 taskId)
         PlaySE(SE_W226);
         break;
     case 3:
-        if(!gTasks[taskData[10]].isActive)
+        if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 4;
             taskData[10] = sub_8083664();
@@ -250,11 +250,11 @@ void sub_80B9484(u8 taskId)
         break;
     case 4:
         taskData[8]++;
-        if(taskData[8] > 60)
+        if (taskData[8] > 60)
             taskData[TD_STATE] = 5;
         break;
     case 5:
-        if(!gTasks[taskData[10]].isActive)
+        if (!gTasks[taskData[10]].isActive)
         {
             sub_8055588();
             MenuZeroFillScreen();
@@ -269,7 +269,7 @@ void sub_80B95F0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch(task->data[TD_STATE])
+    switch (task->data[TD_STATE])
     {
     case 0:
         sub_80B9A78();
@@ -281,7 +281,7 @@ void sub_80B95F0(u8 taskId)
         break;
     case 100:
         task->data[12]++;
-        if(task->data[12] > 20)
+        if (task->data[12] > 20)
         {
             task->data[12] = 0;
             task->data[TD_STATE] = 101;
@@ -291,9 +291,9 @@ void sub_80B95F0(u8 taskId)
     {
         u8 players = GetLinkPlayerCount_2();
 
-        if(IsLinkMaster() == 1)
+        if (IsLinkMaster() == 1)
         {
-            if(players == sub_800820C())
+            if (players == sub_800820C())
             {
                 PlaySE(0x15);
                 task->data[TD_STATE] = 201;
@@ -308,9 +308,9 @@ void sub_80B95F0(u8 taskId)
         break;
     }
     case 201:
-        if(sub_800820C() == GetLinkPlayerCount_2())
+        if (sub_800820C() == GetLinkPlayerCount_2())
         {
-            if(++task->data[12] > GetLinkPlayerCount_2() * 30)
+            if (++task->data[12] > GetLinkPlayerCount_2() * 30)
             {
                 sub_8007F4C();
                 task->data[TD_STATE] = 1;
@@ -318,19 +318,19 @@ void sub_80B95F0(u8 taskId)
         }
         break;
     case 301:
-        if(sub_800820C() == GetLinkPlayerCount_2())
+        if (sub_800820C() == GetLinkPlayerCount_2())
             task->data[TD_STATE] = 1;
         break;
     case 400:
         task->data[12]++;
-        if(task->data[12] > 20)
+        if (task->data[12] > 20)
         {
             task->data[TD_STATE] = 1;
             task->data[12] = 0;
         }
         break;
     case 1:
-        if(gReceivedRemoteLinkPlayers)
+        if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), 2, 2);
             task->data[TD_STATE] = 5;
@@ -354,7 +354,7 @@ void sub_80B95F0(u8 taskId)
     }
     case 5:
         task->data[10]++;
-        if(task->data[10] > 60)
+        if (task->data[10] > 60)
         {
             task->data[10] = 0;
             task->data[TD_STATE] = 2;
@@ -367,7 +367,7 @@ void sub_80B97DC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch(task->data[TD_STATE])
+    switch (task->data[TD_STATE])
     {
         case 0: //Copy record data to send buffer
         {
@@ -378,7 +378,7 @@ void sub_80B97DC(u8 taskId)
             break;
         }
         case 1:
-            if(GetMultiplayerId() == 0)
+            if (GetMultiplayerId() == 0)
                 sub_8007E9C(1);
             task->data[TD_STATE]++;
             break;
@@ -386,13 +386,13 @@ void sub_80B97DC(u8 taskId)
             break;
         case 3:
             task->data[4]++;
-            if((u16)task->data[4] == 24)
+            if ((u16)task->data[4] == 24)
                 task->data[TD_STATE]++;
             else
                 task->data[TD_STATE] = 0;
             break;
         case 4:
-            if(!gTasks[task->data[10]].isActive)
+            if (!gTasks[task->data[10]].isActive)
                 task->func = sub_80B9A1C;
     }
 }
@@ -403,30 +403,30 @@ void Task_CopyRecvBuffer(u8 taskId)
     s32 recvStatus = GetBlockReceivedStatus();
     u32 sp8 = 0;
 
-    if(recvStatus == sub_8008198())
+    if (recvStatus == sub_8008198())
     {
         u8 player;
 
-        for(player = 0; player < GetLinkPlayerCount(); player++)
+        for (player = 0; player < GetLinkPlayerCount(); player++)
         {
             //_080B98D4
             u8 *ptr;
             void *src;
             u8 *dst;
 
-            if((recvStatus >> player) & 1)
+            if ((recvStatus >> player) & 1)
             {
                 ptr = LoadPtrFromTaskData(&task->data[5]);
                 dst = ptr + task->data[player + 1] * BUFFER_CHUNK_SIZE + player * sizeof(struct PlayerRecords);
                 src = GetPlayerRecvBuffer(player);
-                if((u32)(task->data[player + 1] + 1) * BUFFER_CHUNK_SIZE > sizeof(struct PlayerRecords))
+                if ((u32)(task->data[player + 1] + 1) * BUFFER_CHUNK_SIZE > sizeof(struct PlayerRecords))
                     memcpy(dst, src, sizeof(struct PlayerRecords) - task->data[player + 1] * BUFFER_CHUNK_SIZE);
                 else
                     memcpy(dst, src, BUFFER_CHUNK_SIZE);
                 //_080B993C
                 ResetBlockReceivedFlag(player);
                 task->data[player + 1]++;
-                if((u16)task->data[player + 1] == 0x18)
+                if ((u16)task->data[player + 1] == 0x18)
                     sp8 = (u8)(sp8 + 1);
             }
         }
@@ -434,7 +434,7 @@ void Task_CopyRecvBuffer(u8 taskId)
         gTasks[task->data[0]].data[0]++;
     }
     //_080B998A
-    if(sp8 == GetLinkPlayerCount())
+    if (sp8 == GetLinkPlayerCount())
         DestroyTask(taskId);
 }
 
@@ -442,7 +442,7 @@ void sub_80B99B4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if(!gTasks[task->data[10]].isActive)
+    if (!gTasks[task->data[10]].isActive)
         DestroyTask(taskId);
 }
 
@@ -451,7 +451,7 @@ void sub_80B99E8(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->func = sub_80B99B4;
-    if(gUnknown_03000718 == 1)
+    if (gUnknown_03000718 == 1)
         sub_80B93B0(task->data[5]);
 }
 
@@ -493,20 +493,20 @@ void sub_80B9A88(u8 *a)
     u32 id;
     u32 players = GetLinkPlayerCount();
 
-    switch(players)
+    switch (players)
     {
     case 2:
-        for(i = 0; i < 2; i++)
+        for (i = 0; i < 2; i++)
             a[i] = gUnknown_083D0288[i];
         break;
     case 3:
         id = GetLinkPlayerTrainerId(0) % 2;
-        for(i = 0; i < 3; i++)
+        for (i = 0; i < 3; i++)
             a[i] = gUnknown_083D028A[id][i];
         break;
     case 4:
         id = GetLinkPlayerTrainerId(0) % 9;
-        for(i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++)
             a[i] = gUnknown_083D0290[id][i];
         break;
     default:
@@ -624,7 +624,7 @@ u8 sub_80B9C4C(u8 *a)
     int i;
     u8 r2 = 0;
 
-    for(i = 0; i < 0x100; i++)
+    for (i = 0; i < 0x100; i++)
         r2 += a[i];
     return r2;
 }
@@ -669,7 +669,7 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
 
     s.unk4C = 12;
 
-    while(r3 < 4)
+    while (r3 < 4)
     {
 
         s.unk4[r3] |= 0xFF;
@@ -684,18 +684,18 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
     s.unk50 = r8 << 16;
     s.unk48 = s.unk30 * s.unk34;
 
-    if(s.unk3C < r8)
+    if (s.unk3C < r8)
     {
         do  //_080B9D00
         {
             u32 *r6 = (u32 *)(s.unk2C + s.unk30 * r3);
-            if(r6[0x1C] != 0 && r6[0x1C] > 0)
+            if (r6[0x1C] != 0 && r6[0x1C] > 0)
             {
 
             }
             //_080B9D3C
         }
-        while(r3 < r8);
+        while (r3 < r8);
     }
     //_080B9D46
 }

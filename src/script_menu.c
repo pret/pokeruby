@@ -38,7 +38,7 @@ void CreatePCMenu(void);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
-    if(FuncIsActiveTask(sub_80B52B4) == 1)
+    if (FuncIsActiveTask(sub_80B52B4) == 1)
         return FALSE;
     else
     {
@@ -50,7 +50,7 @@ bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 
 bool8 sub_80B50B0(u8 left, u8 top, u8 var3, u8 var4, u8 var5)
 {
-    if(FuncIsActiveTask(sub_80B52B4) == 1)
+    if (FuncIsActiveTask(sub_80B52B4) == 1)
         return FALSE;
     else
     {
@@ -74,17 +74,17 @@ void DrawMultichoiceMenu(u8 left, u8 top, u8 count, struct MenuAction *list, u8 
     u8 right;
     u8 bottom;
 
-    for(i = 1; i < count; i++)
+    for (i = 1; i < count; i++)
     {
         newWidth = GetStringWidthInTilesForScriptMenu(list[i].text);
-        if(width < newWidth)
+        if (width < newWidth)
             width = newWidth;
     }
 
     right = width;
     right = (right + left) + 1;
 
-    if(right > 29)
+    if (right > 29)
     {
         left = left + (29 - right);
         right = 29;
@@ -108,7 +108,7 @@ void sub_80B5230(u8 left, u8 top, u8 right, u8 bottom, u8 unkVar, u8 count)
     gTasks[taskId].data[3] = bottom;
     gTasks[taskId].data[4] = unkVar;
 
-    if(count > 3)
+    if (count > 3)
         gTasks[taskId].data[5] = TRUE;
     else
         gTasks[taskId].data[5] = FALSE;
@@ -118,18 +118,18 @@ void sub_80B52B4(u8 taskId)
 {
     s8 var;
 
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
-        if(!gTasks[taskId].data[5])
+        if (!gTasks[taskId].data[5])
             var = ProcessMenuInputNoWrap();
         else
             var = ProcessMenuInput();
 
-        if(var != -2)
+        if (var != -2)
         {
-            if(var == -1)
+            if (var == -1)
             {
-                if(!gTasks[taskId].data[4])
+                if (!gTasks[taskId].data[4])
                 {
                     PlaySE(5);
                     gScriptResult = 127;
@@ -153,7 +153,7 @@ void sub_80B52B4(u8 taskId)
 
 bool8 Multichoice(u8 var1, u8 var2, u8 var3, u8 var4)
 {
-    if(FuncIsActiveTask(sub_80B52B4) == 1)
+    if (FuncIsActiveTask(sub_80B52B4) == 1)
         return FALSE;
     else
     {
@@ -171,10 +171,10 @@ void sub_80B53B4(u8 left, u8 top, u8 count, struct MenuAction *list, u8 var4)
     u8 right;
     u8 bottom;
 
-    for(i = 1; i < count; i++)
+    for (i = 1; i < count; i++)
     {
         newWidth = GetStringWidthInTilesForScriptMenu(list[i].text);
-        if(width < newWidth)
+        if (width < newWidth)
             width = newWidth;
     }
 
@@ -191,7 +191,7 @@ bool8 yes_no_box(u8 var1, u8 var2)
 {
     u8 taskId;
 
-    if(FuncIsActiveTask(task_yes_no_maybe) == 1)
+    if (FuncIsActiveTask(task_yes_no_maybe) == 1)
         return FALSE;
     else
     {
@@ -207,7 +207,7 @@ bool8 yes_no_box(u8 var1, u8 var2)
 // unused
 bool8 IsScriptActive(void)
 {
-    if(gScriptResult == 0xFF)
+    if (gScriptResult == 0xFF)
         return FALSE;
     else
         return TRUE;
@@ -315,7 +315,7 @@ void sub_80B5684(u8 taskId)
 
 bool8 TryCreatePCMenu(void)
 {
-    if(FuncIsActiveTask(sub_80B52B4) == 1)
+    if (FuncIsActiveTask(sub_80B52B4) == 1)
         return FALSE;
     else
     {
@@ -331,12 +331,12 @@ void CreatePCMenu(void)
     u8 width;
     u8 numChoices;
 
-    if(playersPCWidth > GetStringWidthInTilesForScriptMenu(gPCText_SomeonesPC))
+    if (playersPCWidth > GetStringWidthInTilesForScriptMenu(gPCText_SomeonesPC))
         width = playersPCWidth;
     else
         width = 8;
 
-    if(FlagGet(SYS_GAME_CLEAR)) // player has cleared game?
+    if (FlagGet(SYS_GAME_CLEAR)) // player has cleared game?
     {
         numChoices = 4;
         MenuDrawTextWindow(0, 0, width + 2, 9);
@@ -350,7 +350,7 @@ void CreatePCMenu(void)
         MenuPrint(gPCText_LogOff, 1, 5);
     }
 
-    if(FlagGet(SYS_PC_LANETTE)) // player met lanette?
+    if (FlagGet(SYS_PC_LANETTE)) // player met lanette?
         MenuPrint(gPCText_LanettesPC, 1, 1);
     else
         MenuPrint(gPCText_SomeonesPC, 1, 1);
@@ -370,7 +370,7 @@ void task_picbox(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch(task->data[0])
+    switch (task->data[0])
     {
         case 0:
             task->data[0]++;
@@ -393,7 +393,7 @@ bool8 sub_80B58C4(u16 var1, u8 var2, u8 var3)
     u8 taskId;
     u8 var;
 
-    if(FindTaskIdByFunc(task_picbox) != 0xFF)
+    if (FindTaskIdByFunc(task_picbox) != 0xFF)
         return FALSE;
     else
     {
@@ -415,7 +415,7 @@ void *picbox_close(void)
 {
     u8 taskId = FindTaskIdByFunc(task_picbox);
 
-    if(taskId == 0xFF)
+    if (taskId == 0xFF)
         return NULL;
 
     gTasks[taskId].data[0]++;
@@ -424,7 +424,7 @@ void *picbox_close(void)
 
 bool8 sub_80B59AC(void)
 {
-    if(FindTaskIdByFunc(task_picbox) == 0xFF)
+    if (FindTaskIdByFunc(task_picbox) == 0xFF)
         return TRUE;
     else
         return FALSE;

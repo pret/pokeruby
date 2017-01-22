@@ -90,7 +90,8 @@ void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 left, u8 t
     MenuPrint(gOtherText_EggDayCare, left, top);
 }
 
-void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 top) {
+void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 top)
+{
     u8 locationMet;
     u8 gameMet;
     u8 *ptr = gStringVar4;
@@ -98,16 +99,19 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
 
     ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
 
-    if (nature != NATURE_BOLD && nature != NATURE_GENTLE) {
+    if (nature != NATURE_BOLD && nature != NATURE_GENTLE)
+    {
         ptr = StringCopy(ptr, gOtherText_Terminator4);
     }
 
     ptr = StringCopy(ptr, gOtherText_Nature);
 
-    if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE) {
+    if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE)
+    {
         locationMet = GetMonData(pokemon, MON_DATA_MET_LOCATION);
 
-        if (GetMonData(pokemon, MON_DATA_MET_LEVEL) == 0) {
+        if (GetMonData(pokemon, MON_DATA_MET_LEVEL) == 0)
+        {
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, 5);
             *ptr = CHAR_NEWLINE;
             ptr++;
@@ -115,12 +119,16 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
             CopyLocationName(gStringVar1, locationMet);
             ptr = sub_80A1E9C(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Egg2);
-        } else if (locationMet >= 88) {
+        }
+        else if (locationMet >= 88)
+        {
             *ptr = CHAR_NEWLINE;
             ptr++;
 
             StringCopy(ptr, gOtherText_ObtainedInTrade);
-        } else {
+        }
+        else
+        {
             u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
@@ -131,17 +139,23 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
             ptr = sub_80A1E9C(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Met);
         }
-    } else {
+    }
+    else
+    {
         gameMet = GetMonData(pokemon, MON_DATA_MET_GAME);
 
-        if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD)) {
+        if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD))
+        {
             *ptr = CHAR_NEWLINE;
             ptr++;
 
             StringCopy(ptr, gOtherText_ObtainedInTrade);
-        } else {
+        }
+        else
+        {
             locationMet = GetMonData(pokemon, MON_DATA_MET_LOCATION);
-            if (locationMet == 0xFF) {
+            if (locationMet == 0xFF)
+            {
                 u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
@@ -149,12 +163,16 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
                 ptr++;
 
                 StringCopy(ptr, gOtherText_FatefulEncounter);
-            } else if (locationMet >= 88) {
+            }
+            else if (locationMet >= 88)
+            {
                 *ptr = CHAR_NEWLINE;
                 ptr++;
 
                 StringCopy(ptr, gOtherText_ObtainedInTrade);
-            } else {
+            }
+            else
+            {
                 u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);

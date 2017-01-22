@@ -162,7 +162,7 @@ void Task_HandleTruckSequence(u8 taskId)
        break;
    case 2:
        data[1]++;
-       if(!gPaletteFade.active && data[1] > 300)
+       if (!gPaletteFade.active && data[1] > 300)
        {
            data[1] = 0;
            DestroyTask(data[2]);

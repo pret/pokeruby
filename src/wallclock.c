@@ -98,12 +98,12 @@ static void LoadWallClockGraphics(void)
 
     addr = (void *)VRAM;
     size = 0x18000;
-    while(1)
+    while (1)
     {
         DmaFill16(3, 0, addr, 0x1000);
         addr += 0x1000;
         size -= 0x1000;
-        if(size <= 0x1000)
+        if (size <= 0x1000)
         {
             DmaFill16(3, 0, addr, size);
             break;
@@ -113,7 +113,7 @@ static void LoadWallClockGraphics(void)
     DmaClear16(3, PLTT, PLTT_SIZE);
 
     LZ77UnCompVram(gMiscClock_Gfx, (void *)VRAM);
-    if(gSpecialVar_0x8004 == MALE)
+    if (gSpecialVar_0x8004 == MALE)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
     else
         LoadPalette(gMiscClockFemale_Pal, 0, 32);
@@ -201,7 +201,7 @@ void CB2_ViewWallClock(void)
 
     taskId = CreateTask(Task_ViewClock1, 0);
     InitClockWithRtc(taskId);
-    if(gTasks[taskId].data[TD_PERIOD] == 0)
+    if (gTasks[taskId].data[TD_PERIOD] == 0)
     {
         angle1 = 45;
         angle2 = 90;
@@ -243,14 +243,14 @@ static void WallClockMainCallback(void)
 
 static void Task_SetClock1(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
         gTasks[taskId].func = Task_SetClock2;
 }
 
 //Handle keypresses when setting clock
 static void Task_SetClock2(u8 taskId)
 {
-    if(gTasks[taskId].data[TD_MHAND_ANGLE] % 6)
+    if (gTasks[taskId].data[TD_MHAND_ANGLE] % 6)
     {
         gTasks[taskId].data[TD_MHAND_ANGLE] = CalcNewMinHandAngle(
           gTasks[taskId].data[TD_MHAND_ANGLE],
@@ -261,7 +261,7 @@ static void Task_SetClock2(u8 taskId)
     {
         gTasks[taskId].data[TD_MHAND_ANGLE] = gTasks[taskId].data[TD_MINUTES] * 6;
         gTasks[taskId].data[TD_HHAND_ANGLE] = (gTasks[taskId].data[TD_HOURS] % 12) * 30 + (gTasks[taskId].data[TD_MINUTES] / 10) * 5;
-        if(gMain.newKeys & A_BUTTON)
+        if (gMain.newKeys & A_BUTTON)
         {
             gTasks[taskId].func = Task_SetClock3;
             return;
@@ -269,13 +269,13 @@ static void Task_SetClock2(u8 taskId)
         else
         {
             gTasks[taskId].data[TD_SETDIRECTION] = gMain.newKeys & A_BUTTON;
-            if(gMain.heldKeys & DPAD_LEFT)
+            if (gMain.heldKeys & DPAD_LEFT)
                 gTasks[taskId].data[TD_SETDIRECTION] = BACKWARD;
-            if(gMain.heldKeys & DPAD_RIGHT)
+            if (gMain.heldKeys & DPAD_RIGHT)
                 gTasks[taskId].data[TD_SETDIRECTION] = FORWARD;
-            if(gTasks[taskId].data[TD_SETDIRECTION])
+            if (gTasks[taskId].data[TD_SETDIRECTION])
             {
-                if(gTasks[taskId].data[TD_SETSPEED] <= 0xFE)
+                if (gTasks[taskId].data[TD_SETSPEED] <= 0xFE)
                     gTasks[taskId].data[TD_SETSPEED]++;
                 gTasks[taskId].data[TD_MHAND_ANGLE] = CalcNewMinHandAngle(
                   gTasks[taskId].data[TD_MHAND_ANGLE],
@@ -305,7 +305,7 @@ static void Task_SetClock3(u8 taskId)
 //Get menu selection
 static void Task_SetClock4(u8 taskId)
 {
-    switch(ProcessMenuInputNoWrap_())
+    switch (ProcessMenuInputNoWrap_())
     {
         case 0:     //YES
             PlaySE(SE_SELECT);
@@ -331,13 +331,13 @@ static void Task_SetClock5(u8 taskId)
 
 static void Task_SetClock6(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
         SetMainCallback2((MainCallback)gMain.savedCallback);
 }
 
 static void Task_ViewClock1(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
         gTasks[taskId].func = Task_ViewClock2;
 }
 
@@ -345,7 +345,7 @@ static void Task_ViewClock1(u8 taskId)
 static void Task_ViewClock2(u8 taskId)
 {
     InitClockWithRtc(taskId);
-    if(gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         gTasks[taskId].func = Task_ViewClock3;
 }
 
@@ -357,17 +357,17 @@ static void Task_ViewClock3(u8 taskId)
 
 static void Task_ViewClock4(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
         SetMainCallback2((MainCallback)gMain.savedCallback);
 }
 
 static u8 CalcMinHandDelta(u16 speed)
 {
-    if(speed > 60)
+    if (speed > 60)
         return 6;
-    else if(speed > 30)
+    else if (speed > 30)
         return 3;
-    else if(speed > 10)
+    else if (speed > 10)
         return 2;
     else
         return 1;
@@ -378,16 +378,16 @@ static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
 {
     u8 delta = CalcMinHandDelta(speed);
 
-    switch(direction)
+    switch (direction)
     {
         case BACKWARD:
-            if(angle)
+            if (angle)
                 angle = angle - delta;
             else
                 angle = 360 - delta;
             break;
         case FORWARD:
-            if(angle < 360 - delta)
+            if (angle < 360 - delta)
                 angle = angle + delta;
             else
                 angle = 0;
@@ -399,15 +399,15 @@ static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
 //Advances clock forward or backward by 1 minute
 static u8 AdvanceClock(u8 taskId, u8 direction)
 {
-    switch(direction)
+    switch (direction)
     {
         case BACKWARD:
-            if(gTasks[taskId].data[TD_MINUTES] > 0)
+            if (gTasks[taskId].data[TD_MINUTES] > 0)
                 gTasks[taskId].data[TD_MINUTES]--;
             else
             {
                 gTasks[taskId].data[TD_MINUTES] = 59;
-                if(gTasks[taskId].data[TD_HOURS] > 0)
+                if (gTasks[taskId].data[TD_HOURS] > 0)
                     gTasks[taskId].data[TD_HOURS]--;
                 else
                     gTasks[taskId].data[TD_HOURS] = 23;
@@ -415,12 +415,12 @@ static u8 AdvanceClock(u8 taskId, u8 direction)
             }
             break;
         case FORWARD:
-            if(gTasks[taskId].data[TD_MINUTES] <= 58)
+            if (gTasks[taskId].data[TD_MINUTES] <= 58)
                 gTasks[taskId].data[TD_MINUTES]++;
             else
             {
                 gTasks[taskId].data[TD_MINUTES] = 0;
-                if(gTasks[taskId].data[TD_HOURS] <= 22)
+                if (gTasks[taskId].data[TD_HOURS] <= 22)
                     gTasks[taskId].data[TD_HOURS]++;
                 else
                     gTasks[taskId].data[TD_HOURS] = 0;
@@ -436,10 +436,10 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 {
     u8 hours = gTasks[taskId].data[TD_HOURS];
 
-    switch(direction)
+    switch (direction)
     {
         case BACKWARD:
-            switch(hours)
+            switch (hours)
             {
                 case 11:
                     gTasks[taskId].data[TD_PERIOD] = AM;
@@ -450,7 +450,7 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
             }
             break;
         case FORWARD:
-            switch(hours)
+            switch (hours)
             {
                 case 0:
                     gTasks[taskId].data[TD_PERIOD] = AM;
@@ -470,7 +470,7 @@ static void InitClockWithRtc(u8 taskId)
     gTasks[taskId].data[TD_MINUTES] = gLocalTime.minutes;
     gTasks[taskId].data[TD_MHAND_ANGLE] = gTasks[taskId].data[TD_MINUTES] * 6;
     gTasks[taskId].data[TD_HHAND_ANGLE] = (gTasks[taskId].data[TD_HOURS] % 12) * 30 + (gTasks[taskId].data[TD_MINUTES] / 10) * 5;
-    if(gLocalTime.hours <= 11)
+    if (gLocalTime.hours <= 11)
         gTasks[taskId].data[TD_PERIOD] = AM;
     else
         gTasks[taskId].data[TD_PERIOD] = PM;
@@ -492,9 +492,9 @@ void sub_810B05C(struct Sprite *sprite)
     y = gClockHandCoords[angle][1];
 
     //Manual sign extension
-    if(x > 0x80)
+    if (x > 0x80)
         x |= 0xFF00;
-    if(y > 0x80)
+    if (y > 0x80)
         y |= 0xFF00;
 
     sprite->pos2.x = x;
@@ -517,9 +517,9 @@ void sub_810B0F4(struct Sprite *sprite)
     y = gClockHandCoords[angle][1];
 
     //Manual sign extension
-    if(x > 0x80)
+    if (x > 0x80)
         x |= 0xFF00;
-    if(y > 0x80)
+    if (y > 0x80)
         y |= 0xFF00;
 
     sprite->pos2.x = x;
@@ -531,18 +531,18 @@ void sub_810B18C(struct Sprite *sprite)
     s16 sin;
     s16 cos;
 
-    if(gTasks[sprite->data0].data[TD_PERIOD] != AM)
+    if (gTasks[sprite->data0].data[TD_PERIOD] != AM)
     {
-        if((u16)(sprite->data1 - 60) <= 29)
+        if ((u16)(sprite->data1 - 60) <= 29)
             sprite->data1 += 5;
-        if(sprite->data1 <= 59)
+        if (sprite->data1 <= 59)
             sprite->data1++;
     }
     else
     {
-        if((u16)(sprite->data1 - 46) <= 29)
+        if ((u16)(sprite->data1 - 46) <= 29)
             sprite->data1 -= 5;
-        if(sprite->data1 > 75)
+        if (sprite->data1 > 75)
             sprite->data1--;
     }
     cos = Cos2((u16)sprite->data1);
@@ -556,18 +556,18 @@ void sub_810B230(struct Sprite *sprite)
     s16 sin;
     s16 cos;
 
-    if(gTasks[sprite->data0].data[TD_PERIOD] != AM)
+    if (gTasks[sprite->data0].data[TD_PERIOD] != AM)
     {
-        if(sprite->data1 >= 105 && sprite->data1 < 135)
+        if (sprite->data1 >= 105 && sprite->data1 < 135)
             sprite->data1 += 5;
-        if(sprite->data1 < 105)
+        if (sprite->data1 < 105)
             sprite->data1++;
     }
     else
     {
-        if(sprite->data1 > 90 && sprite->data1 <= 120)
+        if (sprite->data1 > 90 && sprite->data1 <= 120)
             sprite->data1 -= 5;
-        if(sprite->data1 > 120)
+        if (sprite->data1 > 120)
             sprite->data1--;
     }
     cos = Cos2((u16)sprite->data1);

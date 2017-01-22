@@ -106,7 +106,7 @@ s8 MoriDebugMenu_BreedEgg(void)
 {
     u8 loopCounter;
 
-    for(loopCounter = 0; loopCounter <= 5; loopCounter++)
+    for (loopCounter = 0; loopCounter <= 5; loopCounter++)
     {
         //UB: Too few arguments for function 'GetMonData'
         if ( GetMonData(&gPlayerParty[loopCounter], MON_DATA_IS_EGG) )
@@ -131,7 +131,7 @@ s8 MoriDebugMenu_PokeblockCase(void)
 {
     s32 loopCounter;
 
-    for(loopCounter = 0; loopCounter <= 39; loopCounter++)
+    for (loopCounter = 0; loopCounter <= 39; loopCounter++)
         sub_810CA6C((u8)loopCounter);
 
     CloseMenu();

@@ -892,7 +892,7 @@ static bool8 sub_80E5E70(u8 var1, u8 var2)
 
 static bool8 sub_80E5EC0(u8 var1, u8 var2)
 {
-    if((u8)(var2 - 1) < 2)
+    if ((u8)(var2 - 1) < 2)
     {
         if (var1 == 10 || var1 == 12)
             return FALSE;
@@ -910,7 +910,7 @@ bool8 IsBikingDisallowedByPlayer(void)
     s16 x, y;
     u8 tileBehavior;
 
-    if(!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_4)))
+    if (!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_4)))
     {
         PlayerGetDestCoords(&x, &y);
         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
@@ -957,10 +957,10 @@ void sub_80E5FCC(int var1, int var2)
     gPlayerAvatar.unkC = var1;
     gPlayerAvatar.unk10 = var2;
 
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
         gPlayerAvatar.unk14[i] = 0;
 
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
         gPlayerAvatar.unk1C[i] = 0;
 }
 
