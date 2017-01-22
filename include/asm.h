@@ -6,16 +6,16 @@
 #include "sprite.h"
 #include "asm_fieldmap.h"
 
-struct UnkInputStruct
+struct FieldInput
 {
-    u8 input_field_0_0:1;
+    u8 pressedAButton:1;
     u8 input_field_0_1:1;
-    u8 input_field_0_2:1;
-    u8 input_field_0_3:1;
+    u8 pressedStartButton:1;
+    u8 pressedSelectButton:1;
     u8 input_field_0_4:1;
     u8 input_field_0_5:1;
     u8 input_field_0_6:1;
-    u8 input_field_0_7:1;
+    u8 pressedBButton:1;
     u8 input_field_1_0:1;
     u8 input_field_1_1:1;
     u8 input_field_1_2:1;
@@ -24,7 +24,7 @@ struct UnkInputStruct
     u8 input_field_1_5:1;
     u8 input_field_1_6:1;
     u8 input_field_1_7:1;
-    u8 input_field_2;
+    u8 dpadDirection;
     u8 input_field_3;
 };
 

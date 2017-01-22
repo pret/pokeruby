@@ -196,7 +196,7 @@ struct MapObject
     /*0x0C*/ struct Coords16 coords1;
     /*0x10*/ struct Coords16 coords2;
     /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;
+    /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
     /*0x19*/ u8 mapobj_unk_19;
     /*0x1A*/ u8 mapobj_unk_1A;
@@ -207,7 +207,7 @@ struct MapObject
     /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
-    /*0x22*/ u8 mapobj_unk_22;
+    /*0x22*/ u8 animId;
     /*size = 0x24*/
 };
 
@@ -302,6 +302,31 @@ struct MapObjectGraphicsInfo
 #define PLAYER_AVATAR_FLAG_6         (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
 
+enum
+{
+    ACRO_BIKE_NORMAL,
+    ACRO_BIKE_TURNING,
+    ACRO_BIKE_WHEELIE_STANDING,
+    ACRO_BIKE_BUNNY_HOP,
+    ACRO_BIKE_WHEELIE_MOVING,
+    ACRO_BIKE_STATE5,
+    ACRO_BIKE_STATE6,
+};
+
+enum
+{
+    DIR_NONE,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+};
+
+enum
+{
+    COLLISION_LEDGE_JUMP = 6
+};
+
 struct PlayerAvatar /* 0x202E858 */
 {
     /*0x00*/ u8 flags;
@@ -312,9 +337,9 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x05*/ u8 mapObjectId;
     /*0x06*/ u8 unk6;
     /*0x07*/ u8 gender;
-	u8 unk8;
+	u8 acroBikeState;
 	u8 unk9;
-	u8 unkA;
+	u8 bikeFrameCounter;
 	u8 unkB;
     u32 unkC;
     u32 unk10;

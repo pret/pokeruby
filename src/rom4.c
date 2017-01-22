@@ -1020,10 +1020,11 @@ bool32 is_c1_link_related_active(void)
 
 void c1_overworld_normal(u16 newKeys, u16 heldKeys)
 {
-    struct UnkInputStruct inputStruct;
+    struct FieldInput inputStruct;
+
     sub_8059204();
-    sub_8067EEC(&inputStruct);
-    process_overworld_input(&inputStruct, newKeys, heldKeys);
+    FieldClearPlayerInput(&inputStruct);
+    FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
     if (!ScriptContext2_IsEnabled())
     {
         if (sub_8068024(&inputStruct) == 1)
@@ -1033,7 +1034,7 @@ void c1_overworld_normal(u16 newKeys, u16 heldKeys)
         }
         else
         {
-            player_step(inputStruct.input_field_2, newKeys, heldKeys);
+            player_step(inputStruct.dpadDirection, newKeys, heldKeys);
         }
     }
 }

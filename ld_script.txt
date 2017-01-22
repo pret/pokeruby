@@ -313,6 +313,7 @@ SECTIONS {
         src/fieldmap.o(.rodata);
         data/metatile_behavior.o(.rodata);
         data/field_door.o(.rodata);
+        src/field_player_avatar.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
         src/field_ground_effect.o(.rodata);
