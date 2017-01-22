@@ -145,9 +145,9 @@ void sub_806487C(struct Sprite *sprite, bool8 invisible);
 void sub_8064990(u8, u8);
 
 // asm/field_control_avatar.o
-void sub_8067EEC(struct UnkInputStruct *pStruct);
-void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys);
-int sub_8068024(struct UnkInputStruct *pStruct);
+void FieldClearPlayerInput(struct FieldInput *pStruct);
+void FieldGetPlayerInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
+int sub_8068024(struct FieldInput *pStruct);
 u8 *sub_80682A8(struct MapPosition *, u8, u8);
 void overworld_poison_timer_set(void);
 void prev_quest_postbuffer_cursor_backup_reset(void);
@@ -361,7 +361,7 @@ void MovePlayerOnBike(u8, u16, u16);
 void sub_80E5B38(u16 i, u16 c);
 u8 sub_80E5DEC(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
-void sub_80E5FCC(int i, int i1);
+void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
 s16 sub_80E6034(void);
 void sub_80E6084();

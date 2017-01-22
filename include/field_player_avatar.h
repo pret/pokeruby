@@ -34,7 +34,7 @@ void SetPlayerAvatarTransitionFlags(u16 a);
 // sub_80591F4
 void sub_8059204(void);
 // player_get_x22
-void player_npc_set_state_and_x22_etc(u8 a, u8 b);
+void PlayerSetAnimId(u8 a, u8 b);
 void PlayerGoSpeed0(u8 a);
 void sub_80593C4(u8 a);
 void npc_use_some_d2s(u8 a);
@@ -46,7 +46,7 @@ void PlayerTurnInPlace(u8 a);
 void PlayerJumpLedge(u8 a);
 void sub_80594C0(void);
 void sub_8059504(u8 a);
-void sub_805951C(u8 a);
+void PlayerStartWheelie(u8 a);
 void sub_8059534(u8 a);
 void sub_805954C(u8 a);
 void sub_8059570(u8 a);

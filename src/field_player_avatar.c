@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "task.h"
 #include "wild_encounter.h"
+#include "map_object_constants.h"
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];
@@ -29,29 +30,6 @@ extern struct
     u32 unkC;
 } gUnknown_0202FF84;
 
-extern bool8 (*gUnknown_0830FB58[])(u8);
-extern u8 (*gUnknown_0830FBA0[])(void);
-extern void (*gUnknown_0830FBEC[])(u8, u16);
-extern bool8 (*gUnknown_0830FBF8[])(u8);
-extern u8 gUnknown_0830FC0C[];
-extern void (*gUnknown_0830FC14[])(struct MapObject *);
-extern bool8 (*gUnknown_0830FC34[])(u8);
-extern u8 gUnknown_0830FC44[][2];
-extern u8 gUnknown_0830FC54[][2];
-extern u8 gUnknown_0830FC64[2][5][2];
-extern bool8 (*gUnknown_0830FC78[])(u8); //Duplicate of gUnknown_0830FC34
-extern u8 (*gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *);
-extern u8 (*gUnknown_0830FC94[])(struct Task *, struct MapObject *);
-extern u8 (*gUnknown_0830FC98[])(struct Task *, struct MapObject *);
-extern u8 gUnknown_0830FCA8[];
-extern u8 gUnknown_0830FCAC[];
-extern u8 (*gUnknown_0830FCB4[])(struct Task *);
-extern s16 gUnknown_0830FCF4[];
-extern s16 gUnknown_0830FCFA[];
-extern u8 gUnknown_0830FD00[];
-extern s16 gUnknown_0830FD02[];
-extern s16 gUnknown_0830FD08[];
-
 //Functions
 static u32 sub_80587D8(void);
 static bool8 sub_8058854(struct MapObject *, u8);
@@ -60,14 +38,41 @@ static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c);
 static void PlayerAllowForcedMovementIfMovingSameDirection(void);
 static u8 TryDoMetatileBehaviorForcedMovement(void);
 static u8 GetForcedMovementByMetatileBehavior(void);
+u8 ForcedMovement_None(void);
+u8 ForcedMovement_Slip(void);
+u8 sub_8058AAC(void);
+u8 sub_8058AC4(void);
+u8 sub_8058ADC(void);
+u8 sub_8058AF4(void);
+u8 sub_8058B0C(void);
+u8 sub_8058B24(void);
+u8 sub_8058B3C(void);
+u8 sub_8058B54(void);
+u8 ForcedMovement_SlideSouth(void);
+u8 ForcedMovement_SlideNorth(void);
+u8 ForcedMovement_SlideWest(void);
+u8 ForcedMovement_SlideEast(void);
+u8 sub_8058C04(void);
+u8 sub_8058C10(void);
+u8 ForcedMovement_MuddySlope(void);
 static void MovePlayerNotOnBike(u8 a, u16 b);
 static u8 CheckMovementInputNotOnBike(u8 a);
+void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
+void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
+void sub_8058D0C(u8 direction, u16 heldKeys);
 static u8 CheckForPlayerAvatarCollision(u8 a);
 static u8 sub_8058EF0(s16 a, s16 b, u8 c);
 static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c);
 static u8 sub_8058F6C(s16 a, s16 b, u8 c);
 static void check_acro_bike_metatile(int unused1, int unused2, u8 c, u8 *d);
 static void DoPlayerAvatarTransition(void);
+void nullsub_49(struct MapObject *a);
+void PlayerAvatarTransition_Normal(struct MapObject *a);
+void PlayerAvatarTransition_MachBike(struct MapObject *a);
+void PlayerAvatarTransition_AcroBike(struct MapObject *a);
+void PlayerAvatarTransition_Surfing(struct MapObject *a);
+void PlayerAvatarTransition_Underwater(struct MapObject *a);
+void sub_80591F4(struct MapObject *a);
 static bool8 player_is_anim_in_certain_ranges(void);
 static bool8 sub_80592A4(void);
 static bool8 PlayerIsAnimActive(void);
@@ -76,8 +81,175 @@ static void PlayerNotOnBikeCollide(u8 a);
 static void PlayCollisionSoundIfNotFacingWarp(u8 a);
 static void sub_8059D60(struct MapObject *a);
 static void StartStrengthAnim(u8 a, u8 b);
+u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c);
+u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c);
+u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c);
 static void sub_8059F94(void);
+u8 sub_805A000(struct Task *task, struct MapObject *mapObject);
 static void sub_805A06C(void);
+u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject);
+u8 sub_805A100(struct Task *task, struct MapObject *mapObject);
+u8 sub_805A178(struct Task *task, struct MapObject *mapObject);
+u8 sub_805A1B8(struct Task *task, struct MapObject *mapObject);
+u8 Fishing1(struct Task *task);
+u8 Fishing2(struct Task *task);
+u8 Fishing3(struct Task *task);
+u8 Fishing4(struct Task *task);
+u8 Fishing5(struct Task *task);
+u8 Fishing6(struct Task *task);
+u8 Fishing7(struct Task *task);
+u8 Fishing8(struct Task *task);
+u8 Fishing9(struct Task *task);
+u8 Fishing10(struct Task *task);
+u8 Fishing11(struct Task *task);
+u8 Fishing12(struct Task *task);
+u8 Fishing13(struct Task *task);
+u8 Fishing14(struct Task *task);
+u8 Fishing15(struct Task *task);
+u8 Fishing16(struct Task *task);
+
+static bool8 (*const gUnknown_0830FB58[])(u8) =
+{
+    MetatileBehavior_IsTrickHouseSlipperyFloor,
+    MetatileBehavior_IsIce_2,
+    MetatileBehavior_IsWalkSouth,
+    MetatileBehavior_IsWalkNorth,
+    MetatileBehavior_IsWalkWest,
+    MetatileBehavior_IsWalkEast,
+    MetatileBehavior_IsSouthwardCurrent,
+    MetatileBehavior_IsNorthwardCurrent,
+    MetatileBehavior_IsWestwardCurrent,
+    MetatileBehavior_IsEastwardCurrent,
+    MetatileBehavior_IsSlideSouth,
+    MetatileBehavior_IsSlideNorth,
+    MetatileBehavior_IsSlideWest,
+    MetatileBehavior_IsSlideEast,
+    MetatileBehavior_IsWaterfall,
+    MetatileBehavior_0xBB,
+    MetatileBehavior_0xBC,
+    MetatileBehavior_IsMuddySlope,
+};
+static u8 (*const gUnknown_0830FBA0[])(void) =
+{
+    ForcedMovement_None,
+    ForcedMovement_Slip,
+    ForcedMovement_Slip,
+    sub_8058AAC,
+    sub_8058AC4,
+    sub_8058ADC,
+    sub_8058AF4,
+    sub_8058B0C,
+    sub_8058B24,
+    sub_8058B3C,
+    sub_8058B54,
+    ForcedMovement_SlideSouth,
+    ForcedMovement_SlideNorth,
+    ForcedMovement_SlideWest,
+    ForcedMovement_SlideEast,
+    sub_8058B0C,
+    sub_8058C04,
+    sub_8058C10,
+    ForcedMovement_MuddySlope,
+};
+static void (*const gUnknown_0830FBEC[])(u8, u16) =
+{
+    PlayerNotOnBikeNotMoving,
+    PlayerNotOnBikeTurningInPlace,
+    sub_8058D0C,
+};
+static bool8 (*const gUnknown_0830FBF8[])(u8) =
+{
+    MetatileBehavior_IsBumpySlope,
+    MetatileBehavior_IsIsolatedVerticalRail,
+    MetatileBehavior_IsIsolatedHorizontalRail,
+    MetatileBehavior_IsVerticalRail,
+    MetatileBehavior_IsHorizontalRail,
+};
+static const u8 gUnknown_0830FC0C[] = {9, 10, 11, 12, 13};
+static void (*const gUnknown_0830FC14[])(struct MapObject *) =
+{
+    PlayerAvatarTransition_Normal,
+    PlayerAvatarTransition_MachBike,
+    PlayerAvatarTransition_AcroBike,
+    PlayerAvatarTransition_Surfing,
+    PlayerAvatarTransition_Underwater,
+    sub_80591F4,
+    nullsub_49,
+    nullsub_49,
+};
+static bool8 (*const gUnknown_0830FC34[])(u8) =
+{
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp,
+};
+static const u8 sRivalAvatarGfxIds[][2] =
+{
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     MAP_OBJ_GFX_RIVAL_MAY_NORMAL},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_SURFING,    MAP_OBJ_GFX_RIVAL_MAY_SURFING},
+    {MAP_OBJ_GFX_BRENDAN_UNDERWATER,       MAP_OBJ_GFX_MAY_UNDERWATER},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_RIVAL_MAY_FIELD_MOVE},
+    {MAP_OBJ_GFX_BRENDAN_FISHING,          MAP_OBJ_GFX_MAY_FISHING},
+    {MAP_OBJ_GFX_BRENDAN_WATERING,         MAP_OBJ_GFX_MAY_WATERING},
+};
+static const u8 sPlayerAvatarGfxIds[][2] =
+{
+    {MAP_OBJ_GFX_BRENDAN_NORMAL,     MAP_OBJ_GFX_MAY_NORMAL},
+    {MAP_OBJ_GFX_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_MAY_MACH_BIKE},
+    {MAP_OBJ_GFX_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_MAY_ACRO_BIKE},
+    {MAP_OBJ_GFX_BRENDAN_SURFING,    MAP_OBJ_GFX_MAY_SURFING},
+    {MAP_OBJ_GFX_BRENDAN_UNDERWATER, MAP_OBJ_GFX_MAY_UNDERWATER},
+    {MAP_OBJ_GFX_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_MAY_FIELD_MOVE},
+    {MAP_OBJ_GFX_BRENDAN_FISHING,    MAP_OBJ_GFX_MAY_FISHING},
+    {MAP_OBJ_GFX_BRENDAN_WATERING,   MAP_OBJ_GFX_MAY_WATERING},
+};
+static const u8 gUnknown_0830FC64[2][5][2] =
+{
+    //male
+    {
+        {MAP_OBJ_GFX_BRENDAN_NORMAL, 1},
+        {MAP_OBJ_GFX_BRENDAN_MACH_BIKE, 2},
+        {MAP_OBJ_GFX_BRENDAN_ACRO_BIKE, 4},
+        {MAP_OBJ_GFX_BRENDAN_SURFING, 8},
+        {MAP_OBJ_GFX_BRENDAN_UNDERWATER, 16},
+    },
+    //female
+    {
+        {MAP_OBJ_GFX_MAY_NORMAL, 1},
+        {MAP_OBJ_GFX_MAY_MACH_BIKE, 2},
+        {MAP_OBJ_GFX_MAY_ACRO_BIKE, 4},
+        {MAP_OBJ_GFX_MAY_SURFING, 8},
+        {MAP_OBJ_GFX_MAY_UNDERWATER, 16},
+    }
+};
+static bool8 (*const gUnknown_0830FC78[])(u8) =  //Duplicate of gUnknown_0830FC34
+{
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp,
+};
+static u8 (*const gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *) =
+{
+    sub_8059E84,
+    sub_8059EA4,
+    sub_8059F40,
+};
+static u8 (*const gUnknown_0830FC94[])(struct Task *, struct MapObject *) =
+{
+    sub_805A000,
+};
+static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
+{
+    sub_805A0D8,
+    sub_805A100,
+    sub_805A178,
+    sub_805A1B8,
+};
+
 
 void sub_80587B4(struct Sprite *sprite)
 {
@@ -89,37 +261,37 @@ static u32 sub_80587D8(void)
     return 0;
 }
 
-void player_step(u8 a, u16 b, u16 c)
+void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     sub_8059D60(playerMapObj);
     if (gPlayerAvatar.unk6 == 0)
     {
-        sub_80E5B38(b, c);
-        if (sub_8058854(playerMapObj, a) == 0)
+        sub_80E5B38(newKeys, heldKeys);
+        if (!sub_8058854(playerMapObj, direction))
         {
             npc_clear_strange_bits(playerMapObj);
             DoPlayerAvatarTransition();
             if (TryDoMetatileBehaviorForcedMovement() == 0)
             {
-                MovePlayerAvatarUsingKeypadInput(a, b, c);
+                MovePlayerAvatarUsingKeypadInput(direction, newKeys, heldKeys);
                 PlayerAllowForcedMovementIfMovingSameDirection();
             }
         }
     }
 }
 
-static bool8 sub_8058854(struct MapObject *a, u8 b)
+static bool8 sub_8058854(struct MapObject *playerMapObj, u8 direction)
 {
-    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(a)
-     && !FieldObjectClearAnimIfSpecialAnimFinished(a))
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerMapObj)
+     && !FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
     {
-        u8 specialAnim = FieldObjectGetSpecialAnim(a);
+        u8 specialAnim = FieldObjectGetSpecialAnim(playerMapObj);
 
-        if (specialAnim > 24 && specialAnim < 29 && b != 0 && a->placeholder18 != b)
+        if (specialAnim > 24 && specialAnim < 29 && direction != DIR_NONE && playerMapObj->placeholder18 != direction)
         {
-            FieldObjectClearAnim(a);
+            FieldObjectClearAnim(playerMapObj);
             return FALSE;
         }
         else
@@ -138,13 +310,13 @@ static void npc_clear_strange_bits(struct MapObject *a)
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
-static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c)
+static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
      || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
-        MovePlayerOnBike(a, b, c);
+        MovePlayerOnBike(direction, newKeys, heldKeys);
     else
-        MovePlayerNotOnBike(a, c);
+        MovePlayerNotOnBike(direction, heldKeys);
 }
 
 static void PlayerAllowForcedMovementIfMovingSameDirection(void)
@@ -189,23 +361,23 @@ u8 ForcedMovement_None(void)
     return 0;
 }
 
-static u8 DoForcedMovement(u8 a, void (*b)(u8))
+static u8 DoForcedMovement(u8 direction, void (*b)(u8))
 {
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
-    u8 r7 = CheckForPlayerAvatarCollision(a);
+    u8 collisionType = CheckForPlayerAvatarCollision(direction);
 
     playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
-    if (r7 != 0)
+    if (collisionType != 0)
     {
         ForcedMovement_None();
-        if (r7 <= 4)
+        if (collisionType <= 4)
         {
             return 0;
         }
         else
         {
-            if (r7 == 6)
-                PlayerJumpLedge(a);
+            if (collisionType == COLLISION_LEDGE_JUMP)
+                PlayerJumpLedge(direction);
             playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
             playerAvatar->running2 = 2;
             return 1;
@@ -214,7 +386,7 @@ static u8 DoForcedMovement(u8 a, void (*b)(u8))
     else
     {
         playerAvatar->running2 = 2;
-        b(a);
+        b(direction);
         return 1;
     }
 }
@@ -272,13 +444,13 @@ u8 sub_8058B54(void)
     return DoForcedMovement(4, npc_use_some_d2s);
 }
 
-static u8 ForcedMovement_Slide(u8 a, void (*b)(u8))
+static u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     playerMapObj->mapobj_bit_10 = 1;
     playerMapObj->mapobj_bit_9 = 1;
-    return DoForcedMovement(a, b);
+    return DoForcedMovement(direction, b);
 }
 
 u8 ForcedMovement_SlideSouth(void)
@@ -329,19 +501,19 @@ u8 ForcedMovement_MuddySlope(void)
     }
 }
 
-static void MovePlayerNotOnBike(u8 a, u16 b)
+static void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
 {
-    gUnknown_0830FBEC[CheckMovementInputNotOnBike(a)](a, b);
+    gUnknown_0830FBEC[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
 
-static u8 CheckMovementInputNotOnBike(u8 a)
+static u8 CheckMovementInputNotOnBike(u8 direction)
 {
-    if (a == 0)
+    if (direction == DIR_NONE)
     {
         gPlayerAvatar.running2 = 0;
         return 0;
     }
-    else if (a != player_get_direction_upper_nybble() && gPlayerAvatar.running2 != 2)
+    else if (direction != player_get_direction_upper_nybble() && gPlayerAvatar.running2 != 2)
     {
         gPlayerAvatar.running2 = 1;
         return 1;
@@ -353,81 +525,81 @@ static u8 CheckMovementInputNotOnBike(u8 a)
     }
 }
 
-void PlayerNotOnBikeNotMoving(u8 a, u16 b)
+void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
 {
     PlayerFaceDirection(player_get_direction_lower_nybble());
 }
 
-void PlayerNotOnBikeTurningInPlace(u8 a, u16 b)
+void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
 {
-    PlayerTurnInPlace(a);
+    PlayerTurnInPlace(direction);
 }
 
-void sub_8058D0C(u8 a, u16 b)
+void sub_8058D0C(u8 direction, u16 heldKeys)
 {
-    u8 r1 = CheckForPlayerAvatarCollision(a);
+    u8 r1 = CheckForPlayerAvatarCollision(direction);
 
     switch (r1)
     {
     case 6:
-        PlayerJumpLedge(a);
+        PlayerJumpLedge(direction);
         return;
     default:
         if (r1 > 8 || r1 < 5)
-            PlayerNotOnBikeCollide(a);
+            PlayerNotOnBikeCollide(direction);
         return;
     case 0:
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         {
-            sub_80593C4(a);
+            sub_80593C4(direction);
             return;
         }
-        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (b & 2) && FlagGet(SYS_B_DASH)
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
          && sub_80E5DEC(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
-            sub_805940C(a);
+            sub_805940C(direction);
             gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         }
         else
         {
-            PlayerGoSpeed0(a);
+            PlayerGoSpeed0(direction);
         }
     }
 }
 
-static u8 CheckForPlayerAvatarCollision(u8 a)
+static u8 CheckForPlayerAvatarCollision(u8 direction)
 {
     s16 x, y;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     x = playerMapObj->coords2.x;
     y = playerMapObj->coords2.y;
-    MoveCoords(a, &x, &y);
-    return CheckForFieldObjectCollision(playerMapObj, x, y, a, MapGridGetMetatileBehaviorAt(x, y));
+    MoveCoords(direction, &x, &y);
+    return CheckForFieldObjectCollision(playerMapObj, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
 
-u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
+u8 CheckForFieldObjectCollision(struct MapObject *a, s16 x, s16 y, u8 direction, u8 e)
 {
-    u8 sp0;
+    u8 collision;
 
-    sp0 = npc_block_way(a, b, c, d);
-    if (sp0 == 3 && sub_8058EF0(b, c, d))
+    collision = npc_block_way(a, x, y, direction);
+    if (collision == 3 && sub_8058EF0(x, y, direction))
         return 5;
-    if (ShouldJumpLedge(b, c, d))
+    if (ShouldJumpLedge(x, y, direction))
     {
         IncrementGameStat(0x2B);
-        return 6;
+        return COLLISION_LEDGE_JUMP;
     }
-    if (sp0 == 4 && sub_8058F6C(b, c, d))
+    if (collision == 4 && sub_8058F6C(x, y, direction))
         return 7;
 
-    if (sp0 == 0)
+    if (collision == 0)
     {
-        if (CheckForRotatingGatePuzzleCollision(d, b, c))
+        if (CheckForRotatingGatePuzzleCollision(direction, x, y))
             return 8;
-        check_acro_bike_metatile(b, c, e, &sp0);
+        check_acro_bike_metatile(x, y, e, &collision);
     }
-    return sp0;
+    return collision;
 }
 
 static u8 sub_8058EF0(s16 a, s16 b, u8 c)
@@ -515,7 +687,7 @@ static void DoPlayerAvatarTransition(void)
 #else
             if (flags & 1)
             {
-                register void (**funcs)(struct MapObject *) asm("r0") = gUnknown_0830FC14;
+                register void (*const *funcs)(struct MapObject *) asm("r0") = gUnknown_0830FC14;
                 funcs[i](&gMapObjects[gPlayerAvatar.mapObjectId]);
             }
 #endif
@@ -540,7 +712,7 @@ void PlayerAvatarTransition_MachBike(struct MapObject *a)
     sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(1));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(2);
-    sub_80E5FCC(0, 0);
+    BikeClearState(0, 0);
 }
 
 void PlayerAvatarTransition_AcroBike(struct MapObject *a)
@@ -548,7 +720,7 @@ void PlayerAvatarTransition_AcroBike(struct MapObject *a)
     sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(2));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(4);
-    sub_80E5FCC(0, 0);
+    BikeClearState(0, 0);
     sub_80E6084();
 }
 
@@ -632,12 +804,12 @@ static bool8 PlayerCheckIfAnimFinishedOrInactive(void)
 
 static void player_set_x22(u8 a)
 {
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_22 = a;
+    gMapObjects[gPlayerAvatar.mapObjectId].animId = a;
 }
 
 u8 player_get_x22(void)
 {
-    return gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_22;
+    return gMapObjects[gPlayerAvatar.mapObjectId].animId;
 }
 
 static void sub_8059348(u8 a)
@@ -645,66 +817,66 @@ static void sub_8059348(u8 a)
     FieldObjectForceSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], a);
 }
 
-void player_npc_set_state_and_x22_etc(u8 a, u8 b)
+void PlayerSetAnimId(u8 animId, u8 b)
 {
     if (!PlayerIsAnimActive())
     {
         player_set_x22(b);
-        FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], a);
+        FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], animId);
     }
 }
 
 void PlayerGoSpeed0(u8 a)
 {
-    player_npc_set_state_and_x22_etc(GetGoSpeed0AnimId(a), 2);
+    PlayerSetAnimId(GetGoSpeed0AnimId(a), 2);
 }
 
 void sub_80593C4(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060744(a), 2);
+    PlayerSetAnimId(sub_8060744(a), 2);
 }
 
 void npc_use_some_d2s(u8 a)
 {
-    player_npc_set_state_and_x22_etc(d2s_08064034(a), 2);
+    PlayerSetAnimId(d2s_08064034(a), 2);
 }
 
 void sub_80593F4(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_806079C(a), 2);
+    PlayerSetAnimId(sub_806079C(a), 2);
 }
 
 void sub_805940C(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_80607F4(a), 2);
+    PlayerSetAnimId(sub_80607F4(a), 2);
 }
 
 void PlayerOnBikeCollide(u8 a)
 {
     PlayCollisionSoundIfNotFacingWarp(a);
-    player_npc_set_state_and_x22_etc(GetStepInPlaceDelay16AnimId(a), 2);
+    PlayerSetAnimId(GetStepInPlaceDelay16AnimId(a), 2);
 }
 
 static void PlayerNotOnBikeCollide(u8 a)
 {
     PlayCollisionSoundIfNotFacingWarp(a);
-    player_npc_set_state_and_x22_etc(GetStepInPlaceDelay32AnimId(a), 2);
+    PlayerSetAnimId(GetStepInPlaceDelay32AnimId(a), 2);
 }
 
-void PlayerFaceDirection(u8 a)
+void PlayerFaceDirection(u8 direction)
 {
-    player_npc_set_state_and_x22_etc(GetFaceDirectionAnimId(a), 1);
+    PlayerSetAnimId(GetFaceDirectionAnimId(direction), 1);
 }
 
-void PlayerTurnInPlace(u8 a)
+void PlayerTurnInPlace(u8 direction)
 {
-    player_npc_set_state_and_x22_etc(GetStepInPlaceDelay8AnimId(a), 1);
+    PlayerSetAnimId(GetStepInPlaceDelay8AnimId(direction), 1);
 }
 
-void PlayerJumpLedge(u8 a)
+void PlayerJumpLedge(u8 direction)
 {
     PlaySE(SE_DANSA);
-    player_npc_set_state_and_x22_etc(GetJumpLedgeAnimId(a), 8);
+    PlayerSetAnimId(GetJumpLedgeAnimId(direction), 8);
 }
 
 void sub_80594C0(void)
@@ -718,62 +890,63 @@ void sub_80594C0(void)
 
 void sub_8059504(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_80609D8(a), 1);
+    PlayerSetAnimId(sub_80609D8(a), 1);
 }
 
-void sub_805951C(u8 a)
+//normal to wheelie
+void PlayerStartWheelie(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060A04(a), 1);
+    PlayerSetAnimId(sub_8060A04(a), 1);
 }
 
 void sub_8059534(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060A30(a), 1);
+    PlayerSetAnimId(sub_8060A30(a), 1);
 }
 
 void sub_805954C(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    player_npc_set_state_and_x22_etc(sub_8060A5C(a), 1);
+    PlayerSetAnimId(sub_8060A5C(a), 1);
 }
 
 void sub_8059570(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    player_npc_set_state_and_x22_etc(sub_8060A88(a), 2);
+    PlayerSetAnimId(sub_8060A88(a), 2);
 }
 
 void sub_8059594(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    player_npc_set_state_and_x22_etc(sub_8060AB4(a), 8);
+    PlayerSetAnimId(sub_8060AB4(a), 8);
 }
 
-void sub_80595B8(u8 a)
+void sub_80595B8(u8 direction)
 {
     PlaySE(SE_JITE_PYOKO);
-    player_npc_set_state_and_x22_etc(sub_8060878(a), 1);
+    PlayerSetAnimId(sub_8060878(direction), 1);
 }
 
-void sub_80595DC(u8 a)
+void sub_80595DC(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
-    player_npc_set_state_and_x22_etc(sub_8060AE0(a), 2);
+    PlayerSetAnimId(sub_8060AE0(direction), 2);
 }
 
 void sub_8059600(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060B0C(a), 2);
+    PlayerSetAnimId(sub_8060B0C(a), 2);
 }
 
 void sub_8059618(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060B38(a), 2);
+    PlayerSetAnimId(sub_8060B38(a), 2);
 }
 
 void sub_8059630(u8 a)
 {
-    player_npc_set_state_and_x22_etc(sub_8060B64(a), 2);
+    PlayerSetAnimId(sub_8060B64(a), 2);
 }
 
 static void PlayCollisionSoundIfNotFacingWarp(u8 a)
@@ -862,49 +1035,49 @@ void sub_80597F4(void)
 
 u8 sub_805983C(u8 a, u8 b)
 {
-    return gUnknown_0830FC44[a][b];
+    return sRivalAvatarGfxIds[a][b];
 }
 
-static u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b)
+static u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    return gUnknown_0830FC54[a][b];
+    return sPlayerAvatarGfxIds[state][gender];
 }
 
-u8 GetPlayerAvatarGraphicsIdByStateId(u8 a)
+u8 GetPlayerAvatarGraphicsIdByStateId(u8 state)
 {
-    return GetPlayerAvatarGraphicsIdByStateIdAndGender(a, gPlayerAvatar.gender);
+    return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
 }
 
-u8 unref_sub_8059888(u8 a)
+u8 unref_GetRivalAvatarGenderByGraphcsId(u8 gfxId)
 {
-    switch (a)
+    switch (gfxId)
     {
-    case 0x69:
-    case 0x6A:
-    case 0x6B:
-    case 0x6C:
-    case 0x6D:
-    case 0x70:
-    case 0x8A:
-    case 0xC0:
+    case MAP_OBJ_GFX_RIVAL_MAY_NORMAL:
+    case MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE:
+    case MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE:
+    case MAP_OBJ_GFX_RIVAL_MAY_SURFING:
+    case MAP_OBJ_GFX_RIVAL_MAY_FIELD_MOVE:
+    case MAP_OBJ_GFX_MAY_UNDERWATER:
+    case MAP_OBJ_GFX_MAY_FISHING:
+    case MAP_OBJ_GFX_MAY_WATERING:
         return FEMALE;
     default:
         return MALE;
     }
 }
 
-u8 GetPlayerAvatarGenderByGraphicsId(u8 a)
+u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
 {
-    switch (a)
+    switch (gfxId)
     {
-    case 0x59:
-    case 0x5A:
-    case 0x5B:
-    case 0x5C:
-    case 0x5D:
-    case 0x70:
-    case 0x8A:
-    case 0xC0:
+    case MAP_OBJ_GFX_MAY_NORMAL:
+    case MAP_OBJ_GFX_MAY_MACH_BIKE:
+    case MAP_OBJ_GFX_MAY_ACRO_BIKE:
+    case MAP_OBJ_GFX_MAY_SURFING:
+    case MAP_OBJ_GFX_MAY_FIELD_MOVE:
+    case MAP_OBJ_GFX_MAY_UNDERWATER:
+    case MAP_OBJ_GFX_MAY_FISHING:
+    case MAP_OBJ_GFX_MAY_WATERING:
         return FEMALE;
     default:
         return MALE;
@@ -930,7 +1103,7 @@ bool8 PartyHasMonWithSurf(void)
 
 bool8 IsPlayerSurfingNorth(void)
 {
-    if (player_get_direction_upper_nybble() == 2 && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    if (player_get_direction_upper_nybble() == DIR_NORTH && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return TRUE;
     else
         return FALSE;
@@ -995,14 +1168,14 @@ void SetPlayerAvatarExtraStateTransition(u8 a, u8 b)
     DoPlayerAvatarTransition();
 }
 
-void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d)
+void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 gender)
 {
     struct UnknownStruct_FPA s;
     u8 mapObjectId;
     struct MapObject *mapObject;
 
     s.unk0 = 0xFF;
-    s.unk1 = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, d);
+    s.unk1 = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, gender);
     s.unk4 = a - 7;
     s.unk6 = b - 7;
     s.unk8 = 0;
@@ -1023,7 +1196,7 @@ void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d)
     gPlayerAvatar.running1 = 0;
     gPlayerAvatar.mapObjectId = mapObjectId;
     gPlayerAvatar.spriteId = mapObject->spriteId;
-    gPlayerAvatar.gender = d;
+    gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(0x21);
 }
 
@@ -1207,9 +1380,8 @@ u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject)
 
 u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
 {
-    u8 directions[4];
+    u8 directions[] = {DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
 
-    memcpy(directions, gUnknown_0830FCA8, sizeof(directions));
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         u8 direction;
@@ -1226,9 +1398,8 @@ u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
 
 u8 sub_805A178(struct Task *task, struct MapObject *mapObject)
 {
-    u8 arr[5];
+    const u8 arr[] = {16, 16, 17, 18, 19};
 
-    memcpy(arr, gUnknown_0830FCAC, sizeof(arr));
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         FieldObjectSetSpecialAnim(mapObject, arr[task->data[2]]);
@@ -1300,6 +1471,26 @@ static void sub_805A2D0(u8 taskId)
 
 /* Fishing */
 
+static u8 (*const gUnknown_0830FCB4[])(struct Task *) =
+{
+    Fishing1,
+    Fishing2,
+    Fishing3,
+    Fishing4,
+    Fishing5,
+    Fishing6,
+    Fishing7,
+    Fishing8,
+    Fishing9,
+    Fishing10,
+    Fishing11,
+    Fishing12,
+    Fishing13,
+    Fishing14,
+    Fishing15,
+    Fishing16,
+};
+
 static void Task_Fishing(u8 taskId);
 static void sub_805A954(void);
 
@@ -1327,12 +1518,10 @@ u8 Fishing1(struct Task *task)
 
 u8 Fishing2(struct Task *task)
 {
-    s16 arr1[3];
-    s16 arr2[3];
     struct MapObject *playerMapObj;
+    const s16 arr1[] = {1, 1, 1};
+    const s16 arr2[] = {1, 3, 6};
 
-    memcpy(arr1, gUnknown_0830FCF4, sizeof(arr1));
-    memcpy(arr2, gUnknown_0830FCFA, sizeof(arr2));
     task->data[12] = 0;
     task->data[13] = arr1[task->data[15]] + (Random() % arr2[task->data[15]]);
     task->data[14] = gMapObjects[gPlayerAvatar.mapObjectId].graphicsId;
@@ -1373,9 +1562,8 @@ u8 Fishing4(struct Task *task)
 
 u8 Fishing5(struct Task *task)
 {
-    u8 dot[2];
+    const u8 dot[] = _"·";
 
-    memcpy(dot, gUnknown_0830FD00, sizeof(dot));
     sub_805A954();
     task->data[1]++;
     if (gMain.newKeys & A_BUTTON)
@@ -1429,9 +1617,8 @@ u8 Fishing7(struct Task *task)
 
 u8 Fishing8(struct Task *task)
 {
-    s16 arr[3];
+    const s16 arr[3] = {36, 33, 30};
 
-    memcpy(arr, gUnknown_0830FD02, sizeof(arr));
     sub_805A954();
     task->data[1]++;
     if (task->data[1] >= arr[task->data[15]])
@@ -1443,9 +1630,13 @@ u8 Fishing8(struct Task *task)
 
 u8 Fishing9(struct Task *task)
 {
-    s16 arr[3][2];
+    const s16 arr[][2] =
+    {
+        {0, 0},
+        {40, 10},
+        {70, 30}
+    };
 
-    memcpy(arr, gUnknown_0830FD08, sizeof(arr));
     sub_805A954();
     task->data[0]++;
     if (task->data[12] < task->data[13])

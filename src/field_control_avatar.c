@@ -112,66 +112,66 @@ extern void sub_8080F58(void);
 extern void sub_80BC038();
 extern void DoCoordEventWeather(u8);
 
-void sub_8067EEC(struct UnkInputStruct *s)
+void FieldClearPlayerInput(struct FieldInput *input)
 {
-    s->input_field_0_0 = 0;
-    s->input_field_0_1 = 0;
-    s->input_field_0_2 = 0;
-    s->input_field_0_3 = 0;
-    s->input_field_0_4 = 0;
-    s->input_field_0_5 = 0;
-    s->input_field_0_6 = 0;
-    s->input_field_0_7 = 0;
-    s->input_field_1_0 = 0;
-    s->input_field_1_1 = 0;
-    s->input_field_1_2 = 0;
-    s->input_field_1_3 = 0;
-    s->input_field_2 = 0;
+    input->pressedAButton = 0;
+    input->input_field_0_1 = 0;
+    input->pressedStartButton = 0;
+    input->pressedSelectButton = 0;
+    input->input_field_0_4 = 0;
+    input->input_field_0_5 = 0;
+    input->input_field_0_6 = 0;
+    input->pressedBButton = 0;
+    input->input_field_1_0 = 0;
+    input->input_field_1_1 = 0;
+    input->input_field_1_2 = 0;
+    input->input_field_1_3 = 0;
+    input->dpadDirection = 0;
 }
 
-void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys)
+void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
     u8 r6 = gPlayerAvatar.running1;
     u8 r9 = gPlayerAvatar.running2;
-    bool8 r7 = MetatileBehavior_IsMoveTile(cur_mapdata_block_role_at_player_pos(r9));
+    bool8 forcedMove = MetatileBehavior_IsMoveTile(cur_mapdata_block_role_at_player_pos(r9));
 
-    if ((r6 == 2 && r7 == FALSE) || r6 == 0)
+    if ((r6 == 2 && forcedMove == FALSE) || r6 == 0)
     {
         if (sub_80E6034() != 4)
         {
-            if (keys & START_BUTTON)
-                pStruct->input_field_0_2 = TRUE;
-            if (keys & SELECT_BUTTON)
-                pStruct->input_field_0_3 = TRUE;
-            if (keys & A_BUTTON)
-                pStruct->input_field_0_0 = TRUE;
-            if (keys & B_BUTTON)
-                pStruct->input_field_0_7 = TRUE;
+            if (newKeys & START_BUTTON)
+                input->pressedStartButton = TRUE;
+            if (newKeys & SELECT_BUTTON)
+                input->pressedSelectButton = TRUE;
+            if (newKeys & A_BUTTON)
+                input->pressedAButton = TRUE;
+            if (newKeys & B_BUTTON)
+                input->pressedBButton = TRUE;
         }
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
         {
-            pStruct->input_field_0_4 = TRUE;
-            pStruct->input_field_0_5 = TRUE;
+            input->input_field_0_4 = TRUE;
+            input->input_field_0_5 = TRUE;
         }
     }
-    if (r7 == FALSE)
+    if (forcedMove == FALSE)
     {
         if (r6 == 2 && r9 == 2)
-            pStruct->input_field_0_6 = TRUE;
-        if (r7 == FALSE && r6 == 2)
-            pStruct->input_field_0_1 = TRUE;
+            input->input_field_0_6 = TRUE;
+        if (forcedMove == FALSE && r6 == 2)
+            input->input_field_0_1 = TRUE;
     }
     if (heldKeys & DPAD_UP)
-        pStruct->input_field_2 = 2;
+        input->dpadDirection = DIR_NORTH;
     else if (heldKeys & DPAD_DOWN)
-        pStruct->input_field_2 = 1;
+        input->dpadDirection = DIR_SOUTH;
     else if (heldKeys & DPAD_LEFT)
-        pStruct->input_field_2 = 3;
+        input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
-        pStruct->input_field_2 = 4;
+        input->dpadDirection = DIR_EAST;
 }
 
-int sub_8068024(struct UnkInputStruct *s)
+int sub_8068024(struct FieldInput *input)
 {
     struct MapPosition position;
     u8 r6;
@@ -184,39 +184,39 @@ int sub_8068024(struct UnkInputStruct *s)
         return TRUE;
     if (mapheader_run_first_tag2_script_list_match() == 1)
         return TRUE;
-    if (s->input_field_0_7 && sub_80687A4() == 1)
+    if (input->pressedBButton && sub_80687A4() == 1)
         return TRUE;
-    if (s->input_field_0_6)
+    if (input->input_field_0_6)
     {
         IncrementGameStat(5);
         if (sub_80687E4(&position, r4, r6) == 1)
             return TRUE;
     }
-    if (s->input_field_0_1 && is_it_battle_time_3(r4) == 1)
+    if (input->input_field_0_1 && is_it_battle_time_3(r4) == 1)
         return TRUE;
-    if (s->input_field_0_4 && s->input_field_2 == r6)
+    if (input->input_field_0_4 && input->dpadDirection == r6)
     {
         if (mapheader_run_first_tag2_script_list_match_conditionally(&position, r4, r6) == 1)
             return TRUE;
     }
     player_get_next_pos_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
-    if (s->input_field_0_0 && sub_80681F0(&position, r4, r6) == 1)
+    if (input->pressedAButton && sub_80681F0(&position, r4, r6) == 1)
         return TRUE;
-    if (s->input_field_0_5 && s->input_field_2 == r6)
+    if (input->input_field_0_5 && input->dpadDirection == r6)
     {
         if (map_warp_consider_2_to_inside(&position, r4, r6) == 1)
             return TRUE;
     }
-    if (s->input_field_0_0 && sub_8068770() == 1)
+    if (input->pressedAButton && sub_8068770() == 1)
         return TRUE;
-    if (s->input_field_0_2)
+    if (input->pressedStartButton)
     {
         PlaySE(SE_WIN_OPEN);
         sub_8071310();
         return TRUE;
     }
-    if (s->input_field_0_3 && sub_80A6D1C() == 1)
+    if (input->pressedSelectButton && sub_80A6D1C() == 1)
         return TRUE;
     return FALSE;
 }
