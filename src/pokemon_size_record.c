@@ -61,9 +61,9 @@ static u8 TranslateBigMonSizeTableIndex(u16 a)
 {
     u8 i;
 
-    for(i = 1; i < 15; i++)
+    for (i = 1; i < 15; i++)
     {
-        if(a < sBigMonSizeTable[i].unk4)
+        if (a < sBigMonSizeTable[i].unk4)
             return i - 1;
     }
     return i;
@@ -99,7 +99,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 
 static u8 CompareMonSize(u16 species, u16 *sizeRecord)
 {
-    if(gScriptResult == 0xFF)
+    if (gScriptResult == 0xFF)
     {
         return 0;
     }
@@ -108,7 +108,7 @@ static u8 CompareMonSize(u16 species, u16 *sizeRecord)
         struct Pokemon *pkmn = &gPlayerParty[gScriptResult];
 
         // UB: Too few arguments for function 'GetMonData'
-        if(GetMonData(pkmn, MON_DATA_IS_EGG) == TRUE || GetMonData(pkmn, MON_DATA_SPECIES) != species)
+        if (GetMonData(pkmn, MON_DATA_IS_EGG) == TRUE || GetMonData(pkmn, MON_DATA_SPECIES) != species)
         {
             return 1;
         }
@@ -122,7 +122,7 @@ static u8 CompareMonSize(u16 species, u16 *sizeRecord)
             newSize = GetMonSize(species, sizeParams);
             oldSize = GetMonSize(species, *sizeRecord);
             FormatMonSizeRecord(gStringVar2, newSize);
-            if(newSize <= oldSize)
+            if (newSize <= oldSize)
             {
                 return 2;
             }
@@ -142,7 +142,7 @@ static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
 
     FormatMonSizeRecord(gStringVar3, size);
     StringCopy(gStringVar1, gSpeciesNames[species]);
-    if(*sizeRecord == 0x8100)
+    if (*sizeRecord == 0x8100)
         StringCopy(gStringVar2, gOtherText_Marco);
     else
         StringCopy(gStringVar2, gSaveBlock2.playerName);
@@ -193,20 +193,20 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
     u8 data = 1;
     u8 arr[] = { 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E };
 
-    if(index < 11 && ribbonId < 65)
+    if (index < 11 && ribbonId < 65)
     {
         gSaveBlock1.giftRibbons[index] = ribbonId;
-        for(i = 0; i < 6; i++)
+        for (i = 0; i < 6; i++)
         {
             struct Pokemon *pkmn = &gPlayerParty[i];
 
-            if(GetMonData(pkmn, MON_DATA_SPECIES) != 0 && GetMonData(pkmn, MON_DATA_SANITY_BIT3) == 0)
+            if (GetMonData(pkmn, MON_DATA_SPECIES) != 0 && GetMonData(pkmn, MON_DATA_SANITY_BIT3) == 0)
             {
                 SetMonData(pkmn, arr[index], &data);
                 gotRibbon = TRUE;
             }
         }
-        if(gotRibbon)
+        if (gotRibbon)
             FlagSet(SYS_RIBBON_GET);
     }
 }

@@ -91,7 +91,7 @@ static void VBlankCB(void)
 
 void CB2_InitOptionMenu(void)
 {
-    switch(gMain.state)
+    switch (gMain.state)
     {
         default:
         case 0:
@@ -112,12 +112,12 @@ void CB2_InitOptionMenu(void)
             REG_BG0VOFS = 0;
             addr = (u8 *)VRAM;
             size = 0x18000;
-            while(1)
+            while (1)
             {
                 DmaFill16(3, 0, addr, 0x1000);
                 addr += 0x1000;
                 size -= 0x1000;
-                if(size <= 0x1000)
+                if (size <= 0x1000)
                 {
                     DmaFill16(3, 0, addr, size);
                     break;
@@ -144,7 +144,7 @@ void CB2_InitOptionMenu(void)
             gMain.state++;
             break;
         case 4:
-            if(!MultistepInitMenuWindowContinue())
+            if (!MultistepInitMenuWindowContinue())
                 return;
             gMain.state++;
             break;
@@ -227,7 +227,7 @@ void CB2_InitOptionMenu(void)
 
 static void Task_OptionMenuFadeIn(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         gTasks[taskId].func = Task_OptionMenuProcessInput;
     }
@@ -235,26 +235,26 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    if(gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
-        if(gTasks[taskId].data[TD_MENUSELECTION] == MENUITEM_CANCEL)
+        if (gTasks[taskId].data[TD_MENUSELECTION] == MENUITEM_CANCEL)
             gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if(gMain.newKeys & DPAD_UP)
+    else if (gMain.newKeys & DPAD_UP)
     {
-        if(gTasks[taskId].data[TD_MENUSELECTION] > 0)
+        if (gTasks[taskId].data[TD_MENUSELECTION] > 0)
             gTasks[taskId].data[TD_MENUSELECTION]--;
         else
             gTasks[taskId].data[TD_MENUSELECTION] = 6;
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
     }
-    else if(gMain.newKeys & DPAD_DOWN)
+    else if (gMain.newKeys & DPAD_DOWN)
     {
-        if(gTasks[taskId].data[TD_MENUSELECTION] <= 5)
+        if (gTasks[taskId].data[TD_MENUSELECTION] <= 5)
             gTasks[taskId].data[TD_MENUSELECTION]++;
         else
             gTasks[taskId].data[TD_MENUSELECTION] = 0;
@@ -262,7 +262,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else
     {
-        switch(gTasks[taskId].data[TD_MENUSELECTION])
+        switch (gTasks[taskId].data[TD_MENUSELECTION])
         {
             case MENUITEM_TEXTSPEED:
                 gTasks[taskId].data[TD_TEXTSPEED] = TextSpeed_ProcessInput(gTasks[taskId].data[TD_TEXTSPEED]);
@@ -307,7 +307,7 @@ static void Task_OptionMenuSave(u8 taskId)
 
 static void Task_OptionMenuFadeOut(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
         SetMainCallback2(gMain.savedCallback);
@@ -328,7 +328,7 @@ static void DrawOptionMenuChoice(u8 *text, u8 x, u8 y, u8 style)
     u8 dst[16];
     u16 i;
 
-    for(i = 0; *text != EOS && i <= 14; i++)
+    for (i = 0; *text != EOS && i <= 14; i++)
         dst[i] = *(text++);
 
     dst[2] = style;
@@ -338,16 +338,16 @@ static void DrawOptionMenuChoice(u8 *text, u8 x, u8 y, u8 style)
 
 static u8 TextSpeed_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
-        if(selection <= 1)
+        if (selection <= 1)
             selection++;
         else
             selection = 0;
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
-        if(selection != 0)
+        if (selection != 0)
             selection--;
         else
             selection = 2;
@@ -371,7 +371,7 @@ static void TextSpeed_DrawChoices(u8 selection)
 
 static u8 BattleScene_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
         selection ^= 1;
     return selection;
 }
@@ -390,7 +390,7 @@ static void BattleScene_DrawChoices(u8 selection)
 
 static u8 BattleStyle_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
         selection ^= 1;
     return selection;
 }
@@ -409,7 +409,7 @@ static void BattleStyle_DrawChoices(u8 selection)
 
 static u8 Sound_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;
         SetPokemonCryStereo(selection);
@@ -431,17 +431,17 @@ static void Sound_DrawChoices(u8 selection)
 
 static u8 FrameType_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
-        if(selection <= 18)
+        if (selection <= 18)
             selection++;
         else
             selection = 0;
         MenuLoadTextWindowGraphics_OverrideFrameType(selection);
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
-        if(selection != 0)
+        if (selection != 0)
             selection--;
         else
             selection = 19;
@@ -458,11 +458,11 @@ static void FrameType_DrawChoices(u8 selection)
     u8 n = selection + 1;
     u16 i;
 
-    for(i = 0; gSystemText_Terminator[i] != EOS && i <= 5; i++)
+    for (i = 0; gSystemText_Terminator[i] != EOS && i <= 5; i++)
         text[i] = gSystemText_Terminator[i];
 
     //Convert number to decimal string
-    if(n / 10 != 0)
+    if (n / 10 != 0)
     {
         text[i] = n / 10 + CHAR_0;
         i++;
@@ -484,16 +484,16 @@ static void FrameType_DrawChoices(u8 selection)
 
 static u8 ButtonMode_ProcessInput(u8 selection)
 {
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
-        if(selection <= 1)
+        if (selection <= 1)
             selection++;
         else
             selection = 0;
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
-        if(selection != 0)
+        if (selection != 0)
             selection--;
         else
             selection = 2;

@@ -1506,7 +1506,7 @@ void sub_813DA64(struct Sprite *sprite)
 {
     sprite->data7++;
 
-    switch(sprite->data0)
+    switch (sprite->data0)
     {
     case 0:
     default:

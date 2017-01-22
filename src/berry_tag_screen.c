@@ -191,42 +191,42 @@ bool8 sub_81462B8(void)
 
     switch (unk_2000000.var_1FFFF)
     {
-        case 0:
-            LZDecompressVram(gBerryCheck_Gfx, (void *) VRAM);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 1:
-            LZDecompressVram(gUnknown_08E788E4, (void *) VRAM + 0x2800);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 2:
-            LZDecompressVram(gUnknown_08E78A84, (void *) VRAM + 0x3000);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 3:
-            for (i = 0; i < 0x400; i++)
-            {
-                if (gSaveBlock2.playerGender == MALE)
-                    gBGTilemapBuffers[2][i] = 0x4042;
-                else
-                    gBGTilemapBuffers[2][i] = 0x5042;
-            }
-            addr = (void *)(VRAM + 0x3800);
-            DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 4:
-            LoadCompressedPalette(gBerryCheck_Pal, 0, 96 * 2);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 5:
-            LoadCompressedObjectPic(&gUnknown_083C1F74);
-            unk_2000000.var_1FFFF += 1;
-            break;
-        case 6:
-            LoadCompressedObjectPalette(&gUnknown_083C1F7C);
-            unk_2000000.var_1FFFF = 0;
-            return TRUE;
+    case 0:
+        LZDecompressVram(gBerryCheck_Gfx, (void *)VRAM);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 1:
+        LZDecompressVram(gUnknown_08E788E4, (void *)VRAM + 0x2800);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 2:
+        LZDecompressVram(gUnknown_08E78A84, (void *)VRAM + 0x3000);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 3:
+        for (i = 0; i < 0x400; i++)
+        {
+            if (gSaveBlock2.playerGender == MALE)
+                gBGTilemapBuffers[2][i] = 0x4042;
+            else
+                gBGTilemapBuffers[2][i] = 0x5042;
+        }
+        addr = (void *)(VRAM + 0x3800);
+        DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 4:
+        LoadCompressedPalette(gBerryCheck_Pal, 0, 96 * 2);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 5:
+        LoadCompressedObjectPic(&gUnknown_083C1F74);
+        unk_2000000.var_1FFFF += 1;
+        break;
+    case 6:
+        LoadCompressedObjectPalette(&gUnknown_083C1F7C);
+        unk_2000000.var_1FFFF = 0;
+        return TRUE;
     }
 
     return FALSE;
@@ -309,7 +309,7 @@ static void sub_8146600(u8 berry)
     struct Berry *berryInfo;
     u16 i;
 
-    berryInfo = GetBerryInfo(berry +1);
+    berryInfo = GetBerryInfo(berry + 1);
     for (i = 0; i < 5; i++)
         gUnknown_0203932E.circles[i] = (u16)gUnknown_0203932E.circles[i] | 0xFFFF;
 
@@ -341,7 +341,8 @@ void sub_81466A0(void)
 }
 
 __attribute__((naked))
-static void sub_81466E8(u8 taskId, s8 direction) {
+static void sub_81466E8(u8 taskId, s8 direction)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r8\n\
@@ -440,7 +441,7 @@ _0814678C:\n\
 void sub_8146798(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    
+
     gUnknown_030041B4 = (gUnknown_030041B4 + taskData[0]) & 0xFF;
     if ((taskData[0] > 0 && gUnknown_030041B4 == 144)
      || (taskData[0] < 0 && gUnknown_030041B4 == 112))
@@ -457,7 +458,8 @@ void sub_8146798(u8 taskId)
 }
 
 __attribute__((naked))
-static void sub_8146810(s8 berry) {
+static void sub_8146810(s8 berry)
+{
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	lsls r0, 24\n\

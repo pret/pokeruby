@@ -26,42 +26,50 @@ extern u8 BattleText_Tie[];
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
 #define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset)      PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
 
-void sub_800DC24(void) {
+void sub_800DC24(void)
+{
 
-    if (gUnknown_02024D26 == 3) {
+    if (gUnknown_02024D26 == 3)
+    {
         PRINT_MESSAGE(BattleText_Tie, 160, CENTER_MESSAGE_X);
         return;
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_40) {
+    if (gBattleTypeFlags & BATTLE_TYPE_40)
+    {
         // Double battle?
 
-        if (gUnknown_02024D26 == 1) {
+        if (gUnknown_02024D26 == 1)
+        {
 
             // lp_field_18 = player position?
-            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
-                case 0:
-                case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
-                    return;
+            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18)
+            {
+            case 0:
+            case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
+                PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+                return;
 
-                case 1:
-                case 3: PRINT_MESSAGE_RIGHT(BattleText_Win, 160)
-                    PRINT_MESSAGE_LEFT(BattleText_Loss, 168)
-                    return;
+            case 1:
+            case 3: PRINT_MESSAGE_RIGHT(BattleText_Win, 160)
+                PRINT_MESSAGE_LEFT(BattleText_Loss, 168)
+                return;
             }
-        } else {
+        }
+        else
+        {
 
-            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
-                case 1:
-                case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                    PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
-                    return;
+            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18)
+            {
+            case 1:
+            case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
+                PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+                return;
 
-                case 0:
-                case 2: PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-                    PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
-                    return;
+            case 0:
+            case 2: PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
+                PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+                return;
             }
         }
 
@@ -69,19 +77,28 @@ void sub_800DC24(void) {
     }
 
 
-    if (gUnknown_02024D26 == 1) {
-        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
+    if (gUnknown_02024D26 == 1)
+    {
+        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0)
+        {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
             PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
-        } else {
+        }
+        else
+        {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
         }
-    } else {
-        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
+    }
+    else
+    {
+        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0)
+        {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
-        } else {
+        }
+        else
+        {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
             PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
         }

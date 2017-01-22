@@ -1573,12 +1573,12 @@ void sub_8054BA8(void)
 
     addr = (void *)VRAM;
     size = 0x18000;
-    while(1)
+    while (1)
     {
         DmaFill16(3, 0, addr, 0x1000);
         addr += 0x1000;
         size -= 0x1000;
-        if(size <= 0x1000)
+        if (size <= 0x1000)
         {
             DmaFill16(3, 0, addr, size);
             break;

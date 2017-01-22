@@ -133,7 +133,8 @@ u8 sub_803C434(u8 a1)
 }
 #else
 __attribute__((naked))
-u8 sub_803C434(u8 a1) {
+u8 sub_803C434(u8 a1)
+{
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	lsls r0, 24\n\

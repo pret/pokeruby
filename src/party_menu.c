@@ -8,23 +8,25 @@
 
 #define DATA_COUNT (6)
 
-struct Unk201C000 {
-    /* 0x00 */ struct Pokemon *pokemon;
-    /* 0x04 */ u8 var04;
-    /* 0x05 */ u8 var05;
-    /* 0x06 */ u16 var06;
-               u8 pad_08[10];
-    /* 0x12 */ u16 var12;
+struct Unk201C000
+{
+    /*0x00*/ struct Pokemon *pokemon;
+    /*0x04*/ u8 var04;
+    /*0x05*/ u8 var05;
+    /*0x06*/ u16 var06;
+    u8 pad_08[10];
+    /*0x12*/ u16 var12;
 };
 
-struct Unk201B260 {
-    /* 0x00 */ u8 var00;
-    /* 0x01 */ u8 var01;
-               u8 pad_02[2];
-    /* 0x04 */ s16 var04[DATA_COUNT * 2];
-               u8 pad_1C[2];
-    /* 0x1E */ u16 var1E;
-    /* 0x20 */ u16 var20;
+struct Unk201B260
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    u8 pad_02[2];
+    /*0x04*/ s16 var04[DATA_COUNT * 2];
+    u8 pad_1C[2];
+    /*0x1E*/ u16 var1E;
+    /*0x20*/ u16 var20;
 };
 
 extern struct Unk201B260 unk_201B260;
@@ -44,7 +46,8 @@ void PartyMenuUpdateLevelOrStatus(struct Pokemon *, u8);
 u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
 void sub_80701DC(u8 taskId);
 
-u8 sub_806E834(u8 *message, u8 arg1) {
+u8 sub_806E834(u8 *message, u8 arg1)
+{
     u8 taskId;
 
     gUnknown_0202E8F6 = 1;
@@ -58,14 +61,17 @@ u8 sub_806E834(u8 *message, u8 arg1) {
     return taskId;
 }
 
-static void sub_806E884(u8 taskId) {
-    if (MenuUpdateWindowText() == 0) {
+static void sub_806E884(u8 taskId)
+{
+    if (MenuUpdateWindowText() == 0)
+    {
         return;
     }
 
     gUnknown_0202E8F6 = 0;
 
-    if (gTasks[taskId].data[0] == 0) {
+    if (gTasks[taskId].data[0] == 0)
+    {
         MenuZeroFillWindowRect(3, 14, 26, 19);
     }
 
@@ -75,13 +81,15 @@ static void sub_806E884(u8 taskId) {
 asm(".section .text_b");
 
 #ifdef NONMATCHING
-void sub_8070088(u8 taskId) {
+void sub_8070088(u8 taskId)
+{
     u8 dummyTaskId;
     struct Task *task2;
 
     gTasks[taskId].func = TaskDummy;
 
-    if (GetMonData(&gPlayerParty[unk_201C000.var04], MON_DATA_SPECIES) == 0) {
+    if (GetMonData(&gPlayerParty[unk_201C000.var04], MON_DATA_SPECIES) == 0)
+    {
         gTasks[taskId].func = sub_80701DC;
         return;
     }
@@ -92,7 +100,8 @@ void sub_8070088(u8 taskId) {
     task2->data[10] = GetMonData(unk_201C000.pokemon, MON_DATA_MAX_HP);
     task2->data[11] = GetMonData(unk_201C000.pokemon, MON_DATA_HP);
 
-    if (ExecuteTableBasedItemEffect__(unk_201C000.var05, unk_201C000.var06, 0)) {
+    if (ExecuteTableBasedItemEffect__(unk_201C000.var05, unk_201C000.var06, 0))
+    {
         DestroyTask(dummyTaskId);
         gTasks[taskId].func = sub_80701DC;
         return;
@@ -107,7 +116,7 @@ void sub_8070088(u8 taskId) {
     unk_201B260.var01 = 2; // u8
 
     task2->data[12] = GetMonData(unk_201C000.pokemon, MON_DATA_HP) - task2->data[11];
-    task2->data[14]= 1;
+    task2->data[14] = 1;
     unk_201B260.var1E = 1; // u16
     unk_201B260.var20 = 1; // u16
 
@@ -116,7 +125,8 @@ void sub_8070088(u8 taskId) {
 }
 #else
 __attribute__((naked))
-void sub_8070088(void) {
+void sub_8070088(void)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -275,12 +285,14 @@ _080701D8: .4byte sub_806F8AC\n\
 
 asm(".section .text_c");
 
-void sub_8070848(u8 taskId) {
+void sub_8070848(u8 taskId)
+{
     u8 i;
 
     MenuDrawTextWindow(11, 0, 29, 7);
 
-    for (i = 0; i < DATA_COUNT; i++) {
+    for (i = 0; i < DATA_COUNT; i++)
+    {
         u8 x;
         u8 y;
         u32 stat;
@@ -299,9 +311,12 @@ void sub_8070848(u8 taskId) {
         MenuPrint_PixelCoords(gUnknown_08376D04[i], (x + 1) * 8, y * 8, 1);
 
 
-        if (i == 2) {
+        if (i == 2)
+        {
             MenuPrint_PixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 0);
-        } else {
+        }
+        else
+        {
             MenuPrint_PixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 1);
         }
 

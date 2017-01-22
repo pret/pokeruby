@@ -21,7 +21,7 @@ void npcs_clear_ids_and_state(void)
 {
     u8 i;
 
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         npc_clear_ids_and_state(&gMapObjects[i]);
 }
 

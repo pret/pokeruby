@@ -107,7 +107,7 @@ static void CB2_SaveFailedScreen(void)
 {
     u16 ime;
 
-    switch(gMain.state)
+    switch (gMain.state)
     {
         case 0:
         default:

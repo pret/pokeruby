@@ -70,7 +70,7 @@ enum {
 //Retrieves one of the available starter Pokemon
 u16 GetStarterPokemon(u16 n)
 {
-    if(n > 3)
+    if (n > 3)
         n = 0;
     return gStarterMons[n];
 }
@@ -190,7 +190,7 @@ static void Task_StarterChoose2(u8 taskId)
 {
     u8 selection = gTasks[taskId].data[TD_STARTERSELECTION];
 
-    if(gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
         u8 spriteId;
 
@@ -224,12 +224,12 @@ static void Task_StarterChoose2(u8 taskId)
     }
     else
     {
-        if((gMain.newKeys & DPAD_LEFT) && selection > 0)
+        if ((gMain.newKeys & DPAD_LEFT) && selection > 0)
         {
             gTasks[taskId].data[TD_STARTERSELECTION]--;
             CreateStarterPokemonLabel(selection, gTasks[taskId].data[TD_STARTERSELECTION]);
         }
-        else if((gMain.newKeys & DPAD_RIGHT) && selection < 2)
+        else if ((gMain.newKeys & DPAD_RIGHT) && selection < 2)
         {
             gTasks[taskId].data[TD_STARTERSELECTION]++;
             CreateStarterPokemonLabel(selection, gTasks[taskId].data[TD_STARTERSELECTION]);
@@ -239,7 +239,7 @@ static void Task_StarterChoose2(u8 taskId)
 
 static void Task_StarterChoose3(u8 taskId)
 {
-    if(gSprites[gTasks[taskId].data[TD_CIRCLE_SPRITE_ID]].affineAnimEnded &&
+    if (gSprites[gTasks[taskId].data[TD_CIRCLE_SPRITE_ID]].affineAnimEnded &&
       gSprites[gTasks[taskId].data[TD_CIRCLE_SPRITE_ID]].pos1.x == STARTER_PKMN_POS_X &&
       gSprites[gTasks[taskId].data[TD_CIRCLE_SPRITE_ID]].pos1.y == STARTER_PKMN_POS_Y)
     {
@@ -261,7 +261,7 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch(ProcessMenuInputNoWrap_())
+    switch (ProcessMenuInputNoWrap_())
     {
         case 0:		//YES
             //Return the starter choice and exit.
@@ -319,7 +319,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     u8 labelTop;
     u8 labelBottom;
 
-    if(prevSelection != 0xFF)
+    if (prevSelection != 0xFF)
     {
         //Remove the old Pokemon label
         MenuZeroFillWindowRect(
@@ -341,7 +341,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     //Copy category string to label
     dstIndex = 8;
     srcIndex = 0;
-    while(category[srcIndex] != EOS && srcIndex <= 10)
+    while (category[srcIndex] != EOS && srcIndex <= 10)
     {
         labelText[dstIndex] = category[srcIndex];
         srcIndex++;
@@ -406,7 +406,7 @@ void sub_810A62C(struct Sprite *sprite)
 //Sprite callback
 void sub_810A68C(struct Sprite *sprite)
 {
-    if(gTasks[sprite->data0].data[TD_STARTERSELECTION] == sprite->data1)
+    if (gTasks[sprite->data0].data[TD_STARTERSELECTION] == sprite->data1)
         StartSpriteAnimIfDifferent(sprite, 1);
     else
         StartSpriteAnimIfDifferent(sprite, 0);
@@ -416,12 +416,12 @@ void sub_810A68C(struct Sprite *sprite)
 void StarterPokemonSpriteAnimCallback(struct Sprite *sprite)
 {
     //Move sprite to upper center of screen
-    if(sprite->pos1.x > STARTER_PKMN_POS_X)
+    if (sprite->pos1.x > STARTER_PKMN_POS_X)
         sprite->pos1.x -= 4;
-    if(sprite->pos1.x < STARTER_PKMN_POS_X)
+    if (sprite->pos1.x < STARTER_PKMN_POS_X)
         sprite->pos1.x += 4;
-    if(sprite->pos1.y > STARTER_PKMN_POS_Y)
+    if (sprite->pos1.y > STARTER_PKMN_POS_Y)
         sprite->pos1.y -= 2;
-    if(sprite->pos1.y < STARTER_PKMN_POS_Y)
+    if (sprite->pos1.y < STARTER_PKMN_POS_Y)
         sprite->pos1.y += 2;
 }

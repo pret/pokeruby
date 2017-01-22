@@ -379,40 +379,45 @@ struct MonCoords
 };
 
 #ifdef NONMATCHING
-static void sub_8106AC4(u16 species, u8 arg1) {
+static void sub_8106AC4(u16 species, u8 arg1)
+{
     void *pal;
 
     // Unsure what gUnknown_03005E8C->var0 is supposed to be.
     pal = species_and_otid_get_pal(species, gUnknown_03005E8C->var4, gUnknown_03005E8C->var0);
     LZDecompressVram(pal, gUnknown_03005E90);
 
-    if (arg1 == 1) {
+    if (arg1 == 1)
+    {
         HandleLoadSpecialPokePic(
-                &gMonFrontPicTable[species],
-                gMonFrontPicCoords[species].x,
-                gMonFrontPicCoords[species].y,
-                0x2000000,
-                gUnknown_081FAF4C[1],
-                species,
-                (u32) gUnknown_03005E8C->var0
+            &gMonFrontPicTable[species],
+            gMonFrontPicCoords[species].x,
+            gMonFrontPicCoords[species].y,
+            0x2000000,
+            gUnknown_081FAF4C[1],
+            species,
+            (u32)gUnknown_03005E8C->var0
         );
         sub_8106B90(gUnknown_081FAF4C[1], gUnknown_03005E90, gUnknown_03005E10);
-    } else {
+    }
+    else
+    {
         HandleLoadSpecialPokePic(
-                &gMonBackPicTable[species],
-                gMonBackPicCoords[species].x,
-                gMonBackPicCoords[species].y,
-                0x2000000,
-                gUnknown_081FAF4C[0],
-                species,
-                (u32) gUnknown_03005E8C->var0
+            &gMonBackPicTable[species],
+            gMonBackPicCoords[species].x,
+            gMonBackPicCoords[species].y,
+            0x2000000,
+            gUnknown_081FAF4C[0],
+            species,
+            (u32)gUnknown_03005E8C->var0
         );
         sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
     }
 }
 #else
 __attribute__((naked))
-static void sub_8106AC4(u16 arg0, u8 arg2) {
+static void sub_8106AC4(u16 arg0, u8 arg2)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r8\n\
@@ -657,28 +662,28 @@ static void sub_8106C40(u8 arg0, u8 arg1)
         switch (gUnknown_03005E8C->contestType / 3)
         {
         case CONTEST_COOL:
-            RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTiles_0, (void *)VRAM);
             RLUnCompWram(gPictureFrameTilemap_0, gUnknown_03005E10);
             break;
         case CONTEST_BEAUTY:
-            RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTiles_1, (void *)VRAM);
             RLUnCompWram(gPictureFrameTilemap_1, gUnknown_03005E10);
             break;
         case CONTEST_CUTE:
-            RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTiles_2, (void *)VRAM);
             RLUnCompWram(gPictureFrameTilemap_2, gUnknown_03005E10);
             break;
         case CONTEST_SMART:
-            RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTiles_3, (void *)VRAM);
             RLUnCompWram(gPictureFrameTilemap_3, gUnknown_03005E10);
             break;
         case CONTEST_TOUGH:
-            RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTiles_4, (void *)VRAM);
             RLUnCompWram(gPictureFrameTilemap_4, gUnknown_03005E10);
             break;
         }
 
-        #define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y) * 32 + (x)])
+#define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y) * 32 + (x)])
 
         // Set the background
         for (y = 0; y < 20; y++)
@@ -698,36 +703,36 @@ static void sub_8106C40(u8 arg0, u8 arg1)
         for (x = 0; x < 16; x++)
             VRAM_PICTURE_DATA(x + 7, 2) = (*gUnknown_03005E10)[2][7];
 
-        #undef VRAM_PICTURE_DATA
+#undef VRAM_PICTURE_DATA
     }
     else if (arg0 < 8)
     {
-        RLUnCompVram(gPictureFrameTiles_5, (void *) VRAM);
-        RLUnCompVram(gPictureFrameTilemap_5, (void *) (VRAM + 0x6000));
+        RLUnCompVram(gPictureFrameTiles_5, (void *)VRAM);
+        RLUnCompVram(gPictureFrameTilemap_5, (void *)(VRAM + 0x6000));
     }
     else
     {
         switch (gUnknown_03005E8C->contestType / 3)
         {
         case CONTEST_COOL:
-            RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_0, (void *) (VRAM + 0x6000));
+            RLUnCompVram(gPictureFrameTiles_0, (void *)VRAM);
+            RLUnCompVram(gPictureFrameTilemap_0, (void *)(VRAM + 0x6000));
             break;
         case CONTEST_BEAUTY:
-            RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_1, (void *) (VRAM + 0x6000));
+            RLUnCompVram(gPictureFrameTiles_1, (void *)VRAM);
+            RLUnCompVram(gPictureFrameTilemap_1, (void *)(VRAM + 0x6000));
             break;
         case CONTEST_CUTE:
-            RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_2, (void *) (VRAM + 0x6000));
+            RLUnCompVram(gPictureFrameTiles_2, (void *)VRAM);
+            RLUnCompVram(gPictureFrameTilemap_2, (void *)(VRAM + 0x6000));
             break;
         case CONTEST_SMART:
-            RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_3, (void *) (VRAM + 0x6000));
+            RLUnCompVram(gPictureFrameTiles_3, (void *)VRAM);
+            RLUnCompVram(gPictureFrameTilemap_3, (void *)(VRAM + 0x6000));
             break;
         case CONTEST_TOUGH:
-            RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_4, (void *) (VRAM + 0x6000));
+            RLUnCompVram(gPictureFrameTiles_4, (void *)VRAM);
+            RLUnCompVram(gPictureFrameTilemap_4, (void *)(VRAM + 0x6000));
             break;
         }
     }

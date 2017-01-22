@@ -22,7 +22,7 @@ extern struct LoadedSaveData gLoadedSaveData[];
 
 void CheckForFlashMemory(void)
 {
-    if(!IdentifyFlash())
+    if (!IdentifyFlash())
     {
         gUnknown_3004820 = 1;
         InitFlashTimer();
@@ -81,7 +81,7 @@ static void SaveMapObjects(void)
 {
     int i;
 
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gSaveBlock1.mapObjects[i] = gMapObjects[i];
 }
 
@@ -89,7 +89,7 @@ static void LoadMapObjects(void)
 {
     int i;
 
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gMapObjects[i] = gSaveBlock1.mapObjects[i];
 }
 
@@ -110,27 +110,27 @@ void LoadPlayerBag(void)
     int i;
 
     // load player items.
-    for(i = 0; i < 20; i++)
+    for (i = 0; i < 20; i++)
         gLoadedSaveData->items[i] = gSaveBlock1.bagPocket_Items[i];
 
     // load player key items.
-    for(i = 0; i < 20; i++)
+    for (i = 0; i < 20; i++)
         gLoadedSaveData->keyItems[i] = gSaveBlock1.bagPocket_KeyItems[i];
 
     // load player pokeballs.
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gLoadedSaveData->pokeBalls[i] = gSaveBlock1.bagPocket_PokeBalls[i];
 
     // load player TMs and HMs.
-    for(i = 0; i < 64; i++)
+    for (i = 0; i < 64; i++)
         gLoadedSaveData->TMsHMs[i] = gSaveBlock1.bagPocket_TMHM[i];
 
     // load player berries.
-    for(i = 0; i < 46; i++)
+    for (i = 0; i < 46; i++)
         gLoadedSaveData->berries[i] = gSaveBlock1.bagPocket_Berries[i];
 
     // load mail.
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gLoadedSaveData->mail[i] = gSaveBlock1.mail[i];
 }
 
@@ -139,26 +139,26 @@ void SavePlayerBag(void)
     int i;
 
     // save player items.
-    for(i = 0; i < 20; i++)
+    for (i = 0; i < 20; i++)
         gSaveBlock1.bagPocket_Items[i] = gLoadedSaveData->items[i];
 
     // save player key items.
-    for(i = 0; i < 20; i++)
+    for (i = 0; i < 20; i++)
         gSaveBlock1.bagPocket_KeyItems[i] = gLoadedSaveData->keyItems[i];
 
     // save player pokeballs.
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gSaveBlock1.bagPocket_PokeBalls[i] = gLoadedSaveData->pokeBalls[i];
 
     // save player TMs and HMs.
-    for(i = 0; i < 64; i++)
+    for (i = 0; i < 64; i++)
         gSaveBlock1.bagPocket_TMHM[i] = gLoadedSaveData->TMsHMs[i];
 
     // save player berries.
-    for(i = 0; i < 46; i++)
+    for (i = 0; i < 46; i++)
         gSaveBlock1.bagPocket_Berries[i] = gLoadedSaveData->berries[i];
 
     // save mail.
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
         gSaveBlock1.mail[i] = gLoadedSaveData->mail[i];
 }

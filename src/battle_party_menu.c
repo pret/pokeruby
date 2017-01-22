@@ -352,7 +352,7 @@ static void Task_809538C(void)
             SetMainCallback2(sub_806AEDC);
             return;
         }
-    } while(sub_80F9344() != 1);
+    } while (sub_80F9344() != 1);
 }
 
 static void Task_HandlePopupMenuInput(u8 taskId)

@@ -17,7 +17,8 @@
 
 typedef void (*Callback)(void);
 
-struct Struct2000000 {
+struct Struct2000000
+{
     /*0x00*/ u8 var_0;
     /*0x01*/ bool8 var_1;
     /*0x02*/ u8 var_2;
@@ -70,7 +71,8 @@ void FormatPlayTime(u8 *playtime, u16 hours, u16 minutes, s16 colon);
 
 u16 GetPokedexSeenCount(void);
 
-enum {
+enum
+{
     TD_0,
     TD_1,
     TD_CALLBACK,
@@ -144,13 +146,15 @@ static void TrainerCard_Back_PrintPokemonTrades_Label(void);
 static void TrainerCard_Back_PrintPokemonTrades(void);
 void unref_sub_8094588(u16 left, u16 top);
 
-void sub_8093110(Callback arg1) {
+void sub_8093110(Callback arg1)
+{
     sub_80932AC(arg1);
     SetMainCallback2(sub_8093174);
     unk_2000000.language = GAME_LANGUAGE;
 }
 
-void sub_8093130(u8 playerIndex, Callback arg2) {
+void sub_8093130(u8 playerIndex, Callback arg2)
+{
     struct Struct2000000* r2;
     struct LinkPlayer* r3;
     struct LinkPlayerMapObject* r4;
@@ -169,53 +173,57 @@ void sub_8093130(u8 playerIndex, Callback arg2) {
 }
 
 
-static void sub_8093174(void) {
-    switch (gMain.state) {
-        case 0:
-            sub_8093534();
-            sub_8093688();
-            gMain.state += 1;
-            break;
-        case 1:
-            sub_8093598();
-            gMain.state += 1;
-            break;
-        case 2:
-            sub_80935EC();
-            gMain.state += 1;
-            break;
-        case 3:
-            sub_8093610();
-            sub_80937A4();
-            gMain.state += 1;
-            break;
-        case 4:
-            sub_80937BC();
-            gMain.state += 1;
-        case 5:
-            if (MultistepInitMenuWindowContinue() == FALSE) {
-                return;
-            }
-            gMain.state += 1;
-            break;
-        case 6:
-            sub_80937F0();
-            gMain.state += 1;
-            break;
-        case 7:
-            sub_80937D8();
-            gMain.state += 1;
-            break;
-        case 8:
-            nullsub_15();
-            sub_8093800();
-            sub_8093550();
-            SetMainCallback2(sub_809323C);
-            break;
+static void sub_8093174(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        sub_8093534();
+        sub_8093688();
+        gMain.state += 1;
+        break;
+    case 1:
+        sub_8093598();
+        gMain.state += 1;
+        break;
+    case 2:
+        sub_80935EC();
+        gMain.state += 1;
+        break;
+    case 3:
+        sub_8093610();
+        sub_80937A4();
+        gMain.state += 1;
+        break;
+    case 4:
+        sub_80937BC();
+        gMain.state += 1;
+    case 5:
+        if (MultistepInitMenuWindowContinue() == FALSE)
+        {
+            return;
+        }
+        gMain.state += 1;
+        break;
+    case 6:
+        sub_80937F0();
+        gMain.state += 1;
+        break;
+    case 7:
+        sub_80937D8();
+        gMain.state += 1;
+        break;
+    case 8:
+        nullsub_15();
+        sub_8093800();
+        sub_8093550();
+        SetMainCallback2(sub_809323C);
+        break;
     }
 }
 
-static void sub_809323C(void) {
+static void sub_809323C(void)
+{
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -237,43 +245,51 @@ static void sub_8093254(void)
         DmaCopy16(3, gUnknown_03004DE0, gUnknown_03004DE0 + 0x780, 320);
 }
 
-static void sub_80932AC(Callback callBack) {
+static void sub_80932AC(Callback callBack)
+{
     u8 taskId = CreateTask(nullsub_60, 0xFF);
     struct Task *task = &gTasks[taskId];
     task->data[TD_0] = FALSE;
-    StoreWordInTwoHalfwords(&task->data[TD_CALLBACK], (u32) callBack);
+    StoreWordInTwoHalfwords(&task->data[TD_CALLBACK], (u32)callBack);
 }
 
-static void sub_80932E4(u8 arg1, Callback callBack) {
+static void sub_80932E4(u8 arg1, Callback callBack)
+{
     u8 taskId = CreateTask(nullsub_60, 0xFF);
 
     struct Task *task = &gTasks[taskId];
     task->data[TD_0] = TRUE;
     task->data[TD_1] = arg1;
-    StoreWordInTwoHalfwords(&task->data[TD_CALLBACK], (u32) callBack);
+    StoreWordInTwoHalfwords(&task->data[TD_CALLBACK], (u32)callBack);
 }
 
-void sub_8093324(void) {
+void sub_8093324(void)
+{
     u8 taskId = FindTaskIdByFunc(nullsub_60);
     struct Task *task = &gTasks[taskId];
     unk_2000000.var_1 = task->data[TD_0];
 
-    LoadWordFromTwoHalfwords((u16 *) &task->data[TD_CALLBACK], (u32 *) &unk_2000000.var_60);
+    LoadWordFromTwoHalfwords((u16 *)&task->data[TD_CALLBACK], (u32 *)&unk_2000000.var_60);
 
-    if (unk_2000000.var_1) {
-        struct TrainerCard (*trainerCards)[4] = &gTrainerCards;
+    if (unk_2000000.var_1)
+    {
+        struct TrainerCard(*trainerCards)[4] = &gTrainerCards;
         s16 var = task->data[TD_1];
         struct TrainerCard *dest = &(*trainerCards)[var];
         memcpy(&unk_2000000.var_64, dest, sizeof(struct TrainerCard));
-    } else {
+    }
+    else
+    {
         sub_8093390(&unk_2000000.var_64);
     }
 }
 
-static void nullsub_60(u8 taskid) {
+static void nullsub_60(u8 taskid)
+{
 }
 
-void sub_8093390(struct TrainerCard *arg1) {
+void sub_8093390(struct TrainerCard *arg1)
+{
     u32 playTime;
     bool32 enteredHallOfFame;
     bool8 r4;
@@ -285,7 +301,8 @@ void sub_8093390(struct TrainerCard *arg1) {
 
     playTime = GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME);
     enteredHallOfFame = GetGameStat(GAME_STAT_ENTERED_HOF);
-    if (!enteredHallOfFame) {
+    if (!enteredHallOfFame)
+    {
         playTime = 0;
     }
     arg1->firstHallOfFameA = playTime >> 16;
@@ -314,82 +331,97 @@ void sub_8093390(struct TrainerCard *arg1) {
     // Battle tower?
     arg1->battleTowerWins = gSaveBlock2.filler_A8.var_4C8;
     arg1->battleTowerLosses = gSaveBlock2.filler_A8.var_4CA;
-    if (arg1->battleTowerWins > 9999) {
+    if (arg1->battleTowerWins > 9999)
+    {
         arg1->battleTowerWins = 9999;
     }
-    if (arg1->battleTowerLosses > 9999) {
+    if (arg1->battleTowerLosses > 9999)
+    {
         arg1->battleTowerLosses = 9999;
     }
 
     r4 = FALSE;
-    if (sub_80C4D50() > 4) {
+    if (sub_80C4D50() > 4)
+    {
         r4 = TRUE;
     }
     arg1->var_4 = r4;
 
     arg1->money = gSaveBlock1.money;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++)
+    {
         arg1->var_28[i] = gSaveBlock1.unk2B1C[i];
     }
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < 8; i++)
+    {
         arg1->playerName[i] = gSaveBlock2.playerName[i];
     }
 
     arg1->stars = sub_80934F4(arg1);
 }
 
-u8 sub_80934C4(u8 id) {
+u8 sub_80934C4(u8 id)
+{
     return gTrainerCards[id].stars;
 }
 
-static u32 sav12_xor_get_clamped_above(u8 index, u32 maxVal) {
+static u32 sav12_xor_get_clamped_above(u8 index, u32 maxVal)
+{
     u32 value = GetGameStat(index);
 
-    if (value > maxVal) {
+    if (value > maxVal)
+    {
         value = maxVal;
     }
 
     return value;
 }
 
-static u8 sub_80934F4(struct TrainerCard *trainerCard) {
+static u8 sub_80934F4(struct TrainerCard *trainerCard)
+{
     u8 value = 0;
 
-    if (trainerCard->firstHallOfFameA != 0 || trainerCard->firstHallOfFameB != 0 || trainerCard->firstHallOfFameC != 0) {
+    if (trainerCard->firstHallOfFameA != 0 || trainerCard->firstHallOfFameB != 0 || trainerCard->firstHallOfFameC != 0)
+    {
         value += 1;
     }
 
-    if (trainerCard->var_3) {
+    if (trainerCard->var_3)
+    {
         value += 1;
     }
 
-    if (trainerCard->battleTowerLosses > 49) {
+    if (trainerCard->battleTowerLosses > 49)
+    {
         value += 1;
     }
 
-    if (trainerCard->var_4) {
+    if (trainerCard->var_4)
+    {
         value += 1;
     }
 
     return value;
 }
 
-static void sub_8093534(void) {
+static void sub_8093534(void)
+{
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
     REG_DISPCNT = 0;
 }
 
-static void sub_8093550(void) {
+static void sub_8093550(void)
+{
     u16 backup;
 
     SetVBlankCallback(sub_8093254);
 
     backup = REG_IME;
     REG_IME = 0;
-    REG_IE |= INTR_FLAG_VBLANK| INTR_FLAG_HBLANK;
+    REG_IE |= INTR_FLAG_VBLANK | INTR_FLAG_HBLANK;
     REG_IME = backup;
 
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR | DISPSTAT_HBLANK_INTR;
@@ -397,7 +429,8 @@ static void sub_8093550(void) {
 }
 
 __attribute__((naked))
-void sub_8093598() {
+void sub_8093598()
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	sub sp, 0x4\n\
@@ -445,7 +478,8 @@ _080935E8: .4byte 0x81000800\n\
 }
 
 __attribute__((naked))
-void sub_80935EC() {
+void sub_80935EC()
+{
     asm(".syntax unified\n\
 	sub sp, 0x4\n\
 	movs r2, 0xE0\n\
@@ -468,7 +502,8 @@ _0809360C: .4byte 0x81000200\n\
 }
 
 __attribute__((naked))
-void sub_8093610() {
+void sub_8093610()
+{
     asm(".syntax unified\n\
 	push {r4,r5,lr}\n\
 	ldr r5, _08093664 @ =REG_BG0CNT\n\
@@ -525,7 +560,8 @@ _08093684: .4byte 0x00000a03\n\
 }
 
 #ifdef NONMATCHING
-static void sub_8093688(void) {
+static void sub_8093688(void)
+{
     int i;
 
     asm_comment("WIP");
@@ -540,7 +576,8 @@ static void sub_8093688(void) {
     unk_2000000.var_5 = FALSE;
     unk_2000000.var_6 = FALSE;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++)
+    {
         sub_80EB3FC(unk_2000000.var_20[i], unk_2000000.var_64.var_28[i]);
     }
 
@@ -549,7 +586,8 @@ static void sub_8093688(void) {
 #else
 
 __attribute__((naked))
-static void sub_8093688(void) {
+static void sub_8093688(void)
+{
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	bl sub_8093324\n\
@@ -592,7 +630,8 @@ _080936D0: .4byte 0x02000000\n\
 
 #endif
 
-void sub_80936D4(void) {
+void sub_80936D4(void)
+{
     unk_2000000.var_7 = FALSE;
     unk_2000000.var_8 = FALSE;
     unk_2000000.var_9 = FALSE;
@@ -603,86 +642,104 @@ void sub_80936D4(void) {
 
     memset(unk_2000000.var_e, 0, sizeof(unk_2000000.var_e));
 
-    if (unk_2000000.var_64.hasPokedex) {
+    if (unk_2000000.var_64.hasPokedex)
+    {
         unk_2000000.var_7 += TRUE;
     }
 
     if (unk_2000000.var_64.firstHallOfFameA != 0 || unk_2000000.var_64.firstHallOfFameB != 0 ||
-        unk_2000000.var_64.firstHallOfFameC != 0) {
+        unk_2000000.var_64.firstHallOfFameC != 0)
+    {
         unk_2000000.var_8 += TRUE;
     }
 
-    if (unk_2000000.var_64.linkBattleWins != 0 || unk_2000000.var_64.linkBattleLosses != 0) {
+    if (unk_2000000.var_64.linkBattleWins != 0 || unk_2000000.var_64.linkBattleLosses != 0)
+    {
         unk_2000000.var_9 += TRUE;
     }
 
-    if (unk_2000000.var_64.battleTowerWins != 0 || unk_2000000.var_64.battleTowerLosses != 0) {
+    if (unk_2000000.var_64.battleTowerWins != 0 || unk_2000000.var_64.battleTowerLosses != 0)
+    {
         unk_2000000.var_a += TRUE;
     }
 
-    if (unk_2000000.var_64.contestsWithFriends != 0) {
+    if (unk_2000000.var_64.contestsWithFriends != 0)
+    {
         unk_2000000.var_b += TRUE;
     }
 
-    if (unk_2000000.var_64.pokeblocksWithFriends != 0) {
+    if (unk_2000000.var_64.pokeblocksWithFriends != 0)
+    {
         unk_2000000.var_c += TRUE;
     }
 
-    if (unk_2000000.var_64.pokemonTrades != 0) {
+    if (unk_2000000.var_64.pokemonTrades != 0)
+    {
         unk_2000000.var_d += TRUE;
     }
 
-    if (!unk_2000000.var_1) {
+    if (!unk_2000000.var_1)
+    {
         u32 badgeFlag;
         int i;
 
         i = 0;
         badgeFlag = BADGE01_GET;
-        while (TRUE) {
-            if (FlagGet(badgeFlag)) {
+        while (TRUE)
+        {
+            if (FlagGet(badgeFlag))
+            {
                 unk_2000000.var_e[i] += TRUE;
             }
 
             badgeFlag += 1;
             i += 1;
-            if (badgeFlag > BADGE08_GET) {
+            if (badgeFlag > BADGE08_GET)
+            {
                 break;
             }
         }
     }
 }
 
-void sub_80937A4() {
+void sub_80937A4()
+{
     ResetPaletteFade();
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
 }
 
-void sub_80937BC() {
+void sub_80937BC()
+{
     SetUpWindowConfig(&WindowConfig_TrainerCard_Back_Values);
     MultistepInitMenuWindowBegin(&WindowConfig_TrainerCard_Back_Values);
 }
 
-static void sub_80937D8() {
+static void sub_80937D8()
+{
     sub_8093E04();
     sub_8093E28();
     sub_8093F64();
     sub_8093DAC();
 }
 
-static void sub_80937F0() {
+static void sub_80937F0()
+{
     sub_8093EF8();
 }
 
-static void nullsub_15(void) {
+static void nullsub_15(void)
+{
 }
 
-static void sub_8093800() {
+static void sub_8093800()
+{
     sub_809380C();
 }
 
-static void sub_809380C() {
+static void sub_809380C()
+{
     u8 taskId;
 
     taskId = CreateTask(sub_809382C, 0);
@@ -690,7 +747,8 @@ static void sub_809380C() {
 }
 
 __attribute__((naked))
-static void sub_809382C(u8 taskId) {
+static void sub_809382C(u8 taskId)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	lsls r0, 24\n\
@@ -722,7 +780,8 @@ _08093860: .4byte gTasks\n\
 }
 
 __attribute__((naked))
-bool8 sub_8093864() {
+bool8 sub_8093864()
+{
     asm(".syntax unified\n\
 	push {r4,r5,lr}\n\
 	sub sp, 0x4\n\
@@ -758,7 +817,8 @@ _080938A4: .4byte gSaveBlock2\n\
 }
 
 __attribute__((naked))
-bool8 sub_80938A8() {
+bool8 sub_80938A8()
+{
     asm(".syntax unified\n\
 	push {lr}\n\
 	ldr r0, _080938C4 @ =gPaletteFade\n\
@@ -782,7 +842,8 @@ _080938C8: .4byte 0x02000000\n\
 }
 
 __attribute__((naked))
-bool8 sub_80938CC() {
+bool8 sub_80938CC()
+{
     asm(".syntax unified\n\
 	push {lr}\n\
 	ldr r0, _080938E4 @ =gMain\n\
@@ -829,7 +890,8 @@ _08093914:\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093918() {
+bool8 sub_8093918()
+{
     sub_8093A28();
     PlaySE(SE_CARD);
 
@@ -838,8 +900,10 @@ bool8 sub_8093918() {
     return FALSE;
 }
 
-bool8 sub_8093938() {
-    if (sub_8093A48()) {
+bool8 sub_8093938()
+{
+    if (sub_8093A48())
+    {
         unk_2000000.var_0 = 2;
     }
 
@@ -847,7 +911,8 @@ bool8 sub_8093938() {
 }
 
 __attribute__((naked))
-bool8 sub_8093954() {
+bool8 sub_8093954()
+{
     asm(".syntax unified\n\
 	push {lr}\n\
 	sub sp, 0x4\n\
@@ -872,35 +937,42 @@ _0809397C: .4byte 0x02000000\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093980() {
-    if (!gPaletteFade.active) {
-        SetMainCallback2((MainCallback) unk_2000000.var_60);
+bool8 sub_8093980()
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2((MainCallback)unk_2000000.var_60);
     }
 
     return FALSE;
 }
 
-static void sub_80939A4(void) {
+static void sub_80939A4(void)
+{
     CreateTask(sub_80939DC, 0);
     BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
 }
 
-static void sub_80939C0(void) {
+static void sub_80939C0(void)
+{
     u8 taskId;
 
     taskId = FindTaskIdByFunc(sub_80939DC);
 
-    if (taskId != 0xFF) {
+    if (taskId != 0xFF)
+    {
         DestroyTask(taskId);
     }
 }
 
-static void sub_80939DC(u8 taskId) {
+static void sub_80939DC(u8 taskId)
+{
     u8 buffer[32];
     struct Task *task;
     task = &gTasks[taskId];
 
-    if (unk_2000000.var_5 != task->data[TD_1]) {
+    if (unk_2000000.var_5 != task->data[TD_1])
+    {
         task->data[TD_1] = unk_2000000.var_5;
         task->data[TD_0] ^= TRUE;
     }
@@ -909,7 +981,8 @@ static void sub_80939DC(u8 taskId) {
     MenuPrint(buffer, 10, 12);
 }
 
-static void sub_8093A28(void) {
+static void sub_8093A28(void)
+{
     u8 taskId;
 
     taskId = CreateTask(sub_8093A68, 0);
@@ -917,7 +990,8 @@ static void sub_8093A28(void) {
 }
 
 __attribute__((naked))
-static u8 sub_8093A48() {
+static u8 sub_8093A48()
+{
     asm(".syntax unified\n\
 	push {lr}\n\
 	ldr r0, _08093A5C @ =sub_8093A68\n\
@@ -939,7 +1013,8 @@ _08093A62:\n\
 }
 
 __attribute__((naked))
-static void sub_8093A68(u8 taskId) {
+static void sub_8093A68(u8 taskId)
+{
     asm(".syntax unified\n\
 	push {r4,r5,lr}\n\
 	lsls r0, 24\n\
@@ -971,7 +1046,8 @@ _08093A9C: .4byte gTasks\n\
 }
 
 __attribute__((naked))
-bool8 sub_8093AA0() {
+bool8 sub_8093AA0()
+{
     asm(".syntax unified\n\
 	push {r4,lr}\n\
 	adds r4, r0, 0\n\
@@ -1012,7 +1088,8 @@ _08093AEC: .4byte sub_8093D7C\n\
 }
 
 __attribute__((naked))
-bool8 sub_8093AF0() {
+bool8 sub_8093AF0()
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -1162,11 +1239,13 @@ _08093C08: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093C0C(struct TrainerCard *trainerCard) {
+bool8 sub_8093C0C(struct TrainerCard *trainerCard)
+{
     sub_80939C0();
     sub_8093DAC();
 
-    if (!unk_2000000.var_3) {
+    if (!unk_2000000.var_3)
+    {
         sub_80939A4();
     }
 
@@ -1176,7 +1255,8 @@ bool8 sub_8093C0C(struct TrainerCard *trainerCard) {
 }
 
 __attribute__((naked))
-bool8 sub_8093C38() {
+bool8 sub_8093C38()
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -1324,7 +1404,8 @@ _08093D4C: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093D50(void) {
+bool8 sub_8093D50(void)
+{
     u8 taskId;
 
     unk_2000000.var_4 = FALSE;
@@ -1338,7 +1419,8 @@ bool8 sub_8093D50(void) {
 }
 
 __attribute__((naked))
-void sub_8093D7C(void) {
+void sub_8093D7C(void)
+{
     asm(".syntax unified\n\
 	ldr r1, _08093DA0 @ =gUnknown_03004DE0\n\
 	ldr r0, _08093DA4 @ =REG_VCOUNT\n\
@@ -1365,15 +1447,20 @@ _08093DA8: .4byte 0x4000012 @ REG_BG0VOFS\n\
     .syntax divided\n");
 }
 
-static void sub_8093DAC(void) {
-    if (unk_2000000.var_3) {
+static void sub_8093DAC(void)
+{
+    if (unk_2000000.var_3)
+    {
         sub_8093DEC();
-    } else {
+    }
+    else
+    {
         sub_8093DC8();
     }
 }
 
-static void sub_8093DC8(void) {
+static void sub_8093DC8(void)
+{
     MenuZeroFillScreen();
     sub_80940E4();
     sub_8093F14();
@@ -1383,7 +1470,8 @@ static void sub_8093DC8(void) {
     sub_8094140();
 }
 
-static void sub_8093DEC(void) {
+static void sub_8093DEC(void)
+{
     MenuZeroFillScreen();
     sub_80940E4();
     sub_8093F48();
@@ -1391,7 +1479,8 @@ static void sub_8093DEC(void) {
 }
 
 __attribute__((naked))
-static void sub_8093E04() {
+static void sub_8093E04()
+{
     asm(".syntax unified\n\
 	ldr r0, _08093E20 @ =REG_BG0VOFS\n\
 	ldr r2, _08093E24 @ =0x0000fffc\n\
@@ -1414,7 +1503,8 @@ _08093E24: .4byte 0x0000fffc\n\
 }
 
 __attribute__((naked))
-static void sub_8093E28(void) {
+static void sub_8093E28(void)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	bl sub_8093EA0\n\
@@ -1471,22 +1561,26 @@ _08093E9C: .4byte 0x80000200\n\
     .syntax divided\n");
 }
 
-void sub_8093EA0(void) {
+void sub_8093EA0(void)
+{
     LoadPalette(gUnknown_083B5EF8[unk_2000000.var_2], 0, 48 * 2);
     LoadPalette(gBadgesPalette, 48, 16 * 2);
     LoadPalette(gUnknown_083B5F4C, 64, 16 * 2);
 
-    if (unk_2000000.var_64.gender != MALE) {
+    if (unk_2000000.var_64.gender != MALE)
+    {
         LoadPalette(gUnknown_083B5F0C, 16, 16 * 2);
     }
 }
 
-static void sub_8093EF8(void) {
-    LoadTrainerGfx_TrainerCard(unk_2000000.var_64.gender, 80, (void *) (VRAM + 0x1880));
+static void sub_8093EF8(void)
+{
+    LoadTrainerGfx_TrainerCard(unk_2000000.var_64.gender, 80, (void *)(VRAM + 0x1880));
 }
 
 __attribute__((naked))
-static void sub_8093F14(void) {
+static void sub_8093F14(void)
+{
     asm(".syntax unified\n\
 	push {lr}\n\
 	sub sp, 0x8\n\
@@ -1514,16 +1608,19 @@ _08093F44: .4byte 0x06004800\n\
     .syntax divided\n");
 }
 
-static void sub_8093F48(void) {
-    CpuFastSet(gUnknown_08E8CFC0, (void *) (VRAM + 0x4800), 320);
+static void sub_8093F48(void)
+{
+    CpuFastSet(gUnknown_08E8CFC0, (void *)(VRAM + 0x4800), 320);
 }
 
-static void sub_8093F64(void) {
-    CpuFastSet(gUnknown_08E8D9C0, (void *) (VRAM + 0x5000), 320);
+static void sub_8093F64(void)
+{
+    CpuFastSet(gUnknown_08E8D9C0, (void *)(VRAM + 0x5000), 320);
 }
 
 __attribute__((naked))
-static void sub_8093F80(void) {
+static void sub_8093F80(void)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	movs r5, 0xC4\n\
@@ -1570,7 +1667,8 @@ _08093FCC: .4byte 0x06004000\n\
 }
 
 __attribute__((naked))
-static void sub_8093FD0(void) {
+static void sub_8093FD0(void)
+{
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	ldr r4, _0809402C @ =0x06004000\n\
@@ -1629,7 +1727,8 @@ _08094034: .4byte 0x0000408f\n\
 }
 
 __attribute__((naked))
-static void sub_8094038(void) {
+static void sub_8094038(void)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r9\n\
@@ -1719,7 +1818,8 @@ _080940E0: .4byte 0x00000402\n\
 }
 
 __attribute__((naked))
-static void sub_80940E4() {
+static void sub_80940E4()
+{
     asm(".syntax unified\n\
 	push {r4,lr}\n\
 	movs r2, 0\n\
@@ -1747,7 +1847,8 @@ _0809410C: .4byte 0x000003ff\n\
 }
 
 __attribute__((naked))
-static void sub_8094110() {
+static void sub_8094110()
+{
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	ldr r6, _0809413C @ =0x06004800\n\
@@ -1778,7 +1879,8 @@ _0809413C: .4byte 0x06004800\n\
 }
 
 
-static void sub_8094140(void) {
+static void sub_8094140(void)
+{
     u8 *buffer;
 
     BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
@@ -1794,7 +1896,8 @@ static void sub_8094140(void) {
     sub_809429C();
 }
 
-static void sub_8094188(void) {
+static void sub_8094188(void)
+{
     BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
     TrainerCard_Back_PrintName();
     TrainerCard_Back_PrintHallOfFameTime_Label();
@@ -1813,21 +1916,25 @@ static void sub_8094188(void) {
     TrainerCard_Back_PrintPokemonTrades();
 }
 
-static void TrainerCard_Front_PrintTrainerID(void) {
+static void TrainerCard_Front_PrintTrainerID(void)
+{
     u8 buffer[8];
 
     ConvertIntToDecimalStringN(buffer, unk_2000000.var_64.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     MenuPrint(buffer, 20, 2);
 }
 
-static void TrainerCard_Front_PrintMoney(void) {
+static void TrainerCard_Front_PrintMoney(void)
+{
     sub_80B7AEC(unk_2000000.var_64.money, 16, 8);
 }
 
-static void TrainerCard_Front_PrintPokedexCount(void) {
+static void TrainerCard_Front_PrintPokedexCount(void)
+{
     u8 buffer[16];
 
-    if (unk_2000000.var_7 == FALSE) {
+    if (unk_2000000.var_7 == FALSE)
+    {
         sub_8094110();
         return;
     }
@@ -1836,7 +1943,8 @@ static void TrainerCard_Front_PrintPokedexCount(void) {
     MenuPrint_RightAligned(buffer, 16, 10);
 }
 
-static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon) {
+static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon)
+{
     u8 buffer[16];
     u16 playTimeHours;
     u16 playTimeMinutes;
@@ -1844,7 +1952,8 @@ static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon) {
     playTimeHours = gSaveBlock2.playTimeHours;
     playTimeMinutes = gSaveBlock2.playTimeMinutes;
 
-    if (unk_2000000.var_1 != 0) {
+    if (unk_2000000.var_1 != 0)
+    {
         playTimeHours = unk_2000000.var_64.playTimeHours;
         playTimeMinutes = unk_2000000.var_64.playTimeMinutes;
     }
@@ -1853,80 +1962,88 @@ static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon) {
     sub_8072C74(arg1, buffer, 48, 1);
 }
 
-static void sub_809429C(void) {
-    u8 *bufferPtr;
+static void sub_809429C(void)
+{
+    u8 *str;
 
-    if (unk_2000000.var_1 == FALSE) {
+    if (unk_2000000.var_1 == FALSE)
+    {
         return;
     }
 
-    bufferPtr = gStringVar1;
-    bufferPtr = StringCopy(bufferPtr, unk_2000000.var_20[0]);
-    bufferPtr[0] = 00;
-    bufferPtr++;
-    bufferPtr = StringCopy(bufferPtr, unk_2000000.var_20[1]);
+    str = gStringVar1;
+    str = StringCopy(str, unk_2000000.var_20[0]);
+    str[0] = 00;
+    str++;
+    str = StringCopy(str, unk_2000000.var_20[1]);
     MenuPrint(gStringVar1, 2, 14);
 
-    bufferPtr = gStringVar1;
-    bufferPtr = StringCopy(bufferPtr, unk_2000000.var_20[2]);
-    bufferPtr[0] = 00;
-    bufferPtr++;
-    bufferPtr = StringCopy(bufferPtr, unk_2000000.var_20[3]);
+    str = gStringVar1;
+    str = StringCopy(str, unk_2000000.var_20[2]);
+    str[0] = 00;
+    str++;
+    str = StringCopy(str, unk_2000000.var_20[3]);
     MenuPrint(gStringVar1, 2, 16);
 }
 
-static void TrainerCard_Back_PrintName(void) {
-    u8 *bufferPtr;
+static void TrainerCard_Back_PrintName(void)
+{
+    u8 *str;
 
-    bufferPtr = gStringVar1;
-    StringCopy(bufferPtr, unk_2000000.var_64.playerName);
-    ConvertInternationalString(bufferPtr, unk_2000000.language);
+    str = gStringVar1;
+    StringCopy(str, unk_2000000.var_64.playerName);
+    ConvertInternationalString(str, unk_2000000.language);
 
-    StringAppend(bufferPtr, gOtherText_TrainersTrainerCard);
+    StringAppend(str, gOtherText_TrainersTrainerCard);
 
     MenuPrint_RightAligned(gStringVar1, 28, 2);
 }
 
-static void TrainerCard_Back_PrintHallOfFameTime_Label(void) {
-    if (unk_2000000.var_8 == FALSE) {
+static void TrainerCard_Back_PrintHallOfFameTime_Label(void)
+{
+    if (unk_2000000.var_8 == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_FirstHOF, 3, 5);
 }
 
-static void TrainerCard_Back_PrintHallOfFameTime(void) {
-    u8 *bufferPtr;
+static void TrainerCard_Back_PrintHallOfFameTime(void)
+{
+    u8 *str;
 
-    if (unk_2000000.var_8 == FALSE) {
+    if (unk_2000000.var_8 == FALSE)
+    {
         return;
     }
 
-    bufferPtr = gStringVar1;
-    bufferPtr = ConvertIntToDecimalStringN(bufferPtr, unk_2000000.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN,
-                                           3);
-    bufferPtr = StringCopy(bufferPtr, gUnknown_083B5EF4);
-    bufferPtr = ConvertIntToDecimalStringN(bufferPtr, unk_2000000.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS,
-                                           2);
-    bufferPtr = StringCopy(bufferPtr, gUnknown_083B5EF4);
-    bufferPtr = ConvertIntToDecimalStringN(bufferPtr, unk_2000000.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS,
-                                           2);
+    str = gStringVar1;
+    str = ConvertIntToDecimalStringN(str, unk_2000000.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    str = StringCopy(str, gUnknown_083B5EF4);
+    str = ConvertIntToDecimalStringN(str, unk_2000000.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS, 2);
+    str = StringCopy(str, gUnknown_083B5EF4);
+    str = ConvertIntToDecimalStringN(str, unk_2000000.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS, 2);
 
     MenuPrint_RightAligned(gStringVar1, 28, 5);
 }
 
-static void TrainerCard_Back_PrintLinkBattlesLabel(void) {
-    if (unk_2000000.var_9 == FALSE) {
+static void TrainerCard_Back_PrintLinkBattlesLabel(void)
+{
+    if (unk_2000000.var_9 == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_LinkCableBattles, 3, 7);
 }
 
-static void TrainerCard_Back_PrintLinkBattles(void) {
+static void TrainerCard_Back_PrintLinkBattles(void)
+{
     u8 buffer[16];
 
-    if (unk_2000000.var_9 == FALSE) {
+    if (unk_2000000.var_9 == FALSE)
+    {
         return;
     }
 
@@ -1937,18 +2054,22 @@ static void TrainerCard_Back_PrintLinkBattles(void) {
     MenuPrint_RightAligned(buffer, 28, 7);
 }
 
-static void TrainerCard_Back_PrintBattleTower_Label(void) {
-    if (unk_2000000.var_a == FALSE) {
+static void TrainerCard_Back_PrintBattleTower_Label(void)
+{
+    if (unk_2000000.var_a == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_BattleTowerWinRecord, 3, 15);
 }
 
-static void TrainerCard_Back_PrintBattleTower(void) {
+static void TrainerCard_Back_PrintBattleTower(void)
+{
     u8 buffer[16];
 
-    if (unk_2000000.var_a == FALSE) {
+    if (unk_2000000.var_a == FALSE)
+    {
         return;
     }
 
@@ -1959,18 +2080,22 @@ static void TrainerCard_Back_PrintBattleTower(void) {
     MenuPrint_PixelCoords(buffer, 149, 120, 0);
 }
 
-static void TrainerCard_Back_PrintLinkContests_Label(void) {
-    if (unk_2000000.var_b == FALSE) {
+static void TrainerCard_Back_PrintLinkContests_Label(void)
+{
+    if (unk_2000000.var_b == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_ContestRecord, 3, 13);
 }
 
-static void TrainerCard_Back_PrintLinkContests(void) {
+static void TrainerCard_Back_PrintLinkContests(void)
+{
     u8 buffer[8];
 
-    if (unk_2000000.var_b == FALSE) {
+    if (unk_2000000.var_b == FALSE)
+    {
         return;
     }
 
@@ -1978,18 +2103,22 @@ static void TrainerCard_Back_PrintLinkContests(void) {
     MenuPrint_RightAligned(buffer, 28, 13);
 }
 
-static void TrainerCard_Back_PrintLinkPokeblocks_Label(void) {
-    if (unk_2000000.var_c == FALSE) {
+static void TrainerCard_Back_PrintLinkPokeblocks_Label(void)
+{
+    if (unk_2000000.var_c == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_MixingRecord, 3, 11);
 }
 
-static void TrainerCard_Back_PrintLinkPokeblocks(void) {
+static void TrainerCard_Back_PrintLinkPokeblocks(void)
+{
     u8 buffer[8];
 
-    if (unk_2000000.var_c == FALSE) {
+    if (unk_2000000.var_c == FALSE)
+    {
         return;
     }
 
@@ -1997,18 +2126,22 @@ static void TrainerCard_Back_PrintLinkPokeblocks(void) {
     MenuPrint_RightAligned(buffer, 28, 11);
 }
 
-static void TrainerCard_Back_PrintPokemonTrades_Label(void) {
-    if (unk_2000000.var_d == FALSE) {
+static void TrainerCard_Back_PrintPokemonTrades_Label(void)
+{
+    if (unk_2000000.var_d == FALSE)
+    {
         return;
     }
 
     MenuPrint(gOtherText_TradeRecord, 3, 9);
 }
 
-static void TrainerCard_Back_PrintPokemonTrades(void) {
+static void TrainerCard_Back_PrintPokemonTrades(void)
+{
     u8 buffer[8];
 
-    if (unk_2000000.var_d == FALSE) {
+    if (unk_2000000.var_d == FALSE)
+    {
         return;
     }
 
@@ -2016,12 +2149,14 @@ static void TrainerCard_Back_PrintPokemonTrades(void) {
     MenuPrint_RightAligned(buffer, 28, 9);
 }
 
-void unref_sub_8094588(u16 left, u16 top) {
+void unref_sub_8094588(u16 left, u16 top)
+{
     u8 *text = gOtherText_Boy;
 
-    if (gSaveBlock2.playerGender == FEMALE) {
+    if (gSaveBlock2.playerGender == FEMALE)
+    {
         text = gOtherText_Girl;
     }
 
-    MenuPrint(text, (u8) left, (u8) top);
+    MenuPrint(text, (u8)left, (u8)top);
 }

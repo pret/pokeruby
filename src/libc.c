@@ -19,13 +19,13 @@ void *memcpy(void *dst0, const void *src0, size_t len0)
 
     // If the size is small, or either src or dst is unaligned,
     // then go to the byte copy loop. This should be rare.
-    if(len >= 16 && !(UNALIGNED(src) | UNALIGNED(dst)))
+    if (len >= 16 && !(UNALIGNED(src) | UNALIGNED(dst)))
     {
         aligned_dst = (long *)dst;
         aligned_src = (long *)src;
 
         // Copy 4X long words at a time if possible.
-        while(len >= 16)
+        while (len >= 16)
         {
             *aligned_dst++ = *aligned_src++;
             *aligned_dst++ = *aligned_src++;
@@ -35,7 +35,7 @@ void *memcpy(void *dst0, const void *src0, size_t len0)
         }
 
         // Copy one long word at a time if possible
-        while(len >= 4)
+        while (len >= 4)
         {
             *aligned_dst++ = *aligned_src++;
             len -= 4;
@@ -46,7 +46,7 @@ void *memcpy(void *dst0, const void *src0, size_t len0)
     }
 
     // Pick up any remaining bytes with a byte copier.
-    while(len--)
+    while (len--)
         *dst++ = *src++;
 
     return dst0;
@@ -62,7 +62,7 @@ void *memset(void *m, int c, size_t n)
 
     // If the size is small or m is unaligned,
     // then go to the byte copy loop. This should be rare.
-    if(n >= LBLOCKSIZE && !UNALIGNED(m))
+    if (n >= LBLOCKSIZE && !UNALIGNED(m))
     {
         // We know that n is large and m is word-aligned.
         aligned_addr = (unsigned long *)m;
@@ -70,7 +70,7 @@ void *memset(void *m, int c, size_t n)
         // Store C into each char sized location in buffer so that
         // we can set large blocks quickly.
         c &= 0xFF;
-        if(LBLOCKSIZE == 4)
+        if (LBLOCKSIZE == 4)
         {
             buffer = (c << 8) | c;
             buffer |= (buffer << 16);
@@ -78,11 +78,11 @@ void *memset(void *m, int c, size_t n)
         else
         {
             buffer = 0;
-            for(i = 0; i < LBLOCKSIZE; i++)
+            for (i = 0; i < LBLOCKSIZE; i++)
                 buffer = (buffer << 8) | c;
         }
 
-        while(n >= LBLOCKSIZE * 4)
+        while (n >= LBLOCKSIZE * 4)
         {
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
@@ -90,7 +90,7 @@ void *memset(void *m, int c, size_t n)
             *aligned_addr++ = buffer;
             n -= LBLOCKSIZE * 4;
         }
-        while(n >= LBLOCKSIZE)
+        while (n >= LBLOCKSIZE)
         {
             *aligned_addr++ = buffer;
             n -= LBLOCKSIZE;
@@ -100,7 +100,7 @@ void *memset(void *m, int c, size_t n)
     }
 
     // Pick up the remainder with a bytewise loop.
-    while(n--)
+    while (n--)
         *s++ = (char)c;
 
     return m;
@@ -112,16 +112,16 @@ int strcmp(const char *s1, const char *s2)
     unsigned long *a2;
 
     // If s1 or s2 are unaligned, then skip this and compare bytes.
-    if(!(UNALIGNED(s1) | UNALIGNED(s2)))
+    if (!(UNALIGNED(s1) | UNALIGNED(s2)))
     {
         // Compare them a word at a time.
         a1 = (unsigned long *)s1;
         a2 = (unsigned long *)s2;
-        while(*a1 == *a2)
+        while (*a1 == *a2)
         {
             // If *a1 == *a2, and we find a null in *a1,
             // then the strings must be equal, so return zero.
-            if(CONTAINSNULL(*a1))
+            if (CONTAINSNULL(*a1))
                 return 0;
 
             a1++;
@@ -133,7 +133,7 @@ int strcmp(const char *s1, const char *s2)
     }
 
     // Check the remaining few bytes.
-    while(*s1 != '\0' && *s1 == *s2)
+    while (*s1 != '\0' && *s1 == *s2)
     {
         s1++;
         s2++;
