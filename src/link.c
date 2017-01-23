@@ -160,16 +160,16 @@ EWRAM_DATA bool8 gLinkOpen = {0};
 
 static const u8 sDebugMessages[7][12] =
 {
-    _"せつぞく　ちゅうです",
-    _"せつぞく　できません",
-    _"かくにん　ちゅうです",
-    _"かくにん　できました",
-    _"かくにん　できません",
-    _"かくにん　を　かくにん",
-    _"かくにん　は　しっぱい",
+    _("せつぞく　ちゅうです"),
+    _("せつぞく　できません"),
+    _("かくにん　ちゅうです"),
+    _("かくにん　できました"),
+    _("かくにん　できません"),
+    _("かくにん　を　かくにん"),
+    _("かくにん　は　しっぱい"),
 };
 
-static const u8 sColorCodes[] = _"{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}";
+static const u8 sColorCodes[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}");
 
 static const u32 sBlockRequestLookupTable[5 * 2] =
 {
@@ -180,11 +180,11 @@ static const u32 sBlockRequestLookupTable[5 * 2] =
     (u32)gBlockSendBuffer,  40,
 };
 
-static const u8 sTestString[] = _"テストな";
+static const u8 sTestString[] = _("テストな");
 
 ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) static const u8 sEmptyString[] = _"";
+ALIGNED(4) static const u8 sEmptyString[] = _("");
 
 void Task_DestroySelf(u8 taskId)
 {

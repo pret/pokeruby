@@ -72,8 +72,6 @@ CFile::~CFile()
 
 void CFile::Preproc()
 {
-    bool inConcatMode = false;
-    bool noTerminator = false;
     char stringChar = 0;
 
     while (m_pos < m_size)
@@ -94,85 +92,140 @@ void CFile::Preproc()
             }
             else
             {
+                if (m_buffer[m_pos] == '\n')
+                    m_lineNum++;
                 std::putchar(m_buffer[m_pos]);
                 m_pos++;
             }
         }
         else
         {
-            if (inConcatMode ? m_buffer[m_pos] == '"'
-                             : (m_buffer[m_pos] == '_' || m_buffer[m_pos] == '@') && m_buffer[m_pos + 1] == '"')
+            TryConvertString();
+
+            char c = m_buffer[m_pos++];
+
+            std::putchar(c);
+
+            if (c == '\n')
+                m_lineNum++;
+            else if (c == '"')
+                stringChar = '"';
+            else if (m_buffer[m_pos] == '\'')
+                stringChar = '\'';
+        }
+    }
+}
+
+bool CFile::ConsumeHorizontalWhitespace()
+{
+    if (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ')
+    {
+        m_pos++;
+        return true;
+    }
+
+    return false;
+}
+
+bool CFile::ConsumeNewline()
+{
+    if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
+    {
+        m_pos += 2;
+        m_lineNum++;
+        return true;
+    }
+
+    if (m_buffer[m_pos] == '\n')
+    {
+        m_pos++;
+        m_lineNum++;
+        return true;
+    }
+
+    return false;
+}
+
+void CFile::SkipWhitespace()
+{
+    while (ConsumeHorizontalWhitespace() || ConsumeNewline())
+        ;
+}
+
+void CFile::TryConvertString()
+{
+    long oldPos = m_pos;
+    long oldLineNum = m_lineNum;
+    bool noTerminator = false;
+
+    if (m_buffer[m_pos] != '_' || (m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1])))
+        return;
+
+    m_pos++;
+
+    if (m_buffer[m_pos] == '_')
+    {
+        noTerminator = true;
+        m_pos++;
+    }
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != '(')
+    {
+        m_pos = oldPos;
+        m_lineNum = oldLineNum;
+        return;
+    }
+
+    m_pos++;
+
+    SkipWhitespace();
+
+    std::printf("{ ");
+
+    while (1)
+    {
+        SkipWhitespace();
+
+        if (m_buffer[m_pos] == '"')
+        {
+            unsigned char s[kMaxStringLength];
+            int length;
+            StringParser stringParser(m_buffer, m_size);
+
+            try
             {
-                if (!inConcatMode)
-                {
-                    noTerminator = (m_buffer[m_pos] == '@');
-                    m_pos++; // skip past underscore or at-sign
-                }
-
-                unsigned char s[kMaxStringLength];
-                int length;
-                StringParser stringParser(m_buffer, m_size);
-
-                try
-                {
-                    m_pos += stringParser.ParseString(m_pos, s, length);
-                }
-                catch (std::runtime_error e)
-                {
-                    RaiseError(e.what());
-                }
-
-                if (!inConcatMode)
-                {
-                    std::printf("{ ");
-                }
-
-                inConcatMode = true;
-
-                for (int i = 0; i < length; i++)
-                    printf("0x%02X, ", s[i]);
+                m_pos += stringParser.ParseString(m_pos, s, length);
             }
+            catch (std::runtime_error e)
+            {
+                RaiseError(e.what());
+            }
+
+            for (int i = 0; i < length; i++)
+                printf("0x%02X, ", s[i]);
+        }
+        else if (m_buffer[m_pos] == ')')
+        {
+            m_pos++;
+            break;
+        }
+        else
+        {
+            if (m_pos >= m_size)
+                RaiseError("unexpected EOF");
+            if (IsAsciiPrintable(m_buffer[m_pos]))
+                RaiseError("unexpected character '%c'", m_buffer[m_pos]);
             else
-            {
-                char c = m_buffer[m_pos++];
-
-                if (c == '\r')
-                {
-                    if (m_buffer[m_pos] == '\n')
-                    {
-                        m_pos++;
-                    }
-
-                    c = '\n';
-                }
-
-                if ((c != ' ' && c != '\t' && c != '\n') && inConcatMode)
-                {
-                    if (noTerminator)
-                        std::printf(" }");
-                    else
-                        std::printf("0xFF }");
-
-                    inConcatMode = false;
-                }
-
-                std::putchar(c);
-
-                if (c == '\n')
-                    m_lineNum++;
-                else if (c == '"')
-                    stringChar = '"';
-                else if (m_buffer[m_pos] == '\'')
-                    stringChar = '\'';
-            }
+                RaiseError("unexpected character '\\x%02X'", m_buffer[m_pos]);
         }
     }
 
-    if (inConcatMode)
-    {
-        printf("0xFF }");
-        RaiseWarning("string at end of file");
-    }
+    if (noTerminator)
+        std::printf(" }");
+    else
+        std::printf("0xFF }");
 }
 
 // Reports a diagnostic message.

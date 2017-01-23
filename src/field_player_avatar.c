@@ -1562,7 +1562,7 @@ u8 Fishing4(struct Task *task)
 
 u8 Fishing5(struct Task *task)
 {
-    const u8 dot[] = _"·";
+    const u8 dot[] = _("·");
 
     sub_805A954();
     task->data[1]++;

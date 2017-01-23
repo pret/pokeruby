@@ -42,6 +42,10 @@ private:
     long m_lineNum;
     std::string m_filename;
 
+    bool ConsumeHorizontalWhitespace();
+    bool ConsumeNewline();
+    void SkipWhitespace();
+    void TryConvertString();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
