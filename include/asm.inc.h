@@ -288,7 +288,7 @@ bool8 sub_80B58C4(u16, u8, u8);
 void *picbox_close(void);
 
 // asm/naming_screen.o
-void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
+void DoNamingScreen(u8 r0, u8 *r1, u16 r2, u16 r3, u32 s0, MainCallback s4);
 
 // asm/secret_base.o
 void sub_80BB5B4(void);
