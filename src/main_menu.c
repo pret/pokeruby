@@ -1081,7 +1081,7 @@ static void Task_NewGameSpeech22(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetPresetPlayerName(1);
-        DoNamingScreen(0, &gSaveBlock2, gSaveBlock2.playerGender, 0, 0, CB_ContinueNewGameSpeechPart2);
+        DoNamingScreen(0, gSaveBlock2.playerName, gSaveBlock2.playerGender, 0, 0, CB_ContinueNewGameSpeechPart2);
     }
 }
 
