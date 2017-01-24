@@ -122,7 +122,6 @@ tidy:
 include castform.mk
 include tilesets.mk
 include fonts.mk
-include generated.mk
 include misc.mk
 
 %.s: ;
@@ -153,25 +152,28 @@ src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
-src/text.o: src/text.c $(GEN_FONT_HEADERS)
-src/link.o: src/link.c $(GEN_LINK_HEADERS)
+ifeq ($(NODEP),)
+%.o: c_dep = $(shell $(SCANINC) $*.c)
+else
+%.o: c_dep :=
+endif
 
-$(C_OBJS): %.o : %.c
+$(C_OBJS): %.o : %.c $$(c_dep)
 	@$(CPP) $(CPPFLAGS) -D $(VERSION) -D REVISION=$(REVISION) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
 ifeq ($(NODEP),)
-%.o: dep = $(shell $(SCANINC) $*.s)
+%.o: asm_dep = $(shell $(SCANINC) $*.s)
 else
-%.o: dep :=
+%.o: asm_dep :=
 endif
 
-$(ASM_OBJS): %.o: %.s $$(dep)
+$(ASM_OBJS): %.o: %.s $$(asm_dep)
 	$(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@ $<
 
-$(DATA_ASM_OBJS): %.o: %.s $$(dep)
+$(DATA_ASM_OBJS): %.o: %.s $$(asm_dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@
 
 $(SONG_OBJS): %.o: %.s

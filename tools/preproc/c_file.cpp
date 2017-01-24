@@ -20,6 +20,8 @@
 
 #include <cstdio>
 #include <cstdarg>
+#include <string>
+#include <memory>
 #include "preproc.h"
 #include "c_file.h"
 #include "char_util.h"
@@ -101,6 +103,10 @@ void CFile::Preproc()
         else
         {
             TryConvertString();
+            TryConvertIncbin();
+
+            if (m_pos >= m_size)
+                break;
 
             char c = m_buffer[m_pos++];
 
@@ -110,7 +116,7 @@ void CFile::Preproc()
                 m_lineNum++;
             else if (c == '"')
                 stringChar = '"';
-            else if (m_buffer[m_pos] == '\'')
+            else if (c == '\'')
                 stringChar = '\'';
         }
     }
@@ -226,6 +232,159 @@ void CFile::TryConvertString()
         std::printf(" }");
     else
         std::printf("0xFF }");
+}
+
+bool CFile::CheckIdentifier(const std::string& ident)
+{
+    int i;
+
+    for (i = 0; (unsigned)i < ident.length() && m_pos + i < m_size; i++)
+        if (ident[i] != m_buffer[m_pos + i])
+            return false;
+
+    return (i == ident.length());
+}
+
+std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size)
+{
+    FILE* fp = fopen(path.c_str(), "rb");
+
+    if (fp == nullptr)
+        RaiseError("Failed to open \"%s\" for reading.\n", path.c_str());
+
+    fseek(fp, 0, SEEK_END);
+
+    size = ftell(fp);
+
+    std::unique_ptr<unsigned char[]> buffer = std::make_unique<unsigned char[]>(size);
+
+    rewind(fp);
+
+    if (fread(buffer.get(), size, 1, fp) != 1)
+        RaiseError("Failed to read \"%s\".\n", path.c_str());
+
+    fclose(fp);
+
+    return buffer;
+}
+
+int ExtractData(const std::unique_ptr<unsigned char[]>& buffer, int offset, int size)
+{
+    switch (size)
+    {
+    case 1:
+        return buffer[offset];
+    case 2:
+        return (buffer[offset + 1] << 8)
+            | buffer[offset];
+    case 4:
+        return (buffer[offset + 3] << 24)
+            | (buffer[offset + 2] << 16)
+            | (buffer[offset + 1] << 8)
+            | buffer[offset];
+    default:
+        FATAL_ERROR("Invalid size passed to ExtractData.\n");
+    }
+}
+
+void CFile::TryConvertIncbin()
+{
+    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    int incbinType = -1;
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (CheckIdentifier(idents[i]))
+        {
+            incbinType = i;
+            break;
+        }
+    }
+
+    if (incbinType == -1)
+        return;
+
+    int size = 1 << (incbinType / 2);
+    bool isSigned = ((incbinType % 2) == 0);
+
+    long oldPos = m_pos;
+    long oldLineNum = m_lineNum;
+
+    m_pos += idents[incbinType].length();
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != '(')
+    {
+        m_pos = oldPos;
+        m_lineNum = oldLineNum;
+        return;
+    }
+
+    m_pos++;
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != '"')
+        RaiseError("expected double quote");
+
+    m_pos++;
+
+    int startPos = m_pos;
+
+    while (m_buffer[m_pos] != '"')
+    {
+        if (m_buffer[m_pos] == 0)
+        {
+            if (m_pos >= m_size)
+                RaiseError("unexpected EOF in path string");
+            else
+                RaiseError("unexpected null character in path string");
+        }
+
+        if (m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
+            RaiseError("unexpected end of line character in path string");
+
+        if (m_buffer[m_pos] == '\\')
+            RaiseError("unexpected escape in path string");
+        
+        m_pos++;
+    }
+
+    std::string path(&m_buffer[startPos], m_pos - startPos);
+
+    m_pos++;
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != ')')
+        RaiseError("expected ')'");
+
+    m_pos++;
+
+    std::printf("{");
+
+    int fileSize;
+    std::unique_ptr<unsigned char[]> buffer = ReadWholeFile(path, fileSize);
+
+    if ((fileSize % size) != 0)
+        RaiseError("Size %d doesn't evenly divide file size %d.\n", size, fileSize);
+
+    int count = fileSize / size;
+    int offset = 0;
+
+    for (int i = 0; i < count; i++)
+    {
+        int data = ExtractData(buffer, offset, size);
+        offset += size;
+
+        if (isSigned)
+            printf("%d,", data);
+        else
+            printf("%uu,", data);
+    }
+
+    std::printf("}");
 }
 
 // Reports a diagnostic message.

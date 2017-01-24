@@ -155,8 +155,8 @@ EWRAM_DATA u32 gFiller_20238B8 = {0};
 EWRAM_DATA u32 dword_20238BC = {0};
 EWRAM_DATA bool8 gLinkOpen = {0};
 
-#include "link/digit_palette.h"
-#include "link/digit_tiles.h"
+static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
+static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");
 
 static const u8 sDebugMessages[7][12] =
 {
