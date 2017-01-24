@@ -365,6 +365,8 @@ SECTIONS {
         data/shop.o(.rodata);
         data/berry.o(.rodata);
         data/script_menu.o(.rodata);
+        data/naming_screen_gfx.o(.rodata);
+        src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
         data/money.o(.rodata);
         data/contest_effect.o(.rodata);
