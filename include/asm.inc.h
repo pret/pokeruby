@@ -96,7 +96,7 @@ void sub_8060288(u8, u8, u8);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);
 void FieldObjectMoveDestCoords(struct MapObject *pObject, u8 unk_19, s16 *pInt, s16 *pInt1);
 bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
-void FieldObjectSetSpecialAnim(struct MapObject *, u8);
+bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
 void FieldObjectForceSetSpecialAnim(struct MapObject *pObject, u8 a);
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void FieldObjectClearAnim(struct MapObject *);
@@ -236,7 +236,7 @@ void sub_809D608(u16);
 u8 pokemon_ailments_get_primary(u32);
 
 // asm/script_movement.o
-u8 exec_movement(u8, u8, u8, void *);
+bool8 exec_movement(u8, u8, u8, u8 *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 

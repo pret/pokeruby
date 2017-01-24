@@ -129,10 +129,12 @@ const struct SpriteTemplate gDummySpriteTemplate;
 // Unreferenced error message.
 // It means "The DMA transfer request table has exceeded its limit."
 static const u8 sDmaOverErrorMsg[] =
-    _"DMA OVER\n"
-     "DMAてんそう\n"
-     "リクエストテーブルが\n"
-     "オーバーしました";
+    _(
+    "DMA OVER\n"
+    "DMAてんそう\n"
+    "リクエストテーブルが\n"
+    "オーバーしました"
+    );
 
 // Unreferenced data.
 static const u8 sUnknownData[24] =

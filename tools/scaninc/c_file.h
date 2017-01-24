@@ -1,4 +1,4 @@
-// Copyright(c) 2016 YamaArashi
+// Copyright(c) 2017 YamaArashi
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,38 +21,34 @@
 #ifndef C_FILE_H
 #define C_FILE_H
 
-#include <cstdarg>
-#include <cstdint>
 #include <string>
+#include <set>
 #include <memory>
-#include "preproc.h"
+#include "scaninc.h"
 
 class CFile
 {
 public:
-    CFile(std::string filename);
-    CFile(CFile&& other);
-    CFile(const CFile&) = delete;
+    CFile(std::string path);
     ~CFile();
-    void Preproc();
+    void FindIncbins();
+    const std::set<std::string>& GetIncbins() { return m_incbins; }
 
 private:
-    char* m_buffer;
-    long m_pos;
-    long m_size;
-    long m_lineNum;
-    std::string m_filename;
+    char *m_buffer;
+    int m_pos;
+    int m_size;
+    int m_lineNum;
+    std::string m_path;
+    std::set<std::string> m_incbins;
 
+    void CFile::RemoveComments();
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
     void SkipWhitespace();
-    void TryConvertString();
     std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
-    void TryConvertIncbin();
-    void ReportDiagnostic(const char* type, const char* format, std::va_list args);
-    void RaiseError(const char* format, ...);
-    void RaiseWarning(const char* format, ...);
+    void CheckIncbin();
 };
 
 #endif // C_FILE_H

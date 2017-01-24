@@ -4,10 +4,10 @@
 
 u8 gUnknownStringVar[16];
 
-const u8 gEmptyString_81E72B0[] = _"";
-const u8 gRightPointingTriangleString[] = _"▶";
+const u8 gEmptyString_81E72B0[] = _("");
+const u8 gRightPointingTriangleString[] = _("▶");
 
-static const u8 sDigits[] = @"0123456789ABCDEF";
+static const u8 sDigits[] = __("0123456789ABCDEF");
 
 static const s32 sPowersOfTen[] =
 {
