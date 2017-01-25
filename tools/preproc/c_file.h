@@ -47,7 +47,7 @@ private:
     bool ConsumeNewline();
     void SkipWhitespace();
     void TryConvertString();
-    std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size);
+    std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
     void TryConvertIncbin();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
