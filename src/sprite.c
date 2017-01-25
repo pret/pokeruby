@@ -1513,7 +1513,7 @@ void AllocTilesForSpriteSheets(struct SpriteSheet *sheets)
         AllocTilesForSpriteSheet(&sheets[i]);
 }
 
-void LoadTilesForSpriteSheet(struct SpriteSheet *sheet)
+void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet)
 {
     u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
@@ -1599,14 +1599,14 @@ static void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
     SET_SPRITE_TILE_RANGE(freeIndex, start, count);
 }
 
-void RequestSpriteSheetCopy(struct SpriteSheet *sheet)
+void RequestSpriteSheetCopy(const struct SpriteSheet *sheet)
 {
     u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
     RequestSpriteCopy(data, (u8 *)OBJ_VRAM0 + tileStart * TILE_SIZE_4BPP, sheet->size);
 }
 
-u16 LoadSpriteSheetDeferred(struct SpriteSheet *sheet)
+u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet)
 {
     s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
@@ -1700,7 +1700,7 @@ void FreeSpritePaletteByTag(u16 tag)
         sSpritePaletteTags[index] = 0xFFFF;
 }
 
-void SetSubspriteTables(struct Sprite *sprite, struct SubspriteTable *subspriteTables)
+void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables)
 {
     sprite->subspriteTables = subspriteTables;
     sprite->subspriteTableNum = 0;
@@ -1726,7 +1726,7 @@ bool8 AddSpriteToOamBuffer(struct Sprite *sprite, u8 *oamIndex)
 
 bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex)
 {
-    struct SubspriteTable *subspriteTable;
+    const struct SubspriteTable *subspriteTable;
     struct OamData *oam;
 
     if (*oamIndex >= gOamLimit)

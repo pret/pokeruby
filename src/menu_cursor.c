@@ -3,22 +3,22 @@
 #include "palette.h"
 #include "sprite.h"
 
-extern struct SpriteSheet gUnknown_0842F140[];
-extern struct SpriteSheet gUnknown_0842F1C0[];
-extern struct SpritePalette gUnknown_0842F240;
-extern struct SpritePalette gUnknown_0842F248;
-extern struct SpriteTemplate gSpriteTemplate_842F250[];
-extern struct SpriteTemplate gSpriteTemplate_842F298[];
+extern const struct SpriteSheet gUnknown_0842F140[];
+extern const struct SpriteSheet gUnknown_0842F1C0[];
+extern const struct SpritePalette gUnknown_0842F240;
+extern const struct SpritePalette gUnknown_0842F248;
+extern const struct SpriteTemplate gSpriteTemplate_842F250[];
+extern const struct SpriteTemplate gSpriteTemplate_842F298[];
 
-extern struct Subsprite *gUnknown_0842F5BC[];
+extern struct Subsprite *const gUnknown_0842F5BC[];
 
-extern struct SubspriteTable gSubspriteTables_842F5C0[];
-extern struct SubspriteTable gSubspriteTables_842F6C0[];
-extern struct SubspriteTable gUnknown_0842F758[];
+extern const struct SubspriteTable gSubspriteTables_842F5C0[];
+extern const struct SubspriteTable gSubspriteTables_842F6C0[];
+extern const struct SubspriteTable gUnknown_0842F758[];
 
-extern struct Subsprite gUnknown_0842F780;
-extern struct Subsprite gUnknown_0842F788;
-extern struct Subsprite gUnknown_0842F790;
+extern const struct Subsprite gUnknown_0842F780;
+extern const struct Subsprite gUnknown_0842F788;
+extern const struct Subsprite gUnknown_0842F790;
 
 extern u16 gUnknown_0203A360[];
 

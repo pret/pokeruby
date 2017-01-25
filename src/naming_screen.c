@@ -37,8 +37,8 @@ struct UnknownStruct1
     u8 unkD;
     u8 currentPage;  //page?
     u8 cursorSpriteId;  //spriteId
-    u8 filler10[1];
-    u8 unk11[0x10];
+    u8 unk10;
+    u8 textBuffer[0x10];
     u8 filler21[0x13];
     /*0x34*/ const struct UnknownStruct2 *unk34;
     /*0x38*/ u8 *nameBuffer;
@@ -80,7 +80,19 @@ asm(".section .rodata\n\
 
 extern u16 *const gUnknown_083CE28C[];
 extern const struct UnknownStruct2 *const gUnknown_083CE398[];
+extern const struct SubspriteTable gSubspriteTables_83CE558[];
+extern const struct SubspriteTable gSubspriteTables_83CE560[];
+extern const struct SubspriteTable gSubspriteTables_83CE578[];
+extern const struct SubspriteTable gSubspriteTables_83CE580[];
+extern const struct SpriteTemplate gSpriteTemplate_83CE5C8;
+extern const struct SpriteTemplate gSpriteTemplate_83CE5E0;
+extern const struct SpriteTemplate gSpriteTemplate_83CE5F8;
+extern const struct SpriteTemplate gSpriteTemplate_83CE610;
+extern const struct SpriteTemplate gSpriteTemplate_83CE628;
 extern const struct SpriteTemplate gSpriteTemplate_83CE640;
+extern const struct SpriteTemplate gSpriteTemplate_83CE658;
+extern const struct SpriteTemplate gSpriteTemplate_83CE670;
+extern const struct SpriteTemplate gSpriteTemplate_83CE688;
 
 void C2_NamingScreen(void);
 void sub_80B5AA0(void);
@@ -145,6 +157,15 @@ void sub_80B65D4(struct Task *, u8, u8);
 u16 sub_80B654C(u8);
 extern void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80B6630(u8);
+void sub_80B6C48(u8, struct Sprite *, struct Sprite *);
+u8 sub_80B6F44(void);
+extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
+extern u8 CreateMonIcon();
+extern void sub_809D51C(void);
+u8 sub_80B7768(s16, s16);
+u8 sub_80B7104(void);
+u8 sub_80B713C(void);
+void sub_80B7174(u8);
 
 #define NAMING_SCREEN_A_BUTTON 5
 #define NAMING_SCREEN_B_BUTTON 6
@@ -333,9 +354,9 @@ void NamingScreen_Init(void)
     EWRAM_000000.currentPage = EWRAM_000000.unk34->unk4;
     EWRAM_000000.unk2 = 14 - EWRAM_000000.unk34->unk1 / 2;
     EWRAM_000000.unk3C = gKeyRepeatStartDelay;
-    memset(EWRAM_000000.unk11, 0xFF, 0x10);
+    memset(EWRAM_000000.textBuffer, 0xFF, 0x10);
     if (EWRAM_000000.unk34->unk0 != 0)
-        StringCopy(EWRAM_000000.unk11, EWRAM_000000.nameBuffer);
+        StringCopy(EWRAM_000000.textBuffer, EWRAM_000000.nameBuffer);
     gKeyRepeatStartDelay = 16;
 }
 
@@ -1054,7 +1075,7 @@ u8 sub_80B6958(void)
         return arr[var2];
 }
 
-/*
+#ifdef NONMATCHING
 void sub_80B6998(struct Sprite *sprite)
 {
     if (sprite->animEnded)
@@ -1080,11 +1101,428 @@ void sub_80B6998(struct Sprite *sprite)
     //_080B6A3E
     if ((sprite->data4 & 0xFF00) != 0)
     {
-        s16 r4 = sprite->data5 / 2;
-        u8 r5 = sprite->data5;
+        //Can't get this part to match
+        u16 var = sprite->data5;
+        s8 r5 = var;
+        s16 var2 = var / 2;
+        s8 r4 = var2;
         u16 index = IndexOfSpritePaletteTag(5) * 16 + 0x0101;
         
         MultiplyInvertedPaletteRGBComponents(index, r4, r5, r5);
     }
 }
-*/
+#else
+__attribute__((naked))
+void sub_80B6998(struct Sprite *sprite)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    adds r4, r0, 0\n\
+    adds r0, 0x3F\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080B69B0\n\
+    adds r0, r4, 0\n\
+    movs r1, 0\n\
+    bl StartSpriteAnim\n\
+_080B69B0:\n\
+    ldrh r1, [r4, 0x36]\n\
+    movs r0, 0xFF\n\
+    ands r0, r1\n\
+    adds r3, r4, 0\n\
+    adds r3, 0x3E\n\
+    movs r1, 0x1\n\
+    ands r0, r1\n\
+    lsls r0, 2\n\
+    ldrb r1, [r3]\n\
+    movs r2, 0x5\n\
+    negs r2, r2\n\
+    ands r2, r1\n\
+    orrs r2, r0\n\
+    strb r2, [r3]\n\
+    movs r1, 0x2E\n\
+    ldrsh r0, [r4, r1]\n\
+    cmp r0, 0x8\n\
+    bne _080B69DA\n\
+    movs r0, 0x4\n\
+    orrs r2, r0\n\
+    strb r2, [r3]\n\
+_080B69DA:\n\
+    ldrb r1, [r3]\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080B6A0A\n\
+    movs r2, 0x36\n\
+    ldrsh r0, [r4, r2]\n\
+    movs r1, 0xFF\n\
+    lsls r1, 8\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080B6A0A\n\
+    movs r0, 0x2E\n\
+    ldrsh r1, [r4, r0]\n\
+    movs r2, 0x32\n\
+    ldrsh r0, [r4, r2]\n\
+    cmp r1, r0\n\
+    bne _080B6A0A\n\
+    movs r0, 0x30\n\
+    ldrsh r1, [r4, r0]\n\
+    movs r2, 0x34\n\
+    ldrsh r0, [r4, r2]\n\
+    cmp r1, r0\n\
+    beq _080B6A16\n\
+_080B6A0A:\n\
+    movs r0, 0\n\
+    strh r0, [r4, 0x38]\n\
+    movs r0, 0x1\n\
+    strh r0, [r4, 0x3A]\n\
+    movs r0, 0x2\n\
+    strh r0, [r4, 0x3C]\n\
+_080B6A16:\n\
+    ldrh r0, [r4, 0x3C]\n\
+    subs r0, 0x1\n\
+    strh r0, [r4, 0x3C]\n\
+    lsls r0, 16\n\
+    cmp r0, 0\n\
+    bne _080B6A3E\n\
+    ldrh r1, [r4, 0x3A]\n\
+    ldrh r2, [r4, 0x38]\n\
+    adds r0, r1, r2\n\
+    strh r0, [r4, 0x38]\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x10\n\
+    beq _080B6A36\n\
+    cmp r0, 0\n\
+    bne _080B6A3A\n\
+_080B6A36:\n\
+    negs r0, r1\n\
+    strh r0, [r4, 0x3A]\n\
+_080B6A3A:\n\
+    movs r0, 0x2\n\
+    strh r0, [r4, 0x3C]\n\
+_080B6A3E:\n\
+    movs r1, 0x36\n\
+    ldrsh r0, [r4, r1]\n\
+    movs r1, 0xFF\n\
+    lsls r1, 8\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080B6A74\n\
+    ldrh r4, [r4, 0x38]\n\
+    lsls r5, r4, 24\n\
+    lsrs r5, 24\n\
+    lsls r4, 16\n\
+    asrs r4, 17\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0x5\n\
+    bl IndexOfSpritePaletteTag\n\
+    lsls r0, 24\n\
+    lsrs r0, 4\n\
+    ldr r2, _080B6A7C @ =0x01010000\n\
+    adds r0, r2\n\
+    lsrs r0, 16\n\
+    adds r1, r4, 0\n\
+    adds r2, r5, 0\n\
+    adds r3, r5, 0\n\
+    bl MultiplyInvertedPaletteRGBComponents\n\
+_080B6A74:\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080B6A7C: .4byte 0x01010000\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_80B6A80(void)
+{
+    u8 spriteId1;
+    u8 spriteId2;
+    u8 spriteId3;
+    
+    spriteId1 = CreateSprite(&gSpriteTemplate_83CE5C8, 0xCC, 0x50, 0);
+    EWRAM_000000.unk10 = spriteId1;
+    SetSubspriteTables(&gSprites[spriteId1], gSubspriteTables_83CE558);
+    
+    spriteId2 = CreateSprite(&gSpriteTemplate_83CE5F8, 0xCC, 0x4C, 1);
+    gSprites[spriteId1].data6 = spriteId2;
+    SetSubspriteTables(&gSprites[spriteId2], gSubspriteTables_83CE560);
+    
+    spriteId3 = CreateSprite(&gSpriteTemplate_83CE5E0, 0xCC, 0x4B, 2);
+    gSprites[spriteId3].oam.priority = 1;
+    gSprites[spriteId1].data7 = spriteId3;
+}
+
+void sub_80B6B14(void)
+{
+    struct Sprite *sprite = &gSprites[EWRAM_000000.unk10];
+    
+    sprite->data0 = 2;
+    sprite->data1 = EWRAM_000000.currentPage;
+}
+
+u8 sub_80B6B5C(struct Sprite *);
+u8 sub_80B6B98(struct Sprite *);
+u8 sub_80B6B9C(struct Sprite *);
+u8 sub_80B6C08(struct Sprite *);
+
+static u8 (*const gUnknown_083CE2B4[])(struct Sprite *) =
+{
+    sub_80B6B5C,
+    sub_80B6B98,
+    sub_80B6B9C,
+    sub_80B6C08,
+};
+
+void sub_80B6B34(struct Sprite *sprite)
+{
+    while (gUnknown_083CE2B4[sprite->data0](sprite) != 0)
+        ;
+}
+
+u8 sub_80B6B5C(struct Sprite *sprite)
+{
+    struct Sprite *sprite1 = &gSprites[sprite->data6];
+    struct Sprite *sprite2 = &gSprites[sprite->data7];
+
+    sub_80B6C48(EWRAM_000000.currentPage, sprite1, sprite2);
+    sprite->data0++;
+    return 0;
+}
+
+u8 sub_80B6B98(struct Sprite *sprite)
+{
+    return 0;
+}
+
+u8 sub_80B6B9C(struct Sprite *sprite)
+{
+    struct Sprite *r4 = &gSprites[sprite->data6];
+    struct Sprite *r5 = &gSprites[sprite->data7];
+    
+    r4->pos2.y++;
+    if (r4->pos2.y > 7)
+    {
+        sprite->data0++;
+        r4->pos2.y = -4;
+        r4->invisible = TRUE;
+        sub_80B6C48(((u8)sprite->data1 + 1) % 3, r4, r5);
+    }
+    return 0;
+}
+
+u8 sub_80B6C08(struct Sprite *sprite)
+{
+    struct Sprite *r2 = &gSprites[sprite->data6];
+    
+    r2->invisible = FALSE;
+    r2->pos2.y++;
+    if (r2->pos2.y >= 0)
+    {
+        r2->pos2.y = 0;
+        sprite->data0 = 1;
+    }
+    return 0;
+}
+
+static const u16 gUnknown_083CE2C4[] = {1, 3, 2};
+static const u16 gUnknown_083CE2CA[] = {4, 6, 5};
+
+void sub_80B6C48(u8 a, struct Sprite *b, struct Sprite *c)
+{
+    c->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_083CE2C4[a]);
+    b->sheetTileStart = GetSpriteTileStartByTag(gUnknown_083CE2CA[a]);
+    b->subspriteTableNum = a;
+}
+
+//
+
+void sub_80B6CA8(void)
+{
+    u8 spriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83CE610, 0xCC, 0x6C, 0);
+    SetSubspriteTables(&gSprites[spriteId], gSubspriteTables_83CE578);
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83CE628, 0xCC, 0x84, 0);
+    SetSubspriteTables(&gSprites[spriteId], gSubspriteTables_83CE578);
+}
+
+void sub_80B6D04(void)
+{
+    u8 spriteId;
+    s16 r1;
+    u8 i;
+    
+    r1 = (EWRAM_000000.unk2 - 1) * 8 + 4;
+    spriteId = CreateSprite(&gSpriteTemplate_83CE658, r1, 0x28, 0);
+    gSprites[spriteId].oam.priority = 3;
+    r1 = EWRAM_000000.unk2 * 8 + 4;
+    for (i = 0; i < EWRAM_000000.unk34->unk1; i++, r1 += 8)
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_83CE670, r1, 0x2C, 0);
+        gSprites[spriteId].oam.priority = 3;
+        gSprites[spriteId].data0 = i;
+    }
+}
+
+void sub_80B6D9C(struct Sprite *sprite)
+{
+    const s16 arr[] = {0, -4, -2, -1};
+    
+    if (sprite->data0 == 0 || --sprite->data0 == 0)
+    {
+        sprite->data0 = 8;
+        sprite->data1 = (sprite->data1 + 1) & 3;
+    }
+    sprite->pos2.x = arr[sprite->data1];
+}
+
+void sub_80B6DE8(struct Sprite *sprite)
+{
+    const s16 arr[] = {2, 3, 2, 1};
+    u8 var;
+    
+    var = sub_80B6F44();
+    if (var != (u8)sprite->data0)
+    {
+        sprite->pos2.y = 0;
+        sprite->data1 = 0;
+        sprite->data2 = 0;
+    }
+    else
+    {
+        sprite->pos2.y = arr[sprite->data1];
+        sprite->data2++;
+        if (sprite->data2 > 8)
+        {
+            sprite->data1 = (sprite->data1 + 1) & 3;
+            sprite->data2 = 0;
+        }
+    }
+}
+
+//
+
+void nullsub_40(void);
+void sub_80B6E68(void);
+void sub_80B6EBC(void);
+void sub_80B6EFC(void);
+
+static void (*const gUnknown_083CE2E0[])(void) =
+{
+    nullsub_40,
+    sub_80B6E68,
+    sub_80B6EBC,
+    sub_80B6EFC,
+};
+
+void sub_80B6E44(void)
+{
+    gUnknown_083CE2E0[EWRAM_000000.unk34->unk2]();
+}
+
+void nullsub_40(void)
+{
+}
+
+void sub_80B6E68(void)
+{
+    u8 rivalGfxId;
+    u8 spriteId;
+    
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, EWRAM_000000.unk3E);
+    spriteId = AddPseudoFieldObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x18, 0);
+    gSprites[spriteId].oam.priority = 3;
+    StartSpriteAnim(&gSprites[spriteId], 4);
+}
+
+void sub_80B6EBC(void)
+{
+    u8 spriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83CE688, 0x34, 0x18, 0);
+    SetSubspriteTables(&gSprites[spriteId], gSubspriteTables_83CE580);
+    gSprites[spriteId].oam.priority = 3;
+}
+
+void sub_80B6EFC(void)
+{
+    u8 spriteId;
+    
+    sub_809D51C();
+    spriteId = CreateMonIcon(EWRAM_000000.unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, EWRAM_000000.unk44);
+    gSprites[spriteId].oam.priority = 3;
+}
+
+u8 sub_80B6F44(void)
+{
+    u8 i;
+    
+    for (i = 0; i < EWRAM_000000.unk34->unk1; i++)
+    {
+        if (EWRAM_000000.textBuffer[i] == 0xFF)
+            return i;
+    }
+    return EWRAM_000000.unk34->unk1 - 1;
+}
+
+u8 sub_80B6F84(void)
+{
+    s8 i;
+    
+    for (i = EWRAM_000000.unk34->unk1 - 1; i > 0; i--)
+    {
+        if (EWRAM_000000.textBuffer[i] != 0xFF)
+            return i;
+    }
+    return 0;
+}
+
+void sub_80B6FBC(void)
+{
+    u8 var;
+    u8 var2;
+    
+    var = sub_80B6F84();
+    EWRAM_000000.textBuffer[var] = 0;
+    sub_80B7960();
+    EWRAM_000000.textBuffer[var] = 0xFF;
+    var2 = sub_80B6958();
+    if (var2 == 0 || var2 == 2)
+        sub_80B6460(1, 0, 1);
+    PlaySE(SE_BOWA);
+}
+
+u8 sub_80B7004(void)
+{
+    s16 x;
+    s16 y;
+    u8 var;
+    u8 r4;
+    
+    get_cursor_pos(&x, &y);
+    x = sub_80B67EC(x);
+    var = sub_80B7768(x, y);
+    r4 = 1;
+    if (var == 0xFF)
+        r4 = sub_80B7104();
+    else if (var == 0xFE)
+        r4 = sub_80B713C();
+    else
+        sub_80B7174(var);
+    sub_80B7960();
+    PlaySE(SE_SELECT);
+    if (r4 != 0)
+    {
+        if (sub_80B6F84() == EWRAM_000000.unk34->unk1 - 1)
+            return 1;
+    }
+    return 0;
+}

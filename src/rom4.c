@@ -2542,7 +2542,7 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
 
     if (linkPlayerMapObj->active)
     {
-        u8 val = sub_805983C(0, mapObj->mapobj_bit_1);
+        u8 val = GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->mapobj_bit_1);
         mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;

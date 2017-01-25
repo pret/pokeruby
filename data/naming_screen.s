@@ -4,36 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083CE2B4:: @ 83CE2B4
-	.4byte sub_80B6B5C
-	.4byte sub_80B6B98
-	.4byte sub_80B6B9C
-	.4byte sub_80B6C08
-
-	.align 1
-gUnknown_083CE2C4:: @ 83CE2C4
-	.2byte 1, 3, 2
-
-	.align 1
-gUnknown_083CE2CA:: @ 83CE2CA
-	.2byte 4, 6, 5
-
-	.align 1
-gUnknown_083CE2D0:: @ 83CE2D0
-	.2byte 0, -4, -2, -1
-
-	.align 1
-gUnknown_083CE2D8:: @ 83CE2D8
-	.2byte 2,  3,  2,  1
-
-	.align 2
-gUnknown_083CE2E0:: @ 83CE2E0
-	.4byte nullsub_40
-	.4byte sub_80B6E68
-	.4byte sub_80B6EBC
-	.4byte sub_80B6EFC
-
-	.align 2
 gUnknown_083CE2F0:: @ 83CE2F0
 	.4byte sub_80B7660
 	.4byte sub_80B7650

@@ -66,7 +66,7 @@ u8 TestPlayerAvatarFlags(u8);
 // GetPlayerAvatarObjectId
 void sub_80597E8(void);
 void sub_80597F4(void);
-u8 sub_805983C(u8 a, u8 b);
+u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 // GetPlayerAvatarGenderByGraphicsId
 bool8 PartyHasMonWithSurf(void);
