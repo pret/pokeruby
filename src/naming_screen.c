@@ -69,7 +69,8 @@ extern u8 unk_2000000[];
 
 #define EWRAM_000000 (*(struct UnknownStruct1 *)(unk_2000000))
 
-//TODO: include "graphics/naming_screen/pc_icon/0.4bpp" and "graphics/naming_screen/pc_icon/1.4bpp" here
+const u32 gSpriteImage_83CE094[] = INCBIN_U32("graphics/naming_screen/pc_icon/0.4bpp");
+const u32 gSpriteImage_83CE154[] = INCBIN_U32("graphics/naming_screen/pc_icon/1.4bpp");
 
 //Some unused pointer, perhaps.
 asm(".section .rodata\n\
