@@ -236,9 +236,9 @@ void CFile::TryConvertString()
 
 bool CFile::CheckIdentifier(const std::string& ident)
 {
-    int i;
+    unsigned int i;
 
-    for (i = 0; (unsigned)i < ident.length() && m_pos + i < m_size; i++)
+    for (i = 0; i < ident.length() && m_pos + i < (unsigned)m_size; i++)
         if (ident[i] != m_buffer[m_pos + i])
             return false;
 
