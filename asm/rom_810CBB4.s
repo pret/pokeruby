@@ -2131,7 +2131,7 @@ _0810DBDC:
 	adds r0, r1
 	ldrb r1, [r0, 0x13]
 	movs r0, 0
-	bl sub_805983C
+	bl GetRivalAvatarGraphicsIdByStateIdAndGender
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp

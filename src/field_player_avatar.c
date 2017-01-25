@@ -1033,9 +1033,9 @@ void sub_80597F4(void)
     }
 }
 
-u8 sub_805983C(u8 a, u8 b)
+u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    return sRivalAvatarGfxIds[a][b];
+    return sRivalAvatarGfxIds[state][gender];
 }
 
 static u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
