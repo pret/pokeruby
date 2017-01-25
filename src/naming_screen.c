@@ -147,7 +147,7 @@ u8 sub_80B61C8(void);
 void sub_80B6FBC(void);
 void sub_80B7090(void);
 u8 GetInputPressedButton(void);
-u8 sub_80B7004(void);
+bool8 sub_80B7004(void);
 void sub_80B6914(void);
 void Task_HandleInput(u8);
 void HandleDpadMovement(struct Task *);
@@ -163,9 +163,17 @@ extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 extern u8 CreateMonIcon();
 extern void sub_809D51C(void);
 u8 sub_80B7768(s16, s16);
-u8 sub_80B7104(void);
-u8 sub_80B713C(void);
+bool8 sub_80B7104(void);
+bool8 sub_80B713C(void);
 void sub_80B7174(u8);
+bool8 sub_80B7198(u8);
+bool8 sub_80B7264(u8);
+void sub_80B7370(u8, u8);
+void sub_80B73CC(u8, u8);
+bool8 sub_80B71E4(u8);
+void sub_80B7474(u8, u8);
+void sub_80B72A4(u8, u8);
+bool8 sub_80B720C(u8);
 
 #define NAMING_SCREEN_A_BUTTON 5
 #define NAMING_SCREEN_B_BUTTON 6
@@ -593,7 +601,7 @@ u8 sub_80B6108(u8 a)
         u8 var = sub_80B7004();
         
         sub_80B6914();
-        if (var != 0)
+        if (var)
         {
             SetInputState(0);
             EWRAM_000000.state = 3;
@@ -1500,7 +1508,7 @@ void sub_80B6FBC(void)
     PlaySE(SE_BOWA);
 }
 
-u8 sub_80B7004(void)
+bool8 sub_80B7004(void)
 {
     s16 x;
     s16 y;
@@ -1522,7 +1530,141 @@ u8 sub_80B7004(void)
     if (r4 != 0)
     {
         if (sub_80B6F84() == EWRAM_000000.unk34->unk1 - 1)
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
+}
+
+void sub_80B7090(void)
+{
+    u8 r5;
+    u8 r4;
+    
+    r5 = sub_80B6F84();
+    r4 = EWRAM_000000.textBuffer[r5];
+    if (sub_80B7198(r4))
+    {
+        if (sub_80B7264(r4))
+            sub_80B7370(r4, r5);
+        else
+            sub_80B73CC(r4, r5);
+    }
+    else
+    {
+        if (sub_80B71E4(r4))
+            sub_80B7474(r4, r5);
+        else
+            sub_80B72A4(r4, r5);
+    }
+    sub_80B7960();
+    PlaySE(SE_SELECT);
+}
+
+bool8 sub_80B7104(void)
+{
+    u8 r5;
+    u8 r4;
+    
+    r5 = sub_80B6F84();
+    r4 = EWRAM_000000.textBuffer[r5];
+    if (sub_80B720C(r4))
+    {
+        sub_80B72A4(r4, r5);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80B713C(void)
+{
+    u8 r5;
+    u8 r4;
+    
+    r5 = sub_80B6F84();
+    r4 = EWRAM_000000.textBuffer[r5];
+    if (sub_80B7264(r4))
+    {
+        sub_80B7370(r4, r5);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80B7174(u8 a)
+{
+    u8 r0 = sub_80B6F44();
+    
+    EWRAM_000000.textBuffer[r0] = a;
+}
+
+bool8 sub_80B7198(u8 a)
+{
+    if ((a >= 55 && a <= 74)
+     || (a >= 135 && a <= 139)
+     || (a >= 140 && a <= 144)
+     || (a >= 145 && a <= 149)
+     || (a >= 150 && a <= 154))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_80B71E4(u8 a)
+{
+    if ((a >= 75 && a <= 79)
+     || (a >= 155 && a <= 159))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_80B720C(u8 a)
+{
+    if ((a >= 6 && a <= 20)
+     || (a >= 26 && a <= 30)
+     || (a >= 75 && a <= 79)
+     || (a >= 86 && a <= 100)
+     || (a >= 106 && a <= 110)
+     || (a >= 155 && a <= 159))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_80B7264(u8 a)
+{
+    if ((a >= 26 && a <= 30)
+     || (a >= 70 && a <= 74)
+     || (a >= 106 && a <= 110)
+     || (a >= 150 && a <= 154))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80B72A4(u8 a, u8 b)
+{
+    u8 chr = a;
+    
+    if (a >= 6 && a <= 10)
+        chr = a + 0x31;
+    else if (a >= 11 && a <= 15)
+        chr = a + 0x31;
+    else if (a >= 16 && a <= 20)
+        chr = a + 0x31;
+    else if (a >= 26 && a <= 30)
+        chr = a + 0x2C;
+    else if (a >= 75 && a <= 79)
+        chr = a + 0xFB;
+    else if (a >= 86 && a <= 90)
+        chr = a + 0x31;
+    else if (a >= 91 && a <= 95)
+        chr = a + 0x31;
+    else if (a >= 96 && a <= 100)
+        chr = a + 0x31;
+    else if (a >= 106 && a <= 110)
+        chr = a + 0x2C;
+    else if (a >= 155 && a <= 159)
+        chr = a + 0xFB;
+    EWRAM_000000.textBuffer[b] = chr;
 }
