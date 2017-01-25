@@ -151,7 +151,6 @@ SECTIONS {
         src/berry.o(.text);
         src/script_menu.o(.text);
         src/naming_screen.o(.text);
-        asm/naming_screen.o(.text);
         src/money.o(.text);
         asm/contest_effect.o(.text);
         src/record_mixing.o(.text);

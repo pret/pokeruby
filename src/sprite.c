@@ -1468,7 +1468,7 @@ void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotat
     CopyOamMatrix(matrixNum, &matrix);
 }
 
-u16 LoadSpriteSheet(struct SpriteSheet *sheet)
+u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
 {
     s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
@@ -1484,7 +1484,7 @@ u16 LoadSpriteSheet(struct SpriteSheet *sheet)
     }
 }
 
-void LoadSpriteSheets(struct SpriteSheet *sheets)
+void LoadSpriteSheets(const struct SpriteSheet *sheets)
 {
     u8 i;
     for (i = 0; sheets[i].data != NULL; i++)

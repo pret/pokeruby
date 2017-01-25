@@ -79,7 +79,6 @@ asm(".section .rodata\n\
 	.4byte 0x2000000\n");
 
 extern u16 *const gUnknown_083CE28C[];
-extern const struct UnknownStruct2 *const gUnknown_083CE398[];
 extern const struct SubspriteTable gSubspriteTables_83CE558[];
 extern const struct SubspriteTable gSubspriteTables_83CE560[];
 extern const struct SubspriteTable gSubspriteTables_83CE578[];
@@ -93,6 +92,20 @@ extern const struct SpriteTemplate gSpriteTemplate_83CE640;
 extern const struct SpriteTemplate gSpriteTemplate_83CE658;
 extern const struct SpriteTemplate gSpriteTemplate_83CE670;
 extern const struct SpriteTemplate gSpriteTemplate_83CE688;
+extern const struct SpriteSheet gUnknown_083CE6A0[];
+extern const struct SpritePalette gUnknown_083CE708[];
+extern const u8 gOtherText_SentToPC[];
+extern const u8 gNamingScreenMenu_Gfx[];
+extern u16 gMenuMessageBoxContentTileOffset;
+extern const u16 gNamingScreenPalettes[];
+extern const u16 gUnknown_083CE748[];
+extern const u16 gUnknown_083CEBF8[];
+extern const u16 gUnknown_083CF0A8[];
+extern const u16 gUnknown_08E86258[];
+extern const u8 gSpeciesNames[][11];
+extern const u8 OtherText_YourName[];
+extern const u8 OtherText_BoxName[];
+extern const u8 OtherText_PokeName[];
 
 void C2_NamingScreen(void);
 void sub_80B5AA0(void);
@@ -174,6 +187,12 @@ bool8 sub_80B71E4(u8);
 void sub_80B7474(u8, u8);
 void sub_80B72A4(u8, u8);
 bool8 sub_80B720C(u8);
+void sub_80B7568(void);
+void sub_80B75B0(void);
+void sub_80B7698(u16 *, const u16 *);
+void sub_80B76E0();
+void nullsub_20(u8, u8);
+void sub_80B785C(u8);
 
 #define NAMING_SCREEN_A_BUTTON 5
 #define NAMING_SCREEN_B_BUTTON 6
@@ -347,6 +366,8 @@ void NamingScreen_SetUpVideoRegs(void)
     REG_BLDCNT = 0x640;
     REG_BLDALPHA = 0x80C;
 }
+
+const struct UnknownStruct2 *const gUnknown_083CE398[];  //forward declaration
 
 void NamingScreen_Init(void)
 {
@@ -1668,3 +1689,401 @@ void sub_80B72A4(u8 a, u8 b)
         chr = a + 0xFB;
     EWRAM_000000.textBuffer[b] = chr;
 }
+
+void sub_80B7370(u8 a, u8 b)
+{
+    u8 chr = a;
+    
+    if (a >= 26 && a <= 30)
+        chr = a + 0x31;
+    else if (a >= 70 && a <= 74)
+        chr = a + 5;
+    else if (a >= 106 && a <= 110)
+        chr = a + 0x31;
+    else if (a >= 150 && a <= 154)
+        chr = a + 5;
+    EWRAM_000000.textBuffer[b] = chr;
+}
+
+void sub_80B73CC(u8 a, u8 b)
+{
+    u8 chr = a;
+    
+    if (a >= 55 && a <= 59)
+        chr = a + 0xCF;
+    else if (a >= 60 && a <= 64)
+        chr = a + 0xCF;
+    else if (a >= 65 && a <= 69)
+        chr = a + 0xCF;
+    else if (a >= 70 && a <= 74)
+        chr = a + 0xD4;
+    else if (a >= 135 && a <= 139)
+        chr = a + 0xCF;
+    else if (a >= 140 && a <= 144)
+        chr = a + 0xCF;
+    else if (a >= 145 && a <= 149)
+        chr = a + 0xCF;
+    else if (a >= 150 && a <= 154)
+        chr = a + 0xD4;
+    EWRAM_000000.textBuffer[b] = chr;
+}
+
+void sub_80B7474(u8 a, u8 b)
+{
+    u8 chr = a;
+    
+    if (a >= 75 && a <= 79)
+        chr = a + 0xCF;
+    else if (a >= 155 && a <= 159)
+        chr = a + 0xCF;
+    EWRAM_000000.textBuffer[b] = chr;
+}
+
+void sub_80B74B0(void)
+{
+    u8 i;
+    
+    for (i = 0; i < EWRAM_000000.unk34->unk1; i++)
+    {
+        if (EWRAM_000000.textBuffer[i] != 0 && EWRAM_000000.textBuffer[i] != 0xFF)
+        {
+            StringCopyN(EWRAM_000000.nameBuffer, EWRAM_000000.textBuffer, EWRAM_000000.unk34->unk1 + 1);
+            break;
+        }
+    }
+}
+
+void sub_80B74FC(void)
+{
+    StringCopy(gStringVar1, EWRAM_000000.nameBuffer);
+    StringExpandPlaceholders(gStringVar4, gOtherText_SentToPC);
+    BasicInitMenuWindow(&gWindowConfig_81E6E88);
+    MenuDisplayMessageBox();
+    sub_8072044(gStringVar4);
+}
+
+void sub_80B753C(void)
+{
+    LoadSpriteSheets(gUnknown_083CE6A0);
+    LoadSpritePalettes(gUnknown_083CE708);
+}
+
+void sub_80B7558(void)
+{
+    sub_80B7568();
+    sub_80B75B0();
+}
+
+void sub_80B7568(void)
+{
+    const void *src;
+    void *dst;
+    
+    src = gNamingScreenMenu_Gfx;
+    dst = (void *)(VRAM + gMenuMessageBoxContentTileOffset * 32);
+    DmaCopy16(3, src, dst, 0x800);
+    
+    src = gNamingScreenMenu_Gfx;
+    dst = (void *)(VRAM + 0x8000 + gMenuMessageBoxContentTileOffset * 32);
+    DmaCopy16(3, src, dst, 0x800);
+}
+
+void sub_80B75B0(void)
+{
+    LoadPalette(gNamingScreenPalettes, 0, 0x80);
+}
+
+void sub_80B7650(u16 *);
+void sub_80B7660(u16 *);
+void sub_80B7670(u16 *);
+
+static void (*const gUnknown_083CE2F0[][2])(u16 *) =
+{
+    {sub_80B7660, sub_80B7650},
+    {sub_80B7650, sub_80B7670},
+    {sub_80B7670, sub_80B7660},
+};
+
+void sub_80B75C4(void)
+{
+    u16 *const arr[] =
+    {
+        (u16 *)(VRAM + 0xE000),
+        (u16 *)(VRAM + 0xE800),
+    };
+    
+    gUnknown_083CE2F0[EWRAM_000000.currentPage][0](arr[EWRAM_000000.unkC]);
+    gUnknown_083CE2F0[EWRAM_000000.currentPage][1](arr[EWRAM_000000.unkD]);
+}
+
+void sub_80B7614(void)
+{
+    u16 *const arr[] =
+    {
+        (u16 *)(VRAM + 0xE000),
+        (u16 *)(VRAM + 0xE800),
+    };
+    
+    gUnknown_083CE2F0[EWRAM_000000.currentPage][1](arr[EWRAM_000000.unkD]);
+}
+
+void sub_80B7650(u16 *vramBuffer)
+{
+    sub_80B7698(vramBuffer, gUnknown_083CE748);
+}
+
+void sub_80B7660(u16 *vramBuffer)
+{
+    sub_80B7698(vramBuffer, gUnknown_083CEBF8);
+}
+
+void sub_80B7670(u16 *vramBuffer)
+{
+    sub_80B7698(vramBuffer, gUnknown_083CF0A8);
+}
+
+void sub_80B7680(void)
+{
+    sub_80B76E0(VRAM + 0xF000, gUnknown_08E86258);
+}
+
+void sub_80B7698(u16 *vramBuffer, const u16 *src)
+{
+    s16 i;
+    s16 j;
+    
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 30; j++, src++)
+        {
+            vramBuffer[i * 32 + j] = *src + gMenuMessageBoxContentTileOffset;
+        }
+    }
+}
+
+void sub_80B76E0(u16 *vramBuffer, const u16 *src)
+{
+    s16 i;
+    s16 j;
+    
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 30; j++, src++)
+        {
+            vramBuffer[i * 32 + j] = *src + gMenuMessageBoxContentTileOffset;
+        }
+        src += 2;
+    }
+}
+
+void sub_80B772C(void)
+{
+    nullsub_20(EWRAM_000000.currentPage, EWRAM_000000.unkC);
+}
+
+void sub_80B7740(void)
+{
+    nullsub_20((EWRAM_000000.currentPage + 1) % 3, EWRAM_000000.unkD);
+}
+
+void nullsub_20(u8 a, u8 b)
+{
+}
+
+void sub_80B7838(void);
+void sub_80B7844(void);
+void sub_80B7850(void);
+
+static void (*const gUnknown_083CE310[][2])(void) =
+{
+    sub_80B7844,
+    sub_80B7838,
+    sub_80B7838,
+    sub_80B7850,
+    sub_80B7850,
+    sub_80B7844,
+};
+
+const struct WindowConfig *const gUnknown_083CE328[][2][2] =
+{
+    {
+        {&gWindowConfig_81E6EDC, &gWindowConfig_81E6EF8},
+        {&gWindowConfig_81E6EA4, &gWindowConfig_81E6EC0},
+    },
+    {
+        {&gWindowConfig_81E6EA4, &gWindowConfig_81E6EC0},
+        {&gWindowConfig_81E6F14, &gWindowConfig_81E6F30},
+    },
+    {
+        {&gWindowConfig_81E6F14, &gWindowConfig_81E6F30},
+        {&gWindowConfig_81E6EDC, &gWindowConfig_81E6EF8},
+    },
+};
+
+void nullsub_61(void);
+void sub_80B78F8(void);
+
+void (*const gUnknown_083CE358[])(void) =
+{
+    nullsub_61,
+    nullsub_61,
+    sub_80B78F8,
+    sub_80B78F8,
+};
+
+void nullsub_62(void);
+void sub_80B7924(void);
+
+void (*const gUnknown_083CE368[])(void) =
+{
+    nullsub_62,
+    sub_80B7924,
+};
+
+extern const u8 gUnknown_083CE3A8[][4][20];
+
+u8 sub_80B7768(s16 a, s16 b)
+{
+    return gUnknown_083CE3A8[EWRAM_000000.currentPage][b][a];
+}
+
+void sub_80B7794(void)
+{
+    BasicInitMenuWindow(gUnknown_083CE328[EWRAM_000000.currentPage][0][EWRAM_000000.unkC]);
+    gUnknown_083CE310[EWRAM_000000.currentPage][0]();
+    BasicInitMenuWindow(gUnknown_083CE328[EWRAM_000000.currentPage][1][EWRAM_000000.unkD]);
+    gUnknown_083CE310[EWRAM_000000.currentPage][1]();
+    sub_80B772C();
+    sub_80B7740();
+}
+
+void sub_80B77F8(void)
+{
+    BasicInitMenuWindow(gUnknown_083CE328[EWRAM_000000.currentPage][1][EWRAM_000000.unkD]);
+    gUnknown_083CE310[EWRAM_000000.currentPage][1]();
+    sub_80B7740();
+}
+
+void sub_80B7838(void)
+{
+    sub_80B785C(1);
+}
+
+void sub_80B7844(void)
+{
+    sub_80B785C(0);
+}
+
+void sub_80B7850(void)
+{
+    sub_80B785C(2);
+}
+
+void sub_80B785C(u8 page)  //print letters on page
+{
+    s16 i;
+    s16 r5;
+    
+    for (i = 0, r5 = 9; i < 4; i++, r5 += 2)
+        MenuPrint(gUnknown_083CE3A8[page][i], 3, r5);
+}
+
+void sub_80B78A8(void)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E6F4C);
+    gUnknown_083CE358[EWRAM_000000.mode]();
+    gUnknown_083CE368[EWRAM_000000.unk34->unk3]();
+    MenuPrint(EWRAM_000000.unk34->title, 9, 2);
+}
+
+void nullsub_61(void)
+{
+}
+
+void sub_80B78F8(void)
+{
+    StringCopy(gStringVar1, gSpeciesNames[(s16)EWRAM_000000.unk3E]);
+}
+
+void nullsub_62(void)
+{
+}
+
+void sub_80B7924(void)
+{
+    u8 genderSymbol[2] = _("♂");
+    
+    if ((s16)EWRAM_000000.unk40 != 0xFF)
+    {
+        if ((s16)EWRAM_000000.unk40 == 0xFE)
+            genderSymbol[0] = 0xB6;  //female symbol
+        MenuPrint(genderSymbol, 0x14, 4);
+    }
+}
+
+void sub_80B7960(void)
+{
+    u8 *string = gStringVar1;
+    
+    string[0] = 0xFC;
+    string[1] = 0x14;
+    string[2] = 8;
+    string[3] = 0xFC;
+    string[4] = 0x11;
+    string[5] = 1;
+    string += 6;
+    StringCopy(string, EWRAM_000000.textBuffer);
+    BasicInitMenuWindow(&gWindowConfig_81E6F4C);
+    MenuPrint(gStringVar1, EWRAM_000000.unk2, 4);
+}
+
+//--------------------------------------------------
+// Forward-declared variables
+//--------------------------------------------------
+
+const struct UnknownStruct2 Unknown_83CE374 =
+{
+    0,
+    7,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    OtherText_YourName,
+};
+
+const struct UnknownStruct2 Unknown_83CE380 =
+{
+    0,
+    8,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    OtherText_BoxName,
+};
+
+const struct UnknownStruct2 Unknown_83CE38C =
+{
+    0,
+    10,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    OtherText_PokeName,
+};
+
+const struct UnknownStruct2 *const gUnknown_083CE398[] =
+{
+    &Unknown_83CE374,
+    &Unknown_83CE380,
+    &Unknown_83CE38C,
+    &Unknown_83CE38C,
+};
