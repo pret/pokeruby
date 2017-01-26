@@ -3,38 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083CE3A8:: @ 83CE3A8
-	.string " A B C  D E F    . $"
-	.string " G H I  J K L    , $"
-	.string " M N O  P Q R S    $"
-	.string " T U V  W X Y Z    $"
-	.string " a b c  d e f    . $"
-	.string " g h i  j k l    , $"
-	.string " m n o  p q r s    $"
-	.string " t u v  w x y z    $"
-	.string " 0  1  2  3  4     $"
-	.string " 5  6  7  8  9     $"
-	.string " !  ?  ♂  ♀  /  -  $"
-	.string " …  “  ”  ‘  ’     $"
-
-	.align 2
-gOamData_83CE498:: @ 83CE498
-	.2byte 0x0000
-	.2byte 0x0000
-	.2byte 0x0000
-
-	.align 2
-gOamData_83CE4A0:: @ 83CE4A0
-	.2byte 0x0000
-	.2byte 0x4000
-	.2byte 0x0000
-
-	.align 2
-gOamData_83CE4A8:: @ 83CE4A8
-	.2byte 0x4000
-	.2byte 0x8000
-	.2byte 0x0000
-
 	.align 2
 gSubspriteTable_83CE4B0:: @ 83CE4B0
 	subsprite -20, -16, 1,   0, 32x8
