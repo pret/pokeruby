@@ -1181,13 +1181,11 @@ void sub_80B6998(struct Sprite *sprite)
     }
     if ((sprite->data4 & 0xFF00) != 0)
     {
-        s16 var = sprite->data5;
-        s8 r4 = var;
-        s16 var2 = sprite->data5 >> 1;
-        s8 r5 = var2;
+        s8 gb = sprite->data5;
+        s8 r = sprite->data5 >> 1;
         u16 index = IndexOfSpritePaletteTag(5) * 16 + 0x0101;
         
-        MultiplyInvertedPaletteRGBComponents(index, r5, r4, r4);
+        MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
     }
 }
 
