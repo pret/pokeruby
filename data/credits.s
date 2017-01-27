@@ -3,12 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0840B7BC:: @ 840B7BC
-	.incbin "graphics/credits/palette_1.gbapal"
-
-gUnknown_0840B7FC:: @ 840B7FC
-	.incbin "graphics/credits/ampersand.4bpp"
-
 gUnknown_0840B83C:: @ 840B83C
 	.incbin "baserom.gba", 0x0040b83c, 0xf
 

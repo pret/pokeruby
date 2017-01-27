@@ -8,6 +8,7 @@
 #include "pokedex.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
@@ -18,17 +19,159 @@ struct MonCoords
     u8 x, y;
 };
 
+const u16 gBirchBagGrassPal[][16] =
+{
+    INCBIN_U16("graphics/misc/birch_bag.gbapal"),
+    INCBIN_U16("graphics/misc/birch_grass.gbapal"),
+};
+const u16 gBirchBallarrow_Pal[] = INCBIN_U16("graphics/misc/birch_ballarrow.gbapal");
+const u16 gBirchCircle_Pal[] = INCBIN_U16("graphics/misc/birch_circle.gbapal");
+const u8 gBirchBagTilemap[] = INCBIN_U8("graphics/misc/birch_bag_map.bin.lz");
+const u8 gBirchGrassTilemap[] = INCBIN_U8("graphics/misc/birch_grass_map.bin.lz");
+const u8 gBirchHelpGfx[] = INCBIN_U8("graphics/misc/birch_help.4bpp.lz");
+const u8 gBirchBallarrow_Gfx[] = INCBIN_U8("graphics/misc/birch_ballarrow.4bpp.lz");
+const u8 gBirchCircle_Gfx[] = INCBIN_U8("graphics/misc/birch_circle.4bpp.lz");
+const u8 gStarterChoose_PokeballCoords[][2] =
+{
+    {60, 64},
+    {120, 88},
+    {180, 64},
+};
+const u8 gStarterChoose_LabelCoords[][2] =
+{
+    {0, 9},
+    {16, 10},
+    {8, 4},
+};
+const u16 gStarterMons[] = {SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
+const struct OamData gOamData_83F76CC =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+const struct OamData gOamData_83F76D4 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+const struct OamData gOamData_83F76DC =
+{
+    .y = 160,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+const u8 gUnknown_083F76E4[][2] =
+{
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {0, 0},
+};
+const union AnimCmd gSpriteAnim_83F76EC[] =
+{
+    ANIMCMD_FRAME(48, 30),
+    ANIMCMD_END,
+};
+const union AnimCmd gSpriteAnim_83F76F4[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+const union AnimCmd gSpriteAnim_83F76FC[] =
+{
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0),
+};
+const union AnimCmd gSpriteAnim_83F7744[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+const union AnimCmd *const gSpriteAnimTable_83F774C[] =
+{
+    gSpriteAnim_83F76EC,
+};
+const union AnimCmd *const gSpriteAnimTable_83F7750[] =
+{
+    gSpriteAnim_83F76F4,
+    gSpriteAnim_83F76FC,
+};
+const union AnimCmd *const gSpriteAnimTable_83F7758[] =
+{
+    gSpriteAnim_83F7744,
+};
+const union AffineAnimCmd gSpriteAffineAnim_83F775C[] =
+{
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END,
+};
+const union AffineAnimCmd gSpriteAffineAnim_83F7774[] =
+{
+    AFFINEANIMCMD_FRAME(20, 20, 0, 0),
+    AFFINEANIMCMD_FRAME(20, 20, 0, 15),
+    AFFINEANIMCMD_END,
+};
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[] =
+{
+    gSpriteAffineAnim_83F775C,
+};
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] =
+{
+    gSpriteAffineAnim_83F7774,
+};
+
 extern void * const gUnknown_081FAF4C[];
-extern const u8 gStarterChoose_PokeballCoords[][2];
-extern u8 gBirchHelpGfx[];
-extern u8 gBirchBagTilemap[];
-extern u8 gBirchGrassTilemap[];
-extern struct SpriteSheet gUnknown_083F7794;
-extern struct SpriteSheet gUnknown_083F77A4;
-extern u8 gBirchBagGrassPal[];
-extern const u8 gStarterChoose_LabelCoords[][2];
-extern u16 gStarterMons[];
-extern union AffineAnimCmd *gSpriteAffineAnimTable_83F778C[];
+extern const struct SpriteSheet gUnknown_083F7794;
+extern const struct SpriteSheet gUnknown_083F77A4;
 extern u8 gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
 extern u8 gSpeciesNames[][11];
@@ -36,7 +179,6 @@ extern u8 gOtherText_Poke[];
 extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpritePalette gMonPaletteTable[];
-extern u8 gUnknown_083F76E4[][2];
 extern u8 gOtherText_BirchInTrouble[];
 
 extern struct SpriteTemplate gSpriteTemplate_83F77E4;
@@ -116,7 +258,7 @@ void CB2_ChooseStarter(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(gBirchBagGrassPal, 0, 0x40);
+    LoadPalette(gBirchBagGrassPal, 0, sizeof(gBirchBagGrassPal));
     LoadCompressedObjectPic(&gUnknown_083F7794);
     LoadCompressedObjectPic(&gUnknown_083F77A4);
     LoadSpritePalettes(gUnknown_083F77B4);

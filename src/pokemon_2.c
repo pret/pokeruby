@@ -39,10 +39,11 @@ extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
 extern u8 gSpeciesNames[][11];
 extern struct BattleMove gBattleMoves[];
-extern struct SpriteTemplate gSpriteTemplate_8208288[];
-extern union AmimCmd *gSpriteAnimTable_81E7C64[];
-extern union AnimCmd **gUnknown_081EC2A4[];
-extern union AnimCmd **gUnknown_081ECACC[];
+extern const struct SpriteTemplate gSpriteTemplate_8208288[];
+extern const union AmimCmd *const gSpriteAnimTable_81E7C64[];
+//array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
+extern const union AnimCmd *const *const gUnknown_081EC2A4[];
+extern const union AnimCmd *const *const gUnknown_081ECACC[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];
@@ -248,7 +249,8 @@ void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
     gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
     gUnknown_02024E8C.paletteTag = species;
-    gUnknown_02024E8C.anims = (union AnimCmd **)gSpriteAnimTable_81E7C64;
+    //Don't know why the compiler says this is incompatible
+    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
