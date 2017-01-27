@@ -199,17 +199,11 @@ const struct WildPokemon MeteorFalls_1F_1R_LandMons [] =
     {14, 14, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {16, 16, SPECIES_LUNATONE},
-#else
-    {16, 16, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {18, 18, SPECIES_LUNATONE},
-#else
-    {18, 18, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {14, 14, SPECIES_LUNATONE},
 #else
+    {16, 16, SPECIES_SOLROCK},
+    {18, 18, SPECIES_SOLROCK},
     {14, 14, SPECIES_SOLROCK},
 #endif
     {19, 19, SPECIES_ZUBAT},
@@ -225,17 +219,11 @@ const struct WildPokemon MeteorFalls_1F_1R_WaterMons [] =
     {30, 35, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {25, 35, SPECIES_LUNATONE},
-#else
-    {25, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {15, 25, SPECIES_LUNATONE},
-#else
-    {15, 25, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {5, 15, SPECIES_LUNATONE},
 #else
+    {25, 35, SPECIES_SOLROCK},
+    {15, 25, SPECIES_SOLROCK},
     {5, 15, SPECIES_SOLROCK},
 #endif
 };
@@ -263,17 +251,11 @@ const struct WildPokemon MeteorFalls_1F_2R_LandMons [] =
     {33, 33, SPECIES_GOLBAT},
 #ifdef SAPPHIRE
     {35, 35, SPECIES_LUNATONE},
-#else
-    {35, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {33, 33, SPECIES_LUNATONE},
-#else
-    {33, 33, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {37, 37, SPECIES_LUNATONE},
 #else
+    {35, 35, SPECIES_SOLROCK},
+    {33, 33, SPECIES_SOLROCK},
     {37, 37, SPECIES_SOLROCK},
 #endif
     {35, 35, SPECIES_GOLBAT},
@@ -295,17 +277,11 @@ const struct WildPokemon MeteorFalls_1F_2R_WaterMons [] =
     {30, 35, SPECIES_GOLBAT},
 #ifdef SAPPHIRE
     {25, 35, SPECIES_LUNATONE},
-#else
-    {25, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {15, 25, SPECIES_LUNATONE},
-#else
-    {15, 25, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {5, 15, SPECIES_LUNATONE},
 #else
+    {25, 35, SPECIES_SOLROCK},
+    {15, 25, SPECIES_SOLROCK},
     {5, 15, SPECIES_SOLROCK},
 #endif
 };
@@ -333,17 +309,11 @@ const struct WildPokemon MeteorFalls_B1F_1R_LandMons [] =
     {33, 33, SPECIES_GOLBAT},
 #ifdef SAPPHIRE
     {35, 35, SPECIES_LUNATONE},
-#else
-    {35, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {33, 33, SPECIES_LUNATONE},
-#else
-    {33, 33, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {37, 37, SPECIES_LUNATONE},
 #else
+    {35, 35, SPECIES_SOLROCK},
+    {33, 33, SPECIES_SOLROCK},
     {37, 37, SPECIES_SOLROCK},
 #endif
     {35, 35, SPECIES_GOLBAT},
@@ -365,17 +335,11 @@ const struct WildPokemon MeteorFalls_B1F_1R_WaterMons [] =
     {30, 35, SPECIES_GOLBAT},
 #ifdef SAPPHIRE
     {25, 35, SPECIES_LUNATONE},
-#else
-    {25, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {15, 25, SPECIES_LUNATONE},
-#else
-    {15, 25, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {5, 15, SPECIES_LUNATONE},
 #else
+    {25, 35, SPECIES_SOLROCK},
+    {15, 25, SPECIES_SOLROCK},
     {5, 15, SPECIES_SOLROCK},
 #endif
 };
@@ -431,17 +395,11 @@ const struct WildPokemon MeteorFalls_B1F_2R_WaterMons [] =
     {30, 35, SPECIES_GOLBAT},
 #ifdef SAPPHIRE
     {25, 35, SPECIES_LUNATONE},
-#else
-    {25, 35, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {15, 25, SPECIES_LUNATONE},
-#else
-    {15, 25, SPECIES_SOLROCK},
-#endif
-#ifdef SAPPHIRE
     {5, 15, SPECIES_LUNATONE},
 #else
+    {25, 35, SPECIES_SOLROCK},
+    {15, 25, SPECIES_SOLROCK},
     {5, 15, SPECIES_SOLROCK},
 #endif
 };
@@ -508,22 +466,13 @@ const struct WildPokemon GraniteCave_B1F_LandMons [] =
     {11, 11, SPECIES_MAKUHITA},
 #ifdef SAPPHIRE
     {10, 10, SPECIES_SABLEYE},
-#else
-    {10, 10, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {10, 10, SPECIES_SABLEYE},
-#else
-    {10, 10, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {9, 9, SPECIES_SABLEYE},
-#else
-    {9, 9, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {11, 11, SPECIES_SABLEYE},
 #else
+    {10, 10, SPECIES_MAWILE},
+    {10, 10, SPECIES_MAWILE},
+    {9, 9, SPECIES_MAWILE},
     {11, 11, SPECIES_MAWILE},
 #endif
 };
@@ -539,32 +488,17 @@ const struct WildPokemon GraniteCave_B2F_LandMons [] =
     {10, 10, SPECIES_ABRA},
 #ifdef SAPPHIRE
     {10, 10, SPECIES_SABLEYE},
-#else
-    {10, 10, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {11, 11, SPECIES_SABLEYE},
-#else
-    {11, 11, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {12, 12, SPECIES_SABLEYE},
-#else
-    {12, 12, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
+    {10, 10, SPECIES_SABLEYE},
+    {12, 12, SPECIES_SABLEYE},
     {10, 10, SPECIES_SABLEYE},
 #else
     {10, 10, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
-    {12, 12, SPECIES_SABLEYE},
-#else
+    {11, 11, SPECIES_MAWILE},
     {12, 12, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
-    {10, 10, SPECIES_SABLEYE},
-#else
+    {10, 10, SPECIES_MAWILE},
+    {12, 12, SPECIES_MAWILE},
     {10, 10, SPECIES_MAWILE},
 #endif
 };
@@ -660,12 +594,9 @@ const struct WildPokemon FieryPath_LandMons [] =
     {16, 16, SPECIES_TORKOAL},
 #ifdef SAPPHIRE
     {14, 14, SPECIES_KOFFING},
-#else
-    {14, 14, SPECIES_GRIMER},
-#endif
-#ifdef SAPPHIRE
     {14, 14, SPECIES_KOFFING},
 #else
+    {14, 14, SPECIES_GRIMER},
     {14, 14, SPECIES_GRIMER},
 #endif
 };
@@ -675,62 +606,29 @@ const struct WildPokemon MtPyre_1F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
+    {28, 28, SPECIES_SHUPPET},
+    {26, 26, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {23, 23, SPECIES_SHUPPET},
+    {22, 22, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
 #else
     {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {28, 28, SPECIES_SHUPPET},
-#else
     {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {26, 26, SPECIES_SHUPPET},
-#else
     {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {25, 25, SPECIES_SHUPPET},
-#else
     {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {23, 23, SPECIES_SHUPPET},
-#else
     {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {22, 22, SPECIES_SHUPPET},
-#else
     {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
 #endif
 };
@@ -740,62 +638,29 @@ const struct WildPokemon MtPyre_2F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
+    {28, 28, SPECIES_SHUPPET},
+    {26, 26, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {23, 23, SPECIES_SHUPPET},
+    {22, 22, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
 #else
     {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {28, 28, SPECIES_SHUPPET},
-#else
     {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {26, 26, SPECIES_SHUPPET},
-#else
     {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {25, 25, SPECIES_SHUPPET},
-#else
     {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {23, 23, SPECIES_SHUPPET},
-#else
     {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {22, 22, SPECIES_SHUPPET},
-#else
     {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
 #endif
 };
@@ -805,62 +670,29 @@ const struct WildPokemon MtPyre_3F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
+    {28, 28, SPECIES_SHUPPET},
+    {26, 26, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {23, 23, SPECIES_SHUPPET},
+    {22, 22, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
+    {29, 29, SPECIES_SHUPPET},
+    {24, 24, SPECIES_SHUPPET},
 #else
     {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {28, 28, SPECIES_SHUPPET},
-#else
     {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {26, 26, SPECIES_SHUPPET},
-#else
     {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {25, 25, SPECIES_SHUPPET},
-#else
     {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {23, 23, SPECIES_SHUPPET},
-#else
     {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {22, 22, SPECIES_SHUPPET},
-#else
     {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {29, 29, SPECIES_SHUPPET},
-#else
     {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
-    {24, 24, SPECIES_SHUPPET},
-#else
     {24, 24, SPECIES_DUSKULL},
 #endif
 };
@@ -870,62 +702,29 @@ const struct WildPokemon MtPyre_4F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
-#else
-    {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {28, 28, SPECIES_SHUPPET},
-#else
-    {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {26, 26, SPECIES_SHUPPET},
-#else
-    {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_SHUPPET},
-#else
-    {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_SHUPPET},
-#else
-    {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {24, 24, SPECIES_SHUPPET},
-#else
-    {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {23, 23, SPECIES_SHUPPET},
-#else
-    {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {22, 22, SPECIES_SHUPPET},
-#else
-    {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_DUSKULL},
-#else
-    {25, 25, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_DUSKULL},
 #else
+    {27, 27, SPECIES_DUSKULL},
+    {28, 28, SPECIES_DUSKULL},
+    {26, 26, SPECIES_DUSKULL},
+    {25, 25, SPECIES_DUSKULL},
+    {29, 29, SPECIES_DUSKULL},
+    {24, 24, SPECIES_DUSKULL},
+    {23, 23, SPECIES_DUSKULL},
+    {22, 22, SPECIES_DUSKULL},
+    {27, 27, SPECIES_SHUPPET},
+    {27, 27, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
     {29, 29, SPECIES_SHUPPET},
 #endif
 };
@@ -935,62 +734,29 @@ const struct WildPokemon MtPyre_5F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
-#else
-    {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {28, 28, SPECIES_SHUPPET},
-#else
-    {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {26, 26, SPECIES_SHUPPET},
-#else
-    {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_SHUPPET},
-#else
-    {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_SHUPPET},
-#else
-    {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {24, 24, SPECIES_SHUPPET},
-#else
-    {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {23, 23, SPECIES_SHUPPET},
-#else
-    {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {22, 22, SPECIES_SHUPPET},
-#else
-    {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_DUSKULL},
-#else
-    {25, 25, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_DUSKULL},
 #else
+    {27, 27, SPECIES_DUSKULL},
+    {28, 28, SPECIES_DUSKULL},
+    {26, 26, SPECIES_DUSKULL},
+    {25, 25, SPECIES_DUSKULL},
+    {29, 29, SPECIES_DUSKULL},
+    {24, 24, SPECIES_DUSKULL},
+    {23, 23, SPECIES_DUSKULL},
+    {22, 22, SPECIES_DUSKULL},
+    {27, 27, SPECIES_SHUPPET},
+    {27, 27, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
     {29, 29, SPECIES_SHUPPET},
 #endif
 };
@@ -1000,62 +766,29 @@ const struct WildPokemon MtPyre_6F_LandMons [] =
 {
 #ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
-#else
-    {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {28, 28, SPECIES_SHUPPET},
-#else
-    {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {26, 26, SPECIES_SHUPPET},
-#else
-    {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_SHUPPET},
-#else
-    {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_SHUPPET},
-#else
-    {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {24, 24, SPECIES_SHUPPET},
-#else
-    {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {23, 23, SPECIES_SHUPPET},
-#else
-    {23, 23, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {22, 22, SPECIES_SHUPPET},
-#else
-    {22, 22, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_DUSKULL},
-#else
-    {27, 27, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_DUSKULL},
-#else
-    {25, 25, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_DUSKULL},
 #else
+    {27, 27, SPECIES_DUSKULL},
+    {28, 28, SPECIES_DUSKULL},
+    {26, 26, SPECIES_DUSKULL},
+    {25, 25, SPECIES_DUSKULL},
+    {29, 29, SPECIES_DUSKULL},
+    {24, 24, SPECIES_DUSKULL},
+    {23, 23, SPECIES_DUSKULL},
+    {22, 22, SPECIES_DUSKULL},
+    {27, 27, SPECIES_SHUPPET},
+    {27, 27, SPECIES_SHUPPET},
+    {25, 25, SPECIES_SHUPPET},
     {29, 29, SPECIES_SHUPPET},
 #endif
 };
@@ -1094,52 +827,25 @@ const struct WildPokemon MtPyre_Summit_LandMons [] =
 {
 #ifdef SAPPHIRE
     {28, 28, SPECIES_SHUPPET},
-#else
-    {28, 28, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {29, 29, SPECIES_SHUPPET},
-#else
-    {29, 29, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {27, 27, SPECIES_SHUPPET},
-#else
-    {27, 27, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {26, 26, SPECIES_SHUPPET},
-#else
-    {26, 26, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {30, 30, SPECIES_SHUPPET},
-#else
-    {30, 30, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {25, 25, SPECIES_SHUPPET},
-#else
-    {25, 25, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {24, 24, SPECIES_SHUPPET},
-#else
-    {24, 24, SPECIES_DUSKULL},
-#endif
-#ifdef SAPPHIRE
     {28, 28, SPECIES_DUSKULL},
-#else
-    {28, 28, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {26, 26, SPECIES_DUSKULL},
-#else
-    {26, 26, SPECIES_SHUPPET},
-#endif
-#ifdef SAPPHIRE
     {30, 30, SPECIES_DUSKULL},
 #else
+    {28, 28, SPECIES_DUSKULL},
+    {29, 29, SPECIES_DUSKULL},
+    {27, 27, SPECIES_DUSKULL},
+    {26, 26, SPECIES_DUSKULL},
+    {30, 30, SPECIES_DUSKULL},
+    {25, 25, SPECIES_DUSKULL},
+    {24, 24, SPECIES_DUSKULL},
+    {28, 28, SPECIES_SHUPPET},
+    {26, 26, SPECIES_SHUPPET},
     {30, 30, SPECIES_SHUPPET},
 #endif
     {28, 28, SPECIES_CHIMECHO},
@@ -1382,17 +1088,11 @@ const struct WildPokemon CaveOfOrigin_1F_LandMons [] =
     {32, 32, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {30, 30, SPECIES_SABLEYE},
-#else
-    {30, 30, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {32, 32, SPECIES_SABLEYE},
-#else
-    {32, 32, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {34, 34, SPECIES_SABLEYE},
 #else
+    {30, 30, SPECIES_MAWILE},
+    {32, 32, SPECIES_MAWILE},
     {34, 34, SPECIES_MAWILE},
 #endif
     {33, 33, SPECIES_ZUBAT},
@@ -1411,17 +1111,11 @@ const struct WildPokemon CaveOfOrigin_B1F_LandMons [] =
     {32, 32, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {30, 30, SPECIES_SABLEYE},
-#else
-    {30, 30, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {32, 32, SPECIES_SABLEYE},
-#else
-    {32, 32, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {34, 34, SPECIES_SABLEYE},
 #else
+    {30, 30, SPECIES_MAWILE},
+    {32, 32, SPECIES_MAWILE},
     {34, 34, SPECIES_MAWILE},
 #endif
     {33, 33, SPECIES_ZUBAT},
@@ -1440,17 +1134,11 @@ const struct WildPokemon CaveOfOrigin_B2F_LandMons [] =
     {32, 32, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {30, 30, SPECIES_SABLEYE},
-#else
-    {30, 30, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {32, 32, SPECIES_SABLEYE},
-#else
-    {32, 32, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {34, 34, SPECIES_SABLEYE},
 #else
+    {30, 30, SPECIES_MAWILE},
+    {32, 32, SPECIES_MAWILE},
     {34, 34, SPECIES_MAWILE},
 #endif
     {33, 33, SPECIES_ZUBAT},
@@ -1469,17 +1157,11 @@ const struct WildPokemon CaveOfOrigin_B3F_LandMons [] =
     {32, 32, SPECIES_ZUBAT},
 #ifdef SAPPHIRE
     {30, 30, SPECIES_SABLEYE},
-#else
-    {30, 30, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {32, 32, SPECIES_SABLEYE},
-#else
-    {32, 32, SPECIES_MAWILE},
-#endif
-#ifdef SAPPHIRE
     {34, 34, SPECIES_SABLEYE},
 #else
+    {30, 30, SPECIES_MAWILE},
+    {32, 32, SPECIES_MAWILE},
     {34, 34, SPECIES_MAWILE},
 #endif
     {33, 33, SPECIES_ZUBAT},
@@ -1825,12 +1507,9 @@ const struct WildPokemon SkyPillar_1F_LandMons [] =
     {48, 48, SPECIES_CLAYDOL},
 #ifdef SAPPHIRE
     {48, 48, SPECIES_BANETTE},
-#else
-    {48, 48, SPECIES_DUSCLOPS},
-#endif
-#ifdef SAPPHIRE
     {50, 50, SPECIES_BANETTE},
 #else
+    {48, 48, SPECIES_DUSCLOPS},
     {50, 50, SPECIES_DUSCLOPS},
 #endif
     {49, 49, SPECIES_CLAYDOL},
@@ -1858,12 +1537,9 @@ const struct WildPokemon SkyPillar_3F_LandMons [] =
     {51, 51, SPECIES_CLAYDOL},
 #ifdef SAPPHIRE
     {51, 51, SPECIES_BANETTE},
-#else
-    {51, 51, SPECIES_DUSCLOPS},
-#endif
-#ifdef SAPPHIRE
     {53, 53, SPECIES_BANETTE},
 #else
+    {51, 51, SPECIES_DUSCLOPS},
     {53, 53, SPECIES_DUSCLOPS},
 #endif
     {52, 52, SPECIES_CLAYDOL},
@@ -1891,12 +1567,9 @@ const struct WildPokemon SkyPillar_5F_LandMons [] =
     {54, 54, SPECIES_CLAYDOL},
 #ifdef SAPPHIRE
     {54, 54, SPECIES_BANETTE},
-#else
-    {54, 54, SPECIES_DUSCLOPS},
-#endif
-#ifdef SAPPHIRE
     {56, 56, SPECIES_BANETTE},
 #else
+    {54, 54, SPECIES_DUSCLOPS},
     {56, 56, SPECIES_DUSCLOPS},
 #endif
     {55, 55, SPECIES_CLAYDOL},
@@ -1932,12 +1605,9 @@ const struct WildPokemon Route102_LandMons [] =
     {4, 4, SPECIES_WURMPLE},
 #ifdef SAPPHIRE
     {3, 3, SPECIES_LOTAD},
-#else
-    {3, 3, SPECIES_SEEDOT},
-#endif
-#ifdef SAPPHIRE
     {4, 4, SPECIES_LOTAD},
 #else
+    {3, 3, SPECIES_SEEDOT},
     {4, 4, SPECIES_SEEDOT},
 #endif
     {3, 3, SPECIES_POOCHYENA},
@@ -2205,12 +1875,9 @@ const struct WildPokemon Route110_LandMons [] =
     {12, 12, SPECIES_WINGULL},
 #ifdef SAPPHIRE
     {12, 12, SPECIES_MINUN},
-#else
-    {12, 12, SPECIES_PLUSLE},
-#endif
-#ifdef SAPPHIRE
     {13, 13, SPECIES_MINUN},
 #else
+    {12, 12, SPECIES_PLUSLE},
     {13, 13, SPECIES_PLUSLE},
 #endif
 };
@@ -2339,37 +2006,19 @@ const struct WildPokemon Route114_LandMons [] =
     {15, 15, SPECIES_SWABLU},
 #ifdef SAPPHIRE
     {15, 15, SPECIES_LOTAD},
+    {16, 16, SPECIES_SEVIPER},
+    {16, 16, SPECIES_LOMBRE},
+    {18, 18, SPECIES_LOMBRE},
+    {17, 17, SPECIES_SEVIPER},
+    {15, 15, SPECIES_SEVIPER},
+    {17, 17, SPECIES_SEVIPER},
 #else
     {15, 15, SPECIES_SEEDOT},
-#endif
-#ifdef SAPPHIRE
-    {16, 16, SPECIES_SEVIPER},
-#else
     {16, 16, SPECIES_ZANGOOSE},
-#endif
-#ifdef SAPPHIRE
-    {16, 16, SPECIES_LOMBRE},
-#else
     {16, 16, SPECIES_NUZLEAF},
-#endif
-#ifdef SAPPHIRE
-    {18, 18, SPECIES_LOMBRE},
-#else
     {18, 18, SPECIES_NUZLEAF},
-#endif
-#ifdef SAPPHIRE
-    {17, 17, SPECIES_SEVIPER},
-#else
     {17, 17, SPECIES_ZANGOOSE},
-#endif
-#ifdef SAPPHIRE
-    {15, 15, SPECIES_SEVIPER},
-#else
     {15, 15, SPECIES_ZANGOOSE},
-#endif
-#ifdef SAPPHIRE
-    {17, 17, SPECIES_SEVIPER},
-#else
     {17, 17, SPECIES_ZANGOOSE},
 #endif
     {15, 15, SPECIES_SURSKIT},
@@ -2480,27 +2129,15 @@ const struct WildPokemon Route117_LandMons [] =
     {13, 13, SPECIES_ODDISH},
 #ifdef SAPPHIRE
     {13, 13, SPECIES_VOLBEAT},
-#else
-    {13, 13, SPECIES_ILLUMISE},
-#endif
-#ifdef SAPPHIRE
     {13, 13, SPECIES_VOLBEAT},
-#else
-    {13, 13, SPECIES_ILLUMISE},
-#endif
-#ifdef SAPPHIRE
     {14, 14, SPECIES_VOLBEAT},
-#else
-    {14, 14, SPECIES_ILLUMISE},
-#endif
-#ifdef SAPPHIRE
     {14, 14, SPECIES_VOLBEAT},
-#else
-    {14, 14, SPECIES_ILLUMISE},
-#endif
-#ifdef SAPPHIRE
     {13, 13, SPECIES_ILLUMISE},
 #else
+    {13, 13, SPECIES_ILLUMISE},
+    {13, 13, SPECIES_ILLUMISE},
+    {14, 14, SPECIES_ILLUMISE},
+    {14, 14, SPECIES_ILLUMISE},
     {13, 13, SPECIES_VOLBEAT},
 #endif
     {13, 13, SPECIES_SURSKIT},
