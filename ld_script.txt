@@ -345,6 +345,7 @@ SECTIONS {
         data/cable_club.o(.rodata);
         data/mori_debug_menu.o(.rodata);
         data/trainer_see.o(.rodata);
+        src/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
@@ -362,7 +363,7 @@ SECTIONS {
         data/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
         data/shop.o(.rodata);
-        data/berry.o(.rodata);
+        src/berry.o(.rodata);
         data/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
@@ -394,8 +395,9 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai.o(.rodata);
         data/trader.o(.rodata);
+        src/starter_choose.o(.rodata);
         data/starter_choose.o(.rodata);
-        data/wallclock.o(.rodata);
+        src/wallclock.o(.rodata);
         data/pokeblock.o(.rodata);
         data/rom_810CBB4.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
@@ -413,9 +415,11 @@ SECTIONS {
         data/contest_ai.o(.rodata);
         data/rom_81258BC.o(.rodata);
         data/player_pc.o(.rodata);
+        src/intro.o(.rodata);
         data/intro.o(.rodata);
         data/battle_anim_813F0F4.o(.rodata);
         data/hall_of_fame.o(.rodata);
+        src/credits.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         data/diploma.o(.rodata);

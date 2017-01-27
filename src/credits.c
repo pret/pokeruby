@@ -180,8 +180,8 @@ extern u8 gBirchHelpGfx[];
 extern void *gUnknown_0840B5A0[];
 
 // data/credits
-extern u16 gUnknown_0840B7BC[32];
-extern u16 gUnknown_0840B7FC[32];
+const u16 gUnknown_0840B7BC[] = INCBIN_U16("graphics/credits/palette_1.gbapal");
+const u8 gUnknown_0840B7FC[] = INCBIN_U8("graphics/credits/ampersand.4bpp");
 extern u8 gUnknown_0840B83C[];
 extern u8 gUnknown_0840B84B[];
 extern u8 gUnknown_0840B85A[];
@@ -191,8 +191,8 @@ extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
 extern u8 gUnknown_0840CA00[][2];
 extern struct SpriteSheet gUnknown_0840CAA0;
 extern struct SpritePalette gUnknown_0840CAB0;
-extern union AnimCmd *gSpriteAnimTable_0840CA54[];
-extern union AnimCmd *gSpriteAnimTable_0840CA94[];
+extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
+extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
 extern struct SpriteTemplate gSpriteTemplate_840CAEC;
 
 // data/intro_credits_graphics
