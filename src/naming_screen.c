@@ -1157,7 +1157,6 @@ static u8 GetKeyRoleAtCursorPos(void)
         return keyRoles[cursorY];
 }
 
-#ifdef NONMATCHING
 void sub_80B6998(struct Sprite *sprite)
 {
     if (sprite->animEnded)
@@ -1180,147 +1179,17 @@ void sub_80B6998(struct Sprite *sprite)
             sprite->data6 = -sprite->data6;
         sprite->data7 = 2;
     }
-    //_080B6A3E
     if ((sprite->data4 & 0xFF00) != 0)
     {
-        //Can't get this part to match
-        u16 var = sprite->data5;
-        s8 r5 = var;
-        s16 var2 = var / 2;
-        s8 r4 = var2;
+        s16 var = sprite->data5;
+        s8 r4 = var;
+        s16 var2 = sprite->data5 >> 1;
+        s8 r5 = var2;
         u16 index = IndexOfSpritePaletteTag(5) * 16 + 0x0101;
         
-        MultiplyInvertedPaletteRGBComponents(index, r4, r5, r5);
+        MultiplyInvertedPaletteRGBComponents(index, r5, r4, r4);
     }
 }
-#else
-__attribute__((naked))
-void sub_80B6998(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r4, r0, 0\n\
-    adds r0, 0x3F\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080B69B0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-    bl StartSpriteAnim\n\
-_080B69B0:\n\
-    ldrh r1, [r4, 0x36]\n\
-    movs r0, 0xFF\n\
-    ands r0, r1\n\
-    adds r3, r4, 0\n\
-    adds r3, 0x3E\n\
-    movs r1, 0x1\n\
-    ands r0, r1\n\
-    lsls r0, 2\n\
-    ldrb r1, [r3]\n\
-    movs r2, 0x5\n\
-    negs r2, r2\n\
-    ands r2, r1\n\
-    orrs r2, r0\n\
-    strb r2, [r3]\n\
-    movs r1, 0x2E\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0x8\n\
-    bne _080B69DA\n\
-    movs r0, 0x4\n\
-    orrs r2, r0\n\
-    strb r2, [r3]\n\
-_080B69DA:\n\
-    ldrb r1, [r3]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080B6A0A\n\
-    movs r2, 0x36\n\
-    ldrsh r0, [r4, r2]\n\
-    movs r1, 0xFF\n\
-    lsls r1, 8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080B6A0A\n\
-    movs r0, 0x2E\n\
-    ldrsh r1, [r4, r0]\n\
-    movs r2, 0x32\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r1, r0\n\
-    bne _080B6A0A\n\
-    movs r0, 0x30\n\
-    ldrsh r1, [r4, r0]\n\
-    movs r2, 0x34\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r1, r0\n\
-    beq _080B6A16\n\
-_080B6A0A:\n\
-    movs r0, 0\n\
-    strh r0, [r4, 0x38]\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x3A]\n\
-    movs r0, 0x2\n\
-    strh r0, [r4, 0x3C]\n\
-_080B6A16:\n\
-    ldrh r0, [r4, 0x3C]\n\
-    subs r0, 0x1\n\
-    strh r0, [r4, 0x3C]\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    bne _080B6A3E\n\
-    ldrh r1, [r4, 0x3A]\n\
-    ldrh r2, [r4, 0x38]\n\
-    adds r0, r1, r2\n\
-    strh r0, [r4, 0x38]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x10\n\
-    beq _080B6A36\n\
-    cmp r0, 0\n\
-    bne _080B6A3A\n\
-_080B6A36:\n\
-    negs r0, r1\n\
-    strh r0, [r4, 0x3A]\n\
-_080B6A3A:\n\
-    movs r0, 0x2\n\
-    strh r0, [r4, 0x3C]\n\
-_080B6A3E:\n\
-    movs r1, 0x36\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r1, 0xFF\n\
-    lsls r1, 8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080B6A74\n\
-    ldrh r4, [r4, 0x38]\n\
-    lsls r5, r4, 24\n\
-    lsrs r5, 24\n\
-    lsls r4, 16\n\
-    asrs r4, 17\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0x5\n\
-    bl IndexOfSpritePaletteTag\n\
-    lsls r0, 24\n\
-    lsrs r0, 4\n\
-    ldr r2, _080B6A7C @ =0x01010000\n\
-    adds r0, r2\n\
-    lsrs r0, 16\n\
-    adds r1, r4, 0\n\
-    adds r2, r5, 0\n\
-    adds r3, r5, 0\n\
-    bl MultiplyInvertedPaletteRGBComponents\n\
-_080B6A74:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080B6A7C: .4byte 0x01010000\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_80B6A80(void)
 {
