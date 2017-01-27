@@ -265,7 +265,7 @@ static void sub_8146480(u8 taskid)
 
 static void sub_81464E4(void)
 {
-    struct Berry *berryInfo;
+    const struct Berry *berryInfo;
     u32 size;
     s32 sizeMajor;
     s32 sizeMinor;
@@ -306,7 +306,7 @@ static void sub_81464E4(void)
 
 static void sub_8146600(u8 berry)
 {
-    struct Berry *berryInfo;
+    const struct Berry *berryInfo;
     u16 i;
 
     berryInfo = GetBerryInfo(berry + 1);
