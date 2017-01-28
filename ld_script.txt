@@ -342,7 +342,6 @@ SECTIONS {
         data/weather.o(.rodata);
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
-        data/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/mori_debug_menu.o(.rodata);
         data/trainer_see.o(.rodata);
