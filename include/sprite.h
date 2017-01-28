@@ -45,6 +45,9 @@ struct AnimJumpCmd
     u32 target:6;
 };
 
+// The first halfword of this union specifies the type of command.
+// If it -2, then it is a jump command, if it is -2, then it is the end of the script.
+// Otherwise, it is the imageValue for a frame command.
 union AnimCmd
 {
     s16 type;
@@ -53,8 +56,8 @@ union AnimCmd
     struct AnimJumpCmd jump;
 };
 
-#define ANIMCMD_FRAME(_imageValue, _duration) \
-    {.frame = {.imageValue = _imageValue, .duration = _duration}}
+#define ANIMCMD_FRAME(...) \
+    {.frame = {__VA_ARGS__}}
 #define ANIMCMD_JUMP(_target) \
     {.jump = {.type = -2, .target = _target}}
 #define ANIMCMD_END \
@@ -67,11 +70,6 @@ struct AffineAnimFrameCmd
     u8 rotation;
     u8 duration;
 };
-
-#define AFFINEANIMCMD_FRAME(_xScale, _yScale, _rotation, _duration) \
-    {.frame = {.xScale = _xScale, .yScale = _yScale, .rotation = _rotation, .duration = _duration}}
-#define AFFINEANIMCMD_END \
-    {.type = 0x7FFF}
 
 struct AffineAnimLoopCmd
 {
@@ -92,6 +90,11 @@ union AffineAnimCmd
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
 };
+
+#define AFFINEANIMCMD_FRAME(_xScale, _yScale, _rotation, _duration) \
+    {.frame = {.xScale = _xScale, .yScale = _yScale, .rotation = _rotation, .duration = _duration}}
+#define AFFINEANIMCMD_END \
+    {.type = 0x7FFF}
 
 struct AffineAnimState
 {

@@ -33,7 +33,6 @@ extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
-
 extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gUnknown_03005EE0;
 extern u16 gSaveFileStatus;
@@ -45,53 +44,28 @@ extern struct MonCoords gMonBackPicCoords[];
 extern struct SpriteSheet gTrainerBackPicTable[];
 extern struct MonCoords gTrainerBackPicCoords[];
 extern struct SpritePalette gTrainerBackPicPaletteTable[];
-
-extern const union AnimCmd *const gUnknown_0840AE80[];
-extern const struct SpriteTemplate gSpriteTemplate_840AFF0;
-extern const struct SpritePalette gUnknown_0840B028[];
-extern const struct SpriteTemplate gSpriteTemplate_840B1F4;
-extern const struct SpriteSheet gIntro3PokeballGfx_Table;
-extern const struct SpriteSheet gIntro3MiscGfx_Table;
-extern const struct SpritePalette gInterfacePokeballPal_Table;
-extern const struct SpritePalette gIntro3MiscPal_Table[];
+extern const u8 gInterfaceGfx_PokeBall[];
+extern const u16 gInterfacePal_PokeBall[];
 extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
 extern const struct SpriteSheet gIntro2MaySpriteSheet;
 extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
 extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
 extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
 extern const struct SpritePalette gIntro2SpritePalettes[];
-
-extern const struct SpriteTemplate gSpriteTemplate_840AE20;
-
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
-
 extern const u16 gUnknown_08393E64[];
-extern const struct SpriteTemplate gSpriteTemplate_840AF94;
-extern const struct SpriteTemplate gSpriteTemplate_840AFAC;
-extern const struct SpriteTemplate gSpriteTemplate_840AFC4;
-extern const struct SpriteTemplate gSpriteTemplate_840B084;
-extern const struct SpriteTemplate gSpriteTemplate_840B0B0;
-extern const struct SpriteTemplate gSpriteTemplate_840B0DC;
-extern const struct SpriteTemplate gSpriteTemplate_840B0F4;
-extern const struct SpriteTemplate gSpriteTemplate_840B124;
-extern const struct SpriteTemplate gSpriteTemplate_840B150;
-extern const u8 gUnknown_0840B168[];
-extern const struct SpriteTemplate gSpriteTemplate_840B170;
-extern const u16 gUnknown_0840B188[];
-extern const struct SpriteTemplate gSpriteTemplate_840B1B0;
-extern const struct SpriteTemplate gSpriteTemplate_840B1C8;
-extern void *gUnknown_0840B5A0[];
+extern void *const gUnknown_0840B5A0[];
 extern const s16 gSineTable[];
 
 //--------------------------------------------------
 // Graphics Data
 //--------------------------------------------------
 
-const u16 Palette_406340[] = INCBIN_U16("graphics/intro/unknown1.gbapal");
-const u16 Palette_406360[] = INCBIN_U16("graphics/intro/unknown2.gbapal");
-const u8 gIntroTiles[] = INCBIN_U8("graphics/intro/intro.4bpp.lz");
+static const u16 Palette_406340[] = INCBIN_U16("graphics/intro/unknown1.gbapal");
+static const u16 Palette_406360[] = INCBIN_U16("graphics/intro/unknown2.gbapal");
+static const u8 gIntroTiles[] = INCBIN_U8("graphics/intro/intro.4bpp.lz");
 static const u16 gIntro1BGPals[][16] =
 {
     INCBIN_U16("graphics/intro/intro1_bgpal1.gbapal"),
@@ -122,11 +96,11 @@ static const u8 gIntro3Pokeball_Gfx[] = INCBIN_U8("graphics/intro/intro3_pokebal
 static const u16 gIntro3Streaks_Pal[] = INCBIN_U16("graphics/intro/intro3_streaks.gbapal");
 static const u8 gIntro3Streaks_Gfx[] = INCBIN_U8("graphics/intro/intro3_streaks.4bpp.lz");
 static const u8 gIntro3Streaks_Tilemap[] = INCBIN_U8("graphics/intro/intro3_streaks_map.bin.lz");
-const u16 gIntro3Misc1Palette[] = INCBIN_U16("graphics/intro/intro3_misc1.gbapal");
-const u16 gIntro3Misc2Palette[] = INCBIN_U16("graphics/intro/intro3_misc2.gbapal");
-const u8 gIntro3MiscTiles[] = INCBIN_U8("graphics/intro/intro3_misc.4bpp.lz");
-const u16 gIntro1EonPalette[] = INCBIN_U16("graphics/intro/intro1_eon.gbapal");
-const u8 gIntro1EonTiles[] = INCBIN_U8("graphics/intro/intro1_eon.4bpp.lz");
+static const u16 gIntro3Misc1Palette[] = INCBIN_U16("graphics/intro/intro3_misc1.gbapal");
+static const u16 gIntro3Misc2Palette[] = INCBIN_U16("graphics/intro/intro3_misc2.gbapal");
+static const u8 gIntro3MiscTiles[] = INCBIN_U8("graphics/intro/intro3_misc.4bpp.lz");
+static const u16 gIntro1EonPalette[] = INCBIN_U16("graphics/intro/intro1_eon.gbapal");
+static const u8 gIntro1EonTiles[] = INCBIN_U8("graphics/intro/intro1_eon.4bpp.lz");
 static const struct OamData gOamData_840ADE8 =
 {
     .y = 160,
@@ -218,7 +192,7 @@ static const union AnimCmd *const gUnknown_0840AE80[] =
     Unknown_40AE60,
     Unknown_40AE70,
 };
-const struct OamData gOamData_840AE90 =
+static const struct OamData gOamData_840AE90 =
 {
     .y = 160,
     .affineMode = 0,
@@ -234,7 +208,7 @@ const struct OamData gOamData_840AE90 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_840AE98 =
+static const struct OamData gOamData_840AE98 =
 {
     .y = 160,
     .affineMode = 0,
@@ -250,7 +224,7 @@ const struct OamData gOamData_840AE98 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_840AEA0 =
+static const struct OamData gOamData_840AEA0 =
 {
     .y = 160,
     .affineMode = 0,
@@ -336,7 +310,7 @@ static const union AnimCmd gSpriteAnim_840AF10[] =
     ANIMCMD_FRAME(128, 8),
     ANIMCMD_END,
 };
-const union AnimCmd *const gSpriteAnimTable_840AF18[] =
+static const union AnimCmd *const gSpriteAnimTable_840AF18[] =
 {
     gSpriteAnim_840AEA8,
     gSpriteAnim_840AEB0,
@@ -346,7 +320,7 @@ const union AnimCmd *const gSpriteAnimTable_840AF18[] =
     gSpriteAnim_840AED0,
     gSpriteAnim_840AED8,
 };
-const union AnimCmd *const gSpriteAnimTable_840AF34[] =
+static const union AnimCmd *const gSpriteAnimTable_840AF34[] =
 {
     gSpriteAnim_840AEE0,
     gSpriteAnim_840AEE8,
@@ -355,7 +329,7 @@ const union AnimCmd *const gSpriteAnimTable_840AF34[] =
     gSpriteAnim_840AF00,
     gSpriteAnim_840AF08,
 };
-const union AnimCmd *const gSpriteAnimTable_840AF4C[] =
+static const union AnimCmd *const gSpriteAnimTable_840AF4C[] =
 {
     gSpriteAnim_840AF10,
 };
@@ -382,8 +356,8 @@ static const s16 gUnknown_0840AF74[][2] =
     {5, 20},
     {3, 28},
 };
-void sub_813D908(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840AF94 =
+static void sub_813D908(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840AF94 =
 {
     .tileTag = 2000,
     .paletteTag = 2001,
@@ -393,7 +367,7 @@ const struct SpriteTemplate gSpriteTemplate_840AF94 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813D908,
 };
-const struct SpriteTemplate gSpriteTemplate_840AFAC =
+static const struct SpriteTemplate gSpriteTemplate_840AFAC =
 {
     .tileTag = 2000,
     .paletteTag = 2001,
@@ -403,7 +377,7 @@ const struct SpriteTemplate gSpriteTemplate_840AFAC =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813D908,
 };
-const struct SpriteTemplate gSpriteTemplate_840AFC4 =
+static const struct SpriteTemplate gSpriteTemplate_840AFC4 =
 {
     .tileTag = 2000,
     .paletteTag = 2001,
@@ -413,7 +387,7 @@ const struct SpriteTemplate gSpriteTemplate_840AFC4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813D908,
 };
-const struct OamData gOamData_840AFDC =
+static const struct OamData gOamData_840AFDC =
 {
     .y = 160,
     .affineMode = 0,
@@ -429,17 +403,17 @@ const struct OamData gOamData_840AFDC =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const union AnimCmd gSpriteAnim_840AFE4[] =
+static const union AnimCmd gSpriteAnim_840AFE4[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_JUMP(0),
 };
-const union AnimCmd *const gSpriteAnimTable_840AFEC[] =
+static const union AnimCmd *const gSpriteAnimTable_840AFEC[] =
 {
     gSpriteAnim_840AFE4,
 };
-void sub_813DA64(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840AFF0 =
+static void sub_813DA64(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840AFF0 =
 {
     .tileTag = 2002,
     .paletteTag = 2002,
@@ -466,29 +440,29 @@ const struct SpritePalette gUnknown_0840B028[] =
     {gIntro1EonPalette, 2002},
     {NULL},
 };
-const union AnimCmd gUnknown_0840B048[] =
+static const union AnimCmd gUnknown_0840B048[] =
 {
     ANIMCMD_FRAME(3, 0),
     ANIMCMD_END,
 };
-const union AnimCmd gUnknown_0840B050[] =
+static const union AnimCmd gUnknown_0840B050[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-const union AnimCmd gUnknown_0840B058[] =
+static const union AnimCmd gUnknown_0840B058[] =
 {
     ANIMCMD_FRAME(1, 8),
     ANIMCMD_FRAME(2, 8),
     ANIMCMD_END,
 };
-const union AnimCmd *const gUnknown_0840B064[] =
+static const union AnimCmd *const gUnknown_0840B064[] =
 {
     gUnknown_0840B048,
     gUnknown_0840B050,
     gUnknown_0840B058,
 };
-const struct OamData gOamData_840B070 =
+static const struct OamData gOamData_840B070 =
 {
     .y = 160,
     .affineMode = 0,
@@ -504,17 +478,17 @@ const struct OamData gOamData_840B070 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const union AnimCmd gSpriteAnim_840B078[] =
+static const union AnimCmd gSpriteAnim_840B078[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-const union AnimCmd *const gSpriteAnimTable_840B080[] =
+static const union AnimCmd *const gSpriteAnimTable_840B080[] =
 {
     gSpriteAnim_840B078,
 };
-void sub_813E30C(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840B084 =
+static void sub_813E30C(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B084 =
 {
     .tileTag = 2002,
     .paletteTag = 2002,
@@ -524,7 +498,7 @@ const struct SpriteTemplate gSpriteTemplate_840B084 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813E30C,
 };
-const struct OamData gOamData_840B09C =
+static const struct OamData gOamData_840B09C =
 {
     .y = 160,
     .affineMode = 0,
@@ -540,17 +514,17 @@ const struct OamData gOamData_840B09C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const union AnimCmd gSpriteAnim_840B0A4[] =
+static const union AnimCmd gSpriteAnim_840B0A4[] =
 {
     ANIMCMD_FRAME(1, 8),
     ANIMCMD_END,
 };
-const union AnimCmd *const gSpriteAnimTable_840B0AC[] =
+static const union AnimCmd *const gSpriteAnimTable_840B0AC[] =
 {
     gSpriteAnim_840B0A4,
 };
-void sub_813E4B8(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840B0B0 =
+static void sub_813E4B8(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B0B0 =
 {
     .tileTag = 2003,
     .paletteTag = 2003,
@@ -560,7 +534,7 @@ const struct SpriteTemplate gSpriteTemplate_840B0B0 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813E4B8,
 };
-const struct OamData gOamData_840B0C8 =
+static const struct OamData gOamData_840B0C8 =
 {
     .y = 160,
     .affineMode = 0,
@@ -576,17 +550,17 @@ const struct OamData gOamData_840B0C8 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const union AnimCmd gSpriteAnim_840B0D0[] =
+static const union AnimCmd gSpriteAnim_840B0D0[] =
 {
     ANIMCMD_FRAME(14, 8),
     ANIMCMD_END,
 };
-const union AnimCmd *const gSpriteAnimTable_840B0D8[] =
+static const union AnimCmd *const gSpriteAnimTable_840B0D8[] =
 {
     gSpriteAnim_840B0D0,
 };
-void sub_813E5E0(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840B0DC =
+static void sub_813E5E0(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B0DC =
 {
     .tileTag = 2003,
     .paletteTag = 2004,
@@ -596,8 +570,8 @@ const struct SpriteTemplate gSpriteTemplate_840B0DC =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813E5E0,
 };
-void sub_813E6C0(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_840B0F4 =
+static void sub_813E6C0(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B0F4 =
 {
     .tileTag = 2003,
     .paletteTag = 2004,
@@ -607,7 +581,7 @@ const struct SpriteTemplate gSpriteTemplate_840B0F4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813E6C0,
 };
-const struct OamData gOamData_840B10C =
+static const struct OamData gOamData_840B10C =
 {
     .y = 160,
     .affineMode = 0,
@@ -623,6 +597,181 @@ const struct OamData gOamData_840B10C =
     .paletteNum = 0,
     .affineParam = 0,
 };
+static const union AnimCmd gSpriteAnim_840B114[] =
+{
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(6, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+static const union AnimCmd *const gSpriteAnimTable_840B120[] =
+{
+    gSpriteAnim_840B114,
+};
+static void sub_813E804(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B124 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2004,
+    .oam = &gOamData_840B10C,
+    .anims = gSpriteAnimTable_840B120,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813E804,
+};
+static const struct OamData gOamData_840B13C =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const union AnimCmd gSpriteAnim_840B144[] =
+{
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const gSpriteAnimTable_840B14C[] =
+{
+    gSpriteAnim_840B144,
+};
+static void sub_813E980(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B150 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2004,
+    .oam = &gOamData_840B13C,
+    .anims = gSpriteAnimTable_840B14C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813E980,
+};
+static const u8 gUnknown_0840B168[] = {0xE6, 0xEB, 0xE4, 0xEA, 0xE5, 0xE9, 0xE7, 0xE8};
+static void sub_813EA60(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B170 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2004,
+    .oam = &gOamData_840B13C,
+    .anims = gSpriteAnimTable_840B14C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813EA60,
+};
+static const u16 gUnknown_0840B188[] = {0x200, 0x1C0, 0x180, 0x140, 0x100, 0xE0, 0xC0, 0xA0, 0x80, 0x80};
+static const struct OamData gOamData_840B19C =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const union AnimCmd gSpriteAnim_840B1A4[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const gSpriteAnimTable_840B1AC[] =
+{
+    gSpriteAnim_840B1A4,
+};
+static void sub_813EBBC(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B1B0 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2004,
+    .oam = &gOamData_840B19C,
+    .anims = gSpriteAnimTable_840B1AC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813EBBC,
+};
+static void sub_813EC90(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B1C8 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2004,
+    .oam = &gOamData_840B19C,
+    .anims = gSpriteAnimTable_840B1AC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813EC90,
+};
+static const struct OamData gOamData_840B1E0 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const union AnimCmd gSpriteAnim_840B1E8[] =
+{
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const gSpriteAnimTable_840B1F0[] =
+{
+    gSpriteAnim_840B1E8,
+};
+static void sub_813EDFC(struct Sprite *sprite);
+static const struct SpriteTemplate gSpriteTemplate_840B1F4 =
+{
+    .tileTag = 2003,
+    .paletteTag = 2003,
+    .oam = &gOamData_840B1E0,
+    .anims = gSpriteAnimTable_840B1F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_813EDFC,
+};
+const struct SpriteSheet gIntro3PokeballGfx_Table[] =
+{
+    {gInterfaceGfx_PokeBall, 0x100, 2002},
+    {NULL},
+};
+const struct SpriteSheet gIntro3MiscGfx_Table[] =
+{
+    {gIntro3MiscTiles, 0xa00, 2003},
+    {NULL},
+};
+const struct SpritePalette gInterfacePokeballPal_Table[] =
+{
+    {gInterfacePal_PokeBall, 2002},
+    {NULL},
+};
+const struct SpritePalette gIntro3MiscPal_Table[] =
+{
+    {gIntro3Misc1Palette, 2003},
+    {gIntro3Misc2Palette, 2004},
+    {NULL},
+};
+const u32 unusedData = 0x02000000;
 
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
@@ -650,18 +799,18 @@ static void sub_813CCE8(u8);
 static u16 sub_813CE88(u16, s16, s16, u16, u8);
 static u8 sub_813CFA8(u16, u16, u16, u16);
 static void sub_813D084(u8);
-void sub_813D220(struct Sprite *);
-void sub_813D368(struct Sprite *);
-void sub_813D414(struct Sprite *);
-void SpriteCB_WaterDropFall(struct Sprite *);
+static void sub_813D220(struct Sprite *);
+static void sub_813D368(struct Sprite *);
+static void sub_813D414(struct Sprite *);
+static void SpriteCB_WaterDropFall(struct Sprite *);
 static u8 CreateWaterDrop(s16, s16, u16, u16, u16, u8);
-void sub_813D788(struct Sprite *);
-void sub_813D880(struct Sprite *);
+static void sub_813D788(struct Sprite *);
+static void sub_813D880(struct Sprite *);
 static u8 CreateGameFreakLogo(s16, s16, u8);
-void sub_813DB9C(struct Sprite *);
-void sub_813DE70(struct Sprite *);
-void sub_813E10C(struct Sprite *);
-void sub_813E210(struct Sprite *);
+static void sub_813DB9C(struct Sprite *);
+static void sub_813DE70(struct Sprite *);
+static void sub_813E10C(struct Sprite *);
+static void sub_813E210(struct Sprite *);
 static void sub_813E580(u16, u16);
 static void sub_813E7C0(u8);
 static void sub_813E930(u8);
@@ -1095,9 +1244,9 @@ static void Task_IntroLoadPart3Streaks(u8 taskId)
     ResetSpriteData();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(&gIntro3PokeballGfx_Table);
-    LoadCompressedObjectPic(&gIntro3MiscGfx_Table);
-    LoadCompressedObjectPalette(&gInterfacePokeballPal_Table);
+    LoadCompressedObjectPic(&gIntro3PokeballGfx_Table[0]);
+    LoadCompressedObjectPic(&gIntro3MiscGfx_Table[0]);
+    LoadCompressedObjectPalette(&gInterfacePokeballPal_Table[0]);
     LoadSpritePalettes(gIntro3MiscPal_Table);
     gTasks[taskId].func = task_intro_14;
 }
@@ -1668,7 +1817,7 @@ static void sub_813D084(u8 a)
     gPlttBufferFaded[241] = color;
 }
 
-void sub_813D0CC(struct Sprite *sprite)
+static void sub_813D0CC(struct Sprite *sprite)
 {
     u8 r0;
 
@@ -1695,7 +1844,7 @@ void sub_813D0CC(struct Sprite *sprite)
     }
 }
 
-void sub_813D158(struct Sprite *sprite)
+static void sub_813D158(struct Sprite *sprite)
 {
     if (gSprites[sprite->data7].data7 != 0)
     {
@@ -1725,7 +1874,7 @@ static void sub_813D208(struct Sprite *sprite)
         sprite->callback = sub_813D220;
 }
 
-void sub_813D220(struct Sprite *sprite)
+static void sub_813D220(struct Sprite *sprite)
 {
     if (sprite->pos1.x <= 116)
     {
@@ -1774,7 +1923,7 @@ void sub_813D220(struct Sprite *sprite)
     }
 }
 
-void sub_813D368(struct Sprite *sprite)
+static void sub_813D368(struct Sprite *sprite)
 {
     SetOamMatrix(sprite->data1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
     SetOamMatrix(sprite->data1 + 1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
@@ -1795,7 +1944,7 @@ void sub_813D368(struct Sprite *sprite)
     }
 }
 
-void sub_813D414(struct Sprite *sprite)
+static void sub_813D414(struct Sprite *sprite)
 {
     if (sprite->data0 != 2)
     {
@@ -1812,7 +1961,7 @@ void sub_813D414(struct Sprite *sprite)
     }
 }
 
-void SpriteCB_WaterDropFall(struct Sprite *sprite)
+static void SpriteCB_WaterDropFall(struct Sprite *sprite)
 {
     if (sprite->pos1.y < sprite->data5)
     {
@@ -1835,7 +1984,7 @@ void SpriteCB_WaterDropFall(struct Sprite *sprite)
 }
 
 //Duplicate function
-void SpriteCB_WaterDropFall_2(struct Sprite *sprite)
+static void SpriteCB_WaterDropFall_2(struct Sprite *sprite)
 {
     if (sprite->pos1.y < sprite->data5)
     {
@@ -1904,7 +2053,7 @@ static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
     return oldSpriteId;
 }
 
-void sub_813D788(struct Sprite *sprite)
+static void sub_813D788(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -1956,7 +2105,7 @@ void sub_813D788(struct Sprite *sprite)
     }
 }
 
-void sub_813D880(struct Sprite *sprite)
+static void sub_813D880(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -1983,7 +2132,7 @@ void sub_813D880(struct Sprite *sprite)
     sprite->data1 += 4;
 }
 
-void sub_813D908(struct Sprite *sprite)
+static void sub_813D908(struct Sprite *sprite)
 {
     if (gTasks[sprite->data0].data[0] == 0)
     {
@@ -2023,7 +2172,7 @@ static u8 CreateGameFreakLogo(s16 a, s16 b, u8 c)
 }
 
 #ifdef NONMATCHING
-void sub_813DA64(struct Sprite *sprite)
+static void sub_813DA64(struct Sprite *sprite)
 {
     sprite->data7++;
 
@@ -2084,7 +2233,7 @@ void sub_813DA64(struct Sprite *sprite)
 }
 #else
 __attribute__((naked))
-void sub_813DA64(struct Sprite *sprite)
+static void sub_813DA64(struct Sprite *sprite)
 {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
@@ -2255,7 +2404,7 @@ _0813DB94:\n\
 }
 #endif
 
-void sub_813DB9C(struct Sprite *sprite)
+static void sub_813DB9C(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -2331,7 +2480,7 @@ void sub_813DB9C(struct Sprite *sprite)
     }
 }
 
-void sub_813DD58(struct Sprite *sprite)
+static void sub_813DD58(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -2374,7 +2523,7 @@ void sub_813DD58(struct Sprite *sprite)
     }
 }
 
-void sub_813DE70(struct Sprite *sprite)
+static void sub_813DE70(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -2452,7 +2601,7 @@ void sub_813DE70(struct Sprite *sprite)
     }
 }
 
-void sub_813E10C(struct Sprite *sprite)
+static void sub_813E10C(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -2520,7 +2669,7 @@ void sub_813E10C(struct Sprite *sprite)
     }
 }
 
-void sub_813E210(struct Sprite *sprite)
+static void sub_813E210(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
@@ -2588,7 +2737,7 @@ void sub_813E210(struct Sprite *sprite)
     }
 }
 
-void sub_813E30C(struct Sprite *sprite)
+static void sub_813E30C(struct Sprite *sprite)
 {
     u16 r4, r1;
 
@@ -2643,7 +2792,7 @@ void sub_813E30C(struct Sprite *sprite)
     }
 }
 
-void sub_813E4B8(struct Sprite *sprite)
+static void sub_813E4B8(struct Sprite *sprite)
 {
     u16 r4;
     u16 r2;
@@ -2689,7 +2838,7 @@ static void sub_813E580(u16 x, u16 y)
     }
 }
 
-void sub_813E5E0(struct Sprite *sprite)
+static void sub_813E5E0(struct Sprite *sprite)
 {
     if (gUnknown_0203931A != 0)
     {
@@ -2711,7 +2860,7 @@ void sub_813E5E0(struct Sprite *sprite)
     }
 }
 
-void sub_813E6C0(struct Sprite *sprite)
+static void sub_813E6C0(struct Sprite *sprite)
 {
     u8 spriteId;
     u8 i;
@@ -2767,7 +2916,7 @@ static void sub_813E7C0(u8 a)
     }
 }
 
-void sub_813E804(struct Sprite *sprite)
+static void sub_813E804(struct Sprite *sprite)
 {
     if (gUnknown_0203931A != 0)
     {
@@ -2808,7 +2957,7 @@ static void sub_813E930(u8 a)
     }
 }
 
-void sub_813E980(struct Sprite *sprite)
+static void sub_813E980(struct Sprite *sprite)
 {
     if (gUnknown_0203931A != 0)
     {
@@ -2834,7 +2983,7 @@ void sub_813E980(struct Sprite *sprite)
     }
 }
 
-void sub_813EA60(struct Sprite *sprite)
+static void sub_813EA60(struct Sprite *sprite)
 {
     bool32 r6;
     s16 r1, r2;
@@ -2891,7 +3040,7 @@ static void InitIntroTorchicAttackAnim(u8 a)
     }
 }
 
-void sub_813EBBC(struct Sprite *sprite)
+static void sub_813EBBC(struct Sprite *sprite)
 {
     if (gUnknown_0203931A != 0)
     {
@@ -2911,7 +3060,7 @@ void sub_813EBBC(struct Sprite *sprite)
     }
 }
 
-void sub_813EC90(struct Sprite *sprite)
+static void sub_813EC90(struct Sprite *sprite)
 {
     bool32 r6;
     s16 r1, r2;
@@ -2970,7 +3119,7 @@ static void InitIntroMudkipAttackAnim(u8 a)
     }
 }
 
-void sub_813EDFC(struct Sprite *sprite)
+static void sub_813EDFC(struct Sprite *sprite)
 {
     u16 foo;
 
