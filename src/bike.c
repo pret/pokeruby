@@ -1022,7 +1022,7 @@ static void sub_80E6024(void)
 
 s16 GetPlayerSpeed(void)
 {
-    // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the speed to use for the player movement on the overworld.
+    // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the player's current speed.
     s16 machSpeeds[3];
 
     memcpy(machSpeeds, gMachBikeSpeeds, sizeof(machSpeeds));
