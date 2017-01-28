@@ -16,8 +16,8 @@
 
 struct Coords32
 {
-	s32 x;
-	s32 y;
+    s32 x;
+    s32 y;
 };
 
 extern const struct Coords32 gUnknown_0821664C[];

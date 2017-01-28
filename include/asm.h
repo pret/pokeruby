@@ -30,19 +30,19 @@ struct FieldInput
 
 struct UnknownStruct_FPA
 {
-	u8 unk0;
-	u8 unk1;
-	u8 unk2;
-	s16 unk4;
-	s16 unk6;
-	u8 unk8;
-	u8 unk9;
-	u8 unkA_0:4;
-	u8 unkA_4:4;
-	u16 unkC;
-	u16 unkE;
-	u32 unk10;
-	u16 unk14;
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    s16 unk4;
+    s16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA_0:4;
+    u8 unkA_4:4;
+    u16 unkC;
+    u16 unkE;
+    u32 unk10;
+    u16 unk14;
 };
 
 #include "asm.inc.h"

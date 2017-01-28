@@ -5,8 +5,8 @@
 
 struct FrameGraphics
 {
-	u8 *tiles;
-	u16 *palette;
+    u8 *tiles;
+    u16 *palette;
 };
 
 u16 SetTextWindowBaseTileNum(u16 baseTileNum);

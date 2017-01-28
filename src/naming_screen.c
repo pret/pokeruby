@@ -80,8 +80,8 @@ const u32 gSpriteImage_83CE154[] = INCBIN_U32("graphics/naming_screen/pc_icon/1.
 //Some unused pointer, perhaps.
 asm(".section .rodata\n\
 @ XXX: what is this?\n\
-	.align 2\n\
-	.4byte 0x2000000\n");
+    .align 2\n\
+    .4byte 0x2000000\n");
 
 extern u16 *const gUnknown_083CE28C[];
 extern const struct SubspriteTable gSubspriteTables_83CE558[];

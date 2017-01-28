@@ -5,10 +5,10 @@
 
 struct HealLocation
 {
-	s8 group;
-	s8 map;
-	u16 x;
-	u16 y;
+    s8 group;
+    s8 map;
+    u16 x;
+    u16 y;
 };
 
 u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum);

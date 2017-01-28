@@ -3,23 +3,23 @@
 
 struct SaveSectionLocation
 {
-	void *data;
-	u16 size;
+    void *data;
+    u16 size;
 };
 
 struct SaveSection
 {
-	u8 data[0xFF4];
-	u16 id;
-	u16 checksum;
-	u32 unknown;
-	u32 counter;
+    u8 data[0xFF4];
+    u16 id;
+    u16 checksum;
+    u32 unknown;
+    u32 counter;
 };
 
 struct UnkSaveSection
 {
-	u8 data[0xFF4];
-	u32 unknown;
+    u8 data[0xFF4];
+    u32 unknown;
 };
 
 void ClearSaveData(void);

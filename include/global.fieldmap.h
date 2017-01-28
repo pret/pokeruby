@@ -14,16 +14,16 @@ enum
 // map types
 enum
 {
-	MAP_TYPE_0,
-	MAP_TYPE_TOWN,
-	MAP_TYPE_CITY,
-	MAP_TYPE_ROUTE,
-	MAP_TYPE_UNDERGROUND,
-	MAP_TYPE_UNDERWATER,
-	MAP_TYPE_6,
-	MAP_TYPE_7,
-	MAP_TYPE_INDOOR,
-	MAP_TYPE_SECRET_BASE
+    MAP_TYPE_0,
+    MAP_TYPE_TOWN,
+    MAP_TYPE_CITY,
+    MAP_TYPE_ROUTE,
+    MAP_TYPE_UNDERGROUND,
+    MAP_TYPE_UNDERWATER,
+    MAP_TYPE_6,
+    MAP_TYPE_7,
+    MAP_TYPE_INDOOR,
+    MAP_TYPE_SECRET_BASE
 };
 
 // map battle scenes
@@ -337,10 +337,10 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x05*/ u8 mapObjectId;
     /*0x06*/ u8 unk6;
     /*0x07*/ u8 gender;
-	u8 acroBikeState;
-	u8 unk9;
-	u8 bikeFrameCounter;
-	u8 unkB;
+    u8 acroBikeState;
+    u8 unk9;
+    u8 bikeFrameCounter;
+    u8 unkB;
     u32 unkC;
     u32 unk10;
     u8 unk14[8];

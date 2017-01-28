@@ -448,13 +448,13 @@ static void Task_StarterChoose5(u8 taskId)
 
     switch (ProcessMenuInputNoWrap_())
     {
-        case 0:		//YES
+        case 0:  // YES
             //Return the starter choice and exit.
             gScriptResult = gTasks[taskId].tStarterSelection;
             SetMainCallback2(gMain.savedCallback);
             break;
-        case 1:     //NO
-        case -1:    //B button
+        case 1:  // NO
+        case -1: // B button
             PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(21, 7, 27, 12);
 

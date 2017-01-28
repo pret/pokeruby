@@ -80,84 +80,84 @@ void sub_80B92AC(void)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
-	bl sub_80BC300\n\
-	bl sub_80C045C\n\
-	ldr r6, _080B9364 @ =0x02018000\n\
-	ldr r0, _080B9368 @ =recordMixingSecretBases\n\
-	ldr r1, [r0]\n\
-	movs r2, 0xC8\n\
-	lsls r2, 4\n\
-	adds r0, r6, 0\n\
-	bl memcpy\n\
-	movs r1, 0xC8\n\
-	lsls r1, 4\n\
-	adds r0, r6, r1\n\
-	ldr r1, _080B936C @ =recordMixingTvShows\n\
-	ldr r1, [r1]\n\
-	movs r2, 0xE1\n\
-	lsls r2, 2\n\
-	bl memcpy\n\
-	ldr r2, _080B9370 @ =0x00001004\n\
-	adds r0, r6, r2\n\
-	ldr r1, _080B9374 @ =gUnknown_083D0274\n\
-	ldr r1, [r1]\n\
-	movs r2, 0x40\n\
-	bl memcpy\n\
-	ldr r1, _080B9378 @ =0x00001044\n\
-	adds r0, r6, r1\n\
-	ldr r1, _080B937C @ =gUnknown_083D0278\n\
-	ldr r1, [r1]\n\
-	movs r2, 0x40\n\
-	bl memcpy\n\
-	ldr r2, _080B9380 @ =0x00001084\n\
-	adds r0, r6, r2\n\
-	ldr r1, _080B9384 @ =recordMixingEasyChatPairs\n\
-	ldr r1, [r1]\n\
-	movs r2, 0x28\n\
-	bl memcpy\n\
-	ldr r5, _080B9388 @ =gUnknown_02038738\n\
-	ldr r4, _080B938C @ =gSaveBlock1\n\
-	ldr r0, _080B9390 @ =0x0000303c\n\
-	adds r1, r4, r0\n\
-	adds r0, r5, 0\n\
-	movs r2, 0x38\n\
-	bl memcpy\n\
-	ldr r2, _080B9394 @ =0x00003074\n\
-	adds r1, r4, r2\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x38\n\
-	movs r2, 0x38\n\
-	bl memcpy\n\
-	ldr r0, _080B9398 @ =0x00002f9c\n\
-	adds r4, r0\n\
-	adds r0, r4, 0\n\
-	adds r1, r5, 0\n\
-	bl sub_8041324\n\
-	ldr r1, _080B939C @ =0x000010ac\n\
-	adds r0, r6, r1\n\
-	ldr r1, _080B93A0 @ =gUnknown_083D0280\n\
-	ldr r1, [r1]\n\
-	movs r2, 0x78\n\
-	bl memcpy\n\
-	ldr r2, _080B93A4 @ =0x00001124\n\
-	adds r0, r6, r2\n\
-	ldr r1, _080B93A8 @ =gUnknown_083D0284\n\
-	ldr r1, [r1]\n\
-	movs r2, 0xA4\n\
-	bl memcpy\n\
-	bl GetMultiplayerId\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _080B935C\n\
-	bl sub_8126338\n\
-	ldr r2, _080B93AC @ =0x000011c8\n\
-	adds r1, r6, r2\n\
-	strh r0, [r1]\n\
+    bl sub_80BC300\n\
+    bl sub_80C045C\n\
+    ldr r6, _080B9364 @ =0x02018000\n\
+    ldr r0, _080B9368 @ =recordMixingSecretBases\n\
+    ldr r1, [r0]\n\
+    movs r2, 0xC8\n\
+    lsls r2, 4\n\
+    adds r0, r6, 0\n\
+    bl memcpy\n\
+    movs r1, 0xC8\n\
+    lsls r1, 4\n\
+    adds r0, r6, r1\n\
+    ldr r1, _080B936C @ =recordMixingTvShows\n\
+    ldr r1, [r1]\n\
+    movs r2, 0xE1\n\
+    lsls r2, 2\n\
+    bl memcpy\n\
+    ldr r2, _080B9370 @ =0x00001004\n\
+    adds r0, r6, r2\n\
+    ldr r1, _080B9374 @ =gUnknown_083D0274\n\
+    ldr r1, [r1]\n\
+    movs r2, 0x40\n\
+    bl memcpy\n\
+    ldr r1, _080B9378 @ =0x00001044\n\
+    adds r0, r6, r1\n\
+    ldr r1, _080B937C @ =gUnknown_083D0278\n\
+    ldr r1, [r1]\n\
+    movs r2, 0x40\n\
+    bl memcpy\n\
+    ldr r2, _080B9380 @ =0x00001084\n\
+    adds r0, r6, r2\n\
+    ldr r1, _080B9384 @ =recordMixingEasyChatPairs\n\
+    ldr r1, [r1]\n\
+    movs r2, 0x28\n\
+    bl memcpy\n\
+    ldr r5, _080B9388 @ =gUnknown_02038738\n\
+    ldr r4, _080B938C @ =gSaveBlock1\n\
+    ldr r0, _080B9390 @ =0x0000303c\n\
+    adds r1, r4, r0\n\
+    adds r0, r5, 0\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    ldr r2, _080B9394 @ =0x00003074\n\
+    adds r1, r4, r2\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x38\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    ldr r0, _080B9398 @ =0x00002f9c\n\
+    adds r4, r0\n\
+    adds r0, r4, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_8041324\n\
+    ldr r1, _080B939C @ =0x000010ac\n\
+    adds r0, r6, r1\n\
+    ldr r1, _080B93A0 @ =gUnknown_083D0280\n\
+    ldr r1, [r1]\n\
+    movs r2, 0x78\n\
+    bl memcpy\n\
+    ldr r2, _080B93A4 @ =0x00001124\n\
+    adds r0, r6, r2\n\
+    ldr r1, _080B93A8 @ =gUnknown_083D0284\n\
+    ldr r1, [r1]\n\
+    movs r2, 0xA4\n\
+    bl memcpy\n\
+    bl GetMultiplayerId\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _080B935C\n\
+    bl sub_8126338\n\
+    ldr r2, _080B93AC @ =0x000011c8\n\
+    adds r1, r6, r2\n\
+    strh r0, [r1]\n\
 _080B935C:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080B9364: .4byte 0x02018000\n\
 _080B9368: .4byte recordMixingSecretBases\n\
 _080B936C: .4byte recordMixingTvShows\n\
@@ -551,70 +551,70 @@ void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
-	mov r6, r10\n\
-	mov r5, r9\n\
-	mov r4, r8\n\
-	push {r4-r6}\n\
-	sub sp, 0x38\n\
-	mov r8, r0\n\
-	mov r10, r1\n\
-	mov r9, r2\n\
-	adds r4, r3, 0\n\
-	ldr r5, [sp, 0x54]\n\
-	lsls r4, 24\n\
-	lsls r5, 24\n\
-	lsrs r5, 24\n\
-	lsrs r4, 23\n\
-	add r4, r9\n\
-	ldrb r0, [r4]\n\
-	mov r6, r10\n\
-	muls r6, r0\n\
-	add r6, r8\n\
-	ldrb r0, [r4, 0x1]\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r6, r1\n\
-	mov r0, sp\n\
-	movs r2, 0x38\n\
-	bl memcpy\n\
-	lsls r5, 1\n\
-	add r5, r9\n\
-	ldrb r0, [r5]\n\
-	mov r1, r10\n\
-	muls r1, r0\n\
-	adds r0, r1, 0\n\
-	add r8, r0\n\
-	ldrb r1, [r4, 0x1]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 3\n\
-	adds r6, r0\n\
-	ldrb r0, [r5, 0x1]\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 3\n\
-	add r1, r8\n\
-	adds r0, r6, 0\n\
-	movs r2, 0x38\n\
-	bl memcpy\n\
-	ldrb r1, [r5, 0x1]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 3\n\
-	add r8, r0\n\
-	mov r0, r8\n\
-	mov r1, sp\n\
-	movs r2, 0x38\n\
-	bl memcpy\n\
-	add sp, 0x38\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
+    mov r6, r10\n\
+    mov r5, r9\n\
+    mov r4, r8\n\
+    push {r4-r6}\n\
+    sub sp, 0x38\n\
+    mov r8, r0\n\
+    mov r10, r1\n\
+    mov r9, r2\n\
+    adds r4, r3, 0\n\
+    ldr r5, [sp, 0x54]\n\
+    lsls r4, 24\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    lsrs r4, 23\n\
+    add r4, r9\n\
+    ldrb r0, [r4]\n\
+    mov r6, r10\n\
+    muls r6, r0\n\
+    add r6, r8\n\
+    ldrb r0, [r4, 0x1]\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 3\n\
+    adds r1, r6, r1\n\
+    mov r0, sp\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    lsls r5, 1\n\
+    add r5, r9\n\
+    ldrb r0, [r5]\n\
+    mov r1, r10\n\
+    muls r1, r0\n\
+    adds r0, r1, 0\n\
+    add r8, r0\n\
+    ldrb r1, [r4, 0x1]\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    lsls r0, 3\n\
+    adds r6, r0\n\
+    ldrb r0, [r5, 0x1]\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 3\n\
+    add r1, r8\n\
+    adds r0, r6, 0\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    ldrb r1, [r5, 0x1]\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    lsls r0, 3\n\
+    add r8, r0\n\
+    mov r0, r8\n\
+    mov r1, sp\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    add sp, 0x38\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 #endif

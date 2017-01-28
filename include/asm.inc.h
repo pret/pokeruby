@@ -78,7 +78,7 @@ u8 AddCameraObject(u8);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 u8 FieldObjectGetBerryTreeId(u8);
 void sub_805C754(struct MapObject *pObject);
-void sub_805C774(struct MapObject *,			 u8 );
+void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(int i);
 u8 FieldObjectDirectionToImageAnimId(u8);
