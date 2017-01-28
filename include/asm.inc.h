@@ -78,7 +78,7 @@ u8 AddCameraObject(u8);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 u8 FieldObjectGetBerryTreeId(u8);
 void sub_805C754(struct MapObject *pObject);
-void sub_805C774(struct MapObject *,			 u8 );
+void sub_805C774(struct MapObject *,             u8 );
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(int i);
 u8 FieldObjectDirectionToImageAnimId(u8);
@@ -363,7 +363,7 @@ u8 IsRunningDisallowed(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
-s16 GetPlayerSpeedToUse(void);
+s16 GetPlayerSpeed(void);
 void sub_80E6084();
 
 // asm/easy_chat.o

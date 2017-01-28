@@ -16,8 +16,8 @@
 
 struct Coords32
 {
-	s32 x;
-	s32 y;
+    s32 x;
+    s32 y;
 };
 
 extern const struct Coords32 gUnknown_0821664C[];
@@ -137,7 +137,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
     if ((r6 == 2 && forcedMove == FALSE) || r6 == 0)
     {
-        if (GetPlayerSpeedToUse() != 4)
+        if (GetPlayerSpeed() != 4)
         {
             if (newKeys & START_BUTTON)
                 input->pressedStartButton = TRUE;

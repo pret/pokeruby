@@ -489,7 +489,7 @@ u8 ForcedMovement_MuddySlope(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if (playerMapObj->placeholder18 != 2 || GetPlayerSpeedToUse() <= 3)
+    if (playerMapObj->placeholder18 != 2 || GetPlayerSpeed() <= 3)
     {
         sub_80E6010(0);
         playerMapObj->mapobj_bit_9 = 1;

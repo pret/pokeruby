@@ -87,11 +87,11 @@ static void (*const gUnknown_083DB5A4[])(u8) =
 // Player speeds
 enum
 {
-	SPEED_STANDING,
-	SPEED_NORMAL,
-	SPEED_FAST,
-	SPEED_FASTER,
-	SPEED_FASTEST,
+    SPEED_STANDING,
+    SPEED_NORMAL,
+    SPEED_FAST,
+    SPEED_FASTER,
+    SPEED_FASTEST,
 };
 
 //Acro bike states
@@ -1020,8 +1020,9 @@ static void sub_80E6024(void)
     gPlayerAvatar.unkB = 0;
 }
 
-s16 GetPlayerSpeedToUse(void)
+s16 GetPlayerSpeed(void)
 {
+    // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the speed to use for the player movement on the overworld.
     s16 machSpeeds[3];
 
     memcpy(machSpeeds, gMachBikeSpeeds, sizeof(machSpeeds));
