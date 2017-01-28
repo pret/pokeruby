@@ -2162,8 +2162,8 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
             return TradeRoom_TooBusyToNotice;
         if (!sub_8083BF4(linkPlayerId))
             return TradeRoom_ReadTrainerCard1;
-		else
-			return TradeRoom_ReadTrainerCard2;
+        else
+            return TradeRoom_ReadTrainerCard2;
     }
 
     return sub_80682A8(&unkStruct, a1->field_C, a1->d);

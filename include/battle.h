@@ -19,17 +19,17 @@
 
 struct Trainer
 {
-	/*0x00*/ u8 partyFlags;
-	/*0x01*/ u8 trainerClass;
-	/*0x02*/ u8 encounterMusic:7;
-	/*0x02*/ u8 gender:1;
-	/*0x03*/ u8 trainerPic;
-	/*0x04*/ u8 trainerName[12];
-	/*0x10*/ u16 items[4];
-	/*0x18*/ bool8 doubleBattle;
-	/*0x1C*/ u32 aiFlags;
-	/*0x20*/ u8 partySize;
-	/*0x24*/ void *party;
+    /*0x00*/ u8 partyFlags;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u8 encounterMusic:7;
+    /*0x02*/ u8 gender:1;
+    /*0x03*/ u8 trainerPic;
+    /*0x04*/ u8 trainerName[12];
+    /*0x10*/ u16 items[4];
+    /*0x18*/ bool8 doubleBattle;
+    /*0x1C*/ u32 aiFlags;
+    /*0x20*/ u8 partySize;
+    /*0x24*/ void *party;
 };
 
 struct AI_ThinkingStruct /* 0x2016800 */
@@ -48,28 +48,28 @@ struct AI_ThinkingStruct /* 0x2016800 */
 
 struct SmallBattleStruct1
 {
-	u8 unk1;
-	u8 unk2;
-	u8 unk3;
-	u8 unk4;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
 };
 
 struct SmallItemStruct
 {
-	u8 item[2][2];
+    u8 item[2][2];
 };
 
 struct BattleStruct /* 0x2000000 */
 {
-	u8 filler0[0x1601C];
-	struct SmallBattleStruct1 unk;
-	u8 filler1[0x68]; // 0x2016020
-	u8 unk88;
-	u8 filler1_2[0x42];
-	/* 0x160CB */ u8 linkPlayerIndex;
-	struct SmallItemStruct item;
-	u8 filler2[0x730];
-	struct AI_ThinkingStruct ai; /* 0x2016800 */
+    u8 filler0[0x1601C];
+    struct SmallBattleStruct1 unk;
+    u8 filler1[0x68]; // 0x2016020
+    u8 unk88;
+    u8 filler1_2[0x42];
+    /* 0x160CB */ u8 linkPlayerIndex;
+    struct SmallItemStruct item;
+    u8 filler2[0x730];
+    struct AI_ThinkingStruct ai; /* 0x2016800 */
 };
 
 extern struct BattleStruct battle_2000000;

@@ -870,326 +870,326 @@ __attribute__((naked))
 void task_c_8144664(u8 taskIdC)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldr r1, _0814468C @ =gTasks\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	movs r2, 0x8\n\
-	ldrsh r0, [r0, r2]\n\
-	adds r6, r1, 0\n\
-	cmp r0, 0x32\n\
-	bls _08144680\n\
-	b _0814492C\n\
+    push {r4-r7,lr}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    ldr r1, _0814468C @ =gTasks\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    movs r2, 0x8\n\
+    ldrsh r0, [r0, r2]\n\
+    adds r6, r1, 0\n\
+    cmp r0, 0x32\n\
+    bls _08144680\n\
+    b _0814492C\n\
 _08144680:\n\
-	lsls r0, 2\n\
-	ldr r1, _08144690 @ =_08144694\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
+    lsls r0, 2\n\
+    ldr r1, _08144690 @ =_08144694\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
 _0814468C: .4byte gTasks\n\
 _08144690: .4byte _08144694\n\
-	.align 2, 0\n\
+    .align 2, 0\n\
 _08144694:\n\
-	.4byte _08144760\n\
-	.4byte _08144784\n\
-	.4byte _081447D8\n\
-	.4byte _081447F0\n\
-	.4byte _0814482C\n\
-	.4byte _08144850\n\
-	.4byte _0814489C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _081448A8\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _081448C8\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _081448EC\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _0814492C\n\
-	.4byte _08144920\n\
+    .4byte _08144760\n\
+    .4byte _08144784\n\
+    .4byte _081447D8\n\
+    .4byte _081447F0\n\
+    .4byte _0814482C\n\
+    .4byte _08144850\n\
+    .4byte _0814489C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _081448A8\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _081448C8\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _081448EC\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _0814492C\n\
+    .4byte _08144920\n\
 _08144760:\n\
-	lsls r4, r5, 2\n\
-	adds r4, r5\n\
-	lsls r4, 3\n\
-	adds r4, r6\n\
-	ldrh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 17\n\
-	movs r1, 0x7F\n\
-	ands r0, r1\n\
-	movs r1, 0xC\n\
-	bl Sin\n\
-	ldr r1, _08144780 @ =gUnknown_0203935A\n\
-	strh r0, [r1]\n\
-	b _081447A8\n\
-	.align 2, 0\n\
+    lsls r4, r5, 2\n\
+    adds r4, r5\n\
+    lsls r4, 3\n\
+    adds r4, r6\n\
+    ldrh r0, [r4, 0x12]\n\
+    lsls r0, 16\n\
+    asrs r0, 17\n\
+    movs r1, 0x7F\n\
+    ands r0, r1\n\
+    movs r1, 0xC\n\
+    bl Sin\n\
+    ldr r1, _08144780 @ =gUnknown_0203935A\n\
+    strh r0, [r1]\n\
+    b _081447A8\n\
+    .align 2, 0\n\
 _08144780: .4byte gUnknown_0203935A\n\
 _08144784:\n\
-	ldr r7, _081447B0 @ =gUnknown_0203935A\n\
-	movs r3, 0\n\
-	ldrsh r4, [r7, r3]\n\
-	cmp r4, 0\n\
-	beq _081447B4\n\
-	lsls r4, r5, 2\n\
-	adds r4, r5\n\
-	lsls r4, 3\n\
-	adds r4, r6\n\
-	ldrh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 17\n\
-	movs r1, 0x7F\n\
-	ands r0, r1\n\
-	movs r1, 0xC\n\
-	bl Sin\n\
-	strh r0, [r7]\n\
+    ldr r7, _081447B0 @ =gUnknown_0203935A\n\
+    movs r3, 0\n\
+    ldrsh r4, [r7, r3]\n\
+    cmp r4, 0\n\
+    beq _081447B4\n\
+    lsls r4, r5, 2\n\
+    adds r4, r5\n\
+    lsls r4, 3\n\
+    adds r4, r6\n\
+    ldrh r0, [r4, 0x12]\n\
+    lsls r0, 16\n\
+    asrs r0, 17\n\
+    movs r1, 0x7F\n\
+    ands r0, r1\n\
+    movs r1, 0xC\n\
+    bl Sin\n\
+    strh r0, [r7]\n\
 _081447A8:\n\
-	ldrh r0, [r4, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x12]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    ldrh r0, [r4, 0x12]\n\
+    adds r0, 0x1\n\
+    strh r0, [r4, 0x12]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _081447B0: .4byte gUnknown_0203935A\n\
 _081447B4:\n\
-	ldr r3, _081447D4 @ =gSprites\n\
-	lsls r1, r5, 2\n\
-	adds r1, r5\n\
-	lsls r1, 3\n\
-	adds r1, r6\n\
-	movs r0, 0xC\n\
-	ldrsh r2, [r1, r0]\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r2, 0x2\n\
-	strh r2, [r0, 0x2E]\n\
-	strh r4, [r1, 0x12]\n\
-	b _08144848\n\
-	.align 2, 0\n\
+    ldr r3, _081447D4 @ =gSprites\n\
+    lsls r1, r5, 2\n\
+    adds r1, r5\n\
+    lsls r1, 3\n\
+    adds r1, r6\n\
+    movs r0, 0xC\n\
+    ldrsh r2, [r1, r0]\n\
+    lsls r0, r2, 4\n\
+    adds r0, r2\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r2, 0x2\n\
+    strh r2, [r0, 0x2E]\n\
+    strh r4, [r1, 0x12]\n\
+    b _08144848\n\
+    .align 2, 0\n\
 _081447D4: .4byte gSprites\n\
 _081447D8:\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r1, r0, r6\n\
-	ldrh r2, [r1, 0x12]\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r1, r3]\n\
-	cmp r0, 0x3F\n\
-	bgt _08144848\n\
-	adds r0, r2, 0x1\n\
-	strh r0, [r1, 0x12]\n\
-	b _08144866\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r1, r0, r6\n\
+    ldrh r2, [r1, 0x12]\n\
+    movs r3, 0x12\n\
+    ldrsh r0, [r1, r3]\n\
+    cmp r0, 0x3F\n\
+    bgt _08144848\n\
+    adds r0, r2, 0x1\n\
+    strh r0, [r1, 0x12]\n\
+    b _08144866\n\
 _081447F0:\n\
-	ldr r3, _08144828 @ =gSprites\n\
-	lsls r2, r5, 2\n\
-	adds r2, r5\n\
-	lsls r2, 3\n\
-	adds r2, r6\n\
-	movs r0, 0xC\n\
-	ldrsh r1, [r2, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r1, 0x3\n\
-	strh r1, [r0, 0x2E]\n\
-	movs r0, 0xE\n\
-	ldrsh r1, [r2, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r1, 0x1\n\
-	strh r1, [r0, 0x2E]\n\
-	movs r0, 0x78\n\
-	strh r0, [r2, 0x10]\n\
-	ldrh r0, [r2, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r2, 0x8]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    ldr r3, _08144828 @ =gSprites\n\
+    lsls r2, r5, 2\n\
+    adds r2, r5\n\
+    lsls r2, 3\n\
+    adds r2, r6\n\
+    movs r0, 0xC\n\
+    ldrsh r1, [r2, r0]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r1, 0x3\n\
+    strh r1, [r0, 0x2E]\n\
+    movs r0, 0xE\n\
+    ldrsh r1, [r2, r0]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r1, 0x1\n\
+    strh r1, [r0, 0x2E]\n\
+    movs r0, 0x78\n\
+    strh r0, [r2, 0x10]\n\
+    ldrh r0, [r2, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r2, 0x8]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _08144828: .4byte gSprites\n\
 _0814482C:\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r1, r0, r6\n\
-	ldrh r2, [r1, 0x10]\n\
-	movs r3, 0x10\n\
-	ldrsh r0, [r1, r3]\n\
-	cmp r0, 0\n\
-	beq _08144844\n\
-	subs r0, r2, 0x1\n\
-	strh r0, [r1, 0x10]\n\
-	b _0814492C\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r1, r0, r6\n\
+    ldrh r2, [r1, 0x10]\n\
+    movs r3, 0x10\n\
+    ldrsh r0, [r1, r3]\n\
+    cmp r0, 0\n\
+    beq _08144844\n\
+    subs r0, r2, 0x1\n\
+    strh r0, [r1, 0x10]\n\
+    b _0814492C\n\
 _08144844:\n\
-	movs r0, 0x40\n\
-	strh r0, [r1, 0x12]\n\
+    movs r0, 0x40\n\
+    strh r0, [r1, 0x12]\n\
 _08144848:\n\
-	ldrh r0, [r1, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1, 0x8]\n\
-	b _0814492C\n\
+    ldrh r0, [r1, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1, 0x8]\n\
+    b _0814492C\n\
 _08144850:\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r4, r0, r6\n\
-	ldrh r1, [r4, 0x12]\n\
-	movs r2, 0x12\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r0, 0\n\
-	ble _0814487C\n\
-	subs r0, r1, 0x1\n\
-	strh r0, [r4, 0x12]\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r4, r0, r6\n\
+    ldrh r1, [r4, 0x12]\n\
+    movs r2, 0x12\n\
+    ldrsh r0, [r4, r2]\n\
+    cmp r0, 0\n\
+    ble _0814487C\n\
+    subs r0, r1, 0x1\n\
+    strh r0, [r4, 0x12]\n\
 _08144866:\n\
-	movs r1, 0x7F\n\
-	ands r0, r1\n\
-	movs r1, 0x14\n\
-	bl Sin\n\
-	ldr r1, _08144878 @ =gUnknown_0203935A\n\
-	strh r0, [r1]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    movs r1, 0x7F\n\
+    ands r0, r1\n\
+    movs r1, 0x14\n\
+    bl Sin\n\
+    ldr r1, _08144878 @ =gUnknown_0203935A\n\
+    strh r0, [r1]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _08144878: .4byte gUnknown_0203935A\n\
 _0814487C:\n\
-	ldr r2, _08144898 @ =gSprites\n\
-	movs r3, 0xC\n\
-	ldrsh r1, [r4, r3]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	movs r1, 0x1\n\
-	strh r1, [r0, 0x2E]\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    ldr r2, _08144898 @ =gSprites\n\
+    movs r3, 0xC\n\
+    ldrsh r1, [r4, r3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r2\n\
+    movs r1, 0x1\n\
+    strh r1, [r0, 0x2E]\n\
+    ldrh r0, [r4, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r4, 0x8]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _08144898: .4byte gSprites\n\
 _0814489C:\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r0, r6\n\
-	movs r1, 0x32\n\
-	b _0814492A\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r6\n\
+    movs r1, 0x32\n\
+    b _0814492A\n\
 _081448A8:\n\
-	ldr r3, _081448C4 @ =gSprites\n\
-	lsls r1, r5, 2\n\
-	adds r1, r5\n\
-	lsls r1, 3\n\
-	adds r1, r6\n\
-	movs r0, 0xE\n\
-	ldrsh r2, [r1, r0]\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r2, 0x2\n\
-	b _081448E0\n\
-	.align 2, 0\n\
+    ldr r3, _081448C4 @ =gSprites\n\
+    lsls r1, r5, 2\n\
+    adds r1, r5\n\
+    lsls r1, 3\n\
+    adds r1, r6\n\
+    movs r0, 0xE\n\
+    ldrsh r2, [r1, r0]\n\
+    lsls r0, r2, 4\n\
+    adds r0, r2\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r2, 0x2\n\
+    b _081448E0\n\
+    .align 2, 0\n\
 _081448C4: .4byte gSprites\n\
 _081448C8:\n\
-	ldr r3, _081448E8 @ =gSprites\n\
-	lsls r1, r5, 2\n\
-	adds r1, r5\n\
-	lsls r1, 3\n\
-	adds r1, r6\n\
-	movs r0, 0xC\n\
-	ldrsh r2, [r1, r0]\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r2, 0x4\n\
+    ldr r3, _081448E8 @ =gSprites\n\
+    lsls r1, r5, 2\n\
+    adds r1, r5\n\
+    lsls r1, 3\n\
+    adds r1, r6\n\
+    movs r0, 0xC\n\
+    ldrsh r2, [r1, r0]\n\
+    lsls r0, r2, 4\n\
+    adds r0, r2\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r2, 0x4\n\
 _081448E0:\n\
-	strh r2, [r0, 0x2E]\n\
-	movs r0, 0x32\n\
-	strh r0, [r1, 0x8]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    strh r2, [r0, 0x2E]\n\
+    movs r0, 0x32\n\
+    strh r0, [r1, 0x8]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _081448E8: .4byte gSprites\n\
 _081448EC:\n\
-	ldr r3, _0814491C @ =gSprites\n\
-	lsls r2, r5, 2\n\
-	adds r2, r5\n\
-	lsls r2, 3\n\
-	adds r2, r6\n\
-	movs r0, 0xC\n\
-	ldrsh r1, [r2, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r1, 0x5\n\
-	strh r1, [r0, 0x2E]\n\
-	movs r0, 0xE\n\
-	ldrsh r1, [r2, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	movs r1, 0x3\n\
-	strh r1, [r0, 0x2E]\n\
-	movs r0, 0x32\n\
-	strh r0, [r2, 0x8]\n\
-	b _0814492C\n\
-	.align 2, 0\n\
+    ldr r3, _0814491C @ =gSprites\n\
+    lsls r2, r5, 2\n\
+    adds r2, r5\n\
+    lsls r2, 3\n\
+    adds r2, r6\n\
+    movs r0, 0xC\n\
+    ldrsh r1, [r2, r0]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r1, 0x5\n\
+    strh r1, [r0, 0x2E]\n\
+    movs r0, 0xE\n\
+    ldrsh r1, [r2, r0]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    movs r1, 0x3\n\
+    strh r1, [r0, 0x2E]\n\
+    movs r0, 0x32\n\
+    strh r0, [r2, 0x8]\n\
+    b _0814492C\n\
+    .align 2, 0\n\
 _0814491C: .4byte gSprites\n\
 _08144920:\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r0, r6\n\
-	movs r1, 0\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r6\n\
+    movs r1, 0\n\
 _0814492A:\n\
-	strh r1, [r0, 0x8]\n\
+    strh r1, [r0, 0x8]\n\
 _0814492C:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 
@@ -1455,107 +1455,107 @@ __attribute__((naked))
 void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	adds r3, r0, 0\n\
-	adds r4, r2, 0\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	lsls r1, 16\n\
-	lsrs r7, r1, 16\n\
-	lsls r4, 16\n\
-	lsrs r5, r4, 16\n\
-	ldr r0, _081451EC @ =gCreditsCopyrightEnd_Gfx\n\
-	movs r6, 0xC0\n\
-	lsls r6, 19\n\
-	adds r3, r6\n\
-	adds r1, r3, 0\n\
-	bl LZ77UnCompVram\n\
-	ldr r0, _081451F0 @ =gIntroCopyright_Pal\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x20\n\
-	bl LoadPalette\n\
-	lsrs r4, 20\n\
-	lsls r4, 28\n\
-	lsrs r4, 16\n\
-	movs r2, 0\n\
-	adds r1, r4, 0x1\n\
-	ldr r3, _081451F4 @ =0x000003ff\n\
+    push {r4-r7,lr}\n\
+    adds r3, r0, 0\n\
+    adds r4, r2, 0\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    lsls r1, 16\n\
+    lsrs r7, r1, 16\n\
+    lsls r4, 16\n\
+    lsrs r5, r4, 16\n\
+    ldr r0, _081451EC @ =gCreditsCopyrightEnd_Gfx\n\
+    movs r6, 0xC0\n\
+    lsls r6, 19\n\
+    adds r3, r6\n\
+    adds r1, r3, 0\n\
+    bl LZ77UnCompVram\n\
+    ldr r0, _081451F0 @ =gIntroCopyright_Pal\n\
+    adds r1, r5, 0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    lsrs r4, 20\n\
+    lsls r4, 28\n\
+    lsrs r4, 16\n\
+    movs r2, 0\n\
+    adds r1, r4, 0x1\n\
+    ldr r3, _081451F4 @ =0x000003ff\n\
 _0814515E:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	adds r0, r6\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, r3\n\
-	bls _0814515E\n\
-	movs r2, 0\n\
-	adds r0, r4, 0x2\n\
-	adds r6, r4, 0\n\
-	adds r6, 0x17\n\
-	movs r1, 0x2B\n\
-	adds r1, r4\n\
-	mov r12, r1\n\
-	adds r4, 0x42\n\
-	ldr r5, _081451F8 @ =0x060001c8\n\
-	adds r3, r0, 0\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7\n\
+    adds r0, r6\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, r3\n\
+    bls _0814515E\n\
+    movs r2, 0\n\
+    adds r0, r4, 0x2\n\
+    adds r6, r4, 0\n\
+    adds r6, 0x17\n\
+    movs r1, 0x2B\n\
+    adds r1, r4\n\
+    mov r12, r1\n\
+    adds r4, 0x42\n\
+    ldr r5, _081451F8 @ =0x060001c8\n\
+    adds r3, r0, 0\n\
 _08145184:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	adds r0, r5\n\
-	adds r1, r2, r3\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x14\n\
-	bls _08145184\n\
-	movs r2, 0\n\
-	ldr r5, _081451FC @ =0x06000248\n\
-	adds r3, r6, 0\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7\n\
+    adds r0, r5\n\
+    adds r1, r2, r3\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x14\n\
+    bls _08145184\n\
+    movs r2, 0\n\
+    ldr r5, _081451FC @ =0x06000248\n\
+    adds r3, r6, 0\n\
 _0814519E:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	adds r0, r5\n\
-	adds r1, r2, r3\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x13\n\
-	bls _0814519E\n\
-	movs r2, 0\n\
-	ldr r5, _08145200 @ =0x060002c8\n\
-	mov r3, r12\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7\n\
+    adds r0, r5\n\
+    adds r1, r2, r3\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x13\n\
+    bls _0814519E\n\
+    movs r2, 0\n\
+    ldr r5, _08145200 @ =0x060002c8\n\
+    mov r3, r12\n\
 _081451B8:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	adds r0, r5\n\
-	adds r1, r2, r3\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x16\n\
-	bls _081451B8\n\
-	movs r2, 0\n\
-	ldr r3, _08145204 @ =0x06000348\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7\n\
+    adds r0, r5\n\
+    adds r1, r2, r3\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x16\n\
+    bls _081451B8\n\
+    movs r2, 0\n\
+    ldr r3, _08145204 @ =0x06000348\n\
 _081451D0:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	adds r0, r3\n\
-	adds r1, r2, r4\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0xB\n\
-	bls _081451D0\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7\n\
+    adds r0, r3\n\
+    adds r1, r2, r4\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0xB\n\
+    bls _081451D0\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _081451EC: .4byte gCreditsCopyrightEnd_Gfx\n\
 _081451F0: .4byte gIntroCopyright_Pal\n\
 _081451F4: .4byte 0x000003ff\n\
@@ -1593,73 +1593,73 @@ __attribute__((naked))
 void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0xC\n\
-	str r0, [sp]\n\
-	ldr r0, [sp, 0x2C]\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	mov r10, r1\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	str r2, [sp, 0x4]\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	str r3, [sp, 0x8]\n\
-	lsls r0, 16\n\
-	lsrs r0, 20\n\
-	lsls r0, 28\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	movs r5, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0xC\n\
+    str r0, [sp]\n\
+    ldr r0, [sp, 0x2C]\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r10, r1\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    str r2, [sp, 0x4]\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    str r3, [sp, 0x8]\n\
+    lsls r0, 16\n\
+    lsrs r0, 20\n\
+    lsls r0, 28\n\
+    lsrs r0, 16\n\
+    mov r9, r0\n\
+    movs r5, 0\n\
 _0814527A:\n\
-	movs r4, 0\n\
-	lsls r7, r5, 1\n\
-	ldr r1, [sp, 0x4]\n\
-	adds r0, r1, r5\n\
-	adds r2, r5, 0x1\n\
-	mov r8, r2\n\
-	lsls r0, 6\n\
-	ldr r1, [sp, 0x8]\n\
-	adds r6, r0, r1\n\
+    movs r4, 0\n\
+    lsls r7, r5, 1\n\
+    ldr r1, [sp, 0x4]\n\
+    adds r0, r1, r5\n\
+    adds r2, r5, 0x1\n\
+    mov r8, r2\n\
+    lsls r0, 6\n\
+    ldr r1, [sp, 0x8]\n\
+    adds r6, r0, r1\n\
 _0814528C:\n\
-	adds r0, r7, r5\n\
-	adds r0, r4\n\
-	ldr r2, [sp]\n\
-	adds r0, r2, r0\n\
-	ldrb r0, [r0]\n\
-	bl sub_8145208\n\
-	mov r2, r10\n\
-	adds r1, r2, r4\n\
-	lsls r1, 1\n\
-	adds r1, r6\n\
-	movs r2, 0xC0\n\
-	lsls r2, 19\n\
-	adds r1, r2\n\
-	add r0, r9\n\
-	strh r0, [r1]\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x2\n\
-	bls _0814528C\n\
-	mov r1, r8\n\
-	lsls r0, r1, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0x4\n\
-	bls _0814527A\n\
-	add sp, 0xC\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    adds r0, r7, r5\n\
+    adds r0, r4\n\
+    ldr r2, [sp]\n\
+    adds r0, r2, r0\n\
+    ldrb r0, [r0]\n\
+    bl sub_8145208\n\
+    mov r2, r10\n\
+    adds r1, r2, r4\n\
+    lsls r1, 1\n\
+    adds r1, r6\n\
+    movs r2, 0xC0\n\
+    lsls r2, 19\n\
+    adds r1, r2\n\
+    add r0, r9\n\
+    strh r0, [r1]\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0x2\n\
+    bls _0814528C\n\
+    mov r1, r8\n\
+    lsls r0, r1, 24\n\
+    lsrs r5, r0, 24\n\
+    cmp r5, 0x4\n\
+    bls _0814527A\n\
+    add sp, 0xC\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 
@@ -1788,238 +1788,238 @@ __attribute__((naked))
 void spritecb_81454E0(struct Sprite *sprite)
 {
     asm(".syntax unified\n\
-	push {r4,r5,lr}\n\
-	sub sp, 0x4\n\
-	adds r5, r0, 0\n\
-	ldr r0, _081454F8 @ =gUnknown_0203935C\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0\n\
-	beq _081454FC\n\
-	adds r0, r5, 0\n\
-	bl DestroySprite\n\
-	b _081456A6\n\
-	.align 2, 0\n\
+    push {r4,r5,lr}\n\
+    sub sp, 0x4\n\
+    adds r5, r0, 0\n\
+    ldr r0, _081454F8 @ =gUnknown_0203935C\n\
+    movs r1, 0\n\
+    ldrsh r0, [r0, r1]\n\
+    cmp r0, 0\n\
+    beq _081454FC\n\
+    adds r0, r5, 0\n\
+    bl DestroySprite\n\
+    b _081456A6\n\
+    .align 2, 0\n\
 _081454F8: .4byte gUnknown_0203935C\n\
 _081454FC:\n\
-	ldrh r0, [r5, 0x3C]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x3C]\n\
-	movs r2, 0x2E\n\
-	ldrsh r0, [r5, r2]\n\
-	cmp r0, 0xA\n\
-	bhi _08145544\n\
-	lsls r0, 2\n\
-	ldr r1, _08145514 @ =_08145518\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
+    ldrh r0, [r5, 0x3C]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5, 0x3C]\n\
+    movs r2, 0x2E\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0xA\n\
+    bhi _08145544\n\
+    lsls r0, 2\n\
+    ldr r1, _08145514 @ =_08145518\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
 _08145514: .4byte _08145518\n\
-	.align 2, 0\n\
+    .align 2, 0\n\
 _08145518:\n\
-	.4byte _08145544\n\
-	.4byte _0814559E\n\
-	.4byte _08145620\n\
-	.4byte _08145660\n\
-	.4byte _08145544\n\
-	.4byte _08145544\n\
-	.4byte _08145544\n\
-	.4byte _08145544\n\
-	.4byte _08145544\n\
-	.4byte _08145544\n\
-	.4byte _08145696\n\
+    .4byte _08145544\n\
+    .4byte _0814559E\n\
+    .4byte _08145620\n\
+    .4byte _08145660\n\
+    .4byte _08145544\n\
+    .4byte _08145544\n\
+    .4byte _08145544\n\
+    .4byte _08145544\n\
+    .4byte _08145544\n\
+    .4byte _08145544\n\
+    .4byte _08145696\n\
 _08145544:\n\
-	ldrb r1, [r5, 0x1]\n\
-	movs r0, 0x4\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	movs r1, 0x1\n\
-	orrs r0, r1\n\
-	strb r0, [r5, 0x1]\n\
-	movs r0, 0x30\n\
-	ldrsh r1, [r5, r0]\n\
-	movs r0, 0x1F\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	ldrb r2, [r5, 0x3]\n\
-	movs r0, 0x3F\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r5, 0x3]\n\
-	movs r0, 0x10\n\
-	strh r0, [r5, 0x32]\n\
-	ldrh r4, [r5, 0x30]\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	movs r0, 0x80\n\
-	lsls r0, 9\n\
-	movs r1, 0x10\n\
-	bl __divsi3\n\
-	adds r1, r0, 0\n\
-	str r1, [sp]\n\
-	adds r0, r4, 0\n\
-	movs r2, 0\n\
-	movs r3, 0\n\
-	bl SetOamMatrix\n\
-	adds r2, r5, 0\n\
-	adds r2, 0x3E\n\
-	ldrb r1, [r2]\n\
-	movs r0, 0x5\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, 0x1\n\
-	strh r0, [r5, 0x2E]\n\
-	b _081456A6\n\
+    ldrb r1, [r5, 0x1]\n\
+    movs r0, 0x4\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    movs r1, 0x1\n\
+    orrs r0, r1\n\
+    strb r0, [r5, 0x1]\n\
+    movs r0, 0x30\n\
+    ldrsh r1, [r5, r0]\n\
+    movs r0, 0x1F\n\
+    ands r1, r0\n\
+    lsls r1, 1\n\
+    ldrb r2, [r5, 0x3]\n\
+    movs r0, 0x3F\n\
+    negs r0, r0\n\
+    ands r0, r2\n\
+    orrs r0, r1\n\
+    strb r0, [r5, 0x3]\n\
+    movs r0, 0x10\n\
+    strh r0, [r5, 0x32]\n\
+    ldrh r4, [r5, 0x30]\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0x80\n\
+    lsls r0, 9\n\
+    movs r1, 0x10\n\
+    bl __divsi3\n\
+    adds r1, r0, 0\n\
+    str r1, [sp]\n\
+    adds r0, r4, 0\n\
+    movs r2, 0\n\
+    movs r3, 0\n\
+    bl SetOamMatrix\n\
+    adds r2, r5, 0\n\
+    adds r2, 0x3E\n\
+    ldrb r1, [r2]\n\
+    movs r0, 0x5\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    strb r0, [r2]\n\
+    movs r0, 0x1\n\
+    strh r0, [r5, 0x2E]\n\
+    b _081456A6\n\
 _0814559E:\n\
-	ldrh r1, [r5, 0x32]\n\
-	movs r2, 0x32\n\
-	ldrsh r0, [r5, r2]\n\
-	cmp r0, 0xFF\n\
-	bgt _081455D4\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x8\n\
-	strh r0, [r5, 0x32]\n\
-	ldrh r4, [r5, 0x30]\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	movs r0, 0x32\n\
-	ldrsh r1, [r5, r0]\n\
-	movs r0, 0x80\n\
-	lsls r0, 9\n\
-	bl __divsi3\n\
-	adds r1, r0, 0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	str r1, [sp]\n\
-	adds r0, r4, 0\n\
-	movs r2, 0\n\
-	movs r3, 0\n\
-	bl SetOamMatrix\n\
-	b _081455DA\n\
+    ldrh r1, [r5, 0x32]\n\
+    movs r2, 0x32\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0xFF\n\
+    bgt _081455D4\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x8\n\
+    strh r0, [r5, 0x32]\n\
+    ldrh r4, [r5, 0x30]\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0x32\n\
+    ldrsh r1, [r5, r0]\n\
+    movs r0, 0x80\n\
+    lsls r0, 9\n\
+    bl __divsi3\n\
+    adds r1, r0, 0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    str r1, [sp]\n\
+    adds r0, r4, 0\n\
+    movs r2, 0\n\
+    movs r3, 0\n\
+    bl SetOamMatrix\n\
+    b _081455DA\n\
 _081455D4:\n\
-	ldrh r0, [r5, 0x2E]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x2E]\n\
+    ldrh r0, [r5, 0x2E]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5, 0x2E]\n\
 _081455DA:\n\
-	movs r2, 0x30\n\
-	ldrsh r1, [r5, r2]\n\
-	cmp r1, 0x2\n\
-	beq _081456A6\n\
-	cmp r1, 0x2\n\
-	bgt _081455EC\n\
-	cmp r1, 0x1\n\
-	beq _081455F2\n\
-	b _081456A6\n\
+    movs r2, 0x30\n\
+    ldrsh r1, [r5, r2]\n\
+    cmp r1, 0x2\n\
+    beq _081456A6\n\
+    cmp r1, 0x2\n\
+    bgt _081455EC\n\
+    cmp r1, 0x1\n\
+    beq _081455F2\n\
+    b _081456A6\n\
 _081455EC:\n\
-	cmp r1, 0x3\n\
-	beq _0814560A\n\
-	b _081456A6\n\
+    cmp r1, 0x3\n\
+    beq _0814560A\n\
+    b _081456A6\n\
 _081455F2:\n\
-	ldrh r1, [r5, 0x3C]\n\
-	movs r0, 0x3\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08145602\n\
-	ldrh r0, [r5, 0x22]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x22]\n\
+    ldrh r1, [r5, 0x3C]\n\
+    movs r0, 0x3\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08145602\n\
+    ldrh r0, [r5, 0x22]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5, 0x22]\n\
 _08145602:\n\
-	ldrh r0, [r5, 0x20]\n\
-	subs r0, 0x2\n\
-	strh r0, [r5, 0x20]\n\
-	b _081456A6\n\
+    ldrh r0, [r5, 0x20]\n\
+    subs r0, 0x2\n\
+    strh r0, [r5, 0x20]\n\
+    b _081456A6\n\
 _0814560A:\n\
-	ldrh r0, [r5, 0x3C]\n\
-	ands r1, r0\n\
-	cmp r1, 0\n\
-	bne _08145618\n\
-	ldrh r0, [r5, 0x22]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x22]\n\
+    ldrh r0, [r5, 0x3C]\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    bne _08145618\n\
+    ldrh r0, [r5, 0x22]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5, 0x22]\n\
 _08145618:\n\
-	ldrh r0, [r5, 0x20]\n\
-	adds r0, 0x2\n\
-	strh r0, [r5, 0x20]\n\
-	b _081456A6\n\
+    ldrh r0, [r5, 0x20]\n\
+    adds r0, 0x2\n\
+    strh r0, [r5, 0x20]\n\
+    b _081456A6\n\
 _08145620:\n\
-	ldrh r1, [r5, 0x34]\n\
-	movs r2, 0x34\n\
-	ldrsh r0, [r5, r2]\n\
-	cmp r0, 0\n\
-	beq _08145630\n\
-	subs r0, r1, 0x1\n\
-	strh r0, [r5, 0x34]\n\
-	b _081456A6\n\
+    ldrh r1, [r5, 0x34]\n\
+    movs r2, 0x34\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0\n\
+    beq _08145630\n\
+    subs r0, r1, 0x1\n\
+    strh r0, [r5, 0x34]\n\
+    b _081456A6\n\
 _08145630:\n\
-	ldr r1, _0814565C @ =REG_BLDCNT\n\
-	movs r2, 0xF4\n\
-	lsls r2, 4\n\
-	adds r0, r2, 0\n\
-	strh r0, [r1]\n\
-	adds r1, 0x2\n\
-	movs r0, 0x10\n\
-	strh r0, [r1]\n\
-	ldrb r1, [r5, 0x1]\n\
-	movs r0, 0xD\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	movs r1, 0x4\n\
-	orrs r0, r1\n\
-	strb r0, [r5, 0x1]\n\
-	movs r0, 0x10\n\
-	strh r0, [r5, 0x34]\n\
-	ldrh r0, [r5, 0x2E]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x2E]\n\
-	b _081456A6\n\
-	.align 2, 0\n\
+    ldr r1, _0814565C @ =REG_BLDCNT\n\
+    movs r2, 0xF4\n\
+    lsls r2, 4\n\
+    adds r0, r2, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    movs r0, 0x10\n\
+    strh r0, [r1]\n\
+    ldrb r1, [r5, 0x1]\n\
+    movs r0, 0xD\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    movs r1, 0x4\n\
+    orrs r0, r1\n\
+    strb r0, [r5, 0x1]\n\
+    movs r0, 0x10\n\
+    strh r0, [r5, 0x34]\n\
+    ldrh r0, [r5, 0x2E]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5, 0x2E]\n\
+    b _081456A6\n\
+    .align 2, 0\n\
 _0814565C: .4byte REG_BLDCNT\n\
 _08145660:\n\
-	ldrh r1, [r5, 0x34]\n\
-	movs r2, 0x34\n\
-	ldrsh r0, [r5, r2]\n\
-	cmp r0, 0\n\
-	beq _08145684\n\
-	subs r1, 0x1\n\
-	strh r1, [r5, 0x34]\n\
-	ldr r3, _08145680 @ =REG_BLDALPHA\n\
-	movs r0, 0x34\n\
-	ldrsh r2, [r5, r0]\n\
-	movs r0, 0x10\n\
-	subs r0, r2\n\
-	lsls r0, 8\n\
-	adds r1, r0\n\
-	strh r1, [r3]\n\
-	b _081456A6\n\
-	.align 2, 0\n\
+    ldrh r1, [r5, 0x34]\n\
+    movs r2, 0x34\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0\n\
+    beq _08145684\n\
+    subs r1, 0x1\n\
+    strh r1, [r5, 0x34]\n\
+    ldr r3, _08145680 @ =REG_BLDALPHA\n\
+    movs r0, 0x34\n\
+    ldrsh r2, [r5, r0]\n\
+    movs r0, 0x10\n\
+    subs r0, r2\n\
+    lsls r0, 8\n\
+    adds r1, r0\n\
+    strh r1, [r3]\n\
+    b _081456A6\n\
+    .align 2, 0\n\
 _08145680: .4byte REG_BLDALPHA\n\
 _08145684:\n\
-	adds r2, r5, 0\n\
-	adds r2, 0x3E\n\
-	ldrb r0, [r2]\n\
-	movs r1, 0x4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, 0xA\n\
-	strh r0, [r5, 0x2E]\n\
-	b _081456A6\n\
+    adds r2, r5, 0\n\
+    adds r2, 0x3E\n\
+    ldrb r0, [r2]\n\
+    movs r1, 0x4\n\
+    orrs r0, r1\n\
+    strb r0, [r2]\n\
+    movs r0, 0xA\n\
+    strh r0, [r5, 0x2E]\n\
+    b _081456A6\n\
 _08145696:\n\
-	ldr r0, _081456B0 @ =REG_BLDCNT\n\
-	movs r1, 0\n\
-	strh r1, [r0]\n\
-	adds r0, 0x2\n\
-	strh r1, [r0]\n\
-	adds r0, r5, 0\n\
-	bl DestroySprite\n\
+    ldr r0, _081456B0 @ =REG_BLDCNT\n\
+    movs r1, 0\n\
+    strh r1, [r0]\n\
+    adds r0, 0x2\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0\n\
+    bl DestroySprite\n\
 _081456A6:\n\
-	add sp, 0x4\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    add sp, 0x4\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _081456B0: .4byte REG_BLDCNT\n\
     .syntax divided\n");
 }
@@ -2083,155 +2083,155 @@ __attribute__((naked))
 u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x14\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r10, r1\n\
-	lsls r2, 16\n\
-	lsrs r2, 16\n\
-	str r2, [sp, 0x10]\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	mov r9, r3\n\
-	adds r0, r6, 0\n\
-	bl NationalPokedexNumToSpecies\n\
-	adds r6, r0, 0\n\
-	cmp r6, 0xC9\n\
-	beq _081456F8\n\
-	movs r0, 0x9A\n\
-	lsls r0, 1\n\
-	cmp r6, r0\n\
-	beq _081456EE\n\
-	movs r7, 0\n\
-	b _081456FC\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x14\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    mov r10, r1\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    str r2, [sp, 0x10]\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    mov r9, r3\n\
+    adds r0, r6, 0\n\
+    bl NationalPokedexNumToSpecies\n\
+    adds r6, r0, 0\n\
+    cmp r6, 0xC9\n\
+    beq _081456F8\n\
+    movs r0, 0x9A\n\
+    lsls r0, 1\n\
+    cmp r6, r0\n\
+    beq _081456EE\n\
+    movs r7, 0\n\
+    b _081456FC\n\
 _081456EE:\n\
-	ldr r0, _081456F4 @ =gSaveBlock2\n\
-	ldr r7, [r0, 0x20]\n\
-	b _081456FC\n\
-	.align 2, 0\n\
+    ldr r0, _081456F4 @ =gSaveBlock2\n\
+    ldr r7, [r0, 0x20]\n\
+    b _081456FC\n\
+    .align 2, 0\n\
 _081456F4: .4byte gSaveBlock2\n\
 _081456F8:\n\
-	ldr r0, _081457E8 @ =gSaveBlock2\n\
-	ldr r7, [r0, 0x1C]\n\
+    ldr r0, _081457E8 @ =gSaveBlock2\n\
+    ldr r7, [r0, 0x1C]\n\
 _081456FC:\n\
-	lsls r0, r6, 3\n\
-	ldr r1, _081457EC @ =gMonFrontPicTable\n\
-	adds r0, r1\n\
-	ldr r1, _081457F0 @ =gMonFrontPicCoords\n\
-	lsls r2, r6, 2\n\
-	adds r2, r1\n\
-	ldrb r1, [r2]\n\
-	ldrb r2, [r2, 0x1]\n\
-	movs r3, 0x80\n\
-	lsls r3, 18\n\
-	ldr r4, _081457F4 @ =gUnknown_0840B5A0\n\
-	mov r8, r4\n\
-	mov r5, r9\n\
-	lsls r4, r5, 2\n\
-	add r4, r8\n\
-	ldr r4, [r4]\n\
-	str r4, [sp]\n\
-	str r6, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r4, 0x1\n\
-	str r4, [sp, 0xC]\n\
-	bl LoadSpecialPokePic\n\
-	ldr r2, _081457F8 @ =0x0000ffff\n\
-	adds r0, r6, 0\n\
-	movs r1, 0\n\
-	bl species_and_otid_get_pal\n\
-	lsls r5, 4\n\
-	mov r8, r5\n\
-	movs r1, 0x80\n\
-	lsls r1, 1\n\
-	add r1, r8\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	movs r2, 0x20\n\
-	bl LoadCompressedPalette\n\
-	mov r7, r9\n\
-	lsls r6, r7, 24\n\
-	lsrs r6, 24\n\
-	mov r0, r9\n\
-	adds r1, r6, 0\n\
-	bl sub_8143648\n\
-	ldr r0, _081457FC @ =gUnknown_02024E8C\n\
-	mov r2, r10\n\
-	lsls r1, r2, 16\n\
-	asrs r1, 16\n\
-	ldr r3, [sp, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r2, 16\n\
-	movs r3, 0\n\
-	bl CreateSprite\n\
-	adds r4, r0, 0\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	ldr r5, _08145800 @ =gSprites\n\
-	lsls r2, r4, 4\n\
-	adds r2, r4\n\
-	lsls r2, 2\n\
-	adds r3, r2, r5\n\
-	ldrb r1, [r3, 0x5]\n\
-	movs r0, 0xF\n\
-	ands r0, r1\n\
-	mov r7, r8\n\
-	orrs r0, r7\n\
-	movs r1, 0xD\n\
-	negs r1, r1\n\
-	ands r0, r1\n\
-	movs r1, 0x4\n\
-	orrs r0, r1\n\
-	strb r0, [r3, 0x5]\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x30]\n\
-	movs r0, 0x3E\n\
-	adds r0, r3\n\
-	mov r8, r0\n\
-	ldrb r0, [r0]\n\
-	orrs r0, r1\n\
-	mov r1, r8\n\
-	strb r0, [r1]\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x1C\n\
-	adds r2, r0\n\
-	ldr r0, _08145804 @ =spritecb_81454E0\n\
-	str r0, [r2]\n\
-	ldr r0, _08145808 @ =gSpriteTemplate_840CAEC\n\
-	movs r2, 0x20\n\
-	ldrsh r1, [r3, r2]\n\
-	movs r7, 0x22\n\
-	ldrsh r2, [r3, r7]\n\
-	movs r3, 0x1\n\
-	bl CreateSprite\n\
-	adds r1, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r5\n\
-	strh r4, [r0, 0x2E]\n\
-	adds r1, r6, 0\n\
-	bl StartSpriteAnimIfDifferent\n\
-	adds r0, r4, 0\n\
-	add sp, 0x14\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    lsls r0, r6, 3\n\
+    ldr r1, _081457EC @ =gMonFrontPicTable\n\
+    adds r0, r1\n\
+    ldr r1, _081457F0 @ =gMonFrontPicCoords\n\
+    lsls r2, r6, 2\n\
+    adds r2, r1\n\
+    ldrb r1, [r2]\n\
+    ldrb r2, [r2, 0x1]\n\
+    movs r3, 0x80\n\
+    lsls r3, 18\n\
+    ldr r4, _081457F4 @ =gUnknown_0840B5A0\n\
+    mov r8, r4\n\
+    mov r5, r9\n\
+    lsls r4, r5, 2\n\
+    add r4, r8\n\
+    ldr r4, [r4]\n\
+    str r4, [sp]\n\
+    str r6, [sp, 0x4]\n\
+    str r7, [sp, 0x8]\n\
+    movs r4, 0x1\n\
+    str r4, [sp, 0xC]\n\
+    bl LoadSpecialPokePic\n\
+    ldr r2, _081457F8 @ =0x0000ffff\n\
+    adds r0, r6, 0\n\
+    movs r1, 0\n\
+    bl species_and_otid_get_pal\n\
+    lsls r5, 4\n\
+    mov r8, r5\n\
+    movs r1, 0x80\n\
+    lsls r1, 1\n\
+    add r1, r8\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    movs r2, 0x20\n\
+    bl LoadCompressedPalette\n\
+    mov r7, r9\n\
+    lsls r6, r7, 24\n\
+    lsrs r6, 24\n\
+    mov r0, r9\n\
+    adds r1, r6, 0\n\
+    bl sub_8143648\n\
+    ldr r0, _081457FC @ =gUnknown_02024E8C\n\
+    mov r2, r10\n\
+    lsls r1, r2, 16\n\
+    asrs r1, 16\n\
+    ldr r3, [sp, 0x10]\n\
+    lsls r2, r3, 16\n\
+    asrs r2, 16\n\
+    movs r3, 0\n\
+    bl CreateSprite\n\
+    adds r4, r0, 0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    ldr r5, _08145800 @ =gSprites\n\
+    lsls r2, r4, 4\n\
+    adds r2, r4\n\
+    lsls r2, 2\n\
+    adds r3, r2, r5\n\
+    ldrb r1, [r3, 0x5]\n\
+    movs r0, 0xF\n\
+    ands r0, r1\n\
+    mov r7, r8\n\
+    orrs r0, r7\n\
+    movs r1, 0xD\n\
+    negs r1, r1\n\
+    ands r0, r1\n\
+    movs r1, 0x4\n\
+    orrs r0, r1\n\
+    strb r0, [r3, 0x5]\n\
+    mov r0, r9\n\
+    adds r0, 0x1\n\
+    strh r0, [r3, 0x30]\n\
+    movs r0, 0x3E\n\
+    adds r0, r3\n\
+    mov r8, r0\n\
+    ldrb r0, [r0]\n\
+    orrs r0, r1\n\
+    mov r1, r8\n\
+    strb r0, [r1]\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x1C\n\
+    adds r2, r0\n\
+    ldr r0, _08145804 @ =spritecb_81454E0\n\
+    str r0, [r2]\n\
+    ldr r0, _08145808 @ =gSpriteTemplate_840CAEC\n\
+    movs r2, 0x20\n\
+    ldrsh r1, [r3, r2]\n\
+    movs r7, 0x22\n\
+    ldrsh r2, [r3, r7]\n\
+    movs r3, 0x1\n\
+    bl CreateSprite\n\
+    adds r1, r0, 0\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r5\n\
+    strh r4, [r0, 0x2E]\n\
+    adds r1, r6, 0\n\
+    bl StartSpriteAnimIfDifferent\n\
+    adds r0, r4, 0\n\
+    add sp, 0x14\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _081457E8: .4byte gSaveBlock2\n\
 _081457EC: .4byte gMonFrontPicTable\n\
 _081457F0: .4byte gMonFrontPicCoords\n\
@@ -2265,219 +2265,219 @@ __attribute__((naked))
 void sub_81458DC(void)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	ldr r7, _0814597C @ =0x0201c000\n\
-	ldr r0, _08145980 @ =0x00004023\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	bl GetStarterPokemon\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	bl SpeciesToNationalPokedexNum\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r10, r0\n\
-	movs r4, 0x1\n\
-	movs r5, 0\n\
-	ldr r0, _08145984 @ =0x00000181\n\
-	mov r8, r0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    ldr r7, _0814597C @ =0x0201c000\n\
+    ldr r0, _08145980 @ =0x00004023\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl GetStarterPokemon\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl SpeciesToNationalPokedexNum\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    mov r10, r0\n\
+    movs r4, 0x1\n\
+    movs r5, 0\n\
+    ldr r0, _08145984 @ =0x00000181\n\
+    mov r8, r0\n\
 _0814590E:\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x1\n\
-	bl sub_8090D90\n\
-	lsls r0, 24\n\
-	adds r6, r7, 0\n\
-	adds r6, 0x90\n\
-	cmp r0, 0\n\
-	beq _0814592C\n\
-	lsls r0, r5, 1\n\
-	adds r0, r6, r0\n\
-	strh r4, [r0]\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x1\n\
+    bl sub_8090D90\n\
+    lsls r0, 24\n\
+    adds r6, r7, 0\n\
+    adds r6, 0x90\n\
+    cmp r0, 0\n\
+    beq _0814592C\n\
+    lsls r0, r5, 1\n\
+    adds r0, r6, r0\n\
+    strh r4, [r0]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
 _0814592C:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, r8\n\
-	bls _0814590E\n\
-	adds r4, r5, 0\n\
-	ldr r0, _08145984 @ =0x00000181\n\
-	lsls r1, r4, 16\n\
-	mov r9, r1\n\
-	movs r2, 0x8E\n\
-	adds r2, r7\n\
-	mov r8, r2\n\
-	adds r1, r7, 0\n\
-	adds r1, 0x86\n\
-	str r1, [sp]\n\
-	cmp r4, r0\n\
-	bhi _08145964\n\
-	adds r1, r6, 0\n\
-	movs r3, 0\n\
-	adds r2, r0, 0\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    cmp r4, r8\n\
+    bls _0814590E\n\
+    adds r4, r5, 0\n\
+    ldr r0, _08145984 @ =0x00000181\n\
+    lsls r1, r4, 16\n\
+    mov r9, r1\n\
+    movs r2, 0x8E\n\
+    adds r2, r7\n\
+    mov r8, r2\n\
+    adds r1, r7, 0\n\
+    adds r1, 0x86\n\
+    str r1, [sp]\n\
+    cmp r4, r0\n\
+    bhi _08145964\n\
+    adds r1, r6, 0\n\
+    movs r3, 0\n\
+    adds r2, r0, 0\n\
 _08145954:\n\
-	lsls r0, r4, 1\n\
-	adds r0, r1, r0\n\
-	strh r3, [r0]\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, r2\n\
-	bls _08145954\n\
+    lsls r0, r4, 1\n\
+    adds r0, r1, r0\n\
+    strh r3, [r0]\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    cmp r4, r2\n\
+    bls _08145954\n\
 _08145964:\n\
-	movs r2, 0xE5\n\
-	lsls r2, 2\n\
-	adds r0, r7, r2\n\
-	strh r5, [r0]\n\
-	mov r1, r9\n\
-	lsrs r0, r1, 16\n\
-	cmp r0, 0x43\n\
-	bhi _08145988\n\
-	mov r2, r8\n\
-	strh r5, [r2]\n\
-	b _0814598E\n\
-	.align 2, 0\n\
+    movs r2, 0xE5\n\
+    lsls r2, 2\n\
+    adds r0, r7, r2\n\
+    strh r5, [r0]\n\
+    mov r1, r9\n\
+    lsrs r0, r1, 16\n\
+    cmp r0, 0x43\n\
+    bhi _08145988\n\
+    mov r2, r8\n\
+    strh r5, [r2]\n\
+    b _0814598E\n\
+    .align 2, 0\n\
 _0814597C: .4byte 0x0201c000\n\
 _08145980: .4byte 0x00004023\n\
 _08145984: .4byte 0x00000181\n\
 _08145988:\n\
-	movs r0, 0x44\n\
-	mov r1, r8\n\
-	strh r0, [r1]\n\
+    movs r0, 0x44\n\
+    mov r1, r8\n\
+    strh r0, [r1]\n\
 _0814598E:\n\
-	movs r5, 0\n\
-	movs r2, 0xE5\n\
-	lsls r2, 2\n\
-	adds r4, r7, r2\n\
-	mov r9, r5\n\
-	b _0814599E\n\
+    movs r5, 0\n\
+    movs r2, 0xE5\n\
+    lsls r2, 2\n\
+    adds r4, r7, r2\n\
+    mov r9, r5\n\
+    b _0814599E\n\
 _0814599A:\n\
-	cmp r5, 0x43\n\
-	bhi _081459EE\n\
+    cmp r5, 0x43\n\
+    bhi _081459EE\n\
 _0814599E:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	ldrh r1, [r4]\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	lsls r1, r5, 1\n\
-	adds r1, r7, r1\n\
-	lsls r0, r2, 1\n\
-	adds r3, r6, r0\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r1]\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	mov r0, r9\n\
-	strh r0, [r3]\n\
-	ldrh r0, [r4]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4]\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r2, r0\n\
-	beq _081459E8\n\
-	ldrh r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r6, r0\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r3]\n\
-	ldrh r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r6, r0\n\
-	mov r1, r9\n\
-	strh r1, [r0]\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    ldrh r1, [r4]\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    lsls r1, r5, 1\n\
+    adds r1, r7, r1\n\
+    lsls r0, r2, 1\n\
+    adds r3, r6, r0\n\
+    ldrh r0, [r3]\n\
+    strh r0, [r1]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    mov r0, r9\n\
+    strh r0, [r3]\n\
+    ldrh r0, [r4]\n\
+    subs r0, 0x1\n\
+    strh r0, [r4]\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r2, r0\n\
+    beq _081459E8\n\
+    ldrh r0, [r4]\n\
+    lsls r0, 1\n\
+    adds r0, r6, r0\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r3]\n\
+    ldrh r0, [r4]\n\
+    lsls r0, 1\n\
+    adds r0, r6, r0\n\
+    mov r1, r9\n\
+    strh r1, [r0]\n\
 _081459E8:\n\
-	ldrh r0, [r4]\n\
-	cmp r0, 0\n\
-	bne _0814599A\n\
+    ldrh r0, [r4]\n\
+    cmp r0, 0\n\
+    bne _0814599A\n\
 _081459EE:\n\
-	mov r2, r8\n\
-	ldrh r0, [r2]\n\
-	cmp r0, 0x43\n\
-	bhi _08145A26\n\
-	adds r5, r0, 0\n\
-	movs r2, 0\n\
-	cmp r5, 0x43\n\
-	bhi _08145A5C\n\
-	mov r3, r8\n\
+    mov r2, r8\n\
+    ldrh r0, [r2]\n\
+    cmp r0, 0x43\n\
+    bhi _08145A26\n\
+    adds r5, r0, 0\n\
+    movs r2, 0\n\
+    cmp r5, 0x43\n\
+    bhi _08145A5C\n\
+    mov r3, r8\n\
 _08145A00:\n\
-	lsls r1, r5, 1\n\
-	adds r1, r7, r1\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7, r0\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	ldrh r0, [r3]\n\
-	cmp r2, r0\n\
-	bne _08145A1A\n\
-	movs r2, 0\n\
+    lsls r1, r5, 1\n\
+    adds r1, r7, r1\n\
+    lsls r0, r2, 1\n\
+    adds r0, r7, r0\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    ldrh r0, [r3]\n\
+    cmp r2, r0\n\
+    bne _08145A1A\n\
+    movs r2, 0\n\
 _08145A1A:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, 0x43\n\
-	bls _08145A00\n\
-	b _08145A5C\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x43\n\
+    bls _08145A00\n\
+    b _08145A5C\n\
 _08145A26:\n\
-	movs r4, 0\n\
-	ldrh r0, [r7]\n\
-	cmp r0, r10\n\
-	beq _08145A42\n\
+    movs r4, 0\n\
+    ldrh r0, [r7]\n\
+    cmp r0, r10\n\
+    beq _08145A42\n\
 _08145A2E:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	lsls r0, r4, 1\n\
-	adds r0, r7, r0\n\
-	ldrh r0, [r0]\n\
-	cmp r0, r10\n\
-	beq _08145A42\n\
-	cmp r4, 0x43\n\
-	bls _08145A2E\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    lsls r0, r4, 1\n\
+    adds r0, r7, r0\n\
+    ldrh r0, [r0]\n\
+    cmp r0, r10\n\
+    beq _08145A42\n\
+    cmp r4, 0x43\n\
+    bls _08145A2E\n\
 _08145A42:\n\
-	mov r1, r8\n\
-	ldrh r0, [r1]\n\
-	subs r0, 0x1\n\
-	cmp r4, r0\n\
-	bge _08145A5C\n\
-	lsls r0, r4, 1\n\
-	adds r0, r7, r0\n\
-	ldr r2, [sp]\n\
-	ldrh r1, [r2]\n\
-	strh r1, [r0]\n\
-	mov r0, r10\n\
-	strh r0, [r2]\n\
-	b _08145A62\n\
+    mov r1, r8\n\
+    ldrh r0, [r1]\n\
+    subs r0, 0x1\n\
+    cmp r4, r0\n\
+    bge _08145A5C\n\
+    lsls r0, r4, 1\n\
+    adds r0, r7, r0\n\
+    ldr r2, [sp]\n\
+    ldrh r1, [r2]\n\
+    strh r1, [r0]\n\
+    mov r0, r10\n\
+    strh r0, [r2]\n\
+    b _08145A62\n\
 _08145A5C:\n\
-	mov r2, r10\n\
-	ldr r1, [sp]\n\
-	strh r2, [r1]\n\
+    mov r2, r10\n\
+    ldr r1, [sp]\n\
+    strh r2, [r1]\n\
 _08145A62:\n\
-	movs r0, 0x44\n\
-	mov r1, r8\n\
-	strh r0, [r1]\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    movs r0, 0x44\n\
+    mov r1, r8\n\
+    strh r0, [r1]\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
