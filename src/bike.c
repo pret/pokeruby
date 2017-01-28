@@ -84,6 +84,16 @@ static void (*const gUnknown_083DB5A4[])(u8) =
     sub_80593F4,
 };
 
+// Player speeds
+enum
+{
+	STANDING,
+	NORMAL,
+	FAST,
+	FASTER,
+	FASTEST,
+};
+
 //Acro bike states
 enum
 {
@@ -132,7 +142,7 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
     AcroBikeHandleInputState6,
 };
 
-const u16 gUnknown_083DB600[] = {1, 2, 4};
+const u16 gMachBikeSpeeds[] = {NORMAL, FAST, FASTEST};
 static const u8 Unknown_3DB606[] = {4, 0};
 
 static const struct UnknownStruct1 gUnknown_083DB608[] =
@@ -243,7 +253,7 @@ static void MachBikeTransition_80E51C4(u8 direction)
         {
             gUnknown_083DB5A4[gPlayerAvatar.bikeFrameCounter](direction);
             gPlayerAvatar.unkB = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-            if (gPlayerAvatar.bikeFrameCounter < 2)
+            if (gPlayerAvatar.bikeFrameCounter < 2) // do not go faster than the last element in the mach bike array
                 gPlayerAvatar.bikeFrameCounter++;
         }
     }
@@ -882,7 +892,7 @@ static u8 sub_80E5DA0(struct MapObject *mapObject, s16 x, s16 y, u8 direction, u
     return collision;
 }
 
-bool8 sub_80E5DEC(u8 tile)
+bool8 IsRunningDisallowed(u8 tile)
 {
     if (IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return TRUE;
@@ -1010,20 +1020,20 @@ static void sub_80E6024(void)
     gPlayerAvatar.unkB = 0;
 }
 
-s16 sub_80E6034(void)
+s16 GetCurrentPlayerSpeed(void)
 {
-    s16 arr[3];
+    s16 machSpeeds[3];
 
-    memcpy(arr, gUnknown_083DB600, sizeof(arr));
+    memcpy(machSpeeds, gMachBikeSpeeds, sizeof(machSpeeds));
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
-        return arr[gPlayerAvatar.bikeFrameCounter];
+        return machSpeeds[gPlayerAvatar.bikeFrameCounter];
     else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
-        return 3;
+        return FASTER;
     else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
-        return 2;
+        return FAST;
     else
-        return 1;
+        return NORMAL;
 }
 
 void sub_80E6084(void)

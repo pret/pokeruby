@@ -489,7 +489,7 @@ u8 ForcedMovement_MuddySlope(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if (playerMapObj->placeholder18 != 2 || sub_80E6034() <= 3)
+    if (playerMapObj->placeholder18 != 2 || GetCurrentPlayerSpeed() <= 3)
     {
         sub_80E6010(0);
         playerMapObj->mapobj_bit_9 = 1;
@@ -555,7 +555,7 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
             return;
         }
         if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
-         && sub_80E5DEC(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
+         && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(direction);
             gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
