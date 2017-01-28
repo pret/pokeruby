@@ -56,8 +56,8 @@ struct Unk3000756
 
 struct LabelPair
 {
-    u8 (*prefix)[];
-    u8 (*suffix)[];
+    const u8 *prefix;
+    const u8 *suffix;
 };
 
 struct Unk03005E20
@@ -97,32 +97,112 @@ extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpriteSheet gMonBackPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
-
 extern void *gUnknown_081FAF4C[];
+extern const u8 OtherText_Cool[];
+extern const u8 OtherText_Beauty2[];
+extern const u8 OtherText_Cute[];
+extern const u8 OtherText_Smart[];
+extern const u8 OtherText_Tough[];
+extern const u8 OtherText_NonstopSuperCool[];
+extern const u8 OtherText_Terminator6[];
+extern const u8 OtherText_GoodLookingPoke[];
+extern const u8 OtherText_Terminator7[];
+extern const u8 OtherText_MarvelousGreat[];
+extern const u8 OtherText_Terminator8[];
+extern const u8 OtherText_CenturyLastVenus[];
+extern const u8 OtherText_Terminator9[];
+extern const u8 OtherText_Terminator10[];
+extern const u8 OtherText_DazzlingSlime[];
+extern const u8 OtherText_PokeCenterIdol[];
+extern const u8 OtherText_Terminator11[];
+extern const u8 OtherText_LovelyAndSweet[];
+extern const u8 OtherText_Terminator12[];
+extern const u8 OtherText_ThePretty[];
+extern const u8 OtherText_WinningPortrait[];
+extern const u8 OtherText_GiveUsWink[];
+extern const u8 OtherText_Terminator13[];
+extern const u8 OtherText_SmartnessMaestro[];
+extern const u8 OtherText_Terminator14[];
+extern const u8 OtherText_ChosenPokeAmong[];
+extern const u8 OtherText_Terminator15[];
+extern const u8 OtherText_TheExcellent[];
+extern const u8 OtherText_ItsMomentOfElegance[];
+extern const u8 OtherText_PowerfullyMuscular[];
+extern const u8 OtherText_Terminator16[];
+extern const u8 OtherText_StrongErEst[];
+extern const u8 OtherText_Terminator17[];
+extern const u8 OtherText_MightyTough[];
+extern const u8 OtherText_Exclamation[];
+extern const u8 gContestText_ContestWinner[];
+extern const u8 gOtherText_Unknown1[];
 
-extern u16 gPictureFramePalettes[];
-
-extern u8 gPictureFrameTiles_0[];
-extern u8 gPictureFrameTiles_1[];
-extern u8 gPictureFrameTiles_2[];
-extern u8 gPictureFrameTiles_3[];
-extern u8 gPictureFrameTiles_4[];
-extern u8 gPictureFrameTiles_5[];
-
-extern u8 gPictureFrameTilemap_0[];
-extern u8 gPictureFrameTilemap_1[];
-extern u8 gPictureFrameTilemap_2[];
-extern u8 gPictureFrameTilemap_3[];
-extern u8 gPictureFrameTilemap_4[];
-extern u8 gPictureFrameTilemap_5[];
-
-extern u8 *gUnknown_083F60AC[];
-extern struct LabelPair gUnknown_083F60C0[];
-extern struct OamData gOamData_83F6138;
-extern u16 gUnknown_083F6140[];
-
-extern u8 gContestText_ContestWinner[];
-extern u8 gOtherText_Unknown1[];
+static const u16 gPictureFramePalettes[][16] =
+{
+    INCBIN_U16("graphics/picture_frame/bg0.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg1.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg2.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg3.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg4.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg5.gbapal"),
+    {0},
+    {0},
+};
+const u8 emptySpace[8 * 32] = {0};
+const u8 gPictureFrameTiles_0[] = INCBIN_U8("graphics/picture_frame/frame0.4bpp.rl");
+const u8 gPictureFrameTiles_1[] = INCBIN_U8("graphics/picture_frame/frame1.4bpp.rl");
+const u8 gPictureFrameTiles_2[] = INCBIN_U8("graphics/picture_frame/frame2.4bpp.rl");
+const u8 gPictureFrameTiles_3[] = INCBIN_U8("graphics/picture_frame/frame3.4bpp.rl");
+const u8 gPictureFrameTiles_4[] = INCBIN_U8("graphics/picture_frame/frame4.4bpp.rl");
+const u8 gPictureFrameTiles_5[] = INCBIN_U8("graphics/picture_frame/frame5.4bpp.rl");
+const u8 gPictureFrameTilemap_0[] = INCBIN_U8("graphics/picture_frame/frame0_map.bin.rl");
+const u8 gPictureFrameTilemap_1[] = INCBIN_U8("graphics/picture_frame/frame1_map.bin.rl");
+const u8 gPictureFrameTilemap_2[] = INCBIN_U8("graphics/picture_frame/frame2_map.bin.rl");
+const u8 gPictureFrameTilemap_3[] = INCBIN_U8("graphics/picture_frame/frame3_map.bin.rl");
+const u8 gPictureFrameTilemap_4[] = INCBIN_U8("graphics/picture_frame/frame4_map.bin.rl");
+const u8 gPictureFrameTilemap_5[] = INCBIN_U8("graphics/picture_frame/frame5_map.bin.rl");
+const u8 *const gUnknown_083F60AC[] =
+{
+    OtherText_Cool,
+    OtherText_Beauty2,
+    OtherText_Cute,
+    OtherText_Smart,
+    OtherText_Tough,
+};
+const struct LabelPair gUnknown_083F60C0[] =
+{
+    {OtherText_NonstopSuperCool, OtherText_Terminator6},
+    {OtherText_GoodLookingPoke, OtherText_Terminator7},
+    {OtherText_MarvelousGreat, OtherText_Terminator8},
+    {OtherText_CenturyLastVenus, OtherText_Terminator9},
+    {OtherText_Terminator10, OtherText_DazzlingSlime},
+    {OtherText_PokeCenterIdol, OtherText_Terminator11},
+    {OtherText_LovelyAndSweet, OtherText_Terminator12},
+    {OtherText_ThePretty, OtherText_WinningPortrait},
+    {OtherText_GiveUsWink, OtherText_Terminator13},
+    {OtherText_SmartnessMaestro, OtherText_Terminator15},
+    {OtherText_ChosenPokeAmong, OtherText_Terminator15},
+    {OtherText_TheExcellent, OtherText_ItsMomentOfElegance},
+    {OtherText_PowerfullyMuscular, OtherText_Terminator16},
+    {OtherText_StrongErEst, OtherText_Terminator17},
+    {OtherText_MightyTough, OtherText_Exclamation},
+};
+const struct OamData gOamData_83F6138 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 1,
+    .bpp = 1,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+const u16 gUnknown_083F6140[] = {0, 0};
 
 static void ShowContestPainting();
 static void CB2_HoldContestPainting(void);
@@ -312,9 +392,9 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     }
     else
     {
-        ptr = StringCopy(ptr, *gUnknown_083F60C0[type].prefix);
+        ptr = StringCopy(ptr, gUnknown_083F60C0[type].prefix);
         ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
-        ptr = StringCopy(ptr, *gUnknown_083F60C0[type].suffix);
+        ptr = StringCopy(ptr, gUnknown_083F60C0[type].suffix);
 
         xPos = 3;
         yPos = 14;
@@ -656,7 +736,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
 {
     u8 x, y;
 
-    LoadPalette(gPictureFramePalettes, 0, 128 * 2);
+    LoadPalette(gPictureFramePalettes, 0, sizeof(gPictureFramePalettes));
     if (arg1 == 1)
     {
         switch (gUnknown_03005E8C->contestType / 3)
