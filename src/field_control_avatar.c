@@ -137,7 +137,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
     if ((r6 == 2 && forcedMove == FALSE) || r6 == 0)
     {
-        if (GetCurrentPlayerSpeed() != 4)
+        if (GetPlayerSpeedToUse() != 4)
         {
             if (newKeys & START_BUTTON)
                 input->pressedStartButton = TRUE;

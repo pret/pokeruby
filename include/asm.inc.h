@@ -363,7 +363,7 @@ u8 IsRunningDisallowed(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
-s16 GetCurrentPlayerSpeed(void);
+s16 GetPlayerSpeedToUse(void);
 void sub_80E6084();
 
 // asm/easy_chat.o

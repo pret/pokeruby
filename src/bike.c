@@ -87,11 +87,11 @@ static void (*const gUnknown_083DB5A4[])(u8) =
 // Player speeds
 enum
 {
-	STANDING,
-	NORMAL,
-	FAST,
-	FASTER,
-	FASTEST,
+	SPEED_STANDING,
+	SPEED_NORMAL,
+	SPEED_FAST,
+	SPEED_FASTER,
+	SPEED_FASTEST,
 };
 
 //Acro bike states
@@ -142,7 +142,7 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
     AcroBikeHandleInputState6,
 };
 
-const u16 gMachBikeSpeeds[] = {NORMAL, FAST, FASTEST};
+const u16 gMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 static const u8 Unknown_3DB606[] = {4, 0};
 
 static const struct UnknownStruct1 gUnknown_083DB608[] =
@@ -1020,7 +1020,7 @@ static void sub_80E6024(void)
     gPlayerAvatar.unkB = 0;
 }
 
-s16 GetCurrentPlayerSpeed(void)
+s16 GetPlayerSpeedToUse(void)
 {
     s16 machSpeeds[3];
 
@@ -1029,11 +1029,11 @@ s16 GetCurrentPlayerSpeed(void)
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];
     else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
-        return FASTER;
+        return SPEED_FASTER;
     else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
-        return FAST;
+        return SPEED_FAST;
     else
-        return NORMAL;
+        return SPEED_NORMAL;
 }
 
 void sub_80E6084(void)
