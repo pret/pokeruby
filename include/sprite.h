@@ -46,7 +46,7 @@ struct AnimJumpCmd
 };
 
 // The first halfword of this union specifies the type of command.
-// If it -2, then it is a jump command, if it is -2, then it is the end of the script.
+// If it -2, then it is a jump command. If it is -1, then it is the end of the script.
 // Otherwise, it is the imageValue for a frame command.
 union AnimCmd
 {
