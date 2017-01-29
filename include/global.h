@@ -268,11 +268,14 @@ struct MailStruct
 
 struct UnkMauvilleOldManStruct
 {
-	u8 unk_2D94;
-	u8 unk_2D95;
-	/*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-	/*0x2D95*/ u8 filler_2DA2[0x1B];
-	u8 unk_2DBD;
+    u8 unk_2D94;
+    u8 unk_2D95;
+    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x2DAE*/ u8 playerName[8];
+    /*0x2DB6*/ u8 filler_2DB6[0x3];
+    /*0x2DB9*/ u8 playerTrainerId[4];
+    u8 unk_2DBD;
 };
 
 struct SaveBlock1 /* 0x02025734 */
