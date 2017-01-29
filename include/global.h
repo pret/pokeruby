@@ -361,7 +361,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B24*/ u8 filler_2B24[0x28];
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 filler_2D8C[0x8];
-	OldMan oldMan;
+    OldMan oldMan;
     ///*0x2D94*/ struct UnkMauvilleOldManStruct oldManStruct;
     /*0x2DBC*/ u8 filler_2DBC[0x18];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
