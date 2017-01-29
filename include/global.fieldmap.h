@@ -72,13 +72,14 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u16 unkA_0:4;
-             u16 unkA_4:4;
+    /*0x0A*/ u8 unkA_0:4;
+             u8 unkA_4:4;
     ///*0x0B*/ u8 fillerB[1];
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
     /*0x10*/ u8 *script;
-    /*0x14*/ u8 filler_14[0x4];
+    /*0x14*/ u16 unk14;
+    /*0x16*/ u8 filler_16[2];
 };  /*size = 0x18*/
 
 struct WarpEvent
