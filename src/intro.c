@@ -879,7 +879,11 @@ static u8 SetUpCopyrightScreen(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
-        REG_BG0CNT = 1792;
+        REG_BG0CNT = BGCNT_PRIORITY(0)
+                   | BGCNT_CHARBASE(0)
+                   | BGCNT_SCREENBASE(7)
+                   | BGCNT_16COLOR
+                   | BGCNT_TXT256x256;
         ime = REG_IME;
         REG_IME = 0;
         REG_IE |= INTR_FLAG_VBLANK;
@@ -959,10 +963,10 @@ static void Task_IntroLoadPart1Graphics(u8 taskId)
     LZ77UnCompVram(gIntro1BG3_Tilemap, (void *)(VRAM + 0xB000));
     DmaClear16(3, VRAM + 0xB800, 0x800);
     LoadPalette(gIntro1BGPals, 0, sizeof(gIntro1BGPals));
-    REG_BG3CNT = 0x9603;
-    REG_BG2CNT = 0x9402;
-    REG_BG1CNT = 0x9201;
-    REG_BG0CNT = 0x9000;
+    REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_TXT256x512;
+    REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(20) | BGCNT_16COLOR | BGCNT_TXT256x512;
+    REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_TXT256x512;
+    REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(16) | BGCNT_16COLOR | BGCNT_TXT256x512;
     LoadCompressedObjectPic(&gUnknown_0840B008[0]);
     LoadCompressedObjectPic(&gUnknown_0840B018[0]);
     LoadSpritePalettes(gUnknown_0840B028);
@@ -1179,7 +1183,7 @@ static void Task_IntroLoadPart3Graphics(u8 taskId)
     ResetSpriteData();
     FreeAllSpritePalettes();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
-    REG_BG2CNT = 0x4883;
+    REG_BG2CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(8) | BGCNT_256COLOR | BGCNT_AFF256x256;
     REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
     gTasks[taskId].func = Task_IntroSpinAndZoomPokeball;
     gIntroFrameCounter = 0;
@@ -1257,8 +1261,16 @@ static void task_intro_14(u8 taskId)
     REG_WIN0V = 0xA0;
     REG_WININ = 0x1C;
     REG_WINOUT = 0x1D;
-    REG_BG3CNT = 0x603;
-    REG_BG0CNT = 0x700;
+    REG_BG3CNT = BGCNT_PRIORITY(3)
+               | BGCNT_CHARBASE(0)
+               | BGCNT_SCREENBASE(6)
+               | BGCNT_16COLOR
+               | BGCNT_TXT256x256;
+    REG_BG0CNT = BGCNT_PRIORITY(0)
+               | BGCNT_CHARBASE(0)
+               | BGCNT_SCREENBASE(7)
+               | BGCNT_16COLOR
+               | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
     gTasks[taskId].data[15] = CreateTask(task_intro_20, 0);
     gTasks[gTasks[taskId].data[15]].data[0] = 0;
@@ -1412,18 +1424,21 @@ static void task_intro_19(u8 taskId)
 
 static void task_intro_20(u8 taskId)
 {
+#define BG2_FLAGS (BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(14) | BGCNT_16COLOR | BGCNT_TXT256x256)
+#define DISPCNT_FLAGS (DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON)
+
     gTasks[taskId].data[15]++;
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        REG_DISPCNT = 0x3940;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
         REG_BG2CNT = 0;
         gTasks[taskId].data[0] = 0xFF;
         break;
     case 2:
         BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
-        REG_BG2CNT = 0x0E07;
-        REG_DISPCNT = 0x3D40;
+        REG_BG2CNT = BG2_FLAGS;
+        REG_DISPCNT = DISPCNT_FLAGS;
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[0] = 20;
@@ -1436,8 +1451,8 @@ static void task_intro_20(u8 taskId)
         break;
     case 3:
         BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
-        REG_BG2CNT = 0x0E07;
-        REG_DISPCNT = 0x3D40;
+        REG_BG2CNT = BG2_FLAGS;
+        REG_DISPCNT = DISPCNT_FLAGS;
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[0] = 0x1E;
@@ -1450,8 +1465,8 @@ static void task_intro_20(u8 taskId)
         break;
     case 4:
         BeginNormalPaletteFade(1, 5, 0, 0x10, 0x37F7);
-        REG_BG2CNT = 0x0E07;
-        REG_DISPCNT = 0x3D40;
+        REG_BG2CNT = BG2_FLAGS;
+        REG_DISPCNT = DISPCNT_FLAGS;
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[3] = 8;
@@ -1468,6 +1483,9 @@ static void task_intro_20(u8 taskId)
     case 0xFF:  //needed to prevent jump table optimization
         break;
     }
+
+#undef BG2_FLAGS
+#undef DISPCNT_FLAGS
 }
 
 static void intro_reset_and_hide_bgs(void)
