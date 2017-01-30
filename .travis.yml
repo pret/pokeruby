@@ -1,10 +1,8 @@
-language: assembly
 os:
 - linux
 env:
   global:
-  - DEVKITPRO=$HOME/devkitPro
-  - DEVKITARM=${DEVKITPRO}/devkitARM
+  - DEVKITARM=$HOME/devkitARM
   matrix:
     secure: iMdu2LVLEFjt7JE9cC2SG3Dt0cRpzaLKPeJCKkZrT4JlDxlLKm7okBWSo74H77KksXkjOF7GZX5ZivtmRDyJE7R52jA6L02yJglo5IdmPHlphDinoIuXwIh9Bx+p4C0WYYSV9L/COo6OfbcZ+DcYszAWnLP8wrr5ycMME3Kx3Ke9aLwMt7IV1RAy+lcuEHS/LkXRSgN1nfoxbiuUkpIz5PYvnD6g67tqyxUAtGmHxWCJP4ahgvfnep7opZ/oSYoeyEKJ8T32VmGc36v2n0FbP2s3zvsXrV+aa4PsEL2syHKaKiGOkUuH0biCeyQWCKQRuKn4S/JqylYlSCSJ05z0VRLHe2iit8Hbqo+/OWS2CpRv27b/ASR9ucSWAwYXmZLD+T46U5nL2Tibvl83YmkhcDyZHoPVOCxUTJLGoKtKjQGxthvZDnNgH+aGE/Pl4ChD4vVPf2/gmNfreadLB5SKJPZhmHyNaMBHbmulUHyr9yo8C08boR3OkIa7sPYc51qQd0ECu1Ky61wvHgycHrrkJYM1O9Wu3f9a4o74oCOMHib+0ogVo0u0P9qv1+UleiXwjxUm4wNnb56+7KzXgLpoMMLMKTH0kXoGFX0s6/cJggT6SrSQwn3/eruxhRYhps6se8KdZNeXoHTuIsvsrPXAGyPiQTmThmBuklkbDu32RGs=
 addons:
@@ -13,12 +11,11 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-5
-    - libc6-dev-i386
     - gcc-multilib
 install:
-- cd ..
-- travis_retry wget http://sourceforge.net/projects/devkitpro/files/Automated%20Installer/devkitARMupdate.pl
-- travis_retry sudo perl devkitARMupdate.pl
+- cd $HOME
+- travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
+- tar xvf devkitARM*.tar.bz2
 - travis_retry git clone https://github.com/YamaArashi/agbcc.git
 - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
 script:
@@ -27,9 +24,9 @@ script:
 # HACK! We need to force Travis to use g++ 5 for C++14 compatibility
 - sed -i 's/g++/g++-5/' tools/scaninc/Makefile tools/preproc/Makefile
 - ./build_tools.sh
-- make tidy && make compare_ruby
-- make tidy && make compare_ruby_rev1
-- make tidy && make compare_ruby_rev2
-- make tidy && make compare_sapphire
-- make tidy && make compare_sapphire_rev1
-- make tidy && make compare_sapphire_rev2
+- make tidy && make -j2 compare_ruby
+- make tidy && make -j2 compare_ruby_rev1
+- make tidy && make -j2 compare_ruby_rev2
+- make tidy && make -j2 compare_sapphire
+- make tidy && make -j2 compare_sapphire_rev1
+- make tidy && make -j2 compare_sapphire_rev2
