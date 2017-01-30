@@ -266,6 +266,35 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
+struct UnkMauvilleOldManStruct
+{
+    u8 unk_2D94;
+    u8 unk_2D95;
+    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x2DAE*/ u8 playerName[8];
+    /*0x2DB6*/ u8 filler_2DB6[0x3];
+    /*0x2DB9*/ u8 playerTrainerId[4];
+    u8 unk_2DBD;
+	/* size = 0x1E */
+};
+
+struct UnkMauvilleOldManStruct2
+{
+	u8 filler0;
+	u8 unk1;
+	u8 unk2;
+	u16 mauvilleOldMan_ecArray[10];
+	u16 mauvilleOldMan_ecArray2[6];
+    u8 fillerF[0x4];
+	/* size = 0x1E */
+};
+
+typedef union OldMan {
+	struct UnkMauvilleOldManStruct oldMan1;
+	struct UnkMauvilleOldManStruct2 oldMan2;
+} OldMan;
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -331,7 +360,10 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B1C*/ u16 unk2B1C[4];
     /*0x2B24*/ u8 filler_2B24[0x28];
     /*0x2B4C*/ struct MailStruct mail[16];
-    /*0x2D8C*/ u8 filler_2D8C[0x48];
+    /*0x2D8C*/ u8 filler_2D8C[0x8];
+    OldMan oldMan;
+    ///*0x2D94*/ struct UnkMauvilleOldManStruct oldManStruct;
+    /*0x2DBC*/ u8 filler_2DBC[0x18];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];

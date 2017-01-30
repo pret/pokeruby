@@ -411,6 +411,6 @@ void npc_hide_all_but_player(void)
     for (i = 0; i < 16; i++)
     {
         if (i != gPlayerAvatar.mapObjectId)
-            RemoveFieldObject(&gFieldObjects[i]);
+            RemoveFieldObject(&gMapObjects[i]);
     }
 }

@@ -359,11 +359,11 @@ void sub_80C8F34(u8);
 // asm/bike.o
 void MovePlayerOnBike(u8, u16, u16);
 void sub_80E5B38(u16 i, u16 c);
-u8 sub_80E5DEC(u8);
+u8 IsRunningDisallowed(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
-s16 sub_80E6034(void);
+s16 GetPlayerSpeed(void);
 void sub_80E6084();
 
 // asm/easy_chat.o

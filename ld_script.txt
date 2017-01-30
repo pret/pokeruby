@@ -181,6 +181,7 @@ SECTIONS {
         asm/easy_chat.o(.text);
         asm/pokenav.o(.text);
         asm/mon_markings.o(.text);
+        src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
