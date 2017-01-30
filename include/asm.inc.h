@@ -376,7 +376,7 @@ u16 sub_80EB72C(u16);
 void sub_80EBA5C(void);
 
 // asm/mauville_old_man.o
-void sub_80F7AA4(void);
+void SetMauvilleOldMan(void);
 void sub_80F7F30(void);
 
 // asm/menu_helpers.o

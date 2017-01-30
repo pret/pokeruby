@@ -59,7 +59,7 @@ void sub_80F7A98(void)
     sub_81099CC();
 }
 
-void sub_80F7AA4(void)
+void SetMauvilleOldMan(void)
 {
     u32 var = ((u16)((gSaveBlock2.playerTrainerId[1] << 8 | gSaveBlock2.playerTrainerId[0])) % 10) / 2;
     
