@@ -11,10 +11,11 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
+    - gcc-5
     - g++-5
-    - libc6-dev-i386
     - gcc-multilib
 install:
+- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 - cd $HOME
 - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
 - tar xvf devkitARM*.tar.bz2
@@ -23,8 +24,6 @@ install:
 script:
 - cd $TRAVIS_BUILD_DIR
 - travis_retry wget -q $BASEROM_URL -O baserom.gba
-# HACK! We need to force Travis to use g++ 5 for C++14 compatibility
-- sed -i 's/g++/g++-5/' tools/scaninc/Makefile tools/preproc/Makefile
 - ./build_tools.sh
 - make tidy && make -j2 compare_ruby
 - make tidy && make -j2 compare_ruby_rev1
