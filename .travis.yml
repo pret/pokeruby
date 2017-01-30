@@ -11,6 +11,7 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-5
+    - libc6-dev-i386
     - gcc-multilib
 install:
 - cd $HOME
