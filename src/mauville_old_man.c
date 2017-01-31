@@ -35,10 +35,10 @@ void sub_80F7A34(void)
 
 void sub_80F7A6C(void)
 {
-    OldMan *oldMan = &gSaveBlock1.oldMan;
+    struct UnkMauvilleOldManStruct *bard = &gSaveBlock1.oldMan.oldMan1;
     
-    oldMan->oldMan1.unk_2D94 = 1;
-    oldMan->oldMan1.unk_2D95 = 0;
+    bard->unk_2D94 = 1;
+    bard->unk_2D95 = 0;
 }
 
 void sub_80F7A7C(void)
@@ -59,7 +59,7 @@ void sub_80F7A98(void)
     sub_81099CC();
 }
 
-void sub_80F7AA4(void)
+void SetMauvilleOldMan(void)
 {
     u32 var = ((u16)((gSaveBlock2.playerTrainerId[1] << 8 | gSaveBlock2.playerTrainerId[0])) % 10) / 2;
     
