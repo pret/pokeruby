@@ -5,8 +5,6 @@ os:
 env:
   global:
   - DEVKITARM=$HOME/devkitARM
-  matrix:
-    secure: iMdu2LVLEFjt7JE9cC2SG3Dt0cRpzaLKPeJCKkZrT4JlDxlLKm7okBWSo74H77KksXkjOF7GZX5ZivtmRDyJE7R52jA6L02yJglo5IdmPHlphDinoIuXwIh9Bx+p4C0WYYSV9L/COo6OfbcZ+DcYszAWnLP8wrr5ycMME3Kx3Ke9aLwMt7IV1RAy+lcuEHS/LkXRSgN1nfoxbiuUkpIz5PYvnD6g67tqyxUAtGmHxWCJP4ahgvfnep7opZ/oSYoeyEKJ8T32VmGc36v2n0FbP2s3zvsXrV+aa4PsEL2syHKaKiGOkUuH0biCeyQWCKQRuKn4S/JqylYlSCSJ05z0VRLHe2iit8Hbqo+/OWS2CpRv27b/ASR9ucSWAwYXmZLD+T46U5nL2Tibvl83YmkhcDyZHoPVOCxUTJLGoKtKjQGxthvZDnNgH+aGE/Pl4ChD4vVPf2/gmNfreadLB5SKJPZhmHyNaMBHbmulUHyr9yo8C08boR3OkIa7sPYc51qQd0ECu1Ky61wvHgycHrrkJYM1O9Wu3f9a4o74oCOMHib+0ogVo0u0P9qv1+UleiXwjxUm4wNnb56+7KzXgLpoMMLMKTH0kXoGFX0s6/cJggT6SrSQwn3/eruxhRYhps6se8KdZNeXoHTuIsvsrPXAGyPiQTmThmBuklkbDu32RGs=
 addons:
   apt:
     sources:
@@ -33,3 +31,5 @@ script:
 - make tidy && make -j2 compare_sapphire
 - make tidy && make -j2 compare_sapphire_rev1
 - make tidy && make -j2 compare_sapphire_rev2
+cache:
+  apt: true
