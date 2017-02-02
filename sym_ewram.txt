@@ -137,10 +137,10 @@ gUnknown_02024C04: @ 2024C04
 byte_2024C06: @ 2024C06
 	.space 0x1
 
-gUnknown_02024C07: @ 2024C07
+gPlayerMonIndex: @ 2024C07
 	.space 0x1
 
-gUnknown_02024C08: @ 2024C08
+gEnemyMonIndex: @ 2024C08
 	.space 0x1
 
 gUnknown_02024C09: @ 2024C09

@@ -58,8 +58,8 @@ extern u16 gSpeciesIdToCryId[];
 extern u8 gUnknown_030041C0[];
 extern u8 gUnknown_03004290[];
 extern u8 gUnknown_020238CC[];
-extern u8 gUnknown_02024C07;
-extern u8 gUnknown_02024C08;
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024E6C;
 
@@ -203,7 +203,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_803F324(int stat)
 {
-    gUnknown_02024C08 = gUnknown_02024E6C;
+    gEnemyMonIndex = gUnknown_02024E6C;
     StringCopy(gUnknown_030041C0, gUnknown_08400F58[gUnknown_082082F8[stat]]);
     StringCopy(gUnknown_03004290, gUnknown_083FFDB3);
     get_battle_strings_(gUnknown_083FFDD3);
@@ -244,7 +244,7 @@ u8 *sub_803F378(u16 itemId)
             }
             else
             {
-                gUnknown_02024C07 = gUnknown_02024E6C;
+                gPlayerMonIndex = gUnknown_02024E6C;
                 get_battle_strings_(gUnknown_083FEE92);
             }
         }
@@ -252,7 +252,7 @@ u8 *sub_803F378(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gUnknown_02024C07 = gUnknown_02024E6C;
+        gPlayerMonIndex = gUnknown_02024E6C;
         get_battle_strings_(gUnknown_083FEE5D);
     }
 

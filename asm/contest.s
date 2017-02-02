@@ -878,9 +878,9 @@ _080AB8CC:
 	strb r2, [r1, 0x3]
 	ldr r0, _080AB92C @ =gBattleTypeFlags
 	strh r4, [r0]
-	ldr r4, _080AB930 @ =gUnknown_02024C07
+	ldr r4, _080AB930 @ =gPlayerMonIndex
 	strb r2, [r4]
-	ldr r0, _080AB934 @ =gUnknown_02024C08
+	ldr r0, _080AB934 @ =gEnemyMonIndex
 	strb r3, [r0]
 	bl sub_80AE858
 	ldr r2, _080AB938 @ =gUnknown_02024BE0
@@ -893,8 +893,8 @@ _080AB8CC:
 _080AB924: .4byte 0x02019204
 _080AB928: .4byte gUnknown_02024A72
 _080AB92C: .4byte gBattleTypeFlags
-_080AB930: .4byte gUnknown_02024C07
-_080AB934: .4byte gUnknown_02024C08
+_080AB930: .4byte gPlayerMonIndex
+_080AB934: .4byte gEnemyMonIndex
 _080AB938: .4byte gUnknown_02024BE0
 _080AB93C:
 	movs r0, 0
@@ -2344,7 +2344,7 @@ _080AC542:
 	adds r4, r0
 	strh r5, [r4, 0xC]
 	ldr r1, _080AC5E0 @ =gUnknown_02024BE0
-	ldr r0, _080AC5E4 @ =gUnknown_02024C07
+	ldr r0, _080AC5E4 @ =gPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -2365,7 +2365,7 @@ _080AC5D4: .4byte gSprites
 _080AC5D8: .4byte sub_80AD8FC
 _080AC5DC: .4byte gTasks
 _080AC5E0: .4byte gUnknown_02024BE0
-_080AC5E4: .4byte gUnknown_02024C07
+_080AC5E4: .4byte gPlayerMonIndex
 _080AC5E8:
 	mov r1, r8
 	lsls r0, r1, 2
@@ -15226,7 +15226,7 @@ sub_80B292C: @ 80B292C
 	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _080B295C @ =gUnknown_02024BE0
 	strb r0, [r1, 0x3]
-	ldr r0, _080B2960 @ =gUnknown_02024C08
+	ldr r0, _080B2960 @ =gEnemyMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -15242,7 +15242,7 @@ sub_80B292C: @ 80B292C
 	.align 2, 0
 _080B2958: .4byte SpriteCallbackDummy
 _080B295C: .4byte gUnknown_02024BE0
-_080B2960: .4byte gUnknown_02024C08
+_080B2960: .4byte gEnemyMonIndex
 _080B2964: .4byte gSprites
 	thumb_func_end sub_80B292C
 
@@ -15341,20 +15341,20 @@ _080B29DC:
 	.4byte _080B2A6C
 	.4byte _080B2A6C
 _080B2A60:
-	ldr r1, _080B2A68 @ =gUnknown_02024C08
+	ldr r1, _080B2A68 @ =gEnemyMonIndex
 	movs r0, 0x2
 	b _080B2A70
 	.align 2, 0
-_080B2A68: .4byte gUnknown_02024C08
+_080B2A68: .4byte gEnemyMonIndex
 _080B2A6C:
-	ldr r1, _080B2A78 @ =gUnknown_02024C08
+	ldr r1, _080B2A78 @ =gEnemyMonIndex
 	movs r0, 0x3
 _080B2A70:
 	strb r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B2A78: .4byte gUnknown_02024C08
+_080B2A78: .4byte gEnemyMonIndex
 	thumb_func_end sub_80B29B4
 
 	thumb_func_start sub_80B2A7C
