@@ -194,7 +194,7 @@ void ResetSpriteData(void);
 void AnimateSprites(void);
 void BuildOamBuffer(void);
 u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
-u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority);
+u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
 u8 CreateSpriteAndAnimate(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 void DestroySprite(struct Sprite *sprite);

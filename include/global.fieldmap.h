@@ -67,7 +67,7 @@ struct MapObjectTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 filler_2[0x2];
+    /*0x02*/ u8 unk2;
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
@@ -281,22 +281,22 @@ struct MapObject2
 
 struct MapObjectGraphicsInfo
 {
-    u16 tileTag;
-    u16 paletteTag1;
-    u16 paletteTag2;
-    u16 size;
-    s16 width;
-    s16 height;
-    u8 paletteSlot:4;
-    u8 shadowSize:2;
-    u8 inanimate:1;
-    u8 disableReflectionPaletteLoad:1;
-    u8 tracks;
-    struct OamData *oam;
-    struct SubspriteTable *subspriteTables;
-    union AnimCmd **anims;
-    struct SpriteFrameImage *images;
-    union AffineAnimCmd **affineAnims;
+    /*0x00*/ u16 tileTag;
+    /*0x02*/ u16 paletteTag1;
+    /*0x04*/ u16 paletteTag2;
+    /*0x06*/ u16 size;
+    /*0x08*/ s16 width;
+    /*0x0A*/ s16 height;
+    /*0x0C*/ u8 paletteSlot:4;
+             u8 shadowSize:2;
+             u8 inanimate:1;
+             u8 disableReflectionPaletteLoad:1;
+    /*0x0D*/ u8 tracks;
+    /*0x10*/ struct OamData *oam;
+    /*0x14*/ struct SubspriteTable *subspriteTables;
+    /*0x18*/ union AnimCmd **anims;
+    /*0x1C*/ struct SpriteFrameImage *images;
+    /*0x20*/ union AffineAnimCmd **affineAnims;
 };
 
 #define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
