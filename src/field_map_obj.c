@@ -2,12 +2,17 @@
 #include "asm.h"
 #include "event_data.h"
 #include "field_map_obj.h"
+#include "rom4.h"
 #include "sprite.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);
+extern void npc_load_two_palettes__no_record();
+extern void npc_load_two_palettes__and_record();
+extern void sub_8060388(s16, s16, s16 *, s16 *);
+extern void sub_80634D0();
 
 void sub_805AAB0(void);
 u8 GetFieldObjectIdByLocalId(u8);
@@ -16,9 +21,16 @@ u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 void FieldObjectHandleDynamicGraphicsId();
 void RemoveFieldObjectInternal(struct MapObject *);
 u16 GetFieldObjectFlagIdByFieldObjectId();
+void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
+struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap();
+void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
+void sub_805BDF8();
+
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
 extern const u8 gUnknown_0836DBBC[];
 extern const u8 gUnknown_0836DC09[];
+extern void (*const gUnknown_0836DA88[])(struct Sprite *);
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {
@@ -413,4 +425,288 @@ void npc_hide_all_but_player(void)
         if (i != gPlayerAvatar.mapObjectId)
             RemoveFieldObject(&gMapObjects[i]);
     }
+}
+
+u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, u8 c, u8 d, s16 e, s16 f)
+{
+    u8 mapObjectId;
+    u8 spriteId;
+    struct MapObjectGraphicsInfo *gfxInfo;
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    
+    mapObjectId = InitFieldObjectStateFromTemplate(mapObjTemplate, c, d);
+    if (mapObjectId == 16)
+        return 16;
+    
+    mapObject = &gMapObjects[mapObjectId];
+    gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    if (gfxInfo->paletteSlot == 0)
+        npc_load_two_palettes__no_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
+    else if (gfxInfo->paletteSlot == 10)
+        npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
+    if (mapObject->animPattern == 0x4C)
+        mapObject->mapobj_bit_13 = TRUE;
+    
+#ifdef NONMATCHING
+    sprTemplate->paletteTag = 0xFFFF;
+#else
+    *(u16 *)&sprTemplate->paletteTag = 0xFFFF;
+#endif
+    spriteId = CreateSprite(sprTemplate, 0, 0, 0);
+    if (spriteId == 64)
+    {
+        gMapObjects[mapObjectId].active = FALSE;
+        return 16;
+    }
+    sprite = &gSprites[spriteId];
+    sub_8060388(e + mapObject->coords2.x, f + mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+    sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
+    sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
+    sprite->pos1.x += 8;
+    sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+    sprite->oam.paletteNum = gfxInfo->paletteSlot;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->data0 = mapObjectId;
+    mapObject->spriteId = spriteId;
+    mapObject->mapobj_bit_12 = gfxInfo->inanimate;
+    if (!mapObject->mapobj_bit_12)
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+    SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
+    sub_80634D0(mapObject, sprite);
+    return mapObjectId;
+}
+
+u8 SpawnFieldObject(struct MapObjectTemplate *mapObjTemplate, u8 b, u8 c, s16 d, s16 e)
+{
+    struct SpriteTemplate spriteTemplate;
+    struct SubspriteTable *subspriteTables = NULL;
+    struct SpriteFrameImage spriteFrameImage;
+    struct MapObjectGraphicsInfo *gfxInfo;
+    u8 mapObjectId;
+    
+    gfxInfo = GetFieldObjectGraphicsInfo(mapObjTemplate->graphicsId);
+    MakeObjectTemplateFromFieldObjectTemplate(mapObjTemplate, &spriteTemplate, &subspriteTables);
+    spriteFrameImage.size = gfxInfo->size;
+    spriteTemplate.images = &spriteFrameImage;
+    mapObjectId = sub_805AFCC(mapObjTemplate, &spriteTemplate, b, c, d, e);
+    if (mapObjectId == 16)
+        return 16;
+    gSprites[gMapObjects[mapObjectId].spriteId].images = gfxInfo->images;
+    if (subspriteTables != NULL)
+        SetSubspriteTables(&gSprites[gMapObjects[mapObjectId].spriteId], subspriteTables);
+    return mapObjectId;
+}
+
+u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjTemplate)
+{
+    s16 x;
+    s16 y;
+    
+    GetFieldObjectMovingCameraOffset(&x, &y);
+    return SpawnFieldObject(mapObjTemplate, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, x, y);
+}
+
+u8 SpawnSpecialFieldObjectParametrized(u8 a, u8 b, u8 c, s16 d, s16 e, u8 f)
+{
+    struct MapObjectTemplate mapObjTemplate;
+    
+    d -= 7;
+    e -= 7;
+    mapObjTemplate.localId = c;
+    mapObjTemplate.graphicsId = a;
+    mapObjTemplate.unk2 = 0;
+    mapObjTemplate.x = d;
+    mapObjTemplate.y = e;
+    mapObjTemplate.elevation = f;
+    mapObjTemplate.movementType = b;
+    mapObjTemplate.unkA_0 = 0;
+    mapObjTemplate.unkA_4 = 0;
+    mapObjTemplate.unkC = 0;
+    mapObjTemplate.unkE = 0;
+    return SpawnSpecialFieldObject(&mapObjTemplate);
+}
+
+u8 show_sprite(u8 a, u8 b, u8 c)
+{
+    struct MapObjectTemplate *r5;
+    s16 x;
+    s16 y;
+    
+    r5 = GetFieldObjectTemplateByLocalIdAndMap(a, b, c);
+    if (r5 == NULL)
+        return 16;
+    GetFieldObjectMovingCameraOffset(&x, &y);
+    return SpawnFieldObject(r5, b, c, x, y);
+}
+
+void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+{
+    struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
+    
+    sprTemplate->tileTag = gfxInfo->tileTag;
+    sprTemplate->paletteTag = gfxInfo->paletteTag1;
+    sprTemplate->oam = gfxInfo->oam;
+    sprTemplate->anims = gfxInfo->anims;
+    sprTemplate->images = gfxInfo->images;
+    sprTemplate->affineAnims = gfxInfo->affineAnims;
+    sprTemplate->callback = callback;
+    *subspriteTables = gfxInfo->subspriteTables;
+}
+
+void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+{
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, gUnknown_0836DA88[callbackIndex], sprTemplate, subspriteTables);
+}
+
+void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+{
+    MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObjTemplate->graphicsId, mapObjTemplate->movementType, sprTemplate, subspriteTables);
+}
+
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority)
+{
+    struct SpriteTemplate spriteTemplate;
+    struct SubspriteTable *subspriteTables;
+    u8 spriteId;
+    
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
+    if (spriteTemplate.paletteTag != 0xFFFF)
+        sub_805BDF8(spriteTemplate.paletteTag);
+    spriteId = CreateSprite(&spriteTemplate, c, d, subpriority);
+    if (spriteId != 64 && subspriteTables != NULL)
+    {
+        SetSubspriteTables(&gSprites[spriteId], subspriteTables);
+        gSprites[spriteId].subspriteMode = 2;
+    }
+    return spriteId;
+}
+
+extern void sub_8064970(struct Sprite *);
+extern void sub_8060470();
+extern void InitObjectPriorityByZCoord();
+
+u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
+{
+    struct MapObjectGraphicsInfo *gfxInfo;
+    struct SpriteTemplate spriteTemplate;
+    struct SubspriteTable *subspriteTables;
+    u8 spriteId;
+    
+    gfxInfo = GetFieldObjectGraphicsInfo(a);
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(a, sub_8064970, &spriteTemplate, &subspriteTables);
+#ifdef NONMATCHING
+    spriteTemplate.paletteTag = 0xFFFF;
+#else
+    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
+#endif
+    c += 7;
+    d += 7;
+    sub_8060470(&c, &d, 8, 16);
+    spriteId = CreateSpriteAtEnd(&spriteTemplate, c, d, 0);
+    if (spriteId != 64)
+    {
+        struct Sprite *sprite = &gSprites[spriteId];
+        
+        sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
+        sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
+        sprite->pos1.y += sprite->centerToCornerVecY;
+        sprite->oam.paletteNum = gfxInfo->paletteSlot;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = b;
+        sprite->data1 = e;
+        if (gfxInfo->paletteSlot == 10)
+            npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
+        if (subspriteTables != NULL)
+        {
+            SetSubspriteTables(sprite, subspriteTables);
+            sprite->subspriteMode = 2;
+        }
+        InitObjectPriorityByZCoord(sprite, e);
+        SetObjectSubpriorityByZCoord(e, sprite, 1);
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(f));
+    }
+    return spriteId;
+}
+
+void sub_805B55C(s16 a, s16 b)
+{
+    u8 i;
+    
+    if (gMapHeader.events != NULL)
+    {
+        s16 r9 = gSaveBlock1.pos.x - 2;
+        s16 sp8 = gSaveBlock1.pos.x + 17;
+        s16 r10 = gSaveBlock1.pos.y;
+        s16 spC = gSaveBlock1.pos.y + 16;
+        u8 objectCount = gMapHeader.events->mapObjectCount;
+        
+        for (i = 0; i < objectCount; i++)
+        {
+            struct MapObjectTemplate *template = &gSaveBlock1.mapObjectTemplates[i];
+            s16 foo = template->x + 7;
+            s16 bar = template->y + 7;
+            
+            if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo
+             && !FlagGet(template->unk14))
+                SpawnFieldObject(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, a, b);
+        }
+    }
+}
+
+void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject);
+
+void RemoveFieldObjectsOutsideView(void)
+{
+    u8 i;
+    u8 j;
+    
+    for (i = 0; i < 16; i++)
+    {
+        bool8 isActiveLinkPlayer;
+        
+        for (j = 0, isActiveLinkPlayer = 0; j < 4; j++)
+        {
+            if (gLinkPlayerMapObjects[j].active && i == gLinkPlayerMapObjects[j].mapObjId)
+                isActiveLinkPlayer = TRUE;
+        }
+        if (!isActiveLinkPlayer)
+        {
+            struct MapObject *mapObject = &gMapObjects[i];
+            
+            if (mapObject->active && !mapObject->mapobj_bit_16)
+            RemoveFieldObjectIfOutsideView(mapObject);
+        }
+    }
+}
+
+void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
+{
+    s16 r7 = gSaveBlock1.pos.x - 2;
+    s16 r5 = gSaveBlock1.pos.x + 17;
+    s16 r4 = gSaveBlock1.pos.y;
+    s16 r6 = gSaveBlock1.pos.y + 16;
+    
+    if (mapObject->coords2.x >= r7 && mapObject->coords2.x <= r5
+     && mapObject->coords2.y >= r4 && mapObject->coords2.y <= r6)
+        return;
+    if (mapObject->coords1.x >= r7 && mapObject->coords1.x <= r5
+     && mapObject->coords1.y >= r4 && mapObject->coords1.y <= r6)
+        return;
+    RemoveFieldObject(mapObject);
+}
+
+void sub_805B75C(int, s16, s16);
+
+void sub_805B710(u16 a, u16 b)
+{
+    u8 i;
+    
+    ClearPlayerAvatarInfo();
+    for (i = 0; i < 16; i++)
+    {
+        if (gMapObjects[i].active)
+            sub_805B75C(i, a, b);
+    }
+    sub_805AAB0();
 }
