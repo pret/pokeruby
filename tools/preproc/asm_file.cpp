@@ -494,7 +494,7 @@ bool AsmFile::IsAtEnd()
 // Output the current location to set gas's logical file and line numbers.
 void AsmFile::OutputLocation()
 {
-    printf("# %ld \"%s\"\n", m_lineNum, m_filename.c_str());
+    std::printf("# %ld \"%s\"\n", m_lineNum, m_filename.c_str());
 }
 
 // Reports a diagnostic message.
