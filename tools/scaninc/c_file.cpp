@@ -222,7 +222,7 @@ std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, i
 
     size = ftell(fp);
 
-    std::unique_ptr<unsigned char[]> buffer = std::make_unique<unsigned char[]>(size);
+    std::unique_ptr<unsigned char[]> buffer = std::unique_ptr<unsigned char[]>(new unsigned char[size]);
 
     rewind(fp);
 
