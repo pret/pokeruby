@@ -247,23 +247,23 @@ bool CFile::CheckIdentifier(const std::string& ident)
 
 std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size)
 {
-    FILE* fp = fopen(path.c_str(), "rb");
+    FILE* fp = std::fopen(path.c_str(), "rb");
 
     if (fp == nullptr)
         RaiseError("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    fseek(fp, 0, SEEK_END);
+    std::fseek(fp, 0, SEEK_END);
 
-    size = ftell(fp);
+    size = std::ftell(fp);
 
     std::unique_ptr<unsigned char[]> buffer = std::unique_ptr<unsigned char[]>(new unsigned char[size]);
 
-    rewind(fp);
+    std::rewind(fp);
 
-    if (fread(buffer.get(), size, 1, fp) != 1)
+    if (std::fread(buffer.get(), size, 1, fp) != 1)
         RaiseError("Failed to read \"%s\".\n", path.c_str());
 
-    fclose(fp);
+    std::fclose(fp);
 
     return buffer;
 }
@@ -379,9 +379,9 @@ void CFile::TryConvertIncbin()
         offset += size;
 
         if (isSigned)
-            printf("%d,", data);
+            std::printf("%d,", data);
         else
-            printf("%uu,", data);
+            std::printf("%uu,", data);
     }
 
     std::printf("}");

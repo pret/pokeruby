@@ -29,12 +29,12 @@
 
 bool CanOpenFile(std::string path)
 {
-    FILE *fp = fopen(path.c_str(), "rb");
+    FILE *fp = std::fopen(path.c_str(), "rb");
 
     if (fp == NULL)
         return false;
 
-    fclose(fp);
+    std::fclose(fp);
     return true;
 }
 
@@ -92,6 +92,6 @@ int main(int argc, char **argv)
 
     for (const std::string &path : dependencies)
     {
-        printf("%s\n", path.c_str());
+        std::printf("%s\n", path.c_str());
     }
 }
