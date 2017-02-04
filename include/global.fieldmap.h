@@ -354,6 +354,13 @@ struct PlayerAvatar /* 0x202E858 */
     // TODO: rest of struct
 };
 
+struct Camera
+{
+    bool8 field_0:1;
+    s32 x;
+    s32 y;
+};
+
 extern struct MapObject gMapObjects[];
 extern u8 gSelectedMapObject;
 extern struct MapHeader gMapHeader;

@@ -132,7 +132,7 @@ struct Sprite
 {
     /*0x00*/ struct OamData oam;
     /*0x08*/ union AnimCmd **anims;
-    /*0x0C*/ struct SpriteFrameImage *images;
+    /*0x0C*/ const struct SpriteFrameImage *images;
     /*0x10*/ union AffineAnimCmd **affineAnims;
     /*0x14*/ const struct SpriteTemplate *template;
     /*0x18*/ const struct SubspriteTable *subspriteTables;

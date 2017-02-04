@@ -63,7 +63,7 @@ void sub_805B710(u16 i, u16 i1);
 void sub_805B980(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
-struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void sub_805BCF0(u8, u8, u8, u8);
