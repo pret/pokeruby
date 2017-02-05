@@ -1,24 +1,22 @@
 language: generic
-sudo: required
 os:
 - linux
+sudo: false
+dist: trusty
 env:
   global:
   - DEVKITARM=$HOME/devkitARM
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-6-multilib
-    - gcc-6-multilib
+    - gcc-multilib
     - linux-libc-dev
+cache:
+  apt: true
 install:
-- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6
-- sudo ln -s /usr/include/asm-generic /usr/include/asm
 - cd $HOME
 - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
-- tar xvf devkitARM*.tar.bz2
+- tar xf devkitARM*.tar.bz2
 - travis_retry git clone https://github.com/YamaArashi/agbcc.git
 - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
 script:
@@ -31,5 +29,3 @@ script:
 - make tidy && make -j2 compare_sapphire
 - make tidy && make -j2 compare_sapphire_rev1
 - make tidy && make -j2 compare_sapphire_rev2
-cache:
-  apt: true
