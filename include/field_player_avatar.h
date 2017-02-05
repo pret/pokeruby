@@ -68,14 +68,14 @@ void sub_80597E8(void);
 void sub_80597F4(void);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
-// GetPlayerAvatarGenderByGraphicsId
+u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerSurfingNorth(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 // ClearPlayerAvatarInfo
 void SetPlayerAvatarStateMask(u8 a);
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
-// SetPlayerAvatarExtraStateTransition
+void SetPlayerAvatarExtraStateTransition(u8 a, u8 b);
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 // sub_8059B88
 // sub_8059BF4

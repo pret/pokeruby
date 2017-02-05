@@ -16,13 +16,6 @@ extern void sub_8056670();
 extern void UpdateTVScreensOnMap();
 extern void sub_80538F0(u8 mapGroup, u8 mapNum);
 
-struct Camera
-{
-    bool8 field_0:1;
-    s32 x;
-    s32 y;
-};
-
 struct ConnectionFlags
 {
     u8 south:1;
