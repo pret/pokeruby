@@ -1,11 +1,21 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+enum
+{
+    BERRY_FIRMNESS_UNKNOWN,
+    BERRY_FIRMNESS_VERY_SOFT,
+    BERRY_FIRMNESS_SOFT,
+    BERRY_FIRMNESS_HARD,
+    BERRY_FIRMNESS_VERY_HARD,
+    BERRY_FIRMNESS_SUPER_HARD,
+};
+
 void ClearEnigmaBerries(void);
 void SetEnigmaBerry(u8 *src);
 u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry);
 bool32 IsEnigmaBerryValid(void);
-struct Berry *GetBerryInfo(u8 berry);
+const struct Berry *GetBerryInfo(u8 berry);
 struct BerryTree *GetBerryTreeInfo(u8 id);
 bool32 FieldObjectInteractionWaterBerryTree(void);
 bool32 IsPlayerFacingPlantedBerryTree(void);

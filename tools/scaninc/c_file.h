@@ -42,11 +42,10 @@ private:
     std::string m_path;
     std::set<std::string> m_incbins;
 
-    void CFile::RemoveComments();
+    void RemoveComments();
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
     void SkipWhitespace();
-    std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
     void CheckIncbin();
 };

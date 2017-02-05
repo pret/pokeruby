@@ -56,8 +56,8 @@ struct Unk3000756
 
 struct LabelPair
 {
-    u8 (*prefix)[];
-    u8 (*suffix)[];
+    const u8 *prefix;
+    const u8 *suffix;
 };
 
 struct Unk03005E20
@@ -97,32 +97,112 @@ extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpriteSheet gMonBackPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
-
 extern void *gUnknown_081FAF4C[];
+extern const u8 OtherText_Cool[];
+extern const u8 OtherText_Beauty2[];
+extern const u8 OtherText_Cute[];
+extern const u8 OtherText_Smart[];
+extern const u8 OtherText_Tough[];
+extern const u8 OtherText_NonstopSuperCool[];
+extern const u8 OtherText_Terminator6[];
+extern const u8 OtherText_GoodLookingPoke[];
+extern const u8 OtherText_Terminator7[];
+extern const u8 OtherText_MarvelousGreat[];
+extern const u8 OtherText_Terminator8[];
+extern const u8 OtherText_CenturyLastVenus[];
+extern const u8 OtherText_Terminator9[];
+extern const u8 OtherText_Terminator10[];
+extern const u8 OtherText_DazzlingSlime[];
+extern const u8 OtherText_PokeCenterIdol[];
+extern const u8 OtherText_Terminator11[];
+extern const u8 OtherText_LovelyAndSweet[];
+extern const u8 OtherText_Terminator12[];
+extern const u8 OtherText_ThePretty[];
+extern const u8 OtherText_WinningPortrait[];
+extern const u8 OtherText_GiveUsWink[];
+extern const u8 OtherText_Terminator13[];
+extern const u8 OtherText_SmartnessMaestro[];
+extern const u8 OtherText_Terminator14[];
+extern const u8 OtherText_ChosenPokeAmong[];
+extern const u8 OtherText_Terminator15[];
+extern const u8 OtherText_TheExcellent[];
+extern const u8 OtherText_ItsMomentOfElegance[];
+extern const u8 OtherText_PowerfullyMuscular[];
+extern const u8 OtherText_Terminator16[];
+extern const u8 OtherText_StrongErEst[];
+extern const u8 OtherText_Terminator17[];
+extern const u8 OtherText_MightyTough[];
+extern const u8 OtherText_Exclamation[];
+extern const u8 gContestText_ContestWinner[];
+extern const u8 gOtherText_Unknown1[];
 
-extern u16 gPictureFramePalettes[];
-
-extern u8 gPictureFrameTiles_0[];
-extern u8 gPictureFrameTiles_1[];
-extern u8 gPictureFrameTiles_2[];
-extern u8 gPictureFrameTiles_3[];
-extern u8 gPictureFrameTiles_4[];
-extern u8 gPictureFrameTiles_5[];
-
-extern u8 gPictureFrameTilemap_0[];
-extern u8 gPictureFrameTilemap_1[];
-extern u8 gPictureFrameTilemap_2[];
-extern u8 gPictureFrameTilemap_3[];
-extern u8 gPictureFrameTilemap_4[];
-extern u8 gPictureFrameTilemap_5[];
-
-extern u8 *gUnknown_083F60AC[];
-extern struct LabelPair gUnknown_083F60C0[];
-extern struct OamData gOamData_83F6138;
-extern u16 gUnknown_083F6140[];
-
-extern u8 gContestText_ContestWinner[];
-extern u8 gOtherText_Unknown1[];
+static const u16 gPictureFramePalettes[][16] =
+{
+    INCBIN_U16("graphics/picture_frame/bg0.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg1.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg2.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg3.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg4.gbapal"),
+    INCBIN_U16("graphics/picture_frame/bg5.gbapal"),
+    {0},
+    {0},
+};
+const u8 emptySpace[8 * 32] = {0};
+const u8 gPictureFrameTiles_0[] = INCBIN_U8("graphics/picture_frame/frame0.4bpp.rl");
+const u8 gPictureFrameTiles_1[] = INCBIN_U8("graphics/picture_frame/frame1.4bpp.rl");
+const u8 gPictureFrameTiles_2[] = INCBIN_U8("graphics/picture_frame/frame2.4bpp.rl");
+const u8 gPictureFrameTiles_3[] = INCBIN_U8("graphics/picture_frame/frame3.4bpp.rl");
+const u8 gPictureFrameTiles_4[] = INCBIN_U8("graphics/picture_frame/frame4.4bpp.rl");
+const u8 gPictureFrameTiles_5[] = INCBIN_U8("graphics/picture_frame/frame5.4bpp.rl");
+const u8 gPictureFrameTilemap_0[] = INCBIN_U8("graphics/picture_frame/frame0_map.bin.rl");
+const u8 gPictureFrameTilemap_1[] = INCBIN_U8("graphics/picture_frame/frame1_map.bin.rl");
+const u8 gPictureFrameTilemap_2[] = INCBIN_U8("graphics/picture_frame/frame2_map.bin.rl");
+const u8 gPictureFrameTilemap_3[] = INCBIN_U8("graphics/picture_frame/frame3_map.bin.rl");
+const u8 gPictureFrameTilemap_4[] = INCBIN_U8("graphics/picture_frame/frame4_map.bin.rl");
+const u8 gPictureFrameTilemap_5[] = INCBIN_U8("graphics/picture_frame/frame5_map.bin.rl");
+const u8 *const gUnknown_083F60AC[] =
+{
+    OtherText_Cool,
+    OtherText_Beauty2,
+    OtherText_Cute,
+    OtherText_Smart,
+    OtherText_Tough,
+};
+const struct LabelPair gUnknown_083F60C0[] =
+{
+    {OtherText_NonstopSuperCool, OtherText_Terminator6},
+    {OtherText_GoodLookingPoke, OtherText_Terminator7},
+    {OtherText_MarvelousGreat, OtherText_Terminator8},
+    {OtherText_CenturyLastVenus, OtherText_Terminator9},
+    {OtherText_Terminator10, OtherText_DazzlingSlime},
+    {OtherText_PokeCenterIdol, OtherText_Terminator11},
+    {OtherText_LovelyAndSweet, OtherText_Terminator12},
+    {OtherText_ThePretty, OtherText_WinningPortrait},
+    {OtherText_GiveUsWink, OtherText_Terminator13},
+    {OtherText_SmartnessMaestro, OtherText_Terminator15},
+    {OtherText_ChosenPokeAmong, OtherText_Terminator15},
+    {OtherText_TheExcellent, OtherText_ItsMomentOfElegance},
+    {OtherText_PowerfullyMuscular, OtherText_Terminator16},
+    {OtherText_StrongErEst, OtherText_Terminator17},
+    {OtherText_MightyTough, OtherText_Exclamation},
+};
+const struct OamData gOamData_83F6138 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 1,
+    .bpp = 1,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+const u16 gUnknown_083F6140[] = {0, 0};
 
 static void ShowContestPainting();
 static void CB2_HoldContestPainting(void);
@@ -144,29 +224,29 @@ __attribute__((naked))
 void sub_8106630(u32 arg0)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	ldr r2, _0810665C @ =0x02015de0\n\
-	subs r4, r2, 0x2\n\
-	subs r5, r2, 0x1\n\
-	ldr r3, _08106660 @ =gSaveBlock1\n\
-	subs r0, 0x1\n\
-	lsls r1, r0, 5\n\
-	adds r1, r3\n\
-	ldr r3, _08106664 @ =0x00002dfc\n\
-	adds r1, r3\n\
-	ldm r1!, {r3,r6,r7}\n\
-	stm r2!, {r3,r6,r7}\n\
-	ldm r1!, {r3,r6,r7}\n\
-	stm r2!, {r3,r6,r7}\n\
-	ldm r1!, {r6,r7}\n\
-	stm r2!, {r6,r7}\n\
-	strb r0, [r4]\n\
-	movs r0, 0\n\
-	strb r0, [r5]\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    push {r4-r7,lr}\n\
+    ldr r2, _0810665C @ =0x02015de0\n\
+    subs r4, r2, 0x2\n\
+    subs r5, r2, 0x1\n\
+    ldr r3, _08106660 @ =gSaveBlock1\n\
+    subs r0, 0x1\n\
+    lsls r1, r0, 5\n\
+    adds r1, r3\n\
+    ldr r3, _08106664 @ =0x00002dfc\n\
+    adds r1, r3\n\
+    ldm r1!, {r3,r6,r7}\n\
+    stm r2!, {r3,r6,r7}\n\
+    ldm r1!, {r3,r6,r7}\n\
+    stm r2!, {r3,r6,r7}\n\
+    ldm r1!, {r6,r7}\n\
+    stm r2!, {r6,r7}\n\
+    strb r0, [r4]\n\
+    movs r0, 0\n\
+    strb r0, [r5]\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _0810665C: .4byte 0x02015de0\n\
 _08106660: .4byte gSaveBlock1\n\
 _08106664: .4byte 0x00002dfc\n\
@@ -312,9 +392,9 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     }
     else
     {
-        ptr = StringCopy(ptr, *gUnknown_083F60C0[type].prefix);
+        ptr = StringCopy(ptr, gUnknown_083F60C0[type].prefix);
         ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
-        ptr = StringCopy(ptr, *gUnknown_083F60C0[type].suffix);
+        ptr = StringCopy(ptr, gUnknown_083F60C0[type].suffix);
 
         xPos = 3;
         yPos = 14;
@@ -419,53 +499,53 @@ __attribute__((naked))
 static void sub_8106AC4(u16 arg0, u8 arg2)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0xC\n\
-	adds r4, r1, 0\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	ldr r7, _08106B28 @ =gUnknown_03005E8C\n\
-	ldr r0, [r7]\n\
-	ldr r1, [r0, 0x4]\n\
-	ldr r2, [r0]\n\
-	adds r0, r6, 0\n\
-	bl species_and_otid_get_pal\n\
-	ldr r1, _08106B2C @ =gUnknown_03005E90\n\
-	mov r8, r1\n\
-	ldr r1, [r1]\n\
-	bl LZDecompressVram\n\
-	cmp r4, 0\n\
-	bne _08106B40\n\
-	lsls r0, r6, 3\n\
-	ldr r1, _08106B30 @ =gMonFrontPicTable\n\
-	adds r0, r1\n\
-	ldr r1, _08106B34 @ =gMonFrontPicCoords\n\
-	lsls r2, r6, 2\n\
-	adds r2, r1\n\
-	ldrb r1, [r2]\n\
-	ldrb r2, [r2, 0x1]\n\
-	movs r3, 0x80\n\
-	lsls r3, 18\n\
-	ldr r4, _08106B38 @ =gUnknown_081FAF4C\n\
-	ldr r5, [r4, 0x4]\n\
-	str r5, [sp]\n\
-	str r6, [sp, 0x4]\n\
-	ldr r4, [r7]\n\
-	ldr r4, [r4]\n\
-	str r4, [sp, 0x8]\n\
-	bl HandleLoadSpecialPokePic\n\
-	mov r2, r8\n\
-	ldr r1, [r2]\n\
-	ldr r0, _08106B3C @ =gUnknown_03005E10\n\
-	ldr r2, [r0]\n\
-	adds r0, r5, 0\n\
-	bl sub_8106B90\n\
-	b _08106B74\n\
-	.align 2, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    sub sp, 0xC\n\
+    adds r4, r1, 0\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    ldr r7, _08106B28 @ =gUnknown_03005E8C\n\
+    ldr r0, [r7]\n\
+    ldr r1, [r0, 0x4]\n\
+    ldr r2, [r0]\n\
+    adds r0, r6, 0\n\
+    bl species_and_otid_get_pal\n\
+    ldr r1, _08106B2C @ =gUnknown_03005E90\n\
+    mov r8, r1\n\
+    ldr r1, [r1]\n\
+    bl LZDecompressVram\n\
+    cmp r4, 0\n\
+    bne _08106B40\n\
+    lsls r0, r6, 3\n\
+    ldr r1, _08106B30 @ =gMonFrontPicTable\n\
+    adds r0, r1\n\
+    ldr r1, _08106B34 @ =gMonFrontPicCoords\n\
+    lsls r2, r6, 2\n\
+    adds r2, r1\n\
+    ldrb r1, [r2]\n\
+    ldrb r2, [r2, 0x1]\n\
+    movs r3, 0x80\n\
+    lsls r3, 18\n\
+    ldr r4, _08106B38 @ =gUnknown_081FAF4C\n\
+    ldr r5, [r4, 0x4]\n\
+    str r5, [sp]\n\
+    str r6, [sp, 0x4]\n\
+    ldr r4, [r7]\n\
+    ldr r4, [r4]\n\
+    str r4, [sp, 0x8]\n\
+    bl HandleLoadSpecialPokePic\n\
+    mov r2, r8\n\
+    ldr r1, [r2]\n\
+    ldr r0, _08106B3C @ =gUnknown_03005E10\n\
+    ldr r2, [r0]\n\
+    adds r0, r5, 0\n\
+    bl sub_8106B90\n\
+    b _08106B74\n\
+    .align 2, 0\n\
 _08106B28: .4byte gUnknown_03005E8C\n\
 _08106B2C: .4byte gUnknown_03005E90\n\
 _08106B30: .4byte gMonFrontPicTable\n\
@@ -473,38 +553,38 @@ _08106B34: .4byte gMonFrontPicCoords\n\
 _08106B38: .4byte gUnknown_081FAF4C\n\
 _08106B3C: .4byte gUnknown_03005E10\n\
 _08106B40:\n\
-	lsls r0, r6, 3\n\
-	ldr r1, _08106B80 @ =gMonBackPicTable\n\
-	adds r0, r1\n\
-	ldr r1, _08106B84 @ =gMonBackPicCoords\n\
-	lsls r2, r6, 2\n\
-	adds r2, r1\n\
-	ldrb r1, [r2]\n\
-	ldrb r2, [r2, 0x1]\n\
-	movs r3, 0x80\n\
-	lsls r3, 18\n\
-	ldr r4, _08106B88 @ =gUnknown_081FAF4C\n\
-	ldr r5, [r4]\n\
-	str r5, [sp]\n\
-	str r6, [sp, 0x4]\n\
-	ldr r4, [r7]\n\
-	ldr r4, [r4]\n\
-	str r4, [sp, 0x8]\n\
-	bl HandleLoadSpecialPokePic\n\
-	mov r0, r8\n\
-	ldr r1, [r0]\n\
-	ldr r0, _08106B8C @ =gUnknown_03005E10\n\
-	ldr r2, [r0]\n\
-	adds r0, r5, 0\n\
-	bl sub_8106B90\n\
+    lsls r0, r6, 3\n\
+    ldr r1, _08106B80 @ =gMonBackPicTable\n\
+    adds r0, r1\n\
+    ldr r1, _08106B84 @ =gMonBackPicCoords\n\
+    lsls r2, r6, 2\n\
+    adds r2, r1\n\
+    ldrb r1, [r2]\n\
+    ldrb r2, [r2, 0x1]\n\
+    movs r3, 0x80\n\
+    lsls r3, 18\n\
+    ldr r4, _08106B88 @ =gUnknown_081FAF4C\n\
+    ldr r5, [r4]\n\
+    str r5, [sp]\n\
+    str r6, [sp, 0x4]\n\
+    ldr r4, [r7]\n\
+    ldr r4, [r4]\n\
+    str r4, [sp, 0x8]\n\
+    bl HandleLoadSpecialPokePic\n\
+    mov r0, r8\n\
+    ldr r1, [r0]\n\
+    ldr r0, _08106B8C @ =gUnknown_03005E10\n\
+    ldr r2, [r0]\n\
+    adds r0, r5, 0\n\
+    bl sub_8106B90\n\
 _08106B74:\n\
-	add sp, 0xC\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    add sp, 0xC\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _08106B80: .4byte gMonBackPicTable\n\
 _08106B84: .4byte gMonBackPicCoords\n\
 _08106B88: .4byte gUnknown_081FAF4C\n\
@@ -552,102 +632,102 @@ __attribute__((naked))
 void sub_8106B90()
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0xC\n\
-	mov r10, r0\n\
-	mov r9, r1\n\
-	str r2, [sp]\n\
-	movs r0, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0xC\n\
+    mov r10, r0\n\
+    mov r9, r1\n\
+    str r2, [sp]\n\
+    movs r0, 0\n\
 _08106BA4:\n\
-	movs r3, 0\n\
-	adds r1, r0, 0x1\n\
-	str r1, [sp, 0x4]\n\
-	lsls r0, 3\n\
-	str r0, [sp, 0x8]\n\
+    movs r3, 0\n\
+    adds r1, r0, 0x1\n\
+    str r1, [sp, 0x4]\n\
+    lsls r0, 3\n\
+    str r0, [sp, 0x8]\n\
 _08106BAE:\n\
-	movs r1, 0\n\
-	adds r2, r3, 0x1\n\
-	mov r8, r2\n\
-	ldr r7, [sp, 0x8]\n\
-	adds r0, r7, r3\n\
-	lsls r0, 5\n\
-	mov r12, r0\n\
-	lsls r4, r3, 3\n\
+    movs r1, 0\n\
+    adds r2, r3, 0x1\n\
+    mov r8, r2\n\
+    ldr r7, [sp, 0x8]\n\
+    adds r0, r7, r3\n\
+    lsls r0, 5\n\
+    mov r12, r0\n\
+    lsls r4, r3, 3\n\
 _08106BBE:\n\
-	movs r3, 0\n\
-	lsls r0, r1, 2\n\
-	adds r6, r1, 0x1\n\
-	mov r2, r12\n\
-	adds r5, r2, r0\n\
-	ldr r7, [sp, 0x8]\n\
-	adds r0, r7, r1\n\
-	lsls r0, 7\n\
-	ldr r1, [sp]\n\
-	adds r2, r0, r1\n\
+    movs r3, 0\n\
+    lsls r0, r1, 2\n\
+    adds r6, r1, 0x1\n\
+    mov r2, r12\n\
+    adds r5, r2, r0\n\
+    ldr r7, [sp, 0x8]\n\
+    adds r0, r7, r1\n\
+    lsls r0, 7\n\
+    ldr r1, [sp]\n\
+    adds r2, r0, r1\n\
 _08106BD2:\n\
-	lsrs r0, r3, 1\n\
-	adds r0, r5, r0\n\
-	add r0, r10\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x1\n\
-	ands r0, r3\n\
-	cmp r0, 0\n\
-	beq _08106BE6\n\
-	lsrs r1, 4\n\
-	b _08106BEA\n\
+    lsrs r0, r3, 1\n\
+    adds r0, r5, r0\n\
+    add r0, r10\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x1\n\
+    ands r0, r3\n\
+    cmp r0, 0\n\
+    beq _08106BE6\n\
+    lsrs r1, 4\n\
+    b _08106BEA\n\
 _08106BE6:\n\
-	movs r0, 0xF\n\
-	ands r1, r0\n\
+    movs r0, 0xF\n\
+    ands r1, r0\n\
 _08106BEA:\n\
-	cmp r1, 0\n\
-	bne _08106BFC\n\
-	adds r0, r4, r3\n\
-	lsls r0, 1\n\
-	adds r0, r2\n\
-	movs r7, 0x80\n\
-	lsls r7, 8\n\
-	adds r1, r7, 0\n\
-	b _08106C08\n\
+    cmp r1, 0\n\
+    bne _08106BFC\n\
+    adds r0, r4, r3\n\
+    lsls r0, 1\n\
+    adds r0, r2\n\
+    movs r7, 0x80\n\
+    lsls r7, 8\n\
+    adds r1, r7, 0\n\
+    b _08106C08\n\
 _08106BFC:\n\
-	adds r0, r4, r3\n\
-	lsls r0, 1\n\
-	adds r0, r2\n\
-	lsls r1, 1\n\
-	add r1, r9\n\
-	ldrh r1, [r1]\n\
+    adds r0, r4, r3\n\
+    lsls r0, 1\n\
+    adds r0, r2\n\
+    lsls r1, 1\n\
+    add r1, r9\n\
+    ldrh r1, [r1]\n\
 _08106C08:\n\
-	strh r1, [r0]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, 0x7\n\
-	bls _08106BD2\n\
-	lsls r0, r6, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r1, 0x7\n\
-	bls _08106BBE\n\
-	mov r1, r8\n\
-	lsls r0, r1, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, 0x7\n\
-	bls _08106BAE\n\
-	ldr r2, [sp, 0x4]\n\
-	lsls r0, r2, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x7\n\
-	bls _08106BA4\n\
-	add sp, 0xC\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    strh r1, [r0]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, 0x7\n\
+    bls _08106BD2\n\
+    lsls r0, r6, 16\n\
+    lsrs r1, r0, 16\n\
+    cmp r1, 0x7\n\
+    bls _08106BBE\n\
+    mov r1, r8\n\
+    lsls r0, r1, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, 0x7\n\
+    bls _08106BAE\n\
+    ldr r2, [sp, 0x4]\n\
+    lsls r0, r2, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x7\n\
+    bls _08106BA4\n\
+    add sp, 0xC\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 #endif
@@ -656,7 +736,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
 {
     u8 x, y;
 
-    LoadPalette(gPictureFramePalettes, 0, 128 * 2);
+    LoadPalette(gPictureFramePalettes, 0, sizeof(gPictureFramePalettes));
     if (arg1 == 1)
     {
         switch (gUnknown_03005E8C->contestType / 3)

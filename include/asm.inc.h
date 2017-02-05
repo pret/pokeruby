@@ -79,7 +79,7 @@ u8 AddCameraObject(u8);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 u8 FieldObjectGetBerryTreeId(u8);
 void sub_805C754(struct MapObject *pObject);
-void sub_805C774(struct MapObject *,			 u8 );
+void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(u8 i);
 u8 FieldObjectDirectionToImageAnimId(u8);
@@ -360,11 +360,11 @@ void sub_80C8F34(u8);
 // asm/bike.o
 void MovePlayerOnBike(u8, u16, u16);
 void sub_80E5B38(u16 i, u16 c);
-u8 sub_80E5DEC(u8);
+u8 IsRunningDisallowed(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
-s16 sub_80E6034(void);
+s16 GetPlayerSpeed(void);
 void sub_80E6084();
 
 // asm/easy_chat.o
@@ -377,7 +377,7 @@ u16 sub_80EB72C(u16);
 void sub_80EBA5C(void);
 
 // asm/mauville_old_man.o
-void sub_80F7AA4(void);
+void SetMauvilleOldMan(void);
 void sub_80F7F30(void);
 
 // asm/menu_helpers.o

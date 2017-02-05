@@ -34,8 +34,8 @@ extern u16 gUnknown_02024BE6;
 extern u16 gUnknown_02024BE8;
 extern u16 gUnknown_02024C04;
 extern u8 byte_2024C06;
-extern u8 gUnknown_02024C07;
-extern u8 gUnknown_02024C08;
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0A;
 extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024C0C;
@@ -422,8 +422,8 @@ void dp01_prepare_buffer_wireless_probably(u8 a, u16 b, u8 *c)
     }
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14000] = a;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14001] = gUnknown_02024A60;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gUnknown_02024C07;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gUnknown_02024C08;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gPlayerMonIndex;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gEnemyMonIndex;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14004] = r9;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14005] = (r9 & 0x0000FF00) >> 8;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14006] = gUnknown_02024C0C;
@@ -565,8 +565,8 @@ void sub_800C47C(u8 taskId)
             sub_80155A4(r4);
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gUnknown_02024C07 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
-                gUnknown_02024C08 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
+                gPlayerMonIndex = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
+                gEnemyMonIndex = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
                 gUnknown_02024C0C = unk_2000000[0x15000 + gTasks[taskId].data[15] + 6];
                 gUnknown_02024C0A = unk_2000000[0x15000 + gTasks[taskId].data[15] + 7];
             }

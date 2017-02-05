@@ -968,7 +968,7 @@ _0812129C: .4byte gUnknown_02024A6A
 _081212A0: .4byte gLinkPlayers
 _081212A4: .4byte gEnemyParty
 _081212A8:
-	ldr r4, _081212CC @ =gUnknown_02024C07
+	ldr r4, _081212CC @ =gPlayerMonIndex
 	ldrb r0, [r4]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -985,7 +985,7 @@ _081212A8:
 	ldr r4, _081212D8 @ =gUnknown_08400797
 	b _081212E6
 	.align 2, 0
-_081212CC: .4byte gUnknown_02024C07
+_081212CC: .4byte gPlayerMonIndex
 _081212D0: .4byte gBattleTypeFlags
 _081212D4: .4byte gUnknown_08400791
 _081212D8: .4byte gUnknown_08400797
@@ -1035,7 +1035,7 @@ _0812131C:
 	.align 2, 0
 _08121338: .4byte gUnknown_02024A6A
 _0812133C:
-	ldr r4, _08121370 @ =gUnknown_02024C07
+	ldr r4, _08121370 @ =gPlayerMonIndex
 	ldrb r0, [r4]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1059,7 +1059,7 @@ _0812133C:
 	adds r0, r1
 	b _0812190E
 	.align 2, 0
-_08121370: .4byte gUnknown_02024C07
+_08121370: .4byte gPlayerMonIndex
 _08121374: .4byte gUnknown_02024A6A
 _08121378: .4byte gPlayerParty
 _0812137C:
@@ -1083,7 +1083,7 @@ _0812137C:
 _081213A0: .4byte gUnknown_02024A6A
 _081213A4: .4byte gEnemyParty
 _081213A8:
-	ldr r5, _081213F4 @ =gUnknown_02024C07
+	ldr r5, _081213F4 @ =gPlayerMonIndex
 	ldrb r0, [r5]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1123,7 +1123,7 @@ _081213E8:
 	ldrh r1, [r0]
 	b _08121908
 	.align 2, 0
-_081213F4: .4byte gUnknown_02024C07
+_081213F4: .4byte gPlayerMonIndex
 _081213F8: .4byte gBattleTypeFlags
 _081213FC: .4byte gUnknown_08400791
 _08121400: .4byte gUnknown_08400797
@@ -1139,7 +1139,7 @@ _0812140C:
 	.align 2, 0
 _08121418: .4byte gUnknown_02024A6A
 _0812141C:
-	ldr r5, _08121468 @ =gUnknown_02024C08
+	ldr r5, _08121468 @ =gEnemyMonIndex
 	ldrb r0, [r5]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1179,7 +1179,7 @@ _0812145C:
 	ldrh r1, [r0]
 	b _08121908
 	.align 2, 0
-_08121468: .4byte gUnknown_02024C08
+_08121468: .4byte gEnemyMonIndex
 _0812146C: .4byte gBattleTypeFlags
 _08121470: .4byte gUnknown_08400791
 _08121474: .4byte gUnknown_08400797
@@ -1489,18 +1489,18 @@ _081216EC:
 _081216F0: .4byte byte_2024C06
 _081216F4:
 	ldr r1, _081216FC @ =gUnknown_0203926C
-	ldr r0, _08121700 @ =gUnknown_02024C07
+	ldr r0, _08121700 @ =gPlayerMonIndex
 	b _08121730
 	.align 2, 0
 _081216FC: .4byte gUnknown_0203926C
-_08121700: .4byte gUnknown_02024C07
+_08121700: .4byte gPlayerMonIndex
 _08121704:
 	ldr r1, _0812170C @ =gUnknown_0203926C
-	ldr r0, _08121710 @ =gUnknown_02024C08
+	ldr r0, _08121710 @ =gEnemyMonIndex
 	b _08121730
 	.align 2, 0
 _0812170C: .4byte gUnknown_0203926C
-_08121710: .4byte gUnknown_02024C08
+_08121710: .4byte gEnemyMonIndex
 _08121714:
 	ldr r1, _08121720 @ =gUnknown_0203926C
 	ldr r0, _08121724 @ =0x02000000
@@ -1805,12 +1805,12 @@ _08121970: .4byte 0x0000084b
 _08121974: .4byte gUnknown_084009ED
 _08121978: .4byte gUnknown_084009F7
 _0812197C:
-	ldr r0, _08121980 @ =gUnknown_02024C07
+	ldr r0, _08121980 @ =gPlayerMonIndex
 	b _08121986
 	.align 2, 0
-_08121980: .4byte gUnknown_02024C07
+_08121980: .4byte gPlayerMonIndex
 _08121984:
-	ldr r0, _08121998 @ =gUnknown_02024C08
+	ldr r0, _08121998 @ =gEnemyMonIndex
 _08121986:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -1821,16 +1821,16 @@ _08121986:
 	ldr r4, _081219A0 @ =gUnknown_084007AC
 	b _081219E6
 	.align 2, 0
-_08121998: .4byte gUnknown_02024C08
+_08121998: .4byte gEnemyMonIndex
 _0812199C: .4byte gUnknown_084007A7
 _081219A0: .4byte gUnknown_084007AC
 _081219A4:
-	ldr r0, _081219A8 @ =gUnknown_02024C07
+	ldr r0, _081219A8 @ =gPlayerMonIndex
 	b _081219AE
 	.align 2, 0
-_081219A8: .4byte gUnknown_02024C07
+_081219A8: .4byte gPlayerMonIndex
 _081219AC:
-	ldr r0, _081219C0 @ =gUnknown_02024C08
+	ldr r0, _081219C0 @ =gEnemyMonIndex
 _081219AE:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -1841,16 +1841,16 @@ _081219AE:
 	ldr r4, _081219C8 @ =gUnknown_084007A1
 	b _081219E6
 	.align 2, 0
-_081219C0: .4byte gUnknown_02024C08
+_081219C0: .4byte gEnemyMonIndex
 _081219C4: .4byte gUnknown_0840079C
 _081219C8: .4byte gUnknown_084007A1
 _081219CC:
-	ldr r0, _081219D0 @ =gUnknown_02024C07
+	ldr r0, _081219D0 @ =gPlayerMonIndex
 	b _081219D6
 	.align 2, 0
-_081219D0: .4byte gUnknown_02024C07
+_081219D0: .4byte gPlayerMonIndex
 _081219D4:
-	ldr r0, _08121A24 @ =gUnknown_02024C08
+	ldr r0, _08121A24 @ =gEnemyMonIndex
 _081219D6:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -1894,7 +1894,7 @@ _08121A06:
 	adds r6, 0x1
 	b _08121A3C
 	.align 2, 0
-_08121A24: .4byte gUnknown_02024C08
+_08121A24: .4byte gEnemyMonIndex
 _08121A28: .4byte gUnknown_084007B2
 _08121A2C: .4byte gUnknown_084007B7
 _08121A30:

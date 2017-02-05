@@ -283,7 +283,7 @@ void CreateStartMenuTask(void (*func)(u8))
 
 void sub_80712B4(u8 taskId)
 {
-	struct Task *task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
     {

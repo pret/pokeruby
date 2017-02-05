@@ -265,7 +265,7 @@ static void sub_8146480(u8 taskid)
 
 static void sub_81464E4(void)
 {
-    struct Berry *berryInfo;
+    const struct Berry *berryInfo;
     u32 size;
     s32 sizeMajor;
     s32 sizeMinor;
@@ -306,7 +306,7 @@ static void sub_81464E4(void)
 
 static void sub_8146600(u8 berry)
 {
-    struct Berry *berryInfo;
+    const struct Berry *berryInfo;
     u16 i;
 
     berryInfo = GetBerryInfo(berry + 1);
@@ -344,98 +344,98 @@ __attribute__((naked))
 static void sub_81466E8(u8 taskId, s8 direction)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	lsls r1, 24\n\
-	lsrs r2, r1, 24\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	ldr r1, _08146748 @ =gTasks + 0x8\n\
-	adds r6, r0, r1\n\
-	ldr r4, _0814674C @ =gUnknown_03005D10\n\
-	movs r0, 0xC\n\
-	adds r0, r4\n\
-	mov r8, r0\n\
-	ldrb r1, [r0, 0x1]\n\
-	ldrb r0, [r4, 0xC]\n\
-	adds r1, r0\n\
-	cmp r1, 0\n\
-	bne _08146718\n\
-	lsls r0, r2, 24\n\
-	cmp r0, 0\n\
-	blt _0814678C\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    lsls r0, 24\n\
+    lsrs r7, r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r2, r1, 24\n\
+    lsls r0, r7, 2\n\
+    adds r0, r7\n\
+    lsls r0, 3\n\
+    ldr r1, _08146748 @ =gTasks + 0x8\n\
+    adds r6, r0, r1\n\
+    ldr r4, _0814674C @ =gUnknown_03005D10\n\
+    movs r0, 0xC\n\
+    adds r0, r4\n\
+    mov r8, r0\n\
+    ldrb r1, [r0, 0x1]\n\
+    ldrb r0, [r4, 0xC]\n\
+    adds r1, r0\n\
+    cmp r1, 0\n\
+    bne _08146718\n\
+    lsls r0, r2, 24\n\
+    cmp r0, 0\n\
+    blt _0814678C\n\
 _08146718:\n\
-	adds r0, r1, 0x1\n\
-	lsls r5, r2, 24\n\
-	mov r1, r8\n\
-	ldrb r1, [r1, 0x2]\n\
-	cmp r0, r1\n\
-	bne _08146728\n\
-	cmp r5, 0\n\
-	bgt _0814678C\n\
+    adds r0, r1, 0x1\n\
+    lsls r5, r2, 24\n\
+    mov r1, r8\n\
+    ldrb r1, [r1, 0x2]\n\
+    cmp r0, r1\n\
+    bne _08146728\n\
+    cmp r5, 0\n\
+    bgt _0814678C\n\
 _08146728:\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	mov r2, r8\n\
-	ldrb r3, [r2, 0x1]\n\
-	ldrb r4, [r4, 0xC]\n\
-	mov r12, r4\n\
-	adds r0, r3, r4\n\
-	asrs r2, r5, 24\n\
-	adds r1, r0, r2\n\
-	cmp r1, 0\n\
-	bge _08146750\n\
-	negs r0, r0\n\
-	strh r0, [r6, 0x2]\n\
-	b _08146766\n\
-	.align 2, 0\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    mov r2, r8\n\
+    ldrb r3, [r2, 0x1]\n\
+    ldrb r4, [r4, 0xC]\n\
+    mov r12, r4\n\
+    adds r0, r3, r4\n\
+    asrs r2, r5, 24\n\
+    adds r1, r0, r2\n\
+    cmp r1, 0\n\
+    bge _08146750\n\
+    negs r0, r0\n\
+    strh r0, [r6, 0x2]\n\
+    b _08146766\n\
+    .align 2, 0\n\
 _08146748: .4byte gTasks + 0x8\n\
 _0814674C: .4byte gUnknown_03005D10\n\
 _08146750:\n\
-	mov r4, r8\n\
-	ldrb r0, [r4, 0x2]\n\
-	cmp r1, r0\n\
-	blt _08146764\n\
-	subs r0, r3\n\
-	mov r1, r12\n\
-	subs r0, r1\n\
-	subs r0, 0x1\n\
-	strh r0, [r6, 0x2]\n\
-	b _08146766\n\
+    mov r4, r8\n\
+    ldrb r0, [r4, 0x2]\n\
+    cmp r1, r0\n\
+    blt _08146764\n\
+    subs r0, r3\n\
+    mov r1, r12\n\
+    subs r0, r1\n\
+    subs r0, 0x1\n\
+    strh r0, [r6, 0x2]\n\
+    b _08146766\n\
 _08146764:\n\
-	strh r2, [r6, 0x2]\n\
+    strh r2, [r6, 0x2]\n\
 _08146766:\n\
-	ldr r0, _08146780 @ =gTasks\n\
-	lsls r1, r7, 2\n\
-	adds r1, r7\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	ldr r0, _08146784 @ =sub_8146798\n\
-	str r0, [r1]\n\
-	cmp r5, 0\n\
-	bge _08146788\n\
-	movs r2, 0x10\n\
-	negs r2, r2\n\
-	adds r0, r2, 0\n\
-	b _0814678A\n\
-	.align 2, 0\n\
+    ldr r0, _08146780 @ =gTasks\n\
+    lsls r1, r7, 2\n\
+    adds r1, r7\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    ldr r0, _08146784 @ =sub_8146798\n\
+    str r0, [r1]\n\
+    cmp r5, 0\n\
+    bge _08146788\n\
+    movs r2, 0x10\n\
+    negs r2, r2\n\
+    adds r0, r2, 0\n\
+    b _0814678A\n\
+    .align 2, 0\n\
 _08146780: .4byte gTasks\n\
 _08146784: .4byte sub_8146798\n\
 _08146788:\n\
-	movs r0, 0x10\n\
+    movs r0, 0x10\n\
 _0814678A:\n\
-	strh r0, [r6]\n\
+    strh r0, [r6]\n\
 _0814678C:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.syntax divided\n");
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided\n");
 }
 
 void sub_8146798(u8 taskId)
@@ -461,90 +461,90 @@ __attribute__((naked))
 static void sub_8146810(s8 berry)
 {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	adds r4, r3, 0\n\
-	lsls r0, r3, 24\n\
-	asrs r1, r0, 24\n\
-	cmp r1, 0\n\
-	ble _08146848\n\
-	ldr r0, _08146840 @ =gUnknown_03005D10\n\
-	adds r4, r0, 0\n\
-	adds r4, 0xC\n\
-	ldrb r2, [r0, 0xC]\n\
-	adds r1, r2, r1\n\
-	adds r6, r0, 0\n\
-	cmp r1, 0x7\n\
-	ble _08146844\n\
-	adds r0, r3, 0\n\
-	adds r0, 0xF9\n\
-	adds r0, r2, r0\n\
-	ldrb r1, [r4, 0x1]\n\
-	adds r0, r1\n\
-	strb r0, [r4, 0x1]\n\
-	movs r0, 0x7\n\
-	b _0814686E\n\
-	.align 2, 0\n\
+    push {r4-r6,lr}\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    adds r4, r3, 0\n\
+    lsls r0, r3, 24\n\
+    asrs r1, r0, 24\n\
+    cmp r1, 0\n\
+    ble _08146848\n\
+    ldr r0, _08146840 @ =gUnknown_03005D10\n\
+    adds r4, r0, 0\n\
+    adds r4, 0xC\n\
+    ldrb r2, [r0, 0xC]\n\
+    adds r1, r2, r1\n\
+    adds r6, r0, 0\n\
+    cmp r1, 0x7\n\
+    ble _08146844\n\
+    adds r0, r3, 0\n\
+    adds r0, 0xF9\n\
+    adds r0, r2, r0\n\
+    ldrb r1, [r4, 0x1]\n\
+    adds r0, r1\n\
+    strb r0, [r4, 0x1]\n\
+    movs r0, 0x7\n\
+    b _0814686E\n\
+    .align 2, 0\n\
 _08146840: .4byte gUnknown_03005D10\n\
 _08146844:\n\
-	adds r0, r2, r3\n\
-	b _0814686E\n\
+    adds r0, r2, r3\n\
+    b _0814686E\n\
 _08146848:\n\
-	ldr r0, _08146868 @ =gUnknown_03005D10\n\
-	adds r5, r0, 0\n\
-	adds r5, 0xC\n\
-	ldrb r2, [r0, 0xC]\n\
-	adds r1, r2, r1\n\
-	adds r6, r0, 0\n\
-	cmp r1, 0\n\
-	bge _0814686C\n\
-	adds r0, r2, r3\n\
-	ldrb r1, [r5, 0x1]\n\
-	adds r0, r1\n\
-	movs r1, 0\n\
-	strb r0, [r5, 0x1]\n\
-	strb r1, [r6, 0xC]\n\
-	b _08146870\n\
-	.align 2, 0\n\
+    ldr r0, _08146868 @ =gUnknown_03005D10\n\
+    adds r5, r0, 0\n\
+    adds r5, 0xC\n\
+    ldrb r2, [r0, 0xC]\n\
+    adds r1, r2, r1\n\
+    adds r6, r0, 0\n\
+    cmp r1, 0\n\
+    bge _0814686C\n\
+    adds r0, r2, r3\n\
+    ldrb r1, [r5, 0x1]\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strb r0, [r5, 0x1]\n\
+    strb r1, [r6, 0xC]\n\
+    b _08146870\n\
+    .align 2, 0\n\
 _08146868: .4byte gUnknown_03005D10\n\
 _0814686C:\n\
-	adds r0, r2, r4\n\
+    adds r0, r2, r4\n\
 _0814686E:\n\
-	strb r0, [r6, 0xC]\n\
+    strb r0, [r6, 0xC]\n\
 _08146870:\n\
-	ldr r2, _081468AC @ =gScriptItemId\n\
-	movs r0, 0x3\n\
-	lsls r0, 2\n\
-	adds r0, r6\n\
-	ldrb r1, [r0, 0x1]\n\
-	ldrb r0, [r0]\n\
-	adds r1, r0\n\
-	ldr r0, _081468B0 @ =gUnknown_03005D24\n\
-	ldr r0, [r0]\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrh r0, [r1]\n\
-	strh r0, [r2]\n\
-	ldr r0, _081468B4 @ =gUnknown_0203932C\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldr r1, _081468B8 @ =gSprites\n\
-	adds r0, r1\n\
-	bl DestroySprite\n\
-	bl sub_81466A0\n\
-	bl sub_80A7DD4\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    ldr r2, _081468AC @ =gScriptItemId\n\
+    movs r0, 0x3\n\
+    lsls r0, 2\n\
+    adds r0, r6\n\
+    ldrb r1, [r0, 0x1]\n\
+    ldrb r0, [r0]\n\
+    adds r1, r0\n\
+    ldr r0, _081468B0 @ =gUnknown_03005D24\n\
+    ldr r0, [r0]\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    ldrh r0, [r1]\n\
+    strh r0, [r2]\n\
+    ldr r0, _081468B4 @ =gUnknown_0203932C\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    ldr r1, _081468B8 @ =gSprites\n\
+    adds r0, r1\n\
+    bl DestroySprite\n\
+    bl sub_81466A0\n\
+    bl sub_80A7DD4\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _081468AC: .4byte gScriptItemId\n\
 _081468B0: .4byte gUnknown_03005D24\n\
 _081468B4: .4byte gUnknown_0203932C\n\
 _081468B8: .4byte gSprites\n\
-	.syntax divided\n");
+    .syntax divided\n");
 }
 
 static void sub_81468BC(void)

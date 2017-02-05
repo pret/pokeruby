@@ -152,144 +152,144 @@ __attribute__((naked))
 void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
 {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	sub sp, 0x4\n\
-	adds r4, r0, 0\n\
-	adds r6, r1, 0\n\
-	lsls r2, 24\n\
-	lsrs r5, r2, 24\n\
-	ldr r2, _080F8958 @ =0x02000000\n\
-	adds r1, r2, 0\n\
-	adds r1, 0xFF\n\
-	movs r0, 0x2\n\
-	strb r0, [r1]\n\
-	adds r0, 0xFE\n\
-	adds r1, r2, r0\n\
-	movs r0, 0x1\n\
-	strb r0, [r1]\n\
-	movs r0, 0x82\n\
-	lsls r0, 1\n\
-	adds r1, r2, r0\n\
-	ldr r0, _080F895C @ =sub_80EB3FC\n\
-	str r0, [r1]\n\
-	movs r0, 0x84\n\
-	lsls r0, 1\n\
-	adds r1, r2, r0\n\
-	ldr r0, _080F8960 @ =ConvertEasyChatWordsToString\n\
-	str r0, [r1]\n\
-	ldrh r1, [r4, 0x20]\n\
-	adds r0, r1, 0\n\
-	subs r0, 0x79\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0xB\n\
-	bhi _080F8964\n\
-	subs r1, 0x79\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xFA\n\
-	strb r1, [r0]\n\
-	b _080F896E\n\
-	.align 2, 0\n\
+    push {r4-r6,lr}\n\
+    sub sp, 0x4\n\
+    adds r4, r0, 0\n\
+    adds r6, r1, 0\n\
+    lsls r2, 24\n\
+    lsrs r5, r2, 24\n\
+    ldr r2, _080F8958 @ =0x02000000\n\
+    adds r1, r2, 0\n\
+    adds r1, 0xFF\n\
+    movs r0, 0x2\n\
+    strb r0, [r1]\n\
+    adds r0, 0xFE\n\
+    adds r1, r2, r0\n\
+    movs r0, 0x1\n\
+    strb r0, [r1]\n\
+    movs r0, 0x82\n\
+    lsls r0, 1\n\
+    adds r1, r2, r0\n\
+    ldr r0, _080F895C @ =sub_80EB3FC\n\
+    str r0, [r1]\n\
+    movs r0, 0x84\n\
+    lsls r0, 1\n\
+    adds r1, r2, r0\n\
+    ldr r0, _080F8960 @ =ConvertEasyChatWordsToString\n\
+    str r0, [r1]\n\
+    ldrh r1, [r4, 0x20]\n\
+    adds r0, r1, 0\n\
+    subs r0, 0x79\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0xB\n\
+    bhi _080F8964\n\
+    subs r1, 0x79\n\
+    adds r0, r2, 0\n\
+    adds r0, 0xFA\n\
+    strb r1, [r0]\n\
+    b _080F896E\n\
+    .align 2, 0\n\
 _080F8958: .4byte 0x02000000\n\
 _080F895C: .4byte sub_80EB3FC\n\
 _080F8960: .4byte ConvertEasyChatWordsToString\n\
 _080F8964:\n\
-	adds r1, r2, 0\n\
-	adds r1, 0xFA\n\
-	movs r0, 0\n\
-	strb r0, [r1]\n\
-	movs r5, 0\n\
+    adds r1, r2, 0\n\
+    adds r1, 0xFA\n\
+    movs r0, 0\n\
+    strb r0, [r1]\n\
+    movs r5, 0\n\
 _080F896E:\n\
-	ldr r1, _080F8994 @ =0x02000000\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _080F8980\n\
-	cmp r0, 0x1\n\
-	beq _080F899C\n\
+    ldr r1, _080F8994 @ =0x02000000\n\
+    movs r2, 0x80\n\
+    lsls r2, 1\n\
+    adds r0, r1, r2\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _080F8980\n\
+    cmp r0, 0x1\n\
+    beq _080F899C\n\
 _080F8980:\n\
-	movs r0, 0x86\n\
-	lsls r0, 1\n\
-	adds r2, r1, r0\n\
-	adds r0, r1, 0\n\
-	adds r0, 0xFA\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 3\n\
-	ldr r1, _080F8998 @ =gUnknown_083E5730\n\
-	b _080F89AC\n\
-	.align 2, 0\n\
+    movs r0, 0x86\n\
+    lsls r0, 1\n\
+    adds r2, r1, r0\n\
+    adds r0, r1, 0\n\
+    adds r0, 0xFA\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 3\n\
+    ldr r1, _080F8998 @ =gUnknown_083E5730\n\
+    b _080F89AC\n\
+    .align 2, 0\n\
 _080F8994: .4byte 0x02000000\n\
 _080F8998: .4byte gUnknown_083E5730\n\
 _080F899C:\n\
-	movs r0, 0x86\n\
-	lsls r0, 1\n\
-	adds r2, r1, r0\n\
-	adds r0, r1, 0\n\
-	adds r0, 0xFA\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 3\n\
-	ldr r1, _080F89DC @ =gUnknown_083E57A4\n\
+    movs r0, 0x86\n\
+    lsls r0, 1\n\
+    adds r2, r1, r0\n\
+    adds r0, r1, 0\n\
+    adds r0, 0xFA\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 3\n\
+    ldr r1, _080F89DC @ =gUnknown_083E57A4\n\
 _080F89AC:\n\
-	adds r0, r1\n\
-	str r0, [r2]\n\
-	ldrh r0, [r4, 0x1E]\n\
-	mov r1, sp\n\
-	bl sub_80A2D64\n\
-	lsls r0, 16\n\
-	ldr r1, _080F89E0 @ =0xffff0000\n\
-	adds r0, r1\n\
-	movs r1, 0xCD\n\
-	lsls r1, 17\n\
-	cmp r0, r1\n\
-	bhi _080F89F8\n\
-	ldr r0, _080F89E4 @ =0x02000000\n\
-	adds r1, r0, 0\n\
-	adds r1, 0xFA\n\
-	ldrb r2, [r1]\n\
-	adds r1, r0, 0\n\
-	cmp r2, 0x6\n\
-	beq _080F89E8\n\
-	cmp r2, 0x9\n\
-	beq _080F89F0\n\
-	b _080F89FA\n\
-	.align 2, 0\n\
+    adds r0, r1\n\
+    str r0, [r2]\n\
+    ldrh r0, [r4, 0x1E]\n\
+    mov r1, sp\n\
+    bl sub_80A2D64\n\
+    lsls r0, 16\n\
+    ldr r1, _080F89E0 @ =0xffff0000\n\
+    adds r0, r1\n\
+    movs r1, 0xCD\n\
+    lsls r1, 17\n\
+    cmp r0, r1\n\
+    bhi _080F89F8\n\
+    ldr r0, _080F89E4 @ =0x02000000\n\
+    adds r1, r0, 0\n\
+    adds r1, 0xFA\n\
+    ldrb r2, [r1]\n\
+    adds r1, r0, 0\n\
+    cmp r2, 0x6\n\
+    beq _080F89E8\n\
+    cmp r2, 0x9\n\
+    beq _080F89F0\n\
+    b _080F89FA\n\
+    .align 2, 0\n\
 _080F89DC: .4byte gUnknown_083E57A4\n\
 _080F89E0: .4byte 0xffff0000\n\
 _080F89E4: .4byte 0x02000000\n\
 _080F89E8:\n\
-	adds r2, r1, 0\n\
-	adds r2, 0xFB\n\
-	movs r0, 0x1\n\
-	b _080F8A00\n\
+    adds r2, r1, 0\n\
+    adds r2, 0xFB\n\
+    movs r0, 0x1\n\
+    b _080F8A00\n\
 _080F89F0:\n\
-	adds r2, r1, 0\n\
-	adds r2, 0xFB\n\
-	movs r0, 0x2\n\
-	b _080F8A00\n\
+    adds r2, r1, 0\n\
+    adds r2, 0xFB\n\
+    movs r0, 0x2\n\
+    b _080F8A00\n\
 _080F89F8:\n\
-	ldr r1, _080F8A20 @ =0x02000000\n\
+    ldr r1, _080F8A20 @ =0x02000000\n\
 _080F89FA:\n\
-	adds r2, r1, 0\n\
-	adds r2, 0xFB\n\
-	movs r0, 0\n\
+    adds r2, r1, 0\n\
+    adds r2, 0xFB\n\
+    movs r0, 0\n\
 _080F8A00:\n\
-	strb r0, [r2]\n\
-	adds r0, r1, 0\n\
-	adds r0, 0xF4\n\
-	str r4, [r0]\n\
-	subs r0, 0x8\n\
-	str r6, [r0]\n\
-	adds r0, 0xC\n\
-	strb r5, [r0]\n\
-	ldr r0, _080F8A24 @ =sub_80F8D50\n\
-	bl SetMainCallback2\n\
-	add sp, 0x4\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    strb r0, [r2]\n\
+    adds r0, r1, 0\n\
+    adds r0, 0xF4\n\
+    str r4, [r0]\n\
+    subs r0, 0x8\n\
+    str r6, [r0]\n\
+    adds r0, 0xC\n\
+    strb r5, [r0]\n\
+    ldr r0, _080F8A24 @ =sub_80F8D50\n\
+    bl SetMainCallback2\n\
+    add sp, 0x4\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080F8A20: .4byte 0x02000000\n\
 _080F8A24: .4byte sub_80F8D50\n\
     .syntax divided\n");
@@ -514,111 +514,111 @@ __attribute__((naked))
 static void sub_80F8DA0(void)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	movs r6, 0\n\
-	movs r5, 0\n\
-	ldr r2, _080F8E3C @ =0x02000000\n\
-	movs r0, 0x86\n\
-	lsls r0, 1\n\
-	adds r1, r2, r0\n\
-	ldr r0, [r1]\n\
-	ldrb r0, [r0]\n\
-	cmp r5, r0\n\
-	bcs _080F8E04\n\
-	mov r8, r2\n\
-	adds r7, r1, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    movs r6, 0\n\
+    movs r5, 0\n\
+    ldr r2, _080F8E3C @ =0x02000000\n\
+    movs r0, 0x86\n\
+    lsls r0, 1\n\
+    adds r1, r2, r0\n\
+    ldr r0, [r1]\n\
+    ldrb r0, [r0]\n\
+    cmp r5, r0\n\
+    bcs _080F8E04\n\
+    mov r8, r2\n\
+    adds r7, r1, 0\n\
 _080F8DBE:\n\
-	lsls r0, r5, 3\n\
-	subs r0, r5\n\
-	lsls r0, 2\n\
-	subs r0, r5\n\
-	add r0, r8\n\
-	mov r1, r8\n\
-	adds r1, 0xF4\n\
-	lsls r2, r6, 1\n\
-	ldr r1, [r1]\n\
-	adds r1, r2\n\
-	ldr r2, [r7]\n\
-	ldr r2, [r2, 0x4]\n\
-	lsls r4, r5, 2\n\
-	adds r2, r4, r2\n\
-	ldr r2, [r2]\n\
-	lsls r2, 28\n\
-	lsrs r2, 30\n\
-	movs r3, 0x1\n\
-	bl ConvertEasyChatWordsToString\n\
-	ldr r1, [r7]\n\
-	ldr r0, [r1, 0x4]\n\
-	adds r4, r0\n\
-	ldr r0, [r4]\n\
-	lsls r0, 28\n\
-	lsrs r0, 30\n\
-	adds r0, r6, r0\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldrb r1, [r1]\n\
-	cmp r5, r1\n\
-	bcc _080F8DBE\n\
+    lsls r0, r5, 3\n\
+    subs r0, r5\n\
+    lsls r0, 2\n\
+    subs r0, r5\n\
+    add r0, r8\n\
+    mov r1, r8\n\
+    adds r1, 0xF4\n\
+    lsls r2, r6, 1\n\
+    ldr r1, [r1]\n\
+    adds r1, r2\n\
+    ldr r2, [r7]\n\
+    ldr r2, [r2, 0x4]\n\
+    lsls r4, r5, 2\n\
+    adds r2, r4, r2\n\
+    ldr r2, [r2]\n\
+    lsls r2, 28\n\
+    lsrs r2, 30\n\
+    movs r3, 0x1\n\
+    bl ConvertEasyChatWordsToString\n\
+    ldr r1, [r7]\n\
+    ldr r0, [r1, 0x4]\n\
+    adds r4, r0\n\
+    ldr r0, [r4]\n\
+    lsls r0, 28\n\
+    lsrs r0, 30\n\
+    adds r0, r6, r0\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    ldrb r1, [r1]\n\
+    cmp r5, r1\n\
+    bcc _080F8DBE\n\
 _080F8E04:\n\
-	ldr r2, _080F8E40 @ =0x020000d8\n\
-	adds r4, r2, 0\n\
-	subs r4, 0xD8\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080F8E48\n\
-	ldr r1, [r2, 0x1C]\n\
-	adds r1, 0x12\n\
-	adds r0, r2, 0\n\
-	bl sub_80F8D7C\n\
-	adds r2, r0, 0\n\
-	ldr r1, _080F8E44 @ =gOtherText_From\n\
-	bl StringCopy\n\
-	ldr r0, _080F8E40 @ =0x020000d8\n\
-	bl StringLength\n\
-	movs r2, 0x86\n\
-	lsls r2, 1\n\
-	adds r1, r4, r2\n\
-	ldr r1, [r1]\n\
-	ldrb r1, [r1, 0x2]\n\
-	subs r1, r0\n\
-	b _080F8E6A\n\
-	.align 2, 0\n\
+    ldr r2, _080F8E40 @ =0x020000d8\n\
+    adds r4, r2, 0\n\
+    subs r4, 0xD8\n\
+    adds r0, r2, 0\n\
+    adds r0, 0x28\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080F8E48\n\
+    ldr r1, [r2, 0x1C]\n\
+    adds r1, 0x12\n\
+    adds r0, r2, 0\n\
+    bl sub_80F8D7C\n\
+    adds r2, r0, 0\n\
+    ldr r1, _080F8E44 @ =gOtherText_From\n\
+    bl StringCopy\n\
+    ldr r0, _080F8E40 @ =0x020000d8\n\
+    bl StringLength\n\
+    movs r2, 0x86\n\
+    lsls r2, 1\n\
+    adds r1, r4, r2\n\
+    ldr r1, [r1]\n\
+    ldrb r1, [r1, 0x2]\n\
+    subs r1, r0\n\
+    b _080F8E6A\n\
+    .align 2, 0\n\
 _080F8E3C: .4byte 0x02000000\n\
 _080F8E40: .4byte 0x020000d8\n\
 _080F8E44: .4byte gOtherText_From\n\
 _080F8E48:\n\
-	ldr r1, _080F8E7C @ =gOtherText_From\n\
-	adds r0, r2, 0\n\
-	bl StringCopy\n\
-	adds r2, r0, 0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0xF4\n\
-	ldr r1, [r0]\n\
-	adds r1, 0x12\n\
-	adds r0, r2, 0\n\
-	bl sub_80F8D7C\n\
-	movs r1, 0x86\n\
-	lsls r1, 1\n\
-	adds r0, r4, r1\n\
-	ldr r0, [r0]\n\
-	ldrb r1, [r0, 0x2]\n\
+    ldr r1, _080F8E7C @ =gOtherText_From\n\
+    adds r0, r2, 0\n\
+    bl StringCopy\n\
+    adds r2, r0, 0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0xF4\n\
+    ldr r1, [r0]\n\
+    adds r1, 0x12\n\
+    adds r0, r2, 0\n\
+    bl sub_80F8D7C\n\
+    movs r1, 0x86\n\
+    lsls r1, 1\n\
+    adds r0, r4, r1\n\
+    ldr r0, [r0]\n\
+    ldrb r1, [r0, 0x2]\n\
 _080F8E6A:\n\
-	adds r0, r4, 0\n\
-	adds r0, 0xF9\n\
-	strb r1, [r0]\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0xF9\n\
+    strb r1, [r0]\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080F8E7C: .4byte gOtherText_From\n\
     .syntax divided\n");
 }

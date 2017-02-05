@@ -128,149 +128,149 @@ __attribute__((naked))
 void sub_8070088(void)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r1, _08070120 @ =gTasks\n\
-	mov r10, r1\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	mov r2, r10\n\
-	adds r7, r1, r2\n\
-	ldr r5, _08070124 @ =TaskDummy\n\
-	str r5, [r7]\n\
-	ldr r4, _08070128 @ =0x0201c000\n\
-	ldrb r0, [r4, 0x5]\n\
-	movs r1, 0x64\n\
-	mov r9, r1\n\
-	mov r2, r9\n\
-	muls r2, r0\n\
-	adds r0, r2, 0\n\
-	ldr r1, _0807012C @ =gPlayerParty\n\
-	mov r8, r1\n\
-	add r0, r8\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _08070118\n\
-	adds r0, r5, 0\n\
-	movs r1, 0x5\n\
-	bl CreateTask\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	str r0, [sp]\n\
-	mov r0, r10\n\
-	adds r0, 0x8\n\
-	ldr r2, [sp]\n\
-	adds r6, r2, r0\n\
-	ldrb r0, [r4, 0x5]\n\
-	mov r1, r9\n\
-	muls r1, r0\n\
-	adds r0, r1, 0\n\
-	add r0, r8\n\
-	str r0, [r4]\n\
-	movs r1, 0x3A\n\
-	bl GetMonData\n\
-	strh r0, [r6, 0x14]\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x39\n\
-	bl GetMonData\n\
-	strh r0, [r6, 0x16]\n\
-	ldrb r0, [r4, 0x5]\n\
-	ldrh r1, [r4, 0x6]\n\
-	movs r2, 0\n\
-	bl ExecuteTableBasedItemEffect__\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08070134\n\
-	adds r0, r5, 0\n\
-	bl DestroyTask\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    ldr r1, _08070120 @ =gTasks\n\
+    mov r10, r1\n\
+    lsls r1, r0, 2\n\
+    adds r1, r0\n\
+    lsls r1, 3\n\
+    mov r2, r10\n\
+    adds r7, r1, r2\n\
+    ldr r5, _08070124 @ =TaskDummy\n\
+    str r5, [r7]\n\
+    ldr r4, _08070128 @ =0x0201c000\n\
+    ldrb r0, [r4, 0x5]\n\
+    movs r1, 0x64\n\
+    mov r9, r1\n\
+    mov r2, r9\n\
+    muls r2, r0\n\
+    adds r0, r2, 0\n\
+    ldr r1, _0807012C @ =gPlayerParty\n\
+    mov r8, r1\n\
+    add r0, r8\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _08070118\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x5\n\
+    bl CreateTask\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    str r0, [sp]\n\
+    mov r0, r10\n\
+    adds r0, 0x8\n\
+    ldr r2, [sp]\n\
+    adds r6, r2, r0\n\
+    ldrb r0, [r4, 0x5]\n\
+    mov r1, r9\n\
+    muls r1, r0\n\
+    adds r0, r1, 0\n\
+    add r0, r8\n\
+    str r0, [r4]\n\
+    movs r1, 0x3A\n\
+    bl GetMonData\n\
+    strh r0, [r6, 0x14]\n\
+    ldr r0, [r4]\n\
+    movs r1, 0x39\n\
+    bl GetMonData\n\
+    strh r0, [r6, 0x16]\n\
+    ldrb r0, [r4, 0x5]\n\
+    ldrh r1, [r4, 0x6]\n\
+    movs r2, 0\n\
+    bl ExecuteTableBasedItemEffect__\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _08070134\n\
+    adds r0, r5, 0\n\
+    bl DestroyTask\n\
 _08070118:\n\
-	ldr r0, _08070130 @ =sub_80701DC\n\
-	str r0, [r7]\n\
-	b _080701B0\n\
-	.align 2, 0\n\
+    ldr r0, _08070130 @ =sub_80701DC\n\
+    str r0, [r7]\n\
+    b _080701B0\n\
+    .align 2, 0\n\
 _08070120: .4byte gTasks\n\
 _08070124: .4byte TaskDummy\n\
 _08070128: .4byte 0x0201c000\n\
 _0807012C: .4byte gPlayerParty\n\
 _08070130: .4byte sub_80701DC\n\
 _08070134:\n\
-	ldr r1, _080701C0 @ =gUnknown_0202E8F4\n\
-	movs r0, 0x1\n\
-	strb r0, [r1]\n\
-	movs r0, 0x3\n\
-	movs r1, 0xE\n\
-	movs r2, 0x1A\n\
-	movs r3, 0x13\n\
-	bl MenuZeroFillWindowRect\n\
-	movs r0, 0x1\n\
-	bl PlaySE\n\
-	ldr r0, [r4]\n\
-	ldrb r1, [r4, 0x5]\n\
-	bl PartyMenuUpdateLevelOrStatus\n\
-	bl IsDoubleBattle\n\
-	adds r1, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldrb r1, [r4, 0x5]\n\
-	lsls r1, 1\n\
-	adds r0, r1\n\
-	ldr r1, _080701C4 @ =gUnknown_083769A8\n\
-	adds r0, r1\n\
-	movs r1, 0x9\n\
-	bl task_pc_turn_off\n\
-	ldr r2, _080701C8 @ =0xfffff261\n\
-	adds r1, r4, r2\n\
-	movs r0, 0x2\n\
-	strb r0, [r1]\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x39\n\
-	bl GetMonData\n\
-	ldrh r1, [r6, 0x16]\n\
-	subs r0, r1\n\
-	strh r0, [r6, 0x18]\n\
-	movs r0, 0x1\n\
-	strh r0, [r6, 0x1C]\n\
-	ldr r1, _080701CC @ =0xfffff27e\n\
-	adds r0, r4, r1\n\
-	movs r1, 0x1\n\
-	strh r1, [r0]\n\
-	ldr r2, _080701D0 @ =0xfffff280\n\
-	adds r0, r4, r2\n\
-	strh r1, [r0]\n\
-	ldrh r1, [r6, 0x16]\n\
-	adds r2, 0x2\n\
-	adds r0, r4, r2\n\
-	strh r1, [r0]\n\
-	ldr r0, _080701D4 @ =0xffff8000\n\
-	str r0, [r4, 0xC]\n\
-	ldr r1, [sp]\n\
-	add r1, r10\n\
-	ldr r0, _080701D8 @ =sub_806F8AC\n\
-	str r0, [r1]\n\
+    ldr r1, _080701C0 @ =gUnknown_0202E8F4\n\
+    movs r0, 0x1\n\
+    strb r0, [r1]\n\
+    movs r0, 0x3\n\
+    movs r1, 0xE\n\
+    movs r2, 0x1A\n\
+    movs r3, 0x13\n\
+    bl MenuZeroFillWindowRect\n\
+    movs r0, 0x1\n\
+    bl PlaySE\n\
+    ldr r0, [r4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    bl PartyMenuUpdateLevelOrStatus\n\
+    bl IsDoubleBattle\n\
+    adds r1, r0, 0\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    ldrb r1, [r4, 0x5]\n\
+    lsls r1, 1\n\
+    adds r0, r1\n\
+    ldr r1, _080701C4 @ =gUnknown_083769A8\n\
+    adds r0, r1\n\
+    movs r1, 0x9\n\
+    bl task_pc_turn_off\n\
+    ldr r2, _080701C8 @ =0xfffff261\n\
+    adds r1, r4, r2\n\
+    movs r0, 0x2\n\
+    strb r0, [r1]\n\
+    ldr r0, [r4]\n\
+    movs r1, 0x39\n\
+    bl GetMonData\n\
+    ldrh r1, [r6, 0x16]\n\
+    subs r0, r1\n\
+    strh r0, [r6, 0x18]\n\
+    movs r0, 0x1\n\
+    strh r0, [r6, 0x1C]\n\
+    ldr r1, _080701CC @ =0xfffff27e\n\
+    adds r0, r4, r1\n\
+    movs r1, 0x1\n\
+    strh r1, [r0]\n\
+    ldr r2, _080701D0 @ =0xfffff280\n\
+    adds r0, r4, r2\n\
+    strh r1, [r0]\n\
+    ldrh r1, [r6, 0x16]\n\
+    adds r2, 0x2\n\
+    adds r0, r4, r2\n\
+    strh r1, [r0]\n\
+    ldr r0, _080701D4 @ =0xffff8000\n\
+    str r0, [r4, 0xC]\n\
+    ldr r1, [sp]\n\
+    add r1, r10\n\
+    ldr r0, _080701D8 @ =sub_806F8AC\n\
+    str r0, [r1]\n\
 _080701B0:\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080701C0: .4byte gUnknown_0202E8F4\n\
 _080701C4: .4byte gUnknown_083769A8\n\
 _080701C8: .4byte 0xfffff261\n\

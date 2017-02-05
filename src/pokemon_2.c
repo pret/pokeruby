@@ -22,8 +22,8 @@ extern u8 gUnknown_02024A60;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gUnknown_02024BE6;
 extern u8 byte_2024C06;
-extern u8 gUnknown_02024C07;
-extern u8 gUnknown_02024C08;
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0C;
 extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
@@ -39,8 +39,9 @@ extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
 extern u8 gSpeciesNames[][11];
 extern struct BattleMove gBattleMoves[];
-extern struct SpriteTemplate gSpriteTemplate_8208288[];
+extern const struct SpriteTemplate gSpriteTemplate_8208288[];
 extern const union AmimCmd *const gSpriteAnimTable_81E7C64[];
+//array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
 extern const union AnimCmd *const *const gUnknown_081EC2A4[];
 extern const union AnimCmd *const *const gUnknown_081ECACC[];
 extern u8 gTrainerClassToPicIndex[];
@@ -68,14 +69,14 @@ u8 sub_803C348(u8 a1)
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C07) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (battle_side_get_owner(i) == battle_side_get_owner(gPlayerMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C08) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (battle_side_get_owner(i) == battle_side_get_owner(gEnemyMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -136,70 +137,70 @@ __attribute__((naked))
 u8 sub_803C434(u8 a1)
 {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl battle_get_per_side_status\n\
-	movs r1, 0x1\n\
-	movs r6, 0x1\n\
-	adds r4, r6, 0\n\
-	ands r4, r0\n\
-	eors r4, r1\n\
-	adds r5, r4, 0\n\
-	ldr r0, _0803C45C\n\
-	ldrh r1, [r0]\n\
-	adds r0, r6, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0803C460\n\
-	adds r0, r4, 0\n\
-	b _0803C4AA\n\
-	.align 2, 0\n\
+    push {r4-r6,lr}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    bl battle_get_per_side_status\n\
+    movs r1, 0x1\n\
+    movs r6, 0x1\n\
+    adds r4, r6, 0\n\
+    ands r4, r0\n\
+    eors r4, r1\n\
+    adds r5, r4, 0\n\
+    ldr r0, _0803C45C\n\
+    ldrh r1, [r0]\n\
+    adds r0, r6, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0803C460\n\
+    adds r0, r4, 0\n\
+    b _0803C4AA\n\
+    .align 2, 0\n\
 _0803C45C: .4byte gBattleTypeFlags\n\
 _0803C460:\n\
-	movs r0, 0\n\
-	bl sub_803C348\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bls _0803C484\n\
-	bl Random\n\
-	adds r1, r6, 0\n\
-	ands r1, r0\n\
-	cmp r1, 0\n\
-	bne _0803C480\n\
-	movs r0, 0x2\n\
-	eors r0, r4\n\
-	b _0803C4AA\n\
+    movs r0, 0\n\
+    bl sub_803C348\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bls _0803C484\n\
+    bl Random\n\
+    adds r1, r6, 0\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    bne _0803C480\n\
+    movs r0, 0x2\n\
+    eors r0, r4\n\
+    b _0803C4AA\n\
 _0803C480:\n\
-	adds r0, r4, 0\n\
-	b _0803C4AA\n\
+    adds r0, r4, 0\n\
+    b _0803C4AA\n\
 _0803C484:\n\
-	ldr r0, _0803C49C\n\
-	ldrb r1, [r0]\n\
-	ldr r2, _0803C4A0\n\
-	lsls r0, r4, 2\n\
-	adds r0, r2\n\
-	ldr r0, [r0]\n\
-	ands r1, r0\n\
-	cmp r1, 0\n\
-	bne _0803C4A4\n\
-	adds r0, r4, 0\n\
-	b _0803C4AA\n\
-	.align 2, 0\n\
+    ldr r0, _0803C49C\n\
+    ldrb r1, [r0]\n\
+    ldr r2, _0803C4A0\n\
+    lsls r0, r4, 2\n\
+    adds r0, r2\n\
+    ldr r0, [r0]\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    bne _0803C4A4\n\
+    adds r0, r4, 0\n\
+    b _0803C4AA\n\
+    .align 2, 0\n\
 _0803C49C: .4byte gUnknown_02024C0C\n\
 _0803C4A0: .4byte gBitTable\n\
 _0803C4A4:\n\
-	movs r0, 0x2\n\
-	eors r5, r0\n\
-	adds r0, r5, 0\n\
+    movs r0, 0x2\n\
+    eors r5, r0\n\
+    adds r0, r5, 0\n\
 _0803C4AA:\n\
-	bl battle_get_side_with_given_state\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
+    bl battle_get_side_with_given_state\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
     .syntax divided\n");
 }
 #endif
