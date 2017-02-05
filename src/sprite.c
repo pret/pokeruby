@@ -172,9 +172,9 @@ static const u8 sCenterToCornerVecTable[3][4][2] =
 static const struct Sprite sDummySprite =
 {
     DUMMY_OAM_DATA,
-    (union AnimCmd **)gDummySpriteAnimTable,
+    gDummySpriteAnimTable,
     NULL,
-    (union AffineAnimCmd **)gDummySpriteAffineAnimTable,
+    gDummySpriteAffineAnimTable,
     (struct SpriteTemplate *)&gDummySpriteTemplate,
     NULL,
     SpriteCallbackDummy,
@@ -232,10 +232,10 @@ const struct SpriteTemplate gDummySpriteTemplate =
 {
     0,
     0xFFFF,
-    (struct OamData *)&gDummyOamData,
-    (union AnimCmd **)gDummySpriteAnimTable,
+    &gDummyOamData,
+    gDummySpriteAnimTable,
     NULL,
-    (union AffineAnimCmd **)gDummySpriteAffineAnimTable,
+    gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
 };
 

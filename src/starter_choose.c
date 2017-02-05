@@ -28,7 +28,7 @@ extern struct SpriteSheet gUnknown_083F77A4;
 extern u8 gBirchBagGrassPal[];
 extern const u8 gStarterChoose_LabelCoords[][2];
 extern u16 gStarterMons[];
-extern union AffineAnimCmd *gSpriteAffineAnimTable_83F778C[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[];
 extern u8 gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
 extern u8 gSpeciesNames[][11];

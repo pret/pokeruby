@@ -69,7 +69,7 @@ extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
 extern const u8 gSystemText_NewPara[];
 
-extern u8 gSpriteAffineAnimTable_81E79AC[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 
 extern u8 unk_2000000[];
 
@@ -1256,7 +1256,7 @@ static void Task_NewGameSpeech30(u8 taskId)
 
             spriteId = gTasks[taskId].data[TD_TRAINER_SPRITE_ID];
             gSprites[spriteId].oam.affineMode = 1;
-            gSprites[spriteId].affineAnims = (union AffineAnimCmd **)gSpriteAffineAnimTable_81E79AC;
+            gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E79AC;
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = ShrinkPlayerSprite;

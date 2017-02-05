@@ -26,9 +26,9 @@ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 void FieldObjectHandleDynamicGraphicsId();
 void RemoveFieldObjectInternal(struct MapObject *);
-u16 GetFieldObjectFlagIdByFieldObjectId();
+u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
-struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap();
+struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 void sub_805BDF8(u16);
 u8 sub_805BE58(const struct SpritePalette *);
@@ -55,7 +55,8 @@ extern const struct MapObjectGraphicsInfo *const gMapObjectGraphicsInfoPointers[
 extern const struct SpritePalette gUnknown_0837377C[];
 extern const struct PairedPalettes gUnknown_08373874[];
 extern const struct PairedPalettes gUnknown_083738E4[];
-extern const u8 gUnknown_0830FD14[];
+extern const struct SpriteTemplate gSpriteTemplate_830FD24;
+extern const u16 *const gUnknown_0837399C[];
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {
@@ -389,7 +390,7 @@ u8 sub_805ADDC(u8 localId)
     {
         struct MapObjectTemplate *template = &gSaveBlock1.mapObjectTemplates[i];
         
-        if (template->localId == localId && !FlagGet(template->unk14))
+        if (template->localId == localId && !FlagGet(template->flagId))
             return InitFieldObjectStateFromTemplate(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
     return 16;
@@ -673,7 +674,7 @@ void sub_805B55C(s16 a, s16 b)
             s16 bar = template->y + 7;
             
             if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo
-             && !FlagGet(template->unk14))
+             && !FlagGet(template->flagId))
                 SpawnFieldObject(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, a, b);
         }
     }
@@ -1023,7 +1024,7 @@ void pal_patch_for_npc(u16 a, u16 b)
     LoadPalette(gUnknown_0837377C[paletteIndex].data, var * 16 + 0x100, 0x20);
 }
 
-void pal_patch_for_npc_range(u16 *arr, u8 b, u8 c)
+void pal_patch_for_npc_range(const u16 *arr, u8 b, u8 c)
 {
     for (; b < c; arr++, b++)
         pal_patch_for_npc(*arr, b);
@@ -1040,6 +1041,8 @@ u8 FindFieldObjectPaletteIndexByTag(u16 tag)
     }
     return 0xFF;
 }
+
+const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
 void npc_load_two_palettes__no_record(u16 a, u8 b)
 {
@@ -1128,3 +1131,419 @@ void npc_coords_shift_still(struct MapObject *mapObject)
 {
     npc_coords_shift(mapObject, mapObject->coords2.x, mapObject->coords2.y);
 }
+
+void UpdateFieldObjectCoordsForCameraUpdate(void)
+{
+    u8 i;
+    s16 deltaX;
+    s16 deltaY;
+    
+#ifndef NONMATCHING
+    asm(""::"r"(i));  //makes the compiler store i in r3
+#endif
+
+    if (gUnknown_0202E844.field_0)
+    {    
+        for (i = 0, deltaX = gUnknown_0202E844.x, deltaY = gUnknown_0202E844.y; i < 16; i++)
+        {
+            struct MapObject *mapObject = &gMapObjects[i];
+            
+            if (mapObject->active)
+            {
+                mapObject->coords1.x -= deltaX;
+                mapObject->coords1.y -= deltaY;
+                mapObject->coords2.x -= deltaX;
+                mapObject->coords2.y -= deltaY;
+                mapObject->coords3.x -= deltaX;
+                mapObject->coords3.y -= deltaY;
+            }
+        }
+    }
+}
+
+bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
+
+u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
+{
+    u8 i;
+    
+    for (i = 0; i < 16; i++)
+    {
+        if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y
+         && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
+            return i;
+    }
+    return 16;
+}
+
+bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
+{
+    if (mapObject->mapobj_unk_0B_0 != 0 && z != 0
+     && mapObject->mapobj_unk_0B_0 != z)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
+{
+    UpdateFieldObjectCoordsForCameraUpdate();
+    sub_805B55C(x, y);
+    RemoveFieldObjectsOutsideView();
+}
+
+void ObjectCB_CameraObject(struct Sprite *sprite);
+const struct SpriteTemplate gSpriteTemplate_830FD24 =
+{
+    .tileTag = 0,
+    .paletteTag = 0xFFFF,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = ObjectCB_CameraObject,
+};
+
+u8 AddCameraObject(u8 a)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_830FD24, 0, 0, 4);
+    
+    gSprites[spriteId].invisible = TRUE;
+    gSprites[spriteId].data0 = a;
+    return spriteId;
+}
+
+void CameraObject_0(struct Sprite *);
+void CameraObject_1(struct Sprite *);
+void CameraObject_2(struct Sprite *);
+
+void ObjectCB_CameraObject(struct Sprite *sprite)
+{
+    void (*const cameraObjectFuncs[])(struct Sprite *) =
+    {
+        CameraObject_0,
+        CameraObject_1,
+        CameraObject_2,
+    };
+    
+    cameraObjectFuncs[sprite->data1](sprite);
+}
+
+void CameraObject_0(struct Sprite *sprite)
+{
+    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->invisible = TRUE;
+    sprite->data1 = 1;
+    CameraObject_1(sprite);
+}
+
+void CameraObject_1(struct Sprite *sprite)
+{
+    s16 x = gSprites[sprite->data0].pos1.x;
+    s16 y = gSprites[sprite->data0].pos1.y;
+    
+    sprite->data2 = x - sprite->pos1.x;
+    sprite->data3 = y - sprite->pos1.y;
+    sprite->pos1.x = x;
+    sprite->pos1.y = y;
+}
+
+void CameraObject_2(struct Sprite *sprite)
+{
+    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+}
+
+struct Sprite *FindCameraObject(void)
+{
+    u8 i;
+    
+    for (i = 0; i < 64; i++)
+    {
+        if (gSprites[i].inUse && gSprites[i].callback == ObjectCB_CameraObject)
+            return &gSprites[i];
+    }
+    return NULL;
+}
+
+void CameraObjectReset1(void)
+{
+    struct Sprite *cameraSprite = FindCameraObject();
+    
+    if (cameraSprite != NULL)
+    {
+        cameraSprite->data1 = 0;
+        cameraSprite->callback(cameraSprite);
+    }
+}
+
+void CameraObjectSetFollowedObjectId(u8 state)
+{
+    struct Sprite *cameraSprite = FindCameraObject();
+    
+    if (cameraSprite != NULL)
+    {
+        cameraSprite->data0 = state;
+        CameraObjectReset1();
+    }
+}
+
+u8 CameraObjectGetFollowedObjectId(void)
+{
+    struct Sprite *cameraSprite = FindCameraObject();
+    
+    if (cameraSprite == NULL)
+        return 64;
+    else
+        return cameraSprite->data0;
+}
+
+void CameraObjectReset2(void)
+{
+    struct Sprite *cameraSprite = FindCameraObject();
+    
+    cameraSprite->data1 = 2;
+}
+
+u8 unref_sub_805C43C(struct Sprite *src, s16 x, s16 y, u8 subpriority)
+{
+    u8 i;
+    
+    for (i = 0; i < 64; i++)
+    {
+        if (!gSprites[i].inUse)
+        {
+            gSprites[i] = *src;
+            gSprites[i].pos1.x = x;
+            gSprites[i].pos1.y = y;
+            gSprites[i].subpriority = subpriority;
+            break;
+        }
+    }
+    return i;
+}
+
+u8 obj_unfreeze(struct Sprite *src, s16 x, s16 y, u8 subpriority)
+{
+    s16 i;
+    
+    for (i = 63; i > -1; i--)
+    {
+        if (!gSprites[i].inUse)
+        {
+            gSprites[i] = *src;
+            gSprites[i].pos1.x = x;
+            gSprites[i].pos1.y = y;
+            gSprites[i].subpriority = subpriority;
+            return i;
+        }
+    }
+    return 64;
+}
+
+void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
+{
+    mapObject->mapobj_unk_20 = mapObject->mapobj_unk_18;
+    if (!mapObject->mapobj_bit_9)
+    {
+        s8 _direction = direction;  //needed for the asm to match
+        mapObject->mapobj_unk_18 = _direction;
+    }
+    mapObject->placeholder18 = direction;
+}
+
+u8 *GetFieldObjectScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    struct MapObjectTemplate *template = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    
+    return template->script;
+}
+
+u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId)
+{
+    return GetFieldObjectScriptPointerByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
+}
+
+u16 GetFieldObjectFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    struct MapObjectTemplate *template = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    
+    return template->flagId;
+}
+
+u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
+{
+    return GetFieldObjectFlagIdByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
+}
+
+u8 unref_sub_805C5D0(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+        return 0xFF;
+    else
+        return gMapObjects[mapObjectId].trainerType;
+}
+
+u8 unref_sub_805C60C(u8 mapObjectId)
+{
+    return gMapObjects[mapObjectId].trainerType;
+}
+
+u8 unref_sub_805C624(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+        return 0xFF;
+    else
+        return gMapObjects[mapObjectId].trainerRange_berryTreeId;
+}
+
+u8 FieldObjectGetBerryTreeId(u8 mapObjectId)
+{
+    return gMapObjects[mapObjectId].trainerRange_berryTreeId;
+}
+
+struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8, struct MapObjectTemplate *, u8);
+
+struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    if (gSaveBlock1.location.mapNum == mapNum && gSaveBlock1.location.mapGroup == mapGroup)
+        return FindFieldObjectTemplateInArrayByLocalId(localId, gSaveBlock1.mapObjectTemplates, gMapHeader.events->mapObjectCount);
+    else
+    {
+        struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        
+        return FindFieldObjectTemplateInArrayByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
+    }
+}
+
+struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
+{
+    u8 i;
+    
+    for (i = 0; i < count; i++)
+    {
+        if (templates[i].localId == localId)
+            return &templates[i];
+    }
+    return NULL;
+}
+
+struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
+{
+    s32 i;
+    
+    if (mapObject->mapNum != gSaveBlock1.location.mapNum
+     || mapObject->mapGroup != gSaveBlock1.location.mapGroup)
+        return NULL;
+    
+    for (i = 0; i < 64; i++)
+    {
+        if (mapObject->localId == gSaveBlock1.mapObjectTemplates[i].localId)
+            return &gSaveBlock1.mapObjectTemplates[i];
+    }
+    return NULL;
+}
+
+void sub_805C754(struct MapObject *mapObject)
+{
+    struct MapObjectTemplate *template = sub_805C700(mapObject);
+    
+    if (template != NULL)
+    {
+        template->x = mapObject->coords2.x - 7;
+        template->y = mapObject->coords2.y - 7;
+    }
+}
+
+void sub_805C774(struct MapObject *mapObject, u8 movementType)
+{
+    struct MapObjectTemplate *template = sub_805C700(mapObject);
+    
+    if (template != NULL)
+        template->movementType = movementType;
+}
+
+void sub_805C78C(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+        sub_805C754(&gMapObjects[mapObjectId]);
+}
+
+void sub_805C7C4(u8 a)
+{
+    gpu_pal_allocator_reset__manage_upper_four();
+    gUnknown_030005A6 = 0x11FF;
+    gUnknown_030005A4 = a;
+    pal_patch_for_npc_range(gUnknown_0837399C[gUnknown_030005A4], 0, 10);
+}
+
+u16 npc_paltag_by_palslot(u8 a)
+{
+    u8 i;
+    
+    if (a < 10)
+        return gUnknown_0837399C[gUnknown_030005A4][a];
+    
+    for (i = 0; gUnknown_083738E4[i].tag != 0x11FF; i++)
+    {
+        if (gUnknown_083738E4[i].tag == gUnknown_030005A6)
+        {
+            return gUnknown_083738E4[i].data[gUnknown_030005A4];
+        }
+    }
+    return 0x11FF;
+}
+
+u32 sub_805C8A8(void);
+
+void sub_805C884(struct Sprite *sprite)
+{
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8A8);
+}
+
+u32 sub_805C8A8(void)
+{
+    return 0;
+}
+
+u32 sub_805C8D0(struct MapObject *, struct Sprite *);
+
+void sub_805C8AC(struct Sprite *sprite)
+{
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8D0);
+}
+
+extern u8 (*const gUnknown_08375224[])();
+
+u32 sub_805C8D0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_08375224[sprite->data1](mapObject, sprite);
+}
+
+void npc_reset();
+
+u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject);
+    sprite->data1 = 1;
+    return 1;
+}
+
+extern void FieldObjectSetRegularAnim();
+
+u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+

@@ -191,8 +191,8 @@ extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
 extern u8 gUnknown_0840CA00[][2];
 extern struct SpriteSheet gUnknown_0840CAA0;
 extern struct SpritePalette gUnknown_0840CAB0;
-extern union AnimCmd *gSpriteAnimTable_0840CA54[];
-extern union AnimCmd *gSpriteAnimTable_0840CA94[];
+extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
+extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
 extern struct SpriteTemplate gSpriteTemplate_840CAEC;
 
 // data/intro_credits_graphics

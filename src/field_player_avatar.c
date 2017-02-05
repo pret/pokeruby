@@ -1185,7 +1185,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerMapObjTemplate.unkC = 0;
     playerMapObjTemplate.unkE = 0;
     playerMapObjTemplate.script = NULL;
-    playerMapObjTemplate.unk14 = 0;
+    playerMapObjTemplate.flagId = 0;
     mapObjectId = SpawnSpecialFieldObject(&playerMapObjTemplate);
     mapObject = &gMapObjects[mapObjectId];
     mapObject->mapobj_bit_16 = 1;

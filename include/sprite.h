@@ -121,19 +121,19 @@ struct SpriteTemplate
 {
     u16 tileTag;
     u16 paletteTag;
-    struct OamData *oam;
-    union AnimCmd **anims;
+    const struct OamData *oam;
+    const union AnimCmd *const *anims;
     struct SpriteFrameImage *images;
-    union AffineAnimCmd **affineAnims;
+    const union AffineAnimCmd *const *affineAnims;
     void (*callback)(struct Sprite *);
 };
 
 struct Sprite
 {
     /*0x00*/ struct OamData oam;
-    /*0x08*/ union AnimCmd **anims;
+    /*0x08*/ const union AnimCmd *const *anims;
     /*0x0C*/ const struct SpriteFrameImage *images;
-    /*0x10*/ union AffineAnimCmd **affineAnims;
+    /*0x10*/ const union AffineAnimCmd *const *affineAnims;
     /*0x14*/ const struct SpriteTemplate *template;
     /*0x18*/ const struct SubspriteTable *subspriteTables;
     /*0x1C*/ void (*callback)(struct Sprite *);
@@ -184,6 +184,10 @@ struct Sprite
 
     /*0x43*/ u8 subpriority;
 };
+
+extern const struct OamData gDummyOamData;
+extern const union AnimCmd *const gDummySpriteAnimTable[];
+extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
