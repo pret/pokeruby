@@ -489,7 +489,7 @@ u8 ForcedMovement_MuddySlope(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if (playerMapObj->placeholder18 != 2 || sub_80E6034() <= 3)
+    if (playerMapObj->placeholder18 != 2 || GetPlayerSpeed() <= 3)
     {
         sub_80E6010(0);
         playerMapObj->mapobj_bit_9 = 1;
@@ -555,7 +555,7 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
             return;
         }
         if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
-         && sub_80E5DEC(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
+         && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(direction);
             gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
@@ -1168,29 +1168,29 @@ void SetPlayerAvatarExtraStateTransition(u8 a, u8 b)
     DoPlayerAvatarTransition();
 }
 
-void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 gender)
+void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
 {
-    struct UnknownStruct_FPA s;
+    struct MapObjectTemplate playerMapObjTemplate;
     u8 mapObjectId;
     struct MapObject *mapObject;
 
-    s.unk0 = 0xFF;
-    s.unk1 = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, gender);
-    s.unk4 = a - 7;
-    s.unk6 = b - 7;
-    s.unk8 = 0;
-    s.unk9 = 11;
-    s.unkA_0 = 0;
-    s.unkA_4 = 0;
-    s.unkC = 0;
-    s.unkE = 0;
-    s.unk10 = 0;
-    s.unk14 = 0;
-    mapObjectId = SpawnSpecialFieldObject(&s);
+    playerMapObjTemplate.localId = 0xFF;
+    playerMapObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, gender);
+    playerMapObjTemplate.x = x - 7;
+    playerMapObjTemplate.y = y - 7;
+    playerMapObjTemplate.elevation = 0;
+    playerMapObjTemplate.movementType = 11;
+    playerMapObjTemplate.unkA_0 = 0;
+    playerMapObjTemplate.unkA_4 = 0;
+    playerMapObjTemplate.unkC = 0;
+    playerMapObjTemplate.unkE = 0;
+    playerMapObjTemplate.script = NULL;
+    playerMapObjTemplate.flagId = 0;
+    mapObjectId = SpawnSpecialFieldObject(&playerMapObjTemplate);
     mapObject = &gMapObjects[mapObjectId];
     mapObject->mapobj_bit_16 = 1;
     mapObject->mapobj_unk_1B = sub_8126B54();
-    FieldObjectTurn(mapObject, c);
+    FieldObjectTurn(mapObject, direction);
     ClearPlayerAvatarInfo();
     gPlayerAvatar.running2 = 0;
     gPlayerAvatar.running1 = 0;

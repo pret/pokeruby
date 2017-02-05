@@ -31,15 +31,15 @@ void PrintAsmBytes(unsigned char *s, int length)
 {
     if (length > 0)
     {
-        printf("\t.byte ");
+        std::printf("\t.byte ");
         for (int i = 0; i < length; i++)
         {
-            printf("0x%02X", s[i]);
+            std::printf("0x%02X", s[i]);
 
             if (i < length - 1)
-                printf(", ");
+                std::printf(", ");
         }
-        putchar('\n');
+        std::putchar('\n');
     }
 }
 
@@ -89,8 +89,8 @@ void PreprocAsmFile(std::string filename)
 
             if (globalLabel.length() != 0)
             {
-                printf("\t.global %s\n", globalLabel.c_str());
-                printf("%s:\n", globalLabel.c_str());
+                std::printf("\t.global %s\n", globalLabel.c_str());
+                std::printf("%s:\n", globalLabel.c_str());
             }
             else
             {
@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 {
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
+        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
         return 1;
     }
 

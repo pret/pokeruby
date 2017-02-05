@@ -359,16 +359,16 @@ enum
     BGM_DAIGO,
     BGM_THANKFOR,
     BGM_END,
-    BGM_BATTLE27,
-    BGM_BATTLE31,
-    BGM_BATTLE20,
-    BGM_BATTLE32,
-    BGM_BATTLE33,
-    BGM_BATTLE36,
-    BGM_BATTLE34,
-    BGM_BATTLE35,
-    BGM_BATTLE38,
-    BGM_BATTLE30,
+    BGM_BATTLE27, // wild
+    BGM_BATTLE31, // aqua/magma grunt
+    BGM_BATTLE20, // trainer
+    BGM_BATTLE32, // gym leader
+    BGM_BATTLE33, // champion
+    BGM_BATTLE36, // regi
+    BGM_BATTLE34, // weather trio
+    BGM_BATTLE35, // rival
+    BGM_BATTLE38, // elite four
+    BGM_BATTLE30, // aqua/magma leader
 };
 
 #endif // GUARD_SONGS_H

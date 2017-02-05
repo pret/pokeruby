@@ -70,6 +70,7 @@ void ClearPokedexFlags(void)
 void sub_8052DA8(void)
 {
     s32 i;
+
     sub_80B2D1C();
     for (i = 0; i < 5; i++)
         gSaveBlock1.sb1_2EFC_struct[i] = gUnknown_08216604;
@@ -139,7 +140,7 @@ void NewGameInitData(void)
     sub_810C994();
     sub_8133F80();
     sub_80E6764();
-    sub_80F7AA4();
+    SetMauvilleOldMan();
     sub_80FA17C();
     sub_810FA54();
     ResetLotteryCorner();

@@ -46,7 +46,6 @@ private:
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
     void SkipWhitespace();
-    std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
     void CheckIncbin();
 };

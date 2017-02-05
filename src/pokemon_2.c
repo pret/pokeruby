@@ -22,8 +22,8 @@ extern u8 gUnknown_02024A60;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gUnknown_02024BE6;
 extern u8 byte_2024C06;
-extern u8 gUnknown_02024C07;
-extern u8 gUnknown_02024C08;
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0C;
 extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
@@ -69,14 +69,14 @@ u8 sub_803C348(u8 a1)
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C07) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (battle_side_get_owner(i) == battle_side_get_owner(gPlayerMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C08) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (battle_side_get_owner(i) == battle_side_get_owner(gEnemyMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -249,8 +249,7 @@ void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
     gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
     gUnknown_02024E8C.paletteTag = species;
-    //Don't know why the compiler says this is incompatible
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;
+    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)

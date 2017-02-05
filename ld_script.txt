@@ -181,6 +181,7 @@ SECTIONS {
         asm/easy_chat.o(.text);
         asm/pokenav.o(.text);
         asm/mon_markings.o(.text);
+        src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
@@ -315,6 +316,7 @@ SECTIONS {
         data/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
         data/field_player_avatar.o(.rodata);
+        src/field_map_obj.o(.rodata);
         data/field_map_obj.o(.rodata);
         src/field_ground_effect.o(.rodata);
         data/field_ground_effect.o(.rodata);

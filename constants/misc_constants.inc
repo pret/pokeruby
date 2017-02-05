@@ -33,3 +33,13 @@
 	.equiv FEMALE, 1
 
 	.equiv GAME_LANGUAGE, 2
+	
+	.equiv ENEMY_TYPE1,  0
+	.equiv ENEMY_TYPE2,  1
+	.equiv PLAYER_TYPE1,  2
+	.equiv PLAYER_TYPE2,  3
+	.equiv CURRENT_MOVE,  4
+	
+	.equiv LESS_THAN, 0
+	.equiv GREATER_THAN, 1
+	.equiv EQUAL, 2

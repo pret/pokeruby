@@ -24,24 +24,24 @@ CFile::CFile(std::string path)
 {
     m_path = path;
 
-    FILE *fp = fopen(path.c_str(), "rb");
+    FILE *fp = std::fopen(path.c_str(), "rb");
 
     if (fp == NULL)
         FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    fseek(fp, 0, SEEK_END);
+    std::fseek(fp, 0, SEEK_END);
 
-    m_size = ftell(fp);
+    m_size = std::ftell(fp);
 
     m_buffer = new char[m_size + 1];
     m_buffer[m_size] = 0;
 
-    rewind(fp);
+    std::rewind(fp);
 
-    if (fread(m_buffer, m_size, 1, fp) != 1)
+    if (std::fread(m_buffer, m_size, 1, fp) != 1)
         FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
 
-    fclose(fp);
+    std::fclose(fp);
 
     m_pos = 0;
     m_lineNum = 1;
@@ -209,48 +209,6 @@ bool CFile::CheckIdentifier(const std::string& ident)
             return false;
 
     return (i == ident.length());
-}
-
-std::unique_ptr<unsigned char[]> CFile::ReadWholeFile(const std::string& path, int& size)
-{
-    FILE* fp = fopen(path.c_str(), "rb");
-
-    if (fp == nullptr)
-        FATAL_INPUT_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
-
-    fseek(fp, 0, SEEK_END);
-
-    size = ftell(fp);
-
-    std::unique_ptr<unsigned char[]> buffer = std::make_unique<unsigned char[]>(size);
-
-    rewind(fp);
-
-    if (fread(buffer.get(), size, 1, fp) != 1)
-        FATAL_INPUT_ERROR("Failed to read \"%s\".\n", path.c_str());
-
-    fclose(fp);
-
-    return buffer;
-}
-
-int ExtractData(const std::unique_ptr<unsigned char[]>& buffer, int offset, int size)
-{
-    switch (size)
-    {
-    case 1:
-        return buffer[offset];
-    case 2:
-        return (buffer[offset + 1] << 8)
-            | buffer[offset];
-    case 4:
-        return (buffer[offset + 3] << 24)
-            | (buffer[offset + 2] << 16)
-            | (buffer[offset + 1] << 8)
-            | buffer[offset];
-    default:
-        FATAL_ERROR("Invalid size passed to ExtractData.\n");
-    }
 }
 
 void CFile::CheckIncbin()

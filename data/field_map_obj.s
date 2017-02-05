@@ -3,19 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0830FD14:: @ 830FD14
-	.byte 1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0
-
-	.align 2
-gSpriteTemplate_830FD24:: @ 830FD24
-	spr_template 0, 0xFFFF, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
-
-	.align 2
-gUnknown_0830FD3C:: @ 830FD3C
-	.4byte CameraObject_0
-	.4byte CameraObject_1
-	.4byte CameraObject_2
-
 @ 830FD48
 	.include "data/graphics/field_objects/map_object_graphics.inc"
 

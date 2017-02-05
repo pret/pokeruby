@@ -59,8 +59,8 @@ struct UnknownStruct3
 extern u8 unk_2000000[];
 extern u16 gUnknown_02024A6A[4];
 extern u8 gUnknown_02024BE0[];
-extern u8 gUnknown_02024C07;
-extern u8 gUnknown_02024C08;
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
 EWRAM_DATA const u8 *gBattleAnimScriptPtr = NULL;
 EWRAM_DATA const u8 *gBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gUnknown_0202F7AC)(void) = NULL;
@@ -260,8 +260,8 @@ void battle_anim_clear_some_data(void)
 
 void move_anim_start_t1(u16 a)
 {
-    gUnknown_0202F7C8 = gUnknown_02024C07;
-    gUnknown_0202F7C9 = gUnknown_02024C08;
+    gUnknown_0202F7C8 = gPlayerMonIndex;
+    gUnknown_0202F7C9 = gEnemyMonIndex;
     move_something(gBattleAnims_Moves, a, 1);
 }
 

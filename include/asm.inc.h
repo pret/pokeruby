@@ -53,16 +53,17 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
 void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
-u8 SpawnSpecialFieldObject(struct UnknownStruct_FPA *);
+u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 u8 show_sprite(u8, u8, u8);
-u8 AddPseudoFieldObject(u8 val, void (*player)(struct Sprite *), int i, int i1, int i2);
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
-void sub_805B55C(int i, int i1);
-void sub_805B710(int i, int i1);
+//void sub_805B55C(int i, int i1);
+void sub_805B55C(s16 a, s16 b);
+void sub_805B710(u16 i, u16 i1);
 void sub_805B980(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
-struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void sub_805BCF0(u8, u8, u8, u8);
@@ -72,7 +73,7 @@ void gpu_pal_allocator_reset__manage_upper_four(void);
 void npc_coords_shift(struct MapObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void npc_coords_shift_still(struct MapObject *pObject);
-u8 GetFieldObjectIdByXYZ(u16, u16, int);
+u8 GetFieldObjectIdByXYZ(u16, u16, u8);
 void UpdateFieldObjectsForCameraUpdate(s16, s16);
 u8 AddCameraObject(u8);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
@@ -80,7 +81,7 @@ u8 FieldObjectGetBerryTreeId(u8);
 void sub_805C754(struct MapObject *pObject);
 void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
-void sub_805C7C4(int i);
+void sub_805C7C4(u8 i);
 u8 FieldObjectDirectionToImageAnimId(u8);
 u8 get_go_image_anim_num(u8 unk_19);
 u8 sub_805FD98(u8);
@@ -359,11 +360,11 @@ void sub_80C8F34(u8);
 // asm/bike.o
 void MovePlayerOnBike(u8, u16, u16);
 void sub_80E5B38(u16 i, u16 c);
-u8 sub_80E5DEC(u8);
+u8 IsRunningDisallowed(u8);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void BikeClearState(int i, int i1);
 void sub_80E6010(u8 i);
-s16 sub_80E6034(void);
+s16 GetPlayerSpeed(void);
 void sub_80E6084();
 
 // asm/easy_chat.o
@@ -376,7 +377,7 @@ u16 sub_80EB72C(u16);
 void sub_80EBA5C(void);
 
 // asm/mauville_old_man.o
-void sub_80F7AA4(void);
+void SetMauvilleOldMan(void);
 void sub_80F7F30(void);
 
 // asm/menu_helpers.o

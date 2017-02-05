@@ -152,7 +152,7 @@ _080464D6:
 	beq _0804655C
 	cmp r2, 0xFF
 	bne _08046598
-	ldr r0, _08046554 @ =gUnknown_02024C08
+	ldr r0, _08046554 @ =gEnemyMonIndex
 	strb r5, [r0]
 	movs r0, 0x18
 	strh r0, [r4, 0x20]
@@ -169,7 +169,7 @@ _08046544: .4byte gUnknown_02024A6A
 _08046548: .4byte gPlayerParty
 _0804654C: .4byte gSpriteTemplate_820AAB4
 _08046550: .4byte gSprites
-_08046554: .4byte gUnknown_02024C08
+_08046554: .4byte gEnemyMonIndex
 _08046558: .4byte sub_8047074
 _0804655C:
 	adds r0, r5, 0
@@ -185,7 +185,7 @@ _0804655C:
 	lsrs r0, 24
 	adds r0, 0x18
 	strh r0, [r4, 0x22]
-	ldr r0, _08046590 @ =gUnknown_02024C08
+	ldr r0, _08046590 @ =gEnemyMonIndex
 	strb r5, [r0]
 	movs r3, 0
 	strh r3, [r4, 0x2E]
@@ -196,12 +196,12 @@ _0804655C:
 	str r1, [r0]
 	b _080465A6
 	.align 2, 0
-_08046590: .4byte gUnknown_02024C08
+_08046590: .4byte gEnemyMonIndex
 _08046594: .4byte sub_8047254
 _08046598:
 	movs r0, 0x1
 	bl battle_get_side_with_given_state
-	ldr r1, _080465C4 @ =gUnknown_02024C08
+	ldr r1, _080465C4 @ =gEnemyMonIndex
 	strb r0, [r1]
 	movs r0, 0x1
 	str r0, [sp]
@@ -211,7 +211,7 @@ _080465A6:
 	adds r1, r7
 	lsls r1, 2
 	adds r4, r1, r0
-	ldr r5, _080465C4 @ =gUnknown_02024C08
+	ldr r5, _080465C4 @ =gEnemyMonIndex
 	ldrb r0, [r5]
 	strh r0, [r4, 0x3A]
 	ldr r2, [sp]
@@ -221,7 +221,7 @@ _080465A6:
 	bl DestroyTask
 	b _08046616
 	.align 2, 0
-_080465C4: .4byte gUnknown_02024C08
+_080465C4: .4byte gEnemyMonIndex
 _080465C8: .4byte gSprites
 _080465CC:
 	movs r0, 0x22

@@ -483,9 +483,18 @@ gSpriteAffineAnimTable_83D67E4:: @ 83D67E4
 gBattleAnimSpriteTemplate_83D67F4:: @ 83D67F4
 	spr_template 10224, 10224, gOamData_837DF94, gSpriteAnimTable_83D66B8, NULL, gSpriteAffineAnimTable_83D67E4, sub_80CBBF0
 
-	.align 2
 gUnknown_083D680C:: @ 83D680C
-	.incbin "baserom.gba", 0x003d680c, 0x24
+	.byte   5, 24,   1
+	.byte   0,  4,   0
+	.byte   8, 16,  -1
+	.byte   0,  2,   0
+	.byte   8, 16,   1
+	.byte   0,  2,   0
+	.byte   8, 16,   1
+	.byte   0,  2,   0
+	.byte   8, 16,   1
+	.byte   0, 16,   0
+	.byte   0,  0, 127
 
 	.align 2
 gSpriteAnim_83D6830:: @ 83D6830
@@ -596,9 +605,15 @@ gBattleAnimSpriteTemplate_83D6954:: @ 83D6954
 gBattleAnimSpriteTemplate_83D696C:: @ 83D696C
 	spr_template 10271, 10271, gOamData_837DF8C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D6938, sub_80CC474
 
-	.align 2
+	.align 1
 gUnknown_083D6984:: @ 83D6984
-	.incbin "baserom.gba", 0x003d6984, 0x10
+	.2byte 0x1F
+	.2byte 0x27F
+	.2byte 0x3FF
+	.2byte 0x3E0
+	.2byte 0x7DC5
+	.2byte 0x7D56
+	.2byte 0x7EB6
 
 	.align 2
 gBattleAnimSpriteTemplate_83D6994:: @ 83D6994
@@ -895,8 +910,10 @@ gSpriteAffineAnim_83D6D2C:: @ 83D6D2C
 	obj_rot_scal_anim_frame 0x8, 0x8, 1, 24
 	obj_rot_scal_anim_end
 
-	.align 2
-	.incbin "baserom.gba", 0x003d6d44, 0x18
+@ unused
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 24
+	obj_rot_scal_anim_loop 10
 
 	.align 2
 gSpriteAffineAnim_83D6D5C:: @ 83D6D5C
@@ -904,8 +921,10 @@ gSpriteAffineAnim_83D6D5C:: @ 83D6D5C
 	obj_rot_scal_anim_frame 0x8, 0x8, -1, 24
 	obj_rot_scal_anim_end
 
-	.align 2
-	.incbin "baserom.gba", 0x003d6d74, 0x18
+@ unused
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 24
+	obj_rot_scal_anim_loop 10
 
 	.align 2
 gSpriteAffineAnimTable_83D6D8C:: @ 83D6D8C
@@ -924,9 +943,11 @@ gBattleAnimSpriteTemplate_83D6DAC:: @ 83D6DAC
 gBattleAnimSpriteTemplate_83D6DC4:: @ 83D6DC4
 	spr_template 10014, 10014, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80CD6CC
 
-	.align 2
 gUnknown_083D6DDC:: @ 83D6DDC
-	.incbin "baserom.gba", 0x003d6ddc, 0x8
+	.byte  64, 64
+	.byte   0,-64
+	.byte -64, 64
+	.byte  32,-32
 
 	.align 2
 gBattleAnimSpriteTemplate_83D6DE4:: @ 83D6DE4
@@ -1197,7 +1218,10 @@ gBattleAnimSpriteTemplate_83D7114:: @ 83D7114
 
 	.align 2
 gUnknown_083D712C:: @ 83D712C
-	.incbin "baserom.gba", 0x003d712c, 0x30
+	.2byte 10072,0x7FFF,0x735F,0x6ADF,0x623F,0x59BF
+	.2byte 10097,0x7FFF,0x6BF9,0x57F4,0x43EF,0x33EA
+	.2byte 10185,0x7FFF,0x63FF,0x47FF,0x2BFF,0x0FFF
+	.2byte 10175,0x7FFF,0x7F9A,0x7F55,0x7F10,0x7ECC
 
 	.align 2
 gBattleAnimSpriteTemplate_83D715C:: @ 83D715C
