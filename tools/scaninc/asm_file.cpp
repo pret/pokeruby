@@ -27,23 +27,23 @@ AsmFile::AsmFile(std::string path)
 {
     m_path = path;
 
-    FILE *fp = fopen(path.c_str(), "rb");
+    FILE *fp = std::fopen(path.c_str(), "rb");
 
     if (fp == NULL)
         FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    fseek(fp, 0, SEEK_END);
+    std::fseek(fp, 0, SEEK_END);
 
-    m_size = ftell(fp);
+    m_size = std::ftell(fp);
 
     m_buffer = new char[m_size];
 
-    rewind(fp);
+    std::rewind(fp);
 
-    if (fread(m_buffer, m_size, 1, fp) != 1)
+    if (std::fread(m_buffer, m_size, 1, fp) != 1)
         FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
 
-    fclose(fp);
+    std::fclose(fp);
 
     m_pos = 0;
     m_lineNum = 1;

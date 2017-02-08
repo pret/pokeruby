@@ -67,7 +67,7 @@ struct MapObjectTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 filler_2[0x2];
+    /*0x02*/ u8 unk2;
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
@@ -78,7 +78,7 @@ struct MapObjectTemplate
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
     /*0x10*/ u8 *script;
-    /*0x14*/ u16 unk14;
+    /*0x14*/ u16 flagId;
     /*0x16*/ u8 filler_16[2];
 };  /*size = 0x18*/
 
@@ -281,22 +281,22 @@ struct MapObject2
 
 struct MapObjectGraphicsInfo
 {
-    u16 tileTag;
-    u16 paletteTag1;
-    u16 paletteTag2;
-    u16 size;
-    s16 width;
-    s16 height;
-    u8 paletteSlot:4;
-    u8 shadowSize:2;
-    u8 inanimate:1;
-    u8 disableReflectionPaletteLoad:1;
-    u8 tracks;
-    struct OamData *oam;
-    struct SubspriteTable *subspriteTables;
-    union AnimCmd **anims;
-    struct SpriteFrameImage *images;
-    union AffineAnimCmd **affineAnims;
+    /*0x00*/ u16 tileTag;
+    /*0x02*/ u16 paletteTag1;
+    /*0x04*/ u16 paletteTag2;
+    /*0x06*/ u16 size;
+    /*0x08*/ s16 width;
+    /*0x0A*/ s16 height;
+    /*0x0C*/ u8 paletteSlot:4;
+             u8 shadowSize:2;
+             u8 inanimate:1;
+             u8 disableReflectionPaletteLoad:1;
+    /*0x0D*/ u8 tracks;
+    /*0x10*/ struct OamData *oam;
+    /*0x14*/ struct SubspriteTable *subspriteTables;
+    /*0x18*/ const union AnimCmd *const *anims;
+    /*0x1C*/ struct SpriteFrameImage *images;
+    /*0x20*/ const union AffineAnimCmd *const *affineAnims;
 };
 
 #define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
@@ -352,6 +352,13 @@ struct PlayerAvatar /* 0x202E858 */
     u8 unk14[8];
     u8 unk1C[8];
     // TODO: rest of struct
+};
+
+struct Camera
+{
+    bool8 field_0:1;
+    s32 x;
+    s32 y;
 };
 
 extern struct MapObject gMapObjects[];

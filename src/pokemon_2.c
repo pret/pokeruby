@@ -249,8 +249,7 @@ void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
     gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
     gUnknown_02024E8C.paletteTag = species;
-    //Don't know why the compiler says this is incompatible
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;
+    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)

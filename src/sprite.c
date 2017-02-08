@@ -58,7 +58,7 @@ static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
 static s16 AllocSpriteTiles(u16 tileCount);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
-static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, struct SpriteFrameImage *images);
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 static void ResetAllSprites(void);
 static void BeginAnim(struct Sprite *sprite);
 static void ContinueAnim(struct Sprite *sprite);
@@ -536,7 +536,7 @@ u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subprior
     return MAX_SPRITES;
 }
 
-u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority)
+u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     s16 i;
 
@@ -829,7 +829,7 @@ void ProcessSpriteCopyRequests(void)
     }
 }
 
-static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, struct SpriteFrameImage *images)
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
