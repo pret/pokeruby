@@ -26,6 +26,16 @@
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
 
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
+extern u8 unk_2000000[];
+
+// to do: maybe try to reduce the defines needed to match?
+#define BATTLE_STRUCT ((struct BattleStruct *)(unk_2000000))
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
+#define UNK_2016A00_STRUCT ((struct UnknownStruct1 *)(unk_2000000 + 0x16A00))
+#define UNK_2016C00_STRUCT ((struct UnknownStruct3 *)(unk_2000000 + 0x16C00))
+#define AI_ARRAY_160CC     ((struct SmallItemStruct *)(unk_2000000 + 0x160CC))
+
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -48,6 +58,12 @@ struct UnknownStruct1
     /*0x22*/ u8 unk22[2];
     /*0x24*/ u16 items[4];
     /*0x2C*/ u8 unk8;
+};
+
+struct UnknownStruct3
+{
+    u8 *ptr[8];
+    u8 unk20;
 };
 
 struct AI_ThinkingStruct /* 0x2016800 */
@@ -92,8 +108,24 @@ struct BattleStruct /* 0x2000000 */
 	/* 0x16A00 */ struct UnknownStruct1 unk_2016A00_2;
 };
 
+struct UnknownStruct4
+{
+    u8 filler0[0x3];
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 fillerA[0x9];
+    u8 taunt:4;
+    u8 unkC:4;
+    u8 fillerD[0x2];
+    u8 unk16;
+    u8 filler17[0x4];
+};
+
 extern struct UnknownStruct1 unk_2016A00;
-extern struct BattleStruct battle_2000000;
+extern struct UnknownStruct3 unk_2016C00;
+extern struct UnknownStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
 #endif // GUARD_BATTLE_H

@@ -43,7 +43,7 @@ void sub_800DC24(void)
         {
 
             // lp_field_18 = player position?
-            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18)
+            switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
             {
             case 0:
             case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
@@ -59,7 +59,7 @@ void sub_800DC24(void)
         else
         {
 
-            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18)
+            switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
             {
             case 1:
             case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
@@ -79,7 +79,7 @@ void sub_800DC24(void)
 
     if (gUnknown_02024D26 == 1)
     {
-        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0)
+        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
         {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
             PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
@@ -92,7 +92,7 @@ void sub_800DC24(void)
     }
     else
     {
-        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0)
+        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
         {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);

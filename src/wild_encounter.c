@@ -2999,6 +2999,7 @@ static bool8 CheckFeebas(void)
 
         if (Random() % 100 > 49) //50% chance of encountering Feebas
             return FALSE;
+
         FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
         for (i = 0; i != NUM_FEEBAS_SPOTS;)
         {
