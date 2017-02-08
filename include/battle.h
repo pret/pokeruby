@@ -17,10 +17,10 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 
-#define AI_ACTION_UNK1          0x0001
-#define AI_ACTION_UNK2          0x0002
-#define AI_ACTION_UNK3          0x0004
-#define AI_ACTION_UNK4          0x0008
+#define AI_ACTION_DONE          0x0001
+#define AI_ACTION_FLEE          0x0002
+#define AI_ACTION_WATCH          0x0004
+#define AI_ACTION_DO_NOT_ATTACK          0x0008
 #define AI_ACTION_UNK5          0x0010
 #define AI_ACTION_UNK6          0x0020
 #define AI_ACTION_UNK7          0x0040

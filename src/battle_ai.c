@@ -385,9 +385,9 @@ u8 BattleAI_GetAIActionToUse(void)
     }
 
     // special flee or watch cases for safari.
-    if (AI_THINKING_STRUCT->aiAction & (AI_ACTION_UNK2)) // flee
+    if (AI_THINKING_STRUCT->aiAction & (AI_ACTION_FLEE)) // flee
         return 4;
-    if (AI_THINKING_STRUCT->aiAction & (AI_ACTION_UNK3)) // watch
+    if (AI_THINKING_STRUCT->aiAction & (AI_ACTION_WATCH)) // watch
         return 5;
 
     numOfBestMoves = 1;
@@ -438,17 +438,17 @@ void BattleAI_DoAIProcessing(void)
             else
             {
                 AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0; // definitely do not consider any move that has 0 PP.
-                AI_THINKING_STRUCT->aiAction |= AI_ACTION_UNK1;
+                AI_THINKING_STRUCT->aiAction |= AI_ACTION_DONE;
             }
-            if (AI_THINKING_STRUCT->aiAction & AI_ACTION_UNK1)
+            if (AI_THINKING_STRUCT->aiAction & AI_ACTION_DONE)
             {
                 AI_THINKING_STRUCT->movesetIndex++;
-                if (AI_THINKING_STRUCT->movesetIndex < 4 && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_UNK4))
+                if (AI_THINKING_STRUCT->movesetIndex < 4 && (AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK) == 0)
                     AI_THINKING_STRUCT->aiState = AIState_SettingUp; // as long as their are more moves to process, keep setting this to setup state.
                 else
                     AI_THINKING_STRUCT->aiState++; // done processing.
-                AI_THINKING_STRUCT->aiAction &= (AI_ACTION_UNK2 | AI_ACTION_UNK3 | AI_ACTION_UNK4 | 
-				AI_ACTION_UNK5 | AI_ACTION_UNK6 | AI_ACTION_UNK7 | AI_ACTION_UNK8); // disable UNK1.
+                AI_THINKING_STRUCT->aiAction &= (AI_ACTION_FLEE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK | 
+				AI_ACTION_UNK5 | AI_ACTION_UNK6 | AI_ACTION_UNK7 | AI_ACTION_UNK8); // disable AI_ACTION_DONE.
             }
             break;
         }
@@ -1951,7 +1951,7 @@ static void BattleAICmd_if_encored(void)
 
 static void BattleAICmd_flee(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_UNK1 | AI_ACTION_UNK2 | AI_ACTION_UNK4); // what matters is UNK2 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_FLEE | AI_ACTION_DO_NOT_ATTACK); // what matters is AI_ACTION_FLEE being enabled.
 }
 
 static void BattleAICmd_if_random_100(void)
@@ -1966,7 +1966,7 @@ static void BattleAICmd_if_random_100(void)
 
 static void BattleAICmd_watch(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_UNK1 | AI_ACTION_UNK3 | AI_ACTION_UNK4); // what matters is UNK3 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK); // what matters is AI_ACTION_WATCH being enabled.
 }
 
 static void BattleAICmd_get_hold_effect(void)
@@ -2127,7 +2127,7 @@ static void BattleAICmd_jump(void)
 static void BattleAICmd_end(void)
 {
     if (sub_8109908() == 0)
-        AI_THINKING_STRUCT->aiAction |= AI_ACTION_UNK1;
+        AI_THINKING_STRUCT->aiAction |= AI_ACTION_DONE;
 }
 
 static void BattleAICmd_if_level_cond(void)

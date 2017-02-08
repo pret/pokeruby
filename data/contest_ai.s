@@ -4,7 +4,7 @@
 	.section .rodata
 
 	.align 2
-gUnknown_08401E60:: @ 8401E60
+sContestAICmdTable:: @ 8401E60
 	.4byte sub_8128AA8
 	.4byte contest_ai_get_turn
 	.4byte sub_8128B0C

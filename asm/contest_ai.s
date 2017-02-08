@@ -164,7 +164,7 @@ _08128A0E:
 	ldrh r1, [r1, 0x2]
 	cmp r1, 0
 	beq _08128A2C
-	ldr r1, _08128A28 @ =gUnknown_08401E60
+	ldr r1, _08128A28 @ =sContestAICmdTable
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -173,7 +173,7 @@ _08128A0E:
 	bl _call_via_r0
 	b _08128A3C
 	.align 2, 0
-_08128A28: .4byte gUnknown_08401E60
+_08128A28: .4byte sContestAICmdTable
 _08128A2C:
 	adds r0, r4, 0x5
 	ldrb r2, [r4, 0x4]
