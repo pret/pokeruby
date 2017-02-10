@@ -4,19 +4,39 @@
 	.section .rodata
 
 gUnknown_0840B83C:: @ 840B83C
-	.incbin "baserom.gba", 0x0040b83c, 0xf
+	.byte    0,   1,   0
+	.byte 0xFF,   1,0xFF
+	.byte 0xFF,   1,0xFF
+	.byte 0xFF,   1,0xFF
+	.byte 0xFF,   1,0xFF
 
 gUnknown_0840B84B:: @ 840B84B
-	.incbin "baserom.gba", 0x0040b84b, 0xf
+	.byte    1,0xFF,   1
+	.byte    1,0xFF,   1
+	.byte    1,   2,   1
+	.byte    1,0xFF,   1
+	.byte    1,0xFF,   1
 
 gUnknown_0840B85A:: @ 840B85A
-	.incbin "baserom.gba", 0x0040b85a, 0xf
+	.byte    1,   0,   0
+	.byte    1,0xFF,0xFF
+	.byte    1,   2,   2
+	.byte    1,0xFF,0xFF
+	.byte    1,0x80,0x80
 
 gUnknown_0840B869:: @ 840B869
-	.incbin "baserom.gba", 0x0040b869, 0xf
+	.byte    1,   3,   1
+	.byte    1,   4,   1
+	.byte    1,   5,   1
+	.byte    1,0xC4,   1
+	.byte    1,0xC3,   1
 
-gUnknown_0840B878::
-	.incbin "baserom.gba", 0x0040B878, 0xf
+gUnknown_0840B878:: @ 840B878
+	.byte    1,   6,   7
+	.byte    1,   8,   9
+	.byte    1,0xFF,   1
+	.byte    1,0x88,0x89
+	.byte    1,0x86,0x87
 
 	.include "data/text/credits.inc"
 
