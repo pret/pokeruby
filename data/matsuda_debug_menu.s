@@ -50,7 +50,10 @@ Unknown_083C924E:
 	.incbin "graphics/unknown/ball.gbapal"
 
 gUnknown_083C926E:: @ 83C926E
-	.incbin "baserom.gba", 0x003c926e, 0x8
+	.byte   2,  0
+	.byte  17,  0
+	.byte   2,  2
+	.byte  17,  2
 
 gMatsudaDebugMenuContestTopLeft:: @ 83C9276
 	.byte 0, 6
@@ -61,10 +64,18 @@ gMatsudaDebugMenuContestTopLeft:: @ 83C9276
 	.byte 15, 10
 
 gUnknown_083C9282:: @ 83C9282
-	.incbin "baserom.gba", 0x003c9282, 0xc
+	.byte   7,  6
+	.byte  22,  6
+	.byte   7,  8
+	.byte  22,  8
+	.byte   7, 10
+	.byte  22, 10
 
 gUnknown_083C928E:: @ 83C928E
-	.incbin "baserom.gba", 0x003c928e, 0x8
+	.byte   2, 14
+	.byte  17, 14
+	.byte   2, 16
+	.byte  17, 16
 
 gUnknown_083C9296:: @ 83C9296
 	.byte 0x08, 0x80, 0x08, 0x80, 0x10, 0x10, 0x30, 0xA8, 0x30, 0xA8, 0x30, 0xA8, 0x08, 0x80, 0x08, 0x80, 0x10, 0x88
@@ -178,5 +189,9 @@ gMatsudaDebugMenuTextList3:: @ 83C93F0
 	.4byte MatsudaDebugMenuText_Slateport @ Hyper
 	.4byte MatsudaDebugMenuText_Lilycove @ Master
 
+@ OamData
+	.align 2
 gUnknown_083C9400:: @ 83C9400
-	.incbin "baserom.gba", 0x003c9400, 0x8
+	.2byte 0x4000
+	.2byte 0x4000
+	.2byte 0xF3FF

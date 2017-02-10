@@ -46,17 +46,17 @@ gUnknown_083B5EF8:: @ 83B5EF8
 	.4byte gMenuTrainerCard4Star_Pal
 
 gUnknown_083B5F0C:: @ 83B5F0C
-	.incbin "baserom.gba", 0x003b5f0c, 0x20
+	.incbin "graphics/trainer_card/83B5F0C.gbapal"
 
 	.align 2
 gBadgesPalette:: @ 83B5F2C
 	.incbin "graphics/trainer_card/badges.gbapal"
 
 gUnknown_083B5F4C:: @ 83B5F4C
-	.incbin "baserom.gba", 0x003b5f4c, 0x20
+	.incbin "graphics/trainer_card/83B5F4C.gbapal"
 
 gUnknown_083B5F6C:: @ 83B5F6C
-	.incbin "baserom.gba", 0x003b5f6c, 0x20
+	.incbin "graphics/trainer_card/83B5F6C.gbapal"
 
 gUnknown_083B5F8C:: @ 83B5F8C
-	.incbin "baserom.gba", 0x003b5f8c, 0x40
+	.incbin "graphics/trainer_card/83B5F8C_map.bin"
