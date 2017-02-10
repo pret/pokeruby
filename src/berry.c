@@ -7,6 +7,8 @@
 #include "rng.h"
 #include "text.h"
 
+#define BERRY_NAME_LENGTH 6
+
 #define FIRST_BERRY ITEM_CHERI_BERRY
 #define LAST_BERRY  ITEM_ENIGMA_BERRY
 
@@ -917,7 +919,7 @@ void ClearBerryTrees(void)
     struct SaveBlock1 *saveBlock1 = &gSaveBlock1;
     struct BerryTree berryTree = gBlankBerryTree;
 
-    for (i = 0; i < 128; i++)
+    for (i = 0; i < (u8)ARRAY_COUNT(saveBlock1->berryTrees); i++) // casting to u8 fixes a mismatched signed compare. what
         saveBlock1->berryTrees[i] = berryTree;
 }
 
@@ -955,7 +957,7 @@ void BerryTreeTimeUpdate(int time)
     int i;
     struct BerryTree *tree;
 
-    for (i = 0; i < 128; i++)
+    for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1.berryTrees); i++)
     {
         tree = &gSaveBlock1.berryTrees[i];
 
@@ -1044,8 +1046,8 @@ u16 BerryTypeToItemId(u16 berry)
 
 void GetBerryNameByBerryType(u8 berry, u8 *string)
 {
-    memcpy(string, GetBerryInfo(berry)->name, 6);
-    string[6] = EOS;
+    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_LENGTH);
+    string[BERRY_NAME_LENGTH] = EOS;
 }
 
 void ResetBerryTreeSparkleFlag(u8 id)
@@ -1185,7 +1187,7 @@ void ResetBerryTreeSparkleFlags(void)
     top = cam_top + 3;
     right = cam_left + 14;
     bottom = top + 8;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1.mapObjects); i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].animPattern == 12)
         {

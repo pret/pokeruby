@@ -398,7 +398,7 @@ static void NamingScreen_Init(void)
     namingScreenData.currentPage = namingScreenData.template->unk4;
     namingScreenData.unk2 = 14 - namingScreenData.template->maxChars / 2;
     namingScreenData.unk3C = gKeyRepeatStartDelay;
-    memset(namingScreenData.textBuffer, 0xFF, 0x10);
+    memset(namingScreenData.textBuffer, 0xFF, sizeof(namingScreenData.textBuffer));
     if (namingScreenData.template->unk0 != 0)
         StringCopy(namingScreenData.textBuffer, namingScreenData.destBuffer);
     gKeyRepeatStartDelay = 16;

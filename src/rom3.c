@@ -748,7 +748,7 @@ void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u
     }
     gUnknown_03004040[14] = 0;
     gUnknown_03004040[15] = 0;
-    memcpy(gUnknown_03004040 + 16, g, 0x1C);
+    memcpy(&gUnknown_03004040[16], g, 0x1C);
     dp01_prepare_buffer(a, gUnknown_03004040, 0x2C);
 }
 

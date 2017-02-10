@@ -55,7 +55,7 @@ extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
 extern bool8 gUnknown_02029816;
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 
 extern u8 gUnknown_03000580[];
 extern u16 (*gUnknown_03000584)(u32);
@@ -103,7 +103,6 @@ extern struct MapHeader * const * const gMapGroups[];
 extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
-
 
 void DoWhiteOut(void)
 {
@@ -2304,7 +2303,7 @@ void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
 
 void strange_npc_table_clear(void)
 {
-    memset(gLinkPlayerMapObjects, 0, 16);
+    memset(gLinkPlayerMapObjects, 0, sizeof(gLinkPlayerMapObjects));
 }
 
 void ZeroMapObject(struct MapObject *mapObj)

@@ -26,6 +26,8 @@
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
 
+#define MAX_TRAINER_ITEMS 4
+
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
 
@@ -33,8 +35,16 @@ extern u8 unk_2000000[];
 #define BATTLE_STRUCT ((struct BattleStruct *)(unk_2000000))
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
 #define UNK_2016A00_STRUCT ((struct UnknownStruct1 *)(unk_2000000 + 0x16A00))
-#define UNK_2016C00_STRUCT ((struct UnknownStruct3 *)(unk_2000000 + 0x16C00))
+#define AI_STACK ((struct AI_Stack *)(unk_2000000 + 0x16C00))
 #define AI_ARRAY_160CC     ((struct SmallItemStruct *)(unk_2000000 + 0x160CC))
+
+enum
+{
+	WEATHER_SUN,
+	WEATHER_RAIN,
+	WEATHER_SANDSTORM,
+	WEATHER_HAIL,
+};
 
 struct Trainer
 {
@@ -51,19 +61,19 @@ struct Trainer
     /*0x24*/ void *party;
 };
 
-struct UnknownStruct1
+struct UnknownStruct1 // AI_Opponent_Info?
 {
-    /*0x00*/ u16 unk0[2][8];
+    /*0x00*/ u16 movesUsed[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
     /*0x20*/ u8 unk20[2];
     /*0x22*/ u8 unk22[2];
     /*0x24*/ u16 items[4];
-    /*0x2C*/ u8 unk8;
+    /*0x2C*/ u8 numOfItems;
 };
 
-struct UnknownStruct3
+struct AI_Stack
 {
     u8 *ptr[8];
-    u8 unk20;
+    u8 size;
 };
 
 struct AI_ThinkingStruct /* 0x2016800 */
@@ -77,7 +87,7 @@ struct AI_ThinkingStruct /* 0x2016800 */
 /* 0x10 */ u8 aiAction;
 /* 0x11 */ u8 aiLogicId;
 /* 0x12 */ u8 filler12[6];
-/* 0x18 */ u8 unk18[4];
+/* 0x18 */ u8 simulatedRNG[4];
 };
 
 struct SmallBattleStruct1
@@ -124,7 +134,6 @@ struct UnknownStruct4
 };
 
 extern struct UnknownStruct1 unk_2016A00;
-extern struct UnknownStruct3 unk_2016C00;
 extern struct UnknownStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 

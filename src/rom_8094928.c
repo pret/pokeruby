@@ -1,6 +1,10 @@
 #include "global.h"
 #include "pokemon.h"
 
+#define UNK_201606C_ARRAY (unk_2000000 + 0x1606C) // lazy define but whatever.
+
+extern u8 unk_2000000[];
+
 extern struct PokemonStorage gPokemonStorage;
 extern u8 IsLinkDoubleBattle(void);
 extern u8 IsDoubleBattle(void);
@@ -13,14 +17,14 @@ extern u8 gUnknown_02038470[3];
 extern u8 sub_803FBBC(void);
 extern u16 gUnknown_02024A6A[];
 
-void unref_sub_8094928(void *ptr)
+void unref_sub_8094928(struct PokemonStorage *ptr)
 {
-    memcpy(ptr, &gPokemonStorage, 0x83d0);
+	*ptr = gPokemonStorage;
 }
 
-void unref_sub_8094940(void *ptr)
+void unref_sub_8094940(struct PokemonStorage *ptr)
 {
-    memcpy(&gPokemonStorage, ptr, 0x83d0);
+	gPokemonStorage = *ptr;
 }
 
 void sub_8094958(void)
@@ -30,7 +34,7 @@ void sub_8094958(void)
 
 void sub_8094978(u8 arg1, u8 arg2)
 {
-    sub_8094A74((((u8(*)[3]) 0x0201606c))[arg1], arg2, arg1);
+    sub_8094A74((UNK_201606C_ARRAY) + arg1 * 3, arg2, arg1);
 }
 
 void sub_8094998(u8 arg[3], u8 player_number)
