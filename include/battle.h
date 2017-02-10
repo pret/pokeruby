@@ -27,6 +27,7 @@
 #define AI_ACTION_UNK8          0x0080
 
 #define MAX_TRAINER_ITEMS 4
+#define MAX_MON_MOVES 4
 
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
@@ -40,10 +41,10 @@ extern u8 unk_2000000[];
 
 enum
 {
-	WEATHER_SUN,
-	WEATHER_RAIN,
-	WEATHER_SANDSTORM,
-	WEATHER_HAIL,
+    WEATHER_SUN,
+    WEATHER_RAIN,
+    WEATHER_SANDSTORM,
+    WEATHER_HAIL,
 };
 
 struct Trainer
@@ -96,6 +97,7 @@ struct SmallBattleStruct1
     u8 unk2;
     u8 unk3;
     u8 unk4;
+    // unknown size
 };
 
 struct SmallItemStruct
@@ -108,14 +110,14 @@ struct BattleStruct /* 0x2000000 */
     u8 filler0[0x1601C];
     struct SmallBattleStruct1 unk;
     u8 filler1[0x68]; // 0x2016020
-    u8 safariFleeRate;
+    /* 0x16089 */ u8 safariFleeRate;
     u8 filler1_2[0x42];
     /* 0x160CB */ u8 linkPlayerIndex;
     /* 0x160CC */ struct SmallItemStruct item;
     u8 filler2[0x72E];
     /* 0x16800 */ struct AI_ThinkingStruct ai; /* 0x2016800 */
-	u8 filler1681C[0x1E4];
-	/* 0x16A00 */ struct UnknownStruct1 unk_2016A00_2;
+    u8 filler1681C[0x1E4];
+    /* 0x16A00 */ struct UnknownStruct1 unk_2016A00_2;
 };
 
 struct UnknownStruct4
