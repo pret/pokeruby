@@ -1017,15 +1017,18 @@ void sub_80AAF30(void)
     gUnknown_0203856C = 1;
     gContestPlayerMonIndex = 3;
     sub_80AE098(0);
+
     for (i = 3; i > -1; i--)
         gUnknown_02038690[i] = 3 - i;
+
     for (i = 0; i < 3; i++)
     {
         gUnknown_02038670[i] = 0;
         gUnknown_02038680[i] = 0;
         gUnknown_02038678[i] = 0;
-        memcpy(&gContestMons[i], &gContestMons[3], 0x40);
+        memcpy(&gContestMons[i], &gContestMons[3], sizeof(struct ContestPokemon));
     }
+
     gUnknown_02038670[3] = 0x12C;
     gUnknown_02038680[3] = 0x190;
     gUnknown_02038678[3] = 0x190;

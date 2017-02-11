@@ -249,8 +249,8 @@ _08128A9A:
 _08128AA4: .4byte 0x020192d0
 	thumb_func_end sub_8128A7C
 
-	thumb_func_start sub_8128AA8
-sub_8128AA8: @ 8128AA8
+	thumb_func_start ContestAICmd_unk_00
+ContestAICmd_unk_00: @ 8128AA8
 	push {lr}
 	ldr r2, _08128AD0 @ =0x020192e4
 	adds r1, r2, 0x5
@@ -287,10 +287,10 @@ _08128ADE:
 	str r0, [r3]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128AA8
+	thumb_func_end ContestAICmd_unk_00
 
-	thumb_func_start contest_ai_get_turn
-contest_ai_get_turn: @ 8128AF0
+	thumb_func_start ContestAICmd_get_turn
+ContestAICmd_get_turn: @ 8128AF0
 	ldr r1, _08128B04 @ =0x020192e4
 	adds r0, r1, 0
 	subs r0, 0xE0
@@ -304,12 +304,12 @@ contest_ai_get_turn: @ 8128AF0
 	.align 2, 0
 _08128B04: .4byte 0x020192e4
 _08128B08: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_turn
+	thumb_func_end ContestAICmd_get_turn
 
-	thumb_func_start sub_8128B0C
-sub_8128B0C: @ 8128B0C
+	thumb_func_start ContestAICmd_unk_02
+ContestAICmd_unk_02: @ 8128B0C
 	push {lr}
-	bl contest_ai_get_turn
+	bl ContestAICmd_get_turn
 	ldr r0, _08128B3C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -339,12 +339,12 @@ _08128B44:
 _08128B48:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128B0C
+	thumb_func_end ContestAICmd_unk_02
 
-	thumb_func_start sub_8128B4C
-sub_8128B4C: @ 8128B4C
+	thumb_func_start ContestAICmd_unk_03
+ContestAICmd_unk_03: @ 8128B4C
 	push {lr}
-	bl contest_ai_get_turn
+	bl ContestAICmd_get_turn
 	ldr r0, _08128B7C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -374,12 +374,12 @@ _08128B84:
 _08128B88:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128B4C
+	thumb_func_end ContestAICmd_unk_03
 
-	thumb_func_start sub_8128B8C
-sub_8128B8C: @ 8128B8C
+	thumb_func_start ContestAICmd_unk_04
+ContestAICmd_unk_04: @ 8128B8C
 	push {lr}
-	bl contest_ai_get_turn
+	bl ContestAICmd_get_turn
 	ldr r0, _08128BBC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -409,12 +409,12 @@ _08128BC4:
 _08128BC8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128B8C
+	thumb_func_end ContestAICmd_unk_04
 
-	thumb_func_start sub_8128BCC
-sub_8128BCC: @ 8128BCC
+	thumb_func_start ContestAICmd_unk_05
+ContestAICmd_unk_05: @ 8128BCC
 	push {lr}
-	bl contest_ai_get_turn
+	bl ContestAICmd_get_turn
 	ldr r0, _08128BFC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -444,10 +444,10 @@ _08128C04:
 _08128C08:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128BCC
+	thumb_func_end ContestAICmd_unk_05
 
-	thumb_func_start contest_ai_get_excitement
-contest_ai_get_excitement: @ 8128C0C
+	thumb_func_start ContestAICmd_get_excitement
+ContestAICmd_get_excitement: @ 8128C0C
 	ldr r1, _08128C24 @ =0x020192e4
 	adds r0, r1, 0
 	subs r0, 0xE0
@@ -463,12 +463,12 @@ contest_ai_get_excitement: @ 8128C0C
 	.align 2, 0
 _08128C24: .4byte 0x020192e4
 _08128C28: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_excitement
+	thumb_func_end ContestAICmd_get_excitement
 
-	thumb_func_start sub_8128C2C
-sub_8128C2C: @ 8128C2C
+	thumb_func_start ContestAICmd_unk_07
+ContestAICmd_unk_07: @ 8128C2C
 	push {lr}
-	bl contest_ai_get_excitement
+	bl ContestAICmd_get_excitement
 	ldr r0, _08128C5C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -498,12 +498,12 @@ _08128C64:
 _08128C68:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128C2C
+	thumb_func_end ContestAICmd_unk_07
 
-	thumb_func_start sub_8128C6C
-sub_8128C6C: @ 8128C6C
+	thumb_func_start ContestAICmd_unk_08
+ContestAICmd_unk_08: @ 8128C6C
 	push {lr}
-	bl contest_ai_get_excitement
+	bl ContestAICmd_get_excitement
 	ldr r0, _08128C9C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -533,12 +533,12 @@ _08128CA4:
 _08128CA8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128C6C
+	thumb_func_end ContestAICmd_unk_08
 
-	thumb_func_start sub_8128CAC
-sub_8128CAC: @ 8128CAC
+	thumb_func_start ContestAICmd_unk_09
+ContestAICmd_unk_09: @ 8128CAC
 	push {lr}
-	bl contest_ai_get_excitement
+	bl ContestAICmd_get_excitement
 	ldr r0, _08128CDC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -568,12 +568,12 @@ _08128CE4:
 _08128CE8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128CAC
+	thumb_func_end ContestAICmd_unk_09
 
-	thumb_func_start sub_8128CEC
-sub_8128CEC: @ 8128CEC
+	thumb_func_start ContestAICmd_unk_0A
+ContestAICmd_unk_0A: @ 8128CEC
 	push {lr}
-	bl contest_ai_get_excitement
+	bl ContestAICmd_get_excitement
 	ldr r0, _08128D1C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -603,10 +603,10 @@ _08128D24:
 _08128D28:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128CEC
+	thumb_func_end ContestAICmd_unk_0A
 
-	thumb_func_start contest_ai_get_user_order
-contest_ai_get_user_order: @ 8128D2C
+	thumb_func_start ContestAICmd_get_user_order
+ContestAICmd_get_user_order: @ 8128D2C
 	ldr r1, _08128D48 @ =0x020192e4
 	adds r2, r1, 0
 	adds r2, 0x41
@@ -624,12 +624,12 @@ contest_ai_get_user_order: @ 8128D2C
 	.align 2, 0
 _08128D48: .4byte 0x020192e4
 _08128D4C: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_user_order
+	thumb_func_end ContestAICmd_get_user_order
 
-	thumb_func_start sub_8128D50
-sub_8128D50: @ 8128D50
+	thumb_func_start ContestAICmd_unk_0C
+ContestAICmd_unk_0C: @ 8128D50
 	push {lr}
-	bl contest_ai_get_user_order
+	bl ContestAICmd_get_user_order
 	ldr r0, _08128D80 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -659,12 +659,12 @@ _08128D88:
 _08128D8C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128D50
+	thumb_func_end ContestAICmd_unk_0C
 
-	thumb_func_start sub_8128D90
-sub_8128D90: @ 8128D90
+	thumb_func_start ContestAICmd_unk_0D
+ContestAICmd_unk_0D: @ 8128D90
 	push {lr}
-	bl contest_ai_get_user_order
+	bl ContestAICmd_get_user_order
 	ldr r0, _08128DC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -694,12 +694,12 @@ _08128DC8:
 _08128DCC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128D90
+	thumb_func_end ContestAICmd_unk_0D
 
-	thumb_func_start sub_8128DD0
-sub_8128DD0: @ 8128DD0
+	thumb_func_start ContestAICmd_unk_0E
+ContestAICmd_unk_0E: @ 8128DD0
 	push {lr}
-	bl contest_ai_get_user_order
+	bl ContestAICmd_get_user_order
 	ldr r0, _08128E00 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -729,12 +729,12 @@ _08128E08:
 _08128E0C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128DD0
+	thumb_func_end ContestAICmd_unk_0E
 
-	thumb_func_start sub_8128E10
-sub_8128E10: @ 8128E10
+	thumb_func_start ContestAICmd_unk_0F
+ContestAICmd_unk_0F: @ 8128E10
 	push {lr}
-	bl contest_ai_get_user_order
+	bl ContestAICmd_get_user_order
 	ldr r0, _08128E40 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -764,10 +764,10 @@ _08128E48:
 _08128E4C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128E10
+	thumb_func_end ContestAICmd_unk_0F
 
-	thumb_func_start contest_ai_get_user_condition_maybe
-contest_ai_get_user_condition_maybe: @ 8128E50
+	thumb_func_start ContestAICmd_get_user_condition_maybe
+ContestAICmd_get_user_condition_maybe: @ 8128E50
 	push {r4,lr}
 	ldr r4, _08128E88 @ =0x020192e4
 	adds r0, r4, 0
@@ -797,12 +797,12 @@ contest_ai_get_user_condition_maybe: @ 8128E50
 	.align 2, 0
 _08128E88: .4byte 0x020192e4
 _08128E8C: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_user_condition_maybe
+	thumb_func_end ContestAICmd_get_user_condition_maybe
 
-	thumb_func_start sub_8128E90
-sub_8128E90: @ 8128E90
+	thumb_func_start ContestAICmd_unk_11
+ContestAICmd_unk_11: @ 8128E90
 	push {lr}
-	bl contest_ai_get_user_condition_maybe
+	bl ContestAICmd_get_user_condition_maybe
 	ldr r0, _08128EC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -832,12 +832,12 @@ _08128EC8:
 _08128ECC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128E90
+	thumb_func_end ContestAICmd_unk_11
 
-	thumb_func_start sub_8128ED0
-sub_8128ED0: @ 8128ED0
+	thumb_func_start ContestAICmd_unk_12
+ContestAICmd_unk_12: @ 8128ED0
 	push {lr}
-	bl contest_ai_get_user_condition_maybe
+	bl ContestAICmd_get_user_condition_maybe
 	ldr r0, _08128F00 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -867,12 +867,12 @@ _08128F08:
 _08128F0C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128ED0
+	thumb_func_end ContestAICmd_unk_12
 
-	thumb_func_start sub_8128F10
-sub_8128F10: @ 8128F10
+	thumb_func_start ContestAICmd_unk_13
+ContestAICmd_unk_13: @ 8128F10
 	push {lr}
-	bl contest_ai_get_user_condition_maybe
+	bl ContestAICmd_get_user_condition_maybe
 	ldr r0, _08128F40 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -902,12 +902,12 @@ _08128F48:
 _08128F4C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128F10
+	thumb_func_end ContestAICmd_unk_13
 
-	thumb_func_start sub_8128F50
-sub_8128F50: @ 8128F50
+	thumb_func_start ContestAICmd_unk_14
+ContestAICmd_unk_14: @ 8128F50
 	push {lr}
-	bl contest_ai_get_user_condition_maybe
+	bl ContestAICmd_get_user_condition_maybe
 	ldr r0, _08128F80 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -937,10 +937,10 @@ _08128F88:
 _08128F8C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128F50
+	thumb_func_end ContestAICmd_unk_14
 
-	thumb_func_start sub_8128F90
-sub_8128F90: @ 8128F90
+	thumb_func_start ContestAICmd_unk_15
+ContestAICmd_unk_15: @ 8128F90
 	ldr r2, _08128FB4 @ =0x020192e4
 	adds r0, r2, 0
 	adds r0, 0x41
@@ -961,12 +961,12 @@ sub_8128F90: @ 8128F90
 	.align 2, 0
 _08128FB4: .4byte 0x020192e4
 _08128FB8: .4byte gAIScriptPtr
-	thumb_func_end sub_8128F90
+	thumb_func_end ContestAICmd_unk_15
 
-	thumb_func_start sub_8128FBC
-sub_8128FBC: @ 8128FBC
+	thumb_func_start ContestAICmd_unk_16
+ContestAICmd_unk_16: @ 8128FBC
 	push {r4,r5,lr}
-	bl sub_8128F90
+	bl ContestAICmd_unk_15
 	ldr r2, _08128FF4 @ =0x020192e4
 	ldr r4, _08128FF8 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1002,12 +1002,12 @@ _08129000:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8128FBC
+	thumb_func_end ContestAICmd_unk_16
 
-	thumb_func_start sub_8129008
-sub_8129008: @ 8129008
+	thumb_func_start ContestAICmd_unk_17
+ContestAICmd_unk_17: @ 8129008
 	push {r4,r5,lr}
-	bl sub_8128F90
+	bl ContestAICmd_unk_15
 	ldr r2, _08129040 @ =0x020192e4
 	ldr r4, _08129044 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1043,12 +1043,12 @@ _0812904C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129008
+	thumb_func_end ContestAICmd_unk_17
 
-	thumb_func_start sub_8129054
-sub_8129054: @ 8129054
+	thumb_func_start ContestAICmd_unk_18
+ContestAICmd_unk_18: @ 8129054
 	push {r4,r5,lr}
-	bl sub_8128F90
+	bl ContestAICmd_unk_15
 	ldr r2, _0812908C @ =0x020192e4
 	ldr r4, _08129090 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1084,12 +1084,12 @@ _08129098:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129054
+	thumb_func_end ContestAICmd_unk_18
 
-	thumb_func_start sub_81290A0
-sub_81290A0: @ 81290A0
+	thumb_func_start ContestAICmd_unk_19
+ContestAICmd_unk_19: @ 81290A0
 	push {r4,r5,lr}
-	bl sub_8128F90
+	bl ContestAICmd_unk_15
 	ldr r2, _081290D8 @ =0x020192e4
 	ldr r4, _081290DC @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1125,10 +1125,10 @@ _081290E4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81290A0
+	thumb_func_end ContestAICmd_unk_19
 
-	thumb_func_start sub_81290EC
-sub_81290EC: @ 81290EC
+	thumb_func_start ContestAICmd_unk_1A
+ContestAICmd_unk_1A: @ 81290EC
 	ldr r2, _08129108 @ =0x020192e4
 	ldr r1, _0812910C @ =gUnknown_02038670
 	adds r0, r2, 0
@@ -1147,12 +1147,12 @@ sub_81290EC: @ 81290EC
 _08129108: .4byte 0x020192e4
 _0812910C: .4byte gUnknown_02038670
 _08129110: .4byte gAIScriptPtr
-	thumb_func_end sub_81290EC
+	thumb_func_end ContestAICmd_unk_1A
 
-	thumb_func_start sub_8129114
-sub_8129114: @ 8129114
+	thumb_func_start ContestAICmd_unk_1B
+ContestAICmd_unk_1B: @ 8129114
 	push {r4,r5,lr}
-	bl sub_81290EC
+	bl ContestAICmd_unk_1A
 	ldr r2, _0812914C @ =0x020192e4
 	ldr r4, _08129150 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1188,12 +1188,12 @@ _08129158:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129114
+	thumb_func_end ContestAICmd_unk_1B
 
-	thumb_func_start sub_8129160
-sub_8129160: @ 8129160
+	thumb_func_start ContestAICmd_unk_1C
+ContestAICmd_unk_1C: @ 8129160
 	push {r4,r5,lr}
-	bl sub_81290EC
+	bl ContestAICmd_unk_1A
 	ldr r2, _08129198 @ =0x020192e4
 	ldr r4, _0812919C @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1229,12 +1229,12 @@ _081291A4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129160
+	thumb_func_end ContestAICmd_unk_1C
 
-	thumb_func_start sub_81291AC
-sub_81291AC: @ 81291AC
+	thumb_func_start ContestAICmd_unk_1D
+ContestAICmd_unk_1D: @ 81291AC
 	push {r4,r5,lr}
-	bl sub_81290EC
+	bl ContestAICmd_unk_1A
 	ldr r2, _081291E4 @ =0x020192e4
 	ldr r4, _081291E8 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1270,12 +1270,12 @@ _081291F0:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81291AC
+	thumb_func_end ContestAICmd_unk_1D
 
-	thumb_func_start sub_81291F8
-sub_81291F8: @ 81291F8
+	thumb_func_start ContestAICmd_unk_1E
+ContestAICmd_unk_1E: @ 81291F8
 	push {r4,r5,lr}
-	bl sub_81290EC
+	bl ContestAICmd_unk_1A
 	ldr r2, _08129230 @ =0x020192e4
 	ldr r4, _08129234 @ =gAIScriptPtr
 	ldr r3, [r4]
@@ -1311,10 +1311,10 @@ _0812923C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81291F8
+	thumb_func_end ContestAICmd_unk_1E
 
-	thumb_func_start contest_ai_get_contest_type
-contest_ai_get_contest_type: @ 8129244
+	thumb_func_start ContestAICmd_get_contest_type
+ContestAICmd_get_contest_type: @ 8129244
 	ldr r1, _08129258 @ =0x020192e4
 	ldr r0, _0812925C @ =gScriptContestCategory
 	ldrh r0, [r0]
@@ -1328,12 +1328,12 @@ contest_ai_get_contest_type: @ 8129244
 _08129258: .4byte 0x020192e4
 _0812925C: .4byte gScriptContestCategory
 _08129260: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_contest_type
+	thumb_func_end ContestAICmd_get_contest_type
 
-	thumb_func_start sub_8129264
-sub_8129264: @ 8129264
+	thumb_func_start ContestAICmd_unk_20
+ContestAICmd_unk_20: @ 8129264
 	push {lr}
-	bl contest_ai_get_contest_type
+	bl ContestAICmd_get_contest_type
 	ldr r0, _08129294 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1363,12 +1363,12 @@ _0812929C:
 _081292A0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129264
+	thumb_func_end ContestAICmd_unk_20
 
-	thumb_func_start sub_81292A4
-sub_81292A4: @ 81292A4
+	thumb_func_start ContestAICmd_unk_21
+ContestAICmd_unk_21: @ 81292A4
 	push {lr}
-	bl contest_ai_get_contest_type
+	bl ContestAICmd_get_contest_type
 	ldr r0, _081292D4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1398,10 +1398,10 @@ _081292DC:
 _081292E0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81292A4
+	thumb_func_end ContestAICmd_unk_21
 
-	thumb_func_start contest_ai_get_move_excitement
-contest_ai_get_move_excitement: @ 81292E4
+	thumb_func_start ContestAICmd_get_move_excitement
+ContestAICmd_get_move_excitement: @ 81292E4
 	push {r4,lr}
 	ldr r2, _08129318 @ =gContestMons
 	ldr r4, _0812931C @ =0x020192e4
@@ -1430,12 +1430,12 @@ contest_ai_get_move_excitement: @ 81292E4
 _08129318: .4byte gContestMons
 _0812931C: .4byte 0x020192e4
 _08129320: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_move_excitement
+	thumb_func_end ContestAICmd_get_move_excitement
 
-	thumb_func_start sub_8129324
-sub_8129324: @ 8129324
+	thumb_func_start ContestAICmd_unk_23
+ContestAICmd_unk_23: @ 8129324
 	push {r4,lr}
-	bl contest_ai_get_move_excitement
+	bl ContestAICmd_get_move_excitement
 	ldr r0, _08129354 @ =0x020192e4
 	ldr r3, _08129358 @ =gAIScriptPtr
 	ldr r2, [r3]
@@ -1467,12 +1467,12 @@ _08129360:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129324
+	thumb_func_end ContestAICmd_unk_23
 
-	thumb_func_start sub_8129368
-sub_8129368: @ 8129368
+	thumb_func_start ContestAICmd_unk_24
+ContestAICmd_unk_24: @ 8129368
 	push {r4,lr}
-	bl contest_ai_get_move_excitement
+	bl ContestAICmd_get_move_excitement
 	ldr r0, _08129398 @ =0x020192e4
 	ldr r3, _0812939C @ =gAIScriptPtr
 	ldr r2, [r3]
@@ -1504,12 +1504,12 @@ _081293A4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129368
+	thumb_func_end ContestAICmd_unk_24
 
-	thumb_func_start sub_81293AC
-sub_81293AC: @ 81293AC
+	thumb_func_start ContestAICmd_unk_25
+ContestAICmd_unk_25: @ 81293AC
 	push {r4,lr}
-	bl contest_ai_get_move_excitement
+	bl ContestAICmd_get_move_excitement
 	ldr r0, _081293DC @ =0x020192e4
 	ldr r3, _081293E0 @ =gAIScriptPtr
 	ldr r2, [r3]
@@ -1541,12 +1541,12 @@ _081293E8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81293AC
+	thumb_func_end ContestAICmd_unk_25
 
-	thumb_func_start sub_81293F0
-sub_81293F0: @ 81293F0
+	thumb_func_start ContestAICmd_unk_26
+ContestAICmd_unk_26: @ 81293F0
 	push {r4,lr}
-	bl contest_ai_get_move_excitement
+	bl ContestAICmd_get_move_excitement
 	ldr r0, _08129420 @ =0x020192e4
 	ldr r3, _08129424 @ =gAIScriptPtr
 	ldr r2, [r3]
@@ -1578,10 +1578,10 @@ _0812942C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81293F0
+	thumb_func_end ContestAICmd_unk_26
 
-	thumb_func_start contest_ai_get_move_effect
-contest_ai_get_move_effect: @ 8129434
+	thumb_func_start ContestAICmd_get_move_effect
+ContestAICmd_get_move_effect: @ 8129434
 	ldr r2, _08129460 @ =gContestMons
 	ldr r3, _08129464 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
@@ -1609,12 +1609,12 @@ _08129460: .4byte gContestMons
 _08129464: .4byte 0x020192e4
 _08129468: .4byte gContestMoves
 _0812946C: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_move_effect
+	thumb_func_end ContestAICmd_get_move_effect
 
-	thumb_func_start sub_8129470
-sub_8129470: @ 8129470
+	thumb_func_start ContestAICmd_unk_28
+ContestAICmd_unk_28: @ 8129470
 	push {lr}
-	bl contest_ai_get_move_effect
+	bl ContestAICmd_get_move_effect
 	ldr r0, _081294A0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1644,12 +1644,12 @@ _081294A8:
 _081294AC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129470
+	thumb_func_end ContestAICmd_unk_28
 
-	thumb_func_start sub_81294B0
-sub_81294B0: @ 81294B0
+	thumb_func_start ContestAICmd_unk_29
+ContestAICmd_unk_29: @ 81294B0
 	push {lr}
-	bl contest_ai_get_move_effect
+	bl ContestAICmd_get_move_effect
 	ldr r0, _081294E0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1679,10 +1679,10 @@ _081294E8:
 _081294EC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81294B0
+	thumb_func_end ContestAICmd_unk_29
 
-	thumb_func_start contest_ai_get_move_effect_type
-contest_ai_get_move_effect_type: @ 81294F0
+	thumb_func_start ContestAICmd_get_move_effect_type
+ContestAICmd_get_move_effect_type: @ 81294F0
 	ldr r2, _08129524 @ =gContestMons
 	ldr r3, _08129528 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
@@ -1715,12 +1715,12 @@ _08129528: .4byte 0x020192e4
 _0812952C: .4byte gContestEffects
 _08129530: .4byte gContestMoves
 _08129534: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_move_effect_type
+	thumb_func_end ContestAICmd_get_move_effect_type
 
-	thumb_func_start sub_8129538
-sub_8129538: @ 8129538
+	thumb_func_start ContestAICmd_unk_2B
+ContestAICmd_unk_2B: @ 8129538
 	push {lr}
-	bl contest_ai_get_move_effect_type
+	bl ContestAICmd_get_move_effect_type
 	ldr r0, _08129568 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1750,12 +1750,12 @@ _08129570:
 _08129574:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129538
+	thumb_func_end ContestAICmd_unk_2B
 
-	thumb_func_start sub_8129578
-sub_8129578: @ 8129578
+	thumb_func_start ContestAICmd_unk_2C
+ContestAICmd_unk_2C: @ 8129578
 	push {lr}
-	bl contest_ai_get_move_effect_type
+	bl ContestAICmd_get_move_effect_type
 	ldr r0, _081295A8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1785,10 +1785,10 @@ _081295B0:
 _081295B4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129578
+	thumb_func_end ContestAICmd_unk_2C
 
-	thumb_func_start contest_ai_check_move_has_highest_appeal
-contest_ai_check_move_has_highest_appeal: @ 81295B8
+	thumb_func_start ContestAICmd_check_move_has_highest_appeal
+ContestAICmd_check_move_has_highest_appeal: @ 81295B8
 	push {r4-r7,lr}
 	ldr r2, _08129610 @ =gContestMons
 	ldr r3, _08129614 @ =0x020192e4
@@ -1853,12 +1853,12 @@ _08129626:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end contest_ai_check_move_has_highest_appeal
+	thumb_func_end ContestAICmd_check_move_has_highest_appeal
 
-	thumb_func_start sub_8129638
-sub_8129638: @ 8129638
+	thumb_func_start ContestAICmd_unk_2E
+ContestAICmd_unk_2E: @ 8129638
 	push {lr}
-	bl contest_ai_check_move_has_highest_appeal
+	bl ContestAICmd_check_move_has_highest_appeal
 	ldr r0, _08129664 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1891,10 +1891,10 @@ _08129674:
 	bx r0
 	.align 2, 0
 _08129678: .4byte gAIScriptPtr
-	thumb_func_end sub_8129638
+	thumb_func_end ContestAICmd_unk_2E
 
-	thumb_func_start sub_812967C
-sub_812967C: @ 812967C
+	thumb_func_start ContestAICmd_unk_2F
+ContestAICmd_unk_2F: @ 812967C
 	push {r4-r7,lr}
 	ldr r2, _081296D4 @ =gContestMons
 	ldr r3, _081296D8 @ =0x020192e4
@@ -1959,12 +1959,12 @@ _081296EA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812967C
+	thumb_func_end ContestAICmd_unk_2F
 
-	thumb_func_start sub_81296FC
-sub_81296FC: @ 81296FC
+	thumb_func_start ContestAICmd_unk_30
+ContestAICmd_unk_30: @ 81296FC
 	push {lr}
-	bl sub_812967C
+	bl ContestAICmd_unk_2F
 	ldr r0, _08129728 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -1997,10 +1997,10 @@ _08129738:
 	bx r0
 	.align 2, 0
 _0812973C: .4byte gAIScriptPtr
-	thumb_func_end sub_81296FC
+	thumb_func_end ContestAICmd_unk_30
 
-	thumb_func_start sub_8129740
-sub_8129740: @ 8129740
+	thumb_func_start ContestAICmd_unk_31
+ContestAICmd_unk_31: @ 8129740
 	push {r4,lr}
 	ldr r2, _08129784 @ =gContestMons
 	ldr r4, _08129788 @ =0x020192e4
@@ -2040,12 +2040,12 @@ _08129788: .4byte 0x020192e4
 _0812978C: .4byte gContestEffects
 _08129790: .4byte gContestMoves
 _08129794: .4byte gAIScriptPtr
-	thumb_func_end sub_8129740
+	thumb_func_end ContestAICmd_unk_31
 
-	thumb_func_start sub_8129798
-sub_8129798: @ 8129798
+	thumb_func_start ContestAICmd_unk_32
+ContestAICmd_unk_32: @ 8129798
 	push {lr}
-	bl sub_8129740
+	bl ContestAICmd_unk_31
 	ldr r0, _081297C8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2075,12 +2075,12 @@ _081297D0:
 _081297D4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129798
+	thumb_func_end ContestAICmd_unk_32
 
-	thumb_func_start sub_81297D8
-sub_81297D8: @ 81297D8
+	thumb_func_start ContestAICmd_unk_33
+ContestAICmd_unk_33: @ 81297D8
 	push {lr}
-	bl sub_8129740
+	bl ContestAICmd_unk_31
 	ldr r0, _08129808 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2110,12 +2110,12 @@ _08129810:
 _08129814:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81297D8
+	thumb_func_end ContestAICmd_unk_33
 
-	thumb_func_start sub_8129818
-sub_8129818: @ 8129818
+	thumb_func_start ContestAICmd_unk_34
+ContestAICmd_unk_34: @ 8129818
 	push {lr}
-	bl sub_8129740
+	bl ContestAICmd_unk_31
 	ldr r0, _08129848 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2145,12 +2145,12 @@ _08129850:
 _08129854:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129818
+	thumb_func_end ContestAICmd_unk_34
 
-	thumb_func_start sub_8129858
-sub_8129858: @ 8129858
+	thumb_func_start ContestAICmd_unk_35
+ContestAICmd_unk_35: @ 8129858
 	push {lr}
-	bl sub_8129740
+	bl ContestAICmd_unk_31
 	ldr r0, _08129888 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2180,10 +2180,10 @@ _08129890:
 _08129894:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129858
+	thumb_func_end ContestAICmd_unk_35
 
-	thumb_func_start sub_8129898
-sub_8129898: @ 8129898
+	thumb_func_start ContestAICmd_unk_36
+ContestAICmd_unk_36: @ 8129898
 	push {r4,lr}
 	ldr r2, _081298DC @ =gContestMons
 	ldr r4, _081298E0 @ =0x020192e4
@@ -2223,12 +2223,12 @@ _081298E0: .4byte 0x020192e4
 _081298E4: .4byte gContestEffects
 _081298E8: .4byte gContestMoves
 _081298EC: .4byte gAIScriptPtr
-	thumb_func_end sub_8129898
+	thumb_func_end ContestAICmd_unk_36
 
-	thumb_func_start sub_81298F0
-sub_81298F0: @ 81298F0
+	thumb_func_start ContestAICmd_unk_37
+ContestAICmd_unk_37: @ 81298F0
 	push {lr}
-	bl sub_8129898
+	bl ContestAICmd_unk_36
 	ldr r0, _08129920 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2258,12 +2258,12 @@ _08129928:
 _0812992C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81298F0
+	thumb_func_end ContestAICmd_unk_37
 
-	thumb_func_start sub_8129930
-sub_8129930: @ 8129930
+	thumb_func_start ContestAICmd_unk_38
+ContestAICmd_unk_38: @ 8129930
 	push {lr}
-	bl sub_8129898
+	bl ContestAICmd_unk_36
 	ldr r0, _08129960 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2293,12 +2293,12 @@ _08129968:
 _0812996C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129930
+	thumb_func_end ContestAICmd_unk_38
 
-	thumb_func_start sub_8129970
-sub_8129970: @ 8129970
+	thumb_func_start ContestAICmd_unk_39
+ContestAICmd_unk_39: @ 8129970
 	push {lr}
-	bl sub_8129898
+	bl ContestAICmd_unk_36
 	ldr r0, _081299A0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2328,12 +2328,12 @@ _081299A8:
 _081299AC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129970
+	thumb_func_end ContestAICmd_unk_39
 
-	thumb_func_start sub_81299B0
-sub_81299B0: @ 81299B0
+	thumb_func_start ContestAICmd_unk_3A
+ContestAICmd_unk_3A: @ 81299B0
 	push {lr}
-	bl sub_8129898
+	bl ContestAICmd_unk_36
 	ldr r0, _081299E0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2363,10 +2363,10 @@ _081299E8:
 _081299EC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81299B0
+	thumb_func_end ContestAICmd_unk_3A
 
-	thumb_func_start contest_ai_get_move_used_count
-contest_ai_get_move_used_count: @ 81299F0
+	thumb_func_start ContestAICmd_get_move_used_count
+ContestAICmd_get_move_used_count: @ 81299F0
 	push {r4,lr}
 	ldr r3, _08129A20 @ =gContestMons
 	ldr r4, _08129A24 @ =0x020192e4
@@ -2410,12 +2410,12 @@ _08129A30:
 	bx r0
 	.align 2, 0
 _08129A40: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_get_move_used_count
+	thumb_func_end ContestAICmd_get_move_used_count
 
-	thumb_func_start sub_8129A44
-sub_8129A44: @ 8129A44
+	thumb_func_start ContestAICmd_unk_3C
+ContestAICmd_unk_3C: @ 8129A44
 	push {lr}
-	bl contest_ai_get_move_used_count
+	bl ContestAICmd_get_move_used_count
 	ldr r0, _08129A74 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2445,12 +2445,12 @@ _08129A7C:
 _08129A80:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129A44
+	thumb_func_end ContestAICmd_unk_3C
 
-	thumb_func_start sub_8129A84
-sub_8129A84: @ 8129A84
+	thumb_func_start ContestAICmd_unk_3D
+ContestAICmd_unk_3D: @ 8129A84
 	push {lr}
-	bl contest_ai_get_move_used_count
+	bl ContestAICmd_get_move_used_count
 	ldr r0, _08129AB4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2480,12 +2480,12 @@ _08129ABC:
 _08129AC0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129A84
+	thumb_func_end ContestAICmd_unk_3D
 
-	thumb_func_start sub_8129AC4
-sub_8129AC4: @ 8129AC4
+	thumb_func_start ContestAICmd_unk_3E
+ContestAICmd_unk_3E: @ 8129AC4
 	push {lr}
-	bl contest_ai_get_move_used_count
+	bl ContestAICmd_get_move_used_count
 	ldr r0, _08129AF4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2515,12 +2515,12 @@ _08129AFC:
 _08129B00:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129AC4
+	thumb_func_end ContestAICmd_unk_3E
 
-	thumb_func_start sub_8129B04
-sub_8129B04: @ 8129B04
+	thumb_func_start ContestAICmd_unk_3F
+ContestAICmd_unk_3F: @ 8129B04
 	push {lr}
-	bl contest_ai_get_move_used_count
+	bl ContestAICmd_get_move_used_count
 	ldr r0, _08129B34 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2550,10 +2550,10 @@ _08129B3C:
 _08129B40:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129B04
+	thumb_func_end ContestAICmd_unk_3F
 
-	thumb_func_start contest_ai_check_combo_starter
-contest_ai_check_combo_starter: @ 8129B44
+	thumb_func_start ContestAICmd_check_combo_starter
+ContestAICmd_check_combo_starter: @ 8129B44
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2613,12 +2613,12 @@ _08129B96:
 _08129BAC: .4byte gContestMons
 _08129BB0: .4byte 0x020192e4
 _08129BB4: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_check_combo_starter
+	thumb_func_end ContestAICmd_check_combo_starter
 
-	thumb_func_start sub_8129BB8
-sub_8129BB8: @ 8129BB8
+	thumb_func_start ContestAICmd_unk_41
+ContestAICmd_unk_41: @ 8129BB8
 	push {lr}
-	bl contest_ai_check_combo_starter
+	bl ContestAICmd_check_combo_starter
 	ldr r0, _08129BE4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2651,12 +2651,12 @@ _08129BF4:
 	bx r0
 	.align 2, 0
 _08129BF8: .4byte gAIScriptPtr
-	thumb_func_end sub_8129BB8
+	thumb_func_end ContestAICmd_unk_41
 
-	thumb_func_start sub_8129BFC
-sub_8129BFC: @ 8129BFC
+	thumb_func_start ContestAICmd_unk_42
+ContestAICmd_unk_42: @ 8129BFC
 	push {lr}
-	bl contest_ai_check_combo_starter
+	bl ContestAICmd_check_combo_starter
 	ldr r0, _08129C28 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2689,10 +2689,10 @@ _08129C38:
 	bx r0
 	.align 2, 0
 _08129C3C: .4byte gAIScriptPtr
-	thumb_func_end sub_8129BFC
+	thumb_func_end ContestAICmd_unk_42
 
-	thumb_func_start contest_ai_check_combo_finisher
-contest_ai_check_combo_finisher: @ 8129C40
+	thumb_func_start ContestAICmd_check_combo_finisher
+ContestAICmd_check_combo_finisher: @ 8129C40
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2751,12 +2751,12 @@ _08129C90:
 _08129CA8: .4byte gContestMons
 _08129CAC: .4byte 0x020192e4
 _08129CB0: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_check_combo_finisher
+	thumb_func_end ContestAICmd_check_combo_finisher
 
-	thumb_func_start sub_8129CB4
-sub_8129CB4: @ 8129CB4
+	thumb_func_start ContestAICmd_unk_44
+ContestAICmd_unk_44: @ 8129CB4
 	push {lr}
-	bl contest_ai_check_combo_finisher
+	bl ContestAICmd_check_combo_finisher
 	ldr r0, _08129CE0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2789,12 +2789,12 @@ _08129CF0:
 	bx r0
 	.align 2, 0
 _08129CF4: .4byte gAIScriptPtr
-	thumb_func_end sub_8129CB4
+	thumb_func_end ContestAICmd_unk_44
 
-	thumb_func_start sub_8129CF8
-sub_8129CF8: @ 8129CF8
+	thumb_func_start ContestAICmd_unk_45
+ContestAICmd_unk_45: @ 8129CF8
 	push {lr}
-	bl contest_ai_check_combo_finisher
+	bl ContestAICmd_check_combo_finisher
 	ldr r0, _08129D24 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2827,10 +2827,10 @@ _08129D34:
 	bx r0
 	.align 2, 0
 _08129D38: .4byte gAIScriptPtr
-	thumb_func_end sub_8129CF8
+	thumb_func_end ContestAICmd_unk_45
 
-	thumb_func_start contest_ai_check_would_finish_combo
-contest_ai_check_would_finish_combo: @ 8129D3C
+	thumb_func_start ContestAICmd_check_would_finish_combo
+ContestAICmd_check_would_finish_combo: @ 8129D3C
 	push {r4,r5,lr}
 	movs r5, 0
 	ldr r3, _08129D8C @ =gContestMons
@@ -2875,12 +2875,12 @@ _08129D7A:
 _08129D8C: .4byte gContestMons
 _08129D90: .4byte 0x020192e4
 _08129D94: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_check_would_finish_combo
+	thumb_func_end ContestAICmd_check_would_finish_combo
 
-	thumb_func_start sub_8129D98
-sub_8129D98: @ 8129D98
+	thumb_func_start ContestAICmd_unk_47
+ContestAICmd_unk_47: @ 8129D98
 	push {lr}
-	bl contest_ai_check_would_finish_combo
+	bl ContestAICmd_check_would_finish_combo
 	ldr r0, _08129DC4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2913,12 +2913,12 @@ _08129DD4:
 	bx r0
 	.align 2, 0
 _08129DD8: .4byte gAIScriptPtr
-	thumb_func_end sub_8129D98
+	thumb_func_end ContestAICmd_unk_47
 
-	thumb_func_start sub_8129DDC
-sub_8129DDC: @ 8129DDC
+	thumb_func_start ContestAICmd_unk_48
+ContestAICmd_unk_48: @ 8129DDC
 	push {lr}
-	bl contest_ai_check_would_finish_combo
+	bl ContestAICmd_check_would_finish_combo
 	ldr r0, _08129E08 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -2951,10 +2951,10 @@ _08129E18:
 	bx r0
 	.align 2, 0
 _08129E1C: .4byte gAIScriptPtr
-	thumb_func_end sub_8129DDC
+	thumb_func_end ContestAICmd_unk_48
 
-	thumb_func_start contest_ai_get_condition
-contest_ai_get_condition: @ 8129E20
+	thumb_func_start ContestAICmd_get_condition
+ContestAICmd_get_condition: @ 8129E20
 	push {r4,r5,lr}
 	ldr r4, _08129E5C @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -2985,12 +2985,12 @@ contest_ai_get_condition: @ 8129E20
 	.align 2, 0
 _08129E5C: .4byte gAIScriptPtr
 _08129E60: .4byte 0x020192e4
-	thumb_func_end contest_ai_get_condition
+	thumb_func_end ContestAICmd_get_condition
 
-	thumb_func_start sub_8129E64
-sub_8129E64: @ 8129E64
+	thumb_func_start ContestAICmd_unk_4A
+ContestAICmd_unk_4A: @ 8129E64
 	push {lr}
-	bl contest_ai_get_condition
+	bl ContestAICmd_get_condition
 	ldr r0, _08129E94 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3020,12 +3020,12 @@ _08129E9C:
 _08129EA0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129E64
+	thumb_func_end ContestAICmd_unk_4A
 
-	thumb_func_start sub_8129EA4
-sub_8129EA4: @ 8129EA4
+	thumb_func_start ContestAICmd_unk_4B
+ContestAICmd_unk_4B: @ 8129EA4
 	push {lr}
-	bl contest_ai_get_condition
+	bl ContestAICmd_get_condition
 	ldr r0, _08129ED4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3055,12 +3055,12 @@ _08129EDC:
 _08129EE0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129EA4
+	thumb_func_end ContestAICmd_unk_4B
 
-	thumb_func_start sub_8129EE4
-sub_8129EE4: @ 8129EE4
+	thumb_func_start ContestAICmd_unk_4C
+ContestAICmd_unk_4C: @ 8129EE4
 	push {lr}
-	bl contest_ai_get_condition
+	bl ContestAICmd_get_condition
 	ldr r0, _08129F14 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3090,12 +3090,12 @@ _08129F1C:
 _08129F20:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129EE4
+	thumb_func_end ContestAICmd_unk_4C
 
-	thumb_func_start sub_8129F24
-sub_8129F24: @ 8129F24
+	thumb_func_start ContestAICmd_unk_4D
+ContestAICmd_unk_4D: @ 8129F24
 	push {lr}
-	bl contest_ai_get_condition
+	bl ContestAICmd_get_condition
 	ldr r0, _08129F54 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3125,10 +3125,10 @@ _08129F5C:
 _08129F60:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129F24
+	thumb_func_end ContestAICmd_unk_4D
 
-	thumb_func_start contest_ai_get_used_combo_starter
-contest_ai_get_used_combo_starter: @ 8129F64
+	thumb_func_start ContestAICmd_get_used_combo_starter
+ContestAICmd_get_used_combo_starter: @ 8129F64
 	push {r4-r6,lr}
 	movs r6, 0
 	ldr r5, _08129FAC @ =gAIScriptPtr
@@ -3169,12 +3169,12 @@ _08129FAC: .4byte gAIScriptPtr
 _08129FB0: .4byte gContestMoves
 _08129FB4: .4byte 0x02019260
 _08129FB8: .4byte 0x020192e4
-	thumb_func_end contest_ai_get_used_combo_starter
+	thumb_func_end ContestAICmd_get_used_combo_starter
 
-	thumb_func_start sub_8129FBC
-sub_8129FBC: @ 8129FBC
+	thumb_func_start ContestAICmd_unk_4F
+ContestAICmd_unk_4F: @ 8129FBC
 	push {lr}
-	bl contest_ai_get_used_combo_starter
+	bl ContestAICmd_get_used_combo_starter
 	ldr r0, _08129FEC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3204,12 +3204,12 @@ _08129FF4:
 _08129FF8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129FBC
+	thumb_func_end ContestAICmd_unk_4F
 
-	thumb_func_start sub_8129FFC
-sub_8129FFC: @ 8129FFC
+	thumb_func_start ContestAICmd_unk_50
+ContestAICmd_unk_50: @ 8129FFC
 	push {lr}
-	bl contest_ai_get_used_combo_starter
+	bl ContestAICmd_get_used_combo_starter
 	ldr r0, _0812A02C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3239,12 +3239,12 @@ _0812A034:
 _0812A038:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8129FFC
+	thumb_func_end ContestAICmd_unk_50
 
-	thumb_func_start sub_812A03C
-sub_812A03C: @ 812A03C
+	thumb_func_start ContestAICmd_unk_51
+ContestAICmd_unk_51: @ 812A03C
 	push {lr}
-	bl contest_ai_get_used_combo_starter
+	bl ContestAICmd_get_used_combo_starter
 	ldr r0, _0812A06C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3274,12 +3274,12 @@ _0812A074:
 _0812A078:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A03C
+	thumb_func_end ContestAICmd_unk_51
 
-	thumb_func_start sub_812A07C
-sub_812A07C: @ 812A07C
+	thumb_func_start ContestAICmd_unk_52
+ContestAICmd_unk_52: @ 812A07C
 	push {lr}
-	bl contest_ai_get_used_combo_starter
+	bl ContestAICmd_get_used_combo_starter
 	ldr r0, _0812A0AC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3309,10 +3309,10 @@ _0812A0B4:
 _0812A0B8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A07C
+	thumb_func_end ContestAICmd_unk_52
 
-	thumb_func_start contest_ai_check_can_participate
-contest_ai_check_can_participate: @ 812A0BC
+	thumb_func_start ContestAICmd_check_can_participate
+ContestAICmd_check_can_participate: @ 812A0BC
 	push {lr}
 	ldr r0, _0812A0DC @ =gAIScriptPtr
 	ldr r0, [r0]
@@ -3344,12 +3344,12 @@ _0812A0E8:
 	.align 2, 0
 _0812A0F8: .4byte 0x020192e4
 _0812A0FC: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_check_can_participate
+	thumb_func_end ContestAICmd_check_can_participate
 
-	thumb_func_start sub_812A100
-sub_812A100: @ 812A100
+	thumb_func_start ContestAICmd_unk_54
+ContestAICmd_unk_54: @ 812A100
 	push {lr}
-	bl contest_ai_check_can_participate
+	bl ContestAICmd_check_can_participate
 	ldr r0, _0812A12C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3382,12 +3382,12 @@ _0812A13C:
 	bx r0
 	.align 2, 0
 _0812A140: .4byte gAIScriptPtr
-	thumb_func_end sub_812A100
+	thumb_func_end ContestAICmd_unk_54
 
-	thumb_func_start sub_812A144
-sub_812A144: @ 812A144
+	thumb_func_start ContestAICmd_unk_55
+ContestAICmd_unk_55: @ 812A144
 	push {lr}
-	bl contest_ai_check_can_participate
+	bl ContestAICmd_check_can_participate
 	ldr r0, _0812A170 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3420,10 +3420,10 @@ _0812A180:
 	bx r0
 	.align 2, 0
 _0812A184: .4byte gAIScriptPtr
-	thumb_func_end sub_812A144
+	thumb_func_end ContestAICmd_unk_55
 
-	thumb_func_start contest_ai_get_val_812A188
-contest_ai_get_val_812A188: @ 812A188
+	thumb_func_start ContestAICmd_get_val_812A188
+ContestAICmd_get_val_812A188: @ 812A188
 	push {r4,lr}
 	ldr r4, _0812A1BC @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -3451,12 +3451,12 @@ contest_ai_get_val_812A188: @ 812A188
 	.align 2, 0
 _0812A1BC: .4byte gAIScriptPtr
 _0812A1C0: .4byte 0x020192e4
-	thumb_func_end contest_ai_get_val_812A188
+	thumb_func_end ContestAICmd_get_val_812A188
 
-	thumb_func_start sub_812A1C4
-sub_812A1C4: @ 812A1C4
+	thumb_func_start ContestAICmd_unk_57
+ContestAICmd_unk_57: @ 812A1C4
 	push {lr}
-	bl contest_ai_get_val_812A188
+	bl ContestAICmd_get_val_812A188
 	ldr r0, _0812A1F0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3489,12 +3489,12 @@ _0812A200:
 	bx r0
 	.align 2, 0
 _0812A204: .4byte gAIScriptPtr
-	thumb_func_end sub_812A1C4
+	thumb_func_end ContestAICmd_unk_57
 
-	thumb_func_start sub_812A208
-sub_812A208: @ 812A208
+	thumb_func_start ContestAICmd_unk_58
+ContestAICmd_unk_58: @ 812A208
 	push {lr}
-	bl contest_ai_get_val_812A188
+	bl ContestAICmd_get_val_812A188
 	ldr r0, _0812A234 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3527,10 +3527,10 @@ _0812A244:
 	bx r0
 	.align 2, 0
 _0812A248: .4byte gAIScriptPtr
-	thumb_func_end sub_812A208
+	thumb_func_end ContestAICmd_unk_58
 
-	thumb_func_start sub_812A24C
-sub_812A24C: @ 812A24C
+	thumb_func_start ContestAICmd_unk_59
+ContestAICmd_unk_59: @ 812A24C
 	push {r4,r5,lr}
 	ldr r5, _0812A28C @ =gAIScriptPtr
 	ldr r0, [r5]
@@ -3565,12 +3565,12 @@ sub_812A24C: @ 812A24C
 	.align 2, 0
 _0812A28C: .4byte gAIScriptPtr
 _0812A290: .4byte 0x020192e4
-	thumb_func_end sub_812A24C
+	thumb_func_end ContestAICmd_unk_59
 
-	thumb_func_start sub_812A294
-sub_812A294: @ 812A294
+	thumb_func_start ContestAICmd_unk_5A
+ContestAICmd_unk_5A: @ 812A294
 	push {lr}
-	bl sub_812A24C
+	bl ContestAICmd_unk_59
 	ldr r0, _0812A2C0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3603,12 +3603,12 @@ _0812A2D0:
 	bx r0
 	.align 2, 0
 _0812A2D4: .4byte gAIScriptPtr
-	thumb_func_end sub_812A294
+	thumb_func_end ContestAICmd_unk_5A
 
-	thumb_func_start sub_812A2D8
-sub_812A2D8: @ 812A2D8
+	thumb_func_start ContestAICmd_unk_5B
+ContestAICmd_unk_5B: @ 812A2D8
 	push {lr}
-	bl sub_812A24C
+	bl ContestAICmd_unk_59
 	ldr r0, _0812A304 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3641,12 +3641,12 @@ _0812A314:
 	bx r0
 	.align 2, 0
 _0812A318: .4byte gAIScriptPtr
-	thumb_func_end sub_812A2D8
+	thumb_func_end ContestAICmd_unk_5B
 
-	thumb_func_start sub_812A31C
-sub_812A31C: @ 812A31C
+	thumb_func_start ContestAICmd_unk_5C
+ContestAICmd_unk_5C: @ 812A31C
 	push {lr}
-	bl sub_812A24C
+	bl ContestAICmd_unk_59
 	ldr r0, _0812A348 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3679,12 +3679,12 @@ _0812A358:
 	bx r0
 	.align 2, 0
 _0812A35C: .4byte gAIScriptPtr
-	thumb_func_end sub_812A31C
+	thumb_func_end ContestAICmd_unk_5C
 
-	thumb_func_start sub_812A360
-sub_812A360: @ 812A360
+	thumb_func_start ContestAICmd_unk_5D
+ContestAICmd_unk_5D: @ 812A360
 	push {lr}
-	bl sub_812A24C
+	bl ContestAICmd_unk_59
 	ldr r0, _0812A38C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3717,10 +3717,10 @@ _0812A39C:
 	bx r0
 	.align 2, 0
 _0812A3A0: .4byte gAIScriptPtr
-	thumb_func_end sub_812A360
+	thumb_func_end ContestAICmd_unk_5D
 
-	thumb_func_start sub_812A3A4
-sub_812A3A4: @ 812A3A4
+	thumb_func_start ContestAICmd_unk_5E
+ContestAICmd_unk_5E: @ 812A3A4
 	push {r4,lr}
 	ldr r4, _0812A3D8 @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -3750,12 +3750,12 @@ sub_812A3A4: @ 812A3A4
 _0812A3D8: .4byte gAIScriptPtr
 _0812A3DC: .4byte 0x020192e4
 _0812A3E0: .4byte gUnknown_02038670
-	thumb_func_end sub_812A3A4
+	thumb_func_end ContestAICmd_unk_5E
 
-	thumb_func_start sub_812A3E4
-sub_812A3E4: @ 812A3E4
+	thumb_func_start ContestAICmd_unk_5F
+ContestAICmd_unk_5F: @ 812A3E4
 	push {lr}
-	bl sub_812A3A4
+	bl ContestAICmd_unk_5E
 	ldr r0, _0812A410 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3788,12 +3788,12 @@ _0812A420:
 	bx r0
 	.align 2, 0
 _0812A424: .4byte gAIScriptPtr
-	thumb_func_end sub_812A3E4
+	thumb_func_end ContestAICmd_unk_5F
 
-	thumb_func_start sub_812A428
-sub_812A428: @ 812A428
+	thumb_func_start ContestAICmd_unk_60
+ContestAICmd_unk_60: @ 812A428
 	push {lr}
-	bl sub_812A3A4
+	bl ContestAICmd_unk_5E
 	ldr r0, _0812A454 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3826,12 +3826,12 @@ _0812A464:
 	bx r0
 	.align 2, 0
 _0812A468: .4byte gAIScriptPtr
-	thumb_func_end sub_812A428
+	thumb_func_end ContestAICmd_unk_60
 
-	thumb_func_start sub_812A46C
-sub_812A46C: @ 812A46C
+	thumb_func_start ContestAICmd_unk_61
+ContestAICmd_unk_61: @ 812A46C
 	push {lr}
-	bl sub_812A3A4
+	bl ContestAICmd_unk_5E
 	ldr r0, _0812A498 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3864,12 +3864,12 @@ _0812A4A8:
 	bx r0
 	.align 2, 0
 _0812A4AC: .4byte gAIScriptPtr
-	thumb_func_end sub_812A46C
+	thumb_func_end ContestAICmd_unk_61
 
-	thumb_func_start sub_812A4B0
-sub_812A4B0: @ 812A4B0
+	thumb_func_start ContestAICmd_unk_62
+ContestAICmd_unk_62: @ 812A4B0
 	push {lr}
-	bl sub_812A3A4
+	bl ContestAICmd_unk_5E
 	ldr r0, _0812A4DC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3902,10 +3902,10 @@ _0812A4EC:
 	bx r0
 	.align 2, 0
 _0812A4F0: .4byte gAIScriptPtr
-	thumb_func_end sub_812A4B0
+	thumb_func_end ContestAICmd_unk_62
 
-	thumb_func_start sub_812A4F4
-sub_812A4F4: @ 812A4F4
+	thumb_func_start ContestAICmd_unk_63
+ContestAICmd_unk_63: @ 812A4F4
 	push {r4,lr}
 	ldr r4, _0812A52C @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -3937,12 +3937,12 @@ sub_812A4F4: @ 812A4F4
 _0812A52C: .4byte gAIScriptPtr
 _0812A530: .4byte 0x02019204
 _0812A534: .4byte gContestMoves
-	thumb_func_end sub_812A4F4
+	thumb_func_end ContestAICmd_unk_63
 
-	thumb_func_start sub_812A538
-sub_812A538: @ 812A538
+	thumb_func_start ContestAICmd_unk_64
+ContestAICmd_unk_64: @ 812A538
 	push {lr}
-	bl sub_812A4F4
+	bl ContestAICmd_unk_63
 	ldr r0, _0812A568 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -3972,12 +3972,12 @@ _0812A570:
 _0812A574:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A538
+	thumb_func_end ContestAICmd_unk_64
 
-	thumb_func_start sub_812A578
-sub_812A578: @ 812A578
+	thumb_func_start ContestAICmd_unk_65
+ContestAICmd_unk_65: @ 812A578
 	push {lr}
-	bl sub_812A4F4
+	bl ContestAICmd_unk_63
 	ldr r0, _0812A5A8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4007,12 +4007,12 @@ _0812A5B0:
 _0812A5B4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A578
+	thumb_func_end ContestAICmd_unk_65
 
-	thumb_func_start sub_812A5B8
-sub_812A5B8: @ 812A5B8
+	thumb_func_start ContestAICmd_unk_66
+ContestAICmd_unk_66: @ 812A5B8
 	push {lr}
-	bl sub_812A4F4
+	bl ContestAICmd_unk_63
 	ldr r0, _0812A5E8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4042,12 +4042,12 @@ _0812A5F0:
 _0812A5F4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A5B8
+	thumb_func_end ContestAICmd_unk_66
 
-	thumb_func_start sub_812A5F8
-sub_812A5F8: @ 812A5F8
+	thumb_func_start ContestAICmd_unk_67
+ContestAICmd_unk_67: @ 812A5F8
 	push {lr}
-	bl sub_812A4F4
+	bl ContestAICmd_unk_63
 	ldr r0, _0812A628 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4077,10 +4077,10 @@ _0812A630:
 _0812A634:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A5F8
+	thumb_func_end ContestAICmd_unk_67
 
-	thumb_func_start sub_812A638
-sub_812A638: @ 812A638
+	thumb_func_start ContestAICmd_unk_68
+ContestAICmd_unk_68: @ 812A638
 	push {r4,lr}
 	ldr r4, _0812A66C @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -4109,12 +4109,12 @@ sub_812A638: @ 812A638
 	.align 2, 0
 _0812A66C: .4byte gAIScriptPtr
 _0812A670: .4byte 0x02019204
-	thumb_func_end sub_812A638
+	thumb_func_end ContestAICmd_unk_68
 
-	thumb_func_start sub_812A674
-sub_812A674: @ 812A674
+	thumb_func_start ContestAICmd_unk_69
+ContestAICmd_unk_69: @ 812A674
 	push {lr}
-	bl sub_812A638
+	bl ContestAICmd_unk_68
 	ldr r0, _0812A6A4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4144,12 +4144,12 @@ _0812A6AC:
 _0812A6B0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A674
+	thumb_func_end ContestAICmd_unk_69
 
-	thumb_func_start sub_812A6B4
-sub_812A6B4: @ 812A6B4
+	thumb_func_start ContestAICmd_unk_6A
+ContestAICmd_unk_6A: @ 812A6B4
 	push {lr}
-	bl sub_812A638
+	bl ContestAICmd_unk_68
 	ldr r0, _0812A6E4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4179,12 +4179,12 @@ _0812A6EC:
 _0812A6F0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A6B4
+	thumb_func_end ContestAICmd_unk_6A
 
-	thumb_func_start sub_812A6F4
-sub_812A6F4: @ 812A6F4
+	thumb_func_start ContestAICmd_unk_6B
+ContestAICmd_unk_6B: @ 812A6F4
 	push {lr}
-	bl sub_812A638
+	bl ContestAICmd_unk_68
 	ldr r0, _0812A724 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4214,12 +4214,12 @@ _0812A72C:
 _0812A730:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A6F4
+	thumb_func_end ContestAICmd_unk_6B
 
-	thumb_func_start sub_812A734
-sub_812A734: @ 812A734
+	thumb_func_start ContestAICmd_unk_6C
+ContestAICmd_unk_6C: @ 812A734
 	push {lr}
-	bl sub_812A638
+	bl ContestAICmd_unk_68
 	ldr r0, _0812A764 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4249,10 +4249,10 @@ _0812A76C:
 _0812A770:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A734
+	thumb_func_end ContestAICmd_unk_6C
 
-	thumb_func_start sub_812A774
-sub_812A774: @ 812A774
+	thumb_func_start ContestAICmd_unk_6D
+ContestAICmd_unk_6D: @ 812A774
 	push {r4,r5,lr}
 	ldr r5, _0812A7B4 @ =gAIScriptPtr
 	ldr r0, [r5]
@@ -4289,12 +4289,12 @@ _0812A7B4: .4byte gAIScriptPtr
 _0812A7B8: .4byte 0x02019204
 _0812A7BC: .4byte gContestEffects
 _0812A7C0: .4byte gContestMoves
-	thumb_func_end sub_812A774
+	thumb_func_end ContestAICmd_unk_6D
 
-	thumb_func_start sub_812A7C4
-sub_812A7C4: @ 812A7C4
+	thumb_func_start ContestAICmd_unk_6E
+ContestAICmd_unk_6E: @ 812A7C4
 	push {lr}
-	bl sub_812A774
+	bl ContestAICmd_unk_6D
 	ldr r0, _0812A7F4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4324,12 +4324,12 @@ _0812A7FC:
 _0812A800:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A7C4
+	thumb_func_end ContestAICmd_unk_6E
 
-	thumb_func_start sub_812A804
-sub_812A804: @ 812A804
+	thumb_func_start ContestAICmd_unk_6F
+ContestAICmd_unk_6F: @ 812A804
 	push {lr}
-	bl sub_812A774
+	bl ContestAICmd_unk_6D
 	ldr r0, _0812A834 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -4359,10 +4359,10 @@ _0812A83C:
 _0812A840:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A804
+	thumb_func_end ContestAICmd_unk_6F
 
-	thumb_func_start sub_812A844
-sub_812A844: @ 812A844
+	thumb_func_start ContestAICmd_unk_70
+ContestAICmd_unk_70: @ 812A844
 	push {r4,lr}
 	ldr r3, _0812A864 @ =0x020192e4
 	ldr r4, _0812A868 @ =gAIScriptPtr
@@ -4382,10 +4382,10 @@ sub_812A844: @ 812A844
 	.align 2, 0
 _0812A864: .4byte 0x020192e4
 _0812A868: .4byte gAIScriptPtr
-	thumb_func_end sub_812A844
+	thumb_func_end ContestAICmd_unk_70
 
-	thumb_func_start sub_812A86C
-sub_812A86C: @ 812A86C
+	thumb_func_start ContestAICmd_unk_71
+ContestAICmd_unk_71: @ 812A86C
 	push {r4,lr}
 	ldr r0, _0812A890 @ =0x020192e4
 	ldr r4, _0812A894 @ =gAIScriptPtr
@@ -4407,10 +4407,10 @@ sub_812A86C: @ 812A86C
 	.align 2, 0
 _0812A890: .4byte 0x020192e4
 _0812A894: .4byte gAIScriptPtr
-	thumb_func_end sub_812A86C
+	thumb_func_end ContestAICmd_unk_71
 
-	thumb_func_start sub_812A898
-sub_812A898: @ 812A898
+	thumb_func_start ContestAICmd_unk_72
+ContestAICmd_unk_72: @ 812A898
 	push {r4,lr}
 	ldr r0, _0812A8C4 @ =0x020192e4
 	ldr r4, _0812A8C8 @ =gAIScriptPtr
@@ -4435,10 +4435,10 @@ sub_812A898: @ 812A898
 	.align 2, 0
 _0812A8C4: .4byte 0x020192e4
 _0812A8C8: .4byte gAIScriptPtr
-	thumb_func_end sub_812A898
+	thumb_func_end ContestAICmd_unk_72
 
-	thumb_func_start sub_812A8CC
-sub_812A8CC: @ 812A8CC
+	thumb_func_start ContestAICmd_unk_73
+ContestAICmd_unk_73: @ 812A8CC
 	push {r4,lr}
 	ldr r2, _0812A8F4 @ =0x020192e4
 	ldr r4, _0812A8F8 @ =gAIScriptPtr
@@ -4462,10 +4462,10 @@ sub_812A8CC: @ 812A8CC
 	.align 2, 0
 _0812A8F4: .4byte 0x020192e4
 _0812A8F8: .4byte gAIScriptPtr
-	thumb_func_end sub_812A8CC
+	thumb_func_end ContestAICmd_unk_73
 
-	thumb_func_start sub_812A8FC
-sub_812A8FC: @ 812A8FC
+	thumb_func_start ContestAICmd_unk_74
+ContestAICmd_unk_74: @ 812A8FC
 	push {r4,lr}
 	ldr r2, _0812A924 @ =0x020192e4
 	ldr r4, _0812A928 @ =gAIScriptPtr
@@ -4489,10 +4489,10 @@ sub_812A8FC: @ 812A8FC
 	.align 2, 0
 _0812A924: .4byte 0x020192e4
 _0812A928: .4byte gAIScriptPtr
-	thumb_func_end sub_812A8FC
+	thumb_func_end ContestAICmd_unk_74
 
-	thumb_func_start sub_812A92C
-sub_812A92C: @ 812A92C
+	thumb_func_start ContestAICmd_unk_75
+ContestAICmd_unk_75: @ 812A92C
 	push {r4,lr}
 	ldr r1, _0812A964 @ =0x020192e4
 	ldr r4, _0812A968 @ =gAIScriptPtr
@@ -4532,10 +4532,10 @@ _0812A972:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A92C
+	thumb_func_end ContestAICmd_unk_75
 
-	thumb_func_start sub_812A978
-sub_812A978: @ 812A978
+	thumb_func_start ContestAICmd_unk_76
+ContestAICmd_unk_76: @ 812A978
 	push {r4,lr}
 	ldr r1, _0812A9B0 @ =0x020192e4
 	ldr r4, _0812A9B4 @ =gAIScriptPtr
@@ -4575,10 +4575,10 @@ _0812A9BE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A978
+	thumb_func_end ContestAICmd_unk_76
 
-	thumb_func_start sub_812A9C4
-sub_812A9C4: @ 812A9C4
+	thumb_func_start ContestAICmd_unk_77
+ContestAICmd_unk_77: @ 812A9C4
 	push {r4,lr}
 	ldr r1, _0812A9FC @ =0x020192e4
 	ldr r4, _0812AA00 @ =gAIScriptPtr
@@ -4618,10 +4618,10 @@ _0812AA0A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812A9C4
+	thumb_func_end ContestAICmd_unk_77
 
-	thumb_func_start sub_812AA10
-sub_812AA10: @ 812AA10
+	thumb_func_start ContestAICmd_unk_78
+ContestAICmd_unk_78: @ 812AA10
 	push {r4,lr}
 	ldr r1, _0812AA48 @ =0x020192e4
 	ldr r4, _0812AA4C @ =gAIScriptPtr
@@ -4661,10 +4661,10 @@ _0812AA56:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AA10
+	thumb_func_end ContestAICmd_unk_78
 
-	thumb_func_start sub_812AA5C
-sub_812AA5C: @ 812AA5C
+	thumb_func_start ContestAICmd_unk_79
+ContestAICmd_unk_79: @ 812AA5C
 	push {r4,lr}
 	ldr r2, _0812AA98 @ =0x020192e4
 	ldr r4, _0812AA9C @ =gAIScriptPtr
@@ -4704,10 +4704,10 @@ _0812AAA4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AA5C
+	thumb_func_end ContestAICmd_unk_79
 
-	thumb_func_start sub_812AAAC
-sub_812AAAC: @ 812AAAC
+	thumb_func_start ContestAICmd_unk_7A
+ContestAICmd_unk_7A: @ 812AAAC
 	push {r4,lr}
 	ldr r2, _0812AAE8 @ =0x020192e4
 	ldr r4, _0812AAEC @ =gAIScriptPtr
@@ -4747,10 +4747,10 @@ _0812AAF4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AAAC
+	thumb_func_end ContestAICmd_unk_7A
 
-	thumb_func_start sub_812AAFC
-sub_812AAFC: @ 812AAFC
+	thumb_func_start ContestAICmd_unk_7B
+ContestAICmd_unk_7B: @ 812AAFC
 	push {r4,lr}
 	ldr r2, _0812AB38 @ =0x020192e4
 	ldr r4, _0812AB3C @ =gAIScriptPtr
@@ -4790,10 +4790,10 @@ _0812AB44:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AAFC
+	thumb_func_end ContestAICmd_unk_7B
 
-	thumb_func_start sub_812AB4C
-sub_812AB4C: @ 812AB4C
+	thumb_func_start ContestAICmd_unk_7C
+ContestAICmd_unk_7C: @ 812AB4C
 	push {r4,lr}
 	ldr r2, _0812AB88 @ =0x020192e4
 	ldr r4, _0812AB8C @ =gAIScriptPtr
@@ -4833,10 +4833,10 @@ _0812AB94:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AB4C
+	thumb_func_end ContestAICmd_unk_7C
 
-	thumb_func_start sub_812AB9C
-sub_812AB9C: @ 812AB9C
+	thumb_func_start ContestAICmd_unk_7D
+ContestAICmd_unk_7D: @ 812AB9C
 	push {r4,lr}
 	bl Random
 	movs r2, 0xFF
@@ -4874,10 +4874,10 @@ _0812ABE0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812AB9C
+	thumb_func_end ContestAICmd_unk_7D
 
-	thumb_func_start sub_812ABE8
-sub_812ABE8: @ 812ABE8
+	thumb_func_start ContestAICmd_unk_7E
+ContestAICmd_unk_7E: @ 812ABE8
 	push {r4,lr}
 	bl Random
 	movs r2, 0xFF
@@ -4915,10 +4915,10 @@ _0812AC2C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812ABE8
+	thumb_func_end ContestAICmd_unk_7E
 
-	thumb_func_start sub_812AC34
-sub_812AC34: @ 812AC34
+	thumb_func_start ContestAICmd_unk_7F
+ContestAICmd_unk_7F: @ 812AC34
 	ldr r3, _0812AC50 @ =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -4935,10 +4935,10 @@ sub_812AC34: @ 812AC34
 	bx lr
 	.align 2, 0
 _0812AC50: .4byte gAIScriptPtr
-	thumb_func_end sub_812AC34
+	thumb_func_end ContestAICmd_unk_7F
 
-	thumb_func_start sub_812AC54
-sub_812AC54: @ 812AC54
+	thumb_func_start ContestAICmd_unk_80
+ContestAICmd_unk_80: @ 812AC54
 	push {r4,lr}
 	ldr r4, _0812AC80 @ =gAIScriptPtr
 	ldr r0, [r4]
@@ -4961,10 +4961,10 @@ sub_812AC54: @ 812AC54
 	bx r0
 	.align 2, 0
 _0812AC80: .4byte gAIScriptPtr
-	thumb_func_end sub_812AC54
+	thumb_func_end ContestAICmd_unk_80
 
-	thumb_func_start sub_812AC84
-sub_812AC84: @ 812AC84
+	thumb_func_start ContestAICmd_unk_81
+ContestAICmd_unk_81: @ 812AC84
 	push {lr}
 	bl sub_812ACC8
 	lsls r0, 24
@@ -4980,7 +4980,7 @@ _0812AC9A:
 	bx r0
 	.align 2, 0
 _0812ACA0: .4byte 0x020192e4
-	thumb_func_end sub_812AC84
+	thumb_func_end ContestAICmd_unk_81
 
 	thumb_func_start sub_812ACA4
 sub_812ACA4: @ 812ACA4
@@ -5034,8 +5034,8 @@ _0812ACF4:
 _0812ACF8: .4byte gAIScriptPtr
 	thumb_func_end sub_812ACC8
 
-	thumb_func_start contest_ai_check_for_exciting_move
-contest_ai_check_for_exciting_move: @ 812ACFC
+	thumb_func_start ContestAICmd_check_for_exciting_move
+ContestAICmd_check_for_exciting_move: @ 812ACFC
 	push {r4-r7,lr}
 	movs r5, 0
 	movs r4, 0
@@ -5077,12 +5077,12 @@ _0812AD36:
 	.align 2, 0
 _0812AD48: .4byte 0x020192e4
 _0812AD4C: .4byte gAIScriptPtr
-	thumb_func_end contest_ai_check_for_exciting_move
+	thumb_func_end ContestAICmd_check_for_exciting_move
 
-	thumb_func_start sub_812AD50
-sub_812AD50: @ 812AD50
+	thumb_func_start ContestAICmd_unk_83
+ContestAICmd_unk_83: @ 812AD50
 	push {lr}
-	bl contest_ai_check_for_exciting_move
+	bl ContestAICmd_check_for_exciting_move
 	ldr r0, _0812AD7C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -5115,12 +5115,12 @@ _0812AD8C:
 	bx r0
 	.align 2, 0
 _0812AD90: .4byte gAIScriptPtr
-	thumb_func_end sub_812AD50
+	thumb_func_end ContestAICmd_unk_83
 
-	thumb_func_start sub_812AD94
-sub_812AD94: @ 812AD94
+	thumb_func_start ContestAICmd_unk_84
+ContestAICmd_unk_84: @ 812AD94
 	push {lr}
-	bl contest_ai_check_for_exciting_move
+	bl ContestAICmd_check_for_exciting_move
 	ldr r0, _0812ADC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -5153,10 +5153,10 @@ _0812ADD0:
 	bx r0
 	.align 2, 0
 _0812ADD4: .4byte gAIScriptPtr
-	thumb_func_end sub_812AD94
+	thumb_func_end ContestAICmd_unk_84
 
-	thumb_func_start sub_812ADD8
-sub_812ADD8: @ 812ADD8
+	thumb_func_start ContestAICmd_unk_85
+ContestAICmd_unk_85: @ 812ADD8
 	push {r4-r7,lr}
 	movs r6, 0
 	ldr r2, _0812AE08 @ =gAIScriptPtr
@@ -5212,12 +5212,12 @@ _0812AE34:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812ADD8
+	thumb_func_end ContestAICmd_unk_85
 
-	thumb_func_start sub_812AE44
-sub_812AE44: @ 812AE44
+	thumb_func_start ContestAICmd_unk_86
+ContestAICmd_unk_86: @ 812AE44
 	push {lr}
-	bl sub_812ADD8
+	bl ContestAICmd_unk_85
 	ldr r0, _0812AE70 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -5250,12 +5250,12 @@ _0812AE80:
 	bx r0
 	.align 2, 0
 _0812AE84: .4byte gAIScriptPtr
-	thumb_func_end sub_812AE44
+	thumb_func_end ContestAICmd_unk_86
 
-	thumb_func_start sub_812AE88
-sub_812AE88: @ 812AE88
+	thumb_func_start ContestAICmd_unk_87
+ContestAICmd_unk_87: @ 812AE88
 	push {lr}
-	bl sub_812ADD8
+	bl ContestAICmd_unk_85
 	ldr r0, _0812AEB4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
@@ -5288,6 +5288,6 @@ _0812AEC4:
 	bx r0
 	.align 2, 0
 _0812AEC8: .4byte gAIScriptPtr
-	thumb_func_end sub_812AE88
+	thumb_func_end ContestAICmd_unk_87
 
 	.align 2, 0 @ Don't pad with nop.
