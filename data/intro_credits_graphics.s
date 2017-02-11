@@ -160,8 +160,36 @@ gSpriteAnimTable_8416B84:: @ 8416B84
 	.4byte gSpriteAnim_8416B74
 	.4byte gSpriteAnim_8416B7C
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416B94:: @ 8416B94
-	.incbin "baserom.gba", 0x00416b94, 0x48
+	.byte -128, 72, 32, 100
+	.2byte 0xC00
+	.space 2
+	.byte -128, -98, 32, 100
+	.2byte 0xC00
+	.space 2
+	.byte 65, -64, 40, 101
+	.2byte 0x800
+	.space 2
+	.byte 65, 56, 40, 101
+	.2byte 0x800
+	.space 2
+	.byte 18, 100, 44, 102
+	.2byte 0x400
+	.space 2
+	.byte 18, -104, 44, 102
+	.2byte 0x400
+	.space 2
+	.byte 19, 8, 46, 103
+	.2byte 0x100
+	.space 2
+	.byte 19, 56, 46, 103
+	.2byte 0x100
+	.space 2
+	.byte 19, -16, 46, 103
+	.2byte 0x100
+	.space 2
 
 	.align 2
 gUnknown_08416BDC:: @ 8416BDC
@@ -189,8 +217,45 @@ gSpriteAnimTable_8416C04:: @ 8416C04
 	.4byte gSpriteAnim_8416BF4
 	.4byte gSpriteAnim_8416BFC
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416C10:: @ 8416C10
-	.incbin "baserom.gba", 0x00416c10, 0x60
+	.byte -128, 16, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, 80, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, -112, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, -48, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -95, 40, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, 104, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, -88, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, -24, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -94, 56, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, 120, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, -72, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, -8, 88, 102
+	.2byte 0x800
+	.space 2
 
 	.align 2
 gUnknown_08416C70:: @ 8416C70
@@ -206,8 +271,27 @@ gSpriteAnim_8416C80:: @ 8416C80
 gSpriteAnimTable_8416C88:: @ 8416C88
 	.4byte gSpriteAnim_8416C80
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416C8C:: @ 8416C8C
-	.incbin "baserom.gba", 0x00416c8c, 0x30
+	.byte -128, 24, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, 64, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, 104, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -112, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -72, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -32, 88, 100
+	.2byte 0x1000
+	.space 2
 
 	.align 2
 gOamData_8416CBC:: @ 8416CBC
