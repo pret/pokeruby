@@ -11,12 +11,15 @@ CryMeterNeedlePalette: @ 83FA65C
 CryMeterNeedleTiles: @ 83FA67C
 	.incbin "graphics/pokedex/cry_meter_needle.4bpp"
 
+	.align 1
 gUnknown_083FAE7C:: @ 83FAE7C
-	.incbin "baserom.gba", 0x003fae7c, 0xa0
+	.incbin "graphics/pokedex/cry_meter_map.bin"
 
+	.align 1
 gUnknown_083FAF1C:: @ 83FAF1C
 	.incbin "graphics/pokedex/cry_meter.gbapal"
 
+	.align 2
 gUnknown_083FAF3C:: @ 83FAF3C
 	.incbin "graphics/pokedex/cry_meter.4bpp.lz"
 
@@ -34,17 +37,52 @@ gUnknown_083FB274:: @ 83FB274
 	.align 2
 	.4byte 0x201C000
 
+	.align 1
 gUnknown_083FB6F8:: @ 83FB6F8
-	.incbin "baserom.gba", 0x003fb6f8, 0x20
+	.incbin "graphics/pokedex/83FB6F8.gbapal"
 
 gUnknown_083FB718:: @ 83FB718
-	.incbin "baserom.gba", 0x003fb718, 0x20
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x11
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
+	.byte 0x22
 
 gUnknown_083FB738:: @ 83FB738
 	.byte 0xF0, 0x0F
 
 gUnknown_083FB73A:: @ 83FB73A
-	.incbin "baserom.gba", 0x003fb73a, 0x26
+	.byte 0x0F,0x0E,0x0D,0x0C,0x0B,0x0A,0x09,0x08,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F
+	.byte 0xF0,0xE0,0xD0,0xC0,0xB0,0xA0,0x90,0x80,0x80,0x90,0xA0,0xB0,0xC0,0xD0,0xE0,0xF0
+
+	.byte 0, 0, 0, 200, 1, 2
 
 	.align 2
 gSpriteAnim_83FB760:: @ 83FB760
