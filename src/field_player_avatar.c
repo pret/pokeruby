@@ -1126,7 +1126,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 void ClearPlayerAvatarInfo(void)
 {
     //TODO: 0x24 should be the size of gPlayerAvatar
-    memset(&gPlayerAvatar, 0, 0x24);
+    memset(&gPlayerAvatar, 0, sizeof(struct PlayerAvatar));
 }
 
 void SetPlayerAvatarStateMask(u8 a)

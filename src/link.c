@@ -475,8 +475,8 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x2222:
             InitLocalLinkPlayer();
             localLinkPlayerBlock.linkPlayer = localLinkPlayer;
-            memcpy(localLinkPlayerBlock.magic1, sMagic, 15);
-            memcpy(localLinkPlayerBlock.magic2, sMagic, 15);
+            memcpy(localLinkPlayerBlock.magic1, sMagic, sizeof(localLinkPlayerBlock.magic1) - 1);
+            memcpy(localLinkPlayerBlock.magic2, sMagic, sizeof(localLinkPlayerBlock.magic2) - 1);
             InitBlockSend(&localLinkPlayerBlock, sizeof(localLinkPlayerBlock));
             break;
         case 0x5555:

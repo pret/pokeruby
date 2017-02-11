@@ -2,29 +2,34 @@
 #include "event_data.h"
 #include "pokedex.h"
 
-extern u8 gUnknown_0202E8E2[];
+#define TEMP_FLAGS_SIZE 0x4
+#define TEMP_UPPER_FLAGS_SIZE 0x8
+#define TEMP_VARS_SIZE 0x20
+
+extern u8 gUnknown_0202E8E2[16];
 extern u16 *gSpecialVars[];
 
 void InitEventData(void)
 {
     memset(gSaveBlock1.flags, 0, sizeof(gSaveBlock1.flags));
     memset(gSaveBlock1.vars, 0, sizeof(gSaveBlock1.vars));
-    memset(gUnknown_0202E8E2, 0, 16);
+    memset(gUnknown_0202E8E2, 0, sizeof(gUnknown_0202E8E2));
 }
 
 void ClearTempFieldEventData(void)
 {
-    memset(gSaveBlock1.flags, 0, 4);
-    memset(gSaveBlock1.vars, 0, 32);
+    memset(gSaveBlock1.flags, 0, TEMP_FLAGS_SIZE);
+    memset(gSaveBlock1.vars, 0, TEMP_VARS_SIZE);
     FlagReset(SYS_ENC_UP_ITEM);
     FlagReset(SYS_ENC_DOWN_ITEM);
     FlagReset(SYS_USE_STRENGTH);
     FlagReset(SYS_CTRL_OBJ_DELETE);
 }
 
+// probably had different flag splits at one point.
 void ClearUpperFlags(void)
 {
-    memset(gSaveBlock1.flags + 0x118, 0, 8);
+    memset(gSaveBlock1.flags + 0x118, 0, TEMP_UPPER_FLAGS_SIZE);
 }
 
 void DisableNationalPokedex(void)
