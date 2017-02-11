@@ -70,7 +70,43 @@ gPokemonStorageScrollingBGTile:: @ 83B6A30
 gPokemonStorageScrollingBGTilemap:: @ 83B6A50
 	.incbin "graphics/pokemon_storage/scrolling_bg_map.bin.lz"
 
-	.incbin "baserom.gba", 0x003b6b4c, 0x48
+@ unused tilemap?
+	.2byte 0x1281
+	.2byte 0x1282
+	.2byte 0x1283
+	.2byte 0x1284
+	.2byte 0x1285
+	.2byte 0x1286
+	.2byte 0x1287
+	.2byte 0x1288
+	.2byte 0x128C
+	.2byte 0x128D
+	.2byte 0x128E
+	.2byte 0x128F
+	.2byte 0x1290
+	.2byte 0x1291
+	.2byte 0x1292
+	.2byte 0x1293
+	.2byte 0x0281
+	.2byte 0x0282
+	.2byte 0x0283
+	.2byte 0x0284
+	.2byte 0x0285
+	.2byte 0x0286
+	.2byte 0x0287
+	.2byte 0x0288
+	.2byte 0x028C
+	.2byte 0x028D
+	.2byte 0x028E
+	.2byte 0x028F
+	.2byte 0x0290
+	.2byte 0x0291
+	.2byte 0x0292
+	.2byte 0x0293
+	.2byte 0x12AD
+	.2byte 0x12AE
+	.2byte 0x12A8
+	.2byte 0x12A8
 
 	.align 2
 WaveformPalette: @ 83B6B94
@@ -200,17 +236,20 @@ gOamData_83B6F2C:: @ 83B6F2C
 	.2byte 0x0000
 
 	.align 2
-Unknown_83B6F34: @ 83B6F34
-	.incbin "baserom.gba", 0x003b6f34, 0x10
+gSpriteAffineAnim_83B6F34:: @ 83B6F34
+	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 120
+	obj_rot_scal_anim_end
 
 	.align 2
-Unknown_83B6F44: @ 83B6F44
-	.incbin "baserom.gba", 0x003b6f44, 0x18
+gSpriteAffineAnim_83B6F44:: @ 83B6F44
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 0
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 15
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_083B6F5C:: @ 83B6F5C
-	.4byte Unknown_83B6F34
-	.4byte Unknown_83B6F44
+gSpriteAffineAnimTable_83B6F5C:: @ 83B6F5C
+	.4byte gSpriteAffineAnim_83B6F34
+	.4byte gSpriteAffineAnim_83B6F44
 
 	.align 2
 gWallpaperPalettes_Forest: @ 83B6F64
@@ -441,8 +480,24 @@ gWallpaperTilemap_Plain: @ 83BAE74
 @ 12×18 tilemap
 	.incbin "graphics/unused/tilemap_3BAEF8.bin"
 
+	.align 1
 gUnknown_083BB0A8:: @ 83BB0A8
-	.incbin "baserom.gba", 0x003bb0a8, 0x40
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
+	.2byte 0x1CE7, 0x7FFF
 
 	.align 2
 gWallpaperTable:: @ 83BB0E8
