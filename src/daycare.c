@@ -27,9 +27,9 @@ u8 daycare_count_pokemon(struct BoxPokemon *daycare_data)
 	count = 0;
 
 	for(i = 0;i <= 1;i++) {
-	if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) != 0) {
-	count++;
-	}
+		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) != 0) {
+			count++;
+		}
 	}
 
 	return count;
@@ -103,9 +103,9 @@ s8 daycare_empty_slot(struct BoxPokemon * daycare_data)
 	u8 i;
 
 	for(i = 0;i <= 1;i++){
-	if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) == 0){
-	return i;
-	}
+		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) == 0){
+			return i;
+		}
 	}
 
 	return -1;
@@ -131,7 +131,7 @@ void sub_80413C8()
 {
 	// strange stack usage - happens because THUMB ARM only allows R0-R7 to be pushed/popped:
 	//    all registers in reglist must be Lo registers, except that PUSH can include the LR, and POP can include the PC
-	//    the ldm/stm section probably copies some struct, but I'm not sure how the code would look
+	// the ldm/stm section probably copies some struct, but I'm not sure how the code would look
 	asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r9\n\
@@ -253,70 +253,23 @@ extern u16 word_2024E82;
 
 void sub_804151C(struct Pokemon * mon)
 {
-	u32 i;
+	s32 i;
 	u8 r6;
 	u16 temp;
-	u16 minus1;
-	i = 0;
-	minus1 = 0xffff;
 
-	while(i <= 100){
-		if(TryIncrementMonLevel(mon) == 0) goto end;
+	for(i = 0; i < 100; i++){
+		if(TryIncrementMonLevel(mon) == FALSE) goto end;
+
 		r6 = 1;
-		i++;
 		while((temp = sub_803B7C8(mon, r6)) != 0){
 			r6 = 0;
-			if(temp == minus1){
+			if(temp == 0xffff){
 				DeleteFirstMoveAndGiveMoveToMon(mon, word_2024E82);
 			}
 		}
 	}
+
 	end:
 
 	CalculateMonStats(mon);
 }
-
-#ifdef NEVERDEFINED
-sub_804151C: @ 804151C
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	movs r5, 0
-	ldr r7, _08041538 @ =0x0000ffff
-_08041524:				<-----------------------------------+
-	adds r0, r4, 0											|
-	bl TryIncrementMonLevel									|
-	lsls r0, 24												|
-	cmp r0, 0												|
-	beq _08041560			break	----------------+		|
-	movs r6, 0x1									|		|
-	adds r5, 0x1									|		|
-	b _0804154C							--------+	|		|
-	.align 2, 0									|	|		|
-_08041538: .4byte 0x0000ffff					|	|		|
-_0804153C:				<-----------------------+---+---+	|
-	movs r6, 0									|	|	|	|
-	cmp r0, r7									|	|	|	|
-	bne _0804154C	--------------------------->|	|	|	|
-	ldr r0, _0804156C @ =word_2024E82			|	|	|	|
-	ldrh r1, [r0]								|	|	|	|
-	adds r0, r4, 0								|	|	|	|
-	bl DeleteFirstMoveAndGiveMoveToMon			|	|	|	|
-_0804154C:								<-------+	|	|	|
-	adds r0, r4, 0									|	|	|
-	adds r1, r6, 0									|	|	|
-	bl sub_803B7C8									|	|	|
-	lsls r0, 16										|	|	|
-	lsrs r0, 16										|	|	|
-	cmp r0, 0										|	|	|
-	bne _0804153C	--------------------------------+---+	|
-	cmp r5, 0x63									|		|
-	ble _08041524	--------------------------------+-------+
-_08041560:								<-----------+
-	adds r0, r4, 0
-	bl CalculateMonStats
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804156C: .4byte word_2024E82
-#endif
