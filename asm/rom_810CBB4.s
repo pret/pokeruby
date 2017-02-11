@@ -1003,8 +1003,8 @@ _0810D370:
 	bx r1
 	thumb_func_end sub_810D32C
 
-	thumb_func_start sub_810D378
-sub_810D378: @ 810D378
+	thumb_func_start UpdateShoalTideFlag
+UpdateShoalTideFlag: @ 810D378
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -1038,7 +1038,7 @@ _0810D3BE:
 	bx r0
 	.align 2, 0
 _0810D3C4: .4byte 0x0000083a
-	thumb_func_end sub_810D378
+	thumb_func_end UpdateShoalTideFlag
 
 	thumb_func_start sub_810D3C8
 sub_810D3C8: @ 810D3C8
