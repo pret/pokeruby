@@ -12,20 +12,29 @@ gUnknown_0840B524:: @ 840B524
 	obj_pal gContestConfetti_Pal, 1001
 	.space 8
 
+	.align 2
 gUnknown_0840B534:: @ 840B534
-	.incbin "baserom.gba", 0x0040b534, 0x6
+	.2byte 120,210,120, 40
+	.2byte 326,220, 56, 40
+	.2byte -86,220,184, 40
+	.2byte 120,-62,120, 88
+	.2byte -25,-62,200, 88
+	.2byte 265,-62, 40, 88
 
-gUnknown_0840B53A:: @ 840B53A
-	.incbin "baserom.gba", 0x0040b53a, 0x2a
-
+	.align 2
 gUnknown_0840B564:: @ 840B564
-	.incbin "baserom.gba", 0x0040b564, 0x6
+	.2byte 120,214,120, 64
+	.2byte 281,214, 56, 64
+	.2byte -41,214,184, 64
 
-gUnknown_0840B56A:: @ 840B56A
-	.incbin "baserom.gba", 0x0040b56a, 0x12
-
+	.align 2
 gUnknown_0840B57C:: @ 840B57C
-	.incbin "baserom.gba", 0x0040b57c, 0x1c
+	.2byte 1002
+	.2byte 1002
+	.space 0x10
+
+@ unused data?
+	.byte 2, 1, 3, 6, 4, 5
 
 	.align 2
 gOamData_840B598:: @ 840B598
