@@ -82,11 +82,11 @@ WaveformTiles: @ 83B6BB4
 
 	.align 2
 gUnknown_083B6D74:: @ 83B6D74
-	.incbin "baserom.gba", 0x003b6d74, 0x20
+	.incbin "graphics/pokemon_storage/83B6D74.gbapal"
 
 	.align 2
 gUnknown_083B6D94:: @ 83B6D94
-	.incbin "baserom.gba", 0x003b6d94, 0x20
+	.incbin "graphics/pokemon_storage/83B6D94.gbapal"
 
 	.align 2
 gUnknown_083B6DB4:: @ 83B6DB4
