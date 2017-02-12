@@ -9885,7 +9885,7 @@ _080B004A:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	ldr r1, _080B00C4 @ =gUnknown_083CA464
+	ldr r1, _080B00C4 @ =gSubspriteTables_83CA464
 	bl SetSubspriteTables
 	ldrb r1, [r4, 0x1]
 	lsls r0, r1, 4
@@ -9914,7 +9914,7 @@ _080B00B4: .4byte gUnknown_083CA3C4
 _080B00B8: .4byte gSpriteTemplate_83CA3F4
 _080B00BC: .4byte gUnknown_02038696
 _080B00C0: .4byte 0x02019338
-_080B00C4: .4byte gUnknown_083CA464
+_080B00C4: .4byte gSubspriteTables_83CA464
 	thumb_func_end sub_80B0034
 
 	thumb_func_start sub_80B00C8
