@@ -147,6 +147,7 @@ SECTIONS {
         src/item.o(.text);
         src/matsuda_debug_menu.o(.text);
         asm/contest.o(.text);
+        src/shop.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         src/script_menu.o(.text);
