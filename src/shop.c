@@ -34,6 +34,7 @@ extern u8 gBuyMenuFrame_Gfx[];
 
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
+extern u16 gUnknown_083CC710[2];
 
 extern void sub_80A6300(void);
 extern void sub_80BE3BC(void);
@@ -42,15 +43,18 @@ extern u8 sub_807D770(void);
 extern void pal_fill_black(void);
 extern void sub_80B3764(int, int);
 extern void sub_80B37EC(void);
-extern void sub_80B3270(void);
 extern void sub_80B40E8(u8);
-extern void sub_80B3240(void);
 extern void BuyMenuDrawMapGraphics(void);
+extern void sub_80F944C(void);
+extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
+extern void sub_80F979C(u32, u32); // unknown args
 
 void sub_80B2E38(u8);
 void HandleShopMenuQuit(u8);
 void sub_80B2FA0(u8);
 void BuyMenuDrawGraphics(void);
+void sub_80B3240(void);
+void sub_80B3270(void);
 
 u8 CreateShopMenu(bool8 var)
 {
@@ -279,5 +283,76 @@ void BuyMenuDrawGraphics(void)
 	gPaletteFade.bufferTransferDisabled = 0;
 	SetVBlankCallback(sub_80B30AC);
 	SetMainCallback2(sub_80B3094);
+	}
+}
+
+void sub_80B3240(void)
+{
+	u16 tempArr[2];
+	
+	memcpy(tempArr, gUnknown_083CC710, sizeof(tempArr));
+	LoadPalette(&tempArr[1], 0xD1, 2);
+	LoadPalette(&tempArr[0], 0xD8, 2);
+}
+
+void sub_80B3270(void)
+{
+	sub_80F944C();
+	
+	if(gUnknown_03000708.itemCount > 7)
+	{
+		CreateVerticalScrollIndicators(0, 172, 12);
+		CreateVerticalScrollIndicators(1, 172, 148);
+		sub_80F979C(0, 1);
+	}
+}
+
+void sub_80B32A4(void)
+{
+	if(gUnknown_03000708.unkB == 0)
+		sub_80F979C(0, 1);
+	else
+		sub_80F979C(0, 0);
+	
+	if(gUnknown_03000708.unkB + 7 >= gUnknown_03000708.itemCount)
+		sub_80F979C(1, 1);
+	else
+		sub_80F979C(1, 0);
+}
+
+void sub_80B32EC(u16 *array, s16 offset1, s16 offset2)
+{
+	array[offset1 + offset2] = 0xC3E1;
+	array[offset1 + offset2 + 1] = 0xC3E1;
+}
+
+void BuyMenuDrawMapMetatileLayer(u16 *array, s16 offset1, s16 offset2, u16 *array2)
+{
+	array[offset1 + offset2] = array2[0];
+	array[offset1 + offset2 + 1] = array2[1];
+	array[offset1 + offset2 + 32] = array2[2];
+	array[offset1 + offset2 + 33] = array2[3];
+}
+
+void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s8 var4)
+{
+	u8 tempVar4 = var4;
+	s16 offset1 = var1 * 2;
+	s16 offset2 = (var2 * 0x40) + 0x40;
+
+	switch(tempVar4)
+	{
+		case 0: // _080B335C
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3);
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
+			break;
+		case 1: // _080B3364
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
+			break;
+		case 2: // _080B3398
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
+			BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
+			break;
 	}
 }
