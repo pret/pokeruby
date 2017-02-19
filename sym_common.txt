@@ -122,7 +122,7 @@ gEnemyParty: @ 30045C0
 gUnknown_0300481C: @ 300481C
 	.space 0x4
 
-gUnknown_3004820: @ 3004820
+gFlashMemoryPresent: @ 3004820
 	.space 0x4
 
 gUnknown_03004824: @ 3004824

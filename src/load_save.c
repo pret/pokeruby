@@ -6,7 +6,7 @@
 #include "rom4.h"
 
 extern u8 gPlayerPartyCount;
-extern u32 gUnknown_3004820;
+extern bool32 gFlashMemoryPresent;
 
 struct LoadedSaveData
 {
@@ -24,11 +24,11 @@ void CheckForFlashMemory(void)
 {
     if (!IdentifyFlash())
     {
-        gUnknown_3004820 = 1;
+        gFlashMemoryPresent = TRUE;
         InitFlashTimer();
     }
     else
-        gUnknown_3004820 = 0;
+        gFlashMemoryPresent = FALSE;
 }
 
 bool32 GetSecretBase2Field_9(void)

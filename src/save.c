@@ -11,7 +11,7 @@ extern struct SaveSection unk_2000000;
 
 extern u32 gUnknown_02039284;
 
-extern u32 gUnknown_3004820;
+extern bool32 gFlashMemoryPresent;
 
 extern u16 gUnknown_03005E9C;
 extern u32 gUnknown_03005EA0;
@@ -581,7 +581,7 @@ u8 sub_8125C3C(u8 a1)
 
 u8 sub_8125D44(u8 a1)
 {
-    if (gUnknown_3004820 != 1)
+    if (gFlashMemoryPresent != TRUE)
         return 0xFF;
     sub_8125C3C(a1);
     if (!gUnknown_03005EA8)
@@ -592,7 +592,7 @@ u8 sub_8125D44(u8 a1)
 
 u8 sub_8125D80(void)
 {
-    if (gUnknown_3004820 != 1)
+    if (gFlashMemoryPresent != TRUE)
         return 1;
     SaveSerializedGame();
     sub_812546C(gSaveSectionLocations);
@@ -628,7 +628,7 @@ u8 sub_8125E04(void)
 
 u8 sub_8125E2C(void)
 {
-    if (gUnknown_3004820 != 1)
+    if (gFlashMemoryPresent != TRUE)
         return 1;
 
     SaveSerializedGame();
@@ -660,7 +660,7 @@ u8 sub_8125EC8(u8 a1)
 {
     u8 result;
 
-    if (gUnknown_3004820 != 1)
+    if (gFlashMemoryPresent != TRUE)
     {
         gSaveFileStatus = 4;
         return 0xFF;
