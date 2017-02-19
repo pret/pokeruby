@@ -1,6 +1,8 @@
 #ifndef GUARD_LOAD_SAVE_H
 #define GUARD_LOAD_SAVE_H
 
+extern bool32 gFlashMemoryPresent;
+
 void CheckForFlashMemory(void);
 bool32 GetSecretBase2Field_9(void);
 void ClearSecretBase2Field_9(void);

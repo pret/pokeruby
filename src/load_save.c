@@ -6,7 +6,8 @@
 #include "rom4.h"
 
 extern u8 gPlayerPartyCount;
-extern bool32 gFlashMemoryPresent;
+
+bool32 gFlashMemoryPresent;
 
 struct LoadedSaveData
 {

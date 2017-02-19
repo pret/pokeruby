@@ -122,8 +122,7 @@ gEnemyParty: @ 30045C0
 gUnknown_0300481C: @ 300481C
 	.space 0x4
 
-gFlashMemoryPresent: @ 3004820
-	.space 0x4
+	.include "load_save.o"
 
 gUnknown_03004824: @ 3004824
 	.space 0x4

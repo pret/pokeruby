@@ -15,7 +15,6 @@
 #include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
-extern bool32 gFlashMemoryPresent;
 extern u32 IntrMain[];
 
 static void VBlankIntr(void);

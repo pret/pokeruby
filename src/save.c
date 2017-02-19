@@ -11,8 +11,6 @@ extern struct SaveSection unk_2000000;
 
 extern u32 gUnknown_02039284;
 
-extern bool32 gFlashMemoryPresent;
-
 extern u16 gUnknown_03005E9C;
 extern u32 gUnknown_03005EA0;
 extern u16 gUnknown_03005EA4;
