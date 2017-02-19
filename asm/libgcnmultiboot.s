@@ -15,7 +15,7 @@
 	.equiv GCMB_STRUCT_IMAGE_SIZE,          0x12
 	.equiv GCMB_STRUCT_SESSION_KEY,         0x14
 	.equiv GCMB_STRUCT_HASH_VAL,            0x18
-	.equiv GCMB_STRUCT_KEYC_DERIVAT         0x1C
+	.equiv GCMB_STRUCT_KEYC_DERIVATION,     0x1C
 	.equiv GCMB_STRUCT_BASE_DEST_PTR,       0x20
 	.equiv GCMB_STRUCT_CUR_DEST_PTR,        0x24
 	.equiv GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
@@ -28,7 +28,7 @@
 	.equiv MBPROGRESS_LOGO_CORRECT,         0x01
 	.equiv MBPROGRESS_READY_TO_BOOT,        0x02
 	
-	.equiv GCMB_MAGIC_BOOTKEY_HASHVAL       0xBB
+	.equiv GCMB_MAGIC_BOOTKEY_HASHVAL,      0xBB
 	.equiv GCMB_MAGIC_BOOTKEY,              0xBB
 	.equiv GCMB_MAGIC_COUNTER2,             0xCC
 	.equiv GCMB_MAGIC_KEYA,                 0xDD
