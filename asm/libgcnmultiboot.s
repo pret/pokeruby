@@ -4,11 +4,36 @@
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
+	.equiv GCMB_STRUCT_COUNTER1,            0x00
+	.equiv GCMB_STRUCT_COUNTER2,            0x01
+	.equiv GCMB_STRUCT_MBPROGRESS,          0x02
+	.equiv GCMB_STRUCT_SAVEDVCOUNT,         0x03
+	.equiv GCMB_STRUCT_KEYA,                0x04
+	.equiv GCMB_STRUCT_KEYB,                0x08
+	.equiv GCMB_STRUCT_KEYC,                0x0C
+	.equiv GCMB_STRUCT_BOOT_KEY,            0x10
+	.equiv GCMB_STRUCT_IMAGE_SIZE,          0x12
+	.equiv GCMB_STRUCT_SESSION_KEY,         0x14
+	.equiv GCMB_STRUCT_HASH_VAL,            0x18
+	.equiv GCMB_STRUCT_KEYC_DERIVATION,     0x1C
 	.equiv GCMB_STRUCT_BASE_DEST_PTR,       0x20
 	.equiv GCMB_STRUCT_CUR_DEST_PTR,        0x24
 	.equiv GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
 
-	.equiv ROM_HEADER_NINTENDO_LOGO_OFFSET, 0x4
+	.equiv ROM_HEADER_NINTENDO_LOGO_OFFSET, 0x04
+	.equiv ROM_HEADER_NINTENDO_LOGO_LENGTH, 0x98
+	.equiv ROM_HEADER_NINTENDO_LOGO_END,    0xA0
+	
+	.equiv MBPROGRESS_NONE,                 0x00
+	.equiv MBPROGRESS_LOGO_CORRECT,         0x01
+	.equiv MBPROGRESS_READY_TO_BOOT,        0x02
+	
+	.equiv GCMB_MAGIC_BOOTKEY_HASHVAL,      0xBB
+	.equiv GCMB_MAGIC_BOOTKEY,              0xBB
+	.equiv GCMB_MAGIC_COUNTER2,             0xCC
+	.equiv GCMB_MAGIC_KEYA,                 0xDD
+	.equiv GCMB_MAGIC_KEYB,                 0xEE
+	.equiv GCMB_MAGIC_KEYCDERIVATION,       0xFF
 
 	.syntax unified
 
@@ -37,137 +62,177 @@ GameCubeMultiBoot_Hash_SkipEor:
 	thumb_func_start GameCubeMultiBoot_Main
 @ void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb)@
 GameCubeMultiBoot_Main: @ 81DCB4C
+	@ If there is no interrupt handler, skip counter manipulation
 	ldr r1, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
 	cmp r1, 0
-	beq _081DCB72
-	ldrb r1, [r0, 0x1]
+	beq GameCubeMultiBoot_Main_SkipCounters
+	@ Increment the second counter
+	ldrb r1, [r0, GCMB_STRUCT_COUNTER2]
 	adds r1, 0x1
-	strb r1, [r0, 0x1]
-	ldrb r1, [r0, 0x2]
-	cmp r1, 0x2
-	beq _081DCBBC
+	strb r1, [r0, GCMB_STRUCT_COUNTER2]
+	@ If there is nothing more to do, bail out
+	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
+	cmp r1, MBPROGRESS_READY_TO_BOOT
+	beq GameCubeMultiBoot_Main_Return
+	@ Save current interrupt master register value
 	ldr r3, pool_InterruptRegs
 	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
+	@ Disable all interrupts
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
-	ldrb r1, [r0]
+	@ Increment the first counter, if it's less than or equal to 10.
+	ldrb r1, [r0, GCMB_STRUCT_COUNTER1]
 	cmp r1, 0xA
-	bgt _081DCB70
+	bgt GameCubeMultiBoot_Main_SkipCounter1Inc
 	adds r1, 0x1
-	strb r1, [r0]
-_081DCB70:
+	strb r1, [r0, GCMB_STRUCT_COUNTER1]
+GameCubeMultiBoot_Main_SkipCounter1Inc:
+	@ Load the saved interrupt master register value (re-enables interrupts if they were enabled before)
 	strh r2, [r3, OFFSET_REG_IME - 0x200]
-_081DCB72:
+GameCubeMultiBoot_Main_SkipCounters:
+	@ Initialise multiboot structures if required
 	bcs GameCubeMultiBoot_Init
-	ldrb r1, [r0, 0x2]
-	cmp r1, 0
-	bne _081DCBBE
+	@ Skip this section (check Nintendo logo) if the check has already passed
+	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
+	cmp r1, MBPROGRESS_NONE
+	bne GameCubeMultiBoot_Main_SkipLogoCheck
+	@ Bail out if no multiboot image data has been transferred yet
 	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
 	ldr r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
 	subs r1, r2
-	beq _081DCC3E
-	cmp r1, 0xA0
-	bcc _081DCC3E
+	beq GameCubeMultiBoot_Main_Return2
+	@ Also bail out if not enough data has been transferred
+	cmp r1, ROM_HEADER_NINTENDO_LOGO_END
+	bcc GameCubeMultiBoot_Main_Return2
+	@ Compare the Nintendo logo of the transferred multiboot image header, with the one in the ROM image of the inserted cart
 	push {r4-r6}
-	movs r1, 0x98
+	movs r1, ROM_HEADER_NINTENDO_LOGO_LENGTH
 	adds r2, ROM_HEADER_NINTENDO_LOGO_OFFSET
 	ldr r4, pool_NintendoLogo
-_081DCB8E:
+GameCubeMultiBoot_Main_LogoCmpLoop:
 	ldm r2!, {r5}
 	ldm r4!, {r6}
 	cmp r5, r6
-	bne _081DCBA4
+	bne GameCubeMultiBoot_Main_LogoCmpEnd
 	subs r1, 0x4
-	bne _081DCB8E
+	bne GameCubeMultiBoot_Main_LogoCmpLoop
 	ldm r2!, {r5}
 	ldm r4!, {r6}
 	eors r5, r6
 	lsrs r5, 8
 	str r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
-_081DCBA4:
+GameCubeMultiBoot_Main_LogoCmpEnd:
 	pop {r4-r6}
+	@ Throw everything away if the logo data didn't match
 	bne GameCubeMultiBoot_Init
-	movs r1, 0x1
-	strb r1, [r0, 0x2]
-	ldr r1, [r0, 0x4]
-	ldr r2, [r0, 0x8]
+	@ Logo matched, set the relevent multiboot progress bit
+	movs r1, MBPROGRESS_LOGO_CORRECT
+	strb r1, [r0, GCMB_STRUCT_MBPROGRESS]
+	@ XOR together KeyA and KeyB to get the initial multiboot image checksum value
+	ldr r1, [r0, GCMB_STRUCT_KEYA]
+	ldr r2, [r0, GCMB_STRUCT_KEYB]
 	eors r1, r2
-	str r1, [r0, 0x18]
+	str r1, [r0, GCMB_STRUCT_HASH_VAL]
+	@ ...also use it as the initial value for the image encryption session key. Algorithm is the same as the GBA BIOS multiboot: sessionkey = (initialvalue * 0x6177614b) + 1
 	ldr r2, pool_Kawa
 	muls r1, r2
 	adds r1, 0x1
-	str r1, [r0, 0x14]
-_081DCBBC:
+	str r1, [r0, GCMB_STRUCT_SESSION_KEY]
+GameCubeMultiBoot_Main_Return:
 	bx lr
-_081DCBBE:
+GameCubeMultiBoot_Main_SkipLogoCheck:
+	@ If this code is executed, then the logo check has passed, and the data being transferred in is encrypted.
+	@ Set up registers.
 	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
 	mov r12, r1
-	ldr r3, [r0, 0x18]
+	ldr r3, [r0, GCMB_STRUCT_HASH_VAL]
 	push {r4-r7}
 	ldr r4, [r0, GCMB_STRUCT_BASE_DEST_PTR]
 	ldr r5, pool_Kawa
-	ldr r6, [r0, 0x14]
+	ldr r6, [r0, GCMB_STRUCT_SESSION_KEY]
 	ldr r7, pool_HashVal
-_081DCBCE:
+GameCubeMultiBoot_Main_ImageDecryptHashLoop:
+	@ If there's no more data, break out of the loop
 	cmp r4, r12
-	bcs _081DCBEE
+	bcs GameCubeMultiBoot_Main_ImageDecryptHashEnd
+	@ Get the next uint32
 	ldr r1, [r4]
+	@ Decrypt the ciphertext: plaintext = (ciphertext ^ sessionkey) + hashval
 	eors r1, r6
 	adds r1, r3
+	@ Save the current uint32 of plaintext and advance the pointer
 	stm r4!, {r1}
+	@ Advance the hashval with this uint32 of plaintext -- this is the same code as GameCubeMultiBoot_Hash.
 	eors r3, r1
 	movs r2, 0x20
-_081DCBDE:
+GameCubeMultiBoot_Main_HashLoop:
 	lsrs r3, 1
-	bcc _081DCBE4
+	bcc GameCubeMultiBoot_Main_HashSkipEor
 	eors r3, r7
-_081DCBE4:
+GameCubeMultiBoot_Main_HashSkipEor:
 	subs r2, 0x1
-	bne _081DCBDE
+	bne GameCubeMultiBoot_Main_HashLoop
+	@ Advance the sessionkey with the usual algorithm: sessionkey = (sessionkey * 0x6177614b) + 1
 	muls r6, r5
 	adds r6, 0x1
-	b _081DCBCE
-_081DCBEE:
+	b GameCubeMultiBoot_Main_ImageDecryptHashLoop
+GameCubeMultiBoot_Main_ImageDecryptHashEnd:
+	@ Save the new pointer, sessionkey, hashval
 	str r4, [r0, GCMB_STRUCT_BASE_DEST_PTR]
-	str r6, [r0, 0x14]
+	str r6, [r0, GCMB_STRUCT_SESSION_KEY]
 	pop {r4-r7}
-	str r3, [r0, 0x18]
-	ldrh r1, [r0, 0x12]
+	str r3, [r0, GCMB_STRUCT_HASH_VAL]
+	@ Bail out if the image size is unknown
+	ldrh r1, [r0, GCMB_STRUCT_IMAGE_SIZE]
 	cmp r1, 0
-	bne _081DCC3E
+	bne GameCubeMultiBoot_Main_Return2
+	@ Bail out if no image data has been transferred
 	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
 	ldr r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
 	cmp r1, r2
-	bne _081DCC3E
-	ldr r1, [r0, 0xC]
+	bne GameCubeMultiBoot_Main_Return2
+	@ If KeyC hasn't been generated yet, go generate it
+	ldr r1, [r0, GCMB_STRUCT_KEYC]
 	cmp r1, 0
-	beq _081DCC28
-	ldrh r1, [r0, 0x10]
+	beq GameCubeMultiBoot_Main_GenerateKeyC
+	@ If the other side hasn't sent its boot key yet, bail out
+	ldrh r1, [r0, GCMB_STRUCT_BOOT_KEY]
 	cmp r1, 0
-	beq _081DCBBC
+	beq GameCubeMultiBoot_Main_Return
+	@ Save off LR so it doesn't get clobbered by the upcoming function call
 	mov r12, lr
-	movs r1, 0xBB
-	ldr r3, [r0, 0xC]
+	@ Generate the real boot key, which is the checksum of a hardcoded value and KeyC
+	movs r1, GCMB_MAGIC_BOOTKEY_HASHVAL
+	ldr r3, [r0, GCMB_STRUCT_KEYC]
 	bl GameCubeMultiBoot_Hash
-	ldrh r1, [r0, 0x10]
+	ldrh r1, [r0, GCMB_STRUCT_BOOT_KEY]
+	@ Restore the saved LR value
 	mov lr, r12
+	@ Compare the two boot keys (real and passed in), if they don't match then throw everything away
 	subs r1, r3
 	bne GameCubeMultiBoot_Init
-	movs r1, 0x2
-	strb r1, [r0, 0x2]
+	@ The two boot keys matched, tell the caller that the image is ready to boot
+	movs r1, MBPROGRESS_READY_TO_BOOT
+	strb r1, [r0, GCMB_STRUCT_MBPROGRESS]
+	@ Nothing more to do, return.
 	bx lr
-_081DCC28:
+GameCubeMultiBoot_Main_GenerateKeyC:
+	@ Save off LR so it doesn't get clobbered by the upcoming function call
 	mov r12, lr
-	ldrb r1, [r0, 0x3]
+	@ KeyC = (SavedVCount << 24) - 1
+	ldrb r1, [r0, GCMB_STRUCT_SAVEDVCOUNT]
 	lsls r1, 24
 	subs r1, 0x1
-	str r1, [r0, 0xC]
+	str r1, [r0, GCMB_STRUCT_KEYC]
+	@ Hash the KeyC with the multiboot image checksum to generate the KeyC derivation material to be sent to the other side of the link
 	bl GameCubeMultiBoot_Hash
+	@ Make sure the sent KeyC derivation material contains a magic value so that the other side can detect it
 	lsls r3, 8
-	adds r3, 0xFF
-	str r3, [r0, 0x1C]
+	adds r3, GCMB_MAGIC_KEYCDERIVATION
+	@ Save off the KeyC derivation material and return to caller
+	str r3, [r0, GCMB_STRUCT_KEYC_DERIVATION]
 	bx r12
-_081DCC3E:
+GameCubeMultiBoot_Main_Return2:
 	bx lr
 	thumb_func_end GameCubeMultiBoot_Main
 
@@ -182,12 +247,15 @@ pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 	thumb_func_start GameCubeMultiBoot_ExecuteProgram
 @ void GameCubeMultiBoot_ExecuteProgram(struct GameCubeMultiBoot *mb)@
 GameCubeMultiBoot_ExecuteProgram: @ 81DCC4C
-	ldrb r1, [r0, 0x2]
-	cmp r1, 0x2
+	@ If there's no multiboot image ready, just return to caller
+	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
+	cmp r1, MBPROGRESS_READY_TO_BOOT
 	bne GameCubeMultiBoot_ExecuteProgram_Fail
+	@ Disable interrupts
 	ldr r3, pool_InterruptRegs
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
+	@ Jump to the real entry point of the multiboot image (past the image header), in ARM mode
 	ldr r1, pool_MultiBootLoadAddr
 	adds r1, 0xC0
 	bx r1
@@ -308,19 +376,25 @@ GameCubeMultiBoot_HandleSerialInterruptDone:
 	bx lr
 
 GameCubeMultiBoot_BeginHandshake:
+	@ Throw away anything that got sent
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
+	@ Send the game code, the other side of the link must send back the same game code
 	ldr r1, pool_RubyUSAGameCode
 	str r1, [r3, OFFSET_REG_JOY_TRANS - 0x120]
 	movs r1, 0x10
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
-	ldrb r1, [r0, 0x3]
-	strb r1, [r0, 0x9]
-	ldrb r1, [r0, 0x2]
+	@ Use the saved VCount value to provide 8 bits of entropy for KeyB
+	ldrb r1, [r0, GCMB_STRUCT_SAVEDVCOUNT]
+	strb r1, [r0, GCMB_STRUCT_KEYB + 1]
+	@ If a multiboot image has been transferred at least enough such that the Nintendo logo check has passed, stop everything.
+	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
 	cmp r1, 0
 	bne GcMbIntrHandler_Stop
+	@ Set the image destination pointers.
 	ldr r1, pool_MultiBootLoadAddr
 	str r1, [r0, GCMB_STRUCT_BASE_DEST_PTR]
 	str r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	@ Set the new interrupt handler.
 	adr r2, GcMbIntrHandler_CheckGameCodeSent
 	b GameCubeMultiBoot_SetInterruptHandler
 
@@ -347,84 +421,91 @@ GameCubeMultiBoot_CheckHandshakeResponse:
 	ldr r2, pool_RubyUSAGameCode
 	cmp r1, r2
 	bne GcMbIntrHandler_Stop @ stop if the GameCube didn't reply with the same game code
-	ldrb r1, [r0, 0x3]
-	strb r1, [r0, 0xB]
-	adr r2, GcMbIntrHandler_81DCD0C
+	@ Use the saved VCount value to provide another 8 bits of entropy for KeyB.
+	ldrb r1, [r0, GCMB_STRUCT_SAVEDVCOUNT]
+	strb r1, [r0, GCMB_STRUCT_KEYB + 3]
+	adr r2, GcMbIntrHandler_ReceiveKeyA
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD0C: @ 81DCD0C
+GcMbIntrHandler_ReceiveKeyA: @ 81DCD0C
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
+	@ make sure top 8 bits of the received value is the KeyA magic number, stop if KeyA is invalid 
 	lsrs r2, r1, 24
-	cmp r2, 0xDD
+	cmp r2, GCMB_MAGIC_KEYA
 	bne GcMbIntrHandler_Stop
-	str r1, [r0, 0x4]
-	ldrb r1, [r0, 0x1]
-	strb r1, [r0, 0xA]
+	@ save received KeyA
+	str r1, [r0, GCMB_STRUCT_KEYA]
+	@ use the second GameCubeMultiBoot_Main() counter as another 8 bits of entropy for KeyB
+	ldrb r1, [r0, GCMB_STRUCT_COUNTER2]
+	strb r1, [r0, GCMB_STRUCT_KEYB + 2]
 	movs r2, 0
 	movs r3, 0
-	ldr r1, [r0, 0x8]
+	ldr r1, [r0, GCMB_STRUCT_KEYB]
 	lsrs r1, 8
-_081DCD26:
+	@ make sure KeyB is valid (other side of the link is supposed to check KeyB too), if it's not then change the byte that was just set so it is
+GameCubeMultiBoot_KeyBCheckLoop:
 	lsrs r1, 1
 	adcs r2, r3
 	cmp r1, 0
-	bne _081DCD26
+	bne GameCubeMultiBoot_KeyBCheckLoop
 	cmp r2, 0xE
-	bgt _081DCD38
+	bgt GameCubeMultiBoot_KeyBSaveNewByte
 	cmp r2, 0x7
-	bge _081DCD3A
+	bge GameCubeMultiBoot_KeyBCheckEnd
 	movs r1, 0xFF
-_081DCD38:
-	strb r1, [r0, 0xA]
-_081DCD3A:
-	ldr r1, [r0, 0x8]
-	adds r1, 0xEE
+GameCubeMultiBoot_KeyBSaveNewByte:
+	strb r1, [r0, GCMB_STRUCT_KEYB + 2]
+GameCubeMultiBoot_KeyBCheckEnd:
+	@ add in the KeyB magic number and send off KeyB
+	ldr r1, [r0, GCMB_STRUCT_KEYB]
+	adds r1, GCMB_MAGIC_KEYB
 	ldr r3, pool_SerialRegs
 	str r1, [r3, OFFSET_REG_JOY_TRANS - 0x120]
 	movs r1, 0x30
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
-	adr r2, GcMbIntrHandler_81DCD4C
+	@ set new interrupt handler
+	adr r2, GcMbIntrHandler_CheckKeyBSent
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD4C: @ 81DCD4C
+GcMbIntrHandler_CheckKeyBSent: @ 81DCD4C
 	lsls r1, 31
 	bcc GcMbIntrHandler_Stop @ stop if send failed
-	bmi _081DCD5C @ branch if receive is complete
-	adr r2, GcMbIntrHandler_81DCD58
+	bmi GameCubeMultiBoot_CheckImageSizeResponse @ branch if receive is complete
+	adr r2, GcMbIntrHandler_CheckImageSizeResponse
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD58: @ 81DCD58
+GcMbIntrHandler_CheckImageSizeResponse: @ 81DCD58
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
-_081DCD5C:
+GameCubeMultiBoot_CheckImageSizeResponse:
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
-	ldr r2, _081DCDFC
+	ldr r2, GameCubeMultiBoot_MaximumImageSizeUInt32s
 	cmp r1, r2
 	bhs GcMbIntrHandler_Stop
 	adds r1, 0x1
 	adds r1, r1
-	strh r1, [r0, 0x12]
-	ldrb r1, [r0, 0x2]
+	strh r1, [r0, GCMB_STRUCT_IMAGE_SIZE]
+	ldrb r1, [r0, GCMB_STRUCT_MBPROGRESS]
 	cmp r1, 0
-_081DCD6E:
+GcMbIntrHandler_StopIfNotEqual:
 	bne GcMbIntrHandler_Stop
 	ldr r1, pool_MultiBootLoadAddr
 	str r1, [r0, GCMB_STRUCT_BASE_DEST_PTR]
 	str r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
-	adr r2, GcMbIntrHandler_81DCD7C
+	adr r2, GcMbIntrHandler_CheckImageResponse
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD7C: @ 81DCD7C
+GcMbIntrHandler_CheckImageResponse: @ 81DCD7C
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
@@ -433,63 +514,73 @@ GcMbIntrHandler_81DCD7C: @ 81DCD7C
 	adds r1, 0x8
 	lsls r1, 2
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
+	@ get the recieved uint32
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
+	@ put it in the current destination pointer and advance that pointer
 	stm r2!, {r1}
+	@ save off the advanced pointer
 	str r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
-	ldrh r1, [r0, 0x12]
+	@ decrease the image size (in uint32s)
+	ldrh r1, [r0, GCMB_STRUCT_IMAGE_SIZE]
 	subs r1, 0x1
-	strh r1, [r0, 0x12]
+	strh r1, [r0, GCMB_STRUCT_IMAGE_SIZE]
+	@ branch away if the transfer is not yet complete
 	bne GameCubeMultiBoot_ReadVCount
 
-_081DCD9A:
-	ldrb r1, [r0, 0x1]
+GcMbIntrHandler_SendCounter2:
+	@ send counter2 with magic number
+	ldrb r1, [r0, GCMB_STRUCT_COUNTER2]
 	lsls r1, 8
-	adds r1, 0xCC
+	adds r1, GCMB_MAGIC_COUNTER2
 	str r1, [r3, OFFSET_REG_JOY_TRANS - 0x120]
-	adr r2, _081DCDA8
+	adr r2, GcMbIntrHandler_CheckCounter2Sent
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-_081DCDA8:
+GcMbIntrHandler_CheckCounter2Sent:
 	lsls r1, 31
 
-_081DCDAA:
-	bcc GcMbIntrHandler_Stop
-	ldr r1, [r0, 0x1C]
+GcMbIntrHandler_StopIfSendFailed:
+	bcc GcMbIntrHandler_Stop @ stop if send failed
+	@ if KeyC derivation value has not yet been generated, send Counter2 again, otherwise, send KeyC derivation
+	ldr r1, [r0, GCMB_STRUCT_KEYC_DERIVATION]
 	cmp r1, 0
-	beq _081DCD9A
+	beq GcMbIntrHandler_SendCounter2
 	str r1, [r3, OFFSET_REG_JOY_TRANS - 0x120]
-	adr r2, GcMbIntrHandler_81DCDB8
+	adr r2, GcMbIntrHandler_CheckKeyCDerivationSent
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDB8: @ 81DCDB8
+GcMbIntrHandler_CheckKeyCDerivationSent: @ 81DCDB8
 	lsls r1, 31
-	bcc _081DCDAA @ branch if send failed
-	bmi _081DCDC8 @ branch if receive is complete
-	adr r2, GcMbIntrHandler_81DCDC4
+	bcc GcMbIntrHandler_StopIfSendFailed @ branch if send failed
+	bmi GameCubeMultiBoot_CheckBootKeyResponse @ branch if receive is complete
+	adr r2, GcMbIntrHandler_CheckBootKeyResponse
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDC4: @ 81DCDC4
+GcMbIntrHandler_CheckBootKeyResponse: @ 81DCDC4
 	lsrs r1, 1 @ is receive complete?
-	bcc _081DCDAA @ branch if not
+	bcc GcMbIntrHandler_StopIfSendFailed @ branch if not
 
-_081DCDC8:
+GameCubeMultiBoot_CheckBootKeyResponse:
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
+	@ make sure received boot key contains expected magic number, stop if not
 	lsrs r2, r1, 24
-	cmp r2, 0xBB
-	bne _081DCD6E
-	strh r1, [r0, 0x10]
-	adr r2, GcMbIntrHandler_81DCDD8
+	cmp r2, GCMB_MAGIC_BOOTKEY
+	bne GcMbIntrHandler_StopIfNotEqual
+	@ save received bootkey to be checked in GameCubeMultiBoot_Main()
+	strh r1, [r0, GCMB_STRUCT_BOOT_KEY]
+	@ stop if anything more gets sent
+	adr r2, GcMbIntrHandler_StopUnconditionally
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDD8: @ 81DCDD8
+GcMbIntrHandler_StopUnconditionally: @ 81DCDD8
 	b GcMbIntrHandler_Stop
 
 	thumb_func_end GameCubeMultiBoot_HandleSerialInterrupt
@@ -535,7 +626,7 @@ GameCubeMultiBoot_Quit: @ 81DCDDA
 
 	.align 2, 0
 
-_081DCDFC: .4byte 0x00004000
+GameCubeMultiBoot_MaximumImageSizeUInt32s: .4byte 0x00004000
 
 pool_InterruptRegs: .4byte REG_BASE + 0x200
 
