@@ -9,6 +9,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "battle_party_menu.h"
 
 struct PartyMenuItem
 {
@@ -59,23 +60,6 @@ extern u8 pokemon_order_func(u8);
 extern void sub_8094C98(u8, u8);
 extern void sub_806E6F0();
 extern void sub_806D538();
-
-struct UnknownStruct1
-{
-    u8 filler0[0x259];
-    u8 unk259;
-    u8 filler25A[6];
-    u8 unk260;
-    u8 filler261[1];
-    u8 unk262;
-    s16 unk264;
-    s16 unk266;
-};
-
-extern u8 unk_2000000[];
-
-#define EWRAM_1609D unk_2000000[0x1609D]
-#define EWRAM_1B000 (*(struct UnknownStruct1 *)(unk_2000000 + 0x1B000))
 
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;

@@ -186,6 +186,7 @@ SECTIONS {
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
+        src/script_pokemon_util_80F99CC.o(.text);
         asm/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
