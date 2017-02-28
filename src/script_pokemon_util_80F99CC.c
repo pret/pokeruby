@@ -318,3 +318,149 @@ void sub_80F9F84(void)
     GetMonNickname(party, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[data]);
 }
+
+// no. hard
+__attribute__((naked))
+void sub_80F9FDC(struct Pokemon *party, u8 var, u8 var2)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x20\n\
+    mov r8, r0\n\
+    adds r5, r1, 0\n\
+    adds r4, r2, 0\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r0, r5, 0\n\
+    adds r0, 0xD\n\
+    str r0, [sp, 0x8]\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0x8]\n\
+    bl GetMonData\n\
+    mov r1, sp\n\
+    adds r1, 0x2\n\
+    str r1, [sp, 0x14]\n\
+    strh r0, [r1]\n\
+    adds r3, r4, 0\n\
+    adds r3, 0xD\n\
+    str r3, [sp, 0xC]\n\
+    mov r0, r8\n\
+    adds r1, r3, 0\n\
+    bl GetMonData\n\
+    mov r1, sp\n\
+    strh r0, [r1]\n\
+    adds r7, r5, 0\n\
+    adds r7, 0x11\n\
+    str r7, [sp, 0x10]\n\
+    mov r0, r8\n\
+    adds r1, r7, 0\n\
+    bl GetMonData\n\
+    mov r1, sp\n\
+    adds r1, 0x5\n\
+    str r1, [sp, 0x18]\n\
+    strb r0, [r1]\n\
+    adds r3, r4, 0\n\
+    adds r3, 0x11\n\
+    str r3, [sp, 0x1C]\n\
+    mov r0, r8\n\
+    adds r1, r3, 0\n\
+    bl GetMonData\n\
+    add r7, sp, 0x4\n\
+    mov r10, r7\n\
+    strb r0, [r7]\n\
+    mov r0, r8\n\
+    movs r1, 0x15\n\
+    bl GetMonData\n\
+    mov r6, sp\n\
+    adds r6, 0x6\n\
+    strb r0, [r6]\n\
+    ldr r1, _080FA0D8 @ =gUnknown_08208238\n\
+    adds r0, r5, r1\n\
+    ldrb r0, [r0]\n\
+    mov r9, r0\n\
+    ldrb r0, [r6]\n\
+    adds r2, r0, 0\n\
+    mov r3, r9\n\
+    ands r2, r3\n\
+    lsls r5, 1\n\
+    asrs r2, r5\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    adds r1, r4, r1\n\
+    ldrb r3, [r1]\n\
+    adds r1, r0, 0\n\
+    ands r1, r3\n\
+    lsls r4, 1\n\
+    asrs r1, r4\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r7, r9\n\
+    bics r0, r7\n\
+    strb r0, [r6]\n\
+    ldrb r0, [r6]\n\
+    bics r0, r3\n\
+    strb r0, [r6]\n\
+    lsls r2, r4\n\
+    lsls r1, r5\n\
+    adds r2, r1\n\
+    ldrb r0, [r6]\n\
+    orrs r0, r2\n\
+    strb r0, [r6]\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0x8]\n\
+    mov r2, sp\n\
+    bl SetMonData\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0xC]\n\
+    ldr r2, [sp, 0x14]\n\
+    bl SetMonData\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0x10]\n\
+    mov r2, r10\n\
+    bl SetMonData\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0x1C]\n\
+    ldr r2, [sp, 0x18]\n\
+    bl SetMonData\n\
+    mov r0, r8\n\
+    movs r1, 0x15\n\
+    adds r2, r6, 0\n\
+    bl SetMonData\n\
+    add sp, 0x20\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080FA0D8: .4byte gUnknown_08208238\n\
+    .syntax divided");
+}
+
+void sub_80FA0DC(void)
+{
+    u16 i;
+
+    SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], 0, gSpecialVar_0x8005);
+    RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
+    
+    for(i = gSpecialVar_0x8005; i < 3; i++)
+        sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
+}
+
+void sub_80FA148(void)
+{
+    struct Pokemon *party = &gPlayerParty[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    
+    if(GetMonData(party, MON_DATA_IS_EGG))
+        gScriptResult = 1;
+}
