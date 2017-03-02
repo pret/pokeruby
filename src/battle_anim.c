@@ -81,6 +81,7 @@ EWRAM_DATA u8 gUnknown_0202F7C8 = 0;
 EWRAM_DATA u8 gUnknown_0202F7C9 = 0;
 EWRAM_DATA u16 gUnknown_0202F7CA[4] = {0};
 EWRAM_DATA u8 gUnknown_0202F7D2 = 0;
+EWRAM_DATA u8 gUnknown_0202F7D3 = 0; // not used, but needed to match some rare instances of ROM not matching due to missing u8 value.
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_03004200;
 extern u16 gUnknown_03004240;
