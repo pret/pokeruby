@@ -31,7 +31,7 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 	setflag 2133
 	end
 
-gUnknown_0815EF19:: @ 815EF19
+gIslandCave_EventScript_OpenRegiiceChamber:: @ 815EF19
 	setmaptile 7, 19, 554, 1
 	setmaptile 8, 19, 555, 1
 	setmaptile 9, 19, 556, 1
