@@ -3,20 +3,7 @@
 #include "field_camera.h"
 #include "metatile_behavior.h"
 #include "task.h"
-
-struct DoorGraphics
-{
-    u16 metatileNum;
-    u8 unk2;
-    void *tiles;
-    void *palette;
-};
-
-struct DoorAnimFrame
-{
-    u8 time;
-    u16 offset;
-};
+#include "field_door.h"
 
 extern struct DoorAnimFrame gDoorOpenAnimFrames[];
 extern struct DoorAnimFrame gDoorCloseAnimFrames[];

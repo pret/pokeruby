@@ -9,6 +9,7 @@
 #include "pokemon.h"
 #include "text.h"
 #include "string_util.h"
+#include "script_pokemon_80F9.h"
 
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;
@@ -35,18 +36,6 @@ extern u8 sub_806CA38();
 extern void sub_8123138(u8);
 extern u8 sub_8040574(struct Pokemon *party);
 extern void sub_809D9F0(struct Pokemon *party, u8, u8, void *, u32);
-
-void sub_80F9A8C(u8);
-void sub_80F9C00(void);
-void sub_80F9E1C(void);
-
-struct UnknownStruct2018000
-{
-    u8 filler0[0x8];
-    u8 unk8;
-};
-
-extern struct UnknownStruct2018000 unk_2018000;
 
 void sub_80F99CC(void)
 {

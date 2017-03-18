@@ -217,7 +217,7 @@ u32 VerifyFlashSector(u16 sectorNum, u8 *src)
     tgt = FLASH_BASE + (sectorNum << gFlash->sector.shift);
     size = gFlash->sector.size;
 
-    return verifyFlashSector_Core(src, tgt, size);
+    return verifyFlashSector_Core(src, tgt, size); // return 0 if verified.
 }
 
 u32 VerifyFlashSectorNBytes(u16 sectorNum, u8 *src, u32 n)
@@ -256,12 +256,12 @@ u32 VerifyFlashSectorNBytes(u16 sectorNum, u8 *src, u32 n)
     return verifyFlashSector_Core(src, tgt, n);
 }
 
-u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
+u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src) // 3rd is unused
 {
     u8 i;
     u32 result;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) // 3 attempts
     {
         result = ProgramFlashSector(sectorNum, src);
         if (result != 0)
@@ -272,7 +272,7 @@ u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
             break;
     }
 
-    return result;
+    return result; // return 0 if verified and programmed.
 }
 
 u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n)

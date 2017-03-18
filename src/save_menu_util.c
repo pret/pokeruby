@@ -81,22 +81,18 @@ void PrintSaveMapName(s16 x, s16 y)
 void PrintSaveBadges(s16 x, s16 y)
 {
     char badges[16];
-    u8 badgeCount;
 
     MenuPrint(gOtherText_Badges, x, y);
-    badgeCount = GetBadgeCount();
-    ConvertIntToDecimalString(badges, badgeCount);
+    ConvertIntToDecimalString(badges, GetBadgeCount());
     MenuPrint_RightAligned(badges, x + 12, y);
 }
 
 void PrintSavePokedexCount(s16 x, s16 y)
 {
     char pokedex[16];
-    u16 pokedexCount;
 
     MenuPrint(gOtherText_Pokedex, x, y);
-    pokedexCount = GetPokedexSeenCount();
-    ConvertIntToDecimalStringN(pokedex, pokedexCount, 1, 3);
+    ConvertIntToDecimalStringN(pokedex, GetPokedexSeenCount(), 1, 3);
     MenuPrint_RightAligned(pokedex, x + 12, y);
 }
 

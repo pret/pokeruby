@@ -11,19 +11,6 @@
 #include "text.h"
 #include "battle_party_menu.h"
 
-struct PartyMenuItem
-{
-    const u8 *text;
-    TaskFunc func;
-};
-
-struct PartyPopupMenu
-{
-    u8 unk0;
-    u8 unk1;
-    const u8 *unk4;
-};
-
 extern u8 IsLinkDoubleBattle(void);
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
 extern void LoadHeldItemIconGraphics(void);

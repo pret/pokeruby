@@ -17,6 +17,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
+#include "naming_screen.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 

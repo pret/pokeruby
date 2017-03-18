@@ -3,6 +3,7 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "rom4.h"
+#include "rom6.h"
 
 extern void sub_8087BA8(void);
 

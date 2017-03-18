@@ -16,6 +16,8 @@
 #include "task.h"
 #include "wild_encounter.h"
 #include "map_object_constants.h"
+#include "bike.h"
+#include "field_map_obj_helpers.h"
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];

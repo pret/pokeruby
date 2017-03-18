@@ -3,6 +3,7 @@
 #include "asm.h"
 #include "field_player_avatar.h"
 #include "task.h"
+#include "field_map_obj_helpers.h"
 
 extern u16 gScriptFacing;
 

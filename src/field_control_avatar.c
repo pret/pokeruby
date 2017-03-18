@@ -13,6 +13,8 @@
 #include "trainer_see.h"
 #include "vars.h"
 #include "wild_encounter.h"
+#include "bike.h"
+#include "field_control_avatar.h"
 
 struct Coords32
 {

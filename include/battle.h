@@ -107,9 +107,12 @@ struct SmallItemStruct
 
 struct BattleStruct /* 0x2000000 */
 {
-    u8 filler0[0x1601C];
+    u8 filler0[0x15DDE];
+	/*0x15DDE*/ u8 unk15DDE;
+	/*0x15DDF*/ u8 unk15DDF;
+	/*0x15DE0*/ u8 filler15DE0[0x23C]; // 0xAF off?
     struct SmallBattleStruct1 unk;
-    u8 filler1[0x68]; // 0x2016020
+    u8 filler1[0x68];
     /* 0x16089 */ u8 safariFleeRate;
     u8 filler1_2[0x42];
     /* 0x160CB */ u8 linkPlayerIndex;

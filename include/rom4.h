@@ -20,7 +20,7 @@ struct LinkPlayerMapObject
 // sub_8052F5C
 // flag_var_implications_of_teleport_
 void new_game(void);
-// sub_8053014
+void sub_8053014(void);
 void sub_8053050(void);
 // sub_805308C
 void ResetGameStats(void);

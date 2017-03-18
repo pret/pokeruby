@@ -402,7 +402,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)
-        sub_8125D44(1);
+        TrySavingData(LINK_SAVE);
     if (gMain.newKeys & SELECT_BUTTON)
         sub_800832C();
     if (gLinkTestDebugValuesEnabled)

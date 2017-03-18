@@ -34,7 +34,7 @@ extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
 extern u32 gIntroFrameCounter;
-extern struct GcmbStruct gUnknown_03005EE0;
+extern struct GcmbStruct gMultibootProgramStruct;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
 extern struct SpriteSheet gMonFrontPicTable[];
@@ -851,7 +851,7 @@ static void LoadCopyrightGraphics(u16 a1, u16 a2, u16 a3)
 
 static void SerialCb_CopyrightScreen(void)
 {
-    GameCubeMultiBoot_HandleSerialInterrupt(&gUnknown_03005EE0);
+    GameCubeMultiBoot_HandleSerialInterrupt(&gMultibootProgramStruct);
 }
 
 static u8 SetUpCopyrightScreen(void)
@@ -892,15 +892,15 @@ static u8 SetUpCopyrightScreen(void)
         SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
         SetSerialCallback(SerialCb_CopyrightScreen);
-        GameCubeMultiBoot_Init(&gUnknown_03005EE0);
+        GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     default:
         UpdatePaletteFade();
         gMain.state++;
-        GameCubeMultiBoot_Main(&gUnknown_03005EE0);
+        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         break;
     case 140:
-        GameCubeMultiBoot_Main(&gUnknown_03005EE0);
-        if (gUnknown_03005EE0.gcmb_field_2 != 1)
+        GameCubeMultiBoot_Main(&gMultibootProgramStruct);
+        if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
             BeginNormalPaletteFade(0xFFFFFFFFu, 0, 0, 0x10, 0);
             gMain.state++;
@@ -911,9 +911,9 @@ static u8 SetUpCopyrightScreen(void)
             break;
         CreateTask(Task_IntroLoadPart1Graphics, 0);
         SetMainCallback2(MainCB2_Intro);
-        if (gUnknown_03005EE0.gcmb_field_2)
+        if (gMultibootProgramStruct.gcmb_field_2)
         {
-            GameCubeMultiBoot_ExecuteProgram(&gUnknown_03005EE0);
+            GameCubeMultiBoot_ExecuteProgram(&gMultibootProgramStruct);
         }
         else
         {
@@ -931,7 +931,7 @@ void c2_copyright_1(void)
     if (!SetUpCopyrightScreen())
     {
         sub_8052E4C();
-        sub_81251B8();
+        ResetSaveCounters();
         sub_8125EC8(0);
         if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
             ClearSav2();

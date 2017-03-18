@@ -8,6 +8,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "rom6.h"
+#include "braille_puzzles.h"
 
 extern u16 gScriptLastTalked;
 extern u32 gUnknown_0202FF84[];
@@ -17,10 +19,6 @@ extern u8 gUnknown_03005CE0;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
 
-extern bool8 ShouldDoBrailleDigEffect(void);
-extern void DoBrailleDigEffect(void);
-extern void sub_8053014(void);
-extern void sub_8059BF4(void);
 extern void sub_808AB90(void);
 extern void task08_080A1C44(u8);
 extern u8 sub_80CA1C8(void);

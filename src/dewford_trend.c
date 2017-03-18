@@ -4,11 +4,9 @@
 #include "link.h"
 #include "rng.h"
 #include "text.h"
+#include "dewford_trend.h"
 
 extern u8 unk_2000000[];
-
-#define ARRAY_2007800 ((struct EasyChatPair *)(unk_2000000 + 0x7800))
-#define ARRAY_2007900 ((struct EasyChatPair *)(unk_2000000 + 0x7900))
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

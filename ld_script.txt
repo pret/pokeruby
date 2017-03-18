@@ -139,6 +139,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.text);
         asm/pokemon_summary_screen.o(.text_80A0958);
         src/script_movement.o(.text);
+        src/fldeff_cut.o(.text);
         asm/fldeff_cut.o(.text);
         asm/mail_data.o(.text);
         src/map_name_popup.o(.text);
@@ -167,7 +168,7 @@ SECTIONS {
         asm/tv.o(.text_80C1C5C);
         src/tv.o(.text_d);
         asm/contest_link_80C2020.o(.text);
-        asm/script_pokemon_util_80C4BF0.o(.text);
+        src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
@@ -313,7 +314,7 @@ SECTIONS {
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
-        data/metatile_behavior.o(.rodata);
+        src/metatile_behavior.o(.rodata);
         data/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
         data/field_player_avatar.o(.rodata);
@@ -367,7 +368,7 @@ SECTIONS {
         data/contest.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
-        data/script_menu.o(.rodata);
+        src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
         data/money.o(.rodata);
@@ -379,6 +380,7 @@ SECTIONS {
         data/contest_link_80C2020.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         data/fldeff_80C5CD4.o(.rodata);
+        src/field_special_scene.o(.rodata);
         data/field_special_scene.o(.rodata);
         data/rotating_gate.o(.rodata);
         data/item_use.o(.rodata);
@@ -412,7 +414,7 @@ SECTIONS {
         data/battle_message.o(.rodata);
         data/choose_party.o(.rodata);
         data/cable_car.o(.rodata);
-        data/save.o(.rodata);
+        src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
         data/rom_81258BC.o(.rodata);
@@ -423,11 +425,10 @@ SECTIONS {
         src/credits.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
-        data/diploma.o(.rodata);
-        data/strings.o(.rodata);
+        src/diploma.o(.rodata);
+        src/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
         src/save_failed_screen.o(.rodata);
-        data/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);

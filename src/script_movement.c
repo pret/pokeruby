@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "task.h"
+#include "field_map_obj_helpers.h"
 
 extern const u32 gBitTable[];
 extern u8 *gUnknown_020384F8[];

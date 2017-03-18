@@ -22,6 +22,7 @@
 #include "task.h"
 #include "trainer_card.h"
 #include "weather.h"
+#include "field_map_obj_helpers.h"
 
 //Menu actions
 enum {
@@ -41,7 +42,7 @@ static u8 (*saveDialogCallback)(void);
 static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
 static bool8 savingComplete;
 
-extern bool8 gUnknown_020297EC;
+extern bool8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
 extern u16 gScriptResult;
 extern u8 (*gCallback_03004AE8)(void);
@@ -586,7 +587,6 @@ static u8 SaveDialogCB_DisplayConfirmMessage(void)
 {
     MenuZeroFillScreen();
     HandleDrawSaveWindowInfo(0, 0);
-    //"Would you like to save the game?"
     DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_DisplayConfirmYesNoMenu);
     return SAVE_IN_PROGRESS;
 }
@@ -608,7 +608,7 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
             {
                 case 0:
                 case 2:
-                    if (gUnknown_020297EC == FALSE)
+                    if (gDifferentSaveFile == FALSE)
                     {
                         saveDialogCallback = SaveDialogCB_SaveFileExists;
                         return SAVE_IN_PROGRESS;
@@ -632,7 +632,7 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 static u8 SaveDialogCB_SaveFileExists(void)
 {
     DisplaySaveMessageWithCallback(
-      gUnknown_020297EC == TRUE ? gSaveText_ThereIsADifferentFile : gSaveText_ThereIsAlreadyAFile,
+      gDifferentSaveFile == TRUE ? gSaveText_ThereIsADifferentFile : gSaveText_ThereIsAlreadyAFile,
       SaveDialogCB_DisplayOverwriteYesNoMenu);
     return SAVE_IN_PROGRESS;
 }
@@ -670,20 +670,20 @@ static u8 SaveDialogCB_DisplaySavingMessage(void)
 
 static u8 SaveDialogCB_DoSave(void)
 {
-    u8 a;
+    bool8 saveSucceeded;
 
     IncrementGameStat(0);
-    if (gUnknown_020297EC == TRUE)
+    if (gDifferentSaveFile == TRUE)
     {
-        a = sub_8125D44(4);
-        gUnknown_020297EC = FALSE;
+        saveSucceeded = TrySavingData(DIFFERENT_FILE_SAVE);
+        gDifferentSaveFile = FALSE;
     }
     else
     {
-        a = sub_8125D44(0);
+        saveSucceeded = TrySavingData(NORMAL_SAVE);
     }
 
-    if (a == 1)
+    if (saveSucceeded == TRUE)
     {
         //"(Player) saved the game."
         DisplaySaveMessageWithCallback(gSaveText_PlayerSavedTheGame, SaveDialogCB_SaveSuccess);

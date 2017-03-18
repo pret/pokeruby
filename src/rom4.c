@@ -30,6 +30,10 @@
 #include "tileset_anim.h"
 #include "weather.h"
 #include "wild_encounter.h"
+#include "script_pokemon_80C4.h"
+#include "clock.h"
+#include "field_map_obj_helpers.h"
+#include "field_control_avatar.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain

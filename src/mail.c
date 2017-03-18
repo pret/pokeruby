@@ -9,6 +9,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "name_string_util.h"
 
 struct UnkMailStruct
 {

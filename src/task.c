@@ -1,48 +1,48 @@
 #include "global.h"
 #include "task.h"
 
-#define NUM_TASKS 16
-
+#define ACTIVE_SENTINEL 0x10
 #define HEAD_SENTINEL 0xFE
 #define TAIL_SENTINEL 0xFF
 
-struct Task gTasks[NUM_TASKS];
+// gTasks is a queue of the active 16 tasks
+struct Task gTasks[ACTIVE_SENTINEL];
 
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();
 
 void ResetTasks()
 {
-    u8 i;
+    u8 taskId;
 
-    for (i = 0; i < NUM_TASKS; i++)
+    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
     {
-        gTasks[i].isActive = FALSE;
-        gTasks[i].func = TaskDummy;
-        gTasks[i].prev = i;
-        gTasks[i].next = i + 1;
-        gTasks[i].priority = -1;
-        memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
+        gTasks[taskId].isActive = FALSE;
+        gTasks[taskId].func = TaskDummy;
+        gTasks[taskId].prev = taskId;
+        gTasks[taskId].next = taskId + 1;
+        gTasks[taskId].priority = -1;
+        memset(gTasks[taskId].data, 0, sizeof(gTasks[taskId].data));
     }
 
     gTasks[0].prev = HEAD_SENTINEL;
-    gTasks[NUM_TASKS - 1].next = TAIL_SENTINEL;
+    gTasks[ACTIVE_SENTINEL - 1].next = TAIL_SENTINEL;
 }
 
 u8 CreateTask(TaskFunc func, u8 priority)
 {
-    u8 i;
+    u8 taskId;
 
-    for (i = 0; i < NUM_TASKS; i++)
+    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
     {
-        if (!gTasks[i].isActive)
+        if (!gTasks[taskId].isActive)
         {
-            gTasks[i].func = func;
-            gTasks[i].priority = priority;
-            InsertTask(i);
-            memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
-            gTasks[i].isActive = TRUE;
-            return i;
+            gTasks[taskId].func = func;
+            gTasks[taskId].priority = priority;
+            InsertTask(taskId);
+            memset(gTasks[taskId].data, 0, sizeof(gTasks[taskId].data));
+            gTasks[taskId].isActive = TRUE;
+            return taskId;
         }
     }
 
@@ -53,9 +53,9 @@ static void InsertTask(u8 newTaskId)
 {
     u8 taskId = FindFirstActiveTask();
 
-    if (taskId == NUM_TASKS)
+    if (taskId == ACTIVE_SENTINEL)
     {
-        // The new task is the only task.
+        // The task system inserts from the top downwards starting from the end (0xFF) to 0. If FindFirstActiveTask returned the value equivalent to ACTIVE_SENTINEL, it means it is the only task because it searched the entire queue.
         gTasks[newTaskId].prev = HEAD_SENTINEL;
         gTasks[newTaskId].next = TAIL_SENTINEL;
         return;
@@ -69,12 +69,14 @@ static void InsertTask(u8 newTaskId)
             // so we insert the new task before it.
             gTasks[newTaskId].prev = gTasks[taskId].prev;
             gTasks[newTaskId].next = taskId;
+
             if (gTasks[taskId].prev != HEAD_SENTINEL)
-                gTasks[gTasks[taskId].prev].next = newTaskId;
+                gTasks[gTasks[taskId].prev].next = newTaskId; // as long as we are not at the end, insert the newTask appropriately.
+
             gTasks[taskId].prev = newTaskId;
             return;
         }
-        if (gTasks[taskId].next == TAIL_SENTINEL)
+        if (gTasks[taskId].next == TAIL_SENTINEL) // we did not find a space for the task, so overwrite the last task as it is the lowest priority.
         {
             // We've reached the end.
             gTasks[newTaskId].prev = taskId;
@@ -82,7 +84,7 @@ static void InsertTask(u8 newTaskId)
             gTasks[taskId].next = newTaskId;
             return;
         }
-        taskId = gTasks[taskId].next;
+        taskId = gTasks[taskId].next; // neither the priority was lower, nor the end. check the next task.
     }
 }
 
@@ -112,11 +114,11 @@ void DestroyTask(u8 taskId)
     }
 }
 
-void RunTasks()
+void RunTasks(void)
 {
     u8 taskId = FindFirstActiveTask();
 
-    if (taskId != NUM_TASKS)
+    if (taskId != ACTIVE_SENTINEL)
     {
         do
         {
@@ -126,11 +128,11 @@ void RunTasks()
     }
 }
 
-static u8 FindFirstActiveTask()
+static u8 FindFirstActiveTask(void)
 {
     u8 taskId;
 
-    for (taskId = 0; taskId < NUM_TASKS; taskId++)
+    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
         if (gTasks[taskId].isActive == TRUE && gTasks[taskId].prev == HEAD_SENTINEL)
             break;
 
@@ -173,7 +175,7 @@ bool8 FuncIsActiveTask(TaskFunc func)
 {
     u8 i;
 
-    for (i = 0; i < NUM_TASKS; i++)
+    for (i = 0; i < ACTIVE_SENTINEL; i++)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return TRUE;
 
@@ -184,19 +186,19 @@ u8 FindTaskIdByFunc(TaskFunc func)
 {
     s32 i;
 
-    for (i = 0; i < NUM_TASKS; i++)
+    for (i = 0; i < ACTIVE_SENTINEL; i++)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
     return -1;
 }
 
-u8 GetTaskCount()
+u8 GetTaskCount(void)
 {
     u8 i;
     u8 count = 0;
 
-    for (i = 0; i < NUM_TASKS; i++)
+    for (i = 0; i < ACTIVE_SENTINEL; i++)
         if (gTasks[i].isActive == TRUE)
             count++;
 

@@ -6,6 +6,7 @@
 #include "rom4.h"
 #include "rtc.h"
 #include "wallclock.h"
+#include "clock.h"
 
 extern void sub_80FA220(u16);
 extern void sub_80BE8C4(u16);

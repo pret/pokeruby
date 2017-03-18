@@ -71,6 +71,11 @@ enum
     BAG_KEYITEMS
 };
 
+struct TextStruct
+{
+	const u8 *text;
+};
+
 struct Coords16
 {
     s16 x;
@@ -167,7 +172,8 @@ struct RamScript
 
 struct SB1_2EFC_Struct
 {
-    u8 unknown[0x20];
+	u16 var;
+    u8 unknown[0x1E];
 };
 
 struct EasyChatPair
@@ -295,6 +301,25 @@ typedef union OldMan {
 	struct UnkMauvilleOldManStruct2 oldMan2;
 } OldMan;
 
+struct Unk_SB_Access_Struct1
+{
+	u8 filler0[0xF8];
+	struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+};
+
+struct Unk_SB_Access_Struct2
+{
+	struct SB1_2EFC_Struct sb1_2EFC_struct2[12]; // each is 0x20
+ /*0x2F84*/ u8 filler[0x18];
+};
+
+/*0x2E04*/
+typedef union SB_Struct {
+	struct Unk_SB_Access_Struct1 unkSB1;
+	struct Unk_SB_Access_Struct2 unkSB2;
+} SB_Struct;
+// size is 0x198
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -364,8 +389,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D94*/ OldMan oldMan;
     /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2DFC*/ u8 filler_2DFC[0x100];
-    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    /*0x2DFC*/ u8 filler_2DFC[0x8];
+	/*0x2E04*/ SB_Struct sbStruct;
     /*0x2F9C*/ u8 filler_2F9C[0xA0];
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];
