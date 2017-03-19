@@ -33,3 +33,4 @@ unk_201C000 = 0x201C000;
 
 gHallOfFame = 0x201E000;
 unk_201f800 = 0x201F800;
+unk_201FFF0 = 0x201FFF0;
