@@ -338,13 +338,13 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
 
     if (bgEvent == NULL)
         return NULL;
-    if (bgEvent->script == NULL)
+    if (bgEvent->bgUnion.script == NULL)
         return gUnknown_081C6C02;
     switch (bgEvent->kind)
     {
         case 0:
         default:
-            return bgEvent->script;
+            return bgEvent->bgUnion.script;
         case 1:
             if (c != 2)
                 return NULL;
@@ -364,21 +364,21 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
         case 5:
         case 6:
         case 7:
-            gSpecialVar_0x8004 = ((u32)bgEvent->script >> 16) + 0x258;
-            gSpecialVar_0x8005 = (u32)bgEvent->script;
+            gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + 0x258;
+            gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
             if (FlagGet(gSpecialVar_0x8004) == TRUE)
                 return NULL;
             return HiddenItemScript;
         case 8:
             if (c == 2)
             {
-                gSpecialVar_0x8004 = (u32)bgEvent->script;
+                gSpecialVar_0x8004 = (u32)bgEvent->bgUnion.script;
                 if (sub_80BC050())
                     return gUnknown_081A2C51;
             }
             return NULL;
     }
-    return bgEvent->script;
+    return bgEvent->bgUnion.script;
 }
 
 static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
