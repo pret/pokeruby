@@ -14,7 +14,7 @@
 #include "trig.h"
 #include "map_obj_lock.h"
 
-extern u8 unk_201FFF0[8]; // seems to be an array of 8 sprite IDs
+extern u8 gCutGrassSpriteArray[8]; // seems to be an array of 8 sprite IDs
 
 extern void (*gUnknown_0300485C)(void);
 extern void (*gUnknown_03005CE4)(void);
@@ -23,8 +23,8 @@ extern struct SpriteTemplate gSpriteTemplate_CutGrass;
 
 extern struct MapPosition gUnknown_0203923C;
 
-extern u8 gUnknown_03005CE0;
-extern u32 gUnknown_0202FF84;
+extern u8 gLastFieldPokeMenuOpened;
+extern u32 gUnknown_0202FF84[];
 
 extern u8 UseCutScript;
 
@@ -65,7 +65,7 @@ bool8 SetUpFieldMove_Cut(void)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
-                    || MetatileBehavior_IsAsh(tileBehavior) == TRUE)
+                    || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
                         gUnknown_0300485C = sub_808AB90;
                         gUnknown_03005CE4 = sub_80A25E8;
@@ -81,7 +81,7 @@ bool8 SetUpFieldMove_Cut(void)
 void sub_80A25E8(void)
 {
     FieldEffectStart(1);
-    gUnknown_0202FF84 = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_UseCutOnGrass(void)
@@ -96,7 +96,7 @@ bool8 FldEff_UseCutOnGrass(void)
 
 void sub_80A2634(void)
 {
-    gUnknown_0202FF84 = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(&UseCutScript);
 }
 
@@ -131,7 +131,7 @@ bool8 FldEff_CutGrass(void)
             if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
             {
                 tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-                if(sub_80578F8(tileBehavior) == TRUE)
+                if(MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
                 {
                     sub_80A27A8(x, y);
                     sub_805BCC0(x, y);
@@ -145,9 +145,9 @@ bool8 FldEff_CutGrass(void)
     // populate sprite ID array
     for(i = 0; i < 8; i++)
     {
-        unk_201FFF0[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
+        gCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
         gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
-        gSprites[unk_201FFF0[i]].data2 = 32 * i;
+        gSprites[gCutGrassSpriteArray[i]].data2 = 32 * i;
     }
     return 0;
 }
@@ -284,10 +284,10 @@ void sub_80A2AB8(void)
     
     for(i = 1; i < 8; i++)
     {
-        DestroySprite(&gSprites[unk_201FFF0[i]]);
+        DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
     }
     
-    FieldEffectStop(&gSprites[unk_201FFF0[0]], 0x3A);
+    FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], 0x3A);
     sub_8064E2C();
     ScriptContext2_Disable();
 }

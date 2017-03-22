@@ -16,7 +16,7 @@
 #include "rom6.h"
 
 extern u8 gPlayerPartyCount;
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 
 extern u32 gUnknown_0202FF84[];
 
@@ -106,7 +106,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void DoBrailleFlyEffect(void)
 {
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(0x3C);
 }
 

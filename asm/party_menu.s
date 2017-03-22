@@ -10413,13 +10413,13 @@ _080702B0:
 	ldr r1, [r4, 0x10]
 	str r1, [r0]
 _080702C6:
-	ldr r1, _080702D4 @ =gUnknown_03005CE0
+	ldr r1, _080702D4 @ =gLastFieldPokeMenuOpened
 	movs r0, 0
 	strb r0, [r1]
 	b _080702DE
 	.align 2, 0
 _080702D0: .4byte gTasks
-_080702D4: .4byte gUnknown_03005CE0
+_080702D4: .4byte gLastFieldPokeMenuOpened
 _080702D8:
 	adds r0, r5, 0
 	bl sub_8070088

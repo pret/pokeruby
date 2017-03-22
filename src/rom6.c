@@ -15,7 +15,7 @@ extern u16 gScriptLastTalked;
 extern u32 gUnknown_0202FF84[];
 extern struct MapPosition gUnknown_0203923C;
 extern void (*gUnknown_0300485C)(void);
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
 
@@ -134,7 +134,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 
 static void sub_810B53C(void)
 {
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(UseRockSmashScript);
 }
 
@@ -173,7 +173,7 @@ static void sub_810B5D8(void)
 {
     sub_8053014();
     FieldEffectStart(0x26);
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
 }
 
 int FldEff_UseDig(void)

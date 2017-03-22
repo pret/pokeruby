@@ -1620,7 +1620,7 @@ task00_8084310: @ 8086604
 	cmp r0, 0
 	beq _08086666
 	ldr r1, _08086670 @ =gUnknown_0202FF84
-	ldr r0, _08086674 @ =gUnknown_03005CE0
+	ldr r0, _08086674 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	cmp r0, 0x5
@@ -1654,7 +1654,7 @@ _08086666:
 	.align 2, 0
 _0808666C: .4byte gTasks
 _08086670: .4byte gUnknown_0202FF84
-_08086674: .4byte gUnknown_03005CE0
+_08086674: .4byte gLastFieldPokeMenuOpened
 _08086678: .4byte CB2_LoadMap
 _0808667C: .4byte gUnknown_0300485C
 _08086680: .4byte mapldr_08084390

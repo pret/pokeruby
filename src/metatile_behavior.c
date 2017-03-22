@@ -826,9 +826,9 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8 var)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsAsh(u8 var)
+bool8 MetatileBehavior_IsAshGrass(u8 var)
 {
-    if (var == MB_ASH)
+    if (var == MB_ASHGRASS)
         return TRUE;
     else
         return FALSE;
@@ -1236,9 +1236,9 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 var)
         return FALSE;
 }
 
-bool8 sub_80578F8(u8 var)
+bool8 MetatileBehavior_IsCuttableGrass(u8 var)
 {
-    if (var == MB_TALL_GRASS || var == MB_LONG_GRASS || var == MB_ASH || var == MB_LONG_GRASS_SOUTH_EDGE)
+    if (var == MB_TALL_GRASS || var == MB_LONG_GRASS || var == MB_ASHGRASS || var == MB_LONG_GRASS_SOUTH_EDGE)
         return TRUE;
     else
         return FALSE;

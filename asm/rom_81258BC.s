@@ -2244,14 +2244,14 @@ sub_812BFD4: @ 812BFD4
 	movs r0, 0x33
 	bl FieldEffectStart
 	ldr r0, _0812BFE8 @ =gUnknown_0202FF84
-	ldr r1, _0812BFEC @ =gUnknown_03005CE0
+	ldr r1, _0812BFEC @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0812BFE8: .4byte gUnknown_0202FF84
-_0812BFEC: .4byte gUnknown_03005CE0
+_0812BFEC: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_812BFD4
 
 	thumb_func_start FldEff_SweetScent
@@ -18242,7 +18242,7 @@ SetUpFieldMove_SoftBoiled: @ 8133CCC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, _08133D14 @ =gUnknown_03005CE0
+	ldr r0, _08133D14 @ =gLastFieldPokeMenuOpened
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r6, 0x64
@@ -18273,7 +18273,7 @@ SetUpFieldMove_SoftBoiled: @ 8133CCC
 	movs r0, 0
 	b _08133D1E
 	.align 2, 0
-_08133D14: .4byte gUnknown_03005CE0
+_08133D14: .4byte gLastFieldPokeMenuOpened
 _08133D18: .4byte gPlayerParty
 _08133D1C:
 	movs r0, 0x1
