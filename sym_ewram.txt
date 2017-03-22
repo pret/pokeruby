@@ -335,7 +335,7 @@ gUnknown_020297E4: @ 20297E4
 gUnknown_020297E8: @ 20297E8
 	.space 0x4
 
-gUnknown_020297EC: @ 20297EC
+gDifferentSaveFile: @ 20297EC
 	.space 0x1
 
 gUnknown_020297ED: @ 20297ED
@@ -512,13 +512,7 @@ gUnknown_0202FF58: @ 202FF58
 	.include "src/wild_encounter.o"
 
 gUnknown_0202FF84: @ 202FF84
-	.space 0x4
-
-gUnknown_0202FF88: @ 202FF88
-	.space 0x4
-
-gUnknown_0202FF8C: @ 202FF8C
-	.space 0x18
+	.space 0x20
 
 gUnknown_0202FFA4: @ 202FFA4
 	.space 0x4
@@ -937,7 +931,7 @@ gUnknown_0203926A: @ 203926A
 gUnknown_0203926C: @ 203926C
 	.space 0x4
 
-gUnknown_02039270: @ 2039270
+gSelectedOrderFromParty: @ 2039270
 	.space 0x4
 
 gUnknown_02039274: @ 2039274
@@ -961,7 +955,7 @@ gUnknown_0203927C: @ 203927C
 gUnknown_0203927D: @ 203927D
 	.space 0x7
 
-gUnknown_02039284: @ 2039284
+gLastSaveSectorStatus: @ 2039284
 	.space 0x4
 
 gUnknown_02039288: @ 2039288
@@ -1025,12 +1019,13 @@ gUnknown_0203932E: @ 203932E
 gUnknown_02039338: @ 2039338
 	.space 0x4
 
-gUnknown_0203933C: @ 203933C
+gSaveFailedType: @ 203933C
 	.space 0x2
 
-gUnknown_0203933E: @ 203933E
+gSaveFailedClockInfo: @ 203933E
 	.space 0x12
 
+	.align 2
 gUnknown_02039350: @ 2039350
 	.space 0x8
 

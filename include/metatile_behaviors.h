@@ -32,7 +32,7 @@
 #define MB_ICE 0x20
 #define MB_SAND 0x21
 #define MB_SEAWEED 0x22
-#define MB_ASH 0x24
+#define MB_ASHGRASS 0x24
 #define MB_25 0x25
 #define MB_THIN_ICE 0x26
 #define MB_CRACKED_ICE 0x27

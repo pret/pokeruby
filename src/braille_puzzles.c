@@ -12,19 +12,15 @@
 #include "species.h"
 #include "task.h"
 #include "text.h"
+#include "braille_puzzles.h"
+#include "rom6.h"
 
 extern u8 gPlayerPartyCount;
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 
 extern u32 gUnknown_0202FF84[];
 
-extern u8 gUnknown_0815EF19[];
-
-void UseFlyAncientTomb_Callback(void);
-void UseFlyAncientTomb_Finish(void);
-void Task_BrailleWait(u8 taskId);
-bool32 BrailleWait_CheckButtonPress(void);
-void SealedChamberShakingEffect(u8 taskId);
+extern u8 gIslandCave_EventScript_OpenRegiiceChamber[]; // regiice event script
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
@@ -110,7 +106,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void DoBrailleFlyEffect(void)
 {
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(0x3C);
 }
 
@@ -196,7 +192,7 @@ void Task_BrailleWait(u8 taskId)
             break;
         case 4:
             sub_8064E2C();
-            ScriptContext1_SetupScript(gUnknown_0815EF19);
+            ScriptContext1_SetupScript(gIslandCave_EventScript_OpenRegiiceChamber);
             DestroyTask(taskId);
             break;
     }

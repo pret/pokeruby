@@ -216,7 +216,7 @@ gUnknown_03005560: @ 3005560
 gUnknown_030056A0: @ 30056A0
 	.space 0x640
 
-gUnknown_03005CE0: @ 3005CE0
+gLastFieldPokeMenuOpened: @ 3005CE0
 	.space 0x4
 
 gUnknown_03005CE4: @ 3005CE4
@@ -309,22 +309,22 @@ gUnknown_03005E94: @ 3005E94
 gUnknown_03005E98: @ 3005E98
 	.space 0x4
 
-gUnknown_03005E9C: @ 3005E9C
+gLastWrittenSector: @ 3005E9C
 	.space 0x4
 
-gUnknown_03005EA0: @ 3005EA0
+gLastSaveCounter: @ 3005EA0
 	.space 0x4
 
-gUnknown_03005EA4: @ 3005EA4
+gLastKnownGoodSector: @ 3005EA4
 	.space 0x4
 
-gUnknown_03005EA8: @ 3005EA8
+gDamagedSaveSectors: @ 3005EA8
 	.space 0x4
 
-gUnknown_03005EAC: @ 3005EAC
+gSaveCounter: @ 3005EAC
 	.space 0x4
 
-gUnknown_03005EB0: @ 3005EB0
+gFastSaveSection: @ 3005EB0
 	.space 0x4
 
 gUnknown_03005EB4: @ 3005EB4
@@ -333,13 +333,13 @@ gUnknown_03005EB4: @ 3005EB4
 gSaveFileStatus: @ 3005EB8
 	.space 0x4
 
-gUnknown_03005EBC: @ 3005EBC
+gGameContinueCallback: @ 3005EBC
 	.space 0x14
 
 gIntroFrameCounter: @ 3005ED0
 	.space 0x10
 
-gUnknown_03005EE0: @ 3005EE0
+gMultibootProgramStruct: @ 3005EE0
 	.space 0x2C
 
 gUnknown_03005F0C: @ 3005F0C

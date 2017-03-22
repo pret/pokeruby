@@ -107,8 +107,21 @@ struct BgEvent
     s16 x, y;
     u8 unk4;
     u8 kind;
-    s16 filler_6;
-    u8 *script;
+    // 0x2 padding for the union beginning.
+    union { // carried over from diego's FR/LG work, seems to be the same struct
+        // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
+        u8 *script;
+
+        // hidden item type probably
+        struct {
+            u8 filler6[0x2];
+            u16 hiddenItemId; // flag offset to determine flag lookup
+        } hiddenItem;
+
+        // secret base type
+        u16 secretBaseId;
+
+    } bgUnion;
 };
 
 struct MapEvents
@@ -126,10 +139,10 @@ struct MapEvents
 
 struct MapConnection
 {
-    u8 direction;
-    u32 offset;
-    u8 mapGroup;
-    u8 mapNum;
+ /*0x00*/ u8 direction;
+ /*0x01*/ u32 offset;
+ /*0x05*/ u8 mapGroup;
+ /*0x06*/ u8 mapNum;
 };
 
 struct MapConnections

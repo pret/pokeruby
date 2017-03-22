@@ -16,6 +16,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "weather.h"
+#include "fieldmap.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
@@ -38,6 +39,7 @@ extern u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
 extern void SetPlayerDirectionTowardsItem(u8);
 extern void DisplayItemRespondingMessageAndExitItemfinder(u8);
 extern void RotatePlayerAndExitItemfinder(u8);
+extern void sub_80C9838(u8, s16, s16);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -47,9 +49,10 @@ extern u8 gItemFinderDirections[];
 
 extern u16 gScriptItemId;
 
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int);
+bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
 void RunItemfinderResults(u8);
 void ExitItemfinder(u8);
+void sub_80C9720(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -88,9 +91,9 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
         gUnknown_03005D00(taskId);
 }
 
-void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *var3)
+void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *text)
 {
-    StringExpandPlaceholders(gStringVar4, var3);
+    StringExpandPlaceholders(gStringVar4, text);
 
     switch (playerMenuStatus)
     {
@@ -290,125 +293,96 @@ void ExitItemfinder(u8 taskId)
     DestroyTask(taskId);
 }
 
-// too much struct math.
-__attribute__((naked))
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int var)
+bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x4\n\
-    adds r5, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r6, r1, 24\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl PlayerGetDestCoords\n\
-    ldr r1, _080C9618 @ =gTasks\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0xC]\n\
-    movs r3, 0\n\
-    mov r9, r4\n\
-    ldrb r0, [r5, 0x3]\n\
-    cmp r3, r0\n\
-    bge _080C95FC\n\
-    subs r1, 0x5\n\
-    mov r8, r1\n\
-_080C9580:\n\
-    lsls r3, 16\n\
-    asrs r1, r3, 16\n\
-    ldr r2, [r5, 0x10]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r4, r0, 2\n\
-    adds r1, r4, r2\n\
-    ldrb r0, [r1, 0x5]\n\
-    adds r7, r3, 0\n\
-    cmp r0, 0x7\n\
-    bne _080C95EC\n\
-    movs r2, 0x96\n\
-    lsls r2, 2\n\
-    adds r0, r2, 0\n\
-    ldrh r1, [r1, 0xA]\n\
-    adds r0, r1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl FlagGet\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080C95EC\n\
-    ldr r1, [r5, 0x10]\n\
-    adds r1, r4, r1\n\
-    ldrh r2, [r1]\n\
-    adds r2, 0x7\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    subs r2, r0\n\
-    ldrh r0, [r1, 0x2]\n\
-    adds r0, 0x7\n\
-    mov r3, r9\n\
-    ldrh r1, [r3]\n\
-    subs r0, r1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    lsls r2, 16\n\
-    asrs r1, r2, 16\n\
-    movs r3, 0xE0\n\
-    lsls r3, 11\n\
-    adds r2, r3\n\
-    lsrs r2, 16\n\
-    cmp r2, 0xE\n\
-    bhi _080C95EC\n\
-    lsls r0, 16\n\
-    asrs r2, r0, 16\n\
-    cmp r2, r8\n\
-    blt _080C95EC\n\
-    cmp r2, 0x5\n\
-    bgt _080C95EC\n\
-    adds r0, r6, 0\n\
-    bl sub_80C9838\n\
-_080C95EC:\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    adds r0, r7, r1\n\
-    lsrs r3, r0, 16\n\
-    asrs r0, 16\n\
-    ldrb r2, [r5, 0x3]\n\
-    cmp r0, r2\n\
-    blt _080C9580\n\
-_080C95FC:\n\
-    adds r0, r6, 0\n\
-    bl sub_80C9720\n\
-    ldr r0, _080C9618 @ =gTasks\n\
-    lsls r1, r6, 2\n\
-    adds r1, r6\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    movs r3, 0xC\n\
-    ldrsh r0, [r1, r3]\n\
-    cmp r0, 0x1\n\
-    beq _080C961C\n\
-    movs r0, 0\n\
-    b _080C961E\n\
-    .align 2, 0\n\
-_080C9618: .4byte gTasks\n\
-_080C961C:\n\
-    movs r0, 0x1\n\
-_080C961E:\n\
-    add sp, 0x4\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided");
+	int distanceX, distanceY;
+    u16 x, y;
+    s16 newDistanceX, newDistanceY, i;
+
+    PlayerGetDestCoords(&x, &y);
+    gTasks[taskId].data[2] = FALSE;
+
+    for (i = 0; i < events->bgEventCount; i++)
+    {
+        if ((events -> bgEvents[i].kind == 7) && !FlagGet(events -> bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 600))
+        {
+            // do a distance lookup of each item so long as the index remains less than the objects on the current map.
+            distanceX = (u16)events -> bgEvents[i].x + 7;
+            newDistanceX = distanceX - x;
+            distanceY = (u16)events -> bgEvents[i].y + 7;
+            newDistanceY = distanceY - y;
+
+            // is item in range?
+            if ((u16)(newDistanceX + 7) < 15 && (newDistanceY >= -5) && (newDistanceY < 6))
+                sub_80C9838(taskId, newDistanceX, newDistanceY); // send coordinates of the item relative to the player
+        }
+    }
+    sub_80C9720(taskId);  
+
+    // hidden item detected?
+    if(gTasks[taskId].data[2] == TRUE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
+{
+    u8 bgEventCount = events->bgEventCount;
+    struct BgEvent *bgEvent = events->bgEvents;
+    int i;
+
+    for(i = 0; i < bgEventCount; i++)
+    {
+        if(bgEvent[i].kind == 7 && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
+        {
+            if(!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + 600))
+                return TRUE;
+            else
+                return FALSE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_80C9688(struct MapConnection *connection, int x, int y)
+{
+	struct MapHeader *mapHeader;
+	u16 localX, localY;
+	u32 localOffset;
+	s32 localLength;
+	
+	mapHeader = mapconnection_get_mapheader(connection);
+	
+	switch(connection->direction)
+	{
+		// same weird temp variable behavior seen in HiddenItemAtPos
+		case 2:
+			localOffset = connection->offset + 7;
+			localX = x - localOffset;
+			localLength = mapHeader->mapData->height - 7;
+			localY = localLength + y; // additions are reversed for some reason
+			break;
+		case 1:
+			localOffset = connection->offset + 7;
+			localX = x - localOffset;
+			localLength = gMapHeader.mapData->height + 7;
+			localY = y - localLength;
+			break;
+		case 3:
+			localLength = mapHeader->mapData->width - 7;
+			localX = localLength + x; // additions are reversed for some reason
+			localOffset = connection->offset + 7;
+			localY = y - localOffset;
+			break;
+		case 4:
+			localLength = gMapHeader.mapData->width + 7;
+			localX = x - localLength;
+			localOffset = connection->offset + 7;
+			localY = y - localOffset;
+			break;
+		default:
+			return FALSE;
+	}
+	return HiddenItemAtPos(mapHeader->events, localX, localY);
 }

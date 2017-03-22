@@ -3,13 +3,14 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "rom4.h"
+#include "rom6.h"
 
 extern void sub_8087BA8(void);
 
-extern u32 gUnknown_0202FF84;
+extern u32 gUnknown_0202FF84[];
 
 extern void (*gUnknown_0300485C)(void);
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 
 void hm_teleport_run_dp02scr(void);
@@ -31,7 +32,7 @@ void hm_teleport_run_dp02scr(void)
 {
     new_game();
     FieldEffectStart(63);
-    gUnknown_0202FF84 = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_UseTeleport(void)

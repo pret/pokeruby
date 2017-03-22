@@ -6,55 +6,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-
-#define SCRIPT_READ_8(ptr)  ((ptr)[0])
-#define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
-#define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
-
-#define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
-#define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
-#define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
-
-#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
-#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
-#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
-#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
-#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
-
-struct BGCntrlBitfield
-{
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
-};
-
-struct BattleAnimBackground
-{
-    void *image;
-    void *palette;
-    void *tilemap;
-};
-
-struct UnknownStruct1
-{
-    u8 unk0;
-};
-
-struct UnknownStruct2
-{
-    void *unk0;
-    u16 *unk4;
-    u8 unk8;
-};
-
-struct UnknownStruct3
-{
-    u8 unk0;
-    u8 filler1[0xB];
-};
+#include "battle_anim.h"
 
 extern u8 unk_2000000[];
 extern u16 gUnknown_02024A6A[4];
@@ -117,7 +69,6 @@ extern void sub_800D7B8(void);
 extern u8 obj_id_for_side_relative_to_move();
 extern u8 battle_get_per_side_status_permutated();
 
-void move_something(const u8 *const moveAnims[], u16 b, u8 c);
 static void sub_80759D0(void);
 static void ScriptCmd_loadsprite(void);
 static void ScriptCmd_unloadsprite(void);
@@ -130,8 +81,6 @@ static void ScriptCmd_hang2(void);
 static void ScriptCmd_end(void);
 static void ScriptCmd_playse(void);
 static void ScriptCmd_monbg(void);
-bool8 b_side_obj__get_some_boolean(u8 a);
-void sub_8076034(u8, u8);
 static void sub_8076380(void);
 static void task_pA_ma0A_obj_to_bg_pal(u8);
 static void ScriptCmd_clearmonbg(void);
@@ -148,7 +97,6 @@ static void ScriptCmd_setvar(void);
 static void ScriptCmd_ifelse(void);
 static void ScriptCmd_jumpif(void);
 static void ScriptCmd_jump(void);
-bool8 sub_8076BE0(void);
 static void ScriptCmd_fadetobg(void);
 static void ScriptCmd_fadetobg_25(void);
 static void task_p5_load_battle_screen_elements(u8);

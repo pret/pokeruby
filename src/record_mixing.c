@@ -10,6 +10,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
+#include "dewford_trend.h"
 
 extern void *recordMixingSecretBases;
 extern void *recordMixingTvShows;

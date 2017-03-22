@@ -8,28 +8,9 @@
 #include "rng.h"
 #include "species.h"
 #include "moves.h"
-
-#define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
-#define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
-#define AIScriptRead8(ptr) ((ptr)[0])
-#define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
+#include "battle_ai.h"
 
 extern void sub_801CAF8(u8, u8);
-
-enum
-{
-    TARGET,
-    USER
-};
-
-// AI states
-enum
-{
-    AIState_SettingUp,
-    AIState_Processing,
-    AIState_FinishedProcessing,
-    AIState_DoNotProcess
-};
 
 extern void move_effectiveness_something(u16, u8, u8);
 
@@ -282,12 +263,6 @@ const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_OVERHEAT,
     0xFFFF
 };
-
-void BattleAI_SetupAIData(void);
-void BattleAI_DoAIProcessing(void);
-void sub_810745C(void);
-void AIStackPushVar(u8 *);
-u8 AIStackPop(void);
 
 // if the AI is a Link battle, safari, battle tower, or ereader, it will ignore considering item uses.
 void BattleAI_HandleItemUseBeforeAISetup(void)

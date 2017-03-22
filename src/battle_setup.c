@@ -23,60 +23,11 @@
 #include "weather.h"
 #include "map_constants.h"
 #include "opponent_constants.h"
-
-#define NUM_TRAINER_EYE_TRAINERS 56
-#define TRAINER_REMATCH_STEPS 255
+#include "script_pokemon_80C4.h"
+#include "field_map_obj_helpers.h"
+#include "field_control_avatar.h"
 
 extern u16 gScriptResult;
-
-// IV + LEVEL + SPECIES
-struct TrainerPartyMember0
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-};
-
-// IV + LEVEL + SPECIES + MOVES
-struct TrainerPartyMember1
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 moves[4];
-};
-
-// IV + LEVEL + SPECIES + ITEMS
-struct TrainerPartyMember2
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 heldItem;
-};
-
-// IV + LEVEL + SPECIES + ITEMS + MOVES
-struct TrainerPartyMember3
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-};
-
-struct TrainerBattleSpec
-{
-    void *ptr;
-    u8 ptrType;
-};
-
-struct TrainerEyeTrainer
-{
-   u16 trainerNums[5];
-   u16 mapGroup;
-   u16 mapNum;
-};
 
 extern void (*gUnknown_0300485C)(void);
 
@@ -1158,7 +1109,7 @@ u8 *sub_8082700(void)
         return gUnknown_081C6C02;
 }
 
-void sub_8082718()
+void sub_8082718(void)
 {
     ShowFieldMessage(sub_8082880());
 }

@@ -2244,14 +2244,14 @@ sub_812BFD4: @ 812BFD4
 	movs r0, 0x33
 	bl FieldEffectStart
 	ldr r0, _0812BFE8 @ =gUnknown_0202FF84
-	ldr r1, _0812BFEC @ =gUnknown_03005CE0
+	ldr r1, _0812BFEC @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0812BFE8: .4byte gUnknown_0202FF84
-_0812BFEC: .4byte gUnknown_03005CE0
+_0812BFEC: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_812BFD4
 
 	thumb_func_start FldEff_SweetScent
@@ -18242,7 +18242,7 @@ SetUpFieldMove_SoftBoiled: @ 8133CCC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, _08133D14 @ =gUnknown_03005CE0
+	ldr r0, _08133D14 @ =gLastFieldPokeMenuOpened
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r6, 0x64
@@ -18273,7 +18273,7 @@ SetUpFieldMove_SoftBoiled: @ 8133CCC
 	movs r0, 0
 	b _08133D1E
 	.align 2, 0
-_08133D14: .4byte gUnknown_03005CE0
+_08133D14: .4byte gLastFieldPokeMenuOpened
 _08133D18: .4byte gPlayerParty
 _08133D1C:
 	movs r0, 0x1
@@ -21701,7 +21701,7 @@ _08135750: .4byte 0x00000564
 _08135754:
 	movs r2, 0
 	ldr r4, _0813576C @ =gSaveBlock2 + 0x565
-	ldr r3, _08135770 @ =gUnknown_02039270
+	ldr r3, _08135770 @ =gSelectedOrderFromParty
 _0813575A:
 	adds r0, r2, r4
 	adds r1, r2, r3
@@ -21713,7 +21713,7 @@ _0813575A:
 	b _0813589A
 	.align 2, 0
 _0813576C: .4byte gSaveBlock2 + 0x565
-_08135770: .4byte gUnknown_02039270
+_08135770: .4byte gSelectedOrderFromParty
 _08135774:
 	ldr r3, _081357C0 @ =0x00000564
 	adds r0, r5, r3
@@ -22042,7 +22042,7 @@ _08135A10: .4byte 0x00000554
 sub_8135A14: @ 8135A14
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, _08135A34 @ =gUnknown_02039270
+	ldr r4, _08135A34 @ =gSelectedOrderFromParty
 	ldr r3, _08135A38 @ =gSaveBlock2 + 0x565
 _08135A1C:
 	adds r0, r2, r4
@@ -22057,7 +22057,7 @@ _08135A1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135A34: .4byte gUnknown_02039270
+_08135A34: .4byte gSelectedOrderFromParty
 _08135A38: .4byte gSaveBlock2 + 0x565
 	thumb_func_end sub_8135A14
 
@@ -22293,7 +22293,7 @@ _08135BF8:
 	orrs r0, r1
 	strb r0, [r2]
 	movs r0, 0x2
-	bl sub_8125D44
+	bl TrySavingData
 	pop {r4,r5}
 	pop {r0}
 	bx r0

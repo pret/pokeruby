@@ -539,11 +539,11 @@ sub_8142274: @ 8142274
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _081422A8 @ =gUnknown_03005EBC
+	ldr r1, _081422A8 @ =gGameContinueCallback
 	ldr r0, _081422AC @ =sub_8141FC4
 	str r0, [r1]
 	movs r0, 0x3
-	bl sub_8125D44
+	bl TrySavingData
 	movs r0, 0x37
 	bl PlaySE
 	ldr r1, _081422B0 @ =gTasks
@@ -559,7 +559,7 @@ sub_8142274: @ 8142274
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081422A8: .4byte gUnknown_03005EBC
+_081422A8: .4byte gGameContinueCallback
 _081422AC: .4byte sub_8141FC4
 _081422B0: .4byte gTasks
 _081422B4: .4byte sub_81422B8

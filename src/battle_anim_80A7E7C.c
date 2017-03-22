@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "battle_anim.h"
 
 #define TASK gTasks[task]
 #define SPRITE gSprites[TASK.data[0]]
@@ -16,7 +17,6 @@ extern u8 gUnknown_0202F7C9;
 
 extern u8 obj_id_for_side_relative_to_move(u8 side);
 extern void move_anim_task_del(u8 task);
-extern bool8 b_side_obj__get_some_boolean(u8 side);
 extern u8 battle_get_side_with_given_state(u8 state);
 extern u8 battle_side_get_owner(u8 side);
 extern void oamt_set_x3A_32(struct Sprite *sprite, void(*callback)(struct Sprite*));
@@ -27,7 +27,6 @@ extern void sub_80784A8(struct Sprite *sprite);
 extern void sub_8078E70(u8 sprite, u8);
 extern void obj_id_set_rotscale(u8 sprite, int, int, u16);
 extern void sub_8078F40(u8 sprite);
-extern bool8 sub_8076BE0();
 extern void sub_8078F9C(u8 sprite);
 
 static void sub_80A7EF0(u8 task);

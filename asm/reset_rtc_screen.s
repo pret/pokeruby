@@ -1238,7 +1238,7 @@ _0806AE54: .4byte 0x00004040
 _0806AE58: .4byte gSystemText_ClockResetDataSave
 _0806AE5C:
 	movs r0, 0
-	bl sub_8125D44
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -295,7 +295,7 @@ static void CB2_MysteryEventMenu(void)
             unkVal = sub_812613C(unk_2000000);
             CpuFill32(0, unk_2000000, 0x7D4);
             if (!GetEventLoadMessage(gStringVar4, unkVal))
-                sub_8125D44(0);
+                TrySavingData(NORMAL_SAVE);
             gMain.state++;
             break;
         case 12:

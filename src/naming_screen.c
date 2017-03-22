@@ -10,63 +10,12 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
+#include "naming_screen.h"
 
 extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 extern u8 CreateMonIcon();
 extern void sub_809D51C(void);
 extern void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
-
-enum
-{
-    NAMING_SCREEN_TEMPLATE_PLAYER_NAME,
-    NAMING_SCREEN_TEMPLATE_BOX_NAME,
-    NAMING_SCREEN_TEMPLATE_MON_NAME,
-};
-
-struct NamingScreenTemplate
-{
-    u8 unk0;
-    u8 maxChars;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;  //mode?
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    const u8 *title;
-};
-
-struct NamingScreenData
-{
-    u8 state;
-    u8 templateNum;
-    u16 unk2;
-    u16 bg1vOffset;
-    u16 bg2vOffset;
-    u16 unk8;
-    u16 unkA;
-    u8 unkC;
-    u8 unkD;
-    u8 currentPage;
-    u8 cursorSpriteId;
-    u8 unk10;
-    u8 textBuffer[0x10];
-    u8 filler21[0x13];
-    const struct NamingScreenTemplate *template;
-    u8 *destBuffer;
-    u16 unk3C;  //savedKeyRepeatStartDelay
-    u16 unk3E;
-    u16 unk40;
-    u32 unk44;
-    MainCallback returnCallback;
-};
-
-enum
-{
-    PAGE_UPPER,
-    PAGE_LOWER,
-    PAGE_OTHERS,
-};
 
 extern u16 gKeyRepeatStartDelay;
 
@@ -140,7 +89,7 @@ static void sub_80B6CA8(void);
 static void sub_80B6D04(void);
 static void sub_80B6E44(void);
 static void InputInit(void);
-static  void sub_80B6438(void);
+static void sub_80B6438(void);
 static void sub_80B5E50(void);
 static void Task_NamingScreenMain(u8);
 static void SetInputState(u8);
@@ -187,31 +136,6 @@ static void sub_80B7698(u16 *, const u16 *);
 static void sub_80B76E0();
 static void nullsub_20(u8, u8);
 static void PrintKeyboardCharacters(u8);
-
-enum
-{
-    MAIN_STATE_BEGIN_FADE_IN,
-    MAIN_STATE_WAIT_FADE_IN,
-    MAIN_STATE_HANDLE_INPUT,
-    MAIN_STATE_MOVE_TO_OK_BUTTON,
-    MAIN_STATE_START_PAGE_SWAP,
-    MAIN_STATE_WAIT_PAGE_SWAP,
-    MAIN_STATE_6,
-    MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE,
-    MAIN_STATE_BEGIN_FADE_OUT,
-};
-
-enum
-{
-    INPUT_STATE_DISABLED,
-    INPUT_STATE_ENABLED,
-};
-
-#define KBEVENT_NONE 0
-#define KBEVENT_PRESSED_A 5
-#define KBEVENT_PRESSED_B 6
-#define KBEVENT_PRESSED_SELECT 8
-#define KBEVENT_PRESSED_START 9
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 c, u16 d, u32 e, MainCallback returnCallback)
 {
@@ -307,7 +231,7 @@ static void GetNamingScreenParameters(void)
     namingScreenData.templateNum = task->data[0];
     namingScreenData.unk3E = task->data[1];
     namingScreenData.unk40 = task->data[2];
-    namingScreenData.unk44 = (task->data[3] << 16) | (u16)task->data[4];
+    namingScreenData.unk42 = (task->data[3] << 16) | (u16)task->data[4];
     LoadWordFromTwoHalfwords(&task->data[5], (u32 *)&namingScreenData.destBuffer);
     LoadWordFromTwoHalfwords(&task->data[7], (u32 *)&namingScreenData.returnCallback);
     DestroyTask(taskId);
@@ -1406,7 +1330,7 @@ static void sub_80B6EFC(void)
     u8 spriteId;
     
     sub_809D51C();
-    spriteId = CreateMonIcon(namingScreenData.unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenData.unk44);
+    spriteId = CreateMonIcon(namingScreenData.unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenData.unk42);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1476,7 +1400,7 @@ static bool8 sub_80B7004(void)
     return FALSE;
 }
 
-static void sub_80B7090(void)
+static void sub_80B7090(void) // DoInput?
 {
     u8 r5;
     u8 r4;

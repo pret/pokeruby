@@ -8,19 +8,17 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "rom6.h"
+#include "braille_puzzles.h"
 
 extern u16 gScriptLastTalked;
 extern u32 gUnknown_0202FF84[];
 extern struct MapPosition gUnknown_0203923C;
 extern void (*gUnknown_0300485C)(void);
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
 
-extern bool8 ShouldDoBrailleDigEffect(void);
-extern void DoBrailleDigEffect(void);
-extern void sub_8053014(void);
-extern void sub_8059BF4(void);
 extern void sub_808AB90(void);
 extern void task08_080A1C44(u8);
 extern u8 sub_80CA1C8(void);
@@ -136,7 +134,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 
 static void sub_810B53C(void)
 {
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(UseRockSmashScript);
 }
 
@@ -175,7 +173,7 @@ static void sub_810B5D8(void)
 {
     sub_8053014();
     FieldEffectStart(0x26);
-    gUnknown_0202FF84[0] = gUnknown_03005CE0;
+    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
 }
 
 int FldEff_UseDig(void)

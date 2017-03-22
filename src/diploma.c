@@ -10,9 +10,6 @@
 #include "task.h"
 #include "text.h"
 
-extern u8 gDiplomaTiles[];
-extern u8 gDiplomaTilemap[];
-extern u8 gDiplomaPalettes[];
 extern u8 gOtherText_NationalDex[];
 extern u8 gOtherText_HoennDex[];
 extern u8 gOtherText_DiplomaCertificationGameFreak[];
@@ -23,6 +20,15 @@ static void Task_DiplomaFadeIn(u8);
 static void Task_DiplomaWaitForKeyPress(u8);
 static void Task_DiplomaFadeOut(u8);
 static void DisplayDiplomaText(void);
+
+static const u16 gDiplomaPalettes[][16] =
+{
+	INCBIN_U16("graphics/misc/diploma_national.gbapal"),
+	INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
+};
+
+static const u8 gDiplomaTilemap[] = INCBIN_U8("graphics/misc/diploma_map.bin.lz");
+static const u8 gDiplomaTiles[] = INCBIN_U8("graphics/misc/diploma.4bpp.lz");
 
 static void VBlankCB(void)
 {

@@ -30,5 +30,7 @@ void sub_80846E4(u8 taskId);
 void sub_8084794(u32 var);
 void sub_80847C8(void);
 void sub_80847D8(u8);
+void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
+void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 #endif // GUARD_TRAINER_SEE_H

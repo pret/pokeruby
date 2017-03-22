@@ -6,6 +6,7 @@
 #include "main.h"
 #include "rng.h"
 #include "text.h"
+#include "field_control_avatar.h"
 
 #define BERRY_NAME_LENGTH 6
 

@@ -9,6 +9,8 @@
 #include "field_effect.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
+#include "field_map_obj_helpers.h"
+#include "field_door.h"
 #include "item.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -23,6 +25,11 @@
 #include "sound.h"
 #include "string_util.h"
 #include "weather.h"
+#include "script_menu.h"
+#include "script_pokemon_80F9.h"
+#include "script_pokemon_80C4.h"
+#include "clock.h"
+#include "contest_painting.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);

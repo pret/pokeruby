@@ -16,19 +16,15 @@
 #include "task.h"
 #include "wild_encounter.h"
 #include "map_object_constants.h"
+#include "bike.h"
+#include "field_map_obj_helpers.h"
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];
 extern u8 gOtherText_NotEvenANibble[];
 extern u8 gOtherText_ItGotAway[];
 
-extern struct
-{
-    s32 x;
-    s32 y;
-    u32 unk8;
-    u32 unkC;
-} gUnknown_0202FF84;
+extern u32 gUnknown_0202FF84[];
 
 //Functions
 static u32 sub_80587D8(void);
@@ -731,9 +727,9 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
     sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(3));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(8);
-    gUnknown_0202FF84.x = a->coords2.x;
-    gUnknown_0202FF84.y = a->coords2.y;
-    gUnknown_0202FF84.unk8 = gPlayerAvatar.mapObjectId;
+    gUnknown_0202FF84[0] = a->coords2.x;
+    gUnknown_0202FF84[1] = a->coords2.y;
+    gUnknown_0202FF84[2] = gPlayerAvatar.mapObjectId;
     unk = FieldEffectStart(8);
     a->mapobj_unk_1A = unk;
     sub_8127ED0(unk, 1);
@@ -1291,10 +1287,10 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
         FieldObjectClearAnimIfSpecialAnimFinished(c);
         FieldObjectSetSpecialAnim(b, GetStepInPlaceDelay16AnimId(task->data[2]));
         FieldObjectSetSpecialAnim(c, GetSimpleGoAnimId(task->data[2]));
-        gUnknown_0202FF84.x = c->coords2.x;
-        gUnknown_0202FF84.y = c->coords2.y;
-        gUnknown_0202FF84.unk8 = c->elevation;
-        gUnknown_0202FF84.unkC = gSprites[c->spriteId].oam.priority;
+        gUnknown_0202FF84[0] = c->coords2.x;
+        gUnknown_0202FF84[1] = c->coords2.y;
+        gUnknown_0202FF84[2] = c->elevation;
+        gUnknown_0202FF84[3] = gSprites[c->spriteId].oam.priority;
         FieldEffectStart(10);
         PlaySE(SE_W070);
         task->data[0]++;

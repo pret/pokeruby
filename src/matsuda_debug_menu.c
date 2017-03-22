@@ -10,8 +10,8 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-
-#define BIT(n) (1 << (n))
+#include "contest.h"
+#include "matsuda_debug_menu.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gUnknown_0203857D[][64];
@@ -63,24 +63,6 @@ extern u8* gMatsudaDebugMenuTextList2[];
 extern u8* gMatsudaDebugMenuTextList3[];
 extern u8 gMatsudaDebugMenuContestTopLeft[][2];
 
-struct ContestPokemon
-{
- /* 0x00 */ u16 species;
- /* 0x02 */ u8 nickname[POKEMON_NAME_LENGTH];
- /* 0x0D */ u8 trainerName[8];
- /* 0x15 */ u8 filler15[9];
- /* 0x1E */ u16 moves[4]; // moves
- /* 0x26 */ u8 cool; // cool
- /* 0x27 */ u8 beauty; // beauty
- /* 0x28 */ u8 cute; // cute
- /* 0x29 */ u8 smart; // smart
- /* 0x2A */ u8 tough; // tough
- /* 0x2B */ u8 sheen; // sheen
- /* 0x2C */ u8 filler2C[20];
-};
-
-extern struct ContestPokemon gContestMons[];
-
 extern bool8 gReceivedRemoteLinkPlayers;
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 
@@ -103,7 +85,6 @@ static void sub_80AA10C(void);
 static void sub_80AA5BC(u8);
 static void sub_80AA614(u8, u8);
 static void sub_80AAD08(struct Sprite *, s8);
-extern void sub_80AB184(void);
 extern void sub_80AB47C(void);
 extern int sub_80B2A7C(u8);  //Don't know return type size
 
@@ -431,7 +412,7 @@ static void sub_80AA10C(void)
     gSprites[spriteId].data3 = zero; // only this assignment of zero is necessary. other replacements of 0 with zero do not change the asm, compiler will treat it the same.
 }
 
-void sub_80AA280(u8 var)
+void sub_80AA280(u8 var) // no?
 {
     u8 i;
 

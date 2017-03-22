@@ -14,6 +14,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "script_pokemon_80C4.h"
 
 typedef void (*Callback)(void);
 

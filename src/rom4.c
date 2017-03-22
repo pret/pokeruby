@@ -30,6 +30,10 @@
 #include "tileset_anim.h"
 #include "weather.h"
 #include "wild_encounter.h"
+#include "script_pokemon_80C4.h"
+#include "clock.h"
+#include "field_map_obj_helpers.h"
+#include "field_control_avatar.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -465,16 +469,10 @@ struct MapConnection *sub_8053818(u8 dir)
 
     if (connection == NULL)
         return NULL;
-
-    i = 0;
-
-    while (i < count)
-    {
-        if (connection->direction == dir)
+	
+	for(i = 0; i < count; i++, connection++)
+		if (connection->direction == dir)
             return connection;
-        i++;
-        connection++;
-    }
 
     return NULL;
 }

@@ -47,7 +47,7 @@ _08121E54: .4byte 0x00000263
 sub_8121E58: @ 8121E58
 	push {lr}
 	movs r1, 0
-	ldr r3, _08121E74 @ =gUnknown_02039270
+	ldr r3, _08121E74 @ =gSelectedOrderFromParty
 	movs r2, 0
 _08121E60:
 	adds r0, r1, r3
@@ -60,7 +60,7 @@ _08121E60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121E74: .4byte gUnknown_02039270
+_08121E74: .4byte gSelectedOrderFromParty
 	thumb_func_end sub_8121E58
 
 	thumb_func_start sub_8121E78
@@ -192,7 +192,7 @@ _08121F78:
 _08121F7E:
 	cmp r4, 0x2
 	bhi _08121FA0
-	ldr r0, _08121FC4 @ =gUnknown_02039270
+	ldr r0, _08121FC4 @ =gSelectedOrderFromParty
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, r6
@@ -223,7 +223,7 @@ _08121FA0:
 	bl sub_806BC3C
 	b _08121FD4
 	.align 2, 0
-_08121FC4: .4byte gUnknown_02039270
+_08121FC4: .4byte gSelectedOrderFromParty
 _08121FC8: .4byte gPlayerParty
 _08121FCC:
 	adds r0, r5, 0
@@ -372,7 +372,7 @@ sub_81220C8: @ 81220C8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081221A2
-	ldr r0, _081220F4 @ =gUnknown_02039270
+	ldr r0, _081220F4 @ =gSelectedOrderFromParty
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0
 	bne _08122100
@@ -381,7 +381,7 @@ sub_81220C8: @ 81220C8
 	.align 2, 0
 _081220EC: .4byte 0x0201b000
 _081220F0: .4byte 0x00000263
-_081220F4: .4byte gUnknown_02039270
+_081220F4: .4byte gSelectedOrderFromParty
 _081220F8:
 	movs r0, 0x12
 	b _081221A4
@@ -391,7 +391,7 @@ _081220FC:
 _08122100:
 	movs r5, 0
 _08122102:
-	ldr r4, _081221B4 @ =gUnknown_02039270
+	ldr r4, _081221B4 @ =gSelectedOrderFromParty
 	adds r4, r5, r4
 	ldrb r0, [r4]
 	movs r1, 0x64
@@ -430,7 +430,7 @@ _0812214A:
 	add r0, r9
 	movs r1, 0
 	ldrsh r4, [r0, r1]
-	ldr r0, _081221B4 @ =gUnknown_02039270
+	ldr r0, _081221B4 @ =gSelectedOrderFromParty
 	adds r6, r5, r0
 	ldrb r0, [r6]
 	mov r2, r8
@@ -481,7 +481,7 @@ _081221A4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081221B4: .4byte gUnknown_02039270
+_081221B4: .4byte gSelectedOrderFromParty
 _081221B8: .4byte gUnknown_030042FC
 _081221BC: .4byte 0x0201b000
 _081221C0: .4byte 0x00000282
@@ -495,7 +495,7 @@ sub_81221CC: @ 81221CC
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, _081221E4 @ =gUnknown_02039270
+	ldr r3, _081221E4 @ =gSelectedOrderFromParty
 _081221D6:
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -504,7 +504,7 @@ _081221D6:
 	movs r0, 0x1
 	b _081221F4
 	.align 2, 0
-_081221E4: .4byte gUnknown_02039270
+_081221E4: .4byte gSelectedOrderFromParty
 _081221E8:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -525,7 +525,7 @@ sub_81221F8: @ 81221F8
 	movs r0, 0x5
 	movs r1, 0x1
 	bl sub_806D538
-	ldr r5, _08122248 @ =gUnknown_03005CE0
+	ldr r5, _08122248 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r5]
 	movs r0, 0x64
 	muls r0, r1
@@ -556,7 +556,7 @@ sub_81221F8: @ 81221F8
 	movs r0, 0x1
 	b _08122270
 	.align 2, 0
-_08122248: .4byte gUnknown_03005CE0
+_08122248: .4byte gLastFieldPokeMenuOpened
 _0812224C: .4byte gPlayerParty
 _08122250: .4byte gTasks
 _08122254: .4byte gUnknown_084017D8
@@ -633,7 +633,7 @@ _081222E0:
 	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _08122320 @ =gUnknown_03005CE0
+	ldr r1, _08122320 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	lsls r0, 24
 	lsrs r0, 24
@@ -657,7 +657,7 @@ _081222E0:
 	str r1, [r0]
 	b _08122342
 	.align 2, 0
-_08122320: .4byte gUnknown_03005CE0
+_08122320: .4byte gLastFieldPokeMenuOpened
 _08122324: .4byte gPlayerParty
 _08122328: .4byte gStringVar1
 _0812232C: .4byte gTasks
@@ -868,7 +868,7 @@ sub_81224A8: @ 81224A8
 	.align 2, 0
 _081224CC: .4byte gTasks
 _081224D0:
-	ldr r0, _081224F8 @ =gUnknown_02039270
+	ldr r0, _081224F8 @ =gSelectedOrderFromParty
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08122504
@@ -888,7 +888,7 @@ _081224D0:
 	str r1, [r0]
 	b _08122520
 	.align 2, 0
-_081224F8: .4byte gUnknown_02039270
+_081224F8: .4byte gSelectedOrderFromParty
 _081224FC: .4byte gTasks
 _08122500: .4byte sub_8122450
 _08122504:
@@ -939,7 +939,7 @@ _08122536:
 	adds r0, r1
 	ldr r1, _08122584 @ =gStringVar1
 	bl GetMonNickname
-	ldr r1, _08122588 @ =gUnknown_03005CE0
+	ldr r1, _08122588 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r4]
 	strb r0, [r1]
 	ldrb r0, [r5]
@@ -952,7 +952,7 @@ _08122578: .4byte 0x0201b260
 _0812257C: .4byte gUnknown_020384F0
 _08122580: .4byte gPlayerParty
 _08122584: .4byte gStringVar1
-_08122588: .4byte gUnknown_03005CE0
+_08122588: .4byte gLastFieldPokeMenuOpened
 _0812258C: .4byte sub_806AEDC
 _08122590:
 	bl sub_80F9344
@@ -1088,8 +1088,8 @@ sub_8122694: @ 8122694
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r3, _081226D4 @ =gUnknown_02039270
-	ldr r2, _081226D8 @ =gUnknown_03005CE0
+	ldr r3, _081226D4 @ =gSelectedOrderFromParty
+	ldr r2, _081226D8 @ =gLastFieldPokeMenuOpened
 _081226A0:
 	adds r1, r4, r3
 	ldrb r0, [r1]
@@ -1116,8 +1116,8 @@ _081226CC:
 	bl sub_8122838
 	b _08122716
 	.align 2, 0
-_081226D4: .4byte gUnknown_02039270
-_081226D8: .4byte gUnknown_03005CE0
+_081226D4: .4byte gSelectedOrderFromParty
+_081226D8: .4byte gLastFieldPokeMenuOpened
 _081226DC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -1196,8 +1196,8 @@ sub_8122770: @ 8122770
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r4, 0
-	ldr r5, _08122798 @ =gUnknown_03005CE0
-	ldr r3, _0812279C @ =gUnknown_02039270
+	ldr r5, _08122798 @ =gLastFieldPokeMenuOpened
+	ldr r3, _0812279C @ =gSelectedOrderFromParty
 _0812277C:
 	adds r2, r4, r3
 	ldrb r1, [r2]
@@ -1213,8 +1213,8 @@ _0812277C:
 	beq _081227AC
 	b _081227BE
 	.align 2, 0
-_08122798: .4byte gUnknown_03005CE0
-_0812279C: .4byte gUnknown_02039270
+_08122798: .4byte gLastFieldPokeMenuOpened
+_0812279C: .4byte gSelectedOrderFromParty
 _081227A0:
 	ldrb r0, [r3, 0x1]
 	strb r0, [r3]
@@ -1237,7 +1237,7 @@ _081227BE:
 	ldrb r0, [r5]
 	movs r1, 0x70
 	bl sub_806BC3C
-	ldr r4, _081227F8 @ =gUnknown_02039270
+	ldr r4, _081227F8 @ =gSelectedOrderFromParty
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _081227DA
@@ -1262,7 +1262,7 @@ _081227EC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081227F8: .4byte gUnknown_02039270
+_081227F8: .4byte gSelectedOrderFromParty
 	thumb_func_end sub_8122770
 
 	thumb_func_start sub_81227FC
@@ -1982,7 +1982,7 @@ sub_8122D94: @ 8122D94
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08122DCC @ =gUnknown_03005CE0
+	ldr r0, _08122DCC @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -2006,7 +2006,7 @@ sub_8122D94: @ 8122D94
 	bl sub_806E750
 	b _08122DFA
 	.align 2, 0
-_08122DCC: .4byte gUnknown_03005CE0
+_08122DCC: .4byte gLastFieldPokeMenuOpened
 _08122DD0: .4byte gPlayerParty
 _08122DD4: .4byte gTasks
 _08122DD8: .4byte gUnknown_08401810
@@ -2061,7 +2061,7 @@ _08122E38:
 	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _08122E70 @ =gUnknown_03005CE0
+	ldr r1, _08122E70 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
@@ -2081,7 +2081,7 @@ _08122E38:
 	str r1, [r0]
 	b _08122E9C
 	.align 2, 0
-_08122E70: .4byte gUnknown_03005CE0
+_08122E70: .4byte gLastFieldPokeMenuOpened
 _08122E74: .4byte gPlayerParty
 _08122E78: .4byte gStringVar1
 _08122E7C: .4byte gTasks
@@ -2089,7 +2089,7 @@ _08122E80: .4byte sub_8122EAC
 _08122E84:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _08122EA4 @ =gUnknown_03005CE0
+	ldr r1, _08122EA4 @ =gLastFieldPokeMenuOpened
 	movs r0, 0xFF
 	strb r0, [r1]
 	ldr r1, _08122EA8 @ =gSpecialVar_0x8004
@@ -2102,7 +2102,7 @@ _08122E9C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08122EA4: .4byte gUnknown_03005CE0
+_08122EA4: .4byte gLastFieldPokeMenuOpened
 _08122EA8: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8122E0C
 
@@ -2204,7 +2204,7 @@ sub_8122F70: @ 8122F70
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08122F88 @ =gSpecialVar_0x8004
-	ldr r1, _08122F8C @ =gUnknown_03005CE0
+	ldr r1, _08122F8C @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	strh r1, [r2]
 	bl sub_8123138
@@ -2212,7 +2212,7 @@ sub_8122F70: @ 8122F70
 	bx r0
 	.align 2, 0
 _08122F88: .4byte gSpecialVar_0x8004
-_08122F8C: .4byte gUnknown_03005CE0
+_08122F8C: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_8122F70
 
 	thumb_func_start sub_8122F90
@@ -2239,7 +2239,7 @@ _08122F96:
 	adds r0, r1
 	ldr r1, _08122FE4 @ =gStringVar1
 	bl GetMonNickname
-	ldr r1, _08122FE8 @ =gUnknown_03005CE0
+	ldr r1, _08122FE8 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r4]
 	strb r0, [r1]
 	ldrb r0, [r5]
@@ -2252,7 +2252,7 @@ _08122FD8: .4byte 0x0201b260
 _08122FDC: .4byte gUnknown_020384F0
 _08122FE0: .4byte gPlayerParty
 _08122FE4: .4byte gStringVar1
-_08122FE8: .4byte gUnknown_03005CE0
+_08122FE8: .4byte gLastFieldPokeMenuOpened
 _08122FEC: .4byte sub_806AEDC
 _08122FF0:
 	bl sub_80F9344

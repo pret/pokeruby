@@ -1523,7 +1523,7 @@ _08069F9E:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsAsh
+	bl MetatileBehavior_IsAshGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A02A

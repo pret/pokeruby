@@ -8,91 +8,21 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
-
-#define MOSAIC_BIT_BG_HSIZE (0)
-#define MOSAIC_BIT_BG_VSIZE (4)
-#define MOSAIC_BIT_OBJ_HSIZE (8)
-#define MOSAIC_BIT_OBJ_VSIZE (12)
-
-enum
-{
-    CONTEST_COOL,
-    CONTEST_BEAUTY,
-    CONTEST_CUTE,
-    CONTEST_SMART,
-    CONTEST_TOUGH,
-};
-
-enum
-{
-    CONTESTRESULT_COOL = 9,
-    CONTESTRESULT_BEAUTY = 13,
-    CONTESTRESULT_CUTE = 2,
-    CONTESTRESULT_SMART = 36,
-    CONTESTRESULT_TOUGH = 6,
-};
-
-struct Unk2015E00
-{
-    u16 unk2015e00[128][32];
-    u16 unk2017e00[0];
-};
-
-struct ContestEntry
-{
-    /*0x00*/ u8 var0;
-    /*0x04*/ u32 var4;
-    /*0x08*/ u16 var8;
-    /*0x0A*/ u8 contestType;
-    /*0x0B*/ u8 pokemon_name[POKEMON_NAME_LENGTH];
-    /*0x15*/ u8 pad15;
-    /*0x16*/ u8 trainer_name[OT_NAME_LENGTH];
-};
-
-struct Unk3000756
-{
-    /*0x00*/ u8 var_0;
-};
-
-struct LabelPair
-{
-    const u8 *prefix;
-    const u8 *suffix;
-};
-
-struct Unk03005E20
-{
-    u8 var_0;
-    u8 pad1[3];
-    u16 (*var_4)[][32];
-    u16 (*var_8)[];
-    u8 pad0C[4];
-    u32 var_10;
-    u16 var_14;
-    u16 var_16;
-    u8 var_18;
-    u8 var_19;
-    u8 var_1A;
-    u8 var_1B;
-    u8 var_1C;
-    u8 var_1D;
-    u8 var_1E;
-    u8 var_1F;
-};
+#include "contest_painting.h"
 
 extern u8 unk_2000000[];
-extern struct ContestEntry unk_2015de0;
-extern struct Unk2015E00 unk_2015e00;
 extern u8 gUnknown_03000750;
 extern u16 gUnknown_03000752;
 extern u16 gUnknown_03000754;
-extern struct Unk3000756 gUnknown_03000756;
 extern u16 (*gUnknown_03005E10)[][32];
-extern struct Unk03005E20 gUnknown_03005E20;
 extern u8 gUnknown_03005E40[];
-extern struct ContestEntry *gUnknown_03005E8C;
 extern u16 (*gUnknown_03005E90)[];
 
+extern struct ContestEntry unk_2015de0;
+extern struct Unk2015E00 unk_2015e00;
+extern struct Unk3000756 gUnknown_03000756;
+extern struct Unk03005E20 gUnknown_03005E20;
+extern struct ContestEntry *gUnknown_03005E8C;
 extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpriteSheet gMonBackPicTable[];
@@ -112,7 +42,7 @@ extern const u8 OtherText_Terminator8[];
 extern const u8 OtherText_CenturyLastVenus[];
 extern const u8 OtherText_Terminator9[];
 extern const u8 OtherText_Terminator10[];
-extern const u8 OtherText_DazzlingSlime[];
+extern const u8 OtherText_DazzlingSmile[];
 extern const u8 OtherText_PokeCenterIdol[];
 extern const u8 OtherText_Terminator11[];
 extern const u8 OtherText_LovelyAndSweet[];
@@ -174,7 +104,7 @@ const struct LabelPair gUnknown_083F60C0[] =
     {OtherText_GoodLookingPoke, OtherText_Terminator7},
     {OtherText_MarvelousGreat, OtherText_Terminator8},
     {OtherText_CenturyLastVenus, OtherText_Terminator9},
-    {OtherText_Terminator10, OtherText_DazzlingSlime},
+    {OtherText_Terminator10, OtherText_DazzlingSmile},
     {OtherText_PokeCenterIdol, OtherText_Terminator11},
     {OtherText_LovelyAndSweet, OtherText_Terminator12},
     {OtherText_ThePretty, OtherText_WinningPortrait},

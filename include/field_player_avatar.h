@@ -78,7 +78,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarExtraStateTransition(u8 a, u8 b);
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 // sub_8059B88
-// sub_8059BF4
+void sub_8059BF4(void);
 // sub_8059C3C
 void sub_8059C94(u8);
 // sub_8059D08

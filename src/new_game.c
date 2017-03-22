@@ -11,8 +11,9 @@
 #include "rom4.h"
 #include "rtc.h"
 #include "script.h"
+#include "dewford_trend.h"
 
-extern u8 gUnknown_020297EC;
+extern u8 gDifferentSaveFile;
 
 extern u8 gPlayerPartyCount;
 extern u8 gUnknown_03005CE8;
@@ -22,8 +23,9 @@ extern u8 gUnknown_0819FA81[];
 
 const struct SB1_2EFC_Struct gUnknown_08216604 =
 {
-    {
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
+    0x0000,
+	{
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     }
@@ -73,7 +75,7 @@ void sub_8052DA8(void)
 
     sub_80B2D1C();
     for (i = 0; i < 5; i++)
-        gSaveBlock1.sb1_2EFC_struct[i] = gUnknown_08216604;
+        gSaveBlock1.sbStruct.unkSB1.sb1_2EFC_struct[i] = gUnknown_08216604;
 }
 
 void sub_8052DE4(void)
@@ -95,7 +97,7 @@ void ClearSav2(void)
 
 void sub_8052E4C(void)
 {
-    gUnknown_020297EC = 0;
+    gDifferentSaveFile = 0;
     sub_808C0A0();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -104,9 +106,10 @@ void sub_8052E4C(void)
 
 void NewGameInitData(void)
 {
-    if (!gSaveFileStatus || gSaveFileStatus == 2)
+    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
         RtcReset();
-    gUnknown_020297EC = 1;
+
+    gDifferentSaveFile = 1;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     sub_808C02C();

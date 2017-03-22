@@ -881,7 +881,7 @@ _080C6398: .4byte sub_80C660C
 sub_80C639C: @ 80C639C
 	push {lr}
 	ldr r1, _080C63B0 @ =gUnknown_0202FF84
-	ldr r0, _080C63B4 @ =gUnknown_03005CE0
+	ldr r0, _080C63B4 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C63B8 @ =gUnknown_081A2CE6
@@ -890,7 +890,7 @@ sub_80C639C: @ 80C639C
 	bx r0
 	.align 2, 0
 _080C63B0: .4byte gUnknown_0202FF84
-_080C63B4: .4byte gUnknown_03005CE0
+_080C63B4: .4byte gLastFieldPokeMenuOpened
 _080C63B8: .4byte gUnknown_081A2CE6
 	thumb_func_end sub_80C639C
 
@@ -1026,7 +1026,7 @@ sub_80C6498: @ 80C6498
 sub_80C64A8: @ 80C64A8
 	push {lr}
 	ldr r1, _080C64BC @ =gUnknown_0202FF84
-	ldr r0, _080C64C0 @ =gUnknown_03005CE0
+	ldr r0, _080C64C0 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C64C4 @ =gUnknown_081A2D3E
@@ -1035,7 +1035,7 @@ sub_80C64A8: @ 80C64A8
 	bx r0
 	.align 2, 0
 _080C64BC: .4byte gUnknown_0202FF84
-_080C64C0: .4byte gUnknown_03005CE0
+_080C64C0: .4byte gLastFieldPokeMenuOpened
 _080C64C4: .4byte gUnknown_081A2D3E
 	thumb_func_end sub_80C64A8
 
@@ -1213,7 +1213,7 @@ sub_80C65FC: @ 80C65FC
 sub_80C660C: @ 80C660C
 	push {lr}
 	ldr r1, _080C6620 @ =gUnknown_0202FF84
-	ldr r0, _080C6624 @ =gUnknown_03005CE0
+	ldr r0, _080C6624 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C6628 @ =gUnknown_081A2D96
@@ -1222,7 +1222,7 @@ sub_80C660C: @ 80C660C
 	bx r0
 	.align 2, 0
 _080C6620: .4byte gUnknown_0202FF84
-_080C6624: .4byte gUnknown_03005CE0
+_080C6624: .4byte gLastFieldPokeMenuOpened
 _080C6628: .4byte gUnknown_081A2D96
 	thumb_func_end sub_80C660C
 

@@ -47,7 +47,7 @@ sub_810CBFC: @ 810CBFC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0810CC24 @ =gUnknown_0202FF84
-	ldr r1, _0810CC28 @ =gUnknown_03005CE0
+	ldr r1, _0810CC28 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r2]
 	ldr r2, _0810CC2C @ =gTasks
@@ -63,7 +63,7 @@ sub_810CBFC: @ 810CBFC
 	bx r0
 	.align 2, 0
 _0810CC24: .4byte gUnknown_0202FF84
-_0810CC28: .4byte gUnknown_03005CE0
+_0810CC28: .4byte gLastFieldPokeMenuOpened
 _0810CC2C: .4byte gTasks
 _0810CC30: .4byte sub_810CC34
 	thumb_func_end sub_810CBFC
