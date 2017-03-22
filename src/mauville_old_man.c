@@ -288,8 +288,7 @@ void sub_80F7CF4(void)
 
     if(oldMan->oldMan2.mauvilleOldMan_ecArray[oldMan->oldMan2.unk1] != 0xFFFF) // is not the last element of the array?
     {
-        int random = (u16)Random();
-        random &= 7;
+        u16 random = 7 % Random(); // this is a little bit closer, but the compiler prefers an AND instead of division. i assume its because the compiler wants to avoid division by zero, however using an & causes this order to not be close anymore.
         sub_80EB3FC(gStringVar4, oldMan->oldMan2.mauvilleOldMan_ecArray[oldMan->oldMan2.unk1]);
         stringPtr = StringCopy(gStringVar4, gOtherText_Is);
         stringPtr = StringCopy(stringPtr, (u8 *)gUnknown_083E5388[random]);
