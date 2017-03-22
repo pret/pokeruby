@@ -121,20 +121,21 @@ gSpriteTemplate_83CA43C:: @ 83CA43C
 	spr_template 20009, 20006, gOamData_83CA3EC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-Unknown_3CA454: @ 83CA454
-	.incbin "baserom.gba", 0x3ca454, 0x10
+gSubspriteTable_83CA454:: @ 83CA454
+	subsprite -26,  -4, 0,   0, 32x8
+	subsprite   6,  -4, 0,   4, 32x8
 
 	.align 2
-gUnknown_083CA464:: @ 83CA464
-	.4byte 0x2, Unknown_3CA454
+gSubspriteTables_83CA464:: @ 83CA464
+	.4byte 2, gSubspriteTable_83CA454
 
 	.align 2
 gUnknown_083CA46C:: @ 83CA46C
-	obj_tiles gContestApplauseGfx, 1024, 0xabe2
+	obj_tiles gContestApplauseGfx, 1024, 44002
 
 	.align 2
 gUnknown_083CA474:: @ 83CA474
-	obj_pal gContestPal, 0xABE2
+	obj_pal gContestPal, 44002
 
 	.align 2
 gOamData_83CA47C:: @ 83CA47C
@@ -252,9 +253,7 @@ gSpriteAffineAnimTable_83CC43C:: @ 83CC43C
 	.4byte gSpriteAffineAnim_83CC404
 	.4byte gSpriteAffineAnim_83CC414
 	.4byte gSpriteAffineAnim_83CC424
-
-	.align 2
-	.incbin "baserom.gba", 0x003cc448, 0x4
+	.4byte NULL
 
 	.align 2
 gOamData_83CC44C:: @ 83CC44C
@@ -280,13 +279,17 @@ gSpriteTemplate_83CC49C:: @ 83CC49C
 
 	.align 2
 gUnknown_083CC4B4:: @ 83CC4B4
-	obj_tiles gBlankGfxCompressed, 4096, 0x80e8
-	obj_tiles gBlankGfxCompressed, 4096, 0x80e9
-	obj_tiles gBlankGfxCompressed, 4096, 0x80ea
-	obj_tiles gBlankGfxCompressed, 4096, 0x80eb
+	obj_tiles gBlankGfxCompressed, 4096, 33000
+	obj_tiles gBlankGfxCompressed, 4096, 33001
+	obj_tiles gBlankGfxCompressed, 4096, 33002
+	obj_tiles gBlankGfxCompressed, 4096, 33003
 
+	.align 2
 gUnknown_083CC4D4:: @ 83CC4D4
-	.incbin "baserom.gba", 0x003cc4d4, 0x20
+	obj_pal 0x20180A4, 33000
+	obj_pal 0x20180C4, 33001
+	obj_pal 0x20180E4, 33002
+	obj_pal 0x2018104, 33003
 
 	.align 2
 gOamData_83CC4F4:: @ 83CC4F4
@@ -329,17 +332,72 @@ gSpriteTemplate_83CC584:: @ 83CC584
 	spr_template 33003, 33003, gOamData_83CC4F4, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83CC534, SpriteCallbackDummy
 
 gUnknown_083CC59C:: @ 83CC59C
-	.incbin "baserom.gba", 0x003cc59c, 0x6
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR}$"
 
 gUnknown_083CC5A2:: @ 83CC5A2
 	.string "/$"
 
+	.align 1
 gUnknown_083CC5A4:: @ 83CC5A4
-	.incbin "baserom.gba", 0x003cc5a4, 0x10
+	.2byte 0x73, 0x19E6, 0x253, 0x4CC4, 0x1F, 0x3E0, 0x3FF, 0x7C00
 
 @ 83CC5B4
 	.include "data/contest_excitement_table.inc"
 
 	.align 2
 gUnknown_083CC5D0:: @ 83CC5D0
-	.incbin "baserom.gba", 0x003cc5d0, 0x100
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_TAILLOW
+	.byte CONTEST_SMART
+	.string "TAILTA$", 11
+	.string "WYATT$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_BRELOOM
+	.byte CONTEST_BEAUTY
+	.string "BRELO$", 11
+	.string "LIANA$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_PELIPPER
+	.byte CONTEST_COOL
+	.string "PELEP$", 11
+	.string "TIERA$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_PELIPPER
+	.byte CONTEST_COOL
+	.string "PELEP$", 11
+	.string "TIERA$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_PELIPPER
+	.byte CONTEST_COOL
+	.string "PELEP$", 11
+	.string "TIERA$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_DELCATTY
+	.byte CONTEST_SMART
+	.string "KITSY$", 11
+	.string "OMAR$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_GULPIN
+	.byte CONTEST_CUTE
+	.string "GULPS$", 11
+	.string "MACIE$", 10
+
+	.4byte 0
+	.4byte 0xFFFF
+	.2byte SPECIES_LOUDRED
+	.byte CONTEST_TOUGH
+	.string "LOUDED$", 11
+	.string "BRYANT$", 10

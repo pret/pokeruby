@@ -4,17 +4,19 @@
 #include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_map_obj.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "event_data.h"
+#include "field_special_scene.h"
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "metatile_behavior.h"
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
@@ -26,10 +28,12 @@
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
-#include "field_special_scene.h"
 #include "weather.h"
 #include "wild_encounter.h"
-#include "metatile_behavior.h"
+#include "script_pokemon_80C4.h"
+#include "clock.h"
+#include "field_map_obj_helpers.h"
+#include "field_control_avatar.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -55,7 +59,7 @@ extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
 extern bool8 gUnknown_02029816;
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 
 extern u8 gUnknown_03000580[];
 extern u16 (*gUnknown_03000584)(u32);
@@ -103,7 +107,6 @@ extern struct MapHeader * const * const gMapGroups[];
 extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
-
 
 void DoWhiteOut(void)
 {
@@ -391,7 +394,7 @@ void sub_8053588(u8 a1)
         warp_set(&gSaveBlock1.warp3, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_80535C4(u16 a1, u16 a2)
+void sub_80535C4(s16 a1, s16 a2)
 {
     u8 v4 = sav1_map_get_light_level();
     u8 v5 = get_map_light_level_by_bank_and_number(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
@@ -466,16 +469,10 @@ struct MapConnection *sub_8053818(u8 dir)
 
     if (connection == NULL)
         return NULL;
-
-    i = 0;
-
-    while (i < count)
-    {
-        if (connection->direction == dir)
+	
+	for(i = 0; i < count; i++, connection++)
+		if (connection->direction == dir)
             return connection;
-        i++;
-        connection++;
-    }
 
     return NULL;
 }
@@ -539,7 +536,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     DoCurrentWeather();
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
-    AddMapNamePopUpWindowTask();
+    ShowMapNamePopup();
 }
 
 void sub_8053994(u32 a1)
@@ -667,15 +664,15 @@ bool32 IsBikingAllowedByMap(void)
         return FALSE;
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         return FALSE;
-	
+
     // is player in SeafloorCavern_Room9?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 36)
         return FALSE;
-	
+
     // is player in CaveOfOrigin_B4F?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 42)
         return FALSE;
-	
+
     return TRUE;
 }
 
@@ -1020,20 +1017,21 @@ bool32 is_c1_link_related_active(void)
 
 void c1_overworld_normal(u16 newKeys, u16 heldKeys)
 {
-    struct UnkInputStruct inputStruct;
+    struct FieldInput inputStruct;
+
     sub_8059204();
-    sub_8067EEC(&inputStruct);
-    process_overworld_input(&inputStruct, newKeys, heldKeys);
+    FieldClearPlayerInput(&inputStruct);
+    FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
     if (!ScriptContext2_IsEnabled())
     {
         if (sub_8068024(&inputStruct) == 1)
         {
             ScriptContext2_Enable();
-            HideMapNamePopUpWindow();
+            HideMapNamePopup();
         }
         else
         {
-            player_step(inputStruct.input_field_2, newKeys, heldKeys);
+            player_step(inputStruct.dpadDirection, newKeys, heldKeys);
         }
     }
 }
@@ -1254,7 +1252,7 @@ void sub_80546F0(void)
 void sub_805470C(void)
 {
     if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-        AddMapNamePopUpWindowTask();
+        ShowMapNamePopup();
     sub_8080B60();
 }
 
@@ -1449,7 +1447,7 @@ bool32 sub_805493C(u8 *a1, u32 a2)
         break;
     case 11:
         if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-            AddMapNamePopUpWindowTask();
+            ShowMapNamePopup();
         (*a1)++;
         break;
     case 12:
@@ -1572,12 +1570,12 @@ void sub_8054BA8(void)
 
     addr = (void *)VRAM;
     size = 0x18000;
-    while(1)
+    while (1)
     {
         DmaFill16(3, 0, addr, 0x1000);
         addr += 0x1000;
         size -= 0x1000;
-        if(size <= 0x1000)
+        if (size <= 0x1000)
         {
             DmaFill16(3, 0, addr, size);
             break;
@@ -2099,7 +2097,7 @@ void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3)
     sub_8055B08(linkPlayerId, &x, &y);
     a3->sub.x = x;
     a3->sub.y = y;
-    a3->sub.field_8 = sub_8055B50(linkPlayerId);
+    a3->sub.height = sub_8055B50(linkPlayerId);
     a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -2141,7 +2139,7 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
 
 u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 {
-    struct UnkStruct_8054FF8_Substruct unkStruct;
+    struct MapPosition unkStruct;
     u8 linkPlayerId;
 
     if (a1->c && a1->c != 2)
@@ -2150,7 +2148,7 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     unkStruct = a1->sub;
     unkStruct.x += gUnknown_0821664C[a1->d].x;
     unkStruct.y += gUnknown_0821664C[a1->d].y;
-    unkStruct.field_8 = 0;
+    unkStruct.height = 0;
     linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
 
     if (linkPlayerId != 4)
@@ -2161,8 +2159,8 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
             return TradeRoom_TooBusyToNotice;
         if (!sub_8083BF4(linkPlayerId))
             return TradeRoom_ReadTrainerCard1;
-		else
-			return TradeRoom_ReadTrainerCard2;
+        else
+            return TradeRoom_ReadTrainerCard2;
     }
 
     return sub_80682A8(&unkStruct, a1->field_C, a1->d);
@@ -2303,7 +2301,7 @@ void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
 
 void strange_npc_table_clear(void)
 {
-    memset(gLinkPlayerMapObjects, 0, 16);
+    memset(gLinkPlayerMapObjects, 0, sizeof(gLinkPlayerMapObjects));
 }
 
 void ZeroMapObject(struct MapObject *mapObj)
@@ -2541,7 +2539,7 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
 
     if (linkPlayerMapObj->active)
     {
-        u8 val = sub_805983C(0, mapObj->mapobj_bit_1);
+        u8 val = GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->mapobj_bit_1);
         mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;

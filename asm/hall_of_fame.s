@@ -539,11 +539,11 @@ sub_8142274: @ 8142274
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _081422A8 @ =gUnknown_03005EBC
+	ldr r1, _081422A8 @ =gGameContinueCallback
 	ldr r0, _081422AC @ =sub_8141FC4
 	str r0, [r1]
 	movs r0, 0x3
-	bl sub_8125D44
+	bl TrySavingData
 	movs r0, 0x37
 	bl PlaySE
 	ldr r1, _081422B0 @ =gTasks
@@ -559,7 +559,7 @@ sub_8142274: @ 8142274
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081422A8: .4byte gUnknown_03005EBC
+_081422A8: .4byte gGameContinueCallback
 _081422AC: .4byte sub_8141FC4
 _081422B0: .4byte gTasks
 _081422B4: .4byte sub_81422B8
@@ -1700,7 +1700,7 @@ _08142B8E:
 	adds r0, 0x4
 	adds r0, r1, r0
 	ldrh r3, [r0]
-	ldr r0, _08142BD0 @ =gUnknown_0840B53A
+	ldr r0, _08142BD0 @ =gUnknown_0840B534 + 0x6
 	adds r1, r0
 	b _08142BE2
 	.align 2, 0
@@ -1710,14 +1710,14 @@ _08142BC0: .4byte gUnknown_0203931C
 _08142BC4: .4byte 0x000001ff
 _08142BC8: .4byte gUnknown_0840B564
 _08142BCC: .4byte gUnknown_0840B534
-_08142BD0: .4byte gUnknown_0840B53A
+_08142BD0: .4byte gUnknown_0840B534 + 0x6
 _08142BD4:
 	lsls r1, r5, 3
 	mov r0, r10
 	adds r0, 0x4
 	adds r0, r1, r0
 	ldrh r3, [r0]
-	ldr r2, _08142C28 @ =gUnknown_0840B56A
+	ldr r2, _08142C28 @ =gUnknown_0840B564 + 0x6
 	adds r1, r2
 _08142BE2:
 	ldrh r2, [r1]
@@ -1755,7 +1755,7 @@ _08142BE2:
 	strh r0, [r1]
 	b _08142C3C
 	.align 2, 0
-_08142C28: .4byte gUnknown_0840B56A
+_08142C28: .4byte gUnknown_0840B564 + 0x6
 _08142C2C: .4byte gSprites
 _08142C30:
 	adds r0, r5, 0x5

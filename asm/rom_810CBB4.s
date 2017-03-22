@@ -47,7 +47,7 @@ sub_810CBFC: @ 810CBFC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0810CC24 @ =gUnknown_0202FF84
-	ldr r1, _0810CC28 @ =gUnknown_03005CE0
+	ldr r1, _0810CC28 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r2]
 	ldr r2, _0810CC2C @ =gTasks
@@ -63,7 +63,7 @@ sub_810CBFC: @ 810CBFC
 	bx r0
 	.align 2, 0
 _0810CC24: .4byte gUnknown_0202FF84
-_0810CC28: .4byte gUnknown_03005CE0
+_0810CC28: .4byte gLastFieldPokeMenuOpened
 _0810CC2C: .4byte gTasks
 _0810CC30: .4byte sub_810CC34
 	thumb_func_end sub_810CBFC
@@ -1003,8 +1003,8 @@ _0810D370:
 	bx r1
 	thumb_func_end sub_810D32C
 
-	thumb_func_start sub_810D378
-sub_810D378: @ 810D378
+	thumb_func_start UpdateShoalTideFlag
+UpdateShoalTideFlag: @ 810D378
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -1038,7 +1038,7 @@ _0810D3BE:
 	bx r0
 	.align 2, 0
 _0810D3C4: .4byte 0x0000083a
-	thumb_func_end sub_810D378
+	thumb_func_end UpdateShoalTideFlag
 
 	thumb_func_start sub_810D3C8
 sub_810D3C8: @ 810D3C8
@@ -2131,7 +2131,7 @@ _0810DBDC:
 	adds r0, r1
 	ldrb r1, [r0, 0x13]
 	movs r0, 0
-	bl sub_805983C
+	bl GetRivalAvatarGraphicsIdByStateIdAndGender
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp

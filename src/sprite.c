@@ -1,8 +1,8 @@
 #include "global.h"
 #include "sprite.h"
 #include "main.h"
-#include "palette.h"
 #include "menu_cursor.h"
+#include "palette.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -36,7 +36,7 @@ struct OamMatrix
 
 struct SpriteCopyRequest
 {
-    u8 *src;
+    const u8 *src;
     u8 *dest;
     u16 size;
 };
@@ -58,7 +58,7 @@ static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
 static s16 AllocSpriteTiles(u16 tileCount);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
-static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, struct SpriteFrameImage *images);
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 static void ResetAllSprites(void);
 static void BeginAnim(struct Sprite *sprite);
 static void ContinueAnim(struct Sprite *sprite);
@@ -95,7 +95,7 @@ static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameC
 static void ResetAffineAnimData(void);
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
-static void DoLoadSpritePalette(u16 *src, u16 paletteOffset);
+static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset);
 
 typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
@@ -129,10 +129,12 @@ const struct SpriteTemplate gDummySpriteTemplate;
 // Unreferenced error message.
 // It means "The DMA transfer request table has exceeded its limit."
 static const u8 sDmaOverErrorMsg[] =
-    _"DMA OVER\n"
-     "DMAてんそう\n"
-     "リクエストテーブルが\n"
-     "オーバーしました";
+    _(
+    "DMA OVER\n"
+    "DMAてんそう\n"
+    "リクエストテーブルが\n"
+    "オーバーしました"
+    );
 
 // Unreferenced data.
 static const u8 sUnknownData[24] =
@@ -169,51 +171,51 @@ static const u8 sCenterToCornerVecTable[3][4][2] =
 
 static const struct Sprite sDummySprite =
 {
-    DUMMY_OAM_DATA,
-    (union AnimCmd **)gDummySpriteAnimTable,
-    NULL,
-    (union AffineAnimCmd **)gDummySpriteAffineAnimTable,
-    (struct SpriteTemplate *)&gDummySpriteTemplate,
-    NULL,
-    SpriteCallbackDummy,
-    { 304, 160 },
-    {   0,   0 },
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0xFF
+    .oam = DUMMY_OAM_DATA,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .template = &gDummySpriteTemplate,
+    .subspriteTables = NULL,
+    .callback = SpriteCallbackDummy,
+    .pos1 = { 304, 160 },
+    .pos2 = {   0,   0 },
+    .centerToCornerVecX = 0,
+    .centerToCornerVecY = 0,
+    .animNum = 0,
+    .animCmdIndex = 0,
+    .animDelayCounter = 0,
+    .animPaused = 0,
+    .affineAnimPaused = 0,
+    .animLoopCounter = 0,
+    .data0 = 0,
+    .data1 = 0,
+    .data2 = 0,
+    .data3 = 0,
+    .data4 = 0,
+    .data5 = 0,
+    .data6 = 0,
+    .data7 = 0,
+    .inUse = 0,
+    .coordOffsetEnabled = 0,
+    .invisible = 0,
+    .flags_3 = 0,
+    .flags_4 = 0,
+    .flags_5 = 0,
+    .flags_6 = 0,
+    .flags_7 = 0,
+    .hFlip = 0,
+    .vFlip = 0,
+    .animBeginning = 0,
+    .affineAnimBeginning = 0,
+    .animEnded = 0,
+    .affineAnimEnded = 0,
+    .usingSheet = 0,
+    .flags_f = 0,
+    .sheetTileStart = 0,
+    .subspriteTableNum = 0,
+    .subspriteMode = 0,
+    .subpriority = 0xFF
 };
 
 const struct OamData gDummyOamData = DUMMY_OAM_DATA;
@@ -228,13 +230,13 @@ const union AffineAnimCmd * const gDummySpriteAffineAnimTable[] = { &sDummyAffin
 
 const struct SpriteTemplate gDummySpriteTemplate =
 {
-    0,
-    0xFFFF,
-    (struct OamData *)&gDummyOamData,
-    (union AnimCmd **)gDummySpriteAnimTable,
-    NULL,
-    (union AffineAnimCmd **)gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
+    .tileTag = 0,
+    .paletteTag = 0xFFFF,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 // TODO: Find out what these are used for.
@@ -534,7 +536,7 @@ u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subprior
     return MAX_SPRITES;
 }
 
-u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority)
+u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     s16 i;
 
@@ -827,7 +829,7 @@ void ProcessSpriteCopyRequests(void)
     }
 }
 
-static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, struct SpriteFrameImage *images)
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
@@ -838,7 +840,7 @@ static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, struct SpriteFra
     }
 }
 
-void RequestSpriteCopy(u8 *src, u8 *dest, u16 size)
+void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
@@ -1466,7 +1468,7 @@ void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotat
     CopyOamMatrix(matrixNum, &matrix);
 }
 
-u16 LoadSpriteSheet(struct SpriteSheet *sheet)
+u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
 {
     s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
@@ -1482,7 +1484,7 @@ u16 LoadSpriteSheet(struct SpriteSheet *sheet)
     }
 }
 
-void LoadSpriteSheets(struct SpriteSheet *sheets)
+void LoadSpriteSheets(const struct SpriteSheet *sheets)
 {
     u8 i;
     for (i = 0; sheets[i].data != NULL; i++)
@@ -1511,9 +1513,9 @@ void AllocTilesForSpriteSheets(struct SpriteSheet *sheets)
         AllocTilesForSpriteSheet(&sheets[i]);
 }
 
-void LoadTilesForSpriteSheet(struct SpriteSheet *sheet)
+void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet)
 {
-    u8 *data = sheet->data;
+    const u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
     CpuCopy16(data, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
 }
@@ -1597,14 +1599,14 @@ static void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
     SET_SPRITE_TILE_RANGE(freeIndex, start, count);
 }
 
-void RequestSpriteSheetCopy(struct SpriteSheet *sheet)
+void RequestSpriteSheetCopy(const struct SpriteSheet *sheet)
 {
-    u8 *data = sheet->data;
+    const u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
     RequestSpriteCopy(data, (u8 *)OBJ_VRAM0 + tileStart * TILE_SIZE_4BPP, sheet->size);
 }
 
-u16 LoadSpriteSheetDeferred(struct SpriteSheet *sheet)
+u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet)
 {
     s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
@@ -1657,7 +1659,7 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
             break;
 }
 
-static void DoLoadSpritePalette(u16 *src, u16 paletteOffset)
+static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 {
     LoadPalette(src, paletteOffset + 0x100, 32);
 }
@@ -1698,7 +1700,7 @@ void FreeSpritePaletteByTag(u16 tag)
         sSpritePaletteTags[index] = 0xFFFF;
 }
 
-void SetSubspriteTables(struct Sprite *sprite, struct SubspriteTable *subspriteTables)
+void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables)
 {
     sprite->subspriteTables = subspriteTables;
     sprite->subspriteTableNum = 0;
@@ -1724,7 +1726,7 @@ bool8 AddSpriteToOamBuffer(struct Sprite *sprite, u8 *oamIndex)
 
 bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex)
 {
-    struct SubspriteTable *subspriteTable;
+    const struct SubspriteTable *subspriteTable;
     struct OamData *oam;
 
     if (*oamIndex >= gOamLimit)

@@ -1,14 +1,14 @@
 #include "global.h"
+#include "asm.h"
+#include "gba/flash_internal.h"
+#include "m4a.h"
 #include "main.h"
-#include "sprite.h"
+#include "menu.h"
 #include "palette.h"
+#include "save.h"
+#include "sprite.h"
 #include "task.h"
 #include "text.h"
-#include "menu.h"
-#include "save.h"
-#include "m4a.h"
-#include "gba/flash_internal.h"
-#include "asm.h"
 
 // In English 1.0, the text window is too small, causing text to overflow.
 
@@ -20,18 +20,19 @@
 
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-struct SaveFailedStruct
+struct SaveFailedClockStruct
 {
-    u16 unk0;
-    u16 unk2;
+    bool16 clockRunning;
+    u16 timer; // appears to be unused, the only case its "used" cannot be reached normally
+    u8 unused[0xE]; // appears to be unused space. alternatively, there could have been multiple clock structs. however, neither of these cases are fulfilled, so the purpose of this space is unknown. one theory is that there is room for 3 more clock structs (2 16-bit values), so its possible GF intended there to be support for link-based save failed screens in case the synchronization failed, or it in fact was present in an earlier build but taken out for reasons.
 };
 
 extern u8 unk_2000000[];
 
-extern u16 gUnknown_0203933C;
-extern struct SaveFailedStruct gUnknown_0203933E;
-extern u32 gUnknown_03005EA8;
-extern u32 gUnknown_03005EBC;
+extern u16 gSaveFailedType;
+extern struct SaveFailedClockStruct gSaveFailedClockInfo;
+extern u32 gDamagedSaveSectors;
+extern u32 gGameContinueCallback;
 
 extern u8 gBirchHelpGfx[];
 
@@ -44,10 +45,7 @@ extern u8 gSystemText_GameplayEnded[];
 
 extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];
-
-extern const u8 gSaveFailedClockGfx[];
-extern const u8 gSaveFailedClockPal[];
-extern u8 gBirchBagGrassPal[];
+extern u8 gBirchBagGrassPal[0x40];
 
 static const struct OamData sClockOamData =
 {
@@ -78,6 +76,9 @@ static const u8 sClockFrames[8][3] =
     { 5, 1, 0 },
 };
 
+static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
+static const u8 gSaveFailedClockGfx[] =	INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
+
 static void VBlankCB(void);
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -89,11 +90,11 @@ static bool8 VerifySectorWipe(u16 sector);
 static bool8 WipeSector(u16 sector);
 static bool8 WipeSectors(u32 sectorBits);
 
-void DoSaveFailedScreen(u8 var)
+void DoSaveFailedScreen(u8 saveType)
 {
     SetMainCallback2(CB2_SaveFailedScreen);
-    gUnknown_0203933C = var;
-    gUnknown_0203933E.unk0 = 0;
+    gSaveFailedType = saveType;
+    gSaveFailedClockInfo.clockRunning = FALSE;
 }
 
 static void VBlankCB(void)
@@ -107,7 +108,7 @@ static void CB2_SaveFailedScreen(void)
 {
     u16 ime;
 
-    switch(gMain.state)
+    switch (gMain.state)
     {
         case 0:
         default:
@@ -135,8 +136,8 @@ static void CB2_SaveFailedScreen(void)
             ResetSpriteData();
             ResetTasks();
             ResetPaletteFade();
-            LoadPalette(&gBirchBagGrassPal, 0, 0x40);
-            LoadPalette(&gSaveFailedClockPal, 0x100, 0x20);
+            LoadPalette(&gBirchBagGrassPal, 0, sizeof(gBirchBagGrassPal));
+            LoadPalette(&gSaveFailedClockPal, 0x100, sizeof(gSaveFailedClockPal));
             SetUpWindowConfig(&gWindowConfig_81E6C3C);
             InitMenuWindow(&gWindowConfig_81E6CE4);
             MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
@@ -169,11 +170,11 @@ static void CB2_WipeSave(void)
 {
     u8 wipeTries = 0;
 
-    gUnknown_0203933E.unk0 = 1;
+    gSaveFailedClockInfo.clockRunning = TRUE;
 
-    while (gUnknown_03005EA8 && wipeTries < 3)
+    while (gDamagedSaveSectors != 0 && wipeTries < 3) // while there are still attempts left, keep trying to fix the save sectors.
     {
-        if (WipeSectors(gUnknown_03005EA8))
+        if (WipeSectors(gDamagedSaveSectors) != FALSE)
         {
             MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
             MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
@@ -183,9 +184,9 @@ static void CB2_WipeSave(void)
 
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
         MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
-        sub_8125C3C(gUnknown_0203933C);
+        HandleSavingData(gSaveFailedType);
 
-        if (gUnknown_03005EA8)
+        if (gDamagedSaveSectors != 0)
         {
 #ifdef BUGFIX_SAVEFAILEDSCREEN2
             MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
@@ -206,9 +207,10 @@ static void CB2_WipeSave(void)
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
 
-        if (!gUnknown_03005EBC) // cant continue game.
+        // no callback exists, so the game cannot continue.
+        if (gGameContinueCallback == 0)
             MenuPrint(gSystemText_SaveCompletedGameEnd, 2, MSG_WIN_TOP + 1);
-        else // can continue game.
+        else // callback exists, so continue
             MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
     }
 
@@ -217,7 +219,7 @@ static void CB2_WipeSave(void)
 
 static void CB2_GameplayCannotBeContinued(void)
 {
-    gUnknown_0203933E.unk0 = 0;
+    gSaveFailedClockInfo.clockRunning = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -230,13 +232,11 @@ static void CB2_GameplayCannotBeContinued(void)
 
 static void CB2_FadeAndReturnToTitleScreen(void)
 {
-    u8 zero;
-
-    gUnknown_0203933E.unk0 = zero = 0;
+    gSaveFailedClockInfo.clockRunning = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, zero, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_ReturnToTitleScreen);
     }
@@ -246,14 +246,14 @@ static void CB2_ReturnToTitleScreen(void)
 {
     if (!UpdatePaletteFade())
     {
-        if (!gUnknown_03005EBC)
+        if (gGameContinueCallback == 0) // no callback exists, so do a soft reset.
         {
             DoSoftReset();
         }
         else
         {
-            SetMainCallback2((MainCallback)gUnknown_03005EBC);
-            gUnknown_03005EBC = 0;
+            SetMainCallback2((MainCallback)gGameContinueCallback);
+            gGameContinueCallback = 0;
         }
     }
 }
@@ -266,7 +266,7 @@ static void VBlankCB_UpdateClockGraphics(void)
     gMain.oamBuffer[0].x = 112;
     gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
-    if (gUnknown_0203933E.unk0)
+    if (gSaveFailedClockInfo.clockRunning != FALSE)
     {
         gMain.oamBuffer[0].tileNum = sClockFrames[n][0];
         gMain.oamBuffer[0].matrixNum = (sClockFrames[n][2] << 4) | (sClockFrames[n][1] << 3);
@@ -278,8 +278,8 @@ static void VBlankCB_UpdateClockGraphics(void)
 
     CpuFastCopy(gMain.oamBuffer, (void *)OAM, 4);
 
-    if (gUnknown_0203933E.unk2)
-        gUnknown_0203933E.unk2--;
+    if (gSaveFailedClockInfo.timer) // maybe was used for debugging?
+        gSaveFailedClockInfo.timer--;
 }
 
 static bool8 VerifySectorWipe(u16 sector)

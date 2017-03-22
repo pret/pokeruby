@@ -1,28 +1,35 @@
 #include "global.h"
 #include "asm.h"
+#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
+#include "coins.h"
+#include "decoration.h"
+#include "event_data.h"
+#include "field_effect.h"
+#include "field_message_box.h"
 #include "field_player_avatar.h"
+#include "field_map_obj_helpers.h"
+#include "field_door.h"
 #include "item.h"
-#include "script.h"
-#include "rng.h"
-#include "palette.h"
-#include "rtc.h"
-#include "pokemon.h"
-#include "asm_fieldmap.h"
 #include "main.h"
+#include "map_obj_lock.h"
 #include "menu.h"
 #include "money.h"
-#include "decoration.h"
-#include "field_message_box.h"
+#include "palette.h"
+#include "pokemon.h"
+#include "rng.h"
+#include "rom4.h"
+#include "rtc.h"
+#include "script.h"
 #include "sound.h"
 #include "string_util.h"
-#include "event_data.h"
-#include "rom4.h"
 #include "weather.h"
-#include "map_obj_lock.h"
-#include "coins.h"
-#include "field_effect.h"
+#include "script_menu.h"
+#include "script_pokemon_80F9.h"
+#include "script_pokemon_80C4.h"
+#include "clock.h"
+#include "contest_painting.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -561,7 +568,7 @@ bool8 ScrCmd_darken(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 sub_8066248(void)
+bool8 IsPaletteNotActive(void)
 {
     if (!gPaletteFade.active)
         return TRUE;
@@ -572,7 +579,7 @@ bool8 sub_8066248(void)
 bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 {
     fade_screen(ScriptReadByte(ctx), 0);
-    SetupNativeScript(ctx, sub_8066248);
+    SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
@@ -581,7 +588,7 @@ bool8 ScrCmd_fadescreendelay(struct ScriptContext *ctx)
     u8 duration = ScriptReadByte(ctx);
     u8 delay = ScriptReadByte(ctx);
     fade_screen(duration, delay);
-    SetupNativeScript(ctx, sub_8066248);
+    SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
@@ -1170,7 +1177,7 @@ bool8 ScrCmd_closebutton(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 sub_80670C0()
+bool8 WaitForAorBPress(void)
 {
     if (gMain.newKeys & A_BUTTON)
         return TRUE;
@@ -1181,7 +1188,7 @@ bool8 sub_80670C0()
 
 bool8 ScrCmd_waitbutton(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, sub_80670C0);
+    SetupNativeScript(ctx, WaitForAorBPress);
     return TRUE;
 }
 

@@ -1,17 +1,17 @@
 #include "global.h"
-#include "sprite.h"
-#include "menu.h"
+#include "mystery_event_menu.h"
+#include "asm.h"
 #include "link.h"
-#include "text.h"
 #include "main.h"
+#include "menu.h"
 #include "palette.h"
-#include "task.h"
-#include "string_util.h"
+#include "save.h"
 #include "songs.h"
 #include "sound.h"
-#include "save.h"
-#include "asm.h"
-#include "mystery_event_menu.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_02039338;
@@ -295,7 +295,7 @@ static void CB2_MysteryEventMenu(void)
             unkVal = sub_812613C(unk_2000000);
             CpuFill32(0, unk_2000000, 0x7D4);
             if (!GetEventLoadMessage(gStringVar4, unkVal))
-                sub_8125D44(0);
+                TrySavingData(NORMAL_SAVE);
             gMain.state++;
             break;
         case 12:

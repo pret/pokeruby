@@ -1,17 +1,17 @@
 #include "global.h"
 #include "link.h"
 #include "asm.h"
+#include "battle.h"
 #include "main.h"
-#include "task.h"
-#include "text.h"
-#include "sprite.h"
-#include "songs.h"
+#include "menu.h"
 #include "palette.h"
 #include "rng.h"
-#include "menu.h"
-#include "sound.h"
 #include "save.h"
-#include "battle.h"
+#include "songs.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -155,21 +155,21 @@ EWRAM_DATA u32 gFiller_20238B8 = {0};
 EWRAM_DATA u32 dword_20238BC = {0};
 EWRAM_DATA bool8 gLinkOpen = {0};
 
-#include "link/digit_palette.h"
-#include "link/digit_tiles.h"
+static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
+static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");
 
 static const u8 sDebugMessages[7][12] =
 {
-    _"せつぞく　ちゅうです",
-    _"せつぞく　できません",
-    _"かくにん　ちゅうです",
-    _"かくにん　できました",
-    _"かくにん　できません",
-    _"かくにん　を　かくにん",
-    _"かくにん　は　しっぱい",
+    _("せつぞく　ちゅうです"),
+    _("せつぞく　できません"),
+    _("かくにん　ちゅうです"),
+    _("かくにん　できました"),
+    _("かくにん　できません"),
+    _("かくにん　を　かくにん"),
+    _("かくにん　は　しっぱい"),
 };
 
-static const u8 sColorCodes[] = _"{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}";
+static const u8 sColorCodes[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}");
 
 static const u32 sBlockRequestLookupTable[5 * 2] =
 {
@@ -180,11 +180,11 @@ static const u32 sBlockRequestLookupTable[5 * 2] =
     (u32)gBlockSendBuffer,  40,
 };
 
-static const u8 sTestString[] = _"テストな";
+static const u8 sTestString[] = _("テストな");
 
 ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) static const u8 sEmptyString[] = _"";
+ALIGNED(4) static const u8 sEmptyString[] = _("");
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -402,7 +402,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)
-        sub_8125D44(1);
+        TrySavingData(LINK_SAVE);
     if (gMain.newKeys & SELECT_BUTTON)
         sub_800832C();
     if (gLinkTestDebugValuesEnabled)
@@ -475,8 +475,8 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x2222:
             InitLocalLinkPlayer();
             localLinkPlayerBlock.linkPlayer = localLinkPlayer;
-            memcpy(localLinkPlayerBlock.magic1, sMagic, 15);
-            memcpy(localLinkPlayerBlock.magic2, sMagic, 15);
+            memcpy(localLinkPlayerBlock.magic1, sMagic, sizeof(localLinkPlayerBlock.magic1) - 1);
+            memcpy(localLinkPlayerBlock.magic2, sMagic, sizeof(localLinkPlayerBlock.magic2) - 1);
             InitBlockSend(&localLinkPlayerBlock, sizeof(localLinkPlayerBlock));
             break;
         case 0x5555:

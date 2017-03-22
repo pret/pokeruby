@@ -65,11 +65,11 @@ struct LinkPlayer
     /* 0x00 */ u16 version;
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
-    /* 0x05 */ u8 name[11];
-    /* 0x10 */ u8 gender;
+    /* 0x08 */ u8 name[11];
+    /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
     /* 0x18 */ u16 lp_field_18;
-    /* 0x20 */ u16 language;
+    /* 0x1A */ u16 language;
 };
 
 struct LinkPlayerBlock

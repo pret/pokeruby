@@ -1,14 +1,14 @@
 #include "global.h"
-#include "trainer_see.h"
 #include "asm.h"
-#include "battle_setup.h"
-#include "field_player_avatar.h"
-#include "field_map_obj.h"
 #include "asm_fieldmap.h"
-#include "task.h"
-#include "sprite.h"
+#include "battle_setup.h"
 #include "field_effect.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "script.h"
+#include "sprite.h"
+#include "task.h"
+#include "trainer_see.h"
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);
@@ -23,7 +23,7 @@ bool8 CheckTrainers(void)
 {
     u8 i;
 
-    for(i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
     {
         if ( gMapObjects[i].active )
             if ( gMapObjects[i].trainerType == 1 ||  gMapObjects[i].trainerType == 3 )
@@ -37,14 +37,14 @@ bool8 CheckTrainer(u8 trainer)
 {
    u8 *scriptPtr = GetFieldObjectScriptPointerByFieldObjectId(trainer);
 
-   if(GetTrainerFlagFromScriptPointer(scriptPtr))
+   if (GetTrainerFlagFromScriptPointer(scriptPtr))
        return FALSE;
    else
    {
        struct MapObject *trainerObj = &gMapObjects[trainer];
        u8 canApproach = TrainerCanApproachPlayer(trainerObj);
 
-       if(canApproach != 0)
+       if (canApproach != 0)
         {
            TrainerWantsBattle(trainer, scriptPtr);
            sub_80842C8(trainerObj, (canApproach - 1));
@@ -71,7 +71,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     }
     else // spinners
     {
-        for(i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++)
         {
             playerCoord = gIsTrainerInRange[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
             if ( CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, i + 1) ) // directions are 1-4 instead of 0-3. south north west east
@@ -233,7 +233,7 @@ s8 sub_808441C(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     if (!(FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)) || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
-            if(task->data[3])
+            if (task->data[3])
             {
                 FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->mapobj_unk_18));
                 task->data[3]--;
@@ -282,7 +282,7 @@ s8 sub_8084534(u8 taskId, struct Task *task, struct MapObject *trainerObj) // te
 
 s8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
         || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x59);
@@ -301,7 +301,7 @@ s8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
 s8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
         || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x3E);
@@ -312,7 +312,7 @@ s8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
 s8 sub_80845FC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(FieldObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
+    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
     {
         gUnknown_0202FF84[0] = trainerObj->coords2.x;
         gUnknown_0202FF84[1] = trainerObj->coords2.y;
@@ -328,7 +328,7 @@ s8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     struct Sprite *sprite;
 
-    if(gSprites[task->data[4]].animCmdIndex == 2)
+    if (gSprites[task->data[4]].animCmdIndex == 2)
     {
         trainerObj->mapobj_bit_26 = 0;
         trainerObj->mapobj_bit_2 = 1;
@@ -344,7 +344,7 @@ s8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
 s8 sub_80846C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(!FieldEffectActiveListContains(49))
+    if (!FieldEffectActiveListContains(49))
         task->data[0] = 3;
 
     return 0;
@@ -357,13 +357,13 @@ void sub_80846E4(u8 taskId)
 
     // another mapObj loaded into by loadword?
     LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&mapObj);
-    if(!task->data[7])
+    if (!task->data[7])
     {
         FieldObjectClearAnim(mapObj);
         task->data[7]++;
     }
     gTrainerSeeFuncList2[task->data[0]](taskId, task, mapObj);
-    if(task->data[0] == 3 && !FieldEffectActiveListContains(49))
+    if (task->data[0] == 3 && !FieldEffectActiveListContains(49))
     {
         npc_set_running_behaviour_etc(mapObj, npc_running_behaviour_by_direction(mapObj->mapobj_unk_18));
         sub_805C774(mapObj, npc_running_behaviour_by_direction(mapObj->mapobj_unk_18));
@@ -395,7 +395,7 @@ u8 FldEff_ExclamationMarkIcon1(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 0, 0);
-    
+
     return 0;
 }
 
@@ -405,7 +405,7 @@ u8 FldEff_ExclamationMarkIcon2(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 33, 1);
-    
+
     return 0;
 }
 
@@ -415,7 +415,7 @@ u8 FldEff_HeartIcon(void)
 
     if (spriteId != 64)
         sub_8084894(&gSprites[spriteId], 46, 0);
-    
+
     return 0;
 }
 
@@ -423,13 +423,13 @@ void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
 {
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;
-    
+
     sprite->data0 = gUnknown_0202FF84[0];
     sprite->data1 = gUnknown_0202FF84[1];
     sprite->data2 = gUnknown_0202FF84[2];
     sprite->data3 = -5;
     sprite->data7 = a2;
-    
+
     StartSpriteAnim(sprite, a3);
 }
 

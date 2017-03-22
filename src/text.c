@@ -1,11 +1,11 @@
 #include "global.h"
 #include "text.h"
-#include "main.h"
-#include "string_util.h"
-#include "songs.h"
-#include "palette.h"
-#include "sound.h"
 #include "battle.h"
+#include "main.h"
+#include "palette.h"
+#include "songs.h"
+#include "sound.h"
+#include "string_util.h"
 
 enum
 {
@@ -211,20 +211,22 @@ const u16 gUnknown_081E29D8[] = { 0x100, 0x200, 0x400, 0x800 };
 const u16 gUnknown_081E29E0[] = { 0x100, 0x200, 0x400, 0x800 };
 const u16 gUnknown_081E29E8[] = { 1, 2, 4, 8 };
 
-#include "fonts/font0_lat_glyphs.h"
-#include "fonts/font1_lat_glyphs.h"
-#include "fonts/font0_jpn_glyphs.h"
-#include "fonts/font1_jpn_glyphs.h"
-#include "fonts/braille_glyphs.h"
-#include "fonts/down_arrow_tiles.h"
+static const u8 sFont0LatinGlyphs[] = INCBIN_U8("graphics/fonts/font0_lat.1bpp");
+static const u8 sFont1LatinGlyphs[] = INCBIN_U8("graphics/fonts/font1_lat.1bpp");
+static const u8 sFont0JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font0_jpn.1bpp");
+static const u8 sFont1JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font1_jpn.1bpp");
+static const u8 sBrailleGlyphs[] = INCBIN_U8("graphics/fonts/font6_braille.1bpp");
+static const u32 sDownArrowTiles[] = INCBIN_U32("graphics/fonts/down_arrow.4bpp");
+
 #include "fonts/type1_map.h"
 #include "fonts/type3_map.h"
 #include "fonts/font1_widths.h"
 #include "fonts/font4_widths.h"
 #include "fonts/font0_widths.h"
 #include "fonts/font3_widths.h"
-#include "fonts/unknown_palette_81E6692.h"
-#include "fonts/default_palette.h"
+
+const u16 gUnknownPalette_81E6692[] = INCBIN_U16("graphics/fonts/unknown_81E6692.gbapal");
+const u16 gFontDefaultPalette[] = INCBIN_U16("graphics/fonts/default.gbapal");
 
 const u8 sBlankTile[8] = { 0, 0, 0, 0, 0, 0, 0, 0, };
 

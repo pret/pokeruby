@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "asm.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "menu.h"
 #include "mystery_event_menu.h"
 #include "option_menu.h"
@@ -16,7 +17,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
-#include "event_data.h"
+#include "naming_screen.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -69,9 +70,7 @@ extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
 extern const u8 gSystemText_NewPara[];
 
-extern u8 gSpriteAffineAnimTable_81E79AC[];
-
-extern u8 gStringVar4[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 
 extern u8 unk_2000000[];
 
@@ -1083,7 +1082,7 @@ static void Task_NewGameSpeech22(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetPresetPlayerName(1);
-        DoNamingScreen(0, &gSaveBlock2, gSaveBlock2.playerGender, 0, 0, CB_ContinueNewGameSpeechPart2);
+        DoNamingScreen(0, gSaveBlock2.playerName, gSaveBlock2.playerGender, 0, 0, CB_ContinueNewGameSpeechPart2);
     }
 }
 
@@ -1258,7 +1257,7 @@ static void Task_NewGameSpeech30(u8 taskId)
 
             spriteId = gTasks[taskId].data[TD_TRAINER_SPRITE_ID];
             gSprites[spriteId].oam.affineMode = 1;
-            gSprites[spriteId].affineAnims = (union AffineAnimCmd **)gSpriteAffineAnimTable_81E79AC;
+            gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E79AC;
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = ShrinkPlayerSprite;

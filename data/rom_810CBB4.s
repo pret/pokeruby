@@ -54,11 +54,13 @@ gCaveTransitionPalette_Black:: @ 83F806C
 	.2byte 0x0000
 	.endr
 
+	.align 1
 gUnknown_083F808C:: @ 83F808C
-	.incbin "baserom.gba", 0x003f808c, 0x10
+	.incbin "graphics/misc/83F808C.gbapal"
 
+	.align 1
 gUnknown_083F809C:: @ 83F809C
-	.incbin "baserom.gba", 0x003f809c, 0x10
+	.incbin "graphics/misc/83F809C.gbapal"
 
 	.align 2
 gCaveTransitionTilemap:: @ 83F80AC
@@ -69,22 +71,52 @@ gCaveTransitionTiles:: @ 83F828C
 	.incbin "graphics/misc/cave_transition.4bpp.lz"
 
 gUnknown_083F8340:: @ 83F8340
-	.incbin "baserom.gba", 0x003f8340, 0x18
+	.byte    1
+	.byte    1
+	.byte    1
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    1
+	.byte    1
+	.byte    1
+	.byte    1
+	.byte    1
+	.byte    1
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    0
+	.byte    1
+	.byte    1
+	.byte    1
 
 gUnknown_083F8358:: @ 83F8358
-	.incbin "baserom.gba", 0x003f8358, 0x4
+	.byte 7, 9, 8, 10
 
 gUnknown_083F835C:: @ 83F835C
-	.incbin "baserom.gba", 0x003f835c, 0x8
+	.byte    0,   1
+	.byte    1,   0
+	.byte    0,  -1
+	.byte   -1,   0
 
+	.align 2
 gUnknown_083F8364:: @ 83F8364
-	.incbin "baserom.gba", 0x003f8364, 0xc
+	.byte    7,  16,   0,   0
+	.byte   15,  18,   0,   0
+	.byte   11,  22,   0,   0
 
 gUnknown_083F8370:: @ 83F8370
-	.incbin "baserom.gba", 0x003f8370, 0x6
+	.byte 0, 1, 1, 1, 1
 
+	.align 1
 gUnknown_083F8376:: @ 83F8376
-	.incbin "baserom.gba", 0x003f8376, 0xa
+	.2byte 0x218, 0x219, 0x21A, 0x21B, 0x21C
 
 	.align 2
 gUnknown_083F8380:: @ 83F8380
@@ -117,19 +149,19 @@ gUnknown_083F83C0:: @ 83F83C0
 	.4byte gOtherText_CancelNoTerminator
 
 gUnknown_083F83E0:: @ 83F83E0
-	.incbin "baserom.gba", 0x003f83e0, 0xc
+	.byte 12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6
 
 gUnknown_083F83EC:: @ 83F83EC
-	.incbin "baserom.gba", 0x003f83ec, 0xc
+	.byte 0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5
 
 gUnknown_083F83F8:: @ 83F83F8
-	.incbin "baserom.gba", 0x003f83f8, 0xc
+	.byte 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5
 
 gUnknown_083F8404:: @ 83F8404
-	.incbin "baserom.gba", 0x003f8404, 0x4
+	.byte 2, 1, 2, 1
 
 gUnknown_083F8408:: @ 83F8408
-	.incbin "baserom.gba", 0x003f8408, 0x8
+	.byte  8,  9, 10, 11, 12, 13, 14, 15
 
 gUnknown_083F8410:: @ 83F8410
-	.incbin "baserom.gba", 0x003f8410, 0x8
+	.byte  8, 13, 14, 11, 10, 12, 15,  9

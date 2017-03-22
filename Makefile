@@ -71,7 +71,6 @@ tidy:
 include castform.mk
 include tilesets.mk
 include fonts.mk
-include generated.mk
 include misc.mk
 
 %.s: ;
@@ -102,9 +101,6 @@ sound/songs/%.s: sound/songs/%.mid
 %src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 %src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
-%src/text.o: src/text.c $(GEN_FONT_HEADERS)
-%src/link.o: src/link.c $(GEN_LINK_HEADERS)
-
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
@@ -116,8 +112,9 @@ $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
-build/$1/asm/%.o: dep = $$(shell $$(SCANINC) asm/$$(*F).s)
-build/$1/data/%.o: dep = $$(shell $$(SCANINC) data/$$(*F).s)
+build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
+build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
+build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
 
 $1_OBJS := $$($1_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$(SONG_OBJS)
@@ -126,7 +123,7 @@ $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 
 $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
-build/$1/%.o : %.c
+build/$1/%.o : %.c $$$$(c_dep)
 	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
@@ -134,12 +131,12 @@ build/$1/%.o : %.c
 
 $$($1_ASM_OBJS): VERSION := $2
 $$($1_ASM_OBJS): REVISION := $3
-build/$1/asm/%.o: asm/%.s $$$$(dep)
+build/$1/asm/%.o: asm/%.s $$$$(asm_dep)
 	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) -o $$@ $$<
 
 $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
-build/$1/data/%.o: data/%.s $$$$(dep)
+build/$1/data/%.o: data/%.s $$$$(asm_dep)
 	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) -o $$@
 
 build/$1/sym_bss.ld: sym_bss.txt

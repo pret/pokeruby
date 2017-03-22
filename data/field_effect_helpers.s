@@ -7,14 +7,16 @@
 	.align 2
 	.string "タマゴ$"
 
+	.align 1
 gUnknown_08401E2C:: @ 8401E2C
-	.incbin "baserom.gba", 0x00401e2c, 0x6
+	.2byte 0xC, 0x1C, 0x2C
 
 gUnknown_08401E32:: @ 8401E32
-	.incbin "baserom.gba", 0x00401e32, 0x4
+	.byte 0, 1, 2, 3
 
+	.align 1
 gUnknown_08401E36:: @ 8401E36
-	.incbin "baserom.gba", 0x00401e36, 0xa
+	.2byte 4, 4, 4, 16
 
 	.align 2
 gUnknown_08401E40:: @ 8401E40
@@ -28,7 +30,8 @@ gUnknown_08401E48:: @ 8401E48
 	.4byte sub_8127E30
 
 gUnknown_08401E54:: @ 8401E54
-	.incbin "baserom.gba", 0x00401e54, 0x6
+	.byte 0, 0, 1, 2, 3
 
+	.align 1
 gUnknown_08401E5A:: @ 8401E5A
-	.incbin "baserom.gba", 0x00401e5a, 0x6
+	.2byte 3, 7

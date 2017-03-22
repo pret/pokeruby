@@ -1,13 +1,13 @@
 #include "global.h"
 #include "menu.h"
 #include "main.h"
-#include "text.h"
-#include "songs.h"
-#include "text_window.h"
-#include "sound.h"
-#include "menu_cursor.h"
 #include "map_obj_lock.h"
+#include "menu_cursor.h"
 #include "script.h"
+#include "songs.h"
+#include "sound.h"
+#include "text.h"
+#include "text_window.h"
 
 struct Menu
 {
@@ -654,7 +654,7 @@ u8 *sub_8072C44(u8 *a1, s32 a2, u8 a3, u8 a4)
     return AlignInt2(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
-u8 *sub_8072C74(u8 *a1, u8 *a2, u8 a3, u8 a4)
+u8 *sub_8072C74(u8 *a1, const u8 *a2, u8 a3, u8 a4)
 {
     return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
 }

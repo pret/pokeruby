@@ -3,13 +3,13 @@
 
 struct Berry
 {
-    u8 name[7];
+    const u8 name[7];
     u8 firmness;
     u16 size;
     u8 maxYield;
     u8 minYield;
-    u8 *description1;
-    u8 *description2;
+    const u8 *description1;
+    const u8 *description2;
     u8 stageDuration;
     u8 spicy;
     u8 dry;

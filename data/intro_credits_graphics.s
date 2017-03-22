@@ -7,10 +7,10 @@ gUnknown_084121FC:: @ 84121FC
 	.incbin "graphics/intro/intro2_grass.gbapal"
 
 gUnknown_0841221C:: @ 841221C
-	.incbin "baserom.gba", 0x0041221c, 0x20
+	.incbin "graphics/intro/intro2_grass_afternoon.gbapal"
 
 gUnknown_0841223C:: @ 841223C
-	.incbin "baserom.gba", 0x0041223c, 0x20
+	.incbin "graphics/intro/intro2_grass_night.gbapal"
 
 	.align 2
 gUnknown_0841225C:: @ 841225C
@@ -21,10 +21,10 @@ gUnknown_084126DC:: @ 84126DC
 	.incbin "graphics/intro/intro2_grass_map.bin.lz"
 
 gUnknown_08412818:: @ 8412818
-	.incbin "baserom.gba", 0x00412818, 0x60
+	.incbin "graphics/intro/8412818.gbapal"
 
 gUnknown_08412878:: @ 8412878
-	.incbin "baserom.gba", 0x00412878, 0x60
+	.incbin "graphics/intro/8412878.gbapal"
 
 	.align 2
 gUnknown_084128D8:: @ 84128D8
@@ -38,16 +38,16 @@ gUnknown_08413184:: @ 8413184
 	.incbin "graphics/intro/intro2_bgclouds.gbapal"
 
 gUnknown_084131A4:: @ 84131A4
-	.incbin "baserom.gba", 0x004131a4, 0x20
+	.incbin "graphics/intro/intro2_bgclouds_afternoon.gbapal"
 
 gUnknown_084131C4:: @ 84131C4
 	.incbin "graphics/intro/intro2_bgclouds2.4bpp.lz"
 
 gUnknown_08413300:: @ 8413300
-	.incbin "baserom.gba", 0x00413300, 0x20
+	.incbin "graphics/intro/intro2_bgtrees2.gbapal"
 
 gUnknown_08413320:: @ 8413320
-	.incbin "baserom.gba", 0x00413320, 0x20
+	.incbin "graphics/intro/intro2_bgtrees2_afternoon.gbapal"
 
 	.align 2
 gUnknown_08413340:: @ 8413340
@@ -66,7 +66,7 @@ gIntro2TreeTiles:: @ 8413CEC
 	.incbin "graphics/intro/intro2_bgtreessmall.4bpp.lz"
 
 gUnknown_08413E38:: @ 8413E38
-	.incbin "baserom.gba", 0x00413e38, 0x40 @ two palettes?
+	.incbin "graphics/intro/8413E38.gbapal"
 
 	.align 2
 gUnknown_08413E78:: @ 8413E78
@@ -160,8 +160,36 @@ gSpriteAnimTable_8416B84:: @ 8416B84
 	.4byte gSpriteAnim_8416B74
 	.4byte gSpriteAnim_8416B7C
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416B94:: @ 8416B94
-	.incbin "baserom.gba", 0x00416b94, 0x48
+	.byte -128, 72, 32, 100
+	.2byte 0xC00
+	.space 2
+	.byte -128, -98, 32, 100
+	.2byte 0xC00
+	.space 2
+	.byte 65, -64, 40, 101
+	.2byte 0x800
+	.space 2
+	.byte 65, 56, 40, 101
+	.2byte 0x800
+	.space 2
+	.byte 18, 100, 44, 102
+	.2byte 0x400
+	.space 2
+	.byte 18, -104, 44, 102
+	.2byte 0x400
+	.space 2
+	.byte 19, 8, 46, 103
+	.2byte 0x100
+	.space 2
+	.byte 19, 56, 46, 103
+	.2byte 0x100
+	.space 2
+	.byte 19, -16, 46, 103
+	.2byte 0x100
+	.space 2
 
 	.align 2
 gUnknown_08416BDC:: @ 8416BDC
@@ -189,8 +217,45 @@ gSpriteAnimTable_8416C04:: @ 8416C04
 	.4byte gSpriteAnim_8416BF4
 	.4byte gSpriteAnim_8416BFC
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416C10:: @ 8416C10
-	.incbin "baserom.gba", 0x00416c10, 0x60
+	.byte -128, 16, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, 80, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, -112, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -128, -48, 88, 100
+	.2byte 0x2000
+	.space 2
+	.byte -95, 40, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, 104, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, -88, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -95, -24, 88, 101
+	.2byte 0x1000
+	.space 2
+	.byte -94, 56, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, 120, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, -72, 88, 102
+	.2byte 0x800
+	.space 2
+	.byte -94, -8, 88, 102
+	.2byte 0x800
+	.space 2
 
 	.align 2
 gUnknown_08416C70:: @ 8416C70
@@ -206,8 +271,27 @@ gSpriteAnim_8416C80:: @ 8416C80
 gSpriteAnimTable_8416C88:: @ 8416C88
 	.4byte gSpriteAnim_8416C80
 
+@ array of 8-byte structs
+	.align 2
 gUnknown_08416C8C:: @ 8416C8C
-	.incbin "baserom.gba", 0x00416c8c, 0x30
+	.byte -128, 24, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, 64, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, 104, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -112, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -72, 88, 100
+	.2byte 0x1000
+	.space 2
+	.byte -128, -32, 88, 100
+	.2byte 0x1000
+	.space 2
 
 	.align 2
 gOamData_8416CBC:: @ 8416CBC

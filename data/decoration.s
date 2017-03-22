@@ -169,7 +169,7 @@ gSpriteAnimTable_83EC930:: @ 83EC930
 
 	.align 2
 gSpriteImageTable_83EC934: @ 83EC934
-	obj_frame_tiles 0x02038984, 0x800
+	obj_frame_tiles gUnknown_02038900+0x84, 0x800
 
 	.align 2
 gSpriteTemplate_83EC93C:: @ 83EC93C
@@ -177,7 +177,7 @@ gSpriteTemplate_83EC93C:: @ 83EC93C
 
 	.align 2
 gUnknown_083EC954:: @ 83EC954
-	obj_pal 0x02039184, 3000
+	obj_pal gUnknown_02038900+0x884, 3000
 
 	.align 2
 gUnknown_083EC95C:: @ 83EC95C

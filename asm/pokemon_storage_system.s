@@ -7972,7 +7972,7 @@ _0809988A:
 	strb r0, [r2, 0x1]
 	ldr r0, [r4]
 	ldr r1, [r0]
-	ldr r0, _080998D4 @ =gUnknown_083B6F5C
+	ldr r0, _080998D4 @ =gSpriteAffineAnimTable_83B6F5C
 	str r0, [r1, 0x10]
 	ldr r0, [r4]
 	ldr r0, [r0]
@@ -7986,7 +7986,7 @@ _080998C0:
 _080998C8: .4byte gUnknown_083B6DB4
 _080998CC: .4byte 0x000010cc
 _080998D0: .4byte 0x00001034
-_080998D4: .4byte gUnknown_083B6F5C
+_080998D4: .4byte gSpriteAffineAnimTable_83B6F5C
 	thumb_func_end sub_809981C
 
 	thumb_func_start sub_80998D8

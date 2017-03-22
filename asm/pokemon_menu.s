@@ -31,7 +31,7 @@ sub_8089A8C: @ 8089A8C
 	ldr r5, _08089AD0 @ =gUnknown_0202FFA9
 	movs r0, 0
 	strb r0, [r5]
-	ldr r0, _08089AD4 @ =gUnknown_03005CE0
+	ldr r0, _08089AD4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -57,7 +57,7 @@ sub_8089A8C: @ 8089A8C
 	b _08089BC8
 	.align 2, 0
 _08089AD0: .4byte gUnknown_0202FFA9
-_08089AD4: .4byte gUnknown_03005CE0
+_08089AD4: .4byte gLastFieldPokeMenuOpened
 _08089AD8: .4byte gPlayerParty
 _08089ADC: .4byte gUnknown_0202FFAA
 _08089AE0:
@@ -73,7 +73,7 @@ _08089AE8:
 	beq _08089B48
 	ldr r5, _08089B24 @ =gUnknown_0839F554
 _08089AF4:
-	ldr r0, _08089B28 @ =gUnknown_03005CE0
+	ldr r0, _08089B28 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -97,7 +97,7 @@ _08089AF4:
 	b _08089B48
 	.align 2, 0
 _08089B24: .4byte gUnknown_0839F554
-_08089B28: .4byte gUnknown_03005CE0
+_08089B28: .4byte gLastFieldPokeMenuOpened
 _08089B2C: .4byte gPlayerParty
 _08089B30: .4byte gUnknown_0202FFAA
 _08089B34: .4byte gUnknown_0202FFA9
@@ -132,7 +132,7 @@ _08089B48:
 	movs r2, 0x1
 	bl AppendToList
 _08089B76:
-	ldr r0, _08089BB0 @ =gUnknown_03005CE0
+	ldr r0, _08089BB0 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -156,7 +156,7 @@ _08089B76:
 _08089BA4: .4byte gUnknown_0202FFAA
 _08089BA8: .4byte gUnknown_0202FFA9
 _08089BAC: .4byte gPlayerParty + 1 * 0x64
-_08089BB0: .4byte gUnknown_03005CE0
+_08089BB0: .4byte gLastFieldPokeMenuOpened
 _08089BB4:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -336,7 +336,7 @@ _08089D04:
 	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _08089D48 @ =gUnknown_03005CE0
+	ldr r1, _08089D48 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
@@ -361,7 +361,7 @@ _08089D04:
 	bl sub_808B5B4
 	b _08089D84
 	.align 2, 0
-_08089D48: .4byte gUnknown_03005CE0
+_08089D48: .4byte gLastFieldPokeMenuOpened
 _08089D4C: .4byte gPlayerParty
 _08089D50: .4byte gStringVar1
 _08089D54: .4byte gUnknown_0202FFA8
@@ -492,7 +492,7 @@ sub_8089E4C: @ 8089E4C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08089E72
-	ldr r0, _08089E7C @ =gUnknown_03005CE0
+	ldr r0, _08089E7C @ =gLastFieldPokeMenuOpened
 	strb r1, [r0]
 	ldr r0, _08089E80 @ =sub_805469C
 	bl SetMainCallback2
@@ -504,14 +504,14 @@ _08089E72:
 	bx r0
 	.align 2, 0
 _08089E78: .4byte gPaletteFade
-_08089E7C: .4byte gUnknown_03005CE0
+_08089E7C: .4byte gLastFieldPokeMenuOpened
 _08089E80: .4byte sub_805469C
 	thumb_func_end sub_8089E4C
 
 	thumb_func_start sub_8089E84
 sub_8089E84: @ 8089E84
 	push {lr}
-	ldr r0, _08089EAC @ =gUnknown_03005CE0
+	ldr r0, _08089EAC @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -528,7 +528,7 @@ sub_8089E84: @ 8089E84
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08089EAC: .4byte gUnknown_03005CE0
+_08089EAC: .4byte gLastFieldPokeMenuOpened
 _08089EB0: .4byte gPlayerParty
 _08089EB4: .4byte gStringVar1
 _08089EB8: .4byte gUnknown_0202FFA8
@@ -561,7 +561,7 @@ _08089ED8:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r1, _08089F0C @ =gUnknown_03005CE0
+	ldr r1, _08089F0C @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r5]
 	strb r0, [r1]
 	bl sub_8089E84
@@ -572,7 +572,7 @@ _08089F04:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08089F0C: .4byte gUnknown_03005CE0
+_08089F0C: .4byte gLastFieldPokeMenuOpened
 _08089F10: .4byte sub_806AEDC
 	thumb_func_end sub_8089EBC
 
@@ -784,7 +784,7 @@ _0808A0A4:
 	ldr r0, _0808A0D4 @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -1126,7 +1126,7 @@ _0808A370:
 	cmp r0, 0x1
 	bne _0808A364
 	ldrb r0, [r4]
-	ldr r1, _0808A39C @ =gUnknown_03005CE0
+	ldr r1, _0808A39C @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -1139,7 +1139,7 @@ _0808A394:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A39C: .4byte gUnknown_03005CE0
+_0808A39C: .4byte gLastFieldPokeMenuOpened
 _0808A3A0: .4byte sub_806AEDC
 	thumb_func_end sub_808A358
 
@@ -1155,7 +1155,7 @@ _0808A3AA:
 	cmp r0, 0x1
 	bne _0808A3E4
 	ldrb r0, [r4]
-	ldr r1, _0808A3DC @ =gUnknown_03005CE0
+	ldr r1, _0808A3DC @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -1169,7 +1169,7 @@ _0808A3AA:
 	b _0808A3F0
 	.align 2, 0
 _0808A3D8: .4byte 0x0201b260
-_0808A3DC: .4byte gUnknown_03005CE0
+_0808A3DC: .4byte gLastFieldPokeMenuOpened
 _0808A3E0: .4byte sub_806AEDC
 _0808A3E4:
 	bl sub_80F9344
@@ -1205,7 +1205,7 @@ sub_808A3F8: @ 808A3F8
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_806BD58
-	ldr r0, _0808A46C @ =gUnknown_03005CE0
+	ldr r0, _0808A46C @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl sub_806C994
@@ -1232,7 +1232,7 @@ sub_808A3F8: @ 808A3F8
 _0808A460: .4byte gScriptItemId
 _0808A464: .4byte sub_808A330
 _0808A468: .4byte gPaletteFade
-_0808A46C: .4byte gUnknown_03005CE0
+_0808A46C: .4byte gLastFieldPokeMenuOpened
 _0808A470: .4byte gPlayerParty
 _0808A474: .4byte sub_808A34C
 _0808A478:
@@ -1298,7 +1298,7 @@ _0808A4EC:
 	cmp r0, 0x1
 	bne _0808A4E0
 	ldrb r0, [r4]
-	ldr r1, _0808A518 @ =gUnknown_03005CE0
+	ldr r1, _0808A518 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -1311,7 +1311,7 @@ _0808A510:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A518: .4byte gUnknown_03005CE0
+_0808A518: .4byte gLastFieldPokeMenuOpened
 _0808A51C: .4byte sub_806AEDC
 	thumb_func_end sub_808A4D4
 
@@ -1334,7 +1334,7 @@ sub_808A520: @ 808A520
 	movs r1, 0x1
 	bl RemoveBagItem
 _0808A542:
-	ldr r6, _0808A590 @ =gUnknown_03005CE0
+	ldr r6, _0808A590 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -1366,7 +1366,7 @@ _0808A542:
 _0808A584: .4byte gPaletteFade
 _0808A588: .4byte gScriptResult
 _0808A58C: .4byte gUnknown_0202E8F8
-_0808A590: .4byte gUnknown_03005CE0
+_0808A590: .4byte gLastFieldPokeMenuOpened
 _0808A594: .4byte gPlayerParty
 _0808A598: .4byte sub_8089CD4
 _0808A59C:
@@ -1397,7 +1397,7 @@ sub_808A5BC: @ 808A5BC
 	ands r0, r1
 	cmp r0, 0
 	bne _0808A5EA
-	ldr r0, _0808A5F4 @ =gUnknown_03005CE0
+	ldr r0, _0808A5F4 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	ldr r1, _0808A5F8 @ =gScriptItemId
 	ldrh r1, [r1]
@@ -1416,7 +1416,7 @@ _0808A5EA:
 	bx r0
 	.align 2, 0
 _0808A5F0: .4byte gPaletteFade
-_0808A5F4: .4byte gUnknown_03005CE0
+_0808A5F4: .4byte gLastFieldPokeMenuOpened
 _0808A5F8: .4byte gScriptItemId
 _0808A5FC: .4byte gTasks
 _0808A600: .4byte sub_808A1E0
@@ -1648,7 +1648,7 @@ _0808A7B4:
 	ldr r0, _0808A7EC @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
-	bl sub_806E81C
+	bl PartyMenuGetPopupMenuFunc
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -1755,7 +1755,7 @@ _0808A8A4: .4byte sub_808A8A8
 sub_808A8A8: @ 808A8A8
 	push {lr}
 	ldr r1, _0808A8C4 @ =gUnknown_020384F0
-	ldr r0, _0808A8C8 @ =gUnknown_03005CE0
+	ldr r0, _0808A8C8 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	strb r0, [r1]
 	ldr r0, _0808A8CC @ =0x0201b000
@@ -1768,7 +1768,7 @@ sub_808A8A8: @ 808A8A8
 	bx r0
 	.align 2, 0
 _0808A8C4: .4byte gUnknown_020384F0
-_0808A8C8: .4byte gUnknown_03005CE0
+_0808A8C8: .4byte gLastFieldPokeMenuOpened
 _0808A8CC: .4byte 0x0201b000
 _0808A8D0: .4byte 0x00000262
 	thumb_func_end sub_808A8A8
@@ -2129,7 +2129,7 @@ sub_808ABA8: @ 808ABA8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808ABDE
-	ldr r0, _0808ABE4 @ =gUnknown_03005CE0
+	ldr r0, _0808ABE4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -2149,7 +2149,7 @@ _0808ABDE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808ABE4: .4byte gUnknown_03005CE0
+_0808ABE4: .4byte gLastFieldPokeMenuOpened
 _0808ABE8: .4byte gPlayerParty
 _0808ABEC: .4byte gUnknown_0202FF84
 _0808ABF0: .4byte gUnknown_03005CE4
@@ -2190,7 +2190,7 @@ _0808AC28: .4byte gMain
 sub_808AC2C: @ 808AC2C
 	push {lr}
 	ldr r0, _0808AC40 @ =gUnknown_0202FF84
-	ldr r1, _0808AC44 @ =gUnknown_03005CE0
+	ldr r1, _0808AC44 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x9
@@ -2199,7 +2199,7 @@ sub_808AC2C: @ 808AC2C
 	bx r0
 	.align 2, 0
 _0808AC40: .4byte gUnknown_0202FF84
-_0808AC44: .4byte gUnknown_03005CE0
+_0808AC44: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_808AC2C
 
 	thumb_func_start SetUpFieldMove_Surf
@@ -2239,7 +2239,7 @@ _0808AC86:
 sub_808AC8C: @ 808AC8C
 	push {lr}
 	ldr r0, _0808ACA0 @ =gUnknown_0202FF84
-	ldr r1, _0808ACA4 @ =gUnknown_03005CE0
+	ldr r1, _0808ACA4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x1F
@@ -2248,7 +2248,7 @@ sub_808AC8C: @ 808AC8C
 	bx r0
 	.align 2, 0
 _0808ACA0: .4byte gUnknown_0202FF84
-_0808ACA4: .4byte gUnknown_03005CE0
+_0808ACA4: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_808AC8C
 
 	thumb_func_start SetUpFieldMove_Fly
@@ -2320,7 +2320,7 @@ _0808AD24:
 	cmp r0, 0x1
 	bne _0808AD18
 	ldrb r0, [r4]
-	ldr r1, _0808AD50 @ =gUnknown_03005CE0
+	ldr r1, _0808AD50 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -2333,7 +2333,7 @@ _0808AD48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808AD50: .4byte gUnknown_03005CE0
+_0808AD50: .4byte gLastFieldPokeMenuOpened
 _0808AD54: .4byte sub_806AEDC
 	thumb_func_end sub_808AD0C
 
@@ -2363,7 +2363,7 @@ _0808AD84: .4byte sub_808AD0C
 	thumb_func_start unref_sub_808AD88
 unref_sub_808AD88: @ 808AD88
 	push {lr}
-	ldr r0, _0808ADA4 @ =gUnknown_03005CE0
+	ldr r0, _0808ADA4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -2376,7 +2376,7 @@ unref_sub_808AD88: @ 808AD88
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808ADA4: .4byte gUnknown_03005CE0
+_0808ADA4: .4byte gLastFieldPokeMenuOpened
 _0808ADA8: .4byte gPlayerParty
 	thumb_func_end unref_sub_808AD88
 
@@ -2384,7 +2384,7 @@ _0808ADA8: .4byte gPlayerParty
 sub_808ADAC: @ 808ADAC
 	push {lr}
 	ldr r0, _0808ADC0 @ =gUnknown_0202FF84
-	ldr r1, _0808ADC4 @ =gUnknown_03005CE0
+	ldr r1, _0808ADC4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x2C
@@ -2393,7 +2393,7 @@ sub_808ADAC: @ 808ADAC
 	bx r0
 	.align 2, 0
 _0808ADC0: .4byte gUnknown_0202FF84
-_0808ADC4: .4byte gUnknown_03005CE0
+_0808ADC4: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_808ADAC
 
 	thumb_func_start SetUpFieldMove_Dive
@@ -2432,7 +2432,7 @@ _0808AE04: .4byte sub_808ADAC
 sub_808AE08: @ 808AE08
 	push {lr}
 	ldr r0, _0808AE1C @ =gUnknown_0202FF84
-	ldr r1, _0808AE20 @ =gUnknown_03005CE0
+	ldr r1, _0808AE20 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x2B
@@ -2441,7 +2441,7 @@ sub_808AE08: @ 808AE08
 	bx r0
 	.align 2, 0
 _0808AE1C: .4byte gUnknown_0202FF84
-_0808AE20: .4byte gUnknown_03005CE0
+_0808AE20: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_808AE08
 
 	thumb_func_start SetUpFieldMove_Waterfall
@@ -2648,7 +2648,7 @@ _0808AFBC:
 _0808AFC2:
 	bl sub_808AF20
 _0808AFC6:
-	ldr r4, _0808B000 @ =gUnknown_03005CE0
+	ldr r4, _0808B000 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r4]
 	cmp r0, 0x5
 	bhi _0808AFE2
@@ -2666,7 +2666,7 @@ _0808AFE2:
 	strb r0, [r4]
 _0808AFE6:
 	ldrb r0, [r5]
-	ldr r1, _0808B000 @ =gUnknown_03005CE0
+	ldr r1, _0808B000 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r5]
@@ -2676,7 +2676,7 @@ _0808AFE6:
 	bl SetMainCallback2
 	b _0808B018
 	.align 2, 0
-_0808B000: .4byte gUnknown_03005CE0
+_0808B000: .4byte gLastFieldPokeMenuOpened
 _0808B004: .4byte gPlayerParty
 _0808B008: .4byte sub_806AEDC
 _0808B00C:
@@ -2796,7 +2796,7 @@ _0808B0EC: .4byte gPaletteFade
 _0808B0F0:
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _0808B118 @ =gUnknown_03005CE0
+	ldr r1, _0808B118 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
@@ -2811,7 +2811,7 @@ _0808B0F0:
 	bl PlaySE
 	b _0808B1CE
 	.align 2, 0
-_0808B118: .4byte gUnknown_03005CE0
+_0808B118: .4byte gLastFieldPokeMenuOpened
 _0808B11C: .4byte gPlayerParty
 _0808B120:
 	bl sub_806D5A4
@@ -2857,7 +2857,7 @@ _0808B180: .4byte sub_808B2B4
 _0808B184:
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _0808B1D8 @ =gUnknown_03005CE0
+	ldr r1, _0808B1D8 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	movs r0, 0x5
 	bl PlaySE
@@ -2896,7 +2896,7 @@ _0808B1CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B1D8: .4byte gUnknown_03005CE0
+_0808B1D8: .4byte gLastFieldPokeMenuOpened
 _0808B1DC: .4byte gUnknown_02038561
 _0808B1E0: .4byte gTasks
 _0808B1E4: .4byte sub_808B25C
@@ -3092,7 +3092,7 @@ sub_808B338: @ 808B338
 	bne _0808B384
 	adds r0, r5, 0
 	bl sub_806CA38
-	ldr r1, _0808B390 @ =gUnknown_03005CE0
+	ldr r1, _0808B390 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
@@ -3121,7 +3121,7 @@ _0808B384:
 	bx r0
 	.align 2, 0
 _0808B38C: .4byte gPaletteFade
-_0808B390: .4byte gUnknown_03005CE0
+_0808B390: .4byte gLastFieldPokeMenuOpened
 _0808B394: .4byte gPlayerParty
 _0808B398: .4byte gSaveBlock1 + 0x2B4C
 _0808B39C: .4byte sub_808B3EC
@@ -3147,7 +3147,7 @@ _0808B3B8:
 	cmp r0, 0x1
 	bne _0808B3AC
 	ldrb r0, [r4]
-	ldr r1, _0808B3E4 @ =gUnknown_03005CE0
+	ldr r1, _0808B3E4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -3160,7 +3160,7 @@ _0808B3DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B3E4: .4byte gUnknown_03005CE0
+_0808B3E4: .4byte gLastFieldPokeMenuOpened
 _0808B3E8: .4byte sub_806AEDC
 	thumb_func_end sub_808B3A0
 
@@ -3187,7 +3187,7 @@ sub_808B3EC: @ 808B3EC
 	movs r1, 0x1
 	bl RemoveBagItem
 _0808B416:
-	ldr r6, _0808B470 @ =gUnknown_03005CE0
+	ldr r6, _0808B470 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -3224,7 +3224,7 @@ _0808B416:
 _0808B464: .4byte gPaletteFade
 _0808B468: .4byte gScriptResult
 _0808B46C: .4byte gUnknown_0202E8F8
-_0808B470: .4byte gUnknown_03005CE0
+_0808B470: .4byte gLastFieldPokeMenuOpened
 _0808B474: .4byte gPlayerParty
 _0808B478: .4byte sub_808B25C
 _0808B47C: .4byte sub_806AEDC
@@ -3258,7 +3258,7 @@ sub_808B4A4: @ 808B4A4
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B4D2
-	ldr r0, _0808B4DC @ =gUnknown_03005CE0
+	ldr r0, _0808B4DC @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	ldr r1, _0808B4E0 @ =gScriptItemId
 	ldrh r1, [r1]
@@ -3277,7 +3277,7 @@ _0808B4D2:
 	bx r0
 	.align 2, 0
 _0808B4D8: .4byte gPaletteFade
-_0808B4DC: .4byte gUnknown_03005CE0
+_0808B4DC: .4byte gLastFieldPokeMenuOpened
 _0808B4E0: .4byte gScriptItemId
 _0808B4E4: .4byte gTasks
 _0808B4E8: .4byte sub_808B4EC

@@ -428,7 +428,7 @@ sub_80C7C94: @ 80C7C94
 	adds r0, r4, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80E6034
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x1
@@ -451,7 +451,7 @@ _080C7CDA:
 	adds r0, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80E6034
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x1

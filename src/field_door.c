@@ -1,22 +1,9 @@
 #include "global.h"
 #include "asm.h"
-#include "task.h"
 #include "field_camera.h"
 #include "metatile_behavior.h"
-
-struct DoorGraphics
-{
-    u16 metatileNum;
-    u8 unk2;
-    void *tiles;
-    void *palette;
-};
-
-struct DoorAnimFrame
-{
-    u8 time;
-    u16 offset;
-};
+#include "task.h"
+#include "field_door.h"
 
 extern struct DoorAnimFrame gDoorOpenAnimFrames[];
 extern struct DoorAnimFrame gDoorCloseAnimFrames[];
@@ -31,7 +18,7 @@ static void door_build_blockdef(u16 *a, u16 b, u8 *c)
 {
     int i;
     u16 unk;
-    
+
     for (i = 0; i < 4; i++)
     {
         unk = *(c++) << 12;
@@ -47,7 +34,7 @@ static void door_build_blockdef(u16 *a, u16 b, u8 *c)
 static void DrawCurrentDoorAnimFrame(u32 x, u32 y, u8 *c)
 {
     u16 arr[8];
-    
+
     door_build_blockdef(arr, 0x3F8, c);
     DrawDoorMetatileAt(x, y - 1, arr);
     door_build_blockdef(arr, 0x3FC, c + 4);
@@ -103,7 +90,7 @@ static void Task_AnimateDoor(u8 taskId)
     u16 *taskData = gTasks[taskId].data;
     struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(taskData[TD_FRAMELIST] << 16 | taskData[TD_FRAMELIST + 1]);
     struct DoorGraphics *gfx = (struct DoorGraphics *)(taskData[TD_GFX] << 16 | taskData[TD_GFX + 1]);
-    
+
     if (sub_8058464(gfx, frames, taskData) == FALSE)
         DestroyTask(taskId);
 }
@@ -134,16 +121,16 @@ static s8 StartDoorAnimationTask(struct DoorGraphics *gfx, struct DoorAnimFrame 
     {
         u8 taskId = CreateTask(Task_AnimateDoor, 0x50);
         s16 *taskData = gTasks[taskId].data;
-        
+
         taskData[TD_X] = x;
         taskData[TD_Y] = y;
-        
+
         taskData[TD_FRAMELIST + 1] = (u32)frames;
         taskData[TD_FRAMELIST] = (u32)frames >> 16;
-        
+
         taskData[TD_GFX + 1] = (u32)gfx;
         taskData[TD_GFX] = (u32)gfx >> 16;
-        
+
         return taskId;
     }
 }

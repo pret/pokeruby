@@ -15,7 +15,6 @@
 #include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
-extern u32 gUnknown_3004820;
 extern u32 IntrMain[];
 
 static void VBlankIntr(void);
@@ -93,8 +92,8 @@ void AgbMain()
 
     gSoftResetDisabled = FALSE;
 
-    if (gUnknown_3004820 != 1)
-        SetMainCallback2(0);
+    if (gFlashMemoryPresent != TRUE)
+        SetMainCallback2(NULL);
 
     gUnknown_3001764 = 0;
 

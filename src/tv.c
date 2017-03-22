@@ -3,12 +3,12 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "flags.h"
-#include "global.h"
 #include "rng.h"
 #include "string_util.h"
 #include "text.h"
 
-enum {
+enum
+{
     TVSHOW_FAN_CLUB_LETTER = 1,
     TVSHOW_RECENT_HAPPENINGS = 2,
     TVSHOW_PKMN_FAN_CLUB_OPINIONS = 3,
@@ -16,15 +16,17 @@ enum {
     TVSHOW_MASS_OUTBREAK = 41,
 };
 
-struct UnkTvStruct {
+struct UnkTvStruct
+{
     s8 var0;
 };
 
-struct OutbreakPokemon {
-    /* 0x00 */ u16 species;
-    /* 0x02 */ u16 moves[4];
-    /* 0x0A */ u8 level;
-    /* 0x0B */ u8 location;
+struct OutbreakPokemon
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 moves[4];
+    /*0x0A*/ u8 level;
+    /*0x0B*/ u8 location;
 };
 
 extern u16 gSpecialVar_0x8004;
@@ -38,26 +40,30 @@ extern u8 gSpeciesNames[][11];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-void sub_80BE478(void) {
+void sub_80BE478(void)
+{
     u16 playerNameLength;
     u16 pokemonNicknameLength;
     TVShow *tvShow;
 
     sub_80BF478();
 
-    if (gScriptResult == 1) {
+    if (gScriptResult == 1)
+    {
         return;
     }
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
 
     playerNameLength = StringLength(gSaveBlock2.playerName);
-    if (playerNameLength <= 1) {
+    if (playerNameLength <= 1)
+    {
         return;
     }
 
     pokemonNicknameLength = StringLength(gStringVar1);
-    if (pokemonNicknameLength <= 1) {
+    if (pokemonNicknameLength <= 1)
+    {
         return;
     }
 
@@ -84,7 +90,8 @@ void sub_80BE478(void) {
     StripExtCtrlCodes(tvShow->nameRaterShow.pokemonName);
 }
 
-void StartMassOutbreak(void) {
+void StartMassOutbreak(void)
+{
     TVShow *tvShow;
 
     tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
@@ -104,7 +111,8 @@ void StartMassOutbreak(void) {
     gSaveBlock1.outbreakUnk5 = 2;
 }
 
-void sub_80BE5FC(void) {
+void sub_80BE5FC(void)
+{
     TVShow *tvShow;
     u16 species;
 
@@ -120,7 +128,8 @@ void sub_80BE5FC(void) {
     tvShow->fanclubLetter.var18 = GAME_LANGUAGE;
 }
 
-void sub_80BE65C(void) {
+void sub_80BE65C(void)
+{
     TVShow *tvShow;
 
     tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
@@ -134,7 +143,8 @@ void sub_80BE65C(void) {
     tvShow->recentHappenings.var18 = GAME_LANGUAGE;
 }
 
-void sub_80BE6A0(void) {
+void sub_80BE6A0(void)
+{
     TVShow *tvShow;
     u8 monIndex;
 
@@ -160,30 +170,36 @@ void sub_80BE6A0(void) {
     StripExtCtrlCodes(tvShow->fanclubOpinions.var10);
 }
 
-void nullsub_21(void) {
-
+void nullsub_21(void)
+{
 }
 
-void sub_80BE778(void) {
+void sub_80BE778(void)
+{
     u8 i;
 
-    if (!FlagGet(SYS_GAME_CLEAR)) {
+    if (!FlagGet(SYS_GAME_CLEAR))
+    {
         return;
     }
 
 
-    for (i = 0; i < 24; i++) {
-        if (gSaveBlock1.tvShows[i].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK) {
+    for (i = 0; i < 24; i++)
+    {
+        if (gSaveBlock1.tvShows[i].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK)
+        {
             return;
         }
     }
 
-    if (sub_80BF77C(0x147)) {
+    if (sub_80BF77C(0x147))
+    {
         return;
     }
 
     gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
-    if (gUnknown_03005D38.var0 == -1) {
+    if (gUnknown_03005D38.var0 == -1)
+    {
         return;
     }
     {
@@ -223,7 +239,8 @@ void sub_80BE778(void) {
     }
 }
 
-void EndMassOutbreak(void) {
+void EndMassOutbreak(void)
+{
     gSaveBlock1.outbreakPokemonSpecies = 0;
     gSaveBlock1.outbreakLocationMapNum = 0;
     gSaveBlock1.outbreakLocationMapGroup = 0;
@@ -239,7 +256,8 @@ void EndMassOutbreak(void) {
     gSaveBlock1.outbreakUnk5 = 0;
 }
 
-void sub_80BE8C4(u16 arg0) {
+void sub_80BE8C4(u16 arg0)
+{
     sub_80BE8EC(arg0);
     UpdateMassOutbreakTimeLeft(arg0);
     sub_80BEE84(arg0);
@@ -248,14 +266,16 @@ void sub_80BE8C4(u16 arg0) {
 
 asm(".section .text_b");
 
-u8 sub_80BF4F4(u8 arg0) {
+u8 sub_80BF4F4(u8 arg0)
+{
     u32 species;
 
     GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
 
     species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
 
-    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == FALSE) {
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == FALSE)
+    {
         return FALSE;
     }
 
@@ -264,7 +284,8 @@ u8 sub_80BF4F4(u8 arg0) {
 
 asm(".section .text_c");
 
-void DoTVShowPokemonNewsMassOutbreak(void) {
+void DoTVShowPokemonNewsMassOutbreak(void)
+{
     TVShow *tvShow;
 
     tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
@@ -281,13 +302,15 @@ void DoTVShowPokemonNewsMassOutbreak(void) {
 
 asm(".section .text_d");
 
-void TVShowDone(void) {
+void TVShowDone(void)
+{
     gScriptResult = 1;
     gUnknown_020387E8 = 0;
 
     gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var01 = 0;
 }
 
-void sub_80C2014(void) {
+void sub_80C2014(void)
+{
     gUnknown_020387E8 = 0;
 }

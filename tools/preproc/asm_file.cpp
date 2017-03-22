@@ -111,45 +111,22 @@ void AsmFile::RemoveComments()
             m_buffer[pos++] = ' ';
             m_buffer[pos++] = ' ';
 
-            char commentStringChar = 0;
-
             for (;;)
             {
                 if (m_buffer[pos] == 0)
                     return;
 
-                if (commentStringChar != 0)
+                if (m_buffer[pos] == '*' && m_buffer[pos + 1] == '/')
                 {
-                    if (m_buffer[pos] == '\\' && m_buffer[pos + 1] == commentStringChar)
-                    {
-                        m_buffer[pos++] = ' ';
-                        m_buffer[pos++] = ' ';
-                    }
-                    else
-                    {
-                        if (m_buffer[pos] == commentStringChar)
-                            commentStringChar = 0;
-                        if (m_buffer[pos] != '\n')
-                            m_buffer[pos] = ' ';
-                        pos++;
-                    }
+                    m_buffer[pos++] = ' ';
+                    m_buffer[pos++] = ' ';
+                    break;
                 }
                 else
                 {
-                    if (m_buffer[pos] == '*' && m_buffer[pos + 1] == '/')
-                    {
-                        m_buffer[pos++] = ' ';
-                        m_buffer[pos++] = ' ';
-                        break;
-                    }
-                    else
-                    {
-                        if (m_buffer[pos] == '"' || m_buffer[pos] == '\'')
-                            commentStringChar = m_buffer[pos];
-                        if (m_buffer[pos] != '\n')
-                            m_buffer[pos] = ' ';
-                        pos++;
-                    }
+                    if (m_buffer[pos] != '\n')
+                        m_buffer[pos] = ' ';
+                    pos++;
                 }
             }
         }
@@ -517,7 +494,7 @@ bool AsmFile::IsAtEnd()
 // Output the current location to set gas's logical file and line numbers.
 void AsmFile::OutputLocation()
 {
-    printf("# %ld \"%s\"\n", m_lineNum, m_filename.c_str());
+    std::printf("# %ld \"%s\"\n", m_lineNum, m_filename.c_str());
 }
 
 // Reports a diagnostic message.

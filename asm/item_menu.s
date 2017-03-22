@@ -5128,7 +5128,7 @@ sub_80A599C: @ 80A599C
 	movs r4, 0
 	strh r2, [r1, 0x18]
 	strh r3, [r1, 0x1A]
-	ldr r1, _080A59CC @ =gUnknown_03005CE0
+	ldr r1, _080A59CC @ =gLastFieldPokeMenuOpened
 	strb r4, [r1]
 	bl sub_80A5AE4
 	pop {r4}
@@ -5137,7 +5137,7 @@ sub_80A599C: @ 80A599C
 	.align 2, 0
 _080A59C4: .4byte gTasks
 _080A59C8: .4byte sub_805469C
-_080A59CC: .4byte gUnknown_03005CE0
+_080A59CC: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_80A599C
 
 	thumb_func_start sub_80A59D0
@@ -7539,7 +7539,7 @@ _080A6D14:
 	thumb_func_start sub_80A6D1C
 sub_80A6D1C: @ 80A6D1C
 	push {r4,r5,lr}
-	bl HideMapNamePopUpWindow
+	bl HideMapNamePopup
 	ldr r0, _080A6D70 @ =gSaveBlock1
 	ldr r1, _080A6D74 @ =0x00000496
 	adds r4, r0, r1

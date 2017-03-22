@@ -1,8 +1,8 @@
 #include "global.h"
 #include "asm.h"
-#include "sprite.h"
 #include "asm_fieldmap.h"
 #include "field_effect.h"
+#include "sprite.h"
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
@@ -311,7 +311,7 @@ void DoShadowFieldEffect(struct MapObject *mapObject)
 
 void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     gUnknown_0202FF84[0] = sprite->pos1.x;
     gUnknown_0202FF84[1] = sprite->pos1.y + (gfxInfo->height >> 1) - 2;
     gUnknown_0202FF84[2] = 151;

@@ -15,11 +15,6 @@
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
-
 enum
 {
     VERSION_SAPPHIRE = 1,
@@ -74,6 +69,11 @@ enum
     BAG_TMsHMs,
     BAG_BERRIES,
     BAG_KEYITEMS
+};
+
+struct TextStruct
+{
+	const u8 *text;
 };
 
 struct Coords16
@@ -172,7 +172,8 @@ struct RamScript
 
 struct SB1_2EFC_Struct
 {
-    u8 unknown[0x20];
+	u16 var;
+    u8 unknown[0x1E];
 };
 
 struct EasyChatPair
@@ -271,7 +272,55 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct SaveBlock1
+struct UnkMauvilleOldManStruct
+{
+    u8 unk_2D94;
+    u8 unk_2D95;
+    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x2DAE*/ u8 playerName[8];
+    /*0x2DB6*/ u8 filler_2DB6[0x3];
+    /*0x2DB9*/ u8 playerTrainerId[4];
+    u8 unk_2DBD;
+	/* size = 0x2C */
+};
+
+struct UnkMauvilleOldManStruct2
+{
+	u8 filler0;
+	u8 unk1;
+	u8 unk2;
+	u16 mauvilleOldMan_ecArray[10];
+	u16 mauvilleOldMan_ecArray2[6];
+    u8 fillerF[0x2];
+	/* size = 0x2C */
+};
+
+typedef union OldMan {
+	struct UnkMauvilleOldManStruct oldMan1;
+	struct UnkMauvilleOldManStruct2 oldMan2;
+} OldMan;
+
+struct Unk_SB_Access_Struct1
+{
+	u8 filler0[0xF8];
+	struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+};
+
+struct Unk_SB_Access_Struct2
+{
+	struct SB1_2EFC_Struct sb1_2EFC_struct2[12]; // each is 0x20
+ /*0x2F84*/ u8 filler[0x18];
+};
+
+/*0x2E04*/
+typedef union SB_Struct {
+	struct Unk_SB_Access_Struct1 unkSB1;
+	struct Unk_SB_Access_Struct2 unkSB2;
+} SB_Struct;
+// size is 0x198
+
+struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
@@ -336,10 +385,12 @@ struct SaveBlock1
     /*0x2B1C*/ u16 unk2B1C[4];
     /*0x2B24*/ u8 filler_2B24[0x28];
     /*0x2B4C*/ struct MailStruct mail[16];
-    /*0x2D8C*/ u8 filler_2D8C[0x48];
+    /*0x2D8C*/ u8 filler_2D8C[0x8];
+    /*0x2D94*/ OldMan oldMan;
+    /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2DFC*/ u8 filler_2DFC[0x100];
-    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    /*0x2DFC*/ u8 filler_2DFC[0x8];
+	/*0x2E04*/ SB_Struct sbStruct;
     /*0x2F9C*/ u8 filler_2F9C[0xA0];
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];
@@ -380,7 +431,14 @@ struct Pokedex
 
 struct SaveBlock2_Sub
 {
-    /*0x0000, 0x00A8*/ u8 filler_000[0x4C8];
+    /*0x0000, 0x00A8*/ u8 filler_000[0x4AE];
+    /*0x04AE, 0x0556*/ u8 var_4AE;
+    /*0x04AF, 0x0557*/ u8 var_4AF;
+    /*0x04B0, 0x0558*/ u16 var_4B0;
+    /*0x04B2, 0x055A*/ u16 var_4B2;
+    /*0x04B4, 0x055C*/ u16 var_4B4;
+    /*0x04B6, 0x055E*/ u16 var_4B6;
+    /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
     /*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
@@ -410,11 +468,11 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0xA8*/ struct SaveBlock2_Sub filler_A8;
 };
 
-struct UnkStruct_8054FF8_Substruct
+struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 field_8;
+    u8 height;
 };
 
 struct UnkStruct_8054FF8
@@ -423,7 +481,7 @@ struct UnkStruct_8054FF8
     u8 b;
     u8 c;
     u8 d;
-    struct UnkStruct_8054FF8_Substruct sub;
+    struct MapPosition sub;
     u16 field_C;
 };
 

@@ -2,29 +2,12 @@
 #include "string_util.h"
 #include "text.h"
 
-#define MAX_PLACEHOLDER_ID 0xD
-
-static u8 *ExpandPlaceholder_UnknownStringVar(void);
-static u8 *ExpandPlaceholder_PlayerName(void);
-static u8 *ExpandPlaceholder_StringVar1(void);
-static u8 *ExpandPlaceholder_StringVar2(void);
-static u8 *ExpandPlaceholder_StringVar3(void);
-static u8 *ExpandPlaceholder_KunChan(void);
-static u8 *ExpandPlaceholder_RivalName(void);
-static u8 *ExpandPlaceholder_Version(void);
-static u8 *ExpandPlaceholder_EvilTeam(void);
-static u8 *ExpandPlaceholder_GoodTeam(void);
-static u8 *ExpandPlaceholder_EvilLeader(void);
-static u8 *ExpandPlaceholder_GoodLeader(void);
-static u8 *ExpandPlaceholder_EvilLegendary(void);
-static u8 *ExpandPlaceholder_GoodLegendary(void);
-
 u8 gUnknownStringVar[16];
 
-const u8 gEmptyString_81E72B0[] = _"";
-const u8 gRightPointingTriangleString[] = _"▶";
+const u8 gEmptyString_81E72B0[] = _("");
+const u8 gRightPointingTriangleString[] = _("▶");
 
-static const u8 sDigits[] = @"0123456789ABCDEF";
+static const u8 sDigits[] = __("0123456789ABCDEF");
 
 static const s32 sPowersOfTen[] =
 {
@@ -38,29 +21,6 @@ static const s32 sPowersOfTen[] =
       10000000,
      100000000,
     1000000000,
-};
-
-static const u8 sSetBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
-static const u8 sGotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
-
-typedef u8 *(*ExpandPlaceholderFunc)(void);
-
-static const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
-{
-    ExpandPlaceholder_UnknownStringVar,
-    ExpandPlaceholder_PlayerName,
-    ExpandPlaceholder_StringVar1,
-    ExpandPlaceholder_StringVar2,
-    ExpandPlaceholder_StringVar3,
-    ExpandPlaceholder_KunChan,
-    ExpandPlaceholder_RivalName,
-    ExpandPlaceholder_Version,
-    ExpandPlaceholder_EvilTeam,
-    ExpandPlaceholder_GoodTeam,
-    ExpandPlaceholder_EvilLeader,
-    ExpandPlaceholder_GoodLeader,
-    ExpandPlaceholder_EvilLegendary,
-    ExpandPlaceholder_GoodLegendary,
 };
 
 extern u8 gExpandedPlaceholder_Empty[];
@@ -445,11 +405,8 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    u8 setBrailleFont[4];
-    u8 gotoLine2[5];
-
-    memcpy(setBrailleFont, sSetBrailleFont, 4);
-    memcpy(gotoLine2, sGotoLine2, 5);
+    u8 setBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
+    u8 gotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
 
     dest = StringCopy(dest, setBrailleFont);
 
@@ -473,32 +430,32 @@ u8 *StringBraille(u8 *dest, const u8 *src)
     }
 }
 
-u8 *ExpandPlaceholder_UnknownStringVar(void)
+static u8 *ExpandPlaceholder_UnknownStringVar(void)
 {
     return gUnknownStringVar;
 }
 
-u8 *ExpandPlaceholder_PlayerName(void)
+static u8 *ExpandPlaceholder_PlayerName(void)
 {
     return gSaveBlock2.playerName;
 }
 
-u8 *ExpandPlaceholder_StringVar1(void)
+static u8 *ExpandPlaceholder_StringVar1(void)
 {
     return gStringVar1;
 }
 
-u8 *ExpandPlaceholder_StringVar2(void)
+static u8 *ExpandPlaceholder_StringVar2(void)
 {
     return gStringVar2;
 }
 
-u8 *ExpandPlaceholder_StringVar3(void)
+static u8 *ExpandPlaceholder_StringVar3(void)
 {
     return gStringVar3;
 }
 
-u8 *ExpandPlaceholder_KunChan(void)
+static u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2.playerGender == MALE)
         return gExpandedPlaceholder_Kun;
@@ -506,7 +463,7 @@ u8 *ExpandPlaceholder_KunChan(void)
         return gExpandedPlaceholder_Chan;
 }
 
-u8 *ExpandPlaceholder_RivalName(void)
+static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2.playerGender == MALE)
         return gExpandedPlaceholder_May;
@@ -537,10 +494,30 @@ VERSION_DEPENDENT_PLACEHOLDER_LIST
 
 u8 *GetExpandedPlaceholder(u32 id)
 {
-    if (id > MAX_PLACEHOLDER_ID)
+    typedef u8 *(*ExpandPlaceholderFunc)(void);
+
+    static const ExpandPlaceholderFunc funcs[] =
+    {
+        ExpandPlaceholder_UnknownStringVar,
+        ExpandPlaceholder_PlayerName,
+        ExpandPlaceholder_StringVar1,
+        ExpandPlaceholder_StringVar2,
+        ExpandPlaceholder_StringVar3,
+        ExpandPlaceholder_KunChan,
+        ExpandPlaceholder_RivalName,
+        ExpandPlaceholder_Version,
+        ExpandPlaceholder_EvilTeam,
+        ExpandPlaceholder_GoodTeam,
+        ExpandPlaceholder_EvilLeader,
+        ExpandPlaceholder_GoodLeader,
+        ExpandPlaceholder_EvilLegendary,
+        ExpandPlaceholder_GoodLegendary,
+    };
+
+    if (id >= ARRAY_COUNT(funcs))
         return gExpandedPlaceholder_Empty;
     else
-        return sExpandPlaceholderFuncs[id]();
+        return funcs[id]();
 }
 
 u8 *StringFill(u8 *dest, u8 c, u16 n)

@@ -210,7 +210,7 @@ gSpecials::
 	.4byte SafariZoneGetPokeblockNameInFeeder
 	.4byte sub_810BAF4
 	.4byte sub_810D32C
-	.4byte sub_810D378
+	.4byte UpdateShoalTideFlag
 	.4byte sub_810D3FC
 	.4byte ScriptGetPokedexInfo
 	.4byte ShowPokedexRatingMessage

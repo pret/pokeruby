@@ -6,147 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80C962C
-sub_80C962C: @ 80C962C
-	push {r4-r6,lr}
-	lsls r1, 16
-	lsrs r3, r1, 16
-	lsls r2, 16
-	lsrs r4, r2, 16
-	ldrb r2, [r0, 0x3]
-	ldr r5, [r0, 0x10]
-	movs r1, 0
-	cmp r1, r2
-	bge _080C9680
-	lsls r0, r3, 16
-	asrs r6, r0, 16
-	lsls r0, r4, 16
-	asrs r4, r0, 16
-	adds r3, r5, 0
-_080C964A:
-	ldrb r0, [r3, 0x5]
-	cmp r0, 0x7
-	bne _080C9678
-	ldrh r0, [r3]
-	cmp r6, r0
-	bne _080C9678
-	ldrh r0, [r3, 0x2]
-	cmp r4, r0
-	bne _080C9678
-	movs r1, 0x96
-	lsls r1, 2
-	adds r0, r1, 0
-	ldrh r3, [r3, 0xA]
-	adds r0, r3
-	lsls r0, 16
-	lsrs r0, 16
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C9680
-	movs r0, 0x1
-	b _080C9682
-_080C9678:
-	adds r3, 0xC
-	adds r1, 0x1
-	cmp r1, r2
-	blt _080C964A
-_080C9680:
-	movs r0, 0
-_080C9682:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C962C
-
-	thumb_func_start sub_80C9688
-sub_80C9688: @ 80C9688
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	bl mapconnection_get_mapheader
-	adds r3, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0x2
-	beq _080C96B0
-	cmp r0, 0x2
-	bgt _080C96A6
-	cmp r0, 0x1
-	beq _080C96C4
-	b _080C9704
-_080C96A6:
-	cmp r0, 0x3
-	beq _080C96DC
-	cmp r0, 0x4
-	beq _080C96E6
-	b _080C9704
-_080C96B0:
-	ldr r0, [r4, 0x4]
-	adds r0, 0x7
-	subs r0, r5, r0
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, [r3]
-	ldr r0, [r0, 0x4]
-	subs r0, 0x7
-	adds r0, r6
-	b _080C96FA
-_080C96C4:
-	ldr r0, [r4, 0x4]
-	adds r0, 0x7
-	subs r0, r5, r0
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, _080C96D8 @ =gMapHeader
-	ldr r0, [r0]
-	ldr r0, [r0, 0x4]
-	b _080C96F6
-	.align 2, 0
-_080C96D8: .4byte gMapHeader
-_080C96DC:
-	ldr r0, [r3]
-	ldr r0, [r0]
-	subs r0, 0x7
-	adds r0, r5
-	b _080C96F0
-_080C96E6:
-	ldr r0, _080C9700 @ =gMapHeader
-	ldr r0, [r0]
-	ldr r0, [r0]
-	adds r0, 0x7
-	subs r0, r5, r0
-_080C96F0:
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, [r4, 0x4]
-_080C96F6:
-	adds r0, 0x7
-	subs r0, r6, r0
-_080C96FA:
-	lsls r0, 16
-	lsrs r2, r0, 16
-	b _080C9708
-	.align 2, 0
-_080C9700: .4byte gMapHeader
-_080C9704:
-	movs r0, 0
-	b _080C971A
-_080C9708:
-	ldr r0, [r3, 0x4]
-	lsls r1, 16
-	asrs r1, 16
-	lsls r2, 16
-	asrs r2, 16
-	bl sub_80C962C
-	lsls r0, 24
-	lsrs r0, 24
-_080C971A:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C9688
-
 	thumb_func_start sub_80C9720
 sub_80C9720: @ 80C9720
 	push {r4-r7,lr}
@@ -1033,13 +892,13 @@ ItemUseOutOfBattle_SacredAsh: @ 80C9DCC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080C9DDC @ =gUnknown_03005CE0
+	ldr r1, _080C9DDC @ =gLastFieldPokeMenuOpened
 	movs r0, 0
 	strb r0, [r1]
 	movs r5, 0
 	b _080C9DE6
 	.align 2, 0
-_080C9DDC: .4byte gUnknown_03005CE0
+_080C9DDC: .4byte gLastFieldPokeMenuOpened
 _080C9DE0:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1062,7 +921,7 @@ _080C9DE6:
 	bl GetMonData
 	cmp r0, 0
 	bne _080C9DE0
-	ldr r0, _080C9E2C @ =gUnknown_03005CE0
+	ldr r0, _080C9E2C @ =gLastFieldPokeMenuOpened
 	strb r5, [r0]
 _080C9E10:
 	ldr r1, _080C9E30 @ =gUnknown_03004AE4
@@ -1078,7 +937,7 @@ _080C9E10:
 	bx r0
 	.align 2, 0
 _080C9E28: .4byte gPlayerParty
-_080C9E2C: .4byte gUnknown_03005CE0
+_080C9E2C: .4byte gLastFieldPokeMenuOpened
 _080C9E30: .4byte gUnknown_03004AE4
 _080C9E34: .4byte sub_8070048
 _080C9E38: .4byte gUnknown_02038561

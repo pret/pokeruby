@@ -1,15 +1,26 @@
 #include "global.h"
 #include "field_special_scene.h"
 #include "asm.h"
+#include "event_data.h"
+#include "field_camera.h"
 #include "palette.h"
-#include "task.h"
+#include "rom4.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
-#include "field_camera.h"
-#include "rom4.h"
-#include "event_data.h"
 #include "sprite.h"
+#include "task.h"
+
+#define SECONDS(value) ((signed) (60.0 * value + 0.5))
+
+// porthole states
+enum
+{
+	INIT_PORTHOLE,
+	IDLE_CHECK,
+	EXECUTE_MOVEMENT,
+	EXIT_PORTHOLE,
+};
 
 extern s8 gTruckCamera_HorizontalTable[];
 
@@ -44,20 +55,18 @@ void Task_Truck1(u8 taskId)
     u8 mapNum, mapGroup;
     register s16 zero asm("r4");
 
-    box1 = GetTruckBoxMovement(data[0] + 30) * 4; // box 1 happens 30 frames earlier than the other 2.
+    box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.
     sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, box1 + 3);
-    box2 = GetTruckBoxMovement(data[0]) * 2;
+    box2 = GetTruckBoxMovement(data[0]) * 2; // bottom left box.
     sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, box2 - 3);
-    box3 = GetTruckBoxMovement(data[0]) * 4;
+    box3 = GetTruckBoxMovement(data[0]) * 4; // bottom right box.
     mapNum = gSaveBlock1.location.mapNum;
     mapGroup = gSaveBlock1.location.mapGroup;
     zero = 0;
     sub_805BD90(3, mapNum, mapGroup, -3, box3);
 
-    data[0]++;
-
-    if (data[0] == 0x7530) // timer?
-        data[0] = zero;
+    if (++data[0] == SECONDS(500)) // this will never run
+        data[0] = zero; // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
     SetCameraPanning(0, cameraYpan);
@@ -142,7 +151,7 @@ void Task_HandleTruckSequence(u8 taskId)
        */
    case 0:
        data[1]++;
-       if (data[1] == 90)
+       if (data[1] == SECONDS(1.5))
        {
            SetCameraPanningCallback(0);
            data[1] = 0; // reset the timer.
@@ -153,7 +162,7 @@ void Task_HandleTruckSequence(u8 taskId)
        break;
    case 1:
        data[1]++;
-       if (data[1] == 150)
+       if (data[1] == SECONDS(2.5))
        {
            pal_fill_black();
            data[1] = 0;
@@ -162,7 +171,7 @@ void Task_HandleTruckSequence(u8 taskId)
        break;
    case 2:
        data[1]++;
-       if(!gPaletteFade.active && data[1] > 300)
+       if (!gPaletteFade.active && data[1] > SECONDS(5))
        {
            data[1] = 0;
            DestroyTask(data[2]);
@@ -241,22 +250,22 @@ bool8 sub_80C7754(void)
     }
 }
 
-void sub_80C77A0(u8 taskId)
+void Task_HandlePorthole(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *var = GetVarPointer(0x40B4);
+    u16 *var = GetVarPointer(VAR_PORTHOLE);
     struct WarpData *location = &gSaveBlock1.location;
 
     switch (data[0])
     {
-    case 0:
+    case INIT_PORTHOLE: // finish fading before making porthole finish.
         if (!gPaletteFade.active)
         {
             data[1] = 0;
-            data[0] = 2;
+            data[0] = EXECUTE_MOVEMENT; // execute movement before checking if should be exited. strange?
         }
         break;
-    case 1:
+    case IDLE_CHECK: // idle and move.
         if (gMain.newKeys & A_BUTTON)
             data[1] = 1;
         if (!sub_80A212C(0xFF, location->mapNum, location->mapGroup))
@@ -271,25 +280,25 @@ void sub_80C77A0(u8 taskId)
             return;
         }
         data[0] = 2;
-    case 2:
+    case EXECUTE_MOVEMENT: // execute movement.
         if (data[1])
         {
-            data[0] = 3;
+            data[0] = EXIT_PORTHOLE; // exit porthole.
             return;
         }
-
-        if (*var == 2)
+		// run this once.
+        if (*var == 2) // which direction?
         {
             exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
-            data[0] = 1;
+            data[0] = IDLE_CHECK; // run case 1.
         }
         else
         {
             exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
-            data[0] = 1;
+            data[0] = IDLE_CHECK; // run case 1.
         }
         break;
-    case 3:
+    case EXIT_PORTHOLE: // exit porthole.
         FlagReset(0x4001);
         FlagReset(0x4000);
         copy_saved_warp2_bank_and_enter_x_to_warp1(0);
@@ -320,7 +329,7 @@ void sub_80C791C(void)
     sub_80C78A0();
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = TRUE;
     pal_fill_black();
-    CreateTask(sub_80C77A0, 80);
+    CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();
 }
 

@@ -38,14 +38,6 @@ void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);
 
-// src/field_door.o
-void FieldSetDoorOpened(u32, u32);
-void FieldSetDoorClosed(u32, u32);
-s8 FieldAnimateDoorClose(u32, u32);
-s8 FieldAnimateDoorOpen(u32, u32);
-bool8 FieldIsDoorAnimationRunning(void);
-u32 sub_8058790(u32 x, u32 y);
-
 // asm/field_map_obj.o
 void sub_805AA98();
 u8 sub_805AB54(void);
@@ -53,16 +45,17 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
 void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
-u8 SpawnSpecialFieldObject(struct UnknownStruct_FPA *);
+u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 u8 show_sprite(u8, u8, u8);
-u8 AddPseudoFieldObject(u8 val, void (*player)(struct Sprite *), int i, int i1, int i2);
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
-void sub_805B55C(int i, int i1);
-void sub_805B710(int i, int i1);
+//void sub_805B55C(int i, int i1);
+void sub_805B55C(s16 a, s16 b);
+void sub_805B710(u16 i, u16 i1);
 void sub_805B980(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
-struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void sub_805BCF0(u8, u8, u8, u8);
@@ -72,15 +65,15 @@ void gpu_pal_allocator_reset__manage_upper_four(void);
 void npc_coords_shift(struct MapObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void npc_coords_shift_still(struct MapObject *pObject);
-u8 GetFieldObjectIdByXYZ(u16, u16, int);
+u8 GetFieldObjectIdByXYZ(u16, u16, u8);
 void UpdateFieldObjectsForCameraUpdate(s16, s16);
 u8 AddCameraObject(u8);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 u8 FieldObjectGetBerryTreeId(u8);
 void sub_805C754(struct MapObject *pObject);
-void sub_805C774(struct MapObject *,			 u8 );
+void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
-void sub_805C7C4(int i);
+void sub_805C7C4(u8 i);
 u8 FieldObjectDirectionToImageAnimId(u8);
 u8 get_go_image_anim_num(u8 unk_19);
 u8 sub_805FD98(u8);
@@ -96,7 +89,7 @@ void sub_8060288(u8, u8, u8);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);
 void FieldObjectMoveDestCoords(struct MapObject *pObject, u8 unk_19, s16 *pInt, s16 *pInt1);
 bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
-void FieldObjectSetSpecialAnim(struct MapObject *, u8);
+bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
 void FieldObjectForceSetSpecialAnim(struct MapObject *pObject, u8 a);
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void FieldObjectClearAnim(struct MapObject *);
@@ -136,31 +129,10 @@ u8 ZCoordToPriority(u8);
 void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
-// src/field_map_obj_helpers.o
-bool8 FreezeMapObject(struct MapObject *);
-void FreezeMapObjects(void);
-void FreezeMapObjectsExceptOne(u8);
-void UnfreezeMapObjects(void);
-void sub_806487C(struct Sprite *sprite, bool8 invisible);
-void sub_8064990(u8, u8);
-
-// asm/field_control_avatar.o
-void sub_8067EEC(struct UnkInputStruct *pStruct);
-void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys);
-int sub_8068024(struct UnkInputStruct *pStruct);
-u8 *sub_80682A8(void *, u8, u8);
-void overworld_poison_timer_set(void);
-void prev_quest_postbuffer_cursor_backup_reset(void);
-u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
-u8 *GetFieldObjectScriptPointerForComparison();
-
 // asm/field_tasks.o
 void SetUpFieldTasks();
 void ActivatePerStepCallback(u8);
 void ResetFieldTasksArgs(void);
-
-// asm/clock.o
-void DoTimeBasedEvents(void);
 
 // asm/reset_rtc_screen.o
 void CB2_InitResetRtcScreen(void);
@@ -202,10 +174,6 @@ u8 sub_8083664(void);
 void sub_8083A84(TaskFunc);
 s32 sub_8083BF4(u8 id);
 
-// src/fldeff_emotion.o
-void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
-void objc_exclamation_mark_probably(struct Sprite *sprite);
-
 // asm/rom_80859BC.o
 u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
@@ -236,7 +204,7 @@ void sub_809D608(u16);
 u8 pokemon_ailments_get_primary(u32);
 
 // asm/script_movement.o
-u8 exec_movement(u8, u8, u8, void *);
+bool8 exec_movement(u8, u8, u8, u8 *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 
@@ -245,8 +213,8 @@ void sub_80A2B18(void);
 u16 sub_80A2D64(u16, u8 *);
 
 // asm/map_name_popup.o
-void AddMapNamePopUpWindowTask(void);
-void HideMapNamePopUpWindow();
+void ShowMapNamePopup(void);
+void HideMapNamePopup();
 
 // asm/item_menu.o
 void sub_80A3684(void);
@@ -257,11 +225,6 @@ void sub_80A68CC();
 u8 sub_80A7D8C(u8 berry, int i, int i1);
 void sub_80A7DD4(void);
 u8 sub_80A7E5C(u8);
-
-// src/matsuda_debug_menu.o
-void sub_80AA280(u8);
-void sub_80AA5E8(u8);
-void sub_80AA658(u8);
 
 // asm/contest.o
 void sub_80AB1B0(void);
@@ -277,18 +240,6 @@ void sub_80B2D1C(void);
 void CreatePokemartMenu(void *);
 void CreateDecorationShop1Menu(void *);
 void CreateDecorationShop2Menu(void *);
-
-// src/script_menu.o
-bool8 sub_80B5054(u8, u8, u8, u8);
-bool8 sub_80B50B0(u8, u8, u8, u8, u8);
-bool8 Multichoice(u8, u8, u8, u8);
-bool8 yes_no_box(u8, u8);
-bool8 sub_80B5578(u8, u8, u8, u8, u8);
-bool8 sub_80B58C4(u16, u8, u8);
-void *picbox_close(void);
-
-// asm/naming_screen.o
-void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 
 // asm/secret_base.o
 void sub_80BB5B4(void);
@@ -329,15 +280,6 @@ void sub_80C4940(void);
 void sub_80C4980(u8);
 u8 sub_80C4B34(u8 *);
 
-// asm/script_pokemon_util_80C4BF0.o
-u8 sub_80C4D50(void);
-void ShowContestWinner(void);
-void HealPlayerParty();
-u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
-u8 ScriptGiveEgg(u16);
-void ScriptWildBattle(u16, u8, u16);
-void ScriptSetMonMoveSlot(u8, u16, u8);
-
 // asm/fldeff_80C5CD4.o
 void DoFieldPoisonEffect(void);
 bool32 FieldPoisonEffectIsRunning(void);
@@ -356,16 +298,6 @@ void sub_80C8E1C(u8);
 void sub_80C8EBC(u8);
 void sub_80C8F34(u8);
 
-// asm/bike.o
-void MovePlayerOnBike(u8, u16, u16);
-void sub_80E5B38(u16 i, u16 c);
-u8 sub_80E5DEC(u8);
-bool8 player_should_look_direction_be_enforced_upon_movement(void);
-void sub_80E5FCC(int i, int i1);
-void sub_80E6010(int i);
-s16 sub_80E6034(void);
-void sub_80E6084();
-
 // asm/easy_chat.o
 void sub_80E6764(void);
 void sub_80EB3FC(u8 *, u16);
@@ -376,25 +308,13 @@ u16 sub_80EB72C(u16);
 void sub_80EBA5C(void);
 
 // asm/mauville_old_man.o
-void sub_80F7AA4(void);
+void SetMauvilleOldMan(void);
 void sub_80F7F30(void);
 
 // asm/menu_helpers.o
 bool8 sub_80F9344(void);
 void sub_80F9368(void);
 void sub_80F9438(void);
-
-// asm/script_pokemon_util_80F99CC.o
-void sub_80F99CC(void);
-
-// src/dewford_trend.o
-void sub_80FA17C(void);
-void sub_80FA46C(struct EasyChatPair *, u16, u8);
-void sub_80FA4E4(struct EasyChatPair *, u32, u8);
-bool8 sub_80FA670(struct EasyChatPair *, struct EasyChatPair *, u8);
-void sub_80FA740(struct EasyChatPair *);
-bool8 SB1ContainsWords(u16 *);
-bool8 IsEasyChatPairEqual(u16 *, u16 *);
 
 // asm/region_map.o
 void sub_80FBFB4(u8 *str, u8 region, u8);
@@ -403,13 +323,6 @@ u8 *CopyLocationName(u8 *dest, u8 location);
 
 // asm/slot_machine.o
 void PlaySlotMachine(u8, void *);
-
-// asm/contest_painting.o
-void sub_8106630(u32);
-
-// asm/rom6.o
-bool8 npc_before_player_of_type(u8);
-u8 oei_task_add(void);
 
 // asm/pokeblock.o
 void sub_810C994(void);
@@ -468,30 +381,14 @@ void sub_8134AC0(void *);
 // src/player_pc.o
 void NewGameInitPCItems(void);
 
-// src/intro.o
-void sub_813CE30(u16, u16, u16, u16);
-
-// asm/braille_puzzles.o
-bool8 ShouldDoBrailleStrengthEffect(void);
-void DoBrailleStrengthEffect(void);
-
 // asm/intro_credits_graphics.o
 void load_intro_part2_graphics(/*TODO: arg types*/);
 void sub_8148C78(/*TODO: arg types*/);
+void sub_8148CB0(u8);
+void sub_8148E90(u8);
 u8 sub_8148EC0(/*TODO: arg types*/);
 void sub_8149020(/*TODO: arg types*/);
 u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
-
-// asm/name_string_util.o
-void SanitizeNameString(u8*);
-
-// src/agb_flash.o
-u16 ReadFlashId(void);
-u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size);
-u32 ProgramFlashSectorAndVerify();
-u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
-u16 IdentifyFlash(void);

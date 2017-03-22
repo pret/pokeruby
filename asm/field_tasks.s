@@ -1523,7 +1523,7 @@ _08069F9E:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsAsh
+	bl MetatileBehavior_IsAshGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A02A
@@ -1708,7 +1708,7 @@ _0806A122:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A182
-	bl sub_80E6034
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4

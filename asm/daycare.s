@@ -196,7 +196,7 @@ _08041498: .4byte 0x00002b4c
 	thumb_func_start daycare_send
 daycare_send: @ 804149C
 	push {lr}
-	ldr r0, _080414B4 @ =gUnknown_03005CE0
+	ldr r0, _080414B4 @ =gLastFieldPokeMenuOpened
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -207,7 +207,7 @@ daycare_send: @ 804149C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080414B4: .4byte gUnknown_03005CE0
+_080414B4: .4byte gLastFieldPokeMenuOpened
 _080414B8: .4byte gPlayerParty
 _080414BC: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end daycare_send
@@ -2104,7 +2104,7 @@ _08042324: .4byte gStringVar2
 	thumb_func_start sub_8042328
 sub_8042328: @ 8042328
 	push {r4-r6,lr}
-	ldr r6, _08042354 @ =gUnknown_03005CE0
+	ldr r6, _08042354 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -2123,7 +2123,7 @@ sub_8042328: @ 8042328
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042354: .4byte gUnknown_03005CE0
+_08042354: .4byte gLastFieldPokeMenuOpened
 _08042358: .4byte gPlayerParty
 _0804235C: .4byte gStringVar1
 	thumb_func_end sub_8042328
@@ -2722,7 +2722,7 @@ _0804279C:
 	bl sub_8072DEC
 	movs r0, 0x5
 	bl PlaySE
-	ldr r3, _080427DC @ =gUnknown_03005CE0
+	ldr r3, _080427DC @ =gLastFieldPokeMenuOpened
 	ldr r2, _080427E0 @ =gScriptResult
 	ldr r1, _080427E4 @ =gTasks
 	lsls r0, r4, 2
@@ -2742,7 +2742,7 @@ _0804279C:
 	bl EnableBothScriptContexts
 	b _08042816
 	.align 2, 0
-_080427DC: .4byte gUnknown_03005CE0
+_080427DC: .4byte gLastFieldPokeMenuOpened
 _080427E0: .4byte gScriptResult
 _080427E4: .4byte gTasks
 _080427E8:
@@ -2752,7 +2752,7 @@ _080427E8:
 	cmp r0, 0
 	beq _08042816
 	bl sub_8072DEC
-	ldr r0, _0804281C @ =gUnknown_03005CE0
+	ldr r0, _0804281C @ =gLastFieldPokeMenuOpened
 	ldr r1, _08042820 @ =gScriptResult
 	strh r4, [r1]
 	movs r1, 0x2
@@ -2770,7 +2770,7 @@ _08042816:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804281C: .4byte gUnknown_03005CE0
+_0804281C: .4byte gLastFieldPokeMenuOpened
 _08042820: .4byte gScriptResult
 	thumb_func_end DaycareLevelMenuProcessKeyInput
 

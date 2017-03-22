@@ -1200,7 +1200,7 @@ _0803EB34: .4byte gBattleMons
 _0803EB38: .4byte gUnknown_02024A60
 _0803EB3C: .4byte gUnknown_030042E0
 _0803EB40:
-	ldr r1, _0803EB58 @ =gUnknown_02024BEC
+	ldr r1, _0803EB58 @ =gBattleMoveDamage
 	ldr r0, [sp]
 	negs r0, r0
 	str r0, [r1]
@@ -1214,7 +1214,7 @@ _0803EB4C:
 	mov r10, r2
 	b _0803EE0A
 	.align 2, 0
-_0803EB58: .4byte gUnknown_02024BEC
+_0803EB58: .4byte gBattleMoveDamage
 _0803EB5C:
 	movs r7, 0x2
 	mov r0, r10

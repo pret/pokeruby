@@ -122,7 +122,7 @@ gUnknown_02024BE8: @ 2024BE8
 gUnknown_02024BEA: @ 2024BEA
 	.space 0x2
 
-gUnknown_02024BEC: @ 2024BEC
+gBattleMoveDamage: @ 2024BEC
 	.space 0x4
 
 gUnknown_02024BF0: @ 2024BF0
@@ -137,10 +137,10 @@ gUnknown_02024C04: @ 2024C04
 byte_2024C06: @ 2024C06
 	.space 0x1
 
-gUnknown_02024C07: @ 2024C07
+gPlayerMonIndex: @ 2024C07
 	.space 0x1
 
-gUnknown_02024C08: @ 2024C08
+gEnemyMonIndex: @ 2024C08
 	.space 0x1
 
 gUnknown_02024C09: @ 2024C09
@@ -194,7 +194,7 @@ gUnknown_02024C5C: @ 2024C5C
 gUnknown_02024C60: @ 2024C60
 	.space 0x8
 
-gUnknown_02024C68: @ 2024C68
+gBattleMoveFlags: @ 2024C68
 	.space 0x4
 
 gUnknown_02024C6C: @ 2024C6C
@@ -335,7 +335,7 @@ gUnknown_020297E4: @ 20297E4
 gUnknown_020297E8: @ 20297E8
 	.space 0x4
 
-gUnknown_020297EC: @ 20297EC
+gDifferentSaveFile: @ 20297EC
 	.space 0x1
 
 gUnknown_020297ED: @ 20297ED
@@ -484,66 +484,9 @@ gMPlay_PokemonCry: @ 202F79C
 gPokemonCryBGMDuckingCounter: @ 202F7A0
 	.space 0x4
 
-gUnknown_0202F7A4: @ 202F7A4
-	.space 0x4
+	.include "src/battle_anim.o"
 
-gUnknown_0202F7A8: @ 202F7A8
-	.space 0x4
-
-gUnknown_0202F7AC: @ 202F7AC
-	.space 0x4
-
-gUnknown_0202F7B0: @ 202F7B0
-	.space 0x1
-
-gUnknown_0202F7B1: @ 202F7B1
-	.space 0x1
-
-gUnknown_0202F7B2: @ 202F7B2
-	.space 0x1
-
-gUnknown_0202F7B3: @ 202F7B3
-	.space 0x1
-
-gUnknown_0202F7B4: @ 202F7B4
-	.space 0x4
-
-gUnknown_0202F7B8: @ 202F7B8
-	.space 0x4
-
-gUnknown_0202F7BC: @ 202F7BC
-	.space 0x2
-
-gUnknown_0202F7BE: @ 202F7BE
-	.space 0x2
-
-gUnknown_0202F7C0: @ 202F7C0
-	.space 0x2
-
-gUnknown_0202F7C2: @ 202F7C2
-	.space 0x2
-
-gUnknown_0202F7C4: @ 202F7C4
-	.space 0x1
-
-gUnknown_0202F7C5: @ 202F7C5
-	.space 0x1
-
-gUnknown_0202F7C6: @ 202F7C6
-	.space 0x2
-
-gUnknown_0202F7C8: @ 202F7C8
-	.space 0x1
-
-gUnknown_0202F7C9: @ 202F7C9
-	.space 0x1
-
-gUnknown_0202F7CA: @ 202F7CA
-	.space 0x8
-
-gUnknown_0202F7D2: @ 202F7D2
-	.space 0x2
-
+	.align 2
 gUnknown_0202F7D4: @ 202F7D4
 	.space 0x10
 
@@ -569,13 +512,7 @@ gUnknown_0202FF58: @ 202FF58
 	.include "src/wild_encounter.o"
 
 gUnknown_0202FF84: @ 202FF84
-	.space 0x4
-
-gUnknown_0202FF88: @ 202FF88
-	.space 0x4
-
-gUnknown_0202FF8C: @ 202FF8C
-	.space 0x18
+	.space 0x20
 
 gUnknown_0202FFA4: @ 202FFA4
 	.space 0x4
@@ -667,9 +604,9 @@ gUnknown_020384F4: @ 20384F4
 gUnknown_020384F8: @ 20384F8
 	.space 0x40
 
-gUnknown_02038538: @ 2038538
-	.space 0x4
+	.include "src/map_name_popup.o"
 
+	.align 2
 gUnknown_0203853C: @ 203853C
 	.space 0x4
 
@@ -994,7 +931,7 @@ gUnknown_0203926A: @ 203926A
 gUnknown_0203926C: @ 203926C
 	.space 0x4
 
-gUnknown_02039270: @ 2039270
+gSelectedOrderFromParty: @ 2039270
 	.space 0x4
 
 gUnknown_02039274: @ 2039274
@@ -1018,7 +955,7 @@ gUnknown_0203927C: @ 203927C
 gUnknown_0203927D: @ 203927D
 	.space 0x7
 
-gUnknown_02039284: @ 2039284
+gLastSaveSectorStatus: @ 2039284
 	.space 0x4
 
 gUnknown_02039288: @ 2039288
@@ -1082,12 +1019,13 @@ gUnknown_0203932E: @ 203932E
 gUnknown_02039338: @ 2039338
 	.space 0x4
 
-gUnknown_0203933C: @ 203933C
+gSaveFailedType: @ 203933C
 	.space 0x2
 
-gUnknown_0203933E: @ 203933E
+gSaveFailedClockInfo: @ 203933E
 	.space 0x12
 
+	.align 2
 gUnknown_02039350: @ 2039350
 	.space 0x8
 

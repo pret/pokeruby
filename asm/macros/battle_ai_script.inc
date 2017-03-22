@@ -1,21 +1,24 @@
-	.macro if_random percent, address
+	.macro if_random_less_than percent, address
 	.byte 0x00
 	.byte \percent
 	.4byte \address
 	.endm
 
-	.macro if_not_random percent, address
+	@ unused
+	.macro if_random_greater_than percent, address
 	.byte 0x01
 	.byte \percent
 	.4byte \address
 	.endm
 
-	.macro if_random_1 address
+	@ unused
+	.macro if_random_equal address
 	.byte 0x02
 	.4byte \address
 	.endm
 
-	.macro if_not_random_1 address
+	@ unused
+	.macro if_random_not_equal address
 	.byte 0x03
 	.4byte \address
 	.endm
@@ -212,7 +215,8 @@
 	.byte \byte
 	.endm
 
-	.macro ai_23
+	@ unused
+	.macro get_move_power
 	.byte 0x23
 	.endm
 
@@ -225,14 +229,17 @@
 	.byte \target
 	.endm
 
-	.macro if_type type, address
+	.macro if_arg_equal type, address
 	.byte 0x26
 	.byte \type
 	.4byte \address
 	.endm
 
-	.macro ai_27
+	@ unused
+	.macro if_arg_not_equal type, address
 	.byte 0x27
+	.byte \type
+	.4byte \address
 	.endm
 
 	.macro if_would_go_first target, address
@@ -247,10 +254,12 @@
 	.4byte \address
 	.endm
 
+	@ nullsub
 	.macro ai_2a
 	.byte 0x2a
 	.endm
 
+	@ nullsub
 	.macro ai_2b
 	.byte 0x2b
 	.endm
@@ -260,7 +269,8 @@
 	.byte \target
 	.endm
 
-	.macro ai_2d
+	@ unused
+	.macro get_considered_move
 	.byte 0x2d
 	.endm
 
@@ -273,7 +283,8 @@
 	.byte \target
 	.endm
 
-	.macro ai_30
+	@ unused
+	.macro get_highest_possible_damage
 	.byte 0x30
 	.endm
 
@@ -283,10 +294,12 @@
 	.4byte \address
 	.endm
 
+	@ nullsub
 	.macro ai_32
 	.byte 0x32
 	.endm
 
+	@ nullsub
 	.macro ai_33
 	.byte 0x33
 	.endm
@@ -364,12 +377,20 @@
 	.4byte \address
 	.endm
 
-	.macro if_has_move
+	@ unused
+	.macro if_has_move, target, move, address
 	.byte 0x3f
+	.byte \target
+	.2byte \move
+	.4byte \address
 	.endm
 
-	.macro if_dont_have_move
+	@ unused
+	.macro if_dont_have_move, target, move, address
 	.byte 0x40
+	.byte \target
+	.2byte \move
+	.4byte \address
 	.endm
 
 	.macro if_move_effect target, effect, address
@@ -393,8 +414,9 @@
 	.4byte \address
 	.endm
 
-	.macro if_encored address
+	.macro if_encored target, address
 	.byte 0x44
+	.byte \target
 	.4byte \address
 	.endm
 
@@ -402,7 +424,7 @@
 	.byte 0x45
 	.endm
 
-	.macro if_random_2 address
+	.macro if_random_100 address
 	.byte 0x46
 	.4byte \address
 	.endm
@@ -440,15 +462,15 @@
 	.byte \target
 	.endm
 
-	.macro get_move_type
+	.macro get_move_type_from_result
 	.byte 0x4e
 	.endm
 
-	.macro get_move_power
+	.macro get_move_power_from_result
 	.byte 0x4f
 	.endm
 
-	.macro get_move_effect
+	.macro get_move_effect_from_result
 	.byte 0x50
 	.endm
 
@@ -457,30 +479,37 @@
 	.byte \target
 	.endm
 
+	@ nullsub
 	.macro ai_52
 	.byte 0x52
 	.endm
 
+	@ nullsub
 	.macro ai_53
 	.byte 0x53
 	.endm
 
+	@ nullsub
 	.macro ai_54
 	.byte 0x54
 	.endm
 
+	@ nullsub
 	.macro ai_55
 	.byte 0x55
 	.endm
 
+	@ nullsub
 	.macro ai_56
 	.byte 0x56
 	.endm
 
+	@ nullsub
 	.macro ai_57
 	.byte 0x57
 	.endm
 
+	@ unused
 	.macro call address
 	.byte 0x58
 	.4byte \address
@@ -513,6 +542,7 @@
 	if_level_cond 2, \address
 	.endm
 
+	@ unused
 	.macro if_taunted address
 	.byte 0x5c
 	.4byte \address

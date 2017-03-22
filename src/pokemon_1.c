@@ -1,14 +1,14 @@
 #include "global.h"
 #include "asm.h"
-#include "text.h"
-#include "string_util.h"
+#include "items.h"
+#include "main.h"
 #include "pokemon.h"
+#include "rng.h"
 #include "rom4.h"
 #include "species.h"
-#include "main.h"
-#include "rng.h"
 #include "sprite.h"
-#include "items.h"
+#include "string_util.h"
+#include "text.h"
 
 //Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)

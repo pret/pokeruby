@@ -7430,8 +7430,8 @@ sub_806E7D0: @ 806E7D0
 	bx r0
 	thumb_func_end sub_806E7D0
 
-	thumb_func_start sub_806E81C
-sub_806E81C: @ 806E81C
+	thumb_func_start PartyMenuGetPopupMenuFunc
+PartyMenuGetPopupMenuFunc: @ 806E81C
 	lsls r0, 24
 	lsls r3, 24
 	lsrs r3, 24
@@ -7444,7 +7444,7 @@ sub_806E81C: @ 806E81C
 	adds r0, r2
 	ldr r0, [r0, 0x4]
 	bx lr
-	thumb_func_end sub_806E81C
+	thumb_func_end PartyMenuGetPopupMenuFunc
 
     .section .text_806E884
 
@@ -9414,7 +9414,7 @@ _0806F8FC:
 	strh r3, [r0]
 _0806F900:
 	adds r5, r0, 0
-	ldr r1, _0806F940 @ =gUnknown_02024BEC
+	ldr r1, _0806F940 @ =gBattleMoveDamage
 	ldrh r0, [r5]
 	negs r0, r0
 	str r0, [r1]
@@ -9442,7 +9442,7 @@ _0806F900:
 	bl StringExpandPlaceholders
 	b _0806F964
 	.align 2, 0
-_0806F940: .4byte gUnknown_02024BEC
+_0806F940: .4byte gBattleMoveDamage
 _0806F944: .4byte 0x0201c000
 _0806F948: .4byte gStringVar1
 _0806F94C: .4byte gStringVar2
@@ -10413,13 +10413,13 @@ _080702B0:
 	ldr r1, [r4, 0x10]
 	str r1, [r0]
 _080702C6:
-	ldr r1, _080702D4 @ =gUnknown_03005CE0
+	ldr r1, _080702D4 @ =gLastFieldPokeMenuOpened
 	movs r0, 0
 	strb r0, [r1]
 	b _080702DE
 	.align 2, 0
 _080702D0: .4byte gTasks
-_080702D4: .4byte gUnknown_03005CE0
+_080702D4: .4byte gLastFieldPokeMenuOpened
 _080702D8:
 	adds r0, r5, 0
 	bl sub_8070088
