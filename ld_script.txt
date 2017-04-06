@@ -228,7 +228,8 @@ SECTIONS {
         asm/rom_81258BC.o(.text);
         asm/roamer.o(.text);
         asm/battle_tower.o(.text);
-        asm/rom_8136130.o(.text);
+        asm/use_pokeblock.o(.text);
+        asm/battle_anim_8137220.o(.text);
         src/player_pc.o(.text);
         asm/player_pc.o(.text);
         src/intro.o(.text);
@@ -422,7 +423,8 @@ SECTIONS {
         data/rom_81258BC.o(.rodata);
         data/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
-        data/rom_8136130.o(.rodata);
+		data/use_pokeblock.o(.rodata);
+		data/battle_anim_8137220.o(.rodata);
         data/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/battle_anim_813F0F4.o(.rodata);
