@@ -6351,3 +6351,5 @@ _0807AA0A:
 _0807AA20: .4byte sub_8078B34
 _0807AA24: .4byte move_anim_8072740
 	thumb_func_end sub_807A9BC
+
+	.align 2, 0 @ Don't pad with nop.
