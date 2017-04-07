@@ -422,7 +422,8 @@ SECTIONS {
         src/wallclock.o(.rodata);
         data/pokeblock.o(.rodata);
         data/fldeff_flash.o(.rodata);
-        data/rom_810CBB4.o(.rodata);
+        data/time_events.o(.rodata);
+        data/field_specials.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         data/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);

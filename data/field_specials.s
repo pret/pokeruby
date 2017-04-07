@@ -3,32 +3,7 @@
 
 	.section .rodata
 
-gUnknown_083F8340:: @ 83F8340
-	.byte    1
-	.byte    1
-	.byte    1
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    1
-	.byte    1
-	.byte    1
-	.byte    1
-	.byte    1
-	.byte    1
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    0
-	.byte    1
-	.byte    1
-	.byte    1
-
+	.align 2
 gUnknown_083F8358:: @ 83F8358
 	.byte 7, 9, 8, 10
 
