@@ -97,6 +97,8 @@ static const struct PartyPopupMenu sBattlePartyPopupMenus[] =
     {ARRAY_COUNT(Unknown_83B5FF2), 9, Unknown_83B5FF2},
 };
 
+// rom_8094928 is part of this file, has yet to be decompiled.
+
 int SetUpBattlePartyMenu(void)
 {
     switch (EWRAM_1B000.unk264)
