@@ -35,3 +35,4 @@ types_*.taghl
 *.dump
 *.sa*
 Thumbs.db
+build/*

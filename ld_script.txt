@@ -448,8 +448,8 @@ SECTIONS {
         data/decoration_inventory.o(.rodata);
         data/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
-		data/use_pokeblock.o(.rodata);
-		data/battle_anim_8137220.o(.rodata);
+        data/use_pokeblock.o(.rodata);
+        data/battle_anim_8137220.o(.rodata);
         data/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/battle_anim_813F0F4.o(.rodata);
