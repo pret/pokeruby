@@ -4,6 +4,7 @@
 #include "field_player_avatar.h"
 #include "field_map_obj_helpers.h"
 #include "item.h"
+#include "items.h"
 #include "mail.h"
 #include "map_obj_lock.h"
 #include "menu.h"
@@ -24,7 +25,11 @@ extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
 extern void (* gUnknown_03004AE4)(u8);
+extern void (* const gUnknown_083D61F4[])();
+
 extern u8 *gUnknown_083D61DC[];
+
+extern u8 gMoveNames[][13];
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
@@ -47,6 +52,14 @@ extern void sub_810BA7C(u8);
 extern void sub_8080E28(void);
 extern void UseMedicine(u8);
 extern void sub_8070048(u8);
+extern void DoPPRecoveryItemEffect(u8);
+extern void DoPPUpItemEffect(u8);
+extern void DoRareCandyItemEffect(u8);
+extern u16 ItemIdToBattleMoveId(u16);
+extern void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
+extern void sub_80F914C(u8, void const *);
+extern void sub_80A3E0C(void);
+extern void TeachMonTMMove(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -54,6 +67,10 @@ extern u8 gOtherText_NoResponse[];
 extern u8 gOtherText_ItemfinderResponding[];
 extern u8 gOtherText_ItemfinderItemUnderfoot[];
 extern u8 gOtherText_Coins3[];
+extern u8 gOtherText_BootedHM[];
+extern u8 gOtherText_BootedTM[];
+extern u8 gOtherText_ContainsMove[];
+extern u8 gOtherText_UsedItem[];
 
 extern u8 gItemFinderDirections[];
 
@@ -73,6 +90,9 @@ void DisplayItemRespondingMessageAndExitItemfinder(u8);
 void RotatePlayerAndExitItemfinder(u8);
 void sub_80C9D00(u8);
 void sub_80C9D74(u8);
+void sub_80C9EE4(u8);
+void sub_80C9F10(u8);
+void sub_80C9F80(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -848,4 +868,69 @@ void ItemUseOutOfBattle_SacredAsh(u8 taskId)
     gUnknown_03004AE4 = sub_8070048;
     gUnknown_02038561 = 4;
     ItemMenu_ConfirmNormalFade(taskId);
+}
+
+void ItemUseOutOfBattle_PPRecovery(u8 taskId)
+{
+    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    sub_80C9D98(taskId);
+}
+
+void ItemUseOutOfBattle_PPUp(u8 taskId)
+{
+    gUnknown_03004AE4 = DoPPUpItemEffect;
+    sub_80C9D98(taskId);    
+}
+
+void ItemUseOutOfBattle_RareCandy(u8 taskId)
+{
+    gUnknown_03004AE4 = DoRareCandyItemEffect;
+    sub_80C9D98(taskId);    
+}
+
+void ItemUseOutOfBattle_TMHM(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    
+    if(gScriptItemId >= ITEM_HM01)
+        DisplayItemMessageOnField(taskId, gOtherText_BootedHM, sub_80C9EE4, 1); // HM
+    else
+        DisplayItemMessageOnField(taskId, gOtherText_BootedTM, sub_80C9EE4, 1); // TM
+}
+
+void sub_80C9EE4(u8 taskId)
+{
+    PlaySE(2);
+    gTasks[taskId].func = sub_80C9F10;
+}
+
+void sub_80C9F10(u8 taskId)
+{
+    if(gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gScriptItemId)]);
+        StringExpandPlaceholders(gStringVar4, gOtherText_ContainsMove);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_80C9F80, 1);
+    }
+}
+
+void sub_80C9F80(u8 var)
+{
+    DisplayYesNoMenu(7, 7, 1);
+    sub_80A3FA0(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
+    sub_80F914C(var, gUnknown_083D61F4);
+}
+
+void sub_80C9FC0(u8 var)
+{
+    gUnknown_03004AE4 = TeachMonTMMove;
+    sub_80C9D98(var);
+}
+
+void sub_80C9FDC(void)
+{
+    RemoveBagItem(gScriptItemId, 1);
+    sub_80A3E0C();
+    CopyItemName(gScriptItemId, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gOtherText_UsedItem);
 }
