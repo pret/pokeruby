@@ -17,6 +17,7 @@
 #include "task.h"
 #include "weather.h"
 #include "fieldmap.h"
+#include "coins.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
@@ -36,12 +37,15 @@ extern void sub_80A5D04(void);
 extern bool8 IsBikingDisallowedByPlayer(void);
 extern void GetOnOffBike(u8);
 extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
+extern void sub_810BA7C(u8);
+extern void sub_8080E28(void);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
 extern u8 gOtherText_NoResponse[];
 extern u8 gOtherText_ItemfinderResponding[];
 extern u8 gOtherText_ItemfinderItemUnderfoot[];
+extern u8 gOtherText_Coins3[];
 
 extern u8 gItemFinderDirections[];
 
@@ -693,5 +697,40 @@ void RotatePlayerAndExitItemfinder(u8 taskId)
         
         if(data[3] == 4)
             DisplayItemMessageOnField(taskId, gOtherText_ItemfinderItemUnderfoot, ExitItemfinder, 0);
+    }
+}
+
+void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
+{
+    if(sub_80F9344() == TRUE)
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
+    }
+    else if(gTasks[taskId].data[2] != TRUE)
+    {
+        sub_810BA7C(0);
+        ItemMenu_ConfirmNormalFade(taskId);
+    }
+    else
+    {
+        gUnknown_0300485C = (void *)sub_8080E28;
+        sub_810BA7C(1);
+        ItemMenu_ConfirmComplexFade(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_CoinCase(u8 taskId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, GetCoins(), 0, 4);
+    StringExpandPlaceholders(gStringVar4, gOtherText_Coins3);
+    
+    if(!gTasks[taskId].data[2])
+    {
+        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        DisplayItemMessageOnField(taskId, gStringVar4, CleanUpItemMenuMessage, 1);
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gStringVar4, CleanUpOverworldMessage, 0);
     }
 }
