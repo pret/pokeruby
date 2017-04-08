@@ -20,6 +20,7 @@
 #include "fieldmap.h"
 #include "coins.h"
 #include "berry.h"
+#include "vars.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
@@ -39,8 +40,6 @@ extern void ExecuteItemUseFromBlackPalette(void);
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
 extern void CleanUpItemMenuMessage(u8);
 extern void CleanUpOverworldMessage(u8);
-extern void ItemUseOutOfBattle_TMHM(u8);
-extern void ItemUseOutOfBattle_EvolutionStone(u8);
 extern void ItemUseOnFieldCB_Bike(u8);
 extern void ItemUseOnFieldCB_Rod(u8);
 extern void ItemUseOnFieldCB_Itemfinder(u8);
@@ -55,11 +54,15 @@ extern void sub_8070048(u8);
 extern void DoPPRecoveryItemEffect(u8);
 extern void DoPPUpItemEffect(u8);
 extern void DoRareCandyItemEffect(u8);
+extern void DoEvolutionStoneItemEffect(u8);
 extern u16 ItemIdToBattleMoveId(u16);
 extern void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
 extern void sub_80F914C(u8, void const *);
 extern void sub_80A3E0C(void);
 extern void TeachMonTMMove(u8);
+extern void sub_80878A8(void);
+extern void sub_8053014(void);
+extern void sub_80A7094(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -71,6 +74,10 @@ extern u8 gOtherText_BootedHM[];
 extern u8 gOtherText_BootedTM[];
 extern u8 gOtherText_ContainsMove[];
 extern u8 gOtherText_UsedItem[];
+extern u8 gOtherText_RepelLingers[];
+extern u8 gOtherText_UsedFlute[];
+extern u8 gOtherText_UsedRepel[];
+extern u8 gOtherText_BoxIsFull[];
 
 extern u8 gItemFinderDirections[];
 
@@ -93,6 +100,8 @@ void sub_80C9D74(u8);
 void sub_80C9EE4(u8);
 void sub_80C9F10(u8);
 void sub_80C9F80(u8);
+void ItemUseOutOfBattle_TMHM(u8);
+void ItemUseOutOfBattle_EvolutionStone(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -879,7 +888,7 @@ void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 void ItemUseOutOfBattle_PPUp(u8 taskId)
 {
     gUnknown_03004AE4 = DoPPUpItemEffect;
-    sub_80C9D98(taskId);    
+    sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
@@ -933,4 +942,127 @@ void sub_80C9FDC(void)
     sub_80A3E0C();
     CopyItemName(gScriptItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gOtherText_UsedItem);
+}
+
+void ItemUseOutOfBattle_Repel(u8 var)
+{
+    if(VarGet(VAR_REPEL_STEP_COUNT) == FALSE)
+    {
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gScriptItemId));
+        sub_80C9FDC();
+        DisplayItemMessageOnField(var, gStringVar4, CleanUpItemMenuMessage, 1);
+    }
+    else
+    {
+        DisplayItemMessageOnField(var, gOtherText_RepelLingers, CleanUpItemMenuMessage, 1);
+    }
+}
+
+void sub_80CA07C(void)
+{
+    sub_80A3E0C();
+    CopyItemName(gScriptItemId, gStringVar2);
+}
+
+void sub_80CA098(u8 taskId)
+{
+    if(++gTasks[taskId].data[15] > 7)
+    {
+        PlaySE(0x75);
+        DisplayItemMessageOnField(taskId, gStringVar4, CleanUpItemMenuMessage, 1);
+    }
+}
+
+void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
+{
+    if(gScriptItemId == 43)
+    {
+        FlagSet(SYS_ENC_UP_ITEM);
+        FlagReset(SYS_ENC_DOWN_ITEM);
+        sub_80CA07C();
+        StringExpandPlaceholders(gStringVar4, gOtherText_UsedFlute);
+        gTasks[taskId].func = sub_80CA098;
+        gTasks[taskId].data[15] = 0;
+    }
+    else if(gScriptItemId == 42)
+    {
+        FlagSet(SYS_ENC_DOWN_ITEM);
+        FlagReset(SYS_ENC_UP_ITEM);
+        sub_80CA07C();
+        StringExpandPlaceholders(gStringVar4, gOtherText_UsedRepel);
+        gTasks[taskId].func = sub_80CA098;
+        gTasks[taskId].data[15] = 0;
+    }
+}
+
+void task08_080A1C44(u8 taskId)
+{
+    player_avatar_init_params_reset();
+    sub_80878A8();
+    DestroyTask(taskId);
+}
+
+void sub_80CA18C(u8 taskId)
+{
+    sub_8053014();
+    sub_80C9FDC();
+    gTasks[taskId].data[0] = 0;
+    DisplayItemMessageOnField(taskId, gStringVar4, task08_080A1C44, 0);
+}
+
+bool8 sub_80CA1C8(void)
+{
+    if(gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void ItemUseOutOfBattle_EscapeRope(u8 taskId)
+{
+    if(sub_80CA1C8() == TRUE) // is map type an area you can use escape rope?
+    {
+        gUnknown_03005D00 = sub_80CA18C;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
+    }
+}
+
+void ItemUseOutOfBattle_EvolutionStone(u8 var)
+{
+    gUnknown_03004AE4 = DoEvolutionStoneItemEffect;
+    sub_80C9D98(var);
+}
+
+void ItemUseInBattle_PokeBall(u8 var)
+{
+    if(PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    {
+        RemoveBagItem(gScriptItemId, 1);
+        sub_80A7094(var);
+    }
+    else
+    {
+        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        DisplayItemMessageOnField(var, gOtherText_BoxIsFull, CleanUpItemMenuMessage, 1);
+    }
+}
+
+void sub_80CA294(u8 var)
+{
+    if(gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+        sub_80A7094(var);
+}
+
+void sub_80CA2BC(u8 taskId)
+{
+    if(++gTasks[taskId].data[15] > 7)
+    {
+        PlaySE(1);
+        RemoveBagItem(gScriptItemId, 1);
+        DisplayItemMessageOnField(taskId, sub_803F378(gScriptItemId), sub_80CA294, 1);
+    }
 }
