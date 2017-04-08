@@ -272,7 +272,7 @@ gSpecials::
 	.4byte CheckLeadMonTough
 	.4byte sub_80C7958
 	.4byte DoSoftReset
-	.4byte sub_810D180
+	.4byte GameClear
 	.4byte sub_810EBEC
 	.4byte ShowGlassWorkshopMenu
 	.4byte SpawnCameraDummy
