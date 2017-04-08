@@ -18,10 +18,16 @@
 #include "field_screeneffect.h"
 #include "fieldmap.h"
 #include "coins.h"
+#include "berry.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
+extern void (* gUnknown_03004AE4)(u8);
+extern u8 *gUnknown_083D61DC[];
+
+extern u8 gUnknown_02038561;
+extern u8 gLastFieldPokeMenuOpened;
 
 extern void HandleItemMenuPaletteFade(u8);
 extern void ExecuteItemUseFromBlackPalette(void);
@@ -39,6 +45,8 @@ extern void GetOnOffBike(u8);
 extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
 extern void sub_810BA7C(u8);
 extern void sub_8080E28(void);
+extern void UseMedicine(u8);
+extern void sub_8070048(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -48,6 +56,9 @@ extern u8 gOtherText_ItemfinderItemUnderfoot[];
 extern u8 gOtherText_Coins3[];
 
 extern u8 gItemFinderDirections[];
+
+extern u8 gUnknown_081A1654[];
+extern u8 gUnknown_081A168F[];
 
 extern u16 gScriptItemId;
 
@@ -60,6 +71,8 @@ u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
 void SetPlayerDirectionTowardsItem(u8);
 void DisplayItemRespondingMessageAndExitItemfinder(u8);
 void RotatePlayerAndExitItemfinder(u8);
+void sub_80C9D00(u8);
+void sub_80C9D74(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -733,4 +746,106 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
     {
         DisplayItemMessageOnField(taskId, gStringVar4, CleanUpOverworldMessage, 0);
     }
+}
+
+void sub_80C9BB8(u8 var)
+{
+    if(gMain.newKeys & A_BUTTON)
+        CleanUpItemMenuMessage(var);
+}
+
+void sub_80C9BD8(u8 var)
+{
+    if(gMain.newKeys & A_BUTTON)
+        CleanUpOverworldMessage(var);
+}
+
+// unused
+void ItemUseOutOfBattle_SSTicket(u8 taskId)
+{
+    if(gTasks[taskId].data[2] == 0)
+    {
+        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BB8, 1);
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BD8, 0);
+    }
+}
+
+void sub_80C9C7C(u8 taskId)
+{
+    if(IsPlayerFacingPlantedBerryTree() == TRUE)
+    {
+        gUnknown_03005D00 = sub_80C9D00;
+        gUnknown_0300485C = ExecuteItemUseFromBlackPalette;
+        gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
+        gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
+        gTasks[taskId].func = HandleItemMenuPaletteFade;
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+    }
+    else
+    {
+        ItemId_GetFieldFunc(gScriptItemId)(taskId);
+    }
+}
+
+void sub_80C9D00(u8 taskId)
+{
+    RemoveBagItem(gScriptItemId, 1);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(gUnknown_081A1654);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_WailmerPail(u8 taskId)
+{
+    if(TryToWaterBerryTree() == TRUE)
+    {
+        gUnknown_03005D00 = sub_80C9D74;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
+    }
+}
+
+void sub_80C9D74(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(gUnknown_081A168F);
+    DestroyTask(taskId);
+}
+
+void sub_80C9D98(u8 taskId)
+{
+    gUnknown_02038561 = 0;
+    ItemMenu_ConfirmNormalFade(taskId);
+}
+
+void ItemUseOutOfBattle_Medicine(u8 taskId)
+{
+    gUnknown_03004AE4 = UseMedicine;
+    sub_80C9D98(taskId);
+}
+
+void ItemUseOutOfBattle_SacredAsh(u8 taskId)
+{
+    u8 i;
+    
+    gLastFieldPokeMenuOpened = 0;
+    
+    for(i = 0; i < 6; i++)
+    {
+        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0 && GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+        {
+            gLastFieldPokeMenuOpened = i;
+            break;
+        }
+    }
+    gUnknown_03004AE4 = sub_8070048;
+    gUnknown_02038561 = 4;
+    ItemMenu_ConfirmNormalFade(taskId);
 }
