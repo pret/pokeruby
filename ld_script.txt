@@ -213,7 +213,7 @@ SECTIONS {
         src/rom6.o(.text);
         asm/pokeblock.o(.text);
         asm/fldeff_flash.o(.text);
-        asm/post_battle_event_funcs.o(.text);
+        src/post_battle_event_funcs.o(.text);
         asm/time_events.o(.text);
         asm/birch_pc.o(.text);
         asm/hof_pc.o(.text);

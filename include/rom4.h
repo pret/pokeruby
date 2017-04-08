@@ -26,7 +26,7 @@ void sub_8053050(void);
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
-// SetGameStat
+void SetGameStat(u8, u32);
 // sub_8053154
 // sub_8053198
 void update_saveblock1_field_object_coords(u8, s16, s16);
@@ -59,7 +59,7 @@ void sub_80536E4(s8, s8, s8, s8, s8);
 void sub_8053720(s16, s16);
 // sub_8053778
 // unref_sub_8053790
-// sub_80537CC
+void sub_80537CC(u8);
 void gpu_sync_bg_hide();
 // sub_8053818
 // sub_8053850
