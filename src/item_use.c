@@ -2,7 +2,7 @@
 #include "asm.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
-#include "field_player_avatar.h"
+#include "field_map_obj_helpers.h"
 #include "item.h"
 #include "mail.h"
 #include "map_obj_lock.h"
@@ -35,15 +35,13 @@ extern void ItemUseOnFieldCB_Itemfinder(u8);
 extern void sub_80A5D04(void);
 extern bool8 IsBikingDisallowedByPlayer(void);
 extern void GetOnOffBike(u8);
-extern u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
-extern void SetPlayerDirectionTowardsItem(u8);
-extern void DisplayItemRespondingMessageAndExitItemfinder(u8);
-extern void RotatePlayerAndExitItemfinder(u8);
 extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
 extern u8 gOtherText_NoResponse[];
+extern u8 gOtherText_ItemfinderResponding[];
+extern u8 gOtherText_ItemfinderItemUnderfoot[];
 
 extern u8 gItemFinderDirections[];
 
@@ -54,6 +52,10 @@ void RunItemfinderResults(u8);
 void ExitItemfinder(u8);
 void sub_80C9720(u8);
 void sub_80C9838(u8, s16, s16);
+u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
+void SetPlayerDirectionTowardsItem(u8);
+void DisplayItemRespondingMessageAndExitItemfinder(u8);
+void RotatePlayerAndExitItemfinder(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -614,5 +616,82 @@ void sub_80C9838(u8 taskId, s16 x, s16 y)
                 data[1] = y;
             }
         }
+    }
+}
+
+u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
+{
+    s16 abX, abY;
+
+    if(itemX == 0 && itemY == 0)
+        return DIR_NONE; // player is standing on the item.
+
+    // get absolute X distance.
+    if(itemX < 0)
+        abX = itemX * -1;
+    else
+        abX = itemX;
+
+    // get absolute Y distance.
+    if(itemY < 0)
+        abY = itemY * -1;
+    else
+        abY = itemY;
+    
+    if(abX > abY)
+    {
+        if(itemX < 0)
+            return DIR_EAST;
+        else
+            return DIR_NORTH;
+    }
+    else
+    {
+        if(abX < abY)
+        {
+            if(itemY < 0)
+                return DIR_SOUTH;
+            else
+                return DIR_WEST;
+        }
+        if(abX == abY)
+        {
+            if(itemY < 0)
+                return DIR_SOUTH;
+            else
+                return DIR_WEST;            
+        }
+        return DIR_NONE; // should never get here. return something so it doesnt crash.
+    }
+}
+
+void SetPlayerDirectionTowardsItem(u8 direction)
+{
+    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    FieldObjectClearAnim(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    UnfreezeMapObject(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    PlayerTurnInPlace(direction);
+}
+
+void DisplayItemRespondingMessageAndExitItemfinder(u8 taskId)
+{
+    if(FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+        DisplayItemMessageOnField(taskId, gOtherText_ItemfinderResponding, ExitItemfinder, 0);
+}
+
+void RotatePlayerAndExitItemfinder(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    if(FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    || data[2] == FALSE)
+    {
+        SetPlayerDirectionTowardsItem(gItemFinderDirections[data[5]]);
+        data[2] = 1;
+        data[5] = (data[5] + 1) & 3;
+        data[3]++;
+        
+        if(data[3] == 4)
+            DisplayItemMessageOnField(taskId, gOtherText_ItemfinderItemUnderfoot, ExitItemfinder, 0);
     }
 }
