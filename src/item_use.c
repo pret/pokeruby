@@ -39,7 +39,7 @@ extern u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
 extern void SetPlayerDirectionTowardsItem(u8);
 extern void DisplayItemRespondingMessageAndExitItemfinder(u8);
 extern void RotatePlayerAndExitItemfinder(u8);
-extern void sub_80C9838(u8, s16, s16);
+extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -53,6 +53,7 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
 void RunItemfinderResults(u8);
 void ExitItemfinder(u8);
 void sub_80C9720(u8);
+void sub_80C9838(u8, s16, s16);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -295,7 +296,7 @@ void ExitItemfinder(u8 taskId)
 
 bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
 {
-	int distanceX, distanceY;
+    int distanceX, distanceY;
     u16 x, y;
     s16 newDistanceX, newDistanceY, i;
 
@@ -347,42 +348,271 @@ bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
 
 bool8 sub_80C9688(struct MapConnection *connection, int x, int y)
 {
-	struct MapHeader *mapHeader;
-	u16 localX, localY;
-	u32 localOffset;
-	s32 localLength;
-	
-	mapHeader = mapconnection_get_mapheader(connection);
-	
-	switch(connection->direction)
-	{
-		// same weird temp variable behavior seen in HiddenItemAtPos
-		case 2:
-			localOffset = connection->offset + 7;
-			localX = x - localOffset;
-			localLength = mapHeader->mapData->height - 7;
-			localY = localLength + y; // additions are reversed for some reason
-			break;
-		case 1:
-			localOffset = connection->offset + 7;
-			localX = x - localOffset;
-			localLength = gMapHeader.mapData->height + 7;
-			localY = y - localLength;
-			break;
-		case 3:
-			localLength = mapHeader->mapData->width - 7;
-			localX = localLength + x; // additions are reversed for some reason
-			localOffset = connection->offset + 7;
-			localY = y - localOffset;
-			break;
-		case 4:
-			localLength = gMapHeader.mapData->width + 7;
-			localX = x - localLength;
-			localOffset = connection->offset + 7;
-			localY = y - localOffset;
-			break;
-		default:
-			return FALSE;
-	}
-	return HiddenItemAtPos(mapHeader->events, localX, localY);
+    struct MapHeader *mapHeader;
+    u16 localX, localY;
+    u32 localOffset;
+    s32 localLength;
+    
+    mapHeader = mapconnection_get_mapheader(connection);
+    
+    switch(connection->direction)
+    {
+        // same weird temp variable behavior seen in HiddenItemAtPos
+        case 2:
+            localOffset = connection->offset + 7;
+            localX = x - localOffset;
+            localLength = mapHeader->mapData->height - 7;
+            localY = localLength + y; // additions are reversed for some reason
+            break;
+        case 1:
+            localOffset = connection->offset + 7;
+            localX = x - localOffset;
+            localLength = gMapHeader.mapData->height + 7;
+            localY = y - localLength;
+            break;
+        case 3:
+            localLength = mapHeader->mapData->width - 7;
+            localX = localLength + x; // additions are reversed for some reason
+            localOffset = connection->offset + 7;
+            localY = y - localOffset;
+            break;
+        case 4:
+            localLength = gMapHeader.mapData->width + 7;
+            localX = x - localLength;
+            localOffset = connection->offset + 7;
+            localY = y - localOffset;
+            break;
+        default:
+            return FALSE;
+    }
+    return HiddenItemAtPos(mapHeader->events, localX, localY);
+}
+
+// weird math
+#ifdef NONMATCHING
+void sub_80C9720(u8 taskId)
+{
+    s16 x, y;
+    s16 curX, curY;
+    s16 width = gMapHeader.mapData->width + 7;
+    s16 height = gMapHeader.mapData->height + 7;
+
+    PlayerGetDestCoords(&x, &y);
+
+    for (curX = x - 7; curX <= x + 7; curX++)
+    {
+        for (curY = y - 5; curY <= y + 5; curY++)
+        {
+            if (7 > curX
+             || curX >= width
+             || 7 > curY
+             || curY >= height)
+            {
+                struct MapConnection *conn = sub_8056BA0(curX, curY);
+                if (conn && sub_80C9688(conn, curX, curY) == TRUE)
+                    sub_80C9838(taskId, curX - x, curY - y);
+            }
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80C9720(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x14\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    str r0, [sp, 0x4]\n\
+    ldr r0, _080C9834 @ =gMapHeader\n\
+    ldr r1, [r0]\n\
+    ldr r0, [r1]\n\
+    adds r0, 0x7\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0x8]\n\
+    ldr r0, [r1, 0x4]\n\
+    adds r0, 0x7\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0xC]\n\
+    mov r4, sp\n\
+    adds r4, 0x2\n\
+    mov r0, sp\n\
+    adds r1, r4, 0\n\
+    bl PlayerGetDestCoords\n\
+    mov r0, sp\n\
+    ldrh r0, [r0]\n\
+    subs r0, 0x7\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    asrs r0, 16\n\
+    mov r1, sp\n\
+    movs r2, 0\n\
+    ldrsh r1, [r1, r2]\n\
+    adds r1, 0x7\n\
+    cmp r0, r1\n\
+    bgt _080C9824\n\
+_080C976E:\n\
+    mov r5, sp\n\
+    ldrh r0, [r5, 0x2]\n\
+    subs r0, 0x5\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    lsls r2, r4, 16\n\
+    asrs r1, r2, 16\n\
+    movs r6, 0x2\n\
+    ldrsh r0, [r5, r6]\n\
+    adds r0, 0x5\n\
+    lsls r3, 16\n\
+    mov r8, r3\n\
+    cmp r1, r0\n\
+    bgt _080C980E\n\
+    movs r0, 0x7\n\
+    str r0, [sp, 0x10]\n\
+    mov r1, r8\n\
+    asrs r1, 16\n\
+    mov r9, r1\n\
+    mov r10, r0\n\
+_080C9796:\n\
+    ldr r3, [sp, 0x10]\n\
+    cmp r3, r9\n\
+    bgt _080C97B8\n\
+    ldr r5, [sp, 0x8]\n\
+    lsls r0, r5, 16\n\
+    asrs r0, 16\n\
+    cmp r9, r0\n\
+    bge _080C97B8\n\
+    asrs r1, r2, 16\n\
+    cmp r10, r1\n\
+    bgt _080C97B8\n\
+    ldr r6, [sp, 0xC]\n\
+    lsls r0, r6, 16\n\
+    asrs r0, 16\n\
+    lsls r7, r4, 16\n\
+    cmp r1, r0\n\
+    blt _080C97F6\n\
+_080C97B8:\n\
+    mov r0, r8\n\
+    asrs r5, r0, 16\n\
+    lsls r4, 16\n\
+    asrs r6, r4, 16\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl sub_8056BA0\n\
+    adds r7, r4, 0\n\
+    cmp r0, 0\n\
+    beq _080C97F6\n\
+    adds r1, r5, 0\n\
+    adds r2, r6, 0\n\
+    bl sub_80C9688\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _080C97F6\n\
+    mov r0, sp\n\
+    ldrh r1, [r0]\n\
+    subs r1, r5, r1\n\
+    lsls r1, 16\n\
+    asrs r1, 16\n\
+    ldrh r2, [r0, 0x2]\n\
+    subs r2, r6, r2\n\
+    lsls r2, 16\n\
+    asrs r2, 16\n\
+    ldr r0, [sp, 0x4]\n\
+    bl sub_80C9838\n\
+_080C97F6:\n\
+    movs r1, 0x80\n\
+    lsls r1, 9\n\
+    adds r0, r7, r1\n\
+    lsrs r4, r0, 16\n\
+    lsls r2, r4, 16\n\
+    asrs r1, r2, 16\n\
+    mov r3, sp\n\
+    movs r5, 0x2\n\
+    ldrsh r0, [r3, r5]\n\
+    adds r0, 0x5\n\
+    cmp r1, r0\n\
+    ble _080C9796\n\
+_080C980E:\n\
+    movs r1, 0x80\n\
+    lsls r1, 9\n\
+    add r1, r8\n\
+    lsrs r3, r1, 16\n\
+    asrs r1, 16\n\
+    mov r0, sp\n\
+    movs r6, 0\n\
+    ldrsh r0, [r0, r6]\n\
+    adds r0, 0x7\n\
+    cmp r1, r0\n\
+    ble _080C976E\n\
+_080C9824:\n\
+    add sp, 0x14\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080C9834: .4byte gMapHeader\n\
+    .syntax divided");
+}
+#endif
+
+void sub_80C9838(u8 taskId, s16 x, s16 y)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 var1, var2, var3, var4;
+    
+    if(data[2] == FALSE)
+    {
+        data[0] = x;
+        data[1] = y;
+        data[2] = TRUE;
+    }
+    else
+    {
+        // data[0] and data[1] contain the player's coordinates.
+        // x and y contain the item's coordinates.
+        if(data[0] < 0)
+            var1 = data[0] * -1; // item is to the left
+        else
+            var1 = data[0]; // item is to the right
+        
+        if(data[1] < 0)
+            var2 = data[1] * -1; // item is to the north
+        else
+            var2 = data[1]; // item is to the south
+        
+        if(x < 0)
+            var3 = x * -1;
+        else
+            var3 = x;
+        
+        if(y < 0)
+            var4 = y * -1;
+        else
+            var4 = y;
+        
+        if(var1 + var2 > var3 + var4)
+        {
+            data[0] = x;
+            data[1] = y;
+        }
+        else
+        {
+            if(var1 + var2 == var3 + var4 && (var2 > var4 || (var2 == var4 && data[1] < y)))
+            {
+                data[0] = x;
+                data[1] = y;
+            }
+        }
+    }
 }
