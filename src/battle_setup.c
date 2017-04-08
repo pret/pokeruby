@@ -20,7 +20,7 @@
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "map_constants.h"
 #include "opponent_constants.h"
 #include "script_pokemon_80C4.h"

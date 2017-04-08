@@ -21,7 +21,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "field_map_obj_helpers.h"
 
 //Menu actions

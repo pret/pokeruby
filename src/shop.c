@@ -4,7 +4,7 @@
 #include "task.h"
 #include "main.h"
 #include "sound.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "palette.h"
 #include "sprite.h"
 #include "asm.h"

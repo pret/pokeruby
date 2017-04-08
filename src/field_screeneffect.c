@@ -1,5 +1,5 @@
 #include "global.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "asm.h"
 #include "palette.h"
 #include "sprite.h"
