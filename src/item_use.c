@@ -21,6 +21,7 @@
 #include "coins.h"
 #include "berry.h"
 #include "vars.h"
+#include "battle.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
@@ -34,6 +35,13 @@ extern u8 gMoveNames[][13];
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
+extern u8 gUnknown_02024E6C;
+
+extern u8 gItemFinderDirections[];
+extern u8 gUnknown_081A1654[];
+extern u8 gUnknown_081A168F[];
+
+extern u16 gUnknown_02024A6A[];
 
 extern void HandleItemMenuPaletteFade(u8);
 extern void ExecuteItemUseFromBlackPalette(void);
@@ -63,6 +71,10 @@ extern void TeachMonTMMove(u8);
 extern void sub_80878A8(void);
 extern void sub_8053014(void);
 extern void sub_80A7094(u8);
+extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon *mon, u16, u8, u16);
+extern void sub_8094E4C(void);
+extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
+extern u8 GetItemEffectType();
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -78,13 +90,11 @@ extern u8 gOtherText_RepelLingers[];
 extern u8 gOtherText_UsedFlute[];
 extern u8 gOtherText_UsedRepel[];
 extern u8 gOtherText_BoxIsFull[];
-
-extern u8 gItemFinderDirections[];
-
-extern u8 gUnknown_081A1654[];
-extern u8 gUnknown_081A168F[];
+extern u8 gOtherText_WontHaveAnyEffect[];
+extern u8 gOtherText_SnapConfusion[];
 
 extern u16 gScriptItemId;
+extern u16 gBattleTypeFlags;
 
 bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
 void RunItemfinderResults(u8);
@@ -102,6 +112,7 @@ void sub_80C9F10(u8);
 void sub_80C9F80(u8);
 void ItemUseOutOfBattle_TMHM(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
+void ItemUseOutOfBattle_CannotUse(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -1065,4 +1076,161 @@ void sub_80CA2BC(u8 taskId)
         RemoveBagItem(gScriptItemId, 1);
         DisplayItemMessageOnField(taskId, sub_803F378(gScriptItemId), sub_80CA294, 1);
     }
+}
+
+void ItemUseInBattle_StatIncrease(u8 taskId)
+{
+    u16 partyId = gUnknown_02024A6A[gUnknown_02024E6C];
+    
+    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    
+    if(ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gScriptItemId, partyId, 0) != FALSE)
+    {
+        DisplayItemMessageOnField(taskId, gOtherText_WontHaveAnyEffect, CleanUpItemMenuMessage, 1);
+    }
+    else
+    {
+        gTasks[taskId].func = sub_80CA2BC;
+        gTasks[taskId].data[15] = 0;
+    }
+}
+
+void sub_80CA394(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        sub_8094E4C();
+        gpu_pal_allocator_reset__manage_upper_four();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80CA3C0(u8 taskId)
+{
+    gTasks[taskId].func = sub_80CA394;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+}
+
+void ItemUseInBattle_Medicine(u8 var)
+{
+    gUnknown_03004AE4 = UseMedicine;
+    sub_80CA3C0(var);
+}
+
+void unref_sub_80CA410(u8 var)
+{
+    gUnknown_03004AE4 = sub_8070048;
+    sub_80CA3C0(var);
+}
+
+void ItemUseInBattle_PPRecovery(u8 var)
+{
+    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    sub_80CA3C0(var);
+}
+
+void unref_sub_80CA448(u8 var)
+{    
+    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    
+    if(ExecuteTableBasedItemEffect__(0, gScriptItemId, 0) == FALSE)
+    {
+        RemoveBagItem(gScriptItemId, 1);
+        GetMonNickname(&gPlayerParty[0], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gOtherText_SnapConfusion);
+        DisplayItemMessageOnField(var, gStringVar4, sub_80A7094, 1);
+    }
+    else
+    {
+        DisplayItemMessageOnField(var, gOtherText_WontHaveAnyEffect, CleanUpItemMenuMessage, 1);
+    }
+}
+
+void ItemUseInBattle_Escape(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    
+    if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == FALSE)
+    {
+        sub_80C9FDC();
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_80A7094, 1);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
+    }
+}
+
+void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
+{
+    switch(GetItemEffectType(gScriptItemId) - 1)
+    {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+            gTasks[taskId].data[15] = 1;
+            ItemUseOutOfBattle_Medicine(taskId);
+            break;
+        case 9:
+            gTasks[taskId].data[15] = 1;
+            ItemUseOutOfBattle_SacredAsh(taskId);
+            break;
+        case 0:
+            gTasks[taskId].data[15] = 1;
+            ItemUseOutOfBattle_RareCandy(taskId);
+            break;
+        case 18:
+        case 19:
+            gTasks[taskId].data[15] = 1;
+            ItemUseOutOfBattle_PPUp(taskId);
+            break;
+        case 20:
+            gTasks[taskId].data[15] = 1;
+            ItemUseOutOfBattle_PPRecovery(taskId);
+            break;
+        default:
+            gTasks[taskId].data[15] = 4;
+            ItemUseOutOfBattle_CannotUse(taskId);
+    }
+}
+
+void ItemUseInBattle_EnigmaBerry(u8 taskId)
+{
+    switch(GetItemEffectType(gScriptItemId))
+    {
+        case 0:
+            ItemUseInBattle_StatIncrease(taskId);
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 11:
+            ItemUseInBattle_Medicine(taskId);
+            break;
+        case 21:
+            ItemUseInBattle_PPRecovery(taskId);
+            break;
+        default:
+            ItemUseOutOfBattle_CannotUse(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_CannotUse(u8 taskId)
+{
+    DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
 }
