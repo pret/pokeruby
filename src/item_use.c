@@ -23,13 +23,9 @@
 #include "vars.h"
 #include "battle.h"
 
-extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
 extern void (* gUnknown_03004AE4)(u8);
-extern void (* const gUnknown_083D61F4[])();
-
-extern u8 *gUnknown_083D61DC[];
 
 extern u8 gMoveNames[][13];
 
@@ -37,7 +33,6 @@ extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_02024E6C;
 
-extern u8 gItemFinderDirections[];
 extern u8 gUnknown_081A1654[];
 extern u8 gUnknown_081A168F[];
 
@@ -75,6 +70,9 @@ extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon *mon, u16, u8, u16);
 extern void sub_8094E4C(void);
 extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
 extern u8 GetItemEffectType();
+extern void sub_808B020(void);
+extern void sub_810B96C(void);
+extern void sub_80C9FC0(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -95,6 +93,34 @@ extern u8 gOtherText_SnapConfusion[];
 
 extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;
+
+// -----------------------
+
+const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
+const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
+
+const struct TextStruct gUnknown_083D61DC[2] = 
+{
+	gSSTidalBetaString,
+	gSSTidalBetaString2,
+};
+
+const struct FuncStruct gExitToOverworldFuncList[3] = 
+{
+	sub_808B020,
+	c2_exit_to_overworld_2_switch,
+	sub_810B96C,
+};
+
+const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
+
+const struct FuncStruct gUnknown_083D61F4[2] = 
+{
+	sub_80C9FC0,
+	CleanUpItemMenuMessage,
+};
+
+// -----------------------
 
 bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
 void RunItemfinderResults(u8);
@@ -123,8 +149,8 @@ void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
     else
         taskData = ItemId_GetType(gScriptItemId) - 1;
 
-    gTasks[taskId].data[8] = (u32)gExitToOverworldFuncList[taskData] >> 16;
-    gTasks[taskId].data[9] = (u32)gExitToOverworldFuncList[taskData];
+    gTasks[taskId].data[8] = (u32)(gExitToOverworldFuncList[taskData].func) >> 16;
+    gTasks[taskId].data[9] = (u32)(gExitToOverworldFuncList[taskData].func);
     gTasks[taskId].func = HandleItemMenuPaletteFade;
 }
 
@@ -806,11 +832,11 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
     if(gTasks[taskId].data[2] == 0)
     {
         MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BB8, 1);
+        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BB8, 1);
     }
     else
     {
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BD8, 0);
+        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BD8, 0);
     }
 }
 

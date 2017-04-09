@@ -76,6 +76,11 @@ struct TextStruct
 	const u8 *text;
 };
 
+struct FuncStruct
+{
+	void *func;
+};
+
 struct Coords16
 {
     s16 x;
