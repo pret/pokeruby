@@ -2,7 +2,7 @@
 #include "field_effect.h"
 #include "sprite.h"
 #include "text.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
 

@@ -24,7 +24,7 @@
 #include "script.h"
 #include "sound.h"
 #include "string_util.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "script_menu.h"
 #include "script_pokemon_80F9.h"
 #include "script_pokemon_80C4.h"

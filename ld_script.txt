@@ -121,10 +121,10 @@ SECTIONS {
         asm/rom5.o(.text);
         asm/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
-        src/weather.o(.text);
-        asm/weather.o(.text);
-        src/field_doortransition.o(.text);
-        asm/field_doortransition.o(.text);
+        src/field_screeneffect.o(.text);
+        asm/field_screeneffect.o(.text);
+        src/field_fadetransition.o(.text);
+        asm/field_fadetransition.o(.text);
         asm/rom_8080874.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
@@ -186,7 +186,6 @@ SECTIONS {
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
         src/item_use.o(.text);
-        asm/item_use.o(.text);
         asm/battle_anim_80CA710.o(.text);
         src/bike.o(.text);
         asm/easy_chat.o(.text);
@@ -366,7 +365,7 @@ SECTIONS {
         data/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
-        data/weather.o(.rodata);
+        data/field_screeneffect.o(.rodata);
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);

@@ -28,7 +28,7 @@
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
-#include "weather.h"
+#include "field_screeneffect.h"
 #include "wild_encounter.h"
 #include "script_pokemon_80C4.h"
 #include "clock.h"

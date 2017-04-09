@@ -897,7 +897,7 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
     return TRUE;
 }
 
-bool32 IsPlayerFacingPlantedBerryTree(void)
+bool8 IsPlayerFacingPlantedBerryTree(void)
 {
     if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript
      && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
@@ -906,10 +906,10 @@ bool32 IsPlayerFacingPlantedBerryTree(void)
         return FALSE;
 }
 
-u8 TryToWaterBerryTree(void)
+bool8 TryToWaterBerryTree(void)
 {
     if (GetFieldObjectScriptPointerForComparison() != &BerryTreeScript)
-        return 0;
+        return FALSE;
     else
         return FieldObjectInteractionWaterBerryTree();
 }
