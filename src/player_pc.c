@@ -39,6 +39,8 @@ extern void sub_813A6FC(u8);
 
 extern u8 gOtherText_NoItems[];
 
+//extern struct ItemSlot gNewGamePCItems[];
+
 extern u16 gNewGamePCItems[];
 
 extern u8 gOtherText_WhatWillYouDo[];
@@ -62,18 +64,21 @@ void PlayerPCProcessMenuInput(u8 taskId);
 void InitItemStorageMenu(u8);
 void ItemStorageMenuPrint(u8 *);
 
+enum
+{
+    ITEM_ID,
+    QUANTITY,
+};
+
+#define NEW_GAME_PC_ITEMS(i, type) ((u16)(gNewGamePCItems + type)[i * 2])
+
 void NewGameInitPCItems(void)
 {
-    u8 i = 0;
+    u8 i;
 
-    ClearItemSlots(gSaveBlock1.pcItems, 0x32);
-
-    while (gNewGamePCItems[i * 2] && (gNewGamePCItems + 1)[i * 2])
-    {
-        if (AddPCItem(gNewGamePCItems[i * 2], (gNewGamePCItems + 1)[i * 2]) != 1)
+    for(i = 0, ClearItemSlots(gSaveBlock1.pcItems, 0x32); NEW_GAME_PC_ITEMS(i, ITEM_ID) && NEW_GAME_PC_ITEMS(i, QUANTITY); i++)
+        if(AddPCItem(NEW_GAME_PC_ITEMS(i, ITEM_ID), NEW_GAME_PC_ITEMS(i, QUANTITY)) != 1)
             break;
-        i++;
-    }
 }
 
 void BedroomPC(void)
