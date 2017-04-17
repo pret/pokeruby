@@ -1,12 +1,16 @@
-// asm/rom3.o
+// src/rom3.o
 void sub_800C35C(void);
 
-// asm/rom_800D42C.o
+// asm/battle_2.o
 void sub_800E7C4(void);
 u8 b_first_side(u8, u8, u8);
 void sub_80157C4(u8 index);
+
+// asm/battle_3.o
 u8 sub_8015A98(u8, u8, u8);
 u8 sub_8018324(u8, u8, u8, u8, u16);
+
+// asm/battle_7.o
 void sub_8032AA8(u8 index, int i);
 
 // src/pokemon_3.o
@@ -23,8 +27,10 @@ void current_map_music_set__default_for_battle(u16);
 void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
-// asm/daycare.o
+// src/daycare.o
 u8 daycare_count_pokemon(u8 *);
+
+// asm/daycare.o
 void sub_8041324(struct BoxPokemon *, void *);
 void sub_8041790(int i);
 u16 sub_8041870(u16);
@@ -38,7 +44,7 @@ void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);
 
-// asm/field_map_obj.o
+// src/field_map_obj.o
 void sub_805AA98();
 u8 sub_805AB54(void);
 u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
@@ -49,7 +55,6 @@ u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 u8 show_sprite(u8, u8, u8);
 u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
-//void sub_805B55C(int i, int i1);
 void sub_805B55C(s16 a, s16 b);
 void sub_805B710(u16 i, u16 i1);
 void sub_805B980(struct MapObject *, u8);
@@ -74,6 +79,8 @@ void sub_805C754(struct MapObject *pObject);
 void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(u8 i);
+
+// asm/field_map_obj.o
 u8 FieldObjectDirectionToImageAnimId(u8);
 u8 get_go_image_anim_num(u8 unk_19);
 u8 sub_805FD98(u8);
@@ -138,8 +145,17 @@ void ResetFieldTasksArgs(void);
 void CB2_InitResetRtcScreen(void);
 
 // asm/party_menu.o
+void sub_806CB74(u8 taskId);
+void sub_806CCE4(void);
+void sub_806CD44(u8 taskId);
+void sub_806D538();
+void sub_806D5A4(void);
 void GetMonNickname(struct Pokemon *mon, u8 *nickname);
 bool8 pokemon_has_move(struct Pokemon *, u16);
+void sub_806FA18(u8 taskId);
+
+// src/party_menu.o
+void sub_806E834();
 
 // asm/rom_8077ABC.o
 u8 battle_side_get_owner(u8);
@@ -147,13 +163,15 @@ u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
 bool8 IsDoubleBattle();
 
-// asm/weather.o
+// asm/field_screeneffect.o
 void SetWeather(u32);
 
-// asm/rom_8080874.o
+// src/field_fadetransition.o
 void pal_fill_black();
 void sub_8080990(void);
 void sub_80809B0(void);
+
+// asm/field_fadetransition.o
 void sub_8080A3C(void);
 void sub_8080AC4(void);
 void mapldr_default();
@@ -166,6 +184,8 @@ void sub_8080EF0(void);
 void sp13F_fall_to_last_warp(void);
 void sub_8080F68(void);
 void sub_8080F9C(void);
+
+// asm/rom_8080874.o
 void sub_8081594(u8);
 void sub_80815E0(u8 val);
 
@@ -174,7 +194,7 @@ u8 sub_8083664(void);
 void sub_8083A84(TaskFunc);
 s32 sub_8083BF4(u8 id);
 
-// asm/rom_80859BC.o
+// asm/field_effect.o
 u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
 u8 CreateBirchSprite(u8, u8, u8);
@@ -188,6 +208,7 @@ void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
 
 // asm/pokemon_menu.o
 void sub_8089A70(void);
+void sub_808A004();
 void sub_808AB90(void);
 
 // asm/pokemon_storage_system.o
@@ -203,7 +224,7 @@ void sub_809D608(u16);
 // asm/pokemon_summary_screen.o
 u8 pokemon_ailments_get_primary(u32);
 
-// asm/script_movement.o
+// src/script_movement.o
 bool8 exec_movement(u8, u8, u8, u8 *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
@@ -212,7 +233,7 @@ void sub_80A2178(void);
 void sub_80A2B18(void);
 u16 sub_80A2D64(u16, u8 *);
 
-// asm/map_name_popup.o
+// src/map_name_popup.o
 void ShowMapNamePopup(void);
 void HideMapNamePopup();
 
@@ -307,8 +328,10 @@ u16 sub_80EB72C(u16);
 // asm/pokenav.o
 void sub_80EBA5C(void);
 
-// asm/mauville_old_man.o
+// src/mauville_old_man.o
 void SetMauvilleOldMan(void);
+
+// asm/mauville_old_man.o
 void sub_80F7F30(void);
 
 // asm/menu_helpers.o
@@ -329,9 +352,13 @@ void sub_810C994(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
 
-// asm/rom_810CBB4.o
+// asm/fldeff_flash.o
 void sub_810CC80(void);
+
+// asm/time_events.o
 u8 sub_810D32C(void);
+
+// asm/field_specials.o
 void ResetCyclingRoadChallengeData(void);
 bool32 sub_810D9B0(u16);
 u8 sub_810D9EC(s8 *, s8 *, s16 *, s16 *);
@@ -363,19 +390,25 @@ void sub_8127ED0(u8, u8);
 void sub_8127F28(u8, u8, s16);
 u8 sub_8128124(u8 id);
 
-// asm/rom_81258BC.o
+// asm/learn_move.o
 void sub_8132670(void);
+
+// asm/decoration_inventory.o
 void sub_8133F80(void);
 u8 sub_8133FE4(u8);
 u8 IsThereStorageSpaceForDecoration(u8);
 u8 sub_8134074(u8);
 s8 sub_81340A8(u8);
+
+// asm/roamer.o
 void sub_81341F8(void);
 void sub_813420C(void);
 void mapnumbers_history_shift_sav1_0_2_4_out(void);
 void sub_8134348(void);
 void sub_8134394();
 u8 sub_81344CC(void);
+
+// asm/battle_tower.o
 void sub_8134AC0(void *);
 
 // src/player_pc.o
