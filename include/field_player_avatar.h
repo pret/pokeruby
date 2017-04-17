@@ -63,7 +63,7 @@ u8 player_get_direction_upper_nybble(void);
 u8 PlayerGetZCoord(void);
 u8 TestPlayerAvatarFlags(u8);
 // sub_80597D0
-// GetPlayerAvatarObjectId
+u8 GetPlayerAvatarObjectId(void);
 void sub_80597E8(void);
 void sub_80597F4(void);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b);
