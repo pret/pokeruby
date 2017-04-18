@@ -74,7 +74,7 @@ SECTIONS {
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/battle_interface.o(.text);
-        asm/smokescreen.o(.text);
+        src/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
@@ -215,7 +215,7 @@ SECTIONS {
         src/post_battle_event_funcs.o(.text);
         asm/time_events.o(.text);
         asm/birch_pc.o(.text);
-        asm/hof_pc.o(.text);
+        src/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
@@ -240,10 +240,10 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
-        asm/fldeff_sweetscent.o(.text);
+        src/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);
         asm/learn_move.o(.text);
-        asm/fldeff_softboiled.o(.text);
+        src/fldeff_softboiled.o(.text);
         asm/decoration_inventory.o(.text);
         asm/roamer.o(.text);
         asm/battle_tower.o(.text);
