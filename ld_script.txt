@@ -116,7 +116,7 @@ SECTIONS {
         src/palette.o(.text);
         src/sound.o(.text);
         src/battle_anim.o(.text);
-        asm/rom_8077ABC.o(.text);
+        src/rom_8077ABC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
         asm/battle_anim_807B69C.o(.text);
@@ -359,7 +359,7 @@ SECTIONS {
         src/sound.o(.rodata);
         data/battle_anim.o(.rodata);
         src/battle_anim.o(.rodata);
-        data/rom_8077ABC.o(.rodata);
+        src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
         data/task.o(.rodata);
