@@ -19,31 +19,26 @@ enum
 };
 
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
-extern void ItemStorageMenuProcessInput(u8);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
 extern u8 sub_813AF3C(void);
 extern void sub_813AF78(void);
-extern void sub_813A240(u8);
 extern void sub_813B108(u8);
 extern void sub_813B174(u8);
 extern void sub_80A6A30(void);
 extern u8 sub_807D770(void);
-extern void sub_813A280(u8);
 extern void sub_813AE6C(u8, u8);
-extern void sub_813A240(u8);
 extern void sub_813AD58(u16);
 extern void sub_813AE0C(u8);
 extern void sub_813ABE8(u8);
 extern void sub_813AA30(u8, u8);
-extern void sub_813A4B4(u8);
-extern void sub_813A468(u8);
 extern void sub_80F996C(u8);
 extern void sub_813A794(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
-extern void sub_813A584(u8);
-extern void sub_813A6FC(u8);
+extern void sub_80F98DC(int);
+extern void sub_813A8F0(u8);
+extern void sub_813A984(u8);
 
 extern u8 gOtherText_NoItems[];
 
@@ -69,6 +64,13 @@ void InitPlayerPCMenu(u8 taskId);
 void PlayerPCProcessMenuInput(u8 taskId);
 void InitItemStorageMenu(u8);
 void ItemStorageMenuPrint(u8 *);
+void ItemStorageMenuProcessInput(u8);
+void sub_813A280(u8);
+void sub_813A240(u8);
+void sub_813A4B4(u8);
+void sub_813A468(u8);
+void HandleQuantityRolling(u8);
+void sub_813A6FC(u8);
 
 void NewGameInitPCItems(void)
 {
@@ -332,7 +334,7 @@ void sub_813A280(u8 taskId)
     s16 *data = gTasks[taskId].data;
     s16 var;
     
-    if (gMain.newAndRepeatedKeys & 0x40)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if(data[0])
         {
@@ -363,7 +365,7 @@ void sub_813A280(u8 taskId)
                 MoveMenuCursor(0);
         }
     }
-    else if(gMain.newAndRepeatedKeys & 0x80) // _0813A306
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _0813A306
     {
         if(data[0] != data[4] - 1)
         {
@@ -389,7 +391,7 @@ void sub_813A280(u8 taskId)
                 MoveMenuCursor(0);
         }
     }
-    else if(gMain.newKeys & 0x4) // _0813A3A0
+    else if(gMain.newKeys & SELECT_BUTTON) // _0813A3A0
     {
         if (!data[9])
         {
@@ -410,7 +412,7 @@ void sub_813A280(u8 taskId)
             sub_813AE0C(taskId);
         }
     }
-    else if(gMain.newKeys & 0x1)
+    else if(gMain.newKeys & A_BUTTON)
     {
         PlaySE(5);
         if(!data[9])
@@ -430,7 +432,7 @@ void sub_813A280(u8 taskId)
             sub_813AE0C(taskId);
         }
     }
-    else if(gMain.newKeys & 0x2)
+    else if(gMain.newKeys & B_BUTTON)
     {
         PlaySE(5);
         if(!data[9])
@@ -491,5 +493,87 @@ void sub_813A4B4(u8 taskId)
     data[3] = 1;
     MenuDrawTextWindow(6, 8, 13, 11);
     sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3);
-    gTasks[taskId].func = sub_813A584;
+    gTasks[taskId].func = HandleQuantityRolling;
+}
+
+void HandleQuantityRolling(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if(data[3] != gSaveBlock1.pcItems[var].quantity)
+            data[3]++;
+        else
+            data[3] = 1; // you are at the max amount of items you have when you press Up, set your quantity back to 1.
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if(data[3] != 1)
+            data[3]--;
+        else
+            data[3] = gSaveBlock1.pcItems[var].quantity; // you are at 0 when you press down, set your quantity to the amount you have.
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // reduce by 10.
+    {
+        data[3] -= 10;
+
+        if(data[3] <= 0)
+            data[3] = 1; // dont underflow or allow 0!
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // add 10.
+    {
+        data[3] += 10;
+
+        if(data[3] > gSaveBlock1.pcItems[var].quantity)
+            data[3] = gSaveBlock1.pcItems[var].quantity; // dont overflow!
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newKeys & A_BUTTON) // confirm quantity.
+    {
+        PlaySE(5);
+        MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
+
+        if(!data[6])
+            sub_813A6FC(taskId);
+        else
+            sub_813A794(taskId);
+    }
+    else if(gMain.newKeys & B_BUTTON) // cancel quantity.
+    {
+        PlaySE(5);
+        MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
+        sub_80F98DC(0);
+        sub_80F98DC(1);
+        sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId); // why not use var?
+        gTasks[taskId].func = sub_813A280;
+    }
+}
+
+void sub_813A6FC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(AddBagItem(gSaveBlock1.pcItems[var].itemId, data[3]) == TRUE) // add item works.
+    {
+        CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
+        sub_813AD58(0xFFFD);
+        gTasks[taskId].func = sub_813A8F0;
+    }
+    else // cannot add item. inventory full?
+    {
+        data[3] = 0;
+        sub_813AD58(0xFFFA);
+        gTasks[taskId].func = sub_813A984;
+    }
 }
