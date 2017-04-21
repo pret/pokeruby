@@ -485,10 +485,7 @@ gPokemonCryBGMDuckingCounter: @ 202F7A0
 	.space 0x4
 
 	.include "src/battle_anim.o"
-
-	.align 2
-gUnknown_0202F7D4: @ 202F7D4
-	.space 0x10
+	.include "src/rom_8077ABC.o"
 
 gUnknown_0202F7E4: @ 202F7E4
 	.space 0x4
