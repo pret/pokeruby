@@ -181,7 +181,7 @@ gCallback_03004AE8: @ 3004AE8
 gDisableMusic: @ 3004AEC
 	.space 0x4
 
-gUnknown_03004AF0: @ 3004AF0
+gSoundAnimFramesToWait: @ 3004AF0
 	.space 0x10
 
 gBattleAnimArgs: @ 3004B00

@@ -44,7 +44,7 @@ extern u16 gUnknown_03004280;
 extern u16 gUnknown_03004288;
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
-extern u16 gUnknown_03004AF0;
+extern u16 gSoundAnimFramesToWait;
 extern u16 gAnimSpriteIndexArray[8];
 extern s16 gBattleAnimArgs[8];
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -626,7 +626,7 @@ static void ScriptCmd_end(void)
     if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0
      || gMonAnimTaskIdArray[0] != 0xFF || gMonAnimTaskIdArray[1] != 0xFF)
     {
-        gUnknown_03004AF0 = 0;
+        gSoundAnimFramesToWait = 0;
         gAnimFramesToWait = 1;
         return;
     }
@@ -634,7 +634,7 @@ static void ScriptCmd_end(void)
     // finish the sound effects.
     if (IsSEPlaying())
     {
-        if (++gUnknown_03004AF0 <= 90) // wait 90 frames, then halt the sound effect.
+        if (++gSoundAnimFramesToWait <= 90) // wait 90 frames, then halt the sound effect.
         {
             gAnimFramesToWait = 1;
             return;
@@ -647,7 +647,7 @@ static void ScriptCmd_end(void)
     }
     
     // the SE has halted, so set the SE Frame Counter to 0 and continue.
-    gUnknown_03004AF0 = 0;
+    gSoundAnimFramesToWait = 0;
 
     for (i = 0; i < 8; i++)
     {
@@ -2067,16 +2067,16 @@ static void ScriptCmd_waitsound(void)
 {
     if (gAnimSoundTaskCount != 0)
     {
-        gUnknown_03004AF0 = 0;
+        gSoundAnimFramesToWait = 0;
         gAnimFramesToWait = 1;
     }
     else if (IsSEPlaying())
     {
-        if (++gUnknown_03004AF0 > 0x5A)
+        if (++gSoundAnimFramesToWait > 90)
         {
             m4aMPlayStop(&gMPlay_SE1);
             m4aMPlayStop(&gMPlay_SE2);
-            gUnknown_03004AF0 = 0;
+            gSoundAnimFramesToWait = 0;
         }
         else
         {
@@ -2085,7 +2085,7 @@ static void ScriptCmd_waitsound(void)
     }
     else
     {
-        gUnknown_03004AF0 = 0;
+        gSoundAnimFramesToWait = 0;
         gBattleAnimScriptPtr++;
         gAnimFramesToWait = 0;
     }
