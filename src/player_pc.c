@@ -33,12 +33,9 @@ extern void sub_813AE6C(u8, u8);
 extern void sub_813AD58(u16);
 extern void sub_813AE0C(u8);
 extern void sub_813ABE8(u8);
-extern void sub_813AA30(u8, u8);
 extern void sub_80F996C(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
 extern void sub_80F98DC(int);
-extern void sub_813A8F0(u8);
-extern void sub_813A984(u8);
 extern void sub_80F914C(u8, void const *);
 
 extern u8 gOtherText_NoItems[];
@@ -74,6 +71,10 @@ void sub_813A468(u8);
 void HandleQuantityRolling(u8);
 void sub_813A6FC(u8);
 void sub_813A794(u8);
+void sub_813A8F0(u8);
+void sub_813A984(u8);
+void sub_813A9EC(u8);
+void sub_813AA30(u8, u8);
 
 void NewGameInitPCItems(void)
 {
@@ -607,4 +608,93 @@ void sub_813A83C(u8 taskId)
     MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
     sub_813AD58(0xFFFB);
     gTasks[taskId].func = sub_813A8F0;
+}
+
+void sub_813A878(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    InitMenu(0, 16, 2, data[4], data[0], 0xD);
+    sub_80F98DC(0);
+    sub_80F98DC(1);
+    sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
+    gTasks[taskId].func = sub_813A280;
+}
+
+void sub_813A8F0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 var;
+    u8 usedItemSlots;
+    
+    if(gMain.newKeys & 0x1 || gMain.newKeys == 0x2)
+    {
+        RemovePCItem(data[0] + data[1], data[3]);
+        var = data[2];
+        usedItemSlots = CountUsedPCItemSlots();
+        data[2] = usedItemSlots;
+        
+        if((s16)var != usedItemSlots && (s16)var < data[4] + data[1] && data[1] != 0)
+            data[1]--;
+        
+        sub_813A240(taskId);
+        sub_813A9EC(taskId);
+        InitMenu(0, 16, 2, data[4], data[0], 0xD);
+    }
+}
+
+void sub_813A984(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    if(gMain.newKeys & 0x1 || gMain.newKeys == 2)
+    {
+        sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
+        sub_80F98DC(0);
+        sub_80F98DC(1);
+        gTasks[taskId].func = sub_813A280;
+    }
+}
+
+void sub_813A9EC(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    sub_80F98DC(0);
+    sub_80F98DC(1);
+    sub_813AE0C(taskId);
+    gTasks[taskId].func = sub_813A280;
+}
+
+// seems like it was meant to return data[8] - data[1], but doesn't.
+void sub_813AA30(u8 taskId, u8 arg)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[1] + data[0];
+
+    data[9] = 0;
+
+    if((u8)data[2] > var && (u8)data[8] != var && arg == 0)
+    {
+        struct ItemSlot itemSlot = gSaveBlock1.pcItems[data[8]]; // backup the itemSlot before swapping the two.
+
+        gSaveBlock1.pcItems[data[8]] = gSaveBlock1.pcItems[var];
+        gSaveBlock1.pcItems[var] = itemSlot;
+        return;
+    }
+    else if(var == data[2])
+    {
+        sub_813AD58(0xFFFF);
+    }
+    else
+    {
+        sub_813AD58(gSaveBlock1.pcItems[var].itemId);
+    }
+
+    // dead code not getting optimized out what the fuck???
+    {
+    register int data8 asm("r1") = data[8];
+    register int data1 asm("r0") = data[1];
+    asm(""::"r"(data8 - data1));
+    }
 }
