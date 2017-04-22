@@ -12,6 +12,7 @@
 
 #define NEW_GAME_PC_ITEMS(i, type) ((u16)(gNewGamePCItems + type)[i * 2])
 
+// type as in define above
 enum
 {
     ITEM_ID,
@@ -34,11 +35,11 @@ extern void sub_813AE0C(u8);
 extern void sub_813ABE8(u8);
 extern void sub_813AA30(u8, u8);
 extern void sub_80F996C(u8);
-extern void sub_813A794(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
 extern void sub_80F98DC(int);
 extern void sub_813A8F0(u8);
 extern void sub_813A984(u8);
+extern void sub_80F914C(u8, void const *);
 
 extern u8 gOtherText_NoItems[];
 
@@ -59,6 +60,7 @@ extern u8 gUnknown_08152C75;
 
 extern u32 gUnknown_08406288[];
 extern const struct MenuAction gUnknown_084062C0[];
+extern const struct FuncStruct gUnknown_084062E0[];
 
 void InitPlayerPCMenu(u8 taskId);
 void PlayerPCProcessMenuInput(u8 taskId);
@@ -71,6 +73,7 @@ void sub_813A4B4(u8);
 void sub_813A468(u8);
 void HandleQuantityRolling(u8);
 void sub_813A6FC(u8);
+void sub_813A794(u8);
 
 void NewGameInitPCItems(void)
 {
@@ -576,4 +579,32 @@ void sub_813A6FC(u8 taskId)
         sub_813AD58(0xFFFA);
         gTasks[taskId].func = sub_813A984;
     }
+}
+
+void sub_813A794(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(ItemId_GetImportance(gSaveBlock1.pcItems[var].itemId) == FALSE)
+    {
+        CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
+        sub_813AD58(65528);
+        DisplayYesNoMenu(7, 6, 1);
+        sub_80F914C(taskId, gUnknown_084062E0);
+    }
+    else
+    {
+        data[3] = 0;
+        sub_813AD58(65529);
+        gTasks[taskId].func = sub_813A8F0;
+    }
+}
+
+void sub_813A83C(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    sub_813AD58(0xFFFB);
+    gTasks[taskId].func = sub_813A8F0;
 }
