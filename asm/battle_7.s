@@ -341,10 +341,10 @@ _08031534:
 _08031570: .4byte gSprites
 _08031574: .4byte gUnknown_02024BE0
 _08031578:
-	ldr r0, _080315D0 @ =gUnknown_0202F7C8
+	ldr r0, _080315D0 @ =gBattleAnimPlayerMonIndex
 	mov r1, r9
 	strb r1, [r0]
-	ldr r0, _080315D4 @ =gUnknown_0202F7C9
+	ldr r0, _080315D4 @ =gBattleAnimEnemyMonIndex
 	mov r1, r10
 	strb r1, [r0]
 	ldr r4, _080315D8 @ =0x02017840
@@ -352,7 +352,7 @@ _08031578:
 	ldr r0, _080315DC @ =gBattleAnims_Unknown1
 	adds r1, r5, 0
 	movs r2, 0
-	bl move_something
+	bl DoMoveAnim
 	ldr r0, _080315E0 @ =sub_80315E8
 	movs r1, 0xA
 	bl CreateTask
@@ -385,8 +385,8 @@ _080315C2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080315D0: .4byte gUnknown_0202F7C8
-_080315D4: .4byte gUnknown_0202F7C9
+_080315D0: .4byte gBattleAnimPlayerMonIndex
+_080315D4: .4byte gBattleAnimEnemyMonIndex
 _080315D8: .4byte 0x02017840
 _080315DC: .4byte gBattleAnims_Unknown1
 _080315E0: .4byte sub_80315E8
@@ -398,10 +398,10 @@ sub_80315E8: @ 80315E8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0803162C @ =gUnknown_0202F7AC
+	ldr r0, _0803162C @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _08031630 @ =gUnknown_0202F7B1
+	ldr r0, _08031630 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08031626
@@ -429,8 +429,8 @@ _08031626:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803162C: .4byte gUnknown_0202F7AC
-_08031630: .4byte gUnknown_0202F7B1
+_0803162C: .4byte gAnimScriptCallback
+_08031630: .4byte gAnimScriptActive
 _08031634: .4byte gTasks
 _08031638: .4byte 0x02017810
 	thumb_func_end sub_80315E8
@@ -468,14 +468,14 @@ move_anim_start_t4: @ 8031660
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, _080316B4 @ =gUnknown_0202F7C8
+	ldr r0, _080316B4 @ =gBattleAnimPlayerMonIndex
 	strb r1, [r0]
-	ldr r0, _080316B8 @ =gUnknown_0202F7C9
+	ldr r0, _080316B8 @ =gBattleAnimEnemyMonIndex
 	strb r2, [r0]
 	ldr r0, _080316BC @ =gBattleAnims_Unknown2
 	adds r1, r3, 0
 	movs r2, 0
-	bl move_something
+	bl DoMoveAnim
 	ldr r0, _080316C0 @ =sub_80316CC
 	movs r1, 0xA
 	bl CreateTask
@@ -502,8 +502,8 @@ move_anim_start_t4: @ 8031660
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080316B4: .4byte gUnknown_0202F7C8
-_080316B8: .4byte gUnknown_0202F7C9
+_080316B4: .4byte gBattleAnimPlayerMonIndex
+_080316B8: .4byte gBattleAnimEnemyMonIndex
 _080316BC: .4byte gBattleAnims_Unknown2
 _080316C0: .4byte sub_80316CC
 _080316C4: .4byte gTasks
@@ -515,10 +515,10 @@ sub_80316CC: @ 80316CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08031710 @ =gUnknown_0202F7AC
+	ldr r0, _08031710 @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _08031714 @ =gUnknown_0202F7B1
+	ldr r0, _08031714 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0803170A
@@ -546,8 +546,8 @@ _0803170A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08031710: .4byte gUnknown_0202F7AC
-_08031714: .4byte gUnknown_0202F7B1
+_08031710: .4byte gAnimScriptCallback
+_08031714: .4byte gAnimScriptActive
 _08031718: .4byte gTasks
 _0803171C: .4byte 0x02017810
 	thumb_func_end sub_80316CC
@@ -1721,7 +1721,7 @@ _0803207C: .4byte gPlttBufferFaded
 _08032080: .4byte gPlttBufferUnfaded
 _08032084: .4byte REG_BG0CNT
 _08032088:
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080320D0
@@ -1971,7 +1971,7 @@ _08032288:
 	adds r1, r2
 	ldr r2, _0803234C @ =REG_BG0CNT
 	bl CpuSet
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080322C8
@@ -2049,7 +2049,7 @@ sub_8032350: @ 8032350
 	lsls r1, 24
 	cmp r1, 0
 	bne _08032408
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803236C
@@ -2061,7 +2061,7 @@ _0803236C:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08032376:
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032388
@@ -2130,7 +2130,7 @@ _080323FC: .4byte gSubstituteDollPal
 _08032400: .4byte 0x040000d4
 _08032404: .4byte 0x84000200
 _08032408:
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _08032456
@@ -2751,7 +2751,7 @@ _080328E8: .4byte gUnknown_02024BE0
 _080328EC: .4byte gSprites
 _080328F0: .4byte sub_8032978
 _080328F4:
-	ldr r0, _08032910 @ =gUnknown_0202F7B1
+	ldr r0, _08032910 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08032906
@@ -2767,7 +2767,7 @@ _08032906:
 	ldr r6, _08032914 @ =0x02017800
 	b _08032938
 	.align 2, 0
-_08032910: .4byte gUnknown_0202F7B1
+_08032910: .4byte gAnimScriptActive
 _08032914: .4byte 0x02017800
 _08032918:
 	lsls r0, r4, 2

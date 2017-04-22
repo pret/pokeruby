@@ -117,8 +117,8 @@ extern u8 gBattleMonForms[NUM_BATTLE_SLOTS];
 extern u8 gEnemyMonElevation[];
 extern u16 gUnknown_0202F7CA[];
 extern u8 gBattleMonSprites[NUM_BATTLE_SLOTS];
-extern u8 gUnknown_0202F7C8;
-extern u8 gUnknown_0202F7C9;
+extern u8 gBattleAnimPlayerMonIndex;
+extern u8 gBattleAnimEnemyMonIndex;
 extern s16 gBattleAnimArgs[8];
 extern u8 gUnknown_02024A72[NUM_BATTLE_SLOTS];
 extern u8 gUnknown_02024A68; // gNumBattleMons?
@@ -129,7 +129,7 @@ extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18;
 extern struct SpriteSheet gMonFrontPicTable[];
 extern struct SpriteSheet gMonBackPicTable[];
 
-extern u8 sub_8076BE0();
+extern u8 IsContest();
 extern bool8 sub_8078874(u8);
 extern bool8 b_side_obj__get_some_boolean(u8);
 extern void UpdateMonIconFrame(struct Sprite *sprite);
@@ -137,7 +137,7 @@ extern void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 a
 extern void *species_and_otid_get_pal(u32, u32, u32);
 extern void FreeSpriteOamMatrix(struct Sprite *sprite);
 extern void ResetPaletteStructByUid(u16);
-extern void move_anim_task_del(u8 task);
+extern void DestroyAnimVisualTask(u8 task);
 extern u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *));
 
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
@@ -242,7 +242,7 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
 	u16 species;
 	struct TransformStatus *transform;
 
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		if (a2 == 3 && slot == 3) {
 			a2 = 1;
 		}
@@ -258,7 +258,7 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
 	case 3:
 	case 4:
 	default:
-		if (sub_8076BE0()) {
+		if (IsContest()) {
 			if (unk_2019348.field_4 & 1) {
 				species = unk_2019348.field_2;
 			} else {
@@ -298,9 +298,9 @@ u8 sub_8077BFC(u8 slot, u16 species) {
 	u8 ret;
 	u16 var;
 
-	if (!battle_side_get_owner(slot) || sub_8076BE0()) {
+	if (!battle_side_get_owner(slot) || IsContest()) {
 		if (species == SPECIES_UNOWN) {
-			if (sub_8076BE0()) {
+			if (IsContest()) {
 				if (unk_2019348.field_4 & 1) {
 					personality = unk_2019348.field_10;
 				} else {
@@ -357,7 +357,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
 u8 sub_8077DD8(u8 slot, u16 species) {
 	u8 ret = 0;
 	if (battle_side_get_owner(slot) == 1) {
-		if (!sub_8076BE0()) {
+		if (!IsContest()) {
 			if (species == SPECIES_CASTFORM) {
 				ret = gCastformElevations[gBattleMonForms[slot]];
 			} else if (species > NUM_SPECIES) {
@@ -373,7 +373,7 @@ u8 sub_8077DD8(u8 slot, u16 species) {
 u8 sub_8077E44(u8 slot, u16 species, u8 a3) {
 	u16 offset;
 	u8 y;
-	if (battle_side_get_owner(slot) == 0 || sub_8076BE0()) {
+	if (battle_side_get_owner(slot) == 0 || IsContest()) {
 		offset = sub_8077BFC(slot, species);
 	} else {
 		offset = sub_8077BFC(slot, species);
@@ -393,7 +393,7 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
 	u16 species;
 	struct TransformStatus *transform;
 	if (a2 == 3 || a2 == 4) {
-		if (sub_8076BE0()) {
+		if (IsContest()) {
 			if (unk_2019348.field_4 & 1) {
 				species = unk_2019348.field_2;
 			} else {
@@ -436,7 +436,7 @@ u8 sub_8077FC0(u8 slot) {
 	u8 r6;
 	struct TransformStatus *transform;
 	r6 = sub_8077ABC(slot, 1);
-	if (!sub_8076BE0()) {
+	if (!IsContest()) {
 		if (battle_side_get_owner(slot)) {
 			transform = &gTransformStatuses[slot];
 			if (!transform->species) {
@@ -462,28 +462,28 @@ u8 sub_8077FC0(u8 slot) {
 u8 obj_id_for_side_relative_to_move(u8 a1) {
 	u8 *sprites;
 	if (a1 == 0) {
-		if (sub_8078874(gUnknown_0202F7C8)) {
+		if (sub_8078874(gBattleAnimPlayerMonIndex)) {
 			sprites = gBattleMonSprites;
-			return sprites[gUnknown_0202F7C8];
+			return sprites[gBattleAnimPlayerMonIndex];
 		} else {
 			return 0xff;
 		}
 	} else if (a1 == 1) {
-		if (sub_8078874(gUnknown_0202F7C9)) {
+		if (sub_8078874(gBattleAnimEnemyMonIndex)) {
 			sprites = gBattleMonSprites;
-			return sprites[gUnknown_0202F7C9];
+			return sprites[gBattleAnimEnemyMonIndex];
 		} else {
 			return 0xff;
 		}
 	} else if (a1 == 2) {
-		if (!b_side_obj__get_some_boolean(gUnknown_0202F7C8 ^ 2)) {
+		if (!b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2)) {
 			return 0xff;
 		} else {
-			return gBattleMonSprites[gUnknown_0202F7C8 ^ 2];
+			return gBattleMonSprites[gBattleAnimPlayerMonIndex ^ 2];
 		}
 	} else {
-		if (b_side_obj__get_some_boolean(gUnknown_0202F7C9 ^ 2)) {
-			return gBattleMonSprites[gUnknown_0202F7C9 ^ 2];
+		if (b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2)) {
+			return gBattleMonSprites[gBattleAnimEnemyMonIndex ^ 2];
 		} else {
 			return 0xff;
 		}
@@ -636,8 +636,8 @@ void sub_80783D0(struct Sprite *sprite) {
 void unref_sub_8078414(struct Sprite *sprite) {
 	sprite->data1 = sprite->pos1.x + sprite->pos2.x;
 	sprite->data3 = sprite->pos1.y + sprite->pos2.y;
-	sprite->data2 = sub_8077ABC(gUnknown_0202F7C9, 2);
-	sprite->data4 = sub_8077ABC(gUnknown_0202F7C9, 3);
+	sprite->data2 = sub_8077ABC(gBattleAnimEnemyMonIndex, 2);
+	sprite->data4 = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
 	sprite->callback = sub_80782F8;
 }
 
@@ -688,8 +688,8 @@ void move_anim_8074EE0(struct Sprite *sprite) {
 void unref_sub_8078588(struct Sprite *sprite) {
 	sprite->data1 = sprite->pos1.x + sprite->pos2.x;
 	sprite->data3 = sprite->pos1.y + sprite->pos2.y;
-	sprite->data2 = sub_8077ABC(gUnknown_0202F7C8, 2);
-	sprite->data4 = sub_8077ABC(gUnknown_0202F7C8, 3);
+	sprite->data2 = sub_8077ABC(gBattleAnimPlayerMonIndex, 2);
+	sprite->data4 = sub_8077ABC(gBattleAnimPlayerMonIndex, 3);
 	sprite->callback = sub_80782F8;
 }
 
@@ -719,23 +719,23 @@ void sub_807861C(struct Sprite *sprite) {
 void sub_8078634(u8 task) {
 	REG_BLDCNT = 0;
 	REG_BLDALPHA = 0;
-	move_anim_task_del(task);
+	DestroyAnimVisualTask(task);
 }
 
 void sub_8078650(struct Sprite *sprite) {
-	sprite->pos1.x = sub_8077ABC(gUnknown_0202F7C8, 2);
-	sprite->pos1.y = sub_8077ABC(gUnknown_0202F7C8, 3);
+	sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 2);
+	sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 3);
 }
 
 void sub_807867C(struct Sprite *sprite, s16 a2) {
-	u16 v1 = sub_8077ABC(gUnknown_0202F7C8, 0);
-	u16 v2 = sub_8077ABC(gUnknown_0202F7C9, 0);
+	u16 v1 = sub_8077ABC(gBattleAnimPlayerMonIndex, 0);
+	u16 v2 = sub_8077ABC(gBattleAnimEnemyMonIndex, 0);
 	if (v1 > v2) {
 		sprite->pos1.x -= a2;
 	} else if (v1 < v2) {
 		sprite->pos1.x += a2;
 	} else {
-		if (battle_side_get_owner(gUnknown_0202F7C8)) {
+		if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 			sprite->pos1.x -= a2;
 		} else {
 			sprite->pos1.x += a2;
@@ -769,8 +769,8 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite) {
 
 void sub_8078764(struct Sprite *sprite, u8 a2) {
 	if (!a2) {
-		sprite->pos1.x = sub_8077EE4(gUnknown_0202F7C9, 0);
-		sprite->pos1.y = sub_8077EE4(gUnknown_0202F7C9, 1);
+		sprite->pos1.x = sub_8077EE4(gBattleAnimEnemyMonIndex, 0);
+		sprite->pos1.y = sub_8077EE4(gBattleAnimEnemyMonIndex, 1);
 	}
 	sub_807867C(sprite, gBattleAnimArgs[0]);
 	sprite->pos1.y += gBattleAnimArgs[1];
@@ -778,11 +778,11 @@ void sub_8078764(struct Sprite *sprite, u8 a2) {
 
 void sub_80787B0(struct Sprite *sprite, u8 a2) {
 	if (!a2) {
-		sprite->pos1.x = sub_8077EE4(gUnknown_0202F7C8, 0);
-		sprite->pos1.y = sub_8077EE4(gUnknown_0202F7C8, 1);
+		sprite->pos1.x = sub_8077EE4(gBattleAnimPlayerMonIndex, 0);
+		sprite->pos1.y = sub_8077EE4(gBattleAnimPlayerMonIndex, 1);
 	} else {
-		sprite->pos1.x = sub_8077EE4(gUnknown_0202F7C8, 2);
-		sprite->pos1.y = sub_8077EE4(gUnknown_0202F7C8, 3);
+		sprite->pos1.x = sub_8077EE4(gBattleAnimPlayerMonIndex, 2);
+		sprite->pos1.y = sub_8077EE4(gBattleAnimPlayerMonIndex, 3);
 	}
 	sub_807867C(sprite, gBattleAnimArgs[0]);
 	sprite->pos1.y += gBattleAnimArgs[1];
@@ -807,11 +807,11 @@ u8 battle_get_side_with_given_state(u8 slot) {
 }
 
 bool8 sub_8078874(u8 slot) {
-	if (sub_8076BE0()) {
-		if (gUnknown_0202F7C8 == slot) {
+	if (IsContest()) {
+		if (gBattleAnimPlayerMonIndex == slot) {
 			return TRUE;
 		}
-		if (gUnknown_0202F7C9 == slot) {
+		if (gBattleAnimEnemyMonIndex == slot) {
 			return TRUE;
 		}
 		return FALSE;
@@ -837,7 +837,7 @@ bool8 IsDoubleBattle() {
 }
 
 void sub_8078914(struct Struct_sub_8078914 *unk) {
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		unk->field_0 = (u8 *)0x6008000;
 		unk->field_4 = (u8 *)0x600f000;
 		unk->field_8 = 0xe;
@@ -849,11 +849,11 @@ void sub_8078914(struct Struct_sub_8078914 *unk) {
 }
 
 void sub_8078954(struct Struct_sub_8078914 *unk) {
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		unk->field_0 = (u8 *)0x6008000;
 		unk->field_4 = (u8 *)0x600f000;
 		unk->field_8 = 0xe;
-	} else if (battle_get_per_side_status_permutated(gUnknown_0202F7C8) == 1) {
+	} else if (battle_get_per_side_status_permutated(gBattleAnimPlayerMonIndex) == 1) {
 		unk->field_0 = (u8 *)0x6004000;
 		unk->field_4 = (u8 *)0x600e000;
 		unk->field_8 = 0x8;
@@ -865,7 +865,7 @@ void sub_8078954(struct Struct_sub_8078914 *unk) {
 }
 
 u8 sub_80789BC() {
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		return 1;
 	}
 	return 2;
@@ -875,7 +875,7 @@ void sub_80789D4(bool8 a1) {
 	if (!a1) {
 		BG3CNT.size = 0;
 		BG3CNT.overflow = 1;
-	} else if (sub_8076BE0()) {
+	} else if (IsContest()) {
 		BG3CNT.size = 0;
 		BG3CNT.overflow = 1;
 	} else {
@@ -1080,7 +1080,7 @@ void obj_id_set_rotscale(u8 sprite, s16 xScale, s16 yScale, u16 rotation) {
 }
 
 bool8 sub_8078E38() {
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		if (gSprites[obj_id_for_side_relative_to_move(0)].data2 == 0xc9 /* XXX SPECIES_UNOWN? */) {
 			return FALSE;
 		}
@@ -1092,12 +1092,12 @@ bool8 sub_8078E38() {
 void sub_8078E70(u8 sprite, u8 a2) {
 	struct Struct_2017810 *unk;
 	u8 r7 = gSprites[sprite].data0;
-	if (sub_8076BE0() || b_side_obj__get_some_boolean(r7)) {
+	if (IsContest() || b_side_obj__get_some_boolean(r7)) {
 		gSprites[sprite].invisible = FALSE;
 	}
 	gSprites[sprite].oam.objMode = a2;
 	gSprites[sprite].affineAnimPaused = TRUE;
-	if (!sub_8076BE0() && !gSprites[sprite].oam.affineMode) {
+	if (!IsContest() && !gSprites[sprite].oam.affineMode) {
 		unk = &unk_2017810[r7];
 		gSprites[sprite].oam.matrixNum = unk->field_6;
 	}
@@ -1190,41 +1190,41 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
 	u32 var = 0;
 	u32 shift;
 	if (a1) {
-		if (!sub_8076BE0()) {
+		if (!IsContest()) {
 			var = 0xe;
 		} else {
 			var = 1 << sub_80789BC();
 		}
 	}
 	if (a2) {
-		shift = gUnknown_0202F7C8 + 16;
+		shift = gBattleAnimPlayerMonIndex + 16;
 		var |= 1 << shift;
 	}
 	if (a3) {
-		shift = gUnknown_0202F7C9 + 16;
+		shift = gBattleAnimEnemyMonIndex + 16;
 		var |= 1 << shift;
 	}
 	if (a4) {
-		if (b_side_obj__get_some_boolean(gUnknown_0202F7C8 ^ 2)) {
-			shift = (gUnknown_0202F7C8 ^ 2) + 16;
+		if (b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2)) {
+			shift = (gBattleAnimPlayerMonIndex ^ 2) + 16;
 			var |= 1 << shift;
 		}
 	}
 	if (a5) {
-		if (b_side_obj__get_some_boolean(gUnknown_0202F7C9 ^ 2)) {
-			shift = (gUnknown_0202F7C9 ^ 2) + 16;
+		if (b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2)) {
+			shift = (gBattleAnimEnemyMonIndex ^ 2) + 16;
 			var |= 1 << shift;
 		}
 	}
 	if (a6) {
-		if (!sub_8076BE0()) {
+		if (!IsContest()) {
 			var |= 0x100;
 		} else {
 			var |= 0x4000;
 		}
 	}
 	if (a7) {
-		if (!sub_8076BE0()) {
+		if (!IsContest()) {
 			var |= 0x200;
 		}
 	}
@@ -1234,7 +1234,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
 u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4) {
 	u32 var = 0;
 	u32 shift;
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		if (a1) {
 			var |= 1 << 18;
 			return var;
@@ -1309,24 +1309,24 @@ void sub_807941C(struct Sprite *sprite) {
 		v2 = 1;
 	}
 	sub_80787B0(sprite, v1);
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 	}
 	sprite->data0 = gBattleAnimArgs[4];
-	sprite->data2 = sub_8077ABC(gUnknown_0202F7C9, 2) + gBattleAnimArgs[2];
-	sprite->data4 = sub_8077ABC(gUnknown_0202F7C9, v2) + gBattleAnimArgs[3];
+	sprite->data2 = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + gBattleAnimArgs[2];
+	sprite->data4 = sub_8077ABC(gBattleAnimEnemyMonIndex, v2) + gBattleAnimArgs[3];
 	sprite->callback = sub_8078B34;
 	oamt_set_x3A_32(sprite, move_anim_8072740);
 }
 
 void sub_80794A8(struct Sprite *sprite) {
 	sub_80787B0(sprite, 1);
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 	}
 	sprite->data0 = gBattleAnimArgs[4];
-	sprite->data2 = sub_8077ABC(gUnknown_0202F7C9, 2) + gBattleAnimArgs[2];
-	sprite->data4 = sub_8077ABC(gUnknown_0202F7C9, 3) + gBattleAnimArgs[3];
+	sprite->data2 = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + gBattleAnimArgs[2];
+	sprite->data4 = sub_8077ABC(gBattleAnimEnemyMonIndex, 3) + gBattleAnimArgs[3];
 	sprite->data5 = gBattleAnimArgs[5];
 	sub_80786EC(sprite);
 	sprite->callback = sub_8079518;
@@ -1349,12 +1349,12 @@ void sub_8079534(struct Sprite *sprite) {
 	}
 	if (!gBattleAnimArgs[5]) {
 		sub_80787B0(sprite, r4);
-		slot = gUnknown_0202F7C8;
+		slot = gBattleAnimPlayerMonIndex;
 	} else {
 		sub_8078764(sprite, r4);
-		slot = gUnknown_0202F7C9;
+		slot = gBattleAnimEnemyMonIndex;
 	}
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 	}
 	sub_8078764(sprite, r4);
@@ -1430,7 +1430,7 @@ void sub_80796F8(u8 taskId) {
 		}
 		REG_BLDALPHA = (task->data[4] << 8) | task->data[3];
 		if (task->data[3] == task->data[7] && task->data[4] == task->data[8]) {
-			move_anim_task_del(taskId);
+			DestroyAnimVisualTask(taskId);
 			return;
 		}
 	}
@@ -1439,7 +1439,7 @@ void sub_80796F8(u8 taskId) {
 void sub_8079790(u8 task) {
 	u8 sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
 	if (sprite == 0xff) {
-		move_anim_task_del(task);
+		DestroyAnimVisualTask(task);
 		return;
 	}
 	gTasks[task].data[0] = (gSprites[sprite].oam.paletteNum * 0x10) + 0x101;
@@ -1475,7 +1475,7 @@ void sub_8079814(u8 taskId) {
 					task->data[4] = 0;
 					task->data[6] = 0;
 				} else {
-					move_anim_task_del(taskId);
+					DestroyAnimVisualTask(taskId);
 					return;
 				}
 			}
@@ -1486,7 +1486,7 @@ void sub_8079814(u8 taskId) {
 void sub_80798AC(u8 task) {
 	u8 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
 	if (palette == 0xff) {
-		move_anim_task_del(task);
+		DestroyAnimVisualTask(task);
 		return;
 	}
 	gTasks[task].data[0] = (palette * 0x10) + 0x101;
@@ -1595,7 +1595,7 @@ u16 sub_8079B10(u8 sprite) {
 	u16 i;
 	for (i = 0; i < (sizeof(gBattleMonSprites) / sizeof(u8)); i++) {
 		if (gBattleMonSprites[i] == sprite) {
-			if (sub_8076BE0()) {
+			if (IsContest()) {
 				species = unk_2019348.field_0;
 				return gMonBackPicCoords[species].y_offset;
 			} else {
@@ -1677,21 +1677,21 @@ void sub_8079CEC(u8 task) {
 		v1 = 3;
 	}
 	gBattleAnimArgs[7] = v1;
-	move_anim_task_del(task);
+	DestroyAnimVisualTask(task);
 }
 
 void unref_sub_8079D20(u8 priority) {
-	if (b_side_obj__get_some_boolean(gUnknown_0202F7C9)) {
-		gSprites[gBattleMonSprites[gUnknown_0202F7C9]].oam.priority = priority;
+	if (b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex)) {
+		gSprites[gBattleMonSprites[gBattleAnimEnemyMonIndex]].oam.priority = priority;
 	}
-	if (b_side_obj__get_some_boolean(gUnknown_0202F7C8)) {
-		gSprites[gBattleMonSprites[gUnknown_0202F7C8]].oam.priority = priority;
+	if (b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex)) {
+		gSprites[gBattleMonSprites[gBattleAnimPlayerMonIndex]].oam.priority = priority;
 	}
-	if (b_side_obj__get_some_boolean(gUnknown_0202F7C9 ^ 2)) {
-		gSprites[gBattleMonSprites[gUnknown_0202F7C9 ^ 2]].oam.priority = priority;
+	if (b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2)) {
+		gSprites[gBattleMonSprites[gBattleAnimEnemyMonIndex ^ 2]].oam.priority = priority;
 	}
-	if (b_side_obj__get_some_boolean(gUnknown_0202F7C8 ^ 2)) {
-		gSprites[gBattleMonSprites[gUnknown_0202F7C8 ^ 2]].oam.priority = priority;
+	if (b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2)) {
+		gSprites[gBattleMonSprites[gBattleAnimPlayerMonIndex ^ 2]].oam.priority = priority;
 	}
 }
 
@@ -1708,7 +1708,7 @@ void sub_8079E24() {
 u8 sub_8079E90(u8 slot) {
 	u8 status;
 	u8 ret;
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		if (slot == 2) {
 			return 30;
 		} else {
@@ -1731,7 +1731,7 @@ u8 sub_8079E90(u8 slot) {
 
 u8 sub_8079ED4(u8 slot) {
 	u8 status = battle_get_per_side_status(slot);
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		return 2;
 	}
 	if (status == 0 || status == 3) {
@@ -1743,7 +1743,7 @@ u8 sub_8079ED4(u8 slot) {
 
 u8 battle_get_per_side_status_permutated(u8 slot) {
 	u8 status;
-	if (!sub_8076BE0()) {
+	if (!IsContest()) {
 		status = battle_get_per_side_status(slot);
 		if (status == 0 || status == 3) {
 			return 2;
@@ -1799,7 +1799,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
 	} else {
 		sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonBackPicCoords[species].y_offset, a6);
 	}
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		gSprites[sprite].affineAnims = &gSpriteAffineAnimTable_81E7C18;
 		StartSpriteAffineAnim(&gSprites[sprite], 0);
 	}
@@ -1818,7 +1818,7 @@ int sub_807A100(u8 slot, u8 a2) {
 	int ret;
 	const struct MonCoords *coords;
 	struct TransformStatus *transform;
-	if (sub_8076BE0()) {
+	if (IsContest()) {
 		if (unk_2019348.field_4 & 1) {
 			species = unk_2019348.field_2;
 			personality = unk_2019348.field_10;
@@ -1925,7 +1925,7 @@ void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4) {
 	}
 	v3 = sub_8077ABC(slot, v1);
 	v4 = sub_8077ABC(slot, v2);
-	if (IsDoubleBattle() && !sub_8076BE0()) {
+	if (IsDoubleBattle() && !IsContest()) {
 		v5 = sub_8077ABC(slot ^ 2, v1);
 		v6 = sub_8077ABC(slot ^ 2, v2);
 	} else {
@@ -1949,7 +1949,7 @@ u8 sub_807A4A0(int a1, u8 sprite, int a3) {
 
 void sub_807A544(struct Sprite *sprite) {
 	sub_8078650(sprite);
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		sprite->pos1.x -= gBattleAnimArgs[0];
 		gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 		sprite->hFlip = TRUE;
@@ -1966,7 +1966,7 @@ void sub_807A544(struct Sprite *sprite) {
 }
 
 void sub_807A5C4(struct Sprite *sprite) {
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		sprite->pos1.x -= gBattleAnimArgs[0];
 		gBattleAnimArgs[3] *= -1;
 	} else {
@@ -1984,7 +1984,7 @@ void sub_807A5C4(struct Sprite *sprite) {
 
 void sub_807A63C(struct Sprite *sprite) {
 	sub_8078650(sprite);
-	if (battle_side_get_owner(gUnknown_0202F7C8)) {
+	if (battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		sprite->pos1.x -= gBattleAnimArgs[0];
 	} else {
 		sprite->pos1.x += gBattleAnimArgs[0];
@@ -1999,7 +1999,7 @@ void sub_807A69C(u8 taskId) {
 	u16 dest;
 	struct Task *task = &gTasks[taskId];
 	task->data[0] = obj_id_for_side_relative_to_move(0);
-	task->data[1] = (battle_side_get_owner(gUnknown_0202F7C8)) ? -8 : 8;
+	task->data[1] = (battle_side_get_owner(gBattleAnimPlayerMonIndex)) ? -8 : 8;
 	task->data[2] = 0;
 	task->data[3] = 0;
 	gSprites[task->data[0]].pos2.x -= task->data[0];
@@ -2008,7 +2008,7 @@ void sub_807A69C(u8 taskId) {
 
 	dest = (task->data[4] + 0x10) * 0x10;
 	src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-	task->data[6] = sub_8079E90(gUnknown_0202F7C8);
+	task->data[6] = sub_8079E90(gBattleAnimPlayerMonIndex);
 	if (task->data[6] == 20 || task->data[6] == 40) {
 		task->data[6] = 2;
 	} else {
@@ -2041,7 +2041,7 @@ void sub_807A784(u8 taskId) {
 	case 2:
 		if (!task->data[5]) {
 			FreeSpritePaletteByTag(10097);
-			move_anim_task_del(taskId);
+			DestroyAnimVisualTask(taskId);
 		}
 		break;
 	}
@@ -2069,9 +2069,9 @@ void sub_807A8D4(struct Sprite *sprite) {
 }
 
 void sub_807A908(struct Sprite *sprite) {
-	sprite->pos1.x = sub_8077ABC(gUnknown_0202F7C8, 2);
-	sprite->pos1.y = sub_8077ABC(gUnknown_0202F7C8, 3);
-	if (!battle_side_get_owner(gUnknown_0202F7C8)) {
+	sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 2);
+	sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 3);
+	if (!battle_side_get_owner(gBattleAnimPlayerMonIndex)) {
 		sprite->data0 = 5;
 	} else {
 		sprite->data0 = -10;
@@ -2098,7 +2098,7 @@ void sub_807A9BC(struct Sprite *sprite) {
 	sprite->data0 = gBattleAnimArgs[2];
 	sprite->data2 = sprite->pos1.x + gBattleAnimArgs[4];
 	sprite->data4 = sprite->pos1.y + gBattleAnimArgs[5];
-	if (!battle_side_get_owner(gUnknown_0202F7C9)) {
+	if (!battle_side_get_owner(gBattleAnimEnemyMonIndex)) {
 		x = (u16)gBattleAnimArgs[4] + 30;
 		sprite->pos1.x += x;
 		sprite->pos1.y = gBattleAnimArgs[5] - 20;

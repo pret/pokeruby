@@ -12,11 +12,11 @@ extern s16 gBattleAnimArgs[8];
 extern u8 gUnknown_02024BE0[];
 extern s32 gUnknown_0202F7B8;
 extern u16 gUnknown_0202F7BC;
-extern u8 gUnknown_0202F7C8;
-extern u8 gUnknown_0202F7C9;
+extern u8 gBattleAnimPlayerMonIndex;
+extern u8 gBattleAnimEnemyMonIndex;
 
 extern u8 obj_id_for_side_relative_to_move(u8 side);
-extern void move_anim_task_del(u8 task);
+extern void DestroyAnimVisualTask(u8 task);
 extern u8 battle_get_side_with_given_state(u8 state);
 extern u8 battle_side_get_owner(u8 side);
 extern void oamt_set_x3A_32(struct Sprite *sprite, void(*callback)(struct Sprite*));
@@ -51,7 +51,7 @@ void sub_80A7E7C(u8 task)
     sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -91,7 +91,7 @@ static void sub_80A7EF0(u8 task)
         {
             SPRITE.pos2.x = 0;
             SPRITE.pos2.y = 0;
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -113,7 +113,7 @@ void sub_80A7FA0(u8 task)
         sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
         if (sprite == 0xff)
         {
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -143,11 +143,11 @@ void sub_80A7FA0(u8 task)
     }
     else
     {
-        sprite = gUnknown_02024BE0[gUnknown_0202F7C8];
+        sprite = gUnknown_02024BE0[gBattleAnimPlayerMonIndex];
     }
     if (r6)
     {
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -187,7 +187,7 @@ static void sub_80A808C(u8 task)
         {
             SPRITE.pos2.x = 0;
             SPRITE.pos2.y = 0;
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -203,7 +203,7 @@ void sub_80A8154(u8 task)
     sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
     gSprites[sprite].pos2.x += gBattleAnimArgs[1];
@@ -246,7 +246,7 @@ static void sub_80A81D8(u8 task)
                 SPRITE.pos2.x -= TASK.data[5] / 2;
                 SPRITE.pos2.y -= TASK.data[6] / 2;
             }
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -289,7 +289,7 @@ static void sub_80A8374(u8 task)
     gSprites[sprite].pos2.y = TASK.data[9] >> 8;
     if (--TASK.data[4] == 0)
     {
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
 }
@@ -335,14 +335,14 @@ static void sub_80A8488(u8 task)
     {
         gSprites[sprite].pos2.x = 0;
         gSprites[sprite].pos2.y = 0;
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
 }
 
 void sub_80A8500(u8 task)
 {
-    if (battle_side_get_owner(gUnknown_0202F7C8))
+    if (battle_side_get_owner(gBattleAnimPlayerMonIndex))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
@@ -352,7 +352,7 @@ void sub_80A8500(u8 task)
 void sub_80A8530(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (battle_side_get_owner(gUnknown_0202F7C8))
+    if (battle_side_get_owner(gBattleAnimPlayerMonIndex))
     {
         sprite->data1 = -gBattleAnimArgs[1];
     }
@@ -362,7 +362,7 @@ void sub_80A8530(struct Sprite *sprite)
     }
     sprite->data0 = gBattleAnimArgs[0];
     sprite->data2 = 0;
-    sprite->data3 = gUnknown_02024BE0[gUnknown_0202F7C8];
+    sprite->data3 = gUnknown_02024BE0[gBattleAnimPlayerMonIndex];
     sprite->data4 = gBattleAnimArgs[0];
     oamt_set_x3A_32(sprite, sub_80A85A4);
     sprite->callback = sub_8078458;
@@ -404,11 +404,11 @@ void sub_80A8638(struct Sprite *sprite)
     int spriteId;
     if (!gBattleAnimArgs[0])
     {
-        spriteId = gUnknown_02024BE0[gUnknown_0202F7C8];
+        spriteId = gUnknown_02024BE0[gBattleAnimPlayerMonIndex];
     }
     else
     {
-        spriteId = gUnknown_02024BE0[gUnknown_0202F7C9];
+        spriteId = gUnknown_02024BE0[gBattleAnimEnemyMonIndex];
     }
     sprite->data0 = gBattleAnimArgs[2];
     sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
@@ -471,11 +471,11 @@ void sub_80A8764(struct Sprite *sprite)
     u8 spriteId;
     if (!gBattleAnimArgs[0])
     {
-        v1 = gUnknown_0202F7C8;
+        v1 = gBattleAnimPlayerMonIndex;
     }
     else
     {
-        v1 = gUnknown_0202F7C9;
+        v1 = gBattleAnimEnemyMonIndex;
     }
     spriteId = gUnknown_02024BE0[v1];
     if (battle_side_get_owner(v1))
@@ -507,11 +507,11 @@ void sub_80A8818(struct Sprite *sprite)
     sprite->invisible = TRUE;
     if (!gBattleAnimArgs[0])
     {
-        v1 = gUnknown_0202F7C8;
+        v1 = gBattleAnimPlayerMonIndex;
     }
     else
     {
-        v1 = gUnknown_0202F7C9;
+        v1 = gBattleAnimEnemyMonIndex;
     }
     spriteId = gUnknown_02024BE0[v1];
     if (battle_side_get_owner(v1))
@@ -555,7 +555,7 @@ void sub_80A8920(u8 task)
 {
     s16 r7;
     r7 = 0x8000 / gBattleAnimArgs[3];
-    if (battle_side_get_owner(gUnknown_0202F7C8))
+    if (battle_side_get_owner(gBattleAnimPlayerMonIndex))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
@@ -599,7 +599,7 @@ static void sub_80A8A18(u8 task)
         gSprites[spriteId].pos2.x = (TASK.data[12] >> 8) + (TASK.data[11] >> 8);
         if (--TASK.data[6] == 0)
         {
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -617,27 +617,27 @@ void sub_80A8A80(u8 task)
         spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
         break;
     case 2:
-        if (!b_side_obj__get_some_boolean(gUnknown_0202F7C8 ^ 2))
+        if (!b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2))
         {
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
-        spriteId = gUnknown_02024BE0[gUnknown_0202F7C8 ^ 2];
+        spriteId = gUnknown_02024BE0[gBattleAnimPlayerMonIndex ^ 2];
         break;
     case 3:
-        if (!b_side_obj__get_some_boolean(gUnknown_0202F7C9 ^ 2))
+        if (!b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2))
         {
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
-        spriteId = gUnknown_02024BE0[gUnknown_0202F7C9 ^ 2];
+        spriteId = gUnknown_02024BE0[gBattleAnimEnemyMonIndex ^ 2];
         break;
     default:
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
     TASK.data[0] = spriteId;
-    if (battle_side_get_owner(gUnknown_0202F7C9))
+    if (battle_side_get_owner(gBattleAnimEnemyMonIndex))
     {
         TASK.data[1] = gBattleAnimArgs[1];
     }
@@ -654,7 +654,7 @@ static void sub_80A8B3C(u8 task)
     gSprites[spriteId].pos2.x += TASK.data[1];
     if (gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x + 0x20 > 0x130u)
     {
-        move_anim_task_del(task);
+        DestroyAnimVisualTask(task);
         return;
     }
 }
@@ -662,7 +662,7 @@ static void sub_80A8B3C(u8 task)
 void sub_80A8B88(u8 task)
 {
     u8 spriteId;
-    if (battle_side_get_owner(gUnknown_0202F7C8))
+    if (battle_side_get_owner(gBattleAnimPlayerMonIndex))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
@@ -674,11 +674,11 @@ void sub_80A8B88(u8 task)
     TASK.data[4] = spriteId;
     if (gBattleAnimArgs[4] == 0)
     {
-        TASK.data[5] = gUnknown_0202F7C8;
+        TASK.data[5] = gBattleAnimPlayerMonIndex;
     }
     else
     {
-        TASK.data[5] = gUnknown_0202F7C9;
+        TASK.data[5] = gBattleAnimEnemyMonIndex;
     }
     TASK.data[12] = 1;
     TASK.func = sub_80A8C0C;
@@ -719,7 +719,7 @@ static void sub_80A8C0C(u8 task)
         {
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = 0;
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -759,7 +759,7 @@ static void sub_80A8D8C(u8 task)
         else
         {
             sub_8078F40(spriteId);
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         }
     }
@@ -783,7 +783,7 @@ void sub_80A8E04(u8 task)
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = spriteId;
     TASK.data[6] = gBattleAnimArgs[3];
-    if (sub_8076BE0())
+    if (IsContest())
     {
         TASK.data[7] = 1;
     }
@@ -791,16 +791,16 @@ void sub_80A8E04(u8 task)
     {
         if (gBattleAnimArgs[2] == 0)
         {
-            TASK.data[7] = !battle_side_get_owner(gUnknown_0202F7C8);
+            TASK.data[7] = !battle_side_get_owner(gBattleAnimPlayerMonIndex);
         }
         else
         {
-            TASK.data[7] = !battle_side_get_owner(gUnknown_0202F7C9);
+            TASK.data[7] = !battle_side_get_owner(gBattleAnimEnemyMonIndex);
         }
     }
     if (TASK.data[7])
     {
-        if (!sub_8076BE0())
+        if (!IsContest())
         {
             TASK.data[3] *= -1;
             TASK.data[4] *= -1;
@@ -818,14 +818,14 @@ void sub_80A8EFC(u8 task)
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)
     {
-        if (battle_side_get_owner(gUnknown_0202F7C8))
+        if (battle_side_get_owner(gBattleAnimPlayerMonIndex))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
     }
     else
     {
-        if (battle_side_get_owner(gUnknown_0202F7C9))
+        if (battle_side_get_owner(gBattleAnimEnemyMonIndex))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
@@ -863,7 +863,7 @@ void sub_80A8FD8(u8 task)
             sub_8078F40(TASK.data[5]);
         case 0:
         default:
-            move_anim_task_del(task);
+            DestroyAnimVisualTask(task);
             return;
         case 2:
             TASK.data[1] = 0;
@@ -947,7 +947,7 @@ static void sub_80A913C(u8 taskId)
         {
             gSprites[task->data[7]].pos2.x = 0;
             gSprites[task->data[7]].pos2.y = 0;
-            move_anim_task_del(taskId);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }

@@ -2296,7 +2296,7 @@ _0811FFBE:
 	movs r0, 0
 	bl sub_80326EC
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl ExecuteMoveAnim
 	ldrb r0, [r5]
 	lsls r1, r0, 1
 	adds r1, r0
@@ -2306,10 +2306,10 @@ _0811FFBE:
 	strb r0, [r1, 0x4]
 	b _08120088
 _0811FFE4:
-	ldr r0, _08120040 @ =gUnknown_0202F7AC
+	ldr r0, _08120040 @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _08120044 @ =gUnknown_0202F7B1
+	ldr r0, _08120044 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08120088
@@ -2351,8 +2351,8 @@ _0812002C:
 	strb r1, [r0, 0x4]
 	b _08120088
 	.align 2, 0
-_08120040: .4byte gUnknown_0202F7AC
-_08120044: .4byte gUnknown_0202F7B1
+_08120040: .4byte gAnimScriptCallback
+_08120044: .4byte gAnimScriptActive
 _08120048: .4byte gUnknown_02024A60
 _0812004C: .4byte 0x02017810
 _08120050:

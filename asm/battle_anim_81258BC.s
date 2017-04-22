@@ -203,7 +203,7 @@ sub_812B004: @ 812B004
 	cmp r0, 0x2
 	bne _0812B04C
 	adds r0, r5, 0
-	bl move_anim_related_task_del
+	bl DestroyAnimSoundTask
 _0812B04C:
 	pop {r4,r5}
 	pop {r0}
@@ -329,7 +329,7 @@ sub_812B108: @ 812B108
 	cmp r0, 0
 	bne _0812B150
 	adds r0, r5, 0
-	bl move_anim_related_task_del
+	bl DestroyAnimSoundTask
 	b _0812B182
 	.align 2, 0
 _0812B14C: .4byte gTasks
@@ -377,7 +377,7 @@ sub_812B18C: @ 812B18C
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B1CC
@@ -394,7 +394,7 @@ _0812B1BC: .4byte gBattleAnimArgs
 _0812B1C0: .4byte 0x02019348
 _0812B1C4:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _0812B272
 _0812B1CC:
 	ldr r0, _0812B1E0 @ =gBattleAnimArgs
@@ -403,29 +403,29 @@ _0812B1CC:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _0812B1E8
-	ldr r0, _0812B1E4 @ =gUnknown_0202F7C8
+	ldr r0, _0812B1E4 @ =gBattleAnimPlayerMonIndex
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
 _0812B1E0: .4byte gBattleAnimArgs
-_0812B1E4: .4byte gUnknown_0202F7C8
+_0812B1E4: .4byte gBattleAnimPlayerMonIndex
 _0812B1E8:
 	cmp r1, 0x1
 	bne _0812B1F8
-	ldr r0, _0812B1F4 @ =gUnknown_0202F7C9
+	ldr r0, _0812B1F4 @ =gBattleAnimEnemyMonIndex
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
-_0812B1F4: .4byte gUnknown_0202F7C9
+_0812B1F4: .4byte gBattleAnimEnemyMonIndex
 _0812B1F8:
 	cmp r1, 0x2
 	bne _0812B204
-	ldr r0, _0812B200 @ =gUnknown_0202F7C8
+	ldr r0, _0812B200 @ =gBattleAnimPlayerMonIndex
 	b _0812B206
 	.align 2, 0
-_0812B200: .4byte gUnknown_0202F7C8
+_0812B200: .4byte gBattleAnimPlayerMonIndex
 _0812B204:
-	ldr r0, _0812B230 @ =gUnknown_0202F7C9
+	ldr r0, _0812B230 @ =gBattleAnimEnemyMonIndex
 _0812B206:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -445,10 +445,10 @@ _0812B21A:
 	cmp r0, 0
 	bne _0812B234
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _0812B2B0
 	.align 2, 0
-_0812B230: .4byte gUnknown_0202F7C9
+_0812B230: .4byte gBattleAnimEnemyMonIndex
 _0812B234:
 	adds r0, r4, 0
 	bl battle_side_get_owner
@@ -507,7 +507,7 @@ _0812B29C:
 	bl PlayCry3
 _0812B2AA:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _0812B2B0:
 	pop {r4-r6}
 	pop {r0}
@@ -524,7 +524,7 @@ sub_812B2B8: @ 812B2B8
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B2DC
@@ -534,7 +534,7 @@ sub_812B2B8: @ 812B2B8
 _0812B2D8: .4byte 0x02019348
 _0812B2DC:
 	ldr r1, _0812B304 @ =gUnknown_0202F7CA
-	ldr r0, _0812B308 @ =gUnknown_0202F7C8
+	ldr r0, _0812B308 @ =gBattleAnimPlayerMonIndex
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -548,13 +548,13 @@ _0812B2E6:
 	bl PlayCry3
 _0812B2F6:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0812B304: .4byte gUnknown_0202F7CA
-_0812B308: .4byte gUnknown_0202F7C8
+_0812B308: .4byte gBattleAnimPlayerMonIndex
 	thumb_func_end sub_812B2B8
 
 	thumb_func_start sub_812B30C
@@ -575,7 +575,7 @@ sub_812B30C: @ 812B30C
 	adds r0, r5, 0
 	bl PlaySE1WithPanning
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -601,7 +601,7 @@ sub_812B340: @ 812B340
 	adds r0, r5, 0
 	bl PlaySE2WithPanning
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -719,7 +719,7 @@ _0812B43E:
 	cmp r1, r0
 	bne _0812B456
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _0812B456:
 	pop {r4,r5}
 	pop {r0}
