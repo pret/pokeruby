@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "item.h"
+#include "items.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -32,11 +33,12 @@ extern u8 sub_807D770(void);
 extern void sub_813AE6C(u8, u8);
 extern void sub_813AD58(u16);
 extern void sub_813AE0C(u8);
-extern void sub_813ABE8(u8);
 extern void sub_80F996C(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
 extern void sub_80F98DC(int);
 extern void sub_80F914C(u8, void const *);
+extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
+extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 
 extern u8 gOtherText_NoItems[];
 
@@ -47,8 +49,16 @@ extern u8 gOtherText_NoMailHere[];
 
 extern u8 *gUnknown_02039314;
 extern struct MenuAction gUnknown_08406298[];
+
 extern u8 gUnknown_084062B8[];
 extern u8 gUnknown_084062BC[];
+extern u8 gUnknown_0840632A[];
+extern u8 gUnknown_08406327[];
+extern u8 gUnknown_08406330[];
+extern u8 gUnknown_0840631E[];
+extern u8 gUnknown_08406318[];
+extern u8 gOtherText_CancelNoTerminator[];
+
 extern u8 gUnknown_030007B4;
 extern u8 unk_201FE00[];
 
@@ -75,6 +85,7 @@ void sub_813A8F0(u8);
 void sub_813A984(u8);
 void sub_813A9EC(u8);
 void sub_813AA30(u8, u8);
+void sub_813ABE8(u8);
 
 void NewGameInitPCItems(void)
 {
@@ -690,11 +701,122 @@ void sub_813AA30(u8 taskId, u8 arg)
     {
         sub_813AD58(gSaveBlock1.pcItems[var].itemId);
     }
-
+    
     // dead code not getting optimized out what the fuck???
     {
     register int data8 asm("r1") = data[8];
     register int data1 asm("r0") = data[1];
     asm(""::"r"(data8 - data1));
     }
+}
+
+void sub_813AAC4(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int arg5)
+{
+    sub_80A4164(gStringVar1, arg1, arg2, arg4);
+    
+    if(arg5)
+        MenuPrint(gUnknown_0840632A, 0x1A, arg3);
+    else
+        MenuPrint(gUnknown_08406327, 0x1A, arg3);
+}
+
+void sub_813AB10(u8 var)
+{
+    MenuPrint(gUnknown_08406330, 0x19, var);
+}
+
+void sub_813AB28(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    CopyItemName(itemSlot->itemId, gStringVar1);
+    
+    if(var2)
+        MenuPrint(gUnknown_0840631E, 16, var);
+    else
+        MenuPrint(gUnknown_08406318, 16, var);
+}
+
+void sub_813AB64(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+}
+
+void sub_813AB90(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    sub_813AB10(var);
+}
+
+void sub_813ABAC(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    
+    if(itemSlot->itemId < ITEM_HM01)
+        sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+    else
+        sub_813AB10(var); // key items do not have a quantity.
+}
+
+void sub_813ABE8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 i;
+    int tempArg;
+    u16 j = 0;
+    
+    // r5 is i and is unsigned 16-bit.
+    
+    for(i = data[1]; i < data[1] + data[4]; i++)
+    {
+        j = (i - data[1]) * 2;
+        
+        if(i != data[2])
+        {
+            tempArg = 0;
+
+            if(data[9] != 0 && i == data[8])
+                tempArg = 1;
+            
+            switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
+            {
+                case 0:
+                case 1:
+                case 3:
+                    sub_813AB64((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+                case 4:
+                    sub_813AB90((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+                case 2:
+                    sub_813ABAC((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+            }
+        }
+        else
+        {
+            goto weirdCase; // what???
+        }
+    }
+
+beforeLabel:
+    if(i - data[1] < 8)
+        MenuFillWindowRectWithBlankTile(16, j + 4, 0x1C, 0x12);
+    
+    switch(data[1])
+    {
+        default:
+            CreateVerticalScrollIndicators(0, 0xB8, 8);
+            break;
+weirdCase:
+            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
+            goto beforeLabel;
+        case 0:
+            DestroyVerticalScrollIndicator(0);
+            break;
+    }
+
+    if(data[1] + data[4] <= data[2])
+        CreateVerticalScrollIndicators(1, 0xB8, 0x98);
+    else
+        DestroyVerticalScrollIndicator(1);
 }
