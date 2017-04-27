@@ -2,6 +2,7 @@
 #include "new_game.h"
 #include "asm.h"
 #include "berry.h"
+#include "dewford_trend.h"
 #include "event_data.h"
 #include "lottery_corner.h"
 #include "play_time.h"
@@ -11,7 +12,6 @@
 #include "rom4.h"
 #include "rtc.h"
 #include "script.h"
-#include "dewford_trend.h"
 
 extern u8 gDifferentSaveFile;
 

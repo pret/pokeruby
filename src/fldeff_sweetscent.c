@@ -1,14 +1,14 @@
 #include "global.h"
 #include "asm.h"
-#include "task.h"
-#include "sound.h"
-#include "wild_encounter.h"
-#include "sprite.h"
 #include "field_effect.h"
-#include "palette.h"
-#include "script.h"
 #include "field_player_avatar.h"
+#include "palette.h"
 #include "rom6.h"
+#include "script.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "wild_encounter.h"
 
 static void sub_812BFD4(void);
 static void sub_812C01C(void);

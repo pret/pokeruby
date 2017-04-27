@@ -1,4 +1,5 @@
 #include "global.h"
+#include "trainer_see.h"
 #include "asm.h"
 #include "asm_fieldmap.h"
 #include "battle_setup.h"
@@ -8,7 +9,6 @@
 #include "script.h"
 #include "sprite.h"
 #include "task.h"
-#include "trainer_see.h"
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);

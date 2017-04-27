@@ -2,10 +2,13 @@
 #include "field_player_avatar.h"
 #include "asm.h"
 #include "asm_fieldmap.h"
+#include "bike.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_map_obj.h"
+#include "field_map_obj_helpers.h"
 #include "main.h"
+#include "map_object_constants.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "rng.h"
@@ -15,9 +18,6 @@
 #include "sound.h"
 #include "task.h"
 #include "wild_encounter.h"
-#include "map_object_constants.h"
-#include "bike.h"
-#include "field_map_obj_helpers.h"
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];

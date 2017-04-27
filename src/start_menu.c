@@ -2,7 +2,9 @@
 #include "start_menu.h"
 #include "asm.h"
 #include "event_data.h"
+#include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
+#include "field_screeneffect.h"
 #include "load_save.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -21,8 +23,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "field_screeneffect.h"
-#include "field_map_obj_helpers.h"
 
 //Menu actions
 enum {

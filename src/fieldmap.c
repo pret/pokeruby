@@ -1,6 +1,6 @@
 #include "global.h"
-#include "palette.h"
 #include "fieldmap.h"
+#include "palette.h"
 
 struct BackupMapData
 {

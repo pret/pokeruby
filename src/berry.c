@@ -1,12 +1,12 @@
 #include "global.h"
 #include "berry.h"
 #include "asm.h"
+#include "field_control_avatar.h"
 #include "item.h"
 #include "items.h"
 #include "main.h"
 #include "rng.h"
 #include "text.h"
-#include "field_control_avatar.h"
 
 #define BERRY_NAME_LENGTH 6
 

@@ -1,6 +1,6 @@
 #include "global.h"
-#include "asm.h"
 #include "gba/flash_internal.h"
+#include "asm.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"

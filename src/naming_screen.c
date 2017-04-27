@@ -1,4 +1,5 @@
 #include "global.h"
+#include "naming_screen.h"
 #include "asm.h"
 #include "main.h"
 #include "menu.h"
@@ -10,7 +11,6 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
-#include "naming_screen.h"
 
 extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 extern u8 CreateMonIcon();

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_anim.h"
 #include "asm.h"
 #include "decompress.h"
 #include "m4a.h"
@@ -6,7 +7,6 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "battle_anim.h"
 
 extern u8 unk_2000000[];
 extern u16 gUnknown_02024A6A[4];

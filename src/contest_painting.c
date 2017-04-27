@@ -1,4 +1,5 @@
 #include "global.h"
+#include "contest_painting.h"
 #include "asm.h"
 #include "decompress.h"
 #include "main.h"
@@ -8,7 +9,6 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
-#include "contest_painting.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_03000750;

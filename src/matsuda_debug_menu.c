@@ -1,5 +1,7 @@
 #include "global.h"
+#include "matsuda_debug_menu.h"
 #include "asm.h"
+#include "contest.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -10,8 +12,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "contest.h"
-#include "matsuda_debug_menu.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gUnknown_0203857D[][64];

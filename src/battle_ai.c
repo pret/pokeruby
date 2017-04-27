@@ -1,14 +1,14 @@
 #include "global.h"
+#include "battle_ai.h"
 #include "abilities.h"
 #include "asm.h"
 #include "battle.h"
 #include "battle_move_effects.h"
 #include "item.h"
+#include "moves.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "species.h"
-#include "moves.h"
-#include "battle_ai.h"
 
 extern void sub_801CAF8(u8, u8);
 

@@ -1,9 +1,9 @@
 #include "global.h"
 #include "gba/syscall.h"
+#include "field_screeneffect.h"
 #include "global.fieldmap.h"
 #include "script.h"
 #include "task.h"
-#include "field_screeneffect.h"
 
 void palette_bg_fill_white(void);
 void palette_bg_fill_black(void);

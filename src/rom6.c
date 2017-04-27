@@ -1,5 +1,7 @@
 #include "global.h"
+#include "rom6.h"
 #include "asm.h"
+#include "braille_puzzles.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "rom4.h"
@@ -8,8 +10,6 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "rom6.h"
-#include "braille_puzzles.h"
 
 extern u16 gScriptLastTalked;
 extern u32 gUnknown_0202FF84[];

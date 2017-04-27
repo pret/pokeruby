@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_party_menu.h"
 #include "asm.h"
 #include "main.h"
 #include "menu.h"
@@ -9,7 +10,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "battle_party_menu.h"
 
 extern u8 IsLinkDoubleBattle(void);
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);

@@ -1,9 +1,9 @@
 #include "global.h"
-#include "script.h"
 #include "main.h"
-#include "script_menu.h"
 #include "palette.h"
 #include "rom4.h"
+#include "script.h"
+#include "script_menu.h"
 #include "task.h"
 
 extern void sub_81428CC(void);

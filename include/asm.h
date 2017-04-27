@@ -1,10 +1,10 @@
 #ifndef PROJECT_ASM_H
 #define PROJECT_ASM_H
 
-#include "task.h"
+#include "asm_fieldmap.h"
 #include "main.h"
 #include "sprite.h"
-#include "asm_fieldmap.h"
+#include "task.h"
 
 struct FieldInput
 {
