@@ -1,15 +1,15 @@
 #include "global.h"
-#include "menu.h"
-#include "script.h"
-#include "task.h"
-#include "main.h"
-#include "sound.h"
-#include "field_screeneffect.h"
-#include "palette.h"
-#include "sprite.h"
 #include "asm.h"
 #include "decompress.h"
+#include "field_screeneffect.h"
+#include "main.h"
+#include "menu.h"
 #include "money.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
 
 struct UnknownShopStruct
 {

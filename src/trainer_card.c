@@ -9,12 +9,12 @@
 #include "palette.h"
 #include "pokedex.h"
 #include "rom4.h"
+#include "script_pokemon_80C4.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
-#include "script_pokemon_80C4.h"
 
 typedef void (*Callback)(void);
 

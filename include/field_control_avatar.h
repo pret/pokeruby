@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDCONTROLAVATAR_H
 #define GUARD_FIELDCONTROLAVATAR_H
 
+#include "asm.h"
+
 void FieldClearPlayerInput(struct FieldInput *pStruct);
 void FieldGetPlayerInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
 int sub_8068024(struct FieldInput *pStruct);

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "field_screeneffect.h"
 #include "item.h"
 #include "main.h"
 #include "menu.h"
@@ -8,7 +9,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "field_screeneffect.h"
 
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
 extern void ItemStorageMenuProcessInput(u8);

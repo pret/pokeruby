@@ -1,6 +1,6 @@
 #include "global.h"
-#include "sprite.h"
 #include "decompress.h"
+#include "sprite.h"
 
 extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 

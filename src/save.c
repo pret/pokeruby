@@ -1,6 +1,6 @@
 #include "global.h"
-#include "gba/flash_internal.h"
 #include "gba/gba.h"
+#include "gba/flash_internal.h"
 #include "save.h"
 #include "asm.h"
 #include "load_save.h"

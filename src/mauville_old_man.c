@@ -1,9 +1,9 @@
 #include "global.h"
-#include "string_util.h"
-#include "menu.h"
-#include "script.h"
 #include "asm.h"
+#include "menu.h"
 #include "rng.h"
+#include "script.h"
+#include "string_util.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

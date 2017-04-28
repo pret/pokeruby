@@ -1,12 +1,12 @@
 #include "global.h"
 #include "asm.h"
+#include "braille_puzzles.h"
 #include "field_effect.h"
 #include "pokemon.h"
+#include "rom6.h"
 #include "script.h"
 #include "task.h"
 #include "text.h"
-#include "braille_puzzles.h"
-#include "rom6.h"
 
 static void sub_811AA18(void);
 static void sub_811AA38(void);

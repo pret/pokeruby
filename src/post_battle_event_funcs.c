@@ -1,10 +1,10 @@
 #include "global.h"
-#include "main.h"
-#include "script_pokemon_80C4.h"
 #include "event_data.h"
+#include "load_save.h"
+#include "main.h"
 #include "pokemon.h"
 #include "rom4.h"
-#include "load_save.h"
+#include "script_pokemon_80C4.h"
 
 extern void sub_8141F90(void);
 

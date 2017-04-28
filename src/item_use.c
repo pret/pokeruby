@@ -1,8 +1,13 @@
 #include "global.h"
 #include "asm.h"
+#include "battle.h"
+#include "berry.h"
+#include "coins.h"
 #include "event_data.h"
-#include "field_player_avatar.h"
 #include "field_map_obj_helpers.h"
+#include "field_player_avatar.h"
+#include "field_screeneffect.h"
+#include "fieldmap.h"
 #include "item.h"
 #include "items.h"
 #include "mail.h"
@@ -16,12 +21,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "field_screeneffect.h"
-#include "fieldmap.h"
-#include "coins.h"
-#include "berry.h"
 #include "vars.h"
-#include "battle.h"
 
 extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);

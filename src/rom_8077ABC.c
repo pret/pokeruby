@@ -1,12 +1,12 @@
 #include "global.h"
 #include "battle.h"
-#include "sprite.h"
-#include "species.h"
-#include "trig.h"
-#include "task.h"
 #include "blend_palette.h"
 #include "decompress.h"
 #include "palette.h"
+#include "species.h"
+#include "sprite.h"
+#include "task.h"
+#include "trig.h"
 
 #define GET_UNOWN_LETTER(personality) ((\
 	  (((personality & 0x03000000) >> 24) << 6) \
