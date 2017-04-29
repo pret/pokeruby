@@ -43,7 +43,7 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
 	BgAffineSet(&src, dest, 1);
 }
 
-#ifndef NONMATCHING
+#ifdef NONMATCHING
 
 // Functionally equivalent.
 // Only the two yflip loops don't match.
