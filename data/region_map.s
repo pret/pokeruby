@@ -97,14 +97,19 @@ gUnknown_083E76E8:: @ 83E76E8
 gSpriteTemplate_83E76F0:: @ 83E76F0
 	spr_template 0, 0, gOamData_83E76B8, gSpriteAnimTable_83E76E0, NULL, gDummySpriteAffineAnimTable, sub_80FBAF0
 
-gUnknown_083E7708:: @ 83E7708
-	.incbin "baserom.gba", 0x003e7708, 0x8
+	.align 2
+gOamData_083E7708:: @ 83E7708
+	.2byte 0x0000
+	.2byte 0x4000
+	.2byte 0x0800
 
-Unknown_83E7710:
-	.incbin "baserom.gba", 0x003e7710, 0x8
+	.align 2
+gSpriteAnim_83E7710: @ 83E7710
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
-gUnknown_083E7718:: @ 83E7718
-	.4byte Unknown_83E7710
+gSpriteAnimTable_083E7718:: @ 83E7718 ANIMCMD
+	.4byte gSpriteAnim_83E7710
 
 gUnknown_083E771C:: @ 83E771C
 	.incbin "graphics/pokenav/map_frame.gbapal"
@@ -113,7 +118,7 @@ gUnknown_083E773C:: @ 83E773C
 	.incbin "graphics/pokenav/map_frame.4bpp.lz"
 
 gUnknown_083E7774:: @ 83E7774
-	.incbin "baserom.gba", 0x003e7774, 0xb8
+	.incbin "graphics/pokenav/map_frame.bin.lz"
 
 	.align 2
 gPokenavMapMisc_Pal::
