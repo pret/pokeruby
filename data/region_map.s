@@ -128,7 +128,56 @@ gUnknown_083E784C:: @ 83E784C
 	.incbin "graphics/pokenav/map_misc.4bpp.lz"
 
 gUnknown_083E7920:: @ 83E7920
-	.incbin "baserom.gba", 0x3e7920, 0x98
+	.byte  0,  9,  1
+	.byte  0, 10, 14
+	.byte  0, 11, 15
+	.byte  0, 12, 16
+	.byte  0, 13, 17
+	.byte  0, 14, 18
+	.byte  0, 15, 19
+	.byte  0,  0,  3
+	.byte  0,  1,  4
+	.byte  0,  2,  5
+	.byte  0,  3,  6
+	.byte  0,  4,  7
+	.byte  0,  5,  8
+	.byte  0,  6,  9
+	.byte  0,  7, 10
+	.byte  0,  8, 11
+	.byte  0, 16,  0
+	.byte  0, 17,  0
+	.byte  0, 18,  0
+	.byte  0, 19,  0
+	.byte  0, 20,  0
+	.byte  0, 21,  0
+	.byte  0, 22,  0
+	.byte  0, 23,  0
+	.byte  0, 24,  0
+	.byte  0, 25,  0
+	.byte  0, 26,  0
+	.byte  0, 27,  0
+	.byte  0, 28,  0
+	.byte  0, 29,  0
+	.byte  0, 30,  0
+	.byte  0, 31,  0
+	.byte  0, 32,  0
+	.byte  0, 33,  0
+	.byte  0, 34,  0
+	.byte  0, 35,  0
+	.byte  0, 36,  0
+	.byte  0, 37,  0
+	.byte  0, 38,  0
+	.byte  0, 39,  0
+	.byte  0, 40,  0
+	.byte  0, 41,  0
+	.byte  0, 42,  0
+	.byte  0, 43,  0
+	.byte  0, 44,  0
+	.byte  0, 45,  0
+	.byte  0, 46,  0
+	.byte  0, 47,  0
+	.byte  0, 48,  0
+	.byte  0, 49,  0
 
 	.align 2
 Unknown_3E79B8: @ 83E79B8
@@ -138,7 +187,12 @@ Unknown_3E79B8: @ 83E79B8
 	.align 2
 gUnknown_083E79C0:: @ 83E79C0
 	.4byte Unknown_3E79B8
-	.incbin "baserom.gba", 0x3e79c4, 0x8
+	.2byte 0xF
+	.2byte 0x854
+
+@ XXX: what is this?
+	.align 2
+	.4byte 0x2000000
 
 	.align 2
 gUnknown_083E79CC:: @ 83E79CC
