@@ -341,13 +341,15 @@ gSpriteTemplate_83DBDE4:: @ 83DBDE4
 	spr_template 7, 5, gOamData_83DBD70, gSpriteAnimTable_83DBDCC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083DBDFC:: @ 83DBDFC
-	.incbin "baserom.gba", 0x003dbdfc, 0x20
+	.incbin "graphics/unknown/unknown_3DBDFC.gbapal"
 
 gUnknown_083DBE1C:: @ 83DBE1C
 	.incbin "baserom.gba", 0x003dbe1c, 0x24
 
 gUnknown_083DBE40:: @ 83DBE40
-	.incbin "baserom.gba", 0x003dbe40, 0x68 @ LZ
+	.incbin "graphics/unknown/unknown_3DBE40.gbapal"
+
+	.incbin "baserom.gba", 0x003dbe60, 0x48
 
 gUnknown_083DBEA8:: @ 83DBEA8
 	.string "{CLEAR_TO 88}$"

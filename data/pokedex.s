@@ -15,11 +15,11 @@ gUnknown_0839F73C:: @ 839F73C
 
 	.align 2
 gUnknown_0839F8A0:: @ 839F8A0
-	.incbin "baserom.gba", 0x0039f8a0, 0xe8
+	.incbin "graphics/pokedex/pokedex_cry_layout.bin.lz"
 
 	.align 2
 gUnknown_0839F988:: @ 839F988
-	.incbin "baserom.gba", 0x0039f988, 0xf4
+	.incbin "graphics/pokedex/pokedex_size_layout.bin.lz"
 
 gUnknown_0839FA7C:: @ 839FA7C
 	.incbin "graphics/pokedex/noball.4bpp.lz"
@@ -262,7 +262,9 @@ gUnknown_083B4EC4:: @ 83B4EC4
 	.include "data/graphics/pokemon/footprint_table.inc"
 
 gUnknown_083B5558:: @ 83B5558
-	.incbin "baserom.gba", 0x3b5558, 0x24
+	.string "{CLEAR_TO 0}$"
+
+	.incbin "baserom.gba", 0x3b555c, 0x20
 
 	.align 2
 gOamData_83B557C:: @ 83B557C
@@ -497,7 +499,7 @@ gUnknown_083B5A7C:: @ 83B5A7C
 	.byte 2, 3, 2, 0
 
 gUnknown_083B5AAC:: @ 83B5AAC
-	.incbin "baserom.gba", 0x003b5aac, 0x6
+	.string "{STR_VAR_1}{CLEAR_TO 43}$"
 
 gUnknown_083B5AB2:: @ 83B5AB2
-	.incbin "baserom.gba", 0x003b5ab2, 0x6
+	.string "{STR_VAR_1}{CLEAR_TO 96}$"
