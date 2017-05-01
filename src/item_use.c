@@ -23,13 +23,9 @@
 #include "task.h"
 #include "vars.h"
 
-extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
 extern void (* gUnknown_03004AE4)(u8);
-extern void (* const gUnknown_083D61F4[])();
-
-extern u8 *gUnknown_083D61DC[];
 
 extern u8 gMoveNames[][13];
 
@@ -37,7 +33,6 @@ extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_02024E6C;
 
-extern u8 gItemFinderDirections[];
 extern u8 gUnknown_081A1654[];
 extern u8 gUnknown_081A168F[];
 
@@ -45,7 +40,7 @@ extern u16 gUnknown_02024A6A[];
 
 extern void HandleItemMenuPaletteFade(u8);
 extern void ExecuteItemUseFromBlackPalette(void);
-extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16);
 extern void CleanUpItemMenuMessage(u8);
 extern void CleanUpOverworldMessage(u8);
 extern void ItemUseOnFieldCB_Bike(u8);
@@ -75,6 +70,8 @@ extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon *mon, u16, u8, u16);
 extern void sub_8094E4C(void);
 extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
 extern u8 GetItemEffectType();
+extern void sub_808B020(void);
+extern void sub_810B96C(void);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -110,9 +107,41 @@ void sub_80C9D74(u8);
 void sub_80C9EE4(u8);
 void sub_80C9F10(u8);
 void sub_80C9F80(u8);
+void sub_80C9FC0(u8);
 void ItemUseOutOfBattle_TMHM(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
+
+static const u8 Unknown_83D619C[] = _(
+    "この　チケットで　ふねに　のりほうだい\n"
+    "はやく　のってみたいな"
+);
+
+static const u8 Unknown_83D61BC[] = _(
+    "この　チケットで　ふねに　のりほうだい\n"
+    "はやく　のってみたいな"
+);
+
+static const u8 *const gUnknown_083D61DC[] =
+{
+    Unknown_83D619C,
+    Unknown_83D61BC,
+};
+
+static void (* const gExitToOverworldFuncList[])(void) =
+{
+    sub_808B020,
+    c2_exit_to_overworld_2_switch,
+    sub_810B96C,
+};
+
+static const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
+
+static void (* const gUnknown_083D61F4[])(u8) =
+{
+    sub_80C9FC0,
+    CleanUpItemMenuMessage,
+};   
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
