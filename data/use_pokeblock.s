@@ -12,7 +12,11 @@ ConditionUpDownTiles:
 	.incbin "graphics/misc/condition_up_down.4bpp"
 
 gUnknown_08406118:: @ 8406118
-	.incbin "baserom.gba", 0x00406118, 0x14
+	.4byte 22 @ MON_DATA_COOL
+	.4byte 47 @ MON_DATA_TOUGH
+	.4byte 33 @ MON_DATA_SMART
+	.4byte 24 @ MON_DATA_CUTE
+	.4byte 23 @ MON_DATA_BEAUTY
 
 	.align 2
 gUnknown_0840612C:: @ 840612C
@@ -35,7 +39,11 @@ gSpritePalette_ConditionUpDown:: @ 8406150
 	obj_pal ConditionUpDownPalette, 0
 
 gUnknown_08406158:: @ 8406158
-	.incbin "baserom.gba", 0x00406158, 0x14
+	.2byte 156, 30
+	.2byte 117, 53
+	.2byte 117, 112
+	.2byte 197, 112
+	.2byte 197, 53
 
 	.align 2
 gOamData_840616C:: @ 840616C

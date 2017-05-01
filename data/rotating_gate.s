@@ -252,22 +252,48 @@ gSpriteTemplate_83D60A4:: @ 83D60A4
 	spr_template 4864, 0xFFFF, gOamData_83D5E14, gSpriteAnimTable_83D5E78, NULL, gSpriteAffineAnimTable_83D603C, sub_80C7C94
 
 gUnknown_083D60BC:: @ 83D60BC
-	.incbin "baserom.gba", 0x003d60bc, 0x10
+	.byte 255, 255, 255, 255
+	.byte  39,  38,  18,  19
+	.byte 255, 255, 255, 255
+	.byte 255, 255, 255, 255
 
 gUnknown_083D60CC:: @ 83D60CC
-	.incbin "baserom.gba", 0x003d60cc, 0x10
+	.byte 255, 255, 255, 255
+	.byte 255, 255, 255, 255
+	.byte  23,  22,  34,  35
+	.byte 255, 255, 255, 255
 
 gUnknown_083D60DC:: @ 83D60DC
-	.incbin "baserom.gba", 0x003d60dc, 0x10
+	.byte 255,  17, 255, 255
+	.byte 255,  16, 255, 255
+	.byte 255,  36, 255, 255
+	.byte 255,  37, 255, 255
 
 gUnknown_083D60EC:: @ 83D60EC
-	.incbin "baserom.gba", 0x003d60ec, 0x10
+	.byte 255, 255,  33, 255
+	.byte 255, 255,  32, 255
+	.byte 255, 255,  20, 255
+	.byte 255, 255,  21, 255
 
 gUnknown_083D60FC:: @ 83D60FC
-	.incbin "baserom.gba", 0x003d60fc, 0x20
+	.byte  0, -1, 0, 0
+	.byte  1, -2, 0, 0
+	.byte  0,  0, 0, 0
+	.byte  1,  0, 0, 0
+	.byte -1,  0, 0, 0
+	.byte -1,  1, 0, 0
+	.byte -1, -1, 0, 0
+	.byte -2, -1, 0, 0
 
 gUnknown_083D611C:: @ 83D611C
-	.incbin "baserom.gba", 0x003d611c, 0x20
+	.byte -1, -1, 0, 0
+	.byte -1, -2, 0, 0
+	.byte  0, -1, 0, 0
+	.byte  1, -1, 0, 0
+	.byte  0,  0, 0, 0
+	.byte  0,  1, 0, 0
+	.byte -1,  0, 0, 0
+	.byte -2,  0, 0, 0
 	
 	.align 2
 gUnknown_083D613C:: @ 83D613C

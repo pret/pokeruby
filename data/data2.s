@@ -2030,12 +2030,11 @@ gBitTable:: @ 820872C
 	.4byte 0x80000000
 
 	.align 2
-gSpriteTemplate_82087AC:: @ 82087AC
+gInvisibleSpriteTemplate:: @ 82087AC
 	spr_template 0, 0, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-@ sprite dimensions
 	.align 2
-gUnknown_082087C4:: @ 82087C4
+gSpriteDimensions:: @ 82087C4
 	@ square
 	.byte 1, 1
 	.byte 2, 2

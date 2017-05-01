@@ -1,6 +1,8 @@
 #include "global.h"
+#include "field_control_avatar.h"
 #include "asm.h"
 #include "battle_setup.h"
+#include "bike.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "flags.h"
@@ -13,8 +15,6 @@
 #include "trainer_see.h"
 #include "vars.h"
 #include "wild_encounter.h"
-#include "bike.h"
-#include "field_control_avatar.h"
 
 struct Coords32
 {

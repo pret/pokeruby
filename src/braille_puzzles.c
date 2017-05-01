@@ -1,4 +1,5 @@
 #include "global.h"
+#include "braille_puzzles.h"
 #include "asm.h"
 #include "event_data.h"
 #include "field_camera.h"
@@ -6,14 +7,13 @@
 #include "flags.h"
 #include "map_obj_lock.h"
 #include "menu.h"
+#include "rom6.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
 #include "task.h"
 #include "text.h"
-#include "braille_puzzles.h"
-#include "rom6.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;

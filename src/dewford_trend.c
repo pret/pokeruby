@@ -1,10 +1,10 @@
 #include "global.h"
+#include "dewford_trend.h"
 #include "asm.h"
 #include "event_data.h"
 #include "link.h"
 #include "rng.h"
 #include "text.h"
-#include "dewford_trend.h"
 
 extern u8 unk_2000000[];
 

@@ -91,11 +91,11 @@ void LoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32
     {
         u16 i = (((g & 0x3000000) >> 18) | ((g & 0x30000) >> 12) | ((g & 0x300) >> 6) | (g & 3)) % 0x1C;
 
-        // if it is Unown A, set the index to where Unown begins, otherwise add the egg index to get the correct letter to load.
+        // The other Unowns are separate from Unown A.
         if (i == 0)
             i = SPECIES_UNOWN;
         else
-            i += SPECIES_EGG;
+            i += SPECIES_UNOWN_B - 1;
 
         if (frontOrBack8 == 0)
             LZ77UnCompWram(gMonBackPicTable[i].data, dest);

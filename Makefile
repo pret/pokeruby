@@ -105,7 +105,7 @@ $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 
-define VERSION_RULES =
+define VERSION_RULES
 
 $1_C_OBJS := $$(C_SRCS:%.c=build/$1/%.o)
 $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)

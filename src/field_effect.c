@@ -1,8 +1,8 @@
 #include "global.h"
 #include "field_effect.h"
+#include "field_screeneffect.h"
 #include "sprite.h"
 #include "text.h"
-#include "field_screeneffect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
 

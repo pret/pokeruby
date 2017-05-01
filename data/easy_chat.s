@@ -347,13 +347,17 @@ gUnknown_083DBE1C:: @ 83DBE1C
 	.incbin "baserom.gba", 0x003dbe1c, 0x24
 
 gUnknown_083DBE40:: @ 83DBE40
-	.incbin "baserom.gba", 0x003dbe40, 0x68
+	.incbin "baserom.gba", 0x003dbe40, 0x68 @ LZ
 
 gUnknown_083DBEA8:: @ 83DBEA8
-	.incbin "baserom.gba", 0x003dbea8, 0x4
+	.string "{CLEAR_TO 88}$"
 
+	.align 2
 gUnknown_083DBEAC:: @ 83DBEAC
-	.incbin "baserom.gba", 0x003dbeac, 0x80
+	.string "{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}others$", 0x20
+	.string "{UNKNOWN_14 8} G H I  J K L      $", 0x20
+	.string "{UNKNOWN_14 8} M N O  P Q R S    $", 0x20
+	.string "{UNKNOWN_14 8} T U V  W X Y Z    $", 0x20
 
 @ 83DBF2C
 	.include "data/text/easy_chat/group_words.inc"

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "field_screeneffect.h"
 #include "item.h"
 #include "items.h"
 #include "main.h"
@@ -9,7 +10,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "field_screeneffect.h"
 
 #define NEW_GAME_PC_ITEMS(i, type) ((u16)(gNewGamePCItems + type)[i * 2])
 

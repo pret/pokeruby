@@ -1,8 +1,8 @@
 #include "global.h"
+#include "battle_anim.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-#include "battle_anim.h"
 
 #define TASK gTasks[task]
 #define SPRITE gSprites[TASK.data[0]]

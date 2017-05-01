@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_PARTY_MENU_H
 #define GUARD_BATTLE_PARTY_MENU_H
 
+#include "task.h"
+
 struct UnknownStruct1
 {
     u8 filler0[0x259];

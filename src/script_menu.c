@@ -1,13 +1,13 @@
 #include "global.h"
+#include "script_menu.h"
 #include "event_data.h"
 #include "menu.h"
 #include "palette.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
-#include "task.h"
 #include "strings.h"
-#include "script_menu.h"
+#include "task.h"
 
 // multichoice lists
 const struct MenuAction MultichoiceList_00[] =

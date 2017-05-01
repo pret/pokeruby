@@ -50,7 +50,19 @@ gUnknown_083E6B04:: @ 83E6B04
 	.include "data/region_map_locations.inc"
 
 gUnknown_083E7684:: @ 83E7684
-	.incbin "baserom.gba", 0x003e7684, 0x34
+	.2byte 50, 39
+	.2byte 51, 41
+	.2byte 52, 42
+	.2byte 53, 43
+	.2byte 54, 14
+	.2byte 69, 43
+	.2byte 66, 12
+	.2byte 79, 49
+	.2byte 59, 19
+	.2byte 76, 27
+	.2byte 65, 37
+	.2byte 85, 46
+	.2byte 88, 88
 
 	.align 2
 gOamData_83E76B8:: @ 83E76B8
@@ -129,7 +141,8 @@ gUnknown_083E79CC:: @ 83E79CC
 
 	.align 2
 gUnknown_083E79D4:: @ 83E79D4
-	.incbin "baserom.gba", 0x003e79d4, 0x8
+	.2byte 2120,  58
+	.2byte 65535, 88
 
 	.align 2
 gOamData_83E79DC:: @ 83E79DC

@@ -1,6 +1,8 @@
 #ifndef GUARD_NAMINGSCREEN_H
 #define GUARD_NAMINGSCREEN_H
 
+#include "main.h"
+
 #define KBEVENT_NONE 0
 #define KBEVENT_PRESSED_A 5
 #define KBEVENT_PRESSED_B 6
