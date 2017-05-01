@@ -24,7 +24,15 @@ gDebugText_DriverTest:: @ 83D02F2
 	.string "R‥DRIVER-TEST$"
 
 gUnknown_083D0300:: @ 83D0300
-	.incbin "baserom.gba", 0x003d0300, 0x12
+	.byte  1,  1
+	.byte  1,  3
+	.byte  1,  5
+	.byte  1,  7
+	.byte  1,  9
+	.byte  1, 11
+	.byte  1, 13
+	.byte  1, 15
+	.byte  1, 17
 
 gUnknown_083D0312:: @ 83D0312
 	.string "Bぼたんで　もどる$"
@@ -68,8 +76,16 @@ gUnknown_083D038A:: @ 83D038A
 gUnknown_083D0393:: @ 83D0393
 	.string "すてれお‥‥‥‥$" @ stereo
 
+	.align 2
 gUnknown_083D039C:: @ 83D039C
-	.incbin "baserom.gba", 0x003d039c, 0x40
+	.4byte    0,   387
+	.4byte    0,   127
+	.4byte -127,   127
+	.4byte -128, 32639
+	.4byte    0, 65535
+	.4byte    0,   255
+	.4byte    0, 65535
+	.4byte  -64,    63
 
 gUnknown_083D03DC:: @ 83D03DC
 	.string "▶$"
@@ -77,8 +93,14 @@ gUnknown_083D03DC:: @ 83D03DC
 gUnknown_083D03DE:: @ 83D03DE
 	.string " $"
 
+	.align 2
 gUnknown_083D03E0:: @ 83D03E0
-	.incbin "baserom.gba", 0x003d03e0, 0x18
+	.4byte      1
+	.4byte     10
+	.4byte    100
+	.4byte   1000
+	.4byte  10000
+	.4byte 100000
 
 gUnknown_083D03F8:: @ 83D03F8
 	.byte 0x3F, 0x00, 0xC0, 0x7F, 0x80 @ stereo panning

@@ -40,7 +40,7 @@ extern u16 gUnknown_02024A6A[];
 
 extern void HandleItemMenuPaletteFade(u8);
 extern void ExecuteItemUseFromBlackPalette(void);
-extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16);
 extern void CleanUpItemMenuMessage(u8);
 extern void CleanUpOverworldMessage(u8);
 extern void ItemUseOnFieldCB_Bike(u8);
@@ -72,7 +72,6 @@ extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
 extern u8 GetItemEffectType();
 extern void sub_808B020(void);
 extern void sub_810B96C(void);
-extern void sub_80C9FC0(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
@@ -94,7 +93,24 @@ extern u8 gOtherText_SnapConfusion[];
 extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;
 
-// -----------------------
+bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
+void RunItemfinderResults(u8);
+void ExitItemfinder(u8);
+void sub_80C9720(u8);
+void sub_80C9838(u8, s16, s16);
+u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
+void SetPlayerDirectionTowardsItem(u8);
+void DisplayItemRespondingMessageAndExitItemfinder(u8);
+void RotatePlayerAndExitItemfinder(u8);
+void sub_80C9D00(u8);
+void sub_80C9D74(u8);
+void sub_80C9EE4(u8);
+void sub_80C9F10(u8);
+void sub_80C9F80(u8);
+void sub_80C9FC0(u8);
+void ItemUseOutOfBattle_TMHM(u8);
+void ItemUseOutOfBattle_EvolutionStone(u8);
+void ItemUseOutOfBattle_CannotUse(u8);
 
 const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
@@ -119,26 +135,6 @@ const struct FuncStruct gUnknown_083D61F4[2] =
 	sub_80C9FC0,
 	CleanUpItemMenuMessage,
 };
-
-// -----------------------
-
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
-void RunItemfinderResults(u8);
-void ExitItemfinder(u8);
-void sub_80C9720(u8);
-void sub_80C9838(u8, s16, s16);
-u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
-void SetPlayerDirectionTowardsItem(u8);
-void DisplayItemRespondingMessageAndExitItemfinder(u8);
-void RotatePlayerAndExitItemfinder(u8);
-void sub_80C9D00(u8);
-void sub_80C9D74(u8);
-void sub_80C9EE4(u8);
-void sub_80C9F10(u8);
-void sub_80C9F80(u8);
-void ItemUseOutOfBattle_TMHM(u8);
-void ItemUseOutOfBattle_EvolutionStone(u8);
-void ItemUseOutOfBattle_CannotUse(u8);
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {

@@ -2623,9 +2623,9 @@ sub_80FBCF0: @ 80FBCF0
 	movs r2, 0
 	strh r3, [r0]
 	strh r1, [r0, 0x2]
-	ldr r0, _080FBDA4 @ =gUnknown_083E7708
+	ldr r0, _080FBDA4 @ =gOamData_083E7708
 	str r0, [sp, 0x4]
-	ldr r0, _080FBDA8 @ =gUnknown_083E7718
+	ldr r0, _080FBDA8 @ =gSpriteAnimTable_083E7718
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
 	ldr r0, _080FBDAC @ =gDummySpriteAffineAnimTable
@@ -2685,8 +2685,8 @@ _080FBD42:
 _080FBD98: .4byte gRegionMapBrendanIconTiles
 _080FBD9C: .4byte gRegionMapBrendanIconPalette
 _080FBDA0: .4byte 0xffff0000
-_080FBDA4: .4byte gUnknown_083E7708
-_080FBDA8: .4byte gUnknown_083E7718
+_080FBDA4: .4byte gOamData_083E7708
+_080FBDA8: .4byte gSpriteAnimTable_083E7718
 _080FBDAC: .4byte gDummySpriteAffineAnimTable
 _080FBDB0: .4byte SpriteCallbackDummy
 _080FBDB4: .4byte gSaveBlock2

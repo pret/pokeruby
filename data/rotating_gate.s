@@ -294,7 +294,7 @@ gUnknown_083D611C:: @ 83D611C
 	.byte  0,  1, 0, 0
 	.byte -1,  0, 0, 0
 	.byte -2,  0, 0, 0
-	
+
 	.align 2
 gUnknown_083D613C:: @ 83D613C
 	.byte  1, 0, 1, 0, 0, 0, 0, 0
