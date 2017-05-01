@@ -15,7 +15,7 @@ gDebugText_SE:: @ 83D02D5
 	.string "SE $"
 
 gUnknown_083D02D9:: @ 83D02D9
-	.incbin "baserom.gba", 0x003d02d9, 0xd
+	.string "A‥さいせい　B‥おわり$"
 
 gDebugText_UpDown:: @ 83D02E6
 	.string "L‥UP R‥DOWN$"
@@ -27,10 +27,10 @@ gUnknown_083D0300:: @ 83D0300
 	.incbin "baserom.gba", 0x003d0300, 0x12
 
 gUnknown_083D0312:: @ 83D0312
-	.incbin "baserom.gba", 0x003d0312, 0xa
+	.string "Bぼたんで　もどる$"
 
 gUnknown_083D031C:: @ 83D031C
-	.incbin "baserom.gba", 0x003d031c, 0xb
+	.string "Aぼたんで　さいせい$"
 
 gDebugText_Voice:: @ 83D0327
 	.string "VOICE‥‥‥‥$"
