@@ -11,10 +11,11 @@ gDexArrows_Pal::
 gDexArrows_Gfx::
 	.incbin "graphics/pokedex/arrows.4bpp"
 
-	.incbin "baserom.gba", 0x00402c78, 0x80
-
 gUnknown_08402CF8:: @ 8402CF8
-	.incbin "baserom.gba", 0x00402cf8, 0x10
+	.byte 0,  0,  9,  13
+	.byte 10, 0,  29, 7
+	.byte 2,  14, 27, 19
+	.byte 10, 8,  29, 13
 
 gUnknown_08402D08:: @ 8402D08
 	.4byte OtherText_Battle
@@ -132,10 +133,16 @@ gSpriteTemplate_8402E08:: @ 8402E08
 	spr_template 5525, 5526, gOamData_8402D50, gSpriteAnimTable_8402DF8, NULL, gDummySpriteAffineAnimTable, sub_8133300
 
 	.align 2
-	.incbin "baserom.gba", 0x00402e20, 0x4
+	.incbin "baserom.gba", 0x00402e20, 0x4 @ あきと ?
 
 gUnknown_08402E24:: @ 8402E24
-	.incbin "baserom.gba", 0x00402e24, 0x15
+	.byte 11,  1,  1
+	.byte  3,  6,  2
+	.byte 24,  1,  3
+	.byte  3, 11,  4
+	.byte  5,  4,  5
+	.byte  3,  6,  6
+	.byte  3, 11,  7
 
 gUnknown_08402E39:: @ 8402E39
 	.byte 0, 1, 2, 3
