@@ -132,8 +132,7 @@ gSpriteAnimTable_8402DF8:: @ 8402DF8
 gSpriteTemplate_8402E08:: @ 8402E08
 	spr_template 5525, 5526, gOamData_8402D50, gSpriteAnimTable_8402DF8, NULL, gDummySpriteAffineAnimTable, sub_8133300
 
-	.align 2
-	.incbin "baserom.gba", 0x00402e20, 0x4 @ あきと ?
+	.string "あきと$" @ programmer Akito Mori?
 
 gUnknown_08402E24:: @ 8402E24
 	.byte 11,  1,  1
