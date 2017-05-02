@@ -36,11 +36,11 @@ gSpriteAnimTable_83D18E8:: @ 83D18E8
 
 	.align 2
 gUnknownPal_083D18EC::
-	.incbin "baserom.gba", 0x003d18ec, 0x20
+	.incbin "graphics/unknown/unknown_3D18EC.gbapal"
 
 	.align 2
 gUnknownPal_083D190C::
-	.incbin "baserom.gba", 0x003d190c, 0x20
+	.incbin "graphics/unknown/unknown_3D190C.gbapal"
 
 	.incbin "baserom.gba", 0x003d192c, 0x60
 
@@ -112,7 +112,7 @@ gSpriteImage_83D20CC:: @ 83D20CC
 	.incbin "graphics/unknown_sprites/83D25C4/4.4bpp"
 
 	.align 2
-	.incbin "baserom.gba", 0x003d214c, 0x80
+	.incbin "graphics/unknown_sprites/83D25C4/5.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette8: @ 83D21CC
@@ -295,7 +295,7 @@ gSpriteImage_83D27C0:: @ 83D27C0
 
 	.align 2
 Palette_3D2840:: @ 83D2840
-	.incbin "baserom.gba", 0x3d2840, 0x20
+	.incbin "graphics/unknown/unknown_3D2840.gbapal"
 
 	.align 2
 gSpriteImageTable_83D2860:: @ 83D2860
