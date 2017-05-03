@@ -1303,7 +1303,13 @@ gSpriteAffineAnim_83D7250:: @ 83D7250
 	obj_rot_scal_anim_end
 
 	.align 2
-	.incbin "baserom.gba", 0x003d7278, 0x48
+@ unused tilemap?
+	.2byte 0x0010, 0x0010, 0x0000, 0x0000, 0x001E, 0x001E
+	.2byte 0x0800, 0x0000, 0x0000, 0x0000, 0x1000, 0x0000
+	.2byte 0x7FFD, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.2byte 0x0B04, 0x0000, 0x0000, 0x0000, 0x0BFC, 0x0000
+	.2byte 0x7FFD, 0x0002, 0x0000, 0x0000, 0xFFE2, 0xFFE2
+	.2byte 0x0800, 0x0000, 0x7FFF, 0x0000, 0x0000, 0x0000
 
 	.align 2
 gSpriteAffineAnimTable_83D72C0:: @ 83D72C0
@@ -1604,11 +1610,57 @@ gBattleAnimSpriteTemplate_83D76DC:: @ 83D76DC
 	spr_template 10138, 10138, gOamData_837E054, gSpriteAnimTable_83D76D4, NULL, gDummySpriteAffineAnimTable, sub_80D0228
 
 	.align 2
+	@ probably 4 structs of Struct_0202F7D4.
 gUnknown_083D76F4:: @ 83D76F4
-	.incbin "baserom.gba", 0x003d76f4, 0x20
+	.2byte 0xFFFA
+	.2byte 0x0004
+	.byte 0x00
+	.byte 0x08
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x000A
+	.2byte 0xFFF6
+	.byte 0x00
+	.byte 0x08
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0xFFFC
+	.2byte 0x0006
+	.byte 0x00
+	.byte 0x08
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF @ terminator?
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
+	.align 2
 gUnknown_083D7714:: @ 83D7714
-	.incbin "baserom.gba", 0x003d7714, 0x20
+	.2byte 0xFFFC
+	.2byte 0xFFFB 
+	.byte 0x00
+	.byte 0x0C
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0000
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x18
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0004
+	.2byte 0x0005
+	.byte 0x00
+	.byte 0x0C
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF @ terminator?
+	.2byte 0x00
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
 	.align 2
 gSpriteAnim_83D7734:: @ 83D7734
@@ -1651,7 +1703,41 @@ gBattleAnimSpriteTemplate_83D7798:: @ 83D7798
 
 	.align 2
 gUnknown_083D77B0:: @ 83D77B0
-	.incbin "baserom.gba", 0x003d77b0, 0x30
+	.2byte 0xFFF6
+	.2byte 0x0009
+	.byte 0x00
+	.byte 0x07
+	.byte 0x00, 0x00 @ padding
+	
+	.2byte 0x0014
+	.2byte 0xFFEC
+	.byte 0x00
+	.byte 0x07
+	.byte 0x00, 0x00 @ padding
+	
+	.2byte 0xFFEC
+	.2byte 0x0014
+	.byte 0x00
+	.byte 0x07
+	.byte 0x00, 0x00 @ padding
+
+	.2byte 0x000A
+	.2byte 0xFFF7
+	.byte 0x00
+	.byte 0x07
+	.byte 0x00, 0x00 @ padding
+	
+	.2byte 0x7FFD
+	.2byte 0x0002
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ padding
+	
+	.2byte 0x7FFF
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ padding
 
 	.align 2
 gBattleAnimSpriteTemplate_83D77E0:: @ 83D77E0
@@ -1769,7 +1855,17 @@ gBattleAnimSpriteTemplate_83D79A4:: @ 83D79A4
 
 	.align 2
 gUnknown_083D79BC:: @ 83D79BC
-	.incbin "baserom.gba", 0x003d79bc, 0x10
+	.2byte 0x0060
+	.2byte 0xFFF3
+	.byte 0x00
+	.byte 0x08
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
 	.align 2
 gSpriteAnim_83D79CC:: @ 83D79CC
@@ -1981,7 +2077,29 @@ gBattleAnimSpriteTemplate_83D7C90:: @ 83D7C90
 
 	.align 2
 gUnknown_083D7CA8:: @ 83D7CA8
-	.incbin "baserom.gba", 0x003d7ca8, 0x20
+	.2byte 0xFFF4
+	.2byte 0x0008
+	.byte 0x00
+	.byte 0x04
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0014
+	.2byte 0xFFEC
+	.byte 0x00
+	.byte 0x04
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0xFFF8
+	.2byte 0x000C
+	.byte 0x00
+	.byte 0x04
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
 	.align 2
 gBattleAnimSpriteTemplate_83D7CC8:: @ 83D7CC8
@@ -3483,7 +3601,8 @@ gBattleAnimSpriteTemplate_83DA498:: @ 83DA498
 	spr_template 10270, 10270, gOamData_837DF94, gSpriteAnimTable_83DA490, NULL, gDummySpriteAffineAnimTable, sub_80DA4D8
 
 	.align 2
-	.incbin "baserom.gba", 0x003da4b0, 0x20
+@ unused palette
+	.incbin "graphics/unknown/unknown_3DA4B0.gbapal"
 
 	.align 2
 gSpriteTemplate_83DA4D0:: @ 83DA4D0
@@ -3730,10 +3849,49 @@ gBattleAnimSpriteTemplate_83DA88C:: @ 83DA88C
 
 	.align 2
 gUnknown_083DA8A4:: @ 83DA8A4
-	.incbin "baserom.gba", 0x003da8a4, 0x20
+	.2byte 0xFFF8
+	.2byte 0x000A
+	.byte 0x00
+	.byte 0x10
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0012
+	.2byte 0xFFEE
+	.byte 0x00
+	.byte 0x10
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0xFFEC
+	.2byte 0x0010
+	.byte 0x00
+	.byte 0x08
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
+	.align 2
 gUnknown_083DA8C4:: @ 83DA8C4
-	.incbin "baserom.gba", 0x003da8c4, 0x18
+	.2byte 0x0040
+	.2byte 0xFFFC
+	.byte 0x00
+	.byte 0x14
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0000
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0xC8
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x7FFF
+	.2byte 0x0000
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00, 0x00 @ struct padding
 
 	.align 2
 gSpriteTemplate_83DA8DC:: @ 83DA8DC
@@ -3986,10 +4144,21 @@ gBattleAnimSpriteTemplate_83DACE8:: @ 83DACE8
 
 	.align 2
 Unknown_3DAD00:: @ 83DAD00
-	.incbin "baserom.gba", 0x3dad00, 0x10
+	.2byte 0xFFF0
+	.2byte 0x0000
+	.byte 0x09
+	.byte 0x40
+	.byte 0x00, 0x00 @ struct padding
+	
+	.2byte 0x0010
+	.2byte 0x0000
+	.byte 0x89
+	.byte 0x40
+	.byte 0x00, 0x00 @ struct padding
 
 	.align 2
 gUnknown_083DAD10:: @ 83DAD10
+@ the first argument is likely the amount of structs there are in the pointed data.
 	.4byte 0x2, Unknown_3DAD00
 
 	.align 2
@@ -4574,7 +4743,8 @@ gBattleAnimSpriteTemplate_83DB550:: @ 83DB550
 
 	.align 2
 gUnknown_083DB568:: @ 83DB568
-	.incbin "baserom.gba", 0x003db568, 0x4
+@ seems to be a src element in a LoadPalette call.
+	.2byte 0x7FFF
 
 	.align 2
 gUnknown_083DB56C:: @ 83DB56C
