@@ -166,13 +166,27 @@ gUnknown_083FD828:: @ 83FD828
 	.4byte sub_811C630
 
 gUnknown_083FD850:: @ 83FD850
-	.incbin "baserom.gba", 0x003fd850, 0x6
+	.byte TRAINER_PIC_SIDNEY
+	.byte TRAINER_PIC_PHOEBE
+	.byte TRAINER_PIC_GLACIA
+	.byte TRAINER_PIC_DRAKE
+	.byte TRAINER_PIC_STEVEN
 
+	.align 1
 gUnknown_083FD856:: @ 83FD856
-	.incbin "baserom.gba", 0x003fd856, 0x14
+	.2byte 0x200, 0x200
+	.2byte 0x200, 0x200
+	.2byte 0x1B0, 0x1B0
+	.2byte 0x1A0, 0x1A0
+	.2byte 0x188, 0x188
 
+	.align 1
 gUnknown_083FD86A:: @ 83FD86A
-	.incbin "baserom.gba", 0x003fd86a, 0x16
+	.2byte   0,  0
+	.2byte   0,  0
+	.2byte  -4,  4
+	.2byte   0,  5
+	.2byte   0,  7
 
 	.align 2
 gUnknown_083FD880:: @ 83FD880
@@ -184,11 +198,13 @@ gUnknown_083FD880:: @ 83FD880
 	.4byte sub_811C9E4
 	.4byte sub_811C934
 
+	.align 1
 gUnknown_083FD89C:: @ 83FD89C
-	.incbin "baserom.gba", 0x003fd89c, 0x4
+	.2byte 12, -12
 
+	.align 1
 gUnknown_083FD8A0:: @ 83FD8A0
-	.incbin "baserom.gba", 0x003fd8a0, 0x4
+	.2byte -1, 1
 
 	.align 2
 gUnknown_083FD8A4:: @ 83FD8A4
@@ -204,8 +220,16 @@ gUnknown_083FD8B0:: @ 83FD8B0
 	.4byte sub_811CE4C
 	.4byte sub_811CEB0
 
+	.align 1
 gUnknown_083FD8C4:: @ 83FD8C4
-	.incbin "baserom.gba", 0x003fd8c4, 0x10
+	.2byte   0
+	.2byte  20
+	.2byte  15
+	.2byte  40
+	.2byte  10
+	.2byte  25
+	.2byte  35
+	.2byte   5
 
 	.align 2
 gUnknown_083FD8D4:: @ 83FD8D4
@@ -221,11 +245,25 @@ gUnknown_083FD8E0:: @ 83FD8E0
 	.4byte sub_811D3B0
 	.4byte sub_811D41C
 
+	.align 1
 gUnknown_083FD8F4:: @ 83FD8F4
-	.incbin "baserom.gba", 0x003fd8f4, 0x46
+	.2byte   56,   0,   0, 160,   0
+	.2byte  104, 160, 240,  88,   1
+	.2byte  240,  72,  56,   0,   1
+	.2byte    0,  32, 144, 160,   0
+	.2byte  144, 160, 184,   0,   1
+	.2byte   56,   0, 168, 160,   0
+	.2byte  168, 160,  48,   0,   1
 
+	.align 1
 gUnknown_083FD93A:: @ 83FD93A
-	.incbin "baserom.gba", 0x003fd93a, 0xe
+	.2byte  8
+	.2byte  4
+	.2byte  2
+	.2byte  1
+	.2byte  1
+	.2byte  1
+	.2byte  0
 
 	.align 2
 gUnknown_083FD948:: @ 83FD948
