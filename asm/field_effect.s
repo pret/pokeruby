@@ -7059,7 +7059,7 @@ sub_8089018: @ 8089018
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _080890CC @ =gUnknown_0839F44C
+	ldr r0, _080890CC @ =gSpriteAffineAnimTable_0839F44C
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -7132,7 +7132,7 @@ _080890C4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080890CC: .4byte gUnknown_0839F44C
+_080890CC: .4byte gSpriteAffineAnimTable_0839F44C
 _080890D0: .4byte 0x0000ffd0
 _080890D4: .4byte 0x000007ff
 	thumb_func_end sub_8089018
@@ -7215,7 +7215,7 @@ sub_808914C: @ 808914C
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _08089228 @ =gUnknown_0839F44C
+	ldr r0, _08089228 @ =gSpriteAffineAnimTable_0839F44C
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -7311,7 +7311,7 @@ _08089220:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08089228: .4byte gUnknown_0839F44C
+_08089228: .4byte gSpriteAffineAnimTable_0839F44C
 _0808922C: .4byte 0x0000ffe0
 	thumb_func_end sub_808914C
 
