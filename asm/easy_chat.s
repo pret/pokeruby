@@ -5473,7 +5473,7 @@ _080E8A8E:
 	mov r0, sp
 	movs r1, 0x3
 	strh r1, [r0]
-	ldr r0, _080E8B74 @ =gUnknown_083DBD10
+	ldr r0, _080E8B74 @ =gSpriteAnimTable_83DBD10
 	str r0, [sp, 0x8]
 	movs r5, 0
 	movs r7, 0x3F
@@ -5535,7 +5535,7 @@ _080E8AF6:
 _080E8B68: .4byte gSpriteTemplate_83DBD18
 _080E8B6C: .4byte gUnknown_083DB694
 _080E8B70: .4byte gSprites
-_080E8B74: .4byte gUnknown_083DBD10
+_080E8B74: .4byte gSpriteAnimTable_83DBD10
 	thumb_func_end sub_80E8A7C
 
 	thumb_func_start sub_80E8B78
