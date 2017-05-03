@@ -30,14 +30,33 @@ gBerryMasterWifePhrases:: @ 83DB680
 gUnknown_083DB694:: @ 83DB694
 	.4byte 0x02001000
 
+	.align 2
 gUnknown_083DB698:: @ 83DB698
-	.incbin "baserom.gba", 0x003db698, 0xc
+	.4byte REG_BG3VOFS
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
 gUnknown_083DB6A4:: @ 83DB6A4
-	.incbin "baserom.gba", 0x003db6a4, 0xe
+	.byte  4
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  1
+	.byte  5
+	.byte  0
+	.byte  2
+	.byte  2
+	.byte  3
+	.byte  2
+	.byte  2
+	.byte  2
+	.byte  3
 
 gUnknown_083DB6B2:: @ 83DB6B2
-	.incbin "baserom.gba", 0x003db6b2, 0x42
+	.string "ABCDEF $        "
+	.string "GHIJKL$         "
+	.string "MNOPQRS$        "
+	.string "TUVWXYZ$        "
 
 	.align 2
 gUnknown_083DB6F4:: @ 83DB6F4
@@ -60,7 +79,20 @@ gUnknown_083DB6F4:: @ 83DB6F4
 	.4byte OtherText_WithFourPhrases, OtherText_CombineNinePhrasesPage2, 0x1
 
 gUnknown_083DB7C0:: @ 83DB7C0
-	.incbin "baserom.gba", 0x003db7c0, 0x1c
+	.byte  0,  6
+	.byte  1,  7
+	.byte  1,  8
+	.byte  1,  9
+	.byte  2, 10
+	.byte 16, 13
+	.byte  4, 12
+	.byte  3, 13
+	.byte  3, 13
+	.byte  5, 14
+	.byte  3, 13
+	.byte  3, 13
+	.byte  3, 13
+	.byte 15, 13
 
 	.align 2
 gUnknown_083DB7DC:: @ 83DB7DC
@@ -69,11 +101,21 @@ gUnknown_083DB7DC:: @ 83DB7DC
 	.4byte 0x0200ad12
 	.4byte 0x0200ad5b
 
+	.align 1
 gUnknown_083DB7EC:: @ 83DB7EC
-	.incbin "baserom.gba", 0x003db7ec, 0x8
+	ec_word I_AM
+	ec_word A
+	ec_word POKEMON
+	ec_word GREAT
 
+	.align 1
 gUnknown_083DB7F4:: @ 83DB7F4
-	.incbin "baserom.gba", 0x3db7f4, 0xc
+	ec_word ARE
+	ec_word YOU
+	ec_word READY
+	ec_word QUES
+	ec_word HERE_I_COME
+	ec_word EXCL
 
 	.align 2
 InterviewPalette_0:: @ 83DB800
@@ -220,7 +262,10 @@ gSpriteTemplate_83DBCAC:: @ 83DBCAC
 
 	.align 2
 gUnknown_083DBCC4:: @ 83DBCC4
-	.incbin "baserom.gba", 0x003dbcc4, 0x1c
+	.byte  1,  3,  5,  8, 10, 12, 15
+	.byte  1,  3,  5,  8, 10, 12,  0
+	.byte  1,  3,  5,  8, 10, 12, 14
+	.byte  1,  3,  5,  8, 10, 12, 14
 
 	.align 2
 gOamData_83DBCE0:: @ 83DBCE0
@@ -243,14 +288,20 @@ gSpriteAnimTable_83DBCF8:: @ 83DBCF8
 	.4byte gSpriteAnim_83DBCE8
 	.4byte gSpriteAnim_83DBCF0
 
-Unknown_83DBD00:
-	.incbin "baserom.gba", 0x003dbd00, 0x8
-Unknown_83DBD08:
-	.incbin "baserom.gba", 0x003dbd08, 0x8
+	.align 2
+gSpriteAnim_83DBD00:: @ 83DBD00
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
-gUnknown_083DBD10:: @ 83DBD10
-	.4byte Unknown_83DBD00
-	.4byte Unknown_83DBD08
+	.align 2
+gSpriteAnim_83DBD08:: @ 83DBD08
+	obj_image_anim_frame 4, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_83DBD10:: @ 83DBD10
+	.4byte gSpriteAnim_83DBD00
+	.4byte gSpriteAnim_83DBD08
 
 	.align 2
 gSpriteTemplate_83DBD18:: @ 83DBD18
@@ -343,13 +394,21 @@ gSpriteTemplate_83DBDE4:: @ 83DBDE4
 gUnknown_083DBDFC:: @ 83DBDFC
 	.incbin "graphics/unknown/unknown_3DBDFC.gbapal"
 
+	.align 1
 gUnknown_083DBE1C:: @ 83DBE1C
-	.incbin "baserom.gba", 0x003dbe1c, 0x24
+	.2byte  0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300
+	.2byte  0x301, 0x301, 0x301, 0x301, 0x301, 0x300, 0x300, 0x300, 0x300
 
 gUnknown_083DBE40:: @ 83DBE40
 	.incbin "graphics/unknown/unknown_3DBE40.gbapal"
 
-	.incbin "baserom.gba", 0x003dbe60, 0x48
+@ unused tilemap?
+	.2byte  0x5036, 0x5037, 0x5038, 0x5039, 0x503A, 0x503B
+	.2byte  0x5046, 0x5047, 0x5048, 0x5049, 0x504A, 0x504B
+	.2byte  0x5056, 0x5057, 0x5058, 0x5059, 0x505A, 0x505B
+	.2byte  0x5030, 0x5031, 0x5032, 0x5033, 0x5034, 0x5035
+	.2byte  0x5040, 0x5041, 0x5042, 0x5043, 0x5044, 0x5045
+	.2byte  0x5050, 0x5051, 0x5052, 0x5053, 0x5054, 0x5055
 
 gUnknown_083DBEA8:: @ 83DBEA8
 	.string "{CLEAR_TO 88}$"
