@@ -11,8 +11,10 @@
 #include "item.h"
 #include "items.h"
 #include "mail.h"
+#include "main.h"
 #include "map_obj_lock.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "rom4.h"
@@ -60,7 +62,6 @@ extern void DoRareCandyItemEffect(u8);
 extern void DoEvolutionStoneItemEffect(u8);
 extern u16 ItemIdToBattleMoveId(u16);
 extern void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
-extern void sub_80F914C(u8, void const *);
 extern void sub_80A3E0C(void);
 extern void TeachMonTMMove(u8);
 extern void sub_80878A8(void);
@@ -112,28 +113,28 @@ void ItemUseOutOfBattle_TMHM(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 
-const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
-const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
+static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
+static const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 
-const struct TextStruct gUnknown_083D61DC[2] =
+static const struct TextStruct gUnknown_083D61DC[2] =
 {
     gSSTidalBetaString,
     gSSTidalBetaString2,
 };
 
-const struct FuncStruct gExitToOverworldFuncList[3] =
+static const MainCallback gExitToOverworldFuncList[] =
 {
     sub_808B020,
     c2_exit_to_overworld_2_switch,
     sub_810B96C,
 };
 
-const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
+static const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
 
-const struct FuncStruct gUnknown_083D61F4[2] =
+static const struct YesNoFuncTable gUnknown_083D61F4 =
 {
-    sub_80C9FC0,
-    CleanUpItemMenuMessage,
+    .yesFunc = sub_80C9FC0,
+    .noFunc = CleanUpItemMenuMessage,
 };
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
@@ -145,8 +146,8 @@ void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
     else
         taskData = ItemId_GetType(gScriptItemId) - 1;
 
-    gTasks[taskId].data[8] = (u32)(gExitToOverworldFuncList[taskData].func) >> 16;
-    gTasks[taskId].data[9] = (u32)(gExitToOverworldFuncList[taskData].func);
+    gTasks[taskId].data[8] = (u32)gExitToOverworldFuncList[taskData] >> 16;
+    gTasks[taskId].data[9] = (u32)gExitToOverworldFuncList[taskData];
     gTasks[taskId].func = HandleItemMenuPaletteFade;
 }
 
@@ -960,7 +961,7 @@ void sub_80C9F80(u8 var)
 {
     DisplayYesNoMenu(7, 7, 1);
     sub_80A3FA0(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
-    sub_80F914C(var, gUnknown_083D61F4);
+    sub_80F914C(var, &gUnknown_083D61F4);
 }
 
 void sub_80C9FC0(u8 var)

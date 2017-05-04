@@ -5,6 +5,7 @@
 #include "items.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
 #include "script.h"
 #include "sound.h"
@@ -36,7 +37,6 @@ extern void sub_813AE0C(u8);
 extern void sub_80F996C(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
 extern void sub_80F98DC(int);
-extern void sub_80F914C(u8, void const *);
 extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
 extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 
@@ -67,7 +67,7 @@ extern u8 gUnknown_08152C75;
 
 extern u32 gUnknown_08406288[];
 extern const struct MenuAction gUnknown_084062C0[];
-extern const struct FuncStruct gUnknown_084062E0[];
+extern const struct YesNoFuncTable gUnknown_084062E0;
 
 void InitPlayerPCMenu(u8 taskId);
 void PlayerPCProcessMenuInput(u8 taskId);
@@ -604,7 +604,7 @@ void sub_813A794(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
         sub_813AD58(65528);
         DisplayYesNoMenu(7, 6, 1);
-        sub_80F914C(taskId, gUnknown_084062E0);
+        sub_80F914C(taskId, &gUnknown_084062E0);
     }
     else
     {
