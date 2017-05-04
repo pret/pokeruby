@@ -150,7 +150,10 @@ gSpriteImageTable_839F178:: @ 839F178
 
 	.align 2
 Unknown_39F180:: @ 839F180
-	.incbin "baserom.gba", 0x0039f180, 0x20
+	subsprite -12,  -8, 2,   0, 16x8
+	subsprite   4,  -8, 2,   2, 8x8
+	subsprite -12,   0, 2,   3, 16x8
+	subsprite   4,   0, 2,   5, 8x8
 
 	.align 2
 gUnknown_0839F1A0:: @ 839F1A0
@@ -158,7 +161,10 @@ gUnknown_0839F1A0:: @ 839F1A0
 
 	.align 2
 Unknown_39F1A8:: @ 39F1A8
-	.incbin "baserom.gba", 0x0039f1a8, 0x20
+	subsprite -32,  -8, 2,   0, 32x8
+	subsprite   0,  -8, 2,   4, 32x8
+	subsprite -32,   0, 2,   8, 32x8
+	subsprite   0,   0, 2,  12, 32x8
 
 	.align 2
 gUnknown_0839F1C8:: @ 839F1C8
@@ -232,13 +238,18 @@ gUnknown_0839F288:: @ 839F288
 	.4byte PokeballGlowEffect_7
 
 gUnknown_0839F2A8:: @ 839F2A8
-	.incbin "baserom.gba", 0x0039f2a8, 0x18
+	.2byte 0, 0
+	.2byte 6, 0
+	.2byte 0, 4
+	.2byte 6, 4
+	.2byte 0, 8
+	.2byte 6, 8
 
 gUnknown_0839F2C0:: @ 839F2C0
-	.incbin "baserom.gba", 0x0039f2c0, 0x4
+	.byte 16, 12, 8, 0
 
 gUnknown_0839F2C4:: @ 839F2C4
-	.incbin "baserom.gba", 0x0039f2c4, 0x4
+	.byte 16, 12, 8, 0
 
 gUnknown_0839F2C8:: @ 839F2C8
 	.space 4
@@ -316,7 +327,7 @@ gUnknown_0839F378:: @ 839F378
 	.4byte sub_8087914
 
 gUnknown_0839F380:: @ 839F380
-	.incbin "baserom.gba", 0x0039f380, 0x8
+	.byte 1, 3, 4, 2, 1
 
 	.align 2
 gUnknown_0839F388:: @ 839F388
@@ -375,15 +386,21 @@ gUnknown_0839F3F8:: @ 839F3F8
 	.4byte sub_8088EB4
 	.4byte sub_8088F10
 	.4byte sub_8088F30
-Unknown_839F41C:
-	.incbin "baserom.gba", 0x0039f41c, 0x18
-Unknown_839F434:
-	.incbin "baserom.gba", 0x0039f434, 0x18
+
+SpriteAffineAnim_839F41C:
+	obj_rot_scal_anim_frame 8, 8, -30, 0
+	obj_rot_scal_anim_frame 28, 28, 0, 30
+	obj_rot_scal_anim_end
+
+SpriteAffineAnim_839F434:
+	obj_rot_scal_anim_frame 256, 256, 64, 0
+	obj_rot_scal_anim_frame -10, -10, 0, 22
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_0839F44C:: @ 839F44C
-	.4byte Unknown_839F41C
-	.4byte Unknown_839F434
+gSpriteAffineAnimTable_0839F44C:: @ 839F44C
+	.4byte SpriteAffineAnim_839F41C
+	.4byte SpriteAffineAnim_839F434
 
 	.align 2
 gUnknown_0839F454:: @ 839F454
@@ -396,4 +413,21 @@ gUnknown_0839F454:: @ 839F454
 	.4byte fishE
 
 gUnknown_0839F470:: @ 839F470
-	.incbin "baserom.gba", 0x0039f470, 0x24
+	.2byte -2
+	.2byte -4
+	.2byte -5
+	.2byte -6
+	.2byte -7
+	.2byte -8
+	.2byte -8
+	.2byte -8
+	.2byte -7
+	.2byte -7
+	.2byte -6
+	.2byte -5
+	.2byte -3
+	.2byte -2
+	.2byte 0
+	.2byte 2
+	.2byte 4
+	.2byte 8
