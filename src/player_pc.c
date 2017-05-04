@@ -677,7 +677,6 @@ void sub_813A9EC(u8 taskId)
     gTasks[taskId].func = sub_813A280;
 }
 
-// seems like it was meant to return data[8] - data[1], but doesn't.
 void sub_813AA30(u8 taskId, u8 arg)
 {
     s16 *data = gTasks[taskId].data;
@@ -701,12 +700,18 @@ void sub_813AA30(u8 taskId, u8 arg)
     {
         sub_813AD58(gSaveBlock1.pcItems[var].itemId);
     }
-    
-    // dead code not getting optimized out what the fuck???
-    {
-    register int data8 asm("r1") = data[8];
-    register int data1 asm("r0") = data[1];
-    asm(""::"r"(data8 - data1));
+
+    /* 
+    THEORY: This check produces essentially dead code, but it might have been working in an earlier build
+    in which case it allows a programmer to easily duplicate items without the use of a debug menu.
+    With the removal of a lot of the debug menus close to release, a programmer may have added this to 
+    help test things with a low key (such as planting a lot of duplicated berries, which requires this lazy "cheat")
+    without bringing the relevent debug menus back. The commented out line is intentionally left in below to show
+    what it may have looked like.
+    */
+    if(data[8] - data[1] > 0) { // this check is arbitrary and used to generate the correct assembly using the subtraction, which is what matters. the 0 check doesn't.
+        //gSaveBlock1.pcItems[data[8]].quantity += 100;
+        gSaveBlock1.pcItems[data[8]].quantity += 0; // do not enforce item cap.
     }
 }
 
