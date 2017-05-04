@@ -1303,13 +1303,16 @@ gSpriteAffineAnim_83D7250:: @ 83D7250
 	obj_rot_scal_anim_end
 
 	.align 2
-@ unused tilemap?
-	.2byte 0x0010, 0x0010, 0x0000, 0x0000, 0x001E, 0x001E
-	.2byte 0x0800, 0x0000, 0x0000, 0x0000, 0x1000, 0x0000
-	.2byte 0x7FFD, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
-	.2byte 0x0B04, 0x0000, 0x0000, 0x0000, 0x0BFC, 0x0000
-	.2byte 0x7FFD, 0x0002, 0x0000, 0x0000, 0xFFE2, 0xFFE2
-	.2byte 0x0800, 0x0000, 0x7FFF, 0x0000, 0x0000, 0x0000
+@ unused
+	obj_rot_scal_anim_frame 16, 16, 0, 0
+	obj_rot_scal_anim_frame 30, 30, 0, 8
+	obj_rot_scal_anim_frame 0, 0, 0, 16
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0, 0, 4, 11
+	obj_rot_scal_anim_frame 0, 0, -4, 11
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_frame -30, -30, 0, 8
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteAffineAnimTable_83D72C0:: @ 83D72C0
@@ -1610,57 +1613,18 @@ gBattleAnimSpriteTemplate_83D76DC:: @ 83D76DC
 	spr_template 10138, 10138, gOamData_837E054, gSpriteAnimTable_83D76D4, NULL, gDummySpriteAffineAnimTable, sub_80D0228
 
 	.align 2
-	@ probably 4 structs of Struct_0202F7D4.
 gUnknown_083D76F4:: @ 83D76F4
-	.2byte 0xFFFA
-	.2byte 0x0004
-	.byte 0x00
-	.byte 0x08
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x000A
-	.2byte 0xFFF6
-	.byte 0x00
-	.byte 0x08
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0xFFFC
-	.2byte 0x0006
-	.byte 0x00
-	.byte 0x08
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF @ terminator?
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame -6, 4, 0, 8
+	obj_rot_scal_anim_frame 10, -10, 0, 8
+	obj_rot_scal_anim_frame -4, 6, 0, 8
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gUnknown_083D7714:: @ 83D7714
-	.2byte 0xFFFC
-	.2byte 0xFFFB 
-	.byte 0x00
-	.byte 0x0C
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0000
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x18
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0004
-	.2byte 0x0005
-	.byte 0x00
-	.byte 0x0C
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF @ terminator?
-	.2byte 0x00
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame -4, -5, 0, 12
+	obj_rot_scal_anim_frame 0, 0, 0, 24
+	obj_rot_scal_anim_frame 4, 5, 0, 12
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteAnim_83D7734:: @ 83D7734
@@ -1703,41 +1667,12 @@ gBattleAnimSpriteTemplate_83D7798:: @ 83D7798
 
 	.align 2
 gUnknown_083D77B0:: @ 83D77B0
-	.2byte 0xFFF6
-	.2byte 0x0009
-	.byte 0x00
-	.byte 0x07
-	.byte 0x00, 0x00 @ padding
-	
-	.2byte 0x0014
-	.2byte 0xFFEC
-	.byte 0x00
-	.byte 0x07
-	.byte 0x00, 0x00 @ padding
-	
-	.2byte 0xFFEC
-	.2byte 0x0014
-	.byte 0x00
-	.byte 0x07
-	.byte 0x00, 0x00 @ padding
-
-	.2byte 0x000A
-	.2byte 0xFFF7
-	.byte 0x00
-	.byte 0x07
-	.byte 0x00, 0x00 @ padding
-	
-	.2byte 0x7FFD
-	.2byte 0x0002
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ padding
-	
-	.2byte 0x7FFF
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ padding
+	obj_rot_scal_anim_frame -10, 9, 0, 7
+	obj_rot_scal_anim_frame 20, -20, 0, 7
+	obj_rot_scal_anim_frame -20, 20, 0, 7
+	obj_rot_scal_anim_frame 10, -9, 0, 7
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_83D77E0:: @ 83D77E0
@@ -1855,17 +1790,8 @@ gBattleAnimSpriteTemplate_83D79A4:: @ 83D79A4
 
 	.align 2
 gUnknown_083D79BC:: @ 83D79BC
-	.2byte 0x0060
-	.2byte 0xFFF3
-	.byte 0x00
-	.byte 0x08
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame 96, -13, 0, 8
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteAnim_83D79CC:: @ 83D79CC
@@ -2077,29 +2003,10 @@ gBattleAnimSpriteTemplate_83D7C90:: @ 83D7C90
 
 	.align 2
 gUnknown_083D7CA8:: @ 83D7CA8
-	.2byte 0xFFF4
-	.2byte 0x0008
-	.byte 0x00
-	.byte 0x04
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0014
-	.2byte 0xFFEC
-	.byte 0x00
-	.byte 0x04
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0xFFF8
-	.2byte 0x000C
-	.byte 0x00
-	.byte 0x04
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame -12, 8, 0, 4
+	obj_rot_scal_anim_frame 20, -20, 0, 4
+	obj_rot_scal_anim_frame -8, 12, 0, 4
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_83D7CC8:: @ 83D7CC8
@@ -3849,49 +3756,16 @@ gBattleAnimSpriteTemplate_83DA88C:: @ 83DA88C
 
 	.align 2
 gUnknown_083DA8A4:: @ 83DA8A4
-	.2byte 0xFFF8
-	.2byte 0x000A
-	.byte 0x00
-	.byte 0x10
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0012
-	.2byte 0xFFEE
-	.byte 0x00
-	.byte 0x10
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0xFFEC
-	.2byte 0x0010
-	.byte 0x00
-	.byte 0x08
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame -8, 10, 0, 16
+	obj_rot_scal_anim_frame 18, -18, 0, 16
+	obj_rot_scal_anim_frame -20, 16, 0, 8
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gUnknown_083DA8C4:: @ 83DA8C4
-	.2byte 0x0040
-	.2byte 0xFFFC
-	.byte 0x00
-	.byte 0x14
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0000
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0xC8
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x7FFF
-	.2byte 0x0000
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00, 0x00 @ struct padding
+	obj_rot_scal_anim_frame 64, -4, 0, 20
+	obj_rot_scal_anim_frame 0, 0, 0, -56
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteTemplate_83DA8DC:: @ 83DA8DC
