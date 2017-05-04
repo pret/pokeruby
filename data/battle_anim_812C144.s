@@ -291,7 +291,7 @@ gUnknown_08402590:: @ 8402590
 
 	.align 2
 gUnknown_084025C0:: @ 84025C0
-	.4byte 0x00FC18E8
+	.byte 0xE8, 0x18, 0xFC, 0x00 @ last could be align padding
 
 	.align 2
 gSpriteAnim_84025C4:: @ 84025C4
@@ -321,7 +321,7 @@ gBattleAnimSpriteTemplate_84025EC:: @ 84025EC
 
 	.align 2
 gUnknown_08402604:: @ 8402604
-	.4byte 0x00285078
+	.byte 0x78, 0x50, 0x28, 0x00 @ last could be align padding
 
 	.align 2
 gUnknown_08402608:: @ 8402608
