@@ -325,7 +325,7 @@ gUnknown_08402604:: @ 8402604
 
 	.align 2
 gUnknown_08402608:: @ 8402608
-	.incbin "baserom.gba", 0x00402608, 0x8
+	.byte 0, 0, 0, 0, 50
 
 	.align 2
 gUnknown_08402610:: @ 8402610
@@ -500,7 +500,7 @@ gSpriteTemplate_84028CC:: @ 84028CC
 
 	.align 2
 gUnknown_084028E4:: @ 84028E4
-	.incbin "baserom.gba", 0x004028e4, 0x30
+	.incbin "graphics/battle_anims/sprites/effect.gbapal"
 
 	.align 2
 gSpriteAnim_8402914:: @ 8402914

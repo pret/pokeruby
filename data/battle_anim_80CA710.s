@@ -1860,7 +1860,9 @@ gBattleAnimSpriteTemplate_83D7A80:: @ 83D7A80
 
 	.align 2
 gUnknown_083D7A98:: @ 83D7A98
-	.incbin "baserom.gba", 0x003d7a98, 0x18
+	obj_rot_scal_anim_frame 0x000A, 0xFFF3, 0x00, 0x0A
+	obj_rot_scal_anim_frame 0xFFF6, 0x000D, 0x00, 0x0A
+	obj_rot_scal_anim_end
 
 	.align 2
 gBattleAnimSpriteTemplate_83D7AB0:: @ 83D7AB0
@@ -3016,15 +3018,25 @@ gBattleAnimSpriteTemplate_83D9D80:: @ 83D9D80
 
 	.align 2
 gUnknown_083D9D98:: @ 83D9D98
-	.incbin "baserom.gba", 0x003d9d98, 0x14
+	.byte 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5
 
 	.align 2
 gBattleAnimSpriteTemplate_83D9DAC:: @ 83D9DAC
 	spr_template 10172, 10172, gOamData_837E074, gSpriteAnimTable_83D9D38, NULL, gDummySpriteAffineAnimTable, sub_80D8700
 
+@ bitfield array
 	.align 2
 gUnknown_083D9DC4:: @ 83D9DC4
-	.incbin "baserom.gba", 0x003d9dc4, 0x28
+	.4byte 0x2001E064
+	.4byte 0x0001E055
+	.4byte 0x1011E0F2
+	.4byte 0x1021E042
+	.4byte 0x0031E0B6
+	.4byte 0x2001E03C
+	.4byte 0x0011E0D6
+	.4byte 0x1001E071
+	.4byte 0x1031E0D2
+	.4byte 0x0021E026
 
 	.align 2
 gSpriteAffineAnim_83D9DEC:: @ 83D9DEC
