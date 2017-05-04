@@ -5,13 +5,18 @@
 
 	.align 2
 gUnknown_083D1624:: @ 83D1624
-	.incbin "baserom.gba", 0x003d1624, 0x20
+	.incbin "graphics/unknown/unknown_3D1624/0.4bpp"
 
 gUnknown_083D1644:: @ 83D1644
-	.incbin "baserom.gba", 0x003d1644, 0xa0
+	.incbin "graphics/unknown/unknown_3D1624/1.4bpp"
+	.incbin "graphics/unknown/unknown_3D1624/2.4bpp"
+	.incbin "graphics/unknown/unknown_3D1624/3.4bpp"
+	.incbin "graphics/unknown/unknown_3D1624/4.4bpp"
+	.incbin "graphics/unknown/unknown_3D1624/5.4bpp"
 
 gUnknown_083D16E4:: @ 83D16E4
-	.incbin "baserom.gba", 0x003d16e4, 0x40
+	.incbin "graphics/unknown/unknown_3D1624/6.4bpp"
+	.incbin "graphics/unknown/unknown_3D1624/7.4bpp"
 
 	.align 2
 gMiscBlank_Pal::
@@ -70,4 +75,4 @@ gUnknown_083D17E2:: @ 83D17E2
 	.string "{SIZE 3}{COLOR_HIGHLIGHT_SHADOW WHITE2 DARK_GREY LIGHT_BLUE}$"
 
 	.align 2
-	.incbin "baserom.gba", 0x003d17ec, 0x20
+	.incbin "graphics/unknown/unknown_3D17EC.gbapal"
