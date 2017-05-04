@@ -114,6 +114,8 @@
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
 
+#define PARTY_SIZE 6
+
 enum {
     NATURE_HARDY,
     NATURE_LONELY,
@@ -376,8 +378,8 @@ struct PokemonStorage
     u8 unkArray[14];
 };
 
-extern struct Pokemon gPlayerParty[6];
-extern struct Pokemon gEnemyParty[6];
+extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern struct Pokemon gEnemyParty[PARTY_SIZE];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

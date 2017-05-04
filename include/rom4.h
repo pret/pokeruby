@@ -100,7 +100,7 @@ void sub_8054164(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 // get_map_light_level_from_warp
 u8 sav1_map_get_light_level(void);
-// get_map_light_from_warp0
+u8 get_map_light_from_warp0(void);
 bool8 is_light_level_1_2_3_5_or_6(u8 a1);
 bool8 is_light_level_1_2_3_or_6(u8 a1);
 u8 is_light_level_8_or_9(u8);

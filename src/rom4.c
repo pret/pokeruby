@@ -932,7 +932,7 @@ void sub_80540D0(s16 *a1, u16 *a2)
 
 void sub_8054164(void)
 {
-    if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !sub_810D32C())
+    if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !IsMirageIslandPresent())
     {
         gUnknown_02029816 = TRUE;
         gUnknown_02029814 = GetMirageIslandMon();

@@ -12,7 +12,7 @@ extern void sub_80FA220(u16);
 extern void sub_80BE8C4(u16);
 extern void sub_8080834(u16);
 extern void UpdatePartyPokerusTime(u16);
-extern void sub_810D2F4(u16);
+extern void UpdateMirageRnd(u16);
 extern void UpdateBirchState(u16);
 extern void sub_810F618(u16);
 
@@ -53,7 +53,7 @@ static void UpdatePerDay(struct Time *time)
         sub_80BE8C4(newDays);
         sub_8080834(newDays);
         UpdatePartyPokerusTime(newDays);
-        sub_810D2F4(newDays);
+        UpdateMirageRnd(newDays);
         UpdateBirchState(newDays);
         sub_810F618(newDays);
         SetRandomLotteryNumber(newDays);

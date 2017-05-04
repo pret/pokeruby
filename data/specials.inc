@@ -209,9 +209,9 @@ gSpecials::
 	.4byte ExitSafariMode
 	.4byte SafariZoneGetPokeblockNameInFeeder
 	.4byte sub_810BAF4
-	.4byte sub_810D32C
+	.4byte IsMirageIslandPresent
 	.4byte UpdateShoalTideFlag
-	.4byte sub_810D3FC
+	.4byte InitBirchState
 	.4byte ScriptGetPokedexInfo
 	.4byte ShowPokedexRatingMessage
 	.4byte DoPCTurnOnEffect
@@ -284,7 +284,7 @@ gSpecials::
 	.4byte sub_80818A4
 	.4byte sub_80818FC
 	.4byte ShowBattleTowerRecords
-	.4byte sub_810D3E8
+	.4byte WaitWeather
 	.4byte sub_810F414
 	.4byte sub_810F424
 	.4byte player_get_direction_lower_nybble

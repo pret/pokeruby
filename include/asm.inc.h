@@ -356,7 +356,7 @@ s16 sub_810CAE4(u8, struct Pokeblock *);
 void sub_810CC80(void);
 
 // asm/time_events.o
-u8 sub_810D32C(void);
+u8 IsMirageIslandPresent(void);
 
 // asm/field_specials.o
 void ResetCyclingRoadChallengeData(void);
