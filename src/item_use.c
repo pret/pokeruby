@@ -115,13 +115,13 @@ void ItemUseOutOfBattle_CannotUse(u8);
 const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 
-const struct TextStruct gUnknown_083D61DC[2] = 
+const struct TextStruct gUnknown_083D61DC[2] =
 {
-	gSSTidalBetaString,
-	gSSTidalBetaString2,
+    gSSTidalBetaString,
+    gSSTidalBetaString2,
 };
 
-const struct FuncStruct gExitToOverworldFuncList[3] = 
+const struct FuncStruct gExitToOverworldFuncList[3] =
 {
 	sub_808B020,
 	c2_exit_to_overworld_2_switch,
@@ -130,10 +130,10 @@ const struct FuncStruct gExitToOverworldFuncList[3] =
 
 const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
 
-const struct FuncStruct gUnknown_083D61F4[2] = 
+const struct FuncStruct gUnknown_083D61F4[2] =
 {
-	sub_80C9FC0,
-	CleanUpItemMenuMessage,
+    sub_80C9FC0,
+    CleanUpItemMenuMessage,
 };
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
@@ -399,7 +399,7 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
                 sub_80C9838(taskId, newDistanceX, newDistanceY); // send coordinates of the item relative to the player
         }
     }
-    sub_80C9720(taskId);  
+    sub_80C9720(taskId);
 
     // hidden item detected?
     if(gTasks[taskId].data[2] == TRUE)
@@ -433,9 +433,9 @@ bool8 sub_80C9688(struct MapConnection *connection, int x, int y)
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
-    
+
     mapHeader = mapconnection_get_mapheader(connection);
-    
+
     switch(connection->direction)
     {
         // same weird temp variable behavior seen in HiddenItemAtPos
@@ -651,7 +651,7 @@ void sub_80C9838(u8 taskId, s16 x, s16 y)
 {
     s16 *data = gTasks[taskId].data;
     s16 var1, var2, var3, var4;
-    
+
     if(data[2] == FALSE)
     {
         data[0] = x;
@@ -666,22 +666,22 @@ void sub_80C9838(u8 taskId, s16 x, s16 y)
             var1 = data[0] * -1; // item is to the left
         else
             var1 = data[0]; // item is to the right
-        
+
         if(data[1] < 0)
             var2 = data[1] * -1; // item is to the north
         else
             var2 = data[1]; // item is to the south
-        
+
         if(x < 0)
             var3 = x * -1;
         else
             var3 = x;
-        
+
         if(y < 0)
             var4 = y * -1;
         else
             var4 = y;
-        
+
         if(var1 + var2 > var3 + var4)
         {
             data[0] = x;
@@ -716,7 +716,7 @@ u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
         abY = itemY * -1;
     else
         abY = itemY;
-    
+
     if(abX > abY)
     {
         if(itemX < 0)
@@ -738,7 +738,7 @@ u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
             if(itemY < 0)
                 return DIR_SOUTH;
             else
-                return DIR_WEST;            
+                return DIR_WEST;
         }
         return DIR_NONE; // should never get here. return something so it doesnt crash.
     }
@@ -761,7 +761,7 @@ void DisplayItemRespondingMessageAndExitItemfinder(u8 taskId)
 void RotatePlayerAndExitItemfinder(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     if(FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
@@ -769,7 +769,7 @@ void RotatePlayerAndExitItemfinder(u8 taskId)
         data[2] = 1;
         data[5] = (data[5] + 1) & 3;
         data[3]++;
-        
+
         if(data[3] == 4)
             DisplayItemMessageOnField(taskId, gOtherText_ItemfinderItemUnderfoot, ExitItemfinder, 0);
     }
@@ -798,7 +798,7 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, GetCoins(), 0, 4);
     StringExpandPlaceholders(gStringVar4, gOtherText_Coins3);
-    
+
     if(!gTasks[taskId].data[2])
     {
         MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
@@ -896,9 +896,9 @@ void ItemUseOutOfBattle_Medicine(u8 taskId)
 void ItemUseOutOfBattle_SacredAsh(u8 taskId)
 {
     u8 i;
-    
+
     gLastFieldPokeMenuOpened = 0;
-    
+
     for(i = 0; i < 6; i++)
     {
         if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0 && GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
@@ -927,13 +927,13 @@ void ItemUseOutOfBattle_PPUp(u8 taskId)
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
     gUnknown_03004AE4 = DoRareCandyItemEffect;
-    sub_80C9D98(taskId);    
+    sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-    
+
     if(gScriptItemId >= ITEM_HM01)
         DisplayItemMessageOnField(taskId, gOtherText_BootedHM, sub_80C9EE4, 1); // HM
     else
@@ -1103,9 +1103,9 @@ void sub_80CA2BC(u8 taskId)
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
     u16 partyId = gUnknown_02024A6A[gUnknown_02024E6C];
-    
+
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-    
+
     if(ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gScriptItemId, partyId, 0) != FALSE)
     {
         DisplayItemMessageOnField(taskId, gOtherText_WontHaveAnyEffect, CleanUpItemMenuMessage, 1);
@@ -1152,9 +1152,9 @@ void ItemUseInBattle_PPRecovery(u8 var)
 }
 
 void unref_sub_80CA448(u8 var)
-{    
+{
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-    
+
     if(ExecuteTableBasedItemEffect__(0, gScriptItemId, 0) == FALSE)
     {
         RemoveBagItem(gScriptItemId, 1);
@@ -1171,7 +1171,7 @@ void unref_sub_80CA448(u8 var)
 void ItemUseInBattle_Escape(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-    
+
     if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == FALSE)
     {
         sub_80C9FDC();

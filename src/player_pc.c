@@ -348,7 +348,7 @@ void sub_813A280(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 var;
-    
+
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if(data[0])
@@ -401,7 +401,7 @@ void sub_813A280(u8 taskId)
             PlaySE(5);
             data[1]++;
             sub_813AE0C(taskId);
-            
+
             if (data[9])
                 MoveMenuCursor(0);
         }
@@ -481,7 +481,7 @@ void sub_813A4B4(u8 taskId)
 
     sub_80F996C(0);
     sub_80F996C(1);
-    
+
     if(!data[6])
     {
         if(gSaveBlock1.pcItems[var].quantity == 1)
@@ -515,7 +515,7 @@ void HandleQuantityRolling(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
-    
+
     if(gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if(data[3] != gSaveBlock1.pcItems[var].quantity)
@@ -577,7 +577,7 @@ void sub_813A6FC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
-    
+
     if(AddBagItem(gSaveBlock1.pcItems[var].itemId, data[3]) == TRUE) // add item works.
     {
         CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
@@ -597,7 +597,7 @@ void sub_813A794(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
-    
+
     if(ItemId_GetImportance(gSaveBlock1.pcItems[var].itemId) == FALSE)
     {
         CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
@@ -624,7 +624,7 @@ void sub_813A83C(u8 taskId)
 void sub_813A878(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
     InitMenu(0, 16, 2, data[4], data[0], 0xD);
     sub_80F98DC(0);
@@ -638,17 +638,17 @@ void sub_813A8F0(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 var;
     u8 usedItemSlots;
-    
+
     if(gMain.newKeys & 0x1 || gMain.newKeys == 0x2)
     {
         RemovePCItem(data[0] + data[1], data[3]);
         var = data[2];
         usedItemSlots = CountUsedPCItemSlots();
         data[2] = usedItemSlots;
-        
+
         if((s16)var != usedItemSlots && (s16)var < data[4] + data[1] && data[1] != 0)
             data[1]--;
-        
+
         sub_813A240(taskId);
         sub_813A9EC(taskId);
         InitMenu(0, 16, 2, data[4], data[0], 0xD);
@@ -658,7 +658,7 @@ void sub_813A8F0(u8 taskId)
 void sub_813A984(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     if(gMain.newKeys & 0x1 || gMain.newKeys == 2)
     {
         sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
@@ -718,7 +718,7 @@ void sub_813AA30(u8 taskId, u8 arg)
 void sub_813AAC4(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int arg5)
 {
     sub_80A4164(gStringVar1, arg1, arg2, arg4);
-    
+
     if(arg5)
         MenuPrint(gUnknown_0840632A, 0x1A, arg3);
     else
@@ -733,7 +733,7 @@ void sub_813AB10(u8 var)
 void sub_813AB28(struct ItemSlot *itemSlot, u8 var, int var2)
 {
     CopyItemName(itemSlot->itemId, gStringVar1);
-    
+
     if(var2)
         MenuPrint(gUnknown_0840631E, 16, var);
     else
@@ -755,7 +755,7 @@ void sub_813AB90(struct ItemSlot *itemSlot, u8 var, int var2)
 void sub_813ABAC(struct ItemSlot *itemSlot, u8 var, int var2)
 {
     sub_813AB28(itemSlot, var, var2);
-    
+
     if(itemSlot->itemId < ITEM_HM01)
         sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
     else
@@ -768,20 +768,20 @@ void sub_813ABE8(u8 taskId)
     u16 i;
     int tempArg;
     u16 j = 0;
-    
+
     // r5 is i and is unsigned 16-bit.
-    
+
     for(i = data[1]; i < data[1] + data[4]; i++)
     {
         j = (i - data[1]) * 2;
-        
+
         if(i != data[2])
         {
             tempArg = 0;
 
             if(data[9] != 0 && i == data[8])
                 tempArg = 1;
-            
+
             switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
             {
                 case 0:
@@ -806,7 +806,7 @@ void sub_813ABE8(u8 taskId)
 beforeLabel:
     if(i - data[1] < 8)
         MenuFillWindowRectWithBlankTile(16, j + 4, 0x1C, 0x12);
-    
+
     switch(data[1])
     {
         default:
