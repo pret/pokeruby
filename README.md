@@ -1,4 +1,4 @@
-# Pokémon Ruby and Sapphire
+# Pokémon Ruby and Sapphire [![Build Status](https://travis-ci.org/pret/pokeruby.svg?branch=master)](https://travis-ci.org/pret/pokeruby)
 
 This is a disassembly of Pokémon Ruby and Sapphire.
 
