@@ -74,7 +74,7 @@ struct AffineAnimFrameCmd
 struct AffineAnimLoopCmd
 {
     s16 type;
-    u16 count;
+    s16 count;
 };
 
 struct AffineAnimJumpCmd
@@ -91,10 +91,14 @@ union AffineAnimCmd
     struct AffineAnimJumpCmd jump;
 };
 
+#define AFFINEANIMCMDTYPE_LOOP 0x7FFD
+#define AFFINEANIMCMDTYPE_JUMP 0x7FFE
+#define AFFINEANIMCMDTYPE_END  0x7FFF
+
 #define AFFINEANIMCMD_FRAME(_xScale, _yScale, _rotation, _duration) \
     {.frame = {.xScale = _xScale, .yScale = _yScale, .rotation = _rotation, .duration = _duration}}
 #define AFFINEANIMCMD_END \
-    {.type = 0x7FFF}
+    {.type = AFFINEANIMCMDTYPE_END}
 
 struct AffineAnimState
 {

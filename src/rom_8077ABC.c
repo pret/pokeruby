@@ -90,13 +90,6 @@ struct BGCnt {
 	u16 size:2;
 };
 
-struct Struct_0202F7D4 {
-	s16 field_0;
-	s16 field_2;
-	u8 field_4;
-	u8 field_5;
-};
-
 #define BG1CNT (*(volatile struct BGCnt*)REG_ADDR_BG1CNT)
 #define BG2CNT (*(volatile struct BGCnt*)REG_ADDR_BG2CNT)
 #define BG3CNT (*(volatile struct BGCnt*)REG_ADDR_BG3CNT)
@@ -168,7 +161,7 @@ void sub_807A8D4(struct Sprite *sprite);
 void sub_807A960(struct Sprite *sprite);
 
 
-EWRAM_DATA struct Struct_0202F7D4 *gUnknown_0202F7D4 = NULL;
+EWRAM_DATA union AffineAnimCmd *gUnknown_0202F7D4 = NULL;
 EWRAM_DATA u32 filler_0202F7D8[3] = {0};
 
 const struct Struct_gUnknown_0837F578 gUnknown_0837F578[][4] = {
@@ -1507,39 +1500,39 @@ void sub_80798F4(struct Task *task, u8 a2, void *a3) {
 
 bool8 sub_807992C(struct Task *task) {
 	gUnknown_0202F7D4 = sub_8079BFC(task->data[13], task->data[14]) + (task->data[7] << 3);
-	switch (gUnknown_0202F7D4->field_0) {
+	switch (gUnknown_0202F7D4->type) {
 	default:
-		if (!gUnknown_0202F7D4->field_5) {
-			task->data[10] = gUnknown_0202F7D4->field_0;
-			task->data[11] = gUnknown_0202F7D4->field_2;
-			task->data[12] = gUnknown_0202F7D4->field_4;
+		if (!gUnknown_0202F7D4->frame.duration) {
+			task->data[10] = gUnknown_0202F7D4->frame.xScale;
+			task->data[11] = gUnknown_0202F7D4->frame.yScale;
+			task->data[12] = gUnknown_0202F7D4->frame.rotation;
 			task->data[7]++;
 			gUnknown_0202F7D4++;
 		}
-		task->data[10] += gUnknown_0202F7D4->field_0;
-		task->data[11] += gUnknown_0202F7D4->field_2;
-		task->data[12] += gUnknown_0202F7D4->field_4;
+		task->data[10] += gUnknown_0202F7D4->frame.xScale;
+		task->data[11] += gUnknown_0202F7D4->frame.yScale;
+		task->data[12] += gUnknown_0202F7D4->frame.rotation;
 		obj_id_set_rotscale(task->data[15], task->data[10], task->data[11], task->data[12]);
 		sub_8079A64(task->data[15]);
-		if (++task->data[8] >= gUnknown_0202F7D4->field_5) {
+		if (++task->data[8] >= gUnknown_0202F7D4->frame.duration) {
 			task->data[8] = 0;
 			task->data[7]++;
 		}
 		break;
 
-	case 0x7ffe:
-		task->data[7] = gUnknown_0202F7D4->field_2;
+	case AFFINEANIMCMDTYPE_JUMP:
+		task->data[7] = gUnknown_0202F7D4->jump.target;
 		break;
 
-	case 0x7ffd:
-		if (gUnknown_0202F7D4->field_2) {
+	case AFFINEANIMCMDTYPE_LOOP:
+		if (gUnknown_0202F7D4->loop.count) {
 			if (task->data[9]) {
 				if (!--task->data[9]) {
 					task->data[7]++;
 					break;
 				}
 			} else {
-				task->data[9] = gUnknown_0202F7D4->field_2;
+				task->data[9] = gUnknown_0202F7D4->loop.count;
 			}
 			if (!task->data[7]) {
 				break;
@@ -1547,7 +1540,7 @@ bool8 sub_807992C(struct Task *task) {
 			for (;;) {
 				task->data[7]--;
 				gUnknown_0202F7D4--;
-				if (gUnknown_0202F7D4->field_0 == 0x7ffd) {
+				if (gUnknown_0202F7D4->type == AFFINEANIMCMDTYPE_LOOP) {
 					task->data[7]++;
 					return TRUE;
 				}
