@@ -35,8 +35,7 @@ gUnknown_08396FA8:: @ 8396FA8
 	.4byte DroughtPaletteData_3
 	.4byte DroughtPaletteData_4
 	.4byte DroughtPaletteData_5
-	@.4byte unk_20000000
-	.incbin "baserom.gba", 0x00396fc0, 0x4 @ pointer to unk_2000000?
+	.4byte 0x2000000
 
 	.align 2
 gUnknown_08396FC4:: @ 8396FC4
@@ -68,7 +67,38 @@ gUnknown_083970B8:: @ 83970B8
 	.4byte nullsub_39
 
 gUnknown_083970C8:: @ 83970C8
-	.incbin "baserom.gba", 0x003970c8, 0x20
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 2
+	.byte 1
+	.byte 2
+	.byte 2
+	.byte 2
+	.byte 2
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 2
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
 
 	.align 2
 gUnknown_083970E8:: @ 83970E8
@@ -209,11 +239,14 @@ gSpriteAnimTable_839AA98:: @ 839AA98
 gSpriteTemplate_839AAA4:: @ 839AAA4
 	spr_template 4614, 4608, gOamData_839AA68, gSpriteAnimTable_839AA98, NULL, gDummySpriteAffineAnimTable, sub_807E5C0
 
+	.align 1
 gUnknown_0839AABC:: @ 839AABC
-	.incbin "baserom.gba", 0x0039aabc, 0x8
+	.2byte -104, 208
+	.2byte -160, 320
 
+	.align 1
 gUnknown_0839AAC4:: @ 839AAC4
-	.incbin "baserom.gba", 0x0039aac4, 0x8
+	.2byte 18, 7, 12, 10
 
 	.align 2
 gUnknown_0839AACC:: @ 839AACC
@@ -249,8 +282,15 @@ gSpriteAnimTable_839AAFC:: @ 839AAFC
 gSpriteTemplate_839AB04:: @ 839AB04
 	spr_template 0xFFFF, 4608, gOamData_839AAD4, gSpriteAnimTable_839AAFC, gSpriteImageTable_839AADC, gDummySpriteAffineAnimTable, sub_807ED48
 
-	.align 2
-	.incbin "baserom.gba", 0x0039ab1c, 0x10
+@ unused data
+	.2byte   0
+	.2byte   6
+	.2byte   6
+	.2byte  12
+	.2byte  18
+	.2byte  42
+	.2byte 300
+	.2byte 300
 
 	.align 2
 gOamData_839AB2C:: @ 839AB2C
@@ -390,11 +430,24 @@ gSpriteTemplate_839AC3C:: @ 839AC3C
 gUnknown_0839AC54:: @ 839AC54
 	obj_tiles WeatherSandstormTiles, 0xA00, 0x1204
 
+	.align 1
 gUnknown_0839AC5C:: @ 839AC5C
-	.incbin "baserom.gba", 0x0039ac5c, 0xc
+	.2byte   0
+	.2byte 120
+	.2byte  80
+	.2byte 160
+	.2byte  40
+	.2byte   0
 
 gUnknown_0839AC68:: @ 839AC68
-	.incbin "baserom.gba", 0x0039ac68, 0x8
+	.byte 40
+	.byte 90
+	.byte 60
+	.byte 90
+	.byte  2
+	.byte 60
+	.byte 40
+	.byte 30
 
 	.align 2
 gUnknown_0839AC70:: @ 839AC70
