@@ -645,7 +645,7 @@ static void ScriptCmd_end(void)
             m4aMPlayStop(&gMPlay_SE2);
         }
     }
-    
+
     // the SE has halted, so set the SE Frame Counter to 0 and continue.
     gSoundAnimFramesToWait = 0;
 
