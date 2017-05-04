@@ -1811,7 +1811,10 @@ gSpriteTemplate_83D79E8:: @ 83D79E8
 	spr_template 10207, 10207, gOamData_837DF2C, gSpriteAnimTable_83D79E4, NULL, gDummySpriteAffineAnimTable, sub_80D1A70
 
 gUnknown_083D7A00:: @ 83D7A00
-	.incbin "baserom.gba", 0x003d7a00, 0x8
+	.byte 30, 28
+	.byte -20, 24
+	.byte 16, 26
+	.byte -10, 28
 
 	.align 2
 gSpriteAnim_83D7A08:: @ 83D7A08
@@ -1840,7 +1843,12 @@ gBattleAnimSpriteTemplate_83D7A44:: @ 83D7A44
 
 	.align 2
 gUnknown_083D7A5C:: @ 83D7A5C
-	.incbin "baserom.gba", 0x003d7a5c, 0xc
+	.2byte 10206
+	.2byte 9999
+	.2byte 9998
+	.2byte 9997
+	.2byte 9996
+	.2byte 0
 
 	.align 2
 gBattleAnimSpriteTemplate_83D7A68:: @ 83D7A68
@@ -2562,10 +2570,10 @@ gBattleAnimSpriteTemplate_83D977C:: @ 83D977C
 
 	.align 2
 gUnknown_083D9794:: @ 83D9794
-	.incbin "baserom.gba", 0x003d9794, 0x10
+	.byte -1, -1, 0, 1, 1, 0, 0, -1, -1, 1, 1, 0, 0, -1, 0, 1
 
 gUnknown_083D97A4:: @ 83D97A4
-	.incbin "baserom.gba", 0x003d97a4, 0x10
+	.byte -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1
 
 	.align 2
 gSpriteAnim_83D97B4:: @ 83D97B4
@@ -2682,7 +2690,22 @@ gBattleAnimSpriteTemplate_83D9950:: @ 83D9950
 
 	.align 2
 gUnknown_083D9968:: @ 83D9968
-	.incbin "baserom.gba", 0x003d9968, 0x20
+	.byte  58, -60
+	.byte -56, -36
+	.byte   8, -56
+	.byte -16,  56
+	.byte  58, -10
+	.byte -58,  10
+	.byte  48, -18
+	.byte  -8,  56
+	.byte  16, -56
+	.byte -58, -42
+	.byte  58,  30
+	.byte -48,  40
+	.byte  12, -48
+	.byte  48, -12
+	.byte -56,  18
+	.byte  48,  48
 
 	.align 2
 gSpriteAnim_83D9988:: @ 83D9988
@@ -2987,7 +3010,7 @@ gBattleAnimSpriteTemplate_83D9D54:: @ 83D9D54
 
 	.align 2
 gUnknown_083D9D6C:: @ 83D9D6C
-	.incbin "baserom.gba", 0x003d9d6c, 0x14
+	.byte 0, 1, 2, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 8, 8, 8, 9
 
 	.align 2
 gBattleAnimSpriteTemplate_83D9D80:: @ 83D9D80
@@ -3755,7 +3778,11 @@ gSpriteAnimTable_83DA85C:: @ 83DA85C
 
 	.align 2
 Unknown_3DA860:: @ 83DA860
-	.incbin "baserom.gba", 0x3da860, 0x28
+	obj_rot_scal_anim_frame 0, 0, 4, 4
+	obj_rot_scal_anim_frame 0, 0, -4, 8
+	obj_rot_scal_anim_frame 0, 0, 4, 4
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gUnknown_083DA888:: @ 83DA888
