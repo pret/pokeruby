@@ -264,7 +264,7 @@ gUnknown_083B4EC4:: @ 83B4EC4
 gUnknown_083B5558:: @ 83B5558
 	.string "{CLEAR_TO 0}$"
 
-	.incbin "baserom.gba", 0x3b555c, 0x20
+	.incbin "graphics/unknown/unknown_3B555C.bin"
 
 	.align 2
 gOamData_83B557C:: @ 83B557C
@@ -367,7 +367,16 @@ gUnknown_083B57A4:: @ 83B57A4
 	spr_template 0xFFFF, 0, gOamData_83B557C, NULL, gSpriteImageTable_83B5594, gDummySpriteAffineAnimTable, nullsub_59
 
 gUnknown_083B57BC:: @ 83B57BC
-	.incbin "baserom.gba", 0x003b57bc, 0x28
+	.byte    0,   0,   0,   0
+	.byte  187,   3, 213,   3
+	.byte  190,   3, 216,   3
+	.byte  193,   3, 219,   3
+	.byte  196,   3, 222,   3
+	.byte  199,   3, 225,   3
+	.byte  202,   3, 228,   3
+	.byte  205,   3, 231,   3
+	.byte  208,   3, 234,   3
+	.byte  211,   2, 237,   2
 
 	.align 2
 gUnknown_083B57E4:: @ 83B57E4

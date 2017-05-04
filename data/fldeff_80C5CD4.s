@@ -5,7 +5,7 @@
 
 	.align 2
 gUnknown_083D1898:: @ 83D1898
-	obj_pal gUnknownPal_083D190C, 0x0080
+	obj_tiles gUnknownGfx_083D190C, 0x80, 0
 
 	.align 2
 gUnknown_083D18A0:: @ 83D18A0
@@ -39,10 +39,8 @@ gUnknownPal_083D18EC::
 	.incbin "graphics/unknown/unknown_3D18EC.gbapal"
 
 	.align 2
-gUnknownPal_083D190C::
-	.incbin "graphics/unknown/unknown_3D190C.gbapal"
-
-	.incbin "baserom.gba", 0x003d192c, 0x60
+gUnknownGfx_083D190C::
+	.incbin "graphics/unknown/unknown_3D190C.4bpp"
 
 	.align 2
 gSpriteImage_83D198C:: @ 83D198C
@@ -64,8 +62,7 @@ gSpriteImage_83D1B0C:: @ 83D1B0C
 gSpriteImage_83D1B8C:: @ 83D1B8C
 	.incbin "graphics/unknown_sprites/83D259C/4.4bpp"
 
-	.align 2
-	.incbin "baserom.gba", 0x003d1c0c, 0x20
+	.space 32
 
 	.align 2
 gFieldEffectObjectPalette7: @ 83D1C2C
