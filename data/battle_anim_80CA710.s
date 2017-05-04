@@ -4018,17 +4018,8 @@ gBattleAnimSpriteTemplate_83DACE8:: @ 83DACE8
 
 	.align 2
 Unknown_3DAD00:: @ 83DAD00
-	.2byte 0xFFF0
-	.2byte 0x0000
-	.byte 0x09
-	.byte 0x40
-	.byte 0x00, 0x00 @ struct padding
-	
-	.2byte 0x0010
-	.2byte 0x0000
-	.byte 0x89
-	.byte 0x40
-	.byte 0x00, 0x00 @ struct padding
+	subsprite -16,   0, 1,   0, 32x16
+	subsprite  16,   0, 1,   8, 32x16
 
 	.align 2
 gUnknown_083DAD10:: @ 83DAD10
