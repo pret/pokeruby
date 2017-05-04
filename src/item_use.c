@@ -123,9 +123,9 @@ const struct TextStruct gUnknown_083D61DC[2] =
 
 const struct FuncStruct gExitToOverworldFuncList[3] =
 {
-	sub_808B020,
-	c2_exit_to_overworld_2_switch,
-	sub_810B96C,
+    sub_808B020,
+    c2_exit_to_overworld_2_switch,
+    sub_810B96C,
 };
 
 const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
