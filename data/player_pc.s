@@ -43,7 +43,7 @@ gUnknown_084062E8:: @ 84062E8
 	.align 2
 gNewGamePCItems:: @ 84062F0
 	.2byte ITEM_POTION, 1
-	.2byte 0, 0
+	.2byte ITEM_NONE, 0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8

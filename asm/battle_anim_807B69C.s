@@ -342,7 +342,7 @@ sub_807B920: @ 807B920
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, _0807B9B0 @ =gUnknown_0202F7C9
+	ldr r4, _0807B9B0 @ =gBattleAnimEnemyMonIndex
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8077ABC
@@ -359,7 +359,7 @@ sub_807B920: @ 807B920
 	ldr r2, _0807B9B8 @ =0xffdc0000
 	adds r0, r2
 	lsrs r4, r0, 16
-	bl sub_8076BE0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B95E
@@ -407,7 +407,7 @@ _0807B95E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B9B0: .4byte gUnknown_0202F7C9
+_0807B9B0: .4byte gBattleAnimEnemyMonIndex
 _0807B9B4: .4byte 0xffe00000
 _0807B9B8: .4byte 0xffdc0000
 _0807B9BC: .4byte 0xfffa0000
@@ -634,7 +634,7 @@ _0807BB6C:
 	adds r0, 0x2
 	strh r3, [r0]
 	adds r0, r2, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _0807BB7E:
 	pop {r4}
 	pop {r0}
@@ -849,7 +849,7 @@ _0807BD1A:
 	b _0807BD28
 _0807BD20:
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _0807BD4A
 _0807BD28:
 	ldr r0, _0807BD50 @ =gBattleAnimArgs
@@ -886,13 +886,13 @@ move_anim_start_t2: @ 807BD5C
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _0807BD98 @ =gUnknown_0202F7C8
+	ldr r0, _0807BD98 @ =gBattleAnimPlayerMonIndex
 	strb r4, [r0]
-	ldr r0, _0807BD9C @ =gUnknown_0202F7C9
+	ldr r0, _0807BD9C @ =gBattleAnimEnemyMonIndex
 	strb r4, [r0]
 	ldr r0, _0807BDA0 @ =gBattleAnims_StatusConditions
 	movs r2, 0
-	bl move_something
+	bl DoMoveAnim
 	ldr r0, _0807BDA4 @ =sub_807BDAC
 	movs r1, 0xA
 	bl CreateTask
@@ -908,8 +908,8 @@ move_anim_start_t2: @ 807BD5C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BD98: .4byte gUnknown_0202F7C8
-_0807BD9C: .4byte gUnknown_0202F7C9
+_0807BD98: .4byte gBattleAnimPlayerMonIndex
+_0807BD9C: .4byte gBattleAnimEnemyMonIndex
 _0807BDA0: .4byte gBattleAnims_StatusConditions
 _0807BDA4: .4byte sub_807BDAC
 _0807BDA8: .4byte gTasks
@@ -920,10 +920,10 @@ sub_807BDAC: @ 807BDAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0807BDF0 @ =gUnknown_0202F7AC
+	ldr r0, _0807BDF0 @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _0807BDF4 @ =gUnknown_0202F7B1
+	ldr r0, _0807BDF4 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807BDEA
@@ -951,8 +951,8 @@ _0807BDEA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BDF0: .4byte gUnknown_0202F7AC
-_0807BDF4: .4byte gUnknown_0202F7B1
+_0807BDF0: .4byte gAnimScriptCallback
+_0807BDF4: .4byte gAnimScriptActive
 _0807BDF8: .4byte gTasks
 _0807BDFC: .4byte 0x02017810
 	thumb_func_end sub_807BDAC

@@ -112,36 +112,29 @@ void ItemUseOutOfBattle_TMHM(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 
-static const u8 Unknown_83D619C[] = _(
-    "この　チケットで　ふねに　のりほうだい\n"
-    "はやく　のってみたいな"
-);
+const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
+const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 
-static const u8 Unknown_83D61BC[] = _(
-    "この　チケットで　ふねに　のりほうだい\n"
-    "はやく　のってみたいな"
-);
-
-static const u8 *const gUnknown_083D61DC[] =
+const struct TextStruct gUnknown_083D61DC[2] = 
 {
-    Unknown_83D619C,
-    Unknown_83D61BC,
+	gSSTidalBetaString,
+	gSSTidalBetaString2,
 };
 
-static void (* const gExitToOverworldFuncList[])(void) =
+const struct FuncStruct gExitToOverworldFuncList[3] = 
 {
-    sub_808B020,
-    c2_exit_to_overworld_2_switch,
-    sub_810B96C,
+	sub_808B020,
+	c2_exit_to_overworld_2_switch,
+	sub_810B96C,
 };
 
-static const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
+const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
 
-static void (* const gUnknown_083D61F4[])(u8) =
+const struct FuncStruct gUnknown_083D61F4[2] = 
 {
-    sub_80C9FC0,
-    CleanUpItemMenuMessage,
-};   
+	sub_80C9FC0,
+	CleanUpItemMenuMessage,
+};
 
 void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
@@ -152,8 +145,8 @@ void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
     else
         taskData = ItemId_GetType(gScriptItemId) - 1;
 
-    gTasks[taskId].data[8] = (u32)gExitToOverworldFuncList[taskData] >> 16;
-    gTasks[taskId].data[9] = (u32)gExitToOverworldFuncList[taskData];
+    gTasks[taskId].data[8] = (u32)(gExitToOverworldFuncList[taskData].func) >> 16;
+    gTasks[taskId].data[9] = (u32)(gExitToOverworldFuncList[taskData].func);
     gTasks[taskId].func = HandleItemMenuPaletteFade;
 }
 
@@ -835,11 +828,11 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
     if(gTasks[taskId].data[2] == 0)
     {
         MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BB8, 1);
+        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BB8, 1);
     }
     else
     {
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BD8, 0);
+        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BD8, 0);
     }
 }
 

@@ -2531,7 +2531,7 @@ _080AC730:
 	adds r0, r4, 0
 	bl sub_80B29B4
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl ExecuteMoveAnim
 	ldr r1, _080AC778 @ =gTasks
 	mov r3, r8
 	lsls r0, r3, 2
@@ -2544,10 +2544,10 @@ _080AC730:
 	.align 2, 0
 _080AC778: .4byte gTasks
 _080AC77C:
-	ldr r0, _080AC7B8 @ =gUnknown_0202F7AC
+	ldr r0, _080AC7B8 @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _080AC7BC @ =gUnknown_0202F7B1
+	ldr r0, _080AC7BC @ =gAnimScriptActive
 	ldrb r4, [r0]
 	cmp r4, 0
 	beq _080AC790
@@ -2572,8 +2572,8 @@ _080AC790:
 	strh r0, [r1, 0x8]
 	bl _080AD8CA
 	.align 2, 0
-_080AC7B8: .4byte gUnknown_0202F7AC
-_080AC7BC: .4byte gUnknown_0202F7B1
+_080AC7B8: .4byte gAnimScriptCallback
+_080AC7BC: .4byte gAnimScriptActive
 _080AC7C0: .4byte 0x02019204
 _080AC7C4: .4byte gTasks
 _080AC7C8:

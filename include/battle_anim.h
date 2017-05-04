@@ -50,9 +50,9 @@ struct UnknownStruct3
     u8 filler1[0xB];
 };
 
-void move_something(const u8 *const moveAnims[], u16 b, u8 c);
+void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 b_side_obj__get_some_boolean(u8 a);
 void sub_8076034(u8, u8);
-bool8 sub_8076BE0(void);
+bool8 IsContest(void);
 
 #endif

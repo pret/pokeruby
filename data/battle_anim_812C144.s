@@ -189,7 +189,10 @@ gBattleAnimSpriteTemplate_84023E8:: @ 84023E8
 
 	.align 2
 gUnknown_08402400:: @ 8402400
-	.incbin "baserom.gba", 0x00402400, 0x20
+	obj_rot_scal_anim_frame -12, 8, 0, 4
+	obj_rot_scal_anim_frame 20, -20, 0, 4
+	obj_rot_scal_anim_frame -8, 12, 0, 4
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteAnim_8402420:: @ 8402420
@@ -238,7 +241,10 @@ gBattleAnimSpriteTemplate_8402498:: @ 8402498
 
 	.align 2
 gUnknown_084024B0:: @ 84024B0
-	.incbin "baserom.gba", 0x004024b0, 0x20
+	obj_rot_scal_anim_frame -12, 20, 0, 8
+	obj_rot_scal_anim_frame 12, -20, 0, 8
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_84024D0:: @ 84024D0
@@ -254,11 +260,21 @@ gSpriteTemplate_8402500:: @ 8402500
 
 	.align 2
 gUnknown_08402518:: @ 8402518
-	.incbin "baserom.gba", 0x00402518, 0x28
+	obj_rot_scal_anim_frame 8, -8, 0, 12
+	obj_rot_scal_anim_frame -16, 16, 0, 12
+	obj_rot_scal_anim_frame 8, -8, 0, 12
+	obj_rot_scal_anim_loop 1
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gUnknown_08402540:: @ 8402540
-	.incbin "baserom.gba", 0x00402540, 0x38
+	obj_rot_scal_anim_frame 0, 6, 0, 20
+	obj_rot_scal_anim_frame 0, 0, 0, 20
+	obj_rot_scal_anim_frame 0, -18, 0, 6
+	obj_rot_scal_anim_frame -18, -18, 0, 3
+	obj_rot_scal_anim_frame 0, 0, 0, 15
+	obj_rot_scal_anim_frame 4, 4, 0, 13
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_8402578:: @ 8402578
@@ -266,11 +282,16 @@ gBattleAnimSpriteTemplate_8402578:: @ 8402578
 
 	.align 2
 gUnknown_08402590:: @ 8402590
-	.incbin "baserom.gba", 0x00402590, 0x30
+	obj_rot_scal_anim_frame 0, 6, 0, 20
+	obj_rot_scal_anim_frame 0, 0, 0, 20
+	obj_rot_scal_anim_frame 7, -30, 0, 6
+	obj_rot_scal_anim_frame 0, 0, 0, 20
+	obj_rot_scal_anim_frame -2, 3, 0, 20
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gUnknown_084025C0:: @ 84025C0
-	.incbin "baserom.gba", 0x004025c0, 0x4
+	.byte 0xE8, 0x18, 0xFC, 0x00 @ last could be align padding
 
 	.align 2
 gSpriteAnim_84025C4:: @ 84025C4
@@ -300,13 +321,18 @@ gBattleAnimSpriteTemplate_84025EC:: @ 84025EC
 
 	.align 2
 gUnknown_08402604:: @ 8402604
-	.incbin "baserom.gba", 0x00402604, 0x4
+	.byte 0x78, 0x50, 0x28, 0x00 @ last could be align padding
 
+	.align 2
 gUnknown_08402608:: @ 8402608
 	.incbin "baserom.gba", 0x00402608, 0x8
 
+	.align 2
 gUnknown_08402610:: @ 8402610
-	.incbin "baserom.gba", 0x00402610, 0x20
+	obj_rot_scal_anim_frame 0, -15, 0, 7
+	obj_rot_scal_anim_frame 0, 15, 0, 7
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_8402630:: @ 8402630
@@ -352,7 +378,8 @@ gBattleAnimSpriteTemplate_84026A4:: @ 84026A4
 	spr_template 10238, 10238, gOamData_837DF24, gSpriteAnimTable_8402698, NULL, gDummySpriteAffineAnimTable, sub_812E7A0
 
 	.align 2
-	.incbin "baserom.gba", 0x004026bc, 0x20
+@ probably unknown palette
+	.incbin "graphics/unknown/unknown_4026BC.gbapal"
 
 	.align 2
 gSpriteAnim_84026DC:: @ 84026DC
@@ -383,7 +410,12 @@ gBattleAnimSpriteTemplate_8402738:: @ 8402738
 
 	.align 2
 gUnknown_08402750:: @ 8402750
-	.incbin "baserom.gba", 0x00402750, 0x30
+	obj_rot_scal_anim_frame 16, 0, 0, 4
+	obj_rot_scal_anim_frame 0, -3, 0, 16
+	obj_rot_scal_anim_frame 4, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 24
+	obj_rot_scal_anim_frame -5, 3, 0, 16
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteAffineAnim_8402780:: @ 8402780
@@ -457,12 +489,16 @@ gBattleAnimSpriteTemplate_8402894:: @ 8402894
 
 	.align 2
 gUnknown_084028AC:: @ 84028AC
-	.incbin "baserom.gba", 0x004028ac, 0x20
+	obj_rot_scal_anim_frame -16, 16, 0, 6
+	obj_rot_scal_anim_frame 16, -16, 0, 12
+	obj_rot_scal_anim_frame -16, 16, 0, 6
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gSpriteTemplate_84028CC:: @ 84028CC
 	spr_template 10243, 10243, gOamData_837DF24, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_812FF94
 
+	.align 2
 gUnknown_084028E4:: @ 84028E4
 	.incbin "baserom.gba", 0x004028e4, 0x30
 
@@ -521,7 +557,9 @@ gBattleAnimSpriteTemplate_84029C4:: @ 84029C4
 
 	.align 2
 gUnknown_084029DC:: @ 84029DC
-	.incbin "baserom.gba", 0x004029dc, 0x18
+	obj_rot_scal_anim_frame 0, -16, 0, 6
+	obj_rot_scal_anim_frame 0, 16, 0, 6
+	obj_rot_scal_anim_end 0
 
 	.align 2
 gBattleAnimSpriteTemplate_84029F4:: @ 84029F4
@@ -597,4 +635,9 @@ gBattleAnimSpriteTemplate_8402B10:: @ 8402B10
 
 	.align 2
 gUnknown_08402B28:: @ 8402B28
-	.incbin "baserom.gba", 0x00402b28, 0x30
+	obj_rot_scal_anim_frame 0, 16, 0, 4
+	obj_rot_scal_anim_frame -2, 0, 0, 8
+	obj_rot_scal_anim_frame 0, 4, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 24
+	obj_rot_scal_anim_frame 1, -5, 0, 16
+	obj_rot_scal_anim_end 0

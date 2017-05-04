@@ -2,6 +2,7 @@
 #include "asm.h"
 #include "field_screeneffect.h"
 #include "item.h"
+#include "items.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -10,27 +11,34 @@
 #include "string_util.h"
 #include "task.h"
 
+#define NEW_GAME_PC_ITEMS(i, type) ((u16)(gNewGamePCItems + type)[i * 2])
+
+// type as in define above
+enum
+{
+    ITEM_ID,
+    QUANTITY,
+};
+
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
-extern void ItemStorageMenuProcessInput(u8);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
 extern u8 sub_813AF3C(void);
 extern void sub_813AF78(void);
-extern void sub_813A240(u8);
 extern void sub_813B108(u8);
 extern void sub_813B174(u8);
 extern void sub_80A6A30(void);
 extern u8 sub_807D770(void);
-extern void sub_813A280(u8);
 extern void sub_813AE6C(u8, u8);
-extern void sub_813A240(u8);
 extern void sub_813AD58(u16);
 extern void sub_813AE0C(u8);
-extern void sub_813ABE8(u8);
-extern void sub_813AA30(u8, u8);
-extern void sub_813A4B4(u8);
-extern void sub_813A468(u8);
+extern void sub_80F996C(u8);
+extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
+extern void sub_80F98DC(int);
+extern void sub_80F914C(u8, void const *);
+extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
+extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 
 extern u8 gOtherText_NoItems[];
 
@@ -41,8 +49,16 @@ extern u8 gOtherText_NoMailHere[];
 
 extern u8 *gUnknown_02039314;
 extern struct MenuAction gUnknown_08406298[];
+
 extern u8 gUnknown_084062B8[];
 extern u8 gUnknown_084062BC[];
+extern u8 gUnknown_0840632A[];
+extern u8 gUnknown_08406327[];
+extern u8 gUnknown_08406330[];
+extern u8 gUnknown_0840631E[];
+extern u8 gUnknown_08406318[];
+extern u8 gOtherText_CancelNoTerminator[];
+
 extern u8 gUnknown_030007B4;
 extern u8 unk_201FE00[];
 
@@ -51,24 +67,34 @@ extern u8 gUnknown_08152C75;
 
 extern u32 gUnknown_08406288[];
 extern const struct MenuAction gUnknown_084062C0[];
+extern const struct FuncStruct gUnknown_084062E0[];
 
 void InitPlayerPCMenu(u8 taskId);
 void PlayerPCProcessMenuInput(u8 taskId);
 void InitItemStorageMenu(u8);
 void ItemStorageMenuPrint(u8 *);
+void ItemStorageMenuProcessInput(u8);
+void sub_813A280(u8);
+void sub_813A240(u8);
+void sub_813A4B4(u8);
+void sub_813A468(u8);
+void HandleQuantityRolling(u8);
+void sub_813A6FC(u8);
+void sub_813A794(u8);
+void sub_813A8F0(u8);
+void sub_813A984(u8);
+void sub_813A9EC(u8);
+void sub_813AA30(u8, u8);
+void sub_813ABE8(u8);
 
 void NewGameInitPCItems(void)
 {
-    u8 i = 0;
+    u8 i;
 
-    ClearItemSlots(gSaveBlock1.pcItems, 0x32);
-
-    while (gNewGamePCItems[i * 2] && (gNewGamePCItems + 1)[i * 2])
-    {
-        if (AddPCItem(gNewGamePCItems[i * 2], (gNewGamePCItems + 1)[i * 2]) != 1)
-            break;
-        i++;
-    }
+    // because Game Freak don't know how to use a struct or a 2d array
+    for(i = 0, ClearItemSlots(gSaveBlock1.pcItems, ARRAY_COUNT(gSaveBlock1.pcItems)); NEW_GAME_PC_ITEMS(i, ITEM_ID) && NEW_GAME_PC_ITEMS(i, QUANTITY) &&
+        AddPCItem(NEW_GAME_PC_ITEMS(i, ITEM_ID), NEW_GAME_PC_ITEMS(i, QUANTITY)) == TRUE; i++)
+            ;
 }
 
 void BedroomPC(void)
@@ -318,354 +344,124 @@ void sub_813A240(u8 taskId)
         unk_201FE00[1] = unk_201FE00[3] + 1;
 }
 
-#ifdef NONMATCHING
 void sub_813A280(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-
-    if (gMain.newAndRepeatedKeys & 0x40)
+    s16 var;
+    
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (data[0])
+        if(data[0])
         {
             PlaySE(5);
             data[0] = MoveMenuCursor(-1);
+            var = data[1] + data[0];
             if (!data[9])
             {
-                if (data[1] + data[0] == data[2])
+                if (var == data[2])
                 {
                     sub_813AD58(0xFFFF);
-                    return;
                 }
-                sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
-            }
-            return;
-        }
-        if (!data[1])
-            return;
-        PlaySE(5);
-        sub_813AE0C(taskId);
-        if (data[9])
-            MoveMenuCursor(0);
-        return;
-    }
-    if (!(gMain.newAndRepeatedKeys & 0x80))
-    {
-        if (gMain.newKeys & 0x4)
-        {
-            if (!data[9])
-            {
-                if (data[0] + data[1] != data[2])
+                else
                 {
-                    PlaySE(5);
-                    data[9] = 1;
-                    data[8] = data[0] + data[1];
-                    sub_813AD58(0xFFF7);
+                    sub_813AD58(gSaveBlock1.pcItems[var].itemId);
                 }
-                sub_813ABE8(taskId);
-                return;
             }
+        }
+        else // _0813A2E4
+        {
+            if (!data[1])
+                return;
             PlaySE(5);
+            data[1]--;
+            sub_813AE0C(taskId);
+            // probably further down
+            if (data[9])
+                MoveMenuCursor(0);
+        }
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _0813A306
+    {
+        if(data[0] != data[4] - 1)
+        {
+            PlaySE(5);
+            data[0] = MoveMenuCursor(1);
+            var = data[1] + data[0];
+
+            if(data[9])
+                return;
+
+            if (var == data[2])
+                sub_813AD58(0xFFFF); // probably further down
+            else
+                sub_813AD58(gSaveBlock1.pcItems[var].itemId);
+        }
+        else if(data[1] + data[0] != data[2])
+        {
+            PlaySE(5);
+            data[1]++;
+            sub_813AE0C(taskId);
+            
+            if (data[9])
+                MoveMenuCursor(0);
+        }
+    }
+    else if(gMain.newKeys & SELECT_BUTTON) // _0813A3A0
+    {
+        if (!data[9])
+        {
+            if (data[0] + data[1] != data[2])
+            {
+                PlaySE(5);
+                data[9] = 1;
+                data[8] = data[1] + data[0];
+                sub_813AD58(0xFFF7);
+            }
+            // _0813A3DC
+            sub_813ABE8(taskId);
+        }
+        else // _0813A3E8
+        {
+            PlaySE(5); // merging?
             sub_813AA30(taskId, 0);
             sub_813AE0C(taskId);
-            return;
         }
-        if (gMain.newKeys & 0x1)
+    }
+    else if(gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(5);
+        if(!data[9])
         {
-            PlaySE(5);
-            if (data[9])
-            {
-                sub_813AA30(taskId, 0);
-                sub_813AE0C(taskId);
-                return;
-            }
-            if (data[1] + data[0] != data[2])
+            if(data[1] + data[0] != data[2])
             {
                 sub_813A4B4(taskId);
-                return;
+            }
+            else
+            {
+                sub_813A468(taskId);
             }
         }
         else
         {
-            if (!(gMain.newKeys & 0x2))
-                return;
-            PlaySE(5);
-            if (data[9])
-            {
-                sub_813AA30(taskId, 1);
-                sub_813AE0C(taskId);
-                return;
-            }
-            sub_8072DEC();
+            sub_813AA30(taskId, 0);
+            sub_813AE0C(taskId);
         }
-        sub_813A468(taskId);
-        return;
     }
-    if (data[0] == data[4] - 1)
+    else if(gMain.newKeys & B_BUTTON)
     {
-        if (data[1] + data[0] == data[2])
-            return;
         PlaySE(5);
-        data[1]++;
-        sub_813AE0C(taskId);
-        if (data[9])
-            MoveMenuCursor(0);
-        return;
-    }
-    PlaySE(5);
-    data[0] = MoveMenuCursor(1);
-    if (!data[9])
-    {
-        if (data[1] + data[0] != data[2])
+        if(!data[9])
         {
-            sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
-            return;
+            sub_8072DEC();
+            sub_813A468(taskId);
         }
-        sub_813AD58(0xFFFF);
+        else
+        {
+            sub_813AA30(taskId, 1);
+            sub_813AE0C(taskId);
+        }
     }
 }
-#else
-__attribute__((naked))
-void sub_813A280(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r6, r5, 0\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    ldr r1, _0813A2DC @ =gTasks + 0x8\n\
-    adds r4, r0, r1\n\
-    ldr r2, _0813A2E0 @ =gMain\n\
-    ldrh r1, [r2, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0813A306\n\
-    movs r1, 0\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    beq _0813A2E4\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    bl MoveMenuCursor\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    strh r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    adds r1, r0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0\n\
-    beq _0813A2CC\n\
-    b _0813A460\n\
-_0813A2CC:\n\
-    lsls r0, r1, 16\n\
-    asrs r1, r0, 16\n\
-    movs r2, 0x4\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r1, r0\n\
-    beq _0813A34C\n\
-    b _0813A358\n\
-    .align 2, 0\n\
-_0813A2DC: .4byte gTasks + 0x8\n\
-_0813A2E0: .4byte gMain\n\
-_0813A2E4:\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    bne _0813A2EE\n\
-    b _0813A460\n\
-_0813A2EE:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    ldrh r0, [r4, 0x2]\n\
-    subs r0, 0x1\n\
-    strh r0, [r4, 0x2]\n\
-    adds r0, r5, 0\n\
-    bl sub_813AE0C\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    b _0813A394\n\
-_0813A306:\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0813A3A0\n\
-    movs r0, 0\n\
-    ldrsh r1, [r4, r0]\n\
-    movs r2, 0x8\n\
-    ldrsh r0, [r4, r2]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    beq _0813A370\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    bl MoveMenuCursor\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    strh r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    adds r1, r0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0\n\
-    beq _0813A340\n\
-    b _0813A460\n\
-_0813A340:\n\
-    lsls r0, r1, 16\n\
-    asrs r1, r0, 16\n\
-    movs r2, 0x4\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r1, r0\n\
-    bne _0813A358\n\
-_0813A34C:\n\
-    ldr r0, _0813A354 @ =0x0000ffff\n\
-    bl sub_813AD58\n\
-    b _0813A460\n\
-    .align 2, 0\n\
-_0813A354: .4byte 0x0000ffff\n\
-_0813A358:\n\
-    ldr r0, _0813A36C @ =gSaveBlock1\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    movs r0, 0x93\n\
-    lsls r0, 3\n\
-    adds r1, r0\n\
-    ldrh r0, [r1]\n\
-    bl sub_813AD58\n\
-    b _0813A460\n\
-    .align 2, 0\n\
-_0813A36C: .4byte gSaveBlock1\n\
-_0813A370:\n\
-    movs r2, 0x2\n\
-    ldrsh r0, [r4, r2]\n\
-    adds r0, r1\n\
-    movs r2, 0x4\n\
-    ldrsh r1, [r4, r2]\n\
-    cmp r0, r1\n\
-    beq _0813A460\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    ldrh r0, [r4, 0x2]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x2]\n\
-    adds r0, r5, 0\n\
-    bl sub_813AE0C\n\
-    movs r1, 0x12\n\
-    ldrsh r0, [r4, r1]\n\
-_0813A394:\n\
-    cmp r0, 0\n\
-    beq _0813A460\n\
-    movs r0, 0\n\
-    bl MoveMenuCursor\n\
-    b _0813A460\n\
-_0813A3A0:\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0813A3F0\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0\n\
-    bne _0813A3E8\n\
-    movs r1, 0\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r2, 0x2\n\
-    ldrsh r1, [r4, r2]\n\
-    adds r0, r1\n\
-    movs r2, 0x4\n\
-    ldrsh r1, [r4, r2]\n\
-    cmp r0, r1\n\
-    beq _0813A3DC\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x12]\n\
-    ldrh r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    adds r0, r1\n\
-    strh r0, [r4, 0x10]\n\
-    ldr r0, _0813A3E4 @ =0x0000fff7\n\
-    bl sub_813AD58\n\
-_0813A3DC:\n\
-    adds r0, r5, 0\n\
-    bl sub_813ABE8\n\
-    b _0813A460\n\
-    .align 2, 0\n\
-_0813A3E4: .4byte 0x0000fff7\n\
-_0813A3E8:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    b _0813A420\n\
-_0813A3F0:\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0813A430\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0\n\
-    bne _0813A420\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r2, 0\n\
-    ldrsh r1, [r4, r2]\n\
-    adds r0, r1\n\
-    movs r2, 0x4\n\
-    ldrsh r1, [r4, r2]\n\
-    cmp r0, r1\n\
-    beq _0813A44A\n\
-    adds r0, r5, 0\n\
-    bl sub_813A4B4\n\
-    b _0813A460\n\
-_0813A420:\n\
-    adds r0, r5, 0\n\
-    movs r1, 0\n\
-    bl sub_813AA30\n\
-    adds r0, r5, 0\n\
-    bl sub_813AE0C\n\
-    b _0813A460\n\
-_0813A430:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0813A460\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r1, 0x12\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    bne _0813A452\n\
-    bl sub_8072DEC\n\
-_0813A44A:\n\
-    adds r0, r5, 0\n\
-    bl sub_813A468\n\
-    b _0813A460\n\
-_0813A452:\n\
-    adds r0, r6, 0\n\
-    movs r1, 0x1\n\
-    bl sub_813AA30\n\
-    adds r0, r6, 0\n\
-    bl sub_813AE0C\n\
-_0813A460:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
-}
-#endif
 
 void sub_813A468(u8 taskId)
 {
@@ -678,141 +474,349 @@ void sub_813A468(u8 taskId)
     gTasks[taskId].func = ItemStorageMenuProcessInput;
 }
 
-#ifdef NONMATCHING
 void sub_813A4B4(u8 taskId)
 {
-    u16 *data = gTasks[taskId].data;
-    u16 var = data[2] + data[0];
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
 
     sub_80F996C(0);
     sub_80F996C(1);
-
-    if (data[6])
+    
+    if(!data[6])
     {
-        if (gSaveBlock1.pcItems[var].itemId == 1)
+        if(gSaveBlock1.pcItems[var].quantity == 1)
         {
             data[3] = 1;
-            sub_813A794(taskId);
+            sub_813A6FC(taskId);
             return;
         }
-        sub_813AD58(0xFFF7);
+        else // _0813A50C
+        {
+            sub_813AD58(0xFFFE);
+        }
+    }
+    else if(gSaveBlock1.pcItems[var].quantity == 1) // _0813A518
+    {
         data[3] = 1;
-        MenuDrawTextWindow(6, 8, 13, 11);
-        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3);
-        gTasks[taskId].func = sub_813A584;
+        sub_813A794(taskId);
         return;
     }
-    if (gSaveBlock1.pcItems[var].itemId != 1)
+    else
     {
-        sub_813AD58(0xFFF7);
-        data[3] = 1;
-        MenuDrawTextWindow(6, 8, 13, 11);
-        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3);
-        gTasks[taskId].func = sub_813A584;
-        return;
+        sub_813AD58(0xFFFC);
     }
     data[3] = 1;
-    sub_813A6FC(taskId);
+    MenuDrawTextWindow(6, 8, 13, 11);
+    sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3);
+    gTasks[taskId].func = HandleQuantityRolling;
 }
-#else
-__attribute__((naked))
-void sub_813A4B4(u8 taskId)
+
+void HandleQuantityRolling(u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r0, 3\n\
-    ldr r1, _0813A500 @ =gTasks + 0x8\n\
-    adds r4, r0, r1\n\
-    ldrb r0, [r4, 0x2]\n\
-    ldrb r1, [r4]\n\
-    adds r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    movs r0, 0\n\
-    bl sub_80F996C\n\
-    movs r0, 0x1\n\
-    bl sub_80F996C\n\
-    movs r1, 0xC\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    bne _0813A518\n\
-    ldr r1, _0813A504 @ =gSaveBlock1\n\
-    lsls r0, r5, 2\n\
-    adds r0, r1\n\
-    ldr r1, _0813A508 @ =0x0000049a\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bne _0813A50C\n\
-    strh r0, [r4, 0x6]\n\
-    adds r0, r6, 0\n\
-    bl sub_813A6FC\n\
-    b _0813A570\n\
-    .align 2, 0\n\
-_0813A500: .4byte gTasks + 0x8\n\
-_0813A504: .4byte gSaveBlock1\n\
-_0813A508: .4byte 0x0000049a\n\
-_0813A50C:\n\
-    ldr r0, _0813A514 @ =0x0000fffe\n\
-    bl sub_813AD58\n\
-    b _0813A542\n\
-    .align 2, 0\n\
-_0813A514: .4byte 0x0000fffe\n\
-_0813A518:\n\
-    ldr r1, _0813A534 @ =gSaveBlock1\n\
-    lsls r0, r5, 2\n\
-    adds r0, r1\n\
-    ldr r1, _0813A538 @ =0x0000049a\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bne _0813A53C\n\
-    strh r0, [r4, 0x6]\n\
-    adds r0, r6, 0\n\
-    bl sub_813A794\n\
-    b _0813A570\n\
-    .align 2, 0\n\
-_0813A534: .4byte gSaveBlock1\n\
-_0813A538: .4byte 0x0000049a\n\
-_0813A53C:\n\
-    ldr r0, _0813A578 @ =0x0000fffc\n\
-    bl sub_813AD58\n\
-_0813A542:\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x6]\n\
-    movs r0, 0x6\n\
-    movs r1, 0x8\n\
-    movs r2, 0xD\n\
-    movs r3, 0xB\n\
-    bl MenuDrawTextWindow\n\
-    ldrh r0, [r4, 0x6]\n\
-    movs r1, 0x3\n\
-    str r1, [sp]\n\
-    movs r1, 0x1\n\
-    movs r2, 0x8\n\
-    movs r3, 0x9\n\
-    bl sub_80A418C\n\
-    ldr r1, _0813A57C @ =gTasks\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _0813A580 @ =sub_813A584\n\
-    str r1, [r0]\n\
-_0813A570:\n\
-    add sp, 0x4\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0813A578: .4byte 0x0000fffc\n\
-_0813A57C: .4byte gTasks\n\
-_0813A580: .4byte sub_813A584\n\
-    .syntax divided");
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if(data[3] != gSaveBlock1.pcItems[var].quantity)
+            data[3]++;
+        else
+            data[3] = 1; // you are at the max amount of items you have when you press Up, set your quantity back to 1.
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if(data[3] != 1)
+            data[3]--;
+        else
+            data[3] = gSaveBlock1.pcItems[var].quantity; // you are at 0 when you press down, set your quantity to the amount you have.
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // reduce by 10.
+    {
+        data[3] -= 10;
+
+        if(data[3] <= 0)
+            data[3] = 1; // dont underflow or allow 0!
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // add 10.
+    {
+        data[3] += 10;
+
+        if(data[3] > gSaveBlock1.pcItems[var].quantity)
+            data[3] = gSaveBlock1.pcItems[var].quantity; // dont overflow!
+
+        sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
+    }
+    else if(gMain.newKeys & A_BUTTON) // confirm quantity.
+    {
+        PlaySE(5);
+        MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
+
+        if(!data[6])
+            sub_813A6FC(taskId);
+        else
+            sub_813A794(taskId);
+    }
+    else if(gMain.newKeys & B_BUTTON) // cancel quantity.
+    {
+        PlaySE(5);
+        MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
+        sub_80F98DC(0);
+        sub_80F98DC(1);
+        sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId); // why not use var?
+        gTasks[taskId].func = sub_813A280;
+    }
 }
-#endif
+
+void sub_813A6FC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(AddBagItem(gSaveBlock1.pcItems[var].itemId, data[3]) == TRUE) // add item works.
+    {
+        CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
+        sub_813AD58(0xFFFD);
+        gTasks[taskId].func = sub_813A8F0;
+    }
+    else // cannot add item. inventory full?
+    {
+        data[3] = 0;
+        sub_813AD58(0xFFFA);
+        gTasks[taskId].func = sub_813A984;
+    }
+}
+
+void sub_813A794(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[0] + data[1];
+    
+    if(ItemId_GetImportance(gSaveBlock1.pcItems[var].itemId) == FALSE)
+    {
+        CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
+        sub_813AD58(65528);
+        DisplayYesNoMenu(7, 6, 1);
+        sub_80F914C(taskId, gUnknown_084062E0);
+    }
+    else
+    {
+        data[3] = 0;
+        sub_813AD58(65529);
+        gTasks[taskId].func = sub_813A8F0;
+    }
+}
+
+void sub_813A83C(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    sub_813AD58(0xFFFB);
+    gTasks[taskId].func = sub_813A8F0;
+}
+
+void sub_813A878(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    InitMenu(0, 16, 2, data[4], data[0], 0xD);
+    sub_80F98DC(0);
+    sub_80F98DC(1);
+    sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
+    gTasks[taskId].func = sub_813A280;
+}
+
+void sub_813A8F0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 var;
+    u8 usedItemSlots;
+    
+    if(gMain.newKeys & 0x1 || gMain.newKeys == 0x2)
+    {
+        RemovePCItem(data[0] + data[1], data[3]);
+        var = data[2];
+        usedItemSlots = CountUsedPCItemSlots();
+        data[2] = usedItemSlots;
+        
+        if((s16)var != usedItemSlots && (s16)var < data[4] + data[1] && data[1] != 0)
+            data[1]--;
+        
+        sub_813A240(taskId);
+        sub_813A9EC(taskId);
+        InitMenu(0, 16, 2, data[4], data[0], 0xD);
+    }
+}
+
+void sub_813A984(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    if(gMain.newKeys & 0x1 || gMain.newKeys == 2)
+    {
+        sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
+        sub_80F98DC(0);
+        sub_80F98DC(1);
+        gTasks[taskId].func = sub_813A280;
+    }
+}
+
+void sub_813A9EC(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
+    sub_80F98DC(0);
+    sub_80F98DC(1);
+    sub_813AE0C(taskId);
+    gTasks[taskId].func = sub_813A280;
+}
+
+// seems like it was meant to return data[8] - data[1], but doesn't.
+void sub_813AA30(u8 taskId, u8 arg)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 var = data[1] + data[0];
+
+    data[9] = 0;
+
+    if((u8)data[2] > var && (u8)data[8] != var && arg == 0)
+    {
+        struct ItemSlot itemSlot = gSaveBlock1.pcItems[data[8]]; // backup the itemSlot before swapping the two.
+
+        gSaveBlock1.pcItems[data[8]] = gSaveBlock1.pcItems[var];
+        gSaveBlock1.pcItems[var] = itemSlot;
+        return;
+    }
+    else if(var == data[2])
+    {
+        sub_813AD58(0xFFFF);
+    }
+    else
+    {
+        sub_813AD58(gSaveBlock1.pcItems[var].itemId);
+    }
+    
+    // dead code not getting optimized out what the fuck???
+    {
+    register int data8 asm("r1") = data[8];
+    register int data1 asm("r0") = data[1];
+    asm(""::"r"(data8 - data1));
+    }
+}
+
+void sub_813AAC4(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int arg5)
+{
+    sub_80A4164(gStringVar1, arg1, arg2, arg4);
+    
+    if(arg5)
+        MenuPrint(gUnknown_0840632A, 0x1A, arg3);
+    else
+        MenuPrint(gUnknown_08406327, 0x1A, arg3);
+}
+
+void sub_813AB10(u8 var)
+{
+    MenuPrint(gUnknown_08406330, 0x19, var);
+}
+
+void sub_813AB28(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    CopyItemName(itemSlot->itemId, gStringVar1);
+    
+    if(var2)
+        MenuPrint(gUnknown_0840631E, 16, var);
+    else
+        MenuPrint(gUnknown_08406318, 16, var);
+}
+
+void sub_813AB64(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+}
+
+void sub_813AB90(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    sub_813AB10(var);
+}
+
+void sub_813ABAC(struct ItemSlot *itemSlot, u8 var, int var2)
+{
+    sub_813AB28(itemSlot, var, var2);
+    
+    if(itemSlot->itemId < ITEM_HM01)
+        sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+    else
+        sub_813AB10(var); // key items do not have a quantity.
+}
+
+void sub_813ABE8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 i;
+    int tempArg;
+    u16 j = 0;
+    
+    // r5 is i and is unsigned 16-bit.
+    
+    for(i = data[1]; i < data[1] + data[4]; i++)
+    {
+        j = (i - data[1]) * 2;
+        
+        if(i != data[2])
+        {
+            tempArg = 0;
+
+            if(data[9] != 0 && i == data[8])
+                tempArg = 1;
+            
+            switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
+            {
+                case 0:
+                case 1:
+                case 3:
+                    sub_813AB64((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+                case 4:
+                    sub_813AB90((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+                case 2:
+                    sub_813ABAC((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    break;
+            }
+        }
+        else
+        {
+            goto weirdCase; // what???
+        }
+    }
+
+beforeLabel:
+    if(i - data[1] < 8)
+        MenuFillWindowRectWithBlankTile(16, j + 4, 0x1C, 0x12);
+    
+    switch(data[1])
+    {
+        default:
+            CreateVerticalScrollIndicators(0, 0xB8, 8);
+            break;
+weirdCase:
+            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
+            goto beforeLabel;
+        case 0:
+            DestroyVerticalScrollIndicator(0);
+            break;
+    }
+
+    if(data[1] + data[4] <= data[2])
+        CreateVerticalScrollIndicators(1, 0xB8, 0x98);
+    else
+        DestroyVerticalScrollIndicator(1);
+}
