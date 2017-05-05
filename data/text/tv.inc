@@ -1046,5 +1046,5 @@ gTVWorldOfMastersText3:: @ 81ABDF2
 	.string "That’s all for today.\n"
 	.string "Please tune in next time.$"
 
-	.include "data/text/gabby_and_ty.s"
-	.include "data/text/pokemon_news.s"
+	.include "data/text/gabby_and_ty.inc"
+	.include "data/text/pokemon_news.inc"
