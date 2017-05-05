@@ -28,7 +28,7 @@ void sub_80F7A34(void)
 
     oldMan->oldMan1.unk_2D94 = 0;
     oldMan->oldMan1.unk_2DBD = 0;
-    
+
     for(i = 0; i < 6; i++)
         oldMan->oldMan1.mauvilleOldMan_ecArray[i] = gUnknown_083E537C[i];
 }
@@ -36,7 +36,7 @@ void sub_80F7A34(void)
 void sub_80F7A6C(void)
 {
     struct UnkMauvilleOldManStruct *bard = &gSaveBlock1.oldMan.oldMan1;
-    
+
     bard->unk_2D94 = 1;
     bard->unk_2D95 = 0;
 }
@@ -49,7 +49,7 @@ void sub_80F7A7C(void)
 void sub_80F7A88(void)
 {
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     oldMan->oldMan1.unk_2D94 = 4;
     oldMan->oldMan1.unk_2D95 = 0;
 }
@@ -62,7 +62,7 @@ void sub_80F7A98(void)
 void SetMauvilleOldMan(void)
 {
     u32 var = ((u16)((gSaveBlock2.playerTrainerId[1] << 8 | gSaveBlock2.playerTrainerId[0])) % 10) / 2;
-    
+
     switch(var)
     {
         case 0:
@@ -100,7 +100,7 @@ void sub_80F7B2C(void)
 {
     u16 *scriptPtr = &gScriptResult; // why??
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     *scriptPtr = oldMan->oldMan1.unk_2DBD;
 }
 
@@ -109,15 +109,15 @@ void sub_80F7B40(void)
     u16 i;
     OldMan *oldMan = &gSaveBlock1.oldMan;
     //struct UnkMauvilleOldManStruct *oldManStruct = &gSaveBlock1.oldManStruct;
-    
+
     StringCopy(oldMan->oldMan1.playerName, gSaveBlock2.playerName);
-    
+
     for(i = 0; i < 4; i++)
         oldMan->oldMan1.playerTrainerId[i] = gSaveBlock2.playerTrainerId[i];
-    
+
     for(i = 0; i < 6; i++)
         oldMan->oldMan1.mauvilleOldMan_ecArray[i] = oldMan->oldMan1.mauvilleOldMan_ecArray2[i];
-    
+
     oldMan->oldMan1.unk_2DBD = 1;
 }
 
@@ -237,14 +237,14 @@ void sub_80F7C70(void)
 {
     u16 *scriptPtr = &gScriptResult; // again??
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     *scriptPtr = oldMan->oldMan1.unk_2D95;
 }
 
 void sub_80F7C84(void)
 {
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     oldMan->oldMan1.unk_2D95 = 1;
 }
 
@@ -266,7 +266,7 @@ void sub_80F7C90(void)
 void sub_80F7CC8(void)
 {
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     if(oldMan->oldMan1.unk_2D95 == 10)
     {
         gScriptResult = FALSE;
@@ -282,7 +282,7 @@ void sub_80F7CF4(void)
 {
     u8 *stringPtr;
     OldMan *oldMan = &gSaveBlock1.oldMan;
-    
+
     if(oldMan->oldMan2.unk1 == 0)
         sub_80F7DC0();
 
@@ -302,7 +302,7 @@ void sub_80F7CF4(void)
         oldMan->oldMan2.unk1 = 10;
     else
         oldMan->oldMan2.unk1++;
-    
+
     gScriptResult = TRUE;
 }
 #else

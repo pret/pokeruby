@@ -61,7 +61,7 @@ static void sub_8046388(struct Sprite *sprite)
         if (!sprite->data1)
             DestroySprite(sprite);
         else
-            sprite->callback = SpriteCallbackDummy; 
+            sprite->callback = SpriteCallbackDummy;
     }
 }
 

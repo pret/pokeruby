@@ -303,7 +303,7 @@ static u8 AcroBikeHandleInputTurning(u8 *newDirection, u16 newKeys, u16 heldKeys
 
     *newDirection = gPlayerAvatar.unk9;
     gPlayerAvatar.bikeFrameCounter++;
-    
+
     //Wait 6 frames before actually changing direction
     if (gPlayerAvatar.bikeFrameCounter > 6)
     {
@@ -341,7 +341,7 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *ptr, u16 newKeys, u16 heldKeys)
     direction = player_get_direction_upper_nybble();
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     gPlayerAvatar.running2 = 0;
-    
+
     if (heldKeys & B_BUTTON)
         gPlayerAvatar.bikeFrameCounter++;
     else
@@ -406,9 +406,9 @@ static u8 AcroBikeHandleInputBunnyHop(u8 *ptr, u16 newKeys, u16 heldKeys)
             return 4;
         }
     }
-    
+
     //B Button is still held
-    
+
     if (*ptr == DIR_NONE)
     {
         *ptr = direction;

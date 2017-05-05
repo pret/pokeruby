@@ -75,7 +75,7 @@ u8 CreateShopMenu(bool8 var)
         PrintMenuItemsReordered(1, 1, 2, gUnknown_083CC6D0, (u8 *)gUnknown_083CC6EB);
     }
     InitMenu(0, 1, 1, gUnknown_03000708.unkA + 1, 0, 9);
-    
+
     return CreateTask(sub_80B2E38, 8);
 }
 
@@ -160,7 +160,7 @@ void HandleShopMenuQuit(u8 taskId)
     sub_80BE3BC(); // in tv.s?
     ScriptContext2_Disable();
     DestroyTask(taskId);
-    
+
     if(gUnknown_03000708.callback)
         gUnknown_03000708.callback(); // run the callback if it exists.
 }
@@ -289,7 +289,7 @@ void BuyMenuDrawGraphics(void)
 void sub_80B3240(void)
 {
     u16 tempArr[2];
-    
+
     memcpy(tempArr, gUnknown_083CC710, sizeof(tempArr));
     LoadPalette(&tempArr[1], 0xD1, 2);
     LoadPalette(&tempArr[0], 0xD8, 2);
@@ -298,7 +298,7 @@ void sub_80B3240(void)
 void sub_80B3270(void)
 {
     sub_80F944C();
-    
+
     if(gUnknown_03000708.itemCount > 7)
     {
         CreateVerticalScrollIndicators(0, 172, 12);
@@ -313,7 +313,7 @@ void sub_80B32A4(void)
         sub_80F979C(0, 1);
     else
         sub_80F979C(0, 0);
-    
+
     if(gUnknown_03000708.unkB + 7 >= gUnknown_03000708.itemCount)
         sub_80F979C(1, 1);
     else

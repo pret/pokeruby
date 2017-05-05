@@ -360,7 +360,7 @@ void dp01t_00_3_getattr(void)
     u8 unk[256];
     int r6 = 0;
     s32 i;
-    
+
     if (gUnknown_02023A60[gUnknown_02024A60][2] == 0)
     {
         r6 = dp01_getattr_by_ch1_for_player_pokemon(gUnknown_02024A6A[gUnknown_02024A60], unk);
@@ -389,7 +389,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     s16 data16;
     u32 data32;
     s32 size = 0;
-    
+
     switch (gUnknown_02023A60[gUnknown_02024A60][1])
     {
     case 0:
@@ -694,7 +694,7 @@ void sub_811EC10(void)
 {
     u8 i;
     u8 r4;
-    
+
     if (gUnknown_02023A60[gUnknown_02024A60][2] == 0)
     {
         sub_811EC68(gUnknown_02024A6A[gUnknown_02024A60]);

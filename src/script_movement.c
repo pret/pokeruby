@@ -22,7 +22,7 @@ static void sub_80A2490(u8, u8, u8, u8 *);
 bool8 exec_movement(u8 a, u8 b, u8 c, u8 *d)
 {
     u8 mapObjId;
-    
+
     if (TryGetFieldObjectIdByLocalIdAndMap(a, b, c, &mapObjId))
         return TRUE;
     if (!FuncIsActiveTask(Task_80A244C))
@@ -35,7 +35,7 @@ bool8 sub_80A212C(u8 a, u8 b, u8 c)
     u8 mapObjId;
     u8 r4;
     u8 r1;
-    
+
     if (TryGetFieldObjectIdByLocalIdAndMap(a, b, c, &mapObjId))
         return 1;
     r4 = sub_80A21E0();
@@ -48,7 +48,7 @@ bool8 sub_80A212C(u8 a, u8 b, u8 c)
 void sub_80A2178(void)
 {
     u8 taskId;
-    
+
     taskId = sub_80A21E0();
     if (taskId != 0xFF)
     {
@@ -61,7 +61,7 @@ static void sub_80A2198(u8 priority)
 {
     u8 taskId;
     u8 i;
-    
+
     taskId = CreateTask(Task_80A244C, priority);
     for (i = 1; i < 16; i++)
         gTasks[taskId].data[i] = 0xFFFF;
@@ -75,7 +75,7 @@ static u8 sub_80A21E0(void)
 static bool8 sub_80A21F4(u8 taskId, u8 b, u8 *c)
 {
     u8 r4;
-    
+
     r4 = sub_80A2260(taskId, b);
     if (r4 != 16)
     {
@@ -101,7 +101,7 @@ static u8 sub_80A2260(u8 taskId, u8 b)
 {
     u8 *ptr;
     u8 i;
-    
+
     ptr = (u8 *)&gTasks[taskId].data[1];
     for (i = 0; i < 16; i++, ptr++)
     {
@@ -114,7 +114,7 @@ static u8 sub_80A2260(u8 taskId, u8 b)
 static void sub_80A229C(u8 taskId, u8 b, u8 **c)
 {
     u8 i;
-    
+
     *c = (u8 *)&gTasks[taskId].data[1];
     for (i = 0; i < b; i++, (*c)++)
         ;
@@ -123,7 +123,7 @@ static void sub_80A229C(u8 taskId, u8 b, u8 **c)
 static void sub_80A22D0(u8 taskId, u8 b, u8 c)
 {
     u8 *ptr;
-    
+
     sub_80A229C(taskId, b, &ptr);
     *ptr = c;  //what is this supposed to do?
 }
@@ -131,7 +131,7 @@ static void sub_80A22D0(u8 taskId, u8 b, u8 c)
 static void sub_80A22F4(u8 taskId, u8 b, u8 *c)
 {
     u8 *ptr;
-    
+
     sub_80A229C(taskId, b, &ptr);
     *c = *ptr;
 }
@@ -139,7 +139,7 @@ static void sub_80A22F4(u8 taskId, u8 b, u8 *c)
 static void sub_80A2318(u8 a, u8 b)
 {
     u16 var = ~gBitTable[b];
-    
+
     gTasks[a].data[0] &= var;
 }
 
@@ -179,7 +179,7 @@ static void sub_80A2408(u8 a)
 {
     u8 *ptr;
     u8 i;
-    
+
     ptr = (u8 *)&gTasks[a].data[1];
     for (i = 0; i < 16; i++, ptr++)
     {
@@ -192,7 +192,7 @@ static void Task_80A244C(u8 taskId)
 {
     u8 i;
     u8 var;
-    
+
     for (i = 0; i < 16; i++)
     {
         sub_80A22F4(taskId, i, &var);
@@ -204,11 +204,11 @@ static void Task_80A244C(u8 taskId)
 static void sub_80A2490(u8 taskId, u8 b, u8 c, u8 *d)
 {
     u8 var;
-    
+
     if (FieldObjectIsSpecialAnimActive(&gMapObjects[c])
      && !FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[c]))
         return;
-    
+
     var = *d;
     if (var == 0xFE)
     {
