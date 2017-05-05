@@ -23,8 +23,8 @@ static void DisplayDiplomaText(void);
 
 static const u16 gDiplomaPalettes[][16] =
 {
-	INCBIN_U16("graphics/misc/diploma_national.gbapal"),
-	INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
+    INCBIN_U16("graphics/misc/diploma_national.gbapal"),
+    INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
 };
 
 static const u8 gDiplomaTilemap[] = INCBIN_U8("graphics/misc/diploma_map.bin.lz");

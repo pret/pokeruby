@@ -485,6 +485,13 @@ struct UnkStruct_8054FF8
     u16 field_C;
 };
 
+// wasnt defined so I had to define it
+struct HallOfFame
+{
+	u8 filler[0x1F00];
+};
+
+extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
 
 #endif // GUARD_GLOBAL_H
