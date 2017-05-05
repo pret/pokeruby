@@ -327,7 +327,14 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/rtc.o(.rodata);
+        data/main_menu.o(.rodata);
         data/data2.o(.rodata);
+        data/pokemon.o(.rodata);
+        data/trig.o(.rodata);
+        data/util.o(.rodata);
+        data/daycare.o(.rodata);
+        data/egg_hatch.o(.rodata);
+        data/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
         data/trade.o(.rodata);
         data/berry_blender.o(.rodata);

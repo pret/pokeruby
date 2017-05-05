@@ -12,561 +12,561 @@
 // multichoice lists
 const struct MenuAction MultichoiceList_00[] =
 {
-	{(u8 *)OtherText_Petalburg, 0},
-	{(u8 *)OtherText_Slateport, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Petalburg, 0},
+    {(u8 *)OtherText_Slateport, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_02[] =
 {
-	{(u8 *)OtherText_Enter, 0},
-	{(u8 *)OtherText_Info3, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Enter, 0},
+    {(u8 *)OtherText_Info3, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_03[] =
 {
-	{(u8 *)OtherText_WhatsAContest, 0},
-	{(u8 *)OtherText_TypesOfContest, 0},
-	{(u8 *)OtherText_Ranks, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_WhatsAContest, 0},
+    {(u8 *)OtherText_TypesOfContest, 0},
+    {(u8 *)OtherText_Ranks, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_04[] =
 {
-	{(u8 *)OtherText_CoolContest, 0},
-	{(u8 *)OtherText_BeautyContest, 0},
-	{(u8 *)OtherText_CuteContest, 0},
-	{(u8 *)OtherText_SmartContest, 0},
-	{(u8 *)OtherText_ToughContest, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_CoolContest, 0},
+    {(u8 *)OtherText_BeautyContest, 0},
+    {(u8 *)OtherText_CuteContest, 0},
+    {(u8 *)OtherText_SmartContest, 0},
+    {(u8 *)OtherText_ToughContest, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_06[] =
 {
-	{(u8 *)OtherText_Decoration, 0},
-	{(u8 *)OtherText_PackUp, 0},
-	{(u8 *)OtherText_Registry, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Decoration, 0},
+    {(u8 *)OtherText_PackUp, 0},
+    {(u8 *)OtherText_Registry, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_05[] =
 {
-	{(u8 *)OtherText_Decoration, 0},
-	{(u8 *)OtherText_PackUp, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Decoration, 0},
+    {(u8 *)OtherText_PackUp, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_07[] =
 {
-	{(u8 *)OtherText_Register, 0},
-	{(u8 *)OtherText_Registry, 0},
-	{(u8 *)OtherText_Information, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Register, 0},
+    {(u8 *)OtherText_Registry, 0},
+    {(u8 *)OtherText_Information, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_12[] =
 {
-	{(u8 *)OtherText_Mach, 0},
-	{(u8 *)OtherText_Acro, 0},
+    {(u8 *)OtherText_Mach, 0},
+    {(u8 *)OtherText_Acro, 0},
 };
 
 const struct MenuAction MultichoiceList_13[] =
 {
-	{(u8 *)OtherText_Poison, 0},
-	{(u8 *)OtherText_Paralysis, 0},
-	{(u8 *)OtherText_Sleep, 0},
-	{(u8 *)OtherText_Burn, 0},
-	{(u8 *)OtherText_Frozen, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Poison, 0},
+    {(u8 *)OtherText_Paralysis, 0},
+    {(u8 *)OtherText_Sleep, 0},
+    {(u8 *)OtherText_Burn, 0},
+    {(u8 *)OtherText_Frozen, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_14[] =
 {
-	{(u8 *)OtherText_Dewford, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Dewford, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_16[] =
 {
-	{(u8 *)OtherText_SawIt, 0},
-	{(u8 *)OtherText_NotYet, 0},
+    {(u8 *)OtherText_SawIt, 0},
+    {(u8 *)OtherText_NotYet, 0},
 };
 
 const struct MenuAction MultichoiceList_17[] =
 {
-	{(u8 *)OtherText_Yes, 0},
-	{(u8 *)OtherText_No, 0},
-	{(u8 *)OtherText_Info3, 0},
+    {(u8 *)OtherText_Yes, 0},
+    {(u8 *)OtherText_No, 0},
+    {(u8 *)OtherText_Info3, 0},
 };
 
 const struct MenuAction MultichoiceList_18[] =
 {
-	{(u8 *)OtherText_SingleBattle, 0},
-	{(u8 *)OtherText_DoubleBattle, 0},
-	{(u8 *)OtherText_MultiBattle, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_SingleBattle, 0},
+    {(u8 *)OtherText_DoubleBattle, 0},
+    {(u8 *)OtherText_MultiBattle, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_19[] =
 {
-	{(u8 *)OtherText_Littleroot, 0},
-	{(u8 *)OtherText_Slateport, 0},
-	{(u8 *)OtherText_Lilycove, 0},
+    {(u8 *)OtherText_Littleroot, 0},
+    {(u8 *)OtherText_Slateport, 0},
+    {(u8 *)OtherText_Lilycove, 0},
 };
 
 const struct MenuAction MultichoiceList_20[] =
 {
-	{(u8 *)OtherText_Yes, 0},
-	{(u8 *)OtherText_No, 0},
-	{(u8 *)OtherText_Info3, 0},
+    {(u8 *)OtherText_Yes, 0},
+    {(u8 *)OtherText_No, 0},
+    {(u8 *)OtherText_Info3, 0},
 };
 
 const struct MenuAction MultichoiceList_23[] =
 {
-	{(u8 *)OtherText_MakeAChallenge, 0},
-	{(u8 *)OtherText_ObtainInformation, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_MakeAChallenge, 0},
+    {(u8 *)OtherText_ObtainInformation, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_24[] =
 {
-	{(u8 *)OtherText_Lv50_2, 0},
-	{(u8 *)OtherText_Lv100_2, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Lv50_2, 0},
+    {(u8 *)OtherText_Lv100_2, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_25[] =
 {
-	{(u8 *)OtherText_Zigzagoon, 0},
-	{(u8 *)OtherText_Nincada, 0},
-	{(u8 *)OtherText_Poochyena, 0},
+    {(u8 *)OtherText_Zigzagoon, 0},
+    {(u8 *)OtherText_Nincada, 0},
+    {(u8 *)OtherText_Poochyena, 0},
 };
 
 const struct MenuAction MultichoiceList_26[] =
 {
-	{(u8 *)OtherText_Nincada2, 0},
-	{(u8 *)OtherText_Lotad, 0},
-	{(u8 *)OtherText_Roselia, 0},
+    {(u8 *)OtherText_Nincada2, 0},
+    {(u8 *)OtherText_Lotad, 0},
+    {(u8 *)OtherText_Roselia, 0},
 };
 
 const struct MenuAction MultichoiceList_27[] =
 {
-	{(u8 *)OtherText_Shroomish, 0},
-	{(u8 *)OtherText_Nincada3, 0},
-	{(u8 *)OtherText_Surskit, 0},
+    {(u8 *)OtherText_Shroomish, 0},
+    {(u8 *)OtherText_Nincada3, 0},
+    {(u8 *)OtherText_Surskit, 0},
 };
 
 const struct MenuAction MultichoiceList_28[] =
 {
-	{(u8 *)OtherText_Treecko, 0},
-	{(u8 *)OtherText_Torchic, 0},
-	{(u8 *)OtherText_Mudkip, 0},
+    {(u8 *)OtherText_Treecko, 0},
+    {(u8 *)OtherText_Torchic, 0},
+    {(u8 *)OtherText_Mudkip, 0},
 };
 
 const struct MenuAction MultichoiceList_29[] =
 {
-	{(u8 *)OtherText_Seedot, 0},
-	{(u8 *)OtherText_Shroomish2, 0},
-	{(u8 *)OtherText_Spinda, 0},
+    {(u8 *)OtherText_Seedot, 0},
+    {(u8 *)OtherText_Shroomish2, 0},
+    {(u8 *)OtherText_Spinda, 0},
 };
 
 const struct MenuAction MultichoiceList_30[] =
 {
-	{(u8 *)OtherText_Shroomish3, 0},
-	{(u8 *)OtherText_Zigzagoon2, 0},
-	{(u8 *)OtherText_Wurmple, 0},
+    {(u8 *)OtherText_Shroomish3, 0},
+    {(u8 *)OtherText_Zigzagoon2, 0},
+    {(u8 *)OtherText_Wurmple, 0},
 };
 
 const struct MenuAction MultichoiceList_31[] =
 {
-	{(u8 *)OtherText_PokeBall, 0},
-	{(u8 *)OtherText_SuperPotion, 0},
-	{(u8 *)OtherText_SamePrice, 0},
+    {(u8 *)OtherText_PokeBall, 0},
+    {(u8 *)OtherText_SuperPotion, 0},
+    {(u8 *)OtherText_SamePrice, 0},
 };
 
 const struct MenuAction MultichoiceList_32[] =
 {
-	{(u8 *)OtherText_Yen135, 0},
-	{(u8 *)OtherText_Yen155, 0},
-	{(u8 *)OtherText_Yen175, 0},
+    {(u8 *)OtherText_Yen135, 0},
+    {(u8 *)OtherText_Yen155, 0},
+    {(u8 *)OtherText_Yen175, 0},
 };
 
 const struct MenuAction MultichoiceList_33[] =
 {
-	{(u8 *)OtherText_CostMore, 0},
-	{(u8 *)OtherText_CostLess, 0},
-	{(u8 *)OtherText_SamePrice2, 0},
+    {(u8 *)OtherText_CostMore, 0},
+    {(u8 *)OtherText_CostLess, 0},
+    {(u8 *)OtherText_SamePrice2, 0},
 };
 
 const struct MenuAction MultichoiceList_34[] =
 {
-	{(u8 *)OtherText_MaleSymbol, 0},
-	{(u8 *)OtherText_FemaleSymbol, 0},
-	{(u8 *)OtherText_Neither, 0},
+    {(u8 *)OtherText_MaleSymbol, 0},
+    {(u8 *)OtherText_FemaleSymbol, 0},
+    {(u8 *)OtherText_Neither, 0},
 };
 
 const struct MenuAction MultichoiceList_35[] =
 {
-	{(u8 *)OtherText_Males, 0},
-	{(u8 *)OtherText_Females, 0},
-	{(u8 *)OtherText_SameNumber, 0},
+    {(u8 *)OtherText_Males, 0},
+    {(u8 *)OtherText_Females, 0},
+    {(u8 *)OtherText_SameNumber, 0},
 };
 
 const struct MenuAction MultichoiceList_36[] =
 {
-	{(u8 *)OtherText_Male, 0},
-	{(u8 *)OtherText_Female, 0},
-	{(u8 *)OtherText_ItDepends, 0},
+    {(u8 *)OtherText_Male, 0},
+    {(u8 *)OtherText_Female, 0},
+    {(u8 *)OtherText_ItDepends, 0},
 };
 
 const struct MenuAction MultichoiceList_37[] =
 {
-	{(u8 *)OtherText_Six2, 0},
-	{(u8 *)OtherText_Eight2, 0},
-	{(u8 *)OtherText_Ten, 0},
+    {(u8 *)OtherText_Six2, 0},
+    {(u8 *)OtherText_Eight2, 0},
+    {(u8 *)OtherText_Ten, 0},
 };
 
 const struct MenuAction MultichoiceList_38[] =
 {
-	{(u8 *)OtherText_One, 0},
-	{(u8 *)OtherText_Two, 0},
-	{(u8 *)OtherText_Three, 0},
+    {(u8 *)OtherText_One, 0},
+    {(u8 *)OtherText_Two, 0},
+    {(u8 *)OtherText_Three, 0},
 };
 
 const struct MenuAction MultichoiceList_39[] =
 {
-	{(u8 *)OtherText_Six, 0},
-	{(u8 *)OtherText_Seven, 0},
-	{(u8 *)OtherText_Eight, 0},
+    {(u8 *)OtherText_Six, 0},
+    {(u8 *)OtherText_Seven, 0},
+    {(u8 *)OtherText_Eight, 0},
 };
 
 const struct MenuAction MultichoiceList_42[] =
 {
-	{(u8 *)OtherText_FreshWater, 0},
-	{(u8 *)OtherText_SodaPop, 0},
-	{(u8 *)OtherText_Lemonade, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_FreshWater, 0},
+    {(u8 *)OtherText_SodaPop, 0},
+    {(u8 *)OtherText_Lemonade, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_43[] =
 {
-	{(u8 *)OtherText_HowToRide, 0},
-	{(u8 *)OtherText_HowToTurn, 0},
-	{(u8 *)OtherText_SandySlopes, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_HowToRide, 0},
+    {(u8 *)OtherText_HowToTurn, 0},
+    {(u8 *)OtherText_SandySlopes, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_44[] =
 {
-	{(u8 *)OtherText_Wheelies, 0},
-	{(u8 *)OtherText_BunnyHops, 0},
-	{(u8 *)OtherText_Jumping, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Wheelies, 0},
+    {(u8 *)OtherText_BunnyHops, 0},
+    {(u8 *)OtherText_Jumping, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_45[] =
 {
-	{(u8 *)OtherText_Satisfied, 0},
-	{(u8 *)OtherText_Dissatisfied, 0},
+    {(u8 *)OtherText_Satisfied, 0},
+    {(u8 *)OtherText_Dissatisfied, 0},
 };
 
 const struct MenuAction MultichoiceList_46[] =
 {
-	{(u8 *)OtherText_Deepseatooth, 0},
-	{(u8 *)OtherText_Deepseascale, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Deepseatooth, 0},
+    {(u8 *)OtherText_Deepseascale, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_47[] =
 {
-	{(u8 *)OtherText_BlueFlute2, 0},
-	{(u8 *)OtherText_YellowFlute2, 0},
-	{(u8 *)OtherText_RedFlute2, 0},
-	{(u8 *)OtherText_WhiteFlute2, 0},
-	{(u8 *)OtherText_BlackFlute2, 0},
-	{(u8 *)OtherText_GlassChair, 0},
-	{(u8 *)OtherText_GlassDesk, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_BlueFlute2, 0},
+    {(u8 *)OtherText_YellowFlute2, 0},
+    {(u8 *)OtherText_RedFlute2, 0},
+    {(u8 *)OtherText_WhiteFlute2, 0},
+    {(u8 *)OtherText_BlackFlute2, 0},
+    {(u8 *)OtherText_GlassChair, 0},
+    {(u8 *)OtherText_GlassDesk, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_48[] =
 {
-	{(u8 *)OtherText_TreeckoDoll, 0},
-	{(u8 *)OtherText_TorchicDoll, 0},
-	{(u8 *)OtherText_MudkipDoll, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_TreeckoDoll, 0},
+    {(u8 *)OtherText_TorchicDoll, 0},
+    {(u8 *)OtherText_MudkipDoll, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_55[] =
 {
-	{(u8 *)OtherText_TM32, 0},
-	{(u8 *)OtherText_TM29, 0},
-	{(u8 *)OtherText_TM35, 0},
-	{(u8 *)OtherText_TM24, 0},
-	{(u8 *)OtherText_TM13, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_TM32, 0},
+    {(u8 *)OtherText_TM29, 0},
+    {(u8 *)OtherText_TM35, 0},
+    {(u8 *)OtherText_TM24, 0},
+    {(u8 *)OtherText_TM13, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_49[] =
 {
-	{(u8 *)OtherText_50Coins, 0},
-	{(u8 *)OtherText_500Coins, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_50Coins, 0},
+    {(u8 *)OtherText_500Coins, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_50[] =
 {
-	{(u8 *)OtherText_Excellent, 0},
-	{(u8 *)OtherText_NotSoHot, 0},
+    {(u8 *)OtherText_Excellent, 0},
+    {(u8 *)OtherText_NotSoHot, 0},
 };
 
 const struct MenuAction MultichoiceList_52[] =
 {
-	{(u8 *)OtherText_Lilycove, 0},
-	{(u8 *)OtherText_BattleTower, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Lilycove, 0},
+    {(u8 *)OtherText_BattleTower, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_53[] =
 {
-	{(u8 *)OtherText_Slateport, 0},
-	{(u8 *)OtherText_Lilycove, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Slateport, 0},
+    {(u8 *)OtherText_Lilycove, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_54[] =
 {
-	{(u8 *)OtherText_Right, 0},
-	{(u8 *)OtherText_Left, 0},
+    {(u8 *)OtherText_Right, 0},
+    {(u8 *)OtherText_Left, 0},
 };
 
 const struct MenuAction MultichoiceList_56[] =
 {
-	{(u8 *)OtherText_Slateport, 0},
-	{(u8 *)OtherText_BattleTower, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_Slateport, 0},
+    {(u8 *)OtherText_BattleTower, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_57[] =
 {
-	{(u8 *)OtherText_1F_2, 0},
-	{(u8 *)OtherText_2F_2, 0},
-	{(u8 *)OtherText_3F_2, 0},
-	{(u8 *)OtherText_4F_2, 0},
-	{(u8 *)OtherText_5F_2, 0},
+    {(u8 *)OtherText_1F_2, 0},
+    {(u8 *)OtherText_2F_2, 0},
+    {(u8 *)OtherText_3F_2, 0},
+    {(u8 *)OtherText_4F_2, 0},
+    {(u8 *)OtherText_5F_2, 0},
 };
 
 const struct MenuAction MultichoiceList_58[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_59[] =
 {
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_60[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_61[] =
 {
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_62[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_63[] =
 {
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_64[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_65[] =
 {
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_66[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_67[] =
 {
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_68[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_69[] =
 {
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_70[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_71[] =
 {
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_72[] =
 {
-	{(u8 *)OtherText_RedShard, 0},
-	{(u8 *)OtherText_YellowShard, 0},
-	{(u8 *)OtherText_BlueShard, 0},
-	{(u8 *)OtherText_GreenShard, 0},
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)OtherText_RedShard, 0},
+    {(u8 *)OtherText_YellowShard, 0},
+    {(u8 *)OtherText_BlueShard, 0},
+    {(u8 *)OtherText_GreenShard, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MenuAction MultichoiceList_01[] =
 {
-	{(u8 *)gOtherText_CancelNoTerminator, 0},
+    {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
 const struct MultichoiceListStruct gMultichoiceLists[] =
 {
-	{(struct MenuAction *)MultichoiceList_00, 3},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_02, 3},
-	{(struct MenuAction *)MultichoiceList_03, 4},
-	{(struct MenuAction *)MultichoiceList_04, 6},
-	{(struct MenuAction *)MultichoiceList_05, 3},
-	{(struct MenuAction *)MultichoiceList_06, 4},
-	{(struct MenuAction *)MultichoiceList_07, 4},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_12, 2},
-	{(struct MenuAction *)MultichoiceList_13, 6},
-	{(struct MenuAction *)MultichoiceList_14, 2},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_16, 2},
-	{(struct MenuAction *)MultichoiceList_17, 3},
-	{(struct MenuAction *)MultichoiceList_18, 4},
-	{(struct MenuAction *)MultichoiceList_19, 3},
-	{(struct MenuAction *)MultichoiceList_20, 3},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_23, 3},
-	{(struct MenuAction *)MultichoiceList_24, 3},
-	{(struct MenuAction *)MultichoiceList_25, 3},
-	{(struct MenuAction *)MultichoiceList_26, 3},
-	{(struct MenuAction *)MultichoiceList_27, 3},
-	{(struct MenuAction *)MultichoiceList_28, 3},
-	{(struct MenuAction *)MultichoiceList_29, 3},
-	{(struct MenuAction *)MultichoiceList_30, 3},
-	{(struct MenuAction *)MultichoiceList_31, 3},
-	{(struct MenuAction *)MultichoiceList_32, 3},
-	{(struct MenuAction *)MultichoiceList_33, 3},
-	{(struct MenuAction *)MultichoiceList_34, 3},
-	{(struct MenuAction *)MultichoiceList_35, 3},
-	{(struct MenuAction *)MultichoiceList_36, 3},
-	{(struct MenuAction *)MultichoiceList_37, 3},
-	{(struct MenuAction *)MultichoiceList_38, 3},
-	{(struct MenuAction *)MultichoiceList_39, 3},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_42, 4},
-	{(struct MenuAction *)MultichoiceList_43, 4},
-	{(struct MenuAction *)MultichoiceList_44, 4},
-	{(struct MenuAction *)MultichoiceList_45, 2},
-	{(struct MenuAction *)MultichoiceList_46, 3},
-	{(struct MenuAction *)MultichoiceList_47, 8},
-	{(struct MenuAction *)MultichoiceList_48, 4},
-	{(struct MenuAction *)MultichoiceList_49, 3},
-	{(struct MenuAction *)MultichoiceList_50, 2},
-	{(struct MenuAction *)MultichoiceList_01, 1},
-	{(struct MenuAction *)MultichoiceList_52, 3},
-	{(struct MenuAction *)MultichoiceList_53, 3},
-	{(struct MenuAction *)MultichoiceList_54, 2},
-	{(struct MenuAction *)MultichoiceList_55, 6},
-	{(struct MenuAction *)MultichoiceList_56, 3},
-	{(struct MenuAction *)MultichoiceList_57, 5},
-	{(struct MenuAction *)MultichoiceList_58, 2},
-	{(struct MenuAction *)MultichoiceList_59, 2},
-	{(struct MenuAction *)MultichoiceList_60, 3},
-	{(struct MenuAction *)MultichoiceList_61, 2},
-	{(struct MenuAction *)MultichoiceList_62, 3},
-	{(struct MenuAction *)MultichoiceList_63, 3},
-	{(struct MenuAction *)MultichoiceList_64, 4},
-	{(struct MenuAction *)MultichoiceList_65, 2},
-	{(struct MenuAction *)MultichoiceList_66, 3},
-	{(struct MenuAction *)MultichoiceList_67, 3},
-	{(struct MenuAction *)MultichoiceList_68, 4},
-	{(struct MenuAction *)MultichoiceList_69, 3},
-	{(struct MenuAction *)MultichoiceList_70, 4},
-	{(struct MenuAction *)MultichoiceList_71, 4},
-	{(struct MenuAction *)MultichoiceList_72, 5}
+    {(struct MenuAction *)MultichoiceList_00, 3},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_02, 3},
+    {(struct MenuAction *)MultichoiceList_03, 4},
+    {(struct MenuAction *)MultichoiceList_04, 6},
+    {(struct MenuAction *)MultichoiceList_05, 3},
+    {(struct MenuAction *)MultichoiceList_06, 4},
+    {(struct MenuAction *)MultichoiceList_07, 4},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_12, 2},
+    {(struct MenuAction *)MultichoiceList_13, 6},
+    {(struct MenuAction *)MultichoiceList_14, 2},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_16, 2},
+    {(struct MenuAction *)MultichoiceList_17, 3},
+    {(struct MenuAction *)MultichoiceList_18, 4},
+    {(struct MenuAction *)MultichoiceList_19, 3},
+    {(struct MenuAction *)MultichoiceList_20, 3},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_23, 3},
+    {(struct MenuAction *)MultichoiceList_24, 3},
+    {(struct MenuAction *)MultichoiceList_25, 3},
+    {(struct MenuAction *)MultichoiceList_26, 3},
+    {(struct MenuAction *)MultichoiceList_27, 3},
+    {(struct MenuAction *)MultichoiceList_28, 3},
+    {(struct MenuAction *)MultichoiceList_29, 3},
+    {(struct MenuAction *)MultichoiceList_30, 3},
+    {(struct MenuAction *)MultichoiceList_31, 3},
+    {(struct MenuAction *)MultichoiceList_32, 3},
+    {(struct MenuAction *)MultichoiceList_33, 3},
+    {(struct MenuAction *)MultichoiceList_34, 3},
+    {(struct MenuAction *)MultichoiceList_35, 3},
+    {(struct MenuAction *)MultichoiceList_36, 3},
+    {(struct MenuAction *)MultichoiceList_37, 3},
+    {(struct MenuAction *)MultichoiceList_38, 3},
+    {(struct MenuAction *)MultichoiceList_39, 3},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_42, 4},
+    {(struct MenuAction *)MultichoiceList_43, 4},
+    {(struct MenuAction *)MultichoiceList_44, 4},
+    {(struct MenuAction *)MultichoiceList_45, 2},
+    {(struct MenuAction *)MultichoiceList_46, 3},
+    {(struct MenuAction *)MultichoiceList_47, 8},
+    {(struct MenuAction *)MultichoiceList_48, 4},
+    {(struct MenuAction *)MultichoiceList_49, 3},
+    {(struct MenuAction *)MultichoiceList_50, 2},
+    {(struct MenuAction *)MultichoiceList_01, 1},
+    {(struct MenuAction *)MultichoiceList_52, 3},
+    {(struct MenuAction *)MultichoiceList_53, 3},
+    {(struct MenuAction *)MultichoiceList_54, 2},
+    {(struct MenuAction *)MultichoiceList_55, 6},
+    {(struct MenuAction *)MultichoiceList_56, 3},
+    {(struct MenuAction *)MultichoiceList_57, 5},
+    {(struct MenuAction *)MultichoiceList_58, 2},
+    {(struct MenuAction *)MultichoiceList_59, 2},
+    {(struct MenuAction *)MultichoiceList_60, 3},
+    {(struct MenuAction *)MultichoiceList_61, 2},
+    {(struct MenuAction *)MultichoiceList_62, 3},
+    {(struct MenuAction *)MultichoiceList_63, 3},
+    {(struct MenuAction *)MultichoiceList_64, 4},
+    {(struct MenuAction *)MultichoiceList_65, 2},
+    {(struct MenuAction *)MultichoiceList_66, 3},
+    {(struct MenuAction *)MultichoiceList_67, 3},
+    {(struct MenuAction *)MultichoiceList_68, 4},
+    {(struct MenuAction *)MultichoiceList_69, 3},
+    {(struct MenuAction *)MultichoiceList_70, 4},
+    {(struct MenuAction *)MultichoiceList_71, 4},
+    {(struct MenuAction *)MultichoiceList_72, 5}
 };
 
 const struct TextStruct gUnknown_083CE048[] =
 {
-	OtherText_Cool2,
-	OtherText_Beauty3,
-	OtherText_Cute2,
-	OtherText_Smart2,
-	OtherText_Tough2,
-	OtherText_Normal,
-	OtherText_Super,
-	OtherText_Hyper,
-	OtherText_Master,
-	OtherText_Cool3,
-	OtherText_Beauty4,
-	OtherText_Cute3,
-	OtherText_Smart3,
-	OtherText_Tough3,
-	OtherText_Items,
-	OtherText_KeyItems,
-	OtherText_Balls,
-	OtherText_TMsHMs,
-	OtherText_Berries,
+    OtherText_Cool2,
+    OtherText_Beauty3,
+    OtherText_Cute2,
+    OtherText_Smart2,
+    OtherText_Tough2,
+    OtherText_Normal,
+    OtherText_Super,
+    OtherText_Hyper,
+    OtherText_Master,
+    OtherText_Cool3,
+    OtherText_Beauty4,
+    OtherText_Cute3,
+    OtherText_Smart3,
+    OtherText_Tough3,
+    OtherText_Items,
+    OtherText_KeyItems,
+    OtherText_Balls,
+    OtherText_TMsHMs,
+    OtherText_Berries,
 };
 
 extern u8 gPCText_WhichPCShouldBeAccessed[];

@@ -105,7 +105,7 @@ void sub_805AAB0(void)
 u8 sub_805AB54(void)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (!gMapObjects[i].active)
@@ -134,7 +134,7 @@ bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 
 u8 GetFieldObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
@@ -146,7 +146,7 @@ u8 GetFieldObjectIdByXY(s16 x, s16 y)
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
@@ -158,7 +158,7 @@ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroup)
 u8 GetFieldObjectIdByLocalId(u8 localId)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId)
@@ -174,7 +174,7 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8
     u8 var;
     u16 r3;
     u16 r2;
-    
+
     //asm("nop"::"r"(b));
     if (GetAvailableFieldObjectSlot(template->localId, b, c, &var) != 0)
         return 16;
@@ -382,14 +382,14 @@ u8 sub_805ADDC(u8 localId)
 {
     u8 objectCount;
     u8 i;
-    
+
     if (gMapHeader.events == NULL)
         return 16;
     objectCount = gMapHeader.events->mapObjectCount;
     for (i = 0; i < objectCount; i++)
     {
         struct MapObjectTemplate *template = &gSaveBlock1.mapObjectTemplates[i];
-        
+
         if (template->localId == localId && !FlagGet(template->flagId))
             return InitFieldObjectStateFromTemplate(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
@@ -399,7 +399,7 @@ u8 sub_805ADDC(u8 localId)
 u8 GetAvailableFieldObjectSlot(u16 a, u8 b, u8 c, u8 *d)
 {
     u8 i = 0;
-    
+
     for (i = 0; i < 16 && gMapObjects[i].active; i++)
     {
         if (gMapObjects[i].localId == a && gMapObjects[i].mapNum == b && gMapObjects[i].mapGroup == c)
@@ -425,7 +425,7 @@ void RemoveFieldObject(struct MapObject *mapObject)
 void RemoveFieldObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
-    
+
     if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         return;
     FlagSet(GetFieldObjectFlagIdByFieldObjectId(mapObjectId));
@@ -436,7 +436,7 @@ void RemoveFieldObjectInternal(struct MapObject *mapObject)
 {
     struct SpriteFrameImage image;
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
-    
+
     image.size = gfxInfo->size;
     gSprites[mapObject->spriteId].images = &image;
     DestroySprite(&gSprites[mapObject->spriteId]);
@@ -445,7 +445,7 @@ void RemoveFieldObjectInternal(struct MapObject *mapObject)
 void npc_hide_all_but_player(void)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (i != gPlayerAvatar.mapObjectId)
@@ -460,11 +460,11 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct MapObject *mapObject;
     struct Sprite *sprite;
-    
+
     mapObjectId = InitFieldObjectStateFromTemplate(mapObjTemplate, c, d);
     if (mapObjectId == 16)
         return 16;
-    
+
     mapObject = &gMapObjects[mapObjectId];
     gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     if (gfxInfo->paletteSlot == 0)
@@ -473,7 +473,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
         npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
     if (mapObject->animPattern == 0x4C)
         mapObject->mapobj_bit_13 = TRUE;
-    
+
 #ifdef NONMATCHING
     sprTemplate->paletteTag = 0xFFFF;
 #else
@@ -510,7 +510,7 @@ u8 SpawnFieldObject(struct MapObjectTemplate *mapObjTemplate, u8 b, u8 c, s16 d,
     struct SpriteFrameImage spriteFrameImage;
     const struct MapObjectGraphicsInfo *gfxInfo;
     u8 mapObjectId;
-    
+
     gfxInfo = GetFieldObjectGraphicsInfo(mapObjTemplate->graphicsId);
     MakeObjectTemplateFromFieldObjectTemplate(mapObjTemplate, &spriteTemplate, &subspriteTables);
     spriteFrameImage.size = gfxInfo->size;
@@ -528,7 +528,7 @@ u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjTemplate)
 {
     s16 x;
     s16 y;
-    
+
     GetFieldObjectMovingCameraOffset(&x, &y);
     return SpawnFieldObject(mapObjTemplate, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, x, y);
 }
@@ -536,7 +536,7 @@ u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjTemplate)
 u8 SpawnSpecialFieldObjectParametrized(u8 a, u8 b, u8 c, s16 d, s16 e, u8 f)
 {
     struct MapObjectTemplate mapObjTemplate;
-    
+
     d -= 7;
     e -= 7;
     mapObjTemplate.localId = c;
@@ -558,7 +558,7 @@ u8 show_sprite(u8 a, u8 b, u8 c)
     struct MapObjectTemplate *r5;
     s16 x;
     s16 y;
-    
+
     r5 = GetFieldObjectTemplateByLocalIdAndMap(a, b, c);
     if (r5 == NULL)
         return 16;
@@ -569,7 +569,7 @@ u8 show_sprite(u8 a, u8 b, u8 c)
 void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
 {
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
-    
+
     sprTemplate->tileTag = gfxInfo->tileTag;
     sprTemplate->paletteTag = gfxInfo->paletteTag1;
     sprTemplate->oam = gfxInfo->oam;
@@ -595,7 +595,7 @@ u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c
     struct SpriteTemplate spriteTemplate;
     struct SubspriteTable *subspriteTables;
     u8 spriteId;
-    
+
     MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
     if (spriteTemplate.paletteTag != 0xFFFF)
         sub_805BDF8(spriteTemplate.paletteTag);
@@ -618,7 +618,7 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
     struct SpriteTemplate spriteTemplate;
     struct SubspriteTable *subspriteTables;
     u8 spriteId;
-    
+
     gfxInfo = GetFieldObjectGraphicsInfo(a);
     MakeObjectTemplateFromFieldObjectGraphicsInfo(a, sub_8064970, &spriteTemplate, &subspriteTables);
 #ifdef NONMATCHING
@@ -633,7 +633,7 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
     if (spriteId != 64)
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        
+
         sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
         sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
         sprite->pos1.y += sprite->centerToCornerVecY;
@@ -658,7 +658,7 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
 void sub_805B55C(s16 a, s16 b)
 {
     u8 i;
-    
+
     if (gMapHeader.events != NULL)
     {
         s16 r9 = gSaveBlock1.pos.x - 2;
@@ -666,13 +666,13 @@ void sub_805B55C(s16 a, s16 b)
         s16 r10 = gSaveBlock1.pos.y;
         s16 spC = gSaveBlock1.pos.y + 16;
         u8 objectCount = gMapHeader.events->mapObjectCount;
-        
+
         for (i = 0; i < objectCount; i++)
         {
             struct MapObjectTemplate *template = &gSaveBlock1.mapObjectTemplates[i];
             s16 foo = template->x + 7;
             s16 bar = template->y + 7;
-            
+
             if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo
              && !FlagGet(template->flagId))
                 SpawnFieldObject(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, a, b);
@@ -686,11 +686,11 @@ void RemoveFieldObjectsOutsideView(void)
 {
     u8 i;
     u8 j;
-    
+
     for (i = 0; i < 16; i++)
     {
         bool8 isActiveLinkPlayer;
-        
+
         for (j = 0, isActiveLinkPlayer = 0; j < 4; j++)
         {
             if (gLinkPlayerMapObjects[j].active && i == gLinkPlayerMapObjects[j].mapObjId)
@@ -699,7 +699,7 @@ void RemoveFieldObjectsOutsideView(void)
         if (!isActiveLinkPlayer)
         {
             struct MapObject *mapObject = &gMapObjects[i];
-            
+
             if (mapObject->active && !mapObject->mapobj_bit_16)
             RemoveFieldObjectIfOutsideView(mapObject);
         }
@@ -712,7 +712,7 @@ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
     s16 r5 = gSaveBlock1.pos.x + 17;
     s16 r4 = gSaveBlock1.pos.y;
     s16 r6 = gSaveBlock1.pos.y + 16;
-    
+
     if (mapObject->coords2.x >= r7 && mapObject->coords2.x <= r5
      && mapObject->coords2.y >= r4 && mapObject->coords2.y <= r6)
         return;
@@ -727,7 +727,7 @@ void sub_805B75C(u8, s16, s16);
 void sub_805B710(u16 a, u16 b)
 {
     u8 i;
-    
+
     ClearPlayerAvatarInfo();
     for (i = 0; i < 16; i++)
     {
@@ -748,7 +748,7 @@ void sub_805B75C(u8 a, s16 b, s16 c)
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct MapObject *mapObject;
     u8 spriteId;
-    
+
     #define i spriteId
     for (i = 0; i < 4; i++)
     {
@@ -756,7 +756,7 @@ void sub_805B75C(u8 a, s16 b, s16 c)
             return;
     }
     #undef i
-    
+
     mapObject = &gMapObjects[a];
     asm("":::"r5");
     subspriteTables = NULL;
@@ -774,7 +774,7 @@ void sub_805B75C(u8 a, s16 b, s16 c)
     if (spriteId != 64)
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        
+
         sub_8060388(b + mapObject->coords2.x, c + mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
         sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
         sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
@@ -824,7 +824,7 @@ void sub_805B980(struct MapObject *mapObject, u8 graphicsId)
 {
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct Sprite *sprite;
-    
+
     gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
     sprite = &gSprites[mapObject->spriteId];
     if (gfxInfo->paletteSlot == 0)
@@ -851,7 +851,7 @@ void sub_805B980(struct MapObject *mapObject, u8 graphicsId)
 void unref_sub_805BA80(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
 {
     u8 mapObjectId;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         sub_805B980(&gMapObjects[mapObjectId], graphicsId);
 }
@@ -869,7 +869,7 @@ void FieldObjectTurn(struct MapObject *mapObject, u8 direction)
 void FieldObjectTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direction)
 {
     u8 mapObjectId;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         FieldObjectTurn(&gMapObjects[mapObjectId], direction);
 }
@@ -883,7 +883,7 @@ void get_berry_tree_graphics(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 treeStage;
     u8 treeId;
-    
+
     mapObject->mapobj_bit_13 = TRUE;
     sprite->invisible = TRUE;
     treeStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
@@ -920,7 +920,7 @@ void FieldObjectHandleDynamicGraphicsId(struct MapObject *mapObject)
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGroup, u8 d)
 {
     u8 mapObjectId;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         gMapObjects[mapObjectId].mapobj_bit_13 = d;
 }
@@ -936,7 +936,7 @@ void sub_805BCC0(s16 x, s16 y)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
-    
+
     mapObjectId = GetFieldObjectIdByXY(x, y);
     if (mapObjectId != 16)
     {
@@ -950,7 +950,7 @@ void sub_805BCF0(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
     u8 mapObjectId;
     struct MapObject *mapObject;
     struct Sprite *sprite;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         mapObject = &gMapObjects[mapObjectId];
@@ -964,7 +964,7 @@ void sub_805BD48(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         mapObject = &gMapObjects[mapObjectId];
@@ -977,7 +977,7 @@ void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     u8 mapObjectId;
     struct Sprite *sprite;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         sprite = &gSprites[gMapObjects[mapObjectId].spriteId];
@@ -995,7 +995,7 @@ void gpu_pal_allocator_reset__manage_upper_four(void)
 void sub_805BDF8(u16 tag)
 {
     u16 paletteIndex = FindFieldObjectPaletteIndexByTag(tag);
-    
+
     if (paletteIndex != 0x11FF)  //always happens. FindFieldObjectPaletteIndexByTag returns u8
         sub_805BE58(&gUnknown_0837377C[paletteIndex]);
 }
@@ -1003,7 +1003,7 @@ void sub_805BDF8(u16 tag)
 void unref_sub_805BE24(u16 *arr)
 {
     u8 i;
-    
+
     for (i = 0; arr[i] != 0x11FF; i++)
         sub_805BDF8(arr[i]);
 }
@@ -1020,7 +1020,7 @@ void pal_patch_for_npc(u16 a, u16 b)
 {
     u8 var = b;
     u8 paletteIndex = FindFieldObjectPaletteIndexByTag(a);
-    
+
     LoadPalette(gUnknown_0837377C[paletteIndex].data, var * 16 + 0x100, 0x20);
 }
 
@@ -1033,7 +1033,7 @@ void pal_patch_for_npc_range(const u16 *arr, u8 b, u8 c)
 u8 FindFieldObjectPaletteIndexByTag(u16 tag)
 {
     u8 i;
-    
+
     for (i = 0; gUnknown_0837377C[i].tag != 0x11FF; i++)
     {
         if (gUnknown_0837377C[i].tag == tag)
@@ -1047,7 +1047,7 @@ const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0
 void npc_load_two_palettes__no_record(u16 a, u8 b)
 {
     u8 i;
-    
+
     pal_patch_for_npc(a, b);
     for (i = 0; gUnknown_08373874[i].tag != 0x11FF; i++)
     {
@@ -1062,7 +1062,7 @@ void npc_load_two_palettes__no_record(u16 a, u8 b)
 void npc_load_two_palettes__and_record(u16 a, u8 b)
 {
     u8 i;
-    
+
     gUnknown_030005A6 = a;
     pal_patch_for_npc(a, b);
     for (i = 0; gUnknown_083738E4[i].tag != 0x11FF; i++)
@@ -1103,7 +1103,7 @@ void sub_805C058(struct MapObject *mapObject, s16 x, s16 y)
 {
     struct Sprite *sprite = &gSprites[mapObject->spriteId];
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
-    
+
     npc_coords_set(mapObject, x, y);
     sub_80603CC(mapObject->coords2.x, mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
@@ -1118,7 +1118,7 @@ void sub_805C058(struct MapObject *mapObject, s16 x, s16 y)
 void sub_805C0F8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     u8 mapObjectId;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         x += 7;
@@ -1137,17 +1137,17 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     u8 i;
     s16 deltaX;
     s16 deltaY;
-    
+
 #ifndef NONMATCHING
     asm(""::"r"(i));  //makes the compiler store i in r3
 #endif
 
     if (gUnknown_0202E844.field_0)
-    {    
+    {
         for (i = 0, deltaX = gUnknown_0202E844.x, deltaY = gUnknown_0202E844.y; i < 16; i++)
         {
             struct MapObject *mapObject = &gMapObjects[i];
-            
+
             if (mapObject->active)
             {
                 mapObject->coords1.x -= deltaX;
@@ -1166,7 +1166,7 @@ bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 {
     u8 i;
-    
+
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y
@@ -1207,7 +1207,7 @@ const struct SpriteTemplate gSpriteTemplate_830FD24 =
 u8 AddCameraObject(u8 a)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_830FD24, 0, 0, 4);
-    
+
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].data0 = a;
     return spriteId;
@@ -1225,7 +1225,7 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
         CameraObject_1,
         CameraObject_2,
     };
-    
+
     cameraObjectFuncs[sprite->data1](sprite);
 }
 
@@ -1242,7 +1242,7 @@ void CameraObject_1(struct Sprite *sprite)
 {
     s16 x = gSprites[sprite->data0].pos1.x;
     s16 y = gSprites[sprite->data0].pos1.y;
-    
+
     sprite->data2 = x - sprite->pos1.x;
     sprite->data3 = y - sprite->pos1.y;
     sprite->pos1.x = x;
@@ -1260,7 +1260,7 @@ void CameraObject_2(struct Sprite *sprite)
 struct Sprite *FindCameraObject(void)
 {
     u8 i;
-    
+
     for (i = 0; i < 64; i++)
     {
         if (gSprites[i].inUse && gSprites[i].callback == ObjectCB_CameraObject)
@@ -1272,7 +1272,7 @@ struct Sprite *FindCameraObject(void)
 void CameraObjectReset1(void)
 {
     struct Sprite *cameraSprite = FindCameraObject();
-    
+
     if (cameraSprite != NULL)
     {
         cameraSprite->data1 = 0;
@@ -1283,7 +1283,7 @@ void CameraObjectReset1(void)
 void CameraObjectSetFollowedObjectId(u8 state)
 {
     struct Sprite *cameraSprite = FindCameraObject();
-    
+
     if (cameraSprite != NULL)
     {
         cameraSprite->data0 = state;
@@ -1294,7 +1294,7 @@ void CameraObjectSetFollowedObjectId(u8 state)
 u8 CameraObjectGetFollowedObjectId(void)
 {
     struct Sprite *cameraSprite = FindCameraObject();
-    
+
     if (cameraSprite == NULL)
         return 64;
     else
@@ -1304,14 +1304,14 @@ u8 CameraObjectGetFollowedObjectId(void)
 void CameraObjectReset2(void)
 {
     struct Sprite *cameraSprite = FindCameraObject();
-    
+
     cameraSprite->data1 = 2;
 }
 
 u8 unref_sub_805C43C(struct Sprite *src, s16 x, s16 y, u8 subpriority)
 {
     u8 i;
-    
+
     for (i = 0; i < 64; i++)
     {
         if (!gSprites[i].inUse)
@@ -1329,7 +1329,7 @@ u8 unref_sub_805C43C(struct Sprite *src, s16 x, s16 y, u8 subpriority)
 u8 obj_unfreeze(struct Sprite *src, s16 x, s16 y, u8 subpriority)
 {
     s16 i;
-    
+
     for (i = 63; i > -1; i--)
     {
         if (!gSprites[i].inUse)
@@ -1358,7 +1358,7 @@ void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
 u8 *GetFieldObjectScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     struct MapObjectTemplate *template = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
-    
+
     return template->script;
 }
 
@@ -1370,7 +1370,7 @@ u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId)
 u16 GetFieldObjectFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     struct MapObjectTemplate *template = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
-    
+
     return template->flagId;
 }
 
@@ -1382,7 +1382,7 @@ u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
 u8 unref_sub_805C5D0(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
-    
+
     if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         return 0xFF;
     else
@@ -1397,7 +1397,7 @@ u8 unref_sub_805C60C(u8 mapObjectId)
 u8 unref_sub_805C624(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
-    
+
     if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         return 0xFF;
     else
@@ -1418,7 +1418,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
     else
     {
         struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
-        
+
         return FindFieldObjectTemplateInArrayByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
     }
 }
@@ -1426,7 +1426,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
 struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
 {
     u8 i;
-    
+
     for (i = 0; i < count; i++)
     {
         if (templates[i].localId == localId)
@@ -1438,11 +1438,11 @@ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, st
 struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
 {
     s32 i;
-    
+
     if (mapObject->mapNum != gSaveBlock1.location.mapNum
      || mapObject->mapGroup != gSaveBlock1.location.mapGroup)
         return NULL;
-    
+
     for (i = 0; i < 64; i++)
     {
         if (mapObject->localId == gSaveBlock1.mapObjectTemplates[i].localId)
@@ -1454,7 +1454,7 @@ struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
 void sub_805C754(struct MapObject *mapObject)
 {
     struct MapObjectTemplate *template = sub_805C700(mapObject);
-    
+
     if (template != NULL)
     {
         template->x = mapObject->coords2.x - 7;
@@ -1465,7 +1465,7 @@ void sub_805C754(struct MapObject *mapObject)
 void sub_805C774(struct MapObject *mapObject, u8 movementType)
 {
     struct MapObjectTemplate *template = sub_805C700(mapObject);
-    
+
     if (template != NULL)
         template->movementType = movementType;
 }
@@ -1473,7 +1473,7 @@ void sub_805C774(struct MapObject *mapObject, u8 movementType)
 void sub_805C78C(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
-    
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
         sub_805C754(&gMapObjects[mapObjectId]);
 }
@@ -1489,10 +1489,10 @@ void sub_805C7C4(u8 a)
 u16 npc_paltag_by_palslot(u8 a)
 {
     u8 i;
-    
+
     if (a < 10)
         return gUnknown_0837399C[gUnknown_030005A4][a];
-    
+
     for (i = 0; gUnknown_083738E4[i].tag != 0x11FF; i++)
     {
         if (gUnknown_083738E4[i].tag == gUnknown_030005A6)

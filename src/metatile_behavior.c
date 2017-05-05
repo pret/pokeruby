@@ -3,7 +3,7 @@
 
 #define TILE_ATTRIBUTES(three, two, one) (((one) ? 1 : 0) | ((two) ? 2 : 0) | ((three) ? 4 : 0))
 
-static const u8 sTileBitAttributes[] = 
+static const u8 sTileBitAttributes[] =
 {
     TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE),

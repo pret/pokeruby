@@ -469,9 +469,9 @@ struct MapConnection *sub_8053818(u8 dir)
 
     if (connection == NULL)
         return NULL;
-	
-	for(i = 0; i < count; i++, connection++)
-		if (connection->direction == dir)
+
+    for(i = 0; i < count; i++, connection++)
+        if (connection->direction == dir)
             return connection;
 
     return NULL;

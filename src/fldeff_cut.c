@@ -87,7 +87,7 @@ void sub_80A25E8(void)
 bool8 FldEff_UseCutOnGrass(void)
 {
     u8 taskId = oei_task_add();
-    
+
     gTasks[taskId].data[8] = (u32)sub_80A2684 >> 16;
     gTasks[taskId].data[9] = (u32)sub_80A2684;
     IncrementGameStat(0x12);
@@ -103,7 +103,7 @@ void sub_80A2634(void)
 bool8 FldEff_UseCutOnTree(void)
 {
     u8 taskId = oei_task_add();
-    
+
     gTasks[taskId].data[8] = (u32)sub_80A2B00 >> 16;
     gTasks[taskId].data[9] = (u32)sub_80A2B00;
     IncrementGameStat(0x12);
@@ -157,7 +157,7 @@ bool8 FldEff_CutGrass(void)
 void sub_80A27A8(s16 x, s16 y)
 {
     int metatileId = MapGridGetMetatileIdAt(x, y);
-    
+
     switch(metatileId)
     {
         case 0x208:
@@ -167,19 +167,19 @@ void sub_80A27A8(s16 x, s16 y)
             break;
         case 0x1C6:
             MapGridSetMetatileIdAt(x, y, 0x1CE);
-            break;        
+            break;
         case 0x1C7:
             MapGridSetMetatileIdAt(x, y, 0x1CF);
-            break;        
+            break;
         case 0x281:
             MapGridSetMetatileIdAt(x, y, 0x279);
-            break;            
+            break;
         case 0x282:
             MapGridSetMetatileIdAt(x, y, 0x27A);
-            break;            
+            break;
         case 0x283:
             MapGridSetMetatileIdAt(x, y, 0x27B);
-            break;    
+            break;
         case 0x206:
         case 0x207:
             MapGridSetMetatileIdAt(x, y, 0x271);
@@ -197,7 +197,7 @@ void sub_80A27A8(s16 x, s16 y)
 s32 sub_80A28A0(s16 x, s16 y)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
-    
+
     if(metatileId == 1)
         return 1;
     else if(metatileId == 633)
@@ -214,7 +214,7 @@ void sub_80A28F4(s16 x, s16 y)
 {
     s16 i;
     u16 lowerY = y + 3;
-    
+
     for(i = 0; i < 3; i++)
     {
         u16 currentX = x + i;
@@ -266,7 +266,7 @@ void objc_8097BBC(struct Sprite *sprite)
 
     sprite->pos2.x = Sin(sprite->data2, sprite->data0);
     sprite->pos2.y = Cos(sprite->data2, sprite->data0);
-    
+
     sprite->data2 = (sprite->data2 + 8) & 0xFF;
     sprite->data0 += ((tempdata2 = sprite->data3) << 16 >> 18) + 1; // what?
     sprite->data3 = tempdata2 + 1;
@@ -281,12 +281,12 @@ void objc_8097BBC(struct Sprite *sprite)
 void sub_80A2AB8(void)
 {
     u8 i;
-    
+
     for(i = 1; i < 8; i++)
     {
         DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
     }
-    
+
     FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], 0x3A);
     sub_8064E2C();
     ScriptContext2_Disable();

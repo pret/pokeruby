@@ -29,26 +29,26 @@ extern struct HallOfFame gHallOfFame;
 
 const struct SaveSectionLocation gSaveSectionLocations[] =
 {
-	{((u8 *) &gSaveBlock2) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock2, 1)},
-	{((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock1, 1)},
-	{((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gSaveBlock1, 2)},
-	{((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gSaveBlock1, 3)},
-	{((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gSaveBlock1, 4)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gPokemonStorage, 1)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gPokemonStorage, 2)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gPokemonStorage, 3)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gPokemonStorage, 4)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(5), GETCHUNKSIZE(gPokemonStorage, 5)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(6), GETCHUNKSIZE(gPokemonStorage, 6)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(7), GETCHUNKSIZE(gPokemonStorage, 7)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(8), GETCHUNKSIZE(gPokemonStorage, 8)},
-	{((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(9), GETCHUNKSIZE(gPokemonStorage, 9)}
+    {((u8 *) &gSaveBlock2) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock2, 1)},
+    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock1, 1)},
+    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gSaveBlock1, 2)},
+    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gSaveBlock1, 3)},
+    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gSaveBlock1, 4)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gPokemonStorage, 1)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gPokemonStorage, 2)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gPokemonStorage, 3)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gPokemonStorage, 4)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(5), GETCHUNKSIZE(gPokemonStorage, 5)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(6), GETCHUNKSIZE(gPokemonStorage, 6)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(7), GETCHUNKSIZE(gPokemonStorage, 7)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(8), GETCHUNKSIZE(gPokemonStorage, 8)},
+    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(9), GETCHUNKSIZE(gPokemonStorage, 9)}
 };
 
 const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] =
 {
-	{((u8 *) &gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
-	{((u8 *) &gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
+    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
+    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
 };
 
 const u8 gFlashSectors[] = { 0x1E, 0x1F };
@@ -352,7 +352,7 @@ u8 sub_81257F0(u16 a1, const struct SaveSectionLocation *location)
 
     if (ProgramFlashByte(sector, sizeof(struct UnkSaveSection), 0x25))
     {
-		// sector is damaged, so enable the bit in gDamagedSaveSectors and restore the last written sector and save counter.
+        // sector is damaged, so enable the bit in gDamagedSaveSectors and restore the last written sector and save counter.
         SetDamagedSectorBits(ENABLE, sector);
         gLastWrittenSector = gLastKnownGoodSector;
         gSaveCounter = gLastSaveCounter;
