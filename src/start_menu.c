@@ -73,8 +73,7 @@ static u8 StartMenu_ExitCallback(void);
 static u8 StartMenu_RetireCallback(void);
 static u8 StartMenu_PlayerLinkCallback(void);
 
-static const struct MenuAction sStartMenuItems[] =
-{
+static const struct MenuAction sStartMenuItems[] = {
     { SystemText_Pokedex, StartMenu_PokedexCallback },
     { SystemText_Pokemon, StartMenu_PokemonCallback },
     { SystemText_BAG, StartMenu_BagCallback },

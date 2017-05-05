@@ -10,30 +10,26 @@
 #include "task.h"
 
 // multichoice lists
-const struct MenuAction MultichoiceList_00[] =
-{
+const struct MenuAction MultichoiceList_00[] = {
     {(u8 *)OtherText_Petalburg, 0},
     {(u8 *)OtherText_Slateport, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_02[] =
-{
+const struct MenuAction MultichoiceList_02[] = {
     {(u8 *)OtherText_Enter, 0},
     {(u8 *)OtherText_Info3, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_03[] =
-{
+const struct MenuAction MultichoiceList_03[] = {
     {(u8 *)OtherText_WhatsAContest, 0},
     {(u8 *)OtherText_TypesOfContest, 0},
     {(u8 *)OtherText_Ranks, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_04[] =
-{
+const struct MenuAction MultichoiceList_04[] = {
     {(u8 *)OtherText_CoolContest, 0},
     {(u8 *)OtherText_BeautyContest, 0},
     {(u8 *)OtherText_CuteContest, 0},
@@ -42,37 +38,32 @@ const struct MenuAction MultichoiceList_04[] =
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_06[] =
-{
+const struct MenuAction MultichoiceList_06[] = {
     {(u8 *)OtherText_Decoration, 0},
     {(u8 *)OtherText_PackUp, 0},
     {(u8 *)OtherText_Registry, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_05[] =
-{
+const struct MenuAction MultichoiceList_05[] = {
     {(u8 *)OtherText_Decoration, 0},
     {(u8 *)OtherText_PackUp, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_07[] =
-{
+const struct MenuAction MultichoiceList_07[] = {
     {(u8 *)OtherText_Register, 0},
     {(u8 *)OtherText_Registry, 0},
     {(u8 *)OtherText_Information, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_12[] =
-{
+const struct MenuAction MultichoiceList_12[] = {
     {(u8 *)OtherText_Mach, 0},
     {(u8 *)OtherText_Acro, 0},
 };
 
-const struct MenuAction MultichoiceList_13[] =
-{
+const struct MenuAction MultichoiceList_13[] = {
     {(u8 *)OtherText_Poison, 0},
     {(u8 *)OtherText_Paralysis, 0},
     {(u8 *)OtherText_Sleep, 0},
@@ -81,205 +72,176 @@ const struct MenuAction MultichoiceList_13[] =
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_14[] =
-{
+const struct MenuAction MultichoiceList_14[] = {
     {(u8 *)OtherText_Dewford, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_16[] =
-{
+const struct MenuAction MultichoiceList_16[] = {
     {(u8 *)OtherText_SawIt, 0},
     {(u8 *)OtherText_NotYet, 0},
 };
 
-const struct MenuAction MultichoiceList_17[] =
-{
+const struct MenuAction MultichoiceList_17[] = {
     {(u8 *)OtherText_Yes, 0},
     {(u8 *)OtherText_No, 0},
     {(u8 *)OtherText_Info3, 0},
 };
 
-const struct MenuAction MultichoiceList_18[] =
-{
+const struct MenuAction MultichoiceList_18[] = {
     {(u8 *)OtherText_SingleBattle, 0},
     {(u8 *)OtherText_DoubleBattle, 0},
     {(u8 *)OtherText_MultiBattle, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_19[] =
-{
+const struct MenuAction MultichoiceList_19[] = {
     {(u8 *)OtherText_Littleroot, 0},
     {(u8 *)OtherText_Slateport, 0},
     {(u8 *)OtherText_Lilycove, 0},
 };
 
-const struct MenuAction MultichoiceList_20[] =
-{
+const struct MenuAction MultichoiceList_20[] = {
     {(u8 *)OtherText_Yes, 0},
     {(u8 *)OtherText_No, 0},
     {(u8 *)OtherText_Info3, 0},
 };
 
-const struct MenuAction MultichoiceList_23[] =
-{
+const struct MenuAction MultichoiceList_23[] = {
     {(u8 *)OtherText_MakeAChallenge, 0},
     {(u8 *)OtherText_ObtainInformation, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_24[] =
-{
+const struct MenuAction MultichoiceList_24[] = {
     {(u8 *)OtherText_Lv50_2, 0},
     {(u8 *)OtherText_Lv100_2, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_25[] =
-{
+const struct MenuAction MultichoiceList_25[] = {
     {(u8 *)OtherText_Zigzagoon, 0},
     {(u8 *)OtherText_Nincada, 0},
     {(u8 *)OtherText_Poochyena, 0},
 };
 
-const struct MenuAction MultichoiceList_26[] =
-{
+const struct MenuAction MultichoiceList_26[] = {
     {(u8 *)OtherText_Nincada2, 0},
     {(u8 *)OtherText_Lotad, 0},
     {(u8 *)OtherText_Roselia, 0},
 };
 
-const struct MenuAction MultichoiceList_27[] =
-{
+const struct MenuAction MultichoiceList_27[] = {
     {(u8 *)OtherText_Shroomish, 0},
     {(u8 *)OtherText_Nincada3, 0},
     {(u8 *)OtherText_Surskit, 0},
 };
 
-const struct MenuAction MultichoiceList_28[] =
-{
+const struct MenuAction MultichoiceList_28[] = {
     {(u8 *)OtherText_Treecko, 0},
     {(u8 *)OtherText_Torchic, 0},
     {(u8 *)OtherText_Mudkip, 0},
 };
 
-const struct MenuAction MultichoiceList_29[] =
-{
+const struct MenuAction MultichoiceList_29[] = {
     {(u8 *)OtherText_Seedot, 0},
     {(u8 *)OtherText_Shroomish2, 0},
     {(u8 *)OtherText_Spinda, 0},
 };
 
-const struct MenuAction MultichoiceList_30[] =
-{
+const struct MenuAction MultichoiceList_30[] = {
     {(u8 *)OtherText_Shroomish3, 0},
     {(u8 *)OtherText_Zigzagoon2, 0},
     {(u8 *)OtherText_Wurmple, 0},
 };
 
-const struct MenuAction MultichoiceList_31[] =
-{
+const struct MenuAction MultichoiceList_31[] = {
     {(u8 *)OtherText_PokeBall, 0},
     {(u8 *)OtherText_SuperPotion, 0},
     {(u8 *)OtherText_SamePrice, 0},
 };
 
-const struct MenuAction MultichoiceList_32[] =
-{
+const struct MenuAction MultichoiceList_32[] = {
     {(u8 *)OtherText_Yen135, 0},
     {(u8 *)OtherText_Yen155, 0},
     {(u8 *)OtherText_Yen175, 0},
 };
 
-const struct MenuAction MultichoiceList_33[] =
-{
+const struct MenuAction MultichoiceList_33[] = {
     {(u8 *)OtherText_CostMore, 0},
     {(u8 *)OtherText_CostLess, 0},
     {(u8 *)OtherText_SamePrice2, 0},
 };
 
-const struct MenuAction MultichoiceList_34[] =
-{
+const struct MenuAction MultichoiceList_34[] = {
     {(u8 *)OtherText_MaleSymbol, 0},
     {(u8 *)OtherText_FemaleSymbol, 0},
     {(u8 *)OtherText_Neither, 0},
 };
 
-const struct MenuAction MultichoiceList_35[] =
-{
+const struct MenuAction MultichoiceList_35[] = {
     {(u8 *)OtherText_Males, 0},
     {(u8 *)OtherText_Females, 0},
     {(u8 *)OtherText_SameNumber, 0},
 };
 
-const struct MenuAction MultichoiceList_36[] =
-{
+const struct MenuAction MultichoiceList_36[] = {
     {(u8 *)OtherText_Male, 0},
     {(u8 *)OtherText_Female, 0},
     {(u8 *)OtherText_ItDepends, 0},
 };
 
-const struct MenuAction MultichoiceList_37[] =
-{
+const struct MenuAction MultichoiceList_37[] = {
     {(u8 *)OtherText_Six2, 0},
     {(u8 *)OtherText_Eight2, 0},
     {(u8 *)OtherText_Ten, 0},
 };
 
-const struct MenuAction MultichoiceList_38[] =
-{
+const struct MenuAction MultichoiceList_38[] = {
     {(u8 *)OtherText_One, 0},
     {(u8 *)OtherText_Two, 0},
     {(u8 *)OtherText_Three, 0},
 };
 
-const struct MenuAction MultichoiceList_39[] =
-{
+const struct MenuAction MultichoiceList_39[] = {
     {(u8 *)OtherText_Six, 0},
     {(u8 *)OtherText_Seven, 0},
     {(u8 *)OtherText_Eight, 0},
 };
 
-const struct MenuAction MultichoiceList_42[] =
-{
+const struct MenuAction MultichoiceList_42[] = {
     {(u8 *)OtherText_FreshWater, 0},
     {(u8 *)OtherText_SodaPop, 0},
     {(u8 *)OtherText_Lemonade, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_43[] =
-{
+const struct MenuAction MultichoiceList_43[] = {
     {(u8 *)OtherText_HowToRide, 0},
     {(u8 *)OtherText_HowToTurn, 0},
     {(u8 *)OtherText_SandySlopes, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_44[] =
-{
+const struct MenuAction MultichoiceList_44[] = {
     {(u8 *)OtherText_Wheelies, 0},
     {(u8 *)OtherText_BunnyHops, 0},
     {(u8 *)OtherText_Jumping, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_45[] =
-{
+const struct MenuAction MultichoiceList_45[] = {
     {(u8 *)OtherText_Satisfied, 0},
     {(u8 *)OtherText_Dissatisfied, 0},
 };
 
-const struct MenuAction MultichoiceList_46[] =
-{
+const struct MenuAction MultichoiceList_46[] = {
     {(u8 *)OtherText_Deepseatooth, 0},
     {(u8 *)OtherText_Deepseascale, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_47[] =
-{
+const struct MenuAction MultichoiceList_47[] = {
     {(u8 *)OtherText_BlueFlute2, 0},
     {(u8 *)OtherText_YellowFlute2, 0},
     {(u8 *)OtherText_RedFlute2, 0},
@@ -290,16 +252,14 @@ const struct MenuAction MultichoiceList_47[] =
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_48[] =
-{
+const struct MenuAction MultichoiceList_48[] = {
     {(u8 *)OtherText_TreeckoDoll, 0},
     {(u8 *)OtherText_TorchicDoll, 0},
     {(u8 *)OtherText_MudkipDoll, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_55[] =
-{
+const struct MenuAction MultichoiceList_55[] = {
     {(u8 *)OtherText_TM32, 0},
     {(u8 *)OtherText_TM29, 0},
     {(u8 *)OtherText_TM35, 0},
@@ -308,48 +268,41 @@ const struct MenuAction MultichoiceList_55[] =
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_49[] =
-{
+const struct MenuAction MultichoiceList_49[] = {
     {(u8 *)OtherText_50Coins, 0},
     {(u8 *)OtherText_500Coins, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_50[] =
-{
+const struct MenuAction MultichoiceList_50[] = {
     {(u8 *)OtherText_Excellent, 0},
     {(u8 *)OtherText_NotSoHot, 0},
 };
 
-const struct MenuAction MultichoiceList_52[] =
-{
+const struct MenuAction MultichoiceList_52[] = {
     {(u8 *)OtherText_Lilycove, 0},
     {(u8 *)OtherText_BattleTower, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_53[] =
-{
+const struct MenuAction MultichoiceList_53[] = {
     {(u8 *)OtherText_Slateport, 0},
     {(u8 *)OtherText_Lilycove, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_54[] =
-{
+const struct MenuAction MultichoiceList_54[] = {
     {(u8 *)OtherText_Right, 0},
     {(u8 *)OtherText_Left, 0},
 };
 
-const struct MenuAction MultichoiceList_56[] =
-{
+const struct MenuAction MultichoiceList_56[] = {
     {(u8 *)OtherText_Slateport, 0},
     {(u8 *)OtherText_BattleTower, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_57[] =
-{
+const struct MenuAction MultichoiceList_57[] = {
     {(u8 *)OtherText_1F_2, 0},
     {(u8 *)OtherText_2F_2, 0},
     {(u8 *)OtherText_3F_2, 0},
@@ -357,106 +310,91 @@ const struct MenuAction MultichoiceList_57[] =
     {(u8 *)OtherText_5F_2, 0},
 };
 
-const struct MenuAction MultichoiceList_58[] =
-{
+const struct MenuAction MultichoiceList_58[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_59[] =
-{
+const struct MenuAction MultichoiceList_59[] = {
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_60[] =
-{
+const struct MenuAction MultichoiceList_60[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_61[] =
-{
+const struct MenuAction MultichoiceList_61[] = {
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_62[] =
-{
+const struct MenuAction MultichoiceList_62[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_63[] =
-{
+const struct MenuAction MultichoiceList_63[] = {
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_64[] =
-{
+const struct MenuAction MultichoiceList_64[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_65[] =
-{
+const struct MenuAction MultichoiceList_65[] = {
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_66[] =
-{
+const struct MenuAction MultichoiceList_66[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_67[] =
-{
+const struct MenuAction MultichoiceList_67[] = {
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_68[] =
-{
+const struct MenuAction MultichoiceList_68[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_69[] =
-{
+const struct MenuAction MultichoiceList_69[] = {
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_70[] =
-{
+const struct MenuAction MultichoiceList_70[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_71[] =
-{
+const struct MenuAction MultichoiceList_71[] = {
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
     {(u8 *)OtherText_GreenShard, 0},
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_72[] =
-{
+const struct MenuAction MultichoiceList_72[] = {
     {(u8 *)OtherText_RedShard, 0},
     {(u8 *)OtherText_YellowShard, 0},
     {(u8 *)OtherText_BlueShard, 0},
@@ -464,13 +402,11 @@ const struct MenuAction MultichoiceList_72[] =
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MenuAction MultichoiceList_01[] =
-{
+const struct MenuAction MultichoiceList_01[] = {
     {(u8 *)gOtherText_CancelNoTerminator, 0},
 };
 
-const struct MultichoiceListStruct gMultichoiceLists[] =
-{
+const struct MultichoiceListStruct gMultichoiceLists[] = {
     {(struct MenuAction *)MultichoiceList_00, 3},
     {(struct MenuAction *)MultichoiceList_01, 1},
     {(struct MenuAction *)MultichoiceList_02, 3},
@@ -546,8 +482,7 @@ const struct MultichoiceListStruct gMultichoiceLists[] =
     {(struct MenuAction *)MultichoiceList_72, 5}
 };
 
-const struct TextStruct gUnknown_083CE048[] =
-{
+const struct TextStruct gUnknown_083CE048[] = {
     OtherText_Cool2,
     OtherText_Beauty3,
     OtherText_Cute2,

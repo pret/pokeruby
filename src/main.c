@@ -39,8 +39,7 @@ const char BuildDateTime[] = "2002 10 15 20:34";
 const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
 #endif
 
-const IntrFunc gIntrTableTemplate[] =
-{
+const IntrFunc gIntrTableTemplate[] = {
     SerialIntr, // Serial interrupt
     Timer3Intr, // Timer 3 interrupt
     HBlankIntr, // H-blank interrupt

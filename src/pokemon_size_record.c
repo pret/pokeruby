@@ -19,8 +19,7 @@ struct UnknownStruct
 
 extern u16 gScriptResult;
 
-static const struct UnknownStruct sBigMonSizeTable[] =
-{
+static const struct UnknownStruct sBigMonSizeTable[] = {
     {  290,   1,      0 },
     {  300,   1,     10 },
     {  400,   2,    110 },

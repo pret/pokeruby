@@ -1,16 +1,14 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-const u16 mxMaxTime[] =
-{
+const u16 mxMaxTime[] = {
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
     2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
     2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
 };
 
-const struct FlashSetupInfo MX29L010 =
-{
+const struct FlashSetupInfo MX29L010 = {
     ProgramFlashByte_MX,
     ProgramFlashSector_MX,
     EraseFlashChip_MX,
@@ -30,8 +28,7 @@ const struct FlashSetupInfo MX29L010 =
     }
 };
 
-const struct FlashSetupInfo DefaultFlash =
-{
+const struct FlashSetupInfo DefaultFlash = {
     ProgramFlashByte_MX,
     ProgramFlashSector_MX,
     EraseFlashChip_MX,

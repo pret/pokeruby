@@ -23,8 +23,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 // Graphics Data
 //--------------------------------------------------
 
-const u16 gBirchBagGrassPal[][16] =
-{
+const u16 gBirchBagGrassPal[][16] = {
     INCBIN_U16("graphics/misc/birch_bag.gbapal"),
     INCBIN_U16("graphics/misc/birch_grass.gbapal"),
 };
@@ -35,21 +34,18 @@ const u8 gBirchGrassTilemap[] = INCBIN_U8("graphics/misc/birch_grass_map.bin.lz"
 const u8 gBirchHelpGfx[] = INCBIN_U8("graphics/misc/birch_help.4bpp.lz");
 static const u8 gBirchBallarrow_Gfx[] = INCBIN_U8("graphics/misc/birch_ballarrow.4bpp.lz");
 static const u8 gBirchCircle_Gfx[] = INCBIN_U8("graphics/misc/birch_circle.4bpp.lz");
-static const u8 gStarterChoose_PokeballCoords[][2] =
-{
+static const u8 gStarterChoose_PokeballCoords[][2] = {
     {60, 64},
     {120, 88},
     {180, 64},
 };
-static const u8 gStarterChoose_LabelCoords[][2] =
-{
+static const u8 gStarterChoose_LabelCoords[][2] = {
     {0, 9},
     {16, 10},
     {8, 4},
 };
 static const u16 sStarterMons[] = {SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
-static const struct OamData gOamData_83F76CC =
-{
+static const struct OamData gOamData_83F76CC = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -64,8 +60,7 @@ static const struct OamData gOamData_83F76CC =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const struct OamData gOamData_83F76D4 =
-{
+static const struct OamData gOamData_83F76D4 = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -80,8 +75,7 @@ static const struct OamData gOamData_83F76D4 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const struct OamData gOamData_83F76DC =
-{
+static const struct OamData gOamData_83F76DC = {
     .y = 160,
     .affineMode = 3,
     .objMode = 0,
@@ -96,25 +90,21 @@ static const struct OamData gOamData_83F76DC =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const u8 gUnknown_083F76E4[][2] =
-{
+static const u8 gUnknown_083F76E4[][2] = {
     {60, 32},
     {120, 56},
     {180, 32},
     {0, 0},
 };
-static const union AnimCmd gSpriteAnim_83F76EC[] =
-{
+static const union AnimCmd gSpriteAnim_83F76EC[] = {
     ANIMCMD_FRAME(48, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_83F76F4[] =
-{
+static const union AnimCmd gSpriteAnim_83F76F4[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_83F76FC[] =
-{
+static const union AnimCmd gSpriteAnim_83F76FC[] = {
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(32, 4),
@@ -134,63 +124,51 @@ static const union AnimCmd gSpriteAnim_83F76FC[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_JUMP(0),
 };
-static const union AnimCmd gSpriteAnim_83F7744[] =
-{
+static const union AnimCmd gSpriteAnim_83F7744[] = {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F774C[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F774C[] = {
     gSpriteAnim_83F76EC,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F7750[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F7750[] = {
     gSpriteAnim_83F76F4,
     gSpriteAnim_83F76FC,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F7758[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F7758[] = {
     gSpriteAnim_83F7744,
 };
-static const union AffineAnimCmd gSpriteAffineAnim_83F775C[] =
-{
+static const union AffineAnimCmd gSpriteAffineAnim_83F775C[] = {
     AFFINEANIMCMD_FRAME(16, 16, 0, 0),
     AFFINEANIMCMD_FRAME(16, 16, 0, 15),
     AFFINEANIMCMD_END,
 };
-static const union AffineAnimCmd gSpriteAffineAnim_83F7774[] =
-{
+static const union AffineAnimCmd gSpriteAffineAnim_83F7774[] = {
     AFFINEANIMCMD_FRAME(20, 20, 0, 0),
     AFFINEANIMCMD_FRAME(20, 20, 0, 15),
     AFFINEANIMCMD_END,
 };
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[] =
-{
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[] = {
     gSpriteAffineAnim_83F775C,
 };
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] =
-{
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] = {
     gSpriteAffineAnim_83F7774,
 };
-static const struct SpriteSheet gUnknown_083F7794[] =
-{
+static const struct SpriteSheet gUnknown_083F7794[] = {
     {gBirchBallarrow_Gfx, 0x0800, 0x1000},
     {NULL},
 };
-static const struct SpriteSheet gUnknown_083F77A4[] =
-{
+static const struct SpriteSheet gUnknown_083F77A4[] = {
     {gBirchCircle_Gfx, 0x0800, 0x1001},
     {NULL},
 };
-const struct SpritePalette gUnknown_083F77B4[] =
-{
+const struct SpritePalette gUnknown_083F77B4[] = {
     {gBirchBallarrow_Pal, 0x1000},
     {gBirchCircle_Pal, 0x1001},
     {NULL},
 };
 static void sub_810A62C(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77CC =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77CC = {
     .tileTag = 4096,
     .paletteTag = 4096,
     .oam = &gOamData_83F76CC,
@@ -200,8 +178,7 @@ static const struct SpriteTemplate gSpriteTemplate_83F77CC =
     .callback = sub_810A62C,
 };
 static void sub_810A68C(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77E4 =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77E4 = {
     .tileTag = 4096,
     .paletteTag = 4096,
     .oam = &gOamData_83F76D4,
@@ -211,8 +188,7 @@ static const struct SpriteTemplate gSpriteTemplate_83F77E4 =
     .callback = sub_810A68C,
 };
 static void StarterPokemonSpriteAnimCallback(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77FC =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77FC = {
     .tileTag = 4097,
     .paletteTag = 4097,
     .oam = &gOamData_83F76DC,

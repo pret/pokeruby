@@ -99,8 +99,7 @@ u8 Fishing14(struct Task *task);
 u8 Fishing15(struct Task *task);
 u8 Fishing16(struct Task *task);
 
-static bool8 (*const gUnknown_0830FB58[])(u8) =
-{
+static bool8 (*const gUnknown_0830FB58[])(u8) = {
     MetatileBehavior_IsTrickHouseSlipperyFloor,
     MetatileBehavior_IsIce_2,
     MetatileBehavior_IsWalkSouth,
@@ -120,8 +119,7 @@ static bool8 (*const gUnknown_0830FB58[])(u8) =
     MetatileBehavior_0xBC,
     MetatileBehavior_IsMuddySlope,
 };
-static u8 (*const gUnknown_0830FBA0[])(void) =
-{
+static u8 (*const gUnknown_0830FBA0[])(void) = {
     ForcedMovement_None,
     ForcedMovement_Slip,
     ForcedMovement_Slip,
@@ -142,14 +140,12 @@ static u8 (*const gUnknown_0830FBA0[])(void) =
     sub_8058C10,
     ForcedMovement_MuddySlope,
 };
-static void (*const gUnknown_0830FBEC[])(u8, u16) =
-{
+static void (*const gUnknown_0830FBEC[])(u8, u16) = {
     PlayerNotOnBikeNotMoving,
     PlayerNotOnBikeTurningInPlace,
     sub_8058D0C,
 };
-static bool8 (*const gUnknown_0830FBF8[])(u8) =
-{
+static bool8 (*const gUnknown_0830FBF8[])(u8) = {
     MetatileBehavior_IsBumpySlope,
     MetatileBehavior_IsIsolatedVerticalRail,
     MetatileBehavior_IsIsolatedHorizontalRail,
@@ -157,8 +153,7 @@ static bool8 (*const gUnknown_0830FBF8[])(u8) =
     MetatileBehavior_IsHorizontalRail,
 };
 static const u8 gUnknown_0830FC0C[] = {9, 10, 11, 12, 13};
-static void (*const gUnknown_0830FC14[])(struct MapObject *) =
-{
+static void (*const gUnknown_0830FC14[])(struct MapObject *) = {
     PlayerAvatarTransition_Normal,
     PlayerAvatarTransition_MachBike,
     PlayerAvatarTransition_AcroBike,
@@ -168,15 +163,13 @@ static void (*const gUnknown_0830FC14[])(struct MapObject *) =
     nullsub_49,
     nullsub_49,
 };
-static bool8 (*const gUnknown_0830FC34[])(u8) =
-{
+static bool8 (*const gUnknown_0830FC34[])(u8) = {
     MetatileBehavior_IsSouthArrowWarp,
     MetatileBehavior_IsNorthArrowWarp,
     MetatileBehavior_IsWestArrowWarp,
     MetatileBehavior_IsEastArrowWarp,
 };
-static const u8 sRivalAvatarGfxIds[][2] =
-{
+static const u8 sRivalAvatarGfxIds[][2] = {
     {MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     MAP_OBJ_GFX_RIVAL_MAY_NORMAL},
     {MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
     {MAP_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
@@ -186,8 +179,7 @@ static const u8 sRivalAvatarGfxIds[][2] =
     {MAP_OBJ_GFX_BRENDAN_FISHING,          MAP_OBJ_GFX_MAY_FISHING},
     {MAP_OBJ_GFX_BRENDAN_WATERING,         MAP_OBJ_GFX_MAY_WATERING},
 };
-static const u8 sPlayerAvatarGfxIds[][2] =
-{
+static const u8 sPlayerAvatarGfxIds[][2] = {
     {MAP_OBJ_GFX_BRENDAN_NORMAL,     MAP_OBJ_GFX_MAY_NORMAL},
     {MAP_OBJ_GFX_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_MAY_MACH_BIKE},
     {MAP_OBJ_GFX_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_MAY_ACRO_BIKE},
@@ -197,8 +189,7 @@ static const u8 sPlayerAvatarGfxIds[][2] =
     {MAP_OBJ_GFX_BRENDAN_FISHING,    MAP_OBJ_GFX_MAY_FISHING},
     {MAP_OBJ_GFX_BRENDAN_WATERING,   MAP_OBJ_GFX_MAY_WATERING},
 };
-static const u8 gUnknown_0830FC64[2][5][2] =
-{
+static const u8 gUnknown_0830FC64[2][5][2] = {
     //male
     {
         {MAP_OBJ_GFX_BRENDAN_NORMAL, 1},
@@ -223,18 +214,15 @@ static bool8 (*const gUnknown_0830FC78[])(u8) =  //Duplicate of gUnknown_0830FC3
     MetatileBehavior_IsWestArrowWarp,
     MetatileBehavior_IsEastArrowWarp,
 };
-static u8 (*const gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *) =
-{
+static u8 (*const gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *) = {
     sub_8059E84,
     sub_8059EA4,
     sub_8059F40,
 };
-static u8 (*const gUnknown_0830FC94[])(struct Task *, struct MapObject *) =
-{
+static u8 (*const gUnknown_0830FC94[])(struct Task *, struct MapObject *) = {
     sub_805A000,
 };
-static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
-{
+static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) = {
     sub_805A0D8,
     sub_805A100,
     sub_805A178,
@@ -1453,8 +1441,7 @@ static void sub_805A2D0(u8 taskId)
 
 /* Fishing */
 
-static u8 (*const gUnknown_0830FCB4[])(struct Task *) =
-{
+static u8 (*const gUnknown_0830FCB4[])(struct Task *) = {
     Fishing1,
     Fishing2,
     Fishing3,

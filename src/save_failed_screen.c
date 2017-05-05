@@ -41,8 +41,7 @@ extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];
 extern u8 gBirchBagGrassPal[0x40];
 
-static const struct OamData sClockOamData =
-{
+static const struct OamData sClockOamData = {
     160, // Y
     0,
     0,
@@ -58,8 +57,7 @@ static const struct OamData sClockOamData =
     0
 };
 
-static const u8 sClockFrames[8][3] =
-{
+static const u8 sClockFrames[8][3] = {
     { 1, 0, 0 },
     { 5, 0, 0 },
     { 9, 0, 0 },

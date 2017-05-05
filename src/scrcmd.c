@@ -67,8 +67,7 @@ extern struct Decoration gDecorations[];
 // script.c.
 void * const gNullScriptPtr = NULL;
 
-static const u8 sScriptConditionTable[6][3] =
-{
+static const u8 sScriptConditionTable[6][3] = {
 //  <  =  >
     1, 0, 0, // <
     0, 1, 0, // =
@@ -78,8 +77,7 @@ static const u8 sScriptConditionTable[6][3] =
     1, 0, 1, // !=
 };
 
-static u8 * const sScriptStringVars[] =
-{
+static u8 * const sScriptStringVars[] = {
     gStringVar1,
     gStringVar2,
     gStringVar3,

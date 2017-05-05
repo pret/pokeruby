@@ -27,8 +27,7 @@ extern u32 gGameContinueCallback;
 extern struct PokemonStorage gPokemonStorage;
 extern struct HallOfFame gHallOfFame;
 
-const struct SaveSectionLocation gSaveSectionLocations[] =
-{
+const struct SaveSectionLocation gSaveSectionLocations[] = {
     {((u8 *) &gSaveBlock2) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock2, 1)},
     {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock1, 1)},
     {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gSaveBlock1, 2)},
@@ -45,8 +44,7 @@ const struct SaveSectionLocation gSaveSectionLocations[] =
     {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(9), GETCHUNKSIZE(gPokemonStorage, 9)}
 };
 
-const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] =
-{
+const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] = {
     {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
     {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
 };

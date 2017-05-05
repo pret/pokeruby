@@ -145,8 +145,7 @@ static void BattleAICmd_if_not_taunted(void);
 
 typedef void (*BattleAICmdFunc)(void);
 
-static const BattleAICmdFunc sBattleAICmdTable[] =
-{
+static const BattleAICmdFunc sBattleAICmdTable[] = {
     BattleAICmd_if_random_less_than,
     BattleAICmd_if_random_greater_than,
     BattleAICmd_if_random_equal,
@@ -246,8 +245,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
 #ifdef NONMATCHING
 static
 #endif
-const u16 sDiscouragedPowerfulMoveEffects[] =
-{
+const u16 sDiscouragedPowerfulMoveEffects[] = {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
     EFFECT_RAZOR_WIND,

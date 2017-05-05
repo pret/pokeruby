@@ -1,16 +1,14 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-const u16 leMaxTime[] =
-{
+const u16 leMaxTime[] = {
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
     2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
     2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
 };
 
-const struct FlashSetupInfo LE26FV10N1TS =
-{
+const struct FlashSetupInfo LE26FV10N1TS = {
     ProgramFlashByte_MX,
     ProgramFlashSector_MX,
     EraseFlashChip_MX,

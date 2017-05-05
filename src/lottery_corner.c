@@ -16,8 +16,7 @@ extern u16 gSpecialVar_0x8006;
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
 
-static const u16 sLotteryPrizes[] =
-{
+static const u16 sLotteryPrizes[] = {
     ITEM_PP_UP,
     ITEM_EXP_SHARE,
     ITEM_MAX_REVIVE,

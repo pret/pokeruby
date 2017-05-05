@@ -26,8 +26,7 @@ extern struct Unk3000756 gUnknown_03000756;
 extern struct Unk03005E20 gUnknown_03005E20;
 extern struct ContestEntry *gUnknown_03005E8C;
 
-static const u16 gPictureFramePalettes[][16] =
-{
+static const u16 gPictureFramePalettes[][16] = {
     INCBIN_U16("graphics/picture_frame/bg0.gbapal"),
     INCBIN_U16("graphics/picture_frame/bg1.gbapal"),
     INCBIN_U16("graphics/picture_frame/bg2.gbapal"),
@@ -50,16 +49,14 @@ const u8 gPictureFrameTilemap_2[] = INCBIN_U8("graphics/picture_frame/frame2_map
 const u8 gPictureFrameTilemap_3[] = INCBIN_U8("graphics/picture_frame/frame3_map.bin.rl");
 const u8 gPictureFrameTilemap_4[] = INCBIN_U8("graphics/picture_frame/frame4_map.bin.rl");
 const u8 gPictureFrameTilemap_5[] = INCBIN_U8("graphics/picture_frame/frame5_map.bin.rl");
-const u8 *const gUnknown_083F60AC[] =
-{
+const u8 *const gUnknown_083F60AC[] = {
     OtherText_Cool,
     OtherText_Beauty2,
     OtherText_Cute,
     OtherText_Smart,
     OtherText_Tough,
 };
-const struct LabelPair gUnknown_083F60C0[] =
-{
+const struct LabelPair gUnknown_083F60C0[] = {
     {OtherText_NonstopSuperCool, OtherText_Terminator6},
     {OtherText_GoodLookingPoke, OtherText_Terminator7},
     {OtherText_MarvelousGreat, OtherText_Terminator8},
@@ -76,8 +73,7 @@ const struct LabelPair gUnknown_083F60C0[] =
     {OtherText_StrongErEst, OtherText_Terminator17},
     {OtherText_MightyTough, OtherText_Exclamation},
 };
-const struct OamData gOamData_83F6138 =
-{
+const struct OamData gOamData_83F6138 = {
     .y = 0,
     .affineMode = 0,
     .objMode = 0,

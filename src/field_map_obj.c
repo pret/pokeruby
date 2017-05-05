@@ -1199,8 +1199,7 @@ void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
 }
 
 void ObjectCB_CameraObject(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_830FD24 =
-{
+const struct SpriteTemplate gSpriteTemplate_830FD24 = {
     .tileTag = 0,
     .paletteTag = 0xFFFF,
     .oam = &gDummyOamData,

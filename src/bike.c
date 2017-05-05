@@ -59,23 +59,20 @@ static u8 CanBikeFaceDirOnMetatile(u8, u8);
 static bool8 sub_80E5EC0(u8, u8);
 static void sub_80E6024(void);
 
-static void (*const sMachBikeTransitions[])(u8) =
-{
+static void (*const sMachBikeTransitions[])(u8) = {
     MachBikeTransition_FaceDirection,
     MachBikeTransition_80E517C,
     MachBikeTransition_80E51C4,
     MachBikeTransition_80E5270,
 };
 
-static void (*const gUnknown_083DB5A4[])(u8) =
-{
+static void (*const gUnknown_083DB5A4[])(u8) = {
     PlayerGoSpeed0,
     sub_80593C4,
     sub_80593F4,
 };
 
-static void (*const sAcroBikeTransitions[])(u8) =
-{
+static void (*const sAcroBikeTransitions[])(u8) = {
     AcroBikeTransition_FaceDirection,
     AcroBikeTransition_80E5708,
     AcroBikeTransition_80E5744,
@@ -91,8 +88,7 @@ static void (*const sAcroBikeTransitions[])(u8) =
     AcroBikeTransition_80E5AC0,
 };
 
-static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
-{
+static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) = {
     AcroBikeHandleInputNormal,
     AcroBikeHandleInputTurning,
     AcroBikeHandleInputWheelieStanding,
@@ -105,8 +101,7 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
 const u16 gMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 static const u8 Unknown_3DB606[] = {4, 0};
 
-static const struct UnknownStruct1 gUnknown_083DB608[] =
-{
+static const struct UnknownStruct1 gUnknown_083DB608[] = {
     {1, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 1},
     {2, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 2},
     {3, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 3},

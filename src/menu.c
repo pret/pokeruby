@@ -42,8 +42,7 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-const struct MenuAction gMenuYesNoItems[] =
-{
+const struct MenuAction gMenuYesNoItems[] = {
     { OtherText_Yes, NULL },
     { OtherText_No, NULL },
 };

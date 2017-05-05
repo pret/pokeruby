@@ -196,8 +196,7 @@ const u8 OtherText_TheField[] = _("the field.");
 const u8 OtherText_TheField2[] = _("the field.");
 const u8 OtherText_ThePC[] = _("the PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
-{
+const struct TextStruct gUnknown_0840E740[7] = {
     OtherText_TheField3,
     OtherText_TheBattle,
     OtherText_ThePokeList,

@@ -3,8 +3,7 @@
 // Some of these functions have different signatures, so we need to make this
 // an array of void pointers or a struct. It's simpler to just make it an array
 // for now.
-void * const gMPlayJumpTableTemplate[] =
-{
+void * const gMPlayJumpTableTemplate[] = {
     ply_fine,
     ply_goto,
     ply_patt,
@@ -44,8 +43,7 @@ void * const gMPlayJumpTableTemplate[] =
 };
 
 // This is a table of deltas between sample values in compressed PCM data.
-const s8 gDeltaEncodingTable[] =
-{
+const s8 gDeltaEncodingTable[] = {
       0,
       1,
       4,
@@ -64,8 +62,7 @@ const s8 gDeltaEncodingTable[] =
      -1,
 };
 
-const u8 gScaleTable[] =
-{
+const u8 gScaleTable[] = {
     0xE0, 0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB,
     0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xDB,
     0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB,
@@ -83,8 +80,7 @@ const u8 gScaleTable[] =
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
 };
 
-const u32 gFreqTable[] =
-{
+const u32 gFreqTable[] = {
     2147483648u,
     2275179671u,
     2410468894u,
@@ -99,8 +95,7 @@ const u32 gFreqTable[] =
     4053909305u,
 };
 
-const u16 gPcmSamplesPerVBlankTable[] =
-{
+const u16 gPcmSamplesPerVBlankTable[] = {
     96,
     132,
     176,
@@ -115,8 +110,7 @@ const u16 gPcmSamplesPerVBlankTable[] =
     704,
 };
 
-const u8 gCgbScaleTable[] =
-{
+const u8 gCgbScaleTable[] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B,
     0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B,
@@ -130,8 +124,7 @@ const u8 gCgbScaleTable[] =
     0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB,
 };
 
-const s16 gCgbFreqTable[] =
-{
+const s16 gCgbFreqTable[] = {
     -2004,
     -1891,
     -1785,
@@ -146,8 +139,7 @@ const s16 gCgbFreqTable[] =
     -1062,
 };
 
-const u8 gNoiseTable[] =
-{
+const u8 gNoiseTable[] = {
     0xD7, 0xD6, 0xD5, 0xD4,
     0xC7, 0xC6, 0xC5, 0xC4,
     0xB7, 0xB6, 0xB5, 0xB4,
@@ -165,8 +157,7 @@ const u8 gNoiseTable[] =
     0x03, 0x02, 0x01, 0x00,
 };
 
-const u8 gCgb3Vol[] =
-{
+const u8 gCgb3Vol[] = {
     0x00, 0x00,
     0x60, 0x60, 0x60, 0x60,
     0x40, 0x40, 0x40, 0x40,
@@ -174,8 +165,7 @@ const u8 gCgb3Vol[] =
     0x20, 0x20,
 };
 
-const u8 gClockTable[] =
-{
+const u8 gClockTable[] = {
     0x00,
     0x01,
     0x02,
@@ -255,8 +245,7 @@ const u8 gClockTable[] =
 #define EOT    0xce
 #define TIE    0xcf
 
-const struct PokemonCrySong gPokemonCrySongTemplate =
-{
+const struct PokemonCrySong gPokemonCrySongTemplate = {
     1, // track count
     0, // block count
     255, // priority
@@ -288,8 +277,7 @@ const struct PokemonCrySong gPokemonCrySongTemplate =
     {EOT, FINE} // end
 };
 
-const XcmdFunc gXcmdTable[] =
-{
+const XcmdFunc gXcmdTable[] = {
     ply_xxx,
     ply_xwave,
     ply_xtype,

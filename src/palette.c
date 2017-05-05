@@ -48,8 +48,7 @@ EWRAM_DATA u32 gFiller_202F394 = 0;
 EWRAM_DATA static u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA static u8 sPaletteDecompressionBuffer[0x400] = {0};
 
-static const struct PaletteStructTemplate sDummyPaletteStructTemplate =
-{
+static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
     0xFFFF,
     0,
     0,

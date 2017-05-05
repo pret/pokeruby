@@ -22,8 +22,7 @@ extern u16 gSaveFileStatus;
 
 extern u8 gUnknown_0819FA81[];
 
-const struct SB1_2EFC_Struct gUnknown_08216604 =
-{
+const struct SB1_2EFC_Struct gUnknown_08216604 = {
     0x0000,
     {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,

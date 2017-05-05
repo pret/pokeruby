@@ -21,8 +21,7 @@ static void CoordEventWeather_Drought(void);
 static void CoordEventWeather_UnderwaterFog(void);
 static void CoordEventWeather_UnderwaterBubbles(void);
 
-static const struct CoordEventWeather sCoordEventWeatherFuncs[] =
-{
+static const struct CoordEventWeather sCoordEventWeatherFuncs[] = {
     {  0x1, CoordEventWeather_Indoor },
     {  0x2, CoordEventWeather_Sunny },
     {  0x3, CoordEventWeather_Rain },

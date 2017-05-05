@@ -42,8 +42,7 @@ extern struct ToneData voicegroup_8453DC0[];
 extern struct ToneData voicegroup_84543C0[];
 extern struct ToneData voicegroup_84549C0[];
 
-static const struct Fanfare sFanfares[] =
-{
+static const struct Fanfare sFanfares[] = {
     { BGM_FANFA1,      80 },
     { BGM_FANFA4,     160 },
     { BGM_FANFA5,     220 },

@@ -70,8 +70,7 @@ static void Task_BattlePartyMenuSummary(u8 taskId);
 static void Task_BattlePartyMenuShift(u8 taskId);
 static void Task_BattlePartyMenuCancel(u8 taskId);
 
-static const struct PartyMenuItem sBattlePartyMenuActions[] =
-{
+static const struct PartyMenuItem sBattlePartyMenuActions[] = {
     {OtherText_Summary,             Task_BattlePartyMenuSummary},
     {gOtherText_CancelNoTerminator, Task_BattlePartyMenuCancel},
     {OtherText_Shift,               Task_BattlePartyMenuShift},
@@ -80,8 +79,7 @@ static const struct PartyMenuItem sBattlePartyMenuActions[] =
 static const u8 Unknown_83B5FEC[] = {2, 0, 1};  //SHIFT, SUMMARY, CANCEL
 static const u8 Unknown_83B5FEF[] = {3, 0, 1};  //SEND OUT, SUMMARY, CANCEL
 static const u8 Unknown_83B5FF2[] = {0, 1};     //SUMMARY, CANCEL
-static const struct PartyPopupMenu sBattlePartyPopupMenus[] =
-{
+static const struct PartyPopupMenu sBattlePartyPopupMenus[] = {
     {ARRAY_COUNT(Unknown_83B5FEC), 9, Unknown_83B5FEC},
     {ARRAY_COUNT(Unknown_83B5FEF), 9, Unknown_83B5FEF},
     {ARRAY_COUNT(Unknown_83B5FF2), 9, Unknown_83B5FF2},

@@ -137,8 +137,7 @@ static const u8 sDmaOverErrorMsg[] =
     );
 
 // Unreferenced data.
-static const u8 sUnknownData[24] =
-{
+static const u8 sUnknownData[24] = {
     0x01, 0x04, 0x10, 0x40,
     0x02, 0x04, 0x08, 0x20,
     0x02, 0x04, 0x08, 0x20,
@@ -147,8 +146,7 @@ static const u8 sUnknownData[24] =
     0x02, 0x04, 0x08, 0x20,
 };
 
-static const u8 sCenterToCornerVecTable[3][4][2] =
-{
+static const u8 sCenterToCornerVecTable[3][4][2] = {
     {   // square
         {  -4,  -4 },
         {  -8,  -8 },
@@ -169,8 +167,7 @@ static const u8 sCenterToCornerVecTable[3][4][2] =
     },
 };
 
-static const struct Sprite sDummySprite =
-{
+static const struct Sprite sDummySprite = {
     .oam = DUMMY_OAM_DATA,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -228,8 +225,7 @@ static const union AffineAnimCmd sDummyAffineAnim = { AFFINE_ANIM_END };
 
 const union AffineAnimCmd * const gDummySpriteAffineAnimTable[] = { &sDummyAffineAnim };
 
-const struct SpriteTemplate gDummySpriteTemplate =
-{
+const struct SpriteTemplate gDummySpriteTemplate = {
     .tileTag = 0,
     .paletteTag = 0xFFFF,
     .oam = &gDummyOamData,
@@ -240,43 +236,37 @@ const struct SpriteTemplate gDummySpriteTemplate =
 };
 
 // TODO: Find out what these are used for.
-static const u16 sOamBitmasks[9] =
-{
+static const u16 sOamBitmasks[9] = {
     0xFF00, 0x00FF, 0x001F,
     0xFE00, 0x01FF, 0x03E0,
     0xFC00, 0x03FF, 0xFC00,
 };
 
-static const AnimFunc sAnimFuncs[] =
-{
+static const AnimFunc sAnimFuncs[] = {
     ContinueAnim,
     BeginAnim,
 };
 
-static const AnimFunc sAffineAnimFuncs[] =
-{
+static const AnimFunc sAffineAnimFuncs[] = {
     ContinueAffineAnim,
     BeginAffineAnim,
 };
 
-static const AnimCmdFunc sAnimCmdFuncs[] =
-{
+static const AnimCmdFunc sAnimCmdFuncs[] = {
     AnimCmd_loop,
     AnimCmd_jump,
     AnimCmd_end,
     AnimCmd_frame,
 };
 
-static const AffineAnimCmdFunc sAffineAnimCmdFuncs[] =
-{
+static const AffineAnimCmdFunc sAffineAnimCmdFuncs[] = {
     AffineAnimCmd_loop,
     AffineAnimCmd_jump,
     AffineAnimCmd_end,
     AffineAnimCmd_frame,
 };
 
-static const struct OamDimensions sOamDimensions[3][4] =
-{
+static const struct OamDimensions sOamDimensions[3][4] = {
     {   // square
         {  8,  8 },
         { 16, 16 },

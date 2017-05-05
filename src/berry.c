@@ -277,8 +277,7 @@ const u8 gBerryDescriptionPart1_Enigma[] = _("Eine enigmatische BEERE. Sie schei
 const u8 gBerryDescriptionPart2_Enigma[] = _("die Macht der Sterne zu besitzen.");
 #endif
 
-const struct Berry gBerries[] =
-{
+const struct Berry gBerries[] = {
     {
         .name = NAME_CHERI_BERRY,
         .firmness = BERRY_FIRMNESS_SOFT,

@@ -99,14 +99,12 @@ void ItemUseOutOfBattle_CannotUse(u8);
 static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 static const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 
-static const struct TextStruct gUnknown_083D61DC[2] =
-{
+static const struct TextStruct gUnknown_083D61DC[2] = {
     gSSTidalBetaString,
     gSSTidalBetaString2,
 };
 
-static const MainCallback gExitToOverworldFuncList[] =
-{
+static const MainCallback gExitToOverworldFuncList[] = {
     sub_808B020,
     c2_exit_to_overworld_2_switch,
     sub_810B96C,
@@ -114,8 +112,7 @@ static const MainCallback gExitToOverworldFuncList[] =
 
 static const u8 gItemFinderDirections[] = { DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST };
 
-static const struct YesNoFuncTable gUnknown_083D61F4 =
-{
+static const struct YesNoFuncTable gUnknown_083D61F4 = {
     .yesFunc = sub_80C9FC0,
     .noFunc = CleanUpItemMenuMessage,
 };

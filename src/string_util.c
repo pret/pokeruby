@@ -10,8 +10,7 @@ const u8 gRightPointingTriangleString[] = _("▶");
 
 static const u8 sDigits[] = __("0123456789ABCDEF");
 
-static const s32 sPowersOfTen[] =
-{
+static const s32 sPowersOfTen[] = {
              1,
             10,
            100,
