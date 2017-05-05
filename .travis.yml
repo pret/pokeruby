@@ -28,3 +28,4 @@ script:
   - make -j2 compare_sapphire
   - make -j2 compare_sapphire_rev1
   - make -j2 compare_sapphire_rev2
+  - make -j2 ruby_de
