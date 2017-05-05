@@ -137,6 +137,21 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
+#ifdef GERMAN
+s32 StringLengthN(const u8 *str, s32 n)
+{
+    s32 i;
+
+    for (i = 0; i < n && str[i] != EOS; i++)
+        ;
+
+    if (i == n)
+        i = 0;
+
+    return i;
+}
+#endif
+
 s32 StringCompare(const u8 *str1, const u8 *str2)
 {
     while (*str1 == *str2)

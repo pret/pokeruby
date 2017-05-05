@@ -2474,12 +2474,18 @@ static u8 UpdateWindowText(struct Window *win)
     return 0;
 }
 
+#if defined(ENGLISH)
+#define SUB_800374C_LINE_LENGTH 26
+#elif defined(GERMAN)
+#define SUB_800374C_LINE_LENGTH 27
+#endif
+
 u8 sub_800374C(struct Window *win)
 {
     u8 retVal;
 
     sWaitType = 1;
-    sLineLength = 26;
+    sLineLength = SUB_800374C_LINE_LENGTH;
     retVal = UpdateWindowText(win);
     sLineLength = 26;
     sWaitType = 0;

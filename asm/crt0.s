@@ -30,10 +30,94 @@ GPIOPortReadEnable: @ 80000C8
 
 	.space 6
 
+@ 80000D0
+
+@ TODO: figure out what this data is
+
+	.ifdef GERMAN
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte          2
+	.4byte          5
+	.4byte 0x656B6F70
+	.4byte 0x206E6F6D
+	.4byte 0x79627572
+	.4byte 0x72657620
+	.4byte 0x6E6F6973
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte  0x81F52D0
+	.4byte  0x81F6770
+	.4byte  0x81F7530
+	.4byte  0x81F82F0
+	.4byte  0x83C7C30
+	.4byte  0x83C8310
+	.4byte  0x83C84C8
+	.4byte  0x82040E8
+	.4byte  0x820529C
+	.4byte  0x83F7BF0
+	.4byte     0x1220
+	.4byte     0x1340
+	.4byte       0x18
+	.4byte      0x938
+	.4byte     0x3A8C
+	.4byte       0x46
+	.4byte      0x836
+	.4byte      0x84C
+	.4byte      0x182
+	.4byte  0xA0A0A07
+	.4byte  0xC060C0C
+	.4byte  0xC121006
+	.4byte  0x8010B0F
+	.4byte        0xC
+	.4byte      0x890
+	.4byte     0x3AC0
+	.4byte      0x234
+	.4byte      0x238
+	.4byte          9
+	.4byte        0xA
+	.4byte          0
+	.4byte          8
+	.4byte      0x556
+	.4byte      0x557
+	.4byte     0x312F
+	.4byte     0x311B
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte          0
+	.4byte 0xFFFFFFFF
+	.endif
+
 	.arm
 	.align 2, 0
 	.global Init
-Init: @ 80000D0
+Init:
 	mov r0, PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
@@ -55,7 +139,7 @@ sp_irq: .word IWRAM_END - 0x60
 	.arm
 	.align 2, 0
 	.global IntrMain
-IntrMain: @ 800010C
+IntrMain:
 	mov r3, REG_BASE
 	add r3, r3, 0x200
 	ldr r2, [r3, OFFSET_REG_IE - 0x200]
