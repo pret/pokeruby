@@ -144,7 +144,7 @@ bool8 sub_80F9ACC(void)
 void sub_80F9C00(void)
 {
     u8 i;
-    
+
     for(i = 0; i < gPlayerPartyCount; i++)
     {
         switch(sub_80AE47C(&gPlayerParty[i]))
@@ -251,7 +251,7 @@ bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 
 void sub_80F9E1C(void)
 {
     u8 i;
-    
+
     for(i = 0; i < gPlayerPartyCount; i++)
     {
         if(!sub_8040574(&gPlayerParty[i]))
@@ -293,7 +293,7 @@ void sub_80F9F3C(void) // count pokemon moves
     u8 i;
 
     gScriptResult = 0;
-    
+
     for(i = 0; i < 4; i++) // checks MOVE1-MOVE4
         if(GetMonData(&gPlayerParty[gSpecialVar_0x8004], i + 13))
             gScriptResult++;
@@ -440,7 +440,7 @@ void sub_80FA0DC(void)
 
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], 0, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
-    
+
     for(i = gSpecialVar_0x8005; i < 3; i++)
         sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
@@ -449,7 +449,7 @@ void sub_80FA148(void)
 {
     struct Pokemon *party = &gPlayerParty[gSpecialVar_0x8004];
     gScriptResult = 0;
-    
+
     if(GetMonData(party, MON_DATA_IS_EGG))
         gScriptResult = 1;
 }

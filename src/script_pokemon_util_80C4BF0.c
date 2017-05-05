@@ -120,7 +120,7 @@ void sub_80C4C78(void)
             var = 12;
             break;
     }
-    
+
     returnVar = gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[var].var;
 
     if(returnVar == 0)
@@ -436,8 +436,8 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
-        HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data, 
-        gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y, 
+        HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
+        gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y,
         (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
         paletteData = sub_80409C8(species, var2, var1);
         LoadCompressedObjectPalette(paletteData);
@@ -455,7 +455,7 @@ void ShowContestEntryMonPic(void)
 void sub_80C5164(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80C5190);
-    
+
     if(taskId != 0xFF)
         gTasks[taskId].data[0]++;
 }
@@ -464,7 +464,7 @@ void sub_80C5190(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct Sprite *sprite;
-    
+
     switch(task->data[0])
     {
         case 2:
@@ -531,7 +531,7 @@ void HealPlayerParty(void)
         arg[1] = maxHP >> 8;
         SetMonData(&gPlayerParty[i], MON_DATA_HP, arg);
         ppBonuses = GetMonData(&gPlayerParty[i], MON_DATA_PP_BONUSES);
-        
+
         // restore PP.
         for(j = 0; j < 4; j++)
         {
@@ -583,7 +583,7 @@ u8 ScriptGiveEgg(u16 value)
     sub_8042044(&mon, value, 1);
     data = 1;
     SetMonData(&mon, MON_DATA_IS_EGG, &data);
-    
+
     return GiveMonToPlayer(&mon);
 }
 
@@ -608,7 +608,7 @@ void CheckForAlivePartyMons(void)
 bool8 CheckPartyMonHasHeldItem(u16 item)
 {
     int i;
-    
+
     for(i = 0; i < 6; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
@@ -621,7 +621,7 @@ bool8 CheckPartyMonHasHeldItem(u16 item)
 bool8 GetNameOfEnigmaBerryInPlayerParty(void)
 {
     bool8 hasItem = CheckPartyMonHasHeldItem(ITEM_ENIGMA_BERRY);
-    
+
     if(hasItem == TRUE)
         GetBerryNameByBerryType(ItemIdToBerryType(ITEM_ENIGMA_BERRY), gStringVar1);
 
@@ -634,7 +634,7 @@ void ScriptWildBattle(u16 species, u8 level, u16 item)
 
     ZeroEnemyPartyMons();
     CreateMon(&gEnemyParty[0], species, level, 0x20, 0, 0, 0, 0);
-    
+
     if(item)
     {
         data[0] = item;
@@ -647,7 +647,7 @@ void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
 {
     if(monIndex > 6)
         monIndex = gPlayerPartyCount - 1;
-    
+
     SetMonMoveSlot(&gPlayerParty[monIndex], move, slot);
 }
 
@@ -660,7 +660,7 @@ void sub_80C5568(void)
 void sub_80C5580(void)
 {
     u8 var = gSelectedOrderFromParty[0];
-    
+
     switch(var)
     {
         case 0:
@@ -670,7 +670,7 @@ void sub_80C5580(void)
             gScriptResult = 1;
             break;
     }
-    
+
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
@@ -683,7 +683,7 @@ void ChooseBattleTowerPlayerParty(void)
 void SetBattleTowerPlayerParty(void)
 {
     u8 var = gSelectedOrderFromParty[0];
-    
+
     switch(var)
     {
         case 0: // player quit battle tower?
@@ -695,7 +695,7 @@ void SetBattleTowerPlayerParty(void)
             gScriptResult = 1;
             break;
     }
-    
+
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 

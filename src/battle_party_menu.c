@@ -129,7 +129,7 @@ int SetUpBattlePartyMenu(void)
             {
                 EWRAM_1B000.unk266 = 0;
                 EWRAM_1B000.unk264++;
-            }                
+            }
         }
         break;
     case 1:
@@ -223,7 +223,7 @@ void SetUpBattlePokemonMenu(u8 a)
             gUnknown_03004AE4(a, gScriptItemId, Task_80952E4);
             return;
         }
-        
+
         switch (sub_806BD80(a))
         {
         case 1:
@@ -331,7 +331,7 @@ static void Task_809538C(void)
 static void Task_HandlePopupMenuInput(u8 taskId)
 {
     TaskFunc func;
-    
+
     if (!gPaletteFade.active)
     {
         if (gMain.newAndRepeatedKeys & DPAD_UP)
@@ -347,7 +347,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             return;
         }
         if (gMain.newKeys & A_BUTTON)
-        {            
+        {
             PlaySE(SE_SELECT);
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
                                sBattlePartyPopupMenus,
@@ -374,7 +374,7 @@ static void Task_80954C0(u8 taskId)
 static void Task_ShowSummaryScreen(u8 taskId)
 {
     u8 partySelection = sub_806CA38(taskId);
-    
+
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
@@ -395,7 +395,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     u8 partySelection;
     u8 i;
     u8 r4;
-    
+
     sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     partySelection = sub_806CA38(taskId);
     if (IsLinkDoubleBattle() == TRUE && (partySelection == 1 || partySelection == 4 || partySelection == 5))
@@ -458,7 +458,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     {
         u8 r0;
         u8 r4 = gUnknown_02024E6C;
-        
+
         sub_806D5A4();
         r0 = pokemon_order_func(gUnknown_02024A6A[r4]);
         GetMonNickname(&gPlayerParty[r0], gStringVar1);
