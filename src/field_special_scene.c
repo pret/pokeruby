@@ -16,10 +16,10 @@
 // porthole states
 enum
 {
-	INIT_PORTHOLE,
-	IDLE_CHECK,
-	EXECUTE_MOVEMENT,
-	EXIT_PORTHOLE,
+    INIT_PORTHOLE,
+    IDLE_CHECK,
+    EXECUTE_MOVEMENT,
+    EXIT_PORTHOLE,
 };
 
 extern s8 gTruckCamera_HorizontalTable[];
@@ -286,7 +286,7 @@ void Task_HandlePorthole(u8 taskId)
             data[0] = EXIT_PORTHOLE; // exit porthole.
             return;
         }
-		// run this once.
+        // run this once.
         if (*var == 2) // which direction?
         {
             exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);

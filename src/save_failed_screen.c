@@ -77,7 +77,7 @@ static const u8 sClockFrames[8][3] =
 };
 
 static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
-static const u8 gSaveFailedClockGfx[] =	INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
+static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
 
 static void VBlankCB(void);
 static void CB2_SaveFailedScreen(void);
