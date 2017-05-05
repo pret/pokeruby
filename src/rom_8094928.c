@@ -19,12 +19,12 @@ extern u16 gUnknown_02024A6A[];
 
 void unref_sub_8094928(struct PokemonStorage *ptr)
 {
-	*ptr = gPokemonStorage;
+    *ptr = gPokemonStorage;
 }
 
 void unref_sub_8094940(struct PokemonStorage *ptr)
 {
-	gPokemonStorage = *ptr;
+    gPokemonStorage = *ptr;
 }
 
 void sub_8094958(void)
