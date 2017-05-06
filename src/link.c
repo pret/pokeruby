@@ -689,7 +689,6 @@ void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
     gLinkTimeOutCounter = 0;
-    ResetBlockSend();
     OpenLink();
 }
 
