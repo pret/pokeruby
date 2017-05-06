@@ -72,6 +72,7 @@ SECTIONS {
         src/blend_palette.o(.text);
         src/daycare.o(.text);
         asm/daycare.o(.text);
+        src/egg_hatch.o(.text);
         asm/egg_hatch.o(.text);
         asm/battle_interface.o(.text);
         src/smokescreen.o(.text);
