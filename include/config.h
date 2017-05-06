@@ -23,6 +23,10 @@
 #define BUGFIX_TRAINERAPPROACH
 #endif
 
+#if (ENGLISH && REVISION >= 1) || GERMAN
+#define BUGFIX_EVO_NAME
+#endif
+
 // Fixed in Emerald.
 // #define BUGFIX_SETMONIVS
 

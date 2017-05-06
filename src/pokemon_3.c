@@ -40,6 +40,12 @@ struct EvolutionData
     struct Evolution evolutions[5];
 };
 
+struct SpindaSpot
+{
+    u8 x, y;
+    u16 image[16];
+};
+
 extern void get_battle_strings_(u8 *);
 
 extern u8 gPlayerPartyCount;
@@ -62,6 +68,9 @@ extern u8 gPlayerMonIndex;
 extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024E6C;
+extern struct SpindaSpot gSpindaSpotGraphics[];
+extern void *gUnknown_081FAF4C[];
+extern u8 gSpeciesNames[][11];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -475,4 +484,109 @@ u32 SpeciesToCryId(u16 species)
         return 200;
 
     return gSpeciesIdToCryId[species - 276];
+}
+
+void unref_sub_803F938(u16 species, u32 personality, u8 *dest)
+{
+    if (species == SPECIES_SPINDA && dest != gUnknown_081FAF4C[0] && dest != gUnknown_081FAF4C[2])
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            int j;
+            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+
+            for (j = 0; j < 16; j++)
+            {
+                int k;
+                s32 row = gSpindaSpotGraphics[i].image[j];
+
+                for (k = x; k < x + 16; k++)
+                {
+                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
+
+                    if (row & 1)
+                    {
+                        if (k & 1)
+                        {
+                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
+                                *val += 0x40;
+                        }
+                        else
+                        {
+                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
+                                *val += 0x04;
+                        }
+                    }
+
+                    row >>= 1;
+                }
+
+                y++;
+            }
+
+            personality >>= 8;
+        }
+    }
+}
+
+void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
+{
+    if (species == SPECIES_SPINDA && a4)
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            int j;
+            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+
+            for (j = 0; j < 16; j++)
+            {
+                int k;
+                s32 row = gSpindaSpotGraphics[i].image[j];
+
+                for (k = x; k < x + 16; k++)
+                {
+                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
+
+                    if (row & 1)
+                    {
+                        if (k & 1)
+                        {
+                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
+                                *val += 0x40;
+                        }
+                        else
+                        {
+                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
+                                *val += 0x04;
+                        }
+                    }
+
+                    row >>= 1;
+                }
+
+                y++;
+            }
+
+            personality >>= 8;
+        }
+    }
+}
+
+void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
+{
+#ifdef BUGFIX_EVO_NAME
+    u8 language;
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    language = GetMonData(mon, MON_DATA_LANGUAGE, &language);
+    if (language == GAME_LANGUAGE && !StringCompareWithoutExtCtrlCodes(gSpeciesNames[oldSpecies], gStringVar1))
+        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
+#else
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    if (!StringCompareWithoutExtCtrlCodes(gSpeciesNames[oldSpecies], gStringVar1))
+        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
+#endif
 }

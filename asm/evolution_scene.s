@@ -1733,7 +1733,7 @@ _081127BE:
 	ldrh r1, [r4, 0xE]
 	ldrh r2, [r4, 0x10]
 	mov r0, r9
-	bl sub_803FB68
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
@@ -3041,7 +3041,7 @@ _08113316:
 	ldrh r1, [r4, 0xE]
 	ldrh r2, [r4, 0x10]
 	mov r0, r8
-	bl sub_803FB68
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
