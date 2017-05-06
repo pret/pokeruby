@@ -414,6 +414,9 @@ void sub_8134AC0(void *);
 // src/player_pc.o
 void NewGameInitPCItems(void);
 
+// src/diploma.o
+void sub_8145D88(void);
+
 // asm/intro_credits_graphics.o
 void load_intro_part2_graphics(/*TODO: arg types*/);
 void sub_8148C78(/*TODO: arg types*/);
