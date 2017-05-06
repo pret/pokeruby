@@ -49,24 +49,18 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0xFFFFFFFF
 	.4byte          2
 	.4byte          5
-	.4byte 0x656B6F70
-	.4byte 0x206E6F6D
-	.4byte 0x79627572
-	.4byte 0x72657620
-	.4byte 0x6E6F6973
-	.4byte          0
-	.4byte          0
-	.4byte          0
-	.4byte  0x81F52D0
-	.4byte  0x81F6770
-	.4byte  0x81F7530
-	.4byte  0x81F82F0
-	.4byte  0x83C7C30
-	.4byte  0x83C8310
-	.4byte  0x83C84C8
-	.4byte  0x82040E8
-	.4byte  0x820529C
-	.4byte  0x83F7BF0
+	.ascii "pokemon ruby version"
+	.space 12
+	.4byte gMonFrontPicTable
+	.4byte gMonBackPicTable
+	.4byte gMonPaletteTable
+	.4byte gMonShinyPaletteTable
+	.4byte gMonIconTable
+	.4byte gMonIconPaletteIndices
+	.4byte gMonIconPaletteTable
+	.4byte gSpeciesNames
+	.4byte gMoveNames
+	.4byte gDecorations
 	.4byte     0x1220
 	.4byte     0x1340
 	.4byte       0x18

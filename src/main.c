@@ -31,9 +31,13 @@ static void IntrDummy(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
-const u8 gGameLanguage = GAME_LANGUAGE; // English
+const u8 gGameLanguage = GAME_LANGUAGE;
 
+#if defined(ENGLISH)
 const char BuildDateTime[] = "2002 10 15 20:34";
+#elif defined(GERMAN)
+const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
+#endif
 
 const IntrFunc gIntrTableTemplate[] =
 {
