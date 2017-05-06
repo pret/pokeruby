@@ -53,6 +53,7 @@ SymFile::SymFile(std::string filename) : m_filename(filename)
     m_pos = 0;
     m_lineNum = 1;
     m_lineStart = 0;
+    m_inLangConditional = false;
 
     RemoveComments();
 }
@@ -387,10 +388,76 @@ void SymFile::ExpectEmptyRestOfLine()
     }
 }
 
+
+void SymFile::SkipLine()
+{
+    while (m_buffer[m_pos] != 0 && m_buffer[m_pos] != '\n')
+        m_pos++;
+
+    if (m_buffer[m_pos] == '\n')
+        m_pos++;
+}
+
 // Checks if we're at the end of the file.
 bool SymFile::IsAtEnd()
 {
     return (m_pos >= m_size);
+}
+
+void SymFile::HandleLangConditional(std::string lang)
+{
+    if (m_buffer[m_pos] != '#')
+        return;
+
+    m_pos++;
+
+    if (CheckForDirective("begin"))
+    {
+        if (m_inLangConditional)
+            RaiseError("already inside language conditional");
+
+        SkipWhitespace();
+
+        std::string label = GetLabel(false);
+
+        if (label.length() == 0)
+            RaiseError("no language name after #begin");
+
+        ExpectEmptyRestOfLine();
+
+        if (lang == label)
+        {
+            m_inLangConditional = true;
+        }
+        else
+        {
+            while (!IsAtEnd() && m_buffer[m_pos] != '#')
+                SkipLine();
+
+            if (m_buffer[m_pos] != '#')
+                RaiseError("unterminated language conditional");
+
+            m_pos++;
+
+            if (!CheckForDirective("end"))
+                RaiseError("expected #end");
+
+            ExpectEmptyRestOfLine();
+        }
+    }
+    else if (CheckForDirective("end"))
+    {
+        if (!m_inLangConditional)
+            RaiseError("not inside language conditional");
+
+        m_inLangConditional = false;
+
+        ExpectEmptyRestOfLine();
+    }
+    else
+    {
+        RaiseError("unknown # directive");
+    }
 }
 
 // Reports a diagnostic message.

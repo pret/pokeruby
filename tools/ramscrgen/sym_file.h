@@ -46,7 +46,9 @@ public:
     std::string ReadPath();
     bool ReadInteger(unsigned long& value);
     void ExpectEmptyRestOfLine();
+    void SkipLine();
     bool IsAtEnd();
+    void HandleLangConditional(std::string lang);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
 
@@ -57,6 +59,7 @@ private:
     long m_lineNum;
     long m_lineStart;
     std::string m_filename;
+    bool m_inLangConditional;
 
     bool ConsumeComma();
     void RemoveComments();

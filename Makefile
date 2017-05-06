@@ -142,14 +142,17 @@ $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
 	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
+build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
-	cd build/$1 && ../../$$(RAMSCRGEN) .bss ../../sym_bss.txt >sym_bss.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) .bss ../../sym_bss.txt $$(LANGUAGE) >sym_bss.ld
 
+build/$1/sym_common.ld: LANGUAGE := $4
 build/$1/sym_common.ld: sym_common.txt $$($1_C_OBJS) $$(wildcard common_syms/*.txt)
-	cd build/$1 && ../../$$(RAMSCRGEN) COMMON ../../sym_common.txt -c src,../../common_syms >sym_common.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) COMMON ../../sym_common.txt $$(LANGUAGE) -c src,../../common_syms >sym_common.ld
 
+build/$1/sym_ewram.ld: LANGUAGE := $4
 build/$1/sym_ewram.ld: sym_ewram.txt
-	cd build/$1 && ../../$$(RAMSCRGEN) ewram_data ../../sym_ewram.txt >sym_ewram.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $$(LANGUAGE) >sym_ewram.ld
 
 build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld build/$1/sym_ewram.ld
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
