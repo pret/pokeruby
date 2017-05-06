@@ -28,7 +28,11 @@ enum LanguageId {
     LANGUAGE_GERMAN = 5,
 };
 
+#if defined(ENGLISH)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#elif defined(GERMAN)
+#define GAME_LANGUAGE (LANGUAGE_GERMAN)
+#endif
 
 enum
 {

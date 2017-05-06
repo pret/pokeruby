@@ -138,10 +138,12 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top)
 
     MenuPrint_RightAligned(buffer, left, top);
 
+#ifdef ENGLISH
     ptr[0] = 0xFC;
     ptr[1] = 0x14;
     ptr[2] = 0x00;
     ptr[3] = 0xFF;
+#endif
 }
 
 __attribute__((naked))

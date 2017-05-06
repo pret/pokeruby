@@ -334,6 +334,10 @@ void BattleAI_SetupAIData(void)
         AI_THINKING_STRUCT->aiFlags = 0x20000000;
     else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         AI_THINKING_STRUCT->aiFlags = 0x80000000;
+#ifdef GERMAN
+    else if (gBattleTypeFlags & 0x900 || gTrainerBattleOpponent == 0x400)
+        AI_THINKING_STRUCT->aiFlags = 7;
+#endif
     else // otherwise, just set aiFlags to whatever flags the trainer has set in their data.
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;
 }
