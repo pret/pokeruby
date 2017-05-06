@@ -310,6 +310,13 @@ static const union AnimCmd gSpriteAnim_840AF10[] =
     ANIMCMD_FRAME(128, 8),
     ANIMCMD_END,
 };
+#if GERMAN
+static const union AnimCmd gSpriteAnim_8416DA4[] =
+{
+    ANIMCMD_FRAME(118, 8),
+    ANIMCMD_END,
+};
+#endif
 static const union AnimCmd *const gSpriteAnimTable_840AF18[] =
 {
     gSpriteAnim_840AEA8,
@@ -319,6 +326,9 @@ static const union AnimCmd *const gSpriteAnimTable_840AF18[] =
     gSpriteAnim_840AEC8,
     gSpriteAnim_840AED0,
     gSpriteAnim_840AED8,
+#if GERMAN
+    gSpriteAnim_8416DA4,
+#endif
 };
 static const union AnimCmd *const gSpriteAnimTable_840AF34[] =
 {
