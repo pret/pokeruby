@@ -1,8 +1,10 @@
 #include "global.h"
 #include "asm.h"
+#include "battle.h"
 #include "event_data.h"
 #include "item.h"
 #include "items.h"
+#include "link.h"
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
@@ -71,6 +73,8 @@ extern u8 gUnknown_02024E6C;
 extern struct SpindaSpot gSpindaSpotGraphics[];
 extern void *gUnknown_081FAF4C[];
 extern u8 gSpeciesNames[][11];
+extern struct Trainer gTrainers[];
+extern s8 gNatureStatTable[][5];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -589,4 +593,74 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
     if (!StringCompareWithoutExtCtrlCodes(gSpeciesNames[oldSpecies], gStringVar1))
         SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
 #endif
+}
+
+bool8 sub_803FBBC(void)
+{
+    bool8 retVal = FALSE;
+    switch (gLinkPlayers[GetMultiplayerId()].lp_field_18)
+    {
+    case 0:
+    case 3:
+        retVal = FALSE;
+        break;
+    case 1:
+    case 2:
+        retVal = TRUE;
+        break;
+    }
+    return retVal;
+}
+
+bool8 sub_803FBFC(u8 id)
+{
+    bool8 retVal = FALSE;
+    switch (gLinkPlayers[id].lp_field_18)
+    {
+    case 0:
+    case 3:
+        retVal = FALSE;
+        break;
+    case 1:
+    case 2:
+        retVal = TRUE;
+        break;
+    }
+    return retVal;
+}
+
+s32 sub_803FC34(u16 a1)
+{
+    s32 id;
+    for (id = 0; id < MAX_LINK_PLAYERS; id++)
+        if (gLinkPlayers[id].lp_field_18 == a1)
+            break;
+    return id;
+}
+
+u8 sub_803FC58(u16 trainer)
+{
+    return gTrainers[trainer].encounterMusic_gender & 0x7F;
+}
+
+u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
+{
+    if (statIndex < 1 || statIndex > 5)
+    {
+        // should just be "return n", but it wouldn't match without this
+        u16 retVal = n;
+        retVal++;
+        retVal--;
+        return retVal;
+    }
+
+    switch (gNatureStatTable[nature][statIndex - 1])
+    {
+    case 1:
+        return (u16)(n * 110) / 100;
+    case -1:
+        return (u16)(n * 90) / 100;
+    }
+
+    return n;
 }
