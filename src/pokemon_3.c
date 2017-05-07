@@ -2,12 +2,14 @@
 #include "asm.h"
 #include "battle.h"
 #include "event_data.h"
+#include "hold_effects.h"
 #include "item.h"
 #include "items.h"
 #include "link.h"
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
+#include "rom4.h"
 #include "rtc.h"
 #include "species.h"
 #include "sprite.h"
@@ -75,6 +77,9 @@ extern void *gUnknown_081FAF4C[];
 extern u8 gSpeciesNames[][11];
 extern struct Trainer gTrainers[];
 extern s8 gNatureStatTable[][5];
+extern s8 gUnknown_082082FE[][3];
+extern u16 gTrainerBattleOpponent;
+extern u16 gBattleTypeFlags;
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -663,4 +668,61 @@ u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
     }
 
     return n;
+}
+
+void AdjustFriendship(struct Pokemon *mon, u8 event)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    u8 holdEffect;
+
+    if (heldItem == ITEM_ENIGMA_BERRY)
+    {
+        if (gMain.inBattle)
+        {
+            holdEffect = gEnigmaBerries[0].holdEffect;
+        }
+        else
+        {
+            holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
+        }
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(heldItem);
+    }
+
+    if (species && species != SPECIES_EGG)
+    {
+        u8 friendshipLevel = 0;
+        s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+        if (friendship > 99)
+            friendshipLevel++;
+        if (friendship > 199)
+            friendshipLevel++;
+        if ((event != 5 || !(Random() & 1))
+         && (event != 3
+          || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+           && (gTrainers[gTrainerBattleOpponent].trainerClass == 24
+            || gTrainers[gTrainerBattleOpponent].trainerClass == 25
+            || gTrainers[gTrainerBattleOpponent].trainerClass == 32))))
+        {
+            s8 mod = gUnknown_082082FE[event][friendshipLevel];
+            if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+                mod = (150 * mod) / 100;
+            friendship += mod;
+            if (mod > 0)
+            {
+                if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
+                    friendship++;
+                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == sav1_map_get_name())
+                    friendship++;
+            }
+            if (friendship < 0)
+                friendship = 0;
+            if (friendship > 255)
+                friendship = 255;
+            SetMonData(mon, MON_DATA_FRIENDSHIP, (u8 *)&friendship);
+        }
+    }
 }
