@@ -82,6 +82,8 @@ extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
 extern struct BaseStats gBaseStats[];
 extern u32 gBitTable[];
+extern u32 gExperienceTables[8][101];
+extern u32 gTMHMLearnsets[][2];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -975,5 +977,39 @@ void PartySpreadPokerus(struct Pokemon *party)
                 }
             }
         }
+    }
+}
+
+bool8 TryIncrementMonLevel(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 nextLevel = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
+    if (GetMonData(mon, MON_DATA_EXP, 0) > gExperienceTables[gBaseStats[species].growthRate][nextLevel])
+    {
+        SetMonData(mon, MON_DATA_LEVEL, &nextLevel);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    if (species == SPECIES_EGG)
+    {
+        return 0;
+    }
+    else if (tm < 32)
+    {
+        u32 mask = 1 << tm;
+        return gTMHMLearnsets[species][0] & mask;
+    }
+    else
+    {
+        u32 mask = 1 << (tm - 32);
+        return gTMHMLearnsets[species][1] & mask;
     }
 }
