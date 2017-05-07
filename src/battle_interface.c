@@ -31,8 +31,8 @@ struct UnknownStruct6
 
 struct UnknownStruct7
 {
-    u8 filler[0x180];
-};
+    u8 filler0[0x180];
+};  // size = 0x180
 
 extern u8 ewram[];
 #define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
@@ -41,10 +41,10 @@ extern u8 ewram[];
 #define ewram17800 ((struct UnknownStruct6 *)(ewram + 0x17800))
 #define ewram17850 ((struct UnknownStruct5 *)(ewram + 0x17850))
 
+extern u8 gUnknown_020238CC[];
 extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
-
 extern u8 gUnknown_03004340[];
 
 extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
@@ -69,10 +69,13 @@ extern void *const gUnknown_0820A854[];
 extern void *const gUnknown_0820A85C[];
 extern void *const gUnknown_0820A87C[];
 extern void *const gUnknown_0820A894[];
+extern void *const gUnknown_0820A8B4[];
+extern void *const gUnknown_0820A8DC[];
+extern void *const gUnknown_0820A904[];
 extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
-
+extern const u8 gUnknown_0820A8B0[];
 extern const u8 *const gNatureNames[];
 
 extern const u8 gUnknown_08D1216C[][32];
@@ -1020,7 +1023,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = ewram520[battle_get_per_side_status(gSprites[a].data6)].filler;
+    r6 = ewram520[battle_get_per_side_status(gSprites[a].data6)].filler0;
     r8 = 5;
     nature = GetNature(pkmn);
     StringCopy(str + 6, gNatureNames[nature]);
@@ -2437,4 +2440,130 @@ void sub_8045180(struct Sprite *sprite)
     
     sprite->pos2.x = gSprites[spriteId].pos2.x;
     sprite->pos2.y = gSprites[spriteId].pos2.y;
+}
+
+extern int sub_8040D3C();
+
+void sub_80451A0(u8 a, struct Pokemon *pkmn)
+{
+    u8 nickname[POKEMON_NAME_LENGTH];
+    u8 gender;
+    u16 species;
+    u8 language;
+    u8 *ptr;
+    s32 i;
+    s32 _7;
+    u8 *const *r1;
+    
+    StringCopy(gUnknown_020238CC, gUnknown_0820A8B0);
+    GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
+    StringGetEnd10(nickname);
+    ptr = StringCopy(gUnknown_020238CC + 3, nickname);
+    ptr[0] = 0xFC;
+    ptr[1] = 3;
+    ptr[2] = 2;
+    ptr[3] = 0xFC;
+    ptr[4] = 1;
+    ptr += 5;
+    gender = GetMonGender(pkmn);
+    species = GetMonData(pkmn, MON_DATA_SPECIES);
+    language = GetMonData(pkmn, MON_DATA_LANGUAGE);
+    if (sub_8040D3C(species, nickname, language))
+        gender = 100;
+    switch (gender)
+    {
+        default:
+            ptr[0] = 0xB;
+            ptr[1] = 0xFF;
+            ptr += 1;
+            break;
+        case MON_MALE:
+            ptr[0] = 0xB;
+            ptr[1] = 0xB5;
+            ptr[2] = 0xFF;
+            ptr += 2;
+            break;
+        case MON_FEMALE:
+            ptr[0] = 0xA;
+            ptr[1] = 0xB6;
+            ptr[2] = 0xFF;
+            ptr += 2;
+            break;
+    }
+    ptr[0] = 0xFC;
+    ptr[1] = 0x13;
+    ptr[2] = 0x37;
+    ptr[3] = 0xFF;
+    ptr = (u8 *)0x02000520 + battle_get_per_side_status(gSprites[a].data6) * 0x180;
+    sub_80034D4(ptr, gUnknown_020238CC);
+
+    i = 0;
+    _7 = 7;
+    if (GetMonData(pkmn, MON_DATA_LANGUAGE) == 1
+     && GetMonData(pkmn, MON_DATA_IS_EGG) == 0)
+    {
+        u8 *p = gUnknown_020238CC;
+        
+        while (*p != 0xFF)
+        {
+            if (*p == 0xFC)
+            {
+                p += GetExtCtrlCodeLength(p[1]) + 1;
+            }
+            else
+            {
+                u8 r0;
+                
+                if ((*p >= 0x37 && *p <= 0x4A) || (*p >= 0x87 && *p <= 0x9A))
+                    r0 = 0x2C;
+                else if ((*p >= 0x4B && *p <= 0x4F) || (*p >= 0x9B && *p <= 0x9F))
+                    r0 = 0x2D;
+                else
+                    r0 = 0x2B;
+                
+                CpuCopy32(sub_8043CDC(r0), ptr + 0x40 * i, 32);
+                i++;
+                p++;
+            }
+        }
+    }
+
+    for (; i < _7; i++)
+        CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
+
+    if (battle_side_get_owner(gSprites[a].data6) == 0 && !IsDoubleBattle())
+    {
+        r1 = (u8 *const *)gUnknown_0820A8B4;
+        for (i = 0; i < _7; i++)
+        {
+            u8 *r4 = r1[i];
+            
+            r4 += gSprites[a].oam.tileNum * 32;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
+            
+            r4 += 0x100;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
+        }
+    }
+    else
+    {
+        if (battle_side_get_owner(gSprites[a].data6) == 0)
+            r1 = (u8 *const *)gUnknown_0820A904;
+        else
+            r1 = (u8 *const *)gUnknown_0820A8DC;
+        for (i = 0; i < _7; i++)
+        {
+            u8 *r4 = r1[i];
+            
+            r4 += gSprites[a].oam.tileNum * 32;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
+            
+            r4 += 0x100;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
+        }
+    }
 }
