@@ -115,6 +115,8 @@
 #define TYPE_DARK     0x11
 
 #define PARTY_SIZE 6
+#define MAX_TOTAL_EVS 510
+#define NUM_STATS 6
 
 enum {
     NATURE_HARDY,

@@ -80,6 +80,8 @@ extern s8 gNatureStatTable[][5];
 extern s8 gUnknown_082082FE[][3];
 extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
+extern struct BaseStats gBaseStats[];
+extern u32 gBitTable[];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -87,6 +89,8 @@ extern u8 gUnknown_083FFDD3[];
 extern u8 gUnknown_083FEE5D[];
 extern u8 gUnknown_083FEE92[];
 extern u8 *gUnknown_08400F58[];
+
+u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -723,6 +727,253 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             if (friendship > 255)
                 friendship = 255;
             SetMonData(mon, MON_DATA_FRIENDSHIP, (u8 *)&friendship);
+        }
+    }
+}
+
+void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+{
+    u8 evs[NUM_STATS];
+    u16 evIncrease = 0;
+    u16 totalEVs = 0;
+    u16 heldItem;
+    u8 holdEffect;
+    int i;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        evs[i] = GetMonData(mon, MON_DATA_HP_EV + i, 0);
+        totalEVs += evs[i];
+    }
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        u8 hasHadPokerus;
+        int multiplier;
+
+        if (totalEVs >= MAX_TOTAL_EVS)
+            break;
+
+        hasHadPokerus = CheckPartyHasHadPokerus(mon, 0);
+
+        if (hasHadPokerus)
+            multiplier = 2;
+        else
+            multiplier = 1;
+
+        switch ( i )
+        {
+        case 0:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_HP * multiplier;
+            break;
+        case 1:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Attack * multiplier;
+            break;
+        case 2:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Defense * multiplier;
+            break;
+        case 3:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Speed * multiplier;
+            break;
+        case 4:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_SpAttack * multiplier;
+            break;
+        case 5:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_SpDefense * multiplier;
+            break;
+        }
+
+        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+
+        if (heldItem == ITEM_ENIGMA_BERRY)
+        {
+            if (gMain.inBattle)
+            {
+                holdEffect = gEnigmaBerries[0].holdEffect;
+            }
+            else
+            {
+                holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
+            }
+        }
+        else
+        {
+            holdEffect = ItemId_GetHoldEffect(heldItem);
+        }
+
+        if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
+            evIncrease *= 2;
+
+        if (totalEVs + (s16)evIncrease > MAX_TOTAL_EVS)
+            evIncrease = ((s16)evIncrease + MAX_TOTAL_EVS) - (totalEVs + evIncrease);
+
+        if (evs[i] + (s16)evIncrease > 255)
+        {
+            int val1 = (s16)evIncrease + 255;
+            int val2 = evs[i] + evIncrease;
+            evIncrease = val1 - val2;
+        }
+
+        evs[i] += evIncrease;
+        totalEVs += evIncrease;
+        SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+    }
+}
+
+u16 GetMonEVCount(struct Pokemon *mon)
+{
+    int i;
+    u16 count = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+        count += GetMonData(mon, MON_DATA_HP_EV + i, 0);
+
+    return count;
+}
+
+void RandomlyGivePartyPokerus(struct Pokemon *party)
+{
+    u16 rnd = Random();
+    if (rnd == 0x4000 || rnd == 0x8000 || rnd == 0xC000)
+    {
+        struct Pokemon *mon;
+
+        do
+        {
+            do
+            {
+                rnd = Random() % PARTY_SIZE;
+                mon = &party[rnd];
+            }
+            while (!GetMonData(mon, MON_DATA_SPECIES, 0));
+        }
+        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
+
+        if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
+        {
+            u8 rnd2;
+
+            do
+            {
+                rnd2 = Random();
+            }
+            while (rnd2 == 0);
+
+            if (rnd2 & 0xF0)
+                rnd2 &= 0x07;
+
+            rnd2 |= (rnd2 << 4);
+            rnd2 &= 0xF3;
+            rnd2++;
+
+            SetMonData(&party[rnd], MON_DATA_POKERUS, &rnd2);
+        }
+    }
+}
+
+u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
+{
+    u8 retVal;
+
+    int partyIndex = 0;
+    unsigned curBit = 1;
+    retVal = 0;
+
+    if (selection)
+    {
+        do
+        {
+            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0) & 0xF))
+                retVal |= curBit;
+            partyIndex++;
+            curBit <<= 1;
+            selection >>= 1;
+        }
+        while (selection);
+    }
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
+    {
+        retVal = 1;
+    }
+
+    return retVal;
+}
+
+u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
+{
+    u8 retVal;
+
+    int partyIndex = 0;
+    unsigned curBit = 1;
+    retVal = 0;
+
+    if (selection)
+    {
+        do
+        {
+            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0))
+                retVal |= curBit;
+            partyIndex++;
+            curBit <<= 1;
+            selection >>= 1;
+        }
+        while (selection);
+    }
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
+    {
+        retVal = 1;
+    }
+
+    return retVal;
+}
+
+void UpdatePartyPokerusTime(u16 days)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
+        {
+            u8 pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, 0);
+            if (pokerus & 0xF)
+            {
+                if ((pokerus & 0xF) < days || days > 4)
+                    pokerus &= 0xF0;
+                else
+                    pokerus -= days;
+
+                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
+            }
+        }
+    }
+}
+
+void PartySpreadPokerus(struct Pokemon *party)
+{
+    if ((Random() % 3) == 0)
+    {
+        int i;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
+            {
+                u8 pokerus = GetMonData(&party[i], MON_DATA_POKERUS, 0);
+                u8 curPokerus = pokerus;
+                if (pokerus)
+                {
+                    if (pokerus & 0xF)
+                    {
+                        // spread to adjacent party members
+                        if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, 0) & 0xF0))
+                            SetMonData(&party[i - 1], MON_DATA_POKERUS, &curPokerus);
+                        if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, 0) & 0xF0))
+                        {
+                            SetMonData(&party[i + 1], MON_DATA_POKERUS, &curPokerus);
+                            i++;
+                        }
+                    }
+                }
+            }
         }
     }
 }
