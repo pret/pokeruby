@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dewford_trend.h"
 #include "asm.h"
+#include "easy_chat.h"
 #include "event_data.h"
 #include "link.h"
 #include "rng.h"
@@ -24,12 +25,12 @@ void sub_80FA17C(void)
 
     for (i = 0; i < 5; i++)
     {
-        gSaveBlock1.easyChatPairs[i].words[0] = sub_80EB72C(10);
+        gSaveBlock1.easyChatPairs[i].words[0] = sub_80EB72C(EC_GROUP_CONDITIONS);
 
         if (Random() & 1)
-            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(12);
+            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(EC_GROUP_LIFESTYLE);
         else
-            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(13);
+            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(EC_GROUP_HOBBIES);
 
         gSaveBlock1.easyChatPairs[i].unk1_6 = Random() & 1;
         sub_80FA740(&gSaveBlock1.easyChatPairs[i]);
