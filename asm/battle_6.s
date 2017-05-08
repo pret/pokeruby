@@ -2530,7 +2530,7 @@ sub_802F934: @ 802F934
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _0802FA98 @ =gUnknown_02024E84
+	ldr r1, _0802FA98 @ =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -2581,7 +2581,7 @@ _0802FA88: .4byte gUnknown_0300434C
 _0802FA8C: .4byte gUnknown_02024E8C
 _0802FA90: .4byte gUnknown_02024BE0
 _0802FA94: .4byte gSprites
-_0802FA98: .4byte gUnknown_02024E84
+_0802FA98: .4byte gBattleMonForms
 _0802FA9C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_802F934
 

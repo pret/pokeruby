@@ -296,7 +296,7 @@ gBattleMovePower: @ 2024E80
 word_2024E82: @ 2024E82
 	.space 0x2
 
-gUnknown_02024E84: @ 2024E84
+gBattleMonForms: @ 2024E84
 	.space 0x4
 
 byte_2024E88: @ 2024E88

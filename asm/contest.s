@@ -420,7 +420,7 @@ _080AB4E0:
 	adds r0, r1
 	movs r1, 0
 	strb r1, [r0]
-	bl sub_8040710
+	bl ClearBattleMonForms
 	bl sub_80AB398
 	ldr r1, _080AB54C @ =gMain
 	ldr r0, _080AB550 @ =0x0000043c
@@ -2294,7 +2294,7 @@ _080AC534:
 	lsls r4, 2
 	mov r9, r4
 	ldr r4, _080AC5C4 @ =0x02019348
-	ldr r1, _080AC5C8 @ =gUnknown_02024E84
+	ldr r1, _080AC5C8 @ =gBattleMonForms
 	movs r2, 0
 	adds r0, r1, 0x3
 _080AC542:
@@ -2358,7 +2358,7 @@ _080AC542:
 	bl _080AD8CA
 	.align 2, 0
 _080AC5C4: .4byte 0x02019348
-_080AC5C8: .4byte gUnknown_02024E84
+_080AC5C8: .4byte gBattleMonForms
 _080AC5CC: .4byte 0xfffffebc
 _080AC5D0: .4byte gContestMons
 _080AC5D4: .4byte gSprites
@@ -15035,7 +15035,7 @@ sub_80B2790: @ 80B2790
 	movs r2, 0x14
 	bl memset
 	bl battle_anim_clear_some_data
-	ldr r1, _080B27F8 @ =gUnknown_02024E84
+	ldr r1, _080B27F8 @ =gBattleMonForms
 	movs r2, 0
 	adds r0, r1, 0x3
 _080B27D0:
@@ -15057,7 +15057,7 @@ _080B27D0:
 	.align 2, 0
 _080B27F0: .4byte 0x02019260
 _080B27F4: .4byte gContestMons
-_080B27F8: .4byte gUnknown_02024E84
+_080B27F8: .4byte gBattleMonForms
 _080B27FC:
 	cmp r5, 0x82
 	beq _080B2898

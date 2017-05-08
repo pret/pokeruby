@@ -3528,7 +3528,7 @@ _08010430:
 	cmp r4, r0  @ Check if pokemon species is Castform
 	bne _08010454
 	ldr r0, _0801044C @ =gUnknownCastformCoords_0837F598
-	ldr r1, _08010450 @ =gUnknown_02024E84
+	ldr r1, _08010450 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -3538,7 +3538,7 @@ _08010430:
 	.align 2, 0
 _08010448: .4byte SPECIES_CASTFORM
 _0801044C: .4byte gUnknownCastformCoords_0837F598
-_08010450: .4byte gUnknown_02024E84
+_08010450: .4byte gBattleMonForms
 _08010454:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -3611,7 +3611,7 @@ _080104C8:
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r1
-	ldr r2, _0801051C @ =gUnknown_02024E84
+	ldr r2, _0801051C @ =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r1, [r4, r3]
 	adds r1, r2
@@ -3631,7 +3631,7 @@ _080104F6:
 	subs r0, 0x1
 	cmp r0, 0
 	bge _080104F6
-	ldr r0, _0801051C @ =gUnknown_02024E84
+	ldr r0, _0801051C @ =gBattleMonForms
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
 	adds r1, r0
@@ -3644,7 +3644,7 @@ _08010510:
 	bx r0
 	.align 2, 0
 _08010518: .4byte gUnknown_081FAF4C
-_0801051C: .4byte gUnknown_02024E84
+_0801051C: .4byte gBattleMonForms
 	thumb_func_end sub_8010494
 
 	thumb_func_start sub_8010520

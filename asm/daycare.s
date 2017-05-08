@@ -1202,7 +1202,7 @@ _08041C18:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08041CD8 @ =gUnknown_03000470
-	bl sub_804051C
+	bl GetLevelUpMovesBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]

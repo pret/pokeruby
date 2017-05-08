@@ -84,6 +84,8 @@ extern struct BaseStats gBaseStats[];
 extern u32 gBitTable[];
 extern u32 gExperienceTables[8][101];
 extern u32 gTMHMLearnsets[][2];
+extern const u16 *gLevelUpLearnsets[];
+extern u8 gBattleMonForms[];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -1012,4 +1014,119 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
         u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
+}
+
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    int i, j, k;
+
+    for (i = 0; i < 4; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < 20; i++)
+    {
+        u16 moveLevel;
+
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
+            break;
+
+        moveLevel = gLevelUpLearnsets[species][i] & 0xFE00;
+
+        if (moveLevel <= (level << 9))
+        {
+            for (j = 0; j < 4 && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
+                ;
+
+            if (j == 4)
+            {
+                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & 0x1FF); k++)
+                    ;
+
+                if (k == numMoves)
+                    moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
+            }
+        }
+    }
+
+    return numMoves;
+}
+
+u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
+{
+    u8 numMoves = 0;
+    int i;
+
+    for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != 0xFFFF; i++)
+         moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
+
+     return numMoves;
+}
+
+u8 sub_8040574(struct Pokemon *mon)
+{
+    u16 learnedMoves[4];
+    u16 moves[20];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    int i, j, k;
+
+    if (species == SPECIES_EGG)
+        return 0;
+
+    for (i = 0; i < 4; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < 20; i++)
+    {
+        u16 moveLevel;
+
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
+            break;
+
+        moveLevel = gLevelUpLearnsets[species][i] & 0xFE00;
+
+        if (moveLevel <= (level << 9))
+        {
+            for (j = 0; j < 4 && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
+                ;
+
+            if (j == 4)
+            {
+                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & 0x1FF); k++)
+                    ;
+
+                if (k == numMoves)
+                    moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
+            }
+        }
+    }
+
+    return numMoves;
+}
+
+u16 SpeciesToPokedexNum(u16 species)
+{
+    if (IsNationalPokedexEnabled())
+    {
+        return SpeciesToNationalPokedexNum(species);
+    }
+    else
+    {
+        species = SpeciesToHoennPokedexNum(species);
+        if (species <= 202)
+            return species;
+        return 0xFFFF;
+    }
+}
+
+void ClearBattleMonForms(void)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+        gBattleMonForms[i] = 0;
 }

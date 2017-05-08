@@ -56,7 +56,7 @@ extern void sub_8083C50(u8);
 extern void nullsub_41(void);
 extern void nullsub_91(void);
 extern void battle_anim_clear_some_data(void);
-extern void sub_8040710(void);
+extern void ClearBattleMonForms(void);
 extern void BattleAI_HandleItemUseBeforeAISetup(void);
 extern void sub_8094978(u8, int);
 extern void sub_800BA78(void);
@@ -102,7 +102,7 @@ void setup_poochyena_battle(void)
     sub_800B858();
     gUnknown_02024A64 = 0;
     battle_anim_clear_some_data();
-    sub_8040710();
+    ClearBattleMonForms();
     BattleAI_HandleItemUseBeforeAISetup();
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
