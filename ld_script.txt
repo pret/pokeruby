@@ -244,6 +244,8 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
+        src/battle_anim_81258BC.o(.text);
+        asm/battle_anim_81258BC.o(.text_812BBFC);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);
         asm/learn_move.o(.text);
