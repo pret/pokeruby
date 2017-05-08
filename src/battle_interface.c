@@ -33,7 +33,16 @@ struct UnknownStruct6
 struct UnknownStruct7
 {
     u8 filler0[0x180];
-};  // size = 0x180
+};
+
+struct UnknownStruct9
+{
+    s32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC_0:5;
+    u32 unk10;
+};
 
 extern u8 ewram[];
 #define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
@@ -90,16 +99,39 @@ extern const u8 gUnknown_08D1216C[][32];
 extern const u8 *const gNatureNames[];
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
+#define ABS(n) ((n) >= 0 ? (n) : -(n))
+// Used for computing copy destination addresses
+#define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
 
-int sub_804373C(s16 unused1, s16 unused2, int unused3)
+extern int sub_8040D3C();
+extern u8 sub_8090D90();
+extern void load_gfxc_health_bar();
+
+static void sub_8043D5C(struct Sprite *);
+static const void *sub_8043CDC(u8);
+void sub_8044210(u8, s16, u8);
+static void draw_status_ailment_maybe(u8);
+void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c);
+extern void sub_8045180(struct Sprite *);
+static void sub_8045110(struct Sprite *);
+static void sub_8045048(struct Sprite *);
+static void sub_8044F70(u8 taskId);
+static void sub_8044E74(u8 taskId);
+static void sub_8044ECC(u8 taskId);
+static u8 sub_80457E8(u8, u8);
+s32 sub_8045C78(u8, u8, u8, u8);
+static int sub_8045F58(s32, s32, int, int *, u8, u16);
+static u8 GetScaledExpFraction(int, int, int, u8);
+static void sub_8045D58(u8, u8);
+static u8 sub_804602C(int, int, int, int *, u8 *, u8);
+static void sub_8046128(struct UnknownStruct9 *a, int *b, void *c);
+
+static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
     return 9;
 }
 
-//#define NONMATCHING
-
 #ifdef NONMATCHING
-
 void sub_8043740(s16 a, u16 *b, u8 c)
 {
     u8 sp0[4];
@@ -174,75 +206,6 @@ void sub_8043740(s16 a, u16 *b, u8 c)
     }
     asm(""::"r"(r9));
 }
-
-/*
-void sub_8043740(s16 a, u16 *b, u8 c)
-{
-    u8 sp0[4];
-    s8 i;
-    s8 j;
-    s8 r9;
-    
-    for (i = 0; i < 4; i++)
-        sp0[i] = 0;
-    
-    //_0804377C
-    i = 3;
-    r9 = -1;
-    while (a > 0)
-    {
-        sp0[i] = a % 10;
-        a /= 10;
-        i--;
-    }
-    //_080437AA
-    while (i > -1)
-    {
-        sp0[i] = 0xFF;
-        i--;
-    }
-    //_080437CE
-    if (sp0[3] == 0xFF)
-        sp0[3] = 0;
-    
-    //_080437DA
-    if (c == 0)
-    {
-        for (i = 0, j = 0; i < 4; i++)
-        {
-            if (sp0[j] == 0xFF)
-            {
-                b[j] = (b[j] & 0xFC00) | 0x1E;
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | 0x1E;
-            }
-            else
-            {
-                b[j] = (b[j] & 0xFC00) | (sp0[j] + 0x14);
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | (sp0[i] + 0x34);
-            }
-            j++;
-        }
-        
-    }
-    //_0804386A
-    else
-    {
-        for (i = 0; i < 4; i++)
-        {
-            if (sp0[i] == 0xFF)
-            {
-                b[i] = (b[i] & 0xFC00) | 0x1E;
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | 0x1E;
-            }
-            else
-            {
-                b[i] = (b[i] & 0xFC00) | (sp0[i] + 0x14);
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | (sp0[i] + 0x34);
-            }
-        }
-    }
-}
-*/
 #else
 __attribute__((naked))
 void sub_8043740(s16 a, u16 *b, u8 c)
@@ -478,9 +441,6 @@ void unref_sub_80438E0(s16 a, s16 b, u16 *c)
     sub_8043740(a, c + 5, 1);
 }
 
-void sub_8043D5C(struct Sprite *);
-const void *sub_8043CDC(u8);
-
 u8 battle_make_oam_normal_battle(u8 a)
 {
     int sp0 = 0;
@@ -493,20 +453,19 @@ u8 battle_make_oam_normal_battle(u8 a)
     {
         if (battle_side_get_owner(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[0], 0xF0, 0xA0, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[0], 0xF0, 0xA0, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
             
             gSprites[spriteId1].oam.shape = 0;
             gSprites[spriteId2].oam.shape = 0;
-            gSprites[spriteId2].oam.tileNum += 0x40;
+            gSprites[spriteId2].oam.tileNum += 64;
         }
-        //_080439AC
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[0], 0xF0, 0xA0, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[0], 0xF0, 0xA0, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[0], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[0], 240, 160, 1);
             
-            gSprites[spriteId2].oam.tileNum += 0x20;
+            gSprites[spriteId2].oam.tileNum += 32;
             sp0 = 2;
         }
         //_080439F2
@@ -520,24 +479,24 @@ u8 battle_make_oam_normal_battle(u8 a)
     {
         if (battle_side_get_owner(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 0xF0, 0xA0, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 0xF0, 0xA0, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 240, 160, 1);
             
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data5 = spriteId1;
-            gSprites[spriteId2].oam.tileNum += 0x20;
+            gSprites[spriteId2].oam.tileNum += 32;
             gSprites[spriteId2].callback = sub_8043D5C;
             sp0 = 1;
         }
         //_08043ACC
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 0xF0, 0xA0, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 0xF0, 0xA0, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 240, 160, 1);
             
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data5 = spriteId1;
-            gSprites[spriteId2].oam.tileNum += 0x20;
+            gSprites[spriteId2].oam.tileNum += 32;
             gSprites[spriteId2].callback = sub_8043D5C;
             sp0 = 2;
         }
@@ -545,12 +504,12 @@ u8 battle_make_oam_normal_battle(u8 a)
     }
     //_08043B50
     
-    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplate_820A56C[gUnknown_02024A72[a]], 0x8C, 0x3C, 0);
+    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplate_820A56C[gUnknown_02024A72[a]], 140, 60, 0);
     sprite = &gSprites[spriteId3];
     SetSubspriteTables(sprite, &gSubspriteTables_820A684[battle_side_get_owner(a)]);
     sprite->subspriteMode = 2;
     sprite->oam.priority = 1;
-    CpuCopy32(sub_8043CDC(1), (u16 *)(VRAM + 0x10000) + sprite->oam.tileNum * 16, 0x40);
+    CpuCopy32(sub_8043CDC(1), (void *)(OBJ_VRAM0 + sprite->oam.tileNum * 32), 64);
     
     gSprites[spriteId1].data5 = spriteId3;
     gSprites[spriteId1].data6 = a;
@@ -565,8 +524,8 @@ u8 battle_make_oam_normal_battle(u8 a)
 
 u8 battle_make_oam_safari_battle(void)
 {
-    u8 spriteId1 = CreateSprite(&gSpriteTemplate_820A54C, 0xF0, 0xA0, 1);
-    u8 spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A54C, 0xF0, 0xA0, 1);
+    u8 spriteId1 = CreateSprite(&gSpriteTemplate_820A54C, 240, 160, 1);
+    u8 spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A54C, 240, 160, 1);
     
     gSprites[spriteId1].oam.shape = 0;
     gSprites[spriteId2].oam.shape = 0;
@@ -577,7 +536,7 @@ u8 battle_make_oam_safari_battle(void)
     return spriteId1;
 }
 
-const void *sub_8043CDC(u8 a)
+static const void *sub_8043CDC(u8 a)
 {
     return gUnknown_08D1216C[a];
 }
@@ -606,7 +565,7 @@ void sub_8043CEC(struct Sprite *sprite)
     sprite->pos2.y = gSprites[r5].pos2.y;
 }
 
-void sub_8043D5C(struct Sprite *sprite)
+static void sub_8043D5C(struct Sprite *sprite)
 {
     u8 data5 = sprite->data5;
 
@@ -639,7 +598,7 @@ void sub_8043DFC(u8 a)
     gSprites[gSprites[a].oam.affineParam].invisible = FALSE;
 }
 
-void sub_8043E50(u8 spriteId, s16 x, s16 y)
+static void sub_8043E50(u8 spriteId, s16 x, s16 y)
 {
     gSprites[spriteId].pos1.x = x;
     gSprites[spriteId].pos1.y = y;
@@ -697,28 +656,28 @@ void sub_8043F44(u8 a)
     {
         switch (battle_get_per_side_status(a))
         {
-            case 0:
-                x = 159;
-                y = 77;
-                break;
-            case 2:
-                x = 171;
-                y = 102;
-                break;
-            case 1:
-                x = 44;
-                y = 19;
-                break;
-            case 3:
-                x = 32;
-                y = 44;
-                break;
+        case 0:
+            x = 159;
+            y = 77;
+            break;
+        case 2:
+            x = 171;
+            y = 102;
+            break;
+        case 1:
+            x = 44;
+            y = 19;
+            break;
+        case 3:
+            x = 32;
+            y = 44;
+            break;
         }
     }
     sub_8043E50(gUnknown_03004340[a], x, y);
 }
     
-void sub_8043FC0(u8 a, u8 b)
+static void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
     void *const *r7;
@@ -735,7 +694,6 @@ void sub_8043FC0(u8 a, u8 b)
         else
             r7 = gUnknown_0820A80C;
     }
-    //_08044010
     else
     {
         if (battle_side_get_owner(gSprites[a].data6) == 0)
@@ -743,7 +701,6 @@ void sub_8043FC0(u8 a, u8 b)
         else
             r7 = gUnknown_0820A80C;
     }
-    //_0804402E
     
     ptr = str + 6;
     if (b == 100)
@@ -752,31 +709,29 @@ void sub_8043FC0(u8 a, u8 b)
     }
     else
     {
-        *(ptr++) = 0xFC;
+        *(ptr++) = EXT_CTRL_CODE_BEGIN;
         *(ptr++) = 0x11;
         *(ptr++) = 1;
-        *(ptr++) = 0xFC;
+        *(ptr++) = EXT_CTRL_CODE_BEGIN;
         *(ptr++) = 0x14;
         *(ptr++) = 4;
-        *(ptr++) = 0xF0;
-        *(ptr++) = 0xFC;
+        *(ptr++) = CHAR_COLON;
+        *(ptr++) = EXT_CTRL_CODE_BEGIN;
         *(ptr++) = 0x14;
         *(ptr++) = 0;
         ptr = ConvertIntToDecimalStringN(ptr, b, 0, 2);
     }
     
-    *(ptr++) = 0xFC;
+    *(ptr++) = EXT_CTRL_CODE_BEGIN;
     *(ptr++) = 0x13;
     *(ptr++) = 0xF;
-    *(ptr++) = 0xFF;
+    *(ptr++) = EOS;
     sub_80034D4((u8 *)0x02000000, str);
     
     two = 2;
-    for (i = 0; i < two; i++)  // _080440BC
-        CpuCopy32((void *)(0x02000020 + i * 0x40), r7[i] + gSprites[a].oam.tileNum * 32, 0x20);
+    for (i = 0; i < two; i++)
+        CpuCopy32((void *)(0x02000020 + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
 }
-
-void sub_8044210(u8, s16, u8);
 
 #ifdef NONMATCHING
 void sub_80440EC(u8 a, s16 b, u8 c)
@@ -996,10 +951,9 @@ void sub_8044210(u8 a, s16 b, u8 c)
         r7 = gUnknown_0820A87C;
         r10 = 6;
         ptr = sub_8003504(ptr, b, 0x2B, 1);
-        *(ptr++) = 0xBA;
-        *(ptr++) = 0xFF;
+        *(ptr++) = CHAR_SLASH;
+        *(ptr++) = EOS;
     }
-    //_0804428C
     else
     {
         r7 = gUnknown_0820A894;
@@ -1007,10 +961,9 @@ void sub_8044210(u8 a, s16 b, u8 c)
         sub_8003504(ptr, b, 0xF, 1);
         if (battle_side_get_owner(r4) == 0)
         {
-            CpuCopy32(sub_8043CDC(0x74), (u8 *)0x06010000 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
+            CpuCopy32(sub_8043CDC(0x74), (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32), 32);
         }
     }
-    //_080442CE
     r4 = gSprites[a].data5;
     sub_80034D4((u8 *)0x02000000, str);
     for (i = 0; i < r10; i++)
@@ -1054,16 +1007,15 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     }
     //r7 = 1;
     //sp18 = a * 16;
-#define FOO(a) ((a) - (a) / 8 * 8) + ((a) / 8) * 64
     for (r7 = 1; r7 < r8 + 1; r7++)
     {
         int foo;
         
-        foo = gSprites[a].oam.tileNum + FOO(r7);
+        foo = gSprites[a].oam.tileNum + MACRO1(r7);
         CpuCopy32(r6, (u8 *)0x06010000 + foo * 32, 32);
         r6 += 32;
         
-        foo = gSprites[a].oam.tileNum + 8 + FOO(r7);
+        foo = gSprites[a].oam.tileNum + 8 + MACRO1(r7);
         CpuCopy32(r6, (u8 *)0x06010000 + foo * 32, 32);
         r6 += 32;
     }
@@ -1351,9 +1303,6 @@ _08044548: .4byte 0x04000008\n\
 }
 #endif
 
-extern void draw_status_ailment_maybe(u8);
-void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c);
-
 void sub_804454C(void)
 {
     s32 i;
@@ -1381,7 +1330,7 @@ void sub_804454C(void)
                 {
                     spriteId = gSprites[gUnknown_03004340[i]].data5;
                     
-                    CpuFill32(0, (u8 *)0x06010000 + gSprites[spriteId].oam.tileNum * 32, 0x100);
+                    CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
                     sub_8044210(gUnknown_03004340[i], GetMonData(&gPlayerParty[gUnknown_02024A6A[i]], MON_DATA_HP), 0);
                     sub_8044210(gUnknown_03004340[i], GetMonData(&gPlayerParty[gUnknown_02024A6A[i]], MON_DATA_MAX_HP), 1);
                 }
@@ -1389,7 +1338,7 @@ void sub_804454C(void)
                 {
                     draw_status_ailment_maybe(gUnknown_03004340[i]);
                     sub_8045A5C(gUnknown_03004340[i], &gPlayerParty[gUnknown_02024A6A[i]], 5);
-                    CpuCopy32(sub_8043CDC(0x75), (u8 *)0x06010680 + gSprites[gUnknown_03004340[i]].oam.tileNum * 32, 32);
+                    CpuCopy32(sub_8043CDC(0x75), (void *)(OBJ_VRAM0 + 0x680 + gSprites[gUnknown_03004340[i]].oam.tileNum * 32), 32);
                 }
             }
             else
@@ -1404,7 +1353,7 @@ void sub_804454C(void)
                     {
                         spriteId = gSprites[gUnknown_03004340[i]].data5;
                         
-                        CpuFill32(0, (u8 *)0x06010000 + gSprites[spriteId].oam.tileNum * 32, 0x100);
+                        CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
                         sub_8044210(gUnknown_03004340[i], GetMonData(&gEnemyParty[gUnknown_02024A6A[i]], MON_DATA_HP), 0);
                         sub_8044210(gUnknown_03004340[i], GetMonData(&gEnemyParty[gUnknown_02024A6A[i]], MON_DATA_MAX_HP), 1);
                     }
@@ -1427,8 +1376,6 @@ struct UnknownStruct8
     u16 unk0;
     u32 unk4;
 };
-
-extern void sub_8045180(struct Sprite *);
 
 // This function almost matches except for just two instructions around 0x08044B52 that are swapped.
 #ifdef NONMATCHING
@@ -2233,11 +2180,6 @@ _08044C9C: .4byte gTasks\n\
 }
 #endif
 
-extern void sub_8045110(struct Sprite *);
-extern void sub_8045048(struct Sprite *);
-extern void sub_8044F70(u8 taskId);
-extern void sub_8044E74(u8 taskId);
-
 void sub_8044CA0(u8 taskId)
 {
     u8 sp[6];
@@ -2289,9 +2231,7 @@ void sub_8044CA0(u8 taskId)
     }
 }
 
-extern void sub_8044ECC(u8 taskId);
-
-void sub_8044E74(u8 taskId)
+static void sub_8044E74(u8 taskId)
 {
     u16 temp = gTasks[taskId].data[11]++;
     
@@ -2306,7 +2246,7 @@ void sub_8044E74(u8 taskId)
         gTasks[taskId].func = sub_8044ECC;
 }
 
-void sub_8044ECC(u8 taskId)
+static void sub_8044ECC(u8 taskId)
 {
     u8 sp[6];
     s32 i;
@@ -2331,7 +2271,7 @@ void sub_8044ECC(u8 taskId)
     }
 }
 
-void sub_8044F70(u8 taskId)
+static void sub_8044F70(u8 taskId)
 {
     u8 sp[6];
     s32 i;
@@ -2367,7 +2307,7 @@ void sub_8045030(struct Sprite *sprite)
         sprite->pos2.x += sprite->data0;
 }
 
-void sub_8045048(struct Sprite *sprite)
+static void sub_8045048(struct Sprite *sprite)
 {
     sprite->data1 += 32;
     if (sprite->data0 > 0)
@@ -2417,7 +2357,7 @@ void sub_804507C(struct Sprite *sprite)
     }
 }
 
-void sub_8045110(struct Sprite *sprite)
+static void sub_8045110(struct Sprite *sprite)
 {
     u8 r0;
     u16 r2;
@@ -2451,9 +2391,7 @@ void sub_8045180(struct Sprite *sprite)
     sprite->pos2.y = gSprites[spriteId].pos2.y;
 }
 
-extern int sub_8040D3C();
-
-void sub_80451A0(u8 a, struct Pokemon *pkmn)
+static void sub_80451A0(u8 a, struct Pokemon *pkmn)
 {
     u8 nickname[POKEMON_NAME_LENGTH];
     u8 gender;
@@ -2468,10 +2406,10 @@ void sub_80451A0(u8 a, struct Pokemon *pkmn)
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
     StringGetEnd10(nickname);
     ptr = StringCopy(gUnknown_020238CC + 3, nickname);
-    ptr[0] = 0xFC;
+    ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 3;
     ptr[2] = 2;
-    ptr[3] = 0xFC;
+    ptr[3] = EXT_CTRL_CODE_BEGIN;
     ptr[4] = 1;
     ptr += 5;
     gender = GetMonGender(pkmn);
@@ -2483,26 +2421,26 @@ void sub_80451A0(u8 a, struct Pokemon *pkmn)
     {
         default:
             ptr[0] = 0xB;
-            ptr[1] = 0xFF;
+            ptr[1] = EOS;
             ptr += 1;
             break;
         case MON_MALE:
             ptr[0] = 0xB;
-            ptr[1] = 0xB5;
-            ptr[2] = 0xFF;
+            ptr[1] = CHAR_MALE;
+            ptr[2] = EOS;
             ptr += 2;
             break;
         case MON_FEMALE:
             ptr[0] = 0xA;
-            ptr[1] = 0xB6;
-            ptr[2] = 0xFF;
+            ptr[1] = CHAR_FEMALE;
+            ptr[2] = EOS;
             ptr += 2;
             break;
     }
-    ptr[0] = 0xFC;
+    ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 0x13;
     ptr[2] = 0x37;
-    ptr[3] = 0xFF;
+    ptr[3] = EOS;
     ptr = (u8 *)0x02000520 + battle_get_per_side_status(gSprites[a].data6) * 0x180;
     sub_80034D4(ptr, gUnknown_020238CC);
 
@@ -2513,9 +2451,9 @@ void sub_80451A0(u8 a, struct Pokemon *pkmn)
     {
         u8 *p = gUnknown_020238CC;
         
-        while (*p != 0xFF)
+        while (*p != EOS)
         {
-            if (*p == 0xFC)
+            if (*p == EXT_CTRL_CODE_BEGIN)
             {
                 p += GetExtCtrlCodeLength(p[1]) + 1;
             }
@@ -2577,9 +2515,7 @@ void sub_80451A0(u8 a, struct Pokemon *pkmn)
     }
 }
 
-extern u8 sub_8090D90();
-
-void sub_8045458(u8 a, u8 b)
+static void sub_8045458(u8 a, u8 b)
 {
     u8 r4;
     
@@ -2596,16 +2532,14 @@ void sub_8045458(u8 a, u8 b)
         {
             r4 = gSprites[a].data5;
             if (b != 0)
-                CpuCopy32(sub_8043CDC(0x46), (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
+                CpuCopy32(sub_8043CDC(0x46), (void *)(OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32), 32);
             else
-                CpuFill32(0, (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
+                CpuFill32(0, (void *)(OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32), 32);
         }
     }
 }
 
-extern u8 sub_80457E8(u8, u8);
-
-void draw_status_ailment_maybe(u8 a)
+static void draw_status_ailment_maybe(u8 a)
 {
     s32 r4;
     s32 r4_2;
@@ -2661,10 +2595,10 @@ void draw_status_ailment_maybe(u8 a)
         r6 = sub_8043CDC(0x27);
         
         for (i = 0; i < 3; i++)
-            CpuCopy32(r6, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
+            CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32), 32);
 
         if (!ewram17800[r7].bit_4)
-            CpuCopy32(sub_8043CDC(1), (u8 *)0x06010000 + gSprites[r10].oam.tileNum * 32, 64);
+            CpuCopy32(sub_8043CDC(1), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 64);
 
         sub_8045458(a, 1);
         return;
@@ -2674,20 +2608,20 @@ void draw_status_ailment_maybe(u8 a)
     r4_2 += r7 + 12;
     // I don't like writing the array index like this, but I can't get it to match otherwise.
     FillPalette(r0[gBattleInterfaceStatusIcons_DynPal], r4_2 + 0x100, 2);
-    CpuCopy16(gPlttBufferUnfaded + 0x100 + r4_2, (u16 *)0x05000200 + r4_2, 2);
-    CpuCopy32(r6, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + r8) * 32, 96);
+    CpuCopy16(gPlttBufferUnfaded + 0x100 + r4_2, (void *)(OBJ_PLTT + r4_2 * 2), 2);
+    CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32), 96);
     if (IsDoubleBattle() == TRUE || battle_side_get_owner(r7) == TRUE)
     {
         if (!ewram17800[r7].bit_4)
         {
-            CpuCopy32(sub_8043CDC(0), (u8 *)0x06010000 + gSprites[r10].oam.tileNum * 32, 32);
-            CpuCopy32(sub_8043CDC(0x41), (u8 *)0x06010000 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
+            CpuCopy32(sub_8043CDC(0), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 32);
+            CpuCopy32(sub_8043CDC(0x41), (void *)(OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32), 32);
         }
     }
     sub_8045458(a, 0);
 }
 
-u8 sub_80457E8(u8 a, u8 b)
+static u8 sub_80457E8(u8 a, u8 b)
 {
     u8 ret = a;
 
@@ -2747,7 +2681,7 @@ u8 sub_80457E8(u8 a, u8 b)
     return ret;
 }
 
-void sub_80458B0(u8 a)
+static void sub_80458B0(u8 a)
 {
     u8 *r6;
     u8 r8;
@@ -2762,22 +2696,18 @@ void sub_80458B0(u8 a)
         CpuCopy32(sub_8043CDC(0x2B), r6 + i * 64, 32);
     for (r7 = 3; r7 < 3 + r8; r7++)
     {
-#define M(a) ((a) - (a) / 8 * 8) + 64 * ((a) / 8)
-
-        addr = (u8 *)0x06010000 + (gSprites[a].oam.tileNum + M(r7)) * 32;
+        addr = (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + MACRO1(r7)) * 32);
         CpuCopy32(r6, addr, 32);
         r6 += 32;
         
-        addr = (u8 *)0x06010000 + (8 + gSprites[a].oam.tileNum + M(r7)) * 32;
+        addr = (void *)(OBJ_VRAM0 + (8 + gSprites[a].oam.tileNum + MACRO1(r7)) * 32);
         CpuCopy32(r6, addr, 32);
         r6 += 32;
-        
-#undef M
     }
     
 }
 
-void sub_8045998(u8 a)
+static void sub_8045998(u8 a)
 {
     u8 *r7;
     u8 status;
@@ -2794,20 +2724,17 @@ void sub_8045998(u8 a)
     r7 = (u8 *)0x02000520 + status * 0x180 + 32;
     for (i = 6; i < 6 + r6; i++)
     {
-        CpuCopy32(r7, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + 0x18 + (i - i / 8 * 8) + 64 * (i / 8)) * 32, 32);
+        CpuCopy32(r7, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x18 + MACRO1(i)) * 32), 32);
         r7 += 64;
     }
 }
-
-extern void load_gfxc_health_bar();
-s32 sub_8045C78(u8, u8, u8, u8);
 
 void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
 {
     u8 r10;
     u32 maxhp;
     u32 currhp;
-    
+
     r10 = gSprites[a].data6;
     if (battle_side_get_owner(r10) == 0)
     {
@@ -2872,12 +2799,6 @@ void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
     }
 }
 
-int sub_8045F58(s32, s32, int, int *, u8, u16);
-u8 GetScaledExpFraction(int, int, int, u8);
-void sub_8045D58(u8, u8);
-
-#define ABS(n) ((n) >= 0 ? (n) : -(n))
-
 s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
 {
     s32 r6;
@@ -2905,9 +2826,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
     return r6;
 }
 
-u8 sub_804602C(int, int, int, int *, u8 *, u8);
-
-void sub_8045D58(u8 a, u8 b)
+static void sub_8045D58(u8 a, u8 b)
 {
     u8 sp8[7];
     u8 r0;
@@ -2929,9 +2848,9 @@ void sub_8045D58(u8 a, u8 b)
         {
             u8 r4 = gSprites[ewram17850[a].unk0].data5;
             if (i < 2)
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (void *)(OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32), 32);
             else
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (u8 *)0x06010040 + (i + gSprites[r4].oam.tileNum) * 32, 32);
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (void *)(OBJ_VRAM0 + 64 + (i + gSprites[r4].oam.tileNum) * 32), 32);
         }
         break;
     case 1:
@@ -2945,15 +2864,15 @@ void sub_8045D58(u8 a, u8 b)
         for (i = 0; i < 8; i++)
         {
             if (i < 4)
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (u8 *)0x06010000 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32, 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (void *)(OBJ_VRAM0 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32), 32);
             else
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (u8 *)0x06010B80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32, 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (void *)(OBJ_VRAM0 + 0xB80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32), 32);
         }
         break;
     }
 }
 
-int sub_8045F58(s32 a, s32 b, int c, int *d, u8 e, u16 f)
+static int sub_8045F58(s32 a, s32 b, int c, int *d, u8 e, u16 f)
 {
     u8 r2 = e << 3;
     int r6;
@@ -3037,7 +2956,7 @@ int sub_8045F58(s32 a, s32 b, int c, int *d, u8 e, u16 f)
     return ret;
 }
 
-u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
+static u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
 {
     s32 r5 = b - c;
     u8 r3;
@@ -3080,17 +2999,6 @@ u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
     return r3;
 }
 
-struct UnknownStruct9
-{
-    s32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC_0:5;
-    u32 unk10;
-};
-
-void sub_8046128(struct UnknownStruct9 *a, int *b, void *c);
-
 s16 sub_80460C8(struct UnknownStruct9 *a, int *b, void *c, int d)
 {
     u16 r7;
@@ -3102,11 +3010,11 @@ s16 sub_80460C8(struct UnknownStruct9 *a, int *b, void *c, int d)
         r1 = *b >> 8;
     else
         r1 = *b;
-    sub_804373C(a->unk0, r1, d);
+    do_nothing(a->unk0, r1, d);
     return r7;
 }
 
-void sub_8046128(struct UnknownStruct9 *a, int *b, void *c)
+static void sub_8046128(struct UnknownStruct9 *a, int *b, void *c)
 {
     u8 sp8[6];
     u16 sp10[6];
@@ -3118,7 +3026,7 @@ void sub_8046128(struct UnknownStruct9 *a, int *b, void *c)
     CpuCopy16(sp10, c, sizeof(sp10));
 }
 
-u8 GetScaledExpFraction(int a, int b, int c, u8 d)
+static u8 GetScaledExpFraction(int a, int b, int c, u8 d)
 {
     u8 r7 = d * 8;
     int r5 = a - b;
