@@ -222,6 +222,8 @@ SECTIONS {
         src/field_specials.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
+        src/battle_records.o(.text);
+        asm/battle_records.o(.text_8110494);
         asm/pokedex_area_screen.o(.text);
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
