@@ -92,6 +92,8 @@ extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
 extern const struct SpritePalette gMonPaletteTable[];
 extern const struct SpritePalette gMonShinyPaletteTable[];
+extern const u16 gHMMoves[];
+extern s8 gUnknown_083F7E28[];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -1240,4 +1242,81 @@ const struct SpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
         return &gMonShinyPaletteTable[species];
     else
         return &gMonPaletteTable[species];
+}
+
+bool8 IsHMMove2(u16 move)
+{
+    int i = 0;
+    while (gHMMoves[i] != 0xFFFF)
+    {
+        if (gHMMoves[i++] == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8040A3C(u16 species)
+{
+    return gBaseStats[species].bodyColor >> 7; // XXX: should this be a bitfield instead?
+}
+
+s8 sub_8040A54(struct Pokemon *mon, u8 a2)
+{
+    u8 nature = GetNature(mon);
+    return gUnknown_083F7E28[nature * 5 + a2];
+}
+
+s8 sub_8040A7C(u32 personality, u8 a2)
+{
+    u8 nature = GetNatureFromPersonality(personality);
+    return gUnknown_083F7E28[nature * 5 + a2];
+}
+
+bool8 IsOtherTrainer(u32, u8 *);
+
+bool8 IsTradedMon(struct Pokemon *mon)
+{
+    u8 otName[8];
+    u32 otId;
+    GetMonData(mon, MON_DATA_OT_NAME, otName);
+    otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    return IsOtherTrainer(otId, otName);
+}
+
+bool8 IsOtherTrainer(u32 otId, u8 *otName)
+{
+    if (otId == (gSaveBlock2.playerTrainerId[0] | (gSaveBlock2.playerTrainerId[1] << 8) | (gSaveBlock2.playerTrainerId[2] << 16) | (gSaveBlock2.playerTrainerId[3] << 24)))
+    {
+        int i;
+
+        for (i = 0; otName[i] != EOS; i++)
+            if (otName[i] != gSaveBlock2.playerName[i])
+                return TRUE;
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void BoxMonRestorePP(struct BoxPokemon *);
+
+void MonRestorePP(struct Pokemon *mon)
+{
+    BoxMonRestorePP(&mon->box);
+}
+
+void BoxMonRestorePP(struct BoxPokemon *boxMon)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0))
+        {
+            u16 move = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0);
+            u16 bonus = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, 0);
+            u8 pp = CalculatePPWithBonus(move, bonus, i);
+            SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
+        }
+    }
 }

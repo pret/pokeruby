@@ -115,15 +115,15 @@ gUnknown_082082FE:: @ 82082FE
 	.byte -5, -5, -10
 
 	.align 1
-gUnknown_0820831A:: @ 820831A
-	.2byte    0xF
-	.2byte   0x13
-	.2byte   0x39
-	.2byte   0x46
-	.2byte   0x94
-	.2byte   0xF9
-	.2byte   0x7F
-	.2byte  0x123
+gHMMoves:: @ 820831A
+	.2byte MOVE_CUT
+	.2byte MOVE_FLY
+	.2byte MOVE_SURF
+	.2byte MOVE_STRENGTH
+	.2byte MOVE_FLASH
+	.2byte MOVE_ROCK_SMASH
+	.2byte MOVE_WATERFALL
+	.2byte MOVE_DIVE
 	.2byte 0xFFFF
 
 @ "Nidoran♂" Japanese name

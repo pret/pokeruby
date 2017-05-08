@@ -170,7 +170,7 @@ _0804144A:
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl pokemon_restore_pp
+	bl BoxMonRestorePP
 	movs r0, 0x88
 	lsls r0, 1
 	add r0, r8

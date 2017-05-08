@@ -73,7 +73,7 @@ AddHatchedMonToParty: @ 80429EC
 	movs r1, 0x23
 	bl SetMonData
 	adds r0, r5, 0
-	bl sub_8040B1C
+	bl MonRestorePP
 	adds r0, r5, 0
 	bl CalculateMonStats
 	add sp, 0x14

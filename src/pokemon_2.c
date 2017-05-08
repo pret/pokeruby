@@ -1079,7 +1079,7 @@ u8 SendMonToPC(struct Pokemon *mon)
         {
             if (GetBoxMonData(&gPokemonStorage.boxes[i][j], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
-                sub_8040B1C(mon);
+                MonRestorePP(mon);
                 CopyMon(&gPokemonStorage.boxes[i][j], &mon->box, sizeof(mon->box));
                 return 1;
             }

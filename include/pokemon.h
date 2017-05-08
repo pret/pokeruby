@@ -457,7 +457,7 @@ u8 GetNatureFromPersonality(u32 personality);
 
 u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
 
-void sub_8040B1C(void *);
+void MonRestorePP(struct Pokemon *);
 
 u8 *sub_803F378(u16 itemId);
 

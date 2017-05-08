@@ -2408,7 +2408,7 @@ _08112DCC:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8040A00
+	bl IsHMMove2
 	cmp r0, 0
 	beq _08112E24
 	ldr r0, _08112E10 @ =gUnknown_08400F8C
@@ -3701,7 +3701,7 @@ _08113910:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8040A00
+	bl IsHMMove2
 	cmp r0, 0
 	beq _08113970
 	ldr r0, _0811395C @ =gUnknown_08400F8C
