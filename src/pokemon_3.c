@@ -1333,7 +1333,7 @@ void sub_8040B8C(void)
     if (!battle_side_get_owner(BATTLE_STRUCT->filler1[0x34]))
         gUnknown_030041C0[3] = pokemon_order_func(gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]]);
     else
-        gUnknown_030041C0[3] = gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]];   
+        gUnknown_030041C0[3] = gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]];
     gUnknown_03004290[0] = 0xFD;
     gUnknown_03004290[1] = 4;
     gUnknown_03004290[2] = gUnknown_02024E6C;
