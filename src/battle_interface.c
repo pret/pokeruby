@@ -91,7 +91,7 @@ extern const u8 *const gNatureNames[];
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 
-int sub_804373C(void)
+int sub_804373C(s16 unused1, s16 unused2, int unused3)
 {
     return 9;
 }
@@ -2872,9 +2872,9 @@ void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
     }
 }
 
-extern int sub_8045F58(int, int, int, void *, int, u16);
-extern u8 GetScaledExpFraction();
-extern void sub_8045D58();
+int sub_8045F58(s32, s32, int, int *, u8, u16);
+u8 GetScaledExpFraction(int, int, int, u8);
+void sub_8045D58(u8, u8);
 
 #define ABS(n) ((n) >= 0 ? (n) : -(n))
 
@@ -2903,4 +2903,266 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
     if (r6 == -1)
         ewram17850[a].unk10 = 0;
     return r6;
+}
+
+u8 sub_804602C(int, int, int, int *, u8 *, u8);
+
+void sub_8045D58(u8 a, u8 b)
+{
+    u8 sp8[7];
+    u8 r0;
+    u8 r8;
+    u8 i;
+    
+    switch (b)
+    {
+    case 0:
+        r0 = sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 6);
+        r8 = 3;
+        if (r0 <= 0x18)
+        {
+            r8 = 0x38;
+            if (r0 > 9)
+                r8 = 0x2F;
+        }
+        for (i = 0; i < 6; i++)
+        {
+            u8 r4 = gSprites[ewram17850[a].unk0].data5;
+            if (i < 2)
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
+            else
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, (u8 *)0x06010040 + (i + gSprites[r4].oam.tileNum) * 32, 32);
+        }
+        break;
+    case 1:
+        sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 8);
+        r0 = GetMonData(&gPlayerParty[gUnknown_02024A6A[a]], MON_DATA_LEVEL);
+        if (r0 == 100)
+        {
+            for (i = 0; i < 8; i++)
+                sp8[i] = 0;
+        }
+        for (i = 0; i < 8; i++)
+        {
+            if (i < 4)
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (u8 *)0x06010000 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32, 32);
+            else
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, (u8 *)0x06010B80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32, 32);
+        }
+        break;
+    }
+}
+
+int sub_8045F58(s32 a, s32 b, int c, int *d, u8 e, u16 f)
+{
+    u8 r2 = e << 3;
+    int r6;
+    int ret;
+    
+    if (*d == -32768)
+    {
+        if (a < r2)
+            *d = b << 8;
+        else
+            *d = b;
+    }
+    //_08045F8A
+    b -= c;
+    if (b < 0)
+        b = 0;
+    else if (b > a)
+        b = a;
+    if (a < r2)
+    {
+        int var = *d >> 8;
+        
+        r6 = *d;
+        if (b == var && (r6 & 0xFF) == 0)
+            return -1;
+    }
+    else
+    {
+        r6 = *d;
+        if (b == r6)
+            return -1;
+    }
+    //_08045FC4
+    if (a < r2)
+    {
+        int r0 = (a << 8) / r2;
+        
+        if (c < 0)
+        {
+            *d = r6 + r0;
+            ret = *d >> 8;
+            if (ret >= b)
+            {
+                *d = b << 8;
+                ret = b;
+            }
+        }
+        //_08045FE2
+        else
+        {
+            *d = r6 - r0;
+            ret = *d >> 8;
+            if ((*d & 0xFF) > 0)
+                ret++;
+            if (ret <= b)
+            {
+                *d = b << 8;
+                ret = b;
+            }
+        }
+    }
+    else
+    {
+        //_08045FFE
+        if (c < 0)
+        {
+            *d += f;
+            if (*d > b)
+                *d = b;
+            ret = *d;
+        }
+        //_08046010
+        else
+        {
+            *d -= f;
+            if (*d < b)
+                *d = b;
+            ret = *d;
+        }
+    }
+    return ret;
+}
+
+u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
+{
+    s32 r5 = b - c;
+    u8 r3;
+    u8 i;
+    u8 r2;
+    
+    if (r5 < 0)
+        r5 = 0;
+    else if (r5 > a)
+        r5 = a;
+    r3 = f << 3;
+    for (i = 0; i < f; i++)
+        e[i] = 0;
+    if (a < r3)
+        r2 = *d * r3 / a >> 8;
+    else
+        r2 = *d * r3 / a;
+    r3 = r2;
+    if (r3 == 0 && r5 > 0)
+    {
+        e[0] = 1;
+        r3 = 1;
+    }
+    else
+    {
+        for (i = 0; i < f; i++)
+        {
+            if (r2 >= 8)
+            {
+                e[i] = 8;
+            }
+            else
+            {
+                e[i] = r2;
+                break;
+            }
+            r2 -= 8;
+        }
+    }
+    return r3;
+}
+
+struct UnknownStruct9
+{
+    s32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 unkC_0:5;
+    u32 unk10;
+};
+
+void sub_8046128(struct UnknownStruct9 *a, int *b, void *c);
+
+s16 sub_80460C8(struct UnknownStruct9 *a, int *b, void *c, int d)
+{
+    u16 r7;
+    s16 r1;
+    
+    r7 = sub_8045F58(a->unk0, a->unk4, a->unk8, b, 6, 1);
+    sub_8046128(a, b, c);
+    if (a->unk0 < 0x30)
+        r1 = *b >> 8;
+    else
+        r1 = *b;
+    sub_804373C(a->unk0, r1, d);
+    return r7;
+}
+
+void sub_8046128(struct UnknownStruct9 *a, int *b, void *c)
+{
+    u8 sp8[6];
+    u16 sp10[6];
+    u8 i;
+    
+    sub_804602C(a->unk0, a->unk4, a->unk8, b, (u8 *)sp8, 6);
+    for (i = 0; i < 6; i++)
+        sp10[i] = (a->unkC_0 << 12) | (a->unk10 + sp8[i]);
+    CpuCopy16(sp10, c, sizeof(sp10));
+}
+
+u8 GetScaledExpFraction(int a, int b, int c, u8 d)
+{
+    u8 r7 = d * 8;
+    int r5 = a - b;
+    s8 r4;
+    s8 r0;
+    s32 result;
+    
+    if (r5 < 0)
+        r5 = 0;
+    else if (r5 > c)
+        r5 = c;
+
+    r4 = a * r7 / c;
+    r0 = r5 * r7 / c;
+    result = r4 - r0;    
+    return ABS(result);
+}
+
+u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
+{
+    u8 result = hp * scale / maxhp;
+
+    if (result == 0 && hp > 0)
+        return 1;
+    return result;
+}
+
+int GetHPBarLevel(s16 hp, s16 maxhp)
+{
+    int result;
+
+    if (hp == maxhp)
+        result = 4;
+    else
+    {
+        u8 fraction = GetScaledHPFraction(hp, maxhp, 48);
+        if (fraction > 24)
+            result = 3;
+        else if (fraction > 9)
+            result = 2;
+        else if (fraction > 0)
+            result = 1;
+        else
+            result = 0;
+    }
+    return result;
 }
