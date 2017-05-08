@@ -375,6 +375,13 @@ void sub_810FA54(void);
 // asm/battle_records.o
 void InitLinkBattleRecords(void);
 
+// asm/pokedex_cry_screen.o
+u8 sub_8119E3C(struct CryRelatedStruct *, u8);
+void sub_8119F88(u8 a);
+void sub_811A050(u16 species);
+u8 ShowPokedexCryScreen(struct CryRelatedStruct *, u8);
+void DestroyCryMeterNeedleSprite();
+
 // asm/battle_transition.o
 void sub_811AABC(u8);
 void sub_811AAD8(u8);
