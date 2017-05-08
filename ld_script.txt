@@ -215,7 +215,7 @@ SECTIONS {
         asm/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
-        asm/birch_pc.o(.text);
+        src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         asm/field_specials.o(.text);
