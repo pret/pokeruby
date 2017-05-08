@@ -10752,14 +10752,14 @@ _08013EE0:
 	cmp r0, 0
 	beq _08013F1C
 	ldr r0, _08013F50 @ =gEnemyParty
-	bl sub_8134504
+	bl UpdateRoamerHPStatus
 	ldrb r0, [r5]
 	cmp r0, 0x1
 	beq _08013F18
 	cmp r0, 0x7
 	bne _08013F1C
 _08013F18:
-	bl sub_813452C
+	bl SetRoamerInactive
 _08013F1C:
 	movs r0, 0x5A
 	bl m4aSongNumStop

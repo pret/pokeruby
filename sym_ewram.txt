@@ -958,14 +958,9 @@ gLastSaveSectorStatus: @ 2039284
 gUnknown_02039288: @ 2039288
 	.space 0x74
 
-gUnknown_020392FC: @ 20392FC
-	.space 0x6
+	.include "src/roamer.o"
 
-@ Latios/Latias location
-@ map group, map num.
-gRoamerLocation: @ 2039302
-	.space 0x2
-
+	.align 2
 gUnknown_02039304: @ 2039304
 	.space 0x4
 

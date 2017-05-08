@@ -156,7 +156,8 @@ struct Roamer
     /*0x10*/ u8 cute;
     /*0x11*/ u8 smart;
     /*0x12*/ u8 tough;
-    /*0x13*/ u8 active;
+    /*0x13*/ bool8 active;
+    /*0x14*/ u8 filler[0x8];
 };
 
 struct RamScriptData
@@ -408,7 +409,6 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
-    /*0x3158*/ u8 filler_3158[0x8];
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
     /*0x3A7C*/ u8 filler_3A7C[0x10];

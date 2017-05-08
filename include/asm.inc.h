@@ -416,14 +416,6 @@ u8 IsThereStorageSpaceForDecoration(u8);
 u8 sub_8134074(u8);
 s8 sub_81340A8(u8);
 
-// asm/roamer.o
-void sub_81341F8(void);
-void sub_813420C(void);
-void mapnumbers_history_shift_sav1_0_2_4_out(void);
-void sub_8134348(void);
-void sub_8134394();
-u8 sub_81344CC(void);
-
 // asm/battle_tower.o
 void sub_8134AC0(void *);
 

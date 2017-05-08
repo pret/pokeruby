@@ -9,6 +9,7 @@
 #include "pokedex.h"
 #include "pokemon_size_record.h"
 #include "rng.h"
+#include "roamer.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "script.h"
@@ -135,8 +136,8 @@ void NewGameInitData(void)
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     sub_80961D8();
-    sub_81341F8();
-    sub_813420C();
+    ClearRoamerData();
+    ClearRoamerLocationData();
     gSaveBlock1.registeredItem = 0;
     sub_80A3714();
     NewGameInitPCItems();

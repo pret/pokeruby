@@ -255,7 +255,7 @@ SECTIONS {
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         asm/decoration_inventory.o(.text);
-        asm/roamer.o(.text);
+        src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
         asm/battle_anim_8137220.o(.text);
@@ -463,7 +463,7 @@ SECTIONS {
         data/battle_anim_812C144.o(.rodata);
         data/learn_move.o(.rodata);
         data/decoration_inventory.o(.rodata);
-        data/roamer.o(.rodata);
+        src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         data/use_pokeblock.o(.rodata);
         data/battle_anim_8137220.o(.rodata);
