@@ -7,10 +7,13 @@
 #include "items.h"
 #include "link.h"
 #include "main.h"
+#include "m4a.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
 #include "rtc.h"
+#include "songs.h"
+#include "sound.h"
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -86,6 +89,9 @@ extern u32 gExperienceTables[8][101];
 extern u32 gTMHMLearnsets[][2];
 extern const u16 *gLevelUpLearnsets[];
 extern u8 gBattleMonForms[];
+extern const u8 BattleText_Wally[];
+extern const struct SpritePalette gMonPaletteTable[];
+extern const struct SpritePalette gMonShinyPaletteTable[];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -765,7 +771,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         else
             multiplier = 1;
 
-        switch ( i )
+        switch (i)
         {
         case 0:
             evIncrease = gBaseStats[defeatedSpecies].evYield_HP * multiplier;
@@ -1129,4 +1135,109 @@ void ClearBattleMonForms(void)
     int i;
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
+}
+
+u16 sub_8040728(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+        return BGM_BATTLE34;
+    if (gBattleTypeFlags & BATTLE_TYPE_REGI)
+        return BGM_BATTLE36;
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return BGM_BATTLE20;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        switch (gTrainers[gTrainerBattleOpponent].trainerClass)
+        {
+            case 2:
+            case 0x31:
+                return BGM_BATTLE30;
+            case 3:
+            case 4:
+            case 0x32:
+            case 0x33:
+                return BGM_BATTLE31;
+            case 0x19:
+                return BGM_BATTLE32;
+            case 0x20:
+                return BGM_BATTLE33;
+            case 0x2E:
+                if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
+                    return BGM_BATTLE20;
+                return BGM_BATTLE35;
+            case 0x18:
+                return BGM_BATTLE38;
+            default:
+                return BGM_BATTLE20;
+        }
+    }
+    return BGM_BATTLE27;
+}
+
+void sub_80408BC(void)
+{
+    ResetMapMusic();
+    m4aMPlayAllStop();
+    PlayBGM(sub_8040728());
+}
+
+void current_map_music_set__default_for_battle(u16 song)
+{
+    ResetMapMusic();
+    m4aMPlayAllStop();
+    if (song)
+        PlayNewMapMusic(song);
+    else
+        PlayNewMapMusic(sub_8040728());
+}
+
+const u16 *species_and_otid_get_pal(u16, u32, u32);
+
+const u16 *pokemon_get_pal(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return species_and_otid_get_pal(species, otId, personality);
+}
+
+//Extracts the upper 16 bits of a 32-bit number
+#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+
+//Extracts the lower 16 bits of a 32-bit number
+#define LOHALF(n) ((n) & 0xFFFF)
+
+const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
+{
+    u32 shinyValue;
+
+    if (species > SPECIES_EGG)
+        return gMonPaletteTable[0].data;
+
+    shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        return gMonShinyPaletteTable[species].data;
+    else
+        return gMonPaletteTable[species].data;
+}
+
+const struct SpritePalette *sub_80409C8(u16, u32, u32);
+
+const struct SpritePalette *sub_8040990(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return sub_80409C8(species, otId, personality);
+}
+
+const struct SpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
+{
+    u32 shinyValue;
+
+    shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        return &gMonShinyPaletteTable[species];
+    else
+        return &gMonPaletteTable[species];
 }

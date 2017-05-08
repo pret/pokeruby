@@ -1101,7 +1101,7 @@ gBadEggNickname:: @ 8400E3A
 	.string "Bad EGG$"
 
 gUnknown_08400E42:: @ 8400E42
-BattleText_Wally:
+BattleText_Wally::
 	.string "WALLY$"
 
 BattleText_Win:: @ 8400E48
