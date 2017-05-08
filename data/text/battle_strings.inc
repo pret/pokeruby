@@ -480,7 +480,7 @@ BattleText_TookAttack2:
 	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
 
 gUnknown_083FFCCA:: @ 83FFCCA
-BattleText_PreventedSwitch:
+BattleText_PreventedSwitch::
 	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
 BattleText_PreventedOther:
 	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"

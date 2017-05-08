@@ -4311,7 +4311,7 @@ GetStringCenterAlignXOffset: @ 809FA74
 	thumb_func_start sub_809FA94
 sub_809FA94: @ 809FA94
 	push {lr}
-	bl sub_8040CB4
+	bl IsShiny
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809FAB4

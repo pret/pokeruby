@@ -54,6 +54,8 @@ struct SpindaSpot
 };
 
 extern void get_battle_strings_(u8 *);
+extern void sub_8120FFC(const u8 *, u8 *);
+extern u8 pokemon_order_func(u8);
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -94,6 +96,10 @@ extern const struct SpritePalette gMonPaletteTable[];
 extern const struct SpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern s8 gUnknown_083F7E28[];
+extern u8 byte_2024C06;
+extern const u8 BattleText_PreventedSwitch[];
+extern u16 gUnknown_02024A6A[];
+extern u8 gJapaneseNidoranNames[][11];
 
 extern u8 gUnknown_082082F8[];
 extern u8 gUnknown_083FFDB3[];
@@ -1319,4 +1325,111 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
             SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
         }
     }
+}
+
+void sub_8040B8C(void)
+{
+    byte_2024C06 = BATTLE_STRUCT->filler1_2[0x37];
+    gUnknown_030041C0[0] = 0xFD;
+    gUnknown_030041C0[1] = 4;
+    gUnknown_030041C0[2] = BATTLE_STRUCT->filler1[0x34];
+    gUnknown_030041C0[4] = EOS;
+    if (!battle_side_get_owner(BATTLE_STRUCT->filler1[0x34]))
+        gUnknown_030041C0[3] = pokemon_order_func(gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]]);
+    else
+        gUnknown_030041C0[3] = gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]];   
+    gUnknown_03004290[0] = 0xFD;
+    gUnknown_03004290[1] = 4;
+    gUnknown_03004290[2] = gUnknown_02024E6C;
+    gUnknown_03004290[3] = pokemon_order_func(gUnknown_02024A6A[gUnknown_02024E6C]);
+    gUnknown_03004290[4] = EOS;
+    sub_8120FFC(BattleText_PreventedSwitch, gStringVar4);
+}
+
+void SetWildMonHeldItem(void)
+{
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
+    {
+        u16 rnd = Random() % 100;
+        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
+        if (gBaseStats[species].item1 == gBaseStats[species].item2)
+        {
+            SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item1);
+            return;
+        }
+
+        if (rnd > 44)
+        {
+            if (rnd <= 94)
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item1);
+            else
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item2);
+        }
+    }
+}
+
+bool8 IsShinyOtIdPersonality(u32, u32);
+
+bool8 IsShiny(struct Pokemon *mon)
+{
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return IsShinyOtIdPersonality(otId, personality);
+}
+
+bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
+{
+    bool8 retVal = FALSE;
+    u32 shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        retVal = TRUE;
+    return retVal;
+}
+
+u8 *sub_8040D08(void)
+{
+    u8 id = GetMultiplayerId();
+    return gLinkPlayers[sub_803FC34(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+}
+
+bool32 sub_8040D3C(u16 species, u8 *name, u8 language)
+{
+    bool32 retVal = FALSE;
+    if (species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+    {
+        u8 *speciesName;
+        if (language == GAME_LANGUAGE)
+        {
+            speciesName = gSpeciesNames[species];
+        }
+        else
+        {
+            if (species == SPECIES_NIDORAN_M)
+                speciesName = gJapaneseNidoranNames[0];
+            else
+                speciesName = gJapaneseNidoranNames[1];
+        }
+        if (!StringCompareWithoutExtCtrlCodes(name, speciesName))
+            retVal = TRUE;
+        else
+            retVal = FALSE;
+    }
+    return retVal;
+}
+
+bool32 sub_8040D8C(u16 species, u8 *name)
+{
+    u8 language = GAME_LANGUAGE;
+    if (name[0] == 0xFC && name[1] == 21)
+        language = LANGUAGE_JAPANESE;
+    return sub_8040D3C(species, name, language);
+}
+
+bool32 unref_sub_8040DAC(struct Pokemon *mon)
+{
+    u8 name[12];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 language = GetMonData(mon, MON_DATA_LANGUAGE, 0);
+    GetMonData(mon, MON_DATA_NICKNAME, name);
+    return sub_8040D3C(species, name, language);
 }

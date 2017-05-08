@@ -65,7 +65,6 @@ SECTIONS {
         src/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon_3.o(.text);
-        asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
         src/util.o(.text);
@@ -333,6 +332,7 @@ SECTIONS {
         data/main_menu.o(.rodata);
         data/data2.o(.rodata);
         data/pokemon.o(.rodata);
+        . = ALIGN(4);
         data/trig.o(.rodata);
         data/util.o(.rodata);
         data/daycare.o(.rodata);

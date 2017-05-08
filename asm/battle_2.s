@@ -196,7 +196,7 @@ _0800E97E:
 	ldr r1, _0800E9D8 @ =gTrainerBattleOpponent
 	ldrh r1, [r1]
 	bl sub_800F8E8
-	bl sub_8040C38
+	bl SetWildMonHeldItem
 _0800E998:
 	ldr r0, _0800E9DC @ =gMain
 	ldr r1, _0800E9E0 @ =0x0000043d

@@ -126,9 +126,6 @@ gHMMoves:: @ 820831A
 	.2byte MOVE_DIVE
 	.2byte 0xFFFF
 
-@ "Nidoran♂" Japanese name
+gJapaneseNidoranNames:: @ 820832C
 	.string "ニドラン♂$", 11
-
-@ "Nidoran♀" Japanese name
-gUnknown_08208337:: @ 8208337
-	.string "ニドラン♀$", 13
+	.string "ニドラン♀$", 11
