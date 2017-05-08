@@ -4,7 +4,10 @@
 #define CHAR_SPACE          0x00
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_HYPHEN         0xAE
+#define CHAR_MALE           0xB5
+#define CHAR_FEMALE         0xB6
 #define CHAR_CURRENCY       0xB7
+#define CHAR_SLASH          0xBA
 #define CHAR_COLON          0xF0
 #define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
@@ -155,7 +158,7 @@ u8 sub_8002F44(struct Window *win);
 u8 sub_8003418(struct Window *win);
 u8 sub_8003460(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 top);
-void sub_80034D4(u8 *tileData, u8 *text);
+void sub_80034D4(u8 *tileData, const u8 *text);
 u8 sub_80034EC(u8 *str);
 u8 *sub_8003504(u8 *dest, s32 value, u8 alignAmount, u8 alignType);
 u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType);

@@ -1043,15 +1043,15 @@ BattleText_SpDef:
 	.string "SP. DEF$"
 
 gUnknown_08400DD6:: @ 8400DD6
-BattleText_SafariBalls:
+BattleText_SafariBalls::
 	.string "{HIGHLIGHT RED}SAFARI BALLS$"
 
 gUnknown_08400DE6:: @ 8400DE6
-BattleText_SafariBallsLeft:
+BattleText_SafariBallsLeft::
 	.string "{HIGHLIGHT RED}Left: $"
 
 gUnknown_08400DF0:: @ 8400DF0
-BattleText_HighlightRed:
+BattleText_HighlightRed::
 	.string "{HIGHLIGHT RED}$"
 
 BattleText_Sleep::

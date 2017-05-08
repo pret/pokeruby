@@ -2338,7 +2338,7 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
     return retVal;
 }
 
-void sub_80034D4(u8 *tileData, u8 *text)
+void sub_80034D4(u8 *tileData, const u8 *text)
 {
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6C74, tileData, text);
 }
