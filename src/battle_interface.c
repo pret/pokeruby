@@ -7,6 +7,7 @@
 #include "sound.h"
 #include "songs.h"
 #include "battle.h"
+#include "palette.h"
 
 struct UnknownStruct5
 {
@@ -47,6 +48,10 @@ extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_03004340[];
 
+extern u16 gBattleTypeFlags;
+extern u8 gNumSafariBalls;
+
+extern u32 gExperienceTables[8][101];
 extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
 extern const struct SpriteTemplate gSpriteTemplate_820A51C[];
 extern const struct SpriteTemplate gSpriteTemplate_820A54C;
@@ -76,11 +81,15 @@ extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
 extern const u8 gUnknown_0820A8B0[];
-extern const u8 *const gNatureNames[];
-
+extern const struct BaseStats gBaseStats[];
+extern const u8 BattleText_SafariBalls[];
+extern const u8 BattleText_SafariBallsLeft[];
+extern const u8 BattleText_HighlightRed[];
 extern const u8 gUnknown_08D1216C[][32];
 
-extern u16 gBattleTypeFlags;
+extern const u8 *const gNatureNames[];
+extern const u16 gBattleInterfaceStatusIcons_DynPal[];
+
 
 int sub_804373C(void)
 {
@@ -1342,8 +1351,8 @@ _08044548: .4byte 0x04000008\n\
 }
 #endif
 
-extern void draw_status_ailment_maybe();
-extern void sub_8045A5C();
+extern void draw_status_ailment_maybe(u8);
+void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c);
 
 void sub_804454C(void)
 {
@@ -2566,4 +2575,332 @@ void sub_80451A0(u8 a, struct Pokemon *pkmn)
             ptr += 32;
         }
     }
+}
+
+extern u8 sub_8090D90();
+
+void sub_8045458(u8 a, u8 b)
+{
+    u8 r4;
+    
+    if (gBattleTypeFlags & 0x200)
+        return;
+    if (gBattleTypeFlags & 8)
+        return;
+
+    r4 = gSprites[a].data6;
+    if (battle_side_get_owner(r4) != 0)
+    {
+        u16 species = GetMonData(&gEnemyParty[gUnknown_02024A6A[r4]], MON_DATA_SPECIES);
+        if (sub_8090D90(SpeciesToNationalPokedexNum(species), 1) != 0)
+        {
+            r4 = gSprites[a].data5;
+            if (b != 0)
+                CpuCopy32(sub_8043CDC(0x46), (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
+            else
+                CpuFill32(0, (u8 *)0x06010000 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
+        }
+    }
+}
+
+extern u8 sub_80457E8(u8, u8);
+
+void draw_status_ailment_maybe(u8 a)
+{
+    s32 r4;
+    s32 r4_2;
+    u8 r7;
+    u8 r10;
+    s16 r8;
+    const u8 *r6;
+    u8 r0;
+    s32 i;
+    
+    r7 = gSprites[a].data6;
+    r10 = gSprites[a].data5;
+    if (battle_side_get_owner(r7) == 0)
+    {
+        r4 = GetMonData(&gPlayerParty[gUnknown_02024A6A[r7]], MON_DATA_STATUS);
+        if (!IsDoubleBattle())
+            r8 = 0x1A;
+        else
+            r8 = 0x12;
+    }
+    else
+    {
+        r4 = GetMonData(&gEnemyParty[gUnknown_02024A6A[r7]], MON_DATA_STATUS);
+        r8 = 0x11;
+    }
+    if (r4 & 7)
+    {
+        r6 = sub_8043CDC(sub_80457E8(0x1B, r7));
+        r0 = 2;
+    }
+    else if (r4 & 0x88)
+    {
+        r6 = sub_8043CDC(sub_80457E8(0x15, r7));
+        r0 = 0;
+    }
+    else if (r4 & 0x10)
+    {
+        r6 = sub_8043CDC(sub_80457E8(0x21, r7));
+        r0 = 4;
+    }
+    else if (r4 & 0x20)
+    {
+        r6 = sub_8043CDC(sub_80457E8(0x1E, r7));
+        r0 = 3;
+    }
+    else if (r4 & 0x40)
+    {
+        r6 = sub_8043CDC(sub_80457E8(0x18, r7));
+        r0 = 1;
+    }
+    else
+    {
+        r6 = sub_8043CDC(0x27);
+        
+        for (i = 0; i < 3; i++)
+            CpuCopy32(r6, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
+
+        if (!ewram17800[r7].bit_4)
+            CpuCopy32(sub_8043CDC(1), (u8 *)0x06010000 + gSprites[r10].oam.tileNum * 32, 64);
+
+        sub_8045458(a, 1);
+        return;
+    }
+
+    r4_2 = gSprites[a].oam.paletteNum * 16;
+    r4_2 += r7 + 12;
+    // I don't like writing the array index like this, but I can't get it to match otherwise.
+    FillPalette(r0[gBattleInterfaceStatusIcons_DynPal], r4_2 + 0x100, 2);
+    CpuCopy16(gPlttBufferUnfaded + 0x100 + r4_2, (u16 *)0x05000200 + r4_2, 2);
+    CpuCopy32(r6, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + r8) * 32, 96);
+    if (IsDoubleBattle() == TRUE || battle_side_get_owner(r7) == TRUE)
+    {
+        if (!ewram17800[r7].bit_4)
+        {
+            CpuCopy32(sub_8043CDC(0), (u8 *)0x06010000 + gSprites[r10].oam.tileNum * 32, 32);
+            CpuCopy32(sub_8043CDC(0x41), (u8 *)0x06010000 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
+        }
+    }
+    sub_8045458(a, 0);
+}
+
+u8 sub_80457E8(u8 a, u8 b)
+{
+    u8 ret = a;
+
+    switch (a)
+    {
+    case 21:
+        if (b == 0)
+            ret = 21;
+        else if (b == 1)
+            ret = 71;
+        else if (b == 2)
+            ret = 86;
+        else
+            ret = 101;
+        break;
+    case 24:
+        if (b == 0)
+            ret = 24;
+        else if (b == 1)
+            ret = 74;
+        else if (b == 2)
+            ret = 89;
+        else
+            ret = 104;
+        break;
+    case 27:
+        if (b == 0)
+            ret = 27;
+        else if (b == 1)
+            ret = 77;
+        else if (b == 2)
+            ret = 92;
+        else
+            ret = 107;
+        break;
+    case 30:
+        if (b == 0)
+            ret = 30;
+        else if (b == 1)
+            ret = 80;
+        else if (b == 2)
+            ret = 95;
+        else
+            ret = 110;
+        break;
+    case 33:
+        if (b == 0)
+            ret = 33;
+        else if (b == 1)
+            ret = 83;
+        else if (b == 2)
+            ret = 98;
+        else
+            ret = 113;
+        break;
+    }
+    return ret;
+}
+
+void sub_80458B0(u8 a)
+{
+    u8 *r6;
+    u8 r8;
+    u8 i;
+    s32 r7;
+    u8 *addr;
+    
+    r6 = (u8 *)0x02000520 + battle_get_per_side_status(gSprites[a].data6) * 0x180;
+    r8 = 7;
+    sub_80034D4(r6, BattleText_SafariBalls);
+    for (i = 0; i < r8; i++)
+        CpuCopy32(sub_8043CDC(0x2B), r6 + i * 64, 32);
+    for (r7 = 3; r7 < 3 + r8; r7++)
+    {
+#define M(a) ((a) - (a) / 8 * 8) + 64 * ((a) / 8)
+
+        addr = (u8 *)0x06010000 + (gSprites[a].oam.tileNum + M(r7)) * 32;
+        CpuCopy32(r6, addr, 32);
+        r6 += 32;
+        
+        addr = (u8 *)0x06010000 + (8 + gSprites[a].oam.tileNum + M(r7)) * 32;
+        CpuCopy32(r6, addr, 32);
+        r6 += 32;
+        
+#undef M
+    }
+    
+}
+
+void sub_8045998(u8 a)
+{
+    u8 *r7;
+    u8 status;
+    s32 r6;
+    s32 i;
+    
+    r7 = StringCopy(gUnknown_020238CC, BattleText_SafariBallsLeft);
+    r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
+    StringAppend(r7, BattleText_HighlightRed);
+    status = battle_get_per_side_status(gSprites[a].data6);
+    r7 = (u8 *)0x02000520 + status * 0x180;
+    r6 = 5;
+    sub_80034D4(r7, gUnknown_020238CC);
+    r7 = (u8 *)0x02000520 + status * 0x180 + 32;
+    for (i = 6; i < 6 + r6; i++)
+    {
+        CpuCopy32(r7, (u8 *)0x06010000 + (gSprites[a].oam.tileNum + 0x18 + (i - i / 8 * 8) + 64 * (i / 8)) * 32, 32);
+        r7 += 64;
+    }
+}
+
+extern void load_gfxc_health_bar();
+s32 sub_8045C78(u8, u8, u8, u8);
+
+void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
+{
+    u8 r10;
+    u32 maxhp;
+    u32 currhp;
+    
+    r10 = gSprites[a].data6;
+    if (battle_side_get_owner(r10) == 0)
+    {
+        if (c == 3 || c == 0)
+            sub_8043FC0(a, GetMonData(pkmn, MON_DATA_LEVEL));
+        if (c == 1 || c == 0)
+            sub_80440EC(a, GetMonData(pkmn, MON_DATA_HP), 0);
+        if (c == 2 || c == 0)
+            sub_80440EC(a, GetMonData(pkmn, MON_DATA_MAX_HP), 1);
+        if (c == 5 || c == 0)
+        {
+            load_gfxc_health_bar(0);
+            maxhp = GetMonData(pkmn, MON_DATA_MAX_HP);
+            currhp = GetMonData(pkmn, MON_DATA_HP);
+            sub_8043D84(r10, a, maxhp, currhp, 0);
+            sub_8045C78(r10, a, 0, 0);
+        }
+        if (!IsDoubleBattle() && (c == 6 || c == 0))
+        {
+            u16 species;
+            u8 level;
+            u32 exp;
+            u32 var1;
+            u32 var2;
+            u32 currLevelExp;
+            
+            load_gfxc_health_bar(3);
+            species = GetMonData(pkmn, MON_DATA_SPECIES);
+            level = GetMonData(pkmn, MON_DATA_LEVEL);
+            exp = GetMonData(pkmn, MON_DATA_EXP);
+            currLevelExp = gExperienceTables[gBaseStats[species].growthRate][level];
+            var1 = exp - currLevelExp;
+            var2 = gExperienceTables[gBaseStats[species].growthRate][level + 1] - currLevelExp;
+            sub_8043D84(r10, a, var2, var1, 0);
+            sub_8045C78(r10, a, 1, 0);
+        }
+        if (c == 4 || c == 0)
+            sub_80451A0(a, pkmn);
+        if (c == 9 || c == 0)
+            draw_status_ailment_maybe(a);
+        if (c == 10)
+            sub_80458B0(a);
+        if (c == 10 || c == 11)
+            sub_8045998(a);
+    }
+    else
+    {
+        if (c == 3 || c == 0)
+            sub_8043FC0(a, GetMonData(pkmn, MON_DATA_LEVEL));
+        if (c == 5 || c == 0)
+        {
+            load_gfxc_health_bar(0);
+            maxhp = GetMonData(pkmn, MON_DATA_MAX_HP);
+            currhp = GetMonData(pkmn, MON_DATA_HP);
+            sub_8043D84(r10, a, maxhp, currhp, 0);
+            sub_8045C78(r10, a, 0, 0);
+        }
+        if (c == 4 || c == 0)
+            sub_80451A0(a, pkmn);
+        if (c == 9 || c == 0)
+            draw_status_ailment_maybe(a);
+    }
+}
+
+extern int sub_8045F58(int, int, int, void *, int, u16);
+extern u8 GetScaledExpFraction();
+extern void sub_8045D58();
+
+#define ABS(n) ((n) >= 0 ? (n) : -(n))
+
+s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
+{
+    s32 r6;
+    
+    if (c == 0)
+    {
+        r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, 6, 1);
+    }
+    else
+    {
+        u16 r5;
+        s32 r8;
+        
+        r5 = GetScaledExpFraction(ewram17850[a].unk8, ewram17850[a].unkC, ewram17850[a].unk4, 8);
+        if (r5 == 0)
+            r5 = 1;
+        r8 = ewram17850[a].unkC;
+        r5 = ABS(r8 / r5);
+        r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, r8, &ewram17850[a].unk10, 8, r5);
+    }
+    if (c == 1 || (c == 0 && (!ewram17800[a].bit_4)))
+        sub_8045D58(a, c);
+    if (r6 == -1)
+        ewram17850[a].unk10 = 0;
+    return r6;
 }

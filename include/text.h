@@ -155,7 +155,7 @@ u8 sub_8002F44(struct Window *win);
 u8 sub_8003418(struct Window *win);
 u8 sub_8003460(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 top);
-void sub_80034D4(u8 *tileData, u8 *text);
+void sub_80034D4(u8 *tileData, const u8 *text);
 u8 sub_80034EC(u8 *str);
 u8 *sub_8003504(u8 *dest, s32 value, u8 alignAmount, u8 alignType);
 u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType);
