@@ -402,7 +402,9 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];
     /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[0x59];
+    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
@@ -495,7 +497,7 @@ struct UnkStruct_8054FF8
 // wasnt defined so I had to define it
 struct HallOfFame
 {
-	u8 filler[0x1F00];
+    u8 filler[0x1F00];
 };
 
 extern struct HallOfFame gHallOfFame;
