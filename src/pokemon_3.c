@@ -53,10 +53,6 @@ struct SpindaSpot
     u16 image[16];
 };
 
-extern void get_battle_strings_(u8 *);
-extern void sub_8120FFC(const u8 *, u8 *);
-extern u8 pokemon_order_func(u8);
-
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
