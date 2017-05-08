@@ -51,15 +51,6 @@ struct PokedexEntry
     /*0x20*/ u16 trainerOffset;
 };  /*size = 0x24*/
 
-struct CryRelatedStruct
-{
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-};
-
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
@@ -123,13 +114,6 @@ u16 NationalPokedexNumToSpecies(u16);
 
 //  asm/pokedex_area_screen
 void ShowPokedexAreaScreen(u16 species, u8 *string);
-
-// asm/pokedex_cry_screen
-u8 sub_8119E3C(struct CryRelatedStruct *, u8);
-void sub_8119F88(u8 a);
-void sub_811A050(u16 species);
-u8 ShowPokedexCryScreen(struct CryRelatedStruct *, u8);
-void DestroyCryMeterNeedleSprite();
 
 void sub_808C02C(void)
 {
@@ -2526,9 +2510,9 @@ void Task_InitCryScreenMultistep(u8 taskId)
 
             sp8.unk0 = 0x4020;
             sp8.unk2 = 0x1F;
-            sp8.unk3 = 8;
-            sp8.unk5 = 0x1E;
-            sp8.unk4 = 0xC;
+            sp8.paletteNo = 8;
+            sp8.yPos = 0x1E;
+            sp8.xPos = 0xC;
             if (sub_8119E3C(&sp8, 0) != 0)
             {
                 gMain.state++;
@@ -2542,9 +2526,9 @@ void Task_InitCryScreenMultistep(u8 taskId)
 
             sp10.unk0 = 0x3000;
             sp10.unk2 = 0xE;
-            sp10.unk3 = 9;
-            sp10.unk4 = 0x12;
-            sp10.unk5 = 3;
+            sp10.paletteNo = 9;
+            sp10.xPos = 0x12;
+            sp10.yPos = 3;
             if (ShowPokedexCryScreen(&sp10, 1) != 0)
             {
                 gMain.state++;

@@ -45,6 +45,15 @@ struct UnknownStruct_FPA
     u16 unk14;
 };
 
+struct CryRelatedStruct
+{
+    u16 unk0;
+    u8 unk2;
+    u8 paletteNo;
+    u8 xPos;
+    u8 yPos;
+};
+
 #include "asm.inc.h"
 
 #endif //PROJECT_ASM_H
