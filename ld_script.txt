@@ -56,6 +56,8 @@ SECTIONS {
         asm/battle_4.o(.text);
         asm/battle_5.o(.text);
         asm/battle_6.o(.text);
+        src/battle_6.o(.text);
+        asm/battle_6.o(.text_8030464);
         asm/battle_7.o(.text);
         asm/battle_8.o(.text);
         asm/battle_9.o(.text);
