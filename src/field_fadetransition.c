@@ -1,6 +1,6 @@
 #include "global.h"
 #include "gba/syscall.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "global.fieldmap.h"
 #include "script.h"
 #include "task.h"

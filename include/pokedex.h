@@ -55,7 +55,7 @@ struct PokedexView
     u8 unk65E[8];
 };
 
-void sub_808C02C(void);
+void ResetPokedex(void);
 void sub_808C0A0(void);
 void sub_808C0B8(void);
 void ClearPokedexView(struct PokedexView *pokedexView);

@@ -825,8 +825,8 @@ _080E675C: .4byte 0x00009da4
 _080E6760: .4byte 0x00009f6e
 	thumb_func_end sub_80E6690
 
-	thumb_func_start sub_80E6764
-sub_80E6764: @ 80E6764
+	thumb_func_start InitEasyChatPhrases
+InitEasyChatPhrases: @ 80E6764
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r4, _080E680C @ =gSaveBlock1 + 0x2B1C
@@ -926,7 +926,7 @@ _080E681C: .4byte gSaveBlock1 + 0x2B34
 _080E6820: .4byte 0x0000ffff
 _080E6824: .4byte gSaveBlock1 + 0x2B4C
 _080E6828: .4byte gSaveBlock1 + 0x2D8C
-	thumb_func_end sub_80E6764
+	thumb_func_end InitEasyChatPhrases
 
 	thumb_func_start sub_80E682C
 sub_80E682C: @ 80E682C

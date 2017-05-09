@@ -11,15 +11,15 @@ nullsub_89: @ 80AB1AC
 	bx lr
 	thumb_func_end nullsub_89
 
-	thumb_func_start sub_80AB1B0
-sub_80AB1B0: @ 80AB1B0
+	thumb_func_start ResetLinkContestBoolean
+ResetLinkContestBoolean: @ 80AB1B0
 	ldr r1, _080AB1B8 @ =gIsLinkContest
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _080AB1B8: .4byte gIsLinkContest
-	thumb_func_end sub_80AB1B0
+	thumb_func_end ResetLinkContestBoolean
 
 	thumb_func_start sub_80AB1BC
 sub_80AB1BC: @ 80AB1BC

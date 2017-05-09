@@ -11,8 +11,8 @@ nullsub_14: @ 807AD54
 	bx lr
 	thumb_func_end nullsub_14
 
-	thumb_func_start sub_807AD58
-sub_807AD58: @ 807AD58
+	thumb_func_start ReshowBattleScreenAfterMenu
+ReshowBattleScreenAfterMenu: @ 807AD58
 	push {lr}
 	ldr r2, _0807AD90 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
@@ -33,7 +33,7 @@ sub_807AD58: @ 807AD58
 	ldr r1, _0807ADA0 @ =0x0001fffe
 	adds r0, r1
 	strb r2, [r0]
-	ldr r0, _0807ADA4 @ =sub_807ADA8
+	ldr r0, _0807ADA4 @ =CB2_ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -43,11 +43,11 @@ _0807AD94: .4byte REG_MOSAIC
 _0807AD98: .4byte 0x02000000
 _0807AD9C: .4byte 0x0001ffff
 _0807ADA0: .4byte 0x0001fffe
-_0807ADA4: .4byte sub_807ADA8
-	thumb_func_end sub_807AD58
+_0807ADA4: .4byte CB2_ReshowBattleScreenAfterMenu
+	thumb_func_end ReshowBattleScreenAfterMenu
 
-	thumb_func_start sub_807ADA8
-sub_807ADA8: @ 807ADA8
+	thumb_func_start CB2_ReshowBattleScreenAfterMenu
+CB2_ReshowBattleScreenAfterMenu: @ 807ADA8
 	push {r4-r7,lr}
 	sub sp, 0x8
 	ldr r0, _0807ADC4 @ =0x02000000
@@ -352,7 +352,7 @@ _0807B05C: .4byte gPaletteFade
 _0807B060: .4byte sub_800F808
 _0807B064: .4byte 0x02000000
 _0807B068: .4byte 0x0001ffff
-	thumb_func_end sub_807ADA8
+	thumb_func_end CB2_ReshowBattleScreenAfterMenu
 
 	thumb_func_start sub_807B06C
 sub_807B06C: @ 807B06C

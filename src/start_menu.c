@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "load_save.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -782,7 +782,7 @@ static bool32 sub_80719FC(u8 *step)
         case 2:
             SetUpWindowConfig(&gWindowConfig_81E6CE4);
             InitMenuWindow(&gWindowConfig_81E6CE4);
-            REG_DISPCNT = 0x100;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
             break;
         case 3:
         {

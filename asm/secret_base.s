@@ -131,8 +131,8 @@ _080BB54C:
 	bx r0
 	thumb_func_end sub_80BB4AC
 
-	thumb_func_start sub_80BB594
-sub_80BB594: @ 80BB594
+	thumb_func_start ResetSecretBase
+ResetSecretBase: @ 80BB594
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
@@ -147,16 +147,16 @@ sub_80BB594: @ 80BB594
 	bx r0
 	.align 2, 0
 _080BB5B0: .4byte gSaveBlock1 + 0x1A08
-	thumb_func_end sub_80BB594
+	thumb_func_end ResetSecretBase
 
-	thumb_func_start sub_80BB5B4
-sub_80BB5B4: @ 80BB5B4
+	thumb_func_start ResetSecretBases
+ResetSecretBases: @ 80BB5B4
 	push {r4,lr}
 	movs r4, 0
 _080BB5B8:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80BB594
+	bl ResetSecretBase
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -165,7 +165,7 @@ _080BB5B8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BB5B4
+	thumb_func_end ResetSecretBases
 
 	thumb_func_start sub_80BB5D0
 sub_80BB5D0: @ 80BB5D0
@@ -1701,37 +1701,7 @@ _080BC18A:
 	bx r1
 	thumb_func_end sub_80BC14C
 
-	thumb_func_start sub_80BC190
-sub_80BC190: @ 80BC190
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r4, r1, 2
-	adds r4, r1
-	lsls r4, 5
-	ldr r0, _080BC1C8 @ =gSaveBlock1 + 0x1A0A
-	adds r4, r0
-	adds r0, r4, 0
-	bl sub_80BB8A8
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl StringCopyN
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r1, _080BC1CC @ =gOtherText_PlayersBase
-	adds r0, r5, 0
-	bl StringAppend
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BC1C8: .4byte gSaveBlock1 + 0x1A0A
-_080BC1CC: .4byte gOtherText_PlayersBase
-	thumb_func_end sub_80BC190
+.section .text_80BC1D0
 
 	thumb_func_start GetSecretBaseMapName
 GetSecretBaseMapName: @ 80BC1D0
@@ -2043,7 +2013,7 @@ sub_80BC440: @ 80BC440
 	adds r4, r0
 	ldrh r5, [r4]
 	movs r0, 0
-	bl sub_80BB594
+	bl ResetSecretBase
 	strh r5, [r4]
 	bl sub_80BC0F8
 	pop {r4,r5}
@@ -2155,7 +2125,7 @@ sub_80BC50C: @ 80BC50C
 	adds r4, r0
 	ldrh r5, [r4]
 	movs r0, 0
-	bl sub_80BB594
+	bl ResetSecretBase
 	strh r5, [r4]
 	pop {r4,r5}
 	pop {r0}

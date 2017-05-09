@@ -13,7 +13,6 @@ extern u8 unk_2000000[];
 #define EWRAM_15000 ((u8 *)(unk_2000000 + 0x15000))
 
 extern u16 gBattleTypeFlags;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern const u32 gBitTable[];
 extern u16 gBattleWeather;
 extern const struct BattleMove gBattleMoves[];

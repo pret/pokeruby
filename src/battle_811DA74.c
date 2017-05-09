@@ -69,7 +69,6 @@ extern void c3_0802FDF4(u8);
 extern void sub_8031F88();
 extern void sub_8141828();
 extern void c2_8011A1C(void);
-extern void sub_800832C();
 extern void dp01_prepare_buffer_wireless_probably();
 extern void dp01_build_cmdbuf_x1D_1D_numargs_varargs(int, u16, void *);
 

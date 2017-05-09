@@ -7,8 +7,8 @@
 
 	.text
 
-	thumb_func_start sub_80BD7A8
-sub_80BD7A8: @ 80BD7A8
+	thumb_func_start ClearTVShowData
+ClearTVShowData: @ 80BD7A8
 	push {r4-r7,lr}
 	movs r3, 0
 	ldr r6, _080BD7F0 @ =gSaveBlock1
@@ -50,7 +50,7 @@ _080BD7F0: .4byte gSaveBlock1
 _080BD7F4: .4byte 0x0000273a
 _080BD7F8: .4byte 0x00002738
 _080BD7FC: .4byte 0x00002739
-	thumb_func_end sub_80BD7A8
+	thumb_func_end ClearTVShowData
 
 	thumb_func_start special_0x44
 special_0x44: @ 80BD800
@@ -417,8 +417,8 @@ _080BDAAE:
 	bx r1
 	thumb_func_end special_0x4a
 
-	thumb_func_start sub_80BDAB4
-sub_80BDAB4: @ 80BDAB4
+	thumb_func_start ResetGabbyAndTy
+ResetGabbyAndTy: @ 80BDAB4
 	push {r4,lr}
 	ldr r2, _080BDAF8 @ =gSaveBlock1
 	ldr r1, _080BDAFC @ =0x00002b10
@@ -461,7 +461,7 @@ _080BDB04: .4byte 0x00002b16
 _080BDB08: .4byte 0x0000ffff
 _080BDB0C: .4byte 0x00002b1b
 _080BDB10: .4byte 0x00002b18
-	thumb_func_end sub_80BDAB4
+	thumb_func_end ResetGabbyAndTy
 
 	thumb_func_start GabbyAndTyBeforeInterview
 GabbyAndTyBeforeInterview: @ 80BDB14

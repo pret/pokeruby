@@ -1076,7 +1076,7 @@ _0813B5CC:
 	movs r3, 0
 	bl DisplayItemMessageOnField
 	adds r0, r6, 0
-	bl sub_80A2B40
+	bl ClearMailStruct
 	bl sub_813AF78
 	ldrb r0, [r4, 0x3]
 	subs r0, 0x1

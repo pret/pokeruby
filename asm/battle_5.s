@@ -4487,23 +4487,23 @@ nullsub_8: @ 802E410
 	thumb_func_start sub_802E414
 sub_802E414: @ 802E414
 	push {lr}
-	ldr r0, _0802E420 @ =sub_807AD58
+	ldr r0, _0802E420 @ =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802E420: .4byte sub_807AD58
+_0802E420: .4byte ReshowBattleScreenAfterMenu
 	thumb_func_end sub_802E414
 
 	thumb_func_start sub_802E424
 sub_802E424: @ 802E424
 	push {lr}
-	ldr r0, _0802E430 @ =sub_807AD58
+	ldr r0, _0802E430 @ =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802E430: .4byte sub_807AD58
+_0802E430: .4byte ReshowBattleScreenAfterMenu
 	thumb_func_end sub_802E424
 
 	thumb_func_start sub_802E434
