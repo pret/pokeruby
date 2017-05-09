@@ -64,7 +64,6 @@ extern u8* gMatsudaDebugMenuTextList3[];
 extern u8 gMatsudaDebugMenuContestTopLeft[][2];
 
 extern bool8 gReceivedRemoteLinkPlayers;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 
 extern struct MenuAction gMatsudaDebugMenuActions[];
 
