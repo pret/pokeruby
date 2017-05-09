@@ -789,10 +789,10 @@ bool8 sub_808D344(u8 a)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            REG_BG3CNT = 0xF03;
-            REG_BG1CNT = 0xD01;
-            REG_BG0CNT = 0xC00;
-            REG_DISPCNT = 0x9F40;
+            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(15) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(12) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON | DISPCNT_OBJWIN_ON;
             gMain.state++;
             break;
         case 6:
@@ -2296,8 +2296,8 @@ void Task_InitPageScreenMultistep(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            REG_BG3CNT = 0xF03;
-            REG_BG1CNT = 0xD00;
+            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(15) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_BG1CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256;
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
             gMain.state++;
             break;
@@ -2422,7 +2422,7 @@ void Task_InitAreaScreenMultistep(u8 taskId)
         sub_8090540(0xD);
         sub_8090644(1, 0xD);
         sub_808D640();
-        REG_BG1CNT = 0xD00;
+        REG_BG1CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256;
         gMain.state++;
         break;
     case 2:
@@ -2544,10 +2544,10 @@ void Task_InitCryScreenMultistep(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            REG_BG2CNT = 0xE02;
-            REG_BG0CNT = 0x1F07;
-            REG_BG1CNT = 0xD00;
-            REG_DISPCNT = 0x1F07 + 0x39;
+            REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(14) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_BG0CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_BG1CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
             gMain.state++;
             break;
         case 10:
@@ -2715,8 +2715,8 @@ void Task_InitSizeScreenMultistep(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            REG_BG2CNT = 0xE03;
-            REG_DISPCNT = 0x1E40;
+            REG_BG2CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(14) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
             gMain.state++;
             break;
         case 9:
@@ -3156,8 +3156,8 @@ void sub_8090750(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            REG_BG3CNT = 0xF07;
-            REG_DISPCNT = 0x1C40;
+            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(15) | BGCNT_16COLOR | BGCNT_TXT256x256;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
             gTasks[taskId].data[0]++;
             break;
         case 6:

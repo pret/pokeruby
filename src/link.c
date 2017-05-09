@@ -207,13 +207,13 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
     switch (bgNum)
     {
     case 1:
-        REG_BG1CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     case 2:
-        REG_BG2CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG2CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     case 3:
-        REG_BG3CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG3CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     }
 }
@@ -255,7 +255,7 @@ void LinkTestScreen(void)
     }
 
     InitLinkTestBG(0, 2, 4, 0);
-    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP;
     CreateTask(Task_DestroySelf, 0);
     RunTasks();
     AnimateSprites();
