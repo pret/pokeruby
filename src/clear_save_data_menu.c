@@ -41,7 +41,7 @@ static void Task_InitMenu(u8 taskId)
 {
     ResetSpriteData();
 
-    REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
     SetVBlankCallback(VBlankCB_ClearSaveDataScreen);
     MenuDrawTextWindow(2, 14, 27, 19);
@@ -149,7 +149,7 @@ static u8 InitClearSaveDataScreen(void)
             SetVBlankCallback(VBlankCB_InitClearSaveDataScreen);
 
             REG_BG3CNT = 0x0703;
-            REG_DISPCNT = 0x0900;
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
             gMain.state = 1;
             return 0;
         case 1:

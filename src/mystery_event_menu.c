@@ -54,7 +54,7 @@ void CB2_InitMysteryEventMenu(void)
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
     InitMenuWindow(&gWindowConfig_81E6CE4);
     MenuZeroFillScreen();
-    REG_DISPCNT = 320;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     REG_BLDCNT = 0;
     CreateTask(Task_DestroySelf, 0);
     StopMapMusic();

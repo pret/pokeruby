@@ -290,7 +290,7 @@ static void sub_80A9F10(u8 taskId)
 
 static void sub_80A9F50(void)
 {
-    REG_DISPCNT = DISPCNT_OBJ_1D_MAP;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     REG_DISPCNT |= DISPCNT_OBJ_ON | DISPCNT_BG0_ON;
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
     InitWindowFromConfig(&gMenuWindow, &gWindowConfig_81E6C3C);
@@ -1073,7 +1073,7 @@ void unref_sub_80AB084(u8 *text)
     REG_WIN0V = 0;
     REG_WIN1H = 0;
     REG_WIN1V = 0;
-    REG_DISPCNT = 0x1F40;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
 
     savedIme = REG_IME;
     REG_IME = 0;

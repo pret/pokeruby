@@ -747,8 +747,8 @@ static void Task_NewGameSpeech1(u8 taskId)
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-    REG_BG1CNT = 0x00000703;
-    REG_DISPCNT = DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
+    REG_BG1CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     gTasks[taskId].data[TD_BGHOFS] = 0;
     gTasks[taskId].func = Task_NewGameSpeech2;
     gTasks[taskId].data[TD_TRAINER_SPRITE_ID] = 0xFF;
@@ -1391,7 +1391,7 @@ void CB_ContinueNewGameSpeechPart2()
 
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
-    REG_BG1CNT = 1795;
+    REG_BG1CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP |
       DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
 }

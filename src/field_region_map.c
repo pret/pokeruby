@@ -94,7 +94,7 @@ void sub_813EFDC(void)
     switch (unk_2000000.unk888)
     {
     case 0:
-        REG_DISPCNT = 5441;
+        REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         unk_2000000.unk888++;
         break;
     case 1:
