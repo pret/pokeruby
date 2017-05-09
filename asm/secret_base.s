@@ -1701,37 +1701,7 @@ _080BC18A:
 	bx r1
 	thumb_func_end sub_80BC14C
 
-	thumb_func_start sub_80BC190
-sub_80BC190: @ 80BC190
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r4, r1, 2
-	adds r4, r1
-	lsls r4, 5
-	ldr r0, _080BC1C8 @ =gSaveBlock1 + 0x1A0A
-	adds r4, r0
-	adds r0, r4, 0
-	bl sub_80BB8A8
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl StringCopyN
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r1, _080BC1CC @ =gOtherText_PlayersBase
-	adds r0, r5, 0
-	bl StringAppend
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BC1C8: .4byte gSaveBlock1 + 0x1A0A
-_080BC1CC: .4byte gOtherText_PlayersBase
-	thumb_func_end sub_80BC190
+.section .text_80BC1D0
 
 	thumb_func_start GetSecretBaseMapName
 GetSecretBaseMapName: @ 80BC1D0
