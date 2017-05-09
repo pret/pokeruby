@@ -320,7 +320,7 @@ static void sub_80F8DA0(void)
     u16 i;
     u8 r6;
     u8 *ptr;
-    
+
     r6 = 0;
     for (i = 0; i < ewram0.var10C->var0; i++)
     {
@@ -333,7 +333,7 @@ static void sub_80F8DA0(void)
         ptr = sub_80F8D7C(ptr, ewram0.varF4->playerName);
         StringCopy(ptr, gOtherText_From);
         ewram0.varF9 = ewram0.var10C->var2 - StringLength(ewram0.varD8);
-        
+
     }
     else
     {
