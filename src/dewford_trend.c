@@ -19,7 +19,7 @@ static bool8 SB1ContainsWords(u16 *a);
 static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2);
 static s16 sub_80FA828(struct EasyChatPair *a, u16 b);
 
-void sub_80FA17C(void)
+void InitDewfordTrends(void)
 {
     u16 i;
 

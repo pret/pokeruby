@@ -709,8 +709,8 @@ _080A370A:
 	bx r0
 	thumb_func_end sub_80A36B8
 
-	thumb_func_start sub_80A3714
-sub_80A3714: @ 80A3714
+	thumb_func_start ClearItems
+ClearItems: @ 80A3714
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080A373C @ =gBagPockets
@@ -731,7 +731,7 @@ _080A371A:
 	bx r0
 	.align 2, 0
 _080A373C: .4byte gBagPockets
-	thumb_func_end sub_80A3714
+	thumb_func_end ClearItems
 
 	thumb_func_start sub_80A3740
 sub_80A3740: @ 80A3740

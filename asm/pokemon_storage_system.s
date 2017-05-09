@@ -1186,8 +1186,8 @@ _080961D0: .4byte sub_8096130
 _080961D4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80961A8
 
-	thumb_func_start sub_80961D8
-sub_80961D8: @ 80961D8
+	thumb_func_start ResetPokemonStorageSystem
+ResetPokemonStorageSystem: @ 80961D8
 	push {r4-r7,lr}
 	ldr r1, _08096258 @ =gPokemonStorage
 	movs r0, 0
@@ -1256,7 +1256,7 @@ _0809623E:
 _08096258: .4byte gPokemonStorage
 _0809625C: .4byte gPokemonStorage + 0x8344
 _08096260: .4byte gPCText_BOX
-	thumb_func_end sub_80961D8
+	thumb_func_end ResetPokemonStorageSystem
 
 	thumb_func_start sub_8096264
 sub_8096264: @ 8096264

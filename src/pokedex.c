@@ -115,7 +115,7 @@ u16 NationalPokedexNumToSpecies(u16);
 //  asm/pokedex_area_screen
 void ShowPokedexAreaScreen(u16 species, u8 *string);
 
-void sub_808C02C(void)
+void ResetPokedex(void)
 {
     u16 i;
 

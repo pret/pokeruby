@@ -4270,8 +4270,8 @@ _0810FA4A:
 _0810FA50: .4byte gStringVar1
 	thumb_func_end sub_810F9AC
 
-	thumb_func_start sub_810FA54
-sub_810FA54: @ 810FA54
+	thumb_func_start ResetFanClub
+ResetFanClub: @ 810FA54
 	ldr r0, _0810FA68 @ =gSaveBlock1
 	ldr r2, _0810FA6C @ =0x000013c2
 	adds r1, r0, r2
@@ -4285,7 +4285,7 @@ sub_810FA54: @ 810FA54
 _0810FA68: .4byte gSaveBlock1
 _0810FA6C: .4byte 0x000013c2
 _0810FA70: .4byte 0x000013c4
-	thumb_func_end sub_810FA54
+	thumb_func_end ResetFanClub
 
 	thumb_func_start sub_810FA74
 sub_810FA74: @ 810FA74

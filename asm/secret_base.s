@@ -131,8 +131,8 @@ _080BB54C:
 	bx r0
 	thumb_func_end sub_80BB4AC
 
-	thumb_func_start sub_80BB594
-sub_80BB594: @ 80BB594
+	thumb_func_start ResetSecretBase
+ResetSecretBase: @ 80BB594
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
@@ -147,16 +147,16 @@ sub_80BB594: @ 80BB594
 	bx r0
 	.align 2, 0
 _080BB5B0: .4byte gSaveBlock1 + 0x1A08
-	thumb_func_end sub_80BB594
+	thumb_func_end ResetSecretBase
 
-	thumb_func_start sub_80BB5B4
-sub_80BB5B4: @ 80BB5B4
+	thumb_func_start ResetSecretBases
+ResetSecretBases: @ 80BB5B4
 	push {r4,lr}
 	movs r4, 0
 _080BB5B8:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80BB594
+	bl ResetSecretBase
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -165,7 +165,7 @@ _080BB5B8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BB5B4
+	thumb_func_end ResetSecretBases
 
 	thumb_func_start sub_80BB5D0
 sub_80BB5D0: @ 80BB5D0
@@ -2043,7 +2043,7 @@ sub_80BC440: @ 80BC440
 	adds r4, r0
 	ldrh r5, [r4]
 	movs r0, 0
-	bl sub_80BB594
+	bl ResetSecretBase
 	strh r5, [r4]
 	bl sub_80BC0F8
 	pop {r4,r5}
@@ -2155,7 +2155,7 @@ sub_80BC50C: @ 80BC50C
 	adds r4, r0
 	ldrh r5, [r4]
 	movs r0, 0
-	bl sub_80BB594
+	bl ResetSecretBase
 	strh r5, [r4]
 	pop {r4,r5}
 	pop {r0}
