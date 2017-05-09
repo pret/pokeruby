@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "songs.h"
 #include "sound.h"
+#include "trig.h"
 
 asm(".set REG_BASE, 0x4000000");
 asm(".set OFFSET_REG_BLDCNT,      0x50");
@@ -141,14 +142,13 @@ struct CreditsEntry
     u8 *text;
 };
 
-extern u8 unk_2000000[];
+extern u8 ewram[];
 
-#define EWRAM_1F800          ((u16 *)(unk_2000000 + 0x1F800))
-#define HALL_OF_FAME_SHEET_0 ((u8 *)(unk_2000000 + 0x1E000))
-#define HALL_OF_FAME_SHEET_1 ((u8 *)(unk_2000000 + 0x1E800))
-#define HALL_OF_FAME_SHEET_2 ((u8 *)(unk_2000000 + 0x1F000))
-
-extern struct Unk201C000 unk_201C000;
+#define EWRAM_1F800          ((u16 *)(ewram + 0x1F800))
+#define HALL_OF_FAME_SHEET_0 ((u8 *)(ewram + 0x1E000))
+#define HALL_OF_FAME_SHEET_1 ((u8 *)(ewram + 0x1E800))
+#define HALL_OF_FAME_SHEET_2 ((u8 *)(ewram + 0x1F000))
+#define ewram1c000           (*(struct Unk201C000 *)(ewram + 0x1C000))
 
 extern struct HallOfFame gHallOfFame;
 extern u8 unk_201e800[0x800];
@@ -162,7 +162,7 @@ extern u16 gUnknown_02039322; // TASK A
 extern u8 gUnknown_02039324;
 extern u8 gUnknown_02039325;
 extern u16 gUnknown_02039358;
-extern u16 gUnknown_0203935A;
+extern s16 gUnknown_0203935A;
 extern s16 gUnknown_0203935C;
 
 extern u8 gReservedSpritePaletteCount;
@@ -328,7 +328,7 @@ void sub_81439D0(void)
     SetMainCallback2(sub_814395C);
     gUnknown_02039325 = 0;
 
-    c000 = &unk_201C000;
+    c000 = &ewram1c000;
 
     sub_81458DC();
 
@@ -818,11 +818,9 @@ static u8 sub_8144454(u8 page, u8 taskIdA)
 
 #define UNK_DEFINE_44 (0x44)
 
-#define EWRAM_1C000 (*(struct Unk201C000 *)(unk_2000000 + 0x1C000))
-
 static void task_d_8144514(u8 taskIdD)
 {
-    struct Unk201C000 *r6 = &EWRAM_1C000;
+    struct Unk201C000 *r6 = &ewram1c000;
     u8 r2;
 
     switch (gTasks[taskIdD].data[TDD_STATE])
@@ -866,331 +864,87 @@ static void task_d_8144514(u8 taskIdD)
     }
 }
 
-__attribute__((naked))
 void task_c_8144664(u8 taskIdC)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r1, _0814468C @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    movs r2, 0x8\n\
-    ldrsh r0, [r0, r2]\n\
-    adds r6, r1, 0\n\
-    cmp r0, 0x32\n\
-    bls _08144680\n\
-    b _0814492C\n\
-_08144680:\n\
-    lsls r0, 2\n\
-    ldr r1, _08144690 @ =_08144694\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0814468C: .4byte gTasks\n\
-_08144690: .4byte _08144694\n\
-    .align 2, 0\n\
-_08144694:\n\
-    .4byte _08144760\n\
-    .4byte _08144784\n\
-    .4byte _081447D8\n\
-    .4byte _081447F0\n\
-    .4byte _0814482C\n\
-    .4byte _08144850\n\
-    .4byte _0814489C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _081448A8\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _081448C8\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _081448EC\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _0814492C\n\
-    .4byte _08144920\n\
-_08144760:\n\
-    lsls r4, r5, 2\n\
-    adds r4, r5\n\
-    lsls r4, 3\n\
-    adds r4, r6\n\
-    ldrh r0, [r4, 0x12]\n\
-    lsls r0, 16\n\
-    asrs r0, 17\n\
-    movs r1, 0x7F\n\
-    ands r0, r1\n\
-    movs r1, 0xC\n\
-    bl Sin\n\
-    ldr r1, _08144780 @ =gUnknown_0203935A\n\
-    strh r0, [r1]\n\
-    b _081447A8\n\
-    .align 2, 0\n\
-_08144780: .4byte gUnknown_0203935A\n\
-_08144784:\n\
-    ldr r7, _081447B0 @ =gUnknown_0203935A\n\
-    movs r3, 0\n\
-    ldrsh r4, [r7, r3]\n\
-    cmp r4, 0\n\
-    beq _081447B4\n\
-    lsls r4, r5, 2\n\
-    adds r4, r5\n\
-    lsls r4, 3\n\
-    adds r4, r6\n\
-    ldrh r0, [r4, 0x12]\n\
-    lsls r0, 16\n\
-    asrs r0, 17\n\
-    movs r1, 0x7F\n\
-    ands r0, r1\n\
-    movs r1, 0xC\n\
-    bl Sin\n\
-    strh r0, [r7]\n\
-_081447A8:\n\
-    ldrh r0, [r4, 0x12]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x12]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_081447B0: .4byte gUnknown_0203935A\n\
-_081447B4:\n\
-    ldr r3, _081447D4 @ =gSprites\n\
-    lsls r1, r5, 2\n\
-    adds r1, r5\n\
-    lsls r1, 3\n\
-    adds r1, r6\n\
-    movs r0, 0xC\n\
-    ldrsh r2, [r1, r0]\n\
-    lsls r0, r2, 4\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r2, 0x2\n\
-    strh r2, [r0, 0x2E]\n\
-    strh r4, [r1, 0x12]\n\
-    b _08144848\n\
-    .align 2, 0\n\
-_081447D4: .4byte gSprites\n\
-_081447D8:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r1, r0, r6\n\
-    ldrh r2, [r1, 0x12]\n\
-    movs r3, 0x12\n\
-    ldrsh r0, [r1, r3]\n\
-    cmp r0, 0x3F\n\
-    bgt _08144848\n\
-    adds r0, r2, 0x1\n\
-    strh r0, [r1, 0x12]\n\
-    b _08144866\n\
-_081447F0:\n\
-    ldr r3, _08144828 @ =gSprites\n\
-    lsls r2, r5, 2\n\
-    adds r2, r5\n\
-    lsls r2, 3\n\
-    adds r2, r6\n\
-    movs r0, 0xC\n\
-    ldrsh r1, [r2, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r1, 0x3\n\
-    strh r1, [r0, 0x2E]\n\
-    movs r0, 0xE\n\
-    ldrsh r1, [r2, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r1, 0x1\n\
-    strh r1, [r0, 0x2E]\n\
-    movs r0, 0x78\n\
-    strh r0, [r2, 0x10]\n\
-    ldrh r0, [r2, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r2, 0x8]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_08144828: .4byte gSprites\n\
-_0814482C:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r1, r0, r6\n\
-    ldrh r2, [r1, 0x10]\n\
-    movs r3, 0x10\n\
-    ldrsh r0, [r1, r3]\n\
-    cmp r0, 0\n\
-    beq _08144844\n\
-    subs r0, r2, 0x1\n\
-    strh r0, [r1, 0x10]\n\
-    b _0814492C\n\
-_08144844:\n\
-    movs r0, 0x40\n\
-    strh r0, [r1, 0x12]\n\
-_08144848:\n\
-    ldrh r0, [r1, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1, 0x8]\n\
-    b _0814492C\n\
-_08144850:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r4, r0, r6\n\
-    ldrh r1, [r4, 0x12]\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0\n\
-    ble _0814487C\n\
-    subs r0, r1, 0x1\n\
-    strh r0, [r4, 0x12]\n\
-_08144866:\n\
-    movs r1, 0x7F\n\
-    ands r0, r1\n\
-    movs r1, 0x14\n\
-    bl Sin\n\
-    ldr r1, _08144878 @ =gUnknown_0203935A\n\
-    strh r0, [r1]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_08144878: .4byte gUnknown_0203935A\n\
-_0814487C:\n\
-    ldr r2, _08144898 @ =gSprites\n\
-    movs r3, 0xC\n\
-    ldrsh r1, [r4, r3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x1\n\
-    strh r1, [r0, 0x2E]\n\
-    ldrh r0, [r4, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x8]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_08144898: .4byte gSprites\n\
-_0814489C:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r6\n\
-    movs r1, 0x32\n\
-    b _0814492A\n\
-_081448A8:\n\
-    ldr r3, _081448C4 @ =gSprites\n\
-    lsls r1, r5, 2\n\
-    adds r1, r5\n\
-    lsls r1, 3\n\
-    adds r1, r6\n\
-    movs r0, 0xE\n\
-    ldrsh r2, [r1, r0]\n\
-    lsls r0, r2, 4\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r2, 0x2\n\
-    b _081448E0\n\
-    .align 2, 0\n\
-_081448C4: .4byte gSprites\n\
-_081448C8:\n\
-    ldr r3, _081448E8 @ =gSprites\n\
-    lsls r1, r5, 2\n\
-    adds r1, r5\n\
-    lsls r1, 3\n\
-    adds r1, r6\n\
-    movs r0, 0xC\n\
-    ldrsh r2, [r1, r0]\n\
-    lsls r0, r2, 4\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r2, 0x4\n\
-_081448E0:\n\
-    strh r2, [r0, 0x2E]\n\
-    movs r0, 0x32\n\
-    strh r0, [r1, 0x8]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_081448E8: .4byte gSprites\n\
-_081448EC:\n\
-    ldr r3, _0814491C @ =gSprites\n\
-    lsls r2, r5, 2\n\
-    adds r2, r5\n\
-    lsls r2, 3\n\
-    adds r2, r6\n\
-    movs r0, 0xC\n\
-    ldrsh r1, [r2, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r1, 0x5\n\
-    strh r1, [r0, 0x2E]\n\
-    movs r0, 0xE\n\
-    ldrsh r1, [r2, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    movs r1, 0x3\n\
-    strh r1, [r0, 0x2E]\n\
-    movs r0, 0x32\n\
-    strh r0, [r2, 0x8]\n\
-    b _0814492C\n\
-    .align 2, 0\n\
-_0814491C: .4byte gSprites\n\
-_08144920:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r6\n\
-    movs r1, 0\n\
-_0814492A:\n\
-    strh r1, [r0, 0x8]\n\
-_0814492C:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    switch (gTasks[taskIdC].data[0])
+    {
+    case 0:
+        gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
+        gTasks[taskIdC].data[5]++;
+        break;
+    case 1:
+        if (gUnknown_0203935A != 0)
+        {
+            gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
+            gTasks[taskIdC].data[5]++;
+        }
+        else
+        {
+            gSprites[gTasks[taskIdC].data[2]].data0 = 2;
+            gTasks[taskIdC].data[5] = 0;
+            gTasks[taskIdC].data[0]++;
+        }
+        break;
+    case 2:
+        if (gTasks[taskIdC].data[5] < 64)
+        {
+            gTasks[taskIdC].data[5]++;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+        }
+        else
+        {
+            gTasks[taskIdC].data[0]++;
+        }
+        break;
+    case 3:
+        gSprites[gTasks[taskIdC].data[2]].data0 = 3;
+        gSprites[gTasks[taskIdC].data[3]].data0 = 1;
+        gTasks[taskIdC].data[4] = 120;
+        gTasks[taskIdC].data[0]++;
+        break;
+    case 4:
+        if (gTasks[taskIdC].data[4] != 0)
+        {
+            gTasks[taskIdC].data[4]--;
+        }
+        else
+        {
+            gTasks[taskIdC].data[5] = 64;
+            gTasks[taskIdC].data[0]++;
+        }
+        break;
+    case 5:
+        if (gTasks[taskIdC].data[5] > 0)
+        {
+            gTasks[taskIdC].data[5]--;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+        }
+        else
+        {
+            gSprites[gTasks[taskIdC].data[2]].data0 = 1;
+            gTasks[taskIdC].data[0]++;
+        }
+        break;
+    case 6:
+        gTasks[taskIdC].data[0] = 50;
+        break;
+    case 10:
+        gSprites[gTasks[taskIdC].data[3]].data0 = 2;
+        gTasks[taskIdC].data[0] = 50;
+        break;
+    case 20:
+        gSprites[gTasks[taskIdC].data[2]].data0 = 4;
+        gTasks[taskIdC].data[0] = 50;
+        break;
+    case 30:
+        gSprites[gTasks[taskIdC].data[2]].data0 = 5;
+        gSprites[gTasks[taskIdC].data[3]].data0 = 3;
+        gTasks[taskIdC].data[0] = 50;
+        break;
+    case 50:
+        gTasks[taskIdC].data[0] = 0;
+        break;
+    }
 }
 
 #define UNK_DEF_1F3 (499)
