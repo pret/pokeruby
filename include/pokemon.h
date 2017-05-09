@@ -65,7 +65,7 @@
 #define MON_DATA_SPD               61
 #define MON_DATA_SPATK             62
 #define MON_DATA_SPDEF             63
-#define MON_DATA_64                64
+#define MON_DATA_MAIL              64
 #define MON_DATA_SPECIES2          65
 #define MON_DATA_IVS               66
 #define MON_DATA_CHAMPION_RIBBON   67
@@ -252,7 +252,7 @@ struct Pokemon
     struct BoxPokemon box;
     u32 status;
     u8 level;
-    u8 pokerus;
+    u8 mail;
     u16 hp;
     u16 maxHP;
     u16 attack;

@@ -152,6 +152,7 @@ SECTIONS {
         asm/pokemon_summary_screen.o(.text_80A0958);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
+        src/mail_data.o(.text);
         asm/mail_data.o(.text);
         src/map_name_popup.o(.text);
         asm/item_menu.o(.text);
