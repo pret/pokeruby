@@ -3413,7 +3413,7 @@ _080A4BB4: .4byte 0x00000103
 _080A4BB8: .4byte gOtherText_Walk
 _080A4BBC:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

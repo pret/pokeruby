@@ -116,7 +116,7 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
         break;
     }
 
-    if (((sub_80A2D64(arg0->species, buffer) << 16) + 0xFFFF0000) <= (410 << 16))
+    if (((MailSpeciesToSpecies(arg0->species, buffer) << 16) + 0xFFFF0000) <= (410 << 16))
     {
         switch (ewram0.varFA)
         {

@@ -143,7 +143,7 @@ _08089B76:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08089BB4
@@ -964,7 +964,7 @@ sub_808A228: @ 808A228
 	lsrs r4, r0, 24
 	ldr r0, _0808A268 @ =gScriptItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A278
@@ -1188,7 +1188,7 @@ sub_808A3F8: @ 808A3F8
 	push {r4,lr}
 	ldr r0, _0808A460 @ =gScriptItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A47E
@@ -1349,7 +1349,7 @@ _0808A542:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80A2DF8
+	bl TakeMailFromMon
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -3202,7 +3202,7 @@ _0808B416:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80A2DF8
+	bl TakeMailFromMon
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4

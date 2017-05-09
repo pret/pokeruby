@@ -2620,7 +2620,7 @@ _08096D66:
 	ldr r1, _08096D8C @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08096E4C
@@ -2712,7 +2712,7 @@ _08096E30:
 	ldr r1, _08096E58 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08096E5C
@@ -3102,7 +3102,7 @@ _08097190:
 	ldr r1, _080971C4 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08097210
@@ -3145,7 +3145,7 @@ _08097200:
 	ldr r1, _08097218 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809721C

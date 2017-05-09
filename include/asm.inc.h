@@ -236,8 +236,8 @@ bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 
 // asm/mail_data.o
-void sub_80A2B18(void);
-u16 sub_80A2D64(u16, u8 *);
+void ClearMailData(void);
+u16 MailSpeciesToSpecies(u16, u8 *);
 
 // src/map_name_popup.o
 void ShowMapNamePopup(void);

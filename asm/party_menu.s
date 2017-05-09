@@ -5808,7 +5808,7 @@ _0806DBAC:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5841,7 +5841,7 @@ _0806DBF0:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5991,7 +5991,7 @@ _0806DD2C: .4byte gSpriteTemplate_837660C
 _0806DD30: .4byte gSprites
 _0806DD34:
 	adds r0, r7, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DD46
@@ -6321,7 +6321,7 @@ _0806DFAC:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DFD8
@@ -7486,14 +7486,14 @@ PartyMenuUpdateMonHeldItem: @ 806E904
 	lsls r1, 16
 	lsrs r4, r1, 16
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806E93C
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80A2BC4
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -7571,7 +7571,7 @@ PartyMenuTryGiveMonHeldItem: @ 806E964
 	cmp r2, 0
 	beq _0806EA44
 	adds r0, r2, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7609,7 +7609,7 @@ _0806E9F0:
 	movs r1, 0x5
 	bl CreateTask
 	adds r0, r5, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7631,7 +7631,7 @@ _0806EA44:
 	movs r1, 0x1
 	bl RemoveBagItem
 	adds r0, r5, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EA66
@@ -7726,7 +7726,7 @@ PartyMenuTryGiveMonHeldItem_806EACC: @ 806EACC
 	ldrh r1, [r4, 0x6]
 	bl PartyMenuUpdateMonHeldItem
 	ldrh r0, [r4, 0x6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EB34
@@ -7923,9 +7923,9 @@ _0806ECB8: .4byte party_menu_link_mon_held_item_object
 _0806ECBC:
 	ldr r0, [r5]
 	adds r1, r4, 0
-	bl sub_80A2D88
+	bl GiveMailToMon2
 	adds r0, r4, 0
-	bl sub_80A2B40
+	bl ClearMailStruct
 	ldr r0, _0806ECE0 @ =gOtherText_MailTransferredMailbox
 	movs r1, 0x1
 	bl sub_806E834
@@ -7997,13 +7997,13 @@ _0806ED50:
 	cmp r0, 0x1
 	bne _0806ED92
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806ED7C
 	ldr r0, [r5]
-	bl sub_80A2DF8
+	bl TakeMailFromMon
 _0806ED7C:
 	ldrb r0, [r5, 0x5]
 	adds r1, r6, 0
@@ -8126,7 +8126,7 @@ Task_LoseMailMessage: @ 806EE5C
 	cmp r0, 0x1
 	bne _0806EE98
 	ldr r0, [r5]
-	bl sub_80A2DF8
+	bl TakeMailFromMon
 	ldr r0, _0806EE94 @ =gOtherText_MailTaken
 	movs r1, 0
 	bl sub_806E834
@@ -8235,7 +8235,7 @@ Task_TakeHeldMail: @ 806EF38
 	bl MenuZeroFillWindowRect
 	ldr r0, _0806EF70 @ =0x0201c000
 	ldr r0, [r0]
-	bl sub_80A2E78
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF

@@ -111,7 +111,7 @@ sub_80413C8: @ 80413C8
 	lsrs r4, r0, 24
 	mov r9, r4
 	adds r0, r7, 0
-	bl sub_80A2B94
+	bl MonHasMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804144A
@@ -156,7 +156,7 @@ sub_80413C8: @ 80413C8
 	ldm r1!, {r0,r2,r3}
 	stm r4!, {r0,r2,r3}
 	adds r0, r7, 0
-	bl sub_80A2DF8
+	bl TakeMailFromMon
 _0804144A:
 	mov r2, r9
 	lsls r4, r2, 24
@@ -372,7 +372,7 @@ _080415D8:
 	adds r4, r5, r4
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_80A2D88
+	bl GiveMailToMon2
 	adds r0, r4, 0
 	bl sub_80417F4
 _08041610:
@@ -644,7 +644,7 @@ _08041812:
 	subs r1, 0x1
 	cmp r1, r2
 	bge _08041812
-	bl sub_80A2B40
+	bl ClearMailStruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80417F4
