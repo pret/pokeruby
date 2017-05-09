@@ -3,9 +3,11 @@
 
 #define CHAR_SPACE          0x00
 #define CHAR_QUESTION_MARK  0xAC
+#define CHAR_PERIOD         0xAD
 #define CHAR_HYPHEN         0xAE
 #define CHAR_MALE           0xB5
 #define CHAR_FEMALE         0xB6
+#define CHAR_COMMA          0xB8
 #define CHAR_CURRENCY       0xB7
 #define CHAR_SLASH          0xBA
 #define CHAR_COLON          0xF0

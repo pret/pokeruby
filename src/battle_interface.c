@@ -677,6 +677,12 @@ void sub_8043F44(u8 a)
     sub_8043E50(gUnknown_03004340[a], x, y);
 }
 
+#if ENGLISH
+#define CHAR_LV_SEPARATOR CHAR_COLON
+#elif GERMAN
+#define CHAR_LV_SEPARATOR CHAR_PERIOD
+#endif
+
 static void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
@@ -715,7 +721,7 @@ static void sub_8043FC0(u8 a, u8 b)
         *(ptr++) = EXT_CTRL_CODE_BEGIN;
         *(ptr++) = 0x14;
         *(ptr++) = 4;
-        *(ptr++) = CHAR_COLON;
+        *(ptr++) = CHAR_LV_SEPARATOR;
         *(ptr++) = EXT_CTRL_CODE_BEGIN;
         *(ptr++) = 0x14;
         *(ptr++) = 0;

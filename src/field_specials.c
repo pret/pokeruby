@@ -12,9 +12,6 @@
 #include "text.h"
 #include "wallclock.h"
 
-#define CHAR_PERIOD 0xAD
-#define CHAR_COMMA 0xB8
-
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
 #elif GERMAN
