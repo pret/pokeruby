@@ -1,6 +1,6 @@
 #include "global.h"
 #include "field_effect.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "sprite.h"
 #include "text.h"
 

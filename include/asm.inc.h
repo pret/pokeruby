@@ -166,7 +166,7 @@ u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
 bool8 IsDoubleBattle();
 
-// asm/field_screeneffect.o
+// asm/field_weather.o
 void SetWeather(u32);
 
 // src/field_fadetransition.o

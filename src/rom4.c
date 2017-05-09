@@ -13,7 +13,7 @@
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "field_special_scene.h"
 #include "heal_location.h"
 #include "link.h"

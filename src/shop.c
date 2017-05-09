@@ -1,7 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "decompress.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "main.h"
 #include "menu.h"
 #include "money.h"

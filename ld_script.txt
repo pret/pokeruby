@@ -75,7 +75,7 @@ SECTIONS {
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
         asm/egg_hatch.o(.text);
-		src/battle_interface.o(.text);
+        src/battle_interface.o(.text);
         src/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
@@ -123,11 +123,11 @@ SECTIONS {
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
-        src/field_screeneffect.o(.text);
-        asm/field_screeneffect.o(.text);
+        src/field_weather.o(.text);
+        asm/field_weather.o(.text);
         src/field_fadetransition.o(.text);
         asm/field_fadetransition.o(.text);
-        asm/rom_8080874.o(.text);
+        asm/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         src/mori_debug_menu.o(.text);
@@ -383,7 +383,7 @@ SECTIONS {
         data/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
-        data/field_screeneffect.o(.rodata);
+        data/field_weather.o(.rodata);
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
