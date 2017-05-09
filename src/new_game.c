@@ -139,10 +139,10 @@ void NewGameInitData(void)
     ClearRoamerData();
     ClearRoamerLocationData();
     gSaveBlock1.registeredItem = 0;
-    ClearItems();
+    ClearBag();
     NewGameInitPCItems();
-    sub_810C994();
-    sub_8133F80();
+    ClearPokeblocks();
+    ClearDecorationInventories();
     InitEasyChatPhrases();
     SetMauvilleOldMan();
     InitDewfordTrends();

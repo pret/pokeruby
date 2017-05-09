@@ -245,7 +245,7 @@ void HideMapNamePopup();
 
 // asm/item_menu.o
 void sub_80A3684(void);
-void ClearItems(void);
+void ClearBag(void);
 void sub_80A53F8(void);
 void sub_80A5B40(void);
 void sub_80A68CC();
@@ -353,7 +353,7 @@ u8 *CopyLocationName(u8 *dest, u8 location);
 void PlaySlotMachine(u8, void *);
 
 // asm/pokeblock.o
-void sub_810C994(void);
+void ClearPokeblocks(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
 
@@ -365,8 +365,8 @@ u8 IsMirageIslandPresent(void);
 
 // asm/field_specials.o
 void ResetCyclingRoadChallengeData(void);
-bool32 sub_810D9B0(u16);
-u8 sub_810D9EC(s8 *, s8 *, s16 *, s16 *);
+bool32 CountSSTidalStep(u16);
+u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *);
 void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
 void ScriptShowElevatorMenu(void);
 u8 GetLeadMonIndex(void);
@@ -410,7 +410,7 @@ u8 sub_8128124(u8 id);
 void sub_8132670(void);
 
 // asm/decoration_inventory.o
-void sub_8133F80(void);
+void ClearDecorationInventories(void);
 u8 sub_8133FE4(u8);
 u8 IsThereStorageSpaceForDecoration(u8);
 u8 sub_8134074(u8);

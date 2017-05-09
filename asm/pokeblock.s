@@ -2320,8 +2320,8 @@ _0810C944:
 _0810C94C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_810C8D4
 
-	thumb_func_start ClearPokeblocks
-ClearPokeblocks: @ 810C950
+	thumb_func_start ClearPokeblock
+ClearPokeblock: @ 810C950
 	lsls r0, 24
 	ldr r1, _0810C988 @ =gSaveBlock1
 	lsrs r0, 21
@@ -2354,15 +2354,15 @@ ClearPokeblocks: @ 810C950
 _0810C988: .4byte gSaveBlock1
 _0810C98C: .4byte 0x000007f9
 _0810C990: .4byte 0x000007fe
-	thumb_func_end ClearPokeblocks
+	thumb_func_end ClearPokeblock
 
-	thumb_func_start sub_810C994
-sub_810C994: @ 810C994
+	thumb_func_start ClearPokeblocks
+ClearPokeblocks: @ 810C994
 	push {r4,lr}
 	movs r4, 0
 _0810C998:
 	adds r0, r4, 0
-	bl ClearPokeblocks
+	bl ClearPokeblock
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2371,7 +2371,7 @@ _0810C998:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810C994
+	thumb_func_end ClearPokeblocks
 
 	thumb_func_start sub_810C9B0
 sub_810C9B0: @ 810C9B0
@@ -2499,7 +2499,7 @@ sub_810CA6C: @ 810CA6C
 	cmp r0, 0
 	beq _0810CA94
 	adds r0, r2, 0
-	bl ClearPokeblocks
+	bl ClearPokeblock
 	movs r0, 0x1
 	b _0810CA96
 	.align 2, 0

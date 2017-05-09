@@ -6,8 +6,8 @@
 
 	.text
 	
-	thumb_func_start ClearDecorations
-ClearDecorations: @ 8133F4C
+	thumb_func_start ClearDecorationInventory
+ClearDecorationInventory: @ 8133F4C
 	push {r4,r5,lr}
 	lsls r0, 24
 	movs r3, 0
@@ -36,15 +36,15 @@ _08133F76:
 	bx r0
 	.align 2, 0
 _08133F7C: .4byte gDecorationInventories
-	thumb_func_end ClearDecorations
+	thumb_func_end ClearDecorationInventory
 
-	thumb_func_start sub_8133F80
-sub_8133F80: @ 8133F80
+	thumb_func_start ClearDecorationInventories
+ClearDecorationInventories: @ 8133F80
 	push {r4,lr}
 	movs r4, 0
 _08133F84:
 	adds r0, r4, 0
-	bl ClearDecorations
+	bl ClearDecorationInventory
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -53,7 +53,7 @@ _08133F84:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8133F80
+	thumb_func_end ClearDecorationInventories
 
 	thumb_func_start sub_8133F9C
 sub_8133F9C: @ 8133F9C

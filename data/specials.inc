@@ -38,7 +38,7 @@ gSpecials::
 	.4byte sub_8083820
 	.4byte sub_8083614
 	.4byte GetLinkPartnerNames
-	.4byte sub_810DB28
+	.4byte SpawnBerryBlenderLinkPlayerSprites
 	.4byte SavePlayerParty
 	.4byte LoadPlayerParty
 	.4byte sub_80C5568
@@ -139,14 +139,14 @@ gSpecials::
 	.4byte sub_80C4C78
 	.4byte sub_80C4D50
 	.4byte ShowContestWinner
-	.4byte sub_810DCCC
-	.4byte sub_810DC7C
+	.4byte MauvilleGymSpecial2
+	.4byte MauvilleGymSpecial1
 	.4byte ShowFieldMessageStringVar4
 	.4byte DrawWholeMapView
 	.4byte StorePlayerCoordsInVars
-	.4byte sub_810DEDC
-	.4byte sub_810E070
-	.4byte sub_810E230
+	.4byte MauvilleGymSpecial3
+	.4byte PetalburgGymSpecial1
+	.4byte PetalburgGymSpecial2
 	.4byte GetPlayerTrainerIdOnesDigit
 	.4byte GetPlayerBigGuyGirlString
 	.4byte GetRivalSonDaughterString

@@ -239,7 +239,7 @@ bool8 sub_80C7754(void)
     s8 mapGroup, mapNum;
     s16 x, y;
 
-    if (sub_810D9EC(&mapGroup, &mapNum, &x, &y))
+    if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y))
     {
         return FALSE;
     }
@@ -270,7 +270,7 @@ void Task_HandlePorthole(u8 taskId)
             data[1] = 1;
         if (!sub_80A212C(0xFF, location->mapNum, location->mapGroup))
             return;
-        if (sub_810D9B0(1) == TRUE)
+        if (CountSSTidalStep(1) == TRUE)
         {
             if (*var == 2)
                 *var = 9;
