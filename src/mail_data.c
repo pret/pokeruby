@@ -1,4 +1,5 @@
 #include "global.h"
+#include "items.h"
 #include "name_string_util.h"
 #include "pokemon.h"
 #include "species.h"
@@ -72,8 +73,8 @@ u8 sub_80A2BC4(struct Pokemon *mon, u16 itemId)
             for (i = 0; i < 4; i++)
                 gSaveBlock1.mail[id].trainerId[i] = gSaveBlock2.playerTrainerId[i];
 
-            species = GetBoxMonData(mon, MON_DATA_SPECIES);
-            personality = GetBoxMonData(mon, MON_DATA_PERSONALITY);
+            species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
+            personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
             gSaveBlock1.mail[id].species = sub_80A2D44(species, personality);
             gSaveBlock1.mail[id].itemId = _itemId;
             SetMonData(mon, MON_DATA_MAIL, &id);
@@ -91,4 +92,116 @@ u16 sub_80A2D44(u16 species, u32 personality)
     if (species != SPECIES_UNOWN)
         return species;
     return ((sub_809D474(personality) << 16) + (30000 << 16)) >> 16;
+}
+
+u16 sub_80A2D64(u16 a1, u16 *a2)
+{
+    u16 result;
+
+    if (a1 >= 30000 && a1 < (30000 + UNOWN_FORM_COUNT))
+    {
+        result = SPECIES_UNOWN;
+        *a2 = a1 - 30000;
+    }
+    else
+    {
+        result = a1;
+    }
+
+    return result;
+}
+
+u8 sub_80A2D88(struct Pokemon *mon, struct MailStruct *mail)
+{
+    u8 heldItem[2];
+    u16 itemId = mail->itemId;
+    u8 mailId = sub_80A2BC4(mon, itemId);
+
+    if (mailId == 0xFF)
+        return 0xFF;
+
+    gSaveBlock1.mail[mailId] = *mail;
+
+    SetMonData(mon, MON_DATA_MAIL, &mailId);
+
+    heldItem[0] = itemId;
+    heldItem[1] = itemId >> 8;
+
+    SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
+
+    return mailId;
+}
+
+int unref_sub_80A2DF4(void)
+{
+    return 0;
+}
+
+void sub_80A2DF8(struct Pokemon *mon)
+{
+    u8 heldItem[2];
+    u8 mailId;
+
+    if (sub_80A2B94(mon))
+    {
+        mailId = GetMonData(mon, MON_DATA_MAIL);
+        gSaveBlock1.mail[mailId].itemId = 0;
+        mailId = 0xFF;
+        heldItem[0] = 0;
+        heldItem[1] = 0;
+        SetMonData(mon, MON_DATA_MAIL, &mailId);
+        SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
+    }
+}
+
+void unref_sub_80A2E58(u8 mailId)
+{
+    gSaveBlock1.mail[mailId].itemId = 0;
+}
+
+u8 sub_80A2E78(struct Pokemon *mon)
+{
+    u8 i;
+    u8 newHeldItem[2];
+    u8 newMailId;
+
+    newHeldItem[0] = 0;
+    newHeldItem[1] = 0;
+    newMailId = 0xFF;
+
+    for (i = 6; i < 16; i++)
+    {
+        if (gSaveBlock1.mail[i].itemId == 0)
+        {
+            memcpy(&gSaveBlock1.mail[i], &gSaveBlock1.mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct MailStruct));
+            gSaveBlock1.mail[GetMonData(mon, MON_DATA_MAIL)].itemId = 0;
+            SetMonData(mon, MON_DATA_MAIL, &newMailId);
+            SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);
+            return i;
+        }
+    }
+
+    return 0xFF;
+}
+
+bool8 itemid_is_mail(u16 itemId)
+{
+    switch (itemId)
+    {
+    case ITEM_ORANGE_MAIL:
+    case ITEM_HARBOR_MAIL:
+    case ITEM_GLITTER_MAIL:
+    case ITEM_MECH_MAIL:
+    case ITEM_WOOD_MAIL:
+    case ITEM_WAVE_MAIL:
+    case ITEM_BEAD_MAIL:
+    case ITEM_SHADOW_MAIL:
+    case ITEM_TROPIC_MAIL:
+    case ITEM_DREAM_MAIL:
+    case ITEM_FAB_MAIL:
+    case ITEM_RETRO_MAIL:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
