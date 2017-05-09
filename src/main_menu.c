@@ -250,7 +250,8 @@ u32 InitMainMenu(u8 a1)
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
 
-    REG_DISPCNT = DISPCNT_OBJ_1D_MAP
+    REG_DISPCNT = DISPCNT_MODE_0
+                | DISPCNT_OBJ_1D_MAP
                 | DISPCNT_BG0_ON
                 | DISPCNT_OBJ_ON
                 | DISPCNT_WIN0_ON;

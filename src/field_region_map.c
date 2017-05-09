@@ -64,7 +64,7 @@ void CB2_FieldInitRegionMap(void)
     SetUpWindowConfig(&gWindowConfig_81E709C);
     InitMenuWindow(&gWindowConfig_81E709C);
     MenuZeroFillScreen();
-    REG_BG0CNT = 7936;
+    REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
     MenuDrawTextWindow(21, 0, 29, 3);
     sub_8072BD8(gOtherText_Hoenn, 0x16, 1, 0x38);
     MenuDrawTextWindow(16, 16, 29, 19);
