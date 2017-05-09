@@ -211,6 +211,9 @@ SECTIONS {
         src/decoration.o(.text);
         asm/decoration.o(.text_80FE868);
         asm/slot_machine.o(.text);
+        src/slot_machine.o(.text);
+        asm/slot_machine.o(.text_8104D30)
+        src/slot_machine.o(.text_b);
         src/contest_painting.o(.text);
         src/battle_ai.o(.text);
         asm/trader.o(.text);
