@@ -296,7 +296,7 @@ struct UnkMauvilleOldManStruct2
     u8 unk1;
     u8 unk2;
     u16 mauvilleOldMan_ecArray[10];
-    u16 mauvilleOldMan_ecArray2[6];
+    u8 mauvilleOldMan_ecArray2[12];
     u8 fillerF[0x2];
     /* size = 0x2C */
 };
