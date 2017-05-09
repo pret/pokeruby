@@ -149,6 +149,11 @@ struct Link gLink;
 u8 gLastRecvQueueCount;
 u16 gLinkSavedIme;
 
+#ifdef GERMAN
+u8 deUnkValue1;
+u8 deUnkValue2;
+#endif
+
 EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = {0};
 EWRAM_DATA bool8 gLinkTestDummyBool = {0};
 EWRAM_DATA u32 gFiller_20238B8 = {0};
@@ -479,6 +484,9 @@ static void ProcessRecvCmds(u8 unusedParam)
             memcpy(localLinkPlayerBlock.magic2, sMagic, sizeof(localLinkPlayerBlock.magic2) - 1);
             InitBlockSend(&localLinkPlayerBlock, sizeof(localLinkPlayerBlock));
             break;
+        case 0x4444:
+            word_3002910[i] = gRecvCmds[1][i];
+            break;
         case 0x5555:
             byte_3002A68 = 1;
             break;
@@ -549,23 +557,28 @@ static void ProcessRecvCmds(u8 unusedParam)
             sub_80516C4(i, gRecvCmds[1][i]);
             break;
         case 0xCCCC:
-        {
-            const u32 *addresses;
-            const u32 *sizes;
-            void *data;
-            u16 size;
+#if defined(ENGLISH)
+            SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+#elif defined(GERMAN)
+            if (deUnkValue2 == 1)
+            {
+                deUnkValue2 = 2;
+                deUnkValue1 = gRecvCmds[1][i];
+            }
+            else if (deUnkValue2 == 2 || deUnkValue2 == 3)
+            {
+                SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
 
-            addresses = sBlockRequestLookupTable;
-            data = (void *)addresses[gRecvCmds[1][i] * 2];
-
-            sizes = addresses + 1;
-            size = sizes[gRecvCmds[1][i] * 2];
-
-            SendBlock(0, data, size);
-            break;
-        }
-        case 0x4444:
-            word_3002910[i] = gRecvCmds[1][i];
+                if (deUnkValue2 == 2)
+                    deUnkValue2 = 1;
+                else
+                    deUnkValue2 = 0;
+            }
+            else
+            {
+                SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+            }
+#endif
             break;
         case 0xCAFE:
             word_3002910[i] = gRecvCmds[1][i];
@@ -676,6 +689,9 @@ void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
     gLinkTimeOutCounter = 0;
+#if defined(GERMAN)
+    ResetBlockSend();
+#endif
     OpenLink();
 }
 

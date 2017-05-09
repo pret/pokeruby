@@ -8832,7 +8832,7 @@ _080203B8:
 	muls r0, r1
 	ldr r1, _08020400 @ =gPlayerParty
 	adds r0, r1
-	bl sub_8040AA4
+	bl IsTradedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08020404
@@ -15948,7 +15948,7 @@ _08023CC8:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8040A00
+	bl IsHMMove2
 	cmp r0, 0
 	beq _08023D20
 	ldr r0, _08023D14 @ =0x0000013f

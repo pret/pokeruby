@@ -480,7 +480,7 @@ BattleText_TookAttack2:
 	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
 
 gUnknown_083FFCCA:: @ 83FFCCA
-BattleText_PreventedSwitch:
+BattleText_PreventedSwitch::
 	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
 BattleText_PreventedOther:
 	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"
@@ -1043,15 +1043,15 @@ BattleText_SpDef:
 	.string "SP. DEF$"
 
 gUnknown_08400DD6:: @ 8400DD6
-BattleText_SafariBalls:
+BattleText_SafariBalls::
 	.string "{HIGHLIGHT RED}SAFARI BALLS$"
 
 gUnknown_08400DE6:: @ 8400DE6
-BattleText_SafariBallsLeft:
+BattleText_SafariBallsLeft::
 	.string "{HIGHLIGHT RED}Left: $"
 
 gUnknown_08400DF0:: @ 8400DF0
-BattleText_HighlightRed:
+BattleText_HighlightRed::
 	.string "{HIGHLIGHT RED}$"
 
 BattleText_Sleep::
@@ -1101,7 +1101,7 @@ gBadEggNickname:: @ 8400E3A
 	.string "Bad EGG$"
 
 gUnknown_08400E42:: @ 8400E42
-BattleText_Wally:
+BattleText_Wally::
 	.string "WALLY$"
 
 BattleText_Win:: @ 8400E48

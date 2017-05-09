@@ -635,47 +635,7 @@ _0811042E:
 _08110438: .4byte gStringVar1
 	thumb_func_end PrintLinkBattleRecord
 
-	thumb_func_start ShowLinkBattleRecords
-ShowLinkBattleRecords: @ 811043C
-	push {r4,lr}
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1C
-	movs r3, 0x12
-	bl MenuDrawTextWindow
-	ldr r0, _08110488 @ =gOtherText_BattleResults
-	movs r1, 0
-	movs r2, 0x1
-	movs r3, 0xF0
-	bl sub_8072BD8
-	ldr r0, _0811048C @ =gSaveBlock1 + 0x30B8
-	bl PrintLinkBattleWinsLossesDraws
-	ldr r0, _08110490 @ =gOtherText_WinLoseDraw
-	movs r1, 0xC
-	movs r2, 0x6
-	bl MenuPrint
-	movs r4, 0
-_08110468:
-	lsls r0, r4, 4
-	ldr r1, _0811048C @ =gSaveBlock1 + 0x30B8
-	adds r0, r1
-	adds r4, 0x1
-	lsls r1, r4, 25
-	movs r2, 0xC0
-	lsls r2, 19
-	adds r1, r2
-	lsrs r1, 24
-	bl PrintLinkBattleRecord
-	cmp r4, 0x4
-	ble _08110468
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08110488: .4byte gOtherText_BattleResults
-_0811048C: .4byte gSaveBlock1 + 0x30B8
-_08110490: .4byte gOtherText_WinLoseDraw
-	thumb_func_end ShowLinkBattleRecords
+.section .text_8110494
 
 	thumb_func_start sub_8110494
 sub_8110494: @ 8110494

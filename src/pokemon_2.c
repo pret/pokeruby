@@ -383,8 +383,8 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
         return mon->spAttack;
     case MON_DATA_SPDEF:
         return mon->spDefense;
-    case MON_DATA_64:
-        return mon->pokerus;
+    case MON_DATA_MAIL:
+        return mon->mail;
     default:
         return GetBoxMonData(&mon->box, field, data);
     }
@@ -761,8 +761,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const u8 *data)
     case MON_DATA_SPDEF:
         SET16(mon->spDefense);
         break;
-    case MON_DATA_64:
-        SET8(mon->pokerus);
+    case MON_DATA_MAIL:
+        SET8(mon->mail);
         break;
     case MON_DATA_SPECIES2:
         break;
@@ -1079,7 +1079,7 @@ u8 SendMonToPC(struct Pokemon *mon)
         {
             if (GetBoxMonData(&gPokemonStorage.boxes[i][j], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
-                sub_8040B1C(mon);
+                MonRestorePP(mon);
                 CopyMon(&gPokemonStorage.boxes[i][j], &mon->box, sizeof(mon->box));
                 return 1;
             }

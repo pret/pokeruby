@@ -2530,7 +2530,7 @@ sub_802F934: @ 802F934
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _0802FA98 @ =gUnknown_02024E84
+	ldr r1, _0802FA98 @ =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -2581,7 +2581,7 @@ _0802FA88: .4byte gUnknown_0300434C
 _0802FA8C: .4byte gUnknown_02024E8C
 _0802FA90: .4byte gUnknown_02024BE0
 _0802FA94: .4byte gSprites
-_0802FA98: .4byte gUnknown_02024E84
+_0802FA98: .4byte gBattleMonForms
 _0802FA9C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_802F934
 
@@ -3673,104 +3673,7 @@ _08030378:
 	bx r0
 	thumb_func_end dp01t_11_1_message_for_player_only
 
-	thumb_func_start sub_803037C
-sub_803037C: @ 803037C
-	push {r4,lr}
-	sub sp, 0x8
-	ldr r1, _08030434 @ =gUnknown_030042A4
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, _08030438 @ =gUnknown_030042A0
-	movs r0, 0xA0
-	strh r0, [r1]
-	ldr r4, _0803043C @ =gUnknown_03004210
-	movs r0, 0x1B
-	str r0, [sp]
-	movs r0, 0x12
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0xA
-	movs r2, 0x2
-	movs r3, 0xF
-	bl FillWindowRect
-	movs r0, 0x10
-	str r0, [sp]
-	movs r0, 0x26
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0xA
-	movs r2, 0x2
-	movs r3, 0x23
-	bl FillWindowRect
-	ldr r1, _08030440 @ =gUnknown_03004330
-	ldr r0, _08030444 @ =gUnknown_02024A60
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, _08030448 @ =sub_802C098
-	str r1, [r0]
-	ldr r1, _0803044C @ =gUnknown_08400CF3
-	movs r2, 0xC8
-	lsls r2, 1
-	movs r0, 0x23
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r3, 0x12
-	bl InitWindow
-	adds r0, r4, 0
-	bl sub_8002F44
-	ldr r1, _08030450 @ =0x0000ffff
-	ldr r3, _08030454 @ =0x00002d9f
-	movs r0, 0
-	str r0, [sp]
-	movs r2, 0xC
-	bl sub_814A5C0
-	movs r4, 0
-_080303EC:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl nullsub_8
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _080303EC
-	ldr r1, _08030458 @ =gUnknown_02024E60
-	ldr r0, _08030444 @ =gUnknown_02024A60
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r0, [r0]
-	movs r1, 0
-	bl sub_802E3E4
-	ldr r0, _0803045C @ =gUnknown_08400CA8
-	bl get_battle_strings_
-	ldr r4, _0803043C @ =gUnknown_03004210
-	ldr r1, _08030460 @ =gUnknown_020238CC
-	movs r2, 0xDC
-	lsls r2, 1
-	movs r0, 0x23
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r3, 0x2
-	bl InitWindow
-	adds r0, r4, 0
-	bl sub_8002F44
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08030434: .4byte gUnknown_030042A4
-_08030438: .4byte gUnknown_030042A0
-_0803043C: .4byte gUnknown_03004210
-_08030440: .4byte gUnknown_03004330
-_08030444: .4byte gUnknown_02024A60
-_08030448: .4byte sub_802C098
-_0803044C: .4byte gUnknown_08400CF3
-_08030450: .4byte 0x0000ffff
-_08030454: .4byte 0x00002d9f
-_08030458: .4byte gUnknown_02024E60
-_0803045C: .4byte gUnknown_08400CA8
-_08030460: .4byte gUnknown_020238CC
-	thumb_func_end sub_803037C
+.section .text_8030464
 
 	thumb_func_start nullsub_42
 nullsub_42: @ 8030464

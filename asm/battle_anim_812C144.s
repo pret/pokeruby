@@ -3144,7 +3144,7 @@ _0812D906:
 	ldr r0, _0812D9CC @ =gUnknown_081FAF4C
 	lsls r1, 2
 	adds r1, r0
-	ldr r2, _0812D9D0 @ =gUnknown_02024E84
+	ldr r2, _0812D9D0 @ =gBattleMonForms
 	ldr r0, _0812D9D4 @ =gBattleAnimPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r2
@@ -3243,7 +3243,7 @@ _0812D9A2:
 	b _0812DA0A
 	.align 2, 0
 _0812D9CC: .4byte gUnknown_081FAF4C
-_0812D9D0: .4byte gUnknown_02024E84
+_0812D9D0: .4byte gBattleMonForms
 _0812D9D4: .4byte gBattleAnimPlayerMonIndex
 _0812D9D8: .4byte 0x040000d4
 _0812D9DC: .4byte 0x84000200

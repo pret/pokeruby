@@ -28,7 +28,11 @@ enum LanguageId {
     LANGUAGE_GERMAN = 5,
 };
 
+#if defined(ENGLISH)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#elif defined(GERMAN)
+#define GAME_LANGUAGE (LANGUAGE_GERMAN)
+#endif
 
 enum
 {
@@ -152,7 +156,8 @@ struct Roamer
     /*0x10*/ u8 cute;
     /*0x11*/ u8 smart;
     /*0x12*/ u8 tough;
-    /*0x13*/ u8 active;
+    /*0x13*/ bool8 active;
+    /*0x14*/ u8 filler[0x8];
 };
 
 struct RamScriptData
@@ -291,7 +296,7 @@ struct UnkMauvilleOldManStruct2
     u8 unk1;
     u8 unk2;
     u16 mauvilleOldMan_ecArray[10];
-    u16 mauvilleOldMan_ecArray2[6];
+    u8 mauvilleOldMan_ecArray2[12];
     u8 fillerF[0x2];
     /* size = 0x2C */
 };
@@ -382,10 +387,13 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
     /*0x2B10*/ u8 filler_2B0E[0xC];
-    /*0x2B1C*/ u16 unk2B1C[4];
-    /*0x2B24*/ u8 filler_2B24[0x28];
+    /*0x2B1C*/ u16 unk2B1C[6];
+    /*0x2B28*/ u16 unk2B28[6];
+    /*0x2B34*/ u16 unk2B34[6];
+    /*0x2B40*/ u16 unk2B40[6];
     /*0x2B4C*/ struct MailStruct mail[16];
-    /*0x2D8C*/ u8 filler_2D8C[0x8];
+    /*0x2D8C*/ u8 unk2D8C[4];
+    /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ OldMan oldMan;
     /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
@@ -395,11 +403,12 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];
     /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[0x59];
+    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
-    /*0x3158*/ u8 filler_3158[0x8];
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
     /*0x3A7C*/ u8 filler_3A7C[0x10];
@@ -488,7 +497,7 @@ struct UnkStruct_8054FF8
 // wasnt defined so I had to define it
 struct HallOfFame
 {
-	u8 filler[0x1F00];
+    u8 filler[0x1F00];
 };
 
 extern struct HallOfFame gHallOfFame;

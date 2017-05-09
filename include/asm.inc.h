@@ -10,20 +10,23 @@ void sub_80157C4(u8 index);
 u8 sub_8015A98(u8, u8, u8);
 u8 sub_8018324(u8, u8, u8, u8, u16);
 
+// asm/battle_5.o
+void sub_802C098();
+void sub_802E3E4(u8, int);
+void nullsub_8(u8);
+
 // asm/battle_7.o
 void sub_8032AA8(u8 index, int i);
 
 // src/pokemon_3.o
 u16 SpeciesToNationalPokedexNum(u16);
-
-// asm/pokemon_3.o
-void DrawSpindaSpots(u16, u32, void *, u8);
+void DrawSpindaSpots(u16, u32, u8 *, u8);
 u8 sub_803FC58(u16);
 void AdjustFriendship(struct Pokemon *, u8);
 void sub_80408BC();
 void current_map_music_set__default_for_battle(u16);
 
-// asm/util.o
+// src/util.o
 void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
@@ -157,7 +160,7 @@ void sub_806FA18(u8 taskId);
 // src/party_menu.o
 void sub_806E834();
 
-// asm/rom_8077ABC.o
+// src/rom_8077ABC.o
 u8 battle_side_get_owner(u8);
 u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
@@ -210,6 +213,9 @@ void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
 void sub_8089A70(void);
 void sub_808A004();
 void sub_808AB90(void);
+
+// asm/rom_8094928.o
+u8 pokemon_order_func(u8);
 
 // asm/pokemon_storage_system.o
 void sub_80961D8(void);
@@ -321,9 +327,8 @@ void sub_80C8F34(u8);
 
 // asm/easy_chat.o
 void sub_80E6764(void);
-void sub_80EB3FC(u8 *, u16);
+u8* sub_80EB3FC(u8 *, u16);
 u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
-u16 sub_80EB72C(u16);
 
 // asm/pokenav.o
 void sub_80EBA5C(void);
@@ -355,7 +360,7 @@ s16 sub_810CAE4(u8, struct Pokeblock *);
 // asm/fldeff_flash.o
 void sub_810CC80(void);
 
-// asm/time_events.o
+// src/time_events.o
 u8 IsMirageIslandPresent(void);
 
 // asm/field_specials.o
@@ -370,10 +375,21 @@ void sub_810FA54(void);
 // asm/battle_records.o
 void InitLinkBattleRecords(void);
 
+// asm/pokedex_cry_screen.o
+u8 sub_8119E3C(struct CryRelatedStruct *, u8);
+void sub_8119F88(u8 a);
+void sub_811A050(u16 species);
+u8 ShowPokedexCryScreen(struct CryRelatedStruct *, u8);
+void DestroyCryMeterNeedleSprite();
+
 // asm/battle_transition.o
 void sub_811AABC(u8);
 void sub_811AAD8(u8);
 u8 sub_811AAE8(void);
+
+// asm/battle_message.o
+void get_battle_strings_(u8 *);
+void sub_8120FFC(const u8 *, u8 *);
 
 // src/mystery_event_script.o
 u32 sub_812613C(u8 *);
@@ -400,19 +416,14 @@ u8 IsThereStorageSpaceForDecoration(u8);
 u8 sub_8134074(u8);
 s8 sub_81340A8(u8);
 
-// asm/roamer.o
-void sub_81341F8(void);
-void sub_813420C(void);
-void mapnumbers_history_shift_sav1_0_2_4_out(void);
-void sub_8134348(void);
-void sub_8134394();
-u8 sub_81344CC(void);
-
 // asm/battle_tower.o
 void sub_8134AC0(void *);
 
 // src/player_pc.o
 void NewGameInitPCItems(void);
+
+// src/diploma.o
+void sub_8145D88(void);
 
 // asm/intro_credits_graphics.o
 void load_intro_part2_graphics(/*TODO: arg types*/);

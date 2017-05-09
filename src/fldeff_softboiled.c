@@ -43,6 +43,13 @@ struct UnknownStruct3 {
     s16 unk2E;
 };
 
+#if ENGLISH
+#define WINDOW_LEFT 3
+#define WINDOW_RIGHT 26
+#elif GERMAN
+#define WINDOW_LEFT 0
+#define WINDOW_RIGHT 29
+#endif
 
 #define EWRAM_1000 (*(struct UnknownStruct2 *)(unk_2000000 + 0x1000))
 #define EWRAM_1B000 (*(struct UnknownStruct1 *)(unk_2000000 + 0x1B000))
@@ -141,7 +148,7 @@ static void sub_8133E74(u8 taskId) {
         return;
     }
 
-    MenuZeroFillWindowRect(3, 14, 26, 19);
+    MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
     sub_806D538(3, 0);
     gTasks[taskId].func = sub_806CB74;
 }
@@ -152,9 +159,6 @@ static void sub_8133EB8(u8 taskId) {
     sub_806E834(gOtherText_CantUseOnPoke, 1);
     gTasks[taskId].func = sub_8133E74;
 }
-
-#define WINDOW_LEFT 3
-#define WINDOW_RIGHT 26
 
 static void sub_8133EF8(void) {
     sub_806CCE4();

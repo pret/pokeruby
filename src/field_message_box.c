@@ -15,7 +15,7 @@ static u8 sMessageBoxMode;
 static void Task_FieldMessageBox(u8 taskId);
 static void CreateFieldMessageBoxTask(void);
 static void DestroyFieldMessageBoxTask(void);
-static void PrintFieldMessage(u8 *message);
+static void PrintFieldMessage(const u8 *message);
 static void PrintFieldMessageFromStringVar4(void);
 
 void InitFieldMessageBox(void)
@@ -67,7 +67,7 @@ static void DestroyFieldMessageBoxTask(void)
         DestroyTask(taskId);
 }
 
-bool8 ShowFieldMessage(u8 *message)
+bool8 ShowFieldMessage(const u8 *message)
 {
     if (sMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
     {
@@ -81,7 +81,7 @@ bool8 ShowFieldMessage(u8 *message)
     }
 }
 
-bool8 ShowFieldAutoScrollMessage(u8 *message)
+bool8 ShowFieldAutoScrollMessage(const u8 *message)
 {
     if (sMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
     {
@@ -95,14 +95,14 @@ bool8 ShowFieldAutoScrollMessage(u8 *message)
     }
 }
 
-bool8 unref_sub_8064BB8(u8 *message)
+bool8 unref_sub_8064BB8(const u8 *message)
 {
     sMessageBoxMode = FIELD_MESSAGE_BOX_AUTO_SCROLL;
     PrintFieldMessage(message);
     return TRUE;
 }
 
-bool8 unref_sub_8064BD0(u8 *message)
+bool8 unref_sub_8064BD0(const u8 *message)
 {
     if (sMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
     {
@@ -116,7 +116,7 @@ bool8 unref_sub_8064BD0(u8 *message)
     }
 }
 
-static void PrintFieldMessage(u8 *message)
+static void PrintFieldMessage(const u8 *message)
 {
     StringExpandPlaceholders(gStringVar4, message);
     sub_8002EB0(&gFieldMessageBoxWindow, gStringVar4, gMenuTextTileOffset, 2, 15);

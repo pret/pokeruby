@@ -1815,7 +1815,7 @@ sub_8133558: @ 8133558
 	ldr r2, _081335FC @ =gPlayerParty
 	adds r0, r2
 	adds r1, 0x20
-	bl sub_80403CC
+	bl GetMoveRelearnerMoves
 	ldr r1, [r5]
 	strb r0, [r1, 0x1A]
 	movs r4, 0

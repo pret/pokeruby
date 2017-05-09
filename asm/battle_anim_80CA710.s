@@ -54891,7 +54891,7 @@ sub_80E4EF8: @ 80E4EF8
 	ldr r1, _080E4FD0 @ =gUnknown_081FAF4C
 	lsls r4, 2
 	adds r4, r1
-	ldr r1, _080E4FD4 @ =gUnknown_02024E84
+	ldr r1, _080E4FD4 @ =gBattleMonForms
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 11
@@ -54962,7 +54962,7 @@ _080E4FBC:
 	.align 2, 0
 _080E4FCC: .4byte 0x040000d4
 _080E4FD0: .4byte gUnknown_081FAF4C
-_080E4FD4: .4byte gUnknown_02024E84
+_080E4FD4: .4byte gBattleMonForms
 _080E4FD8: .4byte 0x80000400
 	thumb_func_end sub_80E4EF8
 

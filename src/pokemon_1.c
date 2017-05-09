@@ -51,7 +51,7 @@ void ZeroMonData(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_SPATK, (u8 *)&arg);
     SetMonData(mon, MON_DATA_SPDEF, (u8 *)&arg);
     arg = 255;
-    SetMonData(mon, MON_DATA_64, (u8 *)&arg);
+    SetMonData(mon, MON_DATA_MAIL, (u8 *)&arg);
 }
 
 void ZeroPlayerPartyMons(void)
@@ -75,7 +75,7 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     arg = 255;
-    SetMonData(mon, MON_DATA_64, (u8 *)&arg);
+    SetMonData(mon, MON_DATA_MAIL, (u8 *)&arg);
     CalculateMonStats(mon);
 }
 
@@ -478,7 +478,7 @@ void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest)
     SetMonData(dest, MON_DATA_HP, (u8 *)&value);
     SetMonData(dest, MON_DATA_MAX_HP, (u8 *)&value);
     value = 255;
-    SetMonData(dest, MON_DATA_64, (u8 *)&value);
+    SetMonData(dest, MON_DATA_MAIL, (u8 *)&value);
     CalculateMonStats(dest);
 }
 

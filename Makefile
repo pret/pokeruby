@@ -26,7 +26,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
 
-VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2
+VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_de
 
 # Clear the default suffixes.
 .SUFFIXES:
@@ -123,30 +123,36 @@ $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 
 $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
+$$($1_C_OBJS): LANGUAGE := $4
 build/$1/%.o : %.c $$$$(c_dep)
-	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) $$< -o build/$1/$$*.i
+	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
 	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
 
 $$($1_ASM_OBJS): VERSION := $2
 $$($1_ASM_OBJS): REVISION := $3
+$$($1_ASM_OBJS): LANGUAGE := $4
 build/$1/asm/%.o: asm/%.s $$$$(asm_dep)
-	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) -o $$@ $$<
+	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@ $$<
 
 $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
+$$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
+build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
-	cd build/$1 && ../../$$(RAMSCRGEN) .bss ../../sym_bss.txt >sym_bss.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) .bss ../../sym_bss.txt $$(LANGUAGE) >sym_bss.ld
 
+build/$1/sym_common.ld: LANGUAGE := $4
 build/$1/sym_common.ld: sym_common.txt $$($1_C_OBJS) $$(wildcard common_syms/*.txt)
-	cd build/$1 && ../../$$(RAMSCRGEN) COMMON ../../sym_common.txt -c src,../../common_syms >sym_common.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) COMMON ../../sym_common.txt $$(LANGUAGE) -c src,../../common_syms >sym_common.ld
 
+build/$1/sym_ewram.ld: LANGUAGE := $4
 build/$1/sym_ewram.ld: sym_ewram.txt
-	cd build/$1 && ../../$$(RAMSCRGEN) ewram_data ../../sym_ewram.txt >sym_ewram.ld
+	cd build/$1 && ../../$$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $$(LANGUAGE) >sym_ewram.ld
 
 build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld build/$1/sym_ewram.ld
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
@@ -164,9 +170,10 @@ $1: poke$1.gba
 	@:
 endef
 
-$(eval $(call VERSION_RULES,ruby,RUBY,0))
-$(eval $(call VERSION_RULES,ruby_rev1,RUBY,1))
-$(eval $(call VERSION_RULES,ruby_rev2,RUBY,2))
-$(eval $(call VERSION_RULES,sapphire,SAPPHIRE,0))
-$(eval $(call VERSION_RULES,sapphire_rev1,SAPPHIRE,1))
-$(eval $(call VERSION_RULES,sapphire_rev2,SAPPHIRE,2))
+$(eval $(call VERSION_RULES,ruby,RUBY,0,ENGLISH))
+$(eval $(call VERSION_RULES,ruby_rev1,RUBY,1,ENGLISH))
+$(eval $(call VERSION_RULES,ruby_rev2,RUBY,2,ENGLISH))
+$(eval $(call VERSION_RULES,sapphire,SAPPHIRE,0,ENGLISH))
+$(eval $(call VERSION_RULES,sapphire_rev1,SAPPHIRE,1,ENGLISH))
+$(eval $(call VERSION_RULES,sapphire_rev2,SAPPHIRE,2,ENGLISH))
+$(eval $(call VERSION_RULES,ruby_de,RUBY,0,GERMAN))

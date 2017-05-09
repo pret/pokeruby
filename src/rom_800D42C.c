@@ -12,8 +12,16 @@ extern u8 BattleText_Win[];
 extern u8 BattleText_Loss[];
 extern u8 BattleText_Tie[];
 
+#if ENGLISH
 #define LEFT_MESSAGE_X 6
 #define RIGHT_MESSAGE_X 21
+#define TILE_OFFSET_LOSS 168
+#elif GERMAN
+#define LEFT_MESSAGE_X 5
+#define RIGHT_MESSAGE_X 20
+#define TILE_OFFSET_LOSS 172
+#endif
+#define TILE_OFFSET_WIN 160
 #define CENTER_MESSAGE_X 13
 #define MESSAGE_Y 2
 
@@ -31,7 +39,7 @@ void sub_800DC24(void)
 
     if (gUnknown_02024D26 == 3)
     {
-        PRINT_MESSAGE(BattleText_Tie, 160, CENTER_MESSAGE_X);
+        PRINT_MESSAGE(BattleText_Tie, TILE_OFFSET_WIN, CENTER_MESSAGE_X);
         return;
     }
 
@@ -46,13 +54,15 @@ void sub_800DC24(void)
             switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
             {
             case 0:
-            case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            case 2:
+                PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
+                PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
                 return;
 
             case 1:
-            case 3: PRINT_MESSAGE_RIGHT(BattleText_Win, 160)
-                PRINT_MESSAGE_LEFT(BattleText_Loss, 168)
+            case 3:
+                PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN)
+                PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS)
                 return;
             }
         }
@@ -62,13 +72,15 @@ void sub_800DC24(void)
             switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
             {
             case 1:
-            case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-                PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            case 3:
+                PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
+                PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
                 return;
 
             case 0:
-            case 2: PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-                PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+            case 2:
+                PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
+                PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
                 return;
             }
         }
@@ -81,26 +93,26 @@ void sub_800DC24(void)
     {
         if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
         {
-            PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-            PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+            PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
+            PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
         }
         else
         {
-            PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-            PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
+            PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
         }
     }
     else
     {
         if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
         {
-            PRINT_MESSAGE_LEFT(BattleText_Win, 160);
-            PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
+            PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
+            PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
         }
         else
         {
-            PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
-            PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
+            PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
+            PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
         }
     }
 }

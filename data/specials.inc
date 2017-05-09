@@ -297,7 +297,7 @@ gSpecials::
 	.4byte GetLeadMonEVCount
 	.4byte sub_8064EAC
 	.4byte sub_8064ED4
-	.4byte sub_813430C
+	.4byte InitRoamer
 	.4byte sub_810F5BC
 	.4byte IsGrassTypeInParty
 	.4byte sub_8081334

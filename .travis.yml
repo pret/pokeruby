@@ -21,6 +21,7 @@ install:
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
 script:
   - cd $TRAVIS_BUILD_DIR
+  - ./whitespace.sh
   - ./build_tools.sh
   - make -j2 compare_ruby
   - make -j2 compare_ruby_rev1
@@ -28,3 +29,4 @@ script:
   - make -j2 compare_sapphire
   - make -j2 compare_sapphire_rev1
   - make -j2 compare_sapphire_rev2
+  - make -j2 ruby_de

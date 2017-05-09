@@ -280,7 +280,7 @@ move_anim_start_t3: @ 80314C8
 	ands r0, r7
 	cmp r0, 0
 	beq _0803150C
-	ldr r0, _08031508 @ =gUnknown_02024E84
+	ldr r0, _08031508 @ =gBattleMonForms
 	adds r0, r6, r0
 	movs r2, 0x7F
 	adds r1, r7, 0
@@ -289,7 +289,7 @@ move_anim_start_t3: @ 80314C8
 	movs r0, 0x1
 	b _080315C2
 	.align 2, 0
-_08031508: .4byte gUnknown_02024E84
+_08031508: .4byte gBattleMonForms
 _0803150C:
 	lsls r1, r6, 2
 	ldr r0, _08031530 @ =0x02017800
@@ -732,7 +732,7 @@ _08031856:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_800D238
-	ldr r0, _080318E8 @ =gUnknown_02024E84
+	ldr r0, _080318E8 @ =gBattleMonForms
 	add r0, r9
 	ldrb r0, [r0]
 	lsls r0, 5
@@ -773,7 +773,7 @@ _080318CE:
 	.align 2, 0
 _080318E0: .4byte 0x02000000
 _080318E4: .4byte SPECIES_CASTFORM
-_080318E8: .4byte gUnknown_02024E84
+_080318E8: .4byte gBattleMonForms
 _080318EC: .4byte 0x00007fff
 _080318F0: .4byte gPlttBufferFaded
 _080318F4: .4byte gPlttBufferUnfaded
@@ -896,7 +896,7 @@ _080319BE:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_800D238
-	ldr r0, _08031A50 @ =gUnknown_02024E84
+	ldr r0, _08031A50 @ =gBattleMonForms
 	add r0, r9
 	ldrb r0, [r0]
 	lsls r0, 5
@@ -937,7 +937,7 @@ _08031A36:
 	.align 2, 0
 _08031A48: .4byte 0x02000000
 _08031A4C: .4byte SPECIES_CASTFORM
-_08031A50: .4byte gUnknown_02024E84
+_08031A50: .4byte gBattleMonForms
 _08031A54: .4byte 0x00007fff
 _08031A58: .4byte gPlttBufferFaded
 _08031A5C: .4byte gPlttBufferUnfaded
@@ -1675,7 +1675,7 @@ sub_8031FC4: @ 8031FC4
 	adds r1, r5, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, _08032074 @ =gUnknown_02024E84
+	ldr r0, _08032074 @ =gBattleMonForms
 	add r0, r8
 	ldrh r1, [r4]
 	strb r1, [r0]
@@ -1715,7 +1715,7 @@ _08032064: .4byte gUnknown_02024BE0
 _08032068: .4byte gSprites
 _0803206C: .4byte 0x02017840
 _08032070: .4byte 0xffffebc0
-_08032074: .4byte gUnknown_02024E84
+_08032074: .4byte gBattleMonForms
 _08032078: .4byte 0x00007fff
 _0803207C: .4byte gPlttBufferFaded
 _08032080: .4byte gPlttBufferUnfaded
@@ -1949,7 +1949,7 @@ _08032202:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl sub_800D238
-	ldr r0, _0803233C @ =gUnknown_02024E84
+	ldr r0, _0803233C @ =gBattleMonForms
 	ldr r1, [sp, 0xC]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -1982,7 +1982,7 @@ _08032288:
 	add r1, r9
 	adds r0, r1
 	strh r7, [r0, 0x2]
-	ldr r0, _0803233C @ =gUnknown_02024E84
+	ldr r0, _0803233C @ =gBattleMonForms
 	adds r1, r2, r0
 	ldr r4, [sp, 0xC]
 	adds r0, r4, r0
@@ -2006,7 +2006,7 @@ _080322C8:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, _0803233C @ =gUnknown_02024E84
+	ldr r1, _0803233C @ =gBattleMonForms
 	add r1, r8
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -2033,7 +2033,7 @@ _0803232C: .4byte 0x040000d4
 _08032330: .4byte 0x84000200
 _08032334: .4byte 0x02000000
 _08032338: .4byte SPECIES_CASTFORM
-_0803233C: .4byte gUnknown_02024E84
+_0803233C: .4byte gBattleMonForms
 _08032340: .4byte 0x00007fff
 _08032344: .4byte gPlttBufferFaded
 _08032348: .4byte gPlttBufferUnfaded
@@ -2192,7 +2192,7 @@ refresh_graphics_maybe: @ 8032464
 	lsls r0, 2
 	ldr r1, _080324A0 @ =gSprites
 	adds r4, r0, r1
-	ldr r0, _080324A4 @ =gUnknown_02024E84
+	ldr r0, _080324A4 @ =gBattleMonForms
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -2204,7 +2204,7 @@ refresh_graphics_maybe: @ 8032464
 	b _080324AE
 	.align 2, 0
 _080324A0: .4byte gSprites
-_080324A4: .4byte gUnknown_02024E84
+_080324A4: .4byte gBattleMonForms
 _080324A8:
 	adds r0, r6, 0
 	bl sub_8077F68
@@ -3001,7 +3001,7 @@ sub_8032AA8: @ 8032AA8
 	movs r3, 0
 	movs r0, 0
 	strh r0, [r2, 0x2]
-	ldr r0, _08032AD8 @ =gUnknown_02024E84
+	ldr r0, _08032AD8 @ =gBattleMonForms
 	adds r0, r4, r0
 	strb r3, [r0]
 	cmp r1, 0
@@ -3014,7 +3014,7 @@ _08032ACC:
 	bx r0
 	.align 2, 0
 _08032AD4: .4byte 0x02017800
-_08032AD8: .4byte gUnknown_02024E84
+_08032AD8: .4byte gBattleMonForms
 	thumb_func_end sub_8032AA8
 
 	thumb_func_start nullsub_45

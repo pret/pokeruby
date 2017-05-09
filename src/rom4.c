@@ -25,6 +25,7 @@
 #include "palette.h"
 #include "play_time.h"
 #include "rng.h"
+#include "roamer.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
@@ -164,8 +165,8 @@ void sub_805308C(void)
     FlagReset(SYS_SAFARI_MODE);
     sub_8054164();
     ResetCyclingRoadChallengeData();
-    mapnumbers_history_shift_sav1_0_2_4_out();
-    sub_8134348();
+    UpdateLocationHistoryForRoamer();
+    RoamerMoveToOtherLocationSet();
 }
 
 void ResetGameStats(void)
@@ -531,8 +532,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
         sub_807D874(i);
 
     sub_8072ED0();
-    mapnumbers_history_shift_sav1_0_2_4_out();
-    sub_8134394();
+    UpdateLocationHistoryForRoamer();
+    RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
@@ -561,8 +562,8 @@ void sub_8053994(u32 a1)
     sub_8053C98();
     sav1_reset_battle_music_maybe();
     mapheader_run_script_with_tag_x3();
-    mapnumbers_history_shift_sav1_0_2_4_out();
-    sub_8134348();
+    UpdateLocationHistoryForRoamer();
+    RoamerMoveToOtherLocationSet();
     not_trainer_hill_battle_pyramid();
     if (a1 != 1 && v3)
     {

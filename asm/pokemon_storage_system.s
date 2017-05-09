@@ -11660,7 +11660,7 @@ _0809B508:
 	ldr r0, _0809B540 @ =0x000025b4
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_restore_pp
+	bl BoxMonRestorePP
 	ldr r3, _0809B544 @ =gPokemonStorage
 	lsls r0, r5, 2
 	adds r0, r5
