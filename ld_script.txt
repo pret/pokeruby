@@ -193,6 +193,8 @@ SECTIONS {
         asm/easy_chat.o(.text);
         src/easy_chat.o(.text);
         asm/pokenav.o(.text);
+        src/pokenav.o(.text);
+        asm/pokenav.o(.text_80F708C);
         asm/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
