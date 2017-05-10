@@ -38,6 +38,136 @@ void InitDewfordTrends(void)
     sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
 }
 
+struct Test
+{
+	u8 unk0;
+};
+
+void sub_80FA220(u16 a)
+{
+    u16 i;
+    u32 sp0;
+
+    if (a != 0)
+    {
+        sp0 = a * 5;
+
+        for (i = 0; i < 5; i++)
+        {
+            //_080FA24A
+            u32 r2 = sp0;
+            u32 r4;
+			struct EasyChatPair *r5 = &gSaveBlock1.easyChatPairs[i];
+			
+            if (r5->unk1_6 == 0)
+            {
+                if (r5->unk0_0 >= (u16)r2)
+                {
+                    r5->unk0_0 -= r2;
+                    if (r5->unk0_0 == 0)
+                        r5->unk1_6 = 1;
+                    continue;
+                }
+                //_080FA290
+                r2 -= r5->unk0_0;
+				r5->unk0_0 = 0;
+                r5->unk1_6 = 1;
+            }
+            //_080FA2A0
+            r4 = r5->unk0_0 + r2;
+            if (r4 > r5->unk0_7)
+            {
+                u32 sp4 = r4 % r5->unk0_7;
+                r4 = r4 / r5->unk0_7;
+
+				r5->unk1_6 = r4 ^ 1;
+                if (r5->unk1_6)
+                    r5->unk0_0 += sp4;
+				else
+                //_080FA2FA
+					r5->unk0_0 = r5->unk0_7 - sp4;
+            }
+			else
+			{
+				//_080FA310
+				r5->unk0_0 = r4;
+
+				if (r5->unk0_0 == r5->unk0_7)
+					r5->unk1_6 = 0;
+			}
+        }
+        sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
+    }
+    //_080FA34E
+}
+
+/*
+void sub_80FA220(u16 a)
+{
+    u16 i;
+    u32 sp0;
+    u32 sp4;
+
+    if (a != 0)
+    {
+        sp0 = a * 5;
+
+        for (i = 0; i < 5; i++)
+        {
+            //_080FA24A
+            u16 r2 = sp0;
+            u32 r4;
+
+            //if ((*(u8 *)&gSaveBlock1.easyChatPairs[i] & 0x40) == 0)
+            {
+                //if ((u16)gSaveBlock1.easyChatPairs[i].unk0_0 >= (u16)(a * 5))
+                if (gSaveBlock1.easyChatPairs[i].unk0_0 >= r2)
+                {
+                    gSaveBlock1.easyChatPairs[i].unk0_0 -= r2;
+                    if (gSaveBlock1.easyChatPairs[i].unk0_0 != 0)
+						continue;
+					else
+						gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+                }
+                //_080FA290
+                r2 -= gSaveBlock1.easyChatPairs[i].unk0_0;
+                gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+            }
+            //_080FA2A0
+            r4 = gSaveBlock1.easyChatPairs[i].unk0_0 + r2;
+            if (r4 > gSaveBlock1.easyChatPairs[i].unk0_7)
+            {
+                sp4 = r4 % gSaveBlock1.easyChatPairs[i].unk0_7;
+                r4 = r4 / gSaveBlock1.easyChatPairs[i].unk0_7;
+
+                if (r4 == 0)
+                    gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+                else
+                    gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
+
+
+                if (gSaveBlock1.easyChatPairs[i].unk1_6)
+                {
+                    gSaveBlock1.easyChatPairs[i].unk0_0 += sp4;
+                    continue;
+                }
+                //_080FA2FA
+                gSaveBlock1.easyChatPairs[i].unk0_7 -= sp4;
+                continue;
+            }
+            //_080FA310
+            gSaveBlock1.easyChatPairs[i].unk0_0 = r4;
+
+            if (gSaveBlock1.easyChatPairs[i].unk0_0 == gSaveBlock1.easyChatPairs[i].unk0_7)
+                gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
+        }
+        sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
+    }
+    //_080FA34E
+}
+*/
+
+/*
 #ifdef NONMATCHING
 void sub_80FA220(u16 a)
 {
@@ -275,6 +405,7 @@ _080FA360: .4byte gSaveBlock1 + 0x2DD4\n\
     .syntax divided\n");
 }
 #endif
+*/
 
 bool8 sub_80FA364(u16 *a)
 {
