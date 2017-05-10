@@ -7,6 +7,7 @@
 #include "task.h"
 #include "pokemon.h"
 #include "species.h"
+#include "link.h"
 
 struct UnknownStruct5
 {
@@ -24,7 +25,8 @@ struct UnknownStruct6
 
 struct UnknownStruct7
 {
-    u8 filler0[2];
+    u8 unk0;
+    u8 unk1;
     u8 unk2;
     u8 unk3;
 };
@@ -38,6 +40,7 @@ struct UnknownStruct8
 };
 
 extern const struct UnknownStruct5 gUnknown_081F9674;
+extern const u8 gUnknown_081F96C8[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
@@ -62,6 +65,8 @@ extern u16 gBattleTypeFlags;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
+extern struct BattleEnigmaBerry gEnigmaBerries[];
+extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
@@ -208,4 +213,118 @@ void sub_800EAAC(void)
         _ewram4->unk8[i] = gSaveBlock1.enigmaBerry.itemEffect[i];
     _ewram4->unk7 = gSaveBlock1.enigmaBerry.holdEffect;
     _ewram4->unk1A = gSaveBlock1.enigmaBerry.holdEffectParam;
+}
+
+void sub_800EB08(void)
+{
+    s32 i;
+    s32 j;
+    
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    {
+        for (i = 0; i < 7; i++)
+        {
+            gEnigmaBerries[0].name[i] = gSaveBlock1.enigmaBerry.berry.name[i];
+            gEnigmaBerries[2].name[i] = gSaveBlock1.enigmaBerry.berry.name[i];
+        }
+        for (i = 0; i < 18; i++)
+        {
+            gEnigmaBerries[0].itemEffect[i] = gSaveBlock1.enigmaBerry.itemEffect[i];
+            gEnigmaBerries[2].itemEffect[i] = gSaveBlock1.enigmaBerry.itemEffect[i];
+        }
+        gEnigmaBerries[0].holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
+        gEnigmaBerries[2].holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
+        gEnigmaBerries[0].holdEffectParam = gSaveBlock1.enigmaBerry.holdEffectParam;
+        gEnigmaBerries[2].holdEffectParam = gSaveBlock1.enigmaBerry.holdEffectParam;
+    }
+    else
+    {
+        s32 r8;
+        struct BattleEnigmaBerry *src;
+        u8 r4;
+        
+        if (gBattleTypeFlags & BATTLE_TYPE_40)
+            r8 = 4;
+        else
+            r8 = 2;
+        for (i = 0; i < r8; i++)
+        {
+            src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
+            r4 = gLinkPlayers[i].lp_field_18;
+            
+            for (j = 0; j < 7; j++)
+                gEnigmaBerries[r4].name[j] = src->name[j];
+            for (j = 0; j < 18; j++)
+                gEnigmaBerries[r4].itemEffect[j] = src->itemEffect[j];
+            gEnigmaBerries[r4].holdEffect = src->holdEffect;
+            gEnigmaBerries[r4].holdEffectParam = src->holdEffectParam;
+        }
+    }
+}
+
+void shedinja_something(struct Pokemon *pkmn)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 language = 1;
+    
+    if (GetMonData(pkmn, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+     && GetMonData(pkmn, MON_DATA_LANGUAGE) != language)
+    {
+        GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
+        if (StringCompareWithoutExtCtrlCodes(nickname, gUnknown_081F96C8) == 0)
+            SetMonData(pkmn, MON_DATA_LANGUAGE, &language);
+    }
+}
+
+void sub_800EC9C(void)
+{
+    u8 r4;
+    u8 r5;
+    
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    r4 = GetMultiplayerId();
+    ewram[0x160CB] = r4;
+    r5 = r4 ^ 1;
+    switch (gUnknown_02024D1E)
+    {
+        case 0:
+        //_0800ED0C
+            if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+            {
+                if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
+                {
+                    ewram0.unk0 = 1;
+                    ewram0.unk1 = 1;
+                    sub_800E9EC();
+                    sub_800EAAC();
+                    SendBlock(bitmask_all_link_players_but_self(), &ewram0, 32);
+                    gUnknown_02024D1E = 1;
+                }
+            }
+            //_0800ED64
+            else
+            {
+                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gUnknown_02024D1E = 8;
+                sub_800EB08();
+            }
+            break;
+        case 1:
+        //_0800ED7C
+            if ((GetBlockReceivedStatus() & 3) == 3)
+            {
+                ResetBlockReceivedFlags();
+                if (gBlockRecvBuffer[0][0] == 0x100)
+                {
+                    if (r4 == 0)
+                        gBattleTypeFlags |= 12;
+                    else
+                        gBattleTypeFlags |= 8;
+                }
+                //_0800EDBC
+            }
+            break;
+    }
 }
