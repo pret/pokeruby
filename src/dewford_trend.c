@@ -38,243 +38,62 @@ void InitDewfordTrend(void)
     sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
 }
 
-#ifdef NONMATCHING
 void UpdateDewfordTrendPerDay(u16 a)
 {
     u16 i;
-    u32 sp0;
-    u32 sp4;
 
     if (a != 0)
     {
-        sp0 = a * 5;
+        u32 sp0 = a * 5;
 
         for (i = 0; i < 5; i++)
         {
             //_080FA24A
-            u32 r2 = sp0;
             u32 r4;
+            u32 r2 = sp0;
+            struct EasyChatPair *r5 = &gSaveBlock1.easyChatPairs[i];
 
-            if (gSaveBlock1.easyChatPairs[i].unk1_6 == 0)
+            if (r5->unk1_6 == 0)
             {
-                if (gSaveBlock1.easyChatPairs[i].unk0_0 >= r2)
+                if (r5->unk0_0 >= (u16)r2)
                 {
-                    gSaveBlock1.easyChatPairs[i].unk0_0 -= r2;
-                    if (gSaveBlock1.easyChatPairs[i].unk0_0 == 0)
-                        gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+                    r5->unk0_0 -= r2;
+                    if (r5->unk0_0 == 0)
+                        r5->unk1_6 = 1;
                     continue;
                 }
                 //_080FA290
-                r2 -= gSaveBlock1.easyChatPairs[i].unk0_0;
-                gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+                r2 -= r5->unk0_0;
+                r5->unk0_0 = 0;
+                r5->unk1_6 = 1;
             }
             //_080FA2A0
-            r4 = gSaveBlock1.easyChatPairs[i].unk0_0 + r2;
-            if (r4 > gSaveBlock1.easyChatPairs[i].unk0_7)
+            r4 = r5->unk0_0 + r2;
+            if ((u16)r4 > r5->unk0_7)
             {
-                sp4 = r4 % gSaveBlock1.easyChatPairs[i].unk0_7;
-                r4 = r4 / gSaveBlock1.easyChatPairs[i].unk0_7;
+                u32 sp4 = r4 % r5->unk0_7;
+                r4 = r4 / r5->unk0_7;
 
-                if (r4 == 0)
-                    gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
+                r5->unk1_6 = r4 ^ 1;
+                if (r5->unk1_6)
+                    r5->unk0_0 = sp4;
                 else
-                    gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
-
-
-                if (gSaveBlock1.easyChatPairs[i].unk1_6)
-                {
-                    gSaveBlock1.easyChatPairs[i].unk0_0 += sp4;
-                    continue;
-                }
                 //_080FA2FA
-                gSaveBlock1.easyChatPairs[i].unk0_7 -= sp4;
-                continue;
+                    r5->unk0_0 = r5->unk0_7 - sp4;
             }
-            //_080FA310
-            gSaveBlock1.easyChatPairs[i].unk0_0 = r4;
+            else
+            {
+                //_080FA310
+                r5->unk0_0 = r4;
 
-            if (gSaveBlock1.easyChatPairs[i].unk0_0 == gSaveBlock1.easyChatPairs[i].unk0_7)
-                gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
+                if (r5->unk0_0 == r5->unk0_7)
+                    r5->unk1_6 = 0;
+            }
         }
         sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
     }
     //_080FA34E
 }
-
-#else
-__attribute__((naked))
-void UpdateDewfordTrendPerDay(u16 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r1, 0\n\
-    bne _080FA236\n\
-    b _080FA34E\n\
-_080FA236:\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    movs r1, 0x7F\n\
-    mov r9, r1\n\
-    movs r2, 0x80\n\
-    negs r2, r2\n\
-    mov r8, r2\n\
-_080FA24A:\n\
-    ldr r2, [sp]\n\
-    mov r4, r10\n\
-    lsls r0, r4, 3\n\
-    ldr r1, _080FA28C @ =gSaveBlock1 + 0x2DD4\n\
-    adds r5, r0, r1\n\
-    ldrb r6, [r5, 0x1]\n\
-    movs r0, 0x40\n\
-    ands r0, r6\n\
-    cmp r0, 0\n\
-    bne _080FA2A0\n\
-    ldrb r4, [r5]\n\
-    lsls r3, r4, 25\n\
-    lsrs r1, r3, 25\n\
-    lsls r0, r2, 16\n\
-    lsrs r0, 16\n\
-    cmp r1, r0\n\
-    bcc _080FA290\n\
-    adds r0, r1, 0\n\
-    subs r0, r2\n\
-    mov r2, r9\n\
-    ands r0, r2\n\
-    mov r1, r8\n\
-    ands r1, r4\n\
-    orrs r1, r0\n\
-    strb r1, [r5]\n\
-    movs r0, 0x7F\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _080FA336\n\
-    movs r0, 0x40\n\
-    orrs r0, r6\n\
-    b _080FA334\n\
-    .align 2, 0\n\
-_080FA28C: .4byte gSaveBlock1 + 0x2DD4\n\
-_080FA290:\n\
-    lsrs r0, r3, 25\n\
-    subs r2, r0\n\
-    mov r0, r8\n\
-    ands r0, r4\n\
-    strb r0, [r5]\n\
-    movs r0, 0x40\n\
-    orrs r0, r6\n\
-    strb r0, [r5, 0x1]\n\
-_080FA2A0:\n\
-    ldrb r7, [r5]\n\
-    lsls r0, r7, 25\n\
-    lsrs r0, 25\n\
-    adds r4, r0, r2\n\
-    ldrh r0, [r5]\n\
-    lsls r6, r0, 18\n\
-    lsls r0, r4, 16\n\
-    lsrs r0, 16\n\
-    lsrs r1, r6, 25\n\
-    cmp r0, r1\n\
-    bls _080FA310\n\
-    adds r0, r4, 0\n\
-    bl __umodsi3\n\
-    adds r3, r0, 0\n\
-    lsrs r1, r6, 25\n\
-    adds r0, r4, 0\n\
-    str r3, [sp, 0x4]\n\
-    bl __udivsi3\n\
-    adds r4, r0, 0\n\
-    movs r0, 0x1\n\
-    eors r4, r0\n\
-    ands r4, r0\n\
-    lsls r2, r4, 6\n\
-    ldrb r0, [r5, 0x1]\n\
-    movs r4, 0x41\n\
-    negs r4, r4\n\
-    adds r1, r4, 0\n\
-    ands r0, r1\n\
-    orrs r0, r2\n\
-    strb r0, [r5, 0x1]\n\
-    movs r1, 0x40\n\
-    ands r0, r1\n\
-    ldr r3, [sp, 0x4]\n\
-    cmp r0, 0\n\
-    beq _080FA2FA\n\
-    adds r1, r3, 0\n\
-    mov r0, r9\n\
-    ands r1, r0\n\
-    mov r0, r8\n\
-    ands r0, r7\n\
-    orrs r0, r1\n\
-    strb r0, [r5]\n\
-    b _080FA336\n\
-_080FA2FA:\n\
-    ldrh r0, [r5]\n\
-    lsls r0, 18\n\
-    lsrs r0, 25\n\
-    subs r0, r3\n\
-    mov r1, r9\n\
-    ands r0, r1\n\
-    mov r1, r8\n\
-    ands r1, r7\n\
-    orrs r1, r0\n\
-    strb r1, [r5]\n\
-    b _080FA336\n\
-_080FA310:\n\
-    mov r2, r9\n\
-    ands r4, r2\n\
-    mov r0, r8\n\
-    ands r0, r7\n\
-    orrs r0, r4\n\
-    strb r0, [r5]\n\
-    lsls r0, 25\n\
-    ldrh r1, [r5]\n\
-    lsls r1, 18\n\
-    lsrs r0, 25\n\
-    lsrs r1, 25\n\
-    cmp r0, r1\n\
-    bne _080FA336\n\
-    ldrb r0, [r5, 0x1]\n\
-    movs r4, 0x41\n\
-    negs r4, r4\n\
-    adds r1, r4, 0\n\
-    ands r0, r1\n\
-_080FA334:\n\
-    strb r0, [r5, 0x1]\n\
-_080FA336:\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r10, r0\n\
-    cmp r0, 0x4\n\
-    bls _080FA24A\n\
-    ldr r0, _080FA360 @ =gSaveBlock1 + 0x2DD4\n\
-    movs r1, 0x5\n\
-    movs r2, 0\n\
-    bl sub_80FA46C\n\
-_080FA34E:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080FA360: .4byte gSaveBlock1 + 0x2DD4\n\
-    .syntax divided\n");
-}
-#endif
 
 bool8 sub_80FA364(u16 *a)
 {
