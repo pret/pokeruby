@@ -1498,7 +1498,7 @@ u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
     {
         for (i = 0; i < 6; i++)  //_08044A9A
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_40) // && b[i] != 0xFFFF && b[i]
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI) // && b[i] != 0xFFFF && b[i]
             {
                 if (b[i].unk0 == 0xFFFF)
                 {
@@ -1546,7 +1546,7 @@ u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
         // Mismatch occurrs in this loop initialization
         for (i = 0; i < 6; i++)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_40)
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (b[i].unk0 == 0xFFFF)
                 {
