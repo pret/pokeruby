@@ -7537,8 +7537,8 @@ _0808082E:
 	bx r1
 	thumb_func_end TranslateWeatherNum
 
-	thumb_func_start sub_8080834
-sub_8080834: @ 8080834
+	thumb_func_start UpdateWeatherPerDay
+UpdateWeatherPerDay: @ 8080834
 	lsls r0, 16
 	ldr r2, _08080850 @ =gSaveBlock1
 	adds r2, 0x2F
@@ -7554,7 +7554,7 @@ sub_8080834: @ 8080834
 	bx lr
 	.align 2, 0
 _08080850: .4byte gSaveBlock1
-	thumb_func_end sub_8080834
+	thumb_func_end UpdateWeatherPerDay
 
 	thumb_func_start UpdateRainCounter
 UpdateRainCounter: @ 8080854

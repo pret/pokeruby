@@ -517,7 +517,7 @@ bool8 sub_8068894(void)
     }
     if (SafariZoneTakeStep() == TRUE)
         return TRUE;
-    if (sub_810D9B0(1) == TRUE)
+    if (CountSSTidalStep(1) == TRUE)
     {
         ScriptContext1_SetupScript(gUnknown_0815FD0D);
         return TRUE;

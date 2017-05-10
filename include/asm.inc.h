@@ -166,7 +166,7 @@ u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
 bool8 IsDoubleBattle();
 
-// asm/field_screeneffect.o
+// asm/field_weather.o
 void SetWeather(u32);
 
 // src/field_fadetransition.o
@@ -218,7 +218,7 @@ void sub_808AB90(void);
 u8 pokemon_order_func(u8);
 
 // asm/pokemon_storage_system.o
-void sub_80961D8(void);
+void ResetPokemonStorageSystem(void);
 
 // asm/pokemon_icon.o
 u8 sub_809D3A4(u16 arg0, void (*)(struct Sprite *), int, u8 arg3, u32 arg4);
@@ -236,8 +236,8 @@ bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 
 // asm/mail_data.o
-void sub_80A2B18(void);
-u16 sub_80A2D64(u16, u8 *);
+void ClearMailData(void);
+u16 MailSpeciesToSpecies(u16, u8 *);
 
 // src/map_name_popup.o
 void ShowMapNamePopup(void);
@@ -245,7 +245,7 @@ void HideMapNamePopup();
 
 // asm/item_menu.o
 void sub_80A3684(void);
-void sub_80A3714(void);
+void ClearBag(void);
 void sub_80A53F8(void);
 void sub_80A5B40(void);
 void sub_80A68CC();
@@ -254,7 +254,7 @@ void sub_80A7DD4(void);
 u8 sub_80A7E5C(u8);
 
 // asm/contest.o
-void sub_80AB1B0(void);
+void ResetLinkContestBoolean(void);
 void sub_80AE098(u8);
 void sub_80AE398(u8, u8);
 u32 sub_80AE770(u8, u8);
@@ -269,16 +269,16 @@ void CreateDecorationShop1Menu(void *);
 void CreateDecorationShop2Menu(void *);
 
 // asm/secret_base.o
-void sub_80BB5B4(void);
+void ResetSecretBases(void);
 u8 sub_80BBB24(void);
 void sub_80BBCCC(u8);
 u8 *sub_80BCCE8(void);
 void sub_80BD674(void *, u32, u8);
 
 // asm/tv.o
-void sub_80BD7A8(void);
+void ClearTVShowData(void);
 void UpdateTVScreensOnMap(u32, u32);
-void sub_80BDAB4(void);
+void ResetGabbyAndTy(void);
 u8 sub_80BDEAC(u8 *);
 void sub_80BE160(TVShow *);
 void sub_80BE8EC(u16);
@@ -326,7 +326,7 @@ void sub_80C8EBC(u8);
 void sub_80C8F34(u8);
 
 // asm/easy_chat.o
-void sub_80E6764(void);
+void InitEasyChatPhrases(void);
 u8* sub_80EB3FC(u8 *, u16);
 u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 
@@ -353,7 +353,7 @@ u8 *CopyLocationName(u8 *dest, u8 location);
 void PlaySlotMachine(u8, void *);
 
 // asm/pokeblock.o
-void sub_810C994(void);
+void ClearPokeblocks(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
 
@@ -365,12 +365,12 @@ u8 IsMirageIslandPresent(void);
 
 // asm/field_specials.o
 void ResetCyclingRoadChallengeData(void);
-bool32 sub_810D9B0(u16);
-u8 sub_810D9EC(s8 *, s8 *, s16 *, s16 *);
+bool32 CountSSTidalStep(u16);
+u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *);
 void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
 void ScriptShowElevatorMenu(void);
 u8 GetLeadMonIndex(void);
-void sub_810FA54(void);
+void ResetFanClub(void);
 
 // asm/battle_records.o
 void InitLinkBattleRecords(void);
@@ -410,7 +410,7 @@ u8 sub_8128124(u8 id);
 void sub_8132670(void);
 
 // asm/decoration_inventory.o
-void sub_8133F80(void);
+void ClearDecorationInventories(void);
 u8 sub_8133FE4(u8);
 u8 IsThereStorageSpaceForDecoration(u8);
 u8 sub_8134074(u8);

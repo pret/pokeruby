@@ -420,7 +420,7 @@ sub_80F931C: @ 80F931C
 	cmp r0, 0x1
 	bne _080F933C
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -33,8 +33,8 @@ ResetSSTidalFlag: @ 810D9A0
 _0810D9AC: .4byte 0x0000082d
 	thumb_func_end ResetSSTidalFlag
 
-	thumb_func_start sub_810D9B0
-sub_810D9B0: @ 810D9B0
+	thumb_func_start CountSSTidalStep
+CountSSTidalStep: @ 810D9B0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -64,10 +64,10 @@ _0810D9E6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810D9B0
+	thumb_func_end CountSSTidalStep
 
-	thumb_func_start sub_810D9EC
-sub_810D9EC: @ 810D9EC
+	thumb_func_start GetSSTidalLocation
+GetSSTidalLocation: @ 810D9EC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -179,7 +179,7 @@ _0810DABE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810D9EC
+	thumb_func_end GetSSTidalLocation
 
 	thumb_func_start GetLinkPartnerNames
 GetLinkPartnerNames: @ 810DAC8
@@ -231,8 +231,8 @@ _0810DB20: .4byte gUnknown_083D1464
 _0810DB24: .4byte gLinkPlayers + 0x8
 	thumb_func_end GetLinkPartnerNames
 
-	thumb_func_start sub_810DB28
-sub_810DB28: @ 810DB28
+	thumb_func_start SpawnBerryBlenderLinkPlayerSprites
+SpawnBerryBlenderLinkPlayerSprites: @ 810DB28
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -403,10 +403,10 @@ _0810DC5C:
 	.align 2, 0
 _0810DC74: .4byte gLinkPlayers
 _0810DC78: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_810DB28
+	thumb_func_end SpawnBerryBlenderLinkPlayerSprites
 
-	thumb_func_start sub_810DC7C
-sub_810DC7C: @ 810DC7C
+	thumb_func_start MauvilleGymSpecial1
+MauvilleGymSpecial1: @ 810DC7C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _0810DC9C @ =gUnknown_083F8364
@@ -444,10 +444,10 @@ _0810DCB6:
 	bx r0
 	.align 2, 0
 _0810DCC8: .4byte 0x00000205
-	thumb_func_end sub_810DC7C
+	thumb_func_end MauvilleGymSpecial1
 
-	thumb_func_start sub_810DCCC
-sub_810DCCC: @ 810DCCC
+	thumb_func_start MauvilleGymSpecial2
+MauvilleGymSpecial2: @ 810DCCC
 	push {r4-r6,lr}
 	movs r5, 0xC
 _0810DCD0:
@@ -681,10 +681,10 @@ _0810DED0:
 	bx r0
 	.align 2, 0
 _0810DED8: .4byte 0x00000251
-	thumb_func_end sub_810DCCC
+	thumb_func_end MauvilleGymSpecial2
 
-	thumb_func_start sub_810DEDC
-sub_810DEDC: @ 810DEDC
+	thumb_func_start MauvilleGymSpecial3
+MauvilleGymSpecial3: @ 810DEDC
 	push {r4-r6,lr}
 	ldr r4, _0810DF18 @ =gUnknown_083F8364
 	movs r5, 0x2
@@ -850,10 +850,10 @@ _0810E066:
 	bx r0
 	.align 2, 0
 _0810E06C: .4byte 0x00000251
-	thumb_func_end sub_810DEDC
+	thumb_func_end MauvilleGymSpecial3
 
-	thumb_func_start sub_810E070
-sub_810E070: @ 810E070
+	thumb_func_start PetalburgGymSpecial1
+PetalburgGymSpecial1: @ 810E070
 	push {lr}
 	ldr r0, _0810E090 @ =gUnknown_02039258
 	movs r1, 0
@@ -862,7 +862,7 @@ sub_810E070: @ 810E070
 	strb r1, [r0]
 	movs r0, 0x2C
 	bl PlaySE
-	ldr r0, _0810E098 @ =sub_810E09C
+	ldr r0, _0810E098 @ =Task_PetalburgGym
 	movs r1, 0x8
 	bl CreateTask
 	pop {r0}
@@ -870,11 +870,11 @@ sub_810E070: @ 810E070
 	.align 2, 0
 _0810E090: .4byte gUnknown_02039258
 _0810E094: .4byte gUnknown_02039259
-_0810E098: .4byte sub_810E09C
-	thumb_func_end sub_810E070
+_0810E098: .4byte Task_PetalburgGym
+	thumb_func_end PetalburgGymSpecial1
 
-	thumb_func_start sub_810E09C
-sub_810E09C: @ 810E09C
+	thumb_func_start Task_PetalburgGym
+Task_PetalburgGym: @ 810E09C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -893,7 +893,7 @@ sub_810E09C: @ 810E09C
 	lsls r1, 1
 	adds r1, r2
 	ldrh r1, [r1]
-	bl sub_810E104
+	bl PetalburgGymFunc
 	movs r0, 0
 	strb r0, [r4]
 	ldrb r0, [r5]
@@ -920,10 +920,10 @@ _0810E0FC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810E09C
+	thumb_func_end Task_PetalburgGym
 
-	thumb_func_start sub_810E104
-sub_810E104: @ 810E104
+	thumb_func_start PetalburgGymFunc
+PetalburgGymFunc: @ 810E104
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1078,22 +1078,22 @@ _0810E21E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810E104
+	thumb_func_end PetalburgGymFunc
 
-	thumb_func_start sub_810E230
-sub_810E230: @ 810E230
+	thumb_func_start PetalburgGymSpecial2
+PetalburgGymSpecial2: @ 810E230
 	push {lr}
 	ldr r0, _0810E244 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r1, _0810E248 @ =gUnknown_083F8376
 	ldrh r1, [r1, 0x8]
-	bl sub_810E104
+	bl PetalburgGymFunc
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810E244: .4byte gSpecialVar_0x8004
 _0810E248: .4byte gUnknown_083F8376
-	thumb_func_end sub_810E230
+	thumb_func_end PetalburgGymSpecial2
 
 	thumb_func_start ShowFieldMessageStringVar4
 ShowFieldMessageStringVar4: @ 810E24C
@@ -3695,8 +3695,8 @@ _0810F612:
 	bx r1
 	thumb_func_end sub_810F5BC
 
-	thumb_func_start sub_810F618
-sub_810F618: @ 810F618
+	thumb_func_start SetShoalItemFlag
+SetShoalItemFlag: @ 810F618
 	push {lr}
 	ldr r0, _0810F624 @ =0x0000085f
 	bl FlagSet
@@ -3704,7 +3704,7 @@ sub_810F618: @ 810F618
 	bx r0
 	.align 2, 0
 _0810F624: .4byte 0x0000085f
-	thumb_func_end sub_810F618
+	thumb_func_end SetShoalItemFlag
 
 	thumb_func_start PutZigzagoonInPlayerParty
 PutZigzagoonInPlayerParty: @ 810F628
@@ -4270,8 +4270,8 @@ _0810FA4A:
 _0810FA50: .4byte gStringVar1
 	thumb_func_end sub_810F9AC
 
-	thumb_func_start sub_810FA54
-sub_810FA54: @ 810FA54
+	thumb_func_start ResetFanClub
+ResetFanClub: @ 810FA54
 	ldr r0, _0810FA68 @ =gSaveBlock1
 	ldr r2, _0810FA6C @ =0x000013c2
 	adds r1, r0, r2
@@ -4285,7 +4285,7 @@ sub_810FA54: @ 810FA54
 _0810FA68: .4byte gSaveBlock1
 _0810FA6C: .4byte 0x000013c2
 _0810FA70: .4byte 0x000013c4
-	thumb_func_end sub_810FA54
+	thumb_func_end ResetFanClub
 
 	thumb_func_start sub_810FA74
 sub_810FA74: @ 810FA74

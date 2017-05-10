@@ -228,7 +228,7 @@ mon_icon_convert_unown_species_id: @ 809D434
 	cmp r2, SPECIES_UNOWN
 	bne _0809D45E
 	adds r0, r1, 0
-	bl sub_809D474
+	bl GetUnownLetterByPersonality
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -258,8 +258,8 @@ _0809D46C:
 	bx r1
 	thumb_func_end mon_icon_convert_unown_species_id
 
-	thumb_func_start sub_809D474
-sub_809D474: @ 809D474
+	thumb_func_start GetUnownLetterByPersonality
+GetUnownLetterByPersonality: @ 809D474
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0xC0
@@ -285,7 +285,7 @@ sub_809D474: @ 809D474
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D474
+	thumb_func_end GetUnownLetterByPersonality
 
 	thumb_func_start sub_809D4A8
 sub_809D4A8: @ 809D4A8
@@ -295,7 +295,7 @@ sub_809D4A8: @ 809D4A8
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_80A2D64
+	bl MailSpeciesToSpecies
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, SPECIES_UNOWN

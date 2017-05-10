@@ -1186,8 +1186,8 @@ _080961D0: .4byte sub_8096130
 _080961D4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80961A8
 
-	thumb_func_start sub_80961D8
-sub_80961D8: @ 80961D8
+	thumb_func_start ResetPokemonStorageSystem
+ResetPokemonStorageSystem: @ 80961D8
 	push {r4-r7,lr}
 	ldr r1, _08096258 @ =gPokemonStorage
 	movs r0, 0
@@ -1256,7 +1256,7 @@ _0809623E:
 _08096258: .4byte gPokemonStorage
 _0809625C: .4byte gPokemonStorage + 0x8344
 _08096260: .4byte gPCText_BOX
-	thumb_func_end sub_80961D8
+	thumb_func_end ResetPokemonStorageSystem
 
 	thumb_func_start sub_8096264
 sub_8096264: @ 8096264
@@ -2620,7 +2620,7 @@ _08096D66:
 	ldr r1, _08096D8C @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08096E4C
@@ -2712,7 +2712,7 @@ _08096E30:
 	ldr r1, _08096E58 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08096E5C
@@ -3102,7 +3102,7 @@ _08097190:
 	ldr r1, _080971C4 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08097210
@@ -3145,7 +3145,7 @@ _08097200:
 	ldr r1, _08097218 @ =0x000011f2
 	adds r0, r4, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809721C
@@ -5891,196 +5891,7 @@ _08098892:
 	bx r1
 	thumb_func_end sub_8098830
 
-	thumb_func_start sub_8098898
-sub_8098898: @ 8098898
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r0, 0xA
-	movs r1, 0x10
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r1, _080988C4 @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0x6
-	bls _080988B8
-	b _080989F4
-_080988B8:
-	lsls r0, 2
-	ldr r1, _080988C8 @ =_080988CC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080988C4: .4byte gUnknown_083B6DF4
-_080988C8: .4byte _080988CC
-	.align 2, 0
-_080988CC:
-	.4byte _080989F4
-	.4byte _08098930
-	.4byte _080988E8
-	.4byte _08098974
-	.4byte _08098954
-	.4byte _08098910
-	.4byte _080989B8
-_080988E8:
-	ldr r4, _08098904 @ =0x02002694
-	ldr r1, _08098908 @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl StringCopy
-	adds r2, r0, 0
-	ldr r0, _0809890C @ =0xffffeb66
-	adds r4, r0
-	adds r0, r2, 0
-	adds r1, r4, 0
-	b _080989FE
-	.align 2, 0
-_08098904: .4byte 0x02002694
-_08098908: .4byte gUnknown_083B6DF4
-_0809890C: .4byte 0xffffeb66
-_08098910:
-	ldr r4, _08098928 @ =0x02002694
-	ldr r1, _0809892C @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl StringCopy
-	adds r2, r0, 0
-	adds r4, 0x50
-	adds r1, r4, 0
-	b _080989FE
-	.align 2, 0
-_08098928: .4byte 0x02002694
-_0809892C: .4byte gUnknown_083B6DF4
-_08098930:
-	ldr r0, _08098948 @ =0x02002694
-	ldr r2, _0809894C @ =0xffffeb66
-	adds r1, r0, r2
-	bl StringCopy
-	adds r2, r0, 0
-	ldr r1, _08098950 @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r2, 0
-	b _080989FE
-	.align 2, 0
-_08098948: .4byte 0x02002694
-_0809894C: .4byte 0xffffeb66
-_08098950: .4byte gUnknown_083B6DF4
-_08098954:
-	ldr r0, _0809896C @ =0x02002694
-	adds r1, r0, 0
-	adds r1, 0x50
-	bl StringCopy
-	adds r2, r0, 0
-	ldr r1, _08098970 @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r2, 0
-	b _080989FE
-	.align 2, 0
-_0809896C: .4byte 0x02002694
-_08098970: .4byte gUnknown_083B6DF4
-_08098974:
-	ldr r1, _080989AC @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r6, [r0]
-	adds r0, r6, 0
-	bl StringLength
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r4, r6, r4
-	adds r4, 0x1
-	ldr r5, _080989B0 @ =0x02002694
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl StringCopy
-	adds r2, r0, 0
-	ldr r0, _080989B4 @ =0xffffeb66
-	adds r5, r0
-	adds r0, r2, 0
-	adds r1, r5, 0
-	bl StringCopy
-	adds r2, r0, 0
-	adds r1, r4, 0
-	b _080989FE
-	.align 2, 0
-_080989AC: .4byte gUnknown_083B6DF4
-_080989B0: .4byte 0x02002694
-_080989B4: .4byte 0xffffeb66
-_080989B8:
-	ldr r1, _080989EC @ =gUnknown_083B6DF4
-	lsls r0, r5, 3
-	adds r0, r1
-	ldr r6, [r0]
-	adds r0, r6, 0
-	bl StringLength
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r4, r6, r4
-	subs r4, 0x1
-	ldr r5, _080989F0 @ =0x02002694
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl StringCopy
-	adds r2, r0, 0
-	subs r0, r2, 0x1
-	adds r5, 0x50
-	adds r1, r5, 0
-	bl StringCopy
-	adds r2, r0, 0
-	adds r1, r4, 0
-	b _080989FE
-	.align 2, 0
-_080989EC: .4byte gUnknown_083B6DF4
-_080989F0: .4byte 0x02002694
-_080989F4:
-	ldr r0, _08098A2C @ =0x02002694
-	ldr r2, _08098A30 @ =gUnknown_083B6DF4
-	lsls r1, r5, 3
-	adds r1, r2
-	ldr r1, [r1]
-_080989FE:
-	bl StringCopy
-	adds r2, r0, 0
-	ldr r0, _08098A34 @ =0x020026a6
-	adds r3, r0, 0
-	subs r3, 0x12
-	cmp r2, r0
-	bcs _08098A18
-	movs r1, 0
-_08098A10:
-	strb r1, [r2]
-	adds r2, 0x1
-	cmp r2, r0
-	bcc _08098A10
-_08098A18:
-	movs r0, 0xFF
-	strb r0, [r2]
-	adds r0, r3, 0
-	movs r1, 0xB
-	movs r2, 0x11
-	bl MenuPrint
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08098A2C: .4byte 0x02002694
-_08098A30: .4byte gUnknown_083B6DF4
-_08098A34: .4byte 0x020026a6
-	thumb_func_end sub_8098898
+.section .text_8098A38
 
 	thumb_func_start sub_8098A38
 sub_8098A38: @ 8098A38

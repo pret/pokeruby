@@ -31,8 +31,6 @@ extern u8 gUnknown_0300071C[];
 extern u8 gOtherText_MixingComplete[];
 extern u8 gOtherText_MixingRecordsWithFriend[];
 extern bool8 gReceivedRemoteLinkPlayers;
-extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 
 #define BUFFER_CHUNK_SIZE 200
 

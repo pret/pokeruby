@@ -3,7 +3,7 @@
 
 void write_word_to_mem(u32 var, u8 *dataPtr);
 void copy_word_to_mem(u8 *copyTo, u8 *copyFrom);
-void set_player_trainer_id(void);
+void InitPlayerTrainerId(void);
 void SetDefaultOptions(void);
 void ClearPokedexFlags(void);
 void sub_8052DA8(void);

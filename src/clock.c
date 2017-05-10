@@ -8,17 +8,17 @@
 #include "rtc.h"
 #include "wallclock.h"
 
-extern void sub_80FA220(u16);
-extern void sub_80BE8C4(u16);
-extern void sub_8080834(u16);
+extern void UpdateDewfordTrendPerDay(u16);
+extern void UpdateTVShowsPerDay(u16);
+extern void UpdateWeatherPerDay(u16);
 extern void UpdatePartyPokerusTime(u16);
 extern void UpdateMirageRnd(u16);
 extern void UpdateBirchState(u16);
-extern void sub_810F618(u16);
+extern void SetShoalItemFlag(u16);
 
 static void InitTimeBasedEvents(void);
 static void UpdatePerDay(struct Time *time);
-static void UpdatePerSecond(struct Time *time);
+static void UpdatePerMinute(struct Time *time);
 static void ReturnFromStartWallClock(void);
 
 static void InitTimeBasedEvents(void)
@@ -35,7 +35,7 @@ void DoTimeBasedEvents(void)
     {
         RtcCalcLocalTime();
         UpdatePerDay(&gLocalTime);
-        UpdatePerSecond(&gLocalTime);
+        UpdatePerMinute(&gLocalTime);
     }
 }
 
@@ -49,32 +49,32 @@ static void UpdatePerDay(struct Time *time)
     {
         newDays = time->days - days;
         ClearUpperFlags();
-        sub_80FA220(newDays);
-        sub_80BE8C4(newDays);
-        sub_8080834(newDays);
+        UpdateDewfordTrendPerDay(newDays);
+        UpdateTVShowsPerDay(newDays);
+        UpdateWeatherPerDay(newDays);
         UpdatePartyPokerusTime(newDays);
         UpdateMirageRnd(newDays);
         UpdateBirchState(newDays);
-        sub_810F618(newDays);
+        SetShoalItemFlag(newDays);
         SetRandomLotteryNumber(newDays);
         *varPtr = time->days;
     }
 }
 
-static void UpdatePerSecond(struct Time *time)
+static void UpdatePerMinute(struct Time *time)
 {
     struct Time newTime;
-    s32 totalSeconds;
+    s32 minutes;
 
     CalcTimeDifference(&newTime, &gSaveBlock2.lastBerryTreeUpdate, time);
-    totalSeconds = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
+    minutes = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
 
     // there's no way to get the correct assembly other than with this nested if check. so dumb.
-    if (totalSeconds != 0)
+    if (minutes != 0)
     {
-        if (totalSeconds >= 0)
+        if (minutes >= 0)
         {
-            BerryTreeTimeUpdate(totalSeconds);
+            BerryTreeTimeUpdate(minutes);
             gSaveBlock2.lastBerryTreeUpdate = *time;
         }
     }

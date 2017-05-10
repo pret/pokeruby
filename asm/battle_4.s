@@ -15879,7 +15879,7 @@ _08023C3E:
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08023C78 @ =sub_807AD58
+	ldr r3, _08023C78 @ =ReshowBattleScreenAfterMenu
 	ldr r4, _08023C7C @ =word_2024E82
 	ldrh r4, [r4]
 	str r4, [sp]
@@ -15894,7 +15894,7 @@ _08023C68: .4byte gPaletteFade
 _08023C6C: .4byte gPlayerParty
 _08023C70: .4byte 0x00016018
 _08023C74: .4byte gPlayerPartyCount
-_08023C78: .4byte sub_807AD58
+_08023C78: .4byte ReshowBattleScreenAfterMenu
 _08023C7C: .4byte word_2024E82
 _08023C80: .4byte 0x0001601a
 _08023C84:

@@ -709,8 +709,8 @@ _080A370A:
 	bx r0
 	thumb_func_end sub_80A36B8
 
-	thumb_func_start sub_80A3714
-sub_80A3714: @ 80A3714
+	thumb_func_start ClearBag
+ClearBag: @ 80A3714
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080A373C @ =gBagPockets
@@ -731,7 +731,7 @@ _080A371A:
 	bx r0
 	.align 2, 0
 _080A373C: .4byte gBagPockets
-	thumb_func_end sub_80A3714
+	thumb_func_end ClearBag
 
 	thumb_func_start sub_80A3740
 sub_80A3740: @ 80A3740
@@ -3413,7 +3413,7 @@ _080A4BB4: .4byte 0x00000103
 _080A4BB8: .4byte gOtherText_Walk
 _080A4BBC:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

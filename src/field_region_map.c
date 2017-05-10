@@ -64,7 +64,7 @@ void CB2_FieldInitRegionMap(void)
     SetUpWindowConfig(&gWindowConfig_81E709C);
     InitMenuWindow(&gWindowConfig_81E709C);
     MenuZeroFillScreen();
-    REG_BG0CNT = 7936;
+    REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
     MenuDrawTextWindow(21, 0, 29, 3);
     sub_8072BD8(gOtherText_Hoenn, 0x16, 1, 0x38);
     MenuDrawTextWindow(16, 16, 29, 19);
@@ -94,7 +94,7 @@ void sub_813EFDC(void)
     switch (unk_2000000.unk888)
     {
     case 0:
-        REG_DISPCNT = 5441;
+        REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         unk_2000000.unk888++;
         break;
     case 1:

@@ -7,7 +7,7 @@
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "field_screeneffect.h"
+#include "field_weather.h"
 #include "main.h"
 #include "map_constants.h"
 #include "metatile_behavior.h"

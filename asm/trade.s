@@ -7639,7 +7639,7 @@ sub_804BA94: @ 804BA94
 	lsls r0, 2
 	ldr r1, _0804BB68 @ =gSaveBlock1 + 0x2B4C
 	adds r0, r1
-	bl sub_80A2B40
+	bl ClearMailStruct
 _0804BAE8:
 	ldr r4, _0804BB6C @ =gUnknown_03004828
 	ldr r0, [r4]
@@ -7678,7 +7678,7 @@ _0804BB28:
 	ldr r0, _0804BB70 @ =gUnknown_02029700
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80A2D88
+	bl GiveMailToMon2
 _0804BB3E:
 	mov r0, r9
 	bl sub_804BA18
@@ -11262,7 +11262,7 @@ sub_804D948: @ 804D948
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _0804DAC0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804DAB4

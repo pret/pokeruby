@@ -65,7 +65,6 @@ extern u8 sub_8078874(u8);
 extern void sub_8078914();
 extern u8 sub_80AEB1C();
 extern void sub_80E4EF8(int, int, int, int, u16, u8, int);
-extern void sub_800D238();
 extern u8 sub_80789BC();
 extern void sub_80AB2AC(void);
 extern void sub_800D7B8(void);

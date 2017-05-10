@@ -117,6 +117,7 @@
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
+#define UNOWN_FORM_COUNT 28
 
 enum {
     NATURE_HARDY,

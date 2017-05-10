@@ -76,7 +76,7 @@ SECTIONS {
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
         asm/egg_hatch.o(.text);
-		src/battle_interface.o(.text);
+        src/battle_interface.o(.text);
         src/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
@@ -121,16 +121,18 @@ SECTIONS {
         src/battle_anim.o(.text);
         src/rom_8077ABC.o(.text);
         src/task.o(.text);
-        asm/rom5.o(.text);
+        asm/reshow_battle_screen.o(.text);
         asm/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
-        src/field_screeneffect.o(.text);
-        asm/field_screeneffect.o(.text);
+        src/field_weather.o(.text);
+        asm/field_weather.o(.text);
         src/field_fadetransition.o(.text);
         asm/field_fadetransition.o(.text);
-        asm/rom_8080874.o(.text);
+        asm/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
+        src/cable_club.o(.text);
+        asm/cable_club.o(.text_80830E4);
         src/mori_debug_menu.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
@@ -147,6 +149,8 @@ SECTIONS {
         asm/rom_8094928.o(.text);
         src/battle_party_menu.o(.text);
         asm/pokemon_storage_system.o(.text);
+        src/pokemon_storage_system.o(.text);
+        asm/pokemon_storage_system.o(.text_8098A38);
         asm/pokemon_icon.o(.text);
         asm/pokemon_summary_screen.o(.text);
         src/pokemon_summary_screen.o(.text);
@@ -154,7 +158,6 @@ SECTIONS {
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
         src/mail_data.o(.text);
-        asm/mail_data.o(.text);
         src/map_name_popup.o(.text);
         asm/item_menu.o(.text);
         src/battle_anim_80A7E7C.o(.text);
@@ -172,6 +175,8 @@ SECTIONS {
         asm/record_mixing.o(.text);
         asm/sound_check_menu.o(.text);
         asm/secret_base.o(.text);
+        src/secret_base.o(.text);
+        asm/secret_base.o(.text_80BC1D0);
         asm/tv.o(.text);
         src/tv.o(.text);
         asm/tv.o(.text_80BE8EC);
@@ -195,6 +200,8 @@ SECTIONS {
         asm/easy_chat.o(.text);
         src/easy_chat.o(.text);
         asm/pokenav.o(.text);
+        src/pokenav.o(.text);
+        asm/pokenav.o(.text_80F708C);
         asm/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
@@ -209,6 +216,9 @@ SECTIONS {
         src/decoration.o(.text);
         asm/decoration.o(.text_80FE868);
         asm/slot_machine.o(.text);
+        src/slot_machine.o(.text);
+        asm/slot_machine.o(.text_8104D30)
+        src/slot_machine.o(.text_b);
         src/contest_painting.o(.text);
         src/battle_ai.o(.text);
         asm/trader.o(.text);
@@ -385,7 +395,7 @@ SECTIONS {
         data/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
-        data/field_screeneffect.o(.rodata);
+        data/field_weather.o(.rodata);
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
