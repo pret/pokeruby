@@ -114,7 +114,7 @@ void sub_8010824(void);
 
 void sub_800E7C4(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_40)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         sub_800B858();
         SetMainCallback2(sub_800F104);
@@ -179,7 +179,7 @@ void sub_800E7F8(void)
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(sub_800FCFC);
     setup_poochyena_battle();
-    if (gBattleTypeFlags & BATTLE_TYPE_40)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         SetMainCallback2(sub_800F298);
     else
         SetMainCallback2(sub_800EC9C);
@@ -268,7 +268,7 @@ void sub_800EB08(void)
         struct BattleEnigmaBerry *src;
         u8 r4;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_40)
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             r8 = 4;
         else
             r8 = 2;
