@@ -22849,67 +22849,7 @@ sub_80F6FFC: @ 80F6FFC
 _080F7008: .4byte REG_BLDCNT
 	thumb_func_end sub_80F6FFC
 
-	thumb_func_start sub_80F700C
-sub_80F700C: @ 80F700C
-	push {r4,r5,lr}
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r2, _080F7078 @ =gUnknown_083DFEC4
-	ldr r4, [r2]
-	lsls r2, r1, 3
-	adds r2, r4, r2
-	ldr r3, _080F707C @ =0x0000cee8
-	adds r2, r3
-	ldrh r3, [r2]
-	lsls r2, r3, 2
-	adds r2, r3
-	lsls r2, 3
-	ldr r3, _080F7080 @ =gTrainers
-	adds r5, r2, r3
-	adds r3, r0, 0
-	ldr r0, _080F7084 @ =0x0000d158
-	adds r4, r0
-	ldrh r4, [r4]
-	cmp r1, r4
-	bcs _080F7060
-	ldrb r1, [r5, 0x1]
-	movs r0, 0xD
-	muls r1, r0
-	ldr r0, _080F7088 @ =gTrainerClassNames
-	adds r1, r0
-	adds r0, r3, 0
-	bl StringCopy
-	adds r3, r0, 0
-	movs r0, 0xFC
-	strb r0, [r3]
-	movs r0, 0x13
-	strb r0, [r3, 0x1]
-	movs r0, 0x4B
-	strb r0, [r3, 0x2]
-	adds r3, 0x3
-	adds r1, r5, 0x4
-	adds r0, r3, 0
-	bl StringCopy
-	adds r3, r0, 0
-_080F7060:
-	movs r0, 0xFC
-	strb r0, [r3]
-	movs r0, 0x13
-	strb r0, [r3, 0x1]
-	movs r0, 0x80
-	strb r0, [r3, 0x2]
-	movs r0, 0xFF
-	strb r0, [r3, 0x3]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080F7078: .4byte gUnknown_083DFEC4
-_080F707C: .4byte 0x0000cee8
-_080F7080: .4byte gTrainers
-_080F7084: .4byte 0x0000d158
-_080F7088: .4byte gTrainerClassNames
-	thumb_func_end sub_80F700C
+.section .text_80F708C
 
 	thumb_func_start sub_80F708C
 sub_80F708C: @ 80F708C

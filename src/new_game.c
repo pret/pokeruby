@@ -145,7 +145,7 @@ void NewGameInitData(void)
     ClearDecorationInventories();
     InitEasyChatPhrases();
     SetMauvilleOldMan();
-    InitDewfordTrends();
+    InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();

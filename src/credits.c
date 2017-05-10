@@ -474,8 +474,8 @@ void task_a_8143D04(u8 taskIdA)
         BeginNormalPaletteFade(-1, 0, 16, 0, 0);
         REG_BG3HOFS = 0;
         REG_BG3VOFS = 32;
-        REG_BG3CNT = 0x703;
-        REG_DISPCNT = 0x1940;
+        REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
         gMain.state = 0;
         gUnknown_0203935C = 0;
@@ -518,13 +518,13 @@ static void task_a_8143F3C(u8 taskIdA)
     FreeAllSpritePalettes();
     BeginNormalPaletteFade(-1, 8, 16, 0, 0);
 
-    REG_BG0CNT = 0x700;
+    REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     backup = REG_IME;
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = backup;
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-    REG_DISPCNT = 0x140;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
 
     gTasks[taskIdA].data[TDA_0] = 0x100;
     gTasks[taskIdA].func = task_a_8143FDC;

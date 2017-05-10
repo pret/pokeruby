@@ -1130,7 +1130,7 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
     return TRUE;
 }
 
-void BerryTreeTimeUpdate(int time)
+void BerryTreeTimeUpdate(s32 minutes)
 {
     int i;
     struct BerryTree *tree;
@@ -1141,27 +1141,27 @@ void BerryTreeTimeUpdate(int time)
 
         if (tree->berry && tree->stage && !tree->growthSparkle)
         {
-            if (time >= GetStageDurationByBerryType(tree->berry) * 71)
+            if (minutes >= GetStageDurationByBerryType(tree->berry) * 71)
             {
                 *tree = gBlankBerryTree;
             }
             else
             {
-                int time2 = time;
+                s32 time = minutes;
 
-                while (time2 != 0)
+                while (time != 0)
                 {
-                    if (tree->secondsUntilNextStage > time2)
+                    if (tree->minutesUntilNextStage > time)
                     {
-                        tree->secondsUntilNextStage -= time2;
+                        tree->minutesUntilNextStage -= time;
                         break;
                     }
-                    time2 -= tree->secondsUntilNextStage;
-                    tree->secondsUntilNextStage = GetStageDurationByBerryType(tree->berry);
+                    time -= tree->minutesUntilNextStage;
+                    tree->minutesUntilNextStage = GetStageDurationByBerryType(tree->berry);
                     if (!BerryTreeGrow(tree))
                         break;
                     if (tree->stage == 5)
-                        tree->secondsUntilNextStage *= 4;
+                        tree->minutesUntilNextStage *= 4;
                 }
             }
         }
@@ -1174,12 +1174,12 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
 
     *tree = gBlankBerryTree;
     tree->berry = berry;
-    tree->secondsUntilNextStage = GetStageDurationByBerryType(berry);
+    tree->minutesUntilNextStage = GetStageDurationByBerryType(berry);
     tree->stage = stage;
     if (stage == 5)
     {
         tree->berryYield = CalcBerryYield(tree);
-        tree->secondsUntilNextStage *= 4;
+        tree->minutesUntilNextStage *= 4;
     }
     if (!sparkle)
     {
