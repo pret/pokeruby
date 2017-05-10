@@ -8,13 +8,13 @@
 #include "rtc.h"
 #include "wallclock.h"
 
-extern void sub_80FA220(u16);
-extern void sub_80BE8C4(u16);
-extern void sub_8080834(u16);
+extern void UpdateDewfordTrendPerDay(u16);
+extern void UpdateTVShowsPerDay(u16);
+extern void UpdateWeatherPerDay(u16);
 extern void UpdatePartyPokerusTime(u16);
 extern void UpdateMirageRnd(u16);
 extern void UpdateBirchState(u16);
-extern void sub_810F618(u16);
+extern void SetShoalItemFlag(u16);
 
 static void InitTimeBasedEvents(void);
 static void UpdatePerDay(struct Time *time);
@@ -49,13 +49,13 @@ static void UpdatePerDay(struct Time *time)
     {
         newDays = time->days - days;
         ClearUpperFlags();
-        sub_80FA220(newDays);
-        sub_80BE8C4(newDays);
-        sub_8080834(newDays);
+        UpdateDewfordTrendPerDay(newDays);
+        UpdateTVShowsPerDay(newDays);
+        UpdateWeatherPerDay(newDays);
         UpdatePartyPokerusTime(newDays);
         UpdateMirageRnd(newDays);
         UpdateBirchState(newDays);
-        sub_810F618(newDays);
+        SetShoalItemFlag(newDays);
         SetRandomLotteryNumber(newDays);
         *varPtr = time->days;
     }

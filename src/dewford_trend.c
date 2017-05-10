@@ -19,7 +19,7 @@ static bool8 SB1ContainsWords(u16 *a);
 static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2);
 static s16 sub_80FA828(struct EasyChatPair *a, u16 b);
 
-void InitDewfordTrends(void)
+void InitDewfordTrend(void)
 {
     u16 i;
 
@@ -39,7 +39,7 @@ void InitDewfordTrends(void)
 }
 
 #ifdef NONMATCHING
-void sub_80FA220(u16 a)
+void UpdateDewfordTrendPerDay(u16 a)
 {
     u16 i;
     u32 sp0;
@@ -103,7 +103,7 @@ void sub_80FA220(u16 a)
 
 #else
 __attribute__((naked))
-void sub_80FA220(u16 a)
+void UpdateDewfordTrendPerDay(u16 a)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

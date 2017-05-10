@@ -51,6 +51,7 @@
 #define SYS_BRAILLE_WAIT     0x851
 #define SYS_BRAILLE_FLY      0x852
 
+#define SYS_SHOAL_ITEM       0x85F
 #define SYS_B_DASH           0x860 // got Running Shoes
 #define SYS_CTRL_OBJ_DELETE  0x861
 #define SYS_RESET_RTC_ENABLE 0x862

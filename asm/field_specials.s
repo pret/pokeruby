@@ -3695,8 +3695,8 @@ _0810F612:
 	bx r1
 	thumb_func_end sub_810F5BC
 
-	thumb_func_start sub_810F618
-sub_810F618: @ 810F618
+	thumb_func_start SetShoalItemFlag
+SetShoalItemFlag: @ 810F618
 	push {lr}
 	ldr r0, _0810F624 @ =0x0000085f
 	bl FlagSet
@@ -3704,7 +3704,7 @@ sub_810F618: @ 810F618
 	bx r0
 	.align 2, 0
 _0810F624: .4byte 0x0000085f
-	thumb_func_end sub_810F618
+	thumb_func_end SetShoalItemFlag
 
 	thumb_func_start PutZigzagoonInPlayerParty
 PutZigzagoonInPlayerParty: @ 810F628
