@@ -32,7 +32,7 @@
 	.equiv MALE, 0
 	.equiv FEMALE, 1
 
-	.equiv GAME_LANGUAGE, 2
+	.equiv GAME_LANGUAGE, 5
 	
 	.equiv ENEMY_TYPE1,  0
 	.equiv ENEMY_TYPE2,  1
