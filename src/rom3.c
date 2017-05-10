@@ -123,7 +123,7 @@ void sub_800B950(void)
     else
         sub_800B9A8();
     sub_800BD54();
-    if (!(gBattleTypeFlags & BATTLE_TYPE_40))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         for (i = 0; i < gUnknown_02024A68; i++)
             sub_8094978(i, 0);
@@ -187,7 +187,7 @@ void sub_800BA78(void)
         }
         return;
     }
-    if ((gBattleTypeFlags & (BATTLE_TYPE_40 | BATTLE_TYPE_DOUBLE)) == BATTLE_TYPE_DOUBLE)
+    if ((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) == BATTLE_TYPE_DOUBLE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
@@ -298,7 +298,7 @@ void sub_800BD54(void)
     int i;
     int j;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_40))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         for (i = 0; i < gUnknown_02024A68; i++)
         {

@@ -43,7 +43,7 @@ void PrintLinkBattleWinLossTie(void)
         return;
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_40)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         // Double battle?
 
