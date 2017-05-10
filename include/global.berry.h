@@ -45,7 +45,7 @@ struct BerryTree
     u8 berry;
     u8 stage:7;
     u8 growthSparkle:1;
-    u16 secondsUntilNextStage;
+    u16 minutesUntilNextStage;
     u8 berryYield;
     u8 regrowthCount:4;
     u8 watered1:1;

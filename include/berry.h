@@ -22,7 +22,7 @@ bool8 IsPlayerFacingPlantedBerryTree(void);
 bool8 TryToWaterBerryTree(void);
 void ClearBerryTrees(void);
 bool32 BerryTreeGrow(struct BerryTree *tree);
-void BerryTreeTimeUpdate(int time);
+void BerryTreeTimeUpdate(s32 minutes);
 void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle);
 void RemoveBerryTree(u8 id);
 u8 GetBerryTypeByBerryTreeId(u8 id);
