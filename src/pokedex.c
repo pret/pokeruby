@@ -2249,12 +2249,12 @@ void Task_InitPageScreenMultistep(u8 taskId)
                 sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
             //_0808F45A
             sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
-            MenuPrint(gDexText_UnknownPoke, 11, 5);
+            MenuPrint(gDexText_UnknownPoke, 16, 5);
             MenuPrint(gDexText_UnknownHeight, 16, 7);
             MenuPrint(gDexText_UnknownWeight, 16, 9);
             if (gUnknown_0202FFBC->owned)
             {
-                sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, 11, 5);
+                sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, 16, 5);
                 sub_8091458(gPokedexEntries[gUnknown_0202FFBC->dexNum].height, 16, 7);
                 sub_8091564(gPokedexEntries[gUnknown_0202FFBC->dexNum].weight, 16, 9);
                 MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);

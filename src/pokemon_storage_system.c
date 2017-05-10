@@ -44,7 +44,7 @@ void sub_8098898(u8 index) {
         // TODO: fix for German
         // {var} + " was released."
         ptr = StringCopy(gUnk2002694, gUnk20026e4);
-        ptr = StringCopy(ptr, gUnknown_083B6DF4[index].text);
+        ptr = de_sub_8073174(gUnk2002694, gUnknown_083B6DF4[index].text);
         break;
 
     case 3:

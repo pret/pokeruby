@@ -400,7 +400,7 @@ _080BE0A2:\n\
 	bl StringCopy\n\
 	adds r0, r4, 0\n\
 	bl sub_80BE138\n\
-	movs r0, 2 @ GAME_LANGUAGE\n\
+	movs r0, 5 @ GAME_LANGUAGE\n\
 	strb r0, [r4, 0x2]\n\
 _080BE112:\n\
 	pop {r4-r7}\n\
@@ -1350,18 +1350,26 @@ void sub_80BF4BC(void)
 
 u8 sub_80BF4F4(u8 arg0)
 {
+    u8 langData[4];
     u32 species;
+
+    u8 *tmp;
 
     GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
 
-    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
-
-    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == FALSE)
-    {
-        return FALSE;
+    tmp = langData;
+    tmp[0] = GetMonData(&gPlayerParty[arg0], MON_DATA_LANGUAGE, &langData);
+    if (tmp[0] != GAME_LANGUAGE) {
+        return TRUE;
     }
 
-    return TRUE;
+    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
+
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1)) {
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 u8 sub_80BF544(void)

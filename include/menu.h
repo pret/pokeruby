@@ -70,5 +70,6 @@ void unref_sub_8072DC0(void);
 void sub_8072DCC(u8);
 void sub_8072DDC(u8);
 void sub_8072DEC(void);
+u8 *de_sub_8073174(u8 *name, u8 *format);
 
 #endif // GUARD_MENU_H

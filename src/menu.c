@@ -8,6 +8,7 @@
 #include "sound.h"
 #include "text.h"
 #include "text_window.h"
+#include "string_util.h"
 
 struct Menu
 {
@@ -613,6 +614,7 @@ u8 unref_sub_8072A5C(u8 *dest, u8 *src, u8 left, u16 top, u8 width, u32 a6)
     return sub_8004FD0(gMenuWindowPtr, dest, src, gMenuTextTileOffset, left, top, width, a6);
 }
 
+#ifdef NONMATCHING
 int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     u8 newlineCount = sub_8004FD0(gMenuWindowPtr, NULL, str, gMenuTextTileOffset, left, top, width, a6);
@@ -625,6 +627,90 @@ int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
     if (newlineCount < height)
         MenuFillWindowRectWithBlankTile(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
+#else
+__attribute__((naked))
+int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x10\n\
+	mov r12, r0\n\
+	ldr r0, [sp, 0x24]\n\
+	ldr r4, [sp, 0x28]\n\
+	str r4, [sp, 0xC]\n\
+	lsls r1, 24\n\
+	lsrs r5, r1, 24\n\
+	lsls r2, 16\n\
+	lsrs r4, r2, 16\n\
+	lsls r3, 24\n\
+	lsrs r6, r3, 24\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r0, _08072AF8 @ =gMenuWindowPtr\n\
+	ldr r0, [r0]\n\
+	ldr r1, _08072AFC @ =gMenuTextTileOffset\n\
+	ldrh r3, [r1]\n\
+	str r5, [sp]\n\
+	str r4, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r1, 0\n\
+	mov r2, r12\n\
+	bl sub_8004FD0\n\
+	adds r1, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r2, r1, 24\n\
+	movs r3, 0x7\n\
+	ands r3, r5\n\
+	cmp r3, 0\n\
+	bne _08072B00\n\
+	adds r1, r6, 0x7\n\
+	asrs r1, 3\n\
+	subs r1, 0x1\n\
+	b _08072B0C\n\
+	.align 2, 0\n\
+_08072AF8: .4byte gMenuWindowPtr\n\
+_08072AFC: .4byte gMenuTextTileOffset\n\
+_08072B00:\n\
+	adds r3, r6, r3\n\
+	subs r1, r3, 0x1\n\
+	cmp r1, 0\n\
+	bge _08072B0A\n\
+	adds r1, r3, 0x6\n\
+_08072B0A:\n\
+	asrs r1, 3\n\
+_08072B0C:\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r6, r1, 0\n\
+	lsrs r5, 3\n\
+	adds r1, r7, 0x7\n\
+	asrs r1, 3\n\
+	lsls r1, 24\n\
+	lsrs r7, r1, 24\n\
+	lsrs r4, 3\n\
+	cmp r2, r7\n\
+	bcs _08072B3E\n\
+	lsls r1, r2, 1\n\
+	adds r1, r4, r1\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r2, r5, r6\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	adds r3, r7, r4\n\
+	subs r3, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	adds r0, r5, 0\n\
+	bl MenuFillWindowRectWithBlankTile\n\
+_08072B3E:\n\
+	add sp, 0x10\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
 {
@@ -736,4 +822,50 @@ void sub_8072DDC(u8 a1)
 void sub_8072DEC(void)
 {
     sub_814A7FC();
+}
+
+void de_sub_8073110(u8 * buffer, u8 * name) {
+    u8 * ptr, *ptr2, *ptr3;
+
+    ptr2 = buffer;
+    ptr = &gStringVar1[1 + StringLengthN(gStringVar1, 256)];
+    ptr3 = ptr;
+
+    for (;;)
+    {
+        if (*ptr2 == EOS)
+            break;
+
+        if (*ptr2 == 0xFD)
+        {
+
+            *ptr3 = EOS;
+            ptr2 += 2;
+
+            StringAppend(ptr, name);
+            StringAppend(ptr, ptr2);
+
+            buffer[0] = EOS;
+            StringAppend(buffer, ptr);
+            break;
+        }
+
+        *ptr3 = *ptr2;
+        ptr2 += 1;
+        ptr3 += 1;
+    }
+}
+
+u8 *de_sub_8073174(u8 *name, u8 *format) {
+    u32 offset;
+    u8 *ptr;
+
+    offset = StringLengthN(gStringVar2, 0x100);
+    ptr = &gStringVar2[1 + offset];
+
+    StringCopy(ptr, format);
+
+    de_sub_8073110(ptr, name);
+
+    return StringCopy(name, ptr);
 }

@@ -20,17 +20,17 @@ extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_081A4932[];
 extern const u8 gUnknown_081A4975[];
 
-void sub_8082D4C();
+void sub_8082D4C(void);
 void sub_8082D60(u8, u8);
 u16 sub_8082D9C(u8, u8);
 u32 sub_8082DF4(u8);
 u32 sub_8082E28(u8);
 u32 sub_8082EB8(u8);
 void sub_8082FEC(u8 taskId);
-static void sub_80830E4(u8 taskId);
+void sub_80830E4(u8 taskId);
 void sub_8083188(u8 taskId);
-static void sub_8083288(u8 taskId);
-static void sub_8083314(u8 taskId);
+ void sub_8083288(u8 taskId);
+ void sub_8083314(u8 taskId);
 void sub_80833C4(u8 taskId);
 void sub_8083418(u8 taskId);
 u8 sub_8083444(u8 taskId);
@@ -57,20 +57,19 @@ void sub_808303C(u8 taskId) {
         return;
     }
 
-    if (linkPlayerCount < taskData[1])
+    if ((gLinkType == 0x2255 && (u32) linkPlayerCount > 1) ||
+        (gLinkType != 0x2255 && taskData[1] <= linkPlayerCount))
     {
-        return;
+        sub_80081C8(linkPlayerCount);
+        sub_8082D4C();
+        ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1); // r5
+        ShowFieldAutoScrollMessage((u8 *) gUnknown_081A4975);
+        gTasks[taskId].func = sub_80830E4;
     }
-
-    sub_80081C8(linkPlayerCount);
-    sub_8082D4C();
-    ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1); // r5
-    ShowFieldAutoScrollMessage((u8 *) gUnknown_081A4975);
-    gTasks[taskId].func = sub_80830E4;
 }
 
 #ifdef NONMATCHING
-static void sub_80830E4(u8 taskId) {
+void sub_80830E4(u8 taskId) {
     if (sub_8082E28(taskId) == 1 ||
         sub_8082EB8(taskId) == 1 ||
         sub_8082DF4(taskId) == 1 ||
@@ -96,7 +95,7 @@ static void sub_80830E4(u8 taskId) {
 }
 #else
 __attribute__((naked))
-static void sub_80830E4(u8 taskId) {
+void sub_80830E4(u8 taskId) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
     lsls r0, 24\n\
@@ -238,7 +237,7 @@ void sub_80831F8(u8 taskId) {
     }
 }
 
-static void sub_8083288(u8 taskId) {
+ void sub_8083288(u8 taskId) {
     if (sub_8082DF4(taskId) == 1)
     {
         return;
@@ -260,8 +259,9 @@ static void sub_8083288(u8 taskId) {
         sub_8007E9C(2);
     }
 }
+extern struct LinkPlayer gLinkPlayers[];
 
-static void sub_8083314(u8 taskId) {
+ void sub_8083314(u8 taskId) {
     u8 index;
 
     struct TrainerCard *trainerCards;
@@ -291,9 +291,14 @@ static void sub_8083314(u8 taskId) {
 
     if (gScriptResult == 1)
     {
-        u16 linkType;
-        linkType = gLinkType;
-        sub_8082D4C(0x00004411, linkType);
+        if (gLinkType != 0x4411)
+        {
+            if (gLinkType == 0x6601)
+            {
+                deUnkValue2 = 1;
+            }
+        }
+        sub_8082D4C();
         EnableBothScriptContexts();
         DestroyTask(taskId);
         return;

@@ -328,6 +328,7 @@ void sub_80C8F34(u8);
 // asm/easy_chat.o
 void InitEasyChatPhrases(void);
 u8* sub_80EB3FC(u8 *, u16);
+u32 de_sub_80EB748(u32, u32);
 u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 
 // asm/pokenav.o
