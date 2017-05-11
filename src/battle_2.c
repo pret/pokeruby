@@ -109,6 +109,7 @@ void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
 void sub_800F808(void);
+void sub_800F838(struct Sprite *);
 void sub_800F8E8();
 void sub_800FCFC(void);
 void sub_8010824(void);
@@ -813,6 +814,66 @@ void sub_800F298(void)
                     gBattleTypeFlags |= BATTLE_TYPE_20;
                 }
             }
+            break;
+    }
+}
+
+void sub_800F808(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    sub_800374C(&gUnknown_03004210);
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+void sub_800F828(struct Sprite *sprite)
+{
+    sprite->data0 = 0;
+    sprite->callback = sub_800F838;
+}
+
+void sub_800F838(struct Sprite *sprite)
+{
+    u16 *arr = (u16 *)ewram;
+
+    switch (sprite->data0)
+    {
+        case 0:
+            sprite->data0++;
+            sprite->data1 = 0;
+            sprite->data2 = 0x281;
+            sprite->data3 = 0;
+            sprite->data4 = 1;
+            // fall through
+        case 1:
+            sprite->data4--;
+            if (sprite->data4 == 0)
+            {
+                s32 i;
+                s32 r2;
+                s32 r0;
+                
+                sprite->data4 = 2;
+                r2 = sprite->data1 + sprite->data3 * 32;
+                r0 = sprite->data2 - sprite->data3 * 32;
+                for (i = 0; i < 29; i += 2)
+                {
+                    arr[r2 + i] = 0x3D;
+                    arr[r0 + i] = 0x3D;
+                }
+                sprite->data3++;
+                if (sprite->data3 == 21)
+                {
+                    sprite->data0++;
+                    sprite->data1 = 32;
+                }
+            }
+            break;
+        case 2:
+            sprite->data1--;
+            if (sprite->data1 == 20)
+                SetMainCallback2(sub_800E7C4);
             break;
     }
 }
