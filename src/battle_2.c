@@ -9,6 +9,7 @@
 #include "species.h"
 #include "link.h"
 #include "name_string_util.h"
+#include "battle_setup.h"
 
 struct UnknownStruct5
 {
@@ -56,6 +57,9 @@ struct UnknownPokemonStruct2
 
 extern const struct UnknownStruct5 gUnknown_081F9674;
 extern const u8 gUnknown_081F96C8[];
+extern const struct Trainer gTrainers[];
+extern const u8 gSpeciesNames[][11];
+extern const struct BattleMove gBattleMoves[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
@@ -83,7 +87,7 @@ extern MainCallback gUnknown_030042D0;
 extern struct UnknownStruct6 gUnknown_03004DE0;
 //extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
 extern u16 gBattleTypeFlags;
-extern u8 gBattleTerrain;
+extern s8 gBattleTerrain;  // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of GetBattleTerrain.
 extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -92,7 +96,6 @@ extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
 extern void sub_80895F8();
-extern u8 GetBattleTerrain();
 extern void sub_800D6D4();
 extern void sub_800DAB8();
 extern void sub_800E23C();
@@ -109,7 +112,8 @@ void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
 void sub_800F808(void);
-void sub_800F8E8();
+void sub_800F838(struct Sprite *);
+u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
 void sub_8010824(void);
 
@@ -186,7 +190,7 @@ void sub_800E7F8(void)
         SetMainCallback2(sub_800EC9C);
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        sub_800F8E8(gEnemyParty, gTrainerBattleOpponent);
+        CreateNPCTrainerParty(gEnemyParty, gTrainerBattleOpponent);
         SetWildMonHeldItem();
     }
     gMain.inBattle = TRUE;
@@ -815,4 +819,159 @@ void sub_800F298(void)
             }
             break;
     }
+}
+
+void sub_800F808(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    sub_800374C(&gUnknown_03004210);
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+void sub_800F828(struct Sprite *sprite)
+{
+    sprite->data0 = 0;
+    sprite->callback = sub_800F838;
+}
+
+void sub_800F838(struct Sprite *sprite)
+{
+    u16 *arr = (u16 *)ewram;
+
+    switch (sprite->data0)
+    {
+        case 0:
+            sprite->data0++;
+            sprite->data1 = 0;
+            sprite->data2 = 0x281;
+            sprite->data3 = 0;
+            sprite->data4 = 1;
+            // fall through
+        case 1:
+            sprite->data4--;
+            if (sprite->data4 == 0)
+            {
+                s32 i;
+                s32 r2;
+                s32 r0;
+
+                sprite->data4 = 2;
+                r2 = sprite->data1 + sprite->data3 * 32;
+                r0 = sprite->data2 - sprite->data3 * 32;
+                for (i = 0; i < 29; i += 2)
+                {
+                    arr[r2 + i] = 0x3D;
+                    arr[r0 + i] = 0x3D;
+                }
+                sprite->data3++;
+                if (sprite->data3 == 21)
+                {
+                    sprite->data0++;
+                    sprite->data1 = 32;
+                }
+            }
+            break;
+        case 2:
+            sprite->data1--;
+            if (sprite->data1 == 20)
+                SetMainCallback2(sub_800E7C4);
+            break;
+    }
+}
+
+u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
+{
+    u32 nameHash = 0;
+    s32 i;
+
+    if (trainerNum == 0x400)
+        return 0;
+
+    if ((gBattleTypeFlags & 0x908) == 8)
+    {
+        ZeroEnemyPartyMons();
+        for (i = 0; i < gTrainers[trainerNum].partySize; i++)
+        {
+            u32 personalityValue;
+            s32 j;
+            u8 fixedIV;
+
+            if (gTrainers[trainerNum].doubleBattle == TRUE)
+                personalityValue = 0x80;
+            else if (gTrainers[trainerNum].encounterMusic_gender & 0x80)
+                personalityValue = 0x78;
+            else
+                personalityValue = 0x88;
+
+            for (j = 0; gTrainers[trainerNum].trainerName[j] != 0xFF; j++)
+                nameHash += gTrainers[trainerNum].trainerName[j];
+
+            switch (gTrainers[trainerNum].partyFlags)
+            {
+                case 0:
+                {
+                    struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
+
+                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                        nameHash += gSpeciesNames[partyData[i].species][j];
+                    personalityValue += nameHash << 8;
+                    fixedIV = partyData[i].iv * 31 / 255;
+                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                    break;
+                }
+                case 1:
+                {
+                    struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
+
+                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                        nameHash += gSpeciesNames[partyData[i].species][j];
+                    personalityValue += nameHash << 8;
+                    fixedIV = partyData[i].iv * 31 / 255;
+                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                    for (j = 0; j < 4; j++)
+                    {
+                        SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                        SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
+
+                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                        nameHash += gSpeciesNames[partyData[i].species][j];
+                    personalityValue += nameHash << 8;
+                    fixedIV = partyData[i].iv * 31 / 255;
+                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                    SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                    break;
+                }
+                case 3:
+                {
+                    struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
+
+                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                        nameHash += gSpeciesNames[partyData[i].species][j];
+                    personalityValue += nameHash << 8;
+                    fixedIV = partyData[i].iv * 31 / 255;
+                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                    SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                    for (j = 0; j < 4; j++)
+                    {
+                        SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                        SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    }
+                    break;
+                }
+            }
+        }
+        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    }
+    return gTrainers[trainerNum].partySize;
 }
