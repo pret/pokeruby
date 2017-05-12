@@ -9,7 +9,7 @@ HEADERS := agb.h error.h main.h midi.h tables.h
 .PHONY: clean
 
 mid2agb: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) mid2agb mid2agb.exe

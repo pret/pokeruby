@@ -9,7 +9,7 @@ SRCS = main.c extended.c
 .PHONY: clean
 
 aif2pcm: $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
 
 clean:
 	$(RM) aif2pcm aif2pcm.exe

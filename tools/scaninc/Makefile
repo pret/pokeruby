@@ -9,7 +9,7 @@ HEADERS := scaninc.h asm_file.h c_file.h
 .PHONY: clean
 
 scaninc: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) scaninc scaninc.exe

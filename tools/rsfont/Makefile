@@ -9,7 +9,7 @@ SRCS = main.c convert_png.c util.c font.c
 .PHONY: clean
 
 rsfont: $(SRCS) convert_png.h gfx.h global.h util.h font.h
-	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
 
 clean:
 	$(RM) rsfont rsfont.exe
