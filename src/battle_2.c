@@ -975,3 +975,136 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     }
     return gTrainers[trainerNum].partySize;
 }
+
+void sub_800FCD4(void)
+{
+    if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F )
+        REG_BG0CNT = 0x9800;
+}
+
+void sub_800FCFC(void)
+{
+    Random();  // unused return value
+    REG_BG0HOFS = gUnknown_030042A4;
+    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG1HOFS = gUnknown_030042C0;
+    REG_BG1VOFS = gUnknown_030041B4;
+    REG_BG2HOFS = gUnknown_03004288;
+    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG3HOFS = gUnknown_030041B0;
+    REG_BG3VOFS = gUnknown_030041B8;
+    REG_WIN0H = gUnknown_030042C4;
+    REG_WIN0V = gUnknown_03004240;
+    REG_WIN1H = gUnknown_03004200;
+    REG_WIN1V = gUnknown_03004244;
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    sub_8089668();
+}
+
+void nullsub_36(struct Sprite *sprite)
+{
+}
+
+void sub_800FDB0(struct Sprite *sprite)
+{
+    if (sprite->data0 != 0)
+        sprite->pos1.x = sprite->data1 + ((sprite->data2 & 0xFF00) >> 8);
+    else
+        sprite->pos1.x = sprite->data1 - ((sprite->data2 & 0xFF00) >> 8);
+    sprite->data2 += 0x180;
+    if (sprite->affineAnimEnded)
+    {
+        FreeSpriteTilesByTag(0x2710);
+        FreeSpritePaletteByTag(0x2710);
+        FreeSpriteOamMatrix(sprite);
+        DestroySprite(sprite);
+    }
+}
+
+void sub_800FE20(struct Sprite *sprite)
+{
+    StartSpriteAffineAnim(sprite, 1);
+    sprite->callback = sub_800FDB0;
+    PlaySE(SE_BT_START);
+}
+
+void sub_800FE40(u8 a)
+{
+    struct Pokemon *sp4 = NULL;
+    struct Pokemon *sp8 = NULL;
+    u8 r2 = ewram160CB;
+    u32 r7;
+    s32 i;
+    
+    
+    if (gBattleTypeFlags & 0x40)
+    {
+        switch (gLinkPlayers[r2].lp_field_18)
+        {
+        case 1:
+        case 3:
+            sp4 = gEnemyParty;
+            sp8 = gPlayerParty;
+            goto foo;
+        case 0:
+        case 2:
+            sp4 = gPlayerParty;
+            sp8 = gEnemyParty;
+            break;
+        }
+    }
+    else
+    {
+        sp4 = gPlayerParty;
+        sp8 = gEnemyParty;
+    }
+    //_0800FEBC
+    r7 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        u16 r5 = GetMonData(&sp4[i], MON_DATA_SPECIES2);
+        u16 r6 = GetMonData(&sp4[i], MON_DATA_HP);
+        u32 r1 = GetMonData(&sp4[i], MON_DATA_STATUS);
+        
+        if (r5 == 0)
+            continue;
+        if (r5 != SPECIES_EGG && r6 != 0 && r1 == 0)
+            r7 |= 1 << i * 2;
+        
+        if (r5 == 0)
+            continue;
+        if (r6 != 0 && (r5 == SPECIES_EGG || r1 != 0))
+            r7 |= 2 << i * 2;
+        
+        if (r5 == 0)
+            continue;
+        if (r5 != SPECIES_EGG && r6 == 0)
+            r7 |= 3 << i * 2;
+    }
+    gTasks[a].data[3] = r7;
+    r7 = 0;
+    for (i = 0; i < 6; i++)  //_0800FF6A
+    {
+        u16 r5 = GetMonData(&sp8[i], MON_DATA_SPECIES2);
+        u16 r6 = GetMonData(&sp8[i], MON_DATA_HP);
+        u32 r1 = GetMonData(&sp8[i], MON_DATA_STATUS);
+        
+        if (r5 == 0)
+            continue;
+        if (r5 != SPECIES_EGG && r6 != 0 && r1 == 0)
+            r7 |= 1 << i * 2;
+        
+        if (r5 == 0)
+            continue;
+        if (r6 != 0 && (r5 == SPECIES_EGG || r1 != 0))
+            r7 |= 2 << i * 2;
+        
+        if (r5 == 0)
+            continue;
+        if (r5 != SPECIES_EGG && r6 == 0)
+            r7 |= 3 << i * 2;
+    }
+    gTasks[a].data[4] = r7;
+}
