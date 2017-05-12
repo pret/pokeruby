@@ -7560,10 +7560,10 @@ sub_804BA18: @ 804BA18
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _0804BA5A:
 	pop {r4}
 	pop {r0}

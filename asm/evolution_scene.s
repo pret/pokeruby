@@ -1233,13 +1233,13 @@ _08112354:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -1739,13 +1739,13 @@ _081127BE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08112FD0
@@ -3047,13 +3047,13 @@ _08113316:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08113B3A

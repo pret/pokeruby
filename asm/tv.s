@@ -3456,7 +3456,7 @@ _080BF6B2:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
@@ -5178,7 +5178,7 @@ sub_80C03C8: @ 80C03C8
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	asrs r2, r0, 24
 	cmp r2, 0

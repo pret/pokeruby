@@ -568,8 +568,8 @@ u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
         if(sentToPc >= 0)
         {
             // set both the seen and caught flags
-            sub_8090D90(nationalSpecies, 2);
-            sub_8090D90(nationalSpecies, 3);
+            GetNationalPokedexFlag(nationalSpecies, 2);
+            GetNationalPokedexFlag(nationalSpecies, 3);
         }
     }
     return sentToPc;

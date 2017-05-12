@@ -2044,7 +2044,7 @@ void sub_81458DC(void)
 _0814590E:\n\
     adds r0, r4, 0\n\
     movs r1, 0x1\n\
-    bl sub_8090D90\n\
+    bl GetNationalPokedexFlag\n\
     lsls r0, 24\n\
     adds r6, r7, 0\n\
     adds r6, 0x90\n\

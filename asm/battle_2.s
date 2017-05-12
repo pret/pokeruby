@@ -5676,7 +5676,7 @@ _080114FE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	b _08011588
 	.align 2, 0
 _08011530: .4byte gBaseStats
@@ -5707,7 +5707,7 @@ _0801154C:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0
 	bl dp01_build_cmdbuf_x04_4_4_4
 	ldrb r0, [r4]
@@ -6152,7 +6152,7 @@ _080118DE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _08011912:
 	ldrb r0, [r4]
 	adds r0, 0x1
