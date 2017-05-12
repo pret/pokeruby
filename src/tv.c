@@ -256,7 +256,7 @@ void EndMassOutbreak(void)
     gSaveBlock1.outbreakUnk5 = 0;
 }
 
-void sub_80BE8C4(u16 arg0)
+void UpdateTVShowsPerDay(u16 arg0)
 {
     sub_80BE8EC(arg0);
     UpdateMassOutbreakTimeLeft(arg0);

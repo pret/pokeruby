@@ -34,7 +34,7 @@ extern u8 BattleText_Tie[];
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
 #define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset)      PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
 
-void sub_800DC24(void)
+void PrintLinkBattleWinLossTie(void)
 {
 
     if (gUnknown_02024D26 == 3)
@@ -43,7 +43,7 @@ void sub_800DC24(void)
         return;
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_40)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         // Double battle?
 

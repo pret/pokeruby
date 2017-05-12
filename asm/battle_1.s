@@ -1358,7 +1358,7 @@ _0800E148:
 	ldrsh r0, [r1, r5]
 	cmp r0, 0
 	beq _0800E154
-	bl sub_800DC24
+	bl PrintLinkBattleWinLossTie
 _0800E154:
 	movs r0, 0x78
 	bl PlaySE
