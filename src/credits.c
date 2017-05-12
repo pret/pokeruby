@@ -871,83 +871,83 @@ static void task_d_8144514(u8 taskIdD)
 
 void task_c_8144664(u8 taskIdC)
 {
-    switch (gTasks[taskIdC].data[0])
+    switch (gTasks[taskIdC].data[TDC_0])
     {
     case 0:
-        gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
-        gTasks[taskIdC].data[5]++;
+        gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+        gTasks[taskIdC].data[TDC_5]++;
         break;
     case 1:
         if (gUnknown_0203935A != 0)
         {
-            gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
-            gTasks[taskIdC].data[5]++;
+            gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+            gTasks[taskIdC].data[TDC_5]++;
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[2]].data0 = 2;
-            gTasks[taskIdC].data[5] = 0;
-            gTasks[taskIdC].data[0]++;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 2;
+            gTasks[taskIdC].data[TDC_5] = 0;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 2:
-        if (gTasks[taskIdC].data[5] < 64)
+        if (gTasks[taskIdC].data[TDC_5] < 64)
         {
-            gTasks[taskIdC].data[5]++;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+            gTasks[taskIdC].data[TDC_5]++;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
-            gTasks[taskIdC].data[0]++;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 3:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 3;
-        gSprites[gTasks[taskIdC].data[3]].data0 = 1;
-        gTasks[taskIdC].data[4] = 120;
-        gTasks[taskIdC].data[0]++;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 3;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 1;
+        gTasks[taskIdC].data[TDC_4] = 120;
+        gTasks[taskIdC].data[TDC_0]++;
         break;
     case 4:
-        if (gTasks[taskIdC].data[4] != 0)
+        if (gTasks[taskIdC].data[TDC_4] != 0)
         {
-            gTasks[taskIdC].data[4]--;
+            gTasks[taskIdC].data[TDC_4]--;
         }
         else
         {
-            gTasks[taskIdC].data[5] = 64;
-            gTasks[taskIdC].data[0]++;
+            gTasks[taskIdC].data[TDC_5] = 64;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 5:
-        if (gTasks[taskIdC].data[5] > 0)
+        if (gTasks[taskIdC].data[TDC_5] > 0)
         {
-            gTasks[taskIdC].data[5]--;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+            gTasks[taskIdC].data[TDC_5]--;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[2]].data0 = 1;
-            gTasks[taskIdC].data[0]++;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 1;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 6:
-        gTasks[taskIdC].data[0] = 50;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 10:
-        gSprites[gTasks[taskIdC].data[3]].data0 = 2;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 2;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 20:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 4;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 4;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 30:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 5;
-        gSprites[gTasks[taskIdC].data[3]].data0 = 3;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 5;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 3;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 50:
-        gTasks[taskIdC].data[0] = 0;
+        gTasks[taskIdC].data[TDC_0] = 0;
         break;
     }
 }
