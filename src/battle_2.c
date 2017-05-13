@@ -1,4 +1,5 @@
 #include "global.h"
+#include "asm.h"
 #include "battle.h"
 #include "main.h"
 #include "text.h"
@@ -10,6 +11,14 @@
 #include "link.h"
 #include "name_string_util.h"
 #include "battle_setup.h"
+#include "rng.h"
+#include "sound.h"
+#include "songs.h"
+
+struct MonCoords
+{
+    u8 x, y;
+};
 
 struct UnknownStruct5
 {
@@ -55,35 +64,65 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
+struct UnknownStruct9
+{
+    u8 unk0;
+    u16 unk2;
+};
+
+struct UnknownStruct10
+{
+    u8 unk0_0:1;
+    u8 unk0_1:1;
+    u8 unk0_2:1;
+    u8 filler1[1];
+    u8 unk2;
+    u8 unk3;
+    u8 filler4[8];
+};
+
 extern const struct UnknownStruct5 gUnknown_081F9674;
 extern const u8 gUnknown_081F96C8[];
+extern void *const gUnknown_081FAF4C[];
+extern const u16 gUnknown_08D004E0[];
 extern const struct Trainer gTrainers[];
 extern const u8 gSpeciesNames[][11];
 extern const struct BattleMove gBattleMoves[];
+extern const struct MonCoords gMonFrontPicCoords[];
+extern const struct MonCoords gCastformFrontSpriteCoords[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
 #define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
 #define ewram160CB (ewram[0x160CB])
+#define ewram17800 ((struct UnknownStruct9 *)(ewram + 0x17800))
+#define ewram17810 ((struct UnknownStruct10 *)(ewram + 0x17810))
 #define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
+extern u16 gUnknown_02024A6A[];
+extern u8 gUnknown_02024BE0[];
 extern u8 gUnknown_02024D1E[];
 extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
+extern u16 gUnknown_02024DE8;
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030041B8;
 extern struct Window gUnknown_030041D0;
+extern u16 gUnknown_03004200;
 extern struct Window gUnknown_03004210;
+extern u16 gUnknown_03004244;
 extern struct Window gUnknown_03004250;
 extern u16 gUnknown_03004240;
 extern u16 gUnknown_03004280;
+extern u32 gUnknown_03004284;
 extern u16 gUnknown_03004288;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gUnknown_030042D0;
+extern u8 gUnknown_03004340[];
 extern struct UnknownStruct6 gUnknown_03004DE0;
 //extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
 extern u16 gBattleTypeFlags;
@@ -92,6 +131,7 @@ extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
+extern u8 gBattleMonForms[];
 
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
@@ -106,6 +146,11 @@ extern void sub_800DE30(u8);
 extern void sub_800B950(void);
 extern u8 battle_load_something();
 extern void OpenPartyMenu();
+extern void sub_8089668();
+extern void sub_800D74C();
+extern void sub_804777C(u8);
+extern void sub_8043DFC();
+extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 
 void sub_800E7F8(void);
 void sub_800EC9C(void);
@@ -116,6 +161,17 @@ void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
 void sub_8010824(void);
+void sub_80101B8(void);
+void c2_081284E0(void);
+void sub_8010278(struct Sprite *);
+void sub_80102AC(struct Sprite *);
+void nullsub_37(struct Sprite *);
+void sub_8010320(struct Sprite *);
+void sub_8010494(struct Sprite *);
+void sub_801053C(struct Sprite *);
+void oac_poke_ally_(struct Sprite *);
+void nullsub_86(struct Sprite *);
+void objc_dp11b_pingpong(struct Sprite *);
 
 void sub_800E7C4(void)
 {
@@ -1030,7 +1086,7 @@ void sub_800FE20(struct Sprite *sprite)
     PlaySE(SE_BT_START);
 }
 
-void sub_800FE40(u8 a)
+void sub_800FE40(u8 taskId)
 {
     struct Pokemon *sp4 = NULL;
     struct Pokemon *sp8 = NULL;
@@ -1038,20 +1094,19 @@ void sub_800FE40(u8 a)
     u32 r7;
     s32 i;
     
-    
-    if (gBattleTypeFlags & 0x40)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         switch (gLinkPlayers[r2].lp_field_18)
         {
-        case 1:
-        case 3:
-            sp4 = gEnemyParty;
-            sp8 = gPlayerParty;
-            goto foo;
         case 0:
         case 2:
             sp4 = gPlayerParty;
             sp8 = gEnemyParty;
+            break;
+        case 1:
+        case 3:
+            sp4 = gEnemyParty;
+            sp8 = gPlayerParty;
             break;
         }
     }
@@ -1060,51 +1115,398 @@ void sub_800FE40(u8 a)
         sp4 = gPlayerParty;
         sp8 = gEnemyParty;
     }
-    //_0800FEBC
+
     r7 = 0;
     for (i = 0; i < 6; i++)
     {
-        u16 r5 = GetMonData(&sp4[i], MON_DATA_SPECIES2);
-        u16 r6 = GetMonData(&sp4[i], MON_DATA_HP);
-        u32 r1 = GetMonData(&sp4[i], MON_DATA_STATUS);
+        u16 species = GetMonData(&sp4[i], MON_DATA_SPECIES2);
+        u16 hp = GetMonData(&sp4[i], MON_DATA_HP);
+        u32 status = GetMonData(&sp4[i], MON_DATA_STATUS);
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r5 != SPECIES_EGG && r6 != 0 && r1 == 0)
+        if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r6 != 0 && (r5 == SPECIES_EGG || r1 != 0))
+        if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r5 != SPECIES_EGG && r6 == 0)
+        if (species != SPECIES_EGG && hp == 0)
             r7 |= 3 << i * 2;
     }
-    gTasks[a].data[3] = r7;
+    gTasks[taskId].data[3] = r7;
+    
     r7 = 0;
-    for (i = 0; i < 6; i++)  //_0800FF6A
+    for (i = 0; i < 6; i++)
     {
-        u16 r5 = GetMonData(&sp8[i], MON_DATA_SPECIES2);
-        u16 r6 = GetMonData(&sp8[i], MON_DATA_HP);
-        u32 r1 = GetMonData(&sp8[i], MON_DATA_STATUS);
+        u16 species = GetMonData(&sp8[i], MON_DATA_SPECIES2);
+        u16 hp = GetMonData(&sp8[i], MON_DATA_HP);
+        u32 status = GetMonData(&sp8[i], MON_DATA_STATUS);
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r5 != SPECIES_EGG && r6 != 0 && r1 == 0)
+        if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r6 != 0 && (r5 == SPECIES_EGG || r1 != 0))
+        if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
         
-        if (r5 == 0)
+        if (species == 0)
             continue;
-        if (r5 != SPECIES_EGG && r6 == 0)
+        if (species != SPECIES_EGG && hp == 0)
             r7 |= 3 << i * 2;
     }
-    gTasks[a].data[4] = r7;
+    gTasks[taskId].data[4] = r7;
+}
+
+void c2_8011A1C(void)
+{
+    s32 i;
+    u8 taskId;
+    
+    SetHBlankCallback(NULL);
+    SetVBlankCallback(NULL);
+    CpuFill32(0, (void *)VRAM, VRAM_SIZE);
+    REG_MOSAIC = 0;
+    REG_WIN0H = 0xF0;
+    REG_WIN0V = 0x5051;
+    REG_WININ = 0;
+    REG_WINOUT = 0;
+    gUnknown_030042C4 = 0xF0;
+    gUnknown_03004240 = 0x5051;
+    dp12_8087EA4();
+    
+    for (i = 0; i < 80; i++)
+    {
+        gUnknown_03004DE0.unk0[i] = 0xF0;
+        gUnknown_03004DE0.unk780[i] = 0xF0;
+    }
+    for (i = 80; i < 160; i++)
+    {
+        asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
+        gUnknown_03004DE0.unk0[i] = 0xFF10;
+        gUnknown_03004DE0.unk780[i] = 0xFF10;
+    }
+    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    ResetPaletteFade();
+    gUnknown_030042A4 = 0;
+    gUnknown_030042A0 = 0;
+    gUnknown_030042C0 = 0;
+    gUnknown_030041B4 = 0;
+    gUnknown_03004288 = 0;
+    gUnknown_03004280 = 0;
+    gUnknown_030041B0 = 0;
+    gUnknown_030041B8 = 0;
+
+    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
+    InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
+    InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    sub_800D6D4();
+    LoadCompressedPalette(gUnknown_08D004E0, 0, 64);
+    sub_800D74C();
+    ResetSpriteData();
+    ResetTasks();
+    sub_800E23C();
+    REG_WINOUT = 0x37;
+    FreeAllSpritePalettes();
+    gReservedSpritePaletteCount = 4;
+    SetVBlankCallback(sub_800FCFC);
+    taskId = CreateTask(sub_800DE30, 0);
+    gTasks[taskId].data[1] = 0x10E;
+    gTasks[taskId].data[2] = 0x5A;
+    gTasks[taskId].data[5] = 1;
+    sub_800FE40(taskId);
+    SetMainCallback2(sub_80101B8);
+    gUnknown_02024D1E[0] = 0;
+}
+
+void sub_80101B8(void)
+{
+    c2_081284E0();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+void c2_081284E0(void)
+{
+    switch (gUnknown_02024D1E[0])
+    {
+        case 0:
+            gUnknown_02024D1E[1] = 0xFF;
+            gUnknown_02024D1E[0]++;
+            break;
+        case 1:
+            gUnknown_02024D1E[1]--;
+            if (gUnknown_02024D1E[1] == 0)
+            {
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+                gUnknown_02024D1E[0]++;
+            }
+            break;
+        case 2:
+            if (!gPaletteFade.active)
+                SetMainCallback2(gMain.savedCallback);
+            break;
+    }
+}
+
+void oac_poke_opponent(struct Sprite *sprite)
+{
+    sprite->callback = sub_8010278;
+    StartSpriteAnimIfDifferent(sprite, 0);
+    BeginNormalPaletteFade(0x00020000, 0, 10, 10, 0x3DEF);
+}
+
+void sub_8010278(struct Sprite *sprite)
+{
+    if ((gUnknown_02024DE8 & 1) == 0)
+    {
+        sprite->pos2.x += 2;
+        if (sprite->pos2.x == 0)
+        {
+            sprite->callback = sub_80102AC;
+            PlayCry1(sprite->data2, 25);
+        }
+    }
+}
+
+void sub_80102AC(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        sub_804777C(sprite->data0);
+        sub_8043DFC(gUnknown_03004340[sprite->data0]);
+        sprite->callback = nullsub_37;
+        StartSpriteAnimIfDifferent(sprite, 0);
+        BeginNormalPaletteFade(0x00020000, 0, 10, 0, 0x3DEF);
+    }
+}
+
+void nullsub_37(struct Sprite *sprite)
+{
+}
+
+void unref_sub_801030C(struct Sprite *sprite)
+{
+    sprite->data3 = 6;
+    sprite->data4 = 1;
+    sprite->callback = sub_8010320;
+}
+
+void sub_8010320(struct Sprite *sprite)
+{
+    sprite->data4--;
+    if (sprite->data4 == 0)
+    {
+        sprite->data4 = 8;
+        sprite->invisible ^= 1;
+        sprite->data3--;
+        if (sprite->data3 == 0)
+        {
+            sprite->invisible = FALSE;
+            sprite->callback = nullsub_37;
+            gUnknown_03004284 = 0;
+        }
+    }
+}
+
+void sub_8010384(struct Sprite *sprite)
+{
+    u8 r6 = sprite->data0;
+    u16 species;
+    u8 yOffset;
+    
+    if (ewram17800[r6].unk2 != 0)
+        species = ewram17800[r6].unk2;
+    else
+        species = sprite->data2;
+    
+    GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY);  // Unused return value
+    
+    if (species == SPECIES_UNOWN)
+    {
+        u32 personalityValue = GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY);
+        u16 unownForm = ((((personalityValue & 0x3000000) >> 18) | ((personalityValue & 0x30000) >> 12) | ((personalityValue & 0x300) >> 6) | (personalityValue & 3)) % 0x1C);
+        u16 unownSpecies;
+        
+        if (unownForm == 0)
+            unownSpecies = SPECIES_UNOWN;  // Use the A Unown form
+        else
+            unownSpecies = NUM_SPECIES + unownForm;  // Use one of the other Unown letters
+        
+        yOffset = gMonFrontPicCoords[unownSpecies].y;
+    }
+    else if (species == SPECIES_CASTFORM)
+    {
+        yOffset = gCastformFrontSpriteCoords[gBattleMonForms[r6]].y;
+    }
+    else if (species > NUM_SPECIES)  
+    {
+        yOffset = gMonFrontPicCoords[SPECIES_NONE].y;
+    }
+    else
+    {
+        yOffset = gMonFrontPicCoords[species].y;
+    }
+    
+    sprite->data3 = 8 - yOffset / 8;
+    sprite->data4 = 1;
+    sprite->callback = sub_8010494;
+}
+
+void sub_8010494(struct Sprite *sprite)
+{
+    s32 i;
+    
+    sprite->data4--;
+    if (sprite->data4 == 0)
+    {
+        sprite->data4 = 2;
+        sprite->pos2.y += 8;
+        sprite->data3--;
+        if (sprite->data3 < 0)
+        {
+            FreeSpriteOamMatrix(sprite);
+            DestroySprite(sprite);
+        }
+        else
+        {
+            u8 *dst = (u8 *)gUnknown_081FAF4C[battle_get_per_side_status(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
+            
+            for (i = 0; i < 0x100; i++)
+                *(dst++) = 0;
+            StartSpriteAnim(sprite, gBattleMonForms[sprite->data0]);
+        }
+    }
+}
+
+void sub_8010520(struct Sprite *sprite)
+{
+    sprite->data3 = 8;
+    sprite->data4 = sprite->invisible;
+    sprite->callback = sub_801053C;
+}
+
+void sub_801053C(struct Sprite *sprite)
+{
+    sprite->data3--;
+    if (sprite->data3 == 0)
+    {
+        sprite->invisible ^= 1;
+        sprite->data3 = 8;
+    }
+}
+
+void sub_8010574(struct Sprite *sprite)
+{
+    sprite->invisible = sprite->data4;
+    sprite->data4 = FALSE;
+    sprite->callback = nullsub_37;
+}
+
+void sub_80105A0(struct Sprite *sprite)
+{
+    sprite->callback = oac_poke_ally_;
+}
+
+void oac_poke_ally_(struct Sprite *sprite)
+{
+    if ((gUnknown_02024DE8 & 1) == 0)
+    {
+        sprite->pos2.x -= 2;
+        if (sprite->pos2.x == 0)
+        {
+            sprite->callback = nullsub_86;
+            sprite->data1 = 0;
+        }
+    }
+}
+
+void sub_80105DC(struct Sprite *sprite)
+{
+    sprite->callback = nullsub_86;
+}
+
+void nullsub_86(struct Sprite *sprite)
+{
+}
+
+void sub_80105EC(struct Sprite *sprite)
+{
+    if ((gUnknown_02024DE8 & 1) == 0)
+    {
+        sprite->pos2.x += sprite->data1;
+        sprite->pos2.y += sprite->data2;
+    }
+}
+
+void dp11b_obj_instanciate(u8 a, u8 b, s8 c, s8 d)
+{
+    u8 spriteId;
+    u8 r7;
+    
+    if (b)
+    {
+        if (ewram17810[a].unk0_1)
+            return;
+    }
+    else
+    {
+        if (ewram17810[a].unk0_2)
+            return;
+    }
+    
+    spriteId = CreateInvisibleSpriteWithCallback(objc_dp11b_pingpong);
+    if (b == TRUE)
+    {
+        r7 = gUnknown_03004340[a];
+        ewram17810[a].unk2 = spriteId;
+        ewram17810[a].unk0_1 = 1;
+        gSprites[spriteId].data0 = 0x80;
+    }
+    else
+    {
+        r7 = gUnknown_02024BE0[a];
+        ewram17810[a].unk3 = spriteId;
+        ewram17810[a].unk0_2 = 1;
+        gSprites[spriteId].data0 = 0xC0;
+    }
+    gSprites[spriteId].data1 = c;
+    gSprites[spriteId].data2 = d;
+    gSprites[spriteId].data3 = r7;
+    gSprites[spriteId].data4 = b;
+    gSprites[r7].pos2.x = 0;
+    gSprites[r7].pos2.y = 0;
+}
+
+void dp11b_obj_free(u8 a, u8 b)
+{
+    u8 r4;
+    
+    if (b == TRUE)
+    {
+        if (!ewram17810[a].unk0_1)
+            return;
+        r4 = gSprites[ewram17810[a].unk2].data3;
+        DestroySprite(&gSprites[ewram17810[a].unk2]);
+        ewram17810[a].unk0_1 = 0;
+    }
+    else
+    {
+        if (!ewram17810[a].unk0_2)
+            return;
+        r4 = gSprites[ewram17810[a].unk3].data3;
+        DestroySprite(&gSprites[ewram17810[a].unk3]);
+        ewram17810[a].unk0_2 = 0;
+    }
+    gSprites[r4].pos2.x = 0;
+    gSprites[r4].pos2.y = 0;
 }
