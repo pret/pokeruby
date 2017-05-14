@@ -381,3 +381,10 @@ u16 sub_8041648()
 {
 	return sub_8041570(gSaveBlock1.daycareData, gSpecialVar_0x8004);
 }
+
+u8 sub_8041664(struct BoxPokemon * mon, u32 steps){
+	struct BoxPokemon temp = *mon;
+	u32 new_exp = GetBoxMonData(mon, MON_DATA_EXP) + steps;
+	SetBoxMonData(&temp, MON_DATA_EXP, (u8 *) &new_exp);
+	return GetLevelFromBoxMonExp(&temp);
+}

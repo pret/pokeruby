@@ -6,35 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8041664
-sub_8041664: @ 8041664
-	push {r4,r5,lr}
-	sub sp, 0x54
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r0, sp
-	adds r1, r4, 0
-	movs r2, 0x50
-	bl memcpy
-	adds r0, r4, 0
-	movs r1, 0x19
-	bl GetBoxMonData
-	adds r0, r5
-	str r0, [sp, 0x50]
-	add r2, sp, 0x50
-	mov r0, sp
-	movs r1, 0x19
-	bl SetBoxMonData
-	mov r0, sp
-	bl GetLevelFromBoxMonExp
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x54
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8041664
-
 	thumb_func_start sub_80416A0
 sub_80416A0: @ 80416A0
 	push {r4-r6,lr}
