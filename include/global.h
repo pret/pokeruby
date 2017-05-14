@@ -536,8 +536,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D94*/ OldMan oldMan;
     /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2DFC*/ u8 filler_2DFC[0x100];
-    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    /*0x2DFC*/ u8 filler_2DFC[0x8];
+    /*0x2E04*/ SB_Struct sbStruct;
     /*0x2F9C*/ struct BoxPokemon filler_2F9C[2]; // daycare related
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];

@@ -3,7 +3,7 @@
 #include "string_util.h"
 #include "asm.h"
 
-extern u8 gUnknown_03005CE0;
+extern u8 gLastFieldPokeMenuOpened;
 
 u8 *pokemon_get_nick(struct Pokemon *mon, u8 *dest)
 {
@@ -115,7 +115,7 @@ s8 daycare_empty_slot(struct BoxPokemon * daycare_data)
 	s8 empty_slot;
 
 	empty_slot = daycare_empty_slot(daycare_data);
-	if(sub_80A2B94(mon) != 0){ // if the mon holds a mail?
+	if(MonHasMail(mon) != 0){ // if the mon holds a mail?
 		u8 empty_slot_times_56 = empty_slot * 56;
 		u8 * something2 = ((u8 *) (daycare_data + 2)) + empty_slot_times_56 + 36;
 		StringCopy(something2, gSaveBlock2);
@@ -145,7 +145,7 @@ void sub_80413C8()
 	lsrs r4, r0, 24\n\
 	mov r9, r4\n\
 	adds r0, r7, 0\n\
-	bl sub_80A2B94\n\
+	bl MonHasMail\n\
 	lsls r0, 24\n\
 	cmp r0, 0\n\
 	beq _0804144A\n\
@@ -190,7 +190,7 @@ void sub_80413C8()
 	ldm r1!, {r0,r2,r3}\n\
 	stm r4!, {r0,r2,r3}\n\
 	adds r0, r7, 0\n\
-	bl sub_80A2DF8\n\
+	bl TakeMailFromMon\n\
 _0804144A:\n\
 	mov r2, r9\n\
 	lsls r4, r2, 24\n\
@@ -204,7 +204,7 @@ _0804144A:\n\
 	movs r2, 0x50\n\
 	bl memcpy\n\
 	adds r0, r4, 0\n\
-	bl pokemon_restore_pp\n\
+	bl BoxMonRestorePP\n\
 	movs r0, 0x88\n\
 	lsls r0, 1\n\
 	add r0, r8\n\
@@ -230,7 +230,7 @@ _08041498: .4byte 0x00002b4c\n\
 
 void daycare_send()
 {
-	sub_80413C8(gPlayerParty + gUnknown_03005CE0, gSaveBlock1.filler_2F9C);
+	sub_80413C8(gPlayerParty + gLastFieldPokeMenuOpened, gSaveBlock1.filler_2F9C);
 }
 
 void sub_80417F4(u8 *);
