@@ -20,8 +20,6 @@ asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
 
-u32 NationalPokedexNumToSpecies(u16 nationalNum);
-
 struct MonCoords
 {
     u8 x, y;
@@ -109,7 +107,7 @@ enum
     TDA_TASK_B_ID = 15,
 
     // Appears to be responsible for text
-            TDB_0 = 0,
+    TDB_0 = 0,
     TDB_TASK_A_ID = 1,
     TDB_CURRENT_PAGE = 2,
     TDB_3 = 3,
@@ -234,12 +232,12 @@ static u8 sub_8144454(u8 page, u8 taskIdA);
 static void task_d_8144514(u8 taskIdD);
 static bool8 sub_8144ECC(u8 data, u8 taskIdA);
 static void sub_81450AC(u8 taskIdA);
-void sub_8145128(u16, u16, u16);
+static void sub_8145128(u16, u16, u16);
 static void sub_81452D0(u16 arg0, u16 palette);
 static void spritecb_player_8145378(struct Sprite *sprite);
 static void spritecb_rival_8145420(struct Sprite *sprite);
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position);
-void sub_81458DC(void);
+static u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position);
+static void sub_81458DC(void);
 
 static void vblank_8143948(void)
 {
@@ -1210,165 +1208,40 @@ static void sub_81450AC(u8 taskIdA)
     gUnknown_0203935C = 1;
 }
 
-#ifdef NONMATCHING
-// Sets up the tilemap for 'misc/end_copyright.png'
-void sub_8145128(u16 arg0, u16 arg1, u16 arg2) {
-    u16 i;
+static void sub_8145128(u16 arg0, u16 arg1, u16 arg2) {
     u16 baseTile;
-    u16 offset0, offset1, offset2, offset3, offset4;
+    u16 i;
 
     LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *) (VRAM + arg0));
     LoadPalette(gIntroCopyright_Pal, arg2, sizeof(gIntroCopyright_Pal));
 
     baseTile = (arg2 / 16) << 12;
 
-    offset0 = baseTile + 1;
     for (i = 0; i < 32 * 32; i++)
     {
         ((u16 *) (VRAM + arg1))[i] = baseTile + 1;
     }
 
-    offset1 = offset0 + 1;
-    offset2 = offset1 + 21;
-    offset3 = offset2 + 20;
-    offset4 = offset3 + 23;
-
     for (i = 0; i < 21; i++)
     {
-        ((u16 *) (VRAM + arg1))[7 * 32 + 4 + i] = offset1 + i;
+        ((u16 *) (VRAM + arg1))[7 * 32 + 4 + i] = i + 2 + baseTile;
     }
 
     for (i = 0; i < 20; i++)
     {
-        ((u16 *) (VRAM + arg1))[9 * 32 + 4 + i] = offset2 + i;
+        ((u16 *) (VRAM + arg1))[9 * 32 + 4 + i] = i + 23 + baseTile;
     }
 
     for (i = 0; i < 23; i++)
     {
-        ((u16 *) (VRAM + arg1))[11 * 32 + 4 + i] = offset3 + i;
+        ((u16 *) (VRAM + arg1))[11 * 32 + 4 + i] = i + 43 + baseTile;
     }
 
     for (i = 0; i < 12; i++)
     {
-        ((u16 *) (VRAM + arg1))[13 * 32 + 4 + i] = offset4 + i;
+        ((u16 *) (VRAM + arg1))[13 * 32 + 4 + i] = i + 66 + baseTile;
     }
 }
-#else
-__attribute__((naked))
-void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    adds r3, r0, 0\n\
-    adds r4, r2, 0\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    lsls r1, 16\n\
-    lsrs r7, r1, 16\n\
-    lsls r4, 16\n\
-    lsrs r5, r4, 16\n\
-    ldr r0, _081451EC @ =gCreditsCopyrightEnd_Gfx\n\
-    movs r6, 0xC0\n\
-    lsls r6, 19\n\
-    adds r3, r6\n\
-    adds r1, r3, 0\n\
-    bl LZ77UnCompVram\n\
-    ldr r0, _081451F0 @ =gIntroCopyright_Pal\n\
-    adds r1, r5, 0\n\
-    movs r2, 0x20\n\
-    bl LoadPalette\n\
-    lsrs r4, 20\n\
-    lsls r4, 28\n\
-    lsrs r4, 16\n\
-    movs r2, 0\n\
-    adds r1, r4, 0x1\n\
-    ldr r3, _081451F4 @ =0x000003ff\n\
-_0814515E:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r6\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, r3\n\
-    bls _0814515E\n\
-    movs r2, 0\n\
-    adds r0, r4, 0x2\n\
-    adds r6, r4, 0\n\
-    adds r6, 0x17\n\
-    movs r1, 0x2B\n\
-    adds r1, r4\n\
-    mov r12, r1\n\
-    adds r4, 0x42\n\
-    ldr r5, _081451F8 @ =0x060001c8\n\
-    adds r3, r0, 0\n\
-_08145184:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x14\n\
-    bls _08145184\n\
-    movs r2, 0\n\
-    ldr r5, _081451FC @ =0x06000248\n\
-    adds r3, r6, 0\n\
-_0814519E:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x13\n\
-    bls _0814519E\n\
-    movs r2, 0\n\
-    ldr r5, _08145200 @ =0x060002c8\n\
-    mov r3, r12\n\
-_081451B8:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x16\n\
-    bls _081451B8\n\
-    movs r2, 0\n\
-    ldr r3, _08145204 @ =0x06000348\n\
-_081451D0:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r3\n\
-    adds r1, r2, r4\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0xB\n\
-    bls _081451D0\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_081451EC: .4byte gCreditsCopyrightEnd_Gfx\n\
-_081451F0: .4byte gIntroCopyright_Pal\n\
-_081451F4: .4byte 0x000003ff\n\
-_081451F8: .4byte 0x060001c8\n\
-_081451FC: .4byte 0x06000248\n\
-_08145200: .4byte 0x060002c8\n\
-_08145204: .4byte 0x06000348\n\
-    .syntax divided\n");
-}
-#endif
 
 u16 sub_8145208(u8 arg0)
 {
@@ -1621,33 +1494,14 @@ void spritecb_81454E0(struct Sprite *sprite) {
     }
 }
 
-#ifdef NONMATCHING
-/*
-extern struct SpriteFrameImage *gUnknown_0840B69C[];
-extern const union AmimCmd *const gSpriteAnimTable_81E7C64[];
-extern struct SpriteTemplate gUnknown_0840B6B8;
-
-void sub_8143648(u16 paletteTag, u8 arg1) {
-    gUnknown_02024E8C = gUnknown_0840B6B8;
-    gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = gUnknown_0840B69C[arg1];
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *) gSpriteAnimTable_81E7C64;
-}
-*/
-
-void sub_8143648(u16 paletteTag, u8 arg1);
-
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position)
+static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 {
-    u32 species;
     u32 personality;
     void *palette;
     u8 spriteId;
     u8 spriteId2;
 
-    // FIXME: For some reason r0 is copied to r6 before.
-    species = NationalPokedexNumToSpecies(nationalNum);
-
+    species = NationalPokedexNumToSpecies(species);
 
     switch (species)
     {
@@ -1693,172 +1547,6 @@ u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position)
 
     return spriteId;
 }
-#else
-__attribute__((naked))
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    mov r10, r1\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    str r2, [sp, 0x10]\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    mov r9, r3\n\
-    adds r0, r6, 0\n\
-    bl NationalPokedexNumToSpecies\n\
-    adds r6, r0, 0\n\
-    cmp r6, 0xC9\n\
-    beq _081456F8\n\
-    movs r0, 0x9A\n\
-    lsls r0, 1\n\
-    cmp r6, r0\n\
-    beq _081456EE\n\
-    movs r7, 0\n\
-    b _081456FC\n\
-_081456EE:\n\
-    ldr r0, _081456F4 @ =gSaveBlock2\n\
-    ldr r7, [r0, 0x20]\n\
-    b _081456FC\n\
-    .align 2, 0\n\
-_081456F4: .4byte gSaveBlock2\n\
-_081456F8:\n\
-    ldr r0, _081457E8 @ =gSaveBlock2\n\
-    ldr r7, [r0, 0x1C]\n\
-_081456FC:\n\
-    lsls r0, r6, 3\n\
-    ldr r1, _081457EC @ =gMonFrontPicTable\n\
-    adds r0, r1\n\
-    ldr r1, _081457F0 @ =gMonFrontPicCoords\n\
-    lsls r2, r6, 2\n\
-    adds r2, r1\n\
-    ldrb r1, [r2]\n\
-    ldrb r2, [r2, 0x1]\n\
-    movs r3, 0x80\n\
-    lsls r3, 18\n\
-    ldr r4, _081457F4 @ =gUnknown_0840B5A0\n\
-    mov r8, r4\n\
-    mov r5, r9\n\
-    lsls r4, r5, 2\n\
-    add r4, r8\n\
-    ldr r4, [r4]\n\
-    str r4, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    str r7, [sp, 0x8]\n\
-    movs r4, 0x1\n\
-    str r4, [sp, 0xC]\n\
-    bl LoadSpecialPokePic\n\
-    ldr r2, _081457F8 @ =0x0000ffff\n\
-    adds r0, r6, 0\n\
-    movs r1, 0\n\
-    bl species_and_otid_get_pal\n\
-    lsls r5, 4\n\
-    mov r8, r5\n\
-    movs r1, 0x80\n\
-    lsls r1, 1\n\
-    add r1, r8\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    movs r2, 0x20\n\
-    bl LoadCompressedPalette\n\
-    mov r7, r9\n\
-    lsls r6, r7, 24\n\
-    lsrs r6, 24\n\
-    mov r0, r9\n\
-    adds r1, r6, 0\n\
-    bl sub_8143648\n\
-    ldr r0, _081457FC @ =gUnknown_02024E8C\n\
-    mov r2, r10\n\
-    lsls r1, r2, 16\n\
-    asrs r1, 16\n\
-    ldr r3, [sp, 0x10]\n\
-    lsls r2, r3, 16\n\
-    asrs r2, 16\n\
-    movs r3, 0\n\
-    bl CreateSprite\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r5, _08145800 @ =gSprites\n\
-    lsls r2, r4, 4\n\
-    adds r2, r4\n\
-    lsls r2, 2\n\
-    adds r3, r2, r5\n\
-    ldrb r1, [r3, 0x5]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    mov r7, r8\n\
-    orrs r0, r7\n\
-    movs r1, 0xD\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    strb r0, [r3, 0x5]\n\
-    mov r0, r9\n\
-    adds r0, 0x1\n\
-    strh r0, [r3, 0x30]\n\
-    movs r0, 0x3E\n\
-    adds r0, r3\n\
-    mov r8, r0\n\
-    ldrb r0, [r0]\n\
-    orrs r0, r1\n\
-    mov r1, r8\n\
-    strb r0, [r1]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x1C\n\
-    adds r2, r0\n\
-    ldr r0, _08145804 @ =spritecb_81454E0\n\
-    str r0, [r2]\n\
-    ldr r0, _08145808 @ =gSpriteTemplate_840CAEC\n\
-    movs r2, 0x20\n\
-    ldrsh r1, [r3, r2]\n\
-    movs r7, 0x22\n\
-    ldrsh r2, [r3, r7]\n\
-    movs r3, 0x1\n\
-    bl CreateSprite\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    strh r4, [r0, 0x2E]\n\
-    adds r1, r6, 0\n\
-    bl StartSpriteAnimIfDifferent\n\
-    adds r0, r4, 0\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_081457E8: .4byte gSaveBlock2\n\
-_081457EC: .4byte gMonFrontPicTable\n\
-_081457F0: .4byte gMonFrontPicCoords\n\
-_081457F4: .4byte gUnknown_0840B5A0\n\
-_081457F8: .4byte 0x0000ffff\n\
-_081457FC: .4byte gUnknown_02024E8C\n\
-_08145800: .4byte gSprites\n\
-_08145804: .4byte spritecb_81454E0\n\
-_08145808: .4byte gSpriteTemplate_840CAEC\n\
-    .syntax divided\n");
-}
-#endif
 
 void spritecb_814580C(struct Sprite *sprite)
 {
@@ -1876,317 +1564,79 @@ void spritecb_814580C(struct Sprite *sprite)
     sprite->pos1.y = gSprites[sprite->data0].pos1.y;
 }
 
-#ifdef NONMATCHING
-void sub_81458DC(void) {
-    u16 dexNum, seenTypesCount, count, i2;
-
+static void sub_81458DC(void) {
     struct Unk201C000 *unk201C000 = &ewram1c000;
+    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
+    u16 seenTypesCount;
+    u16 page;
+    u16 dexNum;
+    u16 j;
 
-    const u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
-
-    dexNum = 1;
-    seenTypesCount = 0;
-    for (; dexNum < 386; dexNum++)
+    for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
     {
         if (sub_8090D90(dexNum, 1))
         {
             unk201C000->unk90[seenTypesCount] = dexNum;
-            seenTypesCount += 1;
+            seenTypesCount++;
         }
     }
 
-    count = seenTypesCount;
-    while (count < 386)
+    for (dexNum = seenTypesCount; dexNum < 386; dexNum++)
     {
-        unk201C000->unk90[count] = 0;
-        count += 1;
+        unk201C000->unk90[dexNum] = 0;
     }
 
     unk201C000->unk394 = seenTypesCount;
     if (unk201C000->unk394 < POKEMON_TILE_COUNT)
     {
-        unk201C000->unk8E = unk201C000->unk394;
+        unk201C000->unk8E = seenTypesCount;
     }
     else
     {
         unk201C000->unk8E = POKEMON_TILE_COUNT;
     }
 
-    for (i2 = 0; i2 < POKEMON_TILE_COUNT;)
+    j = 0;
+    do
     {
-        const u16 r2 = Random() % unk201C000->unk394;
-        unk201C000->unk0[i2] = unk201C000->unk90[r2];
-        i2 += 1;
+        page = Random() % unk201C000->unk394;
+        unk201C000->unk0[j] = unk201C000->unk90[page];
 
-        unk201C000->unk90[r2] = 0;
-        unk201C000->unk394 -= 1;
-
-        if (r2 != unk201C000->unk394)
+        j++;
+        unk201C000->unk90[page] = 0;
+        unk201C000->unk394--;
+        if (page != unk201C000->unk394)
         {
-            unk201C000->unk90[r2] = unk201C000->unk90[unk201C000->unk394];
+            unk201C000->unk90[page] = unk201C000->unk90[unk201C000->unk394];
             unk201C000->unk90[unk201C000->unk394] = 0;
         }
-
-        if (unk201C000->unk394 == 0)
-        {
-            break;
-        }
     }
+    while (unk201C000->unk394 != 0 && j < POKEMON_TILE_COUNT);
 
     if (unk201C000->unk8E < POKEMON_TILE_COUNT)
     {
-        u16 i;
-        u16 page;
-        for (i = unk201C000->unk8E; i < POKEMON_TILE_COUNT; i++)
+        for (j = unk201C000->unk8E, page = 0; j < POKEMON_TILE_COUNT; j++)
         {
-            unk201C000->unk0[i] = unk201C000->unk0[page];
-            page += 1;
+            unk201C000->unk0[j] = unk201C000->unk0[page];
 
+            page++;
             if (page == unk201C000->unk8E)
-            {
                 page = 0;
-            }
         }
+        unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
     }
     else
     {
-        u16 starterIndex;
-        for (starterIndex = 0; starterIndex < POKEMON_TILE_COUNT; starterIndex++)
-        {
-            if (unk201C000->unk0[starterIndex] == starter)
-            {
-                break;
-            }
-        }
 
-        if (starterIndex < unk201C000->unk8E)
+        for (dexNum = 0; unk201C000->unk0[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++);
+
+        if (dexNum < unk201C000->unk8E - 1)
         {
-            unk201C000->unk0[starterIndex] = unk201C000->unk0[POKEMON_TILE_COUNT - 1];
+            unk201C000->unk0[dexNum] = unk201C000->unk0[POKEMON_TILE_COUNT - 1];
+            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
         }
+        else
+            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
     }
-
-    unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
     unk201C000->unk8E = POKEMON_TILE_COUNT;
 }
-#else
-__attribute__((naked))
-void sub_81458DC(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r7, _0814597C @ =0x0201c000\n\
-    ldr r0, _08145980 @ =0x00004023\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl GetStarterPokemon\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl SpeciesToNationalPokedexNum\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r10, r0\n\
-    movs r4, 0x1\n\
-    movs r5, 0\n\
-    ldr r0, _08145984 @ =0x00000181\n\
-    mov r8, r0\n\
-_0814590E:\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    bl sub_8090D90\n\
-    lsls r0, 24\n\
-    adds r6, r7, 0\n\
-    adds r6, 0x90\n\
-    cmp r0, 0\n\
-    beq _0814592C\n\
-    lsls r0, r5, 1\n\
-    adds r0, r6, r0\n\
-    strh r4, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_0814592C:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, r8\n\
-    bls _0814590E\n\
-    adds r4, r5, 0\n\
-    ldr r0, _08145984 @ =0x00000181\n\
-    lsls r1, r4, 16\n\
-    mov r9, r1\n\
-    movs r2, 0x8E\n\
-    adds r2, r7\n\
-    mov r8, r2\n\
-    adds r1, r7, 0\n\
-    adds r1, 0x86\n\
-    str r1, [sp]\n\
-    cmp r4, r0\n\
-    bhi _08145964\n\
-    adds r1, r6, 0\n\
-    movs r3, 0\n\
-    adds r2, r0, 0\n\
-_08145954:\n\
-    lsls r0, r4, 1\n\
-    adds r0, r1, r0\n\
-    strh r3, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, r2\n\
-    bls _08145954\n\
-_08145964:\n\
-    movs r2, 0xE5\n\
-    lsls r2, 2\n\
-    adds r0, r7, r2\n\
-    strh r5, [r0]\n\
-    mov r1, r9\n\
-    lsrs r0, r1, 16\n\
-    cmp r0, 0x43\n\
-    bhi _08145988\n\
-    mov r2, r8\n\
-    strh r5, [r2]\n\
-    b _0814598E\n\
-    .align 2, 0\n\
-_0814597C: .4byte 0x0201c000\n\
-_08145980: .4byte 0x00004023\n\
-_08145984: .4byte 0x00000181\n\
-_08145988:\n\
-    movs r0, 0x44\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-_0814598E:\n\
-    movs r5, 0\n\
-    movs r2, 0xE5\n\
-    lsls r2, 2\n\
-    adds r4, r7, r2\n\
-    mov r9, r5\n\
-    b _0814599E\n\
-_0814599A:\n\
-    cmp r5, 0x43\n\
-    bhi _081459EE\n\
-_0814599E:\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    ldrh r1, [r4]\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    lsls r1, r5, 1\n\
-    adds r1, r7, r1\n\
-    lsls r0, r2, 1\n\
-    adds r3, r6, r0\n\
-    ldrh r0, [r3]\n\
-    strh r0, [r1]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    mov r0, r9\n\
-    strh r0, [r3]\n\
-    ldrh r0, [r4]\n\
-    subs r0, 0x1\n\
-    strh r0, [r4]\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r2, r0\n\
-    beq _081459E8\n\
-    ldrh r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r6, r0\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r3]\n\
-    ldrh r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r6, r0\n\
-    mov r1, r9\n\
-    strh r1, [r0]\n\
-_081459E8:\n\
-    ldrh r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _0814599A\n\
-_081459EE:\n\
-    mov r2, r8\n\
-    ldrh r0, [r2]\n\
-    cmp r0, 0x43\n\
-    bhi _08145A26\n\
-    adds r5, r0, 0\n\
-    movs r2, 0\n\
-    cmp r5, 0x43\n\
-    bhi _08145A5C\n\
-    mov r3, r8\n\
-_08145A00:\n\
-    lsls r1, r5, 1\n\
-    adds r1, r7, r1\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    ldrh r0, [r3]\n\
-    cmp r2, r0\n\
-    bne _08145A1A\n\
-    movs r2, 0\n\
-_08145A1A:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x43\n\
-    bls _08145A00\n\
-    b _08145A5C\n\
-_08145A26:\n\
-    movs r4, 0\n\
-    ldrh r0, [r7]\n\
-    cmp r0, r10\n\
-    beq _08145A42\n\
-_08145A2E:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    lsls r0, r4, 1\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r10\n\
-    beq _08145A42\n\
-    cmp r4, 0x43\n\
-    bls _08145A2E\n\
-_08145A42:\n\
-    mov r1, r8\n\
-    ldrh r0, [r1]\n\
-    subs r0, 0x1\n\
-    cmp r4, r0\n\
-    bge _08145A5C\n\
-    lsls r0, r4, 1\n\
-    adds r0, r7, r0\n\
-    ldr r2, [sp]\n\
-    ldrh r1, [r2]\n\
-    strh r1, [r0]\n\
-    mov r0, r10\n\
-    strh r0, [r2]\n\
-    b _08145A62\n\
-_08145A5C:\n\
-    mov r2, r10\n\
-    ldr r1, [sp]\n\
-    strh r2, [r1]\n\
-_08145A62:\n\
-    movs r0, 0x44\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
