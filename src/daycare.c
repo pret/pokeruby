@@ -118,7 +118,7 @@ s8 daycare_empty_slot(struct BoxPokemon * daycare_data)
 	if(MonHasMail(mon) != 0){ // if the mon holds a mail?
 		u8 empty_slot_times_56 = empty_slot * 56;
 		u8 * something2 = ((u8 *) (daycare_data + 2)) + empty_slot_times_56 + 36;
-		StringCopy(something2, gSaveBlock2);
+		StringCopy(something2, gSaveBlock2.playerName);
 		PadNameString(something2, 0xFC);
 		something2 += 8;
 		pokemon_get_nick(mon, something2);
@@ -230,7 +230,7 @@ _08041498: .4byte 0x00002b4c\n\
 
 void daycare_send()
 {
-	sub_80413C8(gPlayerParty + gLastFieldPokeMenuOpened, gSaveBlock1.filler_2F9C);
+	sub_80413C8(gPlayerParty + gLastFieldPokeMenuOpened, gSaveBlock1.daycareData);
 }
 
 void sub_80417F4(u8 *);
@@ -238,9 +238,9 @@ void sub_80417F4(u8 *);
 void sub_80414C0(struct BoxPokemon * daycare_data)
 {
 	u32 second_species;
-	if((GetBoxMonData(daycare_data + 1, MON_DATA_SPECIES) != 0) && ((second_species = GetBoxMonData(daycare_data, MON_DATA_SPECIES)) == 0)){
-		memcpy(daycare_data, daycare_data + 1, 80);
-		ZeroBoxMonData(daycare_data + 1);
+	if((GetBoxMonData(&daycare_data[1], MON_DATA_SPECIES) != 0) && ((second_species = GetBoxMonData(&daycare_data[0], MON_DATA_SPECIES)) == 0)){
+		daycare_data[0] = daycare_data[1];
+		ZeroBoxMonData(&daycare_data[1]);
 		memcpy(daycare_data + 2, (u8 *) (daycare_data + 1) + 0x88, 0x38);
 		*((u32 *)(daycare_data) + 68) = *((u32 *)(daycare_data) + 69);
 		*((u32 *)(daycare_data) + 69) = second_species;
@@ -272,4 +272,112 @@ void sub_804151C(struct Pokemon * mon)
 	end:
 
 	CalculateMonStats(mon);
+}
+
+__attribute__((naked))
+u16 sub_8041570(struct BoxPokemon * daycare_data, u8 a2){
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r9\n\
+	mov r6, r8\n\
+	push {r6,r7}\n\
+	sub sp, 0x68\n\
+	adds r5, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r4, r1, 24\n\
+	lsls r7, r4, 2\n\
+	adds r0, r7, r4\n\
+	lsls r0, 4\n\
+	adds r6, r5, r0\n\
+	ldr r1, _08041640 @ =gStringVar1\n\
+	adds r0, r6, 0\n\
+	bl pokemon_get_nick_\n\
+	adds r0, r6, 0\n\
+	movs r1, 0xB\n\
+	bl GetBoxMonData\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	mov r9, r0\n\
+	adds r0, r6, 0\n\
+	mov r1, sp\n\
+	bl sub_803B4B4\n\
+	mov r0, sp\n\
+	movs r1, 0x38\n\
+	bl GetMonData\n\
+	cmp r0, 0x64\n\
+	beq _080415D8\n\
+	mov r0, sp\n\
+	movs r1, 0x19\n\
+	bl GetMonData\n\
+	movs r2, 0x88\n\
+	lsls r2, 1\n\
+	adds r1, r5, r2\n\
+	adds r1, r7\n\
+	ldr r1, [r1]\n\
+	adds r0, r1\n\
+	str r0, [sp, 0x64]\n\
+	add r2, sp, 0x64\n\
+	mov r0, sp\n\
+	movs r1, 0x19\n\
+	bl SetMonData\n\
+	mov r0, sp\n\
+	bl sub_804151C\n\
+_080415D8:\n\
+	ldr r0, _08041644 @ =gPlayerParty\n\
+	movs r1, 0xFA\n\
+	lsls r1, 1\n\
+	adds r1, r0\n\
+	mov r8, r1\n\
+	mov r0, r8\n\
+	mov r1, sp\n\
+	movs r2, 0x64\n\
+	bl memcpy\n\
+	lsls r0, r4, 3\n\
+	subs r0, r4\n\
+	lsls r1, r0, 3\n\
+	adds r0, r5, r1\n\
+	adds r0, 0xC0\n\
+	ldrh r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _08041610\n\
+	adds r4, r1, 0\n\
+	adds r4, 0xA0\n\
+	adds r4, r5, r4\n\
+	mov r0, r8\n\
+	adds r1, r4, 0\n\
+	bl GiveMailToMon2\n\
+	adds r0, r4, 0\n\
+	bl sub_80417F4\n\
+_08041610:\n\
+	bl party_compaction\n\
+	adds r0, r6, 0\n\
+	bl ZeroBoxMonData\n\
+	movs r2, 0x88\n\
+	lsls r2, 1\n\
+	adds r0, r5, r2\n\
+	adds r0, r7\n\
+	movs r1, 0\n\
+	str r1, [r0]\n\
+	adds r0, r5, 0\n\
+	bl sub_80414C0\n\
+	bl CalculatePlayerPartyCount\n\
+	mov r0, r9\n\
+	add sp, 0x68\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_08041640: .4byte gStringVar1\n\
+_08041644: .4byte gPlayerParty\n\
+	.syntax divided");
+}
+
+extern u8 gSpecialVar_0x8004;
+
+u16 sub_8041648()
+{
+	return sub_8041570(gSaveBlock1.daycareData, gSpecialVar_0x8004);
 }

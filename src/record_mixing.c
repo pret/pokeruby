@@ -66,7 +66,7 @@ void sub_80B92AC(void)
     memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, 0x28);
     memcpy(gUnknown_02038738, gSaveBlock1.filler_303C, 0x38);
     memcpy(gUnknown_02038738 + 0x38, gSaveBlock1.filler_3074, 0x38);
-    sub_8041324(gSaveBlock1.filler_2F9C, gUnknown_02038738);
+    sub_8041324(gSaveBlock1.daycareData, gUnknown_02038738);
     memcpy(unk_2018000.filler10AC, gUnknown_083D0280, 0x78);
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
 

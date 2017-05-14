@@ -538,7 +538,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct BoxPokemon filler_2F9C[2]; // daycare related
+    /*0x2F9C*/ struct BoxPokemon daycareData[2];
     /*0x303C*/ u8 filler_303C[0x38];
     /*0x3074*/ u8 filler_3074[0x42];
     /*0x30B6*/ u8 filler_30B6;
