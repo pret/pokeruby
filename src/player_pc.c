@@ -21,28 +21,41 @@ enum
     QUANTITY,
 };
 
+// special item description handlers
+enum
+{
+    ITEMPC_SWITCH_WHICH_ITEM = 0xFFF7,
+    ITEMPC_OKAY_TO_THROW_AWAY,
+    ITEMPC_TOO_IMPORTANT,
+    ITEMPC_NO_MORE_ROOM,
+    ITEMPC_THREW_AWAY_ITEM,
+    ITEMPC_HOW_MANY_TO_TOSS,
+    ITEMPC_WITHDREW_THING,
+    ITEMPC_HOW_MANY_TO_WITHDRAW,
+    ITEMPC_GO_BACK_TO_PREV
+};
+
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
-extern u8 sub_813AF3C(void);
 extern void sub_813AF78(void);
 extern void sub_813B108(u8);
 extern void sub_813B174(u8);
 extern void sub_80A6A30(void);
 extern u8 sub_807D770(void);
-extern void sub_813AE6C(u8, u8);
-extern void sub_813AD58(u16);
-extern void sub_813AE0C(u8);
 extern void sub_80F996C(u8);
 extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
 extern void sub_80F98DC(int);
 extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
 extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
+extern void sub_80F944C(void);
+extern void LoadScrollIndicatorPalette(void);
 
 extern u8 gOtherText_NoItems[];
 
 extern u16 gNewGamePCItems[];
+extern u16 gUnknown_08406334[3];
 
 extern u8 gOtherText_WhatWillYouDo[];
 extern u8 gOtherText_NoMailHere[];
@@ -57,7 +70,16 @@ extern u8 gUnknown_08406327[];
 extern u8 gUnknown_08406330[];
 extern u8 gUnknown_0840631E[];
 extern u8 gUnknown_08406318[];
+extern u8 gMenuText_GoBackToPrev[];
 extern u8 gOtherText_CancelNoTerminator[];
+extern u8 gOtherText_HowManyToWithdraw[];
+extern u8 gOtherText_WithdrewThing[];
+extern u8 gOtherText_HowManyToToss[];
+extern u8 gOtherText_ThrewAwayItem[];
+extern u8 gOtherText_NoMoreRoom[];
+extern u8 gOtherText_TooImportant[];
+extern u8 gOtherText_OkayToThrowAwayPrompt[];
+extern u8 gOtherText_SwitchWhichItem[];
 
 extern u8 gUnknown_030007B4;
 extern u8 unk_201FE00[];
@@ -86,6 +108,11 @@ void sub_813A984(u8);
 void sub_813A9EC(u8);
 void sub_813AA30(u8, u8);
 void sub_813ABE8(u8);
+void sub_813AD58(u16);
+void sub_813AE0C(u8);
+void sub_813AE6C(u8, u8);
+void sub_813AF04(void);
+u8 sub_813AF3C(void);
 
 void NewGameInitPCItems(void)
 {
@@ -824,4 +851,98 @@ weirdCase:
         CreateVerticalScrollIndicators(1, 0xB8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);
+}
+
+void sub_813AD58(u16 itemId)
+{
+    u8 *string;
+
+    switch(itemId)
+    {
+        case ITEMPC_GO_BACK_TO_PREV:
+            string = gMenuText_GoBackToPrev;
+            break;
+        case ITEMPC_HOW_MANY_TO_WITHDRAW:
+            string = gOtherText_HowManyToWithdraw;
+            break;
+        case ITEMPC_WITHDREW_THING:
+            string = gOtherText_WithdrewThing;
+            break;
+        case ITEMPC_HOW_MANY_TO_TOSS:
+            string = gOtherText_HowManyToToss;
+            break;
+        case ITEMPC_THREW_AWAY_ITEM:
+            string = gOtherText_ThrewAwayItem;
+            break;
+        case ITEMPC_NO_MORE_ROOM:
+            string = gOtherText_NoMoreRoom;
+            break;
+        case ITEMPC_TOO_IMPORTANT:
+            string = gOtherText_TooImportant;
+            break;
+        case ITEMPC_OKAY_TO_THROW_AWAY:
+            string = gOtherText_OkayToThrowAwayPrompt;
+            break;
+        case ITEMPC_SWITCH_WHICH_ITEM:
+            string = gOtherText_SwitchWhichItem;
+            break;
+        default:
+            string = ItemId_GetDescription(itemId);
+            break;
+    }
+
+    sub_8072AB0(string, 8, 0x68, 0x68, 0x30, 1);
+}
+
+void sub_813AE0C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 var = data[1] + data[0];
+
+    sub_813ABE8(taskId);
+    
+    if(data[9] == 0)
+    {
+        if(var == data[2])
+            sub_813AD58(0xFFFF);
+        else
+            sub_813AD58(gSaveBlock1.pcItems[var].itemId);
+    }
+}
+
+void sub_813AE6C(u8 taskId, u8 var)
+{
+    s16 *data = gTasks[taskId].data;
+
+    sub_80F944C();
+    LoadScrollIndicatorPalette();
+    sub_813AF04();
+    MenuDrawTextWindow(0xF, 0, 0x1D, 0x13);
+    MenuDrawTextWindow(0, 0xC, 0xE, 0x13);
+    MenuDrawTextWindow(0, 0, 0xB, 3);
+    sub_813AD58(gSaveBlock1.pcItems[0].itemId);
+    MenuPrint(gUnknown_084062C0[var].text, 1, 1);
+    sub_813ABE8(taskId);
+    InitMenu(0, 0x10, 2, data[4], data[0], 0xD);
+}
+
+void sub_813AF04(void)
+{
+    u16 arr[3];
+
+    memcpy(arr, gUnknown_08406334, sizeof(arr));
+    LoadPalette(&arr[2], 0xDF, 2);
+    LoadPalette(&arr[1], 0xD1, 2);
+    LoadPalette(&arr[0], 0xD8, 2);
+}
+
+u8 sub_813AF3C(void)
+{
+    u8 i, j;
+
+    for(i = 0, j = 6; j < 16; j++)
+        if(gSaveBlock1.mail[j].itemId != 0)
+            i++;
+
+    return i;
 }
