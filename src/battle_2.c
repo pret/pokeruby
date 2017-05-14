@@ -621,25 +621,42 @@ void sub_800F298(void)
     BuildOamBuffer();
     switch (gUnknown_02024D1E[0])
     {
-        case 0:
-            if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
-            {
-                ewram0.unk0 = 1;
-                ewram0.unk1 = 1;
-                sub_800E9EC();
-                sub_800EAAC();
-                SendBlock(bitmask_all_link_players_but_self(), ewram, 0x20);
-                gUnknown_02024D1E[0]++;
-            }
-            break;
-        case 1:
-            if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-            {
-                u8 taskId;
+    case 0:
+        if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
+        {
+            ewram0.unk0 = 1;
+            ewram0.unk1 = 1;
+            sub_800E9EC();
+            sub_800EAAC();
+            SendBlock(bitmask_all_link_players_but_self(), ewram, 0x20);
+            gUnknown_02024D1E[0]++;
+        }
+        break;
+    case 1:
+        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
+        {
+            u8 taskId;
 
-                ResetBlockReceivedFlags();
-                id = 0;
-                if (gBlockRecvBuffer[0][0] == 0x100)
+            ResetBlockReceivedFlags();
+            id = 0;
+            if (gBlockRecvBuffer[0][0] == 0x100)
+            {
+                if (playerId == 0)
+                    gBattleTypeFlags |= 12;
+                else
+                    gBattleTypeFlags |= 8;
+                id++;
+            }
+            if (id == 0)
+            {
+                s32 i;
+
+                for (i = 0; i < MAX_LINK_PLAYERS; i++)
+                {
+                    if (gBlockRecvBuffer[0][0] != gBlockRecvBuffer[i][0])
+                        break;
+                }
+                if (i == MAX_LINK_PLAYERS)
                 {
                     if (playerId == 0)
                         gBattleTypeFlags |= 12;
@@ -649,231 +666,214 @@ void sub_800F298(void)
                 }
                 if (id == 0)
                 {
-                    s32 i;
-
-                    for (i = 0; i < MAX_LINK_PLAYERS; i++)
+                    while (id < MAX_LINK_PLAYERS)
                     {
-                        if (gBlockRecvBuffer[0][0] != gBlockRecvBuffer[i][0])
+                        if (gBlockRecvBuffer[id][0] == 0x0101 && id != playerId)
+                            if (id < playerId)
+                                break;
+                        if (gBlockRecvBuffer[id][0] > 0x0101 && id != playerId)
                             break;
-                    }
-                    if (i == MAX_LINK_PLAYERS)
-                    {
-                        if (playerId == 0)
-                            gBattleTypeFlags |= 12;
-                        else
-                            gBattleTypeFlags |= 8;
                         id++;
                     }
-                    if (id == 0)
-                    {
-                        while (id < MAX_LINK_PLAYERS)
-                        {
-                            if (gBlockRecvBuffer[id][0] == 0x0101 && id != playerId)
-                                if (id < playerId)
-                                    break;
-                            if (gBlockRecvBuffer[id][0] > 0x0101 && id != playerId)
-                                break;
-                            id++;
-                        }
-                        if (id == MAX_LINK_PLAYERS)
-                            gBattleTypeFlags |= 12;
-                        else
-                            gBattleTypeFlags |= 8;
-                    }
+                    if (id == MAX_LINK_PLAYERS)
+                        gBattleTypeFlags |= 12;
+                    else
+                        gBattleTypeFlags |= 8;
                 }
-                sub_800EB08();
-                memcpy(ewram1D000, gPlayerParty, sizeof(struct Pokemon) * 3);
-                taskId = CreateTask(sub_800DE30, 0);
-                gTasks[taskId].data[1] = 0x10E;
-                gTasks[taskId].data[2] = 0x5A;
-                gTasks[taskId].data[5] = 0;
-                gTasks[taskId].data[3] = 0;
-                gTasks[taskId].data[4] = 0;
-                for (id = 0; id < MAX_LINK_PLAYERS; id++)
+            }
+            sub_800EB08();
+            memcpy(ewram1D000, gPlayerParty, sizeof(struct Pokemon) * 3);
+            taskId = CreateTask(sub_800DE30, 0);
+            gTasks[taskId].data[1] = 0x10E;
+            gTasks[taskId].data[2] = 0x5A;
+            gTasks[taskId].data[5] = 0;
+            gTasks[taskId].data[3] = 0;
+            gTasks[taskId].data[4] = 0;
+            for (id = 0; id < MAX_LINK_PLAYERS; id++)
+            {
+                switch (gLinkPlayers[id].lp_field_18)
+                {
+                case 0:
+                    gTasks[taskId].data[3] |= gBlockRecvBuffer[id][1] & 0x3F;
+                    break;
+                case 1:
+                    gTasks[taskId].data[4] |= gBlockRecvBuffer[id][1] & 0x3F;
+                    break;
+                case 2:
+                    gTasks[taskId].data[3] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
+                    break;
+                case 3:
+                    gTasks[taskId].data[4] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
+                    break;
+                }
+            }
+            ZeroPlayerPartyMons();
+            ZeroEnemyPartyMons();
+            gUnknown_02024D1E[0]++;
+            goto step_2;
+        }
+        break;
+    case 2:
+      step_2:
+        if (sub_8007ECC())
+        {
+            SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
+            gUnknown_02024D1E[0]++;
+        }
+        break;
+    case 3:
+        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
+        {
+            ResetBlockReceivedFlags();
+            for (id = 0; id < MAX_LINK_PLAYERS; id++)
+            {
+                if (id == playerId)
                 {
                     switch (gLinkPlayers[id].lp_field_18)
                     {
+                    case 0:
+                    case 3:
+                        memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
+                        break;
+                    case 1:
+                    case 2:
+                        memcpy(gPlayerParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
+                        break;
+                    }
+                }
+                else
+                {
+                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
+                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
+                    {
+                        switch (gLinkPlayers[id].lp_field_18)
+                        {
                         case 0:
-                            gTasks[taskId].data[3] |= gBlockRecvBuffer[id][1] & 0x3F;
+                        case 3:
+                            memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
                             break;
                         case 1:
-                            gTasks[taskId].data[4] |= gBlockRecvBuffer[id][1] & 0x3F;
-                            break;
                         case 2:
-                            gTasks[taskId].data[3] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
+                            memcpy(gPlayerParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
                             break;
+                        }
+                    }
+                    else
+                    {
+                        switch (gLinkPlayers[id].lp_field_18)
+                        {
+                        case 0:
                         case 3:
-                            gTasks[taskId].data[4] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
+                            memcpy(gEnemyParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
                             break;
-                    }
-                }
-                ZeroPlayerPartyMons();
-                ZeroEnemyPartyMons();
-                gUnknown_02024D1E[0]++;
-                goto step_2;
-            }
-            break;
-        case 2:
-          step_2:
-            if (sub_8007ECC())
-            {
-                SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
-                gUnknown_02024D1E[0]++;
-            }
-            break;
-        case 3:
-            if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-            {
-                ResetBlockReceivedFlags();
-                for (id = 0; id < MAX_LINK_PLAYERS; id++)
-                {
-                    if (id == playerId)
-                    {
-                        switch (gLinkPlayers[id].lp_field_18)
-                        {
-                            case 0:
-                            case 3:
-                                memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                break;
-                            case 1:
-                            case 2:
-                                memcpy(gPlayerParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
-                         || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
-                        {
-                            switch (gLinkPlayers[id].lp_field_18)
-                            {
-                                case 0:
-                                case 3:
-                                    memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                    break;
-                                case 1:
-                                case 2:
-                                    memcpy(gPlayerParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (gLinkPlayers[id].lp_field_18)
-                            {
-                                case 0:
-                                case 3:
-                                    memcpy(gEnemyParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                    break;
-                                case 1:
-                                case 2:
-                                    memcpy(gEnemyParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                                    break;
-                            }
+                        case 1:
+                        case 2:
+                            memcpy(gEnemyParty + 3, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
+                            break;
                         }
                     }
                 }
-                gUnknown_02024D1E[0]++;
             }
-            break;
-        case 4:
-            if (sub_8007ECC())
-            {
-                SendBlock(bitmask_all_link_players_but_self(), ewram1D000 + 2, sizeof(struct Pokemon));
-                gUnknown_02024D1E[0]++;
-            }
-            break;
-        case 5:
-            if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-            {
-                ResetBlockReceivedFlags();
-                for (id = 0; id < MAX_LINK_PLAYERS; id++)
-                {
-                    if (id == playerId)
-                    {
-                        switch (gLinkPlayers[id].lp_field_18)
-                        {
-                            case 0:
-                            case 3:
-                                memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                break;
-                            case 1:
-                            case 2:
-                                memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
-                         || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
-                        {
-                            switch (gLinkPlayers[id].lp_field_18)
-                            {
-                                case 0:
-                                case 3:
-                                    memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                    break;
-                                case 1:
-                                case 2:
-                                    memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (gLinkPlayers[id].lp_field_18)
-                            {
-                                case 0:
-                                case 3:
-                                    memcpy(gEnemyParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                    break;
-                                case 1:
-                                case 2:
-                                    memcpy(gEnemyParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                                    break;
-                            }
-                        }
-                    }
-                }
-
-                shedinja_something(&gPlayerParty[0]);
-                shedinja_something(&gPlayerParty[1]);
-                shedinja_something(&gPlayerParty[2]);
-                shedinja_something(&gPlayerParty[3]);
-                shedinja_something(&gPlayerParty[4]);
-                shedinja_something(&gPlayerParty[5]);
-
-                shedinja_something(&gEnemyParty[0]);
-                shedinja_something(&gEnemyParty[1]);
-                shedinja_something(&gEnemyParty[2]);
-                shedinja_something(&gEnemyParty[3]);
-                shedinja_something(&gEnemyParty[4]);
-                shedinja_something(&gEnemyParty[5]);
-
-                gUnknown_02024D1E[0]++;
-            }
-            break;
-        case 6:
-            sub_800B950();
             gUnknown_02024D1E[0]++;
-            gUnknown_02024D1E[1] = 0;
-            gUnknown_02024D1E[2] = 0;
-            break;
-        case 7:
-            if (battle_load_something(gUnknown_02024D1F, gUnknown_02024D1F + 1) != 0)
+        }
+        break;
+    case 4:
+        if (sub_8007ECC())
+        {
+            SendBlock(bitmask_all_link_players_but_self(), ewram1D000 + 2, sizeof(struct Pokemon));
+            gUnknown_02024D1E[0]++;
+        }
+        break;
+    case 5:
+        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
+        {
+            ResetBlockReceivedFlags();
+            for (id = 0; id < MAX_LINK_PLAYERS; id++)
             {
-                gUnknown_030042D0 = gMain.callback1;
-                gMain.callback1 = sub_8010824;
-                SetMainCallback2(sub_800F808);
-                if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+                if (id == playerId)
                 {
-                    gTrainerBattleOpponent = 0x800;
-                    gBattleTypeFlags |= BATTLE_TYPE_20;
+                    switch (gLinkPlayers[id].lp_field_18)
+                    {
+                    case 0:
+                    case 3:
+                        memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                        break;
+                    case 1:
+                    case 2:
+                        memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                        break;
+                    }
+                }
+                else
+                {
+                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
+                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
+                    {
+                        switch (gLinkPlayers[id].lp_field_18)
+                        {
+                        case 0:
+                        case 3:
+                            memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                            break;
+                        case 1:
+                        case 2:
+                            memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        switch (gLinkPlayers[id].lp_field_18)
+                        {
+                        case 0:
+                        case 3:
+                            memcpy(gEnemyParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                            break;
+                        case 1:
+                        case 2:
+                            memcpy(gEnemyParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                            break;
+                        }
+                    }
                 }
             }
-            break;
+
+            shedinja_something(&gPlayerParty[0]);
+            shedinja_something(&gPlayerParty[1]);
+            shedinja_something(&gPlayerParty[2]);
+            shedinja_something(&gPlayerParty[3]);
+            shedinja_something(&gPlayerParty[4]);
+            shedinja_something(&gPlayerParty[5]);
+
+            shedinja_something(&gEnemyParty[0]);
+            shedinja_something(&gEnemyParty[1]);
+            shedinja_something(&gEnemyParty[2]);
+            shedinja_something(&gEnemyParty[3]);
+            shedinja_something(&gEnemyParty[4]);
+            shedinja_something(&gEnemyParty[5]);
+
+            gUnknown_02024D1E[0]++;
+        }
+        break;
+    case 6:
+        sub_800B950();
+        gUnknown_02024D1E[0]++;
+        gUnknown_02024D1E[1] = 0;
+        gUnknown_02024D1E[2] = 0;
+        break;
+    case 7:
+        if (battle_load_something(gUnknown_02024D1F, gUnknown_02024D1F + 1) != 0)
+        {
+            gUnknown_030042D0 = gMain.callback1;
+            gMain.callback1 = sub_8010824;
+            SetMainCallback2(sub_800F808);
+            if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+            {
+                gTrainerBattleOpponent = 0x800;
+                gBattleTypeFlags |= BATTLE_TYPE_20;
+            }
+        }
+        break;
     }
 }
 
@@ -898,42 +898,42 @@ void sub_800F838(struct Sprite *sprite)
 
     switch (sprite->data0)
     {
-        case 0:
-            sprite->data0++;
-            sprite->data1 = 0;
-            sprite->data2 = 0x281;
-            sprite->data3 = 0;
-            sprite->data4 = 1;
-            // fall through
-        case 1:
-            sprite->data4--;
-            if (sprite->data4 == 0)
-            {
-                s32 i;
-                s32 r2;
-                s32 r0;
+    case 0:
+        sprite->data0++;
+        sprite->data1 = 0;
+        sprite->data2 = 0x281;
+        sprite->data3 = 0;
+        sprite->data4 = 1;
+        // fall through
+    case 1:
+        sprite->data4--;
+        if (sprite->data4 == 0)
+        {
+            s32 i;
+            s32 r2;
+            s32 r0;
 
-                sprite->data4 = 2;
-                r2 = sprite->data1 + sprite->data3 * 32;
-                r0 = sprite->data2 - sprite->data3 * 32;
-                for (i = 0; i < 29; i += 2)
-                {
-                    arr[r2 + i] = 0x3D;
-                    arr[r0 + i] = 0x3D;
-                }
-                sprite->data3++;
-                if (sprite->data3 == 21)
-                {
-                    sprite->data0++;
-                    sprite->data1 = 32;
-                }
+            sprite->data4 = 2;
+            r2 = sprite->data1 + sprite->data3 * 32;
+            r0 = sprite->data2 - sprite->data3 * 32;
+            for (i = 0; i < 29; i += 2)
+            {
+                arr[r2 + i] = 0x3D;
+                arr[r0 + i] = 0x3D;
             }
-            break;
-        case 2:
-            sprite->data1--;
-            if (sprite->data1 == 20)
-                SetMainCallback2(sub_800E7C4);
-            break;
+            sprite->data3++;
+            if (sprite->data3 == 21)
+            {
+                sprite->data0++;
+                sprite->data1 = 32;
+            }
+        }
+        break;
+    case 2:
+        sprite->data1--;
+        if (sprite->data1 == 20)
+            SetMainCallback2(sub_800E7C4);
+        break;
     }
 }
 
@@ -966,65 +966,65 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
             switch (gTrainers[trainerNum].partyFlags)
             {
-                case 0:
+            case 0:
+            {
+                struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                break;
+            }
+            case 1:
+            {
+                struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                for (j = 0; j < 4; j++)
                 {
-                    struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
-
-                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
-                        nameHash += gSpeciesNames[partyData[i].species][j];
-                    personalityValue += nameHash << 8;
-                    fixedIV = partyData[i].iv * 31 / 255;
-                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
-                    break;
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
                 }
-                case 1:
+                break;
+            }
+            case 2:
+            {
+                struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                break;
+            }
+            case 3:
+            {
+                struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
+
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                    nameHash += gSpeciesNames[partyData[i].species][j];
+                personalityValue += nameHash << 8;
+                fixedIV = partyData[i].iv * 31 / 255;
+                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                for (j = 0; j < 4; j++)
                 {
-                    struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
-
-                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
-                        nameHash += gSpeciesNames[partyData[i].species][j];
-                    personalityValue += nameHash << 8;
-                    fixedIV = partyData[i].iv * 31 / 255;
-                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
-
-                    for (j = 0; j < 4; j++)
-                    {
-                        SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
-                        SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                    }
-                    break;
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
                 }
-                case 2:
-                {
-                    struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
-
-                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
-                        nameHash += gSpeciesNames[partyData[i].species][j];
-                    personalityValue += nameHash << 8;
-                    fixedIV = partyData[i].iv * 31 / 255;
-                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
-
-                    SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
-                    break;
-                }
-                case 3:
-                {
-                    struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
-
-                    for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
-                        nameHash += gSpeciesNames[partyData[i].species][j];
-                    personalityValue += nameHash << 8;
-                    fixedIV = partyData[i].iv * 31 / 255;
-                    CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
-
-                    SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
-                    for (j = 0; j < 4; j++)
-                    {
-                        SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
-                        SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                    }
-                    break;
-                }
+                break;
+            }
             }
         }
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
@@ -1093,7 +1093,7 @@ void sub_800FE40(u8 taskId)
     u8 r2 = ewram160CB;
     u32 r7;
     s32 i;
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         switch (gLinkPlayers[r2].lp_field_18)
@@ -1122,41 +1122,41 @@ void sub_800FE40(u8 taskId)
         u16 species = GetMonData(&sp4[i], MON_DATA_SPECIES2);
         u16 hp = GetMonData(&sp4[i], MON_DATA_HP);
         u32 status = GetMonData(&sp4[i], MON_DATA_STATUS);
-        
+
         if (species == 0)
             continue;
         if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
-        
+
         if (species == 0)
             continue;
         if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
-        
+
         if (species == 0)
             continue;
         if (species != SPECIES_EGG && hp == 0)
             r7 |= 3 << i * 2;
     }
     gTasks[taskId].data[3] = r7;
-    
+
     r7 = 0;
     for (i = 0; i < 6; i++)
     {
         u16 species = GetMonData(&sp8[i], MON_DATA_SPECIES2);
         u16 hp = GetMonData(&sp8[i], MON_DATA_HP);
         u32 status = GetMonData(&sp8[i], MON_DATA_STATUS);
-        
+
         if (species == 0)
             continue;
         if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
-        
+
         if (species == 0)
             continue;
         if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
-        
+
         if (species == 0)
             continue;
         if (species != SPECIES_EGG && hp == 0)
@@ -1169,7 +1169,7 @@ void c2_8011A1C(void)
 {
     s32 i;
     u8 taskId;
-    
+
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
     CpuFill32(0, (void *)VRAM, VRAM_SIZE);
@@ -1181,7 +1181,7 @@ void c2_8011A1C(void)
     gUnknown_030042C4 = 0xF0;
     gUnknown_03004240 = 0x5051;
     dp12_8087EA4();
-    
+
     for (i = 0; i < 80; i++)
     {
         gUnknown_03004DE0.unk0[i] = 0xF0;
@@ -1239,22 +1239,22 @@ void c2_081284E0(void)
 {
     switch (gUnknown_02024D1E[0])
     {
-        case 0:
-            gUnknown_02024D1E[1] = 0xFF;
+    case 0:
+        gUnknown_02024D1E[1] = 0xFF;
+        gUnknown_02024D1E[0]++;
+        break;
+    case 1:
+        gUnknown_02024D1E[1]--;
+        if (gUnknown_02024D1E[1] == 0)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             gUnknown_02024D1E[0]++;
-            break;
-        case 1:
-            gUnknown_02024D1E[1]--;
-            if (gUnknown_02024D1E[1] == 0)
-            {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-                gUnknown_02024D1E[0]++;
-            }
-            break;
-        case 2:
-            if (!gPaletteFade.active)
-                SetMainCallback2(gMain.savedCallback);
-            break;
+        }
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+            SetMainCallback2(gMain.savedCallback);
+        break;
     }
 }
 
@@ -1323,32 +1323,32 @@ void sub_8010384(struct Sprite *sprite)
     u8 r6 = sprite->data0;
     u16 species;
     u8 yOffset;
-    
+
     if (ewram17800[r6].unk2 != 0)
         species = ewram17800[r6].unk2;
     else
         species = sprite->data2;
-    
+
     GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY);  // Unused return value
-    
+
     if (species == SPECIES_UNOWN)
     {
         u32 personalityValue = GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY);
         u16 unownForm = ((((personalityValue & 0x3000000) >> 18) | ((personalityValue & 0x30000) >> 12) | ((personalityValue & 0x300) >> 6) | (personalityValue & 3)) % 0x1C);
         u16 unownSpecies;
-        
+
         if (unownForm == 0)
             unownSpecies = SPECIES_UNOWN;  // Use the A Unown form
         else
             unownSpecies = NUM_SPECIES + unownForm;  // Use one of the other Unown letters
-        
+
         yOffset = gMonFrontPicCoords[unownSpecies].y;
     }
     else if (species == SPECIES_CASTFORM)
     {
         yOffset = gCastformFrontSpriteCoords[gBattleMonForms[r6]].y;
     }
-    else if (species > NUM_SPECIES)  
+    else if (species > NUM_SPECIES)
     {
         yOffset = gMonFrontPicCoords[SPECIES_NONE].y;
     }
@@ -1356,7 +1356,7 @@ void sub_8010384(struct Sprite *sprite)
     {
         yOffset = gMonFrontPicCoords[species].y;
     }
-    
+
     sprite->data3 = 8 - yOffset / 8;
     sprite->data4 = 1;
     sprite->callback = sub_8010494;
@@ -1365,7 +1365,7 @@ void sub_8010384(struct Sprite *sprite)
 void sub_8010494(struct Sprite *sprite)
 {
     s32 i;
-    
+
     sprite->data4--;
     if (sprite->data4 == 0)
     {
@@ -1380,7 +1380,7 @@ void sub_8010494(struct Sprite *sprite)
         else
         {
             u8 *dst = (u8 *)gUnknown_081FAF4C[battle_get_per_side_status(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
-            
+
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
             StartSpriteAnim(sprite, gBattleMonForms[sprite->data0]);
@@ -1452,7 +1452,7 @@ void dp11b_obj_instanciate(u8 a, u8 b, s8 c, s8 d)
 {
     u8 spriteId;
     u8 r7;
-    
+
     if (b)
     {
         if (ewram17810[a].unk0_1)
@@ -1463,7 +1463,7 @@ void dp11b_obj_instanciate(u8 a, u8 b, s8 c, s8 d)
         if (ewram17810[a].unk0_2)
             return;
     }
-    
+
     spriteId = CreateInvisibleSpriteWithCallback(objc_dp11b_pingpong);
     if (b == TRUE)
     {
@@ -1490,7 +1490,7 @@ void dp11b_obj_instanciate(u8 a, u8 b, s8 c, s8 d)
 void dp11b_obj_free(u8 a, u8 b)
 {
     u8 r4;
-    
+
     if (b == TRUE)
     {
         if (!ewram17810[a].unk0_1)
