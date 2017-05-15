@@ -70,18 +70,37 @@ enum
     PAGE_PROGRAMMERS,
     PAGE_GRAPHIC_DESIGNERS,
     PAGE_PRODUCT_SUPPORT,
+
+#if ENGLISH
     PAGE_ARTWORK,
     PAGE_TEXT_EDITOR,
     PAGE_NOA_TESTING,
     PAGE_BRAILLE_CODE_CHECK_1,
     PAGE_BRAILLE_CODE_CHECK_2,
+#elif GERMAN
+    PAGE_NOE_TESTING,
+    PAGE_BRAILLE_CODE_CHECK_1,
+#endif
+
     PAGE_SPECIAL_THANKS_4,
     PAGE_SPECIAL_THANKS_5,
 
     PAGE_COUNT
 };
 
+#if ENGLISH
+#define POKEMON_TILE_COUNT 68
+#define LAST_PAGE (PAGE_TEXT_EDITOR)
+#define UNK_DEFINE_45 (0x45)
 #define UNK_DEFINE_82 (0x82)
+#define UNK_DEF_1F3 (499)
+#elif GERMAN
+#define POKEMON_TILE_COUNT 65
+#define LAST_PAGE (PAGE_NOE_TESTING)
+#define UNK_DEFINE_45 (8)
+#define UNK_DEFINE_82 (0x8D)
+#define UNK_DEF_1F3 (554)
+#endif
 
 #define COLOR_DARK_GREEN 0x1967
 #define COLOR_LIGHT_GREEN 0x328D
@@ -125,7 +144,6 @@ enum
     TDE_TASK_A_ID = 2,
 };
 
-#define POKEMON_TILE_COUNT 68
 
 struct Unk201C000
 {
@@ -746,8 +764,6 @@ static void task_b_81441B8(u8 taskIdB)
     }
 }
 
-#define LAST_PAGE (PAGE_TEXT_EDITOR)
-
 static u8 sub_8144454(u8 page, u8 taskIdA)
 {
     // Starts with bike + ocean + morning
@@ -942,8 +958,6 @@ void task_c_8144664(u8 taskIdC)
     }
 }
 
-#define UNK_DEF_1F3 (499)
-
 void task_e_8144934(u8 taskIdE)
 {
     s16 taskIdC;
@@ -1007,8 +1021,6 @@ void task_e_8144934(u8 taskIdE)
         break;
     }
 }
-
-#define UNK_DEFINE_45 (0x45)
 
 static void sub_8144A68(u8 data, u8 taskIdA)
 {
@@ -1280,12 +1292,19 @@ static void sub_81452D0(u16 arg0, u16 palette)
     for (pos = 0; pos < 32 * 32; pos++)
         ((u16 *) (VRAM + arg0))[pos] = baseTile + 1;
 
+#if ENGLISH
     sub_814524C(gUnknown_0840B83C, 3, 7, arg0, palette);
     sub_814524C(gUnknown_0840B84B, 7, 7, arg0, palette);
     sub_814524C(gUnknown_0840B85A, 11, 7, arg0, palette);
     sub_814524C(gUnknown_0840B85A, 16, 7, arg0, palette);
     sub_814524C(gUnknown_0840B869, 20, 7, arg0, palette);
     sub_814524C(gUnknown_0840B878, 24, 7, arg0, palette);
+#elif GERMAN
+    sub_814524C(gUnknown_0840B85A, 7, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B869, 11, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B878, 15, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B85A, 19, 7, arg0, palette);
+#endif
 }
 
 static void spritecb_player_8145378(struct Sprite *sprite)
