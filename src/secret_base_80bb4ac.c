@@ -57,7 +57,7 @@ void sub_80BB5E4(void) { // 80bb5e4
     u16 idx;
     gScriptResult = 0;
     for (idx=0; idx<20; idx++) {
-        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0) 
+        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0)
             continue;
         gScriptResult = 1;
         VarSet(0x4054, idx);
