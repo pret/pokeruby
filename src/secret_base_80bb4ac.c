@@ -1,7 +1,7 @@
 #include "global.h"
 
-extern int gUnknown_020387DC;
-extern int gSpecialVar_0x8004;
+extern u8 gUnknown_020387DC;
+extern u16 gSpecialVar_0x8004;
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
     u16 i;
@@ -44,6 +44,6 @@ void ResetSecretBases(void) { // 080bb5b4
         ResetSecretBase(i);
 }
 
-// void sub_80BB5D0(void) { // 080bb5d0
-    // gUnknown_020387DC = gSpecialVar_0x8004;
-// }
+void sub_80BB5D0(void) { // 080bb5d0
+    gUnknown_020387DC = gSpecialVar_0x8004;
+}

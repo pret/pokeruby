@@ -6,18 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80BB5D0
-sub_80BB5D0: @ 80BB5D0
-	ldr r0, _080BB5DC @ =gUnknown_020387DC
-	ldr r1, _080BB5E0 @ =gSpecialVar_0x8004
-	ldrh r1, [r1]
-	strb r1, [r0]
-	bx lr
-	.align 2, 0
-_080BB5DC: .4byte gUnknown_020387DC
-_080BB5E0: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_80BB5D0
-
 	thumb_func_start sub_80BB5E4
 sub_80BB5E4: @ 80BB5E4
 	push {r4,lr}
