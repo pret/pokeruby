@@ -1,8 +1,11 @@
 #include "global.h"
 #include "event_data.h"
+#include "asm.h"
+#include "field_player_avatar.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8007;
 extern u16 gScriptResult;
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
@@ -67,4 +70,37 @@ void sub_80BB63C(void) { // 80bb63c
         gScriptResult = 1;
     else
         gScriptResult = 0;
+}
+
+u8 sub_80BB66C(void) { // 80bb66c
+    s16 x, y;
+    u16 v0;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    v0 = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
+    if (v0 == 0x90 || v0 == 0x91)
+        return 1;
+    else if (v0 == 0x92 || v0 == 0x93)
+        return 2;
+    else if (v0 == 0x9a || v0 == 0x9b)
+        return 3;
+    else if (v0 == 0x94 || v0 == 0x95)
+        return 4;
+    else if (v0 == 0x96 || v0 == 0x97 || v0 == 0x9c || v0 == 0x9d)
+        return 5;
+    else if (v0 == 0x98 || v0 == 0x99)
+        return 6;
+    return 0;
+}
+
+void sub_80BB70C(void) { // 80bb70c
+    gSpecialVar_0x8007 = sub_80BB66C();
+}
+
+s16 unref_sub_80BB724(u16 *a0, u8 a1) {
+    u16 v2;
+    for (v2=0; v2<0x200; v2++) {
+        if ((a0[v2] & 0xFFF) == a1)
+            return (s16)v2;
+    }
+    return -1;
 }
