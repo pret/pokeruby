@@ -1455,7 +1455,7 @@ _08112594:
 _081125A2:
 	movs r0, 0xBC
 	lsls r0, 1
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _081125B8 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1647,7 +1647,7 @@ _08112728:
 	bl _08112FD0
 _0811273E:
 	movs r0, 0x21
-	bl PlaySE
+	bl PlaySoundEffect
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -2210,7 +2210,7 @@ _08112C0C:
 	cmp r0, 0
 	beq _08112C32
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl nullsub_6
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -2227,7 +2227,7 @@ _08112C32:
 	cmp r0, 0
 	bne _08112C58
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl nullsub_6
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -2254,7 +2254,7 @@ _08112C58:
 	movs r3, 0x2
 	bl sub_8002EB0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08112CA8 @ =gUnknown_02024D1E
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
@@ -2317,7 +2317,7 @@ _08112CF0:
 	movs r3, 0x2
 	bl sub_8002EB0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08112D28 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2753,7 +2753,7 @@ _081130EA:
 	bl m4aSongNumStop
 	movs r0, 0xBC
 	lsls r0, 1
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08113108 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2944,7 +2944,7 @@ _08113274:
 	bl _08113B3A
 _0811328A:
 	movs r0, 0x21
-	bl PlaySE
+	bl PlaySoundEffect
 _08113290:
 	lsls r0, r7, 2
 	adds r0, r7
@@ -3479,7 +3479,7 @@ _0811371C:
 	cmp r0, 0
 	beq _08113742
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl HBlankCB_TradeEvolutionScene
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -3496,7 +3496,7 @@ _08113742:
 	cmp r0, 0
 	bne _08113768
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl HBlankCB_TradeEvolutionScene
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -3534,7 +3534,7 @@ _08113768:
 	movs r3, 0x2
 	bl sub_8002EB0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _081137D0 @ =gUnknown_02024D1E
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
@@ -3608,7 +3608,7 @@ _08113818:
 	movs r3, 0x2
 	bl sub_8002EB0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08113868 @ =gTasks
 	mov r2, r9
 	adds r0, r2, r7

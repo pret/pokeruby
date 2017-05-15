@@ -59,13 +59,13 @@ static void Task_ProcessMenuInput(u8 taskId)
     switch (ProcessMenuInputNoWrap_())
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         sub_8071F40(gSystemText_ClearingData);
         gTasks[taskId].func = Task_ClearSaveData;
         break;
     case -1:
     case 1:
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         DestroyTask(taskId);
         SetMainCallback2(CB2_SoftReset);
         break;

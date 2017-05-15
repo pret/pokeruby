@@ -49,7 +49,7 @@ static void sub_812C01C(void)
 {
     u8 taskId;
 
-    PlaySE(0xEC);
+    PlaySoundEffect(0xEC);
     BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, 0x1F);
     taskId = CreateTask(sub_812C084, 0);
     gTasks[taskId].data[0] = 0;

@@ -699,7 +699,7 @@ _0806A9BA:
 _0806A9CC:
 	strh r0, [r5, 0x4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0806AA58
 _0806A9D6:
 	cmp r4, 0x5
@@ -721,7 +721,7 @@ _0806A9D6:
 	ldrh r0, [r5, 0xC]
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0806AA1C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -751,7 +751,7 @@ _0806AA24:
 	cmp r0, 0
 	beq _0806AA58
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r2, [r5, 0x6]
 	ldrb r3, [r5, 0x8]
 	ldrb r0, [r5, 0xA]
@@ -1046,7 +1046,7 @@ _0806ACB0:
 	cmp r0, 0
 	beq _0806ACC4
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl DestroyTask
 _0806ACC4:
@@ -1246,7 +1246,7 @@ _0806AE5C:
 	ldr r0, _0806AE78 @ =gSystemText_SaveCompleted
 	bl ResetRtcScreen_ShowMessage
 	movs r0, 0x49
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0806AE88
 	.align 2, 0
 _0806AE78: .4byte gSystemText_SaveCompleted
@@ -1254,7 +1254,7 @@ _0806AE7C:
 	ldr r0, _0806AECC @ =gSystemText_SaveFailed
 	bl ResetRtcScreen_ShowMessage
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 _0806AE88:
 	movs r0, 0x5
 	strh r0, [r5]

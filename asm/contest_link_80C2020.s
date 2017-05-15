@@ -3361,7 +3361,7 @@ _080C3A94:
 	adds r0, r4, 0
 	bl DestroyTask
 	movs r0, 0x18
-	bl PlaySE
+	bl PlaySoundEffect
 _080C3B12:
 	pop {r4}
 	pop {r0}
@@ -4341,13 +4341,13 @@ _080C4292:
 	cmp r0, 0
 	beq _080C429E
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 _080C429E:
 	mov r1, r10
 	cmp r1, 0
 	beq _080C42AA
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 _080C42AA:
 	add sp, 0x8
 	pop {r3-r5}

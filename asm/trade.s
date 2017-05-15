@@ -3021,7 +3021,7 @@ _08049600:
 	cmp r0, r6
 	beq _0804960C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0804960C:
 	strb r6, [r7]
 	pop {r4-r7}
@@ -3143,7 +3143,7 @@ _080496F4:
 	cmp r0, 0
 	beq _080497B6
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _08049750 @ =gUnknown_03004824
 	ldr r0, [r4]
 	adds r1, r0, 0
@@ -3317,7 +3317,7 @@ sub_8049860: @ 8049860
 	cmp r0, 0
 	beq _08049880
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	b _08049890
@@ -3329,7 +3329,7 @@ _08049880:
 	cmp r0, 0
 	beq _0804989C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 _08049890:
 	bl MoveMenuCursor
@@ -3345,7 +3345,7 @@ _0804989C:
 	cmp r0, 0
 	beq _08049938
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -3415,7 +3415,7 @@ _08049938:
 	cmp r0, 0
 	beq _0804994A
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8049804
 _0804994A:
 	add sp, 0x4
@@ -3439,7 +3439,7 @@ sub_8049954: @ 8049954
 	beq _08049974
 _0804996A:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8049804
 _08049974:
 	pop {r0}
@@ -3627,7 +3627,7 @@ sub_8049AC0: @ 8049AC0
 	cmp r0, 0
 	beq _08049AE0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	b _08049AF0
@@ -3639,7 +3639,7 @@ _08049AE0:
 	cmp r0, 0
 	beq _08049AFC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 _08049AF0:
 	bl MoveMenuCursor
@@ -3655,7 +3655,7 @@ _08049AFC:
 	cmp r0, 0
 	beq _08049B64
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl GetMenuCursorPos
 	lsls r0, 24
 	cmp r0, 0
@@ -3747,7 +3747,7 @@ sub_8049BC0: @ 8049BC0
 	cmp r0, 0
 	beq _08049BE0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	b _08049BF0
@@ -3759,7 +3759,7 @@ _08049BE0:
 	cmp r0, 0
 	beq _08049BFC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 _08049BF0:
 	bl MoveMenuCursor
@@ -3775,7 +3775,7 @@ _08049BFC:
 	cmp r0, 0
 	beq _08049C72
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3826,7 +3826,7 @@ _08049C72:
 	cmp r0, 0
 	beq _08049C84
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8049804
 _08049C84:
 	pop {r4,r5}
@@ -3941,7 +3941,7 @@ sub_8049D44: @ 8049D44
 	cmp r0, 0
 	beq _08049D8A
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0
 	bl sub_804A840
 	movs r0, 0x1
@@ -6388,7 +6388,7 @@ sub_804B058: @ 804B058
 	cmp r0, 0xA
 	bne _0804B074
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 _0804B074:
@@ -6487,7 +6487,7 @@ sub_804B104: @ 804B104
 	cmp r0, 0xF
 	bne _0804B120
 	movs r0, 0xCC
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 _0804B120:
@@ -9417,7 +9417,7 @@ _0804CB70:
 	cmp r0, 0
 	bne _0804CB8E
 	movs r0, 0x2E
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0804CBC4 @ =gUnknown_03004828
 	ldr r1, [r0]
 	adds r1, 0xC4
@@ -9700,7 +9700,7 @@ _0804CD94:
 	cmp r0, 0x2
 	bhi _0804CDDC
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 _0804CDDC:
 	ldr r2, [r6]
 	adds r3, r2, 0
@@ -10120,7 +10120,7 @@ _0804D11A:
 	adds r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x9F
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0804D570
 	.align 2, 0
 _0804D138: .4byte gSprites
@@ -10893,7 +10893,7 @@ sub_804D738: @ 804D738
 	cmp r0, 0x16
 	bne _0804D760
 	movs r0, 0x38
-	bl PlaySE
+	bl PlaySoundEffect
 _0804D760:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -10903,7 +10903,7 @@ _0804D760:
 	cmp r0, 0x2C
 	bne _0804D796
 	movs r0, 0x8C
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0804D7A4 @ =sub_804D7AC
 	str r0, [r4, 0x1C]
 	movs r0, 0
@@ -11005,7 +11005,7 @@ sub_804D80C: @ 804D80C
 	movs r0, 0x16
 	strh r0, [r4, 0x2E]
 	movs r0, 0x38
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0804D88C
 _0804D83C:
 	movs r1, 0x2E
@@ -11013,21 +11013,21 @@ _0804D83C:
 	cmp r0, 0x42
 	bne _0804D84A
 	movs r0, 0x39
-	bl PlaySE
+	bl PlaySoundEffect
 _0804D84A:
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x5C
 	bne _0804D858
 	movs r0, 0x3A
-	bl PlaySE
+	bl PlaySoundEffect
 _0804D858:
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x6B
 	bne _0804D866
 	movs r0, 0x3B
-	bl PlaySE
+	bl PlaySoundEffect
 _0804D866:
 	ldr r1, _0804D894 @ =gTradeBallVerticalVelocityTable
 	movs r2, 0x2E

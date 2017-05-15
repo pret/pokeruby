@@ -1332,7 +1332,7 @@ _08115C0C:
 	mov r1, r8
 	strh r1, [r4, 0xA]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r5, _08115D3C @ =0x020190b8
 	ldr r1, _08115D40 @ =0x0000ffff
 	adds r0, r5, 0
@@ -1650,7 +1650,7 @@ _08115E6E:
 	cmp r1, 0
 	beq _08115EB8
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 	b _08115EC2
 	.align 2, 0
 _08115EA8: .4byte gTasks
@@ -3302,7 +3302,7 @@ _08116BE4:
 	cmp r0, 0
 	beq _08116C06
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _08116C06:
 	movs r0, 0
 	str r0, [r5]

@@ -511,7 +511,7 @@ sub_80BC824: @ 80BC824
 	cmp r0, 0
 	beq _080BC860
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	b _080BC8B6
@@ -524,7 +524,7 @@ _080BC860:
 	cmp r0, 0
 	beq _080BC940
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4, 0x4]
 	subs r0, 0x1
 	b _080BC8A4
@@ -549,7 +549,7 @@ _080BC874:
 	cmp r0, r1
 	beq _080BC940
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4, 0x4]
 	adds r0, 0x1
 _080BC8A4:
@@ -559,7 +559,7 @@ _080BC8A4:
 	b _080BC940
 _080BC8AE:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 _080BC8B6:
 	bl MoveMenuCursor
@@ -574,7 +574,7 @@ _080BC8C2:
 	cmp r0, 0
 	beq _080BC91C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	movs r2, 0x4
@@ -613,7 +613,7 @@ _080BC91C:
 	cmp r0, 0
 	beq _080BC940
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8072DEC
 	movs r0, 0
 	movs r1, 0
@@ -727,7 +727,7 @@ sub_80BC9E4: @ 80BC9E4
 	cmp r0, 0
 	beq _080BCA7C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -745,7 +745,7 @@ _080BCA18:
 	cmp r0, 0x1
 	beq _080BCA7C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _080BCA7C
@@ -756,7 +756,7 @@ _080BCA3A:
 	cmp r0, 0
 	beq _080BCA68
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _080BCA64 @ =gUnknown_083D13D4
 	bl GetMenuCursorPos
 	lsls r0, 24
@@ -775,7 +775,7 @@ _080BCA68:
 	cmp r0, 0
 	beq _080BCA7C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_80BCBF8
 _080BCA7C:

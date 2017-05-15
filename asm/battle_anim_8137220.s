@@ -135,7 +135,7 @@ _0813730E:
 	cmp r4, 0
 	bne _08137410
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
@@ -158,7 +158,7 @@ _08137344:
 	cmp r4, 0
 	bne _08137410
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	movs r1, 0
 	b _0813737E
@@ -206,7 +206,7 @@ _081373AC:
 	cmp r0, 0
 	bne _08137410
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0
 	bl nullsub_8
 	movs r0, 0x1
@@ -233,7 +233,7 @@ _081373E8:
 	cmp r0, 0
 	bne _08137410
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_814A7FC
 	movs r0, 0x1
 	movs r1, 0x1
@@ -4063,7 +4063,7 @@ _081393B2:
 	bne _081393DE
 	bl sub_814A7FC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r2, 0x80
 	lsls r2, 1
 	movs r0, 0x1
@@ -4447,7 +4447,7 @@ sub_8139680: @ 8139680
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl PlaySE
+	bl PlaySoundEffect
 	bl dp01_tbl5_exec_completed
 	pop {r0}
 	bx r0

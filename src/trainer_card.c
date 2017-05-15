@@ -662,7 +662,7 @@ bool8 sub_80938CC(struct Task *task)
 bool8 sub_8093918(struct Task *task)
 {
     sub_8093A28();
-    PlaySE(SE_CARD);
+    PlaySoundEffect(SE_CARD);
 
     ewram0.var_0 += 1;
 

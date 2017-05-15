@@ -138,7 +138,7 @@ _080F9114:
 	b _080F9140
 _080F911A:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080F912C @ =gUnknown_020388C4
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -148,7 +148,7 @@ _080F911A:
 _080F912C: .4byte gUnknown_020388C4
 _080F9130:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080F9148 @ =gUnknown_020388C4
 	ldr r1, [r0, 0x4]
 	adds r0, r4, 0

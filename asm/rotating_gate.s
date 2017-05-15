@@ -439,7 +439,7 @@ sub_80C7C94: @ 80C7C94
 	lsrs r4, r0, 24
 _080C7CCA:
 	movs r0, 0x30
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl StartSpriteAffineAnim
@@ -462,7 +462,7 @@ _080C7CDA:
 	lsrs r4, r0, 24
 _080C7CFA:
 	movs r0, 0x30
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl StartSpriteAffineAnim

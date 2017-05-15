@@ -157,7 +157,7 @@ void Task_HandleTruckSequence(u8 taskId)
            data[1] = 0; // reset the timer.
            data[2] = CreateTask(Task_Truck1, 0xA);
            data[0] = 1; // run the next case.
-           PlaySE(SE_TRACK_MOVE);
+           PlaySoundEffect(SE_TRACK_MOVE);
        }
        break;
    case 1:
@@ -177,7 +177,7 @@ void Task_HandleTruckSequence(u8 taskId)
            DestroyTask(data[2]);
            data[3] = CreateTask(Task_Truck2, 0xA);
            data[0] = 3;
-           PlaySE(SE_TRACK_STOP);
+           PlaySoundEffect(SE_TRACK_STOP);
        }
        break;
    case 3:
@@ -192,7 +192,7 @@ void Task_HandleTruckSequence(u8 taskId)
        data[1]++;
        if (data[1] == 90)
        {
-           PlaySE(SE_TRACK_HAIK);
+           PlaySoundEffect(SE_TRACK_HAIK);
            data[1] = 0;
            data[0] = 5;
        }
@@ -205,7 +205,7 @@ void Task_HandleTruckSequence(u8 taskId)
             MapGridSetMetatileIdAt(11, 9, 528);
             MapGridSetMetatileIdAt(11, 10, 536);
             DrawWholeMapView();
-            PlaySE(SE_TRACK_DOOR);
+            PlaySoundEffect(SE_TRACK_DOOR);
             DestroyTask(taskId);
             ScriptContext2_Disable();
        }

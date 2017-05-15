@@ -169,13 +169,13 @@ void sub_80F9C6C(u8 var)
         switch(sub_806BD80(var))
         {
             case 1:
-                PlaySE(5);
+                PlaySoundEffect(5);
                 gUnknown_02038694 = sub_806CA38(var);
                 gSpecialVar_0x8004 = gUnknown_02038694;
                 sub_8123138(var);
                 break;
             case 2:
-                PlaySE(5);
+                PlaySoundEffect(5);
                 gUnknown_02038694 = 0xFF;
                 gSpecialVar_0x8004 = 0xFF;
                 sub_8123138(var);
@@ -268,13 +268,13 @@ void sub_80F9E64(u8 var)
         switch(sub_806BD80(var))
         {
             case 1:
-                PlaySE(5);
+                PlaySoundEffect(5);
                 gSpecialVar_0x8004 = sub_806CA38(var);
                 gSpecialVar_0x8005 = sub_8040574(&gPlayerParty[gSpecialVar_0x8004]);
                 sub_8123138(var);
                 break;
             case 2:
-                PlaySE(5);
+                PlaySoundEffect(5);
                 gSpecialVar_0x8004 = 0xFF;
                 sub_8123138(var);
         }

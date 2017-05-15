@@ -245,7 +245,7 @@ static void sub_814640C(u8 taskId)
 
 static void sub_8146440(u8 taskId)
 {
-    PlaySE(SE_SELECT);
+    PlaySoundEffect(SE_SELECT);
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gTasks[taskId].func = sub_814640C;
 }
@@ -379,7 +379,7 @@ _08146718:\n\
     bgt _0814678C\n\
 _08146728:\n\
     movs r0, 0x5\n\
-    bl PlaySE\n\
+    bl PlaySoundEffect\n\
     mov r2, r8\n\
     ldrb r3, [r2, 0x1]\n\
     ldrb r4, [r4, 0xC]\n\

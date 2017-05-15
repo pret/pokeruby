@@ -794,7 +794,7 @@ _08101E9C:
 	movs r0, 0x9
 	strb r0, [r1]
 	movs r0, 0x5F
-	bl PlaySE
+	bl PlaySoundEffect
 	b _08101F1A
 	.align 2, 0
 _08101EB8: .4byte 0x02000000
@@ -813,7 +813,7 @@ _08101EC2:
 	cmp r0, 0
 	beq _08101EEC
 	movs r0, 0x5F
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r0, [r4, 0x12]
 	bl sub_8103D50
 	ldrh r0, [r4, 0xC]
@@ -1032,7 +1032,7 @@ sub_8102058: @ 8102058
 	cmp r0, 0
 	beq _0810207E
 	movs r0, 0x18
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _0810208C @ =0x02000000
 	ldrb r0, [r4, 0x18]
 	bl sub_8102E1C
@@ -2460,7 +2460,7 @@ sub_8102AD0: @ 8102AD0
 	cmp r0, 0
 	beq _08102AF6
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 _08102AF6:
 	ldr r2, _08102B70 @ =0x02000000
 	ldrh r0, [r2, 0xE]
@@ -2497,7 +2497,7 @@ _08102B22:
 	cmp r0, 0
 	beq _08102B58
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08102B70 @ =0x02000000
 	ldrh r0, [r1, 0xE]
 	ldrh r2, [r1, 0xC]
@@ -6583,7 +6583,7 @@ sub_81048CC: @ 81048CC
 	ldr r0, _0810493C @ =0x00000187
 	bl PlayFanfare
 	movs r0, 0xB2
-	bl PlaySE
+	bl PlaySoundEffect
 	pop {r4,r5}
 	pop {r0}
 	bx r0

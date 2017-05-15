@@ -23,7 +23,7 @@ extern u8 gUnknown_083D0288[2];
 extern u8 gUnknown_083D028A[2][3];
 extern u8 gUnknown_083D0290[9][4];
 
-extern u8 gUnknown_02038738[];  //Don't know what type this points to
+extern struct RecordMixing_UnknownStruct gUnknown_02038738[2];  //Don't know what type this points to
 extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
@@ -53,7 +53,9 @@ struct PlayerRecords {
 extern struct PlayerRecords unk_2008000;
 extern struct PlayerRecords unk_2018000;
 
-#ifdef NONMATCHING
+extern void sub_80BC300();
+extern void sub_80C045C();
+
 void sub_80B92AC(void)
 {
     sub_80BC300();
@@ -64,8 +66,8 @@ void sub_80B92AC(void)
     memcpy(unk_2018000.filler1004, gUnknown_083D0274, 0x40);
     memcpy(unk_2018000.filler1044, gUnknown_083D0278, 0x40);
     memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, 0x28);
-    memcpy(gUnknown_02038738, gSaveBlock1.filler_303C, 0x38);
-    memcpy(gUnknown_02038738 + 0x38, gSaveBlock1.filler_3074, 0x38);
+    gUnknown_02038738[0] = gSaveBlock1.filler_303C[0];
+    gUnknown_02038738[1] = gSaveBlock1.filler_303C[1];
     sub_8041324(gSaveBlock1.daycareData, gUnknown_02038738);
     memcpy(unk_2018000.filler10AC, gUnknown_083D0280, 0x78);
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
@@ -73,112 +75,6 @@ void sub_80B92AC(void)
     if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = sub_8126338();
 }
-#else
-__attribute__((naked))
-void sub_80B92AC(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    bl sub_80BC300\n\
-    bl sub_80C045C\n\
-    ldr r6, _080B9364 @ =0x02018000\n\
-    ldr r0, _080B9368 @ =recordMixingSecretBases\n\
-    ldr r1, [r0]\n\
-    movs r2, 0xC8\n\
-    lsls r2, 4\n\
-    adds r0, r6, 0\n\
-    bl memcpy\n\
-    movs r1, 0xC8\n\
-    lsls r1, 4\n\
-    adds r0, r6, r1\n\
-    ldr r1, _080B936C @ =recordMixingTvShows\n\
-    ldr r1, [r1]\n\
-    movs r2, 0xE1\n\
-    lsls r2, 2\n\
-    bl memcpy\n\
-    ldr r2, _080B9370 @ =0x00001004\n\
-    adds r0, r6, r2\n\
-    ldr r1, _080B9374 @ =gUnknown_083D0274\n\
-    ldr r1, [r1]\n\
-    movs r2, 0x40\n\
-    bl memcpy\n\
-    ldr r1, _080B9378 @ =0x00001044\n\
-    adds r0, r6, r1\n\
-    ldr r1, _080B937C @ =gUnknown_083D0278\n\
-    ldr r1, [r1]\n\
-    movs r2, 0x40\n\
-    bl memcpy\n\
-    ldr r2, _080B9380 @ =0x00001084\n\
-    adds r0, r6, r2\n\
-    ldr r1, _080B9384 @ =recordMixingEasyChatPairs\n\
-    ldr r1, [r1]\n\
-    movs r2, 0x28\n\
-    bl memcpy\n\
-    ldr r5, _080B9388 @ =gUnknown_02038738\n\
-    ldr r4, _080B938C @ =gSaveBlock1\n\
-    ldr r0, _080B9390 @ =0x0000303c\n\
-    adds r1, r4, r0\n\
-    adds r0, r5, 0\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    ldr r2, _080B9394 @ =0x00003074\n\
-    adds r1, r4, r2\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x38\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    ldr r0, _080B9398 @ =0x00002f9c\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    adds r1, r5, 0\n\
-    bl sub_8041324\n\
-    ldr r1, _080B939C @ =0x000010ac\n\
-    adds r0, r6, r1\n\
-    ldr r1, _080B93A0 @ =gUnknown_083D0280\n\
-    ldr r1, [r1]\n\
-    movs r2, 0x78\n\
-    bl memcpy\n\
-    ldr r2, _080B93A4 @ =0x00001124\n\
-    adds r0, r6, r2\n\
-    ldr r1, _080B93A8 @ =gUnknown_083D0284\n\
-    ldr r1, [r1]\n\
-    movs r2, 0xA4\n\
-    bl memcpy\n\
-    bl GetMultiplayerId\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080B935C\n\
-    bl sub_8126338\n\
-    ldr r2, _080B93AC @ =0x000011c8\n\
-    adds r1, r6, r2\n\
-    strh r0, [r1]\n\
-_080B935C:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080B9364: .4byte 0x02018000\n\
-_080B9368: .4byte recordMixingSecretBases\n\
-_080B936C: .4byte recordMixingTvShows\n\
-_080B9370: .4byte 0x00001004\n\
-_080B9374: .4byte gUnknown_083D0274\n\
-_080B9378: .4byte 0x00001044\n\
-_080B937C: .4byte gUnknown_083D0278\n\
-_080B9380: .4byte 0x00001084\n\
-_080B9384: .4byte recordMixingEasyChatPairs\n\
-_080B9388: .4byte gUnknown_02038738\n\
-_080B938C: .4byte gSaveBlock1\n\
-_080B9390: .4byte 0x0000303c\n\
-_080B9394: .4byte 0x00003074\n\
-_080B9398: .4byte 0x00002f9c\n\
-_080B939C: .4byte 0x000010ac\n\
-_080B93A0: .4byte gUnknown_083D0280\n\
-_080B93A4: .4byte 0x00001124\n\
-_080B93A8: .4byte gUnknown_083D0284\n\
-_080B93AC: .4byte 0x000011c8\n\
-    .syntax divided\n");
-}
-#endif
 
 #undef NONMATCHING
 
@@ -200,7 +96,7 @@ void sub_80B9450(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 50)
     {
-        PlaySE(SE_W213);
+        PlaySoundEffect(SE_W213);
         gTasks[taskId].data[0] = 0;
     }
 }
@@ -235,7 +131,7 @@ void sub_80B9484(u8 taskId)
     case 2:
         taskData[10] = CreateTask(sub_80BA00C, 10);
         taskData[TD_STATE] = 3;
-        PlaySE(SE_W226);
+        PlaySoundEffect(SE_W226);
         break;
     case 3:
         if (!gTasks[taskData[10]].isActive)
@@ -294,14 +190,14 @@ void sub_80B95F0(u8 taskId)
         {
             if (players == sub_800820C())
             {
-                PlaySE(0x15);
+                PlaySoundEffect(0x15);
                 task->data[TD_STATE] = 201;
                 task->data[12] = 0;
             }
         }
         else
         {
-            PlaySE(0x16);
+            PlaySoundEffect(0x16);
             task->data[TD_STATE] = 301;
         }
         break;

@@ -33,6 +33,7 @@ u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
 	return count;
 }
 
+#ifndef ASDF
 __attribute__((naked))
 void sub_8041324(struct BoxPokemon * box_pokemon, void * void_pointer)
 {
@@ -95,6 +96,7 @@ _08041374:\n\
 	bx r0\n\
 	.syntax divided\n");
 }
+#endif
 
 s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
 {

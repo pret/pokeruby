@@ -1079,7 +1079,7 @@ sub_810BF38: @ 810BF38
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r2, _0810BF6C @ =gSprites
 	ldr r0, _0810BF70 @ =0x02000000
 	ldr r1, _0810BF74 @ =0x0001fffe
@@ -1195,7 +1195,7 @@ _0810C012:
 	cmp r0, r1
 	beq _0810C0B8
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl sub_810BDAC
 	ldr r1, _0810C054 @ =gTasks
@@ -1220,7 +1220,7 @@ _0810C05C:
 	cmp r0, 0
 	beq _0810C09C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0810C088 @ =gUnknown_02039248
 	ldrb r1, [r0, 0x1]
 	ldrb r2, [r0]
@@ -1249,7 +1249,7 @@ _0810C09C:
 	cmp r0, 0
 	beq _0810C0B8
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0810C0C0 @ =gScriptResult
 	ldr r2, _0810C0C4 @ =0x0000ffff
 	adds r0, r2, 0
@@ -1354,7 +1354,7 @@ _0810C168:
 	beq _0810C190
 _0810C17A:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_810C1C8
@@ -1367,7 +1367,7 @@ _0810C190:
 	cmp r0, 0
 	beq _0810C1BA
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_810C1C8
@@ -1692,7 +1692,7 @@ sub_810C40C: @ 810C40C
 	cmp r0, 0
 	beq _0810C4BC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -1713,7 +1713,7 @@ _0810C440:
 	cmp r0, r1
 	beq _0810C4BC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _0810C4BC
@@ -1726,7 +1726,7 @@ _0810C46C:
 	cmp r0, 0
 	beq _0810C4A8
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _0810C4A0 @ =gUnknown_083F7EF4
 	bl GetMenuCursorPos
 	lsls r0, 24
@@ -1751,7 +1751,7 @@ _0810C4A8:
 	cmp r0, 0
 	beq _0810C4BC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_810C748
 _0810C4BC:

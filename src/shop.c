@@ -106,7 +106,7 @@ void sub_80B2E38(u8 var)
     {
         if(gUnknown_03000708.unk9)
         {
-            PlaySE(0x5);
+            PlaySoundEffect(0x5);
             gUnknown_03000708.unk9 = MoveMenuCursor(-1);
         }
     }
@@ -114,13 +114,13 @@ void sub_80B2E38(u8 var)
     {
         if(gUnknown_03000708.unk9 != gUnknown_03000708.unkA)
         {
-            PlaySE(0x5);
+            PlaySoundEffect(0x5);
             gUnknown_03000708.unk9 = MoveMenuCursor(1);
         }
     }
     else if (gMain.newKeys & 1)
     {
-        PlaySE(0x5);
+        PlaySoundEffect(0x5);
         if(!gUnknown_03000708.unkC)
         {
             gUnknown_083CC6D0[gUnknown_083CC6E8[gUnknown_03000708.unk9]].func(local);
@@ -132,7 +132,7 @@ void sub_80B2E38(u8 var)
     }
     else if(gMain.newKeys & 2)
     {
-        PlaySE(0x5);
+        PlaySoundEffect(0x5);
         HandleShopMenuQuit(local);
     }
 }

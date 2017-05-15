@@ -521,12 +521,12 @@ void PlayBGM(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
-void PlaySE(u16 songNum)
+void PlaySoundEffect(u16 songNum)
 {
     m4aSongNumStart(songNum);
 }
 
-void PlaySE12WithPanning(u16 songNum, s8 pan)
+void PlaySoundEffect12WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
@@ -535,14 +535,14 @@ void PlaySE12WithPanning(u16 songNum, s8 pan)
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
 }
 
-void PlaySE1WithPanning(u16 songNum, s8 pan)
+void PlaySoundEffect1WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
     m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
 }
 
-void PlaySE2WithPanning(u16 songNum, s8 pan)
+void PlaySoundEffect2WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE2);

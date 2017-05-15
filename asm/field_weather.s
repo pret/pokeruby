@@ -1978,7 +1978,7 @@ _0807DDA0:
 _0807DDA6:
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl PlaySE
+	bl PlaySoundEffect
 _0807DDAE:
 	pop {r0}
 	bx r0
@@ -2004,18 +2004,18 @@ PlayRainSoundEffect: @ 807DDB8
 	cmp r0, 0
 	bne _0807DDF0
 	movs r0, 0x56
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807DDF6
 	.align 2, 0
 _0807DDE0: .4byte gUnknown_0202F7E8
 _0807DDE4: .4byte 0x000006dd
 _0807DDE8:
 	movs r0, 0x54
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807DDF6
 _0807DDF0:
 	movs r0, 0x52
-	bl PlaySE
+	bl PlaySoundEffect
 _0807DDF6:
 	pop {r0}
 	bx r0
@@ -4930,14 +4930,14 @@ sub_807F434: @ 807F434
 	cmp r4, 0
 	beq _0807F474
 	movs r0, 0x57
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807F47A
 	.align 2, 0
 _0807F46C: .4byte gUnknown_08396FC4
 _0807F470: .4byte 0x000006ed
 _0807F474:
 	movs r0, 0x58
-	bl PlaySE
+	bl PlaySoundEffect
 _0807F47A:
 	ldr r0, _0807F488 @ =gUnknown_08396FC4
 	ldr r0, [r0]

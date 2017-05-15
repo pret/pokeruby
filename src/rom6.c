@@ -150,7 +150,7 @@ int FldEff_RockSmash(void)
 
 static void sub_810B58C(void)
 {
-    PlaySE(SE_W088);
+    PlaySoundEffect(SE_W088);
     FieldEffectActiveListRemove(0x25);
     EnableBothScriptContexts();
 }

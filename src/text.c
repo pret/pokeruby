@@ -136,7 +136,7 @@ static u8 ExtCtrlCode_Escape(struct Window *);
 static u8 ExtCtrlCode_Nop2(struct Window *);
 static u8 ExtCtrlCode_SetCursorY(struct Window *);
 static u8 ExtCtrlCode_ClearWindowTextLines(struct Window *);
-static u8 ExtCtrlCode_PlaySE(struct Window *);
+static u8 ExtCtrlCode_PlaySoundEffect(struct Window *);
 static u8 ExtCtrlCode_Skip(struct Window *);
 static u8 ExtCtrlCode_SetCursorX(struct Window *);
 static u8 ExtCtrlCode_SkipTo(struct Window *);
@@ -380,7 +380,7 @@ static const ExtCtrlCodeFunc sExtCtrlCodeFuncs[] =
     ExtCtrlCode_Nop2,
     ExtCtrlCode_SetCursorY,
     ExtCtrlCode_ClearWindowTextLines,
-    ExtCtrlCode_PlaySE,
+    ExtCtrlCode_PlaySoundEffect,
     ExtCtrlCode_Skip,
     ExtCtrlCode_SetCursorX,
     ExtCtrlCode_SkipTo,
@@ -2197,11 +2197,11 @@ static u8 ExtCtrlCode_ClearWindowTextLines(struct Window *win)
     return 2;
 }
 
-static u8 ExtCtrlCode_PlaySE(struct Window *win)
+static u8 ExtCtrlCode_PlaySoundEffect(struct Window *win)
 {
     u16 loByte = win->text[win->textIndex++];
     u16 hiByte = win->text[win->textIndex++] << 8;
-    PlaySE(loByte | hiByte);
+    PlaySoundEffect(loByte | hiByte);
     return 2;
 }
 
@@ -2377,7 +2377,7 @@ static u8 UpdateWindowText(struct Window *win)
         {
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
-                PlaySE(SE_SELECT);
+                PlaySoundEffect(SE_SELECT);
             }
             else
             {
@@ -3187,7 +3187,7 @@ static u8 WaitWithDownArrow(struct Window *win)
     {
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
             TryEraseDownArrow(win);
         }
         else

@@ -953,7 +953,7 @@ _080B3B06:
 	movs r2, 0
 	bl sub_80B39D0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r0, [r4, 0xB]
 	ldrb r1, [r4, 0x9]
 	adds r0, r1
@@ -1015,7 +1015,7 @@ sub_80B3B80: @ 80B3B80
 	adds r0, r5, 0
 	bl sub_80B79E0
 	movs r0, 0x5F
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, [r5]
 	movs r1, 0
 	movs r2, 0
@@ -1684,7 +1684,7 @@ _080B4102:
 	b _080B436C
 _080B411E:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r0, [r4, 0xB]
 	subs r0, 0x1
 	strb r0, [r4, 0xB]
@@ -1698,7 +1698,7 @@ _080B4138: .4byte gMain
 _080B413C: .4byte gUnknown_03000708
 _080B4140:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	b _080B41A0
@@ -1718,7 +1718,7 @@ _080B414C:
 	b _080B436C
 _080B4166:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r0, [r4, 0xB]
 	adds r0, 0x1
 	strb r0, [r4, 0xB]
@@ -1740,7 +1740,7 @@ _080B4190:
 	b _080B436C
 _080B4198:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 _080B41A0:
 	bl MoveMenuCursor
@@ -1756,7 +1756,7 @@ _080B41AC:
 	b _080B4358
 _080B41B8:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r6, _080B426C @ =gUnknown_03000708
 	ldrb r0, [r6, 0xB]
 	ldrb r1, [r6, 0x9]
@@ -1935,7 +1935,7 @@ _080B4358:
 	cmp r0, 0
 	beq _080B436C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	mov r0, r8
 	bl sub_80B43F0
 _080B436C:

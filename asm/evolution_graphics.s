@@ -642,7 +642,7 @@ sub_81499A0: @ 81499A0
 	ldr r0, _081499EC @ =sub_81499F0
 	str r0, [r5]
 	movs r0, 0x8C
-	bl PlaySE
+	bl PlaySoundEffect
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -774,7 +774,7 @@ sub_8149AA8: @ 8149AA8
 	ldr r1, _08149AD8 @ =sub_8149ADC
 	str r1, [r0]
 	movs r0, 0xB7
-	bl PlaySE
+	bl PlaySoundEffect
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -873,7 +873,7 @@ sub_8149B5C: @ 8149B5C
 	ldr r1, _08149B8C @ =sub_8149B90
 	str r1, [r0]
 	movs r0, 0x66
-	bl PlaySE
+	bl PlaySoundEffect
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1016,7 +1016,7 @@ sub_8149C50: @ 8149C50
 	ldr r0, _08149CAC @ =sub_8149CB0
 	str r0, [r5]
 	movs r0, 0xCA
-	bl PlaySE
+	bl PlaySoundEffect
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -1177,7 +1177,7 @@ sub_8149D8C: @ 8149D8C
 	ldr r0, _08149DE8 @ =sub_8149DEC
 	str r0, [r5]
 	movs r0, 0xCA
-	bl PlaySE
+	bl PlaySoundEffect
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

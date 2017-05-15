@@ -5326,7 +5326,7 @@ bs8_exit_by_flight: @ 8014F80
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x11
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08014FB4 @ =gUnknown_02024A68
 	ldrb r0, [r0]
 	strb r0, [r4]

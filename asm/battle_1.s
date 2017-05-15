@@ -1361,7 +1361,7 @@ _0800E148:
 	bl PrintLinkBattleWinLossTie
 _0800E154:
 	movs r0, 0x78
-	bl PlaySE
+	bl PlaySoundEffect
 	mov r0, r9
 	bl DestroyTask
 	ldr r4, _0800E224 @ =gSprites

@@ -1479,7 +1479,7 @@ sub_813FCBC: @ 813FCBC
 	bne _0813FD16
 	movs r0, 0x3D
 	movs r1, 0
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 	ldr r0, _0813FD24 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -1737,7 +1737,7 @@ sub_813FEC8: @ 813FEC8
 	cmp r0, 0xB
 	bne _0813FEFA
 	movs r0, 0x3C
-	bl PlaySE
+	bl PlaySoundEffect
 _0813FEFA:
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -1970,19 +1970,19 @@ _081400BC:
 	b _081400DA
 _081400C2:
 	movs r0, 0x38
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0814010E
 _081400CA:
 	movs r0, 0x39
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0814010E
 _081400D2:
 	movs r0, 0x3A
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0814010E
 _081400DA:
 	movs r0, 0x3B
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0814010E
 _081400E2:
 	movs r2, 0x38
@@ -2071,7 +2071,7 @@ sub_8140158: @ 8140158
 	ldr r0, _0814019C @ =sub_81401A0
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 _08140190:
 	pop {r4,r5}
 	pop {r0}
@@ -2399,7 +2399,7 @@ _081403FC:
 	bl StartSpriteAffineAnim
 _08140404:
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 _0814040A:
 	pop {r4,r5}
 	pop {r0}
@@ -2468,7 +2468,7 @@ sub_8140454: @ 8140454
 	bl sub_8043EB4
 	bl m4aMPlayAllStop
 	ldr r0, _0814048C @ =0x00000173
-	bl PlaySE
+	bl PlaySoundEffect
 	b _081404CC
 	.align 2, 0
 _08140484: .4byte gBattleAnimEnemyMonIndex
@@ -3032,7 +3032,7 @@ _081408B6:
 	strh r7, [r0, 0x10]
 	strh r5, [r0, 0x26]
 	movs r0, 0xF
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08140924 @ =gMain
 	ldr r1, _08140928 @ =0x0000043d
 	adds r0, r1
@@ -5258,7 +5258,7 @@ _08141A82:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x66
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 _08141A8C:
 	ldr r1, _08141AC4 @ =gSprites
 	adds r0, r4, r5

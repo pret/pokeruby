@@ -387,7 +387,7 @@ _080F7558:
 	cmp r0, 0
 	beq _080F758C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x5]
 	subs r0, 0x1
@@ -409,7 +409,7 @@ _080F758C:
 	cmp r0, 0
 	beq _080F75B0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x5]
 	adds r0, 0x1
@@ -427,7 +427,7 @@ _080F75B0:
 	cmp r0, 0
 	beq _080F7602
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, [r4]
 	movs r1, 0x5
 	ldrsb r1, [r0, r1]
@@ -472,7 +472,7 @@ _080F7602:
 	cmp r0, 0
 	beq _080F75FE
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _080F7610:
 	movs r0, 0
 _080F7612:

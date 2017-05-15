@@ -1000,7 +1000,7 @@ _080AB9E0:
 	strh r0, [r4, 0xA]
 	movs r0, 0x61
 	movs r1, 0
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1300,7 +1300,7 @@ sub_80ABC70: @ 80ABC70
 	bne _080ABCCE
 _080ABC88:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080ABCB4 @ =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	bl sub_80AF59C
@@ -1579,7 +1579,7 @@ _080ABEC6:
 	beq _080ABF08
 	bl sub_814A7FC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080ABF00 @ =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -1616,7 +1616,7 @@ _080ABF24:
 _080ABF26:
 	bl sub_814A904
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0
 	bl sub_80AFFE0
 	ldr r0, _080ABF64 @ =gUnknown_03004210
@@ -1727,7 +1727,7 @@ _080AC006:
 	cmp r6, 0x1
 	bls _080AC098
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080AC098
 	.align 2, 0
 _080AC03C: .4byte 0x02019204
@@ -1769,7 +1769,7 @@ _080AC068:
 	cmp r6, 0x1
 	bls _080AC098
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _080AC098:
 	add sp, 0x8
 	pop {r4-r7}
@@ -2946,7 +2946,7 @@ _080ACAAE:
 	cmp r0, 0
 	beq _080ACAC0
 	movs r0, 0x63
-	bl PlaySE
+	bl PlaySoundEffect
 _080ACAC0:
 	ldr r0, _080ACAD4 @ =gTasks
 	mov r3, r8
@@ -3291,13 +3291,13 @@ _080ACD5E:
 	cmp r0, 0
 	beq _080ACD7C
 	movs r0, 0x63
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080ACD82
 	.align 2, 0
 _080ACD78: .4byte gUnknown_02038696
 _080ACD7C:
 	movs r0, 0x64
-	bl PlaySE
+	bl PlaySoundEffect
 _080ACD82:
 	lsls r0, r6, 3
 	subs r0, r6
@@ -4099,7 +4099,7 @@ _080AD420:
 _080AD42C:
 	bl sub_80B1DDC
 	movs r0, 0xDF
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl sub_80B1CBC
 	b _080AD4CC
@@ -5396,7 +5396,7 @@ sub_80ADE54: @ 80ADE54
 	strh r0, [r1]
 	movs r0, 0x62
 	movs r1, 0
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 	ldr r1, _080ADEA4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -7539,7 +7539,7 @@ _080AEF0A:
 	beq _080AEF3A
 	movs r0, 0x26
 _080AEF2C:
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r1, [r5, 0x10]
 	movs r0, 0x31
 	negs r0, r0
@@ -8982,7 +8982,7 @@ _080AF990:
 	adds r0, r3, 0x1
 	strh r0, [r2, 0xA]
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080AF9D0
 _080AF9BC:
 	ldrh r0, [r2, 0x8]
@@ -8993,7 +8993,7 @@ _080AF9BC:
 	subs r0, r3, 0x1
 	strh r0, [r2, 0xA]
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 _080AF9D0:
 	ldr r3, _080AFA00 @ =gTasks
 	lsls r0, r4, 2
@@ -9517,7 +9517,7 @@ _080AFDA2:
 	cmp r2, 0
 	ble _080AFDFC
 	movs r0, 0x60
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _080AFDF4 @ =gMPlay_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
@@ -9536,7 +9536,7 @@ _080AFDF4: .4byte gMPlay_SE1
 _080AFDF8: .4byte 0x0000ffff
 _080AFDFC:
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 _080AFE02:
 	cmp r5, 0
 	bne _080AFE1C
@@ -10199,7 +10199,7 @@ sub_80B02A8: @ 80B02A8
 	ldr r0, _080B02F0 @ =sub_80B02F4
 	str r0, [r4, 0x1C]
 	movs r0, 0x18
-	bl PlaySE
+	bl PlaySoundEffect
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -11431,7 +11431,7 @@ sub_80B0BC4: @ 80B0BC4
 	cmp r1, 0
 	bne _080B0C48
 	movs r0, 0x65
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B0C4E
 	.align 2, 0
 _080B0C38: .4byte gSprites
@@ -11440,7 +11440,7 @@ _080B0C40: .4byte sub_80B0C5C
 _080B0C44: .4byte SpriteCallbackDummy
 _080B0C48:
 	movs r0, 0x2
-	bl PlaySE
+	bl PlaySoundEffect
 _080B0C4E:
 	pop {r3,r4}
 	mov r8, r3
@@ -12927,7 +12927,7 @@ _080B1758:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x20
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B177C: .4byte gSprites
@@ -12950,7 +12950,7 @@ _080B1788:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x1F
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B17B0: .4byte gSprites
@@ -12973,7 +12973,7 @@ _080B17BC:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x1F
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B17E4: .4byte gSprites
@@ -12996,7 +12996,7 @@ _080B17F0:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B1818: .4byte gSprites
@@ -13019,7 +13019,7 @@ _080B1824:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B184C: .4byte gSprites
@@ -13042,7 +13042,7 @@ _080B1858:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B1880: .4byte gSprites
@@ -13065,7 +13065,7 @@ _080B188C:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0xC3
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080B18E4
 	.align 2, 0
 _080B18B4: .4byte gSprites
@@ -13088,7 +13088,7 @@ _080B18C0:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 _080B18E4:
 	adds r2, r4, 0
 	ldr r4, _080B1914 @ =gSprites
@@ -14175,7 +14175,7 @@ _080B20CA:
 	adds r0, 0x11
 	strh r0, [r4]
 	movs r0, 0x63
-	bl PlaySE
+	bl PlaySoundEffect
 _080B2126:
 	adds r6, 0x1
 	cmp r6, 0x3
@@ -14481,7 +14481,7 @@ sub_80B237C: @ 80B237C
 	strh r0, [r1]
 	movs r0, 0x62
 	movs r1, 0
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 	ldr r1, _080B23B4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -14774,7 +14774,7 @@ _080B25C8:
 	strh r0, [r4, 0xC]
 	movs r0, 0x61
 	movs r1, 0
-	bl PlaySE12WithPanning
+	bl PlaySoundEffect12WithPanning
 	ldr r0, _080B25E0 @ =sub_80B2508
 	str r0, [r4]
 _080B25D8:

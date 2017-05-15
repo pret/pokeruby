@@ -333,7 +333,7 @@ sub_8089CD4: @ 8089CD4
 _08089D00: .4byte gPaletteFade
 _08089D04:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_806CA38
 	ldr r1, _08089D48 @ =gLastFieldPokeMenuOpened
@@ -369,7 +369,7 @@ _08089D58: .4byte gTasks
 _08089D5C: .4byte sub_8089D94
 _08089D60:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	str r5, [sp]
@@ -413,7 +413,7 @@ sub_8089D94: @ 8089D94
 	cmp r1, 0x40
 	bne _08089DD4
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -428,7 +428,7 @@ _08089DD4:
 	cmp r1, 0x80
 	bne _08089DF0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl MoveMenuCursor
 	ldr r1, _08089DEC @ =gUnknown_0202FFA8
@@ -443,7 +443,7 @@ _08089DF0:
 	cmp r0, 0
 	beq _08089E30
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08089E24 @ =gPokemonMenuActions
 	ldr r2, _08089E28 @ =gUnknown_0202FFAA
 	ldr r0, _08089E2C @ =gUnknown_0202FFA8
@@ -755,7 +755,7 @@ sub_808A060: @ 808A060
 	bl MoveMenuCursor
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0808A086:
 	ldr r0, _0808A0D0 @ =gMain
 	ldrh r0, [r0, 0x2E]
@@ -769,7 +769,7 @@ _0808A086:
 	bl MoveMenuCursor
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0808A0A4:
 	ldr r0, _0808A0D0 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -778,7 +778,7 @@ _0808A0A4:
 	cmp r0, 0
 	beq _0808A0E0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0808A0D8 @ =gUnknown_0839F578
 	ldr r2, _0808A0DC @ =gPokemonMenuActions
 	ldr r0, _0808A0D4 @ =gUnknown_0202FFA8
@@ -1585,7 +1585,7 @@ sub_808A73C: @ 808A73C
 	cmp r0, 0x40
 	bne _0808A77A
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _0808A768 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -1612,7 +1612,7 @@ _0808A77A:
 	cmp r0, 0x80
 	bne _0808A7B4
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r4, _0808A7A4 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
 	ldr r1, _0808A7A8 @ =gUnknown_0839F584
@@ -1642,7 +1642,7 @@ _0808A7B4:
 	cmp r0, 0
 	beq _0808A7F0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0808A7E4 @ =gUnknown_0839F584
 	ldr r2, _0808A7E8 @ =gPokemonMenuActions
 	ldr r0, _0808A7EC @ =gUnknown_0202FFA8
@@ -1814,7 +1814,7 @@ PokemonMenu_Cancel: @ 808A918
 	lsrs r4, 24
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_808A8D4
 	pop {r4}
@@ -1830,7 +1830,7 @@ PokemonMenu_CancelSubmenu: @ 808A938
 	lsrs r4, 24
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x13
 	movs r1, 0
 	movs r2, 0x1D
@@ -2808,7 +2808,7 @@ _0808B0F0:
 	cmp r0, 0
 	beq _0808B120
 	movs r0, 0x20
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0808B1CE
 	.align 2, 0
 _0808B118: .4byte gLastFieldPokeMenuOpened
@@ -2831,7 +2831,7 @@ _0808B13C:
 	cmp r0, 0x1
 	bne _0808B154
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0808B174 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0808B17C @ =sub_808B2EC
@@ -2842,7 +2842,7 @@ _0808B154:
 	cmp r0, 0x3
 	bne _0808B1CE
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0808B180 @ =sub_808B2B4
 	adds r0, r4, 0
 	bl PartyMenuTryGiveMonMail
@@ -2860,7 +2860,7 @@ _0808B184:
 	ldr r1, _0808B1D8 @ =gLastFieldPokeMenuOpened
 	strb r0, [r1]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	str r5, [sp]

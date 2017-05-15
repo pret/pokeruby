@@ -109,7 +109,7 @@ void sub_8070088(u8 taskId)
 
     gUnknown_0202E8F4 = 1;
     MenuZeroFillWindowRect(3, 14, 26, 19);
-    PlaySE(SE_KAIFUKU);
+    PlaySoundEffect(SE_KAIFUKU);
     PartyMenuUpdateLevelOrStatus(unk_201C000.pokemon, unk_201C000.var05);
 
     task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle()][unk_201C000.var05], 9);
@@ -214,7 +214,7 @@ _08070134:\n\
     movs r3, 0x13\n\
     bl MenuZeroFillWindowRect\n\
     movs r0, 0x1\n\
-    bl PlaySE\n\
+    bl PlaySoundEffect\n\
     ldr r0, [r4]\n\
     ldrb r1, [r4, 0x5]\n\
     bl PartyMenuUpdateLevelOrStatus\n\

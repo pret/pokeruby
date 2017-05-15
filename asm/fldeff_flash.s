@@ -72,7 +72,7 @@ _0810CC30: .4byte sub_810CC34
 sub_810CC34: @ 810CC34
 	push {lr}
 	movs r0, 0xCF
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0810CC4C @ =0x00000828
 	bl FlagSet
 	ldr r0, _0810CC50 @ =gUnknown_081B694A

@@ -426,7 +426,7 @@ _08090AA4:
 	mov r0, r8
 	strh r0, [r5, 0x10]
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	b _08090B44
 	.align 2, 0
 _08090B00: .4byte gTasks
@@ -653,7 +653,7 @@ sub_8090C68: @ 8090C68
 	adds r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	b _08090D2A
 	.align 2, 0
 _08090CD0: .4byte gUnknown_0202FFBC
@@ -693,7 +693,7 @@ _08090CE4:
 	subs r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 _08090D2A:
 	pop {r4,r5}
 	pop {r0}
@@ -3220,7 +3220,7 @@ sub_809207C: @ 809207C
 	cmp r0, 0
 	beq _080920B0
 	movs r0, 0x3
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080920A8 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
@@ -3260,12 +3260,12 @@ _080920D8:
 	b _0809216C
 _080920DE:
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	strh r4, [r5, 0xA]
 	b _080920F2
 _080920E8:
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x4
 	strh r0, [r5, 0xA]
 _080920F2:
@@ -3276,7 +3276,7 @@ _080920F2:
 _080920F8: .4byte sub_809217C
 _080920FC:
 	movs r0, 0x3
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08092108 @ =sub_80927B8
 	str r0, [r5]
 	b _0809216C
@@ -3297,7 +3297,7 @@ _0809210C:
 	cmp r0, 0
 	ble _0809213A
 	movs r0, 0x6D
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4, 0x8]
 	subs r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3321,7 +3321,7 @@ _0809213A:
 	cmp r0, 0x1
 	bgt _0809216C
 	movs r0, 0x6D
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3403,7 +3403,7 @@ _080921F0:
 	cmp r3, 0
 	beq _08092230
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl sub_8092EB0
 	ldr r0, _08092228 @ =gTasks
@@ -3480,7 +3480,7 @@ _08092288:
 	adds r0, r2
 	strh r1, [r0]
 	movs r0, 0x3
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080922D0 @ =sub_80927B8
 	str r0, [r6]
 	b _080923EC
@@ -3499,14 +3499,14 @@ _080922D4:
 	ldr r0, _080922EC @ =sub_80923FC
 	str r0, [r6]
 	movs r0, 0x70
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080923EC
 	.align 2, 0
 _080922E8: .4byte gDexText_Searching
 _080922EC: .4byte sub_80923FC
 _080922F0:
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080922FC @ =sub_80925CC
 	str r0, [r6]
 	b _080923EC
@@ -3530,7 +3530,7 @@ _08092300:
 	cmp r0, 0xFF
 	beq _08092338
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -3559,7 +3559,7 @@ _08092338:
 	cmp r0, 0xFF
 	beq _08092374
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -3588,7 +3588,7 @@ _08092374:
 	cmp r0, 0xFF
 	beq _080923B0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -3617,7 +3617,7 @@ _080923B0:
 	cmp r0, 0xFF
 	beq _080923EC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -3731,7 +3731,7 @@ sub_80924A4: @ 80924A4
 	cmp r0, 0
 	beq _080924DC
 	movs r0, 0x1F
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080924D8 @ =gDexText_SearchComplete
 	bl sub_8091E20
 	b _080924E8
@@ -3741,7 +3741,7 @@ _080924D4: .4byte 0x0000060c
 _080924D8: .4byte gDexText_SearchComplete
 _080924DC:
 	movs r0, 0x20
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080924FC @ =gDexText_NoMatching
 	bl sub_8091E20
 _080924E8:
@@ -3811,7 +3811,7 @@ sub_8092508: @ 8092508
 	ldr r1, _0809258C @ =sub_80927B8
 	str r1, [r0]
 	movs r0, 0x3
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080925A4
 	.align 2, 0
 _08092570: .4byte gMain
@@ -3831,7 +3831,7 @@ _08092590:
 	ldr r0, _080925B0 @ =sub_809217C
 	str r0, [r1]
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 _080925A4:
 	pop {r4,r5}
 	pop {r0}
@@ -3951,7 +3951,7 @@ sub_8092644: @ 8092644
 	beq _080926B4
 	bl sub_814ADC8
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x12
 	movs r1, 0x1
 	movs r2, 0x1C
@@ -3971,7 +3971,7 @@ _080926B4:
 	beq _080926EC
 	bl sub_814ADC8
 	movs r0, 0x17
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x12
 	movs r1, 0x1
 	movs r2, 0x1C
@@ -4026,7 +4026,7 @@ _08092730:
 	beq _080927AE
 _08092734:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4]
 	ldrh r1, [r5]
 	adds r0, r1
@@ -4074,7 +4074,7 @@ _08092794:
 	beq _080927AE
 _08092798:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r4]
 	ldrh r1, [r5]
 	adds r0, r1

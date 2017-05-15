@@ -2270,7 +2270,7 @@ _08042768:
 _0804278A:
 	bl MoveMenuCursor
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	b _08042816
 	.align 2, 0
 _08042798: .4byte gTasks
@@ -2281,7 +2281,7 @@ _0804279C:
 	beq _080427E8
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r3, _080427DC @ =gLastFieldPokeMenuOpened
 	ldr r2, _080427E0 @ =gScriptResult
 	ldr r1, _080427E4 @ =gTasks
