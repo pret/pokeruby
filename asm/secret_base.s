@@ -1316,39 +1316,6 @@ _080BC18A:
 	thumb_func_end sub_80BC14C
 
 .section .text_80BC1D0
-
-	thumb_func_start sub_80BC224
-sub_80BC224: @ 80BC224
-	push {r4,r5,lr}
-	ldr r0, _080BC25C @ =0x00004054
-	bl VarGet
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 5
-	ldr r0, _080BC260 @ =gSaveBlock1 + 0x1A0A
-	adds r4, r0
-	ldr r5, _080BC264 @ =gStringVar1
-	adds r0, r4, 0
-	bl sub_80BB8A8
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl StringCopyN
-	movs r1, 0xFF
-	strb r1, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC25C: .4byte 0x00004054
-_080BC260: .4byte gSaveBlock1 + 0x1A0A
-_080BC264: .4byte gStringVar1
-	thumb_func_end sub_80BC224
-
 	thumb_func_start sub_80BC268
 sub_80BC268: @ 80BC268
 	push {lr}
