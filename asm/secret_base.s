@@ -1317,46 +1317,6 @@ _080BC18A:
 
 .section .text_80BC1D0
 
-	thumb_func_start GetSecretBaseMapName
-GetSecretBaseMapName: @ 80BC1D0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	mov r8, r0
-	ldr r6, _080BC214 @ =gUnknown_020387DC
-	ldr r5, _080BC218 @ =gSaveBlock1
-	ldr r4, _080BC21C @ =0x00004054
-	adds r0, r4, 0
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 5
-	adds r1, r5
-	ldr r0, _080BC220 @ =0x00001a08
-	adds r1, r0
-	ldrb r0, [r1]
-	strb r0, [r6]
-	adds r0, r4, 0
-	bl VarGet
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r0, r8
-	bl sub_80BC190
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BC214: .4byte gUnknown_020387DC
-_080BC218: .4byte gSaveBlock1
-_080BC21C: .4byte 0x00004054
-_080BC220: .4byte 0x00001a08
-	thumb_func_end GetSecretBaseMapName
-
 	thumb_func_start sub_80BC224
 sub_80BC224: @ 80BC224
 	push {r4,r5,lr}
