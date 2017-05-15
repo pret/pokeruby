@@ -30,7 +30,7 @@ sub_80416A0: @ 80416A0
 	add r5, r8
 	ldr r1, [r5]
 	adds r0, r4, 0
-	bl sub_8041664
+	bl Daycare_GetLevelAfterSteps
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, r6
@@ -60,7 +60,7 @@ sub_80416E8: @ 80416E8
 	adds r6, r0
 	ldr r1, _08041720 @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	ldr r0, _08041724 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0
@@ -92,7 +92,7 @@ sub_8041728: @ 8041728
 	adds r6, r0
 	ldr r1, _08041768 @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -1625,7 +1625,7 @@ sub_80422C4: @ 80422C4
 	beq _080422FC
 	ldr r1, _0804231C @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r6, 0
 	movs r1, 0x3
 	bl GetBoxMonData
@@ -1650,7 +1650,7 @@ _080422FC:
 	beq _08042314
 	ldr r1, _08042324 @ =gStringVar2
 	adds r0, r4, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 _08042314:
 	pop {r4-r6}
 	pop {r0}
@@ -1671,7 +1671,7 @@ sub_8042328: @ 8042328
 	ldr r4, _08042358 @ =gPlayerParty
 	adds r0, r4
 	ldr r1, _0804235C @ =gStringVar1
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -1714,7 +1714,7 @@ sp0B6_daycare: @ 8042370
 _08042384: .4byte gSaveBlock1 + 0x2F9C
 _08042388:
 	adds r0, r4, 0
-	bl daycare_count_pokemon
+	bl Daycare_CountPokemon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2118,7 +2118,7 @@ _08042648:
 	adds r5, r1, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl MonAppendGenderSymbol
@@ -2178,7 +2178,7 @@ _080426C6:
 	adds r1, r6, r3
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8041664
+	bl Daycare_GetLevelAfterSteps
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

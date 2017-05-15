@@ -5,7 +5,7 @@
 
 extern u8 gLastFieldPokeMenuOpened;
 
-u8 *pokemon_get_nick(struct Pokemon *mon, u8 *dest)
+u8 *GetMonNick(struct Pokemon *mon, u8 *dest)
 {
 	s8 nickname[POKEMON_NAME_LENGTH * 2];
 
@@ -13,7 +13,7 @@ u8 *pokemon_get_nick(struct Pokemon *mon, u8 *dest)
 	return StringCopy10(dest, nickname);
 }
 
-u8 *pokemon_get_nick_(struct BoxPokemon *mon, u8 *dest)
+u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest)
 {
 	s8 nickname[POKEMON_NAME_LENGTH * 2];
 
@@ -21,16 +21,14 @@ u8 *pokemon_get_nick_(struct BoxPokemon *mon, u8 *dest)
 	return StringCopy10(dest, nickname);
 }
 
-u8 daycare_count_pokemon(struct BoxPokemon *daycare_data)
+u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
 {
 	u8 i, count;
 	count = 0;
 
-	for(i = 0;i <= 1;i++) {
-		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) != 0) {
+	for(i = 0;i <= 1;i++)
+		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) != 0)
 			count++;
-		}
-	}
 
 	return count;
 }
@@ -98,36 +96,34 @@ _08041374:\n\
 	.syntax divided\n");
 }
 
-s8 daycare_empty_slot(struct BoxPokemon * daycare_data)
+s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
 {
 	u8 i;
 
-	for(i = 0;i <= 1;i++){
-		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) == 0){
+	for(i = 0;i <= 1;i++)
+		if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) == 0)
 			return i;
-		}
-	}
 
 	return -1;
 }
 
-/*void sub_80413C8(struct Pokemon * mon, struct BoxPokemon * daycare_data){ // unfinished
+/*void Daycare_SendPokemon(struct Pokemon * mon, struct BoxPokemon * daycare_data){ // unfinished
 	s8 empty_slot;
 
-	empty_slot = daycare_empty_slot(daycare_data);
+	empty_slot = Daycare_FindEmptySpot(daycare_data);
 	if(MonHasMail(mon) != 0){ // if the mon holds a mail?
 		u8 empty_slot_times_56 = empty_slot * 56;
 		u8 * something2 = ((u8 *) (daycare_data + 2)) + empty_slot_times_56 + 36;
 		StringCopy(something2, gSaveBlock2.playerName);
 		PadNameString(something2, 0xFC);
 		something2 += 8;
-		pokemon_get_nick(mon, something2);
+		GetMonNick(mon, something2);
 		u8 pokerus = GetMonData(mon, MON_DATA_64);
 		something1 += (u8 * daycare_data)
 }*/
 
 __attribute__((naked))
-void sub_80413C8()
+void Daycare_SendPokemon()
 {
 	// strange stack usage - happens because THUMB ARM only allows R0-R7 to be pushed/popped:
 	//    all registers in reglist must be Lo registers, except that PUSH can include the LR, and POP can include the PC
@@ -140,7 +136,7 @@ void sub_80413C8()
 	adds r7, r0, 0\n\
 	mov r8, r1\n\
 	mov r0, r8\n\
-	bl daycare_empty_slot\n\
+	bl Daycare_FindEmptySpot\n\
 	lsls r0, 24\n\
 	lsrs r4, r0, 24\n\
 	mov r9, r4\n\
@@ -168,7 +164,7 @@ void sub_80413C8()
 	adds r6, 0x8\n\
 	adds r0, r7, 0\n\
 	adds r1, r6, 0\n\
-	bl pokemon_get_nick\n\
+	bl GetMonNick\n\
 	adds r0, r7, 0\n\
 	movs r1, 0x40\n\
 	bl GetMonData\n\
@@ -228,9 +224,9 @@ _08041498: .4byte 0x00002b4c\n\
 	.syntax divided\n");
 }
 
-void daycare_send()
+void Daycare_SendPokemon_Special()
 {
-	sub_80413C8(gPlayerParty + gLastFieldPokeMenuOpened, gSaveBlock1.daycareData);
+	Daycare_SendPokemon(gPlayerParty + gLastFieldPokeMenuOpened, gSaveBlock1.daycareData);
 }
 
 void sub_80417F4(u8 *);
@@ -291,7 +287,7 @@ u16 sub_8041570(struct BoxPokemon * daycare_data, u8 a2){
 	adds r6, r5, r0\n\
 	ldr r1, _08041640 @ =gStringVar1\n\
 	adds r0, r6, 0\n\
-	bl pokemon_get_nick_\n\
+	bl GetBoxMonNick\n\
 	adds r0, r6, 0\n\
 	movs r1, 0xB\n\
 	bl GetBoxMonData\n\
@@ -382,7 +378,7 @@ u16 sub_8041648()
 	return sub_8041570(gSaveBlock1.daycareData, gSpecialVar_0x8004);
 }
 
-u8 sub_8041664(struct BoxPokemon * mon, u32 steps){
+u8 Daycare_GetLevelAfterSteps(struct BoxPokemon * mon, u32 steps){
 	struct BoxPokemon temp = *mon;
 	u32 new_exp = GetBoxMonData(mon, MON_DATA_EXP) + steps;
 	SetBoxMonData(&temp, MON_DATA_EXP, (u8 *) &new_exp);
