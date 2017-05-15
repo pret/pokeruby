@@ -36,7 +36,7 @@ extern bool8 gReceivedRemoteLinkPlayers;
 
 void sub_80B929C(void)
 {
-    sub_8083A84(sub_80B9484);
+    sub_8083A84(Task_RecordMixing_Main);
 }
 
 struct PlayerRecords {
@@ -53,10 +53,10 @@ struct PlayerRecords {
 extern struct PlayerRecords unk_2008000;
 extern struct PlayerRecords unk_2018000;
 
-extern void sub_80BC300();
-extern void sub_80C045C();
+void sub_80BC300();
+void sub_80C045C();
 
-void sub_80B92AC(void)
+void RecordMixing_PrepareExchangePacket(void)
 {
     sub_80BC300();
     sub_80C045C();
@@ -76,9 +76,7 @@ void sub_80B92AC(void)
         unk_2018000.filler11C8[0] = sub_8126338();
 }
 
-#undef NONMATCHING
-
-void sub_80B93B0(u32 a)
+void RecordMixing_ReceiveExchangePacket(u32 a)
 {
     sub_80BD674(unk_2008000.secretBases, sizeof(struct PlayerRecords), a);
     sub_80BFD44((u8 *)unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
@@ -91,7 +89,7 @@ void sub_80B93B0(u32 a)
     sub_80B9F3C(unk_2008000.filler11C8, a);
 }
 
-void sub_80B9450(u8 taskId)
+void Task_RecordMixing_SoundEffect(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 50)
@@ -102,24 +100,23 @@ void sub_80B9450(u8 taskId)
 }
 
 #define TD_STATE 0
-
-void sub_80B9484(u8 taskId)
+void Task_RecordMixing_Main(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
     switch (taskData[TD_STATE])
     {
-    case 0:
+    case 0:        // init
         sub_8007270(gSpecialVar_0x8005);
         VarSet(0x4000, 1);
         gUnknown_03000718 = 0;
-        sub_80B92AC();
+        RecordMixing_PrepareExchangePacket();
         CreateRecordMixingSprite();
         taskData[TD_STATE] = 1;
         taskData[10] = CreateTask(sub_80B95F0, 0x50);
-        taskData[15] = CreateTask(sub_80B9450, 0x51);
+        taskData[15] = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
         break;
-    case 1:
+    case 1:        // wait for sub_80B95F0
         if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 2;
@@ -133,7 +130,7 @@ void sub_80B9484(u8 taskId)
         taskData[TD_STATE] = 3;
         PlaySoundEffect(SE_W226);
         break;
-    case 3:
+    case 3:        // wait for sub_80BA00C
         if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 4;
@@ -143,7 +140,7 @@ void sub_80B9484(u8 taskId)
             taskData[8] = 0;
         }
         break;
-    case 4:
+    case 4:        // wait 60 frames
         taskData[8]++;
         if (taskData[8] > 60)
             taskData[TD_STATE] = 5;
@@ -171,10 +168,10 @@ void sub_80B95F0(u8 taskId)
         MenuDisplayMessageBox();
         MenuPrint(gOtherText_MixingRecordsWithFriend, 2, 15);
         task->data[8] = 0x708;
-        task->data[TD_STATE] = 0x190;
+        task->data[TD_STATE] = 400;
         ClearLinkCallback_2();
         break;
-    case 100:
+    case 100:        // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
@@ -216,7 +213,7 @@ void sub_80B95F0(u8 taskId)
         if (sub_800820C() == GetLinkPlayerCount_2())
             task->data[TD_STATE] = 1;
         break;
-    case 400:
+    case 400:        // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
@@ -224,7 +221,7 @@ void sub_80B95F0(u8 taskId)
             task->data[12] = 0;
         }
         break;
-    case 1:
+    case 1:        // wait for handshake
         if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), 2, 2);
@@ -238,16 +235,16 @@ void sub_80B95F0(u8 taskId)
         task->data[6] = GetLinkPlayerCount_2();
         task->data[TD_STATE] = 0;
         task->data[5] = GetMultiplayerId_();
-        task->func = sub_80B97DC;
+        task->func = Task_RecordMixing_SendPacket;
         StorePtrInTaskData(&unk_2018000, &task->data[2]);
-        subTaskId = CreateTask(Task_CopyRecvBuffer, 0x50);
+        subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
         task->data[10] = subTaskId;
         gTasks[subTaskId].data[0] = taskId;
         //StorePtrInTaskData((void*)0x2008000, &gTasks[subTaskId].data[5]);
         StorePtrInTaskData((u8 *)&unk_2018000 - 0x10000, &gTasks[subTaskId].data[5]);
         break;
     }
-    case 5:
+    case 5:        // wait 60 frames
         task->data[10]++;
         if (task->data[10] > 60)
         {
@@ -258,9 +255,10 @@ void sub_80B95F0(u8 taskId)
     }
 }
 
-void sub_80B97DC(u8 taskId)
+void Task_RecordMixing_SendPacket(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    // does this send the data 24 times?
 
     switch (task->data[TD_STATE])
     {
@@ -288,15 +286,15 @@ void sub_80B97DC(u8 taskId)
             break;
         case 4:
             if (!gTasks[task->data[10]].isActive)
-                task->func = sub_80B9A1C;
+                task->func = Task_RecordMixing_SendPacket_SwitchToReceive;
     }
 }
 
-void Task_CopyRecvBuffer(u8 taskId)
+void Task_RecordMixing_CopyReceiveBuffer(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 recvStatus = GetBlockReceivedStatus();
-    u32 sp8 = 0;
+    u8 handledPlayers = 0;
 
     if (recvStatus == sub_8008198())
     {
@@ -304,32 +302,27 @@ void Task_CopyRecvBuffer(u8 taskId)
 
         for (player = 0; player < GetLinkPlayerCount(); player++)
         {
-            //_080B98D4
-            u8 *ptr;
             void *src;
             u8 *dst;
 
             if ((recvStatus >> player) & 1)
             {
-                ptr = LoadPtrFromTaskData(&task->data[5]);
-                dst = ptr + task->data[player + 1] * BUFFER_CHUNK_SIZE + player * sizeof(struct PlayerRecords);
+                dst = LoadPtrFromTaskData(&task->data[5]) + task->data[player + 1] * BUFFER_CHUNK_SIZE + player * sizeof(struct PlayerRecords);
                 src = GetPlayerRecvBuffer(player);
-                if ((u32)(task->data[player + 1] + 1) * BUFFER_CHUNK_SIZE > sizeof(struct PlayerRecords))
+                if ((task->data[player + 1] + 1) * BUFFER_CHUNK_SIZE > sizeof(struct PlayerRecords))
                     memcpy(dst, src, sizeof(struct PlayerRecords) - task->data[player + 1] * BUFFER_CHUNK_SIZE);
                 else
                     memcpy(dst, src, BUFFER_CHUNK_SIZE);
-                //_080B993C
                 ResetBlockReceivedFlag(player);
                 task->data[player + 1]++;
                 if ((u16)task->data[player + 1] == 0x18)
-                    sp8 = (u8)(sp8 + 1);
+                    handledPlayers++;
             }
         }
-        //line 828
         gTasks[task->data[0]].data[0]++;
     }
     //_080B998A
-    if (sp8 == GetLinkPlayerCount())
+    if (handledPlayers == GetLinkPlayerCount())
         DestroyTask(taskId);
 }
 
@@ -341,18 +334,18 @@ void sub_80B99B4(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_80B99E8(u8 taskId)
+void Task_RecordMixing_ReceivePacket(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->func = sub_80B99B4;
     if (gUnknown_03000718 == 1)
-        sub_80B93B0(task->data[5]);
+        RecordMixing_ReceiveExchangePacket(task->data[5]);
 }
 
-void sub_80B9A1C(u8 taskId)
+void Task_RecordMixing_SendPacket_SwitchToReceive(u8 taskId)
 {
-    gTasks[taskId].func = sub_80B99E8;
+    gTasks[taskId].func = Task_RecordMixing_ReceivePacket;
     gUnknown_03000718 = 1;
 }
 
@@ -433,6 +426,7 @@ u8 sub_80B9BBC(u16 *a)
     return a[16];
 }
 
+#undef NONMATCHING
 #ifdef NONMATCHING
 
 void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
