@@ -1,7 +1,9 @@
 #include "global.h"
+#include "event_data.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
+extern u16 gScriptResult;
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
     u16 i;
@@ -46,4 +48,23 @@ void ResetSecretBases(void) { // 080bb5b4
 
 void sub_80BB5D0(void) { // 080bb5d0
     gUnknown_020387DC = gSpecialVar_0x8004;
+}
+
+void sub_80BB5E4(void) { // 80bb5e4
+    u16 idx;
+    gScriptResult = 0;
+    for (idx=0; idx<20; idx++) {
+        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0) 
+            continue;
+        gScriptResult = 1;
+        VarSet(0x4054, idx);
+        break;
+    }
+}
+
+void sub_80BB63C(void) { // 80bb63c
+    if (gSaveBlock1.secretBases[0].sbr_field_0)
+        gScriptResult = 1;
+    else
+        gScriptResult = 0;
 }
