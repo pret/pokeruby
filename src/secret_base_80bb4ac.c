@@ -21,7 +21,7 @@ extern const struct {
     u16 unk_083D1358_0;
     u16 unk_083D1358_1;
 } gUnknown_083D1358[7];
-extern const u8 gUnknown_083D1374[48];
+extern const u8 gUnknown_083D1374[4 * 16];
 extern void *gUnknown_0300485C;
 extern u8 sub_807D770(void);
 
@@ -238,10 +238,10 @@ void sub_80BBAF0(void) {
     saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
 }
 
-u8 sub_80BBB24(void) {
+bool8 sub_80BBB24(void) {
     if (gMapHeader.mapType == 9 && VarGet(VAR_0x4097) == 0)
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }
 
 void sub_80BBB50(u8 taskid) {
@@ -261,4 +261,28 @@ void sub_80BBB90(void) {
     CurrentMapDrawMetatileAt(x + 7, y + 7);
     pal_fill_black();
     CreateTask(sub_80BBB50, 0);
+}
+
+void sub_80BBBEC(u8 taskid) {
+    s8 idx;
+    if (!gPaletteFade.active) {
+        idx = 4 * (gUnknown_020387DC / 10);
+        warp1_set(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
+        warp_in();
+        gUnknown_0300485C = sub_80BBB90;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskid);
+    }
+}
+
+void sub_80BBC78(void) {
+    u8 taskid = CreateTask(sub_80BBBEC, 0);
+    gTasks[taskid].data[0] = 0;
+    fade_screen(1, 0);
+}
+
+bool8 CurrentMapIsSecretBase(void) {
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_SECRET_BASE_SHRUB4 && (u8)(gSaveBlock1.location.mapNum) <= MAP_ID_SECRET_BASE_SHRUB4)
+        return TRUE;
+    return FALSE;
 }
