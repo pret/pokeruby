@@ -5,12 +5,13 @@
 #include "text.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "string_util.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8007;
 extern u16 gScriptResult;
-extern struct {
+extern const struct {
     u16 unk_083D1358_0;
     u16 unk_083D1358_1;
 } gUnknown_083D1358[7];
@@ -154,4 +155,19 @@ u8 sub_80BB8A8(u8 *arg1) {
             return idx;
     }
     return 7;
+}
+
+void sub_80BB8CC(void) {
+    u8 nameLength;
+    u16 idx;
+    gSaveBlock1.secretBases[0].sbr_field_0 = gUnknown_020387DC;
+    for (idx=0; idx<4; idx++) {
+        gSaveBlock1.secretBases[0].trainerId[idx] = gSaveBlock2.playerTrainerId[idx];
+    }
+    VarSet(VAR_0x4054, 0);
+    nameLength = sub_80BB8A8(gSaveBlock2.playerName);
+    memset(gSaveBlock1.secretBases[0].sbr_field_2, 0xFF, 7);
+    StringCopyN(gSaveBlock1.secretBases[0].sbr_field_2, gSaveBlock2.playerName, nameLength);
+    gSaveBlock1.secretBases[0].gender = gSaveBlock2.playerGender;
+    VarSet(VAR_SECRET_BASE_MAP, gMapHeader.name);
 }
