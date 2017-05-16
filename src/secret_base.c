@@ -3,6 +3,7 @@
 #include "strings.h"
 #include "text.h"
 #include "event_data.h"
+#include "vars.h"
 
 extern u8 gUnknown_020387DC;
 
@@ -20,13 +21,13 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     return StringAppend(dest, gOtherText_PlayersBase);
 }
 
-u8 *GetSecretBaseMapName(u8 *dest) { // 80bc1d0
-    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(0x4054)].sbr_field_0;
-    return sub_80BC190(dest, VarGet(0x4054));
+u8 *GetSecretBaseMapName(u8 *dest) {
+    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_0;
+    return sub_80BC190(dest, VarGet(VAR_0x4054));
 }
 
-void sub_80BC224(void) { // 80bc224
-    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(0x4054)].sbr_field_2;
+void sub_80BC224(void) {
+    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].sbr_field_2;
     u8 *var1 = gStringVar1;
     u8 var2 = sub_80BB8A8(var0);
     u8 *var3 = StringCopyN(var1, var0, var2);

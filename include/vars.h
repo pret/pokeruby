@@ -26,6 +26,8 @@
 
 #define VAR_BARBOACH_SIZE_RECORD   0x404F
 
-#define VAR_PORTHOLE           0x40B4
+#define VAR_0x4054                 0x4054
+
+#define VAR_PORTHOLE               0x40B4
 
 #endif // GUARD_VARS_H

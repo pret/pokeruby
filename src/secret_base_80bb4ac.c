@@ -1,12 +1,15 @@
 #include "global.h"
 #include "event_data.h"
 #include "asm.h"
+#include "vars.h"
 #include "field_player_avatar.h"
+#include "field_camera.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8007;
 extern u16 gScriptResult;
+extern u16 gUnknown_083D1358[16];
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
     u16 i;
@@ -57,10 +60,10 @@ void sub_80BB5E4(void) { // 80bb5e4
     u16 idx;
     gScriptResult = 0;
     for (idx=0; idx<20; idx++) {
-        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0) 
+        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0)
             continue;
         gScriptResult = 1;
-        VarSet(0x4054, idx);
+        VarSet(VAR_0x4054, idx);
         break;
     }
 }
@@ -72,10 +75,9 @@ void sub_80BB63C(void) { // 80bb63c
         gScriptResult = 0;
 }
 
-#ifdef NONMATCHING
 u8 sub_80BB66C(void) { // 80bb66c
     s16 x, y;
-    u16 v0;
+    s16 v0;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     v0 = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
     if (v0 == 0x90 || v0 == 0x91)
@@ -92,97 +94,6 @@ u8 sub_80BB66C(void) { // 80bb66c
         return 6;
     return 0;
 }
-#else
-__attribute__((naked))
-u8 sub_80BB66C(void) {
-    asm(".syntax unified\n\
-    	push {r4,lr}\n\
-    	sub sp, 0x4\n\
-    	mov r4, sp\n\
-    	adds r4, 0x2\n\
-    	mov r0, sp\n\
-    	adds r1, r4, 0\n\
-    	bl GetXYCoordsOneStepInFrontOfPlayer\n\
-    	mov r0, sp\n\
-    	movs r1, 0\n\
-    	ldrsh r0, [r0, r1]\n\
-    	movs r2, 0\n\
-    	ldrsh r1, [r4, r2]\n\
-    	bl MapGridGetMetatileBehaviorAt\n\
-    	adds r1, r0, 0\n\
-    	ldr r2, _080BB6A4 @ =0x00000fff\n\
-    	adds r0, r2, 0\n\
-    	ands r1, r0\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x90\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bhi _080BB6A8\n\
-    	movs r0, 0x1\n\
-    	b _080BB702\n\
-    	.align 2, 0\n\
-    _080BB6A4: .4byte 0x00000fff\n\
-    _080BB6A8:\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x92\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bhi _080BB6B8\n\
-    	movs r0, 0x2\n\
-    	b _080BB702\n\
-    _080BB6B8:\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x9A\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bhi _080BB6C8\n\
-    	movs r0, 0x3\n\
-    	b _080BB702\n\
-    _080BB6C8:\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x94\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bhi _080BB6D8\n\
-    	movs r0, 0x4\n\
-    	b _080BB702\n\
-    _080BB6D8:\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x96\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bls _080BB6EC\n\
-    	cmp r1, 0x9C\n\
-    	beq _080BB6EC\n\
-    	cmp r1, 0x9D\n\
-    	bne _080BB6F0\n\
-    _080BB6EC:\n\
-    	movs r0, 0x5\n\
-    	b _080BB702\n\
-    _080BB6F0:\n\
-    	adds r0, r1, 0\n\
-    	subs r0, 0x98\n\
-    	lsls r0, 16\n\
-    	lsrs r0, 16\n\
-    	cmp r0, 0x1\n\
-    	bls _080BB700\n\
-    	movs r0, 0\n\
-    	b _080BB702\n\
-    _080BB700:\n\
-    	movs r0, 0x6\n\
-    _080BB702:\n\
-    	add sp, 0x4\n\
-    	pop {r4}\n\
-    	pop {r1}\n\
-    	bx r1\n\
-        .syntax divided\n");
-}
-#endif
 
 void sub_80BB70C(void) { // 80bb70c
     gSpecialVar_0x8007 = sub_80BB66C();
@@ -196,3 +107,131 @@ s16 unref_sub_80BB724(u16 *a0, u8 a1) {
     }
     return -1;
 }
+
+void sub_80BB764(s16 *arg1, s16 *arg2, u16 arg3) {
+    s16 x, y;
+    for (y=0; y<gMapHeader.mapData->height; y++) {
+        for (x=0; x<gMapHeader.mapData->width; x++) {
+            if ((gMapHeader.mapData->map[y * gMapHeader.mapData->width + x] & 0x3ff) == arg3) {
+                *arg1 = x;
+                *arg2 = y;
+                return;
+            }
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void sub_80BB800(void) {
+    s16 x, y;
+    u16 v0, v1;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    v1 = MapGridGetMetatileIdAt(x, y);
+    for (v0=0; v0<7; v0++) {
+        if (gUnknown_083D1358[v0] == v1) {
+            MapGridSetMetatileIdAt(x, y, gUnknown_083D1358[v0 + 1] | 0x300);
+            CurrentMapDrawMetatileAt(x, y);
+            break;
+        }
+    }
+    for (v0=0; v0<7; v0++) {
+        if (gUnknown_083D1358[v0 + 1] == v1) {
+            MapGridSetMetatileIdAt(x, y, gUnknown_083D1358[v0] | 0x300);
+            CurrentMapDrawMetatileAt(x, y);
+            break;
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80BB800(void) {
+    asm(".syntax unified\n\
+    	push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	sub sp, 0x4\n\
+	mov r4, sp\n\
+	adds r4, 0x2\n\
+	mov r0, sp\n\
+	adds r1, r4, 0\n\
+	bl GetXYCoordsOneStepInFrontOfPlayer\n\
+	mov r0, sp\n\
+	movs r1, 0\n\
+	ldrsh r0, [r0, r1]\n\
+	movs r2, 0\n\
+	ldrsh r1, [r4, r2]\n\
+	bl MapGridGetMetatileIdAt\n\
+	movs r5, 0\n\
+	mov r12, r4\n\
+	lsls r0, 16\n\
+	asrs r3, r0, 16\n\
+	ldr r1, _080BB84C @ =gUnknown_083D1358\n\
+	mov r8, r1\n\
+	adds r7, r0, 0\n\
+	mov r4, sp\n\
+	mov r6, r12\n\
+_080BB834:\n\
+	ldr r0, _080BB84C @ =gUnknown_083D1358\n\
+	lsls r1, r5, 2\n\
+	adds r2, r1, r0\n\
+	ldrh r0, [r2]\n\
+	cmp r0, r3\n\
+	bne _080BB850\n\
+	movs r3, 0\n\
+	ldrsh r0, [r4, r3]\n\
+	movs r5, 0\n\
+	ldrsh r1, [r6, r5]\n\
+	ldrh r3, [r2, 0x2]\n\
+	b _080BB878\n\
+	.align 2, 0\n\
+_080BB84C: .4byte gUnknown_083D1358\n\
+_080BB850:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	cmp r5, 0x6\n\
+	bls _080BB834\n\
+	movs r5, 0\n\
+	mov r4, sp\n\
+	mov r6, r12\n\
+_080BB860:\n\
+	lsls r0, r5, 2\n\
+	mov r1, r8\n\
+	adds r3, r0, r1\n\
+	ldrh r1, [r3, 0x2]\n\
+	asrs r0, r7, 16\n\
+	cmp r1, r0\n\
+	bne _080BB892\n\
+	movs r2, 0\n\
+	ldrsh r0, [r4, r2]\n\
+	movs r5, 0\n\
+	ldrsh r1, [r6, r5]\n\
+	ldrh r3, [r3]\n\
+_080BB878:\n\
+	movs r5, 0xC0\n\
+	lsls r5, 4\n\
+	adds r2, r5, 0\n\
+	orrs r2, r3\n\
+	bl MapGridSetMetatileIdAt\n\
+	movs r1, 0\n\
+	ldrsh r0, [r4, r1]\n\
+	movs r2, 0\n\
+	ldrsh r1, [r6, r2]\n\
+	bl CurrentMapDrawMetatileAt\n\
+	b _080BB89C\n\
+_080BB892:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	cmp r5, 0x6\n\
+	bls _080BB860\n\
+_080BB89C:\n\
+	add sp, 0x4\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+#endif

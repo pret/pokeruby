@@ -175,7 +175,7 @@ SECTIONS {
         asm/record_mixing.o(.text);
         asm/sound_check_menu.o(.text);
 		src/secret_base_80bb4ac.o(.text);
-        asm/secret_base.o(.text);
+        asm/secret_base.o(.text_b);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
         asm/tv.o(.text);
