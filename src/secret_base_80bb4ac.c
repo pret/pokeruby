@@ -171,3 +171,115 @@ void sub_80BB8CC(void) {
     gSaveBlock1.secretBases[0].gender = gSaveBlock2.playerGender;
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.name);
 }
+
+#ifdef NONMATCHING
+void sub_80BB970(struct MapEvents *events) {
+    u16 bgevidx, idx, jdx;
+    s16 tile_id;
+    for (bgevidx=0; bgevidx<events->bgEventCount; bgevidx++) {
+        if (events->bgEvents[bgevidx].kind == 8) {
+            for (jdx=0; jdx<20; jdx++) {
+                if (gSaveBlock1.secretBases[jdx].sbr_field_0 == events->bgEvents[bgevidx].bgUnion.secretBaseId) {
+                    tile_id = MapGridGetMetatileIdAt(events->bgEvents[bgevidx].x + 7, events->bgEvents[bgevidx].y + 7);
+                    for (idx=0; idx<7; idx++) {
+                        if (gUnknown_083D1358[idx].unk_083D1358_0 == tile_id) {
+                            MapGridSetMetatileIdAt((events->bgEvents[bgevidx].x + 7), (events->bgEvents[bgevidx].y + 7), gUnknown_083D1358[idx].unk_083D1358_1 | 0xc00);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80BB970(struct MapEvents *events) {
+    asm(".syntax unified\n\
+        push {r4-r7,lr}\n\
+        adds r5, r0, 0\n\
+        movs r2, 0\n\
+        b _080BBA06\n\
+    _080BB978:\n\
+        ldr r0, [r5, 0x10]\n\
+        lsls r1, r2, 1\n\
+        adds r1, r2\n\
+        lsls r1, 2\n\
+        adds r3, r1, r0\n\
+        ldrb r0, [r3, 0x5]\n\
+        adds r7, r2, 0x1\n\
+        cmp r0, 0x8\n\
+        bne _080BBA02\n\
+        movs r2, 0\n\
+        ldr r4, _080BB9E0 @ =gSaveBlock1\n\
+        adds r6, r1, 0\n\
+    _080BB990:\n\
+        lsls r0, r2, 2\n\
+        adds r0, r2\n\
+        lsls r0, 5\n\
+        adds r0, r4\n\
+        ldr r1, _080BB9E4 @ =0x00001a08\n\
+        adds r0, r1\n\
+        ldrb r1, [r0]\n\
+        ldr r0, [r3, 0x8]\n\
+        cmp r1, r0\n\
+        bne _080BB9F8\n\
+        ldrh r0, [r3]\n\
+        adds r0, 0x7\n\
+        ldrh r1, [r3, 0x2]\n\
+        adds r1, 0x7\n\
+        bl MapGridGetMetatileIdAt\n\
+        movs r3, 0\n\
+        lsls r0, 16\n\
+        asrs r4, r0, 16\n\
+    _080BB9B6:\n\
+        ldr r0, _080BB9E8 @ =gUnknown_083D1358\n\
+        lsls r1, r3, 2\n\
+        adds r2, r1, r0\n\
+        ldrh r0, [r2]\n\
+        cmp r0, r4\n\
+        bne _080BB9EC\n\
+        ldr r1, [r5, 0x10]\n\
+        adds r1, r6, r1\n\
+        ldrh r0, [r1]\n\
+        adds r0, 0x7\n\
+        ldrh r1, [r1, 0x2]\n\
+        adds r1, 0x7\n\
+        ldrh r3, [r2, 0x2]\n\
+        movs r4, 0xC0\n\
+        lsls r4, 4\n\
+        adds r2, r4, 0\n\
+        orrs r2, r3\n\
+        bl MapGridSetMetatileIdAt\n\
+        b _080BBA02\n\
+        .align 2, 0\n\
+    _080BB9E0: .4byte gSaveBlock1\n\
+    _080BB9E4: .4byte 0x00001a08\n\
+    _080BB9E8: .4byte gUnknown_083D1358\n\
+    _080BB9EC:\n\
+        adds r0, r3, 0x1\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        cmp r3, 0x6\n\
+        bls _080BB9B6\n\
+        b _080BBA02\n\
+    _080BB9F8:\n\
+        adds r0, r2, 0x1\n\
+        lsls r0, 16\n\
+        lsrs r2, r0, 16\n\
+        cmp r2, 0x13\n\
+        bls _080BB990\n\
+    _080BBA02:\n\
+        lsls r0, r7, 16\n\
+        lsrs r2, r0, 16\n\
+    _080BBA06:\n\
+        ldrb r0, [r5, 0x3]\n\
+        cmp r2, r0\n\
+        bcc _080BB978\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+    .syntax divided\n");
+}
+#endif
