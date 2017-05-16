@@ -6,49 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BBB90
-sub_80BBB90: @ 80BBB90
-	push {r4,lr}
-	sub sp, 0x4
-	bl ScriptContext2_Enable
-	bl HideMapNamePopup
-	mov r4, sp
-	adds r4, 0x2
-	movs r2, 0x88
-	lsls r2, 2
-	mov r0, sp
-	adds r1, r4, 0
-	bl sub_80BB764
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r0, 0x7
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	adds r1, 0x7
-	movs r2, 0xE2
-	lsls r2, 4
-	bl MapGridSetMetatileIdAt
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r0, 0x7
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	adds r1, 0x7
-	bl CurrentMapDrawMetatileAt
-	bl pal_fill_black
-	ldr r0, _080BBBE8 @ =sub_80BBB50
-	movs r1, 0
-	bl CreateTask
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BBBE8: .4byte sub_80BBB50
-	thumb_func_end sub_80BBB90
-
 	thumb_func_start sub_80BBBEC
 sub_80BBBEC: @ 80BBBEC
 	push {r4-r6,lr}

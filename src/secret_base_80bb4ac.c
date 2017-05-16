@@ -251,3 +251,14 @@ void sub_80BBB50(u8 taskid) {
         DestroyTask(taskid);
     }
 }
+
+void sub_80BBB90(void) {
+    s16 x, y;
+    ScriptContext2_Enable();
+    HideMapNamePopup();
+    sub_80BB764(&x, &y, 0x220);
+    MapGridSetMetatileIdAt(x + 7, y + 7, 0xe20);
+    CurrentMapDrawMetatileAt(x + 7, y + 7);
+    pal_fill_black();
+    CreateTask(sub_80BBB50, 0);
+}
