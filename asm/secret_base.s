@@ -6,33 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BBA14
-sub_80BBA14: @ 80BBA14
-	push {lr}
-	ldr r0, _080BBA40 @ =gUnknown_020387DC
-	ldrb r0, [r0]
-	movs r1, 0xA
-	bl __udivsi3
-	ldr r2, _080BBA44 @ =gUnknown_083D1374
-	lsls r0, 26
-	asrs r0, 24
-	adds r1, r0, r2
-	ldrb r1, [r1]
-	lsls r1, 24
-	asrs r1, 24
-	adds r0, 0x1
-	adds r0, r2
-	movs r2, 0
-	ldrsb r2, [r0, r2]
-	movs r0, 0x19
-	bl warp1_set_2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BBA40: .4byte gUnknown_020387DC
-_080BBA44: .4byte gUnknown_083D1374
-	thumb_func_end sub_80BBA14
-
 	thumb_func_start sub_80BBA48
 sub_80BBA48: @ 80BBA48
 	push {r4,lr}
