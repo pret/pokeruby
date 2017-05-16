@@ -10,6 +10,7 @@
 #include "map_constants.h"
 #include "task.h"
 #include "palette.h"
+#include "field_weather.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
@@ -227,4 +228,10 @@ void sub_80BBA48(u8 taskid) {
             DestroyTask(taskid);
             break;
     }
+}
+
+void sub_80BBAF0(void) {
+    CreateTask(sub_80BBA48, 0);
+    fade_screen(1, 0);
+    saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
 }

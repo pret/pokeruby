@@ -6,31 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BBAF0
-sub_80BBAF0: @ 80BBAF0
-	push {lr}
-	ldr r0, _080BBB1C @ =sub_80BBA48
-	movs r1, 0
-	bl CreateTask
-	movs r0, 0x1
-	movs r1, 0
-	bl fade_screen
-	ldr r0, _080BBB20 @ =gSaveBlock1
-	movs r1, 0x4
-	ldrsb r1, [r0, r1]
-	movs r2, 0x5
-	ldrsb r2, [r0, r2]
-	movs r3, 0x1
-	negs r3, r3
-	movs r0, 0
-	bl saved_warp2_set
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BBB1C: .4byte sub_80BBA48
-_080BBB20: .4byte gSaveBlock1
-	thumb_func_end sub_80BBAF0
-
 	thumb_func_start sub_80BBB24
 sub_80BBB24: @ 80BBB24
 	push {lr}
