@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "asm.h"
 #include "vars.h"
+#include "text.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
 
@@ -144,4 +145,13 @@ void sub_80BB800(void) {
             return;
         }
     }
+}
+
+u8 sub_80BB8A8(u8 *arg1) {
+    u8 idx;
+    for (idx=0; idx<7; idx++) {
+        if (arg1[idx] == EOS)
+            return idx;
+    }
+    return 7;
 }

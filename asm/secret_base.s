@@ -6,30 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BB8A8
-sub_80BB8A8: @ 80BB8A8
-	push {lr}
-	adds r2, r0, 0
-	movs r1, 0
-_080BB8AE:
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _080BB8BA
-	adds r0, r1, 0
-	b _080BB8C6
-_080BB8BA:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x6
-	bls _080BB8AE
-	movs r0, 0x7
-_080BB8C6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BB8A8
-
 	thumb_func_start sub_80BB8CC
 sub_80BB8CC: @ 80BB8CC
 	push {r4-r6,lr}
