@@ -14,6 +14,7 @@
 #include "rng.h"
 #include "sound.h"
 #include "songs.h"
+#include "trig.h"
 
 struct MonCoords
 {
@@ -81,6 +82,31 @@ struct UnknownStruct10
     u8 filler4[8];
 };
 
+struct UnknownStruct11
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5_0:1;
+    u8 unk5_1:1;
+    u16 unk6;
+    u8 unk8[10];
+    u8 unk12;
+    u8 unk13;
+    u8 unk14[10];
+    u8 filler1E[2];
+    u16 unk20;
+    u16 unk22;
+    u16 unk24;
+    u16 unk26;
+    u16 unk28;
+    u8 unk2A[10];
+    u8 filler34[2];
+    u8 unk36[10];
+};
+
 extern const struct UnknownStruct5 gUnknown_081F9674;
 extern const u8 gUnknown_081F96C8[];
 extern void *const gUnknown_081FAF4C[];
@@ -90,20 +116,65 @@ extern const u8 gSpeciesNames[][11];
 extern const struct BattleMove gBattleMoves[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
+extern const struct BaseStats gBaseStats[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
 #define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
+#define ewram16002 (ewram[0x16002])
+#define ewram1601B (ewram[0x1601B])
+#define ewram16056 (ewram[0x16056])
+#define ewram16078 (ewram[0x16078])
+#define ewram16084 (ewram[0x16084])
+#define ewram16086 (ewram[0x16086])
+#define ewram16087 (ewram[0x16087])
+#define ewram16088 (ewram[0x16088])
+#define ewram16089 (ewram[0x16089])
+#define ewram160A1 (ewram[0x160A1])
+#define ewram160AC ((u8 *)(ewram + 0x160AC))
+#define ewram160C8 (ewram[0x160C8])
+#define ewram160C9 (ewram[0x160C9])
 #define ewram160CB (ewram[0x160CB])
+#define ewram160CC ((u8 *)(ewram + 0x160CC))
+#define ewram160E8 ((u8 *)(ewram + 0x160E8))
+#define ewram160F0 ((u8 *)(ewram + 0x160F0))
+#define ewram16100 ((u8 *)(ewram + 0x16100))
+#define ewram16108 ((u8 *)(ewram + 0x16108))
+#define ewram16113 (ewram[0x16113])
+#define ewram17100 ((u32 *)(ewram + 0x17100))
+#define ewram17130 (ewram[0x17130])
+#define ewram17160 (ewram[0x17160])
 #define ewram17800 ((struct UnknownStruct9 *)(ewram + 0x17800))
 #define ewram17810 ((struct UnknownStruct10 *)(ewram + 0x17810))
 #define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
+extern u8 gUnknown_02024A60;
+extern u32 gUnknown_02024A64;
+extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024BE0[];
+extern u8 gUnknown_02024C0C;
+extern u8 gUnknown_02024C0E;
+extern u16 gUnknown_02024C2C[];
+extern u16 gUnknown_02024C34[];
+extern u16 gUnknown_02024C3C[];
+extern u16 gUnknown_02024C44[];
+extern u16 gUnknown_02024C4C[];
+extern u16 gUnknown_02024C54[];
+extern u8 gUnknown_02024C5C[];
+extern u32 gUnknown_02024C6C;
+extern u8 gUnknown_02024C70[];
+extern u16 gUnknown_02024C7A[];
+extern u8 gUnknown_02024C80[][12];
+extern u32 gUnknown_02024C98[];
+//extern u8 gUnknown_02024CA8[][0x1C];
+extern u16 gUnknown_02024D18;
+extern u16 gUnknown_02024D1A;
 extern u8 gUnknown_02024D1E[];
 extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
+extern u8 gUnknown_02024D26;
+extern u8 gUnknown_02024DBC[];
 extern u16 gUnknown_02024DE8;
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B4;
@@ -122,6 +193,10 @@ extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gUnknown_030042D0;
+extern void (*gUnknown_030042D4)(void);
+extern struct UnknownStruct11 gUnknown_030042E0;
+extern u8 gUnknown_03004324;
+extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
 extern struct UnknownStruct6 gUnknown_03004DE0;
 //extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
@@ -132,6 +207,10 @@ extern u16 gTrainerBattleOpponent;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u8 gBattleMonForms[];
+extern u8 gPlayerMonIndex;
+extern u8 gEnemyMonIndex;
+extern u16 gBattleWeather;
+extern u32 gBattleMoveDamage;
 
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
@@ -172,6 +251,10 @@ void sub_801053C(struct Sprite *);
 void oac_poke_ally_(struct Sprite *);
 void nullsub_86(struct Sprite *);
 void objc_dp11b_pingpong(struct Sprite *);
+void sub_8010874(void);
+void bc_8012FAC(void);
+void sub_801365C(u8);
+void sub_801377C(void);
 
 void sub_800E7C4(void)
 {
@@ -1509,4 +1592,148 @@ void dp11b_obj_free(u8 a, u8 b)
     }
     gSprites[r4].pos2.x = 0;
     gSprites[r4].pos2.y = 0;
+}
+
+void objc_dp11b_pingpong(struct Sprite *sprite)
+{
+    u8 spriteId = sprite->data3;
+    s32 var;
+    
+    if (sprite->data4 == 1)
+        var = sprite->data0;
+    else
+        var = sprite->data0;
+    
+    gSprites[spriteId].pos2.y = Sin(var, sprite->data2) + sprite->data2;
+    sprite->data0 = (sprite->data0 + sprite->data1) & 0xFF;
+}
+
+void nullsub_41(void)
+{
+}
+
+void sub_8010800(void)
+{
+    sub_8010874();
+    gUnknown_02024D1E[1] = 0;
+    gUnknown_030042D4 = bc_8012FAC;
+}
+
+void sub_8010824(void)
+{
+    gUnknown_030042D4();
+    gUnknown_02024A60 = 0;
+    
+    for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        gUnknown_03004330[gUnknown_02024A60]();
+}
+
+void sub_8010874(void)
+{
+    s32 i;
+    s32 j;
+    u8 *r4;
+    
+    sub_801365C(0);
+    sub_801377C();
+    
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_02024C98[i] = 0;
+        
+        r4 = (u8 *)&gUnknown_02024CA8[i];
+        for (j = 0; j < (u32)0x1C; j++)
+            r4[j] = 0;
+        
+        gUnknown_02024CA8[i].unk16 = 2;
+        gUnknown_02024C70[i] = 0;
+        gUnknown_02024C34[i] = 0;
+        gUnknown_02024C3C[i] = 0;
+        gUnknown_02024C44[i] = 0;
+        gUnknown_02024C4C[i] = 0;
+        gUnknown_02024C5C[i] = 0xFF;
+        gUnknown_02024C54[i] = 0;
+        gUnknown_02024C2C[i] = 0;
+        ewram17100[i] = 0;
+    }
+    
+    for (i = 0; i < 2; i++)
+    {        
+        gUnknown_02024C7A[i] = 0;
+        
+        r4 = (u8 *)&gUnknown_02024C80[i];
+        for (j = 0; j < (u32)12; j++)
+            r4[j] = 0;
+    }
+    
+    gPlayerMonIndex = 0;
+    gEnemyMonIndex = 0;
+    gBattleWeather = 0;
+    
+    r4 = (u8 *)&gUnknown_02024DBC;
+    for (i = 0; i < (u32)0x2C; i++)
+        r4[i] = 0;
+    
+    gUnknown_02024C6C = 0;
+    if ((gBattleTypeFlags & 2) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
+        gUnknown_02024C6C = 0x80;
+    ewram16084 = gSaveBlock2.optionsBattleStyle;
+    gUnknown_02024C0E = 0;
+    gUnknown_02024D26 = 0;
+    gUnknown_02024A64 = 0;
+    gUnknown_02024D1A = 0;
+    ewram17130 = 0;
+    ewram17160 = 0;
+    for (i = 0; i < 8; i++)
+        gUnknown_02024D1E[i] = 0;
+    gUnknown_02024D18 = 0;
+    gBattleMoveDamage = 0;
+    gUnknown_02024DE8 = 0;
+    ewram16002 = 0;
+    ewram160A1 = 0;
+    gUnknown_03004324 = 0;
+    gUnknown_02024C0C = 0;
+    ewram16078 = 0;
+    ewram16086 = 0;
+    ewram16087 = 0;
+    ewram16089 = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
+    ewram16088 = 3;
+    ewram1601B = 0;
+    ewram16056 = 1;
+    
+    for (i = 0; i < 8; i++)
+    {
+        ewram[i + 0x160AC] = 0;
+        ewram[i + 0x160CC] = 0;
+        ewram[i + 0x160E8] = 0;
+        ewram[i + 0x160F0] = 0;
+        ewram[i + 0x16100] = 0;
+        ewram[i + 0x16108] = 0;
+    }
+    
+    ewram160C8 = 6;
+    ewram160C9 = 6;
+    ewram16113 = 0;
+    for (i = 0; i < 11; i++)
+        gUnknown_030042E0.unk36[i] = 0;
+    gUnknown_030042E0.unk13 = 0;
+    gUnknown_030042E0.unk0 = 0;
+    gUnknown_030042E0.unk1 = 0;
+    gUnknown_030042E0.unk2 = 0;
+    gUnknown_030042E0.unk3 = 0;
+    gUnknown_030042E0.unk4 = 0;
+    gUnknown_030042E0.unk5_0 = 0;
+    gUnknown_030042E0.unk5_1 = 0;
+    gUnknown_030042E0.unk20 = 0;
+    gUnknown_030042E0.unk22 = 0;
+    gUnknown_030042E0.unk24 = 0;
+    gUnknown_030042E0.unk6 = 0;
+    gUnknown_030042E0.unk26 = 0;
+    gUnknown_030042E0.unk28 = 0;
+    for (i = 0; i < 10; i++)
+    {
+        gUnknown_030042E0.unk8[i] = 0;
+        gUnknown_030042E0.unk14[i] = 0;
+        gUnknown_030042E0.unk2A[i] = 0;
+    }
 }
