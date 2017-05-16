@@ -3,11 +3,13 @@
 #include "asm.h"
 #include "vars.h"
 #include "field_player_avatar.h"
+#include "field_camera.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8007;
 extern u16 gScriptResult;
+extern u16 gUnknown_083D1358[16];
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
     u16 i;
@@ -119,12 +121,117 @@ void sub_80BB764(s16 *arg1, s16 *arg2, u16 arg3) {
     }
 }
 
-// void sub_80BB800(void) {
-    // s16 x, y;
-    // u16 v0, v1;
-    // GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    // v1 = MapGridGetMetatileIdAt(x, y);
-    // for (v0=0; v0<7; v0++) {
-        // if (gUnknown_083D1358[v0] == v1)
-    // }
-// }
+#ifdef NONMATCHING
+void sub_80BB800(void) {
+    s16 x, y;
+    u16 v0, v1;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    v1 = MapGridGetMetatileIdAt(x, y);
+    for (v0=0; v0<7; v0++) {
+        if (gUnknown_083D1358[v0] == v1) {
+            MapGridSetMetatileIdAt(x, y, gUnknown_083D1358[v0 + 1] | 0x300);
+            CurrentMapDrawMetatileAt(x, y);
+            break;
+        }
+    }
+    for (v0=0; v0<7; v0++) {
+        if (gUnknown_083D1358[v0 + 1] == v1) {
+            MapGridSetMetatileIdAt(x, y, gUnknown_083D1358[v0] | 0x300);
+            CurrentMapDrawMetatileAt(x, y);
+            break;
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80BB800(void) {
+    asm(".syntax unified\n\
+    	push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	sub sp, 0x4\n\
+	mov r4, sp\n\
+	adds r4, 0x2\n\
+	mov r0, sp\n\
+	adds r1, r4, 0\n\
+	bl GetXYCoordsOneStepInFrontOfPlayer\n\
+	mov r0, sp\n\
+	movs r1, 0\n\
+	ldrsh r0, [r0, r1]\n\
+	movs r2, 0\n\
+	ldrsh r1, [r4, r2]\n\
+	bl MapGridGetMetatileIdAt\n\
+	movs r5, 0\n\
+	mov r12, r4\n\
+	lsls r0, 16\n\
+	asrs r3, r0, 16\n\
+	ldr r1, _080BB84C @ =gUnknown_083D1358\n\
+	mov r8, r1\n\
+	adds r7, r0, 0\n\
+	mov r4, sp\n\
+	mov r6, r12\n\
+_080BB834:\n\
+	ldr r0, _080BB84C @ =gUnknown_083D1358\n\
+	lsls r1, r5, 2\n\
+	adds r2, r1, r0\n\
+	ldrh r0, [r2]\n\
+	cmp r0, r3\n\
+	bne _080BB850\n\
+	movs r3, 0\n\
+	ldrsh r0, [r4, r3]\n\
+	movs r5, 0\n\
+	ldrsh r1, [r6, r5]\n\
+	ldrh r3, [r2, 0x2]\n\
+	b _080BB878\n\
+	.align 2, 0\n\
+_080BB84C: .4byte gUnknown_083D1358\n\
+_080BB850:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	cmp r5, 0x6\n\
+	bls _080BB834\n\
+	movs r5, 0\n\
+	mov r4, sp\n\
+	mov r6, r12\n\
+_080BB860:\n\
+	lsls r0, r5, 2\n\
+	mov r1, r8\n\
+	adds r3, r0, r1\n\
+	ldrh r1, [r3, 0x2]\n\
+	asrs r0, r7, 16\n\
+	cmp r1, r0\n\
+	bne _080BB892\n\
+	movs r2, 0\n\
+	ldrsh r0, [r4, r2]\n\
+	movs r5, 0\n\
+	ldrsh r1, [r6, r5]\n\
+	ldrh r3, [r3]\n\
+_080BB878:\n\
+	movs r5, 0xC0\n\
+	lsls r5, 4\n\
+	adds r2, r5, 0\n\
+	orrs r2, r3\n\
+	bl MapGridSetMetatileIdAt\n\
+	movs r1, 0\n\
+	ldrsh r0, [r4, r1]\n\
+	movs r2, 0\n\
+	ldrsh r1, [r6, r2]\n\
+	bl CurrentMapDrawMetatileAt\n\
+	b _080BB89C\n\
+_080BB892:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	cmp r5, 0x6\n\
+	bls _080BB860\n\
+_080BB89C:\n\
+	add sp, 0x4\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+#endif
