@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "rom4.h"
 #include "asm.h"
+#include "script.h"
 #include "vars.h"
 #include "text.h"
 #include "field_player_avatar.h"
@@ -22,6 +23,7 @@ extern const struct {
 } gUnknown_083D1358[7];
 extern const u8 gUnknown_083D1374[48];
 extern void *gUnknown_0300485C;
+extern u8 sub_807D770(void);
 
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
@@ -240,4 +242,12 @@ u8 sub_80BBB24(void) {
     if (gMapHeader.mapType == 9 && VarGet(VAR_0x4097) == 0)
         return 0;
     return 1;
+}
+
+void sub_80BBB50(u8 taskid) {
+    FieldObjectTurn(&(gMapObjects[gPlayerAvatar.mapObjectId]), 2);
+    if (sub_807D770() == 1) {
+        EnableBothScriptContexts();
+        DestroyTask(taskid);
+    }
 }

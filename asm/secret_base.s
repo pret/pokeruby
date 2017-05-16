@@ -6,37 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BBB50
-sub_80BBB50: @ 80BBB50
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _080BBB88 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _080BBB8C @ =gMapObjects
-	adds r0, r1
-	movs r1, 0x2
-	bl FieldObjectTurn
-	bl sub_807D770
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080BBB80
-	bl EnableBothScriptContexts
-	adds r0, r4, 0
-	bl DestroyTask
-_080BBB80:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BBB88: .4byte gPlayerAvatar
-_080BBB8C: .4byte gMapObjects
-	thumb_func_end sub_80BBB50
-
 	thumb_func_start sub_80BBB90
 sub_80BBB90: @ 80BBB90
 	push {r4,lr}
