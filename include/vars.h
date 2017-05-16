@@ -28,6 +28,8 @@
 
 #define VAR_0x4054                 0x4054
 
+#define VAR_0x4097                 0x4097
+
 #define VAR_PORTHOLE               0x40B4
 
 #endif // GUARD_VARS_H

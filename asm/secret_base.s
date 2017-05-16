@@ -6,30 +6,6 @@
 
 	.section .text_b
 
-	thumb_func_start sub_80BBB24
-sub_80BBB24: @ 80BBB24
-	push {lr}
-	ldr r0, _080BBB40 @ =gMapHeader
-	ldrb r0, [r0, 0x17]
-	cmp r0, 0x9
-	bne _080BBB48
-	ldr r0, _080BBB44 @ =0x00004097
-	bl VarGet
-	lsls r0, 16
-	cmp r0, 0
-	bne _080BBB48
-	movs r0, 0
-	b _080BBB4A
-	.align 2, 0
-_080BBB40: .4byte gMapHeader
-_080BBB44: .4byte 0x00004097
-_080BBB48:
-	movs r0, 0x1
-_080BBB4A:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BBB24
-
 	thumb_func_start sub_80BBB50
 sub_80BBB50: @ 80BBB50
 	push {r4,lr}
