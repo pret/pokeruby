@@ -1598,12 +1598,12 @@ void objc_dp11b_pingpong(struct Sprite *sprite)
 {
     u8 spriteId = sprite->data3;
     s32 var;
-    
+
     if (sprite->data4 == 1)
         var = sprite->data0;
     else
         var = sprite->data0;
-    
+
     gSprites[spriteId].pos2.y = Sin(var, sprite->data2) + sprite->data2;
     sprite->data0 = (sprite->data0 + sprite->data1) & 0xFF;
 }
@@ -1623,7 +1623,7 @@ void sub_8010824(void)
 {
     gUnknown_030042D4();
     gUnknown_02024A60 = 0;
-    
+
     for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
         gUnknown_03004330[gUnknown_02024A60]();
 }
@@ -1633,18 +1633,18 @@ void sub_8010874(void)
     s32 i;
     s32 j;
     u8 *r4;
-    
+
     sub_801365C(0);
     sub_801377C();
-    
+
     for (i = 0; i < 4; i++)
     {
         gUnknown_02024C98[i] = 0;
-        
+
         r4 = (u8 *)&gUnknown_02024CA8[i];
         for (j = 0; j < (u32)0x1C; j++)
             r4[j] = 0;
-        
+
         gUnknown_02024CA8[i].unk16 = 2;
         gUnknown_02024C70[i] = 0;
         gUnknown_02024C34[i] = 0;
@@ -1656,24 +1656,24 @@ void sub_8010874(void)
         gUnknown_02024C2C[i] = 0;
         ewram17100[i] = 0;
     }
-    
+
     for (i = 0; i < 2; i++)
-    {        
+    {
         gUnknown_02024C7A[i] = 0;
-        
+
         r4 = (u8 *)&gUnknown_02024C80[i];
         for (j = 0; j < (u32)12; j++)
             r4[j] = 0;
     }
-    
+
     gPlayerMonIndex = 0;
     gEnemyMonIndex = 0;
     gBattleWeather = 0;
-    
+
     r4 = (u8 *)&gUnknown_02024DBC;
     for (i = 0; i < (u32)0x2C; i++)
         r4[i] = 0;
-    
+
     gUnknown_02024C6C = 0;
     if ((gBattleTypeFlags & 2) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
         gUnknown_02024C6C = 0x80;
@@ -1700,7 +1700,7 @@ void sub_8010874(void)
     ewram16088 = 3;
     ewram1601B = 0;
     ewram16056 = 1;
-    
+
     for (i = 0; i < 8; i++)
     {
         ewram[i + 0x160AC] = 0;
@@ -1710,7 +1710,7 @@ void sub_8010874(void)
         ewram[i + 0x16100] = 0;
         ewram[i + 0x16108] = 0;
     }
-    
+
     ewram160C8 = 6;
     ewram160C9 = 6;
     ewram16113 = 0;
