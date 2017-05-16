@@ -9,8 +9,8 @@ struct Decoration
     /*0x12*/ u8 decor_field_12;
     /*0x13*/ u8 decor_field_13;
     /*0x14*/ u16 price;
-    /*0x16*/ u8 *description;
-    /*0x1A*/ void *tiles;
+    /*0x18*/ u8 *description;
+    /*0x1c*/ u16 *tiles;
 };
 
 extern struct Decoration gDecorations[0x77];
