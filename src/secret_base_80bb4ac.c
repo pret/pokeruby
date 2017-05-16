@@ -8,6 +8,8 @@
 #include "field_camera.h"
 #include "string_util.h"
 #include "map_constants.h"
+#include "task.h"
+#include "palette.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
@@ -18,6 +20,7 @@ extern const struct {
     u16 unk_083D1358_1;
 } gUnknown_083D1358[7];
 extern const u8 gUnknown_083D1374[48];
+extern void *gUnknown_0300485C;
 
 
 void sub_80BB4AC(struct SecretBaseRecord *record) { // 080bb4ac
@@ -200,4 +203,28 @@ void sub_80BB970(struct MapEvents *events) {
 void sub_80BBA14(void) {
     s8 idx = 4 * (gUnknown_020387DC / 10);
     warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
+}
+
+void sub_80BBA48(u8 taskid) {
+    u16 curbaseid;
+    switch (gTasks[taskid].data[0]) {
+        case 0:
+            gTasks[taskid].data[0] = 1;
+            break;
+        case 1:
+            if (!gPaletteFade.active) {
+                gTasks[taskid].data[0] = 2;
+            }
+            break;
+        case 2:
+            curbaseid = VarGet(VAR_0x4054);
+            if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
+                gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
+            sub_80BBA14();
+            warp_in();
+            gUnknown_0300485C = sub_8080990;
+            SetMainCallback2(CB2_LoadMap);
+            DestroyTask(taskid);
+            break;
+    }
 }
