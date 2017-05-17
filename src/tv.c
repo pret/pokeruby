@@ -341,6 +341,35 @@ void sub_80BF55C(TVShow tvShow[], u8 showidx)
     }
 }
 
+void sub_80BF588(TVShow tvShow[])
+{
+    u8 showidx;
+    u8 showidx2;
+    for (showidx=0; showidx<4; showidx++) {
+        if (tvShow[showidx].common.var00 == 0) {
+            for (showidx2=showidx+1; showidx2<5; showidx2++) {
+                if (tvShow[showidx2].common.var00 != 0) {
+                    tvShow[showidx] = tvShow[showidx2];
+                    sub_80BF55C(tvShow, showidx2);
+                    break;
+                }
+            }
+        }
+    }
+    for (showidx=5; showidx<24; showidx++) {
+        if (tvShow[showidx].common.var00 == 0) {
+            for (showidx2=showidx+1; showidx2<24; showidx2++) {
+                if (tvShow[showidx2].common.var00 != 0) {
+                    tvShow[showidx] = tvShow[showidx2];
+                    sub_80BF55C(gSaveBlock1.tvShows, showidx2);
+                    break;
+                }
+            }
+        }
+    }
+    
+}
+
 
 asm(".section .text_c");
 
