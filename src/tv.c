@@ -40,6 +40,24 @@ extern u8 gSpeciesNames[][11];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
+extern void sub_80BEBF4(void);
+
+void ClearTVShowData(void)
+{
+    u8 showidx;
+    u8 extradataidx;
+    for (showidx=0; showidx<25; showidx++) {
+        gSaveBlock1.tvShows[showidx].common.var00 = 0;
+        gSaveBlock1.tvShows[showidx].common.var01 = 0;
+        for (extradataidx=0; extradataidx<34; extradataidx++) {
+            gSaveBlock1.tvShows[showidx].common.pad02[extradataidx] = 0;
+        }
+    }
+    sub_80BEBF4();
+}
+
+asm(".section .text_a");
+
 void sub_80BE478(void)
 {
     u16 playerNameLength;

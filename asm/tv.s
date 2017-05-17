@@ -7,51 +7,6 @@
 
 	.text
 
-	thumb_func_start ClearTVShowData
-ClearTVShowData: @ 80BD7A8
-	push {r4-r7,lr}
-	movs r3, 0
-	ldr r6, _080BD7F0 @ =gSaveBlock1
-	movs r4, 0
-	ldr r0, _080BD7F4 @ =0x0000273a
-	adds r5, r6, r0
-_080BD7B4:
-	lsls r2, r3, 3
-	adds r2, r3
-	lsls r2, 2
-	adds r1, r2, r6
-	ldr r7, _080BD7F8 @ =0x00002738
-	adds r0, r1, r7
-	strb r4, [r0]
-	ldr r0, _080BD7FC @ =0x00002739
-	adds r1, r0
-	strb r4, [r1]
-	movs r1, 0
-	adds r3, 0x1
-_080BD7CC:
-	adds r0, r1, r2
-	adds r0, r5
-	strb r4, [r0]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x21
-	bls _080BD7CC
-	lsls r0, r3, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x18
-	bls _080BD7B4
-	bl sub_80BEBF4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BD7F0: .4byte gSaveBlock1
-_080BD7F4: .4byte 0x0000273a
-_080BD7F8: .4byte 0x00002738
-_080BD7FC: .4byte 0x00002739
-	thumb_func_end ClearTVShowData
-
 	thumb_func_start special_0x44
 special_0x44: @ 80BD800
 	push {r4-r7,lr}

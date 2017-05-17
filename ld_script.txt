@@ -176,8 +176,9 @@ SECTIONS {
         asm/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
+		src/tv.o(.text);
         asm/tv.o(.text);
-        src/tv.o(.text);
+        src/tv.o(.text_a);
         asm/tv.o(.text_80BE8EC);
         src/tv.o(.text_b);
         asm/tv.o(.text_80BF544);
