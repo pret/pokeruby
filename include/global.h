@@ -107,11 +107,11 @@ struct SecretBaseRecord
     /*0x1A1A*/ u8 decorations[16];
     /*0x1A2A*/ u8 decorationPos[16];
     /*0x1A3A*/ u32 partyPersonality[6];
-    /*0x1A52*/ u16 partyMoves[6 * 4];
-    /*0x1A6A*/ u16 partySpecies[6];
-    /*0x1A76*/ u16 partyHeldItems[6];
-    /*0x1A82*/ u8 partyLevels[6];
-    /*0x1A88*/ u8 partyEVs[6];
+    /*0x1A54*/ u16 partyMoves[6 * 4];
+    /*0x1A84*/ u16 partySpecies[6];
+    /*0x1A90*/ u16 partyHeldItems[6];
+    /*0x1A9C*/ u8 partyLevels[6];
+    /*0x1AA2*/ u8 partyEVs[6];
 };
 
 #include "game_stat.h"
