@@ -1613,63 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start sub_80BE8EC
-sub_80BE8EC: @ 80BE8EC
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	ldr r1, _080BE930 @ =gSaveBlock1
-	ldr r2, _080BE934 @ =0x00002afc
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	cmp r0, 0
-	bne _080BE94C
-	movs r3, 0
-	adds r5, r1, 0
-	ldr r7, _080BE938 @ =0x00002738
-	adds r6, r5, r7
-_080BE906:
-	lsls r0, r3, 3
-	adds r0, r3
-	lsls r2, r0, 2
-	adds r1, r2, r5
-	ldr r7, _080BE938 @ =0x00002738
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	cmp r0, 0x29
-	bne _080BE942
-	adds r7, 0x1
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080BE942
-	adds r1, r2, r6
-	ldrh r0, [r1, 0x16]
-	cmp r0, r4
-	bcs _080BE93C
-	movs r0, 0
-	strh r0, [r1, 0x16]
-	b _080BE94C
-	.align 2, 0
-_080BE930: .4byte gSaveBlock1
-_080BE934: .4byte 0x00002afc
-_080BE938: .4byte 0x00002738
-_080BE93C:
-	subs r0, r4
-	strh r0, [r1, 0x16]
-	b _080BE94C
-_080BE942:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x17
-	bls _080BE906
-_080BE94C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80BE8EC
-
 	thumb_func_start UpdateMassOutbreakTimeLeft
 UpdateMassOutbreakTimeLeft: @ 80BE954
 	push {lr}

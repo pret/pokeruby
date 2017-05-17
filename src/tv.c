@@ -282,6 +282,23 @@ void UpdateTVShowsPerDay(u16 arg0)
     sub_80BEA5C(arg0);
 }
 
+void sub_80BE8EC(u16 arg0) {
+    u8 showidx;
+    TVShow *tvShow;
+    if (gSaveBlock1.outbreakPokemonSpecies == 0) {
+        for (showidx=0; showidx<24; showidx++) {
+            if (gSaveBlock1.tvShows[showidx].massOutbreak.var00 == 0x29 && gSaveBlock1.tvShows[showidx].massOutbreak.var01 == 0x01) {
+                tvShow = &(gSaveBlock1.tvShows[showidx]);
+                if (tvShow->massOutbreak.var16 < arg0)
+                    tvShow->massOutbreak.var16 = 0;
+                else
+                    tvShow->massOutbreak.var16 -= arg0;
+                break;
+            }
+        }
+    }
+}
+
 asm(".section .text_b");
 
 u8 sub_80BF4F4(u8 arg0)
