@@ -282,7 +282,8 @@ void UpdateTVShowsPerDay(u16 arg0)
     sub_80BEA5C(arg0);
 }
 
-void sub_80BE8EC(u16 arg0) {
+void sub_80BE8EC(u16 arg0)
+{
     u8 showidx;
     TVShow *tvShow;
     if (gSaveBlock1.outbreakPokemonSpecies == 0) {
@@ -299,7 +300,8 @@ void sub_80BE8EC(u16 arg0) {
     }
 }
 
-void UpdateMassOutbreakTimeLeft(u16 arg0) {
+void UpdateMassOutbreakTimeLeft(u16 arg0)
+{
     if (gSaveBlock1.outbreakUnk5 <= arg0)
         EndMassOutbreak();
     else
@@ -323,6 +325,22 @@ u8 sub_80BF4F4(u8 arg0)
 
     return TRUE;
 }
+
+u8 sub_80BF544(void)
+{
+    return sub_80BF4F4(GetLeadMonIndex());
+}
+
+void sub_80BF55C(TVShow tvShow[], u8 showidx)
+{
+    u8 idx;
+    tvShow[showidx].common.var00 = 0;
+    tvShow[showidx].common.var01 = 0;
+    for (idx=0; idx<34; idx++) {
+        tvShow[showidx].common.pad02[idx] = 0;
+    }
+}
+
 
 asm(".section .text_c");
 

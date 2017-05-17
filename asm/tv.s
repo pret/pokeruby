@@ -3121,46 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start sub_80BF544
-sub_80BF544: @ 80BF544
-	push {lr}
-	bl GetLeadMonIndex
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80BF4F4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF544
-
-	thumb_func_start sub_80BF55C
-sub_80BF55C: @ 80BF55C
-	push {lr}
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, r1, 3
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r0
-	movs r0, 0
-	strb r0, [r2]
-	strb r0, [r2, 0x1]
-	movs r1, 0
-	adds r2, 0x2
-	movs r3, 0
-_080BF576:
-	adds r0, r2, r1
-	strb r3, [r0]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x21
-	bls _080BF576
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80BF55C
-
 	thumb_func_start sub_80BF588
 sub_80BF588: @ 80BF588
 	push {r4-r7,lr}
