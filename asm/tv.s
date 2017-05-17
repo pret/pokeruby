@@ -3121,59 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
-CheckForBigMovieOrEmergencyNewsOnTV: @ 80BFBB0
-	push {lr}
-	ldr r1, _080BFBD0 @ =gSaveBlock1
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	cmp r0, 0x1
-	bne _080BFBCC
-	ldr r0, _080BFBD4 @ =gSaveBlock2
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _080BFBD8
-	movs r0, 0x5
-	ldrsb r0, [r1, r0]
-	cmp r0, 0
-	beq _080BFBE0
-_080BFBCC:
-	movs r0, 0
-	b _080BFC0A
-	.align 2, 0
-_080BFBD0: .4byte gSaveBlock1
-_080BFBD4: .4byte gSaveBlock2
-_080BFBD8:
-	movs r0, 0x5
-	ldrsb r0, [r1, r0]
-	cmp r0, 0x2
-	bne _080BFBCC
-_080BFBE0:
-	ldr r0, _080BFC04 @ =0x0000085d
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080BFBFE
-	movs r0, 0x83
-	lsls r0, 4
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080BFC08
-_080BFBFE:
-	movs r0, 0x1
-	b _080BFC0A
-	.align 2, 0
-_080BFC04: .4byte 0x0000085d
-_080BFC08:
-	movs r0, 0x2
-_080BFC0A:
-	pop {r1}
-	bx r1
-	thumb_func_end CheckForBigMovieOrEmergencyNewsOnTV
-
 	thumb_func_start GetMomOrDadStringForTVMessage
 GetMomOrDadStringForTVMessage: @ 80BFC10
 	push {r4,lr}

@@ -10,6 +10,7 @@
 #include "pokedex.h"
 #include "naming_screen.h"
 #include "rom4.h"
+#include "map_constants.h"
 
 enum
 {
@@ -589,6 +590,24 @@ u8 sub_80BFB54(u8 arg0)
 u32 GetPlayerTrainerId(void)
 {
     return (gSaveBlock2.playerTrainerId[3] << 24) | (gSaveBlock2.playerTrainerId[2] << 16) | (gSaveBlock2.playerTrainerId[1] << 8) | (gSaveBlock2.playerTrainerId[0]);
+}
+
+u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
+{
+    if (gSaveBlock1.location.mapGroup != MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+        return 0;
+    if (gSaveBlock2.playerGender == MALE) {
+        if (gSaveBlock1.location.mapNum != MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+            return 0;
+    } else {
+        if (gSaveBlock1.location.mapNum != MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+            return 0;
+    }
+    if (FlagGet(SYS_TV_LATI) == 1)
+        return 1;
+    if (FlagGet(SYS_TV_HOME) == 1)
+        return 2;
+    return 1;
 }
 
 asm(".section .text_c");
