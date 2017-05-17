@@ -29,6 +29,8 @@ extern const struct
 extern const u8 gUnknown_083D1374[4 * 16];
 extern void *gUnknown_0300485C;
 extern u8 sub_807D770(void);
+extern u8 gUnknown_083D13EC[12];
+extern u8 sub_80BCCA4(u8);
 
 
 void sub_80BB4AC(struct SecretBaseRecord *record) // 080bb4ac
@@ -740,3 +742,20 @@ _080BBFA0: .4byte gDecorations + 0x1C\n\
 .syntax divided\n");
 }
 #endif
+
+void sub_80BBFA4(void)
+{
+    int curBase = VarGet(VAR_0x4054);
+    VarSet(VAR_0x401F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
+}
+
+void sub_80BBFD8(s16 *position, struct MapEvents *events)
+{
+    s16 bgevtidx;
+    for (bgevtidx=0; bgevtidx<events->bgEventCount; bgevtidx++) {
+        if (events->bgEvents[bgevtidx].kind == 8 && position[0] == events->bgEvents[bgevtidx].x + 7 && position[1] == events->bgEvents[bgevtidx].y + 7) {
+            gUnknown_020387DC = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
+            break;
+        }
+    }
+}

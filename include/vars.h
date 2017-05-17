@@ -1,6 +1,7 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+#define VAR_0x401F                 0x401F
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
