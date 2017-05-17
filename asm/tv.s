@@ -3121,58 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start sub_80BF74C
-sub_80BF74C: @ 80BF74C
-	push {lr}
-	adds r2, r0, 0
-	movs r1, 0x5
-_080BF752:
-	lsls r0, r1, 24
-	asrs r1, r0, 24
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080BF768
-	adds r0, r1, 0
-	b _080BF778
-_080BF768:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	asrs r0, 24
-	cmp r0, 0x17
-	ble _080BF752
-	movs r0, 0x1
-	negs r0, r0
-_080BF778:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF74C
-
-	thumb_func_start sub_80BF77C
-sub_80BF77C: @ 80BF77C
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r4
-	bls _080BF794
-	movs r0, 0x1
-	b _080BF796
-_080BF794:
-	movs r0, 0
-_080BF796:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF77C
-
 	thumb_func_start sub_80BF79C
 sub_80BF79C: @ 80BF79C
 	push {r4-r6,lr}

@@ -292,7 +292,7 @@ u8 sub_80BF0B8(u32);
 void sub_80BF478(void);
 u16 sub_80BF674(u16 species);
 s8 sub_80BF720(TVShow *);
-u8 sub_80BF77C(u32);
+bool8 sub_80BF77C(u16);
 void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
 

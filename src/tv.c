@@ -420,6 +420,23 @@ s8 sub_80BF720(TVShow tvShow[])
     return -1;
 }
 
+s8 sub_80BF74C(TVShow tvShow[])
+{
+    s8 idx;
+    for (idx=5; idx<24; idx++) {
+        if (tvShow[idx].common.var00 == 0)
+            return idx;
+    }
+    return -1;
+}
+
+bool8 sub_80BF77C(u16 value)
+{
+    if (Random() <= value)
+        return FALSE;
+    return TRUE;
+}
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)
