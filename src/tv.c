@@ -8,6 +8,7 @@
 #include "text.h"
 #include "species.h"
 #include "pokedex.h"
+#include "naming_screen.h"
 
 enum
 {
@@ -531,6 +532,21 @@ bool8 sub_80BF9B4(void)
         return FALSE;
     sub_80BE478();
     return TRUE;
+}
+
+void c2_080CC144(void);
+
+void sub_80BF9F8(void)
+{
+    u16 spec;
+    u16 gender;
+    u32 pval;
+    GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar3);
+    GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar2);
+    spec = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_SPECIES, 0);
+    gender = GetMonGender(&(gPlayerParty[gSpecialVar_0x8004]));
+    pval = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_PERSONALITY, 0);
+    DoNamingScreen(3, gStringVar2, spec, gender, pval, c2_080CC144);
 }
 
 asm(".section .text_c");
