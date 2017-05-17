@@ -11,6 +11,7 @@
 #include "naming_screen.h"
 #include "rom4.h"
 #include "map_constants.h"
+#include "strings.h"
 
 enum
 {
@@ -609,6 +610,166 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
         return 2;
     return 1;
 }
+
+#ifdef NONMATCHING
+void GetMomOrDadStringForTVMessage(void)
+{
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F) {
+        if (gSaveBlock2.playerGender == MALE) {
+            if (gSaveBlock1.location.mapNum == MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F) {
+                StringCopy(gStringVar1, gOtherText_Mom);
+                VarSet(VAR_0x4003, 1);
+            }
+        } else {
+            if (gSaveBlock1.location.mapNum == MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F) {
+                StringCopy(gStringVar1, gOtherText_Mom);
+                VarSet(VAR_0x4003, 1);
+            }
+        }
+    }
+    if (VarGet(VAR_0x4003) == 1) {
+        StringCopy(gStringVar1, gOtherText_Mom);
+    } else if (VarGet(VAR_0x4003) == 2) {
+        StringCopy(gStringVar1, gOtherText_Dad);
+    } else if (VarGet(VAR_0x4003) > 2) {
+        if ((u16)(VarGet(VAR_0x4003) & 1) == 0) {
+            StringCopy(gStringVar1, gOtherText_Mom);
+        } else {
+            StringCopy(gStringVar1, gOtherText_Dad);
+        }
+    } else {
+        if ((u16)(Random() & 1) != 0) {
+            StringCopy(gStringVar1, gOtherText_Mom);
+            VarSet(VAR_0x4003, 1);
+        } else {
+            StringCopy(gStringVar1, gOtherText_Dad);
+            VarSet(VAR_0x4003, 2);
+        }
+    }
+}
+#else
+__attribute__((naked))
+void GetMomOrDadStringForTVMessage(void)
+{
+    asm(".syntax unified\n\
+	push {r4,lr}\n\
+	ldr r1, _080BFC40 @ =gSaveBlock1\n\
+	movs r0, 0x4\n\
+	ldrsb r0, [r1, r0]\n\
+	cmp r0, 0x1\n\
+	bne _080BFC6C\n\
+	ldr r0, _080BFC44 @ =gSaveBlock2\n\
+	ldrb r0, [r0, 0x8]\n\
+	cmp r0, 0\n\
+	bne _080BFC54\n\
+	movs r0, 0x5\n\
+	ldrsb r0, [r1, r0]\n\
+	cmp r0, 0\n\
+	bne _080BFC6C\n\
+	ldr r0, _080BFC48 @ =gStringVar1\n\
+	ldr r1, _080BFC4C @ =gOtherText_Mom\n\
+	bl StringCopy\n\
+	ldr r0, _080BFC50 @ =0x00004003\n\
+	movs r1, 0x1\n\
+	bl VarSet\n\
+	b _080BFC6C\n\
+	.align 2, 0\n\
+_080BFC40: .4byte gSaveBlock1\n\
+_080BFC44: .4byte gSaveBlock2\n\
+_080BFC48: .4byte gStringVar1\n\
+_080BFC4C: .4byte gOtherText_Mom\n\
+_080BFC50: .4byte 0x00004003\n\
+_080BFC54:\n\
+	movs r0, 0x5\n\
+	ldrsb r0, [r1, r0]\n\
+	cmp r0, 0x2\n\
+	bne _080BFC6C\n\
+	ldr r0, _080BFCB4 @ =gStringVar1\n\
+	ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
+	bl StringCopy\n\
+	ldr r0, _080BFCBC @ =0x00004003\n\
+	movs r1, 0x1\n\
+	bl VarSet\n\
+_080BFC6C:\n\
+	ldr r4, _080BFCBC @ =0x00004003\n\
+	adds r0, r4, 0\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	cmp r0, 0x1\n\
+	beq _080BFCAA\n\
+	adds r0, r4, 0\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	cmp r0, 0x2\n\
+	beq _080BFCC0\n\
+	adds r0, r4, 0\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	cmp r0, 0x2\n\
+	bls _080BFCD4\n\
+	adds r0, r4, 0\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	movs r1, 0x1\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _080BFCC0\n\
+_080BFCAA:\n\
+	ldr r0, _080BFCB4 @ =gStringVar1\n\
+	ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
+	bl StringCopy\n\
+	b _080BFD10\n\
+	.align 2, 0\n\
+_080BFCB4: .4byte gStringVar1\n\
+_080BFCB8: .4byte gOtherText_Mom\n\
+_080BFCBC: .4byte 0x00004003\n\
+_080BFCC0:\n\
+	ldr r0, _080BFCCC @ =gStringVar1\n\
+	ldr r1, _080BFCD0 @ =gOtherText_Dad\n\
+	bl StringCopy\n\
+	b _080BFD10\n\
+	.align 2, 0\n\
+_080BFCCC: .4byte gStringVar1\n\
+_080BFCD0: .4byte gOtherText_Dad\n\
+_080BFCD4:\n\
+	bl Random\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	movs r1, 0x1\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080BFD00\n\
+	ldr r0, _080BFCF8 @ =gStringVar1\n\
+	ldr r1, _080BFCFC @ =gOtherText_Mom\n\
+	bl StringCopy\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x1\n\
+	bl VarSet\n\
+	b _080BFD10\n\
+	.align 2, 0\n\
+_080BFCF8: .4byte gStringVar1\n\
+_080BFCFC: .4byte gOtherText_Mom\n\
+_080BFD00:\n\
+	ldr r0, _080BFD18 @ =gStringVar1\n\
+	ldr r1, _080BFD1C @ =gOtherText_Dad\n\
+	bl StringCopy\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x2\n\
+	bl VarSet\n\
+_080BFD10:\n\
+	pop {r4}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080BFD18: .4byte gStringVar1\n\
+_080BFD1C: .4byte gOtherText_Dad\n\
+.syntax divided\n");
+}
+#endif
 
 asm(".section .text_c");
 
