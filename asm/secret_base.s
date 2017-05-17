@@ -6,35 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC440
-sub_80BC440: @ 80BC440
-	push {r4,r5,lr}
-	ldr r4, _080BC45C @ =gSaveBlock1
-	ldr r0, _080BC460 @ =0x00001a16
-	adds r4, r0
-	ldrh r5, [r4]
-	movs r0, 0
-	bl ResetSecretBase
-	strh r5, [r4]
-	bl sub_80BC0F8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC45C: .4byte gSaveBlock1
-_080BC460: .4byte 0x00001a16
-	thumb_func_end sub_80BC440
-
-	thumb_func_start SecretBasePC_PackUp
-SecretBasePC_PackUp: @ 80BC464
-	push {lr}
-	movs r0, 0x14
-	bl IncrementGameStat
-	bl sub_80BC440
-	pop {r0}
-	bx r0
-	thumb_func_end SecretBasePC_PackUp
-
 	thumb_func_start sub_80BC474
 sub_80BC474: @ 80BC474
 	push {r4-r7,lr}

@@ -1054,3 +1054,17 @@ _080BC43C: .4byte gSaveBlock1 + 0x1AA2\n\
 .syntax divided\n");
 }
 #endif
+
+void sub_80BC440(void)
+{
+    u16 backupValue = gSaveBlock1.secretBases[0].sbr_field_e;
+    ResetSecretBase(0);
+    gSaveBlock1.secretBases[0].sbr_field_e = backupValue;
+    sub_80BC0F8();
+}
+
+void SecretBasePC_PackUp(void)
+{
+    IncrementGameStat(20);
+    sub_80BC440();
+}
