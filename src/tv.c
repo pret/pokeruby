@@ -437,6 +437,32 @@ bool8 sub_80BF77C(u16 value)
     return TRUE;
 }
 
+void sub_80BF79C(struct TVShowRecentHappenings *arg0) // TVShowFanClubLetter?
+{
+    u8 i = Random() % 6;
+    while (1) {
+        if (i == 6)
+            i = 0;
+        if (arg0->var04[i] != 0xFFFF)
+            break;
+        i ++;
+    }
+    sub_80EB3FC(gStringVar3, arg0->var04[i]);
+}
+
+u8 sub_80BF7E8(struct TVShowFanClubLetter *arg0) // TVShowRecentHappenings?
+{
+    u16 flagsum = 0;
+    u8 i = 0;
+    if (arg0->pad04[0] != 0xFF) {
+        while (i < 11 && arg0->pad04[i] != 0xFF) {
+            flagsum += arg0->pad04[i];
+            i++;
+        }
+    }
+    return flagsum & 0x7;
+}
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)

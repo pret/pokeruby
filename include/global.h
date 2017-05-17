@@ -210,7 +210,7 @@ struct TVShowRecentHappenings {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
     /*0x02*/ u16 var02;
-    u8 pad04[12];
+	/*0x04*/ u16 var04[6];
     /*0x10*/ u8 var10[8];
     /*0x18*/ u8 var18;
     u8 pad19[10];
@@ -222,7 +222,7 @@ struct TVShowFanclubOpinions {
     /*0x02*/ u16 var02;
     /*0x04*/ u8 var04A:4;
     u8 var04B:4;
-    /*0x04*/ u8 var05[8];
+    /*0x05*/ u8 var05[8];
     /*0x0D*/ u8 var0D;
     /*0x0E*/ u8 var0E;
     /*0x0F*/ u8 var0F;
