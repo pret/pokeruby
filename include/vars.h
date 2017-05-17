@@ -35,4 +35,6 @@
 
 #define VAR_PORTHOLE               0x40B4
 
+#define VAR_0x40BC                 0x40BC
+
 #endif // GUARD_VARS_H

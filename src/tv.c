@@ -771,6 +771,12 @@ _080BFD1C: .4byte gOtherText_Dad\n\
 }
 #endif
 
+void sub_80BFD20(void)
+{
+    VarSet(VAR_0x40BC, 0);
+    RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+}
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)

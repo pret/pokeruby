@@ -3121,24 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start sub_80BFD20
-sub_80BFD20: @ 80BFD20
-	push {lr}
-	ldr r0, _080BFD3C @ =0x000040bc
-	movs r1, 0
-	bl VarSet
-	ldr r0, _080BFD40 @ =gSaveBlock1
-	ldrb r1, [r0, 0x5]
-	ldrb r2, [r0, 0x4]
-	movs r0, 0x5
-	bl RemoveFieldObjectByLocalIdAndMap
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BFD3C: .4byte 0x000040bc
-_080BFD40: .4byte gSaveBlock1
-	thumb_func_end sub_80BFD20
-
 	thumb_func_start sub_80BFD44
 sub_80BFD44: @ 80BFD44
 	push {r4-r7,lr}
