@@ -6,6 +6,8 @@
 #include "rng.h"
 #include "string_util.h"
 #include "text.h"
+#include "species.h"
+#include "pokedex.h"
 
 enum
 {
@@ -376,6 +378,24 @@ u16 sub_80BF638(u8 arg0, u16 arg1)
     u16 retval = sub_80BF674(arg1);
     StringCopy(gUnknown_083D1464[arg0], gSpeciesNames[retval]);
     return retval;
+}
+
+u16 sub_80BF674(u16 species) {
+    u16 rspecies;
+    u16 cspecies;
+    rspecies = (Random() % (NUM_SPECIES - 1)) + 1;
+    cspecies = rspecies;
+    while ((s8)sub_8090D90(SpeciesToNationalPokedexNum(cspecies), 0) != 1 || cspecies == species) {
+        if (cspecies == SPECIES_BULBASAUR)
+            cspecies = NUM_SPECIES - 1;
+        else
+            cspecies --;
+        if (cspecies == rspecies) {
+            cspecies = species;
+            return cspecies;
+        }
+    }
+    return cspecies;
 }
 
 asm(".section .text_c");

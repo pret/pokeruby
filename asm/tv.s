@@ -3121,59 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start sub_80BF674
-sub_80BF674: @ 80BF674
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r5, r0, 16
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, _080BF694 @ =0x0000019b
-	bl __umodsi3
-	adds r0, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r6, r4, 0
-	b _080BF6B2
-	.align 2, 0
-_080BF694: .4byte 0x0000019b
-_080BF698:
-	cmp r4, 0x1
-	bne _080BF6A4
-	ldr r4, _080BF6A0 @ =0x0000019b
-	b _080BF6AA
-	.align 2, 0
-_080BF6A0: .4byte 0x0000019b
-_080BF6A4:
-	subs r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-_080BF6AA:
-	cmp r4, r6
-	bne _080BF6B2
-	adds r4, r5, 0
-	b _080BF6CE
-_080BF6B2:
-	adds r0, r4, 0
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0
-	bl sub_8090D90
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0x1
-	bne _080BF698
-	cmp r4, r5
-	beq _080BF698
-_080BF6CE:
-	adds r0, r4, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF674
-
 	thumb_func_start sub_80BF6D8
 sub_80BF6D8: @ 80BF6D8
 	push {lr}
