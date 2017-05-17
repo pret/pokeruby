@@ -34,6 +34,7 @@ struct OutbreakPokemon
 extern u8 *gUnknown_083D1464[3];
 
 extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8006;
 extern u8 gSpecialVar_0x8007;
 extern u16 gScriptResult;
 extern u8 gUnknown_020387E8;
@@ -380,7 +381,8 @@ u16 sub_80BF638(u8 arg0, u16 arg1)
     return retval;
 }
 
-u16 sub_80BF674(u16 species) {
+u16 sub_80BF674(u16 species)
+{
     u16 rspecies;
     u16 cspecies;
     rspecies = (Random() % (NUM_SPECIES - 1)) + 1;
@@ -396,6 +398,26 @@ u16 sub_80BF674(u16 species) {
         }
     }
     return cspecies;
+}
+
+void sub_80BF6D8(void)
+{
+    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
+    gSpecialVar_0x8006 = gUnknown_03005D38.var0;
+    if (gUnknown_03005D38.var0 == -1)
+        gScriptResult = 1;
+    else
+        gScriptResult = 0;
+}
+
+s8 sub_80BF720(TVShow tvShow[])
+{
+    u8 idx;
+    for (idx=0; idx<5; idx++) {
+        if (tvShow[idx].common.var00 == 0)
+            return idx;
+    }
+    return -1;
 }
 
 asm(".section .text_c");
