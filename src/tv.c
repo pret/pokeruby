@@ -513,6 +513,26 @@ void sub_80BF820(u8 arg0, u8 arg1, u8 arg2, u16 arg3, u16 arg4, struct TVShowNam
     StringCopy(gUnknown_083D1464[arg0], flags);
 }
 
+bool8 sub_80BF974(void)
+{
+    u8 i;
+    for (i=0; i<5; i++)
+    {
+        if (gSaveBlock1.tvShows[i].common.var00 == gSpecialVar_0x8004)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80BF9B4(void)
+{
+    GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar1);
+    if (!StringCompareWithoutExtCtrlCodes(gStringVar3, gStringVar1))
+        return FALSE;
+    sub_80BE478();
+    return TRUE;
+}
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)
