@@ -1613,55 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start sub_80BE97C
-sub_80BE97C: @ 80BE97C
-	push {r4,lr}
-	lsls r0, 24
-	cmp r0, 0
-	beq _080BE9A4
-	ldr r4, _080BE9A0 @ =gUnknown_020387E2
-	ldrh r0, [r4]
-	lsrs r0, 8
-	cmp r0, 0x4
-	bls _080BE992
-	bl sub_80BE9D4
-_080BE992:
-	ldrb r0, [r4]
-	strh r0, [r4]
-	cmp r0, 0xFF
-	beq _080BE9C8
-	adds r0, 0x1
-	b _080BE9C6
-	.align 2, 0
-_080BE9A0: .4byte gUnknown_020387E2
-_080BE9A4:
-	ldr r4, _080BE9D0 @ =gUnknown_020387E2
-	ldrb r0, [r4]
-	cmp r0, 0x4
-	bls _080BE9B0
-	bl sub_80BE9D4
-_080BE9B0:
-	ldrh r0, [r4]
-	movs r1, 0xFF
-	lsls r1, 8
-	ands r1, r0
-	strh r1, [r4]
-	lsrs r0, r1, 8
-	cmp r0, 0xFF
-	beq _080BE9C8
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r1, r2
-_080BE9C6:
-	strh r0, [r4]
-_080BE9C8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE9D0: .4byte gUnknown_020387E2
-	thumb_func_end sub_80BE97C
-
 	thumb_func_start sub_80BE9D4
 sub_80BE9D4: @ 80BE9D4
 	push {r4,r5,lr}

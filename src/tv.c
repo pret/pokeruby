@@ -51,6 +51,8 @@ extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 extern void sub_80BEBF4(void);
 
+extern u16 gUnknown_020387E2;
+
 void ClearTVShowData(void)
 {
     u8 showidx;
@@ -315,6 +317,30 @@ void UpdateMassOutbreakTimeLeft(u16 arg0)
         EndMassOutbreak();
     else
         gSaveBlock1.outbreakUnk5 -= arg0;
+}
+
+void sub_80BE9D4(u8);
+
+void sub_80BE97C(bool8 flag)
+{
+    u8 var0, var1;
+    if (flag != 0) {
+        var0 = gUnknown_020387E2 >> 8;
+        if (var0 > 4)
+            sub_80BE9D4(var0);
+        gUnknown_020387E2 &= 0xFF;
+        var1 = gUnknown_020387E2 & 0xFF;
+        if (var1 != 0xFF)
+            gUnknown_020387E2++;
+    } else {
+        var0 = gUnknown_020387E2 & 0xFF;
+        if (var0 > 4)
+            sub_80BE9D4(var0);
+        gUnknown_020387E2 &= 0xFF00;
+        var1 = gUnknown_020387E2 >> 8;
+        if (var1 != 0xFF)
+            gUnknown_020387E2 += 0x100;
+    }
 }
 
 asm(".section .text_b");
