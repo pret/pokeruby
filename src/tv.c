@@ -29,6 +29,8 @@ struct OutbreakPokemon
     /*0x0B*/ u8 location;
 };
 
+extern u8 *gUnknown_083D1464[3];
+
 extern u16 gSpecialVar_0x8004;
 extern u8 gSpecialVar_0x8007;
 extern u16 gScriptResult;
@@ -367,9 +369,14 @@ void sub_80BF588(TVShow tvShow[])
             }
         }
     }
-    
 }
 
+u16 sub_80BF638(u8 arg0, u16 arg1)
+{
+    u16 retval = sub_80BF674(arg1);
+    StringCopy(gUnknown_083D1464[arg0], gSpeciesNames[retval]);
+    return retval;
+}
 
 asm(".section .text_c");
 

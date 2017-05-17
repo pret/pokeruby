@@ -3121,37 +3121,6 @@ _080BF4F0: .4byte gSaveBlock1 + 0x2738
 
 .section .text_80BF544
 
-	thumb_func_start sub_80BF638
-sub_80BF638: @ 80BF638
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_80BF674
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	ldr r0, _080BF66C @ =gUnknown_083D1464
-	lsls r4, 2
-	adds r4, r0
-	ldr r0, [r4]
-	movs r1, 0xB
-	muls r1, r5
-	ldr r2, _080BF670 @ =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BF66C: .4byte gUnknown_083D1464
-_080BF670: .4byte gSpeciesNames
-	thumb_func_end sub_80BF638
-
 	thumb_func_start sub_80BF674
 sub_80BF674: @ 80BF674
 	push {r4-r6,lr}
