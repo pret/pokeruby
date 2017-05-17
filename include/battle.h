@@ -124,17 +124,22 @@ struct BattleStruct /* 0x2000000 */
 
 struct UnknownStruct4
 {
-    u8 filler0[0x3];
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[0x9];
-    u8 taunt:4;
-    u8 unkC:4;
-    u8 fillerD[0x2];
-    u8 unk16;
-    u8 filler17[0x4];
+    /*0x00*/ u8 filler0[0x3];
+    /*0x04*/ u16 unk4;
+    /*0x06*/ u16 unk6;
+    /*0x08*/ u8 unk8;
+    /*0x09*/ u8 unk9;
+    /*0x0A*/ u8 unkA;
+             u8 fillerB[4];
+             u8 unkF_0:4;
+             u8 unkF_4:4;
+             u8 filler10[3];
+    /*0x13*/ u8 taunt:4;
+    /*0x13*/ u8 unkC:4;
+    /*0x14*/ u8 unk14;
+    /*0x15*/ u8 unk15;
+    /*0x16*/ u8 unk16;
+    /*0x17*/ u8 filler17[0x4];
 };
 
 extern struct UnknownStruct1 unk_2016A00;

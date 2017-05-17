@@ -107,6 +107,36 @@ struct UnknownStruct11
     u8 unk36[10];
 };
 
+struct UnknownStruct12
+{
+    u32 unk0;
+    u8 filler4[0x54];
+};
+
+struct UnknownStruct13
+{
+    u32 unk0_0:1;
+    u32 unk0_1:1;
+    u32 unk0_2:1;
+    u32 unk0_3:1;
+    u32 unk0_4:1;
+    u32 unk0_5:1;
+    u32 unk0_6:1;
+    u32 unk0_7:1;
+    u32 unk1_0:1;
+    u32 unk1_1:1;
+    u32 unk1_2:1;
+    u32 unk1_3:2;
+    u32 unk1_5:1;
+    u32 unk1_6:1;
+    u32 unk1_7:1;
+    u32 unk2_0:1;
+    u32 unk2_1:1;
+    u32 unk2_2:1;
+    u32 unk2_3:1;
+    u8 filler4[12];
+};
+
 extern const struct UnknownStruct5 gUnknown_081F9674;
 extern const u8 gUnknown_081F96C8[];
 extern void *const gUnknown_081FAF4C[];
@@ -117,13 +147,16 @@ extern const struct BattleMove gBattleMoves[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 extern const struct BaseStats gBaseStats[];
+extern const u32 gBitTable[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
 #define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
 #define ewram16002 (ewram[0x16002])
 #define ewram1601B (ewram[0x1601B])
+#define ewram16020 ((u8 *)(ewram + 0x16020))
 #define ewram16056 (ewram[0x16056])
+#define ewram16058 (ewram[0x16058])
 #define ewram16078 (ewram[0x16078])
 #define ewram16084 (ewram[0x16084])
 #define ewram16086 (ewram[0x16086])
@@ -132,12 +165,15 @@ extern u8 ewram[];
 #define ewram16089 (ewram[0x16089])
 #define ewram160A1 (ewram[0x160A1])
 #define ewram160AC ((u8 *)(ewram + 0x160AC))
+#define ewram160BC ((u16 *)(ewram + 0x160BC))  // hp
 #define ewram160C8 (ewram[0x160C8])
 #define ewram160C9 (ewram[0x160C9])
 #define ewram160CB (ewram[0x160CB])
 #define ewram160CC ((u8 *)(ewram + 0x160CC))
+#define ewram160E6 (ewram[0x160E6])
 #define ewram160E8 ((u8 *)(ewram + 0x160E8))
 #define ewram160F0 ((u8 *)(ewram + 0x160F0))
+#define ewram160F9 (ewram[0x160F9])
 #define ewram16100 ((u8 *)(ewram + 0x16100))
 #define ewram16108 ((u8 *)(ewram + 0x16108))
 #define ewram16113 (ewram[0x16113])
@@ -149,11 +185,14 @@ extern u8 ewram[];
 #define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
+extern u8 gUnknown_02024260[][0x200];
 extern u8 gUnknown_02024A60;
 extern u32 gUnknown_02024A64;
 extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
+extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gUnknown_02024BE0[];
+extern u16 gUnknown_02024BE6;
 extern u8 gUnknown_02024C0C;
 extern u8 gUnknown_02024C0E;
 extern u16 gUnknown_02024C2C[];
@@ -174,8 +213,11 @@ extern u16 gUnknown_02024D1A;
 extern u8 gUnknown_02024D1E[];
 extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
 extern u8 gUnknown_02024D26;
+extern struct UnknownStruct13 gUnknown_02024D28[];
 extern u8 gUnknown_02024DBC[];
 extern u16 gUnknown_02024DE8;
+extern u8 gUnknown_02024E60[];
+extern u8 gUnknown_02024E64[];
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030041B8;
@@ -211,6 +253,7 @@ extern u8 gPlayerMonIndex;
 extern u8 gEnemyMonIndex;
 extern u16 gBattleWeather;
 extern u32 gBattleMoveDamage;
+extern struct BattlePokemon gBattleMons[];
 
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
@@ -230,6 +273,16 @@ extern void sub_800D74C();
 extern void sub_804777C(u8);
 extern void sub_8043DFC();
 extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
+extern void dp01_build_cmdbuf_x00_a_b_0(u8 a, u8 b, u8 c);
+extern void dp01_build_cmdbuf_x04_4_4_4(u8 a);
+extern void dp01_build_cmdbuf_x07_7_7_7(u8 a);
+extern void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
+extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
+extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
+extern void dp01_battle_side_mark_buffer_for_execution();
+extern u8 sub_8090D90();
+extern void b_std_message();
+extern void sub_800C704(u8, u8, u8);
 
 void sub_800E7F8(void);
 void sub_800EC9C(void);
@@ -253,6 +306,17 @@ void nullsub_86(struct Sprite *);
 void objc_dp11b_pingpong(struct Sprite *);
 void sub_8010874(void);
 void bc_8012FAC(void);
+void bc_load_battlefield(void);
+void sub_8011384(void);
+void bc_801333C(void);
+void bc_battle_begin_message(void);
+void bc_8013568(void);
+void sub_8011800(void);
+void sub_8011834(void);
+void bc_801362C(void);
+void sub_8011970(void);
+void sub_80119B4(void);
+void sub_8011B00(void);
 void sub_801365C(u8);
 void sub_801377C(void);
 
@@ -1735,5 +1799,479 @@ void sub_8010874(void)
         gUnknown_030042E0.unk8[i] = 0;
         gUnknown_030042E0.unk14[i] = 0;
         gUnknown_030042E0.unk2A[i] = 0;
+    }
+}
+
+void sub_8010B88(void)
+{
+    struct UnknownStruct4 sp0 = gUnknown_02024CA8[gUnknown_02024A60];
+    s32 i;
+    u8 *ptr;
+    u32 *ptr2;
+
+    if (gBattleMoves[gUnknown_02024BE6].effect != 0x7F)
+    {
+        for (i = 0; i < 8; i++)
+            gBattleMons[gUnknown_02024A60].statStages[i] = 6;
+        for (i = 0; i < gUnknown_02024A68; i++)
+        {
+            struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
+
+            if ((sp20->unk0 & 0x04000000) && gUnknown_02024CA8[i].unk14 == gUnknown_02024A60)
+                sp20->unk0 &= ~0x04000000;
+            if ((gUnknown_02024C98[i] & 0x18) && gUnknown_02024CA8[i].unk15 == gUnknown_02024A60)
+            {
+                gUnknown_02024C98[i] &= ~0x18;
+                gUnknown_02024CA8[i].unk15 = 0;
+            }
+        }
+    }
+    if (gBattleMoves[gUnknown_02024BE6].effect == 0x7F)
+    {
+        gBattleMons[gUnknown_02024A60].status2 &= 0x15100007;
+        gUnknown_02024C98[gUnknown_02024A60] &= 0x3043F;
+
+        for (i = 0; i < gUnknown_02024A68; i++)
+        {
+            if (battle_side_get_owner(gUnknown_02024A60) != battle_side_get_owner(i)
+             && (gUnknown_02024C98[i] & 0x18) != 0
+             && (gUnknown_02024CA8[i].unk15 == gUnknown_02024A60))
+            {
+                gUnknown_02024C98[i] &= ~0x18;
+                gUnknown_02024C98[i] |= 0x10;
+            }
+        }
+    }
+    else
+    {
+        gBattleMons[gUnknown_02024A60].status2 = 0;
+        gUnknown_02024C98[gUnknown_02024A60] = 0;
+    }
+
+    for (i = 0; i < gUnknown_02024A68; i++)
+    {
+        if (gUnknown_02024AD0[i].unk0 & (gBitTable[gUnknown_02024A60] << 16))
+            gUnknown_02024AD0[i].unk0 &= ~(gBitTable[gUnknown_02024A60] << 16);
+        if ((gUnknown_02024AD0[i].unk0 & 0xE000) && ewram[0x16020 + i] == gUnknown_02024A60)
+            gUnknown_02024AD0[i].unk0 &= ~0xE000;
+    }
+
+    gUnknown_02024E60[gUnknown_02024A60] = 0;
+    gUnknown_02024E64[gUnknown_02024A60] = 0;
+
+    ptr = (u8 *)&gUnknown_02024CA8[gUnknown_02024A60];
+    for (i = 0; i < (u32)0x1C; i++)
+        ptr[i] = 0;
+
+    if (gBattleMoves[gUnknown_02024BE6].effect == 0x7F)
+    {
+        gUnknown_02024CA8[gUnknown_02024A60].unkA = sp0.unkA;
+        gUnknown_02024CA8[gUnknown_02024A60].unk15 = sp0.unk15;
+        gUnknown_02024CA8[gUnknown_02024A60].unkF_0 = sp0.unkF_0;
+        gUnknown_02024CA8[gUnknown_02024A60].unkF_4 = sp0.unkF_4;
+    }
+
+    gUnknown_02024CA8[gUnknown_02024A60].unk16 = 2;
+    gUnknown_02024C34[gUnknown_02024A60] = 0;
+    gUnknown_02024C3C[gUnknown_02024A60] = 0;
+    gUnknown_02024C44[gUnknown_02024A60] = 0;
+    gUnknown_02024C4C[gUnknown_02024A60] = 0;
+    gUnknown_02024C2C[gUnknown_02024A60] = 0;
+    gUnknown_02024C5C[gUnknown_02024A60] = 0xFF;
+
+    ewram[0x160AC + gUnknown_02024A60 * 2 + 0] = 0;
+    ewram[0x160AC + gUnknown_02024A60 * 2 + 1] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 0] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 1] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 2] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 3] = 0;
+    ewram[0x160E8 + gUnknown_02024A60 * 2 + 0] = 0;
+    ewram[0x160E8 + gUnknown_02024A60 * 2 + 1] = 0;
+
+    ptr2 = (u32 *)(ewram + 0x17100);
+    ptr2[gUnknown_02024A60] = 0;
+
+    gUnknown_02024BE6 = 0;
+}
+
+void sub_8010F48(void)
+{
+    s32 i;
+    u8 *ptr;
+    u32 *ptr2;
+
+    for (i = 0; i < 8; i++)
+        gBattleMons[gUnknown_02024A60].statStages[i] = 6;
+    gBattleMons[gUnknown_02024A60].status2 = 0;
+    gUnknown_02024C98[gUnknown_02024A60] = 0;
+    for (i = 0; i < gUnknown_02024A68; i++)
+    {
+        if ((gBattleMons[i].status2 & 0x4000000) && gUnknown_02024CA8[i].unk14 == gUnknown_02024A60)
+            gBattleMons[i].status2 &= ~0x4000000;
+        if (gBattleMons[i].status2 & (gBitTable[gUnknown_02024A60] << 16))
+            gBattleMons[i].status2 &= ~(gBitTable[gUnknown_02024A60] << 16);
+        if ((gBattleMons[i].status2 & 0xE000) && ewram[0x16020 + i] == gUnknown_02024A60)
+            gBattleMons[i].status2 &= ~0xE000;
+    }
+    gUnknown_02024E60[gUnknown_02024A60] = 0;
+    gUnknown_02024E64[gUnknown_02024A60] = 0;
+
+    ptr = (u8 *)&gUnknown_02024CA8[gUnknown_02024A60];
+    for (i = 0; i < (u32)0x1C; i++)
+        ptr[i] = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_0 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_1 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_2 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_3 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_4 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_5 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_6 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk0_7 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_0 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_1 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_2 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_3 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_5 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_6 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk1_7 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk2_0 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk2_1 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk2_2 = 0;
+    gUnknown_02024D28[gUnknown_02024A60].unk2_3 = 0;
+
+    gUnknown_02024CA8[gUnknown_02024A60].unk16 = 2;
+    gUnknown_02024C34[gUnknown_02024A60] = 0;
+    gUnknown_02024C3C[gUnknown_02024A60] = 0;
+    gUnknown_02024C44[gUnknown_02024A60] = 0;
+    gUnknown_02024C4C[gUnknown_02024A60] = 0;
+    gUnknown_02024C2C[gUnknown_02024A60] = 0;
+    gUnknown_02024C5C[gUnknown_02024A60] = 0xFF;
+
+    ewram[0x160E8 + gUnknown_02024A60 * 2 + 0] = 0;
+    ewram[0x160E8 + gUnknown_02024A60 * 2 + 1] = 0;
+    ewram[0x160AC + gUnknown_02024A60 * 2 + 0] = 0;
+    ewram[0x160AC + gUnknown_02024A60 * 2 + 1] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 0] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 1] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 2] = 0;
+    ewram[0x16100 + gUnknown_02024A60 * 4 + 3] = 0;
+
+    ptr2 = (u32 *)(ewram + 0x17100);
+    ptr2[gUnknown_02024A60] = 0;
+
+    gBattleMons[gUnknown_02024A60].type1 = gBaseStats[gBattleMons[gUnknown_02024A60].species].type1;
+    gBattleMons[gUnknown_02024A60].type2 = gBaseStats[gBattleMons[gUnknown_02024A60].species].type2;
+}
+
+void bc_8012FAC(void)
+{
+    switch (gUnknown_02024D1E[0])
+    {
+    case 0:
+        gUnknown_02024A60 = gUnknown_02024D1E[1];
+        dp01_build_cmdbuf_x00_a_b_0(0, 0, 0);
+        dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+        gUnknown_02024D1E[0]++;
+        break;
+    case 1:
+        if (gUnknown_02024A64 == 0)
+        {
+            gUnknown_02024D1E[1]++;
+            if (gUnknown_02024D1E[1] == gUnknown_02024A68)
+                gUnknown_030042D4 = bc_load_battlefield;
+            else
+                gUnknown_02024D1E[0] = 0;
+        }
+        break;
+    }
+}
+
+void bc_load_battlefield(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        gUnknown_02024A60 = battle_get_side_with_given_state(0);
+        dp01_build_cmdbuf_x2E_a(0, gBattleTerrain);
+        dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+        gUnknown_030042D4 = sub_8011384;
+        gUnknown_02024D1E[0] = 0;
+        gUnknown_02024D1E[1] = 0;
+    }
+}
+
+void sub_8011384(void)
+{
+    u8 *ptr;
+    s32 i;
+
+    if (gUnknown_02024A64 == 0)
+    {
+        for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        {
+            if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+             && battle_side_get_owner(gUnknown_02024A60) == 0)
+            {
+                ptr = (u8 *)&gBattleMons[gUnknown_02024A60];
+                for (i = 0; i < (u32)0x58; i++)
+                    ptr[i] = 0;
+            }
+            else
+            {
+                u8 r0;
+
+                ptr = (u8 *)&gBattleMons[gUnknown_02024A60];
+                for (i = 0; i < (u32)0x58; i++)
+                    ptr[i] = gUnknown_02024260[gUnknown_02024A60][4 + i];
+
+                gBattleMons[gUnknown_02024A60].type1 = gBaseStats[gBattleMons[gUnknown_02024A60].species].type1;
+                gBattleMons[gUnknown_02024A60].type2 = gBaseStats[gBattleMons[gUnknown_02024A60].species].type2;
+                gBattleMons[gUnknown_02024A60].ability = GetAbilityBySpecies(gBattleMons[gUnknown_02024A60].species, gBattleMons[gUnknown_02024A60].altAbility);
+                r0 = battle_side_get_owner(gUnknown_02024A60);
+                ewram160BC[r0] = gBattleMons[gUnknown_02024A60].hp;
+                for (i = 0; i < 8; i++)
+                    gBattleMons[gUnknown_02024A60].statStages[i] = 6;
+                gBattleMons[gUnknown_02024A60].status2 = 0;
+            }
+
+            if (battle_get_per_side_status(gUnknown_02024A60) == 0)
+            {
+                dp01_build_cmdbuf_x07_7_7_7(0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            {
+                if (battle_get_per_side_status(gUnknown_02024A60) == 1)
+                {
+                    dp01_build_cmdbuf_x07_7_7_7(0);
+                    dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+                }
+                if (battle_side_get_owner(gUnknown_02024A60) == 1
+                 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+            }
+            else
+            {
+                if (battle_side_get_owner(gUnknown_02024A60) == 1
+                 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+                {
+                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                    dp01_build_cmdbuf_x04_4_4_4(0);
+                    dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+                }
+            }
+
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            {
+                if (battle_get_per_side_status(gUnknown_02024A60) == 2
+                 || battle_get_per_side_status(gUnknown_02024A60) == 3)
+                {
+                    dp01_build_cmdbuf_x07_7_7_7(0);
+                    dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+                }
+            }
+        }
+        gUnknown_030042D4 = bc_801333C;
+    }
+}
+
+void bc_801333C(void)
+{
+    s32 i;
+
+    if (gUnknown_02024A64 == 0)
+    {
+        struct
+        {
+            u16 hp;
+            u32 status;
+        } sp0[6];
+
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        {
+            for (i = 0; i < 6; i++)
+            {
+                if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == 0
+                 || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                {
+                    sp0[i].hp = 0xFFFF;
+                    sp0[i].status = 0;
+                }
+                else
+                {
+                    sp0[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                    sp0[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
+                }
+            }
+            gUnknown_02024A60 = battle_get_side_with_given_state(1);
+            dp01_build_cmdbuf_x30_TODO(0, (u8 *)sp0, 0x80);
+            dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+
+            for (i = 0; i < 6; i++)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
+                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                {
+                    sp0[i].hp = 0xFFFF;
+                    sp0[i].status = 0;
+                }
+                else
+                {
+                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                }
+            }
+            gUnknown_02024A60 = battle_get_side_with_given_state(0);
+            dp01_build_cmdbuf_x30_TODO(0, (u8 *)sp0, 0x80);
+            dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+
+            gUnknown_030042D4 = bc_battle_begin_message;
+        }
+        else
+        {
+            // The array gets set here, but nothing is ever done with it.
+            // Likely unfinished code.
+
+            for (i = 0; i < 6; i++)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
+                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                {
+                    sp0[i].hp = 0xFFFF;
+                    sp0[i].status = 0;
+                }
+                else
+                {
+                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                }
+            }
+
+            gUnknown_030042D4 = bc_8013568;
+        }
+    }
+}
+
+void bc_battle_begin_message(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        gUnknown_02024A60 = battle_get_side_with_given_state(1);
+        b_std_message(0, gUnknown_02024A60);
+        gUnknown_030042D4 = sub_8011800;
+    }
+}
+
+void bc_8013568(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        gUnknown_030042D4 = sub_8011970;
+        b_std_message(0, 0);
+    }
+}
+
+void sub_8011800(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        b_std_message(1, battle_get_side_with_given_state(1));
+        gUnknown_030042D4 = sub_8011834;
+    }
+}
+
+void sub_8011834(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        {
+            if (battle_get_per_side_status(gUnknown_02024A60) == 1)
+            {
+                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
+             && battle_get_per_side_status(gUnknown_02024A60) == 3)
+            {
+                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+        }
+        gUnknown_030042D4 = bc_801362C;
+    }
+}
+
+void bc_801362C(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        {
+            if (battle_side_get_owner(gUnknown_02024A60) == 1
+             && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+                sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+        }
+        gUnknown_030042D4 = sub_8011970;
+    }
+}
+
+void unref_sub_8011950(void)
+{
+    if (gUnknown_02024A64 == 0)
+        gUnknown_030042D4 = sub_8011970;
+}
+
+void sub_8011970(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+            b_std_message(1, battle_get_side_with_given_state(0));
+        gUnknown_030042D4 = sub_80119B4;
+    }
+}
+
+void sub_80119B4(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        {
+            if (battle_get_per_side_status(gUnknown_02024A60) == 0)
+            {
+                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
+             && battle_get_per_side_status(gUnknown_02024A60) == 2)
+            {
+                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+        }
+        ewram16058 = 0;
+        ewram160F9 = 0;
+        ewram160E6 = 0;
+        gUnknown_030042D4 = sub_8011B00;
+    }
+}
+
+void unref_sub_8011A68(void)
+{
+    if (gUnknown_02024A64 == 0)
+    {
+        for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+        {
+            if (battle_side_get_owner(gUnknown_02024A60) == 0)
+            {
+                sub_800C704(0, gUnknown_02024A6A[gUnknown_02024A60], 0);
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+            }
+        }
+        ewram16058 = 0;
+        ewram160F9 = 0;
+        ewram160E6 = 0;
+        gUnknown_030042D4 = sub_8011B00;
     }
 }
