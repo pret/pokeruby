@@ -463,6 +463,56 @@ u8 sub_80BF7E8(struct TVShowFanClubLetter *arg0) // TVShowRecentHappenings?
     return flagsum & 0x7;
 }
 
+void sub_80BF820(u8 arg0, u8 arg1, u8 arg2, u16 arg3, u16 arg4, struct TVShowNameRaterShow *tvShow)
+{
+    u8 flags[3];
+    u16 nameLength;
+    u8 i;
+    for (i=0; i<3; i++)
+        flags[i] = EOS;
+    if (arg3 == 0) {
+        nameLength = StringLength(tvShow->trainerName);
+        if (arg2 == 0) {
+            flags[0] = tvShow->trainerName[arg1];
+        } else if (arg2 == 1) {
+            flags[0] = tvShow->trainerName[nameLength - arg1];
+        } else if (arg2 == 2) {
+            flags[0] = tvShow->trainerName[arg1];
+            flags[1] = tvShow->trainerName[arg1 + 1];
+        } else {
+            flags[0] = tvShow->trainerName[nameLength - (arg1 + 2)];
+            flags[1] = tvShow->trainerName[nameLength - (arg1 + 1)];
+        }
+    } else if (arg3 == 1) {
+        nameLength = StringLength(tvShow->pokemonName);
+        if (arg2 == 0) {
+            flags[0] = tvShow->pokemonName[arg1];
+        } else if (arg2 == 1) {
+            flags[0] = tvShow->pokemonName[nameLength - arg1];
+        } else if (arg2 == 2) {
+            flags[0] = tvShow->pokemonName[arg1];
+            flags[1] = tvShow->pokemonName[arg1 + 1];
+        } else {
+            flags[0] = tvShow->pokemonName[nameLength - (arg1 + 2)];
+            flags[1] = tvShow->pokemonName[nameLength - (arg1 + 1)];
+        }
+    } else {
+        nameLength = StringLength(gSpeciesNames[arg4]);
+        if (arg2 == 0) {
+            flags[0] = gSpeciesNames[arg4][arg1];
+        } else if (arg2 == 1) {
+            flags[0] = gSpeciesNames[arg4][nameLength - arg1];
+        } else if (arg2 == 2) {
+            flags[0] = gSpeciesNames[arg4][arg1];
+            flags[1] = gSpeciesNames[arg4][arg1 + 1];
+        } else {
+            flags[0] = gSpeciesNames[arg4][nameLength - (arg1 + 2)];
+            flags[1] = gSpeciesNames[arg4][nameLength - (arg1 + 1)];
+        }
+    }
+    StringCopy(gUnknown_083D1464[arg0], flags);
+}
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)
