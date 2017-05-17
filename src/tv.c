@@ -299,6 +299,13 @@ void sub_80BE8EC(u16 arg0) {
     }
 }
 
+void UpdateMassOutbreakTimeLeft(u16 arg0) {
+    if (gSaveBlock1.outbreakUnk5 <= arg0)
+        EndMassOutbreak();
+    else
+        gSaveBlock1.outbreakUnk5 -= arg0;
+}
+
 asm(".section .text_b");
 
 u8 sub_80BF4F4(u8 arg0)

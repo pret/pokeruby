@@ -1613,30 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start UpdateMassOutbreakTimeLeft
-UpdateMassOutbreakTimeLeft: @ 80BE954
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, _080BE96C @ =gSaveBlock1
-	ldr r3, _080BE970 @ =0x00002b0e
-	adds r2, r0, r3
-	ldrh r0, [r2]
-	cmp r0, r1
-	bhi _080BE974
-	bl EndMassOutbreak
-	b _080BE978
-	.align 2, 0
-_080BE96C: .4byte gSaveBlock1
-_080BE970: .4byte 0x00002b0e
-_080BE974:
-	subs r0, r1
-	strh r0, [r2]
-_080BE978:
-	pop {r0}
-	bx r0
-	thumb_func_end UpdateMassOutbreakTimeLeft
-
 	thumb_func_start sub_80BE97C
 sub_80BE97C: @ 80BE97C
 	push {r4,lr}
