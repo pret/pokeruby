@@ -9,6 +9,7 @@
 #include "species.h"
 #include "pokedex.h"
 #include "naming_screen.h"
+#include "rom4.h"
 
 enum
 {
@@ -547,6 +548,47 @@ void sub_80BF9F8(void)
     gender = GetMonGender(&(gPlayerParty[gSpecialVar_0x8004]));
     pval = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_PERSONALITY, 0);
     DoNamingScreen(3, gStringVar2, spec, gender, pval, c2_080CC144);
+}
+
+void c2_080CC144(void)
+{
+    SetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, gStringVar2);
+    c2_exit_to_overworld_1_continue_scripts_restart_music();
+}
+
+void sub_80BFAE0(void)
+{
+    GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar1);
+    StringGetEnd10(gStringVar1);
+}
+
+u32 GetPlayerTrainerId(void);
+
+void sub_80BFB10(void)
+{
+    if (GetPlayerTrainerId() == GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_OT_ID, 0))
+        gScriptResult = 0;
+    else
+        gScriptResult = 1;
+}
+
+u8 sub_80BFB54(u8 arg0)
+{
+    if (arg0 == 0)
+        return 0;
+    else if (arg0 > 0 && arg0 <= 20)
+        return 2;
+    else if (arg0 > 20 && arg0 <= 40)
+        return 3;
+    else if (arg0 > 40 && arg0 <= 60)
+        return 4;
+    else
+        return 0;
+}
+
+u32 GetPlayerTrainerId(void)
+{
+    return (gSaveBlock2.playerTrainerId[3] << 24) | (gSaveBlock2.playerTrainerId[2] << 16) | (gSaveBlock2.playerTrainerId[1] << 8) | (gSaveBlock2.playerTrainerId[0]);
 }
 
 asm(".section .text_c");
