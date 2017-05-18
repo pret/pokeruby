@@ -13,6 +13,7 @@
 #include "map_constants.h"
 #include "strings.h"
 #include "link.h"
+#include "easy_chat.h"
 
 enum
 {
@@ -452,6 +453,18 @@ void sub_80BEA88(void)
 // }
 
 asm(".section .text_b");
+
+void sub_80BF25C(u8);
+
+void sub_80BF4BC(void)
+{
+    TVShow *show;
+    sub_80BF25C(7);
+    if (gScriptResult == 0) {
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        sub_80EB6FC(show->fanclubOpinions.var18, 1);
+    }
+}
 
 u8 sub_80BF4F4(u8 arg0)
 {

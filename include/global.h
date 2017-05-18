@@ -227,6 +227,7 @@ struct TVShowFanclubOpinions {
     /*0x0E*/ u8 var0E;
     /*0x0F*/ u8 var0F;
     /*0x10*/ u8 var10[8];
+    /*0x18*/ u16 var18[6];
 };
 
 struct TVShowNameRaterShow {

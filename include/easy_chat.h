@@ -28,5 +28,6 @@ enum {
 
 
 u16 sub_80EB72C(u16 group);
+void sub_80EB6FC(u16 *, u16);
 
 #endif // GUARD_EASYCHAT_H

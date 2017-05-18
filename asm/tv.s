@@ -2878,35 +2878,6 @@ _080BF4B4: .4byte gUnknown_03005D38
 _080BF4B8: .4byte gSaveBlock1 + 0x2738
 	thumb_func_end sub_80BF484
 
-	thumb_func_start sub_80BF4BC
-sub_80BF4BC: @ 80BF4BC
-	push {lr}
-	movs r0, 0x7
-	bl sub_80BF25C
-	ldr r0, _080BF4E8 @ =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0
-	bne _080BF4E4
-	ldr r0, _080BF4EC @ =gUnknown_03005D38
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _080BF4F0 @ =gSaveBlock1 + 0x2738
-	adds r0, r1
-	adds r0, 0x18
-	movs r1, 0x1
-	bl sub_80EB6FC
-_080BF4E4:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BF4E8: .4byte gScriptResult
-_080BF4EC: .4byte gUnknown_03005D38
-_080BF4F0: .4byte gSaveBlock1 + 0x2738
-	thumb_func_end sub_80BF4BC
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68
