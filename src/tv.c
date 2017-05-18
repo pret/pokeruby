@@ -59,10 +59,10 @@ void ClearTVShowData(void)
     u8 showidx;
     u8 extradataidx;
     for (showidx=0; showidx<25; showidx++) {
-        gSaveBlock1.tvShows[showidx].common.var00 = 0;
-        gSaveBlock1.tvShows[showidx].common.var01 = 0;
+        gSaveBlock1.tvShows.shows[showidx].common.var00 = 0;
+        gSaveBlock1.tvShows.shows[showidx].common.var01 = 0;
         for (extradataidx=0; extradataidx<34; extradataidx++) {
-            gSaveBlock1.tvShows[showidx].common.pad02[extradataidx] = 0;
+            gSaveBlock1.tvShows.shows[showidx].common.pad02[extradataidx] = 0;
         }
     }
     sub_80BEBF4();
@@ -99,7 +99,7 @@ void sub_80BE478(void)
         return;
     }
 
-    tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+    tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
 
     tvShow->nameRaterShow.var00 = TVSHOW_NAME_RATER_SHOW;
     tvShow->nameRaterShow.var01 = 1;
@@ -126,7 +126,7 @@ void StartMassOutbreak(void)
 {
     TVShow *tvShow;
 
-    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
 
     gSaveBlock1.outbreakPokemonSpecies = tvShow->massOutbreak.species;
     gSaveBlock1.outbreakLocationMapNum = tvShow->massOutbreak.locationMapNum;
@@ -148,7 +148,7 @@ void sub_80BE5FC(void)
     TVShow *tvShow;
     u16 species;
 
-    tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+    tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
 
     tvShow->fanclubLetter.var00 = TVSHOW_FAN_CLUB_LETTER;
     tvShow->fanclubLetter.var01 = 1;
@@ -164,7 +164,7 @@ void sub_80BE65C(void)
 {
     TVShow *tvShow;
 
-    tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+    tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
 
     tvShow->recentHappenings.var00 = TVSHOW_RECENT_HAPPENINGS;
     tvShow->recentHappenings.var01 = 1;
@@ -180,7 +180,7 @@ void sub_80BE6A0(void)
     TVShow *tvShow;
     u8 monIndex;
 
-    tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+    tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
 
     tvShow->fanclubOpinions.var00 = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
     tvShow->fanclubOpinions.var01 = 1;
@@ -218,7 +218,7 @@ void sub_80BE778(void)
 
     for (i = 0; i < 24; i++)
     {
-        if (gSaveBlock1.tvShows[i].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK)
+        if (gSaveBlock1.tvShows.shows[i].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK)
         {
             return;
         }
@@ -229,7 +229,7 @@ void sub_80BE778(void)
         return;
     }
 
-    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
+    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows.shows);
     if (gUnknown_03005D38.var0 == -1)
     {
         return;
@@ -245,7 +245,7 @@ void sub_80BE778(void)
 
         val2 = gUnknown_03005D38.var0;
 
-        tvShow = &gSaveBlock1.tvShows[val2];
+        tvShow = &gSaveBlock1.tvShows.shows[val2];
 
         tvShow->massOutbreak.var00 = TVSHOW_MASS_OUTBREAK;
         tvShow->massOutbreak.var01 = 1;
@@ -302,8 +302,8 @@ void sub_80BE8EC(u16 arg0)
     TVShow *tvShow;
     if (gSaveBlock1.outbreakPokemonSpecies == 0) {
         for (showidx=0; showidx<24; showidx++) {
-            if (gSaveBlock1.tvShows[showidx].massOutbreak.var00 == 0x29 && gSaveBlock1.tvShows[showidx].massOutbreak.var01 == 0x01) {
-                tvShow = &(gSaveBlock1.tvShows[showidx]);
+            if (gSaveBlock1.tvShows.shows[showidx].massOutbreak.var00 == 0x29 && gSaveBlock1.tvShows.shows[showidx].massOutbreak.var01 == 0x01) {
+                tvShow = &(gSaveBlock1.tvShows.shows[showidx]);
                 if (tvShow->massOutbreak.var16 < arg0)
                     tvShow->massOutbreak.var16 = 0;
                 else
@@ -352,9 +352,9 @@ u8 sub_80BF1B4(s8);
 void sub_80BE9D4()
 {
     TVShow *show;
-    gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
+    gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
     if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(24) != 1) {
-        show = &(gSaveBlock1.tvShows[gUnknown_03005D38.var0]);
+        show = &(gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0]);
 #ifdef NONMATCHING
         show->common.var00 = 24;
         show->common.var01 = 0;
@@ -386,12 +386,12 @@ void sub_80BEA88(void);
 void sub_80BEA5C(u16 arg0)
 {
     struct UnknownSaveStruct2A98 *unk_2a98;
-    unk_2a98 = &gSaveBlock1.unknown_2A98;
+    unk_2a98 = &gSaveBlock1.tvShows.unknown_2A98;
     if (unk_2a98->var00 == 0x19)
     {
         if (unk_2a98->var02 <= 0x13)
         {
-            sub_80BF55C(gSaveBlock1.tvShows, 0x18);
+            sub_80BF55C(gSaveBlock1.tvShows.shows, 0x18);
         }
         else
         {
@@ -404,14 +404,14 @@ void sub_80BEA88(void)
     struct UnknownSaveStruct2A98 *unk_2a98;
     TVShow *tvShow;
     u8 rval;
-    unk_2a98 = &gSaveBlock1.unknown_2A98;
+    unk_2a98 = &gSaveBlock1.tvShows.unknown_2A98;
     rval = sub_80BF77C(0xFFFF);
     if (rval == 0)
     {
-        gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
+        gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
         if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(0x19) != 1)
         {
-            tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+            tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
             tvShow->unknownTvShowType2.var00 = 0x19;
             tvShow->unknownTvShowType2.var01 = rval;
             tvShow->unknownTvShowType2.var02 = unk_2a98->var02;
@@ -442,7 +442,7 @@ void sub_80BEA88(void)
             // val = (rval16 % 3) + 1;
             // if (sub_80BEE48(val) != 1)
             // {
-                // tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+                // tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
                 // unk_2abc[gUnknown_03005D38.var0][0] = val;
                 // to do
             // }
@@ -503,7 +503,7 @@ void sub_80BF588(TVShow tvShow[])
             for (showidx2=showidx+1; showidx2<24; showidx2++) {
                 if (tvShow[showidx2].common.var00 != 0) {
                     tvShow[showidx] = tvShow[showidx2];
-                    sub_80BF55C(gSaveBlock1.tvShows, showidx2);
+                    sub_80BF55C(gSaveBlock1.tvShows.shows, showidx2);
                     break;
                 }
             }
@@ -539,7 +539,7 @@ u16 sub_80BF674(u16 species)
 
 void sub_80BF6D8(void)
 {
-    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
+    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows.shows);
     gSpecialVar_0x8006 = gUnknown_03005D38.var0;
     if (gUnknown_03005D38.var0 == -1)
         gScriptResult = 1;
@@ -655,7 +655,7 @@ bool8 sub_80BF974(void)
     u8 i;
     for (i=0; i<5; i++)
     {
-        if (gSaveBlock1.tvShows[i].common.var00 == gSpecialVar_0x8004)
+        if (gSaveBlock1.tvShows.shows[i].common.var00 == gSpecialVar_0x8004)
             return TRUE;
     }
     return FALSE;
@@ -916,7 +916,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
 {
     TVShow *tvShow;
 
-    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
 
     sub_80FBFB4(gStringVar1, tvShow->massOutbreak.locationMapNum, 0);
 
@@ -935,7 +935,7 @@ void TVShowDone(void)
     gScriptResult = 1;
     gUnknown_020387E8 = 0;
 
-    gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var01 = 0;
+    gSaveBlock1.tvShows.shows[gSpecialVar_0x8004].common.var01 = 0;
 }
 
 void sub_80C2014(void)
