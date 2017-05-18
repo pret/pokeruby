@@ -31,6 +31,12 @@ struct OutbreakPokemon
 
 extern u8 *gUnknown_083D1464[3];
 
+struct TVSaleItem {
+    u16 item_id;
+    u16 item_price;
+};
+extern struct TVSaleItem gUnknown_02038724[3];
+
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
@@ -449,6 +455,27 @@ asm(".section .text_b");
 
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
+
+void sub_80BF20C(void)
+{
+    u8 i, j;
+    u16 tmpId, tmpPrice;
+    for (i=0; i<2; i++)
+    {
+        for (j=i+1; j<3; j++)
+        {
+            if (gUnknown_02038724[i].item_price < gUnknown_02038724[j].item_price)
+            {
+                tmpId = gUnknown_02038724[i].item_id;
+                tmpPrice = gUnknown_02038724[i].item_price;
+                gUnknown_02038724[i].item_id = gUnknown_02038724[j].item_id;
+                gUnknown_02038724[i].item_price = gUnknown_02038724[j].item_price;
+                gUnknown_02038724[j].item_id = tmpId;
+                gUnknown_02038724[j].item_price = tmpPrice;
+            }
+        }
+    }
+}
 
 void sub_80BF25C(u8 showType)
 {

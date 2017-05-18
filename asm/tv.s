@@ -2536,53 +2536,6 @@ _080BF204:
 	bx r1
 	thumb_func_end sub_80BF1B4
 
-	thumb_func_start sub_80BF20C
-sub_80BF20C: @ 80BF20C
-	push {r4-r7,lr}
-	movs r2, 0
-_080BF210:
-	adds r1, r2, 0x1
-	lsls r0, r1, 24
-	lsrs r5, r0, 24
-	adds r7, r1, 0
-	cmp r5, 0x2
-	bhi _080BF248
-	ldr r6, _080BF258 @ =gUnknown_02038724
-	lsls r0, r2, 2
-	adds r4, r0, r6
-_080BF222:
-	lsls r0, r5, 2
-	adds r3, r0, r6
-	ldrh r0, [r4, 0x2]
-	ldrh r1, [r3, 0x2]
-	cmp r0, r1
-	bcs _080BF23E
-	ldrh r1, [r4]
-	adds r2, r0, 0
-	ldrh r0, [r3]
-	strh r0, [r4]
-	ldrh r0, [r3, 0x2]
-	strh r0, [r4, 0x2]
-	strh r1, [r3]
-	strh r2, [r3, 0x2]
-_080BF23E:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x2
-	bls _080BF222
-_080BF248:
-	lsls r0, r7, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x1
-	bls _080BF210
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BF258: .4byte gUnknown_02038724
-	thumb_func_end sub_80BF20C
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68
