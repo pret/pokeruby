@@ -32,6 +32,7 @@ struct OutbreakPokemon
 extern u8 *gUnknown_083D1464[3];
 
 extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 extern u8 gSpecialVar_0x8007;
 extern u16 gScriptResult;
@@ -446,7 +447,77 @@ void sub_80BEA88(void)
 
 asm(".section .text_b");
 
-void sub_80BF25C(u8);
+void sub_80BF6D8(void);
+void sub_80BF588(TVShow tvShows[]);
+
+void sub_80BF25C(u8 showType)
+{
+    u8 i;
+    for (i=0; i<5; i++)
+    {
+        if (gSaveBlock1.tvShows.shows[i].common.var00 == showType) {
+            if(gSaveBlock1.tvShows.shows[i].common.var01 == 1)
+            {
+                gScriptResult = 1;
+            }
+            else
+            {
+                sub_80BF55C(gSaveBlock1.tvShows.shows, i);
+                sub_80BF588(gSaveBlock1.tvShows.shows);
+                sub_80BF6D8();
+            }
+            return;
+        }
+    }
+    sub_80BF6D8();
+}
+
+void sub_80BF334(void);
+void sub_80BF3A4(void);
+void sub_80BF3DC(void);
+void sub_80BF46C(void);
+void sub_80BF478(void);
+void sub_80BF484(void);
+void sub_80BF4BC(void);
+
+void sub_80BF2C4(void)
+{
+    gScriptResult = 0;
+    switch (gSpecialVar_0x8005) {
+        case TVSHOW_FAN_CLUB_LETTER:
+            sub_80BF334();
+            break;
+        case TVSHOW_RECENT_HAPPENINGS:
+            sub_80BF3A4();
+            break;
+        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+            sub_80BF3DC();
+            break;
+        case TVSHOW_UNKN_SHOWTYPE_04:
+            sub_80BF46C();
+            break;
+        case TVSHOW_NAME_RATER_SHOW:
+            sub_80BF478();
+            break;
+        case TVSHOW_UNK_SHOWTYPE_06:
+            sub_80BF484();
+            break;
+        case TVSHOW_UNK_SHOWTYPE_07:
+            sub_80BF4BC();
+            break;
+    }
+}
+
+void sub_80BF334(void)
+{
+    TVShow *show;
+    sub_80BF25C(TVSHOW_FAN_CLUB_LETTER);
+    if (gScriptResult == 0) {
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, 0)]);
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        sub_80EB6FC(show->fanclubLetter.pad04, 6);
+    }
+}
 
 void sub_80BF3A4(void)
 {
@@ -623,7 +694,7 @@ bool8 sub_80BF77C(u16 value)
     return TRUE;
 }
 
-void sub_80BF79C(struct TVShowRecentHappenings *arg0) // TVShowFanClubLetter?
+void sub_80BF79C(struct TVShowRecentHappenings *arg0)
 {
     u8 i = Random() % 6;
     while (1) {
@@ -636,13 +707,13 @@ void sub_80BF79C(struct TVShowRecentHappenings *arg0) // TVShowFanClubLetter?
     sub_80EB3FC(gStringVar3, arg0->var04[i]);
 }
 
-u8 sub_80BF7E8(struct TVShowFanClubLetter *arg0) // TVShowRecentHappenings?
+u8 sub_80BF7E8(struct TVShowNameRaterShow *arg0)
 {
     u16 flagsum = 0;
     u8 i = 0;
-    if (arg0->pad04[0] != 0xFF) {
-        while (i < 11 && arg0->pad04[i] != 0xFF) {
-            flagsum += arg0->pad04[i];
+    if (arg0->pokemonName[0] != 0xFF) {
+        while (i < 11 && arg0->pokemonName[i] != 0xFF) {
+            flagsum += arg0->pokemonName[i];
             i++;
         }
     }

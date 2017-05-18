@@ -201,7 +201,7 @@ struct TVShowFanClubLetter {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
     /*0x02*/ u16 species;
-    u8 pad04[12];
+    /*0x04*/ u16 pad04[6];
     /*0x10*/ u8 playerName[8];
     /*0x18*/ u8 var18;
 };
