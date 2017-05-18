@@ -375,6 +375,81 @@ void sub_80BE9D4()
     }
 }
 
+void sub_80BEA50(u16 var)
+{
+    gUnknown_020387E0 = var;
+}
+
+void sub_80BF55C(TVShow tvShow[], u8 showidx);
+void sub_80BEA88(void);
+
+void sub_80BEA5C(u16 arg0)
+{
+    struct UnknownSaveStruct2A98 *unk_2a98;
+    unk_2a98 = &gSaveBlock1.unknown_2A98;
+    if (unk_2a98->var00 == 0x19)
+    {
+        if (unk_2a98->var02 <= 0x13)
+        {
+            sub_80BF55C(gSaveBlock1.tvShows, 0x18);
+        }
+        else
+        {
+            sub_80BEA88();
+        }
+    }
+}
+void sub_80BEA88(void)
+{
+    struct UnknownSaveStruct2A98 *unk_2a98;
+    TVShow *tvShow;
+    u8 rval;
+    unk_2a98 = &gSaveBlock1.unknown_2A98;
+    rval = sub_80BF77C(0xFFFF);
+    if (rval == 0)
+    {
+        gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
+        if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(0x19) != 1)
+        {
+            tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+            tvShow->unknownTvShowType2.var00 = 0x19;
+            tvShow->unknownTvShowType2.var01 = rval;
+            tvShow->unknownTvShowType2.var02 = unk_2a98->var02;
+            tvShow->unknownTvShowType2.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->var06;
+            tvShow->unknownTvShowType2.var04 = unk_2a98->var04;
+            tvShow->unknownTvShowType2.var08 = unk_2a98->var08;
+            tvShow->unknownTvShowType2.var0a = unk_2a98->var0a;
+            StringCopy(tvShow->unknownTvShowType2.playerName, gSaveBlock2.playerName);
+            sub_80BE138(tvShow);
+            tvShow->unknownTvShowType2.language = GAME_LANGUAGE;
+        }
+    }
+}
+
+// void sub_80BEB20(void)
+// {
+    // struct UnknownSaveStruct2ABC *unk_2abc;
+    // u16 rval16;
+    // u16 val;
+    // unk_2abc = &gSaveBlock1.unknown_2ABC;
+    // TVShow *tvShow;
+    // if (FlagGet(SYS_GAME_CLEAR) != 0)
+    // {
+        // gUnknown_03005D38.var0 = sub_80BEBC8(unk_2abc);
+        // if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
+        // {
+            // rval16 = Random();
+            // val = (rval16 % 3) + 1;
+            // if (sub_80BEE48(val) != 1)
+            // {
+                // tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
+                // unk_2abc[gUnknown_03005D38.var0][0] = val;
+                // to do
+            // }
+        // }
+    // }
+// }
+
 asm(".section .text_b");
 
 u8 sub_80BF4F4(u8 arg0)

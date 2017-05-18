@@ -272,6 +272,19 @@ struct TVShowUnknownTVShowType {
 	/*0x13*/ u8 playerName[8];
 };
 
+struct TVShowUnknownTVShowType2 {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 var02;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u16 var06;
+	/*0x08*/ u16 var08;
+	/*0x0a*/ u8 var0a;
+	/*0x0b*/ u8 language;
+	u8 pad0c[7];
+	/*0x13*/ u8 playerName[8];
+};
+
 typedef union TVShow {
     struct TVShowCommon common;
     struct TVShowFanClubLetter fanclubLetter;
@@ -280,6 +293,7 @@ typedef union TVShow {
     struct TVShowNameRaterShow nameRaterShow;
     struct TVShowMassOutbreak massOutbreak;
 	struct TVShowUnknownTVShowType unknownTvShowType;
+	struct TVShowUnknownTVShowType2 unknownTvShowType2;
 } TVShow;
 
 struct MailStruct
@@ -339,6 +353,21 @@ typedef union SB_Struct {
 } SB_Struct;
 // size is 0x198
 
+struct UnknownSaveStruct2A98 {
+	u8 var00;
+	u8 var01;
+	u16 var02;
+	u16 var04;
+	u16 var06;
+	u16 var08;
+	u8 var0a;
+	u8 pad0b[25];
+};
+
+struct UnknownSaveStruct2ABC {
+	u8 pad00[4];
+};
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -389,7 +418,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
     /*0x2738*/ TVShow tvShows[24];
-    /*0x2A98*/ u8 filler_2A98[0x64];
+    /*0x2A98*/ struct UnknownSaveStruct2A98 unknown_2A98;
+    /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
