@@ -185,7 +185,7 @@ _080B93AC: .4byte 0x000011c8\n\
 void sub_80B93B0(u32 a)
 {
     sub_80BD674(unk_2008000.secretBases, sizeof(struct PlayerRecords), a);
-    sub_80BFD44(unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
+    sub_80BFD44((u8 *)unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
     sub_80C0514(unk_2008000.filler1004, sizeof(struct PlayerRecords), a);
     sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
     //UB: Too many arguments for function "sub_80FA4E4"

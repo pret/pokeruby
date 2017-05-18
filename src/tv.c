@@ -910,6 +910,49 @@ void sub_80BFD20(void)
     RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
+extern u8 ewram[];
+#define gUnknown_02007000 (*(struct ewramStruct_0207000 *)(ewram + 0x7000))
+
+struct ewramStruct_0207000 {
+    struct SaveTVStruct tvshows[4];
+};
+
+void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3);
+
+void sub_80C04A0(void);
+void sub_80C01D4(void);
+void sub_80C0408(void);
+
+void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
+{
+    u8 i;
+    struct ewramStruct_0207000 *ewramTVShows;
+    for (i=0; i<4; i++) {
+        memcpy(&gUnknown_02007000.tvshows[i], &arg0[i * arg1], sizeof(struct SaveTVStruct));
+    }
+    ewramTVShows = &gUnknown_02007000;
+    switch (arg2) {
+        case 0:
+            sub_80BFE24(&gSaveBlock1.tvShows, &ewramTVShows->tvshows[1], &ewramTVShows->tvshows[2], &ewramTVShows->tvshows[3]);
+            break;
+        case 1:
+            sub_80BFE24(&ewramTVShows->tvshows[0], &gSaveBlock1.tvShows, &ewramTVShows->tvshows[2], &ewramTVShows->tvshows[3]);
+            break;
+        case 2:
+            sub_80BFE24(&ewramTVShows->tvshows[0], &ewramTVShows->tvshows[1], &gSaveBlock1.tvShows, &ewramTVShows->tvshows[3]);
+            break;
+        case 3:
+            sub_80BFE24(&ewramTVShows->tvshows[0], &ewramTVShows->tvshows[1], &ewramTVShows->tvshows[2], &gSaveBlock1.tvShows);
+            break;
+    }
+    sub_80BF588(gSaveBlock1.tvShows.shows);
+    sub_80C04A0();
+    sub_80BF588(gSaveBlock1.tvShows.shows);
+    sub_80C01D4();
+    sub_80C0408();
+}
+
+
 asm(".section .text_c");
 
 void DoTVShowPokemonNewsMassOutbreak(void)
