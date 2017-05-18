@@ -261,6 +261,17 @@ struct TVShowMassOutbreak {
     u8 pad19[11];
 };
 
+struct TVShowUnknownTVShowType {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 var02;
+	/*0x03*/ u8 var03;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u8 language;
+	u8 pad07[12];
+	/*0x13*/ u8 playerName[8];
+};
+
 typedef union TVShow {
     struct TVShowCommon common;
     struct TVShowFanClubLetter fanclubLetter;
@@ -268,6 +279,7 @@ typedef union TVShow {
     struct TVShowFanclubOpinions fanclubOpinions;
     struct TVShowNameRaterShow nameRaterShow;
     struct TVShowMassOutbreak massOutbreak;
+	struct TVShowUnknownTVShowType unknownTvShowType;
 } TVShow;
 
 struct MailStruct

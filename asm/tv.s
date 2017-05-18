@@ -1613,65 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start sub_80BE9D4
-sub_80BE9D4: @ 80BE9D4
-	push {r4,r5,lr}
-	ldr r5, _080BEA3C @ =gSaveBlock1 + 0x2738
-	adds r0, r5, 0
-	bl sub_80BF74C
-	ldr r4, _080BEA40 @ =gUnknown_03005D38
-	strb r0, [r4]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080BEA36
-	movs r0, 0x18
-	bl sub_80BF1B4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080BEA36
-	movs r0, 0
-	ldrsb r0, [r4, r0]
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	adds r4, r5
-	movs r1, 0
-	movs r0, 0x18
-	strb r0, [r4]
-	strb r1, [r4, 0x1]
-	ldr r1, _080BEA44 @ =gUnknown_020387E2
-	ldrh r0, [r1]
-	strb r0, [r4, 0x2]
-	ldrh r0, [r1]
-	lsrs r0, 8
-	strb r0, [r4, 0x3]
-	ldr r0, _080BEA48 @ =gUnknown_020387E0
-	ldrh r0, [r0]
-	strh r0, [r4, 0x4]
-	adds r0, r4, 0
-	adds r0, 0x13
-	ldr r1, _080BEA4C @ =gSaveBlock2
-	bl StringCopy
-	adds r0, r4, 0
-	bl sub_80BE138
-	movs r0, GAME_LANGUAGE
-	strb r0, [r4, 0x6]
-_080BEA36:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BEA3C: .4byte gSaveBlock1 + 0x2738
-_080BEA40: .4byte gUnknown_03005D38
-_080BEA44: .4byte gUnknown_020387E2
-_080BEA48: .4byte gUnknown_020387E0
-_080BEA4C: .4byte gSaveBlock2
-	thumb_func_end sub_80BE9D4
-
 	thumb_func_start sub_80BEA50
 sub_80BEA50: @ 80BEA50
 	ldr r1, _080BEA58 @ =gUnknown_020387E0

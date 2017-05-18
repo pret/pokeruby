@@ -51,6 +51,7 @@ extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 extern void sub_80BEBF4(void);
 
+extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
 
 void ClearTVShowData(void)
@@ -66,6 +67,8 @@ void ClearTVShowData(void)
     }
     sub_80BEBF4();
 }
+
+extern void sub_80BE138(TVShow *);
 
 asm(".section .text_a");
 
@@ -319,7 +322,7 @@ void UpdateMassOutbreakTimeLeft(u16 arg0)
         gSaveBlock1.outbreakUnk5 -= arg0;
 }
 
-void sub_80BE9D4(u8);
+void sub_80BE9D4();
 
 void sub_80BE97C(bool8 flag)
 {
@@ -327,7 +330,7 @@ void sub_80BE97C(bool8 flag)
     if (flag != 0) {
         var0 = gUnknown_020387E2 >> 8;
         if (var0 > 4)
-            sub_80BE9D4(var0);
+            sub_80BE9D4();
         gUnknown_020387E2 &= 0xFF;
         var1 = gUnknown_020387E2 & 0xFF;
         if (var1 != 0xFF)
@@ -335,11 +338,40 @@ void sub_80BE97C(bool8 flag)
     } else {
         var0 = gUnknown_020387E2 & 0xFF;
         if (var0 > 4)
-            sub_80BE9D4(var0);
+            sub_80BE9D4();
         gUnknown_020387E2 &= 0xFF00;
         var1 = gUnknown_020387E2 >> 8;
         if (var1 != 0xFF)
             gUnknown_020387E2 += 0x100;
+    }
+}
+
+s8 sub_80BF74C(TVShow tvShows[]);
+u8 sub_80BF1B4(s8);
+
+void sub_80BE9D4()
+{
+    TVShow *show;
+    gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
+    if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(24) != 1) {
+        show = &(gSaveBlock1.tvShows[gUnknown_03005D38.var0]);
+#ifdef NONMATCHING
+        show->common.var00 = 24;
+        show->common.var01 = 0;
+#else
+        asm(".syntax unified\n\
+        movs r1, 0\n\
+        movs r0, 24\n\
+        strb r0, [r4]\n\
+        strb r1, [r4, 1]\n\
+        .syntax divided\n");
+#endif
+        show->unknownTvShowType.var02 = gUnknown_020387E2 & 0xFF;
+        show->unknownTvShowType.var03 = gUnknown_020387E2 >> 8;
+        show->unknownTvShowType.var04 = gUnknown_020387E0;
+        StringCopy(show->unknownTvShowType.playerName, gSaveBlock2.playerName);
+        sub_80BE138(show);
+        show->unknownTvShowType.language = GAME_LANGUAGE;
     }
 }
 
