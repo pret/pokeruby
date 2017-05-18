@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "tv.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "flags.h"
@@ -14,15 +15,6 @@
 #include "strings.h"
 #include "link.h"
 #include "easy_chat.h"
-
-enum
-{
-    TVSHOW_FAN_CLUB_LETTER = 1,
-    TVSHOW_RECENT_HAPPENINGS = 2,
-    TVSHOW_PKMN_FAN_CLUB_OPINIONS = 3,
-    TVSHOW_NAME_RATER_SHOW = 5,
-    TVSHOW_MASS_OUTBREAK = 41,
-};
 
 struct UnkTvStruct
 {
@@ -456,13 +448,56 @@ asm(".section .text_b");
 
 void sub_80BF25C(u8);
 
+void sub_80BF3A4(void)
+{
+    TVShow *show;
+    sub_80BF25C(TVSHOW_RECENT_HAPPENINGS);
+    if (gScriptResult == 0) {
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        sub_80EB6FC(show->recentHappenings.var04, 6);
+    }
+}
+
+void sub_80BF3DC(void)
+{
+    TVShow *show;
+    sub_80BF25C(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
+    if (gScriptResult == 0) {
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, 0)]);
+        GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, gStringVar2);
+        StringGetEnd10(gStringVar2);
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        sub_80EB6FC(show->fanclubOpinions.var1C, 2);
+    }
+}
+
+void sub_80BF46C(void)
+{
+    gScriptResult = 1;
+}
+
+void sub_80BF478(void)
+{
+    sub_80BF25C(TVSHOW_NAME_RATER_SHOW);
+}
+
+void sub_80BF484(void)
+{
+    TVShow *show;
+    sub_80BF25C(TVSHOW_UNK_SHOWTYPE_06);
+    if (gScriptResult == 0) {
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        sub_80EB6FC(show->recentHappenings.var04, 2); // wrong struct ident, fix later
+    }
+}
+
 void sub_80BF4BC(void)
 {
     TVShow *show;
-    sub_80BF25C(7);
+    sub_80BF25C(TVSHOW_UNK_SHOWTYPE_07);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-        sub_80EB6FC(show->fanclubOpinions.var18, 1);
+        sub_80EB6FC(show->fanclubOpinions.var18, 1); // wrong struct ident, fix later
     }
 }
 
