@@ -235,6 +235,7 @@ extern u8 gUnknown_02024DBC[];
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E60[];
 extern u8 gUnknown_02024E64[];
+extern u8 gUnknown_02038470[];
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030041B8;
@@ -294,6 +295,7 @@ extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 extern void dp01_build_cmdbuf_x00_a_b_0(u8 a, u8 b, u8 c);
 extern void dp01_build_cmdbuf_x04_4_4_4(u8 a);
 extern void dp01_build_cmdbuf_x07_7_7_7(u8 a);
+extern void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c);
 extern void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
 extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
 extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
@@ -307,6 +309,7 @@ extern u8 sub_8016558();
 extern u8 sub_80173A4();
 extern u8 sub_80170DC();
 extern u8 ItemId_GetHoldEffect(u16);
+extern void sub_8094C98();
 
 void sub_800E7F8(void);
 void sub_800EC9C(void);
@@ -2313,7 +2316,7 @@ void sub_8011B00(void)
     s32 i;
     s32 j;
     u8 r9 = 0;
-    
+
     if (gUnknown_02024A64 == 0)
     {
         if (ewram16058 == 0)
@@ -2387,7 +2390,7 @@ void sub_8011B00(void)
 void bc_8013B1C(void)
 {
     s32 i;
-    
+
     if (gUnknown_02024A64 == 0)
     {
         gUnknown_030042D4 = sub_8011E8C;
@@ -2411,7 +2414,7 @@ void bc_8013B1C(void)
 void sub_8011E8C(void)
 {
     s32 i;
-    
+
     sub_801365C(1);
     if (gUnknown_02024D26 == 0)
     {
@@ -2462,7 +2465,7 @@ u8 sub_8012028(void)
     u8 r2;
     u8 r6;
     s32 i;
-    
+
     if (gBattleMons[gUnknown_02024A60].item == 0xAF)
         r2 = gEnigmaBerries[gUnknown_02024A60].holdEffect;
     else
@@ -2517,3 +2520,82 @@ u8 sub_8012028(void)
     }
     return 0;
 }
+
+void sub_8012258(u8 a)
+{
+    s32 i;
+    u8 r4;
+    u8 r1;
+
+    for (i = 0; i < 3; i++)
+        gUnknown_02038470[i] = ewram[0x1606C + i + a * 3];
+    r4 = pokemon_order_func(gUnknown_02024A6A[a]);
+    r1 = pokemon_order_func(ewram[0x16068 + a]);
+    sub_8094C98(r4, r1);
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            ewram[0x1606C + i + a * 3] = gUnknown_02038470[i];
+            ewram[0x1606C + i + (a ^ 2) * 3] = gUnknown_02038470[i];
+        }
+    }
+    else
+    {
+        for (i = 0; i < 3; i++)
+        {
+            ewram[0x1606C + i + a * 3] = gUnknown_02038470[i];
+        }
+    }
+}
+
+/*
+void sub_8012324(void)
+{
+    u8 r5;
+
+    gUnknown_02024D1E[4] = 0;
+    // inverted loop
+    //_0801234C
+    for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
+    {
+        r5 = battle_get_per_side_status(gUnknown_02024A60);
+        switch (gUnknown_02024D1E[gUnknown_02024A60])
+        {
+            case 0:
+                ewram[0x016068 + gUnknown_02024A60] = 6;
+                if (!(gBattleTypeFlags & 0x40)
+                 && (r5 & 2)
+                 && !(ewram160A6 & gBitTable[battle_get_side_with_given_state(r5 ^ 2)])
+                 && gUnknown_02024D1E[battle_get_side_with_given_state(r5)] != 4)
+                    break;
+                //_080123F8
+                if (ewram160A6 & gBitTable[gUnknown_02024A60])
+                {
+                    gUnknown_02024C18[gUnknown_02024A60] = 13;
+                    if (!(gBattleTypeFlags & 0x40))
+                        gUnknown_02024D1E[gUnknown_02024A60] = 4;
+                    //_08012454
+                    else
+                        gUnknown_02024D1E[gUnknown_02024A60] = 3;
+                    break;
+                }
+                //_08012468
+                if ((gBattleMons[gUnknown_02024A60].status2 & 0x1000)
+                 || (gBattleMons[gUnknown_02024A60].status2 & 0x10000000))
+                {
+                    gUnknown_02024C18[gUnknown_02024A60] = 0;
+                    gUnknown_02024D1E[gUnknown_02024A60] = 3;
+                }
+                else
+                {
+                    dp01_build_cmdbuf_x12_a_bb(0, gUnknown_02024C18[0], gUnknown_02024260[0][1] | (gUnknown_02024260[0][2] << 8));
+                    dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+                    gUnknown_02024D1E[gUnknown_02024A60]++;
+                }
+                break;
+            case 1:
+        }
+    }
+}
+*/
