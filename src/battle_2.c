@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "songs.h"
 #include "trig.h"
+#include "abilities.h"
 
 struct MonCoords
 {
@@ -152,11 +153,17 @@ extern const u32 gBitTable[];
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
 #define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
+#define ewram16000 (ewram[0x16000])
+#define ewram16001 (ewram[0x16001])
 #define ewram16002 (ewram[0x16002])
+#define ewram16003 (ewram[0x16003])
+#define ewram1600C (ewram[0x1600C])
+#define ewram1600E (ewram[0x1600E])
 #define ewram1601B (ewram[0x1601B])
 #define ewram16020 ((u8 *)(ewram + 0x16020))
 #define ewram16056 (ewram[0x16056])
 #define ewram16058 (ewram[0x16058])
+#define ewram16059 (ewram[0x16059])
 #define ewram16078 (ewram[0x16078])
 #define ewram16084 (ewram[0x16084])
 #define ewram16086 (ewram[0x16086])
@@ -164,6 +171,7 @@ extern u8 ewram[];
 #define ewram16088 (ewram[0x16088])
 #define ewram16089 (ewram[0x16089])
 #define ewram160A1 (ewram[0x160A1])
+#define ewram160A6 (ewram[0x160A6])
 #define ewram160AC ((u8 *)(ewram + 0x160AC))
 #define ewram160BC ((u16 *)(ewram + 0x160BC))  // hp
 #define ewram160C8 (ewram[0x160C8])
@@ -176,6 +184,8 @@ extern u8 ewram[];
 #define ewram160F9 (ewram[0x160F9])
 #define ewram16100 ((u8 *)(ewram + 0x16100))
 #define ewram16108 ((u8 *)(ewram + 0x16108))
+#define ewram16110 (ewram[0x16110])
+#define ewram16111 (ewram[0x16111])
 #define ewram16113 (ewram[0x16113])
 #define ewram17100 ((u32 *)(ewram + 0x17100))
 #define ewram17130 (ewram[0x17130])
@@ -190,11 +200,16 @@ extern u8 gUnknown_02024A60;
 extern u32 gUnknown_02024A64;
 extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
+extern u8 gUnknown_02024A7F;
+extern u8 gUnknown_02024A7A[];
 extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024BE6;
+extern u8 byte_2024C06;
+extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024C0C;
 extern u8 gUnknown_02024C0E;
+extern u8 gUnknown_02024C18[];
 extern u16 gUnknown_02024C2C[];
 extern u16 gUnknown_02024C34[];
 extern u16 gUnknown_02024C3C[];
@@ -202,6 +217,7 @@ extern u16 gUnknown_02024C44[];
 extern u16 gUnknown_02024C4C[];
 extern u16 gUnknown_02024C54[];
 extern u8 gUnknown_02024C5C[];
+extern u16 gUnknown_02024C60[];
 extern u32 gUnknown_02024C6C;
 extern u8 gUnknown_02024C70[];
 extern u16 gUnknown_02024C7A[];
@@ -210,6 +226,7 @@ extern u32 gUnknown_02024C98[];
 //extern u8 gUnknown_02024CA8[][0x1C];
 extern u16 gUnknown_02024D18;
 extern u16 gUnknown_02024D1A;
+extern u16 gUnknown_02024D1C;
 extern u8 gUnknown_02024D1E[];
 extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
 extern u8 gUnknown_02024D26;
@@ -254,6 +271,7 @@ extern u8 gEnemyMonIndex;
 extern u16 gBattleWeather;
 extern u32 gBattleMoveDamage;
 extern struct BattlePokemon gBattleMons[];
+extern u8 gBattleMoveFlags;
 
 extern void sub_800B858(void);
 extern void dp12_8087EA4(void);
@@ -281,8 +299,14 @@ extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
 extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
 extern void dp01_battle_side_mark_buffer_for_execution();
 extern u8 sub_8090D90();
-extern void b_std_message();
 extern void sub_800C704(u8, u8, u8);
+extern u8 sub_8018324();
+extern u8 sub_801A02C();
+extern u8 sub_8015DFC();
+extern u8 sub_8016558();
+extern u8 sub_80173A4();
+extern u8 sub_80170DC();
+extern u8 ItemId_GetHoldEffect(u16);
 
 void sub_800E7F8(void);
 void sub_800EC9C(void);
@@ -317,8 +341,16 @@ void bc_801362C(void);
 void sub_8011970(void);
 void sub_80119B4(void);
 void sub_8011B00(void);
+void sub_8011E8C(void);
+void sub_8012324(void);
+void sub_8012FBC(u8, u8);
+u8 b_first_side();
 void sub_801365C(u8);
 void sub_801377C(void);
+void sub_80138F0(void);
+void b_cancel_multi_turn_move_maybe(u8);
+void b_std_message();
+void sub_80156DC();
 
 void sub_800E7C4(void)
 {
@@ -2274,4 +2306,214 @@ void unref_sub_8011A68(void)
         ewram160E6 = 0;
         gUnknown_030042D4 = sub_8011B00;
     }
+}
+
+void sub_8011B00(void)
+{
+    s32 i;
+    s32 j;
+    u8 r9 = 0;
+    
+    if (gUnknown_02024A64 == 0)
+    {
+        if (ewram16058 == 0)
+        {
+            for (i = 0; i < gUnknown_02024A68; i++)
+                gUnknown_02024A7A[i] = i;
+            for (i = 0; i < gUnknown_02024A68 - 1; i++)
+            {
+                for (j = i + 1; j < gUnknown_02024A68; j++)
+                {
+                    if (b_first_side(gUnknown_02024A7A[i], gUnknown_02024A7A[j], 1) != 0)
+                        sub_8012FBC(i, j);
+                }
+            }
+        }
+        if (ewram160E6 == 0 && sub_8018324(0, 0, 0, 0xFF, 0) != 0)
+        {
+            ewram160E6 = 1;
+            return;
+        }
+        while (ewram16058 < gUnknown_02024A68)
+        {
+            if (sub_8018324(0, gUnknown_02024A7A[ewram16058], 0, 0, 0) != 0)
+                r9++;
+            ewram16058++;
+            if (r9 != 0)
+                return;
+        }
+        if (sub_8018324(9, 0, 0, 0, 0) != 0)
+            return;
+        if (sub_8018324(11, 0, 0, 0, 0) != 0)
+            return;
+        while (ewram160F9 < gUnknown_02024A68)
+        {
+            if (sub_801A02C(0, gUnknown_02024A7A[ewram160F9], 0) != 0)
+                r9++;
+            ewram160F9++;
+            if (r9 != 0)
+                return;
+        }
+        // Absolutely pointless for-loop that somehow doesn't get optimized out
+        for (i = 0; i < gUnknown_02024A68; i++)
+            ;
+        for (i = 0; i < 4; i++)
+        {
+            ewram[0x16068 + i] = 6;
+            gUnknown_02024C18[i] = 0xFF;
+            gUnknown_02024C60[i] = 0;
+        }
+        sub_801365C(0);
+        sub_801377C();
+        ewram160A6 = gUnknown_02024C0C;
+        gUnknown_030042D4 = sub_8012324;
+        sub_80156DC();
+        for (i = 0; i < 8; i++)
+            gUnknown_02024D1E[i] = 0;
+        for (i = 0; i < gUnknown_02024A68; i++)
+            gBattleMons[i].status2 &= ~8;
+        ewram16000 = 0;
+        ewram16001 = 0;
+        ewram16110 = 0;
+        ewram16111 = 0;
+        ewram1600C = 0;
+        ewram16059 = 0;
+        ewram1600E = 0;
+        gBattleMoveFlags = 0;
+        gUnknown_02024D1C = Random();
+    }
+}
+
+void bc_8013B1C(void)
+{
+    s32 i;
+    
+    if (gUnknown_02024A64 == 0)
+    {
+        gUnknown_030042D4 = sub_8011E8C;
+        for (i = 0; i < 8; i++)
+            gUnknown_02024D1E[i] = 0;
+        for (i = 0; i < gUnknown_02024A68; i++)
+        {
+            gBattleMons[i].status2 &= ~8;
+            if ((gBattleMons[i].status1 & 7) && (gBattleMons[i].status2 & 0x1000))
+                b_cancel_multi_turn_move_maybe(i);
+        }
+        ewram16000 = 0;
+        ewram16001 = 0;
+        ewram16110 = 0;
+        ewram16111 = 0;
+        ewram1600E = 0;
+        gBattleMoveFlags = 0;
+    }
+}
+
+void sub_8011E8C(void)
+{
+    s32 i;
+    
+    sub_801365C(1);
+    if (gUnknown_02024D26 == 0)
+    {
+        if (sub_8015DFC() != 0)
+            return;
+        if (sub_8016558() != 0)
+            return;
+    }
+    if (sub_80173A4() != 0)
+        return;
+    ewram16059 = 0;
+    if (sub_80170DC() != 0)
+        return;
+    sub_801365C(0);
+    gUnknown_02024C6C &= ~0x200;
+    gUnknown_02024C6C &= ~0x80000;
+    gUnknown_02024C6C &= ~0x400000;
+    gUnknown_02024C6C &= ~0x100000;
+    ewram16002 = 0;
+    ewram160A1 = 0;
+    ewram1600C = 0;
+    gBattleMoveDamage = 0;
+    gBattleMoveFlags = 0;
+    for (i = 0; i < 5; i++)
+        gUnknown_02024D1E[i] = 0;
+    if (gUnknown_02024D26 != 0)
+    {
+        gUnknown_02024A7F = 12;
+        gUnknown_030042D4 = sub_80138F0;
+        return;
+    }
+    if (gUnknown_030042E0.unk13 < 0xFF)
+        gUnknown_030042E0.unk13++;
+    for (i = 0; i < gUnknown_02024A68; i++)
+    {
+        gUnknown_02024C18[i] = 0xFF;
+        gUnknown_02024C60[i] = 0;
+    }
+    for (i = 0; i < 4; i++)
+        ewram[0x16068 + i] = 6;
+    ewram160A6 = gUnknown_02024C0C;
+    gUnknown_030042D4 = sub_8012324;
+    gUnknown_02024D1C = Random();
+}
+
+u8 sub_8012028(void)
+{
+    u8 r2;
+    u8 r6;
+    s32 i;
+    
+    if (gBattleMons[gUnknown_02024A60].item == 0xAF)
+        r2 = gEnigmaBerries[gUnknown_02024A60].holdEffect;
+    else
+        r2 = ItemId_GetHoldEffect(gBattleMons[gUnknown_02024A60].item);
+    gUnknown_02024C0B = gUnknown_02024A60;
+    if (r2 == 0x25)
+        return 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return 0;
+    if (gBattleMons[gUnknown_02024A60].ability == ABILITY_RUN_AWAY)
+        return 0;
+    r6 = battle_side_get_owner(gUnknown_02024A60);
+    for (i = 0; i < gUnknown_02024A68; i++)
+    {
+        if (r6 != battle_side_get_owner(i)
+         && gBattleMons[i].ability == 0x17)
+        {
+            ewram16003 = i;
+            byte_2024C06 = gBattleMons[i].ability;
+            gUnknown_02024D1E[5] = 2;
+            return 2;
+        }
+        if (r6 != battle_side_get_owner(i)
+         && gBattleMons[gUnknown_02024A60].ability != ABILITY_LEVITATE
+         && gBattleMons[gUnknown_02024A60].type1 != 2
+         && gBattleMons[gUnknown_02024A60].type2 != 2
+         && gBattleMons[i].ability == 0x47)
+        {
+            ewram16003 = i;
+            byte_2024C06 = gBattleMons[i].ability;
+            gUnknown_02024D1E[5] = 2;
+            return 2;
+        }
+    }
+    i = sub_8018324(15, gUnknown_02024A60, 0x2A, 0, 0);
+    if (i != 0 && (gBattleMons[gUnknown_02024A60].type1 == 8 || gBattleMons[gUnknown_02024A60].type2 == 8))
+    {
+        ewram16003 = i - 1;
+        byte_2024C06 = gBattleMons[i - 1].ability;
+        gUnknown_02024D1E[5] = 2;
+        return 2;
+    }
+    if ((gBattleMons[gUnknown_02024A60].status2 & 0x0400E000) || (gUnknown_02024C98[gUnknown_02024A60] & 0x400))
+    {
+        gUnknown_02024D1E[5] = 0;
+        return 1;
+    }
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        gUnknown_02024D1E[5] = 1;
+        return 1;
+    }
+    return 0;
 }
