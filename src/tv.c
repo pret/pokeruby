@@ -56,7 +56,8 @@ extern void sub_80BEBF4(void);
 
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
-extern const u8 *gUnknown_083CE048[];;
+extern const u8 *gUnknown_083CE048[];
+extern u16 gScriptLastTalked;
 
 u32 GetPlayerTrainerId(void);
 
@@ -462,6 +463,61 @@ void sub_80BF6D8(void);
 void sub_80BEC10(u8);
 void sub_80BEC40(void);
 void sub_80BF588(TVShow tvShows[]);
+
+bool8 IsPriceDiscounted(u8);
+
+bool8 GetPriceReduction(u8 arg0)
+{
+    u8 i;
+    if (arg0 == 0)
+    {
+        return FALSE;
+    }
+    for (i=0; i<16; i++)
+    {
+        if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+        {
+            if (gSaveBlock1.unknown_2ABC[i].val1 == 2 && IsPriceDiscounted(arg0) != 0)
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool8 IsPriceDiscounted(u8 arg0)
+{
+    switch (arg0)
+    {
+        case 1:
+            if (gSaveBlock1.location.mapGroup == MAP_GROUP_SLATEPORT_CITY && gSaveBlock1.location.mapNum == MAP_ID_SLATEPORT_CITY && gScriptLastTalked == 0x1a)
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+            break;
+        case 3:
+            if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+            break;
+        default:
+            return TRUE;
+    }
+}
 
 bool8 sub_80BEE48(u8 arg0)
 {
