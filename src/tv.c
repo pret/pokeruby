@@ -17,6 +17,7 @@
 #include "easy_chat.h"
 #include "item.h"
 #include "contest_painting.h"
+#include "rtc.h"
 
 struct UnkTvStruct
 {
@@ -57,6 +58,11 @@ extern void sub_80BEBF4(void);
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
 extern const u8 *gUnknown_083CE048[];
+
+extern const u8 *gTVNewsTextGroup1[];
+extern const u8 *gTVNewsTextGroup2[];
+extern const u8 *gTVNewsTextGroup3[];
+
 extern u16 gScriptLastTalked;
 
 u32 GetPlayerTrainerId(void);
@@ -463,8 +469,40 @@ void sub_80BF6D8(void);
 void sub_80BEC10(u8);
 void sub_80BEC40(void);
 void sub_80BF588(TVShow tvShows[]);
+u8 sub_80BECA0(void);
 
 bool8 IsPriceDiscounted(u8);
+
+void sub_80BECE8(void)
+{
+    u8 arg0;
+    arg0 = sub_80BECA0();
+    if (arg0 == 0xff)
+    {
+        gScriptResult = 0;
+        return;
+    }
+    if (gSaveBlock1.unknown_2ABC[arg0].val2 == 0)
+    {
+        gSaveBlock1.unknown_2ABC[arg0].val1 = 2;
+        if (gLocalTime.hours < 20)
+        {
+            ShowFieldMessage(gTVNewsTextGroup2[gSaveBlock1.unknown_2ABC[arg0].val0]);
+        }
+        else
+        {
+            ShowFieldMessage(gTVNewsTextGroup3[gSaveBlock1.unknown_2ABC[arg0].val0]);
+        }
+    }
+    else
+    {
+        u16 value = gSaveBlock1.unknown_2ABC[arg0].val2;
+        ConvertIntToDecimalStringN(gStringVar1, value, 0, 1);
+        gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
+        ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.unknown_2ABC[arg0].val0]);
+    }
+    gScriptResult = 1;
+}
 
 bool8 GetPriceReduction(u8 arg0)
 {
