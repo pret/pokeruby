@@ -289,6 +289,15 @@ struct TVShowUnknownTVShowType2 {
 	/*0x13*/ u8 playerName[8];
 };
 
+struct TVShowSmartShopper {
+	u8 var00;
+	u8 var01;
+	u8 boughtOrSoldFlag;
+	u8 pad03[3];
+	u16 itemIds[3];
+	u16 itemAmounts[3];
+};
+
 typedef union TVShow {
     struct TVShowCommon common;
     struct TVShowFanClubLetter fanclubLetter;
@@ -298,6 +307,7 @@ typedef union TVShow {
     struct TVShowMassOutbreak massOutbreak;
 	struct TVShowUnknownTVShowType unknownTvShowType;
 	struct TVShowUnknownTVShowType2 unknownTvShowType2;
+	struct TVShowSmartShopper smartshopperShow;
 } TVShow;
 
 struct MailStruct

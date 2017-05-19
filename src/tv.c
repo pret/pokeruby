@@ -15,6 +15,7 @@
 #include "strings.h"
 #include "link.h"
 #include "easy_chat.h"
+#include "item.h"
 
 struct UnkTvStruct
 {
@@ -33,7 +34,7 @@ extern u8 *gUnknown_083D1464[3];
 
 struct TVSaleItem {
     u16 item_id;
-    u16 item_price;
+    u16 item_amount;
 };
 extern struct TVSaleItem gUnknown_02038724[3];
 
@@ -455,8 +456,32 @@ void sub_80BEA88(void)
 
 asm(".section .text_b");
 
+void sub_80BF088(u8 arg0, s32 price);
+
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
+
+void sub_80BF154(u8 arg0, struct TVShowSmartShopper *arg1)
+{
+    u8 i;
+    s32 price;
+    price = 0;
+    for (i=0; i<3; i++)
+    {
+        if (arg1->itemIds[i])
+        {
+            price += ItemId_GetPrice(arg1->itemIds[i]) * arg1->itemAmounts[i];
+        }
+    }
+    if (arg1->boughtOrSoldFlag == 1)
+    {
+        sub_80BF088(arg0, price >> 1);
+    }
+    else
+    {
+        sub_80BF088(arg0, price);
+    }
+}
 
 bool8 sub_80BF1B4(u8 showIdx)
 {
@@ -481,19 +506,19 @@ bool8 sub_80BF1B4(u8 showIdx)
 void sub_80BF20C(void)
 {
     u8 i, j;
-    u16 tmpId, tmpPrice;
+    u16 tmpId, tmpAmount;
     for (i=0; i<2; i++)
     {
         for (j=i+1; j<3; j++)
         {
-            if (gUnknown_02038724[i].item_price < gUnknown_02038724[j].item_price)
+            if (gUnknown_02038724[i].item_amount < gUnknown_02038724[j].item_amount)
             {
                 tmpId = gUnknown_02038724[i].item_id;
-                tmpPrice = gUnknown_02038724[i].item_price;
+                tmpAmount = gUnknown_02038724[i].item_amount;
                 gUnknown_02038724[i].item_id = gUnknown_02038724[j].item_id;
-                gUnknown_02038724[i].item_price = gUnknown_02038724[j].item_price;
+                gUnknown_02038724[i].item_amount = gUnknown_02038724[j].item_amount;
                 gUnknown_02038724[j].item_id = tmpId;
-                gUnknown_02038724[j].item_price = tmpPrice;
+                gUnknown_02038724[j].item_amount = tmpAmount;
             }
         }
     }
