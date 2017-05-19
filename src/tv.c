@@ -53,6 +53,7 @@ extern u8 gSpeciesNames[][11];
 extern u8 gMoveNames[][13];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern u8 *gTVGabbyAndTyTextGroup[];
+extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 extern void sub_80BEBF4(void);
@@ -381,12 +382,12 @@ void sub_80BE9D4()
         strb r1, [r4, 1]\n\
         .syntax divided\n");
 #endif
-        show->unknownTvShowType.var02 = gUnknown_020387E2 & 0xFF;
-        show->unknownTvShowType.var03 = gUnknown_020387E2 >> 8;
-        show->unknownTvShowType.var04 = gUnknown_020387E0;
-        StringCopy(show->unknownTvShowType.playerName, gSaveBlock2.playerName);
+        show->pokemonAngler.var02 = gUnknown_020387E2 & 0xFF;
+        show->pokemonAngler.var03 = gUnknown_020387E2 >> 8;
+        show->pokemonAngler.var04 = gUnknown_020387E0;
+        StringCopy(show->pokemonAngler.playerName, gSaveBlock2.playerName);
         sub_80BE138(show);
-        show->unknownTvShowType.language = GAME_LANGUAGE;
+        show->pokemonAngler.language = GAME_LANGUAGE;
     }
 }
 
@@ -1610,6 +1611,8 @@ _080BFF58:\n\
 
 asm(".section .text_c");
 
+void TVShowConvertInternationalString(u8 *, u8 *, u8);
+
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 void DoTVShowPokemonNewsMassOutbreak(void)
@@ -1679,6 +1682,34 @@ void DoTVShowInSearchOfTrainers(void) {
             break;
     }
     ShowFieldMessage(gTVGabbyAndTyTextGroup[switchval]);
+}
+
+void DoTVShowPokemonAngler(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    if (tvShow->pokemonAngler.var02 < tvShow->pokemonAngler.var03) {
+        gUnknown_020387E8 = 0;
+    } else {
+        gUnknown_020387E8 = 1;
+    }
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonAngler.playerName, tvShow->pokemonAngler.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->pokemonAngler.var04]);
+            sub_80BF088(2, tvShow->pokemonAngler.var03);
+            TVShowDone();
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonAngler.playerName, tvShow->pokemonAngler.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->pokemonAngler.var04]);
+            sub_80BF088(2, tvShow->pokemonAngler.var02);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVFishingGuruAdviceTextGroup[switchval]);
 }
 
 asm(".section .text_d");

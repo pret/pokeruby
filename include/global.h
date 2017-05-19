@@ -265,7 +265,7 @@ struct TVShowMassOutbreak {
     u8 pad19[11];
 };
 
-struct TVShowUnknownTVShowType {
+struct TVShowPokemonAngler {
 	/*0x00*/ u8 var00;
 	/*0x01*/ u8 var01;
 	/*0x02*/ u8 var02;
@@ -313,7 +313,7 @@ typedef union TVShow {
     struct TVShowFanclubOpinions fanclubOpinions;
     struct TVShowNameRaterShow nameRaterShow;
     struct TVShowMassOutbreak massOutbreak;
-	struct TVShowUnknownTVShowType unknownTvShowType;
+	struct TVShowPokemonAngler pokemonAngler;
 	struct TVShowUnknownTVShowType2 unknownTvShowType2;
 	struct TVShowSmartShopper smartshopperShow;
 	struct TVShowContestWinner contestShow;
