@@ -51,6 +51,15 @@ extern struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 gSpeciesNames[][11];
 extern u8 gMoveNames[][13];
+
+extern u8 *gTVBravoTrainerTextGroup[];
+extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
+extern u8 *gTVSmartShopperTextGroup[];
+extern u8 *gTVNameRaterTextGroup[];
+extern u8 *gTVPokemonTodayTextGroup[];
+extern u8 *gTVPokemonTodayFailedCaptureTextGroup[];
+extern u8 *gTVFanClubTextGroup[];
+extern u8 *gTVRecentHappeningsTextGroup[];
 extern u8 *gTVFanClubOpinionsTextGroup[];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern u8 *gTVGabbyAndTyTextGroup[];
@@ -1616,6 +1625,83 @@ asm(".section .text_c");
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
+
+void DoTVShowRecentHappenings(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->recentHappenings.var10, tvShow->recentHappenings.var18);
+            sub_80BF79C(&tvShow->recentHappenings);
+            gUnknown_020387E8 = 50;
+            break;
+        case 1:
+            gUnknown_020387E8 += 1 + (Random() % 3);
+            break;
+        case 2:
+        case 3:
+        case 4:
+            gUnknown_020387E8 = 5;
+            break;
+        case 5:
+            TVShowDone();
+            break;
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
+        case 30:
+        case 31:
+        case 32:
+        case 33:
+        case 34:
+        case 35:
+        case 36:
+        case 37:
+        case 38:
+        case 39:
+        case 40:
+        case 41:
+        case 42:
+        case 43:
+        case 44:
+        case 45:
+        case 46:
+        case 47:
+        case 48:
+        case 49:
+            break;
+        case 50:
+            ConvertEasyChatWordsToString(gStringVar4, tvShow->recentHappenings.var04, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            gUnknown_020387E8 = 1;
+            return;
+    }
+    ShowFieldMessage(gTVRecentHappeningsTextGroup[switchval]);
+}
 
 void DoTVShowPokemonFanClubOpinions(void) {
     TVShow *tvShow;
