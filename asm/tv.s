@@ -2720,24 +2720,6 @@ _080C07C0: .4byte 0x00002abd
 
 .section .dotvshow
 
-	thumb_func_start TVShowConvertInternationalString
-TVShowConvertInternationalString: @ 80C08FC
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r4, r2, 24
-	lsrs r4, 24
-	bl StringCopy
-	cmp r4, 0x1
-	bhi _080C0914
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl ConvertInternationalString
-_080C0914:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end TVShowConvertInternationalString
-
 	thumb_func_start DoTVShowBravoTrainerPokemonProfile
 DoTVShowBravoTrainerPokemonProfile: @ 80C091C
 	push {r4,r5,lr}

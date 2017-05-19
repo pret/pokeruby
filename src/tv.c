@@ -1683,6 +1683,13 @@ void DoTVShow(void) {
     }
 }
 
+void TVShowConvertInternationalString(u8 *dest, u8 *src, u8 language) {
+    StringCopy(dest, src);
+    if (language < LANGUAGE_ENGLISH) {
+        ConvertInternationalString(dest, LANGUAGE_JAPANESE);
+    }
+}
+
 asm(".section .text_c");
 
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
