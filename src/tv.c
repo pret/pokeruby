@@ -461,6 +461,28 @@ void sub_80BF088(u8 arg0, s32 price);
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
 
+u8 sub_80BF0B8(int value)
+{
+    if (value / 10 == 0)
+        return 1;
+    else if (value / 100 == 0)
+        return 2;
+    else if (value / 1000 == 0)
+        return 3;
+    else if (value / 10000 == 0)
+        return 4;
+    else if (value / 100000 == 0)
+        return 5;
+    else if (value / 1000000 == 0)
+        return 6;
+    else if (value / 10000000 == 0)
+        return 7;
+    else if (value / 100000000 == 0)
+        return 8;
+    else
+        return 1;
+}
+
 void sub_80BF154(u8 arg0, struct TVShowSmartShopper *arg1)
 {
     u8 i;
