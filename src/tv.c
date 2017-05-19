@@ -184,7 +184,7 @@ void sub_80BE5FC(void)
     species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tvShow->fanclubLetter.species = species;
     sub_80BE160(tvShow);
-    tvShow->fanclubLetter.var18 = GAME_LANGUAGE;
+    tvShow->fanclubLetter.language = GAME_LANGUAGE;
 }
 
 void sub_80BE65C(void)
@@ -195,11 +195,11 @@ void sub_80BE65C(void)
 
     tvShow->recentHappenings.var00 = TVSHOW_RECENT_HAPPENINGS;
     tvShow->recentHappenings.var01 = 1;
-    StringCopy(&tvShow->recentHappenings.var10[0], &gSaveBlock2.playerName[0]);
+    StringCopy(tvShow->recentHappenings.playerName, gSaveBlock2.playerName);
     tvShow->recentHappenings.var02 = 0;
 
     sub_80BE160(tvShow);
-    tvShow->recentHappenings.var18 = GAME_LANGUAGE;
+    tvShow->recentHappenings.language = GAME_LANGUAGE;
 }
 
 void sub_80BE6A0(void)
@@ -294,7 +294,7 @@ void sub_80BE778(void)
         tvShow->massOutbreak.var16 = 0x01;
         sub_80BE160(tvShow);
 
-        tvShow->massOutbreak.var18 = GAME_LANGUAGE;
+        tvShow->massOutbreak.language = GAME_LANGUAGE;
     }
 }
 
@@ -1044,17 +1044,17 @@ bool8 sub_80BF77C(u16 value)
     return TRUE;
 }
 
-void sub_80BF79C(struct TVShowRecentHappenings *arg0)
+void sub_80BF79C(TVShow *arg0)
 {
     u8 i = Random() % 6;
     while (1) {
         if (i == 6)
             i = 0;
-        if (arg0->var04[i] != 0xFFFF)
+        if (arg0->recentHappenings.var04[i] != 0xFFFF)
             break;
         i ++;
     }
-    sub_80EB3FC(gStringVar3, arg0->var04[i]);
+    sub_80EB3FC(gStringVar3, arg0->recentHappenings.var04[i]);
 }
 
 u8 sub_80BF7E8(struct TVShowNameRaterShow *arg0)
@@ -1626,6 +1626,101 @@ void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
+void DoTVShowPokemonFanClubLetter(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    u16 rval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->fanclubLetter.playerName, tvShow->fanclubLetter.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->fanclubLetter.species]);
+            gUnknown_020387E8 = 50;
+            break;
+        case 1:
+            rval = (Random() % 4) + 1;
+            if (rval == 1) {
+                gUnknown_020387E8 = 2;
+            } else {
+                gUnknown_020387E8 = rval + 2;
+            }
+            break;
+        case 2:
+            gUnknown_020387E8 = 51;
+            break;
+        case 3:
+            gUnknown_020387E8 += (Random() % 3) + 1;
+            break;
+        case 4:
+        case 5:
+        case 6:
+            sub_80BF79C(tvShow);
+            gUnknown_020387E8 = 7;
+            break;
+        case 7:
+            rval = (Random() % 0x1f) + 0x46;
+            sub_80BF088(2, rval);
+            TVShowDone();
+            break;
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
+        case 30:
+        case 31:
+        case 32:
+        case 33:
+        case 34:
+        case 35:
+        case 36:
+        case 37:
+        case 38:
+        case 39:
+        case 40:
+        case 41:
+        case 42:
+        case 43:
+        case 44:
+        case 45:
+        case 46:
+        case 47:
+        case 48:
+        case 49:
+            break;
+        case 50:
+            ConvertEasyChatWordsToString(gStringVar4, tvShow->fanclubLetter.pad04, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            gUnknown_020387E8 = 1;
+            return;
+        case 51:
+            ConvertEasyChatWordsToString(gStringVar4, tvShow->fanclubLetter.pad04, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            gUnknown_020387E8 = 3;
+            return;
+    }
+    ShowFieldMessage(gTVFanClubTextGroup[switchval]);
+}
+
 void DoTVShowRecentHappenings(void) {
     TVShow *tvShow;
     u8 switchval;
@@ -1634,8 +1729,8 @@ void DoTVShowRecentHappenings(void) {
     switchval = gUnknown_020387E8;
     switch (switchval) {
         case 0:
-            TVShowConvertInternationalString(gStringVar1, tvShow->recentHappenings.var10, tvShow->recentHappenings.var18);
-            sub_80BF79C(&tvShow->recentHappenings);
+            TVShowConvertInternationalString(gStringVar1, tvShow->recentHappenings.playerName, tvShow->recentHappenings.language);
+            sub_80BF79C(tvShow);
             gUnknown_020387E8 = 50;
             break;
         case 1:

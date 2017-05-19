@@ -205,7 +205,7 @@ struct TVShowFanClubLetter {
     /*0x02*/ u16 species;
     /*0x04*/ u16 pad04[6];
     /*0x10*/ u8 playerName[8];
-    /*0x18*/ u8 var18;
+    /*0x18*/ u8 language;
 };
 
 struct TVShowRecentHappenings {
@@ -213,8 +213,8 @@ struct TVShowRecentHappenings {
     /*0x01*/ u8 var01;
     /*0x02*/ u16 var02;
 	/*0x04*/ u16 var04[6];
-    /*0x10*/ u8 var10[8];
-    /*0x18*/ u8 var18;
+    /*0x10*/ u8 playerName[8];
+    /*0x18*/ u8 language;
     u8 pad19[10];
 };
 
@@ -261,7 +261,7 @@ struct TVShowMassOutbreak {
     /*0x14*/ u8 level;
     /*0x15*/ u8 var15;
     /*0x16*/ u16 var16;
-    /*0x18*/ u8 var18;
+    /*0x18*/ u8 language;
     u8 pad19[11];
 };
 
