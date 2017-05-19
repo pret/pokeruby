@@ -63,3 +63,5 @@
 #define SPECIAL_FLAG_1 0x4001
 
 #endif // GUARD_FLAGS_H
+
+bool8 FlagGet(u16 flag);

@@ -459,7 +459,33 @@ void sub_80BEA88(void)
 asm(".section .text_b");
 
 void sub_80BF6D8(void);
+void sub_80BEC10(u8);
+void sub_80BEC40(void);
 void sub_80BF588(TVShow tvShows[]);
+
+void sub_80BEE84(u16 var0)
+{
+    u8 i;
+    for (i=0; i<16; i++)
+    {
+        if (gSaveBlock1.unknown_2ABC[i].val0)
+        {
+            if (gSaveBlock1.unknown_2ABC[i].val2 < var0)
+            {
+                sub_80BEC10(i);
+            }
+            else
+            {
+                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(SYS_GAME_CLEAR) == 1)
+                {
+                    gSaveBlock1.unknown_2ABC[i].val1 = 1;
+                }
+                gSaveBlock1.unknown_2ABC[i].val2 -= var0;
+            }
+        }
+    }
+    sub_80BEC40();
+}
 
 void sub_80BEF10(u8 strvaridx, u8 rank)
 {

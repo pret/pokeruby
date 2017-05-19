@@ -393,7 +393,9 @@ struct SaveTVStruct {
 };
 
 struct UnknownSaveStruct2ABC {
-	u8 pad00[4];
+	u8 val0;
+	u8 val1;
+	u16 val2;
 };
 
 struct SaveBlock1 /* 0x02025734 */
