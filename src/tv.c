@@ -51,6 +51,7 @@ extern struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 gSpeciesNames[][11];
 extern u8 gMoveNames[][13];
+extern u8 *gTVFanClubOpinionsTextGroup[];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern u8 *gTVGabbyAndTyTextGroup[];
 extern u8 *gTVFishingGuruAdviceTextGroup[];
@@ -208,13 +209,13 @@ void sub_80BE6A0(void)
     tvShow->fanclubOpinions.var04B = gSpecialVar_0x8007;
 
 
-    StringCopy(tvShow->fanclubOpinions.var05, gSaveBlock2.playerName);
+    StringCopy(tvShow->fanclubOpinions.playerName, gSaveBlock2.playerName);
 
     GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, tvShow->fanclubOpinions.var10);
 
     tvShow->fanclubOpinions.var02 = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     sub_80BE160(tvShow);
-    tvShow->fanclubOpinions.var0D = GAME_LANGUAGE;
+    tvShow->fanclubOpinions.language = GAME_LANGUAGE;
     tvShow->fanclubOpinions.var0E = sub_80BDEAC(tvShow->fanclubOpinions.var10);
     StripExtCtrlCodes(tvShow->fanclubOpinions.var10);
 }
@@ -839,10 +840,10 @@ void sub_80BF2C4(void)
         case TVSHOW_NAME_RATER_SHOW:
             sub_80BF478();
             break;
-        case TVSHOW_UNK_SHOWTYPE_06:
+        case TVSHOW_FISHING_ADVICE:
             sub_80BF484();
             break;
-        case TVSHOW_UNK_SHOWTYPE_07:
+        case TVSHOW_WORLD_OF_MASTERS:
             sub_80BF4BC();
             break;
     }
@@ -895,7 +896,7 @@ void sub_80BF478(void)
 void sub_80BF484(void)
 {
     TVShow *show;
-    sub_80BF25C(TVSHOW_UNK_SHOWTYPE_06);
+    sub_80BF25C(TVSHOW_FISHING_ADVICE);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
         sub_80EB6FC(show->recentHappenings.var04, 2); // wrong struct ident, fix later
@@ -905,7 +906,7 @@ void sub_80BF484(void)
 void sub_80BF4BC(void)
 {
     TVShow *show;
-    sub_80BF25C(TVSHOW_UNK_SHOWTYPE_07);
+    sub_80BF25C(TVSHOW_WORLD_OF_MASTERS);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
         sub_80EB6FC(show->fanclubOpinions.var18, 1); // wrong struct ident, fix later
@@ -1447,7 +1448,7 @@ __attribute__((naked))
 void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
 {
     asm(".syntax unified\n\
-    	push {r4-r7,lr}\n\
+	push {r4-r7,lr}\n\
 	mov r7, r10\n\
 	mov r6, r9\n\
 	mov r5, r8\n\
@@ -1615,6 +1616,40 @@ asm(".section .text_c");
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
+
+void DoTVShowPokemonFanClubOpinions(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->fanclubOpinions.playerName, tvShow->fanclubOpinions.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->fanclubOpinions.var02]);
+            TVShowConvertInternationalString(gStringVar3, tvShow->fanclubOpinions.var10, tvShow->fanclubOpinions.var0E);
+            gUnknown_020387E8 = tvShow->fanclubOpinions.var04B + 1;
+            break;
+        case 1:
+        case 2:
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, tvShow->fanclubOpinions.playerName, tvShow->fanclubOpinions.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->fanclubOpinions.var02]);
+            sub_80EB3FC(gStringVar3, tvShow->fanclubOpinions.var1C[0]);
+            gUnknown_020387E8 = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, tvShow->fanclubOpinions.playerName, tvShow->fanclubOpinions.language);
+            sub_80EB3FC(gStringVar3, tvShow->fanclubOpinions.var1C[1]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVFanClubOpinionsTextGroup[switchval]);
+}
+
+void nullsub_22(void) {
+
+}
 
 void DoTVShowPokemonNewsMassOutbreak(void)
 {

@@ -224,8 +224,8 @@ struct TVShowFanclubOpinions {
     /*0x02*/ u16 var02;
     /*0x04*/ u8 var04A:4;
     u8 var04B:4;
-    /*0x05*/ u8 var05[8];
-    /*0x0D*/ u8 var0D;
+    /*0x05*/ u8 playerName[8];
+    /*0x0D*/ u8 language;
     /*0x0E*/ u8 var0E;
     /*0x0F*/ u8 var0F;
     /*0x10*/ u8 var10[8];
