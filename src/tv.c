@@ -439,37 +439,56 @@ void sub_80BEA88(void)
     }
 }
 
-// void sub_80BEB20(void)
-// {
-    // struct UnknownSaveStruct2ABC *unk_2abc;
-    // u16 rval16;
-    // u16 val;
-    // unk_2abc = &gSaveBlock1.unknown_2ABC;
-    // TVShow *tvShow;
-    // if (FlagGet(SYS_GAME_CLEAR) != 0)
-    // {
-        // gUnknown_03005D38.var0 = sub_80BEBC8(unk_2abc);
-        // if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
-        // {
-            // rval16 = Random();
-            // val = (rval16 % 3) + 1;
-            // if (sub_80BEE48(val) != 1)
-            // {
-                // tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-                // unk_2abc[gUnknown_03005D38.var0][0] = val;
-                // to do
-            // }
-        // }
-    // }
-// }
-
-asm(".section .text_b");
-
-void sub_80BF6D8(void);
+int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0);
 void sub_80BEC10(u8);
 void sub_80BF588(TVShow tvShows[]);
+void sub_80BF6D8(void);
+bool8 sub_80BF77C(u16);
+bool8 sub_80BEE48(u8);
 
 bool8 IsPriceDiscounted(u8);
+
+void sub_80BEB20(void) {
+    u16 rval;
+    struct SaveBlock1 *save;
+    struct UnknownSaveStruct2ABC *unk2abc;
+    if (FlagGet(SYS_GAME_CLEAR) != 0) {
+        unk2abc = gSaveBlock1.unknown_2ABC;
+        gUnknown_03005D38.var0 = sub_80BEBC8(unk2abc);
+        if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1) {
+            rval = (Random() % 3) + 1;
+            if (sub_80BEE48(rval) != 1) {
+                save = &gSaveBlock1;
+                save->unknown_2ABC[gUnknown_03005D38.var0].val0 = rval;
+                save->unknown_2ABC[gUnknown_03005D38.var0].val2 = 4;
+                save->unknown_2ABC[gUnknown_03005D38.var0].val1 = 1;
+            }
+        }
+    }
+}
+
+int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0) {
+    s8 i;
+    for (i=0; i<16; i++) {
+        if (arg0[i].val0 == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void sub_80BEBF4(void) {
+    u8 i;
+    for (i=0; i<16; i++) {
+        sub_80BEC10(i);
+    }
+}
+
+void sub_80BEC10(u8 arg0) {
+    gSaveBlock1.unknown_2ABC[arg0].val0 = 0;
+    gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
+    gSaveBlock1.unknown_2ABC[arg0].val2 = 0;
+}
 
 void sub_80BEC40(void) {
     u8 i, j;

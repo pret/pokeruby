@@ -180,8 +180,6 @@ SECTIONS {
         asm/tv.o(.text);
         src/tv.o(.text_a);
         asm/tv.o(.text_80BE8EC);
-        src/tv.o(.text_b);
-        asm/tv.o(.text_80BF544);
         src/tv.o(.text_c);
         asm/tv.o(.text_80C1C5C);
         src/tv.o(.text_d);
