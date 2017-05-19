@@ -6,25 +6,6 @@ extern struct Berry *GetBerryInfo(u8 berry);
 
 extern u8 gOtherText_Berry2[];
 extern u8 gUnknown_02038560;
-
-struct Item
-{
-    u8 name[14];
-    u16 itemId;
-    u16 price;
-    u8 holdEffect;
-    u8 holdEffectParam;
-    u8 *description;
-    u8 importance;
-    u8 unk19;
-    u8 pocket;
-    u8 type;
-    ItemUseFunc fieldUseFunc;
-    u8 battleUsage;
-    ItemUseFunc battleUseFunc;
-    u8 secondaryId;
-};
-
 extern struct Item gItems[];
 
 struct BagPocket
