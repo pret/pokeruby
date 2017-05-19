@@ -467,11 +467,37 @@ asm(".section .text_b");
 
 void sub_80BF6D8(void);
 void sub_80BEC10(u8);
-void sub_80BEC40(void);
 void sub_80BF588(TVShow tvShows[]);
-u8 sub_80BECA0(void);
 
 bool8 IsPriceDiscounted(u8);
+
+void sub_80BEC40(void) {
+    u8 i, j;
+    for (i = 0; i < 15; i++) {
+        if (gSaveBlock1.unknown_2ABC[i].val0 == 0) {
+            for (j = i + 1; j < 16; j++) {
+                if (gSaveBlock1.unknown_2ABC[j].val0 != 0) {
+                    gSaveBlock1.unknown_2ABC[i] = gSaveBlock1.unknown_2ABC[j];
+                    sub_80BEC10(j);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+u8 sub_80BECA0(void)
+{
+    u8 i;
+    for (i=0; i<16; i++)
+    {
+        if (gSaveBlock1.unknown_2ABC[i].val0 != 0 && gSaveBlock1.unknown_2ABC[i].val1 == 1 && gSaveBlock1.unknown_2ABC[i].val2 < 3)
+        {
+            return i;
+        }
+    }
+    return 0xFF;
+}
 
 void sub_80BECE8(void)
 {
