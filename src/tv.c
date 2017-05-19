@@ -1637,6 +1637,59 @@ void DoTVShowPokemonTodayFailedCapture(void);
 void DoTVShowPokemonAngler(void);
 void DoTVShowTheWorldOfMasters(void);
 
+bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
+
+void sub_80C06BC(int *arg0, int *arg1) {
+    struct UnknownSaveStruct2ABC *str0;
+    struct UnknownSaveStruct2ABC *str1;
+    str0 = (void *)arg0[0];
+    str1 = (void *)arg1[0];
+    str1 += gUnknown_03000722;
+    sub_80C06E8(str0, str1, gUnknown_03005D38.var0);
+}
+
+bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2) {
+    u8 i;
+    if (arg1->val0 == 0) {
+        return FALSE;
+    }
+    for (i=0; i<16; i++) {
+        if (arg0[i].val0 == arg1->val0) {
+            return FALSE;
+        }
+    }
+    arg0[arg2].val0 = arg1->val0;
+    arg0[arg2].val1 = 1;
+    arg0[arg2].val2 = arg1->val2;
+    return TRUE;
+}
+
+s8 sub_80C0730(struct UnknownSaveStruct2ABC *arg0, u8 arg1) {
+    if (arg0[arg1].val0 == 0) {
+        return -1;
+    }
+    return arg1;
+}
+
+void sub_80C0750(void) {
+    u8 i;
+    for (i=0; i<16; i++) {
+        if (gSaveBlock1.unknown_2ABC[i].val0 > 3) {
+            sub_80BEC10(i);
+        }
+    }
+    sub_80BEC40();
+}
+
+void sub_80C0788(void) {
+    u8 i;
+    if (FlagGet(SYS_GAME_CLEAR) != 1) {
+        for (i=0; i<16; i++) {
+            gSaveBlock1.unknown_2ABC[i].val1 = 0;
+        }
+    }
+}
+
 void DoTVShow(void) {
     if (gSaveBlock1.tvShows.shows[gSpecialVar_0x8004].common.var01 != 0) {
         switch (gSaveBlock1.tvShows.shows[gSpecialVar_0x8004].common.var00) {
