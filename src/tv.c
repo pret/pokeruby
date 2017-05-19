@@ -16,6 +16,7 @@
 #include "link.h"
 #include "easy_chat.h"
 #include "item.h"
+#include "contest_painting.h"
 
 struct UnkTvStruct
 {
@@ -55,6 +56,7 @@ extern void sub_80BEBF4(void);
 
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
+extern const u8 *gUnknown_083CE048[5];
 
 u32 GetPlayerTrainerId(void);
 
@@ -459,7 +461,27 @@ asm(".section .text_b");
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
 
-void CopyContestCategoryToStringVar(u8 strvaridx, u8 category);
+void CopyContestCategoryToStringVar(u8 strvaridx, u8 category)
+{
+    switch (category)
+    {
+        case CONTEST_COOL:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL]);
+            break;
+        case CONTEST_BEAUTY:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY]);
+            break;
+        case CONTEST_CUTE:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE]);
+            break;
+        case CONTEST_SMART:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART]);
+            break;
+        case CONTEST_TOUGH:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH]);
+            break;
+    }
+}
 
 void SetContestCategoryStringVarForInterview(void)
 {
