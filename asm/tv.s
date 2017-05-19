@@ -2038,42 +2038,6 @@ _080BEE40: .4byte gSaveBlock1
 _080BEE44: .4byte 0x0000160d
 	thumb_func_end IsPriceDiscounted
 
-	thumb_func_start sub_80BEE48
-sub_80BEE48: @ 80BEE48
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	bne _080BEE56
-_080BEE52:
-	movs r0, 0x1
-	b _080BEE74
-_080BEE56:
-	movs r1, 0
-	ldr r4, _080BEE7C @ =gSaveBlock1
-	ldr r3, _080BEE80 @ =0x00002abc
-_080BEE5C:
-	lsls r0, r1, 2
-	adds r0, r4
-	adds r0, r3
-	ldrb r0, [r0]
-	cmp r0, r2
-	beq _080BEE52
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xF
-	bls _080BEE5C
-	movs r0, 0
-_080BEE74:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BEE7C: .4byte gSaveBlock1
-_080BEE80: .4byte 0x00002abc
-	thumb_func_end sub_80BEE48
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68

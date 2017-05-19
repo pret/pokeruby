@@ -463,6 +463,26 @@ void sub_80BEC10(u8);
 void sub_80BEC40(void);
 void sub_80BF588(TVShow tvShows[]);
 
+bool8 sub_80BEE48(u8 arg0)
+{
+    u8 i;
+    if (arg0 == 0)
+    {
+        return TRUE;
+    }
+    else
+    {
+        for (i=0; i<16; i++)
+        {
+            if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
 void sub_80BEE84(u16 var0)
 {
     u8 i;
