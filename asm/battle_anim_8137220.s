@@ -3992,7 +3992,7 @@ _0813930C:
 	bl get_battle_strings_
 	ldr r4, _08139354 @ =gUnknown_03004210
 	ldr r1, _08139374 @ =gUnknown_020238CC
-	movs r2, 0xDC
+	movs r2, 0xDE
 	lsls r2, 1
 	movs r0, 0x23
 	str r0, [sp]

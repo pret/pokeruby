@@ -182,7 +182,7 @@ _080908D6:
 	movs r2, 0x3
 	bl sub_80911C8
 	ldr r0, _0809094C @ =gDexText_UnknownPoke
-	movs r1, 0xB
+	movs r1, 0x10
 	movs r2, 0x5
 	bl MenuPrint
 	ldr r0, _08090950 @ =gDexText_UnknownHeight
@@ -199,7 +199,7 @@ _080908D6:
 	ldr r6, _08090958 @ =gPokedexEntries
 	adds r5, r4, r6
 	adds r0, r5, 0
-	movs r1, 0xB
+	movs r1, 0x10
 	movs r2, 0x5
 	bl sub_8091304
 	ldrh r0, [r5, 0xC]
@@ -1485,177 +1485,172 @@ _080912E6:
 
 	thumb_func_start sub_8091304
 sub_8091304: @ 8091304
-	push {r4-r7,lr}
+	push {r4-r6,lr}
 	sub sp, 0x20
 	adds r3, r0, 0
 	lsls r1, 24
-	lsrs r1, 24
-	mov r12, r1
+	lsrs r5, r1, 24
 	lsls r2, 24
-	lsrs r7, r2, 24
-	movs r4, 0
+	lsrs r4, r2, 24
+	movs r2, 0
 	ldrb r0, [r3]
-	ldr r6, _08091340 @ =gDexText_UnknownPoke
+	ldr r6, _08091354 @ =gDexText_UnknownPoke
 	cmp r0, 0xFF
-	beq _0809133A
-_0809131E:
+	beq _08091338
+_0809131C:
 	mov r0, sp
-	adds r1, r0, r4
-	adds r0, r3, r4
+	adds r1, r0, r2
+	adds r0, r3, r2
 	ldrb r0, [r0]
 	strb r0, [r1]
-	adds r0, r4, 0x1
+	adds r0, r2, 0x1
 	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r3, r4
+	lsrs r2, r0, 24
+	adds r0, r3, r2
 	ldrb r0, [r0]
 	cmp r0, 0xFF
-	beq _0809133A
-	cmp r4, 0xA
-	bls _0809131E
-_0809133A:
-	movs r3, 0
-	ldrb r0, [r6]
-	b _0809134E
-	.align 2, 0
-_08091340: .4byte gDexText_UnknownPoke
-_08091344:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	adds r0, r3, r6
-	ldrb r0, [r0]
-_0809134E:
-	cmp r0, 0xAC
-	beq _08091344
-	cmp r0, 0
-	beq _08091344
-	subs r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	adds r0, r3, r6
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	beq _08091388
-	adds r5, r6, 0
-_08091366:
-	adds r1, r4, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
+	beq _08091338
+	cmp r2, 0xA
+	bls _0809131C
+_08091338:
 	mov r0, sp
-	adds r2, r0, r1
-	adds r1, r3, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	adds r1, r5
-	ldrb r0, [r1]
-	strb r0, [r2]
-	adds r0, r3, r5
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _08091366
-_08091388:
-	mov r0, sp
-	adds r1, r0, r4
+	adds r1, r0, r2
 	movs r0, 0xFF
 	strb r0, [r1]
 	mov r0, sp
-	mov r1, r12
-	adds r2, r7, 0
+	adds r1, r5, 0
+	adds r2, r4, 0
 	adds r3, r6, 0
 	bl sub_8072B80
 	add sp, 0x20
-	pop {r4-r7}
+	pop {r4-r6}
 	pop {r0}
 	bx r0
+	.align 2, 0
+_08091354: .4byte gDexText_UnknownPoke
 	thumb_func_end sub_8091304
 
 	thumb_func_start unref_sub_80913A4
 unref_sub_80913A4: @ 80913A4
 	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
 	sub sp, 0x8
 	lsls r0, 16
-	lsrs r4, r0, 16
+	lsrs r5, r0, 16
 	lsls r1, 24
-	lsrs r7, r1, 24
+	lsrs r1, 24
+	mov r9, r1
 	lsls r2, 24
-	lsrs r6, r2, 24
-	movs r5, 0
+	lsrs r2, 24
+	mov r8, r2
+	movs r7, 0
+	mov r1, sp
+	movs r0, 0xFC
+	strb r0, [r1]
+	adds r1, 0x1
+	movs r0, 0x13
+	strb r0, [r1]
+	movs r6, 0x3
 	movs r1, 0xFA
 	lsls r1, 2
-	adds r0, r4, 0
+	adds r0, r5, 0
 	bl __udivsi3
 	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	bne _080913CE
-	mov r0, sp
-	strb r5, [r0]
-	b _080913D6
-_080913CE:
+	lsrs r2, r0, 24
+	cmp r2, 0
+	bne _080913E4
+	movs r7, 0x6
+	b _080913F0
+_080913E4:
+	movs r6, 0x4
 	mov r1, sp
+	adds r1, 0x3
+	adds r0, r2, 0
 	adds r0, 0xA1
 	strb r0, [r1]
-	movs r5, 0x1
-_080913D6:
+_080913F0:
 	movs r1, 0xFA
 	lsls r1, 2
-	adds r0, r4, 0
+	adds r0, r5, 0
 	bl __umodsi3
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
 	bl __udivsi3
 	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	bne _080913FC
-	cmp r5, 0
-	bne _080913FC
-	mov r0, sp
-	strb r5, [r0, 0x1]
-	b _08091402
-_080913FC:
-	mov r1, sp
+	lsrs r2, r0, 24
+	cmp r2, 0
+	bne _08091414
+	cmp r7, 0
+	beq _08091414
+	adds r7, 0x6
+	b _08091424
+_08091414:
+	adds r1, r6, 0
+	adds r0, r1, 0x1
+	lsls r0, 24
+	lsrs r6, r0, 24
+	add r1, sp
+	adds r0, r2, 0
 	adds r0, 0xA1
-	strb r0, [r1, 0x1]
-_08091402:
-	mov r5, sp
+	strb r0, [r1]
+_08091424:
+	adds r1, r6, 0
+	adds r0, r1, 0x1
+	lsls r0, 24
+	lsrs r6, r0, 24
+	adds r4, r6, 0
+	mov r0, sp
+	adds r6, r0, r1
 	movs r1, 0xFA
 	lsls r1, 2
-	adds r0, r4, 0
+	adds r0, r5, 0
 	bl __umodsi3
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
 	bl __umodsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
+	adds r5, r0, 0
+	lsls r5, 16
+	lsrs r5, 16
+	adds r0, r5, 0
 	movs r1, 0xA
 	bl __udivsi3
 	adds r0, 0xA1
-	strb r0, [r5, 0x2]
-	mov r1, sp
-	movs r0, 0xAD
-	strb r0, [r1, 0x3]
-	mov r5, sp
-	adds r0, r4, 0
+	strb r0, [r6]
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r6, r0, 24
+	adds r2, r6, 0
+	mov r0, sp
+	adds r1, r0, r4
+	movs r0, 0xB8
+	strb r0, [r1]
+	adds r4, r2, 0x1
+	lsls r4, 24
+	lsrs r4, 24
+	mov r0, sp
+	adds r6, r0, r2
+	adds r0, r5, 0
 	movs r1, 0xA
 	bl __umodsi3
 	adds r0, 0xA1
-	strb r0, [r5, 0x4]
-	mov r1, sp
-	movs r0, 0xFF
-	strb r0, [r1, 0x5]
+	strb r0, [r6]
 	mov r0, sp
-	adds r1, r7, 0
-	adds r2, r6, 0
+	adds r1, r0, r4
+	movs r0, 0xFF
+	strb r0, [r1]
+	mov r0, sp
+	strb r7, [r0, 0x2]
+	mov r1, r9
+	mov r2, r8
 	bl MenuPrint
 	add sp, 0x8
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1663,360 +1658,28 @@ _08091402:
 
 	thumb_func_start sub_8091458
 sub_8091458: @ 8091458
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x10
+	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 24
 	lsrs r1, 24
-	mov r9, r1
 	lsls r2, 24
 	lsrs r2, 24
-	mov r8, r2
-	ldr r1, _080914D4 @ =0x00002710
-	muls r0, r1
-	movs r1, 0xFE
-	bl __divsi3
-	adds r7, r0, 0
-	movs r1, 0xA
-	bl __umodsi3
-	cmp r0, 0x4
-	bls _0809148A
-	adds r7, 0xA
-_0809148A:
-	adds r0, r7, 0
-	movs r1, 0x78
-	bl __udivsi3
-	adds r6, r0, 0
-	lsls r0, r6, 4
-	subs r0, r6
-	lsls r0, 3
-	subs r0, r7, r0
-	movs r1, 0xA
-	bl __udivsi3
-	adds r7, r0, 0
-	mov r1, sp
-	movs r0, 0xFC
-	strb r0, [r1]
-	adds r1, 0x1
-	movs r0, 0x13
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __udivsi3
-	adds r2, r0, 0
-	cmp r2, 0
-	bne _080914D8
-	mov r1, sp
-	adds r1, 0x2
-	movs r0, 0x12
-	strb r0, [r1]
-	movs r5, 0x4
-	adds r1, 0x1
-	adds r0, r6, 0
-	adds r0, 0xA1
-	strb r0, [r1]
-	b _080914F8
-	.align 2, 0
-_080914D4: .4byte 0x00002710
-_080914D8:
-	mov r1, sp
-	adds r1, 0x2
-	movs r0, 0xC
-	strb r0, [r1]
-	adds r1, 0x1
-	adds r0, r2, 0
-	adds r0, 0xA1
-	strb r0, [r1]
-	movs r5, 0x5
-	add r4, sp, 0x4
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __umodsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-_080914F8:
-	adds r1, r5, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r2, r5, 0
-	add r1, sp
-	movs r0, 0xB4
-	strb r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r6, r5, 0
-	mov r0, sp
-	adds r4, r0, r2
-	adds r0, r7, 0
-	movs r1, 0xA
-	bl __udivsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	mov r1, sp
-	adds r4, r1, r6
-	adds r0, r7, 0
-	movs r1, 0xA
-	bl __umodsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, sp
-	adds r2, r1, r5
-	movs r1, 0xB2
-	strb r1, [r2]
-	mov r2, sp
-	adds r1, r2, r0
-	movs r0, 0xFF
-	strb r0, [r1]
-	mov r0, sp
-	mov r1, r9
-	mov r2, r8
-	bl MenuPrint
-	add sp, 0x10
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
+	bl unref_sub_80913A4
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8091458
 
 	thumb_func_start sub_8091564
 sub_8091564: @ 8091564
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x14
+	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 24
 	lsrs r1, 24
-	mov r10, r1
 	lsls r2, 24
 	lsrs r2, 24
-	str r2, [sp, 0x10]
-	ldr r7, _080915BC @ =0x000186a0
-	muls r0, r7
-	ldr r1, _080915C0 @ =0x000011b8
-	bl __divsi3
-	adds r6, r0, 0
-	movs r1, 0xA
-	bl __umodsi3
-	cmp r0, 0x4
-	bls _08091598
-	adds r6, 0xA
-_08091598:
-	movs r5, 0
-	mov r4, sp
-	adds r0, r6, 0
-	adds r1, r7, 0
-	bl __udivsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xA1
-	bne _080915C4
-	mov r0, sp
-	strb r5, [r0]
-	movs r7, 0x2
-	adds r0, 0x1
-	strb r5, [r0]
-	b _080915C8
-	.align 2, 0
-_080915BC: .4byte 0x000186a0
-_080915C0: .4byte 0x000011b8
-_080915C4:
-	movs r5, 0x1
-	movs r7, 0x1
-_080915C8:
-	ldr r1, _0809160C @ =0x000186a0
-	adds r0, r6, 0
-	bl __umodsi3
-	adds r6, r0, 0
-	mov r0, sp
-	adds r4, r0, r7
-	ldr r1, _08091610 @ =0x00002710
-	adds r0, r6, 0
-	bl __udivsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xA1
-	bne _08091614
-	cmp r5, 0
-	bne _08091614
-	adds r1, r7, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r2, r7, 0
-	mov r3, sp
-	adds r0, r3, r1
-	strb r5, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r3, r2
-	strb r5, [r0]
-	b _0809161C
-	.align 2, 0
-_0809160C: .4byte 0x000186a0
-_08091610: .4byte 0x00002710
-_08091614:
-	movs r5, 0x1
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-_0809161C:
-	ldr r1, _08091660 @ =0x00002710
-	adds r0, r6, 0
-	bl __umodsi3
-	adds r6, r0, 0
-	mov r0, sp
-	adds r4, r0, r7
-	movs r1, 0xFA
-	lsls r1, 2
-	adds r0, r6, 0
-	bl __udivsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xA1
-	bne _08091664
-	cmp r5, 0
-	bne _08091664
-	adds r1, r7, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r2, r7, 0
-	mov r3, sp
-	adds r0, r3, r1
-	strb r5, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r3, r2
-	strb r5, [r0]
-	b _0809166A
-	.align 2, 0
-_08091660: .4byte 0x00002710
-_08091664:
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-_0809166A:
-	movs r1, 0xFA
-	lsls r1, 2
-	adds r0, r6, 0
-	bl __umodsi3
-	adds r6, r0, 0
-	adds r1, r7, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r5, r7, 0
-	mov r0, sp
-	adds r4, r0, r1
-	adds r0, r6, 0
-	movs r1, 0x64
-	bl __udivsi3
-	adds r0, 0xA1
-	movs r1, 0
-	mov r9, r1
-	strb r0, [r4]
-	adds r0, r6, 0
-	movs r1, 0x64
-	bl __umodsi3
-	adds r6, r0, 0
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r1, r7, 0
-	mov r2, sp
-	adds r0, r2, r5
-	movs r3, 0xAD
-	mov r8, r3
-	mov r2, r8
-	strb r2, [r0]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r5, r7, 0
-	mov r3, sp
-	adds r4, r3, r1
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __udivsi3
-	adds r0, 0xA1
-	strb r0, [r4]
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r1, r7, 0
-	mov r2, sp
-	adds r0, r2, r5
-	mov r3, r9
-	strb r3, [r0]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r2, r7, 0
-	add r1, sp
-	movs r0, 0xE0
-	strb r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r3, r7, 0
-	mov r0, sp
-	adds r1, r0, r2
-	movs r0, 0xD6
-	strb r0, [r1]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r2, r7, 0
-	mov r0, sp
-	adds r1, r0, r3
-	movs r0, 0xE7
-	strb r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r3, sp
-	adds r1, r3, r2
-	mov r2, r8
-	strb r2, [r1]
-	adds r1, r3, r0
-	movs r0, 0xFF
-	strb r0, [r1]
-	mov r0, sp
-	mov r1, r10
-	ldr r2, [sp, 0x10]
-	bl MenuPrint
-	add sp, 0x14
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
+	bl unref_sub_80913A4
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8091564
@@ -2938,7 +2601,7 @@ sub_8091E20: @ 8091E20
 	str r1, [sp, 0x4]
 	movs r1, 0x9
 	movs r2, 0x78
-	movs r3, 0xD0
+	movs r3, 0xD8
 	bl sub_8072AB0
 	add sp, 0x8
 	pop {r0}
