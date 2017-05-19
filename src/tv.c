@@ -850,10 +850,10 @@ void sub_80BF2C4(void)
         case TVSHOW_NAME_RATER_SHOW:
             sub_80BF478();
             break;
-        case TVSHOW_FISHING_ADVICE:
+        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
             sub_80BF484();
             break;
-        case TVSHOW_WORLD_OF_MASTERS:
+        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
             sub_80BF4BC();
             break;
     }
@@ -906,7 +906,7 @@ void sub_80BF478(void)
 void sub_80BF484(void)
 {
     TVShow *show;
-    sub_80BF25C(TVSHOW_FISHING_ADVICE);
+    sub_80BF25C(TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
         sub_80EB6FC(show->recentHappenings.var04, 2); // wrong struct ident, fix later
@@ -916,7 +916,7 @@ void sub_80BF484(void)
 void sub_80BF4BC(void)
 {
     TVShow *show;
-    sub_80BF25C(TVSHOW_WORLD_OF_MASTERS);
+    sub_80BF25C(TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
         sub_80EB6FC(show->fanclubOpinions.var18, 1); // wrong struct ident, fix later
@@ -1620,6 +1620,68 @@ _080BFF58:\n\
 .syntax divided\n");
 }
 #endif
+
+asm(".section .dotvshow\n");
+
+void DoTVShowPokemonFanClubLetter(void);
+void DoTVShowRecentHappenings(void);
+void DoTVShowPokemonFanClubOpinions(void);
+void nullsub_22(void);
+void DoTVShowPokemonNewsMassOutbreak(void);
+void DoTVShowBravoTrainerPokemonProfile(void);
+void DoTVShowBravoTrainerBattleTowerProfile(void);
+void DoTVShowPokemonTodaySuccessfulCapture(void);
+void DoTVShowTodaysSmartShopper(void);
+void DoTVShowTheNameRaterShow(void);
+void DoTVShowPokemonTodayFailedCapture(void);
+void DoTVShowPokemonAngler(void);
+void DoTVShowTheWorldOfMasters(void);
+
+void DoTVShow(void) {
+    if (gSaveBlock1.tvShows.shows[gSpecialVar_0x8004].common.var01 != 0) {
+        switch (gSaveBlock1.tvShows.shows[gSpecialVar_0x8004].common.var00) {
+            case TVSHOW_FAN_CLUB_LETTER:
+                DoTVShowPokemonFanClubLetter();
+                break;
+            case TVSHOW_RECENT_HAPPENINGS:
+                DoTVShowRecentHappenings();
+                break;
+            case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+                DoTVShowPokemonFanClubOpinions();
+                break;
+            case TVSHOW_UNKN_SHOWTYPE_04:
+                nullsub_22();
+                break;
+            case TVSHOW_MASS_OUTBREAK:
+                DoTVShowPokemonNewsMassOutbreak();
+                break;
+            case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+                DoTVShowBravoTrainerPokemonProfile();
+                break;
+            case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+                DoTVShowBravoTrainerBattleTowerProfile();
+                break;
+            case TVSHOW_POKEMON_TODAY_CAUGHT:
+                DoTVShowPokemonTodaySuccessfulCapture();
+                break;
+            case TVSHOW_SMART_SHOPPER:
+                DoTVShowTodaysSmartShopper();
+                break;
+            case TVSHOW_NAME_RATER_SHOW:
+                DoTVShowTheNameRaterShow();
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                DoTVShowPokemonTodayFailedCapture();
+                break;
+            case TVSHOW_FISHING_ADVICE:
+                DoTVShowPokemonAngler();
+                break;
+            case TVSHOW_WORLD_OF_MASTERS:
+                DoTVShowTheWorldOfMasters();
+                break;
+        }
+    }
+}
 
 asm(".section .text_c");
 
