@@ -288,7 +288,7 @@ void sub_80BEA50(u16);
 void sub_80BEA5C(u16);
 bool8 GetPriceReduction(u8);
 void sub_80BEE84(u16);
-u8 sub_80BF0B8(int);
+size_t sub_80BF0B8(int);
 void sub_80BF478(void);
 u16 sub_80BF674(u16 species);
 s8 sub_80BF720(TVShow *);

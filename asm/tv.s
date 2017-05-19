@@ -2327,32 +2327,6 @@ _080BF080: .4byte gSpecialVar_0x8004
 _080BF084: .4byte gSaveBlock1 + 0x2738
 	thumb_func_end SetContestCategoryStringVarForInterview
 
-	thumb_func_start sub_80BF088
-sub_80BF088: @ 80BF088
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	bl sub_80BF0B8
-	adds r3, r0, 0
-	ldr r0, _080BF0B4 @ =gUnknown_083D1464
-	lsls r4, 2
-	adds r4, r0
-	ldr r0, [r4]
-	lsls r3, 24
-	lsrs r3, 24
-	adds r1, r5, 0
-	movs r2, 0
-	bl ConvertIntToDecimalStringN
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BF0B4: .4byte gUnknown_083D1464
-	thumb_func_end sub_80BF088
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68

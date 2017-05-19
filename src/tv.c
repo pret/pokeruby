@@ -456,12 +456,17 @@ void sub_80BEA88(void)
 
 asm(".section .text_b");
 
-void sub_80BF088(u8 arg0, s32 price);
-
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
 
-u8 sub_80BF0B8(int value)
+void sub_80BF088(u8 arg0, s32 price)
+{
+    size_t log10val;
+    log10val = sub_80BF0B8(price);
+    ConvertIntToDecimalStringN(gUnknown_083D1464[arg0], price, 0, log10val);
+}
+
+size_t sub_80BF0B8(int value)
 {
     if (value / 10 == 0)
         return 1;
