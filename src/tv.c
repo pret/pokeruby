@@ -50,7 +50,9 @@ extern u8 gUnknown_020387E8;
 extern struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 gSpeciesNames[][11];
+extern u8 gMoveNames[][13];
 extern u8 *gTVPokemonOutbreakTextGroup[];
+extern u8 *gTVGabbyAndTyTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 extern void sub_80BEBF4(void);
@@ -1608,6 +1610,8 @@ _080BFF58:\n\
 
 asm(".section .text_c");
 
+void TakeTVShowInSearchOfTrainersOffTheAir(void);
+
 void DoTVShowPokemonNewsMassOutbreak(void)
 {
     TVShow *tvShow;
@@ -1622,6 +1626,59 @@ void DoTVShowPokemonNewsMassOutbreak(void)
     StartMassOutbreak();
 
     ShowFieldMessage(gTVPokemonOutbreakTextGroup[gUnknown_020387E8]);
+}
+
+void DoTVShowInSearchOfTrainers(void) {
+    u8 switchval;
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            sub_80FBFB4(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
+            if (gSaveBlock1.gabbyAndTyData.val9 > 1) {
+                gUnknown_020387E8 = 1;
+            } else {
+                gUnknown_020387E8 = 2;
+            }
+            break;
+        case 1:
+            gUnknown_020387E8 = 2;
+            break;
+        case 2:
+            if (gSaveBlock1.gabbyAndTyData.valA_0 == 0) {
+                gUnknown_020387E8 = 4;
+            } else if (gSaveBlock1.gabbyAndTyData.valA_3 != 0) {
+                gUnknown_020387E8 = 5;
+            } else if (gSaveBlock1.gabbyAndTyData.valA_2 != 0) {
+                gUnknown_020387E8 = 6;
+            } else if (gSaveBlock1.gabbyAndTyData.valA_1 != 0) {
+                gUnknown_020387E8 = 7;
+            } else {
+                gUnknown_020387E8 = 3;
+            }
+            break;
+        case 3:
+            StringCopy(gStringVar1, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
+            StringCopy(gStringVar2, gMoveNames[gSaveBlock1.gabbyAndTyData.move1]);
+            StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
+            gUnknown_020387E8 = 8;
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            gUnknown_020387E8 = 8;
+            break;
+        case 8:
+            sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.move2);
+            StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
+            StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
+            gScriptResult = 1;
+            gUnknown_020387E8 = 0;;
+            TakeTVShowInSearchOfTrainersOffTheAir();
+            break;
+    }
+    ShowFieldMessage(gTVGabbyAndTyTextGroup[switchval]);
 }
 
 asm(".section .text_d");

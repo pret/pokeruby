@@ -398,6 +398,21 @@ struct UnknownSaveStruct2ABC {
 	u16 val2;
 };
 
+struct GabbyAndTyData {
+    u16 mon1;
+    u16 mon2;
+    u16 move1;
+    u16 move2;
+    u8 mapnum;
+    u8 val9;
+    u8 valA_0:1;
+    u8 valA_1:1;
+    u8 valA_2:1;
+    u8 valA_3:1;
+    u8 valA_4:4;
+    u8 valB;
+};
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -459,7 +474,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0C*/ u8 outbreakUnk4;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
-    /*0x2B10*/ u8 filler_2B0E[0xC];
+    /*0x2B18*/ struct GabbyAndTyData gabbyAndTyData;
     /*0x2B1C*/ u16 unk2B1C[6];
     /*0x2B28*/ u16 unk2B28[6];
     /*0x2B34*/ u16 unk2B34[6];
