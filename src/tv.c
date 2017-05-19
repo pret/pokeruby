@@ -459,6 +459,15 @@ asm(".section .text_b");
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
 
+void CopyContestCategoryToStringVar(u8 strvaridx, u8 category);
+
+void SetContestCategoryStringVarForInterview(void)
+{
+    TVShow *tvShow;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    CopyContestCategoryToStringVar(1, tvShow->contestShow.contestCategory);
+}
+
 void sub_80BF088(u8 arg0, s32 price)
 {
     size_t log10val;

@@ -2305,28 +2305,6 @@ _080BF058: .4byte gUnknown_083D1464
 _080BF05C: .4byte gUnknown_083CE048
 	thumb_func_end CopyContestCategoryToStringVar
 
-	thumb_func_start SetContestCategoryStringVarForInterview
-SetContestCategoryStringVarForInterview: @ 80BF060
-	push {lr}
-	ldr r0, _080BF080 @ =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _080BF084 @ =gSaveBlock1 + 0x2738
-	adds r0, r1
-	ldrb r1, [r0, 0x13]
-	lsls r1, 29
-	lsrs r1, 29
-	movs r0, 0x1
-	bl CopyContestCategoryToStringVar
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BF080: .4byte gSpecialVar_0x8004
-_080BF084: .4byte gSaveBlock1 + 0x2738
-	thumb_func_end SetContestCategoryStringVarForInterview
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68

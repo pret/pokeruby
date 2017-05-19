@@ -298,6 +298,14 @@ struct TVShowSmartShopper {
 	u16 itemAmounts[3];
 };
 
+struct TVShowContestWinner {
+	u8 var00;
+	u8 var01;
+	u8 pad02[17];
+	u8 contestCategory:3;
+	u8 var13_3:5;
+};
+
 typedef union TVShow {
     struct TVShowCommon common;
     struct TVShowFanClubLetter fanclubLetter;
@@ -308,6 +316,7 @@ typedef union TVShow {
 	struct TVShowUnknownTVShowType unknownTvShowType;
 	struct TVShowUnknownTVShowType2 unknownTvShowType2;
 	struct TVShowSmartShopper smartshopperShow;
+	struct TVShowContestWinner contestShow;
 } TVShow;
 
 struct MailStruct
