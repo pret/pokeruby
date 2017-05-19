@@ -55,6 +55,8 @@ extern void sub_80BEBF4(void);
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
 
+u32 GetPlayerTrainerId(void);
+
 void ClearTVShowData(void)
 {
     u8 showidx;
@@ -348,7 +350,7 @@ void sub_80BE97C(bool8 flag)
 }
 
 s8 sub_80BF74C(TVShow tvShow[]);
-u8 sub_80BF1B4(s8);
+bool8 sub_80BF1B4(u8);
 
 void sub_80BE9D4()
 {
@@ -455,6 +457,26 @@ asm(".section .text_b");
 
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
+
+bool8 sub_80BF1B4(u8 showIdx)
+{
+    TVShow *tvShows;
+    u8 i;
+    u32 trainerId;
+    tvShows = gSaveBlock1.tvShows.shows;
+    trainerId = GetPlayerTrainerId();
+    for (i=5; i<24; i++)
+    {
+        if (tvShows[i].common.var00 == showIdx)
+        {
+            if ((trainerId & 0xFF) == tvShows[i].common.trainerIdLo && ((trainerId >> 8) & 0xFF) == tvShows[i].common.trainerIdHi)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
 
 void sub_80BF20C(void)
 {
@@ -843,8 +865,6 @@ void sub_80BFAE0(void)
     GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar1);
     StringGetEnd10(gStringVar1);
 }
-
-u32 GetPlayerTrainerId(void);
 
 void sub_80BFB10(void)
 {

@@ -2488,54 +2488,6 @@ _080BF1A8:
 	bx r0
 	thumb_func_end sub_80BF154
 
-	thumb_func_start sub_80BF1B4
-sub_80BF1B4: @ 80BF1B4
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r7, _080BF1F4 @ =gSaveBlock1 + 0x2738
-	bl GetPlayerTrainerId
-	adds r5, r0, 0
-	movs r4, 0x5
-_080BF1C4:
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	adds r1, r0, r7
-	ldrb r0, [r1]
-	cmp r0, r6
-	bne _080BF1F8
-	movs r3, 0xFF
-	adds r0, r5, 0
-	ands r0, r3
-	adds r2, r1, 0
-	adds r2, 0x22
-	ldrb r2, [r2]
-	cmp r0, r2
-	bne _080BF1F8
-	lsrs r0, r5, 8
-	ands r0, r3
-	adds r1, 0x23
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080BF1F8
-	movs r0, 0x1
-	b _080BF204
-	.align 2, 0
-_080BF1F4: .4byte gSaveBlock1 + 0x2738
-_080BF1F8:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x17
-	bls _080BF1C4
-	movs r0, 0
-_080BF204:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF1B4
-
 .section .text_80BF544
 
 	thumb_func_start sub_80BFF68
