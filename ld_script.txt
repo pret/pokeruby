@@ -181,8 +181,6 @@ SECTIONS {
         src/tv.o(.text_a);
         asm/tv.o(.text_80BE8EC);
         src/tv.o(.text_c);
-        asm/tv.o(.text_80C1C5C);
-        src/tv.o(.text_d);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);

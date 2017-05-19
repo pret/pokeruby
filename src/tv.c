@@ -54,6 +54,7 @@ extern u8 gMoveNames[][13];
 extern u8 *gTVPokemonOutbreakTextGroup[];
 extern u8 *gTVGabbyAndTyTextGroup[];
 extern u8 *gTVFishingGuruAdviceTextGroup[];
+extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 extern void sub_80BEBF4(void);
@@ -428,16 +429,16 @@ void sub_80BEA88(void)
         if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(0x19) != 1)
         {
             tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-            tvShow->unknownTvShowType2.var00 = 0x19;
-            tvShow->unknownTvShowType2.var01 = rval;
-            tvShow->unknownTvShowType2.var02 = unk_2a98->var02;
-            tvShow->unknownTvShowType2.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->var06;
-            tvShow->unknownTvShowType2.var04 = unk_2a98->var04;
-            tvShow->unknownTvShowType2.var08 = unk_2a98->var08;
-            tvShow->unknownTvShowType2.var0a = unk_2a98->var0a;
-            StringCopy(tvShow->unknownTvShowType2.playerName, gSaveBlock2.playerName);
+            tvShow->worldOfMasters.var00 = 0x19;
+            tvShow->worldOfMasters.var01 = rval;
+            tvShow->worldOfMasters.var02 = unk_2a98->var02;
+            tvShow->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->var06;
+            tvShow->worldOfMasters.var04 = unk_2a98->var04;
+            tvShow->worldOfMasters.var08 = unk_2a98->var08;
+            tvShow->worldOfMasters.var0a = unk_2a98->var0a;
+            StringCopy(tvShow->worldOfMasters.playerName, gSaveBlock2.playerName);
             sub_80BE138(tvShow);
-            tvShow->unknownTvShowType2.language = GAME_LANGUAGE;
+            tvShow->worldOfMasters.language = GAME_LANGUAGE;
         }
     }
 }
@@ -1712,7 +1713,34 @@ void DoTVShowPokemonAngler(void) {
     ShowFieldMessage(gTVFishingGuruAdviceTextGroup[switchval]);
 }
 
-asm(".section .text_d");
+void DoTVShowTheWorldOfMasters(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->worldOfMasters.playerName,
+                                             tvShow->worldOfMasters.language);
+            sub_80BF088(1, tvShow->worldOfMasters.var06);
+            sub_80BF088(2, tvShow->worldOfMasters.var02);
+            gUnknown_020387E8 = 1;
+            break;
+        case 1:
+            StringCopy(gStringVar1, gSpeciesNames[tvShow->worldOfMasters.var08]);
+            gUnknown_020387E8 = 2;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, tvShow->worldOfMasters.playerName,
+                                             tvShow->worldOfMasters.language);
+            sub_80FBFB4(gStringVar2, tvShow->worldOfMasters.var0a, 0);
+            StringCopy(gStringVar3, gSpeciesNames[tvShow->worldOfMasters.var04]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVWorldOfMastersTextGroup[switchval]);
+}
 
 void TVShowDone(void)
 {
