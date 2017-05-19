@@ -269,7 +269,7 @@ struct TVShowNameRaterShow {
     /*0x1B*/ u8 random2;
     /*0x1C*/ u16 var1C;
     /*0x1E*/ u8 language;
-    /*0x1F*/ u8 var1F;
+    /*0x1F*/ u8 pokemonNameLanguage;
 };
 
 struct TVShowMassOutbreak {

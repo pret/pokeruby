@@ -145,7 +145,7 @@ void sub_80BE478(void)
     sub_80BE160(tvShow);
 
     tvShow->nameRaterShow.language = GAME_LANGUAGE;
-    tvShow->nameRaterShow.var1F = sub_80BDEAC(tvShow->nameRaterShow.pokemonName);
+    tvShow->nameRaterShow.pokemonNameLanguage = sub_80BDEAC(tvShow->nameRaterShow.pokemonName);
 
     StripExtCtrlCodes(tvShow->nameRaterShow.pokemonName);
 }
@@ -1627,10 +1627,105 @@ void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
+void DoTVShowTheNameRaterShow(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.trainerName, tvShow->nameRaterShow.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->nameRaterShow.species]);
+            TVShowConvertInternationalString(gStringVar3, tvShow->nameRaterShow.pokemonName, tvShow->nameRaterShow.pokemonNameLanguage);
+            gUnknown_020387E8 = sub_80BF7E8(&tvShow->nameRaterShow) + 1;
+            break;
+        case 1:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            if (tvShow->nameRaterShow.random == 0) {
+                gUnknown_020387E8 = 9;
+            } else if (tvShow->nameRaterShow.random == 1) {
+                gUnknown_020387E8 = 10;
+            } else if (tvShow->nameRaterShow.random == 2) {
+                gUnknown_020387E8 = 11;
+            }
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.trainerName, tvShow->nameRaterShow.language);
+            if (tvShow->nameRaterShow.random == 0) {
+                gUnknown_020387E8 = 9;
+            } else if (tvShow->nameRaterShow.random == 1) {
+                gUnknown_020387E8 = 10;
+            } else if (tvShow->nameRaterShow.random == 2) {
+                gUnknown_020387E8 = 11;
+            }
+            break;
+        case 9:
+        case 10:
+        case 11:
+            sub_80BF820(0, 1, 0, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar3, gStringVar1, tvShow->nameRaterShow.pokemonNameLanguage);
+            sub_80BF820(0, 0, 0, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar2, gStringVar1, tvShow->nameRaterShow.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.pokemonName, tvShow->nameRaterShow.pokemonNameLanguage);
+            gUnknown_020387E8 = 12;
+            break;
+        case 13:
+            sub_80BF820(0, 0, 3, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar3, gStringVar1, tvShow->nameRaterShow.pokemonNameLanguage);
+            sub_80BF820(0, 0, 2, 0, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar2, gStringVar1, tvShow->nameRaterShow.language);
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.trainerName, tvShow->nameRaterShow.language);
+            gUnknown_020387E8 = 14;
+            break;
+        case 14:
+            sub_80BF820(0, 0, 3, 0, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar3, gStringVar1, tvShow->nameRaterShow.language);
+            sub_80BF820(0, 0, 2, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar2, gStringVar1, tvShow->nameRaterShow.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.trainerName, tvShow->nameRaterShow.language);
+            gUnknown_020387E8 = 18;
+            break;
+        case 15:
+            sub_80BF820(1, 0, 2, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar1, gStringVar2, tvShow->nameRaterShow.pokemonNameLanguage);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->nameRaterShow.species]);
+            sub_80BF820(2, 0, 3, 2, tvShow->nameRaterShow.species, &tvShow->nameRaterShow);
+            gUnknown_020387E8 = 16;
+            break;
+        case 16:
+            sub_80BF820(0, 0, 3, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar3, gStringVar1, tvShow->nameRaterShow.pokemonNameLanguage);
+            sub_80BF820(0, 0, 2, 2, tvShow->nameRaterShow.species, &tvShow->nameRaterShow);
+            gUnknown_020387E8 = 17;
+            break;
+        case 17:
+            sub_80BF820(1, 0, 2, 1, 0, &tvShow->nameRaterShow);
+            TVShowConvertInternationalString(gStringVar1, gStringVar2, tvShow->nameRaterShow.pokemonNameLanguage);
+            sub_80BF820(2, 0, 3, 2, tvShow->nameRaterShow.var1C, &tvShow->nameRaterShow);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->nameRaterShow.var1C]);
+            gUnknown_020387E8 = 18;
+            break;
+        case 12:
+            switchval = 18;
+            gUnknown_020387E8 = 18;
+        case 18:
+            TVShowConvertInternationalString(gStringVar1, tvShow->nameRaterShow.pokemonName, tvShow->nameRaterShow.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, tvShow->nameRaterShow.trainerName, tvShow->nameRaterShow.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVNameRaterTextGroup[switchval]);
+}
+
 void DoTVShowPokemonTodaySuccessfulCapture(void) {
     TVShow *tvShow;
     u8 switchval;
-//    u16 rval;
     tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
     gScriptResult = 0;
     switchval = gUnknown_020387E8;
