@@ -15,7 +15,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MASTER BALL$", 14
+	.string "MEISTERBALL$", 14
 	.2byte ITEM_MASTER_BALL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -30,7 +30,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 0
 
-	.string "ULTRA BALL$", 14
+	.string "HYPERBALL$", 14
 	.2byte ITEM_ULTRA_BALL
 	.2byte 1200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -45,7 +45,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 1
 
-	.string "GREAT BALL$", 14
+	.string "SUPERBALL$", 14
 	.2byte ITEM_GREAT_BALL
 	.2byte 600 @ price
 	.byte HOLD_EFFECT_NONE
@@ -60,7 +60,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 2
 
-	.string "POKé BALL$", 14
+	.string "POKéBALL$", 14
 	.2byte ITEM_POKE_BALL
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -75,7 +75,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 3
 
-	.string "SAFARI BALL$", 14
+	.string "SAFARIBALL$", 14
 	.2byte ITEM_SAFARI_BALL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -90,7 +90,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 4
 
-	.string "NET BALL$", 14
+	.string "NETZBALL$", 14
 	.2byte ITEM_NET_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -105,7 +105,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 5
 
-	.string "DIVE BALL$", 14
+	.string "TAUCHBALL$", 14
 	.2byte ITEM_DIVE_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -120,7 +120,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 6
 
-	.string "NEST BALL$", 14
+	.string "NESTBALL$", 14
 	.2byte ITEM_NEST_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -135,7 +135,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 7
 
-	.string "REPEAT BALL$", 14
+	.string "WIEDERBALL$", 14
 	.2byte ITEM_REPEAT_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -150,7 +150,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 8
 
-	.string "TIMER BALL$", 14
+	.string "TIMERBALL$", 14
 	.2byte ITEM_TIMER_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -165,7 +165,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 9
 
-	.string "LUXURY BALL$", 14
+	.string "LUXUSBALL$", 14
 	.2byte ITEM_LUXURY_BALL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -180,7 +180,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 10
 
-	.string "PREMIER BALL$", 14
+	.string "PREMIERBALL$", 14
 	.2byte ITEM_PREMIER_BALL
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -195,7 +195,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PokeBall
 	.4byte 11
 
-	.string "POTION$", 14
+	.string "TRANK$", 14
 	.2byte ITEM_POTION
 	.2byte 300 @ price
 	.byte HOLD_EFFECT_NONE
@@ -210,7 +210,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ANTIDOTE$", 14
+	.string "GEGENGIFT$", 14
 	.2byte ITEM_ANTIDOTE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -225,7 +225,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "BURN HEAL$", 14
+	.string "FEUERHEILER$", 14
 	.2byte ITEM_BURN_HEAL
 	.2byte 250 @ price
 	.byte HOLD_EFFECT_NONE
@@ -240,7 +240,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ICE HEAL$", 14
+	.string "EISHEILER$", 14
 	.2byte ITEM_ICE_HEAL
 	.2byte 250 @ price
 	.byte HOLD_EFFECT_NONE
@@ -255,7 +255,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "AWAKENING$", 14
+	.string "AUFWECKER$", 14
 	.2byte ITEM_AWAKENING
 	.2byte 250 @ price
 	.byte HOLD_EFFECT_NONE
@@ -270,7 +270,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "PARLYZ HEAL$", 14
+	.string "PARA-HEILER$", 14
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -285,7 +285,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "FULL RESTORE$", 14
+	.string "TOP-GENESUNG$", 14
 	.2byte ITEM_FULL_RESTORE
 	.2byte 3000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -300,7 +300,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "MAX POTION$", 14
+	.string "TOP-TRANK$", 14
 	.2byte ITEM_MAX_POTION
 	.2byte 2500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -315,7 +315,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "HYPER POTION$", 14
+	.string "HYPERTRANK$", 14
 	.2byte ITEM_HYPER_POTION
 	.2byte 1200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -330,7 +330,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "SUPER POTION$", 14
+	.string "SUPERTRANK$", 14
 	.2byte ITEM_SUPER_POTION
 	.2byte 700 @ price
 	.byte HOLD_EFFECT_NONE
@@ -345,7 +345,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "FULL HEAL$", 14
+	.string "HYPERHEILER$", 14
 	.2byte ITEM_FULL_HEAL
 	.2byte 600 @ price
 	.byte HOLD_EFFECT_NONE
@@ -360,7 +360,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "REVIVE$", 14
+	.string "BELEBER$", 14
 	.2byte ITEM_REVIVE
 	.2byte 1500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -375,7 +375,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "MAX REVIVE$", 14
+	.string "TOP-BELEBER$", 14
 	.2byte ITEM_MAX_REVIVE
 	.2byte 4000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -390,7 +390,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "FRESH WATER$", 14
+	.string "TAFELWASSER$", 14
 	.2byte ITEM_FRESH_WATER
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -405,7 +405,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "SODA POP$", 14
+	.string "SPRUDEL$", 14
 	.2byte ITEM_SODA_POP
 	.2byte 300 @ price
 	.byte HOLD_EFFECT_NONE
@@ -420,7 +420,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "LEMONADE$", 14
+	.string "LIMONADE$", 14
 	.2byte ITEM_LEMONADE
 	.2byte 350 @ price
 	.byte HOLD_EFFECT_NONE
@@ -435,7 +435,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "MOOMOO MILK$", 14
+	.string "KUHMUH-MILCH$", 14
 	.2byte ITEM_MOOMOO_MILK
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -450,7 +450,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ENERGYPOWDER$", 14
+	.string "ENERGIESTAUB$", 14
 	.2byte ITEM_ENERGY_POWDER
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -465,7 +465,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ENERGY ROOT$", 14
+	.string "KRAFTWURZEL$", 14
 	.2byte ITEM_ENERGY_ROOT
 	.2byte 800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -480,7 +480,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "HEAL POWDER$", 14
+	.string "HEILPUDER$", 14
 	.2byte ITEM_HEAL_POWDER
 	.2byte 450 @ price
 	.byte HOLD_EFFECT_NONE
@@ -495,7 +495,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "REVIVAL HERB$", 14
+	.string "VITALKRAUT$", 14
 	.2byte ITEM_REVIVAL_HERB
 	.2byte 2800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -510,7 +510,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ETHER$", 14
+	.string "ÄTHER$", 14
 	.2byte ITEM_ETHER
 	.2byte 1200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -525,7 +525,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
-	.string "MAX ETHER$", 14
+	.string "TOP-ÄTHER$", 14
 	.2byte ITEM_MAX_ETHER
 	.2byte 2000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -540,7 +540,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
-	.string "ELIXIR$", 14
+	.string "ELIXIER$", 14
 	.2byte ITEM_ELIXIR
 	.2byte 3000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -555,7 +555,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
-	.string "MAX ELIXIR$", 14
+	.string "TOP-ELIXIER$", 14
 	.2byte ITEM_MAX_ELIXIR
 	.2byte 4500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -570,7 +570,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
-	.string "LAVA COOKIE$", 14
+	.string "LAVAKEKS$", 14
 	.2byte ITEM_LAVA_COOKIE
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -585,7 +585,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "BLUE FLUTE$", 14
+	.string "BLAUE FLÖTE$", 14
 	.2byte ITEM_BLUE_FLUTE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -600,7 +600,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "YELLOW FLUTE$", 14
+	.string "GELBE FLÖTE$", 14
 	.2byte ITEM_YELLOW_FLUTE
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -615,7 +615,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "RED FLUTE$", 14
+	.string "ROTE FLÖTE$", 14
 	.2byte ITEM_RED_FLUTE
 	.2byte 300 @ price
 	.byte HOLD_EFFECT_NONE
@@ -630,7 +630,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "BLACK FLUTE$", 14
+	.string "SCHW. FLÖTE$", 14
 	.2byte ITEM_BLACK_FLUTE
 	.2byte 400 @ price
 	.byte HOLD_EFFECT_NONE
@@ -645,7 +645,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WHITE FLUTE$", 14
+	.string "WEISSE FLÖTE$", 14
 	.2byte ITEM_WHITE_FLUTE
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -660,7 +660,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BERRY JUICE$", 14
+	.string "BEERENSAFT$", 14
 	.2byte ITEM_BERRY_JUICE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_RESTORE_HP
@@ -675,7 +675,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "SACRED ASH$", 14
+	.string "ZAUBERASCHE$", 14
 	.2byte ITEM_SACRED_ASH
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -690,7 +690,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SHOAL SALT$", 14
+	.string "KÜSTENSALZ$", 14
 	.2byte ITEM_SHOAL_SALT
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -705,7 +705,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SHOAL SHELL$", 14
+	.string "KÜSTENSCHALE$", 14
 	.2byte ITEM_SHOAL_SHELL
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -720,7 +720,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RED SHARD$", 14
+	.string "PURPURSTÜCK$", 14
 	.2byte ITEM_RED_SHARD
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -735,7 +735,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLUE SHARD$", 14
+	.string "INDIGOSTÜCK$", 14
 	.2byte ITEM_BLUE_SHARD
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -750,7 +750,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "YELLOW SHARD$", 14
+	.string "GELBSTÜCK$", 14
 	.2byte ITEM_YELLOW_SHARD
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -765,7 +765,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GREEN SHARD$", 14
+	.string "GRÜNSTÜCK$", 14
 	.2byte ITEM_GREEN_SHARD
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_NONE
@@ -945,7 +945,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HP UP$", 14
+	.string "KP-PLUS$", 14
 	.2byte ITEM_HP_UP
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -975,7 +975,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "IRON$", 14
+	.string "EISEN$", 14
 	.2byte ITEM_IRON
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -990,7 +990,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CARBOS$", 14
+	.string "CARBON$", 14
 	.2byte ITEM_CARBOS
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1005,7 +1005,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CALCIUM$", 14
+	.string "KALZIUM$", 14
 	.2byte ITEM_CALCIUM
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1020,7 +1020,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RARE CANDY$", 14
+	.string "SONDERBONBON$", 14
 	.2byte ITEM_RARE_CANDY
 	.2byte 4800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1035,7 +1035,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PP UP$", 14
+	.string "AP-PLUS$", 14
 	.2byte ITEM_PP_UP
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1050,7 +1050,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ZINC$", 14
+	.string "ZINK$", 14
 	.2byte ITEM_ZINC
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1065,7 +1065,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PP MAX$", 14
+	.string "AP-TOP$", 14
 	.2byte ITEM_PP_MAX
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1095,7 +1095,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GUARD SPEC.$", 14
+	.string "MEGABLOCK$", 14
 	.2byte ITEM_GUARD_SPEC
 	.2byte 700 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1110,7 +1110,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "DIRE HIT$", 14
+	.string "ANGRIFFPLUS$", 14
 	.2byte ITEM_DIRE_HIT
 	.2byte 650 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1125,7 +1125,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "X ATTACK$", 14
+	.string "X-ANGRIFF$", 14
 	.2byte ITEM_X_ATTACK
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1140,7 +1140,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "X DEFEND$", 14
+	.string "X-ABWEHR$", 14
 	.2byte ITEM_X_DEFEND
 	.2byte 550 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1155,7 +1155,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "X SPEED$", 14
+	.string "X-TEMPO$", 14
 	.2byte ITEM_X_SPEED
 	.2byte 350 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1170,7 +1170,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "X ACCURACY$", 14
+	.string "X-TREFFER$", 14
 	.2byte ITEM_X_ACCURACY
 	.2byte 950 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1185,7 +1185,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "X SPECIAL$", 14
+	.string "X-SPEZIAL$", 14
 	.2byte ITEM_X_SPECIAL
 	.2byte 350 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1200,7 +1200,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
-	.string "POKé DOLL$", 14
+	.string "POKéPUPPE$", 14
 	.2byte ITEM_POKE_DOLL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1215,7 +1215,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Escape
 	.4byte 0
 
-	.string "FLUFFY TAIL$", 14
+	.string "ENECO-RUTE$", 14
 	.2byte ITEM_FLUFFY_TAIL
 	.2byte 1000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1245,7 +1245,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SUPER REPEL$", 14
+	.string "SUPERSCHUTZ$", 14
 	.2byte ITEM_SUPER_REPEL
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1260,7 +1260,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MAX REPEL$", 14
+	.string "TOP-SCHUTZ$", 14
 	.2byte ITEM_MAX_REPEL
 	.2byte 700 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1275,7 +1275,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ESCAPE ROPE$", 14
+	.string "FLUCHTSEIL$", 14
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte 550 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1290,7 +1290,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "REPEL$", 14
+	.string "SCHUTZ$", 14
 	.2byte ITEM_REPEL
 	.2byte 350 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1395,7 +1395,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SUN STONE$", 14
+	.string "SONNENSTEIN$", 14
 	.2byte ITEM_SUN_STONE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1410,7 +1410,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MOON STONE$", 14
+	.string "MONDSTEIN$", 14
 	.2byte ITEM_MOON_STONE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1425,7 +1425,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "FIRE STONE$", 14
+	.string "FEUERSTEIN$", 14
 	.2byte ITEM_FIRE_STONE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1440,7 +1440,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "THUNDERSTONE$", 14
+	.string "DONNERSTEIN$", 14
 	.2byte ITEM_THUNDER_STONE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1455,7 +1455,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WATER STONE$", 14
+	.string "WASSERSTEIN$", 14
 	.2byte ITEM_WATER_STONE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1470,7 +1470,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LEAF STONE$", 14
+	.string "BLATTSTEIN$", 14
 	.2byte ITEM_LEAF_STONE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1545,7 +1545,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "TINYMUSHROOM$", 14
+	.string "MINIPILZ$", 14
 	.2byte ITEM_TINY_MUSHROOM
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1560,7 +1560,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BIG MUSHROOM$", 14
+	.string "RIESENPILZ$", 14
 	.2byte ITEM_BIG_MUSHROOM
 	.2byte 5000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1590,7 +1590,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PEARL$", 14
+	.string "PERLE$", 14
 	.2byte ITEM_PEARL
 	.2byte 1400 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1605,7 +1605,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BIG PEARL$", 14
+	.string "RIESENPERLE$", 14
 	.2byte ITEM_BIG_PEARL
 	.2byte 7500 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1620,7 +1620,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "STARDUST$", 14
+	.string "STERNENSTAUB$", 14
 	.2byte ITEM_STARDUST
 	.2byte 2000 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1635,7 +1635,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "STAR PIECE$", 14
+	.string "STERNENSTÜCK$", 14
 	.2byte ITEM_STAR_PIECE
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1665,7 +1665,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HEART SCALE$", 14
+	.string "HERZSCHUPPE$", 14
 	.2byte ITEM_HEART_SCALE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1815,7 +1815,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ORANGE MAIL$", 14
+	.string "ZIGZAGBRIEF$", 14
 	.2byte ITEM_ORANGE_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1830,7 +1830,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HARBOR MAIL$", 14
+	.string "HAFENBRIEF$", 14
 	.2byte ITEM_HARBOR_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1845,7 +1845,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 1
 
-	.string "GLITTER MAIL$", 14
+	.string "GLITZERBRIEF$", 14
 	.2byte ITEM_GLITTER_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1860,7 +1860,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 2
 
-	.string "MECH MAIL$", 14
+	.string "EILBRIEF$", 14
 	.2byte ITEM_MECH_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1875,7 +1875,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 3
 
-	.string "WOOD MAIL$", 14
+	.string "WALDBRIEF$", 14
 	.2byte ITEM_WOOD_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1890,7 +1890,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 4
 
-	.string "WAVE MAIL$", 14
+	.string "WELLENBRIEF$", 14
 	.2byte ITEM_WAVE_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1905,7 +1905,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 5
 
-	.string "BEAD MAIL$", 14
+	.string "PERLENBRIEF$", 14
 	.2byte ITEM_BEAD_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1920,7 +1920,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 6
 
-	.string "SHADOW MAIL$", 14
+	.string "DUNKELBRIEF$", 14
 	.2byte ITEM_SHADOW_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1935,7 +1935,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 7
 
-	.string "TROPIC MAIL$", 14
+	.string "TROPENBRIEF$", 14
 	.2byte ITEM_TROPIC_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1950,7 +1950,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 8
 
-	.string "DREAM MAIL$", 14
+	.string "TRAUMBRIEF$", 14
 	.2byte ITEM_DREAM_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1965,7 +1965,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 9
 
-	.string "FAB MAIL$", 14
+	.string "EDELBRIEF$", 14
 	.2byte ITEM_FAB_MAIL
 	.2byte 50 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1980,7 +1980,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 10
 
-	.string "RETRO MAIL$", 14
+	.string "RETROBRIEF$", 14
 	.2byte ITEM_RETRO_MAIL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -1995,7 +1995,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 11
 
-	.string "CHERI BERRY$", 14
+	.string "AMRENABEERE$", 14
 	.2byte ITEM_CHERI_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_PAR
@@ -2010,7 +2010,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "CHESTO BERRY$", 14
+	.string "MARONBEERE$", 14
 	.2byte ITEM_CHESTO_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_SLP
@@ -2025,7 +2025,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "PECHA BERRY$", 14
+	.string "PIRSIFBEERE$", 14
 	.2byte ITEM_PECHA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_PSN
@@ -2040,7 +2040,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "RAWST BERRY$", 14
+	.string "FRAGIABEERE$", 14
 	.2byte ITEM_RAWST_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_BRN
@@ -2055,7 +2055,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "ASPEAR BERRY$", 14
+	.string "WILBIRBEERE$", 14
 	.2byte ITEM_ASPEAR_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_FRZ
@@ -2070,7 +2070,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "LEPPA BERRY$", 14
+	.string "JONAGOBEERE$", 14
 	.2byte ITEM_LEPPA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_RESTORE_PP
@@ -2085,7 +2085,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
-	.string "ORAN BERRY$", 14
+	.string "SINELBEERE$", 14
 	.2byte ITEM_ORAN_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_RESTORE_HP
@@ -2100,7 +2100,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "PERSIM BERRY$", 14
+	.string "PERSIMBEERE$", 14
 	.2byte ITEM_PERSIM_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_CONFUSION
@@ -2115,7 +2115,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "LUM BERRY$", 14
+	.string "PRUNUSBEERE$", 14
 	.2byte ITEM_LUM_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CURE_STATUS
@@ -2130,7 +2130,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "SITRUS BERRY$", 14
+	.string "TSITRUBEERE$", 14
 	.2byte ITEM_SITRUS_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_RESTORE_HP
@@ -2145,7 +2145,7 @@ gItems:: @ 83C5564
 	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
-	.string "FIGY BERRY$", 14
+	.string "GIEFEBEERE$", 14
 	.2byte ITEM_FIGY_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CONFUSE_SPICY
@@ -2160,7 +2160,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WIKI BERRY$", 14
+	.string "WIKIBEERE$", 14
 	.2byte ITEM_WIKI_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CONFUSE_DRY
@@ -2175,7 +2175,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MAGO BERRY$", 14
+	.string "MAGOBEERE$", 14
 	.2byte ITEM_MAGO_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CONFUSE_SWEET
@@ -2190,7 +2190,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "AGUAV BERRY$", 14
+	.string "GAUVEBEERE$", 14
 	.2byte ITEM_AGUAV_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CONFUSE_BITTER
@@ -2205,7 +2205,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "IAPAPA BERRY$", 14
+	.string "YAPABEERE$", 14
 	.2byte ITEM_IAPAPA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CONFUSE_SOUR
@@ -2220,7 +2220,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RAZZ BERRY$", 14
+	.string "HIMMIHBEERE$", 14
 	.2byte ITEM_RAZZ_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2235,7 +2235,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLUK BERRY$", 14
+	.string "MORBBEERE$", 14
 	.2byte ITEM_BLUK_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2250,7 +2250,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "NANAB BERRY$", 14
+	.string "NANABBEERE$", 14
 	.2byte ITEM_NANAB_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2265,7 +2265,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WEPEAR BERRY$", 14
+	.string "NIRBEBEERE$", 14
 	.2byte ITEM_WEPEAR_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2280,7 +2280,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PINAP BERRY$", 14
+	.string "SANANABEERE$", 14
 	.2byte ITEM_PINAP_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2295,7 +2295,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "POMEG BERRY$", 14
+	.string "GRANABEERE$", 14
 	.2byte ITEM_POMEG_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2310,7 +2310,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "KELPSY BERRY$", 14
+	.string "SETANGBEERE$", 14
 	.2byte ITEM_KELPSY_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2325,7 +2325,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "QUALOT BERRY$", 14
+	.string "QUALOTBEERE$", 14
 	.2byte ITEM_QUALOT_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2340,7 +2340,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HONDEW BERRY$", 14
+	.string "HONMELBEERE$", 14
 	.2byte ITEM_HONDEW_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2355,7 +2355,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GREPA BERRY$", 14
+	.string "LABRUSBEERE$", 14
 	.2byte ITEM_GREPA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2370,7 +2370,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "TAMATO BERRY$", 14
+	.string "TAMOTBEERE$", 14
 	.2byte ITEM_TAMATO_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2385,7 +2385,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CORNN BERRY$", 14
+	.string "SAIMBEERE$", 14
 	.2byte ITEM_CORNN_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2400,7 +2400,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MAGOST BERRY$", 14
+	.string "MAGOSTBEERE$", 14
 	.2byte ITEM_MAGOST_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2415,7 +2415,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RABUTA BERRY$", 14
+	.string "RABUTABEERE$", 14
 	.2byte ITEM_RABUTA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2430,7 +2430,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "NOMEL BERRY$", 14
+	.string "TRONZIBEERE$", 14
 	.2byte ITEM_NOMEL_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2445,7 +2445,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SPELON BERRY$", 14
+	.string "KIWANBEERE$", 14
 	.2byte ITEM_SPELON_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2460,7 +2460,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PAMTRE BERRY$", 14
+	.string "PALLMBEERE$", 14
 	.2byte ITEM_PAMTRE_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2475,7 +2475,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WATMEL BERRY$", 14
+	.string "WASMELBEERE$", 14
 	.2byte ITEM_WATMEL_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2490,7 +2490,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DURIN BERRY$", 14
+	.string "DURINBEERE$", 14
 	.2byte ITEM_DURIN_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2505,7 +2505,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BELUE BERRY$", 14
+	.string "MYRTILBEERE$", 14
 	.2byte ITEM_BELUE_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2520,7 +2520,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LIECHI BERRY$", 14
+	.string "LYDZIBEERE$", 14
 	.2byte ITEM_LIECHI_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_ATTACK_UP
@@ -2535,7 +2535,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GANLON BERRY$", 14
+	.string "LINGANBEERE$", 14
 	.2byte ITEM_GANLON_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_DEFENSE_UP
@@ -2550,7 +2550,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SALAC BERRY$", 14
+	.string "SALKABEERE$", 14
 	.2byte ITEM_SALAC_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_SPEED_UP
@@ -2565,7 +2565,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PETAYA BERRY$", 14
+	.string "TAHAYBEERE$", 14
 	.2byte ITEM_PETAYA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_SP_ATTACK_UP
@@ -2580,7 +2580,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "APICOT BERRY$", 14
+	.string "APIKOBEERE$", 14
 	.2byte ITEM_APICOT_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_SP_DEFENSE_UP
@@ -2595,7 +2595,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LANSAT BERRY$", 14
+	.string "LANSATBEERE$", 14
 	.2byte ITEM_LANSAT_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_CRITICAL_UP
@@ -2610,7 +2610,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "STARF BERRY$", 14
+	.string "KRAMBOBEERE$", 14
 	.2byte ITEM_STARF_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_RANDOM_STAT_UP
@@ -2625,7 +2625,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ENIGMA BERRY$", 14
+	.string "ENIGMABEERE$", 14
 	.2byte ITEM_ENIGMA_BERRY
 	.2byte 20 @ price
 	.byte HOLD_EFFECT_NONE
@@ -2685,7 +2685,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BRIGHTPOWDER$", 14
+	.string "BLENDPUDER$", 14
 	.2byte ITEM_BRIGHT_POWDER
 	.2byte 10 @ price
 	.byte HOLD_EFFECT_EVASION_UP
@@ -2700,7 +2700,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WHITE HERB$", 14
+	.string "SCHLOHKRAUT$", 14
 	.2byte ITEM_WHITE_HERB
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_RESTORE_STATS
@@ -2715,7 +2715,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MACHO BRACE$", 14
+	.string "MACHOBAND$", 14
 	.2byte ITEM_MACHO_BRACE
 	.2byte 3000 @ price
 	.byte HOLD_EFFECT_MACHO_BRACE
@@ -2730,7 +2730,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "EXP. SHARE$", 14
+	.string "EP-TEILER$", 14
 	.2byte ITEM_EXP_SHARE
 	.2byte 3000 @ price
 	.byte HOLD_EFFECT_EXP_SHARE
@@ -2745,7 +2745,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "QUICK CLAW$", 14
+	.string "FLINKKLAUE$", 14
 	.2byte ITEM_QUICK_CLAW
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_QUICK_CLAW
@@ -2760,7 +2760,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SOOTHE BELL$", 14
+	.string "SANFTGLOCKE$", 14
 	.2byte ITEM_SOOTHE_BELL
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_HAPPINESS_UP
@@ -2775,7 +2775,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MENTAL HERB$", 14
+	.string "MENTALKRAUT$", 14
 	.2byte ITEM_MENTAL_HERB
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_CURE_ATTRACT
@@ -2790,7 +2790,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CHOICE BAND$", 14
+	.string "WAHLBAND$", 14
 	.2byte ITEM_CHOICE_BAND
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_CHOICE_BAND
@@ -2805,7 +2805,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "KING’S ROCK$", 14
+	.string "KING-STEIN$", 14
 	.2byte ITEM_KINGS_ROCK
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_FLINCH
@@ -2820,7 +2820,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SILVERPOWDER$", 14
+	.string "SILBERSTAUB$", 14
 	.2byte ITEM_SILVER_POWDER
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_BUG_POWER
@@ -2835,7 +2835,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "AMULET COIN$", 14
+	.string "MÜNZAMULETT$", 14
 	.2byte ITEM_AMULET_COIN
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_DOUBLE_PRIZE
@@ -2850,7 +2850,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CLEANSE TAG$", 14
+	.string "SCHUTZBAND$", 14
 	.2byte ITEM_CLEANSE_TAG
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_REPEL
@@ -2865,7 +2865,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SOUL DEW$", 14
+	.string "SEELENTAU$", 14
 	.2byte ITEM_SOUL_DEW
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_SOUL_DEW
@@ -2880,7 +2880,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DEEPSEATOOTH$", 14
+	.string "ABYSSZAHN$", 14
 	.2byte ITEM_DEEP_SEA_TOOTH
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_DEEP_SEA_TOOTH
@@ -2895,7 +2895,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DEEPSEASCALE$", 14
+	.string "ABYSSPLATTE$", 14
 	.2byte ITEM_DEEP_SEA_SCALE
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_DEEP_SEA_SCALE
@@ -2910,7 +2910,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SMOKE BALL$", 14
+	.string "RAUCHBALL$", 14
 	.2byte ITEM_SMOKE_BALL
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_CAN_ALWAYS_RUN
@@ -2925,7 +2925,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "EVERSTONE$", 14
+	.string "EWIGSTEIN$", 14
 	.2byte ITEM_EVERSTONE
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_PREVENT_EVOLVE
@@ -2940,7 +2940,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "FOCUS BAND$", 14
+	.string "FOKUS-BAND$", 14
 	.2byte ITEM_FOCUS_BAND
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_FOCUS_BAND
@@ -2955,7 +2955,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LUCKY EGG$", 14
+	.string "GLÜCKS-EI$", 14
 	.2byte ITEM_LUCKY_EGG
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_LUCKY_EGG
@@ -2970,7 +2970,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SCOPE LENS$", 14
+	.string "SCOPE-LINSE$", 14
 	.2byte ITEM_SCOPE_LENS
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_SCOPE_LENS
@@ -2985,7 +2985,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "METAL COAT$", 14
+	.string "METALLMANTEL$", 14
 	.2byte ITEM_METAL_COAT
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_STEEL_POWER
@@ -3000,7 +3000,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LEFTOVERS$", 14
+	.string "ÜBERRESTE$", 14
 	.2byte ITEM_LEFTOVERS
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_LEFTOVERS
@@ -3015,7 +3015,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DRAGON SCALE$", 14
+	.string "DRACHENHAUT$", 14
 	.2byte ITEM_DRAGON_SCALE
 	.2byte 2100 @ price
 	.byte HOLD_EFFECT_DRAGON_SCALE
@@ -3030,7 +3030,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LIGHT BALL$", 14
+	.string "KUGELBLITZ$", 14
 	.2byte ITEM_LIGHT_BALL
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_LIGHT_BALL
@@ -3045,7 +3045,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SOFT SAND$", 14
+	.string "PUDERSAND$", 14
 	.2byte ITEM_SOFT_SAND
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_GROUND_POWER
@@ -3060,7 +3060,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HARD STONE$", 14
+	.string "GRANITSTEIN$", 14
 	.2byte ITEM_HARD_STONE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_ROCK_POWER
@@ -3075,7 +3075,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MIRACLE SEED$", 14
+	.string "WUNDERSAAT$", 14
 	.2byte ITEM_MIRACLE_SEED
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_GRASS_POWER
@@ -3090,7 +3090,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLACKGLASSES$", 14
+	.string "SCHATTENGLAS$", 14
 	.2byte ITEM_BLACK_GLASSES
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_DARK_POWER
@@ -3105,7 +3105,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLACK BELT$", 14
+	.string "SCHWARZGURT$", 14
 	.2byte ITEM_BLACK_BELT
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_FIGHTING_POWER
@@ -3135,7 +3135,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MYSTIC WATER$", 14
+	.string "ZAUBERWASSER$", 14
 	.2byte ITEM_MYSTIC_WATER
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_WATER_POWER
@@ -3150,7 +3150,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SHARP BEAK$", 14
+	.string "HACKATTACK$", 14
 	.2byte ITEM_SHARP_BEAK
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_FLYING_POWER
@@ -3165,7 +3165,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "POISON BARB$", 14
+	.string "GIFTSTICH$", 14
 	.2byte ITEM_POISON_BARB
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_POISON_POWER
@@ -3180,7 +3180,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "NEVERMELTICE$", 14
+	.string "EWIGES EIS$", 14
 	.2byte ITEM_NEVER_MELT_ICE
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_ICE_POWER
@@ -3195,7 +3195,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SPELL TAG$", 14
+	.string "BANNSTICKER$", 14
 	.2byte ITEM_SPELL_TAG
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_GHOST_POWER
@@ -3210,7 +3210,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "TWISTEDSPOON$", 14
+	.string "KRÜMMLÖFFEL$", 14
 	.2byte ITEM_TWISTED_SPOON
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_PSYCHIC_POWER
@@ -3225,7 +3225,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CHARCOAL$", 14
+	.string "HOLZKOHLE$", 14
 	.2byte ITEM_CHARCOAL
 	.2byte 9800 @ price
 	.byte HOLD_EFFECT_FIRE_POWER
@@ -3240,7 +3240,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DRAGON FANG$", 14
+	.string "DRACHENZAHN$", 14
 	.2byte ITEM_DRAGON_FANG
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_DRAGON_POWER
@@ -3255,7 +3255,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SILK SCARF$", 14
+	.string "SEIDENSCHAL$", 14
 	.2byte ITEM_SILK_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NORMAL_POWER
@@ -3285,7 +3285,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SHELL BELL$", 14
+	.string "SEEGESANG$", 14
 	.2byte ITEM_SHELL_BELL
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_SHELL_BELL
@@ -3300,7 +3300,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SEA INCENSE$", 14
+	.string "SEERAUCH$", 14
 	.2byte ITEM_SEA_INCENSE
 	.2byte 9600 @ price
 	.byte HOLD_EFFECT_WATER_POWER
@@ -3315,7 +3315,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LAX INCENSE$", 14
+	.string "LAXRAUCH$", 14
 	.2byte ITEM_LAX_INCENSE
 	.2byte 9600 @ price
 	.byte HOLD_EFFECT_EVASION_UP
@@ -3345,7 +3345,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "METAL POWDER$", 14
+	.string "METALLSTAUB$", 14
 	.2byte ITEM_METAL_POWDER
 	.2byte 10 @ price
 	.byte HOLD_EFFECT_METAL_POWDER
@@ -3360,7 +3360,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "THICK CLUB$", 14
+	.string "KAMPFKNOCHEN$", 14
 	.2byte ITEM_THICK_CLUB
 	.2byte 500 @ price
 	.byte HOLD_EFFECT_THICK_CLUB
@@ -3375,7 +3375,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "STICK$", 14
+	.string "LAUCHSTANGE$", 14
 	.2byte ITEM_STICK
 	.2byte 200 @ price
 	.byte HOLD_EFFECT_STICK
@@ -3810,7 +3810,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RED SCARF$", 14
+	.string "ROTER SCHAL$", 14
 	.2byte ITEM_RED_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3825,7 +3825,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLUE SCARF$", 14
+	.string "BLAUER SCHAL$", 14
 	.2byte ITEM_BLUE_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3840,7 +3840,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "PINK SCARF$", 14
+	.string "ROSA SCHAL$", 14
 	.2byte ITEM_PINK_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3855,7 +3855,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GREEN SCARF$", 14
+	.string "GRÜNER SCHAL$", 14
 	.2byte ITEM_GREEN_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3870,7 +3870,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "YELLOW SCARF$", 14
+	.string "GELBER SCHAL$", 14
 	.2byte ITEM_YELLOW_SCARF
 	.2byte 100 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3885,7 +3885,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "MACH BIKE$", 14
+	.string "EILRAD$", 14
 	.2byte ITEM_MACH_BIKE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3900,7 +3900,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "COIN CASE$", 14
+	.string "MÜNZKORB$", 14
 	.2byte ITEM_COIN_CASE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3915,7 +3915,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ITEMFINDER$", 14
+	.string "DETEKTOR$", 14
 	.2byte ITEM_ITEMFINDER
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3930,7 +3930,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "OLD ROD$", 14
+	.string "ANGEL$", 14
 	.2byte ITEM_OLD_ROD
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3945,7 +3945,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GOOD ROD$", 14
+	.string "PROFIANGEL$", 14
 	.2byte ITEM_GOOD_ROD
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3960,7 +3960,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 1
 
-	.string "SUPER ROD$", 14
+	.string "SUPERANGEL$", 14
 	.2byte ITEM_SUPER_ROD
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3975,7 +3975,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 2
 
-	.string "S.S. TICKET$", 14
+	.string "BOOTSTICKET$", 14
 	.2byte ITEM_SS_TICKET
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -3990,7 +3990,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CONTEST PASS$", 14
+	.string "WETTB.-KARTE$", 14
 	.2byte ITEM_CONTEST_PASS
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4020,7 +4020,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "WAILMER PAIL$", 14
+	.string "WAILMERKANNE$", 14
 	.2byte ITEM_WAILMER_PAIL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4035,7 +4035,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DEVON GOODS$", 14
+	.string "DEVON-WAREN$", 14
 	.2byte ITEM_DEVON_GOODS
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4050,7 +4050,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "SOOT SACK$", 14
+	.string "ASCHETASCHE$", 14
 	.2byte ITEM_SOOT_SACK
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4065,7 +4065,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BASEMENT KEY$", 14
+	.string "KELLERÖFFNER$", 14
 	.2byte ITEM_BASEMENT_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4080,7 +4080,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ACRO BIKE$", 14
+	.string "KUNSTRAD$", 14
 	.2byte ITEM_ACRO_BIKE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4095,7 +4095,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 1
 
-	.string "{POKEBLOCK} CASE$", 14
+	.string "{POKEBLOCK}BOX$", 14
 	.2byte ITEM_POKEBLOCK_CASE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4110,7 +4110,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "LETTER$", 14
+	.string "BRIEF$", 14
 	.2byte ITEM_LETTER
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4125,7 +4125,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "EON TICKET$", 14
+	.string "ÄON-TICKET$", 14
 	.2byte ITEM_EON_TICKET
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4140,7 +4140,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 1
 
-	.string "RED ORB$", 14
+	.string "ROTE KUGEL$", 14
 	.2byte ITEM_RED_ORB
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4155,7 +4155,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "BLUE ORB$", 14
+	.string "BLAUE KUGEL$", 14
 	.2byte ITEM_BLUE_ORB
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4185,7 +4185,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "GO-GOGGLES$", 14
+	.string "WÜSTENGLAS$", 14
 	.2byte ITEM_GO_GOGGLES
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4200,7 +4200,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "METEORITE$", 14
+	.string "METEORIT$", 14
 	.2byte ITEM_METEORITE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4215,7 +4215,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RM. 1 KEY$", 14
+	.string "K1-SCHLÜSSEL$", 14
 	.2byte ITEM_ROOM_1_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4230,7 +4230,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RM. 2 KEY$", 14
+	.string "K2-SCHLÜSSEL$", 14
 	.2byte ITEM_ROOM_2_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4245,7 +4245,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RM. 4 KEY$", 14
+	.string "K4-SCHLÜSSEL$", 14
 	.2byte ITEM_ROOM_4_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4260,7 +4260,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "RM. 6 KEY$", 14
+	.string "K6-SCHLÜSSEL$", 14
 	.2byte ITEM_ROOM_6_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4275,7 +4275,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "STORAGE KEY$", 14
+	.string "L.-SCHLÜSSEL$", 14
 	.2byte ITEM_STORAGE_KEY
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4290,7 +4290,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "ROOT FOSSIL$", 14
+	.string "WURZELFOSSIL$", 14
 	.2byte ITEM_ROOT_FOSSIL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4305,7 +4305,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "CLAW FOSSIL$", 14
+	.string "KLAUENFOSSIL$", 14
 	.2byte ITEM_CLAW_FOSSIL
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -4320,7 +4320,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "DEVON SCOPE$", 14
+	.string "DEVON-SCOPE$", 14
 	.2byte ITEM_DEVON_SCOPE
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5085,7 +5085,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM01$", 14
+	.string "VM01$", 14
 	.2byte ITEM_HM01
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5100,7 +5100,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM02$", 14
+	.string "VM02$", 14
 	.2byte ITEM_HM02
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5115,7 +5115,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM03$", 14
+	.string "VM03$", 14
 	.2byte ITEM_HM03
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5130,7 +5130,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM04$", 14
+	.string "VM04$", 14
 	.2byte ITEM_HM04
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5145,7 +5145,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM05$", 14
+	.string "VM05$", 14
 	.2byte ITEM_HM05
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5160,7 +5160,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM06$", 14
+	.string "VM06$", 14
 	.2byte ITEM_HM06
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5175,7 +5175,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM07$", 14
+	.string "VM07$", 14
 	.2byte ITEM_HM07
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE
@@ -5190,7 +5190,7 @@ gItems:: @ 83C5564
 	.4byte NULL
 	.4byte 0
 
-	.string "HM08$", 14
+	.string "VM08$", 14
 	.2byte ITEM_HM08
 	.2byte 0 @ price
 	.byte HOLD_EFFECT_NONE

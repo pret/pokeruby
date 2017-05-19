@@ -1,55 +1,54 @@
 ShoalCave_LowTideEntranceRoom_Text_1C6668:: @ 81C6668
-	.string "Are you planning on going deep in\n"
-	.string "there?\p"
-	.string "How about bringing me back some\n"
-	.string "SHOAL SALT and SHOAL SHELLS?\p"
-	.string "I can make you something good if\n"
-	.string "you bring me the ingredients.$"
+	.string "Hast du vor, tiefer hineinzugehen?\p"
+	.string "Würdest du mir bitte KÜSTENSALZ\n"
+	.string "und KÜSTENSCHALEN mitbringen?\p"
+	.string "Ich kann dir daraus etwas Wunderbares\n"
+	.string "anfertigen.$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C670D:: @ 81C670D
-	.string "If you bring me four each of the\n"
-	.string "SHOAL SALT and SHOAL SHELLS,\l"
-	.string "I can make you a SHELL BELL...\p"
-	.string "You can get those ingredients\n"
-	.string "every day.$"
+	.string "Wenn du mir jeweils viermal KÜSTENSALZ\n"
+	.string "und KÜSTENSCHALE mitbringst, fertige\l"
+	.string "ich dir SEEGESANG daraus an.\p"
+	.string "Jeder Tag ist ein guter Tag, die Zutaten\n"
+	.string "dafür zu finden...$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C6793:: @ 81C6793
-	.string "Oh, hey! SHOAL SALT and SHOAL\n"
-	.string "SHELLS! And enough of them, too!\p"
-	.string "Would you like me to make you a\n"
-	.string "SHELL BELL with them?$"
+	.string "Oh, hey! KÜSTENSALZ und KÜSTENSCHALE!\n"
+	.string "Und davon auch noch so viele!\p"
+	.string "Soll ich dir daraus SEEGESANG\n"
+	.string "anfertigen?$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C6808:: @ 81C6808
-	.string "All righty, then! I’ll make you a\n"
-	.string "SHELL BELL right away.\p"
+	.string "Sehr schön! Ich werde dir sofort\n"
+	.string "SEEGESANG anfertigen.\p"
 	.string "... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "There! Done!$"
+	.string "Fertig! Bitte schön!$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C688E:: @ 81C688E
-	.string "Have a POKéMON hold on to that.\n"
-	.string "It’ll love it, that’s for certain.\p"
-	.string "Why, the SHELL BELL’s chime...\n"
-	.string "It’s simply sublime!\p"
-	.string "You can get its ingredients every\n"
-	.string "day, so I can make you more.$"
+	.string "Gib das einem POKéMON zum Tragen.\n"
+	.string "Es wird das lieben, das garantiere ich!\p"
+	.string "Der Klang von SEEGESANG...\n"
+	.string "Er ist einfach vollendet!\p"
+	.string "Die Zutaten kannst du jeden Tag finden,\n"
+	.string "daher kann ich dir mehrere machen.$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C6944:: @ 81C6944
-	.string "Oh... Is that so...\n"
-	.string "I wanted to make a SHELL BELL...$"
+	.string "Oh... Wirklich?\n"
+	.string "Ich wollte SEEGESANG anfertigen...$"
 
 ShoalCave_LowTideInnerRoom_Text_1C6979:: @ 81C6979
 ShoalCave_LowTideLowerRoom_Text_1C6979:: @ 81C6979
 ShoalCave_LowTideStairsRoom_Text_1C6979:: @ 81C6979
-	.string "There was some SHOAL SALT here.\n"
-	.string "But, there’s nothing here now.$"
+	.string "Hier gab es mal KÜSTENSALZ.\n"
+	.string "Aber jetzt ist nichts mehr davon da.$"
 
 ShoalCave_LowTideInnerRoom_Text_1C69B8:: @ 81C69B8
-	.string "There was a SHOAL SHELL here.\n"
-	.string "But, there’s nothing here now.$"
+	.string "Hier gab es mal eine KÜSTENSCHALE.\n"
+	.string "Aber jetzt gibt es keine mehr.$"
 
 ShoalCave_LowTideEntranceRoom_Text_1C69F5:: @ 81C69F5
-	.string "You don’t have space in your BAG\n"
-	.string "if I were to make it for you.\p"
-	.string "You should make room and come back\n"
-	.string "for a SHELL BELL.$"
+	.string "In deinem BEUTEL ist nicht genügend\n"
+	.string "Platz für das neue Item.\p"
+	.string "Schaffe Platz und hole dir dann\n"
+	.string "SEEGESANG bei mir ab.$"

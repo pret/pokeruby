@@ -1,42 +1,42 @@
 Route110_TrickHousePuzzle7_Text_19DF0B:: @ 819DF0B
-	.string "The TRICK MASTER always vanishes\n"
-	.string "like smoke. How does he do it?$"
+	.string "Der RÄTSELMEISTER verschwindet immer\n"
+	.string "wie Rauch. Wie macht er das nur?$"
 
 Route110_TrickHousePuzzle7_Text_19DF4B:: @ 819DF4B
-	.string "Aiyeeeh! You’re much too strong!\n"
-	.string "How do you do it?$"
+	.string "Aiijeeh! Du bist viel zu stark!\n"
+	.string "Wie machst du das nur?$"
 
 Route110_TrickHousePuzzle7_Text_19DF7E:: @ 819DF7E
-	.string "I wish I could appear and disappear as\n"
-	.string "if I were smoke, too.$"
+	.string "Ich wollte, ich könnte mich auch wie\n"
+	.string "Rauch in Luft auflösen...$"
 
 Route110_TrickHousePuzzle7_Text_19DFBB:: @ 819DFBB
-	.string "Going around the same spot...\n"
-	.string "It begets ill fortune...$"
+	.string "Immer am gleichen Ort herumgeistern...\n"
+	.string "Das bringt Unglück...$"
 
 Route110_TrickHousePuzzle7_Text_19DFF2:: @ 819DFF2
-	.string "Defeated!\n"
-	.string "It’s a bad sign...$"
+	.string "Besiegt!\n"
+	.string "Das ist ein schlechtes Omen...$"
 
 Route110_TrickHousePuzzle7_Text_19E00F:: @ 819E00F
-	.string "I’ve circled the same spot over ten\n"
-	.string "times now... It’s ill fortune...$"
+	.string "Ich bin nun schon zehn Mal an diesem Ort\n"
+	.string "herumgegeistert. Daher hatte ich Pech!$"
 
 Route110_TrickHousePuzzle7_Text_19E054:: @ 819E054
-	.string "Whoever wins will get through here\n"
-	.string "first. That’s the feeling I get.$"
+	.string "Ich glaube, der Sieger wird der erste\n"
+	.string "Gewinner an diesem Ort überhaupt sein.$"
 
 Route110_TrickHousePuzzle7_Text_19E098:: @ 819E098
-	.string "Oh!\n"
-	.string "Well, go ahead, then!$"
+	.string "Ah!\n"
+	.string "Dann geh hurtig weiter!$"
 
 Route110_TrickHousePuzzle7_Text_19E0B2:: @ 819E0B2
-	.string "You’re solving all the puzzles in the\n"
-	.string "TRICK HOUSE. That’s the feeling I get.$"
+	.string "Ich glaube, du wirst alle Rätsel in\n"
+	.string "diesem RÄTSELHAUS lösen!$"
 
 UnknownString_819E0FF: @ 819E0FF
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER I love.”\n"
+	.string "{PLAYER} hat den geheimen Code auf die\n"
+	.string "Tür geschrieben.\p"
+	.string "“Ich liebe den RÄTSELMEISTER.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
+	.string "Das Schloss geht klickend auf.$"

@@ -120,7 +120,7 @@ gMetatileAttributes_Building:: @ 826C188
 
 	.align 1
 gMetatiles_Shop:: @ 826C198
-	.incbin "data/tilesets/secondary/shop/metatiles.bin"
+	.incbin "data-de/tilesets/secondary/shop/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_Shop:: @ 826D318

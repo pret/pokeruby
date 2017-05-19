@@ -4300,7 +4300,7 @@ VictoryRoad_B1F_MapBorder:: @ 82F83D0
 	.incbin "data/maps/VictoryRoad_B1F/border.bin"
 
 VictoryRoad_B1F_MapBlockdata:: @ 82F83D8
-	.incbin "data/maps/VictoryRoad_B1F/map.bin"
+	.incbin "data-de/maps/VictoryRoad_B1F/map.bin"
 
 	.align 2
 VictoryRoad_B1F_MapAttributes:: @ 82F8EFC
@@ -4315,7 +4315,7 @@ VictoryRoad_B2F_MapBorder:: @ 82F8F14
 	.incbin "data/maps/VictoryRoad_B2F/border.bin"
 
 VictoryRoad_B2F_MapBlockdata:: @ 82F8F1C
-	.incbin "data/maps/VictoryRoad_B2F/map.bin"
+	.incbin "data-de/maps/VictoryRoad_B2F/map.bin"
 
 	.align 2
 VictoryRoad_B2F_MapAttributes:: @ 82F9A40

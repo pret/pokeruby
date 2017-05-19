@@ -1,59 +1,59 @@
 gRibbonDescriptionPart1_Champion:
-	.string "CHAMPION-beating, HALL$"
+	.string "BAND für unschlagbare$"
 
 gRibbonDescriptionPart2_Champion:
-	.string "OF FAME Member RIBBON$"
+	.string "RUHMESHALLE-Mitglieder$"
 
 gRibbonDescriptionPart1_CoolContest:
-	.string "COOL CONTEST$"
+	.string "COOLNESS-WETTBEWERB$"
 
 gRibbonDescriptionPart1_BeautyContest:
-	.string "BEAUTY CONTEST$"
+	.string "SCHÖNHEITSWETTBEWERB$"
 
 gRibbonDescriptionPart1_CuteContest:
-	.string "CUTE CONTEST$"
+	.string "ANMUT-WETTBEWERB$"
 
 gRibbonDescriptionPart1_SmartContest:
-	.string "SMART CONTEST$"
+	.string "KLUGHEITSWETTBEWERB$"
 
 gRibbonDescriptionPart1_ToughContest:
-	.string "TOUGH CONTEST$"
+	.string "STÄRKE-WETTBEWERB$"
 
 gRibbonDescriptionPart2_NormalRank:
-	.string "Normal Rank winner!$"
+	.string "Sieger in Normal-Klasse!$"
 
 gRibbonDescriptionPart2_SuperRank:
-	.string "Super Rank winner!$"
+	.string "Sieger in Super-Klasse!$"
 
 gRibbonDescriptionPart2_HyperRank:
-	.string "Hyper Rank winner!$"
+	.string "Sieger in Hyper-Klasse!$"
 
 gRibbonDescriptionPart2_MasterRank:
-	.string "Master Rank winner!$"
+	.string "Sieger in Master-Klasse!$"
 
 gRibbonDescriptionPart1_Winning:
-	.string "RIBBON for clearing LV50$"
+	.string "BAND für Lv. 50-Erfolg$"
 
 gRibbonDescriptionPart2_Winning:
-	.string "at the BATTLE TOWER.$"
+	.string "im DUELLTURM.$"
 
 gRibbonDescriptionPart1_Victory:
-	.string "Won for clearing LV100$"
+	.string "Für Erfolg in Lv. 100$"
 
 gRibbonDescriptionPart2_Victory:
-	.string "at the BATTLE TOWER.$"
+	.string "im DUELLTURM.$"
 
 gRibbonDescriptionPart1_Artist:
-	.string "RIBBON for being chosen$"
+	.string "Band für auserwählte$"
 
 gRibbonDescriptionPart2_Artist:
-	.string "as a super sketch model.$"
+	.string "Porträt-Modelle.$"
 
 gRibbonDescriptionPart1_Effort:
-	.string "RIBBON awarded for$"
+	.string "BAND für$"
 
 gRibbonDescriptionPart2_Effort:
-	.string "being a hard worker.$"
+	.string "fleißige Arbeiter.$"
 
 	.align 2
 gRibbonDescriptions:: @ 83E113C

@@ -1,192 +1,194 @@
 SootopolisCity_Gym_1F_Text_18E8A5:: @ 818E8A5
-	.string "Yo! How’s it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "SOOTOPOLIS’s GYM LEADER WALLACE is\n"
-	.string "a master of WATER-type POKéMON.\p"
-	.string "And, to get to WALLACE, an icy floor\n"
-	.string "will hamper your progress...\p"
-	.string "Listen, I’m sorry, but that’s all the\n"
-	.string "advice that I have for you.\p"
-	.string "The rest of the way, you have to\n"
-	.string "go for it yourself!$"
+	.string "Na, wie sieht es aus, auf dem Weg zum\n"
+	.string "CHAMP, {PLAYER}?\p"
+	.string "ARENALEITER WASSILI in XENEROVILLE\n"
+	.string "ist der Meister der WASSER-POKéMON.\p"
+	.string "Und auf dem Weg zu ihm wirst du auf\n"
+	.string "gefrorenem Boden ins Rutschen kommen.\p"
+	.string "Tut mir Leid, aber mehr kann ich dir dazu\n"
+	.string "auch nicht sagen.\p"
+	.string "Den Rest des Weges musst du alleine\n"
+	.string "meistern.$"
 
 SootopolisCity_Gym_1F_Text_18E9C9:: @ 818E9C9
-	.string "Yow! You’ve beaten even WALLACE, who\n"
-	.string "was supposedly the best in all HOENN!\p"
-	.string "Okay! Check out your TRAINER’s CARD.\p"
-	.string "If you’ve gotten all the BADGES, you’re\n"
-	.string "set for the POKéMON LEAGUE challenge!$"
+	.string "Hui! Du hast WASSILI besiegt, von dem\n"
+	.string "man sagt, er sei der beste TRAINER in\l"
+	.string "der HOENN-Region.\p"
+	.string "Okay! Schau auf deinem\n"
+	.string "TRAINERPASS nach.\p"
+	.string "Wenn du alle ORDEN erhalten hast,\n"
+	.string "kannst du die POKéMON LIGA\l"
+	.string "herausfordern!$"
 
 SootopolisCity_Gym_B1F_Text_18EA87:: @ 818EA87
-	.string "I’ll show you the sublime techniques\n"
-	.string "I learned from our LEADER WALLACE!$"
+	.string "Ich zeige dir die sublimen Techniken,\n"
+	.string "die ich vom ARENALEITER WASSILI\l"
+	.string "gelernt habe.$"
 
 SootopolisCity_Gym_B1F_Text_18EACF:: @ 818EACF
-	.string "Please forgive me, WALLACE...$"
+	.string "Bitte verzeih mir, WASSILI...$"
 
 SootopolisCity_Gym_B1F_Text_18EAED:: @ 818EAED
-	.string "Watch what happens if you crack all\n"
-	.string "the floor tiles.$"
+	.string "Pass auf, was passiert, wenn du alle\n"
+	.string "Bodenfliesen betreten hast...$"
 
 SootopolisCity_Gym_B1F_Text_18EB22:: @ 818EB22
-	.string "You came all the way here, but you won’t\n"
-	.string "get to see WALLACE.\p"
-	.string "Not if you lose to me, you won’t!$"
+	.string "Du bist den ganzen Weg hierher ge-\n"
+	.string "kommen, aber bis zu WASSILI dringst\l"
+	.string "du nicht vor.\p"
+	.string "Weil du gegen mich verlieren wirst!$"
 
 SootopolisCity_Gym_B1F_Text_18EB81:: @ 818EB81
-	.string "You’re strong!\n"
-	.string "I was fooled by your cute looks!$"
+	.string "Du bist stark! Ich habe mich durch dein\n"
+	.string "unschuldiges Aussehen täuschen lassen.$"
 
 SootopolisCity_Gym_B1F_Text_18EBB1:: @ 818EBB1
-	.string "You might be good enough to avoid\n"
-	.string "being wiped out in one hit by WALLACE.$"
+	.string "Du bist gut genug, um nicht sofort von\n"
+	.string "WASSILI besiegt zu werden.$"
 
 SootopolisCity_Gym_B1F_Text_18EBFA:: @ 818EBFA
-	.string "The sight of WALLACE conducting a\n"
-	.string "battle...\p"
-	.string "The very beauty of it compelled me to\n"
-	.string "become a TRAINER.$"
+	.string "Die Art, wie WASSILI kämpft...\p"
+	.string "Dieser wunderbare Anblick hat mich dazu\n"
+	.string "inspiriert, TRAINER zu werden.$"
 
 SootopolisCity_Gym_B1F_Text_18EC5E:: @ 818EC5E
-	.string "You battled with more beauty than\n"
-	.string "I could muster...$"
+	.string "Du kämpfst mit mehr Anmut als ich...$"
 
 SootopolisCity_Gym_B1F_Text_18EC92:: @ 818EC92
-	.string "The grace you bring to battle is\n"
-	.string "fabulous.\p"
-	.string "Oh... I’m so fortunate to have found\n"
-	.string "POKéMON.$"
+	.string "Die Ästhetik, die du in den Kampf ein-\n"
+	.string "bringst, ist unbeschreiblich.\p"
+	.string "Oh... Ich bin so glücklich, dass ich mich\n"
+	.string "für POKéMON entschieden habe.$"
 
 SootopolisCity_Gym_B1F_Text_18ECEB:: @ 818ECEB
-	.string "I should teach you how harsh battles\n"
-	.string "can be.$"
+	.string "Ich werde dir beibringen, dass Kämpfe\n"
+	.string "kein Zuckerschlecken sind!$"
 
 SootopolisCity_Gym_B1F_Text_18ED18:: @ 818ED18
 	.string "Oh.\n"
-	.string "You’re strong.$"
+	.string "Du bist stark.$"
 
 SootopolisCity_Gym_B1F_Text_18ED2B:: @ 818ED2B
-	.string "I’ll tell you something good.\p"
-	.string "If you want to reach WALLACE, you\n"
-	.string "need to walk on each floor tile once.$"
+	.string "Ich verrate dir etwas.\p"
+	.string "Wenn du zu WASSILI willst, dann darfst\n"
+	.string "du auf jede Fliese nur ein Mal treten.$"
 
 SootopolisCity_Gym_B1F_Text_18ED91:: @ 818ED91
-	.string "The POKéMON GYM of the highest level\n"
-	.string "in the HOENN region...\p"
-	.string "That’s the SOOTOPOLIS GYM.$"
+	.string "Die POKéMON ARENA mit den höchsten\n"
+	.string "Anforderungen in der HOENN-Region...\p"
+	.string "Das ist die ARENA von XENEROVILLE.$"
 
 SootopolisCity_Gym_B1F_Text_18EDE8:: @ 818EDE8
-	.string "What a high level you are!$"
+	.string "Du kämpfst aber auf einem hohen Niveau!$"
 
 SootopolisCity_Gym_B1F_Text_18EE03:: @ 818EE03
-	.string "Rather than being satisfied by being\n"
-	.string "in a strong GYM, I imagine training in\l"
-	.string "other places will make you stronger.\l"
-	.string "But above all, it looks more fun.$"
+	.string "Statt damit zufrieden zu sein, zur\n"
+	.string "besten ARENA zu gehören, würde ich\l"
+	.string "gerne auch an anderen Orten trainieren.\l"
+	.string "Aber hier ist es so lustig!$"
 
 SootopolisCity_Gym_B1F_Text_18EE96:: @ 818EE96
-	.string "I train my POKéMON together with\n"
-	.string "WALLACE.\p"
-	.string "Don’t think I’m a pushover.$"
+	.string "Ich trainiere meine POKéMON zusammen\n"
+	.string "mit WASSILI.\p"
+	.string "Ich bin nicht leicht zu nehmen!$"
 
 SootopolisCity_Gym_B1F_Text_18EEDC:: @ 818EEDC
-	.string "I was bowled right over...$"
+	.string "Da wurde ich glatt überrollt...$"
 
 SootopolisCity_Gym_B1F_Text_18EEF7:: @ 818EEF7
-	.string "I think you have potential.\n"
-	.string "Why don’t you stay and train with us?$"
+	.string "Ich denke, du hast durchaus Potential.\n"
+	.string "Warum bleibst du nicht bei uns?$"
 
 SootopolisCity_Gym_B1F_Text_18EF39:: @ 818EF39
-	.string "A graceful glide across the ice while\n"
-	.string "crossing no lines...\p"
-	.string "A TRAINER putting on that performance\n"
-	.string "would be elegantly beautiful!$"
+	.string "Anmutig über das Eis zu gleiten, ohne\n"
+	.string "die Linien zu berühren...\p"
+	.string "Ein TRAINER, der das beherrscht, wird\n"
+	.string "auch in anderen Dingen elegant wirken.$"
 
 SootopolisCity_Gym_B1F_Text_18EFB8:: @ 818EFB8
-	.string "Well, excuse me?!$"
+	.string "Äh, entschuldige mich...$"
 
 SootopolisCity_Gym_B1F_Text_18EFCA:: @ 818EFCA
-	.string "This is really obvious, but how strong\n"
-	.string "you are as a TRAINER has nothing to do\l"
-	.string "with how young or old you are.$"
+	.string "Es ist offensichtlich: Die Stärke eines\n"
+	.string "TRAINERS hat nichts mit seinem Alter\l"
+	.string "zu tun!$"
 
 SootopolisCity_Gym_B1F_Text_18F037:: @ 818F037
-	.string "When I’m with my POKéMON, the time\n"
-	.string "flies by before you can say, “Oops!”$"
+	.string "Wenn ich mit meinen POKéMON zusammen\n"
+	.string "bin, vergeht die Zeit so schnell, dass\l"
+	.string "ich noch nicht mal “Uuups” sagen kann.$"
 
 SootopolisCity_Gym_B1F_Text_18F07F:: @ 818F07F
-	.string "Oops!$"
+	.string "Uuups!$"
 
 SootopolisCity_Gym_B1F_Text_18F085:: @ 818F085
-	.string "I wish I can forget about lost causes\n"
-	.string "before I can manage an “Oops!”$"
+	.string "Ich wollte, ich könnte meine Niederlagen\n"
+	.string "vergessen, bevor ich “Uuups”\l"
+	.string "ausgesprochen habe.$"
 
 SootopolisCity_Gym_1F_Text_18F0CA:: @ 818F0CA
-	.string "Allow me to formally introduce\n"
-	.string "myself.\p"
-	.string "I am WALLACE.\n"
-	.string "The GYM LEADER of SOOTOPOLIS.\p"
-	.string "There’s something about you...\n"
-	.string "A difference in your demeanor.\p"
-	.string "I think I sense that in you.\p"
-	.string "What happened inside the CAVE OF\n"
-	.string "ORIGIN, and what you did, I will likely\l"
-	.string "learn through our upcoming battle.\p"
-	.string "Now, show me. Show me the power you\n"
-	.string "wield with your POKéMON.\p"
-	.string "And I, in turn, shall present you with\n"
-	.string "a performance of illusions in water\l"
-	.string "by me and my POKéMON!$"
+	.string "Erlaube mir, mich kurz vorzustellen.\p"
+	.string "Ich bin WASSILI.\n"
+	.string "Der ARENALEITER von XENEROVILLE.\p"
+	.string "Irgendetwas fällt mir an dir auf...\n"
+	.string "Da ist etwas in deinem Auftreten...\p"
+	.string "Ich denke, ich spüre etwas in dir.\p"
+	.string "Das, was in der URZEITHÖHLE\n"
+	.string "passierte und was du getan hast, all das\l"
+	.string "werde ich im Kampf mit dir lesen können.\p"
+	.string "Gib mir die Gelegenheit dazu. Zeig mir,\n"
+	.string "wie du deine POKéMON im Kampf führst.\p"
+	.string "Und als Gegenleistung zeige ich dir eine\n"
+	.string "Illusion im Wasser. Dargeboten von mir\l"
+	.string "und meinen POKéMON.$"
 
 SootopolisCity_Gym_1F_Text_18F282:: @ 818F282
 	.string "Bravo.\p"
-	.string "I realize now your authenticity and\n"
-	.string "magnificence as a POKéMON TRAINER.\p"
-	.string "I find much joy in having met you and\n"
-	.string "your POKéMON.\p"
-	.string "You have proven yourself worthy of\n"
-	.string "the RAIN BADGE. Accept it.$"
+	.string "Jetzt erkenne ich, welch ein groß-\n"
+	.string "artiger POKéMON-TRAINER vor mir steht.\p"
+	.string "Es hat mir viel Freude gemacht, dich und\n"
+	.string "deine POKéMON kennen gelernt zu haben.\p"
+	.string "Du verdienst zu Recht den\n"
+	.string "SCHAUERORDEN. Bitte nimm ihn an.$"
 
 SootopolisCity_Gym_1F_Text_18F342:: @ 818F342
-	.string "{PLAYER} received the RAIN BADGE\n"
-	.string "from WALLACE.$"
+	.string "{PLAYER} erhält den SCHAUERORDEN\n"
+	.string "von WASSILI.$"
 
 SootopolisCity_Gym_1F_Text_18F36B:: @ 818F36B
-	.string "Having that BADGE assures you the\n"
-	.string "full obedience of all your POKéMON to\l"
-	.string "every command you make.\p"
-	.string "The BADGE also allows the use of the\n"
-	.string "HM move WATERFALL to scale walls\l"
-	.string "of cascading water.\p"
-	.string "And, so that you never forget the\n"
-	.string "battle we shared, take this...$"
+	.string "Dieser ORDEN sorgt dafür, dass dir alle\n"
+	.string "deine POKéMON gehorchen.\p"
+	.string "Der ORDEN befähigt dich außerdem dazu,\n"
+	.string "mit der VM KASKADE Wasserfälle in jede\l"
+	.string "Richtung zu passieren.\p"
+	.string "Und damit du unseren Kampf stets in\n"
+	.string "Erinnerung behältst, gebe ich dir dies...$"
 
 SootopolisCity_Gym_1F_Text_18F466:: @ 818F466
-	.string "The TM I handed you contains\n"
-	.string "WATER PULSE.\p"
-	.string "In use, it will occasionally confuse\n"
-	.string "the target with ultrasonic waves.$"
+	.string "Diese TM enthält AQUAWELLE.\p"
+	.string "Damit kann das gegnerische POKéMON\n"
+	.string "mit Ultraschallwellen verwirrt werden.$"
 
 SootopolisCity_Gym_1F_Text_18F4D7:: @ 818F4D7
-	.string "TRAINERS who have gathered all the\n"
-	.string "GYM BADGES of HOENN should make way\l"
-	.string "for the ultimate destination.\p"
-	.string "The POKéMON LEAGUE.\p"
-	.string "Travel to the easternmost reaches\n"
-	.string "of HOENN, to the island EVER GRANDE.\l"
-	.string "The POKéMON LEAGUE is there.$"
+	.string "TRAINER, die alle ORDEN der ARENEN in\n"
+	.string "HOENN erhalten haben, sollten sich...\p"
+	.string "Auf den Weg zur ultimativen Heraus-\n"
+	.string "forderung machen. Der POKéMON LIGA!\p"
+	.string "Reise zu den östlichsten Gebieten von\n"
+	.string "HOENN, zur Insel PRACHTPOLIS CITY. Dort\l"
+	.string "findest du die POKéMON LIGA.$"
 
 SootopolisCity_Gym_1F_Text_18F5B4:: @ 818F5B4
-	.string "There remains but one BADGE to\n"
-	.string "obtain in HOENN.\p"
-	.string "If you wish to challenge the POKéMON\n"
-	.string "LEAGUE, you must obtain the last\l"
-	.string "BADGE from the GYM in FORTREE.$"
+	.string "In HOENN gibt es nur noch einen ORDEN\n"
+	.string "zu verdienen.\p"
+	.string "Wenn du die POKéMON LIGA herausfordern\n"
+	.string "willst, musst du zuerst den ORDEN der\l"
+	.string "ARENA in BAUMHAUSEN CITY bekommen.$"
 
 SootopolisCity_Gym_1F_Text_18F649:: @ 818F649
-	.string "SOOTOPOLIS CITY POKéMON GYM$"
+	.string "POKéMON ARENA von XENEROVILLE$"
 
 SootopolisCity_Gym_1F_Text_18F665:: @ 818F665
-	.string "SOOTOPOLIS CITY POKéMON GYM\p"
-	.string "WALLACE’S CERTIFIED TRAINERS:\n"
+	.string "POKéMON ARENA von XENEROVILLE\p"
+	.string "WASSILIS ANERKANNTE TRAINER:\n"
 	.string "{PLAYER}$"

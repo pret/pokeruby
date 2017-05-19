@@ -1,1021 +1,1505 @@
 BattleText_UnknownString:
 	.string "{STRING 33}$"
 BattleText_GainExpPoints:
-	.string "{STRING 0} gained{STRING 1}\n{STRING 42} EXP. Points!\p$"
+	.string "{STRING 0} erhält{PLAYER}\n"
+	.string "{STRING 42} E-Punkte!\p"
+	.string "$"
 BattleText_Terminator:
 	.string "$"
 BattleText_BoostedExp:
-	.string " a boosted$"
+	.string " spezielle$"
 BattleText_GrewLevel:
-	.string "{STRING 0} grew to\nLV. {STRING 1}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} erreicht\n"
+	.string "Lv. {PLAYER}!{UNKNOWN_A}\p"
+	.string "$"
 BattleText_LearnedMove:
-	.string "{STRING 0} learned\n{STRING 1}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} erlernt\n"
+	.string "{PLAYER}!{UNKNOWN_A}\p"
+	.string "$"
 BattleText_TryingToLearnMove:
-	.string "{STRING 0} is trying to\nlearn {STRING 1}.\p$"
+	.string "{STRING 0} versucht,\n"
+	.string "{PLAYER} zu lernen.\p"
+	.string "$"
 BattleText_CantLearnMore:
-	.string "But, {STRING 0} can’t learn\nmore than four moves.\p$"
+	.string "Aber {STRING 0} kann nicht\n"
+	.string "mehr als vier Attacken erlernen.\p"
+	.string "$"
 BattleText_DeleteMove:
-	.string "Delete a move to make\nroom for {STRING 1}?$"
+	.string "Soll eine Attacke zu Gunsten von\n"
+	.string "{PLAYER} vergessen werden?$"
 BattleText_DeletedMove:
-	.string "{STRING 0} forgot\n{STRING 1}.\p$"
+	.string "{STRING 0} hat\n"
+	.string "{PLAYER} vergessen!\p"
+	.string "$"
 BattleText_StopLearning:
-	.string "{PAUSE 32}Stop learning\n{STRING 1}?$"
+	.string "{PAUSE 32}{PLAYER}\n"
+	.string "nicht erlernen?$"
 BattleText_DidNotLearn:
-	.string "{STRING 0} did not learn\n{STRING 1}.\p$"
+	.string "{STRING 0} hat {PLAYER}\n"
+	.string "nicht erlernt.\p"
+	.string "$"
 BattleText_UseNext:
-	.string "Use next POKéMON?$"
+	.string "Nächstes POKéMON einsetzen?$"
 BattleText_AttackMissed:
-	.string "{ATTACKING_MON}’s\nattack missed!$"
+	.string "Attacke von {EVIL_LEGENDARY}\n"
+	.string "ging daneben!$"
 BattleText_ProtectedItself:
-	.string "{DEFENDING_MON}\nprotected itself!$"
+	.string "{GOOD_LEGENDARY}\n"
+	.string "schützt sich selbst!$"
 BattleText_AvoidedDamage:
-	.string "{DEFENDING_MON} avoided\ndamage with {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} vermeidet\n"
+	.string "Schaden mit {STRING 22}!$"
 BattleText_GroundMoveNegate:
-	.string "{DEFENDING_MON} makes GROUND\nmoves miss with {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} wehrt BODEN-\n"
+	.string "Attacken mit {STRING 22} ab!$"
 BattleText_AvoidedAttack:
-	.string "{DEFENDING_MON} avoided\nthe attack!$"
+	.string "{GOOD_LEGENDARY} wehrt die\n"
+	.string "Attacke ab!$"
 BattleText_DoesntAffect:
-	.string "It doesn’t affect\n{DEFENDING_MON}...$"
+	.string "Es hat keine Wirkung auf\n"
+	.string "{GOOD_LEGENDARY}...$"
 BattleText_AttackingFainted:
-	.string "{ATTACKING_MON}\nfainted!\p$"
+	.string "{EVIL_LEGENDARY}\n"
+	.string "wurde besiegt!\p"
+	.string "$"
 BattleText_DefendingFainted:
-	.string "{DEFENDING_MON}\nfainted!\p$"
+	.string "{GOOD_LEGENDARY}\n"
+	.string "wurde besiegt!\p"
+	.string "$"
 BattleText_WinningPrize:
-	.string "{STRING 32} got ¥{STRING 0}\nfor winning!\p$"
+	.string "{STRING 32} gewinnt ¥{STRING 0}!\p"
+	.string "$"
 BattleText_OutOfUsablePoke:
-	.string "{STRING 32} is out of\nuseable POKéMON!\p$"
+	.string "{STRING 32} hat kein\n"
+	.string "kampffähiges POKéMON mehr!\p"
+	.string "$"
 BattleText_WhitedOut:
-	.string "{STRING 32} whited out!{PAUSE_UNTIL_PRESS}$"
+	.string "{STRING 32} fällt in Ohnmacht!{PAUSE_UNTIL_PRESS}$"
 BattleText_PreventEscape:
-	.string "{STRING 16} prevents\nescape with {STRING 23}!\p$"
+	.string "{STRING 16} verhindert\n"
+	.string "eine Flucht mit {STRING 23}!\p"
+	.string "$"
 BattleText_CantEscape:
-	.string "Can’t escape!\p$"
+	.string "Flucht unmöglich!\p"
+	.string "$"
 BattleText_AttackingCantEscape:
-	.string "{ATTACKING_MON}\ncan’t escape!$"
+	.string "{EVIL_LEGENDARY}\n"
+	.string "kann nicht fliehen!$"
 BattleText_HitMulti:
-	.string "Hit {STRING 0} time(s)!$"
+	.string "{STRING 0}-mal getroffen!$"
 BattleText_FellAsleep:
-	.string "{STRING 14}\nfell asleep!$"
+	.string "{STRING 14}\n"
+	.string "ist eingeschlafen!$"
 BattleText_MadeAsleep:
-	.string "{STRING 16}’s {STRING 23}\nmade {STRING 14} sleep!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} lässt\l"
+	.string "{STRING 14} einschlafen!$"
 BattleText_DefendingAsleep:
-	.string "{DEFENDING_MON} is\nalready asleep!$"
+	.string "{GOOD_LEGENDARY} schläft\n"
+	.string "bereits!$"
 BattleText_AttackingAsleep:
-	.string "{ATTACKING_MON} is\nalready asleep!$"
+	.string "{EVIL_LEGENDARY} schläft\n"
+	.string "bereits!$"
 BattleText_WasntAffected:
-	.string "{DEFENDING_MON}\nwasn’t affected!$"
+	.string "{GOOD_LEGENDARY}\n"
+	.string "ist unversehrt!$"
 BattleText_Poisoned:
-	.string "{STRING 14}\nwas poisoned!$"
+	.string "{STRING 14}\n"
+	.string "wurde vergiftet!$"
 BattleText_Poisoned2:
-	.string "{STRING 16}’s {STRING 23}\npoisoned {STRING 14}!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} vergiftete\l"
+	.string "{STRING 14}!$"
 BattleText_PoisonHurt:
-	.string "{ATTACKING_MON} is hurt\nby poison!$"
+	.string "{EVIL_LEGENDARY} wurde durch\n"
+	.string "Gift verletzt!$"
 BattleText_AlreadyPoisoned:
-	.string "{DEFENDING_MON} is already\npoisoned.$"
+	.string "{GOOD_LEGENDARY} ist bereits\n"
+	.string "vergiftet.$"
 BattleText_BadlyPoisoned:
-	.string "{STRING 14} is badly\npoisoned!$"
+	.string "{STRING 14} wurde schwer\n"
+	.string "vergiftet!$"
 BattleText_EnergyDrained:
-	.string "{DEFENDING_MON} had its\nenergy drained!$"
+	.string "{GOOD_LEGENDARY} wurde\n"
+	.string "Energie abgesaugt!$"
 BattleText_Burned:
-	.string "{STRING 14} was burned!$"
+	.string "{STRING 14} brennt!$"
 BattleText_Burned2:
-	.string "{STRING 16}’s {STRING 23}\nburned {STRING 14}!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} verbrennt\l"
+	.string "{STRING 14}!$"
 BattleText_BurnHurt:
-	.string "{ATTACKING_MON} is hurt\nby its burn!$"
+	.string "Die Verbrennung schadet\n"
+	.string "{EVIL_LEGENDARY}!$"
 BattleText_AlreadyBurned:
-	.string "{DEFENDING_MON} already\nhas a burn.$"
+	.string "{GOOD_LEGENDARY} brennt\n"
+	.string "bereits.$"
 BattleText_Frozen:
-	.string "{STRING 14} was\nfrozen solid!$"
+	.string "{STRING 14} erstarrt\n"
+	.string "zu Eis!$"
 BattleText_Frozen2:
-	.string "{STRING 16}’s {STRING 23}\nfroze {STRING 14} solid!$"
+	.string "{STRING 14} wurde durch\n"
+	.string "{STRING 23} von\l"
+	.string "{STRING 16} eingefroren!$"
 BattleText_FrozenSolid:
-	.string "{ATTACKING_MON} is\nfrozen solid!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "eingefroren!$"
 BattleText_DefendingDefrosted:
-	.string "{DEFENDING_MON} was\ndefrosted!$"
+	.string "{GOOD_LEGENDARY} wurde\n"
+	.string "aufgetaut!$"
 BattleText_AttackingDefrosted:
-	.string "{ATTACKING_MON} was\ndefrosted!$"
+	.string "{EVIL_LEGENDARY} wurde\n"
+	.string "aufgetaut!$"
 BattleText_Defrosted:
-	.string "{ATTACKING_MON} was\ndefrosted by {STRING 17}!$"
+	.string "{EVIL_LEGENDARY} wurde\n"
+	.string "durch {STRING 17} aufgetaut!$"
 BattleText_Paralyzed:
-	.string "{STRING 14} is paralyzed!\nIt may be unable to move!$"
+	.string "{STRING 14} ist\n"
+	.string "paralysiert! Es greift\l"
+	.string "eventuell nicht an!$"
 BattleText_Paralyzed2:
-	.string "{STRING 16}’s {STRING 23}\nparalyzed {STRING 14}!\lIt may be unable to move!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} paralysierte\p"
+	.string "{STRING 14}!\n"
+	.string "Es greift eventuell nicht an!$"
 BattleText_Paralyzed3:
-	.string "{ATTACKING_MON} is paralyzed!\nIt can’t move!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "paralysiert! Es kann\l"
+	.string "nicht angreifen!$"
 BattleText_AlreadyParalyzed:
-	.string "{DEFENDING_MON} is\nalready paralyzed!$"
+	.string "{GOOD_LEGENDARY} ist\n"
+	.string "bereits paralysiert!$"
 BattleText_ParalysisHealed:
-	.string "{DEFENDING_MON} was\nhealed of paralysis!$"
+	.string "{GOOD_LEGENDARY} wurde von der\n"
+	.string "Paralyse geheilt!$"
 BattleText_DreamEaten:
-	.string "{DEFENDING_MON}’s\ndream was eaten!$"
+	.string "Der Traum von {GOOD_LEGENDARY}\n"
+	.string "wurde gefressen!$"
 BattleText_AttackingStatNoHigher:
-	.string "{ATTACKING_MON}’s {STRING 0}\nwon’t go higher!$"
+	.string "{STRING 0} von\n"
+	.string "{EVIL_LEGENDARY} kann nicht\l"
+	.string "mehr erhöht werden!$"
 BattleText_DefendingStatNoHigher:
-	.string "{DEFENDING_MON}’s {STRING 0}\nwon’t go lower!$"
+	.string "{STRING 0} von\n"
+	.string "{GOOD_LEGENDARY} kann nicht\l"
+	.string "weiter gesenkt werden!$"
 BattleText_StoppedWorking:
-	.string "Your team’s {STRING 0}\nstopped working!$"
+	.string "{STRING 0} in deinem Team\n"
+	.string "funktioniert nicht mehr!$"
 BattleText_StoppedWorking2:
-	.string "The foe’s {STRING 0}\nstopped working!$"
+	.string "{STRING 0} des Gegners\n"
+	.string "funktioniert nicht mehr!$"
 BattleText_Confused:
-	.string "{ATTACKING_MON} is\nconfused!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "verwirrt!$"
 BattleText_ConfusionSnapOut:
-	.string "{ATTACKING_MON} snapped\nout of confusion!$"
+	.string "{EVIL_LEGENDARY} ist nicht\n"
+	.string "mehr verwirrt!$"
 BattleText_BecameConfused:
-	.string "{STRING 14} became\nconfused!$"
+	.string "{STRING 14} wurde\n"
+	.string "verwirrt!$"
 BattleText_AlreadyConfused:
-	.string "{DEFENDING_MON} is\nalready confused!$"
+	.string "{GOOD_LEGENDARY} ist\n"
+	.string "bereits verwirrt!$"
 BattleText_FellLove:
-	.string "{DEFENDING_MON}\nfell in love!$"
+	.string "{GOOD_LEGENDARY}\n"
+	.string "hat sich verliebt!$"
 BattleText_InLoveWith:
-	.string "{ATTACKING_MON} is in love\nwith {STRING 16}!$"
+	.string "{EVIL_LEGENDARY} hat sich in\n"
+	.string "{STRING 16} verliebt!$"
 BattleText_ImmobilizedBy:
-	.string "{ATTACKING_MON} is\nimmobilized by love!$"
+	.string "{EVIL_LEGENDARY} ist starr\n"
+	.string "vor Liebe!$"
 BattleText_BlownAway:
-	.string "{DEFENDING_MON} was\nblown away!$"
+	.string "{GOOD_LEGENDARY} wurde\n"
+	.string "weggeweht!$"
 BattleText_TypeTransform:
-	.string "{ATTACKING_MON} transformed\ninto the {STRING 0} type!$"
+	.string "{EVIL_LEGENDARY} verwandelt\n"
+	.string "sich zu Typ {STRING 0}!$"
 BattleText_Flinched:
-	.string "{ATTACKING_MON} flinched!$"
+	.string "{EVIL_LEGENDARY} schreckt\n"
+	.string "zurück!$"
 BattleText_RegainedHealth:
-	.string "{DEFENDING_MON} regained\nhealth!$"
+	.string "{GOOD_LEGENDARY} erholt sich!$"
 BattleText_HPFull:
-	.string "{DEFENDING_MON}’s\nHP is full!$"
+	.string "{GOOD_LEGENDARY} hat alle KP!$"
 BattleText_RaisedSpDef:
-	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF!$"
+	.string "{STRING 17} von\n"
+	.string "{STRING 38} erhöht\l"
+	.string "die SP. VER.$"
 BattleText_RaisedSpDefLittle:
-	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF a little!$"
+	.string "Die SP. VER. wird etwas durch\n"
+	.string "{STRING 17} von\l"
+	.string "{STRING 38} erhöht.$"
 BattleText_RaisedDefense:
-	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE!$"
+	.string "{STRING 17} von\n"
+	.string "{STRING 38}\l"
+	.string "erhöht die VERTEIDIGUNG!$"
 BattleText_RaisedDefenseLittle:
-	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE a little!$"
+	.string "{STRING 17} von\n"
+	.string "{STRING 38}\l"
+	.string "erhöht etwas die VERTEIDIGUNG!$"
 BattleText_CoveredVeil:
-	.string "{STRING 38} is covered\nby a veil!$"
+	.string "{STRING 38} wird von\n"
+	.string "einem Schleier umhüllt!$"
 BattleText_SafeguardActive:
-	.string "{DEFENDING_MON} is protected\nby SAFEGUARD!$"
+	.string "{GOOD_LEGENDARY} wird durch\n"
+	.string "BODYGUARD geschützt!$"
 BattleText_SafeguardFaded:
-	.string "{STRING 40}’s SAFEGUARD\nfaded!$"
+	.string "BODYGUARD von\n"
+	.string "{STRING 40} lässt nach!$"
 BattleText_WentToSleep:
-	.string "{ATTACKING_MON} went\nto sleep!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "eingeschlafen!$"
 BattleText_SpeltHealthy:
-	.string "{ATTACKING_MON} slept and\nbecame healthy!$"
+	.string "{EVIL_LEGENDARY} schläft und\n"
+	.string "erholt sich!$"
 BattleText_WhipWhirlwind:
-	.string "{ATTACKING_MON} whipped\nup a whirlwind!$"
+	.string "{EVIL_LEGENDARY} entfacht\n"
+	.string "einen Wirbelwind!$"
 BattleText_TookSunlight:
-	.string "{ATTACKING_MON} took\nin sunlight!$"
+	.string "{EVIL_LEGENDARY} absorbiert\n"
+	.string "Sonnenlicht!$"
 BattleText_LoweredHead:
-	.string "{ATTACKING_MON} lowered\nits head!$"
+	.string "{EVIL_LEGENDARY} zieht seinen\n"
+	.string "Kopf ein!$"
 BattleText_IsGlowing:
-	.string "{ATTACKING_MON} is glowing!$"
+	.string "{EVIL_LEGENDARY} leuchtet!$"
 BattleText_FlewHigh:
-	.string "{ATTACKING_MON} flew\nup high!$"
+	.string "{EVIL_LEGENDARY} fliegt\n"
+	.string "hoch empor!$"
 BattleText_DugHole:
-	.string "{ATTACKING_MON} dug a hole!$"
+	.string "{EVIL_LEGENDARY} gräbt sich\n"
+	.string "ein!$"
 BattleText_HidUnderwater:
-	.string "{ATTACKING_MON} hid\nunderwater!$"
+	.string "{EVIL_LEGENDARY} taucht\n"
+	.string "unter!$"
 BattleText_SprangUp:
-	.string "{ATTACKING_MON} sprang up!$"
+	.string "{EVIL_LEGENDARY} springt auf!$"
 BattleText_SqueezedBind:
-	.string "{DEFENDING_MON} was squeezed by\n{ATTACKING_MON}’s BIND!$"
+	.string "{EVIL_LEGENDARY} setzt bei\n"
+	.string "{GOOD_LEGENDARY}\l"
+	.string "KLAMMERGRIFF ein!$"
 BattleText_TrappedVortex:
-	.string "{DEFENDING_MON} was trapped\nin the vortex!$"
+	.string "{GOOD_LEGENDARY} wurde in\n"
+	.string "einem Strudel gefangen!$"
 BattleText_SandTombTrapped:
-	.string "{DEFENDING_MON} was trapped\nby SAND TOMB!$"
+	.string "{GOOD_LEGENDARY} wurde durch\n"
+	.string "SANDGRAB gefangen!$"
 BattleText_Wrapped:
-	.string "{DEFENDING_MON} was WRAPPED by\n{ATTACKING_MON}!$"
+	.string "{GOOD_LEGENDARY} wurde von\n"
+	.string "{EVIL_LEGENDARY} umWICKELt!$"
 BattleText_Clamped:
-	.string "{ATTACKING_MON} CLAMPED\n{DEFENDING_MON}!$"
+	.string "{GOOD_LEGENDARY} wurde von\n"
+	.string "{EVIL_LEGENDARY} geSCHNAPPT!$"
 BattleText_HurtBy:
-	.string "{ATTACKING_MON} is hurt\nby {STRING 0}!$"
+	.string "{EVIL_LEGENDARY} wurde durch\n"
+	.string "{STRING 0} verletzt!$"
 BattleText_FreedFrom:
-	.string "{ATTACKING_MON} was freed\nfrom {STRING 0}!$"
+	.string "{EVIL_LEGENDARY} wurde von\n"
+	.string "{STRING 0} befreit!$"
 BattleText_KeptGoingCrash:
-	.string "{ATTACKING_MON} kept going\nand crashed!$"
+	.string "{EVIL_LEGENDARY} macht weiter\n"
+	.string "und bricht zusammen!$"
 
 gUnknown_083FEE5D:: @ 83FEE5D
 BattleText_MistShroud:
-	.string "{STRING 38} became\nshrouded in MIST!$"
+	.string "{STRING 38} wird in\n"
+	.string "WEISSNEBEL gehüllt!$"
 BattleText_MistProtect:
-	.string "{STRING 16} is protected\nby MIST!$"
+	.string "{STRING 16} wird durch\n"
+	.string "WEISSNEBEL geschützt!$"
 
 gUnknown_083FEE92:: @ 83FEE92
 BattleText_GetPumped:
-	.string "{ATTACKING_MON} is getting\npumped!$"
+	.string "{EVIL_LEGENDARY} pumpt\n"
+	.string "sich auf!$"
 BattleText_HitRecoil:
-	.string "{ATTACKING_MON} is hit\nwith recoil!$"
+	.string "{EVIL_LEGENDARY} wurde vom\n"
+	.string "Rückstoß getroffen!$"
 BattleText_ProtectedItself2:
-	.string "{ATTACKING_MON} protected\nitself!$"
+	.string "{EVIL_LEGENDARY} schützt\n"
+	.string "sich selbst!$"
 BattleText_SandBuffeted:
-	.string "{ATTACKING_MON} is buffeted\nby the sandstorm!$"
+	.string "{EVIL_LEGENDARY} wird vom\n"
+	.string "Sandsturm getroffen!$"
 BattleText_HailStricken:
-	.string "{ATTACKING_MON} is stricken\nby HAIL!$"
+	.string "{EVIL_LEGENDARY} wird vom\n"
+	.string "HAGELSTURM getroffen!$"
 BattleText_WoreOff:
-	.string "{STRING 36}’s {STRING 0}\nwore off!$"
+	.string "{STRING 0} von\n"
+	.string "{STRING 36} lässt nach!$"
 BattleText_WasSeeded:
-	.string "{DEFENDING_MON} was seeded!$"
+	.string "{GOOD_LEGENDARY} wurde\n"
+	.string "bepflanzt!$"
 BattleText_EvadedAttack:
-	.string "{DEFENDING_MON} evaded\nthe attack!$"
+	.string "{GOOD_LEGENDARY} ist\n"
+	.string "ausgewichen!$"
 BattleText_HealthSapped:
-	.string "{ATTACKING_MON}’s health is\nsapped by LEECH SEED!$"
+	.string "EGELSAMEN schadet\n"
+	.string "{EVIL_LEGENDARY}!$"
 BattleText_FastAsleep:
-	.string "{ATTACKING_MON} is fast\nasleep.$"
+	.string "{EVIL_LEGENDARY} schläft tief\n"
+	.string "und fest.$"
 BattleText_WokeUp:
-	.string "{ATTACKING_MON} woke up!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "aufgewacht!$"
 BattleText_UproarAwake:
-	.string "But {STRING 16}’s UPROAR\nkept it awake!$"
+	.string "AUFRUHR von {STRING 16}\n"
+	.string "hält es wach!$"
 BattleText_UproarWoke:
-	.string "{ATTACKING_MON} woke up\nin the UPROAR!$"
+	.string "{EVIL_LEGENDARY} wird durch\n"
+	.string "AUFRUHR wach!$"
 BattleText_UproarCaused:
-	.string "{ATTACKING_MON} caused\nan UPROAR!$"
+	.string "{EVIL_LEGENDARY} verursacht\n"
+	.string "AUFRUHR!$"
 BattleText_UproarMaking:
-	.string "{ATTACKING_MON} is making\nan UPROAR!$"
+	.string "{EVIL_LEGENDARY} macht\n"
+	.string "einen AUFRUHR!$"
 BattleText_CalmedDown:
-	.string "{ATTACKING_MON} calmed down.$"
+	.string "{EVIL_LEGENDARY}\n"
+	.string "beruhigt sich.$"
 BattleText_UproarCantSleep:
-	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
+	.string "{GOOD_LEGENDARY} kann bei dem\n"
+	.string "AUFRUHR nicht schlafen!$"
 BattleText_Stockpiled:
-	.string "{ATTACKING_MON} STOCKPILED\n{STRING 0}!$"
+	.string "{EVIL_LEGENDARY} HORTET\n"
+	.string "{STRING 0}!$"
 BattleText_StockpiledCant:
-	.string "{ATTACKING_MON} can’t\nSTOCKPILE any more!$"
+	.string "{EVIL_LEGENDARY} kann nicht\n"
+	.string "weiter HORTEN!$"
 BattleText_UproarCantSleep2:
-	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
+	.string "{GOOD_LEGENDARY} kann bei dem\n"
+	.string "AUFRUHR nicht schlafen!$"
 BattleText_UproarKeptAwake:
-	.string "But the UPROAR kept\n{DEFENDING_MON} awake!$"
+	.string "Aber der AUFRUHR hält\n"
+	.string "{GOOD_LEGENDARY} wach!$"
 BattleText_StayedAwake:
-	.string "{DEFENDING_MON} stayed awake\nusing its {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} hält sich mit\n"
+	.string "{STRING 22} wach!$"
 BattleText_StoringEnergy:
-	.string "{ATTACKING_MON} is storing\nenergy!$"
+	.string "{EVIL_LEGENDARY} speichert\n"
+	.string "Energie!$"
 BattleText_UnleashedEnergy:
-	.string "{ATTACKING_MON} unleashed\nenergy!$"
+	.string "{EVIL_LEGENDARY} erzeugt\n"
+	.string "Energie!$"
 BattleText_FatigueConfuse:
-	.string "{ATTACKING_MON} became\nconfused out of fatigue!$"
+	.string "{EVIL_LEGENDARY} ist vor\n"
+	.string "Erschöpfung verwirrt!$"
 BattleText_PickedUpYen:
-	.string "{STRING 32} picked up\n¥{STRING 0}!\p$"
+	.string "{STRING 32} hebt\n"
+	.string "¥{STRING 0} auf!\p"
+	.string "$"
 BattleText_Unaffected:
-	.string "{DEFENDING_MON} is\nunaffected!$"
+	.string "{GOOD_LEGENDARY} ist\n"
+	.string "unversehrt!$"
 BattleText_Transformed:
-	.string "{ATTACKING_MON} transformed\ninto {STRING 0}!$"
+	.string "{EVIL_LEGENDARY} verwandelt\n"
+	.string "sich in {STRING 0}!$"
 BattleText_SubMade:
-	.string "{ATTACKING_MON} made\na SUBSTITUTE!$"
+	.string "{EVIL_LEGENDARY} setzt einen\n"
+	.string "DELEGATOR ein!$"
 BattleText_SubAlready:
-	.string "{ATTACKING_MON} already\nhas a SUBSTITUTE!$"
+	.string "{EVIL_LEGENDARY} hat bereits\n"
+	.string "einen DELEGATOR!$"
 BattleText_SubTookDamage:
-	.string "The SUBSTITUTE took damage\nfor {DEFENDING_MON}!\p$"
+	.string "Der DELEGATOR steckt den\n"
+	.string "Schlag für {GOOD_LEGENDARY}\l"
+	.string "ein!\p"
+	.string "$"
 BattleText_SubFaded:
-	.string "{DEFENDING_MON}’s\nSUBSTITUTE faded!\p$"
+	.string "DELEGATOR von\n"
+	.string "{GOOD_LEGENDARY} lässt nach!\p"
+	.string "$"
 BattleText_MustRecharge:
-	.string "{ATTACKING_MON} must\nrecharge!$"
+	.string "{EVIL_LEGENDARY} muss sich\n"
+	.string "wieder aufladen!$"
 BattleText_RageBuilding:
-	.string "{DEFENDING_MON}’s RAGE\nis building!$"
+	.string "{GOOD_LEGENDARY} verfällt in\n"
+	.string "RASEREI!$"
 BattleText_MoveWasDisabled:
-	.string "{DEFENDING_MON}’s {STRING 0}\nwas disabled!$"
+	.string "{STRING 0} von\n"
+	.string "{GOOD_LEGENDARY}\l"
+	.string "wurde blockiert!$"
 BattleText_DisabledNoMore:
-	.string "{ATTACKING_MON} is disabled\nno more!$"
+	.string "{EVIL_LEGENDARY} ist nicht\n"
+	.string "mehr blockiert!$"
 BattleText_EncoreGot:
-	.string "{DEFENDING_MON} got\nan ENCORE!$"
+	.string "{GOOD_LEGENDARY} gibt\n"
+	.string "eine ZUGABE!$"
 BattleText_EncoreEnded:
-	.string "{ATTACKING_MON}’s ENCORE\nended!$"
+	.string "ZUGABE von {EVIL_LEGENDARY}\n"
+	.string "ist beendet!$"
 BattleText_TookAim:
-	.string "{ATTACKING_MON} took aim\nat {DEFENDING_MON}!$"
+	.string "{EVIL_LEGENDARY} zielt\n"
+	.string "auf {GOOD_LEGENDARY}!$"
 BattleText_SketchedMove:
-	.string "{ATTACKING_MON} SKETCHED\n{STRING 0}!$"
+	.string "{EVIL_LEGENDARY} setzt\n"
+	.string "NACHAHMER bei {STRING 0} ein!$"
 BattleText_DestinyBondTake:
-	.string "{ATTACKING_MON} is trying\nto take its foe with it!$"
+	.string "{EVIL_LEGENDARY} versucht den\n"
+	.string "Gegner mit sich zu nehmen!$"
 BattleText_DestinyBondTaken:
-	.string "{DEFENDING_MON} took\n{ATTACKING_MON} with it!$"
+	.string "{GOOD_LEGENDARY} nimmt\n"
+	.string "{EVIL_LEGENDARY} mit sich!$"
 BattleText_ReducedBy:
-	.string "Reduced {DEFENDING_MON}’s\n{STRING 0} by {STRING 1}!$"
+	.string "{STRING 0} von\n"
+	.string "{GOOD_LEGENDARY} wird um\l"
+	.string "{PLAYER} reduziert!$"
 BattleText_StoleSomething:
-	.string "{ATTACKING_MON} stole\n{DEFENDING_MON}’s {STRING 19}!$"
+	.string "{EVIL_LEGENDARY} stiehlt\n"
+	.string "{STRING 19} von\l"
+	.string "{GOOD_LEGENDARY}!$"
 BattleText_CantEscapeNow:
-	.string "{DEFENDING_MON} can’t\nescape now!$"
+	.string "{GOOD_LEGENDARY} kann\n"
+	.string "nicht fliehen!$"
 BattleText_NightmareStart:
-	.string "{DEFENDING_MON} fell into\na NIGHTMARE!$"
+	.string "{GOOD_LEGENDARY} bekommt\n"
+	.string "NACHTMAHR!$"
 BattleText_NightmareLock:
-	.string "{ATTACKING_MON} is locked\nin a NIGHTMARE!$"
+	.string "{EVIL_LEGENDARY} ist in\n"
+	.string "NACHTMAHR gefangen!$"
 BattleText_CurseLay:
-	.string "{ATTACKING_MON} cut its own HP\nand laid a CURSE on\l{DEFENDING_MON}!$"
+	.string "{EVIL_LEGENDARY} nimmt einen\n"
+	.string "Teil seiner KP und legt einen\l"
+	.string "FLUCH auf {GOOD_LEGENDARY}!$"
 BattleText_CurseAfflict:
-	.string "{ATTACKING_MON} is afflicted\nby the CURSE!$"
+	.string "{EVIL_LEGENDARY} wurde durch\n"
+	.string "FLUCH verletzt!$"
 BattleText_SpikesScattered:
-	.string "{STRING 37} POKéMON team had SPIKES\nscattered around it!$"
+	.string "POKéMON-Team von {STRING 37}\n"
+	.string "verteilt STACHELN um sich!$"
 BattleText_SpikesHurt:
-	.string "{STRING 16} is hurt\nby SPIKES!$"
+	.string "{STRING 16} wurde durch\n"
+	.string "STACHLER verletzt!$"
 BattleText_IdentifiedPoke:
-	.string "{ATTACKING_MON} identified\n{DEFENDING_MON}!$"
+	.string "{EVIL_LEGENDARY} erkennt\n"
+	.string "{GOOD_LEGENDARY}!$"
 BattleText_PerishSongFell:
-	.string "{ATTACKING_MON}’s PERISH count\nfell to {STRING 0}!$"
+	.string "ABGESANG von {EVIL_LEGENDARY}\n"
+	.string "steht bei {STRING 0}!$"
 BattleText_BracedItself:
-	.string "{ATTACKING_MON} braced\nitself!$"
+	.string "{EVIL_LEGENDARY} macht sich\n"
+	.string "bereit!$"
 BattleText_EnduredHit:
-	.string "{DEFENDING_MON} ENDURED\nthe hit!$"
+	.string "{GOOD_LEGENDARY} setzt\n"
+	.string "AUSDAUER ein!$"
 BattleText_MagnitudeCount:
-	.string "MAGNITUDE {STRING 0}!$"
+	.string "INTENSITÄT {STRING 0}!$"
 BattleText_CutHPMaxATK:
-	.string "{ATTACKING_MON} cut its own HP\nand maximized ATTACK!$"
+	.string "{EVIL_LEGENDARY} nutzt seine\n"
+	.string "KP und hebt den ANGR-Wert!$"
 BattleText_CopyStatChanges:
-	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s stat changes!$"
+	.string "{EVIL_LEGENDARY} kopiert die\n"
+	.string "Statusveränderungen\l"
+	.string "von {GOOD_LEGENDARY}!$"
 BattleText_GotFreeFrom:
-	.string "{ATTACKING_MON} got free of\n{DEFENDING_MON}’s {STRING 0}!$"
+	.string "{EVIL_LEGENDARY} befreit\n"
+	.string "sich von {STRING 0}\l"
+	.string "von {GOOD_LEGENDARY}!$"
 BattleText_LeechShed:
-	.string "{ATTACKING_MON} shed\nLEECH SEED!$"
+	.string "{EVIL_LEGENDARY} befreit sich\n"
+	.string "von EGELSAMEN!$"
 BattleText_SpikesBlownAway:
-	.string "{ATTACKING_MON} blew away\nSPIKES!$"
+	.string "{EVIL_LEGENDARY} blies den\n"
+	.string "STACHLER weg!$"
 BattleText_FledBattle:
-	.string "{ATTACKING_MON} fled from\nbattle!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "geflüchtet!$"
 BattleText_ForesawAttack:
-	.string "{ATTACKING_MON} foresaw\nan attack!$"
+	.string "{EVIL_LEGENDARY} sah eine\n"
+	.string "Attacke voraus!$"
 BattleText_TookAttack:
-	.string "{DEFENDING_MON} took\n{STRING 0}’s attack!$"
+	.string "{GOOD_LEGENDARY} wurde von\n"
+	.string "der Attacke {STRING 0} getroffen!$"
 BattleText_ChoseDestiny:
-	.string "{ATTACKING_MON} chose\n{STRING 17} as its destiny!$"
+	.string "{EVIL_LEGENDARY} wählte\n"
+	.string "{STRING 17} als Vorhersehung aus!$"
 BattleText_PokeAttack:
-	.string "{STRING 0}’s attack!$"
+	.string "Angriff von {STRING 0}!$"
 BattleText_CenterAttention:
-	.string "{ATTACKING_MON} became the\ncenter of attention!$"
+	.string "{EVIL_LEGENDARY} zieht alle\n"
+	.string "Aufmerksamkeit auf sich!$"
 BattleText_ChargingPower:
-	.string "{ATTACKING_MON} began\ncharging power!$"
+	.string "{EVIL_LEGENDARY} lädt\n"
+	.string "sich auf!$"
 BattleText_NaturePower:
-	.string "NATURE POWER turned into\n{STRING 17}!$"
+	.string "NATUR-KRAFT wurde zu\n"
+	.string "{STRING 17}!$"
 BattleText_StatusNormal:
-	.string "{ATTACKING_MON}’s status\nreturned to normal!$"
+	.string "Status von {EVIL_LEGENDARY}\n"
+	.string "wird normal!$"
 BattleText_TormentSubject:
-	.string "{DEFENDING_MON} was subjected\nto TORMENT!$"
+	.string "{GOOD_LEGENDARY} wird von\n"
+	.string "FOLTERKNECHT unterworfen!$"
 BattleText_TightenFocus:
-	.string "{ATTACKING_MON} is tightening\nits focus!$"
+	.string "{EVIL_LEGENDARY} verstärkt\n"
+	.string "seinen Fokus!$"
 BattleText_TauntFell:
-	.string "{DEFENDING_MON} fell for\nthe TAUNT!$"
+	.string "{GOOD_LEGENDARY} fällt auf\n"
+	.string "VERHÖHNER herein!$"
 BattleText_ReadyToHelp:
-	.string "{ATTACKING_MON} is ready to\nhelp {DEFENDING_MON}!$"
+	.string "{EVIL_LEGENDARY} will\n"
+	.string "{GOOD_LEGENDARY} helfen!$"
 BattleText_SwitchedItems:
-	.string "{ATTACKING_MON} switched\nitems with its opponent!$"
+	.string "{EVIL_LEGENDARY} tauscht\n"
+	.string "Items mit anderem PKMN!$"
 BattleText_Obtained1:
-	.string "{ATTACKING_MON} obtained\n{STRING 0}.$"
+	.string "{EVIL_LEGENDARY} erhält\n"
+	.string "{STRING 0}.$"
 BattleText_Obtained2:
-	.string "{DEFENDING_MON} obtained\n{STRING 1}.$"
+	.string "{GOOD_LEGENDARY} erhält\n"
+	.string "{PLAYER}.$"
 BattleText_Obtained3:
-	.string "{ATTACKING_MON} obtained\n{STRING 0}.\p{DEFENDING_MON} obtained\n{STRING 1}.$"
+	.string "{EVIL_LEGENDARY} erhält\n"
+	.string "{STRING 0}.\p"
+	.string "{GOOD_LEGENDARY} erhält\n"
+	.string "{PLAYER}.$"
 BattleText_CopiedObject:
-	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s {STRING 22}!$"
+	.string "{EVIL_LEGENDARY}\n"
+	.string "kopiert {STRING 22} von\l"
+	.string "{GOOD_LEGENDARY}!$"
 BattleText_WishMade:
-	.string "{ATTACKING_MON} made a WISH!$"
+	.string "{EVIL_LEGENDARY} spricht einen\n"
+	.string "WUNSCHTRAUM aus!$"
 BattleText_WishTrue:
-	.string "{STRING 0}’s WISH\ncame true!$"
+	.string "WUNSCHTRAUM von\n"
+	.string "{STRING 0} erfüllt sich!$"
 BattleText_PlantedRoots:
-	.string "{ATTACKING_MON} planted its roots!$"
+	.string "{EVIL_LEGENDARY} pflanzt seine\n"
+	.string "Wurzeln!$"
 BattleText_AbsorbNutrients:
-	.string "{ATTACKING_MON} absorbed\nnutrients with its roots!$"
+	.string "{EVIL_LEGENDARY} nimmt über\n"
+	.string "seine Wurzeln Nährstoffe auf!$"
 BattleText_AnchoredItself:
-	.string "{DEFENDING_MON} anchored\nitself with its roots!$"
+	.string "{GOOD_LEGENDARY}\n"
+	.string "verankert sich mit seinen Wurzeln!$"
 BattleText_DrowsyMade:
-	.string "{ATTACKING_MON} made\n{DEFENDING_MON} drowsy!$"
+	.string "{EVIL_LEGENDARY} macht\n"
+	.string "{GOOD_LEGENDARY} schläfrig!$"
 BattleText_KnockedOffItem:
-	.string "{ATTACKING_MON} knocked off\n{DEFENDING_MON}’s {STRING 19}!$"
+	.string "{EVIL_LEGENDARY}\n"
+	.string "entreißt {STRING 19} von\l"
+	.string "{GOOD_LEGENDARY}!$"
 BattleText_AbilitySwap:
-	.string "{ATTACKING_MON} swapped abilities\nwith its opponent!$"
+	.string "{EVIL_LEGENDARY} tauscht die\n"
+	.string "Fähigkeiten mit einem PKMN!$"
 BattleText_SealedMove:
-	.string "{ATTACKING_MON} sealed the\nopponent’s move(s)!$"
+	.string "{EVIL_LEGENDARY} versiegelt\n"
+	.string "die Attacke/n des Gegners!$"
 BattleText_GrudgeBear:
-	.string "{ATTACKING_MON} wants the\nopponent to bear a GRUDGE!$"
+	.string "{EVIL_LEGENDARY} möchte, dass\n"
+	.string "der Gegner ein NACHSPIEL erträgt!$"
 BattleText_GrudgeLosePP:
-	.string "{ATTACKING_MON}’s {STRING 0}\nlost all its PP due to\lthe GRUDGE!$"
+	.string "{STRING 0} von\n"
+	.string "{EVIL_LEGENDARY} hat aufgrund\l"
+	.string "von NACHSPIEL alle AP verloren!$"
 BattleText_ShroudedItself:
-	.string "{ATTACKING_MON} shrouded\nitself in {STRING 17}!$"
+	.string "{EVIL_LEGENDARY} verhüllt sich\n"
+	.string "selbst in {STRING 17}!$"
 BattleText_MagicCoatBounce:
-	.string "{ATTACKING_MON}’s {STRING 17}\nwas bounced back by MAGIC COAT!$"
+	.string "{STRING 17} von\n"
+	.string "{EVIL_LEGENDARY} prallte am\l"
+	.string "MAGIEMANTEL ab!$"
 BattleText_AwaitMove:
-	.string "{ATTACKING_MON} awaits its foe\nto make a move!$"
+	.string "{EVIL_LEGENDARY} wartet auf\n"
+	.string "eine gegnerische Attacke!$"
 BattleText_SnatchedMove:
-	.string "{DEFENDING_MON} SNATCHED\n{STRING 16}’s move!$"
+	.string "{GOOD_LEGENDARY} ÜBERNAHM\n"
+	.string "Attacke von {STRING 16}!$"
 BattleText_ElecWeakened:
-	.string "Electricity’s power was\nweakened!$"
+	.string "Die Stärke der Elektrizität\n"
+	.string "wurde geschwächt!$"
 BattleText_FireWeakened:
-	.string "Fire’s power was\nweakened!$"
+	.string "Die Stärke des Feuers\n"
+	.string "wurde geschwächt!$"
 BattleText_FoundOne:
-	.string "{ATTACKING_MON} found\none {STRING 19}!$"
+	.string "{EVIL_LEGENDARY} hat 1\n"
+	.string "{STRING 19} gefunden!$"
 BattleText_SoothingAroma:
-	.string "A soothing aroma wafted\nthrough the area!$"
+	.string "Ein wohltuendes Aroma\n"
+	.string "breitet sich aus!$"
 BattleText_CantUseItems:
-	.string "Items can’t be used now.{PAUSE 64}$"
+	.string "Hier können Items nicht eingesetzt\n"
+	.string "werden.{PAUSE 64}$"
 BattleText_UnknownString2:
-	.string "For {STRING 16},\n{STRING 19} {STRING 0}$"
+	.string "Für {STRING 16} war\n"
+	.string "{STRING 19} {STRING 0}$"
 BattleText_HustleUse:
-	.string "{STRING 16} used\n{STRING 19} to hustle!$"
+	.string "{STRING 16} setzt\n"
+	.string "{STRING 19} ein, um zu drängeln!$"
 BattleText_LostFocus:
-	.string "{ATTACKING_MON} lost its\nfocus and couldn’t move!$"
+	.string "{EVIL_LEGENDARY} hat seinen\n"
+	.string "Fokus verloren und kann\l"
+	.string "nicht angreifen!$"
 BattleText_DraggedOut:
-	.string "{DEFENDING_MON} was\ndragged out!\p$"
+	.string "{GOOD_LEGENDARY} wurde\n"
+	.string "auserwählt!\p"
+	.string "$"
 BattleText_BrokeWall:
-	.string "The wall shattered!$"
+	.string "Die Mauer brach zusammen!$"
 BattleText_NoEffect:
-	.string "But it had no effect!$"
+	.string "Es ist wirkungslos!$"
 BattleText_NoMovesLeft:
-	.string "{STRING 15} has no\nmoves left!\p$"
+	.string "{STRING 15} hat keine\n"
+	.string "Attacken mehr übrig!\p"
+	.string "$"
 BattleText_MoveIsDisabled:
-	.string "{STRING 15}’s {STRING 17}\nis disabled!\p$"
+	.string "{STRING 17} von\n"
+	.string "{STRING 15} ist blockiert!\p"
+	.string "$"
 BattleText_TormentNoUse:
-	.string "{STRING 15} can’t use the same\nmove twice in a row due to the TORMENT!\p$"
+	.string "{STRING 15} kann\n"
+	.string "aufgrund von FOLTERKNECHT\p"
+	.string "die Attacke nicht 2-mal\n"
+	.string "hintereinander einsetzen!$"
 BattleText_TauntNoUse:
-	.string "{STRING 15} can’t use\n{STRING 17} after the TAUNT!\p$"
+	.string "{STRING 15} kann\n"
+	.string "{STRING 17} nach VERHÖHNER\l"
+	.string "nicht einsetzen!\p"
+	.string "$"
 BattleText_SealedNoUse:
-	.string "{STRING 15} can’t use the\nsealed {STRING 17}!\p$"
+	.string "{STRING 15} kann die ver-\n"
+	.string "siegelte Attacke {STRING 17}\l"
+	.string "nicht einsetzen!\p"
+	.string "$"
 BattleText_RainMade:
-	.string "{STRING 16}’s {STRING 23}\nmade it rain!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} lässt\l"
+	.string "es regnen!$"
 BattleText_SpeedRisen:
-	.string "{STRING 16}’s {STRING 23}\nraised its SPEED!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} erhöht\l"
+	.string "seine INIT.!$"
 BattleText_ProtectedBy:
-	.string "{DEFENDING_MON} was protected\nby {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} wurde durch\n"
+	.string "{STRING 22} geschützt!$"
 BattleText_PreventedBy:
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents {ATTACKING_MON}\lfrom using {STRING 17}!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} hindert\p"
+	.string "{EVIL_LEGENDARY} daran,\n"
+	.string "{STRING 17} einzusetzen!$"
 BattleText_HPRestoredUsing:
-	.string "{DEFENDING_MON} restored HP\nusing its {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} füllt KP mit\n"
+	.string "Hilfe von {STRING 22} auf!$"
 BattleText_MadeUseless:
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} useless!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} hebt die\l"
+	.string "Wirkung von {STRING 17} auf!$"
 BattleText_MadeType:
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade it the {STRING 0} type!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} macht es zu\l"
+	.string "einem {STRING 0}-Typ!$"
 BattleText_PreventedPara:
-	.string "{STRING 14}’s {STRING 22}\nprevents paralysis!$"
+	.string "{STRING 22} von\n"
+	.string "{STRING 14} verhindert\l"
+	.string "eine Paralyse!$"
 BattleText_PreventedRomance:
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents romance!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} verhindert\l"
+	.string "eine Romanze!$"
 BattleText_PreventedPoison:
-	.string "{STRING 14}’s {STRING 22}\nprevents poisoning!$"
+	.string "{STRING 22} von\n"
+	.string "{STRING 14} verhindert\l"
+	.string "eine Vergiftung!$"
 BattleText_PreventedConfusion:
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents confusion!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} verhindert\l"
+	.string "Verwirrung!$"
 BattleText_RaisedFirePower:
-	.string "{DEFENDING_MON}’s {STRING 22}\nraised its FIRE power!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} erhöht die\l"
+	.string "FEUER-Kraft!$"
 BattleText_AnchorsItself:
-	.string "{DEFENDING_MON} anchors\nitself with {STRING 22}!$"
+	.string "{GOOD_LEGENDARY} verankert\n"
+	.string "sich mit Hilfe von {STRING 22}!$"
 BattleText_CutsAttack:
-	.string "{STRING 16}’s {STRING 23}\ncuts {DEFENDING_MON}’s ATTACK!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} vermindert\l"
+	.string "ANGRIFF von {GOOD_LEGENDARY}!$"
 BattleText_PreventedStatLoss:
-	.string "{STRING 16}’s {STRING 23}\nprevents stat loss!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} verhindert\l"
+	.string "Statusveränderungen!$"
 BattleText_HurtOther:
-	.string "{DEFENDING_MON}’s {STRING 22}\nhurt {ATTACKING_MON}!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} verletzt\l"
+	.string "{EVIL_LEGENDARY}!$"
 BattleText_Traced:
-	.string "{STRING 16} TRACED\n{STRING 0}’s {STRING 1}!$"
+	.string "FÄHRTE von\n"
+	.string "{STRING 16}\p"
+	.string "erkennt {PLAYER}\n"
+	.string "von {STRING 0}!$"
 BattleText_PreventedBurn:
-	.string "{STRING 14}’s {STRING 24}\nprevents burns!$"
+	.string "{STRING 24} von\n"
+	.string "{STRING 14} verhindert\l"
+	.string "Verbrennung!$"
 BattleText_BlocksOther:
-	.string "{DEFENDING_MON}’s {STRING 22}\nblocks {STRING 17}!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} blockiert\l"
+	.string "{STRING 17}!$"
 BattleText_BlocksOther2:
-	.string "{STRING 16}’s {STRING 23}\nblocks {STRING 17}!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} blockiert\l"
+	.string "{STRING 17}!$"
 BattleText_RestoredHPByItem:
-	.string "{ATTACKING_MON}’s {STRING 21}\nrestored some HP!$"
+	.string "{STRING 21} von\n"
+	.string "{EVIL_LEGENDARY} füllt\l"
+	.string "einige KP auf!$"
 BattleText_WhipSandstorm:
-	.string "{STRING 16}’s {STRING 23}\nwhipped up a sandstorm!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} entfacht\l"
+	.string "einen Sandsturm!$"
 BattleText_SunIntensified:
-	.string "{STRING 16}’s {STRING 23}\nintensified the sun’s rays!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} intensiviert\l"
+	.string "die Sonnenstrahlen!$"
 BattleText_PreventedLoss:
-	.string "{STRING 16}’s {STRING 23}\nprevents {STRING 0} loss!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} verhindert \l"
+	.string "den Verlust von {STRING 0}!$"
 BattleText_InfatuatedPoke:
-	.string "{DEFENDING_MON}’s {STRING 22}\ninfatuated {ATTACKING_MON}!$"
+	.string "{EVIL_LEGENDARY} ist vernarrt\n"
+	.string "in {STRING 22} von\l"
+	.string "{GOOD_LEGENDARY}!$"
 BattleText_MadeIneffective:
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} ineffective!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} macht\l"
+	.string "{STRING 17} wirkungslos!$"
 BattleText_CuredProblem:
-	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} heilte sein\l"
+	.string "Problem mit {STRING 0}!$"
 BattleText_OozeSuckup:
-	.string "It sucked up the\nLIQUID OOZE!$"
+	.string "Es saugte\n"
+	.string "KLOAKENSOSSE auf!$"
 BattleText_Transformed2:
-	.string "{STRING 16} transformed!$"
+	.string "{STRING 16}\n"
+	.string "verwandelte sich!$"
 BattleText_TookAttack2:
-	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} übernahm\l"
+	.string "den Angriff!$"
 
 gUnknown_083FFCCA:: @ 83FFCCA
 BattleText_PreventedSwitch::
-	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
+	.string "{STRING 20} von\n"
+	.string "{STRING 0} verhindert\p"
+	.string "Wechsel!\p"
+	.string "$"
 BattleText_PreventedOther:
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} macht\p"
+	.string "{STRING 0} von\n"
+	.string "{STRING 16} wirkungslos!$"
 BattleText_MadeIneffective2:
-	.string "{STRING 16}’s {STRING 23}\nmade it ineffective!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} machte\l"
+	.string "es wirkungslos!$"
 BattleText_PreventedFlinching:
-	.string "{STRING 14}’s {STRING 24}\nprevents flinching!$"
+	.string "{STRING 24} von\n"
+	.string "{STRING 14} verhindert\l"
+	.string "ein Zurückschrecken!$"
 BattleText_PreventedOther2:
-	.string "{ATTACKING_MON}’s {STRING 21}\nprevents {DEFENDING_MON}’s\l{STRING 22} from working!$"
+	.string "{STRING 21} von\n"
+	.string "{EVIL_LEGENDARY} macht\p"
+	.string "{STRING 22} von\n"
+	.string "{GOOD_LEGENDARY} wirkungslos!$"
 BattleText_CuredOfProblem:
-	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} heilte sein\l"
+	.string "Problem mit {STRING 0}!$"
 BattleText_NoEffectOn:
-	.string "{STRING 16}’s {STRING 23}\nhad no effect on {STRING 14}!$"
+	.string "{STRING 23} von\n"
+	.string "{STRING 16} hat keine\l"
+	.string "Wirkung auf {STRING 14}!$"
 BattleText_Sharply:
-	.string "sharply $"
+	.string "steigt stark!$"
 
 gUnknown_083FFDB3:: @ 83FFDB3
 BattleText_Rose:
-	.string "rose!$"
+	.string "steigt.$"
 BattleText_Harshly:
-	.string "harshly $"
+	.string "sinkt stark!$"
 BattleText_Fell:
-	.string "fell!$"
+	.string "sinkt.$"
 BattleText_UnknownString7:
-	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "{STRING 0} von\n"
+	.string "{EVIL_LEGENDARY} {PLAYER}$"
 
 gUnknown_083FFDD3:: @ 83FFDD3
 BattleText_UnknownString3:
-	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "{STRING 0} von\n"
+	.string "{GOOD_LEGENDARY} {PLAYER}$"
 BattleText_UnknownString4:
-	.string "Using {STRING 19}, the {STRING 0}\nof {STRING 16} {STRING 1}$"
+	.string "{STRING 19}: {STRING 0} von\n"
+	.string "{STRING 16} {PLAYER}$"
 BattleText_UnknownString5:
-	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "{STRING 0} von\n"
+	.string "{EVIL_LEGENDARY} {PLAYER}$"
 BattleText_UnknownString6:
-	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "{STRING 0} von\n"
+	.string "{GOOD_LEGENDARY} {PLAYER}$"
 BattleText_StatNoHigher:
-	.string "{ATTACKING_MON}’s stats won’t\ngo any higher!$"
+	.string "Status von {EVIL_LEGENDARY}\n"
+	.string "kann nicht weiter erhöht werden!$"
 BattleText_StatNoLower:
-	.string "{DEFENDING_MON}’s stats won’t\ngo any lower!$"
+	.string "Status von {GOOD_LEGENDARY}\n"
+	.string "kann nicht weiter sinken!$"
 BattleText_Critical:
-	.string "A critical hit!$"
+	.string "Ein Volltreffer!$"
 BattleText_GrandSlam:
-	.string "It’s a one-hit KO!$"
+	.string "Ein K.O.-Treffer!$"
 BattleText_MoveForget123:
-	.string "{PAUSE 32}1, {PAUSE 15}2 and...{PAUSE 15} ...{PAUSE 15} ...{PAUSE 15}\n{PAUSE 15}{PLAY_SE SE_KON}Poof!\p$"
+	.string "{PAUSE 32}1, {PAUSE 15}2 und...{PAUSE 15} ...{PAUSE 15} ...{PAUSE 15}\n"
+	.string "{PAUSE 15}{PLAY_SE 0x38 0x00}Schwupp!\p"
+	.string "$"
 BattleText_MoveForgetAnd:
-	.string "And...\p$"
+	.string "Und...\p"
+	.string "$"
 BattleText_CantForgetHM:
-	.string "HM moves can’t be\nforgotten now.\p$"
+	.string "VM-Attacken können jetzt \n"
+	.string "nicht vergessen werden.\p"
+	.string "$"
 BattleText_NotEffective:
-	.string "It’s not very effective...$"
+	.string "Das ist nicht sehr effektiv...$"
 BattleText_SuperEffective:
-	.string "It’s super effective!$"
+	.string "Das ist sehr effektiv!$"
 
 gUnknown_083FFEFC:: @ 83FFEFC
 BattleText_GotAwaySafely:
-	.string "{PLAY_SE SE_NIGERU}Got away safely!\p$"
+	.string "{PLAY_SE 0x11 0x00}Du bist entkommen!\p"
+	.string "$"
 BattleText_FledUsingItem:
-	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing its {STRING 19}!\p$"
+	.string "{PLAY_SE 0x11 0x00}{EVIL_LEGENDARY} floh\n"
+	.string "durch Einsatz von {STRING 19}!\p"
+	.string "$"
 BattleText_FledUsingOther:
-	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing {STRING 21}!\p$"
+	.string "{PLAY_SE 0x11 0x00}{EVIL_LEGENDARY} floh\n"
+	.string "durch Einsatz von {STRING 21}!\p"
+	.string "$"
 BattleText_FledWild:
-	.string "{PLAY_SE SE_NIGERU}Wild {STRING 0} fled!$"
+	.string "{PLAY_SE 0x11 0x00}Wildes {STRING 0} floh!$"
 
 gUnknown_083FFF56:: @ 83FFF56
 BattleText_PlayerDefeatedTrainer:
-	.string "Player defeated\n{STRING 29}!$"
+	.string "Spieler besiegte\n"
+	.string "{STRING 29}!$"
 
 gUnknown_083FFF6A:: @ 83FFF6A
 BattleText_PlayerDefeatedTrainers:
-	.string "Player beat {STRING 30}\nand {STRING 29}!$"
+	.string "Spieler besiegte\n"
+	.string "{STRING 30} und {STRING 29}!$"
 
 gUnknown_083FFF81:: @ 83FFF81
 BattleText_PlayerLostTrainer:
-	.string "Player lost against\n{STRING 29}!$"
+	.string "Spieler verlor gegen\n"
+	.string "{STRING 29}!$"
 
 gUnknown_083FFF99:: @ 83FFF99
 BattleText_PlayerLostTrainers:
-	.string "Player lost to {STRING 30}\nand {STRING 29}!$"
+	.string "Spieler verlor gegen\n"
+	.string "{STRING 30} und {STRING 29}!$"
 
 gUnknown_083FFFB3:: @ 83FFFB3
 BattleText_PlayerTiedTrainer:
-	.string "Player tied against\n{STRING 29}!$"
+	.string "Patt zwischen Spieler und\n"
+	.string "{STRING 29}!$"
 
 gUnknown_083FFFCB:: @ 83FFFCB
 BattleText_PlayerTiedTrainers:
-	.string "Player tied against {STRING 30}\nand {STRING 29}!$"
+	.string "Patt zwischen Spieler, {STRING 30}\n"
+	.string "und {STRING 29}!$"
 
 gUnknown_083FFFEA:: @ 83FFFEA
 BattleText_FledSingle:
-	.string "{PLAY_SE SE_NIGERU}{STRING 29} fled!$"
+	.string "{PLAY_SE 0x11 0x00}{STRING 29} floh!$"
 
 gUnknown_083FFFF7:: @ 83FFFF7
 BattleText_FledDouble:
-	.string "{PLAY_SE SE_NIGERU}{STRING 29} and\n{STRING 30} fled!$"
+	.string "{PLAY_SE 0x11 0x00}{STRING 29} und\n"
+	.string "{STRING 30} flohen!$"
 BattleText_NoRunning:
-	.string "No! There’s no running\nfrom a TRAINER battle!\p$"
+	.string "Du kannst aus TRAINER-Kämpfen\n"
+	.string "nicht fliehen!\p"
+	.string "$"
 BattleText_CantEscape2:
-	.string "Can’t escape!\p$"
+	.string "Flucht unmöglich!\p"
+	.string "$"
 BattleText_BirchDontLeaveMe:
-	.string "PROF. BIRCH: D-don’t leave\nme here like this!\p$"
+	.string "PROF. BIRK: Du... Du kannst mich doch\n"
+	.string "nicht einfach im Stich lassen!\p"
+	.string "$"
 BattleText_Nothing:
-	.string "But nothing happened!$"
+	.string "Nichts geschieht!$"
 BattleText_Failed:
-	.string "But it failed!$"
+	.string "Es schlug fehl!$"
 BattleText_HurtItself:
-	.string "It hurt itself in its\nconfusion!$"
+	.string "Es hat sich vor Verwirrung\n"
+	.string "selbst verletzt!$"
 BattleText_MirrorFail:
-	.string "The MIRROR MOVE failed!$"
+	.string "Der SPIEGELTRICK schlug fehl!$"
 BattleText_RainStart:
-	.string "It started to rain!$"
+	.string "Es fängt an zu regnen!$"
 BattleText_PourStart:
-	.string "A downpour started!$"
+	.string "Ein Wolkenbruch!$"
 BattleText_RainCont1:
-	.string "Rain continues to fall.$"
+	.string "Es regnet weiter.$"
 BattleText_PourCont:
-	.string "The downpour continues.$"
+	.string "Der Wolkenbruch hält an.$"
 BattleText_RainStop:
-	.string "The rain stopped.$"
+	.string "Es hat aufgehört zu regnen.$"
 BattleText_SandBrewed:
-	.string "A sandstorm brewed!$"
+	.string "Ein Sandsturm kommt auf!$"
 BattleText_SandRages:
-	.string "The sandstorm rages.$"
+	.string "Der Sandsturm tobt.$"
 BattleText_SandSubsided:
-	.string "The sandstorm subsided.$"
+	.string "Der Sandsturm legt sich.$"
 BattleText_SunBright:
-	.string "The sunlight got bright!$"
+	.string "Das Sonnenlicht wird stärker!$"
 BattleText_SunStrong:
-	.string "The sunlight is strong.$"
+	.string "Gleißendes Sonnenlicht!$"
 BattleText_SunFaded:
-	.string "The sunlight faded.$"
+	.string "Das Sonnenlicht lässt nach!$"
 BattleText_HailStart:
-	.string "It started to hail!$"
+	.string "Es fängt an zu hageln!$"
 BattleText_HailCont:
-	.string "Hail continues to fall.$"
+	.string "Es hagelt!$"
 BattleText_HailStop:
-	.string "The hail  stopped.$"
+	.string "Es hat aufgehört zu hageln.$"
 BattleText_SpitUpFail:
-	.string "But it failed to SPIT UP\na thing!$"
+	.string "Aber es konnte nichts\n"
+	.string "ENTFESSELN!$"
 BattleText_SwallowFail:
-	.string "But it failed to SWALLOW\na thing!$"
+	.string "Aber es konnte nichts\n"
+	.string "VERZEHREN!$"
 BattleText_WindHeatWave:
-	.string "The wind turned into a\nHEAT WAVE!$"
+	.string "Der Wind wurde zu einer\n"
+	.string "HITZEWELLE!$"
 BattleText_StatElim:
-	.string "All stat changes were\neliminated!$"
+	.string "Alle Statusveränderungen wurden\n"
+	.string "entfernt!$"
 BattleText_CoinScatter:
-	.string "Coins scattered everywhere!$"
+	.string "Es liegen überall Münzen verstreut!$"
 BattleText_SubWeak:
-	.string "It was too weak to make\na SUBSTITUTE!$"
+	.string "Zu schwach, um einen DELEGATOR\n"
+	.string "einzusetzen!$"
 BattleText_PainSplit:
-	.string "The battlers shared\ntheir pain!$"
+	.string "Die Kontrahenten teilen\n"
+	.string "ihr Leid!$"
 BattleText_BellChime:
-	.string "A bell chimed!$"
+	.string "Eine Glocke läutet!$"
 BattleText_PerishSong:
-	.string "All affected POKéMON will\nfaint in 3 turns!$"
+	.string "Alle betroffenen POKéMON werden\n"
+	.string "in 3 Runden K.O. gehen!$"
 BattleText_NoPP1:
-	.string "There’s no PP left for\nthis move!\p$"
+	.string "Es sind keine AP mehr für\n"
+	.string "diese Attacke übrig!\p"
+	.string "$"
 BattleText_NoPP2:
-	.string "But there was no PP left\nfor the move!$"
+	.string "Aber es waren keine AP mehr\n"
+	.string "für diese Attacke übrig!$"
 BattleText_IgnoredOrdersSLP:
-	.string "{ATTACKING_MON} ignored\norders while asleep!$"
+	.string "{EVIL_LEGENDARY} ignoriert die\n"
+	.string "Befehle. Es schläft!$"
 BattleText_IgnoredOrders:
-	.string "{ATTACKING_MON} ignored\norders!$"
+	.string "{EVIL_LEGENDARY} ignoriert den\n"
+	.string "Befehl!$"
 BattleText_BeganNap:
-	.string "{ATTACKING_MON} began to nap!$"
+	.string "{EVIL_LEGENDARY} macht\n"
+	.string "ein Nickerchen!$"
 BattleText_LoafingAround:
-	.string "{ATTACKING_MON} is\nloafing around!$"
+	.string "{EVIL_LEGENDARY} faulenzt!$"
 BattleText_WontObey:
-	.string "{ATTACKING_MON} won’t\nobey!$"
+	.string "{EVIL_LEGENDARY} ist\n"
+	.string "ungehorsam!$"
 BattleText_TurnedAway:
-	.string "{ATTACKING_MON} turned away!$"
+	.string "{EVIL_LEGENDARY} wendet\n"
+	.string "sich ab!$"
 BattleText_NotNotice:
-	.string "{ATTACKING_MON} pretended\nto not notice!$"
+	.string "{EVIL_LEGENDARY} gibt vor,\n"
+	.string "nichts zu bemerken!$"
 BattleText_WillSwitch:
-	.string "{STRING 25} {STRING 26} is\nabout to use {STRING 1}.\pWill {STRING 32} change\nPOKéMON?$"
+	.string "Als Nächstes wird {PLAYER} von\n"
+	.string "{STRING 25} {STRING 26} eingesetzt.\p"
+	.string "Wird {STRING 32} das\n"
+	.string "POKéMON wechseln?$"
 BattleText_LearnedMove2:
-	.string "{ATTACKING_MON} learned\n{STRING 0}!$"
+	.string "{EVIL_LEGENDARY} hat\n"
+	.string "{STRING 0} gelernt!$"
 BattleText_PlayerDefeatedTrainer2:
-	.string "Player defeated\n{STRING 25} {STRING 26}!\p$"
+	.string "Spieler besiegte\n"
+	.string "{STRING 25} {STRING 26}!\p"
+	.string "$"
 BattleText_CreptCloser:
-	.string "{STRING 32} crept closer to\n{STRING 3}!$"
+	.string "{STRING 32} schleicht sich näher an\n"
+	.string "{STR_VAR_2} heran!$"
 BattleText_CantGetCloser:
-	.string "{STRING 32} can’t get any closer!$"
+	.string "{STRING 32} kann nicht näher herangehen!$"
 BattleText_WatchingCarefully:
-	.string "{STRING 3} is watching\ncarefully!$"
+	.string "{STR_VAR_2} beobachtet\n"
+	.string "alles aufmerksam!$"
 BattleText_CuriousAbout:
-	.string "{STRING 3} is curious about\nthe {STRING 0}!$"
+	.string "{STR_VAR_2} ist\n"
+	.string "neugierig auf {STRING 0}!$"
 BattleText_EnthralledBy:
-	.string "{STRING 3} is enthralled by\nthe {STRING 0}!$"
+	.string "{STR_VAR_2} ist begeistert\n"
+	.string "von {STRING 0}!$"
 BattleText_IgnoredThing:
-	.string "{STRING 3} completely ignored\nthe {STRING 0}!$"
+	.string "{STR_VAR_2} ignoriert\n"
+	.string "{STRING 0} völlig!$"
 BattleText_ThrewBlock:
-	.string "{STRING 32} threw a {POKEBLOCK}\nat the {STRING 3}!$"
+	.string "{STRING 32} wirft {STR_VAR_2} einen\n"
+	.string "{POKEBLOCK} zu!$"
 BattleText_SafariOver:
-	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You’re out of\nSAFARI BALLS! Game over!\p$"
+	.string "{PLAY_SE 0x49 0x00}ANSAGE: Du hast keine\n"
+	.string "SAFARIBÄLLE mehr! Game over!\p"
+	.string "$"
 
 gUnknown_08400555:: @ 8400555
 BattleText_WildAppeared1:
-	.string "Wild {STRING 3} appeared!\p$"
+	.string "Ein wildes {STR_VAR_2} erscheint!\p"
+	.string "$"
 
 gUnknown_08400568:: @ 8400568
 BattleText_WildAppeared2:
-	.string "Wild {STRING 3} appeared!\p$"
+	.string "Ein wildes {STR_VAR_2} erscheint!\p"
+	.string "$"
 
 gUnknown_0840057B:: @ 840057B
 BattleText_WildAppeared3:
-	.string "Wild {STRING 3} appeared!{PAUSE 127}$"
+	.string "Ein wildes {STR_VAR_2} erscheint!{PAUSE 127}$"
 
 gUnknown_08400590:: @ 8400590
 BattleText_WildDoubleAppeared:
-	.string "Wild {STRING 5} and\n{STRING 3} appeared!\p$"
+	.string "Ein wildes {KUN} und\n"
+	.string "ein wildes {STR_VAR_2} erscheinen!\p"
+	.string "$"
 
 gUnknown_084005AA:: @ 84005AA
 BattleText_SingleWantToBattle1:
-	.string "{STRING 25} {STRING 26}\nwould like to battle!\p$"
+	.string "Eine Herausforderung von\n"
+	.string "{STRING 25} {STRING 26}!\p"
+	.string "$"
 
 gUnknown_084005C7:: @ 84005C7
 BattleText_SingleWantToBattle2:
-	.string "{STRING 29}\nwants to battle!$"
+	.string "Eine Herausforderung von\n"
+	.string "{STRING 29}!$"
 
 gUnknown_084005DB:: @ 84005DB
 BattleText_DoubleWantToBattle:
-	.string "{STRING 29} and {STRING 30}\nwant to battle!$"
+	.string "{STRING 29} und {STRING 30}\n"
+	.string "möchten kämpfen!$"
 
 gUnknown_084005F5:: @ 84005F5
 BattleText_SentOutSingle1:
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 3}!$"
+	.string "{STR_VAR_2} wird von\n"
+	.string "{STRING 25} {STRING 26} in den\l"
+	.string "Kampf geschickt!$"
 
 gUnknown_08400608:: @ 8400608
 BattleText_SentOutDouble1:
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 3} and {STRING 5}!$"
+	.string "{STR_VAR_2} und {KUN}\n"
+	.string "werden von\p"
+	.string "{STRING 25} {STRING 26}\n"
+	.string "in den Kampf geschickt!$"
 
 gUnknown_08400622:: @ 8400622
 BattleText_SentOutSingle2:
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 0}!$"
+	.string "{STRING 0} wird von\n"
+	.string "{STRING 25} {STRING 26}\l"
+	.string "in den Kampf geschickt!$"
 
 gUnknown_08400635:: @ 8400635
 BattleText_SentOutSingle3:
-	.string "{STRING 29} sent\nout {STRING 3}!$"
+	.string "{STRING 29} schickt\n"
+	.string "{STR_VAR_2} in den Kampf!$"
 
 gUnknown_08400645:: @ 8400645
 BattleText_SentOutDouble2:
-	.string "{STRING 29} sent out\n{STRING 3} and {STRING 5}!$"
+	.string "{STRING 29} schickt\n"
+	.string "{STR_VAR_2} und {KUN}!$"
 
 gUnknown_0840065C:: @ 840065C
 BattleText_SentOutDouble3:
-	.string "{STRING 29} sent out\n{STRING 7}!\p{STRING 30} sent out\n{STRING 9}!$"
+	.string "{STRING 29} schickt\n"
+	.string "{VERSION}!\p"
+	.string "{STRING 30} schickt\n"
+	.string "{GOOD_TEAM}!$"
 
 gUnknown_0840067C:: @ 840067C
 BattleText_SentOutSingle4:
-	.string "{STRING 29} sent out\n{STRING 0}!$"
+	.string "{STRING 29} schickt\n"
+	.string "{STRING 0}!$"
 
 gUnknown_0840068C:: @ 840068C
 BattleText_SentOutSingle5:
-	.string "{STRING 31} sent out\n{STRING 0}!$"
+	.string "{STRING 31} schickt\n"
+	.string "{STRING 0}!$"
 
 gUnknown_0840069C:: @ 840069C
 BattleText_SentOutSingle6:
-	.string "Go! {STRING 2}!$"
+	.string "Los! {STR_VAR_1}!$"
 
 gUnknown_084006A4:: @ 84006A4
 BattleText_SentOutDouble4:
-	.string "Go! {STRING 2} and\n{STRING 4}!$"
+	.string "Los! {STR_VAR_1} und\n"
+	.string "{STR_VAR_3}!$"
 
 gUnknown_084006B3:: @ 84006B3
 BattleText_SentOutSingle7:
-	.string "Go! {STRING 0}!$"
+	.string "Los! {STRING 0}!$"
 
 gUnknown_084006BB:: @ 84006BB
 BattleText_SentOutSingle8:
-	.string "Do it! {STRING 0}!$"
+	.string "Du schaffst es! {STRING 0}!$"
 
 gUnknown_084006C6:: @ 84006C6
 BattleText_SentOutSingle9:
-	.string "Go for it, {STRING 0}!$"
+	.string "Streng dich an, {STRING 0}!$"
 
 gUnknown_084006D5:: @ 84006D5
 BattleText_SentOutSingle10:
-	.string "Your foe’s weak!\nGet’m, {STRING 0}!$"
+	.string "Mach es fertig!\n"
+	.string "Los, {STRING 0}!$"
 
 gUnknown_084006F1:: @ 84006F1
 BattleText_SentOutSingle11:
-	.string "{STRING 28} sent out\n{STRING 8}!\pGo! {STRING 6}!$"
+	.string "{STRING 28} schickt\n"
+	.string "{EVIL_TEAM}!\p"
+	.string "Los! {RIVAL}!$"
 
 gUnknown_08400709:: @ 8400709
 BattleText_ComeBackSingle1:
-	.string "{STRING 0}, that’s enough!\nCome back!$"
+	.string "{STRING 0}, genug!\n"
+	.string "Komm zurück!$"
 
 gUnknown_08400727:: @ 8400727
 BattleText_ComeBackSingle2:
-	.string "{STRING 0}, come back!$"
+	.string "{STRING 0}, komm zurück!$"
 
 gUnknown_08400736:: @ 8400736
 BattleText_ComeBackSingle3:
-	.string "{STRING 0}, OK!\nCome back!$"
+	.string "{STRING 0}, O.K.!\n"
+	.string "Komm zurück!$"
 
 gUnknown_08400749:: @ 8400749
 BattleText_ComeBackSingle4:
-	.string "{STRING 0}, good!\nCome back!$"
+	.string "{STRING 0}, gut!\n"
+	.string "Komm zurück!$"
 
 gUnknown_0840075E:: @ 840075E
 BattleText_WithdrewPoke1:
-	.string "{STRING 25} {STRING 26}\nwithdrew {STRING 0}!$"
+	.string "{STRING 0} wurde\n"
+	.string "von {STRING 25} {STRING 26}\l"
+	.string "zurückgerufen!$"
 
 gUnknown_08400771:: @ 8400771
 BattleText_WithdrewPoke2:
-	.string "{STRING 29} withdrew\n{STRING 0}!$"
+	.string "{STRING 29} ruft\n"
+	.string "{STRING 0} zurück!$"
 
 gUnknown_08400781:: @ 8400781
 BattleText_WithdrewPoke3:
-	.string "{STRING 31} withdrew\n{STRING 0}!$"
+	.string "{STRING 31} ruft\n"
+	.string "{STRING 0} zurück!$"
 
 gUnknown_08400791:: @ 8400791
 BattleText_Wild:
-	.string "Wild $"
+	.string " (Wild)$"
 
 gUnknown_08400797:: @ 8400797
 BattleText_Foe:
-	.string "Foe $"
+	.string " (Gegner)$"
 
 gUnknown_0840079C:: @ 840079C
 BattleText_Foe2:
-	.string "Foe $"
+	.string "Gegner$"
 
 gUnknown_084007A1:: @ 84007A1
 BattleText_Ally:
-	.string "Ally $"
+	.string "Anwender$"
 
 gUnknown_084007A7:: @ 84007A7
 BattleText_Foe3:
-	.string "Foe $"
+	.string "Gegner$"
 
 gUnknown_084007AC:: @ 84007AC
 BattleText_Ally2:
-	.string "Ally $"
+	.string "Anwender$"
 
 gUnknown_084007B2:: @ 84007B2
 BattleText_Foe4:
-	.string "Foe $"
+	.string "Gegner$"
 
 gUnknown_084007B7:: @ 84007B7
 BattleText_Ally3:
-	.string "Ally $"
+	.string "Anwender$"
 
 gUnknown_084007BD:: @ 84007BD
 BattleText_OpponentUsedMove:
-	.string "{ATTACKING_MON} used\n{STRING 1}$"
+	.string "{EVIL_LEGENDARY} setzt\n"
+	.string "{PLAYER} ein!$"
 
 gUnknown_084007C8:: @ 84007C8
-BattleText_Exclamation2: @ out of order but whatever
-	.string "!$"
+BattleText_Exclamation2:
+	.string "$"
 
 gUnknown_084007CA:: @ 84007CA
 BattleText_Exclamation3:
-	.string "!$"
+	.string "$"
 
 gUnknown_084007CC:: @ 84007CC
 BattleText_Exclamation4:
-	.string "!$"
+	.string "$"
 
 gUnknown_084007CE:: @ 84007CE
 BattleText_Exclamation5:
-	.string "!$"
+	.string "$"
 
 gUnknown_084007D0:: @ 84007D0
 BattleText_Exclamation:
-	.string "!$"
-BattleStatText_HP:
-	.string "HP$"
-BattleStatText_Attack:
-	.string "ATTACK$"
-BattleStatText_Defense:
-	.string "DEFENSE$"
-BattleStatText_Speed:
-	.string "SPEED$"
-BattleStatText_SpAtk:
-	.string "SP. ATK$"
-BattleStatText_SpDef:
-	.string "SP. DEF$"
-BattleStatText_Accuracy:
-	.string "accuracy$"
-BattleStatText_Evasion:
-	.string "evasiveness$"
-ContestStatText_TooSpicy:
-	.string "was too spicy!$"
-ContestStatText_TooDry:
-	.string "was too dry!$"
-ContestStatText_TooSweet:
-	.string "was too sweet!$"
-ContestStatText_TooBitter:
-	.string "was too bitter!$"
-ContestStatText_TooSour:
-	.string "was too sour!$"
+	.string "$"
+
+BattleStatText_HP: @ 84007D2
+	.string "KP$"
+
+BattleStatText_Attack: @ 84007D5
+	.string "ANGRIFF$"
+
+BattleStatText_Defense: @ 84007DC
+	.string "VERT.$"
+
+BattleStatText_Speed: @ 84007E4
+	.string "INIT.$"
+
+BattleStatText_SpAtk: @ 84007EA
+	.string "SP.ANG.$"
+
+BattleStatText_SpDef: @ 84007F2
+	.string "SP.VER.$"
+
+BattleStatText_Accuracy: @ 84007FA
+	.string "GENAUIGKEIT$"
+
+BattleStatText_Evasion: @ 8400803
+	.string "FLUCHTWERT$"
+
+ContestStatText_TooSpicy: @ 840080F
+	.string "zu scharf!$"
+
+ContestStatText_TooDry: @ 840081E
+	.string "zu trocken!$"
+
+ContestStatText_TooSweet: @ 840082B
+	.string "zu süß!$"
+
+ContestStatText_TooBitter: @ 840083A
+	.string "zu bitter!$"
+
+ContestStatText_TooSour: @ 840084A
+	.string "zu sauer!$"
 BattleText_Used1:
-	.string "{STRING 32} used\n{STRING 19}!$"
+	.string "{STRING 32} setzt\n"
+	.string "{STRING 19} ein!$"
 BattleText_TutorialUsed:
-	.string "WALLY used\n{STRING 19}!$"
+	.string "HEIKO setzt\n"
+	.string "{STRING 19} ein!$"
 BattleText_Used2:
-	.string "{STRING 25} {STRING 26}\nused {STRING 19}!$"
+	.string "{STRING 19} wird von\n"
+	.string "{STRING 25} {STRING 26} eingesetzt!$"
 BattleText_BlockBall:
-	.string "The TRAINER blocked the BALL!$"
+	.string "Der TRAINER hat den BALL abgeblockt!$"
 BattleText_DontBeAThief:
-	.string "Don’t be a thief!$"
+	.string "Sei kein Dieb!$"
 BattleText_DodgeBall:
-	.string "It dodged the thrown BALL!\nThis POKéMON can’t be caught!$"
+	.string "Es ist dem BALL ausgewichen! Dieses\n"
+	.string "POKéMON kann nicht gefangen werden!$"
 BattleText_MissPoke:
-	.string "You missed the POKéMON!$"
+	.string "Du hast das POKéMON verfehlt!$"
 BattleText_BallBrokeOhNo:
-	.string "Oh, no!\nThe POKéMON broke free!$"
+	.string "Mist!\n"
+	.string "Das POKéMON hat sich befreit!$"
 BattleText_BallBrokeAppeared:
-	.string "Aww!\nIt appeared to be caught!$"
+	.string "Oh!\n"
+	.string "Fast hätte es geklappt!$"
 BattleText_BallBrokeAlmost:
-	.string "Aargh!\nAlmost had it!$"
+	.string "Mist!\n"
+	.string "Das war knapp!$"
 BattleText_BallBrokeSoClose:
-	.string "Shoot!\nIt was so close, too!$"
+	.string "Verflixt!\n"
+	.string "Es hätte beinahe geklappt!$"
 BattleText_BallCaught1:
-	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
+	.string "Toll!\n"
+	.string "{STR_VAR_2} wurde gefangen!{UNKNOWN_A}{PLAY_BGM 0x60 0x01}\p"
+	.string "$"
 BattleText_BallCaught2:
-	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
+	.string "Toll!\n"
+	.string "{STR_VAR_2} wurde gefangen!{UNKNOWN_A}{PLAY_BGM 0x60 0x01}{PAUSE 127}$"
 BattleText_GiveNickname:
-	.string "Give a nickname to the\ncaptured {STRING 3}?$"
+	.string "Möchtest du dem {STR_VAR_2}\n"
+	.string "einen Spitznamen geben?$"
 BattleText_SentToPC:
-	.string "{STRING 3} was sent to\n{STRING 35} PC.$"
+	.string "{STR_VAR_2} wurde auf\n"
+	.string "{STRING 35} PC übertragen.$"
 
 gUnknown_084009ED:: @ 84009ED
 BattleText_Someone:
-	.string "someone’s$"
+	.string "einen$"
 
 gUnknown_084009F7:: @ 84009F7
 BattleText_Lanette:
-	.string "LANETTE’s$"
+	.string "LANETTES$"
 BattleText_AddedToDex:
-	.string "{STRING 3}’s data was\nadded to the POKéDEX.\p$"
+	.string "Für {STR_VAR_2} wurde ein Eintrag\n"
+	.string "im POKéDEX angelegt.\p"
+	.string "$"
 BattleText_Raining:
-	.string "It is raining.$"
+	.string "Es regnet.$"
 BattleText_Sandstorm:
-	.string "A sandstorm is raging.$"
+	.string "Ein Sandsturm tobt.$"
 BattleText_BoxFull:
-	.string "The BOX is full!\nYou can’t catch any more!\p$"
+	.string "Die BOXEN sind voll!\n"
+	.string "Du kannst keines mehr fangen!\p"
+	.string "$"
 
 gUnknown_08400A78:: @ 8400A78
 BattleText_EnigmaBerry:
-	.string "ENIGMA BERRY$"
+	.string "ENIGMABEERE$"
 
 gUnknown_08400A85:: @ 8400A85
 BattleText_Berry:
-	.string " BERRY$"
+	.string "{STR_VAR_1}BEERE$"
 BattleText_CuredParalysis:
-	.string "{STRING 16}’s {STRING 19}\ncured paralysis!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\l"
+	.string "heilte die Paralyse!$"
 BattleText_CuredPoison:
-	.string "{STRING 16}’s {STRING 19}\ncured poison!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\l"
+	.string "heilte die Vergiftung!$"
 BattleText_CuredBurn:
-	.string "{STRING 16}’s {STRING 19}\nhealed its burn!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\l"
+	.string "heilte die Verbrennung!$"
 BattleText_CuredFreeze:
-	.string "{STRING 16}’s {STRING 19}\ndefrosted it!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16} taute es auf!$"
 BattleText_CuredSleep:
-	.string "{STRING 16}’s {STRING 19}\nwoke it from its sleep!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16} \l"
+	.string "weckte es auf!$"
 BattleText_CuredConfusion:
-	.string "{STRING 16}’s {STRING 19}\nsnapped it out of confusion!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\l"
+	.string "hebt die Verwirrung auf!$"
 BattleText_CuredStatus:
-	.string "{STRING 16}’s {STRING 19}\ncured its {STRING 0} problem!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16} \l"
+	.string "heilte sein {STRING 0}-Problem!$"
 BattleText_NormalizedStatus:
-	.string "{STRING 16}’s {STRING 19}\nnormalized its status!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16} normalisierte\l"
+	.string "seine Statuswerte!$"
 BattleText_RestoredHealth:
-	.string "{STRING 16}’s {STRING 19}\nrestored health!$"
+	.string "{STRING 19} füllte\n"
+	.string "KP von {STRING 16} auf!$"
 BattleText_RestoredPP:
-	.string "{STRING 16}’s {STRING 19}\nrestored {STRING 0}’s PP!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16} füllte AP von\l"
+	.string "{STRING 0} auf!$"
 BattleText_RestoredStatus:
-	.string "{STRING 16}’s {STRING 19}\nrestored its status!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\p"
+	.string "stellte seine\n"
+	.string "Statuswerte wieder her!$"
 BattleText_RestoredHPLittle:
-	.string "{STRING 16}’s {STRING 19}\nrestored its HP a little!$"
+	.string "{STRING 19} von\n"
+	.string "{STRING 16}\l"
+	.string "füllte einige KP auf!$"
 BattleText_ChoiceBand:
-	.string "{STRING 19} allows the\nuse of only {STRING 17}!\p$"
+	.string "{STRING 19} erlaubt\n"
+	.string "nur den Einsatz von {STRING 17}!\p"
+	.string "$"
 BattleText_FocusSash:
-	.string "{DEFENDING_MON} hung on\nusing its {STRING 19}!$"
+	.string "{GOOD_LEGENDARY} hält\n"
+	.string "mit Hilfe von\l"
+	.string "{STRING 19} durch!$"
 BattleText_Terminator2:
 	.string "$"
 BattleText_WallyBall:
-	.string "You throw a BALL now, right?\nI... I’ll do my best!$"
+	.string "Nun muss man einen BALL werfen, oder?\n"
+	.string "Ich... Ich werde mein Bestes geben!$"
 
 gUnknown_08400C4A:: @ 8400C4A
 BattleText_StartEvo:
-	.string "What?\n{STRING 2} is evolving!$"
+	.string "Hey?\n"
+	.string "{STR_VAR_1} entwickelt sich!$"
 
 gUnknown_08400C60:: @ 8400C60
 BattleText_FinishEvo:
-	.string "Congratulations! Your {STRING 2}\nevolved into {STRING 3}!{UNKNOWN_A}\p$"
+	.string "Glückwunsch! Dein {STR_VAR_1}\n"
+	.string "wurde zu {STR_VAR_2}!{UNKNOWN_A}\p"
+	.string "$"
 
 gUnknown_08400C8D:: @ 8400C8D
 BattleText_StopEvo:
-	.string "Huh? {STRING 2}\nstopped evolving!\p$"
+	.string "Hm? Die Entwicklung\n"
+	.string "wurde abgebrochen!\p"
+	.string "$"
 
 gUnknown_08400CA8:: @ 8400CA8
 BattleText_OtherMenu:
-	.string "What should\n{STRING 15} do?$"
+	.string "Was soll\n"
+	.string "{STRING 15} tun?$"
 
 gUnknown_08400CBB:: @ 8400CBB
 BattleText_PlayerMenu:
-	.string "What will\n{STRING 32} do?$"
+	.string "Was wird {STRING 32}\n"
+	.string "tun?$"
 
 gUnknown_08400CCC:: @ 8400CCC
 BattleText_WallyMenu:
-	.string "What will\nWALLY do?$"
+	.string "Was wird\n"
+	.string "HEIKO tun?$"
 
 gUnknown_08400CE0:: @ 8400CE0
 BattleText_LinkStandby:
-	.string "{PAUSE 16}Link standby...$"
+	.string "{PAUSE 16}Verbindung...$"
 
 gUnknown_08400CF3:: @ 8400CF3
 BattleText_MenuOptions:
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}FIGHT{CLEAR_TO 0x2E}BAG\nPOKéMON{CLEAR_TO 0x2E}RUN$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}KAMPF{CLEAR_TO 46}BEUTEL\n"
+	.string "POKéMON{CLEAR_TO 46}FLUCHT$"
 
 gUnknown_08400D15:: @ 8400D15
 BattleText_MenuOptionsSafari:
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}BALL{CLEAR_TO 0x2E}{POKEBLOCK}\nGO NEAR{CLEAR_TO 0x2E}RUN$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}BALL{CLEAR_TO 46}{POKEBLOCK}\n"
+	.string "NÄHER{CLEAR_TO 46}FLUCHT$"
 
 gUnknown_08400D38:: @ 8400D38
 BattleText_PP:
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}PP\nTYPE/$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}AP\n"
+	.string "TYP/$"
 
 gUnknown_08400D49:: @ 8400D49
-BattleText_Format: @ cant think of a better name
+BattleText_Format:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
 
 gUnknown_08400D52:: @ 8400D52
 BattleText_ForgetMove:
-	.string "{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}{PALETTE 5}Which move should\nbe forgotten?$"
+	.string "{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}{PALETTE 5}Welche Attacke soll vergessen werden?$"
 
 gUnknown_08400D7A:: @ 8400D7A
 BattleText_YesNo:
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Yes\nNo$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Ja\n"
+	.string "Nein$"
 
 gUnknown_08400D89:: @ 8400D89
 BattleText_SwitchWhich:
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Switch\nwhich?$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}\n"
+	.string "Wohin?$"
 
 gUnknown_08400D9F:: @ 8400D9F
 BattleText_Format2:
@@ -1028,50 +1512,49 @@ BattleText_Plus:
 	.string "+$"
 
 gUnknown_08400DAC:: @ 8400DAC
-@ someone improve the formatting of this please
 BattleText_Dash:
 	.string "-$"
 BattleText_HP:
-	.string "HP     $"
+	.string "KP     $"
 BattleText_Attack:
-	.string "ATTACK $"
+	.string "ANGR. $"
 BattleText_Defense:
-	.string "DEFENSE$"
+	.string "VERT.$"
 BattleText_SpAtk:
-	.string "SP. ATK$"
+	.string "SP.ANG.$"
 BattleText_SpDef:
-	.string "SP. DEF$"
+	.string "SP.VER.$"
 
 gUnknown_08400DD6:: @ 8400DD6
 BattleText_SafariBalls::
-	.string "{HIGHLIGHT RED}SAFARI BALLS$"
+	.string "{HIGHLIGHT RED}SAFARIBÄLLE$"
 
 gUnknown_08400DE6:: @ 8400DE6
 BattleText_SafariBallsLeft::
-	.string "{HIGHLIGHT RED}Left: $"
+	.string "{HIGHLIGHT RED}Übrig: $"
 
 gUnknown_08400DF0:: @ 8400DF0
 BattleText_HighlightRed::
 	.string "{HIGHLIGHT RED}$"
 
 BattleText_Sleep::
-	.string "sleep$"
+	.string "Schlaf$"
 BattleText_PoisonStatus::
-	.string "poison$"
+	.string "Gift$"
 BattleText_Burn::
-	.string "burn$"
+	.string "Verbrennung$"
 BattleText_Paralysis::
-	.string "paralysis$"
+	.string "Paralyse$"
 BattleText_IceStatus::
-	.string "ice$"
+	.string "Eis$"
 BattleText_Confusion::
-	.string "confusion$"
+	.string "Verwirrung$"
 BattleText_Love::
-	.string "love$"
+	.string "Liebe$"
 
 gUnknown_08400E23:: @ 8400E23
 BattleText_Format3:
-	.string " and $"
+	.string " und $"
 
 gUnknown_08400E29:: @ 8400E29
 BattleText_Format4:
@@ -1083,79 +1566,81 @@ BattleText_Format5:
 
 gUnknown_08400E2E:: @ 8400E2E
 BattleText_Format6:
-	.string "\l$"
+	.string "\l"
+	.string "$"
 
 gUnknown_08400E30:: @ 8400E30
 BattleText_Format7:
-	.string "\n$"
+	.string "\n"
+	.string "$"
 
 gUnknown_08400E32:: @ 8400E32
 BattleText_Format8:
-	.string "are$"
+	.string "sind$"
 
 gUnknown_08400E36:: @ 8400E36
 BattleText_Format9:
-	.string "are$"
+	.string "sind$"
 
 gBadEggNickname:: @ 8400E3A
-	.string "Bad EGG$"
+	.string "Schl. EI$"
 
 gUnknown_08400E42:: @ 8400E42
 BattleText_Wally::
-	.string "WALLY$"
+	.string "HEIKO$"
 
 BattleText_Win:: @ 8400E48
-	.string "{HIGHLIGHT TRANSPARENT}Win$"
+	.string "{HIGHLIGHT TRANSPARENT}Sieg$"
 
 BattleText_Loss:: @ 8400E4F
-	.string "{HIGHLIGHT TRANSPARENT}Loss$"
+	.string "{HIGHLIGHT TRANSPARENT}Ndrl.$"
 
 BattleText_Tie:: @ 8400E57
-	.string "{HIGHLIGHT TRANSPARENT}Tie$"
+	.string "{HIGHLIGHT TRANSPARENT}Patt$"
 
 gUnknown_08400E5E:: @ 8400E5E
 BattleText_Format10:
-	.string " is$"
+	.string " ist$"
 
 gUnknown_08400E62:: @ 8400E62
 BattleText_Format11:
-	.string "’s$"
+	.string "$"
 BattleText_Normal:
-	.string "a NORMAL move$"
+	.string "eine NORMALE Att.$"
 BattleText_Fighting:
-	.string "a FIGHTING move$"
+	.string "eine KAMPF-Att.$"
 BattleText_Flying:
-	.string "a FLYING move$"
+	.string "eine FLUG-Att.$"
 BattleText_Poison:
-	.string "a POISON move$"
+	.string "eine GIFT-Att.$"
 BattleText_Ground:
-	.string "a GROUND move$"
+	.string "eine BODEN-Att.$"
 BattleText_Rock:
-	.string "a ROCK move$"
+	.string "eine GESTEINS-Att.$"
 BattleText_Bug:
-	.string "a BUG move$"
+	.string "eine KÄFER-Att.$"
 BattleText_Ghost:
-	.string "a GHOST move$"
+	.string "eine GEIST-Att.$"
 BattleText_Steel:
-	.string "a STEEL move$"
+	.string "eine STAHL-Att.$"
 BattleText_Typeless:
-	.string "a ??? move$"
+	.string "eine ???-Attacke$"
 BattleText_Fire:
-	.string "a FIRE move$"
+	.string "eine FEUER-Att.$"
 BattleText_Water:
-	.string "a WATER move$"
+	.string "eine WASSER-Att.$"
 BattleText_Grass:
-	.string "a GRASS move$"
+	.string "eine PFLANZEN-Att.$"
 BattleText_Electric:
-	.string "an ELECTRIC move$"
+	.string "eine ELEKTRO-Att.$"
 BattleText_Psychic:
-	.string "a PSYCHIC move$"
+	.string "eine PSYCHO-Att.$"
 BattleText_Ice:
-	.string "an ICE move$"
+	.string "eine EIS-Att.$"
 BattleText_Dragon:
-	.string "a DRAGON move$"
+	.string "eine DRACHEN-Att.$"
 BattleText_Dark:
-	.string "a DARK move$"
+	.string "eine UNLICHT-Att.$"
 
 	.align 2
 gUnknown_08400F58:: @ 8400F58

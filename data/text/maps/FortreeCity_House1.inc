@@ -1,35 +1,37 @@
 FortreeCity_House1_Text_18568C:: @ 818568C
-	.string "Hi, there’s this POKéMON that I’m\n"
-	.string "looking for.\p"
-	.string "I want a {STR_VAR_1}.\n"
-	.string "Do you have one?\p"
-	.string "Would you trade it for my {STR_VAR_2}?$"
+	.string "Hi! Da gibt es dieses POKéMON, nach\n"
+	.string "dem ich suche.\p"
+	.string "Ich möchte ein {STR_VAR_1} haben.\n"
+	.string "Hast du eines?\p"
+	.string "Würdest du es gegen mein {STR_VAR_2}\n"
+	.string "tauschen?$"
 
 FortreeCity_House1_Text_1856F7:: @ 81856F7
-	.string "Thank you!\p"
-	.string "I’ll be good to your {STR_VAR_1},\n"
-	.string "so please be nice to my {STR_VAR_2}!$"
+	.string "Danke schön!\p"
+	.string "Ich werde gut zu deinem {STR_VAR_1}\n"
+	.string "sein, also sei auch gut zu meinem\l"
+	.string "{STR_VAR_2}!$"
 
 FortreeCity_House1_Text_185737:: @ 8185737
-	.string "Wait!\n"
-	.string "That POKéMON isn’t a {STR_VAR_1}.\p"
-	.string "I guess you don’t want to trade\n"
-	.string "with me.$"
+	.string "Warte!\n"
+	.string "Das ist kein {STR_VAR_1}.\p"
+	.string "Ich glaube, du willst gar nicht mit mir\n"
+	.string "tauschen.$"
 
 FortreeCity_House1_Text_18577F:: @ 818577F
-	.string "Oh, okay. If you change your mind,\n"
-	.string "please come see me.\p"
-	.string "I’ll be waiting!$"
+	.string "Oh, okay. Wenn du es dir anders über-\n"
+	.string "legst, komm wieder vorbei.\p"
+	.string "Ich werde hier warten!$"
 
 FortreeCity_House1_Text_1857C7:: @ 81857C7
-	.string "Thank you for trading with me!\p"
-	.string "I really wanted this POKéMON, so\n"
-	.string "I promise to take good care of it!$"
+	.string "Danke, dass du mit mir getauscht hast!\p"
+	.string "Dieses POKéMON habe ich mir schon lange\n"
+	.string "gewünscht. Bei mir wird’s ihm gut gehen!$"
 
 FortreeCity_House1_Text_18582A:: @ 818582A
-	.string "Trading POKéMON with others...\p"
-	.string "It’s as if you’re trading your own\n"
-	.string "memories with other people.$"
+	.string "Mit anderen sein POKéMON tauschen...\p"
+	.string "Das ist, als ob du die Erinnerungen mit\n"
+	.string "anderen Menschen teilst.$"
 
 FortreeCity_House1_Text_185888:: @ 8185888
-	.string "ZIGZAGOON: Gumomoh?$"
+	.string "ZIGZACHS: Gumomoh?$"

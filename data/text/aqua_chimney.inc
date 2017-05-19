@@ -1,142 +1,145 @@
 MtChimney_Text_1B2DEE:: @ 81B2DEE
-	.string "The power contained in the\n"
-	.string "METEORITE...\p"
-	.string "By amplifying its power with this\n"
-	.string "machine, MT. CHIMNEY’s volcanic activity\l"
-	.string "will stop.\p"
-	.string "Fufufu... Eventually, the cooled-down\n"
-	.string "crater will fill with rainwater, giving\l"
-	.string "WATER POKéMON a place to live.$"
+	.string "Die Kraft, die in diesem METEORITEN\n"
+	.string "steckt...\p"
+	.string "Wenn man diese Kraft mit dieser\n"
+	.string "Maschine verstärkt, kann man die\l"
+	.string "Aktivität des SCHLOTBERGs stoppen.\p"
+	.string "Hahaha... Und dann füllt sich der ausge-\n"
+	.string "kühlte Krater mit Regenwasser und gibt\l"
+	.string "den WASSER-POKéMON Lebensraum.$"
 
 MtChimney_Text_1B2ED9:: @ 81B2ED9
-	.string "ARCHIE: You again...\p"
-	.string "Now listen.\n"
-	.string "All life depends on the sea.\p"
-	.string "The sea is everything!\n"
-	.string "Its importance is paramount!\p"
-	.string "That is why we of TEAM AQUA are\n"
-	.string "committed to expanding the sea.\p"
-	.string "Doing so will result in the emergence\n"
-	.string "of new POKéMON species.\p"
-	.string "We will return the world back to\n"
-	.string "nature for the good of POKéMON.\p"
-	.string "That is TEAM AQUA’s vision!\p"
-	.string "I can’t allow an ignorant child like\n"
-	.string "you to get in our way.\p"
-	.string "I, ARCHIE, will show you the\n"
-	.string "consequences of meddling!$"
+	.string "ADRIAN: Du schon wieder...\p"
+	.string "Hör gut zu.\n"
+	.string "Das Meer bringt alles Leben hervor.\p"
+	.string "Wasser bedeutet Leben!\n"
+	.string "Es besitzt absolute Priorität!\p"
+	.string "Daher widmet sich TEAM AQUA der Auf-\n"
+	.string "gabe, die Meere zu vergrößern.\p"
+	.string "So können sich neue POKéMON-Arten\n"
+	.string "entwickeln.\p"
+	.string "Wir wollen die Welt zum Wohle der\n"
+	.string "POKéMON umgestalten.\p"
+	.string "Das ist die große Vision von TEAM AQUA!\p"
+	.string "Ich kann einem sturen Kind wie dir nicht\n"
+	.string "erlauben, sich uns in den Weg zu stellen.\p"
+	.string "Ich, ADRIAN, werde dir zeigen, was\n"
+	.string "passiert, wenn du uns aufhalten willst!$"
 
 MtChimney_Text_1B3099:: @ 81B3099
-	.string "What?!\p"
-	.string "I, ARCHIE, was caught off guard?!$"
+	.string "Wie bitte?!?\p"
+	.string "Ich, ADRIAN, wurde ganz hinterhältig\n"
+	.string "besiegt?!?$"
 
 MtChimney_Text_1B30C2:: @ 81B30C2
-	.string "ARCHIE: Ah, whatever.\n"
-	.string "I will give up our plans for MT.\l"
-	.string "CHIMNEY for the time being...\p"
-	.string "But no one can ever stop us!\n"
-	.string "TEAM AQUA will prevail!\p"
-	.string "Don’t you ever forget that!$"
+	.string "ADRIAN: Ach, was soll’s.\n"
+	.string "Ich werde für heute meine Pläne am\l"
+	.string "SCHLOTBERG vergessen. Für heute!\p"
+	.string "Niemand wird uns jemals stoppen!\n"
+	.string "TEAM AQUA wird siegen!!!\p"
+	.string "Vergiss das nicht!!!$"
 
 MtChimney_Text_1B3168:: @ 81B3168
-	.string "Hehehe!\p"
-	.string "So you’ve come all the way here!\p"
-	.string "But you’re too late!\n"
-	.string "I’ve already delivered the METEORITE\l"
-	.string "from METEOR FALLS to the BOSS!$"
+	.string "Hahahaha!\p"
+	.string "Hast du dich den ganzen Weg hier\n"
+	.string "heraufgequält?\p"
+	.string "So ein Jammer. Du kommst zu spät.\n"
+	.string "Ich habe den METEORITEN aus METEOR-\l"
+	.string "FÄLLE bereits unserem BOSS gegeben!$"
 
 MtChimney_Text_1B31EA:: @ 81B31EA
-	.string "Hehehe...\n"
-	.string "So I lost...\p"
-	.string "I’m sure glad I never took you on back\n"
-	.string "at METEOR FALLS.$"
+	.string "Hahaha...\n"
+	.string "Da habe ich wohl verloren...\p"
+	.string "Gut, dass ich dich nicht schon in\n"
+	.string "METEORFÄLLE herausgefordert habe.$"
 
 MtChimney_Text_1B3239:: @ 81B3239
-	.string "Hehehe!\p"
-	.string "You might have beaten me, but you don’t\n"
-	.string "stand a chance against the BOSS!\p"
-	.string "If you get lost now, you won’t have to\n"
-	.string "face a sound whipping!$"
+	.string "Hahaha!\p"
+	.string "Du hast mich besiegt, aber gegen\n"
+	.string "unseren BOSS hast du keine Chance!\p"
+	.string "Wenn du dich jetzt leise aus dem Staub\n"
+	.string "machst, vermeidest du jede Menge Ärger.$"
 
 MtChimney_Text_1B32C8:: @ 81B32C8
-	.string "We of TEAM AQUA are working hard for\n"
-	.string "everyone’s sake.\p"
-	.string "Like, if there’s more water around,\n"
-	.string "WATER POKéMON will be happy, and it’ll\l"
-	.string "give people more fun places to swim!$"
+	.string "Wir vom TEAM AQUA setzen unsere\n"
+	.string "Energie zum Wohle aller ein.\p"
+	.string "Wenn es mehr Wasser gibt, sind die\n"
+	.string "WASSER-POKéMON glücklicher und die\l"
+	.string "Menschen hätten mehr Platz zum\l"
+	.string "Schwimmen.$"
 
 MtChimney_Text_1B336E:: @ 81B336E
-	.string "Hunh?\n"
-	.string "What do you mean I lost?$"
+	.string "Bitte?\n"
+	.string "Was heißt das? Ich habe verloren?$"
 
 MtChimney_Text_1B338D:: @ 81B338D
-	.string "Our BOSS says, “It will make everyone\n"
-	.string "happy.”\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
+	.string "Unser BOSS sagt: “So wird jeder\n"
+	.string "glücklich sein...”\p"
+	.string "Aber warum versucht dann jeder, uns\n"
+	.string "aufzuhalten?$"
 
 MtChimney_Text_1B33EA:: @ 81B33EA
-	.string "That annoying TEAM MAGMA...\n"
-	.string "They always mess with our plans!$"
+	.string "Dieses nervtötende TEAM MAGMA! Jedes\n"
+	.string "Mal versuchen sie, uns zu stoppen!$"
 
 MtChimney_Text_1B3427:: @ 81B3427
-	.string "METEORITES pack amazing power!$"
+	.string "METEORITEN stecken voller Energie.$"
 
 MtChimney_Text_1B3446:: @ 81B3446
-	.string "Go! Stomp TEAM MAGMA!\n"
-	.string "And expand the sea!$"
+	.string "Los! Stampfen wir TEAM MAGMA in den\n"
+	.string "Boden! Und vergrößern die Meere!$"
 
 MtChimney_Text_1B3470:: @ 81B3470
-	.string "Stay out of our way, okay?\p"
-	.string "We’re trying to enlarge the sea for\n"
-	.string "the good of everybody!$"
+	.string "Komm uns nicht in die Quere, okay?\p"
+	.string "Wir versuchen, das Meer zum Wohle aller\n"
+	.string "zu vergrößern!$"
 
 MtChimney_Text_1B34C6:: @ 81B34C6
 	.string "Yeah!\n"
-	.string "Hose them down!$"
+	.string "Jeder wird nass!$"
 
 MtChimney_Text_1B34DC:: @ 81B34DC
-	.string "We’re going to keep expanding the sea!$"
+	.string "Wir werden die Meere vergrößern.$"
 
 MtChimney_Text_1B3503:: @ 81B3503
 	.string "Bushaa!$"
 
 MtChimney_Text_1B350B:: @ 81B350B
-	.string "MAXIE: Oh, {PLAYER}{KUN}!\p"
-	.string "Please, you must stop TEAM AQUA\n"
-	.string "for me!\p"
-	.string "They’re trying to make this volcano\n"
-	.string "inactive by using the stolen\l"
-	.string "METEORITE’s power!$"
+	.string "MARC: Oh, {PLAYER}{KUN}!\p"
+	.string "Bitte, halte TEAM AQUA für mich auf!\p"
+	.string "Sie versuchen, mit der Kraft des\n"
+	.string "gestohlenen METEORITEN den Vulkan\l"
+	.string "zu inaktivieren!$"
 
 MtChimney_Text_1B3598:: @ 81B3598
-	.string "MAXIE: {PLAYER}{KUN}!\p"
-	.string "Please, you’ve got to stop TEAM AQUA\n"
-	.string "for me!\p"
-	.string "Dealing with these three thugs is\n"
-	.string "a lot, even for me!$"
+	.string "MARC: Oh, {PLAYER}{KUN}!\p"
+	.string "Bitte, halte TEAM AQUA für mich auf!\p"
+	.string "Diese drei Schurken sind selbst für mich\n"
+	.string "eine harte Nuss!$"
 
 MtChimney_Text_1B3608:: @ 81B3608
-	.string "MAXIE: {PLAYER}{KUN}! Thank you!\p"
-	.string "With your help, we thwarted TEAM\n"
-	.string "AQUA’s destructive plan!\p"
-	.string "But... This victory doesn’t mean the\n"
-	.string "end of their evil plans.\p"
-	.string "We will remain vigilant and keep up\n"
-	.string "our pursuit of TEAM AQUA.\p"
-	.string "{PLAYER}{KUN}, we shall meet again!$"
+	.string "MARC: {PLAYER}{KUN}!\p"
+	.string "Mit deiner Hilfe konnte ich die Pläne\n"
+	.string "von TEAM AQUA durchkreuzen!\p"
+	.string "Aber... Dieser Sieg bedeutet nicht, dass\n"
+	.string "sie ihre üblen Pläne aufgeben werden.\p"
+	.string "Wir werden ein wachsames Auge auf TEAM\n"
+	.string "AQUA haben und sie weiter verfolgen.\p"
+	.string "{PLAYER}{KUN}, wir werden uns wieder sehen!$"
 
 MtChimney_Text_1B36F1:: @ 81B36F1
-	.string "Darn... TEAM AQUA outnumbers us!\n"
-	.string "We can’t keep up with them!$"
+	.string "Mist... TEAM AQUA ist uns zahlenmäßig\n"
+	.string "überlegen! Wir können es nicht mit ihnen\l"
+	.string "aufnehmen!$"
 
 MtChimney_Text_1B372E:: @ 81B372E
-	.string "If they expand the sea, there’ll be less\n"
-	.string "habitats for POKéMON and people!$"
+	.string "Wenn sie die Meere vergrößern, gibt es\n"
+	.string "weniger Lebensraum für POKéMON und\l"
+	.string "Menschen!$"
 
 MtChimney_Text_1B3778:: @ 81B3778
-	.string "TEAM AQUA wants to expand the sea...\n"
-	.string "How’s that for insane?$"
+	.string "TEAM AQUA versucht, die Meere zu ver-\n"
+	.string "größern... Sind die krank im Hirn?$"
 
 MtChimney_Text_1B37B4:: @ 81B37B4
 	.string "Bufoh!$"

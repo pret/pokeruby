@@ -1,110 +1,110 @@
 gLandmarkName_FlowerShop::
-	.string "FLOWER SHOP$"
+	.string "BLUMENLADEN$"
 
 gLandmarkName_PetalburgWoods::
-	.string "PETALBURG WOODS$"
+	.string "BLÜTENBURGWALD$"
 
 gLandmarkName_MrBrineysCottage::
-	.string "MR. BRINEY’S COTTAGE$"
+	.string "MR. BRACKS HÜTTE$"
 
 gLandmarkName_AbandonedShip::
-	.string "ABANDONED SHIP$"
+	.string "SCHIFFSWRACK$"
 
 gLandmarkName_SeashoreHouse::
-	.string "SEASHORE HOUSE$"
+	.string "STRANDHAUS$"
 
 gLandmarkName_SlateportBeach::
-	.string "SLATEPORT BEACH$"
+	.string "GRAPHITPORTSTRAND$"
 
 gLandmarkName_CyclingRoad::
-	.string "CYCLING ROAD$"
+	.string "RADWEG$"
 
 gLandmarkName_NewMauville::
-	.string "NEW MAUVILLE$"
+	.string "NEU MALVENFROH$"
 
 gLandmarkName_TrickHouse::
-	.string "TRICK HOUSE$"
+	.string "RÄTSELHAUS$"
 
 gLandmarkName_OldLadysRestShop::
-	.string "OLD LADY’S REST STOP$"
+	.string "HOTEL DER ALTEN DAME$"
 
 gLandmarkName_Desert::
-	.string "DESERT$"
+	.string "WÜSTE$"
 
 gLandmarkName_WinstrateFamily::
-	.string "THE WINSTRATE FAMILY$"
+	.string "FAMILIE SIHGERS$"
 
 gLandmarkName_CableCar::
-	.string "CABLE CAR$"
+	.string "SEILBAHN$"
 
 gLandmarkName_GlassWorkshop::
-	.string "GLASS WORKSHOP$"
+	.string "GLASWERKSTATT$"
 
 gLandmarkName_WeatherInstitute::
-	.string "WEATHER INSTITUTE$"
+	.string "KLIMA-INSTITUT$"
 
 gLandmarkName_MeteorFalls::
-	.string "METEOR FALLS$"
+	.string "METEORFÄLLE$"
 
 gLandmarkName_TunnelersRestHouse::
-	.string "TUNNELER’S REST HOUSE$"
+	.string "BERGRASTHAUS$"
 
 gLandmarkName_RusturfTunnel::
-	.string "RUSTURF TUNNEL$"
+	.string "METAFLURTUNNEL$"
 
 gLandmarkName_PokemonDayCare::
-	.string "POKéMON DAY CARE$"
+	.string "POKéMON-PENSION$"
 
 gLandmarkName_SafariZoneEntrance::
-	.string "SAFARI ZONE ENTRANCE$"
+	.string "EINGANG SAFARI-ZONE$"
 
 gLandmarkName_MtPyre::
-	.string "MT. PYRE$"
+	.string "PYROBERG$"
 
 gLandmarkName_ShoalCave::
-	.string "SHOAL CAVE$"
+	.string "KÜSTENHÖHLE$"
 
 gLandmarkName_SeafloorCavern::
-	.string "SEAFLOOR CAVERN$"
+	.string "TIEFSEEHÖHLE$"
 
 gLandmarkName_GraniteCave::
-	.string "GRANITE CAVE$"
+	.string "GRANITHÖHLE$"
 
 gLandmarkName_OceanCurrent::
-	.string "OCEAN CURRENT$"
+	.string "MEERESSTRÖMUNG$"
 
 gLandmarkName_LanettesHouse::
-	.string "LANETTE’S HOUSE$"
+	.string "LANETTES HAUS$"
 
 gLandmarkName_FieryPath::
-	.string "FIERY PATH$"
+	.string "FEURIGER PFAD$"
 
 gLandmarkName_JaggedPass::
-	.string "JAGGED PASS$"
+	.string "STEILPASS$"
 
 gLandmarkName_SkyPillar::
-	.string "SKY PILLAR$"
+	.string "HIMMELTURM$"
 
 gLandmarkName_BerryMastersHouse::
-	.string "BERRY MASTER’S HOUSE$"
+	.string "BEERENMEISTER-VILLA$"
 
 gLandmarkName_IslandCave::
-	.string "ISLAND CAVE$"
+	.string "INSELHÖHLE$"
 
 gLandmarkName_DesertRuins::
-	.string "DESERT RUINS$"
+	.string "WÜSTENRUINE$"
 
 gLandmarkName_ScorchedSlab::
-	.string "SCORCHED SLAB$"
+	.string "SONNENGROTTE$"
 
 gLandmarkName_AncientTomb::
-	.string "ANCIENT TOMB$"
+	.string "GRABMAL$"
 
 gLandmarkName_SealedChamber::
-	.string "SEALED CHAMBER$"
+	.string "SIEGELKAMMER$"
 
 gLandmarkName_FossilManiacsHouse::
-	.string "FOSSIL MANIAC’S HOUSE$"
+	.string "FOSSILMANIACS HAUS$"
 
 gLandmarkName_HuntersHouse::
-	.string "HUNTER’S HOUSE$"
+	.string "HAUS DES TAUCHERS$"

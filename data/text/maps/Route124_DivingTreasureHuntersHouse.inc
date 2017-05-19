@@ -1,53 +1,54 @@
 Route124_DivingTreasureHuntersHouse_Text_19F416:: @ 819F416
-	.string "I’m the DIVING TREASURE HUNTER!\p"
-	.string "I’m the awesome dude who makes\n"
-	.string "deep-sea dives to gather treasures\l"
-	.string "resting at the bottom.$"
+	.string "Ich bin der SCHATZTAUCHER!\p"
+	.string "Ich bin der Typ, der in der Tiefsee\n"
+	.string "taucht und nach Schätzen am Meeres-\l"
+	.string "grund sucht.$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F48F:: @ 819F48F
-	.string "Tell me, have you seen any SHARDS of\n"
-	.string "tools made in ancient times?$"
+	.string "Sag, hast du SCHERBEN antiker\n"
+	.string "Werkzeuge gesehen?$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F4D1:: @ 819F4D1
-	.string "You haven’t got any treasures\n"
-	.string "for me...\p"
-	.string "If you see any SHARDS, like the RED\n"
-	.string "SHARD, you’ve got to trade it with me!$"
+	.string "Du hast keinerlei Schätze für mich...\p"
+	.string "Wenn du Stücke findest, besonders\n"
+	.string "PURPURSTÜCKE, tausche sie mit mir!$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F544:: @ 819F544
-	.string "Oh, hey! That...\n"
-	.string "That’s a SHARD! I’m looking for those!\p"
-	.string "Oh, man, you’ve got to trade that\n"
-	.string "with me! I’ll give you something good!$"
+	.string "Oh, hey! Das... Das ist eine\n"
+	.string "Scherbe! Genau die suche ich!\p"
+	.string "Oh, du musst unbedingt mit mir\n"
+	.string "tauschen! Ich gebe dir etwas\l"
+	.string "Gutes dafür!$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F5C5:: @ 819F5C5
-	.string "What do you want to trade?$"
+	.string "Was möchtest du tauschen?$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F5E0:: @ 819F5E0
-	.string "You’ll trade your {STR_VAR_1} for\n"
-	.string "my {STR_VAR_2}, then?$"
+	.string "Du tauschst dein {STR_VAR_1} gegen\n"
+	.string "mein {STR_VAR_2}?$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F606:: @ 819F606
-	.string "It’s a done deal!\n"
-	.string "Use that wisely!$"
+	.string "Das ist ein guter Tausch!\n"
+	.string "Setze es wohl überlegt ein!$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F629:: @ 819F629
-	.string "Do you want to trade something else?$"
+	.string "Möchtest du noch etwas tauschen?$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F64E:: @ 819F64E
-	.string "Whoops, your BAG’s full.\n"
-	.string "Get rid of some items, friend!$"
+	.string "Hups, dein BEUTEL ist voll.\n"
+	.string "Schaffe Platz, mein Freund!$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F686:: @ 819F686
-	.string "No? That’s a downer.\n"
-	.string "Well, if you change your mind, come back.$"
+	.string "Nein? Das ist niederschmetternd.\n"
+	.string "Wenn du deine Meinung änderst, ich\l"
+	.string "bin hier!$"
 
 Route124_DivingTreasureHuntersHouse_Text_19F6C5:: @ 819F6C5
-	.string "Wanted item              Trade item\n"
-	.string " RED SHARD           {0x7B}{0x7C} FIRE STONE\p"
-	.string "Wanted item              Trade item\n"
-	.string " YELLOW SHARD     {0x7B}{0x7C} THUNDERSTONE\p"
-	.string "Wanted item              Trade item\n"
-	.string " BLUE SHARD         {0x7B}{0x7C} WATER STONE\p"
-	.string "Wanted item              Trade item\n"
-	.string " GREEN SHARD       {0x7B}{0x7C} LEAF STONE$"
+	.string "Gesuchtes Item         Item zum Tausch\n"
+	.string " PURPURSTÜCK      {LEFT_ARROW}{RIGHT_ARROW} FEUERSTEIN\p"
+	.string "Gesuchtes Item         Item zum Tausch\n"
+	.string " GELBSTÜCK          {LEFT_ARROW}{RIGHT_ARROW} DONNERSTEIN\p"
+	.string "Gesuchtes Item         Item zum Tausch\n"
+	.string " INDIGOSTÜCK        {LEFT_ARROW}{RIGHT_ARROW} WASSERSTEIN\p"
+	.string "Gesuchtes Item         Item zum Tausch\n"
+	.string " GRÜNSTÜCK           {LEFT_ARROW}{RIGHT_ARROW} BLATTSTEIN$"

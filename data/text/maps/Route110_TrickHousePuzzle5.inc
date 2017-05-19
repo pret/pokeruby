@@ -1,141 +1,144 @@
 Route110_TrickHousePuzzle5_Text_19D423:: @ 819D423
-	.string "CLICKETY-CLACK...\n"
-	.string "MECHADOLL 1 AM I!\p"
-	.string "IF YOU ANSWER QUIZZES CORRECTLY,\n"
-	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
-	.string "THEN YOU CAN OBTAIN THE SECRET CODE.$"
+	.string "KLICK-KLACK...\n"
+	.string "ROBOPUPPE 1 ICH BIN!\p"
+	.string "GIBST DU IM QUIZ RICHTIGE ANTWORTEN,\n"
+	.string "ERREICHST DU BALD ROBOPUPPE 5.\l"
+	.string "DORT ERHÄLTST DU DEN GEHEIMEN CODE.$"
 
 Route110_TrickHousePuzzle5_Text_19D4AE:: @ 819D4AE
-	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKéMON is not found\n"
-	.string "on ROUTE 103. Which one is it?$"
+	.string "ROBOPUPPE 1 QUIZ.\p"
+	.string "Eines dieser POKéMON kann man nicht\n"
+	.string "auf der ROUTE 103 finden. Welches?$"
 
 Route110_TrickHousePuzzle5_Text_19D501:: @ 819D501
-	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKéMON is not of the\n"
-	.string "GRASS type. Which one is it?$"
+	.string "ROBOPUPPE 1 QUIZ.\p"
+	.string "Eines dieser POKéMON ist kein\n"
+	.string "PFLANZEN-POKéMON. Welches?$"
 
 Route110_TrickHousePuzzle5_Text_19D553:: @ 819D553
-	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKéMON uses SCRATCH.\n"
-	.string "Which one is it?$"
+	.string "ROBOPUPPE 1 QUIZ.\p"
+	.string "Eines dieser POKéMON setzt\n"
+	.string "KRATZER ein. Welches?$"
 
 Route110_TrickHousePuzzle5_Text_19D599:: @ 819D599
-	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
-	.string "GO THROUGH. PLEASE.$"
+	.string "GLÜCKWUNSCH! RICHTIG.\n"
+	.string "GEHE HINDURCH. BITTE.$"
 
 Route110_TrickHousePuzzle5_Text_19D5CF:: @ 819D5CF
-	.string "BZZZT. DISAPPOINTMENT.\n"
-	.string "ERROR.$"
+	.string "BZZZT. ENTTÄUSCHEND.\n"
+	.string "FEHLER.$"
 
 Route110_TrickHousePuzzle5_Text_19D5ED:: @ 819D5ED
 	.string "WAHAHAHAHA! WAHAHAHAHA!\n"
-	.string "CLICKETY-CLACK!$"
+	.string "KLICK-KLACK!$"
 
 Route110_TrickHousePuzzle5_Text_19D615:: @ 819D615
-	.string "YOUR NEXT CHALLENGE WE WAIT FOR.$"
+	.string "DEINE NÄCHSTE HERAUSFORDERUNG WIR\n"
+	.string "ERWARTEN.$"
 
 Route110_TrickHousePuzzle5_Text_19D636:: @ 819D636
-	.string "CLICKETY-CLACK...\n"
-	.string "MECHADOLL 2 AM I!\p"
-	.string "MECHADOLL 1’S QUIZ DIFFICULTY LEVEL\n"
-	.string "IS SET TOO LOW.$"
+	.string "KLICK-KLACK...\n"
+	.string "ROBOPUPPE 2 ICH BIN!\p"
+	.string "ROBOPUPPE 1 QUIZ-SCHWIERIGKEITS-\n"
+	.string "GRAD IST ZU NIEDRIG.$"
 
 Route110_TrickHousePuzzle5_Text_19D68E:: @ 819D68E
-	.string "MECHADOLL 2 QUIZ.\p"
-	.string "In PROF. BIRCH’s bag, there were three\n"
-	.string "POKéMON. Which one was at the right?$"
+	.string "ROBOPUPPE 2 QUIZ.\p"
+	.string "In PROF. BIRKS Beutel befanden sich\n"
+	.string "drei POKéMON. Welches lag ganz rechts?$"
 
 Route110_TrickHousePuzzle5_Text_19D6EC:: @ 819D6EC
-	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which POKéMON was offered for a trade\n"
-	.string "at the POKéMON TRAINER’S SCHOOL?$"
+	.string "ROBOPUPPE 2 QUIZ.\p"
+	.string "Welches POKéMON wurde in der POKéMON\n"
+	.string "TRAINERSCHULE zum Tausch angeboten?$"
 
 Route110_TrickHousePuzzle5_Text_19D745:: @ 819D745
-	.string "MECHADOLL 2 QUIZ.\p"
-	.string "The DEVON RESEARCHER was looking for\n"
-	.string "what POKéMON in PETALBURG WOODS?$"
+	.string "ROBOPUPPE 2 QUIZ.\p"
+	.string "Welches POKéMON hat der FORSCHER von\n"
+	.string "DEVON im BLÜTENBURGWALD gesucht?$"
 
 UnknownString_819D79D: @ 819D79D
-	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
-	.string "GO THROUGH. PLEASE.$"
+	.string "GLÜCKWUNSCH! RICHTIG.\n"
+	.string "GEHE HINDURCH. BITTE.$"
 
 Route110_TrickHousePuzzle5_Text_19D7D3:: @ 819D7D3
-	.string "CLICKETY-CLACK...\n"
-	.string "MECHADOLL 3 AM I!\p"
-	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
+	.string "KLICK-KLACK...\n"
+	.string "ROBOPUPPE 3 ICH BIN!\p"
+	.string "FÜR MICH ZÄHLT NUR GELD.$"
 
 Route110_TrickHousePuzzle5_Text_19D81B:: @ 819D81B
-	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Which costs more?\n"
-	.string "Three POKé BALLS or one SUPER POTION?$"
+	.string "ROBOPUPPE 3 QUIZ.\p"
+	.string "Was ist teurer?\n"
+	.string "Drei POKéBÄLLE oder ein SUPERTRANK?$"
 
 Route110_TrickHousePuzzle5_Text_19D865:: @ 819D865
-	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Sell one ESCAPE ROPE and buy\n"
-	.string "one ANTIDOTE. How much money remains?$"
+	.string "ROBOPUPPE 3 QUIZ.\p"
+	.string "Verkaufe ein FLUCHTSEIL und kaufe ein\n"
+	.string "GEGENGIFT. Wie viel Geld bleibt übrig?$"
 
 Route110_TrickHousePuzzle5_Text_19D8BA:: @ 819D8BA
-	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Do one FULL HEAL and GREAT BALL\n"
-	.string "cost more than one REVIVE?$"
+	.string "ROBOPUPPE 3 QUIZ.\p"
+	.string "Kosten ein HYPERHEILER und ein\n"
+	.string "SUPERBALL mehr als ein BELEBER?$"
 
 UnknownString_819D907: @ 819D907
-	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
-	.string "GO THROUGH. PLEASE.$"
+	.string "GLÜCKWUNSCH! RICHTIG.\n"
+	.string "GEHE HINDURCH. BITTE.$"
 
 Route110_TrickHousePuzzle5_Text_19D93D:: @ 819D93D
-	.string "CLICKETY-CLACK...\n"
-	.string "MECHADOLL 4 THAT IS ME!\p"
-	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
+	.string "KLICK-KLACK...\n"
+	.string "ROBOPUPPE 4 ICH BIN!\p"
+	.string "ICH INTERESSIERE MICH FÜR SCHÖNES.$"
 
 Route110_TrickHousePuzzle5_Text_19D987:: @ 819D987
-	.string "MECHADOLL 4 QUIZ.\p"
-	.string "RUSTBORO GYM LEADER ROXANNE used a\n"
-	.string "GEODUDE. Was it male or female?$"
+	.string "ROBOPUPPE 4 QUIZ.\p"
+	.string "ARENALEITERIN FELIZIA in METAROST\n"
+	.string "CITY kämpft mit KLEINSTEIN. Ist es\l"
+	.string "männlich oder weiblich?$"
 
 Route110_TrickHousePuzzle5_Text_19D9DC:: @ 819D9DC
-	.string "MECHADOLL 4 QUIZ.\p"
-	.string "In DEWFORD HALL, were there more men\n"
-	.string "or women?$"
+	.string "ROBOPUPPE 4 QUIZ.\p"
+	.string "Befanden sich in der FAUSTAUHAVEN\n"
+	.string "HALLE mehr Männer oder mehr Frauen?$"
 
 Route110_TrickHousePuzzle5_Text_19DA1D:: @ 819DA1D
-	.string "MECHADOLL 4 QUIZ.\p"
-	.string "The first TRAINER in DEWFORD GYM was\n"
-	.string "male or female?$"
+	.string "ROBOPUPPE 4 QUIZ.\p"
+	.string "Der erste TRAINER in der ARENA von\n"
+	.string "FAUSTAUHAVEN, war der männlich oder\l"
+	.string "weiblich?$"
 
 UnknownString_819DA64: @ 819DA64
-	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
-	.string "GO THROUGH. PLEASE.$"
+	.string "GLÜCKWUNSCH! RICHTIG.\n"
+	.string "GEHE HINDURCH. BITTE.$"
 
 Route110_TrickHousePuzzle5_Text_19DA9A:: @ 819DA9A
-	.string "CLICKETY-CLACK...\n"
-	.string "MECHADOLL 5 AM I!\p"
-	.string "THE MASTER’S BEST AND PROUDEST\n"
-	.string "ACHIEVEMENT AM I.$"
+	.string "KLICK-KLACK...\n"
+	.string "ROBOPUPPE 5 ICH BIN!\p"
+	.string "DES MEISTERS BESTE UND STOLZESTE\n"
+	.string "ERFINDUNG ICH BIN.$"
 
 Route110_TrickHousePuzzle5_Text_19DAEF:: @ 819DAEF
-	.string "MECHADOLL 5 QUIZ.\p"
-	.string "How many BIKES does RYDEL have on\n"
-	.string "display outside his cycle shop?$"
+	.string "ROBOPUPPE 5 QUIZ.\p"
+	.string "Wie viele RÄDER stehen bei\n"
+	.string "RADLA vor dem Laden?$"
 
 Route110_TrickHousePuzzle5_Text_19DB43:: @ 819DB43
-	.string "MECHADOLL 5 QUIZ.\p"
-	.string "How many people give you BERRIES at the\n"
-	.string "PRETTY PETAL flower shop?$"
+	.string "ROBOPUPPE 5 QUIZ.\p"
+	.string "Von wie vielen Leuten bekommst du im\n"
+	.string "BLÜTENTRAUM BLUMENLADEN BEEREN?$"
 
 Route110_TrickHousePuzzle5_Text_19DB97:: @ 819DB97
-	.string "MECHADOLL 5 QUIZ.\p"
-	.string "How many signs are there in\n"
-	.string "LILYCOVE CITY?$"
+	.string "ROBOPUPPE 5 QUIZ.\p"
+	.string "Wie viele Schilder gibt es in\n"
+	.string "SEEGRASULB CITY?$"
 
 UnknownString_819DBD4: @ 819DBD4
-	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
-	.string "GO THROUGH. PLEASE.$"
+	.string "GLÜCKWUNSCH! RICHTIG.\n"
+	.string "GEHE HINDURCH. BITTE.$"
 
 UnknownString_819DC0A: @ 819DC0A
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is my life.”\n"
+	.string "{PLAYER} hat den geheimen Code auf die\n"
+	.string "Tür geschrieben.\p"
+	.string "“RÄTSELMEISTER ist mein Leben.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
+	.string "Das Schloss geht klickend auf.$"

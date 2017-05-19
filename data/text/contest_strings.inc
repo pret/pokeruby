@@ -1,99 +1,151 @@
-ContestString_DescHighlyAppealing:
-	.string "A highly appealing move.$"
-ContestString_DescStartled1:
-	.string "After this move, the user is\nmore easily startled.$"
-ContestString_DescGreatLock:
-	.string "Makes a great appeal, but\nallows no more to the end.$"
-ContestString_DescRepeatable:
-	.string "Can be repeatedly used\nwithout boring the JUDGE.$"
-ContestString_DescStartled2:
-	.string "Can avoid being startled\nby others once.$"
-ContestString_DescStartled3:
-	.string "Can avoid being startled\nby others.$"
-ContestString_DescStartled4:
-	.string "Can avoid being startled\nby others a little.$"
-ContestString_DescStartled5:
-	.string "After this move, the user is\nless likely to be startled.$"
-ContestString_DescStartled6:
-	.string "Slightly startles the\nPOKéMON in front.$"
-ContestString_DescStartled7:
-	.string "Slightly startles those\nthat have made appeals.$"
-ContestString_DescStartled8:
-	.string "Startles the POKéMON that\nappealed before the user.$"
-ContestString_DescStartled9:
-	.string "Startles all POKéMON that\nhave done their appeals.$"
-ContestString_DescStartled10:
-	.string "Badly startles the\nPOKéMON in front.$"
-ContestString_DescStartled11:
-	.string "Badly startles those that\nhave made appeals.$"
-ContestString_DescStartled12:
-	.string "Startles the POKéMON that\nappealed before the user.$"
-ContestString_DescStartled13:
-	.string "Startles all POKéMON that\nappealed before the user.$"
-ContestString_DescAttentionShift:
-	.string "Shifts the JUDGE’s\nattention from others.$"
-ContestString_DescStartled14:
-	.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
-ContestString_DescJamOthersMissTurn:
-	.string "Jams the others, and misses\none turn of appeals.$"
-ContestString_DescStartled15:
-	.string "Startles POKéMON that\nmade a same-type appeal.$"
-ContestString_DescStartled16:
-	.string "Badly startles POKéMON\nthat made COOL appeals.$"
-ContestString_DescStartled17:
-	.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
-ContestString_DescStartled18:
-	.string "Badly startles POKéMON\nthat made CUTE appeals.$"
-ContestString_DescStartled19:
-	.string "Badly startles POKéMON\nthat made SMART appeals.$"
-ContestString_DescStartled20:
-	.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
-ContestString_DescNervousOne:
-	.string "Makes one POKéMON after\nthe user nervous.$"
-ContestString_DescNervousAllAfter:
-	.string "Makes all POKéMON after\nthe user nervous.$"
-ContestString_DescConditionWorseBefore:
-	.string "Worsens the condition of\nthose that made appeals.$"
-ContestString_DescStartled21:
-	.string "Badly startles POKéMON in\ngood condition.$"
-ContestString_DescGreatWhenFirst:
-	.string "The appeal works great if\nperformed first.$"
-ContestString_DescGreatWhenLast:
-	.string "The appeal works great if\nperformed last.$"
-ContestString_DescAppealGoodBeforeAll:
-	.string "Makes the appeal as good\nas those before it.$"
-ContestString_DescAppealGoodBeforeOne:
-	.string "Makes the appeal as good\nas the one before it.$"
-ContestString_DescBetterWhenLater:
-	.string "The appeal works better\nthe later it is performed.$"
-ContestString_DescAffectedByTiming:
-	.string "The appeal’s quality varies\ndepending on its timing.$"
-ContestString_DescBetterWhenSameType:
-	.string "Works well if it’s the same\ntype as the one before.$"
-ContestString_DescBetterWhenDiffType:
-	.string "Works well if different in\ntype than the one before.$"
-ContestString_DescAffectedByFront:
-	.string "Affected by how well the\nappeal in front goes.$"
-ContestString_DescConditionUp:
-	.string "Ups the user’s condition.\nHelps prevent nervousness.$"
-ContestString_DescAffectedByCondition:
-	.string "The appeal works well if the\nuser’s condition is good.$"
-ContestString_DescAppealEarlier:
-	.string "The next appeal can be made\nearlier next turn.$"
-ContestString_DescAppealLater:
-	.string "The next appeal can be made\nlater next turn.$"
-ContestString_DescRandomOrderEasier:
-	.string "Makes the next turn’s order\nmore easily scrambled.$"
-ContestString_DescRandomOrder:
-	.string "Scrambles the order of\nappeals on the next turn.$"
-ContestString_DescAnyExcitement:
-	.string "An appeal that excites the\naudience in any CONTEST.$"
-ContestString_DescStartled22:
-	.string "Badly startles all POKéMON\nthat made good appeals.$"
-ContestString_DescScaleWithExcitement:
-	.string "The appeal works best the\nmore the crowd is excited.$"
-ContestString_DescStopExcitement:
-	.string "Temporarily stops the\ncrowd from growing excited.$"
+ContestString_DescHighlyAppealing: @ 83CA4EC
+	.string "Eine sehr ansprechende\n"
+	.string "Vorführung.$"
+ContestString_DescStartled1: @ 83CA505
+	.string "Einsatz der Attacke macht\n"
+	.string "PKMN leichter irritierbar.$"
+ContestString_DescGreatLock: @ 83CA538
+	.string "Großartiger Ausdruck, der\n"
+	.string "sich nicht steigern lässt.$"
+ContestString_DescRepeatable: @ 83CA56D
+	.string "Langweilt den JUROR auch\n"
+	.string "bei Wiederholung nicht.$"
+ContestString_DescStartled2: @ 83CA59E
+	.string "Kann Irritation durch\n"
+	.string "andere einmal verhindern.$"
+ContestString_DescStartled3: @ 83CA5C7
+	.string "Kann Irritation durch\n"
+	.string "andere verhindern.$"
+ContestString_DescStartled4: @ 83CA5EB
+	.string "Kann Irritation durch an-\n"
+	.string "dere ein wenig eindämmen.$"
+ContestString_DescStartled5: @ 83CA618
+	.string "Einsatz der Attacke dämmt\n"
+	.string "danach Irritation ein.$"
+ContestString_DescStartled6: @ 83CA651
+	.string "Irritiert das vordere\n"
+	.string "POKéMON ein wenig.$"
+ContestString_DescStartled7: @ 83CA679
+	.string "Irritiert die POKéMON ein\n"
+	.string "wenig, die schon auftraten.$"
+ContestString_DescStartled8: @ 83CA6A9
+	.string "Irritiert das POKéMON, das\n"
+	.string "vorher aufgetreten ist.$"
+ContestString_DescStartled9: @ 83CA6DD
+	.string "Irritiert alle POKéMON,\n"
+	.string "die bisher auftraten.$"
+ContestString_DescStartled10: @ 83CA710
+	.string "Irritiert das vordere\n"
+	.string "POKéMON sehr stark.$"
+ContestString_DescStartled11: @ 83CA735
+	.string "Irritiert die POKéMON, die\n"
+	.string "schon aufgetreten sind.$"
+ContestString_DescStartled12: @ 83CA762
+	.string "Irritiert das POKéMON, das\n"
+	.string "vorher aufgetreten ist.$"
+ContestString_DescStartled13: @ 83CA796
+	.string "Irritiert alle POKéMON, die\n"
+	.string "vorher aufgetreten sind.$"
+ContestString_DescAttentionShift: @ 83CA7CA
+	.string "Lenkt den JUROR von den\n"
+	.string "anderen POKéMON ab.$"
+ContestString_DescStartled14: @ 83CA7F4
+	.string "Irritiert PKMN, bes. die,\n"
+	.string "auf die der JUROR achtet.$"
+ContestString_DescJamOthersMissTurn: @ 83CA829
+	.string "Stört die anderen und An-\n"
+	.string "wender setzt 1 Runde aus.$"
+ContestString_DescStartled15: @ 83CA85A
+	.string "Irritiert PKMN, bes. die, die\n"
+	.string "Ausdruck gl. Typs zeigten.$"
+ContestString_DescStartled16: @ 83CA889
+	.string "Irritiert PKMN, die Ausdrck.\n"
+	.string "des Typs COOL vorführten.$"
+ContestString_DescStartled17: @ 83CA8B8
+	.string "Irritiert PKMN, die Ausdrck.\n"
+	.string "des Typs SCHÖN vorführten.$"
+ContestString_DescStartled18: @ 83CA8E9
+	.string "Irritiert PKMN, die Ausdrck.\n"
+	.string "des Typs ANMUT vorführten.$"
+ContestString_DescStartled19: @ 83CA918
+	.string "Irritiert PKMN, die Ausdrck.\n"
+	.string "des Typs KLUG vorführten.$"
+ContestString_DescStartled20: @ 83CA948
+	.string "Irritiert PKMN, die Ausdrck.\n"
+	.string "des Typs STARK vorführten.$"
+
+ContestString_DescNervousOne: @ 83CA978
+	.string "Macht nachfolgendes\n"
+	.string "POKéMON nervös.$"
+
+ContestString_DescNervousAllAfter: @ 83CA9A2
+	.string "Macht alle nachfolgenden\n"
+	.string "POKéMON nervös.$"
+
+ContestString_DescConditionWorseBefore: @ 83CA9CC
+	.string "Schwächt Kondition der\n"
+	.string "PKMN, die bisher auftraten.$"
+
+ContestString_DescStartled21: @ 83CA9FE
+	.string "Irritiert POKéMON, die eine\n"
+	.string "gute Kondition haben.$"
+ContestString_DescGreatWhenFirst: @ 83CAA28
+	.string "Ausdruck gelingt sehr gut,\n"
+	.string "wenn als Erster vorgeführt.$"
+ContestString_DescGreatWhenLast: @ 83CAA53
+	.string "Ausdruck gelingt sehr gut,\n"
+	.string "wenn zuletzt vorgeführt.$"
+ContestString_DescAppealGoodBeforeAll: @ 83CAA7D
+	.string "Ausdruck gelingt so gut\n"
+	.string "wie die der Vorgänger.$"
+ContestString_DescAppealGoodBeforeOne: @ 83CAAAA
+	.string "Ausdruck gelingt so gut\n"
+	.string "wie der des Vorgängers.$"
+ContestString_DescBetterWhenLater: @ 83CAAD9
+	.string "Je später der Auftritt,\n"
+	.string "desto besser der Ausdruck.$"
+ContestString_DescAffectedByTiming: @ 83CAB0C
+	.string "Die Qualität des Ausdrucks\n"
+	.string "hängt vom Timing ab.$"
+ContestString_DescBetterWhenSameType: @ 83CAB41
+	.string "Gelingt gut, wenn vom\n"
+	.string "selben Typ wie der vorige.$"
+ContestString_DescBetterWhenDiffType: @ 83CAB75
+	.string "Gelingt gut, wenn vom\n"
+	.string "anderen Typ als der vorige.$"
+ContestString_DescAffectedByFront: @ 83CABAA
+	.string "Hängt von Qualität des Aus-\n"
+	.string "drucks des Vorgängers ab.$"
+ContestString_DescConditionUp: @ 83CABD9
+	.string "Verbessert die Kondition\n"
+	.string "und verhindert Nervosität.$"
+ContestString_DescAffectedByCondition: @ 83CAC0E
+	.string "Ausdruck gelingt gut, wenn\n"
+	.string "Kondition des PKMN gut ist.$"
+ContestString_DescAppealEarlier: @ 83CAC45
+	.string "Der nächste Ausdruck kann\n"
+	.string "früher vorgeführt werden.$"
+ContestString_DescAppealLater: @ 83CAC74
+	.string "Der nächste Ausdruck kann\n"
+	.string "später vorgeführt werden.$"
+ContestString_DescRandomOrderEasier: @ 83CACA1
+	.string "Ändert die Reihenfolge der\n"
+	.string "nächst. Auftritte leichter.$"
+ContestString_DescRandomOrder: @ 83CACD4
+	.string "Ändert die Reihenfolge der\n"
+	.string "nächsten Auftritte.$"
+ContestString_DescAnyExcitement: @ 83CAD05
+	.string "Verzückt das Publikum in \n"
+	.string "jedem WETTBEWERB.$"
+ContestString_DescStartled22: @ 83CAD39
+	.string "Irritiert alle POKéMON,\n"
+	.string "deren Ausdruck gut war.$"
+ContestString_DescScaleWithExcitement: @ 83CAD6C
+	.string "Gelingt am besten, wenn\n"
+	.string "das Publikum gespannt ist.$"
+ContestString_DescStopExcitement: @ 83CADA1
+	.string "Bremst zeitweise Begeis-\n"
+	.string "terung des Publikums.$"
 
 	.align 2
 gUnknown_083CADD4:: @ 83CADD4
@@ -146,32 +198,32 @@ gUnknown_083CADD4:: @ 83CADD4
 	.4byte ContestString_DescScaleWithExcitement
 	.4byte ContestString_DescStopExcitement
 
-ContestString_MoveRainDance:
-	.string "RAIN DANCE$"
-ContestString_MoveRage:
-	.string "RAGE$"
-ContestString_MoveFocusEnergy:
-	.string "FOCUS ENERGY$"
-ContestString_MoveHypnosis:
-	.string "HYPNOSIS$"
-ContestString_MoveSoftboiled:
-	.string "SOFTBOILED$"
-ContestString_MoveHornAttack:
-	.string "HORN ATTACK$"
-ContestString_MoveSwordsDance:
-	.string "SWORDS DANCE$"
-ContestString_MoveConversion:
-	.string "CONVERSION$"
-ContestString_MoveSunnyDay:
-	.string "SUNNY DAY$"
-ContestString_MoveRest:
-	.string "REST$"
-ContestString_MoveVicegrip:
-	.string "VICEGRIP$"
-ContestString_MoveDefenseCurl:
-	.string "DEFENSE CURL$"
-ContestString_MoveLockOn:
-	.string "LOCK-ON$"
+ContestString_MoveRainDance: @ 83CAE94
+	.string "REGENTANZ$"
+ContestString_MoveRage: @ 83CAE9F
+	.string "RASEREI$"
+ContestString_MoveFocusEnergy: @ 83CAEA4
+	.string "ENERGIEFOKUS$"
+ContestString_MoveHypnosis: @ 83CAEB1
+	.string "HYPNOSE$"
+ContestString_MoveSoftboiled: @ 83CAEBA
+	.string "WEICHEI$"
+ContestString_MoveHornAttack: @ 83CAEC5
+	.string "HORNATTACKE$"
+ContestString_MoveSwordsDance: @ 83CAED1
+	.string "SCHWERTTANZ$"
+ContestString_MoveConversion: @ 83CAEDE
+	.string "UMWANDLUNG$"
+ContestString_MoveSunnyDay: @ 83CAEE9
+	.string "SONNENTAG$"
+ContestString_MoveRest: @ 83CAEF3
+	.string "ERHOLUNG$"
+ContestString_MoveVicegrip: @ 83CAEF8
+	.string "KLAMMER$"
+ContestString_MoveDefenseCurl: @ 83CAF01
+	.string "EINIGLER$"
+ContestString_MoveLockOn: @ 83CAF0E
+	.string "ZIELSCHUSS$"
 
 	.align 2
 	.4byte ContestString_MoveRainDance
@@ -190,15 +242,15 @@ ContestString_MoveLockOn:
 	.4byte ContestString_MoveLockOn
 
 ContestString_Cool:
-	.string "COOL$"
+	.string "COOL.$"
 ContestString_Beauty:
-	.string "BEAUTY$"
+	.string "SCHÖN.$"
 ContestString_Cute:
-	.string "CUTE$"
+	.string "ANMUT$"
 ContestString_Smart:
-	.string "SMART$"
+	.string "KLUG.$"
 ContestString_Tough:
-	.string "TOUGH$"
+	.string "STÄRKE$"
 
 	.align 2
 gUnknown_083CAF70:: @ 83CAF70
@@ -209,47 +261,70 @@ gUnknown_083CAF70:: @ 83CAF70
 	.4byte ContestString_Tough
 
 gUnknown_083CAF84:: @ 83CAF84
-	.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
+	.string "Ausdruck {NAME_END}! Welche\n"
+	.string "Attacke wird gezeigt?$"
 
 gUnknown_083CAFAE:: @ 83CAFAE
-	.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
+	.string "Ausdruck {NAME_END}! Aber es\n"
+	.string "kann nicht teilnehmen!$"
 
 gUnknown_083CAFD7:: @ 83CAFD7
-	.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
-	.string "The other POKéMON\nmade moves.{PAUSE 60}$"
+	.string "{STR_VAR_1} führt\n"
+	.string "{STR_VAR_2} vor!$"
+
+	.string "Die anderen POKéMON\n"
+	.string "zeigten ihre Attacken!$"
 
 gUnknown_083CB00D:: @ 83CB00D
-	.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
+	.string "{STR_VAR_1} beobachtet\n"
+	.string "die anderen.{PAUSE 60}$"
 
 gUnknown_083CB02C:: @ 83CB02C
-	.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
-	.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
+	.string "Soweit zur\n"
+	.string "Ausdruckskraft!{PAUSE 60}$"
+
+	.string "{STR_VAR_3}-\n"
+	.string "Att. {STR_VAR_2}\n"
+	.string "von {STR_VAR_1}!$"
+
 	.string "TRICK$"
-	.string "SPECIAL$"
+
+	.string "SPEZIAL$"
+
 ContestString_AppealJammed:
-	.string "But the appeal was\njammed.$"
+	.string "Der Auftritt\n"
+	.string "wurde gestört.$"
 ContestString_FollowLead:
-	.string "It followed another\nPOKéMON’s lead.$"
+	.string "Es folgte einem\n"
+	.string "anderen POKéMON.$"
 ContestString_MessedUp:
-	.string "But it messed up.$"
+	.string "Es scheiterte.$"
 ContestString_BetterUsual:
-	.string "It went better than\nusual.$"
+	.string "Das lief besser\n"
+	.string "als sonst.$"
 ContestString_JudgeLookAway:
-	.string "The JUDGE looked away\nfor some reason.$"
+	.string "Der JUROR war\n"
+	.string "irgendwie abgelenkt.$"
 ContestString_WorkHard:
-	.string "It worked hard to build on\npast mistakes.$"
+	.string "Es strengte sich an,\n"
+	.string "Fehler auszubügeln.$"
 ContestString_NoMoreMoves:
-	.string "It can’t make any more\nmoves.$"
+	.string "Es kann keine Attacken\n"
+	.string "mehr ausführen.$"
 ContestString_WorkReallyWell:
-	.string "It worked frighteningly\nwell.$"
+	.string "Das lief unheimlich gut.$"
 ContestString_WorkHardStandout:
-	.string "It worked as hard as the\nstandout POKéMON.$"
+	.string "Es strengte sich genauso\n"
+	.string "wie das beste POKéMON an.$"
 ContestString_JudgeExpectantly:
-	.string "The JUDGE looked on\nexpectantly.$"
+	.string "Der JUROR schaute es\n"
+	.string "besonders aufmerksam an.$"
 ContestString_WorkRatherWell:
-	.string "It worked rather well.$"
+	.string "Das lief bedeutend\n"
+	.string "besser.$"
 ContestString_WorkBetter:
-	.string "It worked a little better\nthan usual.$"
+	.string "Es lief etwas besser\n"
+	.string "als sonst.$"
 
 	.align 2
 	.4byte ContestString_AppealJammed
@@ -267,17 +342,23 @@ ContestString_WorkBetter:
 	.4byte ContestString_WorkBetter
 
 ContestString_StandOutNone:
-	.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} stach\n"
+	.string "überhaupt nicht hervor...{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutNotMuch:
-	.string "{STR_VAR_1} didn’t stand\nout very much...{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} stach nicht\n"
+	.string "besonders hervor...{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutLittle:
-	.string "{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} erregte ein\n"
+	.string "wenig Aufmerksamkeit.{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutLot:
-	.string "{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} erregte eine\n"
+	.string "Menge Aufmerksamkeit.{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutTotal:
-	.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} erhielt die\n"
+	.string "volle Aufmerksamkeit.{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutDidnt:
-	.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} konnte\n"
+	.string "keinen Ausdruck zeigen.{PAUSE_UNTIL_PRESS}$"
 
 	.align 2
 gUnknown_083CB2F0:: @ 83CB2F0
@@ -289,57 +370,82 @@ gUnknown_083CB2F0:: @ 83CB2F0
 	.4byte ContestString_StandOutDidnt
 
 ContestString_AppealAnticipation3:
-	.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+	.string "Heiß ersehnt: Der Aus-\n"
+	.string "druck von {STR_VAR_1}.$"
 ContestString_JudgeSatisfied:
-	.string "The JUDGE was very\nsatisfied.$"
+	.string "Der JUROR war sehr\n"
+	.string "zufrieden.$"
 ContestString_Terminator:
 	.string "$"
 ContestString_JudgeHeldFirm:
-	.string "The JUDGE ’s views on\n{STR_VAR_1} held firm.$"
+	.string "Der JUROR behält\n"
+	.string "{STR_VAR_1} fest im Blick.$"
 ContestString_ChangedPerceptions:
-	.string "{STR_VAR_1}’s {STR_VAR_3}\nchanged perceptions.$"
+	.string "{STR_VAR_3} von {STR_VAR_1}\n"
+	.string "ändert die Wahrnehmung.$"
 ContestString_AppealWoreOff:
-	.string "{STR_VAR_1}’s appeal\neffect wore off.$"
+	.string "Wirkung von {STR_VAR_1}\n"
+	.string "lässt nach.$"
 ContestString_AppealWoreOff2:
-	.string "The special appeal’s\neffect wore off.$"
+	.string "Die besondere Wirkung\n"
+	.string "lässt nach.$"
 ContestString_AppealLookSame:
-	.string "Everyone’s appeals were\nmade to look the same.$"
+	.string "Jeder Ausdruck wird sich\n"
+	.string "nun gleichen.$"
 ContestString_AppealCheapened:
-	.string "{STR_VAR_2}’s appeal was\ncheapened.$"
+	.string "Ausdruck von {STR_VAR_2}\n"
+	.string "wurde abgewertet.$"
 ContestString_AppealCheapened2:
-	.string "It cheapened the appeal\nof those ahead.$"
+	.string "Es wertete die Ausdrücke\n"
+	.string "der anderen PKMN ab.$"
 ContestString_AppealAttentionStolen:
-	.string "It stole attention away\nfrom {STR_VAR_2}.$"
+	.string "Es stahl {STR_VAR_2} die\n"
+	.string "Aufmerksamkeit.$"
 ContestString_AppealCheapened3:
-	.string "It cheapened\n{STR_VAR_2}’s appeal.$"
+	.string "Es wertete Ausdruck\n"
+	.string "von {STR_VAR_2} ab.$"
 ContestString_AppealCheapened4:
-	.string "It severely cheapened\nother appeals.$"
+	.string "Es wertete die Ausdrücke\n"
+	.string "der anderen stark ab.$"
 ContestString_AppealAnticipation:
-	.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+	.string "Alle warten sehnsüchtig\n"
+	.string "auf {STR_VAR_1}.$"
 ContestString_AppealCheapened5:
-	.string "It cheapened the appeal\nof those ahead.$"
+	.string "Es wertete den Ausdruck\n"
+	.string "der PKMN vor ihm ab.$"
 ContestString_AppealCheapened6:
-	.string "It cheapened the JUDGE’s\nfavorite appeal.$"
+	.string "Es wertete den Lieblings-\n"
+	.string "ausdruck des JURORS ab.$"
 ContestString_AppealCheapened7:
-	.string "The appeals of others\nwere cheapened by half.$"
+	.string "Der Ausdruckswert der\n"
+	.string "anderen wurde halbiert.$"
 ContestString_JammedStoodOut:
-	.string "It stood out to make up\nfor being jammed.$"
+	.string "Es macht sich bereit, die\n"
+	.string "anderen zu beeindrucken.$"
 ContestString_AppealNoMore:
-	.string "It can’t participate in\nappeals any more.$"
+	.string "Es kann an keiner Vor-\n"
+	.string "führung mehr teilnehmen.$"
 ContestString_AppealTouched:
-	.string "It touched the JUDGE for\na fantastic appeal.$"
+	.string "Der fantastische Aus-\n"
+	.string "druck berührte den JUROR.$"
 ContestString_AppealAnticipation2:
-	.string "Anticipation rose for\nupcoming appeals.$"
+	.string "Die Erwartung für die fol-\n"
+	.string "genden Ausdrücke steigt.$"
 ContestString_AppealStoodOut2:
-	.string "It stood out as much as\nspecial appeals.$"
+	.string "Es war so beeindruckend\n"
+	.string "wie ein Spezialausdruck.$"
 ContestString_AppealStoodOut3:
-	.string "It stood out as much as\n{STR_VAR_1}.$"
+	.string "Es war so beeindruckend\n"
+	.string "wie {STR_VAR_1}.$"
 ContestString_JammedAppealsNotice:
-	.string "Jammed appeals were made\neven less noticeable.$"
+	.string "Ein Ausdruck, der gestört\n"
+	.string "wurde, ist unauffälliger.$"
 ContestString_AppealSame:
-	.string "Everyone’s appeals were\nmade the same.$"
+	.string "Jeder Teilnehmer hat nun\n"
+	.string "den gleichen Ausdruck.$"
 ContestString_AppealFullWorse:
-	.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
+	.string "{STR_VAR_1} ist voll. Der\n"
+	.string "Ausdruck wird schlechter.$"
 
 	.align 2
 	.4byte ContestString_JudgeHeldFirm
@@ -369,169 +475,237 @@ ContestString_AppealFullWorse:
 	.4byte ContestString_JammedAppealsNotice
 	.4byte ContestString_AppealSame
 ContestString_MoreConscious:
-	.string "It became more conscious\nof the other POKéMON.{PAUSE 60}$"
+	.string "Es wird sich der anderen\n"
+	.string "PKMN mehr bewusst.{PAUSE 60}$"
 ContestString_NoAppeal:
-	.string "{STR_VAR_1} can’t make an\nappeal after this.{PAUSE 60}$"
+	.string "{STR_VAR_1} kann danach\n"
+	.string "keinen Ausdruck zeigen.{PAUSE 60}$"
 ContestString_SettleDown:
-	.string "It settled down just a\nlittle bit.{PAUSE 60}$"
+	.string "Es kommt ein wenig\n"
+	.string "zur Ruhe.{PAUSE 60}$"
 ContestString_ObliviousToOthers:
-	.string "It became oblivious to\nthe other POKéMON.{PAUSE 60}$"
+	.string "Die anderen PKMN nehmen\n"
+	.string "es überhaupt nicht wahr.{PAUSE 60}$"
 ContestString_LessAware:
-	.string "It became less aware of\nthe other POKéMON.{PAUSE 60}$"
+	.string "Es ist sich der anderen\n"
+	.string "PKMN kaum bewusst.{PAUSE 60}$"
 ContestString_StoppedCaring:
-	.string "It stopped caring about\nother POKéMON much.{PAUSE 60}$"
+	.string "Es kümmert sich nicht\n"
+	.string "mehr viel um andere PKMN.{PAUSE 60}$"
 ContestString_StartleAttempt:
-	.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+	.string "Es versucht, die anderen\n"
+	.string "PKMN zu erschrecken.{PAUSE 60}$"
 ContestString_DazzleAttempt:
-	.string "It tried to dazzle the\nothers.{PAUSE 60}$"
+	.string "Es versucht, die anderen\n"
+	.string "PKMN zu blenden.{PAUSE 60}$"
 ContestString_JudgeLookAway2:
-	.string "The JUDGE looked away\nfrom {STR_VAR_1}.{PAUSE 60}$"
+	.string "Der JUROR schaut\n"
+	.string "{STR_VAR_1} nicht mehr an.{PAUSE 60}$"
 ContestString_UnnerveAttempt:
-	.string "It tried to unnerve the\nnext POKéMON.{PAUSE 60}$"
+	.string "Es versucht, die folgenden\n"
+	.string "PKMN zu entnerven.{PAUSE 60}$"
 ContestString_Nervous:
-	.string "{STR_VAR_1} became\nnervous.{PAUSE 60}$"
+	.string "{STR_VAR_1} wird\n"
+	.string "nervös.{PAUSE 60}$"
 ContestString_UnnerveWaiting:
-	.string "The appeal tried to\nunnerve waiting POKéMON.{PAUSE 60}$"
+	.string "Dieser Ausdruck soll die\n"
+	.string "anderen PKMN entnerven.{PAUSE 60}$"
 ContestString_TauntWell:
-	.string "It taunted POKéMON\ndoing well.{PAUSE 60}$"
+	.string "Es verhöhnt die\n"
+	.string "besseren PKMN.{PAUSE 60}$"
 ContestString_RegainedForm:
-	.string "{STR_VAR_1} regained its\nform.{PAUSE 60}$"
+	.string "{STR_VAR_1} findet zu\n"
+	.string "seiner Form zurück.{PAUSE 60}$"
 ContestString_JamWell:
-	.string "It tried to jam POKéMON\ndoing well.{PAUSE 60}$"
+	.string "Es versucht, die besseren\n"
+	.string "PKMN zu beeindrucken.{PAUSE 60}$"
 ContestString_HustleStandout:
-	.string "The standout {STR_VAR_1}\nhustled even more.{PAUSE 60}$"
+	.string "{STR_VAR_1} an der Spitze\n"
+	.string "engagiert sich noch mehr.{PAUSE 60}$"
 ContestString_WorkHardUnnoticed:
-	.string "The largely unnoticed\n{STR_VAR_1} worked hard.{PAUSE 60}$"
+	.string "Das bisher unauffällige\n"
+	.string "{STR_VAR_1} gibt alles.$"
 ContestString_WorkBefore:
-	.string "It worked as much as\nPOKéMON before it.{PAUSE 60}$"
+	.string "Es strengt sich genauso\n"
+	.string "an wie die PKMN vor ihm.{PAUSE 60}$"
 ContestString_AppealNotWell:
-	.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Kam nicht gut an.{PAUSE 60}$"
 ContestString_WorkPreceding:
-	.string "It worked as much as the\npreceding POKéMON.{PAUSE 60}$"
+	.string "Es strengt sich an wie die\n"
+	.string "vorangegangenen PKMN.{PAUSE 60}$"
 ContestString_AppealNotWell2:
-	.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Verlief nicht so gut.{PAUSE 60}$"
 ContestString_AppealNotShownWell:
-	.string "{STR_VAR_1}’s appeal\ncouldn’t be shown well.{PAUSE 60}$"
+	.string "Ausdruck v. {STR_VAR_1}: \n"
+	.string "Wurde gestört.{PAUSE 60}$"
 ContestString_AppealSlightlyWell:
-	.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Verlief ganz gut.{PAUSE 60}$"
 ContestString_AppealPrettyWell:
-	.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Kam ganz gut an.{PAUSE 60}$"
 ContestString_AppealExcellently:
-	.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+	.string "{STR_VAR_1} führte seinen\n"
+	.string "Ausdruck exzellent vor.{PAUSE 60}$"
 ContestString_AppealDud:
-	.string "{STR_VAR_1}’s appeal was\na dud.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war absolut mies.{PAUSE 60}$"
 ContestString_AppealNotVeryWell:
-	.string "{STR_VAR_1}’s appeal did\nnot work very well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war nicht so gut.{PAUSE 60}$"
 ContestString_AppealSlightlyWell2:
-	.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war nicht schlecht.{PAUSE 60}$"
 ContestString_AppealPrettyWell2:
-	.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war recht gut.{PAUSE 60}$"
 ContestString_AppealVeryWell:
-	.string "{STR_VAR_1}’s appeal\nwent very well.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war sehr gut.{PAUSE 60}$"
 ContestString_AppealExcellently2:
-	.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+	.string "Ausdruck von {STR_VAR_1}:\n"
+	.string "Er war exzellent.{PAUSE 60}$"
 ContestString_SameTypeGood:
-	.string "It’s the same type as the\nPOKéMON before - good!{PAUSE 60}$"
+	.string "Der gleiche Typ wie das\n"
+	.string "vorhergehende PKMN - gut!{PAUSE 60}$"
 ContestString_DiffTypeGood:
-	.string "It’s not the same type as\nthe one before - good!{PAUSE 60}$"
+	.string "Nicht der gleiche Typ wie\n"
+	.string "das vorherige PKMN - gut!{PAUSE 60}$"
 ContestString_StoodOutAsMuch:
-	.string "It stood out much more\nthan the POKéMON before.{PAUSE 60}$"
+	.string "Es ist viel besser als die\n"
+	.string "vorhergehenden PKMN.{PAUSE 60}$"
 ContestString_NotAsWell:
-	.string "It didn’t do as well as the\nPOKéMON before.{PAUSE 60}$"
+	.string "Es war nicht so gut wie\n"
+	.string "das PKMN vor ihm.{PAUSE 60}$"
 ContestString_ConditionRose:
-	.string "{STR_VAR_1}’s condition\nrose above usual.{PAUSE 60}$"
+	.string "Die Kondition von\n"
+	.string "{STR_VAR_1} stieg.{PAUSE 60}$"
 ContestString_HotStatus:
-	.string "{STR_VAR_1}’s hot status\nmade it a great appeal!{PAUSE 60}$"
+	.string "Status von {STR_VAR_1}:\n"
+	.string "Bewirkt guten Ausdruck!{PAUSE 60}$"
 ContestString_MoveUpLine:
-	.string "It moved up in line for\nthe next appeal.{PAUSE 60}$"
+	.string "Es steigt in der Reihen-\n"
+	.string "folge auf.{PAUSE 60}$"
 ContestString_MoveBackLine:
-	.string "It moved back in line once\nfor the next appeal.{PAUSE 60}$"
+	.string "Es fällt in der Reihen-\n"
+	.string "folge zurück.{PAUSE 60}$"
 ContestString_ScrambleOrder:
-	.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
+	.string "Es bringt die Reihenfolge\n"
+	.string "durcheinander.{PAUSE 60}$"
 
 gUnknown_083CBD52:: @ 83CBD52
 ContestString_JudgeExpectantly2:
-	.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
+	.string "Der JUROR betrachtet\n"
+	.string "{STR_VAR_1} interessiert.{PAUSE 60}$"
 
 gUnknown_083CBD79:: @ 83CBD79
 ContestString_WentOverWell:
-	.string "The appeal combo went\nover well.{PAUSE 60}$"
+	.string "Die Combo der Ausdrücke\n"
+	.string "kam gut an.{PAUSE 60}$"
 
 gUnknown_083CBD9D:: @ 83CBD9D
 ContestString_WentOverVeryWell:
-	.string "The appeal combo went\nover very well.{PAUSE 60}$"
+	.string "Die Combo der Ausdrücke\n"
+	.string "kam sehr gut an.{PAUSE 60}$"
 
 gUnknown_083CBDC6:: @ 83CBDC6
 ContestString_AppealComboExcellently:
-	.string "The appeal combo went\nover excellently.{PAUSE 60}$"
+	.string "Die Combo der Ausdrücke\n"
+	.string "kam exzellent an.{PAUSE 60}$"
 ContestString_AvertGaze:
-	.string "{STR_VAR_1} managed to\navert its gaze.{PAUSE 60}$"
+	.string "{STR_VAR_1} gelingt es,\n"
+	.string "den Blick abzuwenden.{PAUSE 60}$"
 ContestString_AvoidSeeing:
-	.string "{STR_VAR_1} managed to\navoid seeing it.{PAUSE 60}$"
+	.string "{STR_VAR_1} wandte den\n"
+	.string "Blick erfolgreich ab.{PAUSE 60}$"
 ContestString_NotFazed:
-	.string "{STR_VAR_1} isn’t fazed\nby that sort of thing.{PAUSE 60}$"
+	.string "{STR_VAR_1} lässt sich\n"
+	.string "davon nicht ablenken.{PAUSE 60}$"
 ContestString_LittleDistracted:
-	.string "{STR_VAR_1} became a\nlittle distracted.{PAUSE 60}$"
+	.string "{STR_VAR_1} wurde etwas\n"
+	.string "unruhig.{PAUSE 60}$"
 ContestString_AttemptStartle:
-	.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+	.string "Es versucht, die anderen\n"
+	.string "PKMN zu verschrecken.{PAUSE 60}$"
 ContestString_LookedDown:
-	.string "{STR_VAR_1} looked down\nout of distraction.{PAUSE 60}$"
+	.string "{STR_VAR_1} blickt\n"
+	.string "irritiert zu Boden.{PAUSE 60}$"
 ContestString_TurnedBack:
-	.string "{STR_VAR_1} turned back\nout of distraction.{PAUSE 60}$"
+	.string "{STR_VAR_1} dreht sich\n"
+	.string "irritiert um.{PAUSE 60}$"
 ContestString_UtterCry:
-	.string "{STR_VAR_1} couldn’t help\nuttering a cry.{PAUSE 60}$"
+	.string "{STR_VAR_1} kann einen \n"
+	.string "Laut nicht unterdrücken.{PAUSE 60}$"
 ContestString_LeaptUp:
-	.string "{STR_VAR_1} couldn’t help\nleaping up.{PAUSE 60}$"
+	.string "{STR_VAR_1} kann nicht\n"
+	.string "anders und springt auf.{PAUSE 60}$"
 ContestString_TrippedOver:
-	.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
+	.string "{STR_VAR_1} ist so irri-\n"
+	.string "tiert, dass es stolpert.{PAUSE 60}$"
 
 gUnknown_083CBF60:: @ 83CBF60
 ContestString_TooNervous:
-	.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
+	.string "{STR_VAR_1} ist zu nervös,\n"
+	.string "um etwas vorzuführen.{PAUSE 60}$"
 ContestString_MessedUp2:
-	.string "But it messed up.{PAUSE 60}$"
+	.string "Es hatte keinen Erfolg.{PAUSE 60}$"
 ContestString_FailedTargetNervous:
-	.string "But it failed to make\nthe target nervous.{PAUSE 60}$"
+	.string "Es konnte keine\n"
+	.string "Nervosität erzeugen.{PAUSE 60}$"
 ContestString_FailedAnyoneNervous:
-	.string "But it failed to make\nanyone nervous.{PAUSE 60}$"
+	.string "Aber es konnte niemanden\n"
+	.string "nervös machen.{PAUSE 60}$"
 ContestString_Ignored:
-	.string "But it was ignored...{PAUSE 60}$"
+	.string "Es wurde ignoriert...{PAUSE 60}$"
 ContestString_NoConditionImprove:
-	.string "But it couldn’t improve\nits condition...{PAUSE 60}$"
+	.string "Es konnte seinen Aus-\n"
+	.string "druck nicht verstärken...{PAUSE 60}$"
 ContestString_BadConditionWeakAppeal:
-	.string "Its bad condition\nresulted in a weak appeal.{PAUSE 60}$"
+	.string "Schwacher Ausdruck we-\n"
+	.string "gen schlechter Konditon.{PAUSE 60}$"
 ContestString_Unaffected:
-	.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
+	.string "{STR_VAR_1} blieb\n"
+	.string "unbeeindruckt.{PAUSE 60}$"
 
 gUnknown_083CC075:: @ 83CC075
 ContestString_DissapointedRepeat:
-	.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
+	.string "{STR_VAR_1} enttäuscht\n"
+	.string "durch Wiederholung.{PAUSE 60}$"
 
 gUnknown_083CC0A0:: @ 83CC0A0
 ContestString_WentOverGreat:
-	.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
+	.string "Die {STR_VAR_3} von\n"
+	.string "{STR_VAR_1} war sehr gut.{PAUSE 60}$"
 
 gUnknown_083CC0BC:: @ 83CC0BC
 ContestString_DidntGoWell:
-	.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
+	.string "Die {STR_VAR_3} von\n"
+	.string "{STR_VAR_1} war nicht gut.{PAUSE 60}$"
 
 gUnknown_083CC0E3:: @ 83CC0E3
 ContestString_GotCrowdGoing:
-	.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
+	.string "{STR_VAR_1} begeistert\n"
+	.string "Publikum mit {STR_VAR_3}.{PAUSE 60}$"
 
 gUnknown_083CC103:: @ 83CC103
 ContestString_CantAppealNextTurn:
-	.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
+	.string "{STR_VAR_1} setzt in der \n"
+	.string "folgenden Runde aus.{PAUSE 60}$"
 ContestString_AttractedAttention:
-	.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
+	.string "Die Aufmerksamkeit des\n"
+	.string "Publikums liegt auf ihm.{PAUSE 60}$"
 
 gUnknown_083CC14A:: @ 83CC14A
 ContestString_CrowdWatches:
-	.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
+	.string "Das Publikum beobachtet\n"
+	.string "weiterhin {STR_VAR_3}.{PAUSE 60}$"
 
 gUnknown_083CC16E:: @ 83CC16E
 ContestString_Ignored2:
-	.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
+	.string "{STR_VAR_2} von\n"
+	.string "{STR_VAR_1} ist ignoriert.{PAUSE 60}$"
 
 	.align 2
 gUnknown_083CC188:: @ 83CC188
@@ -599,30 +773,30 @@ gUnknown_083CC188:: @ 83CC188
 	.4byte ContestString_AttractedAttention
 
 gUnknown_083CC280:: @ 83CC280
-	.string "shyness$"
+	.string "Scheu$"
 
 gUnknown_083CC288:: @ 83CC288
-	.string "anxiety$"
+	.string "Besorgnis$"
 
 gUnknown_083CC290:: @ 83CC290
-	.string "laziness$"
+	.string "Faulheit$"
 
 gUnknown_083CC299:: @ 83CC299
-	.string "hesitancy$"
+	.string "Zögern$"
 
 gUnknown_083CC2A3:: @ 83CC2A3
-	.string "fear$"
+	.string "Furcht$"
 
 ContestString_Coolness:
-	.string "coolness$"
+	.string "Coolness$"
 ContestString_Beauty2:
-	.string "beauty$"
+	.string "Schönheit$"
 ContestString_Cuteness:
-	.string "cuteness$"
+	.string "Anmut$"
 ContestString_Smartness:
-	.string "smartness$"
+	.string "Klugheit$"
 ContestString_Toughness:
-	.string "toughness$"
+	.string "Stärke$"
 
 	.align 2
 gUnknown_083CC2D8:: @ 83CC2D8
@@ -633,22 +807,22 @@ gUnknown_083CC2D8:: @ 83CC2D8
 	.4byte ContestString_Toughness
 
 gUnknown_083CC2EC:: @ 83CC2EC
-	.string "TENSION:$"
+	.string "SPANNUNG:$"
 
 ContestString_CoolMove:
-	.string "COOL Move$"
+	.string "COOLE Att.$"
 
 ContestString_BeautyMove:
-	.string "BEAUTY Move$"
+	.string "SCHÖNE Att.$"
 
 ContestString_CuteMove:
-	.string "CUTE Move$"
+	.string "ANMUT-Att.$"
 
 ContestString_SmartMove:
-	.string "SMART Move$"
+	.string "KLUGE Att.$"
 
 ContestString_ToughMove:
-	.string "TOUGH Move$"
+	.string "STARKE Att.$"
 
 ContestString_UnknownMoveType:
 	.string "???$"
@@ -664,6 +838,6 @@ gUnknown_083CC330:: @ 83CC330
 
 @ unused?
 ContestString_Rank:
-	.string "RANK$"
+	.string "KLASSE$"
 
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"

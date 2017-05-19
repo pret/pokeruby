@@ -1,21 +1,21 @@
 MtPyre_6F_Text_1969FE:: @ 81969FE
-	.string "When I’m here...\n"
-	.string "A curious power flows into me...$"
+	.string "Wenn ich hier bin... Dann durchströmt\n"
+	.string "mich eine seltsame Macht...$"
 
 MtPyre_6F_Text_196A30:: @ 8196A30
-	.string "The power is ebbing away...$"
+	.string "Die Macht ebbt ab...$"
 
 MtPyre_6F_Text_196A4C:: @ 8196A4C
-	.string "Perhaps the power is from the spirits\n"
-	.string "of POKéMON in fitful sleep here...$"
+	.string "Die Geister der hier ruhenden POKéMON\n"
+	.string "erfüllen mich mit ihrer Macht...$"
 
 MtPyre_6F_Text_196A95:: @ 8196A95
-	.string "Behind you...\n"
-	.string "What is it...$"
+	.string "Hinter dir...\n"
+	.string "W... Was ist das?$"
 
 MtPyre_6F_Text_196AB1:: @ 8196AB1
-	.string "Something faded away...$"
+	.string "Etwas war da und verschwand...$"
 
 MtPyre_6F_Text_196AC9:: @ 8196AC9
-	.string "The POKéMON at rest here...\n"
-	.string "Sometimes, they play...$"
+	.string "Die POKéMON, die hier ruhen...\n"
+	.string "Manchmal spielen sie...$"

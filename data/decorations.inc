@@ -1,580 +1,581 @@
 DecorDesc_SMALL_DESK: @ 83E9FD0
-	.string "A small desk built\n"
-	.string "for one.$"
+	.string "Ein kleiner Tisch\n"
+	.string "für eine Person.$"
 
 DecorDesc_POKEMON_DESK: @ 83E9FEC
-	.string "A small desk built in\n"
-	.string "the shape of a POKé\n"
-	.string "BALL.$"
+	.string "Ein kleiner Tisch,\n"
+	.string "geformt wie ein\n"
+	.string "POKéBALL.$"
 
 DecorDesc_HEAVY_DESK: @ 83EA01C
-	.string "A large desk made\n"
-	.string "of steel. Put some\n"
-	.string "decorations on it.$"
+	.string "Ein großer Tisch\n"
+	.string "aus Stahl. Für\n"
+	.string "Dekorationen.$"
 
 DecorDesc_RAGGED_DESK: @ 83EA054
-	.string "A large desk made\n"
-	.string "of wood. Put some\n"
-	.string "decorations on it.$"
+	.string "Ein großer Tisch\n"
+	.string "aus Holz. Für\n"
+	.string "Dekorationen.$"
 
 DecorDesc_COMFORT_DESK: @ 83EA08B
-	.string "A large desk made\n"
-	.string "of leaves. Put some\n"
-	.string "decorations on it.$"
+	.string "Ein riesiger Tisch\n"
+	.string "aus Blättern. Für\n"
+	.string "Dekorationen.$"
 
 DecorDesc_PRETTY_DESK: @ 83EA0C4
-	.string "A huge desk made\n"
-	.string "of glass. Holds lots\n"
-	.string "of decorations.$"
+	.string "Ein riesiger Tisch\n"
+	.string "aus Glas. Trägt\n"
+	.string "viele Dekorationen.$"
 
 DecorDesc_BRICK_DESK: @ 83EA0FA
-	.string "A huge desk made\n"
-	.string "of brick. Holds lots\n"
-	.string "of decorations.$"
+	.string "Ein riesiger Tisch\n"
+	.string "aus Backstein. Für\n"
+	.string "viele Dekorationen.$"
 
 DecorDesc_CAMP_DESK: @ 83EA130
-	.string "A huge desk made\n"
-	.string "of logs. Put lots of\n"
-	.string "decorations on it.$"
+	.string "Ein riesiger Tisch\n"
+	.string "aus Baumstämmen.\n"
+	.string "Für Dekorationen.$"
 
 DecorDesc_HARD_DESK: @ 83EA169
-	.string "A huge desk made\n"
-	.string "of rocks. Holds\n"
-	.string "many decorations.$"
+	.string "Ein riesiger Tisch\n"
+	.string "aus Stein. Trägt\n"
+	.string "viele Dekorationen.$"
 
 DecorDesc_SMALL_CHAIR: @ 83EA19C
-	.string "A small chair made\n"
-	.string "for one.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "für eine Person.$"
 
 DecorDesc_POKEMON_CHAIR: @ 83EA1B8
-	.string "A small chair built\n"
-	.string "in the shape of a\n"
-	.string "POKé BALL.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "in der Form eines\n"
+	.string "POKéBALLS.$"
 
 DecorDesc_HEAVY_CHAIR: @ 83EA1E9
-	.string "A small chair made\n"
-	.string "of steel.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Stahl.$"
 
 DecorDesc_PRETTY_CHAIR: @ 83EA206
-	.string "A small chair made\n"
-	.string "of glass.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Glas.$"
 
 DecorDesc_COMFORT_CHAIR: @ 83EA223
-	.string "A small chair made\n"
-	.string "of leaves.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Blättern.$"
 
 DecorDesc_RAGGED_CHAIR: @ 83EA241
-	.string "A small chair made\n"
-	.string "of wood.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Holz.$"
 
 DecorDesc_BRICK_CHAIR: @ 83EA25D
-	.string "A small chair made\n"
-	.string "of brick.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Backstein.$"
 
 DecorDesc_CAMP_CHAIR: @ 83EA27A
-	.string "A small chair made\n"
-	.string "of logs.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Baumstämmen.$"
 
 DecorDesc_HARD_CHAIR: @ 83EA296
-	.string "A small chair made\n"
-	.string "of rock.$"
+	.string "Ein kleiner Stuhl\n"
+	.string "aus Stein.$"
 
 DecorDesc_RED_PLANT: @ 83EA2B2
-	.string "A vivid red potted\n"
-	.string "plant.$"
+	.string "Eine leuchtend\n"
+	.string "rote Pflanze.$"
 
 DecorDesc_TROPICAL_PLANT: @ 83EA2CC
-	.string "A flowering tropical\n"
-	.string "plant in a pot.$"
+	.string "Eine blühende,\n"
+	.string "tropische Pflanze\n"
+	.string "in einem Übertopf.$"
 
 DecorDesc_PRETTY_FLOWERS: @ 83EA2F1
-	.string "A pot of cute\n"
-	.string "flowers.$"
+	.string "Ein Topf mit\n"
+	.string "hübschen Blumen.$"
 
 DecorDesc_COLORFUL_PLANT: @ 83EA308
-	.string "A large pot with\n"
-	.string "many colorful\n"
-	.string "flowers.$"
+	.string "Ein großer Topf mit\n"
+	.string "vielen, farben-\n"
+	.string "prächtigen Blumen.$"
 
 DecorDesc_BIG_PLANT: @ 83EA330
-	.string "A large, umbrella-\n"
-	.string "shaped plant in a\n"
-	.string "big pot.$"
+	.string "Eine große, schirm-\n"
+	.string "förmige Pflanze in\n"
+	.string "einem großen Topf.$"
 
 DecorDesc_GORGEOUS_PLANT: @ 83EA35E
-	.string "A large, impressive\n"
-	.string "plant in a big pot.$"
+	.string "Eine beeindruckend\n"
+	.string "große Pflanze in\n"
+	.string "einem großen Topf.$"
 
 DecorDesc_RED_BRICK: @ 83EA386
-	.string "A red-colored brick.\n"
-	.string "Decorations can be\n"
-	.string "placed on top.$"
+	.string "Ein roter Back-\n"
+	.string "stein. Stelle Deko-\n"
+	.string "rationen darauf.$"
 
 DecorDesc_YELLOW_BRICK: @ 83EA3BD
-	.string "A yellow-colored\n"
-	.string "brick. Put some\n"
-	.string "decorations on top.$"
+	.string "Ein gelber Back-\n"
+	.string "stein. Stelle Deko-\n"
+	.string "rationen darauf.$"
 
 DecorDesc_BLUE_BRICK: @ 83EA3F2
-	.string "A blue-colored\n"
-	.string "brick. Put some\n"
-	.string "decorations on top.$"
+	.string "Ein blauer Back-\n"
+	.string "stein. Stelle Deko-\n"
+	.string "rationen darauf.$"
 
 DecorDesc_RED_BALLOON: @ 83EA425
-	.string "A red balloon filled\n"
-	.string "with water. Bursts\n"
-	.string "if stepped on.$"
+	.string "Ein roter Ballon mit\n"
+	.string "Wasser. Platzt beim\n"
+	.string "Drauftreten.$"
 
 DecorDesc_BLUE_BALLOON: @ 83EA45C
-	.string "A blue balloon filled\n"
-	.string "with water. Bursts\n"
-	.string "if stepped on.$"
+	.string "Ein blauer Ballon\n"
+	.string "mit Wasser. Platzt\n"
+	.string "beim Drauftreten.$"
 
 DecorDesc_YELLOW_BALLOON: @ 83EA494
-	.string "A yellow balloon\n"
-	.string "filled with water.\n"
-	.string "Pops if stepped on.$"
+	.string "Ein gelber Ballon\n"
+	.string "mit Wasser. Platzt\n"
+	.string "beim Drauftreten.$"
 
 DecorDesc_RED_TENT: @ 83EA4CC
-	.string "A large red tent.\n"
-	.string "You can hide inside\n"
-	.string "it.$"
+	.string "Ein großes, rotes\n"
+	.string "Zelt. Darin kann man\n"
+	.string "sich verstecken.$"
 
 DecorDesc_BLUE_TENT: @ 83EA4F6
-	.string "A large blue tent.\n"
-	.string "You can hide inside\n"
-	.string "it.$"
+	.string "Ein großes, blaues\n"
+	.string "Zelt. Darin kann man\n"
+	.string "sich verstecken.$"
 
 DecorDesc_SOLID_BOARD: @ 83EA521
-	.string "Place over a hole to\n"
-	.string "cross to the other\n"
-	.string "side.$"
+	.string "Leg es über ein\n"
+	.string "Loch, um die andere\n"
+	.string "Seite zu erreichen.$"
 
 DecorDesc_SLIDE: @ 83EA54F
-	.string "Use to slide down\n"
-	.string "from the platform.$"
+	.string "Nützlich, um von der\n"
+	.string "Plattform hinab-\n"
+	.string "gleiten zu können.$"
 
 DecorDesc_FENCE_LENGTH: @ 83EA574
-	.string "A small fence that\n"
-	.string "blocks passage.$"
+	.string "Ein kleiner Zaun,\n"
+	.string "der den Durchgang\n"
+	.string "versperrt.$"
 
 DecorDesc_FENCE_WIDTH: @ 83EA597
-	.string "A small fence that\n"
-	.string "blocks passage.$"
+	.string "Ein kleiner Zaun,\n"
+	.string "der den Durchgang\n"
+	.string "versperrt.$"
 
 DecorDesc_TIRE: @ 83EA5BA
-	.string "An old large tire.\n"
-	.string "Decorations can be\n"
-	.string "placed on top.$"
+	.string "Ein großer, alter\n"
+	.string "Reifen. Für\n"
+	.string "Dekorationen.$"
 
 DecorDesc_STAND: @ 83EA5EF
-	.string "A large pedestal\n"
-	.string "with steps.$"
+	.string "Ein Podest mit\n"
+	.string "Stufen.$"
 
 DecorDesc_MUD_BALL: @ 83EA60C
-	.string "A large ball of mud.\n"
-	.string "Crumbles if stepped\n"
-	.string "on.$"
+	.string "Ein großer Ball aus\n"
+	.string "Lehm. Geht kaputt\n"
+	.string "beim Drauftreten.$"
 
 DecorDesc_BREAKABLE_DOOR: @ 83EA639
-	.string "A weird door that\n"
-	.string "people can walk\n"
-	.string "right through.$"
+	.string "Eine verrückte Tür,\n"
+	.string "durch die man hin-\n"
+	.string "durchlaufen kann.$"
 
 DecorDesc_SAND_ORNAMENT: @ 83EA66A
-	.string "An ornament made\n"
-	.string "of sand. Crumbles if\n"
-	.string "touched.$"
+	.string "Ein Ornament aus\n"
+	.string "Sand. Fällt bei\n"
+	.string "Kontakt zusammen.$"
 
 DecorDesc_SILVER_SHIELD: @ 83EA699
-	.string "Awarded for 50\n"
-	.string "straight wins at\n"
-	.string "the BATTLE TOWER.$"
+	.string "Belohnung für\n"
+	.string "50 Siege in Folge im\n"
+	.string "DUELLTURM.$"
 
 DecorDesc_GOLD_SHIELD: @ 83EA6CB
-	.string "Awarded for 100\n"
-	.string "straight wins at\n"
-	.string "the BATTLE TOWER.$"
+	.string "Belohnung für\n"
+	.string "100 Siege in Folge\n"
+	.string "im DUELLTURM.$"
 
 DecorDesc_GLASS_ORNAMENT: @ 83EA6FE
-	.string "A glass replica of\n"
-	.string "a famous sculpture\n"
-	.string "at the ART MUSEUM.$"
+	.string "Das Replikat einer\n"
+	.string "berühmten Skulptur\n"
+	.string "des KUNSTMUSEUMS.$"
 
 DecorDesc_TV: @ 83EA737
-	.string "A small, gray-\n"
-	.string "colored toy TV.$"
+	.string "Ein kleiner, grauer\n"
+	.string "Spielzeug-\n"
+	.string "Fernseher.$"
 
 DecorDesc_ROUND_TV: @ 83EA756
-	.string "A toy TV modeled\n"
-	.string "in the image of a\n"
-	.string "SEEDOT.$"
+	.string "Ein Spielzeug-\n"
+	.string "Fernseher in der\n"
+	.string "Form von SAMURZEL.$"
 
 DecorDesc_CUTE_TV: @ 83EA781
-	.string "A toy TV modeled\n"
-	.string "in the image of a\n"
-	.string "SKITTY.$"
+	.string "Ein Spielzeug-\n"
+	.string "Fernseher in der\n"
+	.string "Form eines ENECO.$"
 
 DecorDesc_GLITTER_MAT: @ 83EA7AC
-	.string "An odd mat that\n"
-	.string "glitters if stepped\n"
-	.string "on.$"
+	.string "Eine seltsame\n"
+	.string "Matte. Glitzert\n"
+	.string "beim Drauftreten.$"
 
 DecorDesc_JUMP_MAT: @ 83EA7D4
-	.string "A trick mat that\n"
-	.string "jumps when it is\n"
-	.string "stepped on.$"
+	.string "Eine Trick-Matte,\n"
+	.string "die hüpft, wenn man\n"
+	.string "drauftritt.$"
 
 DecorDesc_SPIN_MAT: @ 83EA802
-	.string "A trick mat that\n"
-	.string "spins around when\n"
-	.string "stepped on.$"
+	.string "Eine Trick-Matte,\n"
+	.string "die sich beim\n"
+	.string "Drauftreten dreht.$"
 
 DecorDesc_C_LOW_NOTE_MAT: @ 83EA831
-	.string "A mat that plays\n"
-	.string "a low C note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die das\n"
+	.string "tiefe C spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_D_NOTE_MAT: @ 83EA860
-	.string "A mat that plays\n"
-	.string "a D note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein D spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_E_NOTE_MAT: @ 83EA88B
-	.string "A mat that plays\n"
-	.string "an E note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein E spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_F_NOTE_MAT: @ 83EA8B7
-	.string "A mat that plays\n"
-	.string "an F note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein F spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_G_NOTE_MAT: @ 83EA8E3
-	.string "A mat that plays\n"
-	.string "a G note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein G spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_A_NOTE_MAT: @ 83EA90E
-	.string "A mat that plays\n"
-	.string "an A note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein A spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_B_NOTE_MAT: @ 83EA93A
-	.string "A mat that plays\n"
-	.string "a B note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die\n"
+	.string "ein H spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_C_HIGH_NOTE_MAT: @ 83EA965
-	.string "A mat that plays\n"
-	.string "a high C note when\n"
-	.string "stepped on.$"
+	.string "Eine Matte, die das\n"
+	.string "hohe C spielt, wenn\n"
+	.string "man drauftritt.$"
 
 DecorDesc_SURF_MAT: @ 83EA995
-	.string "A mat designed with\n"
-	.string "a SURF image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "einem SURFER-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_THUNDER_MAT: @ 83EA9C9
-	.string "A mat designed with\n"
-	.string "a THUNDER image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "einem DONNER-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_FIRE_BLAST_MAT: @ 83EAA00
-	.string "A mat designed with\n"
-	.string "a FIRE BLAST image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "FEUERSTURM-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_POWDER_SNOW_MAT: @ 83EAA3A
-	.string "A mat with a POWDER\n"
-	.string "SNOW image design.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "PULVERSCHNEE-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_ATTRACT_MAT: @ 83EAA73
-	.string "A mat designed with\n"
-	.string "an ATTRACT image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "ANZIEHUNG-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_FISSURE_MAT: @ 83EAAAB
-	.string "A mat designed with\n"
-	.string "a FISSURE image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "GEOFISSUR-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_SPIKES_MAT: @ 83EAAE2
-	.string "A mat designed with\n"
-	.string "a SPIKES image.\n"
-	.string "Put items on top.$"
+	.string "Eine Matte mit\n"
+	.string "STACHLER-\n"
+	.string "Muster. Für Items.$"
 
 DecorDesc_BALL_POSTER: @ 83EAB18
-	.string "A small poster\n"
-	.string "printed with POKé\n"
-	.string "BALLS.$"
+	.string "Ein kleines Poster\n"
+	.string "von POKéBÄLLEN.$"
 
 DecorDesc_GREEN_POSTER: @ 83EAB40
-	.string "A small poster with\n"
-	.string "a TREECKO print.$"
+	.string "Ein kleines Poster\n"
+	.string "von GECKARBOR.$"
 
 DecorDesc_RED_POSTER: @ 83EAB65
-	.string "A small poster with\n"
-	.string "a TORCHIC print.$"
+	.string "Ein kleines Poster\n"
+	.string "von FLEMMLI.$"
 
 DecorDesc_BLUE_POSTER: @ 83EAB8A
-	.string "A small poster with\n"
-	.string "a MUDKIP print.$"
+	.string "Ein kleines Poster\n"
+	.string "von HYDROPI.$"
 
 DecorDesc_CUTE_POSTER: @ 83EABAE
-	.string "A small poster with\n"
-	.string "an AZURILL print.$"
+	.string "Ein kleines Poster\n"
+	.string "von AZURILL.$"
 
 DecorDesc_PIKA_POSTER: @ 83EABD4
-	.string "A large poster with\n"
-	.string "a PIKACHU and\n"
-	.string "PICHU print.$"
+	.string "Ein großes Poster\n"
+	.string "von PIKACHU und\n"
+	.string "PICHU.$"
 
 DecorDesc_LONG_POSTER: @ 83EAC03
-	.string "A large poster with\n"
-	.string "a SEVIPER print.$"
+	.string "Ein großes Poster\n"
+	.string "von VIPITIS.$"
 
 DecorDesc_SEA_POSTER: @ 83EAC28
-	.string "A large poster with\n"
-	.string "a RELICANTH print.$"
+	.string "Ein großes Poster\n"
+	.string "von RELICANTH.$"
 
 DecorDesc_SKY_POSTER: @ 83EAC4F
-	.string "A large poster with\n"
-	.string "a WINGULL print.$"
+	.string "Ein großes Poster\n"
+	.string "von WINGULL.$"
 
 DecorDesc_KISS_POSTER: @ 83EAC74
-	.string "A large poster with\n"
-	.string "a SMOOCHUM print.$"
+	.string "Ein großes Poster\n"
+	.string "von KUSSILLA.$"
 
 DecorDesc_PICHU_DOLL: @ 83EAC9A
-	.string "A PICHU doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PICHU-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_PIKACHU_DOLL: @ 83EACC5
-	.string "A PIKACHU doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PIKACHU-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_MARILL_DOLL: @ 83EACF2
-	.string "A MARILL doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "MARILL-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_TOGEPI_DOLL: @ 83EAD1E
-	.if REVISION >= 1
-	.string "A TOGEPI doll.\n"
-	.else
-	.string "A TOPGEPI doll.\n"
-	.endif
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "TOGEPI-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_CYNDAQUIL_DOLL: @ 83EAD4B
-	.string "A CYNDAQUIL doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "FEURIGEL-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_CHIKORITA_DOLL: @ 83EAD7A
-	.string "A CHIKORITA doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "ENDIVIE-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_TOTODILE_DOLL: @ 83EADA9
-	.string "A TOTODILE doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "KARNIMANI-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_JIGGLYPUFF_DOLL: @ 83EADD7
-	.string "A JIGGLYPUFF doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PUMMELUFF-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_MEOWTH_DOLL: @ 83EAE07
-	.string "A MEOWTH doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "MAUZI-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_CLEFAIRY_DOLL: @ 83EAE33
-	.string "A CLEFAIRY doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PIEPI-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_DITTO_DOLL: @ 83EAE61
-	.string "A DITTO doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "DITTO-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_SMOOCHUM_DOLL: @ 83EAE8C
-	.string "A SMOOCHUM doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "KUSSILLA-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_TREECKO_DOLL: @ 83EAEBA
-	.string "A TREECKO doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "GECKARBOR-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_TORCHIC_DOLL: @ 83EAEE7
-	.string "A TORCHIC doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "FLEMMLI-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_MUDKIP_DOLL: @ 83EAF14
-	.string "A MUDKIP doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "HYDROPI-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_DUSKULL_DOLL: @ 83EAF40
-	.string "A DUSKULL doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "ZWIRRLICHT-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_WYNAUT_DOLL: @ 83EAF6D
-	.string "A WYNAUT doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "ISSO-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_BALTOY_DOLL: @ 83EAF99
-	.string "A BALTOY doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PUPPANCE-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_KECLEON_DOLL: @ 83EAFC5
-	.string "A KECLEON doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "KECLEON-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_AZURILL_DOLL: @ 83EAFF2
-	.string "An AZURILL doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "AZURILL-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_SKITTY_DOLL: @ 83EB020
-	.string "A SKITTY doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "ENECO-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_SWABLU_DOLL: @ 83EB04C
-	.string "A SWABLU doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "WABLU-Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder einen Tisch.$"
 
 DecorDesc_GULPIN_DOLL: @ 83EB078
-	.string "A GULPIN doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "SCHLUPPUCK-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_LOTAD_DOLL: @ 83EB0A4
-	.string "A LOTAD doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "LOTURZEL-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_SEEDOT_DOLL: @ 83EB0CF
-	.string "A SEEDOT doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "SAMURZEL-Puppe.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_PIKA_CUSHION: @ 83EB0FB
-	.string "A PIKACHU cushion.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PIKACHU-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_ROUND_CUSHION: @ 83EB12B
-	.string "A MARILL cushion.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "MARILL-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_KISS_CUSHION: @ 83EB15A
-	.string "A SMOOCHUM\n"
-	.string "cushion. Place it on\n"
-	.string "a mat or a desk.$"
+	.string "KUSSILLA-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_ZIGZAG_CUSHION: @ 83EB18B
-	.string "A ZIGZAGOON\n"
-	.string "cushion. Place it on\n"
-	.string "a mat or a desk.$"
+	.string "ZIGZACHS-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_SPIN_CUSHION: @ 83EB1BD
-	.string "A SPINDA cushion.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "PANDIR-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_DIAMOND_CUSHION: @ 83EB1EC
-	.string "A SABLEYE cushion.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "ZOBIRIS-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_BALL_CUSHION: @ 83EB21C
-	.string "A BALL cushion.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "BALL-Kissen.\n"
+	.string "Für eine Matte oder\n"
+	.string "den Tisch.$"
 
 DecorDesc_GRASS_CUSHION: @ 83EB249
-	.string "A grass-mark\n"
-	.string "cushion. Place it on\n"
-	.string "a mat or a desk.$"
+	.string "Kissen mit Gras-\n"
+	.string "muster. Für\n"
+	.string "Matte oder Tisch.$"
 
 DecorDesc_FIRE_CUSHION: @ 83EB27C
-	.string "A fire-mark\n"
-	.string "cushion. Place it on\n"
-	.string "a mat or a desk.$"
+	.string "Kissen mit Feuer-\n"
+	.string "muster. Für\n"
+	.string "Matte oder Tisch.$"
 
 DecorDesc_WATER_CUSHION: @ 83EB2AE
-	.string "A water-mark\n"
-	.string "cushion. Place it on\n"
-	.string "a mat or a desk.$"
+	.string "Kissen mit Wasser-\n"
+	.string "muster. Für\n"
+	.string "Matte oder Tisch.$"
 
 DecorDesc_SNORLAX_DOLL: @ 83EB2E1
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_RHYDON_DOLL: @ 83EB30C
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_LAPRAS_DOLL: @ 83EB337
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_VENUSAUR_DOLL: @ 83EB362
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_CHARIZARD_DOLL: @ 83EB38D
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_BLASTOISE_DOLL: @ 83EB3B8
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_WAILMER_DOLL: @ 83EB3E3
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_REGIROCK_DOLL: @ 83EB40E
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_REGICE_DOLL: @ 83EB439
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 DecorDesc_REGISTEEL_DOLL: @ 83EB464
-	.string "A large doll.\n"
-	.string "Place it on a mat\n"
-	.string "or a desk.$"
+	.string "Große Puppe. Leg\n"
+	.string "sie auf eine Matte\n"
+	.string "oder den Tisch.$"
 
 	.align 1
 DecorGfx_SMALL_DESK: @ 83EB490
@@ -1221,7 +1222,7 @@ DecorGfx_REGISTEEL_DOLL: @ 83EB6C2
 	.align 2
 gDecorations:: @ 83EB6C4
 	.byte DECOR_NONE
-	.string "SMALL DESK$", 16
+	.string "KLEINER TISCH$", 16
 	.byte 0
 	.byte 0
 	.byte 0
@@ -1231,7 +1232,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SMALL_DESK
 
 	.byte DECOR_SMALL_DESK
-	.string "SMALL DESK$", 16
+	.string "KLEINER TISCH$", 16
 	.byte 0
 	.byte 0
 	.byte 0
@@ -1241,7 +1242,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SMALL_DESK
 
 	.byte DECOR_POKEMON_DESK
-	.string "POKéMON DESK$", 16
+	.string "POKéMONTISCH$", 16
 	.byte 0
 	.byte 0
 	.byte 0
@@ -1251,7 +1252,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_POKEMON_DESK
 
 	.byte DECOR_HEAVY_DESK
-	.string "HEAVY DESK$", 16
+	.string "SCHWERER TISCH$", 16
 	.byte 0
 	.byte 9
 	.byte 0
@@ -1261,7 +1262,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_HEAVY_DESK
 
 	.byte DECOR_RAGGED_DESK
-	.string "RAGGED DESK$", 16
+	.string "INTARSIENTISCH$", 16
 	.byte 0
 	.byte 9
 	.byte 0
@@ -1271,7 +1272,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RAGGED_DESK
 
 	.byte DECOR_COMFORT_DESK
-	.string "COMFORT DESK$", 16
+	.string "NATURTISCH$", 16
 	.byte 0
 	.byte 9
 	.byte 0
@@ -1281,7 +1282,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_COMFORT_DESK
 
 	.byte DECOR_PRETTY_DESK
-	.string "PRETTY DESK$", 16
+	.string "EDLER TISCH$", 16
 	.byte 0
 	.byte 8
 	.byte 0
@@ -1291,7 +1292,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PRETTY_DESK
 
 	.byte DECOR_BRICK_DESK
-	.string "BRICK DESK$", 16
+	.string "BACKSTEINTISCH$", 16
 	.byte 0
 	.byte 8
 	.byte 0
@@ -1301,7 +1302,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BRICK_DESK
 
 	.byte DECOR_CAMP_DESK
-	.string "CAMP DESK$", 16
+	.string "CAMPINGTISCH$", 16
 	.byte 0
 	.byte 8
 	.byte 0
@@ -1311,7 +1312,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CAMP_DESK
 
 	.byte DECOR_HARD_DESK
-	.string "HARD DESK$", 16
+	.string "MASSIVER TISCH$", 16
 	.byte 0
 	.byte 8
 	.byte 0
@@ -1321,7 +1322,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_HARD_DESK
 
 	.byte DECOR_SMALL_CHAIR
-	.string "SMALL CHAIR$", 16
+	.string "KLEINER STUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1331,7 +1332,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SMALL_CHAIR
 
 	.byte DECOR_POKEMON_CHAIR
-	.string "POKéMON CHAIR$", 16
+	.string "POKéMON STUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1341,7 +1342,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_POKEMON_CHAIR
 
 	.byte DECOR_HEAVY_CHAIR
-	.string "HEAVY CHAIR$", 16
+	.string "SCHWERER STUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1351,7 +1352,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_HEAVY_CHAIR
 
 	.byte DECOR_PRETTY_CHAIR
-	.string "PRETTY CHAIR$", 16
+	.string "EDLER STUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1361,7 +1362,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PRETTY_CHAIR
 
 	.byte DECOR_COMFORT_CHAIR
-	.string "COMFORT CHAIR$", 16
+	.string "NATURSTUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1371,7 +1372,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_COMFORT_CHAIR
 
 	.byte DECOR_RAGGED_CHAIR
-	.string "RAGGED CHAIR$", 16
+	.string "INTARSIENSTUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1381,7 +1382,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RAGGED_CHAIR
 
 	.byte DECOR_BRICK_CHAIR
-	.string "BRICK CHAIR$", 16
+	.string "BACKSTEINSTUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1391,7 +1392,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BRICK_CHAIR
 
 	.byte DECOR_CAMP_CHAIR
-	.string "CAMP CHAIR$", 16
+	.string "CAMPINGSTUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1401,7 +1402,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CAMP_CHAIR
 
 	.byte DECOR_HARD_CHAIR
-	.string "HARD CHAIR$", 16
+	.string "MASSIVER STUHL$", 16
 	.byte 1
 	.byte 0
 	.byte 1
@@ -1411,7 +1412,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_HARD_CHAIR
 
 	.byte DECOR_RED_PLANT
-	.string "RED PLANT$", 16
+	.string "ROTE PFLANZE$", 16
 	.byte 2
 	.byte 5
 	.byte 2
@@ -1421,7 +1422,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RED_PLANT
 
 	.byte DECOR_TROPICAL_PLANT
-	.string "TROPICAL PLANT$", 16
+	.string "TROPENPFLANZE$", 16
 	.byte 2
 	.byte 5
 	.byte 2
@@ -1431,7 +1432,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TROPICAL_PLANT
 
 	.byte DECOR_PRETTY_FLOWERS
-	.string "PRETTY FLOWERS$", 16
+	.string "HÜBSCHE BLUMEN$", 16
 	.byte 2
 	.byte 5
 	.byte 2
@@ -1441,7 +1442,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PRETTY_FLOWERS
 
 	.byte DECOR_COLORFUL_PLANT
-	.string "COLORFUL PLANT$", 16
+	.string "BUNTE PFLANZE$", 16
 	.byte 2
 	.byte 4
 	.byte 2
@@ -1451,7 +1452,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_COLORFUL_PLANT
 
 	.byte DECOR_BIG_PLANT
-	.string "BIG PLANT$", 16
+	.string "GROSSE PFLANZE$", 16
 	.byte 2
 	.byte 4
 	.byte 2
@@ -1461,7 +1462,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BIG_PLANT
 
 	.byte DECOR_GORGEOUS_PLANT
-	.string "GORGEOUS PLANT$", 16
+	.string "ZIERPFLANZE$", 16
 	.byte 2
 	.byte 4
 	.byte 2
@@ -1471,7 +1472,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GORGEOUS_PLANT
 
 	.byte DECOR_RED_BRICK
-	.string "RED BRICK$", 16
+	.string "ROTER STEIN$", 16
 	.byte 0
 	.byte 5
 	.byte 3
@@ -1481,7 +1482,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RED_BRICK
 
 	.byte DECOR_YELLOW_BRICK
-	.string "YELLOW BRICK$", 16
+	.string "GELBER STEIN$", 16
 	.byte 0
 	.byte 5
 	.byte 3
@@ -1491,7 +1492,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_YELLOW_BRICK
 
 	.byte DECOR_BLUE_BRICK
-	.string "BLUE BRICK$", 16
+	.string "BLAUER STEIN$", 16
 	.byte 0
 	.byte 5
 	.byte 3
@@ -1501,7 +1502,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BLUE_BRICK
 
 	.byte DECOR_RED_BALLOON
-	.string "RED BALLOON$", 16
+	.string "ROTER BALLON$", 16
 	.byte 1
 	.byte 0
 	.byte 3
@@ -1511,7 +1512,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RED_BALLOON
 
 	.byte DECOR_BLUE_BALLOON
-	.string "BLUE BALLOON$", 16
+	.string "BLAUER BALLON$", 16
 	.byte 1
 	.byte 0
 	.byte 3
@@ -1521,7 +1522,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BLUE_BALLOON
 
 	.byte DECOR_YELLOW_BALLOON
-	.string "YELLOW BALLOON$", 16
+	.string "GELBER BALLON$", 16
 	.byte 1
 	.byte 0
 	.byte 3
@@ -1531,7 +1532,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_YELLOW_BALLOON
 
 	.byte DECOR_RED_TENT
-	.string "RED TENT$", 16
+	.string "ROTES ZELT$", 16
 	.byte 1
 	.byte 8
 	.byte 3
@@ -1541,7 +1542,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RED_TENT
 
 	.byte DECOR_BLUE_TENT
-	.string "BLUE TENT$", 16
+	.string "BLAUES ZELT$", 16
 	.byte 1
 	.byte 8
 	.byte 3
@@ -1551,7 +1552,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BLUE_TENT
 
 	.byte DECOR_SOLID_BOARD
-	.string "SOLID BOARD$", 16
+	.string "SOLIDES BRETT$", 16
 	.byte 1
 	.byte 5
 	.byte 3
@@ -1561,7 +1562,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SOLID_BOARD
 
 	.byte DECOR_SLIDE
-	.string "SLIDE$", 16
+	.string "RUTSCHE$", 16
 	.byte 1
 	.byte 7
 	.byte 3
@@ -1571,7 +1572,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SLIDE
 
 	.byte DECOR_FENCE_LENGTH
-	.string "FENCE LENGTH$", 16
+	.string "ZAUN VERTIKAL$", 16
 	.byte 0
 	.byte 0
 	.byte 3
@@ -1581,7 +1582,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_FENCE_LENGTH
 
 	.byte DECOR_FENCE_WIDTH
-	.string "FENCE WIDTH$", 16
+	.string "ZAUN HORIZONTAL$", 16
 	.byte 0
 	.byte 0
 	.byte 3
@@ -1591,7 +1592,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_FENCE_WIDTH
 
 	.byte DECOR_TIRE
-	.string "TIRE$", 16
+	.string "REIFEN$", 16
 	.byte 0
 	.byte 4
 	.byte 3
@@ -1601,7 +1602,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TIRE
 
 	.byte DECOR_STAND
-	.string "STAND$", 16
+	.string "PODEST$", 16
 	.byte 1
 	.byte 3
 	.byte 3
@@ -1611,7 +1612,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_STAND
 
 	.byte DECOR_MUD_BALL
-	.string "MUD BALL$", 16
+	.string "LEHMBALL$", 16
 	.byte 1
 	.byte 0
 	.byte 3
@@ -1621,7 +1622,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_MUD_BALL
 
 	.byte DECOR_BREAKABLE_DOOR
-	.string "BREAKABLE DOOR$", 16
+	.string "BRECHBARE TÜR$", 16
 	.byte 1
 	.byte 5
 	.byte 3
@@ -1631,7 +1632,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BREAKABLE_DOOR
 
 	.byte DECOR_SAND_ORNAMENT
-	.string "SAND ORNAMENT$", 16
+	.string "SANDORNAMENT$", 16
 	.byte 2
 	.byte 5
 	.byte 3
@@ -1641,7 +1642,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SAND_ORNAMENT
 
 	.byte DECOR_SILVER_SHIELD
-	.string "SILVER SHIELD$", 16
+	.string "SILBERSCHILD$", 16
 	.byte 2
 	.byte 5
 	.byte 3
@@ -1651,7 +1652,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SILVER_SHIELD
 
 	.byte DECOR_GOLD_SHIELD
-	.string "GOLD SHIELD$", 16
+	.string "GOLDSCHILD$", 16
 	.byte 2
 	.byte 5
 	.byte 3
@@ -1661,7 +1662,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GOLD_SHIELD
 
 	.byte DECOR_GLASS_ORNAMENT
-	.string "GLASS ORNAMENT$", 16
+	.string "GLASORNAMENT$", 16
 	.byte 2
 	.byte 5
 	.byte 3
@@ -1671,7 +1672,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GLASS_ORNAMENT
 
 	.byte DECOR_TV
-	.string "TV$", 16
+	.string "FERNSEHER$", 16
 	.byte 0
 	.byte 0
 	.byte 3
@@ -1681,7 +1682,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TV
 
 	.byte DECOR_ROUND_TV
-	.string "ROUND TV$", 16
+	.string "RUNDER TV$", 16
 	.byte 0
 	.byte 0
 	.byte 3
@@ -1691,7 +1692,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_ROUND_TV
 
 	.byte DECOR_CUTE_TV
-	.string "CUTE TV$", 16
+	.string "HÜBSCHER TV$", 16
 	.byte 0
 	.byte 0
 	.byte 3
@@ -1701,7 +1702,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CUTE_TV
 
 	.byte DECOR_GLITTER_MAT
-	.string "GLITTER MAT$", 16
+	.string "GLITZER-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1711,7 +1712,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GLITTER_MAT
 
 	.byte DECOR_JUMP_MAT
-	.string "JUMP MAT$", 16
+	.string "SPRUNG-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1721,7 +1722,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_JUMP_MAT
 
 	.byte DECOR_SPIN_MAT
-	.string "SPIN MAT$", 16
+	.string "DREH-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1731,7 +1732,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SPIN_MAT
 
 	.byte DECOR_C_LOW_NOTE_MAT
-	.string "C Low NOTE MAT$", 16
+	.string "Tiefes C-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1741,7 +1742,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_C_LOW_NOTE_MAT
 
 	.byte DECOR_D_NOTE_MAT
-	.string "D NOTE MAT$", 16
+	.string "D-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1751,7 +1752,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_D_NOTE_MAT
 
 	.byte DECOR_E_NOTE_MAT
-	.string "E NOTE MAT$", 16
+	.string "E-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1761,7 +1762,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_E_NOTE_MAT
 
 	.byte DECOR_F_NOTE_MAT
-	.string "F NOTE MAT$", 16
+	.string "F-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1771,7 +1772,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_F_NOTE_MAT
 
 	.byte DECOR_G_NOTE_MAT
-	.string "G NOTE MAT$", 16
+	.string "G-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1781,7 +1782,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_G_NOTE_MAT
 
 	.byte DECOR_A_NOTE_MAT
-	.string "A NOTE MAT$", 16
+	.string "A-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1791,7 +1792,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_A_NOTE_MAT
 
 	.byte DECOR_B_NOTE_MAT
-	.string "B NOTE MAT$", 16
+	.string "H-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1801,7 +1802,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_B_NOTE_MAT
 
 	.byte DECOR_C_HIGH_NOTE_MAT
-	.string "C High NOTE MAT$", 16
+	.string "Hohes C-MATTE$", 16
 	.byte 1
 	.byte 0
 	.byte 4
@@ -1811,7 +1812,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_C_HIGH_NOTE_MAT
 
 	.byte DECOR_SURF_MAT
-	.string "SURF MAT$", 16
+	.string "SURFER-MATTE$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1821,7 +1822,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SURF_MAT
 
 	.byte DECOR_THUNDER_MAT
-	.string "THUNDER MAT$", 16
+	.string "DONNER-MATTE$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1831,7 +1832,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_THUNDER_MAT
 
 	.byte DECOR_FIRE_BLAST_MAT
-	.string "FIRE BLAST MAT$", 16
+	.string "FEUER-MATTE$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1841,7 +1842,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_FIRE_BLAST_MAT
 
 	.byte DECOR_POWDER_SNOW_MAT
-	.string "POWDER SNOW MAT$", 16
+	.string "SCHNEE-MATTE$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1851,7 +1852,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_POWDER_SNOW_MAT
 
 	.byte DECOR_ATTRACT_MAT
-	.string "ATTRACT MAT$", 16
+	.string "ANZIEHUNG-MAT.$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1861,7 +1862,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_ATTRACT_MAT
 
 	.byte DECOR_FISSURE_MAT
-	.string "FISSURE MAT$", 16
+	.string "GEOFISSUR-MAT.$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1871,7 +1872,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_FISSURE_MAT
 
 	.byte DECOR_SPIKES_MAT
-	.string "SPIKES MAT$", 16
+	.string "STACHLER-MATTE$", 16
 	.byte 1
 	.byte 8
 	.byte 4
@@ -1881,7 +1882,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SPIKES_MAT
 
 	.byte DECOR_BALL_POSTER
-	.string "BALL POSTER$", 16
+	.string "BALLPOSTER$", 16
 	.byte 3
 	.byte 0
 	.byte 5
@@ -1891,7 +1892,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BALL_POSTER
 
 	.byte DECOR_GREEN_POSTER
-	.string "GREEN POSTER$", 16
+	.string "GRÜNES POSTER$", 16
 	.byte 3
 	.byte 0
 	.byte 5
@@ -1901,7 +1902,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GREEN_POSTER
 
 	.byte DECOR_RED_POSTER
-	.string "RED POSTER$", 16
+	.string "ROTES POSTER$", 16
 	.byte 3
 	.byte 0
 	.byte 5
@@ -1911,7 +1912,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RED_POSTER
 
 	.byte DECOR_BLUE_POSTER
-	.string "BLUE POSTER$", 16
+	.string "BLAUES POSTER$", 16
 	.byte 3
 	.byte 0
 	.byte 5
@@ -1921,7 +1922,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BLUE_POSTER
 
 	.byte DECOR_CUTE_POSTER
-	.string "CUTE POSTER$", 16
+	.string "HÜBSCHES POSTER$", 16
 	.byte 3
 	.byte 0
 	.byte 5
@@ -1931,7 +1932,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CUTE_POSTER
 
 	.byte DECOR_PIKA_POSTER
-	.string "PIKA POSTER$", 16
+	.string "PICHUKA-POSTER$", 16
 	.byte 3
 	.byte 1
 	.byte 5
@@ -1941,7 +1942,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PIKA_POSTER
 
 	.byte DECOR_LONG_POSTER
-	.string "LONG POSTER$", 16
+	.string "SCHLANG-POSTER$", 16
 	.byte 3
 	.byte 1
 	.byte 5
@@ -1951,7 +1952,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_LONG_POSTER
 
 	.byte DECOR_SEA_POSTER
-	.string "SEA POSTER$", 16
+	.string "MEER-POSTER$", 16
 	.byte 3
 	.byte 1
 	.byte 5
@@ -1961,7 +1962,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SEA_POSTER
 
 	.byte DECOR_SKY_POSTER
-	.string "SKY POSTER$", 16
+	.string "HIMMEL-POSTER$", 16
 	.byte 3
 	.byte 1
 	.byte 5
@@ -1971,7 +1972,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SKY_POSTER
 
 	.byte DECOR_KISS_POSTER
-	.string "KISS POSTER$", 16
+	.string "KUSS-POSTER$", 16
 	.byte 3
 	.byte 1
 	.byte 5
@@ -1981,7 +1982,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_KISS_POSTER
 
 	.byte DECOR_PICHU_DOLL
-	.string "PICHU DOLL$", 16
+	.string "PICHU-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -1991,7 +1992,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PICHU_DOLL
 
 	.byte DECOR_PIKACHU_DOLL
-	.string "PIKACHU DOLL$", 16
+	.string "PIKACHU-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2001,7 +2002,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PIKACHU_DOLL
 
 	.byte DECOR_MARILL_DOLL
-	.string "MARILL DOLL$", 16
+	.string "MARILL-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2011,7 +2012,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_MARILL_DOLL
 
 	.byte DECOR_TOGEPI_DOLL
-	.string "TOGEPI DOLL$", 16
+	.string "TOGEPI-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2021,7 +2022,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TOGEPI_DOLL
 
 	.byte DECOR_CYNDAQUIL_DOLL
-	.string "CYNDAQUIL DOLL$", 16
+	.string "FEURIGEL-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2031,7 +2032,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CYNDAQUIL_DOLL
 
 	.byte DECOR_CHIKORITA_DOLL
-	.string "CHIKORITA DOLL$", 16
+	.string "ENDIVIE-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2041,7 +2042,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CHIKORITA_DOLL
 
 	.byte DECOR_TOTODILE_DOLL
-	.string "TOTODILE DOLL$", 16
+	.string "KARNIMANIPUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2051,7 +2052,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TOTODILE_DOLL
 
 	.byte DECOR_JIGGLYPUFF_DOLL
-	.string "JIGGLYPUFF DOLL$", 16
+	.string "PUMMELUFFPUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2061,7 +2062,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_JIGGLYPUFF_DOLL
 
 	.byte DECOR_MEOWTH_DOLL
-	.string "MEOWTH DOLL$", 16
+	.string "MAUZI-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2071,7 +2072,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_MEOWTH_DOLL
 
 	.byte DECOR_CLEFAIRY_DOLL
-	.string "CLEFAIRY DOLL$", 16
+	.string "PIEPI-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2081,7 +2082,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CLEFAIRY_DOLL
 
 	.byte DECOR_DITTO_DOLL
-	.string "DITTO DOLL$", 16
+	.string "DITTO-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2091,7 +2092,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_DITTO_DOLL
 
 	.byte DECOR_SMOOCHUM_DOLL
-	.string "SMOOCHUM DOLL$", 16
+	.string "KUSSILLA-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2101,7 +2102,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SMOOCHUM_DOLL
 
 	.byte DECOR_TREECKO_DOLL
-	.string "TREECKO DOLL$", 16
+	.string "GECKARBOR-PUPP.$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2111,7 +2112,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TREECKO_DOLL
 
 	.byte DECOR_TORCHIC_DOLL
-	.string "TORCHIC DOLL$", 16
+	.string "FLEMMLI-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2121,7 +2122,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_TORCHIC_DOLL
 
 	.byte DECOR_MUDKIP_DOLL
-	.string "MUDKIP DOLL$", 16
+	.string "HYDROPI-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2131,7 +2132,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_MUDKIP_DOLL
 
 	.byte DECOR_DUSKULL_DOLL
-	.string "DUSKULL DOLL$", 16
+	.string "ZWIRRLICHTPUP.$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2141,7 +2142,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_DUSKULL_DOLL
 
 	.byte DECOR_WYNAUT_DOLL
-	.string "WYNAUT DOLL$", 16
+	.string "ISSO-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2151,7 +2152,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_WYNAUT_DOLL
 
 	.byte DECOR_BALTOY_DOLL
-	.string "BALTOY DOLL$", 16
+	.string "PUPPANCE-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2161,7 +2162,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BALTOY_DOLL
 
 	.byte DECOR_KECLEON_DOLL
-	.string "KECLEON DOLL$", 16
+	.string "KECLEON-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2171,7 +2172,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_KECLEON_DOLL
 
 	.byte DECOR_AZURILL_DOLL
-	.string "AZURILL DOLL$", 16
+	.string "AZURILL-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2181,7 +2182,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_AZURILL_DOLL
 
 	.byte DECOR_SKITTY_DOLL
-	.string "SKITTY DOLL$", 16
+	.string "ENECO-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2191,7 +2192,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SKITTY_DOLL
 
 	.byte DECOR_SWABLU_DOLL
-	.string "SWABLU DOLL$", 16
+	.string "WABLU-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2201,7 +2202,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SWABLU_DOLL
 
 	.byte DECOR_GULPIN_DOLL
-	.string "GULPIN DOLL$", 16
+	.string "SCHLUPPUCKPUP.$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2211,7 +2212,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GULPIN_DOLL
 
 	.byte DECOR_LOTAD_DOLL
-	.string "LOTAD DOLL$", 16
+	.string "LOTURZEL-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2221,7 +2222,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_LOTAD_DOLL
 
 	.byte DECOR_SEEDOT_DOLL
-	.string "SEEDOT DOLL$", 16
+	.string "SAMURZEL-PUPPE$", 16
 	.byte 4
 	.byte 0
 	.byte 6
@@ -2231,7 +2232,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SEEDOT_DOLL
 
 	.byte DECOR_PIKA_CUSHION
-	.string "PIKA CUSHION$", 16
+	.string "PIKA-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2241,7 +2242,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_PIKA_CUSHION
 
 	.byte DECOR_ROUND_CUSHION
-	.string "ROUND CUSHION$", 16
+	.string "RUNDES KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2251,7 +2252,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_ROUND_CUSHION
 
 	.byte DECOR_KISS_CUSHION
-	.string "KISS CUSHION$", 16
+	.string "KUSS-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2261,7 +2262,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_KISS_CUSHION
 
 	.byte DECOR_ZIGZAG_CUSHION
-	.string "ZIGZAG CUSHION$", 16
+	.string "ZIGZACHS-KISS.$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2271,7 +2272,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_ZIGZAG_CUSHION
 
 	.byte DECOR_SPIN_CUSHION
-	.string "SPIN CUSHION$", 16
+	.string "KREISEL-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2281,7 +2282,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SPIN_CUSHION
 
 	.byte DECOR_DIAMOND_CUSHION
-	.string "DIAMOND CUSHION$", 16
+	.string "DIAMANT-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2291,7 +2292,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_DIAMOND_CUSHION
 
 	.byte DECOR_BALL_CUSHION
-	.string "BALL CUSHION$", 16
+	.string "BALL-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2301,7 +2302,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BALL_CUSHION
 
 	.byte DECOR_GRASS_CUSHION
-	.string "GRASS CUSHION$", 16
+	.string "PFLANZEN-KISS.$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2311,7 +2312,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_GRASS_CUSHION
 
 	.byte DECOR_FIRE_CUSHION
-	.string "FIRE CUSHION$", 16
+	.string "FEUER-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2321,7 +2322,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_FIRE_CUSHION
 
 	.byte DECOR_WATER_CUSHION
-	.string "WATER CUSHION$", 16
+	.string "WASSER-KISSEN$", 16
 	.byte 4
 	.byte 0
 	.byte 7
@@ -2331,7 +2332,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_WATER_CUSHION
 
 	.byte DECOR_SNORLAX_DOLL
-	.string "SNORLAX DOLL$", 16
+	.string "RELAXO-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2341,7 +2342,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_SNORLAX_DOLL
 
 	.byte DECOR_RHYDON_DOLL
-	.string "RHYDON DOLL$", 16
+	.string "RIZEROS-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2351,7 +2352,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_RHYDON_DOLL
 
 	.byte DECOR_LAPRAS_DOLL
-	.string "LAPRAS DOLL$", 16
+	.string "LAPRAS-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2361,7 +2362,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_LAPRAS_DOLL
 
 	.byte DECOR_VENUSAUR_DOLL
-	.string "VENUSAUR DOLL$", 16
+	.string "BISAFLOR-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2371,7 +2372,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_VENUSAUR_DOLL
 
 	.byte DECOR_CHARIZARD_DOLL
-	.string "CHARIZARD DOLL$", 16
+	.string "GLURAK-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2381,7 +2382,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_CHARIZARD_DOLL
 
 	.byte DECOR_BLASTOISE_DOLL
-	.string "BLASTOISE DOLL$", 16
+	.string "TURTOK-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2391,7 +2392,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_BLASTOISE_DOLL
 
 	.byte DECOR_WAILMER_DOLL
-	.string "WAILMER DOLL$", 16
+	.string "WAILMER-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2401,7 +2402,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_WAILMER_DOLL
 
 	.byte DECOR_REGIROCK_DOLL
-	.string "REGIROCK DOLL$", 16
+	.string "REGIROCK-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2411,7 +2412,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_REGIROCK_DOLL
 
 	.byte DECOR_REGICE_DOLL
-	.string "REGICE DOLL$", 16
+	.string "REGICE-PUPPE$", 16
 	.byte 4
 	.byte 5
 	.byte 6
@@ -2421,7 +2422,7 @@ gDecorations:: @ 83EB6C4
 	.4byte DecorGfx_REGICE_DOLL
 
 	.byte DECOR_REGISTEEL_DOLL
-	.string "REGISTEEL DOLL$", 16
+	.string "REGISTEEL-PUPP.$", 16
 	.byte 4
 	.byte 5
 	.byte 6

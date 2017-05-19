@@ -1,18 +1,19 @@
 SlateportCity_SternsShipyard_2F_Text_17C7A2:: @ 817C7A2
-	.string "Designing a large ship is more like\n"
-	.string "making a big building than putting\l"
-	.string "together a transportation vehicle.$"
+	.string "Die Konstruktion eines großen Schiffes\n"
+	.string "ist eher vergleichbar mit der eines\l"
+	.string "Gebäudes, als eines Transportmittels.$"
 
 SlateportCity_SternsShipyard_2F_Text_17C80C:: @ 817C80C
-	.string "Don’t you think it’s strange that a\n"
-	.string "ship made of heavy iron floats?\p"
-	.string "It floats because of a principle\n"
-	.string "called buoyancy.$"
+	.string "Findest du es nicht auch seltsam, dass\n"
+	.string "ein Schiff aus Eisen gebaut wird?\p"
+	.string "Es schwimmt aufgrund des so genannten\n"
+	.string "Auftriebs.$"
 
 UnknownString_817C882: @ 817C882
-	.string "The sea between SLATEPORT and\n"
-	.string "PACIFIDLOG has a fast-running tide.\p"
-	.string "Ordinary ships can’t make headway\n"
-	.string "through there.\p"
-	.string "You’d need substantial propulsion\n"
-	.string "to plow through those waters...$"
+	.string "Die See zwischen GRAPHITPORT CITY und\n"
+	.string "FLOSSBRUNN hat einen starken Ge- \l"
+	.string "zeitenwechsel.\p"
+	.string "Normale Schiffe können dort nicht\n"
+	.string "fahren.\p"
+	.string "Man braucht einen starken Antrieb,\n"
+	.string "um diese Wasser befahren zu können...$"

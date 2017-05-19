@@ -342,3 +342,4 @@ gSpecials::
 	.4byte GetNameOfEnigmaBerryInPlayerParty
 	.4byte ScriptRandom
 	.4byte sub_80835D8
+	.4byte nullsub_814B200

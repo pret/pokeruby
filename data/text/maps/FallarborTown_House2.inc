@@ -1,38 +1,38 @@
 FallarborTown_House2_Text_177AF4:: @ 8177AF4
-	.string "I’m the MOVE TUTOR.\p"
-	.string "I know all the moves that POKéMON\n"
-	.string "learn - every one of them - and I can\l"
-	.string "teach POKéMON those moves.\p"
-	.string "I can teach a move to a POKéMON\n"
-	.string "of yours if you’d like.\p"
-	.string "I’ll do it for a HEART SCALE.\n"
-	.string "I’m collecting those now.$"
+	.string "Ich bin der ATTACKEN-HELFER.\p"
+	.string "Ich kenne alle Attacken, die ein\n"
+	.string "POKéMON lernen kann - und ich kann sie\l"
+	.string "ihnen beibringen.\p"
+	.string "Ich kann auch deinen POKéMON neue\n"
+	.string "Attacken beibringen, wenn du magst.\p"
+	.string "Als Gegenleistung hätte ich gerne eine\n"
+	.string "HERZSCHUPPE. Die sammle ich nämlich.$"
 
 FallarborTown_House2_Text_177BDB:: @ 8177BDB
-	.string "Oh! That’s it! That’s an honest to\n"
-	.string "goodness HEART SCALE!\p"
-	.string "Let me guess, you want me to teach\n"
-	.string "a move?$"
+	.string "Oh! Das ist es! Das ist ehrlich und\n"
+	.string "wahrhaftig eine HERZSCHUPPE!\p"
+	.string "Lass mich raten... Ich soll einem POKéMON\n"
+	.string "eine neue Attacke beibringen?!?$"
 
 FallarborTown_House2_Text_177C3F:: @ 8177C3F
-	.string "Which POKéMON needs tutoring?$"
+	.string "Welches POKéMON soll sie lernen?$"
 
 FallarborTown_House2_Text_177C5D:: @ 8177C5D
-	.string "Which move should I teach?$"
+	.string "Welche Attacke soll ich es lehren?$"
 
 FallarborTown_House2_Text_177C78:: @ 8177C78
-	.string "Sorry...\p"
-	.string "It doesn’t appear as if I have any move\n"
-	.string "I can teach that POKéMON.$"
+	.string "Tut mir Leid...\p"
+	.string "Scheinbar gibt es keine Attacke, die ich\n"
+	.string "diesem POKéMON beibringen kann.$"
 
 FallarborTown_House2_Text_177CC3:: @ 8177CC3
-	.string "{PLAYER} handed over one HEART SCALE\n"
-	.string "in exchange.$"
+	.string "{PLAYER} tauscht eine HERZSCHUPPE ein.$"
 
 FallarborTown_House2_Text_177CEF:: @ 8177CEF
-	.string "If your POKéMON need to learn a move,\n"
-	.string "come back with a HEART SCALE.$"
+	.string "Falls deine POKéMON neue Attacken\n"
+	.string "lernen sollen, komm mit einer\l"
+	.string "HERZSCHUPPE wieder.$"
 
 FallarborTown_House2_Text_177D33:: @ 8177D33
-	.string "Hunh? There isn’t a single move that\n"
-	.string "I can teach an EGG.$"
+	.string "Bitte? Ich kann einem EI nicht eine\n"
+	.string "einzige Attacke beibringen!$"
