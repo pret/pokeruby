@@ -56,7 +56,7 @@ extern void sub_80BEBF4(void);
 
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
-extern const u8 *gUnknown_083CE048[5];
+extern const u8 *gUnknown_083CE048[];;
 
 u32 GetPlayerTrainerId(void);
 
@@ -460,6 +460,25 @@ asm(".section .text_b");
 
 void sub_80BF6D8(void);
 void sub_80BF588(TVShow tvShows[]);
+
+void sub_80BEF10(u8 strvaridx, u8 rank)
+{
+    switch (rank)
+    {
+        case NORMAL_RANK:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5]);
+            break;
+        case SUPER_RANK:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5]);
+            break;
+        case HYPER_RANK:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5]);
+            break;
+        case MASTER_RANK:
+            StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5]);
+            break;
+    }
+}
 
 void CopyContestCategoryToStringVar(u8 strvaridx, u8 category)
 {
