@@ -199,6 +199,19 @@ struct TVShowCommon {
 	/*0x23*/ u8 trainerIdHi;
 };
 
+struct TVShowPokemonToday {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 language;
+    /*0x03*/ u8 pad03[9];
+    /*0x0c*/ u16 species;
+    /*0x0e*/ u16 species2;
+    /*0x10*/ u8 var10;
+    /*0x11*/ u8 var11;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 playerName[8];
+};
+
 struct TVShowFanClubLetter {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
@@ -317,6 +330,7 @@ typedef union TVShow {
 	struct TVShowWorldOfMasters worldOfMasters;
 	struct TVShowSmartShopper smartshopperShow;
 	struct TVShowContestWinner contestShow;
+    struct TVShowPokemonToday pokemonToday;
 } TVShow;
 
 struct MailStruct

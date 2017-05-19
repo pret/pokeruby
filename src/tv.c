@@ -1626,6 +1626,52 @@ void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
+void DoTVShowPokemonTodayFailedCapture(void) {
+    TVShow *tvShow;
+    u8 switchval;
+    u16 rval;
+    tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch (switchval) {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonToday.playerName, tvShow->pokemonToday.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->pokemonToday.species]);
+            gUnknown_020387E8 = 1;
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonToday.playerName, tvShow->pokemonToday.language);
+            sub_80FBFB4(gStringVar2, tvShow->pokemonToday.var12, 0);
+            StringCopy(gStringVar3, gSpeciesNames[tvShow->pokemonToday.species2]);
+            if (tvShow->pokemonToday.var11 == 1) {
+                gUnknown_020387E8 = 3;
+            } else {
+                gUnknown_020387E8 = 2;
+            }
+            break;
+        case 2:
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonToday.playerName, tvShow->pokemonToday.language);
+            sub_80BF088(1, tvShow->pokemonToday.var10);
+            rval = (Random() % 3);
+            if (rval == 0) {
+                gUnknown_020387E8 = 5;
+            } else {
+                gUnknown_020387E8 = 4;
+            }
+            break;
+        case 4:
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, tvShow->pokemonToday.playerName, tvShow->pokemonToday.language);
+            gUnknown_020387E8 = 6;
+            break;
+        case 6:
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVPokemonTodayFailedCaptureTextGroup[switchval]);
+}
+
 void DoTVShowPokemonFanClubLetter(void) {
     TVShow *tvShow;
     u8 switchval;
