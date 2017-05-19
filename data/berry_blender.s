@@ -57,11 +57,11 @@ gUnknown_08216284:: @ 8216284
 	.string "4P$", 4
 
 UnknownText_Mister:
-	.string "MISTER$"
+	.string "OPI$"
 UnknownText_Laddie:
-	.string "LADDIE$"
+	.string "KUMPEL$"
 UnknownText_Lassie:
-	.string "LASSIE$"
+	.string "TUSSI$"
 
 	.align 2
 gUnknown_082162B8:: @ 82162B8

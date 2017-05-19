@@ -6,11 +6,11 @@
 	.align 1
 gUnknown_083E537C:: @ 83E537C
 	ec_word SISTER
-	ec_word EATS
+	ec_word MUST_BE
 	ec_word SWEETS
 	ec_word VORACIOUS
-	ec_word AND
 	ec_word DROOLING
+	ec_word THICK
 
 	.align 2
 gUnknown_083E5388:: @ 83E5388
