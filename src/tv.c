@@ -1627,6 +1627,23 @@ u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx) {
     return TRUE;
 }
 
+u8 sub_80C00B4(TVShow *tv1, TVShow *tv2, u8 idx) {
+    u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
+    if ((linkTrainerId & 0xFF) == tv2->common.srcTrainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.srcTrainerIdHi) {
+        return FALSE;
+    }
+    if ((linkTrainerId & 0xFF) == tv2->common.trainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.trainerIdHi) {
+        return FALSE;
+    }
+    tv2->common.srcTrainerIdLo = tv2->common.srcTrainerId2Lo;
+    tv2->common.srcTrainerIdHi = tv2->common.srcTrainerId2Hi;
+    tv2->common.srcTrainerId2Lo = linkTrainerId & 0xFF;
+    tv2->common.srcTrainerId2Hi = linkTrainerId >> 8;
+    *tv1 = *tv2;
+    tv1->common.var01 = 1;
+    return TRUE;
+}
+
 asm(".section .dotvshow\n");
 
 void DoTVShowPokemonFanClubLetter(void);
