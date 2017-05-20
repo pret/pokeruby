@@ -706,7 +706,7 @@ void SetContestCategoryStringVarForInterview(void)
 {
     TVShow *tvShow;
     tvShow = &gSaveBlock1.tvShows.shows[gSpecialVar_0x8004];
-    CopyContestCategoryToStringVar(1, tvShow->contestShow.contestCategory);
+    CopyContestCategoryToStringVar(1, tvShow->bravoTrainer.contestCategory);
 }
 
 void sub_80BF088(u8 arg0, s32 price)
@@ -1668,6 +1668,280 @@ s8 sub_80C019C(TVShow tvShows[]) {
     }
     return -1;
 }
+
+void sub_80C03A8(u8 showidx);
+void sub_80C03C8(u16 species, u8 showidx);
+
+#ifdef NONMATCHING
+void sub_80C01D4(void) {
+    u8 i;
+    for (i=0; i<24; i++) {
+        switch (gSaveBlock1.tvShows.shows[i].common.var00) {
+            case 0:
+                break;
+            case TVSHOW_FAN_CLUB_LETTER:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].fanclubLetter.species, i);
+                break;
+            case TVSHOW_RECENT_HAPPENINGS:
+                break;
+            case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].fanclubOpinions.var02, i);
+                break;
+            case TVSHOW_UNKN_SHOWTYPE_04:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].worldOfMasters.var06, i);
+                break;
+            case TVSHOW_NAME_RATER_SHOW:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].nameRaterShow.species, i);
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].nameRaterShow.var1C, i);
+                break;
+            case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].bravoTrainer.species, i);
+                break;
+            case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].bravoTrainerTower.var0a, i);
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].bravoTrainerTower.var14, i);
+                break;
+            case TVSHOW_POKEMON_TODAY_CAUGHT:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].pokemonToday.species, i);
+                break;
+            case TVSHOW_SMART_SHOPPER:
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].pokemonTodayFailed.species, i);
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].pokemonTodayFailed.species2, i);
+                break;
+            case TVSHOW_FISHING_ADVICE:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].pokemonAngler.var04, i);
+                break;
+            case TVSHOW_WORLD_OF_MASTERS:
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].worldOfMasters.var08, i);
+                sub_80C03C8(gSaveBlock1.tvShows.shows[i].worldOfMasters.var04, i);
+                break;
+            case TVSHOW_MASS_OUTBREAK:
+                break;
+            default:
+                sub_80C03A8(i);
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80C01D4(void) {
+    asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	movs r6, 0\n\
+_080C01D8:\n\
+	ldr r0, _080C01F8 @ =gSaveBlock1\n\
+	lsls r2, r6, 3\n\
+	adds r1, r2, r6\n\
+	lsls r1, 2\n\
+	adds r1, r0\n\
+	ldr r0, _080C01FC @ =0x00002738\n\
+	adds r1, r0\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0x29\n\
+	bls _080C01EE\n\
+	b _default\n\
+_080C01EE:\n\
+	lsls r0, 2\n\
+	ldr r1, _080C0200 @ =_080C0204\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_080C01F8: .4byte gSaveBlock1\n\
+_080C01FC: .4byte 0x00002738\n\
+_080C0200: .4byte _080C0204\n\
+	.align 2, 0\n\
+_080C0204:\n\
+	.4byte _break\n\
+	.4byte _fanclubLetter @ TVSHOW_FAN_CLUB_LETTER\n\
+	.4byte _break    @ TVSHOW_RECENT_HAPPENINGS\n\
+	.4byte _fanclubOpinions @ TVSHOW_PKMN_FAN_CLUB_OPINIONS\n\
+	.4byte _showtype4 @ TVSHOW_UNKN_SHOWTYPE_04\n\
+	.4byte _nameRater @ TVSHOW_NAME_RATER_SHOW\n\
+	.4byte _bravoTrainerContest @ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE\n\
+	.4byte _bravoTrainerTower @ TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _pokemonTodayS @ TVSHOW_POKEMON_TODAY_CAUGHT\n\
+	.4byte _break    @ TVSHOW_SMART_SHOPPER\n\
+	.4byte _pokemonTodayF @ TVSHOW_POKEMON_TODAY_FAILED\n\
+	.4byte _fishing @ TVSHOW_FISHING_ADVICE\n\
+	.4byte _worldOfMasters @ TVSHOW_WORLD_OF_MASTERS\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _default\n\
+	.4byte _break    @ TVSHOW_MASS_OUTBREAK\n\
+_fanclubLetter:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C02B8 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x2]\n\
+	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C02B8: .4byte gSaveBlock1 + 0x2738\n\
+_fanclubOpinions:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C02C8 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x2]\n\
+	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C02C8: .4byte gSaveBlock1 + 0x2738\n\
+_showtype4:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C02D8 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x6]\n\
+	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C02D8: .4byte gSaveBlock1 + 0x2738\n\
+_nameRater:\n\
+	adds r4, r2, r6\n\
+	lsls r4, 2\n\
+	ldr r0, _080C02F4 @ =gSaveBlock1 + 0x2738\n\
+	adds r4, r0\n\
+	ldrh r0, [r4, 0x2]\n\
+	lsls r5, r6, 24\n\
+	lsrs r5, 24\n\
+	adds r1, r5, 0\n\
+	bl sub_80C03C8\n\
+	ldrh r0, [r4, 0x1C]\n\
+	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C02F4: .4byte gSaveBlock1 + 0x2738\n\
+_bravoTrainerContest:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C0304 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x2]\n\
+	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C0304: .4byte gSaveBlock1 + 0x2738\n\
+_bravoTrainerTower:\n\
+	adds r4, r2, r6\n\
+	lsls r4, 2\n\
+	ldr r0, _080C0320 @ =gSaveBlock1 + 0x2738\n\
+	adds r4, r0\n\
+	ldrh r0, [r4, 0xA]\n\
+	lsls r5, r6, 24\n\
+	lsrs r5, 24\n\
+	adds r1, r5, 0\n\
+	bl sub_80C03C8\n\
+	ldrh r0, [r4, 0x14]\n\
+	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C0320: .4byte gSaveBlock1 + 0x2738\n\
+_pokemonTodayS:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C0330 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x10]\n\
+	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C0330: .4byte gSaveBlock1 + 0x2738\n\
+_pokemonTodayF:\n\
+	adds r4, r2, r6\n\
+	lsls r4, 2\n\
+	ldr r0, _080C034C @ =gSaveBlock1 + 0x2738\n\
+	adds r4, r0\n\
+	ldrh r0, [r4, 0xC]\n\
+	lsls r5, r6, 24\n\
+	lsrs r5, 24\n\
+	adds r1, r5, 0\n\
+	bl sub_80C03C8\n\
+	ldrh r0, [r4, 0xE]\n\
+	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+	.align 2, 0\n\
+_080C034C: .4byte gSaveBlock1 + 0x2738\n\
+_fishing:\n\
+	adds r0, r2, r6\n\
+	lsls r0, 2\n\
+	ldr r1, _080C0364 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r1\n\
+	ldrh r0, [r0, 0x4]\n\
+_checkSpecies1:\n\
+	lsls r1, r6, 24\n\
+	lsrs r1, 24\n\
+	bl sub_80C03C8\n\
+	b _break\n\
+	.align 2, 0\n\
+_080C0364: .4byte gSaveBlock1 + 0x2738\n\
+_worldOfMasters:\n\
+	adds r4, r2, r6\n\
+	lsls r4, 2\n\
+	ldr r0, _080C0388 @ =gSaveBlock1 + 0x2738\n\
+	adds r4, r0\n\
+	ldrh r0, [r4, 0x8]\n\
+	lsls r5, r6, 24\n\
+	lsrs r5, 24\n\
+	adds r1, r5, 0\n\
+	bl sub_80C03C8\n\
+	ldrh r0, [r4, 0x4]\n\
+_checkSpecies2:\n\
+	adds r1, r5, 0\n\
+	bl sub_80C03C8\n\
+	b _break\n\
+	.align 2, 0\n\
+_080C0388: .4byte gSaveBlock1 + 0x2738\n\
+_default:\n\
+	lsls r0, r6, 24\n\
+	lsrs r0, 24\n\
+	bl sub_80C03A8\n\
+_break:\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+	cmp r6, 0x17\n\
+	bhi _080C03A0\n\
+	b _080C01D8\n\
+_080C03A0:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80C03A8(u8 showidx) {
+    gSaveBlock1.tvShows.shows[showidx].common.var01 = 0;
+}
+
+void sub_80C03C8(u16 species, u8 showidx) {
+    if (sub_8090D90(SpeciesToNationalPokedexNum(species), 0) == 0) {
+        gSaveBlock1.tvShows.shows[showidx].common.var01 = 0;
+    }
+}
+
 
 asm(".section .dotvshow\n");
 

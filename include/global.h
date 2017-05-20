@@ -323,20 +323,30 @@ struct TVShowWorldOfMasters {
 };
 
 struct TVShowSmartShopper {
-	u8 var00;
-	u8 var01;
-	u8 boughtOrSoldFlag;
-	u8 pad03[3];
-	u16 itemIds[3];
-	u16 itemAmounts[3];
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 boughtOrSoldFlag;
+	/*0x03*/ u8 pad03[3];
+	/*0x06*/ u16 itemIds[3];
+	/*0x0C*/ u16 itemAmounts[3];
 };
 
-struct TVShowContestWinner {
-	u8 var00;
-	u8 var01;
-	u8 pad02[17];
-	u8 contestCategory:3;
-	u8 var13_3:5;
+struct TVShowBravoTrainerPokemonProfiles {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 species;
+	/*0x04*/ u8 pad04[15];
+	/*0x13*/ u8 contestCategory:3;
+	/*0x13*/ u8 var13_3:5;
+};
+
+struct TVShowBravoTrainerBattleTowerSpotlight {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 pad02[8];
+	/*0x0A*/ u16 var0a;
+	/*0x0C*/ u8 pad0c[8];
+	/*0x14*/ u16 var14;
 };
 
 typedef union TVShow {
@@ -349,7 +359,8 @@ typedef union TVShow {
 	struct TVShowPokemonAngler pokemonAngler;
 	struct TVShowWorldOfMasters worldOfMasters;
 	struct TVShowSmartShopper smartshopperShow;
-	struct TVShowContestWinner contestShow;
+	struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
+	struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
     struct TVShowPokemonToday pokemonToday;
     struct TVShowPokemonTodayFailed pokemonTodayFailed;
 } TVShow;
