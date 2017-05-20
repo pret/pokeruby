@@ -97,8 +97,39 @@ void ClearTVShowData(void)
 }
 
 extern void sub_80BE138(TVShow *);
+bool8 sub_80BF1B4(u8);
+void sub_80BF20C(void);
 
 asm(".section .text_a");
+s8 sub_80BF74C(TVShow tvShow[]);
+
+void sub_80BE3BC(void) {
+    u8 rval;
+    TVShow *tvShow;
+    u8 i;
+
+    rval = sub_80BF77C(0x5555);
+    if (rval == 0) {
+        gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
+        if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_SMART_SHOPPER) != 1) {
+            sub_80BF20C();
+            if (gUnknown_02038724[0].item_amount >= 20) {
+                tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+                tvShow->smartshopperShow.var00 = TVSHOW_SMART_SHOPPER;
+                tvShow->smartshopperShow.var01 = rval;
+                tvShow->smartshopperShow.shopLocation = gMapHeader.name;
+                for (i=0; i<3; i++) {
+                    tvShow->smartshopperShow.itemIds[i] = gUnknown_02038724[i].item_id;
+                    tvShow->smartshopperShow.itemAmounts[i] = gUnknown_02038724[i].item_amount;
+                }
+                tvShow->smartshopperShow.priceReduced = GetPriceReduction(1);
+                StringCopy(tvShow->smartshopperShow.playerName, gSaveBlock2.playerName);
+                sub_80BE138(tvShow);
+                tvShow->smartshopperShow.language = GAME_LANGUAGE;
+            }
+        }
+    }
+}
 
 void sub_80BE478(void)
 {
@@ -330,7 +361,7 @@ void sub_80BE8EC(u16 arg0)
     TVShow *tvShow;
     if (gSaveBlock1.outbreakPokemonSpecies == 0) {
         for (showidx=0; showidx<24; showidx++) {
-            if (gSaveBlock1.tvShows.shows[showidx].massOutbreak.var00 == 0x29 && gSaveBlock1.tvShows.shows[showidx].massOutbreak.var01 == 0x01) {
+            if (gSaveBlock1.tvShows.shows[showidx].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK && gSaveBlock1.tvShows.shows[showidx].massOutbreak.var01 == 0x01) {
                 tvShow = &(gSaveBlock1.tvShows.shows[showidx]);
                 if (tvShow->massOutbreak.var16 < arg0)
                     tvShow->massOutbreak.var16 = 0;
@@ -374,18 +405,15 @@ void sub_80BE97C(bool8 flag)
     }
 }
 
-s8 sub_80BF74C(TVShow tvShow[]);
-bool8 sub_80BF1B4(u8);
-
 void sub_80BE9D4()
 {
     TVShow *show;
     gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
-    if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(24) != 1) {
+    if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_FISHING_ADVICE) != 1) {
         show = &(gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0]);
 #ifdef NONMATCHING
-        show->common.var00 = 24;
-        show->common.var01 = 0;
+        show->pokemonAngler.var00 = TVSHOW_FISHING_ADVICE;
+        show->pokemonAngler.var01 = 0;
 #else
         asm(".syntax unified\n\
         movs r1, 0\n\
@@ -415,7 +443,7 @@ void sub_80BEA5C(u16 arg0)
 {
     struct UnknownSaveStruct2A98 *unk_2a98;
     unk_2a98 = &gSaveBlock1.tvShows.unknown_2A98;
-    if (unk_2a98->var00 == 0x19)
+    if (unk_2a98->var00 == TVSHOW_WORLD_OF_MASTERS)
     {
         if (unk_2a98->var02 <= 0x13)
         {
@@ -437,10 +465,10 @@ void sub_80BEA88(void)
     if (rval == 0)
     {
         gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
-        if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(0x19) != 1)
+        if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_WORLD_OF_MASTERS) != 1)
         {
             tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-            tvShow->worldOfMasters.var00 = 0x19;
+            tvShow->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
             tvShow->worldOfMasters.var01 = rval;
             tvShow->worldOfMasters.var02 = unk_2a98->var02;
             tvShow->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->var06;
@@ -750,7 +778,7 @@ void sub_80BF154(u8 arg0, struct TVShowSmartShopper *arg1)
             price += ItemId_GetPrice(arg1->itemIds[i]) * arg1->itemAmounts[i];
         }
     }
-    if (arg1->boughtOrSoldFlag == 1)
+    if (arg1->priceReduced == 1)
     {
         sub_80BF088(arg0, price >> 1);
     }
@@ -2388,49 +2416,6 @@ void DoTVShowPokemonFanClubLetter(void) {
             sub_80BF088(2, rval);
             TVShowDone();
             break;
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 25:
-        case 26:
-        case 27:
-        case 28:
-        case 29:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-        case 35:
-        case 36:
-        case 37:
-        case 38:
-        case 39:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-        case 45:
-        case 46:
-        case 47:
-        case 48:
-        case 49:
-            break;
         case 50:
             ConvertEasyChatWordsToString(gStringVar4, tvShow->fanclubLetter.pad04, 2, 2);
             ShowFieldMessage(gStringVar4);
@@ -2467,51 +2452,6 @@ void DoTVShowRecentHappenings(void) {
             break;
         case 5:
             TVShowDone();
-            break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 25:
-        case 26:
-        case 27:
-        case 28:
-        case 29:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-        case 35:
-        case 36:
-        case 37:
-        case 38:
-        case 39:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-        case 45:
-        case 46:
-        case 47:
-        case 48:
-        case 49:
             break;
         case 50:
             ConvertEasyChatWordsToString(gStringVar4, tvShow->recentHappenings.var04, 2, 2);

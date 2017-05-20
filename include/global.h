@@ -325,10 +325,13 @@ struct TVShowWorldOfMasters {
 struct TVShowSmartShopper {
 	/*0x00*/ u8 var00;
 	/*0x01*/ u8 var01;
-	/*0x02*/ u8 boughtOrSoldFlag;
-	/*0x03*/ u8 pad03[3];
+	/*0x02*/ u8 priceReduced;
+	/*0x03*/ u8 language;
+	/*0x04*/ u8 pad04[2];
 	/*0x06*/ u16 itemIds[3];
 	/*0x0C*/ u16 itemAmounts[3];
+	/*0x12*/ u8 shopLocation;
+	/*0x13*/ u8 playerName[8];
 };
 
 struct TVShowBravoTrainerPokemonProfiles {
