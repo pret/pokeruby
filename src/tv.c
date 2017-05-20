@@ -104,8 +104,31 @@ extern u16 sub_8135D3C(u8);
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
 
+void sub_80BF334(void);
+void sub_80BF3A4(void);
+void sub_80BF3DC(void);
+void sub_80BF46C(void);
+void sub_80BF478(void);
+void sub_80BF484(void);
+void sub_80BF4BC(void);
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
+
+void sub_80BF55C(TVShow tvShow[], u8 showidx);
+void sub_80BEA88(void);
+
+void sub_80BE23C(u16 a0) {
+    TVShow *show;
+    show = &gSaveBlock1.tvShows.unknown_2A98;
+    sub_80BF484();
+    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows.shows);
+    if (gUnknown_03005D38.var0 != -1) {
+        sub_80BF55C(gSaveBlock1.tvShows.shows, 24);
+        show->bravoTrainer.var14 = a0;
+        show->bravoTrainer.var00 = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
+    }
+}
 
 void sub_80BE284(u8 a0) {
     TVShow *show;
@@ -889,14 +912,6 @@ void sub_80BF25C(u8 showType)
     sub_80BF6D8();
 }
 
-void sub_80BF334(void);
-void sub_80BF3A4(void);
-void sub_80BF3DC(void);
-void sub_80BF46C(void);
-void sub_80BF478(void);
-void sub_80BF484(void);
-void sub_80BF4BC(void);
-
 void sub_80BF2C4(void)
 {
     gScriptResult = 0;
@@ -975,7 +990,7 @@ void sub_80BF484(void)
     sub_80BF25C(TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-        sub_80EB6FC(show->recentHappenings.var04, 2); // wrong struct ident, fix later
+        sub_80EB6FC(show->bravoTrainer.var04, 2);
     }
 }
 
@@ -985,7 +1000,7 @@ void sub_80BF4BC(void)
     sub_80BF25C(TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE);
     if (gScriptResult == 0) {
         show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
-        sub_80EB6FC(show->fanclubOpinions.var18, 1); // wrong struct ident, fix later
+        sub_80EB6FC(show->bravoTrainerTower.var18, 1); // wrong struct ident, fix later
     }
 }
 

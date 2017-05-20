@@ -338,13 +338,13 @@ struct TVShowBravoTrainerPokemonProfiles {
 	/*0x00*/ u8 var00;
 	/*0x01*/ u8 var01;
 	/*0x02*/ u16 species;
-	/*0x04*/ u8 pad04[4];
+	/*0x04*/ u16 var04[2];
 	/*0x08*/ u8 pokemonNickname[11];
 	/*0x13*/ u8 contestCategory:3;
 	/*0x13*/ u8 contestRank:2;
 	/*0x13*/ u8 var13_5:2;
 	/*0x13*/ u8 var13_7:1;
-	/*0x14*/
+	/*0x14*/ u16 var14;
 };
 
 struct TVShowBravoTrainerBattleTowerSpotlight {
@@ -355,7 +355,7 @@ struct TVShowBravoTrainerBattleTowerSpotlight {
 	/*0x0C*/ u8 pokemonName[8];
 	/*0x14*/ u16 winningMove;
 	/*0x16*/ u16 var16;
-	/*0x18*/ u8 pad18[2];
+	/*0x18*/ u16 var18[1];
 	/*0x1A*/ u8 btLevel;
 	/*0x1B*/ u8 var1b;
 	/*0x1C*/ u8 var1c;
