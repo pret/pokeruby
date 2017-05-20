@@ -1613,41 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start sub_80C019C
-sub_80C019C: @ 80C019C
-	push {lr}
-	adds r3, r0, 0
-	movs r2, 0
-_080C01A2:
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0, r3
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	bne _080C01C2
-	ldrb r0, [r1]
-	subs r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3B
-	bhi _080C01C2
-	lsls r0, r2, 24
-	asrs r0, 24
-	b _080C01D0
-_080C01C2:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x17
-	bls _080C01A2
-	movs r0, 0x1
-	negs r0, r0
-_080C01D0:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C019C
-
 	thumb_func_start sub_80C01D4
 sub_80C01D4: @ 80C01D4
 	push {r4-r6,lr}

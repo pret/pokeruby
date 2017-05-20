@@ -1659,6 +1659,16 @@ u8 sub_80C0134(TVShow *tv1, TVShow *tv2, u8 idx) {
     return TRUE;
 }
 
+s8 sub_80C019C(TVShow tvShows[]) {
+    u8 i;
+    for (i=0; i<24; i++) {
+        if (tvShows[i].common.var01 == 0 && (u8)(tvShows[i].common.var00 - 1) < 60) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 asm(".section .dotvshow\n");
 
 void DoTVShowPokemonFanClubLetter(void);
