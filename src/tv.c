@@ -1425,9 +1425,11 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
 extern u8 gUnknown_03000720;
 extern s8 gUnknown_03000722;
 s8 sub_80C019C(TVShow tvShows[]);
-extern u8 sub_80BFF68(struct SaveTVStruct ** tv1, struct SaveTVStruct ** tv2, u8 idx);
+bool8 sub_80BFF68(struct SaveTVStruct ** tv1, struct SaveTVStruct ** tv2, u8 idx);
+u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx);
+u8 sub_80C00B4(TVShow *tv1, TVShow *tv2, u8 idx);
+u8 sub_80C0134(TVShow *tv1, TVShow *tv2, u8 idx);
 
-// #ifdef NONMATCHING
 void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
 {
     u8 i, j;
@@ -1460,173 +1462,156 @@ void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct Sa
         }
     }
 }
-// #else
-// __attribute__((naked))
-// void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
-// {
-    // asm(".syntax unified\n\
-	// push {r4-r7,lr}\n\
-	// mov r7, r10\n\
-	// mov r6, r9\n\
-	// mov r5, r8\n\
-	// push {r5-r7}\n\
-	// sub sp, 0x20\n\
-	// str r0, [sp, 0x10]\n\
-	// str r1, [sp, 0x14]\n\
-	// str r2, [sp, 0x18]\n\
-	// str r3, [sp, 0x1C]\n\
-	// add r0, sp, 0x10\n\
-	// str r0, [sp]\n\
-	// add r0, sp, 0x14\n\
-	// str r0, [sp, 0x4]\n\
-	// add r0, sp, 0x18\n\
-	// str r0, [sp, 0x8]\n\
-	// add r0, sp, 0x1C\n\
-	// str r0, [sp, 0xC]\n\
-	// bl GetLinkPlayerCount\n\
-	// ldr r1, _080BFEA0 @ =gUnknown_03000720\n\
-	// strb r0, [r1]\n\
-// _080BFE50:\n\
-	// movs r6, 0\n\
-	// ldr r0, _080BFEA0 @ =gUnknown_03000720\n\
-	// ldrb r1, [r0]\n\
-	// cmp r6, r1\n\
-	// bcs _080BFE50\n\
-	// mov r10, r0\n\
-// _080BFE5C:\n\
-	// cmp r6, 0\n\
-	// bne _080BFE64\n\
-	// ldr r2, _080BFEA4 @ =gUnknown_020387E4\n\
-	// strb r6, [r2]\n\
-// _080BFE64:\n\
-	// lsls r4, r6, 2\n\
-	// mov r3, sp\n\
-	// adds r0, r3, r4\n\
-	// ldr r0, [r0]\n\
-	// ldr r0, [r0]\n\
-	// bl sub_80C019C\n\
-	// ldr r1, _080BFEA8 @ =gUnknown_03000722\n\
-	// strb r0, [r1]\n\
-	// lsls r0, 24\n\
-	// asrs r0, 24\n\
-	// movs r1, 0x1\n\
-	// negs r1, r1\n\
-	// adds r7, r4, 0\n\
-	// cmp r0, r1\n\
-	// bne _080BFEAC\n\
-	// ldr r1, _080BFEA4 @ =gUnknown_020387E4\n\
-	// ldrb r0, [r1]\n\
-	// adds r0, 0x1\n\
-	// strb r0, [r1]\n\
-	// lsls r0, 24\n\
-	// lsrs r0, 24\n\
-	// mov r2, r10\n\
-	// ldrb r2, [r2]\n\
-	// cmp r0, r2\n\
-	// beq _080BFF58\n\
-	// adds r6, 0x1\n\
-	// mov r9, r6\n\
-	// b _080BFF3C\n\
-	// .align 2, 0\n\
-// _080BFEA0: .4byte gUnknown_03000720\n\
-// _080BFEA4: .4byte gUnknown_020387E4\n\
-// _080BFEA8: .4byte gUnknown_03000722\n\
-// _080BFEAC:\n\
-	// movs r5, 0\n\
-	// mov r3, r10\n\
-	// ldrb r0, [r3]\n\
-	// subs r0, 0x1\n\
-	// adds r2, r6, 0x1\n\
-	// mov r9, r2\n\
-	// cmp r5, r0\n\
-	// bge _080BFF22\n\
-	// ldr r3, _080BFF4C @ =gUnknown_03000720\n\
-	// mov r8, r3\n\
-// _080BFEC0:\n\
-	// adds r0, r6, r5\n\
-	// adds r4, r0, 0x1\n\
-	// mov r0, r8\n\
-	// ldrb r1, [r0]\n\
-	// adds r0, r4, 0\n\
-	// bl __modsi3\n\
-	// lsls r0, 2\n\
-	// add r0, sp\n\
-	// ldr r0, [r0]\n\
-	// ldr r0, [r0]\n\
-	// bl sub_80BF74C\n\
-	// ldr r1, _080BFF50 @ =gUnknown_03005D38\n\
-	// strb r0, [r1]\n\
-	// lsls r0, 24\n\
-	// asrs r0, 24\n\
-	// movs r1, 0x1\n\
-	// negs r1, r1\n\
-	// cmp r0, r1\n\
-	// beq _080BFF12\n\
-	// mov r2, r8\n\
-	// ldrb r1, [r2]\n\
-	// adds r0, r4, 0\n\
-	// bl __modsi3\n\
-	// adds r2, r0, 0\n\
-	// lsls r0, r2, 2\n\
-	// add r0, sp\n\
-	// ldr r0, [r0]\n\
-	// mov r3, sp\n\
-	// adds r1, r3, r7\n\
-	// ldr r1, [r1]\n\
-	// lsls r2, 24\n\
-	// lsrs r2, 24\n\
-	// bl sub_80BFF68\n\
-	// lsls r0, 24\n\
-	// lsrs r0, 24\n\
-	// cmp r0, 0x1\n\
-	// beq _080BFF22\n\
-// _080BFF12:\n\
-	// adds r0, r5, 0x1\n\
-	// lsls r0, 24\n\
-	// lsrs r5, r0, 24\n\
-	// mov r1, r8\n\
-	// ldrb r0, [r1]\n\
-	// subs r0, 0x1\n\
-	// cmp r5, r0\n\
-	// blt _080BFEC0\n\
-// _080BFF22:\n\
-	// mov r2, r10\n\
-	// ldrb r0, [r2]\n\
-	// subs r0, 0x1\n\
-	// cmp r5, r0\n\
-	// bne _080BFF3C\n\
-	// mov r3, sp\n\
-	// adds r0, r3, r7\n\
-	// ldr r0, [r0]\n\
-	// ldr r0, [r0]\n\
-	// ldr r1, _080BFF54 @ =gUnknown_03000722\n\
-	// ldrb r1, [r1]\n\
-	// bl sub_80BF55C\n\
-// _080BFF3C:\n\
-	// mov r1, r9\n\
-	// lsls r0, r1, 24\n\
-	// lsrs r6, r0, 24\n\
-	// mov r2, r10\n\
-	// ldrb r2, [r2]\n\
-	// cmp r6, r2\n\
-	// bcc _080BFE5C\n\
-	// b _080BFE50\n\
-	// .align 2, 0\n\
-// _080BFF4C: .4byte gUnknown_03000720\n\
-// _080BFF50: .4byte gUnknown_03005D38\n\
-// _080BFF54: .4byte gUnknown_03000722\n\
-// _080BFF58:\n\
-	// add sp, 0x20\n\
-	// pop {r3-r5}\n\
-	// mov r8, r3\n\
-	// mov r9, r4\n\
-	// mov r10, r5\n\
-	// pop {r4-r7}\n\
-	// pop {r0}\n\
-	// bx r0\n\
-// .syntax divided\n");
-// }
-// #endif
+
+#ifdef NONMATCHING
+bool8 sub_80BFF68(struct SaveTVStruct ** arg1, struct SaveTVStruct ** arg2, u8 idx) {
+    u8 value;
+    u8 switchval;
+    struct SaveTVStruct *tv1;
+    struct SaveTVStruct *tv2;
+    tv1 = *arg1;
+    tv2 = *arg2;
+    value = FALSE;
+    switchval = sub_80BFB54(tv2->shows[gUnknown_03000722].common.var00);
+    switch (switchval) {
+        case 2:
+            value = sub_80C004C(&tv1->shows[gUnknown_03005D38.var0], &tv2->shows[gUnknown_03000722], idx);
+            break;
+        case 3:
+            value = sub_80C00B4(&tv1->shows[gUnknown_03005D38.var0], &tv2->shows[gUnknown_03000722], idx);
+            break;
+        case 4:
+            value = sub_80C0134(&tv1->shows[gUnknown_03005D38.var0], &tv2->shows[gUnknown_03000722], idx);
+            break;
+    }
+    if (value == TRUE) {
+        sub_80BF55C(tv2->shows, gUnknown_03000722);
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+#else
+__attribute__((naked))
+bool8 sub_80BFF68(struct SaveTVStruct ** arg1, struct SaveTVStruct ** arg2, u8 idx) {
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x4\n\
+	lsls r2, 24\n\
+	lsrs r7, r2, 24\n\
+	ldr r4, [r0]\n\
+	ldr r6, [r1]\n\
+	movs r5, 0\n\
+	ldr r2, _080BFFA4 @ =gUnknown_03000722\n\
+	movs r1, 0\n\
+	ldrsb r1, [r2, r1]\n\
+	lsls r0, r1, 3\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r6 @ this is the only mimsmatch\n\
+	ldrb r0, [r0]\n\
+	str r2, [sp]\n\
+	bl sub_80BFB54\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	adds r1, r0, 0\n\
+	ldr r2, [sp]\n\
+	cmp r0, 0x3\n\
+	beq _080BFFD8\n\
+	cmp r0, 0x3\n\
+	bgt _080BFFA8\n\
+	cmp r0, 0x2\n\
+	beq _080BFFAE\n\
+	b _080C0026\n\
+	.align 2, 0\n\
+_080BFFA4: .4byte gUnknown_03000722\n\
+_080BFFA8:\n\
+	cmp r1, 0x4\n\
+	beq _080C0000\n\
+	b _080C0026\n\
+_080BFFAE:\n\
+	ldr r0, _080BFFD4 @ =gUnknown_03005D38\n\
+	movs r1, 0\n\
+	ldrsb r1, [r0, r1]\n\
+	lsls r0, r1, 3\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4, r0\n\
+	ldrb r2, [r2]\n\
+	lsls r2, 24\n\
+	asrs r2, 24\n\
+	lsls r1, r2, 3\n\
+	adds r1, r2\n\
+	lsls r1, 2\n\
+	adds r1, r6, r1\n\
+	adds r2, r7, 0\n\
+	bl sub_80C004C\n\
+	b _080C0022\n\
+	.align 2, 0\n\
+_080BFFD4: .4byte gUnknown_03005D38\n\
+_080BFFD8:\n\
+	ldr r0, _080BFFFC @ =gUnknown_03005D38\n\
+	movs r1, 0\n\
+	ldrsb r1, [r0, r1]\n\
+	lsls r0, r1, 3\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4, r0\n\
+	ldrb r2, [r2]\n\
+	lsls r2, 24\n\
+	asrs r2, 24\n\
+	lsls r1, r2, 3\n\
+	adds r1, r2\n\
+	lsls r1, 2\n\
+	adds r1, r6, r1\n\
+	adds r2, r7, 0\n\
+	bl sub_80C00B4\n\
+	b _080C0022\n\
+	.align 2, 0\n\
+_080BFFFC: .4byte gUnknown_03005D38\n\
+_080C0000:\n\
+	ldr r0, _080C0030 @ =gUnknown_03005D38\n\
+	movs r1, 0\n\
+	ldrsb r1, [r0, r1]\n\
+	lsls r0, r1, 3\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4, r0\n\
+	ldrb r2, [r2]\n\
+	lsls r2, 24\n\
+	asrs r2, 24\n\
+	lsls r1, r2, 3\n\
+	adds r1, r2\n\
+	lsls r1, 2\n\
+	adds r1, r6, r1\n\
+	adds r2, r7, 0\n\
+	bl sub_80C0134\n\
+_080C0022:\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+_080C0026:\n\
+	cmp r5, 0x1\n\
+	beq _080C0034\n\
+	movs r0, 0\n\
+	b _080C0040\n\
+	.align 2, 0\n\
+_080C0030: .4byte gUnknown_03005D38\n\
+_080C0034:\n\
+	ldr r0, _080C0048 @ =gUnknown_03000722\n\
+	ldrb r1, [r0]\n\
+	adds r0, r6, 0\n\
+	bl sub_80BF55C\n\
+	movs r0, 0x1\n\
+_080C0040:\n\
+	add sp, 0x4\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_080C0048: .4byte gUnknown_03000722\n\
+.syntax divided\n");
+}
+#endif
 
 asm(".section .dotvshow\n");
 
