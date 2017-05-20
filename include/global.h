@@ -194,9 +194,12 @@ struct EasyChatPair
 struct TVShowCommon {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
-	/*0x02*/ u8 pad02[28];
-	/*0x20*/ u8 srcTrainerId2Lo;
-	/*0x21*/ u8 srcTrainerId2Hi;
+	/*0x02*/ u8 pad02[20];
+	/*0x16*/ u16 var16[3];
+	/*0x1C*/ u8 srcTrainerId3Lo;
+	/*0x1D*/ u8 srcTrainerId3Hi;
+	/*0x1E*/ u8 srcTrainerId2Lo;
+	/*0x1F*/ u8 srcTrainerId2Hi;
 	/*0x20*/ u8 srcTrainerIdLo;
 	/*0x21*/ u8 srcTrainerIdHi;
 	/*0x22*/ u8 trainerIdLo;

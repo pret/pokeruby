@@ -1613,63 +1613,6 @@ _080BE474: .4byte gSaveBlock2
 
     .section .text_80BE8EC
 
-	thumb_func_start sub_80C0134
-sub_80C0134: @ 80C0134
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	adds r4, r1, 0
-	lsls r0, r2, 24
-	lsrs r0, 24
-	bl GetLinkPlayerTrainerId
-	adds r5, r0, 0
-	movs r2, 0xFF
-	ands r0, r2
-	adds r1, r4, 0
-	adds r1, 0x22
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080C0164
-	lsrs r0, r5, 8
-	ands r0, r2
-	adds r1, r4, 0
-	adds r1, 0x23
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080C0164
-	movs r0, 0
-	b _080C0196
-_080C0164:
-	adds r1, r4, 0
-	adds r1, 0x20
-	ldrb r0, [r1]
-	adds r2, r4, 0
-	adds r2, 0x22
-	strb r0, [r2]
-	adds r3, r4, 0
-	adds r3, 0x21
-	ldrb r0, [r3]
-	adds r2, 0x1
-	strb r0, [r2]
-	strb r5, [r1]
-	lsrs r0, r5, 8
-	strb r0, [r3]
-	adds r1, r6, 0
-	adds r0, r4, 0
-	ldm r0!, {r2-r4}
-	stm r1!, {r2-r4}
-	ldm r0!, {r2-r4}
-	stm r1!, {r2-r4}
-	ldm r0!, {r2-r4}
-	stm r1!, {r2-r4}
-	movs r0, 0x1
-	strb r0, [r6, 0x1]
-	strh r0, [r6, 0x16]
-_080C0196:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C0134
-
 	thumb_func_start sub_80C019C
 sub_80C019C: @ 80C019C
 	push {lr}
