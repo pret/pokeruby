@@ -1610,52 +1610,7 @@ _080BE470: .4byte gMapHeader
 _080BE474: .4byte gSaveBlock2
 	thumb_func_end sub_80BE3BC
 
-
     .section .text_80BE8EC
-	thumb_func_start sub_80C0408
-sub_80C0408: @ 80C0408
-	push {r4-r6,lr}
-	ldr r0, _080C044C @ =0x00000804
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080C0444
-	movs r2, 0
-	ldr r6, _080C0450 @ =gSaveBlock1
-	ldr r4, _080C0454 @ =0x00002739
-	movs r3, 0
-	ldr r5, _080C0458 @ =0x00002738
-_080C0422:
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0, r6
-	adds r0, r1, r5
-	ldrb r0, [r0]
-	cmp r0, 0x7
-	beq _080C0436
-	cmp r0, 0x29
-	bne _080C043A
-_080C0436:
-	adds r0, r1, r4
-	strb r3, [r0]
-_080C043A:
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0x17
-	bls _080C0422
-_080C0444:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C044C: .4byte 0x00000804
-_080C0450: .4byte gSaveBlock1
-_080C0454: .4byte 0x00002739
-_080C0458: .4byte 0x00002738
-	thumb_func_end sub_80C0408
 
 	thumb_func_start sub_80C045C
 sub_80C045C: @ 80C045C

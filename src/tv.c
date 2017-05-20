@@ -1942,6 +1942,65 @@ void sub_80C03C8(u16 species, u8 showidx) {
     }
 }
 
+#ifdef NONMATCHING
+void sub_80C0408(void) {
+    u16 i;
+    if (FlagGet(SYS_GAME_CLEAR) != 1) {
+        for (i=0; i<24; i++) {
+            if (gSaveBlock1.tvShows.shows[i].common.var00 == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE || gSaveBlock1.tvShows.shows[i].common.var00 == TVSHOW_MASS_OUTBREAK) {
+                gSaveBlock1.tvShows.shows[i].common.var01 = 0;
+            }
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80C0408(void) {
+    asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	ldr r0, _080C044C @ =0x00000804\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	beq _080C0444\n\
+	movs r2, 0\n\
+	ldr r6, _080C0450 @ =gSaveBlock1\n\
+	ldr r4, _080C0454 @ =0x00002739\n\
+	movs r3, 0\n\
+	ldr r5, _080C0458 @ =0x00002738\n\
+_080C0422:\n\
+	lsls r0, r2, 3\n\
+	adds r0, r2\n\
+	lsls r0, 2\n\
+	adds r1, r0, r6\n\
+	adds r0, r1, r5\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x7\n\
+	beq _080C0436\n\
+	cmp r0, 0x29\n\
+	bne _080C043A\n\
+_080C0436:\n\
+	adds r0, r1, r4\n\
+	strb r3, [r0]\n\
+_080C043A:\n\
+	adds r0, r2, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 16\n\
+	cmp r2, 0x17\n\
+	bls _080C0422\n\
+_080C0444:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080C044C: .4byte 0x00000804\n\
+_080C0450: .4byte gSaveBlock1\n\
+_080C0454: .4byte 0x00002739\n\
+_080C0458: .4byte 0x00002738\n\
+.syntax divided\n");
+}
+#endif
 
 asm(".section .dotvshow\n");
 
