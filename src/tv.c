@@ -34,6 +34,7 @@ struct OutbreakPokemon
 };
 
 extern u8 *gUnknown_083D1464[3];
+extern u8 gUnknown_02038694;
 
 struct TVSaleItem {
     u16 item_id;
@@ -100,9 +101,24 @@ extern void sub_80BE138(TVShow *);
 bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
 extern u16 sub_8135D3C(u8);
+extern u8 gScriptContestCategory;
+extern u8 gScriptContestRank;
 
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
+
+void sub_80BE284(u8 a0) {
+    TVShow *show;
+    show = &gSaveBlock1.tvShows.unknown_2A98;
+    gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows.shows);
+    if (gUnknown_03005D38.var0 != -1) {
+        show->bravoTrainer.var13_5 = a0;
+        show->bravoTrainer.contestCategory = gScriptContestCategory;
+        show->bravoTrainer.contestRank = gScriptContestRank;
+        show->bravoTrainer.species = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_SPECIES, NULL);
+        GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
+    }
+}
 
 void sub_80BE320(void) {
     TVShow *show;
@@ -463,11 +479,11 @@ void sub_80BEA88(void);
 
 void sub_80BEA5C(u16 arg0)
 {
-    struct UnknownSaveStruct2A98 *unk_2a98;
+    TVShow *unk_2a98;
     unk_2a98 = &gSaveBlock1.tvShows.unknown_2A98;
-    if (unk_2a98->var00 == TVSHOW_WORLD_OF_MASTERS)
+    if (unk_2a98->common.var00 == TVSHOW_WORLD_OF_MASTERS)
     {
-        if (unk_2a98->var02 <= 0x13)
+        if (unk_2a98->worldOfMasters.var02 < 20)
         {
             sub_80BF55C(gSaveBlock1.tvShows.shows, 0x18);
         }
@@ -479,7 +495,7 @@ void sub_80BEA5C(u16 arg0)
 }
 void sub_80BEA88(void)
 {
-    struct UnknownSaveStruct2A98 *unk_2a98;
+    TVShow *unk_2a98;
     TVShow *tvShow;
     u8 rval;
     unk_2a98 = &gSaveBlock1.tvShows.unknown_2A98;
@@ -492,11 +508,11 @@ void sub_80BEA88(void)
             tvShow = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
             tvShow->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
             tvShow->worldOfMasters.var01 = rval;
-            tvShow->worldOfMasters.var02 = unk_2a98->var02;
-            tvShow->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->var06;
-            tvShow->worldOfMasters.var04 = unk_2a98->var04;
-            tvShow->worldOfMasters.var08 = unk_2a98->var08;
-            tvShow->worldOfMasters.var0a = unk_2a98->var0a;
+            tvShow->worldOfMasters.var02 = unk_2a98->worldOfMasters.var02;
+            tvShow->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS) - unk_2a98->worldOfMasters.var06;
+            tvShow->worldOfMasters.var04 = unk_2a98->worldOfMasters.var04;
+            tvShow->worldOfMasters.var08 = unk_2a98->worldOfMasters.var08;
+            tvShow->worldOfMasters.var0a = unk_2a98->worldOfMasters.var0a;
             StringCopy(tvShow->worldOfMasters.playerName, gSaveBlock2.playerName);
             sub_80BE138(tvShow);
             tvShow->worldOfMasters.language = GAME_LANGUAGE;

@@ -338,9 +338,13 @@ struct TVShowBravoTrainerPokemonProfiles {
 	/*0x00*/ u8 var00;
 	/*0x01*/ u8 var01;
 	/*0x02*/ u16 species;
-	/*0x04*/ u8 pad04[15];
+	/*0x04*/ u8 pad04[4];
+	/*0x08*/ u8 pokemonNickname[11];
 	/*0x13*/ u8 contestCategory:3;
-	/*0x13*/ u8 var13_3:5;
+	/*0x13*/ u8 contestRank:2;
+	/*0x13*/ u8 var13_5:2;
+	/*0x13*/ u8 var13_7:1;
+	/*0x14*/
 };
 
 struct TVShowBravoTrainerBattleTowerSpotlight {
@@ -431,20 +435,9 @@ typedef union SB_Struct {
 } SB_Struct;
 // size is 0x198
 
-struct UnknownSaveStruct2A98 {
-    u8 var00;
-    u8 var01;
-    u16 var02;
-    u16 var04;
-    u16 var06;
-    u16 var08;
-    u8 var0a;
-    u8 pad0b[25];
-};
-
 struct SaveTVStruct {
     TVShow shows[24];
-    struct UnknownSaveStruct2A98 unknown_2A98;
+	TVShow unknown_2A98;
 };
 
 struct UnknownSaveStruct2ABC {
