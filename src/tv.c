@@ -2002,6 +2002,15 @@ _080C0458: .4byte 0x00002738\n\
 }
 #endif
 
+void sub_80C045C(void) {
+    u8 i;
+    for (i=0; i<5; i++) {
+        if (sub_80BFB54(gSaveBlock1.tvShows.shows[i].common.var00) == 2) {
+            gSaveBlock1.tvShows.shows[i].common.var01 = 0;
+        }
+    }
+}
+
 asm(".section .dotvshow\n");
 
 void DoTVShowPokemonFanClubLetter(void);
