@@ -784,17 +784,17 @@ void sub_813ABE8(u8 taskId)
 
             switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
             {
-                case 0:
-                case 1:
-                case 3:
-                    sub_813AB64((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
-                    break;
-                case 4:
-                    sub_813AB90((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
-                    break;
-                case 2:
-                    sub_813ABAC((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
-                    break;
+            case 0:
+            case 1:
+            case 3:
+                sub_813AB64((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                break;
+            case 4:
+                sub_813AB90((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                break;
+            case 2:
+                sub_813ABAC((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                break;
             }
         }
         else
@@ -809,15 +809,15 @@ beforeLabel:
 
     switch(data[1])
     {
-        default:
-            CreateVerticalScrollIndicators(0, 0xB8, 8);
-            break;
+    default:
+        CreateVerticalScrollIndicators(0, 0xB8, 8);
+        break;
 weirdCase:
-            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
-            goto beforeLabel;
-        case 0:
-            DestroyVerticalScrollIndicator(0);
-            break;
+        sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
+        goto beforeLabel;
+    case 0:
+        DestroyVerticalScrollIndicator(0);
+        break;
     }
 
     if(data[1] + data[4] <= data[2])

@@ -169,28 +169,28 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 {
                     switch (j)
                     {
-                        case 2:
-                            if (val & 0x10)
-                                val &= 0xEF;
-                        case 0:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 1:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 3:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 7:
-                            if (i == effectByte)
-                                return 0;
-                            break;
+                    case 2:
+                        if (val & 0x10)
+                            val &= 0xEF;
+                    case 0:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 1:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 3:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 7:
+                        if (i == effectByte)
+                            return 0;
+                        break;
                     }
                 }
                 j++;
@@ -208,21 +208,21 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 {
                     switch (j)
                     {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 7:
-                            if (i == effectByte)
-                                return 0;
-                            break;
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 7:
+                        if (i == effectByte)
+                            return 0;
+                        break;
                     }
                 }
                 j++;
@@ -1153,26 +1153,26 @@ u16 sub_8040728(void)
     {
         switch (gTrainers[gTrainerBattleOpponent].trainerClass)
         {
-            case 2:
-            case 0x31:
-                return BGM_BATTLE30;
-            case 3:
-            case 4:
-            case 0x32:
-            case 0x33:
-                return BGM_BATTLE31;
-            case 0x19:
-                return BGM_BATTLE32;
-            case 0x20:
-                return BGM_BATTLE33;
-            case 0x2E:
-                if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
-                    return BGM_BATTLE20;
-                return BGM_BATTLE35;
-            case 0x18:
-                return BGM_BATTLE38;
-            default:
+        case 2:
+        case 0x31:
+            return BGM_BATTLE30;
+        case 3:
+        case 4:
+        case 0x32:
+        case 0x33:
+            return BGM_BATTLE31;
+        case 0x19:
+            return BGM_BATTLE32;
+        case 0x20:
+            return BGM_BATTLE33;
+        case 0x2E:
+            if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
                 return BGM_BATTLE20;
+            return BGM_BATTLE35;
+        case 0x18:
+            return BGM_BATTLE38;
+        default:
+            return BGM_BATTLE20;
         }
     }
     return BGM_BATTLE27;

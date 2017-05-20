@@ -2562,39 +2562,39 @@ void sub_8012324(void)
         r5 = battle_get_per_side_status(gUnknown_02024A60);
         switch (gUnknown_02024D1E[gUnknown_02024A60])
         {
-            case 0:
-                ewram[0x016068 + gUnknown_02024A60] = 6;
-                if (!(gBattleTypeFlags & 0x40)
-                 && (r5 & 2)
-                 && !(ewram160A6 & gBitTable[battle_get_side_with_given_state(r5 ^ 2)])
-                 && gUnknown_02024D1E[battle_get_side_with_given_state(r5)] != 4)
-                    break;
-                //_080123F8
-                if (ewram160A6 & gBitTable[gUnknown_02024A60])
-                {
-                    gUnknown_02024C18[gUnknown_02024A60] = 13;
-                    if (!(gBattleTypeFlags & 0x40))
-                        gUnknown_02024D1E[gUnknown_02024A60] = 4;
-                    //_08012454
-                    else
-                        gUnknown_02024D1E[gUnknown_02024A60] = 3;
-                    break;
-                }
-                //_08012468
-                if ((gBattleMons[gUnknown_02024A60].status2 & 0x1000)
-                 || (gBattleMons[gUnknown_02024A60].status2 & 0x10000000))
-                {
-                    gUnknown_02024C18[gUnknown_02024A60] = 0;
-                    gUnknown_02024D1E[gUnknown_02024A60] = 3;
-                }
-                else
-                {
-                    dp01_build_cmdbuf_x12_a_bb(0, gUnknown_02024C18[0], gUnknown_02024260[0][1] | (gUnknown_02024260[0][2] << 8));
-                    dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
-                    gUnknown_02024D1E[gUnknown_02024A60]++;
-                }
+        case 0:
+            ewram[0x016068 + gUnknown_02024A60] = 6;
+            if (!(gBattleTypeFlags & 0x40)
+             && (r5 & 2)
+             && !(ewram160A6 & gBitTable[battle_get_side_with_given_state(r5 ^ 2)])
+             && gUnknown_02024D1E[battle_get_side_with_given_state(r5)] != 4)
                 break;
-            case 1:
+            //_080123F8
+            if (ewram160A6 & gBitTable[gUnknown_02024A60])
+            {
+                gUnknown_02024C18[gUnknown_02024A60] = 13;
+                if (!(gBattleTypeFlags & 0x40))
+                    gUnknown_02024D1E[gUnknown_02024A60] = 4;
+                //_08012454
+                else
+                    gUnknown_02024D1E[gUnknown_02024A60] = 3;
+                break;
+            }
+            //_08012468
+            if ((gBattleMons[gUnknown_02024A60].status2 & 0x1000)
+             || (gBattleMons[gUnknown_02024A60].status2 & 0x10000000))
+            {
+                gUnknown_02024C18[gUnknown_02024A60] = 0;
+                gUnknown_02024D1E[gUnknown_02024A60] = 3;
+            }
+            else
+            {
+                dp01_build_cmdbuf_x12_a_bb(0, gUnknown_02024C18[0], gUnknown_02024260[0][1] | (gUnknown_02024260[0][2] << 8));
+                dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
+                gUnknown_02024D1E[gUnknown_02024A60]++;
+            }
+            break;
+        case 1:
         }
     }
 }
