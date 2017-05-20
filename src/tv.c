@@ -1424,202 +1424,209 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
 
 extern u8 gUnknown_03000720;
 extern s8 gUnknown_03000722;
-s8 sub_80C019C(struct SaveTVStruct *tvStruct);
-extern u8 sub_80BFF68(struct SaveTVStruct *tv1, struct SaveTVStruct *tv2, u8 idx);
+s8 sub_80C019C(TVShow tvShows[]);
+extern u8 sub_80BFF68(struct SaveTVStruct ** tv1, struct SaveTVStruct ** tv2, u8 idx);
 
-#ifdef NONMATCHING
+// #ifdef NONMATCHING
 void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
 {
-    struct SaveTVStruct ** argslist[4] = {&arg0, &arg1, &arg2, &arg3};
-    u8 i;
-    u8 j;
+    u8 i, j;
+    struct SaveTVStruct ** argslist[4];
+    argslist[0] = &arg0;
+    argslist[1] = &arg1;
+    argslist[2] = &arg2;
+    argslist[3] = &arg3;
     gUnknown_03000720 = GetLinkPlayerCount();
-    for (i=0; i < gUnknown_03000720; i++) {
-        while (gUnknown_03000720 > 0);
-        if (i == 0)
-            gUnknown_020387E4 = 0;
-        gUnknown_03000722 = sub_80C019C(*(argslist[i]));
-        if (gUnknown_03000722 == -1) {
-            gUnknown_020387E4++;
-            if (gUnknown_020387E4 == gUnknown_03000720)
-                return;
-        } else {
-            for (j=0; j<gUnknown_03000720-1; j++) {
-                gUnknown_03005D38.var0 = sub_80BF74C(*(argslist[(j + 1) % gUnknown_03000720])->shows);
-                if (gUnknown_03005D38.var0 != -1 && sub_80BFF68(*(argslist[(i + 1) % gUnknown_03000720]), *(argslist[(i + 1)]), (i + 1) % gUnknown_03000720) == 1) {
-                    break;
+    while (1) {
+        for (i=0; i<gUnknown_03000720; i++) {
+            if (i == 0)
+                gUnknown_020387E4 = i;
+            gUnknown_03000722 = sub_80C019C(argslist[i][0]->shows);
+            if (gUnknown_03000722 == -1) {
+                gUnknown_020387E4++;
+                if (gUnknown_020387E4 == gUnknown_03000720)
+                    return;
+            } else {
+                for (j=0; j<gUnknown_03000720-1; j++) {
+                    gUnknown_03005D38.var0 = sub_80BF74C(argslist[(i + j + 1) % gUnknown_03000720][0]->shows);
+                    if (gUnknown_03005D38.var0 != -1 && sub_80BFF68(argslist[(i + j + 1) % gUnknown_03000720], argslist[i], (i + j + 1) % gUnknown_03000720) == 1) {
+                        break;
+                    }
+                }
+                if (j == gUnknown_03000720 - 1) {
+                    sub_80BF55C(argslist[i][0]->shows, gUnknown_03000722);
                 }
             }
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x20\n\
-	str r0, [sp, 0x10]\n\
-	str r1, [sp, 0x14]\n\
-	str r2, [sp, 0x18]\n\
-	str r3, [sp, 0x1C]\n\
-	add r0, sp, 0x10\n\
-	str r0, [sp]\n\
-	add r0, sp, 0x14\n\
-	str r0, [sp, 0x4]\n\
-	add r0, sp, 0x18\n\
-	str r0, [sp, 0x8]\n\
-	add r0, sp, 0x1C\n\
-	str r0, [sp, 0xC]\n\
-	bl GetLinkPlayerCount\n\
-	ldr r1, _080BFEA0 @ =gUnknown_03000720\n\
-	strb r0, [r1]\n\
-_080BFE50:\n\
-	movs r6, 0\n\
-	ldr r0, _080BFEA0 @ =gUnknown_03000720\n\
-	ldrb r1, [r0]\n\
-	cmp r6, r1\n\
-	bcs _080BFE50\n\
-	mov r10, r0\n\
-_080BFE5C:\n\
-	cmp r6, 0\n\
-	bne _080BFE64\n\
-	ldr r2, _080BFEA4 @ =gUnknown_020387E4\n\
-	strb r6, [r2]\n\
-_080BFE64:\n\
-	lsls r4, r6, 2\n\
-	mov r3, sp\n\
-	adds r0, r3, r4\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0]\n\
-	bl sub_80C019C\n\
-	ldr r1, _080BFEA8 @ =gUnknown_03000722\n\
-	strb r0, [r1]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	adds r7, r4, 0\n\
-	cmp r0, r1\n\
-	bne _080BFEAC\n\
-	ldr r1, _080BFEA4 @ =gUnknown_020387E4\n\
-	ldrb r0, [r1]\n\
-	adds r0, 0x1\n\
-	strb r0, [r1]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r2, r10\n\
-	ldrb r2, [r2]\n\
-	cmp r0, r2\n\
-	beq _080BFF58\n\
-	adds r6, 0x1\n\
-	mov r9, r6\n\
-	b _080BFF3C\n\
-	.align 2, 0\n\
-_080BFEA0: .4byte gUnknown_03000720\n\
-_080BFEA4: .4byte gUnknown_020387E4\n\
-_080BFEA8: .4byte gUnknown_03000722\n\
-_080BFEAC:\n\
-	movs r5, 0\n\
-	mov r3, r10\n\
-	ldrb r0, [r3]\n\
-	subs r0, 0x1\n\
-	adds r2, r6, 0x1\n\
-	mov r9, r2\n\
-	cmp r5, r0\n\
-	bge _080BFF22\n\
-	ldr r3, _080BFF4C @ =gUnknown_03000720\n\
-	mov r8, r3\n\
-_080BFEC0:\n\
-	adds r0, r6, r5\n\
-	adds r4, r0, 0x1\n\
-	mov r0, r8\n\
-	ldrb r1, [r0]\n\
-	adds r0, r4, 0\n\
-	bl __modsi3\n\
-	lsls r0, 2\n\
-	add r0, sp\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0]\n\
-	bl sub_80BF74C\n\
-	ldr r1, _080BFF50 @ =gUnknown_03005D38\n\
-	strb r0, [r1]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	beq _080BFF12\n\
-	mov r2, r8\n\
-	ldrb r1, [r2]\n\
-	adds r0, r4, 0\n\
-	bl __modsi3\n\
-	adds r2, r0, 0\n\
-	lsls r0, r2, 2\n\
-	add r0, sp\n\
-	ldr r0, [r0]\n\
-	mov r3, sp\n\
-	adds r1, r3, r7\n\
-	ldr r1, [r1]\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	bl sub_80BFF68\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _080BFF22\n\
-_080BFF12:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	mov r1, r8\n\
-	ldrb r0, [r1]\n\
-	subs r0, 0x1\n\
-	cmp r5, r0\n\
-	blt _080BFEC0\n\
-_080BFF22:\n\
-	mov r2, r10\n\
-	ldrb r0, [r2]\n\
-	subs r0, 0x1\n\
-	cmp r5, r0\n\
-	bne _080BFF3C\n\
-	mov r3, sp\n\
-	adds r0, r3, r7\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0]\n\
-	ldr r1, _080BFF54 @ =gUnknown_03000722\n\
-	ldrb r1, [r1]\n\
-	bl sub_80BF55C\n\
-_080BFF3C:\n\
-	mov r1, r9\n\
-	lsls r0, r1, 24\n\
-	lsrs r6, r0, 24\n\
-	mov r2, r10\n\
-	ldrb r2, [r2]\n\
-	cmp r6, r2\n\
-	bcc _080BFE5C\n\
-	b _080BFE50\n\
-	.align 2, 0\n\
-_080BFF4C: .4byte gUnknown_03000720\n\
-_080BFF50: .4byte gUnknown_03005D38\n\
-_080BFF54: .4byte gUnknown_03000722\n\
-_080BFF58:\n\
-	add sp, 0x20\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-.syntax divided\n");
-}
-#endif
+// #else
+// __attribute__((naked))
+// void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
+// {
+    // asm(".syntax unified\n\
+	// push {r4-r7,lr}\n\
+	// mov r7, r10\n\
+	// mov r6, r9\n\
+	// mov r5, r8\n\
+	// push {r5-r7}\n\
+	// sub sp, 0x20\n\
+	// str r0, [sp, 0x10]\n\
+	// str r1, [sp, 0x14]\n\
+	// str r2, [sp, 0x18]\n\
+	// str r3, [sp, 0x1C]\n\
+	// add r0, sp, 0x10\n\
+	// str r0, [sp]\n\
+	// add r0, sp, 0x14\n\
+	// str r0, [sp, 0x4]\n\
+	// add r0, sp, 0x18\n\
+	// str r0, [sp, 0x8]\n\
+	// add r0, sp, 0x1C\n\
+	// str r0, [sp, 0xC]\n\
+	// bl GetLinkPlayerCount\n\
+	// ldr r1, _080BFEA0 @ =gUnknown_03000720\n\
+	// strb r0, [r1]\n\
+// _080BFE50:\n\
+	// movs r6, 0\n\
+	// ldr r0, _080BFEA0 @ =gUnknown_03000720\n\
+	// ldrb r1, [r0]\n\
+	// cmp r6, r1\n\
+	// bcs _080BFE50\n\
+	// mov r10, r0\n\
+// _080BFE5C:\n\
+	// cmp r6, 0\n\
+	// bne _080BFE64\n\
+	// ldr r2, _080BFEA4 @ =gUnknown_020387E4\n\
+	// strb r6, [r2]\n\
+// _080BFE64:\n\
+	// lsls r4, r6, 2\n\
+	// mov r3, sp\n\
+	// adds r0, r3, r4\n\
+	// ldr r0, [r0]\n\
+	// ldr r0, [r0]\n\
+	// bl sub_80C019C\n\
+	// ldr r1, _080BFEA8 @ =gUnknown_03000722\n\
+	// strb r0, [r1]\n\
+	// lsls r0, 24\n\
+	// asrs r0, 24\n\
+	// movs r1, 0x1\n\
+	// negs r1, r1\n\
+	// adds r7, r4, 0\n\
+	// cmp r0, r1\n\
+	// bne _080BFEAC\n\
+	// ldr r1, _080BFEA4 @ =gUnknown_020387E4\n\
+	// ldrb r0, [r1]\n\
+	// adds r0, 0x1\n\
+	// strb r0, [r1]\n\
+	// lsls r0, 24\n\
+	// lsrs r0, 24\n\
+	// mov r2, r10\n\
+	// ldrb r2, [r2]\n\
+	// cmp r0, r2\n\
+	// beq _080BFF58\n\
+	// adds r6, 0x1\n\
+	// mov r9, r6\n\
+	// b _080BFF3C\n\
+	// .align 2, 0\n\
+// _080BFEA0: .4byte gUnknown_03000720\n\
+// _080BFEA4: .4byte gUnknown_020387E4\n\
+// _080BFEA8: .4byte gUnknown_03000722\n\
+// _080BFEAC:\n\
+	// movs r5, 0\n\
+	// mov r3, r10\n\
+	// ldrb r0, [r3]\n\
+	// subs r0, 0x1\n\
+	// adds r2, r6, 0x1\n\
+	// mov r9, r2\n\
+	// cmp r5, r0\n\
+	// bge _080BFF22\n\
+	// ldr r3, _080BFF4C @ =gUnknown_03000720\n\
+	// mov r8, r3\n\
+// _080BFEC0:\n\
+	// adds r0, r6, r5\n\
+	// adds r4, r0, 0x1\n\
+	// mov r0, r8\n\
+	// ldrb r1, [r0]\n\
+	// adds r0, r4, 0\n\
+	// bl __modsi3\n\
+	// lsls r0, 2\n\
+	// add r0, sp\n\
+	// ldr r0, [r0]\n\
+	// ldr r0, [r0]\n\
+	// bl sub_80BF74C\n\
+	// ldr r1, _080BFF50 @ =gUnknown_03005D38\n\
+	// strb r0, [r1]\n\
+	// lsls r0, 24\n\
+	// asrs r0, 24\n\
+	// movs r1, 0x1\n\
+	// negs r1, r1\n\
+	// cmp r0, r1\n\
+	// beq _080BFF12\n\
+	// mov r2, r8\n\
+	// ldrb r1, [r2]\n\
+	// adds r0, r4, 0\n\
+	// bl __modsi3\n\
+	// adds r2, r0, 0\n\
+	// lsls r0, r2, 2\n\
+	// add r0, sp\n\
+	// ldr r0, [r0]\n\
+	// mov r3, sp\n\
+	// adds r1, r3, r7\n\
+	// ldr r1, [r1]\n\
+	// lsls r2, 24\n\
+	// lsrs r2, 24\n\
+	// bl sub_80BFF68\n\
+	// lsls r0, 24\n\
+	// lsrs r0, 24\n\
+	// cmp r0, 0x1\n\
+	// beq _080BFF22\n\
+// _080BFF12:\n\
+	// adds r0, r5, 0x1\n\
+	// lsls r0, 24\n\
+	// lsrs r5, r0, 24\n\
+	// mov r1, r8\n\
+	// ldrb r0, [r1]\n\
+	// subs r0, 0x1\n\
+	// cmp r5, r0\n\
+	// blt _080BFEC0\n\
+// _080BFF22:\n\
+	// mov r2, r10\n\
+	// ldrb r0, [r2]\n\
+	// subs r0, 0x1\n\
+	// cmp r5, r0\n\
+	// bne _080BFF3C\n\
+	// mov r3, sp\n\
+	// adds r0, r3, r7\n\
+	// ldr r0, [r0]\n\
+	// ldr r0, [r0]\n\
+	// ldr r1, _080BFF54 @ =gUnknown_03000722\n\
+	// ldrb r1, [r1]\n\
+	// bl sub_80BF55C\n\
+// _080BFF3C:\n\
+	// mov r1, r9\n\
+	// lsls r0, r1, 24\n\
+	// lsrs r6, r0, 24\n\
+	// mov r2, r10\n\
+	// ldrb r2, [r2]\n\
+	// cmp r6, r2\n\
+	// bcc _080BFE5C\n\
+	// b _080BFE50\n\
+	// .align 2, 0\n\
+// _080BFF4C: .4byte gUnknown_03000720\n\
+// _080BFF50: .4byte gUnknown_03005D38\n\
+// _080BFF54: .4byte gUnknown_03000722\n\
+// _080BFF58:\n\
+	// add sp, 0x20\n\
+	// pop {r3-r5}\n\
+	// mov r8, r3\n\
+	// mov r9, r4\n\
+	// mov r10, r5\n\
+	// pop {r4-r7}\n\
+	// pop {r0}\n\
+	// bx r0\n\
+// .syntax divided\n");
+// }
+// #endif
 
 asm(".section .dotvshow\n");
 
