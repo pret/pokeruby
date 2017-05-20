@@ -448,26 +448,26 @@ static void Task_StarterChoose5(u8 taskId)
 
     switch (ProcessMenuInputNoWrap_())
     {
-        case 0:  // YES
-            //Return the starter choice and exit.
-            gScriptResult = gTasks[taskId].tStarterSelection;
-            SetMainCallback2(gMain.savedCallback);
-            break;
-        case 1:  // NO
-        case -1: // B button
-            PlaySE(SE_SELECT);
-            MenuZeroFillWindowRect(21, 7, 27, 12);
+    case 0:  // YES
+        //Return the starter choice and exit.
+        gScriptResult = gTasks[taskId].tStarterSelection;
+        SetMainCallback2(gMain.savedCallback);
+        break;
+    case 1:  // NO
+    case -1: // B button
+        PlaySE(SE_SELECT);
+        MenuZeroFillWindowRect(21, 7, 27, 12);
 
-            spriteId = gTasks[taskId].tPkmnSpriteId;
-            FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
-            FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-            DestroySprite(&gSprites[spriteId]);
+        spriteId = gTasks[taskId].tPkmnSpriteId;
+        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
+        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+        DestroySprite(&gSprites[spriteId]);
 
-            spriteId = gTasks[taskId].tCircleSpriteId;
-            FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-            DestroySprite(&gSprites[spriteId]);
-            gTasks[taskId].func = Task_StarterChoose6;
-            break;
+        spriteId = gTasks[taskId].tCircleSpriteId;
+        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+        DestroySprite(&gSprites[spriteId]);
+        gTasks[taskId].func = Task_StarterChoose6;
+        break;
     }
 }
 

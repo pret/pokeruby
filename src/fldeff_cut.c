@@ -160,37 +160,37 @@ void sub_80A27A8(s16 x, s16 y)
 
     switch(metatileId)
     {
-        case 0x208:
-        case 0x15:
-        case 0xD:
-            MapGridSetMetatileIdAt(x, y, 0x1);
-            break;
-        case 0x1C6:
-            MapGridSetMetatileIdAt(x, y, 0x1CE);
-            break;
-        case 0x1C7:
-            MapGridSetMetatileIdAt(x, y, 0x1CF);
-            break;
-        case 0x281:
-            MapGridSetMetatileIdAt(x, y, 0x279);
-            break;
-        case 0x282:
-            MapGridSetMetatileIdAt(x, y, 0x27A);
-            break;
-        case 0x283:
-            MapGridSetMetatileIdAt(x, y, 0x27B);
-            break;
-        case 0x206:
-        case 0x207:
-            MapGridSetMetatileIdAt(x, y, 0x271);
-            break;
-        case 0x212:
-        case 0x20A:
-            MapGridSetMetatileIdAt(x, y, 0x218);
-            break;
-        case 0x25:
-            MapGridSetMetatileIdAt(x, y, 0xE);
-            break;
+    case 0x208:
+    case 0x15:
+    case 0xD:
+        MapGridSetMetatileIdAt(x, y, 0x1);
+        break;
+    case 0x1C6:
+        MapGridSetMetatileIdAt(x, y, 0x1CE);
+        break;
+    case 0x1C7:
+        MapGridSetMetatileIdAt(x, y, 0x1CF);
+        break;
+    case 0x281:
+        MapGridSetMetatileIdAt(x, y, 0x279);
+        break;
+    case 0x282:
+        MapGridSetMetatileIdAt(x, y, 0x27A);
+        break;
+    case 0x283:
+        MapGridSetMetatileIdAt(x, y, 0x27B);
+        break;
+    case 0x206:
+    case 0x207:
+        MapGridSetMetatileIdAt(x, y, 0x271);
+        break;
+    case 0x212:
+    case 0x20A:
+        MapGridSetMetatileIdAt(x, y, 0x218);
+        break;
+    case 0x25:
+        MapGridSetMetatileIdAt(x, y, 0xE);
+        break;
     }
 }
 
@@ -223,18 +223,18 @@ void sub_80A28F4(s16 x, s16 y)
         {
             switch((u8)sub_80A28A0(currentXsigned, y + 1))
             {
-                case 1:
-                    MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x208);
-                    break;
-                case 2:
-                    MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x281);
-                    break;
-                case 3:
-                    MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x282);
-                    break;
-                case 4:
-                    MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x283);
-                    break;
+            case 1:
+                MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x208);
+                break;
+            case 2:
+                MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x281);
+                break;
+            case 3:
+                MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x282);
+                break;
+            case 4:
+                MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x283);
+                break;
             }
         }
         if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY) == 1)

@@ -72,32 +72,32 @@ void Task_WhiteOut(u8 taskId)
 
     switch (taskData[TD_STATE])
     {
-        case 0: //Check if Pokemon have fainted due to poison
-            while (taskData[TD_PARTY_MEMBER] < 6)
+    case 0: //Check if Pokemon have fainted due to poison
+        while (taskData[TD_PARTY_MEMBER] < 6)
+        {
+            if (CheckMonFaintedFromPoison(taskData[TD_PARTY_MEMBER]))
             {
-                if (CheckMonFaintedFromPoison(taskData[TD_PARTY_MEMBER]))
-                {
-                    MonFaintFromPoisonOnField(taskData[TD_PARTY_MEMBER]);
-                    ShowFieldMessage(fieldPoisonText_PokemonFainted);
-                    taskData[TD_STATE]++;
-                    return;
-                }
-                taskData[TD_PARTY_MEMBER]++;
+                MonFaintFromPoisonOnField(taskData[TD_PARTY_MEMBER]);
+                ShowFieldMessage(fieldPoisonText_PokemonFainted);
+                taskData[TD_STATE]++;
+                return;
             }
-            taskData[TD_STATE] = 2;
-            break;
-        case 1: //Wait for message box to disappear
-            if (IsFieldMessageBoxHidden())
-                taskData[TD_STATE]--; //Check next party member
-            break;
-        case 2: //Done checking Pokemon
-            if (AllMonsFainted())
-                gScriptResult = 1;
-            else
-                gScriptResult = 0;
-            EnableBothScriptContexts();
-            DestroyTask(taskId);
-            break;
+            taskData[TD_PARTY_MEMBER]++;
+        }
+        taskData[TD_STATE] = 2;
+        break;
+    case 1: //Wait for message box to disappear
+        if (IsFieldMessageBoxHidden())
+            taskData[TD_STATE]--; //Check next party member
+        break;
+    case 2: //Done checking Pokemon
+        if (AllMonsFainted())
+            gScriptResult = 1;
+        else
+            gScriptResult = 0;
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        break;
     }
 }
 

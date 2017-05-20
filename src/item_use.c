@@ -180,13 +180,13 @@ void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *text)
 
     switch (playerMenuStatus)
     {
-        case 0: // Item Menu
-            MenuZeroFillWindowRect(0, 13, 13, 20);
-            DisplayItemMessageOnField(var1, gStringVar4, CleanUpItemMenuMessage, 1);
-            break;
-        default: // Field
-            DisplayItemMessageOnField(var1, gStringVar4, CleanUpOverworldMessage, 0);
-            break;
+    case 0: // Item Menu
+        MenuZeroFillWindowRect(0, 13, 13, 20);
+        DisplayItemMessageOnField(var1, gStringVar4, CleanUpItemMenuMessage, 1);
+        break;
+    default: // Field
+        DisplayItemMessageOnField(var1, gStringVar4, CleanUpOverworldMessage, 0);
+        break;
     }
 }
 
@@ -439,33 +439,33 @@ bool8 sub_80C9688(struct MapConnection *connection, int x, int y)
 
     switch(connection->direction)
     {
-        // same weird temp variable behavior seen in HiddenItemAtPos
-        case 2:
-            localOffset = connection->offset + 7;
-            localX = x - localOffset;
-            localLength = mapHeader->mapData->height - 7;
-            localY = localLength + y; // additions are reversed for some reason
-            break;
-        case 1:
-            localOffset = connection->offset + 7;
-            localX = x - localOffset;
-            localLength = gMapHeader.mapData->height + 7;
-            localY = y - localLength;
-            break;
-        case 3:
-            localLength = mapHeader->mapData->width - 7;
-            localX = localLength + x; // additions are reversed for some reason
-            localOffset = connection->offset + 7;
-            localY = y - localOffset;
-            break;
-        case 4:
-            localLength = gMapHeader.mapData->width + 7;
-            localX = x - localLength;
-            localOffset = connection->offset + 7;
-            localY = y - localOffset;
-            break;
-        default:
-            return FALSE;
+    // same weird temp variable behavior seen in HiddenItemAtPos
+    case 2:
+        localOffset = connection->offset + 7;
+        localX = x - localOffset;
+        localLength = mapHeader->mapData->height - 7;
+        localY = localLength + y; // additions are reversed for some reason
+        break;
+    case 1:
+        localOffset = connection->offset + 7;
+        localX = x - localOffset;
+        localLength = gMapHeader.mapData->height + 7;
+        localY = y - localLength;
+        break;
+    case 3:
+        localLength = mapHeader->mapData->width - 7;
+        localX = localLength + x; // additions are reversed for some reason
+        localOffset = connection->offset + 7;
+        localY = y - localOffset;
+        break;
+    case 4:
+        localLength = gMapHeader.mapData->width + 7;
+        localX = x - localLength;
+        localOffset = connection->offset + 7;
+        localY = y - localOffset;
+        break;
+    default:
+        return FALSE;
     }
     return HiddenItemAtPos(mapHeader->events, localX, localY);
 }
@@ -1188,42 +1188,42 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
 {
     switch(GetItemEffectType(gScriptItemId) - 1)
     {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-            gTasks[taskId].data[15] = 1;
-            ItemUseOutOfBattle_Medicine(taskId);
-            break;
-        case 9:
-            gTasks[taskId].data[15] = 1;
-            ItemUseOutOfBattle_SacredAsh(taskId);
-            break;
-        case 0:
-            gTasks[taskId].data[15] = 1;
-            ItemUseOutOfBattle_RareCandy(taskId);
-            break;
-        case 18:
-        case 19:
-            gTasks[taskId].data[15] = 1;
-            ItemUseOutOfBattle_PPUp(taskId);
-            break;
-        case 20:
-            gTasks[taskId].data[15] = 1;
-            ItemUseOutOfBattle_PPRecovery(taskId);
-            break;
-        default:
-            gTasks[taskId].data[15] = 4;
-            ItemUseOutOfBattle_CannotUse(taskId);
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+        gTasks[taskId].data[15] = 1;
+        ItemUseOutOfBattle_Medicine(taskId);
+        break;
+    case 9:
+        gTasks[taskId].data[15] = 1;
+        ItemUseOutOfBattle_SacredAsh(taskId);
+        break;
+    case 0:
+        gTasks[taskId].data[15] = 1;
+        ItemUseOutOfBattle_RareCandy(taskId);
+        break;
+    case 18:
+    case 19:
+        gTasks[taskId].data[15] = 1;
+        ItemUseOutOfBattle_PPUp(taskId);
+        break;
+    case 20:
+        gTasks[taskId].data[15] = 1;
+        ItemUseOutOfBattle_PPRecovery(taskId);
+        break;
+    default:
+        gTasks[taskId].data[15] = 4;
+        ItemUseOutOfBattle_CannotUse(taskId);
     }
 }
 
@@ -1231,25 +1231,25 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
 {
     switch(GetItemEffectType(gScriptItemId))
     {
-        case 0:
-            ItemUseInBattle_StatIncrease(taskId);
-            break;
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 11:
-            ItemUseInBattle_Medicine(taskId);
-            break;
-        case 21:
-            ItemUseInBattle_PPRecovery(taskId);
-            break;
-        default:
-            ItemUseOutOfBattle_CannotUse(taskId);
+    case 0:
+        ItemUseInBattle_StatIncrease(taskId);
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 11:
+        ItemUseInBattle_Medicine(taskId);
+        break;
+    case 21:
+        ItemUseInBattle_PPRecovery(taskId);
+        break;
+    default:
+        ItemUseOutOfBattle_CannotUse(taskId);
     }
 }
 

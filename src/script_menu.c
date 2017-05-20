@@ -913,19 +913,19 @@ void task_picbox(u8 taskId)
 
     switch (task->data[0])
     {
-        case 0:
-            task->data[0]++;
-            break;
-        case 1:
-            break;
-        case 2:
-            FreeResourcesAndDestroySprite(&gSprites[task->data[2]]);
-            task->data[0]++;
-            break;
-        case 3:
-            MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
-            DestroyTask(taskId);
-            break;
+    case 0:
+        task->data[0]++;
+        break;
+    case 1:
+        break;
+    case 2:
+        FreeResourcesAndDestroySprite(&gSprites[task->data[2]]);
+        task->data[0]++;
+        break;
+    case 3:
+        MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
+        DestroyTask(taskId);
+        break;
     }
 }
 

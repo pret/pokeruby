@@ -237,24 +237,24 @@ void sub_80BBA48(u8 taskid)
 {
     u16 curbaseid;
     switch (gTasks[taskid].data[0]) {
-        case 0:
-            gTasks[taskid].data[0] = 1;
-            break;
-        case 1:
-            if (!gPaletteFade.active) {
-                gTasks[taskid].data[0] = 2;
-            }
-            break;
-        case 2:
-            curbaseid = VarGet(VAR_0x4054);
-            if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
-                gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
-            sub_80BBA14();
-            warp_in();
-            gUnknown_0300485C = sub_8080990;
-            SetMainCallback2(CB2_LoadMap);
-            DestroyTask(taskid);
-            break;
+    case 0:
+        gTasks[taskid].data[0] = 1;
+        break;
+    case 1:
+        if (!gPaletteFade.active) {
+            gTasks[taskid].data[0] = 2;
+        }
+        break;
+    case 2:
+        curbaseid = VarGet(VAR_0x4054);
+        if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
+            gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
+        sub_80BBA14();
+        warp_in();
+        gUnknown_0300485C = sub_8080990;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskid);
+        break;
     }
 }
 
@@ -782,23 +782,23 @@ bool8 sub_80BC050(void)
 void sub_80BC074(u8 taskid)
 {
     switch (gTasks[taskid].data[0]) {
-        case 0:
-            ScriptContext2_Enable();
-            gTasks[taskid].data[0] = 1;
-            break;
-        case 1:
-            if (!gPaletteFade.active) {
-                gTasks[taskid].data[0] = 2;
-            }
-            break;
-        case 2:
-            copy_saved_warp2_bank_and_enter_x_to_warp1(0x7E);
-            warp_in();
-            gUnknown_0300485C = mapldr_default;
-            SetMainCallback2(CB2_LoadMap);
-            ScriptContext2_Disable();
-            DestroyTask(taskid);
-            break;
+    case 0:
+        ScriptContext2_Enable();
+        gTasks[taskid].data[0] = 1;
+        break;
+    case 1:
+        if (!gPaletteFade.active) {
+            gTasks[taskid].data[0] = 2;
+        }
+        break;
+    case 2:
+        copy_saved_warp2_bank_and_enter_x_to_warp1(0x7E);
+        warp_in();
+        gUnknown_0300485C = mapldr_default;
+        SetMainCallback2(CB2_LoadMap);
+        ScriptContext2_Disable();
+        DestroyTask(taskid);
+        break;
     }
 }
 
