@@ -99,9 +99,31 @@ void ClearTVShowData(void)
 extern void sub_80BE138(TVShow *);
 bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
+extern u16 sub_8135D3C(u8);
 
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
+
+void sub_80BE320(void) {
+    TVShow *show;
+    show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+    show->bravoTrainerTower.var00 = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
+    show->bravoTrainerTower.var01 = 1;
+    StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2.playerName);
+    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2.filler_A8.filler_3DC);
+    show->bravoTrainerTower.species = gSaveBlock2.filler_A8.var_480;
+    show->bravoTrainerTower.winningMove = gSaveBlock2.filler_A8.var_482;
+    show->bravoTrainerTower.var16 = sub_8135D3C(gSaveBlock2.filler_A8.var_4D0);
+    show->bravoTrainerTower.var1c = gSaveBlock2.filler_A8.var_4AD;
+    if (gSaveBlock2.filler_A8.var_4D0 == 0) {
+        show->bravoTrainerTower.btLevel = 50;
+    } else {
+        show->bravoTrainerTower.btLevel = 100;
+    }
+    show->bravoTrainerTower.var1b = gSpecialVar_0x8004;
+    sub_80BE160(show);
+    show->bravoTrainerTower.language = GAME_LANGUAGE;
+}
 
 void sub_80BE3BC(void) {
     u8 rval;

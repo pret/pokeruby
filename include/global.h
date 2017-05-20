@@ -346,10 +346,16 @@ struct TVShowBravoTrainerPokemonProfiles {
 struct TVShowBravoTrainerBattleTowerSpotlight {
 	/*0x00*/ u8 var00;
 	/*0x01*/ u8 var01;
-	/*0x02*/ u8 pad02[8];
-	/*0x0A*/ u16 var0a;
-	/*0x0C*/ u8 pad0c[8];
-	/*0x14*/ u16 var14;
+	/*0x02*/ u8 trainerName[8];
+	/*0x0A*/ u16 species;
+	/*0x0C*/ u8 pokemonName[8];
+	/*0x14*/ u16 winningMove;
+	/*0x16*/ u16 var16;
+	/*0x18*/ u8 pad18[2];
+	/*0x1A*/ u8 btLevel;
+	/*0x1B*/ u8 var1b;
+	/*0x1C*/ u8 var1c;
+	/*0x1D*/ u8 language;
 };
 
 typedef union TVShow {
@@ -577,7 +583,11 @@ struct Pokedex
 
 struct SaveBlock2_Sub
 {
-    /*0x0000, 0x00A8*/ u8 filler_000[0x4AE];
+    /*0x0000, 0x00A4*/ u8 filler_000[0x3D8];
+	/*0x03D8, 0x0480*/ u16 var_480;
+	/*0x03DA, 0x0482*/ u16 var_482;
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD1];
+    /*0x04AD, 0x0555*/ u8 var_4AD;
     /*0x04AE, 0x0556*/ u8 var_4AE;
     /*0x04AF, 0x0557*/ u8 var_4AF;
     /*0x04B0, 0x0558*/ u16 var_4B0;
@@ -587,7 +597,9 @@ struct SaveBlock2_Sub
     /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
+    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04D0, 0x0578*/ u8 var_4D0;
+    /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
 
 struct SaveBlock2 /* 0x02024EA4 */
