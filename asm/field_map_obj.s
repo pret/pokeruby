@@ -6,63 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_805CAAC
-sub_805CAAC: @ 805CAAC
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsls r1, 16
-	lsrs r0, r1, 16
-	lsls r2, 16
-	lsls r3, 16
-	cmp r2, r3
-	ble _0805CACA
-	movs r2, 0x4
-	lsls r0, r4, 16
-	cmp r0, 0
-	bge _0805CAD4
-	movs r2, 0x3
-	b _0805CAD4
-_0805CACA:
-	movs r2, 0x1
-	lsls r0, 16
-	cmp r0, 0
-	bge _0805CAD4
-	movs r2, 0x2
-_0805CAD4:
-	adds r0, r2, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805CAAC
-
-	thumb_func_start sub_805CADC
-sub_805CADC: @ 805CADC
-	push {lr}
-	movs r0, 0x1
-	lsls r1, 16
-	cmp r1, 0
-	bge _0805CAE8
-	movs r0, 0x2
-_0805CAE8:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805CADC
-
-	thumb_func_start sub_805CAEC
-sub_805CAEC: @ 805CAEC
-	push {lr}
-	movs r1, 0x4
-	lsls r0, 16
-	cmp r0, 0
-	bge _0805CAF8
-	movs r1, 0x3
-_0805CAF8:
-	adds r0, r1, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805CAEC
-
 	thumb_func_start sub_805CB00
 sub_805CB00: @ 805CB00
 	push {r4-r7,lr}
