@@ -146,6 +146,36 @@ void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
 extern u16 gUnknown_02024C04;
 
+void sub_80BE5FC(void);
+void sub_80BE65C(void);
+void sub_80BE6A0(void);
+void nullsub_21(void);
+void sub_80BE188(void);
+void sub_80BE320(void);
+
+void sub_80BDE48(void) {
+    switch (gSpecialVar_0x8005) {
+        case TVSHOW_FAN_CLUB_LETTER:
+            sub_80BE5FC();
+            break;
+        case TVSHOW_RECENT_HAPPENINGS:
+            sub_80BE65C();
+            break;
+        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+            sub_80BE6A0();
+            break;
+        case TVSHOW_UNKN_SHOWTYPE_04:
+            nullsub_21();
+            break;
+        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+            sub_80BE188();
+            break;
+        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+            sub_80BE320();
+            break;
+    }
+}
+
 u8 sub_80BDEAC(u8 *a0) {
     u8 lang;
     lang = GAME_LANGUAGE;

@@ -845,54 +845,6 @@ _080BDE40: .4byte gSpecialVar_0x8004
 _080BDE44: .4byte gSpecialVar_0x8005
 	thumb_func_end GabbyAndTySetScriptVarsToFieldObjectLocalIds
 
-	thumb_func_start sub_80BDE48
-sub_80BDE48: @ 80BDE48
-	push {lr}
-	ldr r0, _080BDE60 @ =gSpecialVar_0x8005
-	ldrh r0, [r0]
-	subs r0, 0x1
-	cmp r0, 0x6
-	bhi _080BDEA6
-	lsls r0, 2
-	ldr r1, _080BDE64 @ =_080BDE68
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080BDE60: .4byte gSpecialVar_0x8005
-_080BDE64: .4byte _080BDE68
-	.align 2, 0
-_080BDE68:
-	.4byte _080BDE84
-	.4byte _080BDE8A
-	.4byte _080BDE90
-	.4byte _080BDE96
-	.4byte _080BDEA6
-	.4byte _080BDE9C
-	.4byte _080BDEA2
-_080BDE84:
-	bl sub_80BE5FC
-	b _080BDEA6
-_080BDE8A:
-	bl sub_80BE65C
-	b _080BDEA6
-_080BDE90:
-	bl sub_80BE6A0
-	b _080BDEA6
-_080BDE96:
-	bl nullsub_21
-	b _080BDEA6
-_080BDE9C:
-	bl sub_80BE188
-	b _080BDEA6
-_080BDEA2:
-	bl sub_80BE320
-_080BDEA6:
-	pop {r0}
-	bx r0
-	.align 2, 0
-	thumb_func_end sub_80BDE48
-
     .section .text_80BE8EC
 
 	thumb_func_start sub_80C04A0
