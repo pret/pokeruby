@@ -1601,3 +1601,44 @@ u8 sub_805C9D8(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
+u8 sub_805CA08(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+u8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
+{
+    s16 x;
+    s16 y;
+    s16 objx;
+    s16 objy;
+    s16 minx;
+    s16 maxx;
+    s16 miny;
+    s16 maxy;
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH) == 0)
+    {
+        return 0;
+    }
+    if (mapObject->trainerType != 1 && mapObject->trainerType != 3)
+    {
+        return 0;
+    }
+    PlayerGetDestCoords(&x, &y);
+    objx = mapObject->coords2.x;
+    objy = mapObject->coords2.y;
+    minx = objx - mapObject->trainerRange_berryTreeId;
+    miny = objy - mapObject->trainerRange_berryTreeId;
+    maxx = objx + mapObject->trainerRange_berryTreeId;
+    maxy = objy + mapObject->trainerRange_berryTreeId;
+    if (minx > x || maxx < x || miny > y || maxy < y)
+    {
+        return 0;
+    }
+    return 1;
+}
