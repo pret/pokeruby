@@ -1548,17 +1548,56 @@ u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-extern bool8 FieldObjectExecRegularAnim();
+extern u8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 extern const s16 gUnknown_0837520C[];
 extern void sub_8064820(struct Sprite *, s16);
 
 u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0) {
+    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0)
+    {
         return 0;
     }
     sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
     sprite->data1 = 3;
+    return 1;
+}
+
+extern u8 sub_8064824(struct Sprite *);
+
+u8 sub_805C96C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) != 0)
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+extern const u8 gUnknown_08375240[4];
+extern u8 sub_805FF20(struct MapObject *, u8);
+
+u8 sub_805C98C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375240, 4);
+    direction = directions[Random() & 3];
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 5;
+    if (sub_805FF20(mapObject, direction) != 0)
+    {
+        sprite->data1 = 1;
+    }
+    return 1;
+}
+
+u8 sub_805C9D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 6;
     return 1;
 }
 
