@@ -60,7 +60,7 @@ const IntrFunc gIntrTableTemplate[] =
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
 u16 gKeyRepeatStartDelay;
-u8 gUnknown_3001764;
+bool8 gLinkTransferringData;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
 u8 gSoftResetDisabled;
@@ -99,7 +99,7 @@ void AgbMain()
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
-    gUnknown_3001764 = 0;
+    gLinkTransferringData = FALSE;
 
     for (;;)
     {
@@ -112,13 +112,13 @@ void AgbMain()
 
         if (gLink.sendQueue.count > 1 && sub_8055910() == 1)
         {
-            gUnknown_3001764 = 1;
+            gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
-            gUnknown_3001764 = 0;
+            gLinkTransferringData = FALSE;
         }
         else
         {
-            gUnknown_3001764 = 0;
+            gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
             if (gLink.recvQueue.count > 1)
@@ -126,9 +126,9 @@ void AgbMain()
                 if (sub_80558AC() == 1)
                 {
                     gMain.newKeys = 0;
-                    gUnknown_3001764 = 1;
+                    gLinkTransferringData = TRUE;
                     UpdateLinkAndCallCallbacks();
-                    gUnknown_3001764 = 0;
+                    gLinkTransferringData = FALSE;
                 }
             }
         }
