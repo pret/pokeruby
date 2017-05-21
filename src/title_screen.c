@@ -709,7 +709,7 @@ static void CB2_GoToMainMenu(void)
 static void CB2_GoToCopyrightScreen(void)
 {
     if (!UpdatePaletteFade())
-        SetMainCallback2(CB2_InitCopyrightScreen);
+        SetMainCallback2(CB2_InitCopyrightScreenAfterTitleScreen);
 }
 
 static void CB2_GoToClearSaveDataScreen(void)

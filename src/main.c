@@ -152,7 +152,7 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(c2_copyright_1);
+    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
 }
 
 static void CallCallbacks(void)
