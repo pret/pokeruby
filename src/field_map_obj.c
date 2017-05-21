@@ -42,6 +42,7 @@ extern u8 (*const gUnknown_083752A4[])(struct MapObject *mapObject, struct Sprit
 extern u8 (*const gUnknown_083752C4[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752E4[])(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752F8[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 struct PairedPalettes
 {
@@ -2286,7 +2287,69 @@ u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-void sub_805D634(struct Sprite *sprite);
+
+u8 sub_805D658(struct MapObject *mapObject, struct Sprite *sprite);
+
+void sub_805D634(struct Sprite *sprite)
+{
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D658);
+}
+
+u8 sub_805D658(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083752F8[sprite->data1](mapObject, sprite);
+}
+
+u8 sub_805D678(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D68C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D6B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D6FC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752C0, 2);
+    direction = sub_805CD60(mapObject, 2);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
 void sub_805D774(struct Sprite *sprite);
 void sub_805D8B4(struct Sprite *sprite);
 void sub_805D9F4(struct Sprite *sprite);
