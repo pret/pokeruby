@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "berry.h"
 #include "coins.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
@@ -29,8 +30,6 @@
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
 extern void (* gUnknown_03004AE4)(u8);
-
-extern u8 gMoveNames[][13];
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;

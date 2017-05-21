@@ -2,6 +2,7 @@
 #include "battle_setup.h"
 #include "asm.h"
 #include "battle.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_control_avatar.h"
 #include "field_map_obj_helpers.h"
@@ -34,7 +35,6 @@ extern void (*gUnknown_0300485C)(void);
 
 extern struct Pokemon gEnemyParty[];
 extern struct Pokemon gPlayerParty[];
-extern struct Trainer gTrainers[];
 
 EWRAM_DATA u16 gTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;
@@ -752,7 +752,7 @@ u8 GetWildBattleTransition(void)
 
 u8 GetTrainerBattleTransition(void)
 {
-    struct Trainer *trainer;
+    const struct Trainer *trainer;
     u8 minPartyCount;
     u8 flashVar;
     u8 level;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon_size_record.h"
+#include "data2.h"
 #include "event_data.h"
 #include "species.h"
 #include "string_util.h"
@@ -17,7 +18,6 @@ struct UnknownStruct
 };
 
 extern u16 gScriptResult;
-extern u8 gSpeciesNames[][11];
 
 static const struct UnknownStruct sBigMonSizeTable[] =
 {

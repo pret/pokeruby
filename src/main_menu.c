@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main_menu.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "menu.h"
@@ -22,11 +23,6 @@
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
-struct MonCoords
-{
-    u8 x, y;
-};
-
 extern struct PaletteFadeControl gPaletteFade;
 
 extern u16 gSaveFileStatus;
@@ -43,11 +39,7 @@ extern u8 gBirchSpeech_SoItsPlayer[];
 extern u8 gBirchSpeech_AhOkayYouArePlayer[];
 extern u8 gBirchSpeech_AreYouReady[];
 
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct SpriteSheet gMonFrontPicTable[];
-extern const struct SpritePalette gMonPaletteTable[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern void * const gUnknown_081FAF4C[];
 extern u16 gUnknown_081E795C[];
 extern const struct MenuAction gUnknown_081E79B0[];
 extern const struct MenuAction gMalePresetNames[];
@@ -1400,8 +1392,8 @@ u8 CreateAzurillSprite(u8 x, u8 y)
 {
     DecompressPicFromTable_2(
         &gMonFrontPicTable[SPECIES_AZURILL],
-        gMonFrontPicCoords[SPECIES_AZURILL].x,
-        gMonFrontPicCoords[SPECIES_AZURILL].y,
+        gMonFrontPicCoords[SPECIES_AZURILL].coords,
+        gMonFrontPicCoords[SPECIES_AZURILL].y_offset,
         gUnknown_081FAF4C[0],
         gUnknown_081FAF4C[1],
         SPECIES_AZURILL);

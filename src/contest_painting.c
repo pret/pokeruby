@@ -1,6 +1,7 @@
 #include "global.h"
 #include "contest_painting.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "main.h"
 #include "menu.h"
@@ -24,11 +25,6 @@ extern struct Unk2015E00 unk_2015e00;
 extern struct Unk3000756 gUnknown_03000756;
 extern struct Unk03005E20 gUnknown_03005E20;
 extern struct ContestEntry *gUnknown_03005E8C;
-extern const struct SpriteSheet gMonFrontPicTable[];
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct SpriteSheet gMonBackPicTable[];
-extern const struct MonCoords gMonBackPicCoords[];
-extern void *gUnknown_081FAF4C[];
 
 static const u16 gPictureFramePalettes[][16] =
 {
@@ -344,13 +340,6 @@ static void VBlankCB_ContestPainting(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
-
-
-struct MonCoords
-{
-    u8 x;
-    u8 y;
-};
 
 #ifdef NONMATCHING
 static void sub_8106AC4(u16 species, u8 arg1)

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "easy_chat.h"
 #include "asm.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
@@ -22,8 +23,6 @@ static u16 sub_80EB9D8(void);
 static u16 sub_80EB960(void);
 u16 sub_80EB72C(u16);
 
-extern const u8 gSpeciesNames[][11];
-extern u8 gMoveNames[][13];
 extern void *gEasyChatGroupWords[];
 extern const u8 gEasyChatGroupSizes[];
 

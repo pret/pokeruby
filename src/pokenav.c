@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "data2.h"
 #include "string_util.h"
 
 struct UnkPokenavStruct_Sub {
@@ -17,8 +18,6 @@ struct UnkPokenavStruct {
 
 extern struct UnkPokenavStruct *gUnknown_083DFEC4;
 
-extern const struct Trainer gTrainers[];
-extern const u8 gTrainerClassNames[][13];
 
 void sub_80F700C(u8 *arg0, u16 arg1) {
     struct Trainer *trainer;

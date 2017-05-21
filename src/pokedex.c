@@ -103,7 +103,6 @@ extern u16 NationalToHoennOrder(u16);
 extern u16 gPokedexOrder_Alphabetical[];
 extern u16 gPokedexOrder_Weight[];
 extern u16 gPokedexOrder_Height[];
-extern u8 gSpeciesNames[][11];
 
 u16 NationalPokedexNumToSpecies(u16);
 
