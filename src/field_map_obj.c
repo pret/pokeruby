@@ -34,6 +34,7 @@ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 void sub_805BDF8(u16);
 u8 sub_805BE58(const struct SpritePalette *);
 u8 FindFieldObjectPaletteIndexByTag(u16);
+extern u8 (*const gUnknown_08375244[])(s16 a0, s16 a1, s16 a2, s16 a3);
 
 struct PairedPalettes
 {
@@ -1687,7 +1688,8 @@ u8 sub_805CAEC(s16 a0, s16 a1, s16 a2, s16 a3)
     return dirn;
 }
 
-u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_SOUTH)
@@ -1709,7 +1711,8 @@ u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_SOUTH)
@@ -1731,7 +1734,8 @@ u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_NORTH)
@@ -1775,7 +1779,8 @@ u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_EAST)
@@ -1785,7 +1790,8 @@ u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_WEST)
@@ -1795,7 +1801,8 @@ u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_SOUTH)
@@ -1805,7 +1812,8 @@ u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
-u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_NORTH)
@@ -1815,3 +1823,28 @@ u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3) {
     return dirn;
 }
 
+u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
+{
+    s16 x;
+    s16 y;
+    s16 x2;
+    s16 y2;
+    if (!FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        return 0;
+    }
+    PlayerGetDestCoords(&x, &y);
+    x -= mapObject->coords2.x;
+    y -= mapObject->coords2.y;
+    x2 = x;
+    y2 = y;
+    if (x2 < 0)
+    {
+        x2 = -x2;
+    }
+    if (y2 < 0)
+    {
+        y2 = -y2;
+    }
+    return gUnknown_08375244[a1](x, y, x2, y2);
+}
