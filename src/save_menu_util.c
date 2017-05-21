@@ -5,11 +5,7 @@
 #include "menu.h"
 #include "pokedex.h"
 #include "string_util.h"
-
-extern u8 gOtherText_Player[];
-extern u8 gOtherText_Badges[];
-extern u8 gOtherText_Pokedex[];
-extern u8 gOtherText_PlayTime[];
+#include "strings2.h"
 
 void HandleDrawSaveWindowInfo(s16 left, s16 top)
 {

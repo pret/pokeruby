@@ -7,12 +7,9 @@
 #include "rom4.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 gOtherText_NationalDex[];
-extern u8 gOtherText_HoennDex[];
-extern u8 gOtherText_DiplomaCertificationGameFreak[];
 
 static void VBlankCB(void);
 static void MainCB2(void);

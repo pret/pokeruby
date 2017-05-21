@@ -1,8 +1,6 @@
 #include "global.h"
 #include "menu.h"
-
-extern const u8 gOtherText_BattleResults[];
-extern const u8 gOtherText_WinLoseDraw[];
+#include "strings2.h"
 
 void PrintLinkBattleWinsLossesDraws(void *);
 

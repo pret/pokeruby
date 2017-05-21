@@ -10,18 +10,12 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 #include "text.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_02039338;
-
-extern u8 gSystemText_LinkStandby[];
-extern u8 gSystemText_LoadEventPressA[];
-extern u8 gSystemText_LoadingEvent[];
-extern u8 gSystemText_DontCutLink[];
-extern u8 gSystemText_EventLoadSuccess[];
-extern u8 gSystemText_LoadingError[];
 
 static void VBlankCB(void);
 static bool8 CheckLanguageMatch(void);

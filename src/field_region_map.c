@@ -5,6 +5,7 @@
 #include "palette.h"
 #include "sprite.h"
 #include "text.h"
+#include "strings2.h"
 
 extern void sub_80FA8EC(u32, u8);
 extern void sub_80FAB10(void);
@@ -28,8 +29,6 @@ struct UnkStruct
 };
 
 extern struct UnkStruct unk_2000000;
-
-extern u8 gOtherText_Hoenn[];
 
 void CB2_FieldInitRegionMap(void);
 void CB2_FieldRegionMap(void);
