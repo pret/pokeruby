@@ -464,9 +464,9 @@ struct GabbyAndTyData {
     u8 valB;
 };
 
-typedef struct RecordMixing_UnknownStruct {
+struct RecordMixing_UnknownStruct {
 	u8 data[0x38];
-} RecordMixing_UnknownStruct;
+};
 
 struct SaveBlock1 /* 0x02025734 */
 {
