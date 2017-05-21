@@ -43,7 +43,7 @@ struct Main
     /*0x43D*/ u8 inBattle:1;
 };
 
-extern u8 gUnknown_3001764;
+extern u8 gLinkTransferringData;
 extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
 extern bool8 gLinkVSyncDisabled;
