@@ -1,6 +1,8 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+#define VAR_0x4003                 0x4003
+#define VAR_0x401F                 0x401F
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
@@ -26,6 +28,13 @@
 
 #define VAR_BARBOACH_SIZE_RECORD   0x404F
 
-#define VAR_PORTHOLE           0x40B4
+#define VAR_0x4054                 0x4054
+
+#define VAR_0x4089                 0x4089
+#define VAR_0x4097                 0x4097
+
+#define VAR_PORTHOLE               0x40B4
+
+#define VAR_0x40BC                 0x40BC
 
 #endif // GUARD_VARS_H

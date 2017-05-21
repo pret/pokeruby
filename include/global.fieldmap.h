@@ -104,7 +104,7 @@ struct CoordEvent
 
 struct BgEvent
 {
-    s16 x, y;
+    u16 x, y;
     u8 unk4;
     u8 kind;
     // 0x2 padding for the union beginning.
@@ -119,7 +119,7 @@ struct BgEvent
         } hiddenItem;
 
         // secret base type
-        u16 secretBaseId;
+        u32 secretBaseId;
 
     } bgUnion;
 };

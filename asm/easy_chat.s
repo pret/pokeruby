@@ -11165,32 +11165,4 @@ _080EB6F4: .4byte gSaveBlock1 + 0x273A
 _080EB6F8: .4byte 0x0000ffff
 	thumb_func_end unref_sub_80EB684
 
-	thumb_func_start sub_80EB6FC
-sub_80EB6FC: @ 80EB6FC
-	push {lr}
-	adds r2, r0, 0
-	lsls r1, 16
-	ldr r0, _080EB724 @ =0xffff0000
-	adds r1, r0
-	lsrs r0, r1, 16
-	ldr r1, _080EB728 @ =0x0000ffff
-	cmp r0, r1
-	beq _080EB71E
-	adds r3, r1, 0
-_080EB710:
-	strh r3, [r2]
-	adds r2, 0x2
-	subs r0, 0x1
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r1
-	bne _080EB710
-_080EB71E:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EB724: .4byte 0xffff0000
-_080EB728: .4byte 0x0000ffff
-	thumb_func_end sub_80EB6FC
-
 	.align 2, 0 @ Don't pad with nop.
