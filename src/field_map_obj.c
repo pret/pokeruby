@@ -1642,3 +1642,47 @@ u8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
     }
     return 1;
 }
+
+u8 sub_805CAAC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    if (a2 > a3)
+    {
+        dirn = DIR_EAST;
+        if (a0 < 0)
+        {
+            dirn = DIR_WEST;
+        }
+    }
+    else
+    {
+        dirn = DIR_SOUTH;
+        if (a1 < 0)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CADC(s16 a0, s16 a1)
+{
+    u8 dirn;
+    dirn = DIR_SOUTH;
+    if (a1 < 0)
+    {
+        dirn = DIR_NORTH;
+    }
+    return dirn;
+}
+
+u8 sub_805CAEC(s16 a0, s16 a1)
+{
+    u8 dirn;
+    dirn = DIR_EAST;
+    if (a0 < 0)
+    {
+        dirn = DIR_WEST;
+    }
+    return dirn;
+}
