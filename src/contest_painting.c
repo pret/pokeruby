@@ -8,6 +8,7 @@
 #include "rng.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 
 extern u8 unk_2000000[];
@@ -28,43 +29,6 @@ extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpriteSheet gMonBackPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
 extern void *gUnknown_081FAF4C[];
-extern const u8 OtherText_Cool[];
-extern const u8 OtherText_Beauty2[];
-extern const u8 OtherText_Cute[];
-extern const u8 OtherText_Smart[];
-extern const u8 OtherText_Tough[];
-extern const u8 OtherText_NonstopSuperCool[];
-extern const u8 OtherText_Terminator6[];
-extern const u8 OtherText_GoodLookingPoke[];
-extern const u8 OtherText_Terminator7[];
-extern const u8 OtherText_MarvelousGreat[];
-extern const u8 OtherText_Terminator8[];
-extern const u8 OtherText_CenturyLastVenus[];
-extern const u8 OtherText_Terminator9[];
-extern const u8 OtherText_Terminator10[];
-extern const u8 OtherText_DazzlingSmile[];
-extern const u8 OtherText_PokeCenterIdol[];
-extern const u8 OtherText_Terminator11[];
-extern const u8 OtherText_LovelyAndSweet[];
-extern const u8 OtherText_Terminator12[];
-extern const u8 OtherText_ThePretty[];
-extern const u8 OtherText_WinningPortrait[];
-extern const u8 OtherText_GiveUsWink[];
-extern const u8 OtherText_Terminator13[];
-extern const u8 OtherText_SmartnessMaestro[];
-extern const u8 OtherText_Terminator14[];
-extern const u8 OtherText_ChosenPokeAmong[];
-extern const u8 OtherText_Terminator15[];
-extern const u8 OtherText_TheExcellent[];
-extern const u8 OtherText_ItsMomentOfElegance[];
-extern const u8 OtherText_PowerfullyMuscular[];
-extern const u8 OtherText_Terminator16[];
-extern const u8 OtherText_StrongErEst[];
-extern const u8 OtherText_Terminator17[];
-extern const u8 OtherText_MightyTough[];
-extern const u8 OtherText_Exclamation[];
-extern const u8 gContestText_ContestWinner[];
-extern const u8 gOtherText_Unknown1[];
 
 static const u16 gPictureFramePalettes[][16] =
 {

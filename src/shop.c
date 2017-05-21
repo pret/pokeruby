@@ -9,6 +9,7 @@
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
+#include "strings.h"
 #include "task.h"
 
 struct UnknownShopStruct
@@ -28,8 +29,6 @@ extern struct MenuAction gUnknown_083CC6D0[];
 
 extern u8 gUnknown_083CC6E8[];
 extern u8 gUnknown_083CC6EB[];
-extern u8 gOtherText_CanIHelpYou[];
-extern u8 gOtherText_AnythingElse[];
 extern u8 gBuyMenuFrame_Gfx[];
 
 extern u16 gBuyMenuFrame_Tilemap[];
@@ -38,7 +37,7 @@ extern u16 gUnknown_083CC710[2];
 
 extern void sub_80A6300(void);
 extern void sub_80BE3BC(void);
-extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
 extern u8 sub_807D770(void);
 extern void pal_fill_black(void);
 extern void sub_80B3764(int, int);

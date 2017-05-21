@@ -5,6 +5,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "sprite.h"
 #include "palette.h"
@@ -86,50 +87,6 @@ extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[DATA_COUNT];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
-extern const u8 gOtherText_TallPlusAndRightArrow[];
-extern const u8 gOtherText_WontHaveAnyEffect[];
-extern const u8 gOtherText_ElevatedTo[];
-extern const u8 gOtherText_MailMustBeRemoved[];
-extern const u8 gOtherText_AlreadyHolding[];
-extern const u8 gOtherText_TakenAndReplaced[];
-extern const u8 gOtherText_BagFullCannotRemoveItem[];
-extern const u8 gOtherText_WasGivenToHold[];
-extern const u8 gOtherText_PokeHoldingItemCantMail[];
-extern const u8 gOtherText_MailTransferredMailbox[];
-extern const u8 gOtherText_NotHoldingAnything[];
-extern const u8 gOtherText_ReceivedTheThingFrom[];
-extern const u8 gOtherText_SendRemovedMailPrompt[];
-extern const u8 gOtherText_MailTaken[];
-extern const u8 gOtherText_MailWasSent[];
-extern const u8 gOtherText_MailboxIsFull[];
-extern const u8 gOtherText_MailRemovedMessageLost[];
-extern const u8 gOtherText_WantsToLearn[];
-extern const u8 gOtherText_NotCompatible[];
-extern const u8 gOtherText_AlreadyKnows[];
-extern const u8 gOtherText_LearnedMove[];
-extern const u8 gOtherText_WhichMoveToForget2[];
-extern const u8 gOtherText_ForgetMove123_2[];
-extern const u8 gOtherText_StopTryingTo[];
-extern const u8 gOtherText_DidNotLearnMove2[];
-extern const u8 gOtherText_RegainedHealth[];
-extern const u8 gOtherText_HPRestoredBy[];
-extern const u8 gOtherText_CuredPoisoning[];
-extern const u8 gOtherText_WokeUp[];
-extern const u8 gOtherText_BurnHealed[];
-extern const u8 gOtherText_ThawedOut[];
-extern const u8 gOtherText_CuredParalysis[];
-extern const u8 gOtherText_SnapConfusion[];
-extern const u8 gOtherText_GotOverLove[];
-extern const u8 gOtherText_BecameHealthy[];
-extern const u8 gOtherText_Hp2[];
-extern const u8 gOtherText_Attack[];
-extern const u8 gOtherText_Defense[];
-extern const u8 gOtherText_Speed[];
-extern const u8 gOtherText_SpAtk2[];
-extern const u8 gOtherText_SpDef2[];
-extern const u8 gOtherText_WasRaised[];
-extern const u8 gOtherText_PPIncreased[];
-extern const u8 gOtherText_PPRestored[];
 extern const u8 gMoveNames[][13];
 extern const u8 *const gItemEffectTable[];
 
