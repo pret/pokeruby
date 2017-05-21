@@ -26,14 +26,22 @@ struct UnkTvStruct
 };
 
 struct UnkBattleStruct {
-    u8 pad00[6];
+    u16 var00;
+    u8 var02[3];
+    u8 var05_0:1;
+    u8 var05_1:1;
+    u8 var05_pad2:6;
     u16 var06;
     u8 pad08[24];
     u16 var20;
     u8 pad22[6];
     u16 var28;
+    u8 var2a[11];
+    u8 var35;
+    u8 var36[11];
 };
 extern struct UnkBattleStruct gUnknown_030042E0;
+extern u8 gUnknown_0300430A[11];
 
 struct OutbreakPokemon
 {
@@ -123,6 +131,11 @@ void sub_80BF478(void);
 void sub_80BF484(void);
 void sub_80BF4BC(void);
 
+void sub_80BE028(void);
+void sub_80BE074(void);
+void sub_80BE778(void);
+void sub_80BEB20(void);
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 
@@ -131,6 +144,66 @@ void sub_80BEA88(void);
 
 void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
+extern u16 gUnknown_02024C04;
+
+u8 sub_80BDEAC(u8 *a0) {
+    u8 lang;
+    lang = GAME_LANGUAGE;
+    if (a0[0] == 0xFC && a0[1] == 0x15) {
+        lang = LANGUAGE_JAPANESE;
+    }
+    return lang;
+}
+
+void sub_80BDEC8(void) {
+    TVShow *show;
+    u8 i;
+    u16 total;
+    u16 item;
+    total = 0;
+    sub_80BEB20();
+    sub_80BE778();
+    if (gUnknown_030042E0.var28 == 0) {
+        sub_80BE074();
+    } else {
+        sub_80BE028();
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gUnknown_030042E0.var28], gUnknown_030042E0.var2a) != 0) {
+            gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
+            if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1) {
+                for (i=0; i<11; i++) {
+                    total += gUnknown_030042E0.var36[i];
+                }
+                if (total != 0 || gUnknown_030042E0.var05_1 != 0) {
+                    total = FALSE;
+                    show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+                    show->pokemonToday.var00 = TVSHOW_POKEMON_TODAY_CAUGHT;
+                    show->pokemonToday.var01 = total;
+                    if (gUnknown_030042E0.var05_1 != 0) {
+                        total = 1;
+                        item = ITEM_MASTER_BALL;
+                    } else {
+                        for (i=0; i<11; i++) {
+                            total += gUnknown_030042E0.var36[i];
+                        }
+                        if (total > 0xff) {
+                            total = 0xff;
+                        }
+                        item = gUnknown_02024C04;
+                    }
+                    show->pokemonToday.var12 = total;
+                    show->pokemonToday.ball = item;
+                    StringCopy(show->pokemonToday.playerName, gSaveBlock2.playerName);
+                    StringCopy(show->pokemonToday.nickname, gUnknown_030042E0.var2a);
+                    show->pokemonToday.species = gUnknown_030042E0.var28;
+                    sub_80BE138(show);
+                    show->pokemonToday.language = GAME_LANGUAGE;
+                    show->pokemonToday.language2 = sub_80BDEAC(show->pokemonToday.nickname);
+                    StripExtCtrlCodes(show->pokemonToday.nickname);
+                }
+            }
+        }
+    }
+}
 
 void sub_80BE028(void) {
     TVShow *buffer;
@@ -149,27 +222,27 @@ void sub_80BE028(void) {
 #ifdef NONMATCHING
 void sub_80BE074(void) {
     u8 i;
-    u16 tot;
+    u16 total;
+    u8 flag;
     TVShow *show;
     if (sub_80BF77C(0xffff) == 0) {
-        asm_comment("Here the registers for i and tot are assigned in the wrong order.");
-        tot = 0;
-        for (i=0; i<ARRAY_COUNT(gUnknown_03004316); i++) {
-            tot += gUnknown_03004316[i];
+        for (i=0, total=0; i<ARRAY_COUNT(gUnknown_03004316); i++) {
+            total += gUnknown_03004316[i];
         }
-        if (tot > 0xff) {
-            tot = 0xff;
+        if (total > 0xff) {
+            total = 0xff;
         }
-        if (tot > 2 && gUnknown_02024D26 == 1) {
+        if (total > 2 && gUnknown_02024D26 == 1) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_FAILED) != 1) {
+                flag = FALSE;
                 show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
                 asm_comment("Here the wrong registers are used to hold the show ID and flag.");
                 show->pokemonTodayFailed.var00 = TVSHOW_POKEMON_TODAY_FAILED;
-                show->pokemonTodayFailed.var01 = 0;
+                show->pokemonTodayFailed.var01 = flag;
                 show->pokemonTodayFailed.species = gUnknown_030042E0.var06;
                 show->pokemonTodayFailed.species2 = gUnknown_030042E0.var20;
-                show->pokemonTodayFailed.var10 = tot;
+                show->pokemonTodayFailed.var10 = total;
                 show->pokemonTodayFailed.var11 = gUnknown_02024D26;
                 show->pokemonTodayFailed.var12 = gMapHeader.name;
                 StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2.playerName);
@@ -236,6 +309,7 @@ _080BE0A2:\n\
 	adds r4, r0\n\
 	lsls r4, 2\n\
 	adds r4, r6\n\
+    @ -- Here the compiler puts the status flag in the wrong register. --\n\
 	movs r1, 0\n\
 	movs r0, 0x17\n\
 	strb r0, [r4]\n\
