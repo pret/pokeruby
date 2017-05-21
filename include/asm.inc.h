@@ -158,7 +158,7 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_806FA18(u8 taskId);
 
 // src/party_menu.o
-void sub_806E834();
+u8 sub_806E834(const u8 *message, u8 arg1);
 
 // src/rom_8077ABC.o
 u8 battle_side_get_owner(u8);
