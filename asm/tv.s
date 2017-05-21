@@ -1079,44 +1079,6 @@ _080BE020: .4byte gSaveBlock2
 _080BE024: .4byte gUnknown_0300430A
 	thumb_func_end sub_80BDEC8
 
-	thumb_func_start sub_80BE028
-sub_80BE028: @ 80BE028
-	push {r4,lr}
-	ldr r4, _080BE064 @ =gSaveBlock1 + 0x2A98
-	ldrb r0, [r4]
-	cmp r0, 0x19
-	beq _080BE048
-	ldr r1, _080BE068 @ =0xfffffca0
-	adds r0, r4, r1
-	movs r1, 0x18
-	bl sub_80BF55C
-	movs r0, 0x5
-	bl GetGameStat
-	strh r0, [r4, 0x6]
-	movs r0, 0x19
-	strb r0, [r4]
-_080BE048:
-	ldrh r0, [r4, 0x2]
-	adds r0, 0x1
-	strh r0, [r4, 0x2]
-	ldr r1, _080BE06C @ =gUnknown_030042E0
-	ldrh r0, [r1, 0x28]
-	strh r0, [r4, 0x4]
-	ldrh r0, [r1, 0x6]
-	strh r0, [r4, 0x8]
-	ldr r0, _080BE070 @ =gMapHeader
-	ldrb r0, [r0, 0x14]
-	strb r0, [r4, 0xA]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE064: .4byte gSaveBlock1 + 0x2A98
-_080BE068: .4byte 0xfffffca0
-_080BE06C: .4byte gUnknown_030042E0
-_080BE070: .4byte gMapHeader
-	thumb_func_end sub_80BE028
-
     .section .text_80BE8EC
 
 	thumb_func_start sub_80C04A0

@@ -30,6 +30,8 @@ struct UnkBattleStruct {
     u16 var06;
     u8 pad08[24];
     u16 var20;
+    u8 pad22[6];
+    u16 var28;
 };
 extern struct UnkBattleStruct gUnknown_030042E0;
 
@@ -129,6 +131,20 @@ void sub_80BEA88(void);
 
 void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
+
+void sub_80BE028(void) {
+    TVShow *buffer;
+    buffer = &gSaveBlock1.tvShows.unknown_2A98;
+    if (buffer->worldOfMasters.var00 != TVSHOW_WORLD_OF_MASTERS) {
+        sub_80BF55C(gSaveBlock1.tvShows.shows, 24);
+        buffer->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS);
+        buffer->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
+    }
+    buffer->worldOfMasters.var02++;
+    buffer->worldOfMasters.var04 = gUnknown_030042E0.var28;
+    buffer->worldOfMasters.var08 = gUnknown_030042E0.var06;
+    buffer->worldOfMasters.var0a = gMapHeader.name;
+}
 
 #ifdef NONMATCHING
 void sub_80BE074(void) {
