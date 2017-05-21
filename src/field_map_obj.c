@@ -4,6 +4,7 @@
 #include "berry.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "field_effect.h"
 #include "palette.h"
 #include "rom4.h"
 #include "rng.h"
@@ -39,6 +40,7 @@ extern u8 (*const gUnknown_08375270[])(struct MapObject *mapObject, struct Sprit
 extern u8 (*const gUnknown_08375284[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752A4[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752C4[])(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 struct PairedPalettes
 {
@@ -2113,7 +2115,114 @@ u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-void FieldObjectCB_BerryTree(struct Sprite *sprite);
+u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
+
+void FieldObjectCB_BerryTree(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[sprite->data0];
+    if (!(sprite->data7 & 1))
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data7 |= 1;
+    }
+    meta_step(mapObject, sprite, sub_805D314);
+}
+
+u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083752D0[sprite->data1](mapObject, sprite);
+}
+
+extern u32 gUnknown_0202FF84[];
+
+u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 berryTreeStage;
+    npc_reset(mapObject, sprite);
+    mapObject->mapobj_bit_13 = 1;
+    sprite->invisible = 1;
+    berryTreeStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
+    if (!berryTreeStage)
+    {
+        if (!(sprite->data7 & 4) && sprite->animNum == 4)
+        {
+            gUnknown_0202FF84[0] = mapObject->coords2.x;
+            gUnknown_0202FF84[1] = mapObject->coords2.y;
+            gUnknown_0202FF84[2] = sprite->subpriority - 1;
+            gUnknown_0202FF84[3] = sprite->oam.priority;
+            FieldEffectStart(0x17);
+            sprite->animNum = 0;
+        }
+        return 0;
+    }
+    mapObject->mapobj_bit_13 = 0;
+    sprite->invisible = 0;
+    berryTreeStage--;
+    if (sprite->animNum != berryTreeStage)
+    {
+        sprite->data1 = 2;
+        return 1;
+    }
+    get_berry_tree_graphics(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, 0x39);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 3;
+    sprite->data2 = 0;
+    sprite->data7 |= 2;
+    gUnknown_0202FF84[0] = mapObject->coords2.x;
+    gUnknown_0202FF84[1] = mapObject->coords2.y;
+    gUnknown_0202FF84[2] = sprite->subpriority - 1;
+    gUnknown_0202FF84[3] = sprite->oam.priority;
+    FieldEffectStart(0x17);
+    return 1;
+}
+
+u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2++;
+    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->animPaused = 1;
+    if (sprite->data2 > 64)
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data1 = 4;
+        sprite->data2 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2++;
+    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->animPaused = 1;
+    if (sprite->data2 > 64)
+    {
+        sprite->data1 = 0;
+        sprite->data7 &= (-3);
+        return 1;
+    }
+    return 0;
+}
+
 void sub_805D4F4(struct Sprite *sprite);
 void sub_805D634(struct Sprite *sprite);
 void sub_805D774(struct Sprite *sprite);
