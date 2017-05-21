@@ -6,38 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_805C930
-sub_805C930: @ 805C930
-	push {r4-r6,lr}
-	adds r6, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805C964
-	ldr r5, _0805C960 @ =gUnknown_0837520C
-	bl Random
-	movs r4, 0x3
-	adds r1, r4, 0
-	ands r1, r0
-	lsls r1, 1
-	adds r1, r5
-	movs r0, 0
-	ldrsh r1, [r1, r0]
-	adds r0, r6, 0
-	bl sub_8064820
-	strh r4, [r6, 0x30]
-	movs r0, 0x1
-	b _0805C966
-	.align 2, 0
-_0805C960: .4byte gUnknown_0837520C
-_0805C964:
-	movs r0, 0
-_0805C966:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805C930
-
 	thumb_func_start sub_805C96C
 sub_805C96C: @ 805C96C
 	push {r4,lr}
