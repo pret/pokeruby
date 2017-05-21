@@ -41,6 +41,7 @@ extern u8 (*const gUnknown_08375284[])(struct MapObject *mapObject, struct Sprit
 extern u8 (*const gUnknown_083752A4[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752C4[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752E4[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 struct PairedPalettes
 {
@@ -1546,7 +1547,7 @@ u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-extern void FieldObjectSetRegularAnim();
+extern void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 
 u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2223,7 +2224,68 @@ u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-void sub_805D4F4(struct Sprite *sprite);
+u8 sub_805D518(struct MapObject *mapObject, struct Sprite *sprite);
+
+void sub_805D4F4(struct Sprite *sprite)
+{
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D518);
+}
+
+u8 sub_805D518(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083752E4[sprite->data1](mapObject, sprite);
+}
+
+u8 sub_805D538(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D54C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D578(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D5BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752A0, 2);
+    direction = sub_805CD60(mapObject, 1);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
 void sub_805D634(struct Sprite *sprite);
 void sub_805D774(struct Sprite *sprite);
 void sub_805D8B4(struct Sprite *sprite);
