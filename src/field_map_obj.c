@@ -38,6 +38,7 @@ extern u8 (*const gUnknown_08375244[])(s16 a0, s16 a1, s16 a2, s16 a3);
 extern u8 (*const gUnknown_08375270[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_08375284[])(struct MapObject *mapObject, struct Sprite *sprite);
 extern u8 (*const gUnknown_083752A4[])(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752C4[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 struct PairedPalettes
 {
@@ -2076,3 +2077,38 @@ u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
+u8 sub_805D254(struct MapObject *mapObject, struct Sprite *sprite);
+
+void sub_805D230(struct Sprite *sprite)
+{
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D254);
+}
+
+u8 sub_805D254(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083752C4[sprite->data1](mapObject, sprite);
+}
+
+u8 sub_805D274(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D2A0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        sprite->data1 = 2;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 0;
+    return 0;
+}
