@@ -153,6 +153,45 @@ void nullsub_21(void);
 void sub_80BE188(void);
 void sub_80BE320(void);
 
+extern u8 GabbyAndTyGetBattleNum(void);
+
+void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void) {
+    switch (GabbyAndTyGetBattleNum()) {
+        case 1:
+            gSpecialVar_0x8004 = 0xE;
+            gSpecialVar_0x8005 = 0xD;
+            break;
+        case 2:
+            gSpecialVar_0x8004 = 0x5;
+            gSpecialVar_0x8005 = 0x6;
+            break;
+        case 3:
+            gSpecialVar_0x8004 = 0x12;
+            gSpecialVar_0x8005 = 0x11;
+            break;
+        case 4:
+            gSpecialVar_0x8004 = 0x15;
+            gSpecialVar_0x8005 = 0x16;
+            break;
+        case 5:
+            gSpecialVar_0x8004 = 0x8;
+            gSpecialVar_0x8005 = 0x9;
+            break;
+        case 6:
+            gSpecialVar_0x8004 = 0x13;
+            gSpecialVar_0x8005 = 0x14;
+            break;
+        case 7:
+            gSpecialVar_0x8004 = 0x17;
+            gSpecialVar_0x8005 = 0x18;
+            break;
+        case 8:
+            gSpecialVar_0x8004 = 0xA;
+            gSpecialVar_0x8005 = 0xB;
+            break;
+    }
+}
+
 void sub_80BDE48(void) {
     switch (gSpecialVar_0x8005) {
         case TVSHOW_FAN_CLUB_LETTER:
