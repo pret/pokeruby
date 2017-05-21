@@ -129,24 +129,24 @@ void PlayerPCProcessMenuInput(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & 0x40)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MoveMenuCursor(-1);
     }
     else if (gMain.newAndRepeatedKeys & 0x80)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MoveMenuCursor(1);
     }
     else if (gMain.newKeys & 0x1)
     {
         sub_8072DEC();
-        PlaySoundEffect(5);
+        PlaySE(5);
         gUnknown_08406298[gUnknown_02039314[GetMenuCursorPos()]].func(taskId);
     }
     else if (gMain.newKeys & 0x2)
     {
         sub_8072DEC();
-        PlaySoundEffect(5);
+        PlaySE(5);
         gUnknown_08406298[gUnknown_030007B4[gUnknown_02039314 - 1]].func(taskId);
     }
 }
@@ -222,25 +222,25 @@ void ItemStorageMenuProcessInput(u8 var)
 {
     if (gMain.newAndRepeatedKeys & 0x40)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MoveMenuCursor(-1);
         ItemStorageMenuPrint((u8 *)gUnknown_08406288[GetMenuCursorPos()]);
     }
     else if (gMain.newAndRepeatedKeys & 0x80)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MoveMenuCursor(1);
         ItemStorageMenuPrint((u8 *)gUnknown_08406288[GetMenuCursorPos()]);
     }
     else if (gMain.newKeys & 0x1)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         gUnknown_084062C0[GetMenuCursorPos()].func(var);
     }
     else if (gMain.newKeys & 0x2)
     {
         sub_8072DEC();
-        PlaySoundEffect(5);
+        PlaySE(5);
         gUnknown_084062C0[3].func(var);
     }
 }
@@ -353,7 +353,7 @@ void sub_813A280(u8 taskId)
     {
         if(data[0])
         {
-            PlaySoundEffect(5);
+            PlaySE(5);
             data[0] = MoveMenuCursor(-1);
             var = data[1] + data[0];
             if (!data[9])
@@ -372,7 +372,7 @@ void sub_813A280(u8 taskId)
         {
             if (!data[1])
                 return;
-            PlaySoundEffect(5);
+            PlaySE(5);
             data[1]--;
             sub_813AE0C(taskId);
             // probably further down
@@ -384,7 +384,7 @@ void sub_813A280(u8 taskId)
     {
         if(data[0] != data[4] - 1)
         {
-            PlaySoundEffect(5);
+            PlaySE(5);
             data[0] = MoveMenuCursor(1);
             var = data[1] + data[0];
 
@@ -398,7 +398,7 @@ void sub_813A280(u8 taskId)
         }
         else if(data[1] + data[0] != data[2])
         {
-            PlaySoundEffect(5);
+            PlaySE(5);
             data[1]++;
             sub_813AE0C(taskId);
 
@@ -412,7 +412,7 @@ void sub_813A280(u8 taskId)
         {
             if (data[0] + data[1] != data[2])
             {
-                PlaySoundEffect(5);
+                PlaySE(5);
                 data[9] = 1;
                 data[8] = data[1] + data[0];
                 sub_813AD58(0xFFF7);
@@ -422,14 +422,14 @@ void sub_813A280(u8 taskId)
         }
         else // _0813A3E8
         {
-            PlaySoundEffect(5); // merging?
+            PlaySE(5); // merging?
             sub_813AA30(taskId, 0);
             sub_813AE0C(taskId);
         }
     }
     else if(gMain.newKeys & A_BUTTON)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         if(!data[9])
         {
             if(data[1] + data[0] != data[2])
@@ -449,7 +449,7 @@ void sub_813A280(u8 taskId)
     }
     else if(gMain.newKeys & B_BUTTON)
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         if(!data[9])
         {
             sub_8072DEC();
@@ -554,7 +554,7 @@ void HandleQuantityRolling(u8 taskId)
     }
     else if(gMain.newKeys & A_BUTTON) // confirm quantity.
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
 
         if(!data[6])
@@ -564,7 +564,7 @@ void HandleQuantityRolling(u8 taskId)
     }
     else if(gMain.newKeys & B_BUTTON) // cancel quantity.
     {
-        PlaySoundEffect(5);
+        PlaySE(5);
         MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
         sub_80F98DC(0);
         sub_80F98DC(1);

@@ -969,7 +969,7 @@ _080860D4:
 	subs r0, 0x1
 	strh r0, [r4, 0x3A]
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 _08086130:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -1943,7 +1943,7 @@ sub_8086870: @ 8086870
 	ands r0, r2
 	strb r0, [r1, 0x1]
 	movs r0, 0x2B
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -2031,7 +2031,7 @@ _08086964:
 	cmp r0, 0
 	blt _08086988
 	movs r0, 0xD6
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r6]
 	movs r1, 0x8
 	orrs r0, r1
@@ -2253,7 +2253,7 @@ _08086AEA:
 	strh r0, [r5, 0x8]
 _08086B18:
 	movs r0, 0x50
-	bl PlaySoundEffect
+	bl PlaySE
 _08086B1E:
 	movs r0, 0
 	pop {r4,r5}
@@ -3273,7 +3273,7 @@ sub_8087298: @ 8087298
 	movs r0, 0x32
 	bl FieldEffectStart
 	movs r0, 0xB2
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3625,7 +3625,7 @@ sub_8087548: @ 8087548
 	strb r0, [r4, 0x1]
 	bl CameraObjectReset1
 	movs r0, 0xAF
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_80608A4
 	adds r1, r0, 0
@@ -3875,7 +3875,7 @@ _0808774C:
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
 	movs r0, 0x27
-	bl PlaySoundEffect
+	bl PlaySE
 _0808776C:
 	movs r0, 0
 	pop {r4-r6}
@@ -4528,7 +4528,7 @@ _08087C60:
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
 	movs r0, 0x2D
-	bl PlaySoundEffect
+	bl PlaySE
 _08087C8E:
 	add sp, 0x8
 	pop {r4,r5}
@@ -4799,7 +4799,7 @@ sub_8087E4C: @ 8087E4C
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
 	movs r0, 0x2D
-	bl PlaySoundEffect
+	bl PlaySE
 _08087EC2:
 	pop {r4-r6}
 	pop {r0}
@@ -6461,7 +6461,7 @@ FldEff_NPCFlyOut: @ 8088B68
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x9E
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -6774,7 +6774,7 @@ _08088DFE:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r0, 0x9E
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4, 0xA]
 	bl sub_8088FC0
 _08088E1C:

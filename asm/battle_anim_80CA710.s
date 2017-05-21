@@ -2686,7 +2686,7 @@ _080CBB8A:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080CBBBE:
 	adds r0, r4, 0
 	bl sub_80CB814
@@ -2704,7 +2704,7 @@ _080CBBBE:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080CBBE6:
 	pop {r4,r5}
 	pop {r0}
@@ -5930,7 +5930,7 @@ _080CD438:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xD2
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080CD49E:
 	ldrh r0, [r5, 0x38]
 	movs r1, 0x1
@@ -6141,7 +6141,7 @@ _080CD5D8:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC0
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	b _080CD648
 	.align 2, 0
 _080CD634: .4byte 0x00007fff
@@ -7501,7 +7501,7 @@ sub_80CE000: @ 80CE000
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC2
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080CE052:
 	movs r1, 0
 	strh r1, [r4, 0x2E]
@@ -10996,7 +10996,7 @@ _080CFAA4:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x9A
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x2
@@ -11667,7 +11667,7 @@ sub_80D0030: @ 80D0030
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xA6
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x20]
 	adds r0, r1
@@ -13601,7 +13601,7 @@ _080D0EF0:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080D0F36:
 	ldrh r0, [r4, 0x34]
 	ldrh r2, [r4, 0x36]
@@ -23646,7 +23646,7 @@ _080D5C92:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0x90
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	b _080D5CBA
 	.align 2, 0
 _080D5CB0: .4byte gUnknown_0202F7D2
@@ -26822,7 +26822,7 @@ _080D74DC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x76
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080D74FE:
 	movs r0, 0x12
 	ldrsh r3, [r4, r0]
@@ -37516,7 +37516,7 @@ _080DC778:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCB
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl ChangeSpriteAffineAnim
@@ -39402,7 +39402,7 @@ _080DD694:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xA2
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	b _080DD76C
 	.align 2, 0
 _080DD6A4: .4byte gSprites
@@ -39488,7 +39488,7 @@ _080DD70C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xAF
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080DD74A:
 	ldrh r0, [r4, 0x18]
 	subs r0, 0x1
@@ -40138,7 +40138,7 @@ _080DDC30:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0xC4
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080DDC42:
 	pop {r4}
 	pop {r0}
@@ -40186,7 +40186,7 @@ _080DDC92:
 	cmp r0, 0
 	ble _080DDC9E
 	movs r0, 0xC4
-	bl PlaySoundEffect
+	bl PlaySE
 _080DDC9E:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -51751,7 +51751,7 @@ _080E3692:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xEF
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	b _080E36F4
 	.align 2, 0
 _080E36D8: .4byte gUnknown_02024BE0
@@ -51764,7 +51764,7 @@ _080E36E0:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xF5
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _080E36F4:
 	add sp, 0x24
 	pop {r3-r5}

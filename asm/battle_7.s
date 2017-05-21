@@ -2302,7 +2302,7 @@ sub_80324F8: @ 80324F8
 	cmp r0, 0
 	bne _0803255A
 	movs r0, 0x5A
-	bl PlaySoundEffect
+	bl PlaySE
 _0803255A:
 	ldrb r0, [r4]
 	orrs r0, r5

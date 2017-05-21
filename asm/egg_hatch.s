@@ -1084,7 +1084,7 @@ _08043304:
 	cmp r0, 0xF
 	bne _08043334
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
@@ -1137,7 +1137,7 @@ _0804336C:
 	cmp r0, 0xF
 	bne _08043398
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1220,7 +1220,7 @@ _08043418:
 	cmp r0, 0xF
 	bne _0804344C
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1232,7 +1232,7 @@ _0804344C:
 	cmp r0, 0x1E
 	bne _0804345A
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 _0804345A:
 	pop {r4-r6}
 	pop {r0}
@@ -1306,7 +1306,7 @@ _080434C0:
 	cmp r4, 0
 	bne _080434EE
 	movs r0, 0x71
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]

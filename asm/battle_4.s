@@ -15788,7 +15788,7 @@ _08023B74:
 	cmp r0, 0
 	beq _08023B9A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -15805,7 +15805,7 @@ _08023B9A:
 	cmp r0, 0
 	bne _08023BC0
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -15818,7 +15818,7 @@ _08023BC0:
 	cmp r0, 0
 	beq _08023C0C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08023C00 @ =gUnknown_02024D1E
 	ldrb r4, [r0, 0x1]
 	cmp r4, 0
@@ -15850,7 +15850,7 @@ _08023C0C:
 	b _08023E5C
 _08023C16:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 _08023C1C:
 	ldr r0, _08023C28 @ =0x02000000
 	ldr r1, _08023C2C @ =0x0001601a
@@ -16162,7 +16162,7 @@ _08023EA8:
 	cmp r0, 0
 	beq _08023ECE
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -16179,7 +16179,7 @@ _08023ECE:
 	cmp r0, 0
 	bne _08023EF4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -16192,7 +16192,7 @@ _08023EF4:
 	cmp r0, 0
 	beq _08023F4C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08023F30 @ =gUnknown_02024D1E
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
@@ -16231,7 +16231,7 @@ _08023F4C:
 	cmp r0, 0
 	beq _08023F78
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r3, _08023F80 @ =gUnknown_02024C10
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -17094,7 +17094,7 @@ _08024616:
 	cmp r0, 0
 	beq _0802463A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0
 	strb r0, [r5, 0x1]
@@ -17111,7 +17111,7 @@ _0802463A:
 	cmp r0, 0
 	bne _08024660
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -17137,7 +17137,7 @@ _0802467C:
 	beq _08024696
 _08024684:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8023AD8
 	ldr r1, _0802469C @ =gUnknown_02024C10
 	ldr r0, [r1]
@@ -17695,7 +17695,7 @@ _08024AF4:
 	b _08024C38
 _08024AFE:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08024B98 @ =gStringVar4
 	ldr r1, _08024B9C @ =gUnknown_08400D9F
 	bl StringCopy
@@ -17818,7 +17818,7 @@ _08024C04:
 	cmp r0, 0
 	beq _08024C38
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xB
@@ -32047,7 +32047,7 @@ _0802BCEC:
 	cmp r0, 0
 	beq _0802BD10
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -32064,7 +32064,7 @@ _0802BD10:
 	cmp r0, 0
 	bne _0802BD36
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl nullsub_6
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -32077,7 +32077,7 @@ _0802BD36:
 	cmp r0, 0
 	beq _0802BD68
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802BD64 @ =gUnknown_02024D1E
 	ldrb r0, [r1, 0x1]
 	cmp r0, 0
@@ -32099,7 +32099,7 @@ _0802BD68:
 	b _0802BEDA
 _0802BD72:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802BD80 @ =gUnknown_02024D1E
 _0802BD7A:
 	movs r0, 0x4

@@ -189,7 +189,7 @@ sub_802C098: @ 802C098
 	cmp r0, 0
 	beq _0802C13E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_814A7FC
 	ldr r1, _0802C108 @ =gUnknown_02024E60
 	ldrb r0, [r4]
@@ -252,7 +252,7 @@ _0802C13E:
 	b _0802C2AC
 _0802C158:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -280,7 +280,7 @@ _0802C178:
 	b _0802C2AC
 _0802C192:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -324,7 +324,7 @@ _0802C1D0:
 	bne _0802C2AC
 _0802C1E8:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -392,7 +392,7 @@ _0802C218:
 	bl AddBagItem
 _0802C278:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0xC
 	movs r2, 0
@@ -486,7 +486,7 @@ _0802C32E:
 	beq _0802C3A8
 	bl sub_814A7FC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0802C394 @ =gSprites
 	ldr r1, _0802C398 @ =gUnknown_02024BE0
 	ldr r4, _0802C388 @ =gUnknown_03004344
@@ -532,7 +532,7 @@ _0802C3A8:
 	cmp r0, 0
 	beq _0802C41C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0802C400 @ =gSprites
 	ldr r1, _0802C404 @ =gUnknown_02024BE0
 	ldr r5, _0802C408 @ =gUnknown_03004344
@@ -583,7 +583,7 @@ _0802C41C:
 	b _0802C540
 _0802C426:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0802C458 @ =gSprites
 	ldr r1, _0802C45C @ =gUnknown_02024BE0
 	ldr r3, _0802C460 @ =gUnknown_03004344
@@ -724,7 +724,7 @@ _0802C540:
 	b _0802C658
 _0802C54A:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0802C57C @ =gSprites
 	ldr r1, _0802C580 @ =gUnknown_02024BE0
 	ldr r3, _0802C584 @ =gUnknown_03004344
@@ -902,7 +902,7 @@ sub_802C68C: @ 802C68C
 	b _0802C864
 _0802C6B2:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802C6F0 @ =gUnknown_02024E64
 	ldrb r0, [r7]
 	adds r0, r1
@@ -1114,7 +1114,7 @@ _0802C864:
 	beq _0802C8A4
 	bl sub_814A7FC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0802C898 @ =gUnknown_030042A4
 	strh r4, [r0]
 	ldr r1, _0802C89C @ =gUnknown_030042A0
@@ -1242,7 +1242,7 @@ _0802C944:
 _0802C976:
 	strb r0, [r1]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -1361,7 +1361,7 @@ sub_802CA60: @ 802CA60
 	b _0802CE78
 _0802CA7A:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0802CDF0 @ =gUnknown_02024E64
 	mov r10, r0
 	ldr r1, _0802CDF4 @ =gUnknown_02024A60
@@ -1867,7 +1867,7 @@ _0802CE78:
 	cmp r0, 0
 	beq _0802CEF0
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0802CF34 @ =gUnknown_03004344
 	ldrb r0, [r0]
 	bl nullsub_7
@@ -1955,7 +1955,7 @@ _0802CF4E:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802CF7C @ =gUnknown_02024E64
 	ldr r0, _0802CF80 @ =gUnknown_02024A60
 	ldrb r0, [r0]
@@ -2022,7 +2022,7 @@ _0802CFE2:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802D010 @ =gUnknown_02024E64
 	ldr r0, _0802D014 @ =gUnknown_02024A60
 	ldrb r0, [r0]
@@ -2082,7 +2082,7 @@ _0802D066:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802D094 @ =gUnknown_02024E64
 	ldr r0, _0802D098 @ =gUnknown_02024A60
 	ldrb r0, [r0]
@@ -2149,7 +2149,7 @@ _0802D0FA:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _0802D128 @ =gUnknown_02024E64
 	ldr r0, _0802D12C @ =gUnknown_02024A60
 	ldrb r0, [r0]
@@ -3395,7 +3395,7 @@ sub_802DA9C: @ 802DA9C
 	mov r0, r10
 	bl sub_8043D84
 	movs r0, 0x21
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0802DB68 @ =sub_802DB6C
 	mov r1, r8
 	str r0, [r1]

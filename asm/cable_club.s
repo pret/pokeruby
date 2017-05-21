@@ -399,7 +399,7 @@ sub_8082F68: @ 8082F68
 	cmp r0, 0x1
 	bne _08082FCC
 	movs r0, 0x15
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08082FC4 @ =gUnknown_081A4932
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08082FC8 @ =sub_8082FEC
@@ -410,7 +410,7 @@ _08082FC4: .4byte gUnknown_081A4932
 _08082FC8: .4byte sub_8082FEC
 _08082FCC:
 	movs r0, 0x16
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08082FE4 @ =gUnknown_081A49B6
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08082FE8 @ =sub_80831F8

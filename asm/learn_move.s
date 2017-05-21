@@ -1083,7 +1083,7 @@ _08132FBC:
 	cmp r0, 0
 	beq _08132FD6
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 _08132FCE:
 	ldr r0, _08132FE8 @ =gUnknown_030007B0
 	ldr r1, [r0]
@@ -1254,7 +1254,7 @@ _0813310C:
 	cmp r4, 0
 	beq _0813312A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0813313C @ =gUnknown_030007B0
 	ldr r1, [r2]
 	movs r0, 0x5
@@ -1432,7 +1432,7 @@ _0813326C:
 	cmp r4, 0
 	beq _0813328A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _0813329C @ =gUnknown_030007B0
 	ldr r1, [r2]
 	movs r3, 0
@@ -1923,7 +1923,7 @@ sub_813362C: @ 813362C
 	b _08133796
 _08133646:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x1B]
 	subs r0, 0x1
@@ -1968,7 +1968,7 @@ _08133688:
 	b _08133796
 _081336A0:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x1B]
 	adds r0, 0x1
@@ -2009,7 +2009,7 @@ _081336E8:
 	cmp r0, 0
 	beq _0813376C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r5, _08133738 @ =gUnknown_030007B0
 	ldr r2, [r5]
 	ldrb r1, [r2, 0x1B]
@@ -2065,7 +2065,7 @@ _0813376C:
 	cmp r0, 0
 	beq _08133796
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _081337D4 @ =gUnknown_030007B0
 	ldr r1, [r0]
 	movs r0, 0xC

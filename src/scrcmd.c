@@ -807,7 +807,7 @@ bool8 ScrCmd_countpokemon(struct ScriptContext *ctx)
 
 bool8 ScrCmd_playsfx(struct ScriptContext *ctx)
 {
-    PlaySoundEffect(ScriptReadHalfword(ctx));
+    PlaySE(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
@@ -1787,7 +1787,7 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
     x += 7;
     y += 7;
-    PlaySoundEffect(sub_8058790(x, y));
+    PlaySE(sub_8058790(x, y));
     FieldAnimateDoorOpen(x, y);
     return FALSE;
 }

@@ -1418,7 +1418,7 @@ sub_812CBB4: @ 812CBB4
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xDE
-	bl PlaySoundEffect1WithPanning
+	bl PlaySE1WithPanning
 	b _0812CC12
 _0812CBF2:
 	ldrh r0, [r4, 0x24]
@@ -2087,7 +2087,7 @@ _0812D0D4:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xBA
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	cmp r4, 0x40
 	beq _0812D138
 	ldr r5, _0812D16C @ =gSprites
@@ -3738,7 +3738,7 @@ _0812DDD2:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xE4
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	b _0812DE80
 _0812DDEA:
 	mov r0, sp
@@ -10844,7 +10844,7 @@ _081314A6:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldr r1, _081314D4 @ =0xfffff800
 	adds r0, r1, 0
 	ldrh r2, [r4, 0x1C]
@@ -10917,7 +10917,7 @@ _08131538:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	adds r0, r6, 0
 	bl DestroyAnimVisualTask
 _0813155A:
@@ -11014,7 +11014,7 @@ _081315F8:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	movs r0, 0
 	strh r0, [r4, 0x26]
 	b _081316B0
@@ -11043,7 +11043,7 @@ _0813161C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	strh r5, [r4, 0x30]
 	strh r5, [r4, 0x26]
 	b _081316B0
@@ -11087,7 +11087,7 @@ _0813168C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC0
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	movs r0, 0
 	strh r0, [r4, 0x30]
 _081316B0:
@@ -12123,7 +12123,7 @@ _08131ECA:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7A
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldr r0, _08131F54 @ =gBattleAnimEnemyMonIndex
 	ldrb r0, [r0]
 	movs r1, 0x1

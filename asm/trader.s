@@ -320,7 +320,7 @@ sub_8109B7C: @ 8109B7C
 	cmp r0, 0
 	beq _08109BAC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -334,7 +334,7 @@ _08109BAC:
 	cmp r0, 0
 	beq _08109BC2
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _08109C3E
@@ -344,7 +344,7 @@ _08109BC2:
 	cmp r0, 0
 	beq _08109C28
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r5, _08109BFC @ =gSpecialVar_0x8005
 	bl GetMenuCursorPos
 	lsls r0, 24
@@ -389,7 +389,7 @@ _08109C28:
 	cmp r0, 0
 	beq _08109C3E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_8109B34

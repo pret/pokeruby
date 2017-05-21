@@ -446,13 +446,13 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0x0000);
         gTasks[taskId].func = Task_MainMenuPressedA;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
         REG_WIN0H = WIN_RANGE(0, 240);
         REG_WIN0V = WIN_RANGE(0, 160);
@@ -966,14 +966,14 @@ static void Task_NewGameSpeech16(u8 taskId)
     {
     case MALE:
         sub_8072DEC();
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     case FEMALE:
         sub_8072DEC();
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
@@ -1069,19 +1069,19 @@ static void Task_NewGameSpeech21(u8 taskId)
     case 3:
     case 4:
         sub_8072DEC();
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         SetPresetPlayerName(selection);
         gTasks[taskId].func = Task_NewGameSpeech23;
         break;
     case 0:     //NEW NAME
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
         sub_8072DEC();
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
         break;
@@ -1122,7 +1122,7 @@ static void Task_NewGameSpeech25(u8 taskId)
     switch (ProcessMenuInputNoWrap_())
     {
     case 0:     //YES
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].data[TD_TRAINER_SPRITE_ID]].oam.objMode = ST_OAM_OBJ_BLEND;
         StartSpriteFadeOut(taskId, 2);
@@ -1131,7 +1131,7 @@ static void Task_NewGameSpeech25(u8 taskId)
         break;
     case -1:    //B button
     case 1:     //NO
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
         break;

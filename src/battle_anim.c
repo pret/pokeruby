@@ -673,7 +673,7 @@ static void ScriptCmd_end(void)
 static void ScriptCmd_playse(void)
 {
     gBattleAnimScriptPtr++;
-    PlaySoundEffect(SCRIPT_READ_16(gBattleAnimScriptPtr));
+    PlaySE(SCRIPT_READ_16(gBattleAnimScriptPtr));
     gBattleAnimScriptPtr += 2;
 }
 
@@ -1715,7 +1715,7 @@ static void ScriptCmd_panse_19(void)
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    PlaySoundEffect12WithPanning(r4, sub_8076F98(r0));
+    PlaySE12WithPanning(r4, sub_8076F98(r0));
     gBattleAnimScriptPtr += 3;
 }
 
@@ -1755,7 +1755,7 @@ static void ScriptCmd_panse_1B(void)
     gTasks[taskId].data[2] = r4;
     gTasks[taskId].data[3] = r7;
     gTasks[taskId].data[4] = panning;
-    PlaySoundEffect12WithPanning(songNum, panning);
+    PlaySE12WithPanning(songNum, panning);
     gAnimSoundTaskCount++;
     gBattleAnimScriptPtr += 6;
 }
@@ -1917,7 +1917,7 @@ static void ScriptCmd_panse_26(void)
     gTasks[taskId].data[2] = r6;
     gTasks[taskId].data[3] = r10;
     gTasks[taskId].data[4] = r4;
-    PlaySoundEffect12WithPanning(r8, r4);
+    PlaySE12WithPanning(r8, r4);
     gAnimSoundTaskCount++;
     gBattleAnimScriptPtr += 6;
 }
@@ -1949,7 +1949,7 @@ static void ScriptCmd_panse_27(void)
     gTasks[taskId].data[2] = r4_2;
     gTasks[taskId].data[3] = r7;
     gTasks[taskId].data[4] = r6;
-    PlaySoundEffect12WithPanning(r9, r6);
+    PlaySE12WithPanning(r9, r6);
     gAnimSoundTaskCount++;
     gBattleAnimScriptPtr += 6;
 }
@@ -1996,7 +1996,7 @@ static void sub_80774FC(u8 taskId)
         r1 = gTasks[taskId].data[1];
         gTasks[taskId].data[3]--;
         r4 = gTasks[taskId].data[3];
-        PlaySoundEffect12WithPanning(r0, r1);
+        PlaySE12WithPanning(r0, r1);
         if (r4 == 0)
         {
             DestroyTask(taskId);
@@ -2034,7 +2034,7 @@ static void sub_80775CC(u8 taskId)
     gTasks[taskId].data[2]--;
     if (r0 <= 0)
     {
-        PlaySoundEffect12WithPanning(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+        PlaySE12WithPanning(gTasks[taskId].data[0], gTasks[taskId].data[1]);
         DestroyTask(taskId);
         gAnimSoundTaskCount--;
     }

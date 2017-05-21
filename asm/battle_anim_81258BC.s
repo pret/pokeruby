@@ -24,7 +24,7 @@ unref_sub_812AECC: @ 812AECC
 	b _0812AF08
 _0812AEEA:
 	movs r0, 0x16
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	b _0812AF0A
 _0812AEF4:
@@ -32,7 +32,7 @@ _0812AEF4:
 	b _0812AF08
 _0812AEFA:
 	movs r0, 0x16
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_812AF10
 	movs r0, 0x1
 	b _0812AF0A
@@ -152,7 +152,7 @@ _0812AFD0:
 	ldrh r0, [r4, 0x8]
 	lsls r1, r5, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 _0812AFEA:
 	lsls r1, r6, 24
 	asrs r1, 24
@@ -194,7 +194,7 @@ sub_812B004: @ 812B004
 	ldrh r0, [r4, 0xA]
 	lsls r1, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -321,7 +321,7 @@ sub_812B108: @ 812B108
 	ldrh r0, [r4, 0x8]
 	movs r1, 0x1E
 	ldrsb r1, [r4, r1]
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x10]
 	subs r0, 0x1
 	strh r0, [r4, 0x10]
@@ -573,7 +573,7 @@ sub_812B30C: @ 812B30C
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl PlaySoundEffect1WithPanning
+	bl PlaySE1WithPanning
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4,r5}
@@ -599,7 +599,7 @@ sub_812B340: @ 812B340
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl PlaySoundEffect2WithPanning
+	bl PlaySE2WithPanning
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4,r5}
@@ -801,7 +801,7 @@ bx_battle_menu_t6_2: @ 812B4D4
 	cmp r0, 0
 	beq _0812B546
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_814A7FC
 	ldr r1, _0812B50C @ =gUnknown_02024E60
 	ldr r0, _0812B510 @ =gUnknown_02024A60
@@ -863,7 +863,7 @@ _0812B546:
 	cmp r0, 0
 	beq _0812B64E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -891,7 +891,7 @@ _0812B584:
 	cmp r0, 0
 	bne _0812B64E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -919,7 +919,7 @@ _0812B5C0:
 	cmp r0, 0
 	beq _0812B64E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -955,7 +955,7 @@ _0812B60C:
 	cmp r0, 0
 	bne _0812B64E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1857,7 +1857,7 @@ _0812BD94:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	bl dp01_tbl6_exec_completed
 	pop {r4}
 	pop {r0}

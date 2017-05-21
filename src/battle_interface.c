@@ -1589,7 +1589,7 @@ u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
     for (i = 0; i < 6; i++)
         gTasks[taskId].data[3 + i] = sp[i];
     gTasks[taskId].data[10] = d;
-    PlaySoundEffect12WithPanning(SE_TB_START, 0);
+    PlaySE12WithPanning(SE_TB_START, 0);
     return taskId;
 }
 #else
@@ -2169,7 +2169,7 @@ _08044C62:\n\
     strh r6, [r0, 0x1C]\n\
     movs r0, 0x72\n\
     movs r1, 0\n\
-    bl PlaySoundEffect12WithPanning\n\
+    bl PlaySE12WithPanning\n\
     adds r0, r4, 0\n\
     add sp, 0x28\n\
     pop {r3-r5}\n\
@@ -2356,9 +2356,9 @@ void sub_804507C(struct Sprite *sprite)
         if (r3 != 0)
             pan = -64;
         if (sprite->data7 != 0)
-            PlaySoundEffect2WithPanning(SE_TB_KARA, pan);
+            PlaySE2WithPanning(SE_TB_KARA, pan);
         else
-            PlaySoundEffect1WithPanning(SE_TB_KON, pan);
+            PlaySE1WithPanning(SE_TB_KON, pan);
         sprite->callback = SpriteCallbackDummy;
     }
 }

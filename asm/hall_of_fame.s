@@ -545,7 +545,7 @@ sub_8142274: @ 8142274
 	movs r0, 0x3
 	bl TrySavingData
 	movs r0, 0x37
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _081422B0 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -972,7 +972,7 @@ _081425C0:
 	movs r1, 0xF
 	bl sub_8143068
 	movs r0, 0x69
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08142610 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r4

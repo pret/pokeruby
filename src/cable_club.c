@@ -89,7 +89,7 @@ static void sub_80830E4(u8 taskId) {
 
     if (gMain.heldKeys & A_BUTTON)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         sub_8007F4C();
         gTasks[(u32) taskId].func = sub_8083188;
     }
@@ -153,7 +153,7 @@ _08083158:\n\
     cmp r0, 0\n\
     beq _08083178\n\
     movs r0, 0x5\n\
-    bl PlaySoundEffect\n\
+    bl PlaySE\n\
     bl sub_8007F4C\n\
     ldr r0, _08083180 @ =gTasks\n\
     lsls r1, r6, 2\n\

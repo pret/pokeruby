@@ -1043,7 +1043,7 @@ SummaryScreenExit: @ 809E0FC
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1386,7 +1386,7 @@ _0809E3BC: .4byte 0x02018000
 _0809E3C0: .4byte gSpecialVar_0x8005
 _0809E3C4:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r1, [r5]
 	adds r0, r4, 0
 	bl sub_809F9D0
@@ -1492,13 +1492,13 @@ _0809E474:
 	cmp r0, 0
 	bne _0809E4AC
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	b _0809E502
 	.align 2, 0
 _0809E4A8: .4byte 0x02018000
 _0809E4AC:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r1, [r6]
 	adds r0, r4, 0
 	adds r0, 0x7A
@@ -1520,7 +1520,7 @@ _0809E4D8: .4byte gTasks
 _0809E4DC: .4byte sub_809E534
 _0809E4E0:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r7, 0
 	bl sub_809EAC8
 	b _0809E502
@@ -1530,7 +1530,7 @@ _0809E4EE:
 	cmp r0, 0
 	beq _0809E502
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r7, 0
 	bl sub_809EAC8
 _0809E502:
@@ -1946,7 +1946,7 @@ sub_809E83C: @ 809E83C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x13
 	bl sub_80A1B1C
 	movs r0, 0
@@ -2041,7 +2041,7 @@ sub_809E8F0: @ 809E8F0
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	mov r1, r9
 	ldrb r6, [r1]
 	ldr r1, _0809E944 @ =gTasks
@@ -2206,7 +2206,7 @@ SummaryScreenHandleAButton: @ 809EA50
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r4, _0809EABC @ =0x02018000
 	adds r1, r4, 0
 	adds r1, 0x79
@@ -3122,7 +3122,7 @@ _0809F17C:
 	cmp r0, 0xFF
 	bne _0809F1A6
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl sub_809F0D0
@@ -3204,7 +3204,7 @@ _0809F22C:
 	cmp r0, r1
 	beq _0809F270
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r5, _0809F278 @ =0x02018010
 	adds r0, r5, 0
 	bl GetMonStatusAndPokerus

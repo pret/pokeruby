@@ -971,7 +971,7 @@ sub_80C644C: @ 80C644C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x83
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, _080C6464 @ =sub_80C6468
@@ -1148,7 +1148,7 @@ sub_80C6598: @ 80C6598
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x9B
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080C65BC @ =gUnknown_0202FF84
 	ldr r1, [r0, 0x1C]
 	adds r2, r4, 0
@@ -1303,7 +1303,7 @@ sub_80C66BC: @ 80C66BC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xA9
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, _080C66D4 @ =sub_80C66D8
@@ -1495,7 +1495,7 @@ sub_80C683C: @ 80C683C
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r0, 0x3
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080C6874 @ =0x00004054
 	bl VarGet
 	lsls r0, 16
@@ -1666,19 +1666,19 @@ _080C6988:
 	b _080C69B6
 _080C6998:
 	movs r0, 0x4A
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C69B6
 _080C69A0:
 	movs r0, 0x4B
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C69B6
 _080C69A8:
 	movs r0, 0x4C
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C69B6
 _080C69B0:
 	movs r0, 0x4E
-	bl PlaySoundEffect
+	bl PlaySE
 _080C69B6:
 	pop {r0}
 	bx r0
@@ -1706,7 +1706,7 @@ sub_80C69C4: @ 80C69C4
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x4D
-	bl PlaySoundEffect
+	bl PlaySE
 	lsls r5, 16
 	asrs r5, 16
 	lsls r4, 16
@@ -1914,35 +1914,35 @@ _080C6AF0:
 	.4byte _080C6C18
 _080C6BE0:
 	movs r0, 0x3E
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6BE8:
 	movs r0, 0x3F
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6BF0:
 	movs r0, 0x40
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6BF8:
 	movs r0, 0x41
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6C00:
 	movs r0, 0x42
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6C08:
 	movs r0, 0x43
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6C10:
 	movs r0, 0x44
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080C6C1E
 _080C6C18:
 	movs r0, 0x45
-	bl PlaySoundEffect
+	bl PlaySE
 _080C6C1E:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1995,7 +1995,7 @@ SpriteCB_YellowCave4Sparkle: @ 80C6C64
 	cmp r0, 0x8
 	bne _080C6C7C
 	movs r0, 0xC3
-	bl PlaySoundEffect
+	bl PlaySE
 _080C6C7C:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -2239,7 +2239,7 @@ SpriteCB_SandPillar_0: @ 80C6E64
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x83
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r4, _080C6E90 @ =gUnknown_0202FF84
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
@@ -2500,7 +2500,7 @@ _080C7070: .4byte REG_MOSAIC
 DoFieldPoisonEffect: @ 80C7074
 	push {lr}
 	movs r0, 0x4F
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080C7088 @ =Task_FieldPoisonEffect
 	movs r1, 0x50
 	bl CreateTask

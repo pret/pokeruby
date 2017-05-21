@@ -46,7 +46,7 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(17, 9, 563);
     MapGridSetMetatileIdAt(18, 9, 3636);
     DrawWholeMapView();
-    PlaySoundEffect(SE_BAN);
+    PlaySE(SE_BAN);
     FlagSet(SYS_BRAILLE_DIG);
     ScriptContext2_Disable();
 }
@@ -88,7 +88,7 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(15, 27, 563);
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
-    PlaySoundEffect(SE_BAN);
+    PlaySE(SE_BAN);
     FlagSet(SYS_BRAILLE_STRENGTH);
     ScriptContext2_Disable();
 }
@@ -134,7 +134,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(15, 27, 563);
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
-    PlaySoundEffect(SE_BAN);
+    PlaySE(SE_BAN);
     FlagSet(SYS_BRAILLE_FLY);
     ScriptContext2_Disable();
 }
@@ -159,7 +159,7 @@ void Task_BrailleWait(u8 taskId)
             if (BrailleWait_CheckButtonPress() != FALSE)
             {
                 MenuZeroFillScreen();
-                PlaySoundEffect(5);
+                PlaySE(5);
                 data[0] = 2;
             }
             else

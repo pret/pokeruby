@@ -3269,7 +3269,7 @@ _0811C39E:
 	ldrsh r0, [r4, r1]
 	bl sub_811CA28
 	movs r0, 0x68
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r5]
 	adds r0, 0x1
 	ldrb r1, [r5]

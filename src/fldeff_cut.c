@@ -122,7 +122,7 @@ bool8 FldEff_CutGrass(void)
     u8 tileBehavior;
     u8 i, j; // not in for loop?
 
-    for(i = 0, PlaySoundEffect(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
+    for(i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
     {
         y = i - 1 + gUnknown_0203923C.y;
         for(j = 0; j < 3; j++)
@@ -294,7 +294,7 @@ void sub_80A2AB8(void)
 
 void sub_80A2B00(void)
 {
-    PlaySoundEffect(0x80);
+    PlaySE(0x80);
     FieldEffectActiveListRemove(2);
     EnableBothScriptContexts();
 }

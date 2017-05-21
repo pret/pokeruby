@@ -361,7 +361,7 @@ void Task_PokedexMainScreen(u8 taskId)
               0, 0, 0x10, 0);
             gSprites[gPokedexView->unk626].callback = sub_808EDB8;
             gTasks[taskId].func = sub_808CA64;
-            PlaySoundEffect(SE_PIN);
+            PlaySE(SE_PIN);
         }
         else if (gMain.newKeys & START_BUTTON)
         {
@@ -370,11 +370,11 @@ void Task_PokedexMainScreen(u8 taskId)
             gPokedexView->menuIsOpen = 1;
             gPokedexView->menuCursorPos = 0;
             gTasks[taskId].func = Task_PokedexMainScreenMenu;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if (gMain.newKeys & SELECT_BUTTON)
         {
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].data[0] = sub_8091E3C();
             gPokedexView->unk64F = 0;
@@ -383,13 +383,13 @@ void Task_PokedexMainScreen(u8 taskId)
             gPokedexView->unk614 = gPokedexView->dexMode;
             gPokedexView->unk618 = gPokedexView->dexOrder;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySoundEffect(SE_PC_LOGON);
+            PlaySE(SE_PC_LOGON);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_ClosePokedex;
-            PlaySoundEffect(SE_PC_OFF);
+            PlaySE(SE_PC_OFF);
         }
         else
         {
@@ -444,7 +444,7 @@ void Task_PokedexMainScreenMenu(u8 taskId)
                 case 3: //CLOSE POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_ClosePokedex;
-                    PlaySoundEffect(SE_PC_OFF);
+                    PlaySE(SE_PC_OFF);
                     break;
             }
         }
@@ -454,17 +454,17 @@ void Task_PokedexMainScreenMenu(u8 taskId)
         {
             gPokedexView->menuIsOpen = 0;
             gTasks[taskId].func = Task_PokedexMainScreen;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if ((gMain.newAndRepeatedKeys & DPAD_UP) && gPokedexView->menuCursorPos != 0)
         {
             gPokedexView->menuCursorPos--;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if ((gMain.newAndRepeatedKeys & DPAD_DOWN) && gPokedexView->menuCursorPos <= 2)
         {
             gPokedexView->menuCursorPos++;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
     }
 }
@@ -562,7 +562,7 @@ void Task_PokedexResultsScreen(u8 taskId)
             gSprites[gPokedexView->unk626].callback = sub_808EDB8;
             BeginNormalPaletteFade(~a, 0, 0, 0x10, 0);
             gTasks[taskId].func = sub_808D118;
-            PlaySoundEffect(SE_PIN);
+            PlaySE(SE_PIN);
         }
         else if (gMain.newKeys & START_BUTTON)
         {
@@ -570,7 +570,7 @@ void Task_PokedexResultsScreen(u8 taskId)
             gPokedexView->menuIsOpen = 1;
             gPokedexView->menuCursorPos = 0;
             gTasks[taskId].func = Task_PokedexResultsScreenMenu;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if (gMain.newKeys & SELECT_BUTTON)
         {
@@ -578,13 +578,13 @@ void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].data[0] = sub_8091E3C();
             gPokedexView->unk64F = 0;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySoundEffect(SE_PC_LOGON);
+            PlaySE(SE_PC_LOGON);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
-            PlaySoundEffect(SE_PC_OFF);
+            PlaySE(SE_PC_OFF);
         }
         else
         {
@@ -635,12 +635,12 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
                 case 3: //BACK TO POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
-                    PlaySoundEffect(SE_TRACK_DOOR);
+                    PlaySE(SE_TRACK_DOOR);
                     break;
                 case 4: //CLOSE POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_PokedexResultsScreenExitPokedex;
-                    PlaySoundEffect(SE_PC_OFF);
+                    PlaySE(SE_PC_OFF);
                     break;
             }
         }
@@ -650,17 +650,17 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
         {
             gPokedexView->menuIsOpen = 0;
             gTasks[taskId].func = Task_PokedexResultsScreen;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if ((gMain.newAndRepeatedKeys & DPAD_UP) && gPokedexView->menuCursorPos)
         {
             gPokedexView->menuCursorPos--;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
         else if ((gMain.newAndRepeatedKeys & DPAD_DOWN) && gPokedexView->menuCursorPos <= 3)
         {
             gPokedexView->menuCursorPos++;
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
         }
     }
 }
@@ -1371,7 +1371,7 @@ u16 sub_808E48C(u16 a, u16 b)
             gPokedexView->unk62C += (a - r6) * 16;
             sub_808E82C();
             sub_808E0CC(a, 0xE);
-            PlaySoundEffect(SE_Z_PAGE);
+            PlaySE(SE_Z_PAGE);
             goto _0808E5A2;
         }
         //_0808E53C
@@ -1387,7 +1387,7 @@ u16 sub_808E48C(u16 a, u16 b)
         gPokedexView->unk62C += (a - r6) * 16;
         sub_808E82C();
         sub_808E0CC(a, 0xE);
-        PlaySoundEffect(SE_Z_PAGE);
+        PlaySE(SE_Z_PAGE);
         goto _0808E5A2;
 
        _0808E5A2:
@@ -1402,7 +1402,7 @@ u16 sub_808E48C(u16 a, u16 b)
         sub_808E398(2, a);
         //goto _0808E60E
         sub_808DBE8(2, a, b);
-        PlaySoundEffect(SE_Z_SCROLL);
+        PlaySE(SE_Z_SCROLL);
     }
     //_0808E5E4
     else
@@ -1412,7 +1412,7 @@ u16 sub_808E48C(u16 a, u16 b)
         sub_808E398(1, a);
         //_0808E60E
         sub_808DBE8(1, a, b);
-        PlaySoundEffect(SE_Z_SCROLL);
+        PlaySE(SE_Z_SCROLL);
     }
     //_0808E60E
     goto _0808E5A2;
@@ -1511,7 +1511,7 @@ _0808E4E0:\n\
     movs r1, 0xE\n\
     bl sub_808E0CC\n\
     movs r0, 0x6D\n\
-    bl PlaySoundEffect\n\
+    bl PlaySE\n\
     b _0808E5A2\n\
     .align 2, 0\n\
 _0808E52C: .4byte gMain\n\
@@ -1566,7 +1566,7 @@ _0808E55A:\n\
     movs r1, 0xE\n\
     bl sub_808E0CC\n\
     movs r0, 0x6D\n\
-    bl PlaySoundEffect\n\
+    bl PlaySE\n\
 _0808E5A2:\n\
     mov r0, r10\n\
     cmp r0, 0\n\
@@ -1623,7 +1623,7 @@ _0808E60E:\n\
     adds r2, r4, 0\n\
     bl sub_808DBE8\n\
     movs r0, 0x6C\n\
-    bl PlaySoundEffect\n\
+    bl PlaySE\n\
     b _0808E5A2\n\
     .align 2, 0\n\
 _0808E620: .4byte gPokedexView\n\
@@ -2335,13 +2335,13 @@ void Task_PageScreenProcessInput(u8 taskId)
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = sub_808F888;
-        PlaySoundEffect(SE_Z_SCROLL);
+        PlaySE(SE_Z_SCROLL);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_ClosePageScreen;
-        PlaySoundEffect(SE_PC_OFF);
+        PlaySE(SE_PC_OFF);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
@@ -2353,21 +2353,21 @@ void Task_PageScreenProcessInput(u8 taskId)
         case AREA_SCREEN:
             BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_InitAreaScreenMultistep;
-            PlaySoundEffect(SE_PIN);
+            PlaySE(SE_PIN);
             break;
         case CRY_SCREEN:
             BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_InitCryScreenMultistep;
-            PlaySoundEffect(SE_PIN);
+            PlaySE(SE_PIN);
             break;
         case SIZE_SCREEN:
             if (!gUnknown_0202FFBC->owned)
-                PlaySoundEffect(SE_HAZURE);
+                PlaySE(SE_HAZURE);
             else
             {
                 BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
                 gTasks[taskId].func = Task_InitSizeScreenMultistep;
-                PlaySoundEffect(SE_PIN);
+                PlaySE(SE_PIN);
             }
             break;
         }
@@ -2378,7 +2378,7 @@ void Task_PageScreenProcessInput(u8 taskId)
     {
         gPokedexView->selectedScreen--;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
-        PlaySoundEffect(SE_Z_PAGE);
+        PlaySE(SE_Z_PAGE);
     }
     else if (((gMain.newKeys & DPAD_RIGHT)
      || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
@@ -2386,7 +2386,7 @@ void Task_PageScreenProcessInput(u8 taskId)
     {
         gPokedexView->selectedScreen++;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
-        PlaySoundEffect(SE_Z_PAGE);
+        PlaySE(SE_Z_PAGE);
     }
 }
 
@@ -2581,7 +2581,7 @@ void Task_CryScreenProcessInput(u8 taskId)
             m4aMPlayContinue(&gMPlay_BGM);
             gPokedexView->unk64F = 1;
             gTasks[taskId].func = sub_808FFBC;
-            PlaySoundEffect(SE_PC_OFF);
+            PlaySE(SE_PC_OFF);
         }
         else if ((gMain.newKeys & DPAD_LEFT)
          || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
@@ -2590,20 +2590,20 @@ void Task_CryScreenProcessInput(u8 taskId)
             m4aMPlayContinue(&gMPlay_BGM);
             gPokedexView->unk64F = 2;
             gTasks[taskId].func = sub_808FFBC;
-            PlaySoundEffect(SE_Z_PAGE);
+            PlaySE(SE_Z_PAGE);
         }
         else if ((gMain.newKeys & DPAD_RIGHT)
          || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!gUnknown_0202FFBC->owned)
-                PlaySoundEffect(SE_HAZURE);
+                PlaySE(SE_HAZURE);
             else
             {
                 BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
                 m4aMPlayContinue(&gMPlay_BGM);
                 gPokedexView->unk64F = 3;
                 gTasks[taskId].func = sub_808FFBC;
-                PlaySoundEffect(SE_Z_PAGE);
+                PlaySE(SE_Z_PAGE);
             }
         }
     }
@@ -2737,7 +2737,7 @@ void Task_SizeScreenProcessInput(u8 taskId)
         BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
         gPokedexView->unk64F = 1;
         gTasks[taskId].func = sub_8090498;
-        PlaySoundEffect(SE_PC_OFF);
+        PlaySE(SE_PC_OFF);
     }
     //_08090430
     else if ((gMain.newKeys & DPAD_LEFT)
@@ -2746,7 +2746,7 @@ void Task_SizeScreenProcessInput(u8 taskId)
         BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
         gPokedexView->unk64F = 2;
         gTasks[taskId].func = sub_8090498;
-        PlaySoundEffect(SE_Z_PAGE);
+        PlaySE(SE_Z_PAGE);
     }
 }
 

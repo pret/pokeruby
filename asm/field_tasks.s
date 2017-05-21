@@ -716,7 +716,7 @@ _0806995E:
 	cmp r0, 0
 	beq _080699CE
 	movs r0, 0x46
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080699CE
 _0806998C:
 	ldrh r0, [r4, 0xC]
@@ -999,7 +999,7 @@ _08069BA4:
 	bne _08069BB8
 _08069BB2:
 	movs r0, 0x47
-	bl PlaySoundEffect
+	bl PlaySE
 _08069BB8:
 	cmp r7, 0
 	beq _08069BF4
@@ -1409,7 +1409,7 @@ _08069EB6:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x2A
-	bl PlaySoundEffect
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1455,7 +1455,7 @@ _08069F20:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x29
-	bl PlaySoundEffect
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]

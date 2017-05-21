@@ -1397,7 +1397,7 @@ sub_8096368: @ 8096368
 	cmp r0, 0
 	beq _08096384
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xC9
 	b _080963CC
 	.align 2, 0
@@ -1408,7 +1408,7 @@ _08096384:
 	cmp r0, 0
 	beq _080963A4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080963A0 @ =gUnknown_02038478
 	ldr r0, [r0]
 	movs r1, 0x8F
@@ -1424,7 +1424,7 @@ _080963A4:
 	cmp r0, 0
 	beq _080963B8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_809662C
 	b _080963CA
 _080963B8:
@@ -1433,7 +1433,7 @@ _080963B8:
 	cmp r0, 0
 	beq _080963CA
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80965F8
 _080963CA:
 	movs r0, 0xC8
@@ -2464,7 +2464,7 @@ _08096C0E:
 	b _08096C38
 _08096C16:
 	movs r0, 0x2
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r1, 0
 	movs r0, 0xE
 	strh r0, [r4, 0xC]
@@ -2580,7 +2580,7 @@ _08096CE0:
 	.4byte _08096DA0
 _08096D20:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08096D30 @ =0x02000000
 	movs r0, 0x1
 	strb r0, [r1, 0x4]
@@ -2646,7 +2646,7 @@ _08096DA0:
 _08096DA8: .4byte sub_8097CC0
 _08096DAC:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096DBC @ =sub_809789C
 	bl sub_8096BE0
 	b _08096FBA
@@ -2654,7 +2654,7 @@ _08096DAC:
 _08096DBC: .4byte sub_809789C
 _08096DC0:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096DD0 @ =sub_8097078
 	bl sub_8096BE0
 	b _08096FBA
@@ -2662,7 +2662,7 @@ _08096DC0:
 _08096DD0: .4byte sub_8097078
 _08096DD4:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r4, _08096DF0 @ =0x02000000
 	ldr r0, _08096DF4 @ =gPokemonStorage
 	ldrb r0, [r0]
@@ -2680,7 +2680,7 @@ _08096DF4: .4byte gPokemonStorage
 _08096DF8: .4byte 0x000008b2
 _08096DFC:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r4, _08096E24 @ =0x02000000
 	ldr r0, _08096E28 @ =gPokemonStorage
 	ldrb r0, [r0]
@@ -2725,7 +2725,7 @@ _08096E54: .4byte 0x02000000
 _08096E58: .4byte 0x000011f2
 _08096E5C:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096E6C @ =sub_809746C
 	bl sub_8096BE0
 	b _08096FBA
@@ -2737,7 +2737,7 @@ _08096E70:
 	cmp r0, 0
 	bne _08096E96
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096E88 @ =sub_80972A8
 	bl sub_8096BE0
 	b _08096FBA
@@ -2757,7 +2757,7 @@ _08096E96:
 _08096EA0: .4byte 0x02000000
 _08096EA4:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096EB4 @ =c3_0808DC50
 	bl sub_8096BE0
 	b _08096FBA
@@ -2765,7 +2765,7 @@ _08096EA4:
 _08096EB4: .4byte c3_0808DC50
 _08096EB8:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096EC8 @ =sub_8097390
 	bl sub_8096BE0
 	b _08096FBA
@@ -2773,7 +2773,7 @@ _08096EB8:
 _08096EC8: .4byte sub_8097390
 _08096ECC:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08096EDC @ =sub_80972FC
 	bl sub_8096BE0
 	b _08096FBA
@@ -2852,12 +2852,12 @@ _08096F78: .4byte gMain
 _08096F7C: .4byte 0x02000000
 _08096F80:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xD
 	b _08096F92
 _08096F8A:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x16
 _08096F92:
 	bl sub_8098898
@@ -2939,7 +2939,7 @@ _0809701C:
 	b _0809706A
 _08097022:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl add_to_c3_somehow
 	b _08097044
 _0809702E:
@@ -3055,7 +3055,7 @@ _08097120:
 	cmp r0, 0
 	bne _080971D6
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _0809713C @ =sub_80972A8
 	bl sub_8096BE0
@@ -3064,7 +3064,7 @@ _08097120:
 _0809713C: .4byte sub_80972A8
 _08097140:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _08097154 @ =sub_80972FC
 	bl sub_8096BE0
@@ -3077,7 +3077,7 @@ _08097158:
 	cmp r0, 0
 	beq _080971D6
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _08097174 @ =c3_0808DC50
 	bl sub_8096BE0
@@ -3086,7 +3086,7 @@ _08097158:
 _08097174: .4byte c3_0808DC50
 _08097178:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _0809718C @ =sub_8097390
 	bl sub_8096BE0
@@ -3107,7 +3107,7 @@ _08097190:
 	cmp r0, 0
 	bne _08097210
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _080971C8 @ =sub_809746C
 	bl sub_8096BE0
@@ -3157,7 +3157,7 @@ _08097210:
 _08097218: .4byte 0x000011f2
 _0809721C:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0809722C @ =sub_8097594
 	bl sub_8096BE0
 	b _0809729A
@@ -3165,7 +3165,7 @@ _0809721C:
 _0809722C: .4byte sub_8097594
 _08097230:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08097240 @ =sub_8097788
 	bl sub_8096BE0
 	b _0809729A
@@ -3173,7 +3173,7 @@ _08097230:
 _08097240: .4byte sub_8097788
 _08097244:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08097254 @ =sub_80977E4
 	bl sub_8096BE0
 	b _0809729A
@@ -3181,17 +3181,17 @@ _08097244:
 _08097254: .4byte sub_80977E4
 _08097258:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xD
 	b _08097274
 _08097262:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x11
 	b _08097274
 _0809726C:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x16
 _08097274:
 	bl sub_8098898
@@ -4005,7 +4005,7 @@ _08097914:
 _08097928: .4byte sub_8096C84
 _0809792C:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0809793C @ =sub_8097B44
 	bl sub_8096BE0
 	b _08097968
@@ -4013,7 +4013,7 @@ _0809792C:
 _0809793C: .4byte sub_8097B44
 _08097940:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _08097954 @ =sub_8097974
 	bl sub_8096BE0
@@ -4022,7 +4022,7 @@ _08097940:
 _08097954: .4byte sub_8097974
 _08097958:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r0, _08097970 @ =sub_8097A64
 	bl sub_8096BE0
@@ -4087,7 +4087,7 @@ _080979D4:
 	cmp r0, 0xC
 	blt _08097A5A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r4]
 	subs r0, 0xC
 	strh r0, [r4]
@@ -4118,7 +4118,7 @@ _080979FC:
 	b _08097A5A
 _08097A24:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldrh r0, [r4]
 	subs r0, 0x10
@@ -4329,7 +4329,7 @@ _08097BD4:
 	cmp r0, 0
 	beq _08097BF8
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_8098898
 	ldr r1, _08097BF4 @ =0x02000000
@@ -4340,7 +4340,7 @@ _08097BD4:
 _08097BF4: .4byte 0x02000000
 _08097BF8:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	bl sub_8098898
 	movs r0, 0
@@ -4386,7 +4386,7 @@ _08097C4A:
 _08097C58: .4byte sub_8096C84
 _08097C5C:
 	movs r0, 0x3
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r1, _08097C70 @ =0x02000000
 	ldrb r0, [r1, 0x4]
@@ -4463,7 +4463,7 @@ _08097CF4:
 	cmp r0, 0
 	beq _08097D18
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_8098898
 	ldr r1, _08097D14 @ =0x02000000
@@ -4474,7 +4474,7 @@ _08097CF4:
 _08097D14: .4byte 0x02000000
 _08097D18:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x12
 	bl sub_8098898
 	movs r0, 0
@@ -4521,7 +4521,7 @@ _08097D6C:
 _08097D78: .4byte sub_8096C84
 _08097D7C:
 	movs r0, 0x3
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8098A5C
 	ldr r1, _08097D90 @ =0x02000000
 	ldrb r0, [r1, 0x4]
@@ -5825,7 +5825,7 @@ sub_809880C: @ 809880C
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x6
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80984E8
 	pop {r0}
 	bx r0
@@ -14796,7 +14796,7 @@ sub_809CF30: @ 809CF30
 	cmp r0, 0
 	beq _0809CF52
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r5, 0x1
 _0809CF52:
 	ldrh r1, [r4, 0x2E]
@@ -14805,7 +14805,7 @@ _0809CF52:
 	cmp r0, 0
 	beq _0809CF70
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -14818,7 +14818,7 @@ _0809CF70:
 	cmp r0, 0
 	beq _0809CF8E
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _0809CF8E

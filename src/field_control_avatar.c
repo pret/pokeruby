@@ -214,7 +214,7 @@ int sub_8068024(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
-        PlaySoundEffect(SE_WIN_OPEN);
+        PlaySE(SE_WIN_OPEN);
         sub_8071310();
         return TRUE;
     }
@@ -261,7 +261,7 @@ static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
      && script != gUnknown_0815F36C
      && script != gUnknown_0815F43A
      && script != gUnknown_081A0009)
-        PlaySoundEffect(5);
+        PlaySE(5);
 
     ScriptContext1_SetupScript(script);
     return TRUE;
@@ -828,7 +828,7 @@ int dive_warp(struct MapPosition *position, u16 b)
         {
             walkrun_find_lowest_active_bit_in_bitfield();
             sp13E_warp_to_last_warp();
-            PlaySoundEffect(SE_W291);
+            PlaySE(SE_W291);
             return TRUE;
         }
     }
@@ -838,7 +838,7 @@ int dive_warp(struct MapPosition *position, u16 b)
         {
             walkrun_find_lowest_active_bit_in_bitfield();
             sp13E_warp_to_last_warp();
-            PlaySoundEffect(SE_W291);
+            PlaySE(SE_W291);
             return TRUE;
         }
     }

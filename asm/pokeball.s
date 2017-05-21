@@ -256,7 +256,7 @@ _080465CC:
 	ldr r1, _08046630 @ =TaskDummy
 	str r1, [r0]
 	movs r0, 0x3D
-	bl PlaySoundEffect
+	bl PlaySE
 _08046616:
 	add sp, 0x4
 	pop {r3-r5}
@@ -435,7 +435,7 @@ sub_8046760: @ 8046760
 	cmp r0, 0xB
 	bne _08046778
 	movs r0, 0x3C
-	bl PlaySoundEffect
+	bl PlaySE
 _08046778:
 	ldr r6, _080467C4 @ =gSprites
 	ldr r5, _080467C8 @ =gUnknown_02024BE0
@@ -604,19 +604,19 @@ _080468B0:
 	b _080468CE
 _080468B6:
 	movs r0, 0x38
-	bl PlaySoundEffect
+	bl PlaySE
 	b _08046902
 _080468BE:
 	movs r0, 0x39
-	bl PlaySoundEffect
+	bl PlaySE
 	b _08046902
 _080468C6:
 	movs r0, 0x3A
-	bl PlaySoundEffect
+	bl PlaySE
 	b _08046902
 _080468CE:
 	movs r0, 0x3B
-	bl PlaySoundEffect
+	bl PlaySE
 	b _08046902
 _080468D6:
 	movs r2, 0x38
@@ -701,7 +701,7 @@ sub_8046944: @ 8046944
 	ldr r0, _08046980 @ =sub_8046984
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 _08046978:
 	pop {r4}
 	pop {r0}
@@ -875,7 +875,7 @@ _08046ABC:
 	bl StartSpriteAffineAnim
 _08046AC4:
 	movs r0, 0x17
-	bl PlaySoundEffect
+	bl PlaySE
 _08046ACA:
 	pop {r4}
 	pop {r0}
@@ -1494,7 +1494,7 @@ sub_8046FBC: @ 8046FBC
 	strb r1, [r0]
 	bl m4aMPlayAllStop
 	ldr r0, _08046FF0 @ =0x00000173
-	bl PlaySoundEffect
+	bl PlaySE
 	b _08047056
 	.align 2, 0
 _08046FEC: .4byte gUnknown_02024E6D
@@ -2404,7 +2404,7 @@ sub_80476E0: @ 80476E0
 	cmp r0, 0xB
 	bne _080476F8
 	movs r0, 0x3C
-	bl PlaySoundEffect
+	bl PlaySE
 _080476F8:
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24

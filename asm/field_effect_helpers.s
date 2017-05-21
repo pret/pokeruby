@@ -1890,7 +1890,7 @@ FldEff_Splash: @ 8127610
 	subs r0, 0x4
 	strh r0, [r3, 0x26]
 	movs r0, 0x46
-	bl PlaySoundEffect
+	bl PlaySE
 _0812769A:
 	movs r0, 0
 	pop {r4-r6}
@@ -2248,7 +2248,7 @@ _08127920:
 	cmp r0, 0
 	bne _0812796A
 	movs r0, 0x46
-	bl PlaySoundEffect
+	bl PlaySE
 _0812796A:
 	add sp, 0x4
 	pop {r4,r5}

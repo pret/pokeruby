@@ -230,7 +230,7 @@ void SetUpBattlePokemonMenu(u8 a)
             if (gUnknown_02038473 == 3)
             {
                 if (GetMonData(&gPlayerParty[sub_806CA38(a)], MON_DATA_IS_EGG))
-                    PlaySoundEffect(SE_HAZURE);
+                    PlaySE(SE_HAZURE);
                 else
                 {
                     sub_806D5A4();
@@ -239,7 +239,7 @@ void SetUpBattlePokemonMenu(u8 a)
             }
             else
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 GetMonNickname(&gPlayerParty[sub_806CA38(a)], gStringVar1);
                 sub_8095050(a, sub_806CA38(a));
                 SetTaskFuncWithFollowupFunc(a, Task_HandlePopupMenuInput, SetUpBattlePokemonMenu);
@@ -247,10 +247,10 @@ void SetUpBattlePokemonMenu(u8 a)
             break;
         case 2:
             if (gUnknown_02038473 == 1)
-                PlaySoundEffect(SE_HAZURE);
+                PlaySE(SE_HAZURE);
             else
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 if (gUnknown_02038473 == 3)
                 {
                     gUnknown_0202E8F4 = 0;
@@ -336,19 +336,19 @@ static void Task_HandlePopupMenuInput(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
             MoveMenuCursor(-1);
             return;
         }
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
             MoveMenuCursor(1);
             return;
         }
         if (gMain.newKeys & A_BUTTON)
         {
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
                                sBattlePartyPopupMenus,
                                sBattlePartyMenuActions,
@@ -358,7 +358,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
         }
         if (gMain.newKeys & B_BUTTON)
         {
-            PlaySoundEffect(SE_SELECT);
+            PlaySE(SE_SELECT);
             Task_BattlePartyMenuCancel(taskId);
             return;
         }

@@ -630,7 +630,7 @@ sub_81222B0: @ 81222B0
 _081222DC: .4byte gPaletteFade
 _081222E0:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
 	ldr r1, _08122320 @ =gLastFieldPokeMenuOpened
@@ -679,7 +679,7 @@ _0812234C: .4byte gTasks
 _08122350: .4byte sub_81224A8
 _08122354:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_8121E58
 	movs r0, 0x1
 	negs r0, r0
@@ -729,7 +729,7 @@ sub_812238C: @ 812238C
 	cmp r0, 0
 	beq _0812244A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -748,7 +748,7 @@ _081223D0:
 	cmp r0, 0x3
 	beq _0812244A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _0812244A
@@ -759,7 +759,7 @@ _081223F2:
 	cmp r0, 0
 	beq _0812243C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08122430 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -893,7 +893,7 @@ _081224FC: .4byte gTasks
 _08122500: .4byte sub_8122450
 _08122504:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xE
 	movs r1, 0
 	bl sub_806D538
@@ -1125,7 +1125,7 @@ _081226DC:
 	cmp r4, 0x2
 	bls _081226A0
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x14
 	movs r1, 0xA
 	movs r2, 0x1D
@@ -1302,7 +1302,7 @@ sub_8122838: @ 8122838
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81227FC
 	pop {r4}
@@ -1643,7 +1643,7 @@ sub_8122AB8: @ 8122AB8
 	movs r1, 0x2
 	strb r1, [r0]
 	movs r0, 0x78
-	bl PlaySoundEffect
+	bl PlaySE
 _08122AF4:
 	pop {r4}
 	pop {r0}
@@ -2058,7 +2058,7 @@ sub_8122E0C: @ 8122E0C
 _08122E34: .4byte gPaletteFade
 _08122E38:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
 	ldr r1, _08122E70 @ =gLastFieldPokeMenuOpened
@@ -2088,7 +2088,7 @@ _08122E7C: .4byte gTasks
 _08122E80: .4byte sub_8122EAC
 _08122E84:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08122EA4 @ =gLastFieldPokeMenuOpened
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -2130,7 +2130,7 @@ sub_8122EAC: @ 8122EAC
 	cmp r0, 0
 	beq _08122F6A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -2149,7 +2149,7 @@ _08122EF0:
 	cmp r0, 0x3
 	beq _08122F6A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _08122F6A
@@ -2160,7 +2160,7 @@ _08122F12:
 	cmp r0, 0
 	beq _08122F5C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08122F50 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2389,7 +2389,7 @@ sub_81230F4: @ 81230F4
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x14
 	movs r1, 0xA
 	movs r2, 0x1D

@@ -3111,7 +3111,7 @@ _0802FEC8:
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldr r2, _0802FF4C @ =gSprites
 	ldr r3, _0802FF50 @ =gUnknown_02024BE0
 	ldrb r0, [r5]
@@ -4628,7 +4628,7 @@ _08030BEC:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	bl dp01_tbl1_exec_completed
 	pop {r4}
 	pop {r0}

@@ -226,7 +226,7 @@ sub_8080B78: @ 8080B78
 	bl sub_8053E90
 	bl pal_fill_for_map_transition
 	movs r0, 0x2E
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08080B98 @ =task_map_chg_seq_0807E2CC
 	movs r1, 0xA
 	bl CreateTask
@@ -616,7 +616,7 @@ sub_8080E88: @ 8080E88
 	bl fade_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08080EB4 @ =gUnknown_0300485C
 	ldr r1, _08080EB8 @ =mapldr_default
 	str r1, [r0]
@@ -726,7 +726,7 @@ sub_8080F68: @ 8080F68
 	bl sub_8053FF8
 	bl fade_8080918
 	movs r0, 0x2D
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08080F90 @ =task0A_fade_n_map_maybe
 	movs r1, 0xA
 	bl CreateTask
@@ -822,7 +822,7 @@ sub_808102C: @ 808102C
 	bl sub_8053FF8
 	bl fade_8080918
 	movs r0, 0x9
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0808104C @ =sub_8080FC4
 	movs r1, 0xA
 	bl CreateTask
@@ -864,7 +864,7 @@ _0808107E:
 	bl fade_screen
 	bl sub_8053FF8
 	movs r0, 0x9
-	bl PlaySoundEffect
+	bl PlaySE
 	b _080810AC
 _08081096:
 	bl sub_8080E64
@@ -1016,7 +1016,7 @@ _080811A8:
 	bl sub_8058790
 	lsls r0, 16
 	lsrs r0, 16
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r2, 0
@@ -1203,7 +1203,7 @@ sub_8081334: @ 8081334
 	bl fade_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08081360 @ =gUnknown_0300485C
 	ldr r1, _08081364 @ =sub_8080B60
 	str r1, [r0]

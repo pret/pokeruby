@@ -2203,28 +2203,28 @@ void sub_80557E8(void)
 
 void sub_80557F4(void)
 {
-    PlaySoundEffect(SE_WIN_OPEN);
+    PlaySE(SE_WIN_OPEN);
     sub_8071310();
     ScriptContext2_Enable();
 }
 
 void sub_8055808(u8 *script)
 {
-    PlaySoundEffect(SE_SELECT);
+    PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
     ScriptContext2_Enable();
 }
 
 void sub_8055824(void)
 {
-    PlaySoundEffect(SE_WIN_OPEN);
+    PlaySE(SE_WIN_OPEN);
     ScriptContext1_SetupScript(TradeRoom_PromptToCancelLink);
     ScriptContext2_Enable();
 }
 
 void sub_8055840(u8 *script)
 {
-    PlaySoundEffect(SE_SELECT);
+    PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
     ScriptContext2_Enable();
 }

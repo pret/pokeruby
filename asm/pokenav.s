@@ -152,7 +152,7 @@ _080EBBA0:
 	movs r1, 0x1
 	strb r1, [r0]
 	movs r0, 0x6E
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EBBD8 @ =sub_80EBD90
 	bl SetMainCallback2
 	ldr r0, _080EBBDC @ =sub_80EBD18
@@ -1019,7 +1019,7 @@ _080EC2AE:
 	cmp r0, 0
 	beq _080EC2D4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080EC2D0 @ =0x00006dad
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -1073,7 +1073,7 @@ _080EC31C:
 	.4byte _080EC358
 _080EC330:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC340 @ =sub_80EC4A0
 	bl sub_80EBDBC
 	b _080EC492
@@ -1081,7 +1081,7 @@ _080EC330:
 _080EC340: .4byte sub_80EC4A0
 _080EC344:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC354 @ =sub_80EC81C
 	bl sub_80EBDBC
 	b _080EC492
@@ -1165,7 +1165,7 @@ _080EC3DC:
 	cmp r0, 0
 	beq _080EC408
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC404 @ =sub_80EDB88
 	bl sub_80EBDBC
 	b _080EC492
@@ -1174,7 +1174,7 @@ _080EC400: .4byte 0x00008fe8
 _080EC404: .4byte sub_80EDB88
 _080EC408:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x5
 	b _080EC442
@@ -1186,7 +1186,7 @@ _080EC414:
 	cmp r0, 0
 	beq _080EC438
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC434 @ =sub_80EE3D8
 	bl sub_80EBDBC
 	b _080EC492
@@ -1195,7 +1195,7 @@ _080EC430: .4byte 0x0000d158
 _080EC434: .4byte sub_80EE3D8
 _080EC438:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x6
 _080EC442:
@@ -1210,7 +1210,7 @@ _080EC44C:
 	cmp r5, 0
 	beq _080EC478
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080EC474 @ =0x00006dad
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -1522,7 +1522,7 @@ _080EC6E2:
 	b _080EC800
 _080EC6E8:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC6FC @ =0x02000000
 	movs r1, 0xC1
 	lsls r1, 2
@@ -1534,7 +1534,7 @@ _080EC6E8:
 _080EC6FC: .4byte 0x02000000
 _080EC700:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EC714 @ =0x02000000
 	movs r2, 0xC1
 	lsls r2, 2
@@ -1730,7 +1730,7 @@ _080EC888:
 	cmp r0, 0
 	beq _080EC8B0
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080EC8AC @ =0x00006dad
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -1748,7 +1748,7 @@ _080EC8B0:
 	cmp r0, 0
 	beq _080EC918
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _080EC8E8 @ =0x00006dad
 	adds r0, r4, r2
 	ldrb r1, [r0]
@@ -1797,7 +1797,7 @@ _080EC918:
 	cmp r0, 0
 	beq _080EC954
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080EC93C @ =0x00006df0
 	adds r0, r4, r1
 	strb r6, [r0]
@@ -2172,7 +2172,7 @@ _080ECC24:
 	cmp r0, 0
 	beq _080ECC4C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080ECC48 @ =0x00006dad
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -2192,7 +2192,7 @@ _080ECC4C:
 	b _080ECD40
 _080ECC5A:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _080ECC7C @ =0x00006dad
 	adds r0, r4, r2
 	ldrb r0, [r0]
@@ -2300,7 +2300,7 @@ _080ECD40:
 	cmp r0, 0
 	beq _080ECD74
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _080ECD60 @ =0x00006dad
 	adds r1, r4, r2
 	movs r0, 0x5
@@ -3036,7 +3036,7 @@ _080ED342:
 	cmp r0, 0
 	beq _080ED38C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080ED370 @ =sub_80ED4D8
 	bl sub_80EBDBC
 	b _080ED3CA
@@ -3045,12 +3045,12 @@ _080ED36C: .4byte gMain
 _080ED370: .4byte sub_80ED4D8
 _080ED374:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl ShowMapNamePopUpWindow
 	b _080ED3CA
 _080ED380:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _080ED3C8
@@ -3060,7 +3060,7 @@ _080ED38C:
 	cmp r0, 0
 	beq _080ED3CA
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080ED3A4 @ =sub_80ECD80
 	bl sub_80EBDBC
 	b _080ED3CA
@@ -3739,7 +3739,7 @@ _080ED91A:
 	beq _080ED970
 _080ED948:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_80F5060
 	bl move_anim_execute
@@ -3780,7 +3780,7 @@ _080ED970:
 	bge _080ED9CC
 _080ED9A2:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	bl sub_80F5060
 	bl move_anim_execute
@@ -3802,7 +3802,7 @@ _080ED9CC:
 	cmp r0, 0
 	beq _080ED9F8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80F4FDC
 	bl move_anim_execute
 	ldr r0, _080ED9F4 @ =0x02000000
@@ -3841,7 +3841,7 @@ _080EDA02:
 	b _080EDB7A
 _080EDA26:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xC1
 	lsls r0, 2
 	adds r1, r4, r0
@@ -3861,7 +3861,7 @@ _080EDA44:
 	b _080EDB7A
 _080EDA50:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r2, 0xC1
 	lsls r2, 2
 	adds r1, r5, r2
@@ -4297,7 +4297,7 @@ _080EDDE2:
 	cmp r0, 0
 	beq _080EDE2C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EDE10 @ =sub_80EDEE4
 	bl sub_80EBDBC
 	b _080EDE6A
@@ -4306,12 +4306,12 @@ _080EDE0C: .4byte gMain
 _080EDE10: .4byte sub_80EDEE4
 _080EDE14:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl ShowMapNamePopUpWindow
 	b _080EDE6A
 _080EDE20:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _080EDE68
@@ -4321,7 +4321,7 @@ _080EDE2C:
 	cmp r0, 0
 	beq _080EDE6A
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EDE44 @ =sub_80EDE70
 	bl sub_80EBDBC
 	b _080EDE6A
@@ -4653,7 +4653,7 @@ _080EE0CC:
 	cmp r0, 0
 	beq _080EE104
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_80F6A4C
@@ -4681,7 +4681,7 @@ _080EE104:
 	cmp r2, r0
 	bge _080EE140
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_80F6A4C
 	movs r0, 0xC1
@@ -4698,7 +4698,7 @@ _080EE140:
 	cmp r0, 0
 	beq _080EE164
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0xB
 	bl sub_80EEFBC
 	ldr r0, _080EE160 @ =0x02000000
@@ -4716,7 +4716,7 @@ _080EE164:
 	b _080EE288
 _080EE16E:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EE17C @ =sub_80EE294
 	bl sub_80EBDBC
 	b _080EE288
@@ -4788,7 +4788,7 @@ _080EE1F8:
 	cmp r0, 0x1
 	bne _080EE224
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80F3B94
 	ldr r0, _080EE220 @ =0x02000000
 	movs r5, 0xC1
@@ -4807,7 +4807,7 @@ _080EE224:
 	cmp r0, 0
 	beq _080EE288
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80F3B94
 	ldr r0, _080EE24C @ =0x02000000
 	movs r1, 0xC1
@@ -5241,7 +5241,7 @@ _080EE5B2:
 	cmp r0, 0
 	beq _080EE608
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EE5E0 @ =sub_80EE658
 	bl sub_80EBDBC
 	b _080EE652
@@ -5250,7 +5250,7 @@ _080EE5DC: .4byte gMain
 _080EE5E0: .4byte sub_80EE658
 _080EE5E4:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080EE5F8 @ =0x0000876e
 	adds r0, r5, r1
 	ldrb r0, [r0]
@@ -5260,7 +5260,7 @@ _080EE5E4:
 _080EE5F8: .4byte 0x0000876e
 _080EE5FC:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _080EE650
@@ -5270,7 +5270,7 @@ _080EE608:
 	cmp r0, 0
 	beq _080EE652
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _080EE620 @ =sub_80EE8F4
 	bl sub_80EBDBC
 	b _080EE652
@@ -5446,7 +5446,7 @@ _080EE780:
 	cmp r0, 0
 	beq _080EE7B8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_80F708C
@@ -5474,7 +5474,7 @@ _080EE7B8:
 	cmp r2, r0
 	bge _080EE7F8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_80F708C
 	movs r0, 0xC1
@@ -5494,7 +5494,7 @@ _080EE7F8:
 	cmp r0, 0
 	beq _080EE8E8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_80F4394
 	bl sub_80F0EC0
 	ldr r1, _080EE81C @ =0x02000000
@@ -5682,7 +5682,7 @@ sub_80EE96C: @ 80EE96C
 	cmp r4, 0
 	bne _080EE9A0
 	movs r0, 0x6F
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -12295,7 +12295,7 @@ _080F1E22:
 	blt _080F1E0E
 _080F1E38:
 	movs r0, 0x6
-	bl PlaySoundEffect
+	bl PlaySE
 	pop {r4-r6}
 	pop {r0}
 	bx r0

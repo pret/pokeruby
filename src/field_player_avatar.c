@@ -871,7 +871,7 @@ void PlayerTurnInPlace(u8 direction)
 
 void PlayerJumpLedge(u8 direction)
 {
-    PlaySoundEffect(SE_DANSA);
+    PlaySE(SE_DANSA);
     PlayerSetAnimId(GetJumpLedgeAnimId(direction), 8);
 }
 
@@ -902,31 +902,31 @@ void sub_8059534(u8 a)
 
 void sub_805954C(u8 a)
 {
-    PlaySoundEffect(SE_JITE_PYOKO);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060A5C(a), 1);
 }
 
 void sub_8059570(u8 a)
 {
-    PlaySoundEffect(SE_JITE_PYOKO);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060A88(a), 2);
 }
 
 void sub_8059594(u8 a)
 {
-    PlaySoundEffect(SE_JITE_PYOKO);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060AB4(a), 8);
 }
 
 void sub_80595B8(u8 direction)
 {
-    PlaySoundEffect(SE_JITE_PYOKO);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060878(direction), 1);
 }
 
 void sub_80595DC(u8 direction)
 {
-    PlaySoundEffect(SE_WALL_HIT);
+    PlaySE(SE_WALL_HIT);
     PlayerSetAnimId(sub_8060AE0(direction), 2);
 }
 
@@ -959,7 +959,7 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a)
             if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
                 return;
         }
-        PlaySoundEffect(SE_WALL_HIT);
+        PlaySE(SE_WALL_HIT);
     }
 }
 
@@ -1292,7 +1292,7 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
         gUnknown_0202FF84[2] = c->elevation;
         gUnknown_0202FF84[3] = gSprites[c->spriteId].oam.priority;
         FieldEffectStart(10);
-        PlaySoundEffect(SE_W070);
+        PlaySE(SE_W070);
         task->data[0]++;
     }
     return 0;
@@ -1334,7 +1334,7 @@ u8 sub_805A000(struct Task *task, struct MapObject *mapObject)
     gPlayerAvatar.unk6 = 1;
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
-        PlaySoundEffect(SE_DANSA);
+        PlaySE(SE_DANSA);
         FieldObjectSetSpecialAnim(mapObject, sub_806084C(mapObject->mapobj_unk_18));
         task->data[1]++;
         if (task->data[1] > 1)
@@ -1370,7 +1370,7 @@ u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject)
     task->data[1] = mapObject->placeholder18;
     gPlayerAvatar.unk6 = 1;
     ScriptContext2_Enable();
-    PlaySoundEffect(SE_TK_WARPIN);
+    PlaySE(SE_TK_WARPIN);
     return 1;
 }
 

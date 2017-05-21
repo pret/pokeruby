@@ -315,17 +315,17 @@ static u8 StartMenu_InputProcessCallback(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(-1);
     }
     if (gMain.newKeys & DPAD_DOWN)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func == StartMenu_PokedexCallback)
         {
             if (GetNationalPokedexCount(0) == 0)
@@ -566,7 +566,7 @@ static bool8 SaveDialogCheckForTimeoutOrKeypress(void)
     saveDialogTimer--;
     if (gMain.heldKeys & A_BUTTON)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         return TRUE;
     }
     else if (saveDialogTimer == 0)
@@ -702,7 +702,7 @@ static u8 SaveDialogCB_SaveSuccess(void)
 {
     if (MenuUpdateWindowText())
     {
-        PlaySoundEffect(SE_SAVE);
+        PlaySE(SE_SAVE);
         saveDialogCallback = SaveDialogCB_ReturnSuccess;
     }
     return SAVE_IN_PROGRESS;
@@ -723,7 +723,7 @@ static u8 SaveDialogCB_SaveError(void)
 {
     if (MenuUpdateWindowText())
     {
-        PlaySoundEffect(SE_BOO);
+        PlaySE(SE_BOO);
         saveDialogCallback = SaveDialogCB_ReturnError;
     }
     return SAVE_IN_PROGRESS;

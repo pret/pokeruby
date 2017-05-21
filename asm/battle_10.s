@@ -3005,7 +3005,7 @@ _080399A8:
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldr r2, _080399EC @ =gSprites
 	ldr r1, _080399F0 @ =gUnknown_02024BE0
 	ldrb r0, [r5]
@@ -3953,7 +3953,7 @@ _0803A0E8:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	bl dp01_tbl4_exec_completed
 	pop {r4}
 	pop {r0}

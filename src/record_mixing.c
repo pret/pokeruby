@@ -94,7 +94,7 @@ void Task_RecordMixing_SoundEffect(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 50)
     {
-        PlaySoundEffect(SE_W213);
+        PlaySE(SE_W213);
         gTasks[taskId].data[0] = 0;
     }
 }
@@ -128,7 +128,7 @@ void Task_RecordMixing_Main(u8 taskId)
     case 2:
         taskData[10] = CreateTask(sub_80BA00C, 10);
         taskData[TD_STATE] = 3;
-        PlaySoundEffect(SE_W226);
+        PlaySE(SE_W226);
         break;
     case 3:        // wait for sub_80BA00C
         if (!gTasks[taskData[10]].isActive)
@@ -187,14 +187,14 @@ void sub_80B95F0(u8 taskId)
         {
             if (players == sub_800820C())
             {
-                PlaySoundEffect(0x15);
+                PlaySE(0x15);
                 task->data[TD_STATE] = 201;
                 task->data[12] = 0;
             }
         }
         else
         {
-            PlaySoundEffect(0x16);
+            PlaySE(0x16);
             task->data[TD_STATE] = 301;
         }
         break;

@@ -672,7 +672,7 @@ void sub_80B52B4(u8 taskId)
             {
                 if (!gTasks[taskId].data[4])
                 {
-                    PlaySoundEffect(5);
+                    PlaySE(5);
                     gScriptResult = 127;
                 }
                 else
@@ -770,7 +770,7 @@ void task_yes_no_maybe(u8 taskId)
         return;
     case -1:
     case 1:
-        PlaySoundEffect(5);
+        PlaySE(5);
         gScriptResult = 0;
         break;
     case 0:
@@ -835,7 +835,7 @@ void sub_80B5684(u8 taskId)
         {
             if (!gTasks[taskId].data[4])
             {
-                PlaySoundEffect(5);
+                PlaySE(5);
                 gScriptResult = 127;
             }
             else

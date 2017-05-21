@@ -168,7 +168,7 @@ Task_DecorationPCProcessMenuInput: @ 80FE2EC
 	cmp r0, 0
 	beq _080FE324
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -182,7 +182,7 @@ _080FE324:
 	cmp r0, 0
 	beq _080FE342
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	ldr r1, _080FE370 @ =gUnknown_020388D4
@@ -195,7 +195,7 @@ _080FE342:
 	cmp r0, 0
 	beq _080FE378
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080FE374 @ =gUnknown_083EC604
 	ldr r0, _080FE370 @ =gUnknown_020388D4
 	ldrb r0, [r0]
@@ -217,7 +217,7 @@ _080FE378:
 	cmp r0, 0
 	beq _080FE38C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r7, 0
 	bl gpu_pal_decompress_alloc_tag_and_upload
 _080FE38C:
@@ -554,7 +554,7 @@ _080FE61C:
 	cmp r0, 0
 	beq _080FE640
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -568,7 +568,7 @@ _080FE640:
 	cmp r0, 0
 	beq _080FE656
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _080FE720
@@ -579,7 +579,7 @@ _080FE656:
 	cmp r0, 0
 	beq _080FE70C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl GetMenuCursorPos
 	ldr r4, _080FE6C0 @ =gUnknown_020388F6
 	strb r0, [r4]
@@ -652,7 +652,7 @@ _080FE70C:
 	cmp r0, 0
 	beq _080FE720
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80FE728
 _080FE720:
@@ -819,7 +819,7 @@ sub_80FE894: @ 80FE894
 	mov r10, r1
 _080FE8C8:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	lsls r0, r5, 24
 	asrs r0, 24
 	cmp r0, 0
@@ -967,7 +967,7 @@ _080FE9EE:
 	beq _080FEA7C
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r2, _080FEA44 @ =gUnknown_020388F5
 	ldr r1, _080FEA48 @ =gUnknown_020388F2
 	ldr r0, _080FEA38 @ =gUnknown_020388F4
@@ -1027,7 +1027,7 @@ _080FEA7C:
 	beq _080FEAAC
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _080FEAB4 @ =gUnknown_083EC634
 	ldr r2, _080FEAB8 @ =gTasks
 	lsls r0, r4, 2
@@ -3846,7 +3846,7 @@ _08100078: .4byte gSecretBaseText_PlaceItHere
 _0810007C: .4byte sub_81000A0
 _08100080:
 	movs r0, 0x20
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r1, _08100098 @ =gSecretBaseText_CantBePlacedHere
 	ldr r2, _0810009C @ =sub_81006A8
 	adds r0, r4, 0

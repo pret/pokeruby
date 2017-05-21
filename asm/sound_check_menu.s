@@ -2012,7 +2012,7 @@ _080BB104:
 	movs r4, 0x40
 	negs r4, r4
 	adds r1, r4, 0
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	str r4, [r5, 0x1C]
 	b _080BB14C
 	.align 2, 0
@@ -2021,7 +2021,7 @@ _080BB13C: .4byte gUnknown_020387B4
 _080BB140:
 	ldrh r0, [r5]
 	movs r1, 0x3F
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	movs r0, 0x3F
 	str r0, [r5, 0x1C]
 _080BB14C:
@@ -2031,7 +2031,7 @@ _080BB14C:
 	b _080BB1C8
 _080BB154:
 	ldrh r0, [r5]
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	str r4, [r5, 0x18]
 	b _080BB1C8
 _080BB15E:

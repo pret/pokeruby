@@ -1985,7 +1985,7 @@ _0811FD34:
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	ldr r2, _0811FDB8 @ =gSprites
 	ldr r3, _0811FDBC @ =gUnknown_02024BE0
 	ldrb r0, [r5]
@@ -2952,7 +2952,7 @@ _081204B4:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl PlaySoundEffect12WithPanning
+	bl PlaySE12WithPanning
 	bl dp01_tbl3_exec_completed
 	pop {r4}
 	pop {r0}

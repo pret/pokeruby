@@ -554,7 +554,7 @@ sub_813B174: @ 813B174
 	cmp r0, 0
 	beq _0813B1B8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0813B1E6
@@ -567,7 +567,7 @@ _0813B1B8:
 	cmp r0, 0
 	beq _0813B274
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4, 0x2]
 	subs r0, 0x1
 	b _0813B208
@@ -583,7 +583,7 @@ _0813B1CA:
 	cmp r1, r0
 	beq _0813B1F4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 _0813B1E6:
 	bl MoveMenuCursor
@@ -598,7 +598,7 @@ _0813B1F4:
 	cmp r0, r1
 	beq _0813B274
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldrb r0, [r4, 0x2]
 	adds r0, 0x1
 _0813B208:
@@ -614,7 +614,7 @@ _0813B212:
 	beq _0813B25C
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0813B23C @ =0x0201fe00
 	ldrb r1, [r0, 0x2]
 	ldrb r2, [r0]
@@ -647,7 +647,7 @@ _0813B25C:
 	beq _0813B274
 	bl sub_8072DEC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_813B320
 _0813B274:
@@ -811,7 +811,7 @@ sub_813B3A0: @ 813B3A0
 	cmp r0, 0
 	beq _0813B3C8
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -824,7 +824,7 @@ _0813B3C8:
 	cmp r0, 0
 	beq _0813B3DE
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _0813B420
@@ -835,7 +835,7 @@ _0813B3DE:
 	cmp r0, 0
 	beq _0813B40C
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r4, _0813B408 @ =gUnknown_084062F8
 	bl GetMenuCursorPos
 	lsls r0, 24
@@ -854,7 +854,7 @@ _0813B40C:
 	cmp r0, 0
 	beq _0813B420
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r4, 0
 	bl Mailbox_Cancel
 _0813B420:

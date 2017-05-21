@@ -861,7 +861,7 @@ PetalburgGymSpecial1: @ 810E070
 	ldr r0, _0810E094 @ =gUnknown_02039259
 	strb r1, [r0]
 	movs r0, 0x2C
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _0810E098 @ =Task_PetalburgGym
 	movs r1, 0x8
 	bl CreateTask
@@ -2159,7 +2159,7 @@ _0810E9E8:
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -2205,7 +2205,7 @@ _0810EA94:
 	ldr r0, _0810EAC4 @ =gScriptResult
 	strh r1, [r0]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_810EEDC
 	movs r0, 0
 	movs r1, 0
@@ -2402,7 +2402,7 @@ sub_810EBEC: @ 810EBEC
 	bl SetCameraPanningCallback
 	bl sub_810ECFC
 	movs r0, 0x59
-	bl PlaySoundEffect
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2450,7 +2450,7 @@ sub_810EC34: @ 810EC34
 	cmp r0, 0x17
 	bne _0810EC92
 	movs r0, 0x49
-	bl PlaySoundEffect
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_810EC9C
 	bl InstallCameraPanAheadCallback
@@ -3092,7 +3092,7 @@ _0810F17A:
 	ldrb r1, [r1]
 	strh r1, [r0]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_810EEDC
 	movs r0, 0
 	movs r1, 0
@@ -3112,7 +3112,7 @@ _0810F1AE:
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	bl sub_810EEDC
 	movs r0, 0
 	movs r1, 0
@@ -3896,7 +3896,7 @@ sub_810F758: @ 810F758
 	movs r0, 0
 	bl SetCameraPanningCallback
 	movs r0, 0xD6
-	bl PlaySoundEffect
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.align 2, 0

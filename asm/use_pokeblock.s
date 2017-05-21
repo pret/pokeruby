@@ -635,7 +635,7 @@ _0813667C:
 	cmp r0, 0
 	beq _081366AC
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_80F5060
 	bl move_anim_execute
@@ -653,7 +653,7 @@ _081366AC:
 	cmp r0, 0
 	beq _081366D4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	movs r0, 0
 	bl sub_80F5060
 	bl move_anim_execute
@@ -671,7 +671,7 @@ _081366D4:
 	cmp r0, 0
 	beq _081366F4
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _081366F0 @ =gUnknown_02039304
 	ldr r0, [r0]
 	adds r0, 0x50
@@ -687,7 +687,7 @@ _081366F4:
 	b _081367FA
 _081366FE:
 	movs r0, 0x5
-	bl PlaySoundEffect
+	bl PlaySE
 	ldr r0, _08136728 @ =gUnknown_083DFEC4
 	ldr r0, [r0]
 	ldr r2, _0813672C @ =0x000087dc

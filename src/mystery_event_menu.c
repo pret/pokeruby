@@ -113,13 +113,13 @@ static void CB2_MysteryEventMenu(void)
         case 3:
             if ((gLinkStatus & 0x20) && (gLinkStatus & 0x1C) > 4)
             {
-                PlaySoundEffect(SE_PIN);
+                PlaySE(SE_PIN);
                 sub_8072044(gSystemText_LoadEventPressA);
                 gMain.state++;
             }
             if (gMain.newKeys & B_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 CloseLink();
                 gMain.state = 15;
             }
@@ -139,7 +139,7 @@ static void CB2_MysteryEventMenu(void)
             }
             if (gMain.newKeys & A_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 sub_8007F4C();
                 MenuDrawTextWindow(6, 5, 23, 8);
                 MenuPrint(gSystemText_LoadingEvent, 7, 6);
@@ -147,7 +147,7 @@ static void CB2_MysteryEventMenu(void)
             }
             else if (gMain.newKeys & B_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 CloseLink();
                 gMain.state = 15;
             }
@@ -185,7 +185,7 @@ static void CB2_MysteryEventMenu(void)
             }
             if (gMain.newKeys & B_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 CloseLink();
                 gMain.state = 15;
                 break;
@@ -199,7 +199,7 @@ static void CB2_MysteryEventMenu(void)
             }
             if (gMain.newKeys & A_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 sub_8007F4C();
                 MenuDrawTextWindow(6, 5, 23, 8);
                 MenuPrint(gSystemText_LoadingEvent, 7, 6);
@@ -207,7 +207,7 @@ static void CB2_MysteryEventMenu(void)
             }
             else if (gMain.newKeys & B_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 CloseLink();
                 gMain.state = 15;
             }
@@ -264,7 +264,7 @@ static void CB2_MysteryEventMenu(void)
             }
             if (gMain.newKeys & B_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 CloseLink();
                 gMain.state = 15;
                 break;
@@ -313,7 +313,7 @@ static void CB2_MysteryEventMenu(void)
         case 14:
             if (gMain.newKeys & A_BUTTON)
             {
-                PlaySoundEffect(SE_SELECT);
+                PlaySE(SE_SELECT);
                 gMain.state++;
             }
             break;

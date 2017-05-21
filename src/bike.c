@@ -617,7 +617,7 @@ static void AcroBikeTransition_80E5920(u8 direction)
         }
     }
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    PlaySoundEffect(SE_JITE_PYOKO);
+    PlaySE(SE_JITE_PYOKO);
     playerMapObj->mapobj_bit_9 = 1;
     PlayerSetAnimId(sub_80608A4(direction), 2);
 }

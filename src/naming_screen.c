@@ -453,7 +453,7 @@ static bool8 MainState_StartPageSwap(struct Task *task)
     StartPageSwapAnim();
     sub_80B6888(1);
     sub_80B6460(0, 0, 1);
-    PlaySoundEffect(SE_WIN_OPEN);
+    PlaySE(SE_WIN_OPEN);
     namingScreenData.state = MAIN_STATE_WAIT_PAGE_SWAP;
     return FALSE;
 }
@@ -607,7 +607,7 @@ static bool8 KeyboardKeyHandler_OK(u8 event)
     sub_80B6460(2, 1, 0);
     if (event == KBEVENT_PRESSED_A)
     {
-        PlaySoundEffect(SE_SELECT);
+        PlaySE(SE_SELECT);
         namingScreenData.state = MAIN_STATE_6;
         return TRUE;
     }
@@ -1370,7 +1370,7 @@ static void DeleteTextCharacter(void)
     var2 = GetKeyRoleAtCursorPos();
     if (var2 == 0 || var2 == 2)
         sub_80B6460(1, 0, 1);
-    PlaySoundEffect(SE_BOWA);
+    PlaySE(SE_BOWA);
 }
 
 static bool8 sub_80B7004(void)
@@ -1391,7 +1391,7 @@ static bool8 sub_80B7004(void)
     else
         AddTextCharacter(ch);
     sub_80B7960();
-    PlaySoundEffect(SE_SELECT);
+    PlaySE(SE_SELECT);
     if (r4)
     {
         if (GetPreviousTextCaretPosition() == namingScreenData.template->maxChars - 1)
@@ -1422,7 +1422,7 @@ static void sub_80B7090(void) // DoInput?
             sub_80B72A4(r4, r5);
     }
     sub_80B7960();
-    PlaySoundEffect(SE_SELECT);
+    PlaySE(SE_SELECT);
 }
 
 static bool8 sub_80B7104(void)

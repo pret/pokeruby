@@ -2009,7 +2009,7 @@ _081115B4:
 	beq _081115D0
 	strh r1, [r5, 0xA]
 	movs r0, 0x3
-	bl PlaySoundEffect
+	bl PlaySE
 	b _0811163C
 	.align 2, 0
 _081115CC: .4byte gMain
@@ -2030,7 +2030,7 @@ _081115D0:
 _081115EA:
 	strh r3, [r5, 0xA]
 	movs r0, 0x6D
-	bl PlaySoundEffect
+	bl PlaySE
 	b _0811163C
 	.align 2, 0
 _081115F4: .4byte gSaveBlock2
