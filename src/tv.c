@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "tv.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "flags.h"
@@ -68,9 +69,6 @@ extern u16 gScriptResult;
 extern u8 gUnknown_020387E8;
 
 extern struct UnkTvStruct gUnknown_03005D38;
-
-extern u8 gSpeciesNames[][11];
-extern u8 gMoveNames[][13];
 
 extern u8 *gTVBravoTrainerTextGroup[];
 extern u8 *gTVBravoTrainerBattleTowerTextGroup[];

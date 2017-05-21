@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "m4a.h"
@@ -19,11 +20,6 @@ asm(".set OFFSET_REG_BLDCNT,      0x50");
 asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
-struct MonCoords
-{
-    u8 x, y;
-};
 
 extern void *species_and_otid_get_pal(u32, u16, u16);
 
@@ -172,10 +168,6 @@ extern s16 gUnknown_0203935A;
 extern s16 gUnknown_0203935C;
 
 extern u8 gReservedSpritePaletteCount;
-
-// data/data2
-extern struct MonCoords gMonFrontPicCoords[];
-extern struct SpriteSheet gMonFrontPicTable[];
 
 // data/starter_choose
 extern u16 gBirchBagGrassPal[32];
@@ -1520,8 +1512,8 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 
     LoadSpecialPokePic(
         &gMonFrontPicTable[species],
-        gMonFrontPicCoords[species].x,
-        gMonFrontPicCoords[species].y,
+        gMonFrontPicCoords[species].coords,
+        gMonFrontPicCoords[species].y_offset,
         0x2000000,
         gUnknown_0840B5A0[position],
         species,

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "battle.h"
+#include "data2.h"
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
@@ -74,9 +75,6 @@ extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024E6C;
 extern struct SpindaSpot gSpindaSpotGraphics[];
-extern void *gUnknown_081FAF4C[];
-extern u8 gSpeciesNames[][11];
-extern struct Trainer gTrainers[];
 extern s8 gNatureStatTable[][5];
 extern s8 gUnknown_082082FE[][3];
 extern u16 gTrainerBattleOpponent;
@@ -88,8 +86,6 @@ extern u32 gTMHMLearnsets[][2];
 extern const u16 *gLevelUpLearnsets[];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
-extern const struct SpritePalette gMonPaletteTable[];
-extern const struct SpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern s8 gUnknown_083F7E28[];
 extern u8 byte_2024C06;

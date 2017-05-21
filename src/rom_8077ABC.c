@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "blend_palette.h"
+#include "data2.h"
 #include "decompress.h"
 #include "palette.h"
 #include "species.h"
@@ -38,13 +39,6 @@ struct Struct_unk_2019348 {
 struct TransformStatus {
     u16 unknown;
     u16 species;
-};
-
-struct MonCoords {
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
 };
 
 struct Struct_gUnknown_0837F578 {
@@ -101,11 +95,8 @@ extern struct Struct_unk_2019348 unk_2019348;
 extern struct TransformStatus gTransformStatuses[];
 extern u16 gBattleMonPartyPositions[];
 extern u16 gBattleTypeFlags;
-extern struct MonCoords gMonBackPicCoords[];
-extern struct MonCoords gMonFrontPicCoords[];
 extern u32 gTransformPersonalities[NUM_BATTLE_SLOTS];
 extern u8 gBattleMonForms[NUM_BATTLE_SLOTS];
-extern u8 gEnemyMonElevation[];
 extern u16 gUnknown_0202F7CA[];
 extern u8 gBattleMonSprites[NUM_BATTLE_SLOTS];
 extern u8 gBattleAnimPlayerMonIndex;
@@ -116,9 +107,6 @@ extern u8 gUnknown_02024A68; // gNumBattleMons?
 extern struct OamMatrix gOamMatrices[];
 extern struct Struct_2017810 unk_2017810[];
 extern u8 gUnknown_0202F7BE;
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18;
-extern struct SpriteSheet gMonFrontPicTable[];
-extern struct SpriteSheet gMonBackPicTable[];
 
 extern u8 IsContest();
 extern bool8 sub_8078874(u8);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "data2.h"
 #include "decompress.h"
 #include "sprite.h"
 
@@ -6,9 +7,6 @@ extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 
 static void sub_8046388(struct Sprite *);
 
-extern struct SpriteSheet gUnknown_081FAEA4;
-extern struct SpritePalette gUnknown_081FAEAC;
-extern const struct SpriteTemplate gSpriteTemplate_81FAF0C;
 
 u8 sub_8046234(s16 x, s16 y, u8 a3)
 {

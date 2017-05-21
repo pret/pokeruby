@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "data2.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "songs.h"
@@ -87,7 +88,6 @@ extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[DATA_COUNT];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
-extern const u8 gMoveNames[][13];
 extern const u8 *const gItemEffectTable[];
 
 extern bool8 IsDoubleBattle(void);

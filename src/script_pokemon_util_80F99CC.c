@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "battle_party_menu.h"
+#include "data2.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "rom4.h"
@@ -16,8 +17,6 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038694;
 extern u16 gScriptResult;
-
-extern u8 gMoveNames[][13];
 
 extern void (*gUnknown_0300485C)(void);
 

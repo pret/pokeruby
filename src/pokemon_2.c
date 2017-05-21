@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "data2.h"
 #include "event_data.h"
 #include "main.h"
 #include "pokemon.h"
@@ -37,13 +38,8 @@ extern struct PokemonStorage gPokemonStorage;
 extern u8 gBadEggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
-extern u8 gSpeciesNames[][11];
-extern struct BattleMove gBattleMoves[];
 extern const struct SpriteTemplate gSpriteTemplate_8208288[];
-extern const union AmimCmd *const gSpriteAnimTable_81E7C64[];
 //array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
-extern const union AnimCmd *const *const gUnknown_081EC2A4[];
-extern const union AnimCmd *const *const gUnknown_081ECACC[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];

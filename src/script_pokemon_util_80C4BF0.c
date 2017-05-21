@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "berry.h"
 #include "contest.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "items.h"
@@ -21,9 +22,6 @@
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
-extern const struct SpriteSheet gMonFrontPicTable[];
-extern struct MonCoords gMonFrontPicCoords[];
-
 extern void sub_80C46EC(void);
 extern void sub_80C4740(void);
 extern void sub_80C48F4(void);
@@ -35,7 +33,6 @@ extern void sub_8042044(struct Pokemon *mon, u16, u8);
 extern void sub_8121E10(void);
 extern void sub_8121E34(void);
 
-extern void *gUnknown_081FAF4C[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct SpritePalette *sub_80409C8(u16, u32, u32);
 
@@ -437,7 +434,7 @@ void ShowContestEntryMonPic(void)
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
-        gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y,
+        gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
         (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
         paletteData = sub_80409C8(species, var2, var1);
         LoadCompressedObjectPalette(paletteData);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "mori_debug_menu.h"
 #include "asm.h"
+#include "data2.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -19,8 +20,6 @@ extern u8 gUnknown_0839B255[];
 extern u8 gUnknown_0839B257[];
 
 extern const struct MenuAction gMoriDebugMenuActions[];
-
-extern u8 gSpeciesNames[][11];
 
 void unref_sub_8083CF0(void)
 {

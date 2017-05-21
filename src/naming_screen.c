@@ -1,6 +1,7 @@
 #include "global.h"
 #include "naming_screen.h"
 #include "asm.h"
+#include "data2.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -56,7 +57,6 @@ extern const u16 gUnknown_083CE748[];
 extern const u16 gUnknown_083CEBF8[];
 extern const u16 gUnknown_083CF0A8[];
 extern const u16 gUnknown_08E86258[];
-extern const u8 gSpeciesNames[][11];
 
 static void C2_NamingScreen(void);
 static void sub_80B5AA0(void);

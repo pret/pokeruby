@@ -2,6 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "intro.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "libgncmultiboot.h"
 #include "link.h"
@@ -21,12 +22,6 @@
 extern void *species_and_otid_get_pal(/*TODO: arg types*/);
 extern void sub_8143680(int, u8);
 
-struct MonCoords
-{
-    u8 x, y;
-};
-
-
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
@@ -36,13 +31,6 @@ extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gMultibootProgramStruct;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
-extern struct SpriteSheet gMonFrontPicTable[];
-extern struct MonCoords gMonFrontPicCoords[];
-extern struct SpriteSheet gMonBackPicTable[];
-extern struct MonCoords gMonBackPicCoords[];
-extern struct SpriteSheet gTrainerBackPicTable[];
-extern struct MonCoords gTrainerBackPicCoords[];
-extern struct SpritePalette gTrainerBackPicPaletteTable[];
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u16 gInterfacePal_PokeBall[];
 extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
@@ -1797,9 +1785,9 @@ static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
     u8 spriteId;
 
     if (front)
-        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
+        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
     else
-        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].x, gMonBackPicCoords[species].y, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
+        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].coords, gMonBackPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
     pal = species_and_otid_get_pal(species, 0, 0xFFFF);
     LoadCompressedPalette(pal, 0x100 + d * 0x10, 0x20);
     sub_8143648(d, d);
@@ -1813,7 +1801,7 @@ static u8 sub_813CFA8(u16 a, u16 b, u16 c, u16 d)
 {
     u8 spriteId;
 
-    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].x, gTrainerBackPicCoords[a].y, (void *)0x2000000, gUnknown_0840B5A0[d], a);
+    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].coords, gTrainerBackPicCoords[a].y_offset, (void *)0x2000000, gUnknown_0840B5A0[d], a);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + d * 0x10, 0x20);
     sub_8143680(d, d);
     gUnknown_02024E8C.anims = gUnknown_0840B064;

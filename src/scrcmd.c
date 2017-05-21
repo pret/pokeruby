@@ -6,6 +6,7 @@
 #include "clock.h"
 #include "coins.h"
 #include "contest_painting.h"
+#include "data2.h"
 #include "decoration.h"
 #include "event_data.h"
 #include "field_door.h"
@@ -58,9 +59,6 @@ extern u16 gScriptContestCategory;
 extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
 extern u8 *gStdScripts_End[];
-
-extern u8 gSpeciesNames[][11];
-extern u8 gMoveNames[][13];
 
 extern u8 * const gUnknown_083CE048[];
 extern struct Decoration gDecorations[];
