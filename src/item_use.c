@@ -22,6 +22,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "vars.h"
 
@@ -73,23 +74,6 @@ extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
 extern u8 GetItemEffectType();
 extern void sub_808B020(void);
 extern void sub_810B96C(void);
-
-extern u8 gOtherText_DadsAdvice[];
-extern u8 gOtherText_CantGetOffBike[];
-extern u8 gOtherText_NoResponse[];
-extern u8 gOtherText_ItemfinderResponding[];
-extern u8 gOtherText_ItemfinderItemUnderfoot[];
-extern u8 gOtherText_Coins3[];
-extern u8 gOtherText_BootedHM[];
-extern u8 gOtherText_BootedTM[];
-extern u8 gOtherText_ContainsMove[];
-extern u8 gOtherText_UsedItem[];
-extern u8 gOtherText_RepelLingers[];
-extern u8 gOtherText_UsedFlute[];
-extern u8 gOtherText_UsedRepel[];
-extern u8 gOtherText_BoxIsFull[];
-extern u8 gOtherText_WontHaveAnyEffect[];
-extern u8 gOtherText_SnapConfusion[];
 
 extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;

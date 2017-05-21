@@ -11,6 +11,7 @@
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "trig.h"
 
@@ -20,14 +21,11 @@ struct MonCoords
 };
 
 extern void * const gUnknown_081FAF4C[];
-extern const u8 gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
 extern const u8 gSpeciesNames[][11];
-extern const u8 gOtherText_Poke[];
 extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpritePalette gMonPaletteTable[];
-extern const u8 gOtherText_BirchInTrouble[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 //--------------------------------------------------

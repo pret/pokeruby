@@ -23,6 +23,7 @@
 #include "species.h"
 #include "starter_choose.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
@@ -44,8 +45,6 @@ EWRAM_DATA u8 *gTrainerVictorySpeech = NULL;
 EWRAM_DATA u8 *gTrainerCannotBattleSpeech = NULL;
 EWRAM_DATA u8 *gTrainerBattleScriptReturnAddress = NULL;
 EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
-
-extern u8 gOtherText_CancelWithTerminator[];
 
 extern u16 gBattleTypeFlags;
 extern u16 gScriptLastTalked;
@@ -1169,12 +1168,12 @@ void PlayTrainerEncounterMusic(void)
 }
 
 //Returns an empty string if a null pointer was passed, otherwise returns str
-u8 *SanitizeString(u8 *str)
+u8 *SanitizeString(const u8 *str)
 {
     if (str)
-        return str;
+        return (u8 *) str;
     else
-        return gOtherText_CancelWithTerminator;
+        return (u8 *) gOtherText_CancelWithTerminator;
 }
 
 u8 *sub_808281C(void)

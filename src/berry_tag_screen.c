@@ -12,6 +12,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 
@@ -38,10 +39,6 @@ extern u16 gUnknown_030041B4;
 extern const struct SpriteSheet gUnknown_083C1F74;
 extern const struct SpritePalette gUnknown_083C1F7C;
 
-extern u8 gOtherText_ThreeQuestions2[];
-extern u8 gOtherText_Size[];
-extern u8 gOtherText_Firm[];
-extern u8 gContestStatsText_Unknown1[];
 extern u8 *gUnknown_0841192C[];
 
 extern u8 gBerryCheck_Gfx[];

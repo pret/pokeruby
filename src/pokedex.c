@@ -12,6 +12,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
@@ -90,12 +91,6 @@ extern u8 gUnknown_08E96ACC[];
 extern u8 gUnknown_08E96B58[];
 
 extern struct PokedexEntry gPokedexEntries[];
-extern u8 gDexText_UnknownPoke[];
-extern u8 gDexText_UnknownHeight[];
-extern u8 gDexText_UnknownWeight[];
-extern u8 gDexText_CryOf[];
-extern u8 gDexText_SizeComparedTo[];
-extern u8 gDexText_RegisterComplete[];
 
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);

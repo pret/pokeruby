@@ -10,6 +10,7 @@
 #include "script.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 
 #define NEW_GAME_PC_ITEMS(i, type) ((u16)(gNewGamePCItems + type)[i * 2])
@@ -21,7 +22,7 @@ enum
     QUANTITY,
 };
 
-extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
@@ -40,12 +41,7 @@ extern void sub_80F98DC(int);
 extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
 extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 
-extern u8 gOtherText_NoItems[];
-
 extern u16 gNewGamePCItems[];
-
-extern u8 gOtherText_WhatWillYouDo[];
-extern u8 gOtherText_NoMailHere[];
 
 extern u8 *gUnknown_02039314;
 extern struct MenuAction gUnknown_08406298[];
@@ -57,7 +53,6 @@ extern u8 gUnknown_08406327[];
 extern u8 gUnknown_08406330[];
 extern u8 gUnknown_0840631E[];
 extern u8 gUnknown_08406318[];
-extern u8 gOtherText_CancelNoTerminator[];
 
 extern u8 gUnknown_030007B4;
 extern u8 unk_201FE00[];

@@ -1,10 +1,10 @@
 #include "global.h"
 #include "item.h"
 #include "string_util.h"
+#include "strings.h"
 
 extern struct Berry *GetBerryInfo(u8 berry);
 
-extern u8 gOtherText_Berry2[];
 extern u8 gUnknown_02038560;
 extern struct Item gItems[];
 

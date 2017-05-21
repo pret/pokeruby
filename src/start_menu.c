@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "trainer_card.h"
 
@@ -54,10 +55,8 @@ EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 
 //Text strings
-extern u8 gSystemText_Saving[];
 extern u8 gSaveText_PlayerSavedTheGame[];
 extern u8 gSaveText_DontTurnOff[];
-extern u8 gSystemText_SaveErrorExchangeBackup[];
 extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
@@ -113,7 +112,7 @@ static u8 SaveCallback1(void);
 static u8 SaveCallback2(void);
 static void sub_807160C(void);
 static u8 RunSaveDialogCallback(void);
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void));
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void));
 static void Task_SaveDialog(u8 taskId);
 static void sub_8071700(void);
 static void HideSaveDialog(void);
@@ -517,7 +516,7 @@ void InitSaveDialog(void)
     CreateTask(Task_SaveDialog, 0x50);
 }
 
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void))
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void))
 {
     StringExpandPlaceholders(gStringVar4, ptr);
     MenuDisplayMessageBox();

@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "save.h"
 #include "sprite.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 
@@ -35,13 +36,6 @@ extern u32 gDamagedSaveSectors;
 extern u32 gGameContinueCallback;
 
 extern u8 gBirchHelpGfx[];
-
-extern u8 gSystemText_SaveFailedBackupCheck[];
-extern u8 gSystemText_CheckCompleteSaveAttempt[];
-extern u8 gSystemText_BackupDamagedGameContinue[];
-extern u8 gSystemText_SaveCompletedPressA[];
-extern u8 gSystemText_SaveCompletedGameEnd[];
-extern u8 gSystemText_GameplayEnded[];
 
 extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];

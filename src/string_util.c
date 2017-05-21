@@ -1,5 +1,6 @@
 #include "global.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 
 u8 gUnknownStringVar[16];
@@ -22,20 +23,6 @@ static const s32 sPowersOfTen[] =
      100000000,
     1000000000,
 };
-
-extern u8 gExpandedPlaceholder_Empty[];
-extern u8 gExpandedPlaceholder_Kun[];
-extern u8 gExpandedPlaceholder_Chan[];
-extern u8 gExpandedPlaceholder_Sapphire[];
-extern u8 gExpandedPlaceholder_Ruby[];
-extern u8 gExpandedPlaceholder_Aqua[];
-extern u8 gExpandedPlaceholder_Magma[];
-extern u8 gExpandedPlaceholder_Archie[];
-extern u8 gExpandedPlaceholder_Maxie[];
-extern u8 gExpandedPlaceholder_Kyogre[];
-extern u8 gExpandedPlaceholder_Groudon[];
-extern u8 gExpandedPlaceholder_Brendan[];
-extern u8 gExpandedPlaceholder_May[];
 
 u8 *StringCopy10(u8 *dest, const u8 *src)
 {
@@ -473,17 +460,17 @@ static u8 *ExpandPlaceholder_StringVar3(void)
 static u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return gExpandedPlaceholder_Kun;
+        return (u8 *) gExpandedPlaceholder_Kun;
     else
-        return gExpandedPlaceholder_Chan;
+        return (u8 *) gExpandedPlaceholder_Chan;
 }
 
 static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return gExpandedPlaceholder_May;
+        return (u8 *) gExpandedPlaceholder_May;
     else
-        return gExpandedPlaceholder_Brendan;
+        return (u8 *) gExpandedPlaceholder_Brendan;
 }
 
 #define VERSION_DEPENDENT_PLACEHOLDER_LIST \
@@ -497,11 +484,11 @@ static u8 *ExpandPlaceholder_RivalName(void)
 
 #ifdef SAPPHIRE
 #define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##s; }
+static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##s; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #else
 #define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##r; }
+static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##r; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #endif
 
@@ -530,7 +517,7 @@ u8 *GetExpandedPlaceholder(u32 id)
     };
 
     if (id >= ARRAY_COUNT(funcs))
-        return gExpandedPlaceholder_Empty;
+        return (u8 *) gExpandedPlaceholder_Empty;
     else
         return funcs[id]();
 }
