@@ -44,7 +44,6 @@ extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
 extern const u16 gUnknown_08393E64[];
 extern void *const gUnknown_0840B5A0[];
-extern const s16 gSineTable[];
 
 //--------------------------------------------------
 // Graphics Data

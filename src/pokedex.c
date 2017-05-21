@@ -14,6 +14,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "trig.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon
@@ -78,7 +79,6 @@ extern struct SpriteTemplate gSpriteTemplate_83A056C;
 extern struct SpriteTemplate gSpriteTemplate_83A0584;
 extern struct SpriteTemplate gSpriteTemplate_83A059C;
 extern struct SpriteTemplate gSpriteTemplate_83A05B4;
-extern s16 gSineTable[];
 extern struct PokedexListItem *gUnknown_0202FFBC;
 extern IntrCallback gUnknown_03005CEC;
 extern u8 gUnknown_08E96BD4[];
