@@ -1,12 +1,17 @@
 #include "global.h"
 #include "asm.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex.h"
+#include "rng.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
+#include "starter_choose.h"
 #include "trig.h"
 
 asm(".set REG_BASE, 0x4000000");
@@ -14,8 +19,6 @@ asm(".set OFFSET_REG_BLDCNT,      0x50");
 asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
-u32 NationalPokedexNumToSpecies(u16 nationalNum);
 
 struct MonCoords
 {
@@ -126,14 +129,17 @@ enum
     TDE_TASK_A_ID = 2,
 };
 
+#define POKEMON_TILE_COUNT 68
+
 struct Unk201C000
 {
-    u16 unk0[8];
-    u8 pad_10[0x78];
+    u16 unk0[POKEMON_TILE_COUNT];
     u16 unk88;
     u16 unk8A;
     u16 unk8C;
     u16 unk8E;
+    u16 unk90[386];
+    u16 unk394;
 };
 
 struct CreditsEntry
@@ -226,12 +232,12 @@ static u8 sub_8144454(u8 page, u8 taskIdA);
 static void task_d_8144514(u8 taskIdD);
 static bool8 sub_8144ECC(u8 data, u8 taskIdA);
 static void sub_81450AC(u8 taskIdA);
-void sub_8145128(u16, u16, u16);
-static void sub_81452D0(u16 arg0, u16 arg1);
+static void sub_8145128(u16, u16, u16);
+static void sub_81452D0(u16 arg0, u16 palette);
 static void spritecb_player_8145378(struct Sprite *sprite);
 static void spritecb_rival_8145420(struct Sprite *sprite);
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3);
-void sub_81458DC(void);
+static u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position);
+static void sub_81458DC(void);
 
 static void vblank_8143948(void)
 {
@@ -666,8 +672,7 @@ static void task_b_81441B8(u8 taskIdB)
 
                 for (i = 0; i < 5; i++)
                 {
-                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 0,
-                        9 + i * 2, 240);
+                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 0, 9 + i * 2, 240);
                 }
 
                 gTasks[taskIdB].data[TDB_CURRENT_PAGE] += 1;
@@ -816,8 +821,6 @@ static u8 sub_8144454(u8 page, u8 taskIdA)
     return FALSE;
 }
 
-#define UNK_DEFINE_44 (0x44)
-
 static void task_d_8144514(u8 taskIdD)
 {
     struct Unk201C000 *r6 = &ewram1c000;
@@ -834,7 +837,7 @@ static void task_d_8144514(u8 taskIdD)
         gTasks[taskIdD].data[TDD_STATE]++;
         break;
     case 2:
-        if (r6->unk88 == UNK_DEFINE_44 || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != task_a_8143B68)
+        if (r6->unk88 == POKEMON_TILE_COUNT || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != task_a_8143B68)
             break;
         r2 = sub_81456B4(r6->unk0[r6->unk8C], gUnknown_0840CA00[r6->unk8A][0], gUnknown_0840CA00[r6->unk8A][1], r6->unk8A);
         if (r6->unk8C < r6->unk8E - 1)
@@ -866,83 +869,83 @@ static void task_d_8144514(u8 taskIdD)
 
 void task_c_8144664(u8 taskIdC)
 {
-    switch (gTasks[taskIdC].data[0])
+    switch (gTasks[taskIdC].data[TDC_0])
     {
     case 0:
-        gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
-        gTasks[taskIdC].data[5]++;
+        gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+        gTasks[taskIdC].data[TDC_5]++;
         break;
     case 1:
         if (gUnknown_0203935A != 0)
         {
-            gUnknown_0203935A = Sin((gTasks[taskIdC].data[5] >> 1) & 0x7F, 12);
-            gTasks[taskIdC].data[5]++;
+            gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+            gTasks[taskIdC].data[TDC_5]++;
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[2]].data0 = 2;
-            gTasks[taskIdC].data[5] = 0;
-            gTasks[taskIdC].data[0]++;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 2;
+            gTasks[taskIdC].data[TDC_5] = 0;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 2:
-        if (gTasks[taskIdC].data[5] < 64)
+        if (gTasks[taskIdC].data[TDC_5] < 64)
         {
-            gTasks[taskIdC].data[5]++;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+            gTasks[taskIdC].data[TDC_5]++;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
-            gTasks[taskIdC].data[0]++;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 3:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 3;
-        gSprites[gTasks[taskIdC].data[3]].data0 = 1;
-        gTasks[taskIdC].data[4] = 120;
-        gTasks[taskIdC].data[0]++;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 3;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 1;
+        gTasks[taskIdC].data[TDC_4] = 120;
+        gTasks[taskIdC].data[TDC_0]++;
         break;
     case 4:
-        if (gTasks[taskIdC].data[4] != 0)
+        if (gTasks[taskIdC].data[TDC_4] != 0)
         {
-            gTasks[taskIdC].data[4]--;
+            gTasks[taskIdC].data[TDC_4]--;
         }
         else
         {
-            gTasks[taskIdC].data[5] = 64;
-            gTasks[taskIdC].data[0]++;
+            gTasks[taskIdC].data[TDC_5] = 64;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 5:
-        if (gTasks[taskIdC].data[5] > 0)
+        if (gTasks[taskIdC].data[TDC_5] > 0)
         {
-            gTasks[taskIdC].data[5]--;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[5] & 0x7F, 20);
+            gTasks[taskIdC].data[TDC_5]--;
+            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[2]].data0 = 1;
-            gTasks[taskIdC].data[0]++;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 1;
+            gTasks[taskIdC].data[TDC_0]++;
         }
         break;
     case 6:
-        gTasks[taskIdC].data[0] = 50;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 10:
-        gSprites[gTasks[taskIdC].data[3]].data0 = 2;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 2;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 20:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 4;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 4;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 30:
-        gSprites[gTasks[taskIdC].data[2]].data0 = 5;
-        gSprites[gTasks[taskIdC].data[3]].data0 = 3;
-        gTasks[taskIdC].data[0] = 50;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 5;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 3;
+        gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 50:
-        gTasks[taskIdC].data[0] = 0;
+        gTasks[taskIdC].data[TDC_0] = 0;
         break;
     }
 }
@@ -1205,119 +1208,39 @@ static void sub_81450AC(u8 taskIdA)
     gUnknown_0203935C = 1;
 }
 
-__attribute__((naked))
-void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    adds r3, r0, 0\n\
-    adds r4, r2, 0\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    lsls r1, 16\n\
-    lsrs r7, r1, 16\n\
-    lsls r4, 16\n\
-    lsrs r5, r4, 16\n\
-    ldr r0, _081451EC @ =gCreditsCopyrightEnd_Gfx\n\
-    movs r6, 0xC0\n\
-    lsls r6, 19\n\
-    adds r3, r6\n\
-    adds r1, r3, 0\n\
-    bl LZ77UnCompVram\n\
-    ldr r0, _081451F0 @ =gIntroCopyright_Pal\n\
-    adds r1, r5, 0\n\
-    movs r2, 0x20\n\
-    bl LoadPalette\n\
-    lsrs r4, 20\n\
-    lsls r4, 28\n\
-    lsrs r4, 16\n\
-    movs r2, 0\n\
-    adds r1, r4, 0x1\n\
-    ldr r3, _081451F4 @ =0x000003ff\n\
-_0814515E:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r6\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, r3\n\
-    bls _0814515E\n\
-    movs r2, 0\n\
-    adds r0, r4, 0x2\n\
-    adds r6, r4, 0\n\
-    adds r6, 0x17\n\
-    movs r1, 0x2B\n\
-    adds r1, r4\n\
-    mov r12, r1\n\
-    adds r4, 0x42\n\
-    ldr r5, _081451F8 @ =0x060001c8\n\
-    adds r3, r0, 0\n\
-_08145184:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x14\n\
-    bls _08145184\n\
-    movs r2, 0\n\
-    ldr r5, _081451FC @ =0x06000248\n\
-    adds r3, r6, 0\n\
-_0814519E:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x13\n\
-    bls _0814519E\n\
-    movs r2, 0\n\
-    ldr r5, _08145200 @ =0x060002c8\n\
-    mov r3, r12\n\
-_081451B8:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r5\n\
-    adds r1, r2, r3\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x16\n\
-    bls _081451B8\n\
-    movs r2, 0\n\
-    ldr r3, _08145204 @ =0x06000348\n\
-_081451D0:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7\n\
-    adds r0, r3\n\
-    adds r1, r2, r4\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0xB\n\
-    bls _081451D0\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_081451EC: .4byte gCreditsCopyrightEnd_Gfx\n\
-_081451F0: .4byte gIntroCopyright_Pal\n\
-_081451F4: .4byte 0x000003ff\n\
-_081451F8: .4byte 0x060001c8\n\
-_081451FC: .4byte 0x06000248\n\
-_08145200: .4byte 0x060002c8\n\
-_08145204: .4byte 0x06000348\n\
-    .syntax divided\n");
+static void sub_8145128(u16 arg0, u16 arg1, u16 arg2) {
+    u16 baseTile;
+    u16 i;
+
+    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *) (VRAM + arg0));
+    LoadPalette(gIntroCopyright_Pal, arg2, sizeof(gIntroCopyright_Pal));
+
+    baseTile = (arg2 / 16) << 12;
+
+    for (i = 0; i < 32 * 32; i++)
+    {
+        ((u16 *) (VRAM + arg1))[i] = baseTile + 1;
+    }
+
+    for (i = 0; i < 21; i++)
+    {
+        ((u16 *) (VRAM + arg1))[7 * 32 + 4 + i] = i + 2 + baseTile;
+    }
+
+    for (i = 0; i < 20; i++)
+    {
+        ((u16 *) (VRAM + arg1))[9 * 32 + 4 + i] = i + 23 + baseTile;
+    }
+
+    for (i = 0; i < 23; i++)
+    {
+        ((u16 *) (VRAM + arg1))[11 * 32 + 4 + i] = i + 43 + baseTile;
+    }
+
+    for (i = 0; i < 12; i++)
+    {
+        ((u16 *) (VRAM + arg1))[13 * 32 + 4 + i] = i + 66 + baseTile;
+    }
 }
 
 u16 sub_8145208(u8 arg0)
@@ -1332,106 +1255,45 @@ u16 sub_8145208(u8 arg0)
 
     if (arg0 & (1 << 7))
     {
-        out |= 0x800;
+        out |= 1 << 11;
     }
 
     if (arg0 & (1 << 6))
     {
-        out |= 0x400;
+        out |= 1 << 10;
     }
 
     return out;
 }
 
-__attribute__((naked))
-void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    str r0, [sp]\n\
-    ldr r0, [sp, 0x2C]\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r10, r1\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    str r2, [sp, 0x4]\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    str r3, [sp, 0x8]\n\
-    lsls r0, 16\n\
-    lsrs r0, 20\n\
-    lsls r0, 28\n\
-    lsrs r0, 16\n\
-    mov r9, r0\n\
-    movs r5, 0\n\
-_0814527A:\n\
-    movs r4, 0\n\
-    lsls r7, r5, 1\n\
-    ldr r1, [sp, 0x4]\n\
-    adds r0, r1, r5\n\
-    adds r2, r5, 0x1\n\
-    mov r8, r2\n\
-    lsls r0, 6\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r6, r0, r1\n\
-_0814528C:\n\
-    adds r0, r7, r5\n\
-    adds r0, r4\n\
-    ldr r2, [sp]\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    bl sub_8145208\n\
-    mov r2, r10\n\
-    adds r1, r2, r4\n\
-    lsls r1, 1\n\
-    adds r1, r6\n\
-    movs r2, 0xC0\n\
-    lsls r2, 19\n\
-    adds r1, r2\n\
-    add r0, r9\n\
-    strh r0, [r1]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x2\n\
-    bls _0814528C\n\
-    mov r1, r8\n\
-    lsls r0, r1, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x4\n\
-    bls _0814527A\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette) {
+    u8 y, x;
+
+    const u16 tileOffset = (palette / 16) << 12;
+
+    for (y = 0; y < 5; y++)
+    {
+        for (x = 0; x < 3; x++)
+        {
+            ((u16 *) (VRAM + arg3 + (baseY + y) * 64))[baseX + x] = tileOffset + sub_8145208(arg0[y * 3 + x]);
+        }
+    }
 }
 
-static void sub_81452D0(u16 arg0, u16 arg1)
+static void sub_81452D0(u16 arg0, u16 palette)
 {
-    u16 i;
-    u16 foo = arg1 / 16;
-    u16 bar = foo * 4096;
+    u16 pos;
+    u16 baseTile = (palette / 16) << 12;
 
-    for (i = 0; i < 0x400; i++)
-        ((u16 *)(VRAM + arg0))[i] = bar + 1;
+    for (pos = 0; pos < 32 * 32; pos++)
+        ((u16 *) (VRAM + arg0))[pos] = baseTile + 1;
 
-    sub_814524C(&gUnknown_0840B83C, 3, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B84B, 7, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B85A, 11, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B85A, 16, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B869, 20, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B878, 24, 7, arg0, arg1);
+    sub_814524C(gUnknown_0840B83C, 3, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B84B, 7, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B85A, 11, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B85A, 16, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B869, 20, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B878, 24, 7, arg0, palette);
 }
 
 static void spritecb_player_8145378(struct Sprite *sprite)
@@ -1538,268 +1400,121 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
     }
 }
 
-__attribute__((naked))
-void spritecb_81454E0(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    sub sp, 0x4\n\
-    adds r5, r0, 0\n\
-    ldr r0, _081454F8 @ =gUnknown_0203935C\n\
-    movs r1, 0\n\
-    ldrsh r0, [r0, r1]\n\
-    cmp r0, 0\n\
-    beq _081454FC\n\
-    adds r0, r5, 0\n\
-    bl DestroySprite\n\
-    b _081456A6\n\
-    .align 2, 0\n\
-_081454F8: .4byte gUnknown_0203935C\n\
-_081454FC:\n\
-    ldrh r0, [r5, 0x3C]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5, 0x3C]\n\
-    movs r2, 0x2E\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0xA\n\
-    bhi _08145544\n\
-    lsls r0, 2\n\
-    ldr r1, _08145514 @ =_08145518\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08145514: .4byte _08145518\n\
-    .align 2, 0\n\
-_08145518:\n\
-    .4byte _08145544\n\
-    .4byte _0814559E\n\
-    .4byte _08145620\n\
-    .4byte _08145660\n\
-    .4byte _08145544\n\
-    .4byte _08145544\n\
-    .4byte _08145544\n\
-    .4byte _08145544\n\
-    .4byte _08145544\n\
-    .4byte _08145544\n\
-    .4byte _08145696\n\
-_08145544:\n\
-    ldrb r1, [r5, 0x1]\n\
-    movs r0, 0x4\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    movs r1, 0x1\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x1]\n\
-    movs r0, 0x30\n\
-    ldrsh r1, [r5, r0]\n\
-    movs r0, 0x1F\n\
-    ands r1, r0\n\
-    lsls r1, 1\n\
-    ldrb r2, [r5, 0x3]\n\
-    movs r0, 0x3F\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x3]\n\
-    movs r0, 0x10\n\
-    strh r0, [r5, 0x32]\n\
-    ldrh r4, [r5, 0x30]\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0x80\n\
-    lsls r0, 9\n\
-    movs r1, 0x10\n\
-    bl __divsi3\n\
-    adds r1, r0, 0\n\
-    str r1, [sp]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl SetOamMatrix\n\
-    adds r2, r5, 0\n\
-    adds r2, 0x3E\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0x5\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2]\n\
-    movs r0, 0x1\n\
-    strh r0, [r5, 0x2E]\n\
-    b _081456A6\n\
-_0814559E:\n\
-    ldrh r1, [r5, 0x32]\n\
-    movs r2, 0x32\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0xFF\n\
-    bgt _081455D4\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x8\n\
-    strh r0, [r5, 0x32]\n\
-    ldrh r4, [r5, 0x30]\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0x32\n\
-    ldrsh r1, [r5, r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 9\n\
-    bl __divsi3\n\
-    adds r1, r0, 0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    str r1, [sp]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl SetOamMatrix\n\
-    b _081455DA\n\
-_081455D4:\n\
-    ldrh r0, [r5, 0x2E]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5, 0x2E]\n\
-_081455DA:\n\
-    movs r2, 0x30\n\
-    ldrsh r1, [r5, r2]\n\
-    cmp r1, 0x2\n\
-    beq _081456A6\n\
-    cmp r1, 0x2\n\
-    bgt _081455EC\n\
-    cmp r1, 0x1\n\
-    beq _081455F2\n\
-    b _081456A6\n\
-_081455EC:\n\
-    cmp r1, 0x3\n\
-    beq _0814560A\n\
-    b _081456A6\n\
-_081455F2:\n\
-    ldrh r1, [r5, 0x3C]\n\
-    movs r0, 0x3\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08145602\n\
-    ldrh r0, [r5, 0x22]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5, 0x22]\n\
-_08145602:\n\
-    ldrh r0, [r5, 0x20]\n\
-    subs r0, 0x2\n\
-    strh r0, [r5, 0x20]\n\
-    b _081456A6\n\
-_0814560A:\n\
-    ldrh r0, [r5, 0x3C]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _08145618\n\
-    ldrh r0, [r5, 0x22]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5, 0x22]\n\
-_08145618:\n\
-    ldrh r0, [r5, 0x20]\n\
-    adds r0, 0x2\n\
-    strh r0, [r5, 0x20]\n\
-    b _081456A6\n\
-_08145620:\n\
-    ldrh r1, [r5, 0x34]\n\
-    movs r2, 0x34\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0\n\
-    beq _08145630\n\
-    subs r0, r1, 0x1\n\
-    strh r0, [r5, 0x34]\n\
-    b _081456A6\n\
-_08145630:\n\
-    ldr r1, _0814565C @ =REG_BLDCNT\n\
-    movs r2, 0xF4\n\
-    lsls r2, 4\n\
-    adds r0, r2, 0\n\
-    strh r0, [r1]\n\
-    adds r1, 0x2\n\
-    movs r0, 0x10\n\
-    strh r0, [r1]\n\
-    ldrb r1, [r5, 0x1]\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x1]\n\
-    movs r0, 0x10\n\
-    strh r0, [r5, 0x34]\n\
-    ldrh r0, [r5, 0x2E]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5, 0x2E]\n\
-    b _081456A6\n\
-    .align 2, 0\n\
-_0814565C: .4byte REG_BLDCNT\n\
-_08145660:\n\
-    ldrh r1, [r5, 0x34]\n\
-    movs r2, 0x34\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0\n\
-    beq _08145684\n\
-    subs r1, 0x1\n\
-    strh r1, [r5, 0x34]\n\
-    ldr r3, _08145680 @ =REG_BLDALPHA\n\
-    movs r0, 0x34\n\
-    ldrsh r2, [r5, r0]\n\
-    movs r0, 0x10\n\
-    subs r0, r2\n\
-    lsls r0, 8\n\
-    adds r1, r0\n\
-    strh r1, [r3]\n\
-    b _081456A6\n\
-    .align 2, 0\n\
-_08145680: .4byte REG_BLDALPHA\n\
-_08145684:\n\
-    adds r2, r5, 0\n\
-    adds r2, 0x3E\n\
-    ldrb r0, [r2]\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    strb r0, [r2]\n\
-    movs r0, 0xA\n\
-    strh r0, [r5, 0x2E]\n\
-    b _081456A6\n\
-_08145696:\n\
-    ldr r0, _081456B0 @ =REG_BLDCNT\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    adds r0, 0x2\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0\n\
-    bl DestroySprite\n\
-_081456A6:\n\
-    add sp, 0x4\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_081456B0: .4byte REG_BLDCNT\n\
-    .syntax divided\n");
+void spritecb_81454E0(struct Sprite *sprite) {
+    if (gUnknown_0203935C)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+
+    sprite->data7 += 1;
+    switch (sprite->data0)
+    {
+    case 0:
+    default:
+        sprite->oam.affineMode = 1;
+        sprite->oam.matrixNum = sprite->data1;
+        sprite->data2 = 16;
+        SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+        sprite->invisible = FALSE;
+        sprite->data0 = 1;
+        break;
+
+    case 1:
+        if (sprite->data2 < 256)
+        {
+            sprite->data2 += 8;
+            SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+        }
+        else
+        {
+            sprite->data0 += 1;
+        }
+        switch (sprite->data1)
+        {
+        case 1:
+            if ((sprite->data7 & 3) == 0)
+            {
+                sprite->pos1.y += 1;
+            }
+            sprite->pos1.x -= 2;
+            break;
+        case 2:
+            break;
+        case 3:
+            if ((sprite->data7 & 3) == 0)
+            {
+                sprite->pos1.y += 1;
+            }
+            sprite->pos1.x += 2;
+            break;
+        }
+        break;
+
+    case 2:
+        if (sprite->data3 != 0)
+        {
+            sprite->data3 -= 1;
+        }
+        else
+        {
+            REG_BLDCNT = 0xF40;
+            REG_BLDALPHA = 0x10;
+            sprite->oam.objMode = 1;
+            sprite->data3 = 16;
+            sprite->data0 += 1;
+        }
+        break;
+
+    case 3:
+        if (sprite->data3 != 0)
+        {
+            int data3;
+            vu16 *reg;
+
+            sprite->data3 -= 1;
+
+            reg = &REG_BLDALPHA;
+            data3 = 16 - sprite->data3;
+            *reg = (data3 << 8) + sprite->data3;
+        }
+        else
+        {
+            sprite->invisible = TRUE;
+            sprite->data0 = 10;
+        }
+        break;
+
+    case 10:
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        DestroySprite(sprite);
+        break;
+
+    }
 }
 
-#ifdef NONMATCHING
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
+static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 {
-    u32 species;
     u32 personality;
     void *palette;
     u8 spriteId;
     u8 spriteId2;
 
-    species = NationalPokedexNumToSpecies(nationalNum);
+    species = NationalPokedexNumToSpecies(species);
+
     switch (species)
     {
-    case SPECIES_UNOWN:
-        personality = gSaveBlock2.pokedex.unownPersonality;
+    default:
+        personality = 0;
         break;
 
     case SPECIES_SPINDA:
         personality = gSaveBlock2.pokedex.spindaPersonality;
         break;
 
-    default:
-        personality = 0;
+    case SPECIES_UNOWN:
+        personality = gSaveBlock2.pokedex.unownPersonality;
         break;
     }
 
@@ -1808,196 +1523,30 @@ u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
         gMonFrontPicCoords[species].x,
         gMonFrontPicCoords[species].y,
         0x2000000,
-        gUnknown_0840B5A0[arg3],
+        gUnknown_0840B5A0[position],
         species,
         personality,
         1
     );
 
     palette = species_and_otid_get_pal(species, 0, 0xFFFF);
-    LoadCompressedPalette(palette, 0x100 + (arg3 * 16), 0x20);
-    sub_8143648(arg3, arg3);
+    LoadCompressedPalette(palette, 0x100 + (position * 16), 0x20);
+    sub_8143648(position, position);
 
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
-    gSprites[spriteId].oam.paletteNum = arg3;
+    gSprites[spriteId].oam.paletteNum = position;
     gSprites[spriteId].oam.priority = 1;
-    gSprites[spriteId].data1 = arg3 + 1;
+    gSprites[spriteId].data1 = position + 1;
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].callback = spritecb_81454E0;
 
     spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].pos1.x, gSprites[spriteId].pos1.y, 1);
     gSprites[spriteId2].data0 = spriteId;
 
-    StartSpriteAnimIfDifferent(&gSprites[spriteId2], arg3);
+    StartSpriteAnimIfDifferent(&gSprites[spriteId2], position);
 
     return spriteId;
 }
-#else
-__attribute__((naked))
-u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    mov r10, r1\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    str r2, [sp, 0x10]\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    mov r9, r3\n\
-    adds r0, r6, 0\n\
-    bl NationalPokedexNumToSpecies\n\
-    adds r6, r0, 0\n\
-    cmp r6, 0xC9\n\
-    beq _081456F8\n\
-    movs r0, 0x9A\n\
-    lsls r0, 1\n\
-    cmp r6, r0\n\
-    beq _081456EE\n\
-    movs r7, 0\n\
-    b _081456FC\n\
-_081456EE:\n\
-    ldr r0, _081456F4 @ =gSaveBlock2\n\
-    ldr r7, [r0, 0x20]\n\
-    b _081456FC\n\
-    .align 2, 0\n\
-_081456F4: .4byte gSaveBlock2\n\
-_081456F8:\n\
-    ldr r0, _081457E8 @ =gSaveBlock2\n\
-    ldr r7, [r0, 0x1C]\n\
-_081456FC:\n\
-    lsls r0, r6, 3\n\
-    ldr r1, _081457EC @ =gMonFrontPicTable\n\
-    adds r0, r1\n\
-    ldr r1, _081457F0 @ =gMonFrontPicCoords\n\
-    lsls r2, r6, 2\n\
-    adds r2, r1\n\
-    ldrb r1, [r2]\n\
-    ldrb r2, [r2, 0x1]\n\
-    movs r3, 0x80\n\
-    lsls r3, 18\n\
-    ldr r4, _081457F4 @ =gUnknown_0840B5A0\n\
-    mov r8, r4\n\
-    mov r5, r9\n\
-    lsls r4, r5, 2\n\
-    add r4, r8\n\
-    ldr r4, [r4]\n\
-    str r4, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    str r7, [sp, 0x8]\n\
-    movs r4, 0x1\n\
-    str r4, [sp, 0xC]\n\
-    bl LoadSpecialPokePic\n\
-    ldr r2, _081457F8 @ =0x0000ffff\n\
-    adds r0, r6, 0\n\
-    movs r1, 0\n\
-    bl species_and_otid_get_pal\n\
-    lsls r5, 4\n\
-    mov r8, r5\n\
-    movs r1, 0x80\n\
-    lsls r1, 1\n\
-    add r1, r8\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    movs r2, 0x20\n\
-    bl LoadCompressedPalette\n\
-    mov r7, r9\n\
-    lsls r6, r7, 24\n\
-    lsrs r6, 24\n\
-    mov r0, r9\n\
-    adds r1, r6, 0\n\
-    bl sub_8143648\n\
-    ldr r0, _081457FC @ =gUnknown_02024E8C\n\
-    mov r2, r10\n\
-    lsls r1, r2, 16\n\
-    asrs r1, 16\n\
-    ldr r3, [sp, 0x10]\n\
-    lsls r2, r3, 16\n\
-    asrs r2, 16\n\
-    movs r3, 0\n\
-    bl CreateSprite\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r5, _08145800 @ =gSprites\n\
-    lsls r2, r4, 4\n\
-    adds r2, r4\n\
-    lsls r2, 2\n\
-    adds r3, r2, r5\n\
-    ldrb r1, [r3, 0x5]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    mov r7, r8\n\
-    orrs r0, r7\n\
-    movs r1, 0xD\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    strb r0, [r3, 0x5]\n\
-    mov r0, r9\n\
-    adds r0, 0x1\n\
-    strh r0, [r3, 0x30]\n\
-    movs r0, 0x3E\n\
-    adds r0, r3\n\
-    mov r8, r0\n\
-    ldrb r0, [r0]\n\
-    orrs r0, r1\n\
-    mov r1, r8\n\
-    strb r0, [r1]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x1C\n\
-    adds r2, r0\n\
-    ldr r0, _08145804 @ =spritecb_81454E0\n\
-    str r0, [r2]\n\
-    ldr r0, _08145808 @ =gSpriteTemplate_840CAEC\n\
-    movs r2, 0x20\n\
-    ldrsh r1, [r3, r2]\n\
-    movs r7, 0x22\n\
-    ldrsh r2, [r3, r7]\n\
-    movs r3, 0x1\n\
-    bl CreateSprite\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    strh r4, [r0, 0x2E]\n\
-    adds r1, r6, 0\n\
-    bl StartSpriteAnimIfDifferent\n\
-    adds r0, r4, 0\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_081457E8: .4byte gSaveBlock2\n\
-_081457EC: .4byte gMonFrontPicTable\n\
-_081457F0: .4byte gMonFrontPicCoords\n\
-_081457F4: .4byte gUnknown_0840B5A0\n\
-_081457F8: .4byte 0x0000ffff\n\
-_081457FC: .4byte gUnknown_02024E8C\n\
-_08145800: .4byte gSprites\n\
-_08145804: .4byte spritecb_81454E0\n\
-_08145808: .4byte gSpriteTemplate_840CAEC\n\
-    .syntax divided\n");
-}
-#endif
 
 void spritecb_814580C(struct Sprite *sprite)
 {
@@ -2015,223 +1564,79 @@ void spritecb_814580C(struct Sprite *sprite)
     sprite->pos1.y = gSprites[sprite->data0].pos1.y;
 }
 
-__attribute__((naked))
-void sub_81458DC(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r7, _0814597C @ =0x0201c000\n\
-    ldr r0, _08145980 @ =0x00004023\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl GetStarterPokemon\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl SpeciesToNationalPokedexNum\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r10, r0\n\
-    movs r4, 0x1\n\
-    movs r5, 0\n\
-    ldr r0, _08145984 @ =0x00000181\n\
-    mov r8, r0\n\
-_0814590E:\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    bl sub_8090D90\n\
-    lsls r0, 24\n\
-    adds r6, r7, 0\n\
-    adds r6, 0x90\n\
-    cmp r0, 0\n\
-    beq _0814592C\n\
-    lsls r0, r5, 1\n\
-    adds r0, r6, r0\n\
-    strh r4, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_0814592C:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, r8\n\
-    bls _0814590E\n\
-    adds r4, r5, 0\n\
-    ldr r0, _08145984 @ =0x00000181\n\
-    lsls r1, r4, 16\n\
-    mov r9, r1\n\
-    movs r2, 0x8E\n\
-    adds r2, r7\n\
-    mov r8, r2\n\
-    adds r1, r7, 0\n\
-    adds r1, 0x86\n\
-    str r1, [sp]\n\
-    cmp r4, r0\n\
-    bhi _08145964\n\
-    adds r1, r6, 0\n\
-    movs r3, 0\n\
-    adds r2, r0, 0\n\
-_08145954:\n\
-    lsls r0, r4, 1\n\
-    adds r0, r1, r0\n\
-    strh r3, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, r2\n\
-    bls _08145954\n\
-_08145964:\n\
-    movs r2, 0xE5\n\
-    lsls r2, 2\n\
-    adds r0, r7, r2\n\
-    strh r5, [r0]\n\
-    mov r1, r9\n\
-    lsrs r0, r1, 16\n\
-    cmp r0, 0x43\n\
-    bhi _08145988\n\
-    mov r2, r8\n\
-    strh r5, [r2]\n\
-    b _0814598E\n\
-    .align 2, 0\n\
-_0814597C: .4byte 0x0201c000\n\
-_08145980: .4byte 0x00004023\n\
-_08145984: .4byte 0x00000181\n\
-_08145988:\n\
-    movs r0, 0x44\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-_0814598E:\n\
-    movs r5, 0\n\
-    movs r2, 0xE5\n\
-    lsls r2, 2\n\
-    adds r4, r7, r2\n\
-    mov r9, r5\n\
-    b _0814599E\n\
-_0814599A:\n\
-    cmp r5, 0x43\n\
-    bhi _081459EE\n\
-_0814599E:\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    ldrh r1, [r4]\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    lsls r1, r5, 1\n\
-    adds r1, r7, r1\n\
-    lsls r0, r2, 1\n\
-    adds r3, r6, r0\n\
-    ldrh r0, [r3]\n\
-    strh r0, [r1]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    mov r0, r9\n\
-    strh r0, [r3]\n\
-    ldrh r0, [r4]\n\
-    subs r0, 0x1\n\
-    strh r0, [r4]\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r2, r0\n\
-    beq _081459E8\n\
-    ldrh r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r6, r0\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r3]\n\
-    ldrh r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r6, r0\n\
-    mov r1, r9\n\
-    strh r1, [r0]\n\
-_081459E8:\n\
-    ldrh r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _0814599A\n\
-_081459EE:\n\
-    mov r2, r8\n\
-    ldrh r0, [r2]\n\
-    cmp r0, 0x43\n\
-    bhi _08145A26\n\
-    adds r5, r0, 0\n\
-    movs r2, 0\n\
-    cmp r5, 0x43\n\
-    bhi _08145A5C\n\
-    mov r3, r8\n\
-_08145A00:\n\
-    lsls r1, r5, 1\n\
-    adds r1, r7, r1\n\
-    lsls r0, r2, 1\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    ldrh r0, [r3]\n\
-    cmp r2, r0\n\
-    bne _08145A1A\n\
-    movs r2, 0\n\
-_08145A1A:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x43\n\
-    bls _08145A00\n\
-    b _08145A5C\n\
-_08145A26:\n\
-    movs r4, 0\n\
-    ldrh r0, [r7]\n\
-    cmp r0, r10\n\
-    beq _08145A42\n\
-_08145A2E:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    lsls r0, r4, 1\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r10\n\
-    beq _08145A42\n\
-    cmp r4, 0x43\n\
-    bls _08145A2E\n\
-_08145A42:\n\
-    mov r1, r8\n\
-    ldrh r0, [r1]\n\
-    subs r0, 0x1\n\
-    cmp r4, r0\n\
-    bge _08145A5C\n\
-    lsls r0, r4, 1\n\
-    adds r0, r7, r0\n\
-    ldr r2, [sp]\n\
-    ldrh r1, [r2]\n\
-    strh r1, [r0]\n\
-    mov r0, r10\n\
-    strh r0, [r2]\n\
-    b _08145A62\n\
-_08145A5C:\n\
-    mov r2, r10\n\
-    ldr r1, [sp]\n\
-    strh r2, [r1]\n\
-_08145A62:\n\
-    movs r0, 0x44\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+static void sub_81458DC(void) {
+    struct Unk201C000 *unk201C000 = &ewram1c000;
+    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
+    u16 seenTypesCount;
+    u16 page;
+    u16 dexNum;
+    u16 j;
+
+    for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
+    {
+        if (sub_8090D90(dexNum, 1))
+        {
+            unk201C000->unk90[seenTypesCount] = dexNum;
+            seenTypesCount++;
+        }
+    }
+
+    for (dexNum = seenTypesCount; dexNum < 386; dexNum++)
+    {
+        unk201C000->unk90[dexNum] = 0;
+    }
+
+    unk201C000->unk394 = seenTypesCount;
+    if (unk201C000->unk394 < POKEMON_TILE_COUNT)
+    {
+        unk201C000->unk8E = seenTypesCount;
+    }
+    else
+    {
+        unk201C000->unk8E = POKEMON_TILE_COUNT;
+    }
+
+    j = 0;
+    do
+    {
+        page = Random() % unk201C000->unk394;
+        unk201C000->unk0[j] = unk201C000->unk90[page];
+
+        j++;
+        unk201C000->unk90[page] = 0;
+        unk201C000->unk394--;
+        if (page != unk201C000->unk394)
+        {
+            unk201C000->unk90[page] = unk201C000->unk90[unk201C000->unk394];
+            unk201C000->unk90[unk201C000->unk394] = 0;
+        }
+    }
+    while (unk201C000->unk394 != 0 && j < POKEMON_TILE_COUNT);
+
+    if (unk201C000->unk8E < POKEMON_TILE_COUNT)
+    {
+        for (j = unk201C000->unk8E, page = 0; j < POKEMON_TILE_COUNT; j++)
+        {
+            unk201C000->unk0[j] = unk201C000->unk0[page];
+
+            page++;
+            if (page == unk201C000->unk8E)
+                page = 0;
+        }
+        unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+    }
+    else
+    {
+
+        for (dexNum = 0; unk201C000->unk0[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++);
+
+        if (dexNum < unk201C000->unk8E - 1)
+        {
+            unk201C000->unk0[dexNum] = unk201C000->unk0[POKEMON_TILE_COUNT - 1];
+            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+        }
+        else
+            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+    }
+    unk201C000->unk8E = POKEMON_TILE_COUNT;
 }

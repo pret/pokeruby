@@ -422,6 +422,9 @@ void sub_8134AC0(void *);
 // src/player_pc.o
 void NewGameInitPCItems(void);
 
+// asm/hall_of_fame.o
+void sub_8143648(u16 paletteTag, u8 arg1);
+
 // src/diploma.o
 void sub_8145D88(void);
 
