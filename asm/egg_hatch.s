@@ -52,7 +52,7 @@ AddHatchedMonToParty: @ 80429EC
 	bl sub_8090D90
 	ldr r1, _08042AA4 @ =gStringVar1
 	adds r0, r5, 0
-	bl pokemon_get_nick
+	bl GetMonNick
 	mov r2, sp
 	adds r2, 0xE
 	movs r0, 0x4
@@ -110,7 +110,7 @@ sub_8042ABC: @ 8042ABC
 	lsls r0, 4
 	adds r0, r5, r0
 	mov r1, sp
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r1, r0, 3
@@ -857,7 +857,7 @@ _08043124:
 	ldr r1, _08043150 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _08043154 @ =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, _08043158 @ =gStringVar4
 	ldr r1, _0804315C @ =gOtherText_HatchedFromEgg
 	adds r0, r4, 0
@@ -898,7 +898,7 @@ _08043180:
 	ldr r1, _080431A8 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080431AC @ =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, _080431B0 @ =gStringVar4
 	ldr r1, _080431B4 @ =gOtherText_NickHatchPrompt
 	adds r0, r4, 0
@@ -957,7 +957,7 @@ _080431DA:
 	adds r0, r6
 	ldr r1, _08043280 @ =gStringVar3
 	mov r10, r1
-	bl pokemon_get_nick
+	bl GetMonNick
 	mov r2, r9
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x4]
