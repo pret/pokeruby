@@ -1665,7 +1665,7 @@ u8 sub_805CAAC(s16 a0, s16 a1, s16 a2, s16 a3)
     return dirn;
 }
 
-u8 sub_805CADC(s16 a0, s16 a1)
+u8 sub_805CADC(s16 a0, s16 a1, s16 a2, s16 a3)
 {
     u8 dirn;
     dirn = DIR_SOUTH;
@@ -1676,7 +1676,7 @@ u8 sub_805CADC(s16 a0, s16 a1)
     return dirn;
 }
 
-u8 sub_805CAEC(s16 a0, s16 a1)
+u8 sub_805CAEC(s16 a0, s16 a1, s16 a2, s16 a3)
 {
     u8 dirn;
     dirn = DIR_EAST;
@@ -1686,3 +1686,132 @@ u8 sub_805CAEC(s16 a0, s16 a1)
     }
     return dirn;
 }
+
+u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_EAST)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    else if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_SOUTH)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_WEST)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    else if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_SOUTH)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_EAST)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    else if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_NORTH)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_WEST)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    else if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_NORTH)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
