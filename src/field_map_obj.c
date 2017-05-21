@@ -2112,3 +2112,171 @@ u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
     mapObject->mapobj_bit_1 = 0;
     return 0;
 }
+
+void FieldObjectCB_BerryTree(struct Sprite *sprite);
+void sub_805D4F4(struct Sprite *sprite);
+void sub_805D634(struct Sprite *sprite);
+void sub_805D774(struct Sprite *sprite);
+void sub_805D8B4(struct Sprite *sprite);
+void sub_805D9F4(struct Sprite *sprite);
+void sub_805DB34(struct Sprite *sprite);
+void sub_805DC74(struct Sprite *sprite);
+void sub_805DDB4(struct Sprite *sprite);
+void sub_805DEF4(struct Sprite *sprite);
+void sub_805E034(struct Sprite *sprite);
+void sub_805E174(struct Sprite *sprite);
+void sub_805E278(struct Sprite *sprite);
+void sub_805E37C(struct Sprite *sprite);
+void sub_805E37C(struct Sprite *sprite);
+void sub_805E37C(struct Sprite *sprite);
+void sub_805E37C(struct Sprite *sprite);
+void sub_805E5DC(struct Sprite *sprite);
+void sub_805E668(struct Sprite *sprite);
+void sub_805E6F4(struct Sprite *sprite);
+void sub_805E780(struct Sprite *sprite);
+void sub_805E80C(struct Sprite *sprite);
+void sub_805E898(struct Sprite *sprite);
+void sub_805E924(struct Sprite *sprite);
+void sub_805E9B0(struct Sprite *sprite);
+void sub_805EA3C(struct Sprite *sprite);
+void sub_805EAC8(struct Sprite *sprite);
+void sub_805EB54(struct Sprite *sprite);
+void sub_805EBE0(struct Sprite *sprite);
+void sub_805EC6C(struct Sprite *sprite);
+void sub_805ECF8(struct Sprite *sprite);
+void sub_805ED84(struct Sprite *sprite);
+void sub_805EE10(struct Sprite *sprite);
+void sub_805EE9C(struct Sprite *sprite);
+void sub_805EF28(struct Sprite *sprite);
+void sub_805EFB4(struct Sprite *sprite);
+void sub_805F040(struct Sprite *sprite);
+void sub_805F0CC(struct Sprite *sprite);
+void sub_805F158(struct Sprite *sprite);
+void sub_805F1E4(struct Sprite *sprite);
+void sub_805F270(struct Sprite *sprite);
+void sub_805F2FC(struct Sprite *sprite);
+void sub_805F2FC(struct Sprite *sprite);
+void sub_805F2FC(struct Sprite *sprite);
+void sub_805F2FC(struct Sprite *sprite);
+void FieldObjectCB_TreeDisguise(struct Sprite *sprite);
+void FieldObjectCB_MountainDisguise(struct Sprite *sprite);
+void sub_805F8E0(struct Sprite *sprite);
+void sub_805F8E0(struct Sprite *sprite);
+void sub_805F8E0(struct Sprite *sprite);
+void sub_805F8E0(struct Sprite *sprite);
+void FieldObjectCB_Hidden1(struct Sprite *sprite);
+void sub_805FB20(struct Sprite *sprite);
+void sub_805FB20(struct Sprite *sprite);
+void sub_805FB20(struct Sprite *sprite);
+void sub_805FB20(struct Sprite *sprite);
+void sub_805FB90(struct Sprite *sprite);
+void sub_805FB90(struct Sprite *sprite);
+void sub_805FB90(struct Sprite *sprite);
+void sub_805FB90(struct Sprite *sprite);
+void sub_805FC00(struct Sprite *sprite);
+void sub_805FC00(struct Sprite *sprite);
+void sub_805FC00(struct Sprite *sprite);
+void sub_805FC00(struct Sprite *sprite);
+void sub_805FC70(struct Sprite *sprite);
+
+asm(".section .text_b\n");
+
+void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 0;
+    mapObject->mapobj_bit_6 = 0;
+    mapObject->mapobj_bit_7 = 0;
+    mapObject->mapobj_unk_1C = 0xff;
+    sprite->data1 = 0;
+}
+
+extern const u8 gUnknown_083755F4[9];
+extern const u8 gUnknown_083755FD[9];
+extern const u8 gUnknown_08375606[9];
+extern const u8 gUnknown_0837560F[9];
+extern const u8 gUnknown_08375618[9];
+extern const u8 gUnknown_08375621[9];
+extern const u8 gUnknown_0837562A[9];
+extern const u8 gUnknown_08375633[9];
+extern const u8 gUnknown_0837563C[9];
+extern const u8 gUnknown_08375645[9];
+extern const u8 gUnknown_0837564E[9];
+extern const u8 gUnknown_08375657[9];
+extern const u8 gUnknown_08375660[9];
+extern const u8 gUnknown_08375669[9];
+extern const u8 gUnknown_08375672[9];
+
+u8 FieldObjectDirectionToImageAnimId(u8 direction)
+{
+    return gUnknown_083755F4[direction];
+}
+
+u8 get_go_image_anim_num(u8 direction)
+{
+    return gUnknown_083755FD[direction];
+}
+
+u8 get_go_fast_image_anim_num(u8 direction)
+{
+    return gUnknown_08375606[direction];
+}
+
+u8 get_go_faster_image_anim_num(u8 direction)
+{
+    return gUnknown_0837560F[direction];
+}
+
+u8 sub_805FD78(u8 direction)
+{
+    return gUnknown_08375618[direction];
+}
+
+u8 sub_805FD88(u8 direction)
+{
+    return gUnknown_08375621[direction];
+}
+
+u8 sub_805FD98(u8 direction)
+{
+    return gUnknown_0837562A[direction];
+}
+
+u8 unref_sub_805FDA8(u8 direction)
+{
+    return gUnknown_08375633[direction];
+}
+
+u8 sub_805FDB8(u8 direction)
+{
+    return gUnknown_0837563C[direction];
+}
+
+u8 sub_805FDC8(u8 direction)
+{
+    return gUnknown_08375645[direction];
+}
+
+u8 sub_805FDD8(u8 direction)
+{
+    return gUnknown_0837564E[direction];
+}
+
+u8 sub_805FDE8(u8 direction)
+{
+    return gUnknown_08375657[direction];
+}
+
+u8 sub_805FDF8(u8 direction)
+{
+    return gUnknown_08375660[direction];
+}
+
+u8 sub_805FE08(u8 direction)
+{
+    return gUnknown_08375669[direction];
+}
+
+u8 get_run_image_anim_num(u8 direction)
+{
+    return gUnknown_08375672[direction];
+}
