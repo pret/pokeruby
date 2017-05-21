@@ -25,6 +25,14 @@ struct UnkTvStruct
     s8 var0;
 };
 
+struct UnkBattleStruct {
+    u8 pad00[6];
+    u16 var06;
+    u8 pad08[24];
+    u16 var20;
+};
+extern struct UnkBattleStruct gUnknown_030042E0;
+
 struct OutbreakPokemon
 {
     /*0x00*/ u16 species;
@@ -97,12 +105,13 @@ void ClearTVShowData(void)
     sub_80BEBF4();
 }
 
-extern void sub_80BE138(TVShow *);
 bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
 extern u16 sub_8135D3C(u8);
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
+extern u8 gUnknown_03004316[11];
+extern u8 gUnknown_02024D26;
 
 void sub_80BF334(void);
 void sub_80BF3A4(void);
@@ -117,6 +126,182 @@ s8 sub_80BF74C(TVShow tvShow[]);
 
 void sub_80BF55C(TVShow tvShow[], u8 showidx);
 void sub_80BEA88(void);
+
+void sub_80BE138(TVShow *show);
+void sub_80BE160(TVShow *show);
+
+#ifdef NONMATCHING
+void sub_80BE074(void) {
+    u8 i;
+    u16 tot;
+    TVShow *show;
+    if (sub_80BF77C(0xffff) == 0) {
+        asm_comment("Here the registers for i and tot are assigned in the wrong order.");
+        tot = 0;
+        for (i=0; i<ARRAY_COUNT(gUnknown_03004316); i++) {
+            tot += gUnknown_03004316[i];
+        }
+        if (tot > 0xff) {
+            tot = 0xff;
+        }
+        if (tot > 2 && gUnknown_02024D26 == 1) {
+            gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows.shows);
+            if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_FAILED) != 1) {
+                show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+                asm_comment("Here the wrong registers are used to hold the show ID and flag.");
+                show->pokemonTodayFailed.var00 = TVSHOW_POKEMON_TODAY_FAILED;
+                show->pokemonTodayFailed.var01 = 0;
+                show->pokemonTodayFailed.species = gUnknown_030042E0.var06;
+                show->pokemonTodayFailed.species2 = gUnknown_030042E0.var20;
+                show->pokemonTodayFailed.var10 = tot;
+                show->pokemonTodayFailed.var11 = gUnknown_02024D26;
+                show->pokemonTodayFailed.var12 = gMapHeader.name;
+                StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2.playerName);
+                sub_80BE138(show);
+                show->pokemonTodayFailed.language = GAME_LANGUAGE;
+            }
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80BE074(void) {
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	ldr r0, _080BE118 @ =0x0000ffff\n\
+	bl sub_80BF77C\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080BE112\n\
+	movs r1, 0\n\
+	movs r5, 0\n\
+	ldr r2, _080BE11C @ =gUnknown_03004316\n\
+_080BE088:\n\
+	adds r0, r1, r2\n\
+	ldrb r0, [r0]\n\
+	adds r0, r5, r0\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	adds r0, r1, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r1, r0, 24\n\
+	cmp r1, 0xA\n\
+	bls _080BE088\n\
+	cmp r5, 0xFF\n\
+	bls _080BE0A2\n\
+	movs r5, 0xFF\n\
+_080BE0A2:\n\
+	cmp r5, 0x2\n\
+	bls _080BE112\n\
+	ldr r7, _080BE120 @ =gUnknown_02024D26\n\
+	ldrb r0, [r7]\n\
+	cmp r0, 0x1\n\
+	bne _080BE112\n\
+	ldr r6, _080BE124 @ =gSaveBlock1 + 0x2738\n\
+	adds r0, r6, 0\n\
+	bl sub_80BF74C\n\
+	ldr r4, _080BE128 @ =gUnknown_03005D38\n\
+	strb r0, [r4]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	cmp r0, r1\n\
+	beq _080BE112\n\
+	movs r0, 0x17\n\
+	bl sub_80BF1B4\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	beq _080BE112\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	lsls r4, r0, 3\n\
+	adds r4, r0\n\
+	lsls r4, 2\n\
+	adds r4, r6\n\
+	movs r1, 0\n\
+	movs r0, 0x17\n\
+	strb r0, [r4]\n\
+	strb r1, [r4, 0x1]\n\
+	ldr r1, _080BE12C @ =gUnknown_030042E0\n\
+	ldrh r0, [r1, 0x6]\n\
+	strh r0, [r4, 0xC]\n\
+	ldrh r0, [r1, 0x20]\n\
+	strh r0, [r4, 0xE]\n\
+	strb r5, [r4, 0x10]\n\
+	ldrb r0, [r7]\n\
+	strb r0, [r4, 0x11]\n\
+	ldr r0, _080BE130 @ =gMapHeader\n\
+	ldrb r0, [r0, 0x14]\n\
+	strb r0, [r4, 0x12]\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x13\n\
+	ldr r1, _080BE134 @ =gSaveBlock2\n\
+	bl StringCopy\n\
+	adds r0, r4, 0\n\
+	bl sub_80BE138\n\
+	movs r0, 2 @ GAME_LANGUAGE\n\
+	strb r0, [r4, 0x2]\n\
+_080BE112:\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080BE118: .4byte 0x0000ffff\n\
+_080BE11C: .4byte gUnknown_03004316\n\
+_080BE120: .4byte gUnknown_02024D26\n\
+_080BE124: .4byte gSaveBlock1 + 0x2738\n\
+_080BE128: .4byte gUnknown_03005D38\n\
+_080BE12C: .4byte gUnknown_030042E0\n\
+_080BE130: .4byte gMapHeader\n\
+_080BE134: .4byte gSaveBlock2\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80BE138(TVShow *show) {
+    u32 playerId;
+    playerId = GetPlayerTrainerId();
+    show->common.srcTrainerId2Lo = playerId & 0xFF;
+    show->common.srcTrainerId2Hi = playerId >> 8;
+    show->common.srcTrainerIdLo = playerId & 0xFF;
+    show->common.srcTrainerIdHi = playerId >> 8;
+    show->common.trainerIdLo = playerId & 0xFF;
+    show->common.trainerIdHi = playerId >> 8;
+}
+
+void sub_80BE160(TVShow *show) {
+    u32 playerId;
+    playerId = GetPlayerTrainerId();
+    show->common.srcTrainerIdLo = playerId & 0xFF;
+    show->common.srcTrainerIdHi = playerId >> 8;
+    show->common.trainerIdLo = playerId & 0xFF;
+    show->common.trainerIdHi = playerId >> 8;
+}
+
+void sub_80BE188(void) {
+    TVShow *show;
+    TVShow *buffer;
+    buffer = &gSaveBlock1.tvShows.unknown_2A98;
+    if (buffer->bravoTrainer.var00 == TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE) {
+        show = &gSaveBlock1.tvShows.shows[gUnknown_03005D38.var0];
+        show->bravoTrainer.var00 = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
+        show->bravoTrainer.var01 = 1;
+        show->bravoTrainer.species = buffer->bravoTrainer.species;
+        StringCopy(show->bravoTrainer.playerName, gSaveBlock2.playerName);
+        StringCopy(show->bravoTrainer.pokemonNickname, buffer->bravoTrainer.pokemonNickname);
+        show->bravoTrainer.contestCategory = buffer->bravoTrainer.contestCategory;
+        show->bravoTrainer.contestRank = buffer->bravoTrainer.contestRank;
+        show->bravoTrainer.var14 = buffer->bravoTrainer.var14;
+        show->bravoTrainer.var13_5 = buffer->bravoTrainer.var13_5;
+        show->bravoTrainer.contestCategory = buffer->bravoTrainer.contestCategory;
+        sub_80BE160(show);
+        show->bravoTrainer.language = GAME_LANGUAGE;
+        show->bravoTrainer.var1f = sub_80BDEAC(show->bravoTrainer.pokemonNickname);
+        StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
+    }
+}
 
 void sub_80BE23C(u16 a0) {
     TVShow *show;

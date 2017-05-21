@@ -345,6 +345,9 @@ struct TVShowBravoTrainerPokemonProfiles {
 	/*0x13*/ u8 var13_5:2;
 	/*0x13*/ u8 var13_7:1;
 	/*0x14*/ u16 var14;
+	/*0x16*/ u8 playerName[8];
+	/*0x1E*/ u8 language;
+	/*0x1F*/ u8 var1f;
 };
 
 struct TVShowBravoTrainerBattleTowerSpotlight {
