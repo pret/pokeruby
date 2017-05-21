@@ -21,7 +21,7 @@ Finally, build the rom.
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
+Then get the compiled tools from https://github.com/ProjectRevoTPP/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
 
 You can then build pokeruby using `make` in the MSYS environment provided with devkitARM.
 
