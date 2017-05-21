@@ -311,7 +311,7 @@ extern u8 sub_80170DC();
 extern u8 ItemId_GetHoldEffect(u16);
 extern void sub_8094C98();
 
-void sub_800E7F8(void);
+void InitBattle(void);
 void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
@@ -365,11 +365,11 @@ void sub_800E7C4(void)
     }
     else
     {
-        sub_800E7F8();
+        InitBattle();
     }
 }
 
-void sub_800E7F8(void)
+void InitBattle(void)
 {
     s32 i;
 
@@ -785,7 +785,7 @@ void sub_800F104(void)
         {
             gBattleTypeFlags = *pSavedBattleTypeFlags;
             gMain.savedCallback = *pSavedCallback;
-            SetMainCallback2(sub_800E7F8);
+            SetMainCallback2(InitBattle);
         }
         break;
     }
