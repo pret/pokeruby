@@ -6,6 +6,7 @@
 #include "field_player_avatar.h"
 #include "palette.h"
 #include "rom4.h"
+#include "rng.h"
 #include "sprite.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
@@ -1544,6 +1545,20 @@ u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
     sprite->data1 = 2;
+    return 1;
+}
+
+extern bool8 FieldObjectExecRegularAnim();
+extern const s16 gUnknown_0837520C[];
+extern void sub_8064820(struct Sprite *, s16);
+
+u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0) {
+        return 0;
+    }
+    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    sprite->data1 = 3;
     return 1;
 }
 
