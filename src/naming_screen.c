@@ -8,6 +8,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 #include "text.h"
 #include "trig.h"
@@ -48,7 +49,6 @@ extern const struct SpriteTemplate gSpriteTemplate_83CE670;
 extern const struct SpriteTemplate gSpriteTemplate_83CE688;
 extern const struct SpriteSheet gUnknown_083CE6A0[];
 extern const struct SpritePalette gUnknown_083CE708[];
-extern const u8 gOtherText_SentToPC[];
 extern const u8 gNamingScreenMenu_Gfx[];
 extern u16 gMenuMessageBoxContentTileOffset;
 extern const u16 gNamingScreenPalettes[];
@@ -57,9 +57,6 @@ extern const u16 gUnknown_083CEBF8[];
 extern const u16 gUnknown_083CF0A8[];
 extern const u16 gUnknown_08E86258[];
 extern const u8 gSpeciesNames[][11];
-extern const u8 OtherText_YourName[];
-extern const u8 OtherText_BoxName[];
-extern const u8 OtherText_PokeName[];
 
 static void C2_NamingScreen(void);
 static void sub_80B5AA0(void);

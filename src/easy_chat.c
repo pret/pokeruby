@@ -7,6 +7,7 @@
 #include "rng.h"
 #include "string_util.h"
 #include "strings.h"
+#include "strings2.h"
 #include "text.h"
 
 u8 sub_80EB37C(u16);
@@ -27,8 +28,6 @@ extern void *gEasyChatGroupWords[];
 extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
-
-extern const u8 gOtherText_ThreeQuestions[];
 
 #ifdef NONMATCHING
 u8 *sub_80EB3FC(u8 *dst, u16 word) {

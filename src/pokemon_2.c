@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
+#include "strings2.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -34,7 +35,6 @@ extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u8 gEggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
 extern u8 gSpeciesNames[][11];

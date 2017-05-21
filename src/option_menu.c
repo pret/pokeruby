@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "sprite.h"
+#include "strings2.h"
 #include "task.h"
 
 extern void SetPokemonCryStereo(u32 val);
@@ -33,28 +34,6 @@ enum {
 
 extern u8 gUnknown_0839F63C[];
 extern u8 gUnknown_0839F5FC[];  //palette
-extern u8 gSystemText_Normal[];
-extern u8 gSystemText_LR[];
-extern u8 gSystemText_LA[];
-extern u8 gSystemText_Terminator[];
-extern u8 gSystemText_Type[];
-extern u8 gSystemText_Mono[];
-extern u8 gSystemText_Stereo[];
-extern u8 gSystemText_Shift[];
-extern u8 gSystemText_Set[];
-extern u8 gSystemText_On[];
-extern u8 gSystemText_Off[];
-extern u8 gSystemText_Slow[];
-extern u8 gSystemText_Mid[];
-extern u8 gSystemText_Fast[];
-extern u8 gSystemText_OptionMenu[];
-extern u8 gSystemText_TextSpeed[];
-extern u8 gSystemText_BattleScene[];
-extern u8 gSystemText_BattleStyle[];
-extern u8 gSystemText_Sound[];
-extern u8 gSystemText_ButtonMode[];
-extern u8 gSystemText_Frame[];
-extern u8 gSystemText_Cancel[];
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
@@ -323,7 +302,7 @@ static void HighlightOptionMenuItem(u8 index)
     REG_WIN1V = WIN_RANGE_(index * 16 + 40, index * 16 + 56);
 }
 
-static void DrawOptionMenuChoice(u8 *text, u8 x, u8 y, u8 style)
+static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 {
     u8 dst[16];
     u16 i;

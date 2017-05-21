@@ -8,6 +8,7 @@
 #include "rom4.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 #include "text.h"
 
@@ -69,8 +70,6 @@ extern u16 gUnknown_083E562C[][2];
 
 extern struct MailLayout gUnknown_083E5730[];
 extern struct MailLayout gUnknown_083E57A4[];
-
-extern u8 gOtherText_From[];
 
 static u8 sub_80F8A28(void);
 static void sub_80F8D50(void);

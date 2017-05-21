@@ -7,10 +7,9 @@
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "strings2.h"
 #include "task.h"
 
-extern u8 gSystemText_ClearAllSaveDataPrompt[];
-extern u8 gSystemText_ClearingData[];
 extern const struct MenuAction gMenuYesNoItems[];
 
 static void VBlankCB_ClearSaveDataScreen(void);

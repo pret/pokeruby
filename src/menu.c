@@ -173,7 +173,7 @@ void MenuDrawTextWindow(u8 left, u8 top, u8 right, u8 bottom)
     DrawTextWindow(gMenuWindowPtr, left, top, right, bottom);
 }
 
-void sub_8071F40(u8 *str)
+void sub_8071F40(const u8 *str)
 {
     MenuDrawTextWindow(2, 14, 28, 19);
     MenuPrint(str, 3, 15);
@@ -637,7 +637,7 @@ void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
     sub_8003460(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
-void sub_8072BD8(u8 *a1, u8 a2, u8 a3, u16 a4)
+void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
 {
     sub_8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }

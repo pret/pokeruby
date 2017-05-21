@@ -22,6 +22,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
+#include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
 
@@ -60,17 +61,6 @@ extern u8 gSaveText_DontTurnOff[];
 extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
-extern u8 gOtherText_SafariStock[];
-extern u8 SystemText_Pokedex[];
-extern u8 SystemText_Pokemon[];
-extern u8 SystemText_BAG[];
-extern u8 SystemText_Pokenav[];
-extern u8 SystemText_Player[];
-extern u8 SystemText_Save[];
-extern u8 SystemText_Option[];
-extern u8 SystemText_Exit[];
-extern u8 SystemText_Retire[];
-extern u8 SystemText_Player[];
 
 static u8 StartMenu_PokedexCallback(void);
 static u8 StartMenu_PokemonCallback(void);

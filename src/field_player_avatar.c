@@ -16,13 +16,9 @@
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
+#include "strings2.h"
 #include "task.h"
 #include "wild_encounter.h"
-
-extern u8 gOtherText_OhABite[];
-extern u8 gOtherText_PokeOnHook[];
-extern u8 gOtherText_NotEvenANibble[];
-extern u8 gOtherText_ItGotAway[];
 
 extern u32 gUnknown_0202FF84[];
 

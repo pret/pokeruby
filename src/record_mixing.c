@@ -10,6 +10,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 
 extern void *recordMixingSecretBases;
@@ -28,8 +29,6 @@ extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
 extern u8 gUnknown_0300071C[];
-extern u8 gOtherText_MixingComplete[];
-extern u8 gOtherText_MixingRecordsWithFriend[];
 extern bool8 gReceivedRemoteLinkPlayers;
 
 #define BUFFER_CHUNK_SIZE 200
