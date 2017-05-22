@@ -1,38 +1,40 @@
 Route110_TrickHousePuzzle1_Text_19CB4F:: @ 819CB4F
-	.string "I’ll hack and slash my way to victory\n"
-	.string "with the CUT we just learned!$"
+	.string "Ich habe mir den Weg zum Sieg mit dem\n"
+	.string "ZERSCHNEIDER, den wir gerade gelernt\l"
+	.string "haben, gebahnt.$"
 
 Route110_TrickHousePuzzle1_Text_19CB93:: @ 819CB93
-	.string "Why are you so serious?$"
+	.string "Warum nimmst du das so ernst?$"
 
 Route110_TrickHousePuzzle1_Text_19CBAB:: @ 819CBAB
-	.string "I never get tired of hacking\n"
-	.string "and slashing!$"
+	.string "Ich werde des Hackens und\n"
+	.string "Schneidens nie müde!$"
 
 Route110_TrickHousePuzzle1_Text_19CBD6:: @ 819CBD6
-	.string "I wandered into this weird house\n"
-	.string "by accident...$"
+	.string "Ich bin nur zufällig in diesem\n"
+	.string "verrückten Haus gelandet...$"
 
 Route110_TrickHousePuzzle1_Text_19CC06:: @ 819CC06
-	.string "And now I’ve lost...$"
+	.string "Und nun habe ich verloren...$"
 
 Route110_TrickHousePuzzle1_Text_19CC1B:: @ 819CC1B
-	.string "I lost my way, I lost a battle, and I’m\n"
-	.string "even more lost... I can’t get out...$"
+	.string "Ich bin vom Weg abgekommen, ich habe\n"
+	.string "verloren und bin verloren. Ich finde den\l"
+	.string "Ausgang nicht mehr...$"
 
 Route110_TrickHousePuzzle1_Text_19CC68:: @ 819CC68
-	.string "Just who is the TRICK MASTER?$"
+	.string "Wer ist dieser RÄTSELMEISTER bloß?$"
 
 Route110_TrickHousePuzzle1_Text_19CC86:: @ 819CC86
-	.string "I lost while I was lost in thought!$"
+	.string "Ich verlor ganz gedankenverloren.$"
 
 Route110_TrickHousePuzzle1_Text_19CCAA:: @ 819CCAA
-	.string "You’re strong!\n"
-	.string "Just who are you?$"
+	.string "Du bist stark!\n"
+	.string "Wer bist du eigentlich?$"
 
 UnknownString_819CCCB: @ 819CCCB
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is smart.”\n"
+	.string "{PLAYER} hat den geheimen Code auf die\n"
+	.string "Tür geschrieben.\p"
+	.string "“RÄTSELMEISTER ist gewieft.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
+	.string "Das Schloss geht klickend auf.$"

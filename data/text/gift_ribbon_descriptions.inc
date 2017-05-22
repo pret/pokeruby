@@ -1,143 +1,143 @@
 gGiftRibbonDescriptionPart1_2003RegionalTourney:
-	.string "2003 REGIONAL TOURNEY$"
+	.string "REGIONALTURNIER 2003$"
 
 gGiftRibbonDescriptionPart2_Champion:
-	.string "CHAMPION RIBBON$"
+	.string "BAND des CHAMPS$"
 
 gGiftRibbonDescriptionPart1_2003NationalTourney:
-	.string "2003 NATIONAL TOURNEY$"
+	.string "NATIONALTURNIER 2003$"
 
 gGiftRibbonDescriptionPart1_2003GlobalCup:
-	.string "2003 GLOBAL CUP$"
+	.string "WELTPOKAL 2003$"
 
 gGiftRibbonDescriptionPart2_RunnerUp:
-	.string "Runner-up RIBBON$"
+	.string "BAND für Platzierungen$"
 
 gGiftRibbonDescriptionPart2_Semifinalist:
-	.string "Semifinalist RIBBON$"
+	.string "BAND für Halbfinalisten$"
 
 gGiftRibbonDescriptionPart1_2004RegionalTourney:
-	.string "2004 REGIONAL TOURNEY$"
+	.string "REGIONALTURNIER 2004$"
 
 gGiftRibbonDescriptionPart1_2004NationalTourney:
-	.string "2004 NATIONAL TOURNEY$"
+	.string "NATIONALTURNIER 2004$"
 
 gGiftRibbonDescriptionPart1_2004GlobalCup:
-	.string "2004 GLOBAL CUP$"
+	.string "WELTPOKAL 2004$"
 
 gGiftRibbonDescriptionPart1_2005RegionalTourney:
-	.string "2005 REGIONAL TOURNEY$"
+	.string "REGIONALTURNIER 2005$"
 
 gGiftRibbonDescriptionPart1_2005NationalTourney:
-	.string "2005 NATIONAL TOURNEY$"
+	.string "NATIONALTURNIER 2005$"
 
 gGiftRibbonDescriptionPart1_2005GlobalCup:
-	.string "2005 GLOBAL CUP$"
+	.string "WELTPOKAL 2005$"
 
 gGiftRibbonDescriptionPart1_PokemonBattleCup:
-	.string "POKéMON BATTLE CUP$"
+	.string "POKéMON-KAMPF-POKAL$"
 
 gGiftRibbonDescriptionPart2_Participation:
-	.string "Participation RIBBON$"
+	.string "Teilnehmer-BAND$"
 
 gGiftRibbonDescriptionPart1_PokemonLeague:
-	.string "POKéMON LEAGUE$"
+	.string "POKéMON LIGA$"
 
 gGiftRibbonDescriptionPart1_AdvanceCup:
-	.string "ADVANCE CUP$"
+	.string "TALENTPOKAL$"
 
 gGiftRibbonDescriptionPart1_PokemonTournament:
-	.string "POKéMON Tournament$"
+	.string "POKéMON-Turnier$"
 
 gGiftRibbonDescriptionPart2_Participation2:
-	.string "Participation RIBBON$"
+	.string "Teilnehmer-BAND$"
 
 gGiftRibbonDescriptionPart1_PokemonEvent:
-	.string "POKéMON Event$"
+	.string "POKéMON-Wettkampf$"
 
 gGiftRibbonDescriptionPart1_PokemonFestival:
-	.string "POKéMON Festival$"
+	.string "POKéMON-Festival$"
 
 gGiftRibbonDescriptionPart1_DifficultyClearing:
-	.string "Difficulty-clearing$"
+	.string "Schw.-Grad-Abschl.$"
 
 gGiftRibbonDescriptionPart2_Commemorative:
-	.string "Commemorative RIBBON$"
+	.string "Gedenk-BAND$"
 
 gGiftRibbonDescriptionPart1_ClearingAllDifficulties:
-	.string "RIBBON awarded for$"
+	.string "BAND für erf. Abschluss$"
 
 gGiftRibbonDescriptionPart2_ClearingAllDifficulties:
-	.string "clearing all difficulties.$"
+	.string "aller Schwierigk.-Grade.$"
 
 gGiftRibbonDescriptionPart1_100StraightWin:
-	.string "100-straight Win$"
+	.string "100. Sieg in Folge$"
 
 gGiftRibbonDescriptionPart1_DarknessTower:
-	.string "DARKNESS TOWER Clear$"
+	.string "APOKELIPSE-TURM fertig$"
 
 gGiftRibbonDescriptionPart1_RedTower:
-	.string "RED TOWER Clear$"
+	.string "ROTER TURM fertig$"
 
 gGiftRibbonDescriptionPart1_BlackironTower:
-	.string "BLACKIRON TOWER Clear$"
+	.string "EISERNER TURM fertig$"
 
 gGiftRibbonDescriptionPart1_FinalTower:
-	.string "FINAL TOWER Clear$"
+	.string "FINAL-TURM-Abschluss$"
 
 gGiftRibbonDescriptionPart1_LegendMaking:
-	.string "Legend-making$"
+	.string "Legendäres$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterTokyo:
-	.string "POKéMON CENTER TOKYO$"
+	.string "POKéMON-CENTER TOKIO$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterOsaka:
-	.string "POKéMON CENTER OSAKA$"
+	.string "POKéMON-CENTER OSAKA$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterNagoya:
-	.string "POKéMON CENTER NAGOYA$"
+	.string "POKéMON-CENTER NAGOYA$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterNY:
-	.string "POKéMON CENTER NY$"
+	.string "POKéMON-CENTER N. Y.$"
 
 gGiftRibbonDescriptionPart1_SummerHolidays:
-	.string "Summer Holidays RIBBON$"
+	.string "Sommerferien-BAND$"
 
 gGiftRibbonDescriptionPart2_EmptyString:
 	.string "$"
 
 gGiftRibbonDescriptionPart1_WinterHolidays:
-	.string "Winter Holidays RIBBON$"
+	.string "Weihnachtsferien-BAND$"
 
 gGiftRibbonDescriptionPart1_SpringHolidays:
-	.string "Spring Holidays RIBBON$"
+	.string "Osterferien-BAND$"
 
 gGiftRibbonDescriptionPart1_Evergreen:
-	.string "Evergreen RIBBON$"
+	.string "Evergreen-BAND$"
 
 gGiftRibbonDescriptionPart1_SpecialHoliday:
-	.string "Special Holiday RIBBON$"
+	.string "Sonderurlaubs-BAND$"
 
 gGiftRibbonDescriptionPart1_HardWorker:
-	.string "Hard Worker RIBBON$"
+	.string "Fleiß-BAND$"
 
 gGiftRibbonDescriptionPart1_LotsOfFriends:
-	.string "Lots of Friends RIBBON$"
+	.string "Beliebtheits-BAND$"
 
 gGiftRibbonDescriptionPart1_FullOfEnergy:
-	.string "Full of Energy RIBBON$"
+	.string "Energie-BAND$"
 
 gGiftRibbonDescriptionPart1_LovedPokemon:
-	.string "A commemorative RIBBON$"
+	.string "Ein Gedenk-BAND für ein$"
 
 gGiftRibbonDescriptionPart2_LovedPokemon:
-	.string "for a loved POKéMON.$"
+	.string "beliebtes POKéMON.$"
 
 gGiftRibbonDescriptionPart1_LoveForPokemon:
-	.string "RIBBON that shows$"
+	.string "Ein BAND für POKéMON-$"
 
 gGiftRibbonDescriptionPart2_LoveForPokemon:
-	.string "love for POKéMON.$"
+	.string "Freunde.$"
 
 	.align 2
 gGiftRibbonDescriptions:: @ 83E158C

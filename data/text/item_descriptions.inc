@@ -1,1393 +1,1393 @@
 gItemDescription_MasterBall: @ 83C2028
-	.string "The best BALL that\n"
-	.string "catches a POKéMON\n"
-	.string "without fail.$"
+	.string "Der beste BALL.\n"
+	.string "Fängt das POKéMON\n"
+	.string "garantiert.$"
 
 gItemDescription_UltraBall: @ 83C205B
-	.string "A better BALL with\n"
-	.string "a higher catch rate\n"
-	.string "than a GREAT BALL.$"
+	.string "BALL mit hoher Er-\n"
+	.string "folgsquote. Besser\n"
+	.string "als ein SUPERBALL.$"
 
 gItemDescription_GreatBall: @ 83C2095
-	.string "A good BALL with a\n"
-	.string "higher catch rate\n"
-	.string "than a POKé BALL.$"
+	.string "BALL mit guter Er-\n"
+	.string "folgsquote. Besser\n"
+	.string "als ein POKéBALL.$"
 
 gItemDescription_PokeBall: @ 83C20CC
-	.string "A tool used for\n"
-	.string "catching wild\n"
+	.string "Damit fängst\n"
+	.string "du wilde\n"
 	.string "POKéMON.$"
 
 gItemDescription_SafariBall: @ 83C20F3
-	.string "A special BALL that\n"
-	.string "is used only in the\n"
-	.string "SAFARI ZONE.$"
+	.string "Ein BALL, der nur\n"
+	.string "in der SAFARI-ZONE\n"
+	.string "eingesetzt wird.$"
 
 gItemDescription_NetBall: @ 83C2128
-	.string "A BALL that works\n"
-	.string "well on WATER- and\n"
-	.string "BUG-type POKéMON.$"
+	.string "BALL fängt POKéMON\n"
+	.string "des Typs WASSER\n"
+	.string "und KÄFER besser.$"
 
 gItemDescription_DiveBall: @ 83C215F
-	.string "A BALL that works\n"
-	.string "better on POKéMON\n"
-	.string "on the ocean floor.$"
+	.string "BALL fängt besser\n"
+	.string "POKéMON auf\n"
+	.string "dem Meeresgrund.$"
 
 gItemDescription_NestBall: @ 83C2197
-	.string "A BALL that works\n"
-	.string "better on weaker\n"
-	.string "POKéMON.$"
+	.string "BALL mit höherer\n"
+	.string "Erfolgsquote bei\n"
+	.string "schwachen POKéMON.$"
 
 gItemDescription_RepeatBall: @ 83C21C3
-	.string "A BALL that works\n"
-	.string "better on POKéMON\n"
-	.string "caught before.$"
+	.string "BALL fängt besser\n"
+	.string "bereits gefangene\n"
+	.string "POKéMON.$"
 
 gItemDescription_TimerBall: @ 83C21F6
-	.string "More effective as\n"
-	.string "more turns are\n"
-	.string "taken in battle.$"
+	.string "BALL wird effekti-\n"
+	.string "ver, je länger der\n"
+	.string "Kampf dauert.$"
 
 gItemDescription_LuxuryBall: @ 83C2228
-	.string "A cozy BALL that\n"
-	.string "makes POKéMON\n"
-	.string "more friendly.$"
+	.string "Behaglicher BALL,\n"
+	.string "der POKéMON\n"
+	.string "freundlicher macht.$"
 
 gItemDescription_PremierBall: @ 83C2256
-	.string "A rare BALL made\n"
-	.string "in commemoration\n"
-	.string "of some event.$"
+	.string "Seltener BALL, als\n"
+	.string "Reminiszenz an ir-\n"
+	.string "gendein Ereignis.$"
 
 gItemDescription_Potion: @ 83C2287
-	.string "Restores the HP of\n"
-	.string "a POKéMON by\n"
-	.string "20 points.$"
+	.string "Füllt die KP eines\n"
+	.string "POKéMON um\n"
+	.string "20 Punkte auf.$"
 
 gItemDescription_Antidote: @ 83C22B2
-	.string "Heals a poisoned\n"
-	.string "POKéMON.$"
+	.string "Heilt Vergiftungen\n"
+	.string "bei POKéMON.$"
 
 gItemDescription_BurnHeal: @ 83C22CC
-	.string "Heals POKéMON\n"
-	.string "of a burn.$"
+	.string "Heilt Verbrennun-\n"
+	.string "gen bei POKéMON.$"
 
 gItemDescription_IceHeal: @ 83C22E5
-	.string "Defrosts a frozen\n"
-	.string "POKéMON.$"
+	.string "Taut POKéMON\n"
+	.string "wieder auf.$"
 
 gItemDescription_Awakening: @ 83C2300
-	.string "Awakens a sleeping\n"
-	.string "POKéMON.$"
+	.string "Weckt schlafendes\n"
+	.string "POKéMON auf.$"
 
 gItemDescription_ParalyzeHeal: @ 83C231C
-	.string "Heals a paralyzed\n"
-	.string "POKéMON.$"
+	.string "Heilt Paralyse\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_FullRestore: @ 83C2337
-	.string "Fully restores the\n"
-	.string "HP and status of a\n"
-	.string "POKéMON.$"
+	.string "Stellt KP und\n"
+	.string "Status eines\n"
+	.string "POKéMON wieder her.$"
 
 gItemDescription_MaxPotion: @ 83C2366
-	.string "Fully restores the\n"
-	.string "HP of a POKéMON.$"
+	.string "Füllt die KP\n"
+	.string "vollständig auf.$"
 
 gItemDescription_HyperPotion: @ 83C238A
-	.string "Restores the HP of\n"
-	.string "a POKéMON by\n"
-	.string "200 points.$"
+	.string "Füllt die KP eines\n"
+	.string "POKéMON um\n"
+	.string "200 Punkte auf.$"
 
 gItemDescription_SuperPotion: @ 83C23B6
-	.string "Restores the HP of\n"
-	.string "a POKéMON by\n"
-	.string "50 points.$"
+	.string "Füllt die KP eines\n"
+	.string "POKéMON um\n"
+	.string "50 Punkte auf.$"
 
 gItemDescription_FullHeal: @ 83C23E1
-	.string "Heals all the status\n"
-	.string "problems of one\n"
-	.string "POKéMON.$"
+	.string "Beseitigt alle\n"
+	.string "Statusprobleme\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_Revive: @ 83C240F
-	.string "Revives a fainted\n"
-	.string "POKéMON with half\n"
-	.string "its HP.$"
+	.string "Belebt POKéMON\n"
+	.string "und füllt die KP zur\n"
+	.string "Hälfte wieder auf.$"
 
 gItemDescription_MaxRevive: @ 83C243B
-	.string "Revives a fainted\n"
-	.string "POKéMON with all\n"
-	.string "its HP.$"
+	.string "Belebt POKéMON\n"
+	.string "und füllt KP voll-\n"
+	.string "ständig wieder auf.$"
 
 gItemDescription_FreshWater: @ 83C2466
-	.string "A mineral water\n"
-	.string "that restores HP\n"
-	.string "by 50 points.$"
+	.string "Ein stilles Wasser,\n"
+	.string "das die KP um 50\n"
+	.string "Punkte auffüllt.$"
 
 gItemDescription_SodaPop: @ 83C2495
-	.string "A fizzy soda drink\n"
-	.string "that restores HP\n"
-	.string "by 60 points.$"
+	.string "Ein Mineralwasser,\n"
+	.string "das die KP um 60\n"
+	.string "Punkte auffüllt.$"
 
 gItemDescription_Lemonade: @ 83C24C7
-	.string "A very sweet drink\n"
-	.string "that restores HP\n"
-	.string "by 80 points.$"
+	.string "Ein süßes Getränk,\n"
+	.string "das die KP um 80\n"
+	.string "Punkte auffüllt.$"
 
 gItemDescription_MoomooMilk: @ 83C24F9
-	.string "A nutritious milk\n"
-	.string "that restores HP\n"
-	.string "by 100 points.$"
+	.string "Vitaminreiche Milch,\n"
+	.string "die die KP um 100\n"
+	.string "Punkte auffüllt.$"
 
 gItemDescription_EnergyPowder: @ 83C252B
-	.string "A bitter powder\n"
-	.string "that restores HP\n"
-	.string "by 50 points.$"
+	.string "Ein bitteres Pulver,\n"
+	.string "das die KP um\n"
+	.string "50 Punkte auffüllt.$"
 
 gItemDescription_EnergyRoot: @ 83C255A
-	.string "A bitter root\n"
-	.string "that restores HP\n"
-	.string "by 200 points.$"
+	.string "Eine bittere Wurzel,\n"
+	.string "die die KP um 200\n"
+	.string "Punkte auffüllt.$"
 
 gItemDescription_HealPowder: @ 83C2588
-	.string "A bitter powder\n"
-	.string "that heals all\n"
-	.string "status problems.$"
+	.string "Ein bitteres Pulver,\n"
+	.string "das alle Statuspro-\n"
+	.string "bleme heilt.$"
 
 gItemDescription_RevivalHerb: @ 83C25B8
-	.string "A very bitter herb\n"
-	.string "that revives a\n"
-	.string "fainted POKéMON.$"
+	.string "Ein bitteres Kraut,\n"
+	.string "das besiegte\n"
+	.string "POKéMON belebt.$"
 
 gItemDescription_Ether: @ 83C25EB
-	.string "Restores the PP\n"
-	.string "of a selected move\n"
-	.string "by 10.$"
+	.string "Füllt AP einer aus-\n"
+	.string "gewählten Attacke\n"
+	.string "um 10 Punkte auf.$"
 
 gItemDescription_MaxEther: @ 83C2615
-	.string "Fully restores the\n"
-	.string "PP of a selected\n"
-	.string "move.$"
+	.string "Füllt AP einer aus-\n"
+	.string "gewählten Attacke\n"
+	.string "vollständig auf.$"
 
 gItemDescription_Elixir: @ 83C263F
-	.string "Restores the PP\n"
-	.string "of all moves by 10.$"
+	.string "Füllt alle AP\n"
+	.string "um 10 Punkte auf.$"
 
 gItemDescription_MaxElixir: @ 83C2663
-	.string "Fully restores the\n"
-	.string "PP of a POKéMON’s\n"
-	.string "moves.$"
+	.string "Füllt alle AP eines\n"
+	.string "POKéMON voll-\n"
+	.string "ständig auf.$"
 
 gItemDescription_LavaCookie: @ 83C268F
-	.string "A local specialty\n"
-	.string "that heals all\n"
-	.string "status problems.$"
+	.string "Eine regionale Spe-\n"
+	.string "zialität. Heilt alle\n"
+	.string "Statusprobleme.$"
 
 gItemDescription_BlueFlute: @ 83C26C1
-	.string "A glass flute that\n"
-	.string "awakens sleeping\n"
-	.string "POKéMON.$"
+	.string "Eine gläserne Flöte,\n"
+	.string "die schlafende\n"
+	.string "POKéMON aufweckt.$"
 
 gItemDescription_YellowFlute: @ 83C26EE
-	.string "A glass flute that\n"
-	.string "snaps POKéMON\n"
-	.string "out of confusion.$"
+	.string "Eine gläserne Flöte,\n"
+	.string "die verwirrte\n"
+	.string "POKéMON heilt.$"
 
 gItemDescription_RedFlute: @ 83C2721
-	.string "A glass flute that\n"
-	.string "snaps POKéMON\n"
-	.string "out of attraction.$"
+	.string "Eine gläserne Flöte,\n"
+	.string "die POKéMON von\n"
+	.string "Anziehung heilt.$"
 
 gItemDescription_BlackFlute: @ 83C2755
-	.string "A glass flute that\n"
-	.string "keeps away wild\n"
-	.string "POKéMON.$"
+	.string "Eine gläserne Flöte,\n"
+	.string "die wilde\n"
+	.string "POKéMON abhält.$"
 
 gItemDescription_WhiteFlute: @ 83C2781
-	.string "A glass flute that\n"
-	.string "lures wild POKéMON.$"
+	.string "Eine gläserne Flöte,\n"
+	.string "die wilde\n"
+	.string "POKéMON anzieht.$"
 
 gItemDescription_BerryJuice: @ 83C27A8
-	.string "A 100% pure juice\n"
-	.string "that restores HP\n"
-	.string "by 20 points.$"
+	.string "Reiner Fruchtsaft,\n"
+	.string "der die KP um\n"
+	.string "20 Punkte auffüllt.$"
 
 gItemDescription_SacredAsh: @ 83C27D9
-	.string "Fully revives and\n"
-	.string "restores all\n"
-	.string "fainted POKéMON.$"
+	.string "Belebt und\n"
+	.string "erfrischt alle\n"
+	.string "besiegten POKéMON.$"
 
 gItemDescription_ShoalSalt: @ 83C2809
-	.string "Salt obtained from\n"
-	.string "deep inside the\n"
-	.string "SHOAL CAVE.$"
+	.string "Salz, das sich tief\n"
+	.string "in der KÜSTEN- \n"
+	.string "HÖHLE befand.$"
 
 gItemDescription_ShoalShell: @ 83C2838
-	.string "A seashell found\n"
-	.string "deep inside the\n"
-	.string "SHOAL CAVE.$"
+	.string "Muschelschale, die\n"
+	.string "sich in der KÜSTEN- \n"
+	.string "HÖHLE befand.$"
 
 gItemDescription_RedShard: @ 83C2865
-	.string "A shard from an\n"
-	.string "ancient item.\n"
-	.string "Can be sold cheaply.$"
+	.string "Scherbe eines\n"
+	.string "antiken Relikts\n"
+	.string "von geringem Wert.$"
 
 gItemDescription_BlueShard: @ 83C2898
-	.string "A shard from an\n"
-	.string "ancient item.\n"
-	.string "Can be sold cheaply.$"
+	.string "Scherbe eines\n"
+	.string "antiken Relikts\n"
+	.string "von geringem Wert.$"
 
 gItemDescription_YellowShard: @ 83C28CB
-	.string "A shard from an\n"
-	.string "ancient item.\n"
-	.string "Can be sold cheaply.$"
+	.string "Scherbe eines\n"
+	.string "antiken Relikts\n"
+	.string "von geringem Wert.$"
 
 gItemDescription_GreenShard: @ 83C28FE
-	.string "A shard from an\n"
-	.string "ancient item.\n"
-	.string "Can be sold cheaply.$"
+	.string "Scherbe eines\n"
+	.string "antiken Relikts\n"
+	.string "von geringem Wert.$"
 
 gItemDescription_HPUp: @ 83C2931
-	.string "Raises the HP of\n"
-	.string "one POKéMON.$"
+	.string "Hebt die KP\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_Protein: @ 83C294F
-	.string "Raises the stat\n"
-	.string "ATTACK of one\n"
-	.string "POKéMON.$"
+	.string "Hebt den\n"
+	.string "ANGR.-Wert\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_Iron: @ 83C2976
-	.string "Raises the stat\n"
-	.string "DEFENSE of one\n"
-	.string "POKéMON.$"
+	.string "Hebt den\n"
+	.string "VERT.-Wert\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_Carbos: @ 83C299E
-	.string "Raises the stat\n"
-	.string "SPEED of one\n"
-	.string "POKéMON.$"
+	.string "Hebt den\n"
+	.string "INIT.-Wert\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_Calcium: @ 83C29C4
-	.string "Raises the stat\n"
-	.string "SP. ATK of one\n"
-	.string "POKéMON.$"
+	.string "Hebt den\n"
+	.string "SP. ANGR.-Wert\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_RareCandy: @ 83C29EC
-	.string "Raises the level\n"
-	.string "of a POKéMON by\n"
-	.string "one.$"
+	.string "Hebt den Level\n"
+	.string "eines POKéMON\n"
+	.string "um eins an.$"
 
 gItemDescription_PPUp: @ 83C2A12
-	.string "Raises the maximum\n"
-	.string "PP of a selected\n"
-	.string "move.$"
+	.string "Hebt die maximale\n"
+	.string "Anzahl der AP\n"
+	.string "einer Attacke.$"
 
 gItemDescription_Zinc: @ 83C2A3C
-	.string "Raises the stat\n"
-	.string "SP. DEF of one\n"
-	.string "POKéMON.$"
+	.string "Hebt den\n"
+	.string "SP. VERT.-Wert\n"
+	.string "eines POKéMON.$"
 
 gItemDescription_PPMax: @ 83C2A64
-	.string "Raises the PP of a\n"
-	.string "move to its maximum\n"
-	.string "points.$"
+	.string "Maximiert die\n"
+	.string "Anzahl der AP\n"
+	.string "einer Attacke.$"
 
 gItemDescription_GuardSpec: @ 83C2A93
-	.string "Prevents stat\n"
-	.string "reduction when\n"
-	.string "used in battle.$"
+	.string "Statusänderung\n"
+	.string "wird für einen\n"
+	.string "Kampf verhindert.$"
 
 gItemDescription_DireHit: @ 83C2AC0
-	.string "Raises the\n"
-	.string "critical-hit ratio\n"
-	.string "during one battle.$"
+	.string "Hebt die\n"
+	.string "Volltrefferquote\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_XAttack: @ 83C2AF1
-	.string "Raises the stat\n"
-	.string "ATTACK during one\n"
-	.string "battle.$"
+	.string "Hebt den\n"
+	.string "ANGR.-Wert\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_XDefend: @ 83C2B1B
-	.string "Raises the stat\n"
-	.string "DEFENSE during one\n"
-	.string "battle.$"
+	.string "Hebt den\n"
+	.string "VERT.-Wert\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_XSpeed: @ 83C2B46
-	.string "Raises the stat\n"
-	.string "SPEED during one\n"
-	.string "battle.$"
+	.string "Hebt den\n"
+	.string "INIT.-Wert\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_XAccuracy: @ 83C2B6F
-	.string "Raises accuracy\n"
-	.string "of attack moves\n"
-	.string "during one battle.$"
+	.string "Hebt die\n"
+	.string "GENAUIGKEIT\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_XSpecial: @ 83C2BA2
-	.string "Raises the stat\n"
-	.string "SP. ATK during one\n"
-	.string "battle.$"
+	.string "Hebt den\n"
+	.string "SP. ANGR.-Wert\n"
+	.string "für einen Kampf.$"
 
 gItemDescription_PokeDoll: @ 83C2BCD
-	.string "Use to flee from\n"
-	.string "any battle with\n"
-	.string "a wild POKéMON.$"
+	.string "Ermöglicht Flucht\n"
+	.string "im Kampf gegen\n"
+	.string "wilde POKéMON.$"
 
 gItemDescription_FluffyTail: @ 83C2BFE
-	.string "Use to flee from\n"
-	.string "any battle with\n"
-	.string "a wild POKéMON.$"
+	.string "Entfliehe damit\n"
+	.string "jedem Kampf mit ei-\n"
+	.string "nem wilden POKéMON.$"
 
 gItemDescription_SuperRepel: @ 83C2C2F
-	.string "Repels weak wild\n"
-	.string "POKéMON for 200\n"
-	.string "steps.$"
+	.string "Hält 200 Schritte\n"
+	.string "lang schwache,\n"
+	.string "wilde POKéMON ab.$"
 
 gItemDescription_MaxRepel: @ 83C2C57
-	.string "Repels weak wild\n"
-	.string "POKéMON for 250\n"
-	.string "steps.$"
+	.string "Hält 250 Schritte\n"
+	.string "lang schwache,\n"
+	.string "wilde POKéMON ab.$"
 
 gItemDescription_EscapeRope: @ 83C2C7F
-	.string "Use to escape\n"
-	.string "instantly from a\n"
-	.string "cave or a dungeon.$"
+	.string "Ermöglicht die\n"
+	.string "Flucht aus Höhlen\n"
+	.string "oder Ähnlichem.$"
 
 gItemDescription_Repel: @ 83C2CB1
-	.string "Repels weak wild\n"
-	.string "POKéMON for 100\n"
-	.string "steps.$"
+	.string "Hält 100 Schritte\n"
+	.string "lang schwache,\n"
+	.string "wilde POKéMON ab.$"
 
 gItemDescription_SunStone: @ 83C2CD9
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_MoonStone: @ 83C2D02
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_FireStone: @ 83C2D2B
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_ThunderStone: @ 83C2D54
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_WaterStone: @ 83C2D7D
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_LeafStone: @ 83C2DA6
-	.string "Makes certain\n"
-	.string "species of POKéMON\n"
-	.string "evolve.$"
+	.string "Löst bei bestimm-\n"
+	.string "ten POKéMON die\n"
+	.string "Entwicklung aus.$"
 
 gItemDescription_TinyMushroom: @ 83C2DCF
-	.string "A plain, ordinary\n"
-	.string "mushroom.\n"
-	.string "Can be sold cheaply.$"
+	.string "Ein gemeiner\n"
+	.string "Pilz von \n"
+	.string "geringem Wert.$"
 
 gItemDescription_BigMushroom: @ 83C2E00
-	.string "A rare mushroom\n"
-	.string "that would sell at a\n"
-	.string "high price.$"
+	.string "Ein seltener\n"
+	.string "Pilz von \n"
+	.string "hohem Wert.$"
 
 gItemDescription_Pearl: @ 83C2E31
-	.string "A pretty pearl.\n"
-	.string "Can be sold cheaply.$"
+	.string "Eine hübsche Perle\n"
+	.string "von geringem Wert.$"
 
 gItemDescription_BigPearl: @ 83C2E56
-	.string "A lovely large pearl\n"
-	.string "that would sell at a\n"
-	.string "high price.$"
+	.string "Schöne, große Per-\n"
+	.string "le, die einen hohen\n"
+	.string "Preis erzielen kann.$"
 
 gItemDescription_Stardust: @ 83C2E8C
-	.string "Beautiful red sand.\n"
-	.string "Can be sold at a\n"
-	.string "high price.$"
+	.string "Schöner, roter\n"
+	.string "Sand, der von\n"
+	.string "großem Wert ist.$"
 
 gItemDescription_StarPiece: @ 83C2EBD
-	.string "A red gem shard.\n"
-	.string "It would sell for a\n"
-	.string "very high price.$"
+	.string "Roter Edelstein,\n"
+	.string "der einen hohen\n"
+	.string "Preis erzielen kann.$"
 
 gItemDescription_Nugget: @ 83C2EF3
-	.string "A nugget of pure\n"
-	.string "gold. Can be sold at\n"
-	.string "a high price.$"
+	.string "Ein Barren aus pu-\n"
+	.string "rem Gold, der von\n"
+	.string "großem Wert ist.$"
 
 gItemDescription_HeartScale: @ 83C2F27
-	.string "A lovely scale.\n"
-	.string "It is coveted by\n"
-	.string "collectors.$"
+	.string "Hübsche Schuppe,\n"
+	.string "höchst begehrt\n"
+	.string "bei Sammlern.$"
 
 gItemDescription_OrangeMail: @ 83C2F54
-	.string "A ZIGZAGOON-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "ZIGZACHS-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_HarborMail: @ 83C2F84
-	.string "A WINGULL-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "WINGULL-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_GlitterMail: @ 83C2FB2
-	.string "A PIKACHU-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "PIKACHU-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_MechMail: @ 83C2FE0
-	.string "A MAGNEMITE-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "MAGNETILO-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_WoodMail: @ 83C3010
-	.string "A SLAKOTH-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "BUMMELZ-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_WaveMail: @ 83C303E
-	.string "A WAILMER-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "WAILMER-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_BeadMail: @ 83C306C
-	.string "MAIL featuring a\n"
-	.string "sketch of the\n"
-	.string "holding POKéMON.$"
+	.string "BRIEF mit Abbildung\n"
+	.string "des POKéMON, das\n"
+	.string "ihn trägt.$"
 
 gItemDescription_ShadowMail: @ 83C309C
-	.string "A DUSKULL-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "ZWIRRLICHT-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_TropicMail: @ 83C30CA
-	.string "A BELLOSSOM-print\n"
-	.string "MAIL to be held by\n"
-	.string "a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "BLUBELLA-\n"
+	.string "Aufdruck.$"
 
 gItemDescription_DreamMail: @ 83C30FA
-	.string "MAIL featuring a\n"
-	.string "sketch of the\n"
-	.string "holding POKéMON.$"
+	.string "BRIEF mit Abbildung\n"
+	.string "des POKéMON, das\n"
+	.string "ihn trägt.$"
 
 gItemDescription_FabMail: @ 83C312A
-	.string "A gorgeous-print\n"
-	.string "MAIL to be held\n"
-	.string "by a POKéMON.$"
+	.string "BRIEF (Tragen) mit \n"
+	.string "edlem Aufdruck.$"
 
 gItemDescription_RetroMail: @ 83C3159
-	.string "MAIL featuring the\n"
-	.string "drawings of three\n"
-	.string "POKéMON.$"
+	.string "BRIEF mit den Ab-\n"
+	.string "bildungen dreier\n"
+	.string "POKéMON-Gesichter.$"
 
 gItemDescription_CheriBerry: @ 83C3187
-	.string "A hold item that\n"
-	.string "heals paralysis\n"
-	.string "in battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Paralyse.$"
 
 gItemDescription_ChestoBerry: @ 83C31B3
-	.string "A hold item that\n"
-	.string "awakens POKéMON\n"
-	.string "in battle.$"
+	.string "Item (Tragen)\n"
+	.string "weckt schlafendes\n"
+	.string "POKéMON im Kampf.$"
 
 gItemDescription_PechaBerry: @ 83C31DF
-	.string "A hold item that\n"
-	.string "heals poisoning\n"
-	.string "in battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Vergiftung.$"
 
 gItemDescription_RawstBerry: @ 83C320B
-	.string "A hold item that\n"
-	.string "heals a burn in\n"
-	.string "battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Verbrennung.$"
 
 gItemDescription_AspearBerry: @ 83C3234
-	.string "A hold item that\n"
-	.string "defrosts POKéMON\n"
-	.string "in battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Frost.$"
 
 gItemDescription_LeppaBerry: @ 83C3261
-	.string "A hold item that\n"
-	.string "restores 10 PP in\n"
-	.string "battle.$"
+	.string "Item (Tragen) füllt\n"
+	.string "AP im Kampf um\n"
+	.string "10 Punkte auf.$"
 
 gItemDescription_OranBerry: @ 83C328C
-	.string "A hold item that\n"
-	.string "restores 10 HP in\n"
-	.string "battle.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP im Kampf um\n"
+	.string "10 Punkte auf.$"
 
 gItemDescription_PersimBerry: @ 83C32B7
-	.string "A hold item that\n"
-	.string "heals confusion\n"
-	.string "in battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Verwirrung.$"
 
 gItemDescription_LumBerry: @ 83C32E3
-	.string "A hold item that\n"
-	.string "heals status in\n"
-	.string "battle.$"
+	.string "Item (Tragen) be-\n"
+	.string "wirkt Selbstheilung\n"
+	.string "bei Statusproblem.$"
 
 gItemDescription_SitrusBerry: @ 83C330C
-	.string "A hold item that\n"
-	.string "restores 30 HP in\n"
-	.string "battle.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP im Kampf um\n"
+	.string "30 Punkte auf.$"
 
 gItemDescription_FigyBerry: @ 83C3337
-	.string "A hold item that\n"
-	.string "restores HP but\n"
-	.string "may confuse.$"
+	.string "Item (Tragen) füllt\n"
+	.string "im Kampf KP auf, be-\n"
+	.string "wirkt evtl. Verwirr.$"
 
 gItemDescription_WikiBerry: @ 83C3365
-	.string "A hold item that\n"
-	.string "restores HP but\n"
-	.string "may confuse.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP auf, bewirkt\n"
+	.string "evtl. Verwirrung.$"
 
 gItemDescription_MagoBerry: @ 83C3393
-	.string "A hold item that\n"
-	.string "restores HP but\n"
-	.string "may confuse.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP auf, bewirkt\n"
+	.string "evtl. Verwirrung.$"
 
 gItemDescription_AguavBerry: @ 83C33C1
-	.string "A hold item that\n"
-	.string "restores HP but\n"
-	.string "may confuse.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP auf, bewirkt\n"
+	.string "evtl. Verwirrung.$"
 
 gItemDescription_IapapaBerry: @ 83C33EF
-	.string "A hold item that\n"
-	.string "restores HP but\n"
-	.string "may confuse.$"
+	.string "Item (Tragen) füllt\n"
+	.string "KP auf, bewirkt\n"
+	.string "evtl. Verwirrung.$"
 
 gItemDescription_RazzBerry: @ 83C341D
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow RAZZ.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "HIMMIH wächst.$"
 
 gItemDescription_BlukBerry: @ 83C3451
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow BLUK.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "MORB wächst.$"
 
 gItemDescription_NanabBerry: @ 83C3485
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow NANAB.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "NANAB wächst.$"
 
 gItemDescription_WepearBerry: @ 83C34BA
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow WEPEAR.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "NIRBE wächst.$"
 
 gItemDescription_PinapBerry: @ 83C34F0
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow PINAP.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "SANANA wächst.$"
 
 gItemDescription_PomegBerry: @ 83C3525
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow POMEG.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "GRANA wächst.$"
 
 gItemDescription_KelpsyBerry: @ 83C355A
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow KELPSY.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "SETANG wächst.$"
 
 gItemDescription_QualotBerry: @ 83C3590
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow QUALOT.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "QUALOT wächst.$"
 
 gItemDescription_HondewBerry: @ 83C35C6
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow HONDEW.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "HONMEL wächst.$"
 
 gItemDescription_GrepaBerry: @ 83C35FC
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow GREPA.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "LABRUS wächst.$"
 
 gItemDescription_TamatoBerry: @ 83C3631
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow TAMATO.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "TAMOT wächst.$"
 
 gItemDescription_CornnBerry: @ 83C3667
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow CORNN.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "SAIM wächst.$"
 
 gItemDescription_MagostBerry: @ 83C369C
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow MAGOST.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "MAGOST wächst.$"
 
 gItemDescription_RabutaBerry: @ 83C36D2
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow RABUTA.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "RABUTA wächst.$"
 
 gItemDescription_NomelBerry: @ 83C3708
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow NOMEL.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "TRONZI wächst.$"
 
 gItemDescription_SpelonBerry: @ 83C373D
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow SPELON.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "KIWAN wächst.$"
 
 gItemDescription_PamtreBerry: @ 83C3773
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow PAMTRE.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "PALLM wächst.$"
 
 gItemDescription_WatmelBerry: @ 83C37A9
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow WATMEL.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "WASMEL wächst.$"
 
 gItemDescription_DurinBerry: @ 83C37DF
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow DURIN.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "DURIN wächst.$"
 
 gItemDescription_BelueBerry: @ 83C3814
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow BELUE.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "MYRTIL wächst.$"
 
 gItemDescription_LiechiBerry: @ 83C3849
-	.string "A hold item that\n"
-	.string "raises ATTACK in\n"
-	.string "a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "ANGR.-Wert in einer\n"
+	.string "Notlage.$"
 
 gItemDescription_GanlonBerry: @ 83C3874
-	.string "A hold item that\n"
-	.string "raises DEFENSE in\n"
-	.string "a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "VERT.-Wert in einer\n"
+	.string "Notlage.$"
 
 gItemDescription_SalacBerry: @ 83C38A0
-	.string "A hold item that\n"
-	.string "raises SPEED in\n"
-	.string "a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "INIT.-Wert in einer\n"
+	.string "Notlage.$"
 
 gItemDescription_PetayaBerry: @ 83C38CA
-	.string "A hold item that\n"
-	.string "raises SP. ATK in\n"
-	.string "a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SP. ANGR.-Wert\n"
+	.string "in einer Notlage.$"
 
 gItemDescription_ApicotBerry: @ 83C38F6
-	.string "A hold item that\n"
-	.string "raises SP. DEF in\n"
-	.string "a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SP. VERT.-Wert\n"
+	.string "in einer Notlage.$"
 
 gItemDescription_LansatBerry: @ 83C3922
-	.string "A hold item that\n"
-	.string "ups the critical-\n"
-	.string "hit rate in a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "Volltrefferquote\n"
+	.string "in einer Notlage.$"
 
 gItemDescription_StarfBerry: @ 83C395A
-	.string "A hold item that\n"
-	.string "sharply boosts a\n"
-	.string "stat in a pinch.$"
+	.string "Item (Tragen) hebt\n"
+	.string "einen Statuswert\n"
+	.string "in einer Notlage.$"
 
 gItemDescription_EnigmaBerry: @ 83C398D
-	.string "{POKEBLOCK} ingredient.\n"
-	.string "Plant in loamy soil\n"
-	.string "to grow a mystery.$"
+	.string "Säe {POKEBLOCK}-Zutat\n"
+	.string "in Lehmboden, damit\n"
+	.string "Mysterium wächst.$"
 
 gItemDescription_BrightPowder: @ 83C39C6
-	.string "A hold item that\n"
-	.string "casts a glare to\n"
-	.string "reduce accuracy.$"
+	.string "Item (Tragen)\n"
+	.string "senkt die Genauig-\n"
+	.string "keit des Gegners.$"
 
 gItemDescription_WhiteHerb: @ 83C39F9
-	.string "A hold item that\n"
-	.string "restores any\n"
-	.string "lowered stat.$"
+	.string "Item (Tragen) hebt\n"
+	.string "jede Statusverän-\n"
+	.string "derung auf.$"
 
 gItemDescription_MachoBrace: @ 83C3A25
-	.string "A hold item that\n"
-	.string "promotes growth,\n"
-	.string "but reduces SPEED.$"
+	.string "Item (Tragen) för-\n"
+	.string "dert Wachstum,\n"
+	.string "aber senkt INIT.$"
 
 gItemDescription_ExpShare: @ 83C3A5A
-	.string "A hold item that\n"
-	.string "gets EXP. points\n"
-	.string "from battles.$"
+	.string "Item (Tragen) teilt\n"
+	.string "die Kampf-EP.$"
 
 gItemDescription_QuickClaw: @ 83C3A8A
-	.string "A hold item that\n"
-	.string "occasionally allows\n"
-	.string "the first strike.$"
+	.string "Item (Tragen) hebt\n"
+	.string "die Erstschlag-\n"
+	.string "quote.$"
 
 gItemDescription_SootheBell: @ 83C3AC1
-	.string "A hold item that\n"
-	.string "calms spirits and\n"
-	.string "fosters friendship.$"
+	.string "Item (Tragen) be-\n"
+	.string "sänftigt und för-\n"
+	.string "dert Sympathie.$"
 
 gItemDescription_MentalHerb: @ 83C3AF8
-	.string "A hold item that\n"
-	.string "snaps POKéMON out\n"
-	.string "of infatuation.$"
+	.string "Item (Tragen) er-\n"
+	.string "löst POKéMON von\n"
+	.string "der Anziehung.$"
 
 gItemDescription_ChoiceBand: @ 83C3B2B
-	.string "Raises a move’s\n"
-	.string "power, but permits\n"
-	.string "only that move.$"
+	.string "Stärkt eine Atta-\n"
+	.string "cke. Aber nur diese\n"
+	.string "ist einsetzbar.$"
 
 gItemDescription_KingsRock: @ 83C3B5E
-	.string "A hold item that\n"
-	.string "may cause flinching\n"
-	.string "when the foe is hit.$"
+	.string "Item (Tragen) kann\n"
+	.string "Gegner zurück-\n"
+	.string "weichen lassen.$"
 
 gItemDescription_SilverPowder: @ 83C3B98
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "BUG-type moves.$"
+	.string "Item (Tragen) ver-\n"
+	.string "bessert KÄFER-\n"
+	.string "Attacken.$"
 
 gItemDescription_AmuletCoin: @ 83C3BCD
-	.string "Doubles money in\n"
-	.string "battle if the holder\n"
-	.string "takes part.$"
+	.string "Doppelter Geldbe-\n"
+	.string "trag, wenn Träger \n"
+	.string "am Kampf teilnimmt.$"
 
 gItemDescription_CleanseTag: @ 83C3BFF
-	.string "A hold item that\n"
-	.string "helps repel wild\n"
-	.string "POKéMON.$"
+	.string "Item (Tragen) kann\n"
+	.string "wilde POKéMON\n"
+	.string "abhalten.$"
 
 gItemDescription_SoulDew: @ 83C3C2A
-	.string "Hold item: Raises\n"
-	.string "SP. ATK & SP. DEF\n"
-	.string "of LATIOS & LATIAS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SP.ANG & SP.VER von\n"
+	.string "LATIOS & LATIAS.$"
 
 gItemDescription_DeepSeaTooth: @ 83C3C62
-	.string "A hold item that\n"
-	.string "raises the SP. ATK\n"
-	.string "of CLAMPERL.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SP. ANGR. von\n"
+	.string "PERLU.$"
 
 gItemDescription_DeepSeaScale: @ 83C3C93
-	.string "A hold item that\n"
-	.string "raises the SP. DEF\n"
-	.string "of CLAMPERL.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SP. VERT. von\n"
+	.string "PERLU.$"
 
 gItemDescription_SmokeBall: @ 83C3CC4
-	.string "A hold item that\n"
-	.string "can be used to flee\n"
-	.string "from a wild POKéMON.$"
+	.string "Item (Tragen) er-\n"
+	.string "möglicht Flucht vor\n"
+	.string "wilden POKéMON.$"
 
 gItemDescription_Everstone: @ 83C3CFE
-	.string "A wondrous stone\n"
-	.string "& a hold item that\n"
-	.string "prevents evolution.$"
+	.string "Wundersamer Stein\n"
+	.string "zum Tragen. Bewirkt\n"
+	.string "Entwicklungsstopp.$"
 
 gItemDescription_FocusBand: @ 83C3D36
-	.string "A hold item that\n"
-	.string "occasionally\n"
-	.string "prevents fainting.$"
+	.string "Item (Tragen) kann\n"
+	.string "manchmal K.O.\n"
+	.string "verhindern.$"
 
 gItemDescription_LuckyEgg: @ 83C3D67
-	.string "A hold item that\n"
-	.string "boosts EXP. points\n"
-	.string "earned in battle.$"
+	.string "Item (Tragen)\n"
+	.string "erhöht im Kampf er-\n"
+	.string "haltene Extra-EP.$"
 
 gItemDescription_ScopeLens: @ 83C3D9D
-	.string "A hold item that\n"
-	.string "raises the critical-\n"
-	.string "hit rate.$"
+	.string "Item (Tragen)\n"
+	.string "erhöht die\n"
+	.string "Volltrefferquote.$"
 
 gItemDescription_MetalCoat: @ 83C3DCD
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "STEEL-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt STAHL-\n"
+	.string "Attacken.$"
 
 gItemDescription_Leftovers: @ 83C3E04
-	.string "A hold item that\n"
-	.string "gradually restores\n"
-	.string "HP in battle.$"
+	.string "Item (Tragen) füllt\n"
+	.string "im Kampf langsam\n"
+	.string "KP wieder auf.$"
 
 gItemDescription_DragonScale: @ 83C3E36
-	.string "A strange scale\n"
-	.string "held by DRAGON-\n"
-	.string "type POKéMON.$"
+	.string "Seltsame Haut zum\n"
+	.string "Tragen für POKéMON\n"
+	.string "des Typs DRACHEN.$"
 
 gItemDescription_LightBall: @ 83C3E64
-	.string "A hold item that\n"
-	.string "raises the SP. ATK\n"
-	.string "of PIKACHU.$"
+	.string "Item (Tragen)\n"
+	.string "erhöht PIKACHUS\n"
+	.string "SP. ANGR.$"
 
 gItemDescription_SoftSand: @ 83C3E94
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "GROUND-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt BODEN-\n"
+	.string "Attacken.$"
 
 gItemDescription_HardStone: @ 83C3ECC
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "ROCK-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt GESTEIN-\n"
+	.string "Attacken.$"
 
 gItemDescription_MiracleSeed: @ 83C3F02
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "GRASS-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt PFLAN-\n"
+	.string "ZEN-Attacken.$"
 
 gItemDescription_BlackGlasses: @ 83C3F39
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "DARK-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt UNLICHT-\n"
+	.string "Attacken.$"
 
 gItemDescription_BlackBelt: @ 83C3F6F
-	.string "A hold item that\n"
-	.string "boosts FIGHTING-\n"
-	.string "type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt KAMPF-\n"
+	.string "Attacken.$"
 
 gItemDescription_Magnet: @ 83C3F9D
-	.string "A hold item that\n"
-	.string "boosts ELECTRIC-\n"
-	.string "type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt ELEKTRO-\n"
+	.string "Attacken.$"
 
 gItemDescription_MysticWater: @ 83C3FCB
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "WATER-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt WASSER-\n"
+	.string "Attacken.$"
 
 gItemDescription_SharpBeak: @ 83C4002
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "FLYING-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt FLUG-\n"
+	.string "Attacken.$"
 
 gItemDescription_PoisonBarb: @ 83C403A
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "POISON-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt GIFT-\n"
+	.string "Attacken.$"
 
 gItemDescription_NeverMeltIce: @ 83C4072
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "ICE-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt EIS-\n"
+	.string "Attacken.$"
 
 gItemDescription_SpellTag: @ 83C40A7
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "GHOST-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt GEIST-\n"
+	.string "Attacken.$"
 
 gItemDescription_TwistedSpoon: @ 83C40DE
-	.string "A hold item that\n"
-	.string "boosts PSYCHIC-\n"
-	.string "type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt PSYCHO-\n"
+	.string "Attacken.$"
 
 gItemDescription_Charcoal: @ 83C410B
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "FIRE-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt FEUER-\n"
+	.string "Attacken.$"
 
 gItemDescription_DragonFang: @ 83C4141
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "DRAGON-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt DRACHEN-\n"
+	.string "Attacken.$"
 
 gItemDescription_SilkScarf: @ 83C4179
-	.string "A hold item that\n"
-	.string "raises the power of\n"
-	.string "NORMAL-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt NORMAL-\n"
+	.string "Attacken.$"
 
 gItemDescription_UpGrade: @ 83C41B1
-	.string "A peculiar box made\n"
-	.string "by SILPH CO.$"
+	.string "Eine mysteriöse\n"
+	.string "Box der SILPH CO.$"
 
 gItemDescription_ShellBell: @ 83C41D2
-	.string "A hold item that\n"
-	.string "restores HP upon\n"
-	.string "striking the foe.$"
+	.string "Item (Tragen) füllt\n"
+	.string "im Kampf langsam \n"
+	.string "KP wieder auf.$"
 
 gItemDescription_SeaIncense: @ 83C4206
-	.string "A hold item that\n"
-	.string "slightly boosts\n"
-	.string "WATER-type moves.$"
+	.string "Item (Tragen)\n"
+	.string "verstärkt WASSER-\n"
+	.string "Attacken.$"
 
 gItemDescription_LaxIncense: @ 83C4239
-	.string "A hold item that\n"
-	.string "slightly lowers the\n"
-	.string "foe’s accuracy.$"
+	.string "Item (Tragen)\n"
+	.string "senkt Genauigkeit\n"
+	.string "des Gegners.$"
 
 gItemDescription_LuckyPunch: @ 83C426E
-	.string "A hold item that\n"
-	.string "raises CHANSEY’s\n"
-	.string "critical-hit rate.$"
+	.string "Item (Tragen)\n"
+	.string "erhöht CHANEIRAS\n"
+	.string "Volltrefferquote.$"
 
 gItemDescription_MetalPowder: @ 83C42A3
-	.string "A hold item that\n"
-	.string "raises DEFENSE.$"
+	.string "Item (Tragen)\n"
+	.string "erhöht VERT.-Wert\n"
+	.string "von DITTO.$"
 
 gItemDescription_ThickClub: @ 83C42C4
-	.string "A bone of some\n"
-	.string "sort. It can be sold\n"
-	.string "cheaply.$"
+	.string "Irgendeine Art\n"
+	.string "Knochen von\n"
+	.string "geringem Wert.$"
 
 gItemDescription_Stick: @ 83C42F1
-	.string "A stick of leek.\n"
-	.string "It can be sold\n"
-	.string "cheaply.$"
+	.string "Gemeiner Lauch,\n"
+	.string "der nur von\n"
+	.string "geringem Wert ist.$"
 
 gItemDescription_RedScarf: @ 83C431A
-	.string "A hold item that\n"
-	.string "raises COOL in\n"
-	.string "CONTESTS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "COOL.-Wert für den\n"
+	.string "WETTBEWERB.$"
 
 gItemDescription_BlueScarf: @ 83C4344
-	.string "A hold item that\n"
-	.string "raises BEAUTY in\n"
-	.string "CONTESTS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "SCHÖN.-Wert für den\n"
+	.string "WETTBEWERB.$"
 
 gItemDescription_PinkScarf: @ 83C4370
-	.string "A hold item that\n"
-	.string "raises CUTE in\n"
-	.string "CONTESTS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "ANMUT-Wert für den\n"
+	.string "WETTBEWERB.$"
 
 gItemDescription_GreenScarf: @ 83C439A
-	.string "A hold item that\n"
-	.string "raises SMART in\n"
-	.string "CONTESTS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "KLUG.-Wert für den\n"
+	.string "WETTBEWERB.$"
 
 gItemDescription_YellowScarf: @ 83C43C5
-	.string "A hold item that\n"
-	.string "raises TOUGH in\n"
-	.string "CONTESTS.$"
+	.string "Item (Tragen) hebt\n"
+	.string "STÄRKE-Wert für\n"
+	.string "den WETTBEWERB.$"
 
 gItemDescription_MachBike: @ 83C43F0
-	.string "A folding bicycle\n"
-	.string "that more than\n"
-	.string "doubles foot speed.$"
+	.string "Klapprad, das dop-\n"
+	.string "pelt so schnell ist\n"
+	.string "wie ein Fußgänger.$"
 
 gItemDescription_CoinCase: @ 83C4425
-	.string "A case that holds\n"
-	.string "up to 9,999 COINS.$"
+	.string "Kann bis zu 9.999\n"
+	.string "MÜNZEN aufnehmen.$"
 
 gItemDescription_Itemfinder: @ 83C444A
-	.string "A device that\n"
-	.string "signals an invisible\n"
-	.string "item by sound.$"
+	.string "Ein Gerät, das ver-\n"
+	.string "borgene Items via \n"
+	.string "Schallwellen ortet.$"
 
 gItemDescription_OldRod: @ 83C447C
-	.string "Use by any body of\n"
-	.string "water to fish for\n"
-	.string "wild POKéMON.$"
+	.string "Damit kannst du in\n"
+	.string "jedem Gewässer\n"
+	.string "POKéMON angeln.$"
 
 gItemDescription_GoodRod: @ 83C44AF
-	.string "A decent fishing\n"
-	.string "rod for catching\n"
-	.string "wild POKéMON.$"
+	.string "Eine recht gute\n"
+	.string "Angel zum\n"
+	.string "POKéMON-Fischen.$"
 
 gItemDescription_SuperRod: @ 83C44DF
-	.string "The best fishing\n"
-	.string "rod for catching\n"
-	.string "wild POKéMON.$"
+	.string "Die beste Angel,\n"
+	.string "um nach POKéMON\n"
+	.string "zu fischen.$"
 
 gItemDescription_SSTicket: @ 83C450F
-	.string "The ticket required\n"
-	.string "for sailing on a\n"
-	.string "ferry.$"
+	.string "Ein Ticket zur\n"
+	.string "Fahrt auf\n"
+	.string "einer Fähre.$"
 
 gItemDescription_ContestPass: @ 83C453B
-	.string "The pass required\n"
-	.string "for entering\n"
-	.string "POKéMON CONTESTS.$"
+	.string "Ausweis zur Teil-\n"
+	.string "nahme an POKéMON- \n"
+	.string "WETTBEWERBEN.$"
 
 gItemDescription_WailmerPail: @ 83C456C
-	.string "A tool used for\n"
-	.string "watering BERRIES\n"
-	.string "and plants.$"
+	.string "Ein Gegenstand zum\n"
+	.string "Gießen von Pflan-\n"
+	.string "zen wie BEEREN.$"
 
 gItemDescription_DevonGoods: @ 83C4599
-	.string "A package that\n"
-	.string "contains DEVON’s\n"
-	.string "machine parts.$"
+	.string "Päckchen, das Ma-\n"
+	.string "schinenteile von\n"
+	.string "DEVON enthält.$"
 
 gItemDescription_SootSack: @ 83C45C8
-	.string "A sack used to\n"
-	.string "gather and hold\n"
-	.string "volcanic ash.$"
+	.string "Beutel zum Sammeln\n"
+	.string "und Aufbewahren\n"
+	.string "von Vulkanasche.$"
 
 gItemDescription_BasementKey: @ 83C45F5
-	.string "The key for NEW\n"
-	.string "MAUVILLE beneath\n"
-	.string "MAUVILLE CITY.$"
+	.string "Schlüssel für NEU\n"
+	.string "MALVENFROH unter\n"
+	.string "MALVENFROH CITY.$"
 
 gItemDescription_AcroBike: @ 83C4625
-	.string "A folding bicycle\n"
-	.string "capable of jumps\n"
-	.string "and wheelies.$"
+	.string "Klapprad ermög-\n"
+	.string "licht Sprünge und\n"
+	.string "Wheelies.$"
 
 gItemDescription_PokeblockCase: @ 83C4656
-	.string "A case for holding\n"
-	.string "{POKEBLOCK}S made with\n"
-	.string "a BERRY BLENDER.$"
+	.string "Box für {POKEBLOCK},\n"
+	.string "die im BEERENMIXER\n"
+	.string "hergestellt werden.$"
 
 gItemDescription_Letter: @ 83C468B
-	.string "A letter to STEVEN\n"
-	.string "from the PRESIDENT\n"
-	.string "of the DEVON CORP.$"
+	.string "Brief an TROY\n"
+	.string "vom PRÄSIDENTEN\n"
+	.string "der DEVON CORP.$"
 
 gItemDescription_EonTicket: @ 83C46C4
-	.string "The ticket for a\n"
-	.string "ferry to a distant\n"
-	.string "southern island.$"
+	.string "Bootsticket zu\n"
+	.string "einer fernen Insel\n"
+	.string "im Süden.$"
 
 gItemDescription_RedOrb: @ 83C46F9
-	.string "A red, glowing orb\n"
-	.string "said to contain an\n"
-	.string "ancient power.$"
+	.string "Rot glühende Kugel,\n"
+	.string "die eine uralte\n"
+	.string "Macht bergen soll.$"
 
 gItemDescription_BlueOrb: @ 83C472E
-	.string "A blue, glowing orb\n"
-	.string "said to contain an\n"
-	.string "ancient power.$"
+	.string "Blau glühende Kugel,\n"
+	.string "die eine uralte\n"
+	.string "Macht bergen soll.$"
 
 gItemDescription_Scanner: @ 83C4764
-	.string "A device found\n"
-	.string "inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Ein Gerät, das\n"
+	.string "im SCHIFFSWRACK\n"
+	.string "gefunden wurde.$"
 
 gItemDescription_GoGoggles: @ 83C478E
-	.string "Nifty goggles that\n"
-	.string "protect eyes from\n"
-	.string "desert sandstorms.$"
+	.string "Schicke Brille, die\n"
+	.string "die Augen vor Sand-\n"
+	.string "stürmen schützt.$"
 
 gItemDescription_Meteorite: @ 83C47C6
-	.string "A meteorite found\n"
-	.string "at METEOR FALLS.$"
+	.string "Meteorit. Fundort:\n"
+	.string "METEORFÄLLE.$"
 
 gItemDescription_Room1Key: @ 83C47E9
-	.string "A key that opens a\n"
-	.string "door inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Schlüssel zur Tür\n"
+	.string "einer Kabine auf\n"
+	.string "dem SCHIFFSWRACK.$"
 
 gItemDescription_Room2Key: @ 83C481C
-	.string "A key that opens a\n"
-	.string "door inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Schlüssel zur Tür\n"
+	.string "einer Kabine auf\n"
+	.string "dem SCHIFFSWRACK.$"
 
 gItemDescription_Room4Key: @ 83C484F
-	.string "A key that opens a\n"
-	.string "door inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Schlüssel zur Tür\n"
+	.string "einer Kabine auf\n"
+	.string "dem SCHIFFSWRACK.$"
 
 gItemDescription_Room6Key: @ 83C4882
-	.string "A key that opens a\n"
-	.string "door inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Schlüssel zur Tür\n"
+	.string "einer Kabine auf\n"
+	.string "dem SCHIFFSWRACK.$"
 
 gItemDescription_StorageKey: @ 83C48B5
-	.string "The key to the\n"
-	.string "storage inside the\n"
-	.string "ABANDONED SHIP.$"
+	.string "Schlüssel zum\n"
+	.string "Lagerraum auf\n"
+	.string "dem SCHIFFSWRACK.$"
 
 gItemDescription_RootFossil: @ 83C48E7
-	.string "A fossil of an\n"
-	.string "ancient, seafloor-\n"
-	.string "dwelling POKéMON.$"
+	.string "Fossil eines ural-\n"
+	.string "ten POKéMON, das in\n"
+	.string "der Tiefsee lebte.$"
 
 gItemDescription_ClawFossil: @ 83C491B
-	.string "A fossil of an\n"
-	.string "ancient, seafloor-\n"
-	.string "dwelling POKéMON.$"
+	.string "Fossil eines ural-\n"
+	.string "ten POKéMON, das in\n"
+	.string "der Tiefsee lebte.$"
 
 gItemDescription_DevonScope: @ 83C494F
-	.string "A device by DEVON\n"
-	.string "that signals any\n"
-	.string "unseeable POKéMON.$"
+	.string "Gerät von DEVON, \n"
+	.string "das unsichtbare\n"
+	.string "POKéMON entlarvt.$"
 
 gItemDescription_TM01: @ 83C4985
-	.string "Powerful, but makes\n"
-	.string "the user flinch if\n"
-	.string "hit by the foe.$"
+	.string "Stark. POKéMON er-\n"
+	.string "schrickt vielleicht\n"
+	.string "bei gegn. Attacke.$"
 
 gItemDescription_TM02: @ 83C49BC
-	.string "Hooks and slashes\n"
-	.string "the foe with long,\n"
-	.string "sharp claws.$"
+	.string "Gegner wird mit\n"
+	.string "langen, scharfen\n"
+	.string "Krallen attackiert.$"
 
 gItemDescription_TM03: @ 83C49EE
-	.string "Generates an\n"
-	.string "ultrasonic wave\n"
-	.string "that may confuse.$"
+	.string "Eine Ultraschall-\n"
+	.string "welle, die den Geg-\n"
+	.string "ner verwirren kann.$"
 
 gItemDescription_TM04: @ 83C4A1D
-	.string "Raises SP. ATK and\n"
-	.string "SP. DEF by focusing\n"
-	.string "the mind.$"
+	.string "Verstärkt SP. ANGR.\n"
+	.string "und SP. VERT. durch\n"
+	.string "Konzentration.$"
 
 gItemDescription_TM05: @ 83C4A4E
-	.string "A savage roar that\n"
-	.string "makes the foe flee \n"
-	.string "to end the battle.$"
+	.string "Brüller schlägt Geg-\n"
+	.string "ner in die Flucht \n"
+	.string "und beendet Kampf.$"
 
 gItemDescription_TM06: @ 83C4A88
-	.string "Poisons the foe\n"
-	.string "with a toxin that\n"
-	.string "gradually worsens.$"
+	.string "Vergiftet den Geg-\n"
+	.string "ner und schadet \n"
+	.string "ihm zunehmend.$"
 
 gItemDescription_TM07: @ 83C4ABD
-	.string "Summons a hailstorm\n"
-	.string "that hurts all\n"
-	.string "types except ICE.$"
+	.string "Hagelsturm schadet\n"
+	.string "allen POKéMON außer\n"
+	.string "denen des Typs EIS.$"
 
 gItemDescription_TM08: @ 83C4AF2
-	.string "Bulks up the body\n"
-	.string "to boost both\n"
-	.string "ATTACK & DEFENSE.$"
+	.string "Stärkt den Körper.\n"
+	.string "So steigt ANGR.-\n"
+	.string "und VERT.-Wert.$"
 
 gItemDescription_TM09: @ 83C4B24
-	.string "Shoots 2 to 5 seeds\n"
-	.string "in a row to strike\n"
-	.string "the foe.$"
+	.string "Bepflanzt den\n"
+	.string "Gegner mit 2 bis 5\n"
+	.string "Samen auf einmal.$"
 
 gItemDescription_TM10: @ 83C4B54
-	.string "The attack power\n"
-	.string "varies among\n"
-	.string "different POKéMON.$"
+	.string "Die Stärke dieser\n"
+	.string "Attacke hängt vom \n"
+	.string "jew. POKéMON ab.$"
 
 gItemDescription_TM11: @ 83C4B85
-	.string "Raises the power of\n"
-	.string "FIRE-type moves\n"
-	.string "for 5 turns.$"
+	.string "Verstärkt FEUER-\n"
+	.string "Attacken über \n"
+	.string "5 Runden.$"
 
 gItemDescription_TM12: @ 83C4BB6
-	.string "Enrages the foe so\n"
-	.string "it can only use\n"
-	.string "attack moves.$"
+	.string "Reizt Geg. so, dass\n"
+	.string "er nur Angriffs-\n"
+	.string "attacken einsetzt.$"
 
 gItemDescription_TM13: @ 83C4BE7
-	.string "Fires an icy cold\n"
-	.string "beam that may\n"
-	.string "freeze the foe.$"
+	.string "Eisig kalter Strahl,\n"
+	.string "der den Gegner\n"
+	.string "einfrieren kann.$"
 
 gItemDescription_TM14: @ 83C4C17
-	.string "A vicious snow-and-\n"
-	.string "wind attack that\n"
-	.string "may freeze the foe.$"
+	.string "Eis- und Schnee- \n"
+	.string "Attacke, die Gegner\n"
+	.string "einfrieren kann.$"
 
 gItemDescription_TM15: @ 83C4C50
-	.string "Powerful, but needs\n"
-	.string "recharging the\n"
-	.string "next turn.$"
+	.string "Stark, muss sich\n"
+	.string "aber in der nächs-\n"
+	.string "ten Runde aufladen.$"
 
 gItemDescription_TM16: @ 83C4C7E
-	.string "Creates a wall of\n"
-	.string "light that lowers\n"
-	.string "SP. ATK damage.$"
+	.string "Wand aus Licht, die\n"
+	.string "Senkung des SP.\n"
+	.string "ANGR. verringert.$"
 
 gItemDescription_TM17: @ 83C4CB2
-	.string "Negates all damage,\n"
-	.string "but may fail if used\n"
-	.string "in succession.$"
+	.string "Schützt, könnte\n"
+	.string "aber bei häufigem\n"
+	.string "Einsatz versagen.$"
 
 gItemDescription_TM18: @ 83C4CEA
-	.string "Raises the power of\n"
-	.string "WATER-type moves\n"
-	.string "for 5 turns.$"
+	.string "Verstärkt WASSER-\n"
+	.string "Attacken über\n"
+	.string "5 Runden.$"
 
 gItemDescription_TM19: @ 83C4D1C
-	.string "Recovers half the\n"
-	.string "HP of the damage \n"
-	.string "this move inflicts.$"
+	.string "Füllt KP um die Hälf-\n"
+	.string "te der zugefügten\n"
+	.string "Schadenspunkte.$"
 
 gItemDescription_TM20: @ 83C4D54
-	.string "Prevents status\n"
-	.string "abnormality with a\n"
-	.string "mystical power.$"
+	.string "Mystische Macht\n"
+	.string "verhindert Status-\n"
+	.string "veränderungen.$"
 
 gItemDescription_TM21: @ 83C4D87
-	.string "The less the user\n"
-	.string "likes you, the more\n"
-	.string "powerful this move.$"
+	.string "Je unbeliebter der\n"
+	.string "Trainer, desto grö-\n"
+	.string "ßer die Wirkung.$"
 
 gItemDescription_TM22: @ 83C4DC1
-	.string "Absorbs sunlight in\n"
-	.string "the 1st turn, then\n"
-	.string "attacks next turn.$"
+	.string "Erst wird Sonnen-\n"
+	.string "licht absorbiert,\n"
+	.string "dann erfolgt Angr.$"
 
 gItemDescription_TM23: @ 83C4DFB
-	.string "Slams the foe with\n"
-	.string "a hard tail. It may\n"
-	.string "lower DEFENSE.$"
+	.string "Schlag mit harter\n"
+	.string "Rute. Kann gleichz.\n"
+	.string "VERT.-Wert senken.$"
 
 gItemDescription_TM24: @ 83C4E31
-	.string "A powerful electric\n"
-	.string "attack that may\n"
-	.string "cause paralysis.$"
+	.string "Starke Elektro-\n"
+	.string "Attacke kann\n"
+	.string "Paralyse bewirken.$"
 
 gItemDescription_TM25: @ 83C4E66
-	.string "Strikes the foe\n"
-	.string "with a thunderbolt.\n"
-	.string "It may paralyze.$"
+	.string "Mächtiger Donner-\n"
+	.string "schlag, der Paraly-\n"
+	.string "se bewirken kann.$"
 
 gItemDescription_TM26: @ 83C4E9B
-	.string "Causes a quake\n"
-	.string "that has no effect\n"
-	.string "on flying foes.$"
+	.string "Starkes Beben hat\n"
+	.string "keinen Einfluss auf\n"
+	.string "fliegende Gegner.$"
 
 gItemDescription_TM27: @ 83C4ECD
-	.string "The more the user\n"
-	.string "likes you, the more\n"
-	.string "powerful this move.$"
+	.string "Je beliebter der\n"
+	.string "Trainer, desto grö-\n"
+	.string "ßer die Wirkung.$"
 
 gItemDescription_TM28: @ 83C4F07
-	.string "Digs underground\n"
-	.string "the 1st turn, then\n"
-	.string "strikes next turn.$"
+	.string "Erst gräbt sich An-\n"
+	.string "greifer ein, dann\n"
+	.string "erfolgt Angriff.$"
 
 gItemDescription_TM29: @ 83C4F3E
-	.string "A powerful psychic\n"
-	.string "attack that may\n"
-	.string "lower SP. DEF.$"
+	.string "Starke PSYCHO-At-\n"
+	.string "tacke, die SP. VERT.\n"
+	.string "senken kann.$"
 
 gItemDescription_TM30: @ 83C4F70
-	.string "Hurls a dark lump\n"
-	.string "at the foe. It may\n"
-	.string "lower SP. DEF.$"
+	.string "Dunkler Klumpen,\n"
+	.string "der SP. VERT.\n"
+	.string "senken kann.$"
 
 gItemDescription_TM31: @ 83C4FA4
-	.string "Destroys barriers\n"
-	.string "like LIGHT SCREEN\n"
-	.string "and causes damage.$"
+	.string "Zerstört Barrieren\n"
+	.string "wie SCHUTZSCHILD,\n"
+	.string "fügt Schaden zu.$"
 
 gItemDescription_TM32: @ 83C4FDB
-	.string "Creates illusory\n"
-	.string "copies to enhance\n"
-	.string "elusiveness.$"
+	.string "Virtueller Doppel-\n"
+	.string "gänger erhöht\n"
+	.string "den Flucht-Wert.$"
 
 gItemDescription_TM33: @ 83C500B
-	.string "Creates a wall of\n"
-	.string "light that weakens\n"
-	.string "physical attacks.$"
+	.string "Wand aus Licht, die\n"
+	.string "physische Atta-\n"
+	.string "cken schwächt.$"
 
 gItemDescription_TM34: @ 83C5042
-	.string "Zaps the foe with a\n"
-	.string "jolt of electricity\n"
-	.string "that never misses.$"
+	.string "Fügt Gegner einen\n"
+	.string "Stromschlag zu,\n"
+	.string "der nie verfehlt.$"
 
 gItemDescription_TM35: @ 83C507D
-	.string "Looses a stream of\n"
-	.string "fire that may burn\n"
-	.string "the foe.$"
+	.string "Entfesselt Feuer-\n"
+	.string "strahl, der Gegner\n"
+	.string "verbrennen kann.$"
 
 gItemDescription_TM36: @ 83C50AC
-	.string "Hurls sludge at the\n"
-	.string "foe. It may poison\n"
-	.string "the foe.$"
+	.string "Bewirft Gegner mit\n"
+	.string "Matsch, der ihn\n"
+	.string "vergiften kann.$"
 
 gItemDescription_TM37: @ 83C50DC
-	.string "Causes a sandstorm\n"
-	.string "that hits the foe\n"
-	.string "over several turns.$"
+	.string "Sandsturm trifft\n"
+	.string "etliche Runden lang\n"
+	.string "die Kämpfenden.$"
 
 gItemDescription_TM38: @ 83C5115
-	.string "A powerful fire\n"
-	.string "attack that may\n"
-	.string "burn the foe.$"
+	.string "Kraftvolle FEUER-\n"
+	.string "Attacke, die Gegner\n"
+	.string "verbrennen kann.$"
 
 gItemDescription_TM39: @ 83C5143
-	.string "Stops the foe from\n"
-	.string "moving with rocks.\n"
-	.string "May lower SPEED.$"
+	.string "Stoppt GESTEIN-\n"
+	.string "Attacken. Kann\n"
+	.string "INIT.-Wert senken.$"
 
 gItemDescription_TM40: @ 83C517A
-	.string "An extremely fast\n"
-	.string "attack that can’t\n"
-	.string "be avoided.$"
+	.string "Eine extrem schnel-\n"
+	.string "le Attacke, die\n"
+	.string "unausweichlich ist.$"
 
 gItemDescription_TM41: @ 83C51AA
-	.string "Prevents the foe\n"
-	.string "from using the same\n"
-	.string "move in a row.$"
+	.string "Blockiert gerade\n"
+	.string "verwendete Atta-\n"
+	.string "cke des Gegners.$"
 
 gItemDescription_TM42: @ 83C51DE
-	.string "Raises ATTACK when\n"
-	.string "poisoned, burned,\n"
-	.string "or paralyzed.$"
+	.string "Stärkt ANGR.-Wert\n"
+	.string "bei Gift, Brand oder\n"
+	.string "Paralyse.$"
 
 gItemDescription_TM43: @ 83C5211
-	.string "Adds an effect to\n"
-	.string "attack depending\n"
-	.string "on the location.$"
+	.string "Die Umgebung\n"
+	.string "beeinflusst die Art\n"
+	.string "der Attacke.$"
 
 gItemDescription_TM44: @ 83C5245
-	.string "The user sleeps for\n"
-	.string "2 turns to restore\n"
-	.string "health and status.$"
+	.string "POKéMON schläft\n"
+	.string "2 Runden. Füllt KP\n"
+	.string "und heilt Status.$"
 
 gItemDescription_TM45: @ 83C527F
-	.string "Makes it tough to\n"
-	.string "attack a foe of the\n"
-	.string "opposite gender.$"
+	.string "Erschwert Angriff\n"
+	.string "auf Gegner des an-\n"
+	.string "deren Geschlechts.$"
 
 gItemDescription_TM46: @ 83C52B6
-	.string "While attacking,\n"
-	.string "it may steal the\n"
-	.string "foe’s held item.$"
+	.string "Beim Angriff wird\n"
+	.string "Item des Gegners\n"
+	.string "evtl. gestohlen.$"
 
 gItemDescription_TM47: @ 83C52E9
-	.string "Spreads hard-edged\n"
-	.string "wings and slams\n"
-	.string "into the foe.$"
+	.string "Den Gegner\n"
+	.string "treffen stählerne\n"
+	.string "Flügelschläge.$"
 
 gItemDescription_TM48: @ 83C531A
-	.string "Switches abilities\n"
-	.string "with the foe on the\n"
-	.string "turn this is used.$"
+	.string "Austausch der\n"
+	.string "Fähigkeiten bei der\n"
+	.string "nächsten Attacke.$"
 
 gItemDescription_TM49: @ 83C5354
-	.string "Steals the effects\n"
-	.string "of the move the foe\n"
-	.string "is trying to use.$"
+	.string "Stiehlt die\n"
+	.string "Effekte der gegne-\n"
+	.string "rischen Attacke.$"
 
 gItemDescription_TM50: @ 83C538D
-	.string "Enables full-power\n"
-	.string "attack, but sharply\n"
-	.string "lowers SP. ATK.$"
+	.string "Höchste Kraft,\n"
+	.string "aber senkt SP.\n"
+	.string "ANGR. enorm.$"
 
 gItemDescription_HM01: @ 83C53C4
-	.string "Attacks the foe\n"
-	.string "with sharp blades\n"
-	.string "or claws.$"
+	.string "Gegner wird mit\n"
+	.string "klingenscharfen\n"
+	.string "Krallen attackiert.$"
 
 gItemDescription_HM02: @ 83C53F0
-	.string "Flies up on the\n"
-	.string "first turn, then\n"
-	.string "attacks next turn.$"
+	.string "PKMN fliegt hoch,\n"
+	.string "dann erfolgt rasan-\n"
+	.string "ter Luftangriff.$"
 
 gItemDescription_HM03: @ 83C5424
-	.string "Creates a huge\n"
-	.string "wave, then crashes\n"
-	.string "it down on the foe.$"
+	.string "Eine riesige Flut-\n"
+	.string "welle ergießt sich\n"
+	.string "über dem Gegner.$"
 
 gItemDescription_HM04: @ 83C545A
-	.string "Builds enormous\n"
-	.string "power, then slams\n"
-	.string "the foe.$"
+	.string "Den Gegner trifft \n"
+	.string "ein energiegelade-\n"
+	.string "ner Kraftschlag.$"
 
 gItemDescription_HM05: @ 83C5485
-	.string "Looses a powerful\n"
-	.string "blast of light that\n"
-	.string "reduces accuracy.$"
+	.string "Ein gleißender\n"
+	.string "Lichtstrahl, der\n"
+	.string "Genau. senken kann.$"
 
 gItemDescription_HM06: @ 83C54BD
-	.string "A rock-crushingly\n"
-	.string "tough attack that\n"
-	.string "may lower DEFENSE.$"
+	.string "Steinbrecherische\n"
+	.string "Attacke, die VERT.-\n"
+	.string "Wert senken kann.$"
 
 gItemDescription_HM07: @ 83C54F4
-	.string "Attacks the foe\n"
-	.string "with enough power\n"
-	.string "to climb waterfalls.$"
+	.string "Mächtige Attacke,\n"
+	.string "die Wasserfälle\n"
+	.string "bezwingbar macht.$"
 
 gItemDescription_HM08: @ 83C552B
-	.string "Dives underwater\n"
-	.string "the 1st turn, then\n"
-	.string "attacks next turn.$"
+	.string "PKMN taucht ab,\n"
+	.string "dann erfolgt An-\n"
+	.string "griff aus der Tiefe.$"
 
 gItemDescription_Dummy: @ 83C5562
 	.string "$"

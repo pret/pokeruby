@@ -1,50 +1,50 @@
 gMapName_LittlerootTown: @ 83E6FF4
-	.string "LITTLEROOT{NAME_END} TOWN$"
+	.string "WURZELHEIM$"
 
 gMapName_OldaleTown: @ 83E7006
-	.string "OLDALE{NAME_END} TOWN$"
+	.string "ROSALTSTADT$"
 
 gMapName_DewfordTown: @ 83E7014
-	.string "DEWFORD{NAME_END} TOWN$"
+	.string "FAUSTAUHAVEN$"
 
 gMapName_LavaridgeTown: @ 83E7023
-	.string "LAVARIDGE{NAME_END} TOWN$"
+	.string "BAD LAVASTADT$"
 
 gMapName_FallarborTown: @ 83E7034
-	.string "FALLARBOR{NAME_END} TOWN$"
+	.string "LAUBWECHSEL{NAME_END}FELD$"
 
 gMapName_VerdanturfTown: @ 83E7045
-	.string "VERDANTURF{NAME_END} TOWN$"
+	.string "WIESENFLUR$"
 
 gMapName_PacifidlogTown: @ 83E7057
-	.string "PACIFIDLOG{NAME_END} TOWN$"
+	.string "FLOSSBRUNN$"
 
 gMapName_PetalburgCity: @ 83E7069
-	.string "PETALBURG{NAME_END} CITY$"
+	.string "BLÜTENBURG{NAME_END} CITY$"
 
 gMapName_SlateportCity: @ 83E707A
-	.string "SLATEPORT{NAME_END} CITY$"
+	.string "GRAPHITPORT{NAME_END} CITY$"
 
 gMapName_MauvilleCity: @ 83E708B
-	.string "MAUVILLE{NAME_END} CITY$"
+	.string "MALVENFROH{NAME_END} CITY$"
 
 gMapName_RustboroCity: @ 83E709B
-	.string "RUSTBORO{NAME_END} CITY$"
+	.string "METAROST{NAME_END} CITY$"
 
 gMapName_FortreeCity: @ 83E70AB
-	.string "FORTREE{NAME_END} CITY$"
+	.string "BAUMHAUSEN{NAME_END} CITY$"
 
 gMapName_LilycoveCity: @ 83E70BA
-	.string "LILYCOVE{NAME_END} CITY$"
+	.string "SEEGRASULB{NAME_END} CITY$"
 
 gMapName_MossdeepCity: @ 83E70CA
-	.string "MOSSDEEP{NAME_END} CITY$"
+	.string "MOOSBACH{NAME_END} CITY$"
 
 gMapName_SootopolisCity: @ 83E70DA
-	.string "SOOTOPOLIS{NAME_END} CITY$"
+	.string "XENEROVILLE$"
 
 gMapName_EverGrandeCity: @ 83E70EC
-	.string "EVER GRANDE{NAME_END} CITY$"
+	.string "PRACHTPOLIS{NAME_END} CITY$"
 
 gMapName_Route101: @ 83E70FF
 	.string "ROUTE 101$"
@@ -149,88 +149,88 @@ gMapName_Route134: @ 83E7249
 	.string "ROUTE 134$"
 
 gMapName_Underwater: @ 83E7253
-	.string "UNDERWATER$"
+	.string "UNTERWASSER$"
 
 gMapName_GraniteCave: @ 83E725E
-	.string "GRANITE CAVE$"
+	.string "GRANITHÖHLE$"
 
 gMapName_MtChimney: @ 83E726B
-	.string "MT. CHIMNEY$"
+	.string "SCHLOTBERG$"
 
 gMapName_SafariZone: @ 83E7277
-	.string "SAFARI ZONE$"
+	.string "SAFARI-ZONE$"
 
 gMapName_BattleTower: @ 83E7283
-	.string "BATTLE TOWER$"
+	.string "DUELLTURM$"
 
 gMapName_PetalburgWoods: @ 83E7290
-	.string "PETALBURG WOODS$"
+	.string "BLÜTENBURGWALD$"
 
 gMapName_RusturfTunnel: @ 83E72A0
-	.string "RUSTURF TUNNEL$"
+	.string "METAFLURTUNNEL$"
 
 gMapName_AbandonedShip: @ 83E72AF
-	.string "ABANDONED SHIP$"
+	.string "SCHIFFSWRACK$"
 
 gMapName_NewMauville: @ 83E72BE
-	.string "NEW MAUVILLE$"
+	.string "NEU MALVENFROH$"
 
 gMapName_MeteorFalls: @ 83E72CB
-	.string "METEOR FALLS$"
+	.string "METEORFÄLLE$"
 
 gMapName_MtPyre: @ 83E72D8
-	.string "MT. PYRE$"
+	.string "PYROBERG$"
 
 gMapName_EvilTeamHideout: @ 83E72E1
-	.string "{EVIL_TEAM} HIDEOUT$"
+	.string "{EVIL_TEAM}s VERSTECK$"
 
 gMapName_ShoalCave: @ 83E72EC
-	.string "SHOAL CAVE$"
+	.string "KÜSTENHÖHLE$"
 
 gMapName_SeafloorCavern: @ 83E72F7
-	.string "SEAFLOOR CAVERN$"
+	.string "TIEFSEEHÖHLE$"
 
 gMapName_VictoryRoad: @ 83E7307
-	.string "VICTORY ROAD$"
+	.string "SIEGESSTRASSE$"
 
 gMapName_MirageIsland: @ 83E7314
-	.string "MIRAGE ISLAND$"
+	.string "WUNDEREILAND$"
 
 gMapName_CaveOfOrigin: @ 83E7322
-	.string "CAVE OF ORIGIN$"
+	.string "URZEITHÖHLE$"
 
 gMapName_SouthernIsland: @ 83E7331
-	.string "SOUTHERN ISLAND$"
+	.string "INSEL IM SÜDEN$"
 
 gMapName_FieryPath: @ 83E7341
-	.string "FIERY PATH$"
+	.string "FEURIGER PFAD$"
 
 gMapName_JaggedPass: @ 83E734C
-	.string "JAGGED PASS$"
+	.string "STEILPASS$"
 
 gMapName_SealedChamber: @ 83E7358
-	.string "SEALED CHAMBER$"
+	.string "SIEGELKAMMER$"
 
 gMapName_ScorchedSlab: @ 83E7367
-	.string "SCORCHED SLAB$"
+	.string "SONNENGROTTE$"
 
 gMapName_IslandCave: @ 83E7375
-	.string "ISLAND CAVE$"
+	.string "INSELHÖHLE$"
 
 gMapName_DesertRuins: @ 83E7381
-	.string "DESERT RUINS$"
+	.string "WÜSTENRUINE$"
 
 gMapName_AncientTomb: @ 83E738E
-	.string "ANCIENT TOMB$"
+	.string "GRABMAL$"
 
 gMapName_InsideOfTruck: @ 83E739B
-	.string "INSIDE OF TRUCK$"
+	.string "IM MÖBELWAGEN$"
 
 gMapName_SkyPillar: @ 83E73AB
-	.string "SKY PILLAR$"
+	.string "HIMMELTURM$"
 
 gMapName_SecretBase: @ 83E73B6
-	.string "SECRET BASE$"
+	.string "GEHEIMBASIS$"
 
 gMapName_None: @ 83E73C2
 	.string "$"

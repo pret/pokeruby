@@ -1,26 +1,24 @@
 gSaveText_WouldYouLikeToSave:: @ 81C6C85
-UnknownString_81C6C85: @ 81C6C85
-	.string "Would you like to save the game?$"
+	.string "Möchtest du das Spiel speichern?$"
 
-gSaveText_ThereIsAlreadyAFile:: @ 81C6CA6
 UnknownString_81C6CA6: @ 81C6CA6
-	.string "There is already a saved file.\n"
-	.string "Is it okay to overwrite it?$"
+gSaveText_ThereIsAlreadyAFile:: @ 81C6CA6
+	.string "Es gibt bereits einen Spielstand.\n"
+	.string "Spielstand überschreiben?$"
 
-gSaveText_DontTurnOff:: @ 81C6CE1
 BattleTower_BattleRoom_Text_1C6CE1:: @ 81C6CE1
-	.string "SAVING...\n"
-	.string "DON’T TURN OFF THE POWER.$"
+gSaveText_DontTurnOff:: @ 81C6CE1
+	.string "SPEICHERN...\n"
+	.string "BITTE DAS GERÄT NICHT AUSSCHALTEN.$"
 
-gSaveText_PlayerSavedTheGame:: @ 81C6D05
 BattleTower_BattleRoom_Text_1C6D05:: @ 81C6D05
-	.string "{PLAYER} saved the game.$"
+gSaveText_PlayerSavedTheGame:: @ 81C6D05
+	.string "{PLAYER} hat das Spiel gespeichert.$"
 
 UnknownString_81C6D18: @ 81C6D18
-	.string "Save error...$"
+	.string "Fehler beim Speichern...$"
 
-gSaveText_ThereIsADifferentFile:: @ 81C6D26
 UnknownString_81C6D26: @ 81C6D26
-	.string "There is a different game file that is\n"
-	.string "already saved.\p"
-	.string "Is it okay to overwrite it?$"
+gSaveText_ThereIsADifferentFile:: @ 81C6D26
+	.string "Es gibt schon einen anderen Spielstand.\p"
+	.string "Soll er überschrieben werden?$"

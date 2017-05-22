@@ -21,13 +21,13 @@ gIngameTrades:: @ 8215AC4
 	.4byte 0x9C40 @ personality value
 	.2byte ITEM_X_ATTACK @ held item
 	.byte -1 @ mail num
-	.string "ELYSSA$", 11 @ OT name
+	.string "MAIK$", 11 @ OT name
 	.byte MALE @ OT gender
 	.byte 10 @ sheen
 	.2byte SPECIES_SLAKOTH @ player mon species
 	.space 2
 
-	.string "SKITIT$", 11 @ nickname
+	.string "CONEC$", 11 @ nickname
 	.space 1
 	.2byte SPECIES_SKITTY @ NPC mon species
 	.byte 5 @ HP IV
@@ -48,13 +48,13 @@ gIngameTrades:: @ 8215AC4
 	.4byte 0x498A2E17 @ personality value
 	.2byte ITEM_GLITTER_MAIL @ held item
 	.byte 0 @ mail num
-	.string "DARRELL$", 11 @ OT name
+	.string "MADINA$", 11 @ OT name
 	.byte FEMALE @ OT gender
 	.byte 10 @ sheen
 	.2byte SPECIES_PIKACHU @ player mon species
 	.space 2
 
-	.string "COROSO$", 11 @ nickname
+	.string "CORASO$", 11 @ nickname
 	.space 1
 	.2byte SPECIES_CORSOLA @ NPC mon species
 	.byte 4 @ HP IV
@@ -75,7 +75,7 @@ gIngameTrades:: @ 8215AC4
 	.4byte 0x4C970B7F @ personality value
 	.2byte ITEM_TROPIC_MAIL @ held item
 	.byte 1 @ mail num
-	.string "LANE$", 11 @ OT name
+	.string "LIANA$", 11 @ OT name
 	.byte FEMALE @ OT gender
 	.byte 10 @ sheen
 	.2byte SPECIES_BELLOSSOM @ player mon species
@@ -90,19 +90,19 @@ gIngameTradeMail:: @ 8215B78
 	ec_word MY
 	ec_pokemon1 SKITTY
 	ec_word EATS
+	.2byte 0xFFFF
 	ec_word A_LOT
-	ec_word NOW
 	ec_word EXCL
 	.2byte 0
 
 @ 1
 	ec_word I
 	ec_word WANT
-	ec_word TO
-	ec_word SEE
-	ec_word A
+	ec_word OF
 	ec_move2 PETAL_DANCE
-	ec_word IT_S
+	ec_word WORKS
+	ec_word THE
+	ec_word IS
 	ec_word SO
 	ec_word PRETTY
 	.2byte 0

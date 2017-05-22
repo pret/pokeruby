@@ -1,92 +1,94 @@
 Route109_SeashoreHouse_Text_19B4D9:: @ 819B4D9
-	.string "I’m the owner of the SEASHORE HOUSE.\n"
-	.string "But you can call me MR. SEA!\p"
-	.string "What I love above all is to see hot\n"
-	.string "POKéMON battles.\p"
-	.string "Let me see that your heart burns hot!\p"
-	.string "If you can defeat all the TRAINERS\n"
-	.string "here, I’ll reward your efforts.$"
+	.string "Ich bin der Besitzer des STRANDHAUSES.\n"
+	.string "Du kannst MR. MARE zu mir sagen.\p"
+	.string "Heißen POKéMON-Kämpfen zuzusehen\n"
+	.string "liebe ich über alles!\p"
+	.string "Zeig mir, wie heiß dein Herz lodert!\p"
+	.string "Wenn du alle TRAINER besiegen kannst,\n"
+	.string "werde ich dich belohnen!$"
 
 Route109_SeashoreHouse_Text_19B5B9:: @ 819B5B9
-	.string "Show me some hot matches!\p"
-	.string "I run this SEASHORE HOUSE just for\n"
-	.string "that reason alone!$"
+	.string "Zeig mir heiße Kämpfe!\p"
+	.string "Nur für diese habe ich das STRANDHAUS\n"
+	.string "überhaupt geöffnet!$"
 
 Route109_SeashoreHouse_Text_19B609:: @ 819B609
-	.string "You’re scorching hot!\n"
-	.string "Those battles blazed!\l"
-	.string "I’m more than just satisfied!\p"
-	.string "As thanks for showing me your hot\n"
-	.string "streak, I want you to take these.\p"
-	.string "It’s half a dozen bottles of SODA POP!$"
+	.string "Du bist brandheiß!\n"
+	.string "Die Kämpfe glühen geradezu!\l"
+	.string "Ich bin mehr als zufrieden!\p"
+	.string "Du hast deine Fertigkeiten bewiesen.\n"
+	.string "Zum Dank schenke ich dir etwas.\p"
+	.string "Es sind sechs Flaschen SPRUDEL!$"
 
 Route109_SeashoreHouse_Text_19B6BE:: @ 819B6BE
-	.string "Oh, but hey, your BAG’s jammed full.\n"
-	.string "I’ll hang on to these for you.$"
+	.string "Aber dein BEUTEL ist ja gerammelt voll.\n"
+	.string "Ich werde sie für dich aufbewahren.$"
 
 Route109_SeashoreHouse_Text_19B702:: @ 819B702
-	.string "Want to buy some SODA POP?\n"
-	.string "POKéMON love it!\p"
-	.string "Just ¥300 a bottle!\n"
-	.string "Buy some!$"
+	.string "Möchtest du etwas SPRUDEL kaufen?\n"
+	.string "POKéMON lieben ihn!\p"
+	.string "Nur ¥300 pro Flasche!\n"
+	.string "Kauf doch welchen!$"
 
 Route109_SeashoreHouse_Text_19B74C:: @ 819B74C
-	.string "Here you go!$"
+	.string "Hier, bitte schön!$"
 
 Route109_SeashoreHouse_Text_19B759:: @ 819B759
-	.string "You don’t have the money.$"
+	.string "Du hast nicht genügend Geld.$"
 
 Route109_SeashoreHouse_Text_19B773:: @ 819B773
-	.string "No?\n"
-	.string "That’s too bad.$"
+	.string "Nein?\n"
+	.string "Das ist aber wirklich schade.$"
 
 UnknownString_819B787: @ 819B787
-	.string "SODA POP! The POKéMON favorite!\n"
-	.string "Just ¥300 a bottle! Want one?$"
+	.string "SPRUDEL! POKéMONs Liebling!\n"
+	.string "Nur ¥300 pro Flasche! Möchtest du eine?$"
 
 UnknownString_819B7C5: @ 819B7C5
-	.string "Here you go!$"
+	.string "Hier, bitte schön!$"
 
 UnknownString_819B7D2: @ 819B7D2
-	.string "Oh, dear!\n"
-	.string "You don’t have enough money.$"
+	.string "Oh je!\n"
+	.string "Du hast nicht genügend Geld.$"
 
 UnknownString_819B7F9: @ 819B7F9
-	.string "That’s too bad.$"
+	.string "Das ist wirklich sehr schade.$"
 
 Route109_SeashoreHouse_Text_19B809:: @ 819B809
-	.string "If you’re looking for a battle on the\n"
-	.string "high seas, you’ll find no hotter \l"
-	.string "TRAINER than me, matey!$"
+	.string "Wenn du Lust auf einen heißen Kampf\n"
+	.string "auf hoher See hast, findest du keinen\l"
+	.string "lodernderen TRAINER als mich!$"
 
 Route109_SeashoreHouse_Text_19B869:: @ 819B869
-	.string "That was a hot battle!\n"
-	.string "I can accept that loss, matey!$"
+	.string "Das war ein heißer Kampf!\n"
+	.string "Ich kann die Niederlage verkraften!$"
 
 Route109_SeashoreHouse_Text_19B89F:: @ 819B89F
-	.string "Whenever I’m in SLATEPORT, I enjoy\n"
-	.string "hot battles and ice-cold SODA POP!$"
+	.string "Immer wenn ich in GRAPHITPORT CITY bin,\n"
+	.string "genieße ich heiße Kämpfe und\l"
+	.string "eisgekühlten SPRUDEL!$"
 
 Route109_SeashoreHouse_Text_19B8E5:: @ 819B8E5
-	.string "Boring battles aren’t worth the effort.\p"
-	.string "Fiery hot battles are what toughen up\n"
-	.string "TRAINERS and POKéMON!$"
+	.string "Langweilige Kämpfe lohnen sich nicht.\p"
+	.string "Feurig heiße Kämpfe aber stählen\n"
+	.string "TRAINER und POKéMON.$"
 
 Route109_SeashoreHouse_Text_19B949:: @ 819B949
-	.string "That’s hot!$"
+	.string "Das war brandheiß!$"
 
 Route109_SeashoreHouse_Text_19B955:: @ 819B955
-	.string "Whew, I’m all thirsty.\n"
-	.string "Maybe I’ll have a SODA POP.$"
+	.string "Puh, ich bin am Verdursten.\n"
+	.string "Ich sollte SPRUDEL trinken.$"
 
 Route109_SeashoreHouse_Text_19B988:: @ 819B988
-	.string "I’m going to show you how great my\n"
-	.string "POKéMON are, but don’t cry!$"
+	.string "Ich werde dir zeigen, wie toll meine\n"
+	.string "POKéMON sind. Aber heul bloß nicht los!$"
 
 Route109_SeashoreHouse_Text_19B9C7:: @ 819B9C7
-	.string "...I lost, but I won’t cry...$"
+	.string "Ich habe verloren. Aber ich heule nicht!$"
 
 Route109_SeashoreHouse_Text_19B9E5:: @ 819B9E5
-	.string "If one of my POKéMON knew the move\n"
-	.string "for carrying me across water on its\l"
-	.string "back, I could get rid of this inner tube.$"
+	.string "Wenn doch nur eines meiner POKéMON\n"
+	.string "wüsste, wie es mich über das Wasser\l"
+	.string "tragen kann. Dann wäre ich den\l"
+	.string "ollen Schwimmreifen los.$"

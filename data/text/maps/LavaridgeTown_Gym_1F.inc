@@ -1,140 +1,144 @@
 LavaridgeTown_Gym_1F_Text_176312:: @ 8176312
-	.string "Hey, how’s it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "LAVARIDGE’s GYM LEADER FLANNERY\n"
-	.string "uses FIRE-type POKéMON.\p"
-	.string "Her passion for POKéMON burns stronger\n"
-	.string "and hotter than a volcano.\p"
-	.string "Don’t get too close to her - you’ll burn!\n"
-	.string "Hose her down with water and then\l"
-	.string "go for it!$"
+	.string "Na, wie sieht es aus, auf dem Weg zum\n"
+	.string "CHAMP, {PLAYER}?\p"
+	.string "Die ARENALEITERIN von BAD LAVA-\n"
+	.string "STADT, FLAVIA, setzt FEUER-POKéMON\l"
+	.string "ein.\p"
+	.string "Ihre Leidenschaft für POKéMON brennt\n"
+	.string "heißer und stärker als ein Vulkan.\p"
+	.string "Komm ihr nicht zu nahe - du verbrennst\n"
+	.string "dich! Lösche die Glut mit Wasser und\l"
+	.string "dann besiege sie!$"
 
 LavaridgeTown_Gym_1F_Text_17640C:: @ 817640C
-	.string "Yow! That was a scorching hot battle!$"
+	.string "Hui! Das war ein glühend heißer Kampf!$"
 
 LavaridgeTown_Gym_1F_Text_176432:: @ 8176432
-	.string "Owowowowow!\n"
-	.string "Yikes, it’s hot!$"
+	.string "Auauauauau!\n"
+	.string "Hach, ist das heiß!$"
 
 LavaridgeTown_Gym_1F_Text_17644F:: @ 817644F
-	.string "I’m blinded by sweat in my eyes...$"
+	.string "Der Schweiß lief mir in die Augen...$"
 
 LavaridgeTown_Gym_1F_Text_176472:: @ 8176472
-	.string "Being buried in hot sand promotes\n"
-	.string "circulation.\p"
-	.string "It’s effective for healing pain in\n"
-	.string "your joints.$"
+	.string "Ein Bad im heißen Sand regt den\n"
+	.string "Kreislauf an.\p"
+	.string "Auch Gelenkschmerzen lassen sich damit\n"
+	.string "kurieren.$"
 
 LavaridgeTown_Gym_1F_Text_1764D1:: @ 81764D1
-	.string "I’m trying to relieve my stress.\n"
-	.string "Don’t come along and stress me out!$"
+	.string "Ich versuche, Stress abzubauen.\n"
+	.string "Komm her. Ich will mich abreagieren.$"
 
 LavaridgeTown_Gym_1F_Text_176516:: @ 8176516
-	.string "I hope FLANNERY flames you good!$"
+	.string "Ich hoffe, FLAVIA wird dich rösten!$"
 
 LavaridgeTown_Gym_1F_Text_176537:: @ 8176537
-	.string "Haaah... Whew...\p"
-	.string "If you spend too much time buried in\n"
-	.string "hot sand, it tuckers you out...$"
+	.string "Haaah... Huuuuh...\p"
+	.string "Bleibt man zu lange im heißen Sand,\n"
+	.string "macht einen das ganz schön fertig.$"
 
 LavaridgeTown_Gym_1F_Text_17658D:: @ 817658D
-	.string "You must be getting tired by now.\n"
-	.string "You’d like to rest in the hot sand,\l"
-	.string "wouldn’t you?\p"
-	.string "But you should know that maintaining\n"
-	.string "your willpower is an important ability\l"
-	.string "for all TRAINERS.$"
+	.string "Du musst ganz schön müde sein.\n"
+	.string "Willst du dich nicht hier im heißen\l"
+	.string "Sand ausruhen?\p"
+	.string "Aber du solltest wissen, dass\n"
+	.string "Willenskraft ganz wichtig für einen\l"
+	.string "TRAINER ist.$"
 
 LavaridgeTown_Gym_1F_Text_17663F:: @ 817663F
-	.string "Play with fire, and be burned...$"
+	.string "Spiele mit Feuer und du verbrennst dich.$"
 
 LavaridgeTown_Gym_1F_Text_176660:: @ 8176660
-	.string "Your skill is real...\n"
-	.string "But our LEADER FLANNERY is strong.\p"
-	.string "If you don’t watch yourself, you’ll be\n"
-	.string "burned seriously.$"
+	.string "Dein Können ist gut... Aber unsere\n"
+	.string "LEITERIN FLAVIA ist stark.\p"
+	.string "Wenn du nicht aufpasst, verbrennst\n"
+	.string "du dich ernsthaft.$"
 
 LavaridgeTown_Gym_1F_Text_1766D2:: @ 81766D2
-	.string "Can your POKéMON withstand\n"
-	.string "392-degree heat?$"
+	.string "Kann dein POKéMON 200 Grad aushalten?$"
 
 LavaridgeTown_Gym_1F_Text_1766FE:: @ 81766FE
-	.string "It didn’t burn hotly enough...$"
+	.string "Die Hitze war nicht stark genug...$"
 
 LavaridgeTown_Gym_1F_Text_17671D:: @ 817671D
-	.string "The temperature of magma is\n"
-	.string "392 degrees.\p"
-	.string "Your POKéMON beat me, so they should\n"
-	.string "easily survive in magma.$"
+	.string "Die Temperatur von Magma beträgt\n"
+	.string "über 200 Grad.\p"
+	.string "Deine POKéMON haben mich besiegt, sie\n"
+	.string "sollten auch in Magma überleben können.$"
 
 LavaridgeTown_Gym_1F_Text_176784:: @ 8176784
-	.string "Um...\n"
-	.string "Okay, I’ll battle with you.$"
+	.string "Ähm...\n"
+	.string "Okay, ich kämpfe mit dir.$"
 
 LavaridgeTown_Gym_1F_Text_1767A6:: @ 81767A6
-	.string "Oh, but you’re too strong.$"
+	.string "Oh, du bist zu stark.$"
 
 LavaridgeTown_Gym_1F_Text_1767C1:: @ 81767C1
-	.string "I’m going to be a pretty and strong\n"
-	.string "TRAINER just like FLANNERY.$"
+	.string "Ich will einmal so eine starke TRAINERIN\n"
+	.string "werden wie FLAVIA.$"
 
 LavaridgeTown_Gym_1F_Text_176801:: @ 8176801
-	.string "Welcome... No, wait.\p"
-	.string "Puny TRAINER, how good to see you’ve\n"
-	.string "made it here!\p"
-	.string "I have been entrusted with the...\n"
-	.string "No, wait.\p"
-	.string "I am FLANNERY, and I’m the GYM\n"
-	.string "LEADER here!\p"
-	.string "Uh...\n"
-	.string "Dare not underestimate me, though\l"
-	.string "I have been LEADER only a short time!\p"
-	.string "With skills inherited from my grand-\n"
-	.string "father, I shall, uh...demonstrate the\l"
-	.string "hot moves we have honed on this land!$"
+	.string "Willkommen... Halt, warte!\p"
+	.string "Hallo, du Winzling von TRAINER, wie\n"
+	.string "schön, dich hier zu sehen!\p"
+	.string "Ich bin verantwortlich für, äh...\n"
+	.string "Nein, warte.\p"
+	.string "Ich bin FLAVIA und ich bin die ARENA-\n"
+	.string "LEITERIN hier!\p"
+	.string "Äh... Du solltest mich nicht\n"
+	.string "unterschätzen, nur weil ich noch nicht\l"
+	.string "so lange LEITERIN bin!\p"
+	.string "Ich habe das Talent meines Großvaters\n"
+	.string "geerbt und daher... äh... kann ich dir die\l"
+	.string "heißen Attacken zeigen, die wir hier\l"
+	.string "entwickelt haben!$"
 
 LavaridgeTown_Gym_1F_Text_176960:: @ 8176960
-	.string "Oh...\n"
-	.string "I guess I was trying too hard...\p"
-	.string "I... I’ve only recently become a GYM\n"
-	.string "LEADER.\p"
-	.string "I tried too hard to be someone I’m not.\p"
-	.string "I have to do things my natural way.\n"
-	.string "If I don’t, my POKéMON will be confused.\p"
-	.string "Thanks for teaching me that.\n"
-	.string "For that, you deserve this.$"
+	.string "Äh...\n"
+	.string "Ich glaube, ich habe es übertrieben...\p"
+	.string "Ich... Ich bin ja auch noch nicht lange\n"
+	.string "ARENALEITERIN!\p"
+	.string "Ich habe zu sehr versucht, jemand zu\n"
+	.string "sein, der ich gar nicht bin.\p"
+	.string "Ich muss die Dinge auf meine eigene Art\n"
+	.string "angehen. Sonst verwirre ich nur meine\l"
+	.string "POKéMON.\p"
+	.string "Danke, dass du mich das gelehrt hast!\n"
+	.string "Du hast dir das hier wohl verdient!$"
 
 LavaridgeTown_Gym_1F_Text_176A62:: @ 8176A62
-	.string "{PLAYER} received the HEAT BADGE\n"
-	.string "from FLANNERY.$"
+	.string "{PLAYER} erhält den HITZEORDEN\n"
+	.string "von FLAVIA.$"
 
 LavaridgeTown_Gym_1F_Text_176A8C:: @ 8176A8C
-	.string "If you have a HEAT BADGE, all POKéMON\n"
-	.string "up to Level 50, even those you get in\l"
-	.string "trades from other people, will obey\l"
-	.string "you completely.\p"
-	.string "And, it lets POKéMON use the HM move\n"
-	.string "STRENGTH outside of battle.\p"
-	.string "This is a token of my appreciation.\n"
-	.string "Don’t be shy about taking it!$"
+	.string "Mit dem HITZEORDEN gehorchen dir alle\n"
+	.string "POKéMON bis Level 50, auch die, die du\l"
+	.string "durch Tausch erhalten hast.\p"
+	.string "Und du kannst ab sofort STÄRKE auch\n"
+	.string "außerhalb eines Kampfes einsetzen.\p"
+	.string "Dies ist das Zeichen meiner\n"
+	.string "Anerkennung. Nimm es ruhig an!$"
 
 LavaridgeTown_Gym_1F_Text_176B8F:: @ 8176B8F
-	.string "That TM50 contains OVERHEAT.\p"
-	.string "That move inflicts serious damage on\n"
-	.string "the opponent.\p"
-	.string "But it also sharply cuts the SP. ATK\n"
-	.string "of the POKéMON using it. It might not\l"
-	.string "be suitable for longer battles.$"
+	.string "Die TM50 enthält HITZEKOLLER.\p"
+	.string "Diese Attacke richtet beim Gegner\n"
+	.string "großen Schaden an.\p"
+	.string "Aber gleichzeitig wird der SP. ANG.\n"
+	.string "des POKéMON, das die Attacke\p"
+	.string "anwendet, herabgesetzt. Für längere\n"
+	.string "Kämpfe ist sie daher nicht geeignet.$"
 
 LavaridgeTown_Gym_1F_Text_176C4A:: @ 8176C4A
-	.string "Your power reminds me of someone...\p"
-	.string "Oh! I know! You battle like NORMAN,\n"
-	.string "the GYM LEADER of PETALBURG.$"
+	.string "Deine Stärke erinnert mich an\n"
+	.string "jemanden...\p"
+	.string "Jetzt weiß ich’s! Du kämpfst wie NORMAN,\n"
+	.string "der ARENALEITER von BLÜTENBURG CITY.$"
 
 LavaridgeTown_Gym_1F_Text_176CAF:: @ 8176CAF
-	.string "LAVARIDGE TOWN POKéMON GYM$"
+	.string "POKéMON ARENA von BAD LAVASTADT$"
 
 LavaridgeTown_Gym_1F_Text_176CCA:: @ 8176CCA
-	.string "LAVARIDGE TOWN POKéMON GYM\p"
-	.string "FLANNERY’S CERTIFIED TRAINERS:\n"
+	.string "POKéMON ARENA von BAD LAVASTADT\p"
+	.string "FLAVIAS ANERKANNTE TRAINER:\n"
 	.string "{PLAYER}$"

@@ -97,14 +97,11 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
     u8 *ptr = gStringVar4;
     u8 nature = GetNature(pokemon);
 
+    ptr = StringCopy(gStringVar4, gOtherText_Nature);
+
     ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
 
-    if (nature != NATURE_BOLD && nature != NATURE_GENTLE)
-    {
-        ptr = StringCopy(ptr, gOtherText_Terminator4);
-    }
-
-    ptr = StringCopy(ptr, gOtherText_Nature);
+    ptr = StringCopy(ptr, gOtherText_Terminator4);
 
     if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE)
     {

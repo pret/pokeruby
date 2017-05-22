@@ -1,14 +1,15 @@
 PacifidlogTown_House5_Text_179718:: @ 8179718
-	.string "I can’t see MIRAGE ISLAND today...$"
+	.string "Ich kann WUNDEREILAND heute\n"
+	.string "nicht sehen...$"
 
 PacifidlogTown_House5_Text_17973B:: @ 817973B
-	.string "Oh! Oh my!\n"
-	.string "I can see MIRAGE ISLAND today!$"
+	.string "Oh! Oh! Heute kann ich WUNDEREILAND\n"
+	.string "sehen!$"
 
 PacifidlogTown_House5_Text_179765:: @ 8179765
-	.string "MIRAGE ISLAND...\p"
-	.string "It must become visible and invisible\n"
-	.string "depending on the weather conditions\l"
-	.string "that make mirages appear.\p"
-	.string "Or is it really appearing and\n"
-	.string "disappearing?$"
+	.string "WUNDEREILAND...\p"
+	.string "Die Insel ist sichtbar oder nicht\n"
+	.string "sichtbar. Das hängt vom Wetter ab, das\l"
+	.string "Fata Morganen möglich macht oder nicht.\p"
+	.string "Oder verschwindet die Insel tatsächlich\n"
+	.string "manchmal?$"

@@ -472,8 +472,8 @@ static bool8 MainState_WaitPageSwap(struct Task *task)
         sub_80B77F8();
         SetInputState(INPUT_STATE_ENABLED);
         GetCursorPos(&cursorX, &cursorY);
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
-            cursorX = 5;
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 7 || cursorX == 8))
+            cursorX = 6;
         SetCursorPos(cursorX, cursorY);
         sub_80B6888(0);
     }
@@ -750,29 +750,29 @@ static void HandleDpadMovement(struct Task *task)
 
     //Wrap cursor position in the X direction
     if (cursorX < 0)
-        cursorX = 8;
-    if (cursorX > 8)
+        cursorX = 9;
+    if (cursorX > 9)
         cursorX = 0;
 
     //Handle cursor movement in X direction
     if (sDpadDeltaX[dpadDir] != 0)
     {
         //The "others" page only has 5 columns
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7 || cursorX == 8))
         {
             if (sDpadDeltaX[dpadDir] > 0)
-                cursorX = 8;
+                cursorX = 9;
             else
                 cursorX = 5;
         }
 
-        if (cursorX == 8)
+        if (cursorX == 9)
         {
             //We are now on the last column
             task->tKbFunctionKey = cursorY;
             cursorY = s4RowTo3RowTableY[cursorY];
         }
-        else if (prevCursorX == 8)
+        else if (prevCursorX == 9)
         {
             if (cursorY == 1)
                 cursorY = task->tKbFunctionKey;
@@ -781,7 +781,7 @@ static void HandleDpadMovement(struct Task *task)
         }
     }
 
-    if (cursorX == 8)
+    if (cursorX == 9)
     {
         //There are only 3 keys on the last column, unlike the others,
         //so wrap Y accordingly
@@ -1008,11 +1008,11 @@ static void CursorInit(void)
     SetCursorPos(0, 0);
 }
 
-static const u8 sKeyboardSymbolPositions[][9] =
+static const u8 sKeyboardSymbolPositions[][10] =
 {
-    {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Upper page
-    {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Lower page
-    {1,  4,  7, 10, 13, 16, 16, 16, 19},  //Others page
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Upper page
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Lower page
+    {1, 4, 7, 10, 13, 16, 16, 16, 16, 19},  //Others page
 };
 
 static u8 CursorColToKeyboardCol(s16 x)
@@ -1042,7 +1042,7 @@ static void GetCursorPos(s16 *x, s16 *y)
 
 static void MoveCursorToOKButton(void)
 {
-    SetCursorPos(8, 2);
+    SetCursorPos(9, 2);
 }
 
 static void sub_80B6888(u8 a)
@@ -1075,7 +1075,7 @@ static u8 GetKeyRoleAtCursorPos(void)
     s16 cursorY;
 
     GetCursorPos(&cursorX, &cursorY);
-    if (cursorX < 8)
+    if (cursorX < 9)
         return KEY_ROLE_CHAR;
     else
         return keyRoles[cursorY];
@@ -1086,7 +1086,7 @@ void sub_80B6998(struct Sprite *sprite)
     if (sprite->animEnded)
         StartSpriteAnim(sprite, 0);
     sprite->invisible = (sprite->data4 & 0xFF);
-    if (sprite->data0 == 8)
+    if (sprite->data0 == 9)
         sprite->invisible = TRUE;
     if (sprite->invisible || (sprite->data4 & 0xFF00) == 0
      || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
@@ -1935,16 +1935,16 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 static const u8 sKeyboardCharacters[][4][20] =
 {
     {
-        _(" A B C  D E F    . "),
-        _(" G H I  J K L    , "),
-        _(" M N O  P Q R S    "),
-        _(" T U V  W X Y Z    "),
+        _("  ABCD   EFGH   .  "),
+        _("  IJKL   MNOP   ,  "),
+        _("  QRST   UVWX      "),
+        _("  YZ     ÄÖÜ       "),
     },
     {
-        _(" a b c  d e f    . "),
-        _(" g h i  j k l    , "),
-        _(" m n o  p q r s    "),
-        _(" t u v  w x y z    "),
+        _("  abcd   efgh   .  "),
+        _("  ijkl   mnop   ,  "),
+        _("  qrst   uvwx      "),
+        _("  yz     äöü       "),
     },
     {
         _(" 0  1  2  3  4     "),

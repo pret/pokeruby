@@ -88,10 +88,8 @@ static u32 GetMonSize(u16 species, u16 b)
 
 static void FormatMonSizeRecord(u8 *string, u32 size)
 {
-    u8 decimalPoint[] = _(".");
+    u8 decimalPoint[] = _(",");
 
-    //Convert size from centimeters to inches
-    size = (double)(size * 10) / (CM_PER_INCH * 10);
     string = ConvertIntToDecimalStringN(string, size / 10, 0, 8);
     string = StringAppend(string, decimalPoint);
     ConvertIntToDecimalStringN(string, size % 10, 0, 1);

@@ -6,9 +6,9 @@
 TrainerCardColorName_Bronze:
 	.string "BRONZE$", 7
 TrainerCardColorName_Copper:
-	.string "COPPER$", 7
+	.string "KUPFER$", 7
 TrainerCardColorName_Silver:
-	.string "SILVER$", 7
+	.string "SILBER$", 7
 TrainerCardColorName_Gold:
 	.string "GOLD$", 7
 

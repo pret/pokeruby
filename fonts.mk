@@ -32,3 +32,6 @@ graphics/fonts/font4_lat_rev1.4bpp: graphics/fonts/font4_lat_rev1.png
 
 graphics/fonts/font6_braille.1bpp: graphics/fonts/font6_braille.png
 	$(RSFONT) $< $@ 192 0
+
+graphics-de/fonts/font3_lat.4bpp: graphics-de/fonts/font3_lat.png
+	$(RSFONT) $< $@ 254 1

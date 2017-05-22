@@ -1,3 +1,7 @@
+Text_Version_Ruby:
+	.string "POKéMON RUBIN-EDITION$"
+Text_Version_Sapphire:
+	.string "POKéMON SAPHIR-EDITION$"
 Category_Credits:
 	.string "{PALETTE 9}Credits$"
 Category_ExecutiveDirector:
@@ -60,18 +64,18 @@ Category_TaskManagers:
 	.string "{PALETTE 9}Task Managers$"
 Category_BrailleCodeCheck:
 	.string "{PALETTE 9}Braille Code Check$"
-Category_EnglishVersionCoordinators:
-	.string "{PALETTE 9}English Version Coordinators$"
-Category_Translator:
-	.string "{PALETTE 9}Translator$"
+Category_GermanVersionCoordinators:
+	.string "{PALETTE 9}German Version Coordinators$"
+Category_Translators:
+	.string "{PALETTE 9}Translators$"
 Category_ProductSupport:
 	.string "{PALETTE 9}Product Support$"
 Category_Artwork:
 	.string "{PALETTE 9}Artwork$"
 Category_TextEditor:
 	.string "{PALETTE 9}Text Editor$"
-Category_NOAProductTesting:
-	.string "{PALETTE 9}NOA Product Testing$"
+Category_NOEProductTesting:
+	.string "{PALETTE 9}NOE Product Testing$"
 Category_GraphicDesigners:
 	.string "{PALETTE 9}Graphic Designers$"
 Text_SatoshiTajiri:
@@ -226,68 +230,48 @@ Text_Komura:
 	.string "Tomotaka Komura$"
 Text_Ohashi:
 	.string "Mikiko Ohashi$"
-Text_McMahill:
-	.string "Seth McMahill$"
-Text_Ogasawara:
-	.string "Nob Ogasawara$"
 Text_Yamamoto:
 	.string "Souichi Yamamoto$"
 Text_Funakoshi:
 	.string "Masanori Funakoshi$"
-Text_Fujihara:
-	.string "Kazuhiro Fujihara$"
 Text_Nakamichi:
 	.string "Kimiko Nakamichi$"
 Text_Hara:
 	.string "Daisuke Hara$"
-Text_Okada:
-	.string "Atsushi Okada$"
-Text_Lillygren:
-	.string "Teresa Lillygren$"
-Text_Hertzog:
-	.string "Thomas Hertzog$"
-Text_Ridgeway:
-	.string "Ed Ridgeway$"
-Text_NFotB:
-	.string "National Federation of the Blind$"
-Text_Maurer:
-	.string "Patricia A. Maurer$"
 Text_Ford:
 	.string "Sayoko Blodgett-Ford$"
 Text_Barlow:
 	.string "Nicola Pratt-Barlow$"
 Text_Uyama:
 	.string "Koji Uyama$"
-Text_Howitt:
-	.string "Anthony Howitt$"
-Text_Tilden:
-	.string "Gail Tilden$"
 Text_EBU:
 	.string "European Blind Union$"
-Text_ABA:
-	.string "Australian Braille Authority$"
-Text_RNZFotB:
-	.string "Royal New Zealand Federation for the Blind$"
+Text_Saeki:
+	.string "Naoko Saeki$"
+Text_Sadahisa:
+	.string "Kayo Sadahisa$"
+Text_Schafer:
+	.string "Daniel Schäfers$"
+Text_Deimel:
+	.string "Martina Deimel$"
+Text_Jahn:
+	.string "Andrea Jähn$"
+Text_Victoria:
+	.string "Ángel Victoria$"
+Text_Mawer:
+	.string "Matthew Mawer$"
+Text_Danieli:
+	.string "Alessio Danieli$"
+Text_Schnitzer:
+	.string "Rudi Schnitzer$"
+Text_Pujos:
+	.string "Gabriera Pujós$"
 Text_CreditsTerminator:
 	.string "$"
-Text_Version:
-	.ifdef SAPPHIRE
-	.string "{PALETTE 9}POKéMON SAPPHIRE VERSION$"
-	.else
-	.string "{PALETTE 9}POKéMON RUBY VERSION$"
-	.endif
-
 @ pointer table
 
 CreditsTerminator::
 	credits_entry 0, Text_CreditsTerminator
-
-CreditsVersion::
-	.ifdef SAPPHIRE
-	credits_entry 7, Text_Version
-	.else
-	credits_entry 8, Text_Version
-	.endif
 
 CreditsCredits::
 	credits_entry 11, Category_Credits
@@ -383,10 +367,10 @@ CreditsBrailleCodeCheck::
 	credits_entry 10,  Category_BrailleCodeCheck
 
 CreditsSatoshiTajiri::
-	credits_entry 11, Text_SatoshiTajiri
+	credits_entry 11,  Text_SatoshiTajiri
 
 CreditsMasuda::
-	credits_entry 11, Text_Masuda
+	credits_entry 11,  Text_Masuda
 
 CreditsSugimori::
 	credits_entry 11,  Text_Sugimori
@@ -514,7 +498,7 @@ CreditsSagawa::
 CreditsTominaga::
 	credits_entry 11,  Text_Tominaga
 
-CreditsYoshiroTajiri::
+CreditsYoshioTajiri:
 	credits_entry 11,  Text_YoshioTajiri
 
 CreditsSasaki::
@@ -610,11 +594,8 @@ CreditsKomura::
 CreditsOhashi::
 	credits_entry 11,  Text_Ohashi
 
-CreditsEnglishVersionCoordinators::
-	credits_entry 0,  Category_EnglishVersionCoordinators
-
-CreditsTranslator::
-	credits_entry 0,  Category_Translator
+CreditsTranslators::
+	credits_entry 0,  Category_Translators
 
 CreditsProductSupport::
 	credits_entry 0,  Category_ProductSupport
@@ -625,17 +606,8 @@ CreditsArtwork::
 CreditsTextEditor::
 	credits_entry 0,  Category_TextEditor
 
-CreditsNOAProductTesting::
-	credits_entry 0,  Category_NOAProductTesting
-
 CreditsGraphicDesigners::
 	credits_entry 0,  Category_GraphicDesigners
-
-CreditsMcMahill::
-	credits_entry 0,  Text_McMahill
-
-CreditsOgasawara::
-	credits_entry 0,  Text_Ogasawara
 
 CreditsYamamoto::
 	credits_entry 0,  Text_Yamamoto
@@ -643,32 +615,11 @@ CreditsYamamoto::
 CreditsFunakoshi::
 	credits_entry 0,  Text_Funakoshi
 
-CreditsFujihara::
-	credits_entry 0,  Text_Fujihara
-
 CreditsNakamichi::
 	credits_entry 0,  Text_Nakamichi
 
 CreditsHara::
 	credits_entry 0,  Text_Hara
-
-CreditsOkada::
-	credits_entry 0,  Text_Okada
-
-CreditsLillygren::
-	credits_entry 0,  Text_Lillygren
-
-CreditsHertzog::
-	credits_entry 0,  Text_Hertzog
-
-CreditsRidgeway::
-	credits_entry 0,  Text_Ridgeway
-
-CreditsNFotB::
-	credits_entry 0,  Text_NFotB
-
-CreditsMaurer::
-	credits_entry 0,  Text_Maurer
 
 CreditsFord::
 	credits_entry 0,  Text_Ford
@@ -679,20 +630,47 @@ CreditsBarlow::
 CreditsUyama::
 	credits_entry 0,  Text_Uyama
 
-CreditsHowitt::
-	credits_entry 0,  Text_Howitt
-
-CreditsTilden::
-	credits_entry 0,  Text_Tilden
-
 CreditsEBU::
 	credits_entry 0,  Text_EBU
 
-CreditsABA::
-	credits_entry 0,  Text_ABA
+CreditsVersion::
+	credits_entry 0,  Text_Version_Ruby
 
-CreditsRNZFotB::
-	credits_entry 0,  Text_RNZFotB
+CreditsNOEProductTesting::
+	credits_entry 0,  Category_NOEProductTesting
+
+CreditsSaeki::
+	credits_entry 0,  Text_Saeki
+
+CreditsSadahisa::
+	credits_entry 0,  Text_Sadahisa
+
+CreditsGermanVersionCoordinators::
+	credits_entry 0,  Category_GermanVersionCoordinators
+
+CreditsSchafer::
+	credits_entry 0,  Text_Schafer
+
+CreditsDeimel::
+	credits_entry 0,  Text_Deimel
+
+CreditsJahn::
+	credits_entry 0,  Text_Jahn
+
+CreditsVictoria::
+	credits_entry 0,  Text_Victoria
+
+CreditsMawer::
+	credits_entry 0,  Text_Mawer
+
+CreditsDanieli::
+	credits_entry 0,  Text_Danieli
+
+CreditsSchnitzer::
+	credits_entry 0,  Text_Schnitzer
+
+CreditsPujos::
+	credits_entry 0,  Text_Pujos
 
 @ pointer table to credits entries
 
@@ -874,7 +852,7 @@ gCreditsEntryPointerTable:: @ 840C5F0
 
 	.4byte CreditsSpecialThanks
 	.4byte CreditsTominaga
-	.4byte CreditsYoshiroTajiri
+	.4byte CreditsYoshioTajiri
 	.4byte CreditsSasaki
 	.4byte CreditsTerminator
 
@@ -938,23 +916,23 @@ gCreditsEntryPointerTable:: @ 840C5F0
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
 
-	.4byte CreditsEnglishVersionCoordinators
-	.4byte CreditsHiroNakamura
-	.4byte CreditsMcMahill
+	.4byte CreditsGermanVersionCoordinators
+	.4byte CreditsUesugi
+	.4byte CreditsSadahisa
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
 
-	.4byte CreditsTerminator
-	.4byte CreditsTranslator
-	.4byte CreditsOgasawara
-	.4byte CreditsTerminator
+	.4byte CreditsTranslators
+	.4byte CreditsSchafer
+	.4byte CreditsDeimel
+	.4byte CreditsJahn
 	.4byte CreditsTerminator
 
 	.4byte CreditsProgrammers
 	.4byte CreditsMurakawa
 	.4byte CreditsYamamoto
-	.4byte CreditsFunakoshi
 	.4byte CreditsKinashi
+	.4byte CreditsTerminator
 
 	.4byte CreditsGraphicDesigners
 	.4byte CreditsYamamoto
@@ -964,48 +942,30 @@ gCreditsEntryPointerTable:: @ 840C5F0
 
 	.4byte CreditsProductSupport
 	.4byte CreditsNakamichi
+	.4byte CreditsSaeki
 	.4byte CreditsHara
 	.4byte CreditsTerminator
-	.4byte CreditsTerminator
+
+	.4byte CreditsNOEProductTesting
+	.4byte CreditsVictoria
+	.4byte CreditsMawer
+	.4byte CreditsDanieli
+	.4byte CreditsSchnitzer
 
 	.4byte CreditsTerminator
-	.4byte CreditsArtwork
-	.4byte CreditsOkada
-	.4byte CreditsTerminator
-	.4byte CreditsTerminator
-
-	.4byte CreditsTerminator
-	.4byte CreditsTextEditor
-	.4byte CreditsLillygren
-	.4byte CreditsTerminator
-	.4byte CreditsTerminator
-
-	.4byte CreditsNOAProductTesting
-	.4byte CreditsHertzog
-	.4byte CreditsRidgeway
-	.4byte CreditsTerminator
-	.4byte CreditsTerminator
-
 	.4byte CreditsBrailleCodeCheck
-	.4byte CreditsNFotB
-	.4byte CreditsMaurer
-	.4byte CreditsJapanBrailleLibrary
 	.4byte CreditsEBU
-
-	.4byte CreditsBrailleCodeCheck
-	.4byte CreditsABA
-	.4byte CreditsRNZFotB
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
 
 	.4byte CreditsSpecialThanks
+	.4byte CreditsHiroNakamura
 	.4byte CreditsFord
 	.4byte CreditsBarlow
-	.4byte CreditsUesugi
-	.4byte CreditsUyama
+	.4byte CreditsTerminator
 
 	.4byte CreditsSpecialThanks
-	.4byte CreditsHowitt
-	.4byte CreditsTilden
-	.4byte CreditsFujihara
+	.4byte CreditsUyama
+	.4byte CreditsPujos
+	.4byte CreditsTerminator
 	.4byte CreditsTerminator

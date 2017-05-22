@@ -16,7 +16,26 @@ BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
 TITLEGFXDIR := graphics/title_screen
 
-types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
+MENUGFXDIR_DE := graphics-de/interface
+TRADEGFXDIR_DE := graphics-de/trade
+INTROGFXDIR_DE := graphics-de/intro
+PSSGFXDIR_DE := graphics-de/pokemon_storage
+MISCGFXDIR_DE := graphics-de/misc
+PKNAVGFXDIR_DE := graphics-de/pokenav
+UNKNOWNGFXDIR_DE := graphics-de/unknown
+UNUSEDGFXDIR_DE := graphics-de/unused
+REELGFXDIR_DE := graphics-de/slot_machine
+ROULGFXDIR_DE := graphics-de/roulette
+BTLANMSPRGFXDIR_DE := graphics-de/battle_anims/sprites
+PICFRAMEGFXDIR_DE := graphics-de/picture_frame
+CONTESTGFXDIR_DE := graphics-de/contest
+MASKSGFXDIR_DE := graphics-de/battle_anims/masks
+BATTRANSGFXDIR_DE := graphics-de/battle_transitions
+TYPESGFXDIR_DE := graphics-de/types
+TITLEGFXDIR_DE := graphics-de/title_screen
+
+types_1 := fight flying poison ground rock bug ghost steel
+types_2 := fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
@@ -151,7 +170,7 @@ $(INTROGFXDIR)/intro3_misc.4bpp: $(INTROGFXDIR)/intro3_star.4bpp $(INTROGFXDIR)/
 $(TRADEGFXDIR)/gba_affine.8bpp: $(TRADEGFXDIR)/gba_affine.png
 	$(GFX) $< $@ -num_tiles 129
 
-$(TRADEGFXDIR)/menu.4bpp: $(TRADEGFXDIR)/menu.png
+$(TRADEGFXDIR_DE)/menu.4bpp: $(TRADEGFXDIR_DE)/menu.png
 	$(GFX) $< $@ -num_tiles 148
 
 $(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp
@@ -208,44 +227,47 @@ $(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
 $(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
 	$(GFX) $< $@ -num_tiles 16
 
-$(MENUGFXDIR)/party_menu_misc.4bpp: $(MENUGFXDIR)/party_menu_misc.png
+$(MENUGFXDIR_DE)/party_menu_misc.4bpp: $(MENUGFXDIR_DE)/party_menu_misc.png
 	$(GFX) $< $@ -num_tiles 116
 
-$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+$(TYPESGFXDIR_DE)/move_types.4bpp: $(TYPESGFXDIR)/normal.4bpp $(types_1:%=$(TYPESGFXDIR_DE)/%.4bpp) $(TYPESGFXDIR)/mystery.4bpp $(types_2:%=$(TYPESGFXDIR_DE)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR_DE)/contest_%.4bpp)
 	@cat $^ >$@
 
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal >$@
 
-$(MENUGFXDIR)/status_screen.4bpp: $(MENUGFXDIR)/status_screen.png
+$(MENUGFXDIR_DE)/status_screen.4bpp: $(MENUGFXDIR_DE)/status_screen.png
 	$(GFX) $< $@ -num_tiles 217
 
-$(PKNAVGFXDIR)/menu_options.4bpp: $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp
-	@cat $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp >$@
+$(PKNAVGFXDIR_DE)/menu_options.4bpp: $(PKNAVGFXDIR_DE)/menu_hoennmap.4bpp $(PKNAVGFXDIR_DE)/menu_condition.4bpp $(PKNAVGFXDIR_DE)/menu_eyes.4bpp $(PKNAVGFXDIR_DE)/menu_ribbons.4bpp $(PKNAVGFXDIR_DE)/menu_off.4bpp
+	@cat $(PKNAVGFXDIR_DE)/menu_hoennmap.4bpp $(PKNAVGFXDIR_DE)/menu_condition.4bpp $(PKNAVGFXDIR_DE)/menu_eyes.4bpp $(PKNAVGFXDIR_DE)/menu_ribbons.4bpp $(PKNAVGFXDIR_DE)/menu_off.4bpp >$@
 
-$(PKNAVGFXDIR)/condition_menu_misc.4bpp: $(PKNAVGFXDIR)/condition_menu_misc.png
+$(PKNAVGFXDIR_DE)/condition_menu_misc.4bpp: $(PKNAVGFXDIR_DE)/condition_menu_misc.png
 	$(GFX) $< $@ -num_tiles 41
 
-$(PKNAVGFXDIR)/condition_search.4bpp: $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp
-	@cat $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp >$@
+$(PKNAVGFXDIR_DE)/condition_search.4bpp: $(PKNAVGFXDIR_DE)/condition_search_cool.4bpp $(PKNAVGFXDIR_DE)/condition_search_beauty.4bpp $(PKNAVGFXDIR_DE)/condition_search_cute.4bpp $(PKNAVGFXDIR_DE)/condition_search_smart.4bpp $(PKNAVGFXDIR_DE)/condition_search_tough.4bpp $(PKNAVGFXDIR_DE)/condition_search_cancel.4bpp
+	@cat $(PKNAVGFXDIR_DE)/condition_search_cool.4bpp $(PKNAVGFXDIR_DE)/condition_search_beauty.4bpp $(PKNAVGFXDIR_DE)/condition_search_cute.4bpp $(PKNAVGFXDIR_DE)/condition_search_smart.4bpp $(PKNAVGFXDIR_DE)/condition_search_tough.4bpp $(PKNAVGFXDIR_DE)/condition_search_cancel.4bpp >$@
 
-$(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
+$(PSSGFXDIR_DE)/header.4bpp: $(PSSGFXDIR_DE)/header.png
 	$(GFX) $< $@ -num_tiles 47
 
-$(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
+$(PSSGFXDIR_DE)/misc1.4bpp: $(PSSGFXDIR_DE)/misc1.png
 	$(GFX) $< $@ -num_tiles 91
 
-$(MISCGFXDIR)/hof.4bpp: $(MISCGFXDIR)/hof.png
+$(MISCGFXDIR_DE)/hof.4bpp: $(MISCGFXDIR_DE)/hof.png
 	$(GFX) $< $@ -num_tiles 37
 
-$(MENUGFXDIR)/wordgroup_frame.4bpp: $(MENUGFXDIR)/wordgroup_frame.png
-	$(GFX) $< $@ -num_tiles 65
+$(MENUGFXDIR_DE)/wordgroup_frame.4bpp: $(MENUGFXDIR_DE)/wordgroup_frame.png
+	$(GFX) $< $@ -num_tiles 76
 
-$(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
-	$(GFX) $< $@ -num_tiles 43
+$(MENUGFXDIR_DE)/check_berry.4bpp: $(MENUGFXDIR_DE)/check_berry.png
+	$(GFX) $< $@ -num_tiles 97
 
-$(TITLEGFXDIR)/press_start.4bpp: $(TITLEGFXDIR)/press_start.png
+$(INTROGFXDIR_DE)/copyright.4bpp: $(INTROGFXDIR_DE)/copyright.png
+	$(GFX) $< $@ -num_tiles 47
+
+$(TITLEGFXDIR_DE)/press_start.4bpp: $(TITLEGFXDIR_DE)/press_start.png
 	$(GFX) $< $@ -num_tiles 41
 
-$(MISCGFXDIR)/end_copyright.4bpp: $(MISCGFXDIR)/end_copyright.png
-	$(GFX) $< $@ -num_tiles 90
+$(MISCGFXDIR_DE)/end_copyright.4bpp: $(MISCGFXDIR_DE)/end_copyright.png
+	$(GFX) $< $@ -num_tiles 92

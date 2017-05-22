@@ -130,7 +130,7 @@ gMatsudaDebugMenu_GoBackText:: @ 83C9337
 	.string "もどる$" @ Go Back
 
 gMatsudaDebugMenu_BattlePointsText:: @ 83C933B
-	.string "{COLOR MAGENTA}BP.$"
+	.string "{COLOR MAGENTA}BP,$"
 
 MatsudaDebugMenuText_Cool:
 	.string "かっこよさ$" @ coolness

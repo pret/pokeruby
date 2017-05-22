@@ -1,223 +1,92 @@
 Underwater_SealedChamber_Braille_1C533D:: @ 81C533D
-	.byte 3
-	.byte 6
-	.byte 27
-	.byte 13
-	.byte 5
-	.byte 9
-	.braille "GO UP HERE.$"
+	.string "ÀÉëÒÂÌÒÉÌë ÒÉéÀ{0x31}Ê{0x3F}Œ$"
 
 SealedChamber_OuterRoom_Braille_1C534F:: @ 81C534F
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "ABC$"
+	.string "ÊÉßÒÎÌÀÈÂÎ$"
 
 SealedChamber_OuterRoom_Braille_1C5359:: @ 81C5359
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "GHI$"
+	.string "ÊÉßÒÎÌÉÓÙß$"
 
 SealedChamber_OuterRoom_Braille_1C5363:: @ 81C5363
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "MNO$"
+	.string "ÊÉßÒÎÌ{0x1F}ëàì$"
 
 SealedChamber_OuterRoom_Braille_1C536D:: @ 81C536D
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "TUV$"
+	.string "ÌÉÛÒÒÌ{0x3B}{0x39}$"
 
 SealedChamber_OuterRoom_Braille_1C5377:: @ 81C5377
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "DEF$"
+	.string "ÊÉßÒÎÌÌÊÔÒ$"
 
 SealedChamber_OuterRoom_Braille_1C5381:: @ 81C5381
-	.byte 9
-	.byte 6
-	.byte 19
-	.byte 13
-	.byte 12
-	.byte 9
-	.braille "JKL$"
+	.string "ÊÉßÒÎÌÛéçá$"
 
 SealedChamber_OuterRoom_Braille_1C538B:: @ 81C538B
-	.byte 7
-	.byte 6
-	.byte 21
-	.byte 13
-	.byte 11
-	.byte 9
-	.braille "PQRS$"
+	.string "ÊÉßÒÎÌ{0x31}=+{0x33}$"
 
 SealedChamber_OuterRoom_Braille_1C5396:: @ 81C5396
-	.byte 10
-	.byte 6
-	.byte 18
-	.byte 13
-	.byte 14
-	.byte 9
-	.braille ".$"
+	.string "ÌÉÛÒÒÌ{0x3F}Œ$"
 
 SealedChamber_OuterRoom_Braille_1C539E:: @ 81C539E
-	.byte 7
-	.byte 6
-	.byte 21
-	.byte 13
-	.byte 11
-	.byte 9
-	.braille "WXYZ$"
+	.string "ËÉÑÒÏÌèù&$"
 
 SealedChamber_OuterRoom_Braille_1C53A9:: @ 81C53A9
-	.byte 10
-	.byte 6
-	.byte 18
-	.byte 13
-	.byte 14
-	.byte 9
-	.braille ",$"
+	.string "ÌÉÛÒÒÌ{0x3F}Ç$"
 
 SealedChamber_OuterRoom_Braille_1C53B1:: @ 81C53B1
-	.byte 5
-	.byte 6
-	.byte 25
-	.byte 13
-	.byte 7
-	.byte 9
-	.braille "DIG HERE.$"
+	.string "ÉÇ{0x18}ÔËÊàÂÒÀ{0x31}ÊßÌ\n"
+	.string "ÒÉÌë{0x3F}Œ$"
 
 SealedChamber_InnerRoom_Braille_1C53C1:: @ 81C53C1
-	.byte 3
-	.byte 0
-	.byte 27
-	.byte 19
-	.byte 5
-	.byte 3
-	.braille "FIRST COMES\n"
-	.braille "RELICANTH.\n"
-	.braille "LAST COMES\n"
-	.braille "WAILORD.$"
+	.string "È çÛÊÂëÌßÉÂÀéìÒ\n"
+	.string "{0x39}{0x31}Ìëàì{0x3F}Ç\n"
+	.string "+ÀÉßçëÎ\n"
+	.string "{0x39}{0x31}ßÌì{0x39}ì{0x3F}Œ$"
 
 SealedChamber_InnerRoom_Braille_1C53F2:: @ 81C53F2
-	.byte 6
-	.byte 0
-	.byte 22
-	.byte 19
-	.byte 8
-	.byte 3
-	.braille "IN THIS\n"
-	.braille "CAVE WE\n"
-	.braille "HAVE\n"
-	.braille "LIVED.$"
+	.string "ÁÁêÙÇÈÉé ÎÉÌàÌë\n"
+	.string "ÒùÒßÌ ÒÀÈÌé\n"
+	.string "+Éë ÔÌßÌÈì{0x3F}Œ$"
 
 SealedChamber_InnerRoom_Braille_1C5414:: @ 81C5414
-	.byte 4
-	.byte 2
-	.byte 26
-	.byte 17
-	.byte 6
-	.byte 5
-	.braille "WE OWE ALL\n"
-	.braille "TO THE\n"
-	.braille "POKEMON.$"
+	.string "ÀÁëÙÂÈ+Éë =ÌëÎÀéÙÌé\n"
+	.string "ÀßßÌà ÎÌé\n"
+	.string "áçÙÌÛçé{0x3F}Ç$"
 
 SealedChamber_InnerRoom_Braille_1C5435:: @ 81C5435
-	.byte 3
-	.byte 0
-	.byte 25
-	.byte 19
-	.byte 5
-	.byte 3
-	.braille "BUT, WE\n"
-	.braille "SEALED THE\n"
-	.braille "POKEMON\n"
-	.braille "AWAY.$"
+	.string "Á êÛÇÂÎÌééçÂÒ\n"
+	.string "àáÌëëìÌé +Éë\n"
+	.string "ÎÉÌ áçÙÌÛçé\n"
+	.string "+ÌÔ{0x3F}Œ$"
 
 SealedChamber_InnerRoom_Braille_1C545C:: @ 81C545C
-	.byte 1
-	.byte 6
-	.byte 29
-	.byte 13
-	.byte 3
-	.byte 9
-	.braille "WE FEARED IT.$"
+	.string "ÇÇèÔÉÊ+Éë ÒÀììÌé\n"
+	.string "ÀéÔàì{0x3F}Œ$"
 
 SealedChamber_InnerRoom_Braille_1C5470:: @ 81C5470
-	.byte 4
-	.byte 0
-	.byte 26
-	.byte 19
-	.byte 6
-	.byte 3
-	.braille "THOSE WITH\n"
-	.braille "COURAGE,\n"
-	.braille "THOSE WITH\n"
-	.braille "HOPE.$"
+	.string "  ëÛÀÂÎÌéÓÌéÉÔÌé{0x3F}Ç\n"
+	.string "ÎÉÌ ÒçÊÊÌé {0x31}éÎ\n"
+	.string "Û{0x31}ìÉÔ àÉéÎ{0x3F}Ç\n"
+	.string "+ÉëÎ àÉÂÒ$"
 
 SealedChamber_InnerRoom_Braille_1C549B:: @ 81C549B
-	.byte 2
-	.byte 0
-	.byte 28
-	.byte 19
-	.byte 4
-	.byte 3
-	.braille "OPEN A DOOR.\n"
-	.braille "AN ETERNAL\n"
-	.braille "POKEMON\n"
-	.braille "WAITS.$"
+	.string "Á êÛÇÂÌÉéÌ ì&ëÌ {0x39}{0x31}\n"
+	.string "ÌÉéÌÛ Ì+ÉÔÌé\n"
+	.string "áçÙÌÛçé\n"
+	.string "ùÊÊéÌé{0x3F}Œ$"
 
 DesertRuins_Braille_1C54C8:: @ 81C54C8
-	.byte 0
-	.byte 0
-	.byte 29
-	.byte 19
-	.byte 2
-	.byte 3
-	.braille "RIGHT, RIGHT,\n"
-	.braille "DOWN, DOWN.\n"
-	.braille "THEN, USE\n"
-	.braille "STRENGTH.$"
+	.string "  ëÛÀÂ{0x39}+ÌÉÛÀß ëÌÂÒìà\n"
+	.string "{0x31}éÎ {0x39}+ÌÉ\n"
+	.string "ÒÉé{0x31}éìÌë{0x3F}Ç\n"
+	.string "ÎÀéé àìèëÙÌ{0x3F}Œ$"
 
 IslandCave_Braille_1C54FC:: @ 81C54FC
-	.byte 3
-	.byte 0
-	.byte 27
-	.byte 19
-	.byte 5
-	.byte 3
-	.braille "STOP AND\n"
-	.braille "WAIT. WAIT\n"
-	.braille "FOR TIME TO\n"
-	.braille "PASS TWICE.$"
+	.string "Â éÛÈÂ+ÀëìÌ{0x3F}Ç ÈÉà\n"
+	.string "ÎÉÌ {0x39}ÌÉì\n"
+	.string "{0x39}+ÌÉÛÀß\n"
+	.string "Î{0x31}ëÂÒ Éàì{0x3F}Œ$"
 
 AncientTomb_Braille_1C552E:: @ 81C552E
-	.byte 0
-	.byte 0
-	.byte 29
-	.byte 19
-	.byte 1
-	.byte 3
-	.braille "WITH NEW TIME,\n"
-	.braille "HOPE AND LOVE,\n"
-	.braille "AIM TO THE SKY\n"
-	.braille "IN THE MIDDLE.$"
+	.string "  ëÛÀÂéÌ{0x31}Ì {0x39}ÌÉì{0x3F}Ç\n"
+	.string "ÒçÊÊé{0x31}éÔ {0x31}éÎ\n"
+	.string "ßÉÌÈÌ àÉéÎ ÎÉÌ\n"
+	.string "ÒÉÛÛÌßàÛÉììÌ{0x3F}Œ$"

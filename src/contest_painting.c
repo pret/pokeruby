@@ -307,7 +307,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     {
         ptr = StringCopy(ptr, gUnknown_083F60AC[type]);
         ptr = StringCopy(ptr, gContestText_ContestWinner);
-        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
 
         // {ENG}
         ptr[0] = 0xFC;
@@ -315,7 +315,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
         ptr += 2;
 
         ptr = StringCopy(ptr, gOtherText_Unknown1);
-        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
 
         xPos = 6;
         yPos = 14;

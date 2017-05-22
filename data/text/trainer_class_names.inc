@@ -1,59 +1,59 @@
 gTrainerClassNames:: @ 81F0208
-	.string "{PKMN} TRAINER$", 13
-	.string "{PKMN} TRAINER$", 13
-	.string "AQUA LEADER$", 13
+	.string "{PKMN}-TRAINER$", 13
+	.string "{PKMN}-TRAINER$", 13
+	.string "AQUA BOSS$", 13
 	.string "TEAM AQUA$", 13
-	.string "AQUA ADMIN$", 13
-	.string "AROMA LADY$", 13
-	.string "RUIN MANIAC$", 13
+	.string "AQUA VORS.$", 13
+	.string "AROMALADY$", 13
+	.string "RUINENMANIAC$", 13
 	.string "INTERVIEWER$", 13
-	.string "TUBER$", 13 @ うきわガール (Inner Tube Girl) in Japanese
-	.string "TUBER$", 13 @ うきわボーイ (Inner Tube Boy) in Japanese
-	.string "COOLTRAINER$", 13
-	.string "HEX MANIAC$", 13
+	.string "PLANSCHER$", 13 @ うきわガール (Inner Tube Girl) in Japanese
+	.string "PLANSCHER$", 13 @ うきわボーイ (Inner Tube Boy) in Japanese
+	.string "ASS-TRAINER$", 13
+	.string "HEXE$", 13
 	.string "LADY$", 13
-	.string "BEAUTY$", 13
-	.string "RICH BOY$", 13
+	.string "SCHÖNHEIT$", 13
+	.string "SCHNÖSEL$", 13
 	.string "POKéMANIAC$", 13
-	.string "SWIMMER♂$", 13
-	.string "BLACK BELT$", 13
-	.string "GUITARIST$", 13
-	.string "KINDLER$", 13
+	.string "SCHWIMMER$", 13
+	.string "SCHWARZGURT$", 13
+	.string "GITARRIST$", 13
+	.string "HITZKOPF$", 13
 	.string "CAMPER$", 13
-	.string "BUG MANIAC$", 13
-	.string "PSYCHIC$", 13
+	.string "KÄFERMANIAC$", 13
+	.string "PSYCHO$", 13
 	.string "GENTLEMAN$", 13
-	.string "ELITE FOUR$", 13
-	.string "LEADER$", 13
-	.string "SCHOOL KID$", 13
-	.string "SR. AND JR.$", 13
-	.string "WINSTRATE$", 13
+	.string "TOP VIER$", 13
+	.string "LEITER$", 13
+	.string "SCHULKIND$", 13
+	.string "SEN. & JUN.$", 13
+	.string "SIHGERS,$", 13
 	.string "POKéFAN$", 13
-	.string "EXPERT$", 13
-	.string "YOUNGSTER$", 13
-	.string "CHAMPION$", 13
-	.string "FISHERMAN$", 13
-	.string "TRIATHLETE$", 13
-	.string "DRAGON TAMER$", 13
-	.string "BIRD KEEPER$", 13
-	.string "NINJA BOY$", 13
-	.string "BATTLE GIRL$", 13
-	.string "PARASOL LADY$", 13
-	.string "SWIMMER♀$", 13
-	.string "PICNICKER$", 13
-	.string "TWINS$", 13
-	.string "SAILOR$", 13
-	.string "BOARDER$", 13
-	.string "COLLECTOR$", 13
-	.string "{PKMN} TRAINER$", 13
-	.string "{PKMN} BREEDER$", 13
-	.string "{PKMN} RANGER$", 13
-	.string "MAGMA LEADER$", 13
+	.string "EXPERTE$", 13
+	.string "TEENAGER$", 13
+	.string "CHAMP$", 13
+	.string "ANGLER$", 13
+	.string "TRIATHLET$", 13
+	.string "DRACHENPROFI$", 13
+	.string "VOGELFÄNGER$", 13
+	.string "NINJAJUNGE$", 13
+	.string "KÄMPFERIN$", 13
+	.string "SCHIRMDAME$", 13
+	.string "SCHWIMMERIN$", 13
+	.string "PICKNICKER$", 13
+	.string "ZWIL.$", 13
+	.string "MATROSE$", 13
+	.string "SNOWBOARDER$", 13
+	.string "{PKMN}-SAMMLER$", 13
+	.string "{PKMN}-TRAINER$", 13
+	.string "{PKMN}-ZÜCHTER$", 13
+	.string "{PKMN}-RANGER$", 13
+	.string "MAGMA BOSS$", 13
 	.string "TEAM MAGMA$", 13
-	.string "MAGMA ADMIN$", 13
-	.string "LASS$", 13
-	.string "BUG CATCHER$", 13
-	.string "HIKER$", 13
-	.string "YOUNG COUPLE$", 13
-	.string "OLD COUPLE$", 13
-	.string "SIS AND BRO$", 13
+	.string "MAGMA VORS.$", 13
+	.string "GÖRE$", 13
+	.string "KÄFERSAMMLER$", 13
+	.string "WANDERER$", 13
+	.string "JUNGES GLÜCK$", 13
+	.string "ALTES PAAR$", 13
+	.string "GESCHWISTER$", 13

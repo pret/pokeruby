@@ -10,6 +10,7 @@
 #include "field_player_avatar.h"
 #include "field_camera.h"
 #include "map_constants.h"
+#include "menu.h"
 #include "task.h"
 #include "palette.h"
 #include "decoration.h"
@@ -835,7 +836,7 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].sbr_field_2, local1);
     str[0] = EOS;
 
-    return StringAppend(dest, gOtherText_PlayersBase);
+    return de_sub_8073174(dest, (u8 *) gOtherText_PlayersBase);
 }
 
 u8 *GetSecretBaseMapName(u8 *dest) {

@@ -1,3518 +1,3829 @@
-DexDescription_Dummy_1:
-	.string "This is a newly discovered POKéMON.\nIt is currently under investigation.$"
-DexDescription_Dummy_2:
-	.string "No detailed information is available\nat this time.$"
-
-DexDescription_Bulbasaur_1:
-	.string "BULBASAUR can be seen napping in\nbright sunlight.\nThere is a seed on its back.$"
-DexDescription_Bulbasaur_2:
-	.string "By soaking up the sun’s rays, the seed\ngrows progressively larger.$"
-
-DexDescription_Ivysaur_1:
-	.string "There is a bud on this POKéMON’s back.\nTo support its weight, IVYSAUR’s legs\nand trunk grow thick and strong.$"
-DexDescription_Ivysaur_2:
-	.string "If it starts spending more time lying\nin the sunlight, it’s a sign that the\nbud will bloom into a large flower soon.$"
-
-DexDescription_Venusaur_1:
-	.string "There is a large flower on VENUSAUR’s\nback. The flower is said to take on vivid\ncolors if it gets plenty of nutrition$"
-DexDescription_Venusaur_2:
-	.string "and sunlight. The flower’s aroma\nsoothes the emotions of people.$"
-
-DexDescription_Charmander_1:
-	.string "The flame that burns at the tip of its\ntail is an indication of its emotions.\nThe flame wavers when CHARMANDER is$"
-DexDescription_Charmander_2:
-	.string "enjoying itself. If the POKéMON becomes\nenraged, the flame burns fiercely.$"
-
-DexDescription_Charmeleon_1:
-	.string "CHARMELEON mercilessly destroys its\nfoes using its sharp claws.\nIf it encounters a strong foe, it turns$"
-DexDescription_Charmeleon_2:
-	.string "aggressive. In this excited state, the\nflame at the tip of its tail flares with a\nbluish white color.$"
-
-DexDescription_Charizard_1:
-	.string "CHARIZARD flies around the sky in\nsearch of powerful opponents.\nIt breathes fire of such great heat$"
-DexDescription_Charizard_2:
-	.string "that it melts anything. However, it\nnever turns its fiery breath on any\nopponent weaker than itself.$"
-
-DexDescription_Squirtle_1:
-	.string "SQUIRTLE’s shell is not merely used\nfor protection.\nThe shell’s rounded shape and the$"
-DexDescription_Squirtle_2:
-	.string "grooves on its surface help minimize\nresistance in water, enabling this\nPOKéMON to swim at high speeds.$"
-
-DexDescription_Wartortle_1:
-	.string "Its tail is large and covered with a rich,\nthick fur. The tail becomes increasingly\ndeeper in color as WARTORTLE ages.$"
-DexDescription_Wartortle_2:
-	.string "The scratches on its shell are evidence\nof this POKéMON’s toughness as a\nbattler.$"
-
-DexDescription_Blastoise_1:
-	.string "BLASTOISE has water spouts that\nprotrude from its shell. The water\nspouts are very accurate.$"
-DexDescription_Blastoise_2:
-	.string "They can shoot bullets of water with\nenough accuracy to strike empty cans\nfrom a distance of over 160 feet.$"
-
-DexDescription_Caterpie_1:
-	.string "CATERPIE has a voracious appetite.\nIt can devour leaves bigger than its\nbody right before your eyes.$"
-DexDescription_Caterpie_2:
-	.string "From its antenna, this POKéMON releases\na terrifically strong odor.$"
-
-DexDescription_Metapod_1:
-	.string "The shell covering this POKéMON’s body\nis as hard as an iron slab.\nMETAPOD does not move very much.$"
-DexDescription_Metapod_2:
-	.string "It stays still because it is preparing\nits soft innards for evolution inside\nthe hard shell.$"
-
-DexDescription_Butterfree_1:
-	.string "BUTTERFREE has a superior ability to\nsearch for delicious honey from\nflowers.$"
-DexDescription_Butterfree_2:
-	.string "It can even search out, extract, and\ncarry honey from flowers that are\nblooming over six miles from its nest.$"
-
-DexDescription_Weedle_1:
-	.string "WEEDLE has an extremely acute sense\nof smell.\nIt is capable of distinguishing its$"
-DexDescription_Weedle_2:
-	.string "favorite kinds of leaves from those it\ndislikes just by sniffing with its big\nred proboscis (nose).$"
-
-DexDescription_Kakuna_1:
-	.string "KAKUNA remains virtually immobile as it\nclings to a tree. However, on the\ninside, it is extremely busy as it$"
-DexDescription_Kakuna_2:
-	.string "prepares for its coming evolution.\nThis is evident from how hot the shell\nbecomes to the touch.$"
-
-DexDescription_Beedrill_1:
-	.string "BEEDRILL is extremely territorial.\nNo one should ever approach its nest -\nthis is for their own safety.$"
-DexDescription_Beedrill_2:
-	.string "If angered, they will attack in a furious\nswarm.$"
-
-DexDescription_Pidgey_1:
-	.string "PIDGEY has an extremely sharp sense\nof direction.\nIt is capable of unerringly returning$"
-DexDescription_Pidgey_2:
-	.string "home to its nest, however far it may be\nremoved from its familiar surroundings.$"
-
-DexDescription_Pidgeotto_1:
-	.string "PIDGEOTTO claims a large area as its\nown territory. This POKéMON flies\naround, patrolling its living space.$"
-DexDescription_Pidgeotto_2:
-	.string "If its territory is violated, it shows\nno mercy in thoroughly punishing the\nfoe with its sharp claws.$"
-
-DexDescription_Pidgeot_1:
-	.string "This POKéMON has a dazzling plumage of\nbeautifully glossy feathers.\nMany TRAINERS are captivated by the$"
-DexDescription_Pidgeot_2:
-	.string "striking beauty of the feathers on its\nhead, compelling them to choose PIDGEOT\nas their POKéMON.$"
-
-DexDescription_Rattata_1:
-	.string "RATTATA is cautious in the extreme.\nEven while it is asleep, it constantly\nlistens by moving its ears around.$"
-DexDescription_Rattata_2:
-	.string "It is not picky about where it lives -\nit will make its nest anywhere.$"
-
-DexDescription_Raticate_1:
-	.string "RATICATE’s sturdy fangs grow steadily.\nTo keep them ground down, it gnaws\non rocks and logs.$"
-DexDescription_Raticate_2:
-	.string "It may even chew on the walls of\nhouses.$"
-
-DexDescription_Spearow_1:
-	.string "SPEAROW has a very loud cry that can\nbe heard over half a mile away.\nIf its high, keening cry is heard$"
-DexDescription_Spearow_2:
-	.string "echoing all around, it is a sign that\nthey are warning each other of danger.$"
-
-DexDescription_Fearow_1:
-	.string "FEAROW is recognized by its long neck\nand elongated beak.\nThey are conveniently shaped for$"
-DexDescription_Fearow_2:
-	.string "catching prey in soil or water.\nIt deftly moves its long and skinny\nbeak to pluck prey.$"
-
-DexDescription_Ekans_1:
-	.string "EKANS curls itself up in a spiral while\nit rests.\nAssuming this position allows it to$"
-DexDescription_Ekans_2:
-	.string "quickly respond to a threat from any\ndirection with a glare from its upraised\nhead.$"
-
-DexDescription_Arbok_1:
-	.string "This POKéMON is terrifically strong in\norder to constrict things with its body.\nIt can even flatten steel oil drums.$"
-DexDescription_Arbok_2:
-	.string "Once ARBOK wraps its body around its\nfoe, escaping its crunching embrace is\nimpossible.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Pikachu_1:
-	.string "This POKéMON has electricity-storing\npouches on its cheeks. These appear to\nbecome electrically charged during the$"
-DexDescription_Pikachu_2:
-	.string "night while PIKACHU sleeps.\nIt occasionally discharges electricity\nwhen it is dozy after waking up.$"
-	.else
-DexDescription_Pikachu_1:
-	.string "Whenever PIKACHU comes across\nsomething new, it blasts it with a jolt\nof electricity.$"
-DexDescription_Pikachu_2:
-	.string "If you come across a blackened berry,\nit’s evidence that this POKéMON\nmistook the intensity of its charge.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Raichu_1:
-	.string "This POKéMON exudes a weak electrical\ncharge from all over its body that makes\nit take on a slight glow in darkness.$"
-DexDescription_Raichu_2:
-	.string "RAICHU searches for electricity by\nplanting its tail in the ground.$"
-	.else
-DexDescription_Raichu_1:
-	.string "If the electrical sacks become\nexcessively charged, RAICHU plants its\ntail in the ground and discharges.$"
-DexDescription_Raichu_2:
-	.string "Scorched patches of ground will be\nfound near this POKéMON’s nest.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sandshrew_1:
-	.string "SANDSHREW has a very dry hide that is\nextremely tough. The POKéMON can roll\ninto a ball that repels any attack.$"
-DexDescription_Sandshrew_2:
-	.string "At night, it burrows into the desert\nsand to sleep.$"
-	.else
-DexDescription_Sandshrew_1:
-	.string "SANDSHREW’s body is configured to\nabsorb water without waste, enabling it\nto survive in an arid desert.$"
-DexDescription_Sandshrew_2:
-	.string "This POKéMON curls up to protect itself\nfrom its enemies.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sandslash_1:
-	.string "SANDSLASH can roll up its body as if it\nwere a ball covered with large spikes.\nIn battle, this POKéMON will try to make$"
-DexDescription_Sandslash_2:
-	.string "the foe flinch by jabbing it with its\nspines. It then leaps at the stunned\nfoe to tear wildly with its sharp claws.$"
-	.else
-DexDescription_Sandslash_1:
-	.string "SANDSLASH’s body is covered by tough\nspikes, which are hardened sections of\nits hide. Once a year, the old spikes fall$"
-DexDescription_Sandslash_2:
-	.string "out, to be replaced with new spikes that\ngrow out from beneath the old ones.$"
-	.endif
-
-DexDescription_NidoranF_1:
-	.string "NIDORAN has barbs that secrete a\npowerful poison. They are thought to\nhave developed as protection for this$"
-DexDescription_NidoranF_2:
-	.string "small-bodied POKéMON.\nWhen enraged, it releases a horrible\ntoxin from its horn.$"
-
-DexDescription_Nidorina_1:
-	.string "When NIDORINA are with their friends or\nfamily, they keep their barbs tucked\naway to prevent hurting each other.$"
-DexDescription_Nidorina_2:
-	.string "This POKéMON appears to become\nnervous if separated from the others.$"
-
-DexDescription_Nidoqueen_1:
-	.string "NIDOQUEEN’s body is encased in\nextremely hard scales. It is adept at\nsending foes flying with harsh tackles.$"
-DexDescription_Nidoqueen_2:
-	.string "This POKéMON is at its strongest when\nit is defending its young.$"
-
-DexDescription_NidoranM_1:
-	.string "The male NIDORAN has developed\nmuscles for moving its ears. Thanks to\nthem, the ears can be freely moved in$"
-DexDescription_NidoranM_2:
-	.string "any direction. Even the slightest sound\ndoes not escape this POKéMON’s notice.$"
-
-DexDescription_Nidorino_1:
-	.string "NIDORINO has a horn that is harder than\na diamond. If it senses a hostile\npresence, all the barbs on its back$"
-DexDescription_Nidorino_2:
-	.string "bristle up at once, and it challenges\nthe foe with all its might.$"
-
-DexDescription_Nidoking_1:
-	.string "NIDOKING’s thick tail packs enormously\ndestructive power. With one swing, it\ncan topple a metal transmission tower.$"
-DexDescription_Nidoking_2:
-	.string "Once this POKéMON goes on a rampage,\nthere is no stopping it.$"
-
-DexDescription_Clefairy_1:
-	.string "On every night of a full moon, groups of\nthis POKéMON come out to play.\nWhen dawn arrives, the tired CLEFAIRY$"
-DexDescription_Clefairy_2:
-	.string "return to their quiet mountain retreats\nand go to sleep nestled up against each\nother.$"
-
-DexDescription_Clefable_1:
-	.string "CLEFABLE moves by skipping lightly as if\nit were flying using its wings. Its\nbouncy step lets it even walk on water.$"
-DexDescription_Clefable_2:
-	.string "It is known to take strolls on lakes on\nquiet, moonlit nights.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Vulpix_1:
-	.string "Inside VULPIX’s body burns a flame that\nnever goes out. During the daytime,\nwhen the temperatures rise, this$"
-DexDescription_Vulpix_2:
-	.string "POKéMON releases flames from its mouth\nto prevent its body from growing too\nhot.$"
-	.else
-DexDescription_Vulpix_1:
-	.string "At the time of its birth, VULPIX has one\nwhite tail. The tail separates into six\nif this POKéMON receives plenty of love$"
-DexDescription_Vulpix_2:
-	.string "from its TRAINER.\nThe six tails become magnificently\ncurled.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Ninetales_1:
-	.string "Legend has it that NINETALES came into\nbeing when nine wizards possessing\nsacred powers merged into one.$"
-DexDescription_Ninetales_2:
-	.string "This POKéMON is highly intelligent - it\ncan understand human speech.$"
-	.else
-DexDescription_Ninetales_1:
-	.string "NINETALES casts a sinister light from\nits bright red eyes to gain total\ncontrol over its foe’s mind.$"
-DexDescription_Ninetales_2:
-	.string "This POKéMON is said to live for a\nthousand years.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Jigglypuff_1:
-	.string "When this POKéMON sings, it never\npauses to breathe. If it is in a battle\nagainst an opponent that does not$"
-DexDescription_Jigglypuff_2:
-	.string "easily fall asleep, JIGGLYPUFF cannot\nbreathe, endangering its life.$"
-	.else
-DexDescription_Jigglypuff_1:
-	.string "JIGGLYPUFF’s vocal chords can freely\nadjust the wavelength of its voice.\nThis POKéMON uses this ability to sing$"
-DexDescription_Jigglypuff_2:
-	.string "at precisely the right wavelength to\nmake its foes most drowsy.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wigglytuff_1:
-	.string "WIGGLYTUFF’s body is very flexible.\nBy inhaling deeply, this POKéMON can\ninflate itself seemingly without end.$"
-DexDescription_Wigglytuff_2:
-	.string "Once inflated, WIGGLYTUFF bounces\nalong lightly like a balloon.$"
-	.else
-DexDescription_Wigglytuff_1:
-	.string "WIGGLYTUFF has large, saucerlike eyes.\nThe surfaces of its eyes are always\ncovered with a thin layer of tears.$"
-DexDescription_Wigglytuff_2:
-	.string "If any dust gets in this POKéMON’s\neyes, it is quickly washed away.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Zubat_1:
-	.string "ZUBAT avoids sunlight because exposure\ncauses it to become unhealthy.\nDuring the daytime, it stays in caves or$"
-DexDescription_Zubat_2:
-	.string "under the eaves of old houses, sleeping\nwhile hanging upside down.$"
-	.else
-DexDescription_Zubat_1:
-	.string "ZUBAT remains quietly unmoving in a\ndark spot during the bright daylight\nhours. It does so because prolonged$"
-DexDescription_Zubat_2:
-	.string "exposure to the sun causes its body to\nbecome slightly burned.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Golbat_1:
-	.string "GOLBAT bites down on prey with its four\nfangs and drinks the victim’s blood.\nIt becomes active on inky dark$"
-DexDescription_Golbat_2:
-	.string "moonless nights, flying around to\nattack people and POKéMON.$"
-	.else
-DexDescription_Golbat_1:
-	.string "GOLBAT loves to drink the blood of\nliving things. It is particularly active\nin the pitch black of night.$"
-DexDescription_Golbat_2:
-	.string "This POKéMON flits around in the night\nskies, seeking fresh blood.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Oddish_1:
-	.string "ODDISH searches for fertile, nutrient-\nrich soil, then plants itself.\nDuring the daytime, while it is planted,$"
-DexDescription_Oddish_2:
-	.string "this POKéMON’s feet are thought to\nchange shape and become similar to\nthe roots of trees.$"
-	.else
-DexDescription_Oddish_1:
-	.string "During the daytime, ODDISH buries\nitself in soil to absorb nutrients from \nthe ground using its entire body.$"
-DexDescription_Oddish_2:
-	.string "The more fertile the soil, the glossier\nits leaves become.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Gloom_1:
-	.string "From its mouth GLOOM drips honey that\nsmells absolutely horrible.\nApparently, it loves the horrid stench.$"
-DexDescription_Gloom_2:
-	.string "It sniffs the noxious fumes and then \ndrools even more of its honey.$"
-	.else
-DexDescription_Gloom_1:
-	.string "GLOOM releases a foul fragrance from\nthe pistil of its flower. When faced\nwith danger, the stench worsens.$"
-DexDescription_Gloom_2:
-	.string "If this POKéMON is feeling calm and\nsecure, it does not release its usual\nstinky aroma.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Vileplume_1:
-	.string "VILEPLUME has the world’s largest\npetals. They are used to attract prey\nthat are then doused with toxic spores.$"
-DexDescription_Vileplume_2:
-	.string "Once the prey are immobilized, this\nPOKéMON catches and devours them.$"
-	.else
-DexDescription_Vileplume_1:
-	.string "VILEPLUME’s toxic pollen triggers\natrocious allergy attacks. That’s why\nit is advisable never to approach any$"
-DexDescription_Vileplume_2:
-	.string "attractive flowers in a jungle, however\npretty they may be.$"
-	.endif
-
-	.ifdef SAPPHIRE
-
-	.if REVISION >= 1
-DexDescription_Paras_1:
-	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
-DexDescription_Paras_2:
-	.string "BUG/GRASS POKéMON host. They are\nhighly valued as a medicine for\nextending life.$"
-	.else
-DexDescription_Paras_1:
-	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
-DexDescription_Paras_2:
-	.string "BUG POKéMON host. They are highly\nvalued as a medicine for extending life.$"
-	.endif @ REVISION >= 1
-
-	.else
-
-	.if REVISION >= 1
-DexDescription_Paras_1:
-	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
-DexDescription_Paras_2:
-	.string "BUG/GRASS POKéMON host. They are\nhighly valued as a medicine for\nextending life.$"
-	.else
-DexDescription_Paras_1:
-	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from the BUG$"
-DexDescription_Paras_2:
-	.string "POKéMON host. They are highly valued as\na medicine for extending life.$"
-	.endif @ REVISION >= 1
-
-	.endif @ SAPPHIRE
-
-DexDescription_Parasect_1:
-	.string "PARASECT is known to infest large trees\nen masse and drain nutrients from the\nlower trunk and roots.$"
-DexDescription_Parasect_2:
-	.string "When an infested tree dies, they move\nonto another tree all at once.$"
-
-DexDescription_Venonat_1:
-	.string "VENONAT is said to have evolved with\na coat of thin, stiff hair that covers\nits entire body for protection.$"
-DexDescription_Venonat_2:
-	.string "It possesses large eyes that never fail\nto spot even miniscule prey.$"
-
-DexDescription_Venomoth_1:
-	.string "VENOMOTH is nocturnal - it is a POKéMON\nthat only becomes active at night.\nIts favorite prey are small insects$"
-DexDescription_Venomoth_2:
-	.string "that gather around streetlights,\nattracted by the light in the darkness.$"
-
-DexDescription_Diglett_1:
-	.string "DIGLETT are raised in most farms.\nThe reason is simple - wherever this\nPOKéMON burrows, the soil is left$"
-DexDescription_Diglett_2:
-	.string "perfectly tilled for planting crops.\nThis soil is made ideal for growing\ndelicious vegetables.$"
-
-DexDescription_Dugtrio_1:
-	.string "DUGTRIO are actually triplets that\nemerged from one body. As a result,\neach triplet thinks exactly like the$"
-DexDescription_Dugtrio_2:
-	.string "other two triplets.\nThey work cooperatively to burrow\nendlessly.$"
-
-DexDescription_Meowth_1:
-	.string "MEOWTH withdraws its sharp claws into\nits paws to slinkily sneak about without\nmaking any incriminating footsteps.$"
-DexDescription_Meowth_2:
-	.string "For some reason, this POKéMON loves\nshiny coins that glitter with light.$"
-
-DexDescription_Persian_1:
-	.string "PERSIAN has six bold whiskers that give\nit a look of toughness. The whiskers  \nsense air movements to determine what$"
-DexDescription_Persian_2:
-	.string "is in the POKéMON’s surrounding\nvicinity. It becomes docile if grabbed\nby the whiskers.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Psyduck_1:
-	.string "If it uses its mysterious power,\nPSYDUCK can’t remember having done so.\nIt apparently can’t form a memory of$"
-DexDescription_Psyduck_2:
-	.string "such an event because it goes into\nan altered state that is much like\ndeep sleep.$"
-	.else
-DexDescription_Psyduck_1:
-	.string "PSYDUCK uses a mysterious power.\nWhen it does so, this POKéMON \ngenerates brain waves that are$"
-DexDescription_Psyduck_2:
-	.string "supposedly only seen in sleepers.\nThis discovery spurred controversy\namong scholars.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Golduck_1:
-	.string "GOLDUCK is the fastest swimmer among\nall POKéMON. It swims effortlessly, even\nin a rough, stormy sea.$"
-DexDescription_Golduck_2:
-	.string "It sometimes rescues people from\nwrecked ships floundering in high seas.$"
-	.else
-DexDescription_Golduck_1:
-	.string "The webbed flippers on its forelegs and\nhind legs and the streamlined body of\nGOLDUCK give it frightening speed.$"
-DexDescription_Golduck_2:
-	.string "This POKéMON is definitely much faster\nthan even the most athletic swimmer.$"
-	.endif
-
-DexDescription_Mankey_1:
-	.string "When MANKEY starts shaking and its\nnasal breathing turns rough, it’s a sure\nsign that it is becoming angry.$"
-DexDescription_Mankey_2:
-	.string "However, because it goes into a\ntowering rage almost instantly, it is\nimpossible for anyone to flee its wrath.$"
-
-DexDescription_Primeape_1:
-	.string "When PRIMEAPE becomes furious, its\nblood circulation is boosted. In turn,\nits muscles are made even stronger.$"
-DexDescription_Primeape_2:
-	.string "However, it also becomes much less\nintelligent at the same time.$"
-
-DexDescription_Growlithe_1:
-	.string "GROWLITHE has a superb sense of smell.\nOnce it smells anything, this POKéMON\nwon’t forget the scent, no matter what.$"
-DexDescription_Growlithe_2:
-	.string "It uses its advanced olfactory sense\nto determine the emotions of other\nliving things.$"
-
-DexDescription_Arcanine_1:
-	.string "ARCANINE is known for its high speed.\nIt is said to be capable of running over\n6,200 miles in a single day and night.$"
-DexDescription_Arcanine_2:
-	.string "The fire that blazes wildly within this\nPOKéMON’s body is its source of power.$"
-
-DexDescription_Poliwag_1:
-	.string "POLIWAG has a very thin skin. It is\npossible to see the POKéMON’s spiral\ninnards right through the skin.$"
-DexDescription_Poliwag_2:
-	.string "Despite its thinness, however, the skin\nis also very flexible. Even sharp fangs\nbounce right off it.$"
-
-DexDescription_Poliwhirl_1:
-	.string "The surface of POLIWHIRL’s body is\nalways wet and slick with an oily fluid.\nBecause of this greasy covering, it can$"
-DexDescription_Poliwhirl_2:
-	.string "easily slip and slide out of the clutches\nof any enemy in battle.$"
-
-DexDescription_Poliwrath_1:
-	.string "POLIWRATH’s highly developed, brawny\nmuscles never grow fatigued, however\nmuch it exercises.$"
-DexDescription_Poliwrath_2:
-	.string "It is so tirelessly strong, this POKéMON\ncan swim back and forth across the\nPacific Ocean without effort.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Abra_1:
-	.string "ABRA needs to sleep for eighteen hours\na day. If it doesn’t, this POKéMON loses\nits ability to use telekinetic powers.$"
-DexDescription_Abra_2:
-	.string "If it is attacked, ABRA escapes using\nTELEPORT while it is still sleeping.$"
-	.else
-DexDescription_Abra_1:
-	.string "ABRA sleeps for eighteen hours a day.\nHowever, it can sense the presence of\nfoes even while it is sleeping.$"
-DexDescription_Abra_2:
-	.string "In such a situation, this POKéMON\nimmediately teleports to safety.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Kadabra_1:
-	.string "KADABRA holds a silver spoon in its\nhand. The spoon is used to amplify the\nalpha waves in its brain.$"
-DexDescription_Kadabra_2:
-	.string "Without the spoon, the POKéMON is said\nto be limited to half the usual amount\nof its telekinetic powers.$"
-	.else
-DexDescription_Kadabra_1:
-	.string "KADABRA emits a peculiar alpha wave\nif it develops a headache. Only those\npeople with a particularly strong$"
-DexDescription_Kadabra_2:
-	.string "psyche can hope to become a TRAINER\nof this POKéMON.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Alakazam_1:
-	.string "ALAKAZAM’s brain continually grows,\ninfinitely multiplying brain cells.\nThis amazing brain gives this POKéMON$"
-DexDescription_Alakazam_2:
-	.string "an astoundingly high IQ of 5,000.\nIt has a thorough memory of everything\nthat has occurred in the world.$"
-	.else
-DexDescription_Alakazam_1:
-	.string "ALAKAZAM’s brain continually grows,\nmaking its head far too heavy to\nsupport with its neck.$"
-DexDescription_Alakazam_2:
-	.string "This POKéMON holds its head up using\nits psychokinetic power instead.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Machop_1:
-	.string "MACHOP exercises by hefting around\na GRAVELER as if it were a barbell.\nThere are some MACHOP that travel$"
-DexDescription_Machop_2:
-	.string "the world in a quest to master all\nkinds of martial arts.$"
-	.else
-DexDescription_Machop_1:
-	.string "MACHOP’s muscles are special - they\nnever get sore no matter how much they\nare used in exercise.$"
-DexDescription_Machop_2:
-	.string "This POKéMON has sufficient power to\nhurl a hundred adult humans.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Machoke_1:
-	.string "MACHOKE undertakes bodybuilding every\nday even as it helps people with tough,\nphysically demanding labor.$"
-DexDescription_Machoke_2:
-	.string "On its days off, this POKéMON heads to\nthe fields and mountains to exercise\nand train.$"
-	.else
-DexDescription_Machoke_1:
-	.string "MACHOKE’s thoroughly toned muscles\npossess the hardness of steel.\nThis POKéMON has so much strength,$"
-DexDescription_Machoke_2:
-	.string "it can easily hold aloft a sumo wrestler\non just one finger.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Machamp_1:
-	.string "MACHAMP is known as the POKéMON that\nhas mastered every kind of martial arts.\nIf it grabs hold of the foe with its four$"
-DexDescription_Machamp_2:
-	.string "arms, the battle is all but over.\nThe hapless foe is thrown far over the\nhorizon.$"
-	.else
-DexDescription_Machamp_1:
-	.string "MACHAMP has the power to hurl anything\naside. However, trying to do any work\nrequiring care and dexterity causes$"
-DexDescription_Machamp_2:
-	.string "its arms to get tangled.\nThis POKéMON tends to leap into action\nbefore it thinks.$"
-	.endif
-
-DexDescription_Bellsprout_1:
-	.string "BELLSPROUT’s thin and flexible body\nlets it bend and sway to avoid any\nattack, however strong it may be.$"
-DexDescription_Bellsprout_2:
-	.string "From its mouth, this POKéMON spits a\ncorrosive fluid that melts even iron.$"
-
-DexDescription_Weepinbell_1:
-	.string "WEEPINBELL has a large hook on its rear\nend. At night, the POKéMON hooks on to\na tree branch and goes to sleep.$"
-DexDescription_Weepinbell_2:
-	.string "If it moves around in its sleep, it may\nwake up to find itself on the ground.$"
-
-DexDescription_Victreebel_1:
-	.string "VICTREEBEL has a long vine that\nextends from its head. This vine is\nwaved and flicked about as if it were$"
-DexDescription_Victreebel_2:
-	.string "an animal to attract prey. When an\nunsuspecting prey draws near, this\nPOKéMON swallows it whole.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Tentacool_1:
-	.string "TENTACOOL absorbs sunlight and\nrefracts it using water inside its body\nto convert it into beam energy.$"
-DexDescription_Tentacool_2:
-	.string "This POKéMON shoots beams from its\ncrystal-like eyes.$"
-	.else
-DexDescription_Tentacool_1:
-	.string "TENTACOOL’s body is largely composed\nof water. If it is removed from the\nsea, it dries up like parchment.$"
-DexDescription_Tentacool_2:
-	.string "If this POKéMON happens to become\ndehydrated, put it back into the sea.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Tentacruel_1:
-	.string "TENTACRUEL has tentacles that can be\nfreely elongated and shortened at will.\nIt ensnares prey with its tentacles and$"
-DexDescription_Tentacruel_2:
-	.string "weakens the prey by dosing it with a\nharsh toxin. It can catch up to 80\nprey at the same time.$"
-	.else
-DexDescription_Tentacruel_1:
-	.string "TENTACRUEL has large red orbs on its\nhead. The orbs glow before lashing the\nvicinity with a harsh ultrasonic blast.$"
-DexDescription_Tentacruel_2:
-	.string "This POKéMON’s outburst creates rough\nwaves around it.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Geodude_1:
-	.string "When GEODUDE sleeps deeply, it buries\nitself halfway into the ground.\nIt will not awaken even if hikers step$"
-DexDescription_Geodude_2:
-	.string "on it unwittingly.\nIn the morning, this POKéMON rolls\ndownhill in search of food.$"
-	.else
-DexDescription_Geodude_1:
-	.string "The longer a GEODUDE lives, the more\nits edges are chipped and worn away,\nmaking it more rounded in appearance.$"
-DexDescription_Geodude_2:
-	.string "However, this POKéMON’s heart will\nremain hard, craggy, and rough always.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Graveler_1:
-	.string "Rocks are GRAVELER’s favorite food.\nThis POKéMON will climb a mountain from\nthe base to the summit, crunchingly$"
-DexDescription_Graveler_2:
-	.string "feasting on rocks all the while.\nUpon reaching the peak, it rolls back\ndown to the bottom.$"
-	.else
-DexDescription_Graveler_1:
-	.string "GRAVELER grows by feeding on rocks.\nApparently, it prefers to eat rocks\nthat are covered in moss.$"
-DexDescription_Graveler_2:
-	.string "This POKéMON eats its way through\na ton of rocks on a daily basis.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Golem_1:
-	.string "GOLEM is known for rolling down from\nmountains. To prevent them from rolling\ninto the homes of people downhill,$"
-DexDescription_Golem_2:
-	.string "grooves have been dug into the sides of\nmountains to serve as guideways for\ndiverting this POKéMON’s course.$"
-	.else
-DexDescription_Golem_1:
-	.string "GOLEM live up on mountains.\nIf there is a large earthquake, these\nPOKéMON will come rolling down off$"
-DexDescription_Golem_2:
-	.string "the mountains en masse to the\nfoothills below.$"
-	.endif
-
-DexDescription_Ponyta_1:
-	.string "PONYTA is very weak at birth.\nIt can barely stand up.\nThis POKéMON becomes stronger by$"
-DexDescription_Ponyta_2:
-	.string "stumbling and falling to keep up with\nits parent.$"
-
-DexDescription_Rapidash_1:
-	.string "RAPIDASH usually can be seen casually\ncantering in the fields and plains.\nHowever, when this POKéMON turns$"
-DexDescription_Rapidash_2:
-	.string "serious, its fiery manes flare and blaze\nas it gallops its way up to 150 mph.$"
-
-DexDescription_Slowpoke_1:
-	.string "SLOWPOKE uses its tail to catch prey by\ndipping it in water at the side of a\nriver.$"
-DexDescription_Slowpoke_2:
-	.string "However, this POKéMON often forgets\nwhat it’s doing and often spends entire\ndays just loafing at water’s edge.$"
-
-DexDescription_Slowbro_1:
-	.string "SLOWBRO’s tail has a SHELLDER firmly\nattached with a bite. As a result, the\ntail can’t be used for fishing anymore.$"
-DexDescription_Slowbro_2:
-	.string "This causes SLOWBRO to grudgingly swim\nand catch prey instead.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Magnemite_1:
-	.string "MAGNEMITE floats in the air by emitting\nelectromagnetic waves from the units\nat its sides. These waves block gravity.$"
-DexDescription_Magnemite_2:
-	.string "This POKéMON becomes incapable of\nflight if its internal electrical supply\nis depleted.$"
-	.else
-DexDescription_Magnemite_1:
-	.string "MAGNEMITE attaches itself to power\nlines to feed on electricity.\nIf your house has a power outage,$"
-DexDescription_Magnemite_2:
-	.string "check your circuit breakers. You may\nfind a large number of this POKéMON\nclinging to the breaker box.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Magneton_1:
-	.string "MAGNETON emits a powerful magnetic\nforce that is fatal to electronics and\nprecision instruments. Because of$"
-DexDescription_Magneton_2:
-	.string "this, it is said that some towns warn\npeople to keep this POKéMON inside\na POKé BALL.$"
-	.else
-DexDescription_Magneton_1:
-	.string "MAGNETON emits a powerful magnetic\nforce that is fatal to mechanical\ndevices. As a result, large cities sound$"
-DexDescription_Magneton_2:
-	.string "sirens to warn citizens of large-scale\noutbreaks of this POKéMON.$"
-	.endif
-
-DexDescription_Farfetchd_1:
-	.string "FARFETCH’D is always seen with a stick\nfrom a plant of some sort. Apparently,\nthere are good sticks and bad sticks.$"
-DexDescription_Farfetchd_2:
-	.string "This POKéMON has been known to fight\nwith others over sticks.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Doduo_1:
-	.string "DODUO’s two heads contain completely\nidentical brains.\nA scientific study reported that on$"
-DexDescription_Doduo_2:
-	.string "rare occasions, there will be examples\nof this POKéMON possessing different\nsets of brains.$"
-	.else
-DexDescription_Doduo_1:
-	.string "DODUO’s two heads never sleep at the\nsame time.\nIts two heads take turns sleeping,$"
-DexDescription_Doduo_2:
-	.string "so one head can always keep watch for\nenemies while the other one sleeps.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Dodrio_1:
-	.string "Apparently, the heads aren’t the only\nparts of the body that DODRIO has\nthree of.$"
-DexDescription_Dodrio_2:
-	.string "It has three sets of hearts and lungs\nas well, so it is capable of running long\ndistances without rest.$"
-	.else
-DexDescription_Dodrio_1:
-	.string "Watch out if DODRIO’s three heads are\nlooking in three separate directions.\nIt’s a sure sign that it is on its guard.$"
-DexDescription_Dodrio_2:
-	.string "Don’t go near this POKéMON if it’s being\nwary - it may decide to peck you.$"
-	.endif
-
-DexDescription_Seel_1:
-	.string "SEEL hunts for prey in the frigid sea\nunderneath sheets of ice.\nWhen it needs to breathe, it punches$"
-DexDescription_Seel_2:
-	.string "a hole through the ice with the\nsharply protruding section of its head.$"
-
-DexDescription_Dewgong_1:
-	.string "DEWGONG loves to snooze on bitterly\ncold ice.\nThe sight of this POKéMON sleeping on$"
-DexDescription_Dewgong_2:
-	.string "a glacier was mistakenly thought to be\na mermaid by a mariner long ago.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Grimer_1:
-	.string "GRIMER emerged from the sludge that\nsettled on a polluted seabed.\nThis POKéMON loves anything filthy.$"
-DexDescription_Grimer_2:
-	.string "It constantly leaks a horribly germ-\ninfested fluid from all over its body.$"
-	.else
-DexDescription_Grimer_1:
-	.string "GRIMER’s sludgy and rubbery body can\nbe forced through any opening, however\nsmall it may be.$"
-DexDescription_Grimer_2:
-	.string "This POKéMON enters sewer pipes to\ndrink filthy wastewater.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Muk_1:
-	.string "This POKéMON’s favorite food is\nanything that is repugnantly filthy.\nIn dirty towns where people think$"
-DexDescription_Muk_2:
-	.string "nothing of throwing away litter on the\nstreets, MUK are certain to gather.$"
-	.else
-DexDescription_Muk_1:
-	.string "From MUK’s body seeps a foul fluid that\ngives off a nose-bendingly horrible\nstench.$"
-DexDescription_Muk_2:
-	.string "Just one drop of this POKéMON’s body\nfluid can turn a pool stagnant and\nrancid.$"
-	.endif
-
-DexDescription_Shellder_1:
-	.string "At night, this POKéMON uses its broad\ntongue to burrow a hole in the seafloor\nsand and then sleep in it.$"
-DexDescription_Shellder_2:
-	.string "While it is sleeping, SHELLDER closes its\nshell, but leaves its tongue hanging\nout.$"
-
-DexDescription_Cloyster_1:
-	.string "CLOYSTER is capable of swimming in the\nsea. It does so by swallowing water,\nthen jetting it out toward the rear.$"
-DexDescription_Cloyster_2:
-	.string "This POKéMON shoots spikes from its\nshell using the same system.$"
-
-DexDescription_Gastly_1:
-	.string "GASTLY is largely composed of gaseous\nmatter. When exposed to a strong wind,\nthe gaseous body quickly dwindles away.$"
-DexDescription_Gastly_2:
-	.string "Groups of this POKéMON cluster under\nthe eaves of houses to escape the\nravages of wind.$"
-
-DexDescription_Haunter_1:
-	.string "HAUNTER is a dangerous POKéMON.\nIf one beckons you while floating in\ndarkness, you must never approach it.$"
-DexDescription_Haunter_2:
-	.string "This POKéMON will try to lick you with its\ntongue and steal your life away.$"
-
-DexDescription_Gengar_1:
-	.string "Sometimes, on a dark night, your shadow\nthrown by a streetlight will suddenly\nand startlingly overtake you.$"
-DexDescription_Gengar_2:
-	.string "It is actually a GENGAR running past\nyou, pretending to be your shadow.$"
-
-DexDescription_Onix_1:
-	.string "ONIX has a magnet in its brain. It acts\nas a compass so that this POKéMON does\nnot lose direction while it is tunneling.$"
-DexDescription_Onix_2:
-	.string "As it grows older, its body becomes\nincreasingly rounder and smoother.$"
-
-DexDescription_Drowzee_1:
-	.string "If your nose becomes itchy while you\nare sleeping, it’s a sure sign that one\nof these POKéMON is standing above$"
-DexDescription_Drowzee_2:
-	.string "your pillow and trying to eat your dream\nthrough your nostrils.$"
-
-DexDescription_Hypno_1:
-	.string "HYPNO holds a pendulum in its hand.\nThe arcing movement and glitter of the\npendulum lull the foe into a deep state$"
-DexDescription_Hypno_2:
-	.string "of hypnosis.\nWhile this POKéMON searches for prey,\nit polishes the pendulum.$"
-
-DexDescription_Krabby_1:
-	.string "KRABBY live on beaches, burrowed inside\nholes dug into the sand.\nOn sandy beaches with little in the way$"
-DexDescription_Krabby_2:
-	.string "of food, these POKéMON can be seen\nsquabbling with each other over\nterritory.$"
-
-DexDescription_Kingler_1:
-	.string "KINGLER has an enormous, oversized\nclaw. It waves this huge claw in the\nair to communicate with others.$"
-DexDescription_Kingler_2:
-	.string "However, because the claw is so heavy,\nthe POKéMON quickly tires.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Voltorb_1:
-	.string "VOLTORB is extremely sensitive - it\nexplodes at the slightest of shocks.\nIt is rumored that it was first created$"
-DexDescription_Voltorb_2:
-	.string "when a POKé BALL was exposed to a\npowerful pulse of energy.$"
-	.else
-DexDescription_Voltorb_1:
-	.string "VOLTORB was first sighted at a company\nthat manufactures POKé BALLS.\nThe link between that sighting and$"
-DexDescription_Voltorb_2:
-	.string "the fact that this POKéMON looks very\nsimilar to a POKé BALL remains a\nmystery.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Electrode_1:
-	.string "One of ELECTRODE’s characteristics is\nits attraction to electricity.\nIt is a problematical POKéMON that$"
-DexDescription_Electrode_2:
-	.string "congregates mostly at electrical\npower plants to feed on electricity\nthat has just been generated.$"
-	.else
-DexDescription_Electrode_1:
-	.string "ELECTRODE eats electricity in the\natmosphere. On days when lightning\nstrikes, you can see this POKéMON$"
-DexDescription_Electrode_2:
-	.string "exploding all over the place from\neating too much electricity.$"
-	.endif
-
-DexDescription_Exeggcute_1:
-	.string "This POKéMON consists of six eggs that\nform a closely knit cluster. The six eggs\nattract each other and spin around.$"
-DexDescription_Exeggcute_2:
-	.string "When cracks increasingly appear on the\neggs, EXEGGCUTE is close to evolution.$"
-
-DexDescription_Exeggutor_1:
-	.string "EXEGGUTOR originally came from the\ntropics. Its heads steadily grow larger\nfrom exposure to strong sunlight.$"
-DexDescription_Exeggutor_2:
-	.string "It is said that when the heads fall off,\nthey group together to form EXEGGCUTE.$"
-
-DexDescription_Cubone_1:
-	.string "CUBONE pines for the mother it will\nnever see again. Seeing a likeness of\nits mother in the full moon, it cries.$"
-DexDescription_Cubone_2:
-	.string "The stains on the skull the POKéMON\nwears are made by the tears it sheds.$"
-
-DexDescription_Marowak_1:
-	.string "MAROWAK is the evolved form of a CUBONE\nthat has overcome its sadness at the\nloss of its mother and grown tough.$"
-DexDescription_Marowak_2:
-	.string "This POKéMON’s tempered and hardened\nspirit is not easily broken.$"
-
-DexDescription_Hitmonlee_1:
-	.string "HITMONLEE’s legs freely contract and\nstretch. Using these springlike legs, it\nbowls over foes with devastating kicks.$"
-DexDescription_Hitmonlee_2:
-	.string "After battle, it rubs down its legs and\nloosens the muscles to overcome\nfatigue.$"
-
-DexDescription_Hitmonchan_1:
-	.string "HITMONCHAN is said to possess the\nspirit of a boxer who had been working\ntowards a world championship.$"
-DexDescription_Hitmonchan_2:
-	.string "This POKéMON has an indomitable spirit\nand will never give up in the face of\nadversity.$"
-
-DexDescription_Lickitung_1:
-	.string "Whenever LICKITUNG comes across\nsomething new, it will unfailingly give it\na lick. It does so because it memorizes$"
-DexDescription_Lickitung_2:
-	.string "things by texture and by taste.\nIt is somewhat put off by sour things.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Koffing_1:
-	.string "KOFFING embodies toxic substances.\nIt mixes the toxins with raw garbage to\nset off a chemical reaction that$"
-DexDescription_Koffing_2:
-	.string "results in a terribly powerful poison\ngas. The higher the temperature, the\nmore gas is concocted by this POKéMON.$"
-	.else
-DexDescription_Koffing_1:
-	.string "If KOFFING becomes agitated, it raises\nthe toxicity of its internal gases and\njets them out from all over its body.$"
-DexDescription_Koffing_2:
-	.string "This POKéMON may also overinflate its\nround body, then explode.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Weezing_1:
-	.string "WEEZING alternately shrinks and\ninflates its twin bodies to mix together\ntoxic gases inside.$"
-DexDescription_Weezing_2:
-	.string "The more the gases are mixed, the more\npowerful the toxins become. The\nPOKéMON also becomes more putrid.$"
-	.else
-DexDescription_Weezing_1:
-	.string "WEEZING loves the gases given off by\nrotted kitchen garbage. This POKéMON\nwill find a dirty, unkempt house and$"
-DexDescription_Weezing_2:
-	.string "make it its home. At night, when the\npeople in the house are asleep, it will\ngo through the trash.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Rhyhorn_1:
-	.string "RHYHORN’s brain is very small. It is so\ndense, while on a run it forgets why it\nstarted running in the first place.$"
-DexDescription_Rhyhorn_2:
-	.string "It apparently remembers sometimes if it\ndemolishes something.$"
-	.else
-DexDescription_Rhyhorn_1:
-	.string "RHYHORN runs in a straight line,\nsmashing everything in its path.\nIt is not bothered even if it rushes$"
-DexDescription_Rhyhorn_2:
-	.string "headlong into a block of steel.\nThis POKéMON may feel some pain from\nthe collision the next day, however.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Rhydon_1:
-	.string "RHYDON has a horn that serves as a\ndrill. It is used for destroying rocks\nand boulders.$"
-DexDescription_Rhydon_2:
-	.string "This POKéMON occasionally rams into\nstreams of magma, but the armor-like\nhide prevents it from feeling the heat.$"
-	.else
-DexDescription_Rhydon_1:
-	.string "RHYDON’s horn can crush even uncut\ndiamonds. One sweeping blow of its tail\ncan topple a building.$"
-DexDescription_Rhydon_2:
-	.string "This POKéMON’s hide is extremely tough.\nEven direct cannon hits don’t leave\na scratch.$"
-	.endif
-
-DexDescription_Chansey_1:
-	.string "CHANSEY lays nutritionally excellent\neggs on an everyday basis.\nThe eggs are so delicious, they are$"
-DexDescription_Chansey_2:
-	.string "easily and eagerly devoured by even\nthose people who have lost their\nappetite.$"
-
-DexDescription_Tangela_1:
-	.string "TANGELA’s vines snap off easily if they\nare grabbed. This happens without pain,\nallowing it to make a quick getaway.$"
-DexDescription_Tangela_2:
-	.string "The lost vines are replaced by newly\ngrown vines the very next day.$"
-
-DexDescription_Kangaskhan_1:
-	.string "If you come across a young KANGASKHAN\nplaying by itself, you must never\ndisturb it or attempt to catch it.$"
-DexDescription_Kangaskhan_2:
-	.string "The baby POKéMON’s parent is sure to\nbe in the area, and it will become\nviolently enraged at you.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Horsea_1:
-	.string "If HORSEA senses danger, it will\nreflexively spray a dense black ink\nfrom its mouth and try to escape.$"
-DexDescription_Horsea_2:
-	.string "This POKéMON swims by cleverly flapping\nthe fins on its back.$"
-	.else
-DexDescription_Horsea_1:
-	.string "HORSEA eats small insects and moss off\nof rocks. If the ocean current turns\nfast, this POKéMON anchors itself by$"
-DexDescription_Horsea_2:
-	.string "wrapping its tail around rocks or coral\nto prevent being washed away.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Seadra_1:
-	.string "SEADRA generates whirlpools by spinning\nits body. The whirlpools are strong\nenough to swallow even fishing boats.$"
-DexDescription_Seadra_2:
-	.string "This POKéMON weakens prey with these\ncurrents, then swallows it whole.$"
-	.else
-DexDescription_Seadra_1:
-	.string "SEADRA sleeps after wriggling itself\nbetween the branches of coral.\nThose trying to harvest coral are$"
-DexDescription_Seadra_2:
-	.string "occasionally stung by this POKéMON’s\npoison barbs if they fail to notice it.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Goldeen_1:
-	.string "GOLDEEN loves swimming wild and free\nin rivers and ponds.\nIf one of these POKéMON is placed in an$"
-DexDescription_Goldeen_2:
-	.string "aquarium, it will shatter even the\nthickest glass with one ram of its horn\nand make its escape.$"
-	.else
-DexDescription_Goldeen_1:
-	.string "GOLDEEN is a very beautiful POKéMON\nwith fins that billow elegantly in water.\nHowever, don’t let your guard down$"
-DexDescription_Goldeen_2:
-	.string "around this POKéMON - it could ram you\npowerfully with its horn.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Seaking_1:
-	.string "SEAKING is very protective of its eggs.\nThe male and female will take turns\npatrolling around their nest and eggs.$"
-DexDescription_Seaking_2:
-	.string "The guarding of eggs by these POKéMON\ngoes on for over a month.$"
-	.else
-DexDescription_Seaking_1:
-	.string "In the autumn, SEAKING males can be\nseen performing courtship dances in\nriverbeds to woo females.$"
-DexDescription_Seaking_2:
-	.string "During this season, this POKéMON’s body\ncoloration is at its most beautiful.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Staryu_1:
-	.string "STARYU apparently communicates with\nthe stars in the night sky by flashing\nthe red core at the center of its body.$"
-DexDescription_Staryu_2:
-	.string "If parts of its body are torn, this\nPOKéMON simply regenerates the\nmissing pieces and limbs.$"
-	.else
-DexDescription_Staryu_1:
-	.string "STARYU’s center section has an organ\ncalled the core that shines bright red.\nIf you go to a beach toward the$"
-DexDescription_Staryu_2:
-	.string "end of summer, the glowing cores of\nthese POKéMON look like the stars\nin the sky.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Starmie_1:
-	.string "STARMIE swims through water by\nspinning its star-shaped body as if it\nwere a propeller on a ship.$"
-DexDescription_Starmie_2:
-	.string "The core at the center of this\nPOKéMON’s body glows in seven colors.$"
-	.else
-DexDescription_Starmie_1:
-	.string "STARMIE’s center section - the core -\nglows brightly in seven colors.\nBecause of its luminous nature, this$"
-DexDescription_Starmie_2:
-	.string "POKéMON has been given the nickname\n“the gem of the sea.”$"
-	.endif
-
-DexDescription_Mrmime_1:
-	.string "MR. MIME is a master of pantomime.\nIts gestures and motions convince\nwatchers that something unseeable$"
-DexDescription_Mrmime_2:
-	.string "actually exists. Once it is believed,\nit will exist as if it were a real thing.$"
-
-DexDescription_Scyther_1:
-	.string "SCYTHER is blindingly fast. Its blazing\nspeed enhances the effectiveness of\nthe twin scythes on its forearms.$"
-DexDescription_Scyther_2:
-	.string "This POKéMON’s scythes are so\neffective, they can slice through thick\nlogs in one wicked stroke.$"
-
-DexDescription_Jynx_1:
-	.string "JYNX walks rhythmically, swaying and\nshaking its hips as if it were dancing.\nIts motions are so bouncingly alluring,$"
-DexDescription_Jynx_2:
-	.string "people seeing it are compelled to shake\ntheir hips without giving any thought\nto what they are doing.$"
-
-DexDescription_Electabuzz_1:
-	.string "When a storm arrives, gangs of this\nPOKéMON compete with each other to\nscale heights that are likely to be$"
-DexDescription_Electabuzz_2:
-	.string "stricken by lightning bolts.\nSome towns use ELECTABUZZ in place of\nlightning rods.$"
-
-DexDescription_Magmar_1:
-	.string "In battle, MAGMAR blows out intensely\nhot flames from all over its body to\nintimidate its opponent.$"
-DexDescription_Magmar_2:
-	.string "This POKéMON’s fiery bursts create\nheat waves that ignite grass and trees\nin its surroundings.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Pinsir_1:
-	.string "PINSIR has a pair of massive horns \nProtruding from the surface of these\nhorns are thorns.$"
-DexDescription_Pinsir_2:
-	.string "These thorns are driven deeply into the\nfoe’s body when the pincer closes,\nmaking it tough for the foe to escape.$"
-	.else
-DexDescription_Pinsir_1:
-	.string "PINSIR is astoundingly strong. It can\ngrip a foe weighing twice its weight\nin its horns and easily lift it.$"
-DexDescription_Pinsir_2:
-	.string "This POKéMON’s movements turn sluggish\nin cold places.$"
-	.endif
-
-DexDescription_Tauros_1:
-	.string "This POKéMON is not satisfied unless\nit is rampaging at all times.\nIf there is no opponent for TAUROS to$"
-DexDescription_Tauros_2:
-	.string "battle, it will charge at thick trees and\nknock them down to calm itself.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Magikarp_1:
-	.string "MAGIKARP is virtually useless in battle\nas it can only splash around.\nAs a result, it is considered to be weak.$"
-DexDescription_Magikarp_2:
-	.string "However, it is actually a very hardy\nPOKéMON that can survive in any body of\nwater no matter how polluted it is.$"
-	.else
-DexDescription_Magikarp_1:
-	.string "MAGIKARP is a pathetic excuse for a\nPOKéMON that is only capable of\nflopping and splashing.$"
-DexDescription_Magikarp_2:
-	.string "This behavior prompted scientists to\nundertake research into it.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Gyarados_1:
-	.string "Once GYARADOS goes on a rampage, its\nferociously violent blood doesn’t calm\nuntil it has burned everything down.$"
-DexDescription_Gyarados_2:
-	.string "There are records of this POKéMON’s\nrampages lasting a whole month.$"
-	.else
-DexDescription_Gyarados_1:
-	.string "When MAGIKARP evolves into GYARADOS,\nits brain cells undergo a structural\ntransformation. It is said that this$"
-DexDescription_Gyarados_2:
-	.string "transformation is to blame for this\nPOKéMON’s wildly violent nature.$"
-	.endif
-
-DexDescription_Lapras_1:
-	.string "People have driven LAPRAS almost to the\npoint of extinction. In the evenings,\nthis POKéMON is said to sing plaintively$"
-DexDescription_Lapras_2:
-	.string "as it seeks what few others of its kind\nstill remain.$"
-
-DexDescription_Ditto_1:
-	.string "DITTO rearranges its cell structure to\ntransform itself into other shapes.\nHowever, if it tries to transform itself$"
-DexDescription_Ditto_2:
-	.string "into something by relying on its memory,\nthis POKéMON manages to get details\nwrong.$"
-
-DexDescription_Eevee_1:
-	.string "EEVEE has an unstable genetic makeup\nthat suddenly mutates due to the\nenvironment in which it lives.$"
-DexDescription_Eevee_2:
-	.string "Radiation from various STONES causes\nthis POKéMON to evolve.$"
-
-DexDescription_Vaporeon_1:
-	.string "VAPOREON underwent a spontaneous\nmutation and grew fins and gills that\nallow it to live underwater.$"
-DexDescription_Vaporeon_2:
-	.string "This POKéMON has the ability to freely\ncontrol water.$"
-
-DexDescription_Jolteon_1:
-	.string "JOLTEON’s cells generate a low level of\nelectricity. This power is amplified by\nthe static electricity of its fur,$"
-DexDescription_Jolteon_2:
-	.string "enabling the POKéMON to drop\nthunderbolts. The bristling fur is made\nof electrically charged needles.$"
-
-DexDescription_Flareon_1:
-	.string "FLAREON’s fluffy fur has a functional\npurpose - it releases heat into the air\nso that its body does not get$"
-DexDescription_Flareon_2:
-	.string "excessively hot.\nThis POKéMON’s body temperature can\nrise to a maximum of 1,650 degrees F.$"
-
-DexDescription_Porygon_1:
-	.string "PORYGON is capable of reverting itself\nentirely back to program data and\nentering cyberspace.$"
-DexDescription_Porygon_2:
-	.string "This POKéMON is copy-protected so it\ncannot be duplicated by copying.$"
-
-DexDescription_Omanyte_1:
-	.string "OMANYTE is one of the ancient and long-\nsince-extinct POKéMON that have been\nregenerated from fossils by people.$"
-DexDescription_Omanyte_2:
-	.string "If attacked by an enemy, it withdraws\nitself inside its hard shell.$"
-
-DexDescription_Omastar_1:
-	.string "OMASTAR uses its tentacles to capture\nits prey. It is believed to have become\nextinct because its shell grew too large$"
-DexDescription_Omastar_2:
-	.string "and heavy, causing its movements to\nbecome too slow and ponderous.$"
-
-DexDescription_Kabuto_1:
-	.string "KABUTO is a POKéMON that has been\nregenerated from a fossil. However, in\nextremely rare cases, living examples$"
-DexDescription_Kabuto_2:
-	.string "have been discovered.\nThe POKéMON has not changed at all for\n300 million years.$"
-
-DexDescription_Kabutops_1:
-	.string "KABUTOPS swam underwater to hunt for\nits prey in ancient times.\nThe POKéMON was apparently evolving$"
-DexDescription_Kabutops_2:
-	.string "from being a water-dweller to living on\nland as evident from the beginnings of\nchange in its gills and legs.$"
-
-DexDescription_Aerodactyl_1:
-	.string "AERODACTYL is a POKéMON from the age\nof dinosaurs. It was regenerated from\ngenetic material extracted from amber.$"
-DexDescription_Aerodactyl_2:
-	.string "It is imagined to have been the king of\nthe skies in ancient times.$"
-
-DexDescription_Snorlax_1:
-	.string "SNORLAX’s typical day consists of\nnothing more than eating and sleeping.\nIt is such a docile POKéMON that there$"
-DexDescription_Snorlax_2:
-	.string "are children who use its expansive belly\nas a place to play.$"
-
-DexDescription_Articuno_1:
-	.string "ARTICUNO is a legendary bird POKéMON\nthat can control ice.\nThe flapping of its wings chills the air.$"
-DexDescription_Articuno_2:
-	.string "As a result, it is said that when this\nPOKéMON flies, snow will fall.$"
-
-DexDescription_Zapdos_1:
-	.string "ZAPDOS is a legendary bird POKéMON that\nhas the ability to control electricity.\nIt usually lives in thunderclouds.$"
-DexDescription_Zapdos_2:
-	.string "The POKéMON gains power if it is\nstricken by lightning bolts.$"
-
-DexDescription_Moltres_1:
-	.string "MOLTRES is a legendary bird POKéMON\nthat has the ability to control fire.\nIf this POKéMON is injured, it is said to$"
-DexDescription_Moltres_2:
-	.string "dip its body in the molten magma of a\nvolcano to burn and heal itself.$"
-
-DexDescription_Dratini_1:
-	.string "DRATINI continually molts and sloughs\noff its old skin.\nIt does so because the life energy$"
-DexDescription_Dratini_2:
-	.string "within its body steadily builds to reach\nuncontrollable levels.$"
-
-DexDescription_Dragonair_1:
-	.string "DRAGONAIR stores an enormous amount\nof energy inside its body.\nIt is said to alter weather conditions$"
-DexDescription_Dragonair_2:
-	.string "in its vicinity by discharging energy\nfrom the crystals on its neck and tail.$"
-
-DexDescription_Dragonite_1:
-	.string "DRAGONITE is capable of circling the\nglobe in just sixteen hours.\nIt is a kindhearted POKéMON that leads$"
-DexDescription_Dragonite_2:
-	.string "lost and foundering ships in a storm to\nthe safety of land.$"
-
-DexDescription_Mewtwo_1:
-	.string "MEWTWO is a POKéMON that was created\nby genetic manipulation.\nHowever, even though the scientific$"
-DexDescription_Mewtwo_2:
-	.string "power of humans created this POKéMON’s\nbody, they failed to endow MEWTWO with\na compassionate heart.$"
-
-DexDescription_Mew_1:
-	.string "MEW is said to possess the genetic\ncomposition of all POKéMON.\nIt is capable of making itself invisible$"
-DexDescription_Mew_2:
-	.string "at will, so it entirely avoids notice even\nif it approaches people.$"
-
-DexDescription_Chikorita_1:
-	.string "In battle, CHIKORITA waves its leaf\naround to keep the foe at bay.\nHowever, a sweet fragrance also wafts$"
-DexDescription_Chikorita_2:
-	.string "from the leaf, becalming the battling\nPOKéMON and creating a cozy, friendly\natmosphere all around.$"
-
-DexDescription_Bayleef_1:
-	.string "BAYLEEF’s neck is ringed by curled-up\nleaves. Inside each tubular leaf is a\nsmall shoot of a tree.$"
-DexDescription_Bayleef_2:
-	.string "The fragrance of this shoot makes\npeople peppy.$"
-
-DexDescription_Meganium_1:
-	.string "The fragrance of MEGANIUM’s flower\nsoothes and calms emotions.\nIn battle, this POKéMON gives off more$"
-DexDescription_Meganium_2:
-	.string "of its becalming scent to blunt the\nfoe’s fighting spirit.$"
-
-DexDescription_Cyndaquil_1:
-	.string "CYNDAQUIL protects itself by flaring up\nthe flames on its back.\nThe flames are vigorous if the POKéMON$"
-DexDescription_Cyndaquil_2:
-	.string "is angry. However, if it is tired, the\nflames splutter fitfully with incomplete\ncombustion.$"
-
-DexDescription_Quilava_1:
-	.string "QUILAVA keeps its foes at bay with the\nintensity of its flames and gusts of\nsuperheated air.$"
-DexDescription_Quilava_2:
-	.string "This POKéMON applies its outstanding\nnimbleness to dodge attacks even while\nscorching the foe with flames.$"
-
-DexDescription_Typhlosion_1:
-	.string "TYPHLOSION obscures itself behind a\nshimmering heat haze that it creates\nusing its intensely hot flames.$"
-DexDescription_Typhlosion_2:
-	.string "This POKéMON creates blazing explosive\nblasts that burn everything to cinders.$"
-
-DexDescription_Totodile_1:
-	.string "Despite the smallness of its body,\nTOTODILE’s jaws are very powerful.\nWhile the POKéMON may think it is just$"
-DexDescription_Totodile_2:
-	.string "playfully nipping, its bite has enough\npower to cause serious injury.$"
-
-DexDescription_Croconaw_1:
-	.string "Once CROCONAW has clamped its jaws on\nits foe, it will absolutely not let go.\nBecause the tips of its fangs are$"
-DexDescription_Croconaw_2:
-	.string "forked back like barbed fishhooks, they\nbecome impossible to remove when \nthey have sunk in.$"
-
-DexDescription_Feraligatr_1:
-	.string "FERALIGATR intimidates its foes by\nopening its huge mouth.\nIn battle, it will kick the ground hard$"
-DexDescription_Feraligatr_2:
-	.string "with its thick and powerful hind legs to\ncharge at the foe at an incredible\nspeed.$"
-
-DexDescription_Sentret_1:
-	.string "When SENTRET sleeps, it does so while\nanother stands guard. The sentry wakes\nthe others at the first sign of danger.$"
-DexDescription_Sentret_2:
-	.string "When this POKéMON becomes separated\nfrom its pack, it becomes incapable of\nsleep due to fear.$"
-
-DexDescription_Furret_1:
-	.string "FURRET has a very slim build.\nWhen under attack, it can slickly squirm\nthrough narrow spaces and get away.$"
-DexDescription_Furret_2:
-	.string "In spite of its short limbs, this\nPOKéMON is very nimble and fleet.$"
-
-DexDescription_Hoothoot_1:
-	.string "HOOTHOOT has an internal organ that\nsenses and tracks the earth’s rotation.\nUsing this special organ, this POKéMON$"
-DexDescription_Hoothoot_2:
-	.string "begins hooting at precisely the same\ntime every day.$"
-
-DexDescription_Noctowl_1:
-	.string "NOCTOWL never fails at catching prey in\ndarkness. This POKéMON owes its\nsuccess to its superior vision that$"
-DexDescription_Noctowl_2:
-	.string "allows it to see in minimal light, and to\nits soft,  supple wings that make no\nsound in flight.$"
-
-DexDescription_Ledyba_1:
-	.string "LEDYBA secretes an aromatic fluid from\nwhere its legs join its body. This fluid\nis used for communicating with others.$"
-DexDescription_Ledyba_2:
-	.string "This POKéMON conveys its feelings to\nothers by altering the fluid’s scent.$"
-
-DexDescription_Ledian_1:
-	.string "It is said that in lands with clean air,\nwhere the stars fill the sky, there live\nLEDIAN in countless numbers.$"
-DexDescription_Ledian_2:
-	.string "There is a good reason for this - the\nPOKéMON uses the light of the stars\nas its energy.$"
-
-DexDescription_Spinarak_1:
-	.string "The web spun by SPINARAK can be\nconsidered its second nervous system.\nIt is said that this POKéMON can$"
-DexDescription_Spinarak_2:
-	.string "determine what kind of prey is touching\nits web just by the tiny vibrations it\nfeels through the web’s strands.$"
-
-DexDescription_Ariados_1:
-	.string "ARIADOS’s feet are tipped with tiny\nhooked claws that enable it to scuttle\non ceilings and vertical walls.$"
-DexDescription_Ariados_2:
-	.string "This POKéMON constricts the foe with\nthin and strong silk webbing.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Crobat_1:
-	.string "CROBAT sneaks up on its intended prey\nusing wings that barely make a sound.\nThis POKéMON rests by hanging on a$"
-DexDescription_Crobat_2:
-	.string "tree branch with its rear legs that\nserve as wings.$"
-	.else
-DexDescription_Crobat_1:
-	.string "If this POKéMON is flying by fluttering\nonly a pair of wings on either the\nforelegs or hind legs, it’s proof that$"
-DexDescription_Crobat_2:
-	.string "CROBAT has been flying a long distance.\nIt switches the wings it uses if it is\ntired.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Chinchou_1:
-	.string "CHINCHOU’s two antennas are filled with\ncells that generate strong electricity.\nThis POKéMON’s cells create so much$"
-DexDescription_Chinchou_2:
-	.string "electrical power, it even makes itself\ntingle slightly.$"
-	.else
-DexDescription_Chinchou_1:
-	.string "CHINCHOU lets loose positive and\nnegative electrical charges from its\ntwo antennas to make its prey faint.$"
-DexDescription_Chinchou_2:
-	.string "This POKéMON flashes its electric\nlights to exchange signals with others.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lanturn_1:
-	.string "LANTURN is known to emit light.\nIf you peer down into the dark sea from\na ship at night, you can sometimes see$"
-DexDescription_Lanturn_2:
-	.string "this POKéMON’s light rising from the\ndepths where it swims. It gives the sea\nan appearance of a starlit night.$"
-	.else
-DexDescription_Lanturn_1:
-	.string "LANTURN is nicknamed “the deep-sea\nstar” for its illuminated antenna.\nThis POKéMON produces light by$"
-DexDescription_Lanturn_2:
-	.string "causing a chemical reaction between\nbacteria and its bodily fluids inside\nthe antenna.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Pichu_1:
-	.string "When PICHU plays with others, it may\nshort out electricity with another\nPICHU, creating a shower of sparks.$"
-DexDescription_Pichu_2:
-	.string "In that event, this POKéMON will begin\ncrying, startled by the flash of sparks.$"
-	.else
-DexDescription_Pichu_1:
-	.string "PICHU charges itself with electricity\nmore easily on days with thunderclouds\nor when the air is very dry.$"
-DexDescription_Pichu_2:
-	.string "You can hear the crackling of static\nelectricity coming off this POKéMON.$"
-	.endif
-
-DexDescription_Cleffa_1:
-	.string "On nights with many shooting stars,\nCLEFFA can be seen dancing in a ring.\nThey dance through the night and stop$"
-DexDescription_Cleffa_2:
-	.string "only at the break of day, when these\nPOKéMON quench their thirst with the\nmorning dew.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Igglybuff_1:
-	.string "IGGLYBUFF has a soft and plushy body\nthat feels very much like a marshmallow.\nFrom this body wafts a gently sweet$"
-DexDescription_Igglybuff_2:
-	.string "fragrance that soothes and calms the\nemotions of its foes.$"
-	.else
-DexDescription_Igglybuff_1:
-	.string "IGGLYBUFF’s vocal chords are not\nsufficiently developed. It would hurt\nits throat if it were to sing too much.$"
-DexDescription_Igglybuff_2:
-	.string "This POKéMON gargles with freshwater\nfrom a clean stream.$"
-	.endif
-
-DexDescription_Togepi_1:
-	.string "As its energy, TOGEPI uses the positive\nemotions of compassion and pleasure\nexuded by people and POKéMON.$"
-DexDescription_Togepi_2:
-	.string "This POKéMON stores up feelings of\nhappiness inside its shell, then shares\nthem with others.$"
-
-DexDescription_Togetic_1:
-	.string "TOGETIC is said to be a POKéMON that\nbrings good fortune. When the POKéMON\nspots someone who is pure of heart,$"
-DexDescription_Togetic_2:
-	.string "it is said to appear and share its\nhappiness with that person.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Natu_1:
-	.string "NATU has a highly developed jumping\nability. The POKéMON flaps and leaps\nonto tree branches that are taller than$"
-DexDescription_Natu_2:
-	.string "grown-up people to pick at the tree’s\nnew shoots.$"
-	.else
-DexDescription_Natu_1:
-	.string "NATU cannot fly because its wings are\nnot yet fully grown. If your eyes meet\nwith this POKéMON’s eyes, it will stare$"
-DexDescription_Natu_2:
-	.string "back intently at you. But if you move\neven slightly, it will hop away to safety.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Xatu_1:
-	.string "XATU is known to stand motionless while\nstaring at the sun all day long.\nSome people revere it as a mystical$"
-DexDescription_Xatu_2:
-	.string "POKéMON out of their belief that XATU\nis in possession of the power to see\ninto the future.$"
-	.else
-DexDescription_Xatu_1:
-	.string "XATU stands rooted and still in one\nspot all day long. People believe that\nthis POKéMON does so out of fear of$"
-DexDescription_Xatu_2:
-	.string "the terrible things it has foreseen in\nthe future.$"
-	.endif
-
-DexDescription_Mareep_1:
-	.string "MAREEP’s fluffy coat of wool rubs\ntogether and builds a static charge.\nThe more static electricity is charged,$"
-DexDescription_Mareep_2:
-	.string "the more brightly the lightbulb at the\ntip of its tail grows.$"
-
-DexDescription_Flaaffy_1:
-	.string "FLAAFFY’s wool quality changes so that\nit can generate a high amount of static\nelectricity with a small amount of wool.$"
-DexDescription_Flaaffy_2:
-	.string "The bare and slick parts of its hide are\nshielded against electricity.$"
-
-DexDescription_Ampharos_1:
-	.string "AMPHAROS gives off so much light that\nit can be seen even from space.\nPeople in the old days used the light of$"
-DexDescription_Ampharos_2:
-	.string "this POKéMON to send signals back and\nforth with others far away.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Bellossom_1:
-	.string "A BELLOSSOM grows flowers more\nbeautifully if it has evolved from a\nsmelly GLOOM - the stinkier the better.$"
-DexDescription_Bellossom_2:
-	.string "At night, this POKéMON closes its\npetals and goes to sleep.$"
-	.else
-DexDescription_Bellossom_1:
-	.string "When BELLOSSOM gets exposed to plenty\nof sunlight, the leaves ringing its body\nbegin to spin around.$"
-DexDescription_Bellossom_2:
-	.string "This POKéMON’s dancing is renowned in\nthe southern lands.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Marill_1:
-	.string "When fishing for food at the edge of a\nfast-running stream, MARILL wraps its\ntail around the trunk of a tree.$"
-DexDescription_Marill_2:
-	.string "This POKéMON’s tail is flexible and\nconfigured to stretch.$"
-	.else
-DexDescription_Marill_1:
-	.string "MARILL’s oil-filled tail acts much like\na life preserver. If you see just its\ntail bobbing on the water’s surface,$"
-DexDescription_Marill_2:
-	.string "it’s a sure indication that this POKéMON\nis diving beneath the water to feed on\naquatic plants.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Azumarill_1:
-	.string "AZUMARILL can make balloons out of\nair. It makes these air balloons if it\nspots a drowning POKéMON.$"
-DexDescription_Azumarill_2:
-	.string "The air balloons enable the POKéMON in\ntrouble to breathe.$"
-	.else
-DexDescription_Azumarill_1:
-	.string "AZUMARILL’s long ears are indispensable\nsensors. By focusing its hearing, this\nPOKéMON can identify what kinds of$"
-DexDescription_Azumarill_2:
-	.string "prey are around, even in rough and\nfast-running rivers.$"
-	.endif
-
-DexDescription_Sudowoodo_1:
-	.string "SUDOWOODO camouflages itself as a tree\nto avoid being attacked by enemies.\nHowever, because the forelegs remain$"
-DexDescription_Sudowoodo_2:
-	.string "green throughout the year, the POKéMON\nis easily identified as a fake during\nthe winter.$"
-
-DexDescription_Politoed_1:
-	.string "The curled hair on POLITOED’s head is\nproof of its status as a king. It is said\nthat the longer and more curled the$"
-DexDescription_Politoed_2:
-	.string "hair, the more respect this POKéMON\nearns from its peers.$"
-
-DexDescription_Hoppip_1:
-	.string "This POKéMON drifts and floats with the\nwind. If it senses the approach of\nstrong winds, HOPPIP links its leaves$"
-DexDescription_Hoppip_2:
-	.string "with other HOPPIP to prepare against\nbeing blown away.$"
-
-DexDescription_Skiploom_1:
-	.string "SKIPLOOM’s flower blossoms when the\ntemperature rises above 64 degrees F.\nHow much the flower opens depends on$"
-DexDescription_Skiploom_2:
-	.string "the temperature. For that reason, this\nPOKéMON is sometimes used as a\nthermometer.$"
-
-DexDescription_Jumpluff_1:
-	.string "JUMPLUFF rides warm southern winds to\ncross the sea and fly to foreign lands.\nThe POKéMON descends to the ground$"
-DexDescription_Jumpluff_2:
-	.string "when it encounters cold air while it is\nfloating.$"
-
-DexDescription_Aipom_1:
-	.string "AIPOM’s tail ends in a hand-like\nappendage that can be cleverly\nmanipulated.$"
-DexDescription_Aipom_2:
-	.string "However, because the POKéMON uses its\ntail so much, its real hands have become\nrather clumsy.$"
-
-DexDescription_Sunkern_1:
-	.string "SUNKERN tries to move as little as it\npossibly can. It does so because it\ntries to conserve all the nutrients it$"
-DexDescription_Sunkern_2:
-	.string "has stored in its body for its\nevolution. It will not eat a thing, \nsubsisting only on morning dew.$"
-
-DexDescription_Sunflora_1:
-	.string "SUNFLORA converts solar energy into\nnutrition. It moves around actively in\nthe daytime when it is warm.$"
-DexDescription_Sunflora_2:
-	.string "It stops moving as soon as the sun goes\ndown for the night.$"
-
-DexDescription_Yanma_1:
-	.string "YANMA is capable of seeing 360 degrees\nwithout having to move its eyes.\nIt is a great flier that is adept at$"
-DexDescription_Yanma_2:
-	.string "making sudden stops and turning midair.\nThis POKéMON uses its flying ability to\nquickly chase down targeted prey.$"
-
-DexDescription_Wooper_1:
-	.string "WOOPER usually lives in water.\nHowever, it occasionally comes out onto\nland in search of food.$"
-DexDescription_Wooper_2:
-	.string "On land, it coats its body with a gooey,\ntoxic film.$"
-
-DexDescription_Quagsire_1:
-	.string "QUAGSIRE hunts for food by leaving\nits mouth wide open in water and waiting\nfor its prey to blunder in unaware.$"
-DexDescription_Quagsire_2:
-	.string "Because the POKéMON does not move,\nit does not get very hungry.$"
-
-DexDescription_Espeon_1:
-	.string "ESPEON is extremely loyal to any\nTRAINER it considers to be worthy.\nIt is said that this POKéMON developed$"
-DexDescription_Espeon_2:
-	.string "its precognitive powers to protect its\nTRAINER from harm.$"
-
-DexDescription_Umbreon_1:
-	.string "UMBREON evolved as a result of exposure\nto the moon’s waves.\nIt hides silently in darkness and waits$"
-DexDescription_Umbreon_2:
-	.string "for its foes to make a move.\nThe rings on its body glow when it leaps\nto attack.$"
-
-DexDescription_Murkrow_1:
-	.string "MURKROW was feared and loathed as the\nalleged bearer of ill fortune.\nThis POKéMON shows strong interest in$"
-DexDescription_Murkrow_2:
-	.string "anything that sparkles or glitters.\nIt will even try to steal rings from\nwomen.$"
-
-DexDescription_Slowking_1:
-	.string "SLOWKING undertakes research every\nday in an effort to solve the mysteries\nof the world.$"
-DexDescription_Slowking_2:
-	.string "However, this POKéMON apparently\nforgets everything it has learned if\nthe SHELLDER on its head comes off.$"
-
-DexDescription_Misdreavus_1:
-	.string "MISDREAVUS frightens people with a\ncreepy, sobbing cry. The POKéMON\napparently uses its red spheres to$"
-DexDescription_Misdreavus_2:
-	.string "absorb the fearful feelings of foes and\nturn them into nutrition.$"
-
-DexDescription_Unown_1:
-	.string "This POKéMON is shaped like ancient\nwriting. It is a mystery as to which\ncame first, the ancient writings or the$"
-DexDescription_Unown_2:
-	.string "various UNOWN. Research into this\ntopic is ongoing but nothing is known.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Wobbuffet_1:
-	.string "WOBBUFFET does nothing but endure\nattacks - it won’t attack on its own.\nHowever, it won’t endure an attack on$"
-DexDescription_Wobbuffet_2:
-	.string "its tail. When that happens, the\nPOKéMON will try to take the foe with it\nusing DESTINY BOND.$"
-	.else
-DexDescription_Wobbuffet_1:
-	.string "If two or more WOBBUFFET meet, they will\nturn competitive and try to outdo each\nother’s endurance.$"
-DexDescription_Wobbuffet_2:
-	.string "However, they may try to see which one\ncan endure the longest without food.\nTRAINERS need to beware of this habit.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Girafarig_1:
-	.string "GIRAFARIG’s rear head contains a tiny\nbrain that is too small for thinking.\nHowever, the rear head doesn’t need to$"
-DexDescription_Girafarig_2:
-	.string "sleep, so it can keep watch over its\nsurroundings 24 hours a day.$"
-	.else
-DexDescription_Girafarig_1:
-	.string "GIRAFARIG’s rear head also has a brain,\nbut it is small. The rear head attacks in\nresponse to smells and sounds.$"
-DexDescription_Girafarig_2:
-	.string "Approaching this POKéMON from behind\ncan cause the rear head to suddenly\nlash out and bite.$"
-	.endif
-
-DexDescription_Pineco_1:
-	.string "PINECO hangs from a tree branch and\npatiently waits for prey to come along.\nIf the POKéMON is disturbed while$"
-DexDescription_Pineco_2:
-	.string "eating by someone shaking its tree, it\ndrops down to the ground and explodes\nwith no warning.$"
-
-DexDescription_Forretress_1:
-	.string "FORRETRESS conceals itself inside its\nhardened steel shell. The shell is opened\nwhen the POKéMON is catching prey,$"
-DexDescription_Forretress_2:
-	.string "but it does so at such a quick pace\nthat the shell’s inside cannot be seen.$"
-
-DexDescription_Dunsparce_1:
-	.string "DUNSPARCE has a drill for its tail.\nIt uses this tail to burrow into the\nground backwards.$"
-DexDescription_Dunsparce_2:
-	.string "This POKéMON is known to make its nest\nin complex shapes deep under the\nground.$"
-
-DexDescription_Gligar_1:
-	.string "GLIGAR glides through the air without\na sound as if it were sliding.\nThis POKéMON hangs on to the face of$"
-DexDescription_Gligar_2:
-	.string "its foe using its clawed hind legs and\nthe large pincers on its forelegs, then\ninjects the prey with its poison barb.$"
-
-DexDescription_Steelix_1:
-	.string "STEELIX lives even further underground\nthan ONIX. This POKéMON is known to dig\ntowards the earth’s core.$"
-DexDescription_Steelix_2:
-	.string "There are records of this POKéMON\nreaching a depth of over six-tenths\nof a mile underground.$"
-
-DexDescription_Snubbull_1:
-	.string "By baring its fangs and making a scary\nface, SNUBBULL sends smaller POKéMON\nscurrying away in terror.$"
-DexDescription_Snubbull_2:
-	.string "However, this POKéMON seems a little\nsad at making its foes flee.$"
-
-DexDescription_Granbull_1:
-	.string "GRANBULL has a particularly well-\ndeveloped lower jaw. The enormous fangs\nare heavy, causing the POKéMON to tip$"
-DexDescription_Granbull_2:
-	.string "its head back for balance.\nUnless it is startled, it will not try to\nbite indiscriminately.$"
-
-DexDescription_Qwilfish_1:
-	.string "QWILFISH sucks in water, inflating\nitself. This POKéMON uses the pressure\nof the water it swallowed to shoot$"
-DexDescription_Qwilfish_2:
-	.string "toxic quills all at once from all over\nits body. It finds swimming somewhat\nchallenging.$"
-
-DexDescription_Scizor_1:
-	.string "SCIZOR has a body with the hardness of\nsteel. It is not easily fazed by ordinary\nsorts of attacks.$"
-DexDescription_Scizor_2:
-	.string "This POKéMON flaps its wings to\nregulate its body temperature.$"
-
-DexDescription_Shuckle_1:
-	.string "SHUCKLE quietly hides itself under\nrocks, keeping its body concealed\ninside its hard shell while eating$"
-DexDescription_Shuckle_2:
-	.string "berries it has stored away.\nThe berries mix with its body fluids to\nbecome a juice.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Heracross_1:
-	.string "HERACROSS has sharp claws on its feet.\nThese are planted firmly into the\nground or the bark of a tree, giving the$"
-DexDescription_Heracross_2:
-	.string "POKéMON a secure and solid footing\nto forcefully fling away foes with\nits proud horn.$"
-	.else
-DexDescription_Heracross_1:
-	.string "HERACROSS charges in a straight line at\nits foe, slips beneath the foe’s grasp,\nand then scoops up and hurls the$"
-DexDescription_Heracross_2:
-	.string "opponent with its mighty horn.\nThis POKéMON even has enough power\nto topple a massive tree.$"
-	.endif
-
-DexDescription_Sneasel_1:
-	.string "SNEASEL scales trees by punching its\nhooked claws into the bark.\nThis POKéMON seeks out unguarded$"
-DexDescription_Sneasel_2:
-	.string "nests and steals eggs for food while\nthe parents are away.$"
-
-DexDescription_Teddiursa_1:
-	.string "This POKéMON likes to lick its palms that\nare sweetened by being soaked in honey.\nTEDDIURSA concocts its own honey by$"
-DexDescription_Teddiursa_2:
-	.string "blending fruits and pollen collected by\nBEEDRILL.$"
-
-DexDescription_Ursaring_1:
-	.string "In the forests inhabited by URSARING,\nit is said that there are many streams\nand towering trees where they$"
-DexDescription_Ursaring_2:
-	.string "gather food. This POKéMON walks\nthrough its forest gathering food\nevery day.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Slugma_1:
-	.string "SLUGMA does not have any blood in its\nbody. Instead, intensely hot magma\ncirculates throughout this POKéMON’s$"
-DexDescription_Slugma_2:
-	.string "body, carrying essential nutrients and\noxygen to its organs.$"
-	.else
-DexDescription_Slugma_1:
-	.string "Molten magma courses throughout\nSLUGMA’s circulatory system.\nIf this POKéMON is chilled, the magma$"
-DexDescription_Slugma_2:
-	.string "cools and hardens. Its body turns\nbrittle and chunks fall off, reducing\nits size.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Magcargo_1:
-	.string "MAGCARGO’s body temperature is\napproximately 18,000 degrees F.\nWater is vaporized on contact.$"
-DexDescription_Magcargo_2:
-	.string "If this POKéMON is caught in the rain,\nthe raindrops instantly turn into\nsteam, cloaking the area in a thick fog.$"
-	.else
-DexDescription_Magcargo_1:
-	.string "MAGCARGO’s shell is actually its skin\nthat hardened as a result of cooling.\nIts shell is very brittle and fragile -$"
-DexDescription_Magcargo_2:
-	.string "just touching it causes it to crumble\napart. This POKéMON returns to its\noriginal size by dipping itself in magma.$"
-	.endif
-
-DexDescription_Swinub_1:
-	.string "SWINUB roots for food by rubbing its\nsnout against the ground. Its favorite\nfood is a mushroom that grows under$"
-DexDescription_Swinub_2:
-	.string "the cover of dead grass.\nThis POKéMON occasionally roots out\nhot springs.$"
-
-DexDescription_Piloswine_1:
-	.string "PILOSWINE is covered by a thick coat\nof long hair that enables it to endure\nthe freezing cold.$"
-DexDescription_Piloswine_2:
-	.string "This POKéMON uses its tusks to dig up\nfood that has been buried under ice.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Corsola_1:
-	.string "Clusters of CORSOLA congregate in warm\nseas where they serve as ideal hiding\nplaces for smaller POKéMON.$"
-DexDescription_Corsola_2:
-	.string "When the water temperature falls, this\nPOKéMON migrates to the southern seas.$"
-	.else
-DexDescription_Corsola_1:
-	.string "CORSOLA’s branches glitter very\nbeautifully in seven colors when they\ncatch sunlight.$"
-DexDescription_Corsola_2:
-	.string "If any branch breaks off, this POKéMON\ngrows it back in just one night.$"
-	.endif
-
-DexDescription_Remoraid_1:
-	.string "REMORAID sucks in water, then expels it\nat high velocity using its abdominal\nmuscles to shoot down flying prey.$"
-DexDescription_Remoraid_2:
-	.string "When evolution draws near, this POKéMON\ntravels downstream from rivers.$"
-
-DexDescription_Octillery_1:
-	.string "OCTILLERY grabs onto its foe using\nits tentacles. This POKéMON tries to\nimmobilize it before delivering the$"
-DexDescription_Octillery_2:
-	.string "finishing blow.\nIf the foe turns out to be too strong,\nOCTILLERY spews ink to escape.$"
-
-DexDescription_Delibird_1:
-	.string "DELIBIRD carries its food bundled up\nin its tail. There once was a famous\nexplorer who managed to reach the peak$"
-DexDescription_Delibird_2:
-	.string "of Mt. Everest thanks to one of these\nPOKéMON sharing its food.$"
-
-DexDescription_Mantine_1:
-	.string "On sunny days, schools of MANTINE can\nbe seen elegantly leaping over the\nsea’s waves.$"
-DexDescription_Mantine_2:
-	.string "This POKéMON is not bothered by the\nREMORAID that hitches rides.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Skarmory_1:
-	.string "SKARMORY’s steel wings become tattered\nand bashed in from repeated battles.\nOnce a year, the battered wings grow$"
-DexDescription_Skarmory_2:
-	.string "back completely, restoring the cutting\nedges to their pristine state.$"
-	.else
-DexDescription_Skarmory_1:
-	.string "SKARMORY is entirely encased in hard,\nprotective armor. This POKéMON flies at\nclose to 190 mph.$"
-DexDescription_Skarmory_2:
-	.string "It slashes foes with its wings that\npossess swordlike cutting edges.$"
-	.endif
-
-DexDescription_Houndour_1:
-	.string "HOUNDOUR hunt as a coordinated pack.\nThey communicate with each other using\na variety of cries to corner their prey.$"
-DexDescription_Houndour_2:
-	.string "This POKéMON’s remarkable teamwork is\nunparalleled.$"
-
-DexDescription_Houndoom_1:
-	.string "In a HOUNDOOM pack, the one with its\nhorns raked sharply towards the back\nserves a leadership role.$"
-DexDescription_Houndoom_2:
-	.string "These POKéMON choose their leader by\nfighting amongst themselves.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Kingdra_1:
-	.string "KINGDRA sleeps on the seafloor where\nit is otherwise devoid of life.\nWhen a storm arrives, the POKéMON is$"
-DexDescription_Kingdra_2:
-	.string "said to awaken and wander about in\nsearch of prey.$"
-	.else
-DexDescription_Kingdra_1:
-	.string "KINGDRA lives at extreme ocean depths\nthat are otherwise uninhabited.\nIt has long been believed that the$"
-DexDescription_Kingdra_2:
-	.string "yawning of this POKéMON creates\nspiraling ocean currents.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Phanpy_1:
-	.string "PHANPY uses its long nose to shower\nitself. When others gather around, they\nthoroughly douse each other with water.$"
-DexDescription_Phanpy_2:
-	.string "These POKéMON can be seen drying their\nsoaking-wet bodies at the edge of\nwater.$"
-	.else
-DexDescription_Phanpy_1:
-	.string "For its nest, PHANPY digs a vertical pit \nin the ground at the edge of a river.\nIt marks the area around its nest with$"
-DexDescription_Phanpy_2:
-	.string "its trunk to let the others know that\nthe area has been claimed.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Donphan_1:
-	.string "If DONPHAN were to tackle with its hard\nbody, even a house could be destroyed.\nUsing its massive strength, the$"
-DexDescription_Donphan_2:
-	.string "POKéMON helps clear rock and mud slides\nthat block mountain trails.$"
-	.else
-DexDescription_Donphan_1:
-	.string "DONPHAN’s favorite attack is curling\nits body into a ball, then charging at\nits foe while rolling at high speed.$"
-DexDescription_Donphan_2:
-	.string "Once it starts rolling, this POKéMON\ncan’t stop very easily.$"
-	.endif
-
-DexDescription_Porygon2_1:
-	.string "PORYGON2 was created by humans using\nthe power of science. The man-made\nPOKéMON has been endowed with$"
-DexDescription_Porygon2_2:
-	.string "artificial intelligence that enables it\nto learn new gestures and emotions\non its own.$"
-
-DexDescription_Stantler_1:
-	.string "STANTLER’s magnificent antlers were\ntraded at high prices as works of art.\nAs a result, this POKéMON was hunted$"
-DexDescription_Stantler_2:
-	.string "close to extinction by those who were\nafter the priceless antlers.$"
-
-DexDescription_Smeargle_1:
-	.string "SMEARGLE marks the boundaries of its\nterritory using a body fluid that leaks\nout from the tip of its tail.$"
-DexDescription_Smeargle_2:
-	.string "Over 5,000 different marks left by this\nPOKéMON have been found.$"
-
-DexDescription_Tyrogue_1:
-	.string "TYROGUE becomes stressed out if it\ndoes not get to train every day.\nWhen raising this POKéMON, the TRAINER$"
-DexDescription_Tyrogue_2:
-	.string "must establish and uphold various\ntraining methods.$"
-
-DexDescription_Hitmontop_1:
-	.string "HITMONTOP spins on its head at high\nspeed, all the while delivering kicks.\nThis technique is a remarkable mix of$"
-DexDescription_Hitmontop_2:
-	.string "both offense and defense at the same\ntime. The POKéMON travels faster\nspinning than it does walking.$"
-
-DexDescription_Smoochum_1:
-	.string "SMOOCHUM actively runs about, but\nalso falls quite often.\nWhenever the chance arrives, it will$"
-DexDescription_Smoochum_2:
-	.string "look for its reflection to make sure its\nface hasn’t become dirty.$"
-
-DexDescription_Elekid_1:
-	.string "ELEKID stores electricity in its body.\nIf it touches metal and accidentally\ndischarges all its built-up electricity,$"
-DexDescription_Elekid_2:
-	.string "this POKéMON begins swinging its arms\nin circles to recharge itself.$"
-
-DexDescription_Magby_1:
-	.string "MAGBY’s state of health is determined\nby observing the fire it breathes.\nIf the POKéMON is spouting yellow$"
-DexDescription_Magby_2:
-	.string "flames from its mouth, it is in good\nhealth. When it is fatigued, black smoke\nwill be mixed in with the flames.$"
-
-DexDescription_Miltank_1:
-	.string "MILTANK gives over five gallons of milk\non a daily basis. Its sweet milk is\nenjoyed by children and grown-ups alike.$"
-DexDescription_Miltank_2:
-	.string "People who can’t drink milk turn it into\nyogurt and eat it instead.$"
-
-DexDescription_Blissey_1:
-	.string "BLISSEY senses sadness with its fluffy\ncoat of fur. If it does so, this POKéMON\nwill rush over to the sad person,$"
-DexDescription_Blissey_2:
-	.string "however far they may be, to share an\negg of happiness that brings a smile\nto any face.$"
-
-DexDescription_Raikou_1:
-	.string "RAIKOU embodies the speed of lightning.\nThe roars of this POKéMON send shock\nwaves shuddering through the air and$"
-DexDescription_Raikou_2:
-	.string "shake the ground as if lightning bolts\nhad come crashing down.$"
-
-DexDescription_Entei_1:
-	.string "ENTEI embodies the passion of magma.\nThis POKéMON is thought to have been\nborn in the eruption of a volcano.$"
-DexDescription_Entei_2:
-	.string "It sends up massive bursts of fire that\nutterly consume all that they touch.$"
-
-DexDescription_Suicune_1:
-	.string "SUICUNE embodies the compassion of\na pure spring of water. It runs across\nthe land with gracefulness.$"
-DexDescription_Suicune_2:
-	.string "This POKéMON has the power to purify\ndirty water.$"
-
-DexDescription_Larvitar_1:
-	.string "LARVITAR is born deep under the ground.\nTo come up to the surface, this POKéMON\nmust eat its way through the soil above.$"
-DexDescription_Larvitar_2:
-	.string "Until it does so, LARVITAR cannot see\nits parent’s face.$"
-
-DexDescription_Pupitar_1:
-	.string "PUPITAR creates a gas inside its body\nthat it compresses and forcefully\nejects to propel itself like a jet.$"
-DexDescription_Pupitar_2:
-	.string "The body is very durable - it avoids\ndamage even if it hits solid steel.$"
-
-DexDescription_Tyranitar_1:
-	.string "TYRANITAR is so overwhelmingly\npowerful, it can bring down a whole\nmountain to make its nest.$"
-DexDescription_Tyranitar_2:
-	.string "This POKéMON wanders about in\nmountains seeking new opponents to\nfight.$"
-
-DexDescription_Lugia_1:
-	.string "LUGIA’s wings pack devastating power -\na light fluttering of its wings can blow\napart regular houses.$"
-DexDescription_Lugia_2:
-	.string "As a result, this POKéMON chooses to\nlive out of sight deep under the sea.$"
-
-DexDescription_HoOh_1:
-	.string "HO-OH’s feathers glow in seven colors\ndepending on the angle at which they\nare struck by light.$"
-DexDescription_HoOh_2:
-	.string "These feathers are said to bring\nhappiness to the bearers. This POKéMON\nis said to live at the foot of a rainbow.$"
-
-DexDescription_Celebi_1:
-	.string "This POKéMON came from the future by\ncrossing over time.\nIt is thought that so long as CELEBI$"
-DexDescription_Celebi_2:
-	.string "appears, a bright and shining future\nawaits us.$"
-
-	.ifdef SAPPHIRE
-DexDescription_Treecko_1:
-	.string "TREECKO is cool, calm, and collected -\nit never panics under any situation.\nIf a bigger foe were to glare at this$"
-DexDescription_Treecko_2:
-	.string "POKéMON, it would glare right back\nwithout conceding an inch of ground.$"
-	.else
-DexDescription_Treecko_1:
-	.string "TREECKO has small hooks on the bottom\nof its feet that enable it to scale\nvertical walls.$"
-DexDescription_Treecko_2:
-	.string "This POKéMON attacks by slamming foes\nwith its thick tail.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Grovyle_1:
-	.string "This POKéMON adeptly flies from branch\nto branch in trees.\nIn a forest, no POKéMON can ever hope$"
-DexDescription_Grovyle_2:
-	.string "to catch a fleeing GROVYLE however\nfast they may be.$"
-	.else
-DexDescription_Grovyle_1:
-	.string "The leaves growing out of GROVYLE’s\nbody are convenient for camouflaging\nit from enemies in the forest.$"
-DexDescription_Grovyle_2:
-	.string "This POKéMON is a master at climbing\ntrees in jungles.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sceptile_1:
-	.string "SCEPTILE has seeds growing on its back.\nThey are said to be bursting with\nnutrients that revitalize trees.$"
-DexDescription_Sceptile_2:
-	.string "This POKéMON raises the trees in a\nforest with loving care.$"
-	.else
-DexDescription_Sceptile_1:
-	.string "The leaves growing on SCEPTILE’s body\nare very sharp edged. This POKéMON is\nvery agile - it leaps all over the$"
-DexDescription_Sceptile_2:
-	.string "branches of trees and jumps on its foe\nfrom above or behind.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Torchic_1:
-	.string "TORCHIC has a place inside its body\nwhere it keeps its flame. Give it a hug -\nit will be glowing with warmth.$"
-DexDescription_Torchic_2:
-	.string "This POKéMON is covered all over by a\nfluffy coat of down.$"
-	.else
-DexDescription_Torchic_1:
-	.string "TORCHIC sticks with its TRAINER,\nfollowing behind with unsteady\nsteps.$"
-DexDescription_Torchic_2:
-	.string "This POKéMON breathes fire of over\n1,800 degrees F, including fireballs\nthat leave the foe scorched black.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Combusken_1:
-	.string "COMBUSKEN battles with the intensely\nhot flames it spews from its beak and\nwith outstandingly destructive kicks.$"
-DexDescription_Combusken_2:
-	.string "This POKéMON’s cry is very loud and\ndistracting.$"
-	.else
-DexDescription_Combusken_1:
-	.string "COMBUSKEN toughens up its legs and\nthighs by running through fields and\nmountains.$"
-DexDescription_Combusken_2:
-	.string "This POKéMON’s legs possess both speed\nand power, enabling it to dole out ten\nkicks in one second.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Blaziken_1:
-	.string "BLAZIKEN has incredibly strong legs -\nit can easily clear a 30-story building\nin one leap.$"
-DexDescription_Blaziken_2:
-	.string "This POKéMON’s blazing punches leave\nits foes scorched and blackened.$"
-	.else
-DexDescription_Blaziken_1:
-	.string "In battle, BLAZIKEN blows out intense\nflames from its wrists and attacks foes\ncourageously.$"
-DexDescription_Blaziken_2:
-	.string "The stronger the foe, the more\nintensely this POKéMON’s wrists burn.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Mudkip_1:
-	.string "In water, MUDKIP breathes using the\ngills on its cheeks.\nIf it is faced with a tight situation in$"
-DexDescription_Mudkip_2:
-	.string "battle, this POKéMON will unleash its\namazing power - it can crush rocks\nbigger than itself.$"
-	.else
-DexDescription_Mudkip_1:
-	.string "The fin on MUDKIP’s head acts as highly\nsensitive radar. Using this fin to sense\nmovements of water and air, this$"
-DexDescription_Mudkip_2:
-	.string "POKéMON can determine what is taking\nplace around it without using its eyes.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Marshtomp_1:
-	.string "MARSHTOMP is much faster at traveling\nthrough mud than it is at swimming.\nThis POKéMON’s hindquarters exhibit$"
-DexDescription_Marshtomp_2:
-	.string "obvious development, giving it the\nability to walk on just its hind legs.$"
-	.else
-DexDescription_Marshtomp_1:
-	.string "The surface of MARSHTOMP’s body is\nenveloped by a thin, sticky film that\nenables it to live on land.$"
-DexDescription_Marshtomp_2:
-	.string "This POKéMON plays in mud on beaches\nwhen the ocean tide is low.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Swampert_1:
-	.string "SWAMPERT predicts storms by sensing\nsubtle differences in the sounds of\nwaves and tidal winds with its fins.$"
-DexDescription_Swampert_2:
-	.string "If a storm is approaching, it piles up\nboulders to protect itself.$"
-	.else
-DexDescription_Swampert_1:
-	.string "SWAMPERT is very strong. It has enough\npower to easily drag a boulder weighing\nmore than a ton.$"
-DexDescription_Swampert_2:
-	.string "This POKéMON also has powerful vision\nthat lets it see even in murky water.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Poochyena_1:
-	.string "POOCHYENA is an omnivore - it will eat\nanything. A distinguishing feature is\nhow large its fangs are compared to$"
-DexDescription_Poochyena_2:
-	.string "its body. This POKéMON tries to\nintimidate its foes by making the hair\non its tail bristle out.$"
-	.else
-DexDescription_Poochyena_1:
-	.string "At first sight, POOCHYENA takes a bite\nat anything that moves.\nThis POKéMON chases after prey until$"
-DexDescription_Poochyena_2:
-	.string "the victim becomes exhausted.\nHowever, it may turn tail if the prey\nstrikes back.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Mightyena_1:
-	.string "MIGHTYENA travel and act as a pack\nin the wild. The memory of its life in the\nwild compels the POKéMON to obey only$"
-DexDescription_Mightyena_2:
-	.string "those TRAINERS that it recognizes to\npossess superior skill.$"
-	.else
-DexDescription_Mightyena_1:
-	.string "MIGHTYENA gives obvious signals when\nit is preparing to attack. It starts to\ngrowl deeply and then flattens its body.$"
-DexDescription_Mightyena_2:
-	.string "This POKéMON will bite savagely with its\nsharply pointed fangs.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Zigzagoon_1:
-	.string "The hair on ZIGZAGOON’s back is \nbristly. It rubs the hard back hair\nagainst trees to leave its territorial$"
-DexDescription_Zigzagoon_2:
-	.string "markings.\nThis POKéMON may play dead to fool foes\nin battle.$"
-	.else
-DexDescription_Zigzagoon_1:
-	.string "ZIGZAGOON restlessly wanders\neverywhere at all times. This POKéMON\ndoes so because it is very curious.$"
-DexDescription_Zigzagoon_2:
-	.string "It becomes interested in anything\nthat it happens to see.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Linoone_1:
-	.string "When hunting, LINOONE will make a\nbeeline straight for the prey at a full\nrun. While this POKéMON is capable of$"
-DexDescription_Linoone_2:
-	.string "topping 60 mph, it has to come to a\nscreeching halt before it can turn.$"
-	.else
-DexDescription_Linoone_1:
-	.string "LINOONE always runs full speed and only\nin straight lines. If facing an obstacle,\nit makes a right-angle turn to evade it.$"
-DexDescription_Linoone_2:
-	.string "This POKéMON is very challenged by\ngently curving roads.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wurmple_1:
-	.string "WURMPLE is targeted by SWELLOW as\nprey. This POKéMON will try to resist by\npointing the spikes on its rear at the$"
-DexDescription_Wurmple_2:
-	.string "attacking predator.\nIt will weaken the foe by leaking poison\nfrom the spikes.$"
-	.else
-DexDescription_Wurmple_1:
-	.string "Using the spikes on its rear end,  \nWURMPLE peels the bark off trees and\nfeeds on the sap that oozes out.$"
-DexDescription_Wurmple_2:
-	.string "This POKéMON’s feet are tipped with\nsuction pads that allow it to cling to\nglass without slipping.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Silcoon_1:
-	.string "SILCOON was thought to endure hunger\nand not consume anything before its\nevolution. However, it is now thought$"
-DexDescription_Silcoon_2:
-	.string "that this POKéMON slakes its thirst by\ndrinking rainwater that collects on its\nsilk.$"
-	.else
-DexDescription_Silcoon_1:
-	.string "SILCOON tethers itself to a tree branch\nusing silk to keep from falling. There, \nthis POKéMON hangs quietly while it$"
-DexDescription_Silcoon_2:
-	.string "awaits evolution.\nIt peers out of the silk cocoon through\na small hole.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Beautifly_1:
-	.string "BEAUTIFLY has a long mouth like a coiled\nneedle, which is very convenient for\ncollecting pollen from flowers.$"
-DexDescription_Beautifly_2:
-	.string "This POKéMON rides the spring winds as\nit flits around gathering pollen.$"
-	.else
-DexDescription_Beautifly_1:
-	.string "BEAUTIFLY’s favorite food is the sweet\npollen of flowers. If you want to see\nthis POKéMON, just leave a potted$"
-DexDescription_Beautifly_2:
-	.string "flower by an open window. BEAUTIFLY\nis sure to come looking for pollen.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Cascoon_1:
-	.string "If it is attacked, CASCOON remains\nmotionless however badly it may be\nhurt. It does so because if it were to$"
-DexDescription_Cascoon_2:
-	.string "move, its body would be weak upon\nevolution. This POKéMON will also not\nforget the pain it endured.$"
-	.else
-DexDescription_Cascoon_1:
-	.string "CASCOON makes its protective cocoon\nby wrapping its body entirely with a\nfine silk from its mouth. Once the silk$"
-DexDescription_Cascoon_2:
-	.string "goes around its body, it hardens.\nThis POKéMON prepares for its evolution\ninside the cocoon.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Dustox_1:
-	.string "When DUSTOX flaps its wings, a fine\ndust is scattered all over. This dust is\nactually a powerful poison that will$"
-DexDescription_Dustox_2:
-	.string "even make a pro wrestler sick.\nThis POKéMON searches for food using\nits antennae like radar.$"
-	.else
-DexDescription_Dustox_1:
-	.string "DUSTOX is instinctively drawn to light.\nSwarms of this POKéMON are attracted\nby the bright lights of cities, where$"
-DexDescription_Dustox_2:
-	.string "they wreak havoc by stripping the\nleaves off roadside trees for food.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lotad_1:
-	.string "LOTAD is said to have dwelled on land\nbefore. However, this POKéMON is\nthought to have returned to water$"
-DexDescription_Lotad_2:
-	.string "because the leaf on its head grew large\nand heavy. It now lives by floating\natop the water.$"
-	.else
-DexDescription_Lotad_1:
-	.string "LOTAD live in ponds and lakes, where\nthey float on the surface.\nIt grows weak if its broad leaf dies.$"
-DexDescription_Lotad_2:
-	.string "On rare occasions, this POKéMON travels\non land in search of clean water.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lombre_1:
-	.string "LOMBRE’s entire body is covered by a\nslippery, slimy film. It feels horribly\nunpleasant to be touched by this$"
-DexDescription_Lombre_2:
-	.string "POKéMON’s hands.\nLOMBRE is often mistaken for a human\nchild.$"
-	.else
-DexDescription_Lombre_1:
-	.string "LOMBRE is nocturnal - it will get active\nafter dusk. It is also a mischief-maker.\nWhen this POKéMON spots anglers,$"
-DexDescription_Lombre_2:
-	.string "it tugs on their fishing lines from\nbeneath the surface and enjoys their\nconsternation.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Ludicolo_1:
-	.string "Upon hearing an upbeat and cheerful\nrhythm, the cells in LUDICOLO’s body\nbecome very energetic and active.$"
-DexDescription_Ludicolo_2:
-	.string "Even in battle, this POKéMON will\nexhibit an amazing amount of power.$"
-	.else
-DexDescription_Ludicolo_1:
-	.string "LUDICOLO begins dancing as soon as\nit hears cheerful, festive music.\nThis POKéMON is said to appear when it$"
-DexDescription_Ludicolo_2:
-	.string "hears the singing of children on hiking\noutings.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Seedot_1:
-	.string "SEEDOT looks exactly like an acorn\nwhen it is dangling from a tree branch.\nIt startles other POKéMON by suddenly$"
-DexDescription_Seedot_2:
-	.string "moving.\nThis POKéMON polishes its body once a\nday using leaves.$"
-	.else
-DexDescription_Seedot_1:
-	.string "SEEDOT attaches itself to a tree\nbranch using the top of its head.\nIt sucks moisture from the tree while$"
-DexDescription_Seedot_2:
-	.string "hanging off the branch.\nThe more water it drinks, the glossier\nthis POKéMON’s body becomes.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Nuzleaf_1:
-	.string "This POKéMON pulls out the leaf on its\nhead and makes a flute with it.\nThe sound of NUZLEAF’s flute strikes$"
-DexDescription_Nuzleaf_2:
-	.string "fear and uncertainty in the hearts of\npeople lost in a forest.$"
-	.else
-DexDescription_Nuzleaf_1:
-	.string "NUZLEAF live in densely overgrown\nforests. They occasionally venture out\nof the forest to startle people.$"
-DexDescription_Nuzleaf_2:
-	.string "This POKéMON dislikes having its long\nnose pinched.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Shiftry_1:
-	.string "SHIFTRY’s large fans generate awesome\ngusts of wind at a speed close to 100\nfeet per second. The whipped-up wind$"
-DexDescription_Shiftry_2:
-	.string "blows anything away.\nThis POKéMON chooses to live quietly\ndeep in forests.$"
-	.else
-DexDescription_Shiftry_1:
-	.string "SHIFTRY is a mysterious POKéMON that\nis said to live atop towering trees \ndating back over a thousand years.$"
-DexDescription_Shiftry_2:
-	.string "It creates terrific windstorms with\nthe fans it holds.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Taillow_1:
-	.string "TAILLOW is young - it has only just\nleft its nest. As a result, it sometimes\nbecomes lonesome and cries at night.$"
-DexDescription_Taillow_2:
-	.string "This POKéMON feeds on WURMPLE that\nlive in forests.$"
-	.else
-DexDescription_Taillow_1:
-	.string "TAILLOW courageously stands its\nground against foes, however strong\nthey may be.$"
-DexDescription_Taillow_2:
-	.string "This gutsy POKéMON will remain defiant\neven after a loss. On the other hand,\nit cries loudly if it becomes hungry.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Swellow_1:
-	.string "SWELLOW is very conscientious about\nthe upkeep of its glossy wings.\nOnce two SWELLOW are gathered, they$"
-DexDescription_Swellow_2:
-	.string "diligently take care of cleaning each\nother’s wings.$"
-	.else
-DexDescription_Swellow_1:
-	.string "SWELLOW flies high above our heads,\nmaking graceful arcs in the sky.\nThis POKéMON dives at a steep angle as$"
-DexDescription_Swellow_2:
-	.string "soon as it spots its prey. The hapless\nprey is tightly grasped by SWELLOW’s\nclawed feet, preventing escape.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wingull_1:
-	.string "WINGULL rides updrafts rising from the\nsea by extending its long and narrow\nwings to glide.$"
-DexDescription_Wingull_2:
-	.string "This POKéMON’s long beak is useful for\ncatching prey.$"
-	.else
-DexDescription_Wingull_1:
-	.string "WINGULL has the habit of carrying prey\nand valuables in its beak and hiding\nthem in all sorts of locations.$"
-DexDescription_Wingull_2:
-	.string "This POKéMON rides the winds and flies\nas if it were skating across the sky.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Pelipper_1:
-	.string "PELIPPER searches for food while in\nflight by skimming the wave tops.\nThis POKéMON dips its large bill in the$"
-DexDescription_Pelipper_2:
-	.string "sea to scoop up food, then swallows\neverything in one big gulp.$"
-	.else
-DexDescription_Pelipper_1:
-	.string "PELIPPER is a flying transporter that\ncarries small POKéMON and eggs inside\nits massive bill.$"
-DexDescription_Pelipper_2:
-	.string "This POKéMON builds its nest on steep\ncliffs facing the sea.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Ralts_1:
-	.string "RALTS has the ability to sense the\nemotions of people.\nIf its TRAINER is in a cheerful mood,$"
-DexDescription_Ralts_2:
-	.string "this POKéMON grows cheerful and joyous\nin the same way.$"
-	.else
-DexDescription_Ralts_1:
-	.string "RALTS senses the emotions of\npeople using the horns on its head.\nThis POKéMON rarely appears before$"
-DexDescription_Ralts_2:
-	.string "people. But when it does, it draws\ncloser if it senses that the person has\na positive disposition.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Kirlia_1:
-	.string "KIRLIA uses the horns on its head\nto amplify its psychokinetic power.\nWhen the POKéMON uses its power,$"
-DexDescription_Kirlia_2:
-	.string "the air around it becomes distorted,\ncreating mirages of nonexistent\nscenery.$"
-	.else
-DexDescription_Kirlia_1:
-	.string "It is said that a KIRLIA that is\nexposed to the positive emotions of\nits TRAINER grows beautiful.$"
-DexDescription_Kirlia_2:
-	.string "This POKéMON controls psychokinetic\npowers with its highly developed brain.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Gardevoir_1:
-	.string "GARDEVOIR has the psychokinetic\npower to distort the dimensions and\ncreate a small black hole.$"
-DexDescription_Gardevoir_2:
-	.string "This POKéMON will try to protect its\nTRAINER even at the risk of its own\nlife.$"
-	.else
-DexDescription_Gardevoir_1:
-	.string "GARDEVOIR has the ability to read the\nfuture. If it senses impending danger\nto its TRAINER, this POKéMON is said to$"
-DexDescription_Gardevoir_2:
-	.string "unleash its psychokinetic energy at\nfull power.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Surskit_1:
-	.string "If SURSKIT senses danger, it secretes\na thick, sugary syrup from the tip of\nits head.$"
-DexDescription_Surskit_2:
-	.string "There are some POKéMON that love\neating this syrup.$"
-	.else
-DexDescription_Surskit_1:
-	.string "From the tips of its feet, SURSKIT\nsecretes an oil that enables it to walk\non water as if it were skating.$"
-DexDescription_Surskit_2:
-	.string "This POKéMON feeds on microscopic\norganisms in ponds and lakes.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Masquerain_1:
-	.string "MASQUERAIN’s antennas have eyelike\npatterns that usually give it an angry\nlook. If the “eyes” are droopy and$"
-DexDescription_Masquerain_2:
-	.string "appear sad, it is said to be a sign\nthat a heavy rainfall is on its way.$"
-	.else
-DexDescription_Masquerain_1:
-	.string "MASQUERAIN intimidates enemies with\nthe eyelike patterns on its antennas.\nThis POKéMON flaps its four wings to$"
-DexDescription_Masquerain_2:
-	.string "freely fly in any direction - even\nsideways and backwards - as if it were\na helicopter.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Shroomish_1:
-	.string "If SHROOMISH senses danger, it shakes\nits body and scatters spores from the\ntop of its head.$"
-DexDescription_Shroomish_2:
-	.string "This POKéMON’s spores are so toxic,\nthey make trees and weeds wilt.$"
-	.else
-DexDescription_Shroomish_1:
-	.string "SHROOMISH live in damp soil in the dark\ndepths of forests. They are often\nfound keeping still under fallen leaves.$"
-DexDescription_Shroomish_2:
-	.string "This POKéMON feeds on compost that\nis made up of fallen, rotted leaves.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Breloom_1:
-	.string "The seeds ringing BRELOOM’s tail are\nmade of hardened toxic spores. It is\nhorrible to eat the seeds.$"
-DexDescription_Breloom_2:
-	.string "Just taking a bite of this POKéMON’s\nseed will cause your stomach to rumble.$"
-	.else
-DexDescription_Breloom_1:
-	.string "BRELOOM closes in on its foe with light\nand sprightly footwork, then throws\npunches with its stretchy arms.$"
-DexDescription_Breloom_2:
-	.string "This POKéMON’s fighting technique puts\nboxers to shame.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Slakoth_1:
-	.string "SLAKOTH’s heart beats just once a\nminute. Whatever happens, it is\ncontent to loaf around motionless.$"
-DexDescription_Slakoth_2:
-	.string "It is rare to see this POKéMON in\nmotion.$"
-	.else
-DexDescription_Slakoth_1:
-	.string "SLAKOTH lolls around for over twenty\nhours every day. Because it moves so\nlittle, it does not need much food.$"
-DexDescription_Slakoth_2:
-	.string "This POKéMON’s sole daily meal consists\nof just three leaves.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Vigoroth_1:
-	.string "VIGOROTH is simply incapable of\nremaining still. Even when it tries to\nsleep, the blood in its veins grows$"
-DexDescription_Vigoroth_2:
-	.string "agitated, compelling this POKéMON to\nrun wild throughout the jungle before\nit can settle down.$"
-	.else
-DexDescription_Vigoroth_1:
-	.string "VIGOROTH is always itching and agitated\nto go on a wild rampage. It simply can’t\ntolerate sitting still for even a minute.$"
-DexDescription_Vigoroth_2:
-	.string "This POKéMON’s stress level rises if it\ncan’t be moving constantly.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Slaking_1:
-	.string "Wherever SLAKING live, rings of over\na yard in diameter appear in grassy\nfields. They are made by the POKéMON$"
-DexDescription_Slaking_2:
-	.string "as it eats all the grass within reach\nwhile lying prone on the ground.$"
-	.else
-DexDescription_Slaking_1:
-	.string "SLAKING spends all day lying down and\nlolling about.\nIt eats grass growing within its reach.$"
-DexDescription_Slaking_2:
-	.string "If it eats all the grass it can reach,\nthis POKéMON reluctantly moves to\nanother spot.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Nincada_1:
-	.string "NINCADA lives underground. It uses its\nsharp claws to carve the roots of trees\nand absorb moisture and nutrients.$"
-DexDescription_Nincada_2:
-	.string "This POKéMON can’t withstand bright\nsunlight so avoids it.$"
-	.else
-DexDescription_Nincada_1:
-	.string "NINCADA lives underground for many\nyears in complete darkness.\nThis POKéMON absorbs nutrients from$"
-DexDescription_Nincada_2:
-	.string "the roots of trees. It stays motionless\nas it waits for evolution.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Ninjask_1:
-	.string "If NINJASK is not trained properly,\nit will refuse to obey the TRAINER and\ncry loudly continuously.$"
-DexDescription_Ninjask_2:
-	.string "Because of this quality, this POKéMON\nis said to be one that puts the\nTRAINER’s abilities to the test.$"
-	.else
-DexDescription_Ninjask_1:
-	.string "NINJASK moves around at such a high\nspeed that it cannot be seen, even\nwhile its crying can be clearly heard.$"
-DexDescription_Ninjask_2:
-	.string "For that reason, this POKéMON was long\nbelieved to be invisible.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Shedinja_1:
-	.string "SHEDINJA is a peculiar POKéMON.\nIt seems to appear unsought in a POKé\nBALL after a NINCADA evolves.$"
-DexDescription_Shedinja_2:
-	.string "This bizarre POKéMON is entirely\nimmobile - it doesn’t even breathe.$"
-	.else
-DexDescription_Shedinja_1:
-	.string "SHEDINJA’s hard body doesn’t move -\nnot even a twitch. In fact, its body\nappears to be merely a hollow shell.$"
-DexDescription_Shedinja_2:
-	.string "It is believed that this POKéMON will\nsteal the spirit of anyone peering into\nits hollow body from its back.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Whismur_1:
-	.string "WHISMUR is very timid. If it starts to\ncry loudly, it becomes startled by its\nown crying and cries even harder.$"
-DexDescription_Whismur_2:
-	.string "When it finally stops crying, the\nPOKéMON goes to sleep, all tired out.$"
-	.else
-DexDescription_Whismur_1:
-	.string "Normally, WHISMUR’s voice is very quiet -\nit is barely audible even if one is\npaying close attention.$"
-DexDescription_Whismur_2:
-	.string "However, if this POKéMON senses danger,\nit starts crying at an earsplitting\nvolume.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Loudred_1:
-	.string "LOUDRED shouts while stamping its feet.\nAfter it finishes shouting, this\nPOKéMON becomes incapable of hearing$"
-DexDescription_Loudred_2:
-	.string "anything for a while. This is considered\nto be a weak point.$"
-	.else
-DexDescription_Loudred_1:
-	.string "LOUDRED’s bellowing can completely\ndecimate a wood-frame house. It uses\nits voice to punish its foes.$"
-DexDescription_Loudred_2:
-	.string "This POKéMON’s round ears serve as\nloudspeakers.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Exploud_1:
-	.string "EXPLOUD communicates its feelings to\nthe others by emitting whistle-like\nsounds from the tubes on its body.$"
-DexDescription_Exploud_2:
-	.string "This POKéMON only raises its voice when\nit is in battle.$"
-	.else
-DexDescription_Exploud_1:
-	.string "EXPLOUD triggers earthquakes with the\ntremors it creates by bellowing. If this\nPOKéMON violently inhales from the$"
-DexDescription_Exploud_2:
-	.string "ports on its body, it’s a sign that it is\npreparing to let loose a huge bellow.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Makuhita_1:
-	.string "MAKUHITA has a tireless spirit -\nit will never give up hope. It eats a lot\nof food, gets plenty of sleep, and it$"
-DexDescription_Makuhita_2:
-	.string "trains very rigorously. By living that\nway, this POKéMON packs its body with\nenergy.$"
-	.else
-DexDescription_Makuhita_1:
-	.string "MAKUHITA is tenacious - it will keep\ngetting up and attacking its foe\nhowever many times it is knocked down.$"
-DexDescription_Makuhita_2:
-	.string "Every time it gets back up, this\nPOKéMON stores more energy in its body\nfor evolving.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Hariyama_1:
-	.string "HARIYAMA’s thick body may appear fat,\nbut it is actually a hunk of solid muscle.\nIf this POKéMON bears down and$"
-DexDescription_Hariyama_2:
-	.string "tightens all its muscles, its body\nbecomes as hard as a rock.$"
-	.else
-DexDescription_Hariyama_1:
-	.string "HARIYAMA practices its straight-arm\nslaps in any number of locations.\nOne hit of this POKéMON’s powerful,$"
-DexDescription_Hariyama_2:
-	.string "openhanded, straight-arm punches\ncould snap a telephone pole in two.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Azurill_1:
-	.string "AZURILL’s tail is large and bouncy.\nIt is packed full of the nutrients this\nPOKéMON needs to grow.$"
-DexDescription_Azurill_2:
-	.string "AZURILL can be seen bouncing and\nplaying on its big, rubbery tail.$"
-	.else
-DexDescription_Azurill_1:
-	.string "AZURILL spins its tail as if it were a\nlasso, then hurls it far. The momentum\nof the throw sends its body flying, too.$"
-DexDescription_Azurill_2:
-	.string "Using this unique action, one of these\nPOKéMON managed to hurl itself a record\n33 feet.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Nosepass_1:
-	.string "NOSEPASS had been said to be completely\nunmoving, with its magnetic nose\npointed due north.$"
-DexDescription_Nosepass_2:
-	.string "However, close observation has revealed\nthat the POKéMON actually moves by a\nlittle over 3/8 of an inch every year.$"
-	.else
-DexDescription_Nosepass_1:
-	.string "NOSEPASS’s magnetic nose is always\npointed to the north. If two of these\nPOKéMON meet, they cannot turn$"
-DexDescription_Nosepass_2:
-	.string "their faces to each other when they\nare close because their magnetic noses\nrepel one another.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Skitty_1:
-	.string "SKITTY is known to chase around\nplayfully after its own tail. In the wild,\nthis POKéMON lives in holes in the trees$"
-DexDescription_Skitty_2:
-	.string "of forests. It is very popular as a pet\nbecause of its adorable looks.$"
-	.else
-DexDescription_Skitty_1:
-	.string "SKITTY has the habit of becoming\nfascinated by moving objects and\nchasing them around.$"
-DexDescription_Skitty_2:
-	.string "This POKéMON is known to chase after\nits own tail and become dizzy.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Delcatty_1:
-	.string "DELCATTY sleeps anywhere it wants\nwithout keeping a permanent nest.\nIf other POKéMON approach it as it$"
-DexDescription_Delcatty_2:
-	.string "sleeps, this POKéMON will never fight -\nit will just move away somewhere else.$"
-	.else
-DexDescription_Delcatty_1:
-	.string "DELCATTY prefers to live an unfettered\nexistence in which it can do as it\npleases at its own pace.$"
-DexDescription_Delcatty_2:
-	.string "Because this POKéMON eats and sleeps\nwhenever it decides, its daily routines\nare completely random.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sableye_1:
-	.string "SABLEYE digs the ground with sharpened\nclaws to find rocks that it eats.\nSubstances in the eaten rocks$"
-DexDescription_Sableye_2:
-	.string "crystallize and rise up to the POKéMON’s\nbody surface.$"
-	.else
-DexDescription_Sableye_1:
-	.string "SABLEYE lead quiet lives deep inside\ncaverns. They are feared, however,\nbecause these POKéMON are thought to$"
-DexDescription_Sableye_2:
-	.string "steal the spirits of people when their\neyes burn with a sinister glow in the\ndarkness.$"
-	.endif
-
-	.ifdef SAPPHIRE
-
-DexDescription_Mawile_1:
-	.string "Don’t be taken in by this POKéMON’s\ncute face - it’s very dangerous. MAWILE\nfools the foe into letting down its$"
-DexDescription_Mawile_2:
-	.string "guard, then chomps down with its\nmassive jaws. The steel jaws are really\nhorns that have been transformed.$"
-
-	.else
-
-	.if REVISION >= 1
-DexDescription_Mawile_1:
-	.string "MAWILE’s huge jaws are actually steel\nhorns that have been transformed.\nIts docile-looking face serves to lull$"
-DexDescription_Mawile_2:
-	.string "its foe into letting down its guard.\nWhen the foe least expects it, MAWILE\nchomps it with its gaping jaws.$"
-	.else
-DexDescription_Mawile_1:
-	.string "MAWHILE’s huge jaws are actually steel\nhorns that have been transformed.\nIts docile-looking face serves to lull$"
-DexDescription_Mawile_2:
-	.string "its foe into letting down its guard.\nWhen the foe least expects it, MAWHILE\nchomps it with its gaping jaws.$"
-	.endif @ REVISION >= 1
-
-	.endif @ SAPPHIRE
-
-	.ifdef SAPPHIRE
-DexDescription_Aron_1:
-	.string "ARON has a body of steel.\nWith one all-out charge, this POKéMON\ncan demolish even a heavy dump truck.$"
-DexDescription_Aron_2:
-	.string "The destroyed dump truck then becomes\na handy meal for the POKéMON.$"
-	.else
-DexDescription_Aron_1:
-	.string "This POKéMON has a body of steel.\nTo make its body, ARON feeds on\niron ore that it digs from mountains.$"
-DexDescription_Aron_2:
-	.string "Occasionally, it causes major trouble by\neating bridges and rails.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lairon_1:
-	.string "LAIRON feeds on iron contained in\nrocks and water. It makes its nest on\nmountains where iron ore is buried.$"
-DexDescription_Lairon_2:
-	.string "As a result, the POKéMON often clashes\nwith humans mining the iron ore.$"
-	.else
-DexDescription_Lairon_1:
-	.string "LAIRON tempers its steel body by\ndrinking highly nutritious mineral\nspringwater until it is bloated.$"
-DexDescription_Lairon_2:
-	.string "This POKéMON makes its nest close to\nsprings of delicious water.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Aggron_1:
-	.string "AGGRON is surprisingly protective\nof its environment. If its mountain\nis ravaged by a landslide or a fire, this$"
-DexDescription_Aggron_2:
-	.string "POKéMON will haul topsoil to the area,\nplant trees, and beautifully restore its\nown territory.$"
-	.else
-DexDescription_Aggron_1:
-	.string "AGGRON claims an entire mountain as its\nown territory. It mercilessly beats up\nanything that violates its environment.$"
-DexDescription_Aggron_2:
-	.string "This POKéMON vigilantly patrols its\nterritory at all times.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Meditite_1:
-	.string "MEDITITE heightens its inner energy\nthrough meditation. It survives on\njust one berry a day.$"
-DexDescription_Meditite_2:
-	.string "Minimal eating is another aspect of\nthis POKéMON’s training.$"
-	.else
-DexDescription_Meditite_1:
-	.string "MEDITITE undertakes rigorous mental\ntraining deep in the mountains.\nHowever, whenever it meditates, this$"
-DexDescription_Meditite_2:
-	.string "POKéMON always loses its concentration\nand focus. As a result, its training\nnever ends.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Medicham_1:
-	.string "Through the power of meditation,\nMEDICHAM developed its sixth sense.\nIt gained the ability to use$"
-DexDescription_Medicham_2:
-	.string "psychokinetic powers. This POKéMON is\nknown to meditate for a whole month\nwithout eating.$"
-	.else
-DexDescription_Medicham_1:
-	.string "It is said that through meditation,\nMEDICHAM heightens energy inside\nits body and sharpens its sixth sense.$"
-DexDescription_Medicham_2:
-	.string "This POKéMON hides its presence by\nmerging itself with fields and\nmountains.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Electrike_1:
-	.string "ELECTRIKE runs faster than the human\neye can follow. The friction from\nrunning is converted into electricity,$"
-DexDescription_Electrike_2:
-	.string "which is then stored in this POKéMON’s\nfur.$"
-	.else
-DexDescription_Electrike_1:
-	.string "ELECTRIKE stores electricity in its\nlong body hair. This POKéMON stimulates\nits leg muscles with electric charges.$"
-DexDescription_Electrike_2:
-	.string "These jolts of power give its legs\nexplosive acceleration performance.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Manectric_1:
-	.string "MANECTRIC discharges strong\nelectricity from its mane. The mane is\nused for collecting electricity in the$"
-DexDescription_Manectric_2:
-	.string "atmosphere. This POKéMON creates\nthunderclouds above its head.$"
-	.else
-DexDescription_Manectric_1:
-	.string "MANECTRIC is constantly discharging\nelectricity from its mane. The sparks\nsometimes ignite forest fires.$"
-DexDescription_Manectric_2:
-	.string "When it enters a battle, this POKéMON\ncreates thunderclouds.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Plusle_1:
-	.string "When PLUSLE is cheering on its partner,\nit flashes with electric sparks from all\nover its body.$"
-DexDescription_Plusle_2:
-	.string "If its partner loses, this POKéMON cries\nloudly.$"
-	.else
-DexDescription_Plusle_1:
-	.string "PLUSLE always acts as a cheerleader\nfor its partners. Whenever a teammate\nputs out a good effort in battle, this$"
-DexDescription_Plusle_2:
-	.string "POKéMON shorts out its body to create\nthe crackling noises of sparks to show\nits joy.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Minun_1:
-	.string "MINUN loves to cheer on its partner in\nbattle. It gives off sparks from its\nbody while it is doing so.$"
-DexDescription_Minun_2:
-	.string "If its partner is in trouble, this\nPOKéMON gives off increasing amounts\nof sparks.$"
-	.else
-DexDescription_Minun_1:
-	.string "MINUN is more concerned about cheering\non its partners than its own safety.\nIt shorts out the electricity in its$"
-DexDescription_Minun_2:
-	.string "body to create brilliant showers of\nsparks to cheer on its teammates.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Volbeat_1:
-	.string "VOLBEAT’s tail glows like a lightbulb.\nWith other VOLBEAT, it uses its tail to\ndraw geometric shapes in the night sky.$"
-DexDescription_Volbeat_2:
-	.string "This POKéMON loves the sweet aroma\ngiven off by ILLUMISE.$"
-	.else
-DexDescription_Volbeat_1:
-	.string "With the arrival of night, VOLBEAT emits\nlight from its tail. It communicates with\nothers by adjusting the intensity and$"
-DexDescription_Volbeat_2:
-	.string "flashing of its light.\nThis POKéMON is attracted by the sweet\naroma of ILLUMISE.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Illumise_1:
-	.string "ILLUMISE leads a flight of illuminated\nVOLBEAT to draw signs in the night sky.\nThis POKéMON is said to earn greater$"
-DexDescription_Illumise_2:
-	.string "respect from its peers by composing\nmore complex designs in the sky.$"
-	.else
-DexDescription_Illumise_1:
-	.string "ILLUMISE attracts a swarm of VOLBEAT\nusing a sweet fragrance. Once the\nVOLBEAT have gathered, this POKéMON$"
-DexDescription_Illumise_2:
-	.string "leads the lit-up swarm in drawing\ngeometric designs on the canvas of\nthe night sky.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Roselia_1:
-	.string "On extremely rare occasions, a ROSELIA\nis said to appear with its flowers in\nunusual colors.$"
-DexDescription_Roselia_2:
-	.string "The thorns on this POKéMON’s head\ncontain a vicious poison.$"
-	.else
-DexDescription_Roselia_1:
-	.string "ROSELIA shoots sharp thorns as\nprojectiles at any opponent that tries\nto steal the flowers on its arms.$"
-DexDescription_Roselia_2:
-	.string "The aroma of this POKéMON brings\nserenity to living things.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Gulpin_1:
-	.string "Most of GULPIN’s body is made up of its\nstomach - its heart and brain are very\nsmall in comparison.$"
-DexDescription_Gulpin_2:
-	.string "This POKéMON’s stomach contains\nspecial enzymes that dissolve anything.$"
-	.else
-DexDescription_Gulpin_1:
-	.string "Virtually all of GULPIN’s body is its\nstomach. As a result, it can swallow\nsomething its own size.$"
-DexDescription_Gulpin_2:
-	.string "This POKéMON’s stomach contains a\nspecial fluid that digests anything.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Swalot_1:
-	.string "SWALOT has no teeth, so what it\neats, it swallows whole, no matter what.\nIts cavernous mouth yawns widely.$"
-DexDescription_Swalot_2:
-	.string "An automobile tire could easily fit\ninside this POKéMON’s mouth.$"
-	.else
-DexDescription_Swalot_1:
-	.string "When SWALOT spots prey, it spurts out\na hideously toxic fluid from its pores\nand sprays the target.$"
-DexDescription_Swalot_2:
-	.string "Once the prey has weakened, this\nPOKéMON gulps it down whole with its\ncavernous mouth.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Carvanha_1:
-	.string "If anything invades CARVANHA’s\nterritory, it will swarm and tear at the\nintruder with its pointed fangs.$"
-DexDescription_Carvanha_2:
-	.string "On its own, however, this POKéMON turns\nsuddenly timid.$"
-	.else
-DexDescription_Carvanha_1:
-	.string "CARVANHA’s strongly developed jaws\nand its sharply pointed fangs pack the\ndestructive power to rip out boat hulls.$"
-DexDescription_Carvanha_2:
-	.string "Many boats have been attacked and\nsunk by this POKéMON.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sharpedo_1:
-	.string "SHARPEDO can swim at speeds of up to\n75 mph by jetting seawater out of its\nbackside.$"
-DexDescription_Sharpedo_2:
-	.string "This POKéMON’s drawback is its inability\nto swim long distances.$"
-	.else
-DexDescription_Sharpedo_1:
-	.string "Nicknamed “the bully of the sea,”\nSHARPEDO is widely feared.\nIts cruel fangs grow back immediately$"
-DexDescription_Sharpedo_2:
-	.string "if they snap off.\nJust one of these POKéMON can\nthoroughly tear apart a supertanker.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wailmer_1:
-	.string "WAILMER can store water inside its body\nto transform itself into a ball for\nbouncing around on the ground.$"
-DexDescription_Wailmer_2:
-	.string "By filling itself up with more water, this\nPOKéMON can elevate the height of its\nbounces.$"
-	.else
-DexDescription_Wailmer_1:
-	.string "WAILMER’s nostrils are located above\nits eyes. This playful POKéMON loves\nto startle people by forcefully snorting$"
-DexDescription_Wailmer_2:
-	.string "out seawater it stores inside its body\nout of its nostrils.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wailord_1:
-	.string "When chasing prey, WAILORD herds them\nby leaping out of the water and making\na humongous splash.$"
-DexDescription_Wailord_2:
-	.string "It is breathtaking to see this POKéMON\nleaping out of the sea with others in\nits pod.$"
-	.else
-DexDescription_Wailord_1:
-	.string "WAILORD is the largest of all identified\nPOKéMON up to now.\nThis giant POKéMON swims languorously$"
-DexDescription_Wailord_2:
-	.string "in the vast open sea, eating massive\namounts of food at once with its\nenormous mouth.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Numel_1:
-	.string "NUMEL stores magma of almost 2,200\ndegrees F within its body. If it gets\nwet, the magma cools and hardens.$"
-DexDescription_Numel_2:
-	.string "In that event, the POKéMON’s body\ngrows heavy and its movements become\nsluggish.$"
-	.else
-DexDescription_Numel_1:
-	.string "NUMEL is extremely dull witted - it\ndoesn’t notice being hit. However, it\ncan’t stand hunger for even a second.$"
-DexDescription_Numel_2:
-	.string "This POKéMON’s body is a seething\ncauldron of boiling magma.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Camerupt_1:
-	.string "The humps on CAMERUPT’s back are\nformed by a transformation of its\nbones. They sometimes blast out molten$"
-DexDescription_Camerupt_2:
-	.string "magma. This POKéMON apparently erupts\noften when it is enraged.$"
-	.else
-DexDescription_Camerupt_1:
-	.string "CAMERUPT has a volcano inside its body.\nMagma of 18,000 degrees F courses\nthrough its body.$"
-DexDescription_Camerupt_2:
-	.string "Occasionally, the humps on this\nPOKéMON’s back erupt, spewing the\nsuperheated magma.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Torkoal_1:
-	.string "TORKOAL generates energy by burning\ncoal. It grows weaker as the fire\ndies down.$"
-DexDescription_Torkoal_2:
-	.string "When it is preparing for battle, this\nPOKéMON burns more coal.$"
-	.else
-DexDescription_Torkoal_1:
-	.string "TORKOAL digs through mountains in\nsearch of coal. If it finds some, it fills\nhollow spaces on its shell with the coal$"
-DexDescription_Torkoal_2:
-	.string "and burns it.\nIf it is attacked, this POKéMON spouts\nthick black smoke to beat a retreat.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Spoink_1:
-	.string "SPOINK keeps a pearl on top of its head.\nThe pearl functions to amplify this\nPOKéMON’s psychokinetic powers.$"
-DexDescription_Spoink_2:
-	.string "It is therefore on a constant search\nfor a bigger pearl.$"
-	.else
-DexDescription_Spoink_1:
-	.string "SPOINK bounces around on its tail.\nThe shock of its bouncing makes its\nheart pump. As a result, this POKéMON$"
-DexDescription_Spoink_2:
-	.string "cannot afford to stop bouncing - if it\nstops, its heart will stop.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Grumpig_1:
-	.string "GRUMPIG uses the black pearls on its\nbody to wield its fantastic powers.\nWhen it is doing so, it dances bizarrely.$"
-DexDescription_Grumpig_2:
-	.string "This POKéMON’s black pearls are valuable\nas works of art.$"
-	.else
-DexDescription_Grumpig_1:
-	.string "GRUMPIG uses the black pearls on its\nbody to amplify its psychic power waves\nfor gaining total control over its foe.$"
-DexDescription_Grumpig_2:
-	.string "When this POKéMON uses its special\npower, its snorting breath grows\nlabored.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Spinda_1:
-	.string "No two SPINDA are said to have\nidentical spot patterns on their hides.\nThis POKéMON moves in a curious manner$"
-DexDescription_Spinda_2:
-	.string "as if it is stumbling in dizziness.\nIts lurching movements can cause the\nopponent to become confused.$"
-	.else
-DexDescription_Spinda_1:
-	.string "All the SPINDA that exist in the\nworld are said to have utterly unique\nspot patterns.$"
-DexDescription_Spinda_2:
-	.string "The shaky, tottering steps of this\nPOKéMON give it the appearance of\ndancing.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Trapinch_1:
-	.string "TRAPINCH is a patient hunter. It digs\nan inescapable pit in a desert and waits\nfor its prey to come tumbling down.$"
-DexDescription_Trapinch_2:
-	.string "This POKéMON can go a whole week\nwithout access to any water.$"
-	.else
-DexDescription_Trapinch_1:
-	.string "TRAPINCH’s nest is a sloped, bowl-like\npit dug in sand. This POKéMON patiently\nwaits for prey to tumble down the pit.$"
-DexDescription_Trapinch_2:
-	.string "Its giant jaws have enough strength\nto crush even boulders.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Vibrava_1:
-	.string "VIBRAVA’s wings have not yet\ncompleted the process of growing.\nRather than flying long distances,$"
-DexDescription_Vibrava_2:
-	.string "they are more useful for generating\nultrasonic waves by vibrating.$"
-	.else
-DexDescription_Vibrava_1:
-	.string "To make prey faint, VIBRAVA generates\nultrasonic waves by vigorously making\nits two wings vibrate.$"
-DexDescription_Vibrava_2:
-	.string "This POKéMON’s ultrasonic waves are so\npowerful, they can bring on headaches\nin people.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Flygon_1:
-	.string "FLYGON whips up a sandstorm by\nflapping its wings. The wings create a\nseries of notes that sound like singing.$"
-DexDescription_Flygon_2:
-	.string "Because the “singing” is the only thing\nthat can be heard in a sandstorm, this\nPOKéMON is said to be the desert spirit.$"
-	.else
-DexDescription_Flygon_1:
-	.string "FLYGON is nicknamed “the elemental \nspirit of the desert.” Because its\nflapping wings whip up a cloud of sand,$"
-DexDescription_Flygon_2:
-	.string "this POKéMON is always enveloped in a\nsandstorm while flying.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Cacnea_1:
-	.string "The more arid and harsh the\nenvironment, the more pretty and\nfragrant a flower CACNEA grows.$"
-DexDescription_Cacnea_2:
-	.string "This POKéMON battles by wildly swinging\nits thorny arms.$"
-	.else
-DexDescription_Cacnea_1:
-	.string "CACNEA lives in arid locations such\nas deserts. It releases a strong aroma\nfrom its flower to attract prey.$"
-DexDescription_Cacnea_2:
-	.string "When prey comes near, this POKéMON\nshoots sharp thorns from its body to\nbring the victim down.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Cacturne_1:
-	.string "If a traveler is going through a desert\nin the thick of night, CACTURNE\nwill follow in a ragtag group.$"
-DexDescription_Cacturne_2:
-	.string "The POKéMON are biding their time,\nwaiting for the traveler to tire and\nbecome incapable of moving.$"
-	.else
-DexDescription_Cacturne_1:
-	.string "During the daytime, CACTURNE remains\nunmoving so that it does not lose any\nmoisture to the harsh desert sun.$"
-DexDescription_Cacturne_2:
-	.string "This POKéMON becomes active at night\nwhen the temperature drops.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Swablu_1:
-	.string "SWABLU loves to make things clean.\nIf it spots something dirty, it will wipe\nand polish it with its cottony wings.$"
-DexDescription_Swablu_2:
-	.string "If its wings become dirty, this POKéMON\nfinds a stream and showers itself.$"
-	.else
-DexDescription_Swablu_1:
-	.string "SWABLU has light and fluffy wings that\nare like cottony clouds. This POKéMON\nis not frightened of people.$"
-DexDescription_Swablu_2:
-	.string "It lands on the heads of people and\nsits there like a cotton-fluff hat.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Altaria_1:
-	.string "ALTARIA sings in a gorgeous soprano.\nIts wings are like cotton clouds.\nThis POKéMON catches updrafts with its$"
-DexDescription_Altaria_2:
-	.string "buoyant wings and soars way up into\nthe wild blue yonder.$"
-	.else
-DexDescription_Altaria_1:
-	.string "ALTARIA dances and wheels through the\nsky among billowing, cotton-like clouds.\nBy singing melodies in its crystal-clear$"
-DexDescription_Altaria_2:
-	.string "voice, this POKéMON makes its listeners\nexperience dreamy wonderment.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Zangoose_1:
-	.string "ZANGOOSE usually stays on all fours,\nbut when angered, it gets up on its\nhind legs and extends its claws.$"
-DexDescription_Zangoose_2:
-	.string "This POKéMON shares a bitter rivalry\nwith SEVIPER that dates back over\ngenerations.$"
-	.else
-DexDescription_Zangoose_1:
-	.string "Memories of battling its arch-rival\nSEVIPER are etched into every cell of\nZANGOOSE’s body.$"
-DexDescription_Zangoose_2:
-	.string "This POKéMON adroitly dodges attacks\nwith incredible agility.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Seviper_1:
-	.string "SEVIPER’s swordlike tail serves two\npurposes - it slashes foes and douses\nthem with secreted poison.$"
-DexDescription_Seviper_2:
-	.string "This POKéMON will not give up its long-\nrunning blood feud with ZANGOOSE.$"
-	.else
-DexDescription_Seviper_1:
-	.string "SEVIPER shares a generations-long\nfeud with ZANGOOSE. The scars on its\nbody are evidence of vicious battles.$"
-DexDescription_Seviper_2:
-	.string "This POKéMON attacks using its sword-\nedged tail.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lunatone_1:
-	.string "LUNATONE becomes active around the\ntime of the full moon. Instead of\nwalking, it moves by floating in midair.$"
-DexDescription_Lunatone_2:
-	.string "The POKéMON’s intimidating red eyes\ncause all those who see it to become\ntransfixed with fear.$"
-	.else
-DexDescription_Lunatone_1:
-	.string "LUNATONE was discovered at a location\nwhere a meteorite fell. As a result, some\npeople theorize that this POKéMON$"
-DexDescription_Lunatone_2:
-	.string "came from space. However, no one has\nbeen able to prove this theory so far.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Solrock_1:
-	.string "Sunlight is the source of SOLROCK’s\npower. It is said to possess the ability\nto read the emotions of others.$"
-DexDescription_Solrock_2:
-	.string "This POKéMON gives off intense heat\nwhile rotating its body.$"
-	.else
-DexDescription_Solrock_1:
-	.string "SOLROCK is a new species of POKéMON\nthat is said to have fallen from space.\nIt floats in air and moves silently.$"
-DexDescription_Solrock_2:
-	.string "In battle, this POKéMON releases\nintensely bright light.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Barboach_1:
-	.string "BARBOACH’s body is covered with a\nslimy film. If a foe grabs it, this\nPOKéMON just slips out of the enemy’s$"
-DexDescription_Barboach_2:
-	.string "grip.\nThis POKéMON grows weak if the slimy\ncoating dries up.$"
-	.else
-DexDescription_Barboach_1:
-	.string "BARBOACH’s sensitive whiskers serve\nas a superb radar system.\nThis POKéMON hides in mud, leaving only$"
-DexDescription_Barboach_2:
-	.string "its two whiskers exposed while it waits\nfor prey to come along.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Whiscash_1:
-	.string "If WHISCASH goes on a wild rampage,\nit sets off a quake-like tremor with a\nradius of over three miles.$"
-DexDescription_Whiscash_2:
-	.string "This POKéMON has the ability to predict\nreal earthquakes.$"
-	.else
-DexDescription_Whiscash_1:
-	.string "WHISCASH is extremely territorial.\nJust one of these POKéMON will claim a\nlarge pond as its exclusive territory.$"
-DexDescription_Whiscash_2:
-	.string "If a foe approaches it, it thrashes\nabout and triggers a massive\nearthquake.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Corphish_1:
-	.string "CORPHISH catches prey with its sharp\nclaws. It has no likes or dislikes when it\ncomes to food - it will eat anything.$"
-DexDescription_Corphish_2:
-	.string "This POKéMON has no trouble living in\nfilthy water.$"
-	.else
-DexDescription_Corphish_1:
-	.string "CORPHISH were originally foreign\nPOKéMON that were imported as pets.\nThey eventually turned up in the wild.$"
-DexDescription_Corphish_2:
-	.string "This POKéMON is very hardy and has\ngreatly increased its population.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Crawdaunt_1:
-	.string "CRAWDAUNT molts (sheds) its shell\nregularly. Immediately after molting,\nits shell is soft and tender.$"
-DexDescription_Crawdaunt_2:
-	.string "Until the shell hardens, this POKéMON\nhides in its streambed burrow to avoid\nattack from its foes.$"
-	.else
-DexDescription_Crawdaunt_1:
-	.string "CRAWDAUNT has an extremely violent\nnature that compels it to challenge\nother living things to battle.$"
-DexDescription_Crawdaunt_2:
-	.string "Other life-forms refuse to live in\nponds inhabited by this POKéMON,\nmaking them desolate places.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Baltoy_1:
-	.string "As soon as it spots others of its kind,\nBALTOY congregates with them and\nthen begins crying noisily in unison.$"
-DexDescription_Baltoy_2:
-	.string "This POKéMON sleeps while cleverly\nbalancing itself on its one foot.$"
-	.else
-DexDescription_Baltoy_1:
-	.string "BALTOY moves while spinning around on\nits one foot. Primitive wall paintings\ndepicting this POKéMON living among$"
-DexDescription_Baltoy_2:
-	.string "people were discovered in some ancient\nruins.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Claydol_1:
-	.string "CLAYDOL is an enigma that appeared\nfrom a clay statue made by an ancient\ncivilization dating back 20,000 years.$"
-DexDescription_Claydol_2:
-	.string "This POKéMON shoots beams from both\nits hands.$"
-	.else
-DexDescription_Claydol_1:
-	.string "CLAYDOL are said to be dolls of mud made\nby primitive humans and brought to life\nby exposure to a mysterious ray.$"
-DexDescription_Claydol_2:
-	.string "This POKéMON moves about while\nlevitating.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Lileep_1:
-	.string "LILEEP is an ancient POKéMON that was\nregenerated from a fossil. It remains\npermanently anchored to a rock.$"
-DexDescription_Lileep_2:
-	.string "From its immobile perch, this POKéMON\nintently scans for prey with its two\neyes.$"
-	.else
-DexDescription_Lileep_1:
-	.string "LILEEP became extinct approximately\na hundred million years ago.\nThis ancient POKéMON attaches itself$"
-DexDescription_Lileep_2:
-	.string "to a rock on the seafloor and catches\napproaching prey using tentacles \nshaped like flower petals.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Cradily_1:
-	.string "CRADILY’s body serves as an anchor,\npreventing it from being washed away in\nrough seas.$"
-DexDescription_Cradily_2:
-	.string "This POKéMON secretes a strong\ndigestive fluid from its tentacles.$"
-	.else
-DexDescription_Cradily_1:
-	.string "CRADILY roams around the ocean floor\nin search of food. This POKéMON freely\nextends its tree trunk-like neck and$"
-DexDescription_Cradily_2:
-	.string "captures unwary prey using its eight\ntentacles.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Anorith_1:
-	.string "ANORITH is said to be a type of \nPOKéMON predecessor, with eight wings\nat the sides of its body.$"
-DexDescription_Anorith_2:
-	.string "This POKéMON swam in the primordial sea\nby undulating these eight wings.$"
-	.else
-DexDescription_Anorith_1:
-	.string "ANORITH was regenerated from a\nprehistoric fossil. This primitive\nPOKéMON once lived in warm seas.$"
-DexDescription_Anorith_2:
-	.string "It grips its prey firmly between its\ntwo large claws.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Armaldo_1:
-	.string "ARMALDO is a POKéMON species that\nbecame extinct in prehistoric times.\nThis POKéMON is said to have walked on$"
-DexDescription_Armaldo_2:
-	.string "its hind legs, which would have been\nmore convenient for life on land.$"
-	.else
-DexDescription_Armaldo_1:
-	.string "ARMALDO’s tough armor makes all attacks\nbounce off. This POKéMON’s two\nenormous claws can be freely extended$"
-DexDescription_Armaldo_2:
-	.string "or contracted. They have the power to\npunch right through a steel slab.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Feebas_1:
-	.string "While FEEBAS’s body is in tatters,\nit has a hardy and tenacious life force\nthat enables it to live anywhere.$"
-DexDescription_Feebas_2:
-	.string "However, this POKéMON is also slow and\ndimwitted, making it an easy catch.$"
-	.else
-DexDescription_Feebas_1:
-	.string "FEEBAS’s fins are ragged and\ntattered from the start of its life.\nBecause of its shoddy appearance, this$"
-DexDescription_Feebas_2:
-	.string "POKéMON is largely ignored.\nIt is capable of living in both the sea\nand in rivers.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Milotic_1:
-	.string "MILOTIC live at the bottom of large\nlakes. When this POKéMON’s body glows a\nvivid pink, it releases a pulsing wave of$"
-DexDescription_Milotic_2:
-	.string "energy that brings soothing calm to\nrestless spirits.$"
-	.else
-DexDescription_Milotic_1:
-	.string "MILOTIC is said to be the most\nbeautiful of all the POKéMON.\nIt has the power to becalm such$"
-DexDescription_Milotic_2:
-	.string "emotions as anger and hostility to quell\nbitter feuding.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Castform_1:
-	.string "CASTFORM borrows the power of nature\nto transform itself into the guises of\nthe sun, rain clouds, and snow clouds.$"
-DexDescription_Castform_2:
-	.string "This POKéMON’s feelings change with the\nweather.$"
-	.else
-DexDescription_Castform_1:
-	.string "CASTFORM’s appearance changes with\nthe weather.\nThis POKéMON gained the ability to use$"
-DexDescription_Castform_2:
-	.string "the vast power of nature to protect\nits tiny body.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Kecleon_1:
-	.string "KECLEON alters its body coloration to\nblend in with its surroundings, allowing\nit to sneak up on its prey unnoticed.$"
-DexDescription_Kecleon_2:
-	.string "Then it lashes out with its long,\nstretchy tongue to instantly ensnare\nthe unsuspecting target.$"
-	.else
-DexDescription_Kecleon_1:
-	.string "KECLEON is capable of changing its body\ncolors at will to blend in with its\nsurroundings.$"
-DexDescription_Kecleon_2:
-	.string "There is one exception - this POKéMON\ncan’t change the zigzag pattern on its\nbelly.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Shuppet_1:
-	.string "SHUPPET grows by feeding on dark\nemotions, such as vengefulness and \nenvy, in the hearts of people.$"
-DexDescription_Shuppet_2:
-	.string "It roams through cities in search of\ngrudges that taint people.$"
-	.else
-DexDescription_Shuppet_1:
-	.string "SHUPPET is attracted by feelings\nof jealousy and vindictiveness.\nIf someone develops strong feelings of$"
-DexDescription_Shuppet_2:
-	.string "vengeance, this POKéMON will appear\nin a swarm and line up beneath the eaves\nof that person’s home.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Banette_1:
-	.string "A cursed energy permeated the stuffing\nof a discarded and forgotten plush doll,\ngiving it new life as BANETTE.$"
-DexDescription_Banette_2:
-	.string "The POKéMON’s energy would escape if it\nwere to ever open its mouth.$"
-	.else
-DexDescription_Banette_1:
-	.string "BANETTE generates energy for laying\nstrong curses by sticking pins into its\nown body.$"
-DexDescription_Banette_2:
-	.string "This POKéMON was originally a pitiful\nplush doll that was thrown away.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Duskull_1:
-	.string "DUSKULL wanders lost among the deep\ndarkness of midnight. There is an oft-\ntold admonishment given to misbehaving$"
-DexDescription_Duskull_2:
-	.string "children that this POKéMON will spirit\naway bad children who earn scoldings\nfrom their mothers.$"
-	.else
-DexDescription_Duskull_1:
-	.string "DUSKULL can pass through any wall no\nmatter how thick it may be.\nOnce this POKéMON chooses a target,$"
-DexDescription_Duskull_2:
-	.string "it will doggedly pursue the intended\nvictim until the break of dawn.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Dusclops_1:
-	.string "DUSCLOPS absorbs anything, however\nlarge the object may be. This POKéMON\nhypnotizes its foe by waving its hands$"
-DexDescription_Dusclops_2:
-	.string "in a macabre manner and by bringing its\nsingle eye to bear. The hypnotized foe\nis made to do DUSCLOPS’s bidding.$"
-	.else
-DexDescription_Dusclops_1:
-	.string "DUSCLOPS’s body is completely hollow -\nthere is nothing at all inside.\nIt is said that its body is like a black$"
-DexDescription_Dusclops_2:
-	.string "hole. This POKéMON will absorb anything\ninto its body, but nothing will ever come\nback out.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Tropius_1:
-	.string "Children of the southern tropics eat\nas snacks the fruit that grows in\nbunches around the neck of TROPIUS.$"
-DexDescription_Tropius_2:
-	.string "This POKéMON flies by flapping the\nleaves on its back as if they were\nwings.$"
-	.else
-DexDescription_Tropius_1:
-	.string "The bunches of fruit around TROPIUS’s\nneck are very popular with children.\nThis POKéMON loves fruit, and eats it$"
-DexDescription_Tropius_2:
-	.string "continuously. Apparently, its love for\nfruit resulted in its own outgrowth\nof fruit.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Chimecho_1:
-	.string "In high winds, CHIMECHO cries as it\nhangs from a tree branch or the eaves\nof a building using a suction cup on its$"
-DexDescription_Chimecho_2:
-	.string "head.\nThis POKéMON plucks berries with its\nlong tail and eats them.$"
-	.else
-DexDescription_Chimecho_1:
-	.string "CHIMECHO makes its cries echo\ninside its hollow body. When this\nPOKéMON becomes enraged, its cries$"
-DexDescription_Chimecho_2:
-	.string "result in ultrasonic waves that have\nthe power to knock foes flying.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Absol_1:
-	.string "ABSOL has the ability to foretell the\ncoming of natural disasters.\nIt lives in a harsh, rugged mountain$"
-DexDescription_Absol_2:
-	.string "environment. This POKéMON very rarely\nventures down from the mountains.$"
-	.else
-DexDescription_Absol_1:
-	.string "Every time ABSOL appears before people,\nit is followed by a disaster such as an\nearthquake or a tidal wave.$"
-DexDescription_Absol_2:
-	.string "As a result, it came to be known as the\ndisaster POKéMON.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Wynaut_1:
-	.string "WYNAUT gather on moonlit nights to play\nby squeezing up against each other.\nBy being squeezed, this POKéMON gains$"
-DexDescription_Wynaut_2:
-	.string "endurance and is trained to dole out\npowerful counterattacks.$"
-	.else
-DexDescription_Wynaut_1:
-	.string "WYNAUT can always be seen with a big,\nhappy smile on its face. Look at its tail\nto determine if it is angry.$"
-DexDescription_Wynaut_2:
-	.string "When angered, this POKéMON will be\nslapping the ground with its tail.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Snorunt_1:
-	.string "SNORUNT survives by eating only snow\nand ice.\nOld folklore claims that a house visited$"
-DexDescription_Snorunt_2:
-	.string "by this POKéMON is sure to prosper for\nmany generations to come.$"
-	.else
-DexDescription_Snorunt_1:
-	.string "SNORUNT live in regions with heavy\nsnowfall. In seasons without snow, such\nas spring and summer, this POKéMON$"
-DexDescription_Snorunt_2:
-	.string "steals away to live quietly among\nstalactites and stalagmites deep in\ncaverns.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Glalie_1:
-	.string "GLALIE has the ability to freely\ncontrol ice. For example, it can\ninstantly freeze its foe solid.$"
-DexDescription_Glalie_2:
-	.string "After immobilizing its foe in ice, this\nPOKéMON enjoys eating it in leisurely\nfashion.$"
-	.else
-DexDescription_Glalie_1:
-	.string "GLALIE has a body made of rock, which it\nhardens with an armor of ice.\nThis POKéMON has the ability to freeze$"
-DexDescription_Glalie_2:
-	.string "moisture in the atmosphere into any\nshape it desires.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Spheal_1:
-	.string "SPHEAL always travels by rolling\naround on its ball-like body. When the\nseason for ice floes arrives, this$"
-DexDescription_Spheal_2:
-	.string "POKéMON can be seen rolling about on\nice and crossing the sea.$"
-	.else
-DexDescription_Spheal_1:
-	.string "SPHEAL is much faster rolling than \nwalking to get around. When groups of\nthis POKéMON eat, they all clap at once$"
-DexDescription_Spheal_2:
-	.string "to show their pleasure. Because of this,\ntheir mealtimes are noisy.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Sealeo_1:
-	.string "SEALEO often balances and rolls\nthings on the tip of its nose. While the\nPOKéMON is rolling something, it checks$"
-DexDescription_Sealeo_2:
-	.string "the object’s aroma and texture to\ndetermine whether it likes the object\nor not.$"
-	.else
-DexDescription_Sealeo_1:
-	.string "SEALEO has the habit of always juggling\non the tip of its nose anything it sees\nfor the first time.$"
-DexDescription_Sealeo_2:
-	.string "This POKéMON occasionally entertains\nitself by balancing and rolling a SPHEAL\non its nose.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Walrein_1:
-	.string "WALREIN swims all over in frigid\nseawater while crushing icebergs with\nits grand, imposing tusks.$"
-DexDescription_Walrein_2:
-	.string "Its thick layer of blubber makes enemy\nattacks bounce off harmlessly.$"
-	.else
-DexDescription_Walrein_1:
-	.string "WALREIN’s two massively developed\ntusks can totally shatter blocks of\nice weighing ten tons with one blow.$"
-DexDescription_Walrein_2:
-	.string "This POKéMON’s thick coat of blubber\ninsulates it from subzero temperatures.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Clamperl_1:
-	.string "CLAMPERL grows while being protected\nby its rock-hard shell. When its body\nbecomes too large to fit inside the$"
-DexDescription_Clamperl_2:
-	.string "shell, it is sure evidence that this\nPOKéMON is getting close to evolution.$"
-	.else
-DexDescription_Clamperl_1:
-	.string "CLAMPERL’s sturdy shell is not only good\nfor protection - it is also used for\nclamping and catching prey.$"
-DexDescription_Clamperl_2:
-	.string "A fully grown CLAMPERL’s shell will be\nscored with nicks and scratches all\nover.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Huntail_1:
-	.string "HUNTAIL’s tail is shaped like a fish.\nIt uses the tail to attract prey, then\nswallows the prey whole with its large,$"
-DexDescription_Huntail_2:
-	.string "gaping mouth.\nThis POKéMON swims by wiggling its\nslender body like a snake.$"
-	.else
-DexDescription_Huntail_1:
-	.string "HUNTAIL’s presence went unnoticed by\npeople for a long time because it lives\nat extreme depths in the sea.$"
-DexDescription_Huntail_2:
-	.string "This POKéMON’s eyes can see clearly\neven in the murky dark depths of the\nocean.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Gorebyss_1:
-	.string "Although GOREBYSS is the very picture\nof elegance and beauty while swimming,\nit is also cruel. When it spots prey, this$"
-DexDescription_Gorebyss_2:
-	.string "POKéMON inserts its thin mouth into the\nprey’s body and drains the prey of its\nbody fluids.$"
-	.else
-DexDescription_Gorebyss_1:
-	.string "GOREBYSS lives in the southern seas\nat extreme depths. Its body is built to\nwithstand the enormous pressure of$"
-DexDescription_Gorebyss_2:
-	.string "water at incredible depths. Because of\nthis, this POKéMON’s body is unharmed\nby ordinary attacks.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Relicanth_1:
-	.string "RELICANTH is a rare species that was\ndiscovered in deep-sea explorations.\nThis POKéMON’s body withstands the$"
-DexDescription_Relicanth_2:
-	.string "enormous water pressure of the ocean\ndepths. Its body is covered in tough\nscales that are like craggy rocks.$"
-	.else
-DexDescription_Relicanth_1:
-	.string "RELICANTH is a POKéMON species that\nexisted for a hundred million years\nwithout ever changing its form.$"
-DexDescription_Relicanth_2:
-	.string "This ancient POKéMON feeds on\nmicroscopic organisms with its\ntoothless mouth.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Luvdisc_1:
-	.string "LUVDISC’s heart-shaped body is a\nsymbol of love and romance.\nIt is said that any couple meeting this$"
-DexDescription_Luvdisc_2:
-	.string "POKéMON is promised a loving\nrelationship that never ends.$"
-	.else
-DexDescription_Luvdisc_1:
-	.string "LUVDISC live in shallow seas in the\ntropics. This heart-shaped POKéMON\nearned its name by swimming after$"
-DexDescription_Luvdisc_2:
-	.string "loving couples it spotted in the\nocean’s waves.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Bagon_1:
-	.string "BAGON harbors a never-ending dream of\none day soaring high among the clouds.\nAs if trying to dispel its frustration$"
-DexDescription_Bagon_2:
-	.string "over its inability to fly, this POKéMON\nslams its hard head against huge rocks\nand shatters them into pebbles.$"
-	.else
-DexDescription_Bagon_1:
-	.string "BAGON has a dream of one day soaring\nin the sky. In doomed efforts to fly,\nthis POKéMON hurls itself off cliffs.$"
-DexDescription_Bagon_2:
-	.string "As a result of its dives, its head has \ngrown tough and as hard as tempered\nsteel.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Shelgon_1:
-	.string "Covering SHELGON’s body are outgrowths\nmuch like bones. The shell is very hard\nand bounces off enemy attacks.$"
-DexDescription_Shelgon_2:
-	.string "When awaiting evolution, this POKéMON\nhides away in a cavern.$"
-	.else
-DexDescription_Shelgon_1:
-	.string "Inside SHELGON’s armor-like shell, cells\nare in the midst of transformation\nto create an entirely new body.$"
-DexDescription_Shelgon_2:
-	.string "This POKéMON’s shell is extremely heavy,\nmaking its movements sluggish.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Salamence_1:
-	.string "By evolving into SALAMENCE, this\nPOKéMON finally realizes its long-held\ndream of growing wings.$"
-DexDescription_Salamence_2:
-	.string "To express its joy, it flies and wheels\nall over the sky while spouting flames\nfrom its mouth.$"
-	.else
-DexDescription_Salamence_1:
-	.string "SALAMENCE came about as a result of a\nstrong, long-held dream of growing\nwings. It is said that this powerful$"
-DexDescription_Salamence_2:
-	.string "desire triggered a sudden mutation in\nthis POKéMON’s cells, causing it to\nsprout its magnificent wings.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Beldum_1:
-	.string "BELDUM keeps itself floating by\ngenerating a magnetic force that\nrepels earth’s natural magnetism.$"
-DexDescription_Beldum_2:
-	.string "When it sleeps, this POKéMON anchors\nitself to a cliff using the hooks on\nits rear.$"
-	.else
-DexDescription_Beldum_1:
-	.string "Instead of blood, a powerful magnetic\nforce courses throughout BELDUM’s\nbody. This POKéMON communicates with$"
-DexDescription_Beldum_2:
-	.string "others by sending controlled pulses of\nmagnetism.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Metang_1:
-	.string "When two BELDUM fuse together, METANG\nis formed. The brains of the BELDUM are\njoined by a magnetic nervous system.$"
-DexDescription_Metang_2:
-	.string "This POKéMON turns its arms to the rear\nfor traveling at high speed.$"
-	.else
-DexDescription_Metang_1:
-	.string "When two BELDUM fuse together, METANG\nis formed. The brains of the BELDUM are\njoined by a magnetic nervous system.$"
-DexDescription_Metang_2:
-	.string "By linking its brains magnetically,\nthis POKéMON generates strong\npsychokinetic power.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Metagross_1:
-	.string "METAGROSS is the result of two METANG\nachieving fusion. When hunting, this\nPOKéMON pins the prey to the ground$"
-DexDescription_Metagross_2:
-	.string "under its massive body. It then eats\nthe helpless victim using the large \nmouth on its stomach.$"
-	.else
-DexDescription_Metagross_1:
-	.string "METAGROSS has four brains in total.\nCombined, the four brains can breeze\nthrough difficult calculations faster$"
-DexDescription_Metagross_2:
-	.string "than a supercomputer.\nThis POKéMON can float in the air by\ntucking in its four legs.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Regirock_1:
-	.string "REGIROCK’s body is composed entirely of\nrocks. Recently, a study made the\nstartling discovery that the rocks$"
-DexDescription_Regirock_2:
-	.string "were all unearthed from different\nlocations.$"
-	.else
-DexDescription_Regirock_1:
-	.string "REGIROCK was sealed away by people\nlong ago. If this POKéMON’s body is\ndamaged in battle, it is said to seek$"
-DexDescription_Regirock_2:
-	.string "out suitable rocks on its own to repair\nitself.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Regice_1:
-	.string "REGICE cloaks itself with frigid air of\nnegative 328 degrees F.\nThings will freeze solid just by going$"
-DexDescription_Regice_2:
-	.string "near this POKéMON.\nIts icy body is so cold, it will not melt\neven if it is immersed in magma.$"
-	.else
-DexDescription_Regice_1:
-	.string "REGICE’s body was made during an ice\nage. The deep-frozen body can’t be\nmelted, even by fire.$"
-DexDescription_Regice_2:
-	.string "This POKéMON controls frigid air of\nminus 328 degrees F.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Registeel_1:
-	.string "REGISTEEL was imprisoned by people\nin ancient times.\nThe metal composing its body is thought$"
-DexDescription_Registeel_2:
-	.string "to be a curious substance that is not\nof this earth.$"
-	.else
-DexDescription_Registeel_1:
-	.string "REGISTEEL has a body that is harder\nthan any kind of metal.\nIts body is apparently hollow.$"
-DexDescription_Registeel_2:
-	.string "No one has any idea what this POKéMON\neats.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Latias_1:
-	.string "LATIAS is highly intelligent and capable\nof understanding human speech.\nIt is covered with a glass-like down.$"
-DexDescription_Latias_2:
-	.string "The POKéMON enfolds its body with its\ndown and refracts light to alter its\nappearance.$"
-	.else
-DexDescription_Latias_1:
-	.string "LATIAS is highly sensitive to the\nemotions of people. If it senses any\nhostility, this POKéMON ruffles the$"
-DexDescription_Latias_2:
-	.string "feathers all over its body and cries\nshrilly to intimidate the foe.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Latios_1:
-	.string "LATIOS will only open its heart to a\nTRAINER with a compassionate spirit.\nThis POKéMON can fly faster than a jet$"
-DexDescription_Latios_2:
-	.string "plane by folding its forelegs to minimize\nair resistance.$"
-	.else
-DexDescription_Latios_1:
-	.string "LATIOS has the ability to make its foe\nsee an image of what it has seen or\nimagines in its head.$"
-DexDescription_Latios_2:
-	.string "This POKéMON is intelligent and\nunderstands human speech.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Kyogre_1:
-	.string "KYOGRE is named in mythology as the\nPOKéMON that expanded the sea by\ncovering the land with torrential rains$"
-DexDescription_Kyogre_2:
-	.string "and towering tidal waves.\nIt took to sleep after a cataclysmic\nbattle with GROUDON.$"
-	.else
-DexDescription_Kyogre_1:
-	.string "KYOGRE has the power to create massive\nrain clouds that cover the entire sky\nand bring about torrential downpours.$"
-DexDescription_Kyogre_2:
-	.string "This POKéMON saved people who were\nsuffering from droughts.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Groudon_1:
-	.string "GROUDON has the power to scatter rain\nclouds and make water evaporate with\nlight and heat.$"
-DexDescription_Groudon_2:
-	.string "It came as a savior to people who had\nbeen suffering from terrible floods.$"
-	.else
-DexDescription_Groudon_1:
-	.string "GROUDON has long been described in \nmythology as the POKéMON that raised\nlands and expanded continents.$"
-DexDescription_Groudon_2:
-	.string "This POKéMON took to sleep after a\ncataclysmic battle with KYOGRE.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Rayquaza_1:
-	.string "RAYQUAZA is said to have lived for\nhundreds of millions of years in the\nearth’s ozone layer, above the clouds.$"
-DexDescription_Rayquaza_2:
-	.string "Its existence had been completely\nunknown because it lived so high in\nthe sky.$"
-	.else
-DexDescription_Rayquaza_1:
-	.string "RAYQUAZA lived for hundreds of millions\nof years in the earth’s ozone layer, \nnever descending to the ground.$"
-DexDescription_Rayquaza_2:
-	.string "This POKéMON appears to feed on water\nand particles in the atmosphere.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Jirachi_1:
-	.string "JIRACHI will awaken from its sleep of\na thousand years if you sing to it in a\nvoice of purity.$"
-DexDescription_Jirachi_2:
-	.string "It is said to make true any wish that\npeople desire.$"
-	.else
-DexDescription_Jirachi_1:
-	.string "A legend states that JIRACHI will make\ntrue any wish that is written on notes\nattached to its head when it awakens.$"
-DexDescription_Jirachi_2:
-	.string "If this POKéMON senses danger, it will\nfight without awakening.$"
-	.endif
-
-	.ifdef SAPPHIRE
-DexDescription_Deoxys_1:
-	.string "DEOXYS emerged from a virus that came\nfrom space. It is highly intelligent and\nwields psychokinetic powers.$"
-DexDescription_Deoxys_2:
-	.string "This POKéMON shoots lasers from the\ncrystalline organ on its chest.$"
-	.else
-DexDescription_Deoxys_1:
-	.string "The DNA of a space virus underwent a\nsudden mutation upon exposure to a\nlaser beam and resulted in DEOXYS.$"
-DexDescription_Deoxys_2:
-	.string "The crystalline organ on this POKéMON’s\nchest appears to be its brain.$"
-	.endif
+DexDescription_Dummy_1: @ 83A05F9
+	.string "Dieses POKéMON wurde erst vor kurzem \n"
+	.string "entdeckt und wird noch erforscht.$"
+
+DexDescription_Dummy_2: @ 83A0642
+	.string "Zur Zeit sind keine genauen\n"
+	.string "Informationen über dieses\n"
+	.string "POKéMON vorhanden.$"
+
+DexDescription_Bulbasaur_1: @ 83A0675
+	.string "BISASAM macht gern einmal ein\n"
+	.string "Nickerchen im Sonnenschein.\n"
+	.string "Auf seinem Rücken trägt es einen Samen.$"
+
+DexDescription_Bulbasaur_2: @ 83A06C4
+	.string "Indem es Sonnenstrahlen aufsaugt,\n"
+	.string "wird der Samen zunehmend größer.$"
+
+DexDescription_Ivysaur_1: @ 83A0707
+	.string "BISAKNOSP hat eine Knospe auf seinem\n"
+	.string "Rücken. Beine und Rumpf sind kräftig\n"
+	.string "genug, um sein Gewicht zu tragen.$"
+
+DexDescription_Ivysaur_2: @ 83A0775
+	.string "Wenn es lange in der Sonne liegt, ist das\n"
+	.string "ein Anzeichen dafür, dass die Knospe\n"
+	.string "bald blüht.$"
+
+DexDescription_Venusaur_1: @ 83A07EA
+	.string "BISAFLOR hat eine Blume auf seinem\n"
+	.string "Rücken. Wenn sie viel Nahrung und Sonne\n"
+	.string "aufnimmt, verfärbt sie sich bunt.$"
+
+DexDescription_Venusaur_2: @ 83A0860
+	.string "Der Duft der Blume mildert die Emotionen\n"
+	.string "der Menschen.$"
+
+DexDescription_Charmander_1: @ 83A08A1
+	.string "Die Flamme auf seiner Schweifspitze\n"
+	.string "zeigt seine Gefühlslage an. Sie\n"
+	.string "flackert, wenn GLUMANDA zufrieden ist.$"
+
+DexDescription_Charmander_2: @ 83A0913
+	.string "Wenn dieses POKéMON wütend wird, lodert\n"
+	.string "die Flamme gewaltig.$"
+
+DexDescription_Charmeleon_1: @ 83A095E
+	.string "Gnadenlos besiegt GLUTEXO seine Geg-\n"
+	.string "ner mit seinen scharfen Klauen. Wenn es \n"
+	.string "auf starke Gegner trifft, wird es$"
+
+DexDescription_Charmeleon_2: @ 83A09C6
+	.string "wütend und die Flamme auf seiner\n"
+	.string "Schweifspitze flackert in einem\n"
+	.string "bläulichen Ton.$"
+
+DexDescription_Charizard_1: @ 83A0A2C
+	.string "GLURAK fliegt durch die Lüfte, um\n"
+	.string "starke Gegner aufzuspüren. Sein heißer\n"
+	.string "Feueratem bringt alles zum Schmelzen.$"
+
+DexDescription_Charizard_2: @ 83A0A90
+	.string "Aber es richtet seinen Feueratem nie\n"
+	.string "auf schwächere Gegner.$"
+
+DexDescription_Squirtle_1: @ 83A0AF5
+	.string "SCHIGGYs Panzer dient nicht nur zum\n"
+	.string "Schutz. Die runde Form und die Furchen\n"
+	.string "auf der Oberfläche verringern den$"
+
+DexDescription_Squirtle_2: @ 83A0B4B
+	.string "Widerstand im Wasser, so dass dieses\n"
+	.string "POKéMON sehr schnell schwimmen kann.$"
+
+DexDescription_Wartortle_1: @ 83A0BB3
+	.string "SCHILLOK hat einen langen, buschigen\n"
+	.string "Schweif, dessen Farbe intensiver wird,\n"
+	.string "wenn es altert.$"
+
+DexDescription_Wartortle_2: @ 83A0C2A
+	.string "Die Kratzer auf seinem Panzer zeugen\n"
+	.string "von seiner Kampfkraft.$"
+
+DexDescription_Blastoise_1: @ 83A0C7C
+	.string "TURTOK besitzt Wasserdüsen, die aus\n"
+	.string "seinem Panzer herausragen. Diese sind\n"
+	.string "sehr präzise.$"
+
+DexDescription_Blastoise_2: @ 83A0CD9
+	.string "Es kann Wassergeschosse so genau\n"
+	.string "verschießen, dass es damit aus fast\n"
+	.string "50 Metern leere Dosen trifft.$"
+
+DexDescription_Caterpie_1: @ 83A0D45
+	.string "RAUPY ist sehr gefräßig, es kann\n"
+	.string "Blätter verschlingen, die größer sind\n"
+	.string "als es selbst.$"
+
+DexDescription_Caterpie_2: @ 83A0DAA
+	.string "Seine Antennen sondern einen\n"
+	.string "übel riechenden Gestank ab.$"
+
+DexDescription_Metapod_1: @ 83A0DEE
+	.string "Der Panzer dieses POKéMON ist hart wie\n"
+	.string "Stahl. SAFCON bewegt sich kaum,$"
+
+DexDescription_Metapod_2: @ 83A0E52
+	.string "da es das weiche Innere unter seiner\n"
+	.string "harten Schale auf seine Entwicklung \n"
+	.string "vorbereitet.$"
+
+DexDescription_Butterfree_1: @ 83A0EAF
+	.string "SMETTBOs größte Fähigkeit ist das Auf-\n"
+	.string "spüren köstlichen Blütenhonigs.$"
+
+DexDescription_Butterfree_2: @ 83A0EFD
+	.string "Es findet sogar Honig in Blumen, die\n"
+	.string "fast 10 km von seinem Nest entfernt\n"
+	.string "blühen.$"
+
+DexDescription_Weedle_1: @ 83A0F6B
+	.string "HORNLIU verfügt über einen ausge-\n"
+	.string "zeichneten Geruchssinn. So kann es\n"
+	.string "seine Lieblingsblätter von denen$"
+
+DexDescription_Weedle_2: @ 83A0FBD
+	.string "unterscheiden, die es nicht mag, indem\n"
+	.string "es mit seiner großen roten Nase daran\n"
+	.string "schnuppert.$"
+
+DexDescription_Kakuna_1: @ 83A1021
+	.string "KOKUNA bewegt sich kaum, wenn es an\n"
+	.string "einem Baum haftet. In seinem Inneren\n"
+	.string "jedoch regt sich einiges, da es sich auf$"
+
+DexDescription_Kakuna_2: @ 83A108E
+	.string "seine bevorstehende Entwicklung vor-\n"
+	.string "bereitet. Dabei wird seine Schale sehr\n"
+	.string "heiß.$"
+
+DexDescription_Beedrill_1: @ 83A10EE
+	.string "BIBOR sind sehr wehrhaft. Es sollte sich\n"
+	.string "besser niemand ihrem Nest nähern.$"
+
+DexDescription_Beedrill_2: @ 83A1156
+	.string "Wenn man sie ärgert, greifen sie in\n"
+	.string "Schwärmen an.$"
+
+DexDescription_Pidgey_1: @ 83A1187
+	.string "TAUBSI verfügt über einen sehr ge-\n"
+	.string "schulten Orientierungssinn. Es kehrt \n"
+	.string "zielsicher zu seinem Nest zurück,$"
+
+DexDescription_Pidgey_2: @ 83A11DF
+	.string "egal, wie weit es sich von seiner\n"
+	.string "gewohnten Umgebung entfernt hat.$"
+
+DexDescription_Pidgeotto_1: @ 83A122F
+	.string "TAUBOGA nennt ein großes Gebiet sein\n"
+	.string "Eigen. Es fliegt umher und kontrolliert\n"
+	.string "seinen Lebensraum.$"
+
+DexDescription_Pidgeotto_2: @ 83A129B
+	.string "Wenn jemand sein Gebiet betritt, zeigt\n"
+	.string "es keine Gnade und greift seine Gegner\n"
+	.string "mit seinen scharfen Krallen an.$"
+
+DexDescription_Pidgeot_1: @ 83A1301
+	.string "Dieses POKéMON hat ein wunderschönes, \n"
+	.string "glänzendes Gefieder.\n"
+	.string "Viele TRAINER sind von der auffälligen$"
+
+DexDescription_Pidgeot_2: @ 83A1369
+	.string "Schönheit seines Federkleids begeis-\n"
+	.string "tert, so dass sie TAUBOSS als ihr\n"
+	.string "POKéMON wählen.$"
+
+DexDescription_Rattata_1: @ 83A13CA
+	.string "RATTFRATZ ist extrem vorsichtig. Sogar\n"
+	.string "im Schlaf nimmt es alles wahr, indem es\n"
+	.string "seine Ohren bewegt.$"
+
+DexDescription_Rattata_2: @ 83A1438
+	.string "Es stellt keine großen Ansprüche an\n"
+	.string "seinen Lebensraum und richtet sein\n"
+	.string "Nest überall ein.$"
+
+DexDescription_Raticate_1: @ 83A147F
+	.string "RATTIKARLs kräftige Zähne wachsen\n"
+	.string "ständig. Deshalb nagt es unablässig\n"
+	.string "Steine und Baumstämme an,$"
+
+DexDescription_Raticate_2: @ 83A14DC
+	.string "um sie abzuwetzen. Manchmal knabbert\n"
+	.string "es sogar Hauswände an.$"
+
+DexDescription_Spearow_1: @ 83A1505
+	.string "HABITAK kann einen sehr lauten Schrei\n"
+	.string "ausstoßen, den man über die Entfernung\n"
+	.string "von 1 km vernehmen kann.$"
+
+DexDescription_Spearow_2: @ 83A156C
+	.string "Durch das Echo seiner hohen, wehklagen-\n"
+	.string "den Schreie warnt dieses POKéMON seine\n"
+	.string "Artgenossen vor drohender Gefahr.$"
+
+DexDescription_Fearow_1: @ 83A15B9
+	.string "IBITAK erkennt man an seinem langen \n"
+	.string "Hals und Schnabel. \n"
+	.string "Er ist hervorragend dafür geeignet,$"
+
+DexDescription_Fearow_2: @ 83A1614
+	.string "im Erdreich oder im Wasser Beute zu\n"
+	.string "jagen. Es setzt seinen langen, dünnen\n"
+	.string "Schnabel dabei sehr geschickt ein.$"
+
+DexDescription_Ekans_1: @ 83A166C
+	.string "RETTAN rollt sich zu einer Spirale zu-\n"
+	.string "sammen, wenn es sich ausruht.\n"
+	.string "Aus dieser Haltung kann es blitzschnell$"
+
+DexDescription_Ekans_2: @ 83A16C2
+	.string "auf Bedrohungen aus allen Richtungen\n"
+	.string "reagieren, indem es seinen Kopf hebt.$"
+
+DexDescription_Arbok_1: @ 83A1716
+	.string "Dieses POKéMON ist unheimlich stark. Es\n"
+	.string "kann seine Beute mit seinem Körper um-\n"
+	.string "wickeln und sogar Ölfässer zerdrücken.$"
+
+DexDescription_Arbok_2: @ 83A178B
+	.string "Wenn ARBOK einen Gegner umwickelt, ist\n"
+	.string "es unmöglich, seinem Würgegriff zu ent-\n"
+	.string "kommen.$"
+
+DexDescription_Pikachu_1: @ 83A17E3
+	.string "Immer wenn PIKACHU auf etwas Neues\n"
+	.string "stößt, jagt es einen Elektroschock \n"
+	.string "hindurch.$"
+
+DexDescription_Pikachu_2: @ 83A1839
+	.string "Wenn du eine verkohlte Beere findest,\n"
+	.string "hat dieses POKéMON seine elektrische\n"
+	.string "Ladung falsch eingeschätzt.$"
+
+DexDescription_Raichu_1: @ 83A18A4
+	.string "Wenn seine elektrische Ladung zu groß\n"
+	.string "wird, entlädt RAICHU seine Energie ins\n"
+	.string "Erdreich.$"
+
+DexDescription_Raichu_2: @ 83A190D
+	.string "Neben dem Nest dieses POKéMON findet\n"
+	.string "man häufig versengtes Erdreich.$"
+
+DexDescription_Sandshrew_1: @ 83A1950
+	.string "SANDANs Körper kann sehr viel Wasser\n"
+	.string "aufnehmen, so dass es auch in der\n"
+	.string "Wüste überleben kann.$"
+
+DexDescription_Sandshrew_2: @ 83A19B8
+	.string "Dieses POKéMON rollt sich zusammen, um\n"
+	.string "sich vor Feinden zu schützen.$"
+
+DexDescription_Sandslash_1: @ 83A19F2
+	.string "SANDAMERs Körper ist übersät\n"
+	.string "mit spitzen Stacheln, die eigentlich\n"
+	.string "Hauthärtungen darstellen.$"
+
+DexDescription_Sandslash_2: @ 83A1A69
+	.string "Einmal im Jahr fallen die alten Stacheln\n"
+	.string "aus und werden durch neue ersetzt.$"
+
+DexDescription_NidoranF_1: @ 83A1AB6
+	.string "NIDORAN besitzt Widerhaken, die ein\n"
+	.string "starkes Gift ausstoßen. Sie sind ver-\n"
+	.string "mutlich zum Schutz dieses$"
+
+DexDescription_NidoranF_2: @ 83A1B22
+	.string "schmächtigen POKéMON entstanden.\n"
+	.string "Wenn es wütend wird, stößt es ein\n"
+	.string "gefährliches Gift aus seinem Horn aus.$"
+
+DexDescription_Nidorina_1: @ 83A1B72
+	.string "Wenn NIDORINA mit seinen Freunden oder\n"
+	.string "seiner Familie zusammen ist, zieht\n"
+	.string "es seine Widerhaken ein, damit es$"
+
+DexDescription_Nidorina_2: @ 83A1BE3
+	.string "niemanden verletzt. Dieses\n"
+	.string "POKéMON wird nervös, wenn man es\n"
+	.string "von seinen Artgenossen trennt.$"
+
+DexDescription_Nidoqueen_1: @ 83A1C28
+	.string "NIDOQUEENs Körper ist mit sehr harten\n"
+	.string "Schuppen bedeckt. Es ist sehr ge-\n"
+	.string "schickt darin, Gegner mit starken$"
+
+DexDescription_Nidoqueen_2: @ 83A1C95
+	.string "Attacken wegzuschleudern.\n"
+	.string "Dieses POKéMON entwickelt am meisten\n"
+	.string "Kraft, wenn es seine Jungen verteidigt.$"
+
+DexDescription_NidoranM_1: @ 83A1CD6
+	.string "Das männliche NIDORAN hat Muskeln ent-\n"
+	.string "wickelt, um seine Ohren bewegen zu kön-\n"
+	.string "nen. Dadurch kann es sie in jede beliebi-$"
+
+DexDescription_NidoranM_2: @ 83A1D42
+	.string "ge Richtung drehen. Diesem POKéMON \n"
+	.string "entgeht nicht einmal das leiseste Ge-\n"
+	.string "räusch.$"
+
+DexDescription_Nidorino_1: @ 83A1D91
+	.string "NIDORINO besitzt ein Horn, das sogar\n"
+	.string "härter ist als ein Diamant. Wenn es\n"
+	.string "einen Feind wahrnimmt, stellen sich$"
+
+DexDescription_Nidorino_2: @ 83A1DFF
+	.string "all die Widerhaken auf seinem Rücken\n"
+	.string "auf und es schlägt den Gegner mit aller\n"
+	.string "Kraft in die Flucht.$"
+
+DexDescription_Nidoking_1: @ 83A1E41
+	.string "NIDOKINGs Schweif ist enorm stark. Mit\n"
+	.string "einer Bewegung kann es einen metalle-\n"
+	.string "nen Sendemast zum Einsturz bringen.$"
+
+DexDescription_Nidoking_2: @ 83A1EB5
+	.string "Wenn es in Rage gerät, ist es nur schwer\n"
+	.string "aufzuhalten.$"
+
+DexDescription_Clefairy_1: @ 83A1EF3
+	.string "In Vollmondnächten sammeln sich einige\n"
+	.string "dieser POKéMON, um zu spielen. Wird es \n"
+	.string "Tag, kehrt PIEPI zu seinem Zufluchts-$"
+
+DexDescription_Clefairy_2: @ 83A1F61
+	.string "ort in den Bergen zurück und\n"
+	.string "schläft eingekuschelt neben\n"
+	.string "seinen Artgenossen ein.$"
+
+DexDescription_Clefable_1: @ 83A1FB8
+	.string "PIXI bewegt sich fort, indem es leicht\n"
+	.string "mit den Flügeln schlägt. Durch seinen\n"
+	.string "federnden Gang kann es sogar über$"
+
+DexDescription_Clefable_2: @ 83A202D
+	.string "Wasser gehen. Bei Mondschein \n"
+	.string "unternimmt es Spaziergänge auf Seen.$"
+
+DexDescription_Vulpix_1: @ 83A206C
+	.string "VULPIX kommt mit einem weißen Schweif\n"
+	.string "zur Welt. Dieser teilt sich sechsfach, \n"
+	.string "wenn das POKéMON von seinem TRAINER$"
+
+DexDescription_Vulpix_2: @ 83A20E5
+	.string "viel Zuneigung bekommt.\n"
+	.string "Seine sechs Schweife kräuseln sich\n"
+	.string "schließlich.$"
+
+DexDescription_Ninetales_1: @ 83A2122
+	.string "VULNONA sendet einen unheimlichen\n"
+	.string "Lichtstrahl aus seinen hellroten Augen\n"
+	.string "aus, um totale Kontrolle über die$"
+
+DexDescription_Ninetales_2: @ 83A2187
+	.string "Gedanken seines Gegners zu erlangen.\n"
+	.string "Man sagt, dieses POKéMON könne 1000\n"
+	.string "Jahre leben.$"
+
+DexDescription_Jigglypuff_1: @ 83A21BA
+	.string "PUMMELUFFs Stimmbänder können die\n"
+	.string "Tonlage seiner Stimme beliebig vari-\n"
+	.string "ieren. Dieses POKéMON benutzt diese$"
+
+DexDescription_Jigglypuff_2: @ 83A222A
+	.string "Fähigkeit, um seine Gegner mit monoto-\n"
+	.string "nem Gesang in Tiefschlaf zu versetzen.$"
+
+DexDescription_Wigglytuff_1: @ 83A226A
+	.string "KNUDDELUFF hat handtellergroße Augen,\n"
+	.string "die immer mit Tränenflüssigkeit bedeckt\n"
+	.string "sind. Gerät Staub in die Augen dieses$"
+
+DexDescription_Wigglytuff_2: @ 83A22D9
+	.string "POKéMON, so wird dieser sofort ausge-\n"
+	.string "spült.$"
+
+DexDescription_Zubat_1: @ 83A231D
+	.string "Tagsüber bleibt ZUBAT an einem dunklen\n"
+	.string "Ort und bewegt sich kaum. Wenn es dem \n"
+	.string "Sonnenlicht längere Zeit ausgesetzt$"
+
+DexDescription_Zubat_2: @ 83A238A
+	.string "wird, zieht es sich Verbrennungen an\n"
+	.string "seinem Körper zu.$"
+
+DexDescription_Golbat_1: @ 83A23C9
+	.string "GOLBAT hat es auf das Blut von Lebe-\n"
+	.string "wesen abgesehen. Im Schutze der Nacht\n"
+	.string "wird es besonders aktiv.$"
+
+DexDescription_Golbat_2: @ 83A2432
+	.string "Dieses POKéMON fliegt durch die\n"
+	.string "Nacht, um nach frischem Blut zu\n"
+	.string "suchen.$"
+
+DexDescription_Oddish_1: @ 83A2475
+	.string "Am Tage vergräbt sich MYRAPLA im Boden,\n"
+	.string "um mit seinem ganzen Körper Nahrung\n"
+	.string "aufzunehmen.$"
+
+DexDescription_Oddish_2: @ 83A24E2
+	.string "Je fruchtbarer der Boden ist, desto\n"
+	.string "glänzender werden seine Blätter.$"
+
+DexDescription_Gloom_1: @ 83A251D
+	.string "DUFLOR produziert einen Ekel\n"
+	.string "erregenden Gestank aus dem Stempel\n"
+	.string "seiner Blume. Wenn es in Gefahr gerät,$"
+
+DexDescription_Gloom_2: @ 83A2588
+	.string "wird der Gestank noch unerträglicher. \n"
+	.string "Wenn sich dieses POKéMON in Sicherheit\n"
+	.string "befindet, stößt es keinen Gestank aus.$"
+
+DexDescription_Vileplume_1: @ 83A25E0
+	.string "GIFLORs giftige Pollen rufen böse\n"
+	.string "allergische Anfälle hervor. Deshalb ist\n"
+	.string "es ratsam, sich keiner schönen Blume im$"
+
+DexDescription_Vileplume_2: @ 83A264E
+	.string "Dschungel zu nähern, so anziehend sie\n"
+	.string "auch sein mag.$"
+
+DexDescription_Paras_1: @ 83A268A
+	.string "Auf PARAS’ Rücken wachsen parasitäre\n"
+	.string "Pilze, die Tochukaso genannt werden.\n"
+	.string "Sie wachsen, indem sie dem$"
+
+DexDescription_Paras_2: @ 83A2700
+	.string "KÄFER/PFLANZEN-PKMN Nährstoffe\n"
+	.string "entziehen. Sie sind sehr wertvoll als\n"
+	.string "lebensverlängernde Medizin.$"
+
+DexDescription_Parasect_1: @ 83A2747
+	.string "PARASEK sucht große Bäume heim und\n"
+	.string "entzieht Nährstoffe aus Stamm und \n"
+	.string "Wurzeln.$"
+
+DexDescription_Parasect_2: @ 83A27AC
+	.string "Wenn ein befallener Baum stirbt, sucht\n"
+	.string "es sich zusammen mit seinen Artge-\n"
+	.string "nossen einen neuen Wirt.$"
+
+DexDescription_Venonat_1: @ 83A27F1
+	.string "BLUZUK hat einen Pelz aus dünnen\n"
+	.string "Borsten entwickelt, der dem Schutz\n"
+	.string "seines Körpers dient.$"
+
+DexDescription_Venonat_2: @ 83A285D
+	.string "Es hat große Augen, denen auch winzig\n"
+	.string "kleine Beute nicht entgeht.$"
+
+DexDescription_Venomoth_1: @ 83A28A2
+	.string "OMOT ist ein nachtaktives POKéMON.\n"
+	.string "Kleine Insekten, die vom Licht in der\n"
+	.string "Dunkelheit angezogen Straßenlaternen$"
+
+DexDescription_Venomoth_2: @ 83A2911
+	.string "umschwärmen, sind seine bevorzugte\n"
+	.string "Beute.$"
+
+DexDescription_Diglett_1: @ 83A295A
+	.string "DIGDA wird zumeist auf Farmen\n"
+	.string "gezüchtet. Denn wo auch immer dieses\n"
+	.string "POKéMON zu graben beginnt, hinterlässt$"
+
+DexDescription_Diglett_2: @ 83A29C3
+	.string "es Erde, die für das Anpflanzen von\n"
+	.string "Feldfrüchten perfekt geeignet und für\n"
+	.string "den Anbau köstlichen Gemüses ideal ist.$"
+
+DexDescription_Dugtrio_1: @ 83A2A22
+	.string "DIGDRI sind Drillinge, die aus einem\n"
+	.string "Körper entstanden sind. Daher denken\n"
+	.string "alle Köpfe gleich.$"
+
+DexDescription_Dugtrio_2: @ 83A2A8E
+	.string "Sie arbeiten so gut zusammen, dass sie \n"
+	.string "endlos graben können.$"
+
+DexDescription_Meowth_1: @ 83A2ACF
+	.string "MAUZI zieht seine scharfen Krallen ein,\n"
+	.string "um umherschleichen zu können, ohne\n"
+	.string "verräterische Spuren zu hinterlassen.$"
+
+DexDescription_Meowth_2: @ 83A2B42
+	.string "Dieses POKéMON hat eine Vorliebe für\n"
+	.string "Münzen, die im Licht glitzern.$"
+
+DexDescription_Persian_1: @ 83A2B8B
+	.string "SNOBILIKAT hat sechs dicke Schnurr-\n"
+	.string "haare, wodurch es Furcht einflößend\n"
+	.string "wirkt. Durch diese nimmt es wahr, wenn$"
+
+DexDescription_Persian_2: @ 83A2C00
+	.string "sich etwas in seiner Nähe bewegt. Es\n"
+	.string "wird sehr zutraulich, wenn man es an den\n"
+	.string "Schnurrhaaren berührt.$"
+
+DexDescription_Psyduck_1: @ 83A2C58
+	.string "ENTON verwendet eine geheimnisvolle\n"
+	.string "Kraft. Dabei erzeugt es Gehirnströme,\n"
+	.string "die man sonst nur von Schlafenden$"
+
+DexDescription_Psyduck_2: @ 83A2CB7
+	.string "kennt. Diese Entdeckung führte zu \n"
+	.string "einer umstrittenen Diskussion unter\n"
+	.string "Wissenschaftlern.$"
+
+DexDescription_Golduck_1: @ 83A2D0C
+	.string "Die schwimmhäutigen Flossen an seinen\n"
+	.string "Vorder- und Hinterbeinen und der \n"
+	.string "stromlinienförmige Körper machen$"
+
+DexDescription_Golduck_2: @ 83A2D7D
+	.string "ENTORON unheimlich schnell. Dieses\n"
+	.string "POKéMON ist auf jeden Fall schneller als\n"
+	.string "die meisten Hochleistungsschwimmer.$"
+
+DexDescription_Mankey_1: @ 83A2DC9
+	.string "Wenn MENKI sich schüttelt und schwer\n"
+	.string "durch die Nase atmet, dann ist es \n"
+	.string "wütend. Da es blitzartig in Raserei$"
+
+DexDescription_Mankey_2: @ 83A2E35
+	.string "gerät, ist es unmöglich seinem Zorn\n"
+	.string "zu entkommen.$"
+
+DexDescription_Primeape_1: @ 83A2EA4
+	.string "Wenn RASAFF wütend ist, wird seine Blut-\n"
+	.string "zirkulation gesteigert und seine Mus-\n"
+	.string "keln werden noch stärker.$"
+
+DexDescription_Primeape_2: @ 83A2F12
+	.string "Allerdings mindert das auch die \n"
+	.string "Fähigkeit zum logischen Denken.$"
+
+DexDescription_Growlithe_1: @ 83A2F53
+	.string "FUKANO hat einen ausgezeichneten Ge-\n"
+	.string "ruchssinn. Wenn dieses POKéMON ein-\n"
+	.string "mal einen Geruch wahrgenommen hat,$"
+
+DexDescription_Growlithe_2: @ 83A2FC8
+	.string "vergisst es ihn nicht mehr. Es benutzt\n"
+	.string "diese Fähigkeit dazu, die Gefühlslage\n"
+	.string "von Lebewesen auszuloten.$"
+
+DexDescription_Arcanine_1: @ 83A301F
+	.string "ARKANI ist sehr schnell. Es kann an\n"
+	.string "einem Tag fast 10.000 km zurücklegen.\n"
+	.string "Das Feuer, das im Innern dieses POKéMON$"
+
+DexDescription_Arcanine_2: @ 83A3095
+	.string "lodert, dient ihm als Energiequelle.$"
+
+DexDescription_Poliwag_1: @ 83A30E4
+	.string "QUAPSEL hat eine sehr dünne Haut.\n"
+	.string "Durch sie hindurch kann man sogar sein\n"
+	.string "spiralförmiges Inneres sehen.$"
+
+DexDescription_Poliwag_2: @ 83A314D
+	.string "Obwohl seine Haut so dünn ist, ist sie\n"
+	.string "sehr elastisch. Selbst scharfe Reiß-\n"
+	.string "zähne können sie nicht durchdringen.$"
+
+DexDescription_Poliwhirl_1: @ 83A31B2
+	.string "QUAPUTZIs Körper ist immer feucht und\n"
+	.string "glitschig. Dadurch kann es während\n"
+	.string "eines Kampfes leicht der Umklammerung$"
+
+DexDescription_Poliwhirl_2: @ 83A3226
+	.string "eines Gegners entkommen.$"
+
+DexDescription_Poliwrath_1: @ 83A3268
+	.string "QUAPPO besitzt hochentwickelte, starke\n"
+	.string "Muskeln, die niemals ermüden, egal, wie\n"
+	.string "sehr es sie auch beansprucht.$"
+
+DexDescription_Poliwrath_2: @ 83A32C5
+	.string "Es ist so kräftig, dass es mühelos den\n"
+	.string "Pazifik durchschwimmen kann.$"
+
+DexDescription_Abra_1: @ 83A332F
+	.string "ABRA schläft 18 Stunden am Tag.\n"
+	.string "Es nimmt die Gegenwart von Feinden\n"
+	.string "aber auch im Schlaf wahr.$"
+
+DexDescription_Abra_2: @ 83A339B
+	.string "In einer solchen Situation bringt es\n"
+	.string "sich umgehend mit TELEPORT in\n"
+	.string "Sicherheit.$"
+
+DexDescription_Kadabra_1: @ 83A33DE
+	.string "KADABRA sendet Alphawellen aus, wenn es\n"
+	.string "Kopfschmerzen hat. Nur wer eine beson-\n"
+	.string "ders starke Psyche hat, kann$"
+
+DexDescription_Kadabra_2: @ 83A344A
+	.string "dieses POKéMON unter seine Fittiche\n"
+	.string "nehmen.$"
+
+DexDescription_Alakazam_1: @ 83A347F
+	.string "SIMSALAs Gehirn hört nicht auf zu\n"
+	.string "wachsen, so dass sein Kopf zu schwer\n"
+	.string "für seine Nackenmuskulatur wird.$"
+
+DexDescription_Alakazam_2: @ 83A34DB
+	.string "Dieses POKéMON hält seinen Kopf mit\n"
+	.string "psychokinetischer Energie aufrecht.$"
+
+DexDescription_Machop_1: @ 83A3521
+	.string "MACHOLLOs Muskeln sind etwas Beson-\n"
+	.string "deres. Sie schmerzen nie, egal, wie sehr\n"
+	.string "sie beansprucht werden.$"
+
+DexDescription_Machop_2: @ 83A3582
+	.string "Dieses POKéMON hat genug Kraft, um 100\n"
+	.string "Erwachsene umherzuwerfen.$"
+
+DexDescription_Machoke_1: @ 83A35C4
+	.string "MASCHOCKs starke Muskeln sind so hart\n"
+	.string "wie Stahl. Dieses POKéMON hat so viel\n"
+	.string "Kraft, dass es mit nur einem Finger$"
+
+DexDescription_Machoke_2: @ 83A3629
+	.string "einen Sumo-Ringer in der Luft halten\n"
+	.string "kann.$"
+
+DexDescription_Machamp_1: @ 83A3666
+	.string "MACHOMEI hat genug Kraft, um alles \n"
+	.string "Mögliche zu stemmen. Bei Tätigkeiten,\n"
+	.string "die Geschick und Sorgfalt erfordern,$"
+
+DexDescription_Machamp_2: @ 83A36D7
+	.string "machen es ihm seine Arme jedoch nicht\n"
+	.string "leicht. Dieses POKéMON neigt dazu,\n"
+	.string "zuerst zu handeln und dann zu denken.$"
+
+DexDescription_Bellsprout_1: @ 83A3729
+	.string "KNOFENSAs schlanker und elastischer\n"
+	.string "Körper ermöglicht es ihm, jedem\n"
+	.string "Angriff auszuweichen, so heftig dieser$"
+
+DexDescription_Bellsprout_2: @ 83A3792
+	.string "auch sein mag. Dieses POKéMON spuckt\n"
+	.string "eine ätzende Flüssigkeit aus, die sogar\n"
+	.string "Eisen zersetzen kann.$"
+
+DexDescription_Weepinbell_1: @ 83A37DD
+	.string "ULTRIGARIA hat einen großen Haken\n"
+	.string "an seinem Hinterteil. Nachts hängt\n"
+	.string "sich dieses POKéMON zum Schlafen an$"
+
+DexDescription_Weepinbell_2: @ 83A384D
+	.string "einen Ast. Wenn es sich im Schlaf be-\n"
+	.string "wegt, kann es passieren, dass es auf\n"
+	.string "dem Boden wieder aufwacht.$"
+
+DexDescription_Victreebel_1: @ 83A389B
+	.string "Aus SARZENIAs Kopf ragt eine lange\n"
+	.string "Ranke hervor. Diese schwingt hin und \n"
+	.string "her, als ob sie etwas fangen$"
+
+DexDescription_Victreebel_2: @ 83A3905
+	.string "möchte. Wenn sich ahnungslose Beute \n"
+	.string "nähert, wird sie von diesem POKéMON\n"
+	.string "im Ganzen verschlungen.$"
+
+DexDescription_Tentacool_1: @ 83A3966
+	.string "TENTACHAs Körper setzt sich zum größ-\n"
+	.string "ten Teil aus Wasser zusammen. Wenn es\n"
+	.string "das Meer verlässt, vertrocknet es.$"
+
+DexDescription_Tentacool_2: @ 83A39D0
+	.string "Wenn dieses POKéMON auszutrocknen be-\n"
+	.string "ginnt, sollte man es schnell wieder ins\n"
+	.string "Wasser zurückbringen.$"
+
+DexDescription_Tentacruel_1: @ 83A3A18
+	.string "TENTOXA hat große, rote Kugeln auf \n"
+	.string "seinem Kopf. Sie glühen auf, bevor sie \n"
+	.string "seine Gegner mit Ultraschall$"
+
+DexDescription_Tentacruel_2: @ 83A3A8C
+	.string "erschüttern. Ein Ausbruch dieses \n"
+	.string "POKéMON erzeugt starke Wellen \n"
+	.string "in seiner Umgebung.$"
+
+DexDescription_Geodude_1: @ 83A3AC3
+	.string "Je länger ein KLEINSTEIN lebt, desto\n"
+	.string "mehr wird seine raue Oberfläche ab-\n"
+	.string "geschliffen, so dass es runder wird.$"
+
+DexDescription_Geodude_2: @ 83A3B33
+	.string "Das Herz dieses POKéMON bleibt aber\n"
+	.string "für immer versteinert, hart und rau.$"
+
+DexDescription_Graveler_1: @ 83A3B7D
+	.string "GEOROK wächst, indem es sich von Stei-\n"
+	.string "nen ernährt. Am liebsten mag es Steine,\n"
+	.string "die mit Moos überzogen sind.$"
+
+DexDescription_Graveler_2: @ 83A3BDF
+	.string "Dieses POKéMON frisst sich täglich\n"
+	.string "durch eine riesige Menge von Steinen.$"
+
+DexDescription_Golem_1: @ 83A3C22
+	.string "GEOWAZ lebt hoch in den Bergen. Gibt es \n"
+	.string "ein starkes Erdbeben, rollt dieses\n"
+	.string "POKéMON so lange den Berg hinunter,$"
+
+DexDescription_Golem_2: @ 83A3C87
+	.string "bis es schließlich unten angekommen ist.$"
+
+DexDescription_Ponyta_1: @ 83A3CB6
+	.string "Nach seiner Geburt ist PONITA so\n"
+	.string "schwach, dass es kaum von alleine\n"
+	.string "aufstehen kann. Dieses POKéMON wird$"
+
+DexDescription_Ponyta_2: @ 83A3D0D
+	.string "dadurch schnell stärker, dass es sich\n"
+	.string "beim Versuch, mit seinen Eltern Schritt\n"
+	.string "zu halten, immer wieder aufrappeln muss.$"
+
+DexDescription_Rapidash_1: @ 83A3D3F
+	.string "Man kann GALLOPA dabei beobachten, \n"
+	.string "wie es lässig über Felder und Wiesen\n"
+	.string "galoppiert. Wenn dieses POKéMON$"
+
+DexDescription_Rapidash_2: @ 83A3DAA
+	.string "jedoch Ernst macht, erreicht es bis zu\n"
+	.string "240 km/h. Dann beginnt seine Mähne\n"
+	.string "zu lodern.$"
+
+DexDescription_Slowpoke_1: @ 83A3DF8
+	.string "FLEGMON benutzt seinen Schweif, um \n"
+	.string "Beute zu fangen, indem es ihn an einem \n"
+	.string "Flussufer ins Wasser taucht.$"
+
+DexDescription_Slowpoke_2: @ 83A3E4C
+	.string "Dieses POKéMON vergisst häufig, was es\n"
+	.string "gerade tun wollte, und verbringt ganze \n"
+	.string "Tage damit, am Ufer herumzutrödeln.$"
+
+DexDescription_Slowbro_1: @ 83A3EBB
+	.string "An LAHMUS’ Rute hat sich ein MUSCHAS\n"
+	.string "festgebissen. Daher kann es ihn nicht\n"
+	.string "mehr zum Angeln benutzen$"
+
+DexDescription_Slowbro_2: @ 83A3F2F
+	.string "und es ist dazu gezwungen, umherzu-\n"
+	.string "schwimmen und nach Beute Ausschau\n"
+	.string "zu halten.$"
+
+DexDescription_Magnemite_1: @ 83A3F6E
+	.string "MAGNETILO ernährt sich von Elektri-\n"
+	.string "zität aus Stromleitungen. Dieses\n"
+	.string "POKéMON hängt sich gern an$"
+
+DexDescription_Magnemite_2: @ 83A3FD1
+	.string "Sicherungskästen. Wenn es in deinem\n"
+	.string "Haus zu einem Stromausfall kommt,\n"
+	.string "solltest du die Sicherungen überprüfen.$"
+
+DexDescription_Magneton_1: @ 83A4037
+	.string "MAGNETON erzeugt ein sehr starkes Mag-\n"
+	.string "netfeld, das Maschinen zerstören kann.\n"
+	.string "Deshalb hört man in großen Städten oft$"
+
+DexDescription_Magneton_2: @ 83A40A5
+	.string "Sirenen, die die Bürger vor Scharen\n"
+	.string "dieses POKéMON warnen sollen.$"
+
+DexDescription_Farfetchd_1: @ 83A40E7
+	.string "PORENTA trifft man immer mit einer\n"
+	.string "Lauchstange an. Es gibt gute und\n"
+	.string "schlechte Stangen.$"
+
+DexDescription_Farfetchd_2: @ 83A415B
+	.string "Dieses POKéMON kämpft mit Hilfe seiner\n"
+	.string "Stange gegen seine Gegner.$"
+
+DexDescription_Doduo_1: @ 83A4199
+	.string "DODU hat zwei Köpfe, die nie zur \n"
+	.string "selben Zeit, sondern abwechselnd\n"
+	.string "schlafen. Während ein Kopf schläft,$"
+
+DexDescription_Doduo_2: @ 83A41EC
+	.string "hält der andere Ausschau nach Feinden.$"
+
+DexDescription_Dodrio_1: @ 83A4236
+	.string "DODRIs drei Köpfe blicken in drei ver-\n"
+	.string "schiedene Richtungen. Es ist immer auf\n"
+	.string "der Hut.$"
+
+DexDescription_Dodrio_2: @ 83A42AC
+	.string "Du solltest dich diesem POKéMON nicht\n"
+	.string "nähern, wenn es bereits misstrauisch \n"
+	.string "ist. Es könnte nach dir hacken.$"
+
+DexDescription_Seel_1: @ 83A42F7
+	.string "JUROB jagt unter der eisigen Ober-\n"
+	.string "fläche des Eismeeres nach Beute. Zum\n"
+	.string "Luft holen schlägt es mit dem$"
+
+DexDescription_Seel_2: @ 83A435C
+	.string "vorstehenden Teil seines Kopfes ein \n"
+	.string "Loch ins Eis.$"
+
+DexDescription_Dewgong_1: @ 83A43A4
+	.string "JUGONG liebt es, auf bitterkalten Eis-\n"
+	.string "schollen ein Nickerchen zu machen.\n"
+	.string "Ein Seemann, der einmal ein solches$"
+
+DexDescription_Dewgong_2: @ 83A43F8
+	.string "POKéMON schlafend auf einem\n"
+	.string "Eisberg sah, hielt es irrtümlicherweise\n"
+	.string "für eine Meerjungfrau.$"
+
+DexDescription_Grimer_1: @ 83A4440
+	.string "SLEIMAs glitschiger, gummiartiger\n"
+	.string "Körper passt durch jede noch so kleine\n"
+	.string "Öffnung. Dieses POKéMON steigt in die$"
+
+DexDescription_Grimer_2: @ 83A449D
+	.string "Kanalisation hinab, um fauliges\n"
+	.string "Abwasser zu trinken.$"
+
+DexDescription_Muk_1: @ 83A44D9
+	.string "SLEIMOK scheidet eine widerlich\n"
+	.string "stinkende Substanz aus. Ein einziger\n"
+	.string "Tropfen seiner Körpersubstanz reicht$"
+
+DexDescription_Muk_2: @ 83A452D
+	.string "aus, um ein Gewässer zu verseuchen.$"
+
+DexDescription_Shellder_1: @ 83A457D
+	.string "Nachts benutzt dieses POKéMON seine\n"
+	.string "breite Zunge, um ein Loch in den \n"
+	.string "Meeresboden zu graben.$"
+
+DexDescription_Shellder_2: @ 83A45E6
+	.string "Darin schläft es. Dabei schließt es\n"
+	.string "seine Schale, aber die Zunge hängt\n"
+	.string "heraus.$"
+
+DexDescription_Cloyster_1: @ 83A463A
+	.string "AUSTOS kann im Meerwasser schwimmen,\n"
+	.string "indem es Wasser schluckt und wieder\n"
+	.string "herausspritzt.$"
+
+DexDescription_Cloyster_2: @ 83A46AB
+	.string "Dieses POKéMON kann sich auch ver- \n"
+	.string "teidigen, indem es spitze Stacheln mit\n"
+	.string "Hilfe des Wasserdrucks verschießt.$"
+
+DexDescription_Gastly_1: @ 83A46EC
+	.string "NEBULAK hat einen gasförmigen Körper.\n"
+	.string "Wenn es starkem Wind ausgesetzt wird,\n"
+	.string "kann es davongeweht werden.$"
+
+DexDescription_Gastly_2: @ 83A4761
+	.string "Scharen dieses POKéMON sammeln sich\n"
+	.string "unter Dachrinnen, um sich vor dem\n"
+	.string "gefährlichen Wind zu schützen.$"
+
+DexDescription_Haunter_1: @ 83A47B9
+	.string "ALPOLLO ist ein gefährliches POKéMON.\n"
+	.string "Wenn es dich zu sich lockt, während es\n"
+	.string "durch die Dunkelheit schwebt, darfst$"
+
+DexDescription_Haunter_2: @ 83A4824
+	.string "du ihm keinesfalls zu nahe kommen.\n"
+	.string "Dieses POKéMON wird versuchen, an dir\n"
+	.string "zu lecken und dein Leben zu stehlen.$"
+
+DexDescription_Gengar_1: @ 83A4870
+	.string "Nachts kann es passieren, dass dich\n"
+	.string "dein Schatten im Licht einer\n"
+	.string "Straßenlaterne plötzlich überholt.$"
+
+DexDescription_Gengar_2: @ 83A48DC
+	.string "Dann ist es ein GENGAR, das an dir\n"
+	.string "vorbeiläuft und sich als dein Schatten\n"
+	.string "ausgibt.$"
+
+DexDescription_Onix_1: @ 83A4924
+	.string "ONIX hat einen Magneten in seinem\n"
+	.string "Gehirn. Er dient ihm als Kompass,\n"
+	.string "so dass es beim Graben von Tunneln$"
+
+DexDescription_Onix_2: @ 83A499D
+	.string "nicht die Orientierung verliert. Wenn es\n"
+	.string "älter wird, wird sein Körper immer\n"
+	.string "runder und glatter.$"
+
+DexDescription_Drowzee_1: @ 83A49E4
+	.string "Wenn dir im Schlaf die Nase juckt, ist\n"
+	.string "das ein sicheres Zeichen dafür, dass\n"
+	.string "eines dieser POKéMON auf deinem$"
+
+DexDescription_Drowzee_2: @ 83A4A54
+	.string "Kissen sitzt, um deinen Traum durch\n"
+	.string "deine Nasenlöcher hindurch zu\n"
+	.string "verspeisen.$"
+
+DexDescription_Hypno_1: @ 83A4A94
+	.string "HYPNO hält ein Pendel in der Hand. Das\n"
+	.string "Schwingen und Glitzern des Pendels \n"
+	.string "versetzt seine Feinde in eine tiefe$"
+
+DexDescription_Hypno_2: @ 83A4B07
+	.string "Hypnose. Während dieses POKéMON auf \n"
+	.string "der Suche nach Beute ist, poliert es \n"
+	.string "sein Pendel.$"
+
+DexDescription_Krabby_1: @ 83A4B54
+	.string "KRABBY lebt an Stränden, in Löchern im \n"
+	.string "Sand. An Sandstränden, an denen es\n"
+	.string "wenig Nahrung findet, sieht man dieses$"
+
+DexDescription_Krabby_2: @ 83A4BBD
+	.string "POKéMON mit Artgenossen um sein\n"
+	.string "Revier streiten.$"
+
+DexDescription_Kingler_1: @ 83A4C0B
+	.string "KINGLER hat eine riesige Schere. Es\n"
+	.string "winkt damit, um mit anderen zu \n"
+	.string "kommunizieren.$"
+
+DexDescription_Kingler_2: @ 83A4C73
+	.string "Da seine Schere aber so schwer ist, wird\n"
+	.string "dieses POKéMON schnell müde.$"
+
+DexDescription_Voltorb_1: @ 83A4CB5
+	.string "VOLTOBAL wurde zuerst bei einer Firma\n"
+	.string "beobachtet, die POKéBÄLLE herstellt.\n"
+	.string "Der Zusammenhang zwischen dieser$"
+
+DexDescription_Voltorb_2: @ 83A4D1D
+	.string "Beobachtung und der Tatsache, dass\n"
+	.string "dieses POKéMON wie ein POKéBALL\n"
+	.string "aussieht, ist noch ungeklärt.$"
+
+DexDescription_Electrode_1: @ 83A4D6D
+	.string "LEKTROBAL ernährt sich von\n"
+	.string "Elektrizität aus der Atmosphäre. An\n"
+	.string "Tagen, an denen es blitzt, explodiert$"
+
+DexDescription_Electrode_2: @ 83A4DD4
+	.string "dieses POKéMON dauernd, da es zu viel\n"
+	.string "Elektrizität zu sich nimmt.$"
+
+DexDescription_Exeggcute_1: @ 83A4E13
+	.string "Dieses POKéMON besteht aus sechs\n"
+	.string "Eiern, die ein engmaschiges Netz\n"
+	.string "bilden. Die sechs Eier ziehen sich$"
+
+DexDescription_Exeggcute_2: @ 83A4E88
+	.string "gegenseitig an und drehen sich. Wenn\n"
+	.string "die Eier Risse bekommen, steht OWEI\n"
+	.string "kurz vor seiner Entwicklung.$"
+
+DexDescription_Exeggutor_1: @ 83A4ED6
+	.string "KOKOWEI stammt ursprünglich aus den\n"
+	.string "Tropen. Seine Köpfe wachsen stetig,\n"
+	.string "wenn es starkem Sonnenlicht$"
+
+DexDescription_Exeggutor_2: @ 83A4F43
+	.string "ausgesetzt ist. Wenn seine Köpfe\n"
+	.string "abfallen, bilden sie zusammen ein OWEI.$"
+
+DexDescription_Cubone_1: @ 83A4F93
+	.string "TRAGOSSO sehnt sich nach seiner\n"
+	.string "Mutter, die nicht mehr da ist. Wenn es\n"
+	.string "im Vollmond das Ebenbild seiner Mutter$"
+
+DexDescription_Cubone_2: @ 83A5004
+	.string "erblickt, muss es weinen. Die Flecken\n"
+	.string "auf dem Totenkopf, den es trägt,\n"
+	.string "stammen von vergossenen Tränen.$"
+
+DexDescription_Marowak_1: @ 83A504E
+	.string "KNOGGA ist eine entwickelte Form von\n"
+	.string "TRAGOSSO, die den Verlust der Mutter\n"
+	.string "überwunden hat und stärker geworden$"
+
+DexDescription_Marowak_2: @ 83A50BF
+	.string "ist. Die temperamentvolle und\n"
+	.string "gestärkte Seele dieses POKéMON ist\n"
+	.string "nur schwer zu brechen.$"
+
+DexDescription_Hitmonlee_1: @ 83A5101
+	.string "KICKLEE kann seine Beine ausfahren\n"
+	.string "und einziehen. Es verblüfft seine\n"
+	.string "Gegner mit brutalen Tritten.$"
+
+DexDescription_Hitmonlee_2: @ 83A5177
+	.string "Nach einem Kampf massiert es seine\n"
+	.string "Beine und lockert die Muskeln, um der\n"
+	.string "Erschöpfung vorzubeugen.$"
+
+DexDescription_Hitmonchan_1: @ 83A51C8
+	.string "NOCKCHAN besitzt das Herz eines\n"
+	.string "Boxers, der sich auf eine\n"
+	.string "Weltmeisterschaft vorbereitet.$"
+
+DexDescription_Hitmonchan_2: @ 83A522F
+	.string "Dieses POKéMON hat einen unbeugsamen\n"
+	.string "Willen und gibt niemals auf.$"
+
+DexDescription_Lickitung_1: @ 83A5287
+	.string "Wenn SCHLURP etwas Neues entdeckt,\n"
+	.string "leckt es daran. Es merkt sich \n"
+	.string "Gegenstände anhand der Struktur und$"
+
+DexDescription_Lickitung_2: @ 83A52FA
+	.string "des Geschmacks.\n"
+	.string "Saure Sachen schrecken es eher ab.$"
+
+DexDescription_Koffing_1: @ 83A5341
+	.string "Wenn SMOGON sich aufregt, lässt es\n"
+	.string "das giftige Gas in seinem Inneren\n"
+	.string "entweichen. Wenn es sich zu sehr$"
+
+DexDescription_Koffing_2: @ 83A53B5
+	.string "aufbläht, explodiert dieses POKéMON.$"
+
+DexDescription_Weezing_1: @ 83A53F5
+	.string "SMOGMOG liebt die Gase verrottender,\n"
+	.string "fauler Küchenabfälle. Dieses POKéMON\n"
+	.string "sucht sich ein vernachlässigtes,$"
+
+DexDescription_Weezing_2: @ 83A5464
+	.string "schmutziges Gebäude und richtet sich\n"
+	.string "dort häuslich ein. Nachts, wenn die\n"
+	.string "Menschen schlafen, wühlt es im Müll.$"
+
+DexDescription_Rhyhorn_1: @ 83A54C7
+	.string "RIHORN läuft immer geradeaus und\n"
+	.string "zerstampft alles, was ihm in die Quere\n"
+	.string "kommt. Es macht ihm auch nichts aus,$"
+
+DexDescription_Rhyhorn_2: @ 83A552E
+	.string "wenn es mit dem Kopf voran gegen einen\n"
+	.string "Stahlklotz rennt. Am nächsten Tag\n"
+	.string "allerdings könnte es Schmerzen haben.$"
+
+DexDescription_Rhydon_1: @ 83A5598
+	.string "Mit seinem Horn kann RIZEROS selbst\n"
+	.string "Diamanten zerbrechen. Ein einziger\n"
+	.string "Hieb mit seinem Schweif kann ein Haus$"
+
+DexDescription_Rhydon_2: @ 83A55FA
+	.string "zum Einsturz bringen. Die Haut dieses\n"
+	.string "POKéMON ist so hart, dass nicht einmal\n"
+	.string "Kanonenkugeln Kratzer hinterlassen.$"
+
+DexDescription_Chansey_1: @ 83A5651
+	.string "CHANEIRA legt täglich ausgesprochen\n"
+	.string "nahrhafte Eier. Sie sind so köstlich,\n"
+	.string "dass sie sogar von Menschen verspeist$"
+
+DexDescription_Chansey_2: @ 83A56B5
+	.string "werden, die gar keinen Appetit haben.$"
+
+DexDescription_Tangela_1: @ 83A5704
+	.string "Wenn man TANGELAs Ranken berührt, \n"
+	.string "fallen diese sofort ab. Das tut ihm\n"
+	.string "aber nicht weh und es kann$"
+
+DexDescription_Tangela_2: @ 83A5779
+	.string "sich schnell in Sicherheit bringen. \n"
+	.string "Verliert es Ranken, werden diese am\n"
+	.string "nächsten Tag durch neue ersetzt.$"
+
+DexDescription_Kangaskhan_1: @ 83A57BD
+	.string "Wenn du auf ein spielendes KANGAMA\n"
+	.string "stößt, solltest du es nicht stören oder\n"
+	.string "versuchen, es einzufangen.$"
+
+DexDescription_Kangaskhan_2: @ 83A5828
+	.string "Die Mutter dieses Baby-POKéMON ist\n"
+	.string "bestimmt in Reichweite und könnte\n"
+	.string "sehr wütend auf dich werden.$"
+
+DexDescription_Horsea_1: @ 83A588A
+	.string "SEEPER ernährt sich von kleinen\n"
+	.string "Insekten und dem Moos auf Steinen.\n"
+	.string "Bei unruhiger See verankert sich$"
+
+DexDescription_Horsea_2: @ 83A58FB
+	.string "dieses POKéMON mit seinem Schweif an\n"
+	.string "Steinen oder Korallen, damit es nicht\n"
+	.string "weggespült wird.$"
+
+DexDescription_Seadra_1: @ 83A5941
+	.string "Sobald sich SEEMON um eine Koralle\n"
+	.string "gewickelt hat, schläft es. Von Zeit zu\n"
+	.string "Zeit werden Menschen durch die$"
+
+DexDescription_Seadra_2: @ 83A59A7
+	.string "Widerhaken dieses POKéMON verletzt, \n"
+	.string "wenn sie versuchen, Korallen zu ernten\n"
+	.string "und es dabei nicht bemerken.$"
+
+DexDescription_Goldeen_1: @ 83A59F4
+	.string "GOLDINI ist ein wunderschönes POKéMON,\n"
+	.string "dessen Flossen sich elegant im Wasser\n"
+	.string "wiegen. Aber man muss auf dieses$"
+
+DexDescription_Goldeen_2: @ 83A5A65
+	.string "POKéMON Acht geben. Es könnte einen\n"
+	.string "sonst heftig mit seinem Horn rammen.$"
+
+DexDescription_Seaking_1: @ 83A5AA6
+	.string "Im Herbst kann man männliche GOLKING\n"
+	.string "dabei beobachten, wie sie Balztänze in \n"
+	.string "Flussbetten aufführen, um die$"
+
+DexDescription_Seaking_2: @ 83A5B08
+	.string "weiblichen Exemplare zu beeindrucken.\n"
+	.string "Während dieser Zeit ist die Farbe\n"
+	.string "dieser POKéMON am schönsten.$"
+
+DexDescription_Staryu_1: @ 83A5B55
+	.string "In STERNDUs Körpermitte befindet sich\n"
+	.string "ein hellrot leuchtendes Organ - \n"
+	.string "sein Kern. Wenn du im Spätsommer$"
+
+DexDescription_Staryu_2: @ 83A5BC2
+	.string "an einen Strand gehst, sehen die\n"
+	.string "leuchtenden Kerne dieser POKéMON aus\n"
+	.string "wie Sterne.$"
+
+DexDescription_Starmie_1: @ 83A5C14
+	.string "STARMIEs Mittelteil, sein Kern, leuchtet\n"
+	.string "in sieben Farben. Aufgrund dieser\n"
+	.string "Eigenschaft wird es auch$"
+
+DexDescription_Starmie_2: @ 83A5C7F
+	.string "“Juwel des Meeres” genannt.$"
+
+DexDescription_Mrmime_1: @ 83A5CB9
+	.string "PANTIMOS ist ein Meister der Pantomime.\n"
+	.string "Seine Gesten und Bewegungen machen\n"
+	.string "den Zuschauer glauben, dass etwas$"
+
+DexDescription_Mrmime_2: @ 83A5D20
+	.string "Unsichtbares tatsächlich existiert.\n"
+	.string "Wenn ein Objekt für real gehalten wird,\n"
+	.string "beginnt es wirklich zu existieren.$"
+
+DexDescription_Scyther_1: @ 83A5D70
+	.string "SICHLOR ist unheimlich schnell. Dadurch\n"
+	.string "werden die beiden Sensen an seinen\n"
+	.string "Unterarmen noch effektiver.$"
+
+DexDescription_Scyther_2: @ 83A5DDE
+	.string "Dieses POKéMON kann mit seinen Sensen\n"
+	.string "in Sekundenschnelle Baumstämme\n"
+	.string "zerteilen.$"
+
+DexDescription_Jynx_1: @ 83A5E3F
+	.string "ROSSANA bewegt sich rhythmisch fort.\n"
+	.string "Es wiegt und schwingt seine Hüften, als\n"
+	.string "würde es tanzen. Seine Bewegungen$"
+
+DexDescription_Jynx_2: @ 83A5EB4
+	.string "wirken so anziehend auf Menschen, dass\n"
+	.string "diese beginnen, mit den Hüften zu\n"
+	.string "schwingen, ohne darüber nachzudenken.$"
+
+DexDescription_Electabuzz_1: @ 83A5F1A
+	.string "Bei Gewitter konkurrieren diese\n"
+	.string "POKéMON darum, wie viele\n"
+	.string "Spannungseinheiten sie erreichen,$"
+
+DexDescription_Electabuzz_2: @ 83A5F85
+	.string "wenn sie vom Blitz getroffen werden.\n"
+	.string "Einige Ortschaften benutzen ELEKTEK\n"
+	.string "an Stelle von Blitzableitern.$"
+
+DexDescription_Magmar_1: @ 83A5FD8
+	.string "Im Kampf stößt MAGMAR glühend heiße\n"
+	.string "Flammen aus, um seinen Gegner\n"
+	.string "einzuschüchtern.$"
+
+DexDescription_Magmar_2: @ 83A603C
+	.string "Diese Feuersalven erzeugen Hitzewellen,\n"
+	.string "die das Gras und die Bäume der Umgebung\n"
+	.string "in Brand setzen.$"
+
+DexDescription_Pinsir_1: @ 83A609B
+	.string "PINSIR ist erstaunlich stark. Es kann\n"
+	.string "einen Feind, der doppelt so viel wiegt\n"
+	.string "wie es selbst, mit seinen Hörnern$"
+
+DexDescription_Pinsir_2: @ 83A6107
+	.string "packen und hochheben. Bei niedrigen\n"
+	.string "Temperaturen werden die Bewegungen\n"
+	.string "dieses POKéMON schwerfällig.$"
+
+DexDescription_Tauros_1: @ 83A613E
+	.string "Dieses POKéMON ist nur zufrieden, wenn\n"
+	.string "es kämpfen kann. Wenn TAUROS keinen\n"
+	.string "Gegner findet, sucht es sich starke$"
+
+DexDescription_Tauros_2: @ 83A61A7
+	.string "Bäume und lässt sich an ihnen aus,\n"
+	.string "um sich abzureagieren.$"
+
+DexDescription_Magikarp_1: @ 83A61F1
+	.string "KARPADOR ist ein armseliges POKéMON,\n"
+	.string "das nur platschen kann. Sein\n"
+	.string "merkwürdiges Verhalten hat so manchen$"
+
+DexDescription_Magikarp_2: @ 83A624D
+	.string "Wissenschaftler zum Forschen\n"
+	.string "angeregt.$"
+
+DexDescription_Gyarados_1: @ 83A628E
+	.string "Wenn sich KARPADOR zu GARADOS\n"
+	.string "entwickelt, durchlaufen seine\n"
+	.string "Gehirnzellen eine strukturelle$"
+
+DexDescription_Gyarados_2: @ 83A62FD
+	.string "Veränderung, was wohl der Grund für die\n"
+	.string "zügellose, gewalttätige Natur dieses\n"
+	.string "POKéMON ist.$"
+
+DexDescription_Lapras_1: @ 83A6342
+	.string "Die Menschen sind dafür verantwortlich,\n"
+	.string "dass LAPRAS fast ausgestorben wäre.\n"
+	.string "Abends singt es traurige Klagelieder,$"
+
+DexDescription_Lapras_2: @ 83A63B9
+	.string "da nur noch wenige seiner Artgenossen\n"
+	.string "übrig sind.$"
+
+DexDescription_Ditto_1: @ 83A63EF
+	.string "DITTO verändert seine Zellstruktur, um\n"
+	.string "sich in eine andere Form zu verwandeln.\n"
+	.string "Wenn es sich dabei jedoch auf sein$"
+
+DexDescription_Ditto_2: @ 83A6463
+	.string "Gedächtnis verlässt, unterlaufen \n"
+	.string "diesem POKéMON schon mal Fehler.$"
+
+DexDescription_Eevee_1: @ 83A64B7
+	.string "EVOLIs genetisches Erbmaterial ist so\n"
+	.string "instabil, dass die Umgebung plötzliche\n"
+	.string "Mutationen auslösen kann.$"
+
+DexDescription_Eevee_2: @ 83A651C
+	.string "Die Wirkung verschiedener \n"
+	.string "STEINE führt zur Entwicklung dieses \n"
+	.string "POKéMON.$"
+
+DexDescription_Vaporeon_1: @ 83A6559
+	.string "AQUANA hat eine spontane Mutation\n"
+	.string "durchgemacht und ihm sind Flossen und \n"
+	.string "Kiemen gewachsen. Dadurch kann es$"
+
+DexDescription_Vaporeon_2: @ 83A65BD
+	.string "unter Wasser leben.\n"
+	.string "Dieses POKéMON kann Wasser nach\n"
+	.string "Belieben manipulieren.$"
+
+DexDescription_Jolteon_1: @ 83A65F3
+	.string "BLITZAs Zellen erzeugen schwache\n"
+	.string "Elektrizität. Diese wird aber durch die\n"
+	.string "statische Aufladung seines Fells$"
+
+DexDescription_Jolteon_2: @ 83A6666
+	.string "verstärkt, so dass es Blitzschläge\n"
+	.string "erzeugen kann. Sein Fell besteht aus \n"
+	.string "elektrisch geladenen Nadeln.$"
+
+DexDescription_Flareon_1: @ 83A66CC
+	.string "FLAMARAs flauschiges Fell dient einem\n"
+	.string "besonderen Zweck. Es gibt Hitze an die\n"
+	.string "Luft ab, damit sein Körper nicht$"
+
+DexDescription_Flareon_2: @ 83A6738
+	.string "zu heiß wird. Die Körpertemperatur \n"
+	.string "dieses POKéMON kann bis auf 900 Grad\n"
+	.string "ansteigen.$"
+
+DexDescription_Porygon_1: @ 83A6793
+	.string "PORYGON ist in der Lage, sich in Daten\n"
+	.string "zurückzuverwandeln und in den\n"
+	.string "Cyberspace zu gelangen.$"
+
+DexDescription_Porygon_2: @ 83A67F1
+	.string "Dieses POKéMON ist kopiergeschützt, so\n"
+	.string "dass es durch Kopieren nicht\n"
+	.string "vervielfältigt werden kann.$"
+
+DexDescription_Omanyte_1: @ 83A6837
+	.string "AMONITAS ist ein POKéMON, das seit\n"
+	.string "langer Zeit ausgestorben war, aber\n"
+	.string "von den Menschen aus Fossilien$"
+
+DexDescription_Omanyte_2: @ 83A68A8
+	.string "reproduziert wurde. Wenn es von einem\n"
+	.string "Feind angegriffen wird, zieht es sich in\n"
+	.string "sein hartes Gehäuse zurück.$"
+
+DexDescription_Omastar_1: @ 83A68EC
+	.string "AMOROSO benutzt seine Tentakel, um\n"
+	.string "Beute einzufangen. Man nimmt an,\n"
+	.string "dass es ausgestorben ist, weil seine$"
+
+DexDescription_Omastar_2: @ 83A6963
+	.string "Schale zu groß und zu schwer geworden\n"
+	.string "war, so dass seine Bewegungen immer\n"
+	.string "langsamer und schwerfälliger wurden.$"
+
+DexDescription_Kabuto_1: @ 83A69A6
+	.string "KABUTO ist ein POKéMON, das aus einem\n"
+	.string "Fossil reproduziert wurde. Höchst\n"
+	.string "selten wurden lebende Exemplare dieser$"
+
+DexDescription_Kabuto_2: @ 83A6A15
+	.string "Art entdeckt.\n"
+	.string "Dieses POKéMON hat sich seit 300 Mio.\n"
+	.string "Jahren überhaupt nicht verändert.$"
+
+DexDescription_Kabutops_1: @ 83A6A65
+	.string "In der Antike jagte KABUTOPS unter\n"
+	.string "Wasser nach Beute. Es hat sich von\n"
+	.string "einem Meeresbewohner zu einem Land-$"
+
+DexDescription_Kabutops_2: @ 83A6AC9
+	.string "bewohner entwickelt, was man an den\n"
+	.string "Veränderungen seiner Kiemen und\n"
+	.string "Beine sehen kann.$"
+
+DexDescription_Aerodactyl_1: @ 83A6B36
+	.string "AERODACTYL ist ein POKéMON aus dem\n"
+	.string "Zeitalter der Dinosaurier. Es wurde aus\n"
+	.string "genetischem Material reproduziert, das$"
+
+DexDescription_Aerodactyl_2: @ 83A6BA8
+	.string "aus Bernstein gewonnen wurde.\n"
+	.string "Man geht davon aus, dass es in der\n"
+	.string "Antike der König der Lüfte war.$"
+
+DexDescription_Snorlax_1: @ 83A6BEC
+	.string "Der typische Tagesablauf von RELAXO\n"
+	.string "besteht lediglich aus Essen und\n"
+	.string "Schlafen. Es ist so zutraulich, dass$"
+
+DexDescription_Snorlax_2: @ 83A6C5C
+	.string "Kinder seinen dicken Bauch als Platz\n"
+	.string "zum Spielen nutzen.$"
+
+DexDescription_Articuno_1: @ 83A6C99
+	.string "ARKTOS ist ein sagenumwobenes\n"
+	.string "Vogel-POKéMON, das Eis manipulieren\n"
+	.string "kann. Das Schlagen seiner Flügel$"
+
+DexDescription_Articuno_2: @ 83A6CFE
+	.string "bringt die Luft zum Gefrieren. Es wird\n"
+	.string "behauptet, dass es zu schneien\n"
+	.string "beginnt, wenn dieses POKéMON fliegt.$"
+
+DexDescription_Zapdos_1: @ 83A6D44
+	.string "ZAPDOS ist ein legendäres\n"
+	.string "Vogel-POKéMON, das die Fähigkeit\n"
+	.string "besitzt, Elektrizität zu manipulieren.$"
+
+DexDescription_Zapdos_2: @ 83A6DB7
+	.string "Es lebt in Gewitterwolken.\n"
+	.string "Dieses POKéMON nimmt Energie auf,\n"
+	.string "wenn es vom Blitz getroffen wird.$"
+
+DexDescription_Moltres_1: @ 83A6DF5
+	.string "LAVADOS ist ein legendäres\n"
+	.string "Vogel-POKéMON, das Feuer manipulieren\n"
+	.string "kann. Wenn es verletzt wird, taucht es$"
+
+DexDescription_Moltres_2: @ 83A6E69
+	.string "seinen Körper in das Magma eines\n"
+	.string "Vulkans, um sich zu verbrennen\n"
+	.string "und selbst zu heilen.$"
+
+DexDescription_Dratini_1: @ 83A6EB0
+	.string "DRATINI häutet sich ständig und\n"
+	.string "entledigt sich so seiner Haut, da die\n"
+	.string "Lebensenergie in seinem Körper$"
+
+DexDescription_Dratini_2: @ 83A6F0B
+	.string "stetig und unkontrollierbar ansteigt.$"
+
+DexDescription_Dragonair_1: @ 83A6F4B
+	.string "DRAGONIR speichert eine enorme Menge\n"
+	.string "an Energie in seinem Körper. Es kann die\n"
+	.string "Witterung in seiner Umgebung ändern,$"
+
+DexDescription_Dragonair_2: @ 83A6FB1
+	.string "indem es Energie aus den Kristallen an\n"
+	.string "seinem Nacken und an seinem Schweif\n"
+	.string "entlädt.$"
+
+DexDescription_Dragonite_1: @ 83A6FFF
+	.string "DRAGORAN kann die Welt innerhalb\n"
+	.string "von 16 Stunden umkreisen.\n"
+	.string "Es ist ein gutherziges POKéMON, das$"
+
+DexDescription_Dragonite_2: @ 83A7068
+	.string "vermisste und sinkende Schiffe bei\n"
+	.string "Unwetter sicher an Land zurückbringt.$"
+
+DexDescription_Mewtwo_1: @ 83A70A4
+	.string "MEWTU ist ein POKéMON, das durch\n"
+	.string "Genmanipulation entstanden ist. Die\n"
+	.string "Menschen haben es zwar mit ihrem$"
+
+DexDescription_Mewtwo_2: @ 83A7106
+	.string "wissenschaftlichen Sachverstand\n"
+	.string "erzeugt, aber nicht mit einem\n"
+	.string "mitfühlenden Herzen ausgestattet.$"
+
+DexDescription_Mew_1: @ 83A716B
+	.string "MEW soll die genetische\n"
+	.string "Zusammensetzung aller POKéMON\n"
+	.string "besitzen. Es kann sich unsichtbar$"
+
+DexDescription_Mew_2: @ 83A71D3
+	.string "machen, so dass es sich auch Menschen\n"
+	.string "nähern kann, ohne bemerkt zu werden.$"
+
+DexDescription_Chikorita_1: @ 83A7217
+	.string "Im Kampf wedelt ENDIVIE mit seinem\n"
+	.string "Blatt, um den Feind fern zu halten. Von\n"
+	.string "dem Blatt geht auch ein süßlicher Duft$"
+
+DexDescription_Chikorita_2: @ 83A7280
+	.string "aus, der die kämpfenden POKéMON\n"
+	.string "beruhigt und eine gemütliche,\n"
+	.string "freundliche Atmosphäre schafft.$"
+
+DexDescription_Bayleef_1: @ 83A72E3
+	.string "LORBLATTs Nacken ist mit\n"
+	.string "zusammengerollten Blättern behangen.\n"
+	.string "In jedem Blatt befindet sich ein kleiner$"
+
+DexDescription_Bayleef_2: @ 83A7346
+	.string "Trieb eines Baumes.\n"
+	.string "Der Duft dieses Triebes bringt\n"
+	.string "Menschen auf Trab.$"
+
+DexDescription_Meganium_1: @ 83A7376
+	.string "Der Duft von MEGANIEs Blume besänftigt\n"
+	.string "Gemüter. Im Kampf gibt dieses POKéMON\n"
+	.string "mehr von seinem beruhigenden$"
+
+DexDescription_Meganium_2: @ 83A73DC
+	.string "Duftstoff ab, um den Kampfgeist des\n"
+	.string "Gegners zu schwächen.$"
+
+DexDescription_Cyndaquil_1: @ 83A7417
+	.string "FEURIGEL lässt Flammen aus seinem\n"
+	.string "Rücken lodern, wenn es sich schützen\n"
+	.string "muss. Die Flammen sind sehr verzehrend,$"
+
+DexDescription_Cyndaquil_2: @ 83A747E
+	.string "wenn dieses POKéMON wütend ist. Ist es\n"
+	.string "aber müde, flackern die Flammen nur\n"
+	.string "unregelmäßig und schwach.$"
+
+DexDescription_Quilava_1: @ 83A74DA
+	.string "IGELAVAR hält seine Gegner mit Flammen\n"
+	.string "und Böen heißer Luft auf Distanz.\n"
+	.string "Dieses POKéMON nutzt seine$"
+
+DexDescription_Quilava_2: @ 83A7537
+	.string "außergewöhnliche Gewandtheit dazu,\n"
+	.string "Angriffen auszuweichen und seinen\n"
+	.string "Gegner gleichzeitig zu versengen.$"
+
+DexDescription_Typhlosion_1: @ 83A75A2
+	.string "TORNUPTO versteckt sich hinter einem\n"
+	.string "flimmernden Hitzeschild, den es mit\n"
+	.string "Hilfe seiner heißen Flammen erzeugt.$"
+
+DexDescription_Typhlosion_2: @ 83A760B
+	.string "Dieses POKéMON erzeugt Explosionen,\n"
+	.string "die alles in Schutt und Asche\n"
+	.string "legen.$"
+
+DexDescription_Totodile_1: @ 83A765A
+	.string "KARNIMANI ist zwar sehr klein, aber\n"
+	.string "seine Kiefer sind sehr stark. Wenn\n"
+	.string "die POKéMON denken, dass es nur$"
+
+DexDescription_Totodile_2: @ 83A76C7
+	.string "spielerisch an ihnen knabbert, sollten\n"
+	.string "sie vorsichtig sein, denn sein Biss \n"
+	.string "kann zu schweren Verletzungen führen.$"
+
+DexDescription_Croconaw_1: @ 83A770D
+	.string "Wenn TYRACROC einen Feind mit seinen\n"
+	.string "Kiefern eingeklemmt hat, lässt es ihn\n"
+	.string "nicht mehr los. Da seine Zahnspitzen$"
+
+DexDescription_Croconaw_2: @ 83A777D
+	.string "wie Angelhaken gebogen sind, kann man\n"
+	.string "sie nicht mehr entfernen, wenn sie\n"
+	.string "sich verfangen haben.$"
+
+DexDescription_Feraligatr_1: @ 83A77DA
+	.string "IMPERGATOR schüchtert seine Feinde\n"
+	.string "dadurch ein, dass es sein riesiges Maul\n"
+	.string "aufreißt. Im Kampf erschüttert es den$"
+
+DexDescription_Feraligatr_2: @ 83A783D
+	.string "Boden mit seinen kräftigen Hinterbei-\n"
+	.string "nen, wenn es mit unglaublicher Geschwin-\n"
+	.string "digkeit auf seinen Gegner losrennt.$"
+
+DexDescription_Sentret_1: @ 83A7890
+	.string "Wenn WIESOR schläft, hält immer jemand\n"
+	.string "Wache. Beim ersten Anflug von Gefahr\n"
+	.string "weckt die Wache die anderen auf.$"
+
+DexDescription_Sentret_2: @ 83A7905
+	.string "Wenn dieses POKéMON von seinen\n"
+	.string "Artgenossen getrennt wird, kann es\n"
+	.string "vor Angst nicht mehr schlafen.$"
+
+DexDescription_Furret_1: @ 83A7963
+	.string "WIESENIOR ist sehr schlank. Wenn es\n"
+	.string "angegriffen wird, kann es sich durch\n"
+	.string "enge Zwischenräume schlängeln und$"
+
+DexDescription_Furret_2: @ 83A79CE
+	.string "entkommen. Trotz seiner kurzen\n"
+	.string "Gliedmaßen ist dieses POKéMON sehr\n"
+	.string "wendig und flink.$"
+
+DexDescription_Hoothoot_1: @ 83A7A12
+	.string "HOOTHOOT besitzt ein inneres Organ, das\n"
+	.string "die Erdumdrehung wahrnimmt. Dieses\n"
+	.string "besondere Organ ermöglicht es diesem$"
+
+DexDescription_Hoothoot_2: @ 83A7A85
+	.string "POKéMON, jeden Tag zur selben Zeit zu\n"
+	.string "schreien.$"
+
+DexDescription_Noctowl_1: @ 83A7ABA
+	.string "Dank seines hervorragenden\n"
+	.string "Sehvermögens, mit dem es auch bei\n"
+	.string "geringer Beleuchtung sehen kann, und$"
+
+DexDescription_Noctowl_2: @ 83A7B26
+	.string "dank seiner geschmeidigen Flügel,\n"
+	.string "mit denen es geräuschlos fliegt,\n"
+	.string "entgeht NOCTUH keine Beute.$"
+
+DexDescription_Ledyba_1: @ 83A7B86
+	.string "LEDYBA sondert eine duftende\n"
+	.string "Flüssigkeit ab. Darüber kommuniziert\n"
+	.string "es mit anderen. Dieses POKéMON$"
+
+DexDescription_Ledyba_2: @ 83A7BFD
+	.string "übermittelt seine Gefühle, indem es die\n"
+	.string "Duftnote des Sekrets verändert.$"
+
+DexDescription_Ledian_1: @ 83A7C48
+	.string "In Ländern mit frischer Luft und\n"
+	.string "Sternen am Himmel leben unzählig viele\n"
+	.string "LEDIAN.$"
+
+DexDescription_Ledian_2: @ 83A7CB7
+	.string "Dafür gibt es einen guten Grund:\n"
+	.string "Dieses POKéMON nutzt das Licht der\n"
+	.string "Sterne als Energie.$"
+
+DexDescription_Spinarak_1: @ 83A7D10
+	.string "Das von WEBARAK gesponnene Netz ist\n"
+	.string "sein zweites Nervensystem. Dieses\n"
+	.string "POKéMON kann anhand der feinen$"
+
+DexDescription_Spinarak_2: @ 83A7D77
+	.string "Vibrationen der Netzfäden bestimmen,\n"
+	.string "welche Art Beute sich darauf befindet.$"
+
+DexDescription_Ariados_1: @ 83A7DE7
+	.string "ARIADOS hat kleine hakenförmige Krallen\n"
+	.string "an seinen Füßen. Damit kann es an\n"
+	.string "Decken und Wänden entlang flitzen.$"
+
+DexDescription_Ariados_2: @ 83A7E52
+	.string "Dieses POKéMON erdrückt seine Gegner\n"
+	.string "mit starkem, dünnem Seidenfaden.$"
+
+DexDescription_Crobat_1: @ 83A7E95
+	.string "Wenn IKSBAT fliegt, indem es nur ein \n"
+	.string "Paar Flügel, entweder an seinen Vorder-\n"
+	.string "oder Hinterbeinen bewegt, ist dies ein$"
+
+DexDescription_Crobat_2: @ 83A7F07
+	.string "Anzeichen dafür, dass dieses POKéMON \n"
+	.string "bereits eine lange Strecke hinter sich\n"
+	.string "hat. Dann wechselt es die Flügel häufig.$"
+
+DexDescription_Chinchou_1: @ 83A7F5D
+	.string "LAMPI gibt positive und negative\n"
+	.string "elektrische Ladungen durch seine\n"
+	.string "Antennen ab, um seine Beute zu lähmen.$"
+
+DexDescription_Chinchou_2: @ 83A7FC8
+	.string "Dieses POKéMON lässt seine Lichter\n"
+	.string "aufflackern und tauscht Signale mit\n"
+	.string "seinen Artgenossen aus.$"
+
+DexDescription_Lanturn_1: @ 83A8012
+	.string "LANTURN wird auch “Tiefseestern”\n"
+	.string "genannt, da es leuchtende Antennen\n"
+	.string "besitzt. Dieses POKéMON erzeugt Licht,$"
+
+DexDescription_Lanturn_2: @ 83A8077
+	.string "indem es in den Antennen eine chemische\n"
+	.string "Reaktion zwischen Bakterien und seinen\n"
+	.string "Körperflüssigkeiten erzeugt.$"
+
+DexDescription_Pichu_1: @ 83A80CE
+	.string "An Gewittertagen oder Tagen, an denen\n"
+	.string "die Luft sehr trocken ist, kann sich\n"
+	.string "PICHU leichter mit Elektrizität$"
+
+DexDescription_Pichu_2: @ 83A8138
+	.string "aufladen. Dann kann man das Knistern\n"
+	.string "statischer Aufladung hören.$"
+
+DexDescription_Cleffa_1: @ 83A8182
+	.string "In Nächten mit vielen Sternschnuppen,\n"
+	.string "kann man PII im Kreis tanzen sehen. Es\n"
+	.string "tanzt die ganze Nacht hindurch und$"
+
+DexDescription_Cleffa_2: @ 83A81F2
+	.string "hört erst bei Sonnenaufgang auf, um\n"
+	.string "seinen Durst mit Morgentau zu stillen.$"
+
+DexDescription_Igglybuff_1: @ 83A8249
+	.string "FLUFFELUFFs Stimmbänder sind noch\n"
+	.string "nicht voll entwickelt. Wenn es zu viel\n"
+	.string "singt, schmerzt ihm die Kehle.$"
+
+DexDescription_Igglybuff_2: @ 83A82B8
+	.string "Dieses POKéMON gurgelt mit Süßwasser\n"
+	.string "aus einem sauberen Fluss.$"
+
+DexDescription_Togepi_1: @ 83A82F2
+	.string "TOGEPI nutzt die positiven Emotionen,\n"
+	.string "wie Freude und Mitgefühl, von Menschen\n"
+	.string "und POKéMON als Energie.$"
+
+DexDescription_Togepi_2: @ 83A835C
+	.string "Dieses POKéMON speichert Glücksgefühle\n"
+	.string "in seiner Schale und teilt sie mit\n"
+	.string "anderen.$"
+
+DexDescription_Togetic_1: @ 83A83B9
+	.string "TOGETIC ist ein POKéMON, das Glück\n"
+	.string "bringt. Wenn es jemanden trifft, der\n"
+	.string "reinen Herzens ist, zeigt es sich und$"
+
+DexDescription_Togetic_2: @ 83A8428
+	.string "teilt sein Glück mit dieser Person.$"
+
+DexDescription_Natu_1: @ 83A8467
+	.string "NATU kann nicht fliegen, da seine Flügel\n"
+	.string "noch nicht ausgewachsen sind. Wenn du\n"
+	.string "diesem POKéMON in die Augen schaust,$"
+
+DexDescription_Natu_2: @ 83A84DC
+	.string "starrt es dich konzentriert an. Wenn du\n"
+	.string "dich aber bewegst, hüpft es weg, um sich\n"
+	.string "in Sicherheit zu bringen.$"
+
+DexDescription_Xatu_1: @ 83A852D
+	.string "XATU bleibt den ganzen Tag an ein und\n"
+	.string "demselben Ort wie angewurzelt stehen. \n"
+	.string "Die Menschen glauben, dass es dies aus$"
+
+DexDescription_Xatu_2: @ 83A859C
+	.string "Angst vor den Dingen tut, die es für die\n"
+	.string "Zukunft vorausgesehen hat.$"
+
+DexDescription_Mareep_1: @ 83A85CF
+	.string "VOLTILAMMs flauschiges, wollenes Fell\n"
+	.string "erzeugt Reibung und statische\n"
+	.string "Aufladung. Je höher die elektrische$"
+
+DexDescription_Mareep_2: @ 83A863E
+	.string "Ladung wird, desto heller leuchtet die\n"
+	.string "Glühbirne an seinem Schweif.$"
+
+DexDescription_Flaaffy_1: @ 83A867C
+	.string "Die Qualität von WAATYs Wolle verändert\n"
+	.string "sich, so dass es mit nur wenig Wolle eine\n"
+	.string "große statische Aufladung erzeugen$"
+
+DexDescription_Flaaffy_2: @ 83A86F4
+	.string "kann. Die kahlen Stellen in seinem Fell\n"
+	.string "sind gegen Elektrizität abgeschirmt.$"
+
+DexDescription_Ampharos_1: @ 83A873B
+	.string "AMPHAROS strahlt so viel Licht aus,\n"
+	.string "dass es sogar aus dem Weltraum noch \n"
+	.string "gesehen werden kann. In der Antike$"
+
+DexDescription_Ampharos_2: @ 83A87AA
+	.string "benutzten die Menschen das Licht\n"
+	.string "dieses POKéMON dazu, Signale über\n"
+	.string "weite Entfernungen auszutauschen.$"
+
+DexDescription_Bellossom_1: @ 83A87EC
+	.string "Wenn BLUBELLA starkem Sonnenlicht\n"
+	.string "ausgesetzt ist, beginnen sich die Blät-\n"
+	.string "ter an seinem Körper zu drehen.$"
+
+DexDescription_Bellossom_2: @ 83A8851
+	.string "Der Tanz dieses POKéMON ist in\n"
+	.string "südlichen Ländern sehr bekannt.$"
+
+DexDescription_Marill_1: @ 83A888B
+	.string "MARILLs Schweif ist mit Öl gefüllt und\n"
+	.string "dient ihm als eine Art Rettungsring.\n"
+	.string "Wenn nur sein Schweif an der$"
+
+DexDescription_Marill_2: @ 83A88FE
+	.string "Wasseroberfläche zu sehen ist, taucht\n"
+	.string "dieses POKéMON gerade, um sich von\n"
+	.string "Wasserpflanzen zu ernähren.$"
+
+DexDescription_Azumarill_1: @ 83A895E
+	.string "AZUMARILLs lange Ohren dienen ihm\n"
+	.string "als unentbehrliche Sensoren. Wenn es\n"
+	.string "sein Gehör fokussiert, kann dieses$"
+
+DexDescription_Azumarill_2: @ 83A89D0
+	.string "POKéMON auch in reißenden Flüssen\n"
+	.string "identifizieren, welche Art von Beute\n"
+	.string "sich in seiner Nähe befindet.$"
+
+DexDescription_Sudowoodo_1: @ 83A8A08
+	.string "MOGELBAUM tarnt sich als Baum, um\n"
+	.string "Angriffen von Feinden aus dem Weg\n"
+	.string "zu gehen. Da seine Vorderbeine aber$"
+
+DexDescription_Sudowoodo_2: @ 83A8A78
+	.string "das ganze Jahr über grün bleiben, fällt\n"
+	.string "seine Tarnung im Winter leicht auf.$"
+
+DexDescription_Politoed_1: @ 83A8AD1
+	.string "QUAXO hat gelocktes Haar, das ihm den\n"
+	.string "Status eines Königs bescheinigt. Je\n"
+	.string "länger und lockiger sein Haar ist, desto$"
+
+DexDescription_Politoed_2: @ 83A8B45
+	.string "mehr Respekt erntet dieses POKéMON\n"
+	.string "von seinen Artgenossen.$"
+
+DexDescription_Hoppip_1: @ 83A8B7F
+	.string "HOPPSPROSS lässt sich vom Wind\n"
+	.string "treiben. Wenn es bemerkt, dass ein\n"
+	.string "Sturm aufkommt, verbindet es seine$"
+
+DexDescription_Hoppip_2: @ 83A8BF0
+	.string "Blätter mit anderen HOPPSPROSS,\n"
+	.string "damit es nicht davongeweht wird.$"
+
+DexDescription_Skiploom_1: @ 83A8C27
+	.string "HUBELUPFs Blume beginnt zu blühen, wenn\n"
+	.string "die Temperatur über 18 Grad steigt. Wie\n"
+	.string "weit sich die Blüte öffnet, hängt von$"
+
+DexDescription_Skiploom_2: @ 83A8C96
+	.string "der Höhe der Temperatur ab. Daher wird\n"
+	.string "dieses POKéMON manchmal als\n"
+	.string "Thermometer eingesetzt.$"
+
+DexDescription_Jumpluff_1: @ 83A8CE9
+	.string "PAPUNGHA nutzt den Südwind, um das\n"
+	.string "Meer zu überqueren und in ferne\n"
+	.string "Länder zu fliegen. Dieses POKéMON$"
+
+DexDescription_Jumpluff_2: @ 83A8D5A
+	.string "sinkt zu Boden, wenn es während seines\n"
+	.string "Fluges auf kalte Luftschichten stößt.$"
+
+DexDescription_Aipom_1: @ 83A8D8C
+	.string "An GRIFFELs Schweif befindet sich ein\n"
+	.string "handähnliches Anhängsel, mit dem es\n"
+	.string "geschickt zu Werke gehen kann.$"
+
+DexDescription_Aipom_2: @ 83A8DD9
+	.string "Da dieses POKéMON sehr häufig seinen\n"
+	.string "Schweif einsetzt, wirken seine Hände\n"
+	.string "eher plump.$"
+
+DexDescription_Sunkern_1: @ 83A8E37
+	.string "SONNKERN versucht, sich so wenig wie\n"
+	.string "möglich zu bewegen, um alle\n"
+	.string "gespeicherten Nährstoffe für seine$"
+
+DexDescription_Sunkern_2: @ 83A8EA8
+	.string "Entwicklung aufzusparen. Außer\n"
+	.string "Morgentau nimmt es nichts weiter zu\n"
+	.string "sich.$"
+
+DexDescription_Sunflora_1: @ 83A8F0C
+	.string "SONNFLORA verwandelt Solarenergie in\n"
+	.string "Nährstoffe. Tagsüber, wenn es warm ist,\n"
+	.string "ist es sehr aktiv.$"
+
+DexDescription_Sunflora_2: @ 83A8F74
+	.string "Wenn aber die Sonne untergegangen ist,\n"
+	.string "hört es auf sich zu bewegen.$"
+
+DexDescription_Yanma_1: @ 83A8FB0
+	.string "YANMA hat einen Blickwinkel von 360\n"
+	.string "Grad, ohne die Augen bewegen zu müssen.\n"
+	.string "Es ist ein großartiger Flieger und geübt$"
+
+DexDescription_Yanma_2: @ 83A901D
+	.string "darin, plötzlich anzuhalten oder\n"
+	.string "Wendemanöver vorzunehmen. So kann es\n"
+	.string "sich blitzschnell auf Beute stürzen.$"
+
+DexDescription_Wooper_1: @ 83A908F
+	.string "FELINO lebt eigentlich im Wasser.\n"
+	.string "Manchmal kommt es jedoch an Land, um \n"
+	.string "nach Nahrung zu suchen.$"
+
+DexDescription_Wooper_2: @ 83A90EE
+	.string "An Land bedeckt es seinen Körper mit\n"
+	.string "einem schleimigen Giftfilm.$"
+
+DexDescription_Quagsire_1: @ 83A9123
+	.string "MORLORD jagt seine Nahrung, indem es im\n"
+	.string "Wasser sein Maul weit aufmacht und\n"
+	.string "auf unvorsichtige Beute wartet.$"
+
+DexDescription_Quagsire_2: @ 83A9193
+	.string "Da sich dieses POKéMON nicht bewegt,\n"
+	.string "wird es auch nicht besonders hungrig.$"
+
+DexDescription_Espeon_1: @ 83A91D3
+	.string "PSIANA ist jedem TRAINER treu, dem es\n"
+	.string "zugetan ist. Dieses POKéMON hat die\n"
+	.string "Fähigkeit der Prophezeiung entwickelt,$"
+
+DexDescription_Espeon_2: @ 83A923E
+	.string "um seine TRAINER vor Unheil zu\n"
+	.string "bewahren.$"
+
+DexDescription_Umbreon_1: @ 83A9278
+	.string "NACHTARA hat sich dadurch entwickelt,\n"
+	.string "dass es den Mondwellen ausgesetzt war.\n"
+	.string "Es versteckt sich im Schutze der$"
+
+DexDescription_Umbreon_2: @ 83A92DD
+	.string "Dunkelheit und wartet darauf, dass sich\n"
+	.string "ein Feind bewegt. Die Ringe an seinem\n"
+	.string "Körper leuchten auf, wenn es angreift.$"
+
+DexDescription_Murkrow_1: @ 83A932E
+	.string "KRAMURX wurde als vermeintlicher\n"
+	.string "Überbringer des Unheils verabscheut\n"
+	.string "und gefürchtet. Dieses POKéMON hat$"
+
+DexDescription_Murkrow_2: @ 83A9399
+	.string "ein großes Interesse an allem, was\n"
+	.string "funkelt und glitzert. Es stiehlt auch\n"
+	.string "Ringe von Frauen.$"
+
+DexDescription_Slowking_1: @ 83A93E9
+	.string "LASCHOKING betreibt jeden Tag \n"
+	.string "Forschung, um die Geheimnisse der Welt\n"
+	.string "zu lüften. Dieses POKéMON vergisst aber$"
+
+DexDescription_Slowking_2: @ 83A9442
+	.string "alles, was es bereits herausgefunden\n"
+	.string "hat, wenn das MUSCHAS auf seinem\n"
+	.string "Kopf abfällt.$"
+
+DexDescription_Misdreavus_1: @ 83A94AC
+	.string "TRAUNFUGIL erschreckt Menschen mit\n"
+	.string "einem markerschütternden Schrei.\n"
+	.string "Dieses POKéMON verwendet seine roten$"
+
+DexDescription_Misdreavus_2: @ 83A9513
+	.string "Kraftfelder dazu, die Ängste seiner\n"
+	.string "Feinde aufzunehmen und sie in\n"
+	.string "Nahrung umzuwandeln.$"
+
+DexDescription_Unown_1: @ 83A9555
+	.string "ICOGNITO hat die Form antiker\n"
+	.string "Schriftzeichen. Bis heute ist unklar,\n"
+	.string "was zuerst da war: Die antiken$"
+
+DexDescription_Unown_2: @ 83A95C6
+	.string "Schriftzeichen oder die vielen unter-\n"
+	.string "schiedlichen ICOGNITO. Trotz umfang-\n"
+	.string "reicher Forschung bleiben Fragen offen.$"
+
+DexDescription_Wobbuffet_1: @ 83A960F
+	.string "Wenn zwei oder mehr WOINGENAU \n"
+	.string "aufeinander treffen, versuchen sie,\n"
+	.string "gegenseitig ihre Geduld zu übertreffen.$"
+
+DexDescription_Wobbuffet_2: @ 83A9672
+	.string "Sie möchten herausfinden, welches\n"
+	.string "POKéMON es am längsten ohne Nahrung\n"
+	.string "aushält. Darauf müssen Trainer achten.$"
+
+DexDescription_Girafarig_1: @ 83A96E5
+	.string "Der Kopf an GIRAFARIGs Hinterteil hat\n"
+	.string "ein eigenes Gehirn. Er reagiert mit\n"
+	.string "Angriffen auf Gerüche und Geräusche.$"
+
+DexDescription_Girafarig_2: @ 83A9756
+	.string "Wenn man sich diesem POKéMON von\n"
+	.string "hinten nähert, könnte der hintere Kopf\n"
+	.string "plötzlich vorschnellen und zubeißen.$"
+
+DexDescription_Pineco_1: @ 83A97B2
+	.string "TANNZA hängt an Ästen und wartet auf\n"
+	.string "Beute. Wenn man dieses POKéMON bei\n"
+	.string "einer Mahlzeit stört, indem man den$"
+
+DexDescription_Pineco_2: @ 83A9820
+	.string "Baum, auf dem es sich befindet,\n"
+	.string "schüttelt, fällt es herunter und\n"
+	.string "explodiert ohne Vorwarnung.$"
+
+DexDescription_Forretress_1: @ 83A987E
+	.string "FORSTELLKA versteckt sich in seiner\n"
+	.string "stahlharten Schale. Die Schale öffnet\n"
+	.string "sich, wenn es nach Beute schnappt.$"
+
+DexDescription_Forretress_2: @ 83A98F1
+	.string "Dies geht jedoch so schnell, dass man\n"
+	.string "das Innere der Schale nicht zu Gesicht\n"
+	.string "bekommt.$"
+
+DexDescription_Dunsparce_1: @ 83A993D
+	.string "DUMMISEL hat einen Bohrer als Schweif.\n"
+	.string "Diesen benutzt es, um sich rückwärts in\n"
+	.string "den Boden einzugraben.$"
+
+DexDescription_Dunsparce_2: @ 83A9998
+	.string "Dieses POKéMON baut seinen \n"
+	.string "Nestkomplex tief unter der\n"
+	.string "Erdoberfläche auf.$"
+
+DexDescription_Gligar_1: @ 83A99E8
+	.string "SKORGLA segelt lautlos durch die Lüfte.\n"
+	.string "Es verankert sich mit Hilfe der Krallen\n"
+	.string "an seinen Hinterbeinen und der riesigen$"
+
+DexDescription_Gligar_2: @ 83A9A52
+	.string "Scheren an seinen Vorderbeinen am\n"
+	.string "Gesicht eines Feindes fest und\n"
+	.string "vergiftet ihn mit seinem Giftstachel.$"
+
+DexDescription_Steelix_1: @ 83A9AC8
+	.string "STAHLOS lebt noch tiefer unter der Erde\n"
+	.string "als ONIX. Dieses POKéMON gräbt immer\n"
+	.string "in Richtung des Erdkerns.$"
+
+DexDescription_Steelix_2: @ 83A9B31
+	.string "Nachweislich hat dieses POKéMON\n"
+	.string "bereits Tiefen von einem Kilometer\n"
+	.string "erreicht.$"
+
+DexDescription_Snubbull_1: @ 83A9B8E
+	.string "Indem es seine Zähne fletscht und\n"
+	.string "ein Furcht erregendes Gesicht macht,\n"
+	.string "schlägt SNUBBULL kleinere POKéMON$"
+
+DexDescription_Snubbull_2: @ 83A9BF4
+	.string "in die Flucht. Es scheint darüber jedoch\n"
+	.string "etwas traurig zu sein.$"
+
+DexDescription_Granbull_1: @ 83A9C36
+	.string "GRANBULL besitzt einen besonders\n"
+	.string "ausgeprägten Unterkiefer. Wegen seiner\n"
+	.string "schweren Zähne wackelt es mit dem Kopf.$"
+
+DexDescription_Granbull_2: @ 83A9CA6
+	.string "Es beißt nur zu, wenn es erschreckt\n"
+	.string "wird.$"
+
+DexDescription_Qwilfish_1: @ 83A9D02
+	.string "BALDORFISH saugt Wasser ein, um sich\n"
+	.string "aufzublasen. Dieses POKéMON nutzt den\n"
+	.string "Druck des Wassers dazu, giftige$"
+
+DexDescription_Qwilfish_2: @ 83A9D6F
+	.string "Stacheln aus seinem Körper zu\n"
+	.string "verschießen. Es betrachtet Schwimmen\n"
+	.string "als eine echte Herausforderung.$"
+
+DexDescription_Scizor_1: @ 83A9DC8
+	.string "SCHEROX’ Körper ist hart wie Stahl.\n"
+	.string "Gewöhnliche Angriffe jagen ihm keine\n"
+	.string "Angst ein. Dieses POKéMON schlägt$"
+
+DexDescription_Scizor_2: @ 83A9E2B
+	.string "mit den Flügeln, um seine\n"
+	.string "Körpertemperatur zu regulieren.$"
+
+DexDescription_Shuckle_1: @ 83A9E6A
+	.string "POTTROTT versteckt sich leise unter\n"
+	.string "Steinen und verbirgt seinen Körper in\n"
+	.string "seiner harten Schale, wenn es$"
+
+DexDescription_Shuckle_2: @ 83A9ED2
+	.string "gesammelte Beeren zu sich nimmt. Die\n"
+	.string "Beeren vermischen sich mit seinen\n"
+	.string "Körperflüssigkeiten zu einem Saft.$"
+
+DexDescription_Heracross_1: @ 83A9F26
+	.string "SKARABORN geht direkt auf seinen\n"
+	.string "Gegner los, rutscht auf ihn zu, um ihn\n"
+	.string "auszuhebeln und mit seinem mächtigen$"
+
+DexDescription_Heracross_2: @ 83A9F97
+	.string "Horn wegzuschleudern. Dieses POKéMON\n"
+	.string "hat genug Kraft, um einen massigen\n"
+	.string "Baum umzustoßen.$"
+
+DexDescription_Sneasel_1: @ 83A9FF3
+	.string "SNIEBEL klettert an Bäumen hoch, indem\n"
+	.string "es seine hakenförmigen Krallen in die\n"
+	.string "Rinde schlägt. Dieses POKéMON sucht$"
+
+DexDescription_Sneasel_2: @ 83AA055
+	.string "nach unbewachten Nestern und stiehlt\n"
+	.string "die Eier, wenn die Eltern auf Nahrungs-\n"
+	.string "suche sind. Davon ernährt es sich.$"
+
+DexDescription_Teddiursa_1: @ 83AA090
+	.string "TEDDIURSA leckt gern seine mit Honig\n"
+	.string "bedeckten Pranken ab. Dieses POKéMON\n"
+	.string "bereitet seinen eigenen Honig zu, indem$"
+
+DexDescription_Teddiursa_2: @ 83AA106
+	.string "es die von BIBOR gesammelten Früchte\n"
+	.string "und Pollen miteinander vermengt.$"
+
+DexDescription_Ursaring_1: @ 83AA138
+	.string "In den von URSARING bewohnten Wäldern\n"
+	.string "gibt es viele Flüsse und hohe Bäume, in\n"
+	.string "denen es Nahrung findet. Dieses$"
+
+DexDescription_Ursaring_2: @ 83AA1A3
+	.string "POKéMON läuft täglich durch den Wald,\n"
+	.string "um nach Essbarem zu suchen.$"
+
+DexDescription_Slugma_1: @ 83AA1F0
+	.string "Durch SCHNECKMAGs Kreislaufsystem\n"
+	.string "fließt Magma. Wenn dieses POKéMON\n"
+	.string "erkältet ist, kühlt das Magma$"
+
+DexDescription_Slugma_2: @ 83AA253
+	.string "aus und erhärtet. Sein Körper wird\n"
+	.string "spröde und es brechen Stücke heraus,\n"
+	.string "so dass es kleiner wird.$"
+
+DexDescription_Magcargo_1: @ 83AA2A5
+	.string "MAGCARGOs Schale ist eigentlich seine\n"
+	.string "Haut, die erhärtet ist, als es auskühlte.\n"
+	.string "Seine Schale ist sehr spröde und$"
+
+DexDescription_Magcargo_2: @ 83AA319
+	.string "zerbrechlich. Schon bei einer leichten\n"
+	.string "Berührung bricht sie auseinander. Dann\n"
+	.string "muss es ein Bad in Magma nehmen.$"
+
+DexDescription_Swinub_1: @ 83AA38C
+	.string "Auf Nahrungssuche schnüffelt QUIEKEL\n"
+	.string "am Boden entlang. Seine \n"
+	.string "Lieblingsspeise ist ein Pilz, der unter$"
+
+DexDescription_Swinub_2: @ 83AA3FC
+	.string "verwesendem Gras wächst. \n"
+	.string "Manchmal spürt dieses POKéMON heiße\n"
+	.string "Quellen auf.$"
+
+DexDescription_Piloswine_1: @ 83AA446
+	.string "KEIFEL hat ein dichtes Fell aus langen\n"
+	.string "Haaren. Dadurch ist es gegen eisige\n"
+	.string "Kälte gewappnet.$"
+
+DexDescription_Piloswine_2: @ 83AA4A5
+	.string "Dieses POKéMON benutzt seine\n"
+	.string "Hauer, um an Nahrung zu gelangen, die\n"
+	.string "unter dem Eis eingeschlossen ist.$"
+
+DexDescription_Corsola_1: @ 83AA4F0
+	.string "Wenn CORASONNs Arme Sonnenlicht\n"
+	.string "abbekommen, glitzern sie wunderschön\n"
+	.string "in sieben Farben. Wenn ein Arm$"
+
+DexDescription_Corsola_2: @ 83AA546
+	.string "abbricht, wächst über Nacht ein neuer\n"
+	.string "nach.$"
+
+DexDescription_Remoraid_1: @ 83AA58E
+	.string "REMORAID saugt Wasser ein und spritzt\n"
+	.string "es unter Einsatz seiner Bauchmuskeln\n"
+	.string "mit Hochdruck wieder heraus. So schießt$"
+
+DexDescription_Remoraid_2: @ 83AA5FE
+	.string "es fliegende Beute ab. Wenn seine\n"
+	.string "Entwicklung näher rückt, wandert\n"
+	.string "dieses POKéMON flussabwärts.$"
+
+DexDescription_Octillery_1: @ 83AA646
+	.string "OCTILLERY saugt sich mit seinen\n"
+	.string "Tentakeln an einem Feind fest. Dieses\n"
+	.string "POKéMON betäubt seinen Gegner,$"
+
+DexDescription_Octillery_2: @ 83AA6B2
+	.string "bevor es ihm den Rest gibt.\n"
+	.string "Wenn ein Feind zu stark ist, speit es\n"
+	.string "Tinte aus und flüchtet.$"
+
+DexDescription_Delibird_1: @ 83AA708
+	.string "BOTOGEL sammelt seine Nahrung in\n"
+	.string "seinem Schweif. Es gab einmal einen\n"
+	.string "berühmten Entdecker, der es dank eines$"
+
+DexDescription_Delibird_2: @ 83AA779
+	.string "BOTOGELs geschafft hat, einen der\n"
+	.string "höchsten Berge der Welt zu besteigen.\n"
+	.string "Es hatte seine Nahrung mit ihm geteilt.$"
+
+DexDescription_Mantine_1: @ 83AA7B9
+	.string "An schönen Tagen sieht man Schwärme\n"
+	.string "von MANTAX elegant über die Wellen des\n"
+	.string "Ozeans springen.$"
+
+DexDescription_Mantine_2: @ 83AA80F
+	.string "Durch REMORAID, die an ihm haften\n"
+	.string "und ihn begleiten, fühlt sich dieses\n"
+	.string "POKéMON nicht belästigt.$"
+
+DexDescription_Skarmory_1: @ 83AA850
+	.string "PANZAERON ist komplett in einen harten,\n"
+	.string "schützenden Panzer eingehüllt. Dieses\n"
+	.string "POKéMON fliegt 300 km/h.$"
+
+DexDescription_Skarmory_2: @ 83AA8B0
+	.string "Es greift seine Feinde mit seinen\n"
+	.string "messerscharfen Flügeln an.$"
+
+DexDescription_Houndour_1: @ 83AA8F5
+	.string "HUNDUSTER jagen in Gruppen. Sie\n"
+	.string "kommunizieren miteinander über\n"
+	.string "verschiedene Arten von Geheul und$"
+
+DexDescription_Houndour_2: @ 83AA96A
+	.string "treiben ihre Feinde in die Enge.\n"
+	.string "Die Zusammenarbeit dieser POKéMON\n"
+	.string "ist einzigartig.$"
+
+DexDescription_Houndoom_1: @ 83AA99E
+	.string "In einer Gruppe von HUNDEMON ist\n"
+	.string "dasjenige mit den nach hinten\n"
+	.string "gebogenen Hörnern der Anführer.$"
+
+DexDescription_Houndoom_2: @ 83AAA02
+	.string "Diese POKéMON bestimmen ihren Anführer\n"
+	.string "durch das Ausfechten von Kämpfen\n"
+	.string "untereinander.$"
+
+DexDescription_Kingdra_1: @ 83AAA44
+	.string "SEEDRAKING lebt in den Tiefen des\n"
+	.string "Ozeans, die ansonsten verwaist sind.\n"
+	.string "Lange hat man geglaubt, dass das$"
+
+DexDescription_Kingdra_2: @ 83AAAAD
+	.string "Gähnen dieses POKéMON Strudel auslöst.$"
+
+DexDescription_Phanpy_1: @ 83AAAE7
+	.string "Um sich ein Nest zu bauen, gräbt\n"
+	.string "PHANPY am Flussufer ein Loch ins\n"
+	.string "Erdreich. Es markiert die Umgebung$"
+
+DexDescription_Phanpy_2: @ 83AAB5E
+	.string "seines Nests mit Hilfe seines Rüssels,\n"
+	.string "damit seine Artgenossen wissen, dass\n"
+	.string "dieses Gebiet vergeben ist.$"
+
+DexDescription_Donphan_1: @ 83AAB9F
+	.string "DONPHANs Lieblingsattacke ist es, als\n"
+	.string "Ball zusammengerollt mit voller Wucht\n"
+	.string "gegen seine Gegner zu krachen.$"
+
+DexDescription_Donphan_2: @ 83AAC10
+	.string "Wenn es erst einmal rollt, ist dieses\n"
+	.string "POKéMON nur schwer aufzuhalten.$"
+
+DexDescription_Porygon2_1: @ 83AAC4D
+	.string "PORYGON2 wurde in einem\n"
+	.string "wissenschaftlichen Experiment von\n"
+	.string "Menschen erzeugt. Es verfügt über$"
+
+DexDescription_Porygon2_2: @ 83AACB3
+	.string "künstliche Intelligenz, wodurch es \n"
+	.string "selbstständig neue Gesten und Gefühle\n"
+	.string "erlernen kann.$"
+
+DexDescription_Stantler_1: @ 83AAD0A
+	.string "DAMHIRPLEX hat ein prächtiges Geweih,\n"
+	.string "für das hohe Preise gezahlt werden, da\n"
+	.string "sie als Kunstwerke gelten.$"
+
+DexDescription_Stantler_2: @ 83AAD7A
+	.string "Daher wurde dieses POKéMON gejagt und\n"
+	.string "wäre beinahe ausgestorben.$"
+
+DexDescription_Smeargle_1: @ 83AADBD
+	.string "FARBEAGLE markiert sein Revier mit\n"
+	.string "einer Flüssigkeit, die aus seiner\n"
+	.string "Schweifspitze austritt.$"
+
+DexDescription_Smeargle_2: @ 83AAE28
+	.string "Es wurden über 5000 unterschiedliche\n"
+	.string "Markierungen entdeckt, die dieses\n"
+	.string "POKéMON hinterlassen hat.$"
+
+DexDescription_Tyrogue_1: @ 83AAE69
+	.string "RABAUZ muss jeden Tag trainieren,\n"
+	.string "sonst ist es nicht ausgelastet und\n"
+	.string "reagiert gestresst. Wenn man dieses$"
+
+DexDescription_Tyrogue_2: @ 83AAED4
+	.string "POKéMON trainiert, muss man\n"
+	.string "zahlreiche Trainingsmethoden\n"
+	.string "einsetzen und sie ständig ausbauen.$"
+
+DexDescription_Hitmontop_1: @ 83AAF08
+	.string "KAPOERA dreht sich auf dem Kopf\n"
+	.string "stehend um die eigene Achse und teilt\n"
+	.string "Tritte aus. Seine Technik ist eine$"
+
+DexDescription_Hitmontop_2: @ 83AAF79
+	.string "bemerkenswerte Mischung aus Angriff \n"
+	.string "und Verteidigung. Es bewegt sich \n"
+	.string "drehend schneller voran als laufend.$"
+
+DexDescription_Smoochum_1: @ 83AAFDE
+	.string "KUSSILLA läuft hektisch umher, fällt\n"
+	.string "aber auch ziemlich oft hin. Es lässt\n"
+	.string "keine Möglichkeit aus sein Spiegelbild$"
+
+DexDescription_Smoochum_2: @ 83AB03D
+	.string "zu betrachten, um sicherzustellen,\n"
+	.string "dass sein Gesicht nicht schmutzig\n"
+	.string "geworden ist.$"
+
+DexDescription_Elekid_1: @ 83AB080
+	.string "ELEKID speichert Elektrizität in seinem\n"
+	.string "Körper. Wenn es Metall berührt und\n"
+	.string "versehentlich die aufgestaute Energie$"
+
+DexDescription_Elekid_2: @ 83AB0F5
+	.string "entlädt, rotiert es mit den Armen, um\n"
+	.string "sich wieder aufzuladen.$"
+
+DexDescription_Magby_1: @ 83AB13A
+	.string "MAGBYs Gesundheitszustand kann man\n"
+	.string "am Feuer erkennen, das es ausatmet.\n"
+	.string "Wenn es gelbe Flammen ausstößt, ist es$"
+
+DexDescription_Magby_2: @ 83AB1A5
+	.string "in guter Verfassung. Ist es erschöpft,\n"
+	.string "vermischen sich die Flammen mit\n"
+	.string "schwarzem Rauch.$"
+
+DexDescription_Miltank_1: @ 83AB215
+	.string "MILTANK gibt täglich 20 Liter Milch.\n"
+	.string "Sie ist süßlich und wird von Kindern und\n"
+	.string "Erwachsenen gleichermaßen genossen.$"
+
+DexDescription_Miltank_2: @ 83AB28A
+	.string "Menschen, die keine Milch trinken,\n"
+	.string "essen sie stattdessen als Joghurt.$"
+
+DexDescription_Blissey_1: @ 83AB2CE
+	.string "HEITEIRA nimmt mit seinem flauschigen\n"
+	.string "Fell Traurigkeit wahr. Es hastet zu\n"
+	.string "einer traurigen Person, egal, wie weit$"
+
+DexDescription_Blissey_2: @ 83AB340
+	.string "diese entfernt ist und teilt ein \n"
+	.string "GLÜCKS-EI mit ihr, um sie zum Lächeln\n"
+	.string "zu bringen.$"
+
+DexDescription_Raikou_1: @ 83AB397
+	.string "RAIKOU ist so schnell wie der Blitz. Das\n"
+	.string "Gebrüll dieses POKéMON sendet\n"
+	.string "Schockwellen aus, die wie Donnerschläge$"
+
+DexDescription_Raikou_2: @ 83AB409
+	.string "durch die Luft beben und den Boden\n"
+	.string "erschüttern.$"
+
+DexDescription_Entei_1: @ 83AB448
+	.string "ENTEI verfügt über die Leidenschaft\n"
+	.string "von Magma. Dieses POKéMON wurde\n"
+	.string "bei einem Vulkanausbruch geboren$"
+
+DexDescription_Entei_2: @ 83AB4B5
+	.string "und bringt Feuersbrünste hervor, die\n"
+	.string "alles auslöschen, was mit ihnen in\n"
+	.string "Kontakt kommt.$"
+
+DexDescription_Suicune_1: @ 83AB502
+	.string "SUICUNE wohnt die Reinheit einer\n"
+	.string "Quelle inne. Es bewegt sich graziös und \n"
+	.string "hat die Macht, schmutziges Wasser zu$"
+
+DexDescription_Suicune_2: @ 83AB568
+	.string "reinigen.$"
+
+DexDescription_Larvitar_1: @ 83AB59A
+	.string "LARVITAR wurde tief unter der Erde\n"
+	.string "geboren. Um an die Oberfläche zu\n"
+	.string "gelangen, muss es sich durch das$"
+
+DexDescription_Larvitar_2: @ 83AB613
+	.string "Erdreich fressen. Erst dann bekommt es\n"
+	.string "seine Eltern zu Gesicht.$"
+
+DexDescription_Pupitar_1: @ 83AB64C
+	.string "PUPITAR erzeugt in seinem Körper ein\n"
+	.string "Gas, das es komprimiert und kraftvoll\n"
+	.string "ausstößt, um sich wie ein$"
+
+DexDescription_Pupitar_2: @ 83AB6B8
+	.string "Düsenflugzeug anzutreiben. Sein\n"
+	.string "Körper ist sehr robust und er hält\n"
+	.string "auch massivem Stahl stand.$"
+
+DexDescription_Tyranitar_1: @ 83AB701
+	.string "DESPOTAR ist erstaunlich stark. Es\n"
+	.string "kann einen ganzen Berg vernichten, um\n"
+	.string "sein Nest zu bauen. Dieses POKéMON$"
+
+DexDescription_Tyranitar_2: @ 83AB75F
+	.string "wandert in den Bergen umher und sucht\n"
+	.string "nach Gegnern für einen Kampf.$"
+
+DexDescription_Lugia_1: @ 83AB7A7
+	.string "LUGIAs Flügel haben eine\n"
+	.string "zerstörerische Kraft. Bereits ein\n"
+	.string "leichtes Flattern kann Häuser$"
+
+DexDescription_Lugia_2: @ 83AB80D
+	.string "hinfortwehen. Daher hat sich dieses\n"
+	.string "POKéMON dafür entschieden, tief unter\n"
+	.string "dem Meer zu leben, wo es niemand sieht.$"
+
+DexDescription_HoOh_1: @ 83AB858
+	.string "HO-OHs Federn leuchten in sieben\n"
+	.string "Farben, je nachdem aus welchem Winkel\n"
+	.string "das Licht auf sie fällt.$"
+
+DexDescription_HoOh_2: @ 83AB8B8
+	.string "Die Federn sollen ihrem Besitzer Glück\n"
+	.string "bringen. Dieses POKéMON lebt am Fuße\n"
+	.string "eines Regenbogens.$"
+
+DexDescription_Celebi_1: @ 83AB92A
+	.string "Dieses POKéMON kommt aus der Zukunft\n"
+	.string "und ist durch die Zeit gereist. Solange\n"
+	.string "CELEBI auftaucht,$"
+
+DexDescription_Celebi_2: @ 83AB988
+	.string "ist der Menschheit angeblich eine\n"
+	.string "rosige Zukunft beschieden.$"
+
+DexDescription_Treecko_1: @ 83AB9B8
+	.string "Mit den kleinen Haken unter seinen\n"
+	.string "Füßen kann GECKARBOR an Wänden\n"
+	.string "hochklettern. Dieses POKéMON greift$"
+
+DexDescription_Treecko_2: @ 83ABA12
+	.string "Feinde an, indem es mit seinem\n"
+	.string "mächtigen Schweif zuschlägt.$"
+
+DexDescription_Grovyle_1: @ 83ABA4D
+	.string "REPTAIN kann sich mit den Blättern, die\n"
+	.string "aus seinem Körper herauswachsen, im\n"
+	.string "Wald hervorragend tarnen.$"
+
+DexDescription_Grovyle_2: @ 83ABAB5
+	.string "Dieses POKéMON ist ein wahrer Meister\n"
+	.string "darin, auf die Bäume des Dschungels zu\n"
+	.string "klettern.$"
+
+DexDescription_Sceptile_1: @ 83ABAEC
+	.string "Die Blätter, die auf GEWALDROs Körper\n"
+	.string "wachsen, sind sehr scharfkantig. Dieses\n"
+	.string "POKéMON ist sehr agil. Es hüpft von$"
+
+DexDescription_Sceptile_2: @ 83ABB5B
+	.string "Ast zu Ast und springt seine Feinde\n"
+	.string "von oben oder hinten an.$"
+
+DexDescription_Torchic_1: @ 83ABB98
+	.string "FLEMMLI hängt an seinem Trainer wie\n"
+	.string "eine Klette. Es schlurft immer hinter ihm\n"
+	.string "her. Dieses POKéMON spuckt 1000 Grad$"
+
+DexDescription_Torchic_2: @ 83ABBDF
+	.string "heißes Feuer, das seinen Feinden\n"
+	.string "ordentlich einheizt.$"
+
+DexDescription_Combusken_1: @ 83ABC4A
+	.string "JUNGGLUT trainiert seine Beine und\n"
+	.string "Oberschenkel, indem es über Felder und\n"
+	.string "Berge läuft. Die Beine dieses POKéMON$"
+
+DexDescription_Combusken_2: @ 83ABC9D
+	.string "sind sowohl schnell als auch kräftig,\n"
+	.string "so dass es 10 Tritte pro Sekunde\n"
+	.string "ausführen kann.$"
+
+DexDescription_Blaziken_1: @ 83ABD00
+	.string "LOHGOCK stößt heftige Flammen aus\n"
+	.string "seinen Handgelenken aus und greift\n"
+	.string "seine Feinde mutig an. Je stärker ein$"
+
+DexDescription_Blaziken_2: @ 83ABD5C
+	.string "Feind ist, desto stärker lodern die\n"
+	.string "Handgelenke dieses POKéMON.$"
+
+DexDescription_Mudkip_1: @ 83ABDA1
+	.string "Die Flosse an HYDROPIs Kopf dient als\n"
+	.string "hochempfindliches Radar. Damit kann es\n"
+	.string "Bewegungen im Wasser und in der Luft$"
+
+DexDescription_Mudkip_2: @ 83ABE13
+	.string "wahrnehmen. So weiß es jederzeit, was\n"
+	.string "in seiner Umgebung passiert, ohne\n"
+	.string "dabei seine Augen zu benutzen.$"
+
+DexDescription_Marshtomp_1: @ 83ABE60
+	.string "MOORABBELs Körper ist mit einem\n"
+	.string "klebrigen Film überzogen, durch den es\n"
+	.string "an Land überleben kann. Dieses POKéMON$"
+
+DexDescription_Marshtomp_2: @ 83ABEC5
+	.string "spielt bei Ebbe in den Schlammpfützen\n"
+	.string "am Strand.$"
+
+DexDescription_Swampert_1: @ 83ABF06
+	.string "SUMPEX ist sehr stark. Es kann mit\n"
+	.string "Leichtigkeit einen Felsblock bewegen,\n"
+	.string "der über eine Tonne wiegt.$"
+
+DexDescription_Swampert_2: @ 83ABF66
+	.string "Weiterhin ist es mit einem exzellenten\n"
+	.string "Sehvermögen ausgestattet, wodurch es\n"
+	.string "auch in trüben Gewässern sehen kann.$"
+
+DexDescription_Poochyena_1: @ 83ABFB2
+	.string "Sobald FIFFYEN eine Bewegung wahr-\n"
+	.string "nimmt, schnappt es zu. Es jagt seine\n"
+	.string "Beute so lange, bis sie vollkommen$"
+
+DexDescription_Poochyena_2: @ 83AC016
+	.string "erschöpft ist. Wenn sich die Beute\n"
+	.string "allerdings wehrt, kann es passieren, \n"
+	.string "dass FIFFYEN klein beigibt und flieht.$"
+
+DexDescription_Mightyena_1: @ 83AC068
+	.string "MAGNAYEN sendet deutliche Signale\n"
+	.string "aus, wenn es sich auf einen Angriff\n"
+	.string "vorbereitet. Es knurrt heftig und macht$"
+
+DexDescription_Mightyena_2: @ 83AC0DE
+	.string "sich flach. Dieses POKéMON kann mit\n"
+	.string "seinen spitzen Zähnen brutal zubeißen.$"
+
+DexDescription_Zigzagoon_1: @ 83AC11E
+	.string "ZIGZACHS ist ein rastloser Wanderer.\n"
+	.string "Dieses POKéMON ist nämlich sehr\n"
+	.string "neugierig und es inspiziert alles,$"
+
+DexDescription_Zigzagoon_2: @ 83AC185
+	.string "was ihm zufällig begegnet.$"
+
+DexDescription_Linoone_1: @ 83AC1BF
+	.string "GERADAKS rennt immer mit vollem Tempo\n"
+	.string "und nie im Zickzack, sondern nur gerade.\n"
+	.string "Wenn ihm ein Hindernis im Weg ist,$"
+
+DexDescription_Linoone_2: @ 83AC23A
+	.string "läuft es rechtwinklig daran vorbei. Für\n"
+	.string "dieses POKéMON stellen leichte Kurven\n"
+	.string "eine große Herausforderung dar.$"
+
+DexDescription_Wurmple_1: @ 83AC273
+	.string "WAUMPEL kann mit den Stacheln an\n"
+	.string "seinem Hinterteil die Rinde von Bäumen\n"
+	.string "entfernen und ernährt sich von dem$"
+
+DexDescription_Wurmple_2: @ 83AC2DD
+	.string "austretenden Saft. An den Füßen dieses\n"
+	.string "POKéMON befinden sich Saugnäpfe, mit\n"
+	.string "denen es auch an Glas nicht abrutscht.$"
+
+DexDescription_Silcoon_1: @ 83AC340
+	.string "SCHALOKO bindet sich mit einem\n"
+	.string "Seidenfaden an einen Ast. Es baumelt\n"
+	.string "dort und wartet auf seine Entwicklung.$"
+
+DexDescription_Silcoon_2: @ 83AC3B5
+	.string "Durch ein kleines Loch in seinem\n"
+	.string "Seidenkokon lugt es heraus.$"
+
+DexDescription_Beautifly_1: @ 83AC3FD
+	.string "PAPINELLAs Lieblingsspeise ist\n"
+	.string "Blütenstaub. Wenn du dieses POKéMON\n"
+	.string "beobachten möchtest, musst du bloß$"
+
+DexDescription_Beautifly_2: @ 83AC46C
+	.string "einen Blumentopf vor ein geöffnetes\n"
+	.string "Fenster stellen. PAPINELLA wird sich\n"
+	.string "diese Leckerei nicht entgehen lassen.$"
+
+DexDescription_Cascoon_1: @ 83AC4B4
+	.string "PANEKON baut seinen schützenden\n"
+	.string "Kokon, indem es seinen Körper mit\n"
+	.string "feiner Seide einwickelt, die aus seinem$"
+
+DexDescription_Cascoon_2: @ 83AC525
+	.string "Mund austritt. Wenn sein Körper mit\n"
+	.string "Seide bedeckt ist, wird diese hart. Im\n"
+	.string "Kokon wartet es auf seine Entwicklung.$"
+
+DexDescription_Dustox_1: @ 83AC582
+	.string "PUDOX wird instinktiv vom Licht\n"
+	.string "angezogen. In hell erleuchteten \n"
+	.string "Städten kann man Scharen dieses$"
+
+DexDescription_Dustox_2: @ 83AC5F5
+	.string "POKéMON dabei beobachten, die\n"
+	.string "großen Schaden anrichten, indem sie die\n"
+	.string "Blätter von Bäumen abfressen.$"
+
+DexDescription_Lotad_1: @ 83AC63B
+	.string "LOTURZEL lebt auf der Wasseroberfläche\n"
+	.string "von Teichen oder Seen. Es wird\n"
+	.string "schwächer, wenn sein breites Blatt$"
+
+DexDescription_Lotad_2: @ 83AC6A1
+	.string "abstirbt. Nur selten geht dieses\n"
+	.string "POKéMON an Land, um nach sauberem\n"
+	.string "Wasser Ausschau zu halten.$"
+
+DexDescription_Lombre_1: @ 83AC6EB
+	.string "LOMBRERO liebt die Nacht und wird mit\n"
+	.string "Einbruch der Dunkelheit aktiv. Es spielt\n"
+	.string "auch gerne Streiche.$"
+
+DexDescription_Lombre_2: @ 83AC75E
+	.string "Wenn es Angler sieht, zieht es unter\n"
+	.string "Wasser an ihren Angelschnüren und\n"
+	.string "erfreut sich an ihrer Entrüstung.$"
+
+DexDescription_Ludicolo_1: @ 83AC7B6
+	.string "KAPPALORES fängt sofort zu tanzen an,\n"
+	.string "wenn es stimmungsvolle, feierliche Musik\n"
+	.string "vernimmt. Dieses POKéMON erscheint$"
+
+DexDescription_Ludicolo_2: @ 83AC822
+	.string "angeblich, wenn es Kinder auf \n"
+	.string "Wanderausflügen singen hört.$"
+
+DexDescription_Seedot_1: @ 83AC853
+	.string "SAMURZEL hängt sich mit dem Kopf an\n"
+	.string "einen Ast. Dabei entzieht es dem Baum\n"
+	.string "Feuchtigkeit. Je mehr Wasser es trinkt,$"
+
+DexDescription_Seedot_2: @ 83AC8BC
+	.string "desto glänzender wird der Körper dieses\n"
+	.string "POKéMON.$"
+
+DexDescription_Nuzleaf_1: @ 83AC918
+	.string "BLANAS lebt in dichten Wäldern.\n"
+	.string "Manchmal wagt es sich aus dem Wald\n"
+	.string "heraus, um Menschen zu erschrecken.$"
+
+DexDescription_Nuzleaf_2: @ 83AC982
+	.string "Dieses POKéMON mag es überhaupt nicht,\n"
+	.string "wenn man seine lange Nase zwickt.$"
+
+DexDescription_Shiftry_1: @ 83AC9B6
+	.string "TENGULIST ist ein geheimnisvolles\n"
+	.string "POKéMON, das angeblich auf hohen\n"
+	.string "Bäumen lebt, die tausende von Jahren$"
+
+DexDescription_Shiftry_2: @ 83ACA23
+	.string "alt sind. Mit den Blätterventilatoren an\n"
+	.string "seinen Händen kann es heftige Stürme\n"
+	.string "erzeugen.$"
+
+DexDescription_Taillow_1: @ 83ACA5A
+	.string "Mutig behauptet SCHWALBINI sein\n"
+	.string "Territorium gegen Eindringlinge, so\n"
+	.string "stark diese auch sein mögen.$"
+
+DexDescription_Taillow_2: @ 83ACAAB
+	.string "Dieses unerschrockene POKéMON bleibt\n"
+	.string "trotz einer Niederlage angriffslustig,\n"
+	.string "heult aber laut, wenn es Hunger hat.$"
+
+DexDescription_Swellow_1: @ 83ACB1E
+	.string "Dieses POKéMON taucht in einem steilen\n"
+	.string "Winkel ab, sobald es Beute wahrgenommen\n"
+	.string "hat. Es packt seine Beute mit$"
+
+DexDescription_Swellow_2: @ 83ACB8A
+	.string "seinen Krallen und lässt sie\n"
+	.string "nicht mehr entkommen.$"
+
+DexDescription_Wingull_1: @ 83ACBF6
+	.string "Man sieht WINGULL oft mit seiner\n"
+	.string "Beute oder seinen Besitztümern im\n"
+	.string "Schnabel herumfliegen auf der Suche$"
+
+DexDescription_Wingull_2: @ 83ACC62
+	.string "nach geeigneten Verstecken. Dieses\n"
+	.string "POKéMON fliegt durch die Lüfte, als\n"
+	.string "würde es gleiten.$"
+
+DexDescription_Pelipper_1: @ 83ACCAF
+	.string "PELIPPER transportiert kleine POKéMON\n"
+	.string "und Eier in seinem riesigen Schnabel\n"
+	.string "durch die Lüfte. Dieses POKéMON baut$"
+
+DexDescription_Pelipper_2: @ 83ACD0D
+	.string "sein Nest auf steilen Klippen am Meer.$"
+
+DexDescription_Ralts_1: @ 83ACD4A
+	.string "TRASLA nimmt mit den Hörnern an seinem\n"
+	.string "Kopf die Gefühle von Menschen wahr.\n"
+	.string "Menschen bekommen dieses POKéMON$"
+
+DexDescription_Ralts_2: @ 83ACDAE
+	.string "nur selten zu Gesicht. Wenn es bemerkt,\n"
+	.string "dass eine Person gut gelaunt ist, traut\n"
+	.string "es sich näher an sie heran.$"
+
+DexDescription_Kirlia_1: @ 83ACE11
+	.string "Man sagt, dass ein KIRLIA, das häufig\n"
+	.string "positive Emotionen seines TRAINERs\n"
+	.string "wahrnimmt, sehr schön wird.$"
+
+DexDescription_Kirlia_2: @ 83ACE73
+	.string "Dieses POKéMON kontrolliert\n"
+	.string "psychokinetische Energie mit seinem\n"
+	.string "hochentwickelten Gehirn.$"
+
+DexDescription_Gardevoir_1: @ 83ACEBF
+	.string "GUARDEVOIR kann in die Zukunft\n"
+	.string "schauen. Wenn es eine Gefahr für seinen\n"
+	.string "TRAINER voraussieht, entlädt es seine$"
+
+DexDescription_Gardevoir_2: @ 83ACF33
+	.string "psychokinetische Energie mit voller\n"
+	.string "Kraft.$"
+
+DexDescription_Surskit_1: @ 83ACF63
+	.string "GEHWEIHER scheidet aus seinen Zehen\n"
+	.string "ein Öl aus, das es ihm ermöglicht, über\n"
+	.string "Wasser zu gleiten. Dieses POKéMON$"
+
+DexDescription_Surskit_2: @ 83ACFCE
+	.string "ernährt sich von Mikroorganismen aus\n"
+	.string "Teichen und Seen.$"
+
+DexDescription_Masquerain_1: @ 83AD00E
+	.string "MASKEREGEN schüchtert seine Feinde\n"
+	.string "mit den augenähnlichen Mustern auf\n"
+	.string "seinen Antennen ein. Dieses POKéMON$"
+
+DexDescription_Masquerain_2: @ 83AD07D
+	.string "kann mit seinen vier Flügeln wie ein\n"
+	.string "Hubschrauber in jede Richtung fliegen,\n"
+	.string "sogar seitwärts und rückwärts.$"
+
+DexDescription_Shroomish_1: @ 83AD0D5
+	.string "KNILZ lebt im feuchten Erdboden\n"
+	.string "finsterer Wälder. Es wird oft reglos\n"
+	.string "unter herabgefallenen Blättern$"
+
+DexDescription_Shroomish_2: @ 83AD148
+	.string "gefunden. Dieses POKéMON ernährt sich\n"
+	.string "von Kompost aus verrotteten Blättern.$"
+
+DexDescription_Breloom_1: @ 83AD190
+	.string "Mit leichtfüßiger Beinarbeit nähert \n"
+	.string "sich KAPILZ seinen Feinden und\n"
+	.string "schlägt dann mit seinen dehnbaren$"
+
+DexDescription_Breloom_2: @ 83AD1FC
+	.string "Armen um sich. Die Kampftechnik dieses\n"
+	.string "POKéMON treibt Profiboxern die\n"
+	.string "Schamesröte ins Gesicht.$"
+
+DexDescription_Slakoth_1: @ 83AD234
+	.string "BUMMELZ geht zwanzig Stunden pro Tag\n"
+	.string "müßig. Da es sich sehr wenig bewegt,\n"
+	.string "braucht es auch nicht viel Nahrung.$"
+
+DexDescription_Slakoth_2: @ 83AD2A2
+	.string "Seine Tagesration besteht lediglich aus\n"
+	.string "drei Blättern.$"
+
+DexDescription_Vigoroth_1: @ 83AD2E0
+	.string "MUNTIER brennt darauf, sich\n"
+	.string "auszutoben. Es kann nicht einmal für\n"
+	.string "eine Minute stillsitzen. Es gerät in$"
+
+DexDescription_Vigoroth_2: @ 83AD35B
+	.string "Stress, wenn es sich nicht andauernd\n"
+	.string "bewegen kann.$"
+
+DexDescription_Slaking_1: @ 83AD39F
+	.string "LETARKING verbringt den Tag damit,\n"
+	.string "herumzuliegen und nichts zu tun. Es \n"
+	.string "ernährt sich von Gras, das in seiner$"
+
+DexDescription_Slaking_2: @ 83AD3FC
+	.string "Reichweite wächst. Hat es alles\n"
+	.string "aufgefressen, so sucht es sich\n"
+	.string "widerwillig ein anderes Plätzchen.$"
+
+DexDescription_Nincada_1: @ 83AD453
+	.string "NINCADA lebt viele Jahre in absoluter\n"
+	.string "Dunkelheit unter der Erde. Dieses\n"
+	.string "POKéMON nimmt Nährstoffe aus$"
+
+DexDescription_Nincada_2: @ 83AD4B6
+	.string "Baumwurzeln auf. Es rührt sich nicht,\n"
+	.string "da es auf seine Entwicklung wartet.$"
+
+DexDescription_Ninjask_1: @ 83AD4F9
+	.string "NINJASK bewegt sich so schnell, dass\n"
+	.string "man es nicht sehen kann. Seine Schreie\n"
+	.string "sind aber laut und deutlich zu hören.$"
+
+DexDescription_Ninjask_2: @ 83AD567
+	.string "Deshalb hielt man dieses POKéMON lange\n"
+	.string "für unsichtbar.$"
+
+DexDescription_Shedinja_1: @ 83AD5A8
+	.string "NINJATOMs harter Körper bewegt sich\n"
+	.string "überhaupt nicht. Er scheint bloß eine\n"
+	.string "hohle Schale zu sein. Dieses POKéMON$"
+
+DexDescription_Shedinja_2: @ 83AD616
+	.string "soll angeblich die Seele eines jeden\n"
+	.string "stehlen, der hinterrücks einen Blick in\n"
+	.string "seinen hohlen Körper riskiert.$"
+
+DexDescription_Whismur_1: @ 83AD683
+	.string "Normalerweise ist FLURMELs Stimme sehr\n"
+	.string "leise, selbst mit größter Anstrengung\n"
+	.string "ist sie kaum hörbar. Wenn dieses$"
+
+DexDescription_Whismur_2: @ 83AD6E9
+	.string "POKéMON jedoch eine Gefahr wittert,\n"
+	.string "stößt es ohrenbetäubende Schreie aus.$"
+
+DexDescription_Loudred_1: @ 83AD73D
+	.string "KRAKEELOs Brüllen kann ein Holzhaus zum\n"
+	.string "Einsturz bringen. Es setzt seine Stimme\n"
+	.string "ein, um seine Gegner anzugreifen.$"
+
+DexDescription_Loudred_2: @ 83AD7A3
+	.string "Die runden Ohren dieses POKéMON dienen\n"
+	.string "als Lautsprecher.$"
+
+DexDescription_Exploud_1: @ 83AD7D4
+	.string "KRAWUMMS kann durch sein Brüllen\n"
+	.string "Erdbeben auslösen. Wenn dieses\n"
+	.string "POKéMON durch seine Körperöffnungen$"
+
+DexDescription_Exploud_2: @ 83AD846
+	.string "kräftig einatmet, ist es kurz davor,\n"
+	.string "ein mächtiges Brüllen von sich zu geben.$"
+
+DexDescription_Makuhita_1: @ 83AD896
+	.string "MAKUHITA ist sehr zäh. Selbst wenn es im\n"
+	.string "Kampf mehrfach niedergeschlagen\n"
+	.string "wurde, steht es immer wieder auf und$"
+
+DexDescription_Makuhita_2: @ 83AD903
+	.string "greift seinen Gegner an. Bei jedem Mal\n"
+	.string "speichert es mehr Energie in seinem\n"
+	.string "Körper für seine Entwicklung.$"
+
+DexDescription_Hariyama_1: @ 83AD959
+	.string "HARIYAMA führt seinen berüchtigten\n"
+	.string "Streckarm-Schlag überall aus. Ein Schlag\n"
+	.string "von diesem POKéMON reicht aus,$"
+
+DexDescription_Hariyama_2: @ 83AD9C3
+	.string "um einen Strommast zu zerlegen.$"
+
+DexDescription_Azurill_1: @ 83ADA08
+	.string "AZURILL schleudert seinen Schweif wie\n"
+	.string "ein Lasso weit aus und fliegt dann \n"
+	.string "selbst hinterher. Ein AZURILL$"
+
+DexDescription_Azurill_2: @ 83ADA7F
+	.string "hat es auf diese Weise geschafft, die\n"
+	.string "Rekordweite von 10 Metern\n"
+	.string "zurückzulegen.$"
+
+DexDescription_Nosepass_1: @ 83ADAD7
+	.string "NASGNET besitzt eine magnetische\n"
+	.string "Nase, die immer nach Norden zeigt. Wenn\n"
+	.string "sich zwei NASGNET treffen, können sie$"
+
+DexDescription_Nosepass_2: @ 83ADB3F
+	.string "sich einander nicht zuwenden, da ihre\n"
+	.string "magnetischen Nasen sich gegenseitig\n"
+	.string "abstoßen.$"
+
+DexDescription_Skitty_1: @ 83ADB9D
+	.string "ENECO ist davon fasziniert,\n"
+	.string "Gegenstände zu bewegen und sie zu\n"
+	.string "jagen. Dieses POKéMON jagt häufig$"
+
+DexDescription_Skitty_2: @ 83ADBF4
+	.string "seinen eigenen Schweif, so dass ihm\n"
+	.string "schwindlig wird.$"
+
+DexDescription_Delcatty_1: @ 83ADC38
+	.string "ENEKORO liebt seine Eigenständigkeit.\n"
+	.string "So kann es das tun, was es möchte, und\n"
+	.string "kann selbst das Tempo bestimmen.$"
+
+DexDescription_Delcatty_2: @ 83ADC9B
+	.string "Da dieses POKéMON schläft und isst,\n"
+	.string "wenn es Lust dazu hat, ist sein\n"
+	.string "Tagesablauf eher zufälliger Natur.$"
+
+DexDescription_Sableye_1: @ 83ADCFF
+	.string "ZOBIRIS führt ein ruhiges, \n"
+	.string "zurückgezogenes Leben tief im Innern\n"
+	.string "einer Höhle. Es ist aber trotzdem sehr$"
+
+DexDescription_Sableye_2: @ 83ADD6C
+	.string "gefürchtet, da man sagt, es stehle die\n"
+	.string "Seelen der Menschen, wenn seine Augen\n"
+	.string "im Dunkeln Furcht erregend funkeln.$"
+
+DexDescription_Mawile_1: @ 83ADDC3
+	.string "FLUNKIFERs sagenhafte Kiefer sind\n"
+	.string "eigentlich umgewandelte Stahlhörner.\n"
+	.string "Sein unterwürfiger Gesichtsausdruck$"
+
+DexDescription_Mawile_2: @ 83ADE33
+	.string "dient dazu, seinen Gegner in Sicherheit\n"
+	.string "zu wiegen, so dass er unaufmerksam\n"
+	.string "wird. Dann schnappt es zu!$"
+
+DexDescription_Aron_1: @ 83ADE9F
+	.string "Dieses POKéMON hat einen Körper aus\n"
+	.string "Stahl. STOLLUNIOR ernährt sich von\n"
+	.string "Eisenerz aus den Bergen. Zuweilen$"
+
+DexDescription_Aron_2: @ 83ADF07
+	.string "richtet es großen Schaden an, weil es\n"
+	.string "Brücken und Bahngleise auffrisst.$"
+
+DexDescription_Lairon_1: @ 83ADF4A
+	.string "STOLLRAK temperiert seinen Körper,\n"
+	.string "indem es ausgesprochen nahrhaftes \n"
+	.string "Quellwasser trinkt, bis es völlig$"
+
+DexDescription_Lairon_2: @ 83ADFAF
+	.string "aufgebläht ist. Dieses POKéMON baut\n"
+	.string "sein Nest in der Nähe von Quellen, aus\n"
+	.string "denen köstliches Wasser sprudelt.$"
+
+DexDescription_Aggron_1: @ 83ADFF0
+	.string "STOLLOSS nennt einen ganzen Berg sein\n"
+	.string "Territorium. Gnadenlos schlägt es jeden\n"
+	.string "in die Flucht, der sein Reich betritt.$"
+
+DexDescription_Aggron_2: @ 83AE067
+	.string "Dieses POKéMON behält sein Territorium\n"
+	.string "jederzeit im Auge.$"
+
+DexDescription_Meditite_1: @ 83AE0A3
+	.string "MEDITIE unterzieht sich einem\n"
+	.string "strikten mentalen Training tief in den\n"
+	.string "Bergen. Wenn es meditiert, verliert es$"
+
+DexDescription_Meditite_2: @ 83AE10C
+	.string "jedoch immer seine Konzentration.\n"
+	.string "Deshalb wird sein Training niemals\n"
+	.string "ein Ende haben.$"
+
+DexDescription_Medicham_1: @ 83AE164
+	.string "Mittels Meditation erhöht MEDITALIS\n"
+	.string "seine Körperenergie und schärft seinen\n"
+	.string "sechsten Sinn. Dieses POKéMON$"
+
+DexDescription_Medicham_2: @ 83AE1D0
+	.string "verbirgt sich, indem es eins mit den\n"
+	.string "Feldern und Bergen wird.$"
+
+DexDescription_Electrike_1: @ 83AE21D
+	.string "FRIZELBLIZ speichert Elektrizität in\n"
+	.string "seiner langen Körperbehaarung. Dieses\n"
+	.string "POKéMON stimuliert seine$"
+
+DexDescription_Electrike_2: @ 83AE290
+	.string "Beinmuskulatur durch Stromstöße.\n"
+	.string "Dadurch ist es in der Lage, explosiv\n"
+	.string "zu beschleunigen.$"
+
+DexDescription_Manectric_1: @ 83AE2D7
+	.string "VOLTENSO entlädt ständig Elektrizität\n"
+	.string "aus seiner Mähne. Es fliegen dabei\n"
+	.string "Funken, die zuweilen zu Waldbränden$"
+
+DexDescription_Manectric_2: @ 83AE340
+	.string "führen. In einem Kampf erzeugt dieses\n"
+	.string "POKéMON Gewitterwolken.$"
+
+DexDescription_Plusle_1: @ 83AE37D
+	.string "PLUSLE dient seinen Artgenossen als\n"
+	.string "Cheerleader. Wenn ein Teamkamerad\n"
+	.string "im Kampf erfolgreich ist, erzeugt es$"
+
+DexDescription_Plusle_2: @ 83AE3EE
+	.string "das prasselnde Geräusch von Funken, um\n"
+	.string "so seine Freude zu zeigen.$"
+
+DexDescription_Minun_1: @ 83AE444
+	.string "MINUN kümmert sich mehr um das\n"
+	.string "Anfeuern seiner Partner als um seine\n"
+	.string "eigene Sicherheit. Es nutzt die$"
+
+DexDescription_Minun_2: @ 83AE4B5
+	.string "Elektrizität in seinem Körper dazu,\n"
+	.string "einen Funkenregen zu erzeugen und\n"
+	.string "seine Teamkameraden anzufeuern.$"
+
+DexDescription_Volbeat_1: @ 83AE4FB
+	.string "Wenn es Nacht wird, beginnt VOLBEATs\n"
+	.string "Schweif zu leuchten. Es kommuniziert\n"
+	.string "mit anderen, indem es die Helligkeit$"
+
+DexDescription_Volbeat_2: @ 83AE574
+	.string "und das Blinken dieses Lichts reguliert.\n"
+	.string "Dieses POKéMON wird vom süßen Duft\n"
+	.string "der ILLUMISE angezogen.$"
+
+DexDescription_Illumise_1: @ 83AE5C5
+	.string "ILLUMISE zieht ganze VOLBEAT-Scharen\n"
+	.string "mit seinem süßlichen Duft an. Dann\n"
+	.string "führt es diesen hell leuchtenden$"
+
+DexDescription_Illumise_2: @ 83AE630
+	.string "Schwarm an, indem es geometrische\n"
+	.string "Figuren an den Nachthimmel malt.$"
+
+DexDescription_Roselia_1: @ 83AE684
+	.string "ROSELIA verschießt scharfe Stacheln\n"
+	.string "auf jeden Feind, der versucht, die\n"
+	.string "Blumen an seinen Armen zu stehlen.$"
+
+DexDescription_Roselia_2: @ 83AE6EC
+	.string "Der Duft dieses POKéMON beruhigt\n"
+	.string "Lebewesen.$"
+
+DexDescription_Gulpin_1: @ 83AE728
+	.string "Eigentlich besteht SCHLUPPUCKs Körper\n"
+	.string "nur aus einem Magen. Daher kann es\n"
+	.string "etwas verschlingen, das beinahe seine$"
+
+DexDescription_Gulpin_2: @ 83AE78B
+	.string "Größe hat. Sein Magen enthält eine\n"
+	.string "spezielle Flüssigkeit, die wirklich alles\n"
+	.string "verdauen kann.$"
+
+DexDescription_Swalot_1: @ 83AE7D2
+	.string "Wenn SCHLUKWECH Beute sichtet,\n"
+	.string "verspritzt es eine höchst giftige\n"
+	.string "Substanz aus seinen Poren und$"
+
+DexDescription_Swalot_2: @ 83AE836
+	.string "besprüht damit sein Ziel. Wenn die Beute\n"
+	.string "geschwächt ist, schluckt es sie mit\n"
+	.string "seinem riesigen Maul im Ganzen herunter.$"
+
+DexDescription_Carvanha_1: @ 83AE88D
+	.string "KANIVANHAs starke Kiefer und seine\n"
+	.string "spitzen Zähne verfügen über die \n"
+	.string "zerstörerische Kraft, Bootsrümpfe$"
+
+DexDescription_Carvanha_2: @ 83AE900
+	.string "verschlingen zu können. Dieses POKéMON\n"
+	.string "hat schon viele Boote versenkt.$"
+
+DexDescription_Sharpedo_1: @ 83AE938
+	.string "TOHAIDO trägt den Spitznamen\n"
+	.string "“Tyrann des Meeres” und ist\n"
+	.string "sehr gefürchtet. Seine grausamen Zähne$"
+
+DexDescription_Sharpedo_2: @ 83AE99B
+	.string "wachsen sofort nach, wenn sie\n"
+	.string "ausgebrochen sind. Es kann sogar einen\n"
+	.string "Öltanker zerreißen.$"
+
+DexDescription_Wailmer_1: @ 83AE9F0
+	.string "WAILMERs Nasenlöcher liegen über\n"
+	.string "seinen Augen. Dieses verspielte\n"
+	.string "POKéMON erschreckt gern Menschen,$"
+
+DexDescription_Wailmer_2: @ 83AEA63
+	.string "indem es das Meerwasser, das es in\n"
+	.string "seinem Körper speichert, mit aller Kraft\n"
+	.string "herausprustet.$"
+
+DexDescription_Wailord_1: @ 83AEA9F
+	.string "WAILORD ist bisher das größte aller\n"
+	.string "identifizierten POKéMON. Es schwimmt\n"
+	.string "reglos auf dem offenen Meer und nimmt$"
+
+DexDescription_Wailord_2: @ 83AEB01
+	.string "mit seinem enormen Maul riesige Mengen\n"
+	.string "an Nahrung auf.$"
+
+DexDescription_Numel_1: @ 83AEB57
+	.string "CAMAUB ist nicht besonders helle. Es\n"
+	.string "nimmt nicht einmal wahr, wenn es\n"
+	.string "getroffen wurde. Ein Hungergefühl$"
+
+DexDescription_Numel_2: @ 83AEBC7
+	.string "allerdings kann es nicht einmal eine\n"
+	.string "Sekunde lang aushalten. In seinem\n"
+	.string "Körper brodelt glühend heißes Magma.$"
+
+DexDescription_Camerupt_1: @ 83AEC04
+	.string "CAMERUPT trägt einen Vulkan in seinem\n"
+	.string "Körper. 10.000 Grad heißes Magma fließt\n"
+	.string "in ihm. Manchmal brechen die Höcker auf$"
+
+DexDescription_Camerupt_2: @ 83AEC60
+	.string "seinem Rücken aus und verspucken \n"
+	.string "glühend heißes Magma.$"
+
+DexDescription_Torkoal_1: @ 83AECB5
+	.string "QURTEL schaufelt sich auf der Suche\n"
+	.string "nach Kohle durch die Berge. Wenn es\n"
+	.string "welche findet, füllt es die Hohlräume$"
+
+DexDescription_Torkoal_2: @ 83AED2B
+	.string "seines Panzers mit Kohle und verbrennt\n"
+	.string "diese. Wenn es angegriffen wird, stößt\n"
+	.string "es dicken schwarzen Rauch aus.$"
+
+DexDescription_Spoink_1: @ 83AED85
+	.string "SPOINK hüpft auf seinem Schweif durch\n"
+	.string "die Gegend. Die Erschütterung des\n"
+	.string "Hüpfens bringt sein Herz zum Schlagen.$"
+
+DexDescription_Spoink_2: @ 83AEDF2
+	.string "Deshalb kann dieses POKéMON das Hüpfen\n"
+	.string "nicht sein lassen, ansonsten würde sein\n"
+	.string "Herz aufhören zu schlagen.$"
+
+DexDescription_Grumpig_1: @ 83AEE35
+	.string "GROINK benutzt die schwarzen Perlen\n"
+	.string "an seinem Körper dazu, die\n"
+	.string "psychischen Kraftwellen zu verstärken.$"
+
+DexDescription_Grumpig_2: @ 83AEEAA
+	.string "Wenn es diese spezielle Fähigkeit nutzt,\n"
+	.string "wird sein schnaubender Atem\n"
+	.string "schwerfällig.$"
+
+DexDescription_Spinda_1: @ 83AEEF7
+	.string "Jedes PANDIR auf der Welt soll ein\n"
+	.string "einzigartiges Fleckenmuster haben. Der\n"
+	.string "schwankende Gang dieses POKéMON$"
+
+DexDescription_Spinda_2: @ 83AEF4D
+	.string "erweckt den Eindruck, es würde tanzen.$"
+
+DexDescription_Trapinch_1: @ 83AEF9B
+	.string "KNACKLIONs Bau ist eine Art in den Sand\n"
+	.string "gegrabener Kessel. Dieses POKéMON\n"
+	.string "wartet geduldig auf Beute, um sie in$"
+
+DexDescription_Trapinch_2: @ 83AF011
+	.string "seinen Bau zu werfen. Seine gigan-\n"
+	.string "tischen Kiefer verfügen über genügend\n"
+	.string "Kraft, um einen Felsen zu zerquetschen.$"
+
+DexDescription_Vibrava_1: @ 83AF04D
+	.string "Um seine Beute zu schwächen, erzeugt\n"
+	.string "VIBRAVA Ultraschallwellen, indem es\n"
+	.string "seine Flügel vibrieren lässt.$"
+
+DexDescription_Vibrava_2: @ 83AF0B0
+	.string "Die Ultraschallwellen dieses POKéMON \n"
+	.string "sind so stark, dass sie bei Menschen\n"
+	.string "Kopfschmerzen verursachen können.$"
+
+DexDescription_Flygon_1: @ 83AF108
+	.string "LIBELLDRA wird auch “Geist der\n"
+	.string "Wüste” genannt. Da seine flatternden\n"
+	.string "Flügel eine Sandwolke aufwirbeln, ist$"
+
+DexDescription_Flygon_2: @ 83AF177
+	.string "dieses POKéMON beim Fliegen immer\n"
+	.string "von einem Sandsturm umgeben.$"
+
+DexDescription_Cacnea_1: @ 83AF1B5
+	.string "TUSKA lebt an trockenen Orten, z. B. in\n"
+	.string "Wüsten. Es versprüht einen starken\n"
+	.string "Duft aus seiner Blume, um Beute$"
+
+DexDescription_Cacnea_2: @ 83AF221
+	.string "anzuziehen. Wenn sich Beute nähert,\n"
+	.string "verschießt es scharfe Stacheln, um\n"
+	.string "seinen Gegner zu überwältigen.$"
+
+DexDescription_Cacturne_1: @ 83AF280
+	.string "Am Tage bleibt NOKTUSKA reglos, damit es\n"
+	.string "in der brennenden Wüstenhitze keine\n"
+	.string "Feuchtigkeit verliert.$"
+
+DexDescription_Cacturne_2: @ 83AF2ED
+	.string "Dieses POKéMON wird bei Nacht aktiv,\n"
+	.string "wenn die Temperatur sinkt.$"
+
+DexDescription_Swablu_1: @ 83AF32E
+	.string "WABLU hat leichte, flauschige Flügel,\n"
+	.string "die wie Schäfchenwolken aussehen.\n"
+	.string "Dieses POKéMON hat keine Angst vor$"
+
+DexDescription_Swablu_2: @ 83AF398
+	.string "Menschen. Es landet auf ihren Köpfen \n"
+	.string "und bleibt dort sitzen wie ein \n"
+	.string "wattierter Hut.$"
+
+DexDescription_Altaria_1: @ 83AF3E0
+	.string "ALTARIA tanzt und dreht sich in der\n"
+	.string "Luft durch viele Schäfchenwolken.\n"
+	.string "Indem es mit seiner kristallklaren$"
+
+DexDescription_Altaria_2: @ 83AF458
+	.string "Stimme Melodien singt, versetzt es\n"
+	.string "seine Zuhörer in verträumtes\n"
+	.string "Erstaunen.$"
+
+DexDescription_Zangoose_1: @ 83AF49E
+	.string "Die Erinnerungen an den Kampf mit\n"
+	.string "seinem Erzrivalen VIPITIS haben sich in\n"
+	.string "jede Zelle von SENGOs Körper$"
+
+DexDescription_Zangoose_2: @ 83AF4F9
+	.string "eingebrannt. Dieses POKéMON weicht\n"
+	.string "feindlichen Angriffen unheimlich\n"
+	.string "raffiniert und geschickt aus.$"
+
+DexDescription_Seviper_1: @ 83AF537
+	.string "VIPITIS lebt seit Generationen in\n"
+	.string "Fehde mit SENGO. Die Narben auf\n"
+	.string "seinem Körper sind Zeugen grausamer$"
+
+DexDescription_Seviper_2: @ 83AF5A4
+	.string "Kämpfe. Dieses POKéMON greift seine\n"
+	.string "Gegner mit seinem scharfkantigen\n"
+	.string "Schweif an.$"
+
+DexDescription_Lunatone_1: @ 83AF5D6
+	.string "LUNASTEIN wurde in der Nähe eines\n"
+	.string "Meteoritenkraters entdeckt. Daher\n"
+	.string "nehmen einige Menschen an, dass$"
+
+DexDescription_Lunatone_2: @ 83AF648
+	.string "dieses POKéMON aus dem Weltall stammt.\n"
+	.string "Diese Theorie konnte allerdings bisher\n"
+	.string "noch nicht belegt werden.$"
+
+DexDescription_Solrock_1: @ 83AF694
+	.string "SONNFEL ist eine neue POKéMON-Spezies,\n"
+	.string "die angeblich aus dem Weltall\n"
+	.string "kam. Es gleitet durch die$"
+
+DexDescription_Solrock_2: @ 83AF705
+	.string "Luft und bewegt sich leise. Im Kampf\n"
+	.string "setzt dieses POKéMON sehr helles Licht\n"
+	.string "ein.$"
+
+DexDescription_Barboach_1: @ 83AF73E
+	.string "SCHMERBEs empfindliche Barthaare\n"
+	.string "dienen ihm als hervorragendes\n"
+	.string "Radarsystem. Dieses POKéMON versteckt$"
+
+DexDescription_Barboach_2: @ 83AF7A4
+	.string "sich im Schlamm, so dass nur noch seine\n"
+	.string "Barthaare herausgucken, und wartet\n"
+	.string "auf Beute.$"
+
+DexDescription_Whiscash_1: @ 83AF7E4
+	.string "WELSAR legt viel Wert auf sein\n"
+	.string "Territorium. Ein einzelnes POKéMON\n"
+	.string "dieser Art nennt einen Teich sein Eigen.$"
+
+DexDescription_Whiscash_2: @ 83AF855
+	.string "Wenn sich ein Feind nähert, schlägt es\n"
+	.string "um sich und verursacht ein gewaltiges\n"
+	.string "Erdbeben.$"
+
+DexDescription_Corphish_1: @ 83AF8A2
+	.string "KREBSCORPS ist kein heimisches\n"
+	.string "POKéMON, sondern wurde als Haustier\n"
+	.string "importiert. Schließlich verwilderte es.$"
+
+DexDescription_Corphish_2: @ 83AF90E
+	.string "Dieses POKéMON ist mittlerweile sehr\n"
+	.string "robust und hat seine Population\n"
+	.string "vergrößert.$"
+
+DexDescription_Crawdaunt_1: @ 83AF953
+	.string "KREBUTACK ist von Natur aus sehr\n"
+	.string "gewalttätig, so dass es dauernd andere\n"
+	.string "Lebewesen zum Kampf herausfordern$"
+
+DexDescription_Crawdaunt_2: @ 83AF9B9
+	.string "muss. Andere Lebensformen lehnen es ab,\n"
+	.string "mit diesem POKéMON in ein und demselben\n"
+	.string "Teich zu leben.$"
+
+DexDescription_Baltoy_1: @ 83AFA1A
+	.string "PUPPANCE bewegt sich, indem es sich auf\n"
+	.string "seinem Fuß im Kreis dreht. In sehr alten\n"
+	.string "Ruinen wurden primitive Wandmalereien$"
+
+DexDescription_Baltoy_2: @ 83AFA8B
+	.string "entdeckt, die dieses POKéMON in\n"
+	.string "Begleitung von Menschen zeigen.$"
+
+DexDescription_Claydol_1: @ 83AFAB9
+	.string "LEPUMENTAS sind aus Schlamm gefertigte\n"
+	.string "Puppen, die von primitiven Menschen\n"
+	.string "hergestellt und durch mysteriöse$"
+
+DexDescription_Claydol_2: @ 83AFB2B
+	.string "Strahlen zum Leben erweckt wurden.\n"
+	.string "Diese POKéMON bewegen sich\n"
+	.string "schwebend fort.$"
+
+DexDescription_Lileep_1: @ 83AFB56
+	.string "Von LILIEP nahm man an, es sei seit\n"
+	.string "etwa hundert Millionen Jahren\n"
+	.string "ausgestorben. Mit seinen wie$"
+
+DexDescription_Lileep_2: @ 83AFBBC
+	.string "Blütenblätter geformten Tentakeln\n"
+	.string "heftet es sich an einen Felsen auf dem\n"
+	.string "Meeresboden und fängt Beute.$"
+
+DexDescription_Cradily_1: @ 83AFC1F
+	.string "WIELIE durchforstet den Meeresboden\n"
+	.string "nach Beute. Dieses POKéMON fährt\n"
+	.string "seinen baumstammartigen Nacken aus$"
+
+DexDescription_Cradily_2: @ 83AFC90
+	.string "und fängt mit seinen acht Tentakeln\n"
+	.string "Beute.$"
+
+DexDescription_Anorith_1: @ 83AFCC0
+	.string "ANORITH wurde aus einem\n"
+	.string "prähistorischen Fossil erzeugt. Dieses\n"
+	.string "primitive POKéMON lebte einst in warmen$"
+
+DexDescription_Anorith_2: @ 83AFD23
+	.string "Gewässern. Es klemmt seine Beute\n"
+	.string "fest zwischen seine beiden riesigen\n"
+	.string "Klauen ein.$"
+
+DexDescription_Armaldo_1: @ 83AFD59
+	.string "Von ARMALDOs hartem Panzer prallen\n"
+	.string "alle Angriffe ab. Dieses POKéMON\n"
+	.string "hat zwei mächtige Klauen, die es$"
+
+DexDescription_Armaldo_2: @ 83AFDC6
+	.string "ausfahren oder einziehen kann. Es hat\n"
+	.string "so viel Kraft, dass es damit eine\n"
+	.string "Stahlplatte pulverisieren kann.$"
+
+DexDescription_Feebas_1: @ 83AFE0E
+	.string "BARSCHWAs Flossen waren schon immer\n"
+	.string "zerfetzt. Wegen seines merkwürdigen\n"
+	.string "Aussehens wird dieses POKéMON$"
+
+DexDescription_Feebas_2: @ 83AFE77
+	.string "weitgehend ignoriert. Es kann sowohl im\n"
+	.string "Meer als auch in Flüssen leben.$"
+
+DexDescription_Milotic_1: @ 83AFECA
+	.string "MILOTIC soll das Schönste aller\n"
+	.string "POKéMON sein. Es hat die Macht,\n"
+	.string "Emotionen wie Wut und Feindseligkeit zu$"
+
+DexDescription_Milotic_2: @ 83AFF27
+	.string "besänftigen und somit erbitterten\n"
+	.string "Streit zu vermeiden.$"
+
+DexDescription_Castform_1: @ 83AFF60
+	.string "FORMEOs Erscheinung ändert sich\n"
+	.string "mit dem Wetter. Dieses POKéMON hat\n"
+	.string "die Fähigkeit erworben, die mächtige$"
+
+DexDescription_Castform_2: @ 83AFFB7
+	.string "Kraft der Natur zu nutzen, um seinen\n"
+	.string "winzigen Körper zu schützen.$"
+
+DexDescription_Kecleon_1: @ 83AFFEA
+	.string "KECLEON kann die Farbe seines Körpers\n"
+	.string "bei Bedarf verändern, um sich seiner\n"
+	.string "Umgebung anzupassen. Es gibt allerdings$"
+
+DexDescription_Kecleon_2: @ 83B0044
+	.string "eine Ausnahme: Das Zickzackmuster auf\n"
+	.string "seinem Bauch kann es nicht verändern.$"
+
+DexDescription_Shuppet_1: @ 83B0098
+	.string "SHUPPET wird durch Gefühle wie Neid und\n"
+	.string "Rachsucht angezogen. Wenn jemand\n"
+	.string "starke Rachegelüste entwickelt,$"
+
+DexDescription_Shuppet_2: @ 83B0100
+	.string "erscheint dieses POKéMON in Scharen\n"
+	.string "und reiht sich unter der Dachrinne der\n"
+	.string "Person auf.$"
+
+DexDescription_Banette_1: @ 83B0164
+	.string "BANETTE belegt andere mit Flüchen,\n"
+	.string "indem es Nadeln in seinen eigenen\n"
+	.string "Körper sticht. Dieses POKéMON war$"
+
+DexDescription_Banette_2: @ 83B01BA
+	.string "ursprünglich eine Mitleid erregende\n"
+	.string "Plüschpuppe, die weggeworfen wurde.$"
+
+DexDescription_Duskull_1: @ 83B0201
+	.string "ZWIRRLICHT kann durch jede Wand gehen,\n"
+	.string "egal, wie dick diese ist. Wenn dieses\n"
+	.string "POKéMON sich ein Ziel gesucht hat,$"
+
+DexDescription_Duskull_2: @ 83B0266
+	.string "verfolgt es seinen Feind unnachgiebig\n"
+	.string "bis zum Sonnenaufgang.$"
+
+DexDescription_Dusclops_1: @ 83B02AB
+	.string "ZWIRRKLOPs Körper ist komplett hohl. Es\n"
+	.string "wird auch mit einem Schwarzen Loch\n"
+	.string "verglichen. Dieses POKéMON nimmt alles$"
+
+DexDescription_Dusclops_2: @ 83B031B
+	.string "in seinem Körper auf, es kommt jedoch\n"
+	.string "nichts wieder heraus.$"
+
+DexDescription_Tropius_1: @ 83B0377
+	.string "Die Früchte am Nacken von TROPIUS\n"
+	.string "sind bei Kindern sehr beliebt. Dieses\n"
+	.string "POKéMON liebt Früchte und isst sie$"
+
+DexDescription_Tropius_2: @ 83B03E8
+	.string "ständig. Offensichtlich sind ihm wegen\n"
+	.string "dieser Vorliebe selber Früchte\n"
+	.string "gewachsen.$"
+
+DexDescription_Chimecho_1: @ 83B043D
+	.string "PALIMPALIMs Schreie hallen durch\n"
+	.string "seinen hohlen Körper. Wenn dieses\n"
+	.string "POKéMON wütend wird, erzeugen$"
+
+DexDescription_Chimecho_2: @ 83B04A0
+	.string "seine Schreie Ultraschallwellen, die\n"
+	.string "seine Feinde buchstäblich wegfegen\n"
+	.string "können.$"
+
+DexDescription_Absol_1: @ 83B04E5
+	.string "Jedes Mal, wenn ABSOL sich den Menschen\n"
+	.string "zeigt, endet dies in einer Katastrophe\n"
+	.string "wie Erdbeben oder Sturmflut.$"
+
+DexDescription_Absol_2: @ 83B0551
+	.string "Deswegen ist es auch als das\n"
+	.string "Katastrophen-POKéMON bekannt.$"
+
+DexDescription_Wynaut_1: @ 83B058B
+	.string "ISSO hat immer ein breites, fröhliches\n"
+	.string "Lächeln auf seinem Gesicht. Um \n"
+	.string "festzustellen, ob es wütend ist, muss$"
+
+DexDescription_Wynaut_2: @ 83B05F8
+	.string "man seinen Schweif betrachten. Wenn es\n"
+	.string "wütend ist, schlägt es damit auf den\n"
+	.string "Boden.$"
+
+DexDescription_Snorunt_1: @ 83B063E
+	.string "SCHNEPPKE lebt in Gebieten mit heftigem\n"
+	.string "Schneefall. In Jahreszeiten, in denen es\n"
+	.string "nicht schneit, wie im Frühling oder im$"
+
+DexDescription_Snorunt_2: @ 83B06AC
+	.string "Sommer, nimmt das POKéMON Reißaus, um\n"
+	.string "in einer Höhle ein ruhiges Leben unter\n"
+	.string "Stalaktiten und Stalagmiten zu führen.$"
+
+DexDescription_Glalie_1: @ 83B06FB
+	.string "FIRNONTOR hat einen Körper aus Stein,\n"
+	.string "den es mit einem Panzer aus Eis noch\n"
+	.string "verstärkt. Dieses POKéMON kann$"
+
+DexDescription_Glalie_2: @ 83B0769
+	.string "die Luftfeuchtigkeit der Atmosphäre\n"
+	.string "einfrieren und in jegliche Form\n"
+	.string "verwandeln.$"
+
+DexDescription_Spheal_1: @ 83B079F
+	.string "SEEMOPS kann schneller rollen als laufen.\n"
+	.string "Wenn Gruppen dieses POKéMON \n"
+	.string "zusammen essen, klatschen sie$"
+
+DexDescription_Spheal_2: @ 83B0811
+	.string "gleichzeitig, um ihre Freude zu zeigen.\n"
+	.string "Deswegen sind ihre Mahlzeiten sehr\n"
+	.string "laut.$"
+
+DexDescription_Sealeo_1: @ 83B0855
+	.string "SEEJONG hat die Angewohnheit, alles,\n"
+	.string "was es zum ersten Mal sieht, auf seiner \n"
+	.string "Nasenspitze zu jonglieren. Dieses$"
+
+DexDescription_Sealeo_2: @ 83B08B9
+	.string "POKéMON hält sich bei Laune, indem es\n"
+	.string "manchmal ein SEEMOPS auf seiner Nase\n"
+	.string "balanciert und hin- und herrollt.$"
+
+DexDescription_Walrein_1: @ 83B0914
+	.string "WALRAISA hat zwei massive Stoßzähne,\n"
+	.string "die mit einem Hieb Eisblöcke\n"
+	.string "zertrümmern können, die bis zu$"
+
+DexDescription_Walrein_2: @ 83B097F
+	.string "10 Tonnen wiegen. Es besitzt eine dicke\n"
+	.string "Speckschicht, die es vor eisigen\n"
+	.string "Temperaturen schützt.$"
+
+DexDescription_Clamperl_1: @ 83B09CC
+	.string "PERLUs kräftige Schale dient nicht\n"
+	.string "nur dem Schutz, es nutzt sie auch zum\n"
+	.string "Fangen von Beute. Die ausgewachsene$"
+
+DexDescription_Clamperl_2: @ 83B0A36
+	.string "Schale eines PERLU weist viele\n"
+	.string "Kerben und Kratzer auf.$"
+
+DexDescription_Huntail_1: @ 83B0A87
+	.string "AALABYSS entging lange der\n"
+	.string "Aufmerksamkeit des Menschen, da es in\n"
+	.string "extremen Tiefen des Meeres lebt.$"
+
+DexDescription_Huntail_2: @ 83B0AF2
+	.string "Die Augen dieses POKéMON können\n"
+	.string "selbst in den dunklen und trüben Tiefen\n"
+	.string "des Meeres einwandfrei sehen.$"
+
+DexDescription_Gorebyss_1: @ 83B0B42
+	.string "SAGANABYSS lebt in extremen Tiefen des\n"
+	.string "Südmeeres. Sein Körper ist so angelegt,\n"
+	.string "dass er dem enormen Wasserdruck dieser$"
+
+DexDescription_Gorebyss_2: @ 83B0BB1
+	.string "unglaublichen Tiefe standhalten kann.\n"
+	.string "Daher übersteht dieses POKéMON\n"
+	.string "gewöhnliche Attacken unbeschadet.$"
+
+DexDescription_Relicanth_1: @ 83B0C13
+	.string "RELICANTH ist eine POKéMON-Spezies,\n"
+	.string "die vor hundert Millionen Jahren\n"
+	.string "existierte, ohne jemals ihre Form zu$"
+
+DexDescription_Relicanth_2: @ 83B0C7B
+	.string "verändern. Dieses antike POKéMON\n"
+	.string "hat ein zahnloses Maul und ernährt sich\n"
+	.string "von Mikroorganismen.$"
+
+DexDescription_Luvdisc_1: @ 83B0CC9
+	.string "LIEBISKUS lebt in den seichten\n"
+	.string "Gewässern der Tropen. Dieses herz-\n"
+	.string "förmige POKéMON verdankt seinen Namen$"
+
+DexDescription_Luvdisc_2: @ 83B0D32
+	.string "der Tatsache, dass es hinter Liebes-\n"
+	.string "paaren herschwamm, die es in den Wellen\n"
+	.string "des Ozeans beobachtet hatte.$"
+
+DexDescription_Bagon_1: @ 83B0D62
+	.string "KINDWURM hat den Traum, fliegen zu\n"
+	.string "können. In zahlreichen vergeblichen\n"
+	.string "Versuchen stürzte es sich die Klippen$"
+
+DexDescription_Bagon_2: @ 83B0DD3
+	.string "herunter. Daher ist sein Kopf sehr\n"
+	.string "robust und so hart wie Stahl geworden.$"
+
+DexDescription_Shelgon_1: @ 83B0E26
+	.string "In DRASCHELs panzerartiger Schale\n"
+	.string "vollziehen seine Zellen eine\n"
+	.string "Transformation, um einen völlig neuen$"
+
+DexDescription_Shelgon_2: @ 83B0E92
+	.string "Körper zu bilden. Die Schale dieses\n"
+	.string "POKéMON ist ausgesprochen schwer, so\n"
+	.string "dass seine Bewegungen träge wirken.$"
+
+DexDescription_Salamence_1: @ 83B0EDA
+	.string "BRUTALANDA träumte sehr lange davon,\n"
+	.string "dass ihm Flügel wachsen mögen. Dieser\n"
+	.string "sehnliche Wunsch hat wohl eine$"
+
+DexDescription_Salamence_2: @ 83B0F48
+	.string "plötzliche Mutation in den Zellen dieses\n"
+	.string "POKéMON hervorgerufen, so dass ihm\n"
+	.string "plötzlich prächtige Flügel wuchsen.$"
+
+DexDescription_Beldum_1: @ 83B0FB0
+	.string "Anstelle von Blut fließt eine starke\n"
+	.string "magnetische Energie durch TANHELs\n"
+	.string "Körper. Dieses POKéMON kommuniziert$"
+
+DexDescription_Beldum_2: @ 83B101D
+	.string "mit anderen, indem es kontrollierte\n"
+	.string "magnetische Impulse aussendet.$"
+
+DexDescription_Metang_1: @ 83B104F
+	.string "Wenn zwei TANHEL miteinander\n"
+	.string "verschmelzen, entsteht daraus METANG.\n"
+	.string "Die Gehirne der TANHEL werden mit$"
+
+DexDescription_Metang_2: @ 83B10C2
+	.string "einem magnetischen Nervensystem\n"
+	.string "verbunden. Dadurch erzeugt es starke\n"
+	.string "psychokinetische Energie.$"
+
+DexDescription_Metagross_1: @ 83B1119
+	.string "METAGROSS hat insgesamt vier Gehirne.\n"
+	.string "Diese können schwierige Berechnungen\n"
+	.string "schneller lösen als ein Supercomputer.$"
+
+DexDescription_Metagross_2: @ 83B1188
+	.string "Dieses POKéMON kann durch die Lüfte\n"
+	.string "schweben, indem es seine vier Beine\n"
+	.string "einklappt.$"
+
+DexDescription_Regirock_1: @ 83B11DD
+	.string "REGIROCK wurde vor langer Zeit von\n"
+	.string "Menschen weggeschlossen. Wenn der\n"
+	.string "Körper dieses POKéMON im Kampf$"
+
+DexDescription_Regirock_2: @ 83B124A
+	.string "Schaden nimmt, sucht es nach\n"
+	.string "passenden Steinen, um sich selber zu\n"
+	.string "reparieren.$"
+
+DexDescription_Regice_1: @ 83B127A
+	.string "REGICEs tiefgefrorener Körper\n"
+	.string "entstand während der Eiszeit. Es kann\n"
+	.string "nicht einmal durch Feuer geschmolzen$"
+
+DexDescription_Regice_2: @ 83B12D8
+	.string "werden. Dieses POKéMON kontrolliert\n"
+	.string "eisige Luft von minus 200 Grad.$"
+
+DexDescription_Registeel_1: @ 83B1311
+	.string "REGISTEEL hat einen Körper, der härter\n"
+	.string "ist als jede Art von Metall. Sein Körper\n"
+	.string "scheint hohl zu sein.$"
+
+DexDescription_Registeel_2: @ 83B136C
+	.string "Niemand hat eine Ahnung, was dieses\n"
+	.string "POKéMON wohl frisst.$"
+
+DexDescription_Latias_1: @ 83B1398
+	.string "LATIAS ist in höchstem Maße empfindlich\n"
+	.string "gegenüber den Emotionen der Menschen.\n"
+	.string "Wenn es den Anflug von Feindseligkeit$"
+
+DexDescription_Latias_2: @ 83B1403
+	.string "wahrnimmt, werden seine Federn\n"
+	.string "zerzaust und es stößt schrille Schreie\n"
+	.string "aus, um seinen Gegner einzuschüchtern.$"
+
+DexDescription_Latios_1: @ 83B1447
+	.string "LATIOS kann seinem Feind ein Bild\n"
+	.string "von etwas, das dieser einmal gesehen\n"
+	.string "hat, in den Kopf projizieren. Dieses$"
+
+DexDescription_Latios_2: @ 83B14A8
+	.string "POKéMON ist intelligent und es versteht\n"
+	.string "die menschliche Sprache.$"
+
+DexDescription_Kyogre_1: @ 83B14E2
+	.string "KYOGRE kann riesige Regenwolken\n"
+	.string "erzeugen, die den gesamten Himmel\n"
+	.string "bedecken, und wolkenbruchartige$"
+
+DexDescription_Kyogre_2: @ 83B1555
+	.string "Niederschläge hervorrufen. Dieses\n"
+	.string "POKéMON hat vielen Menschen das Leben\n"
+	.string "gerettet, die unter einer Dürre litten.$"
+
+DexDescription_Groudon_1: @ 83B1591
+	.string "GROUDON wurde lange Zeit in der\n"
+	.string "Mythologie als ein POKéMON\n"
+	.string "beschrieben, das Land erschaffen und$"
+
+DexDescription_Groudon_2: @ 83B15F9
+	.string "Kontinente vergrößern kann. Dieses\n"
+	.string "POKéMON fiel nach einem erbitterten\n"
+	.string "Kampf mit KYOGRE in den Schlaf.$"
+
+DexDescription_Rayquaza_1: @ 83B163C
+	.string "RAYQUAZA lebte für hunderte Millionen\n"
+	.string "Jahre in der Ozonschicht und stieg nie\n"
+	.string "zur Erde hinab. Dieses POKéMON$"
+
+DexDescription_Rayquaza_2: @ 83B16AA
+	.string "lebt von Wasser und Partikeln aus der\n"
+	.string "Atmosphäre.$"
+
+DexDescription_Jirachi_1: @ 83B16F1
+	.string "Einer Legende nach erfüllt JIRACHI\n"
+	.string "jeden Wunsch, der auf einen Notizzettel\n"
+	.string "an seinem Kopf geschrieben wird. Wenn$"
+
+DexDescription_Jirachi_2: @ 83B1765
+	.string "dieses POKéMON Gefahr wittert, kämpft\n"
+	.string "es bereits, bevor es überhaupt\n"
+	.string "aufgewacht ist.$"
+
+DexDescription_Deoxys_1: @ 83B17A5
+	.string "Die DNS eines Weltraumvirus hat eine\n"
+	.string "spontane Mutation erfahren, da sie\n"
+	.string "einem Laserstrahl ausgesetzt wurde.$"
+
+DexDescription_Deoxys_2: @ 83B1810
+	.string "Daraus entstand DEOXYS. \n"
+	.string "Das kristallartige Organ auf der Brust\n"
+	.string "dieses POKéMON ist sein Gehirn.$"
 
 @ Unfortunately, preproc doesn't allow us to use strings inside macros,
 @ so the category names have to be on separate lines.
 
 	.align 2
 gPokedexEntries:: @ 83B1858
-	.string "UNKNOWN$", 12
+	.string "UNBEKANNT$", 12
 	pokedex_entry      Dummy,   0,    0, 256,   0,  256,  0
-	.string "SEED$", 12
+	.string "SAMEN$", 12
 	pokedex_entry  Bulbasaur,   7,   69, 356,  17,  256,  0
-	.string "SEED$", 12
+	.string "SAMEN$", 12
 	pokedex_entry    Ivysaur,  10,  130, 335,  13,  256,  0
-	.string "SEED$", 12
+	.string "SAMEN$", 12
 	pokedex_entry   Venusaur,  20, 1000, 256,   0,  388,  6
-	.string "LIZARD$", 12
+	.string "ECHSE$", 12
 	pokedex_entry Charmander,   6,   85, 444,  18,  256,  0
-	.string "FLAME$", 12
+	.string "FLAMME$", 12
 	pokedex_entry Charmeleon,  11,  190, 302,   9,  256,  0
-	.string "FLAME$", 12
+	.string "FLAMME$", 12
 	pokedex_entry  Charizard,  17,  905, 256,   1,  302,  3
-	.string "TINY TURTLE$", 12
+	.string "MINIKRÖTE$", 12
 	pokedex_entry   Squirtle,   5,   90, 412,  18,  256,  0
-	.string "TURTLE$", 12
+	.string "KRÖTE$", 12
 	pokedex_entry  Wartortle,  10,  225, 332,  10,  256,  0
-	.string "SHELLFISH$", 12
+	.string "PANZERTIER$", 12
 	pokedex_entry  Blastoise,  16,  855, 256,  -1,  293,  2
-	.string "WORM$", 12
+	.string "WURM$", 12
 	pokedex_entry   Caterpie,   3,   29, 549,  22,  256,  0
-	.string "COCOON$", 12
+	.string "KOKON$", 12
 	pokedex_entry    Metapod,   7,   99, 350,  18,  256,  0
-	.string "BUTTERFLY$", 12
+	.string "FALTER$", 12
 	pokedex_entry Butterfree,  11,  320, 312,   2,  256,  0
-	.string "HAIRY BUG$", 12
+	.string "RAUPE$", 12
 	pokedex_entry     Weedle,   3,   32, 455,  22,  256,  0
-	.string "COCOON$", 12
+	.string "KOKON$", 12
 	pokedex_entry     Kakuna,   6,  100, 424,  17,  256,  0
-	.string "POISON BEE$", 12
+	.string "GIFTBIENE$", 12
 	pokedex_entry   Beedrill,  10,  295, 366,   2,  256,  0
-	.string "TINY BIRD$", 12
+	.string "KLEINVOGEL$", 12
 	pokedex_entry     Pidgey,   3,   18, 508,  -3,  256,  0
-	.string "BIRD$", 12
+	.string "VOGEL$", 12
 	pokedex_entry  Pidgeotto,  11,  300, 331,  10,  256,  0
-	.string "BIRD$", 12
+	.string "VOGEL$", 12
 	pokedex_entry    Pidgeot,  15,  395, 269,   0,  256,  0
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry    Rattata,   3,   35, 481,  21,  256,  0
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry   Raticate,   7,  185, 459,  18,  256,  0
-	.string "TINY BIRD$", 12
+	.string "KLEINVOGEL$", 12
 	pokedex_entry    Spearow,   3,   20, 571,  22,  256,  0
-	.string "BEAK$", 12
+	.string "PICKVOGEL$", 12
 	pokedex_entry     Fearow,  12,  380, 278,   1,  256,  0
-	.string "SNAKE$", 12
+	.string "SCHLANGE$", 12
 	pokedex_entry      Ekans,  20,   69, 298,  12,  256,  0
-	.string "COBRA$", 12
+	.string "KOBRA$", 12
 	pokedex_entry      Arbok,  35,  650, 256,   0,  296,  2
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry    Pikachu,   4,   60, 479,  19,  256,  0
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry     Raichu,   8,  300, 426,  13,  256,  0
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry  Sandshrew,   6,  120, 365,  18,  256,  0
-	.string "MOUSE$", 12
+	.string "MAUS$", 12
 	pokedex_entry  Sandslash,  10,  295, 341,  11,  256,  0
-	.string "POISON PIN$", 12
+	.string "GIFTDORN$", 12
 	pokedex_entry   NidoranF,   4,   70, 488,  21,  256,  0
-	.string "POISON PIN$", 12
+	.string "GIFTDORN$", 12
 	pokedex_entry   Nidorina,   8,  200, 381,  15,  256,  0
-	.string "DRILL$", 12
+	.string "BOHRER$", 12
 	pokedex_entry  Nidoqueen,  13,  600, 293,   4,  256,  0
-	.string "POISON PIN$", 12
+	.string "GIFTDORN$", 12
 	pokedex_entry   NidoranM,   5,   90, 511,  20,  256,  0
-	.string "POISON PIN$", 12
+	.string "GIFTDORN$", 12
 	pokedex_entry   Nidorino,   9,  195, 408,  15,  256,  0
-	.string "DRILL$", 12
+	.string "BOHRER$", 12
 	pokedex_entry   Nidoking,  14,  620, 256,   0,  256,  0
-	.string "FAIRY$", 12
+	.string "FEE$", 12
 	pokedex_entry   Clefairy,   6,   75, 441,  20,  256,  0
-	.string "FAIRY$", 12
+	.string "FEE$", 12
 	pokedex_entry   Clefable,  13,  400, 256,   5,  256,  0
-	.string "FOX$", 12
+	.string "FUCHS$", 12
 	pokedex_entry     Vulpix,   6,   99, 542,  19,  256,  0
-	.string "FOX$", 12
+	.string "FUCHS$", 12
 	pokedex_entry  Ninetales,  11,  199, 339,  10,  256,  0
-	.string "BALLOON$", 12
+	.string "BALLON$", 12
 	pokedex_entry Jigglypuff,   5,   55, 433,   2,  256,  0
-	.string "BALLOON$", 12
+	.string "BALLON$", 12
 	pokedex_entry Wigglytuff,  10,  120, 328,  11,  256,  0
-	.string "BAT$", 12
+	.string "FLEDERMAUS$", 12
 	pokedex_entry      Zubat,   8,   75, 362,  -5,  256,  0
-	.string "BAT$", 12
+	.string "FLEDERMAUS$", 12
 	pokedex_entry     Golbat,  16,  550, 256,   1,  256,  0
-	.string "WEED$", 12
+	.string "UNKRAUT$", 12
 	pokedex_entry     Oddish,   5,   54, 423,  19,  256,  0
-	.string "WEED$", 12
+	.string "UNKRAUT$", 12
 	pokedex_entry      Gloom,   8,   86, 329,  13,  256,  0
-	.string "FLOWER$", 12
+	.string "BLUME$", 12
 	pokedex_entry  Vileplume,  12,  186, 256,   4,  256,  0
-	.string "MUSHROOM$", 12
+	.string "PILZ$", 12
 	pokedex_entry      Paras,   3,   54, 593,  22,  256,  0
-	.string "MUSHROOM$", 12
+	.string "PILZ$", 12
 	pokedex_entry   Parasect,  10,  295, 307,   8,  256,  0
-	.string "INSECT$", 12
+	.string "INSEKT$", 12
 	pokedex_entry    Venonat,  10,  300, 360,   0,  256, -1
-	.string "POISON MOTH$", 12
+	.string "GIFTMOTTE$", 12
 	pokedex_entry   Venomoth,  15,  125, 285,   2,  256,  1
-	.string "MOLE$", 12
+	.string "MAULWURF$", 12
 	pokedex_entry    Diglett,   2,    8, 833,  25,  256,  0
-	.string "MOLE$", 12
+	.string "MAULWURF$", 12
 	pokedex_entry    Dugtrio,   7,  333, 406,  18,  256,  0
-	.string "SCRATCH CAT$", 12
+	.string "KATZE$", 12
 	pokedex_entry     Meowth,   4,   42, 480,  19,  256,  0
-	.string "CLASSY CAT$", 12
+	.string "RASSEKATZE$", 12
 	pokedex_entry    Persian,  10,  320, 320,  10,  256,  0
-	.string "DUCK$", 12
+	.string "ENTE$", 12
 	pokedex_entry    Psyduck,   8,  196, 369,  15,  256,  0
-	.string "DUCK$", 12
+	.string "ENTE$", 12
 	pokedex_entry    Golduck,  17,  766, 256,   1,  273,  1
-	.string "PIG MONKEY$", 12
+	.string "SCHW./ AFFE$", 12
 	pokedex_entry     Mankey,   5,  280, 404,  19,  256,  0
-	.string "PIG MONKEY$", 12
+	.string "SCHW./ AFFE$", 12
 	pokedex_entry   Primeape,  10,  320, 326,  10,  256,  0
-	.string "PUPPY$", 12
+	.string "HUND$", 12
 	pokedex_entry  Growlithe,   7,  190, 346,  14,  256,  0
-	.string "LEGENDARY$", 12
+	.string "LEGENDÄR$", 12
 	pokedex_entry   Arcanine,  19, 1550, 256,   1,  312,  4
-	.string "TADPOLE$", 12
+	.string "KAULQUAPPE$", 12
 	pokedex_entry    Poliwag,   6,  124, 369,  20,  256,  0
-	.string "TADPOLE$", 12
+	.string "KAULQUAPPE$", 12
 	pokedex_entry  Poliwhirl,  10,  200, 288,  11,  256,  0
-	.string "TADPOLE$", 12
+	.string "KAULQUAPPE$", 12
 	pokedex_entry  Poliwrath,  13,  540, 256,   6,  256,  0
 	.string "PSI$", 12
 	pokedex_entry       Abra,   9,  195, 363,  14,  256,  0
@@ -3520,135 +3831,135 @@ gPokedexEntries:: @ 83B1858
 	pokedex_entry    Kadabra,  13,  565, 256,   3,  256,  0
 	.string "PSI$", 12
 	pokedex_entry   Alakazam,  15,  480, 256,   3,  256,  0
-	.string "SUPERPOWER$", 12
+	.string "KRAFTPROTZ$", 12
 	pokedex_entry     Machop,   8,  195, 342,  14,  256,  0
-	.string "SUPERPOWER$", 12
+	.string "KRAFTPROTZ$", 12
 	pokedex_entry    Machoke,  15,  705, 323,   9,  257,  0
-	.string "SUPERPOWER$", 12
+	.string "KRAFTPROTZ$", 12
 	pokedex_entry    Machamp,  16, 1300, 280,   1,  269, -1
-	.string "FLOWER$", 12
+	.string "BLUME$", 12
 	pokedex_entry Bellsprout,   7,   40, 354,  16,  256,  0
-	.string "FLYCATCHER$", 12
+	.string "FLIEGENTOT$", 12
 	pokedex_entry Weepinbell,  10,   64, 256,   0,  256,  0
-	.string "FLYCATCHER$", 12
+	.string "FLIEGENTOT$", 12
 	pokedex_entry Victreebel,  17,  155, 256,   1,  312,  3
-	.string "JELLYFISH$", 12
+	.string "QUALLE$", 12
 	pokedex_entry  Tentacool,   9,  455, 256,   0,  256,  0
-	.string "JELLYFISH$", 12
+	.string "QUALLE$", 12
 	pokedex_entry Tentacruel,  16,  550, 256,   0,  312,  1
-	.string "ROCK$", 12
+	.string "GESTEIN$", 12
 	pokedex_entry    Geodude,   4,  200, 347,  18,  256,  0
-	.string "ROCK$", 12
+	.string "GESTEIN$", 12
 	pokedex_entry   Graveler,  10, 1050, 256,   2,  256,  0
-	.string "MEGATON$", 12
+	.string "URGESTEIN$", 12
 	pokedex_entry      Golem,  14, 3000, 256,   3,  296,  2
-	.string "FIRE HORSE$", 12
+	.string "FEUERPFERD$", 12
 	pokedex_entry     Ponyta,  10,  300, 283,   8,  256,  0
-	.string "FIRE HORSE$", 12
+	.string "FEUERPFERD$", 12
 	pokedex_entry   Rapidash,  17,  950, 256,   0,  289,  1
-	.string "DOPEY$", 12
+	.string "SCHNARCHER$", 12
 	pokedex_entry   Slowpoke,  12,  360, 256,  10,  256,  0
-	.string "HERMIT CRAB$", 12
+	.string "SYMBIOSE$", 12
 	pokedex_entry    Slowbro,  16,  785, 256,   6,  296,  2
 	.string "MAGNET$", 12
 	pokedex_entry  Magnemite,   3,   60, 288,  -9,  256,  0
 	.string "MAGNET$", 12
 	pokedex_entry   Magneton,  10,  600, 292,   1,  256,  0
-	.string "WILD DUCK$", 12
+	.string "WILDENTE$", 12
 	pokedex_entry  Farfetchd,   8,  150, 330,   2,  293,  2
-	.string "TWIN BIRD$", 12
+	.string "DUOVOGEL$", 12
 	pokedex_entry      Doduo,  14,  392, 256,   3,  257, -1
-	.string "TRIPLE BIRD$", 12
+	.string "TRIVOGEL$", 12
 	pokedex_entry     Dodrio,  18,  852, 256,   0,  268,  0
-	.string "SEA LION$", 12
+	.string "SEEHUND$", 12
 	pokedex_entry       Seel,  11,  900, 297,   8,  256,  0
-	.string "SEA LION$", 12
+	.string "SEEHUND$", 12
 	pokedex_entry    Dewgong,  17, 1200, 256,   0,  275,  0
-	.string "SLUDGE$", 12
+	.string "SCHLAMM$", 12
 	pokedex_entry     Grimer,   9,  300, 258,  10,  256,  0
-	.string "SLUDGE$", 12
+	.string "SCHLAMM$", 12
 	pokedex_entry        Muk,  12,  300, 256,   2,  256,  0
-	.string "BIVALVE$", 12
+	.string "MUSCHEL$", 12
 	pokedex_entry   Shellder,   3,   40, 675,  24,  256,  0
-	.string "BIVALVE$", 12
+	.string "MUSCHEL$", 12
 	pokedex_entry   Cloyster,  15, 1325, 256,   0,  269,  1
 	.string "GAS$", 12
 	pokedex_entry     Gastly,  13,    1, 256,   0,  256,  0
 	.string "GAS$", 12
 	pokedex_entry    Haunter,  16,    1, 256,   2,  293,  2
-	.string "SHADOW$", 12
+	.string "SCHATTEN$", 12
 	pokedex_entry     Gengar,  15,  405, 256,   2,  302,  2
-	.string "ROCK SNAKE$", 12
+	.string "FELSNATTER$", 12
 	pokedex_entry       Onix,  88, 2100, 256,   1,  515, 14
-	.string "HYPNOSIS$", 12
+	.string "HYPNOSE$", 12
 	pokedex_entry    Drowzee,  10,  324, 274,   6,  256,  0
-	.string "HYPNOSIS$", 12
+	.string "HYPNOSE$", 12
 	pokedex_entry      Hypno,  16,  756, 256,   3,  257,  0
-	.string "RIVER CRAB$", 12
+	.string "KRABBE$", 12
 	pokedex_entry     Krabby,   4,   65, 469,  20,  256,  0
-	.string "PINCER$", 12
+	.string "KNEIFER$", 12
 	pokedex_entry    Kingler,  13,  600, 256,   2,  256,  0
 	.string "BALL$", 12
 	pokedex_entry    Voltorb,   5,  104, 364,  -8,  256,  0
 	.string "BALL$", 12
 	pokedex_entry  Electrode,  12,  666, 256,   0,  256,  0
-	.string "EGG$", 12
+	.string "EI$", 12
 	pokedex_entry  Exeggcute,   4,   25, 489,  -4,  256,  0
-	.string "COCONUT$", 12
+	.string "PALMFRUCHT$", 12
 	pokedex_entry  Exeggutor,  20, 1200, 256,   0,  309,  5
-	.string "LONELY$", 12
+	.string "EINSAM$", 12
 	pokedex_entry     Cubone,   4,   65, 545,  21,  256,  0
-	.string "BONE KEEPER$", 12
+	.string "KNOCHENFAN$", 12
 	pokedex_entry    Marowak,  10,  450, 293,  12,  256,  0
-	.string "KICKING$", 12
+	.string "KICKER$", 12
 	pokedex_entry  Hitmonlee,  15,  498, 256,   3,  259,  1
-	.string "PUNCHING$", 12
+	.string "PUNCHER$", 12
 	pokedex_entry Hitmonchan,  14,  502, 256,   2,  277,  2
-	.string "LICKING$", 12
+	.string "SCHLECKER$", 12
 	pokedex_entry  Lickitung,  12,  655, 256,   4,  256,  0
-	.string "POISON GAS$", 12
+	.string "GIFTWOLKE$", 12
 	pokedex_entry    Koffing,   6,   10, 369,  -1,  256,  0
-	.string "POISON GAS$", 12
+	.string "GIFTWOLKE$", 12
 	pokedex_entry    Weezing,  12,   95, 305,   3,  256,  0
-	.string "SPIKES$", 12
+	.string "STACHLER$", 12
 	pokedex_entry    Rhyhorn,  10, 1150, 267,   6,  256,  0
-	.string "DRILL$", 12
+	.string "BOHRER$", 12
 	pokedex_entry     Rhydon,  19, 1200, 256,   1,  299,  2
-	.string "EGG$", 12
+	.string "EI$", 12
 	pokedex_entry    Chansey,  11,  346, 257,   7,  256,  0
-	.string "VINE$", 12
+	.string "RANKE$", 12
 	pokedex_entry    Tangela,  10,  350, 304,   1,  256,  0
-	.string "PARENT$", 12
+	.string "MUTTERTIER$", 12
 	pokedex_entry Kangaskhan,  22,  800, 256,   0,  387,  8
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry     Horsea,   4,   80, 399,  -1,  256,  0
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry     Seadra,  12,  250, 299,   3,  256,  0
-	.string "GOLDFISH$", 12
+	.string "GOLDFISCH$", 12
 	pokedex_entry    Goldeen,   6,  150, 379,   4,  256,  0
-	.string "GOLDFISH$", 12
+	.string "GOLDFISCH$", 12
 	pokedex_entry    Seaking,  13,  390, 256,   3,  256,  0
-	.string "STAR SHAPE$", 12
+	.string "STERNFORM$", 12
 	pokedex_entry     Staryu,   8,  345, 326,   1,  256,  0
-	.string "MYSTERIOUS$", 12
+	.string "MYSTERIÖS$", 12
 	pokedex_entry    Starmie,  11,  800, 301,   3,  256,  0
-	.string "BARRIER$", 12
+	.string "SPERRE$", 12
 	pokedex_entry     Mrmime,  13,  545, 258,   6,  256,  0
 	.string "MANTIS$", 12
 	pokedex_entry    Scyther,  15,  560, 256,   1,  293,  2
-	.string "HUMAN SHAPE$", 12
+	.string "HUMANOTYP$", 12
 	pokedex_entry       Jynx,  14,  406, 256,   3,  300,  1
-	.string "ELECTRIC$", 12
+	.string "ELEKTRO$", 12
 	pokedex_entry Electabuzz,  11,  300, 351,   8,  256,  0
-	.string "SPITFIRE$", 12
+	.string "BRENNER$", 12
 	pokedex_entry     Magmar,  13,  445, 277,   5,  256,  0
-	.string "STAG BEETLE$", 12
+	.string "KNEIFKÄFER$", 12
 	pokedex_entry     Pinsir,  15,  550, 256,   2,  257,  0
-	.string "WILD BULL$", 12
+	.string "WILDBULLE$", 12
 	pokedex_entry     Tauros,  14,  884, 256,   0,  256,  0
-	.string "FISH$", 12
+	.string "FISCH$", 12
 	pokedex_entry   Magikarp,   9,  100, 310,   4,  256,  0
-	.string "ATROCIOUS$", 12
+	.string "GRAUSAM$", 12
 	pokedex_entry   Gyarados,  65, 2350, 256,   6,  481, 13
 	.string "TRANSPORT$", 12
 	pokedex_entry     Lapras,  25, 2200, 257,  10,  423,  8
@@ -3656,509 +3967,509 @@ gPokedexEntries:: @ 83B1858
 	pokedex_entry      Ditto,   3,   40, 633,  23,  256,  0
 	.string "EVOLUTION$", 12
 	pokedex_entry      Eevee,   3,   65, 476,  18,  256,  0
-	.string "BUBBLE JET$", 12
+	.string "BLUBBLASE$", 12
 	pokedex_entry   Vaporeon,  10,  290, 316,   8,  256,  0
-	.string "LIGHTNING$", 12
+	.string "BLITZ$", 12
 	pokedex_entry    Jolteon,   8,  245, 283,   8,  256,  0
-	.string "FLAME$", 12
+	.string "FEUER$", 12
 	pokedex_entry    Flareon,   9,  250, 306,  12,  256,  0
-	.string "VIRTUAL$", 12
+	.string "VIRTUELL$", 12
 	pokedex_entry    Porygon,   8,  365, 328,  15,  256,  0
-	.string "SPIRAL$", 12
+	.string "SPIRALE$", 12
 	pokedex_entry    Omanyte,   4,   75, 521,  22,  256,  0
-	.string "SPIRAL$", 12
+	.string "SPIRALE$", 12
 	pokedex_entry    Omastar,  10,  350, 307,   7,  256,  0
-	.string "SHELLFISH$", 12
+	.string "PANZERTIER$", 12
 	pokedex_entry     Kabuto,   5,  115, 454,  21,  256,  0
-	.string "SHELLFISH$", 12
+	.string "PANZERTIER$", 12
 	pokedex_entry   Kabutops,  13,  405, 271,   3,  256,  0
 	.string "FOSSIL$", 12
 	pokedex_entry Aerodactyl,  18,  590, 256,   0,  302,  4
-	.string "SLEEPING$", 12
+	.string "TAGTRÄUMER$", 12
 	pokedex_entry    Snorlax,  21, 4600, 256,   4,  423, 11
-	.string "FREEZE$", 12
+	.string "EIS$", 12
 	pokedex_entry   Articuno,  17,  554, 256,   0,  309,  2
-	.string "ELECTRIC$", 12
+	.string "ELEKTRO$", 12
 	pokedex_entry     Zapdos,  16,  526, 256,   0,  318,  3
-	.string "FLAME$", 12
+	.string "FLAMME$", 12
 	pokedex_entry    Moltres,  20,  600, 270,   0,  387,  8
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry    Dratini,  18,   33, 256,   8,  386,  6
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry  Dragonair,  40,  165, 256,   0,  411,  5
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry  Dragonite,  22, 2100, 256,   0,  309,  4
-	.string "GENETIC$", 12
+	.string "GENMUTANT$", 12
 	pokedex_entry     Mewtwo,  20, 1220, 256,   0,  309,  4
-	.string "NEW SPECIES$", 12
+	.string "NEUE ART$", 12
 	pokedex_entry        Mew,   4,   40, 457,  -2,  256,  0
-	.string "LEAF$", 12
+	.string "LAUB$", 12
 	pokedex_entry  Chikorita,   9,   64, 512,  20,  256,  0
-	.string "LEAF$", 12
+	.string "LAUB$", 12
 	pokedex_entry    Bayleef,  12,  158, 296,   4,  256,  0
-	.string "HERB$", 12
+	.string "KRÄUTER$", 12
 	pokedex_entry   Meganium,  18, 1005, 256,   0,  277,  1
-	.string "FIRE MOUSE$", 12
+	.string "FEUERMAUS$", 12
 	pokedex_entry  Cyndaquil,   5,   79, 539,  21,  256,  0
-	.string "VOLCANO$", 12
+	.string "VULKAN$", 12
 	pokedex_entry    Quilava,   9,  190, 329,  11,  256,  0
-	.string "VOLCANO$", 12
+	.string "VULKAN$", 12
 	pokedex_entry Typhlosion,  17,  795, 256,   0,  268,  1
-	.string "BIG JAW$", 12
+	.string "GROSSMAUL$", 12
 	pokedex_entry   Totodile,   6,   95, 487,  20,  256,  0
-	.string "BIG JAW$", 12
+	.string "GROSSMAUL$", 12
 	pokedex_entry   Croconaw,  11,  250, 378,  13,  256,  0
-	.string "BIG JAW$", 12
+	.string "GROSSMAUL$", 12
 	pokedex_entry Feraligatr,  23,  888, 256,   0,  342,  7
-	.string "SCOUT$", 12
+	.string "SPÄHER$", 12
 	pokedex_entry    Sentret,   8,   60, 439,  12,  256,  0
-	.string "LONG BODY$", 12
+	.string "LANGLEIB$", 12
 	pokedex_entry     Furret,  18,  325, 346,  11,  256,  0
-	.string "OWL$", 12
+	.string "EULE$", 12
 	pokedex_entry   Hoothoot,   7,  212, 380,  -2,  256,  0
-	.string "OWL$", 12
+	.string "EULE$", 12
 	pokedex_entry    Noctowl,  16,  408, 278,   3,  256,  0
-	.string "FIVE STAR$", 12
+	.string "FÜNF-PUNKT$", 12
 	pokedex_entry     Ledyba,  10,  108, 256,   4,  256,  0
-	.string "FIVE STAR$", 12
+	.string "FÜNF-PUNKT$", 12
 	pokedex_entry     Ledian,  14,  356, 256,   2,  256,  0
-	.string "STRING SPIT$", 12
+	.string "FADENWURF$", 12
 	pokedex_entry   Spinarak,   5,   85, 414,  21,  256,  0
-	.string "LONG LEG$", 12
+	.string "LANGBEIN$", 12
 	pokedex_entry    Ariados,  11,  335, 316,   8,  256,  0
-	.string "BAT$", 12
+	.string "FLEDERMAUS$", 12
 	pokedex_entry     Crobat,  18,  750, 256,   0,  281,  1
 	.string "ANGLER$", 12
 	pokedex_entry   Chinchou,   5,  120, 424,  -2,  256,  0
-	.string "LIGHT$", 12
+	.string "LEUCHTE$", 12
 	pokedex_entry    Lanturn,  12,  225, 269,   6,  256,  0
-	.string "TINY MOUSE$", 12
+	.string "BABYMAUS$", 12
 	pokedex_entry      Pichu,   3,   20, 508,  20,  256,  0
-	.string "STAR SHAPE$", 12
+	.string "STERNFORM$", 12
 	pokedex_entry     Cleffa,   3,   30, 462,  23,  256,  0
-	.string "BALLOON$", 12
+	.string "BALLON$", 12
 	pokedex_entry  Igglybuff,   3,   10, 457,  -1,  256,  0
-	.string "SPIKE BALL$", 12
+	.string "ZACKENBALL$", 12
 	pokedex_entry     Togepi,   3,   15, 507,  23,  256,  0
-	.string "HAPPINESS$", 12
+	.string "FREUDE$", 12
 	pokedex_entry    Togetic,   6,   32, 424,  17,  256,  0
-	.string "TINY BIRD$", 12
+	.string "KLEINVOGEL$", 12
 	pokedex_entry       Natu,   2,   20, 610,  25,  256,  0
-	.string "MYSTIC$", 12
+	.string "MYSTIK$", 12
 	pokedex_entry       Xatu,  15,  150, 256,   6,  318,  4
-	.string "WOOL$", 12
+	.string "WOLLE$", 12
 	pokedex_entry     Mareep,   6,   78, 379,  18,  256,  0
-	.string "WOOL$", 12
+	.string "WOLLE$", 12
 	pokedex_entry    Flaaffy,   8,  133, 372,  15,  256,  0
-	.string "LIGHT$", 12
+	.string "LEUCHTE$", 12
 	pokedex_entry   Ampharos,  14,  615, 256,   4,  256,  0
-	.string "FLOWER$", 12
+	.string "BLUME$", 12
 	pokedex_entry  Bellossom,   4,   58, 472,  21,  256,  0
-	.string "AQUA MOUSE$", 12
+	.string "AQUAMAUS$", 12
 	pokedex_entry     Marill,   4,   85, 476,  20,  256,  0
-	.string "AQUA RABBIT$", 12
+	.string "AQUAHASE$", 12
 	pokedex_entry  Azumarill,   8,  285, 448,  16,  256,  0
 	.string "IMITATION$", 12
 	pokedex_entry  Sudowoodo,  12,  380, 305,   8,  256,  0
-	.string "FROG$", 12
+	.string "FROSCH$", 12
 	pokedex_entry   Politoed,  11,  339, 289,   6,  256,  0
-	.string "COTTONWEED$", 12
+	.string "LÖWENZAHN$", 12
 	pokedex_entry     Hoppip,   4,    5, 562,  -7,  256,  0
-	.string "COTTONWEED$", 12
+	.string "LÖWENZAHN$", 12
 	pokedex_entry   Skiploom,   6,   10, 387,   0,  256,  0
-	.string "COTTONWEED$", 12
+	.string "LÖWENZAHN$", 12
 	pokedex_entry   Jumpluff,   8,   30, 418,  -4,  256,  0
-	.string "LONG TAIL$", 12
+	.string "LANGSCHWEIF$", 12
 	pokedex_entry      Aipom,   8,  115, 363,   6,  256,  0
-	.string "SEED$", 12
+	.string "SAMEN$", 12
 	pokedex_entry    Sunkern,   3,   18, 541,   0,  256,  0
-	.string "SUN$", 12
+	.string "SONNE$", 12
 	pokedex_entry   Sunflora,   8,   85, 444,  15,  256,  0
-	.string "CLEAR WING$", 12
+	.string "LIBELLE$", 12
 	pokedex_entry      Yanma,  12,  380, 274,  -1,  256,  0
-	.string "WATER FISH$", 12
+	.string "FISCH$", 12
 	pokedex_entry     Wooper,   4,   85, 479,  21,  256,  0
-	.string "WATER FISH$", 12
+	.string "FISCH$", 12
 	pokedex_entry   Quagsire,  14,  750, 256,   4,  256,  0
-	.string "SUN$", 12
+	.string "SONNE$", 12
 	pokedex_entry     Espeon,   9,  265, 363,  14,  256,  0
-	.string "MOONLIGHT$", 12
+	.string "MONDSCHEIN$", 12
 	pokedex_entry    Umbreon,  10,  270, 317,  11,  256,  0
-	.string "DARKNESS$", 12
+	.string "FINSTERNIS$", 12
 	pokedex_entry    Murkrow,   5,   21, 401,  -8,  256,  1
-	.string "ROYAL$", 12
+	.string "MONARCH$", 12
 	pokedex_entry   Slowking,  20,  795, 256,   0,  309,  5
-	.string "SCREECH$", 12
+	.string "KREISCHER$", 12
 	pokedex_entry Misdreavus,   7,   10, 407,  -8,  256,  0
 	.string "SYMBOL$", 12
 	pokedex_entry      Unown,   5,   50, 411,   2,  256,  0
-	.string "PATIENT$", 12
+	.string "GEDULD$", 12
 	pokedex_entry  Wobbuffet,  13,  285, 274,   4,  256,  0
-	.string "LONG NECK$", 12
+	.string "LANGHALS$", 12
 	pokedex_entry  Girafarig,  15,  415, 281,   1,  256,  0
-	.string "BAGWORM$", 12
+	.string "BEUTELWURM$", 12
 	pokedex_entry     Pineco,   6,   72, 445,   2,  256,  0
-	.string "BAGWORM$", 12
+	.string "BEUTELWURM$", 12
 	pokedex_entry Forretress,  12, 1258, 293,   5,  256,  0
-	.string "LAND SNAKE$", 12
+	.string "SCHLANGE$", 12
 	pokedex_entry  Dunsparce,  15,  140, 316,  17,  256,  0
-	.string "FLYSCORPION$", 12
+	.string "FLUGSKORPI$", 12
 	pokedex_entry     Gligar,  11,  648, 350,  -1,  256,  0
-	.string "IRON SNAKE$", 12
+	.string "STAHLBOA$", 12
 	pokedex_entry    Steelix,  92, 4000, 256,   0,  516, 13
-	.string "FAIRY$", 12
+	.string "FEE$", 12
 	pokedex_entry   Snubbull,   6,   78, 465,  19,  256,  0
-	.string "FAIRY$", 12
+	.string "FEE$", 12
 	pokedex_entry   Granbull,  14,  487, 256,   4,  256,  0
-	.string "BALLOON$", 12
+	.string "BALLON$", 12
 	pokedex_entry   Qwilfish,   5,   39, 430,   0,  256,  0
-	.string "PINCER$", 12
+	.string "KNEIFER$", 12
 	pokedex_entry     Scizor,  18, 1180, 278,   1,  256,  0
-	.string "MOLD$", 12
+	.string "SCHIMMEL$", 12
 	pokedex_entry    Shuckle,   6,  205, 485,  18,  256,  0
-	.string "SINGLE HORN$", 12
+	.string "EINZELHORN$", 12
 	pokedex_entry  Heracross,  15,  540, 256,   0,  256,  0
-	.string "SHARP CLAW$", 12
+	.string "STICHKLAUE$", 12
 	pokedex_entry    Sneasel,   9,  280, 413,  -3,  256,  0
-	.string "LITTLE BEAR$", 12
+	.string "KLEINBÄR$", 12
 	pokedex_entry  Teddiursa,   6,   88, 455,  19,  256,  0
-	.string "HIBERNATOR$", 12
+	.string "SCHLÄFER$", 12
 	pokedex_entry   Ursaring,  18, 1258, 256,   0,  256,  0
 	.string "LAVA$", 12
 	pokedex_entry     Slugma,   7,  350, 329,  15,  256,  0
 	.string "LAVA$", 12
 	pokedex_entry   Magcargo,   8,  550, 332,  15,  256,  0
-	.string "PIG$", 12
+	.string "FERKEL$", 12
 	pokedex_entry     Swinub,   4,   65, 324,  20,  256,  0
-	.string "SWINE$", 12
+	.string "SCHWEIN$", 12
 	pokedex_entry  Piloswine,  11,  558, 306,  10,  256,  0
-	.string "CORAL$", 12
+	.string "KORALLE$", 12
 	pokedex_entry    Corsola,   6,   50, 410,  15,  256,  0
-	.string "JET$", 12
+	.string "HOCHDRUCK$", 12
 	pokedex_entry   Remoraid,   6,  120, 316,   4,  256,  0
-	.string "JET$", 12
+	.string "HOCHDRUCK$", 12
 	pokedex_entry  Octillery,   9,  285, 296,   3,  256,  0
-	.string "DELIVERY$", 12
+	.string "LIEFERANT$", 12
 	pokedex_entry   Delibird,   9,  160, 293,  11,  256,  0
-	.string "KITE$", 12
+	.string "FLUGROCHEN$", 12
 	pokedex_entry    Mantine,  21, 2200, 256,   0,  342,  7
-	.string "ARMOR BIRD$", 12
+	.string "FLUGSTAHL$", 12
 	pokedex_entry   Skarmory,  17,  505, 256,   0,  271,  1
-	.string "DARK$", 12
+	.string "HADES$", 12
 	pokedex_entry   Houndour,   6,  108, 393,  16,  256,  0
-	.string "DARK$", 12
+	.string "HADES$", 12
 	pokedex_entry   Houndoom,  14,  350, 256,   4,  256,  0
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry    Kingdra,  18, 1520, 256,   0,  287,  0
-	.string "LONG NOSE$", 12
+	.string "LANGRÜSSEL$", 12
 	pokedex_entry     Phanpy,   5,  335, 465,  21,  256,  0
-	.string "ARMOR$", 12
+	.string "PANZERTIER$", 12
 	pokedex_entry    Donphan,  11, 1200, 313,   9,  256,  0
-	.string "VIRTUAL$", 12
+	.string "VIRTUELL$", 12
 	pokedex_entry   Porygon2,   6,  325, 320,  17,  256,  0
-	.string "BIG HORN$", 12
+	.string "VIELENDER$", 12
 	pokedex_entry   Stantler,  14,  712, 256,   0,  256,  0
-	.string "PAINTER$", 12
+	.string "MALER$", 12
 	pokedex_entry   Smeargle,  12,  580, 287,   5,  256,  0
-	.string "SCUFFLE$", 12
+	.string "RACKER$", 12
 	pokedex_entry    Tyrogue,   7,  210, 292,   9,  256,  0
-	.string "HANDSTAND$", 12
+	.string "KOPFSTAND$", 12
 	pokedex_entry  Hitmontop,  14,  480, 256,   2,  257,  0
-	.string "KISS$", 12
+	.string "KUSS$", 12
 	pokedex_entry   Smoochum,   4,   60, 440,  20,  256,  0
-	.string "ELECTRIC$", 12
+	.string "ELEKTRO$", 12
 	pokedex_entry     Elekid,   6,  235, 363,  14,  256,  0
-	.string "LIVE COAL$", 12
+	.string "GLUTHERD$", 12
 	pokedex_entry      Magby,   7,  214, 284,  13,  256,  0
-	.string "MILK COW$", 12
+	.string "MILCHKUH$", 12
 	pokedex_entry    Miltank,  12,  755, 280,   5,  256,  0
-	.string "HAPPINESS$", 12
+	.string "FREUDE$", 12
 	pokedex_entry    Blissey,  15,  468, 256,   4,  310,  3
-	.string "THUNDER$", 12
+	.string "DONNER$", 12
 	pokedex_entry     Raikou,  19, 1780, 256,   0,  345,  7
-	.string "VOLCANO$", 12
+	.string "VULKAN$", 12
 	pokedex_entry      Entei,  21, 1980, 259,   0,  345,  7
-	.string "AURORA$", 12
+	.string "POLARLICHT$", 12
 	pokedex_entry    Suicune,  20, 1870, 269,   0,  345,  7
-	.string "ROCK SKIN$", 12
+	.string "FELSHAUT$", 12
 	pokedex_entry   Larvitar,   6,  720, 472,  18,  256,  0
-	.string "HARD SHELL$", 12
+	.string "HARTSCHALE$", 12
 	pokedex_entry    Pupitar,  12, 1520, 292,   8,  256,  0
-	.string "ARMOR$", 12
+	.string "PANZERTIER$", 12
 	pokedex_entry  Tyranitar,  20, 2020, 256,   0,  345,  7
-	.string "DIVING$", 12
+	.string "TAUCHER$", 12
 	pokedex_entry      Lugia,  52, 2160, 256,   0,  721, 19
-	.string "RAINBOW$", 12
+	.string "REGENBOGEN$", 12
 	pokedex_entry       HoOh,  38, 1990, 256,   0,  610, 17
-	.string "TIME TRAVEL$", 12
+	.string "ZEITREISE$", 12
 	pokedex_entry     Celebi,   6,   50, 393, -10,  256,  0
-	.string "WOOD GECKO$", 12
+	.string "WALDGECKO$", 12
 	pokedex_entry    Treecko,   5,   50, 541,  19,  256,  0
-	.string "WOOD GECKO$", 12
+	.string "WALDGECKO$", 12
 	pokedex_entry    Grovyle,   9,  216, 360,   5,  256,  0
-	.string "FOREST$", 12
+	.string "DSCHUNGEL$", 12
 	pokedex_entry   Sceptile,  17,  522, 256,  -1,  275,  2
-	.string "CHICK$", 12
+	.string "KÜKEN$", 12
 	pokedex_entry    Torchic,   4,   25, 566,  19,  256,  0
-	.string "YOUNG FOWL$", 12
+	.string "KLEINHAHN$", 12
 	pokedex_entry  Combusken,   9,  195, 343,   5,  256,  0
-	.string "BLAZE$", 12
+	.string "GROSSBRAND$", 12
 	pokedex_entry   Blaziken,  19,  520, 256,   0,  301,  4
-	.string "MUD FISH$", 12
+	.string "LEHMHÜPFER$", 12
 	pokedex_entry     Mudkip,   4,   76, 535,  20,  256,  0
-	.string "MUD FISH$", 12
+	.string "LEHMHÜPFER$", 12
 	pokedex_entry  Marshtomp,   7,  280, 340,   7,  256,  0
-	.string "MUD FISH$", 12
+	.string "LEHMHÜPFER$", 12
 	pokedex_entry   Swampert,  15,  819, 256,   0,  256,  0
-	.string "BITE$", 12
+	.string "BISS$", 12
 	pokedex_entry  Poochyena,   5,  136, 481,  19,  256,  0
-	.string "BITE$", 12
+	.string "BISS$", 12
 	pokedex_entry  Mightyena,  10,  370, 362,   9,  256,  0
-	.string "TINYRACCOON$", 12
+	.string "KLEINDACHS$", 12
 	pokedex_entry  Zigzagoon,   4,  175, 560,  22,  256,  0
-	.string "RUSHING$", 12
+	.string "SPRINTER$", 12
 	pokedex_entry    Linoone,   5,  325, 321,   7,  256,  0
-	.string "WORM$", 12
+	.string "WURM$", 12
 	pokedex_entry    Wurmple,   3,   36, 711,  24,  256,  0
-	.string "COCOON$", 12
+	.string "KOKON$", 12
 	pokedex_entry    Silcoon,   6,  100, 431,  19,  256,  0
-	.string "BUTTERFLY$", 12
+	.string "FALTER$", 12
 	pokedex_entry  Beautifly,  10,  284, 298,  -1,  256,  0
-	.string "COCOON$", 12
+	.string "KOKON$", 12
 	pokedex_entry    Cascoon,   7,  115, 391,  20,  256,  0
-	.string "POISON MOTH$", 12
+	.string "GIFTMOTTE$", 12
 	pokedex_entry     Dustox,  12,  316, 269,   1,  256,  0
-	.string "WATER WEED$", 12
+	.string "WASSERLINSE$", 12
 	pokedex_entry      Lotad,   5,   26, 406,  19,  256,  0
-	.string "JOLLY$", 12
+	.string "FROHMUT$", 12
 	pokedex_entry     Lombre,  12,  325, 277,   9,  256,  0
-	.string "CAREFREE$", 12
+	.string "SORGLOS$", 12
 	pokedex_entry   Ludicolo,  15,  550, 256,   0,  268, -1
-	.string "ACORN$", 12
+	.string "EICHELNUSS$", 12
 	pokedex_entry     Seedot,   5,   40, 472,  20,  256,  0
-	.string "WILY$", 12
+	.string "HINTERLIST$", 12
 	pokedex_entry    Nuzleaf,  10,  280, 299,  10,  256,  0
-	.string "WICKED$", 12
+	.string "VERSCHLAGEN$", 12
 	pokedex_entry    Shiftry,  13,  596, 290,   4,  256,  0
-	.string "TINYSWALLOW$", 12
+	.string "SCHWÄLBLEIN$", 12
 	pokedex_entry    Taillow,   3,   23, 465,  21,  256,  0
-	.string "SWALLOW$", 12
+	.string "SCHWALBE$", 12
 	pokedex_entry    Swellow,   7,  198, 428,  15,  256,  0
-	.string "SEAGULL$", 12
+	.string "SEEMÖWE$", 12
 	pokedex_entry    Wingull,   6,   95, 295,  -2,  256,  0
-	.string "WATER BIRD$", 12
+	.string "WASSERVOGEL$", 12
 	pokedex_entry   Pelipper,  12,  280, 288,   1,  256,  0
-	.string "FEELING$", 12
+	.string "GEFÜHL$", 12
 	pokedex_entry      Ralts,   4,   66, 457,  -3,  256,  0
 	.string "EMOTION$", 12
 	pokedex_entry     Kirlia,   8,  202, 354,   0,  256,  0
-	.string "EMBRACE$", 12
+	.string "UMARMUNG$", 12
 	pokedex_entry  Gardevoir,  16,  484, 256,   0,  256,  0
-	.string "POND SKATER$", 12
+	.string "WASSERGEHER$", 12
 	pokedex_entry    Surskit,   5,   17, 375,  17,  256,  0
-	.string "EYEBALL$", 12
+	.string "AUGE$", 12
 	pokedex_entry Masquerain,   8,   36, 378,   8,  256,  0
-	.string "MUSHROOM$", 12
+	.string "PILZ$", 12
 	pokedex_entry  Shroomish,   4,   45, 513,  22,  256,  0
-	.string "MUSHROOM$", 12
+	.string "PILZ$", 12
 	pokedex_entry    Breloom,  12,  392, 324,   6,  256,  0
-	.string "SLACKER$", 12
+	.string "FAULPELZ$", 12
 	pokedex_entry    Slakoth,   8,  240, 291,  16,  256,  0
-	.string "WILD MONKEY$", 12
+	.string "WILDAFFE$", 12
 	pokedex_entry   Vigoroth,  14,  465, 301,   2,  256,  0
-	.string "LAZY$", 12
+	.string "MÜSSIG$", 12
 	pokedex_entry    Slaking,  20, 1305, 256,   2,  300,  1
-	.string "TRAINEE$", 12
+	.string "VORBEREITER$", 12
 	pokedex_entry    Nincada,   5,   55, 405,  21,  256,  0
 	.string "NINJA$", 12
 	pokedex_entry    Ninjask,   8,  120, 383,  -9,  256,  0
-	.string "SHED$", 12
+	.string "HÄUTUNG$", 12
 	pokedex_entry   Shedinja,   8,   12, 372,  -8,  256,  0
-	.string "WHISPER$", 12
+	.string "FLÜSTER$", 12
 	pokedex_entry    Whismur,   6,  163, 373,  17,  256,  0
-	.string "BIG VOICE$", 12
+	.string "LAUTHALS$", 12
 	pokedex_entry    Loudred,  10,  405, 356,  10,  256,  0
-	.string "LOUD NOISE$", 12
+	.string "KRACH$", 12
 	pokedex_entry    Exploud,  15,  840, 284,   1,  256,  0
-	.string "GUTS$", 12
+	.string "COURAGE$", 12
 	pokedex_entry   Makuhita,  10,  864, 256,  10,  256,  0
-	.string "ARM THRUST$", 12
+	.string "ARMWURF$", 12
 	pokedex_entry   Hariyama,  23, 2538, 256,   0,  343,  7
-	.string "POLKA DOT$", 12
+	.string "GEPUNKTET$", 12
 	pokedex_entry    Azurill,   2,   20, 603,  23,  256,  0
-	.string "COMPASS$", 12
+	.string "KOMPASS$", 12
 	pokedex_entry   Nosepass,  10,  970, 256,   9,  289,  3
-	.string "KITTEN$", 12
+	.string "KÄTZCHEN$", 12
 	pokedex_entry     Skitty,   6,  110, 492,  19,  256,  0
-	.string "PRIM$", 12
+	.string "EINGEBILDET$", 12
 	pokedex_entry   Delcatty,  11,  326, 322,  10,  256,  0
-	.string "DARKNESS$", 12
+	.string "FINSTERNIS$", 12
 	pokedex_entry    Sableye,   5,  110, 451,  17,  256,  0
-	.string "DECEIVER$", 12
+	.string "SCHWINDLER$", 12
 	pokedex_entry     Mawile,   6,  115, 466,  17,  256,  0
-	.string "IRON ARMOR$", 12
+	.string "EISENPANZER$", 12
 	pokedex_entry       Aron,   4,  600, 419,  23,  256,  0
-	.string "IRON ARMOR$", 12
+	.string "EISENPANZER$", 12
 	pokedex_entry     Lairon,   9, 1200, 275,  12,  256,  0
-	.string "IRON ARMOR$", 12
+	.string "EISENPANZER$", 12
 	pokedex_entry     Aggron,  21, 3600, 256,  -1,  350,  6
-	.string "MEDITATE$", 12
+	.string "MEDITATION$", 12
 	pokedex_entry   Meditite,   6,  112, 465,  17,  256,  0
-	.string "MEDITATE$", 12
+	.string "MEDITATION$", 12
 	pokedex_entry   Medicham,  13,  315, 298,   5,  256,  0
-	.string "LIGHTNING$", 12
+	.string "GEWITTER$", 12
 	pokedex_entry  Electrike,   6,  152, 290,  15,  256,  0
-	.string "DISCHARGE$", 12
+	.string "ENTLADUNG$", 12
 	pokedex_entry  Manectric,  15,  402, 256,   3,  257,  0
-	.string "CHEERING$", 12
+	.string "JUBEL$", 12
 	pokedex_entry     Plusle,   4,   42, 515,  -9,  256,  0
-	.string "CHEERING$", 12
+	.string "JUBEL$", 12
 	pokedex_entry      Minun,   4,   42, 512,  -7,  256,  0
-	.string "FIREFLY$", 12
+	.string "LIBELLE$", 12
 	pokedex_entry    Volbeat,   7,  177, 442,  16,  256,  0
-	.string "FIREFLY$", 12
+	.string "LIBELLE$", 12
 	pokedex_entry   Illumise,   6,  177, 572,  19,  256,  0
-	.string "THORN$", 12
+	.string "DORN$", 12
 	pokedex_entry    Roselia,   3,   20, 677,  20,  256,  0
-	.string "STOMACH$", 12
+	.string "MAGEN$", 12
 	pokedex_entry     Gulpin,   4,  103, 593,  23,  256,  0
-	.string "POISON BAG$", 12
+	.string "GIFTBEUTEL$", 12
 	pokedex_entry     Swalot,  17,  800, 256,   6,  345,  3
-	.string "SAVAGE$", 12
+	.string "GNADENLOS$", 12
 	pokedex_entry   Carvanha,   8,  208, 362,   0,  256,  0
 	.string "BRUTAL$", 12
 	pokedex_entry   Sharpedo,  18,  888, 256,   0,  317,  3
-	.string "BALL WHALE$", 12
+	.string "KUGELWAL$", 12
 	pokedex_entry    Wailmer,  20, 1300, 256,   2,  493,  0
-	.string "FLOAT WHALE$", 12
+	.string "FLUTWAL$", 12
 	pokedex_entry    Wailord, 145, 3980, 256,   0, 1352, 18
-	.string "NUMB$", 12
+	.string "TAUBHEIT$", 12
 	pokedex_entry      Numel,   7,  240, 342,  17,  256,  0
-	.string "ERUPTION$", 12
+	.string "AUSBRUCH$", 12
 	pokedex_entry   Camerupt,  19, 2200, 256,   7,  345,  6
-	.string "COAL$", 12
+	.string "KOHLE$", 12
 	pokedex_entry    Torkoal,   5,  804, 390,   9,  256,  0
-	.string "BOUNCE$", 12
+	.string "SPRUNGFEDER$", 12
 	pokedex_entry     Spoink,   7,  306, 423,  17,  256,  0
-	.string "MANIPULATE$", 12
+	.string "MANIPULATOR$", 12
 	pokedex_entry    Grumpig,   9,  715, 358,  10,  256,  0
-	.string "SPOT PANDA$", 12
+	.string "PUNKT-PANDA$", 12
 	pokedex_entry     Spinda,  11,   50, 321,   4,  256,  0
-	.string "ANT PIT$", 12
+	.string "AMEISENLÖWE$", 12
 	pokedex_entry   Trapinch,   7,  150, 298,  17,  256,  0
 	.string "VIBRATION$", 12
 	pokedex_entry    Vibrava,  11,  153, 370,  11,  256,  0
-	.string "MYSTIC$", 12
+	.string "MYSTIK$", 12
 	pokedex_entry     Flygon,  20,  820, 256,   0,  268,  1
-	.string "CACTUS$", 12
+	.string "KAKTUS$", 12
 	pokedex_entry     Cacnea,   4,  513, 455,  20,  256,  0
-	.string "SCARECROW$", 12
+	.string "VOGELSCHOCK$", 12
 	pokedex_entry   Cacturne,  13,  774, 327,   5,  256,  0
-	.string "COTTON BIRD$", 12
+	.string "WOLLVOGEL$", 12
 	pokedex_entry     Swablu,   4,   12, 422,  -8,  256,  0
-	.string "HUMMING$", 12
+	.string "SUMMSEL$", 12
 	pokedex_entry    Altaria,  11,  206, 327,   0,  256,  0
-	.string "CAT FERRET$", 12
+	.string "FRETTKATZ$", 12
 	pokedex_entry   Zangoose,  13,  403, 256,   3,  256,  0
-	.string "FANG SNAKE$", 12
+	.string "REISSZAHN$", 12
 	pokedex_entry    Seviper,  27,  525, 275,   7,  256,  0
-	.string "METEORITE$", 12
+	.string "METEORIT$", 12
 	pokedex_entry   Lunatone,  10, 1680, 300,   3,  256,  0
-	.string "METEORITE$", 12
+	.string "METEORIT$", 12
 	pokedex_entry    Solrock,  12, 1540, 328,   0,  256,  0
-	.string "WHISKERS$", 12
+	.string "BARTHAAR$", 12
 	pokedex_entry   Barboach,   4,   19, 581,  -3,  256,  0
-	.string "WHISKERS$", 12
+	.string "BARTHAAR$", 12
 	pokedex_entry   Whiscash,   9,  236, 317,   1,  256,  0
-	.string "RUFFIAN$", 12
+	.string "GROBIAN$", 12
 	pokedex_entry   Corphish,   6,  115, 484,  19,  256,  0
-	.string "ROGUE$", 12
+	.string "SCHLINGEL$", 12
 	pokedex_entry  Crawdaunt,  11,  328, 365,   9,  256,  0
-	.string "CLAY DOLL$", 12
+	.string "LEHMPUPPE$", 12
 	pokedex_entry     Baltoy,   5,  215, 457,  21,  256,  0
-	.string "CLAY DOLL$", 12
+	.string "LEHMPUPPE$", 12
 	pokedex_entry    Claydol,  15, 1080, 256,   3,  280,  1
-	.string "SEA LILY$", 12
+	.string "SEEANEMONE$", 12
 	pokedex_entry     Lileep,  10,  238, 305,   8,  256,  0
-	.string "BARNACLE$", 12
+	.string "RANKFÜSSER$", 12
 	pokedex_entry    Cradily,  15,  604, 267,   0,  256,  0
-	.string "OLD SHRIMP$", 12
+	.string "KREBSSENIOR$", 12
 	pokedex_entry    Anorith,   7,  125, 296,   4,  256,  0
-	.string "PLATE$", 12
+	.string "SCHILD$", 12
 	pokedex_entry    Armaldo,  15,  682, 312,   3,  271,  0
-	.string "FISH$", 12
+	.string "FISCH$", 12
 	pokedex_entry     Feebas,   6,   74, 423,  -4,  256,  0
-	.string "TENDER$", 12
+	.string "ZARTHEIT$", 12
 	pokedex_entry    Milotic,  62, 1620, 256,   0,  360,  7
-	.string "WEATHER$", 12
+	.string "WETTER$", 12
 	pokedex_entry   Castform,   3,    8, 435,  -5,  256,  0
-	.string "COLOR SWAP$", 12
+	.string "FARBENSPIEL$", 12
 	pokedex_entry    Kecleon,  10,  220, 316,  10,  256,  0
-	.string "PUPPET$", 12
+	.string "PUPPE$", 12
 	pokedex_entry    Shuppet,   6,   23, 440,  20,  256,  0
 	.string "MARIONETTE$", 12
 	pokedex_entry    Banette,  11,  125, 262,   9,  256,  0
 	.string "REQUIEM$", 12
 	pokedex_entry    Duskull,   8,  150, 406,  -4,  256,  0
-	.string "BECKON$", 12
+	.string "WINK$", 12
 	pokedex_entry   Dusclops,  16,  306, 256,   3,  299,  1
-	.string "FRUIT$", 12
+	.string "OBST$", 12
 	pokedex_entry    Tropius,  20, 1000, 256,   0,  344,  7
-	.string "WIND CHIME$", 12
+	.string "WINDSPIEL$", 12
 	pokedex_entry   Chimecho,   6,   10, 505,   0,  256,  0
-	.string "DISASTER$", 12
+	.string "DESASTER$", 12
 	pokedex_entry      Absol,  12,  470, 301,   3,  256,  0
-	.string "BRIGHT$", 12
+	.string "STRAHLEKIND$", 12
 	pokedex_entry     Wynaut,   6,  140, 484,  19,  256,  0
-	.string "SNOW HAT$", 12
+	.string "SCHNEEHUT$", 12
 	pokedex_entry    Snorunt,   7,  168, 380,  15,  256,  0
-	.string "FACE$", 12
+	.string "ANTLITZ$", 12
 	pokedex_entry     Glalie,  15, 2565, 256,   3,  344,  0
-	.string "CLAP$", 12
+	.string "APPLAUS$", 12
 	pokedex_entry     Spheal,   8,  395, 315,  16,  256,  0
-	.string "BALL ROLL$", 12
+	.string "SPIELBALL$", 12
 	pokedex_entry     Sealeo,  11,  876, 338,  13,  256,  0
-	.string "ICE BREAK$", 12
+	.string "EISBRECHER$", 12
 	pokedex_entry    Walrein,  14, 1506, 316,   4,  256,  0
-	.string "BIVALVE$", 12
+	.string "MUSCHEL$", 12
 	pokedex_entry   Clamperl,   4,  525, 691,  22,  256,  0
-	.string "DEEP SEA$", 12
+	.string "TIEFSEE$", 12
 	pokedex_entry    Huntail,  17,  270, 307,   1,  256,  0
-	.string "SOUTH SEA$", 12
+	.string "SÜDSEE$", 12
 	pokedex_entry   Gorebyss,  18,  226, 278,   5,  256,  0
-	.string "LONGEVITY$", 12
+	.string "BESTAND$", 12
 	pokedex_entry  Relicanth,  10,  234, 316,   7,  256,  0
 	.string "RENDEZVOUS$", 12
 	pokedex_entry    Luvdisc,   6,   87, 371,   2,  256,  0
-	.string "ROCK HEAD$", 12
+	.string "STEINHAUPT$", 12
 	pokedex_entry      Bagon,   6,  421, 448,  18,  256,  0
-	.string "ENDURANCE$", 12
+	.string "DURCHSTEHER$", 12
 	pokedex_entry    Shelgon,  11, 1105, 311,  12,  256,  0
-	.string "DRAGON$", 12
+	.string "DRACHE$", 12
 	pokedex_entry  Salamence,  15, 1026, 256,   0,  256,  0
-	.string "IRON BALL$", 12
+	.string "EISENKUGEL$", 12
 	pokedex_entry     Beldum,   6,  952, 414,  -1,  256,  0
-	.string "IRON CLAW$", 12
+	.string "EISENKLAUE$", 12
 	pokedex_entry     Metang,  12, 2025, 256,   6,  256,  0
-	.string "IRON LEG$", 12
+	.string "EISENFUSS$", 12
 	pokedex_entry  Metagross,  16, 5500, 256,   4,  447,  9
-	.string "ROCK PEAK$", 12
+	.string "STEINGIPFEL$", 12
 	pokedex_entry   Regirock,  17, 2300, 256,   2,  309,  1
-	.string "ICEBERG$", 12
+	.string "EISBERG$", 12
 	pokedex_entry     Regice,  18, 1750, 256,   0,  301,  2
-	.string "IRON$", 12
+	.string "EISEN$", 12
 	pokedex_entry  Registeel,  19, 2050, 256,   0,  359,  6
-	.string "EON$", 12
+	.string "ÄON$", 12
 	pokedex_entry     Latias,  14,  400, 304,   3,  256,  0
-	.string "EON$", 12
+	.string "ÄON$", 12
 	pokedex_entry     Latios,  20,  600, 256,   0,  294,  3
-	.string "SEA BASIN$", 12
+	.string "SEEGRÜNDLER$", 12
 	pokedex_entry     Kyogre,  45, 3520, 256,   0,  614, 13
-	.string "CONTINENT$", 12
+	.string "KONTINENT$", 12
 	pokedex_entry    Groudon,  35, 9500, 256,   0,  515, 14
-	.string "SKY HIGH$", 12
+	.string "HIMMELHOCH$", 12
 	pokedex_entry   Rayquaza,  70, 2065, 256,   0,  448, 12
-	.string "WISH$", 12
+	.string "WÜNSCHER$", 12
 	pokedex_entry    Jirachi,   3,   11, 608,  -8,  256,  0
-	.string "DNA$", 12
+	.string "DNS$", 12
 	pokedex_entry     Deoxys,  17,  608, 256,   0,  290,  2

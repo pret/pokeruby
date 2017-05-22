@@ -176,15 +176,15 @@ gUnknown_083CA4D4:: @ 83CA4D4
 	.include "data/text/contest_strings.inc"
 
 gUnknownText_MissedTurn:: @ 83CC355
-	.string "Missed turn$"
+	.string "Verpasste Chance$"
 
 gUnknownText_LinkStandbyAndWinner:: @ 83CC361
-	.string "Link standby...$"
+	.string "Verbindung...$"
 	.string "{COLOR WHITE2}$"
-	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+	.string "Der Sieger ist {STR_VAR_2} von\n"
+	.string "{STR_VAR_1}! Herzlichen Glückwunsch!$"
 
 @ unknown, unreferenced data
-	.byte 0x00
 	.byte 0x9C
 	.byte 0x77
 
@@ -350,54 +350,54 @@ gUnknown_083CC5D0:: @ 83CC5D0
 	.4byte 0xFFFF
 	.2byte SPECIES_TAILLOW
 	.byte CONTEST_SMART
-	.string "TAILTA$", 11
-	.string "WYATT$", 10
+	.string "SCHWALBI$", 11
+	.string "ROSEL$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_BRELOOM
 	.byte CONTEST_BEAUTY
-	.string "BRELO$", 11
-	.string "LIANA$", 10
+	.string "TUFUNG$", 11
+	.string "WITOLD$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
-	.string "PELEP$", 11
-	.string "TIERA$", 10
+	.string "LIPPER$", 11
+	.string "RUFUS$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
-	.string "PELEP$", 11
-	.string "TIERA$", 10
+	.string "LIPPER$", 11
+	.string "ELLEN$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
-	.string "PELEP$", 11
-	.string "TIERA$", 10
+	.string "LIPPER$", 11
+	.string "AVIA$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_DELCATTY
 	.byte CONTEST_SMART
-	.string "KITSY$", 11
-	.string "OMAR$", 10
+	.string "CONEC$", 11
+	.string "HAUBERT$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_GULPIN
 	.byte CONTEST_CUTE
-	.string "GULPS$", 11
-	.string "MACIE$", 10
+	.string "SCHLUCKI$", 11
+	.string "HEILWIG$", 10
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_LOUDRED
 	.byte CONTEST_TOUGH
-	.string "LOUDED$", 11
-	.string "BRYANT$", 10
+	.string "KEELO$", 11
+	.string "ISEGRIM$", 10

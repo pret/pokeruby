@@ -1,55 +1,56 @@
 Route118_Text_170D66:: @ 8170D66
-	.string "STEVEN: Hi!\p"
-	.string "You’re that TRAINER I met in DEWFORD!\p"
+	.string "TROY: Hi!\p"
+	.string "Du bist der TRAINER, den ich in\n"
+	.string "FAUSTAUHAVEN getroffen habe!\p"
 	.string "... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "Oh, okay, you’re {PLAYER}{KUN}.\n"
-	.string "I’ll remember it.\p"
+	.string "Oh, okay, du bist {PLAYER}{KUN}.\n"
+	.string "Ich erinnere mich.\p"
 	.string "{PLAYER}{KUN}.\p"
-	.string "In this vast world, there are many\n"
-	.string "kinds of POKéMON.\l"
-	.string "They come in many types.\p"
-	.string "Do you raise different types?\n"
-	.string "Or do you raise only POKéMON of a\l"
-	.string "certain type?\p"
-	.string "What do you think as a TRAINER?\p"
-	.string "Sorry, it’s not my place to ask, is it?\p"
-	.string "Well, anyway, I hope to see you\n"
-	.string "again.$"
+	.string "In dieser großen Welt gibt es viele ver-\n"
+	.string "schiedene Arten von POKéMON mit\l"
+	.string "vielen verschiedenen Elementklassen.\p"
+	.string "Ziehst du verschiedene Elementklassen\n"
+	.string "auf? Oder nur POKéMON einer bestimmten\l"
+	.string "Elementklasse?\p"
+	.string "Was denkst du als TRAINER darüber?\p"
+	.string "Tut mir Leid, ich bombardiere dich hier\n"
+	.string "mit Fragen...\p"
+	.string "Nun, ich hoffe wir sehen uns bald wieder.$"
 
 Route118_Text_170F12:: @ 8170F12
 	.string "Hmm!\n"
-	.string "A GOOD ROD is really good!\p"
-	.string "Wouldn’t you agree?$"
+	.string "Eine PROFIANGEL ist wirklich gut!\p"
+	.string "Meinst du nicht auch?$"
 
 Route118_Text_170F46:: @ 8170F46
 	.string "Hmm!\n"
-	.string "We’re of identical minds!\p"
+	.string "Da sind wir ja der gleichen Meinung!\p"
 	.string "Hmm!\n"
-	.string "Take this GOOD ROD!$"
+	.string "Ich schenke dir diese PROFIANGEL!$"
 
 Route118_Text_170F7E:: @ 8170F7E
-	.string "Wherever there’s water, try your luck\n"
-	.string "at fishing.$"
+	.string "Wo immer du Wasser findest, versuche\n"
+	.string "dein Glück mit Angeln.$"
 
 Route118_Text_170FB0:: @ 8170FB0
-	.string "Don’t you like to fish?$"
+	.string "Magst du keinen Fisch?$"
 
 Route118_Text_170FC8:: @ 8170FC8
-	.string "Try catching all sorts of POKéMON\n"
-	.string "with your GOOD ROD.$"
+	.string "Versuche, alle möglichen Arten von\n"
+	.string "POKéMON mit der PROFIANGEL zu fangen.$"
 
 Route118_Text_170FFE:: @ 8170FFE
-	.string "Even if there isn’t a boat, you can\n"
-	.string "cross rivers and the sea if you have\l"
-	.string "a POKéMON that knows SURF.\p"
-	.string "POKéMON can be counted on to do so\n"
-	.string "much!$"
+	.string "Auch wenn gerade kein Schiff in der\n"
+	.string "Nähe ist, kannst du mit einem POKéMON,\l"
+	.string "das SURFER kennt, das Meer überqueren.\p"
+	.string "Auf POKéMON kann man sich immer\n"
+	.string "verlassen!$"
 
 Route118_Text_17108B:: @ 817108B
 	.string "ROUTE 118\n"
-	.string "{0x7B} MAUVILLE CITY$"
+	.string "{LEFT_ARROW} MALVENFROH CITY$"
 
 Route118_Text_1710A5:: @ 81710A5
 	.string "ROUTE 118\n"
-	.string "{0x79} ROUTE 119$"
+	.string "{UP_ARROW} ROUTE 119$"

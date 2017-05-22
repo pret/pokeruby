@@ -21,9 +21,6 @@ gUnknown_0839F8A0:: @ 839F8A0
 gUnknown_0839F988:: @ 839F988
 	.incbin "graphics/pokedex/pokedex_size_layout.bin.lz"
 
-gUnknown_0839FA7C:: @ 839FA7C
-	.incbin "graphics/pokedex/noball.4bpp.lz"
-
 @ 839FAC4
 	.include "data/pokedex_orders.inc"
 

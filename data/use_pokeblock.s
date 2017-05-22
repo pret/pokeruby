@@ -3,14 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-ConditionUpDownPalette:
-	.incbin "graphics/misc/condition_up_down.gbapal"
-
-	.align 2
-ConditionUpDownTiles:
-	.incbin "graphics/misc/condition_up_down.4bpp"
-
 gUnknown_08406118:: @ 8406118
 	.4byte 22 @ MON_DATA_COOL
 	.4byte 47 @ MON_DATA_TOUGH

@@ -1,71 +1,73 @@
 Route119_WeatherInstitute_2F_Text_19EEAF:: @ 819EEAF
-	.string "The INSTITUTE created a type of\n"
-	.string "POKéMON that has something to do with\l"
-	.string "the weather. We’re here to take them!$"
+	.string "Das INSTITUT hat ein POKéMON ent-\n"
+	.string "wickelt, das irgendwas mit dem Wetter zu\l"
+	.string "tun hat. Das müssen wir kriegen!$"
 
 Route119_WeatherInstitute_2F_Text_19EF1B:: @ 819EF1B
-	.string "Our plan’s being spoiled by a kid?$"
+	.string "Ein Kind hat unsere Pläne durchkreuzt?$"
 
 Route119_WeatherInstitute_2F_Text_19EF3E:: @ 819EF3E
-	.string "If the POKéMON they made here can\n"
-	.string "control the weather freely, then we of\l"
-	.string "TEAM {EVIL_TEAM} definitely need it!$"
+	.string "Wenn sie hier tatsächlich ein POKéMON\n"
+	.string "entwickelt haben, das das Wetter kon-\l"
+	.string "trollieren kann, müssen wir vom TEAM\l"
+	.string "{EVIL_TEAM} es in unsere Gewalt bringen!$"
 
 Route119_WeatherInstitute_2F_Text_19EFA3:: @ 819EFA3
-	.string "We’re TEAM {EVIL_TEAM}!\n"
-	.string "We appear wherever anything rare is\l"
-	.string "found!$"
+	.string "Wir sind TEAM {EVIL_TEAM}!\n"
+	.string "Wir sind überall dort, wo Raritäten\l"
+	.string "gefunden wurden!$"
 
 Route119_WeatherInstitute_2F_Text_19EFDD:: @ 819EFDD
-	.string "You got me!$"
+	.string "Das war’s dann wohl!$"
 
 Route119_WeatherInstitute_2F_Text_19EFE9:: @ 819EFE9
-	.string "You don’t have any idea what we of\n"
-	.string "TEAM {EVIL_TEAM} are working towards!\l"
-	.string "You stay out of our way!$"
+	.string "Du hast doch gar keine Ahnung, was wir\n"
+	.string "vom TEAM {EVIL_TEAM} vorbereiten!\l"
+	.string "Geh uns gefälligst aus dem Weg!$"
 
 Route119_WeatherInstitute_2F_Text_19F042:: @ 819F042
-	.string "Ahahahaha!\p"
-	.string "You’re going to meddle in TEAM {EVIL_TEAM}’s\n"
-	.string "affairs?\p"
-	.string "You’re either absolutely fearless,\n"
-	.string "simply ignorant, or both!\p"
-	.string "You’re so cute, you’re disgusting!\n"
-	.string "I’ll put you down, kiddy!$"
+	.string "Ahahahahaha!!!\p"
+	.string "Du willst dich allen Ernstes in die Ange-\n"
+	.string "legenheiten von TEAM {EVIL_TEAM} einmischen?\p"
+	.string "Dann bist du entweder furchtlos oder\n"
+	.string "einfach dumm! Oder beides?\p"
+	.string "Du bist ja so niedlich. Einfach widerlich!\n"
+	.string "Ich mach dich fertig, du Baby!$"
 
 Route119_WeatherInstitute_2F_Text_19F0F4:: @ 819F0F4
-	.string "Ahahahaha!\n"
-	.string "You’re disgustingly strong!$"
+	.string "Ahahahahaha!!!!!\n"
+	.string "Du bist einfach widerlich... stark!$"
 
 Route119_WeatherInstitute_2F_Text_19F11B:: @ 819F11B
-	.string "Ahahahaha!\n"
-	.string "We got meddled with unexpectedly!\p"
-	.string "We’re out of options.\n"
-	.string "We’ll have to pull out.\p"
-	.string "But this isn’t the last you’ll see of\n"
-	.string "TEAM {EVIL_TEAM}! We have other plans!\l"
-	.string "Don’t you forget it!$"
+	.string "Ahahahahaha! Wir wurden von\n"
+	.string "Unvorhergesehenem gestört!\p"
+	.string "Wir haben keine Möglichkeiten mehr. Wir\n"
+	.string "müssen uns aus dem Schlamassel ziehen.\p"
+	.string "Aber das ist nicht das Letzte, was du\n"
+	.string "von TEAM {EVIL_TEAM} siehst! Wir werden\l"
+	.string "andere Pläne entwickeln. Merk dir das!$"
 
 Route119_WeatherInstitute_2F_Text_19F1CF:: @ 819F1CF
-	.string "Thanks!\n"
-	.string "Thanks to you, we’re safe!\p"
-	.string "It might be an odd way of thanking you,\n"
-	.string "but take this POKéMON.$"
+	.string "Danke!\n"
+	.string "Vielen Dank! Nun sind wir in Sicherheit!\p"
+	.string "Es ist vielleicht eine seltsame Art\n"
+	.string "danke zu sagen, aber dieses POKéMON\l"
+	.string "ist für dich!$"
 
 Route119_WeatherInstitute_2F_Text_19F231:: @ 819F231
-	.string "Hm? You don’t seem to have any room\n"
-	.string "for this POKéMON.$"
+	.string "Oh! Du hast keinen Platz für dieses\n"
+	.string "POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_19F267:: @ 819F267
-	.string "{PLAYER} received CASTFORM!$"
+	.string "{PLAYER} erhält FORMEO!$"
 
 Route119_WeatherInstitute_2F_Text_19F27D:: @ 819F27D
-	.string "That POKéMON changes shape according\n"
-	.string "to the weather conditions.\p"
-	.string "There’re plenty of them in the\n"
-	.string "INSTITUTE - go ahead and take it.$"
+	.string "Dieses POKéMON ändert seine Gestalt\n"
+	.string "abhängig vom jeweiligen Wetter.\p"
+	.string "Hier im INSTITUT gibt es sehr viele\n"
+	.string "davon - du kannst es ruhig annehmen.$"
 
 Route119_WeatherInstitute_2F_Text_19F2FE:: @ 819F2FE
-	.string "I’ve been researching rain for many\n"
-	.string "years, but it’s ridiculous to think that\l"
-	.string "humans can freely change the weather.$"
+	.string "Seit Jahren erforsche ich den Regen,\n"
+	.string "aber zu denken, dass Menschen das\l"
+	.string "Wetter frei bestimmen können, ist dumm.$"

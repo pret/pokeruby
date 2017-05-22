@@ -1,16 +1,17 @@
 MauvilleCity_House1_Text_181B1A:: @ 8181B1A
-	.string "Woohoo, your POKéMON look pretty\n"
-	.string "strong.\p"
-	.string "I like that!\n"
-	.string "Here, take this HM!$"
+	.string "Woohoo, deine POKéMON sehen wirklich\n"
+	.string "sehr stark aus.\p"
+	.string "Das sehe ich gerne!\n"
+	.string "Hier, nimm diese VM!$"
 
 MauvilleCity_House1_Text_181B64:: @ 8181B64
-	.string "That HM contains ROCK SMASH.\p"
-	.string "If you come across large boulders\n"
-	.string "that block your path...\p"
-	.string "Well, use that HM move and smash\n"
-	.string "it right out of your way!$"
+	.string "Diese VM enthält ZERTRÜMMERER.\p"
+	.string "Wenn du unterwegs auf große\n"
+	.string "Felsbrocken stößt...\p"
+	.string "Dann nutze diese VM, um dir den Weg\n"
+	.string "freizumachen.$"
 
 MauvilleCity_House1_Text_181BF6:: @ 8181BF6
-	.string "Oh, yes, if you smash a rock, a POKéMON\n"
-	.string "could come flying out.$"
+	.string "Oh ja, wenn du einen Felsen\n"
+	.string "zertrümmerst, könnte ein POKéMON\l"
+	.string "zum Vorschein kommen.$"
