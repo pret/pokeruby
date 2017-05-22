@@ -26,6 +26,8 @@ static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
     return 0;\
 }
 
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
+
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
 void MoveCoords(u8 direction, s16 *x, s16 *y);
@@ -47,5 +49,7 @@ extern const u8 gUnknown_083753B0[2];
 extern const u8 gUnknown_083753C8[2];
 extern const u8 gUnknown_083753DC[5];
 extern const u8 gUnknown_083753F4[5];
+
+extern const u8 gUnknown_0837567B[9];
 
 #endif // GUARD_FIELD_MAP_OBJ_H

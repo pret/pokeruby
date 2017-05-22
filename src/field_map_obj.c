@@ -1,10 +1,12 @@
 #include "global.h"
 #include "field_map_obj.h"
+#include "fieldmap.h"
 #include "asm.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "field_effect.h"
+#include "field_ground_effect.h"
 #include "palette.h"
 #include "rom4.h"
 #include "rng.h"
@@ -20,14 +22,14 @@ extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
 extern void sub_80634D0();
 extern void pal_patch_for_npc(u16, u16);
-extern void sub_80603CC();
+extern void sub_80603CC(s16, s16, s16 *, s16 *);
 extern void CameraObjectReset1(void);
 
 void sub_805AAB0(void);
 u8 GetFieldObjectIdByLocalId(u8);
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-void FieldObjectHandleDynamicGraphicsId();
+void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void RemoveFieldObjectInternal(struct MapObject *);
 u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
@@ -2896,4 +2898,103 @@ u8 sub_805FE08(u8 direction)
 u8 get_run_image_anim_num(u8 direction)
 {
     return gUnknown_08375672[direction];
+}
+
+void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        if (sprite->animCmdIndex == 1)
+        {
+            sprite->animCmdIndex = 2;
+        } else if (sprite->animCmdIndex == 3)
+        {
+            sprite->animCmdIndex = 0;
+        }
+        SeekSpriteAnim(sprite, sprite->animCmdIndex);
+    }
+}
+
+void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    u8 animCmdIndex;
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        animCmdIndex = 3;
+        if (sprite->animCmdIndex < 2)
+        {
+            animCmdIndex = 1;
+        }
+        SeekSpriteAnim(sprite, animCmdIndex);
+    }
+}
+
+u8 sub_805FE90(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    if (a0 > a2)
+    {
+        return DIR_WEST;
+    } else if (a0 < a2)
+    {
+        return DIR_EAST;
+    } else if (a1 > a3)
+    {
+        return DIR_NORTH;
+    } else
+    {
+        return DIR_SOUTH;
+    }
+}
+
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
+{
+    mapObject->animPattern = animPattern;
+    mapObject->mapobj_unk_21 = 0;
+    mapObject->animId = 0;
+    gSprites[mapObject->spriteId].callback = gUnknown_0836DA88[animPattern];
+    gSprites[mapObject->spriteId].data1 = 0;
+}
+
+u8 npc_running_behaviour_by_direction(u8 direction)
+{
+    return gUnknown_0837567B[direction];
+}
+
+u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    MoveCoords(direction, &x, &y);
+    return npc_block_way(mapObject, x, y, direction);
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y);
+
+u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    {
+        return 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+    {
+        return 2;
+    }
+    if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    {
+        return 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        return 3;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        return 4;
+    }
+    return 0;
 }
