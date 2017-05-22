@@ -23,7 +23,6 @@
 extern u32 gUnknown_0202FF84[];
 
 //Functions
-static u8 sub_80587D8(void);
 static bool8 sub_8058854(struct MapObject *, u8);
 static void npc_clear_strange_bits(struct MapObject *a);
 static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c);
@@ -242,16 +241,7 @@ static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
     sub_805A1B8,
 };
 
-
-void sub_80587B4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_80587D8);
-}
-
-static u8 sub_80587D8(void)
-{
-    return 0;
-}
+fieldmap_object_null_cb(sub_80587B4, sub_80587D8);
 
 void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
