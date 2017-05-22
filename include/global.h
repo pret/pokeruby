@@ -464,6 +464,10 @@ struct GabbyAndTyData {
     u8 valB;
 };
 
+struct RecordMixing_UnknownStruct {
+	u8 data[0x38];
+};
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -538,9 +542,9 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ u8 filler_2F9C[0xA0];
-    /*0x303C*/ u8 filler_303C[0x38];
-    /*0x3074*/ u8 filler_3074[0x42];
+    /*0x2F9C*/ struct BoxPokemon daycareData[2];
+    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C[2];
+    /*0x30AC*/ u8 filler_30AC[0xA];
     /*0x30B6*/ u8 filler_30B6;
     /*0x30B7*/ u8 filler_30B7[1];
     /*0x30B8*/ u8 linkBattleRecords[5][16];

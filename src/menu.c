@@ -598,7 +598,7 @@ s8 ProcessMenuInputNoWrap_(void)
     return ProcessMenuInputNoWrap();
 }
 
-u8 MenuPrint_PixelCoords(u8 *text, u8 left, u16 top, u8 a4)
+u8 MenuPrint_PixelCoords(const u8 *text, u8 left, u16 top, u8 a4)
 {
     return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }

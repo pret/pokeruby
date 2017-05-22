@@ -1515,7 +1515,7 @@ unref_sub_8083BB0: @ 8083BB0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08083BD8 @ =sub_80B9484
+	ldr r2, _08083BD8 @ =Task_RecordMixing_Main
 	adds r1, r4, 0
 	bl SetTaskFuncWithFollowupFunc
 	bl ScriptContext1_Stop
@@ -1524,7 +1524,7 @@ unref_sub_8083BB0: @ 8083BB0
 	bx r0
 	.align 2, 0
 _08083BD4: .4byte sub_80839DC
-_08083BD8: .4byte sub_80B9484
+_08083BD8: .4byte Task_RecordMixing_Main
 	thumb_func_end unref_sub_8083BB0
 
 	thumb_func_start sub_8083BDC

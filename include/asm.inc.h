@@ -31,7 +31,7 @@ void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
 // src/daycare.o
-u8 daycare_count_pokemon(u8 *);
+u8 Daycare_CountPokemon(struct BoxPokemon *);
 
 // asm/daycare.o
 void sub_8041324(struct BoxPokemon *, void *);
@@ -158,7 +158,7 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_806FA18(u8 taskId);
 
 // src/party_menu.o
-void sub_806E834();
+u8 sub_806E834(const u8 *message, u8 arg1);
 
 // src/rom_8077ABC.o
 u8 battle_side_get_owner(u8);
@@ -328,7 +328,7 @@ void sub_80C8F34(u8);
 // asm/easy_chat.o
 void InitEasyChatPhrases(void);
 u8* sub_80EB3FC(u8 *, u16);
-u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
+u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 
 // asm/pokenav.o
 void sub_80EBA5C(void);
@@ -421,6 +421,9 @@ void sub_8134AC0(void *);
 
 // src/player_pc.o
 void NewGameInitPCItems(void);
+
+// asm/hall_of_fame.o
+void sub_8143648(u16 paletteTag, u8 arg1);
 
 // src/diploma.o
 void sub_8145D88(void);

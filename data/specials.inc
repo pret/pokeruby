@@ -187,7 +187,7 @@ gSpecials::
 	.4byte sp0B8_daycare
 	.4byte sp0B9_daycare_relationship_comment
 	.4byte sub_8042328
-	.4byte daycare_send
+	.4byte Daycare_SendPokemon_Special
 	.4byte ChooseSendDaycareMon
 	.4byte ShowDaycareLevelMenu
 	.4byte sub_80417B8
