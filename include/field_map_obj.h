@@ -26,7 +26,6 @@ static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
     return 0;\
 }
 
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
 
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);

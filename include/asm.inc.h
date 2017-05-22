@@ -1,6 +1,14 @@
 // src/rom3.o
 void sub_800C35C(void);
 
+struct UnkStruct8060024 {
+    u8 outsideMovementRect:1;
+    u8 tileIsImpassable:1;
+    u8 elevationMismatch:1;
+    u8 pathBlockedByObject:1;
+    u8 pad_04:4;
+};
+
 // asm/battle_2.o
 void sub_800E7C4(void);
 u8 b_first_side(u8, u8, u8);
