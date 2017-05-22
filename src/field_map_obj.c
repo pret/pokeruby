@@ -12,29 +12,6 @@
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
-#define fieldmap_object_cb(setup, callback, table) \
-extern u8 (*const table[])(struct MapObject *, struct Sprite *);\
-u8 callback(struct MapObject *, struct Sprite *);\
-void setup(struct Sprite *sprite)\
-{\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
-}\
-u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    return table[sprite->data1](mapObject, sprite);\
-}
-
-#define fieldmap_object_null_cb(setup, callback) \
-u8 callback(struct MapObject *, struct Sprite *);\
-void setup(struct Sprite *sprite)\
-{\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
-}\
-u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    return 0;\
-}
-
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);

@@ -3,6 +3,29 @@
 
 #include "sprite.h"
 
+#define fieldmap_object_cb(setup, callback, table) \
+extern u8 (*const table[])(struct MapObject *, struct Sprite *);\
+static u8 callback(struct MapObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
+{\
+    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+}\
+static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return table[sprite->data1](mapObject, sprite);\
+}
+
+#define fieldmap_object_null_cb(setup, callback) \
+static u8 callback(struct MapObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
+{\
+    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+}\
+static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return 0;\
+}
+
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
 void MoveCoords(u8 direction, s16 *x, s16 *y);
