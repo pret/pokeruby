@@ -2829,6 +2829,44 @@ u8 sub_805E4EC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
+u8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprite, u8 *directionSequence)
+{
+    u8 v0;
+    u8 goSpeed0AnimId;
+    if (mapObject->mapobj_unk_21 == 3 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+    }
+    FieldObjectSetDirection(mapObject, directionSequence[mapObject->mapobj_unk_21]);
+    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    if (v0 == 1)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, directionSequence[mapObject->mapobj_unk_21]);
+        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    }
+    if (v0 != 0)
+    {
+        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
 void sub_805E5DC(struct Sprite *sprite);
 void sub_805E668(struct Sprite *sprite);
 void sub_805E6F4(struct Sprite *sprite);
