@@ -3471,3 +3471,68 @@ bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s
     }
     return 0;
 }
+
+bool8 sub_8060234(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        if (gSprites[gMapObjects[mapObjectId].spriteId].data7 & 2)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void sub_8060288(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        gSprites[gMapObjects[mapObjectId].spriteId].data7 |= 4;
+    }
+}
+
+void MoveCoords(u8 direction, s16 *x, s16 *y)
+{
+    *x += gDirectionToVector[direction].x;
+    *y += gDirectionToVector[direction].y;
+}
+
+void unref_sub_80602F8(u8 direction, s16 *x, s16 *y)
+{
+    *x += gDirectionToVector[direction].x << 4;
+    *y += gDirectionToVector[direction].y << 4;
+}
+
+void sub_8060320(u8 direction, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
+{
+    if (gDirectionToVector[direction].x > 0)
+    {
+        *x += deltaX;
+    }
+    if (gDirectionToVector[direction].x < 0)
+    {
+        *x -= deltaX;
+    }
+    if (gDirectionToVector[direction].y > 0)
+    {
+        *y += deltaY;
+    }
+    if (gDirectionToVector[direction].y < 0)
+    {
+        *y -= deltaY;
+    }
+}
+
+extern s16 gUnknown_03004898;
+extern s16 gUnknown_0300489C;
+
+void sub_8060388(s16 x1, s16 y1, s16 *x2, s16 *y2)
+{
+    *x2 = (x1 - gSaveBlock1.pos.x) << 4;
+    *y2 = (y1 - gSaveBlock1.pos.y) << 4;
+    *x2 -= gUnknown_0300489C;
+    *y2 -= gUnknown_03004898;
+}
