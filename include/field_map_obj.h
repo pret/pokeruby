@@ -52,6 +52,26 @@ extern const u8 gUnknown_08375418[4];
 extern const u8 gUnknown_08375428[4];
 extern const u8 gUnknown_08375438[4];
 extern const u8 gUnknown_08375448[4];
+extern const u8 gUnknown_08375458[4];
+extern const u8 gUnknown_08375468[4];
+extern const u8 gUnknown_08375240[4];
+extern const u8 gUnknown_08375484[4];
+extern const u8 gUnknown_08375494[4];
+extern const u8 gUnknown_083754A4[4];
+extern const u8 gUnknown_083754B4[4];
+extern const u8 gUnknown_083754C4[4];
+extern const u8 gUnknown_083754D4[4];
+extern const u8 gUnknown_083754E4[4];
+extern const u8 gUnknown_083754F4[4];
+extern const u8 gUnknown_08375504[4];
+extern const u8 gUnknown_08375514[4];
+extern const u8 gUnknown_08375524[4];
+extern const u8 gUnknown_08375534[4];
+extern const u8 gUnknown_08375544[4];
+extern const u8 gUnknown_08375554[4];
+extern const u8 gUnknown_08375564[4];
+extern const u8 gUnknown_08375574[4];
+extern const u8 gUnknown_08375584[4];
 
 extern const u8 gUnknown_0837567B[9];
 

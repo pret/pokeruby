@@ -2906,8 +2906,6 @@ u8 sub_805E738(struct MapObject *mapObject, struct Sprite *sprite)
     return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-void sub_805E780(struct Sprite *sprite);
-
 fieldmap_object_cb(sub_805E780, sub_805E7A4, gUnknown_0837543C);
 
 u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
@@ -2921,26 +2919,268 @@ u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
     return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-void sub_805E80C(struct Sprite *sprite);
-void sub_805E898(struct Sprite *sprite);
-void sub_805E924(struct Sprite *sprite);
-void sub_805E9B0(struct Sprite *sprite);
-void sub_805EA3C(struct Sprite *sprite);
-void sub_805EAC8(struct Sprite *sprite);
-void sub_805EB54(struct Sprite *sprite);
-void sub_805EBE0(struct Sprite *sprite);
-void sub_805EC6C(struct Sprite *sprite);
-void sub_805ECF8(struct Sprite *sprite);
-void sub_805ED84(struct Sprite *sprite);
-void sub_805EE10(struct Sprite *sprite);
-void sub_805EE9C(struct Sprite *sprite);
-void sub_805EF28(struct Sprite *sprite);
-void sub_805EFB4(struct Sprite *sprite);
-void sub_805F040(struct Sprite *sprite);
-void sub_805F0CC(struct Sprite *sprite);
-void sub_805F158(struct Sprite *sprite);
-void sub_805F1E4(struct Sprite *sprite);
-void sub_805F270(struct Sprite *sprite);
+
+
+fieldmap_object_cb(sub_805E80C, sub_805E830, gUnknown_0837544C);
+
+u8 sub_805E850(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375458, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E898, sub_805E8BC, gUnknown_0837545C);
+
+u8 sub_805E8DC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375468, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E924, sub_805E948, gUnknown_0837546C);
+
+u8 sub_805E968(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375240, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E9B0, sub_805E9D4, gUnknown_08375478);
+
+u8 sub_805E9F4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375484, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EA3C, sub_805EA60, gUnknown_08375488);
+
+u8 sub_805EA80(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375494, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EAC8, sub_805EAEC, gUnknown_08375498);
+
+u8 sub_805EB0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754A4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EB54, sub_805EB78, gUnknown_083754A8);
+
+u8 sub_805EB98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754B4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EBE0, sub_805EC04, gUnknown_083754B8);
+
+u8 sub_805EC24(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754C4, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EC6C, sub_805EC90, gUnknown_083754C8);
+
+u8 sub_805ECB0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754D4, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805ECF8, sub_805ED1C, gUnknown_083754D8);
+
+u8 sub_805ED3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754E4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805ED84, sub_805EDA8, gUnknown_083754E8);
+
+u8 sub_805EDC8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754F4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EE10, sub_805EE34, gUnknown_083754F8);
+
+u8 sub_805EE54(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375504, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EE9C, sub_805EEC0, gUnknown_08375508);
+
+u8 sub_805EEE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375514, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EF28, sub_805EF4C, gUnknown_08375518);
+
+u8 sub_805EF6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375524, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EFB4, sub_805EFD8, gUnknown_08375528);
+
+u8 sub_805EFF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375534, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F040, sub_805F064, gUnknown_08375538);
+
+u8 sub_805F084(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375544, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F0CC, sub_805F0F0, gUnknown_08375548);
+
+u8 sub_805F110(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375554, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F158, sub_805F17C, gUnknown_08375558);
+
+u8 sub_805F19C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375564, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F1E4, sub_805F208, gUnknown_08375568);
+
+u8 sub_805F228(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375574, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F270, sub_805F294, gUnknown_08375578);
+
+u8 sub_805F2B4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375584, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+};
+
 void sub_805F2FC(struct Sprite *sprite);
 void FieldObjectCB_TreeDisguise(struct Sprite *sprite);
 void FieldObjectCB_MountainDisguise(struct Sprite *sprite);
