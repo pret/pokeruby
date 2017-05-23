@@ -76,6 +76,10 @@ extern const u8 gUnknown_08375574[4];
 extern const u8 gUnknown_08375584[4];
 
 extern const u8 gUnknown_0837567B[9];
+extern const u8 gUnknown_0837574F[8];
+
+extern const u8 gUnknown_08375757[4][4];
+extern const u8 gUnknown_08375767[4][4];
 
 extern const struct Coords16 gDirectionToVector[];
 
