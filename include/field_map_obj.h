@@ -77,4 +77,6 @@ extern const u8 gUnknown_08375584[4];
 
 extern const u8 gUnknown_0837567B[9];
 
+extern const struct Coords16 gDirectionToVector[];
+
 #endif // GUARD_FIELD_MAP_OBJ_H
