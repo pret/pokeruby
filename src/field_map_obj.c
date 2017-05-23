@@ -1,16 +1,19 @@
 #include "global.h"
 #include "field_map_obj.h"
+#include "fieldmap.h"
 #include "asm.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "field_effect.h"
+#include "field_ground_effect.h"
 #include "palette.h"
 #include "rom4.h"
 #include "rng.h"
 #include "sprite.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
+
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);
@@ -19,14 +22,14 @@ extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
 extern void sub_80634D0();
 extern void pal_patch_for_npc(u16, u16);
-extern void sub_80603CC();
+extern void sub_80603CC(s16, s16, s16 *, s16 *);
 extern void CameraObjectReset1(void);
 
 void sub_805AAB0(void);
 u8 GetFieldObjectIdByLocalId(u8);
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-void FieldObjectHandleDynamicGraphicsId();
+void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void RemoveFieldObjectInternal(struct MapObject *);
 u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
@@ -1505,33 +1508,8 @@ u16 npc_paltag_by_palslot(u8 a)
     return 0x11FF;
 }
 
-u8 sub_805C8A8(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805C884(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8A8);
-}
-
-u8 sub_805C8A8(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return 0;
-}
-
-u8 sub_805C8D0(struct MapObject *, struct Sprite *);
-
-void sub_805C8AC(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8D0);
-}
-
-extern u8 (*const gUnknown_08375224[])();
-
-u8 sub_805C8D0(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375224[sprite->data1](mapObject, sprite);
-}
-
-void npc_reset(struct MapObject *mapObject, struct Sprite *sprite);
+fieldmap_object_null_cb(sub_805C884, sub_805C8A8);
+fieldmap_object_cb(sub_805C8AC, sub_805C8D0, gUnknown_08375224);
 
 u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -1849,17 +1827,7 @@ u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
     return gUnknown_08375244[a1](x, y, x2, y2);
 }
 
-u8 sub_805CE0C(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805CDE8(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805CE0C);
-}
-
-u8 sub_805CE0C(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375270[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805CDE8, sub_805CE0c, gUnknown_08375270);
 
 u8 sub_805CE2C(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -1911,17 +1879,7 @@ u8 sub_805CEE0(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-u8 sub_805CF4C(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805CF28(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805CF4C);
-}
-
-u8 sub_805CF4C(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375284[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805CF28, sub_805CF4C, gUnknown_08375284);
 
 u8 sub_805CF6C(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -1991,17 +1949,7 @@ u8 sub_805D084(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D0D0(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D0AC(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D0D0);
-}
-
-u8 sub_805D0D0(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083752A4[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D0AC, sub_805D0D0, gUnknown_083752A4);
 
 u8 sub_805D0F0(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2071,17 +2019,7 @@ u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D254(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D230(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D254);
-}
-
-u8 sub_805D254(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083752C4[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D230, sub_805D254, gUnknown_083752C4);
 
 u8 sub_805D274(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2108,6 +2046,7 @@ u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 void FieldObjectCB_BerryTree(struct Sprite *sprite)
 {
@@ -2215,17 +2154,7 @@ u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D518(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D4F4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D518);
-}
-
-u8 sub_805D518(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083752E4[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D4F4, sub_805D518, gUnknown_083752E4);
 
 u8 sub_805D538(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2277,18 +2206,7 @@ u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805D658(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D634(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D658);
-}
-
-u8 sub_805D658(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083752F8[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D634, sub_805D658, gUnknown_083752F8);
 
 u8 sub_805D678(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2340,18 +2258,7 @@ u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805D798(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D774(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D798);
-}
-
-u8 sub_805D798(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_0837530C[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D774, sub_805D798, gUnknown_0837530C);
 
 u8 sub_805D7B8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2403,18 +2310,7 @@ u8 sub_805D86C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805D8D8(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D8B4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805D8D8);
-}
-
-u8 sub_805D8D8(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375324[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D8B4, sub_805D8D8, gUnknown_08375324);
 
 u8 sub_805D8F8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2466,18 +2362,7 @@ u8 sub_805D9AC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805DA18(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805D9F4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805DA18);
-}
-
-u8 sub_805DA18(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_0837533C[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805D9F4, sub_805DA18, gUnknown_0837533C);
 
 u8 sub_805DA38(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2529,18 +2414,7 @@ u8 sub_805DAEC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805DB58(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805DB34(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805DB58);
-}
-
-u8 sub_805DB58(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375354[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805DB34, sub_805DB58, gUnknown_08375354);
 
 u8 sub_805DB78(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2592,18 +2466,7 @@ u8 sub_805DC2C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805DC98(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805DC74(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805DC98);
-}
-
-u8 sub_805DC98(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_0837536C[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805DC74, sub_805DC98, gUnknown_0837536C);
 
 u8 sub_805DCB8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2655,17 +2518,7 @@ u8 sub_805DD6C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-u8 sub_805DDD8(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805DDB4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805DDD8);
-}
-
-u8 sub_805DDD8(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375384[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805DDB4, sub_805DDD8, gUnknown_08375384);
 
 u8 sub_805DDF8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2717,17 +2570,7 @@ u8 sub_805DEAC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-u8 sub_805DF18(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805DEF4(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805DF18);
-}
-
-u8 sub_805DF18(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_0837539C[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805DEF4, sub_805DF18, gUnknown_0837539C);
 
 u8 sub_805DF38(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2779,18 +2622,7 @@ u8 sub_805DFEC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805E058(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805E034(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805E058);
-}
-
-u8 sub_805E058(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083753B4[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805E034, sub_805E058, gUnknown_083753B4);
 
 u8 sub_805E078(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2842,18 +2674,7 @@ u8 sub_805E12C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-
-u8 sub_805E198(struct MapObject *mapObject, struct Sprite *sprite);
-
-void sub_805E174(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805E198);
-}
-
-u8 sub_805E198(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_083753CC[sprite->data1](mapObject, sprite);
-}
+fieldmap_object_cb(sub_805E174, sub_805E198, gUnknown_083753CC);
 
 u8 sub_805E1B8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -2897,7 +2718,51 @@ u8 sub_805E234(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-void sub_805E278(struct Sprite *sprite);
+fieldmap_object_cb(sub_805E278, sub_803E29C, gUnknown_083753E4);
+
+u8 sub_805E2BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E2E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, 0x30);
+        sprite->data1 = 2;
+    }
+    return 0;
+}
+
+u8 sub_805E30C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[5];
+    memcpy(directions, gUnknown_083753F4, 5);
+    direction = sub_805CD60(mapObject, 0);
+    if (direction == 0)
+    {
+        direction = directions[mapObject->mapobj_unk_18];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 0;
+    return 1;
+}
+
+
 void sub_805E37C(struct Sprite *sprite);
 void sub_805E5DC(struct Sprite *sprite);
 void sub_805E668(struct Sprite *sprite);
@@ -3033,4 +2898,152 @@ u8 sub_805FE08(u8 direction)
 u8 get_run_image_anim_num(u8 direction)
 {
     return gUnknown_08375672[direction];
+}
+
+void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        if (sprite->animCmdIndex == 1)
+        {
+            sprite->animCmdIndex = 2;
+        } else if (sprite->animCmdIndex == 3)
+        {
+            sprite->animCmdIndex = 0;
+        }
+        SeekSpriteAnim(sprite, sprite->animCmdIndex);
+    }
+}
+
+void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    u8 animCmdIndex;
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        animCmdIndex = 3;
+        if (sprite->animCmdIndex < 2)
+        {
+            animCmdIndex = 1;
+        }
+        SeekSpriteAnim(sprite, animCmdIndex);
+    }
+}
+
+u8 sub_805FE90(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    if (a0 > a2)
+    {
+        return DIR_WEST;
+    } else if (a0 < a2)
+    {
+        return DIR_EAST;
+    } else if (a1 > a3)
+    {
+        return DIR_NORTH;
+    } else
+    {
+        return DIR_SOUTH;
+    }
+}
+
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
+{
+    mapObject->animPattern = animPattern;
+    mapObject->mapobj_unk_21 = 0;
+    mapObject->animId = 0;
+    gSprites[mapObject->spriteId].callback = gUnknown_0836DA88[animPattern];
+    gSprites[mapObject->spriteId].data1 = 0;
+}
+
+u8 npc_running_behaviour_by_direction(u8 direction)
+{
+    return gUnknown_0837567B[direction];
+}
+
+u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    MoveCoords(direction, &x, &y);
+    return npc_block_way(mapObject, x, y, direction);
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y);
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
+
+u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    {
+        return 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+    {
+        return 2;
+    } else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    {
+        return 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        return 3;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        return 4;
+    }
+    return 0;
+}
+
+u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    u8 flags;
+    flags = 0;
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    {
+        flags |= 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
+    {
+        flags |= 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        flags |= 4;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        flags |= 8;
+    }
+    return flags;
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+{
+    s16 minv;
+    s16 maxv;
+    if (mapObject->mapobj_unk_19 != 0)
+    {
+        minv = mapObject->coords1.x - (mapObject->mapobj_unk_19);
+        maxv = mapObject->coords1.x + (mapObject->mapobj_unk_19);
+        if (minv > x || maxv < x)
+        {
+            return 1;
+        }
+    }
+    if (mapObject->mapobj_unk_19b != 0)
+    {
+        minv = mapObject->coords1.y - (mapObject->mapobj_unk_19b);
+        maxv = mapObject->coords1.y + (mapObject->mapobj_unk_19b);
+        if (minv > y || maxv < y)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
