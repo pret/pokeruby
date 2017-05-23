@@ -3440,3 +3440,34 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x,
     }
     return 0;
 }
+
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (gUnknown_08375684[direction - 1](mapObject->mapobj_unk_1E) || gUnknown_08375694[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+{
+    struct MapObject *mapObject2;
+    u8 i;
+    for (i=0; i<16; i++)
+    {
+        mapObject2 = &gMapObjects[i];
+        if (mapObject2->active && mapObject2 != mapObject)
+        {
+            if ((mapObject2->coords2.x != x || mapObject2->coords2.y != y) && (mapObject2->coords3.x != x || mapObject2->coords3.y != y))
+            {
+                continue;
+            }
+            if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}

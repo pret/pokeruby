@@ -35,6 +35,8 @@ void npc_reset(struct MapObject *mapObject, struct Sprite *sprite);
 
 extern const u8 gUnknown_08375240[4];
 extern u8 (*const gUnknown_08375244[])(s16 a0, s16 a1, s16 a2, s16 a3);
+extern bool8 (*const gUnknown_08375684[4])(u8);
+extern bool8 (*const gUnknown_08375694[4])(u8);
 
 extern const u8 gUnknown_083752A0[2];
 extern const u8 gUnknown_083752C0[2];
