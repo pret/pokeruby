@@ -2867,10 +2867,60 @@ u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-void sub_805E5DC(struct Sprite *sprite);
-void sub_805E668(struct Sprite *sprite);
-void sub_805E6F4(struct Sprite *sprite);
+fieldmap_object_cb(sub_805E5DC, sub_805E600, gUnknown_0837540C);
+
+u8 sub_805E620(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375418, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E668, sub_805E68C, gUnknown_0837541C);
+
+u8 sub_805E6AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375428, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E6F4, sub_805E718, gUnknown_0837542C);
+
+u8 sub_805E738(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375438, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
 void sub_805E780(struct Sprite *sprite);
+
+fieldmap_object_cb(sub_805E780, sub_805E7A4, gUnknown_0837543C);
+
+u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375448, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
 void sub_805E80C(struct Sprite *sprite);
 void sub_805E898(struct Sprite *sprite);
 void sub_805E924(struct Sprite *sprite);

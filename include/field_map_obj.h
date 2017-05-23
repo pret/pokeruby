@@ -48,6 +48,10 @@ extern const u8 gUnknown_083753B0[2];
 extern const u8 gUnknown_083753C8[2];
 extern const u8 gUnknown_083753DC[5];
 extern const u8 gUnknown_083753F4[5];
+extern const u8 gUnknown_08375418[4];
+extern const u8 gUnknown_08375428[4];
+extern const u8 gUnknown_08375438[4];
+extern const u8 gUnknown_08375448[4];
 
 extern const u8 gUnknown_0837567B[9];
 
