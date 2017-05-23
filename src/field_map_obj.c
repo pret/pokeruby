@@ -22,7 +22,7 @@ extern void ClearPlayerAvatarInfo(void);
 extern void npc_load_two_palettes__no_record(u16, u8);
 extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
-extern void sub_80634D0();
+extern void sub_80634D0(struct MapObject *, struct Sprite *);
 extern void pal_patch_for_npc(u16, u16);
 extern void CameraObjectReset1(void);
 
@@ -3627,4 +3627,83 @@ bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
     mapObject->mapobj_bit_7 = 0;
     gSprites[mapObject->spriteId].data2 = 0;
     return FALSE;
+}
+
+void FieldObjectForceSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    FieldObjectSetSpecialAnim(mapObject, specialAnimId);
+}
+
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        FieldObjectClearAnim(mapObject);
+    }
+}
+
+void FieldObjectClearAnim(struct MapObject *mapObject)
+{
+    mapObject->mapobj_unk_1C = 0xFF;
+    mapObject->mapobj_bit_6 = 0;
+    mapObject->mapobj_bit_7 = 0;
+    gSprites[mapObject->spriteId].data1 = 0;
+    gSprites[mapObject->spriteId].data2 = 0;
+}
+
+bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+        return mapObject->mapobj_bit_7;
+    return 0x10;
+}
+
+bool8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *mapObject)
+{
+    u8 specialAnimStatus;
+    specialAnimStatus = FieldObjectCheckIfSpecialAnimFinishedOrInactive(mapObject);
+    if (specialAnimStatus != 0 && specialAnimStatus != 0x10)
+    {
+        FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    }
+    return specialAnimStatus;
+}
+
+u8 FieldObjectGetSpecialAnim(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        return mapObject->mapobj_unk_1C;
+    }
+    return 0xFF;
+}
+
+extern void DoGroundEffects_OnSpawn(struct MapObject *mapObject, struct Sprite *sprite);
+extern void DoGroundEffects_OnBeginStep(struct MapObject *mapObject, struct Sprite *sprite);
+extern void DoGroundEffects_OnFinishStep(struct MapObject *mapObject, struct Sprite *sprite);
+extern void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite);
+void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite);
+void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite);
+void FieldObjectUpdateSubpriority(struct MapObject *mapObject, struct Sprite *sprite);
+
+void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback)(struct MapObject *, struct Sprite *))
+{
+    DoGroundEffects_OnSpawn(mapObject, sprite);
+    sub_80634A0(mapObject, sprite);
+    if (FieldObjectIsSpecialAnimActive(mapObject))
+    {
+        FieldObjectExecSpecialAnim(mapObject, sprite);
+    } else
+    {
+        if (!mapObject->mapobj_bit_8)
+        {
+            while (callback(mapObject, sprite));
+        }
+    }
+    DoGroundEffects_OnBeginStep(mapObject, sprite);
+    DoGroundEffects_OnFinishStep(mapObject, sprite);
+    npc_obj_transfer_image_anim_pause_flag(mapObject, sprite);
+    sub_80634D0(mapObject, sprite);
+    FieldObjectUpdateSubpriority(mapObject, sprite);
 }
