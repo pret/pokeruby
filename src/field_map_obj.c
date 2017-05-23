@@ -3707,3 +3707,360 @@ void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback
     sub_80634D0(mapObject, sprite);
     FieldObjectUpdateSubpriority(mapObject, sprite);
 }
+
+
+const u8 gUnknown_083756C8[5];
+
+u8 GetFaceDirectionAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756C8, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756CD[5];
+
+u8 GetSimpleGoAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756CD, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756D2[5];
+
+u8 GetGoSpeed0AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756D2, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756D7[5];
+
+u8 sub_8060744(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756D7, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756DC[5];
+
+u8 d2s_08064034(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756DC, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756E1[5];
+
+u8 sub_806079C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756E1, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756E6[5];
+
+u8 sub_80607C8(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756E6, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756EB[5];
+
+u8 sub_80607F4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756EB, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756F0[5];
+
+u8 GetJumpLedgeAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756F0, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756F5[5];
+
+u8 sub_806084C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756F5, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756FA[5];
+
+u8 sub_8060878(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756FA, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756FF[5];
+
+u8 sub_80608A4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756FF, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375704[5];
+
+u8 sub_80608D0(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375704, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375709[5];
+
+u8 GetStepInPlaceDelay32AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375709, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837570E[5];
+
+u8 GetStepInPlaceDelay16AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837570E, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375713[5];
+
+u8 GetStepInPlaceDelay8AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375713, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375718[5];
+
+u8 GetStepInPlaceDelay4AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375718, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+u8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
+{
+    return FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
+}
+
+const u8 gUnknown_0837571D[5];
+
+u8 sub_80609D8(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837571D, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375722[5];
+
+u8 sub_8060A04(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375722, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375727[5];
+
+u8 sub_8060A30(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375727, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837572C[5];
+
+u8 sub_8060A5C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837572C, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375731[5];
+
+u8 sub_8060A88(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375731, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375736[5];
+
+u8 sub_8060AB4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375736, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837573B[5];
+
+u8 sub_8060AE0(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837573B, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375740[5];
+
+u8 sub_8060B0C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375740, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375745[5];
+
+u8 sub_8060B38(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375745, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837574A[5];
+
+u8 sub_8060B64(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837574A, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
