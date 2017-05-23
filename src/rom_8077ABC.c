@@ -20,7 +20,6 @@
 #define NUM_BATTLE_SLOTS 4
 
 #define gBattleMonPartyPositions gUnknown_02024A6A
-#define gCastformFrontSpriteCoords gUnknownCastformCoords_0837F598
 #define gCastformElevations gUnknownCastformData_0837F5A8
 #define gCastformBackSpriteYCoords gUnknown_0837F5AC
 #define gTransformPersonalities gUnknown_02024E70
