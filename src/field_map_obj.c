@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_map_obj.h"
+#include "field_map_obj_helpers.h"
 #include "fieldmap.h"
 #include "asm.h"
 #include "berry.h"
@@ -11,6 +12,7 @@
 #include "rom4.h"
 #include "rng.h"
 #include "sprite.h"
+#include "field_camera.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
@@ -22,7 +24,6 @@ extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
 extern void sub_80634D0();
 extern void pal_patch_for_npc(u16, u16);
-extern void sub_80603CC(s16, s16, s16 *, s16 *);
 extern void CameraObjectReset1(void);
 
 void sub_805AAB0(void);
@@ -614,7 +615,7 @@ u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c
 }
 
 extern void sub_8064970(struct Sprite *);
-extern void sub_8060470();
+extern void sub_8060470(s16 *, s16 *, s16, s16);
 extern void InitObjectPriorityByZCoord();
 
 u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
@@ -3526,13 +3527,104 @@ void sub_8060320(u8 direction, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
     }
 }
 
-extern s16 gUnknown_03004898;
-extern s16 gUnknown_0300489C;
-
 void sub_8060388(s16 x1, s16 y1, s16 *x2, s16 *y2)
 {
     *x2 = (x1 - gSaveBlock1.pos.x) << 4;
     *y2 = (y1 - gSaveBlock1.pos.y) << 4;
     *x2 -= gUnknown_0300489C;
     *y2 -= gUnknown_03004898;
+}
+
+void sub_80603CC(s16 x1, s16 y1, s16 *x2, s16 *y2)
+{
+    s16 x3;
+    s16 y3;
+    x3 = -gUnknown_0300489C - gUnknown_03004880.unk10;
+    y3 = -gUnknown_03004898 - gUnknown_03004880.unk14;
+    if (gUnknown_03004880.unk10 > 0)
+    {
+        x3 += 0x10;
+    }
+    if (gUnknown_03004880.unk10 < 0)
+    {
+        x3 -= 0x10;
+    }
+    if (gUnknown_03004880.unk14 > 0)
+    {
+        y3 += 0x10;
+    }
+    if (gUnknown_03004880.unk14 < 0)
+    {
+        y3 -= 0x10;
+    }
+    *x2 = ((x1 - gSaveBlock1.pos.x) << 4) + x3;
+    *y2 = ((y1 - gSaveBlock1.pos.y) << 4) + y3;
+}
+
+void sub_8060470(s16 *x, s16 *y, s16 dx, s16 dy)
+{
+    sub_80603CC(*x, *y, x, y);
+    *x += dx;
+    *y += dy;
+}
+
+void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
+{
+    *x = 0;
+    *y = 0;
+    if (gUnknown_03004880.unk10 > 0)
+    {
+        (*x)++;
+    }
+    if (gUnknown_03004880.unk10 < 0)
+    {
+        (*x)--;
+    }
+    if (gUnknown_03004880.unk14 > 0)
+    {
+        (*y)++;
+    }
+    if (gUnknown_03004880.unk14 < 0)
+    {
+        (*y)--;
+    }
+}
+
+void FieldObjectMoveDestCoords(struct MapObject *mapObject, u8 direction, s16 *x, s16 *y)
+{
+    *x = mapObject->coords2.x;
+    *y = mapObject->coords2.y;
+    MoveCoords(direction, x, y);
+}
+
+bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_1 || mapObject->mapobj_bit_6)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectIsSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6 && mapObject->mapobj_unk_1C != 0xff)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject))
+    {
+        return TRUE;
+    }
+    UnfreezeMapObject(mapObject);
+    mapObject->mapobj_unk_1C = specialAnimId;
+    mapObject->mapobj_bit_6 = 1;
+    mapObject->mapobj_bit_7 = 0;
+    gSprites[mapObject->spriteId].data2 = 0;
+    return FALSE;
 }
