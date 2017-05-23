@@ -128,7 +128,7 @@ u8 sub_80608D0(u8);
 u8 GetStepInPlaceDelay32AnimId(u8 a);
 u8 GetStepInPlaceDelay16AnimId(u8);
 u8 GetStepInPlaceDelay8AnimId(u8 a);
-u8 FieldObjectFaceOppositeDirection(void *, u8);
+u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
 u8 sub_80609D8(u8);
 u8 sub_8060A04(u8);
 u8 sub_8060A30(u8);
