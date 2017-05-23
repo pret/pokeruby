@@ -83,6 +83,8 @@ extern const u8 gUnknown_08375767[4][4];
 
 extern const struct Coords16 gDirectionToVector[];
 
+extern u8 (**const gUnknown_08375778[])(struct MapObject *, struct Sprite *);
+
 extern struct CameraSomething gUnknown_03004880;
 extern s16 gUnknown_03004898;
 extern s16 gUnknown_0300489C;

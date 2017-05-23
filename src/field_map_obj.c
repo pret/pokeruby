@@ -4085,6 +4085,7 @@ int zffu_offset_calc(u8 a0, u8 a1)
 u8 state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     int zffuOffset;
+    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.")
     if (a1 == 0 || a2 == 0 || a1 > 4 || a2 > 4)
     {
         return 0;
@@ -4134,3 +4135,106 @@ _08060C18: .4byte gUnknown_08375767\n\
 .syntax divided\n");
 }
 #endif
+
+void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_bit_7 = 1;
+    }
+}
+
+bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_unk_1C = 0xFF;
+        sprite->data2 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
+{
+    mapObject->mapobj_unk_1C = animId;
+    sprite->data2 = 0;
+}
+
+void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    npc_coords_shift_still(mapObject);
+    sub_805FE64(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    sprite->animPaused = 1;
+    sprite->data2 = 1;
+}
+
+u8 sub_8060CE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_SOUTH);
+    return 1;
+}
+
+u8 sub_8060CF0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_NORTH);
+    return 1;
+}
+
+u8 sub_8060D00(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_WEST);
+    return 1;
+}
+
+u8 sub_8060D10(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_EAST);
+    return 1;
+}
+
+void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    FieldObjectSetDirection(mapObject, direction);
+    MoveCoords(direction, &x, &y);
+    npc_coords_shift(mapObject, x, y);
+    oamt_npc_ministep_reset(sprite, direction, a2);
+    sprite->animPaused = 0;
+    mapObject->mapobj_bit_2 = 1;
+    sprite->data2 = 1;
+}
+
+extern u8 (*const gUnknown_083759C0[5])(u8);
+
+void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+{
+    u8 (*functions[5])(u8);
+    memcpy(functions, gUnknown_083759C0, sizeof(gUnknown_083759C0));
+    sub_8060D20(mapObject, sprite, direction, a2);
+    sub_805FE28(mapObject, sprite, functions[a2](mapObject->mapobj_unk_18));
+}
+
+void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_8060D20(mapObject, sprite, direction, 1);
+    sub_805FE28(mapObject, sprite, get_run_image_anim_num(mapObject->mapobj_unk_18));
+}
+
+bool8 obj_npc_ministep(struct Sprite *);
+
+bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (obj_npc_ministep(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = 1;
+        sprite->animPaused = 1;
+        return 1;
+    }
+    return 0;
+}
