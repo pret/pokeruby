@@ -2762,8 +2762,73 @@ u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
+fieldmap_object_cb(sub_805E37C, sub_805E3A0, gUnknown_083753FC);
 
-void sub_805E37C(struct Sprite *sprite);
+u8 sub_805E3C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E3D4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    direction = gUnknown_0836DC09[mapObject->animPattern];
+    if (mapObject->mapobj_unk_21 != 0)
+    {
+        direction = GetOppositeDirection(direction);
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805E40C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 v0;
+    u8 goSpeed0AnimId;
+    if (mapObject->mapobj_unk_21 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+    }
+    v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    if (v0 == 1)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    }
+    if (v0 != 0)
+    {
+        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 3;
+    return 1;
+}
+
+u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+u8 sub_805E4EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
 void sub_805E5DC(struct Sprite *sprite);
 void sub_805E668(struct Sprite *sprite);
 void sub_805E6F4(struct Sprite *sprite);
