@@ -2,10 +2,9 @@
 #include "coins.h"
 #include "menu.h"
 #include "string_util.h"
+#include "strings.h"
 
 #define MAX_COINS 9999
-
-extern u8 gOtherText_Coins2[];
 
 void UpdateCoinsWindow(s32 a, u8 b, u8 c)
 {

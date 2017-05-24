@@ -21,6 +21,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
+#include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
 
@@ -54,24 +56,11 @@ EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 
 //Text strings
-extern u8 gSystemText_Saving[];
 extern u8 gSaveText_PlayerSavedTheGame[];
 extern u8 gSaveText_DontTurnOff[];
-extern u8 gSystemText_SaveErrorExchangeBackup[];
 extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
-extern u8 gOtherText_SafariStock[];
-extern u8 SystemText_Pokedex[];
-extern u8 SystemText_Pokemon[];
-extern u8 SystemText_BAG[];
-extern u8 SystemText_Pokenav[];
-extern u8 SystemText_Player[];
-extern u8 SystemText_Save[];
-extern u8 SystemText_Option[];
-extern u8 SystemText_Exit[];
-extern u8 SystemText_Retire[];
-extern u8 SystemText_Player[];
 
 static u8 StartMenu_PokedexCallback(void);
 static u8 StartMenu_PokemonCallback(void);
@@ -113,7 +102,7 @@ static u8 SaveCallback1(void);
 static u8 SaveCallback2(void);
 static void sub_807160C(void);
 static u8 RunSaveDialogCallback(void);
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void));
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void));
 static void Task_SaveDialog(u8 taskId);
 static void sub_8071700(void);
 static void HideSaveDialog(void);
@@ -517,7 +506,7 @@ void InitSaveDialog(void)
     CreateTask(Task_SaveDialog, 0x50);
 }
 
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void))
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void))
 {
     StringExpandPlaceholders(gStringVar4, ptr);
     MenuDisplayMessageBox();

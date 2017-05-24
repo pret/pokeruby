@@ -1,7 +1,6 @@
 #include "global.h"
 #include "trig.h"
 
-extern s16 gSineTable[];
 extern s16 gSineDegreeTable[];
 
 // amplitude * sin(index*(π/128))

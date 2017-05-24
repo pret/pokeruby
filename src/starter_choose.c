@@ -1,6 +1,7 @@
 #include "global.h"
 #include "starter_choose.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "main.h"
 #include "menu.h"
@@ -11,23 +12,11 @@
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "trig.h"
 
-struct MonCoords
-{
-    u8 x, y;
-};
-
-extern void * const gUnknown_081FAF4C[];
-extern const u8 gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
-extern const u8 gSpeciesNames[][11];
-extern const u8 gOtherText_Poke[];
-extern const struct SpriteSheet gMonFrontPicTable[];
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct SpritePalette gMonPaletteTable[];
-extern const u8 gOtherText_BirchInTrouble[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 //--------------------------------------------------
@@ -567,7 +556,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 
     DecompressPicFromTable_2(
       &gMonFrontPicTable[species],
-      gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y,
+      gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
       gUnknown_081FAF4C[0], gUnknown_081FAF4C[1],
       species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);

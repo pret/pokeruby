@@ -1,12 +1,14 @@
 #include "global.h"
 #include "easy_chat.h"
 #include "asm.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
 #include "rng.h"
 #include "string_util.h"
 #include "strings.h"
+#include "strings2.h"
 #include "text.h"
 
 u8 sub_80EB37C(u16);
@@ -21,14 +23,10 @@ static u16 sub_80EB9D8(void);
 static u16 sub_80EB960(void);
 u16 sub_80EB72C(u16);
 
-extern const u8 gSpeciesNames[][11];
-extern u8 gMoveNames[][13];
 extern void *gEasyChatGroupWords[];
 extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
-
-extern const u8 gOtherText_ThreeQuestions[];
 
 #ifdef NONMATCHING
 u8 *sub_80EB3FC(u8 *dst, u16 word) {

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "battle.h"
+#include "data2.h"
 #include "main.h"
 #include "text.h"
 #include "palette.h"
@@ -16,18 +17,6 @@
 #include "songs.h"
 #include "trig.h"
 #include "abilities.h"
-
-struct MonCoords
-{
-    u8 x, y;
-};
-
-struct UnknownStruct5
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-};
 
 struct UnknownStruct6
 {
@@ -138,14 +127,7 @@ struct UnknownStruct13
     u8 filler4[12];
 };
 
-extern const struct UnknownStruct5 gUnknown_081F9674;
-extern const u8 gUnknown_081F96C8[];
-extern void *const gUnknown_081FAF4C[];
 extern const u16 gUnknown_08D004E0[];
-extern const struct Trainer gTrainers[];
-extern const u8 gSpeciesNames[][11];
-extern const struct BattleMove gBattleMoves[];
-extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 extern const struct BaseStats gBaseStats[];
 extern const u32 gBitTable[];
@@ -1524,19 +1506,19 @@ void sub_8010384(struct Sprite *sprite)
         else
             unownSpecies = NUM_SPECIES + unownForm;  // Use one of the other Unown letters
 
-        yOffset = gMonFrontPicCoords[unownSpecies].y;
+        yOffset = gMonFrontPicCoords[unownSpecies].y_offset;
     }
     else if (species == SPECIES_CASTFORM)
     {
-        yOffset = gCastformFrontSpriteCoords[gBattleMonForms[r6]].y;
+        yOffset = gCastformFrontSpriteCoords[gBattleMonForms[r6]].y_offset;
     }
     else if (species > NUM_SPECIES)
     {
-        yOffset = gMonFrontPicCoords[SPECIES_NONE].y;
+        yOffset = gMonFrontPicCoords[SPECIES_NONE].y_offset;
     }
     else
     {
-        yOffset = gMonFrontPicCoords[species].y;
+        yOffset = gMonFrontPicCoords[species].y_offset;
     }
 
     sprite->data3 = 8 - yOffset / 8;

@@ -2,6 +2,7 @@
 #include "matsuda_debug_menu.h"
 #include "asm.h"
 #include "contest.h"
+#include "data2.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -55,7 +56,6 @@ extern struct SpriteTemplate gSpriteTemplate_83C92CC;
 extern void (*gUnknown_083C92E4[][2])(struct Sprite *, s8);
 extern u32 gUnknown_083C9400[2];
 
-extern u8 gMoveNames[][13];
 
 extern u8 gMatsudaDebugMenu_UnknownByteArray[];
 extern u8* gMatsudaDebugMenuTextList1[];

@@ -1,8 +1,10 @@
 #include "global.h"
 #include "pokemon_size_record.h"
+#include "data2.h"
 #include "event_data.h"
 #include "species.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "text.h"
 
 extern u16 SpeciesToNationalPokedexNum(u16);
@@ -15,9 +17,7 @@ struct UnknownStruct
     u16 unk4;
 };
 
-extern u8 gOtherText_Marco[];
 extern u16 gScriptResult;
-extern u8 gSpeciesNames[][11];
 
 static const struct UnknownStruct sBigMonSizeTable[] =
 {

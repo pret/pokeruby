@@ -4,22 +4,11 @@
 #include "menu.h"
 #include "pokemon.h"
 #include "string_util.h"
+#include "strings2.h"
 
 extern struct Pokemon *unk_2018000;
 
 extern u8 *(gNatureNames[]);
-extern const u8 gOtherText_Terminator4[];
-extern const u8 gOtherText_Nature[];
-
-extern const u8 gOtherText_Met[];
-extern const u8 gOtherText_Egg2[];
-extern const u8 gOtherText_ObtainedInTrade[];
-extern const u8 gOtherText_FatefulEncounter[];
-extern const u8 gOtherText_Met2[];
-extern const u8 gOtherText_EggDayCare[];
-extern const u8 gOtherText_EggNicePlace[];
-extern const u8 gOtherText_EggObtainedInTrade[];
-extern const u8 gOtherText_EggHotSprings[];
 
 u8 *sub_80A1E9C(u8 *dest, u8 *src, u8);
 u8 PokemonSummaryScreen_CheckOT(struct Pokemon *pokemon);

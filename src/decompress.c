@@ -1,14 +1,11 @@
 #include "global.h"
 #include "decompress.h"
 #include "asm.h"
+#include "data2.h"
 #include "species.h"
 #include "text.h"
 
 #define WRAM 0x02000000
-
-extern struct SpriteSheet gMonFrontPicTable[];
-extern struct SpriteSheet gMonBackPicTable[];
-extern void *gUnknown_081FAF4C[];
 
 void sub_800D238(const void *src, void *dest)
 {

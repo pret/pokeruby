@@ -15,7 +15,6 @@ extern u8 unk_2000000[];
 extern u16 gBattleTypeFlags;
 extern const u32 gBitTable[];
 extern u16 gBattleWeather;
-extern const struct BattleMove gBattleMoves[];
 extern struct BattlePokemon gBattleMons[];
 
 extern u8 gUnknown_020238C4;

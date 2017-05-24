@@ -8,6 +8,7 @@
 #include "rtc.h"
 #include "songs.h"
 #include "sound.h"
+#include "strings2.h"
 #include "task.h"
 #include "trig.h"
 
@@ -15,7 +16,6 @@ extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
-extern u8 gOtherText_CorrectTimePrompt[];
 extern const struct MenuAction gMenuYesNoItems[];
 extern u16 gMiscClockMale_Pal[];
 extern u16 gMiscClockFemale_Pal[];

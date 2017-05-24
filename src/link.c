@@ -10,6 +10,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "strings2.h"
 #include "task.h"
 #include "text.h"
 
@@ -38,8 +39,6 @@ extern u16 gBattleTypeFlags;
 extern u16 gScriptItemId;
 
 extern u16 word_3004858;
-
-extern u8 gMultiText_LinkError[];
 
 static void InitLinkTestBG(u8, u8, u8, u8);
 void InitLinkTestBG_Unused(u8, u8, u8, u8);

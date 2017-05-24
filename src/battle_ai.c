@@ -4,6 +4,7 @@
 #include "asm.h"
 #include "battle.h"
 #include "battle_move_effects.h"
+#include "data2.h"
 #include "item.h"
 #include "moves.h"
 #include "pokemon.h"
@@ -36,8 +37,6 @@ extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u32 gBitTable[];
 extern u8 *BattleAIs[];
-extern struct Trainer gTrainers[];
-extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 
 /*
