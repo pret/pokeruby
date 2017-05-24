@@ -258,54 +258,54 @@ static void DrawMetatile(s32 a, u16 *b, u16 c)
 {
     switch (a)
     {
-        case 2:
-            gBGTilemapBuffers[3][c] = b[0];
-            gBGTilemapBuffers[3][c + 1] = b[1];
-            gBGTilemapBuffers[3][c + 0x20] = b[2];
-            gBGTilemapBuffers[3][c + 0x21] = b[3];
+    case 2:
+        gBGTilemapBuffers[3][c] = b[0];
+        gBGTilemapBuffers[3][c + 1] = b[1];
+        gBGTilemapBuffers[3][c + 0x20] = b[2];
+        gBGTilemapBuffers[3][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[2][c] = 0;
-            gBGTilemapBuffers[2][c + 1] = 0;
-            gBGTilemapBuffers[2][c + 0x20] = 0;
-            gBGTilemapBuffers[2][c + 0x21] = 0;
+        gBGTilemapBuffers[2][c] = 0;
+        gBGTilemapBuffers[2][c + 1] = 0;
+        gBGTilemapBuffers[2][c + 0x20] = 0;
+        gBGTilemapBuffers[2][c + 0x21] = 0;
 
-            gBGTilemapBuffers[1][c] = b[4];
-            gBGTilemapBuffers[1][c + 1] = b[5];
-            gBGTilemapBuffers[1][c + 0x20] = b[6];
-            gBGTilemapBuffers[1][c + 0x21] = b[7];
-            break;
-        case 1:
-            gBGTilemapBuffers[3][c] = b[0];
-            gBGTilemapBuffers[3][c + 1] = b[1];
-            gBGTilemapBuffers[3][c + 0x20] = b[2];
-            gBGTilemapBuffers[3][c + 0x21] = b[3];
+        gBGTilemapBuffers[1][c] = b[4];
+        gBGTilemapBuffers[1][c + 1] = b[5];
+        gBGTilemapBuffers[1][c + 0x20] = b[6];
+        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        break;
+    case 1:
+        gBGTilemapBuffers[3][c] = b[0];
+        gBGTilemapBuffers[3][c + 1] = b[1];
+        gBGTilemapBuffers[3][c + 0x20] = b[2];
+        gBGTilemapBuffers[3][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[2][c] = b[4];
-            gBGTilemapBuffers[2][c + 1] = b[5];
-            gBGTilemapBuffers[2][c + 0x20] = b[6];
-            gBGTilemapBuffers[2][c + 0x21] = b[7];
+        gBGTilemapBuffers[2][c] = b[4];
+        gBGTilemapBuffers[2][c + 1] = b[5];
+        gBGTilemapBuffers[2][c + 0x20] = b[6];
+        gBGTilemapBuffers[2][c + 0x21] = b[7];
 
-            gBGTilemapBuffers[1][c] = 0;
-            gBGTilemapBuffers[1][c + 1] = 0;
-            gBGTilemapBuffers[1][c + 0x20] = 0;
-            gBGTilemapBuffers[1][c + 0x21] = 0;
-            break;
-        case 0:
-            gBGTilemapBuffers[3][c] = 0x3014;
-            gBGTilemapBuffers[3][c + 1] = 0x3014;
-            gBGTilemapBuffers[3][c + 0x20] = 0x3014;
-            gBGTilemapBuffers[3][c + 0x21] = 0x3014;
+        gBGTilemapBuffers[1][c] = 0;
+        gBGTilemapBuffers[1][c + 1] = 0;
+        gBGTilemapBuffers[1][c + 0x20] = 0;
+        gBGTilemapBuffers[1][c + 0x21] = 0;
+        break;
+    case 0:
+        gBGTilemapBuffers[3][c] = 0x3014;
+        gBGTilemapBuffers[3][c + 1] = 0x3014;
+        gBGTilemapBuffers[3][c + 0x20] = 0x3014;
+        gBGTilemapBuffers[3][c + 0x21] = 0x3014;
 
-            gBGTilemapBuffers[2][c] = b[0];
-            gBGTilemapBuffers[2][c + 1] = b[1];
-            gBGTilemapBuffers[2][c + 0x20] = b[2];
-            gBGTilemapBuffers[2][c + 0x21] = b[3];
+        gBGTilemapBuffers[2][c] = b[0];
+        gBGTilemapBuffers[2][c + 1] = b[1];
+        gBGTilemapBuffers[2][c + 0x20] = b[2];
+        gBGTilemapBuffers[2][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[1][c] = b[4];
-            gBGTilemapBuffers[1][c + 1] = b[5];
-            gBGTilemapBuffers[1][c + 0x20] = b[6];
-            gBGTilemapBuffers[1][c + 0x21] = b[7];
-            break;
+        gBGTilemapBuffers[1][c] = b[4];
+        gBGTilemapBuffers[1][c + 1] = b[5];
+        gBGTilemapBuffers[1][c + 0x20] = b[6];
+        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        break;
     }
 }
 

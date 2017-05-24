@@ -151,50 +151,50 @@ void Task_BrailleWait(u8 taskId)
 
     switch (data[0])
     {
-        case 0:
-            data[1] = 7200;
-            data[0] = 1;
-            break;
-        case 1:
-            if (BrailleWait_CheckButtonPress() != FALSE)
+    case 0:
+        data[1] = 7200;
+        data[0] = 1;
+        break;
+    case 1:
+        if (BrailleWait_CheckButtonPress() != FALSE)
+        {
+            MenuZeroFillScreen();
+            PlaySE(5);
+            data[0] = 2;
+        }
+        else
+        {
+            data[1] = data[1] - 1;
+            if (data[1] == 0)
             {
                 MenuZeroFillScreen();
-                PlaySE(5);
-                data[0] = 2;
+                data[0] = 3;
+                data[1] = 30;
             }
-            else
-            {
-                data[1] = data[1] - 1;
-                if (data[1] == 0)
-                {
-                    MenuZeroFillScreen();
-                    data[0] = 3;
-                    data[1] = 30;
-                }
-            }
-            break;
-        case 2:
-            if (BrailleWait_CheckButtonPress() == FALSE)
-            {
-                data[1] = data[1] - 1;
-                if (data[1] == 0)
-                    data[0] = 4;
-                break;
-            }
-            sub_8064E2C();
-            DestroyTask(taskId);
-            ScriptContext2_Disable();
-            break;
-        case 3:
+        }
+        break;
+    case 2:
+        if (BrailleWait_CheckButtonPress() == FALSE)
+        {
             data[1] = data[1] - 1;
             if (data[1] == 0)
                 data[0] = 4;
             break;
-        case 4:
-            sub_8064E2C();
-            ScriptContext1_SetupScript(gIslandCave_EventScript_OpenRegiiceChamber);
-            DestroyTask(taskId);
-            break;
+        }
+        sub_8064E2C();
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        break;
+    case 3:
+        data[1] = data[1] - 1;
+        if (data[1] == 0)
+            data[0] = 4;
+        break;
+    case 4:
+        sub_8064E2C();
+        ScriptContext1_SetupScript(gIslandCave_EventScript_OpenRegiiceChamber);
+        DestroyTask(taskId);
+        break;
     }
 }
 

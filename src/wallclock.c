@@ -428,17 +428,17 @@ static void Task_SetClock4(u8 taskId)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-        case 0:     //YES
-            PlaySE(SE_SELECT);
-            gTasks[taskId].func = Task_SetClock5;   //Move on
-            return;
-        case -1:    //B button
-        case 1:     //NO
-            sub_8072DEC();
-            PlaySE(SE_SELECT);
-            MenuZeroFillWindowRect(23, 8, 29, 13);
-            MenuZeroFillWindowRect(2, 16, 27, 19);
-            gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock
+    case 0:     //YES
+        PlaySE(SE_SELECT);
+        gTasks[taskId].func = Task_SetClock5;   //Move on
+        return;
+    case -1:    //B button
+    case 1:     //NO
+        sub_8072DEC();
+        PlaySE(SE_SELECT);
+        MenuZeroFillWindowRect(23, 8, 29, 13);
+        MenuZeroFillWindowRect(2, 16, 27, 19);
+        gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock
     }
 }
 
@@ -501,18 +501,18 @@ static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
 
     switch (direction)
     {
-        case MVMT_BACKWARD:
-            if (angle)
-                angle = angle - delta;
-            else
-                angle = 360 - delta;
-            break;
-        case MVMT_FORWARD:
-            if (angle < 360 - delta)
-                angle = angle + delta;
-            else
-                angle = 0;
-            break;
+    case MVMT_BACKWARD:
+        if (angle)
+            angle = angle - delta;
+        else
+            angle = 360 - delta;
+        break;
+    case MVMT_FORWARD:
+        if (angle < 360 - delta)
+            angle = angle + delta;
+        else
+            angle = 0;
+        break;
     }
     return angle;
 }
@@ -522,32 +522,32 @@ static u8 AdvanceClock(u8 taskId, u8 direction)
 {
     switch (direction)
     {
-        case MVMT_BACKWARD:
-            if (gTasks[taskId].tMinutes > 0)
-                gTasks[taskId].tMinutes--;
+    case MVMT_BACKWARD:
+        if (gTasks[taskId].tMinutes > 0)
+            gTasks[taskId].tMinutes--;
+        else
+        {
+            gTasks[taskId].tMinutes = 59;
+            if (gTasks[taskId].tHours > 0)
+                gTasks[taskId].tHours--;
             else
-            {
-                gTasks[taskId].tMinutes = 59;
-                if (gTasks[taskId].tHours > 0)
-                    gTasks[taskId].tHours--;
-                else
-                    gTasks[taskId].tHours = 23;
-                UpdateClockPeriod(taskId, direction);
-            }
-            break;
-        case MVMT_FORWARD:
-            if (gTasks[taskId].tMinutes < 59)
-                gTasks[taskId].tMinutes++;
+                gTasks[taskId].tHours = 23;
+            UpdateClockPeriod(taskId, direction);
+        }
+        break;
+    case MVMT_FORWARD:
+        if (gTasks[taskId].tMinutes < 59)
+            gTasks[taskId].tMinutes++;
+        else
+        {
+            gTasks[taskId].tMinutes = 0;
+            if (gTasks[taskId].tHours < 23)
+                gTasks[taskId].tHours++;
             else
-            {
-                gTasks[taskId].tMinutes = 0;
-                if (gTasks[taskId].tHours < 23)
-                    gTasks[taskId].tHours++;
-                else
-                    gTasks[taskId].tHours = 0;
-                UpdateClockPeriod(taskId, direction);
-            }
-            break;
+                gTasks[taskId].tHours = 0;
+            UpdateClockPeriod(taskId, direction);
+        }
+        break;
     }
     return 0;
 }
@@ -559,28 +559,28 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 
     switch (direction)
     {
-        case MVMT_BACKWARD:
-            switch (hours)
-            {
-                case 11:
-                    gTasks[taskId].tPeriod = PERIOD_AM;
-                    break;
-                case 23:
-                    gTasks[taskId].tPeriod = PERIOD_PM;
-                    break;
-            }
+    case MVMT_BACKWARD:
+        switch (hours)
+        {
+        case 11:
+            gTasks[taskId].tPeriod = PERIOD_AM;
             break;
-        case MVMT_FORWARD:
-            switch (hours)
-            {
-                case 0:
-                    gTasks[taskId].tPeriod = PERIOD_AM;
-                    break;
-                case 12:
-                    gTasks[taskId].tPeriod = PERIOD_PM;
-                    break;
-            }
+        case 23:
+            gTasks[taskId].tPeriod = PERIOD_PM;
             break;
+        }
+        break;
+    case MVMT_FORWARD:
+        switch (hours)
+        {
+        case 0:
+            gTasks[taskId].tPeriod = PERIOD_AM;
+            break;
+        case 12:
+            gTasks[taskId].tPeriod = PERIOD_PM;
+            break;
+        }
+        break;
     }
 }
 

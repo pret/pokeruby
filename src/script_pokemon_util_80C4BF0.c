@@ -73,18 +73,18 @@ void sub_80C4C28(void)
 
     switch(specialVar)
     {
-        case 0:
-            var = 3;
-            break;
-        case 1:
-            var = 4;
-            break;
-        case 2:
-            var = 5;
-            break;
-        default:
-            var = 100;
-            break;
+    case 0:
+        var = 3;
+        break;
+    case 1:
+        var = 4;
+        break;
+    case 2:
+        var = 5;
+        break;
+    default:
+        var = 100;
+        break;
     }
     gSpecialVar_0x8004 = var;
 }
@@ -103,22 +103,22 @@ void sub_80C4C78(void)
 
     switch(gScriptContestCategory)
     {
-        case 0:
-            var = 8;
-            break;
-        case 1:
-            var = 9;
-            break;
-        case 2:
-            var = 10;
-            break;
-        case 3:
-            var = 11;
-            break;
-        case 4:
-        default:
-            var = 12;
-            break;
+    case 0:
+        var = 8;
+        break;
+    case 1:
+        var = 9;
+        break;
+    case 2:
+        var = 10;
+        break;
+    case 3:
+        var = 11;
+        break;
+    case 4:
+    default:
+        var = 12;
+        break;
     }
 
     returnVar = gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[var].var;
@@ -467,26 +467,26 @@ void sub_80C5190(u8 taskId)
 
     switch(task->data[0])
     {
-        case 2:
-            sprite = &gSprites[task->data[2]];
-            FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+    case 2:
+        sprite = &gSprites[task->data[2]];
+        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
 
-            if(sprite->oam.affineMode)
-                FreeOamMatrix(sprite->oam.matrixNum);
+        if(sprite->oam.affineMode)
+            FreeOamMatrix(sprite->oam.matrixNum);
 
-            DestroySprite(sprite);
-            task->data[0]++;
-            break;
-        case 0:
-            task->data[0]++;
-            break;
-        case 3:
-            MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
-            DestroyTask(taskId);
-            break;
-        case 1:
-        default:
-            break;
+        DestroySprite(sprite);
+        task->data[0]++;
+        break;
+    case 0:
+        task->data[0]++;
+        break;
+    case 3:
+        MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
+        DestroyTask(taskId);
+        break;
+    case 1:
+    default:
+        break;
     }
 }
 
@@ -593,15 +593,15 @@ void CheckForAlivePartyMons(void)
 
     switch(var)
     {
-        case 1:
-            gScriptResult = var;
-            break;
-        case 0:
-            gScriptResult = var;
-            break;
-        case 2:
-            gScriptResult = var;
-            break;
+    case 1:
+        gScriptResult = var;
+        break;
+    case 0:
+        gScriptResult = var;
+        break;
+    case 2:
+        gScriptResult = var;
+        break;
     }
 }
 
@@ -663,12 +663,12 @@ void sub_80C5580(void)
 
     switch(var)
     {
-        case 0:
-            gScriptResult = 0;
-            break;
-        default:
-            gScriptResult = 1;
-            break;
+    case 0:
+        gScriptResult = 0;
+        break;
+    default:
+        gScriptResult = 1;
+        break;
     }
 
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -686,14 +686,14 @@ void SetBattleTowerPlayerParty(void)
 
     switch(var)
     {
-        case 0: // player quit battle tower?
-            LoadPlayerParty();
-            gScriptResult = 0;
-            break;
-        default: // load battle tower.
-            ReducePlayerPartyToThree();
-            gScriptResult = 1;
-            break;
+    case 0: // player quit battle tower?
+        LoadPlayerParty();
+        gScriptResult = 0;
+        break;
+    default: // load battle tower.
+        ReducePlayerPartyToThree();
+        gScriptResult = 1;
+        break;
     }
 
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);

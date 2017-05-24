@@ -110,59 +110,59 @@ static void CB2_SaveFailedScreen(void)
 
     switch (gMain.state)
     {
-        case 0:
-        default:
-            SetVBlankCallback(0);
-            REG_DISPCNT = 0;
-            REG_BG3CNT = 0;
-            REG_BG2CNT = 0;
-            REG_BG1CNT = 0;
-            REG_BG0CNT = 0;
-            REG_BG3HOFS = 0;
-            REG_BG3VOFS = 0;
-            REG_BG2HOFS = 0;
-            REG_BG2VOFS = 0;
-            REG_BG1HOFS = 0;
-            REG_BG1VOFS = 0;
-            REG_BG0HOFS = 0;
-            REG_BG0VOFS = 0;
-            DmaFill16(3, 0, VRAM, VRAM_SIZE);
-            DmaFill32(3, 0, OAM, OAM_SIZE);
-            DmaFill16(3, 0, PLTT, PLTT_SIZE);
-            LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
-            LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
-            LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-            LZ77UnCompVram(&gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
-            ResetSpriteData();
-            ResetTasks();
-            ResetPaletteFade();
-            LoadPalette(&gBirchBagGrassPal, 0, sizeof(gBirchBagGrassPal));
-            LoadPalette(&gSaveFailedClockPal, 0x100, sizeof(gSaveFailedClockPal));
-            SetUpWindowConfig(&gWindowConfig_81E6C3C);
-            InitMenuWindow(&gWindowConfig_81E6CE4);
-            MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
-            MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19); // message window
-            MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-            ime = REG_IME;
-            REG_IME = 0;
-            REG_IE |= INTR_FLAG_VBLANK;
-            REG_IME = ime;
-            REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-            SetVBlankCallback(VBlankCB);
-            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7)  | BGCNT_16COLOR | BGCNT_TXT256x256;
-            REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6)  | BGCNT_16COLOR | BGCNT_TXT256x256;
-            REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
-            REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG2_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
-            gMain.state++;
-            break;
-        case 1:
-            if (!UpdatePaletteFade())
-            {
-                SetMainCallback2(CB2_WipeSave);
-                SetVBlankCallback(VBlankCB_UpdateClockGraphics);
-            }
-            break;
+    case 0:
+    default:
+        SetVBlankCallback(0);
+        REG_DISPCNT = 0;
+        REG_BG3CNT = 0;
+        REG_BG2CNT = 0;
+        REG_BG1CNT = 0;
+        REG_BG0CNT = 0;
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 0;
+        REG_BG2HOFS = 0;
+        REG_BG2VOFS = 0;
+        REG_BG1HOFS = 0;
+        REG_BG1VOFS = 0;
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+        DmaFill16(3, 0, VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, OAM, OAM_SIZE);
+        DmaFill16(3, 0, PLTT, PLTT_SIZE);
+        LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+        LZ77UnCompVram(&gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
+        ResetSpriteData();
+        ResetTasks();
+        ResetPaletteFade();
+        LoadPalette(&gBirchBagGrassPal, 0, sizeof(gBirchBagGrassPal));
+        LoadPalette(&gSaveFailedClockPal, 0x100, sizeof(gSaveFailedClockPal));
+        SetUpWindowConfig(&gWindowConfig_81E6C3C);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
+        MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
+        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19); // message window
+        MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        ime = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = ime;
+        REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+        SetVBlankCallback(VBlankCB);
+        REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7)  | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6)  | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG2_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
+        gMain.state++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+        {
+            SetMainCallback2(CB2_WipeSave);
+            SetVBlankCallback(VBlankCB_UpdateClockGraphics);
+        }
+        break;
     }
 }
 

@@ -262,31 +262,31 @@ void Task_RecordMixing_SendPacket(u8 taskId)
 
     switch (task->data[TD_STATE])
     {
-        case 0: //Copy record data to send buffer
-        {
-            void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
+    case 0: //Copy record data to send buffer
+    {
+        void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
 
-            memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
+        memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
+        task->data[TD_STATE]++;
+        break;
+    }
+    case 1:
+        if (GetMultiplayerId() == 0)
+            sub_8007E9C(1);
+        task->data[TD_STATE]++;
+        break;
+    case 2:
+        break;
+    case 3:
+        task->data[4]++;
+        if ((u16)task->data[4] == 24)
             task->data[TD_STATE]++;
-            break;
-        }
-        case 1:
-            if (GetMultiplayerId() == 0)
-                sub_8007E9C(1);
-            task->data[TD_STATE]++;
-            break;
-        case 2:
-            break;
-        case 3:
-            task->data[4]++;
-            if ((u16)task->data[4] == 24)
-                task->data[TD_STATE]++;
-            else
-                task->data[TD_STATE] = 0;
-            break;
-        case 4:
-            if (!gTasks[task->data[10]].isActive)
-                task->func = Task_RecordMixing_SendPacket_SwitchToReceive;
+        else
+            task->data[TD_STATE] = 0;
+        break;
+    case 4:
+        if (!gTasks[task->data[10]].isActive)
+            task->func = Task_RecordMixing_SendPacket_SwitchToReceive;
     }
 }
 

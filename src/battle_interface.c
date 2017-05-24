@@ -2409,23 +2409,23 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
         gender = 100;
     switch (gender)
     {
-        default:
-            ptr[0] = 0xB;
-            ptr[1] = EOS;
-            ptr += 1;
-            break;
-        case MON_MALE:
-            ptr[0] = 0xB;
-            ptr[1] = CHAR_MALE;
-            ptr[2] = EOS;
-            ptr += 2;
-            break;
-        case MON_FEMALE:
-            ptr[0] = 0xA;
-            ptr[1] = CHAR_FEMALE;
-            ptr[2] = EOS;
-            ptr += 2;
-            break;
+    default:
+        ptr[0] = 0xB;
+        ptr[1] = EOS;
+        ptr += 1;
+        break;
+    case MON_MALE:
+        ptr[0] = 0xB;
+        ptr[1] = CHAR_MALE;
+        ptr[2] = EOS;
+        ptr += 2;
+        break;
+    case MON_FEMALE:
+        ptr[0] = 0xA;
+        ptr[1] = CHAR_FEMALE;
+        ptr[2] = EOS;
+        ptr += 2;
+        break;
     }
     ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 0x13;
