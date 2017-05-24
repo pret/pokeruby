@@ -4469,3 +4469,68 @@ u8 sub_806123C(struct MapObject *mapObject, struct Sprite *sprite, u8 (*const ca
     }
     return retval;
 }
+
+u8 sub_8061300(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return sub_806123C(mapObject, sprite, sub_8064704);
+}
+
+u8 sub_8061314(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return sub_806123C(mapObject, sprite, sub_806478C);
+}
+
+bool8 sub_8061328(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061300(mapObject, sprite) == 0xFF)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061340(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061314(mapObject, sprite) == 0xFF)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061358(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 retval;
+
+    retval = sub_8061300(mapObject, sprite);
+    if (retval != 1)
+    {
+        if (retval == 0xFF)
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+    sub_805FE64(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    return FALSE;
+}
+
+bool8 sub_80613D4(struct MapObject *, struct Sprite *);
+
+bool8 sub_80613A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 2, 0);
+    return sub_80613D4(mapObject, sprite);
+}
+
+bool8 sub_80613D4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
