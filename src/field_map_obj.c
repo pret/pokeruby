@@ -4435,3 +4435,10 @@ void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     mapObject->mapobj_bit_2 = 1;
     mapObject->mapobj_bit_4 = 1;
 }
+
+void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a4, u8 a5)
+{
+    sub_806113C(mapObject, sprite, direction, a4, a5);
+    sub_805FE28(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    DoShadowFieldEffect(mapObject);
+}

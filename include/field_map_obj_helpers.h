@@ -12,5 +12,6 @@ void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3);
 void sub_806467C(struct Sprite *sprite, u8 direction);
 bool8 sub_806468C(struct Sprite *sprite);
 void sub_80646E4(struct Sprite *sprite, u8 a2, u8 a3, u8 a4);
+void DoShadowFieldEffect(struct MapObject *mapObject);
 
 #endif

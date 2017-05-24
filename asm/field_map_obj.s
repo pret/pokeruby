@@ -1354,38 +1354,6 @@ sub_805FD08: @ 805FD08
 	.section .text_805fd18
 
 	thumb_func_start maybe_shadow_1
-maybe_shadow_1: @ 80611F8
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r0, [sp, 0x10]
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp]
-	adds r0, r4, 0
-	bl sub_806113C
-	ldrb r0, [r4, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	bl get_go_image_anim_num
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl sub_805FE28
-	adds r0, r4, 0
-	bl DoShadowFieldEffect
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end maybe_shadow_1
 
 	thumb_func_start sub_806123C
 sub_806123C: @ 806123C
