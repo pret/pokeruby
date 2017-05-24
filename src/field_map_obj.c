@@ -4416,3 +4416,22 @@ bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
+extern const s16 gUnknown_08375A34[3];
+
+void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a4, u8 a5)
+{
+    s16 vSPp4[3];
+    s16 x;
+    s16 y;
+    memcpy(vSPp4, gUnknown_08375A34, sizeof gUnknown_08375A34);
+    x = 0;
+    y = 0;
+    FieldObjectSetDirection(mapObject, direction);
+    sub_8060320(direction, &x, &y, vSPp4[a4], vSPp4[a4]);
+    npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
+    sub_80646E4(sprite, direction, a4, a5);
+    sprite->data2 = 1;
+    sprite->animPaused = 0;
+    mapObject->mapobj_bit_2 = 1;
+    mapObject->mapobj_bit_4 = 1;
+}
