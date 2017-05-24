@@ -838,14 +838,14 @@ static void MainCB2_EndIntro(void)
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
-static void LoadCopyrightGraphics(u16 a1, u16 a2, u16 a3)
+static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteAddress)
 {
-    LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + a1));
-    LoadPalette(gIntroCopyright_Pal, a3, 0x20);
-    CpuCopy16(gIntroCopyright_Tilemap, (void *)(VRAM + a2), 0x500);
+    LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+    LoadPalette(gIntroCopyright_Pal, paletteAddress, 0x20);
+    CpuCopy16(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress), 0x500);
 }
 
-static void SerialCb_CopyrightScreen(void)
+static void SerialCB_CopyrightScreen(void)
 {
     GameCubeMultiBoot_HandleSerialInterrupt(&gMultibootProgramStruct);
 }
@@ -869,7 +869,7 @@ static u8 SetUpCopyrightScreen(void)
         DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 14336, 0);
+        LoadCopyrightGraphics(0, 0x3800, 0);
         remove_some_task();
         ResetTasks();
         ResetSpriteData();
@@ -887,7 +887,7 @@ static u8 SetUpCopyrightScreen(void)
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
         SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
-        SetSerialCallback(SerialCb_CopyrightScreen);
+        SetSerialCallback(SerialCB_CopyrightScreen);
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     default:
         UpdatePaletteFade();
@@ -898,7 +898,7 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFFu, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
             gMain.state++;
         }
         break;
@@ -922,7 +922,7 @@ static u8 SetUpCopyrightScreen(void)
     return 1;
 }
 
-void c2_copyright_1(void)
+void CB2_InitCopyrightScreenAfterBootup(void)
 {
     if (!SetUpCopyrightScreen())
     {
@@ -935,7 +935,7 @@ void c2_copyright_1(void)
     }
 }
 
-void CB2_InitCopyrightScreen(void)
+void CB2_InitCopyrightScreenAfterTitleScreen(void)
 {
     SetUpCopyrightScreen();
 }

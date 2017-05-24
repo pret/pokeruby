@@ -1,5 +1,5 @@
 gKeyRepeatStartDelay
-gUnknown_3001764
+gLinkTransferringData
 gMain
 gKeyRepeatContinueDelay
 gSoftResetDisabled

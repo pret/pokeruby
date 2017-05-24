@@ -642,7 +642,7 @@ static void BuildSendCmd(u16 code)
         gSendCmd[0] = 0x5FFF;
         break;
     case 0xCAFE:
-        if (!word_3004858 || gUnknown_3001764)
+        if (!word_3004858 || gLinkTransferringData)
             break;
         gSendCmd[0] = 0xCAFE;
         gSendCmd[1] = word_3004858;
