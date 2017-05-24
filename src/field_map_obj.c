@@ -4417,6 +4417,7 @@ bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 extern const s16 gUnknown_08375A34[3];
+extern const s16 gUnknown_08375A3A[3];
 
 void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a4, u8 a5)
 {
@@ -4441,4 +4442,30 @@ void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direc
     sub_806113C(mapObject, sprite, direction, a4, a5);
     sub_805FE28(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
     DoShadowFieldEffect(mapObject);
+}
+
+u8 sub_806123C(struct MapObject *mapObject, struct Sprite *sprite, u8 (*const callback)(struct Sprite *))
+{
+    s16 vSPp4[3];
+    s16 x;
+    s16 y;
+    u8 retval;
+    memcpy(vSPp4, gUnknown_08375A3A, sizeof gUnknown_08375A3A);
+    retval = callback(sprite);
+    if (retval == 1 && vSPp4[sprite->data4] != 0)
+    {
+        x = 0;
+        y = 0;
+        sub_8060320(mapObject->placeholder18, &x, &y, vSPp4[sprite->data4], vSPp4[sprite->data4]);
+        npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
+        mapObject->mapobj_bit_2 = 1;
+        mapObject->mapobj_bit_4 = 1;
+    } else if (retval == 0xff)
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = 1;
+        mapObject->mapobj_bit_5 = 1;
+        sprite->animPaused = 1;
+    }
+    return retval;
 }
