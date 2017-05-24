@@ -1,30 +1,36 @@
 #include "global.h"
 #include "field_map_obj.h"
+#include "field_map_obj_helpers.h"
+#include "fieldmap.h"
 #include "asm.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "field_effect.h"
+#include "field_ground_effect.h"
 #include "palette.h"
 #include "rom4.h"
+#include "rng.h"
 #include "sprite.h"
+#include "field_camera.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
+
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);
 extern void npc_load_two_palettes__no_record(u16, u8);
 extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
-extern void sub_80634D0();
+extern void sub_80634D0(struct MapObject *, struct Sprite *);
 extern void pal_patch_for_npc(u16, u16);
-extern void sub_80603CC();
 extern void CameraObjectReset1(void);
 
 void sub_805AAB0(void);
 u8 GetFieldObjectIdByLocalId(u8);
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-void FieldObjectHandleDynamicGraphicsId();
+void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void RemoveFieldObjectInternal(struct MapObject *);
 u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
@@ -609,7 +615,7 @@ u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c
 }
 
 extern void sub_8064970(struct Sprite *);
-extern void sub_8060470();
+extern void sub_8060470(s16 *, s16 *, s16, s16);
 extern void InitObjectPriorityByZCoord();
 
 u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
@@ -1503,47 +1509,2910 @@ u16 npc_paltag_by_palslot(u8 a)
     return 0x11FF;
 }
 
-u32 sub_805C8A8(void);
-
-void sub_805C884(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8A8);
-}
-
-u32 sub_805C8A8(void)
-{
-    return 0;
-}
-
-u32 sub_805C8D0(struct MapObject *, struct Sprite *);
-
-void sub_805C8AC(struct Sprite *sprite)
-{
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805C8D0);
-}
-
-extern u8 (*const gUnknown_08375224[])();
-
-u32 sub_805C8D0(struct MapObject *mapObject, struct Sprite *sprite)
-{
-    return gUnknown_08375224[sprite->data1](mapObject, sprite);
-}
-
-void npc_reset();
+fieldmap_object_null_cb(sub_805C884, sub_805C8A8);
+fieldmap_object_cb(sub_805C8AC, sub_805C8D0, gUnknown_08375224);
 
 u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject);
+    npc_reset(mapObject, sprite);
     sprite->data1 = 1;
     return 1;
 }
 
-extern void FieldObjectSetRegularAnim();
+extern void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 
 u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
     sprite->data1 = 2;
     return 1;
+}
+
+extern u8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
+extern const s16 gUnknown_0837520C[];
+extern const s16 gUnknown_0837521C[];
+extern void sub_8064820(struct Sprite *, s16);
+
+u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0)
+    {
+        return 0;
+    }
+    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    sprite->data1 = 3;
+    return 1;
+}
+
+extern u8 sub_8064824(struct Sprite *);
+
+u8 sub_805C96C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) != 0)
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+extern u8 sub_805FF20(struct MapObject *, u8);
+
+u8 sub_805C98C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375240, 4);
+    direction = directions[Random() & 3];
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 5;
+    if (sub_805FF20(mapObject, direction) != 0)
+    {
+        sprite->data1 = 1;
+    }
+    return 1;
+}
+
+u8 sub_805C9D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 6;
+    return 1;
+}
+
+u8 sub_805CA08(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+u8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
+{
+    s16 x;
+    s16 y;
+    s16 objx;
+    s16 objy;
+    s16 minx;
+    s16 maxx;
+    s16 miny;
+    s16 maxy;
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH) == 0)
+    {
+        return 0;
+    }
+    if (mapObject->trainerType != 1 && mapObject->trainerType != 3)
+    {
+        return 0;
+    }
+    PlayerGetDestCoords(&x, &y);
+    objx = mapObject->coords2.x;
+    objy = mapObject->coords2.y;
+    minx = objx - mapObject->trainerRange_berryTreeId;
+    miny = objy - mapObject->trainerRange_berryTreeId;
+    maxx = objx + mapObject->trainerRange_berryTreeId;
+    maxy = objy + mapObject->trainerRange_berryTreeId;
+    if (minx > x || maxx < x || miny > y || maxy < y)
+    {
+        return 0;
+    }
+    return 1;
+}
+
+u8 sub_805CAAC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    if (a2 > a3)
+    {
+        dirn = DIR_EAST;
+        if (a0 < 0)
+        {
+            dirn = DIR_WEST;
+        }
+    }
+    else
+    {
+        dirn = DIR_SOUTH;
+        if (a1 < 0)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CADC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = DIR_SOUTH;
+    if (a1 < 0)
+    {
+        dirn = DIR_NORTH;
+    }
+    return dirn;
+}
+
+u8 sub_805CAEC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = DIR_EAST;
+    if (a0 < 0)
+    {
+        dirn = DIR_WEST;
+    }
+    return dirn;
+}
+
+u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_EAST)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    else if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_SOUTH)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_WEST)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    else if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_SOUTH)
+        {
+            dirn = DIR_NORTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_EAST)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    else if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_NORTH)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3) {
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+        if (dirn == DIR_WEST)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    else if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+        if (dirn == DIR_NORTH)
+        {
+            dirn = DIR_SOUTH;
+        }
+    }
+    return dirn;
+}
+
+u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_EAST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_WEST)
+    {
+        dirn = sub_805CADC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_SOUTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    u8 dirn;
+    dirn = sub_805CAAC(a0, a1, a2, a3);
+    if (dirn == DIR_NORTH)
+    {
+        dirn = sub_805CAEC(a0, a1, a2, a3);
+    }
+    return dirn;
+}
+
+u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
+{
+    s16 x;
+    s16 y;
+    s16 x2;
+    s16 y2;
+    if (!FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        return 0;
+    }
+    PlayerGetDestCoords(&x, &y);
+    x -= mapObject->coords2.x;
+    y -= mapObject->coords2.y;
+    x2 = x;
+    y2 = y;
+    if (x2 < 0)
+    {
+        x2 = -x2;
+    }
+    if (y2 < 0)
+    {
+        y2 = -y2;
+    }
+    return gUnknown_08375244[a1](x, y, x2, y2);
+}
+
+fieldmap_object_cb(sub_805CDE8, sub_805CE0c, gUnknown_08375270);
+
+u8 sub_805CE2C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805CE40(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805CE6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805CEB0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805CEE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375240, 4);
+    direction = sub_805CD60(mapObject, 0);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 3];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805CF28, sub_805CF4C, gUnknown_08375284);
+
+u8 sub_805CF6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805CF80(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805CFAC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0)
+    {
+        return 0;
+    }
+    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    sprite->data1 = 3;
+    return 1;
+}
+
+u8 sub_805CFE8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) != 0)
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D008(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752A0, 2);
+    direction = directions[Random() & 1];
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 5;
+    if (sub_805FF20(mapObject, direction) != 0)
+    {
+        sprite->data1 = 1;
+    }
+    return 1;
+}
+
+u8 sub_805D054(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 6;
+    return 1;
+}
+
+u8 sub_805D084(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+fieldmap_object_cb(sub_805D0AC, sub_805D0D0, gUnknown_083752A4);
+
+u8 sub_805D0F0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D104(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D130(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) == 0)
+    {
+        return 0;
+    }
+    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    sprite->data1 = 3;
+    return 1;
+}
+
+u8 sub_805D16C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) != 0)
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D18C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752C0, 2);
+    direction = directions[Random() & 1];
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 5;
+    if (sub_805FF20(mapObject, direction) != 0)
+    {
+        sprite->data1 = 1;
+    }
+    return 1;
+}
+
+u8 sub_805D1D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 6;
+    return 1;
+}
+
+u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+fieldmap_object_cb(sub_805D230, sub_805D254, gUnknown_083752C4);
+
+u8 sub_805D274(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D2A0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
+    {
+        sprite->data1 = 2;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 0;
+    return 0;
+}
+
+u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
+
+void FieldObjectCB_BerryTree(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[sprite->data0];
+    if (!(sprite->data7 & 1))
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data7 |= 1;
+    }
+    meta_step(mapObject, sprite, sub_805D314);
+}
+
+u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083752D0[sprite->data1](mapObject, sprite);
+}
+
+extern u32 gUnknown_0202FF84[];
+
+u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 berryTreeStage;
+    npc_reset(mapObject, sprite);
+    mapObject->mapobj_bit_13 = 1;
+    sprite->invisible = 1;
+    berryTreeStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
+    if (!berryTreeStage)
+    {
+        if (!(sprite->data7 & 4) && sprite->animNum == 4)
+        {
+            gUnknown_0202FF84[0] = mapObject->coords2.x;
+            gUnknown_0202FF84[1] = mapObject->coords2.y;
+            gUnknown_0202FF84[2] = sprite->subpriority - 1;
+            gUnknown_0202FF84[3] = sprite->oam.priority;
+            FieldEffectStart(0x17);
+            sprite->animNum = 0;
+        }
+        return 0;
+    }
+    mapObject->mapobj_bit_13 = 0;
+    sprite->invisible = 0;
+    berryTreeStage--;
+    if (sprite->animNum != berryTreeStage)
+    {
+        sprite->data1 = 2;
+        return 1;
+    }
+    get_berry_tree_graphics(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, 0x39);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 3;
+    sprite->data2 = 0;
+    sprite->data7 |= 2;
+    gUnknown_0202FF84[0] = mapObject->coords2.x;
+    gUnknown_0202FF84[1] = mapObject->coords2.y;
+    gUnknown_0202FF84[2] = sprite->subpriority - 1;
+    gUnknown_0202FF84[3] = sprite->oam.priority;
+    FieldEffectStart(0x17);
+    return 1;
+}
+
+u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2++;
+    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->animPaused = 1;
+    if (sprite->data2 > 64)
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data1 = 4;
+        sprite->data2 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2++;
+    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->animPaused = 1;
+    if (sprite->data2 > 64)
+    {
+        sprite->data1 = 0;
+        sprite->data7 &= (-3);
+        return 1;
+    }
+    return 0;
+}
+
+fieldmap_object_cb(sub_805D4F4, sub_805D518, gUnknown_083752E4);
+
+u8 sub_805D538(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D54C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D578(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D5BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752A0, 2);
+    direction = sub_805CD60(mapObject, 1);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805D634, sub_805D658, gUnknown_083752F8);
+
+u8 sub_805D678(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D68C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D6B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D6FC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_083752C0, 2);
+    direction = sub_805CD60(mapObject, 2);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805D774, sub_805D798, gUnknown_0837530C);
+
+u8 sub_805D7B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D7CC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D7F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D83C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D86C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_08375320, 2);
+    direction = sub_805CD60(mapObject, 3);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805D8B4, sub_805D8D8, gUnknown_08375324);
+
+u8 sub_805D8F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805D90C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805D938(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805D97C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805D9AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_08375338, 2);
+    direction = sub_805CD60(mapObject, 4);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805D9F4, sub_805DA18, gUnknown_0837533C);
+
+u8 sub_805DA38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805DA4C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805DA78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805DABC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805DAEC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_08375350, 2);
+    direction = sub_805CD60(mapObject, 5);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805DB34, sub_805DB58, gUnknown_08375354);
+
+u8 sub_805DB78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805DB8C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805DBB8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805DBFC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805DC2C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[2];
+    memcpy(directions, gUnknown_08375368, 2);
+    direction = sub_805CD60(mapObject, 6);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 1];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805DC74, sub_805DC98, gUnknown_0837536C);
+
+u8 sub_805DCB8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805DCCC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805DCF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805DD3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805DD6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375380, 4);
+    direction = sub_805CD60(mapObject, 7);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 3];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805DDB4, sub_805DDD8, gUnknown_08375384);
+
+u8 sub_805DDF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805DE0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805DE38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805DE7C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805DEAC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375398, 4);
+    direction = sub_805CD60(mapObject, 8);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 3];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805DEF4, sub_805DF18, gUnknown_0837539C);
+
+u8 sub_805DF38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805DF4C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805DF78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805DFBC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805DFEC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_083753B0, 4);
+    direction = sub_805CD60(mapObject, 9);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 3];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805E034, sub_805E058, gUnknown_083753B4);
+
+u8 sub_805E078(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E08C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805E0B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805E0FC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805E12C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[4];
+    memcpy(directions, gUnknown_083753C8, 4);
+    direction = sub_805CD60(mapObject, 10);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 3];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805E174, sub_805E198, gUnknown_083753CC);
+
+u8 sub_805E1B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E1E4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, 0x30);
+        sprite->data1 = 2;
+    }
+    return 0;
+}
+
+u8 sub_805E208(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805E234(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[5];
+    memcpy(directions, gUnknown_083753DC, 5);
+    direction = sub_805CD60(mapObject, 0);
+    if (direction == 0)
+    {
+        direction = directions[mapObject->mapobj_unk_18];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 0;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805E278, sub_803E29C, gUnknown_083753E4);
+
+u8 sub_805E2BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E2E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8064820(sprite, 0x30);
+        sprite->data1 = 2;
+    }
+    return 0;
+}
+
+u8 sub_805E30C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 3;
+    }
+    return 0;
+}
+
+u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[5];
+    memcpy(directions, gUnknown_083753F4, 5);
+    direction = sub_805CD60(mapObject, 0);
+    if (direction == 0)
+    {
+        direction = directions[mapObject->mapobj_unk_18];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 0;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805E37C, sub_805E3A0, gUnknown_083753FC);
+
+u8 sub_805E3C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805E3D4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+    direction = gUnknown_0836DC09[mapObject->animPattern];
+    if (mapObject->mapobj_unk_21 != 0)
+    {
+        direction = GetOppositeDirection(direction);
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805E40C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 v0;
+    u8 goSpeed0AnimId;
+    if (mapObject->mapobj_unk_21 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+    }
+    v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    if (v0 == 1)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    }
+    if (v0 != 0)
+    {
+        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 3;
+    return 1;
+}
+
+u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+u8 sub_805E4EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprite, u8 *directionSequence)
+{
+    u8 v0;
+    u8 goSpeed0AnimId;
+    if (mapObject->mapobj_unk_21 == 3 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+    }
+    FieldObjectSetDirection(mapObject, directionSequence[mapObject->mapobj_unk_21]);
+    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    if (v0 == 1)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, directionSequence[mapObject->mapobj_unk_21]);
+        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        v0 = sub_805FF20(mapObject, mapObject->placeholder18);
+    }
+    if (v0 != 0)
+    {
+        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+fieldmap_object_cb(sub_805E5DC, sub_805E600, gUnknown_0837540C);
+
+u8 sub_805E620(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375418, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E668, sub_805E68C, gUnknown_0837541C);
+
+u8 sub_805E6AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375428, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E6F4, sub_805E718, gUnknown_0837542C);
+
+u8 sub_805E738(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375438, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E780, sub_805E7A4, gUnknown_0837543C);
+
+u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375448, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+
+
+fieldmap_object_cb(sub_805E80C, sub_805E830, gUnknown_0837544C);
+
+u8 sub_805E850(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375458, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E898, sub_805E8BC, gUnknown_0837545C);
+
+u8 sub_805E8DC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375468, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E924, sub_805E948, gUnknown_0837546C);
+
+u8 sub_805E968(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375240, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805E9B0, sub_805E9D4, gUnknown_08375478);
+
+u8 sub_805E9F4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375484, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EA3C, sub_805EA60, gUnknown_08375488);
+
+u8 sub_805EA80(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375494, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EAC8, sub_805EAEC, gUnknown_08375498);
+
+u8 sub_805EB0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754A4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EB54, sub_805EB78, gUnknown_083754A8);
+
+u8 sub_805EB98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754B4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EBE0, sub_805EC04, gUnknown_083754B8);
+
+u8 sub_805EC24(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754C4, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EC6C, sub_805EC90, gUnknown_083754C8);
+
+u8 sub_805ECB0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754D4, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805ECF8, sub_805ED1C, gUnknown_083754D8);
+
+u8 sub_805ED3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754E4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805ED84, sub_805EDA8, gUnknown_083754E8);
+
+u8 sub_805EDC8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_083754F4, 4);
+    if (mapObject->mapobj_unk_21 == 1 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 2;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EE10, sub_805EE34, gUnknown_083754F8);
+
+u8 sub_805EE54(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375504, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EE9C, sub_805EEC0, gUnknown_08375508);
+
+u8 sub_805EEE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375514, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EF28, sub_805EF4C, gUnknown_08375518);
+
+u8 sub_805EF6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375524, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805EFB4, sub_805EFD8, gUnknown_08375528);
+
+u8 sub_805EFF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375534, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F040, sub_805F064, gUnknown_08375538);
+
+u8 sub_805F084(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375544, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F0CC, sub_805F0F0, gUnknown_08375548);
+
+u8 sub_805F110(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375554, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F158, sub_805F17C, gUnknown_08375558);
+
+u8 sub_805F19C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375564, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F1E4, sub_805F208, gUnknown_08375568);
+
+u8 sub_805F228(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375574, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+}
+
+fieldmap_object_cb(sub_805F270, sub_805F294, gUnknown_08375578);
+
+u8 sub_805F2B4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    memcpy(directions, gUnknown_08375584, 4);
+    if (mapObject->mapobj_unk_21 == 2 && mapObject->coords1.x == mapObject->coords2.x)
+    {
+        mapObject->mapobj_unk_21 = 3;
+    }
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+};
+
+void sub_805F2FC(struct Sprite *sprite);
+void FieldObjectCB_TreeDisguise(struct Sprite *sprite);
+void FieldObjectCB_MountainDisguise(struct Sprite *sprite);
+void sub_805F8E0(struct Sprite *sprite);
+void FieldObjectCB_Hidden1(struct Sprite *sprite);
+void sub_805FB20(struct Sprite *sprite);
+void sub_805FB90(struct Sprite *sprite);
+void sub_805FC00(struct Sprite *sprite);
+void sub_805FC70(struct Sprite *sprite);
+
+asm(".section .text_b\n");
+
+void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 0;
+    mapObject->mapobj_bit_6 = 0;
+    mapObject->mapobj_bit_7 = 0;
+    mapObject->mapobj_unk_1C = 0xff;
+    sprite->data1 = 0;
+}
+
+extern const u8 gUnknown_083755F4[9];
+extern const u8 gUnknown_083755FD[9];
+extern const u8 gUnknown_08375606[9];
+extern const u8 gUnknown_0837560F[9];
+extern const u8 gUnknown_08375618[9];
+extern const u8 gUnknown_08375621[9];
+extern const u8 gUnknown_0837562A[9];
+extern const u8 gUnknown_08375633[9];
+extern const u8 gUnknown_0837563C[9];
+extern const u8 gUnknown_08375645[9];
+extern const u8 gUnknown_0837564E[9];
+extern const u8 gUnknown_08375657[9];
+extern const u8 gUnknown_08375660[9];
+extern const u8 gUnknown_08375669[9];
+extern const u8 gUnknown_08375672[9];
+
+u8 FieldObjectDirectionToImageAnimId(u8 direction)
+{
+    return gUnknown_083755F4[direction];
+}
+
+u8 get_go_image_anim_num(u8 direction)
+{
+    return gUnknown_083755FD[direction];
+}
+
+u8 get_go_fast_image_anim_num(u8 direction)
+{
+    return gUnknown_08375606[direction];
+}
+
+u8 get_go_faster_image_anim_num(u8 direction)
+{
+    return gUnknown_0837560F[direction];
+}
+
+u8 sub_805FD78(u8 direction)
+{
+    return gUnknown_08375618[direction];
+}
+
+u8 sub_805FD88(u8 direction)
+{
+    return gUnknown_08375621[direction];
+}
+
+u8 sub_805FD98(u8 direction)
+{
+    return gUnknown_0837562A[direction];
+}
+
+u8 unref_sub_805FDA8(u8 direction)
+{
+    return gUnknown_08375633[direction];
+}
+
+u8 sub_805FDB8(u8 direction)
+{
+    return gUnknown_0837563C[direction];
+}
+
+u8 sub_805FDC8(u8 direction)
+{
+    return gUnknown_08375645[direction];
+}
+
+u8 sub_805FDD8(u8 direction)
+{
+    return gUnknown_0837564E[direction];
+}
+
+u8 sub_805FDE8(u8 direction)
+{
+    return gUnknown_08375657[direction];
+}
+
+u8 sub_805FDF8(u8 direction)
+{
+    return gUnknown_08375660[direction];
+}
+
+u8 sub_805FE08(u8 direction)
+{
+    return gUnknown_08375669[direction];
+}
+
+u8 get_run_image_anim_num(u8 direction)
+{
+    return gUnknown_08375672[direction];
+}
+
+void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        if (sprite->animCmdIndex == 1)
+        {
+            sprite->animCmdIndex = 2;
+        } else if (sprite->animCmdIndex == 3)
+        {
+            sprite->animCmdIndex = 0;
+        }
+        SeekSpriteAnim(sprite, sprite->animCmdIndex);
+    }
+}
+
+void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    u8 animCmdIndex;
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        animCmdIndex = 3;
+        if (sprite->animCmdIndex < 2)
+        {
+            animCmdIndex = 1;
+        }
+        SeekSpriteAnim(sprite, animCmdIndex);
+    }
+}
+
+u8 sub_805FE90(s16 a0, s16 a1, s16 a2, s16 a3)
+{
+    if (a0 > a2)
+    {
+        return DIR_WEST;
+    } else if (a0 < a2)
+    {
+        return DIR_EAST;
+    } else if (a1 > a3)
+    {
+        return DIR_NORTH;
+    } else
+    {
+        return DIR_SOUTH;
+    }
+}
+
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
+{
+    mapObject->animPattern = animPattern;
+    mapObject->mapobj_unk_21 = 0;
+    mapObject->animId = 0;
+    gSprites[mapObject->spriteId].callback = gUnknown_0836DA88[animPattern];
+    gSprites[mapObject->spriteId].data1 = 0;
+}
+
+u8 npc_running_behaviour_by_direction(u8 direction)
+{
+    return gUnknown_0837567B[direction];
+}
+
+u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    MoveCoords(direction, &x, &y);
+    return npc_block_way(mapObject, x, y, direction);
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y);
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
+
+u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    {
+        return 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+    {
+        return 2;
+    } else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    {
+        return 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        return 3;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        return 4;
+    }
+    return 0;
+}
+
+u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    u8 flags;
+    flags = 0;
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    {
+        flags |= 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
+    {
+        flags |= 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        flags |= 4;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        flags |= 8;
+    }
+    return flags;
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+{
+    s16 minv;
+    s16 maxv;
+    if (mapObject->mapobj_unk_19 != 0)
+    {
+        minv = mapObject->coords1.x - (mapObject->mapobj_unk_19);
+        maxv = mapObject->coords1.x + (mapObject->mapobj_unk_19);
+        if (minv > x || maxv < x)
+        {
+            return 1;
+        }
+    }
+    if (mapObject->mapobj_unk_19b != 0)
+    {
+        minv = mapObject->coords1.y - (mapObject->mapobj_unk_19b);
+        maxv = mapObject->coords1.y + (mapObject->mapobj_unk_19b);
+        if (minv > y || maxv < y)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (gUnknown_08375684[direction - 1](mapObject->mapobj_unk_1E) || gUnknown_08375694[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+{
+    struct MapObject *mapObject2;
+    u8 i;
+    for (i=0; i<16; i++)
+    {
+        mapObject2 = &gMapObjects[i];
+        if (mapObject2->active && mapObject2 != mapObject)
+        {
+            if ((mapObject2->coords2.x != x || mapObject2->coords2.y != y) && (mapObject2->coords3.x != x || mapObject2->coords3.y != y))
+            {
+                continue;
+            }
+            if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+bool8 sub_8060234(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        if (gSprites[gMapObjects[mapObjectId].spriteId].data7 & 2)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void sub_8060288(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        gSprites[gMapObjects[mapObjectId].spriteId].data7 |= 4;
+    }
+}
+
+void MoveCoords(u8 direction, s16 *x, s16 *y)
+{
+    *x += gDirectionToVector[direction].x;
+    *y += gDirectionToVector[direction].y;
+}
+
+void unref_sub_80602F8(u8 direction, s16 *x, s16 *y)
+{
+    *x += gDirectionToVector[direction].x << 4;
+    *y += gDirectionToVector[direction].y << 4;
+}
+
+void sub_8060320(u8 direction, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
+{
+    if (gDirectionToVector[direction].x > 0)
+    {
+        *x += deltaX;
+    }
+    if (gDirectionToVector[direction].x < 0)
+    {
+        *x -= deltaX;
+    }
+    if (gDirectionToVector[direction].y > 0)
+    {
+        *y += deltaY;
+    }
+    if (gDirectionToVector[direction].y < 0)
+    {
+        *y -= deltaY;
+    }
+}
+
+void sub_8060388(s16 x1, s16 y1, s16 *x2, s16 *y2)
+{
+    *x2 = (x1 - gSaveBlock1.pos.x) << 4;
+    *y2 = (y1 - gSaveBlock1.pos.y) << 4;
+    *x2 -= gUnknown_0300489C;
+    *y2 -= gUnknown_03004898;
+}
+
+void sub_80603CC(s16 x1, s16 y1, s16 *x2, s16 *y2)
+{
+    s16 x3;
+    s16 y3;
+    x3 = -gUnknown_0300489C - gUnknown_03004880.unk10;
+    y3 = -gUnknown_03004898 - gUnknown_03004880.unk14;
+    if (gUnknown_03004880.unk10 > 0)
+    {
+        x3 += 0x10;
+    }
+    if (gUnknown_03004880.unk10 < 0)
+    {
+        x3 -= 0x10;
+    }
+    if (gUnknown_03004880.unk14 > 0)
+    {
+        y3 += 0x10;
+    }
+    if (gUnknown_03004880.unk14 < 0)
+    {
+        y3 -= 0x10;
+    }
+    *x2 = ((x1 - gSaveBlock1.pos.x) << 4) + x3;
+    *y2 = ((y1 - gSaveBlock1.pos.y) << 4) + y3;
+}
+
+void sub_8060470(s16 *x, s16 *y, s16 dx, s16 dy)
+{
+    sub_80603CC(*x, *y, x, y);
+    *x += dx;
+    *y += dy;
+}
+
+void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
+{
+    *x = 0;
+    *y = 0;
+    if (gUnknown_03004880.unk10 > 0)
+    {
+        (*x)++;
+    }
+    if (gUnknown_03004880.unk10 < 0)
+    {
+        (*x)--;
+    }
+    if (gUnknown_03004880.unk14 > 0)
+    {
+        (*y)++;
+    }
+    if (gUnknown_03004880.unk14 < 0)
+    {
+        (*y)--;
+    }
+}
+
+void FieldObjectMoveDestCoords(struct MapObject *mapObject, u8 direction, s16 *x, s16 *y)
+{
+    *x = mapObject->coords2.x;
+    *y = mapObject->coords2.y;
+    MoveCoords(direction, x, y);
+}
+
+bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_1 || mapObject->mapobj_bit_6)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectIsSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6 && mapObject->mapobj_unk_1C != 0xff)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject))
+    {
+        return TRUE;
+    }
+    UnfreezeMapObject(mapObject);
+    mapObject->mapobj_unk_1C = specialAnimId;
+    mapObject->mapobj_bit_6 = 1;
+    mapObject->mapobj_bit_7 = 0;
+    gSprites[mapObject->spriteId].data2 = 0;
+    return FALSE;
+}
+
+void FieldObjectForceSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    FieldObjectSetSpecialAnim(mapObject, specialAnimId);
+}
+
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        FieldObjectClearAnim(mapObject);
+    }
+}
+
+void FieldObjectClearAnim(struct MapObject *mapObject)
+{
+    mapObject->mapobj_unk_1C = 0xFF;
+    mapObject->mapobj_bit_6 = 0;
+    mapObject->mapobj_bit_7 = 0;
+    gSprites[mapObject->spriteId].data1 = 0;
+    gSprites[mapObject->spriteId].data2 = 0;
+}
+
+bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+        return mapObject->mapobj_bit_7;
+    return 0x10;
+}
+
+bool8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *mapObject)
+{
+    u8 specialAnimStatus;
+    specialAnimStatus = FieldObjectCheckIfSpecialAnimFinishedOrInactive(mapObject);
+    if (specialAnimStatus != 0 && specialAnimStatus != 0x10)
+    {
+        FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    }
+    return specialAnimStatus;
+}
+
+u8 FieldObjectGetSpecialAnim(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        return mapObject->mapobj_unk_1C;
+    }
+    return 0xFF;
+}
+
+extern void DoGroundEffects_OnSpawn(struct MapObject *mapObject, struct Sprite *sprite);
+extern void DoGroundEffects_OnBeginStep(struct MapObject *mapObject, struct Sprite *sprite);
+extern void DoGroundEffects_OnFinishStep(struct MapObject *mapObject, struct Sprite *sprite);
+extern void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite);
+void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite);
+void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite);
+void FieldObjectUpdateSubpriority(struct MapObject *mapObject, struct Sprite *sprite);
+
+void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback)(struct MapObject *, struct Sprite *))
+{
+    DoGroundEffects_OnSpawn(mapObject, sprite);
+    sub_80634A0(mapObject, sprite);
+    if (FieldObjectIsSpecialAnimActive(mapObject))
+    {
+        FieldObjectExecSpecialAnim(mapObject, sprite);
+    } else
+    {
+        if (!mapObject->mapobj_bit_8)
+        {
+            while (callback(mapObject, sprite));
+        }
+    }
+    DoGroundEffects_OnBeginStep(mapObject, sprite);
+    DoGroundEffects_OnFinishStep(mapObject, sprite);
+    npc_obj_transfer_image_anim_pause_flag(mapObject, sprite);
+    sub_80634D0(mapObject, sprite);
+    FieldObjectUpdateSubpriority(mapObject, sprite);
+}
+
+
+const u8 gUnknown_083756C8[5];
+
+u8 GetFaceDirectionAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756C8, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756CD[5];
+
+u8 GetSimpleGoAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756CD, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756D2[5];
+
+u8 GetGoSpeed0AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756D2, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756D7[5];
+
+u8 sub_8060744(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756D7, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756DC[5];
+
+u8 d2s_08064034(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756DC, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756E1[5];
+
+u8 sub_806079C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756E1, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756E6[5];
+
+u8 sub_80607C8(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756E6, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756EB[5];
+
+u8 sub_80607F4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756EB, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756F0[5];
+
+u8 GetJumpLedgeAnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756F0, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756F5[5];
+
+u8 sub_806084C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756F5, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756FA[5];
+
+u8 sub_8060878(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756FA, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_083756FF[5];
+
+u8 sub_80608A4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_083756FF, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375704[5];
+
+u8 sub_80608D0(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375704, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375709[5];
+
+u8 GetStepInPlaceDelay32AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375709, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837570E[5];
+
+u8 GetStepInPlaceDelay16AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837570E, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375713[5];
+
+u8 GetStepInPlaceDelay8AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375713, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375718[5];
+
+u8 GetStepInPlaceDelay4AnimId(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375718, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+u8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
+{
+    return FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
+}
+
+const u8 gUnknown_0837571D[5];
+
+u8 sub_80609D8(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837571D, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375722[5];
+
+u8 sub_8060A04(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375722, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375727[5];
+
+u8 sub_8060A30(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375727, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837572C[5];
+
+u8 sub_8060A5C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837572C, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375731[5];
+
+u8 sub_8060A88(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375731, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375736[5];
+
+u8 sub_8060AB4(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375736, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837573B[5];
+
+u8 sub_8060AE0(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837573B, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375740[5];
+
+u8 sub_8060B0C(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375740, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_08375745[5];
+
+u8 sub_8060B38(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_08375745, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+const u8 gUnknown_0837574A[5];
+
+u8 sub_8060B64(u8 index)
+{
+    u8 directions[5];
+    memcpy(directions, gUnknown_0837574A, 5);
+    if (index >= 5)
+    {
+        index = 0;
+    }
+    return directions[index];
+}
+
+u8 GetOppositeDirection(u8 direction)
+{
+    u8 directions[8];
+    memcpy(directions, gUnknown_0837574F, 8);
+    if (direction == 0 || direction > 8)
+    {
+        return direction;
+    }
+    return directions[direction - 1];
+}
+
+int zffu_offset_calc(u8 a0, u8 a1)
+{
+    return gUnknown_08375757[a0 - 1][a1 - 1];
+}
+
+#ifdef NONMATCHING
+u8 state_to_direction(u8 a0, u8 a1, u8 a2)
+{
+    int zffuOffset;
+    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.")
+    if (a1 == 0 || a2 == 0 || a1 > 4 || a2 > 4)
+    {
+        return 0;
+    }
+    zffuOffset = zffu_offset_calc(a1, a2);
+    return gUnknown_08375767[a0 - 1][zffuOffset - 1];
+}
+#else
+__attribute__((naked))
+u8 state_to_direction(u8 a0, u8 a1, u8 a2)
+{
+    asm(".syntax unified\n\
+	push {r4,lr}\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r0, r1, 0\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	cmp r1, 0\n\
+	beq _08060BFC\n\
+	cmp r2, 0\n\
+	beq _08060BFC\n\
+	cmp r1, 0x4\n\
+	bhi _08060BFC\n\
+	cmp r2, 0x4\n\
+	bls _08060C00\n\
+_08060BFC:\n\
+	movs r0, 0\n\
+	b _08060C12\n\
+_08060C00:\n\
+	adds r1, r2, 0\n\
+	bl zffu_offset_calc\n\
+	ldr r2, _08060C18 @ =gUnknown_08375767\n\
+	lsls r1, r4, 2\n\
+	subs r1, 0x5\n\
+	adds r0, r1\n\
+	adds r0, r2\n\
+	ldrb r0, [r0]\n\
+_08060C12:\n\
+	pop {r4}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_08060C18: .4byte gUnknown_08375767\n\
+.syntax divided\n");
+}
+#endif
+
+void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_bit_7 = 1;
+    }
+}
+
+bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_unk_1C = 0xFF;
+        sprite->data2 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
+{
+    mapObject->mapobj_unk_1C = animId;
+    sprite->data2 = 0;
+}
+
+void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    npc_coords_shift_still(mapObject);
+    sub_805FE64(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    sprite->animPaused = 1;
+    sprite->data2 = 1;
+}
+
+u8 sub_8060CE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_SOUTH);
+    return 1;
+}
+
+u8 sub_8060CF0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_NORTH);
+    return 1;
+}
+
+u8 sub_8060D00(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_WEST);
+    return 1;
+}
+
+u8 sub_8060D10(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_EAST);
+    return 1;
+}
+
+void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    FieldObjectSetDirection(mapObject, direction);
+    MoveCoords(direction, &x, &y);
+    npc_coords_shift(mapObject, x, y);
+    oamt_npc_ministep_reset(sprite, direction, a2);
+    sprite->animPaused = 0;
+    mapObject->mapobj_bit_2 = 1;
+    sprite->data2 = 1;
+}
+
+extern u8 (*const gUnknown_083759C0[5])(u8);
+
+void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+{
+    u8 (*functions[5])(u8);
+    memcpy(functions, gUnknown_083759C0, sizeof(gUnknown_083759C0));
+    sub_8060D20(mapObject, sprite, direction, a2);
+    sub_805FE28(mapObject, sprite, functions[a2](mapObject->mapobj_unk_18));
+}
+
+void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_8060D20(mapObject, sprite, direction, 1);
+    sub_805FE28(mapObject, sprite, get_run_image_anim_num(mapObject->mapobj_unk_18));
+}
+
+bool8 obj_npc_ministep(struct Sprite *);
+
+bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (obj_npc_ministep(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = 1;
+        sprite->animPaused = 1;
+        return 1;
+    }
+    return 0;
+}
+
+void sub_8060E68(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    s16 x;
+    s16 y;
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    FieldObjectSetDirection(mapObject, direction);
+    MoveCoords(direction, &x, &y);
+    npc_coords_shift(mapObject, x, y);
+    sub_806467C(sprite, direction);
+    sprite->animPaused = 0;
+    mapObject->mapobj_bit_2 = 1;
+    sprite->data2 = 1;
+}
+
+void sub_8060ED8(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_8060E68(mapObject, sprite, direction);
+    sub_805FE28(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+}
+
+bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_806468C(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = 1;
+        sprite->animPaused = 1;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8060F5C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8060F3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_SOUTH);
+    return sub_8060F5C(mapObject, sprite);
+}
+
+bool8 sub_8060F5C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8060F9C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8060F7C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_NORTH);
+    return sub_8060F9C(mapObject, sprite);
+}
+
+bool8 sub_8060F9C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8060FDC(struct MapObject *, struct Sprite *);
+
+bool8 sub_8060FBC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_WEST);
+    return sub_8060FDC(mapObject, sprite);
+}
+
+bool8 sub_8060FDC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806101C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8060FFC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_EAST);
+    return sub_806101C(mapObject, sprite);
+}
+
+bool8 sub_806101C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806105C(struct MapObject *, struct Sprite *);
+
+bool8 sub_806103C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_SOUTH, 0);
+    return sub_806105C(mapObject, sprite);
+}
+
+bool8 sub_806105C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806109C(struct MapObject *, struct Sprite *);
+
+bool8 sub_806107C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_NORTH, 0);
+    return sub_806109C(mapObject, sprite);
+}
+
+bool8 sub_806109C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80610DC(struct MapObject *, struct Sprite *);
+
+bool8 sub_80610BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_WEST, 0);
+    return sub_80610DC(mapObject, sprite);
+}
+
+bool8 sub_80610DC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806111C(struct MapObject *, struct Sprite *);
+
+bool8 sub_80610FC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_EAST, 0);
+    return sub_806111C(mapObject, sprite);
+}
+
+bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
 }
 

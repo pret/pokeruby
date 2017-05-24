@@ -25,16 +25,6 @@ extern s16 gUnknown_0300059A;
 extern u8 gUnknown_0300059C;
 extern void (*gUnknown_030005A0)(void);
 
-struct CameraSomething
-{
-    void (*callback)(struct CameraSomething *);
-    u32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-};
-
 extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
