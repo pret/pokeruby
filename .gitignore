@@ -35,5 +35,5 @@ types_*.taghl
 *.dump
 *.sa*
 Thumbs.db
-build/*
-.idea/codeStyleSettings.xml
+build/
+.idea/
