@@ -4517,6 +4517,9 @@ bool8 sub_8061358(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 bool8 sub_80613D4(struct MapObject *, struct Sprite *);
+bool8 sub_806142C(struct MapObject *, struct Sprite *);
+bool8 sub_8061484(struct MapObject *, struct Sprite *);
+bool8 sub_80614DC(struct MapObject *, struct Sprite *);
 
 bool8 sub_80613A8(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -4533,4 +4536,102 @@ bool8 sub_80613D4(struct MapObject *mapObject, struct Sprite *sprite)
         return TRUE;
     }
     return FALSE;
+}
+
+bool8 sub_8061400(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_NORTH, 2, 0);
+    return sub_806142C(mapObject, sprite);
+}
+
+bool8 sub_806142C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061458(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_WEST, 2, 0);
+    return sub_8061484(mapObject, sprite);
+}
+
+bool8 sub_8061484(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80614B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_EAST, 2, 0);
+    return sub_80614DC(mapObject, sprite);
+}
+
+bool8 sub_80614DC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8061508(struct Sprite *sprite, u16 duration)
+{
+    sprite->data2 = 1;
+    sprite->data3 = duration;
+}
+
+bool8 sub_8061510(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data3--;
+    if (!sprite->data3)
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806152C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061508(sprite, 1);
+    return sub_8061510(mapObject, sprite);
+}
+
+bool8 sub_806154C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061508(sprite, 2);
+    return sub_8061510(mapObject, sprite);
+}
+
+bool8 sub_806156C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061508(sprite, 4);
+    return sub_8061510(mapObject, sprite);
+}
+
+bool8 sub_806158C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061508(sprite, 8);
+    return sub_8061510(mapObject, sprite);
+}
+
+bool8 sub_80615AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061508(sprite, 16);
+    return sub_8061510(mapObject, sprite);
 }
