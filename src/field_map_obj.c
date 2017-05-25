@@ -13,6 +13,7 @@
 #include "rng.h"
 #include "sprite.h"
 #include "field_camera.h"
+#include "metatile_behavior.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
@@ -3195,7 +3196,7 @@ u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite
     return 1;
 }
 
-extern u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, u8);
+extern u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 
 u8 sub_805F364(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -3203,7 +3204,7 @@ u8 sub_805F364(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return 0;
     }
-    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), 0);
+    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), NULL);
 }
 
 u8 sub_805F3C4(struct MapObject *mapObject, struct Sprite *sprite)
@@ -3251,12 +3252,90 @@ u8 sub_805F438(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, u8 *a3
 }
 #endif
 
-void FieldObjectCB_TreeDisguise(struct Sprite *sprite);
-void FieldObjectCB_MountainDisguise(struct Sprite *sprite);
-
 asm(".section .text_fmocb2_c\n");
-void sub_805F8E0(struct Sprite *sprite);
-void FieldObjectCB_Hidden1(struct Sprite *sprite);
+
+fieldmap_object_cb(sub_805F8E0, sub_805F904, gUnknown_083755C0);
+
+u8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    {
+        return 0;
+    }
+    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), MetatileBehavior_IsPokeGrass);
+}
+
+u8 sub_805F9F8(struct MapObject *, struct Sprite *);
+
+void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[sprite->data0];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
+    {
+        FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+        mapObject->mapobj_unk_1A = FieldEffectStart(0x1c);
+        mapObject->mapobj_unk_21 = 1;
+        sprite->data7 ++;
+    }
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805F9F8);
+}
+
+u8 sub_805F9F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    return 0;
+}
+
+void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[sprite->data0];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
+    {
+        FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+        mapObject->mapobj_unk_1A = FieldEffectStart(0x1d);
+        mapObject->mapobj_unk_21 = 1;
+        sprite->data7 ++;
+    }
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805F9F8);
+}
+
+u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite);
+extern u8 (*const gUnknown_083755CC[])(struct MapObject *, struct Sprite *);
+
+void FieldObjectCB_Hidden1(struct Sprite *sprite)
+{
+    if (sprite->data7 == 0)
+    {
+        gMapObjects[sprite->data0].mapobj_bit_26 = 1;
+        sprite->subspriteMode = 2;
+        sprite->oam.priority = 3;
+        sprite->data7 ++;
+    }
+    meta_step(&gMapObjects[sprite->data0], sprite, sub_805FAD8);
+}
+
+u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_083755CC[sprite->data1](mapObject, sprite);
+}
+
+u8 sub_805FAF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    return 0;
+}
+
+u8 sub_805FB04(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 0;
+    }
+    return 0;
+}
+
 void sub_805FB20(struct Sprite *sprite);
 void sub_805FB90(struct Sprite *sprite);
 void sub_805FC00(struct Sprite *sprite);
