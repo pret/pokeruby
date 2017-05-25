@@ -17,7 +17,7 @@ install:
   - cd $HOME
   - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
   - tar xf devkitARM*.tar.bz2
-  - travis_retry git clone https://github.com/YamaArashi/agbcc.git
+  - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
 script:
   - cd $TRAVIS_BUILD_DIR
