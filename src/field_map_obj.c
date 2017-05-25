@@ -4902,3 +4902,129 @@ bool8 sub_80616AC(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+void sub_80616CC(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animId, u16 duration)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    sub_805FE28(mapObject, sprite, animId);
+    sprite->animPaused = 0;
+    sprite->data2 = 1;
+    sprite->data3 = duration;
+}
+
+bool8 sub_8061714(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data3--;
+    if (sprite->data3 == 0)
+    {
+        sprite->data2 = 2;
+        sprite->animPaused = 1;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806173C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sprite->data3 & 1)
+    {
+        sprite->animDelayCounter++;
+    }
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061778(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, get_go_image_anim_num(DIR_SOUTH), 32);
+    return sub_806173C(mapObject, sprite);
+}
+
+bool8 sub_80617B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_NORTH, get_go_image_anim_num(DIR_NORTH), 32);
+    return sub_806173C(mapObject, sprite);
+}
+
+bool8 sub_80617E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_WEST, get_go_image_anim_num(DIR_WEST), 32);
+    return sub_806173C(mapObject, sprite);
+}
+
+bool8 sub_8061820(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_EAST, get_go_image_anim_num(DIR_EAST), 32);
+    return sub_806173C(mapObject, sprite);
+}
+
+bool8 sub_8061858(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, get_go_image_anim_num(DIR_SOUTH), 16);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061890(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_NORTH, get_go_image_anim_num(DIR_NORTH), 16);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_80618C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_WEST, get_go_image_anim_num(DIR_WEST), 16);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061900(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_EAST, get_go_image_anim_num(DIR_EAST), 16);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061938(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, get_go_fast_image_anim_num(DIR_SOUTH), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061970(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_NORTH, get_go_fast_image_anim_num(DIR_NORTH), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_80619A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_WEST, get_go_fast_image_anim_num(DIR_WEST), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_80619E0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_EAST, get_go_fast_image_anim_num(DIR_EAST), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061A18(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, get_go_faster_image_anim_num(DIR_SOUTH), 4);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061A50(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_NORTH, get_go_faster_image_anim_num(DIR_NORTH), 4);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061A88(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_WEST, get_go_faster_image_anim_num(DIR_WEST), 4);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8061AC0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_EAST, get_go_faster_image_anim_num(DIR_EAST), 4);
+    return sub_8061714(mapObject, sprite);
+}
