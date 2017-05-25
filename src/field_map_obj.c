@@ -5332,10 +5332,10 @@ void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct 
     sprite->data2 = 1;
 }
 
-u8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->placeholder18, sprite->animNum);
-    return 0;
+    return FALSE;
 }
 
 bool8 sub_8064864(struct Sprite *);
@@ -5696,3 +5696,56 @@ bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
+bool8 sub_80625B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, gUnknown_0836DC09[mapObject->animPattern]);
+    return TRUE;
+}
+
+bool8 sub_80625C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, 0x14);
+    return FALSE;
+}
+
+bool8 sub_80625D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_25 = 0;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80625E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_25 = 1;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80625F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_12 = 1;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062608(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_12 = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062634(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 = 1;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 = 0;
+    sprite->data2 = 1;
+    return TRUE;
+}
