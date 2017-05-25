@@ -6,138 +6,7 @@
 
 	.text
 
-	thumb_func_start sub_805F2FC
-sub_805F2FC: @ 805F2FC
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x2E
-	ldrsh r2, [r1, r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, _0805F318 @ =gMapObjects
-	adds r0, r2
-	ldr r2, _0805F31C @ =sub_805F320
-	bl meta_step
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805F318: .4byte gMapObjects
-_0805F31C: .4byte sub_805F320
-	thumb_func_end sub_805F2FC
-
-	thumb_func_start sub_805F320
-sub_805F320: @ 805F320
-	push {r4,lr}
-	ldr r3, _0805F33C @ =gUnknown_08375588
-	movs r4, 0x30
-	ldrsh r2, [r1, r4]
-	lsls r2, 2
-	adds r2, r3
-	ldr r2, [r2]
-	bl _call_via_r2
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805F33C: .4byte gUnknown_08375588
-	thumb_func_end sub_805F320
-
-	thumb_func_start mss_npc_reset_oampriv3_1_unk2_unk3
-mss_npc_reset_oampriv3_1_unk2_unk3: @ 805F340
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl npc_reset
-	adds r4, 0x21
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _0805F358
-	bl player_get_direction_lower_nybble
-	strb r0, [r4]
-_0805F358:
-	movs r0, 0x1
-	strh r0, [r5, 0x30]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end mss_npc_reset_oampriv3_1_unk2_unk3
-
-	thumb_func_start sub_805F364
-sub_805F364: @ 805F364
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	adds r7, r1, 0
-	ldr r2, _0805F388 @ =gMapObjects
-	ldr r3, _0805F38C @ =gPlayerAvatar
-	ldrb r1, [r3, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1C]
-	cmp r0, 0xFF
-	beq _0805F384
-	ldrb r0, [r3, 0x3]
-	cmp r0, 0x2
-	bne _0805F390
-_0805F384:
-	movs r0, 0
-	b _0805F3B8
-	.align 2, 0
-_0805F388: .4byte gMapObjects
-_0805F38C: .4byte gPlayerAvatar
-_0805F390:
-	ldr r5, _0805F3C0 @ =gUnknown_08375594
-	bl player_get_x22
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 22
-	adds r4, r5
-	bl player_get_direction_upper_nybble
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r4, [r4]
-	adds r0, r6, 0
-	adds r1, r7, 0
-	movs r3, 0
-	bl _call_via_r4
-	lsls r0, 24
-	lsrs r0, 24
-_0805F3B8:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805F3C0: .4byte gUnknown_08375594
-	thumb_func_end sub_805F364
-
-	thumb_func_start sub_805F3C4
-sub_805F3C4: @ 805F3C4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F3E2
-	ldrb r0, [r4]
-	movs r1, 0x3
-	negs r1, r1
-	ands r1, r0
-	strb r1, [r4]
-	movs r0, 0x1
-	strh r0, [r5, 0x30]
-_0805F3E2:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805F3C4
-
+.ifndef NONMATCHING
 	thumb_func_start sub_805F3EC
 sub_805F3EC: @ 805F3EC
 	movs r0, 0
@@ -268,6 +137,7 @@ _0805F4D2:
 	.align 2, 0
 _0805F4EC: .4byte gUnknown_0836DC09
 	thumb_func_end sub_805F438
+.endif
 
 	thumb_func_start sub_805F4F0
 sub_805F4F0: @ 805F4F0
@@ -756,6 +626,8 @@ _0805F8C0:
 	.align 2, 0
 _0805F8DC: .4byte gUnknown_0836DC09
 	thumb_func_end oac_hopping
+
+.section .text_fmocb2_asm
 
 	thumb_func_start sub_805F8E0
 sub_805F8E0: @ 805F8E0

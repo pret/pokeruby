@@ -3182,9 +3182,79 @@ u8 sub_805F2B4(struct MapObject *mapObject, struct Sprite *sprite)
     return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
 };
 
-void sub_805F2FC(struct Sprite *sprite);
+fieldmap_object_cb(sub_805F2FC, sub_805F320, gUnknown_08375588);
+
+u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    if (mapObject->mapobj_unk_21 == 0)
+    {
+        mapObject->mapobj_unk_21 = player_get_direction_lower_nybble();
+    }
+    sprite->data1 = 1;
+    return 1;
+}
+
+extern u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, u8);
+
+u8 sub_805F364(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    {
+        return 0;
+    }
+    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), 0);
+}
+
+u8 sub_805F3C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = 0;
+        sprite->data1 = 1;
+    }
+    return 0;
+}
+
+#ifdef NONMATCHING
+
+u8 sub_805F3EC(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, u8 *a3(u8))
+{
+    return 0;
+}
+
+u8 sub_805F3F0(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, u8 *a3(u8))
+{
+    int direction;
+    direction = state_to_direction(gUnknown_0836DC09[mapObject->animPattern], mapObject->mapobj_unk_21, a2);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 2;
+    return 1;
+}
+
+u8 sub_805F438(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, u8 *a3(u8))
+{
+    s16 x;
+    s16 y;
+    int direction;
+    direction = state_to_direction(gUnknown_0836DC09[mapObject->animPattern], mapObject->mapobj_unk_21, a2);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(direction));
+    if (!npc_block_way(mapObject, x, y, direction) || (a3 != NULL && !a3(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = 1;
+    sprite->data1 = 2;
+    return 1;
+}
+#endif
+
 void FieldObjectCB_TreeDisguise(struct Sprite *sprite);
 void FieldObjectCB_MountainDisguise(struct Sprite *sprite);
+
+asm(".section .text_fmocb2_c\n");
 void sub_805F8E0(struct Sprite *sprite);
 void FieldObjectCB_Hidden1(struct Sprite *sprite);
 void sub_805FB20(struct Sprite *sprite);
@@ -4082,10 +4152,10 @@ int zffu_offset_calc(u8 a0, u8 a1)
 }
 
 #ifdef NONMATCHING
-u8 state_to_direction(u8 a0, u8 a1, u8 a2)
+int state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     int zffuOffset;
-    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.")
+    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.");
     if (a1 == 0 || a2 == 0 || a1 > 4 || a2 > 4)
     {
         return 0;
@@ -4095,7 +4165,7 @@ u8 state_to_direction(u8 a0, u8 a1, u8 a2)
 }
 #else
 __attribute__((naked))
-u8 state_to_direction(u8 a0, u8 a1, u8 a2)
+int state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     asm(".syntax unified\n\
 	push {r4,lr}\n\
