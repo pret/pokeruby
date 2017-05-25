@@ -3336,12 +3336,64 @@ u8 sub_805FB04(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-void sub_805FB20(struct Sprite *sprite);
-void sub_805FB90(struct Sprite *sprite);
-void sub_805FC00(struct Sprite *sprite);
-void sub_805FC70(struct Sprite *sprite);
+fieldmap_object_cb(sub_805FB20, sub_805FB44, gUnknown_083755D0);
 
-asm(".section .text_b\n");
+u8 sub_805FB64(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805FB90, sub_805FBB4, gUnknown_083755D8);
+
+u8 sub_805FBD4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805FC00, sub_805FC24, gUnknown_083755E0);
+
+u8 sub_805FC44(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return 1;
+}
+
+fieldmap_object_cb(sub_805FC70, sub_805FC94, gUnknown_083755E8);
+
+u8 sub_805FCB4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    mapObject->mapobj_bit_13 = 1;
+    sprite->data1 = 1;
+    return 1;
+}
+
+u8 sub_805FCE8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 2;
+        return 1;
+    }
+    return 0;
+}
+
+u8 sub_805FD08(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = 0;
+    return 0;
+}
+
+void sub_805FC70(struct Sprite *sprite);
 
 void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
 {
