@@ -14,6 +14,7 @@
 #include "sprite.h"
 #include "field_camera.h"
 #include "metatile_behavior.h"
+#include "map_constants.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
@@ -5028,3 +5029,670 @@ bool8 sub_8061AC0(struct MapObject *mapObject, struct Sprite *sprite)
     sub_80616CC(mapObject, sprite, DIR_EAST, get_go_faster_image_anim_num(DIR_EAST), 4);
     return sub_8061714(mapObject, sprite);
 }
+
+bool8 sub_8061B18(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061AF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_SOUTH, 2);
+    return sub_8061B18(mapObject, sprite);
+}
+
+bool8 sub_8061B18(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061B58(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061B38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_NORTH, 2);
+    return sub_8061B58(mapObject, sprite);
+}
+
+bool8 sub_8061B58(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061B98(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061B78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_WEST, 2);
+    return sub_8061B98(mapObject, sprite);
+}
+
+bool8 sub_8061B98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061BD8(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061BB8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_EAST, 2);
+    return sub_8061BD8(mapObject, sprite);
+}
+
+bool8 sub_8061BD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061C18(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061BF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_SOUTH, 3);
+    return sub_8061C18(mapObject, sprite);
+}
+
+bool8 sub_8061C18(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061C58(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061C38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_NORTH, 3);
+    return sub_8061C58(mapObject, sprite);
+}
+
+bool8 sub_8061C58(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061C98(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061C78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_WEST, 3);
+    return sub_8061C98(mapObject, sprite);
+}
+
+bool8 sub_8061C98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061CD8(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061CB8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_EAST, 3);
+    return sub_8061CD8(mapObject, sprite);
+}
+
+bool8 sub_8061CD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061D18(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061CF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_SOUTH, 4);
+    return sub_8061D18(mapObject, sprite);
+}
+
+bool8 sub_8061D18(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061D58(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061D38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_NORTH, 4);
+    return sub_8061D58(mapObject, sprite);
+}
+
+bool8 sub_8061D58(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061D98(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061D78(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_WEST, 4);
+    return sub_8061D98(mapObject, sprite);
+}
+
+bool8 sub_8061D98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8061DD8(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061DB8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_go_anim(mapObject, sprite, DIR_EAST, 4);
+    return sub_8061DD8(mapObject, sprite);
+}
+
+bool8 sub_8061DD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061E18(struct MapObject *, struct Sprite *);
+
+bool8 do_run_south_anim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_run_anim(mapObject, sprite, DIR_SOUTH);
+    return sub_8061E18(mapObject, sprite);
+}
+
+bool8 sub_8061E18(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061E58(struct MapObject *, struct Sprite *);
+
+bool8 do_run_north_anim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_run_anim(mapObject, sprite, DIR_NORTH);
+    return sub_8061E58(mapObject, sprite);
+}
+
+bool8 sub_8061E58(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061E98(struct MapObject *, struct Sprite *);
+
+bool8 do_run_west_anim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_run_anim(mapObject, sprite, DIR_WEST);
+    return sub_8061E98(mapObject, sprite);
+}
+
+bool8 sub_8061E98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061ED8(struct MapObject *, struct Sprite *);
+
+bool8 do_run_east_anim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    do_run_anim(mapObject, sprite, DIR_EAST);
+    return sub_8061ED8(mapObject, sprite);
+}
+
+bool8 sub_8061ED8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum)
+{
+    obj_anim_image_set_and_seek(sprite, animNum, 0);
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data2 = 1;
+}
+
+u8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->placeholder18, sprite->animNum);
+    return 0;
+}
+
+bool8 sub_8064864(struct Sprite *);
+
+bool8 sub_8061F3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064864(sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8061F5C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_806113C(mapObject, sprite, direction, 1, 0);
+    StartSpriteAnim(sprite, sub_805FD88(direction));
+}
+
+bool8 sub_8061FB0(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061F90(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061F5C(mapObject, sprite, DIR_SOUTH);
+    return sub_8061FB0(mapObject, sprite);
+}
+
+bool8 sub_8061FB0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061340(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        mapObject->mapobj_bit_5 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8061FF8(struct MapObject *, struct Sprite *);
+
+bool8 sub_8061FD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061F5C(mapObject, sprite, DIR_NORTH);
+    return sub_8061FF8(mapObject, sprite);
+}
+
+bool8 sub_8061FF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061340(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        mapObject->mapobj_bit_5 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062040(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062020(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061F5C(mapObject, sprite, DIR_WEST);
+    return sub_8062040(mapObject, sprite);
+}
+
+bool8 sub_8062040(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061340(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        mapObject->mapobj_bit_5 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062088(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062068(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8061F5C(mapObject, sprite, DIR_EAST);
+    return sub_8062088(mapObject, sprite);
+}
+
+bool8 sub_8062088(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061340(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        mapObject->mapobj_bit_5 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80620B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 objectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP_PETALBURG_CITY, MAP_ID_PETALBURG_CITY, &objectId))
+    {
+        an_look_any(mapObject, sprite, sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y));
+    }
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_806210C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 objectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP_PETALBURG_CITY, MAP_ID_PETALBURG_CITY, &objectId))
+    {
+        an_look_any(mapObject, sprite, GetOppositeDirection(sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y)));
+    }
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062170(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_9 = 1;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062180(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_9 = 0;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062190(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 1, 2);
+    return sub_80621BC(mapObject, sprite);
+}
+
+bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_80621E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_NORTH, 1, 2);
+    return sub_8062214(mapObject, sprite);
+}
+
+bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062240(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_WEST, 1, 2);
+    return sub_806226C(mapObject, sprite);
+}
+
+bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062298(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_EAST, 1, 2);
+    return sub_80622C4(mapObject, sprite);
+}
+
+bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_80622F0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 0, 0);
+    return sub_806231C(mapObject, sprite);
+}
+
+bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062348(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_NORTH, 0, 0);
+    return sub_8062374(mapObject, sprite);
+}
+
+bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_80623A0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_WEST, 0, 0);
+    return sub_80623CC(mapObject, sprite);
+}
+
+bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_80623F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_EAST, 0, 0);
+    return sub_8062424(mapObject, sprite);
+}
+
+bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062450(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 0, 2);
+    return sub_806247C(mapObject, sprite);
+}
+
+bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061358(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_80624A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_NORTH, 0, 2);
+    return sub_80624D4(mapObject, sprite);
+}
+
+bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061358(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062500(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_WEST, 0, 2);
+    return sub_806252C(mapObject, sprite);
+}
+
+bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061358(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite);
+
+bool8 sub_8062558(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    maybe_shadow_1(mapObject, sprite, DIR_EAST, 0, 2);
+    return sub_8062584(mapObject, sprite);
+}
+
+bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061358(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
