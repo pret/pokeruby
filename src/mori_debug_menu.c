@@ -6,7 +6,7 @@
 #include "link.h"
 #include "main.h"
 #include "menu.h"
-#include "pokeblock.h.h"
+#include "pokeblock.h"
 #include "start_menu.h"
 #include "string_util.h"
 

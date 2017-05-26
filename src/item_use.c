@@ -23,7 +23,7 @@
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokeblock.h.h"
+#include "pokeblock.h"
 #include "pokemon_item_effect.h"
 #include "pokemon_menu.h"
 #include "rom4.h"

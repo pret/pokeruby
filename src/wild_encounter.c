@@ -6,7 +6,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "pokeblock.h.h"
+#include "pokeblock.h"
 #include "rng.h"
 #include "roamer.h"
 #include "rom4.h"
