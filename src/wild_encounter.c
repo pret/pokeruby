@@ -1,7 +1,9 @@
+#include "fieldmap.h"
+#include "pokeblock.h.h"
+#include "tv.h"
 #include "global.h"
 #include "wild_encounter.h"
 #include "abilities.h"
-#include "asm.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
@@ -2921,9 +2923,6 @@ const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMo
 
 
 extern u16 gRoute119WaterTileData[];
-extern struct WildPokemonHeader gWildMonHeaders[];
-extern struct Pokemon gEnemyParty[6];
-extern struct Pokemon gPlayerParty[6];
 extern u16 gScriptResult;
 extern struct WildPokemon gWildFeebasRoute119Data;
 extern u8 Event_RepelWoreOff[];

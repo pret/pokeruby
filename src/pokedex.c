@@ -1,7 +1,8 @@
+
+#include "unknown_task.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
-#include "asm.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "m4a.h"
@@ -15,6 +16,9 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "rom4.h"
+#include "pokedex_cry_screen.h"
+#include "pokedex_area_screen.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon
@@ -92,22 +96,9 @@ extern u8 gUnknown_08E96B58[];
 
 extern struct PokedexEntry gPokedexEntries[];
 
-extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
-extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-extern void remove_some_task(void);
-extern u8 sub_8091E3C(void);
-extern void DisableNationalPokedex(void);
-extern void sub_805469C(void);
-extern u16 HoennToNationalOrder(u16);
-extern u16 NationalToHoennOrder(u16);
 extern u16 gPokedexOrder_Alphabetical[];
 extern u16 gPokedexOrder_Weight[];
 extern u16 gPokedexOrder_Height[];
-
-u16 NationalPokedexNumToSpecies(u16);
-
-//  asm/pokedex_area_screen
-void ShowPokedexAreaScreen(u16 species, u8 *string);
 
 void ResetPokedex(void)
 {

@@ -1,5 +1,9 @@
+#include "battle_message.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
+#include "util.h"
 #include "global.h"
-#include "asm.h"
+#include "pokemon.h"
 #include "battle.h"
 #include "data2.h"
 #include "event_data.h"
@@ -9,7 +13,6 @@
 #include "link.h"
 #include "main.h"
 #include "m4a.h"
-#include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
 #include "rtc.h"
@@ -55,14 +58,10 @@ struct SpindaSpot
 };
 
 extern u8 gPlayerPartyCount;
-extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
-extern struct Pokemon gEnemyParty[6];
 extern struct BattlePokemon gBattleMons[4];
-extern u8 * const gItemEffectTable[];
 extern u8 gUnknown_02024A60;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
-extern struct EvolutionData gEvolutionTable[];
 extern u16 gSpeciesToHoennPokedexNum[];
 extern u16 gSpeciesToNationalPokedexNum[];
 extern u16 gHoennToNationalOrder[];
@@ -79,11 +78,7 @@ extern s8 gNatureStatTable[][5];
 extern s8 gUnknown_082082FE[][3];
 extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
-extern struct BaseStats gBaseStats[];
-extern u32 gBitTable[];
-extern u32 gExperienceTables[8][101];
 extern u32 gTMHMLearnsets[][2];
-extern const u16 *gLevelUpLearnsets[];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
 extern const u16 gHMMoves[];
@@ -99,8 +94,6 @@ extern u8 gUnknown_083FFDD3[];
 extern u8 gUnknown_083FEE5D[];
 extern u8 gUnknown_083FEE92[];
 extern u8 *gUnknown_08400F58[];
-
-u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -1191,8 +1184,6 @@ void current_map_music_set__default_for_battle(u16 song)
         PlayNewMapMusic(sub_8040728());
 }
 
-const u16 *species_and_otid_get_pal(u16, u32, u32);
-
 const u16 *pokemon_get_pal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
@@ -1220,8 +1211,6 @@ const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
     else
         return gMonPaletteTable[species].data;
 }
-
-const struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 const struct SpritePalette *sub_8040990(struct Pokemon *mon)
 {
@@ -1269,8 +1258,6 @@ s8 sub_8040A7C(u32 personality, u8 a2)
     u8 nature = GetNatureFromPersonality(personality);
     return gUnknown_083F7E28[nature * 5 + a2];
 }
-
-bool8 IsOtherTrainer(u32, u8 *);
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {

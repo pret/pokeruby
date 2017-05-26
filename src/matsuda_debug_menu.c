@@ -1,6 +1,8 @@
+#include "contest_link_80C2020.h"
+#include "contest_link_80C857C.h"
+#include "unknown_task.h"
 #include "global.h"
 #include "matsuda_debug_menu.h"
-#include "asm.h"
 #include "contest.h"
 #include "data2.h"
 #include "link.h"
@@ -26,8 +28,6 @@ extern u8 gUnknown_0203869B;
 extern u8 gContestPlayerMonIndex;
 extern u16 gScriptContestCategory;
 extern u16 gScriptContestRank;
-
-extern struct Window gMenuWindow;
 
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
@@ -84,8 +84,6 @@ static void sub_80AA10C(void);
 static void sub_80AA5BC(u8);
 static void sub_80AA614(u8, u8);
 static void sub_80AAD08(struct Sprite *, s8);
-extern void sub_80AB47C(void);
-extern int sub_80B2A7C(u8);  //Don't know return type size
 
 u8 unref_sub_80A9B28(void)
 {

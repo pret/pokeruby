@@ -1,5 +1,5 @@
+#include "pokemon_menu.h"
 #include "global.h"
-#include "asm.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "palette.h"

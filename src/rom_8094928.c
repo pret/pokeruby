@@ -1,20 +1,15 @@
+#include "party_menu.h"
+#include "rom_8077ABC.h"
 #include "global.h"
-#include "pokemon.h"
+#include "rom_8094928.h"
 
 #define UNK_201606C_ARRAY (unk_2000000 + 0x1606C) // lazy define but whatever.
 
 extern u8 unk_2000000[];
 
 extern struct PokemonStorage gPokemonStorage;
-extern u8 IsLinkDoubleBattle(void);
-extern u8 IsDoubleBattle(void);
-extern u8 battle_get_side_with_given_state(u8);
-extern u8 battle_side_get_owner(u8);
-void sub_8094998(u8[3], u8);
-void sub_8094A74(u8[3], u8, u32);
 
 extern u8 gUnknown_02038470[3];
-extern u8 sub_803FBBC(void);
 extern u16 gUnknown_02024A6A[];
 
 void unref_sub_8094928(struct PokemonStorage *ptr)

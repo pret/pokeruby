@@ -1,5 +1,7 @@
+#include "battle.h"
+#include "battle_message.h"
 #include "global.h"
-#include "asm.h"
+#include "battle_anim_81258BC.h"
 #include "text.h"
 #include "menu_cursor.h"
 
@@ -14,8 +16,6 @@ extern const u8 gUnknown_08400D15[];
 extern void* gUnknown_03004330[];
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
-
-void bx_battle_menu_t6_2(void);
 
 #if ENGLISH
 #define SUB_812BB10_TILE_DATA_OFFSET 440

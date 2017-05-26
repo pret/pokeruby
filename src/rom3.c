@@ -1,5 +1,13 @@
+#include "battle_anim.h"
+#include "battle_ai.h"
+#include "rom_8094928.h"
+#include "battle_811DA74.h"
+#include "util.h"
+#include "battle_anim_81258BC.h"
+#include "battle_anim_8137220.h"
+#include "cable_club.h"
 #include "global.h"
-#include "asm.h"
+#include "rom3.h"
 #include "battle.h"
 #include "items.h"
 #include "link.h"
@@ -13,7 +21,6 @@ extern u8 unk_2000000[];
 #define EWRAM_15000 ((u8 *)(unk_2000000 + 0x15000))
 
 extern u16 gBattleTypeFlags;
-extern const u32 gBitTable[];
 extern u16 gBattleWeather;
 extern struct BattlePokemon gBattleMons[];
 
@@ -48,32 +55,6 @@ extern u8 gUnknown_03004290[];
 extern u8 gUnknown_030042B0[];
 extern void (*gUnknown_030042D4)(void);
 extern void (*gUnknown_03004330[])(void);
-
-extern void sub_800BF28(void);
-extern void sub_8083C50(u8);
-extern void nullsub_41(void);
-extern void nullsub_91(void);
-extern void battle_anim_clear_some_data(void);
-extern void ClearBattleMonForms(void);
-extern void BattleAI_HandleItemUseBeforeAISetup(void);
-extern void sub_8094978(u8, int);
-extern void sub_800BA78(void);
-extern void sub_800B9A8(void);
-extern void sub_800BD54(void);
-extern void sub_8010800(void);
-extern void sub_812B468(void);
-extern void sub_8137224(void);
-extern void sub_802BF74(void);
-extern void sub_8032AE0(void);
-extern void sub_8037510(void);
-extern void sub_811DA78(void);
-extern void dp01_prepare_buffer_wireless_probably(u8 a, u16, u8 *c);
-extern void sub_800C1A8(u8);
-extern void sub_800C47C(u8);
-extern void sub_8007F4C(void);
-extern u8 sub_8007ECC(void);
-extern void sub_80155A4();
-extern u8 sub_8018324();
 
 void sub_800B858(void)
 {

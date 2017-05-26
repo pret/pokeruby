@@ -1,5 +1,13 @@
+#include "mail_data.h"
+#include "pokemon_summary_screen.h"
+#include "pokemon_menu.h"
+#include "rom_8077ABC.h"
+#include "battle.h"
+#include "battle_party_menu.h"
+#include "rom_8094928.h"
+#include "pokemon_item_effect.h"
 #include "global.h"
-#include "asm.h"
+#include "party_menu.h"
 #include "data2.h"
 #include "menu.h"
 #include "pokemon.h"
@@ -88,75 +96,6 @@ extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[DATA_COUNT];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
-extern const u8 *const gItemEffectTable[];
-
-extern bool8 IsDoubleBattle(void);
-extern void SetUpBattlePokemonMenu(u8);
-extern void sub_808B0C0(u8);
-extern u8 GiveMailToMon(struct Pokemon *, u16);
-extern bool8 ItemIsMail(u16);
-extern void ClearMailStruct(struct MailStruct *);
-extern u8 GiveMailToMon2(struct Pokemon *, struct MailStruct *);
-extern void TakeMailFromMon(struct Pokemon *);
-extern u8 TakeMailFromMon2(struct Pokemon *);
-extern u32 CanMonLearnTMHM(struct Pokemon *, u8);
-extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
-extern void sub_808B564();
-extern u8 sub_809FA30(void);
-extern void sub_808B508(u8);
-extern void sub_8032638();
-extern u8 sub_8094C20();
-extern bool8 ExecuteTableBasedItemEffect_();
-extern u8 GetMonStatusAndPokerus();
-
-u8 sub_806CA38(u8);
-void task_pc_turn_off();
-static void sub_806E884(u8 taskId);
-void sub_806F8AC(u8 taskId);
-void sub_806FB0C(u8 taskId);
-void PartyMenuUpdateLevelOrStatus(struct Pokemon *, u8);
-bool8 ExecuteTableBasedItemEffect__(u8, u16, u8);
-void sub_80701DC(u8 taskId);
-void DoRecoverPP(u8);
-void Task_RareCandy1(u8);
-void Task_RareCandy2(u8);
-void Task_RareCandy3(u8);
-void sub_806D538();
-void sub_806D5A4(void);
-void sub_806E8D0(u8 taskId, u16 b, TaskFunc c);
-void GetMedicineItemEffectMessage(u16);
-void sub_8070A20();
-void sub_8070848(u8 taskId);
-void sub_8070968();
-void party_menu_link_mon_held_item_object(u8);
-void Task_ConfirmGiveHeldItem(u8);
-void DisplayGiveHeldItemMessage(u8, u16, u8);
-void SetHeldItemIconVisibility();
-void DisplayTakeHeldItemMessage(u8, u16, u8);
-void Task_ConfirmTakeHeldMail(u8);
-void Task_TeamMonTMMove(u8);
-void Task_TeamMonTMMove2(u8);
-void Task_TeamMonTMMove3(u8);
-void Task_TeamMonTMMove4(u8);
-void sub_806F358(u8);
-void sub_806F390(u8);
-void sub_806F44C(u8);
-void TMMoveUpdateMoveSlot(u8);
-void StopTryingToTeachMove_806F614(u8);
-void StopTryingToTeachMove_806F67C(u8);
-void StopTryingToTeachMove_806F6B4(u8);
-void sub_806FB44(u8);
-void sub_8070C54();
-void SetMonIconAnim();
-u8 GetMonIconSpriteId_maybe();
-void PartyMenuDoPrintHP(u8, int, u16, u16);
-void PartyMenuClearLevelStatusTilemap();
-void PartyMenuPrintMonLevelOrStatus();
-u8 GetItemEffectType();
-bool8 IsBlueYellowRedFlute(u16);
-void TryPrintPartyMenuMonNickname();
-void sub_8070088(u8);
-
 
 /*
 void sub_806AEDC(void)

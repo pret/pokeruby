@@ -15,5 +15,9 @@ struct Decoration
 
 extern struct Decoration gDecorations[0x77];
 extern void sub_80FF394(u16 unkr0, u16 unkr1, u16 unkr2);
+void DoPlayerPCDecoration(u8);
+void sub_80FEC94(u8 arg0);
+void sub_80FECB8(u8 arg0);
+void sub_80FECE0(u8 arg0);
 
 #endif // GUARD_DECORATION_H

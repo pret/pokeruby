@@ -1,6 +1,7 @@
+#include "fieldmap.h"
+#include "main.h"
 #include "global.h"
 #include "braille_puzzles.h"
-#include "asm.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"

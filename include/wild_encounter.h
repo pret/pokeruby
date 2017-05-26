@@ -1,6 +1,8 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
+extern struct WildPokemonHeader gWildMonHeaders[];
+
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 a, u16 b);
 void RockSmashWildEncounter(void);

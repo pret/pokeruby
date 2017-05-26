@@ -1,7 +1,11 @@
+#include "fieldmap.h"
+#include "field_ground_effect.h"
+#include "field_effect_helpers.h"
+#include "tv.h"
+#include "party_menu.h"
+#include "rotating_gate.h"
 #include "global.h"
 #include "field_player_avatar.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "bike.h"
 #include "event_data.h"
 #include "field_effect.h"
@@ -29,41 +33,14 @@ static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c);
 static void PlayerAllowForcedMovementIfMovingSameDirection(void);
 static u8 TryDoMetatileBehaviorForcedMovement(void);
 static u8 GetForcedMovementByMetatileBehavior(void);
-u8 ForcedMovement_None(void);
-u8 ForcedMovement_Slip(void);
-u8 sub_8058AAC(void);
-u8 sub_8058AC4(void);
-u8 sub_8058ADC(void);
-u8 sub_8058AF4(void);
-u8 sub_8058B0C(void);
-u8 sub_8058B24(void);
-u8 sub_8058B3C(void);
-u8 sub_8058B54(void);
-u8 ForcedMovement_SlideSouth(void);
-u8 ForcedMovement_SlideNorth(void);
-u8 ForcedMovement_SlideWest(void);
-u8 ForcedMovement_SlideEast(void);
-u8 sub_8058C04(void);
-u8 sub_8058C10(void);
-u8 ForcedMovement_MuddySlope(void);
 static void MovePlayerNotOnBike(u8 a, u16 b);
 static u8 CheckMovementInputNotOnBike(u8 a);
-void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
-void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
-void sub_8058D0C(u8 direction, u16 heldKeys);
 static u8 CheckForPlayerAvatarCollision(u8 a);
 static u8 sub_8058EF0(s16 a, s16 b, u8 c);
 static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c);
 static u8 sub_8058F6C(s16 a, s16 b, u8 c);
 static void check_acro_bike_metatile(int unused1, int unused2, u8 c, u8 *d);
 static void DoPlayerAvatarTransition(void);
-void nullsub_49(struct MapObject *a);
-void PlayerAvatarTransition_Normal(struct MapObject *a);
-void PlayerAvatarTransition_MachBike(struct MapObject *a);
-void PlayerAvatarTransition_AcroBike(struct MapObject *a);
-void PlayerAvatarTransition_Surfing(struct MapObject *a);
-void PlayerAvatarTransition_Underwater(struct MapObject *a);
-void sub_80591F4(struct MapObject *a);
 static bool8 player_is_anim_in_certain_ranges(void);
 static bool8 sub_80592A4(void);
 static bool8 PlayerIsAnimActive(void);
@@ -72,32 +49,8 @@ static void PlayerNotOnBikeCollide(u8 a);
 static void PlayCollisionSoundIfNotFacingWarp(u8 a);
 static void sub_8059D60(struct MapObject *a);
 static void StartStrengthAnim(u8 a, u8 b);
-u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c);
-u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c);
-u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c);
 static void sub_8059F94(void);
-u8 sub_805A000(struct Task *task, struct MapObject *mapObject);
 static void sub_805A06C(void);
-u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A100(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A178(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A1B8(struct Task *task, struct MapObject *mapObject);
-u8 Fishing1(struct Task *task);
-u8 Fishing2(struct Task *task);
-u8 Fishing3(struct Task *task);
-u8 Fishing4(struct Task *task);
-u8 Fishing5(struct Task *task);
-u8 Fishing6(struct Task *task);
-u8 Fishing7(struct Task *task);
-u8 Fishing8(struct Task *task);
-u8 Fishing9(struct Task *task);
-u8 Fishing10(struct Task *task);
-u8 Fishing11(struct Task *task);
-u8 Fishing12(struct Task *task);
-u8 Fishing13(struct Task *task);
-u8 Fishing14(struct Task *task);
-u8 Fishing15(struct Task *task);
-u8 Fishing16(struct Task *task);
 
 static bool8 (*const gUnknown_0830FB58[])(u8) =
 {

@@ -1,7 +1,9 @@
+#include "intro_credits_graphics.h"
+#include "unknown_task.h"
+#include "hall_of_fame.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "intro.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "libgncmultiboot.h"
@@ -19,9 +21,6 @@
 #include "title_screen.h"
 #include "trig.h"
 
-extern void *species_and_otid_get_pal(/*TODO: arg types*/);
-extern void sub_8143680(int, u8);
-
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
@@ -33,16 +32,9 @@ extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u16 gInterfacePal_PokeBall[];
-extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
-extern const struct SpriteSheet gIntro2MaySpriteSheet;
-extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
-extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
-extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
-extern const struct SpritePalette gIntro2SpritePalettes[];
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
-extern const u16 gUnknown_08393E64[];
 extern void *const gUnknown_0840B5A0[];
 
 //--------------------------------------------------

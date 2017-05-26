@@ -1,6 +1,10 @@
+#include "fldeff_80C5CD4.h"
+#include "battle_transition.h"
+#include "fieldmap.h"
+#include "secret_base.h"
+#include "field_fadetransition.h"
 #include "global.h"
 #include "battle_setup.h"
-#include "asm.h"
 #include "battle.h"
 #include "data2.h"
 #include "event_data.h"
@@ -32,9 +36,6 @@
 extern u16 gScriptResult;
 
 extern void (*gUnknown_0300485C)(void);
-
-extern struct Pokemon gEnemyParty[];
-extern struct Pokemon gPlayerParty[];
 
 EWRAM_DATA u16 gTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;

@@ -1,7 +1,7 @@
+#include "main.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "sound.h"
-#include "asm.h"
 #include "battle.h"
 #include "m4a.h"
 #include "songs.h"
@@ -13,7 +13,7 @@ struct Fanfare
     u16 duration;
 };
 
-// Hack: different prototype than definition
+// FIXME: different prototype than definition
 u32 SpeciesToCryId(u32);
 
 extern u16 gBattleTypeFlags;

@@ -1,5 +1,9 @@
+#include "contest_link_80C2020.h"
+#include "daycare.h"
+#include "contest_painting.h"
+#include "debug.h"
+#include "choose_party.h"
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
 #include "berry.h"
 #include "contest.h"
@@ -21,17 +25,6 @@
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
-
-extern void sub_80C46EC(void);
-extern void sub_80C4740(void);
-extern void sub_80C48F4(void);
-extern void sub_80B2A7C(u8);
-extern void sub_80AAF30(void); // matsuda debug?
-extern u8 sub_80B2C4C(u8, u8);
-extern void CB2_ContestPainting(void);
-extern void sub_8042044(struct Pokemon *mon, u16, u8);
-extern void sub_8121E10(void);
-extern void sub_8121E34(void);
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct SpritePalette *sub_80409C8(u16, u32, u32);

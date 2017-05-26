@@ -54,5 +54,12 @@ void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 b_side_obj__get_some_boolean(u8 a);
 void sub_8076034(u8, u8);
 bool8 IsContest(void);
+void battle_anim_clear_some_data(void);
+void move_anim_8072740(struct Sprite *sprite);
+void DestroyAnimVisualTask(u8 task);
+void DestroyAnimVisualTask(u8 task);
+bool8 b_side_obj__get_some_boolean(u8);
+u8 IsContest();
+
 
 #endif

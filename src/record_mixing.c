@@ -1,6 +1,13 @@
+#include "cable_club.h"
+#include "secret_base.h"
+#include "mauville_old_man.h"
+#include "battle_tower.h"
+#include "tv.h"
+#include "mystery_event_script.h"
+#include "daycare.h"
+#include "fldeff_80C5CD4.h"
 #include "global.h"
 #include "record_mixing.h"
-#include "asm.h"
 #include "dewford_trend.h"
 #include "event_data.h"
 #include "link.h"
@@ -51,9 +58,6 @@ struct PlayerRecords {
 
 extern struct PlayerRecords unk_2008000;
 extern struct PlayerRecords unk_2018000;
-
-void sub_80BC300();
-void sub_80C045C();
 
 void RecordMixing_PrepareExchangePacket(void)
 {

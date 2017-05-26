@@ -1,3 +1,4 @@
+#include "rom_8077ABC.h"
 #include "global.h"
 #include "battle_anim.h"
 #include "sprite.h"
@@ -14,20 +15,6 @@ extern s32 gUnknown_0202F7B8;
 extern u16 gUnknown_0202F7BC;
 extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
-
-extern u8 obj_id_for_side_relative_to_move(u8 side);
-extern void DestroyAnimVisualTask(u8 task);
-extern u8 battle_get_side_with_given_state(u8 state);
-extern u8 battle_side_get_owner(u8 side);
-extern void oamt_set_x3A_32(struct Sprite *sprite, void(*callback)(struct Sprite*));
-extern void sub_8078458(struct Sprite *sprite);
-extern void move_anim_8072740(struct Sprite *sprite);
-extern void sub_8078A5C(struct Sprite *sprite);
-extern void sub_80784A8(struct Sprite *sprite);
-extern void sub_8078E70(u8 sprite, u8);
-extern void obj_id_set_rotscale(u8 sprite, int, int, u16);
-extern void sub_8078F40(u8 sprite);
-extern void sub_8078F9C(u8 sprite);
 
 static void sub_80A7EF0(u8 task);
 static void sub_80A808C(u8 task);

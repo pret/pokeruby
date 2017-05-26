@@ -1,5 +1,8 @@
+#include "item_menu.h"
+#include "field_fadetransition.h"
+#include "decoration.h"
 #include "global.h"
-#include "asm.h"
+#include "player_pc.h"
 #include "field_weather.h"
 #include "item.h"
 #include "items.h"
@@ -21,25 +24,6 @@ enum
     ITEM_ID,
     QUANTITY,
 };
-
-extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
-extern void DoPlayerPCDecoration(u8);
-extern void BuyMenuFreeMemory(void);
-extern void DestroyVerticalScrollIndicator(u8);
-extern u8 sub_813AF3C(void);
-extern void sub_813AF78(void);
-extern void sub_813B108(u8);
-extern void sub_813B174(u8);
-extern void sub_80A6A30(void);
-extern u8 sub_807D770(void);
-extern void sub_813AE6C(u8, u8);
-extern void sub_813AD58(u16);
-extern void sub_813AE0C(u8);
-extern void sub_80F996C(u8);
-extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
-extern void sub_80F98DC(int);
-extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
-extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 
 extern u16 gNewGamePCItems[];
 
@@ -63,24 +47,6 @@ extern u8 gUnknown_08152C75;
 extern u32 gUnknown_08406288[];
 extern const struct MenuAction gUnknown_084062C0[];
 extern const struct YesNoFuncTable gUnknown_084062E0;
-
-void InitPlayerPCMenu(u8 taskId);
-void PlayerPCProcessMenuInput(u8 taskId);
-void InitItemStorageMenu(u8);
-void ItemStorageMenuPrint(u8 *);
-void ItemStorageMenuProcessInput(u8);
-void sub_813A280(u8);
-void sub_813A240(u8);
-void sub_813A4B4(u8);
-void sub_813A468(u8);
-void HandleQuantityRolling(u8);
-void sub_813A6FC(u8);
-void sub_813A794(u8);
-void sub_813A8F0(u8);
-void sub_813A984(u8);
-void sub_813A9EC(u8);
-void sub_813AA30(u8, u8);
-void sub_813ABE8(u8);
 
 void NewGameInitPCItems(void)
 {

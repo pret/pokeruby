@@ -1,6 +1,18 @@
+#include "decoration_inventory.h"
+#include "field_screen_effect.h"
+#include "field_map_obj.h"
+#include "script_movement.h"
+#include "field_fadetransition.h"
+#include "mystery_event_script.h"
+#include "contest_link_80C2020.h"
+#include "fieldmap.h"
+#include "field_specials.h"
+#include "shop.h"
+#include "party_menu.h"
+#include "field_tasks.h"
+#include "tv.h"
+#include "slot_machine.h"
 #include "global.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
@@ -35,9 +47,6 @@
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
-extern struct Pokemon gPlayerParty[6]; // 0x3004360
-extern struct Pokemon gEnemyParty[6]; // 0x30045C0
-
 extern u32 gUnknown_0202E8AC;
 extern u32 gUnknown_0202E8B0;
 extern u16 gUnknown_0202E8B4;
@@ -60,7 +69,6 @@ extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
 extern u8 *gStdScripts_End[];
 
-extern u8 * const gUnknown_083CE048[];
 extern struct Decoration gDecorations[];
 
 // This is defined in here so the optimizer can't see its value when compiling

@@ -1,5 +1,7 @@
+#include "party_menu.h"
+#include "pokemon_menu.h"
 #include "global.h"
-#include "asm.h"
+#include "fldeff_softboiled.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "songs.h"
@@ -61,10 +63,6 @@ extern u8 gLastFieldPokeMenuOpened;
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_0202E8F4;
-
-// Public
-bool8 SetUpFieldMove_SoftBoiled(void);
-void sub_8133D28(u8 taskid);
 
 // Static
 static void sub_8133D50(u8 taskId);

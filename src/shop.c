@@ -1,5 +1,10 @@
+#include "menu_helpers.h"
+#include "field_fadetransition.h"
+#include "item_menu.h"
+#include "tv.h"
+#include "unknown_task.h"
 #include "global.h"
-#include "asm.h"
+#include "shop.h"
 #include "decompress.h"
 #include "field_weather.h"
 #include "main.h"
@@ -34,26 +39,6 @@ extern u8 gBuyMenuFrame_Gfx[];
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
 extern u16 gUnknown_083CC710[2];
-
-extern void sub_80A6300(void);
-extern void sub_80BE3BC(void);
-extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
-extern u8 sub_807D770(void);
-extern void pal_fill_black(void);
-extern void sub_80B3764(int, int);
-extern void sub_80B37EC(void);
-extern void sub_80B40E8(u8);
-extern void BuyMenuDrawMapGraphics(void);
-extern void sub_80F944C(void);
-extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
-extern void sub_80F979C(u32, u32); // unknown args
-
-void sub_80B2E38(u8);
-void HandleShopMenuQuit(u8);
-void sub_80B2FA0(u8);
-void BuyMenuDrawGraphics(void);
-void sub_80B3240(void);
-void sub_80B3270(void);
 
 u8 CreateShopMenu(bool8 var)
 {

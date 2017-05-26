@@ -1,8 +1,8 @@
+#include "field_effect_helpers.h"
 #include "global.h"
 #include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "fieldmap.h"
-#include "asm.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
@@ -15,30 +15,6 @@
 #include "field_camera.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
-
-
-extern void strange_npc_table_clear(void);
-extern void ClearPlayerAvatarInfo(void);
-extern void npc_load_two_palettes__no_record(u16, u8);
-extern void npc_load_two_palettes__and_record(u16, u8);
-extern void sub_8060388(s16, s16, s16 *, s16 *);
-extern void sub_80634D0(struct MapObject *, struct Sprite *);
-extern void pal_patch_for_npc(u16, u16);
-extern void CameraObjectReset1(void);
-
-void sub_805AAB0(void);
-u8 GetFieldObjectIdByLocalId(u8);
-u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
-u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
-void RemoveFieldObjectInternal(struct MapObject *);
-u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
-struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
-void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
-void sub_805BDF8(u16);
-u8 sub_805BE58(const struct SpritePalette *);
-u8 FindFieldObjectPaletteIndexByTag(u16);
 
 struct PairedPalettes
 {

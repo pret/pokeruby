@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 
 struct BardSound
 {

@@ -1,6 +1,6 @@
+#include "region_map.h"
 #include "global.h"
 #include "save_menu_util.h"
-#include "asm.h"
 #include "event_data.h"
 #include "menu.h"
 #include "pokedex.h"

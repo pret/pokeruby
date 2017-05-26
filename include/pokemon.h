@@ -381,6 +381,17 @@ struct PokemonStorage
     u8 unkArray[14];
 };
 
+extern const u8 *const gItemEffectTable[];
+extern u8 gTrainerClassToPicIndex[];
+extern u8 gTrainerClassToNameIndex[];
+extern const u32 gExperienceTables[8][101];
+extern const struct BaseStats gBaseStats[];
+extern struct EvolutionData gEvolutionTable[];
+extern const u16 *gLevelUpLearnsets[];
+extern u8 gUnknown_08208238[];
+extern u8 gUnknown_0820823C[];
+extern u8 gStatStageRatios[][2];
+
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 
@@ -463,4 +474,26 @@ void MonRestorePP(struct Pokemon *);
 u8 *sub_803F378(u16 itemId);
 
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
+u16 NationalToHoennOrder(u16);
+u16 SpeciesToNationalPokedexNum(u16);
+u16 HoennToNationalOrder(u16);
+void DrawSpindaSpots(u16, u32, u8 *, u8);
+u8 sub_803FBBC(void);
+u8 sub_803FC58(u16);
+void AdjustFriendship(struct Pokemon *, u8);
+u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
+void UpdatePartyPokerusTime(u16);
+u32 CanMonLearnTMHM(struct Pokemon *, u8);
+u8 sub_8040574(struct Pokemon *party);
+void ClearBattleMonForms(void);
+void sub_80408BC();
+void current_map_music_set__default_for_battle(u16);
+void *species_and_otid_get_pal(u32, u32, u32);
+const struct SpritePalette *sub_80409C8(u16, u32, u32);
+bool8 IsOtherTrainer(u32, u8 *);
+void sub_8040B8C(void);
+void SetWildMonHeldItem(void);
+u8 *sub_8040D08();
+int sub_8040D3C();
+
 #endif // GUARD_POKEMON_H

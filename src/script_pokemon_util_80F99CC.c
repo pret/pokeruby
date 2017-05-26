@@ -1,5 +1,9 @@
+#include "party_menu.h"
+#include "contest.h"
+#include "choose_party.h"
+#include "pokemon_summary_screen.h"
+#include "field_fadetransition.h"
 #include "global.h"
-#include "asm.h"
 #include "battle_party_menu.h"
 #include "data2.h"
 #include "palette.h"
@@ -19,22 +23,6 @@ extern u8 gUnknown_02038694;
 extern u16 gScriptResult;
 
 extern void (*gUnknown_0300485C)(void);
-
-extern void OpenPartyMenu(u8, u8);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34(); // undefined args
-extern u8 sub_806BD58(u8, u8);
-extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern u8 sub_806B58C(u8);
-extern u8 sub_80AE47C(struct Pokemon *party);
-extern void sub_806BC3C(u8, u8);
-extern u16 sub_806BD80(); // undefined args in battle_party_menu.c
-extern u8 sub_806CA38();
-extern void sub_8123138(u8);
-extern u8 sub_8040574(struct Pokemon *party);
-extern void sub_809D9F0(struct Pokemon *party, u8, u8, void *, u32);
 
 void sub_80F99CC(void)
 {

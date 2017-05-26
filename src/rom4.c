@@ -1,7 +1,19 @@
+#include "field_specials.h"
+#include "fieldmap.h"
+#include "tv.h"
+#include "secret_base.h"
+#include "map_name_popup.h"
+#include "field_fadetransition.h"
+#include "fldeff_flash.h"
+#include "unknown_task.h"
+#include "cable_club.h"
+#include "field_ground_effect.h"
+#include "field_tasks.h"
+#include "rotating_gate.h"
+#include "field_screen_effect.h"
+#include "time_events.h"
 #include "global.h"
 #include "rom4.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
@@ -48,11 +60,6 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
-struct UCoords32
-{
-    u32 x, y;
-};
-
 extern struct WarpData gUnknown_020297F0;
 extern struct WarpData gUnknown_020297F8;
 extern struct WarpData gUnknown_02029800;
@@ -96,8 +103,6 @@ extern u8 TradeRoom_TooBusyToNotice[];
 extern u8 TradeRoom_PromptToCancelLink[];
 extern u8 TradeRoom_TerminateLink[];
 extern u8 gUnknown_081A4508[];
-
-extern struct UCoords32 gUnknown_0821664C[];
 
 extern u8 (*gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
 extern u8 (*gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8);

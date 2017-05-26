@@ -1,3 +1,4 @@
+#include "hall_of_fame.h"
 #include "global.h"
 #include "event_data.h"
 #include "load_save.h"
@@ -5,8 +6,6 @@
 #include "pokemon.h"
 #include "rom4.h"
 #include "script_pokemon_80C4.h"
-
-extern void sub_8141F90(void);
 
 extern u8 gUnknown_02039324;
 

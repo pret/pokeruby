@@ -1,5 +1,6 @@
+#include "unknown_task.h"
 #include "global.h"
-#include "asm.h"
+#include "diploma.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"

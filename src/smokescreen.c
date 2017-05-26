@@ -1,9 +1,9 @@
+#include "util.h"
 #include "global.h"
 #include "data2.h"
 #include "decompress.h"
 #include "sprite.h"
 
-extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 
 static void sub_8046388(struct Sprite *);
 
