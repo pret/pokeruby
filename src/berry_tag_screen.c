@@ -263,30 +263,49 @@ static void sub_8146480(u8 taskid)
 static void sub_81464E4(void)
 {
     const struct Berry *berryInfo;
+#ifdef UNITS_IMPERIAL
     u32 size;
     s32 sizeMajor;
     s32 sizeMinor;
+#endif
+#if GERMAN
+    u8 buffer[16];
+#endif
 
     berryInfo = GetBerryInfo(gScriptItemId + OFFSET_7B + 1);
 
     ConvertIntToDecimalStringN(gStringVar1, gScriptItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     MenuPrint(gStringVar1, 12, 4);
 
+#if ENGLISH
     MenuPrint(berryInfo->name, 14, 4);
+#elif GERMAN
+    StringCopy(buffer, berryInfo->name);
+    StringAppend(buffer, gOtherText_Berry2);
+    MenuPrint(buffer, 14, 4);
+#endif
+
     MenuPrint(berryInfo->description1, 4, 14);
     MenuPrint(berryInfo->description2, 4, 16);
 
+#ifdef UNITS_IMPERIAL
     size = (berryInfo->size * 1000) / 254;
     if (size % 10 >= 5)
         size += 10;
     sizeMinor = (size % 100) / 10;
     sizeMajor = size / 100;
+#endif
 
     MenuPrint(gOtherText_Size, 11, 7);
     if (berryInfo->size != 0)
     {
+#ifdef UNITS_IMPERIAL
         ConvertIntToDecimalStringN(gStringVar1, sizeMajor, STR_CONV_MODE_LEFT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, sizeMinor, STR_CONV_MODE_LEFT_ALIGN, 2);
+#else
+        ConvertIntToDecimalStringN(gStringVar1, berryInfo->size / 10, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, berryInfo->size % 10, STR_CONV_MODE_LEFT_ALIGN, 2);
+#endif
         MenuPrint(gContestStatsText_Unknown1, 16, 7);
     }
     else
