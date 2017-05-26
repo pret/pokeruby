@@ -1,7 +1,7 @@
-#include "field_effect.h"
 #include "global.h"
 #include "script_menu.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "menu.h"
 #include "palette.h"
 #include "script.h"

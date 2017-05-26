@@ -1,6 +1,6 @@
-#include "fieldmap.h"
 #include "global.h"
 #include "field_ground_effect.h"
+#include "fieldmap.h"
 #include "metatile_behavior.h"
 
 extern u32 gUnknown_08376008[];

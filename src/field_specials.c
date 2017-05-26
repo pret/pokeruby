@@ -1,6 +1,6 @@
-#include "diploma.h"
 #include "global.h"
 #include "field_specials.h"
+#include "diploma.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "main.h"

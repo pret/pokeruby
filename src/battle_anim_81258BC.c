@@ -1,9 +1,9 @@
-#include "battle.h"
-#include "battle_message.h"
 #include "global.h"
 #include "battle_anim_81258BC.h"
-#include "text.h"
+#include "battle.h"
+#include "battle_message.h"
 #include "menu_cursor.h"
+#include "text.h"
 
 extern struct Window gUnknown_03004210;
 extern u8 gUnknown_020238CC[];
@@ -13,7 +13,7 @@ extern const u8 gUnknown_08400CBB[];
 extern u8 gUnknown_02024A60;
 extern const u8 gUnknown_08400D15[];
 
-extern void* gUnknown_03004330[];
+extern void *gUnknown_03004330[];
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 

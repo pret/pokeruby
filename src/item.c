@@ -1,6 +1,6 @@
-#include "berry.h"
 #include "global.h"
 #include "item.h"
+#include "berry.h"
 #include "string_util.h"
 #include "strings.h"
 

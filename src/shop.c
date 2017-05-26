@@ -1,14 +1,12 @@
-#include "menu_helpers.h"
-#include "field_fadetransition.h"
-#include "item_menu.h"
-#include "tv.h"
-#include "unknown_task.h"
 #include "global.h"
 #include "shop.h"
 #include "decompress.h"
+#include "field_fadetransition.h"
 #include "field_weather.h"
+#include "item_menu.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "money.h"
 #include "palette.h"
 #include "script.h"
@@ -16,6 +14,8 @@
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
+#include "tv.h"
+#include "unknown_task.h"
 
 struct UnknownShopStruct
 {

@@ -1,5 +1,3 @@
-#include "unknown_task.h"
-#include "reset_rtc_screen.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "title_screen.h"
@@ -11,9 +9,11 @@
 #include "main.h"
 #include "main_menu.h"
 #include "palette.h"
+#include "reset_rtc_screen.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "unknown_task.h"
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;

@@ -1,9 +1,9 @@
-#include "field_map_obj.h"
-#include "script_movement.h"
 #include "global.h"
 #include "map_obj_lock.h"
+#include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
+#include "script_movement.h"
 #include "task.h"
 
 extern u16 gScriptFacing;

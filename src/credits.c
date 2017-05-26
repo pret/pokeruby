@@ -1,10 +1,9 @@
-#include "task.h"
-#include "intro_credits_graphics.h"
-#include "hall_of_fame.h"
 #include "global.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "hall_of_fame.h"
+#include "intro_credits_graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -15,6 +14,7 @@
 #include "sound.h"
 #include "species.h"
 #include "starter_choose.h"
+#include "task.h"
 #include "trig.h"
 
 asm(".set REG_BASE, 0x4000000");

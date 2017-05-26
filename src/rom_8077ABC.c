@@ -1,17 +1,17 @@
-#include "util.h"
-#include "battle_anim.h"
-#include "pokemon_icon.h"
 #include "global.h"
 #include "rom_8077ABC.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "blend_palette.h"
 #include "data2.h"
 #include "decompress.h"
 #include "palette.h"
+#include "pokemon_icon.h"
 #include "species.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "util.h"
 
 #define GET_UNOWN_LETTER(personality) ((\
       (((personality & 0x03000000) >> 24) << 6) \

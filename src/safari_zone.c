@@ -1,7 +1,7 @@
-#include "field_fadetransition.h"
 #include "global.h"
 #include "safari_zone.h"
 #include "event_data.h"
+#include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "main.h"
 #include "rom4.h"

@@ -1,7 +1,6 @@
-#include "unknown_task.h"
-#include "cute_sketch.h"
 #include "global.h"
 #include "contest_painting.h"
+#include "cute_sketch.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -12,6 +11,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "unknown_task.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_03000750;

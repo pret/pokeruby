@@ -1,10 +1,8 @@
-#include "unknown_task.h"
-#include "easy_chat.h"
-#include "util.h"
-#include "field_effect.h"
 #include "global.h"
 #include "trainer_card.h"
+#include "easy_chat.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -19,6 +17,8 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
+#include "unknown_task.h"
+#include "util.h"
 
 typedef void (*Callback)(void);
 

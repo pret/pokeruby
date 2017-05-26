@@ -1,8 +1,8 @@
-#include "region_map.h"
 #include "global.h"
 #include "map_name_popup.h"
 #include "event_data.h"
 #include "menu.h"
+#include "region_map.h"
 #include "task.h"
 
 EWRAM_DATA static u8 sTaskId = 0;

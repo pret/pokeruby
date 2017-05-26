@@ -1,12 +1,12 @@
-#include "easy_chat.h"
-#include "trader.h"
 #include "global.h"
 #include "mauville_old_man.h"
+#include "easy_chat.h"
 #include "menu.h"
 #include "rng.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"
+#include "trader.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

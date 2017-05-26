@@ -1,5 +1,4 @@
 
-#include "unknown_task.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
@@ -9,16 +8,17 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex_area_screen.h"
+#include "pokedex_cry_screen.h"
 #include "rng.h"
+#include "rom4.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "rom4.h"
-#include "pokedex_cry_screen.h"
-#include "pokedex_area_screen.h"
+#include "unknown_task.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon

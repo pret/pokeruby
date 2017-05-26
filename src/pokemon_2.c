@@ -1,17 +1,17 @@
-#include "rom_8077ABC.h"
-#include "util.h"
-#include "battle.h"
 #include "global.h"
-#include "pokemon.h"
+#include "battle.h"
 #include "data2.h"
 #include "event_data.h"
 #include "main.h"
+#include "pokemon.h"
 #include "rng.h"
+#include "rom_8077ABC.h"
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "text.h"
 #include "strings2.h"
+#include "text.h"
+#include "util.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;

@@ -1,16 +1,15 @@
-#include "unknown_task.h"
-#include "field_effect.h"
-#include "pokeball.h"
 #include "global.h"
 #include "main_menu.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
 #include "option_menu.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "save_menu_util.h"
@@ -22,6 +21,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
+#include "unknown_task.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 

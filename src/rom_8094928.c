@@ -1,7 +1,7 @@
-#include "party_menu.h"
-#include "rom_8077ABC.h"
 #include "global.h"
 #include "rom_8094928.h"
+#include "party_menu.h"
+#include "rom_8077ABC.h"
 
 #define UNK_201606C_ARRAY (unk_2000000 + 0x1606C) // lazy define but whatever.
 

@@ -1,7 +1,7 @@
-#include "berry_blender.h"
 #include "global.h"
 #include "link.h"
 #include "battle.h"
+#include "berry_blender.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"

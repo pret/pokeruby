@@ -1,14 +1,11 @@
-#include "item_menu.h"
-#include "pokenav.h"
-#include "pokemon_menu.h"
-#include "unknown_task.h"
-#include "fieldmap.h"
 #include "global.h"
 #include "start_menu.h"
 #include "event_data.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "fieldmap.h"
+#include "item_menu.h"
 #include "load_save.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -16,6 +13,8 @@
 #include "option_menu.h"
 #include "palette.h"
 #include "pokedex.h"
+#include "pokemon_menu.h"
+#include "pokenav.h"
 #include "rom4.h"
 #include "safari_zone.h"
 #include "save.h"
@@ -29,6 +28,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
+#include "unknown_task.h"
 
 //Menu actions
 enum {

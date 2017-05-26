@@ -1,4 +1,3 @@
-#include "unknown_task.h"
 #include "global.h"
 #include "starter_choose.h"
 #include "data2.h"
@@ -15,6 +14,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern u16 gScriptResult;
 extern struct SpriteTemplate gUnknown_02024E8C;
