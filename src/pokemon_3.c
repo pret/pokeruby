@@ -39,18 +39,6 @@
 #define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
 
-struct Evolution
-{
-    u16 method;
-    u16 param;
-    u16 targetSpecies;
-};
-
-struct EvolutionData
-{
-    struct Evolution evolutions[5];
-};
-
 struct SpindaSpot
 {
     u8 x, y;

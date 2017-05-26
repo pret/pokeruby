@@ -15,30 +15,6 @@
 #include "species.h"
 #include "tv.h"
 
-struct WildPokemon
-{
-    u8 minLevel;
-    u8 maxLevel;
-    u16 species;
-};
-
-struct WildPokemonInfo
-{
-    u8 encounterRate;
-    const struct WildPokemon *wildPokemon;
-};
-
-struct WildPokemonHeader
-{
-    u8 mapGroup;
-    u8 mapNum;
-    struct WildPokemonInfo *landMonsInfo;
-    struct WildPokemonInfo *waterMonsInfo;
-    struct WildPokemonInfo *rockSmashMonsInfo;
-    struct WildPokemonInfo *fishingMonsInfo;
-};
-
-
 const struct WildPokemon PetalburgCity_WaterMons [] =
 {
     {20, 30, SPECIES_MARILL},
