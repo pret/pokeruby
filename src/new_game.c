@@ -14,7 +14,7 @@
 #include "mauville_old_man.h"
 #include "play_time.h"
 #include "player_pc.h"
-#include "pokeblock.h.h"
+#include "pokeblock.h"
 #include "pokedex.h"
 #include "pokemon_size_record.h"
 #include "pokemon_storage_system.h"
