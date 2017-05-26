@@ -5,6 +5,7 @@
 #include "config.h"
 
 // IDE support
+#ifdef __APPLE__
 #define _(x) x
 #define __(x) x
 #define INCBIN_U8 {0}
@@ -16,6 +17,7 @@
 void * 	memcpy (void *, const void *, size_t);
 void * 	memset (void *, int, size_t);
 int 	strcmp (const char *, const char *);
+#endif
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");

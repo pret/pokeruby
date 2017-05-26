@@ -23,7 +23,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 // Graphics Data
 //--------------------------------------------------
 
-const u16 gBirchBagGrassPal[][16] =
+const u16 gBirchBagGrassPal[2][16] =
 {
     INCBIN_U16("graphics/misc/birch_bag.gbapal"),
     INCBIN_U16("graphics/misc/birch_grass.gbapal"),

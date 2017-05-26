@@ -1,7 +1,9 @@
 #include "global.h"
 #include "link.h"
 #include "battle.h"
+#include "berry.h"
 #include "berry_blender.h"
+#include "hall_of_fame.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -76,11 +78,6 @@ static void sub_8008454(void);
 static void sub_80084C8(void);
 static void sub_80084F4(void);
 
-extern void *species_and_otid_get_pal(/*TODO: arg types*/);
-extern void sub_8143680(int, u8);
-extern void sub_81428CC(void);
-
-extern struct Berry *GetBerryInfo(u8 berry);
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);

@@ -9,7 +9,7 @@ void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 u8 sub_809FA30(void);
 u8 pokemon_ailments_get_primary(u32);
 u8 GetMonStatusAndPokerus();
-u8 *sub_80A1E9C(u8 *dest, u8 *src, u8);
+u8 *sub_80A1E9C(u8 *dest, const u8 *src, u8);
 u8 *PokemonSummaryScreen_CopyPokemonLevel(u8 *dest, u8 level);
 u8 PokemonSummaryScreen_CheckOT(struct Pokemon *pokemon);
 

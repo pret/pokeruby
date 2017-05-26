@@ -27,7 +27,6 @@
 #define CONTEST_ENTRY_PIC_TOP 3
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
@@ -429,7 +428,7 @@ void ShowContestEntryMonPic(void)
         HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
         gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
         (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
-        paletteData = sub_80409C8(species, var2, var1);
+        paletteData = (struct SpritePalette *) sub_80409C8(species, var2, var1);
         LoadCompressedObjectPalette(paletteData);
         GetMonSpriteTemplate_803C56C(species, 1);
         gUnknown_02024E8C.paletteTag = paletteData->tag;

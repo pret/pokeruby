@@ -88,7 +88,7 @@ static void sub_80F8FB4(void);
 void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
 {
     u16 mailDesign;
-    u8 buffer[4];
+    u16 buffer[2];
 
     ewram0.varFF = GAME_LANGUAGE;
     ewram0.var100 = 1;

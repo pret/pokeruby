@@ -124,7 +124,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = 6;
 
-    temp = gItemEffectTable[itemId - 13];
+    temp = (u8 *) gItemEffectTable[itemId - 13];
 
     if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;
@@ -252,7 +252,7 @@ u8 *sub_803F378(u16 itemId)
     }
     else
     {
-        itemEffect = gItemEffectTable[itemId - 13];
+        itemEffect = (u8 *) gItemEffectTable[itemId - 13];
     }
 
     gUnknown_02024C0B = gUnknown_02024E6C;
@@ -1198,18 +1198,18 @@ const u16 *pokemon_get_pal(struct Pokemon *mon)
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
+void *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
 
     if (species > SPECIES_EGG)
-        return gMonPaletteTable[0].data;
+        return (void *) gMonPaletteTable[0].data;
 
     shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
     if (shinyValue < 8)
-        return gMonShinyPaletteTable[species].data;
+        return (void *) gMonShinyPaletteTable[species].data;
     else
-        return gMonPaletteTable[species].data;
+        return (void *) gMonPaletteTable[species].data;
 }
 
 const struct SpritePalette *sub_8040990(struct Pokemon *mon)

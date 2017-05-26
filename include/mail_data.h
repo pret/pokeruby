@@ -6,7 +6,7 @@ void ClearMailStruct(struct MailStruct *);
 void ClearMailStruct(struct MailStruct *);
 u8 GiveMailToMon(struct Pokemon *, u16);
 u16 SpeciesToMailSpecies(u16, u32);
-u16 MailSpeciesToSpecies(u16, u8 *);
+u16 MailSpeciesToSpecies(u16, u16 *);
 u8 GiveMailToMon2(struct Pokemon *, struct MailStruct *);
 void TakeMailFromMon(struct Pokemon *);
 u8 TakeMailFromMon2(struct Pokemon *);

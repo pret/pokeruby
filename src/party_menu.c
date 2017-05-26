@@ -97,6 +97,8 @@ extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[DATA_COUNT];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
+static void sub_806E884(u8 taskId);
+
 /*
 void sub_806AEDC(void)
 {

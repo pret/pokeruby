@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
+#include "task.h"
+
 // sub_80587B4
 void player_step(u8 a, u16 b, u16 c);
 u8 ForcedMovement_None(void);

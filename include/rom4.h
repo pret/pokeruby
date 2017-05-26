@@ -44,7 +44,7 @@ void update_saveblock1_field_object_movement_behavior(u8, u8);
 // warp_set
 // warp_data_is_not_neg_1
 struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum);
-struct MapHeader *warp1_get_mapheader(void);
+struct MapHeader * const warp1_get_mapheader(void);
 // set_current_map_header_from_sav1_save_old_name
 // sub_805338C
 // sub_80533CC

@@ -38,7 +38,7 @@
 
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
-extern void (* gUnknown_03004AE4)(u8);
+extern void (* gUnknown_03004AE4)(u8, u16, TaskFunc);
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
