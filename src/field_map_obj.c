@@ -26,7 +26,7 @@ extern void ClearPlayerAvatarInfo(void);
 extern void npc_load_two_palettes__no_record(u16, u8);
 extern void npc_load_two_palettes__and_record(u16, u8);
 extern void sub_8060388(s16, s16, s16 *, s16 *);
-extern void sub_80634D0(struct MapObject *, struct Sprite *);
+void sub_80634D0(struct MapObject *, struct Sprite *);
 extern void pal_patch_for_npc(u16, u16);
 extern void CameraObjectReset1(void);
 
@@ -3886,7 +3886,7 @@ u8 FieldObjectGetSpecialAnim(struct MapObject *mapObject)
 extern void DoGroundEffects_OnSpawn(struct MapObject *mapObject, struct Sprite *sprite);
 extern void DoGroundEffects_OnBeginStep(struct MapObject *mapObject, struct Sprite *sprite);
 extern void DoGroundEffects_OnFinishStep(struct MapObject *mapObject, struct Sprite *sprite);
-extern void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite);
+void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite);
 void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite);
 void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite);
 void FieldObjectUpdateSubpriority(struct MapObject *mapObject, struct Sprite *sprite);
@@ -4398,7 +4398,7 @@ u8 sub_8060D10(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
     s16 x;
     s16 y;
@@ -4407,7 +4407,7 @@ void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     FieldObjectSetDirection(mapObject, direction);
     MoveCoords(direction, &x, &y);
     npc_coords_shift(mapObject, x, y);
-    oamt_npc_ministep_reset(sprite, direction, a2);
+    oamt_npc_ministep_reset(sprite, direction, a3);
     sprite->animPaused = 0;
     mapObject->mapobj_bit_2 = 1;
     sprite->data2 = 1;
@@ -4415,12 +4415,12 @@ void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 
 extern u8 (*const gUnknown_083759C0[5])(u8);
 
-void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a2)
+void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
     u8 (*functions[5])(u8);
     memcpy(functions, gUnknown_083759C0, sizeof(gUnknown_083759C0));
-    sub_8060D20(mapObject, sprite, direction, a2);
-    sub_805FE28(mapObject, sprite, functions[a2](mapObject->mapobj_unk_18));
+    sub_8060D20(mapObject, sprite, direction, a3);
+    sub_805FE28(mapObject, sprite, functions[a3](mapObject->mapobj_unk_18));
 }
 
 void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
@@ -5914,4 +5914,825 @@ bool8 sub_80628D0(struct MapObject *mapObject, struct Sprite *sprite)
         return TRUE;
     }
     return FALSE;
+}
+
+bool8 sub_8062930(struct MapObject *, struct Sprite *);
+
+bool8 sub_80628FC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_SOUTH);
+    sprite->affineAnimPaused = 0;
+    ChangeSpriteAffineAnimIfDifferent(sprite, 1);
+    return sub_8062930(mapObject, sprite);
+}
+
+bool8 sub_8062930(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->affineAnimPaused = 1;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_806295C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    npc_coords_shift_still(mapObject);
+    sub_805FE64(mapObject, sprite, sub_805FDD8(direction));
+    sprite->animPaused = 1;
+    sprite->data2 = 1;
+}
+
+bool8 sub_806299C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_806295C(mapObject, sprite, DIR_SOUTH);
+    return TRUE;
+}
+
+bool8 sub_80629AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_806295C(mapObject, sprite, DIR_NORTH);
+    return TRUE;
+}
+
+bool8 sub_80629BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_806295C(mapObject, sprite, DIR_WEST);
+    return TRUE;
+}
+
+bool8 sub_80629CC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_806295C(mapObject, sprite, DIR_EAST);
+    return TRUE;
+}
+
+bool8 sub_80629DC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, sub_805FD98(DIR_SOUTH));
+    return FALSE;
+}
+
+bool8 sub_8062A00(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, sub_805FD98(DIR_NORTH));
+    return FALSE;
+}
+
+bool8 sub_8062A24(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, sub_805FD98(DIR_WEST));
+    return FALSE;
+}
+
+bool8 sub_8062A48(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, sub_805FD98(DIR_EAST));
+    return FALSE;
+}
+
+bool8 sub_8062A6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, sub_805FDB8(DIR_SOUTH));
+    return FALSE;
+}
+
+bool8 sub_8062A90(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, sub_805FDB8(DIR_NORTH));
+    return FALSE;
+}
+
+bool8 sub_8062AB4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, sub_805FDB8(DIR_WEST));
+    return FALSE;
+}
+
+bool8 sub_8062AD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, sub_805FDB8(DIR_EAST));
+    return FALSE;
+}
+
+bool8 sub_8062AFC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, sub_805FDC8(DIR_SOUTH));
+    return FALSE;
+}
+
+bool8 sub_8062B20(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, sub_805FDC8(DIR_NORTH));
+    return FALSE;
+}
+
+bool8 sub_8062B44(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, sub_805FDC8(DIR_WEST));
+    return FALSE;
+}
+
+bool8 sub_8062B68(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, sub_805FDC8(DIR_EAST));
+    return FALSE;
+}
+
+void sub_8062B8C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3, u8 a4)
+{
+    sub_806113C(mapObject, sprite, direction, a3, a4);
+    StartSpriteAnimIfDifferent(sprite, sub_805FD98(direction));
+    DoShadowFieldEffect(mapObject);
+}
+
+bool8 sub_8062BFC(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062BD0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_SOUTH, 0, 1);
+    return sub_8062BFC(mapObject, sprite);
+}
+
+bool8 sub_8062BFC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062C54(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062C28(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_NORTH, 0, 1);
+    return sub_8062C54(mapObject, sprite);
+}
+
+bool8 sub_8062C54(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062CAC(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062C80(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_WEST, 0, 1);
+    return sub_8062CAC(mapObject, sprite);
+}
+
+bool8 sub_8062CAC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062D04(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062CD8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_EAST, 0, 1);
+    return sub_8062D04(mapObject, sprite);
+}
+
+bool8 sub_8062D04(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062D5C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062D30(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_SOUTH, 1, 1);
+    return sub_8062D5C(mapObject, sprite);
+}
+
+bool8 sub_8062D5C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062DB4(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062D88(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_NORTH, 1, 1);
+    return sub_8062DB4(mapObject, sprite);
+}
+
+bool8 sub_8062DB4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062E0C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062DE0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_WEST, 1, 1);
+    return sub_8062E0C(mapObject, sprite);
+}
+
+bool8 sub_8062E0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062E64(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062E38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_EAST, 1, 1);
+    return sub_8062E64(mapObject, sprite);
+}
+
+bool8 sub_8062E64(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062EBC(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062E90(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_SOUTH, 2, 0);
+    return sub_8062EBC(mapObject, sprite);
+}
+
+bool8 sub_8062EBC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062F14(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062EE8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_NORTH, 2, 0);
+    return sub_8062F14(mapObject, sprite);
+}
+
+bool8 sub_8062F14(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062F6C(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062F40(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_WEST, 2, 0);
+    return sub_8062F6C(mapObject, sprite);
+}
+
+bool8 sub_8062F6C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062FC4(struct MapObject *, struct Sprite *);
+
+bool8 sub_8062F98(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8062B8C(mapObject, sprite, DIR_EAST, 2, 0);
+    return sub_8062FC4(mapObject, sprite);
+}
+
+bool8 sub_8062FC4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8061328(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_22 = 0;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062FF0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, sub_805FDD8(DIR_SOUTH), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8063028(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_NORTH, sub_805FDD8(DIR_NORTH), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8063060(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_WEST, sub_805FDD8(DIR_WEST), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+bool8 sub_8063098(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80616CC(mapObject, sprite, DIR_EAST, sub_805FDD8(DIR_EAST), 8);
+    return sub_8061714(mapObject, sprite);
+}
+
+void sub_80630D0(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
+{
+    sub_8060D20(mapObject, sprite, direction, a3);
+    StartSpriteAnim(sprite, sub_805FD98(mapObject->mapobj_unk_18));
+    SeekSpriteAnim(sprite, 0);
+}
+
+bool8 sub_8063128(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063108(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80630D0(mapObject, sprite, DIR_SOUTH, 1);
+    return sub_8063128(mapObject, sprite);
+}
+
+bool8 sub_8063128(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063168(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063148(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80630D0(mapObject, sprite, DIR_NORTH, 1);
+    return sub_8063168(mapObject, sprite);
+}
+
+bool8 sub_8063168(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80631A8(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063188(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80630D0(mapObject, sprite, DIR_WEST, 1);
+    return sub_80631A8(mapObject, sprite);
+}
+
+bool8 sub_80631A8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80631E8(struct MapObject *, struct Sprite *);
+
+bool8 sub_80631C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80630D0(mapObject, sprite, DIR_EAST, 1);
+    return sub_80631E8(mapObject, sprite);
+}
+
+bool8 sub_80631E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8063208(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
+{
+    sub_8060D20(mapObject, sprite, direction, a3);
+    sub_805FE28(mapObject, sprite, sub_805FDD8(mapObject->mapobj_unk_18));
+}
+
+bool8 sub_8063258(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063238(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063208(mapObject, sprite, DIR_SOUTH, 1);
+    return sub_8063258(mapObject, sprite);
+}
+
+bool8 sub_8063258(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063298(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063278(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063208(mapObject, sprite, DIR_NORTH, 1);
+    return sub_8063298(mapObject, sprite);
+}
+
+bool8 sub_8063298(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80632D8(struct MapObject *, struct Sprite *);
+
+bool8 sub_80632B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063208(mapObject, sprite, DIR_WEST, 1);
+    return sub_80632D8(mapObject, sprite);
+}
+
+bool8 sub_80632D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063318(struct MapObject *, struct Sprite *);
+
+bool8 sub_80632F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063208(mapObject, sprite, DIR_EAST, 1);
+    return sub_8063318(mapObject, sprite);
+}
+
+bool8 sub_8063318(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8063338(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
+{
+    sub_8060D20(mapObject, sprite, direction, a3);
+    StartSpriteAnim(sprite, sub_805FDB8(mapObject->mapobj_unk_18));
+    SeekSpriteAnim(sprite, 0);
+}
+
+bool8 sub_8063390(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063370(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063338(mapObject, sprite, DIR_SOUTH, 1);
+    return sub_8063390(mapObject, sprite);
+}
+
+bool8 sub_8063390(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80633D0(struct MapObject *, struct Sprite *);
+
+bool8 sub_80633B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063338(mapObject, sprite, DIR_NORTH, 1);
+    return sub_80633D0(mapObject, sprite);
+}
+
+bool8 sub_80633D0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063410(struct MapObject *, struct Sprite *);
+
+bool8 sub_80633F0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063338(mapObject, sprite, DIR_WEST, 1);
+    return sub_8063410(mapObject, sprite);
+}
+
+bool8 sub_8063410(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063450(struct MapObject *, struct Sprite *);
+
+bool8 sub_8063430(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8063338(mapObject, sprite, DIR_EAST, 1);
+    return sub_8063450(mapObject, sprite);
+}
+
+bool8 sub_8063450(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8063470(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return TRUE;
+}
+
+bool8 sub_8063474(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->animPaused = 1;
+    return TRUE;
+}
+
+void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->mapobj_bit_10)
+    {
+        sprite->animPaused = 1;
+    }
+}
+
+void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->mapobj_bit_11)
+    {
+        sprite->animPaused = 0;
+        mapObject->mapobj_bit_10 = 0;
+        mapObject->mapobj_bit_11 = 0;
+    }
+}
+
+void sub_80634E8(struct MapObject *, struct Sprite *);
+void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
+
+void sub_80634D0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80634E8(mapObject, sprite);
+    npc_update_obj_anim_flag(mapObject, sprite);
+}
+
+#ifdef NONMATCHING
+void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u16 x;
+    u16 y;
+    s16 x2;
+    s16 y2;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    mapObject->mapobj_bit_14 = 0;
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    if (sprite->coordOffsetEnabled)
+    {
+        x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+        y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+    } else
+    {
+        x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+        y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    }
+    x2 = graphicsInfo->width + x; // offending line
+    y2 = graphicsInfo->height + y; // similarly offending line
+    if ((s16)x >= 0x100 || x2 < -0x10)
+    {
+        mapObject->mapobj_bit_14 = 1;
+    }
+    if ((s16)y >= 0xB0 || y2 < -0x10)
+    {
+        mapObject->mapobj_bit_14 = 1;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite) {
+    asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	adds r5, r0, 0\n\
+	adds r4, r1, 0\n\
+	ldrb r1, [r5, 0x1]\n\
+	movs r0, 0x41\n\
+	negs r0, r0\n\
+	ands r0, r1\n\
+	strb r0, [r5, 0x1]\n\
+	ldrb r0, [r5, 0x5]\n\
+	bl GetFieldObjectGraphicsInfo\n\
+	adds r6, r0, 0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x3E\n\
+	ldrb r1, [r0]\n\
+	movs r0, 0x2\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _0806354C\n\
+	ldrh r1, [r4, 0x24]\n\
+	ldrh r0, [r4, 0x20]\n\
+	adds r1, r0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x28\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	ldr r2, _08063544 @ =gSpriteCoordOffsetX\n\
+	adds r0, r1\n\
+	ldrh r2, [r2]\n\
+	adds r0, r2\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	ldrh r1, [r4, 0x26]\n\
+	ldrh r0, [r4, 0x22]\n\
+	adds r1, r0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x29\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	ldr r2, _08063548 @ =gSpriteCoordOffsetY\n\
+	adds r0, r1\n\
+	ldrh r2, [r2]\n\
+	adds r0, r2\n\
+	b _08063574\n\
+	.align 2, 0\n\
+_08063544: .4byte gSpriteCoordOffsetX\n\
+_08063548: .4byte gSpriteCoordOffsetY\n\
+_0806354C:\n\
+	ldrh r1, [r4, 0x24]\n\
+	ldrh r0, [r4, 0x20]\n\
+	adds r1, r0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x28\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	adds r0, r1\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	ldrh r1, [r4, 0x26]\n\
+	ldrh r0, [r4, 0x22]\n\
+	adds r1, r0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x29\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	adds r0, r1\n\
+_08063574:\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 16\n\
+	ldrh r0, [r6, 0x8]\n\
+	adds r0, r3\n\
+	lsls r0, 16\n\
+	lsrs r1, r0, 16\n\
+	ldrh r0, [r6, 0xA]\n\
+	adds r0, r2\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	lsls r0, r3, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0xFF\n\
+	bgt _0806359C\n\
+	lsls r0, r1, 16\n\
+	asrs r0, 16\n\
+	movs r1, 0x10\n\
+	negs r1, r1\n\
+	cmp r0, r1\n\
+	bge _080635A4\n\
+_0806359C:\n\
+	ldrb r0, [r5, 0x1]\n\
+	movs r1, 0x40\n\
+	orrs r0, r1\n\
+	strb r0, [r5, 0x1]\n\
+_080635A4:\n\
+	lsls r0, r2, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0xAF\n\
+	bgt _080635B8\n\
+	lsls r0, r4, 16\n\
+	asrs r0, 16\n\
+	movs r1, 0x10\n\
+	negs r1, r1\n\
+	cmp r0, r1\n\
+	bge _080635C0\n\
+_080635B8:\n\
+	ldrb r0, [r5, 0x1]\n\
+	movs r1, 0x40\n\
+	orrs r0, r1\n\
+	strb r0, [r5, 0x1]\n\
+_080635C0:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+.syntax divided\n");
+}
+#endif
+
+void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->invisible = 0;
+    if (mapObject->mapobj_bit_13 || mapObject->mapobj_bit_14)
+    {
+        sprite->invisible = 1;
+    }
 }
