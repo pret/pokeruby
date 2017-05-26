@@ -15,6 +15,8 @@
 #include "field_camera.h"
 #include "metatile_behavior.h"
 #include "map_constants.h"
+#include "trainer_see.h"
+#include "field_effect_helpers.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
 
@@ -5748,4 +5750,168 @@ bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
     mapObject->mapobj_bit_13 = 0;
     sprite->data2 = 1;
     return TRUE;
+}
+
+bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+    FieldEffectStart(0x0);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+    FieldEffectStart(0x21);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+    FieldEffectStart(0x2e);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8062704(struct MapObject *, struct Sprite *);
+
+bool8 sub_80626C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->animPattern == 0x3F)
+    {
+        sub_8084794(mapObject);
+        return FALSE;
+    }
+    else if (mapObject->animPattern != 0x39 && mapObject->animPattern != 0x3A)
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    else
+    {
+        sub_812869C(mapObject);
+        sprite->data2 = 1;
+        return sub_8062704(mapObject, sprite);
+    }
+}
+
+bool8 sub_8062704(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_81286C4(mapObject))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062724(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    obj_anim_image_set_and_seek(sprite, 1, 0);
+    sprite->data2 = 1;
+    return FALSE;
+}
+
+bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064864(sprite))
+    {
+        sub_8064820(sprite, 0x20);
+        sprite->data2 = 2;
+    }
+    return FALSE;
+}
+
+bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 ^= 1;
+    if (sub_8064824(sprite))
+    {
+        mapObject->mapobj_bit_13 = 1;
+        sprite->data2 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_80627A0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    obj_anim_image_set_and_seek(sprite, 1, 0);
+    sprite->data2 = 1;
+    return FALSE;
+}
+
+bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8064864(sprite))
+    {
+        sub_8064820(sprite, 0x20);
+        sprite->data2 = 2;
+    }
+    return FALSE;
+}
+
+bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 ^= 1;
+    if (sub_8064824(sprite))
+    {
+        mapObject->mapobj_bit_13 = 1;
+        sprite->data2 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_806281C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_26 = 1;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_806282C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_26 = 0;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_806283C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->oam.affineMode = 3;
+    InitSpriteAffineAnim(sprite);
+    sprite->affineAnimPaused = 1;
+    sprite->subspriteMode = 0;
+    return TRUE;
+}
+
+bool8 sub_806286C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FreeOamMatrix(sprite->oam.matrixNum);
+    sprite->oam.affineMode = 0;
+    CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+    return TRUE;
+}
+
+bool8 sub_80628D0(struct MapObject *, struct Sprite *);
+
+bool8 sub_806289C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8060ED8(mapObject, sprite, DIR_SOUTH);
+    sprite->affineAnimPaused = 0;
+    StartSpriteAffineAnimIfDifferent(sprite, 0);
+    return sub_80628D0(mapObject, sprite);
+}
+
+bool8 sub_80628D0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (an_walk_any_2(mapObject, sprite))
+    {
+        sprite->affineAnimPaused = 1;
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
 }
