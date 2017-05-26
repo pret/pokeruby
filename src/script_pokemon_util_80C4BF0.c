@@ -158,7 +158,7 @@ u8 sub_80C4D50(void)
 }
 
 // nope. too hard
-__attribute__((naked))
+NAKED
 void sub_80C4D80(void)
 {
     asm(".syntax unified\n\

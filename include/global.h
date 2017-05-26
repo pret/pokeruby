@@ -10,6 +10,8 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
+#define NAKED __attribute__((naked))
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10

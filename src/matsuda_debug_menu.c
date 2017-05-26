@@ -798,7 +798,7 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
 }
 */
 
-__attribute__((naked))
+NAKED
 void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\

@@ -320,7 +320,7 @@ void sub_80BE074(void) {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80BE074(void) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -1673,7 +1673,7 @@ void GetMomOrDadStringForTVMessage(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void GetMomOrDadStringForTVMessage(void)
 {
     asm(".syntax unified\n\
@@ -1915,7 +1915,7 @@ bool8 sub_80BFF68(struct SaveTVStruct ** arg1, struct SaveTVStruct ** arg2, u8 i
     }
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80BFF68(struct SaveTVStruct ** arg1, struct SaveTVStruct ** arg2, u8 idx) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -2148,7 +2148,7 @@ void sub_80C01D4(void) {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80C01D4(void) {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
@@ -2377,7 +2377,7 @@ void sub_80C0408(void) {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80C0408(void) {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\

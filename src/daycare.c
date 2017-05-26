@@ -34,7 +34,7 @@ u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
 }
 
 #ifndef ASDF
-__attribute__((naked))
+NAKED
 void sub_8041324(struct BoxPokemon * box_pokemon, void * void_pointer)
 {
     asm(".syntax unified\n\
@@ -124,7 +124,7 @@ s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
         something1 += (u8 * daycare_data)
 }*/
 
-__attribute__((naked))
+NAKED
 void Daycare_SendPokemon()
 {
     // strange stack usage - happens because THUMB ARM only allows R0-R7 to be pushed/popped:
@@ -272,7 +272,7 @@ void sub_804151C(struct Pokemon * mon)
     CalculateMonStats(mon);
 }
 
-__attribute__((naked))
+NAKED
 u16 sub_8041570(struct BoxPokemon * daycare_data, u8 a2){
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

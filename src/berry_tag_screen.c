@@ -356,7 +356,7 @@ void sub_81466A0(void)
     }
 }
 
-__attribute__((naked))
+NAKED
 static void sub_81466E8(u8 taskId, s8 direction)
 {
     asm(".syntax unified\n\
@@ -473,7 +473,7 @@ void sub_8146798(u8 taskId)
     }
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8146810(s8 berry)
 {
     asm(".syntax unified\n\

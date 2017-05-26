@@ -434,7 +434,7 @@ void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
 }
 
 #else
-__attribute__((naked))
+NAKED
 void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
 {
     asm(".syntax unified\n\

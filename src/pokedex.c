@@ -1109,7 +1109,7 @@ u8 sub_808DFE4(u16 a, u8 b, u8 c)
     MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
 }
 #else
-__attribute__((naked))
+NAKED
 u8 sub_808DFE4(u16 a, u8 b, u8 c)
 {
     asm(".syntax unified\n\
@@ -1425,7 +1425,7 @@ u16 sub_808E48C(u16 a, u16 b)
     return a;
 }
 #else
-__attribute__((naked))
+NAKED
 u16 sub_808E48C(u16 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -2047,7 +2047,7 @@ void sub_808F0B4(struct Sprite *sprite)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_808F0B4(struct Sprite *sprite)
 {
     asm(".syntax unified\n\
@@ -2813,7 +2813,7 @@ void sub_8090584(u8 a, u16 b)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8090584(u8 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -2957,7 +2957,7 @@ void sub_8090644(u8 a, u16 b)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8090644(u8 a, u16 b)
 {
     asm(".syntax unified\n\

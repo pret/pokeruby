@@ -308,7 +308,7 @@ void sub_80F9F84(void)
 }
 
 // no. hard
-__attribute__((naked))
+NAKED
 void sub_80F9FDC(struct Pokemon *party, u8 var, u8 var2)
 {
     asm(".syntax unified\n\
