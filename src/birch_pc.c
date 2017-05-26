@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"

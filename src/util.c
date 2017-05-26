@@ -1,5 +1,5 @@
 #include "global.h"
-#include "sprite.h"
+#include "util.h"
 
 extern const struct SpriteTemplate gInvisibleSpriteTemplate;
 extern const u8 gSpriteDimensions[3][4][2];

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "asm.h"
+#include "decoration.h"
 #include "menu.h"
 
 extern u8 gUnknown_020388F2;
@@ -7,10 +7,6 @@ extern u8 gUnknown_020388F3;
 extern u8 gUnknown_020388F4;
 extern u8 gUnknown_020388F6;
 extern u8 gUnknown_020388D5;
-
-void sub_80FEC94(u8 arg0);
-void sub_80FECB8(u8 arg0);
-void sub_80FECE0(u8 arg0);
 
 void sub_80FE7EC(u8 arg0)
 {

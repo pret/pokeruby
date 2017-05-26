@@ -1,25 +1,9 @@
+#include "fieldmap.h"
 #include "global.h"
-#include "asm_fieldmap.h"
+#include "field_ground_effect.h"
 #include "metatile_behavior.h"
 
 extern u32 gUnknown_08376008[];
-
-void FieldObjectUpdateMetatileBehaviors(struct MapObject *);
-void GetGroundEffectFlags_Reflection(struct MapObject *, u32 *);
-void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject *, u32 *);
-void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject *, u32 *);
-void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject *, u32 *);
-void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject *, u32 *);
-void GetGroundEffectFlags_Tracks(struct MapObject *, u32 *);
-void GetGroundEffectFlags_SandPile(struct MapObject *, u32 *);
-void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *, u32 *);
-void GetGroundEffectFlags_Puddle(struct MapObject *, u32 *);
-void GetGroundEffectFlags_Ripple(struct MapObject *, u32 *);
-void GetGroundEffectFlags_ShortGrass(struct MapObject *, u32 *);
-void GetGroundEffectFlags_HotSprings(struct MapObject *, u32 *);
-void GetGroundEffectFlags_Seaweed(struct MapObject *, u32 *);
-void GetGroundEffectFlags_JumpLanding(struct MapObject *, u32 *);
-u8 FieldObjectCheckForReflectiveSurface(struct MapObject *);
 
 void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {

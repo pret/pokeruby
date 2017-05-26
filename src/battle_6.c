@@ -1,5 +1,6 @@
+#include "battle_message.h"
 #include "global.h"
-#include "asm.h"
+#include "battle.h"
 #include "menu_cursor.h"
 #include "text.h"
 

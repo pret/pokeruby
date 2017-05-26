@@ -1,4 +1,8 @@
+#include "util.h"
+#include "battle_anim.h"
+#include "pokemon_icon.h"
 #include "global.h"
+#include "rom_8077ABC.h"
 #include "battle.h"
 #include "blend_palette.h"
 #include "data2.h"
@@ -89,7 +93,6 @@ struct BGCnt {
 extern struct OamData gOamData_837DF9C[];
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
-extern u8 gMiscBlank_Gfx[];
 
 extern struct Struct_unk_2019348 unk_2019348;
 extern struct TransformStatus gTransformStatuses[];
@@ -107,45 +110,6 @@ extern u8 gUnknown_02024A68; // gNumBattleMons?
 extern struct OamMatrix gOamMatrices[];
 extern struct Struct_2017810 unk_2017810[];
 extern u8 gUnknown_0202F7BE;
-
-extern u8 IsContest();
-extern bool8 sub_8078874(u8);
-extern bool8 b_side_obj__get_some_boolean(u8);
-extern void UpdateMonIconFrame(struct Sprite *sprite);
-extern void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);
-extern void *species_and_otid_get_pal(u32, u32, u32);
-extern void FreeSpriteOamMatrix(struct Sprite *sprite);
-extern void ResetPaletteStructByUid(u16);
-extern void DestroyAnimVisualTask(u8 task);
-extern u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *));
-
-u8 sub_8077E44(u8 slot, u16 species, u8 a3);
-u8 battle_get_per_side_status(u8 slot);
-u8 battle_side_get_owner(u8 slot);
-void sub_8078314(struct Sprite *sprite);
-void sub_8078364(struct Sprite *sprite);
-void move_anim_8072740(struct Sprite *sprite);
-void obj_translate_based_on_private_1_2_3_4(struct Sprite *sprite);
-bool8 sub_8078B5C(struct Sprite *sprite);
-u8 battle_get_per_side_status_permutated(u8 slot);
-void sub_8078A5C(struct Sprite *sprite);
-void sub_8078BB8(struct Sprite *sprite);
-void sub_8078D44(struct Sprite *sprite);
-bool8 sub_8078E38();
-void sub_8079518(struct Sprite *sprite);
-void sub_80796F8(u8 task);
-void sub_80797EC(struct Task *task);
-void sub_8079814(u8 taskId);
-void sub_8079BF4(s16 *bottom, s16 *top, void *ptr);
-void *sub_8079BFC(s16 bottom, s16 top);
-void sub_8079A64(u8 sprite);
-u16 sub_8079B10(u8 sprite);
-u8 sub_8079E90(u8 slot);
-void sub_807A784(u8 taskId);
-void sub_807A850(struct Task *task, u8 taskId);
-void sub_807A8D4(struct Sprite *sprite);
-void sub_807A960(struct Sprite *sprite);
-
 
 EWRAM_DATA union AffineAnimCmd *gUnknown_0202F7D4 = NULL;
 EWRAM_DATA u32 filler_0202F7D8[3] = {0};

@@ -1,5 +1,13 @@
+#include "battle.h"
+#include "rom_8077ABC.h"
+#include "battle_interface.h"
+#include "pokeball.h"
+#include "task.h"
+#include "battle_anim_813F0F4.h"
+#include "util.h"
+#include "rom3.h"
 #include "global.h"
-#include "asm.h"
+#include "battle_811DA74.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
@@ -34,7 +42,6 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 
 extern u8 gUnknown_02023A60[][0x200];
@@ -54,29 +61,6 @@ extern u8 unk_2000000[];
 
 #define EWRAM_17800 ((u8 *)(unk_2000000 + 0x17800))
 #define EWRAM_17810 ((struct UnknownStruct2 *)(unk_2000000 + 0x17810))
-
-extern void nullsub_10();
-extern void sub_8045A5C();
-extern void sub_804777C();
-extern void sub_8043DFC();
-extern s16 sub_8045C78();
-extern void sub_80440EC();
-extern void sub_80324F8();
-extern void nullsub_9(u16);
-extern void sub_8043DB0();
-extern void move_anim_start_t4();
-extern void c3_0802FDF4(u8);
-extern void sub_8031F88();
-extern void sub_8141828();
-extern void c2_8011A1C(void);
-extern void dp01_prepare_buffer_wireless_probably();
-extern void dp01_build_cmdbuf_x1D_1D_numargs_varargs(int, u16, void *);
-
-void sub_811DA94(void);
-void sub_811E0A0(void);
-void dp01_tbl3_exec_completed(void);
-u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *b);
-void sub_811EC68(u8);
 
 void nullsub_74(void)
 {

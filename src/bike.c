@@ -1,6 +1,6 @@
+#include "fieldmap.h"
 #include "global.h"
 #include "bike.h"
-#include "asm.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "flags.h"

@@ -1,5 +1,14 @@
+#include "pokemon_menu.h"
+#include "pokeblock.h.h"
+#include "item_menu.h"
+#include "bike.h"
+#include "field_fadetransition.h"
+#include "pokemon_item_effect.h"
+#include "party_menu.h"
+#include "rom_8094928.h"
+#include "field_effect.h"
 #include "global.h"
-#include "asm.h"
+#include "item_use.h"
 #include "battle.h"
 #include "berry.h"
 #include "coins.h"
@@ -40,61 +49,8 @@ extern u8 gUnknown_081A168F[];
 
 extern u16 gUnknown_02024A6A[];
 
-extern void HandleItemMenuPaletteFade(u8);
-extern void ExecuteItemUseFromBlackPalette(void);
-extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16);
-extern void CleanUpItemMenuMessage(u8);
-extern void CleanUpOverworldMessage(u8);
-extern void ItemUseOnFieldCB_Bike(u8);
-extern void ItemUseOnFieldCB_Rod(u8);
-extern void ItemUseOnFieldCB_Itemfinder(u8);
-extern void sub_80A5D04(void);
-extern bool8 IsBikingDisallowedByPlayer(void);
-extern void GetOnOffBike(u8);
-extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
-extern void sub_810BA7C(u8);
-extern void sub_8080E28(void);
-extern void UseMedicine(u8);
-extern void sub_8070048(u8);
-extern void DoPPRecoveryItemEffect(u8);
-extern void DoPPUpItemEffect(u8);
-extern void DoRareCandyItemEffect(u8);
-extern void DoEvolutionStoneItemEffect(u8);
-extern u16 ItemIdToBattleMoveId(u16);
-extern void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
-extern void sub_80A3E0C(void);
-extern void TeachMonTMMove(u8);
-extern void sub_80878A8(void);
-extern void sub_8053014(void);
-extern void sub_80A7094(u8);
-extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon *mon, u16, u8, u16);
-extern void sub_8094E4C(void);
-extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
-extern u8 GetItemEffectType();
-extern void sub_808B020(void);
-extern void sub_810B96C(void);
-
 extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;
-
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
-void RunItemfinderResults(u8);
-void ExitItemfinder(u8);
-void sub_80C9720(u8);
-void sub_80C9838(u8, s16, s16);
-u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
-void SetPlayerDirectionTowardsItem(u8);
-void DisplayItemRespondingMessageAndExitItemfinder(u8);
-void RotatePlayerAndExitItemfinder(u8);
-void sub_80C9D00(u8);
-void sub_80C9D74(u8);
-void sub_80C9EE4(u8);
-void sub_80C9F10(u8);
-void sub_80C9F80(u8);
-void sub_80C9FC0(u8);
-void ItemUseOutOfBattle_TMHM(u8);
-void ItemUseOutOfBattle_EvolutionStone(u8);
-void ItemUseOutOfBattle_CannotUse(u8);
 
 static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 static const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");

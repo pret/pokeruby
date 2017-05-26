@@ -1,5 +1,6 @@
+#include "pokemon_menu.h"
+#include "party_menu.h"
 #include "global.h"
-#include "asm.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
 #include "pokemon.h"

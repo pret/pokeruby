@@ -1,0 +1,6 @@
+#ifndef GUARD_POKEMON_STORAGE_SYSTEM_H
+#define GUARD_POKEMON_STORAGE_SYSTEM_H
+
+void ResetPokemonStorageSystem(void);
+
+#endif // GUARD_POKEMON_STORAGE_SYSTEM_H

@@ -1,6 +1,7 @@
+#include "unknown_task.h"
+#include "cute_sketch.h"
 #include "global.h"
 #include "contest_painting.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -104,11 +105,6 @@ static void ContestPaintingInitVars(u8 arg0);
 static void VBlankCB_ContestPainting(void);
 void sub_8106B90();  //should be static
 static void sub_8107090(u8 arg0, u8 arg1);
-
-extern void sub_80FC7A0(struct Unk03005E20*);
-extern void sub_80FDA18(struct Unk03005E20*);
-extern void sub_80FD8CC(struct Unk03005E20*);
-extern void *species_and_otid_get_pal();
 
 __attribute__((naked))
 void sub_8106630(u32 arg0)

@@ -1,6 +1,6 @@
+#include "unknown_task.h"
 #include "global.h"
 #include "wallclock.h"
-#include "asm.h"
 #include "decompress.h"
 #include "main.h"
 #include "menu.h"
@@ -16,7 +16,6 @@ extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
-extern const struct MenuAction gMenuYesNoItems[];
 extern u16 gMiscClockMale_Pal[];
 extern u16 gMiscClockFemale_Pal[];
 

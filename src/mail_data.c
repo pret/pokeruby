@@ -1,14 +1,11 @@
+#include "pokemon_icon.h"
 #include "global.h"
+#include "mail_data.h"
 #include "items.h"
 #include "name_string_util.h"
 #include "pokemon.h"
 #include "species.h"
 #include "text.h"
-
-void ClearMailStruct(struct MailStruct *);
-u16 SpeciesToMailSpecies(u16, u32);
-bool8 ItemIsMail(u16);
-u16 GetUnownLetterByPersonality(u32);
 
 void ClearMailData(void)
 {

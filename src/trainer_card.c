@@ -1,6 +1,9 @@
+#include "unknown_task.h"
+#include "easy_chat.h"
+#include "util.h"
+#include "field_effect.h"
 #include "global.h"
 #include "trainer_card.h"
-#include "asm.h"
 #include "event_data.h"
 #include "link.h"
 #include "main.h"
@@ -68,9 +71,8 @@ extern u16 gUnknown_08E8D9C0[];
 extern bool8 (*const gUnknown_083B5EBC[])(struct Task *);
 extern bool8 (*const gUnknown_083B5ED8[])(struct Task *);
 
-// Other signature than on save_menu_util.h
+// FIXME: Other signature than on save_menu_util.h
 void FormatPlayTime(u8 *playtime, u16 hours, u16 minutes, s16 colon);
-
 u16 GetPokedexSeenCount(void);
 
 enum

@@ -1,5 +1,9 @@
+#include "battle_tower.h"
+#include "field_specials.h"
+#include "region_map.h"
+#include "script_menu.h"
+#include "field_map_obj.h"
 #include "global.h"
-#include "asm.h"
 #include "tv.h"
 #include "data2.h"
 #include "event_data.h"
@@ -41,8 +45,6 @@ struct UnkBattleStruct {
     u8 var35;
     u8 var36[11];
 };
-extern struct UnkBattleStruct gUnknown_030042E0;
-extern u8 gUnknown_0300430A[11];
 
 struct OutbreakPokemon
 {
@@ -52,13 +54,21 @@ struct OutbreakPokemon
     /*0x0B*/ u8 location;
 };
 
-extern u8 *gUnknown_083D1464[3];
-extern u8 gUnknown_02038694;
-
 struct TVSaleItem {
     u16 item_id;
     u16 item_amount;
 };
+
+struct ewramStruct_0207000 {
+    struct SaveTVStruct tvshows[4];
+};
+
+extern struct UnkBattleStruct gUnknown_030042E0;
+extern u8 gUnknown_0300430A[11];
+
+
+extern u8 gUnknown_02038694;
+
 extern struct TVSaleItem gUnknown_02038724[3];
 
 extern u16 gSpecialVar_0x8004;
@@ -85,11 +95,8 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern void sub_80BEBF4(void);
-
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
-extern const u8 *gUnknown_083CE048[];
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
@@ -97,7 +104,20 @@ extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
 
-u32 GetPlayerTrainerId(void);
+
+extern u8 gScriptContestCategory;
+extern u8 gScriptContestRank;
+extern u8 gUnknown_03004316[11];
+extern u8 gUnknown_02024D26;
+
+extern u16 gUnknown_02024C04;
+
+extern u8 ewram[];
+#define gUnknown_02007000 (*(struct ewramStruct_0207000 *)(ewram + 0x7000))
+extern u8 gUnknown_020387E4;
+
+extern u8 gUnknown_03000720;
+extern s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -113,45 +133,7 @@ void ClearTVShowData(void)
     sub_80BEBF4();
 }
 
-bool8 sub_80BF1B4(u8);
-void sub_80BF20C(void);
-extern u16 sub_8135D3C(u8);
-extern u8 gScriptContestCategory;
-extern u8 gScriptContestRank;
-extern u8 gUnknown_03004316[11];
-extern u8 gUnknown_02024D26;
-
-void sub_80BF334(void);
-void sub_80BF3A4(void);
-void sub_80BF3DC(void);
-void sub_80BF46C(void);
-void sub_80BF478(void);
-void sub_80BF484(void);
-void sub_80BF4BC(void);
-
-void sub_80BE028(void);
-void sub_80BE074(void);
-void sub_80BE778(void);
-void sub_80BEB20(void);
-
 asm(".section .text_a");
-s8 sub_80BF74C(TVShow tvShow[]);
-
-void sub_80BF55C(TVShow tvShow[], u8 showidx);
-void sub_80BEA88(void);
-
-void sub_80BE138(TVShow *show);
-void sub_80BE160(TVShow *show);
-extern u16 gUnknown_02024C04;
-
-void sub_80BE5FC(void);
-void sub_80BE65C(void);
-void sub_80BE6A0(void);
-void nullsub_21(void);
-void sub_80BE188(void);
-void sub_80BE320(void);
-
-extern u8 GabbyAndTyGetBattleNum(void);
 
 void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void) {
     switch (GabbyAndTyGetBattleNum()) {
@@ -784,8 +766,6 @@ void UpdateMassOutbreakTimeLeft(u16 arg0)
         gSaveBlock1.outbreakUnk5 -= arg0;
 }
 
-void sub_80BE9D4();
-
 void sub_80BE97C(bool8 flag)
 {
     u8 var0, var1;
@@ -839,9 +819,6 @@ void sub_80BEA50(u16 var)
     gUnknown_020387E0 = var;
 }
 
-void sub_80BF55C(TVShow tvShow[], u8 showidx);
-void sub_80BEA88(void);
-
 void sub_80BEA5C(u16 arg0)
 {
     TVShow *unk_2a98;
@@ -884,15 +861,6 @@ void sub_80BEA88(void)
         }
     }
 }
-
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0);
-void sub_80BEC10(u8);
-void sub_80BF588(TVShow tvShows[]);
-void sub_80BF6D8(void);
-bool8 sub_80BF77C(u16);
-bool8 sub_80BEE48(u8);
-
-bool8 IsPriceDiscounted(u8);
 
 void sub_80BEB20(void) {
     u16 rval;
@@ -1802,20 +1770,6 @@ void sub_80BFD20(void)
     RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
-extern u8 ewram[];
-#define gUnknown_02007000 (*(struct ewramStruct_0207000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
-
-struct ewramStruct_0207000 {
-    struct SaveTVStruct tvshows[4];
-};
-
-void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3);
-
-void sub_80C04A0(void);
-void sub_80C01D4(void);
-void sub_80C0408(void);
-
 void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
 {
     u8 i;
@@ -1844,14 +1798,6 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
     sub_80C01D4();
     sub_80C0408();
 }
-
-extern u8 gUnknown_03000720;
-extern s8 gUnknown_03000722;
-s8 sub_80C019C(TVShow tvShows[]);
-bool8 sub_80BFF68(struct SaveTVStruct ** tv1, struct SaveTVStruct ** tv2, u8 idx);
-u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx);
-u8 sub_80C00B4(TVShow *tv1, TVShow *tv2, u8 idx);
-u8 sub_80C0134(TVShow *tv1, TVShow *tv2, u8 idx);
 
 void sub_80BFE24(struct SaveTVStruct *arg0, struct SaveTVStruct *arg1, struct SaveTVStruct *arg2, struct SaveTVStruct *arg3)
 {
@@ -2091,9 +2037,6 @@ s8 sub_80C019C(TVShow tvShows[]) {
     }
     return -1;
 }
-
-void sub_80C03A8(u8 showidx);
-void sub_80C03C8(u16 species, u8 showidx);
 
 #ifdef NONMATCHING
 void sub_80C01D4(void) {
@@ -2436,22 +2379,6 @@ void sub_80C045C(void) {
 
 asm(".section .dotvshow\n");
 
-void DoTVShowPokemonFanClubLetter(void);
-void DoTVShowRecentHappenings(void);
-void DoTVShowPokemonFanClubOpinions(void);
-void nullsub_22(void);
-void DoTVShowPokemonNewsMassOutbreak(void);
-void DoTVShowBravoTrainerPokemonProfile(void);
-void DoTVShowBravoTrainerBattleTowerProfile(void);
-void DoTVShowPokemonTodaySuccessfulCapture(void);
-void DoTVShowTodaysSmartShopper(void);
-void DoTVShowTheNameRaterShow(void);
-void DoTVShowPokemonTodayFailedCapture(void);
-void DoTVShowPokemonAngler(void);
-void DoTVShowTheWorldOfMasters(void);
-
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
-
 void sub_80C06BC(int *arg0, int *arg1) {
     struct UnknownSaveStruct2ABC *str0;
     struct UnknownSaveStruct2ABC *str1;
@@ -2557,10 +2484,6 @@ void TVShowConvertInternationalString(u8 *dest, u8 *src, u8 language) {
 }
 
 asm(".section .text_c");
-
-void TVShowConvertInternationalString(u8 *, u8 *, u8);
-
-void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 void DoTVShowTheNameRaterShow(void) {
     TVShow *tvShow;

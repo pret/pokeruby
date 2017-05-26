@@ -6,7 +6,6 @@
 #include "script_menu.h"
 #include "task.h"
 
-extern void sub_81428CC(void);
 extern void (*gUnknown_0300485C)(void);
 
 static void ReshowPCMenuAfterHallOfFamePC(void);

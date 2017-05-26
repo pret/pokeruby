@@ -1,6 +1,5 @@
 #include "global.h"
 #include "script.h"
-#include "asm_fieldmap.h"
 #include "event_data.h"
 
 #define RAM_SCRIPT_MAGIC 51

@@ -146,4 +146,103 @@ extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
+// asm/battle_1.o
+void sub_800D6D4();
+void sub_800D74C();
+void sub_800D7B8(void);
+void sub_800DAB8();
+void sub_800DE30(u8);
+void sub_800E23C();
+
+// src/battle_2.o
+void sub_800E7C4(void);
+void InitBattle(void);
+void sub_800EC9C(void);
+void sub_800F104(void);
+void sub_800F298(void);
+void sub_800F808(void);
+void sub_800F838(struct Sprite *);
+u8 CreateNPCTrainerParty(struct Pokemon *, u16);
+void sub_800FCFC(void);
+void c2_8011A1C(void);
+void sub_80101B8(void);
+void c2_081284E0(void);
+void sub_8010278(struct Sprite *);
+void sub_80102AC(struct Sprite *);
+void nullsub_37(struct Sprite *);
+void sub_8010320(struct Sprite *);
+void sub_8010494(struct Sprite *);
+void sub_801053C(struct Sprite *);
+void oac_poke_ally_(struct Sprite *);
+void nullsub_86(struct Sprite *);
+void objc_dp11b_pingpong(struct Sprite *);
+void nullsub_41(void);
+void sub_8010800(void);
+void sub_8010824(void);
+void sub_8010874(void);
+void bc_8012FAC(void);
+void bc_load_battlefield(void);
+void sub_8011384(void);
+void bc_801333C(void);
+void bc_battle_begin_message(void);
+void bc_8013568(void);
+void sub_8011800(void);
+void sub_8011834(void);
+void bc_801362C(void);
+void sub_8011970(void);
+void sub_80119B4(void);
+void sub_8011B00(void);
+void sub_8011E8C(void);
+
+// asm/battle_2.o
+void sub_8012324(void);
+void sub_8012FBC(u8, u8);
+u8 b_first_side(u8, u8, u8);
+void sub_801365C(u8);
+void sub_801377C(void);
+void sub_80138F0(void);
+void dp01_battle_side_mark_buffer_for_execution();
+void sub_80155A4();
+void b_cancel_multi_turn_move_maybe(u8);
+void b_std_message();
+void sub_80156DC();
+void sub_80157C4(u8 index);
+
+// asm/battle_3.o
+u8 sub_8015A98(u8, u8, u8);
+u8 sub_8015DFC();
+u8 sub_8016558();
+u8 sub_80170DC();
+u8 sub_80173A4();
+u8 sub_8018324(u8, u8, u8, u8, u16);
+u8 sub_801A02C();
+
+// asm/battle_4.o
+void sub_801CAF8(u8, u8);
+void move_effectiveness_something(u16, u8, u8);
+
+// asm/battle_5.o
+void nullsub_91(void);
+void sub_802BF74(void);
+void sub_802C098();
+void c3_0802FDF4(u8);
+void sub_802E3E4(u8, int);
+void nullsub_8(u8);
+void sub_802E414(void);
+
+// asm/battle_7.o
+void move_anim_start_t4();
+void nullsub_9(u16);
+void nullsub_10();
+void load_gfxc_health_bar();
+u8 battle_load_something();
+void sub_8031F88();
+void sub_80324F8();
+void sub_8032638();
+void sub_8032AA8(u8 index, int i);
+void sub_8032AE0(void);
+
+// asm/battle_9.o
+void sub_8037510(void);
+
 #endif // GUARD_BATTLE_H

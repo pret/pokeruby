@@ -1,9 +1,11 @@
+#include "rom_8077ABC.h"
+#include "util.h"
+#include "battle.h"
 #include "global.h"
-#include "asm.h"
+#include "pokemon.h"
 #include "data2.h"
 #include "event_data.h"
 #include "main.h"
-#include "pokemon.h"
 #include "rng.h"
 #include "species.h"
 #include "sprite.h"
@@ -12,9 +14,7 @@
 #include "strings2.h"
 
 extern u8 gPlayerPartyCount;
-extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
-extern struct Pokemon gEnemyParty[6];
 
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
@@ -36,16 +36,9 @@ extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u32 gBitTable[];
-extern struct BaseStats gBaseStats[];
 extern const struct SpriteTemplate gSpriteTemplate_8208288[];
 //array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
-extern u8 gTrainerClassToPicIndex[];
-extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];
-extern u8 gUnknown_08208238[];
-extern u8 gUnknown_0820823C[];
-extern u8 gStatStageRatios[][2];
 extern u8 gHoldEffectToType[][2];
 
 u8 sub_803C348(u8 a1)

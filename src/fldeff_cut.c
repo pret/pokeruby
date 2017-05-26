@@ -1,5 +1,8 @@
+#include "pokemon_menu.h"
+#include "fieldmap.h"
+#include "task.h"
 #include "global.h"
-#include "asm.h"
+#include "fldeff_cut.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -27,18 +30,6 @@ extern u8 gLastFieldPokeMenuOpened;
 extern u32 gUnknown_0202FF84[];
 
 extern u8 UseCutScript;
-
-extern void sub_808AB90(void); // unknown args
-extern void sub_805BCC0(s16 x, s16 y);
-
-void sub_80A2634(void);
-void sub_80A25E8(void);
-void sub_80A2684(void);
-void sub_80A27A8(s16, s16);
-void sub_80A28F4(s16, s16);
-void objc_8097BBC(struct Sprite *sprite);
-void sub_80A2AB8(void);
-void sub_80A2B00(void); // unknown args
 
 bool8 SetUpFieldMove_Cut(void)
 {

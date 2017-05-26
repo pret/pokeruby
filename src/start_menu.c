@@ -1,6 +1,10 @@
+#include "item_menu.h"
+#include "pokenav.h"
+#include "pokemon_menu.h"
+#include "unknown_task.h"
+#include "fieldmap.h"
 #include "global.h"
 #include "start_menu.h"
-#include "asm.h"
 #include "event_data.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
@@ -49,7 +53,6 @@ extern u16 gSaveFileStatus;
 extern u16 gScriptResult;
 extern u8 (*gCallback_03004AE8)(void);
 extern u8 gUnknown_03004860;
-extern u8 gNumSafariBalls;
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;

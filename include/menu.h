@@ -9,6 +9,14 @@ struct MenuAction
    u8 (*func)();
 };
 
+extern const struct MenuAction gMenuYesNoItems[];
+
+extern struct Window gMenuWindow;
+extern struct Window *gMenuWindowPtr;
+extern u16 gMenuTextTileOffset;
+extern u16 gMenuTextWindowContentTileOffset;
+extern u16 gMenuMessageBoxContentTileOffset;
+
 void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);

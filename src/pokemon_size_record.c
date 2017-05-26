@@ -1,3 +1,4 @@
+#include "pokedex.h"
 #include "global.h"
 #include "pokemon_size_record.h"
 #include "data2.h"
@@ -6,9 +7,6 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"
-
-extern u16 SpeciesToNationalPokedexNum(u16);
-extern u16 GetPokedexHeightWeight(u16, u8);
 
 struct UnknownStruct
 {

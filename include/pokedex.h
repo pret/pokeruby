@@ -154,5 +154,7 @@ u16 sub_8091818(u8, u16, u16, u16);
 
 u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
 u8 sub_8091A4C(u8 gender, int i, int i1, int i2);
+u16 GetPokedexHeightWeight(u16, u8);
+u8 sub_8091E3C(void);
 
 #endif // GUARD_POKEDEX_H

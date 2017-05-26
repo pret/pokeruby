@@ -1,6 +1,6 @@
+#include "mystery_event_script.h"
 #include "global.h"
 #include "mystery_event_menu.h"
-#include "asm.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"

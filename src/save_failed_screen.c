@@ -1,6 +1,7 @@
+#include "starter_choose.h"
 #include "global.h"
 #include "gba/flash_internal.h"
-#include "asm.h"
+#include "save_failed_screen.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -34,12 +35,6 @@ extern u16 gSaveFailedType;
 extern struct SaveFailedClockStruct gSaveFailedClockInfo;
 extern u32 gDamagedSaveSectors;
 extern u32 gGameContinueCallback;
-
-extern u8 gBirchHelpGfx[];
-
-extern u8 gBirchGrassTilemap[];
-extern u8 gBirchBagTilemap[];
-extern u8 gBirchBagGrassPal[0x40];
 
 static const struct OamData sClockOamData =
 {

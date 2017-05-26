@@ -1,5 +1,7 @@
+#include "task.h"
+#include "intro_credits_graphics.h"
+#include "hall_of_fame.h"
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -20,8 +22,6 @@ asm(".set OFFSET_REG_BLDCNT,      0x50");
 asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
-extern void *species_and_otid_get_pal(u32, u16, u16);
 
 enum
 {
@@ -187,11 +187,6 @@ extern s16 gUnknown_0203935C;
 
 extern u8 gReservedSpritePaletteCount;
 
-// data/starter_choose
-extern u16 gBirchBagGrassPal[32];
-extern u8 gBirchGrassTilemap[];
-extern u8 gBirchHelpGfx[];
-
 // data/hall_of_fame
 extern void *gUnknown_0840B5A0[];
 
@@ -210,14 +205,6 @@ extern struct SpritePalette gUnknown_0840CAB0;
 extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
 extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
 extern struct SpriteTemplate gSpriteTemplate_840CAEC;
-
-// data/intro_credits_graphics
-extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
-extern const struct SpriteSheet gIntro2MaySpriteSheet;
-extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
-extern const struct SpritePalette gIntro2SpritePalettes[];
-extern const struct SpriteSheet gUnknown_08416E24;
-extern const struct SpriteSheet gUnknown_08416E34;
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];

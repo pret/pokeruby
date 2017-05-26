@@ -40,4 +40,11 @@ void sub_80806E4(void);
 void DoCurrentWeather(void);
 void sub_8080750();
 
+u8 sub_807D770(void);
+const u8 sub_807D770(void);
+u8 sub_807D770(void);
+bool8 sub_807DDFC(void);
+void SetWeather(u32);
+void UpdateWeatherPerDay(u16);
+
 #endif // GUARD_WEATHER_H

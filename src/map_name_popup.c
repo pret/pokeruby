@@ -1,5 +1,6 @@
+#include "region_map.h"
 #include "global.h"
-#include "asm.h"
+#include "map_name_popup.h"
 #include "event_data.h"
 #include "menu.h"
 #include "task.h"

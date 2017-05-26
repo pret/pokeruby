@@ -1,3 +1,4 @@
+#include "menu.h"
 #include "global.h"
 #include "field_message_box.h"
 #include "string_util.h"
@@ -6,9 +7,6 @@
 #include "text_window.h"
 
 extern struct Window gFieldMessageBoxWindow;
-extern u16 gMenuTextWindowContentTileOffset;
-
-extern u16 gMenuTextTileOffset;
 
 static u8 sMessageBoxMode;
 

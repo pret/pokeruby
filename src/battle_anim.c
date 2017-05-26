@@ -1,6 +1,11 @@
+#include "rom_8077ABC.h"
+#include "battle_interface.h"
+#include "battle_anim_80CA710.h"
+#include "contest.h"
+#include "main.h"
+#include "battle.h"
 #include "global.h"
 #include "battle_anim.h"
-#include "asm.h"
 #include "decompress.h"
 #include "m4a.h"
 #include "palette.h"
@@ -56,20 +61,6 @@ extern const u8 *const gBattleAnims_Moves[];
 extern const struct SpriteSheet gBattleAnimPicTable[];
 extern const struct SpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
-
-extern void sub_8079E24();
-extern void sub_8043EB4();
-extern u8 sub_8079E90();
-extern u8 sub_8077ABC();
-extern u8 sub_8078874(u8);
-extern void sub_8078914();
-extern u8 sub_80AEB1C();
-extern void sub_80E4EF8(int, int, int, int, u16, u8, int);
-extern u8 sub_80789BC();
-extern void sub_80AB2AC(void);
-extern void sub_800D7B8(void);
-extern u8 obj_id_for_side_relative_to_move();
-extern u8 battle_get_per_side_status_permutated();
 
 static void RunAnimScriptCommand(void);
 static void ScriptCmd_loadsprite(void);

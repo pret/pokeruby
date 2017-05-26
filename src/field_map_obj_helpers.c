@@ -1,6 +1,7 @@
+#include "field_map_obj.h"
+#include "field_ground_effect.h"
 #include "global.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
+#include "field_map_obj_helpers.h"
 #include "field_effect.h"
 #include "sprite.h"
 

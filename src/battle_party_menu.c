@@ -1,6 +1,12 @@
+#include "party_menu.h"
+#include "rom_8094928.h"
+#include "battle.h"
+#include "item_menu.h"
+#include "rom_8077ABC.h"
+#include "menu_helpers.h"
+#include "pokemon_summary_screen.h"
 #include "global.h"
 #include "battle_party_menu.h"
-#include "asm.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -11,42 +17,6 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 IsLinkDoubleBattle(void);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34();
-extern u8 sub_806BD58(u8, u8);
-extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern void PartyMenuTryPrintMonsHP(void);
-extern void nullsub_13(void);
-extern void PartyMenuDrawHPBars(void);
-extern u8 sub_806B58C(u8);
-extern u8 GetItemEffectType();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern u16 sub_806BD80();
-extern u8 sub_806CA38();
-extern void sub_806D5A4(void);
-extern void sub_802E414(void);
-extern void sub_8094D60(void);
-extern void sub_80A6DCC(void);
-extern void sub_806AF4C();
-extern u8 sub_80F9344(void);
-extern u8 sub_806B124(void);
-extern void sub_806C994();
-extern void sub_806BF74();
-extern void sub_806AEDC(void);
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
-extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
-extern u8 *sub_8040D08();
-extern u8 sub_8094C20();
-extern void sub_8040B8C(void);
-extern u8 pokemon_order_func(u8);
-extern void sub_8094C98(u8, u8);
-extern void sub_806E6F0();
-extern void sub_806D538();
 
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;

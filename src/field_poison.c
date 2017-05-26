@@ -1,5 +1,7 @@
+#include "pokemon_summary_screen.h"
+#include "fldeff_80C5CD4.h"
 #include "global.h"
-#include "asm.h"
+#include "field_poison.h"
 #include "field_message_box.h"
 #include "pokemon.h"
 #include "script.h"
@@ -7,7 +9,6 @@
 #include "task.h"
 #include "text.h"
 
-extern struct Pokemon gPlayerParty[6];
 extern u16 gScriptResult;
 extern u8 fieldPoisonText_PokemonFainted[];
 

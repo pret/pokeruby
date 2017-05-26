@@ -1,3 +1,8 @@
+#include "dewford_trend.h"
+#include "field_weather.h"
+#include "tv.h"
+#include "time_events.h"
+#include "field_specials.h"
 #include "global.h"
 #include "clock.h"
 #include "berry.h"
@@ -7,14 +12,6 @@
 #include "rom4.h"
 #include "rtc.h"
 #include "wallclock.h"
-
-extern void UpdateDewfordTrendPerDay(u16);
-extern void UpdateTVShowsPerDay(u16);
-extern void UpdateWeatherPerDay(u16);
-extern void UpdatePartyPokerusTime(u16);
-extern void UpdateMirageRnd(u16);
-extern void UpdateBirchState(u16);
-extern void SetShoalItemFlag(u16);
 
 static void InitTimeBasedEvents(void);
 static void UpdatePerDay(struct Time *time);
