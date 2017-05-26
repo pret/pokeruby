@@ -1,12 +1,12 @@
-#include "region_map.h"
-#include "tv.h"
 #include "global.h"
 #include "pokemon_summary_screen.h"
 #include "link.h"
 #include "menu.h"
 #include "pokemon.h"
+#include "region_map.h"
 #include "string_util.h"
 #include "strings2.h"
+#include "tv.h"
 
 extern struct Pokemon *unk_2018000;
 

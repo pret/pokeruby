@@ -1,8 +1,8 @@
-#include "field_map_obj.h"
-#include "field_ground_effect.h"
 #include "global.h"
 #include "field_map_obj_helpers.h"
 #include "field_effect.h"
+#include "field_ground_effect.h"
+#include "field_map_obj.h"
 #include "sprite.h"
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);

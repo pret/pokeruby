@@ -1,19 +1,19 @@
-#include "fieldmap.h"
-#include "pokeblock.h.h"
-#include "tv.h"
 #include "global.h"
 #include "wild_encounter.h"
 #include "abilities.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "pokeblock.h.h"
 #include "rng.h"
 #include "roamer.h"
 #include "rom4.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "species.h"
+#include "tv.h"
 
 struct WildPokemon
 {

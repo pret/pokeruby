@@ -1,9 +1,9 @@
-#include "field_map_obj.h"
-#include "util.h"
 #include "global.h"
 #include "script_movement.h"
+#include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "task.h"
+#include "util.h"
 
 extern u8 *gUnknown_020384F8[];
 

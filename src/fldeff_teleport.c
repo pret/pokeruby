@@ -1,11 +1,11 @@
-#include "task.h"
-#include "pokemon_menu.h"
 #include "global.h"
 #include "fldeff_teleport.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
+#include "pokemon_menu.h"
 #include "rom4.h"
 #include "rom6.h"
+#include "task.h"
 
 extern u32 gUnknown_0202FF84[];
 

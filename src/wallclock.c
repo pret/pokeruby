@@ -1,4 +1,3 @@
-#include "unknown_task.h"
 #include "global.h"
 #include "wallclock.h"
 #include "decompress.h"
@@ -11,6 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];

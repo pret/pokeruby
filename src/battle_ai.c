@@ -1,5 +1,3 @@
-#include "util.h"
-#include "rom_8077ABC.h"
 #include "global.h"
 #include "battle_ai.h"
 #include "abilities.h"
@@ -10,7 +8,9 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "rng.h"
+#include "rom_8077ABC.h"
 #include "species.h"
+#include "util.h"
 
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;

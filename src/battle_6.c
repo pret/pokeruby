@@ -1,6 +1,6 @@
-#include "battle_message.h"
 #include "global.h"
 #include "battle.h"
+#include "battle_message.h"
 #include "menu_cursor.h"
 #include "text.h"
 

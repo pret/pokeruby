@@ -1,8 +1,8 @@
-#include "util.h"
 #include "global.h"
 #include "data2.h"
 #include "decompress.h"
 #include "sprite.h"
+#include "util.h"
 
 
 static void sub_8046388(struct Sprite *);

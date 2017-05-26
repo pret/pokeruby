@@ -1,4 +1,3 @@
-#include "unknown_task.h"
 #include "global.h"
 #include "diploma.h"
 #include "main.h"
@@ -11,6 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
+#include "unknown_task.h"
 
 static void VBlankCB(void);
 static void MainCB2(void);

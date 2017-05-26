@@ -1,12 +1,12 @@
-#include "region_map.h"
 #include "global.h"
 #include "field_region_map.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "region_map.h"
 #include "sprite.h"
-#include "text.h"
 #include "strings2.h"
+#include "text.h"
 
 struct RegionMapStruct
 {

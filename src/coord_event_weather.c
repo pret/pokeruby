@@ -1,6 +1,6 @@
-#include "field_weather.h"
 #include "global.h"
 #include "coord_event_weather.h"
+#include "field_weather.h"
 
 struct CoordEventWeather
 {

@@ -1,5 +1,3 @@
-#include "rom3.h"
-#include "unknown_task.h"
 #include "global.h"
 #include "gba/flash_internal.h"
 #include "gba/m4a_internal.h"
@@ -10,10 +8,12 @@
 #include "m4a.h"
 #include "play_time.h"
 #include "rng.h"
+#include "rom3.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"
+#include "unknown_task.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 IntrMain[];

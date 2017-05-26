@@ -1,9 +1,8 @@
-#include "contest_link_80C2020.h"
-#include "contest_link_80C857C.h"
-#include "unknown_task.h"
 #include "global.h"
 #include "matsuda_debug_menu.h"
 #include "contest.h"
+#include "contest_link_80C2020.h"
+#include "contest_link_80C857C.h"
 #include "data2.h"
 #include "link.h"
 #include "main.h"
@@ -15,6 +14,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "unknown_task.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gUnknown_0203857D[][64];

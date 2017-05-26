@@ -1,14 +1,13 @@
-#include "util.h"
-#include "field_player_avatar.h"
-#include "field_map_obj.h"
-#include "pokemon_icon.h"
-#include "field_effect.h"
 #include "global.h"
 #include "naming_screen.h"
 #include "data2.h"
+#include "field_effect.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokemon_icon.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -17,6 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
+#include "util.h"
 
 extern u16 gKeyRepeatStartDelay;
 

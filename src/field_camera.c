@@ -1,9 +1,9 @@
-#include "rotating_gate.h"
-#include "fieldmap.h"
 #include "global.h"
 #include "field_camera.h"
 #include "berry.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
+#include "rotating_gate.h"
 #include "sprite.h"
 #include "text.h"
 

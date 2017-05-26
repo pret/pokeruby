@@ -1,4 +1,3 @@
-#include "starter_choose.h"
 #include "global.h"
 #include "gba/flash_internal.h"
 #include "save_failed_screen.h"
@@ -8,6 +7,7 @@
 #include "palette.h"
 #include "save.h"
 #include "sprite.h"
+#include "starter_choose.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"

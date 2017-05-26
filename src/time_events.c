@@ -1,7 +1,7 @@
-#include "field_weather.h"
 #include "global.h"
 #include "time_events.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"

@@ -1,10 +1,10 @@
-#include "script.h"
-#include "secret_base.h"
-#include "rom4.h"
-#include "tv.h"
 #include "global.h"
 #include "fieldmap.h"
 #include "palette.h"
+#include "rom4.h"
+#include "script.h"
+#include "secret_base.h"
+#include "tv.h"
 
 struct BackupMapData
 {

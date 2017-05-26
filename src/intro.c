@@ -1,11 +1,10 @@
-#include "intro_credits_graphics.h"
-#include "unknown_task.h"
-#include "hall_of_fame.h"
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "intro.h"
 #include "data2.h"
 #include "decompress.h"
+#include "hall_of_fame.h"
+#include "intro_credits_graphics.h"
 #include "libgncmultiboot.h"
 #include "link.h"
 #include "m4a.h"
@@ -20,6 +19,7 @@
 #include "task.h"
 #include "title_screen.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;

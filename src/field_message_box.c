@@ -1,6 +1,6 @@
-#include "menu.h"
 #include "global.h"
 #include "field_message_box.h"
+#include "menu.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
