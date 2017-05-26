@@ -170,24 +170,24 @@ static bool8 (*const gUnknown_0830FC34[])(u8) = {
     MetatileBehavior_IsEastArrowWarp,
 };
 static const u8 sRivalAvatarGfxIds[][2] = {
-    {MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     MAP_OBJ_GFX_RIVAL_MAY_NORMAL},
-    {MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
-    {MAP_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
-    {MAP_OBJ_GFX_RIVAL_BRENDAN_SURFING,    MAP_OBJ_GFX_RIVAL_MAY_SURFING},
-    {MAP_OBJ_GFX_BRENDAN_UNDERWATER,       MAP_OBJ_GFX_MAY_UNDERWATER},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL, MAP_OBJ_GFX_RIVAL_MAY_NORMAL},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE, MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE, MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
+    {MAP_OBJ_GFX_RIVAL_BRENDAN_SURFING, MAP_OBJ_GFX_RIVAL_MAY_SURFING},
+    {MAP_OBJ_GFX_BRENDAN_UNDERWATER, MAP_OBJ_GFX_MAY_UNDERWATER},
     {MAP_OBJ_GFX_RIVAL_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_RIVAL_MAY_FIELD_MOVE},
-    {MAP_OBJ_GFX_BRENDAN_FISHING,          MAP_OBJ_GFX_MAY_FISHING},
-    {MAP_OBJ_GFX_BRENDAN_WATERING,         MAP_OBJ_GFX_MAY_WATERING},
+    {MAP_OBJ_GFX_BRENDAN_FISHING, MAP_OBJ_GFX_MAY_FISHING},
+    {MAP_OBJ_GFX_BRENDAN_WATERING, MAP_OBJ_GFX_MAY_WATERING},
 };
 static const u8 sPlayerAvatarGfxIds[][2] = {
-    {MAP_OBJ_GFX_BRENDAN_NORMAL,     MAP_OBJ_GFX_MAY_NORMAL},
-    {MAP_OBJ_GFX_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_MAY_MACH_BIKE},
-    {MAP_OBJ_GFX_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_MAY_ACRO_BIKE},
-    {MAP_OBJ_GFX_BRENDAN_SURFING,    MAP_OBJ_GFX_MAY_SURFING},
+    {MAP_OBJ_GFX_BRENDAN_NORMAL, MAP_OBJ_GFX_MAY_NORMAL},
+    {MAP_OBJ_GFX_BRENDAN_MACH_BIKE, MAP_OBJ_GFX_MAY_MACH_BIKE},
+    {MAP_OBJ_GFX_BRENDAN_ACRO_BIKE, MAP_OBJ_GFX_MAY_ACRO_BIKE},
+    {MAP_OBJ_GFX_BRENDAN_SURFING, MAP_OBJ_GFX_MAY_SURFING},
     {MAP_OBJ_GFX_BRENDAN_UNDERWATER, MAP_OBJ_GFX_MAY_UNDERWATER},
     {MAP_OBJ_GFX_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_MAY_FIELD_MOVE},
-    {MAP_OBJ_GFX_BRENDAN_FISHING,    MAP_OBJ_GFX_MAY_FISHING},
-    {MAP_OBJ_GFX_BRENDAN_WATERING,   MAP_OBJ_GFX_MAY_WATERING},
+    {MAP_OBJ_GFX_BRENDAN_FISHING, MAP_OBJ_GFX_MAY_FISHING},
+    {MAP_OBJ_GFX_BRENDAN_WATERING, MAP_OBJ_GFX_MAY_WATERING},
 };
 static const u8 gUnknown_0830FC64[2][5][2] = {
     //male
@@ -205,14 +205,13 @@ static const u8 gUnknown_0830FC64[2][5][2] = {
         {MAP_OBJ_GFX_MAY_ACRO_BIKE, 4},
         {MAP_OBJ_GFX_MAY_SURFING, 8},
         {MAP_OBJ_GFX_MAY_UNDERWATER, 16},
-    }
-};
-static bool8 (*const gUnknown_0830FC78[])(u8) =  //Duplicate of gUnknown_0830FC34
-{
-    MetatileBehavior_IsSouthArrowWarp,
-    MetatileBehavior_IsNorthArrowWarp,
-    MetatileBehavior_IsWestArrowWarp,
-    MetatileBehavior_IsEastArrowWarp,
+    }};
+static bool8 (*const gUnknown_0830FC78[])(u8) = //Duplicate of gUnknown_0830FC34
+    {
+        MetatileBehavior_IsSouthArrowWarp,
+        MetatileBehavior_IsNorthArrowWarp,
+        MetatileBehavior_IsWestArrowWarp,
+        MetatileBehavior_IsEastArrowWarp,
 };
 static u8 (*const gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *) = {
     sub_8059E84,
@@ -254,8 +253,7 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 
 static bool8 sub_8058854(struct MapObject *playerMapObj, u8 direction)
 {
-    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerMapObj)
-     && !FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerMapObj) && !FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
     {
         u8 specialAnim = FieldObjectGetSpecialAnim(playerMapObj);
 
@@ -282,8 +280,7 @@ static void npc_clear_strange_bits(struct MapObject *a)
 
 static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
-     || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE) || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
         MovePlayerOnBike(direction, newKeys, heldKeys);
     else
         MovePlayerNotOnBike(direction, heldKeys);
@@ -524,8 +521,7 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
             sub_80593C4(direction);
             return;
         }
-        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
-         && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH) && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(direction);
             gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
@@ -574,9 +570,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 x, s16 y, u8 direction,
 
 static u8 sub_8058EF0(s16 a, s16 b, u8 c)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-     && MapGridGetZCoordAt(a, b) == 3
-     && GetFieldObjectIdByXYZ(a, b, 3) == 16)
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING) && MapGridGetZCoordAt(a, b) == 3 && GetFieldObjectIdByXYZ(a, b, 3) == 16)
     {
         sub_805A20C(c);
         return 1;
@@ -608,8 +602,7 @@ static u8 sub_8058F6C(s16 a, s16 b, u8 c)
                 a = gMapObjects[mapObjectId].coords2.x;
                 b = gMapObjects[mapObjectId].coords2.y;
                 MoveCoords(c, &a, &b);
-                if (npc_block_way(&gMapObjects[mapObjectId], a, b, c) == 0
-                 && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(a, b)) == 0)
+                if (npc_block_way(&gMapObjects[mapObjectId], a, b, c) == 0 && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(a, b)) == 0)
                 {
                     StartStrengthAnim(mapObjectId, c);
                     return 1;
@@ -744,11 +737,7 @@ static bool8 player_is_anim_in_certain_ranges(void)
 {
     u8 unk = gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C;
 
-    if (unk < 4
-     || (unk >= 16 && unk < 0x15)
-     || (unk >= 25 && unk < 41)
-     || (unk >= 98 && unk < 110)
-     || (unk >= 122 && unk < 126))
+    if (unk < 4 || (unk >= 16 && unk < 0x15) || (unk >= 25 && unk < 41) || (unk >= 98 && unk < 110) || (unk >= 122 && unk < 126))
         return TRUE;
     else
         return FALSE;
@@ -1086,8 +1075,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
     s16 y = playerMapObj->coords2.y;
 
     MoveCoords(playerMapObj->mapobj_unk_18, &x, &y);
-    if (npc_block_way(playerMapObj, x, y, playerMapObj->mapobj_unk_18) == 3 && PlayerGetZCoord() == 3
-     && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
+    if (npc_block_way(playerMapObj, x, y, playerMapObj->mapobj_unk_18) == 3 && PlayerGetZCoord() == 3 && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else
         return FALSE;
@@ -1254,8 +1242,7 @@ u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c)
 
 u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
 {
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(b)
-     && !FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(c))
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(b) && !FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(c))
     {
         FieldObjectClearAnimIfSpecialAnimFinished(b);
         FieldObjectClearAnimIfSpecialAnimFinished(c);
@@ -1274,8 +1261,7 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
 
 u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(b)
-     && FieldObjectCheckIfSpecialAnimFinishedOrInactive(c))
+    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(b) && FieldObjectCheckIfSpecialAnimFinishedOrInactive(c))
     {
         FieldObjectClearAnimIfSpecialAnimFinished(b);
         FieldObjectClearAnimIfSpecialAnimFinished(c);
@@ -1600,11 +1586,10 @@ u8 Fishing8(struct Task *task)
 u8 Fishing9(struct Task *task)
 {
     const s16 arr[][2] =
-    {
-        {0, 0},
-        {40, 10},
-        {70, 30}
-    };
+        {
+            {0, 0},
+            {40, 10},
+            {70, 30}};
 
     sub_805A954();
     task->data[0]++;

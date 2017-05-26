@@ -405,7 +405,6 @@ static void ScriptCmd_sprite(void)
             r4 = -r4;
         _r0 = sub_8079E90(gBattleAnimEnemyMonIndex);
         r1 = r4;
-
     }
     else
     {
@@ -622,8 +621,7 @@ static void ScriptCmd_end(void)
     bool32 continuousAnim = FALSE;
 
     // keep waiting as long as there is animations to be done.
-    if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0
-     || gMonAnimTaskIdArray[0] != 0xFF || gMonAnimTaskIdArray[1] != 0xFF)
+    if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0 || gMonAnimTaskIdArray[0] != 0xFF || gMonAnimTaskIdArray[1] != 0xFF)
     {
         gSoundAnimFramesToWait = 0;
         gAnimFramesToWait = 1;
@@ -723,7 +721,6 @@ static void ScriptCmd_monbg(void)
         gTasks[taskId].data[5] = r7;
         gTasks[taskId].data[6] = r5;
         gMonAnimTaskIdArray[0] = taskId;
-
     }
     r5 ^= 2;
     if (r6 > 1 && b_side_obj__get_some_boolean(r5))
@@ -1800,7 +1797,7 @@ static void c3_08073CEC(u8 taskId)
             {
                 if (r4 <= r3)
                     r7 = 1;
-              check:
+            check:
                 if (r7 != 0)
                 {
                     DestroyTask(taskId);
@@ -2215,8 +2212,7 @@ static void ScriptCmd_doublebattle_2D(void)
 
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
-    if (!IsContest() && IsDoubleBattle()
-     && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
+    if (!IsContest() && IsDoubleBattle() && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
     {
         if (r7 == 0)
         {
@@ -2247,10 +2243,9 @@ static void ScriptCmd_doublebattle_2E(void)
     u8 r4;
     u8 spriteId;
 
-    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
+    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
-    if (!IsContest() && IsDoubleBattle()
-     && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
+    if (!IsContest() && IsDoubleBattle() && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
     {
         if (r7 == 0)
         {

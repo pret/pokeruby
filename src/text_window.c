@@ -4,10 +4,10 @@
 #include "palette.h"
 #include "text.h"
 
-#define STD_MSG_BOX_LEFT    0
-#define STD_MSG_BOX_TOP    14
-#define STD_MSG_BOX_WIDTH  26
-#define STD_MSG_BOX_HEIGHT  4
+#define STD_MSG_BOX_LEFT 0
+#define STD_MSG_BOX_TOP 14
+#define STD_MSG_BOX_WIDTH 26
+#define STD_MSG_BOX_HEIGHT 4
 
 static void LoadTextWindowTiles(u8, void *);
 static void LoadTextWindowPalette(u8, u8);

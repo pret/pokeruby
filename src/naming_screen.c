@@ -303,7 +303,7 @@ static void NamingScreen_SetUpVideoRegs(void)
     REG_BLDALPHA = 0x80C;
 }
 
-static const struct NamingScreenTemplate *const sNamingScreenTemplates[];  //forward declaration
+static const struct NamingScreenTemplate *const sNamingScreenTemplates[]; //forward declaration
 
 static void NamingScreen_Init(void)
 {
@@ -483,8 +483,7 @@ static bool8 MainState_6(struct Task *task)
     sub_80B68D8(0);
     sub_80B6460(3, 0, 1);
     gKeyRepeatStartDelay = namingScreenData.unk3C;
-    if (namingScreenData.templateNum == NAMING_SCREEN_TEMPLATE_MON_NAME
-     && CalculatePlayerPartyCount() >= 6)
+    if (namingScreenData.templateNum == NAMING_SCREEN_TEMPLATE_MON_NAME && CalculatePlayerPartyCount() >= 6)
     {
         DisplaySentToPCMessage();
         namingScreenData.state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
@@ -493,7 +492,7 @@ static bool8 MainState_6(struct Task *task)
     else
     {
         namingScreenData.state = MAIN_STATE_BEGIN_FADE_OUT;
-        return TRUE;  //Exit the naming screen
+        return TRUE; //Exit the naming screen
     }
 }
 
@@ -529,7 +528,6 @@ enum
     KEY_ROLE_BACKSPACE,
     KEY_ROLE_OK,
 };
-
 
 static bool8 KeyboardKeyHandler_Character(u8);
 static bool8 KeyboardKeyHandler_Page(u8);
@@ -699,19 +697,19 @@ static void InputState_Enabled(struct Task *task)
 }
 
 static const s16 sDpadDeltaX[] = {
-    0,   //none
-    0,   //up
-    0,   //down
-    -1,  //left
-    1    //right
+    0,  //none
+    0,  //up
+    0,  //down
+    -1, //left
+    1   //right
 };
 
 static const s16 sDpadDeltaY[] = {
-    0,   //none
-    -1,  //up
-    1,   //down
-    0,   //left
-    0    //right
+    0,  //none
+    -1, //up
+    1,  //down
+    0,  //left
+    0   //right
 };
 
 static const s16 s4RowTo3RowTableY[] = {0, 1, 1, 2};
@@ -861,11 +859,11 @@ static void Task_80B64D4(u8 taskId)
 static u16 sub_80B654C(u8 a)
 {
     const u16 arr[] =
-    {
-        IndexOfSpritePaletteTag(4) * 16 + 0x10E,
-        IndexOfSpritePaletteTag(6) * 16 + 0x10C,
-        IndexOfSpritePaletteTag(6) * 16 + 0x10E,
-    };
+        {
+            IndexOfSpritePaletteTag(4) * 16 + 0x10E,
+            IndexOfSpritePaletteTag(6) * 16 + 0x10C,
+            IndexOfSpritePaletteTag(6) * 16 + 0x10E,
+        };
 
     return arr[a];
 }
@@ -939,17 +937,16 @@ static bool8 PageSwapAnimState_Init(struct Task *task)
 static bool8 PageSwapAnimState_1(struct Task *task)
 {
     u16 *const arr[] =
-    {
-        &namingScreenData.bg2vOffset,
-        &namingScreenData.bg1vOffset
-    };
+        {
+            &namingScreenData.bg2vOffset,
+            &namingScreenData.bg1vOffset};
 
     task->tFrameCount += 4;
     *arr[namingScreenData.unkC] = Sin(task->tFrameCount, 40);
     *arr[namingScreenData.unkD] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 64)
     {
-        u8 temp = namingScreenData.unk8;  //Why u8 and not u16?
+        u8 temp = namingScreenData.unk8; //Why u8 and not u16?
 
         namingScreenData.unk8 = namingScreenData.unkA;
         namingScreenData.unkA = temp;
@@ -1000,9 +997,9 @@ static void CursorInit(void)
 }
 
 static const u8 sKeyboardSymbolPositions[][9] = {
-    {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Upper page
-    {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Lower page
-    {1,  4,  7, 10, 13, 16, 16, 16, 19},  //Others page
+    {1, 3, 5, 8, 10, 12, 14, 17, 19},  //Upper page
+    {1, 3, 5, 8, 10, 12, 14, 17, 19},  //Lower page
+    {1, 4, 7, 10, 13, 16, 16, 16, 19}, //Others page
 };
 
 static u8 CursorColToKeyboardCol(s16 x)
@@ -1078,8 +1075,7 @@ void sub_80B6998(struct Sprite *sprite)
     sprite->invisible = (sprite->data4 & 0xFF);
     if (sprite->data0 == 8)
         sprite->invisible = TRUE;
-    if (sprite->invisible || (sprite->data4 & 0xFF00) == 0
-     || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
+    if (sprite->invisible || (sprite->data4 & 0xFF00) == 0 || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
     {
         sprite->data5 = 0;
         sprite->data6 = 1;
@@ -1452,11 +1448,7 @@ static void AddTextCharacter(u8 ch)
 
 static bool8 sub_80B7198(u8 a)
 {
-    if ((a >= 55 && a <= 74)
-     || (a >= 135 && a <= 139)
-     || (a >= 140 && a <= 144)
-     || (a >= 145 && a <= 149)
-     || (a >= 150 && a <= 154))
+    if ((a >= 55 && a <= 74) || (a >= 135 && a <= 139) || (a >= 140 && a <= 144) || (a >= 145 && a <= 149) || (a >= 150 && a <= 154))
         return TRUE;
     else
         return FALSE;
@@ -1464,8 +1456,7 @@ static bool8 sub_80B7198(u8 a)
 
 static bool8 sub_80B71E4(u8 a)
 {
-    if ((a >= 75 && a <= 79)
-     || (a >= 155 && a <= 159))
+    if ((a >= 75 && a <= 79) || (a >= 155 && a <= 159))
         return TRUE;
     else
         return FALSE;
@@ -1473,12 +1464,7 @@ static bool8 sub_80B71E4(u8 a)
 
 static bool8 sub_80B720C(u8 a)
 {
-    if ((a >= 6 && a <= 20)
-     || (a >= 26 && a <= 30)
-     || (a >= 75 && a <= 79)
-     || (a >= 86 && a <= 100)
-     || (a >= 106 && a <= 110)
-     || (a >= 155 && a <= 159))
+    if ((a >= 6 && a <= 20) || (a >= 26 && a <= 30) || (a >= 75 && a <= 79) || (a >= 86 && a <= 100) || (a >= 106 && a <= 110) || (a >= 155 && a <= 159))
         return TRUE;
     else
         return FALSE;
@@ -1486,10 +1472,7 @@ static bool8 sub_80B720C(u8 a)
 
 static bool8 sub_80B7264(u8 a)
 {
-    if ((a >= 26 && a <= 30)
-     || (a >= 70 && a <= 74)
-     || (a >= 106 && a <= 110)
-     || (a >= 150 && a <= 154))
+    if ((a >= 26 && a <= 30) || (a >= 70 && a <= 74) || (a >= 106 && a <= 110) || (a >= 150 && a <= 154))
         return TRUE;
     else
         return FALSE;
@@ -1638,10 +1621,10 @@ static void (*const gUnknown_083CE2F0[][2])(u16 *) = {
 static void sub_80B75C4(void)
 {
     u16 *const arr[] =
-    {
-        (u16 *)(VRAM + 0xE000),
-        (u16 *)(VRAM + 0xE800),
-    };
+        {
+            (u16 *)(VRAM + 0xE000),
+            (u16 *)(VRAM + 0xE800),
+        };
 
     gUnknown_083CE2F0[namingScreenData.currentPage][0](arr[namingScreenData.unkC]);
     gUnknown_083CE2F0[namingScreenData.currentPage][1](arr[namingScreenData.unkD]);
@@ -1650,10 +1633,10 @@ static void sub_80B75C4(void)
 static void sub_80B7614(void)
 {
     u16 *const arr[] =
-    {
-        (u16 *)(VRAM + 0xE000),
-        (u16 *)(VRAM + 0xE800),
-    };
+        {
+            (u16 *)(VRAM + 0xE000),
+            (u16 *)(VRAM + 0xE800),
+        };
 
     gUnknown_083CE2F0[namingScreenData.currentPage][1](arr[namingScreenData.unkD]);
 }
@@ -1767,7 +1750,7 @@ static void (*const gUnknown_083CE368[])(void) = {
     sub_80B7924,
 };
 
-static const u8 sKeyboardCharacters[][4][20];  //forward declaration
+static const u8 sKeyboardCharacters[][4][20]; //forward declaration
 
 static u8 GetCharAtKeyboardPos(s16 a, s16 b)
 {
@@ -1806,7 +1789,7 @@ static void sub_80B7850(void)
     PrintKeyboardCharacters(2);
 }
 
-static void PrintKeyboardCharacters(u8 page)  //print letters on page
+static void PrintKeyboardCharacters(u8 page) //print letters on page
 {
     s16 i;
     s16 r5;
@@ -1843,7 +1826,7 @@ static void sub_80B7924(void)
     if ((s16)namingScreenData.unk40 != MON_GENDERLESS)
     {
         if ((s16)namingScreenData.unk40 == MON_FEMALE)
-            genderSymbol[0] = 0xB6;  //female symbol
+            genderSymbol[0] = 0xB6; //female symbol
         MenuPrint(genderSymbol, 0x14, 4);
     }
 }

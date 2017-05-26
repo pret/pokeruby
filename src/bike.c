@@ -208,7 +208,7 @@ static void MachBikeTransition_80E51C4(u8 direction)
         {
             gUnknown_083DB5A4[gPlayerAvatar.bikeFrameCounter](direction);
             gPlayerAvatar.unkB = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-            if (gPlayerAvatar.bikeFrameCounter < 2) // do not go faster than the last element in the mach bike array
+            if (gPlayerAvatar.bikeFrameCounter < 2)                                                      // do not go faster than the last element in the mach bike array
                 gPlayerAvatar.bikeFrameCounter++;
         }
     }
@@ -584,7 +584,7 @@ static void AcroBikeTransition_80E58AC(u8 direction)
         }
         else
         {
-          derp:
+        derp:
             sub_8059570(direction);
         }
     }
@@ -648,7 +648,7 @@ static void AcroBikeTransition_80E59A0(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
                 sub_8059504(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                sub_80595DC(direction); //hit wall?
         }
         return;
     }
@@ -682,7 +682,7 @@ static void AcroBikeTransition_80E5A30(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
                 sub_8059504(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                sub_80595DC(direction); //hit wall?
         }
         return;
     }
@@ -875,15 +875,13 @@ static bool8 CanBikeFaceDirOnMetatile(u8 direction, u8 tile)
     if (direction == DIR_EAST || direction == DIR_WEST)
     {
         //Bike cannot face east or west on a vertical rail
-        if (MetatileBehavior_IsIsolatedVerticalRail(tile)
-         || MetatileBehavior_IsVerticalRail(tile))
+        if (MetatileBehavior_IsIsolatedVerticalRail(tile) || MetatileBehavior_IsVerticalRail(tile))
             return FALSE;
     }
     else
     {
         //Bike cannot face north or south on a horizontal rail
-        if (MetatileBehavior_IsIsolatedHorizontalRail(tile)
-         || MetatileBehavior_IsHorizontalRail(tile))
+        if (MetatileBehavior_IsIsolatedHorizontalRail(tile) || MetatileBehavior_IsHorizontalRail(tile))
             return FALSE;
     }
     return TRUE;

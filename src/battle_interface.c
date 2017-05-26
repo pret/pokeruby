@@ -1,14 +1,14 @@
 #include "global.h"
+#include "battle_interface.h"
 #include "asm.h"
+#include "battle.h"
+#include "decompress.h"
+#include "palette.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
-#include "decompress.h"
-#include "sound.h"
-#include "songs.h"
-#include "battle.h"
-#include "palette.h"
-#include "battle_interface.h"
 
 struct UnknownStruct5
 {
@@ -21,14 +21,14 @@ struct UnknownStruct5
 
 struct UnknownStruct6
 {
-    u8 bit_0:1;
-    u8 bit_1:1;
-    u8 bit_2:1;
-    u8 bit_3:1;
-    u8 bit_4:1;
-    u8 bit_5:1;
-    u8 bit_6:1;
-    u8 bit_7:1;
+    u8 bit_0 : 1;
+    u8 bit_1 : 1;
+    u8 bit_2 : 1;
+    u8 bit_3 : 1;
+    u8 bit_4 : 1;
+    u8 bit_5 : 1;
+    u8 bit_6 : 1;
+    u8 bit_7 : 1;
 };
 
 struct UnknownStruct7
@@ -37,9 +37,9 @@ struct UnknownStruct7
 };
 
 extern u8 ewram[];
-#define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
-#define ewram16088 (*(u8 *)                  (ewram + 0x16088))
-#define ewram16089 (*(u8 *)                  (ewram + 0x16089))
+#define ewram520 ((struct UnknownStruct7 *)(ewram + 0x00520))
+#define ewram16088 (*(u8 *)(ewram + 0x16088))
+#define ewram16089 (*(u8 *)(ewram + 0x16089))
 #define ewram17800 ((struct UnknownStruct6 *)(ewram + 0x17800))
 #define ewram17850 ((struct UnknownStruct5 *)(ewram + 0x17850))
 
@@ -145,7 +145,7 @@ void sub_8043740(s16 a, u16 *b, u8 c)
         }
         else
             break;
-        asm(""::"r"(r9));
+        asm("" ::"r"(r9));
     }
 
     //_080437AA
@@ -175,7 +175,6 @@ void sub_8043740(s16 a, u16 *b, u8 c)
             }
             j++;
         }
-
     }
     //_0804386A
     else
@@ -194,7 +193,7 @@ void sub_8043740(s16 a, u16 *b, u8 c)
             }
         }
     }
-    asm(""::"r"(r9));
+    asm("" ::"r"(r9));
 }
 #else
 NAKED
@@ -774,7 +773,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     }
     //asm(""::"r"(a));
     //_080441B6
-    for (i = 0; i < c; i++)  // _080440BC
+    for (i = 0; i < c; i++) // _080440BC
     {
         void *temp = r4[i] + gSprites[a].oam.tileNum * 32;
         CpuCopy32((void *)(0x02000020 + i * 0x40), temp, 0x20);
@@ -987,7 +986,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     StringCopy(str + 6, gNatureNames[nature]);
     sub_80034D4(r6, str);
     r7 = 6;
-    for (i = 0; i < (u32)r8; i++, r7++)  //_080443AA
+    for (i = 0; i < (u32)r8; i++, r7++) //_080443AA
     {
         u8 val;
 
@@ -1306,9 +1305,7 @@ void sub_804454C(void)
 
     for (i = 0; i < gUnknown_02024A68; i++)
     {
-        if (gSprites[gUnknown_03004340[i]].callback == SpriteCallbackDummy
-         && battle_side_get_owner(i) != 1
-         && (IsDoubleBattle() || battle_side_get_owner(i) != 0))
+        if (gSprites[gUnknown_03004340[i]].callback == SpriteCallbackDummy && battle_side_get_owner(i) != 1 && (IsDoubleBattle() || battle_side_get_owner(i) != 0))
         {
             u8 r6;
 
@@ -1421,7 +1418,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     //_08044884
 
     sp14 = 0;
-    for (i = 0; i < 6; i++)  //_080448A0
+    for (i = 0; i < 6; i++) //_080448A0
     {
         if (b[i].unk0 != 0xFFFF)
             sp14++;
@@ -1446,7 +1443,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         gSprites[sp18].pos1.x += 0x60;
     }
     //_0804495A
-    for (i = 0; i < 6; i++)  //_08044970
+    for (i = 0; i < 6; i++) //_08044970
     {
         sp[i] = CreateSpriteAtEnd(&gSpriteTemplate_820A7D4[r7], x, y - 4, 9);
         if (d == 0)
@@ -1480,7 +1477,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     //_08044A76
     if (battle_side_get_owner(a) == 0)
     {
-        for (i = 0; i < 6; i++)  //_08044A9A
+        for (i = 0; i < 6; i++) //_08044A9A
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI) // && b[i] != 0xFFFF && b[i]
             {
@@ -1563,7 +1560,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                 }
             }
             // This corrects the initialization order, but messes up the counter update order
-            asm(""::"r"(&b[i]));
+            asm("" ::"r"(&b[i]));
         }
     }
     //_08044C38
@@ -2365,8 +2362,7 @@ static void sub_8045110(struct Sprite *sprite)
         sprite->pos2.x += r2 >> 4;
     else
         sprite->pos2.x -= r2 >> 4;
-    if (sprite->pos2.x + sprite->pos1.x > 248
-     || sprite->pos2.x + sprite->pos1.x < -8)
+    if (sprite->pos2.x + sprite->pos1.x > 248 || sprite->pos2.x + sprite->pos1.x < -8)
     {
         sprite->invisible = TRUE;
         sprite->callback = SpriteCallbackDummy;
@@ -2436,8 +2432,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
 
     i = 0;
     _7 = 7;
-    if (GetMonData(pkmn, MON_DATA_LANGUAGE) == 1
-     && GetMonData(pkmn, MON_DATA_IS_EGG) == 0)
+    if (GetMonData(pkmn, MON_DATA_LANGUAGE) == 1 && GetMonData(pkmn, MON_DATA_IS_EGG) == 0)
     {
         u8 *p = gUnknown_020238CC;
 
@@ -2694,7 +2689,6 @@ static void sub_80458B0(u8 a)
         CpuCopy32(r6, addr, 32);
         r6 += 32;
     }
-
 }
 
 static void sub_8045998(u8 a)

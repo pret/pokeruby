@@ -3,7 +3,7 @@
 // Some of these functions have different signatures, so we need to make this
 // an array of void pointers or a struct. It's simpler to just make it an array
 // for now.
-void * const gMPlayJumpTableTemplate[] = {
+void *const gMPlayJumpTableTemplate[] = {
     ply_fine,
     ply_goto,
     ply_patt,
@@ -44,22 +44,22 @@ void * const gMPlayJumpTableTemplate[] = {
 
 // This is a table of deltas between sample values in compressed PCM data.
 const s8 gDeltaEncodingTable[] = {
-      0,
-      1,
-      4,
-      9,
-     16,
-     25,
-     36,
-     49,
+    0,
+    1,
+    4,
+    9,
+    16,
+    25,
+    36,
+    49,
     -64,
     -49,
     -36,
     -25,
     -16,
-     -9,
-     -4,
-     -1,
+    -9,
+    -4,
+    -1,
 };
 
 const u8 gScaleTable[] = {
@@ -248,20 +248,20 @@ const u8 gClockTable[] = {
 // clang-format on
 
 const struct PokemonCrySong gPokemonCrySongTemplate = {
-    1, // track count
-    0, // block count
+    1,   // track count
+    0,   // block count
     255, // priority
-    0, // reverb
+    0,   // reverb
     (struct ToneData *)&voicegroup_pokemon_cry,
     NULL,
     NULL,
     0,
     TUNE, // part 0
-    C_V, // TUNE value
+    C_V,  // TUNE value
     GOTO,
-    0, // GOTO target address
-    TUNE, // part 1
-    C_V + 16, // TUNE value
+    0,          // GOTO target address
+    TUNE,       // part 1
+    C_V + 16,   // TUNE value
     {VOICE, 0}, // part 0 jumps here with GOTO
     VOL,
     127, // volume
@@ -272,10 +272,10 @@ const struct PokemonCrySong gPokemonCrySongTemplate = {
     PAN,
     C_V, // PAN value
     TIE,
-    60, // TIE key (default is Cn3)
+    60,  // TIE key (default is Cn3)
     127, // TIE velocity
     {XCMD, 0x0C},
-    60, // unk value
+    60,         // unk value
     {EOT, FINE} // end
 };
 

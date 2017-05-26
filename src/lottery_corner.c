@@ -94,7 +94,7 @@ void PickLotteryCornerTicket(void)
 
             // UB: Too few arguments for function GetMonData
             if (GetBoxMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE &&
-            !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
+                !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);

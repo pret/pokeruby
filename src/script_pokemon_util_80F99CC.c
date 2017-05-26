@@ -68,7 +68,7 @@ void sub_80F9A4C(void)
 
 void sub_80F9A8C(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         gPaletteFade.bufferTransferDisabled = 1;
         OpenPartyMenu(gTasks[taskId].data[0], 0);
@@ -78,10 +78,10 @@ void sub_80F9A8C(u8 taskId)
 
 bool8 sub_80F9ACC(void)
 {
-    switch(EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.unk264)
     {
     case 0:
-        if(EWRAM_1B000.unk266 < gPlayerPartyCount)
+        if (EWRAM_1B000.unk266 < gPlayerPartyCount)
         {
             TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
             EWRAM_1B000.unk266++;
@@ -101,7 +101,7 @@ bool8 sub_80F9ACC(void)
         EWRAM_1B000.unk264++;
         break;
     case 3:
-        if(sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
+        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
         {
             EWRAM_1B000.unk266++;
             break;
@@ -125,7 +125,7 @@ bool8 sub_80F9ACC(void)
         EWRAM_1B000.unk264++;
         break;
     case 7: // the only case that can return true.
-        if(sub_806B58C(EWRAM_1B000.unk266) != 1)
+        if (sub_806B58C(EWRAM_1B000.unk266) != 1)
         {
             EWRAM_1B000.unk266++;
             break;
@@ -144,9 +144,9 @@ void sub_80F9C00(void)
 {
     u8 i;
 
-    for(i = 0; i < gPlayerPartyCount; i++)
+    for (i = 0; i < gPlayerPartyCount; i++)
     {
-        switch(sub_80AE47C(&gPlayerParty[i]))
+        switch (sub_80AE47C(&gPlayerParty[i]))
         {
         case 0:
         case 3:
@@ -163,9 +163,9 @@ void sub_80F9C00(void)
 
 void sub_80F9C6C(u8 var)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
-        switch(sub_806BD80(var))
+        switch (sub_806BD80(var))
         {
         case 1:
             PlaySE(5);
@@ -185,10 +185,10 @@ void sub_80F9C6C(u8 var)
 
 bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 6 calls a different function. why
 {
-    switch(EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.unk264)
     {
     case 0:
-        if(EWRAM_1B000.unk266 < gPlayerPartyCount)
+        if (EWRAM_1B000.unk266 < gPlayerPartyCount)
         {
             TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
             EWRAM_1B000.unk266++;
@@ -208,7 +208,7 @@ bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 
         EWRAM_1B000.unk264++;
         break;
     case 3:
-        if(sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
+        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
         {
             EWRAM_1B000.unk266++;
             break;
@@ -232,7 +232,7 @@ bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 
         EWRAM_1B000.unk264++;
         break;
     case 7: // the only case that can return true.
-        if(sub_806B58C(EWRAM_1B000.unk266) != 1)
+        if (sub_806B58C(EWRAM_1B000.unk266) != 1)
         {
             EWRAM_1B000.unk266++;
             break;
@@ -251,9 +251,9 @@ void sub_80F9E1C(void)
 {
     u8 i;
 
-    for(i = 0; i < gPlayerPartyCount; i++)
+    for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if(!sub_8040574(&gPlayerParty[i]))
+        if (!sub_8040574(&gPlayerParty[i]))
             sub_806BC3C(i, 0x9A);
         else
             sub_806BC3C(i, 0x8C);
@@ -262,9 +262,9 @@ void sub_80F9E1C(void)
 
 void sub_80F9E64(u8 var)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
-        switch(sub_806BD80(var))
+        switch (sub_806BD80(var))
         {
         case 1:
             PlaySE(5);
@@ -293,8 +293,8 @@ void sub_80F9F3C(void) // count pokemon moves
 
     gScriptResult = 0;
 
-    for(i = 0; i < 4; i++) // checks MOVE1-MOVE4
-        if(GetMonData(&gPlayerParty[gSpecialVar_0x8004], i + 13))
+    for (i = 0; i < 4; i++) // checks MOVE1-MOVE4
+        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], i + 13))
             gScriptResult++;
 }
 
@@ -440,7 +440,7 @@ void sub_80FA0DC(void)
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], 0, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
 
-    for(i = gSpecialVar_0x8005; i < 3; i++)
+    for (i = gSpecialVar_0x8005; i < 3; i++)
         sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
@@ -449,6 +449,6 @@ void sub_80FA148(void)
     struct Pokemon *party = &gPlayerParty[gSpecialVar_0x8004];
     gScriptResult = 0;
 
-    if(GetMonData(party, MON_DATA_IS_EGG))
+    if (GetMonData(party, MON_DATA_IS_EGG))
         gScriptResult = 1;
 }

@@ -11,7 +11,7 @@
 #define BERRY_NAME_LENGTH 6
 
 #define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
+#define LAST_BERRY ITEM_ENIGMA_BERRY
 
 #ifdef ENGLISH
 
@@ -992,7 +992,7 @@ void ClearEnigmaBerries(void)
 void SetEnigmaBerry(u8 *src)
 {
     u32 i;
-    u8 *dest = (u8*)&gSaveBlock1.enigmaBerry;
+    u8 *dest = (u8 *)&gSaveBlock1.enigmaBerry;
 
     for (i = 0; i < sizeof(gSaveBlock1.enigmaBerry); i++)
         dest[i] = src[i];
@@ -1014,7 +1014,7 @@ u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
     gSaveBlock1.enigmaBerry.berry.description1 = 0;
     gSaveBlock1.enigmaBerry.berry.description2 = 0;
 
-    dest = (u8*)enigmaBerry;
+    dest = (u8 *)enigmaBerry;
     checksum = 0;
     for (i = 0; i < ((u32)&gSaveBlock1.enigmaBerry.checksum - (u32)&gSaveBlock1.enigmaBerry); i++)
     {
@@ -1081,8 +1081,7 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript
-     && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
+    if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
         return TRUE;
     else
         return FALSE;

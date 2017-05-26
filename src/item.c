@@ -193,10 +193,10 @@ bool8 AddBagItem(u16 itemId, u16 count)
             }
         }
         if (count > 0)
-            return FALSE;   //No more empty item slots. The bag is full.
+            return FALSE; //No more empty item slots. The bag is full.
     }
 
-  copy_items:
+copy_items:
     //Copy pocket back into the bag.
     memcpy(gBagPockets[pocket].itemSlots, newItems, gBagPockets[pocket].capacity * sizeof(struct ItemSlot));
     return TRUE;
@@ -218,10 +218,9 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
             totalQuantity += gBagPockets[pocket].itemSlots[i].quantity;
     }
     if (totalQuantity < count)
-        return FALSE;   //We don't have enough of the item
+        return FALSE; //We don't have enough of the item
 
-    if (gBagPockets[pocket].capacity > gUnknown_02038560
-     && gBagPockets[pocket].itemSlots[gUnknown_02038560].itemId == itemId)
+    if (gBagPockets[pocket].capacity > gUnknown_02038560 && gBagPockets[pocket].itemSlots[gUnknown_02038560].itemId == itemId)
     {
         if (gBagPockets[pocket].itemSlots[gUnknown_02038560].quantity >= count)
         {

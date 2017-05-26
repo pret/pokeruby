@@ -234,7 +234,7 @@ bool8 sub_8064824(struct Sprite *sprite)
 void obj_anim_image_set_and_seek(struct Sprite *sprite, u8 a2, u8 a3)
 {
     sprite->animNum = a2;
-    sprite->animPaused = 0 ;
+    sprite->animPaused = 0;
     SeekSpriteAnim(sprite, a3);
 }
 

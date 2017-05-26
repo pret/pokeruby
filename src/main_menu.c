@@ -55,23 +55,26 @@ extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 extern u8 unk_2000000[];
 
 //Task data
-enum {
+enum
+{
     TD_MENULAYOUT,
     TD_SELECTEDMENUITEM,
 };
 
 //Menu layouts
-enum {
-    HAS_NO_SAVED_GAME,  //NEW GAME, OPTION
-    HAS_SAVED_GAME,     //CONTINUE, NEW GAME, OPTION
-    HAS_MYSTERY_GIFT,   //CONTINUE, NEW GAME, MYSTERY EVENTS, OPTION
+enum
+{
+    HAS_NO_SAVED_GAME, //NEW GAME, OPTION
+    HAS_SAVED_GAME,    //CONTINUE, NEW GAME, OPTION
+    HAS_MYSTERY_GIFT,  //CONTINUE, NEW GAME, MYSTERY EVENTS, OPTION
 };
 
 //Task data
-enum {
-    TD_TRAINER_SPRITE_ID = 2,       //Trainer sprite being displayed during gender menu
-    TD_BGHOFS = 4,                  //Used to set REG_BG1HOFS and slide the platform around
-    TD_SUBTASK_DONE,                //Set to true if the spawned task has finished
+enum
+{
+    TD_TRAINER_SPRITE_ID = 2, //Trainer sprite being displayed during gender menu
+    TD_BGHOFS = 4,            //Used to set REG_BG1HOFS and slide the platform around
+    TD_SUBTASK_DONE,          //Set to true if the spawned task has finished
     TD_GENDER_SELECTION,
     TD_COUNTER,
     TD_BIRCH_SPRITE_ID,
@@ -230,11 +233,7 @@ u32 InitMainMenu(u8 a1)
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
 
-    REG_DISPCNT = DISPCNT_MODE_0
-                | DISPCNT_OBJ_1D_MAP
-                | DISPCNT_BG0_ON
-                | DISPCNT_OBJ_ON
-                | DISPCNT_WIN0_ON;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
 
     taskId = CreateTask(Task_MainMenuCheckSave, 0);
     gTasks[taskId].data[TD_SELECTEDMENUITEM] = 0;
@@ -345,7 +344,7 @@ void Task_MainMenuWaitForRtcErrorAck(u8 taskId)
 {
     if (MenuUpdateWindowText())
     {
-        if ( gMain.newKeys & 1 )
+        if (gMain.newKeys & 1)
         {
             MenuZeroFillWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_MainMenuDraw;
@@ -734,7 +733,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     gTasks[taskId].func = Task_NewGameSpeech2;
     gTasks[taskId].data[TD_TRAINER_SPRITE_ID] = 0xFF;
     gTasks[taskId].data[3] = 0xFF;
-    gTasks[taskId].data[TD_COUNTER] = 216;  //Wait 3.6 seconds (216 frames) before starting speech
+    gTasks[taskId].data[TD_COUNTER] = 216; //Wait 3.6 seconds (216 frames) before starting speech
 
     PlayBGM(BGM_DOORO_X4);
 }
@@ -979,7 +978,7 @@ static void Task_NewGameSpeech17(u8 taskId)
 
     if (gTasks[taskId].data[TD_SUBTASK_DONE] == FALSE)
     {
-        gSprites[spriteId].pos1.x += 4;     //Move sprite right
+        gSprites[spriteId].pos1.x += 4; //Move sprite right
     }
     else
     {
@@ -1007,7 +1006,7 @@ static void Task_NewGameSpeech18(u8 taskId)
 
     if (gSprites[spriteId].pos1.x > 180)
     {
-        gSprites[spriteId].pos1.x -= 4;     //Move sprite left
+        gSprites[spriteId].pos1.x -= 4; //Move sprite left
     }
     else
     {
@@ -1044,7 +1043,7 @@ static void Task_NewGameSpeech21(u8 taskId)
 
     switch (selection)
     {
-    case 1:     //preset names
+    case 1: //preset names
     case 2:
     case 3:
     case 4:
@@ -1054,16 +1053,16 @@ static void Task_NewGameSpeech21(u8 taskId)
         SetPresetPlayerName(selection);
         gTasks[taskId].func = Task_NewGameSpeech23;
         break;
-    case 0:     //NEW NAME
+    case 0: //NEW NAME
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
-    case -1:    //B button
+    case -1: //B button
         sub_8072DEC();
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
-        gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
+        gTasks[taskId].func = Task_NewGameSpeech14; //Go back to gender menu
         break;
     }
 }
@@ -1101,19 +1100,19 @@ static void Task_NewGameSpeech25(u8 taskId)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-    case 0:     //YES
+    case 0: //YES
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].data[TD_TRAINER_SPRITE_ID]].oam.objMode = ST_OAM_OBJ_BLEND;
         StartSpriteFadeOut(taskId, 2);
         StartBackgroundFadeOut(taskId, 1);
-        gTasks[taskId].func = Task_NewGameSpeech26;     //Continue
+        gTasks[taskId].func = Task_NewGameSpeech26; //Continue
         break;
-    case -1:    //B button
-    case 1:     //NO
+    case -1: //B button
+    case 1:  //NO
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
-        gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
+        gTasks[taskId].func = Task_NewGameSpeech14; //Go back to gender menu
         break;
     }
 }
@@ -1374,7 +1373,7 @@ void CB_ContinueNewGameSpeechPart2()
     SetMainCallback2(CB2_MainMenu);
     REG_BG1CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP |
-      DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
+                  DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
 }
 
 void nullsub_34(struct Sprite *sprite)
@@ -1433,10 +1432,11 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].data[TD_MAY_SPRITE_ID] = spriteId;
 }
 
-enum {
+enum
+{
     TD_PARENT_TASK_ID,
-    TD_EVA,             //EVA coefficient of REG_BLDALPHA
-    TD_EVB,             //EVB coefficient of REG_BLDALPHA
+    TD_EVA, //EVA coefficient of REG_BLDALPHA
+    TD_EVB, //EVB coefficient of REG_BLDALPHA
     TD_INTERVAL,
     TD_FRAMECOUNTER
 };
@@ -1520,7 +1520,8 @@ static void StartSpriteFadeIn(u8 taskId, u8 interval)
     gTasks[newTaskId].data[TD_FRAMECOUNTER] = interval;
 }
 
-enum {
+enum
+{
     TD_FADELEVEL = 1,
     TD_DELAY,
 };
@@ -1626,9 +1627,9 @@ static void SetPresetPlayerName(u8 index)
     u8 *name;
 
     if (gSaveBlock2.playerGender == MALE)
-        name = (u8 *) gMalePresetNames[index].text;
+        name = (u8 *)gMalePresetNames[index].text;
     else
-        name = (u8 *) gFemalePresetNames[index].text;
+        name = (u8 *)gFemalePresetNames[index].text;
 
     for (i = 0; i < 7; i++)
         gSaveBlock2.playerName[i] = name[i];

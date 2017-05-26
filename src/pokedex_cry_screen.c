@@ -3,7 +3,8 @@
 #include "palette.h"
 #include "sprite.h"
 
-struct Unk201C800 {
+struct Unk201C800
+{
     u8 unk_0;
     u8 unk_1;
     u8 unk_2;
@@ -31,13 +32,14 @@ extern const struct SpritePalette gCryMeterNeedleSpritePalettes[];
 #define CRY_METER_MAP_WIDTH 32
 #endif
 
-u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
+u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1)
+{
     int returnVal = FALSE;
 
     switch (gUnknown_03005E98)
     {
     case 0:
-        LZ77UnCompVram(gUnknown_083FAF3C, (void *) (VRAM + cry->unk0));
+        LZ77UnCompVram(gUnknown_083FAF3C, (void *)(VRAM + cry->unk0));
         LoadPalette(&gUnknown_083FAF1C, cry->paletteNo * 16, 0x20);
         gUnknown_03005E98 += 1;
         break;
@@ -49,9 +51,9 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
         u32 r12;
         int x, y;
 
-        vram = (void *) BG_SCREEN_ADDR(cry->unk2);
+        vram = (void *)BG_SCREEN_ADDR(cry->unk2);
 
-        r12 = (u32) (cry->unk0 << 18) >> 23;
+        r12 = (u32)(cry->unk0 << 18) >> 23;
 
         for (row = 0; row < 8; row++)
         {
@@ -59,7 +61,7 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
             {
                 y = row + cry->yPos;
                 x = col + cry->xPos;
-                *(u16 *) (vram + (y * 64 + x * 2)) = (gUnknown_083FAE7C[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
+                *(u16 *)(vram + (y * 64 + x * 2)) = (gUnknown_083FAE7C[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
             }
         }
 

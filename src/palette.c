@@ -18,24 +18,24 @@ struct PaletteStructTemplate
 {
     u16 uid;
     u16 *src;
-    u16 pst_field_8_0:1;
-    u16 pst_field_8_1:9;
-    u16 size:5;
-    u16 pst_field_9_7:1;
+    u16 pst_field_8_0 : 1;
+    u16 pst_field_8_1 : 9;
+    u16 size : 5;
+    u16 pst_field_9_7 : 1;
     u8 pst_field_A;
-    u8 srcCount:5;
-    u8 pst_field_B_5:3;
+    u8 srcCount : 5;
+    u8 pst_field_B_5 : 3;
     u8 pst_field_C;
 };
 
 struct PaletteStruct
 {
     const struct PaletteStructTemplate *base;
-    u32 ps_field_4_0:1;
-    u16 ps_field_4_1:1;
-    u32 baseDestOffset:9;
-    u16 destOffset:10;
-    u16 srcIndex:7;
+    u32 ps_field_4_0 : 1;
+    u16 ps_field_4_1 : 1;
+    u32 baseDestOffset : 9;
+    u16 destOffset : 10;
+    u16 srcIndex : 7;
     u8 ps_field_8;
     u8 ps_field_9;
 };
@@ -58,8 +58,7 @@ static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
     0,
     0,
     1,
-    0
-};
+    0};
 
 static void unused_sub_8073DFC(struct PaletteStruct *, u32 *);
 static void unused_sub_8073F60(struct PaletteStruct *, u32 *);

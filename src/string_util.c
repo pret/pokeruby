@@ -11,15 +11,15 @@ const u8 gRightPointingTriangleString[] = _("▶");
 static const u8 sDigits[] = __("0123456789ABCDEF");
 
 static const s32 sPowersOfTen[] = {
-             1,
-            10,
-           100,
-          1000,
-         10000,
-        100000,
-       1000000,
-      10000000,
-     100000000,
+    1,
+    10,
+    100,
+    1000,
+    10000,
+    100000,
+    1000000,
+    10000000,
+    100000000,
     1000000000,
 };
 
@@ -168,7 +168,12 @@ s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
 
 u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
-    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
+    enum
+    {
+        WAITING_FOR_NONZERO_DIGIT,
+        WRITING_DIGITS,
+        WRITING_SPACES
+    } state;
     s32 powerOfTen;
     s32 largestPowerOfTen = sPowersOfTen[n - 1];
 
@@ -224,7 +229,12 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
 
 u8 *ConvertIntToDecimalStringN_DigitWidth6(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
-    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
+    enum
+    {
+        WAITING_FOR_NONZERO_DIGIT,
+        WRITING_DIGITS,
+        WRITING_SPACES
+    } state;
     s32 powerOfTen;
     s32 largestPowerOfTen = sPowersOfTen[n - 1];
 
@@ -288,7 +298,12 @@ u8 *ConvertIntToDecimalStringN_DigitWidth6(u8 *dest, s32 value, enum StringConve
 
 u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
-    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
+    enum
+    {
+        WAITING_FOR_NONZERO_DIGIT,
+        WRITING_DIGITS,
+        WRITING_SPACES
+    } state;
     u8 i;
     s32 powerOfSixteen;
     s32 largestPowerOfSixteen = 1;
@@ -406,8 +421,8 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    u8 setBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
-    u8 gotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
+    u8 setBrailleFont[] = {0xFC, 0x06, 0x06, 0xFF};
+    u8 gotoLine2[] = {0xFE, 0xFC, 0x0E, 0x02, 0xFF};
 
     dest = StringCopy(dest, setBrailleFont);
 
@@ -459,35 +474,41 @@ static u8 *ExpandPlaceholder_StringVar3(void)
 static u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return (u8 *) gExpandedPlaceholder_Kun;
+        return (u8 *)gExpandedPlaceholder_Kun;
     else
-        return (u8 *) gExpandedPlaceholder_Chan;
+        return (u8 *)gExpandedPlaceholder_Chan;
 }
 
 static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return (u8 *) gExpandedPlaceholder_May;
+        return (u8 *)gExpandedPlaceholder_May;
     else
-        return (u8 *) gExpandedPlaceholder_Brendan;
+        return (u8 *)gExpandedPlaceholder_Brendan;
 }
 
 #define VERSION_DEPENDENT_PLACEHOLDER_LIST \
-    X(Version,       Ruby,    Sapphire)    \
-    X(EvilTeam,      Magma,   Aqua)        \
-    X(GoodTeam,      Aqua,    Magma)       \
-    X(EvilLeader,    Maxie,   Archie)      \
-    X(GoodLeader,    Archie,  Maxie)       \
+    X(Version, Ruby, Sapphire)             \
+    X(EvilTeam, Magma, Aqua)               \
+    X(GoodTeam, Aqua, Magma)               \
+    X(EvilLeader, Maxie, Archie)           \
+    X(GoodLeader, Archie, Maxie)           \
     X(EvilLegendary, Groudon, Kyogre)      \
-    X(GoodLegendary, Kyogre,  Groudon)
+    X(GoodLegendary, Kyogre, Groudon)
 
 #ifdef SAPPHIRE
-#define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##s; }
+#define X(ph, r, s)                            \
+    static u8 *ExpandPlaceholder_##ph(void)    \
+    {                                          \
+        return (u8 *)gExpandedPlaceholder_##s; \
+    }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #else
-#define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##r; }
+#define X(ph, r, s)                            \
+    static u8 *ExpandPlaceholder_##ph(void)    \
+    {                                          \
+        return (u8 *)gExpandedPlaceholder_##r; \
+    }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #endif
 
@@ -498,25 +519,25 @@ u8 *GetExpandedPlaceholder(u32 id)
     typedef u8 *(*ExpandPlaceholderFunc)(void);
 
     static const ExpandPlaceholderFunc funcs[] =
-    {
-        ExpandPlaceholder_UnknownStringVar,
-        ExpandPlaceholder_PlayerName,
-        ExpandPlaceholder_StringVar1,
-        ExpandPlaceholder_StringVar2,
-        ExpandPlaceholder_StringVar3,
-        ExpandPlaceholder_KunChan,
-        ExpandPlaceholder_RivalName,
-        ExpandPlaceholder_Version,
-        ExpandPlaceholder_EvilTeam,
-        ExpandPlaceholder_GoodTeam,
-        ExpandPlaceholder_EvilLeader,
-        ExpandPlaceholder_GoodLeader,
-        ExpandPlaceholder_EvilLegendary,
-        ExpandPlaceholder_GoodLegendary,
-    };
+        {
+            ExpandPlaceholder_UnknownStringVar,
+            ExpandPlaceholder_PlayerName,
+            ExpandPlaceholder_StringVar1,
+            ExpandPlaceholder_StringVar2,
+            ExpandPlaceholder_StringVar3,
+            ExpandPlaceholder_KunChan,
+            ExpandPlaceholder_RivalName,
+            ExpandPlaceholder_Version,
+            ExpandPlaceholder_EvilTeam,
+            ExpandPlaceholder_GoodTeam,
+            ExpandPlaceholder_EvilLeader,
+            ExpandPlaceholder_GoodLeader,
+            ExpandPlaceholder_EvilLegendary,
+            ExpandPlaceholder_GoodLegendary,
+        };
 
     if (id >= ARRAY_COUNT(funcs))
-        return (u8 *) gExpandedPlaceholder_Empty;
+        return (u8 *)gExpandedPlaceholder_Empty;
     else
         return funcs[id]();
 }

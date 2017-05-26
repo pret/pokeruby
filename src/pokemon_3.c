@@ -7,8 +7,8 @@
 #include "item.h"
 #include "items.h"
 #include "link.h"
-#include "main.h"
 #include "m4a.h"
+#include "main.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
@@ -61,7 +61,7 @@ extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[6];
 extern struct BattlePokemon gBattleMons[4];
-extern u8 * const gItemEffectTable[];
+extern u8 *const gItemEffectTable[];
 extern u8 gUnknown_02024A60;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern struct EvolutionData gEvolutionTable[];
@@ -409,8 +409,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     case 3:
         for (i = 0; i < 5; i++)
         {
-            if (gEvolutionTable[species].evolutions[i].method == EVO_ITEM
-             && gEvolutionTable[species].evolutions[i].param == evolutionItem)
+            if (gEvolutionTable[species].evolutions[i].method == EVO_ITEM && gEvolutionTable[species].evolutions[i].param == evolutionItem)
             {
                 targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
@@ -716,12 +715,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             friendshipLevel++;
         if (friendship > 199)
             friendshipLevel++;
-        if ((event != 5 || !(Random() & 1))
-         && (event != 3
-          || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-           && (gTrainers[gTrainerBattleOpponent].trainerClass == 24
-            || gTrainers[gTrainerBattleOpponent].trainerClass == 25
-            || gTrainers[gTrainerBattleOpponent].trainerClass == 32))))
+        if ((event != 5 || !(Random() & 1)) && (event != 3 || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && (gTrainers[gTrainerBattleOpponent].trainerClass == 24 || gTrainers[gTrainerBattleOpponent].trainerClass == 25 || gTrainers[gTrainerBattleOpponent].trainerClass == 32))))
         {
             s8 mod = gUnknown_082082FE[event][friendshipLevel];
             if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
@@ -856,10 +850,8 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
             {
                 rnd = Random() % PARTY_SIZE;
                 mon = &party[rnd];
-            }
-            while (!GetMonData(mon, MON_DATA_SPECIES, 0));
-        }
-        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
+            } while (!GetMonData(mon, MON_DATA_SPECIES, 0));
+        } while (GetMonData(mon, MON_DATA_IS_EGG, 0));
 
         if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
         {
@@ -868,8 +860,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
             do
             {
                 rnd2 = Random();
-            }
-            while (rnd2 == 0);
+            } while (rnd2 == 0);
 
             if (rnd2 & 0xF0)
                 rnd2 &= 0x07;
@@ -900,8 +891,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
             partyIndex++;
             curBit <<= 1;
             selection >>= 1;
-        }
-        while (selection);
+        } while (selection);
     }
     else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
     {
@@ -928,8 +918,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
             partyIndex++;
             curBit <<= 1;
             selection >>= 1;
-        }
-        while (selection);
+        } while (selection);
     }
     else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
     {
@@ -1069,9 +1058,9 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     int i;
 
     for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != 0xFFFF; i++)
-         moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
+        moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
 
-     return numMoves;
+    return numMoves;
 }
 
 u8 sub_8040574(struct Pokemon *mon)
@@ -1204,12 +1193,12 @@ const u16 *pokemon_get_pal(struct Pokemon *mon)
 }
 
 //Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+#define HIHALF(n) (((n)&0xFFFF0000) >> 16)
 
 //Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
+#define LOHALF(n) ((n)&0xFFFF)
 
-const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
+const u16 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -1233,7 +1222,7 @@ const struct SpritePalette *sub_8040990(struct Pokemon *mon)
     return sub_80409C8(species, otId, personality);
 }
 
-const struct SpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
+const struct SpritePalette *sub_80409C8(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 

@@ -133,9 +133,7 @@ void SafariZoneGetPokeblockNameInFeeder(void)
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gSaveBlock1.location.mapNum == gPokeblockFeeders[i].mapNum
-         && gPokeblockFeeders[i].x == x
-         && gPokeblockFeeders[i].y == y)
+        if (gSaveBlock1.location.mapNum == gPokeblockFeeders[i].mapNum && gPokeblockFeeders[i].x == x && gPokeblockFeeders[i].y == y)
         {
             gScriptResult = i;
             StringCopy(gStringVar1, gPokeblockNames[gPokeblockFeeders[i].pokeblock.color]);
@@ -185,7 +183,6 @@ struct Pokeblock *unref_sub_80C8418(void)
         return &gPokeblockFeeders[gScriptResult].pokeblock;
 }
 
-
 struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();
@@ -196,7 +193,6 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
         return &gPokeblockFeeders[gScriptResult].pokeblock;
 }
 
-
 void SafariZoneActivatePokeblockFeeder(u8 pokeblock_index)
 {
     s16 x, y;
@@ -205,9 +201,7 @@ void SafariZoneActivatePokeblockFeeder(u8 pokeblock_index)
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
         //Find free entry in gPokeblockFeeders
-        if (gPokeblockFeeders[i].mapNum == 0
-         && gPokeblockFeeders[i].x == 0
-         && gPokeblockFeeders[i].y == 0)
+        if (gPokeblockFeeders[i].mapNum == 0 && gPokeblockFeeders[i].x == 0 && gPokeblockFeeders[i].y == 0)
         {
             //Initialize Pokeblock feeder
             GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -246,8 +240,8 @@ bool8 unref_sub_80C853C(void)
     }
 
     ConvertIntToDecimalStringN(gStringVar2,
-        gPokeblockFeeders[gScriptResult].stepCounter,
-        STR_CONV_MODE_LEADING_ZEROS, 3);
+                               gPokeblockFeeders[gScriptResult].stepCounter,
+                               STR_CONV_MODE_LEADING_ZEROS, 3);
 
     return TRUE;
 }

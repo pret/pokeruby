@@ -224,7 +224,8 @@ static void CB2_MysteryEventMenu(void)
                 sub_8072044(gStringVar4);
                 ptr = (u8 *)&gMain;
                 offset1 = offsetof(struct Main, state);
-                asm("" ::: "r1");
+                asm("" ::
+                        : "r1");
                 ptr += offset1;
                 *ptr = 13;
             }

@@ -1,21 +1,20 @@
 #include "global.h"
 #include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
-#include "fieldmap.h"
 #include "asm.h"
 #include "berry.h"
 #include "event_data.h"
-#include "field_player_avatar.h"
+#include "field_camera.h"
 #include "field_effect.h"
 #include "field_ground_effect.h"
+#include "field_map_obj_helpers.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "palette.h"
-#include "rom4.h"
 #include "rng.h"
+#include "rom4.h"
 #include "sprite.h"
-#include "field_camera.h"
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
-
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);
@@ -176,7 +175,7 @@ u8 GetFieldObjectIdByLocalId(u8 localId)
 #ifdef NONMATCHING
 u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8 c)
 {
-    struct MapObject2 *mapObj;  //TODO: resolve the mapobj_unk_19b weirdness
+    struct MapObject2 *mapObj; //TODO: resolve the mapobj_unk_19b weirdness
     u8 var;
     u16 r3;
     u16 r2;
@@ -679,8 +678,7 @@ void sub_805B55C(s16 a, s16 b)
             s16 foo = template->x + 7;
             s16 bar = template->y + 7;
 
-            if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo
-             && !FlagGet(template->flagId))
+            if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo && !FlagGet(template->flagId))
                 SpawnFieldObject(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, a, b);
         }
     }
@@ -707,7 +705,7 @@ void RemoveFieldObjectsOutsideView(void)
             struct MapObject *mapObject = &gMapObjects[i];
 
             if (mapObject->active && !mapObject->mapobj_bit_16)
-            RemoveFieldObjectIfOutsideView(mapObject);
+                RemoveFieldObjectIfOutsideView(mapObject);
         }
     }
 }
@@ -719,11 +717,9 @@ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
     s16 r4 = gSaveBlock1.pos.y;
     s16 r6 = gSaveBlock1.pos.y + 16;
 
-    if (mapObject->coords2.x >= r7 && mapObject->coords2.x <= r5
-     && mapObject->coords2.y >= r4 && mapObject->coords2.y <= r6)
+    if (mapObject->coords2.x >= r7 && mapObject->coords2.x <= r5 && mapObject->coords2.y >= r4 && mapObject->coords2.y <= r6)
         return;
-    if (mapObject->coords1.x >= r7 && mapObject->coords1.x <= r5
-     && mapObject->coords1.y >= r4 && mapObject->coords1.y <= r6)
+    if (mapObject->coords1.x >= r7 && mapObject->coords1.x <= r5 && mapObject->coords1.y >= r4 && mapObject->coords1.y <= r6)
         return;
     RemoveFieldObject(mapObject);
 }
@@ -755,16 +751,17 @@ void sub_805B75C(u8 a, s16 b, s16 c)
     struct MapObject *mapObject;
     u8 spriteId;
 
-    #define i spriteId
+#define i spriteId
     for (i = 0; i < 4; i++)
     {
         if (gLinkPlayerMapObjects[i].active && a == gLinkPlayerMapObjects[i].mapObjId)
             return;
     }
-    #undef i
+#undef i
 
     mapObject = &gMapObjects[a];
-    asm("":::"r5");
+    asm("" ::
+            : "r5");
     subspriteTables = NULL;
     gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     sp18.size = gfxInfo->size;
@@ -1002,7 +999,7 @@ void sub_805BDF8(u16 tag)
 {
     u16 paletteIndex = FindFieldObjectPaletteIndexByTag(tag);
 
-    if (paletteIndex != 0x11FF)  //always happens. FindFieldObjectPaletteIndexByTag returns u8
+    if (paletteIndex != 0x11FF) //always happens. FindFieldObjectPaletteIndexByTag returns u8
         sub_805BE58(&gUnknown_0837377C[paletteIndex]);
 }
 
@@ -1145,7 +1142,7 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     s16 deltaY;
 
 #ifndef NONMATCHING
-    asm(""::"r"(i));  //makes the compiler store i in r3
+    asm("" ::"r"(i)); //makes the compiler store i in r3
 #endif
 
     if (gUnknown_0202E844.field_0)
@@ -1175,8 +1172,7 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 
     for (i = 0; i < 16; i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y
-         && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
+        if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
             return i;
     }
     return 16;
@@ -1184,8 +1180,7 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 
 bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
 {
-    if (mapObject->mapobj_unk_0B_0 != 0 && z != 0
-     && mapObject->mapobj_unk_0B_0 != z)
+    if (mapObject->mapobj_unk_0B_0 != 0 && z != 0 && mapObject->mapobj_unk_0B_0 != z)
         return FALSE;
     else
         return TRUE;
@@ -1225,11 +1220,11 @@ void CameraObject_2(struct Sprite *);
 void ObjectCB_CameraObject(struct Sprite *sprite)
 {
     void (*const cameraObjectFuncs[])(struct Sprite *) =
-    {
-        CameraObject_0,
-        CameraObject_1,
-        CameraObject_2,
-    };
+        {
+            CameraObject_0,
+            CameraObject_1,
+            CameraObject_2,
+        };
 
     cameraObjectFuncs[sprite->data1](sprite);
 }
@@ -1354,7 +1349,7 @@ void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
     mapObject->mapobj_unk_20 = mapObject->mapobj_unk_18;
     if (!mapObject->mapobj_bit_9)
     {
-        s8 _direction = direction;  //needed for the asm to match
+        s8 _direction = direction; //needed for the asm to match
         mapObject->mapobj_unk_18 = _direction;
     }
     mapObject->placeholder18 = direction;
@@ -1444,8 +1439,7 @@ struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
 {
     s32 i;
 
-    if (mapObject->mapNum != gSaveBlock1.location.mapNum
-     || mapObject->mapGroup != gSaveBlock1.location.mapGroup)
+    if (mapObject->mapNum != gSaveBlock1.location.mapNum || mapObject->mapGroup != gSaveBlock1.location.mapGroup)
         return NULL;
 
     for (i = 0; i < 64; i++)
@@ -1735,7 +1729,8 @@ u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3)
     return dirn;
 }
 
-u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3) {
+u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3)
+{
     u8 dirn;
     dirn = sub_805CAAC(a0, a1, a2, a3);
     if (dirn == DIR_NORTH)
@@ -2797,7 +2792,7 @@ u8 sub_805E40C(struct MapObject *mapObject, struct Sprite *sprite)
     goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
     if (v0 == 1)
     {
-        mapObject->mapobj_unk_21 ++;
+        mapObject->mapobj_unk_21++;
         FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
         goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
         v0 = sub_805FF20(mapObject, mapObject->placeholder18);
@@ -2842,7 +2837,7 @@ u8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct 
     v0 = sub_805FF20(mapObject, mapObject->placeholder18);
     if (v0 == 1)
     {
-        mapObject->mapobj_unk_21 ++;
+        mapObject->mapobj_unk_21++;
         FieldObjectSetDirection(mapObject, directionSequence[mapObject->mapobj_unk_21]);
         goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->placeholder18);
         v0 = sub_805FF20(mapObject, mapObject->placeholder18);
@@ -2918,8 +2913,6 @@ u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
 }
-
-
 
 fieldmap_object_cb(sub_805E80C, sub_805E830, gUnknown_0837544C);
 
@@ -3301,7 +3294,8 @@ void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
         if (sprite->animCmdIndex == 1)
         {
             sprite->animCmdIndex = 2;
-        } else if (sprite->animCmdIndex == 3)
+        }
+        else if (sprite->animCmdIndex == 3)
         {
             sprite->animCmdIndex = 0;
         }
@@ -3329,13 +3323,16 @@ u8 sub_805FE90(s16 a0, s16 a1, s16 a2, s16 a3)
     if (a0 > a2)
     {
         return DIR_WEST;
-    } else if (a0 < a2)
+    }
+    else if (a0 < a2)
     {
         return DIR_EAST;
-    } else if (a1 > a3)
+    }
+    else if (a1 > a3)
     {
         return DIR_NORTH;
-    } else
+    }
+    else
     {
         return DIR_SOUTH;
     }
@@ -3378,7 +3375,8 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
     {
         return 2;
-    } else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    }
+    else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
     {
         return 2;
     }
@@ -3454,7 +3452,7 @@ bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s
 {
     struct MapObject *mapObject2;
     u8 i;
-    for (i=0; i<16; i++)
+    for (i = 0; i < 16; i++)
     {
         mapObject2 = &gMapObjects[i];
         if (mapObject2->active && mapObject2 != mapObject)
@@ -3693,11 +3691,13 @@ void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback
     if (FieldObjectIsSpecialAnimActive(mapObject))
     {
         FieldObjectExecSpecialAnim(mapObject, sprite);
-    } else
+    }
+    else
     {
         if (!mapObject->mapobj_bit_8)
         {
-            while (callback(mapObject, sprite));
+            while (callback(mapObject, sprite))
+                ;
         }
     }
     DoGroundEffects_OnBeginStep(mapObject, sprite);
@@ -3706,7 +3706,6 @@ void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback
     sub_80634D0(mapObject, sprite);
     FieldObjectUpdateSubpriority(mapObject, sprite);
 }
-
 
 extern const u8 gUnknown_083756C8[5];
 
@@ -4084,8 +4083,7 @@ int zffu_offset_calc(u8 a0, u8 a1)
 u8 state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     int zffuOffset;
-    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.")
-    if (a1 == 0 || a2 == 0 || a1 > 4 || a2 > 4)
+    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.") if (a1 == 0 || a2 == 0 || a1 > 4 || a2 > 4)
     {
         return 0;
     }
@@ -4414,4 +4412,3 @@ bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
-

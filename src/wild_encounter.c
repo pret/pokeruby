@@ -36,7 +36,6 @@ struct WildPokemonHeader
     struct WildPokemonInfo *fishingMonsInfo;
 };
 
-
 const struct WildPokemon PetalburgCity_WaterMons[] = {
     {20, 30, SPECIES_MARILL},
     {10, 20, SPECIES_MARILL},
@@ -2740,7 +2739,6 @@ const struct WildPokemon Underwater2_WaterMons[] = {
 };
 const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMons};
 
-
 extern u16 gRoute119WaterTileData[];
 extern struct WildPokemonHeader gWildMonHeaders[];
 extern struct Pokemon gEnemyParty[6];
@@ -2856,29 +2854,29 @@ static u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % 100;
 
-    if (rand < 20)                  //20% chance
+    if (rand < 20) //20% chance
         return 0;
-    if (rand >= 20 && rand < 40)    //20% chance
+    if (rand >= 20 && rand < 40) //20% chance
         return 1;
-    if (rand >= 40 && rand < 50)    //10% chance
+    if (rand >= 40 && rand < 50) //10% chance
         return 2;
-    if (rand >= 50 && rand < 60)    //10% chance
+    if (rand >= 50 && rand < 60) //10% chance
         return 3;
-    if (rand >= 60 && rand < 70)    //10% chance
+    if (rand >= 60 && rand < 70) //10% chance
         return 4;
-    if (rand >= 70 && rand < 80)    //10% chance
+    if (rand >= 70 && rand < 80) //10% chance
         return 5;
-    if (rand >= 80 && rand < 85)    //5% chance
+    if (rand >= 80 && rand < 85) //5% chance
         return 6;
-    if (rand >= 85 && rand < 90)    //5% chance
+    if (rand >= 85 && rand < 90) //5% chance
         return 7;
-    if (rand >= 90 && rand < 94)    //4% chance
+    if (rand >= 90 && rand < 94) //4% chance
         return 8;
-    if (rand >= 94 && rand < 98)    //4% chance
+    if (rand >= 94 && rand < 98) //4% chance
         return 9;
-    if (rand == 98)                 //1% chance
+    if (rand == 98) //1% chance
         return 10;
-    else                            //1% chance
+    else //1% chance
         return 11;
 }
 
@@ -2886,15 +2884,15 @@ static u8 ChooseWildMonIndex_Water(void)
 {
     u8 rand = Random() % 100;
 
-    if (rand < 60)                  //60% chance
+    if (rand < 60) //60% chance
         return 0;
-    if (rand >= 60 && rand < 90)    //30% chance
+    if (rand >= 60 && rand < 90) //30% chance
         return 1;
-    if (rand >= 90 && rand < 95)    //5% chance
+    if (rand >= 90 && rand < 95) //5% chance
         return 2;
-    if (rand >= 95 && rand < 99)    //4% chance
+    if (rand >= 95 && rand < 99) //4% chance
         return 3;
-    else                            //1% chance
+    else //1% chance
         return 4;
 }
 
@@ -2913,29 +2911,29 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
     switch (rod)
     {
     case OLD_ROD:
-        if (rand < 70)  //70% chance
+        if (rand < 70) //70% chance
             wildMonIndex = 0;
-        else            //30% chance
+        else //30% chance
             wildMonIndex = 1;
         break;
     case GOOD_ROD:
-        if (rand < 60)                  //60% chance
+        if (rand < 60) //60% chance
             wildMonIndex = 2;
-        if (rand >= 60 && rand < 80)    //20% chance
+        if (rand >= 60 && rand < 80) //20% chance
             wildMonIndex = 3;
-        if (rand >= 80 && rand < 100)   //20% chance
+        if (rand >= 80 && rand < 100) //20% chance
             wildMonIndex = 4;
         break;
     case SUPER_ROD:
-        if (rand < 40)                  //40% chance
+        if (rand < 40) //40% chance
             wildMonIndex = 5;
-        if (rand >= 40 && rand < 80)    //40% chance
+        if (rand >= 40 && rand < 80) //40% chance
             wildMonIndex = 6;
-        if (rand >= 80 && rand < 95)    //15% chance
+        if (rand >= 80 && rand < 95) //15% chance
             wildMonIndex = 7;
-        if (rand >= 95 && rand < 99)    //4% chance
+        if (rand >= 95 && rand < 99) //4% chance
             wildMonIndex = 8;
-        if (rand == 99)                 //1% chance
+        if (rand == 99) //1% chance
             wildMonIndex = 9;
         break;
     }
@@ -2972,7 +2970,7 @@ static u16 GetCurrentMapWildMonHeader(void)
     for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
     {
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1.location.mapGroup &&
-        gWildMonHeaders[i].mapNum == gSaveBlock1.location.mapNum)
+            gWildMonHeaders[i].mapNum == gSaveBlock1.location.mapNum)
             return i;
     }
     return -1;
@@ -3074,9 +3072,7 @@ static bool8 SetUpMassOutbreakEncounter(bool8 checkRepel)
 
 static bool8 DoMassOutbreakEncounterTest(void)
 {
-    if (gSaveBlock1.outbreakPokemonSpecies != 0
-     && gSaveBlock1.location.mapNum == gSaveBlock1.outbreakLocationMapNum
-     && gSaveBlock1.location.mapGroup == gSaveBlock1.outbreakLocationMapGroup)
+    if (gSaveBlock1.outbreakPokemonSpecies != 0 && gSaveBlock1.location.mapNum == gSaveBlock1.outbreakLocationMapNum && gSaveBlock1.location.mapGroup == gSaveBlock1.outbreakLocationMapGroup)
     {
         if (Random() % 100 < gSaveBlock1.outbreakPokemonProbability)
             return TRUE;
@@ -3169,8 +3165,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                     }
                 }
             }
-            else if (MetatileBehavior_IsWaterWildEncounter(a) == TRUE
-             || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(a) == TRUE))
+            else if (MetatileBehavior_IsWaterWildEncounter(a) == TRUE || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(a) == TRUE))
             {
                 if (gWildMonHeaders[headerNum].waterMonsInfo)
                 {
@@ -3220,8 +3215,7 @@ void RockSmashWildEncounter(void)
             gScriptResult = 0;
             return;
         }
-        else if (DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE
-         && GenerateWildMon(wildPokemonInfo, 2, TRUE) == TRUE)
+        else if (DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE && GenerateWildMon(wildPokemonInfo, 2, TRUE) == TRUE)
         {
             CheckForSafariZoneAndProceed();
             gScriptResult = 1;
@@ -3301,8 +3295,8 @@ void FishingWildEncounter(u8 rod)
     else
     {
         species = GenerateFishingWildMon(
-          gWildMonHeaders[GetCurrentMapWildMonHeader()].fishingMonsInfo,
-          rod);
+            gWildMonHeaders[GetCurrentMapWildMonHeader()].fishingMonsInfo,
+            rod);
     }
     IncrementGameStat(12);
     sub_80BEA50(species);

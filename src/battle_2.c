@@ -1,22 +1,22 @@
 #include "global.h"
+#include "abilities.h"
 #include "asm.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "data2.h"
+#include "link.h"
 #include "main.h"
-#include "text.h"
+#include "name_string_util.h"
 #include "palette.h"
+#include "pokemon.h"
+#include "rng.h"
+#include "songs.h"
+#include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "task.h"
-#include "pokemon.h"
-#include "species.h"
-#include "link.h"
-#include "name_string_util.h"
-#include "battle_setup.h"
-#include "rng.h"
-#include "sound.h"
-#include "songs.h"
+#include "text.h"
 #include "trig.h"
-#include "abilities.h"
 
 struct UnknownStruct6
 {
@@ -63,9 +63,9 @@ struct UnknownStruct9
 
 struct UnknownStruct10
 {
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
+    u8 unk0_0 : 1;
+    u8 unk0_1 : 1;
+    u8 unk0_2 : 1;
     u8 filler1[1];
     u8 unk2;
     u8 unk3;
@@ -79,8 +79,8 @@ struct UnknownStruct11
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5_0:1;
-    u8 unk5_1:1;
+    u8 unk5_0 : 1;
+    u8 unk5_1 : 1;
     u16 unk6;
     u8 unk8[10];
     u8 unk12;
@@ -105,25 +105,25 @@ struct UnknownStruct12
 
 struct UnknownStruct13
 {
-    u32 unk0_0:1;
-    u32 unk0_1:1;
-    u32 unk0_2:1;
-    u32 unk0_3:1;
-    u32 unk0_4:1;
-    u32 unk0_5:1;
-    u32 unk0_6:1;
-    u32 unk0_7:1;
-    u32 unk1_0:1;
-    u32 unk1_1:1;
-    u32 unk1_2:1;
-    u32 unk1_3:2;
-    u32 unk1_5:1;
-    u32 unk1_6:1;
-    u32 unk1_7:1;
-    u32 unk2_0:1;
-    u32 unk2_1:1;
-    u32 unk2_2:1;
-    u32 unk2_3:1;
+    u32 unk0_0 : 1;
+    u32 unk0_1 : 1;
+    u32 unk0_2 : 1;
+    u32 unk0_3 : 1;
+    u32 unk0_4 : 1;
+    u32 unk0_5 : 1;
+    u32 unk0_6 : 1;
+    u32 unk0_7 : 1;
+    u32 unk1_0 : 1;
+    u32 unk1_1 : 1;
+    u32 unk1_2 : 1;
+    u32 unk1_3 : 2;
+    u32 unk1_5 : 1;
+    u32 unk1_6 : 1;
+    u32 unk1_7 : 1;
+    u32 unk2_0 : 1;
+    u32 unk2_1 : 1;
+    u32 unk2_2 : 1;
+    u32 unk2_3 : 1;
     u8 filler4[12];
 };
 
@@ -155,7 +155,7 @@ extern u8 ewram[];
 #define ewram160A1 (ewram[0x160A1])
 #define ewram160A6 (ewram[0x160A6])
 #define ewram160AC ((u8 *)(ewram + 0x160AC))
-#define ewram160BC ((u16 *)(ewram + 0x160BC))  // hp
+#define ewram160BC ((u16 *)(ewram + 0x160BC)) // hp
 #define ewram160C8 (ewram[0x160C8])
 #define ewram160C9 (ewram[0x160C9])
 #define ewram160CB (ewram[0x160CB])
@@ -210,7 +210,7 @@ extern u16 gUnknown_02024D18;
 extern u16 gUnknown_02024D1A;
 extern u16 gUnknown_02024D1C;
 extern u8 gUnknown_02024D1E[];
-extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
+extern u8 gUnknown_02024D1F[]; // I don't actually know what type this is.
 extern u8 gUnknown_02024D26;
 extern struct UnknownStruct13 gUnknown_02024D28[];
 extern u8 gUnknown_02024DBC[];
@@ -243,7 +243,7 @@ extern u8 gUnknown_03004340[];
 extern struct UnknownStruct6 gUnknown_03004DE0;
 //extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
 extern u16 gBattleTypeFlags;
-extern s8 gBattleTerrain;  // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of GetBattleTerrain.
+extern s8 gBattleTerrain; // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of GetBattleTerrain.
 extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -376,7 +376,7 @@ void InitBattle(void)
     }
     for (i = 80; i < 160; i++)
     {
-        asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
+        asm("" ::"r"(i)); // Needed to stop the compiler from optimizing out the loop counter
         gUnknown_03004DE0.unk0[i] = 0xFF10;
         gUnknown_03004DE0.unk780[i] = 0xFF10;
     }
@@ -517,8 +517,7 @@ void shedinja_something(struct Pokemon *pkmn)
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 language = 1;
 
-    if (GetMonData(pkmn, MON_DATA_SPECIES) == SPECIES_SHEDINJA
-     && GetMonData(pkmn, MON_DATA_LANGUAGE) != language)
+    if (GetMonData(pkmn, MON_DATA_SPECIES) == SPECIES_SHEDINJA && GetMonData(pkmn, MON_DATA_LANGUAGE) != language)
     {
         GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
         if (StringCompareWithoutExtCtrlCodes(nickname, gUnknown_081F96C8) == 0)
@@ -691,17 +690,17 @@ void sub_800F02C(void)
     {
         u8 *nickname = gUnknown_02023A00[i].nickname;
 
-        gUnknown_02023A00[i].species     = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        gUnknown_02023A00[i].heldItem    = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gUnknown_02023A00[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        gUnknown_02023A00[i].heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
-        gUnknown_02023A00[i].level       = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-        gUnknown_02023A00[i].hp          = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        gUnknown_02023A00[i].maxhp       = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-        gUnknown_02023A00[i].status      = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+        gUnknown_02023A00[i].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        gUnknown_02023A00[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        gUnknown_02023A00[i].maxhp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+        gUnknown_02023A00[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
         gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-        gUnknown_02023A00[i].gender      = GetMonGender(&gPlayerParty[i]);
+        gUnknown_02023A00[i].gender = GetMonGender(&gPlayerParty[i]);
         StripExtCtrlCodes(nickname);
-        gUnknown_02023A00[i].language    = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
+        gUnknown_02023A00[i].language = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
         if (gUnknown_02023A00[i].language != 1)
             PadNameString(nickname, 0);
     }
@@ -743,8 +742,7 @@ void sub_800F104(void)
             {
                 if (i != playerId)
                 {
-                    if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
-                     || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
+                    if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1)) || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
                         memcpy(gUnknown_02023A00, gBlockRecvBuffer[i], 0x60);
                 }
             }
@@ -878,7 +876,7 @@ void sub_800F298(void)
         }
         break;
     case 2:
-      step_2:
+    step_2:
         if (sub_8007ECC())
         {
             SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
@@ -907,8 +905,7 @@ void sub_800F298(void)
                 }
                 else
                 {
-                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
-                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
+                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1)) || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
                     {
                         switch (gLinkPlayers[id].lp_field_18)
                         {
@@ -970,8 +967,7 @@ void sub_800F298(void)
                 }
                 else
                 {
-                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
-                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
+                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1)) || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
                     {
                         switch (gLinkPlayers[id].lp_field_18)
                         {
@@ -1068,7 +1064,7 @@ void sub_800F838(struct Sprite *sprite)
         sprite->data2 = 0x281;
         sprite->data3 = 0;
         sprite->data4 = 1;
-        // fall through
+    // fall through
     case 1:
         sprite->data4--;
         if (sprite->data4 == 0)
@@ -1198,13 +1194,13 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
 void sub_800FCD4(void)
 {
-    if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F )
+    if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F)
         REG_BG0CNT = 0x9800;
 }
 
 void sub_800FCFC(void)
 {
-    Random();  // unused return value
+    Random(); // unused return value
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
     REG_BG1HOFS = gUnknown_030042C0;
@@ -1353,7 +1349,7 @@ void c2_8011A1C(void)
     }
     for (i = 80; i < 160; i++)
     {
-        asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
+        asm("" ::"r"(i)); // Needed to stop the compiler from optimizing out the loop counter
         gUnknown_03004DE0.unk0[i] = 0xFF10;
         gUnknown_03004DE0.unk780[i] = 0xFF10;
     }
@@ -1493,7 +1489,7 @@ void sub_8010384(struct Sprite *sprite)
     else
         species = sprite->data2;
 
-    GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY);  // Unused return value
+    GetMonData(&gEnemyParty[gUnknown_02024A6A[r6]], MON_DATA_PERSONALITY); // Unused return value
 
     if (species == SPECIES_UNOWN)
     {
@@ -1502,9 +1498,9 @@ void sub_8010384(struct Sprite *sprite)
         u16 unownSpecies;
 
         if (unownForm == 0)
-            unownSpecies = SPECIES_UNOWN;  // Use the A Unown form
+            unownSpecies = SPECIES_UNOWN; // Use the A Unown form
         else
-            unownSpecies = NUM_SPECIES + unownForm;  // Use one of the other Unown letters
+            unownSpecies = NUM_SPECIES + unownForm; // Use one of the other Unown letters
 
         yOffset = gMonFrontPicCoords[unownSpecies].y_offset;
     }
@@ -1850,9 +1846,7 @@ void sub_8010B88(void)
 
         for (i = 0; i < gUnknown_02024A68; i++)
         {
-            if (battle_side_get_owner(gUnknown_02024A60) != battle_side_get_owner(i)
-             && (gUnknown_02024C98[i] & 0x18) != 0
-             && (gUnknown_02024CA8[i].unk15 == gUnknown_02024A60))
+            if (battle_side_get_owner(gUnknown_02024A60) != battle_side_get_owner(i) && (gUnknown_02024C98[i] & 0x18) != 0 && (gUnknown_02024CA8[i].unk15 == gUnknown_02024A60))
             {
                 gUnknown_02024C98[i] &= ~0x18;
                 gUnknown_02024C98[i] |= 0x10;
@@ -2025,8 +2019,7 @@ void sub_8011384(void)
     {
         for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
         {
-            if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-             && battle_side_get_owner(gUnknown_02024A60) == 0)
+            if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI) && battle_side_get_owner(gUnknown_02024A60) == 0)
             {
                 ptr = (u8 *)&gBattleMons[gUnknown_02024A60];
                 for (i = 0; i < (u32)0x58; i++)
@@ -2063,14 +2056,12 @@ void sub_8011384(void)
                     dp01_build_cmdbuf_x07_7_7_7(0);
                     dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
                 }
-                if (battle_side_get_owner(gUnknown_02024A60) == 1
-                 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+                if (battle_side_get_owner(gUnknown_02024A60) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                     sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
             }
             else
             {
-                if (battle_side_get_owner(gUnknown_02024A60) == 1
-                 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+                if (battle_side_get_owner(gUnknown_02024A60) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
                     sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
                     dp01_build_cmdbuf_x04_4_4_4(0);
@@ -2080,8 +2071,7 @@ void sub_8011384(void)
 
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (battle_get_per_side_status(gUnknown_02024A60) == 2
-                 || battle_get_per_side_status(gUnknown_02024A60) == 3)
+                if (battle_get_per_side_status(gUnknown_02024A60) == 2 || battle_get_per_side_status(gUnknown_02024A60) == 3)
                 {
                     dp01_build_cmdbuf_x07_7_7_7(0);
                     dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
@@ -2108,8 +2098,7 @@ void bc_801333C(void)
         {
             for (i = 0; i < 6; i++)
             {
-                if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == 0
-                 || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == 0 || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
                     sp0[i].hp = 0xFFFF;
                     sp0[i].status = 0;
@@ -2126,8 +2115,7 @@ void bc_801333C(void)
 
             for (i = 0; i < 6; i++)
             {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
-                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
                     sp0[i].hp = 0xFFFF;
                     sp0[i].status = 0;
@@ -2151,8 +2139,7 @@ void bc_801333C(void)
 
             for (i = 0; i < 6; i++)
             {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
-                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
                     sp0[i].hp = 0xFFFF;
                     sp0[i].status = 0;
@@ -2208,8 +2195,7 @@ void sub_8011834(void)
                 dp01_build_cmdbuf_x2F_2F_2F_2F(0);
                 dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
             }
-            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
-             && battle_get_per_side_status(gUnknown_02024A60) == 3)
+            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && battle_get_per_side_status(gUnknown_02024A60) == 3)
             {
                 dp01_build_cmdbuf_x2F_2F_2F_2F(0);
                 dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
@@ -2225,8 +2211,7 @@ void bc_801362C(void)
     {
         for (gUnknown_02024A60 = 0; gUnknown_02024A60 < gUnknown_02024A68; gUnknown_02024A60++)
         {
-            if (battle_side_get_owner(gUnknown_02024A60) == 1
-             && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
+            if (battle_side_get_owner(gUnknown_02024A60) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
         }
         gUnknown_030042D4 = sub_8011970;
@@ -2260,8 +2245,7 @@ void sub_80119B4(void)
                 dp01_build_cmdbuf_x2F_2F_2F_2F(0);
                 dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
             }
-            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
-             && battle_get_per_side_status(gUnknown_02024A60) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && battle_get_per_side_status(gUnknown_02024A60) == 2)
             {
                 dp01_build_cmdbuf_x2F_2F_2F_2F(0);
                 dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
@@ -2462,19 +2446,14 @@ u8 sub_8012028(void)
     r6 = battle_side_get_owner(gUnknown_02024A60);
     for (i = 0; i < gUnknown_02024A68; i++)
     {
-        if (r6 != battle_side_get_owner(i)
-         && gBattleMons[i].ability == 0x17)
+        if (r6 != battle_side_get_owner(i) && gBattleMons[i].ability == 0x17)
         {
             ewram16003 = i;
             byte_2024C06 = gBattleMons[i].ability;
             gUnknown_02024D1E[5] = 2;
             return 2;
         }
-        if (r6 != battle_side_get_owner(i)
-         && gBattleMons[gUnknown_02024A60].ability != ABILITY_LEVITATE
-         && gBattleMons[gUnknown_02024A60].type1 != 2
-         && gBattleMons[gUnknown_02024A60].type2 != 2
-         && gBattleMons[i].ability == 0x47)
+        if (r6 != battle_side_get_owner(i) && gBattleMons[gUnknown_02024A60].ability != ABILITY_LEVITATE && gBattleMons[gUnknown_02024A60].type1 != 2 && gBattleMons[gUnknown_02024A60].type2 != 2 && gBattleMons[i].ability == 0x47)
         {
             ewram16003 = i;
             byte_2024C06 = gBattleMons[i].ability;

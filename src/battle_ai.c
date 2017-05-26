@@ -255,8 +255,7 @@ const u16 sDiscouragedPowerfulMoveEffects[] = {
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
-    0xFFFF
-};
+    0xFFFF};
 
 // if the AI is a Link battle, safari, battle tower, or ereader, it will ignore considering item uses.
 void BattleAI_HandleItemUseBeforeAISetup(void)
@@ -267,9 +266,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
     for (i = 0; (u32)i < sizeof(struct UnknownStruct1); i++)
         data[i] = 0;
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-     && gTrainerBattleOpponent != 0x400
-     && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gTrainerBattleOpponent != 0x400 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
@@ -420,7 +417,7 @@ void BattleAI_DoAIProcessing(void)
                 else
                     AI_THINKING_STRUCT->aiState++; // done processing.
                 AI_THINKING_STRUCT->aiAction &= (AI_ACTION_FLEE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK |
-                AI_ACTION_UNK5 | AI_ACTION_UNK6 | AI_ACTION_UNK7 | AI_ACTION_UNK8); // disable AI_ACTION_DONE.
+                                                 AI_ACTION_UNK5 | AI_ACTION_UNK6 | AI_ACTION_UNK7 | AI_ACTION_UNK8); // disable AI_ACTION_DONE.
             }
             break;
         }
@@ -871,8 +868,7 @@ static void BattleAICmd_if_user_can_damage(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMons[gPlayerMonIndex].moves[i] != 0
-            && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
+        if (gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
             break;
     }
     if (i == MAX_MON_MOVES)
@@ -887,8 +883,7 @@ static void BattleAICmd_if_user_cant_damage(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMons[gPlayerMonIndex].moves[i] != 0
-         && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
+        if (gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
             break;
     }
     if (i != MAX_MON_MOVES)
@@ -942,8 +937,7 @@ static void BattleAICmd_is_most_powerful_move(void)
         if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
             break;
 
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
-     && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1 && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gUnknown_02024DEC = 0;
         unk_2000000[0x1601C] = 0; // why is this a manual array?
@@ -960,9 +954,7 @@ static void BattleAICmd_is_most_powerful_move(void)
             }
 
             // _081082BA
-            if (gBattleMons[gPlayerMonIndex].moves[i]
-             && sDiscouragedPowerfulMoveEffects[j] == 0xFFFF
-             && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power > 1)
+            if (gBattleMons[gPlayerMonIndex].moves[i] && sDiscouragedPowerfulMoveEffects[j] == 0xFFFF && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power > 1)
             {
                 gUnknown_02024BE6 = gBattleMons[gPlayerMonIndex].moves[i];
                 sub_801CAF8(gPlayerMonIndex, gEnemyMonIndex);
@@ -1324,10 +1316,7 @@ static void BattleAICmd_count_alive_pokemon(void)
 
     for (i = 0; i < 6; i++)
     {
-        if (i != var && i != var2
-         && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        if (i != var && i != var2 && GetMonData(&party[i], MON_DATA_HP) != 0 && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
             AI_THINKING_STRUCT->funcResult++;
         }
@@ -1369,9 +1358,7 @@ static void BattleAICmd_get_ability(void)
         }
 
         // abilities that prevent fleeing.
-        if (gBattleMons[index].ability == ABILITY_SHADOW_TAG
-        || gBattleMons[index].ability == ABILITY_MAGNET_PULL
-        || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
+        if (gBattleMons[index].ability == ABILITY_SHADOW_TAG || gBattleMons[index].ability == ABILITY_MAGNET_PULL || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
         {
             AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
             gAIScriptPtr += 2;
@@ -1737,7 +1724,7 @@ static void BattleAICmd_if_has_move(void)
         }
         if (i == 8)
             gAIScriptPtr += 8;
-         else
+        else
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
         break;
     }

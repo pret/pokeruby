@@ -12,13 +12,13 @@
 #include "text.h"
 
 //Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+#define HIHALF(n) (((n)&0xFFFF0000) >> 16)
 
 //Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
+#define LOHALF(n) ((n)&0xFFFF)
 
 extern struct Pokemon gPlayerParty[6]; // 0x3004360
-extern struct Pokemon gEnemyParty[6]; // 0x30045C0
+extern struct Pokemon gEnemyParty[6];  // 0x30045C0
 
 extern u8 unk_2000000[];
 extern u16 word_2024E82;
@@ -111,10 +111,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else //Player is the OT
     {
-        value = gSaveBlock2.playerTrainerId[0]
-              | (gSaveBlock2.playerTrainerId[1] << 8)
-              | (gSaveBlock2.playerTrainerId[2] << 16)
-              | (gSaveBlock2.playerTrainerId[3] << 24);
+        value = gSaveBlock2.playerTrainerId[0] | (gSaveBlock2.playerTrainerId[1] << 8) | (gSaveBlock2.playerTrainerId[2] << 16) | (gSaveBlock2.playerTrainerId[3] << 24);
     }
 
     SetBoxMonData(boxMon, MON_DATA_OT_ID, (u8 *)&value);
@@ -184,8 +181,7 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
     do
     {
         personality = Random32();
-    }
-    while (nature != GetNatureFromPersonality(personality));
+    } while (nature != GetNatureFromPersonality(personality));
 
     CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
 }
@@ -202,19 +198,14 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
         {
             personality = Random32();
             actualLetter = ((((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 28);
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality)
-            || actualLetter != unownLetter - 1);
+        } while (nature != GetNatureFromPersonality(personality) || gender != GetGenderFromSpeciesAndPersonality(species, personality) || actualLetter != unownLetter - 1);
     }
     else
     {
         do
         {
             personality = Random32();
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
+        } while (nature != GetNatureFromPersonality(personality) || gender != GetGenderFromSpeciesAndPersonality(species, personality));
     }
 
     CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
@@ -230,8 +221,7 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
     {
         otId = Random32();
         personality = Random32();
-    }
-    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
+    } while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
     CreateMon(mon, species, level, 32, 1, personality, 1, otId);
 }
 
@@ -363,9 +353,9 @@ void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
     dest->hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);
     dest->attackIV = GetMonData(mon, MON_DATA_ATK_IV, NULL);
     dest->defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
-    dest->speedIV  = GetMonData(mon, MON_DATA_SPD_IV, NULL);
-    dest->spAttackIV  = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
-    dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
+    dest->speedIV = GetMonData(mon, MON_DATA_SPD_IV, NULL);
+    dest->spAttackIV = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
+    dest->spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
     dest->altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
     dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
@@ -395,14 +385,14 @@ u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     return checksum;
 }
 
-#define CALC_STAT(base, iv, ev, statIndex, field)               \
-{                                                               \
-    u8 baseStat = gBaseStats[species].base;                     \
-    s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
-    u8 nature = GetNature(mon);                                 \
-    n = nature_stat_mod(nature, n, statIndex);                  \
-    SetMonData(mon, field, (u8 *)&n);                           \
-}
+#define CALC_STAT(base, iv, ev, statIndex, field)                   \
+    {                                                               \
+        u8 baseStat = gBaseStats[species].base;                     \
+        s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
+        u8 nature = GetNature(mon);                                 \
+        n = nature_stat_mod(nature, n, statIndex);                  \
+        SetMonData(mon, field, (u8 *)&n);                           \
+    }
 
 void CalculateMonStats(struct Pokemon *mon)
 {

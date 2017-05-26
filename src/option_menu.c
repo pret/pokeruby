@@ -11,7 +11,8 @@ extern void SetPokemonCryStereo(u32 val);
 extern void remove_some_task(void);
 
 //Task data
-enum {
+enum
+{
     TD_MENUSELECTION,
     TD_TEXTSPEED,
     TD_BATTLESCENE,
@@ -22,7 +23,8 @@ enum {
 };
 
 //Menu items
-enum {
+enum
+{
     MENUITEM_TEXTSPEED,
     MENUITEM_BATTLESCENE,
     MENUITEM_BATTLESTYLE,
@@ -33,24 +35,24 @@ enum {
 };
 
 extern u8 gUnknown_0839F63C[];
-extern u8 gUnknown_0839F5FC[];  //palette
+extern u8 gUnknown_0839F5FC[]; //palette
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
 static void Task_OptionMenuSave(u8 taskId);
 static void Task_OptionMenuFadeOut(u8 taskId);
 static void HighlightOptionMenuItem(u8 selection);
-static u8   TextSpeed_ProcessInput(u8 selection);
+static u8 TextSpeed_ProcessInput(u8 selection);
 static void TextSpeed_DrawChoices(u8 selection);
-static u8   BattleScene_ProcessInput(u8 selection);
+static u8 BattleScene_ProcessInput(u8 selection);
 static void BattleScene_DrawChoices(u8 selection);
-static u8   BattleStyle_ProcessInput(u8 selection);
+static u8 BattleStyle_ProcessInput(u8 selection);
 static void BattleStyle_DrawChoices(u8 selection);
-static u8   Sound_ProcessInput(u8 selection);
+static u8 Sound_ProcessInput(u8 selection);
 static void Sound_DrawChoices(u8 selection);
-static u8   FrameType_ProcessInput(u8 selection);
+static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
-static u8   ButtonMode_ProcessInput(u8 selection);
+static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
 
 static void MainCB(void)
@@ -156,7 +158,7 @@ void CB2_InitOptionMenu(void)
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
         SetVBlankCallback(VBlankCB);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON |
-          DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
+                      DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
         gMain.state++;
         break;
     }

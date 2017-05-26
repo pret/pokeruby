@@ -14,9 +14,9 @@
 
 struct UnkMailStruct
 {
-    u8 unk_0_0:2;
-    u8 unk_0_2:2;
-    u8 unk_0_4:4;
+    u8 unk_0_0 : 2;
+    u8 unk_0_2 : 2;
+    u8 unk_0_4 : 4;
 };
 
 struct MailLayout
@@ -24,8 +24,8 @@ struct MailLayout
     u8 var0;
     u8 var1;
     u8 var2;
-    u8 var3_0:4;
-    u8 var3_4:4;
+    u8 var3_0 : 4;
+    u8 var3_4 : 4;
     struct UnkMailStruct *var4;
 };
 
@@ -137,7 +137,6 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
         ewram0.varFB = 0;
     }
 
-
     ewram0.varF4 = arg0;
     ewram0.varEC = arg1;
     ewram0.varF8 = arg2;
@@ -158,7 +157,8 @@ static u8 sub_80F8A28(void)
         REG_DISPCNT = 0;
         RETURN_UP_STATE;
 
-    case 1: CpuFill16(0, (void *)OAM, OAM_SIZE);
+    case 1:
+        CpuFill16(0, (void *)OAM, OAM_SIZE);
         RETURN_UP_STATE;
 
     case 2:
@@ -206,7 +206,8 @@ static u8 sub_80F8A28(void)
         MenuZeroFillScreen();
         RETURN_UP_STATE;
 
-    case 10: CpuFill16(1, (void *)(VRAM + 0x4800), 0x800);
+    case 10:
+        CpuFill16(1, (void *)(VRAM + 0x4800), 0x800);
         RETURN_UP_STATE;
 
     case 11:
@@ -273,8 +274,8 @@ static u8 sub_80F8A28(void)
 
     case 18:
         REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x512;
-        REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(8)  | BGCNT_16COLOR | BGCNT_TXT256x256;
-        REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(9)  | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(8) | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(9) | BGCNT_16COLOR | BGCNT_TXT256x256;
         REG_BLDCNT = 0;
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         BeginNormalPaletteFade(-1, 0, 16, 0, 0);
@@ -332,7 +333,6 @@ static void sub_80F8DA0(void)
         ptr = sub_80F8D7C(ptr, ewram0.varF4->playerName);
         StringCopy(ptr, gOtherText_From);
         ewram0.varF9 = ewram0.var10C->var2 - StringLength(ewram0.varD8);
-
     }
     else
     {

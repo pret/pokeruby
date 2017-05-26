@@ -9,7 +9,7 @@ struct BackupMapData
     u16 *map;
 };
 
-extern struct MapHeader * const get_mapheader_by_bank_and_number(u8, u8);
+extern struct MapHeader *const get_mapheader_by_bank_and_number(u8, u8);
 extern void mapheader_run_script_with_tag_x1(void);
 extern void sub_80BB970(struct MapEvents *);
 extern void sub_80BBCCC();
@@ -19,10 +19,10 @@ extern void sub_80538F0(u8 mapGroup, u8 mapNum);
 
 struct ConnectionFlags
 {
-    u8 south:1;
-    u8 north:1;
-    u8 west:1;
-    u8 east:1;
+    u8 south : 1;
+    u8 north : 1;
+    u8 west : 1;
+    u8 east : 1;
 };
 
 struct Coords32
@@ -254,10 +254,8 @@ void fillNorthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
             connectedMapHeader,
             x2, y2,
             width, /*height*/ 7);
-
     }
 }
-
 
 void fillWestConnection(struct MapHeader *mapHeader, struct MapHeader *connectedMapHeader, s32 offset)
 {
@@ -350,13 +348,12 @@ void fillEastConnection(struct MapHeader *mapHeader, struct MapHeader *connected
     }
 }
 
-union Block
-{
+union Block {
     struct
     {
-        u16 block:10;
-        u16 collision:2;
-        u16 elevation:4;
+        u16 block : 10;
+        u16 collision : 2;
+        u16 elevation : 4;
     } block;
     u16 value;
 };
@@ -367,8 +364,7 @@ u16 MapGridGetZCoordAt(int x, int y)
     int i;
     u16 *border;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
     }
@@ -393,8 +389,7 @@ u16 MapGridIsImpassableAt(int x, int y)
     int i;
     u16 *border;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
     }
@@ -422,8 +417,7 @@ u16 MapGridGetMetatileIdAt(int x, int y)
     u16 *border;
     u16 block2;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
     }
@@ -463,8 +457,7 @@ u16 MapGridGetMetatileLayerTypeAt(int x, int y)
 void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
 {
     int i;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         i = x + y * gUnknown_03004870.width;
         gUnknown_03004870.map[i] = (gUnknown_03004870.map[i] & 0xf000) | (metatile & 0xfff);
@@ -474,8 +467,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
 void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 {
     int i;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         i = x + gUnknown_03004870.width * y;
         gUnknown_03004870.map[i] = metatile;
@@ -625,8 +617,7 @@ int GetMapBorderIdAt(int x, int y)
     struct MapData *mapData;
     u16 block, block2;
     int i, j;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gUnknown_03004870.width && y >= 0 && y < gUnknown_03004870.height)
     {
         i = gUnknown_03004870.width;
         i *= y;
@@ -859,11 +850,7 @@ struct MapConnection *sub_8056BA0(s16 x, s16 y)
         for (i = 0; i < count; i++, connection++)
         {
             direction = connection->direction;
-            if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
-             || (direction == CONNECTION_NORTH && y > 6)
-             || (direction == CONNECTION_SOUTH && y < gMapHeader.mapData->height + 7)
-             || (direction == CONNECTION_WEST && x > 6)
-             || (direction == CONNECTION_EAST && x < gMapHeader.mapData->width + 7))
+            if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE) || (direction == CONNECTION_NORTH && y > 6) || (direction == CONNECTION_SOUTH && y < gMapHeader.mapData->height + 7) || (direction == CONNECTION_WEST && x > 6) || (direction == CONNECTION_EAST && x < gMapHeader.mapData->width + 7))
             {
                 continue;
             }
@@ -932,21 +919,21 @@ void sub_8056CBC(struct Tileset *tileset, int offset, int size)
         }
         else
         {
-            LZ77UnCompVram(tileset->palettes, (void*)0x2000000);
-            LoadPalette((void*)0x2000000, offset, size);
+            LZ77UnCompVram(tileset->palettes, (void *)0x2000000);
+            LoadPalette((void *)0x2000000, offset, size);
         }
     }
 }
 
 void sub_8056D28(struct MapData *mapData)
 {
-    void *src = (void*)(BG_VRAM);
+    void *src = (void *)(BG_VRAM);
     sub_8056C98(mapData->primaryTileset, src);
 }
 
 void sub_8056D38(struct MapData *mapData)
 {
-    void *src = (void*)(BG_VRAM + 0x4000);
+    void *src = (void *)(BG_VRAM + 0x4000);
     sub_8056C98(mapData->secondaryTileset, src);
 }
 

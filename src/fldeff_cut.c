@@ -46,7 +46,7 @@ bool8 SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 tileBehavior;
 
-    if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
+    if (npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
     {
         gUnknown_0300485C = sub_808AB90;
         gUnknown_03005CE4 = sub_80A2634;
@@ -55,17 +55,16 @@ bool8 SetUpFieldMove_Cut(void)
     else // is in ash or grass to cut?
     {
         PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-        for(i = 0; i < 3; i++)
+        for (i = 0; i < 3; i++)
         {
             y = i - 1 + gUnknown_0203923C.y;
-            for(j = 0; j < 3; j++)
+            for (j = 0; j < 3; j++)
             {
                 x = j - 1 + gUnknown_0203923C.x;
-                if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
+                if (MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-                    if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
-                    || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
+                    if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
                         gUnknown_0300485C = sub_808AB90;
                         gUnknown_03005CE4 = sub_80A25E8;
@@ -122,16 +121,16 @@ bool8 FldEff_CutGrass(void)
     u8 tileBehavior;
     u8 i, j; // not in for loop?
 
-    for(i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
+    for (i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
     {
         y = i - 1 + gUnknown_0203923C.y;
-        for(j = 0; j < 3; j++)
+        for (j = 0; j < 3; j++)
         {
             x = j - 1 + gUnknown_0203923C.x;
-            if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
+            if (MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
             {
                 tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-                if(MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
+                if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
                 {
                     sub_80A27A8(x, y);
                     sub_805BCC0(x, y);
@@ -143,10 +142,10 @@ bool8 FldEff_CutGrass(void)
     DrawWholeMapView();
 
     // populate sprite ID array
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
         gCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
-        gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
+                                               gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
         gSprites[gCutGrassSpriteArray[i]].data2 = 32 * i;
     }
     return 0;
@@ -158,7 +157,7 @@ void sub_80A27A8(s16 x, s16 y)
 {
     int metatileId = MapGridGetMetatileIdAt(x, y);
 
-    switch(metatileId)
+    switch (metatileId)
     {
     case 0x208:
     case 0x15:
@@ -198,13 +197,13 @@ s32 sub_80A28A0(s16 x, s16 y)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
 
-    if(metatileId == 1)
+    if (metatileId == 1)
         return 1;
-    else if(metatileId == 633)
+    else if (metatileId == 633)
         return 2;
-    else if(metatileId == 634)
+    else if (metatileId == 634)
         return 3;
-    else if(metatileId == 635)
+    else if (metatileId == 635)
         return 4;
     else
         return 0;
@@ -215,13 +214,13 @@ void sub_80A28F4(s16 x, s16 y)
     s16 i;
     u16 lowerY = y + 3;
 
-    for(i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         u16 currentX = x + i;
         s16 currentXsigned = x + i;
-        if(MapGridGetMetatileIdAt(currentXsigned, y) == 21)
+        if (MapGridGetMetatileIdAt(currentXsigned, y) == 21)
         {
-            switch((u8)sub_80A28A0(currentXsigned, y + 1))
+            switch ((u8)sub_80A28A0(currentXsigned, y + 1))
             {
             case 1:
                 MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x208);
@@ -237,15 +236,15 @@ void sub_80A28F4(s16 x, s16 y)
                 break;
             }
         }
-        if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY) == 1)
+        if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY) == 1)
         {
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x208)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x208)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x1);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x281)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x281)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x279);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x282)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x282)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x27A);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x283)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x283)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x27B);
         }
     }
@@ -272,7 +271,7 @@ void objc_8097BBC(struct Sprite *sprite)
     sprite->data3 = tempdata2 + 1;
 
     tempdata = sprite->data1;
-    if((s16)tempdata != 28) // done rotating the grass, execute clean up function
+    if ((s16)tempdata != 28) // done rotating the grass, execute clean up function
         sprite->data1++;
     else
         sprite->callback = (void *)sub_80A2AB8;
@@ -282,7 +281,7 @@ void sub_80A2AB8(void)
 {
     u8 i;
 
-    for(i = 1; i < 8; i++)
+    for (i = 1; i < 8; i++)
     {
         DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
     }

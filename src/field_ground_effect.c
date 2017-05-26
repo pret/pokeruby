@@ -68,7 +68,7 @@ void FieldObjectUpdateMetatileBehaviors(struct MapObject *mapObj)
 
 void GetGroundEffectFlags_Reflection(struct MapObject *mapObj, u32 *flags)
 {
-    u32 reflectionFlags[2] = { 0x00000020, 0x00000010 };
+    u32 reflectionFlags[2] = {0x00000020, 0x00000010};
     u8 type = FieldObjectCheckForReflectiveSurface(mapObj);
 
     if (type)
@@ -116,8 +116,7 @@ void GetGroundEffectFlags_Tracks(struct MapObject *mapObj, u32 *flags)
     {
         *flags |= 0x100;
     }
-    else if (MetatileBehavior_IsSandOrDeepSand(mapObj->mapobj_unk_1F)
-     || MetatileBehavior_IsUnusedFootprintMetatile(mapObj->mapobj_unk_1F))
+    else if (MetatileBehavior_IsSandOrDeepSand(mapObj->mapobj_unk_1F) || MetatileBehavior_IsUnusedFootprintMetatile(mapObj->mapobj_unk_1F))
     {
         *flags |= 0x80;
     }
@@ -125,8 +124,7 @@ void GetGroundEffectFlags_Tracks(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_SandPile(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1E)
-     && MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1E) && MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_20)
         {
@@ -143,8 +141,7 @@ void GetGroundEffectFlags_SandPile(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *mapObj, u32 *flags)
 {
-    if ((MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1E) && MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1F))
-     || (MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1E) && MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1F)))
+    if ((MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1E) && MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1F)) || (MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1E) && MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1F)))
     {
         if (!mapObj->mapobj_bit_19)
         {
@@ -161,8 +158,7 @@ void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *mapObj, u32 *fla
 
 void GetGroundEffectFlags_Puddle(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1E)
-     && MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1E) && MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1F))
     {
         *flags |= 0x400;
     }
@@ -176,8 +172,7 @@ void GetGroundEffectFlags_Ripple(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_ShortGrass(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1E)
-     && MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1E) && MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_18)
         {
@@ -194,8 +189,7 @@ void GetGroundEffectFlags_ShortGrass(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_HotSprings(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1E)
-     && MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1E) && MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_21)
         {
@@ -221,24 +215,24 @@ void GetGroundEffectFlags_JumpLanding(struct MapObject *mapObj, u32 *flags)
     typedef bool8 (*MetatileFunc)(u8);
 
     static const MetatileFunc metatileFuncs[] =
-    {
-        MetatileBehavior_IsTallGrass,
-        MetatileBehavior_IsLongGrass,
-        MetatileBehavior_IsPuddle,
-        MetatileBehavior_IsSurfableWaterOrUnderwater,
-        MetatileBehavior_IsShallowFlowingWater,
-        MetatileBehavior_IsATile,
-    };
+        {
+            MetatileBehavior_IsTallGrass,
+            MetatileBehavior_IsLongGrass,
+            MetatileBehavior_IsPuddle,
+            MetatileBehavior_IsSurfableWaterOrUnderwater,
+            MetatileBehavior_IsShallowFlowingWater,
+            MetatileBehavior_IsATile,
+        };
 
     static const u32 jumpLandingFlags[] =
-    {
-        0x00001000,  // Landing in tall grass
-        0x00002000,  // Landing in long grass
-        0x00004000,  // Landing on puddle
-        0x00008000,  // Landing on surfable water or underwater
-        0x00004000,  // Landing on shallow flowing water
-        0x00010000,  // Landing on any other type of ground
-    };
+        {
+            0x00001000, // Landing in tall grass
+            0x00002000, // Landing in long grass
+            0x00004000, // Landing on puddle
+            0x00008000, // Landing on surfable water or underwater
+            0x00004000, // Landing on shallow flowing water
+            0x00010000, // Landing on any other type of ground
+        };
 
     if (mapObj->mapobj_bit_5 && !mapObj->mapobj_bit_25)
     {

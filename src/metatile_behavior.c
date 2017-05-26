@@ -243,8 +243,7 @@ static const u8 sTileBitAttributes[] = {
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE)
-};
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE)};
 
 bool8 MetatileBehavior_IsWaterfall(u8);
 
@@ -435,20 +434,16 @@ bool8 MetatileBehavior_IsArrowWarp(u8 var)
 {
     u8 var2 = 0;
 
-    if (MetatileBehavior_IsEastArrowWarp(var)
-        || MetatileBehavior_IsWestArrowWarp(var)
-        || MetatileBehavior_IsNorthArrowWarp(var)
-        || MetatileBehavior_IsSouthArrowWarp(var))
+    if (MetatileBehavior_IsEastArrowWarp(var) || MetatileBehavior_IsWestArrowWarp(var) || MetatileBehavior_IsNorthArrowWarp(var) || MetatileBehavior_IsSouthArrowWarp(var))
     {
         var2 = 1;
     }
-        return var2;
+    return var2;
 }
 
 bool8 MetatileBehavior_IsMoveTile(u8 var)
 {
-    if ((var >= MB_WALK_EAST && var <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR) || (var >= MB_EASTWARD_CURRENT && var <= MB_SOUTHWARD_CURRENT)
-    || var == MB_MUDDY_SLOPE || var == MB_CRACKED_FLOOR || var == MB_WATERFALL || var == MB_ICE || var == MB_BB || var == MB_BC)
+    if ((var >= MB_WALK_EAST && var <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR) || (var >= MB_EASTWARD_CURRENT && var <= MB_SOUTHWARD_CURRENT) || var == MB_MUDDY_SLOPE || var == MB_CRACKED_FLOOR || var == MB_WATERFALL || var == MB_ICE || var == MB_BB || var == MB_BC)
         return TRUE;
     else
         return FALSE;
@@ -610,8 +605,7 @@ bool8 is_tile_x84(u8 var)
 
 bool8 sub_80571C0(u8 var)
 {
-    if (var == MB_91 || var == MB_93 || var == MB_95 || var == MB_97
-    || var == MB_99 || var == MB_9B || var == MB_9D)
+    if (var == MB_91 || var == MB_93 || var == MB_95 || var == MB_97 || var == MB_99 || var == MB_9B || var == MB_9D)
         return TRUE;
     else
         return FALSE;

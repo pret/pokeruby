@@ -43,18 +43,18 @@ extern struct ToneData voicegroup_84543C0[];
 extern struct ToneData voicegroup_84549C0[];
 
 static const struct Fanfare sFanfares[] = {
-    { BGM_FANFA1,      80 },
-    { BGM_FANFA4,     160 },
-    { BGM_FANFA5,     220 },
-    { BGM_ME_WAZA,    220 },
-    { BGM_ME_ASA,     160 },
-    { BGM_ME_BACHI,   340 },
-    { BGM_ME_WASURE,  180 },
-    { BGM_ME_KINOMI,  120 },
-    { BGM_ME_TAMA,    710 },
-    { BGM_ME_B_BIG,   250 },
-    { BGM_ME_B_SMALL, 150 },
-    { BGM_ME_ZANNEN,  160 },
+    {BGM_FANFA1, 80},
+    {BGM_FANFA4, 160},
+    {BGM_FANFA5, 220},
+    {BGM_ME_WAZA, 220},
+    {BGM_ME_ASA, 160},
+    {BGM_ME_BACHI, 340},
+    {BGM_ME_WASURE, 180},
+    {BGM_ME_KINOMI, 120},
+    {BGM_ME_TAMA, 710},
+    {BGM_ME_B_BIG, 250},
+    {BGM_ME_B_SMALL, 150},
+    {BGM_ME_ZANNEN, 160},
 };
 
 static void Task_Fanfare(u8 taskId);
@@ -352,16 +352,16 @@ void PlayCry5(u16 species, u8 mode)
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-#define GET_CRY_PTR(a, b)\
-{\
-    struct ToneData *tone;\
-    if (v0)\
-        tone = &a[index];\
-    else\
-        tone = &b[index];\
-    gMPlay_PokemonCry = SetPokemonCryTone(tone);\
-    break;\
-}
+#define GET_CRY_PTR(a, b)                            \
+    {                                                \
+        struct ToneData *tone;                       \
+        if (v0)                                      \
+            tone = &a[index];                        \
+        else                                         \
+            tone = &b[index];                        \
+        gMPlay_PokemonCry = SetPokemonCryTone(tone); \
+        break;                                       \
+    }
 
 static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
 {
@@ -434,16 +434,21 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
 
     cryId = SpeciesToCryId(cryId);
     index = 0x7F;
-    asm("" ::: "r0");
+    asm("" ::
+            : "r0");
     index &= cryId;
     table = cryId >> 7;
 
     switch (table)
     {
-    case 0: GET_CRY_PTR(voicegroup_84537C0, voicegroup_8452590);
-    case 1: GET_CRY_PTR(voicegroup_8453DC0, voicegroup_8452B90);
-    case 2: GET_CRY_PTR(voicegroup_84543C0, voicegroup_8453190);
-    case 3: GET_CRY_PTR(voicegroup_84549C0, voicegroup_8453790);
+    case 0:
+        GET_CRY_PTR(voicegroup_84537C0, voicegroup_8452590);
+    case 1:
+        GET_CRY_PTR(voicegroup_8453DC0, voicegroup_8452B90);
+    case 2:
+        GET_CRY_PTR(voicegroup_84543C0, voicegroup_8453190);
+    case 3:
+        GET_CRY_PTR(voicegroup_84549C0, voicegroup_8453790);
     }
 }
 

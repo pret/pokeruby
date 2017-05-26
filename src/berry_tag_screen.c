@@ -459,8 +459,7 @@ void sub_8146798(u8 taskId)
     s16 *taskData = gTasks[taskId].data;
 
     gUnknown_030041B4 = (gUnknown_030041B4 + taskData[0]) & 0xFF;
-    if ((taskData[0] > 0 && gUnknown_030041B4 == 144)
-     || (taskData[0] < 0 && gUnknown_030041B4 == 112))
+    if ((taskData[0] > 0 && gUnknown_030041B4 == 144) || (taskData[0] < 0 && gUnknown_030041B4 == 112))
     {
         sub_8146810(gTasks[taskId].data[1]);
         sub_81468BC();

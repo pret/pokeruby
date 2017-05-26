@@ -479,8 +479,7 @@ const struct MultichoiceListStruct gMultichoiceLists[] = {
     {(struct MenuAction *)MultichoiceList_69, 3},
     {(struct MenuAction *)MultichoiceList_70, 4},
     {(struct MenuAction *)MultichoiceList_71, 4},
-    {(struct MenuAction *)MultichoiceList_72, 5}
-};
+    {(struct MenuAction *)MultichoiceList_72, 5}};
 
 const struct TextStruct gUnknown_083CE048[] = {
     OtherText_Cool2,
@@ -740,8 +739,7 @@ bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 columnCount)
 
         taskId = CreateTask(sub_80B5684, 80);
 
-        if (!((gMultichoiceLists[multichoiceId].count >> 1) < columnCount || (gMultichoiceLists[multichoiceId].count & 1))
-         || columnCount == 1 || gMultichoiceLists[multichoiceId].count == columnCount)
+        if (!((gMultichoiceLists[multichoiceId].count >> 1) < columnCount || (gMultichoiceLists[multichoiceId].count & 1)) || columnCount == 1 || gMultichoiceLists[multichoiceId].count == columnCount)
         {
             bottom = (2 * (gMultichoiceLists[multichoiceId].count / columnCount)) + 1 + top;
         }

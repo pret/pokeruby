@@ -28,7 +28,7 @@ void sub_80F7A34(void)
     oldMan->oldMan1.unk_2D94 = 0;
     oldMan->oldMan1.unk_2DBD = 0;
 
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
         oldMan->oldMan1.mauvilleOldMan_ecArray[i] = gUnknown_083E537C[i];
 }
 
@@ -62,7 +62,7 @@ void SetMauvilleOldMan(void)
 {
     u32 var = ((u16)((gSaveBlock2.playerTrainerId[1] << 8 | gSaveBlock2.playerTrainerId[0])) % 10) / 2;
 
-    switch(var)
+    switch (var)
     {
     case 0:
         sub_80F7A34();
@@ -111,10 +111,10 @@ void sub_80F7B40(void)
 
     StringCopy(oldMan->oldMan1.playerName, gSaveBlock2.playerName);
 
-    for(i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
         oldMan->oldMan1.playerTrainerId[i] = gSaveBlock2.playerTrainerId[i];
 
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
         oldMan->oldMan1.mauvilleOldMan_ecArray[i] = oldMan->oldMan1.mauvilleOldMan_ecArray2[i];
 
     oldMan->oldMan1.unk_2DBD = 1;
@@ -123,7 +123,7 @@ void sub_80F7B40(void)
 void sub_80F7BA0(void)
 {
     struct UnkMauvilleOldManStruct *oldMan = &gSaveBlock1.oldMan.oldMan1;
-    u16 specialVar = gSpecialVar_0x8004;  // It's a bit odd to use this temp variable, but it seems needed to match.
+    u16 specialVar = gSpecialVar_0x8004; // It's a bit odd to use this temp variable, but it seems needed to match.
     u16 *r5;
     u16 i;
     u8 *ptr;
@@ -196,7 +196,7 @@ void sub_80F7C90(void)
 {
     u16 var = sub_80EB8EC();
 
-    if(var == 0xFFFF)
+    if (var == 0xFFFF)
     {
         gScriptResult = FALSE;
     }
@@ -211,7 +211,7 @@ void sub_80F7CC8(void)
 {
     OldMan *oldMan = &gSaveBlock1.oldMan;
 
-    if(oldMan->oldMan1.unk_2D95 == 10)
+    if (oldMan->oldMan1.unk_2D95 == 10)
     {
         gScriptResult = FALSE;
         oldMan->oldMan1.unk_2D95 = 0;
@@ -224,10 +224,10 @@ void sub_80F7CF4(void)
 {
     struct UnkMauvilleOldManStruct2 *oldMan = &gSaveBlock1.oldMan.oldMan2;
 
-    if(oldMan->unk1 == 0)
+    if (oldMan->unk1 == 0)
         sub_80F7DC0();
 
-    if(oldMan->mauvilleOldMan_ecArray[oldMan->unk1] != 0xFFFF) // is not the last element of the array?
+    if (oldMan->mauvilleOldMan_ecArray[oldMan->unk1] != 0xFFFF) // is not the last element of the array?
     {
         u8 *stringPtr;
         u32 random = Random();
@@ -242,7 +242,7 @@ void sub_80F7CF4(void)
     {
         StringCopy(gStringVar4, (u8 *)gUnknown_083E53A8[oldMan->mauvilleOldMan_ecArray2[oldMan->unk2++]]);
     }
-    if(!(Random() % 10))
+    if (!(Random() % 10))
         oldMan->unk1 = 10;
     else
         oldMan->unk1++;

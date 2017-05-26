@@ -27,7 +27,8 @@
 #include "trainer_card.h"
 
 //Menu actions
-enum {
+enum
+{
     MENU_ACTION_POKEDEX,
     MENU_ACTION_POKEMON,
     MENU_ACTION_BAG,
@@ -41,7 +42,7 @@ enum {
 };
 
 static u8 (*saveDialogCallback)(void);
-static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
+static u8 saveDialogTimer; //Number of frames to keep the window on screen after save was completed
 static bool8 savingComplete;
 
 extern bool8 gDifferentSaveFile;
@@ -74,16 +75,16 @@ static u8 StartMenu_RetireCallback(void);
 static u8 StartMenu_PlayerLinkCallback(void);
 
 static const struct MenuAction sStartMenuItems[] = {
-    { SystemText_Pokedex, StartMenu_PokedexCallback },
-    { SystemText_Pokemon, StartMenu_PokemonCallback },
-    { SystemText_BAG, StartMenu_BagCallback },
-    { SystemText_Pokenav, StartMenu_PokenavCallback },
-    { SystemText_Player, StartMenu_PlayerCallback },
-    { SystemText_Save, StartMenu_SaveCallback },
-    { SystemText_Option, StartMenu_OptionCallback },
-    { SystemText_Exit, StartMenu_ExitCallback },
-    { SystemText_Retire, StartMenu_RetireCallback },
-    { SystemText_Player, StartMenu_PlayerLinkCallback },
+    {SystemText_Pokedex, StartMenu_PokedexCallback},
+    {SystemText_Pokemon, StartMenu_PokemonCallback},
+    {SystemText_BAG, StartMenu_BagCallback},
+    {SystemText_Pokenav, StartMenu_PokenavCallback},
+    {SystemText_Player, StartMenu_PlayerCallback},
+    {SystemText_Save, StartMenu_SaveCallback},
+    {SystemText_Option, StartMenu_OptionCallback},
+    {SystemText_Exit, StartMenu_ExitCallback},
+    {SystemText_Retire, StartMenu_RetireCallback},
+    {SystemText_Player, StartMenu_PlayerLinkCallback},
 };
 
 //Private functions
@@ -125,7 +126,6 @@ static void sub_80719F0(void);
 static bool32 sub_80719FC(u8 *ptr);
 static void sub_8071B54(void);
 static void Task_8071B64(u8 taskId);
-
 
 static void BuildStartMenuActions(void)
 {
@@ -205,8 +205,7 @@ static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
             *index = _index;
             return TRUE;
         }
-    }
-    while (--n != 0);
+    } while (--n != 0);
     *index = _index;
     return FALSE;
 }
@@ -321,8 +320,8 @@ static u8 StartMenu_InputProcessCallback(void)
         }
         gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
         if (gCallback_03004AE8 != StartMenu_SaveCallback &&
-           gCallback_03004AE8 != StartMenu_ExitCallback &&
-           gCallback_03004AE8 != StartMenu_RetireCallback)
+            gCallback_03004AE8 != StartMenu_ExitCallback &&
+            gCallback_03004AE8 != StartMenu_RetireCallback)
             fade_screen(1, 0);
         return 0;
     }
@@ -590,7 +589,7 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-    case 0:     //YES
+    case 0: //YES
         HideSaveDialog();
         switch (gSaveFileStatus)
         {
@@ -608,8 +607,8 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
             return SAVE_IN_PROGRESS;
         }
         break;
-    case -1:    //B button
-    case 1:     //NO
+    case -1: //B button
+    case 1:  //NO
         HideSaveDialog();
         sub_8071700();
         return SAVE_CANCELED;
@@ -620,8 +619,8 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 static u8 SaveDialogCB_SaveFileExists(void)
 {
     DisplaySaveMessageWithCallback(
-      gDifferentSaveFile == TRUE ? gSaveText_ThereIsADifferentFile : gSaveText_ThereIsAlreadyAFile,
-      SaveDialogCB_DisplayOverwriteYesNoMenu);
+        gDifferentSaveFile == TRUE ? gSaveText_ThereIsADifferentFile : gSaveText_ThereIsAlreadyAFile,
+        SaveDialogCB_DisplayOverwriteYesNoMenu);
     return SAVE_IN_PROGRESS;
 }
 
@@ -636,12 +635,12 @@ static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-    case 0:     //YES
+    case 0: //YES
         HideSaveDialog();
         saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
         break;
-    case -1:    //B button
-    case 1:     //NO
+    case -1: //B button
+    case 1:  //NO
         HideSaveDialog();
         sub_8071700();
         return SAVE_CANCELED;

@@ -19,20 +19,20 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
     {
         // print info + dex information.
         MenuDrawTextWindow(left, top, left + width, top + 11);
-        PrintSaveMapName(++left, ++top); // MAP NAME
-        PrintSavePlayerName(left, top + 2); // PLAYER
-        PrintSaveBadges(left, top + 4); // BADGES
+        PrintSaveMapName(++left, ++top);      // MAP NAME
+        PrintSavePlayerName(left, top + 2);   // PLAYER
+        PrintSaveBadges(left, top + 4);       // BADGES
         PrintSavePokedexCount(left, top + 6); // POKEDEX
-        PrintSavePlayTime(left, top + 8); // PLAY TIME
+        PrintSavePlayTime(left, top + 8);     // PLAY TIME
     }
     else
     {
         // print everything besides dex.
         MenuDrawTextWindow(left, top, left + width, top + 9);
-        PrintSaveMapName(++left, ++top); // MAP NAME
+        PrintSaveMapName(++left, ++top);    // MAP NAME
         PrintSavePlayerName(left, top + 2); // PLAYER
-        PrintSaveBadges(left, top + 4); // BADGES
-        PrintSavePlayTime(left, top + 6); // PLAY TIME
+        PrintSaveBadges(left, top + 4);     // BADGES
+        PrintSavePlayTime(left, top + 6);   // PLAY TIME
     }
 }
 

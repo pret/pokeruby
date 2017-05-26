@@ -112,9 +112,9 @@ void sub_8072E74(void)
     for (i = 0; i < gNumTilesetAnimDmas; i++)
     {
         DmaCopy16(3,
-            gTilesetAnimDmas[i].src,
-            gTilesetAnimDmas[i].dest,
-            gTilesetAnimDmas[i].size);
+                  gTilesetAnimDmas[i].src,
+                  gTilesetAnimDmas[i].dest,
+                  gTilesetAnimDmas[i].size);
     }
     gNumTilesetAnimDmas = 0;
 }
@@ -198,11 +198,16 @@ static void sub_8073014(u16 a1)
 {
     int v1;
     v1 = a1 % 0x10;
-    if (v1 == 0) sub_8073070(a1 / 0x10);
-    if (v1 == 1) sub_8073098(a1 / 0x10);
-    if (v1 == 2) sub_80730C0(a1 / 0x10);
-    if (v1 == 3) sub_80730E8(a1 / 0x10);
-    if (v1 == 4) sub_807361C(a1 / 0x10);
+    if (v1 == 0)
+        sub_8073070(a1 / 0x10);
+    if (v1 == 1)
+        sub_8073098(a1 / 0x10);
+    if (v1 == 2)
+        sub_80730C0(a1 / 0x10);
+    if (v1 == 3)
+        sub_80730E8(a1 / 0x10);
+    if (v1 == 4)
+        sub_807361C(a1 / 0x10);
 }
 
 static void sub_8073058(u16 a1)
@@ -383,71 +388,100 @@ static void sub_8073424(u16 a1)
         sub_80737A4(a1 / 8, 0);
         sub_80737E0(a1 / 8);
     }
-    if (v1 == 1) sub_80737A4(a1 / 8, 1);
-    if (v1 == 2) sub_80737A4(a1 / 8, 2);
-    if (v1 == 3) sub_80737A4(a1 / 8, 3);
-    if (v1 == 4) sub_80737A4(a1 / 8, 4);
-    if (v1 == 5) sub_80737A4(a1 / 8, 5);
-    if (v1 == 6) sub_80737A4(a1 / 8, 6);
-    if (v1 == 7) sub_80737A4(a1 / 8, 7);
+    if (v1 == 1)
+        sub_80737A4(a1 / 8, 1);
+    if (v1 == 2)
+        sub_80737A4(a1 / 8, 2);
+    if (v1 == 3)
+        sub_80737A4(a1 / 8, 3);
+    if (v1 == 4)
+        sub_80737A4(a1 / 8, 4);
+    if (v1 == 5)
+        sub_80737A4(a1 / 8, 5);
+    if (v1 == 6)
+        sub_80737A4(a1 / 8, 6);
+    if (v1 == 7)
+        sub_80737A4(a1 / 8, 7);
 }
 
 static void sub_80734A0(u16 a1)
 {
     int v1;
     v1 = a1 % 8;
-    if (v1 == 0) sub_8073704(a1 / 8, 0);
-    if (v1 == 1) sub_8073704(a1 / 8, 1);
-    if (v1 == 2) sub_8073704(a1 / 8, 2);
-    if (v1 == 3) sub_8073704(a1 / 8, 3);
-    if (v1 == 4) sub_8073704(a1 / 8, 4);
-    if (v1 == 5) sub_8073704(a1 / 8, 5);
-    if (v1 == 6) sub_8073704(a1 / 8, 6);
-    if (v1 == 7) sub_8073704(a1 / 8, 7);
+    if (v1 == 0)
+        sub_8073704(a1 / 8, 0);
+    if (v1 == 1)
+        sub_8073704(a1 / 8, 1);
+    if (v1 == 2)
+        sub_8073704(a1 / 8, 2);
+    if (v1 == 3)
+        sub_8073704(a1 / 8, 3);
+    if (v1 == 4)
+        sub_8073704(a1 / 8, 4);
+    if (v1 == 5)
+        sub_8073704(a1 / 8, 5);
+    if (v1 == 6)
+        sub_8073704(a1 / 8, 6);
+    if (v1 == 7)
+        sub_8073704(a1 / 8, 7);
 }
 
 static void sub_8073514(u16 a1)
 {
     int v1;
     v1 = a1 % 0x10;
-    if (v1 == 0) sub_8073644(a1 / 0x10);
-    if (v1 == 1) sub_8073808(a1 / 0x10);
+    if (v1 == 0)
+        sub_8073644(a1 / 0x10);
+    if (v1 == 1)
+        sub_8073808(a1 / 0x10);
 }
 
 static void sub_8073540(u16 a1)
 {
     int v1;
     v1 = a1 % 8;
-    if (v1 == 0) sub_8073830(a1 / 8, 0);
-    if (v1 == 1) sub_8073830(a1 / 8, 1);
-    if (v1 == 2) sub_8073830(a1 / 8, 2);
-    if (v1 == 3) sub_8073830(a1 / 8, 3);
-    if (v1 == 4) sub_8073830(a1 / 8, 4);
-    if (v1 == 5) sub_8073830(a1 / 8, 5);
-    if (v1 == 6) sub_8073830(a1 / 8, 6);
-    if (v1 == 7) sub_8073830(a1 / 8, 7);
+    if (v1 == 0)
+        sub_8073830(a1 / 8, 0);
+    if (v1 == 1)
+        sub_8073830(a1 / 8, 1);
+    if (v1 == 2)
+        sub_8073830(a1 / 8, 2);
+    if (v1 == 3)
+        sub_8073830(a1 / 8, 3);
+    if (v1 == 4)
+        sub_8073830(a1 / 8, 4);
+    if (v1 == 5)
+        sub_8073830(a1 / 8, 5);
+    if (v1 == 6)
+        sub_8073830(a1 / 8, 6);
+    if (v1 == 7)
+        sub_8073830(a1 / 8, 7);
 }
 
 static void sub_80735B4(u16 a1)
 {
     int v1;
     v1 = a1 % 0x10;
-    if (v1 == 0) sub_807368C(a1 / 0x10);
-    if (v1 == 1) sub_80736DC(a1 / 0x10);
+    if (v1 == 0)
+        sub_807368C(a1 / 0x10);
+    if (v1 == 1)
+        sub_80736DC(a1 / 0x10);
 }
 
 static void sub_80735E4(u16 a1)
 {
     int v1;
     v1 = a1 % 0x10;
-    if (v1 == 0) sub_80736B4(a1 / 0x10);
+    if (v1 == 0)
+        sub_80736B4(a1 / 0x10);
 }
 
 static void sub_8073600(u16 a1)
 {
     int v1;
     v1 = a1 % 0x10;
-    if (v1 == 1) sub_8073868(a1 / 0x10);
+    if (v1 == 1)
+        sub_8073868(a1 / 0x10);
 }
 
 static void sub_807361C(u16 a1)

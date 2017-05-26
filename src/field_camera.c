@@ -9,7 +9,6 @@
 
 extern u8 gUnknown_0202E854;
 
-
 struct UnknownStruct
 {
     u8 unk0;
@@ -364,7 +363,6 @@ void CameraUpdate(void)
     deltaY = 0;
     r1 = gUnknown_03004880.unk10;
     r0 = gUnknown_03004880.unk14;
-
 
     if (r1 == 0 && r7 != 0)
     {

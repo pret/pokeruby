@@ -30,9 +30,9 @@ struct UnkBard2
     /*0x02*/ u8 var02;
     /*0x03*/ u8 var03;
     /*0x04*/ u16 var04;
-             u8 pad06[4];
+    u8 pad06[4];
     /*0x0A*/ u16 var0A;
-             u8 pad0C[12];
+    u8 pad0C[12];
     /*0x18*/ struct UnkBard3 var18[6];
 };
 
@@ -63,7 +63,7 @@ s32 sub_814A2EC(struct UnkBard2 *dest, struct UnkBard *src, u16 arg2)
         dest->var18[i].var00 = src[i].var00;
         if (src[i].var00 != 0xFF)
         {
-            s32 r1 = src[i].var01 +gUnknown_084170F4[src[i].var00];
+            s32 r1 = src[i].var01 + gUnknown_084170F4[src[i].var00];
 
             dest->var18[i].var02 = r1;
             dest->var18[i].var06 = src[i].var04;

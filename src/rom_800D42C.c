@@ -25,14 +25,14 @@ extern u8 BattleText_Tie[];
 #define CENTER_MESSAGE_X 13
 #define MESSAGE_Y 2
 
-#define PRINT_MESSAGE(text, tileDataStartOffset, x)                             \
-{                                                                               \
-    InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
-    sub_8002F44(&gUnknown_03004210);                                            \
-}
+#define PRINT_MESSAGE(text, tileDataStartOffset, x)                              \
+    {                                                                            \
+        InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y); \
+        sub_8002F44(&gUnknown_03004210);                                         \
+    }
 
-#define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
-#define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset)      PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
+#define PRINT_MESSAGE_LEFT(text, tileDataStartOffset) PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
+#define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset) PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
 
 void PrintLinkBattleWinLossTie(void)
 {
@@ -87,7 +87,6 @@ void PrintLinkBattleWinLossTie(void)
 
         return;
     }
-
 
     if (gUnknown_02024D26 == 1)
     {

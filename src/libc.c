@@ -4,7 +4,7 @@
 #define LBLOCKSIZE (sizeof(long))
 
 // Nonzero if (long)X contains a NULL byte.
-#define CONTAINSNULL(X) (((X) - 0x01010101) & ~(X) & 0x80808080)
+#define CONTAINSNULL(X) (((X)-0x01010101) & ~(X)&0x80808080)
 
 // Nonzero if X is not aligned on a "long" boundary.
 #define UNALIGNED(X) ((long)X & (LBLOCKSIZE - 1))
@@ -139,5 +139,5 @@ int strcmp(const char *s1, const char *s2)
         s2++;
     }
 
-    return (*(unsigned char *) s1) - (*(unsigned char *) s2);
+    return (*(unsigned char *)s1) - (*(unsigned char *)s2);
 }

@@ -135,8 +135,7 @@ void sub_811DBC0(void)
     }
     else
     {
-        if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy
-         && gSprites[gUnknown_03004340[gUnknown_02024A60 ^ 2]].callback == SpriteCallbackDummy)
+        if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy && gSprites[gUnknown_03004340[gUnknown_02024A60 ^ 2]].callback == SpriteCallbackDummy)
             r6 = TRUE;
     }
     if (IsCryPlayingOrClearCrySongs())
@@ -169,7 +168,7 @@ void sub_811DCA0(void)
             sub_8045A5C(gUnknown_03004340[gUnknown_02024A60], &gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], 0);
             sub_804777C(gUnknown_02024A60);
             sub_8043DFC(gUnknown_03004340[gUnknown_02024A60]);
-            (s8)EWRAM_17810[4].unk9 &= ~1;
+            (s8) EWRAM_17810[4].unk9 &= ~1;
             gUnknown_03004330[gUnknown_02024A60] = sub_811DBC0;
         }
     }
@@ -177,8 +176,7 @@ void sub_811DCA0(void)
 
 void sub_811DDE8(void)
 {
-    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].animEnded
-     && gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos2.x == 0)
+    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].animEnded && gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos2.x == 0)
         dp01_tbl3_exec_completed();
 }
 
@@ -269,7 +267,7 @@ void sub_811E0CC(void)
     if (EWRAM_17810[gUnknown_02024A60].unk1 & 1)
     {
         EWRAM_17810[gUnknown_02024A60].unk0 &= 0x7F;
-        (s8)EWRAM_17810[gUnknown_02024A60].unk1 &= ~1;
+        (s8) EWRAM_17810[gUnknown_02024A60].unk1 &= ~1;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
@@ -287,8 +285,7 @@ void sub_811E1BC(void)
 {
     if (!(EWRAM_17810[gUnknown_02024A60].unk0 & 0x88))
         sub_8141828(gUnknown_02024A60, &gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]]);
-    if (gSprites[gUnknown_0300434C[gUnknown_02024A60]].callback == SpriteCallbackDummy
-     && !(EWRAM_17810[gUnknown_02024A60].unk0 & 8))
+    if (gSprites[gUnknown_0300434C[gUnknown_02024A60]].callback == SpriteCallbackDummy && !(EWRAM_17810[gUnknown_02024A60].unk0 & 8))
     {
         DestroySprite(&gSprites[gUnknown_0300434C[gUnknown_02024A60]]);
         gUnknown_03004330[gUnknown_02024A60] = sub_811E0CC;

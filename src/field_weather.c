@@ -61,7 +61,6 @@ extern u8 gUnknown_083970C8;
 extern u8 (*gUnknown_0202FC48)[32];
 extern u8 gUnknown_0202F9E8[32];
 
-
 void sub_807C828(void)
 {
     u8 index;

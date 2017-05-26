@@ -61,7 +61,6 @@ extern u8 gUnknown_0819F8AE[];
 extern u8 gUnknown_0819F80B[];
 extern u8 gUnknown_081C6C02[];
 
-
 static const u8 gBattleTransitionTable_Wild[][2] = {
     {8, 9},
     {5, 10},
@@ -1163,9 +1162,9 @@ void PlayTrainerEncounterMusic(void)
 u8 *SanitizeString(const u8 *str)
 {
     if (str)
-        return (u8 *) str;
+        return (u8 *)str;
     else
-        return (u8 *) gOtherText_CancelWithTerminator;
+        return (u8 *)gOtherText_CancelWithTerminator;
 }
 
 u8 *sub_808281C(void)
@@ -1246,7 +1245,7 @@ bool32 sub_80828FC(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 m
             }
         }
     }
-   return ret;
+    return ret;
 }
 
 s32 sub_80829A8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)

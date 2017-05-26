@@ -790,11 +790,7 @@ static u8 SetUpCopyrightScreen(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
-        REG_BG0CNT = BGCNT_PRIORITY(0)
-                   | BGCNT_CHARBASE(0)
-                   | BGCNT_SCREENBASE(7)
-                   | BGCNT_16COLOR
-                   | BGCNT_TXT256x256;
+        REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
         ime = REG_IME;
         REG_IME = 0;
         REG_IE |= INTR_FLAG_VBLANK;
@@ -1172,16 +1168,8 @@ static void task_intro_14(u8 taskId)
     REG_WIN0V = 0xA0;
     REG_WININ = 0x1C;
     REG_WINOUT = 0x1D;
-    REG_BG3CNT = BGCNT_PRIORITY(3)
-               | BGCNT_CHARBASE(0)
-               | BGCNT_SCREENBASE(6)
-               | BGCNT_16COLOR
-               | BGCNT_TXT256x256;
-    REG_BG0CNT = BGCNT_PRIORITY(0)
-               | BGCNT_CHARBASE(0)
-               | BGCNT_SCREENBASE(7)
-               | BGCNT_16COLOR
-               | BGCNT_TXT256x256;
+    REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6) | BGCNT_16COLOR | BGCNT_TXT256x256;
+    REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
     gTasks[taskId].data[15] = CreateTask(task_intro_20, 0);
     gTasks[gTasks[taskId].data[15]].data[0] = 0;
@@ -1353,7 +1341,7 @@ static void task_intro_20(u8 taskId)
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[0] = 20;
-        //fall through
+    //fall through
     case 20:
         REG_BG2VOFS = gTasks[taskId].data[1];
         REG_BG2HOFS = gTasks[taskId].data[2];
@@ -1367,7 +1355,7 @@ static void task_intro_20(u8 taskId)
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[0] = 0x1E;
-        //fall through
+    //fall through
     case 0x1E:
         REG_BG2VOFS = gTasks[taskId].data[1];
         REG_BG2HOFS = gTasks[taskId].data[2];
@@ -1382,7 +1370,7 @@ static void task_intro_20(u8 taskId)
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].data[3] = 8;
         gTasks[taskId].data[0] = 0x28;
-        //fall through
+    //fall through
     case 0x28:
         REG_BG2VOFS = gTasks[taskId].data[1];
         REG_BG2HOFS = gTasks[taskId].data[2];
@@ -1391,7 +1379,7 @@ static void task_intro_20(u8 taskId)
         if (!(gTasks[taskId].data[15] & 7) && gTasks[taskId].data[3] != 0)
             gTasks[taskId].data[3]--;
         break;
-    case 0xFF:  //needed to prevent jump table optimization
+    case 0xFF: //needed to prevent jump table optimization
         break;
     }
 
@@ -1455,7 +1443,7 @@ static void sub_813CCE8(u8 taskId)
         }
         else
         {
-            gTasks[taskId].data[1] = 0;  //redundant?
+            gTasks[taskId].data[1] = 0; //redundant?
             gTasks[taskId].data[0]++;
         }
         return;
@@ -2344,7 +2332,7 @@ static void sub_813DB9C(struct Sprite *sprite)
         else
             sprite->hFlip = FALSE;
         sprite->data0 = 1;
-        //fall through
+    //fall through
     case 1:
         if (sprite->pos1.y > 96)
         {
@@ -2368,7 +2356,7 @@ static void sub_813DB9C(struct Sprite *sprite)
         else
         {
             sprite->data0++;
-            sprite->data3 = 0;  //redundant?
+            sprite->data3 = 0; //redundant?
         }
         break;
     case 3:
@@ -2384,8 +2372,7 @@ static void sub_813DB9C(struct Sprite *sprite)
         break;
     case 4:
         sprite->data4++;
-        if (sprite->pos1.y + sprite->pos2.y > -32
-         && sprite->pos1.x + sprite->pos2.x > -64)
+        if (sprite->pos1.y + sprite->pos2.y > -32 && sprite->pos1.x + sprite->pos2.x > -64)
         {
             u16 r2;
 
@@ -2420,7 +2407,7 @@ static void sub_813DD58(struct Sprite *sprite)
         sprite->oam.matrixNum = sprite->data1;
         sprite->data3 = 2048;
         sprite->data0 = 1;
-        //fall through
+    //fall through
     case 1:
         if (sprite->data3 > 256)
         {
@@ -2579,7 +2566,7 @@ static void sub_813E10C(struct Sprite *sprite)
     case 3:
         sprite->invisible = FALSE;
         sprite->data1++;
-        //fall through
+    //fall through
     case 4:
         if (sprite->pos2.x > -56)
         {
@@ -2647,7 +2634,7 @@ static void sub_813E210(struct Sprite *sprite)
     case 3:
         sprite->invisible = FALSE;
         sprite->data1++;
-        //fall through
+    //fall through
     case 4:
         if (sprite->pos2.x < 56)
         {
@@ -2681,7 +2668,7 @@ static void sub_813E30C(struct Sprite *sprite)
         sprite->oam.matrixNum = 1;
         sprite->data0 = 10;
         sprite->data4 = 36;
-        //fall through
+    //fall through
     case 10:
         if (sprite->pos1.x <= 144)
         {
@@ -2702,7 +2689,7 @@ static void sub_813E30C(struct Sprite *sprite)
         sprite->oam.matrixNum = 2;
         sprite->data0 = 20;
         sprite->data4 = 36;
-        //fall through
+    //fall through
     case 20:
         if (sprite->pos1.x <= 96)
         {
@@ -3064,7 +3051,7 @@ static void sub_813EDFC(struct Sprite *sprite)
         CalcCenterToCornerVec(sprite, 0, 3, 3);
         sprite->data1 = 0;
         sprite->data0 = 1;
-        //fall through
+    //fall through
     case 1:
         break;
     }

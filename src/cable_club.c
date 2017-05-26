@@ -35,7 +35,8 @@ void sub_80833C4(u8 taskId);
 void sub_8083418(u8 taskId);
 u8 sub_8083444(u8 taskId);
 
-void sub_808303C(u8 taskId) {
+void sub_808303C(u8 taskId)
+{
     s32 linkPlayerCount;
     s16 *taskData;
 
@@ -65,12 +66,13 @@ void sub_808303C(u8 taskId) {
     sub_80081C8(linkPlayerCount);
     sub_8082D4C();
     ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1); // r5
-    ShowFieldAutoScrollMessage((u8 *) gUnknown_081A4975);
+    ShowFieldAutoScrollMessage((u8 *)gUnknown_081A4975);
     gTasks[taskId].func = sub_80830E4;
 }
 
 #ifdef NONMATCHING
-static void sub_80830E4(u8 taskId) {
+static void sub_80830E4(u8 taskId)
+{
     if (sub_8082E28(taskId) == 1 ||
         sub_8082EB8(taskId) == 1 ||
         sub_8082DF4(taskId) == 1 ||
@@ -91,12 +93,13 @@ static void sub_80830E4(u8 taskId) {
     {
         PlaySE(SE_SELECT);
         sub_8007F4C();
-        gTasks[(u32) taskId].func = sub_8083188;
+        gTasks[(u32)taskId].func = sub_8083188;
     }
 }
 #else
 NAKED
-static void sub_80830E4(u8 taskId) {
+static void sub_80830E4(u8 taskId)
+{
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
     lsls r0, 24\n\
@@ -173,13 +176,13 @@ _08083184: .4byte sub_8083188\n\
 }
 #endif
 
-void sub_8083188(u8 taskId) {
+void sub_8083188(u8 taskId)
+{
     u8 local1, local2;
     u16 *result;
 
     local1 = gTasks[taskId].data[1];
     local2 = gTasks[taskId].data[2];
-
 
     if (sub_8082DF4(taskId) == 1 ||
         sub_8083444(taskId) == 1)
@@ -201,7 +204,8 @@ void sub_8083188(u8 taskId) {
     }
 }
 
-void sub_80831F8(u8 taskId) {
+void sub_80831F8(u8 taskId)
+{
     u8 local1, local2;
     u16 *result;
 
@@ -221,7 +225,6 @@ void sub_80831F8(u8 taskId) {
         return;
     }
 
-
     if (*result == 3)
     {
         sub_800832C();
@@ -233,12 +236,13 @@ void sub_80831F8(u8 taskId) {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *) gBlockSendBuffer);
+        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
     }
 }
 
-static void sub_8083288(u8 taskId) {
+static void sub_8083288(u8 taskId)
+{
     if (sub_8082DF4(taskId) == 1)
     {
         return;
@@ -255,13 +259,14 @@ static void sub_8083288(u8 taskId) {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *) gBlockSendBuffer);
+        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
         sub_8007E9C(2);
     }
 }
 
-static void sub_8083314(u8 taskId) {
+static void sub_8083314(u8 taskId)
+{
     u8 index;
 
     struct TrainerCard *trainerCards;
