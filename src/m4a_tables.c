@@ -217,6 +217,7 @@ const u8 gClockTable[] = {
     0x60,
 };
 
+// clang-format off
 #define FINE   0xb1
 #define GOTO   0xb2
 #define PATT   0xb3
@@ -244,6 +245,7 @@ const u8 gClockTable[] = {
 
 #define EOT    0xce
 #define TIE    0xcf
+// clang-format on
 
 const struct PokemonCrySong gPokemonCrySongTemplate = {
     1, // track count

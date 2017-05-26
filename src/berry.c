@@ -14,6 +14,8 @@
 #define LAST_BERRY  ITEM_ENIGMA_BERRY
 
 #ifdef ENGLISH
+
+// clang-format off
 #define NAME_CHERI_BERRY   _("CHERI")
 #define NAME_CHESTO_BERRY  _("CHESTO")
 #define NAME_PECHA_BERRY   _("PECHA")
@@ -57,6 +59,7 @@
 #define NAME_LANSAT_BERRY  _("LANSAT")
 #define NAME_STARF_BERRY   _("STARF")
 #define NAME_ENIGMA_BERRY  _("ENIGMA")
+// clang-format on
 
 const u8 gBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 const u8 gBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
@@ -145,6 +148,8 @@ const u8 gBerryDescriptionPart2_Starf[] = _("world’s edge. Considered a mirage
 const u8 gBerryDescriptionPart1_Enigma[] = _("A completely enigmatic BERRY.");
 const u8 gBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
 #elif defined(GERMAN)
+
+// clang-format off
 #define NAME_CHERI_BERRY   _("AMRENA")
 #define NAME_CHESTO_BERRY  _("MARON")
 #define NAME_PECHA_BERRY   _("PIRSIF")
@@ -188,6 +193,7 @@ const u8 gBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars
 #define NAME_LANSAT_BERRY  _("LANSAT")
 #define NAME_STARF_BERRY   _("KRAMBO")
 #define NAME_ENIGMA_BERRY  _("ENIGMA")
+// clang-format on
 
 const u8 gBerryDescriptionPart1_Cheri[] = _("Erblüht mit hübschen, zarten Blumen.");
 const u8 gBerryDescriptionPart2_Cheri[] = _("Diese knallrote BEERE ist sehr scharf.");

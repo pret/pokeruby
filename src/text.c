@@ -215,12 +215,14 @@ static const u8 sFont1JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font1_jpn.1bp
 static const u8 sBrailleGlyphs[] = INCBIN_U8("graphics/fonts/font6_braille.1bpp");
 static const u32 sDownArrowTiles[] = INCBIN_U32("graphics/fonts/down_arrow.4bpp");
 
+// clang-format off
 #include "fonts/type1_map.h"
 #include "fonts/type3_map.h"
 #include "fonts/font1_widths.h"
 #include "fonts/font4_widths.h"
 #include "fonts/font0_widths.h"
 #include "fonts/font3_widths.h"
+// clang-format on
 
 const u16 gUnknownPalette_81E6692[] = INCBIN_U16("graphics/fonts/unknown_81E6692.gbapal");
 const u16 gFontDefaultPalette[] = INCBIN_U16("graphics/fonts/default.gbapal");
