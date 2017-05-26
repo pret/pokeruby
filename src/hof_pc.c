@@ -1,4 +1,5 @@
 #include "global.h"
+#include "hall_of_fame.h"
 #include "main.h"
 #include "palette.h"
 #include "rom4.h"

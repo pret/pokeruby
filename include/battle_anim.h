@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLEANIM_H
 #define GUARD_BATTLEANIM_H
 
+#include "sprite.h"
+
 #define SCRIPT_READ_8(ptr)  ((ptr)[0])
 #define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))

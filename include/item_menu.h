@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_MENU_H
 #define GUARD_ITEM_MENU_H
 
+#include "string_util.h"
+
 void sub_80A3684(void);
 void ClearBag(void);
 void sub_80A3E0C(void);

@@ -1,6 +1,21 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
 
+#include "task.h"
+
+struct PartyMenuItem
+{
+    const u8 *text;
+    TaskFunc func;
+};
+
+struct PartyPopupMenu
+{
+    u8 unk0;
+    u8 unk1;
+    const u8 *unk4;
+};
+
 void sub_806AEDC(void);
 void sub_806AF4C();
 void OpenPartyMenu(u8, u8);
@@ -52,7 +67,7 @@ void sub_8070968();
 void sub_8070A20();
 void Task_RareCandy3(u8);
 void sub_8070C54();
-void DoEvolutionStoneItemEffect(u8);
+void DoEvolutionStoneItemEffect(u8, u16, TaskFunc);
 u8 GetItemEffectType();
 u8 sub_806E834(const u8 *message, u8 arg1);
 void sub_806E8D0(u8 taskId, u16 b, TaskFunc c);
@@ -63,7 +78,7 @@ void DisplayTakeHeldItemMessage(u8, u16, u8);
 void Task_ConfirmTakeHeldMail(u8);
 u16 ItemIdToBattleMoveId(u16);
 bool8 pokemon_has_move(struct Pokemon *, u16);
-void TeachMonTMMove(u8);
+void TeachMonTMMove(u8, u16, TaskFunc);
 void Task_TeamMonTMMove(u8);
 void Task_TeamMonTMMove2(u8);
 void Task_TeamMonTMMove3(u8);
@@ -82,16 +97,15 @@ void sub_806FB44(u8);
 void PartyMenuUpdateLevelOrStatus(struct Pokemon *, u8);
 void GetMedicineItemEffectMessage(u16);
 bool8 ExecuteTableBasedItemEffect__(u8, u16, u8);
-u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
-void UseMedicine(u8);
+void UseMedicine(u8, u16, TaskFunc);
 bool8 IsBlueYellowRedFlute(u16);
-void sub_8070048(u8);
+void sub_8070048(u8, u16, TaskFunc);
 void sub_8070088(u8);
 void sub_80701DC(u8 taskId);
-void DoPPRecoveryItemEffect(u8);
+void DoPPRecoveryItemEffect(u8, u16, TaskFunc);
 void DoRecoverPP(u8);
-void DoPPUpItemEffect(u8);
-void DoRareCandyItemEffect(u8);
+void DoPPUpItemEffect(u8, u16, TaskFunc);
+void DoRareCandyItemEffect(u8, u16, TaskFunc);
 void Task_RareCandy1(u8);
 void Task_RareCandy2(u8);
 void sub_8070848(u8 taskId);

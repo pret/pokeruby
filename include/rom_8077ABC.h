@@ -1,7 +1,10 @@
 #ifndef GUARD_ROM_8077ABC_H
 #define GUARD_ROM_8077ABC_H
 
-u8 sub_8077ABC();
+#include "sprite.h"
+#include "task.h"
+
+u8 sub_8077ABC(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 obj_id_for_side_relative_to_move(u8 side);
 void oamt_set_x3A_32(struct Sprite *sprite, void(*callback)(struct Sprite *));
@@ -32,7 +35,7 @@ void obj_translate_based_on_private_1_2_3_4(struct Sprite *sprite);
 bool8 sub_8078B5C(struct Sprite *sprite);
 void sub_8078BB8(struct Sprite *sprite);
 void sub_8078D44(struct Sprite *sprite);
-void obj_id_set_rotscale(u8 sprite, int, int, u16);
+void obj_id_set_rotscale(u8 sprite, s16, s16, u16);
 bool8 sub_8078E38();
 void sub_8078E70(u8 sprite, u8);
 void sub_8078F40(u8 sprite);
@@ -46,9 +49,7 @@ u16 sub_8079B10(u8 sprite);
 void sub_8079BF4(s16 *bottom, s16 *top, void *ptr);
 void *sub_8079BFC(s16 bottom, s16 top);
 void sub_8079E24();
-u8 sub_8079E90();
 u8 sub_8079E90(u8 slot);
-u8 battle_get_per_side_status_permutated();
 u8 battle_get_per_side_status_permutated(u8 slot);
 void sub_807A784(u8 taskId);
 void sub_807A850(struct Task *task, u8 taskId);

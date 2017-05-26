@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "sprite.h"
+
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -488,12 +490,12 @@ u8 sub_8040574(struct Pokemon *party);
 void ClearBattleMonForms(void);
 void sub_80408BC();
 void current_map_music_set__default_for_battle(u16);
-void *species_and_otid_get_pal(u32, u32, u32);
+void *species_and_otid_get_pal(u16, u32, u32);
 const struct SpritePalette *sub_80409C8(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
 void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
-int sub_8040D3C();
+bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
 
 #endif // GUARD_POKEMON_H

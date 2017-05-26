@@ -17,7 +17,7 @@ void dp01_build_cmdbuf_x04_4_4_4(u8 a);
 void sub_800C704(u8, u8, u8);
 void dp01_build_cmdbuf_x07_7_7_7(u8 a);
 void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c);
-void dp01_build_cmdbuf_x1D_1D_numargs_varargs(int, u16, void *);
+void dp01_build_cmdbuf_x1D_1D_numargs_varargs(u8, u16, u8 *);
 void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
 void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
 void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);

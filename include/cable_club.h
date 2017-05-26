@@ -1,6 +1,8 @@
 #ifndef GUARD_CABLE_CLUB_H
 #define GUARD_CABLE_CLUB_H
 
+#include "task.h"
+
 void sub_8082D4C();
 void sub_8082D60(u8, u8);
 u16 sub_8082D9C(u8, u8);
