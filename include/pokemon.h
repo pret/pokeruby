@@ -3,6 +3,7 @@
 
 #include "sprite.h"
 
+// clang-format off
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -115,6 +116,7 @@
 #define TYPE_ICE      0x0f
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
+// clang-format on
 
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510

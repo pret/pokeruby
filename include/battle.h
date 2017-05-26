@@ -3,6 +3,7 @@
 
 #include "sprite.h"
 
+// clang-format off
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004
@@ -19,14 +20,15 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 
-#define AI_ACTION_DONE          0x0001
-#define AI_ACTION_FLEE          0x0002
-#define AI_ACTION_WATCH          0x0004
-#define AI_ACTION_DO_NOT_ATTACK          0x0008
-#define AI_ACTION_UNK5          0x0010
-#define AI_ACTION_UNK6          0x0020
-#define AI_ACTION_UNK7          0x0040
-#define AI_ACTION_UNK8          0x0080
+#define AI_ACTION_DONE              0x0001
+#define AI_ACTION_FLEE              0x0002
+#define AI_ACTION_WATCH             0x0004
+#define AI_ACTION_DO_NOT_ATTACK     0x0008
+#define AI_ACTION_UNK5              0x0010
+#define AI_ACTION_UNK6              0x0020
+#define AI_ACTION_UNK7              0x0040
+#define AI_ACTION_UNK8              0x0080
+// clang-format on
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
@@ -125,10 +127,10 @@ struct UnkBattleStruct4
     /*0x08*/ u8 unk8;
     /*0x09*/ u8 unk9;
     /*0x0A*/ u8 unkA;
-             u8 fillerB[4];
-             u8 unkF_0:4;
-             u8 unkF_4:4;
-             u8 filler10[3];
+    /*    */ u8 fillerB[4];
+    /*    */ u8 unkF_0:4;
+    /*    */ u8 unkF_4:4;
+    /*    */ u8 filler10[3];
     /*0x13*/ u8 taunt:4;
     /*0x13*/ u8 unkC:4;
     /*0x14*/ u8 unk14;

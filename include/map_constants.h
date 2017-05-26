@@ -1,3 +1,4 @@
+// clang-format off
 #ifndef GUARD_MAP_CONSTANTS_H
 #define GUARD_MAP_CONSTANTS_H
 
