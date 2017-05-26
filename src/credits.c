@@ -448,7 +448,7 @@ void task_a_8143D04(u8 taskIdA)
         gReservedSpritePaletteCount = 8;
         LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
         LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-        LoadPalette(gBirchBagGrassPal + 1, 1, 31 * 2);
+        LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
             HALL_OF_FAME_SHEET_0[i] = 0x11;

@@ -59,7 +59,7 @@ void sub_80F9A8C(u8 taskId)
     if(!gPaletteFade.active)
     {
         gPaletteFade.bufferTransferDisabled = 1;
-        OpenPartyMenu(gTasks[taskId].data[0], 0);
+        OpenPartyMenu((u8) gTasks[taskId].data[0], 0);
         DestroyTask(taskId);
     }
 }

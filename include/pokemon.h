@@ -383,6 +383,18 @@ struct PokemonStorage
     u8 unkArray[14];
 };
 
+struct Evolution
+{
+    u16 method;
+    u16 param;
+    u16 targetSpecies;
+};
+
+struct EvolutionData
+{
+    struct Evolution evolutions[5];
+};
+
 extern const u8 *const gItemEffectTable[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];

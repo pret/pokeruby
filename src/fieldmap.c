@@ -344,7 +344,7 @@ union Block
     u16 value;
 };
 
-u16 MapGridGetZCoordAt(int x, int y)
+u8 MapGridGetZCoordAt(int x, int y)
 {
     u16 block;
     int i;
@@ -370,7 +370,7 @@ u16 MapGridGetZCoordAt(int x, int y)
     return block >> 12;
 }
 
-u16 MapGridIsImpassableAt(int x, int y)
+u8 MapGridIsImpassableAt(int x, int y)
 {
     u16 block;
     int i;
@@ -396,7 +396,7 @@ u16 MapGridIsImpassableAt(int x, int y)
     return (block & 0xc00) >> 10;
 }
 
-u16 MapGridGetMetatileIdAt(int x, int y)
+u32 MapGridGetMetatileIdAt(int x, int y)
 {
     u16 block;
     int i;
@@ -436,7 +436,7 @@ u32 MapGridGetMetatileBehaviorAt(int x, int y)
     return GetBehaviorByMetatileId(metatile) & 0xff;
 }
 
-u16 MapGridGetMetatileLayerTypeAt(int x, int y)
+u8 MapGridGetMetatileLayerTypeAt(int x, int y)
 {
     u16 metatile;
     metatile = MapGridGetMetatileIdAt(x, y);

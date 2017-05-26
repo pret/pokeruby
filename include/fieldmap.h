@@ -16,11 +16,11 @@ void fillSouthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillNorthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillWestConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillEastConnection(struct MapHeader *, struct MapHeader *, s32);
-u16 MapGridGetZCoordAt(int s, int y);
-u16 MapGridIsImpassableAt(int, int);
-u16 MapGridGetMetatileIdAt(int, int);
+u8 MapGridGetZCoordAt(int s, int y);
+u8 MapGridIsImpassableAt(int, int);
+u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int x, int y); // return: (u8|u16|int) args: (int|s16|s32)
-u16 MapGridGetMetatileLayerTypeAt(int, int);
+u8 MapGridGetMetatileLayerTypeAt(int, int);
 void MapGridSetMetatileIdAt(int, int, u16);
 u32 GetBehaviorByMetatileId(u16 metatile);
 void save_serialize_map(void);

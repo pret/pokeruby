@@ -1,6 +1,29 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
+struct WildPokemon
+{
+    u8 minLevel;
+    u8 maxLevel;
+    u16 species;
+};
+
+struct WildPokemonInfo
+{
+    u8 encounterRate;
+    const struct WildPokemon *wildPokemon;
+};
+
+struct WildPokemonHeader
+{
+    u8 mapGroup;
+    u8 mapNum;
+    struct WildPokemonInfo *landMonsInfo;
+    struct WildPokemonInfo *waterMonsInfo;
+    struct WildPokemonInfo *rockSmashMonsInfo;
+    struct WildPokemonInfo *fishingMonsInfo;
+};
+
 extern struct WildPokemonHeader gWildMonHeaders[];
 
 void DisableWildEncounters(bool8 disabled);
