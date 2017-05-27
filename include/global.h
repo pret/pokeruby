@@ -438,11 +438,6 @@ typedef union SB_Struct {
 } SB_Struct;
 // size is 0x198
 
-struct SaveTVStruct {
-    TVShow shows[24];
-	TVShow unknown_2A98;
-};
-
 struct UnknownSaveStruct2ABC {
 	u8 val0;
 	u8 val1;
@@ -517,7 +512,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-    /*0x2738*/ struct SaveTVStruct tvShows;
+	/*0x2738*/ TVShow tvShows[25];
     /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
