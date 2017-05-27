@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.6.1)
+
+project(pokeruby)
+
+FILE(GLOB POKE_SOURCES
+        "${CMAKE_SOURCE_DIR}/src/*.c"
+        "${CMAKE_SOURCE_DIR}/include/*.h"
+        "${CMAKE_SOURCE_DIR}/asm/*.s")
+
+include_directories(${CMAKE_SOURCE_DIR}/include/)
+
+macro(ADD_ROM name version revision language)
+    add_executable(${name} ${POKE_SOURCES})
+    target_compile_definitions(${name} PUBLIC ${version} "REVISION=${revision}" ${language})
+endmacro()
+
+ADD_ROM(pokeruby RUBY 0 ENGLISH)
+ADD_ROM(pokeruby_rev1 RUBY 1 ENGLISH)
+ADD_ROM(pokeruby_rev2 RUBY 2 ENGLISH)
+ADD_ROM(pokesapphire SAPPHIRE 0 ENGLISH)
+ADD_ROM(pokesapphire_rev1 SAPPHIRE 1 ENGLISH)
+ADD_ROM(pokesapphire_rev2 SAPPHIRE 2 ENGLISH)
+ADD_ROM(pokeruby_de RUBY 0 GERMAN)
