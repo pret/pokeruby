@@ -59,23 +59,20 @@ static u8 CanBikeFaceDirOnMetatile(u8, u8);
 static bool8 sub_80E5EC0(u8, u8);
 static void sub_80E6024(void);
 
-static void (*const sMachBikeTransitions[])(u8) =
-{
+static void (*const sMachBikeTransitions[])(u8) = {
     MachBikeTransition_FaceDirection,
     MachBikeTransition_80E517C,
     MachBikeTransition_80E51C4,
     MachBikeTransition_80E5270,
 };
 
-static void (*const gUnknown_083DB5A4[])(u8) =
-{
+static void (*const gUnknown_083DB5A4[])(u8) = {
     PlayerGoSpeed0,
     sub_80593C4,
     sub_80593F4,
 };
 
-static void (*const sAcroBikeTransitions[])(u8) =
-{
+static void (*const sAcroBikeTransitions[])(u8) = {
     AcroBikeTransition_FaceDirection,
     AcroBikeTransition_80E5708,
     AcroBikeTransition_80E5744,
@@ -91,8 +88,7 @@ static void (*const sAcroBikeTransitions[])(u8) =
     AcroBikeTransition_80E5AC0,
 };
 
-static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
-{
+static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) = {
     AcroBikeHandleInputNormal,
     AcroBikeHandleInputTurning,
     AcroBikeHandleInputWheelieStanding,
@@ -105,8 +101,7 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
 const u16 gMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 static const u8 Unknown_3DB606[] = {4, 0};
 
-static const struct UnknownStruct1 gUnknown_083DB608[] =
-{
+static const struct UnknownStruct1 gUnknown_083DB608[] = {
     {1, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 1},
     {2, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 2},
     {3, 2, 15, 15, Unknown_3DB606, Unknown_3DB606, 3},
@@ -213,7 +208,7 @@ static void MachBikeTransition_80E51C4(u8 direction)
         {
             gUnknown_083DB5A4[gPlayerAvatar.bikeFrameCounter](direction);
             gPlayerAvatar.unkB = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-            if (gPlayerAvatar.bikeFrameCounter < 2) // do not go faster than the last element in the mach bike array
+            if (gPlayerAvatar.bikeFrameCounter < 2)                                                      // do not go faster than the last element in the mach bike array
                 gPlayerAvatar.bikeFrameCounter++;
         }
     }
@@ -589,7 +584,7 @@ static void AcroBikeTransition_80E58AC(u8 direction)
         }
         else
         {
-          derp:
+        derp:
             sub_8059570(direction);
         }
     }
@@ -653,7 +648,7 @@ static void AcroBikeTransition_80E59A0(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
                 sub_8059504(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                sub_80595DC(direction); //hit wall?
         }
         return;
     }
@@ -687,7 +682,7 @@ static void AcroBikeTransition_80E5A30(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
                 sub_8059504(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                sub_80595DC(direction); //hit wall?
         }
         return;
     }
@@ -880,15 +875,13 @@ static bool8 CanBikeFaceDirOnMetatile(u8 direction, u8 tile)
     if (direction == DIR_EAST || direction == DIR_WEST)
     {
         //Bike cannot face east or west on a vertical rail
-        if (MetatileBehavior_IsIsolatedVerticalRail(tile)
-         || MetatileBehavior_IsVerticalRail(tile))
+        if (MetatileBehavior_IsIsolatedVerticalRail(tile) || MetatileBehavior_IsVerticalRail(tile))
             return FALSE;
     }
     else
     {
         //Bike cannot face north or south on a horizontal rail
-        if (MetatileBehavior_IsIsolatedHorizontalRail(tile)
-         || MetatileBehavior_IsHorizontalRail(tile))
+        if (MetatileBehavior_IsIsolatedHorizontalRail(tile) || MetatileBehavior_IsHorizontalRail(tile))
             return FALSE;
     }
     return TRUE;

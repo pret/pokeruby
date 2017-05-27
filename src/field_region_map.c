@@ -4,8 +4,8 @@
 #include "menu.h"
 #include "palette.h"
 #include "sprite.h"
-#include "text.h"
 #include "strings2.h"
+#include "text.h"
 
 extern void sub_80FA8EC(u32, u8);
 extern void sub_80FAB10(void);

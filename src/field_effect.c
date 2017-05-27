@@ -87,10 +87,7 @@ bool8 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val)
 
 u32 FieldEffectScript_ReadWord(u8 **script)
 {
-    return (*script)[0]
-         + ((*script)[1] << 8)
-         + ((*script)[2] << 16)
-         + ((*script)[3] << 24);
+    return (*script)[0] + ((*script)[1] << 8) + ((*script)[2] << 16) + ((*script)[3] << 24);
 }
 
 void FieldEffectScript_LoadTiles(u8 **script)
@@ -118,7 +115,7 @@ void FieldEffectScript_LoadPalette(u8 **script)
 
 void FieldEffectScript_CallNative(u8 **script, u32 *val)
 {
-    u32 (*func)(void) = (u32 (*)(void))FieldEffectScript_ReadWord(script);
+    u32 (*func)(void) = (u32(*)(void))FieldEffectScript_ReadWord(script);
     *val = func();
     (*script) += 4;
 }

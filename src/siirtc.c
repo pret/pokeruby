@@ -5,17 +5,20 @@
 #include "gba/gba.h"
 #include "siirtc.h"
 
+// clang-format off
 #define STATUS_INTFE  0x02 // frequency interrupt enable
 #define STATUS_INTME  0x08 // per-minute interrupt enable
 #define STATUS_INTAE  0x20 // alarm interrupt enable
 #define STATUS_24HOUR 0x40 // 0: 12-hour mode, 1: 24-hour mode
 #define STATUS_POWER  0x80 // power on or power failure occurred
+// clang-format on
 
 #define TEST_MODE 0x80 // flag in the "second" byte
 
 #define ALARM_AM 0x00
 #define ALARM_PM 0x80
 
+// clang-format off
 #define OFFSET_YEAR         offsetof(struct SiiRtcInfo, year)
 #define OFFSET_MONTH        offsetof(struct SiiRtcInfo, month)
 #define OFFSET_DAY          offsetof(struct SiiRtcInfo, day)
@@ -26,6 +29,7 @@
 #define OFFSET_STATUS       offsetof(struct SiiRtcInfo, status)
 #define OFFSET_ALARM_HOUR   offsetof(struct SiiRtcInfo, alarmHour)
 #define OFFSET_ALARM_MINUTE offsetof(struct SiiRtcInfo, alarmMinute)
+// clang-format on
 
 #define INFO_BUF(info, index) (*((u8 *)(info) + (index)))
 
@@ -40,15 +44,19 @@
 
 #define CMD(n) (0x60 | (n << 1))
 
+// clang-format off
 #define CMD_RESET    CMD(0)
 #define CMD_STATUS   CMD(1)
 #define CMD_DATETIME CMD(2)
 #define CMD_TIME     CMD(3)
 #define CMD_ALARM    CMD(4)
+// clang-format on
 
+// clang-format off
 #define GPIO_PORT_DATA        (*(vu16 *)0x80000C4)
 #define GPIO_PORT_DIRECTION   (*(vu16 *)0x80000C6)
 #define GPIO_PORT_READ_ENABLE (*(vu16 *)0x80000C8)
+// clang-format on
 
 extern vu16 GPIOPortDirection;
 
@@ -85,8 +93,7 @@ u8 SiiRtcProbe()
 
     errorCode = 0;
 
-    if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER
-     || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
+    if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
     {
         // The RTC is in 12-hour mode. Reset it and switch to 24-hour mode.
 
@@ -165,10 +172,7 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 
     statusData = ReadData();
 
-    rtc->status = (statusData & (STATUS_POWER | STATUS_24HOUR))
-                | ((statusData & STATUS_INTAE) >> 3)
-                | ((statusData & STATUS_INTME) >> 2)
-                | ((statusData & STATUS_INTFE) >> 1);
+    rtc->status = (statusData & (STATUS_POWER | STATUS_24HOUR)) | ((statusData & STATUS_INTAE) >> 3) | ((statusData & STATUS_INTME) >> 2) | ((statusData & STATUS_INTFE) >> 1);
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
@@ -190,10 +194,7 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
 
-    statusData = STATUS_24HOUR
-               | ((rtc->status & SIIRTCINFO_INTAE) << 3)
-               | ((rtc->status & SIIRTCINFO_INTME) << 2)
-               | ((rtc->status & SIIRTCINFO_INTFE) << 1);
+    statusData = STATUS_24HOUR | ((rtc->status & SIIRTCINFO_INTAE) << 3) | ((rtc->status & SIIRTCINFO_INTME) << 2) | ((rtc->status & SIIRTCINFO_INTFE) << 1);
 
     GPIO_PORT_DIRECTION = 7;
 

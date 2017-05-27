@@ -26,30 +26,35 @@ extern u32 gUnknown_02039254;
 
 static void RecordCyclingRoadResults(u32, u8);
 
-void sub_810D6A4(void) {
+void sub_810D6A4(void)
+{
     SetMainCallback2(sub_8145D88);
     ScriptContext2_Enable();
 }
 
-void sub_810D6B8(void) {
+void sub_810D6B8(void)
+{
     gMain.savedCallback = c2_exit_to_overworld_2_switch;
     SetMainCallback2(CB2_ViewWallClock);
     ScriptContext2_Enable();
 }
 
-void ResetCyclingRoadChallengeData(void) {
+void ResetCyclingRoadChallengeData(void)
+{
     gUnknown_02039250 = 0;
     gUnknown_02039251 = 0;
     gUnknown_02039254 = 0;
 }
 
-void BeginCyclingRoadChallenge(void) {
+void BeginCyclingRoadChallenge(void)
+{
     gUnknown_02039250 = 1;
     gUnknown_02039251 = 0;
     gUnknown_02039254 = gMain.vblankCounter1;
 }
 
-u16 GetPlayerAvatarBike(void) {
+u16 GetPlayerAvatarBike(void)
+{
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         return 1;
@@ -63,7 +68,8 @@ u16 GetPlayerAvatarBike(void) {
     return 0;
 }
 
-void DetermineCyclingRoadResults(u32 arg0, u8 arg1) {
+void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
+{
     u8 result;
 
     if (arg1 <= 99)
@@ -131,18 +137,19 @@ void DetermineCyclingRoadResults(u32 arg0, u8 arg1) {
         result += 1;
     }
 
-
     gScriptResult = result;
 }
 
-void FinishCyclingRoadChallenge(void) {
+void FinishCyclingRoadChallenge(void)
+{
     const u32 time = gMain.vblankCounter1 - gUnknown_02039254;
 
     DetermineCyclingRoadResults(time, gUnknown_02039251);
     RecordCyclingRoadResults(time, gUnknown_02039251);
 }
 
-static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
+static void RecordCyclingRoadResults(u32 arg0, u8 arg1)
+{
     u16 high, low;
     u32 record;
 
@@ -158,7 +165,8 @@ static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
     }
 }
 
-u16 GetRecordedCyclingRoadResults(void) {
+u16 GetRecordedCyclingRoadResults(void)
+{
     u16 high, low;
     u32 record;
 
@@ -175,7 +183,8 @@ u16 GetRecordedCyclingRoadResults(void) {
     return TRUE;
 }
 
-void UpdateCyclingRoadState(void) {
+void UpdateCyclingRoadState(void)
+{
     if (gUnknown_020297F0.mapNum == MAP_ID_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE && gUnknown_020297F0.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)
     {
         return;

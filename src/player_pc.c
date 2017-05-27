@@ -22,7 +22,7 @@ enum
     QUANTITY,
 };
 
-extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
@@ -87,9 +87,10 @@ void NewGameInitPCItems(void)
     u8 i;
 
     // because Game Freak don't know how to use a struct or a 2d array
-    for(i = 0, ClearItemSlots(gSaveBlock1.pcItems, ARRAY_COUNT(gSaveBlock1.pcItems)); NEW_GAME_PC_ITEMS(i, ITEM_ID) && NEW_GAME_PC_ITEMS(i, QUANTITY) &&
-        AddPCItem(NEW_GAME_PC_ITEMS(i, ITEM_ID), NEW_GAME_PC_ITEMS(i, QUANTITY)) == TRUE; i++)
-            ;
+    for (i = 0, ClearItemSlots(gSaveBlock1.pcItems, ARRAY_COUNT(gSaveBlock1.pcItems)); NEW_GAME_PC_ITEMS(i, ITEM_ID) && NEW_GAME_PC_ITEMS(i, QUANTITY) &&
+                                                                                       AddPCItem(NEW_GAME_PC_ITEMS(i, ITEM_ID), NEW_GAME_PC_ITEMS(i, QUANTITY)) == TRUE;
+         i++)
+        ;
 }
 
 void BedroomPC(void)
@@ -272,7 +273,7 @@ void sub_813A0F8(void)
 void ItemStorage_Withdraw(u8 taskId)
 {
     u8 var;
-    u16 * data = gTasks[taskId].data;
+    u16 *data = gTasks[taskId].data;
 
     sub_8072DEC();
     MenuZeroFillWindowRect(0, 0, 11, 9);
@@ -296,7 +297,7 @@ void ItemStorage_Withdraw(u8 taskId)
 void ItemStorage_Toss(u8 taskId)
 {
     u8 var;
-    u16 * data = gTasks[taskId].data;
+    u16 *data = gTasks[taskId].data;
 
     sub_8072DEC();
     MenuZeroFillWindowRect(0, 0, 11, 9);
@@ -346,7 +347,7 @@ void sub_813A280(u8 taskId)
 
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if(data[0])
+        if (data[0])
         {
             PlaySE(5);
             data[0] = MoveMenuCursor(-1);
@@ -375,15 +376,15 @@ void sub_813A280(u8 taskId)
                 MoveMenuCursor(0);
         }
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _0813A306
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN) // _0813A306
     {
-        if(data[0] != data[4] - 1)
+        if (data[0] != data[4] - 1)
         {
             PlaySE(5);
             data[0] = MoveMenuCursor(1);
             var = data[1] + data[0];
 
-            if(data[9])
+            if (data[9])
                 return;
 
             if (var == data[2])
@@ -391,7 +392,7 @@ void sub_813A280(u8 taskId)
             else
                 sub_813AD58(gSaveBlock1.pcItems[var].itemId);
         }
-        else if(data[1] + data[0] != data[2])
+        else if (data[1] + data[0] != data[2])
         {
             PlaySE(5);
             data[1]++;
@@ -401,7 +402,7 @@ void sub_813A280(u8 taskId)
                 MoveMenuCursor(0);
         }
     }
-    else if(gMain.newKeys & SELECT_BUTTON) // _0813A3A0
+    else if (gMain.newKeys & SELECT_BUTTON) // _0813A3A0
     {
         if (!data[9])
         {
@@ -422,12 +423,12 @@ void sub_813A280(u8 taskId)
             sub_813AE0C(taskId);
         }
     }
-    else if(gMain.newKeys & A_BUTTON)
+    else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(5);
-        if(!data[9])
+        if (!data[9])
         {
-            if(data[1] + data[0] != data[2])
+            if (data[1] + data[0] != data[2])
             {
                 sub_813A4B4(taskId);
             }
@@ -442,10 +443,10 @@ void sub_813A280(u8 taskId)
             sub_813AE0C(taskId);
         }
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(5);
-        if(!data[9])
+        if (!data[9])
         {
             sub_8072DEC();
             sub_813A468(taskId);
@@ -477,9 +478,9 @@ void sub_813A4B4(u8 taskId)
     sub_80F996C(0);
     sub_80F996C(1);
 
-    if(!data[6])
+    if (!data[6])
     {
-        if(gSaveBlock1.pcItems[var].quantity == 1)
+        if (gSaveBlock1.pcItems[var].quantity == 1)
         {
             data[3] = 1;
             sub_813A6FC(taskId);
@@ -490,7 +491,7 @@ void sub_813A4B4(u8 taskId)
             sub_813AD58(0xFFFE);
         }
     }
-    else if(gSaveBlock1.pcItems[var].quantity == 1) // _0813A518
+    else if (gSaveBlock1.pcItems[var].quantity == 1) // _0813A518
     {
         data[3] = 1;
         sub_813A794(taskId);
@@ -511,53 +512,53 @@ void HandleQuantityRolling(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
 
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if(data[3] != gSaveBlock1.pcItems[var].quantity)
+        if (data[3] != gSaveBlock1.pcItems[var].quantity)
             data[3]++;
         else
             data[3] = 1; // you are at the max amount of items you have when you press Up, set your quantity back to 1.
 
         sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if(data[3] != 1)
+        if (data[3] != 1)
             data[3]--;
         else
             data[3] = gSaveBlock1.pcItems[var].quantity; // you are at 0 when you press down, set your quantity to the amount you have.
 
         sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // reduce by 10.
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT) // reduce by 10.
     {
         data[3] -= 10;
 
-        if(data[3] <= 0)
+        if (data[3] <= 0)
             data[3] = 1; // dont underflow or allow 0!
 
         sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // add 10.
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT) // add 10.
     {
         data[3] += 10;
 
-        if(data[3] > gSaveBlock1.pcItems[var].quantity)
+        if (data[3] > gSaveBlock1.pcItems[var].quantity)
             data[3] = gSaveBlock1.pcItems[var].quantity; // dont overflow!
 
         sub_80A418C(data[3], STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newKeys & A_BUTTON) // confirm quantity.
+    else if (gMain.newKeys & A_BUTTON) // confirm quantity.
     {
         PlaySE(5);
         MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
 
-        if(!data[6])
+        if (!data[6])
             sub_813A6FC(taskId);
         else
             sub_813A794(taskId);
     }
-    else if(gMain.newKeys & B_BUTTON) // cancel quantity.
+    else if (gMain.newKeys & B_BUTTON) // cancel quantity.
     {
         PlaySE(5);
         MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
@@ -573,7 +574,7 @@ void sub_813A6FC(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
 
-    if(AddBagItem(gSaveBlock1.pcItems[var].itemId, data[3]) == TRUE) // add item works.
+    if (AddBagItem(gSaveBlock1.pcItems[var].itemId, data[3]) == TRUE) // add item works.
     {
         CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
@@ -593,7 +594,7 @@ void sub_813A794(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 var = data[0] + data[1];
 
-    if(ItemId_GetImportance(gSaveBlock1.pcItems[var].itemId) == FALSE)
+    if (ItemId_GetImportance(gSaveBlock1.pcItems[var].itemId) == FALSE)
     {
         CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[3], 0, 3);
@@ -634,14 +635,14 @@ void sub_813A8F0(u8 taskId)
     u16 var;
     u8 usedItemSlots;
 
-    if(gMain.newKeys & 0x1 || gMain.newKeys == 0x2)
+    if (gMain.newKeys & 0x1 || gMain.newKeys == 0x2)
     {
         RemovePCItem(data[0] + data[1], data[3]);
         var = data[2];
         usedItemSlots = CountUsedPCItemSlots();
         data[2] = usedItemSlots;
 
-        if((s16)var != usedItemSlots && (s16)var < data[4] + data[1] && data[1] != 0)
+        if ((s16)var != usedItemSlots && (s16)var < data[4] + data[1] && data[1] != 0)
             data[1]--;
 
         sub_813A240(taskId);
@@ -654,7 +655,7 @@ void sub_813A984(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if(gMain.newKeys & 0x1 || gMain.newKeys == 2)
+    if (gMain.newKeys & 0x1 || gMain.newKeys == 2)
     {
         sub_813AD58(gSaveBlock1.pcItems[data[1] + data[0]].itemId);
         sub_80F98DC(0);
@@ -679,7 +680,7 @@ void sub_813AA30(u8 taskId, u8 arg)
 
     data[9] = 0;
 
-    if((u8)data[2] > var && (u8)data[8] != var && arg == 0)
+    if ((u8)data[2] > var && (u8)data[8] != var && arg == 0)
     {
         struct ItemSlot itemSlot = gSaveBlock1.pcItems[data[8]]; // backup the itemSlot before swapping the two.
 
@@ -687,7 +688,7 @@ void sub_813AA30(u8 taskId, u8 arg)
         gSaveBlock1.pcItems[var] = itemSlot;
         return;
     }
-    else if(var == data[2])
+    else if (var == data[2])
     {
         sub_813AD58(0xFFFF);
     }
@@ -704,7 +705,8 @@ void sub_813AA30(u8 taskId, u8 arg)
     without bringing the relevent debug menus back. The commented out line is intentionally left in below to show
     what it may have looked like.
     */
-    if(data[8] - data[1] > 0) { // this check is arbitrary and used to generate the correct assembly using the subtraction, which is what matters. the 0 check doesn't.
+    if (data[8] - data[1] > 0)
+    { // this check is arbitrary and used to generate the correct assembly using the subtraction, which is what matters. the 0 check doesn't.
         //gSaveBlock1.pcItems[data[8]].quantity += 100;
         gSaveBlock1.pcItems[data[8]].quantity += 0; // do not enforce item cap.
     }
@@ -714,7 +716,7 @@ void sub_813AAC4(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int ar
 {
     sub_80A4164(gStringVar1, arg1, arg2, arg4);
 
-    if(arg5)
+    if (arg5)
         MenuPrint(gUnknown_0840632A, 0x1A, arg3);
     else
         MenuPrint(gUnknown_08406327, 0x1A, arg3);
@@ -729,7 +731,7 @@ void sub_813AB28(struct ItemSlot *itemSlot, u8 var, int var2)
 {
     CopyItemName(itemSlot->itemId, gStringVar1);
 
-    if(var2)
+    if (var2)
         MenuPrint(gUnknown_0840631E, 16, var);
     else
         MenuPrint(gUnknown_08406318, 16, var);
@@ -751,7 +753,7 @@ void sub_813ABAC(struct ItemSlot *itemSlot, u8 var, int var2)
 {
     sub_813AB28(itemSlot, var, var2);
 
-    if(itemSlot->itemId < ITEM_HM01)
+    if (itemSlot->itemId < ITEM_HM01)
         sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
     else
         sub_813AB10(var); // key items do not have a quantity.
@@ -766,18 +768,18 @@ void sub_813ABE8(u8 taskId)
 
     // r5 is i and is unsigned 16-bit.
 
-    for(i = data[1]; i < data[1] + data[4]; i++)
+    for (i = data[1]; i < data[1] + data[4]; i++)
     {
         j = (i - data[1]) * 2;
 
-        if(i != data[2])
+        if (i != data[2])
         {
             tempArg = 0;
 
-            if(data[9] != 0 && i == data[8])
+            if (data[9] != 0 && i == data[8])
                 tempArg = 1;
 
-            switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
+            switch (GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
             {
             case 0:
             case 1:
@@ -799,15 +801,15 @@ void sub_813ABE8(u8 taskId)
     }
 
 beforeLabel:
-    if(i - data[1] < 8)
+    if (i - data[1] < 8)
         MenuFillWindowRectWithBlankTile(16, j + 4, 0x1C, 0x12);
 
-    switch(data[1])
+    switch (data[1])
     {
     default:
         CreateVerticalScrollIndicators(0, 0xB8, 8);
         break;
-weirdCase:
+    weirdCase:
         sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
         goto beforeLabel;
     case 0:
@@ -815,7 +817,7 @@ weirdCase:
         break;
     }
 
-    if(data[1] + data[4] <= data[2])
+    if (data[1] + data[4] <= data[2])
         CreateVerticalScrollIndicators(1, 0xB8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "asm.h"
-#include "text.h"
 #include "menu_cursor.h"
+#include "text.h"
 
 extern struct Window gUnknown_03004210;
 extern u8 gUnknown_020238CC[];
@@ -11,7 +11,7 @@ extern const u8 gUnknown_08400CBB[];
 extern u8 gUnknown_02024A60;
 extern const u8 gUnknown_08400D15[];
 
-extern void* gUnknown_03004330[];
+extern void *gUnknown_03004330[];
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 
@@ -23,7 +23,8 @@ void bx_battle_menu_t6_2(void);
 #define SUB_812BB10_TILE_DATA_OFFSET 444
 #endif
 
-void sub_812BB10(void) {
+void sub_812BB10(void)
+{
     int i;
 
     gUnknown_030042A4 = 0;
@@ -43,7 +44,7 @@ void sub_812BB10(void) {
     }
 
     sub_802E3E4(gUnknown_02024E60[gUnknown_02024A60], 0);
-    get_battle_strings_((u8 *) gUnknown_08400CBB);
+    get_battle_strings_((u8 *)gUnknown_08400CBB);
 
     InitWindow(&gUnknown_03004210, gUnknown_020238CC, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);

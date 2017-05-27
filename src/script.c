@@ -354,10 +354,7 @@ u8 *GetRamScript(u8 objectId, u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
     gUnknown_0202E8AC = 0;
-    if (scriptData->magic == RAM_SCRIPT_MAGIC
-     && scriptData->mapGroup == gSaveBlock1.location.mapGroup
-     && scriptData->mapNum == gSaveBlock1.location.mapNum
-     && scriptData->objectId == objectId)
+    if (scriptData->magic == RAM_SCRIPT_MAGIC && scriptData->mapGroup == gSaveBlock1.location.mapGroup && scriptData->mapNum == gSaveBlock1.location.mapNum && scriptData->objectId == objectId)
     {
         if (CalculateRamScriptChecksum() == gSaveBlock1.ramScript.checksum)
         {

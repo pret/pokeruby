@@ -26,8 +26,7 @@ extern struct Unk3000756 gUnknown_03000756;
 extern struct Unk03005E20 gUnknown_03005E20;
 extern struct ContestEntry *gUnknown_03005E8C;
 
-static const u16 gPictureFramePalettes[][16] =
-{
+static const u16 gPictureFramePalettes[][16] = {
     INCBIN_U16("graphics/picture_frame/bg0.gbapal"),
     INCBIN_U16("graphics/picture_frame/bg1.gbapal"),
     INCBIN_U16("graphics/picture_frame/bg2.gbapal"),
@@ -50,16 +49,14 @@ const u8 gPictureFrameTilemap_2[] = INCBIN_U8("graphics/picture_frame/frame2_map
 const u8 gPictureFrameTilemap_3[] = INCBIN_U8("graphics/picture_frame/frame3_map.bin.rl");
 const u8 gPictureFrameTilemap_4[] = INCBIN_U8("graphics/picture_frame/frame4_map.bin.rl");
 const u8 gPictureFrameTilemap_5[] = INCBIN_U8("graphics/picture_frame/frame5_map.bin.rl");
-const u8 *const gUnknown_083F60AC[] =
-{
+const u8 *const gUnknown_083F60AC[] = {
     OtherText_Cool,
     OtherText_Beauty2,
     OtherText_Cute,
     OtherText_Smart,
     OtherText_Tough,
 };
-const struct LabelPair gUnknown_083F60C0[] =
-{
+const struct LabelPair gUnknown_083F60C0[] = {
     {OtherText_NonstopSuperCool, OtherText_Terminator6},
     {OtherText_GoodLookingPoke, OtherText_Terminator7},
     {OtherText_MarvelousGreat, OtherText_Terminator8},
@@ -76,8 +73,7 @@ const struct LabelPair gUnknown_083F60C0[] =
     {OtherText_StrongErEst, OtherText_Terminator17},
     {OtherText_MightyTough, OtherText_Exclamation},
 };
-const struct OamData gOamData_83F6138 =
-{
+const struct OamData gOamData_83F6138 = {
     .y = 0,
     .affineMode = 0,
     .objMode = 0,
@@ -102,15 +98,15 @@ static void ContestPaintingPrintCaption(u8 arg0, u8 arg1);
 static void ContestPaintingInitBG(void);
 static void ContestPaintingInitVars(u8 arg0);
 static void VBlankCB_ContestPainting(void);
-void sub_8106B90();  //should be static
+void sub_8106B90(); //should be static
 static void sub_8107090(u8 arg0, u8 arg1);
 
-extern void sub_80FC7A0(struct Unk03005E20*);
-extern void sub_80FDA18(struct Unk03005E20*);
-extern void sub_80FD8CC(struct Unk03005E20*);
+extern void sub_80FC7A0(struct Unk03005E20 *);
+extern void sub_80FDA18(struct Unk03005E20 *);
+extern void sub_80FD8CC(struct Unk03005E20 *);
 extern void *species_and_otid_get_pal();
 
-__attribute__((naked))
+NAKED
 void sub_8106630(u32 arg0)
 {
     asm(".syntax unified\n\
@@ -230,7 +226,7 @@ static void HoldContestPainting(void)
     case 1:
         if ((gMain.newKeys & 1) || (gMain.newKeys & 2))
         {
-            u8 two = 2;  //needed to make the asm match
+            u8 two = 2; //needed to make the asm match
 
             gUnknown_03000750 = two;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
@@ -359,8 +355,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[1],
             species,
-            (u32)gUnknown_03005E8C->var0
-        );
+            (u32)gUnknown_03005E8C->var0);
         sub_8106B90(gUnknown_081FAF4C[1], gUnknown_03005E90, gUnknown_03005E10);
     }
     else
@@ -372,13 +367,12 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[0],
             species,
-            (u32)gUnknown_03005E8C->var0
-        );
+            (u32)gUnknown_03005E8C->var0);
         sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8106AC4(u16 arg0, u8 arg2)
 {
     asm(".syntax unified\n\
@@ -511,7 +505,7 @@ void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8106B90()
 {
     asm(".syntax unified\n\
@@ -646,7 +640,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
             break;
         }
 
-#define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y) * 32 + (x)])
+#define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y)*32 + (x)])
 
         // Set the background
         for (y = 0; y < 20; y++)
@@ -703,16 +697,17 @@ static void sub_8106C40(u8 arg0, u8 arg1)
 
 static void sub_8106E98(u8 arg0)
 {
-    //Some hacks just to get the asm to match
+//Some hacks just to get the asm to match
 #ifndef NONMATCHING
-    asm(""::"r"(arg0));
+    asm("" ::"r"(arg0));
 #endif
 
     gMain.oamBuffer[0] = gOamData_83F6138;
     gMain.oamBuffer[0].tileNum = 0;
 
 #ifndef NONMATCHING
-    if (arg0) arg0 = gMain.oamBuffer[0].tileNum;
+    if (arg0)
+        arg0 = gMain.oamBuffer[0].tileNum;
 #endif
 
     gMain.oamBuffer[0].x = 88;

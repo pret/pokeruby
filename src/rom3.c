@@ -212,7 +212,6 @@ void sub_800BA78(void)
             gUnknown_03004330[2] = sub_8037510;
             gUnknown_02024A72[2] = 3;
             gUnknown_02024A68 = 4;
-
         }
         return;
     }
@@ -252,8 +251,7 @@ void sub_800BA78(void)
         }
         else
         {
-            if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
-             || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
+            if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1)) || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
             {
                 gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_811DA78;
                 switch (gLinkPlayers[i].lp_field_18)
@@ -307,10 +305,7 @@ void sub_800BD54(void)
                 {
                     if (!(gUnknown_02024A72[i] & 1))
                     {
-                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
+                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0 && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0 && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gUnknown_02024A6A[i] = j;
                             break;
@@ -318,10 +313,7 @@ void sub_800BD54(void)
                     }
                     else
                     {
-                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
+                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0 && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0 && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gUnknown_02024A6A[i] = j;
                             break;
@@ -332,11 +324,8 @@ void sub_800BD54(void)
                 {
                     if (!(gUnknown_02024A72[i] & 1))
                     {
-                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Probably a typo by Game Freak. The rest use SPECIES2
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gUnknown_02024A6A[i - 2] != j)
+                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0 && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0 //Probably a typo by Game Freak. The rest use SPECIES2
+                            && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0 && gUnknown_02024A6A[i - 2] != j)
                         {
                             gUnknown_02024A6A[i] = j;
                             break;
@@ -344,11 +333,7 @@ void sub_800BD54(void)
                     }
                     else
                     {
-                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gUnknown_02024A6A[i - 2] != j)
+                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0 && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0 && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0 && gUnknown_02024A6A[i - 2] != j)
                         {
                             gUnknown_02024A6A[i] = j;
                             break;
@@ -461,8 +446,7 @@ void sub_800C1A8(u8 taskId)
         {
             if (gTasks[taskId].data[13] == 0)
             {
-                if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-                 && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+                if (gTasks[taskId].data[15] > gTasks[taskId].data[14] && gTasks[taskId].data[15] == gTasks[taskId].data[12])
                 {
                     gTasks[taskId].data[12] = 0;
                     gTasks[taskId].data[15] = 0;
@@ -501,12 +485,12 @@ void sub_800C1A8(u8 taskId)
 //fix me
 void sub_800C35C(void)
 {
-    u8 i;  //r4
-    s32 j;  //r2
-    u16 r6;  //r6
-    u8 *recvBuffer;  //r3
-    u8 *dest;  //r5
-    u8 *src;  //r4
+    u8 i;           //r4
+    s32 j;          //r2
+    u16 r6;         //r6
+    u8 *recvBuffer; //r3
+    u8 *dest;       //r5
+    u8 *src;        //r4
 
     if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & 0x20) && gLinkPlayers[0].linkType == 0x2211)
     {
@@ -546,8 +530,7 @@ void sub_800C47C(u8 taskId)
 
     if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
     {
-        if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-         && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+        if (gTasks[taskId].data[15] > gTasks[taskId].data[14] && gTasks[taskId].data[15] == gTasks[taskId].data[12])
         {
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
@@ -784,7 +767,7 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     dp01_prepare_buffer(a, gUnknown_03004040, 0x44);
 }
 #else
-__attribute__((naked))
+NAKED
 void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -922,7 +905,7 @@ _0800CA64: .4byte gUnknown_030041C0\n\
 }
 #endif
 
-__attribute__((naked))
+NAKED
 void dp01_build_cmdbuf_x11_TODO()
 {
     asm(".syntax unified\n\
@@ -1087,7 +1070,7 @@ void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, u8 b, u8 c, u8 d, u8 *e)
     gUnknown_03004040[3] = d;
     for (i = 0; i < 3; i++)
         gUnknown_03004040[4 + i] = e[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 8);  //but only 7 bytes were written
+    dp01_prepare_buffer(a, gUnknown_03004040, 8); //but only 7 bytes were written
 }
 
 void dp01_build_cmdbuf_x17_17_17_17(u8 a)

@@ -43,9 +43,7 @@ int GameClear(void)
     {
         u8 val;
         u8 *ptr = &val;
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT2)
-         && !GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT3)
-         && !GetMonData(&gPlayerParty[i], MON_DATA_CHAMPION_RIBBON))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT2) && !GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT3) && !GetMonData(&gPlayerParty[i], MON_DATA_CHAMPION_RIBBON))
         {
             *ptr = 1;
             SetMonData(&gPlayerParty[i], MON_DATA_CHAMPION_RIBBON, ptr);

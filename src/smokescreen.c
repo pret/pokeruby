@@ -7,7 +7,6 @@ extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 
 static void sub_8046388(struct Sprite *);
 
-
 u8 sub_8046234(s16 x, s16 y, u8 a3)
 {
     u8 mainSpriteId;

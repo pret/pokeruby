@@ -24,7 +24,7 @@
 struct SaveFailedClockStruct
 {
     bool16 clockRunning;
-    u16 timer; // appears to be unused, the only case its "used" cannot be reached normally
+    u16 timer;      // appears to be unused, the only case its "used" cannot be reached normally
     u8 unused[0xE]; // appears to be unused space. alternatively, there could have been multiple clock structs. however, neither of these cases are fulfilled, so the purpose of this space is unknown. one theory is that there is room for 3 more clock structs (2 16-bit values), so its possible GF intended there to be support for link-based save failed screens in case the synchronization failed, or it in fact was present in an earlier build but taken out for reasons.
 };
 
@@ -41,8 +41,7 @@ extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];
 extern u8 gBirchBagGrassPal[0x40];
 
-static const struct OamData sClockOamData =
-{
+static const struct OamData sClockOamData = {
     160, // Y
     0,
     0,
@@ -55,19 +54,17 @@ static const struct OamData sClockOamData =
     0,
     0,
     0,
-    0
-};
+    0};
 
-static const u8 sClockFrames[8][3] =
-{
-    { 1, 0, 0 },
-    { 5, 0, 0 },
-    { 9, 0, 0 },
-    { 5, 0, 1 },
-    { 1, 0, 1 },
-    { 5, 1, 1 },
-    { 9, 1, 0 },
-    { 5, 1, 0 },
+static const u8 sClockFrames[8][3] = {
+    {1, 0, 0},
+    {5, 0, 0},
+    {9, 0, 0},
+    {5, 0, 1},
+    {1, 0, 1},
+    {5, 1, 1},
+    {9, 1, 0},
+    {5, 1, 0},
 };
 
 static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
@@ -135,7 +132,7 @@ static void CB2_SaveFailedScreen(void)
         SetUpWindowConfig(&gWindowConfig_81E6C3C);
         InitMenuWindow(&gWindowConfig_81E6CE4);
         MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19); // message window
+        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);                   // message window
         MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         ime = REG_IME;
@@ -144,8 +141,8 @@ static void CB2_SaveFailedScreen(void)
         REG_IME = ime;
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
         SetVBlankCallback(VBlankCB);
-        REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7)  | BGCNT_16COLOR | BGCNT_TXT256x256;
-        REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6)  | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6) | BGCNT_16COLOR | BGCNT_TXT256x256;
         REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
         REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG2_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
         gMain.state++;

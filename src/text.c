@@ -183,33 +183,30 @@ extern u16 gBattleTypeFlags;
 extern u8 gIsLinkContest;
 extern u8 gTileBuffer[];
 
-vu16 *const gBGControlRegs[] =
-{
+vu16 *const gBGControlRegs[] = {
     &REG_BG0CNT,
     &REG_BG1CNT,
     &REG_BG2CNT,
     &REG_BG3CNT,
 };
 
-vu16 *const gBGHOffsetRegs[] =
-{
+vu16 *const gBGHOffsetRegs[] = {
     &REG_BG0HOFS,
     &REG_BG1HOFS,
     &REG_BG2HOFS,
     &REG_BG3HOFS,
 };
 
-vu16 *const gBGVOffsetRegs[] =
-{
+vu16 *const gBGVOffsetRegs[] = {
     &REG_BG0VOFS,
     &REG_BG1VOFS,
     &REG_BG2VOFS,
     &REG_BG3VOFS,
 };
 
-const u16 gUnknown_081E29D8[] = { 0x100, 0x200, 0x400, 0x800 };
-const u16 gUnknown_081E29E0[] = { 0x100, 0x200, 0x400, 0x800 };
-const u16 gUnknown_081E29E8[] = { 1, 2, 4, 8 };
+const u16 gUnknown_081E29D8[] = {0x100, 0x200, 0x400, 0x800};
+const u16 gUnknown_081E29E0[] = {0x100, 0x200, 0x400, 0x800};
+const u16 gUnknown_081E29E8[] = {1, 2, 4, 8};
 
 static const u8 sFont0LatinGlyphs[] = INCBIN_U8("graphics/fonts/font0_lat.1bpp");
 static const u8 sFont1LatinGlyphs[] = INCBIN_U8("graphics/fonts/font1_lat.1bpp");
@@ -218,128 +215,273 @@ static const u8 sFont1JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font1_jpn.1bp
 static const u8 sBrailleGlyphs[] = INCBIN_U8("graphics/fonts/font6_braille.1bpp");
 static const u32 sDownArrowTiles[] = INCBIN_U32("graphics/fonts/down_arrow.4bpp");
 
+// clang-format off
 #include "fonts/type1_map.h"
 #include "fonts/type3_map.h"
 #include "fonts/font1_widths.h"
 #include "fonts/font4_widths.h"
 #include "fonts/font0_widths.h"
 #include "fonts/font3_widths.h"
+// clang-format on
 
 const u16 gUnknownPalette_81E6692[] = INCBIN_U16("graphics/fonts/unknown_81E6692.gbapal");
 const u16 gFontDefaultPalette[] = INCBIN_U16("graphics/fonts/default.gbapal");
 
-const u8 sBlankTile[8] = { 0, 0, 0, 0, 0, 0, 0, 0, };
+const u8 sBlankTile[8] = {
+    0, 0, 0, 0, 0, 0, 0, 0,
+};
 
-static const u32 sGlyphMasks[9][8][3] =
-{
+static const u32 sGlyphMasks[9][8][3] = {
     {
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0xFFFFFFFF,0xFFFFFFFF,0x00000000, },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFFFFFFF0, },
-        { 0x0000000F,0xFFFFFFFF,0xFFFFFF00, },
-        { 0x000000FF,0xFFFFFFFF,0xFFFFF000, },
-        { 0x00000FFF,0xFFFFFFFF,0xFFFF0000, },
-        { 0x0000FFFF,0xFFFFFFFF,0xFFF00000, },
-        { 0x000FFFFF,0xFFFFFFFF,0xFF000000, },
-        { 0x00FFFFFF,0xFFFFFFFF,0xF0000000, },
-        { 0x0FFFFFFF,0xFFFFFFFF,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFFFFFFF0,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xFFFFFF00,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0xFFFFF000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFFF, 0xFFFF0000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFFFF, 0xFFF00000,
+        },
+        {
+            0x000FFFFF, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFFFFFF00, },
-        { 0x0000000F,0xFFFFFFFF,0xFFFFF000, },
-        { 0x000000FF,0xFFFFFFFF,0xFFFF0000, },
-        { 0x00000FFF,0xFFFFFFFF,0xFFF00000, },
-        { 0x0000FFFF,0xFFFFFFFF,0xFF000000, },
-        { 0x000FFFFF,0xFFFFFFFF,0xF0000000, },
-        { 0x00FFFFFF,0xFFFFFFFF,0x00000000, },
-        { 0x0FFFFFFF,0xFFFFFFF0,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFFFFFF00,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xFFFFF000,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0xFFFF0000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFFF, 0xFFF00000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x000FFFFF, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFFFFFF0, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFFFFF000, },
-        { 0x0000000F,0xFFFFFFFF,0xFFFF0000, },
-        { 0x000000FF,0xFFFFFFFF,0xFFF00000, },
-        { 0x00000FFF,0xFFFFFFFF,0xFF000000, },
-        { 0x0000FFFF,0xFFFFFFFF,0xF0000000, },
-        { 0x000FFFFF,0xFFFFFFFF,0x00000000, },
-        { 0x00FFFFFF,0xFFFFFFF0,0x00000000, },
-        { 0x0FFFFFFF,0xFFFFFF00,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFFFFF000,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xFFFF0000,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0xFFF00000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x000FFFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFFFFF00, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFFFF0000, },
-        { 0x0000000F,0xFFFFFFFF,0xFFF00000, },
-        { 0x000000FF,0xFFFFFFFF,0xFF000000, },
-        { 0x00000FFF,0xFFFFFFFF,0xF0000000, },
-        { 0x0000FFFF,0xFFFFFFFF,0x00000000, },
-        { 0x000FFFFF,0xFFFFFFF0,0x00000000, },
-        { 0x00FFFFFF,0xFFFFFF00,0x00000000, },
-        { 0x0FFFFFFF,0xFFFFF000,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFFFF0000,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xFFF00000,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x000FFFFF, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFFFF00, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFFFF000, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFFF00000, },
-        { 0x0000000F,0xFFFFFFFF,0xFF000000, },
-        { 0x000000FF,0xFFFFFFFF,0xF0000000, },
-        { 0x00000FFF,0xFFFFFFFF,0x00000000, },
-        { 0x0000FFFF,0xFFFFFFF0,0x00000000, },
-        { 0x000FFFFF,0xFFFFFF00,0x00000000, },
-        { 0x00FFFFFF,0xFFFFF000,0x00000000, },
-        { 0x0FFFFFFF,0xFFFF0000,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFFF00000,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x000FFFFF, 0xFFFFFF00, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFFF000, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFFF0000, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xFF000000, },
-        { 0x0000000F,0xFFFFFFFF,0xF0000000, },
-        { 0x000000FF,0xFFFFFFFF,0x00000000, },
-        { 0x00000FFF,0xFFFFFFF0,0x00000000, },
-        { 0x0000FFFF,0xFFFFFF00,0x00000000, },
-        { 0x000FFFFF,0xFFFFF000,0x00000000, },
-        { 0x00FFFFFF,0xFFFF0000,0x00000000, },
-        { 0x0FFFFFFF,0xFFF00000,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xFF000000,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x000000FF, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x00000FFF, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x0000FFFF, 0xFFFFFF00, 0x00000000,
+        },
+        {
+            0x000FFFFF, 0xFFFFF000, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFFFF0000, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFFF00000, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0xF0000000, },
-        { 0x0000000F,0xFFFFFFFF,0x00000000, },
-        { 0x000000FF,0xFFFFFFF0,0x00000000, },
-        { 0x00000FFF,0xFFFFFF00,0x00000000, },
-        { 0x0000FFFF,0xFFFFF000,0x00000000, },
-        { 0x000FFFFF,0xFFFF0000,0x00000000, },
-        { 0x00FFFFFF,0xFFF00000,0x00000000, },
-        { 0x0FFFFFFF,0xFF000000,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0xF0000000,
+        },
+        {
+            0x0000000F, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x000000FF, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x00000FFF, 0xFFFFFF00, 0x00000000,
+        },
+        {
+            0x0000FFFF, 0xFFFFF000, 0x00000000,
+        },
+        {
+            0x000FFFFF, 0xFFFF0000, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFFF00000, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xFF000000, 0x00000000,
+        },
     },
     {
-        { 0x00000000,0xFFFFFFFF,0x00000000, },
-        { 0x0000000F,0xFFFFFFF0,0x00000000, },
-        { 0x000000FF,0xFFFFFF00,0x00000000, },
-        { 0x00000FFF,0xFFFFF000,0x00000000, },
-        { 0x0000FFFF,0xFFFF0000,0x00000000, },
-        { 0x000FFFFF,0xFFF00000,0x00000000, },
-        { 0x00FFFFFF,0xFF000000,0x00000000, },
-        { 0x0FFFFFFF,0xF0000000,0x00000000, },
+        {
+            0x00000000, 0xFFFFFFFF, 0x00000000,
+        },
+        {
+            0x0000000F, 0xFFFFFFF0, 0x00000000,
+        },
+        {
+            0x000000FF, 0xFFFFFF00, 0x00000000,
+        },
+        {
+            0x00000FFF, 0xFFFFF000, 0x00000000,
+        },
+        {
+            0x0000FFFF, 0xFFFF0000, 0x00000000,
+        },
+        {
+            0x000FFFFF, 0xFFF00000, 0x00000000,
+        },
+        {
+            0x00FFFFFF, 0xFF000000, 0x00000000,
+        },
+        {
+            0x0FFFFFFF, 0xF0000000, 0x00000000,
+        },
     },
 };
 
-static const struct ShiftAmount sGlyphShiftAmounts[8] =
-{
-    {  0, 32 },
-    {  4, 28 },
-    {  8, 24 },
-    { 12, 20 },
-    { 16, 16 },
-    { 20, 12 },
-    { 24,  8 },
-    { 28,  4 },
+static const struct ShiftAmount sGlyphShiftAmounts[8] = {
+    {0, 32},
+    {4, 28},
+    {8, 24},
+    {12, 20},
+    {16, 16},
+    {20, 12},
+    {24, 8},
+    {28, 4},
 };
 
 typedef void (*PrintGlyphFunc)(struct Window *, u32);
 
-static const PrintGlyphFunc sPrintGlyphFuncs[] =
-{
+static const PrintGlyphFunc sPrintGlyphFuncs[] = {
     PrintGlyph_TextMode0,
     PrintGlyph_TextMode1,
     PrintGlyph_TextMode2,
@@ -347,8 +489,7 @@ static const PrintGlyphFunc sPrintGlyphFuncs[] =
 
 typedef void (*WriteGlyphTilemapFunc)(struct Window *, u32);
 
-static const WriteGlyphTilemapFunc sWriteGlyphTilemapFuncs[] =
-{
+static const WriteGlyphTilemapFunc sWriteGlyphTilemapFuncs[] = {
     WriteGlyphTilemap_Font0_Font3,
     WriteGlyphTilemap_Font1_Font4,
     WriteGlyphTilemap_Font2_Font5,
@@ -358,12 +499,11 @@ static const WriteGlyphTilemapFunc sWriteGlyphTilemapFuncs[] =
     WriteGlyphTilemap_Font6,
 };
 
-static const struct Window sDefaultWindow = { .language = GAME_LANGUAGE };
+static const struct Window sDefaultWindow = {.language = GAME_LANGUAGE};
 
 typedef u8 (*ExtCtrlCodeFunc)(struct Window *);
 
-static const ExtCtrlCodeFunc sExtCtrlCodeFuncs[] =
-{
+static const ExtCtrlCodeFunc sExtCtrlCodeFuncs[] = {
     ExtCtrlCode_Nop,
     ExtCtrlCode_ForegroundColor,
     ExtCtrlCode_BackgroundColor,
@@ -394,30 +534,28 @@ extern const u32 gFont4LatinGlyphs[];
 extern const u32 gFont3JapaneseGlyphs[];
 extern const u32 gFont4JapaneseGlyphs[];
 
-static const struct Font sFonts[] =
-{
+static const struct Font sFonts[] = {
     // Japanese fonts
-    { 0, (u8 *)sFont0JapaneseGlyphs, 16,   8 },
-    { 1, (u8 *)sFont1JapaneseGlyphs,  8,   0 },
-    { 2, (u8 *)sFont1JapaneseGlyphs,  8,   0 },
-    { 4, (u8 *)gFont3JapaneseGlyphs, 64, 512 },
-    { 1, (u8 *)gFont4JapaneseGlyphs, 32,   0 },
-    { 2, (u8 *)gFont4JapaneseGlyphs, 32,   0 },
-    { 3,       (u8 *)sBrailleGlyphs,  8,   0 },
+    {0, (u8 *)sFont0JapaneseGlyphs, 16, 8},
+    {1, (u8 *)sFont1JapaneseGlyphs, 8, 0},
+    {2, (u8 *)sFont1JapaneseGlyphs, 8, 0},
+    {4, (u8 *)gFont3JapaneseGlyphs, 64, 512},
+    {1, (u8 *)gFont4JapaneseGlyphs, 32, 0},
+    {2, (u8 *)gFont4JapaneseGlyphs, 32, 0},
+    {3, (u8 *)sBrailleGlyphs, 8, 0},
     // Latin
-    { 0,    (u8 *)sFont0LatinGlyphs, 16,   8 },
-    { 1,    (u8 *)sFont1LatinGlyphs,  8,   0 },
-    { 2,    (u8 *)sFont1LatinGlyphs,  8,   0 },
-    { 0,    (u8 *)gFont3LatinGlyphs, 64,  32 },
-    { 1,    (u8 *)gFont4LatinGlyphs, 32,   0 },
-    { 2,    (u8 *)gFont4LatinGlyphs, 32,   0 },
-    { 3,       (u8 *)sBrailleGlyphs,  8,   0 },
+    {0, (u8 *)sFont0LatinGlyphs, 16, 8},
+    {1, (u8 *)sFont1LatinGlyphs, 8, 0},
+    {2, (u8 *)sFont1LatinGlyphs, 8, 0},
+    {0, (u8 *)gFont3LatinGlyphs, 64, 32},
+    {1, (u8 *)gFont4LatinGlyphs, 32, 0},
+    {2, (u8 *)gFont4LatinGlyphs, 32, 0},
+    {3, (u8 *)sBrailleGlyphs, 8, 0},
 };
 
-static const u8 sTextSpeedDelays[] = { 6, 3, 1 }; // slow, mid, fast
+static const u8 sTextSpeedDelays[] = {6, 3, 1}; // slow, mid, fast
 
-static const u8 sExtCtrlCodeLengths[] =
-{
+static const u8 sExtCtrlCodeLengths[] = {
     1,
     2,
     2,
@@ -445,8 +583,7 @@ static const u8 sExtCtrlCodeLengths[] =
 
 typedef void (*ShiftGlyphTileUnshadowedFunc)(struct GlyphBuffer *, u8 *, u32 *, u8);
 
-static const ShiftGlyphTileUnshadowedFunc sShiftGlyphTileUnshadowedFuncs[] =
-{
+static const ShiftGlyphTileUnshadowedFunc sShiftGlyphTileUnshadowedFuncs[] = {
     ShiftGlyphTile_UnshadowedFont_Width0,
     ShiftGlyphTile_UnshadowedFont_Width1,
     ShiftGlyphTile_UnshadowedFont_Width2,
@@ -460,8 +597,7 @@ static const ShiftGlyphTileUnshadowedFunc sShiftGlyphTileUnshadowedFuncs[] =
 
 typedef void (*ShiftGlyphTileShadowedFunc)(struct GlyphBuffer *, u32 *, u32 *, u8);
 
-static const ShiftGlyphTileShadowedFunc sShiftGlyphTileShadowedFuncs[] =
-{
+static const ShiftGlyphTileShadowedFunc sShiftGlyphTileShadowedFuncs[] = {
     ShiftGlyphTile_ShadowedFont_Width0,
     ShiftGlyphTile_ShadowedFont_Width1,
     ShiftGlyphTile_ShadowedFont_Width2,
@@ -473,1243 +609,1184 @@ static const ShiftGlyphTileShadowedFunc sShiftGlyphTileShadowedFuncs[] =
     ShiftGlyphTile_ShadowedFont_Width8,
 };
 
-const struct WindowConfig gWindowConfig_81E6C3C =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    0, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6C3C = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    0,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C58 =
-{
-    0, // BG number
-    0, // BG character base block
-    24, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    26, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6C58 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    24,                        // BG screen base block
+    0,                         // BG priority
+    0,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    26,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C74 =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    1, // foreground color
-    0, // background color
-    3, // shadow color
-    4, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
+const struct WindowConfig gWindowConfig_81E6C74 = {
+    0,               // BG number
+    0,               // BG character base block
+    0,               // BG screen base block
+    0,               // BG priority
+    0,               // palette number
+    1,               // foreground color
+    0,               // background color
+    3,               // shadow color
+    4,               // font
+    0,               // text mode
+    0,               // spacing
+    0,               // tilemap left coordinate
+    0,               // tilemap top coordinate
+    30,              // width
+    20,              // height
     (u8 *)OBJ_VRAM0, // tile data
-    NULL, // tilemap
+    NULL,            // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C90 =
-{
-    0, // BG number
-    1, // BG character base block
-    30, // BG screen base block
-    2, // BG priority
-    31, // palette number
-    15, // foreground color
-    0, // background color
-    1, // shadow color
-    4, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(1), // tile data
+const struct WindowConfig gWindowConfig_81E6C90 = {
+    0,                         // BG number
+    1,                         // BG character base block
+    30,                        // BG screen base block
+    2,                         // BG priority
+    31,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    1,                         // shadow color
+    4,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(1),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CAC =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    15, // foreground color
-    0, // background color
-    1, // shadow color
-    4, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    8, // width
-    60, // height
+const struct WindowConfig gWindowConfig_81E6CAC = {
+    0,           // BG number
+    0,           // BG character base block
+    0,           // BG screen base block
+    0,           // BG priority
+    0,           // palette number
+    15,          // foreground color
+    0,           // background color
+    1,           // shadow color
+    4,           // font
+    2,           // text mode
+    0,           // spacing
+    0,           // tilemap left coordinate
+    0,           // tilemap top coordinate
+    8,           // width
+    60,          // height
     gTileBuffer, // tile data
-    NULL, // tilemap
+    NULL,        // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CC8 =
-{
-    2, // BG number
-    2, // BG character base block
-    15, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6CC8 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    15,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CE4 =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6CE4 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D00 =
-{
-    0, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    2, // foreground color
-    15, // background color
-    3, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6D00 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    2,                         // foreground color
+    15,                        // background color
+    3,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D1C =
-{
-    1, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    1, // BG priority
-    15, // palette number
-    2, // foreground color
-    15, // background color
-    3, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6D1C = {
+    1,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    1,                         // BG priority
+    15,                        // palette number
+    2,                         // foreground color
+    15,                        // background color
+    3,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D38 =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    15, // foreground color
-    0, // background color
-    14, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    8, // width
-    64, // height
+const struct WindowConfig gWindowConfig_81E6D38 = {
+    0,           // BG number
+    0,           // BG character base block
+    0,           // BG screen base block
+    0,           // BG priority
+    0,           // palette number
+    15,          // foreground color
+    0,           // background color
+    14,          // shadow color
+    3,           // font
+    2,           // text mode
+    0,           // spacing
+    0,           // tilemap left coordinate
+    0,           // tilemap top coordinate
+    8,           // width
+    64,          // height
     gTileBuffer, // tile data
-    NULL, // tilemap
+    NULL,        // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D54 =
-{
-    3, // BG number
-    3, // BG character base block
-    15, // BG screen base block
-    3, // BG priority
-    2, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(3), // tile data
+const struct WindowConfig gWindowConfig_81E6D54 = {
+    3,                         // BG number
+    3,                         // BG character base block
+    15,                        // BG screen base block
+    3,                         // BG priority
+    2,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(3),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D70 =
-{
-    3, // BG number
-    3, // BG character base block
-    15, // BG screen base block
-    3, // BG priority
-    3, // palette number
-    1, // foreground color
-    3, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(3), // tile data
+const struct WindowConfig gWindowConfig_81E6D70 = {
+    3,                         // BG number
+    3,                         // BG character base block
+    15,                        // BG screen base block
+    3,                         // BG priority
+    3,                         // palette number
+    1,                         // foreground color
+    3,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(3),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D8C =
-{
-    1, // BG number
-    0, // BG character base block
-    14, // BG screen base block
-    1, // BG priority
-    0, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6D8C = {
+    1,                         // BG number
+    0,                         // BG character base block
+    14,                        // BG screen base block
+    1,                         // BG priority
+    0,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DA8 =
-{
-    0, // BG number
-    0, // BG character base block
-    12, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6DA8 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    12,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(11), // tilemap
 };
 
-const struct WindowConfig WindowConfig_TrainerCard_Back_Values =
-{
-    0, // BG number
-    2, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig WindowConfig_TrainerCard_Back_Values = {
+    0,                         // BG number
+    2,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig WindowConfig_TrainerCard_Back_Labels =
-{
-    0, // BG number
-    2, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    14, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig WindowConfig_TrainerCard_Back_Labels = {
+    0,                         // BG number
+    2,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    14,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DFC =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6DFC = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E18 =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    1, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6E18 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    1,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E34 =
-{
-    1, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    1, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6E34 = {
+    1,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    1,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E50 =
-{
-    0, // BG number
-    2, // BG character base block
-    28, // BG screen base block
-    0, // BG priority
-    13, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6E50 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    28,                        // BG screen base block
+    0,                         // BG priority
+    13,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E6C =
-{
-    0, // BG number
-    2, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    13, // palette number
-    15, // foreground color
-    0, // background color
-    10, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6E6C = {
+    0,                         // BG number
+    2,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    13,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    10,                        // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E88 =
-{
-    0, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6E88 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EA4 =
-{
-    1, // BG number
-    0, // BG character base block
-    28, // BG screen base block
-    1, // BG priority
-    1, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6EA4 = {
+    1,                         // BG number
+    0,                         // BG character base block
+    28,                        // BG screen base block
+    1,                         // BG priority
+    1,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EC0 =
-{
-    2, // BG number
-    2, // BG character base block
-    29, // BG screen base block
-    2, // BG priority
-    1, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6EC0 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    29,                        // BG screen base block
+    2,                         // BG priority
+    1,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EDC =
-{
-    1, // BG number
-    0, // BG character base block
-    28, // BG screen base block
-    1, // BG priority
-    2, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6EDC = {
+    1,                         // BG number
+    0,                         // BG character base block
+    28,                        // BG screen base block
+    1,                         // BG priority
+    2,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EF8 =
-{
-    2, // BG number
-    2, // BG character base block
-    29, // BG screen base block
-    2, // BG priority
-    2, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6EF8 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    29,                        // BG screen base block
+    2,                         // BG priority
+    2,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F14 =
-{
-    1, // BG number
-    0, // BG character base block
-    28, // BG screen base block
-    1, // BG priority
-    3, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6F14 = {
+    1,                         // BG number
+    0,                         // BG character base block
+    28,                        // BG screen base block
+    1,                         // BG priority
+    3,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F30 =
-{
-    2, // BG number
-    2, // BG character base block
-    29, // BG screen base block
-    2, // BG priority
-    3, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    8, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6F30 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    29,                        // BG screen base block
+    2,                         // BG priority
+    3,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    8,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F4C =
-{
-    3, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    3, // BG priority
-    0, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6F4C = {
+    3,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    3,                         // BG priority
+    0,                         // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F68 =
-{
-    0, // BG number
-    2, // BG character base block
-    13, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6F68 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    13,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(13), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F84 =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    15, // foreground color
-    0, // background color
-    1, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E6F84 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    1,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FA0 =
-{
-    1, // BG number
-    0, // BG character base block
-    24, // BG screen base block
-    3, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6FA0 = {
+    1,                         // BG number
+    0,                         // BG character base block
+    24,                        // BG screen base block
+    3,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FBC =
-{
-    0, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    15, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6FBC = {
+    0,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FD8 =
-{
-    0, // BG number
-    0, // BG character base block
-    24, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    15, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6FD8 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    24,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FF4 =
-{
-    0, // BG number
-    0, // BG character base block
-    24, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E6FF4 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    24,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7010 =
-{
-    0, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E7010 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E702C =
-{
-    3, // BG number
-    2, // BG character base block
-    15, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E702C = {
+    3,                         // BG number
+    2,                         // BG character base block
+    15,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7048 =
-{
-    2, // BG number
-    2, // BG character base block
-    14, // BG screen base block
-    2, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    16, // tilemap left coordinate
-    0, // tilemap top coordinate
-    16, // width
-    32, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7048 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    14,                        // BG screen base block
+    2,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    16,                        // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    16,                        // width
+    32,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7064 =
-{
-    2, // BG number
-    2, // BG character base block
-    14, // BG screen base block
-    2, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7064 = {
+    2,                         // BG number
+    2,                         // BG character base block
+    14,                        // BG screen base block
+    2,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7080 =
-{
-    3, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    3, // BG priority
-    11, // palette number
-    1, // foreground color
-    15, // background color
-    5, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E7080 = {
+    3,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    3,                         // BG priority
+    11,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    5,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E709C =
-{
-    0, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    1, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E709C = {
+    0,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    1,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70B8 =
-{
-    2, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    2, // BG priority
-    11, // palette number
-    1, // foreground color
-    0, // background color
-    5, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E70B8 = {
+    2,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    2,                         // BG priority
+    11,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    5,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70D4 =
-{
-    3, // BG number
-    0, // BG character base block
-    30, // BG screen base block
-    3, // BG priority
-    11, // palette number
-    1, // foreground color
-    15, // background color
-    5, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E70D4 = {
+    3,                         // BG number
+    0,                         // BG character base block
+    30,                        // BG screen base block
+    3,                         // BG priority
+    11,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    5,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70F0 =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    15, // foreground color
-    1, // background color
-    14, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    32, // width
-    32, // height
+const struct WindowConfig gWindowConfig_81E70F0 = {
+    0,           // BG number
+    0,           // BG character base block
+    0,           // BG screen base block
+    0,           // BG priority
+    0,           // palette number
+    15,          // foreground color
+    1,           // background color
+    14,          // shadow color
+    3,           // font
+    2,           // text mode
+    0,           // spacing
+    0,           // tilemap left coordinate
+    0,           // tilemap top coordinate
+    32,          // width
+    32,          // height
     gTileBuffer, // tile data
-    NULL, // tilemap
+    NULL,        // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E710C =
-{
-    0, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    1, // BG priority
-    15, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E710C = {
+    0,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    1,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7128 =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7128 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7144 =
-{
-    0, // BG number
-    2, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    13, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7144 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    13,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7160 =
-{
-    1, // BG number
-    1, // BG character base block
-    10, // BG screen base block
-    1, // BG priority
-    14, // palette number
-    1, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(1), // tile data
+const struct WindowConfig gWindowConfig_81E7160 = {
+    1,                         // BG number
+    1,                         // BG character base block
+    10,                        // BG screen base block
+    1,                         // BG priority
+    14,                        // palette number
+    1,                         // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(1),     // tile data
     (u16 *)BG_SCREEN_ADDR(10), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E717C =
-{
-    0, // BG number
-    3, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    15, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(3), // tile data
+const struct WindowConfig gWindowConfig_81E717C = {
+    0,                         // BG number
+    3,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(3),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7198 =
-{
-    0, // BG number
-    2, // BG character base block
-    15, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    15, // foreground color
-    0, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7198 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    15,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    15,                        // foreground color
+    0,                         // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71B4 =
-{
-    0, // BG number
-    2, // BG character base block
-    15, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E71B4 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    15,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71D0 =
-{
-    1, // BG number
-    1, // BG character base block
-    28, // BG screen base block
-    0, // BG priority
-    5, // palette number
-    13, // foreground color
-    14, // background color
-    15, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(1), // tile data
+const struct WindowConfig gWindowConfig_81E71D0 = {
+    1,                         // BG number
+    1,                         // BG character base block
+    28,                        // BG screen base block
+    0,                         // BG priority
+    5,                         // palette number
+    13,                        // foreground color
+    14,                        // background color
+    15,                        // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(1),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71EC =
-{
-    2, // BG number
-    1, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    5, // palette number
-    13, // foreground color
-    14, // background color
-    15, // shadow color
-    3, // font
-    0, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(1), // tile data
+const struct WindowConfig gWindowConfig_81E71EC = {
+    2,                         // BG number
+    1,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    5,                         // palette number
+    13,                        // foreground color
+    14,                        // background color
+    15,                        // shadow color
+    3,                         // font
+    0,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(1),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7208 =
-{
-    0, // BG number
-    2, // BG character base block
-    28, // BG screen base block
-    0, // BG priority
-    8, // palette number
-    1, // foreground color
-    0, // background color
-    2, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7208 = {
+    0,                         // BG number
+    2,                         // BG character base block
+    28,                        // BG screen base block
+    0,                         // BG priority
+    8,                         // palette number
+    1,                         // foreground color
+    0,                         // background color
+    2,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7224 =
-{
-    0, // BG number
-    0, // BG character base block
-    31, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(0), // tile data
+const struct WindowConfig gWindowConfig_81E7224 = {
+    0,                         // BG number
+    0,                         // BG character base block
+    31,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(0),     // tile data
     (u16 *)BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7240 =
-{
-    1, // BG number
-    2, // BG character base block
-    30, // BG screen base block
-    0, // BG priority
-    15, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
-    (u8 *)BG_CHAR_ADDR(2), // tile data
+const struct WindowConfig gWindowConfig_81E7240 = {
+    1,                         // BG number
+    2,                         // BG character base block
+    30,                        // BG screen base block
+    0,                         // BG priority
+    15,                        // palette number
+    1,                         // foreground color
+    15,                        // background color
+    8,                         // shadow color
+    3,                         // font
+    2,                         // text mode
+    0,                         // spacing
+    0,                         // tilemap left coordinate
+    0,                         // tilemap top coordinate
+    30,                        // width
+    20,                        // height
+    (u8 *)BG_CHAR_ADDR(2),     // tile data
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E725C =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    15, // foreground color
-    0, // background color
-    14, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    30, // width
-    20, // height
+const struct WindowConfig gWindowConfig_81E725C = {
+    0,               // BG number
+    0,               // BG character base block
+    0,               // BG screen base block
+    0,               // BG priority
+    0,               // palette number
+    15,              // foreground color
+    0,               // background color
+    14,              // shadow color
+    3,               // font
+    2,               // text mode
+    0,               // spacing
+    0,               // tilemap left coordinate
+    0,               // tilemap top coordinate
+    30,              // width
+    20,              // height
     (u8 *)OBJ_VRAM0, // tile data
-    NULL, // tilemap
+    NULL,            // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7278 =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    3, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    16, // width
-    32, // height
+const struct WindowConfig gWindowConfig_81E7278 = {
+    0,           // BG number
+    0,           // BG character base block
+    0,           // BG screen base block
+    0,           // BG priority
+    0,           // palette number
+    1,           // foreground color
+    15,          // background color
+    8,           // shadow color
+    3,           // font
+    2,           // text mode
+    0,           // spacing
+    0,           // tilemap left coordinate
+    0,           // tilemap top coordinate
+    16,          // width
+    32,          // height
     gTileBuffer, // tile data
-    NULL, // tilemap
+    NULL,        // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7294 =
-{
-    0, // BG number
-    0, // BG character base block
-    0, // BG screen base block
-    0, // BG priority
-    0, // palette number
-    1, // foreground color
-    15, // background color
-    8, // shadow color
-    4, // font
-    2, // text mode
-    0, // spacing
-    0, // tilemap left coordinate
-    0, // tilemap top coordinate
-    16, // width
-    32, // height
+const struct WindowConfig gWindowConfig_81E7294 = {
+    0,           // BG number
+    0,           // BG character base block
+    0,           // BG screen base block
+    0,           // BG priority
+    0,           // palette number
+    1,           // foreground color
+    15,          // background color
+    8,           // shadow color
+    4,           // font
+    2,           // text mode
+    0,           // spacing
+    0,           // tilemap left coordinate
+    0,           // tilemap top coordinate
+    16,          // width
+    32,          // height
     gTileBuffer, // tile data
-    NULL, // tilemap
+    NULL,        // tilemap
 };
 
 static void UpdateBGRegs(const struct WindowConfig *winConfig)
@@ -1783,7 +1860,7 @@ static u16 InitVariableWidthFontTileData(struct Window *win, u16 startOffset)
 
     win->tileDataStartOffset = startOffset;
     win->tileDataOffset = 2;
-    buffer =  win->tileData + 32 * win->tileDataStartOffset;
+    buffer = win->tileData + 32 * win->tileDataStartOffset;
     CpuFastFill(0, buffer, 32);
     ApplyColors_UnshadowedFont(sBlankTile, (u32 *)(buffer + 32), win->config->foregroundColor, win->config->backgroundColor);
     return win->tileDataStartOffset + win->tileDataOffset + win->width * win->height;
@@ -1853,8 +1930,7 @@ u32 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
         break;
     case 1:
         retVal = 256;
-        if (win->config->fontNum == 0
-         || win->config->fontNum == 3)
+        if (win->config->fontNum == 0 || win->config->fontNum == 3)
             retVal *= 2;
         break;
     }
@@ -2663,9 +2739,7 @@ static void GetGlyphTilePointers(u8 fontNum, u8 language, u16 glyph, u8 **upperT
         *lowerTilePtr = font->glyphs + sFontType3Map[index + 1] * font->glyphSize;
         break;
     case 4:
-        *upperTilePtr = font->glyphs
-            + (glyph & 0xFFF0) * font->glyphSize
-            + (((glyph &= 0xF) * font->glyphSize) >> 1);
+        *upperTilePtr = font->glyphs + (glyph & 0xFFF0) * font->glyphSize + (((glyph &= 0xF) * font->glyphSize) >> 1);
         *lowerTilePtr = *upperTilePtr + font->lowerTileOffset;
         break;
     }
@@ -2694,14 +2768,7 @@ static void ApplyColors_UnshadowedFont(const u8 *src, u32 *dest, u8 foreground, 
 
     for (i = 0; i < 8; i++)
     {
-        u32 destRow = a[srcRows[i] & 1]
-                    | (a[(srcRows[i] >> 1) & 1] << 4)
-                    | (a[(srcRows[i] >> 2) & 1] << 8)
-                    | (a[(srcRows[i] >> 3) & 1] << 12)
-                    | (a[(srcRows[i] >> 4) & 1] << 16)
-                    | (a[(srcRows[i] >> 5) & 1] << 20)
-                    | (a[(srcRows[i] >> 6) & 1] << 24)
-                    | (a[(srcRows[i] >> 7)    ] << 28);
+        u32 destRow = a[srcRows[i] & 1] | (a[(srcRows[i] >> 1) & 1] << 4) | (a[(srcRows[i] >> 2) & 1] << 8) | (a[(srcRows[i] >> 3) & 1] << 12) | (a[(srcRows[i] >> 4) & 1] << 16) | (a[(srcRows[i] >> 5) & 1] << 20) | (a[(srcRows[i] >> 6) & 1] << 24) | (a[(srcRows[i] >> 7)] << 28);
         dest[i] = destRow;
     }
 }
@@ -2739,14 +2806,7 @@ static void ApplyColors_ShadowedFont(const void *src, void *dest, u8 foreground,
     for (i = 7; i >= 0; i--)
     {
         u32 row = *curSrc++;
-        u32 recoloredRow = a[row & colorMask]
-                         | (a[(row >> 4) & colorMask] << 4)
-                         | (a[(row >> 8) & colorMask] << 8)
-                         | (a[(row >> 12) & colorMask] << 12)
-                         | (a[(row >> 16) & colorMask] << 16)
-                         | (a[(row >> 20) & colorMask] << 20)
-                         | (a[(row >> 24) & colorMask] << 24)
-                         | (a[(row >> 28)            ] << 28);
+        u32 recoloredRow = a[row & colorMask] | (a[(row >> 4) & colorMask] << 4) | (a[(row >> 8) & colorMask] << 8) | (a[(row >> 12) & colorMask] << 12) | (a[(row >> 16) & colorMask] << 16) | (a[(row >> 20) & colorMask] << 20) | (a[(row >> 24) & colorMask] << 24) | (a[(row >> 28)] << 28);
         *curDest++ = recoloredRow;
     }
 }
@@ -3033,10 +3093,7 @@ static void DoScroll_TextMode2(struct Window *win, u8 lineLength)
 
     buf3 = GetCursorTilemapPointer(win) - 64;
 
-    a[0] = (win->tileDataStartOffset + win->tileDataOffset
-          + ((win->top >> 3) * win->width)
-          + (win->left >> 3))
-         | (win->paletteNum << 12);
+    a[0] = (win->tileDataStartOffset + win->tileDataOffset + ((win->top >> 3) * win->width) + (win->left >> 3)) | (win->paletteNum << 12);
     a[1] = a[0] + win->width;
     a[2] = a[1] + win->width;
     a[3] = a[2] + win->width;
@@ -3901,8 +3958,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width2(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] << 0)
-                | (colors[(src[i] >> 6) & 1] << 4);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -3916,10 +3972,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width3(struct GlyphBuffer *glyphBuffer
     for (i = 0; i < 8; i++)
     {
         // XXX: why 4?
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -3932,10 +3985,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width4(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -3948,11 +3998,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width5(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12)
-                | (colors[(src[i] >> 3) & 1] << 16);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12) | (colors[(src[i] >> 3) & 1] << 16);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -3965,12 +4011,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width6(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12)
-                | (colors[(src[i] >> 3) & 1] << 16)
-                | (colors[(src[i] >> 2) & 1] << 20);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12) | (colors[(src[i] >> 3) & 1] << 16) | (colors[(src[i] >> 2) & 1] << 20);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -3983,13 +4024,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width7(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12)
-                | (colors[(src[i] >> 3) & 1] << 16)
-                | (colors[(src[i] >> 2) & 1] << 20)
-                | (colors[(src[i] >> 1) & 1] << 24);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12) | (colors[(src[i] >> 3) & 1] << 16) | (colors[(src[i] >> 2) & 1] << 20) | (colors[(src[i] >> 1) & 1] << 24);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -4002,14 +4037,7 @@ static void ShiftGlyphTile_UnshadowedFont_Width8(struct GlyphBuffer *glyphBuffer
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 7) & 1] <<  0)
-                | (colors[(src[i] >> 6) & 1] <<  4)
-                | (colors[(src[i] >> 5) & 1] <<  8)
-                | (colors[(src[i] >> 4) & 1] << 12)
-                | (colors[(src[i] >> 3) & 1] << 16)
-                | (colors[(src[i] >> 2) & 1] << 20)
-                | (colors[(src[i] >> 1) & 1] << 24)
-                | (colors[(src[i] >> 0) & 1] << 28);
+        u32 val = (colors[(src[i] >> 7) & 1] << 0) | (colors[(src[i] >> 6) & 1] << 4) | (colors[(src[i] >> 5) & 1] << 8) | (colors[(src[i] >> 4) & 1] << 12) | (colors[(src[i] >> 3) & 1] << 16) | (colors[(src[i] >> 2) & 1] << 20) | (colors[(src[i] >> 1) & 1] << 24) | (colors[(src[i] >> 0) & 1] << 28);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -4110,8 +4138,7 @@ static void ShiftGlyphTile_ShadowedFont_Width2(struct GlyphBuffer *glyphBuffer, 
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 0) & 0xF] << 0)
-                | (colors[(src[i] >> 4) & 0xF] << 4);
+        u32 val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -4124,9 +4151,7 @@ static void ShiftGlyphTile_ShadowedFont_Width3(struct GlyphBuffer *glyphBuffer, 
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >> 0) & 0xF] << 0)
-                | (colors[(src[i] >> 4) & 0xF] << 4)
-                | (colors[(src[i] >> 8) & 0xF] << 8);
+        u32 val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
@@ -4139,24 +4164,17 @@ static void ShiftGlyphTile_ShadowedFont_Width4(struct GlyphBuffer *glyphBuffer, 
     u8 i;
     for (i = 0; i < 8; i++)
     {
-        u32 val = (colors[(src[i] >>  0) & 0xF] <<  0)
-                | (colors[(src[i] >>  4) & 0xF] <<  4)
-                | (colors[(src[i] >>  8) & 0xF] <<  8)
-                | (colors[(src[i] >> 12) & 0xF] << 12);
+        u32 val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8) | (colors[(src[i] >> 12) & 0xF] << 12);
         u32 *dest = &glyphBuffer->pixelRows[i];
         dest[0] |= val << shiftAmount->left;
         dest[8] |= val >> shiftAmount->right;
     }
 }
 
-#define SHIFT_GLYPH_WIDTH5_STEP(i)                          \
-val = (colors[(src[i] >>  0) & 0xF] <<  0)                  \
-    | (colors[(src[i] >>  4) & 0xF] <<  4)                  \
-    | (colors[(src[i] >>  8) & 0xF] <<  8)                  \
-    | (colors[(src[i] >> 12) & 0xF] << 12)                  \
-    | (colors[(src[i] >> 16) & 0xF] << 16);                 \
-glyphBuffer->pixelRows[i]     |= val << shiftAmount->left;  \
-glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right; \
+#define SHIFT_GLYPH_WIDTH5_STEP(i)                                                                                                                                                                    \
+    val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8) | (colors[(src[i] >> 12) & 0xF] << 12) | (colors[(src[i] >> 16) & 0xF] << 16); \
+    glyphBuffer->pixelRows[i] |= val << shiftAmount->left;                                                                                                                                            \
+    glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right;
 
 static void ShiftGlyphTile_ShadowedFont_Width5(struct GlyphBuffer *glyphBuffer, u32 *src, u32 *colors, u8 startPixel)
 {
@@ -4172,15 +4190,10 @@ static void ShiftGlyphTile_ShadowedFont_Width5(struct GlyphBuffer *glyphBuffer, 
     SHIFT_GLYPH_WIDTH5_STEP(7)
 }
 
-#define SHIFT_GLYPH_WIDTH6_STEP(i)                          \
-val = (colors[(src[i] >>  0) & 0xF] <<  0)                  \
-    | (colors[(src[i] >>  4) & 0xF] <<  4)                  \
-    | (colors[(src[i] >>  8) & 0xF] <<  8)                  \
-    | (colors[(src[i] >> 12) & 0xF] << 12)                  \
-    | (colors[(src[i] >> 16) & 0xF] << 16)                  \
-    | (colors[(src[i] >> 20) & 0xF] << 20);                 \
-glyphBuffer->pixelRows[i]     |= val << shiftAmount->left;  \
-glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right; \
+#define SHIFT_GLYPH_WIDTH6_STEP(i)                                                                                                                                                                                                           \
+    val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8) | (colors[(src[i] >> 12) & 0xF] << 12) | (colors[(src[i] >> 16) & 0xF] << 16) | (colors[(src[i] >> 20) & 0xF] << 20); \
+    glyphBuffer->pixelRows[i] |= val << shiftAmount->left;                                                                                                                                                                                   \
+    glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right;
 
 static void ShiftGlyphTile_ShadowedFont_Width6(struct GlyphBuffer *glyphBuffer, u32 *src, u32 *colors, u8 startPixel)
 {
@@ -4196,16 +4209,10 @@ static void ShiftGlyphTile_ShadowedFont_Width6(struct GlyphBuffer *glyphBuffer, 
     SHIFT_GLYPH_WIDTH6_STEP(7)
 }
 
-#define SHIFT_GLYPH_WIDTH7_STEP(i)                          \
-val = (colors[(src[i] >>  0) & 0xF] <<  0)                  \
-    | (colors[(src[i] >>  4) & 0xF] <<  4)                  \
-    | (colors[(src[i] >>  8) & 0xF] <<  8)                  \
-    | (colors[(src[i] >> 12) & 0xF] << 12)                  \
-    | (colors[(src[i] >> 16) & 0xF] << 16)                  \
-    | (colors[(src[i] >> 20) & 0xF] << 20)                  \
-    | (colors[(src[i] >> 24) & 0xF] << 24);                 \
-glyphBuffer->pixelRows[i]     |= val << shiftAmount->left;  \
-glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right; \
+#define SHIFT_GLYPH_WIDTH7_STEP(i)                                                                                                                                                                                                                                                  \
+    val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8) | (colors[(src[i] >> 12) & 0xF] << 12) | (colors[(src[i] >> 16) & 0xF] << 16) | (colors[(src[i] >> 20) & 0xF] << 20) | (colors[(src[i] >> 24) & 0xF] << 24); \
+    glyphBuffer->pixelRows[i] |= val << shiftAmount->left;                                                                                                                                                                                                                          \
+    glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right;
 
 static void ShiftGlyphTile_ShadowedFont_Width7(struct GlyphBuffer *glyphBuffer, u32 *src, u32 *colors, u8 startPixel)
 {
@@ -4221,17 +4228,10 @@ static void ShiftGlyphTile_ShadowedFont_Width7(struct GlyphBuffer *glyphBuffer, 
     SHIFT_GLYPH_WIDTH7_STEP(7)
 }
 
-#define SHIFT_GLYPH_WIDTH8_STEP(i)                          \
-val = (colors[(src[i] >>  0) & 0xF] <<  0)                  \
-    | (colors[(src[i] >>  4) & 0xF] <<  4)                  \
-    | (colors[(src[i] >>  8) & 0xF] <<  8)                  \
-    | (colors[(src[i] >> 12) & 0xF] << 12)                  \
-    | (colors[(src[i] >> 16) & 0xF] << 16)                  \
-    | (colors[(src[i] >> 20) & 0xF] << 20)                  \
-    | (colors[(src[i] >> 24) & 0xF] << 24)                  \
-    | (colors[(src[i] >> 28)      ] << 28);                 \
-glyphBuffer->pixelRows[i]     |= val << shiftAmount->left;  \
-glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right; \
+#define SHIFT_GLYPH_WIDTH8_STEP(i)                                                                                                                                                                                                                                                                                   \
+    val = (colors[(src[i] >> 0) & 0xF] << 0) | (colors[(src[i] >> 4) & 0xF] << 4) | (colors[(src[i] >> 8) & 0xF] << 8) | (colors[(src[i] >> 12) & 0xF] << 12) | (colors[(src[i] >> 16) & 0xF] << 16) | (colors[(src[i] >> 20) & 0xF] << 20) | (colors[(src[i] >> 24) & 0xF] << 24) | (colors[(src[i] >> 28)] << 28); \
+    glyphBuffer->pixelRows[i] |= val << shiftAmount->left;                                                                                                                                                                                                                                                           \
+    glyphBuffer->pixelRows[i + 8] |= val >> shiftAmount->right;
 
 static void ShiftGlyphTile_ShadowedFont_Width8(struct GlyphBuffer *glyphBuffer, u32 *src, u32 *colors, u8 startPixel)
 {
@@ -4311,10 +4311,7 @@ static u16 GetCursorTileNum(struct Window *win, u32 xOffset, u32 yOffset)
     u16 index;
 
     if (win->textMode == 2)
-        index = win->tileDataStartOffset
-              + win->tileDataOffset
-              + (((win->top + win->cursorY) >> 3) + yOffset) * win->width
-              + (((win->left + win->cursorX) >> 3) + xOffset);
+        index = win->tileDataStartOffset + win->tileDataOffset + (((win->top + win->cursorY) >> 3) + yOffset) * win->width + (((win->left + win->cursorX) >> 3) + xOffset);
     else
         index = win->tileDataStartOffset + win->tileDataOffset + 2 * xOffset + yOffset;
 

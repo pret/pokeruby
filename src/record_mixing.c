@@ -24,7 +24,7 @@ extern u8 gUnknown_083D0288[2];
 extern u8 gUnknown_083D028A[2][3];
 extern u8 gUnknown_083D0290[9][4];
 
-extern struct RecordMixing_UnknownStruct gUnknown_02038738[2];  //Don't know what type this points to
+extern struct RecordMixing_UnknownStruct gUnknown_02038738[2]; //Don't know what type this points to
 extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
@@ -38,7 +38,8 @@ void sub_80B929C(void)
     sub_8083A84(Task_RecordMixing_Main);
 }
 
-struct PlayerRecords {
+struct PlayerRecords
+{
     struct SecretBaseRecord secretBases[20];
     u8 tvShows[25][36];
     u8 filler1004[0x40];
@@ -105,7 +106,7 @@ void Task_RecordMixing_Main(u8 taskId)
 
     switch (taskData[TD_STATE])
     {
-    case 0:        // init
+    case 0: // init
         sub_8007270(gSpecialVar_0x8005);
         VarSet(0x4000, 1);
         gUnknown_03000718 = 0;
@@ -115,7 +116,7 @@ void Task_RecordMixing_Main(u8 taskId)
         taskData[10] = CreateTask(sub_80B95F0, 0x50);
         taskData[15] = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
         break;
-    case 1:        // wait for sub_80B95F0
+    case 1: // wait for sub_80B95F0
         if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 2;
@@ -129,7 +130,7 @@ void Task_RecordMixing_Main(u8 taskId)
         taskData[TD_STATE] = 3;
         PlaySE(SE_W226);
         break;
-    case 3:        // wait for sub_80BA00C
+    case 3: // wait for sub_80BA00C
         if (!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 4;
@@ -139,7 +140,7 @@ void Task_RecordMixing_Main(u8 taskId)
             taskData[8] = 0;
         }
         break;
-    case 4:        // wait 60 frames
+    case 4: // wait 60 frames
         taskData[8]++;
         if (taskData[8] > 60)
             taskData[TD_STATE] = 5;
@@ -170,7 +171,7 @@ void sub_80B95F0(u8 taskId)
         task->data[TD_STATE] = 400;
         ClearLinkCallback_2();
         break;
-    case 100:        // wait 20 frames
+    case 100: // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
@@ -212,7 +213,7 @@ void sub_80B95F0(u8 taskId)
         if (sub_800820C() == GetLinkPlayerCount_2())
             task->data[TD_STATE] = 1;
         break;
-    case 400:        // wait 20 frames
+    case 400: // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
@@ -220,7 +221,7 @@ void sub_80B95F0(u8 taskId)
             task->data[12] = 0;
         }
         break;
-    case 1:        // wait for handshake
+    case 1: // wait for handshake
         if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), 2, 2);
@@ -243,7 +244,7 @@ void sub_80B95F0(u8 taskId)
         StorePtrInTaskData((u8 *)&unk_2018000 - 0x10000, &gTasks[subTaskId].data[5]);
         break;
     }
-    case 5:        // wait 60 frames
+    case 5: // wait 60 frames
         task->data[10]++;
         if (task->data[10] > 60)
         {
@@ -434,7 +435,7 @@ void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
 }
 
 #else
-__attribute__((naked))
+NAKED
 void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
 {
     asm(".syntax unified\n\
@@ -535,7 +536,6 @@ struct UnkStruct1
     u32 unk48;
     u32 unk4C;
     u32 unk50;
-
 };
 
 /*
@@ -588,4 +588,3 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
     //_080B9D46
 }
 */
-

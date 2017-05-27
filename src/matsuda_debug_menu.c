@@ -56,11 +56,10 @@ extern struct SpriteTemplate gSpriteTemplate_83C92CC;
 extern void (*gUnknown_083C92E4[][2])(struct Sprite *, s8);
 extern u32 gUnknown_083C9400[2];
 
-
 extern u8 gMatsudaDebugMenu_UnknownByteArray[];
-extern u8* gMatsudaDebugMenuTextList1[];
-extern u8* gMatsudaDebugMenuTextList2[];
-extern u8* gMatsudaDebugMenuTextList3[];
+extern u8 *gMatsudaDebugMenuTextList1[];
+extern u8 *gMatsudaDebugMenuTextList2[];
+extern u8 *gMatsudaDebugMenuTextList3[];
 extern u8 gMatsudaDebugMenuContestTopLeft[][2];
 
 extern bool8 gReceivedRemoteLinkPlayers;
@@ -85,7 +84,7 @@ static void sub_80AA5BC(u8);
 static void sub_80AA614(u8, u8);
 static void sub_80AAD08(struct Sprite *, s8);
 extern void sub_80AB47C(void);
-extern int sub_80B2A7C(u8);  //Don't know return type size
+extern int sub_80B2A7C(u8); //Don't know return type size
 
 u8 unref_sub_80A9B28(void)
 {
@@ -194,16 +193,16 @@ static void sub_80A9D30(u8 taskId)
 
 static void sub_80A9D58(u8 taskId)
 {
-   int i;
-   u8 dest[4];
+    int i;
+    u8 dest[4];
 
-   for (i = 0; i < 4; i++)
-       dest[i] = gTasks[taskId].data[5 + i];
+    for (i = 0; i < 4; i++)
+        dest[i] = gTasks[taskId].data[5 + i];
 
-   gUnknown_0203869B = sub_80C4B34(dest);
-   sub_80AE82C((u8)gScriptContestCategory);
-   sub_80B0F28(0);
-   SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
+    gUnknown_0203869B = sub_80C4B34(dest);
+    sub_80AE82C((u8)gScriptContestCategory);
+    sub_80B0F28(0);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
 
 static void sub_80A9DBC(u8 taskId)
@@ -389,8 +388,8 @@ static void sub_80AA10C(void)
     for (i = 0; i < 6; i++)
     {
         sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i],
-            (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0],
-            gMatsudaDebugMenuContestTopLeft[i][1]);
+                    (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0],
+                    gMatsudaDebugMenuContestTopLeft[i][1]);
     }
 
     gScriptContestCategory = gScriptContestRank = 0;
@@ -518,10 +517,10 @@ void SetDebugMonForContest(void)
     SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
     SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
     SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *)&gContestMons[gContestPlayerMonIndex].moves[0]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *)&gContestMons[gContestPlayerMonIndex].moves[1]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *)&gContestMons[gContestPlayerMonIndex].moves[2]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *)&gContestMons[gContestPlayerMonIndex].moves[3]);
 }
 
 void sub_80AA754(struct Sprite *sprite)
@@ -798,7 +797,7 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
 }
 */
 
-__attribute__((naked))
+NAKED
 void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\

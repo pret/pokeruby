@@ -14,7 +14,7 @@ extern u8 get_map_light_from_warp0(void);
 extern u8 sav1_map_get_light_level(void);
 extern u8 fade_type_for_given_maplight_pair(u8, u8);
 extern u16 gPlttBufferFaded[];
-extern struct MapHeader * warp1_get_mapheader(void);
+extern struct MapHeader *warp1_get_mapheader(void);
 extern void sub_8059B88(u8);
 extern void sub_8053E90(void);
 

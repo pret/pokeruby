@@ -11,9 +11,11 @@
 #define BERRY_NAME_LENGTH 6
 
 #define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
+#define LAST_BERRY ITEM_ENIGMA_BERRY
 
 #ifdef ENGLISH
+
+// clang-format off
 #define NAME_CHERI_BERRY   _("CHERI")
 #define NAME_CHESTO_BERRY  _("CHESTO")
 #define NAME_PECHA_BERRY   _("PECHA")
@@ -57,6 +59,7 @@
 #define NAME_LANSAT_BERRY  _("LANSAT")
 #define NAME_STARF_BERRY   _("STARF")
 #define NAME_ENIGMA_BERRY  _("ENIGMA")
+// clang-format on
 
 const u8 gBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 const u8 gBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
@@ -145,6 +148,8 @@ const u8 gBerryDescriptionPart2_Starf[] = _("world’s edge. Considered a mirage
 const u8 gBerryDescriptionPart1_Enigma[] = _("A completely enigmatic BERRY.");
 const u8 gBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
 #elif defined(GERMAN)
+
+// clang-format off
 #define NAME_CHERI_BERRY   _("AMRENA")
 #define NAME_CHESTO_BERRY  _("MARON")
 #define NAME_PECHA_BERRY   _("PIRSIF")
@@ -188,6 +193,7 @@ const u8 gBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars
 #define NAME_LANSAT_BERRY  _("LANSAT")
 #define NAME_STARF_BERRY   _("KRAMBO")
 #define NAME_ENIGMA_BERRY  _("ENIGMA")
+// clang-format on
 
 const u8 gBerryDescriptionPart1_Cheri[] = _("Erblüht mit hübschen, zarten Blumen.");
 const u8 gBerryDescriptionPart2_Cheri[] = _("Diese knallrote BEERE ist sehr scharf.");
@@ -277,8 +283,7 @@ const u8 gBerryDescriptionPart1_Enigma[] = _("Eine enigmatische BEERE. Sie schei
 const u8 gBerryDescriptionPart2_Enigma[] = _("die Macht der Sterne zu besitzen.");
 #endif
 
-const struct Berry gBerries[] =
-{
+const struct Berry gBerries[] = {
     {
         .name = NAME_CHERI_BERRY,
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -987,7 +992,7 @@ void ClearEnigmaBerries(void)
 void SetEnigmaBerry(u8 *src)
 {
     u32 i;
-    u8 *dest = (u8*)&gSaveBlock1.enigmaBerry;
+    u8 *dest = (u8 *)&gSaveBlock1.enigmaBerry;
 
     for (i = 0; i < sizeof(gSaveBlock1.enigmaBerry); i++)
         dest[i] = src[i];
@@ -1009,7 +1014,7 @@ u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
     gSaveBlock1.enigmaBerry.berry.description1 = 0;
     gSaveBlock1.enigmaBerry.berry.description2 = 0;
 
-    dest = (u8*)enigmaBerry;
+    dest = (u8 *)enigmaBerry;
     checksum = 0;
     for (i = 0; i < ((u32)&gSaveBlock1.enigmaBerry.checksum - (u32)&gSaveBlock1.enigmaBerry); i++)
     {
@@ -1076,8 +1081,7 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript
-     && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
+    if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
         return TRUE;
     else
         return FALSE;

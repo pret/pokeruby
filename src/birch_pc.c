@@ -91,15 +91,13 @@ const u8 *GetPokedexRatingText(u16 count)
         return gUnknown_081C4A91;
     if (count == 200)
     {
-        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         || sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
+        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1) || sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
             return gUnknown_081C4A91;
         return gUnknown_081C4ADA;
     }
     if (count == 201)
     {
-        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         && sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
+        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1) && sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
             return gUnknown_081C4A91;
         return gUnknown_081C4ADA;
     }

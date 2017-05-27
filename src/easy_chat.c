@@ -29,11 +29,11 @@ extern const u8 gEasyChatGroupSizes[];
 extern u16 gSpecialVar_0x8004;
 
 #ifdef NONMATCHING
-u8 *sub_80EB3FC(u8 *dst, u16 word) {
+u8 *sub_80EB3FC(u8 *dst, u16 word)
+{
     int group, wordIndex;
     u8 *src;
     u16 i;
-
 
     if (sub_80EB37C(word))
     {
@@ -46,7 +46,7 @@ u8 *sub_80EB3FC(u8 *dst, u16 word) {
         wordIndex = word & 0x1FF;
         switch (group)
         {
-        case EC_GROUP_POKEMON: // 0
+        case EC_GROUP_POKEMON:   // 0
         case EC_GROUP_POKEMON_2: // 21
             dst = StringCopy(dst, gSpeciesNames[wordIndex]);
             break;
@@ -77,7 +77,8 @@ u8 *sub_80EB3FC(u8 *dst, u16 word) {
 }
 #endif
 
-u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3)
+{
     u16 i;
     u16 n;
 
@@ -114,7 +115,8 @@ u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
     return dst;
 }
 
-u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
+{
     u16 i;
     u16 n;
 
@@ -152,13 +154,12 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
     return dst;
 }
 
-
-u16 unref_sub_80EB5E0(u16 arg0) {
+u16 unref_sub_80EB5E0(u16 arg0)
+{
     u8 *chars;
     u16 i;
     u16 strlen;
     int group, word;
-
 
     if (arg0 == 0xFFFF)
     {
@@ -169,9 +170,9 @@ u16 unref_sub_80EB5E0(u16 arg0) {
     word = arg0 & 0x1FF;
     switch (group)
     {
-    case EC_GROUP_POKEMON: // 0
+    case EC_GROUP_POKEMON:   // 0
     case EC_GROUP_POKEMON_2: // 21
-        chars = (u8 *) gSpeciesNames[word];
+        chars = (u8 *)gSpeciesNames[word];
         break;
 
     case EC_GROUP_MOVE_1: // 18
@@ -203,11 +204,13 @@ u16 unref_sub_80EB5E0(u16 arg0) {
     return strlen;
 }
 
-static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3) {
+static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3)
+{
     return FALSE;
 }
 
-void unref_sub_80EB684(u8 arg0, u16 arg1) {
+void unref_sub_80EB684(u8 arg0, u16 arg1)
+{
     u16 *ptr;
     u16 c;
 
@@ -216,15 +219,15 @@ void unref_sub_80EB684(u8 arg0, u16 arg1) {
     {
     case 5:
         c = 6;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x04);
+        ptr = (u16 *)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x04);
         break;
     case 7:
         c = 2;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x1C);
+        ptr = (u16 *)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x1C);
         break;
     case 8:
         c = 1;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x02);
+        ptr = (u16 *)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x02);
         break;
 
     default:
@@ -240,7 +243,8 @@ void unref_sub_80EB684(u8 arg0, u16 arg1) {
     }
 }
 
-void sub_80EB6FC(u16 *arg0, u16 arg1) {
+void sub_80EB6FC(u16 *arg0, u16 arg1)
+{
     u16 i;
 
     for (i = arg1 - 1; i != 0xFFFF; i--)
@@ -248,10 +252,10 @@ void sub_80EB6FC(u16 *arg0, u16 arg1) {
         *arg0 = 0xFFFF;
         arg0++;
     }
-
 }
 
-u16 sub_80EB72C(u16 group) {
+u16 sub_80EB72C(u16 group)
+{
     u16 local1;
 
     local1 = Random() % gEasyChatGroupSizes[group];
@@ -261,14 +265,14 @@ u16 sub_80EB72C(u16 group) {
         group == EC_GROUP_MOVE_1 ||
         group == EC_GROUP_MOVE_2)
     {
-        local1 = ((u16 *) gEasyChatGroupWords[group])[local1];
+        local1 = ((u16 *)gEasyChatGroupWords[group])[local1];
     }
-
 
     return ((group & 0x7F) << 9) | (local1 & 0x1FF);
 }
 
-u16 sub_80EB784(u16 group) {
+u16 sub_80EB784(u16 group)
+{
     if (!sub_80EAD7C(group))
     {
         return -1;
@@ -289,10 +293,10 @@ u16 sub_80EB784(u16 group) {
     return sub_80EB72C(group);
 }
 
-void sub_80EB7C4(void) {
+void sub_80EB7C4(void)
+{
     u16 *words;
     u16 arg1, arg2;
-
 
     switch (gSpecialVar_0x8004)
     {
@@ -336,7 +340,8 @@ void sub_80EB7C4(void) {
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
-void sub_80EB83C(void) {
+void sub_80EB83C(void)
+{
     u16 group, local2;
 
     if (Random() & 1)
@@ -352,7 +357,8 @@ void sub_80EB83C(void) {
     sub_80EB3FC(gStringVar2, local2);
 }
 
-u8 sub_80EB868(u8 arg0) {
+u8 sub_80EB868(u8 arg0)
+{
     int offset;
     int index;
 
@@ -361,7 +367,8 @@ u8 sub_80EB868(u8 arg0) {
     return (gSaveBlock1.unk2D8C[index] >> offset) & 1;
 }
 
-void sub_80EB890(u8 arg0) {
+void sub_80EB890(u8 arg0)
+{
     int offset;
     int index;
 
@@ -375,7 +382,8 @@ void sub_80EB890(u8 arg0) {
     gSaveBlock1.unk2D8C[index] |= 1 << offset;
 }
 
-u8 sub_80EB8C0(void) {
+u8 sub_80EB8C0(void)
+{
     u8 i, retval;
 
     i = 0;
@@ -391,7 +399,8 @@ u8 sub_80EB8C0(void) {
     return retval;
 }
 
-u16 sub_80EB8EC(void) {
+u16 sub_80EB8EC(void)
+{
     u16 i;
     u16 local1, local2;
 
@@ -420,7 +429,8 @@ u16 sub_80EB8EC(void) {
     return -1;
 }
 
-static u16 sub_80EB960(void) {
+static u16 sub_80EB960(void)
+{
     u16 i;
     u16 local1;
 
@@ -448,11 +458,13 @@ static u16 sub_80EB960(void) {
     return -1;
 }
 
-u8 sub_80EB9C8(void) {
+u8 sub_80EB9C8(void)
+{
     return IsNationalPokedexEnabled();
 }
 
-static u16 sub_80EB9D8(void) {
+static u16 sub_80EB9D8(void)
+{
     u16 *speciesList;
     u16 local1;
     u16 i;
@@ -465,7 +477,7 @@ static u16 sub_80EB9D8(void) {
     }
 
     local1 = Random() % local1;
-    speciesList = (u16 *) gEasyChatGroupWords[EC_GROUP_POKEMON];
+    speciesList = (u16 *)gEasyChatGroupWords[EC_GROUP_POKEMON];
 
     for (i = 0; i < gEasyChatGroupSizes[EC_GROUP_POKEMON]; i++)
     {
@@ -488,4 +500,3 @@ static u16 sub_80EB9D8(void) {
 
     return -1;
 }
-

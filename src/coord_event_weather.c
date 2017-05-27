@@ -21,21 +21,20 @@ static void CoordEventWeather_Drought(void);
 static void CoordEventWeather_UnderwaterFog(void);
 static void CoordEventWeather_UnderwaterBubbles(void);
 
-static const struct CoordEventWeather sCoordEventWeatherFuncs[] =
-{
-    {  0x1, CoordEventWeather_Indoor },
-    {  0x2, CoordEventWeather_Sunny },
-    {  0x3, CoordEventWeather_Rain },
-    {  0x4, CoordEventWeather_Snowflakes },
-    {  0x5, CoordEventWeather_Thunderstorm },
-    {  0x6, CoordEventWeather_Fog },
-    {  0x7, CoordEventWeather_DiagonalFog },
-    {  0x8, CoordEventWeather_Snow },
-    {  0x9, CoordEventWeather_Sandstorm },
-    {  0xa, CoordEventWeather_Cloudy },
-    {  0xb, CoordEventWeather_Drought },
-    { 0x14, CoordEventWeather_UnderwaterFog },
-    { 0x15, CoordEventWeather_UnderwaterBubbles },
+static const struct CoordEventWeather sCoordEventWeatherFuncs[] = {
+    {0x1, CoordEventWeather_Indoor},
+    {0x2, CoordEventWeather_Sunny},
+    {0x3, CoordEventWeather_Rain},
+    {0x4, CoordEventWeather_Snowflakes},
+    {0x5, CoordEventWeather_Thunderstorm},
+    {0x6, CoordEventWeather_Fog},
+    {0x7, CoordEventWeather_DiagonalFog},
+    {0x8, CoordEventWeather_Snow},
+    {0x9, CoordEventWeather_Sandstorm},
+    {0xa, CoordEventWeather_Cloudy},
+    {0xb, CoordEventWeather_Drought},
+    {0x14, CoordEventWeather_UnderwaterFog},
+    {0x15, CoordEventWeather_UnderwaterBubbles},
 };
 
 static void CoordEventWeather_Indoor(void)

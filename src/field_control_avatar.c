@@ -256,11 +256,7 @@ static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
     if (script == NULL)
         return FALSE;
 
-    if (script != gUnknown_0815281E
-     && script != gUnknown_08152C39
-     && script != gUnknown_0815F36C
-     && script != gUnknown_0815F43A
-     && script != gUnknown_081A0009)
+    if (script != gUnknown_0815281E && script != gUnknown_08152C39 && script != gUnknown_0815F36C && script != gUnknown_0815F43A && script != gUnknown_081A0009)
         PlaySE(5);
 
     ScriptContext1_SetupScript(script);
@@ -660,14 +656,7 @@ bool8 sub_8068A64(struct MapPosition *position, u16 b)
 
 static bool8 sub_8068B30(u16 a)
 {
-    if (MetatileBehavior_IsWarpDoor(a) != TRUE
-     && MetatileBehavior_IsLadder(a) != TRUE
-     && MetatileBehavior_IsEscalator(a) != TRUE
-     && MetatileBehavior_IsNonAnimDoor(a) != TRUE
-     && MetatileBehavior_IsLavaridgeB1FWarp(a) != TRUE
-     && MetatileBehavior_IsLavaridge1FWarp(a) != TRUE
-     && MetatileBehavior_IsAquaHideoutWarp(a) != TRUE
-     && MetatileBehavior_IsMtPyreHole(a) != TRUE)
+    if (MetatileBehavior_IsWarpDoor(a) != TRUE && MetatileBehavior_IsLadder(a) != TRUE && MetatileBehavior_IsEscalator(a) != TRUE && MetatileBehavior_IsNonAnimDoor(a) != TRUE && MetatileBehavior_IsLavaridgeB1FWarp(a) != TRUE && MetatileBehavior_IsLavaridge1FWarp(a) != TRUE && MetatileBehavior_IsAquaHideoutWarp(a) != TRUE && MetatileBehavior_IsMtPyreHole(a) != TRUE)
         return FALSE;
     return TRUE;
 }
@@ -879,9 +868,9 @@ int sub_8068FEC(void)
 {
     struct MapPosition position;
 
-    player_get_direction_upper_nybble();  //unnecessary
+    player_get_direction_upper_nybble(); //unnecessary
     player_get_pos_to_and_height(&position);
-    MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
+    MapGridGetMetatileBehaviorAt(position.x, position.y); //unnecessary
     sub_8068C30(&gMapHeader, map_warp_check_packed(&gMapHeader, &position), &position);
     return 0;
 }

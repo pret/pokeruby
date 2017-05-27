@@ -42,10 +42,9 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-const struct MenuAction gMenuYesNoItems[] =
-{
-    { OtherText_Yes, NULL },
-    { OtherText_No, NULL },
+const struct MenuAction gMenuYesNoItems[] = {
+    {OtherText_Yes, NULL},
+    {OtherText_No, NULL},
 };
 
 void CloseMenu(void)
@@ -386,11 +385,9 @@ static bool8 sub_80723D4(void)
     if ((gMain.newKeys & DPAD_DOWN) && gMenu.cursorPos >= (gMenu.maxCursorPos + 1) - gMenu.width)
         return TRUE;
 
-    if ((gMain.newKeys & DPAD_LEFT)
-     && ((gMenu.cursorPos - (gMenu.cursorPos % gMenu.width)) % gMenu.width == 1 // always false
-         || gMenu.cursorPos == 0
-         || gMenu.cursorPos % gMenu.width == 0))
-         return TRUE;
+    if ((gMain.newKeys & DPAD_LEFT) && ((gMenu.cursorPos - (gMenu.cursorPos % gMenu.width)) % gMenu.width == 1 // always false
+                                        || gMenu.cursorPos == 0 || gMenu.cursorPos % gMenu.width == 0))
+        return TRUE;
 
     if ((gMain.newKeys & DPAD_RIGHT) && gMenu.cursorPos % gMenu.width == gMenu.width - 1)
         return TRUE;
@@ -438,9 +435,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
 
     gMenu.columnXCoords[columnCount]--;
 
-    if (!((menuItemCount / 2) < columnCount || (menuItemCount % 2 != 0))
-     || columnCount == 1
-     || columnCount == menuItemCount)
+    if (!((menuItemCount / 2) < columnCount || (menuItemCount % 2 != 0)) || columnCount == 1 || columnCount == menuItemCount)
     {
         height = 2 * (menuItemCount / columnCount) + 1;
     }
@@ -458,7 +453,8 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
 
         val = (s8)top + height;
         val = val << 24;
-        asm("" ::: "r3");
+        asm("" ::
+                : "r3");
         bottom = val >> 24;
 
         totalWidth = (gMenu.columnXCoords[columnCount] + 1);

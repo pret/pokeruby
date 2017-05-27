@@ -2,7 +2,8 @@
 #include "menu.h"
 #include "string_util.h"
 
-struct StorageAction {
+struct StorageAction
+{
     u8 *text;
     u8 format;
 };
@@ -16,7 +17,8 @@ extern const u8 unk_2000000[];
 #define gUnk20011fa (u8 *)(&unk_2000000[0x11fa])
 #define gUnk20026e4 (u8 *)(&unk_2000000[0x26e4])
 
-void sub_8098898(u8 index) {
+void sub_8098898(u8 index)
+{
     u8 *ptr;
 
     MenuDrawTextWindow(10, 16, 29, 19);
@@ -59,21 +61,21 @@ void sub_8098898(u8 index) {
         ptr = StringCopy(ptr, gUnk20011fa);
         ptr = StringCopy(ptr, stringLength);
     }
-        break;
+    break;
 
     case 6:
         // "Bye-bye, ".substr(0, -1) + {var} + "Bye-bye, !".substr(-1, 1)
-    {
-        u8 *stringLength;
-        u8 *text;
+        {
+            u8 *stringLength;
+            u8 *text;
 
-        text = gUnknown_083B6DF4[index].text;
-        stringLength = &text[StringLength(text)] - 1;
+            text = gUnknown_083B6DF4[index].text;
+            stringLength = &text[StringLength(text)] - 1;
 
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
-        ptr = StringCopy(ptr - 1, gUnk20026e4);
-        ptr = StringCopy(ptr, stringLength);
-    }
+            ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
+            ptr = StringCopy(ptr - 1, gUnk20026e4);
+            ptr = StringCopy(ptr, stringLength);
+        }
         break;
 
     case 0:
@@ -84,8 +86,8 @@ void sub_8098898(u8 index) {
 
     while (ptr < gUnk20026A6)
     {
-            ptr[0] = CHAR_SPACE;
-            ptr++;
+        ptr[0] = CHAR_SPACE;
+        ptr++;
     }
 
     ptr[0] = EOS;

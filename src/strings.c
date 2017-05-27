@@ -75,7 +75,7 @@ const u8 gSystemText_NewPara[] = _("\p");
 const u8 gDexText_UnknownPoke[] = _("            ????? POKéMON");
 const u8 gDexText_UnknownHeight[] = _("{CLEAR_TO 0x0C}??’??”");
 const u8 gDexText_UnknownWeight[] = _("????.? lbs.$"); // extra terminator?
-const u8 gDexText_CryOf[] = _("{CLEAR_TO 2}CRY OF$"); // extra terminator?
+const u8 gDexText_CryOf[] = _("{CLEAR_TO 2}CRY OF$");  // extra terminator?
 const u8 gDexText_SizeComparedTo[] = _("SIZE COMPARED TO ");
 const u8 gDexText_RegisterComplete[] = _("POKéDEX registration completed.");
 const u8 gDexText_Searching[] = _("Searching...\nPlease wait.");
@@ -196,8 +196,7 @@ const u8 OtherText_TheField[] = _("the field.");
 const u8 OtherText_TheField2[] = _("the field.");
 const u8 OtherText_ThePC[] = _("the PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
-{
+const struct TextStruct gUnknown_0840E740[7] = {
     OtherText_TheField3,
     OtherText_TheBattle,
     OtherText_ThePokeList,
@@ -502,16 +501,16 @@ const u8 OtherText_Terminator6[] = _("");
 const u8 OtherText_GoodLookingPoke[] = _("Hey, there!\nThe good-looking POKéMON ");
 const u8 OtherText_Terminator7[] = _("");
 const u8 OtherText_MarvelousGreat[] = _("The marvelous, wonderful, and\nvery great ");
-const u8 OtherText_Terminator8[]= _("");
-const u8 OtherText_CenturyLastVenus[]= _("This century’s last Venus -\nthe beautiful ");
-const u8 OtherText_Terminator9[]= _("");
-const u8 OtherText_Terminator10[]= _("");
-const u8 OtherText_DazzlingSmile[]= _("’s dazzling,\nglittering smile");
-const u8 OtherText_PokeCenterIdol[]= _("POKéMON CENTER’s super idol -\nthe incomparable ");
-const u8 OtherText_Terminator11[]= _("");
-const u8 OtherText_LovelyAndSweet[]= _("The lovely and sweet ");
-const u8 OtherText_Terminator12[]= _("");
-const u8 OtherText_ThePretty[]= _("The pretty ");
+const u8 OtherText_Terminator8[] = _("");
+const u8 OtherText_CenturyLastVenus[] = _("This century’s last Venus -\nthe beautiful ");
+const u8 OtherText_Terminator9[] = _("");
+const u8 OtherText_Terminator10[] = _("");
+const u8 OtherText_DazzlingSmile[] = _("’s dazzling,\nglittering smile");
+const u8 OtherText_PokeCenterIdol[] = _("POKéMON CENTER’s super idol -\nthe incomparable ");
+const u8 OtherText_Terminator11[] = _("");
+const u8 OtherText_LovelyAndSweet[] = _("The lovely and sweet ");
+const u8 OtherText_Terminator12[] = _("");
+const u8 OtherText_ThePretty[] = _("The pretty ");
 const u8 OtherText_WinningPortrait[] = _("’s\nwinning portrait");
 const u8 OtherText_GiveUsWink[] = _("Give us a wink!\nThe cutie POKéMON ");
 const u8 OtherText_Terminator13[] = _("");
@@ -1121,14 +1120,14 @@ const u8 OtherText_TheField2[] = _("zum Hauptmenü.");
 const u8 OtherText_ThePC[] = _("zum PC.");
 
 const struct TextStruct gUnknown_0840E740[7] =
-{
-    OtherText_TheField3,
-    OtherText_TheBattle,
-    OtherText_ThePokeList,
-    OtherText_TheShop,
-    OtherText_TheField,
-    OtherText_TheField2,
-    OtherText_ThePC,
+    {
+        OtherText_TheField3,
+        OtherText_TheBattle,
+        OtherText_ThePokeList,
+        OtherText_TheShop,
+        OtherText_TheField,
+        OtherText_TheField2,
+        OtherText_ThePC,
 };
 
 const u8 gOtherText_ReturnTo[] = _("Zurück ");
@@ -1149,7 +1148,7 @@ const u8 gOtherText_OkayToThrowAwayPrompt[] = _("Willst du wirklich\n{STR_VAR_2}
 const u8 gOtherText_DadsAdvice[] = _("VATI sagt immer...\n{PLAYER}, dies ist weder der rechte\lOrt noch der rechte Zeitpunkt dafür!{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_CantGetOffBike[] = _("Du kannst hier nicht vom RAD steigen.{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_ItemfinderResponding[] = _("Oh!\nDas Gerät zeigt etwas an!\pHier muss ein Item vergraben sein!{PAUSE_UNTIL_PRESS}");
-const u8     gOtherText_ItemfinderItemUnderfoot[] = _("Das Gerät macht direkt unter\ndeinen Füßen etwas aus!{PAUSE_UNTIL_PRESS}");
+const u8 gOtherText_ItemfinderItemUnderfoot[] = _("Das Gerät macht direkt unter\ndeinen Füßen etwas aus!{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_NoResponse[] = _("... ... ... ... Nichts!\nKeine Anzeige.{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_Coins3[] = _("Deine MÜNZEN:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_BootedTM[] = _("Eine TM wurde aktiviert.");

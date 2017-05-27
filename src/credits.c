@@ -114,7 +114,7 @@ enum
     TDA_4 = 4,
     TDA_PLAYER_CYCLIST = 5,
     TDA_RIVAL_CYCLIST = 6,
-    TDA_7 = 7, // Has something to do with the bike scene
+    TDA_7 = 7,   // Has something to do with the bike scene
     TDA_11 = 11, // Gets set depending on whether the bike or the grass scene should be shown
     TDA_12 = 12,
     TDA_13 = 13,
@@ -144,7 +144,6 @@ enum
     TDE_TASK_A_ID = 2,
 };
 
-
 struct Unk201C000
 {
     u16 unk0[POKEMON_TILE_COUNT];
@@ -164,11 +163,11 @@ struct CreditsEntry
 
 extern u8 ewram[];
 
-#define EWRAM_1F800          ((u16 *)(ewram + 0x1F800))
+#define EWRAM_1F800 ((u16 *)(ewram + 0x1F800))
 #define HALL_OF_FAME_SHEET_0 ((u8 *)(ewram + 0x1E000))
 #define HALL_OF_FAME_SHEET_1 ((u8 *)(ewram + 0x1E800))
 #define HALL_OF_FAME_SHEET_2 ((u8 *)(ewram + 0x1F000))
-#define ewram1c000           (*(struct Unk201C000 *)(ewram + 0x1C000))
+#define ewram1c000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 
 extern struct HallOfFame gHallOfFame;
 extern u8 unk_201e800[0x800];
@@ -337,7 +336,6 @@ void sub_81439D0(void)
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = savedIme;
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-
 
     SetVBlankCallback(vblank_8143948);
     m4aSongNumStart(BGM_THANKFOR);
@@ -700,7 +698,6 @@ static void task_b_81441B8(u8 taskIdB)
                 }
                 return;
             }
-
 
             gTasks[taskIdB].data[TDB_0] = 10;
             return;
@@ -1212,38 +1209,39 @@ static void sub_81450AC(u8 taskIdA)
     gUnknown_0203935C = 1;
 }
 
-static void sub_8145128(u16 arg0, u16 arg1, u16 arg2) {
+static void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
+{
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *) (VRAM + arg0));
+    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *)(VRAM + arg0));
     LoadPalette(gIntroCopyright_Pal, arg2, sizeof(gIntroCopyright_Pal));
 
     baseTile = (arg2 / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
     {
-        ((u16 *) (VRAM + arg1))[i] = baseTile + 1;
+        ((u16 *)(VRAM + arg1))[i] = baseTile + 1;
     }
 
     for (i = 0; i < 21; i++)
     {
-        ((u16 *) (VRAM + arg1))[7 * 32 + 4 + i] = i + 2 + baseTile;
+        ((u16 *)(VRAM + arg1))[7 * 32 + 4 + i] = i + 2 + baseTile;
     }
 
     for (i = 0; i < 20; i++)
     {
-        ((u16 *) (VRAM + arg1))[9 * 32 + 4 + i] = i + 23 + baseTile;
+        ((u16 *)(VRAM + arg1))[9 * 32 + 4 + i] = i + 23 + baseTile;
     }
 
     for (i = 0; i < 23; i++)
     {
-        ((u16 *) (VRAM + arg1))[11 * 32 + 4 + i] = i + 43 + baseTile;
+        ((u16 *)(VRAM + arg1))[11 * 32 + 4 + i] = i + 43 + baseTile;
     }
 
     for (i = 0; i < 12; i++)
     {
-        ((u16 *) (VRAM + arg1))[13 * 32 + 4 + i] = i + 66 + baseTile;
+        ((u16 *)(VRAM + arg1))[13 * 32 + 4 + i] = i + 66 + baseTile;
     }
 }
 
@@ -1270,7 +1268,8 @@ u16 sub_8145208(u8 arg0)
     return out;
 }
 
-void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette) {
+void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
+{
     u8 y, x;
 
     const u16 tileOffset = (palette / 16) << 12;
@@ -1279,7 +1278,7 @@ void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette) {
     {
         for (x = 0; x < 3; x++)
         {
-            ((u16 *) (VRAM + arg3 + (baseY + y) * 64))[baseX + x] = tileOffset + sub_8145208(arg0[y * 3 + x]);
+            ((u16 *)(VRAM + arg3 + (baseY + y) * 64))[baseX + x] = tileOffset + sub_8145208(arg0[y * 3 + x]);
         }
     }
 }
@@ -1290,7 +1289,7 @@ static void sub_81452D0(u16 arg0, u16 palette)
     u16 baseTile = (palette / 16) << 12;
 
     for (pos = 0; pos < 32 * 32; pos++)
-        ((u16 *) (VRAM + arg0))[pos] = baseTile + 1;
+        ((u16 *)(VRAM + arg0))[pos] = baseTile + 1;
 
 #if ENGLISH
     sub_814524C(gUnknown_0840B83C, 3, 7, arg0, palette);
@@ -1406,12 +1405,11 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
             sprite->pos1.x -= 1;
         }
         break;
-
-
     }
 }
 
-void spritecb_81454E0(struct Sprite *sprite) {
+void spritecb_81454E0(struct Sprite *sprite)
+{
     if (gUnknown_0203935C)
     {
         DestroySprite(sprite);
@@ -1501,7 +1499,6 @@ void spritecb_81454E0(struct Sprite *sprite) {
         REG_BLDALPHA = 0;
         DestroySprite(sprite);
         break;
-
     }
 }
 
@@ -1537,8 +1534,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         gUnknown_0840B5A0[position],
         species,
         personality,
-        1
-    );
+        1);
 
     palette = species_and_otid_get_pal(species, 0, 0xFFFF);
     LoadCompressedPalette(palette, 0x100 + (position * 16), 0x20);
@@ -1575,7 +1571,8 @@ void spritecb_814580C(struct Sprite *sprite)
     sprite->pos1.y = gSprites[sprite->data0].pos1.y;
 }
 
-static void sub_81458DC(void) {
+static void sub_81458DC(void)
+{
     struct Unk201C000 *unk201C000 = &ewram1c000;
     u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
     u16 seenTypesCount;
@@ -1621,8 +1618,7 @@ static void sub_81458DC(void) {
             unk201C000->unk90[page] = unk201C000->unk90[unk201C000->unk394];
             unk201C000->unk90[unk201C000->unk394] = 0;
         }
-    }
-    while (unk201C000->unk394 != 0 && j < POKEMON_TILE_COUNT);
+    } while (unk201C000->unk394 != 0 && j < POKEMON_TILE_COUNT);
 
     if (unk201C000->unk8E < POKEMON_TILE_COUNT)
     {
@@ -1639,7 +1635,8 @@ static void sub_81458DC(void) {
     else
     {
 
-        for (dexNum = 0; unk201C000->unk0[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++);
+        for (dexNum = 0; unk201C000->unk0[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++)
+            ;
 
         if (dexNum < unk201C000->unk8E - 1)
         {

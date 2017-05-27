@@ -3,12 +3,14 @@
 #include "palette.h"
 #include "task.h"
 
-struct UnkStruct2000000 {
+struct UnkStruct2000000
+{
     /*0x00*/ u8 filler00[61];
     /*0x3D*/ u8 unk3D;
 };
 
-struct UnkStruct1 {
+struct UnkStruct1
+{
     /*0x00*/ u8 unk00;
     /*0x01*/ u8 unk01;
     /*0x02*/ s16 unk02;
@@ -31,14 +33,14 @@ extern const u16 gUnknown_08E95A18[];
 extern u16 gUnknown_08E95AB8[];
 extern u16 gUnknown_08E95FB8[];
 
-
 void sub_8104DA4(void);
 
 u8 sub_8105BB4(u8, u8, s16);
 
 static void LoadSlotMachineWheelOverlay(void);
 
-void sub_8104CAC(u8 arg0) {
+void sub_8104CAC(u8 arg0)
+{
     u8 i;
     struct Task *task;
 
@@ -52,10 +54,9 @@ void sub_8104CAC(u8 arg0) {
     {
         u8 spriteId;
         spriteId = sub_8105BB4(
-                gUnknown_083ED048[arg0][i].unk00,
-                gUnknown_083ED048[arg0][i].unk01,
-                gUnknown_083ED048[arg0][i].unk02
-        );
+            gUnknown_083ED048[arg0][i].unk00,
+            gUnknown_083ED048[arg0][i].unk01,
+            gUnknown_083ED048[arg0][i].unk02);
         task->data[4 + i] = spriteId;
 
 #ifdef GERMAN
@@ -71,24 +72,25 @@ void sub_8104CAC(u8 arg0) {
 
 asm(".section .text_b");
 
-void sub_8106448(void) {
+void sub_8106448(void)
+{
     u32 offsetRead, offsetWrite;
     u32 size;
 
-    sub_800D238(gSlotMachine_Gfx, (void *) 0x02010000);
+    sub_800D238(gSlotMachine_Gfx, (void *)0x02010000);
 
     offsetRead = 0x02010000;
     offsetWrite = BG_VRAM;
     size = SLOTMACHINE_GFX_TILES * 32;
     while (TRUE)
     {
-        DmaCopy16(3, offsetRead, (void *) (offsetWrite), 0x1000);
+        DmaCopy16(3, offsetRead, (void *)(offsetWrite), 0x1000);
         offsetRead += 0x1000;
         offsetWrite += 0x1000;
         size -= 0x1000;
         if (size <= 0x1000)
         {
-            DmaCopy16(3, offsetRead, (void *) (offsetWrite), size);
+            DmaCopy16(3, offsetRead, (void *)(offsetWrite), size);
             break;
         }
     }
@@ -97,16 +99,18 @@ void sub_8106448(void) {
     LoadPalette(gPalette_83EDE24, 208, 32);
 }
 
-void sub_81064B8(void) {
-    CpuCopy16(gUnknown_08E95AB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+void sub_81064B8(void)
+{
+    CpuCopy16(gUnknown_08E95AB8, (void *)BG_SCREEN_ADDR(29), 20 * 32 * 2);
     LoadSlotMachineWheelOverlay();
 }
 
-static void LoadSlotMachineWheelOverlay(void) {
+static void LoadSlotMachineWheelOverlay(void)
+{
     s16 x, y, dx;
     u16 *screen;
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = (u16 *)BG_SCREEN_ADDR(30);
 
     for (x = 4; x < 18; x += 5)
     {
@@ -128,8 +132,9 @@ static void LoadSlotMachineWheelOverlay(void) {
     }
 }
 
-void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
-    u16 *vram = (u16 *) BG_SCREEN_ADDR(29);
+void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
+{
+    u16 *vram = (u16 *)BG_SCREEN_ADDR(29);
 
     vram[15 * 32 + arg0] = arg1;
     vram[15 * 32 + 1 + arg0] = arg2;
@@ -137,13 +142,14 @@ void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
     vram[16 * 32 + 1 + arg0] = arg4;
 }
 
-void sub_81065DC(void) {
+void sub_81065DC(void)
+{
     s16 y, x;
     u16 *screen;
 
-    CpuCopy16(gUnknown_08E95FB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+    CpuCopy16(gUnknown_08E95FB8, (void *)BG_SCREEN_ADDR(29), 20 * 32 * 2);
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = (u16 *)BG_SCREEN_ADDR(30);
     for (y = 0; y < 20; y++)
     {
         for (x = 0; x < 30; x++)

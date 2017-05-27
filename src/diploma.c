@@ -18,8 +18,7 @@ static void Task_DiplomaWaitForKeyPress(u8);
 static void Task_DiplomaFadeOut(u8);
 static void DisplayDiplomaText(void);
 
-static const u16 gDiplomaPalettes[][16] =
-{
+static const u16 gDiplomaPalettes[][16] = {
     INCBIN_U16("graphics/misc/diploma_national.gbapal"),
     INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
 };

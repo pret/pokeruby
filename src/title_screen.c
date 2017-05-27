@@ -27,8 +27,7 @@ extern const u8 gTitleScreenPressStart_Gfx[];
 extern const u16 gTitleScreenLogoShinePalette[];
 
 #ifdef SAPPHIRE
-static const u16 sLegendaryMonPalettes[][16] =
-{
+static const u16 sLegendaryMonPalettes[][16] = {
     INCBIN_U16("graphics/title_screen/kyogre_dark.gbapal"),
     INCBIN_U16("graphics/title_screen/kyogre_glow.gbapal"),
 };
@@ -36,8 +35,7 @@ static const u8 sLegendaryMonPixelData[] = INCBIN_U8("graphics/title_screen/kyog
 static const u8 sLegendaryMonTilemap[] = INCBIN_U8("graphics/title_screen/kyogre_map.bin.lz");
 static const u8 sBackdropTilemap[] = INCBIN_U8("graphics/title_screen/water_map.bin.lz");
 #else
-static const u16 sLegendaryMonPalettes[][16] =
-{
+static const u16 sLegendaryMonPalettes[][16] = {
     INCBIN_U16("graphics/title_screen/groudon_dark.gbapal"),
     INCBIN_U16("graphics/title_screen/groudon_glow.gbapal"),
 };
@@ -46,8 +44,7 @@ static const u8 sLegendaryMonTilemap[] = INCBIN_U8("graphics/title_screen/groudo
 static const u8 sBackdropTilemap[] = INCBIN_U8("graphics/title_screen/lava_map.bin.lz");
 #endif
 static const u8 sLogoShineTiles[] = INCBIN_U8("graphics/title_screen/logo_shine.4bpp.lz");
-const u16 gUnknown_08393E64[] =
-{
+const u16 gUnknown_08393E64[] = {
     0x10,
     0x110,
     0x210,
@@ -81,8 +78,7 @@ const u16 gUnknown_08393E64[] =
     0x1001,
     0x1000,
 };
-static const struct OamData sVersionBannerLeftOamData =
-{
+static const struct OamData sVersionBannerLeftOamData = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -97,8 +93,7 @@ static const struct OamData sVersionBannerLeftOamData =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const struct OamData sVersionBannerRightOamData =
-{
+static const struct OamData sVersionBannerRightOamData = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -113,26 +108,21 @@ static const struct OamData sVersionBannerRightOamData =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const union AnimCmd sVersionBannerLeftAnimSequence[] =
-{
+static const union AnimCmd sVersionBannerLeftAnimSequence[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd sVersionBannerRightAnimSequence[] =
-{
+static const union AnimCmd sVersionBannerRightAnimSequence[] = {
     ANIMCMD_FRAME(64, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
-{
+static const union AnimCmd *const sVersionBannerLeftAnimTable[] = {
     sVersionBannerLeftAnimSequence,
 };
-static const union AnimCmd *const sVersionBannerRightAnimTable[] =
-{
+static const union AnimCmd *const sVersionBannerRightAnimTable[] = {
     sVersionBannerRightAnimSequence,
 };
-static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
-{
+static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate = {
     .tileTag = 1000,
     .paletteTag = 1000,
     .oam = &sVersionBannerLeftOamData,
@@ -141,8 +131,7 @@ static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_VersionBannerLeft,
 };
-static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
-{
+static const struct SpriteTemplate sVersionBannerRightSpriteTemplate = {
     .tileTag = 1000,
     .paletteTag = 1000,
     .oam = &sVersionBannerRightOamData,
@@ -151,13 +140,11 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_VersionBannerRight,
 };
-static const struct SpriteSheet gUnknown_08393EFC[] =
-{
+static const struct SpriteSheet gUnknown_08393EFC[] = {
     {gVersionTiles, 0x1000, 1000},
     {NULL},
 };
-static const struct OamData gOamData_8393F0C =
-{
+static const struct OamData gOamData_8393F0C = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -172,48 +159,39 @@ static const struct OamData gOamData_8393F0C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const union AnimCmd gSpriteAnim_8393F14[] =
-{
+static const union AnimCmd gSpriteAnim_8393F14[] = {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F1C[] =
-{
+static const union AnimCmd gSpriteAnim_8393F1C[] = {
     ANIMCMD_FRAME(4, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F24[] =
-{
+static const union AnimCmd gSpriteAnim_8393F24[] = {
     ANIMCMD_FRAME(8, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F2C[] =
-{
+static const union AnimCmd gSpriteAnim_8393F2C[] = {
     ANIMCMD_FRAME(12, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F34[] =
-{
+static const union AnimCmd gSpriteAnim_8393F34[] = {
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F3C[] =
-{
+static const union AnimCmd gSpriteAnim_8393F3C[] = {
     ANIMCMD_FRAME(20, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F44[] =
-{
+static const union AnimCmd gSpriteAnim_8393F44[] = {
     ANIMCMD_FRAME(24, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_8393F4C[] =
-{
+static const union AnimCmd gSpriteAnim_8393F4C[] = {
     ANIMCMD_FRAME(28, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
-{
+static const union AnimCmd *const sStartCopyrightBannerAnimTable[] = {
     gSpriteAnim_8393F14,
     gSpriteAnim_8393F1C,
     gSpriteAnim_8393F24,
@@ -223,8 +201,7 @@ static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
     gSpriteAnim_8393F44,
     gSpriteAnim_8393F4C,
 };
-static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
-{
+static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate = {
     .tileTag = 1001,
     .paletteTag = 1001,
     .oam = &gOamData_8393F0C,
@@ -233,18 +210,15 @@ static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PressStartCopyrightBanner,
 };
-static const struct SpriteSheet gUnknown_08393F8C[] =
-{
+static const struct SpriteSheet gUnknown_08393F8C[] = {
     {gTitleScreenPressStart_Gfx, 0x520, 1001},
     {NULL},
 };
-const struct SpritePalette sPokemonLogoShinePalette[] =
-{
+const struct SpritePalette sPokemonLogoShinePalette[] = {
     {gTitleScreenLogoShinePalette, 1001},
     {NULL},
 };
-static const struct OamData sPokemonLogoShineOamData =
-{
+static const struct OamData sPokemonLogoShineOamData = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -259,17 +233,14 @@ static const struct OamData sPokemonLogoShineOamData =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const union AnimCmd sPokemonLogoShineAnimSequence[] =
-{
+static const union AnimCmd sPokemonLogoShineAnimSequence[] = {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
-static const union AnimCmd *const sPokemonLogoShineAnimTable[] =
-{
+static const union AnimCmd *const sPokemonLogoShineAnimTable[] = {
     sPokemonLogoShineAnimSequence,
 };
-static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate =
-{
+static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate = {
     .tileTag = 1002,
     .paletteTag = 1001,
     .oam = &sPokemonLogoShineOamData,
@@ -278,13 +249,12 @@ static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PokemonLogoShine,
 };
-static const struct SpriteSheet sPokemonLogoShineSpriteSheet[] =
-{
+static const struct SpriteSheet sPokemonLogoShineSpriteSheet[] = {
     {sLogoShineTiles, 0x800, 1002},
     {NULL},
 };
 
-#define _RGB(r, g, b) ((((b) & 31) << 10) + (((g) & 31) << 5) + ((r) & 31))
+#define _RGB(r, g, b) ((((b)&31) << 10) + (((g)&31) << 5) + ((r)&31))
 
 #ifdef SAPPHIRE
 //Red Kyogre markings
@@ -456,7 +426,6 @@ static void VBlankCB(void)
     REG_BG1VOFS = gUnknown_030041B4;
 }
 
-
 #define tCounter data[0]
 #define tSkipToNext data[1]
 
@@ -548,12 +517,7 @@ void CB2_InitTitleScreen(void)
         REG_IE |= INTR_FLAG_VBLANK;
         REG_IME = savedIme;
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-        REG_DISPCNT = DISPCNT_MODE_1
-                    | DISPCNT_OBJ_1D_MAP
-                    | DISPCNT_BG2_ON
-                    | DISPCNT_OBJ_ON
-                    | DISPCNT_WIN0_ON
-                    | DISPCNT_OBJWIN_ON;
+        REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_OBJWIN_ON;
         m4aSongNumStart(0x19D);
         gMain.state = 5;
         break;
@@ -637,12 +601,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     else
     {
         gTasks[taskId].tSkipToNext = TRUE;
-        REG_DISPCNT = DISPCNT_MODE_1
-                    | DISPCNT_OBJ_1D_MAP
-                    | DISPCNT_BG0_ON
-                    | DISPCNT_BG1_ON
-                    | DISPCNT_BG2_ON
-                    | DISPCNT_OBJ_ON;
+        REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         CreatePressStartBanner(DISPLAY_WIDTH / 2, 108);
         CreateCopyrightBanner(DISPLAY_WIDTH / 2, 148);
         gTasks[taskId].data[4] = 0;
@@ -673,8 +632,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     {
         if ((gMain.heldKeys & CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
             SetMainCallback2(CB2_GoToClearSaveDataScreen);
-        if ((gMain.heldKeys & RESET_RTC_BUTTON_COMBO) == RESET_RTC_BUTTON_COMBO
-          && CanResetRTC() == 1)
+        if ((gMain.heldKeys & RESET_RTC_BUTTON_COMBO) == RESET_RTC_BUTTON_COMBO && CanResetRTC() == 1)
         {
             FadeOutBGM(4);
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
@@ -738,6 +696,5 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         else
             palette = LEGENDARY_MARKING_COLOR(31 - colorIntensity);
         LoadPalette(&palette, 0xEF, sizeof(palette));
-   }
+    }
 }
-

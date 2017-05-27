@@ -39,8 +39,7 @@ const char BuildDateTime[] = "2002 10 15 20:34";
 const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
 #endif
 
-const IntrFunc gIntrTableTemplate[] =
-{
+const IntrFunc gIntrTableTemplate[] = {
     SerialIntr, // Serial interrupt
     Timer3Intr, // Timer 3 interrupt
     HBlankIntr, // H-blank interrupt
@@ -57,7 +56,7 @@ const IntrFunc gIntrTableTemplate[] =
     IntrDummy,  // Game Pak interrupt
 };
 
-#define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
+#define INTR_COUNT ((int)(sizeof(gIntrTableTemplate) / sizeof(IntrFunc)))
 
 u16 gKeyRepeatStartDelay;
 bool8 gLinkTransferringData;
@@ -105,9 +104,7 @@ void AgbMain()
     {
         ReadKeys();
 
-        if (gSoftResetDisabled == FALSE
-         && (gMain.heldKeysRaw & A_BUTTON)
-         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
+        if (gSoftResetDisabled == FALSE && (gMain.heldKeysRaw & A_BUTTON) && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
             DoSoftReset();
 
         if (gLink.sendQueue.count > 1 && sub_8055910() == 1)
@@ -336,7 +333,8 @@ static void SerialIntr(void)
 }
 
 static void IntrDummy(void)
-{}
+{
+}
 
 static void WaitForVBlank(void)
 {

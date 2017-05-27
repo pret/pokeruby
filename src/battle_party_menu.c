@@ -58,7 +58,7 @@ extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
-extern void (*gUnknown_03004AE4)();  //don't know types yet
+extern void (*gUnknown_03004AE4)(); //don't know types yet
 
 static void Task_809527C(u8);
 static void Task_80952B4(u8);
@@ -70,18 +70,16 @@ static void Task_BattlePartyMenuSummary(u8 taskId);
 static void Task_BattlePartyMenuShift(u8 taskId);
 static void Task_BattlePartyMenuCancel(u8 taskId);
 
-static const struct PartyMenuItem sBattlePartyMenuActions[] =
-{
-    {OtherText_Summary,             Task_BattlePartyMenuSummary},
+static const struct PartyMenuItem sBattlePartyMenuActions[] = {
+    {OtherText_Summary, Task_BattlePartyMenuSummary},
     {gOtherText_CancelNoTerminator, Task_BattlePartyMenuCancel},
-    {OtherText_Shift,               Task_BattlePartyMenuShift},
-    {OtherText_SendOut,             Task_BattlePartyMenuShift},
+    {OtherText_Shift, Task_BattlePartyMenuShift},
+    {OtherText_SendOut, Task_BattlePartyMenuShift},
 };
-static const u8 Unknown_83B5FEC[] = {2, 0, 1};  //SHIFT, SUMMARY, CANCEL
-static const u8 Unknown_83B5FEF[] = {3, 0, 1};  //SEND OUT, SUMMARY, CANCEL
-static const u8 Unknown_83B5FF2[] = {0, 1};     //SUMMARY, CANCEL
-static const struct PartyPopupMenu sBattlePartyPopupMenus[] =
-{
+static const u8 Unknown_83B5FEC[] = {2, 0, 1}; //SHIFT, SUMMARY, CANCEL
+static const u8 Unknown_83B5FEF[] = {3, 0, 1}; //SEND OUT, SUMMARY, CANCEL
+static const u8 Unknown_83B5FF2[] = {0, 1};    //SUMMARY, CANCEL
+static const struct PartyPopupMenu sBattlePartyPopupMenus[] = {
     {ARRAY_COUNT(Unknown_83B5FEC), 9, Unknown_83B5FEC},
     {ARRAY_COUNT(Unknown_83B5FEF), 9, Unknown_83B5FEF},
     {ARRAY_COUNT(Unknown_83B5FF2), 9, Unknown_83B5FF2},
@@ -340,9 +338,9 @@ static void Task_HandlePopupMenuInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
-                               sBattlePartyPopupMenus,
-                               sBattlePartyMenuActions,
-                               GetMenuCursorPos());
+                                             sBattlePartyPopupMenus,
+                                             sBattlePartyMenuActions,
+                                             GetMenuCursorPos());
             func(taskId);
             return;
         }
@@ -375,7 +373,7 @@ static void Task_ShowSummaryScreen(u8 taskId)
 
 static void Task_BattlePartyMenuSummary(u8 taskId)
 {
-    sub_806CA38(taskId);  //an unused variable was probably set with this.
+    sub_806CA38(taskId); //an unused variable was probably set with this.
     gTasks[taskId].func = Task_ShowSummaryScreen;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
@@ -408,8 +406,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     }
     for (i = 0; i < gUnknown_02024A68; i++)
     {
-        if (battle_side_get_owner(i) == 0
-         && sub_8094C20(partySelection) == gUnknown_02024A6A[i])
+        if (battle_side_get_owner(i) == 0 && sub_8094C20(partySelection) == gUnknown_02024A6A[i])
         {
             sub_806D5A4();
             GetMonNickname(&gPlayerParty[partySelection], gStringVar1);

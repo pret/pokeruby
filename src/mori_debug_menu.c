@@ -34,7 +34,7 @@ void unref_sub_8083CF0(void)
 
 bool8 sub_8083D4C(void)
 {
-     if ( gMain.newKeys & A_BUTTON )
+    if (gMain.newKeys & A_BUTTON)
     {
         CloseMenu();
         return TRUE;
@@ -64,7 +64,7 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 
 s8 MoriDebugMenu_Egg(void)
 {
-    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
+    if (Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame())
         sub_8041940();
     CloseMenu();
 
@@ -73,7 +73,7 @@ s8 MoriDebugMenu_Egg(void)
 
 s8 MoriDebugMenu_MaleEgg(void)
 {
-    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
+    if (Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame())
         sub_8041950();
     CloseMenu();
 
@@ -108,7 +108,7 @@ s8 MoriDebugMenu_BreedEgg(void)
     for (loopCounter = 0; loopCounter <= 5; loopCounter++)
     {
         //UB: Too few arguments for function 'GetMonData'
-        if ( GetMonData(&gPlayerParty[loopCounter], MON_DATA_IS_EGG) )
+        if (GetMonData(&gPlayerParty[loopCounter], MON_DATA_IS_EGG))
         {
             u8 friendship = 0;
             SetMonData(&gPlayerParty[loopCounter], MON_DATA_FRIENDSHIP, &friendship);

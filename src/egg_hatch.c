@@ -1,13 +1,13 @@
 #include "global.h"
 #include "pokemon.h"
 
-void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp) {
+void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+{
     u16 species;
     u32 personality, pokerus;
     u8 i, friendship, language, gameMet, markings;
     u16 moves[4];
     u32 ivs[6];
-
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
@@ -31,12 +31,12 @@ void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp) {
 
     for (i = 0; i < 4; i++)
     {
-        SetMonData(temp, MON_DATA_MOVE1 + i, (const u8 *) &moves[i]);
+        SetMonData(temp, MON_DATA_MOVE1 + i, (const u8 *)&moves[i]);
     }
 
     for (i = 0; i < 6; i++)
     {
-        SetMonData(temp, MON_DATA_HP_IV + i, (const u8 *) &ivs[i]);
+        SetMonData(temp, MON_DATA_HP_IV + i, (const u8 *)&ivs[i]);
     }
 
     language = GAME_LANGUAGE;
@@ -46,7 +46,7 @@ void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp) {
 
     friendship = 120;
     SetMonData(temp, MON_DATA_FRIENDSHIP, &friendship);
-    SetMonData(temp, MON_DATA_POKERUS, (const u8 *) &pokerus);
+    SetMonData(temp, MON_DATA_POKERUS, (const u8 *)&pokerus);
 
     *egg = *temp;
 }

@@ -11,7 +11,7 @@
 #include "sprite.h"
 #include "task.h"
 
-#define SECONDS(value) ((signed) (60.0 * value + 0.5))
+#define SECONDS(value) ((signed)(60.0 * value + 0.5))
 
 // porthole states
 enum
@@ -66,7 +66,7 @@ void Task_Truck1(u8 taskId)
     sub_805BD90(3, mapNum, mapGroup, -3, box3);
 
     if (++data[0] == SECONDS(500)) // this will never run
-        data[0] = zero; // reset the timer if it gets stuck.
+        data[0] = zero;            // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
     SetCameraPanning(0, cameraYpan);
@@ -112,40 +112,40 @@ void Task_Truck2(u8 taskId)
 
 void Task_Truck3(u8 taskId)
 {
-   s16 *data = gTasks[taskId].data;
-   s16 cameraXpan;
-   s16 cameraYpan;
+    s16 *data = gTasks[taskId].data;
+    s16 cameraXpan;
+    s16 cameraYpan;
 
-   data[0]++;
+    data[0]++;
 
-   if (data[0] > 5)
-   {
-       data[0] = 0;
-       data[1]++;
-   }
+    if (data[0] > 5)
+    {
+        data[0] = 0;
+        data[1]++;
+    }
 
-   if ((u16)data[1] == 19)
-   {
-       DestroyTask(taskId);
-   }
-   else
-   {
-       cameraXpan = gTruckCamera_HorizontalTable[data[1]];
-       cameraYpan = 0;
-       SetCameraPanning(cameraXpan, 0);
-       sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
-       sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, cameraYpan - 3);
-       sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, cameraYpan);
-   }
+    if ((u16)data[1] == 19)
+    {
+        DestroyTask(taskId);
+    }
+    else
+    {
+        cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+        cameraYpan = 0;
+        SetCameraPanning(cameraXpan, 0);
+        sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
+        sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, cameraYpan - 3);
+        sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, cameraYpan);
+    }
 }
 
 void Task_HandleTruckSequence(u8 taskId)
 {
-   s16 *data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
-        /*
+    /*
         Each case has a timer which is handled with data[1], incrementing
         until it reaches the if function's condition, which sets the next task up.
         */

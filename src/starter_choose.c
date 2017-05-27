@@ -23,8 +23,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 // Graphics Data
 //--------------------------------------------------
 
-const u16 gBirchBagGrassPal[][16] =
-{
+const u16 gBirchBagGrassPal[][16] = {
     INCBIN_U16("graphics/misc/birch_bag.gbapal"),
     INCBIN_U16("graphics/misc/birch_grass.gbapal"),
 };
@@ -35,21 +34,18 @@ const u8 gBirchGrassTilemap[] = INCBIN_U8("graphics/misc/birch_grass_map.bin.lz"
 const u8 gBirchHelpGfx[] = INCBIN_U8("graphics/misc/birch_help.4bpp.lz");
 static const u8 gBirchBallarrow_Gfx[] = INCBIN_U8("graphics/misc/birch_ballarrow.4bpp.lz");
 static const u8 gBirchCircle_Gfx[] = INCBIN_U8("graphics/misc/birch_circle.4bpp.lz");
-static const u8 gStarterChoose_PokeballCoords[][2] =
-{
+static const u8 gStarterChoose_PokeballCoords[][2] = {
     {60, 64},
     {120, 88},
     {180, 64},
 };
-static const u8 gStarterChoose_LabelCoords[][2] =
-{
+static const u8 gStarterChoose_LabelCoords[][2] = {
     {0, 9},
     {16, 10},
     {8, 4},
 };
 static const u16 sStarterMons[] = {SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
-static const struct OamData gOamData_83F76CC =
-{
+static const struct OamData gOamData_83F76CC = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -64,8 +60,7 @@ static const struct OamData gOamData_83F76CC =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const struct OamData gOamData_83F76D4 =
-{
+static const struct OamData gOamData_83F76D4 = {
     .y = 160,
     .affineMode = 0,
     .objMode = 0,
@@ -80,8 +75,7 @@ static const struct OamData gOamData_83F76D4 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const struct OamData gOamData_83F76DC =
-{
+static const struct OamData gOamData_83F76DC = {
     .y = 160,
     .affineMode = 3,
     .objMode = 0,
@@ -96,25 +90,21 @@ static const struct OamData gOamData_83F76DC =
     .paletteNum = 0,
     .affineParam = 0,
 };
-static const u8 gUnknown_083F76E4[][2] =
-{
+static const u8 gUnknown_083F76E4[][2] = {
     {60, 32},
     {120, 56},
     {180, 32},
     {0, 0},
 };
-static const union AnimCmd gSpriteAnim_83F76EC[] =
-{
+static const union AnimCmd gSpriteAnim_83F76EC[] = {
     ANIMCMD_FRAME(48, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_83F76F4[] =
-{
+static const union AnimCmd gSpriteAnim_83F76F4[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd gSpriteAnim_83F76FC[] =
-{
+static const union AnimCmd gSpriteAnim_83F76FC[] = {
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(32, 4),
@@ -134,63 +124,51 @@ static const union AnimCmd gSpriteAnim_83F76FC[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_JUMP(0),
 };
-static const union AnimCmd gSpriteAnim_83F7744[] =
-{
+static const union AnimCmd gSpriteAnim_83F7744[] = {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F774C[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F774C[] = {
     gSpriteAnim_83F76EC,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F7750[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F7750[] = {
     gSpriteAnim_83F76F4,
     gSpriteAnim_83F76FC,
 };
-static const union AnimCmd *const gSpriteAnimTable_83F7758[] =
-{
+static const union AnimCmd *const gSpriteAnimTable_83F7758[] = {
     gSpriteAnim_83F7744,
 };
-static const union AffineAnimCmd gSpriteAffineAnim_83F775C[] =
-{
+static const union AffineAnimCmd gSpriteAffineAnim_83F775C[] = {
     AFFINEANIMCMD_FRAME(16, 16, 0, 0),
     AFFINEANIMCMD_FRAME(16, 16, 0, 15),
     AFFINEANIMCMD_END,
 };
-static const union AffineAnimCmd gSpriteAffineAnim_83F7774[] =
-{
+static const union AffineAnimCmd gSpriteAffineAnim_83F7774[] = {
     AFFINEANIMCMD_FRAME(20, 20, 0, 0),
     AFFINEANIMCMD_FRAME(20, 20, 0, 15),
     AFFINEANIMCMD_END,
 };
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[] =
-{
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F778C[] = {
     gSpriteAffineAnim_83F775C,
 };
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] =
-{
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] = {
     gSpriteAffineAnim_83F7774,
 };
-static const struct SpriteSheet gUnknown_083F7794[] =
-{
+static const struct SpriteSheet gUnknown_083F7794[] = {
     {gBirchBallarrow_Gfx, 0x0800, 0x1000},
     {NULL},
 };
-static const struct SpriteSheet gUnknown_083F77A4[] =
-{
+static const struct SpriteSheet gUnknown_083F77A4[] = {
     {gBirchCircle_Gfx, 0x0800, 0x1001},
     {NULL},
 };
-const struct SpritePalette gUnknown_083F77B4[] =
-{
+const struct SpritePalette gUnknown_083F77B4[] = {
     {gBirchBallarrow_Pal, 0x1000},
     {gBirchCircle_Pal, 0x1001},
     {NULL},
 };
 static void sub_810A62C(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77CC =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77CC = {
     .tileTag = 4096,
     .paletteTag = 4096,
     .oam = &gOamData_83F76CC,
@@ -200,8 +178,7 @@ static const struct SpriteTemplate gSpriteTemplate_83F77CC =
     .callback = sub_810A62C,
 };
 static void sub_810A68C(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77E4 =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77E4 = {
     .tileTag = 4096,
     .paletteTag = 4096,
     .oam = &gOamData_83F76D4,
@@ -211,8 +188,7 @@ static const struct SpriteTemplate gSpriteTemplate_83F77E4 =
     .callback = sub_810A68C,
 };
 static void StarterPokemonSpriteAnimCallback(struct Sprite *sprite);
-static const struct SpriteTemplate gSpriteTemplate_83F77FC =
-{
+static const struct SpriteTemplate gSpriteTemplate_83F77FC = {
     .tileTag = 4097,
     .paletteTag = 4097,
     .oam = &gOamData_83F76DC,
@@ -314,8 +290,8 @@ void CB2_ChooseStarter(void)
     REG_BLDCNT = 0xFE;
     REG_BLDALPHA = 0;
     REG_BLDY = 0x7;
-    REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7)  | BGCNT_16COLOR | BGCNT_TXT256x256;
-    REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6)  | BGCNT_16COLOR | BGCNT_TXT256x256;
+    REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
+    REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
 
@@ -328,18 +304,18 @@ void CB2_ChooseStarter(void)
 
     //Create three Pokeball sprites
     spriteId = CreateSprite(
-      &gSpriteTemplate_83F77E4,
-      gStarterChoose_PokeballCoords[0][0], gStarterChoose_PokeballCoords[0][1], 2);
+        &gSpriteTemplate_83F77E4,
+        gStarterChoose_PokeballCoords[0][0], gStarterChoose_PokeballCoords[0][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 0;
     spriteId = CreateSprite(
-      &gSpriteTemplate_83F77E4,
-      gStarterChoose_PokeballCoords[1][0], gStarterChoose_PokeballCoords[1][1], 2);
+        &gSpriteTemplate_83F77E4,
+        gStarterChoose_PokeballCoords[1][0], gStarterChoose_PokeballCoords[1][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 1;
     spriteId = CreateSprite(
-      &gSpriteTemplate_83F77E4,
-      gStarterChoose_PokeballCoords[2][0], gStarterChoose_PokeballCoords[2][1], 2);
+        &gSpriteTemplate_83F77E4,
+        gStarterChoose_PokeballCoords[2][0], gStarterChoose_PokeballCoords[2][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 2;
 }
@@ -369,27 +345,27 @@ static void Task_StarterChoose2(u8 taskId)
         u8 spriteId;
 
         MenuZeroFillWindowRect(
-          gStarterChoose_LabelCoords[selection][0],
-          gStarterChoose_LabelCoords[selection][1],
-          gStarterChoose_LabelCoords[selection][0] + 13,
-          gStarterChoose_LabelCoords[selection][1] + 3);
+            gStarterChoose_LabelCoords[selection][0],
+            gStarterChoose_LabelCoords[selection][1],
+            gStarterChoose_LabelCoords[selection][0] + 13,
+            gStarterChoose_LabelCoords[selection][1] + 3);
 
         REG_WIN0H = 0;
         REG_WIN0V = 0;
 
         //Create white circle background
         spriteId = CreateSprite(
-          &gSpriteTemplate_83F77FC,
-          gStarterChoose_PokeballCoords[selection][0],
-          gStarterChoose_PokeballCoords[selection][1],
-          1);
+            &gSpriteTemplate_83F77FC,
+            gStarterChoose_PokeballCoords[selection][0],
+            gStarterChoose_PokeballCoords[selection][1],
+            1);
         gTasks[taskId].tCircleSpriteId = spriteId;
 
         //Create Pokemon sprite
         spriteId = CreatePokemonFrontSprite(
-          GetStarterPokemon(gTasks[taskId].tStarterSelection),
-          gStarterChoose_PokeballCoords[selection][0],
-          gStarterChoose_PokeballCoords[selection][1]);
+            GetStarterPokemon(gTasks[taskId].tStarterSelection),
+            gStarterChoose_PokeballCoords[selection][0],
+            gStarterChoose_PokeballCoords[selection][1]);
         gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_83F778C;
         gSprites[spriteId].callback = StarterPokemonSpriteAnimCallback;
         gTasks[taskId].tPkmnSpriteId = spriteId;
@@ -414,8 +390,8 @@ static void Task_StarterChoose2(u8 taskId)
 static void Task_StarterChoose3(u8 taskId)
 {
     if (gSprites[gTasks[taskId].tCircleSpriteId].affineAnimEnded &&
-      gSprites[gTasks[taskId].tCircleSpriteId].pos1.x == STARTER_PKMN_POS_X &&
-      gSprites[gTasks[taskId].tCircleSpriteId].pos1.y == STARTER_PKMN_POS_Y)
+        gSprites[gTasks[taskId].tCircleSpriteId].pos1.x == STARTER_PKMN_POS_X &&
+        gSprites[gTasks[taskId].tCircleSpriteId].pos1.y == STARTER_PKMN_POS_Y)
     {
         gTasks[taskId].func = Task_StarterChoose4;
     }
@@ -437,7 +413,7 @@ static void Task_StarterChoose5(u8 taskId)
 
     switch (ProcessMenuInputNoWrap_())
     {
-    case 0:  // YES
+    case 0: // YES
         //Return the starter choice and exit.
         gScriptResult = gTasks[taskId].tStarterSelection;
         SetMainCallback2(gMain.savedCallback);
@@ -475,10 +451,10 @@ static void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadow
 }
 
 #define SET_CHAR(str, index, c) \
-{                               \
-    u8 *p = str + index;        \
-    *p = c;                     \
-}
+    {                           \
+        u8 *p = str + index;    \
+        *p = c;                 \
+    }
 
 static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 {
@@ -497,10 +473,10 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     {
         //Remove the old Pokemon label
         MenuZeroFillWindowRect(
-          gStarterChoose_LabelCoords[prevSelection][0],
-          gStarterChoose_LabelCoords[prevSelection][1],
-          gStarterChoose_LabelCoords[prevSelection][0] + 13,
-          gStarterChoose_LabelCoords[prevSelection][1] + 3);
+            gStarterChoose_LabelCoords[prevSelection][0],
+            gStarterChoose_LabelCoords[prevSelection][1],
+            gStarterChoose_LabelCoords[prevSelection][0] + 13,
+            gStarterChoose_LabelCoords[prevSelection][1] + 3);
         REG_WIN0H = 0;
         REG_WIN0V = 0;
     }
@@ -526,17 +502,17 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     //Copy POKEMON string to label
     StringCopy(labelText + dstIndex, gOtherText_Poke);
     MenuPrint(
-      labelText,
-      gStarterChoose_LabelCoords[selection][0],
-      gStarterChoose_LabelCoords[selection][1]);
+        labelText,
+        gStarterChoose_LabelCoords[selection][0],
+        gStarterChoose_LabelCoords[selection][1]);
     AddTextColorCtrlCode(labelText, 0, 15, 8);
 
     //Copy Pokemon name to label
     sub_8072C74(labelText + 5, gSpeciesNames[species], 0x6B, 1);
     MenuPrint(
-      labelText,
-      gStarterChoose_LabelCoords[selection][0],
-      gStarterChoose_LabelCoords[selection][1] + 2);
+        labelText,
+        gStarterChoose_LabelCoords[selection][0],
+        gStarterChoose_LabelCoords[selection][1] + 2);
 
     labelLeft = gStarterChoose_LabelCoords[selection][0] * 8 + 4;
     labelRight = (gStarterChoose_LabelCoords[selection][0] + 13) * 8 + 4;
@@ -555,10 +531,10 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
     u8 spriteId;
 
     DecompressPicFromTable_2(
-      &gMonFrontPicTable[species],
-      gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
-      gUnknown_081FAF4C[0], gUnknown_081FAF4C[1],
-      species);
+        &gMonFrontPicTable[species],
+        gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
+        gUnknown_081FAF4C[0], gUnknown_081FAF4C[1],
+        species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 1);
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);

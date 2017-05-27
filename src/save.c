@@ -18,7 +18,7 @@ extern u32 gLastSaveCounter;
 extern u16 gLastKnownGoodSector;
 extern u32 gDamagedSaveSectors;
 extern u32 gSaveCounter;
-extern struct SaveSection unk_2000000; // slow save RAM
+extern struct SaveSection unk_2000000;       // slow save RAM
 extern struct SaveSection *gFastSaveSection; // the pointer is in fast IWRAM but may sometimes point to the slower EWRAM.
 extern u16 gUnknown_03005EB4;
 extern u16 gSaveFileStatus;
@@ -27,31 +27,27 @@ extern u32 gGameContinueCallback;
 extern struct PokemonStorage gPokemonStorage;
 extern struct HallOfFame gHallOfFame;
 
-const struct SaveSectionLocation gSaveSectionLocations[] =
-{
-    {((u8 *) &gSaveBlock2) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock2, 1)},
-    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock1, 1)},
-    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gSaveBlock1, 2)},
-    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gSaveBlock1, 3)},
-    {((u8 *) &gSaveBlock1) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gSaveBlock1, 4)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gPokemonStorage, 1)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gPokemonStorage, 2)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gPokemonStorage, 3)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gPokemonStorage, 4)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(5), GETCHUNKSIZE(gPokemonStorage, 5)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(6), GETCHUNKSIZE(gPokemonStorage, 6)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(7), GETCHUNKSIZE(gPokemonStorage, 7)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(8), GETCHUNKSIZE(gPokemonStorage, 8)},
-    {((u8 *) &gPokemonStorage) + GETBLOCKOFFSET(9), GETCHUNKSIZE(gPokemonStorage, 9)}
-};
+const struct SaveSectionLocation gSaveSectionLocations[] = {
+    {((u8 *)&gSaveBlock2) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock2, 1)},
+    {((u8 *)&gSaveBlock1) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gSaveBlock1, 1)},
+    {((u8 *)&gSaveBlock1) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gSaveBlock1, 2)},
+    {((u8 *)&gSaveBlock1) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gSaveBlock1, 3)},
+    {((u8 *)&gSaveBlock1) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gSaveBlock1, 4)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(1), GETCHUNKSIZE(gPokemonStorage, 1)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(2), GETCHUNKSIZE(gPokemonStorage, 2)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(3), GETCHUNKSIZE(gPokemonStorage, 3)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(4), GETCHUNKSIZE(gPokemonStorage, 4)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(5), GETCHUNKSIZE(gPokemonStorage, 5)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(6), GETCHUNKSIZE(gPokemonStorage, 6)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(7), GETCHUNKSIZE(gPokemonStorage, 7)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(8), GETCHUNKSIZE(gPokemonStorage, 8)},
+    {((u8 *)&gPokemonStorage) + GETBLOCKOFFSET(9), GETCHUNKSIZE(gPokemonStorage, 9)}};
 
-const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] =
-{
-    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
-    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
-};
+const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] = {
+    {((u8 *)&gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
+    {((u8 *)&gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}};
 
-const u8 gFlashSectors[] = { 0x1E, 0x1F };
+const u8 gFlashSectors[] = {0x1E, 0x1F};
 
 void ClearSaveData(void)
 {
@@ -396,8 +392,7 @@ u8 sub_81258BC(u16 a1, const struct SaveSectionLocation *location)
         if (id == 0)
             gLastWrittenSector = i;
         checksum = CalculateChecksum(gFastSaveSection->data, location[id].size);
-        if (gFastSaveSection->security == UNKNOWN_CHECK_VALUE
-         && gFastSaveSection->checksum == checksum)
+        if (gFastSaveSection->security == UNKNOWN_CHECK_VALUE && gFastSaveSection->checksum == checksum)
         {
             u16 j;
             for (j = 0; j < location[id].size; j++)

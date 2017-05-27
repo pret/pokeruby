@@ -12,8 +12,7 @@ struct Time gLocalTime;
 
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 
-static const s32 sNumDaysInMonths[12] =
-{
+static const s32 sNumDaysInMonths[12] = {
     31,
     28,
     31,

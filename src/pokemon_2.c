@@ -8,8 +8,8 @@
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "text.h"
 #include "strings2.h"
+#include "text.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -129,7 +129,7 @@ u8 sub_803C434(u8 a1)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 u8 sub_803C434(u8 a1)
 {
     asm(".syntax unified\n\
@@ -245,7 +245,7 @@ void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
     gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
     gUnknown_02024E8C.paletteTag = species;
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
+    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64; //Why do I have to cast this?
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
@@ -278,24 +278,24 @@ void DecryptBoxMon(struct BoxPokemon *boxMon)
     }
 }
 
-#define SUBSTRUCT_CASE(n, v1, v2, v3, v4)  \
-case n:                                    \
-    switch (substructType)                 \
-    {                                      \
-    case 0:                                \
-        substruct = &substructs ## n [v1]; \
-        break;                             \
-    case 1:                                \
-        substruct = &substructs ## n [v2]; \
-        break;                             \
-    case 2:                                \
-        substruct = &substructs ## n [v3]; \
-        break;                             \
-    case 3:                                \
-        substruct = &substructs ## n [v4]; \
-        break;                             \
-    }                                      \
-    break;
+#define SUBSTRUCT_CASE(n, v1, v2, v3, v4)   \
+    case n:                                 \
+        switch (substructType)              \
+        {                                   \
+        case 0:                             \
+            substruct = &substructs##n[v1]; \
+            break;                          \
+        case 1:                             \
+            substruct = &substructs##n[v2]; \
+            break;                          \
+        case 2:                             \
+            substruct = &substructs##n[v3]; \
+            break;                          \
+        case 3:                             \
+            substruct = &substructs##n[v4]; \
+            break;                          \
+        }                                   \
+        break;
 
 union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType)
 {
@@ -328,30 +328,30 @@ union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality,
 
     switch (personality % 24)
     {
-    SUBSTRUCT_CASE( 0,0,1,2,3)
-    SUBSTRUCT_CASE( 1,0,1,3,2)
-    SUBSTRUCT_CASE( 2,0,2,1,3)
-    SUBSTRUCT_CASE( 3,0,3,1,2)
-    SUBSTRUCT_CASE( 4,0,2,3,1)
-    SUBSTRUCT_CASE( 5,0,3,2,1)
-    SUBSTRUCT_CASE( 6,1,0,2,3)
-    SUBSTRUCT_CASE( 7,1,0,3,2)
-    SUBSTRUCT_CASE( 8,2,0,1,3)
-    SUBSTRUCT_CASE( 9,3,0,1,2)
-    SUBSTRUCT_CASE(10,2,0,3,1)
-    SUBSTRUCT_CASE(11,3,0,2,1)
-    SUBSTRUCT_CASE(12,1,2,0,3)
-    SUBSTRUCT_CASE(13,1,3,0,2)
-    SUBSTRUCT_CASE(14,2,1,0,3)
-    SUBSTRUCT_CASE(15,3,1,0,2)
-    SUBSTRUCT_CASE(16,2,3,0,1)
-    SUBSTRUCT_CASE(17,3,2,0,1)
-    SUBSTRUCT_CASE(18,1,2,3,0)
-    SUBSTRUCT_CASE(19,1,3,2,0)
-    SUBSTRUCT_CASE(20,2,1,3,0)
-    SUBSTRUCT_CASE(21,3,1,2,0)
-    SUBSTRUCT_CASE(22,2,3,1,0)
-    SUBSTRUCT_CASE(23,3,2,1,0)
+        SUBSTRUCT_CASE(0, 0, 1, 2, 3)
+        SUBSTRUCT_CASE(1, 0, 1, 3, 2)
+        SUBSTRUCT_CASE(2, 0, 2, 1, 3)
+        SUBSTRUCT_CASE(3, 0, 3, 1, 2)
+        SUBSTRUCT_CASE(4, 0, 2, 3, 1)
+        SUBSTRUCT_CASE(5, 0, 3, 2, 1)
+        SUBSTRUCT_CASE(6, 1, 0, 2, 3)
+        SUBSTRUCT_CASE(7, 1, 0, 3, 2)
+        SUBSTRUCT_CASE(8, 2, 0, 1, 3)
+        SUBSTRUCT_CASE(9, 3, 0, 1, 2)
+        SUBSTRUCT_CASE(10, 2, 0, 3, 1)
+        SUBSTRUCT_CASE(11, 3, 0, 2, 1)
+        SUBSTRUCT_CASE(12, 1, 2, 0, 3)
+        SUBSTRUCT_CASE(13, 1, 3, 0, 2)
+        SUBSTRUCT_CASE(14, 2, 1, 0, 3)
+        SUBSTRUCT_CASE(15, 3, 1, 0, 2)
+        SUBSTRUCT_CASE(16, 2, 3, 0, 1)
+        SUBSTRUCT_CASE(17, 3, 2, 0, 1)
+        SUBSTRUCT_CASE(18, 1, 2, 3, 0)
+        SUBSTRUCT_CASE(19, 1, 3, 2, 0)
+        SUBSTRUCT_CASE(20, 2, 1, 3, 0)
+        SUBSTRUCT_CASE(21, 3, 1, 2, 0)
+        SUBSTRUCT_CASE(22, 2, 3, 1, 0)
+        SUBSTRUCT_CASE(23, 3, 2, 1, 0)
     }
 
     return substruct;
@@ -657,10 +657,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             while (moves[i] != 355)
             {
                 u16 move = moves[i];
-                if (substruct1->moves[0] == move
-                    || substruct1->moves[1] == move
-                    || substruct1->moves[2] == move
-                    || substruct1->moves[3] == move)
+                if (substruct1->moves[0] == move || substruct1->moves[1] == move || substruct1->moves[2] == move || substruct1->moves[3] == move)
                     retVal |= gBitTable[i];
                 i++;
             }
@@ -693,23 +690,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = 0;
         if (substruct0->species && !substruct3->isEgg)
         {
-            retVal = substruct3->championRibbon
-                | (substruct3->coolRibbon << 1)
-                | (substruct3->beautyRibbon << 4)
-                | (substruct3->cuteRibbon << 7)
-                | (substruct3->smartRibbon << 10)
-                | (substruct3->toughRibbon << 13)
-                | (substruct3->winningRibbon << 16)
-                | (substruct3->victoryRibbon << 17)
-                | (substruct3->artistRibbon << 18)
-                | (substruct3->effortRibbon << 19)
-                | (substruct3->giftRibbon1 << 20)
-                | (substruct3->giftRibbon2 << 21)
-                | (substruct3->giftRibbon3 << 22)
-                | (substruct3->giftRibbon4 << 23)
-                | (substruct3->giftRibbon5 << 24)
-                | (substruct3->giftRibbon6 << 25)
-                | (substruct3->giftRibbon7 << 26);
+            retVal = substruct3->championRibbon | (substruct3->coolRibbon << 1) | (substruct3->beautyRibbon << 4) | (substruct3->cuteRibbon << 7) | (substruct3->smartRibbon << 10) | (substruct3->toughRibbon << 13) | (substruct3->winningRibbon << 16) | (substruct3->victoryRibbon << 17) | (substruct3->artistRibbon << 18) | (substruct3->effortRibbon << 19) | (substruct3->giftRibbon1 << 20) | (substruct3->giftRibbon2 << 21) | (substruct3->giftRibbon3 << 22) | (substruct3->giftRibbon4 << 23) | (substruct3->giftRibbon5 << 24) | (substruct3->giftRibbon6 << 25) | (substruct3->giftRibbon7 << 26);
         }
         break;
     default:
@@ -1093,8 +1074,7 @@ u8 CalculatePlayerPartyCount(void)
 {
     gPlayerPartyCount = 0;
 
-    while (gPlayerPartyCount < 6
-        && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+    while (gPlayerPartyCount < 6 && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gPlayerPartyCount++;
     }
@@ -1106,8 +1086,7 @@ u8 CalculateEnemyPartyCount(void)
 {
     gEnemyPartyCount = 0;
 
-    while (gEnemyPartyCount < 6
-        && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+    while (gEnemyPartyCount < 6 && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gEnemyPartyCount++;
     }
@@ -1126,9 +1105,7 @@ u8 sub_803DAA0(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
             aliveCount++;
     }
 
@@ -1164,13 +1141,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
         if (gSecretBaseRecord.partySpecies[i])
         {
             CreateMon(&gEnemyParty[i],
-                gSecretBaseRecord.partySpecies[i],
-                gSecretBaseRecord.partyLevels[i],
-                15,
-                1,
-                gSecretBaseRecord.partyPersonality[i],
-                2,
-                0);
+                      gSecretBaseRecord.partySpecies[i],
+                      gSecretBaseRecord.partyLevels[i],
+                      15,
+                      1,
+                      gSecretBaseRecord.partyPersonality[i],
+                      2,
+                      0);
 
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
 

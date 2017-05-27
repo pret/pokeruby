@@ -162,8 +162,7 @@ EWRAM_DATA bool8 gLinkOpen = {0};
 static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
 static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");
 
-static const u8 sDebugMessages[7][12] =
-{
+static const u8 sDebugMessages[7][12] = {
     _("せつぞく　ちゅうです"),
     _("せつぞく　できません"),
     _("かくにん　ちゅうです"),
@@ -175,20 +174,21 @@ static const u8 sDebugMessages[7][12] =
 
 static const u8 sColorCodes[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}");
 
-static const u32 sBlockRequestLookupTable[5 * 2] =
-{
+static const u32 sBlockRequestLookupTable[5 * 2] = {
     (u32)gBlockSendBuffer, 200,
     (u32)gBlockSendBuffer, 200,
     (u32)gBlockSendBuffer, 100,
     (u32)gBlockSendBuffer, 220,
-    (u32)gBlockSendBuffer,  40,
+    (u32)gBlockSendBuffer, 40,
 };
 
 static const u8 sTestString[] = _("テストな");
 
-ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
+ALIGNED(4)
+static const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) static const u8 sEmptyString[] = _("");
+ALIGNED(4)
+static const u8 sEmptyString[] = _("");
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -275,10 +275,7 @@ static void InitLocalLinkPlayer(void)
 {
     s32 i;
 
-    localLinkPlayer.trainerId = gSaveBlock2.playerTrainerId[0]
-                              | (gSaveBlock2.playerTrainerId[1] << 8)
-                              | (gSaveBlock2.playerTrainerId[2] << 16)
-                              | (gSaveBlock2.playerTrainerId[3] << 24);
+    localLinkPlayer.trainerId = gSaveBlock2.playerTrainerId[0] | (gSaveBlock2.playerTrainerId[1] << 8) | (gSaveBlock2.playerTrainerId[2] << 16) | (gSaveBlock2.playerTrainerId[3] << 24);
 
     for (i = 0; i < (s32)sizeof(localLinkPlayer.name); i++)
         localLinkPlayer.name[i] = gSaveBlock2.playerName[i]; // UB: reads past the end of "playerName" array
@@ -525,8 +522,7 @@ static void ProcessRecvCmds(u8 unusedParam)
                     struct LinkPlayer *linkPlayer = &gLinkPlayers[i];
                     *linkPlayer = block->linkPlayer;
 
-                    if (strcmp(block->magic1, sMagic)
-                     || strcmp(block->magic2, sMagic))
+                    if (strcmp(block->magic1, sMagic) || strcmp(block->magic2, sMagic))
                     {
                         SetMainCallback2(CB2_LinkError);
                     }
@@ -907,10 +903,7 @@ bool8 sub_8007ECC(void)
 
 u8 GetBlockReceivedStatus(void)
 {
-    return (gBlockReceived[3] << 3)
-         | (gBlockReceived[2] << 2)
-         | (gBlockReceived[1] << 1)
-         | gBlockReceived[0];
+    return (gBlockReceived[3] << 3) | (gBlockReceived[2] << 2) | (gBlockReceived[1] << 1) | gBlockReceived[0];
 }
 
 static void SetBlockReceivedFlag(u8 multiplayerId)
@@ -1062,8 +1055,7 @@ void sub_800826C(void)
 
     for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
-        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId
-         || StringCompareWithoutExtCtrlCodes(gSavedLinkPlayers[i].name, gLinkPlayers[i].name))
+        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId || StringCompareWithoutExtCtrlCodes(gSavedLinkPlayers[i].name, gLinkPlayers[i].name))
         {
             gLinkErrorOccurred = TRUE;
             CloseLink();
@@ -1566,8 +1558,7 @@ void LinkVSync(void)
             break;
         }
     }
-    else if (gLink.state == LINK_STATE_CONN_ESTABLISHED
-          || gLink.state == LINK_STATE_HANDSHAKE)
+    else if (gLink.state == LINK_STATE_CONN_ESTABLISHED || gLink.state == LINK_STATE_HANDSHAKE)
     {
         sNumVBlanksWithoutSerialIntr++;
 
@@ -1649,8 +1640,7 @@ static bool8 DoHandshake(void)
 
     for (i = 0; i < 4; i++)
     {
-        if ((gLink.tempRecvBuffer[i] & ~0x3) == SLAVE_HANDSHAKE
-         || gLink.tempRecvBuffer[i] == MASTER_HANDSHAKE)
+        if ((gLink.tempRecvBuffer[i] & ~0x3) == SLAVE_HANDSHAKE || gLink.tempRecvBuffer[i] == MASTER_HANDSHAKE)
         {
             playerCount++;
 
@@ -1671,9 +1661,7 @@ static bool8 DoHandshake(void)
     // 1. There are multiple players.
     // 2. The number of players agrees with the last attempt.
     // 3. Player no. 0 is identifying as the master.
-    if (gLink.playerCount > 1
-     && gLink.playerCount == sHandshakePlayerCount
-     && gLink.tempRecvBuffer[0] == MASTER_HANDSHAKE)
+    if (gLink.playerCount > 1 && gLink.playerCount == sHandshakePlayerCount && gLink.tempRecvBuffer[0] == MASTER_HANDSHAKE)
         return TRUE;
 
     if (gLink.playerCount > 1)
@@ -1697,7 +1685,7 @@ static void DoRecv(void)
     {
         for (i = 0; i < gLink.playerCount; i++)
             if (gLink.checksum != recvBuffer[i] && sChecksumAvailable)
-                    gLink.badChecksum = TRUE;
+                gLink.badChecksum = TRUE;
 
         gLink.checksum = 0;
         sChecksumAvailable = TRUE;

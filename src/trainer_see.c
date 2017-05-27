@@ -25,9 +25,9 @@ bool8 CheckTrainers(void)
 
     for (i = 0; i < 16; i++)
     {
-        if ( gMapObjects[i].active )
-            if ( gMapObjects[i].trainerType == 1 ||  gMapObjects[i].trainerType == 3 )
-                if ( CheckTrainer(i) )
+        if (gMapObjects[i].active)
+            if (gMapObjects[i].trainerType == 1 || gMapObjects[i].trainerType == 3)
+                if (CheckTrainer(i))
                     return TRUE;
     }
     return FALSE;
@@ -35,26 +35,26 @@ bool8 CheckTrainers(void)
 
 bool8 CheckTrainer(u8 trainer)
 {
-   u8 *scriptPtr = GetFieldObjectScriptPointerByFieldObjectId(trainer);
+    u8 *scriptPtr = GetFieldObjectScriptPointerByFieldObjectId(trainer);
 
-   if (GetTrainerFlagFromScriptPointer(scriptPtr))
-       return FALSE;
-   else
-   {
-       struct MapObject *trainerObj = &gMapObjects[trainer];
-       u8 canApproach = TrainerCanApproachPlayer(trainerObj);
+    if (GetTrainerFlagFromScriptPointer(scriptPtr))
+        return FALSE;
+    else
+    {
+        struct MapObject *trainerObj = &gMapObjects[trainer];
+        u8 canApproach = TrainerCanApproachPlayer(trainerObj);
 
-       if (canApproach != 0)
+        if (canApproach != 0)
         {
-           TrainerWantsBattle(trainer, scriptPtr);
-           sub_80842C8(trainerObj, (canApproach - 1));
-           return TRUE;
+            TrainerWantsBattle(trainer, scriptPtr);
+            sub_80842C8(trainerObj, (canApproach - 1));
+            return TRUE;
         }
-       else
-       {
-           return FALSE;
-       }
-   }
+        else
+        {
+            return FALSE;
+        }
+    }
 }
 
 bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
@@ -64,7 +64,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     u8 playerCoord;
 
     PlayerGetDestCoords(&x, &y);
-    if ( trainerObj->trainerType == 1 ) // trainers that don't spin
+    if (trainerObj->trainerType == 1) // trainers that don't spin
     {
         playerCoord = gIsTrainerInRange[trainerObj->mapobj_unk_18 - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
         return CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, trainerObj->mapobj_unk_18);
@@ -74,7 +74,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
         for (i = 0; i < 4; i++)
         {
             playerCoord = gIsTrainerInRange[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-            if ( CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, i + 1) ) // directions are 1-4 instead of 0-3. south north west east
+            if (CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, i + 1)) // directions are 1-4 instead of 0-3. south north west east
                 return playerCoord;
         }
         return FALSE;
@@ -83,9 +83,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
 
 bool8 IsTrainerInRangeSouth(struct MapObject *trainerObj, s16 vision, s16 x, s16 y)
 {
-    if ( trainerObj->coords2.x == x
-        && y > trainerObj->coords2.y
-        && y <= trainerObj->coords2.y + vision )
+    if (trainerObj->coords2.x == x && y > trainerObj->coords2.y && y <= trainerObj->coords2.y + vision)
         return (y - trainerObj->coords2.y);
     else
         return FALSE;
@@ -93,9 +91,7 @@ bool8 IsTrainerInRangeSouth(struct MapObject *trainerObj, s16 vision, s16 x, s16
 
 bool8 IsTrainerInRangeNorth(struct MapObject *trainerObj, s16 vision, s16 x, s16 y)
 {
-    if ( trainerObj->coords2.x == x
-        && y < trainerObj->coords2.y
-        && y >= trainerObj->coords2.y - vision )
+    if (trainerObj->coords2.x == x && y < trainerObj->coords2.y && y >= trainerObj->coords2.y - vision)
         return (trainerObj->coords2.y - y);
     else
         return FALSE;
@@ -103,9 +99,7 @@ bool8 IsTrainerInRangeNorth(struct MapObject *trainerObj, s16 vision, s16 x, s16
 
 bool8 IsTrainerInRangeWest(struct MapObject *trainerObj, s16 vision, s16 x, s16 y)
 {
-    if ( trainerObj->coords2.y == y
-        && x < trainerObj->coords2.x
-        && x >= trainerObj->coords2.x - vision )
+    if (trainerObj->coords2.y == y && x < trainerObj->coords2.x && x >= trainerObj->coords2.x - vision)
         return (trainerObj->coords2.x - x);
     else
         return FALSE;
@@ -113,9 +107,7 @@ bool8 IsTrainerInRangeWest(struct MapObject *trainerObj, s16 vision, s16 x, s16 
 
 bool8 IsTrainerInRangeEast(struct MapObject *trainerObj, s16 vision, s16 x, s16 y)
 {
-    if ( trainerObj->coords2.y == y
-        && x > trainerObj->coords2.x
-        && x <= trainerObj->coords2.x + vision )
+    if (trainerObj->coords2.y == y && x > trainerObj->coords2.x && x <= trainerObj->coords2.x + vision)
         return (x - trainerObj->coords2.x);
     else
         return FALSE;
@@ -192,7 +184,8 @@ void RunTrainerSeeFuncList(u8 taskId)
     if (!trainerObj->active)
         SwitchTaskToFollowupFunc(taskId);
     else
-        while (gTrainerSeeFuncList[task->data[0]](taskId, task, trainerObj));
+        while (gTrainerSeeFuncList[task->data[0]](taskId, task, trainerObj))
+            ;
 }
 
 u8 sub_8084394() // cant be void because it is called with RunTrainerSeeFuncList with arguments.
@@ -233,16 +226,16 @@ s8 sub_808441C(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     if (!(FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)) || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
-            if (task->data[3])
-            {
-                FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->mapobj_unk_18));
-                task->data[3]--;
-            }
-            else
-            {
-                FieldObjectSetSpecialAnim(trainerObj, 0x3E);
-                task->data[0]++;
-            }
+        if (task->data[3])
+        {
+            FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->mapobj_unk_18));
+            task->data[3]--;
+        }
+        else
+        {
+            FieldObjectSetSpecialAnim(trainerObj, 0x3E);
+            task->data[0]++;
+        }
     }
     return 0;
 }
@@ -259,8 +252,7 @@ s8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainerObj)
     sub_805C754(trainerObj);
 
     playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj)
-     && !FieldObjectClearAnimIfSpecialAnimFinished(playerObj))
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj) && !FieldObjectClearAnimIfSpecialAnimFinished(playerObj))
         return 0;
 
     sub_80597E8();
@@ -273,17 +265,15 @@ s8 sub_8084534(u8 taskId, struct Task *task, struct MapObject *trainerObj) // te
 {
     struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if ( !FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj)
-        || FieldObjectClearAnimIfSpecialAnimFinished(playerObj) )
-    SwitchTaskToFollowupFunc(taskId);
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj) || FieldObjectClearAnimIfSpecialAnimFinished(playerObj))
+        SwitchTaskToFollowupFunc(taskId);
 
     return 0;
 }
 
 s8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-        || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x59);
         task->data[0]++;
@@ -293,7 +283,7 @@ s8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
 s8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if ( FieldObjectClearAnimIfSpecialAnimFinished(trainerObj) )
+    if (FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
         task->data[0] = 3;
 
     return 0;
@@ -301,8 +291,7 @@ s8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
 s8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-        || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x3E);
         task->data[0]++;
@@ -437,8 +426,7 @@ void objc_exclamation_mark_probably(struct Sprite *sprite)
 {
     u8 mapObjId;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjId)
-     || sprite->animEnded)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjId) || sprite->animEnded)
     {
         FieldEffectStop(sprite, (u8)sprite->data7);
     }

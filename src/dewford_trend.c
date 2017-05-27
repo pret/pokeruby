@@ -78,7 +78,7 @@ void UpdateDewfordTrendPerDay(u16 a)
                 if (r5->unk1_6)
                     r5->unk0_0 = sp4;
                 else
-                //_080FA2FA
+                    //_080FA2FA
                     r5->unk0_0 = r5->unk0_7 - sp4;
             }
             else
@@ -216,7 +216,8 @@ void sub_80FA5E4(void)
 
     if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 < 2)
     {
-        asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
+        asm("" ::
+                : "r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
         if (!gSaveBlock1.easyChatPairs[0].unk1_6 && gSaveBlock1.easyChatPairs[1].unk1_6)
             result = 1;
     }

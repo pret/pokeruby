@@ -63,8 +63,7 @@ static void task08_080C9820(u8 taskId)
     ScriptContext2_Enable();
     gPlayerAvatar.unk6 = 1;
     mapObjId = gPlayerAvatar.mapObjectId;
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
-     || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId]) || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
     {
         if (gMapHeader.mapType == 5)
         {

@@ -42,7 +42,7 @@ void MonFaintFromPoisonOnField(u8 partyMember)
     u32 val = 0;
 
     AdjustFriendship(pkmn, 7);
-    SetMonData(pkmn, MON_DATA_STATUS, (u8*)&val);
+    SetMonData(pkmn, MON_DATA_STATUS, (u8 *)&val);
     GetMonData(pkmn, MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
@@ -52,8 +52,7 @@ bool32 CheckMonFaintedFromPoison(u8 partyMember)
     struct Pokemon *pkmn = &gPlayerParty[partyMember];
 
     // UB: Too few arguments for function 'GetMonData'
-    if (CheckMonIsValid(pkmn) && GetMonData(pkmn, MON_DATA_HP) == 0
-     && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
+    if (CheckMonIsValid(pkmn) && GetMonData(pkmn, MON_DATA_HP) == 0 && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
         return TRUE;
     else
         return FALSE;
@@ -119,8 +118,7 @@ s32 overworld_poison(void)
         u32 hp;
 
         // UB: Too few arguments for function 'GetMonData'
-        if (GetMonData(pkmn, MON_DATA_SANITY_BIT2) != 0
-         && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
+        if (GetMonData(pkmn, MON_DATA_SANITY_BIT2) != 0 && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
         {
             hp = GetMonData(pkmn, MON_DATA_HP);
             if (hp != 0)

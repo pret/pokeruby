@@ -192,7 +192,7 @@ void sub_814A904(void)
 void sub_814A958(u8 a1)
 {
     struct Subsprite *cursub;
-    u8 v2; // r7@1
+    u8 v2;  // r7@1
     s16 v3; // r2@1
     s32 v5; // r0@1
     s32 v6; // r3@1
@@ -202,7 +202,7 @@ void sub_814A958(u8 a1)
 
     cursub = &gMenuCursorSubsprites[0];
     negone = -1;
-    cursub = (struct Subsprite){0,2};
+    cursub = (struct Subsprite){0, 2};
     cursub->x = negone;
     cursub++;
 
@@ -241,8 +241,7 @@ void sub_814A958(u8 a1)
             cursub++;
             v2 = v2 + 1;
             v6 = ((v7 >> 16) - v3) & 0xFFFF;
-        }
-        while (v7 - v3 > 7);
+        } while (v7 - v3 > 7);
     }
     *cursub = gUnknown_0842F790;
     cursub->x = v6 + v3 - 7;
@@ -254,7 +253,7 @@ void sub_814A958(u8 a1)
     return;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_814A958(u8 a1)
 {
     asm(".syntax unified\n\
@@ -534,7 +533,7 @@ u8 CreateBlendedOutlineCursor(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
     if (a2 == 0xFFFF)
     {
         gUnknown_0203A360[a3 & 0xF] = a4;
-        if (LoadSpritePalette(&gUnknown_0842F248) != 0xFF )
+        if (LoadSpritePalette(&gUnknown_0842F248) != 0xFF)
         {
             a2 = 0xFFF1;
             v8 = 0;
