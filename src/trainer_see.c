@@ -373,9 +373,9 @@ void sub_80846E4(u8 taskId)
         mapObj->mapobj_bit_7 = 0;
 }
 
-void sub_8084794(u32 var)
+void sub_8084794(struct MapObject *var)
 {
-    StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80846E4, 0)].data[1], var);
+    StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80846E4, 0)].data[1], (u32)var);
 }
 
 void sub_80847C8(void)

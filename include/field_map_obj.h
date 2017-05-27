@@ -89,4 +89,7 @@ extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
 
+extern u32 gUnknown_0202FF84[];
+
+int state_to_direction(u8, u8, u8);
 #endif // GUARD_FIELD_MAP_OBJ_H
