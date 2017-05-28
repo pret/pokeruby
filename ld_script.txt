@@ -92,7 +92,8 @@ SECTIONS {
         src/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
         asm/field_map_obj.o(.text);
-        src/field_map_obj.o(.text_fmocb2_c);
+		src/field_map_obj.o(.text_b);
+		asm/field_map_obj.o(.text_805fd18);
         src/field_ground_effect.o(.text);
         asm/field_ground_effect.o(.text);
         src/field_map_obj_helpers.o(.text);

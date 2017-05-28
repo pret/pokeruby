@@ -33,7 +33,7 @@ void SetPlayerAvatarTransitionFlags(u16 a);
 // PlayerAvatarTransition_Underwater
 // sub_80591F4
 void sub_8059204(void);
-u8 player_get_x22(void);
+// player_get_x22
 void PlayerSetAnimId(u8 a, u8 b);
 void PlayerGoSpeed0(u8 a);
 void sub_80593C4(u8 a);
