@@ -7,69 +7,6 @@
 
 	.text
 
-	thumb_func_start UpdateTVScreensOnMap
-UpdateTVScreensOnMap: @ 80BD908
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r0, _080BD938 @ =0x00000831
-	bl FlagSet
-	bl CheckForBigMovieOrEmergencyNewsOnTV
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080BD92C
-	cmp r0, 0x2
-	beq _080BD97E
-	ldr r0, _080BD93C @ =gSaveBlock1
-	ldrh r0, [r0, 0x4]
-	cmp r0, 0xD
-	bne _080BD940
-_080BD92C:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x3
-	bl SetTVMetatilesOnMap
-	b _080BD97E
-	.align 2, 0
-_080BD938: .4byte 0x00000831
-_080BD93C: .4byte gSaveBlock1
-_080BD940:
-	ldr r0, _080BD984 @ =0x00000832
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _080BD97E
-	bl sub_80BD8B8
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _080BD96E
-	bl sub_80BECA0
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _080BD96E
-	bl IsTVShowInSearchOfTrainersAiring
-	lsls r0, 24
-	cmp r0, 0
-	beq _080BD97E
-_080BD96E:
-	ldr r0, _080BD988 @ =0x00000831
-	bl FlagReset
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x3
-	bl SetTVMetatilesOnMap
-_080BD97E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BD984: .4byte 0x00000832
-_080BD988: .4byte 0x00000831
-	thumb_func_end UpdateTVScreensOnMap
-
 	thumb_func_start SetTVMetatilesOnMap
 SetTVMetatilesOnMap: @ 80BD98C
 	push {r4-r7,lr}

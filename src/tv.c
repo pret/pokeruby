@@ -293,6 +293,36 @@ u8 sub_80BD8B8(void)
     return retval;
 }
 
+u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
+void SetTVMetatilesOnMap(s32, s32, u16);
+bool8 sub_80BECA0(void);
+bool8 IsTVShowInSearchOfTrainersAiring(void);
+
+void UpdateTVScreensOnMap(s32 a0, s32 a1)
+{
+    u8 bigMovieOrEmergencyNewsOnTv;
+    FlagSet(SYS_TV_WATCH);
+    bigMovieOrEmergencyNewsOnTv = CheckForBigMovieOrEmergencyNewsOnTV();
+    switch (bigMovieOrEmergencyNewsOnTv)
+    {
+        case 1:
+            SetTVMetatilesOnMap(a0, a1, 0x3);
+            break;
+        case 2:
+            break;
+        default:
+            if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+            {
+                SetTVMetatilesOnMap(a0, a1, 0x3);
+            }
+            else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            {
+                FlagReset(SYS_TV_WATCH);
+                SetTVMetatilesOnMap(a0, a1, 0x3);
+            }
+    }
+}
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 
