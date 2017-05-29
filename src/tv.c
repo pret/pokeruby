@@ -276,6 +276,23 @@ u8 special_0x44(void)
 }
 #endif
 
+u8 sub_80BDA30(void);
+
+u8 sub_80BD8B8(void)
+{
+    u8 retval;
+    retval = special_0x44();
+    if (retval == 0xff)
+    {
+        return 0xff;
+    }
+    if (gSaveBlock1.outbreakPokemonSpecies != 0 && gSaveBlock1.tvShows[retval].common.var00 == TVSHOW_MASS_OUTBREAK)
+    {
+        return sub_80BDA30();
+    }
+    return retval;
+}
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 

@@ -7,47 +7,6 @@
 
 	.text
 
-	thumb_func_start sub_80BD8B8
-sub_80BD8B8: @ 80BD8B8
-	push {lr}
-	bl special_0x44
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xFF
-	bne _080BD8CA
-	movs r0, 0xFF
-	b _080BD902
-_080BD8CA:
-	ldr r2, _080BD8F4 @ =gSaveBlock1
-	ldr r3, _080BD8F8 @ =0x00002afc
-	adds r0, r2, r3
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _080BD900
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r2, _080BD8FC @ =0x00002738
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0x29
-	bne _080BD900
-	bl sub_80BDA30
-	lsls r0, 24
-	lsrs r0, 24
-	b _080BD902
-	.align 2, 0
-_080BD8F4: .4byte gSaveBlock1
-_080BD8F8: .4byte 0x00002afc
-_080BD8FC: .4byte 0x00002738
-_080BD900:
-	adds r0, r1, 0
-_080BD902:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BD8B8
-
 	thumb_func_start UpdateTVScreensOnMap
 UpdateTVScreensOnMap: @ 80BD908
 	push {r4,r5,lr}
