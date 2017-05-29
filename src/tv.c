@@ -134,6 +134,148 @@ void sub_80BE074(void);
 void sub_80BE778(void);
 void sub_80BEB20(void);
 
+u8 sub_80BFB54(u8);
+
+#ifdef NONMATCHING
+u8 special_0x44(void)
+{
+    u8 i;
+    u8 j;
+    u8 var01;
+    TVShow *tvShow;
+    for (i=5; i<24; i++)
+    {
+        if (gSaveBlock1.tvShows[i].common.var00 == 0)
+        {
+            break;
+        }
+    }
+    i = Random() % i;
+    j = i;
+    do
+    {
+        if (sub_80BFB54(gSaveBlock1.tvShows[i].common.var00) != 4)
+        {
+            var01 = gSaveBlock1.tvShows[i].common.var01;
+        } else
+        {
+            tvShow = &gSaveBlock1.tvShows[i];
+            if (tvShow->massOutbreak.var16 != 0) {
+                continue;
+            } else {
+                var01 = tvShow->common.var01;
+            }
+        }
+        if (var01 == 1)
+        {
+            return i;
+        }
+    } while (i == 0 ? i = 23 : i --, i != j);
+    return 0xff;
+}
+#else
+__attribute__((naked))
+u8 special_0x44(void)
+{
+    asm(".syntax unified\n"
+    "	push {r4-r7,lr}\n"
+    "	mov r7, r9\n"
+    "	mov r6, r8\n"
+    "	push {r6,r7}\n"
+    "	movs r4, 0x5\n"
+    "	ldr r1, _080BD874 @ =gSaveBlock1\n"
+    "	ldr r2, _080BD878 @ =0x000027ec\n"
+    "	adds r0, r1, r2\n"
+    "	ldrb r0, [r0]\n"
+    "	cmp r0, 0\n"
+    "	beq _080BD834\n"
+    "	adds r2, r1, 0\n"
+    "	ldr r1, _080BD87C @ =0x00002738\n"
+    "_080BD81A:\n"
+    "	adds r0, r4, 0x1\n"
+    "	lsls r0, 24\n"
+    "	lsrs r4, r0, 24\n"
+    "	cmp r4, 0x17\n"
+    "	bhi _080BD834\n"
+    "	lsls r0, r4, 3\n"
+    "	adds r0, r4\n"
+    "	lsls r0, 2\n"
+    "	adds r0, r2\n"
+    "	adds r0, r1\n"
+    "	ldrb r0, [r0]\n"
+    "	cmp r0, 0\n"
+    "	bne _080BD81A\n"
+    "_080BD834:\n"
+    "	bl Random\n"
+    "	lsls r0, 16\n"
+    "	lsrs r0, 16\n"
+    "	adds r1, r4, 0\n"
+    "	bl __modsi3\n"
+    "	lsls r0, 24\n"
+    "	lsrs r4, r0, 24\n"
+    "	mov r8, r4\n"
+    "	ldr r7, _080BD874 @ =gSaveBlock1\n"
+    "	ldr r0, _080BD87C @ =0x00002738\n"
+    "	adds r0, r7\n"
+    "	mov r9, r0\n"
+    "_080BD850:\n"
+    "	lsls r0, r4, 3\n"
+    "	adds r0, r4\n"
+    "	lsls r6, r0, 2\n"
+    "	adds r5, r6, r7\n"
+    "	ldr r1, _080BD87C @ =0x00002738\n"
+    "	adds r0, r5, r1\n"
+    "	ldrb r0, [r0]\n"
+    "	bl sub_80BFB54\n"
+    "	lsls r0, 24\n"
+    "	lsrs r0, 24\n"
+    "	cmp r0, 0x4\n"
+    "	beq _080BD884\n"
+    "	ldr r2, _080BD880 @ =0x00002739\n"
+    "	adds r0, r5, r2\n"
+    "	ldrb r0, [r0]\n"
+    "	b _080BD890\n"
+    "	.align 2, 0\n"
+    "_080BD874: .4byte gSaveBlock1\n"
+    "_080BD878: .4byte 0x000027ec\n"
+    "_080BD87C: .4byte 0x00002738\n"
+    "_080BD880: .4byte 0x00002739\n"
+    "_080BD884:\n"
+    "	mov r0, r9\n"
+    "	adds r1, r6, r0\n"
+    "	ldrh r0, [r1, 0x16]\n"
+    "	cmp r0, 0\n"
+    "	bne _080BD898\n"
+    "	ldrb r0, [r1, 0x1]\n"
+    "_080BD890:\n"
+    "	cmp r0, 0x1\n"
+    "	bne _080BD898\n"
+    "	adds r0, r4, 0\n"
+    "	b _080BD8AC\n"
+    "_080BD898:\n"
+    "	cmp r4, 0\n"
+    "	bne _080BD8A0\n"
+    "	movs r4, 0x17\n"
+    "	b _080BD8A6\n"
+    "_080BD8A0:\n"
+    "	subs r0, r4, 0x1\n"
+    "	lsls r0, 24\n"
+    "	lsrs r4, r0, 24\n"
+    "_080BD8A6:\n"
+    "	cmp r4, r8\n"
+    "	bne _080BD850\n"
+    "	movs r0, 0xFF\n"
+    "_080BD8AC:\n"
+    "	pop {r3,r4}\n"
+    "	mov r8, r3\n"
+    "	mov r9, r4\n"
+    "	pop {r4-r7}\n"
+    "	pop {r1}\n"
+    "	bx r1\n"
+    ".syntax divided\n");
+}
+#endif
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 
