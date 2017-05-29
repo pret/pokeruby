@@ -347,6 +347,24 @@ void TurnOffTVScreen(void)
     DrawWholeMapView();
 }
 
+u8 sub_80BDA0C(void)
+{
+    return gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var00;
+}
+
+u8 sub_80BDA30(void)
+{
+    u8 showIdx;
+    for (showIdx=0; showIdx<24; showIdx++)
+    {
+        if (gSaveBlock1.tvShows[showIdx].common.var00 != 0 && gSaveBlock1.tvShows[showIdx].common.var00 != TVSHOW_MASS_OUTBREAK && gSaveBlock1.tvShows[showIdx].common.var01 == 1)
+        {
+            return showIdx;
+        }
+    }
+    return 0xff;
+}
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 

@@ -7,65 +7,6 @@
 
 	.text
 
-	thumb_func_start sub_80BDA0C
-sub_80BDA0C: @ 80BDA0C
-	ldr r2, _080BDA24 @ =gSaveBlock1
-	ldr r0, _080BDA28 @ =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, _080BDA2C @ =0x00002738
-	adds r0, r1
-	ldrb r0, [r0]
-	bx lr
-	.align 2, 0
-_080BDA24: .4byte gSaveBlock1
-_080BDA28: .4byte gSpecialVar_0x8004
-_080BDA2C: .4byte 0x00002738
-	thumb_func_end sub_80BDA0C
-
-	thumb_func_start sub_80BDA30
-sub_80BDA30: @ 80BDA30
-	push {r4,lr}
-	movs r2, 0
-	ldr r3, _080BDA5C @ =gSaveBlock1
-_080BDA36:
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0, r3
-	ldr r4, _080BDA60 @ =0x00002738
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080BDA64
-	cmp r0, 0x29
-	beq _080BDA64
-	adds r4, 0x1
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080BDA64
-	adds r0, r2, 0
-	b _080BDA70
-	.align 2, 0
-_080BDA5C: .4byte gSaveBlock1
-_080BDA60: .4byte 0x00002738
-_080BDA64:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x17
-	bls _080BDA36
-	movs r0, 0xFF
-_080BDA70:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BDA30
-
 	thumb_func_start special_0x4a
 special_0x4a: @ 80BDA78
 	push {lr}
