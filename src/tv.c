@@ -294,11 +294,11 @@ u8 sub_80BD8B8(void)
 }
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
-void SetTVMetatilesOnMap(s32, s32, u16);
+void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80BECA0(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
-void UpdateTVScreensOnMap(s32 a0, s32 a1)
+void UpdateTVScreensOnMap(int a0, int a1)
 {
     u8 bigMovieOrEmergencyNewsOnTv;
     FlagSet(SYS_TV_WATCH);
@@ -320,6 +320,22 @@ void UpdateTVScreensOnMap(s32 a0, s32 a1)
                 FlagReset(SYS_TV_WATCH);
                 SetTVMetatilesOnMap(a0, a1, 0x3);
             }
+    }
+}
+
+void SetTVMetatilesOnMap(int width, int height, u16 tileId)
+{
+    int x;
+    int y;
+    for (y=0; y<height; y++)
+    {
+        for (x=0; x<width; x++)
+        {
+            if (MapGridGetMetatileBehaviorAt(x, y) == 0x86)
+            {
+                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+            }
+        }
     }
 }
 
