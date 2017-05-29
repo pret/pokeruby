@@ -7,21 +7,6 @@
 
 	.text
 
-	thumb_func_start TurnOffTVScreen
-TurnOffTVScreen: @ 80BD9F0
-	push {lr}
-	ldr r1, _080BDA08 @ =gUnknown_03004870
-	ldr r0, [r1]
-	ldr r1, [r1, 0x4]
-	movs r2, 0x2
-	bl SetTVMetatilesOnMap
-	bl DrawWholeMapView
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BDA08: .4byte gUnknown_03004870
-	thumb_func_end TurnOffTVScreen
-
 	thumb_func_start sub_80BDA0C
 sub_80BDA0C: @ 80BDA0C
 	ldr r2, _080BDA24 @ =gSaveBlock1

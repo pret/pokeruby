@@ -63,6 +63,13 @@ struct MapData
     struct Tileset *secondaryTileset;
 };
 
+struct BackupMapData
+{
+    s32 width;
+    s32 height;
+    u16 *map;
+};
+
 struct MapObjectTemplate
 {
     /*0x00*/ u8 localId;

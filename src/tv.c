@@ -3,7 +3,9 @@
 #include "tv.h"
 #include "data2.h"
 #include "event_data.h"
+#include "fieldmap.h"
 #include "field_message_box.h"
+#include "field_camera.h"
 #include "flags.h"
 #include "rng.h"
 #include "string_util.h"
@@ -337,6 +339,12 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
             }
         }
     }
+}
+
+void TurnOffTVScreen(void)
+{
+    SetTVMetatilesOnMap(gUnknown_03004870.width, gUnknown_03004870.height, 0x2);
+    DrawWholeMapView();
 }
 
 asm(".section .text_a");
