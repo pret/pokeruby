@@ -29,15 +29,20 @@ struct UnkTvStruct
 };
 
 struct UnkBattleStruct {
-    u16 var00;
-    u8 var02[3];
+    u8 var00;
+    u8 var01;
+    u8 var02;
+    u8 var03;
+    u8 var04;
     u8 var05_0:1;
     u8 var05_1:1;
     u8 var05_pad2:6;
     u16 var06;
     u8 pad08[24];
     u16 var20;
-    u8 pad22[6];
+    u16 var22;
+    u16 var24;
+    u16 var26;
     u16 var28;
     u8 var2a[11];
     u8 var35;
@@ -443,6 +448,53 @@ void ResetGabbyAndTy(void)
 }
 #endif
 
+void TakeTVShowInSearchOfTrainersOffTheAir(void);
+
+void GabbyAndTyBeforeInterview(void)
+{
+    u8 i;
+    gSaveBlock1.gabbyAndTyData.mon1 = gUnknown_030042E0.var06;
+    gSaveBlock1.gabbyAndTyData.mon2 = gUnknown_030042E0.var26;
+    gSaveBlock1.gabbyAndTyData.move1 = gUnknown_030042E0.var22;
+    if (gSaveBlock1.gabbyAndTyData.val9 != 0xff)
+    {
+        gSaveBlock1.gabbyAndTyData.val9 ++;
+    }
+    gSaveBlock1.gabbyAndTyData.valA_0 = gUnknown_030042E0.var05_0;
+    if (gUnknown_030042E0.var00)
+    {
+        gSaveBlock1.gabbyAndTyData.valA_1 = 1;
+    } else
+    {
+        gSaveBlock1.gabbyAndTyData.valA_1 = 0;
+    }
+    if (gUnknown_030042E0.var03)
+    {
+        gSaveBlock1.gabbyAndTyData.valA_2 = 1;
+    } else
+    {
+        gSaveBlock1.gabbyAndTyData.valA_2 = 0;
+    }
+    if (!gUnknown_030042E0.var05_1)
+    {
+        for (i=0; i < 11; i++)
+        {
+            if (gUnknown_030042E0.var36[i] != 0)
+            {
+                gSaveBlock1.gabbyAndTyData.valA_3 = 1;
+                break;
+            }
+        }
+    } else
+    {
+        gSaveBlock1.gabbyAndTyData.valA_3 = 1;
+    }
+    TakeTVShowInSearchOfTrainersOffTheAir();
+    if (gSaveBlock1.gabbyAndTyData.move1 == 0)
+    {
+        FlagSet(1);
+    }
+}
 
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
