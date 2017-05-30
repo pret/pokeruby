@@ -447,10 +447,10 @@ struct UnknownSaveStruct2ABC {
 struct GabbyAndTyData {
     /*2b10*/ u16 mon1;
     /*2b12*/ u16 mon2;
-    /*2b14*/ u16 move1;
-    /*2b16*/ u16 move2;
+    /*2b14*/ u16 lastMove;
+    /*2b16*/ u16 quote;
     /*2b18*/ u8 mapnum;
-    /*2b19*/ u8 val9;     // counter?
+    /*2b19*/ u8 battleNum;
     /*2b1a*/ u8 valA_0:1;
     /*2b1a*/ u8 valA_1:1;
     /*2b1a*/ u8 valA_2:1;

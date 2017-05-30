@@ -385,8 +385,8 @@ void ResetGabbyAndTy(void)
 {
     gSaveBlock1.gabbyAndTyData.mon1 = 0;
     gSaveBlock1.gabbyAndTyData.mon2 = 0;
-    gSaveBlock1.gabbyAndTyData.move1 = 0;
-    gSaveBlock1.gabbyAndTyData.move2 = 0xffff;
+    gSaveBlock1.gabbyAndTyData.lastMove = 0;
+    gSaveBlock1.gabbyAndTyData.quote = 0xffff;
     gSaveBlock1.gabbyAndTyData.valA_0 = 0;
     gSaveBlock1.gabbyAndTyData.valA_1 = 0;
     gSaveBlock1.gabbyAndTyData.valA_2 = 0;
@@ -400,7 +400,7 @@ void ResetGabbyAndTy(void)
     gSaveBlock1.gabbyAndTyData.valB_4 = 0;
     gSaveBlock1.gabbyAndTyData.valB_5 = 0;
     gSaveBlock1.gabbyAndTyData.mapnum = 0;
-    gSaveBlock1.gabbyAndTyData.val9 = 0;
+    gSaveBlock1.gabbyAndTyData.battleNum = 0;
 }
 
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
@@ -410,10 +410,10 @@ void GabbyAndTyBeforeInterview(void)
     u8 i;
     gSaveBlock1.gabbyAndTyData.mon1 = gUnknown_030042E0.var06;
     gSaveBlock1.gabbyAndTyData.mon2 = gUnknown_030042E0.var26;
-    gSaveBlock1.gabbyAndTyData.move1 = gUnknown_030042E0.var22;
-    if (gSaveBlock1.gabbyAndTyData.val9 != 0xff)
+    gSaveBlock1.gabbyAndTyData.lastMove = gUnknown_030042E0.var22;
+    if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
     {
-        gSaveBlock1.gabbyAndTyData.val9 ++;
+        gSaveBlock1.gabbyAndTyData.battleNum ++;
     }
     gSaveBlock1.gabbyAndTyData.valA_0 = gUnknown_030042E0.var05_0;
     if (gUnknown_030042E0.var00)
@@ -445,7 +445,7 @@ void GabbyAndTyBeforeInterview(void)
         gSaveBlock1.gabbyAndTyData.valA_3 = 1;
     }
     TakeTVShowInSearchOfTrainersOffTheAir();
-    if (gSaveBlock1.gabbyAndTyData.move1 == 0)
+    if (gSaveBlock1.gabbyAndTyData.lastMove == 0)
     {
         FlagSet(1);
     }
@@ -460,6 +460,36 @@ void sub_80BDC14(void)
     gSaveBlock1.gabbyAndTyData.valA_4 = 1;
     gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.name;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
+}
+
+void TakeTVShowInSearchOfTrainersOffTheAir(void)
+{
+    gSaveBlock1.gabbyAndTyData.valA_4 = 0;
+}
+
+u8 GabbyAndTyGetBattleNum(void)
+{
+    if (gSaveBlock1.gabbyAndTyData.battleNum >= 6)
+    {
+        return (gSaveBlock1.gabbyAndTyData.battleNum % 3) + 6;
+    }
+    return gSaveBlock1.gabbyAndTyData.battleNum;
+}
+
+bool8 IsTVShowInSearchOfTrainersAiring(void)
+{
+    return gSaveBlock1.gabbyAndTyData.valA_4;
+}
+
+bool8 GabbyAndTyGetLastQuote(void)
+{
+    if (gSaveBlock1.gabbyAndTyData.quote == 0xffff)
+    {
+        return FALSE;
+    }
+    sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
+    gSaveBlock1.gabbyAndTyData.quote |= 0xffff;
+    return TRUE;
 }
 
 asm(".section .text_a");
@@ -3242,7 +3272,7 @@ void DoTVShowInSearchOfTrainers(void) {
     switch (switchval) {
     case 0:
         sub_80FBFB4(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
-        if (gSaveBlock1.gabbyAndTyData.val9 > 1) {
+        if (gSaveBlock1.gabbyAndTyData.battleNum > 1) {
             gUnknown_020387E8 = 1;
         } else {
             gUnknown_020387E8 = 2;
@@ -3266,7 +3296,7 @@ void DoTVShowInSearchOfTrainers(void) {
         break;
     case 3:
         StringCopy(gStringVar1, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
-        StringCopy(gStringVar2, gMoveNames[gSaveBlock1.gabbyAndTyData.move1]);
+        StringCopy(gStringVar2, gMoveNames[gSaveBlock1.gabbyAndTyData.lastMove]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
         gUnknown_020387E8 = 8;
         break;
@@ -3277,7 +3307,7 @@ void DoTVShowInSearchOfTrainers(void) {
         gUnknown_020387E8 = 8;
         break;
     case 8:
-        sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.move2);
+        sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
         StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
         gScriptResult = 1;
