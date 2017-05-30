@@ -342,7 +342,7 @@ struct TVShowBravoTrainerPokemonProfiles {
 	/*0x08*/ u8 pokemonNickname[11];
 	/*0x13*/ u8 contestCategory:3;
 	/*0x13*/ u8 contestRank:2;
-	/*0x13*/ u8 var13_5:2;
+	/*0x13*/ u8 contestResult:2;
 	/*0x13*/ u8 var13_7:1;
 	/*0x14*/ u16 var14;
 	/*0x16*/ u8 playerName[8];

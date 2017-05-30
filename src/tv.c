@@ -808,7 +808,7 @@ void sub_80BE188(void) {
         show->bravoTrainer.contestCategory = buffer->bravoTrainer.contestCategory;
         show->bravoTrainer.contestRank = buffer->bravoTrainer.contestRank;
         show->bravoTrainer.var14 = buffer->bravoTrainer.var14;
-        show->bravoTrainer.var13_5 = buffer->bravoTrainer.var13_5;
+        show->bravoTrainer.contestResult = buffer->bravoTrainer.contestResult;
         show->bravoTrainer.contestCategory = buffer->bravoTrainer.contestCategory;
         sub_80BE160(show);
         show->bravoTrainer.language = GAME_LANGUAGE;
@@ -834,7 +834,7 @@ void sub_80BE284(u8 a0) {
     show = &gSaveBlock1.tvShows[24];
     gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
     if (gUnknown_03005D38.var0 != -1) {
-        show->bravoTrainer.var13_5 = a0;
+        show->bravoTrainer.contestResult = a0;
         show->bravoTrainer.contestCategory = gScriptContestCategory;
         show->bravoTrainer.contestRank = gScriptContestRank;
         show->bravoTrainer.species = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_SPECIES, NULL);
@@ -2993,6 +2993,87 @@ void TVShowConvertInternationalString(u8 *dest, u8 *src, u8 language) {
     if (language < LANGUAGE_ENGLISH) {
         ConvertInternationalString(dest, LANGUAGE_JAPANESE);
     }
+}
+
+void DoTVShowBravoTrainerPokemonProfile(void)
+{
+    TVShow *tvShow;
+    u8 switchval;
+
+    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch(switchval)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            CopyContestCategoryToStringVar(1, tvShow->bravoTrainer.contestCategory);
+            sub_80BEF10(2, tvShow->bravoTrainer.contestRank);
+            if (!StringCompareWithoutExtCtrlCodes(gSpeciesNames[tvShow->bravoTrainer.species], tvShow->bravoTrainer.pokemonNickname))
+            {
+                gUnknown_020387E8 = 8;
+            } else
+            {
+                gUnknown_020387E8 = 1;
+            }
+            break;
+        case 1:
+            StringCopy(gStringVar1, gSpeciesNames[tvShow->bravoTrainer.species]);
+            TVShowConvertInternationalString(gStringVar2, tvShow->bravoTrainer.pokemonNickname, tvShow->bravoTrainer.var1f);
+            CopyContestCategoryToStringVar(2, tvShow->bravoTrainer.contestCategory);
+            gUnknown_020387E8 = 2;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            if (tvShow->bravoTrainer.contestResult == 0) // placed first
+            {
+                gUnknown_020387E8 = 3;
+            } else
+            {
+                gUnknown_020387E8 = 4;
+            }
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            sub_80EB3FC(gStringVar2, tvShow->bravoTrainer.var04[0]);
+            sub_80BF088(2, tvShow->bravoTrainer.contestResult + 1);
+            gUnknown_020387E8 = 5;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            sub_80EB3FC(gStringVar2, tvShow->bravoTrainer.var04[0]);
+            sub_80BF088(2, tvShow->bravoTrainer.contestResult + 1);
+            gUnknown_020387E8 = 5;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            CopyContestCategoryToStringVar(1, tvShow->bravoTrainer.contestCategory);
+            sub_80EB3FC(gStringVar3, tvShow->bravoTrainer.var04[1]);
+            if (tvShow->bravoTrainer.var14)
+            {
+                gUnknown_020387E8 = 6;
+            } else
+            {
+                gUnknown_020387E8 = 7;
+            }
+            break;
+        case 6:
+            StringCopy(gStringVar1, gSpeciesNames[tvShow->bravoTrainer.species]);
+            StringCopy(gStringVar2, gMoveNames[tvShow->bravoTrainer.var14]);
+            sub_80EB3FC(gStringVar3, tvShow->bravoTrainer.var04[1]);
+            gUnknown_020387E8 = 7;
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainer.playerName, tvShow->bravoTrainer.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainer.species]);
+            TVShowDone();
+            break;
+        case 8:
+            StringCopy(gStringVar1, gSpeciesNames[tvShow->bravoTrainer.species]);
+            gUnknown_020387E8 = 2;
+            break;
+    }
+    ShowFieldMessage(gTVBravoTrainerTextGroup[switchval]);
 }
 
 asm(".section .text_c");
