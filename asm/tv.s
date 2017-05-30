@@ -7,59 +7,6 @@
 
 	.text
 
-	thumb_func_start sub_80BDC14
-sub_80BDC14: @ 80BDC14
-	push {r4-r6,lr}
-	ldr r4, _080BDC70 @ =gSaveBlock1
-	ldr r0, _080BDC74 @ =0x00002b1a
-	adds r6, r4, r0
-	ldrb r3, [r6]
-	lsls r1, r3, 31
-	adds r0, 0x1
-	adds r5, r4, r0
-	lsrs r1, 31
-	ldrb r2, [r5]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	movs r1, 0x2
-	ands r1, r3
-	movs r2, 0x3
-	negs r2, r2
-	ands r0, r2
-	orrs r0, r1
-	movs r1, 0x4
-	ands r1, r3
-	subs r2, 0x2
-	ands r0, r2
-	orrs r0, r1
-	movs r1, 0x8
-	ands r1, r3
-	subs r2, 0x4
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5]
-	movs r0, 0x10
-	orrs r3, r0
-	strb r3, [r6]
-	ldr r0, _080BDC78 @ =gMapHeader
-	ldrb r0, [r0, 0x14]
-	ldr r1, _080BDC7C @ =0x00002b18
-	adds r4, r1
-	strb r0, [r4]
-	movs r0, 0x6
-	bl IncrementGameStat
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BDC70: .4byte gSaveBlock1
-_080BDC74: .4byte 0x00002b1a
-_080BDC78: .4byte gMapHeader
-_080BDC7C: .4byte 0x00002b18
-	thumb_func_end sub_80BDC14
-
 	thumb_func_start TakeTVShowInSearchOfTrainersOffTheAir
 TakeTVShowInSearchOfTrainersOffTheAir: @ 80BDC80
 	ldr r0, _080BDC94 @ =gSaveBlock1

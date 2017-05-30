@@ -455,8 +455,14 @@ struct GabbyAndTyData {
     /*2b1a*/ u8 valA_1:1;
     /*2b1a*/ u8 valA_2:1;
     /*2b1a*/ u8 valA_3:1;
-    /*2b1a*/ u8 valA_4:4;
-    /*2b1b*/ u8 valB;
+    /*2b1a*/ u8 valA_4:1;
+    /*2b1a*/ u8 valA_5:3;
+    /*2b1b*/ u8 valB_0:1;
+    /*2b1b*/ u8 valB_1:1;
+    /*2b1b*/ u8 valB_2:1;
+    /*2b1b*/ u8 valB_3:1;
+    /*2b1b*/ u8 valB_4:1;
+    /*2b1b*/ u8 valB_5:3;
 };
 
 struct RecordMixing_UnknownStruct {

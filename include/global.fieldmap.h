@@ -160,20 +160,20 @@ struct MapConnections
 
 struct MapHeader
 {
-    struct MapData *mapData;
-    struct MapEvents *events;
-    u8 *mapScripts;
-    struct MapConnections *connections;
-    u16 music;
-    u16 mapDataId;
-    u8 name;
-    u8 cave;
-    u8 weather;
+    /* 0x00 */ struct MapData *mapData;
+    /* 0x04 */ struct MapEvents *events;
+    /* 0x08 */ u8 *mapScripts;
+    /* 0x0C */ struct MapConnections *connections;
+    /* 0x10 */ u16 music;
+    /* 0x12 */ u16 mapDataId;
+    /* 0x14 */ u8 name;
+    /* 0x15 */ u8 cave;
+    /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
-    u8 filler_18;
-    u8 escapeRope;
-    u8 flags;
-    u8 battleType;
+    /* 0x18 */ u8 filler_18;
+    /* 0x19 */ u8 escapeRope;
+    /* 0x1A */ u8 flags;
+    /* 0x1B */ u8 battleType;
 };
 
 struct MapObject
