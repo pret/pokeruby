@@ -94,7 +94,7 @@ struct UCoords16
 
 struct SecretBaseRecord
 {
-    /*0x1A08*/ u8 sbr_field_0; // ID?
+    /*ID?*/ /*0x1A08*/ u8 sbr_field_0; 
     /*0x1A09*/ u8 sbr_field_1_0:4;
     /*0x1A09*/ u8 gender:1;
     /*0x1A09*/ u8 sbr_field_1_5:1;
@@ -445,18 +445,18 @@ struct UnknownSaveStruct2ABC {
 };
 
 struct GabbyAndTyData {
-    u16 mon1;
-    u16 mon2;
-    u16 move1;
-    u16 move2;
-    u8 mapnum;
-    u8 val9;
-    u8 valA_0:1;
-    u8 valA_1:1;
-    u8 valA_2:1;
-    u8 valA_3:1;
-    u8 valA_4:4;
-    u8 valB;
+    /*2b10*/ u16 mon1;    
+    /*2b12*/ u16 mon2;    
+    /*2b14*/ u16 move1;   
+    /*2b16*/ u16 move2;   
+    /*2b18*/ u8 mapnum;   
+    /*2b19*/ u8 val9;     
+    /*2b1a*/ u8 valA_0:1; 
+    /*2b1a*/ u8 valA_1:1; 
+    /*2b1a*/ u8 valA_2:1; 
+    /*2b1a*/ u8 valA_3:1; 
+    /*2b1a*/ u8 valA_4:4; 
+    /*2b1b*/ u8 valB;     
 };
 
 struct RecordMixing_UnknownStruct {
@@ -524,7 +524,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0C*/ u8 outbreakUnk4;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
-    /*0x2B18*/ struct GabbyAndTyData gabbyAndTyData;
+    /*0x2B10*/ struct GabbyAndTyData gabbyAndTyData;
     /*0x2B1C*/ u16 unk2B1C[6];
     /*0x2B28*/ u16 unk2B28[6];
     /*0x2B34*/ u16 unk2B34[6];
@@ -607,11 +607,11 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    /*OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]*/ /*0x13*/ u8 optionsButtonMode;  
+    /*OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]*/ /*0x14*/ u16 optionsTextSpeed:3; 
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+    /*OPTIONS_SOUND_[MONO/STEREO]*/          u16 optionsSound:1; 
+    /*OPTIONS_BATTLE_STYLE_[SHIFT/SET]*/          u16 optionsBattleStyle:1; 
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x18*/ struct Pokedex pokedex;

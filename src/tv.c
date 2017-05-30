@@ -365,6 +365,85 @@ u8 sub_80BDA30(void)
     return 0xff;
 }
 
+u8 special_0x4a(void)
+{
+    TVShow *tvShow;
+    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    if (tvShow->common.var00 == TVSHOW_MASS_OUTBREAK && gSaveBlock1.outbreakPokemonSpecies)
+    {
+        return sub_80BDA30();
+    }
+    return gSpecialVar_0x8004;
+}
+
+#ifdef NONMATCHING
+void ResetGabbyAndTy(void)
+{
+    gSaveBlock1.gabbyAndTyData.mon1 = 0;
+    gSaveBlock1.gabbyAndTyData.mon2 = 0;
+    gSaveBlock1.gabbyAndTyData.move1 = 0;
+    gSaveBlock1.gabbyAndTyData.move2 = 0xffff;
+    gSaveBlock1.gabbyAndTyData.valA_0 = 0;
+    gSaveBlock1.gabbyAndTyData.valA_1 = 0;
+    gSaveBlock1.gabbyAndTyData.valA_2 = 0;
+    gSaveBlock1.gabbyAndTyData.valA_3 = 0;
+    gSaveBlock1.gabbyAndTyData.valA_4 = 0;
+    gSaveBlock1.gabbyAndTyData.valB = 0;
+    gSaveBlock1.gabbyAndTyData.mapnum = 0;
+    gSaveBlock1.gabbyAndTyData.val9 = 0;
+}
+#else
+__attribute__((naked))
+void ResetGabbyAndTy(void)
+{
+    asm(".syntax unified\n"
+    "\tpush {r4,lr}\n"
+    "\tldr r2, _080BDAF8 @ =gSaveBlock1\n"
+    "\tldr r1, _080BDAFC @ =0x00002b10\n"
+    "\tadds r0, r2, r1\n"
+    "\tmovs r3, 0\n"
+    "\tmovs r1, 0\n"
+    "\tstrh r1, [r0]\n"
+    "\tldr r4, _080BDB00 @ =0x00002b12\n"
+    "\tadds r0, r2, r4\n"
+    "\tstrh r1, [r0]\n"
+    "\tadds r4, 0x2\n"
+    "\tadds r0, r2, r4\n"
+    "\tstrh r1, [r0]\n"
+    "\tldr r0, _080BDB04 @ =0x00002b16\n"
+    "\tadds r1, r2, r0\n"
+    "\tldr r0, _080BDB08 @ =0x0000ffff\n"
+    "\tstrh r0, [r1]\n"
+    "\tadds r4, 0x6\n"
+    "\tadds r1, r2, r4\n"
+    "\tmovs r0, 0\n"
+    "\tstrb r0, [r1]\n"
+    "\tldr r0, _080BDB0C @ =0x00002b1b\n"
+    "\tadds r1, r2, r0\n"
+    "\tmovs r0, 0\n"
+    "\tstrb r0, [r1]\n"
+    "\tldr r1, _080BDB10 @ =0x00002b18\n"
+    "\tadds r0, r2, r1\n"
+    "\tstrb r3, [r0]\n"
+    "\tsubs r4, 0x1\n"
+    "\tadds r2, r4\n"
+    "\tstrb r3, [r2]\n"
+    "\tpop {r4}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+    "_080BDAF8: .4byte gSaveBlock1\n"
+    "_080BDAFC: .4byte 0x00002b10\n"
+    "_080BDB00: .4byte 0x00002b12\n"
+    "_080BDB04: .4byte 0x00002b16\n"
+    "_080BDB08: .4byte 0x0000ffff\n"
+    "_080BDB0C: .4byte 0x00002b1b\n"
+    "_080BDB10: .4byte 0x00002b18\n"
+    ".syntax divided\n");
+}
+#endif
+
+
 asm(".section .text_a");
 s8 sub_80BF74C(TVShow tvShow[]);
 
