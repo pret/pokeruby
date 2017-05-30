@@ -3076,6 +3076,114 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     ShowFieldMessage(gTVBravoTrainerTextGroup[switchval]);
 }
 
+void DoTVShowBravoTrainerBattleTowerProfile(void)
+{
+    TVShow *tvShow;
+    u8 switchval;
+
+    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch(switchval)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.trainerName, tvShow->bravoTrainerTower.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.species]);
+            if (tvShow->bravoTrainerTower.var16 >= 7)
+            {
+                gUnknown_020387E8 = 1;
+            } else
+            {
+                gUnknown_020387E8 = 2;
+            }
+            break;
+        case 1:
+            sub_80BF088(0, tvShow->bravoTrainerTower.btLevel);
+            sub_80BF088(1, tvShow->bravoTrainerTower.var16);
+            if (tvShow->bravoTrainerTower.var1c == 1)
+            {
+                gUnknown_020387E8 = 3;
+            } else
+            {
+                gUnknown_020387E8 = 4;
+            }
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            sub_80BF088(1, tvShow->bravoTrainerTower.var16 + 1);
+            if (tvShow->bravoTrainerTower.var1b == 0)
+            {
+                gUnknown_020387E8 = 5;
+            } else
+            {
+                gUnknown_020387E8 = 6;
+            }
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.winningMove]);
+            if (tvShow->bravoTrainerTower.var1b == 0)
+            {
+                gUnknown_020387E8 = 5;
+            } else
+            {
+                gUnknown_020387E8 = 6;
+            }
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.winningMove]);
+            if (tvShow->bravoTrainerTower.var1b == 0)
+            {
+                gUnknown_020387E8 = 5;
+            } else
+            {
+                gUnknown_020387E8 = 6;
+            }
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            gUnknown_020387E8 = 11;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            gUnknown_020387E8 = 11;
+            break;
+        case 7:
+            gUnknown_020387E8 = 11;
+            break;
+        case 8:
+        case 9:
+        case 10:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.trainerName, tvShow->bravoTrainerTower.language);
+            gUnknown_020387E8 = 11;
+            break;
+        case 11:
+            sub_80EB3FC(gStringVar1, tvShow->bravoTrainerTower.var18[0]);
+            if (tvShow->bravoTrainerTower.var1b == 0)
+            {
+                gUnknown_020387E8 = 12;
+            } else
+            {
+                gUnknown_020387E8 = 13;
+            }
+            break;
+        case 12:
+        case 13:
+            sub_80EB3FC(gStringVar1, tvShow->bravoTrainerTower.var18[0]);
+            TVShowConvertInternationalString(gStringVar2, tvShow->bravoTrainerTower.trainerName, tvShow->bravoTrainerTower.language);
+            TVShowConvertInternationalString(gStringVar3, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
+            gUnknown_020387E8 = 14;
+            break;
+        case 14:
+            TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.trainerName, tvShow->bravoTrainerTower.language);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.species]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVBravoTrainerBattleTowerTextGroup[switchval]);
+}
+
 asm(".section .text_c");
 
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
