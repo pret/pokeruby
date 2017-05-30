@@ -492,7 +492,27 @@ bool8 GabbyAndTyGetLastQuote(void)
     return TRUE;
 }
 
-asm(".section .text_a");
+u8 sub_80BDD18(void)
+{
+    if (!gSaveBlock1.gabbyAndTyData.valB_0)
+    {
+        return 1;
+    }
+    if (gSaveBlock1.gabbyAndTyData.valB_3)
+    {
+        return 2;
+    }
+    if (gSaveBlock1.gabbyAndTyData.valB_2)
+    {
+        return 3;
+    }
+    if (gSaveBlock1.gabbyAndTyData.valB_1)
+    {
+        return 4;
+    }
+    return 0;
+}
+
 s8 sub_80BF74C(TVShow tvShow[]);
 
 void sub_80BF55C(TVShow tvShow[], u8 showidx);

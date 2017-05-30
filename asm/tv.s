@@ -7,53 +7,6 @@
 
 	.text
 
-	thumb_func_start sub_80BDD18
-sub_80BDD18: @ 80BDD18
-	push {lr}
-	ldr r0, _080BDD30 @ =gSaveBlock1
-	ldr r1, _080BDD34 @ =0x00002b1b
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _080BDD38
-	movs r0, 0x1
-	b _080BDD5E
-	.align 2, 0
-_080BDD30: .4byte gSaveBlock1
-_080BDD34: .4byte 0x00002b1b
-_080BDD38:
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _080BDD44
-	movs r0, 0x2
-	b _080BDD5E
-_080BDD44:
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _080BDD50
-	movs r0, 0x3
-	b _080BDD5E
-_080BDD50:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _080BDD5C
-	movs r0, 0
-	b _080BDD5E
-_080BDD5C:
-	movs r0, 0x4
-_080BDD5E:
-	pop {r1}
-	bx r1
-	.align 2, 0
-	thumb_func_end sub_80BDD18
-
-    .section .text_80BE8EC
-
 	thumb_func_start sub_80C04A0
 sub_80C04A0: @ 80C04A0
 	push {r4,r5,lr}
