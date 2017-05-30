@@ -146,4 +146,29 @@ extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
+struct UnknownStruct11
+{
+	u8 unk0;
+	u8 unk1;
+	u8 unk2;
+	u8 unk3;
+	u8 unk4;
+	u8 unk5_0:1;
+	u8 unk5_1:1;
+	u16 unk6;
+	u8 unk8[10];
+	u8 unk12;
+	u8 unk13;
+	u8 unk14[10];
+	u8 filler1E[2];
+	u16 unk20;
+	u16 unk22;
+	u16 unk24;
+	u16 unk26;
+	u16 unk28;
+	u8 unk2A[10];
+	u8 filler34[2];
+	u8 unk36[10];
+};
+
 #endif // GUARD_BATTLE_H
