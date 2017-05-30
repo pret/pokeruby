@@ -3184,7 +3184,119 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
     ShowFieldMessage(gTVBravoTrainerBattleTowerTextGroup[switchval]);
 }
 
-asm(".section .text_c");
+void DoTVShowTodaysSmartShopper(void)
+{
+    TVShow *tvShow;
+    u8 switchval;
+
+    tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    switchval = gUnknown_020387E8;
+    switch(switchval)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, tvShow->smartshopperShow.playerName, tvShow->smartshopperShow.language);
+            sub_80FBFB4(gStringVar2, tvShow->smartshopperShow.shopLocation, 0);
+            if (tvShow->smartshopperShow.itemAmounts[0] >= 0xff)
+            {
+                gUnknown_020387E8 = 11;
+            } else
+            {
+                gUnknown_020387E8 = 1;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, tvShow->smartshopperShow.playerName, tvShow->smartshopperShow.language);
+            StringCopy(gStringVar2, ItemId_GetItem(tvShow->smartshopperShow.itemIds[0])->name);
+            sub_80BF088(2, tvShow->smartshopperShow.itemAmounts[0]);
+            gUnknown_020387E8 += (Random() % 4) + 1;
+            break;
+        case 2:
+        case 4:
+        case 5:
+            if (tvShow->smartshopperShow.itemIds[1] != 0)
+            {
+                gUnknown_020387E8 = 6;
+            } else
+            {
+                gUnknown_020387E8 = 10;
+            }
+            break;
+        case 3:
+            sub_80BF088(2, tvShow->smartshopperShow.itemAmounts[0] + 1);
+            if (tvShow->smartshopperShow.itemIds[1] != 0)
+            {
+                gUnknown_020387E8 = 6;
+            } else
+            {
+                gUnknown_020387E8 = 10;
+            }
+            break;
+        case 6:
+            StringCopy(gStringVar2, ItemId_GetItem(tvShow->smartshopperShow.itemIds[1])->name);
+            sub_80BF088(2, tvShow->smartshopperShow.itemAmounts[1]);
+            if (tvShow->smartshopperShow.itemIds[2] != 0)
+            {
+                gUnknown_020387E8 = 7;
+            } else if (tvShow->smartshopperShow.priceReduced == 1)
+            {
+                gUnknown_020387E8 = 8;
+            } else
+            {
+                gUnknown_020387E8 = 9;
+            }
+            break;
+        case 7:
+            StringCopy(gStringVar2, ItemId_GetItem(tvShow->smartshopperShow.itemIds[2])->name);
+            sub_80BF088(2, tvShow->smartshopperShow.itemAmounts[2]);
+            if (tvShow->smartshopperShow.priceReduced == 1)
+            {
+                gUnknown_020387E8 = 8;
+            } else
+            {
+                gUnknown_020387E8 = 9;
+            }
+            break;
+        case 8:
+            if (tvShow->smartshopperShow.itemAmounts[0] < 0xff)
+            {
+                gUnknown_020387E8 = 9;
+            } else
+            {
+                gUnknown_020387E8 = 12;
+            }
+            break;
+        case 9:
+            sub_80BF154(1, &tvShow->smartshopperShow);
+            TVShowDone();
+            break;
+        case 10:
+            if (tvShow->smartshopperShow.priceReduced == 1)
+            {
+                gUnknown_020387E8 = 8;
+            } else
+            {
+                gUnknown_020387E8 = 9;
+            }
+            break;
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, tvShow->smartshopperShow.playerName, tvShow->smartshopperShow.language);
+            StringCopy(gStringVar2, ItemId_GetItem(tvShow->smartshopperShow.itemIds[0])->name);
+            if (tvShow->smartshopperShow.priceReduced == 1)
+            {
+                gUnknown_020387E8 = 8;
+            } else
+            {
+                gUnknown_020387E8 = 12;
+            }
+            break;
+        case 12:
+            TVShowConvertInternationalString(gStringVar1, tvShow->smartshopperShow.playerName, tvShow->smartshopperShow.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVSmartShopperTextGroup[switchval]);
+}
 
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
 
