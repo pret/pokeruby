@@ -124,6 +124,22 @@ void sub_80BEB20(void);
 
 u8 sub_80BFB54(u8);
 
+s8 sub_80BF74C(TVShow tvShow[]);
+
+void sub_80BF55C(TVShow tvShow[], u8 showidx);
+void sub_80BEA88(void);
+
+void sub_80BE138(TVShow *show);
+void sub_80BE160(TVShow *show);
+extern u16 gUnknown_02024C04;
+
+void sub_80BE5FC(void);
+void sub_80BE65C(void);
+void sub_80BE6A0(void);
+void nullsub_21(void);
+void sub_80BE188(void);
+void sub_80BE320(void);
+
 #ifdef NONMATCHING
 u8 special_0x44(void)
 {
@@ -493,24 +509,6 @@ u8 sub_80BDD18(void)
     }
     return 0;
 }
-
-s8 sub_80BF74C(TVShow tvShow[]);
-
-void sub_80BF55C(TVShow tvShow[], u8 showidx);
-void sub_80BEA88(void);
-
-void sub_80BE138(TVShow *show);
-void sub_80BE160(TVShow *show);
-extern u16 gUnknown_02024C04;
-
-void sub_80BE5FC(void);
-void sub_80BE65C(void);
-void sub_80BE6A0(void);
-void nullsub_21(void);
-void sub_80BE188(void);
-void sub_80BE320(void);
-
-extern u8 GabbyAndTyGetBattleNum(void);
 
 void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void) {
     switch (GabbyAndTyGetBattleNum()) {
@@ -1198,7 +1196,6 @@ void sub_80BEA50(u16 var)
     gUnknown_020387E0 = var;
 }
 
-void sub_80BF55C(TVShow tvShow[], u8 showidx);
 void sub_80BEA88(void);
 
 void sub_80BEA5C(u16 arg0)
@@ -2162,12 +2159,13 @@ void sub_80BFD20(void)
 }
 
 extern u8 ewram[];
-#define gUnknown_02007000 (*(struct ewramStruct_0207000 *)(ewram + 0x7000))
+#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
 extern u8 gUnknown_020387E4;
 
-struct ewramStruct_0207000 {
+typedef union ewramStruct_02007000 {
     TVShow tvshows[4][25];
-};
+    struct UnknownSaveStruct2ABC unknown_2abc[4][16];
+} ewramStruct_02007000;
 
 void sub_80BFE24(TVShow arg0[25], TVShow arg1[25], TVShow arg2[25], TVShow arg3[25]);
 
@@ -2178,7 +2176,7 @@ void sub_80C0408(void);
 void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
 {
     u8 i;
-    struct ewramStruct_0207000 *ewramTVShows;
+    ewramStruct_02007000 *ewramTVShows;
     for (i=0; i<4; i++) {
         memcpy(&gUnknown_02007000.tvshows[i], &arg0[i * arg1], 25 * sizeof(TVShow));
     }
@@ -2205,6 +2203,7 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
 }
 
 extern u8 gUnknown_03000720;
+extern u8 gUnknown_03000721;
 extern s8 gUnknown_03000722;
 s8 sub_80C019C(TVShow tvShows[]);
 bool8 sub_80BFF68(TVShow * tv1[25], TVShow * tv2[25], u8 idx);
@@ -2793,7 +2792,88 @@ void sub_80C045C(void) {
     }
 }
 
-asm(".section .dotvshow\n");
+void sub_80C04A0(void)
+{
+    s8 showIdx;
+    s8 count;
+    count = 0;
+    for (showIdx=5; showIdx<24; showIdx++)
+    {
+        if (gSaveBlock1.tvShows[showIdx].common.var00 == 0)
+        {
+            count ++;
+        }
+    }
+    for (showIdx=0; showIdx<5-count; showIdx++)
+    {
+        sub_80BF55C(gSaveBlock1.tvShows, showIdx+5);
+    }
+}
+
+void sub_80C05C4(struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16]);
+void sub_80C0750(void);
+void sub_80C0788(void);
+s8 sub_80C0730(struct UnknownSaveStruct2ABC[16], u8);
+void sub_80C06BC(struct UnknownSaveStruct2ABC *[16], struct UnknownSaveStruct2ABC *[16]);
+
+void sub_80C0514(void *a0, u32 a1, u8 a2)
+{
+    ewramStruct_02007000 *struct02007000;
+    u8 i;
+    for (i=0; i<4; i++)
+    {
+        memcpy(gUnknown_02007000.unknown_2abc[i], a0 + i * a1, 64);
+    }
+    struct02007000 = &gUnknown_02007000;
+    switch (a2)
+    {
+        case 0:
+            sub_80C05C4(gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+            break;
+        case 1:
+            sub_80C05C4(struct02007000->unknown_2abc[0], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+            break;
+        case 2:
+            sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[3]);
+            break;
+        case 3:
+            sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], gSaveBlock1.unknown_2ABC);
+            break;
+    }
+    sub_80C0750();
+    sub_80C0788();
+}
+
+void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2ABC a1[16], struct UnknownSaveStruct2ABC a2[16], struct UnknownSaveStruct2ABC a3[16])
+{
+    u8 i;
+    u8 j;
+    u8 k;
+    struct UnknownSaveStruct2ABC ** arglist[4];
+    arglist[0] = &a0;
+    arglist[1] = &a1;
+    arglist[2] = &a2;
+    arglist[3] = &a3;
+    gUnknown_03000721 = GetLinkPlayerCount();
+    for (i=0; i<16; i++)
+    {
+        for (j=0; j<gUnknown_03000721; j++)
+        {
+            gUnknown_03000722 = sub_80C0730(*arglist[j], i);
+            if (gUnknown_03000722 != -1)
+            {
+                for (k=0; k<gUnknown_03000721-1; k++)
+                {
+                    gUnknown_03005D38.var0 = sub_80BEBC8(*arglist[(j + k + 1) % gUnknown_03000721]);
+                    if (gUnknown_03005D38.var0 != -1)
+                    {
+                        sub_80C06BC(arglist[(j + k + 1) % gUnknown_03000721], arglist[j]);
+                    }
+                }
+            }
+        }
+    }
+}
 
 void DoTVShowPokemonFanClubLetter(void);
 void DoTVShowRecentHappenings(void);
@@ -2811,11 +2891,11 @@ void DoTVShowTheWorldOfMasters(void);
 
 bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
 
-void sub_80C06BC(int *arg0, int *arg1) {
+void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruct2ABC *arg1[16]) {
     struct UnknownSaveStruct2ABC *str0;
     struct UnknownSaveStruct2ABC *str1;
-    str0 = (void *)arg0[0];
-    str1 = (void *)arg1[0];
+    str0 = arg0[0];
+    str1 = arg1[0];
     str1 += gUnknown_03000722;
     sub_80C06E8(str0, str1, gUnknown_03005D38.var0);
 }
