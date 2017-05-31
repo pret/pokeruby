@@ -4,6 +4,7 @@
 struct ScriptContext;
 
 typedef bool8 (*ScrCmdFunc)(struct ScriptContext *);
+typedef u8 Script[];
 
 struct ScriptContext
 {
