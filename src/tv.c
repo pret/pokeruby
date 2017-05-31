@@ -850,7 +850,7 @@ void sub_80BE320(void) {
     StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2.playerName);
     StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2.filler_A8.filler_3DC);
     show->bravoTrainerTower.species = gSaveBlock2.filler_A8.var_480;
-    show->bravoTrainerTower.winningMove = gSaveBlock2.filler_A8.var_482;
+    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2.filler_A8.var_482;
     show->bravoTrainerTower.var16 = sub_8135D3C(gSaveBlock2.filler_A8.var_4D0);
     show->bravoTrainerTower.var1c = gSaveBlock2.filler_A8.var_4AD;
     if (gSaveBlock2.filler_A8.var_4D0 == 0) {
@@ -2454,54 +2454,54 @@ void sub_80C03A8(u8 showidx);
 void sub_80C03C8(u16 species, u8 showidx);
 
 #ifdef NONMATCHING
-void sub_80C01D4(void) {
-    u8 i;
-    for (i=0; i<24; i++) {
-        switch (gSavegitBlock1.tvShows[i].common.var00) {
-        case 0:
-            break;
-        case TVSHOW_FAN_CLUB_LETTER:
-            sub_80C03C8(gSaveBlock1.tvShows[i].fanclubLetter.species, i);
-            break;
-        case TVSHOW_RECENT_HAPPENINGS:
-            break;
-        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-            sub_80C03C8(gSaveBlock1.tvShows[i].fanclubOpinions.var02, i);
-            break;
-        case TVSHOW_UNKN_SHOWTYPE_04:
-            sub_80C03C8(gSaveBlock1.tvShows[i].worldOfMasters.var06, i);
-            break;
-        case TVSHOW_NAME_RATER_SHOW:
-            sub_80C03C8(gSaveBlock1.tvShows[i].nameRaterShow.species, i);
-            sub_80C03C8(gSaveBlock1.tvShows[i].nameRaterShow.var1C, i);
-            break;
-        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-            sub_80C03C8(gSaveBlock1.tvShows[i].bravoTrainer.species, i);
-            break;
-        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-            sub_80C03C8(gSaveBlock1.tvShows[i].bravoTrainerTower.var0a, i);
-            sub_80C03C8(gSaveBlock1.tvShows[i].bravoTrainerTower.var14, i);
-            break;
-        case TVSHOW_POKEMON_TODAY_CAUGHT:
-            sub_80C03C8(gSaveBlock1.tvShows[i].pokemonToday.species, i);
-            break;
-        case TVSHOW_SMART_SHOPPER:
-            break;
-        case TVSHOW_POKEMON_TODAY_FAILED:
-            sub_80C03C8(gSaveBlock1.tvShows[i].pokemonTodayFailed.species, i);
-            sub_80C03C8(gSaveBlock1.tvShows[i].pokemonTodayFailed.species2, i);
-            break;
-        case TVSHOW_FISHING_ADVICE:
-            sub_80C03C8(gSaveBlock1.tvShows[i].pokemonAngler.var04, i);
-            break;
-        case TVSHOW_WORLD_OF_MASTERS:
-            sub_80C03C8(gSaveBlock1.tvShows[i].worldOfMasters.var08, i);
-            sub_80C03C8(gSaveBlock1.tvShows[i].worldOfMasters.var04, i);
-            break;
-        case TVSHOW_MASS_OUTBREAK:
-            break;
-        default:
-            sub_80C03A8(i);
+void sub_80C01D4(void)
+{
+    u16 i;
+    for (i=0; i<24; i++)
+    {
+        switch (gSaveBlock1.tvShows[i].common.var00)
+        {
+            case 0:
+            case TVSHOW_RECENT_HAPPENINGS:
+            case TVSHOW_SMART_SHOPPER:
+            case TVSHOW_MASS_OUTBREAK:
+                break;
+            case TVSHOW_FAN_CLUB_LETTER:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->fanclubLetter.species, i);
+                break;
+            case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->fanclubOpinions.var02, i);
+                break;
+            case TVSHOW_UNKN_SHOWTYPE_04:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->unkShow04.var06, i);
+                break;
+            case TVSHOW_NAME_RATER_SHOW:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->nameRaterShow.species, i);
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->nameRaterShow.var1C, i);
+                break;
+            case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->bravoTrainer.species, i);
+                break;
+            case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->bravoTrainerTower.species, i);
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->bravoTrainerTower.defeatedSpecies, i);
+                break;
+            case TVSHOW_POKEMON_TODAY_CAUGHT:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->pokemonToday.species, i);
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->pokemonTodayFailed.species, i);
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->pokemonTodayFailed.species2, i);
+                break;
+            case TVSHOW_FISHING_ADVICE:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->pokemonAngler.var04, i);
+                break;
+            case TVSHOW_WORLD_OF_MASTERS:
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->worldOfMasters.var08, i);
+                sub_80C03C8((&gSaveBlock1.tvShows[i])->worldOfMasters.var04, i);
+                break;
+            default:
+                sub_80C03A8(i);
         }
     }
 }
@@ -2718,7 +2718,7 @@ void sub_80C03A8(u8 showidx) {
 }
 
 void sub_80C03C8(u16 species, u8 showidx) {
-    if (sub_8090D90(SpeciesToNationalPokedexNum(species), 0) == 0) {
+    if (!sub_8090D90(SpeciesToNationalPokedexNum(species), 0)) {
         gSaveBlock1.tvShows[showidx].common.var01 = 0;
     }
 }
@@ -3121,7 +3121,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
-            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.winningMove]);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.defeatedSpecies]);
             if (tvShow->bravoTrainerTower.var1b == 0)
             {
                 gUnknown_020387E8 = 5;
@@ -3132,7 +3132,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, tvShow->bravoTrainerTower.pokemonName, tvShow->bravoTrainerTower.language);
-            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.winningMove]);
+            StringCopy(gStringVar2, gSpeciesNames[tvShow->bravoTrainerTower.defeatedSpecies]);
             if (tvShow->bravoTrainerTower.var1b == 0)
             {
                 gUnknown_020387E8 = 5;
