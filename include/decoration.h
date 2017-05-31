@@ -51,6 +51,7 @@ extern u8 gUnknown_020388D5;
 extern u8 gUnknown_020388F2;
 extern u8 gUnknown_020388F3;
 extern u8 gUnknown_020388F4;
+extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
 
 extern const u16 gUnknown_083EC654[3];
@@ -59,6 +60,7 @@ extern const u8 *gUnknown_083EC5E4[];
 extern const u8 *gUnknown_083EC624[];
 extern u8 *gUnknown_020388F7[];
 extern const struct MenuAction2 gUnknown_083EC604[];
+extern const struct MenuAction3 gUnknown_083EC634[];
 
 extern void sub_80B3068(u8); // src/shop
 extern u8 sub_8134194(u8); // src/decoration_inventory
@@ -79,6 +81,7 @@ void sub_80FE728(u8);
 void sub_80FE758(u8);
 void sub_80FE868(u8);
 void sub_80FE948(u8);
+void sub_80FEABC(u8, u8);
 void sub_80FEC94(u8);
 void sub_80FECB8(u8);
 void sub_80FECE0(u8);

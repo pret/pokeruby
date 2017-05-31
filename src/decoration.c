@@ -272,3 +272,77 @@ void sub_80FE868(u8 taskId)
     sub_80FE7EC(taskId);
     gTasks[taskId].func = sub_80FE948;
 }
+
+void sub_80FE894(u8 taskId /*r8*/, s8 cursorVector /*r5*/, s8 bgVector /*r7*/)
+{
+    int v0 /*r10*/;
+    u8 v1;
+    v0 = gUnknown_020388F2 + gUnknown_020388F4 == gUnknown_020388D5;
+    PlaySE(SE_SELECT);
+    if (cursorVector != 0)
+    {
+        gUnknown_020388F2 = MoveMenuCursor(cursorVector);
+    }
+    if (bgVector != 0)
+    {
+        v1 = gUnknown_020388F4;
+        gUnknown_020388F4 = v1 + bgVector;
+        sub_80FEABC(taskId, 1);
+    }
+    if (gUnknown_020388F2 + gUnknown_020388F4 != gUnknown_020388D5)
+    {
+        if (v0)
+        {
+            MenuDrawTextWindow(15, 12, 29, 19);
+        }
+        sub_80FECE0(gUnknown_020388F2 + gUnknown_020388F4);
+    } else
+    {
+        MenuZeroFillWindowRect(15, 12, 29, 19);
+    }
+}
+
+void sub_80FE948(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+        {
+            if (gUnknown_020388F2 != 0)
+            {
+                sub_80FE894(taskId, -1, 0);
+            } else if (gUnknown_020388F4 != 0)
+            {
+                sub_80FE894(taskId, 0, -1);
+            }
+        }
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+        {
+            if (gUnknown_020388F2 != gUnknown_020388F3)
+            {
+                sub_80FE894(taskId, 1, 0);
+            } else if (gUnknown_020388F4 + gUnknown_020388F2 != gUnknown_020388D5)
+            {
+                sub_80FE894(taskId, 0, 1);
+            }
+        }
+        if (gMain.newKeys & A_BUTTON)
+        {
+            sub_8072DEC();
+            PlaySE(SE_SELECT);
+            gUnknown_020388F5 = gUnknown_020388F2 + gUnknown_020388F4;
+            if (gUnknown_020388F5 == gUnknown_020388D5)
+            {
+                gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
+            } else
+            {
+                gUnknown_083EC634[gTasks[taskId].data[11]].func1(taskId);
+            }
+        } else if (gMain.newKeys & B_BUTTON)
+        {
+            sub_8072DEC();
+            PlaySE(SE_SELECT);
+            gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
+        }
+    }
+}

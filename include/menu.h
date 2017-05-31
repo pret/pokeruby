@@ -15,6 +15,12 @@ struct MenuAction2
     u8 (*func)(u8);
 };
 
+struct MenuAction3
+{
+    u8 (*func1)(u8);
+    u8 (*func2)(u8);
+};
+
 void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);
