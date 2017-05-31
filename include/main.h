@@ -46,8 +46,8 @@ struct Main
 extern u8 gLinkTransferringData;
 extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
-extern bool8 gLinkVSyncDisabled;
 
+extern bool8 gLinkVSyncDisabled;
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
