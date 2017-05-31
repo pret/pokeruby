@@ -6,60 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_81365C8
-sub_81365C8: @ 81365C8
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r4, _081365E0 @ =gUnknown_02039304
-	ldr r0, [r4]
-	adds r0, 0x50
-	ldrb r1, [r0]
-	cmp r1, 0
-	beq _081365E4
-	cmp r1, 0x1
-	beq _0813660C
-	b _08136626
-	.align 2, 0
-_081365E0: .4byte gUnknown_02039304
-_081365E4:
-	movs r0, 0x1
-	negs r0, r0
-	str r1, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _08136608 @ =sub_8136264
-	bl SetVBlankCallback
-	ldr r1, [r4]
-	adds r1, 0x50
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08136626
-	.align 2, 0
-_08136608: .4byte sub_8136264
-_0813660C:
-	ldr r0, _08136630 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08136626
-	bl sub_80F3C94
-	bl sub_80F3D00
-	ldr r0, _08136634 @ =sub_8136638
-	bl launch_c3_walk_stairs_and_run_once
-_08136626:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08136630: .4byte gPaletteFade
-_08136634: .4byte sub_8136638
-	thumb_func_end sub_81365C8
-
 	thumb_func_start sub_8136638
 sub_8136638: @ 8136638
 	push {r4,lr}

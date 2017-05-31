@@ -27,9 +27,11 @@ void launch_c3_walk_stairs_and_run_once(void (*const)(void));
 void sub_81361E4(void);
 void sub_813622C(void);
 void sub_8136244(void);
+void sub_8136264(void);
 void sub_8136294(void);
 void sub_81365A0(void);
 void sub_81365C8(void);
+void sub_8136638(void);
 void sub_81368A4(void);
 u8 sub_81370E4(u8);
 
@@ -597,5 +599,25 @@ void sub_81365A0(void)
     while (!gUnknown_02039304->unk55)
     {
         sub_8136294();
+    }
+}
+
+void sub_81365C8(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            SetVBlankCallback(sub_8136264);
+            gUnknown_02039304->unk50++;
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                sub_80F3C94();
+                sub_80F3D00();
+                launch_c3_walk_stairs_and_run_once(sub_8136638);
+            }
+            break;
     }
 }

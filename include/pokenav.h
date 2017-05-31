@@ -65,6 +65,8 @@ bool8 sub_80F26BC(void);
 bool8 sub_80F2CBC(u8);
 void sub_80F2E18(u8);
 void sub_80F33A8(void);
+void sub_80F3C94(void);
+void sub_80F3D00(void);
 void sub_80F4BD0(void);
 void sub_80F556C(void *);
 void sub_80F567C(void *, void *);
