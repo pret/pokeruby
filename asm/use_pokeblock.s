@@ -6,37 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8136130
-sub_8136130: @ 8136130
-	push {r4,r5,lr}
-	ldr r4, _0813615C @ =gUnknown_02039304
-	ldr r2, _08136160 @ =gUnknown_083DFEC4
-	ldr r3, [r2]
-	ldr r5, _08136164 @ =0x0000d164
-	adds r2, r3, r5
-	str r2, [r4]
-	str r0, [r2, 0x8]
-	str r1, [r2, 0x4]
-	ldr r0, _08136168 @ =0x0000d162
-	adds r3, r0
-	movs r0, 0x2
-	strb r0, [r3]
-	ldr r0, _0813616C @ =sub_8136294
-	bl launch_c3_walk_stairs_and_run_once
-	ldr r0, _08136170 @ =sub_8136244
-	bl SetMainCallback2
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813615C: .4byte gUnknown_02039304
-_08136160: .4byte gUnknown_083DFEC4
-_08136164: .4byte 0x0000d164
-_08136168: .4byte 0x0000d162
-_0813616C: .4byte sub_8136294
-_08136170: .4byte sub_8136244
-	thumb_func_end sub_8136130
-
 	thumb_func_start sub_8136174
 sub_8136174: @ 8136174
 	push {r4,r5,lr}
