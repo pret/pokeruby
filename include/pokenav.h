@@ -11,9 +11,13 @@ struct UnkPokenavStruct_Sub {
 };
 
 struct UnkPokenavStruct_Sub1 {
-    /*0x0*/ u32 unk0;
-    /*0x1*/ u32 unk4;
-    /*0x2*/ u32 unk8;
+    /*0x00*/ void (*unk0)(void);
+    /*0x04*/ void *unk4;
+    /*0x08*/ void *unk8;
+    /*0x0C*/ u8 fillerC[0x44];
+    /*0x50*/ u8 unk50;
+    /*0x51*/ u8 unk51[5];
+    /*0x56*/ u8 unk56;
 };
 
 struct UnkPokenavStruct {
@@ -27,5 +31,6 @@ struct UnkPokenavStruct {
 
 extern struct UnkPokenavStruct *gUnknown_083DFEC4;
 
+void sub_80F5CDC(u8);
 
 #endif //POKERUBY_POKENAV_H
