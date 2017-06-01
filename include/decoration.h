@@ -45,7 +45,7 @@ extern struct Decoration gDecorations[0x77];
 extern void sub_80FF394(u16 unkr0, u16 unkr1, u16 unkr2);
 
 extern Script gUnknown_0815F399;
-extern u8 *gUnknown_020388D0;
+extern u8 *(gUnknown_020388D0[]);
 extern u8 gUnknown_020388D4;
 extern u8 gUnknown_020388D5;
 extern u8 gUnknown_020388F2;

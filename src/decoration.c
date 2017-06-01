@@ -190,7 +190,7 @@ void sub_80FE604(u8 taskId)
                 if (gUnknown_020388D5)
                 {
                     sub_8134104(gUnknown_020388F6);
-                    gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
+                    *gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
                     sub_80F944C();
                     sub_80F9480(gUnknown_020388F7, 8);
@@ -376,15 +376,15 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
             sub_8072A18(gUnknownText_Exit, 0x08, 8 * ni, 0x68, 1);
             break;
         }
-        if (gUnknown_020388D0[i])
+        if ((*gUnknown_020388D0)[i])
         {
             if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECOCAT_DOLL && gUnknown_020388F6 != DECOCAT_CUSHION && gTasks[taskId].data[11] == 0)
             {
-                StringCopy(gStringVar1, gDecorations[gUnknown_020388D0[i]].name);
+                StringCopy(gStringVar1, gDecorations[(*gUnknown_020388D0)[i]].name);
                 sub_8072A18(gUnknown_083EC65A, 0x08, 8 * ni, 0x68, 1);
             } else
             {
-                sub_8072A18(gDecorations[gUnknown_020388D0[i]].name, 0x08, 8 * ni, 0x68, 1);
+                sub_8072A18(gDecorations[(*gUnknown_020388D0)[i]].name, 0x08, 8 * ni, 0x68, 1);
             }
             for (j=0; j<16; j++)
             {
@@ -418,9 +418,9 @@ void sub_80FECB8(u8 decoCat)
     sub_80FE470(decoCat, 16, 1, 0xff);
 }
 
-void sub_80FECE0(u8 taskId)
+void sub_80FECE0(u8 decoCat)
 {
-    sub_8072AB0(gDecorations[gUnknown_020388D0[taskId]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
+    sub_8072AB0(gDecorations[(*gUnknown_020388D0)[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
 
 void sub_80FED1C(void)
@@ -446,4 +446,60 @@ bool8 sub_80FED64(u8 a0)
         }
     }
     return FALSE;
+}
+
+void sub_80FED90(void)
+{
+    u16 i;
+    u16 j;
+    u16 k;
+    u16 cnt;
+    cnt = 0;
+    for (i=0; i<16; i++)
+    {
+        gUnknown_020388D6[i] = 0;
+        if (i < 12)
+        {
+            gUnknown_020388E6[i] = 0;
+        }
+    }
+    for (i=0; i<16; i++)
+    {
+        if (gSaveBlock1.secretBases[0].decorations[i] != 0)
+        {
+            for (j=0; j<gDecorationInventories[gUnknown_020388F6].size; j++)
+            {
+                if ((*gUnknown_020388D0)[j] == gSaveBlock1.secretBases[0].decorations[i])
+                {
+                    for (k=0; k<cnt && gUnknown_020388D6[k]!=j+1; k++);
+                    if (k == cnt)
+                    {
+                        gUnknown_020388D6[cnt] = j+1;
+                        cnt++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    cnt = 0;
+    for (i=0; i<12; i++)
+    {
+        if (gSaveBlock1.playerRoomDecor[i] != 0)
+        {
+            for (j=0; j<gDecorationInventories[gUnknown_020388F6].size; j++)
+            {
+                if ((*gUnknown_020388D0)[j] == gSaveBlock1.playerRoomDecor[i] && !sub_80FED64(j + 1))
+                {
+                    for (k=0; k<cnt && gUnknown_020388E6[k]!=j+1; k++);
+                    if (k == cnt)
+                    {
+                        gUnknown_020388E6[cnt] = j+1;
+                        cnt++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
