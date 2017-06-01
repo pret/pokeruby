@@ -405,3 +405,45 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
         }
     }
 }
+
+void sub_80FEC94(u8 taskId)
+{
+    MenuDrawTextWindow(0, 0, 14, 19);
+    sub_80FEABC(taskId, 0);
+}
+
+void sub_80FECB8(u8 decoCat)
+{
+    MenuDrawTextWindow(15, 0, 29, 3);
+    sub_80FE470(decoCat, 16, 1, 0xff);
+}
+
+void sub_80FECE0(u8 taskId)
+{
+    sub_8072AB0(gDecorations[gUnknown_020388D0[taskId]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
+}
+
+void sub_80FED1C(void)
+{
+    MenuZeroFillWindowRect(15, 0, 29, 3);
+    MenuZeroFillWindowRect(15, 12, 29, 19);
+}
+
+void sub_80FED3C(u8 taskId)
+{
+    LoadScrollIndicatorPalette();
+    gTasks[taskId].func = sub_80FE868;
+}
+
+bool8 sub_80FED64(u8 a0)
+{
+    u8 i;
+    for (i=0; i<16; i++)
+    {
+        if (gUnknown_020388D6[i] == a0)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
