@@ -346,3 +346,62 @@ void sub_80FE948(u8 taskId)
         }
     }
 }
+
+void sub_80FEABC(u8 taskId, u8 dummy1)
+{
+    u16 i;
+    u16 j;
+    u8 ni;
+    if (gUnknown_020388F4 != 0 || (DestroyVerticalScrollIndicator(0), gUnknown_020388F4 != 0))
+    {
+        CreateVerticalScrollIndicators(0, 0x3c, 0x08);
+    }
+    if (gUnknown_020388F4 + 7 == gUnknown_020388D5)
+    {
+        DestroyVerticalScrollIndicator(1);
+    }
+    if (gUnknown_020388F4 + 7 < gUnknown_020388D5)
+    {
+        CreateVerticalScrollIndicators(1, 0x3c, 0x98);
+    }
+    for (i=gUnknown_020388F4; i<gUnknown_020388F4+8; i++)
+    {
+        ni = 2 * (i - gUnknown_020388F4) + 2;
+        if (gUnknown_020388F7[i - gUnknown_020388F4])
+        {
+            sub_80F94F8(&gUnknown_020388F7[i - gUnknown_020388F4]);
+        }
+        if (i == gUnknown_020388D5)
+        {
+            sub_8072A18(gUnknownText_Exit, 0x08, 8 * ni, 0x68, 1);
+            break;
+        }
+        if (gUnknown_020388D0[i])
+        {
+            if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECOCAT_DOLL && gUnknown_020388F6 != DECOCAT_CUSHION && gTasks[taskId].data[11] == 0)
+            {
+                StringCopy(gStringVar1, gDecorations[gUnknown_020388D0[i]].name);
+                sub_8072A18(gUnknown_083EC65A, 0x08, 8 * ni, 0x68, 1);
+            } else
+            {
+                sub_8072A18(gDecorations[gUnknown_020388D0[i]].name, 0x08, 8 * ni, 0x68, 1);
+            }
+            for (j=0; j<16; j++)
+            {
+                if (gUnknown_020388D6[j] - 1 == i)
+                {
+                    sub_80F94A4(4, &gUnknown_020388F7[i - gUnknown_020388F4], 0x6c, (i - gUnknown_020388F4) * 16 + 24);
+                    break;
+                }
+            }
+            for (j=0; j<12; j++)
+            {
+                if (gUnknown_020388E6[j] - 1 == i)
+                {
+                    sub_80F94A4(5, &gUnknown_020388F7[i - gUnknown_020388F4], 0x6c, (i - gUnknown_020388F4) * 16 + 24);
+                    break;
+                }
+            }
+        }
+    }
+}

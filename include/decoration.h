@@ -2,14 +2,14 @@
 #define GUARD_DECORATION_H
 
 enum {
-    DECOCAT_DESK,
-    DECOCAT_CHAIR,
-    DECOCAT_PLANT,
-    DECOCAT_ORNAMENT,
-    DECOCAT_MAT,
-    DECOCAT_POSTER,
-    DECOCAT_DOLL,
-    DECOCAT_CUSHION
+    /*0*/ DECOCAT_DESK,
+    /*1*/ DECOCAT_CHAIR,
+    /*2*/ DECOCAT_PLANT,
+    /*3*/ DECOCAT_ORNAMENT,
+    /*4*/ DECOCAT_MAT,
+    /*5*/ DECOCAT_POSTER,
+    /*6*/ DECOCAT_DOLL,
+    /*7*/ DECOCAT_CUSHION
 };
 
 struct Decoration
@@ -53,20 +53,27 @@ extern u8 gUnknown_020388F3;
 extern u8 gUnknown_020388F4;
 extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
+extern u8 gUnknown_020388D6[16];
+extern u8 gUnknown_020388E6[12];
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
 extern const u8 *gUnknown_083EC5E4[];
 extern const u8 *gUnknown_083EC624[];
-extern u8 *gUnknown_020388F7[];
+extern u8 gUnknown_020388F7[];
 extern const struct MenuAction2 gUnknown_083EC604[];
 extern const struct MenuAction3 gUnknown_083EC634[];
+extern const u8 gUnknown_083EC65A[];
 
 extern void sub_80B3068(u8); // src/shop
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
 extern void sub_80F944C(void); // src/menu_helpers
-extern void sub_80F9480(u8 *[], u8); // src/menu_helpers
+extern void sub_80F9480(u8 *, u8); // src/menu_helpers
+extern void sub_80F94A4(u8, u8 *, u8, s16);
+extern void sub_80F94F8(u8 *); // src/menu_helpers
+extern void DestroyVerticalScrollIndicator(u8); // src/menu_helpers
+extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
 extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
 extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16); // src/menu_helpers
 extern void ReshowPlayerPC(u8); // src/player_pc
