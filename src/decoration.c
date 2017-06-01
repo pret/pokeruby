@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "rom4.h"
 #include "sound.h"
 #include "songs.h"
 #include "string_util.h"
@@ -7,6 +8,8 @@
 #include "strings.h"
 #include "script.h"
 #include "palette.h"
+#include "field_player_avatar.h"
+#include "field_camera.h"
 #include "decoration.h"
 
 void sub_80FE1DC(void)
@@ -448,7 +451,7 @@ bool8 sub_80FED64(u8 a0)
     return FALSE;
 }
 
-void sub_80FED90(void)
+void sub_80FED90(u8 taskId)
 {
     u16 i;
     u16 j;
@@ -501,5 +504,111 @@ void sub_80FED90(void)
                 }
             }
         }
+    }
+}
+
+void sub_80FEF28(void)
+{
+    if (gUnknown_020388D5 <= 7)
+    {
+        gUnknown_020388F3 = gUnknown_020388D5;
+    } else
+    {
+        gUnknown_020388F3 = 7;
+    }
+}
+
+void sub_80FEF50(u8 taskId)
+{
+    sub_80FED90(taskId);
+    sub_80FEF28();
+    gUnknown_020388F2 = 0;
+    gUnknown_020388F4 = 0;
+}
+
+void sub_80FEF74(void)
+{
+    sub_80F9520(gUnknown_020388F7, 8);
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    sub_8072DEC();
+    MenuZeroFillWindowRect(0, 0, 14, 19);
+}
+
+bool8 sub_80FEFA4(void)
+{
+    u16 i;
+    int v0;
+    for (i=0; i<16; i++)
+    {
+        v0 = gUnknown_020388F4 + gUnknown_020388F2 + 1;
+        if (gUnknown_020388D6[i] == v0 || (i < 12 && gUnknown_020388E6[i] == v0))
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+void sub_80FEFF4(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        LoadScrollIndicatorPalette();
+        gTasks[taskId].func = sub_80FE868;
+    }
+}
+
+void sub_80FF034(u8 taskId)
+{
+    sub_8072DEC();
+    MenuZeroFillWindowRect(0, 0, 14, 19);
+    sub_80FE5AC(taskId);
+}
+
+void sub_80FF058(u8 taskId)
+{
+    sub_80F9520(gUnknown_020388F7, 8);
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    BuyMenuFreeMemory();
+    gTasks[taskId].func = sub_80FF034;
+}
+
+void sub_80FF098(u8 taskId)
+{
+    gUnknown_020388D5--;
+    if (gUnknown_020388F4 + 7 > gUnknown_020388D5 && gUnknown_020388F4 != 0)
+    {
+        gUnknown_020388F4--;
+    }
+    sub_8134104(gUnknown_020388F6);
+    sub_80FED90(taskId);
+    sub_80FEF28();
+}
+
+void sub_80FF0E0(u8 taskId)
+{
+    gTasks[taskId].data[3] = gSaveBlock1.pos.x;
+    gTasks[taskId].data[4] = gSaveBlock1.pos.y;
+    PlayerGetDestCoords(&gTasks[taskId].data[0], &gTasks[taskId].data[1]);
+}
+
+void sub_80FF114(u8 taskId)
+{
+    DrawWholeMapView();
+    warp1_set(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
+    warp_in();
+}
+void sub_80FF160(u8 taskId)
+{
+    if (!sub_81341D4())
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
+    } else
+    {
+        gTasks[taskId].data[11] = 0;
+        gUnknown_020388F6 = 0;
+        sub_80FE5AC(taskId);
     }
 }
