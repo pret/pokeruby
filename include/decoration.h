@@ -167,7 +167,7 @@ extern u8 ewram[];
 
 extern struct Decoration gDecorations[0x77];
 extern struct Decoration *gUnknown_02038900;
-extern u8 *(gUnknown_020388D0[]);
+extern u8 *gUnknown_020388D0;
 
 extern u8 gUnknown_020388D4;
 extern u8 gUnknown_020388D5;
@@ -199,6 +199,7 @@ extern void sub_80B3068(u8); // src/shop
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
+extern bool8 sub_807D770(void);
 extern void sub_80F944C(void); // src/menu_helpers
 extern void sub_80F9480(u8 *, u8); // src/menu_helpers
 extern void sub_80F94A4(u8, u8 *, u8, s16); // src/menu_helpers
@@ -209,8 +210,8 @@ extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
 extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
 extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16); // src/menu_helpers
 extern void BuyMenuFreeMemory(void); // src/menu_helpers
-extern void ReshowPlayerPC(u8); // src/player_pc
 
+extern void ReshowPlayerPC(u8); // src/player_pc
 void sub_80FE2B4(void);
 void Task_DecorationPCProcessMenuInput(u8);
 void sub_80FE394(void);
@@ -228,6 +229,10 @@ void sub_80FECE0(u8);
 void sub_80FEF50(u8);
 void sub_80FF394(u16, u16, u16);
 void sub_80FF6AC(u8);
+void sub_80FF960(u8);
+void sub_810065C(u8);
 void sub_8109DAC(u8);
+void AddDecorationIconObjectFromFieldObject(struct Decoration **, u8);
+void SetUpPlacingDecorationPlayerAvatar(u8, struct Decoration **);
 
 #endif // GUARD_DECORATION_H

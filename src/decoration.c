@@ -199,7 +199,7 @@ void sub_80FE604(u8 taskId)
                 if (gUnknown_020388D5)
                 {
                     sub_8134104(gUnknown_020388F6);
-                    *gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
+                    gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
                     sub_80F944C();
                     sub_80F9480(gUnknown_020388F7, 8);
@@ -385,15 +385,15 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
             sub_8072A18(gUnknownText_Exit, 0x08, 8 * ni, 0x68, 1);
             break;
         }
-        if ((*gUnknown_020388D0)[i])
+        if (gUnknown_020388D0[i])
         {
             if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECOCAT_DOLL && gUnknown_020388F6 != DECOCAT_CUSHION && gTasks[taskId].data[11] == 0)
             {
-                StringCopy(gStringVar1, gDecorations[(*gUnknown_020388D0)[i]].name);
+                StringCopy(gStringVar1, gDecorations[gUnknown_020388D0[i]].name);
                 sub_8072A18(gUnknown_083EC65A, 0x08, 8 * ni, 0x68, 1);
             } else
             {
-                sub_8072A18(gDecorations[(*gUnknown_020388D0)[i]].name, 0x08, 8 * ni, 0x68, 1);
+                sub_8072A18(gDecorations[gUnknown_020388D0[i]].name, 0x08, 8 * ni, 0x68, 1);
             }
             for (j=0; j<16; j++)
             {
@@ -429,7 +429,7 @@ void sub_80FECB8(u8 decoCat)
 
 void sub_80FECE0(u8 decoCat)
 {
-    sub_8072AB0(gDecorations[(*gUnknown_020388D0)[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
+    sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
 
 void sub_80FED1C(void)
@@ -478,7 +478,7 @@ void sub_80FED90(u8 taskId)
         {
             for (j=0; j<gDecorationInventories[gUnknown_020388F6].size; j++)
             {
-                if ((*gUnknown_020388D0)[j] == gSaveBlock1.secretBases[0].decorations[i])
+                if (gUnknown_020388D0[j] == gSaveBlock1.secretBases[0].decorations[i])
                 {
                     for (k=0; k<cnt && gUnknown_020388D6[k]!=j+1; k++);
                     if (k == cnt)
@@ -498,7 +498,7 @@ void sub_80FED90(u8 taskId)
         {
             for (j=0; j<gDecorationInventories[gUnknown_020388F6].size; j++)
             {
-                if ((*gUnknown_020388D0)[j] == gSaveBlock1.playerRoomDecor[i] && !sub_80FED64(j + 1))
+                if (gUnknown_020388D0[j] == gSaveBlock1.playerRoomDecor[i] && !sub_80FED64(j + 1))
                 {
                     for (k=0; k<cnt && gUnknown_020388E6[k]!=j+1; k++);
                     if (k == cnt)
@@ -792,5 +792,39 @@ void sub_80FF5BC(u8 taskId)
         sub_80FEF74();
         sub_80FED1C();
         DisplayItemMessageOnField(taskId, gSecretBaseText_InUseAlready, sub_80FEFF4, 0);
+    }
+}
+
+void sub_80FF6AC(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                sub_80FF0E0(taskId);
+                DestroyVerticalScrollIndicator(0);
+                DestroyVerticalScrollIndicator(1);
+                sub_80F9520(gUnknown_020388F7, 8);
+                BuyMenuFreeMemory();
+                gTasks[taskId].data[2] = 1;
+            }
+            break;
+        case 1:
+            gPaletteFade.bufferTransferDisabled = 1;
+            AddDecorationIconObjectFromFieldObject(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
+            sub_80FF960(taskId);
+            SetUpPlacingDecorationPlayerAvatar(taskId, &gUnknown_02038900);
+            pal_fill_black();
+            gPaletteFade.bufferTransferDisabled = 0;
+            gTasks[taskId].data[2] = 2;
+            break;
+        case 2:
+            if (sub_807D770() == 1)
+            {
+                gTasks[taskId].data[12] = 0;
+                sub_810065C(taskId);
+            }
+            break;
     }
 }
