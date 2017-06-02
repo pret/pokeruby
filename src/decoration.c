@@ -851,3 +851,23 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
         gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
 }
+
+void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *unk_02038900)
+{
+    u8 v0;
+    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2 - 8 * ((u8)gTasks[taskId].data[5] - 1);
+    if (unk_02038900->decoration->decor_field_12 == 2 || unk_02038900->decoration->decor_field_12 == 8 || unk_02038900->decoration->decor_field_12 == 9)
+    {
+        v0 -= 8;
+    }
+    if (gSaveBlock2.playerGender == MALE)
+    {
+        gUnknown_020391A9 = AddPseudoFieldObject(0xc1, SpriteCallbackDummy, v0, 0x48, 0);
+    } else
+    {
+        gUnknown_020391A9 = AddPseudoFieldObject(0xc2, SpriteCallbackDummy, v0, 0x48, 0);
+    }
+    gSprites[gUnknown_020391A9].oam.priority = 1;
+    DestroySprite(&gSprites[gUnknown_020391A8]);
+    gUnknown_020391A8 = gUnknown_03004880.unk4;
+}

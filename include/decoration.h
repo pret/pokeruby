@@ -205,6 +205,7 @@ extern u16 gSpecialVar_0x8007;
 extern u16 gUnknown_020391A4;
 extern u16 gUnknown_020391A6;
 extern u8 gUnknown_020391A8;
+extern u8 gUnknown_020391A9;
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
