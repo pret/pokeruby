@@ -165,8 +165,29 @@ struct DecorationInventory
 extern u8 ewram[];
 #define ewram_1f000 (*(struct DecoPCPointers *)(ewram + 0x1f000))
 
+struct UnkStruct_02038900
+{
+    struct Decoration *decoration;
+    u8 pad_004[0x18];
+    u16 *unk_01C;
+    u8 pad_020[0x864];
+    u16 unk_884[16];
+};
+
+struct UnkStruct_083EC900
+{
+    u8 unk_0;
+    u8 unk_1;
+    u8 unk_2;
+    u8 unk_3;
+};
+
+extern const struct UnkStruct_083EC900 gUnknown_083EC900[10];
+extern const struct SpritePalette gUnknown_083EC954;
+extern const struct SpriteTemplate gSpriteTemplate_83EC93C;
+
 extern struct Decoration gDecorations[0x77];
-extern struct Decoration *gUnknown_02038900;
+extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
 
 extern u8 gUnknown_020388D4;
@@ -183,6 +204,7 @@ extern u16 gSpecialVar_0x8006;
 extern u16 gSpecialVar_0x8007;
 extern u16 gUnknown_020391A4;
 extern u16 gUnknown_020391A6;
+extern u8 gUnknown_020391A8;
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
@@ -210,8 +232,9 @@ extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
 extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
 extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16); // src/menu_helpers
 extern void BuyMenuFreeMemory(void); // src/menu_helpers
-
+extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
+
 void sub_80FE2B4(void);
 void Task_DecorationPCProcessMenuInput(u8);
 void sub_80FE394(void);
@@ -230,9 +253,14 @@ void sub_80FEF50(u8);
 void sub_80FF394(u16, u16, u16);
 void sub_80FF6AC(u8);
 void sub_80FF960(u8);
+void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 *, u8);
+void SetUpPlacingDecorationPlayerAvatar(u8, struct UnkStruct_02038900 *);
 void sub_810065C(u8);
-void sub_8109DAC(u8);
-void AddDecorationIconObjectFromFieldObject(struct Decoration **, u8);
-void SetUpPlacingDecorationPlayerAvatar(u8, struct Decoration **);
+void sub_81006D0(struct UnkStruct_02038900 *);
+void sub_810070C(u16 *, int);
+void sub_8100874(struct UnkStruct_02038900 *);
+void sub_81008BC(struct UnkStruct_02038900 *);
+void sub_8100930(u8);
+void sub_81009A8(struct Sprite *);
 
 #endif // GUARD_DECORATION_H

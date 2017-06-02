@@ -734,7 +734,7 @@ void sub_80FF474(void)
                     break;
                 }
             }
-            VarSet(0x3f20 + gMapHeader.events->mapObjects[j].graphicsId, gUnknown_02038900->tiles[0]);
+            VarSet(0x3f20 + gMapHeader.events->mapObjects[j].graphicsId, gUnknown_02038900.decoration->tiles[0]);
             gSpecialVar_0x8005 = gMapHeader.events->mapObjects[j].localId;
             gSpecialVar_0x8006 = gUnknown_020391A4;
             gSpecialVar_0x8007 = gUnknown_020391A6;
@@ -826,5 +826,28 @@ void sub_80FF6AC(u8 taskId)
                 sub_810065C(taskId);
             }
             break;
+    }
+}
+
+void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_02038900, u8 decoIdx)
+{
+    sub_80FEF74();
+    sub_80FED1C();
+    sub_81006D0(unk_02038900);
+    unk_02038900->decoration = &gDecorations[decoIdx];
+    if (gDecorations[decoIdx].decor_field_11 != 4)
+    {
+        sub_81008BC(unk_02038900);
+        sub_8100930(unk_02038900->decoration->decor_field_12);
+        sub_8100874(unk_02038900);
+        sub_810070C(unk_02038900->unk_884, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
+        LoadSpritePalette(&gUnknown_083EC954);
+        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 0);
+    } else
+    {
+        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 1);
+        gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
 }
