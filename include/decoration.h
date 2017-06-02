@@ -166,6 +166,7 @@ extern u8 ewram[];
 #define ewram_1f000 (*(struct DecoPCPointers *)(ewram + 0x1f000))
 
 extern struct Decoration gDecorations[0x77];
+extern struct Decoration *gUnknown_02038900;
 extern u8 *(gUnknown_020388D0[]);
 
 extern u8 gUnknown_020388D4;
@@ -177,8 +178,13 @@ extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
 extern u8 gUnknown_020388D6[16];
 extern u8 gUnknown_020388E6[12];
-extern const u16 gUnknown_083EC654[3];
+extern u16 gSpecialVar_0x8005;
+extern u16 gSpecialVar_0x8006;
+extern u16 gSpecialVar_0x8007;
+extern u16 gUnknown_020391A4;
+extern u16 gUnknown_020391A6;
 
+extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
 extern const u8 *gUnknown_083EC5E4[];
 extern const u8 *gUnknown_083EC624[];

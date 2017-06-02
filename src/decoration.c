@@ -12,6 +12,7 @@
 #include "field_camera.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "event_data.h"
 #include "decoration.h"
 
 extern Script gUnknown_0815F399;
@@ -713,5 +714,33 @@ void sub_80FF394(u16 mapX, u16 mapY, u16 decIdx)
         case 9:
             sub_80FF1EC(mapX, mapY, 3, 2, decIdx);
             break;
+    }
+}
+
+void sub_80FF474(void)
+{
+    u8 i;
+    u8 j;
+    for (i=0; i<14; i++)
+    {
+        if (FlagGet(i + 0xae) == 1)
+        {
+            FlagReset(i + 0xae);
+            for (j=0; j<gMapHeader.events->mapObjectCount; j++)
+            {
+                if (gMapHeader.events->mapObjects[j].flagId == i + 0xae)
+                {
+                    break;
+                }
+            }
+            VarSet(0x3f20 + gMapHeader.events->mapObjects[j].graphicsId, gUnknown_02038900->tiles[0]);
+            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[j].localId;
+            gSpecialVar_0x8006 = gUnknown_020391A4;
+            gSpecialVar_0x8007 = gUnknown_020391A6;
+            show_sprite(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+            sub_805C0F8(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+            sub_805C78C(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+            break;
+        }
     }
 }
