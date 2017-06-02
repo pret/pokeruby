@@ -13,6 +13,7 @@
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "decoration.h"
 
 extern Script gUnknown_0815F399;
@@ -742,5 +743,54 @@ void sub_80FF474(void)
             sub_805C78C(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
             break;
         }
+    }
+}
+
+bool8 sub_80FF58C/*IsThereRoomForMoreDecorations*/(void)
+{
+    u16 i;
+    for (i=0; i<ewram_1f000.size; i++)
+    {
+        if (ewram_1f000.items[i] == 0)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_80FF5BC(u8 taskId)
+{
+    if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECOCAT_DOLL && gUnknown_020388F6 != DECOCAT_CUSHION)
+    {
+        sub_80FEF74();
+        sub_80FED1C();
+        DisplayItemMessageOnField(taskId, gSecretBaseText_DecorCantPlace, sub_80FEFF4, 0);
+    } else if (sub_80FEFA4() == TRUE)
+    {
+        if (sub_80FF58C() == TRUE)
+        {
+            fade_screen(1, 0);
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].func = sub_80FF6AC;
+        } else
+        {
+            sub_80FEF74();
+            sub_80FED1C();
+            ConvertIntToDecimalStringN(gStringVar1, ewram_1f000.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
+            if (!ewram_1f000.isPlayerRoom)
+            {
+                StringExpandPlaceholders(gStringVar4, gSecretBaseText_NoMoreDecor);
+            } else
+            {
+                StringExpandPlaceholders(gStringVar4, gSecretBaseText_NoMoreDecor2);
+            }
+            DisplayItemMessageOnField(taskId, gStringVar4, sub_80FEFF4, 0);
+        }
+    } else
+    {
+        sub_80FEF74();
+        sub_80FED1C();
+        DisplayItemMessageOnField(taskId, gSecretBaseText_InUseAlready, sub_80FEFF4, 0);
     }
 }

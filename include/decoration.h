@@ -1,7 +1,7 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
-enum {
+enum DecoCat {
     /*0*/ DECOCAT_DESK,
     /*1*/ DECOCAT_CHAIR,
     /*2*/ DECOCAT_PLANT,
@@ -12,7 +12,7 @@ enum {
     /*7*/ DECOCAT_CUSHION
 };
 
-enum{
+enum DecoId {
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
     /*002*/ DECOR_POKEMON_DESK,
@@ -227,6 +227,7 @@ void sub_80FECB8(u8);
 void sub_80FECE0(u8);
 void sub_80FEF50(u8);
 void sub_80FF394(u16, u16, u16);
+void sub_80FF6AC(u8);
 void sub_8109DAC(u8);
 
 #endif // GUARD_DECORATION_H
