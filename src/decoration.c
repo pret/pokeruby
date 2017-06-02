@@ -634,3 +634,47 @@ u16 sub_80FF1B0(u8 decoId, u8 a1)
             return retval;
     }
 }
+
+void sub_80FF1EC(s16 mapX, s16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
+{
+    u16 i;
+    u16 j; // r10
+    u16 behavior;
+    u16 flags; // r8
+    u16 v0;
+    u16 v1;
+    s16 x;
+    s16 decBottom;
+
+    for (i=0; i<decHeight; i++)
+    {
+        decBottom = mapY - decHeight + 1 + i;
+        for (j=0; j<decWidth; j++)
+        {
+            x = mapX + j;
+            behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decIdx].tiles[i * decWidth + j]);
+            if (sub_8057288(behavior) == 1 || (gDecorations[decIdx].decor_field_11 != 1 && (behavior >> 12)))
+            {
+                flags = 0xc00;
+            } else
+            {
+                flags = 0x000;
+            }
+            if (gDecorations[decIdx].decor_field_11 != 3 && sub_80572B0(MapGridGetMetatileBehaviorAt(x, decBottom)) == 1)
+            {
+                v0 = 1;
+            } else
+            {
+                v0 = 0;
+            }
+            v1 = sub_80FF1B0(gDecorations[decIdx].id, i * decWidth + j);
+            if (v1 != 0xffff)
+            {
+                MapGridSetMetatileEntryAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | flags | v1);
+            } else
+            {
+                MapGridSetMetatileIdAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | flags);
+            }
+        }
+    }
+}
