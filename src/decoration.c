@@ -635,7 +635,7 @@ u16 sub_80FF1B0(u8 decoId, u8 a1)
     }
 }
 
-void sub_80FF1EC(s16 mapX, s16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
+void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
 {
     u16 i;
     u16 j; // r10
@@ -676,5 +676,42 @@ void sub_80FF1EC(s16 mapX, s16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
                 MapGridSetMetatileIdAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | flags);
             }
         }
+    }
+}
+
+void sub_80FF394(u16 mapX, u16 mapY, u16 decIdx)
+{
+    switch (gDecorations[decIdx].decor_field_12)
+    {
+        case 0:
+            sub_80FF1EC(mapX, mapY, 1, 1, decIdx);
+            break;
+        case 1:
+            sub_80FF1EC(mapX, mapY, 2, 1, decIdx);
+            break;
+        case 2:
+            sub_80FF1EC(mapX, mapY, 3, 1, decIdx);
+            break;
+        case 3:
+            sub_80FF1EC(mapX, mapY, 4, 2, decIdx);
+            break;
+        case 4:
+            sub_80FF1EC(mapX, mapY, 2, 2, decIdx);
+            break;
+        case 5:
+            sub_80FF1EC(mapX, mapY, 1, 2, decIdx);
+            break;
+        case 6:
+            sub_80FF1EC(mapX, mapY, 1, 3, decIdx);
+            break;
+        case 7:
+            sub_80FF1EC(mapX, mapY, 2, 4, decIdx);
+            break;
+        case 8:
+            sub_80FF1EC(mapX, mapY, 3, 3, decIdx);
+            break;
+        case 9:
+            sub_80FF1EC(mapX, mapY, 3, 2, decIdx);
+            break;
     }
 }

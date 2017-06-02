@@ -166,9 +166,8 @@ extern u8 ewram[];
 #define ewram_1f000 (*(struct DecoPCPointers *)(ewram + 0x1f000))
 
 extern struct Decoration gDecorations[0x77];
-extern void sub_80FF394(u16 unkr0, u16 unkr1, u16 unkr2);
-
 extern u8 *(gUnknown_020388D0[]);
+
 extern u8 gUnknown_020388D4;
 extern u8 gUnknown_020388D5;
 extern u8 gUnknown_020388F2;
@@ -178,8 +177,8 @@ extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
 extern u8 gUnknown_020388D6[16];
 extern u8 gUnknown_020388E6[12];
-
 extern const u16 gUnknown_083EC654[3];
+
 extern const struct DecorationInventory gDecorationInventories[];
 extern const u8 *gUnknown_083EC5E4[];
 extern const u8 *gUnknown_083EC624[];
@@ -189,8 +188,8 @@ extern const struct MenuAction3 gUnknown_083EC634[];
 extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
-
 extern void sub_80B3068(u8); // src/shop
+
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
@@ -198,6 +197,7 @@ extern void sub_80F944C(void); // src/menu_helpers
 extern void sub_80F9480(u8 *, u8); // src/menu_helpers
 extern void sub_80F94A4(u8, u8 *, u8, s16); // src/menu_helpers
 extern void sub_80F94F8(u8 *); // src/menu_helpers
+extern void sub_80F9520(u8 *, u8); // src/menu_helpers
 extern void DestroyVerticalScrollIndicator(u8); // src/menu_helpers
 extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
 extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
@@ -220,7 +220,7 @@ void sub_80FEC94(u8);
 void sub_80FECB8(u8);
 void sub_80FECE0(u8);
 void sub_80FEF50(u8);
-void sub_80F9520(u8 *, u8);
+void sub_80FF394(u16, u16, u16);
 void sub_8109DAC(u8);
 
 #endif // GUARD_DECORATION_H
