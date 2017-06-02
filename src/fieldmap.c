@@ -40,7 +40,6 @@ void fillSouthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillNorthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillWestConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillEastConnection(struct MapHeader *, struct MapHeader *, s32);
-u32 GetBehaviorByMetatileId(u16 metatile);
 struct MapConnection *sub_8056A64(u8 direction, int x, int y);
 bool8 sub_8056ABC(u8 direction, int x, int y, struct MapConnection *connection);
 bool8 sub_8056B20(int x, int src_width, int dest_width, int offset);

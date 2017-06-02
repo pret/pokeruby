@@ -8,40 +8,6 @@
 
 .equiv ewram_1f000, 0x0201f000
 
-	thumb_func_start sub_80FF1B0
-sub_80FF1B0: @ 80FF1B0
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, _080FF1D0 @ =0x0000ffff
-	cmp r2, 0x22
-	beq _080FF1D8
-	cmp r2, 0x26
-	bne _080FF1E2
-	ldr r0, _080FF1D4 @ =gUnknown_083EC97C
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	lsls r0, 28
-	lsrs r0, 16
-	b _080FF1E2
-	.align 2, 0
-_080FF1D0: .4byte 0x0000ffff
-_080FF1D4: .4byte gUnknown_083EC97C
-_080FF1D8:
-	ldr r0, _080FF1E8 @ =gUnknown_083EC984
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	lsls r0, 28
-	lsrs r0, 16
-_080FF1E2:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080FF1E8: .4byte gUnknown_083EC984
-	thumb_func_end sub_80FF1B0
-
 	thumb_func_start sub_80FF1EC
 sub_80FF1EC: @ 80FF1EC
 	push {r4-r7,lr}

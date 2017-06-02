@@ -10,7 +10,11 @@
 #include "palette.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "fieldmap.h"
+#include "metatile_behavior.h"
 #include "decoration.h"
+
+extern Script gUnknown_0815F399;
 
 void sub_80FE1DC(void)
 {
@@ -610,5 +614,23 @@ void sub_80FF160(u8 taskId)
         gTasks[taskId].data[11] = 0;
         gUnknown_020388F6 = 0;
         sub_80FE5AC(taskId);
+    }
+}
+
+u16 sub_80FF1B0(u8 decoId, u8 a1)
+{
+    u16 retval;
+    retval = 0xffff;
+
+    switch (decoId)
+    {
+        case DECOR_STAND:
+            retval = gUnknown_083EC97C[a1] << 12;
+            return retval;
+        case DECOR_SLIDE:
+            retval = gUnknown_083EC984[a1] << 12;
+            return retval;
+        default:
+            return retval;
     }
 }
