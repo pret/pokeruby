@@ -971,3 +971,670 @@ bool8 sub_80FFBDC(u16 a0, struct Decoration *decoration)
     }
     return FALSE;
 }
+
+#ifdef NONMATCHING
+bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
+{
+    u8 i;
+    u8 j;
+    u8 behaviorAt;
+    u16 behaviorBy;
+    u8 fieldObjectId;
+    u8 mapY;
+    u8 mapX;
+    s16 curY;
+    s16 curX;
+    mapY = gTasks[taskId].data[6];
+    mapX = gTasks[taskId].data[5];
+    switch (decoration->decor_field_11)
+    {
+        case 0:
+        case 1:
+            for (i=0; i<mapY; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                    behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]);
+                    if (!sub_80FFBDC(behaviorAt, decoration))
+                    {
+                        return FALSE;
+                    }
+                    if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    if (fieldObjectId != 0 && fieldObjectId != 16)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            break;
+        case 2:
+            for (i=0; i<mapY-1; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                    behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - i) * mapX + j]);
+                    if (!sub_805729C(behaviorAt) && !sub_80FFB6C(behaviorAt, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    if (fieldObjectId != 16)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            curY = gTasks[taskId].data[1] - mapY + 1;
+            for (j=0; j<mapX; j++)
+            {
+                curX = gTasks[taskId].data[0] + j;
+                behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[j]);
+                if (!sub_805729C(behaviorAt) && !sub_80572B0(behaviorAt))
+                {
+                    return FALSE;
+                }
+                if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                {
+                    return FALSE;
+                }
+                fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
+                if (fieldObjectId != 0 && fieldObjectId != 16)
+                {
+                    return FALSE;
+                }
+            }
+            break;
+        case 3:
+            for (i=0; i<mapY; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    if (!sub_80572B0(MapGridGetMetatileBehaviorAt(curX, curY)) || MapGridGetMetatileIdAt(curX, curY) == 0x28c)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            break;
+        case 4:
+            curY = gTasks[taskId].data[1];
+            for (j=0; j<mapX; j++)
+            {
+                curX = gTasks[taskId].data[0] + j;
+                behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                if (decoration->decor_field_12 == 5)
+                {
+                    if (!sub_80572EC(behaviorAt))
+                    {
+                        return FALSE;
+                    }
+                }
+                else if (!sub_80572D8(behaviorAt))
+                {
+                    if (!sub_80572EC(behaviorAt))
+                    {
+                        return FALSE;
+                    }
+                }
+                fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
+                if (fieldObjectId != 16)
+                {
+                    return FALSE;
+                }
+            }
+            break;
+    }
+    return TRUE;
+}
+#else
+__attribute__((naked))
+bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
+{
+    asm(".syntax unified\n"
+    "\tpush {r4-r7,lr}\n"
+    "\tmov r7, r10\n"
+    "\tmov r6, r9\n"
+    "\tmov r5, r8\n"
+    "\tpush {r5-r7}\n"
+    "\tsub sp, 0x24\n"
+    "\tstr r1, [sp]\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tmov r10, r0\n"
+    "\tldr r1, _080FFC60 @ =gTasks\n"
+    "\tlsls r0, 2\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tadds r0, r1\n"
+    "\tldrb r2, [r0, 0x14]\n"
+    "\tstr r2, [sp, 0x4]\n"
+    "\tldrb r0, [r0, 0x12]\n"
+    "\tstr r0, [sp, 0x8]\n"
+    "\tldr r3, [sp]\n"
+    "\tldrb r0, [r3, 0x11]\n"
+    "\tadds r2, r1, 0\n"
+    "\tcmp r0, 0x4\n"
+    "\tbls _080FFC56\n"
+    "\tb _08100024\n"
+    "_080FFC56:\n"
+    "\tlsls r0, 2\n"
+    "\tldr r1, _080FFC64 @ =_080FFC68\n"
+    "\tadds r0, r1\n"
+    "\tldr r0, [r0]\n"
+    "\tmov pc, r0\n"
+    "\t.align 2, 0\n"
+    "_080FFC60: .4byte gTasks\n"
+    "_080FFC64: .4byte _080FFC68\n"
+    "\t.align 2, 0\n"
+    "_080FFC68:\n"
+    "\t.4byte _080FFC7C\n"
+    "\t.4byte _080FFC7C\n"
+    "\t.4byte _080FFD68\n"
+    "\t.4byte _080FFF1C\n"
+    "\t.4byte _080FFFA0\n"
+    "_080FFC7C:\n"
+    "\tmovs r6, 0\n"
+    "\tldr r0, [sp, 0x4]\n"
+    "\tcmp r6, r0\n"
+    "\tbcc _080FFC86\n"
+    "\tb _08100024\n"
+    "_080FFC86:\n"
+    "\tmov r1, r10\n"
+    "\tlsls r1, 2\n"
+    "\tstr r1, [sp, 0x1C]\n"
+    "_080FFC8C:\n"
+    "\tmov r2, r10\n"
+    "\tlsls r0, r2, 2\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tldr r3, _080FFD64 @ =gTasks\n"
+    "\tadds r0, r3\n"
+    "\tldrh r0, [r0, 0xA]\n"
+    "\tsubs r0, r6\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tmov r9, r0\n"
+    "\tmovs r7, 0\n"
+    "\tadds r6, 0x1\n"
+    "\tstr r6, [sp, 0x14]\n"
+    "\tldr r0, [sp, 0x8]\n"
+    "\tcmp r7, r0\n"
+    "\tbcs _080FFD56\n"
+    "\tmov r1, r9\n"
+    "\tlsls r1, 16\n"
+    "\tstr r1, [sp, 0xC]\n"
+    "\tasrs r1, 16\n"
+    "\tmov r9, r1\n"
+    "_080FFCB8:\n"
+    "\tldr r0, [sp, 0x1C]\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tldr r2, _080FFD64 @ =gTasks\n"
+    "\tadds r0, r2\n"
+    "\tldrh r0, [r0, 0x8]\n"
+    "\tadds r0, r7\n"
+    "\tlsls r0, 16\n"
+    "\tmov r8, r0\n"
+    "\tasrs r6, r0, 16\n"
+    "\tadds r0, r6, 0\n"
+    "\tmov r1, r9\n"
+    "\tbl MapGridGetMetatileBehaviorAt\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tldr r3, [sp, 0x4]\n"
+    "\tldr r1, [sp, 0x14]\n"
+    "\tsubs r0, r3, r1\n"
+    "\tldr r2, [sp, 0x8]\n"
+    "\tadds r1, r0, 0\n"
+    "\tmuls r1, r2\n"
+    "\tadds r1, r7\n"
+    "\tldr r3, [sp]\n"
+    "\tldr r0, [r3, 0x1C]\n"
+    "\tlsls r1, 1\n"
+    "\tadds r1, r0\n"
+    "\tmovs r2, 0x80\n"
+    "\tlsls r2, 2\n"
+    "\tadds r0, r2, 0\n"
+    "\tldrh r1, [r1]\n"
+    "\tadds r0, r1\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tbl GetBehaviorByMetatileId\n"
+    "\tmovs r3, 0xF0\n"
+    "\tlsls r3, 8\n"
+    "\tadds r1, r3, 0\n"
+    "\tadds r5, r1, 0\n"
+    "\tands r5, r0\n"
+    "\tadds r0, r4, 0\n"
+    "\tldr r1, [sp]\n"
+    "\tbl sub_80FFBDC\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFD1A\n"
+    "\tb _080FFFF4\n"
+    "_080FFD1A:\n"
+    "\tmov r0, r10\n"
+    "\tadds r1, r6, 0\n"
+    "\tmov r2, r9\n"
+    "\tadds r3, r5, 0\n"
+    "\tbl sub_80FFB94\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFD2E\n"
+    "\tb _080FFFF4\n"
+    "_080FFD2E:\n"
+    "\tmov r1, r8\n"
+    "\tlsrs r0, r1, 16\n"
+    "\tldr r2, [sp, 0xC]\n"
+    "\tlsrs r1, r2, 16\n"
+    "\tmovs r2, 0\n"
+    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tcmp r4, 0\n"
+    "\tbeq _080FFD4A\n"
+    "\tcmp r4, 0x10\n"
+    "\tbeq _080FFD4A\n"
+    "\tb _080FFFF4\n"
+    "_080FFD4A:\n"
+    "\tadds r0, r7, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFCB8\n"
+    "_080FFD56:\n"
+    "\tldr r1, [sp, 0x14]\n"
+    "\tlsls r0, r1, 24\n"
+    "\tlsrs r6, r0, 24\n"
+    "\tldr r2, [sp, 0x4]\n"
+    "\tcmp r6, r2\n"
+    "\tbcc _080FFC8C\n"
+    "\tb _08100024\n"
+    "\t.align 2, 0\n"
+    "_080FFD64: .4byte gTasks\n"
+    "_080FFD68:\n"
+    "\tmovs r6, 0\n"
+    "\tmov r3, r10\n"
+    "\tlsls r3, 2\n"
+    "\tstr r3, [sp, 0x1C]\n"
+    "\tldr r0, [sp, 0x4]\n"
+    "\tsubs r0, 0x1\n"
+    "\tstr r0, [sp, 0x18]\n"
+    "\tcmp r6, r0\n"
+    "\tbge _080FFE54\n"
+    "\tadds r0, r3, 0\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tstr r0, [sp, 0x10]\n"
+    "_080FFD82:\n"
+    "\tldr r1, [sp, 0x10]\n"
+    "\tadds r0, r1, r2\n"
+    "\tldrh r0, [r0, 0xA]\n"
+    "\tsubs r0, r6\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tmov r9, r0\n"
+    "\tmovs r7, 0\n"
+    "\tadds r6, 0x1\n"
+    "\tstr r6, [sp, 0x14]\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcs _080FFE48\n"
+    "\tlsls r0, 16\n"
+    "\tstr r0, [sp, 0x20]\n"
+    "_080FFDA0:\n"
+    "\tldr r1, [sp, 0x10]\n"
+    "\tadds r0, r1, r2\n"
+    "\tldrh r0, [r0, 0x8]\n"
+    "\tadds r0, r7\n"
+    "\tlsls r0, 16\n"
+    "\tmov r8, r0\n"
+    "\tasrs r6, r0, 16\n"
+    "\tmov r2, r9\n"
+    "\tlsls r1, r2, 16\n"
+    "\tadds r0, r6, 0\n"
+    "\tasrs r1, 16\n"
+    "\tbl MapGridGetMetatileBehaviorAt\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tldr r3, [sp, 0x4]\n"
+    "\tldr r1, [sp, 0x14]\n"
+    "\tsubs r0, r3, r1\n"
+    "\tldr r2, [sp, 0x8]\n"
+    "\tadds r1, r0, 0\n"
+    "\tmuls r1, r2\n"
+    "\tadds r1, r7\n"
+    "\tldr r3, [sp]\n"
+    "\tldr r0, [r3, 0x1C]\n"
+    "\tlsls r1, 1\n"
+    "\tadds r1, r0\n"
+    "\tmovs r2, 0x80\n"
+    "\tlsls r2, 2\n"
+    "\tadds r0, r2, 0\n"
+    "\tldrh r1, [r1]\n"
+    "\tadds r0, r1\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tbl GetBehaviorByMetatileId\n"
+    "\tmovs r3, 0xF0\n"
+    "\tlsls r3, 8\n"
+    "\tadds r1, r3, 0\n"
+    "\tadds r5, r1, 0\n"
+    "\tands r5, r0\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl sub_805729C\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFE0C\n"
+    "\tadds r0, r4, 0\n"
+    "\tadds r1, r5, 0\n"
+    "\tbl sub_80FFB6C\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFE0C\n"
+    "\tb _080FFFF4\n"
+    "_080FFE0C:\n"
+    "\tmov r0, r10\n"
+    "\tadds r1, r6, 0\n"
+    "\tldr r3, [sp, 0x20]\n"
+    "\tasrs r2, r3, 16\n"
+    "\tadds r3, r5, 0\n"
+    "\tbl sub_80FFB94\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFE22\n"
+    "\tb _080FFFF4\n"
+    "_080FFE22:\n"
+    "\tmov r1, r8\n"
+    "\tlsrs r0, r1, 16\n"
+    "\tldr r2, [sp, 0x20]\n"
+    "\tlsrs r1, r2, 16\n"
+    "\tmovs r2, 0\n"
+    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tcmp r0, 0x10\n"
+    "\tbeq _080FFE3A\n"
+    "\tb _080FFFF4\n"
+    "_080FFE3A:\n"
+    "\tadds r0, r7, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tldr r2, _080FFF18 @ =gTasks\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFDA0\n"
+    "_080FFE48:\n"
+    "\tldr r1, [sp, 0x14]\n"
+    "\tlsls r0, r1, 24\n"
+    "\tlsrs r6, r0, 24\n"
+    "\tldr r3, [sp, 0x18]\n"
+    "\tcmp r6, r3\n"
+    "\tblt _080FFD82\n"
+    "_080FFE54:\n"
+    "\tldr r0, [sp, 0x1C]\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tadds r0, r2\n"
+    "\tldrh r0, [r0, 0xA]\n"
+    "\tldr r1, [sp, 0x4]\n"
+    "\tsubs r0, r1\n"
+    "\tadds r0, 0x1\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tmov r9, r0\n"
+    "\tmovs r7, 0\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFE74\n"
+    "\tb _08100024\n"
+    "_080FFE74:\n"
+    "\tlsls r0, 16\n"
+    "\tstr r0, [sp, 0x20]\n"
+    "_080FFE78:\n"
+    "\tldr r0, [sp, 0x1C]\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tldr r1, _080FFF18 @ =gTasks\n"
+    "\tadds r0, r1\n"
+    "\tldrh r0, [r0, 0x8]\n"
+    "\tadds r0, r7\n"
+    "\tlsls r0, 16\n"
+    "\tmov r8, r0\n"
+    "\tasrs r6, r0, 16\n"
+    "\tmov r2, r9\n"
+    "\tlsls r1, r2, 16\n"
+    "\tadds r0, r6, 0\n"
+    "\tasrs r1, 16\n"
+    "\tbl MapGridGetMetatileBehaviorAt\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tldr r3, [sp]\n"
+    "\tldr r0, [r3, 0x1C]\n"
+    "\tlsls r1, r7, 1\n"
+    "\tadds r1, r0\n"
+    "\tmovs r2, 0x80\n"
+    "\tlsls r2, 2\n"
+    "\tadds r0, r2, 0\n"
+    "\tldrh r1, [r1]\n"
+    "\tadds r0, r1\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tbl GetBehaviorByMetatileId\n"
+    "\tmovs r3, 0xF0\n"
+    "\tlsls r3, 8\n"
+    "\tadds r1, r3, 0\n"
+    "\tadds r5, r1, 0\n"
+    "\tands r5, r0\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl sub_805729C\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFEDA\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl sub_80572B0\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFEDA\n"
+    "\tb _080FFFF4\n"
+    "_080FFEDA:\n"
+    "\tmov r0, r10\n"
+    "\tadds r1, r6, 0\n"
+    "\tldr r3, [sp, 0x20]\n"
+    "\tasrs r2, r3, 16\n"
+    "\tadds r3, r5, 0\n"
+    "\tbl sub_80FFB94\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _080FFEF0\n"
+    "\tb _080FFFF4\n"
+    "_080FFEF0:\n"
+    "\tmov r1, r8\n"
+    "\tlsrs r0, r1, 16\n"
+    "\tldr r2, [sp, 0x20]\n"
+    "\tlsrs r1, r2, 16\n"
+    "\tmovs r2, 0\n"
+    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tcmp r4, 0\n"
+    "\tbeq _080FFF0A\n"
+    "\tcmp r4, 0x10\n"
+    "\tbne _080FFFF4\n"
+    "_080FFF0A:\n"
+    "\tadds r0, r7, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFE78\n"
+    "\tb _08100024\n"
+    "\t.align 2, 0\n"
+    "_080FFF18: .4byte gTasks\n"
+    "_080FFF1C:\n"
+    "\tmovs r6, 0\n"
+    "\tldr r0, [sp, 0x4]\n"
+    "\tcmp r6, r0\n"
+    "\tbcc _080FFF26\n"
+    "\tb _08100024\n"
+    "_080FFF26:\n"
+    "\tmov r1, r10\n"
+    "\tlsls r0, r1, 2\n"
+    "\tadd r0, r10\n"
+    "\tlsls r1, r0, 3\n"
+    "\tldr r2, _080FFF9C @ =gTasks\n"
+    "\tadds r0, r1, r2\n"
+    "\tldrh r0, [r0, 0xA]\n"
+    "\tsubs r0, r6\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tmov r9, r0\n"
+    "\tmovs r7, 0\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcs _080FFF8C\n"
+    "\tadds r0, r2, 0\n"
+    "\tadds r1, r0\n"
+    "\tmov r8, r1\n"
+    "\tmov r1, r9\n"
+    "\tlsls r0, r1, 16\n"
+    "\tasrs r5, r0, 16\n"
+    "_080FFF50:\n"
+    "\tmov r2, r8\n"
+    "\tldrh r0, [r2, 0x8]\n"
+    "\tadds r0, r7\n"
+    "\tlsls r0, 16\n"
+    "\tasrs r4, r0, 16\n"
+    "\tadds r0, r4, 0\n"
+    "\tadds r1, r5, 0\n"
+    "\tbl MapGridGetMetatileBehaviorAt\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tbl sub_80572B0\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _080FFFF4\n"
+    "\tadds r0, r4, 0\n"
+    "\tadds r1, r5, 0x1\n"
+    "\tbl MapGridGetMetatileIdAt\n"
+    "\tmovs r1, 0xA3\n"
+    "\tlsls r1, 2\n"
+    "\tcmp r0, r1\n"
+    "\tbeq _080FFFF4\n"
+    "\tadds r0, r7, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFF50\n"
+    "_080FFF8C:\n"
+    "\tadds r0, r6, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r6, r0, 24\n"
+    "\tldr r0, [sp, 0x4]\n"
+    "\tcmp r6, r0\n"
+    "\tbcc _080FFF26\n"
+    "\tb _08100024\n"
+    "\t.align 2, 0\n"
+    "_080FFF9C: .4byte gTasks\n"
+    "_080FFFA0:\n"
+    "\tmov r3, r10\n"
+    "\tlsls r1, r3, 2\n"
+    "\tadds r0, r1, r3\n"
+    "\tlsls r0, 3\n"
+    "\tadds r0, r2\n"
+    "\tldrh r0, [r0, 0xA]\n"
+    "\tmov r9, r0\n"
+    "\tmovs r7, 0\n"
+    "\tstr r1, [sp, 0x1C]\n"
+    "\tldr r0, [sp, 0x8]\n"
+    "\tcmp r7, r0\n"
+    "\tbcs _08100024\n"
+    "\tadds r6, r2, 0\n"
+    "\tmov r1, r9\n"
+    "\tlsls r1, 16\n"
+    "\tstr r1, [sp, 0x20]\n"
+    "_080FFFC0:\n"
+    "\tldr r0, [sp, 0x1C]\n"
+    "\tadd r0, r10\n"
+    "\tlsls r0, 3\n"
+    "\tadds r0, r6\n"
+    "\tldrh r0, [r0, 0x8]\n"
+    "\tadds r0, r7\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r5, r0, 16\n"
+    "\tasrs r0, 16\n"
+    "\tmov r2, r9\n"
+    "\tlsls r1, r2, 16\n"
+    "\tasrs r1, 16\n"
+    "\tbl MapGridGetMetatileBehaviorAt\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r4, r0, 24\n"
+    "\tldr r3, [sp]\n"
+    "\tldrb r0, [r3, 0x12]\n"
+    "\tcmp r0, 0x5\n"
+    "\tbne _080FFFF8\n"
+    "_080FFFE8:\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl sub_80572EC\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbne _08100004\n"
+    "_080FFFF4:\n"
+    "\tmovs r0, 0\n"
+    "\tb _08100026\n"
+    "_080FFFF8:\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl sub_80572D8\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _080FFFE8\n"
+    "_08100004:\n"
+    "\tadds r0, r5, 0\n"
+    "\tldr r2, [sp, 0x20]\n"
+    "\tlsrs r1, r2, 16\n"
+    "\tmovs r2, 0\n"
+    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tcmp r0, 0x10\n"
+    "\tbne _080FFFF4\n"
+    "\tadds r0, r7, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tldr r3, [sp, 0x8]\n"
+    "\tcmp r7, r3\n"
+    "\tbcc _080FFFC0\n"
+    "_08100024:\n"
+    "\tmovs r0, 0x1\n"
+    "_08100026:\n"
+    "\tadd sp, 0x24\n"
+    "\tpop {r3-r5}\n"
+    "\tmov r8, r3\n"
+    "\tmov r9, r4\n"
+    "\tmov r10, r5\n"
+    "\tpop {r4-r7}\n"
+    "\tpop {r1}\n"
+    "\tbx r1\n"
+    ".syntax divided\n");
+}
+
+#endif
