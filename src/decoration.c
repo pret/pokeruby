@@ -919,3 +919,55 @@ void sub_80FF960(u8 taskId)
             break;
     }
 }
+
+void sub_80FFAB0(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    gSprites[gUnknown_020391A8].data7 = 1;
+    gSprites[gUnknown_020391A9].data7 = 1;
+    sub_810045C();
+    sub_8100038(taskId);
+}
+
+void sub_80FFB08(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    gSprites[gUnknown_020391A8].data7 = 1;
+    gSprites[gUnknown_020391A9].data7 = 1;
+    sub_810045C();
+    DisplayItemMessageOnField(taskId, gSecretBaseText_CancelDecorating, sub_8100248, 0);
+}
+
+bool8 sub_80FFB6C(u8 a0, u16 a1)
+{
+    if (sub_8057274(a0) != 1 || a1 != 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_80FFB94(u8 taskId, s16 x, s16 y, u16 decoId)
+{
+    if (x == gTasks[taskId].data[3] + 7 && y == gTasks[taskId].data[4] + 7 && decoId != 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_80FFBDC(u16 a0, struct Decoration *decoration)
+{
+    if (sub_8057274(a0) != 1)
+    {
+        if (decoration->id == DECOR_SOLID_BOARD && sub_8057300(a0) == 1)
+        {
+            return TRUE;
+        }
+        if (sub_805729C(a0))
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
