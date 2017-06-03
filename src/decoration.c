@@ -871,3 +871,51 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *un
     DestroySprite(&gSprites[gUnknown_020391A8]);
     gUnknown_020391A8 = gUnknown_03004880.unk4;
 }
+
+void sub_80FF960(u8 taskId)
+{
+    switch (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].decor_field_12)
+    {
+        case 0:
+            gTasks[taskId].data[5] = 1;
+            gTasks[taskId].data[6] = 1;
+            break;
+        case 1:
+            gTasks[taskId].data[5] = 2;
+            gTasks[taskId].data[6] = 1;
+            break;
+        case 2:
+            gTasks[taskId].data[5] = 3;
+            gTasks[taskId].data[6] = 1;
+            break;
+        case 3:
+            gTasks[taskId].data[5] = 4;
+            gTasks[taskId].data[6] = 2;
+            break;
+        case 4:
+            gTasks[taskId].data[5] = 2;
+            gTasks[taskId].data[6] = 2;
+            break;
+        case 5:
+            gTasks[taskId].data[5] = 1;
+            gTasks[taskId].data[6] = 2;
+            break;
+        case 6:
+            gTasks[taskId].data[5] = 1;
+            gTasks[taskId].data[6] = 3;
+            gTasks[taskId].data[1]++;
+            break;
+        case 7:
+            gTasks[taskId].data[5] = 2;
+            gTasks[taskId].data[6] = 4;
+            break;
+        case 8:
+            gTasks[taskId].data[5] = 3;
+            gTasks[taskId].data[6] = 3;
+            break;
+        case 9:
+            gTasks[taskId].data[5] = 3;
+            gTasks[taskId].data[6] = 2;
+            break;
+    }
+}
