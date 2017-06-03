@@ -189,6 +189,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83EC93C;
 extern struct Decoration gDecorations[0x77];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
+extern Script gUnknown_081A2F7B;
 
 extern u8 gUnknown_020388D4;
 extern u8 gUnknown_020388D5;
@@ -206,6 +207,8 @@ extern u16 gUnknown_020391A4;
 extern u16 gUnknown_020391A6;
 extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
+extern u8 gUnknown_020391AA;
+extern void (*gUnknown_0300485C)(void);
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
@@ -218,6 +221,8 @@ extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
 extern void sub_80B3068(u8); // src/shop
+extern const struct YesNoFuncTable gUnknown_083EC95C;
+extern const struct YesNoFuncTable gUnknown_083EC964;
 
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
@@ -257,14 +262,21 @@ void sub_80FF960(u8);
 void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 *, u8);
 void SetUpPlacingDecorationPlayerAvatar(u8, struct UnkStruct_02038900 *);
 void sub_8100038(u8);
+void sub_81000A0(u8);
+void sub_8100174(u8);
 void sub_8100248(u8);
+void sub_810028C(u8);
+void c1_overworld_prev_quest(u8);
+void sub_8100364(void);
 void sub_810045C(void);
 void sub_810065C(u8);
+void sub_81006A8(u8);
 void sub_81006D0(struct UnkStruct_02038900 *);
 void sub_810070C(u16 *, int);
 void sub_8100874(struct UnkStruct_02038900 *);
 void sub_81008BC(struct UnkStruct_02038900 *);
 void sub_8100930(u8);
 void sub_81009A8(struct Sprite *);
+void sub_81016F4(void);
 
 #endif // GUARD_DECORATION_H

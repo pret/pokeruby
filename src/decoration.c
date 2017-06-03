@@ -5,6 +5,7 @@
 #include "songs.h"
 #include "string_util.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "strings.h"
 #include "script.h"
 #include "palette.h"
@@ -1636,5 +1637,164 @@ bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
     "\tbx r1\n"
     ".syntax divided\n");
 }
-
 #endif
+
+void sub_8100038(u8 taskId)
+{
+    if (sub_80FFC24(taskId, &gDecorations[gUnknown_020388D0[gUnknown_020388F5]]) == 1)
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_PlaceItHere, sub_81000A0, 0);
+    } else
+    {
+        PlaySE(SE_HAZURE);
+        DisplayItemMessageOnField(taskId, gSecretBaseText_CantBePlacedHere, sub_81006A8, 0);
+    }
+}
+
+void sub_81000A0(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    sub_80F914C(taskId, &gUnknown_083EC95C);
+}
+
+void sub_81000C4(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_8100174(taskId);
+    if (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].decor_field_11 != 4)
+    {
+        sub_80FF394(gTasks[taskId].data[0], gTasks[taskId].data[1], gUnknown_020388D0[gUnknown_020388F5]);
+    } else
+    {
+        gUnknown_020391A4 = gTasks[taskId].data[0] - 7;
+        gUnknown_020391A6 = gTasks[taskId].data[1] - 7;
+        ScriptContext1_SetupScript(gUnknown_081A2F7B);
+    }
+    gSprites[gUnknown_020391A8].pos1.y += 2;
+    sub_810028C(taskId);
+}
+
+void sub_8100174(u8 taskId)
+{
+    u16 i;
+    for (i=0; i<ewram_1f000.size; i++)
+    {
+        if (ewram_1f000.items[i] == 0)
+        {
+            ewram_1f000.items[i] = gUnknown_020388D0[gUnknown_020388F5];
+            ewram_1f000.pos[i] = ((gTasks[taskId].data[0] - 7) << 4) + (gTasks[taskId].data[1] - 7);
+            break;
+        }
+    }
+    if (!ewram_1f000.isPlayerRoom)
+    {
+        for (i=0; i<16; i++)
+        {
+            if (gUnknown_020388D6[i] == 0)
+            {
+                gUnknown_020388D6[i] = gUnknown_020388F5 + 1;
+                break;
+            }
+        }
+    } else
+    {
+        for (i=0; i<12; i++)
+        {
+            if (gUnknown_020388E6[i] == 0)
+            {
+                gUnknown_020388E6[i] = gUnknown_020388F5 + 1;
+                break;
+            }
+        }
+    }
+}
+
+void sub_8100248(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    sub_80F914C(taskId, &gUnknown_083EC964);
+}
+
+void sub_810026C(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_810028C(taskId);
+}
+
+void sub_810028C(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = c1_overworld_prev_quest;
+}
+
+void c1_overworld_prev_quest(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            ScriptContext2_Enable();
+            if (!gPaletteFade.active)
+            {
+                sub_80FF114(taskId);
+                gTasks[taskId].data[2] = 1;
+            }
+            break;
+        case 1:
+            sub_81016F4();
+            FreeSpritePaletteByTag(0xbb8);
+            gUnknown_0300485C = &sub_8100364;
+            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_8100334(u8 taskId)
+{
+    if (sub_807D770() == 1)
+    {
+        gTasks[taskId].func = sub_80FE948;
+    }
+}
+
+void sub_8100364(void)
+{
+    ScriptContext2_Enable();
+    LoadScrollIndicatorPalette();
+    pal_fill_black();
+    sub_80FE7EC(CreateTask(sub_8100334, 8));
+}
+
+bool8 sub_810038C(u8 taskId)
+{
+    s16 *data;
+    data = gTasks[taskId].data;
+    if (gUnknown_020391AA == DIR_SOUTH && data[1] - data[6] - 6 < 0)
+    {
+        data[1]++;
+        return FALSE;
+    } else if (gUnknown_020391AA == DIR_NORTH && data[1] - 7 >= gMapHeader.mapData->height)
+    {
+        data[1]--;
+        return FALSE;
+    } else if (gUnknown_020391AA == DIR_WEST && data[0] - 7 < 0)
+    {
+        data[0]++;
+        return FALSE;
+    } else if (gUnknown_020391AA == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapData->width)
+    {
+        data[0]--;
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_8100430(void)
+{
+    if ((gMain.heldKeys & 0xF0) != DPAD_UP && (gMain.heldKeys & 0xF0) != DPAD_DOWN && (gMain.heldKeys & 0xF0) != DPAD_LEFT && (gMain.heldKeys & 0xF0) != DPAD_RIGHT)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
