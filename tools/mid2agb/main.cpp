@@ -45,21 +45,28 @@ bool g_compressionEnabled = true;
 [[noreturn]] static void PrintUsage()
 {
     std::printf(
-        "Usage: MID2AGB name [options]\n"
+		"Mid2Agb\n"
+		"Copyright (C) 2016 YamaArashi\n"
+		"\n"
+		"Usage: MID2AGB input_file <output_file> <options>\n"
         "\n"
-        "    input_file  filename(.mid) of MIDI file\n"
-        "   output_file  filename(.s) for AGB file (default:input_file)\n"
+        "      input_file    filename(.mid) of MIDI file\n"
+        "      output_file   filename(.s) for AGB file (default: input_file)\n"
         "\n"
-        "options  -V???  master volume (default:127)\n"
-        "         -G???  voice group number (default:0)\n"
-        "         -P???  priority (default:0)\n"
-        "         -R???  reverb (default:off)\n"
-        "            -X  48 clocks/beat (default:24 clocks/beat)\n"
-        "            -E  exact gate-time\n"
-        "            -N  no compression\n"
+		"options  -L label   Assembly label to use. (default: input_file without .mid)\n"
+		"            -V???   master volume (default: 127)\n"
+        "            -G???   voice group number (default: 0)\n"
+        "            -P???   priority (default: 0)\n"
+        "            -R???   reverb (default: off)\n"
+        "               -X   48 clocks/beat (default: 24 clocks/beat)\n"
+        "               -E   exact gate-time\n"
+        "               -N   no compression\n"
     );
     std::exit(1);
 }
+
+
+// Strips the file extension. 
 
 static std::string StripExtension(std::string s)
 {
@@ -73,22 +80,64 @@ static std::string StripExtension(std::string s)
     return s;
 }
 
-static std::string GetExtension(std::string s)
-{
-    std::size_t pos = s.find_last_of('.');
 
+// Removes spaces in the filename and switches it with underscores for the asm label.
+// 
+// This was an issue with the original Mid2Agb, as assembly labels can't have spaces. 
+// As a result, it would create a .s file with spaces in assembly labels, crashing Sappy.
+// 
+// Credit goes to https://stackoverflow.com/a/5252645
+
+static std::string SpaceToUnderscore(std::string s) {
+	for (std::string::iterator it = s.begin(); it != s.end(); ++it) {
+		if (*it == ' ') {
+			*it = '_';
+		}
+	}
+	return s;
+}
+
+
+// Converts a path to an asm label. 
+// This removes the absolute path (mainly for when dragging mid files from the file explorer
+// with spaces to mid2agb.exe), removes spaces, and removes the file extension. 
+//
+// Example: 
+//     Input:
+//        C:\Users\John Smith\midi for mid2agb.mid
+//    Output: 
+//        midi_for_mid2agb
+
+static std::string GetAsmLabel(std::string s)
+{
+	// find the last backslash or slash. 
+	std::size_t pos = s.find_last_of("/\\");
+	
     if (pos > 0 && pos != std::string::npos)
     {
-        return s.substr(pos + 1);
+        return StripExtension(SpaceToUnderscore(s.substr(pos + 1)));
     }
 
     return "";
+}
+
+static std::string GetExtension(std::string s)
+{
+	std::size_t pos = s.find_last_of('.');
+
+	if (pos > 0 && pos != std::string::npos)
+	{
+		return s.substr(pos + 1);
+	}
+
+	return "";
 }
 
 struct Option
 {
     char letter = 0;
     const char *arg = NULL;
+	
 };
 
 static Option ParseOption(int& index, const int argc, char** argv)
@@ -130,7 +179,7 @@ static Option ParseOption(int& index, const int argc, char** argv)
         index++;
 
         if (index >= argc)
-            RaiseError("missing argument for \"-%c\"", letter);
+            RaiseError("Missing argument for \"-%c\"", letter);
 
         retVal.arg = argv[index];
     }
@@ -197,26 +246,26 @@ int main(int argc, char** argv)
         PrintUsage();
 
     if (GetExtension(inputFilename) != "mid")
-        RaiseError("input filename extension is not \"mid\"");
+        RaiseError("The input filename extension is not \"mid\".");
 
     if (outputFilename.empty())
         outputFilename = StripExtension(inputFilename) + ".s";
 
     if (GetExtension(outputFilename) != "s")
-        RaiseError("output filename extension is not \"s\"");
+        RaiseError("The output filename extension is not \"s\".");
 
     if (g_asmLabel.empty())
-        g_asmLabel = StripExtension(outputFilename);
+        g_asmLabel = GetAsmLabel(outputFilename);
 
     g_inputFile = std::fopen(inputFilename.c_str(), "rb");
 
     if (g_inputFile == nullptr)
-        RaiseError("failed to open \"%s\" for reading", inputFilename.c_str());
+        RaiseError("Could not open \"%s\" for reading.", inputFilename.c_str());
 
     g_outputFile = std::fopen(outputFilename.c_str(), "w");
 
     if (g_outputFile == nullptr)
-        RaiseError("failed to open \"%s\" for writing", outputFilename.c_str());
+        RaiseError("Could not open \"%s\" for writing.", outputFilename.c_str());
 
     ReadMidiFileHeader();
     PrintAgbHeader();

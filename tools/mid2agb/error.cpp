@@ -22,7 +22,8 @@
 #include <cstdlib>
 #include <cstdarg>
 
-// Reports an error diagnostic and terminates the program.
+// Reports an error diagnostic and terminates the program
+// after the user presses Enter.
 [[noreturn]] void RaiseError(const char* format, ...)
 {
     const int bufferSize = 1024;
@@ -30,7 +31,12 @@
     std::va_list args;
     va_start(args, format);
     std::vsnprintf(buffer, bufferSize, format, args);
-    std::fprintf(stderr, "error: %s\n", buffer);
+    std::fprintf(stderr, "Error: %s\n", buffer);
     va_end(args);
+	// If the user drags a MIDI from File Explorer, 
+	// the console window would close before you could
+	// read it. 
+	std::printf("Press ENTER to continue...");
+	std::getchar();
     std::exit(1);
 }

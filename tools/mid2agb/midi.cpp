@@ -56,13 +56,13 @@ static int s_maxNote;
 void Seek(long offset)
 {
     if (std::fseek(g_inputFile, offset, SEEK_SET) != 0)
-        RaiseError("failed to seek to %l", offset);
+        RaiseError("Failed to seek to %l.", offset);
 }
 
 void Skip(long offset)
 {
     if (std::fseek(g_inputFile, offset, SEEK_CUR) != 0)
-        RaiseError("failed to skip %l bytes", offset);
+        RaiseError("Failed to skip %l bytes.", offset);
 }
 
 std::string ReadSignature()
@@ -70,7 +70,7 @@ std::string ReadSignature()
     char signature[4];
 
     if (std::fread(signature, 4, 1, g_inputFile) != 1)
-        RaiseError("failed to read signature");
+        RaiseError("Failed to read signature.");
 
     return std::string(signature, 4);
 }
@@ -80,7 +80,7 @@ std::uint32_t ReadInt8()
     int c = std::fgetc(g_inputFile);
 
     if (c < 0)
-        RaiseError("unexpected EOF");
+        RaiseError("Unexpected EOF. The MIDI file may be corrupt.");
 
     return c;
 }
@@ -132,24 +132,24 @@ void ReadMidiFileHeader()
     Seek(0);
 
     if (ReadSignature() != "MThd")
-        RaiseError("MIDI file header signature didn't match \"MThd\"");
+        RaiseError("The MIDI file header signature didn't match \"MThd\".");
 
     std::uint32_t headerLength = ReadInt32();
 
     if (headerLength != 6)
-        RaiseError("MIDI file header length isn't 6");
+        RaiseError("The MIDI file header length isn't 6.");
 
     std::uint16_t midiFormat = ReadInt16();
 
     if (midiFormat >= 2)
-        RaiseError("unsupported MIDI format (%u)", midiFormat);
+        RaiseError("The current MIDI format, %u, is unsupported. Only Type 0 and Type 1 are supported.", midiFormat);
 
     g_midiFormat = (MidiFormat)midiFormat;
     g_midiTrackCount = ReadInt16();
     g_midiTimeDiv = ReadInt16();
 
     if (g_midiTimeDiv < 0)
-        RaiseError("unsupported MIDI time division (%d)", g_midiTimeDiv);
+        RaiseError("The MIDI time division, %d, is unsupported.", g_midiTimeDiv);
 }
 
 long ReadMidiTrackHeader(long offset)
@@ -157,7 +157,7 @@ long ReadMidiTrackHeader(long offset)
     Seek(offset);
 
     if (ReadSignature() != "MTrk")
-        RaiseError("MIDI track header signature didn't match \"MTrk\"");
+        RaiseError("The MIDI track header signature didn't match \"MTrk\".");
 
     long size = ReadInt32();
 
@@ -227,7 +227,7 @@ std::string ReadEventText()
     if (length <= 2)
     {
         if (fread(buffer, length, 1, g_inputFile) != 1)
-            RaiseError("failed to read event text");
+            RaiseError("Failed to read event text.");
     }
     else
     {
@@ -262,7 +262,7 @@ bool ReadSeqEvent(Event& event)
     }
 
     if (category == MidiEventCategory::Invalid)
-        RaiseError("invalid event");
+        RaiseError("Invalid event.");
 
     // meta event
     int metaEventType = ReadInt8();
@@ -272,11 +272,13 @@ bool ReadSeqEvent(Event& event)
         // text event
         std::string text = ReadEventText();
 
-        if (text == "[")
+		// Brackets are standard, but for some strange reason, gba_mus_riper
+		// uses loopStart and loopEnd. 
+        if (text == "[" || text == "loopStart")
             MakeBlockEvent(event, EventType::LoopBegin);
         else if (text == "][")
             MakeBlockEvent(event, EventType::LoopEndBegin);
-        else if (text == "]")
+        else if (text == "]" || text == "loopEnd")
             MakeBlockEvent(event, EventType::LoopEnd);
         else if (text == ":")
             MakeBlockEvent(event, EventType::Label);
@@ -411,12 +413,12 @@ bool CheckNoteEnd(Event& event)
         SkipEventData();
 
         if (metaEventType == 0x2F)
-            RaiseError("note doesn't end");
+            RaiseError("Note doesn't end.");
 
         return false;
     }
 
-    RaiseError("invalid event");
+    RaiseError("Invalid event.");
 }
 
 void FindNoteEnd(Event& event)
@@ -520,7 +522,7 @@ bool ReadTrackEvent(Event& event)
         return false;
     }
 
-    RaiseError("invalid event");
+    RaiseError("Invalid event.");
 }
 
 void ReadTrackEvents()
