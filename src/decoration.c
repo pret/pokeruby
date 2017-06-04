@@ -1907,3 +1907,52 @@ void sub_810070C(u16 *a0, u16 a1)
         a0[i] = ((u16 *)gMapHeader.mapData->primaryTileset->palettes)[16 * a1 + i];
     }
 }
+
+void sub_8100740(u8 *dest, u16 flags)
+{
+    u8 buffer[32];
+    u16 mode;
+    u16 i;
+    mode = flags >> 10;
+    if (flags != 0)
+    {
+        flags &= 0x3ff;
+    }
+    for (i=0; i<32; i++)
+    {
+        buffer[i] = ((u8 *)gMapHeader.mapData->primaryTileset->tiles)[flags * 32 + i];
+    }
+    switch (mode)
+    {
+        case 0:
+            for (i=0; i<32; i++)
+            {
+                dest[i] = buffer[i];
+            }
+            break;
+        case 1:
+            for (i=0; i<8; i++)
+            {
+                dest[4*i] = (buffer[4*(i+1) - 1] >> 4) + ((buffer[4*(i+1) - 1] & 0xf) << 4);
+                dest[4*i + 1] = (buffer[4*(i+1) - 2] >> 4) + ((buffer[4*(i+1) - 2] & 0xf) << 4);
+                dest[4*i + 2] = (buffer[4*(i+1) - 3] >> 4) + ((buffer[4*(i+1) - 3] & 0xf) << 4);
+                dest[4*i + 3] = (buffer[4*(i+1) - 4] >> 4) + ((buffer[4*(i+1) - 4] & 0xf) << 4);
+            }
+            break;
+        case 2:
+            for (i=0; i<8; i++)
+            {
+                dest[4*i] = buffer[4*(7-i)];
+                dest[4*i + 1] = buffer[4*(7-i) + 1];
+                dest[4*i + 2] = buffer[4*(7-i) + 2];
+                dest[4*i + 3] = buffer[4*(7-i) + 3];
+            }
+            break;
+        case 3:
+            for (i=0; i<32; i++)
+            {
+                dest[i] = (buffer[31-i] >> 4) + ((buffer[31-i] & 0xf) << 4);
+            }
+            break;
+    }
+}
