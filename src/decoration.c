@@ -2147,3 +2147,68 @@ void sub_8100C88(u8 taskId)
             break;
     }
 }
+
+bool8 sub_8100D38(u8 taskId)
+{
+    u16 i;
+    for (i=0; i<ewram_1f000.size; i++)
+    {
+        if (ewram_1f000.items[i] != 0)
+        {
+            gTasks[taskId].data[13] = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void SetUpPuttingAwayDecorationPlayerAvatar(void)
+{
+    player_get_direction_lower_nybble();
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+    sub_81016C8();
+    gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
+    if (gSaveBlock2.playerGender == MALE)
+    {
+        gUnknown_020391A9 = AddPseudoFieldObject(0xc1, SpriteCallbackDummy, 0x88, 0x48, 0);
+    } else
+    {
+        gUnknown_020391A9 = AddPseudoFieldObject(0xc2, SpriteCallbackDummy, 0x88, 0x48, 0);
+    }
+    gSprites[gUnknown_020391A9].oam.priority = 1;
+    DestroySprite(&gSprites[gUnknown_020391A8]);
+    gUnknown_020391A8 = gUnknown_03004880.unk4;
+    gSprites[gUnknown_020391A8].oam.priority = 1;
+}
+
+void sub_8100E70(u8 taskId)
+{
+    s16 *data;
+    data = gTasks[taskId].data;
+    switch (data[2])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                sub_80FF0E0(taskId);
+                data[2] = 1;
+                data[6] = 1;
+                data[5] = 1;
+                sub_8072DEC();
+            }
+            break;
+        case 1:
+            SetUpPuttingAwayDecorationPlayerAvatar();
+            pal_fill_black();
+            data[2] = 2;
+            break;
+        case 2:
+            if (sub_807D770() == TRUE)
+            {
+                data[12] = 1;
+                sub_8100EEC(taskId);
+            }
+            break;
+    }
+}
