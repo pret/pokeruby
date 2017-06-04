@@ -2212,3 +2212,138 @@ void sub_8100E70(u8 taskId)
             break;
     }
 }
+
+void sub_8100EEC(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    gSprites[gUnknown_020391A8].data7 = 0;
+    gSprites[gUnknown_020391A8].invisible = 0;
+    gSprites[gUnknown_020391A8].callback = sub_8101698;
+    gSprites[gUnknown_020391A9].pos1.x = 0x88;
+    gSprites[gUnknown_020391A9].pos1.y = 0x48;
+    gTasks[taskId].data[10] = 0;
+    gTasks[taskId].func = sub_8100494;
+}
+
+void sub_8100F88(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    sub_810045C();
+    sub_8101024(taskId);
+}
+
+void sub_8100FB4(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    sub_810045C();
+    gSprites[gUnknown_020391A8].invisible = 0;
+    gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
+    DisplayItemMessageOnField(taskId, gSecretBaseText_StopPuttingAwayDecor, sub_810156C, 0);
+}
+
+void sub_8101024(u8 taskId)
+{
+    u8 mtBehavior;
+    s16 *data;
+    sub_8101460(taskId);
+    if (gUnknown_02039234 != 0)
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_ReturnDecor, sub_8101518, 0);
+    } else
+    {
+        data = gTasks[taskId].data;
+        mtBehavior = MapGridGetMetatileBehaviorAt(data[0], data[1]);
+        if (MetatileBehavior_IsSecretBasePC(mtBehavior) == TRUE || sub_805738C(mtBehavior) == TRUE)
+        {
+            gSprites[gUnknown_020391A8].invisible = 0;
+            gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
+            DisplayItemMessageOnField(taskId, gSecretBaseText_StopPuttingAwayDecor, sub_810156C, 0);
+        } else
+        {
+            DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecor, sub_81010F0, 0);
+        }
+    }
+}
+
+void sub_81010F0(u8 taskId)
+{
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    {
+        sub_8100EEC(taskId);
+    }
+}
+
+void sub_8101118(u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
+{
+    if (gDecorations[decorIdx].decor_field_12 == 0)
+    {
+        unk_020391B4->var01 = 1;
+        unk_020391B4->var02 = 1;
+    } else if (gDecorations[decorIdx].decor_field_12 == 1)
+    {
+        unk_020391B4->var01 = 2;
+        unk_020391B4->var02 = 1;
+    } else if (gDecorations[decorIdx].decor_field_12 == 2)
+    {
+        unk_020391B4->var01 = 3;
+        unk_020391B4->var02 = 1;
+    } else if (gDecorations[decorIdx].decor_field_12 == 3)
+    {
+        unk_020391B4->var01 = 4;
+        unk_020391B4->var02 = 2;
+    } else if (gDecorations[decorIdx].decor_field_12 == 4)
+    {
+        unk_020391B4->var01 = 2;
+        unk_020391B4->var02 = 2;
+    } else if (gDecorations[decorIdx].decor_field_12 == 5)
+    {
+        unk_020391B4->var01 = 1;
+        unk_020391B4->var02 = 2;
+    } else if (gDecorations[decorIdx].decor_field_12 == 6)
+    {
+        unk_020391B4->var01 = 1;
+        unk_020391B4->var02 = 3;
+    } else if (gDecorations[decorIdx].decor_field_12 == 7)
+    {
+        unk_020391B4->var01 = 2;
+        unk_020391B4->var02 = 4;
+    } else if (gDecorations[decorIdx].decor_field_12 == 8)
+    {
+        unk_020391B4->var01 = 3;
+        unk_020391B4->var02 = 3;
+    } else if (gDecorations[decorIdx].decor_field_12 == 9)
+    {
+        unk_020391B4->var01 = 3;
+        unk_020391B4->var02 = 2;
+    }
+}
+
+void sub_8101198(u8 x, u8 y)
+{
+    gSprites[gUnknown_020391A8].invisible = 1;
+    gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_020391A9].pos1.x = 0x88 + x * 16;
+    gSprites[gUnknown_020391A9].pos1.y = 0x48 + y * 16;
+}
+
+bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
+{
+    u8 x;
+    u8 y;
+    u8 xOff;
+    u8 yOff;
+    x = gTasks[taskId].data[0] - 7;
+    y = gTasks[taskId].data[1] - 7;
+    xOff = ewram_1f000.pos[decorIdx] >> 4;
+    yOff = ewram_1f000.pos[decorIdx] & 0xf;
+    if (ewram_1f000.items[decorIdx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28c)
+    {
+        unk_020391B4->var02--;
+    }
+    if (x >= xOff && x < xOff + unk_020391B4->var01 && y > yOff - unk_020391B4->var02 && y <= yOff)
+    {
+        sub_8101198(unk_020391B4->var01 - (x - xOff + 1), yOff - y);
+        return TRUE;
+    }
+    return FALSE;
+}

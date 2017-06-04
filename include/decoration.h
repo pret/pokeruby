@@ -307,7 +307,12 @@ void sub_81009C0(struct Sprite *);
 bool8 sub_8100D38(u8);
 void sub_8100E70(u8);
 void sub_8100EEC(u8);
+void sub_8101024(u8);
 void sub_81010F0(u8);
+void sub_8101460(u8);
+void sub_8101518(u8);
+void sub_810156C(u8);
+void sub_8101698(struct Sprite *);
 void sub_81016C8(void);
 void sub_81016F4(void);
 
