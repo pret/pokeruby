@@ -2114,3 +2114,36 @@ void sub_8100B6C(void)
         }
     }
 }
+
+void sub_8100C88(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            sub_8100B6C();
+            gTasks[taskId].data[2] = 1;
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                DrawWholeMapView();
+                ScriptContext1_SetupScript(gUnknown_081A2F8A);
+                MenuZeroFillWindowRect(0, 0, 29, 19);
+                gTasks[taskId].data[2] = 2;
+            }
+            break;
+        case 2:
+            ScriptContext2_Enable();
+            sub_80FED90(taskId);
+            pal_fill_black();
+            gTasks[taskId].data[2] = 3;
+            break;
+        case 3:
+            if (sub_807D770() == 1)
+            {
+                gTasks[taskId].data[13] = -1;
+                DisplayItemMessageOnField(taskId, gSecretBaseText_DecorReturned, sub_81010F0, 0);
+            }
+            break;
+    }
+}

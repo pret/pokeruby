@@ -209,6 +209,7 @@ extern struct Decoration gDecorations[0x77];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
 extern Script gUnknown_081A2F7B;
+extern Script gUnknown_081A2F8A;
 extern struct OamData gUnknown_020391AC;
 
 extern u8 gUnknown_020388D4;
@@ -304,6 +305,7 @@ void sub_81009A8(struct Sprite *);
 void sub_81009C0(struct Sprite *);
 bool8 sub_8100D38(u8);
 void sub_8100E70(u8);
+void sub_81010F0(u8);
 void sub_81016F4(void);
 
 #endif // GUARD_DECORATION_H
