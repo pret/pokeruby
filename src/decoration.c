@@ -1968,3 +1968,14 @@ u16 sub_810089C(u16 a0)
 {
     return ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles)[a0] & 0xfff;
 }
+
+void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
+{
+    u8 i;
+    u8 idx;
+    idx = unk_02038900->decoration->decor_field_12;
+    for (i=0; i<gUnknown_083EC860[idx].size; i++)
+    {
+        unk_02038900->unk_004[gUnknown_083EC860[idx].var0[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[idx].var4[i]] * 8 + gUnknown_083EC860[idx].var8[i]);
+    }
+}

@@ -8,68 +8,6 @@
 
 .equiv ewram_1f000, 0x0201f000
 
-	thumb_func_start sub_81008BC
-sub_81008BC: @ 81008BC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r0
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x12]
-	movs r6, 0
-	ldr r1, _0810092C @ =gUnknown_083EC860
-	lsls r5, r0, 4
-	adds r0, r5, r1
-	ldrb r0, [r0, 0xC]
-	cmp r6, r0
-	bcs _08100920
-	adds r7, r1, 0
-_081008D8:
-	mov r4, r8
-	ldm r4!, {r1}
-	adds r0, r7, 0x4
-	adds r0, r5, r0
-	ldr r0, [r0]
-	adds r0, r6
-	ldrb r0, [r0]
-	ldr r1, [r1, 0x1C]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	adds r1, r7, 0
-	adds r1, 0x8
-	adds r1, r5, r1
-	ldr r1, [r1]
-	adds r1, r6
-	lsls r0, 3
-	ldrb r1, [r1]
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_810089C
-	adds r2, r5, r7
-	ldr r1, [r2]
-	adds r1, r6
-	ldrb r1, [r1]
-	lsls r1, 1
-	adds r4, r1
-	strh r0, [r4]
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldrb r2, [r2, 0xC]
-	cmp r6, r2
-	bcc _081008D8
-_08100920:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810092C: .4byte gUnknown_083EC860
-	thumb_func_end sub_81008BC
-
 	thumb_func_start sub_8100930
 sub_8100930: @ 8100930
 	push {r4,r5,lr}

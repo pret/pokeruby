@@ -162,6 +162,16 @@ struct DecorationInventory
     u8 size;
 };
 
+struct UnkStruct_803EC860
+{
+    u8 *var0;
+    u8 *var4;
+    u8 *var8;
+    u8 size;
+};
+
+extern const struct UnkStruct_803EC860 gUnknown_083EC860[];
+
 extern u8 ewram[];
 #define ewram_1f000 (*(struct DecoPCPointers *)(ewram + 0x1f000))
 
