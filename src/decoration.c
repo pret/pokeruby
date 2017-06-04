@@ -1869,3 +1869,41 @@ void sub_8100494(u8 taskId)
         }
     }
 }
+
+void sub_810065C(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    gSprites[gUnknown_020391A8].data7 = 0;
+    gTasks[taskId].data[10] = 0;
+    gTasks[taskId].func = sub_8100494;
+}
+
+void sub_81006A8(u8 taskId)
+{
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    {
+        sub_810065C(taskId);
+    }
+}
+
+void sub_81006D0(struct UnkStruct_02038900 *unk_02038900)
+{
+    u16 i;
+    for (i=0; i<0x800; i++)
+    {
+        unk_02038900->unk_084[i] = 0;
+    }
+    for (i=0; i<0x40; i++)
+    {
+        unk_02038900->unk_004[i] = 0;
+    }
+}
+
+void sub_810070C(u16 *a0, u16 a1)
+{
+    u16 i;
+    for (i=0; i<16; i++)
+    {
+        a0[i] = ((u16 *)gMapHeader.mapData->primaryTileset->palettes)[16 * a1 + i];
+    }
+}

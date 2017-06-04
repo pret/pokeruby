@@ -168,9 +168,8 @@ extern u8 ewram[];
 struct UnkStruct_02038900
 {
     struct Decoration *decoration;
-    u8 pad_004[0x18];
-    u16 *unk_01C;
-    u8 pad_020[0x864];
+    u16 unk_004[0x40];
+    u8 unk_084[0x800];
     u16 unk_884[16];
 };
 
@@ -273,7 +272,7 @@ void sub_810045C(void);
 void sub_810065C(u8);
 void sub_81006A8(u8);
 void sub_81006D0(struct UnkStruct_02038900 *);
-void sub_810070C(u16 *, int);
+void sub_810070C(u16 *, u16);
 void sub_8100874(struct UnkStruct_02038900 *);
 void sub_81008BC(struct UnkStruct_02038900 *);
 void sub_8100930(u8);
