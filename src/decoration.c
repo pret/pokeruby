@@ -1979,3 +1979,94 @@ void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
         unk_02038900->unk_004[gUnknown_083EC860[idx].var0[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[idx].var4[i]] * 8 + gUnknown_083EC860[idx].var8[i]);
     }
 }
+
+void sub_8100930(u8 unk12)
+/*
+ * This function sets an OAM object not directly referenced anywhere else
+ * in the source.
+ */
+{
+    gUnknown_020391AC.y = 0;
+    gUnknown_020391AC.affineMode = 0;
+    gUnknown_020391AC.objMode = 0;
+    gUnknown_020391AC.mosaic = 0;
+    gUnknown_020391AC.bpp = 0;
+    gUnknown_020391AC.shape = gUnknown_083EC900[unk12].unk_0;
+    gUnknown_020391AC.x = 0;
+    gUnknown_020391AC.matrixNum = 0;
+    gUnknown_020391AC.size = gUnknown_083EC900[unk12].unk_1;
+    gUnknown_020391AC.tileNum = 0;
+    gUnknown_020391AC.priority = 1;
+    gUnknown_020391AC.paletteNum = 0;
+}
+
+void sub_81009A8(struct Sprite *sprite)
+{
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+    sprite->data4 = 0;
+    sprite->data5 = 0;
+    sprite->data6 = 0;
+    sprite->data7 = 0;
+    sprite->callback = sub_81009C0;
+}
+
+void sub_81009C0(struct Sprite *sprite)
+{
+    if (sprite->data7 == 0)
+    {
+        if (sprite->data6 < 15)
+        {
+            sprite->invisible = 0;
+        } else
+        {
+            sprite->invisible = 1;
+        }
+        sprite->data6 = (sprite->data6 + 1) & 0x1f;
+    } else
+    {
+        sprite->invisible = 0;
+    }
+}
+
+void sub_8100A0C(u8 taskId)
+{
+    if (sub_8100D38(taskId) == 1)
+    {
+        fade_screen(1, 0);
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].func = sub_8100E70;
+    } else
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecorInUse, sub_80FE428, 0);
+    }
+}
+
+void sub_8100A60(u8 a0)
+{
+    ewram_1f000.items[a0] = 0;
+    ewram_1f000.pos[a0] = 0;
+}
+
+void sub_8100A7C(void)
+{
+    u16 i;
+    gSpecialVar_0x8005 = 0;
+    gScriptResult = 0;
+    if (gSpecialVar_0x8004 == gUnknown_02039234)
+    {
+        gScriptResult = 1;
+    } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].var00]].decor_field_11 == 4)
+    {
+        gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].var04;
+        sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].var00);
+        for (i=0; i<gMapHeader.events->mapObjectCount; i++)
+        {
+            if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8005)
+            {
+                gSpecialVar_0x8006 = gMapHeader.events->mapObjects[i].localId;
+                break;
+            }
+        }
+    }
+}

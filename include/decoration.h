@@ -177,10 +177,10 @@ extern u8 ewram[];
 
 struct UnkStruct_02038900
 {
-    struct Decoration *decoration;
-    u16 unk_004[0x40];
-    u8 unk_084[0x800];
-    u16 unk_884[16];
+    /*0x000; 0x02038900*/ struct Decoration *decoration;
+    /*0x004; 0x02038904*/ u16 unk_004[0x40];
+    /*0x084; 0x02038984*/ u8 unk_084[0x800];
+    /*0x884; 0x02039184*/ u16 unk_884[16];
 };
 
 struct UnkStruct_083EC900
@@ -191,6 +191,14 @@ struct UnkStruct_083EC900
     u8 unk_3;
 };
 
+struct UnkStruct_020391B4
+{
+    u8 var00;
+    u8 pad01[3];
+    u16 var04;
+    u8 pad06[2];
+};
+
 extern const struct UnkStruct_083EC900 gUnknown_083EC900[10];
 extern const struct SpritePalette gUnknown_083EC954;
 extern const struct SpriteTemplate gSpriteTemplate_83EC93C;
@@ -199,6 +207,7 @@ extern struct Decoration gDecorations[0x77];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
 extern Script gUnknown_081A2F7B;
+extern struct OamData gUnknown_020391AC;
 
 extern u8 gUnknown_020388D4;
 extern u8 gUnknown_020388D5;
@@ -209,6 +218,7 @@ extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
 extern u8 gUnknown_020388D6[16];
 extern u8 gUnknown_020388E6[12];
+extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 extern u16 gSpecialVar_0x8007;
@@ -217,8 +227,10 @@ extern u16 gUnknown_020391A6;
 extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
+extern u8 gUnknown_02039234;
 extern void (*gUnknown_0300485C)(void);
 extern void (*gUnknown_083EC96C[2][2])(u8);
+extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
@@ -287,6 +299,9 @@ void sub_8100874(struct UnkStruct_02038900 *);
 void sub_81008BC(struct UnkStruct_02038900 *);
 void sub_8100930(u8);
 void sub_81009A8(struct Sprite *);
+void sub_81009C0(struct Sprite *);
+bool8 sub_8100D38(u8);
+void sub_8100E70(u8);
 void sub_81016F4(void);
 
 #endif // GUARD_DECORATION_H
