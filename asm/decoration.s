@@ -8,48 +8,6 @@
 
 .equiv ewram_1f000, 0x0201f000
 
-	thumb_func_start sub_8100874
-sub_8100874: @ 8100874
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r4, 0
-_0810087A:
-	lsls r0, r4, 5
-	adds r0, 0x84
-	adds r0, r5, r0
-	lsls r2, r4, 1
-	adds r1, r5, 0x4
-	adds r1, r2
-	ldrh r1, [r1]
-	bl sub_8100740
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x3F
-	bls _0810087A
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8100874
-
-	thumb_func_start sub_810089C
-sub_810089C: @ 810089C
-	lsls r0, 16
-	ldr r1, _081008B4 @ =gMapHeader
-	ldr r1, [r1]
-	ldr r1, [r1, 0x14]
-	ldr r1, [r1, 0xC]
-	lsrs r0, 15
-	adds r0, r1
-	ldrh r1, [r0]
-	ldr r0, _081008B8 @ =0x00000fff
-	ands r0, r1
-	bx lr
-	.align 2, 0
-_081008B4: .4byte gMapHeader
-_081008B8: .4byte 0x00000fff
-	thumb_func_end sub_810089C
-
 	thumb_func_start sub_81008BC
 sub_81008BC: @ 81008BC
 	push {r4-r7,lr}

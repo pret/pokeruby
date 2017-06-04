@@ -1956,3 +1956,15 @@ void sub_8100740(u8 *dest, u16 flags)
             break;
     }
 }
+
+void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
+{
+    u16 i;
+    for (i=0; i<0x40; i++)
+        sub_8100740(&unk_02038900->unk_084[i * 32], unk_02038900->unk_004[i]);
+}
+
+u16 sub_810089C(u16 a0)
+{
+    return ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles)[a0] & 0xfff;
+}
