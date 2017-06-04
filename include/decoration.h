@@ -194,7 +194,9 @@ struct UnkStruct_083EC900
 struct UnkStruct_020391B4
 {
     u8 var00;
-    u8 pad01[3];
+    u8 var01;
+    u8 var02;
+    u8 var03;
     u16 var04;
     u8 pad06[2];
 };
