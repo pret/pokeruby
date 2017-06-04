@@ -209,6 +209,7 @@ extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
 extern void (*gUnknown_0300485C)(void);
+extern void (*gUnknown_083EC96C[2][2])(u8);
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];

@@ -1792,9 +1792,80 @@ bool8 sub_810038C(u8 taskId)
 
 bool8 sub_8100430(void)
 {
-    if ((gMain.heldKeys & 0xF0) != DPAD_UP && (gMain.heldKeys & 0xF0) != DPAD_DOWN && (gMain.heldKeys & 0xF0) != DPAD_LEFT && (gMain.heldKeys & 0xF0) != DPAD_RIGHT)
+    if ((gMain.heldKeys & DPAD_ANY) != DPAD_UP && (gMain.heldKeys & DPAD_ANY) != DPAD_DOWN && (gMain.heldKeys & DPAD_ANY) != DPAD_LEFT && (gMain.heldKeys & DPAD_ANY) != DPAD_RIGHT)
     {
         return FALSE;
     }
     return TRUE;
+}
+
+void sub_810045C(void)
+{
+    gUnknown_020391AA = 0;
+    gSprites[gUnknown_020391A8].data2 = 0;
+    gSprites[gUnknown_020391A8].data3 = 0;
+}
+
+void sub_8100494(u8 taskId)
+{
+    if (!gSprites[gUnknown_020391A8].data4)
+    {
+        if (gTasks[taskId].data[10] == 1)
+        {
+            gUnknown_083EC96C[gTasks[taskId].data[12]][0](taskId);
+            return;
+        } else if (gTasks[taskId].data[10] == 2)
+        {
+            gUnknown_083EC96C[gTasks[taskId].data[12]][1](taskId);
+            return;
+        }
+        if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
+        {
+            gUnknown_020391AA = DIR_SOUTH;
+            gSprites[gUnknown_020391A8].data2 =  0;
+            gSprites[gUnknown_020391A8].data3 = -2;
+            gTasks[taskId].data[1]--;
+        }
+        if ((gMain.heldKeys & DPAD_ANY) == DPAD_DOWN)
+        {
+            gUnknown_020391AA = DIR_NORTH;
+            gSprites[gUnknown_020391A8].data2 =  0;
+            gSprites[gUnknown_020391A8].data3 =  2;
+            gTasks[taskId].data[1]++;
+        }
+        if ((gMain.heldKeys & DPAD_ANY) == DPAD_LEFT)
+        {
+            gUnknown_020391AA = DIR_WEST;
+            gSprites[gUnknown_020391A8].data2 = -2;
+            gSprites[gUnknown_020391A8].data3 =  0;
+            gTasks[taskId].data[0]--;
+        }
+        if ((gMain.heldKeys & DPAD_ANY) == DPAD_RIGHT)
+        {
+            gUnknown_020391AA = DIR_EAST;
+            gSprites[gUnknown_020391A8].data2 =  2;
+            gSprites[gUnknown_020391A8].data3 =  0;
+            gTasks[taskId].data[0]++;
+        }
+        if (!sub_8100430() || !sub_810038C(taskId))
+        {
+            sub_810045C();
+        }
+    }
+    if (gUnknown_020391AA)
+    {
+        gSprites[gUnknown_020391A8].data4++;
+        gSprites[gUnknown_020391A8].data4 &= 7;
+    }
+    if (!gTasks[taskId].data[10])
+    {
+        if (gMain.newKeys & A_BUTTON)
+        {
+            gTasks[taskId].data[10] = A_BUTTON;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            gTasks[taskId].data[10] = B_BUTTON;
+        }
+    }
 }
