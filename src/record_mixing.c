@@ -429,14 +429,20 @@ u8 sub_80B9BBC(u16 *a)
 #undef NONMATCHING
 #ifdef NONMATCHING
 
-void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
+void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
+    struct RecordMixing_UnknownStructSub *offA;
+    struct RecordMixing_UnknownStructSub *offB;
+    struct RecordMixing_UnknownStructSub v0;
+    v0 = (offA = ((struct RecordMixing_UnknownStruct *)(b * c[d][0] + (u32)&a))->data)[c[d][1]];
+    offA[c[d][1]] = (offB = ((struct RecordMixing_UnknownStruct *)(b * c[e][0] + (u32)&a))->data)[c[e][1]];
+    offB[c[e][1]] = v0;
     //ToDo: Figure out what this strange stack usage is
 }
 
 #else
 __attribute__((naked))
-void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
+void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
