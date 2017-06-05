@@ -249,6 +249,8 @@ extern const u8 gUnknown_083EC984[];
 extern void sub_80B3068(u8); // src/shop
 extern const struct YesNoFuncTable gUnknown_083EC95C;
 extern const struct YesNoFuncTable gUnknown_083EC964;
+extern const struct YesNoFuncTable gUnknown_083EC9CC;
+extern const struct YesNoFuncTable gUnknown_083EC9D4;
 
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
@@ -311,6 +313,8 @@ void sub_8101024(u8);
 void sub_81010F0(u8);
 void sub_8101460(u8);
 void sub_8101518(u8);
+void sub_81015B0(u8);
+void sub_81015E0(u8);
 void sub_810156C(u8);
 void sub_8101698(struct Sprite *);
 void sub_81016C8(void);

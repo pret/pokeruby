@@ -2347,3 +2347,221 @@ bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B
     }
     return FALSE;
 }
+
+void sub_81012A0(void)
+{
+    u8 xOff;
+    u8 yOff;
+    u16 i;
+    xOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].var00] >> 4;
+    yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].var00] & 0xf;
+    for (i=0; i<0x40; i++)
+    {
+        if (gSaveBlock1.mapObjectTemplates[i].x == xOff && gSaveBlock1.mapObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1.mapObjectTemplates[i].flagId))
+        {
+            gUnknown_020391B4[gUnknown_02039234].var04 = gSaveBlock1.mapObjectTemplates[i].flagId;
+            break;
+        }
+    }
+}
+
+bool8 sub_8101340(u8 taskId)
+{
+    u16 i;
+    for (i=0; i<ewram_1f000.size; i++)
+    {
+        if (ewram_1f000.items[i] != 0)
+        {
+            if (gDecorations[ewram_1f000.items[i]].decor_field_11 == 4)
+            {
+                sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
+                if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
+                {
+                    gUnknown_020391B4->var00 = i;
+                    sub_81012A0();
+                    gUnknown_02039234 = 1;
+                    return TRUE;
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
+void sub_81013B8(u8 a0, u8 a1, u8 a2, u8 a3)
+{
+    u8 i;
+    u8 xOff;
+    u8 yOff;
+    u8 decorIdx;
+    for (i=0; i<ewram_1f000.size; i++)
+    {
+        decorIdx = ewram_1f000.items[i];
+        xOff = ewram_1f000.pos[i] >> 4;
+        yOff = ewram_1f000.pos[i] & 0xf;
+        if (decorIdx != 0 && gDecorations[decorIdx].decor_field_11 == 4 && a0 <= xOff && a1 <= yOff && a2 >= xOff && a3 >= yOff)
+        {
+            gUnknown_020391B4[gUnknown_02039234].var00 = i;
+            sub_81012A0();
+            gUnknown_02039234++;
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void sub_8101460(u8 taskId)
+{
+    u8 i;
+    u8 xOff;
+    u8 yOff;
+    gUnknown_02039234 = 0;
+    if (sub_8101340(taskId) != TRUE)
+    {
+        for (i=0; i<ewram_1f000.size; i++)
+        {
+            if (ewram_1f000.items[i] != 0) // This is using the wrong register!
+            {
+                sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
+                if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
+                {
+                    gUnknown_020391B4[0].var00 = i;
+                    gUnknown_02039234++;
+                    break;
+                }
+            }
+        }
+        if (gUnknown_02039234 != 0)
+        {
+            xOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] >> 4;
+            yOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] & 0xf;
+            sub_81013B8(xOff, yOff - gUnknown_020391B4[0].var02 + 1, xOff + gUnknown_020391B4[0].var01 - 1, yOff);
+        }
+    }
+}
+#else
+__attribute__((naked))
+
+void sub_8101460(u8 taskId)
+{
+    asm(".syntax unified\n"
+    "\tpush {r4-r7,lr}\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r6, r0, 24\n"
+    "\tldr r4, _081014B8 @ =gUnknown_02039234\n"
+    "\tmovs r0, 0\n"
+    "\tstrb r0, [r4]\n"
+    "\tadds r0, r6, 0\n"
+    "\tbl sub_8101340\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tcmp r0, 0x1\n"
+    "\tbeq _08101504\n"
+    "\tmovs r5, 0\n"
+    "\tldr r0, _081014BC @ =ewram_1f000\n"
+    "\tldrb r1, [r0, 0x8]\n"
+    "\tcmp r5, r1\n"
+    "\tbcs _081014D2\n"
+    "\tadds r7, r4, 0\n"
+    "_08101486:\n"
+    "\tldr r0, [r0]\n"
+    "\tadds r0, r5\n"
+    "\tldrb r1, [r0] @ compiler incorrectly uses r0 for this and the next instruction\n"
+    "\tcmp r1, 0\n"
+    "\tbeq _081014C4\n"
+    "\tldr r4, _081014C0 @ =gUnknown_020391B4\n"
+    "\tadds r0, r1, 0\n"
+    "\tadds r1, r4, 0\n"
+    "\tbl sub_8101118\n"
+    "\tadds r0, r6, 0\n"
+    "\tadds r1, r5, 0\n"
+    "\tadds r2, r4, 0\n"
+    "\tbl sub_8101200\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tcmp r0, 0x1\n"
+    "\tbne _081014C4\n"
+    "\tstrb r5, [r4]\n"
+    "\tldrb r0, [r7]\n"
+    "\tadds r0, 0x1\n"
+    "\tstrb r0, [r7]\n"
+    "\tb _081014D2\n"
+    "\t.align 2, 0\n"
+    "_081014B8: .4byte gUnknown_02039234\n"
+    "_081014BC: .4byte 0x201f000\n"
+    "_081014C0: .4byte gUnknown_020391B4\n"
+    "_081014C4:\n"
+    "\tadds r0, r5, 0x1\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r5, r0, 24\n"
+    "\tldr r0, _0810150C @ =ewram_1f000\n"
+    "\tldrb r1, [r0, 0x8]\n"
+    "\tcmp r5, r1\n"
+    "\tbcc _08101486\n"
+    "_081014D2:\n"
+    "\tldr r0, _08101510 @ =gUnknown_02039234\n"
+    "\tldrb r0, [r0]\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _08101504\n"
+    "\tldr r0, _0810150C @ =ewram_1f000\n"
+    "\tldr r2, _08101514 @ =gUnknown_020391B4\n"
+    "\tldrb r1, [r2]\n"
+    "\tldr r0, [r0, 0x4]\n"
+    "\tadds r0, r1\n"
+    "\tldrb r1, [r0]\n"
+    "\tlsrs r0, r1, 4\n"
+    "\tmovs r3, 0xF\n"
+    "\tands r3, r1\n"
+    "\tldrb r1, [r2, 0x2]\n"
+    "\tsubs r1, r3, r1\n"
+    "\tadds r1, 0x1\n"
+    "\tlsls r1, 24\n"
+    "\tlsrs r1, 24\n"
+    "\tldrb r2, [r2, 0x1]\n"
+    "\tadds r2, r0\n"
+    "\tsubs r2, 0x1\n"
+    "\tlsls r2, 24\n"
+    "\tlsrs r2, 24\n"
+    "\tbl sub_81013B8\n"
+    "_08101504:\n"
+    "\tpop {r4-r7}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+    "_0810150C: .4byte 0x201f000\n"
+    "_08101510: .4byte gUnknown_02039234\n"
+    "_08101514: .4byte gUnknown_020391B4\n"
+    ".syntax divided\n");
+}
+#endif
+
+void sub_8101518(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    sub_80F914C(taskId, &gUnknown_083EC9CC);
+}
+
+void sub_810153C(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = sub_8100C88;
+}
+
+void sub_810156C(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    sub_80F914C(taskId, &gUnknown_083EC9D4);
+}
+
+void sub_8101590(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_81015B0(taskId);
+}
+
+void sub_81015B0(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = sub_81015E0;
+}
