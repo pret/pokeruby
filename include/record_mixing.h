@@ -27,7 +27,7 @@ void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d);
 u8 sub_80B9C4C(u8 *a);
 
 // ASM
-void sub_80B9C6C(void *, u32, u8, void *);
+void sub_80B9C6C(struct RecordMixing_UnknownStruct *, u32, u8, void *);
 void sub_80B9F3C(void *, u8);
 void sub_80BA00C(u8);
 
