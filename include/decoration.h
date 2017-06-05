@@ -203,14 +203,16 @@ struct UnkStruct_020391B4
 
 extern const struct UnkStruct_083EC900 gUnknown_083EC900[10];
 extern const struct SpritePalette gUnknown_083EC954;
+extern const struct SpritePalette gUnknown_083ECA5C;
+extern const struct SpritePalette gUnknown_083ECA64;
 extern const struct SpriteTemplate gSpriteTemplate_83EC93C;
 extern const struct SpriteTemplate gSpriteTemplate_83ECA88;
 
 extern struct Decoration gDecorations[0x77];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
-extern Script gUnknown_081A2F7B;
-extern Script gUnknown_081A2F8A;
+extern u8 gUnknown_081A2F7B[];
+extern u8 gUnknown_081A2F8A[];
 extern struct OamData gUnknown_020391AC;
 
 extern u8 gUnknown_020388D4;
@@ -251,6 +253,7 @@ extern const struct YesNoFuncTable gUnknown_083EC95C;
 extern const struct YesNoFuncTable gUnknown_083EC964;
 extern const struct YesNoFuncTable gUnknown_083EC9CC;
 extern const struct YesNoFuncTable gUnknown_083EC9D4;
+extern const struct YesNoFuncTable gUnknown_083ECAA0;
 
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
@@ -316,8 +319,11 @@ void sub_8101518(u8);
 void sub_81015B0(u8);
 void sub_81015E0(u8);
 void sub_810156C(u8);
+void sub_8101678(void);
 void sub_8101698(struct Sprite *);
 void sub_81016C8(void);
 void sub_81016F4(void);
+void sub_8101824(u8);
+void sub_8109A30(u8);
 
 #endif // GUARD_DECORATION_H

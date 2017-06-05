@@ -12,10 +12,11 @@
 #include "map_constants.h"
 #include "task.h"
 #include "palette.h"
-#include "decoration.h"
 #include "field_weather.h"
 #include "metatile_behavior.h"
 #include "pokemon.h"
+#include "script.h"
+#include "decoration.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
@@ -29,8 +30,6 @@ extern const struct
     u16 unk_083D1358_1;
 } gUnknown_083D1358[7];
 extern const u8 gUnknown_083D1374[4 * 16];
-extern void *gUnknown_0300485C;
-extern const u8 sub_807D770(void);
 extern const u8 gUnknown_083D13EC[12];
 extern const u8 sub_80BCCA4(u8);
 extern u8 gUnknown_081A2E14[];
