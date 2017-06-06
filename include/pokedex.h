@@ -144,10 +144,10 @@ void sub_8091060(u16);
 void sub_8091154(u16 order, int i, int i1);
 void sub_80911C8(u16 num, int i, int i1);
 void sub_8091260(u16 num, int i, int i1, int i2);
-void sub_8091304(u8 name[12], int i, int i1);
+void sub_8091304(u8 name[12], u8 left, u8 top);
 
-void sub_8091458(u16 height, int i, int i1);
-void sub_8091564(u16 weight, int i, int i1);
+void sub_8091458(u16 height, u8 left, u8 top);
+void sub_8091564(u16 weight, u8 left, u8 top);
 void sub_8091738(u16, u16, u16);
 void sub_80917CC(int i, int i1);
 u16 sub_8091818(u8, u16, u16, u16);

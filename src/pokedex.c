@@ -3119,7 +3119,7 @@ void sub_8090750(u8 taskId)
         MenuPrint(gDexText_UnknownPoke, 11, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
-        sub_8091304(&gPokedexEntries[dexNum], 11, 5);
+        sub_8091304(gPokedexEntries[dexNum].categoryName, 11, 5);
         sub_8091458(gPokedexEntries[dexNum].height, 16, 7);
         sub_8091564(gPokedexEntries[dexNum].weight, 16, 9);
         MenuPrint(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
@@ -3157,3 +3157,365 @@ void sub_8090750(u8 taskId)
     }
 }
 */
+
+
+asm(".section .text.sub_8091564");
+
+#define CHAR_0 (0xA1)
+
+void sub_8091304(u8 *arg0, u8 left, u8 top) {
+    u8 buffer[32];
+    u8 i;
+
+#if ENGLISH
+    u8 i2;
+#endif
+
+    i = 0;
+    while (arg0[i] != EOS && i < 11)
+    {
+        buffer[i] = arg0[i];
+        i++;
+    }
+
+#if ENGLISH
+    i2 = 0;
+    while (gDexText_UnknownPoke[i2] == CHAR_QUESTION_MARK ||
+           gDexText_UnknownPoke[i2] == CHAR_SPACE)
+    {
+        i2++;
+    }
+
+    i2 -= 1;
+
+    while (gDexText_UnknownPoke[i2] != 0xFF)
+    {
+        buffer[i++] = gDexText_UnknownPoke[i2++];
+    }
+#endif
+
+    buffer[i] = EOS;
+
+    sub_8072B80(buffer, left, top, (u8 *) gDexText_UnknownPoke);
+}
+
+#if ENGLISH && NONMATCHING
+void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
+    u8 result;
+    bool8 outputted = FALSE;
+    u8 buffer[8];
+
+    result = (arg0 / 1000);
+    if (result == 0)
+    {
+        buffer[0] = CHAR_SPACE;
+    }
+    else
+    {
+        buffer[0] = result + CHAR_0;
+        outputted = TRUE;
+    }
+
+
+    result = (arg0 % 1000) / 100;
+    if (result == 0 && !outputted == FALSE)
+    {
+        buffer[1] = CHAR_SPACE;
+    }
+    else
+    {
+        buffer[1] = result + CHAR_0;
+    }
+
+    buffer[2] = (((arg0 % 1000) % 100) / 10) + CHAR_0;
+    buffer[3] = CHAR_PERIOD;
+    buffer[4] = (((arg0 % 1000) % 100) % 10) + CHAR_0;
+
+    buffer[5] = EOS;
+    MenuPrint(buffer, left, top);
+}
+#elif ENGLISH
+
+__attribute__((naked))
+void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x8\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    lsls r1, 24\n\
+    lsrs r7, r1, 24\n\
+    lsls r2, 24\n\
+    lsrs r6, r2, 24\n\
+    movs r5, 0\n\
+    movs r1, 0xFA\n\
+    lsls r1, 2\n\
+    adds r0, r4, 0\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0\n\
+    bne _080913CE\n\
+    mov r0, sp\n\
+    strb r5, [r0]\n\
+    b _080913D6\n\
+    _080913CE:\n\
+    mov r1, sp\n\
+    adds r0, 0xA1\n\
+    strb r0, [r1]\n\
+    movs r5, 0x1\n\
+    _080913D6:\n\
+    movs r1, 0xFA\n\
+    lsls r1, 2\n\
+    adds r0, r4, 0\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x64\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0\n\
+    bne _080913FC\n\
+    cmp r5, 0\n\
+    bne _080913FC\n\
+    mov r0, sp\n\
+    strb r5, [r0, 0x1]\n\
+    b _08091402\n\
+    _080913FC:\n\
+    mov r1, sp\n\
+    adds r0, 0xA1\n\
+    strb r0, [r1, 0x1]\n\
+    _08091402:\n\
+    mov r5, sp\n\
+    movs r1, 0xFA\n\
+    lsls r1, 2\n\
+    adds r0, r4, 0\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x64\n\
+    bl __umodsi3\n\
+    adds r4, r0, 0\n\
+    lsls r4, 16\n\
+    lsrs r4, 16\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xA\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r5, 0x2]\n\
+    mov r1, sp\n\
+    movs r0, 0xAD\n\
+    strb r0, [r1, 0x3]\n\
+    mov r5, sp\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xA\n\
+    bl __umodsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r5, 0x4]\n\
+    mov r1, sp\n\
+    movs r0, 0xFF\n\
+    strb r0, [r1, 0x5]\n\
+    mov r0, sp\n\
+    adds r1, r7, 0\n\
+    adds r2, r6, 0\n\
+    bl MenuPrint\n\
+    add sp, 0x8\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided\n");
+}
+
+#elif GERMAN
+void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
+    u8 buffer[8];
+    int offset;
+    u8 result;
+
+    u8 r6 = 0;
+    offset = 0;
+
+    buffer[r6++] = 0xFC;
+    buffer[r6++] = 0x13;
+    r6++;
+
+    result = (arg0 / 1000);
+    if (result == 0)
+    {
+        offset = 6;
+    }
+    else
+    {
+        buffer[r6++] = result + CHAR_0;
+    }
+
+
+    result = (arg0 % 1000) / 100;
+
+    if (result == 0 && offset != 0)
+    {
+        offset += 6;
+    }
+    else
+    {
+        buffer[r6++] = result + CHAR_0;
+    }
+
+    buffer[r6++] = (((arg0 % 1000) % 100) / 10) + CHAR_0;
+    buffer[r6++] = CHAR_COMMA;
+    buffer[r6++] = (((arg0 % 1000) % 100) % 10) + CHAR_0;
+
+    buffer[r6++] = EOS;
+    buffer[2] = offset;
+    MenuPrint(buffer, left, top);
+}
+#endif
+
+
+#ifdef UNITS_IMPERIAL
+#define CHAR_PRIME (0xB4)
+#define CHAR_DOUBLE_PRIME (0xB2)
+
+void sub_8091458(u16 height, u8 left, u8 top) {
+    u8 buffer[16];
+    u32 inches, feet;
+    u8 i = 0;
+
+    inches = (height * 10000) / 254;
+    if (inches % 10 >= 5)
+    {
+        inches += 10;
+    }
+
+    feet = inches / 120;
+    inches = (inches - (feet * 120)) / 10;
+
+    buffer[i++] = 0xFC;
+    buffer[i++] = 0x13;
+
+    if (feet / 10 == 0)
+    {
+        buffer[i++] = 18;
+        buffer[i++] = feet + CHAR_0;
+    }
+    else
+    {
+        buffer[i++] = 12;
+        buffer[i++] = feet / 10 + CHAR_0;
+        buffer[i++] = (feet % 10) + CHAR_0;
+    }
+
+    buffer[i++] = CHAR_PRIME;
+
+    buffer[i++] = (inches / 10) + CHAR_0;
+    buffer[i++] = (inches % 10) + CHAR_0;
+
+    buffer[i++] = CHAR_DOUBLE_PRIME;
+    buffer[i++] = EOS;
+
+    MenuPrint(buffer, left, top);
+}
+
+#else
+void sub_8091458(u16 height, u8 left, u8 top) {
+    unref_sub_80913A4(height, left, top);
+}
+#endif
+
+#ifdef UNITS_IMPERIAL
+
+#define CHAR_b (0xD6)
+#define CHAR_l (0xE0)
+#define CHAR_s (0xE7)
+
+void sub_8091564(u16 weight, u8 left, u8 top) {
+    u8 buffer[16];
+    u32 lbs;
+    u8 i = 0;
+    bool8 output;
+
+    lbs = (weight * 100000) / 4536;
+    if (lbs % 10 >= 5)
+    {
+        lbs += 10;
+    }
+
+    output = FALSE;
+
+    buffer[i] = (lbs / 100000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 100000);
+    buffer[i] = (lbs / 10000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 10000);
+    buffer[i] = (lbs / 1000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+
+    lbs = (lbs % 1000);
+    buffer[i++] = (lbs / 100) + CHAR_0;
+    lbs = (lbs % 100);
+    buffer[i++] = CHAR_PERIOD;
+    buffer[i++] = (lbs / 10) + CHAR_0;
+
+    buffer[i++] = CHAR_SPACE;
+
+    buffer[i++] = CHAR_l;
+    buffer[i++] = CHAR_b;
+    buffer[i++] = CHAR_s;
+    buffer[i++] = CHAR_PERIOD;
+
+    buffer[i++] = EOS;
+
+    MenuPrint(buffer, left, top);
+}
+
+#else
+void sub_8091564(u16 arg0, u8 left, u8 top) {
+    unref_sub_80913A4(arg0, left, top);
+}
+#endif
+
+asm(".align 2, 0");
+
+asm(".section .text.sub_8091E20");
+
+#if ENGLISH
+#define WIDTH 208
+#elif GERMAN
+#define WIDTH 216
+#endif
+
+void sub_8091E20(const u8 *text) {
+    sub_8072AB0((u8 *) text, 9, 120, WIDTH, 32, 1);
+}
