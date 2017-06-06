@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "palette.h"
 #include "text.h"
+#include "task.h"
 #include "field_effect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
@@ -302,4 +303,269 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     curBlue -= ((curBlue * b) >> 4);
     gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
 }
+#else
+__attribute__((naked))
+void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    asm(".syntax unified\n"
+    "\tpush {r4-r7,lr}\n"
+    "\tmov r7, r9\n"
+    "\tmov r6, r8\n"
+    "\tpush {r6,r7}\n"
+    "\tlsls r0, 16\n"
+    "\tlsls r1, 24\n"
+    "\tlsrs r1, 24\n"
+    "\tlsls r2, 24\n"
+    "\tlsrs r2, 24\n"
+    "\tlsls r3, 24\n"
+    "\tlsrs r3, 24\n"
+    "\tldr r4, _08085D00 @ =gPlttBufferUnfaded\n"
+    "\tlsrs r0, 15\n"
+    "\tadds r4, r0, r4\n"
+    "\tldrh r4, [r4]\n"
+    "\tmovs r5, 0x1F\n"
+    "\tmov r9, r5\n"
+    "\tmov r8, r4\n"
+    "\tmov r6, r8\n"
+    "\tands r6, r5\n"
+    "\tmov r8, r6\n"
+    "\tmovs r6, 0xF8\n"
+    "\tlsls r6, 2\n"
+    "\tands r6, r4\n"
+    "\tlsrs r6, 5\n"
+    "\tmovs r5, 0xF8\n"
+    "\tlsls r5, 7\n"
+    "\tands r4, r5\n"
+    "\tlsrs r4, 10\n"
+    "\tmov r7, r9\n"
+    "\tmov r5, r8\n"
+    "\tsubs r7, r5\n"
+    "\tmov r12, r7\n"
+    "\tmov r7, r12\n"
+    "\tmuls r7, r1\n"
+    "\tadds r1, r7, 0\n"
+    "\tasrs r1, 4\n"
+    "\tadd r8, r1\n"
+    "\tmov r5, r9\n"
+    "\tsubs r1, r5, r6\n"
+    "\tmuls r1, r2\n"
+    "\tasrs r1, 4\n"
+    "\tadds r6, r1\n"
+    "\tsubs r5, r4\n"
+    "\tmov r9, r5\n"
+    "\tmov r1, r9\n"
+    "\tmuls r1, r3\n"
+    "\tasrs r1, 4\n"
+    "\tadds r4, r1\n"
+    "\tmov r7, r8\n"
+    "\tlsls r7, 16\n"
+    "\tlsls r6, 21\n"
+    "\torrs r6, r7\n"
+    "\tlsls r4, 26\n"
+    "\torrs r4, r6\n"
+    "\tlsrs r4, 16\n"
+    "\tldr r1, _08085D04 @ =gPlttBufferFaded\n"
+    "\tadds r0, r1\n"
+    "\tstrh r4, [r0]\n"
+    "\tpop {r3,r4}\n"
+    "\tmov r8, r3\n"
+    "\tmov r9, r4\n"
+    "\tpop {r4-r7}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+    "_08085D00: .4byte gPlttBufferUnfaded\n"
+    "_08085D04: .4byte gPlttBufferFaded\n"
+    ".syntax divided");
+}
+
+__attribute__((naked))
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    asm(".syntax unified\n"
+    "\tpush {r4-r6,lr}\n"
+    "\tmov r6, r8\n"
+    "\tpush {r6}\n"
+    "\tlsls r0, 16\n"
+    "\tlsls r1, 24\n"
+    "\tlsrs r1, 24\n"
+    "\tlsls r2, 24\n"
+    "\tlsrs r2, 24\n"
+    "\tlsls r3, 24\n"
+    "\tlsrs r3, 24\n"
+    "\tldr r4, _08085D78 @ =gPlttBufferUnfaded\n"
+    "\tlsrs r0, 15\n"
+    "\tadds r4, r0, r4\n"
+    "\tldrh r4, [r4]\n"
+    "\tmovs r5, 0x1F\n"
+    "\tmov r8, r5\n"
+    "\tmov r6, r8\n"
+    "\tands r6, r4\n"
+    "\tmov r8, r6\n"
+    "\tmovs r5, 0xF8\n"
+    "\tlsls r5, 2\n"
+    "\tands r5, r4\n"
+    "\tlsrs r5, 5\n"
+    "\tmovs r6, 0xF8\n"
+    "\tlsls r6, 7\n"
+    "\tands r4, r6\n"
+    "\tlsrs r4, 10\n"
+    "\tmov r6, r8\n"
+    "\tmuls r6, r1\n"
+    "\tadds r1, r6, 0\n"
+    "\tasrs r1, 4\n"
+    "\tmov r6, r8\n"
+    "\tsubs r6, r1\n"
+    "\tadds r1, r5, 0\n"
+    "\tmuls r1, r2\n"
+    "\tasrs r1, 4\n"
+    "\tsubs r5, r1\n"
+    "\tadds r1, r4, 0\n"
+    "\tmuls r1, r3\n"
+    "\tasrs r1, 4\n"
+    "\tsubs r4, r1\n"
+    "\tlsls r6, 16\n"
+    "\tlsls r5, 21\n"
+    "\torrs r5, r6\n"
+    "\tlsls r4, 26\n"
+    "\torrs r4, r5\n"
+    "\tlsrs r4, 16\n"
+    "\tldr r1, _08085D7C @ =gPlttBufferFaded\n"
+    "\tadds r0, r1\n"
+    "\tstrh r4, [r0]\n"
+    "\tpop {r3}\n"
+    "\tmov r8, r3\n"
+    "\tpop {r4-r6}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+    "_08085D78: .4byte gPlttBufferUnfaded\n"
+    "_08085D7C: .4byte gPlttBufferFaded\n"
+    ".syntax divided");
+}
 #endif
+
+void Task_PokecenterHeal(u8 taskId);
+extern const void (*gUnknown_0839F268[4])(struct Task *);
+u8 CreatePokeballGlowSprite(s16, s16, s16, u16);
+u8 PokecenterHealEffectHelper(s16, s16);
+
+bool8 FldEff_PokecenterHeal(void)
+{
+    u8 nPokemon;
+    struct Task *task;
+
+    nPokemon = CalculatePlayerPartyCount();
+    task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
+    task->data[1] = nPokemon;
+    task->data[2] = 0x5d;
+    task->data[3] = 0x24;
+    task->data[4] = 0x7c;
+    task->data[5] = 0x18;
+    return FALSE;
+}
+
+void Task_PokecenterHeal(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    gUnknown_0839F268[task->data[0]](task);
+}
+
+void PokecenterHealEffect_0(struct Task *task)
+{
+    task->data[0]++;
+    task->data[6] = CreatePokeballGlowSprite(task->data[1], task->data[2], task->data[3], 1);
+    task->data[7] = PokecenterHealEffectHelper(task->data[4], task->data[5]);
+}
+
+void PokecenterHealEffect_1(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 1)
+    {
+        gSprites[task->data[7]].data0++;
+        task->data[0]++;
+    }
+}
+
+void PokecenterHealEffect_2(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 4)
+    {
+        task->data[0]++;
+    }
+}
+
+void PokecenterHealEffect_3(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 6)
+    {
+        DestroySprite(&gSprites[task->data[6]]);
+        FieldEffectActiveListRemove(FLDEFF_POKECENTER_HEAL);
+        DestroyTask(FindTaskIdByFunc(Task_PokecenterHeal));
+    }
+}
+
+void Task_HallOfFameRecord(u8 taskId);
+extern const void (*gUnknown_0839F278[4])(struct Task *);
+void HallOfFameRecordEffectHelper(u8, u8, u8, u8);
+
+bool8 FldEff_HallOfFameRecord(void)
+{
+    u8 nPokemon;
+    struct Task *task;
+
+    nPokemon = CalculatePlayerPartyCount();
+    task = &gTasks[CreateTask(Task_HallOfFameRecord, 0xff)];
+    task->data[1] = nPokemon;
+    task->data[2] = 0x75;
+    task->data[3] = 0x34;
+    return FALSE;
+}
+
+void Task_HallOfFameRecord(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    gUnknown_0839F278[task->data[0]](task);
+}
+
+void HallOfFameRecordEffect_0(struct Task *task)
+{
+    u8 taskId;
+    task->data[0]++;
+    task->data[6] = CreatePokeballGlowSprite(task->data[1], task->data[2], task->data[3], 0);
+    taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
+    HallOfFameRecordEffectHelper(taskId, 0x78, 0x18, 0);
+    HallOfFameRecordEffectHelper(taskId, 0x28, 0x08, 1);
+    HallOfFameRecordEffectHelper(taskId, 0x48, 0x08, 1);
+    HallOfFameRecordEffectHelper(taskId, 0xa8, 0x08, 1);
+    HallOfFameRecordEffectHelper(taskId, 0xc8, 0x08, 1);
+}
+
+void HallOfFameRecordEffect_1(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 1)
+    {
+        task->data[15]++; // was this ever initialized? is this ever used?
+        task->data[0]++;
+    }
+}
+
+void HallOfFameRecordEffect_2(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 4)
+    {
+        task->data[0]++;
+    }
+}
+
+void HallOfFameRecordEffect_3(struct Task *task)
+{
+    if (gSprites[task->data[6]].data0 > 6)
+    {
+        DestroySprite(&gSprites[task->data[6]]);
+        FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
+        DestroyTask(FindTaskIdByFunc(Task_HallOfFameRecord));
+    }
+}
