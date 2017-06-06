@@ -34,7 +34,7 @@ struct PlttData
     u16 g:5; // green
     u16 b:5; // blue
     u16 unused_15:1;
-};
+} /*__attribute__((packed))*/;
 
 struct OamData
 {

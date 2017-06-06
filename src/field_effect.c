@@ -1,8 +1,11 @@
 #include "global.h"
-#include "field_effect.h"
+#include "data2.h"
 #include "field_weather.h"
+#include "decompress.h"
 #include "sprite.h"
+#include "palette.h"
 #include "text.h"
+#include "field_effect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
 
@@ -207,3 +210,96 @@ bool8 FieldEffectActiveListContains(u8 id)
             return TRUE;
     return FALSE;
 }
+
+u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer)
+{
+    struct SpriteTemplate spriteTemplate;
+    LoadCompressedObjectPaletteOverrideBuffer(&gTrainerFrontPicPaletteTable[gender], buffer);
+    LoadCompressedObjectPicOverrideBuffer(&gTrainerFrontPicTable[gender], buffer);
+    spriteTemplate.tileTag = gTrainerFrontPicTable[gender].tag;
+    spriteTemplate.paletteTag = gTrainerFrontPicPaletteTable[gender].tag;
+    spriteTemplate.oam = &gOamData_839F0F4;
+    spriteTemplate.anims = gDummySpriteAnimTable;
+    spriteTemplate.images = NULL;
+    spriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    spriteTemplate.callback = SpriteCallbackDummy;
+    return CreateSprite(&spriteTemplate, x, y, subpriority);
+}
+
+void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+{
+    LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
+    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, 0x20);
+}
+
+u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority)
+{
+    LoadSpritePalette(&gUnknown_0839F114);
+    return CreateSprite(&gSpriteTemplate_839F128, x, y, subpriority);
+}
+
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
+{
+    DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gUnknown_081FAF4C[3], gUnknown_081FAF4C[3], species);
+    LoadCompressedObjectPalette(&gMonPaletteTable[species]);
+    GetMonSpriteTemplate_803C56C(species, 3);
+    gUnknown_02024E8C.paletteTag = gMonPaletteTable[0].tag;
+    sub_807DE38(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
+    return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
+}
+
+u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
+{
+    const struct SpritePalette *spritePalette;
+    HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gUnknown_081FAF4C[3] /* this is actually u8* or something, pointing to ewram */, gUnknown_081FAF4C[3], species, g);
+    spritePalette = sub_80409C8(species, d, g);
+    LoadCompressedObjectPalette(spritePalette);
+    GetMonSpriteTemplate_803C56C(species, 3);
+    gUnknown_02024E8C.paletteTag = spritePalette->tag;
+    sub_807DE38(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
+}
+
+void FreeResourcesAndDestroySprite(struct Sprite *sprite)
+{
+    sub_807DE68();
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+    if (sprite->oam.affineMode != 0)
+    {
+        FreeOamMatrix(sprite->oam.matrixNum);
+    }
+    DestroySprite(sprite);
+}
+
+#undef NONMATCHING
+#ifdef NONMATCHING
+void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    int curRed;
+    int curGreen;
+    int curBlue;
+
+    curRed = gPlttBufferUnfaded[i] & 0x1f;
+    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
+    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    curRed += (((0x1f - curRed) * r) >> 4);
+    curGreen += (((0x1f - curGreen) * g) >> 4);
+    curBlue += (((0x1f - curBlue) * b) >> 4);
+    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+}
+
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    int curRed;
+    int curGreen;
+    int curBlue;
+
+    curRed = gPlttBufferUnfaded[i] & 0x1f;
+    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
+    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    curRed -= ((curRed * r) >> 4);
+    curGreen -= ((curGreen * g) >> 4);
+    curBlue -= ((curBlue * b) >> 4);
+    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+}
+#endif
