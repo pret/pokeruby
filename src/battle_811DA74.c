@@ -455,7 +455,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     case 5:
     case 6:
     case 7:
-        data16 = GetMonData(&gPlayerParty[a], gUnknown_02023A60[gUnknown_02024A60][1] + MON_DATA_CHECKSUM);
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gUnknown_02023A60[gUnknown_02024A60][1] - 4);
         buffer[0] = data16;
         buffer[1] = data16 >> 8;
         size = 2;
@@ -470,7 +470,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     case 10:
     case 11:
     case 12:
-        buffer[0] = GetMonData(&gPlayerParty[a], gUnknown_02023A60[gUnknown_02024A60][1] + MON_DATA_MARKINGS);
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + gUnknown_02023A60[gUnknown_02024A60][1] - 9);
         size = 1;
         break;
     case 17:
@@ -709,4 +709,221 @@ void sub_811EC10(void)
         }
     }
     dp01_tbl3_exec_completed();
+}
+
+void sub_811EC68(u8 a)
+{
+    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gUnknown_02023A60[gUnknown_02024A60][3];
+    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gUnknown_02023A60[gUnknown_02024A60][3];
+    s32 i;
+    
+    switch (gUnknown_02023A60[gUnknown_02024A60][1])
+    {
+    case 0:
+        {
+            u8 iv;
+            
+            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
+            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            for (i = 0; i < 4; i++)
+            {
+                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+            }
+            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
+            SetMonData(&gPlayerParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            iv = battlePokemon->hpIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            iv = battlePokemon->attackIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            iv = battlePokemon->defenseIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            iv = battlePokemon->speedIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, (u8 *)&iv);
+            iv = battlePokemon->spAttackIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            iv = battlePokemon->spDefenseIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
+            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
+            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPD, (u8 *)&battlePokemon->speed);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+        }
+        break;
+    case 1:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 2:
+        SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 3:
+        for (i = 0; i < 4; i++)
+        {
+            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+        }
+        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
+        break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gUnknown_02023A60[gUnknown_02024A60][1] - 4, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 8:
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP2, &gUnknown_02023A60[gUnknown_02024A60][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP3, &gUnknown_02023A60[gUnknown_02024A60][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP4, &gUnknown_02023A60[gUnknown_02024A60][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &gUnknown_02023A60[gUnknown_02024A60][7]);
+        break;
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1 + gUnknown_02023A60[gUnknown_02024A60][1] - 9, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 17:
+        SetMonData(&gPlayerParty[a], MON_DATA_OT_ID, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 18:
+        SetMonData(&gPlayerParty[a], MON_DATA_EXP, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 19:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 20:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 21:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 22:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 23:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 24:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 25:
+        SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 26:
+        SetMonData(&gPlayerParty[a], MON_DATA_POKERUS, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 27:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 28:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 29:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_GAME, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 30:
+        SetMonData(&gPlayerParty[a], MON_DATA_POKEBALL, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 31:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gUnknown_02023A60[gUnknown_02024A60][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gUnknown_02023A60[gUnknown_02024A60][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gUnknown_02023A60[gUnknown_02024A60][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gUnknown_02023A60[gUnknown_02024A60][7]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gUnknown_02023A60[gUnknown_02024A60][8]);
+        break;
+    case 32:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 33:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 34:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 35:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 36:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 37:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 38:
+        SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 39:
+        SetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 40:
+        SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 41:
+        SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 42:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 43:
+        SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 44:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 45:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 46:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 47:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 48:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 49:
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 50:
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 51:
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 52:
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 53:
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 54:
+        SetMonData(&gPlayerParty[a], MON_DATA_SHEEN, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 55:
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 56:
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 57:
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 58:
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    case 59:
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gUnknown_02023A60[gUnknown_02024A60][3]);
+        break;
+    }
+    sub_80324F8(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
 }
