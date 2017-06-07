@@ -6,65 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_811F664
-sub_811F664: @ 811F664
-	push {r4-r7,lr}
-	ldr r1, _0811F6C8 @ =gUnknown_02024A6A
-	ldr r7, _0811F6CC @ =gUnknown_02024A60
-	ldrb r2, [r7]
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	adds r3, r1, 0
-	muls r3, r0
-	ldr r4, _0811F6D0 @ =gUnknown_02023A60
-	lsls r2, 9
-	adds r0, r4, 0x1
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	ldr r1, _0811F6D4 @ =gPlayerParty
-	adds r0, r1
-	adds r5, r3, r0
-	movs r3, 0
-	adds r0, r4, 0x2
-	adds r2, r0
-	ldrb r2, [r2]
-	cmp r3, r2
-	bcs _0811F6BC
-	adds r6, r4, 0
-	adds r2, r7, 0
-	adds r4, r0, 0
-_0811F69A:
-	adds r1, r5, r3
-	ldrb r0, [r2]
-	lsls r0, 9
-	adds r0, 0x3
-	adds r0, r3, r0
-	adds r0, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldrb r0, [r2]
-	lsls r0, 9
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r3, r0
-	bcc _0811F69A
-_0811F6BC:
-	bl dp01_tbl3_exec_completed
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811F6C8: .4byte gUnknown_02024A6A
-_0811F6CC: .4byte gUnknown_02024A60
-_0811F6D0: .4byte gUnknown_02023A60
-_0811F6D4: .4byte gPlayerParty
-	thumb_func_end sub_811F664
-
 	thumb_func_start sub_811F6D8
 sub_811F6D8: @ 811F6D8
 	push {r4-r6,lr}

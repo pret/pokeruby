@@ -927,3 +927,14 @@ void sub_811EC68(u8 a)
     }
     sub_80324F8(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
 }
+
+void sub_811F664(void)
+{
+    u8 *dst;
+    u8 i;
+    
+    dst = (u8 *)&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]] + gUnknown_02023A60[gUnknown_02024A60][1];
+    for (i = 0; i < gUnknown_02023A60[gUnknown_02024A60][2]; i++)
+        dst[i] = gUnknown_02023A60[gUnknown_02024A60][3 + i];
+    dp01_tbl3_exec_completed();
+}
