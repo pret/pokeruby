@@ -1,11 +1,14 @@
 #include "global.h"
 #include "asm.h"
+#include "battle.h"
+#include "data2.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "sound.h"
+#include "songs.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
@@ -59,6 +62,13 @@ extern u8 unk_2000000[];
 #define EWRAM_17800 ((u8 *)(unk_2000000 + 0x17800))
 #define EWRAM_17810 ((struct UnknownStruct2 *)(unk_2000000 + 0x17810))
 
+extern void oamt_add_pos2_onto_pos1();
+extern void oamt_set_x3A_32();
+extern void sub_8078B34(struct Sprite *);
+extern void sub_80105EC(struct Sprite *);
+extern s32 sub_803FC34(u16);
+extern void sub_8031AF4();
+extern void sub_80313A0(struct Sprite *);
 extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
@@ -1036,5 +1046,72 @@ void sub_811FA5C(void)
             gUnknown_03004330[gUnknown_02024A60] = sub_811DF34;
         }
         break;
+    }
+}
+
+void sub_811FAE4(void)
+{
+    s16 xOffset;
+    u32 gender;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if (battle_get_per_side_status(gUnknown_02024A60) & 2)
+            xOffset = 16;
+        else
+            xOffset = -16;
+        gender = gLinkPlayers[sub_803FC34(gUnknown_02024A60)].gender;
+    }
+    else
+    {
+        xOffset = 0;
+        gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
+    }
+    sub_8031AF4(gender, gUnknown_02024A60);
+    GetMonSpriteTemplate_803C5A0(gender, battle_get_per_side_status(gUnknown_02024A60));
+    gUnknown_02024BE0[gUnknown_02024A60] = CreateSprite(
+      &gUnknown_02024E8C,
+      80 + xOffset, 80 + 4 * (8 - gTrainerBackPicCoords[gender].coords),
+      sub_8079E90(gUnknown_02024A60));
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].oam.paletteNum = gUnknown_02024A60;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos2.x = 240;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data0 = -2;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback = sub_80313A0;
+    gUnknown_03004330[gUnknown_02024A60] = sub_811DAE4;
+}
+
+void sub_811FC30(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_811FC3C(void)
+{
+    oamt_add_pos2_onto_pos1(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data0 = 35;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data2 = -40;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data4 = gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos1.y;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback = sub_8078B34;
+    oamt_set_x3A_32(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]], SpriteCallbackDummy);
+    gUnknown_03004330[gUnknown_02024A60] = sub_811DB1C;
+}
+
+void sub_811FCE8(void)
+{
+    if (EWRAM_17810[gUnknown_02024A60].unk4 == 0)
+    {
+        if (EWRAM_17800[gUnknown_02024A60 * 4] & 4)
+            move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 5);
+        EWRAM_17810[gUnknown_02024A60].unk4++;
+    }
+    else if (!(EWRAM_17810[gUnknown_02024A60].unk0 & 0x40))
+    {
+        EWRAM_17810[gUnknown_02024A60].unk4 = 0;
+        sub_80324F8(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
+        PlaySE12WithPanning(SE_POKE_DEAD, -64);
+        gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data1 = 0;
+        gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data2 = 5;
+        gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback = sub_80105EC;
+        gUnknown_03004330[gUnknown_02024A60] = sub_811DE98;
     }
 }
