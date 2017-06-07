@@ -894,10 +894,10 @@ void sub_8086774(u8 taskId)
 {
     struct Task *task;
     task = &gTasks[taskId];
-    while (gUnknown_0839F2CC[task->data[0]](task));
+    while (gUnknown_0839F2CC[task->data[0]](task)); // return code signifies whether to continue blocking here
 }
 
-bool8 sub_80867AC(struct Task *task)
+bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
 {
     struct MapObject *playerObject;
     struct Sprite *playerSprite;
@@ -908,9 +908,97 @@ bool8 sub_80867AC(struct Task *task)
     gPlayerAvatar.unk6 = 1;
     FieldObjectSetSpecialAnim(playerObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
     task->data[4] = playerSprite->subspriteMode;
-    playerObject->mapobj_bit_27 = 1;
+    playerObject->mapobj_bit_26 = 1;
     playerSprite->oam.priority = 1;
     playerSprite->subspriteMode = 2;
     task->data[0]++;
+    return TRUE;
 }
+
+bool8 sub_8086854(struct Task *task) // gUnknown_0839F2CC[1]
+{
+    if (sub_807D770())
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+#ifdef NONMATCHING
+bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
+{
+    struct Sprite *sprite;
+    s16 centerToCornerVecY;
+    int ctcvy;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    centerToCornerVecY = sprite->centerToCornerVecY;
+    ctcvy = -(centerToCornerVecY << 17);
+    sprite->pos2.y = -((sprite->pos1.y + centerToCornerVecY + gSpriteCoordOffsetY) + (ctcvy >> 16));
+    task->data[1] = 1;
+    task->data[2] = 0;
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 0;
+    PlaySE(SE_RU_HYUU);
+    task->data[0]++;
+    return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                "\tadds r5, r0, 0\n"
+                "\tldr r6, _080868D4 @ =gPlayerAvatar\n"
+                "\tldrb r0, [r6, 0x4]\n"
+                "\tlsls r2, r0, 4\n"
+                "\tadds r2, r0\n"
+                "\tlsls r2, 2\n"
+                "\tldr r0, _080868D8 @ =gSprites\n"
+                "\tadds r2, r0\n"
+                "\tadds r0, r2, 0\n"
+                "\tadds r0, 0x29\n"
+                "\tmovs r4, 0\n"
+                "\tldrsb r4, [r0, r4] @ =gSprites[gPlayerAvatar.spriteId].centerToCornerVecY\n"
+                "\tlsls r0, r4, 17\n"
+                "\tnegs r0, r0\n"
+                "\tldrh r1, [r2, 0x22] @ =gSprites[gPlayerAvatar.spriteId].pos1.y\n"
+                "\tldr r3, _080868DC @ =gSpriteCoordOffsetY\n"
+                "\tadds r1, r4\n"
+                "\tldrh r3, [r3]\n"
+                "\tadds r1, r3\n"
+                "\tasrs r0, 16\n"
+                "\tadds r0, r1\n"
+                "\tnegs r0, r0\n"
+                "\tmovs r1, 0\n"
+                "\tstrh r0, [r2, 0x26]\n"
+                "\tmovs r0, 0x1\n"
+                "\tstrh r0, [r5, 0xA]\n"
+                "\tstrh r1, [r5, 0xC]\n"
+                "\tldr r2, _080868E0 @ =gMapObjects\n"
+                "\tldrb r0, [r6, 0x5]\n"
+                "\tlsls r1, r0, 3\n"
+                "\tadds r1, r0\n"
+                "\tlsls r1, 2\n"
+                "\tadds r1, r2\n"
+                "\tldrb r2, [r1, 0x1]\n"
+                "\tmovs r0, 0x21\n"
+                "\tnegs r0, r0\n"
+                "\tands r0, r2\n"
+                "\tstrb r0, [r1, 0x1]\n"
+                "\tmovs r0, 0x2B\n"
+                "\tbl PlaySE\n"
+                "\tldrh r0, [r5, 0x8]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r5, 0x8]\n"
+                "\tmovs r0, 0\n"
+                "\tpop {r4-r6}\n"
+                "\tpop {r1}\n"
+                "\tbx r1\n"
+                "\t.align 2, 0\n"
+                "_080868D4: .4byte gPlayerAvatar\n"
+                "_080868D8: .4byte gSprites\n"
+                "_080868DC: .4byte gSpriteCoordOffsetY\n"
+                "_080868E0: .4byte gMapObjects");
+}
+#endif
+
 
