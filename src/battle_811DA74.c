@@ -81,6 +81,8 @@ extern u8 ewram[];
 #define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
 #define ewram17810 ((struct UnknownStruct2 *)(ewram + 0x17810))
 
+extern void load_gfxc_health_bar();
+extern void sub_8043D84();
 extern void sub_8120AA8();
 extern void sub_8031F24(void);
 extern void sub_80326EC();
@@ -1286,4 +1288,26 @@ void sub_8120134(void)
 void sub_8120140(void)
 {
     dp01_tbl3_exec_completed();
+}
+
+void sub_812014C(void)
+{
+    s16 r7;
+
+    load_gfxc_health_bar(0);
+    r7 = gUnknown_02023A60[gUnknown_02024A60][2] | (gUnknown_02023A60[gUnknown_02024A60][3] << 8);
+    if (r7 != 0x7FFF)
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_MAX_HP);
+        u32 hp = GetMonData(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_HP);
+
+        sub_8043D84(gUnknown_02024A60, gUnknown_03004340[gUnknown_02024A60], maxHP, hp, r7);
+    }
+    else
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_MAX_HP);
+
+        sub_8043D84(gUnknown_02024A60, gUnknown_03004340[gUnknown_02024A60], maxHP, 0, r7);
+    }
+    gUnknown_03004330[gUnknown_02024A60] = bx_t3_healthbar_update;
 }
