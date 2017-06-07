@@ -21,7 +21,11 @@ struct UnknownStruct2
 {
     u8 unk0;
     u8 unk1;
-    u8 filler2[7];
+    //u8 filler2[7];
+    u8 filler2[2];
+    u8 unk4;
+    u8 filler5[4];
+
     u8 unk9;
     u8 fillerA[2];
 };
@@ -87,6 +91,7 @@ void dp01_tbl3_exec_completed(void);
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *b);
 void sub_811EC68(u8);
 void sub_811F864(u8, u8);
+void sub_811FA5C(void);
 
 void nullsub_74(void)
 {
@@ -998,4 +1003,20 @@ void sub_811F864(u8 a, u8 b)
     gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
     gSprites[gUnknown_02024BE0[a]].callback = SpriteCallbackDummy;
     gSprites[gUnknown_0300434C[a]].data0 = sub_8046400(0, 0xFF);
+}
+
+void sub_811F9D0(void)
+{
+    if (gUnknown_02023A60[gUnknown_02024A60][1] == 0)
+    {
+        EWRAM_17810[gUnknown_02024A60].unk4 = 0;
+        gUnknown_03004330[gUnknown_02024A60] = sub_811FA5C;
+    }
+    else
+    {
+        FreeSpriteOamMatrix(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        DestroySprite(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        sub_8043DB0(gUnknown_03004340[gUnknown_02024A60]);
+        dp01_tbl3_exec_completed();
+    }
 }
