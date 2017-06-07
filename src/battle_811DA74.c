@@ -23,25 +23,18 @@ struct UnknownStruct1
 
 struct UnknownStruct2
 {
-    u8 unk0;
-    u8 unk1;
+    u8 unk0_0:1;
+    u8 unk0_1:2;
+    u8 unk0_3:1;
+    u8 unk0_4:1;
+    u8 unk0_5:1;
+    u8 unk0_6:1;
+    u8 unk0_7:1;
+    u8 unk1_0:1;
     u8 filler2[2];
     u8 unk4;
     u8 unk5;
     u8 filler6[3];
-    u8 unk9;
-    u8 fillerA[2];
-};
-
-struct UnknownStruct2_
-{
-    u8 unk0_0:3;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk1;
-    u8 filler2[2];
-    u8 unk4;
-    u8 filler5[4];
     u8 unk9;
     u8 fillerA[2];
 };
@@ -111,7 +104,6 @@ extern u8 ewram[];
 
 #define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
 #define ewram17810 ((struct UnknownStruct2 *)(ewram + 0x17810))
-#define ewram17810_ ((struct UnknownStruct2_ *)(ewram + 0x17810))
 #define ewram17840 (*(struct UnknownStruct6 *)(ewram + 0x17840))
 
 extern u8 move_anim_start_t3();
@@ -246,10 +238,10 @@ void sub_811DCA0(void)
 {
     u8 r2;
 
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 8))
-    //if (!ewram17810_[gUnknown_02024A60].unk0_3)
+    if (!ewram17810[gUnknown_02024A60].unk0_3)
     {
-        r2 = ewram17810[gUnknown_02024A60 ^ 2].unk0 & 8;
+        // I couldn't get it to work as a bitfield here
+        r2 = *((u8 *)&ewram17810[gUnknown_02024A60 ^ 2]) & 8;
         if (!r2 && (++ewram17810[gUnknown_02024A60].unk9) != 1)
         {
             ewram17810[gUnknown_02024A60].unk9 = r2;
@@ -308,7 +300,7 @@ void sub_811DE98(void)
 
 void sub_811DF34(void)
 {
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+    if (!ewram17810[gUnknown_02024A60].unk0_6)
     {
         FreeSpriteOamMatrix(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
         DestroySprite(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
@@ -355,16 +347,16 @@ void sub_811E034(void)
 
 void sub_811E0A0(void)
 {
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+    if (!ewram17810[gUnknown_02024A60].unk0_6)
         dp01_tbl3_exec_completed();
 }
 
 void sub_811E0CC(void)
 {
-    if (ewram17810[gUnknown_02024A60].unk1 & 1)
+    if (ewram17810[gUnknown_02024A60].unk1_0)
     {
-        ewram17810[gUnknown_02024A60].unk0 &= 0x7F;
-        (s8)ewram17810[gUnknown_02024A60].unk1 &= ~1;
+        ewram17810[gUnknown_02024A60].unk0_7 = 0;
+        ewram17810[gUnknown_02024A60].unk1_0 = 0;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
@@ -380,10 +372,10 @@ void sub_811E0CC(void)
 
 void sub_811E1BC(void)
 {
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 0x88))
+    if (!ewram17810[gUnknown_02024A60].unk0_3 && !ewram17810[gUnknown_02024A60].unk0_7)
         sub_8141828(gUnknown_02024A60, &gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]]);
     if (gSprites[gUnknown_0300434C[gUnknown_02024A60]].callback == SpriteCallbackDummy
-     && !(ewram17810[gUnknown_02024A60].unk0 & 8))
+     && !ewram17810[gUnknown_02024A60].unk0_3)
     {
         DestroySprite(&gSprites[gUnknown_0300434C[gUnknown_02024A60]]);
         gUnknown_03004330[gUnknown_02024A60] = sub_811E0CC;
@@ -439,13 +431,13 @@ void dp01_tbl3_exec_completed(void)
 
 void sub_811E38C(void)
 {
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 0x10))
+    if (!ewram17810[gUnknown_02024A60].unk0_4)
         dp01_tbl3_exec_completed();
 }
 
 void sub_811E3B8(void)
 {
-    if (!(ewram17810[gUnknown_02024A60].unk0 & 0x20))
+    if (!ewram17810[gUnknown_02024A60].unk0_5)
         dp01_tbl3_exec_completed();
 }
 
@@ -1111,7 +1103,7 @@ void sub_811FA5C(void)
         ewram17810[gUnknown_02024A60].unk4 = 1;
         break;
     case 1:
-        if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+        if (!ewram17810[gUnknown_02024A60].unk0_6)
         {
             ewram17810[gUnknown_02024A60].unk4 = 0;
             move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 1);
@@ -1176,7 +1168,7 @@ void sub_811FCE8(void)
             move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 5);
         ewram17810[gUnknown_02024A60].unk4++;
     }
-    else if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+    else if (!ewram17810[gUnknown_02024A60].unk0_6)
     {
         ewram17810[gUnknown_02024A60].unk4 = 0;
         sub_80324F8(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
@@ -1255,7 +1247,7 @@ void sub_811FF30(void)
         ewram17810[gUnknown_02024A60].unk4 = 1;
         break;
     case 1:
-        if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+        if (!ewram17810[gUnknown_02024A60].unk0_6)
         {
             sub_80326EC(0);
             ExecuteMoveAnim(r4);
@@ -1276,7 +1268,7 @@ void sub_811FF30(void)
         }
         break;
     case 3:
-        if (!(ewram17810[gUnknown_02024A60].unk0 & 0x40))
+        if (!ewram17810[gUnknown_02024A60].unk0_6)
         {
             sub_8031F24();
             sub_80324BC(
@@ -1360,21 +1352,12 @@ void sub_812023C(void)
     dp01_tbl3_exec_completed();
 }
 
-struct MaybeABitfield
-{
-    u8 unk0_0:1;
-    u8 unk0_1:3;
-    u8 unk0_4:1;
-};
-
 void sub_8120248(void)
 {
     if (mplay_80342A4(gUnknown_02024A60) == 0)
     {
         sub_8045A5C(gUnknown_03004340[gUnknown_02024A60], &gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], 9);
-        //ewram17810[gUnknown_02024A60].unk0 &= ~0x10;
-        //ewram17810_[gUnknown_02024A60].unk0_4 = 0;
-        ((struct MaybeABitfield *)&ewram17810[gUnknown_02024A60])->unk0_4 = 0;
+        ewram17810[gUnknown_02024A60].unk0_4 = 0;
         gUnknown_03004330[gUnknown_02024A60] = sub_811E38C;
     }
 }
@@ -1533,7 +1516,7 @@ void sub_8120588(void)
     gSprites[gUnknown_02024BE0[gUnknown_02024A60]].oam.paletteNum = r4;
     taskId = CreateTask(sub_812071C, 5);
     gTasks[taskId].data[0] = gUnknown_02024A60;
-    if (ewram17810[gUnknown_02024A60].unk0 & 1)
+    if (ewram17810[gUnknown_02024A60].unk0_0)
         gTasks[gUnknown_02024E68[gUnknown_02024A60]].func = sub_8044CA0;
     ewram17840.unk9 |= 1;
     gUnknown_03004330[gUnknown_02024A60] = nullsub_74;
@@ -1579,8 +1562,7 @@ void dp01t_30_3_80EB11C(void)
         return;
     }
 
-    //ewram17810[gUnknown_02024A60].unk0 |= 1;
-    ((struct MaybeABitfield *)&ewram17810[gUnknown_02024A60])->unk0_0 = 1;
+    ewram17810[gUnknown_02024A60].unk0_0 = 1;
     gUnknown_02024E68[gUnknown_02024A60] = sub_8044804(
       gUnknown_02024A60,
       (struct BattleInterfaceStruct2 *)&gUnknown_02023A60[gUnknown_02024A60][4],
@@ -1603,7 +1585,7 @@ void sub_81208E0(void)
 
 void sub_8120920(void)
 {
-    if (ewram17810[gUnknown_02024A60].unk0 & 1)
+    if (ewram17810[gUnknown_02024A60].unk0_0)
         gTasks[gUnknown_02024E68[gUnknown_02024A60]].func = sub_8044CA0;
     dp01_tbl3_exec_completed();
 }
