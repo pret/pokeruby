@@ -57,6 +57,9 @@ extern u8 unk_2000000[];
 #define EWRAM_17800 ((u8 *)(unk_2000000 + 0x17800))
 #define EWRAM_17810 ((struct UnknownStruct2 *)(unk_2000000 + 0x17810))
 
+extern u8 sub_8046400();
+extern void sub_80312F0(struct Sprite *);
+extern u8 CreateInvisibleSpriteWithCallback();
 extern void sub_80318FC();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
@@ -83,6 +86,7 @@ void sub_811E0A0(void);
 void dp01_tbl3_exec_completed(void);
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *b);
 void sub_811EC68(u8);
+void sub_811F864(u8, u8);
 
 void nullsub_74(void)
 {
@@ -963,8 +967,6 @@ void sub_811F6D8(void)
     gUnknown_03004330[gUnknown_02024A60] = sub_811DDE8;
 }
 
-void sub_811F864();
-
 void sub_811F7F4(void)
 {
     sub_8032AA8(gUnknown_02024A60, gUnknown_02023A60[gUnknown_02024A60][2]);
@@ -972,4 +974,28 @@ void sub_811F7F4(void)
     sub_80318FC(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
     sub_811F864(gUnknown_02024A60, gUnknown_02023A60[gUnknown_02024A60][2]);
     gUnknown_03004330[gUnknown_02024A60] = sub_811E1BC;
+}
+
+void sub_811F864(u8 a, u8 b)
+{
+    u16 species;
+
+    sub_8032AA8(a, b);
+    gUnknown_02024A6A[a] = gUnknown_02023A60[a][1];
+    species = GetMonData(&gPlayerParty[gUnknown_02024A6A[a]], MON_DATA_SPECIES);
+    gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
+    GetMonSpriteTemplate_803C56C(species, battle_get_per_side_status(a));
+    gUnknown_02024BE0[a] = CreateSprite(
+      &gUnknown_02024E8C,
+      sub_8077ABC(a, 2),
+      sub_8077F68(a),
+      sub_8079E90(a));
+    gSprites[gUnknown_0300434C[a]].data1 = gUnknown_02024BE0[a];
+    gSprites[gUnknown_02024BE0[a]].data0 = a;
+    gSprites[gUnknown_02024BE0[a]].data2 = species;
+    gSprites[gUnknown_02024BE0[a]].oam.paletteNum = a;
+    StartSpriteAnim(&gSprites[gUnknown_02024BE0[a]], gBattleMonForms[a]);
+    gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
+    gSprites[gUnknown_02024BE0[a]].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_0300434C[a]].data0 = sub_8046400(0, 0xFF);
 }
