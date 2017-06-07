@@ -1115,3 +1115,23 @@ void sub_811FCE8(void)
         gUnknown_03004330[gUnknown_02024A60] = sub_811DE98;
     }
 }
+
+void sub_811FDCC(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_811FDD8(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_811FDE4(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_811FDF0(void)
+{
+    dp01_tbl3_exec_completed();
+}

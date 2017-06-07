@@ -6,38 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_811FDCC
-sub_811FDCC: @ 811FDCC
-	push {lr}
-	bl dp01_tbl3_exec_completed
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811FDCC
-
-	thumb_func_start sub_811FDD8
-sub_811FDD8: @ 811FDD8
-	push {lr}
-	bl dp01_tbl3_exec_completed
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811FDD8
-
-	thumb_func_start sub_811FDE4
-sub_811FDE4: @ 811FDE4
-	push {lr}
-	bl dp01_tbl3_exec_completed
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811FDE4
-
-	thumb_func_start sub_811FDF0
-sub_811FDF0: @ 811FDF0
-	push {lr}
-	bl dp01_tbl3_exec_completed
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811FDF0
-
 	thumb_func_start sub_811FDFC
 sub_811FDFC: @ 811FDFC
 	push {r4-r6,lr}
