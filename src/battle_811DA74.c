@@ -722,13 +722,13 @@ void sub_811EC68(u8 a)
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gUnknown_02023A60[gUnknown_02024A60][3];
     struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gUnknown_02023A60[gUnknown_02024A60][3];
     s32 i;
-    
+
     switch (gUnknown_02023A60[gUnknown_02024A60][1])
     {
     case 0:
         {
             u8 iv;
-            
+
             SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
             SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
             for (i = 0; i < 4; i++)
@@ -938,7 +938,7 @@ void sub_811F664(void)
 {
     u8 *dst;
     u8 i;
-    
+
     dst = (u8 *)&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]] + gUnknown_02023A60[gUnknown_02024A60][1];
     for (i = 0; i < gUnknown_02023A60[gUnknown_02024A60][2]; i++)
         dst[i] = gUnknown_02023A60[gUnknown_02024A60][3 + i];
