@@ -48,7 +48,14 @@ extern u32 gUnknown_02024A64;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024BE0[];
 extern u8 gUnknown_02024E6D;
+extern u32 gUnknown_02024E70[];
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern u32 *gUnknown_0202F7B4;
+extern u32 gUnknown_0202F7B8;
+extern u16 gUnknown_0202F7BC;
+extern u8 gUnknown_0202F7BE;
+extern u16 gUnknown_0202F7C0;
+extern u8 gUnknown_0202F7C4;
 extern struct Window gUnknown_03004210;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_03004330[])(void);
@@ -62,6 +69,8 @@ extern u8 unk_2000000[];
 #define EWRAM_17800 ((u8 *)(unk_2000000 + 0x17800))
 #define EWRAM_17810 ((struct UnknownStruct2 *)(unk_2000000 + 0x17810))
 
+extern u8 sub_8031720();
+extern u8 mplay_80342A4();
 extern void oamt_add_pos2_onto_pos1();
 extern void oamt_set_x3A_32();
 extern void sub_8078B34(struct Sprite *);
@@ -100,6 +109,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *b);
 void sub_811EC68(u8);
 void sub_811F864(u8, u8);
 void sub_811FA5C(void);
+void sub_811FF30(void);
 
 void nullsub_74(void)
 {
@@ -1134,4 +1144,34 @@ void sub_811FDE4(void)
 void sub_811FDF0(void)
 {
     dp01_tbl3_exec_completed();
+}
+
+void sub_811FDFC(void)
+{
+    if (mplay_80342A4(gUnknown_02024A60) == 0)
+    {
+        u32 r0 = gUnknown_02023A60[gUnknown_02024A60][1]
+               | (gUnknown_02023A60[gUnknown_02024A60][2] << 8);
+
+        gUnknown_0202F7C4 = gUnknown_02023A60[gUnknown_02024A60][3];
+        gUnknown_0202F7BC = gUnknown_02023A60[gUnknown_02024A60][4]
+                          | (gUnknown_02023A60[gUnknown_02024A60][5] << 8);
+        gUnknown_0202F7B8 = gUnknown_02023A60[gUnknown_02024A60][6]
+                          | (gUnknown_02023A60[gUnknown_02024A60][7] << 8)
+                          | (gUnknown_02023A60[gUnknown_02024A60][8] << 16)
+                          | (gUnknown_02023A60[gUnknown_02024A60][9] << 24);
+        gUnknown_0202F7BE = gUnknown_02023A60[gUnknown_02024A60][10];
+        gUnknown_0202F7C0 = gUnknown_02023A60[gUnknown_02024A60][12]
+                          | (gUnknown_02023A60[gUnknown_02024A60][13] << 8);
+        gUnknown_0202F7B4 = (u32 *)&gUnknown_02023A60[gUnknown_02024A60][16];
+        gUnknown_02024E70[gUnknown_02024A60] = *gUnknown_0202F7B4;
+
+        if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+            dp01_tbl3_exec_completed();
+        else
+        {
+            EWRAM_17810[gUnknown_02024A60].unk4 = 0;
+            gUnknown_03004330[gUnknown_02024A60] = sub_811FF30;
+        }
+    }
 }
