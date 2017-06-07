@@ -13,6 +13,7 @@
 #include "sound.h"
 #include "songs.h"
 #include "decoration.h"
+#include "field_player_avatar.h"
 #include "field_map_obj_helpers.h"
 #include "field_map_obj.h"
 #include "field_effect.h"
@@ -873,3 +874,43 @@ void c3_080843F8(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+extern void pal_fill_for_map_transition(void);
+void sub_8086774(u8);
+extern const bool8 (*gUnknown_0839F2CC[7])(struct Task *);
+extern void CameraObjectReset2(void);
+
+void sub_8086748(void)
+{
+    sub_8053E90();
+    pal_fill_for_map_transition();
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    CreateTask(sub_8086774, 0);
+    gUnknown_0300485C = NULL;
+}
+
+void sub_8086774(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    while (gUnknown_0839F2CC[task->data[0]](task));
+}
+
+bool8 sub_80867AC(struct Task *task)
+{
+    struct MapObject *playerObject;
+    struct Sprite *playerSprite;
+    playerObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    playerSprite = &gSprites[gPlayerAvatar.spriteId];
+    CameraObjectReset2();
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
+    gPlayerAvatar.unk6 = 1;
+    FieldObjectSetSpecialAnim(playerObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
+    task->data[4] = playerSprite->subspriteMode;
+    playerObject->mapobj_bit_27 = 1;
+    playerSprite->oam.priority = 1;
+    playerSprite->subspriteMode = 2;
+    task->data[0]++;
+}
+
