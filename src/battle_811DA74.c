@@ -49,6 +49,7 @@ struct UnknownStruct4
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 
+extern u8 gUnknown_020238CC[];
 extern u8 gUnknown_02023A60[][0x200];
 extern u8 gUnknown_02024A60;
 extern u32 gUnknown_02024A64;
@@ -64,6 +65,8 @@ extern u8 gUnknown_0202F7BE;
 extern u16 gUnknown_0202F7C0;
 extern u8 gUnknown_0202F7C4;
 extern struct Window gUnknown_03004210;
+extern u16 gUnknown_030042A0;
+extern u16 gUnknown_030042A4;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
@@ -78,6 +81,7 @@ extern u8 ewram[];
 #define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
 #define ewram17810 ((struct UnknownStruct2 *)(ewram + 0x17810))
 
+extern void sub_8120AA8();
 extern void sub_8031F24(void);
 extern void sub_80326EC();
 extern void ExecuteMoveAnim();
@@ -1238,4 +1242,48 @@ void sub_811FF30(void)
         }
         break;
     }
+}
+
+void sub_8120094(void)
+{
+    gUnknown_030042A4 = 0;
+    gUnknown_030042A0 = 0;
+    sub_8120AA8(*(u16 *)&gUnknown_02023A60[gUnknown_02024A60][2]);
+    sub_8002EB0(&gUnknown_03004210, gUnknown_020238CC, 144, 2, 15);
+    gUnknown_03004330[gUnknown_02024A60] = sub_811DFA0;
+}
+
+void sub_81200F8(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_8120104(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_8120110(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_812011C(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_8120128(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_8120134(void)
+{
+    dp01_tbl3_exec_completed();
+}
+
+void sub_8120140(void)
+{
+    dp01_tbl3_exec_completed();
 }
