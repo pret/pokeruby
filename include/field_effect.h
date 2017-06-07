@@ -80,6 +80,8 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern const struct SpritePalette *sub_80409C8(u16, u32, u32);
 
+extern u8 gLastFieldPokeMenuOpened;
+
 u32 FieldEffectStart(u8 id);
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadfadedpal(u8 **script, u32 *val);

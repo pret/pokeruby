@@ -18,7 +18,7 @@ struct LinkPlayerMapObject
 };
 
 // sub_8052F5C
-// flag_var_implications_of_teleport_
+void flag_var_implications_of_teleport_(void);
 void new_game(void);
 void sub_8053014(void);
 void sub_8053050(void);

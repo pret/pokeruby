@@ -1,13 +1,20 @@
 #include "global.h"
+#include "asm.h"
 #include "data2.h"
+#include "script.h"
+#include "main.h"
 #include "field_weather.h"
 #include "decompress.h"
 #include "sprite.h"
 #include "palette.h"
 #include "text.h"
+#include "rom4.h"
 #include "task.h"
 #include "sound.h"
 #include "songs.h"
+#include "decoration.h"
+#include "field_map_obj_helpers.h"
+#include "field_map_obj.h"
 #include "field_effect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
@@ -780,5 +787,89 @@ void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
     if (sprite->data2 > 127)
     {
         FieldEffectFreeGraphicsResources(sprite);
+    }
+}
+
+void mapldr_080842E8(void);
+void mapldr_08084390(void);
+void task00_8084310(u8);
+void c3_080843F8(u8);
+
+void sub_80865BC(void)
+{
+    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    gUnknown_0300485C = mapldr_080842E8;
+}
+
+void mapldr_080842E8(void)
+{
+    pal_fill_black();
+    CreateTask(task00_8084310, 0);
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    gUnknown_0300485C = NULL;
+}
+
+void task00_8084310(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    if (!task->data[0])
+    {
+        if (!sub_807D770())
+        {
+            return;
+        }
+        gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+        if ((int)gUnknown_0202FF84[0] > 5)
+        {
+            gUnknown_0202FF84[0] = 0;
+        }
+        FieldEffectStart(FLDEFF_USE_FLY);
+        task->data[0]++;
+    }
+    if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
+    {
+        flag_var_implications_of_teleport_();
+        warp_in();
+        SetMainCallback2(CB2_LoadMap);
+        gUnknown_0300485C = mapldr_08084390;
+        DestroyTask(taskId);
+    }
+}
+
+void mapldr_08084390(void)
+{
+    sub_8053E90();
+    pal_fill_black();
+    CreateTask(c3_080843F8, 0);
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
+    if (gPlayerAvatar.flags & 0x08)
+    {
+        FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_WEST);
+    }
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    gUnknown_0300485C = NULL;
+}
+
+void c3_080843F8(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    if (task->data[0] == 0)
+    {
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+        FieldEffectStart(FLDEFF_FLY_IN);
+        task->data[0]++;
+    }
+    if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
+    {
+        ScriptContext2_Disable();
+        UnfreezeMapObjects();
+        DestroyTask(taskId);
     }
 }
