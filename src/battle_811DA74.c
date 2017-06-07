@@ -962,3 +962,14 @@ void sub_811F6D8(void)
     StartSpriteAnim(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]], gBattleMonForms[gUnknown_02024A60]);
     gUnknown_03004330[gUnknown_02024A60] = sub_811DDE8;
 }
+
+void sub_811F864();
+
+void sub_811F7F4(void)
+{
+    sub_8032AA8(gUnknown_02024A60, gUnknown_02023A60[gUnknown_02024A60][2]);
+    gUnknown_02024A6A[gUnknown_02024A60] = gUnknown_02023A60[gUnknown_02024A60][1];
+    sub_80318FC(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
+    sub_811F864(gUnknown_02024A60, gUnknown_02023A60[gUnknown_02024A60][2]);
+    gUnknown_03004330[gUnknown_02024A60] = sub_811E1BC;
+}

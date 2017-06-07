@@ -6,58 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_811F7F4
-sub_811F7F4: @ 811F7F4
-	push {r4-r6,lr}
-	ldr r5, _0811F84C @ =gUnknown_02024A60
-	ldrb r0, [r5]
-	ldr r4, _0811F850 @ =gUnknown_02023A60
-	lsls r1, r0, 9
-	adds r6, r4, 0x2
-	adds r1, r6
-	ldrb r1, [r1]
-	bl sub_8032AA8
-	ldr r2, _0811F854 @ =gUnknown_02024A6A
-	ldrb r0, [r5]
-	lsls r1, r0, 1
-	adds r1, r2
-	lsls r0, 9
-	adds r4, 0x1
-	adds r0, r4
-	ldrb r0, [r0]
-	strh r0, [r1]
-	ldrb r1, [r5]
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r2, [r0]
-	movs r0, 0x64
-	muls r0, r2
-	ldr r2, _0811F858 @ =gPlayerParty
-	adds r0, r2
-	bl sub_80318FC
-	ldrb r0, [r5]
-	lsls r1, r0, 9
-	adds r1, r6
-	ldrb r1, [r1]
-	bl sub_811F864
-	ldr r1, _0811F85C @ =gUnknown_03004330
-	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, _0811F860 @ =sub_811E1BC
-	str r1, [r0]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811F84C: .4byte gUnknown_02024A60
-_0811F850: .4byte gUnknown_02023A60
-_0811F854: .4byte gUnknown_02024A6A
-_0811F858: .4byte gPlayerParty
-_0811F85C: .4byte gUnknown_03004330
-_0811F860: .4byte sub_811E1BC
-	thumb_func_end sub_811F7F4
-
 	thumb_func_start sub_811F864
 sub_811F864: @ 811F864
 	push {r4-r6,lr}
