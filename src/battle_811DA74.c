@@ -21,11 +21,9 @@ struct UnknownStruct2
 {
     u8 unk0;
     u8 unk1;
-    //u8 filler2[7];
     u8 filler2[2];
     u8 unk4;
     u8 filler5[4];
-
     u8 unk9;
     u8 fillerA[2];
 };
@@ -1018,5 +1016,25 @@ void sub_811F9D0(void)
         DestroySprite(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
         sub_8043DB0(gUnknown_03004340[gUnknown_02024A60]);
         dp01_tbl3_exec_completed();
+    }
+}
+
+void sub_811FA5C(void)
+{
+    switch (EWRAM_17810[gUnknown_02024A60].unk4)
+    {
+    case 0:
+        if (EWRAM_17800[gUnknown_02024A60 * 4] & 4)
+            move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 5);
+        EWRAM_17810[gUnknown_02024A60].unk4 = 1;
+        break;
+    case 1:
+        if (!(EWRAM_17810[gUnknown_02024A60].unk0 & 0x40))
+        {
+            EWRAM_17810[gUnknown_02024A60].unk4 = 0;
+            move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 1);
+            gUnknown_03004330[gUnknown_02024A60] = sub_811DF34;
+        }
+        break;
     }
 }
