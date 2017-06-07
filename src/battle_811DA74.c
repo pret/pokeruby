@@ -43,11 +43,13 @@ extern u32 gUnknown_02024A64;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024BE0[];
 extern u8 gUnknown_02024E6D;
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
 extern u8 gUnknown_0300434C[];
+extern u8 gBattleMonForms[];
 extern void (*const gUnknown_083FE4F4[])(void);
 
 extern u8 unk_2000000[];
@@ -55,6 +57,10 @@ extern u8 unk_2000000[];
 #define EWRAM_17800 ((u8 *)(unk_2000000 + 0x17800))
 #define EWRAM_17810 ((struct UnknownStruct2 *)(unk_2000000 + 0x17810))
 
+extern void sub_80318FC();
+extern u8 sub_8077ABC();
+extern u8 sub_8077F68();
+extern u8 sub_8079E90();
 extern void nullsub_10();
 extern void sub_8045A5C();
 extern void sub_804777C();
@@ -937,4 +943,22 @@ void sub_811F664(void)
     for (i = 0; i < gUnknown_02023A60[gUnknown_02024A60][2]; i++)
         dst[i] = gUnknown_02023A60[gUnknown_02024A60][3 + i];
     dp01_tbl3_exec_completed();
+}
+
+void sub_811F6D8(void)
+{
+    sub_80318FC(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], gUnknown_02024A60);
+    GetMonSpriteTemplate_803C56C(
+      GetMonData(&gPlayerParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_SPECIES),
+      battle_get_per_side_status(gUnknown_02024A60));
+    gUnknown_02024BE0[gUnknown_02024A60] = CreateSprite(
+      &gUnknown_02024E8C,
+      sub_8077ABC(gUnknown_02024A60, 2),
+      sub_8077F68(gUnknown_02024A60),
+      sub_8079E90(gUnknown_02024A60));
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos2.x = -240;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data0 = gUnknown_02024A60;
+    gSprites[gUnknown_02024BE0[gUnknown_02024A60]].oam.paletteNum = gUnknown_02024A60;
+    StartSpriteAnim(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]], gBattleMonForms[gUnknown_02024A60]);
+    gUnknown_03004330[gUnknown_02024A60] = sub_811DDE8;
 }
