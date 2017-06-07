@@ -122,7 +122,7 @@ struct BattleStruct /* 0x2000000 */
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
-struct UnknownStruct4
+struct UnkBattleStruct4
 {
     /*0x00*/ u8 filler0[0x3];
     /*0x04*/ u16 unk4;
@@ -143,7 +143,7 @@ struct UnknownStruct4
 };
 
 extern struct UnknownStruct1 unk_2016A00;
-extern struct UnknownStruct4 gUnknown_02024CA8[];
+extern struct UnkBattleStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
 #endif // GUARD_BATTLE_H
