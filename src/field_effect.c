@@ -6,6 +6,8 @@
 #include "palette.h"
 #include "text.h"
 #include "task.h"
+#include "sound.h"
+#include "songs.h"
 #include "field_effect.h"
 
 typedef bool8 (*FldEffCmd)(u8 **, u32 *);
@@ -508,7 +510,7 @@ void PokecenterHealEffect_3(struct Task *task)
 
 void Task_HallOfFameRecord(u8 taskId);
 extern const void (*gUnknown_0839F278[4])(struct Task *);
-void HallOfFameRecordEffectHelper(u8, u8, u8, u8);
+void HallOfFameRecordEffectHelper(s16, s16, s16, u8);
 
 bool8 FldEff_HallOfFameRecord(void)
 {
@@ -567,5 +569,216 @@ void HallOfFameRecordEffect_3(struct Task *task)
         DestroySprite(&gSprites[task->data[6]]);
         FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
         DestroyTask(FindTaskIdByFunc(Task_HallOfFameRecord));
+    }
+}
+
+void SpriteCB_PokeballGlowEffect(struct Sprite *);
+extern const void (*gUnknown_0839F288[8])(struct Sprite *);
+extern const struct SpriteTemplate gSpriteTemplate_839F208;
+extern const struct SpriteTemplate gSpriteTemplate_839F220;
+extern const struct SpriteTemplate gSpriteTemplate_839F238;
+extern const struct SpriteTemplate gSpriteTemplate_839F250;
+extern const struct SubspriteTable gUnknown_0839F1A0;
+extern const struct SubspriteTable gUnknown_0839F1C8;
+extern const struct Coords16 gUnknown_0839F2A8[6];
+
+u8 CreatePokeballGlowSprite(s16 data6, s16 x, s16 y, u16 data5)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateInvisibleSprite(SpriteCB_PokeballGlowEffect);
+    sprite = &gSprites[spriteId];
+    sprite->pos2.x = x;
+    sprite->pos2.y = y;
+    sprite->data5 = data5;
+    sprite->data6 = data6;
+    sprite->data7 = spriteId;
+    return spriteId;
+}
+
+void SpriteCB_PokeballGlowEffect(struct Sprite *sprite)
+{
+    gUnknown_0839F288[sprite->data0](sprite);
+}
+
+void PokeballGlowEffect_0(struct Sprite *sprite)
+{
+    u8 endSpriteId;
+    if (sprite->data1 == 0 || (--sprite->data1) == 0)
+    {
+        sprite->data1 = 25;
+        endSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_839F208, gUnknown_0839F2A8[sprite->data2].x + sprite->pos2.x, gUnknown_0839F2A8[sprite->data2].y + sprite->pos2.y, 0);
+        gSprites[endSpriteId].oam.priority = 2;
+        gSprites[endSpriteId].data0 = sprite->data7;
+        sprite->data2++;
+        sprite->data6--;
+        PlaySE(SE_BOWA);
+    }
+    if (sprite->data6 == 0)
+    {
+        sprite->data1 = 32;
+        sprite->data0++;
+    }
+}
+
+extern const u8 gUnknown_0839F2C0[4]; // red
+extern const u8 gUnknown_0839F2C4[4]; // green
+extern const u8 gUnknown_0839F2C8[4]; // blue
+
+void PokeballGlowEffect_1(struct Sprite *sprite)
+{
+    if ((--sprite->data1) == 0)
+    {
+        sprite->data0++;
+        sprite->data1 = 8;
+        sprite->data2 = 0;
+        sprite->data3 = 0;
+        if (sprite->data5)
+        {
+            PlayFanfare(BGM_ME_ASA);
+        }
+    }
+}
+
+void PokeballGlowEffect_2(struct Sprite *sprite)
+{
+    u8 phase;
+    if ((--sprite->data1) == 0)
+    {
+        sprite->data1 = 8;
+        sprite->data2++;
+        sprite->data2 &= 3;
+        if (sprite->data2 == 0)
+        {
+            sprite->data3++;
+        }
+    }
+    phase = (sprite->data2 + 3) & 3;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x108, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    phase = (sprite->data2 + 2) & 3;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x106, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    phase = (sprite->data2 + 1) & 3;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x102, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    phase = sprite->data2;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x105, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x103, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    if (sprite->data3 > 2)
+    {
+        sprite->data0++;
+        sprite->data1 = 8;
+        sprite->data2 = 0;
+    }
+}
+
+void PokeballGlowEffect_3(struct Sprite *sprite)
+{
+    u8 phase;
+    if ((--sprite->data1) == 0)
+    {
+        sprite->data1 = 8;
+        sprite->data2++;
+        sprite->data2 &= 3;
+        if (sprite->data2 == 3)
+        {
+            sprite->data0++;
+            sprite->data1 = 30;
+        }
+    }
+    phase = sprite->data2;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x108, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x106, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x102, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x105, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x103, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
+}
+
+void PokeballGlowEffect_4(struct Sprite *sprite)
+{
+    if ((--sprite->data1) == 0)
+    {
+        sprite->data0++;
+    }
+}
+
+void PokeballGlowEffect_5(struct Sprite *sprite)
+{
+    sprite->data0++;
+}
+
+void PokeballGlowEffect_6(struct Sprite *sprite)
+{
+    if (sprite->data5 == 0 || IsFanfareTaskInactive())
+    {
+        sprite->data0++;
+    }
+}
+
+void PokeballGlowEffect_7(struct Sprite *sprite)
+{
+}
+
+void SpriteCB_PokeballGlow(struct Sprite *sprite)
+{
+    if (gSprites[sprite->data0].data0 > 4)
+    {
+        FieldEffectFreeGraphicsResources(sprite);
+    }
+}
+
+u8 PokecenterHealEffectHelper(s16 x, s16 y)
+{
+    u8 spriteIdAtEnd;
+    struct Sprite *sprite;
+    spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F220, x, y, 0);
+    sprite = &gSprites[spriteIdAtEnd];
+    sprite->oam.priority = 2;
+    sprite->invisible = 1;
+    SetSubspriteTables(sprite, &gUnknown_0839F1A0);
+    return spriteIdAtEnd;
+}
+
+void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
+{
+    if (sprite->data0 != 0)
+    {
+        sprite->data0 = 0;
+        sprite->invisible = 0;
+        StartSpriteAnim(sprite, 1);
+    }
+    if (sprite->animEnded)
+    {
+        FieldEffectFreeGraphicsResources(sprite);
+    }
+}
+
+void HallOfFameRecordEffectHelper(s16 a0, s16 a1, s16 a2, u8 a3)
+{
+    u8 spriteIdAtEnd;
+    if (!a3)
+    {
+        spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F238, a1, a2, 0);
+        SetSubspriteTables(&gSprites[spriteIdAtEnd], &gUnknown_0839F1C8);
+    } else
+    {
+        spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F250, a1, a2, 0);
+    }
+    gSprites[spriteIdAtEnd].invisible = 1;
+    gSprites[spriteIdAtEnd].data0 = a0;
+}
+
+void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].data[15])
+    {
+        if (sprite->data1 == 0 || (--sprite->data1) == 0)
+        {
+            sprite->data1 = 16;
+            sprite->invisible ^= 1;
+        }
+        sprite->data2++;
+    }
+    if (sprite->data2 > 127)
+    {
+        FieldEffectFreeGraphicsResources(sprite);
     }
 }
