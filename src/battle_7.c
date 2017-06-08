@@ -58,6 +58,7 @@ extern u8 ewram[];
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern u8 gUnknown_02024A60;
+extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
 extern u32 gUnknown_02024E70[];
@@ -68,6 +69,15 @@ extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_Unknown1[];
 extern const u8 *const gBattleAnims_Unknown2[];
+extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct MonCoords gTrainerFrontPicCoords[];
+extern const struct SpritePalette gTrainerFrontPicPaletteTable[];
+extern const struct SpriteSheet gUnknown_0820A47C;
+extern const struct SpriteSheet gUnknown_0820A484;
+extern const struct SpriteSheet gUnknown_0820A48C[];
+extern const struct SpriteSheet gUnknown_0820A49C[];
+extern const struct SpriteSheet gUnknown_0820A4B4[];
+extern const struct SpritePalette gUnknown_0820A4D4[];
 
 extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
@@ -303,4 +313,134 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
     }
+}
+
+void sub_80318FC(struct Pokemon *pkmn, u8 b)
+{
+    u32 personalityValue;
+    u16 species;
+    u32 r7;
+    u32 otId;
+    u8 var;
+    u16 paletteOffset;
+    const u16 *palette;
+
+    personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
+    if (ewram17800[b].unk2 == 0)
+    {
+        species = GetMonData(pkmn, MON_DATA_SPECIES);
+        r7 = personalityValue;
+    }
+    else
+    {
+        species = ewram17800[b].unk2;
+        r7 = gUnknown_02024E70[b];
+    }
+    otId = GetMonData(pkmn, MON_DATA_OT_ID);
+    var = battle_get_per_side_status(b);
+    HandleLoadSpecialPokePic(
+      &gMonBackPicTable[species],
+      gMonBackPicCoords[species].coords,
+      gMonBackPicCoords[species].y_offset,
+      0x02000000,
+      gUnknown_081FAF4C[var],
+      species,
+      r7);
+    paletteOffset = 0x100 + b * 16;
+    if (ewram17800[b].unk2 == 0)
+        palette = pokemon_get_pal(pkmn);
+    else
+        palette = species_and_otid_get_pal(species, otId, personalityValue);
+    sub_800D238(palette, ewram);
+    LoadPalette(ewram, paletteOffset, 0x20);
+    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    if (species == SPECIES_CASTFORM)
+    {
+        paletteOffset = 0x100 + b * 16;
+        sub_800D238(palette, ewram + 0x16400);
+        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+    }
+    if (ewram17800[b].unk2 != 0)
+    {
+        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+    }
+}
+
+void unref_sub_8031A64(void)
+{
+}
+
+void nullsub_9(u16 unused)
+{
+}
+
+void sub_8031A6C(u16 a, u8 b)
+{
+    u8 status;
+    struct SpriteSheet spriteSheet;
+
+    status = battle_get_per_side_status(b);
+    DecompressPicFromTable_2(
+      &gTrainerFrontPicTable[a],
+      gTrainerFrontPicCoords[a].coords,
+      gTrainerFrontPicCoords[a].y_offset,
+      (void *)0x02000000,
+      gUnknown_081FAF4C[status],
+      0);
+    spriteSheet.data = gUnknown_081FAF4C[status];
+    spriteSheet.size = gTrainerFrontPicTable[a].size;
+    spriteSheet.tag = gTrainerFrontPicTable[a].tag;
+    LoadCompressedObjectPic(&spriteSheet);
+    LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[a]);
+}
+
+void sub_8031AF4(u16 a, u8 b)
+{
+    u8 status;
+
+    status = battle_get_per_side_status(b);
+    DecompressPicFromTable_2(
+      &gTrainerBackPicTable[a],
+      gTrainerBackPicCoords[a].coords,
+      gTrainerBackPicCoords[a].y_offset,
+      (void *)0x02000000,
+      gUnknown_081FAF4C[status],
+      0);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
+}
+
+void nullsub_10(int unused)
+{
+}
+
+void sub_8031B74(u16 a)
+{
+    FreeSpritePaletteByTag(gTrainerFrontPicPaletteTable[a].tag);
+    FreeSpriteTilesByTag(gTrainerFrontPicTable[a].tag);
+}
+
+void unref_sub_8031BA0(void)
+{
+    u8 count;
+    u8 i;
+
+    LoadSpritePalette(&gUnknown_0820A4D4[0]);
+    LoadSpritePalette(&gUnknown_0820A4D4[1]);
+    if (!IsDoubleBattle())
+    {
+        LoadCompressedObjectPic(&gUnknown_0820A47C);
+        LoadCompressedObjectPic(&gUnknown_0820A484);
+        count = 2;
+    }
+    else
+    {
+        LoadCompressedObjectPic(&gUnknown_0820A48C[0]);
+        LoadCompressedObjectPic(&gUnknown_0820A48C[1]);
+        LoadCompressedObjectPic(&gUnknown_0820A49C[0]);
+        LoadCompressedObjectPic(&gUnknown_0820A49C[1]);
+        count = 4;
+    }
+    for (i = 0; i < count; i++)
+        LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[i]]);
 }
