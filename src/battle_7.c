@@ -2,6 +2,7 @@
 #include "asm.h"
 // Include this when my other PR gets merged
 //#include "battle.h"
+#include "battle_interface.h"
 #include "battle_anim.h"
 #include "blend_palette.h"
 #include "data2.h"
@@ -34,9 +35,10 @@ struct UnknownStruct2_
     u8 fillerA[2];
 };
 
-struct UnknownStruct4
+struct UnknownStruct4_
 {
-    u8 unk0_0:2;
+    u8 unk0_0:1;
+    u8 unk0_1:1;
     u8 unk0_2:1;
     u8 unk0_3:1;
     u16 unk2;
@@ -51,17 +53,20 @@ struct UnknownStruct6
 
 extern u8 ewram[];
 
-#define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
+#define ewram17800 ((struct UnknownStruct4_ *)(ewram + 0x17800))
 #define ewram17810 ((struct UnknownStruct2_ *)(ewram + 0x17810))
 #define ewram17840 (*(struct UnknownStruct6 *)(ewram + 0x17840))
 
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern u8 gUnknown_02024A60;
+extern u8 gUnknown_02024A68;
+extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
 extern u32 gUnknown_02024E70[];
+extern u8 gUnknown_03004340[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern u8 gBattleAnimPlayerMonIndex;
@@ -82,6 +87,7 @@ extern const struct SpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
 extern const u8 gUnknown_08D09C48[];
 
+extern void sub_8094958(void);
 extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
 extern void move_anim_start_t2();
@@ -92,6 +98,8 @@ extern const u16 *species_and_otid_get_pal();
 void sub_80315E8(u8);
 u8 sub_803163C(u8);
 void sub_80316CC(u8);
+void sub_8031F0C(void);
+void sub_80327CC(void);
 
 void sub_80312F0(struct Sprite *sprite)
 {
@@ -505,4 +513,105 @@ bool8 sub_8031C30(u8 a)
 void load_gfxc_health_bar(void)
 {
     sub_800D238(gUnknown_08D09C48, (void *)0x02000000);
+}
+
+u8 battle_load_something(u8 *pState, u8 *b)
+{
+    bool8 retVal = FALSE;
+
+    switch (*pState)
+    {
+    case 0:
+        sub_8031F0C();
+        (*pState)++;
+        break;
+    case 1:
+        if (sub_8031C30(*b) == 0)
+        {
+            (*b)++;
+        }
+        else
+        {
+            *b = 0;
+            (*pState)++;
+        }
+        break;
+    case 2:
+        (*pState)++;
+        break;
+    case 3:
+        if ((gBattleTypeFlags & 0x80) && *b == 0)
+            gUnknown_03004340[*b] = battle_make_oam_safari_battle();
+        else
+            gUnknown_03004340[*b] = battle_make_oam_normal_battle(*b);
+        (*b)++;
+        if (*b == gUnknown_02024A68)
+        {
+            *b = 0;
+            (*pState)++;
+        }
+        break;
+    case 4:
+        sub_8043F44(*b);
+        if (gUnknown_02024A72[*b] <= 1)
+            nullsub_11(gUnknown_03004340[*b], 0);
+        else
+            nullsub_11(gUnknown_03004340[*b], 1);
+        (*b)++;
+        if (*b == gUnknown_02024A68)
+        {
+            *b = 0;
+            (*pState)++;
+        }
+        break;
+    case 5:
+        if (battle_side_get_owner(*b) == 0)
+        {
+            if (!(gBattleTypeFlags & 0x80))
+                sub_8045A5C(gUnknown_03004340[*b], &gPlayerParty[gUnknown_02024A6A[*b]], 0);
+        }
+        else
+        {
+            sub_8045A5C(gUnknown_03004340[*b], &gEnemyParty[gUnknown_02024A6A[*b]], 0);
+        }
+        sub_8043DB0(gUnknown_03004340[*b]);
+        (*b)++;
+        if (*b == gUnknown_02024A68)
+        {
+            *b = 0;
+            (*pState)++;
+        }
+        break;
+    case 6:
+        sub_80327CC();
+        sub_8094958();
+        retVal = TRUE;
+        break;
+    }
+    return retVal;
+}
+
+void sub_8031EE8(void)
+{
+    memset(ewram17810, 0, 0x30);
+    memset(&ewram17840, 0, 0x10);
+}
+
+void sub_8031F0C(void)
+{
+    sub_8031EE8();
+    memset(ewram17800, 0, 0x10);
+}
+
+void sub_8031F24(void)
+{
+    s32 i;
+
+    for (i = 0; i < gUnknown_02024A68; i++)
+        ewram17800[i].unk0_0 = gSprites[gUnknown_02024BE0[i]].invisible;
+}
+
+void sub_8031F88(u8 a)
+{
+    ewram17800[a].unk0_0 = gSprites[gUnknown_02024BE0[a]].invisible;
 }
