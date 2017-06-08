@@ -3,7 +3,13 @@
 // Include this when my other PR gets merged
 //#include "battle.h"
 #include "battle_anim.h"
+#include "blend_palette.h"
+#include "data2.h"
+#include "decompress.h"
+#include "palette.h"
+#include "pokemon.h"
 #include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "task.h"
 #include "gba/m4a_internal.h"
@@ -33,6 +39,7 @@ struct UnknownStruct4
     u8 unk0_0:2;
     u8 unk0_2:1;
     u8 unk0_3:1;
+    u16 unk2;
 };
 
 struct UnknownStruct6
@@ -53,6 +60,7 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
+extern u32 gUnknown_02024E70[];
 extern u8 gBattleMonForms[];
 extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
@@ -61,10 +69,12 @@ extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_Unknown1[];
 extern const u8 *const gBattleAnims_Unknown2[];
 
+extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
 extern void move_anim_start_t2();
 extern void refresh_graphics_maybe();
 extern void sub_80324E0();
+extern const u16 *species_and_otid_get_pal();
 
 void sub_80315E8(u8);
 u8 sub_803163C(u8);
@@ -241,4 +251,56 @@ bool8 mplay_80342A4(u8 a)
         return FALSE;
     }
     return TRUE;
+}
+
+void sub_8031794(struct Pokemon *pkmn, u8 b)
+{
+    u32 personalityValue;
+    u16 species;
+    u32 r7;
+    u32 otId;
+    u8 var;
+    u16 paletteOffset;
+    const u16 *palette;
+
+    personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
+    if (ewram17800[b].unk2 == 0)
+    {
+        species = GetMonData(pkmn, MON_DATA_SPECIES);
+        r7 = personalityValue;
+    }
+    else
+    {
+        species = ewram17800[b].unk2;
+        r7 = gUnknown_02024E70[b];
+    }
+    otId = GetMonData(pkmn, MON_DATA_OT_ID);
+    var = battle_get_per_side_status(b);
+    HandleLoadSpecialPokePic(
+      &gMonFrontPicTable[species],
+      gMonFrontPicCoords[species].coords,
+      gMonFrontPicCoords[species].y_offset,
+      0x02000000,
+      gUnknown_081FAF4C[var],
+      species,
+      r7);
+    paletteOffset = 0x100 + b * 16;
+    if (ewram17800[b].unk2 == 0)
+        palette = pokemon_get_pal(pkmn);
+    else
+        palette = species_and_otid_get_pal(species, otId, personalityValue);
+    sub_800D238(palette, ewram);
+    LoadPalette(ewram, paletteOffset, 0x20);
+    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    if (species == SPECIES_CASTFORM)
+    {
+        paletteOffset = 0x100 + b * 16;
+        sub_800D238(palette, ewram + 0x16400);
+        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+    }
+    if (ewram17800[b].unk2 != 0)
+    {
+        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+    }
 }
