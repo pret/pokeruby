@@ -1076,11 +1076,19 @@ bool8 sub_80869F8(struct Task *task)
 
 void sub_8086A68(u8);
 extern const bool8 (*gUnknown_0839F2E8[6])(struct Task *);
+extern const bool8 (*gUnknown_0839F300[7])(struct Task *);
 extern void sub_80B4824(u8);
+extern void sub_8053FF8(void);
+extern void fade_8080918(void);
+
 void sub_8086B98(struct Task *);
 void sub_8086BE4(struct Task *);
 void sub_8086C30(void);
 void sub_8086C40(void);
+bool8 sub_8054034(void);
+void sub_8086C94(void);
+void sub_80B483C(void);
+void sub_8086CBC(u8);
 
 void sub_8086A2C(u8 a0, u8 priority)
 {
@@ -1190,12 +1198,6 @@ void sub_8086BE4(struct Task *task)
     }
 }
 
-extern void sub_8053FF8(void);
-extern void fade_8080918(void);
-bool8 sub_8054034(void);
-void sub_8086C94(void);
-void sub_80B483C(void);
-
 void sub_8086C30(void)
 {
     sub_8053FF8();
@@ -1212,4 +1214,132 @@ void sub_8086C40(void)
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_8086A68));
     }
+}
+
+void sub_8086C94(void)
+{
+    sub_8053E90();
+    pal_fill_for_map_transition();
+    ScriptContext2_Enable();
+    CreateTask(sub_8086CBC, 0);
+    gUnknown_0300485C = NULL;
+}
+
+void sub_8086CBC(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    while (gUnknown_0839F300[task->data[0]](task));
+}
+
+bool8 sub_8086CF4(struct Task *task)
+{
+    struct MapObject *mapObject;
+    s16 x;
+    s16 y;
+    u8 behavior;
+    CameraObjectReset2();
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(DIR_EAST));
+    PlayerGetDestCoords(&x, &y);
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
+    task->data[0]++;
+    task->data[1] = 16;
+    if (behavior == 0x6b)
+    {
+        behavior = 1;
+        task->data[0] = 3;
+    } else
+    {
+        behavior = 0;
+    }
+    sub_80B4824(behavior);
+    return TRUE;
+}
+
+bool8 sub_8086D70(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x84, task->data[1]);
+    sprite->pos2.y = Sin(0x94, task->data[1]);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_8086DB0(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x84, task->data[1]);
+    sprite->pos2.y = Sin(0x94, task->data[1]);
+    task->data[2]++;
+    if (task->data[2] & 1)
+    {
+        task->data[1]--;
+    }
+    if (task->data[1] == 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0] = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_8086E10(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x7c, task->data[1]);
+    sprite->pos2.y = Sin(0x76, task->data[1]);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_8086E50(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x7c, task->data[1]);
+    sprite->pos2.y = Sin(0x76, task->data[1]);
+    task->data[2]++;
+    if (task->data[2] & 1)
+    {
+        task->data[1]--;
+    }
+    if (task->data[1] == 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+extern bool8 sub_80B4850(void);
+
+bool8 sub_8086EB0(struct Task *task)
+{
+    if (sub_80B4850())
+    {
+        return FALSE;
+    }
+    sub_80B483C();
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 sub_8086ED4(struct Task *task)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        CameraObjectReset1();
+        ScriptContext2_Disable();
+        FieldObjectSetSpecialAnim(mapObject, GetGoSpeed0AnimId(DIR_EAST));
+        DestroyTask(FindTaskIdByFunc(sub_8086CBC));
+    }
+    return FALSE;
 }
