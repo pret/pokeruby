@@ -17,6 +17,7 @@
 #include "field_player_avatar.h"
 #include "field_map_obj_helpers.h"
 #include "field_map_obj.h"
+#include "metatile_behavior.h"
 #include "field_camera.h"
 #include "field_effect.h"
 
@@ -1341,5 +1342,78 @@ bool8 sub_8086ED4(struct Task *task)
         FieldObjectSetSpecialAnim(mapObject, GetGoSpeed0AnimId(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_8086CBC));
     }
+    return FALSE;
+}
+
+void sub_8086F64(u8);
+extern const bool8 (*gUnknown_0839F31C[5])(struct Task *, struct MapObject *);
+
+bool8 FldEff_UseWaterfall(void)
+{
+    u8 taskId;
+    taskId = CreateTask(sub_8086F64, 0xff);
+    gTasks[taskId].data[1] = gUnknown_0202FF84[0];
+    sub_8086F64(taskId);
+    return FALSE;
+}
+
+void sub_8086F64(u8 taskId)
+{
+    while (gUnknown_0839F31C[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId]));
+}
+
+bool8 sub_8086FB0(struct Task *task, struct MapObject *mapObject)
+{
+    ScriptContext2_Enable();
+    gPlayerAvatar.unk6 = 1;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 waterfall_1_do_anim_probably(struct Task *task, struct MapObject *mapObject)
+{
+    ScriptContext2_Enable();
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject))
+    {
+        FieldObjectClearAnimIfSpecialAnimFinished(mapObject);
+        gUnknown_0202FF84[0] = task->data[1];
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct MapObject *mapObject)
+{
+    if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        return FALSE;
+    }
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 sub_8087030(struct Task *task, struct MapObject *mapObject)
+{
+    FieldObjectSetSpecialAnim(mapObject, GetSimpleGoAnimId(DIR_NORTH));
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_8087058(struct Task *task, struct MapObject *mapObject)
+{
+    if (!FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        return FALSE;
+    }
+    if (MetatileBehavior_IsWaterfall(mapObject->mapobj_unk_1E))
+    {
+        task->data[0] = 3;
+        return TRUE;
+    }
+    ScriptContext2_Disable();
+    gPlayerAvatar.unk6 = 0;
+    DestroyTask(FindTaskIdByFunc(sub_8086F64));
+    FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
     return FALSE;
 }
