@@ -62,6 +62,7 @@ extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
 extern u32 gUnknown_02024E70[];
+extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
@@ -76,8 +77,10 @@ extern const struct SpriteSheet gUnknown_0820A47C;
 extern const struct SpriteSheet gUnknown_0820A484;
 extern const struct SpriteSheet gUnknown_0820A48C[];
 extern const struct SpriteSheet gUnknown_0820A49C[];
+extern const struct SpriteSheet gUnknown_0820A4AC;
 extern const struct SpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
+extern const u8 gUnknown_08D09C48[];
 
 extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
@@ -443,4 +446,63 @@ void unref_sub_8031BA0(void)
     }
     for (i = 0; i < count; i++)
         LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[i]]);
+}
+
+bool8 sub_8031C30(u8 a)
+{
+    bool8 retVal = FALSE;
+
+    if (a != 0)
+    {
+        if (a == 1)
+        {
+            LoadSpritePalette(&gUnknown_0820A4D4[0]);
+            LoadSpritePalette(&gUnknown_0820A4D4[1]);
+        }
+        else if (!IsDoubleBattle())
+        {
+            if (a == 2)
+            {
+                if (gBattleTypeFlags & 0x80)
+                    LoadCompressedObjectPic(&gUnknown_0820A4AC);
+                else
+                    LoadCompressedObjectPic(&gUnknown_0820A47C);
+            }
+            else if (a == 3)
+                LoadCompressedObjectPic(&gUnknown_0820A484);
+            else if (a == 4)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[0]]);
+            else if (a == 5)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[1]]);
+            else
+                retVal = TRUE;
+        }
+        else
+        {
+            if (a == 2)
+                LoadCompressedObjectPic(&gUnknown_0820A48C[0]);
+            else if (a == 3)
+                LoadCompressedObjectPic(&gUnknown_0820A48C[1]);
+            else if (a == 4)
+                LoadCompressedObjectPic(&gUnknown_0820A49C[0]);
+            else if (a == 5)
+                LoadCompressedObjectPic(&gUnknown_0820A49C[1]);
+            else if (a == 6)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[0]]);
+            else if (a == 7)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[1]]);
+            else if (a == 8)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[2]]);
+            else if (a == 9)
+                LoadCompressedObjectPic(&gUnknown_0820A4B4[gUnknown_02024A72[3]]);
+            else
+                retVal = TRUE;
+        }
+    }
+    return retVal;
+}
+
+void load_gfxc_health_bar(void)
+{
+    sub_800D238(gUnknown_08D09C48, (void *)0x02000000);
 }
