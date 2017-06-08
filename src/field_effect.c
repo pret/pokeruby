@@ -1417,3 +1417,51 @@ bool8 sub_8087058(struct Task *task, struct MapObject *mapObject)
     FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
     return FALSE;
 }
+
+void Task_Dive(u8);
+extern const bool8 (*gUnknown_0839F330[3])(struct Task *);
+extern int dive_warp(struct MapPosition *, u16);
+
+bool8 FldEff_UseDive(void)
+{
+    u8 taskId;
+    taskId = CreateTask(Task_Dive, 0xff);
+    gTasks[taskId].data[15] = gUnknown_0202FF84[0];
+    gTasks[taskId].data[14] = gUnknown_0202FF84[1];
+    Task_Dive(taskId);
+    return FALSE;
+}
+
+void Task_Dive(u8 taskId)
+{
+    while (gUnknown_0839F330[gTasks[taskId].data[0]](&gTasks[taskId]));
+}
+
+bool8 sub_8087124(struct Task *task)
+{
+    gPlayerAvatar.unk6 = 1;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 dive_2_unknown(struct Task *task)
+{
+    ScriptContext2_Enable();
+    gUnknown_0202FF84[0] = task->data[15];
+    FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 dive_3_unknown(struct Task *task)
+{
+    struct MapPosition mapPosition;
+    PlayerGetDestCoords(&mapPosition.x, &mapPosition.y);
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        dive_warp(&mapPosition, gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E);
+        DestroyTask(FindTaskIdByFunc(Task_Dive));
+        FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
+    }
+    return FALSE;
+}
