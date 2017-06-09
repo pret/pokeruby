@@ -1587,3 +1587,102 @@ bool8 sub_808759C(struct Task *task, struct MapObject *mapObject, struct Sprite 
     }
     return FALSE;
 }
+
+extern void sub_8060470(s16 *x, s16 *y, s16 dx, s16 dy);
+extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
+
+u8 FldEff_LavaridgeGymWarp(void)
+{
+    u8 spriteId;
+    sub_8060470((s16 *)&gUnknown_0202FF84[0], (s16 *)&gUnknown_0202FF84[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[33], gUnknown_0202FF84[0], gUnknown_0202FF84[1], gUnknown_0202FF84[2]);
+    gSprites[spriteId].oam.priority = gUnknown_0202FF84[3];
+    gSprites[spriteId].coordOffsetEnabled = 1;
+    return spriteId;
+}
+
+void sub_8087638(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, FLDEFF_LAVARIDGE_GYM_WARP);
+    }
+}
+
+void sub_808766C(u8);
+extern const bool8 (*gUnknown_0839F364[5])(struct Task *, struct MapObject *, struct Sprite *);
+
+void sub_8087654(u8 priority)
+{
+    CreateTask(sub_808766C, priority);
+}
+
+void sub_808766C(u8 taskId)
+{
+    while(gUnknown_0839F364[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+}
+
+bool8 sub_80876C8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FreezeMapObjects();
+    CameraObjectReset2();
+    gPlayerAvatar.unk6 = 1;
+    mapObject->mapobj_bit_26 = 1;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_80876F8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        if (task->data[1] > 3)
+        {
+            gUnknown_0202FF84[0] = mapObject->coords2.x;
+            gUnknown_0202FF84[1] = mapObject->coords2.y;
+            gUnknown_0202FF84[2] = sprite->subpriority - 1;
+            gUnknown_0202FF84[3] = sprite->oam.priority;
+            task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
+            task->data[0]++;
+        } else
+        {
+            task->data[1]++;
+            FieldObjectSetSpecialAnim(mapObject, GetStepInPlaceDelay4AnimId(mapObject->mapobj_unk_18));
+            PlaySE(SE_FU_ZUZUZU);
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_8087774(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gSprites[task->data[1]].animCmdIndex == 2)
+    {
+        mapObject->mapobj_bit_13 = 1;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_80877AC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
+    {
+        sub_8053FF8();
+        fade_8080918();
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (!gPaletteFade.active && sub_8054034() == TRUE)
+    {
+        warp_in();
+        gUnknown_0300485C = sub_8086748;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(FindTaskIdByFunc(sub_808766C));
+    }
+    return FALSE;
+}
