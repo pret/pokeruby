@@ -928,16 +928,13 @@ bool8 sub_8086854(struct Task *task) // gUnknown_0839F2CC[1]
     return FALSE;
 }
 
-#ifdef NONMATCHING
 bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
 {
     struct Sprite *sprite;
     s16 centerToCornerVecY;
-    int ctcvy;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    centerToCornerVecY = sprite->centerToCornerVecY;
-    ctcvy = -(centerToCornerVecY << 17);
-    sprite->pos2.y = -((sprite->pos1.y + centerToCornerVecY + gSpriteCoordOffsetY) + (ctcvy >> 16));
+    centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
+    sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 0;
@@ -945,65 +942,6 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
     task->data[0]++;
     return FALSE;
 }
-#else
-__attribute__((naked))
-bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tadds r5, r0, 0\n"
-                "\tldr r6, _080868D4 @ =gPlayerAvatar\n"
-                "\tldrb r0, [r6, 0x4]\n"
-                "\tlsls r2, r0, 4\n"
-                "\tadds r2, r0\n"
-                "\tlsls r2, 2\n"
-                "\tldr r0, _080868D8 @ =gSprites\n"
-                "\tadds r2, r0\n"
-                "\tadds r0, r2, 0\n"
-                "\tadds r0, 0x29\n"
-                "\tmovs r4, 0\n"
-                "\tldrsb r4, [r0, r4] @ =gSprites[gPlayerAvatar.spriteId].centerToCornerVecY\n"
-                "\tlsls r0, r4, 17\n"
-                "\tnegs r0, r0\n"
-                "\tldrh r1, [r2, 0x22] @ =gSprites[gPlayerAvatar.spriteId].pos1.y\n"
-                "\tldr r3, _080868DC @ =gSpriteCoordOffsetY\n"
-                "\tadds r1, r4\n"
-                "\tldrh r3, [r3]\n"
-                "\tadds r1, r3\n"
-                "\tasrs r0, 16\n"
-                "\tadds r0, r1\n"
-                "\tnegs r0, r0\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r0, [r2, 0x26]\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r5, 0xA]\n"
-                "\tstrh r1, [r5, 0xC]\n"
-                "\tldr r2, _080868E0 @ =gMapObjects\n"
-                "\tldrb r0, [r6, 0x5]\n"
-                "\tlsls r1, r0, 3\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r2\n"
-                "\tldrb r2, [r1, 0x1]\n"
-                "\tmovs r0, 0x21\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r2\n"
-                "\tstrb r0, [r1, 0x1]\n"
-                "\tmovs r0, 0x2B\n"
-                "\tbl PlaySE\n"
-                "\tldrh r0, [r5, 0x8]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r5, 0x8]\n"
-                "\tmovs r0, 0\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r1}\n"
-                "\tbx r1\n"
-                "\t.align 2, 0\n"
-                "_080868D4: .4byte gPlayerAvatar\n"
-                "_080868D8: .4byte gSprites\n"
-                "_080868DC: .4byte gSpriteCoordOffsetY\n"
-                "_080868E0: .4byte gMapObjects");
-}
-#endif
 
 bool8 sub_80868E4(struct Task *task)
 {
@@ -1462,6 +1400,122 @@ bool8 dive_3_unknown(struct Task *task)
         dive_warp(&mapPosition, gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E);
         DestroyTask(FindTaskIdByFunc(Task_Dive));
         FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
+    }
+    return FALSE;
+}
+
+void sub_80871D0(u8);
+extern const bool8 (*gUnknown_0839F33C[6])(struct Task *, struct MapObject *, struct Sprite *);
+void mapldr_080851BC(void);
+
+void sub_80871B8(u8 priority)
+{
+    CreateTask(sub_80871D0, priority);
+}
+
+void sub_80871D0(u8 taskId)
+{
+    while (gUnknown_0839F33C[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+}
+
+bool8 sub_808722C(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FreezeMapObjects();
+    CameraObjectReset2();
+    SetCameraPanningCallback(NULL);
+    gPlayerAvatar.unk6 = 1;
+    mapObject->mapobj_bit_26 = 1;
+    task->data[1] = 1;
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 sub_8087264(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    SetCameraPanning(0, task->data[1]);
+    task->data[1] = -task->data[1];
+    task->data[2]++;
+    if (task->data[2] > 7)
+    {
+        task->data[2] = 0;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_8087298(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->pos2.y = 0;
+    task->data[3] = 1;
+    gUnknown_0202FF84[0] = mapObject->coords2.x;
+    gUnknown_0202FF84[1] = mapObject->coords2.y;
+    gUnknown_0202FF84[2] = sprite->subpriority - 1;
+    gUnknown_0202FF84[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
+    PlaySE(SE_W153);
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 sub_80872E4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    s16 centerToCornerVecY;
+    SetCameraPanning(0, task->data[1]);
+    if (task->data[1] = -task->data[1], ++task->data[2] <= 17)
+    {
+        if (!(task->data[2] & 1) && (task->data[1] <= 3))
+        {
+            task->data[1] <<= 1;
+        }
+    } else if (!(task->data[2] & 4) && (task->data[1] > 0))
+    {
+        task->data[1] >>= 1;
+    }
+    if (task->data[2] > 6)
+    {
+        centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
+        if (sprite->pos2.y > -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY))
+        {
+            sprite->pos2.y -= task->data[3];
+            if (task->data[3] <= 7)
+            {
+                task->data[3]++;
+            }
+        } else
+        {
+            task->data[4] = 1;
+        }
+    }
+    if (task->data[5] == 0 && sprite->pos2.y < -0x10)
+    {
+        task->data[5]++;
+        mapObject->mapobj_bit_26 = 1;
+        sprite->oam.priority = 1;
+        sprite->subspriteMode = 2;
+    }
+    if (task->data[1] == 0 && task->data[4] != 0)
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_80873D8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8053FF8();
+    fade_8080918();
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (!gPaletteFade.active && sub_8054034() == TRUE)
+    {
+        warp_in();
+        gUnknown_0300485C = mapldr_080851BC;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(FindTaskIdByFunc(sub_80871D0));
     }
     return FALSE;
 }
