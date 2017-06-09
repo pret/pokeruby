@@ -1131,7 +1131,7 @@ _081226DC:
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_806D5A4
 	ldr r0, _0812271C @ =gOtherText_NoMoreThreePoke
 	movs r1, 0x1
@@ -1178,7 +1178,7 @@ _0812274A:
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	adds r0, r4, 0
 	bl sub_8122838
 _08122760:
@@ -1276,7 +1276,7 @@ sub_81227FC: @ 81227FC
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
@@ -2395,7 +2395,7 @@ sub_81230F4: @ 81230F4
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0xF
 	movs r1, 0
 	bl sub_806D538

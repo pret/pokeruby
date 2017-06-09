@@ -341,7 +341,7 @@ _0813B212:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813B25C
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, _0813B23C @ =0x0201fe00
@@ -374,7 +374,7 @@ _0813B25C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813B274
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
@@ -717,7 +717,7 @@ Mailbox_MoveToBag: @ 813B510
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r0, _0813B540 @ =gStringVar1
 	ldr r1, _0813B544 @ =gOtherText_MoveToBag
 	bl StringCopy
@@ -920,7 +920,7 @@ sub_813B6A4: @ 813B6A4
 	lsrs r6, r0, 24
 	ldr r5, _0813B6F4 @ =0x0201fe00
 	ldrb r4, [r5, 0x3]
-	bl sub_813AF3C
+	bl GetMailboxMailCount
 	strb r0, [r5, 0x3]
 	bl sub_813AF78
 	ldrb r0, [r5, 0x3]
@@ -988,7 +988,7 @@ Mailbox_Cancel: @ 813B734
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xC

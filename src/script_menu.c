@@ -684,7 +684,7 @@ void sub_80B52B4(u8 taskId)
             {
                 gScriptResult = var;
             }
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             MenuZeroFillWindowRect(gTasks[taskId].data[0], gTasks[taskId].data[1], gTasks[taskId].data[2], gTasks[taskId].data[3]);
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -847,7 +847,7 @@ void sub_80B5684(u8 taskId)
         {
             gScriptResult = var;
         }
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         MenuZeroFillWindowRect(gTasks[taskId].data[0], gTasks[taskId].data[1], gTasks[taskId].data[2], gTasks[taskId].data[3]);
         DestroyTask(taskId);
         EnableBothScriptContexts();

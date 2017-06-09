@@ -1577,7 +1577,7 @@ _080ABEC6:
 	ands r5, r0
 	cmp r5, 0
 	beq _080ABF08
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, _080ABF00 @ =gTasks

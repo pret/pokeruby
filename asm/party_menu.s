@@ -7423,7 +7423,7 @@ sub_806E7D0: @ 806E7D0
 	lsls r3, 24
 	lsrs r3, 24
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -10660,7 +10660,7 @@ ItemUseMoveMenu_HandleMoveSelection: @ 80704B0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x13
 	movs r1, 0xA
 	movs r2, 0x1D
@@ -10690,7 +10690,7 @@ ItemUseMoveMenu_HandleCancel: @ 80704F0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x13
 	movs r1, 0xA
 	movs r2, 0x1D

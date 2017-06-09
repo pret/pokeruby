@@ -2612,7 +2612,7 @@ _080BC8C2:
 	ldrsh r1, [r4, r2]
 	cmp r0, r1
 	bne _080BC8FC
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -2622,7 +2622,7 @@ _080BC8C2:
 	bl sub_80BCC54
 	b _080BC940
 _080BC8FC:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x2]
 	adds r0, r1
@@ -2642,7 +2642,7 @@ _080BC91C:
 	beq _080BC940
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -2827,7 +2827,7 @@ sub_80BCA84: @ 80BCA84
 	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
 	bl DestroyVerticalScrollIndicator
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D

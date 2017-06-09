@@ -1595,7 +1595,7 @@ _080E6D58:
 	.align 2, 0
 _080E6D60: .4byte 0x02001000
 _080E6D64:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_80E81FC
 	ldr r0, _080E6D78 @ =sub_80E6AC4
 	bl sub_80E682C
@@ -1781,7 +1781,7 @@ _080E6ED0: .4byte 0x00009c7c
 _080E6ED4: .4byte 0x0000ffff
 _080E6ED8: .4byte sub_80E752C
 _080E6EDC:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_80E81FC
 	ldr r4, _080E6EFC @ =0x02001000
 	ldrb r0, [r4, 0x8]

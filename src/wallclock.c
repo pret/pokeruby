@@ -434,7 +434,7 @@ static void Task_SetClock4(u8 taskId)
             return;
         case -1:    //B button
         case 1:     //NO
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(23, 8, 29, 13);
             MenuZeroFillWindowRect(2, 16, 27, 19);

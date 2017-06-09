@@ -190,7 +190,7 @@ sub_802C098: @ 802C098
 	beq _0802C13E
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r1, _0802C108 @ =gUnknown_02024E60
 	ldrb r0, [r4]
 	adds r0, r1
@@ -398,7 +398,7 @@ _0802C278:
 	movs r2, 0
 	bl dp01_build_cmdbuf_x21_a_bb
 	bl dp01_tbl1_exec_completed
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	b _0802C2AC
 	.align 2, 0
 _0802C294: .4byte gBattleTypeFlags
@@ -484,7 +484,7 @@ _0802C32E:
 	ands r0, r1
 	cmp r0, 0
 	beq _0802C3A8
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x5
 	bl PlaySE
 	ldr r2, _0802C394 @ =gSprites
@@ -1028,7 +1028,7 @@ _0802C7B2:
 	cmp r0, 0
 	bne _0802C7DC
 _0802C7B8:
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r1, _0802C7D0 @ =gUnknown_02024E64
 	ldr r0, _0802C7D8 @ =gUnknown_02024A60
 	ldrb r0, [r0]
@@ -1112,7 +1112,7 @@ _0802C864:
 	ands r0, r1
 	cmp r0, 0
 	beq _0802C8A4
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, _0802C898 @ =gUnknown_030042A4

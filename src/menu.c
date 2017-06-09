@@ -56,7 +56,7 @@ void CloseMenu(void)
     MenuZeroFillScreen();
     sub_8064E2C();
     ScriptContext2_Disable();
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
 }
 
 void AppendToList(u8 *list, u8 *pindex, u32 value)
@@ -272,14 +272,14 @@ s8 ProcessMenuInput(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -307,14 +307,14 @@ s8 ProcessMenuInputNoWrap(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -519,7 +519,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & A_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         return GetMenuCursorPos();
     }
@@ -527,7 +527,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -733,7 +733,7 @@ void sub_8072DDC(u8 a1)
     sub_8072DCC(8 * a1);
 }
 
-void sub_8072DEC(void)
+void HandleDestroyMenuCursors(void)
 {
-    sub_814A7FC();
+    DestroyMenuCursor();
 }

@@ -14,7 +14,7 @@ void sub_80FECE0(u8 arg0);
 
 void sub_80FE7EC(u8 arg0)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
 
     sub_80FEC94(arg0);

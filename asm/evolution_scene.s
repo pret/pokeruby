@@ -3517,7 +3517,7 @@ _08113768:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, _081137D8 @ =gUnknown_08400F8C
 	movs r1, 0x92
 	lsls r1, 3
@@ -3591,7 +3591,7 @@ _08113818:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, _08113874 @ =gUnknown_08400F8C
 	movs r1, 0x92
 	lsls r1, 3

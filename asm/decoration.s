@@ -255,7 +255,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 80FE3C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xA
@@ -497,7 +497,7 @@ sub_80FE5AC: @ 80FE5AC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -627,7 +627,7 @@ _080FE6D0: .4byte gUnknown_020388F7
 _080FE6D4: .4byte gTasks
 _080FE6D8: .4byte sub_80FE868
 _080FE6DC:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE
@@ -693,7 +693,7 @@ sub_80FE758: @ 80FE758
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE
@@ -965,7 +965,7 @@ _080FE9EE:
 	ands r0, r1
 	cmp r0, 0
 	beq _080FEA7C
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	ldr r2, _080FEA44 @ =gUnknown_020388F5
@@ -1025,7 +1025,7 @@ _080FEA7C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080FEAAC
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _080FEAB4 @ =gUnknown_083EC634
@@ -1684,7 +1684,7 @@ sub_80FEF74: @ 80FEF74
 	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
 	bl DestroyVerticalScrollIndicator
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE
@@ -1780,7 +1780,7 @@ sub_80FF034: @ 80FF034
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE
@@ -5743,7 +5743,7 @@ _08100E9E:
 	strh r0, [r4, 0x4]
 	strh r0, [r4, 0xC]
 	strh r0, [r4, 0xA]
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	b _08100EE6
 	.align 2, 0
 _08100EC0: .4byte gPaletteFade

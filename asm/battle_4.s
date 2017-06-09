@@ -15716,7 +15716,7 @@ sub_8023AD8: @ 8023AD8
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_802BBD4
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	add sp, 0x4
 	pop {r0}
 	bx r0

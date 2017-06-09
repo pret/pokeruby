@@ -1830,7 +1830,7 @@ sub_810C540: @ 810C540
 	lsrs r5, 24
 	ldr r0, _0810C5A0 @ =gWindowConfig_81E6E50
 	bl BasicInitMenuWindow
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x7
 	movs r1, 0x4
 	movs r2, 0xD
@@ -2078,7 +2078,7 @@ sub_810C748: @ 810C748
 	bl sub_80F98DC
 	movs r0, 0x1
 	bl sub_80F98DC
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x7
 	movs r1, 0x4
 	movs r2, 0xD
