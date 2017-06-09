@@ -1519,3 +1519,71 @@ bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite 
     }
     return FALSE;
 }
+
+void sub_8087470(u8);
+extern const bool8 (*gUnknown_0839F354[4])(struct Task *, struct MapObject *, struct Sprite *);
+extern u8 sub_80608A4(u8);
+
+void mapldr_080851BC(void)
+{
+    sub_8053E90();
+    pal_fill_for_map_transition();
+    ScriptContext2_Enable();
+    gUnknown_0300485C = NULL;
+    CreateTask(sub_8087470, 0);
+}
+
+void sub_8087470(u8 taskId)
+{
+    while (gUnknown_0839F354[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+}
+
+bool8 sub_80874CC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    CameraObjectReset2();
+    FreezeMapObjects();
+    gPlayerAvatar.unk6 = 1;
+    mapObject->mapobj_bit_13 = 1;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_807D770())
+    {
+        gUnknown_0202FF84[0] = mapObject->coords2.x;
+        gUnknown_0202FF84[1] = mapObject->coords2.y;
+        gUnknown_0202FF84[2] = sprite->subpriority - 1;
+        gUnknown_0202FF84[3] = sprite->oam.priority;
+        task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_8087548(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite = &gSprites[task->data[1]];
+    if (sprite->animCmdIndex > 1)
+    {
+        task->data[0]++;
+        mapObject->mapobj_bit_13 = 0;
+        CameraObjectReset1();
+        PlaySE(SE_W091);
+        FieldObjectSetSpecialAnim(mapObject, sub_80608A4(DIR_EAST));
+    }
+    return FALSE;
+}
+
+bool8 sub_808759C(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        gPlayerAvatar.unk6 = 0;
+        ScriptContext2_Disable();
+        UnfreezeMapObjects();
+        DestroyTask(FindTaskIdByFunc(sub_8087470));
+    }
+    return FALSE;
+}
