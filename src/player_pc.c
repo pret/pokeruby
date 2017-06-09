@@ -137,21 +137,21 @@ void InitItemStorageMenu(u8);
 void ItemStorageMenuPrint(u8 *);
 void ItemStorageMenuProcessInput(u8);
 void ItemStorage_ProcessInput(u8);
-void sub_813A240(u8);
-void sub_813A4B4(u8);
-void sub_813A468(u8);
-void HandleQuantityRolling(u8);
+void ItemStorage_SetItemAndMailCount(u8);
+void ItemStorage_DoItemAction(u8);
+void ItemStorage_GoBackToPlayerPCMenu(u8);
+void ItemStorage_HandleQuantityRolling(u8);
 void ItemStorage_DoItemWithdraw(u8);
-void sub_813A794(u8);
-void sub_813A8F0(u8);
-void sub_813A984(u8);
-void sub_813A9EC(u8);
+void ItemStorage_DoItemToss(u8);
+void ItemStorage_HandleRemoveItem(u8);
+void ItemStorage_WaitPressHandleResumeProcessInput(u8);
+void ItemStorage_HandleResumeProcessInput(u8);
 void ItemStorage_DoItemSwap(u8, bool8);
 void ItemStorage_DrawItemList(u8);
-void GetPlayerPcResponseString(u16);
+void ItemStorage_PrintItemPcResponse(u16);
 void ItemStorage_DrawBothListAndDescription(u8);
-void sub_813AE6C(u8, u8);
-void sub_813AF04(void);
+void ItemStorage_GoBackToItemPCMenu(u8, u8);
+void ItemStorage_LoadPalette(void);
 u8 GetMailboxMailCount(void);
 
 void NewGameInitPCItems(void)
@@ -235,7 +235,7 @@ void PlayerPC_Mailbox(u8 taskId)
         gMailboxInfo.unk0 = 0;
         gMailboxInfo.unk2 = 0;
         sub_813AF78();
-        sub_813A240(taskId);
+        ItemStorage_SetItemAndMailCount(taskId);
         sub_813B108(taskId);
         gTasks[taskId].func = sub_813B174;
     }
@@ -351,8 +351,8 @@ void ItemStorage_Withdraw(u8 taskId)
         CURRENT_ITEM_STORAGE_MENU = ITEMPC_MENU_WITHDRAW;
         PAGE_INDEX = 0;
         ITEMS_ABOVE_TOP = 0;
-        sub_813A240(taskId);
-        sub_813AE6C(taskId, 0);
+        ItemStorage_SetItemAndMailCount(taskId);
+        ItemStorage_GoBackToItemPCMenu(taskId, 0);
         gTasks[taskId].func = ItemStorage_ProcessInput;
     }
     else
@@ -373,8 +373,8 @@ void ItemStorage_Toss(u8 taskId)
         CURRENT_ITEM_STORAGE_MENU = ITEMPC_MENU_TOSS;
         PAGE_INDEX = 0;
         ITEMS_ABOVE_TOP = 0;
-        sub_813A240(taskId);
-        sub_813AE6C(taskId, 2);
+        ItemStorage_SetItemAndMailCount(taskId);
+        ItemStorage_GoBackToItemPCMenu(taskId, 2);
         gTasks[taskId].func = ItemStorage_ProcessInput;
     }
     else
@@ -388,7 +388,7 @@ void ItemStorage_Exit(u8 var)
     ReshowPlayerPC(var);
 }
 
-void sub_813A240(u8 taskId)
+void ItemStorage_SetItemAndMailCount(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -419,11 +419,11 @@ void ItemStorage_ProcessInput(u8 taskId)
             {
                 if (trueIndex == NUM_ITEMS) // if the cursor is on top of cancel, print the go back to prev description.
                 {
-                    GetPlayerPcResponseString(ITEMPC_GO_BACK_TO_PREV);
+                    ItemStorage_PrintItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
                 }
                 else
                 {
-                    GetPlayerPcResponseString(gSaveBlock1.pcItems[trueIndex].itemId);
+                    ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[trueIndex].itemId);
                 }
             }
         }
@@ -452,9 +452,9 @@ void ItemStorage_ProcessInput(u8 taskId)
                 return;
 
             if (trueIndex == NUM_ITEMS)
-                GetPlayerPcResponseString(ITEMPC_GO_BACK_TO_PREV); // probably further down
+                ItemStorage_PrintItemPcResponse(ITEMPC_GO_BACK_TO_PREV); // probably further down
             else
-                GetPlayerPcResponseString(gSaveBlock1.pcItems[trueIndex].itemId);
+                ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[trueIndex].itemId);
         }
         else if(ITEMS_ABOVE_TOP + PAGE_INDEX != NUM_ITEMS)
         {
@@ -470,12 +470,12 @@ void ItemStorage_ProcessInput(u8 taskId)
     {
         if (SWITCH_MODE_ACTIVE == FALSE)
         {
-            if (PAGE_INDEX + ITEMS_ABOVE_TOP != NUM_ITEMS)
+            if (PAGE_INDEX + ITEMS_ABOVE_TOP != NUM_ITEMS) // you cannot swap the Cancel button.
             {
                 PlaySE(SE_SELECT);
                 SWITCH_MODE_ACTIVE = TRUE;
                 SWAP_ITEM_INDEX = ITEMS_ABOVE_TOP + PAGE_INDEX;
-                GetPlayerPcResponseString(ITEMPC_SWITCH_WHICH_ITEM);
+                ItemStorage_PrintItemPcResponse(ITEMPC_SWITCH_WHICH_ITEM);
             }
             // _0813A3DC
             ItemStorage_DrawItemList(taskId);
@@ -494,11 +494,11 @@ void ItemStorage_ProcessInput(u8 taskId)
         {
             if(ITEMS_ABOVE_TOP + PAGE_INDEX != NUM_ITEMS)
             {
-                sub_813A4B4(taskId);
+                ItemStorage_DoItemAction(taskId);
             }
             else
             {
-                sub_813A468(taskId);
+                ItemStorage_GoBackToPlayerPCMenu(taskId);
             }
         }
         else
@@ -513,7 +513,7 @@ void ItemStorage_ProcessInput(u8 taskId)
         if(SWITCH_MODE_ACTIVE == FALSE)
         {
             HandleDestroyMenuCursors();
-            sub_813A468(taskId);
+            ItemStorage_GoBackToPlayerPCMenu(taskId);
         }
         else
         {
@@ -523,7 +523,7 @@ void ItemStorage_ProcessInput(u8 taskId)
     }
 }
 
-void sub_813A468(u8 taskId)
+void ItemStorage_GoBackToPlayerPCMenu(u8 taskId)
 {
     BuyMenuFreeMemory();
     DestroyVerticalScrollIndicator(0);
@@ -534,7 +534,7 @@ void sub_813A468(u8 taskId)
     gTasks[taskId].func = ItemStorageMenuProcessInput;
 }
 
-void sub_813A4B4(u8 taskId)
+void ItemStorage_DoItemAction(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 trueIndex = PAGE_INDEX + ITEMS_ABOVE_TOP;
@@ -552,26 +552,26 @@ void sub_813A4B4(u8 taskId)
         }
         else // _0813A50C
         {
-            GetPlayerPcResponseString(ITEMPC_HOW_MANY_TO_WITHDRAW);
+            ItemStorage_PrintItemPcResponse(ITEMPC_HOW_MANY_TO_WITHDRAW);
         }
     }
     else if(gSaveBlock1.pcItems[trueIndex].quantity == 1) // _0813A518
     {
         NUM_QUANTITY_ROLLER = 1;
-        sub_813A794(taskId);
+        ItemStorage_DoItemToss(taskId);
         return;
     }
     else
     {
-        GetPlayerPcResponseString(ITEMPC_HOW_MANY_TO_TOSS);
+        ItemStorage_PrintItemPcResponse(ITEMPC_HOW_MANY_TO_TOSS);
     }
     NUM_QUANTITY_ROLLER = 1;
     MenuDrawTextWindow(6, 8, 13, 11);
     sub_80A418C(NUM_QUANTITY_ROLLER, STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3);
-    gTasks[taskId].func = HandleQuantityRolling;
+    gTasks[taskId].func = ItemStorage_HandleQuantityRolling;
 }
 
-void HandleQuantityRolling(u8 taskId)
+void ItemStorage_HandleQuantityRolling(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 trueIndex = PAGE_INDEX + ITEMS_ABOVE_TOP;
@@ -620,7 +620,7 @@ void HandleQuantityRolling(u8 taskId)
         if(CURRENT_ITEM_STORAGE_MENU == ITEMPC_MENU_WITHDRAW)
             ItemStorage_DoItemWithdraw(taskId);
         else
-            sub_813A794(taskId);
+            ItemStorage_DoItemToss(taskId);
     }
     else if(gMain.newKeys & B_BUTTON) // cancel quantity.
     {
@@ -628,7 +628,7 @@ void HandleQuantityRolling(u8 taskId)
         MenuZeroFillWindowRect(6, 6, 0xD, 0xB);
         sub_80F98DC(0);
         sub_80F98DC(1);
-        GetPlayerPcResponseString(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId); // why not use trueIndex?
+        ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId); // why not use trueIndex?
         gTasks[taskId].func = ItemStorage_ProcessInput;
     }
 }
@@ -642,18 +642,18 @@ void ItemStorage_DoItemWithdraw(u8 taskId)
     {
         CopyItemName(gSaveBlock1.pcItems[trueIndex].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, NUM_QUANTITY_ROLLER, 0, 3);
-        GetPlayerPcResponseString(ITEMPC_WITHDREW_THING);
-        gTasks[taskId].func = sub_813A8F0;
+        ItemStorage_PrintItemPcResponse(ITEMPC_WITHDREW_THING);
+        gTasks[taskId].func = ItemStorage_HandleRemoveItem;
     }
     else
     {
         NUM_QUANTITY_ROLLER = 0;
-        GetPlayerPcResponseString(ITEMPC_NO_MORE_ROOM);
-        gTasks[taskId].func = sub_813A984;
+        ItemStorage_PrintItemPcResponse(ITEMPC_NO_MORE_ROOM);
+        gTasks[taskId].func = ItemStorage_WaitPressHandleResumeProcessInput;
     }
 }
 
-void sub_813A794(u8 taskId)
+void ItemStorage_DoItemToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 var = PAGE_INDEX + ITEMS_ABOVE_TOP;
@@ -662,26 +662,26 @@ void sub_813A794(u8 taskId)
     {
         CopyItemName(gSaveBlock1.pcItems[var].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, NUM_QUANTITY_ROLLER, 0, 3);
-        GetPlayerPcResponseString(ITEMPC_OKAY_TO_THROW_AWAY);
+        ItemStorage_PrintItemPcResponse(ITEMPC_OKAY_TO_THROW_AWAY);
         DisplayYesNoMenu(7, 6, 1);
         sub_80F914C(taskId, &gUnknown_084062E0);
     }
     else
     {
         NUM_QUANTITY_ROLLER = 0;
-        GetPlayerPcResponseString(ITEMPC_TOO_IMPORTANT);
-        gTasks[taskId].func = sub_813A8F0;
+        ItemStorage_PrintItemPcResponse(ITEMPC_TOO_IMPORTANT);
+        gTasks[taskId].func = ItemStorage_HandleRemoveItem;
     }
 }
 
-void sub_813A83C(u8 taskId)
+void ItemStorage_ResumeInputFromYesToss(u8 taskId)
 {
     MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
-    GetPlayerPcResponseString(ITEMPC_THREW_AWAY_ITEM);
-    gTasks[taskId].func = sub_813A8F0;
+    ItemStorage_PrintItemPcResponse(ITEMPC_THREW_AWAY_ITEM);
+    gTasks[taskId].func = ItemStorage_HandleRemoveItem;
 }
 
-void sub_813A878(u8 taskId)
+void ItemStorage_ResumeInputFromNoToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -689,46 +689,44 @@ void sub_813A878(u8 taskId)
     InitMenu(0, 16, 2, NUM_PAGE_ITEMS, PAGE_INDEX, 0xD);
     sub_80F98DC(0);
     sub_80F98DC(1);
-    GetPlayerPcResponseString(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId);
+    ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId);
     gTasks[taskId].func = ItemStorage_ProcessInput;
 }
 
-void sub_813A8F0(u8 taskId)
+void ItemStorage_HandleRemoveItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 var;
-    u8 usedItemSlots;
+    s16 oldNumItems;
 
     if(gMain.newKeys & A_BUTTON || gMain.newKeys == B_BUTTON)
     {
         RemovePCItem(PAGE_INDEX + ITEMS_ABOVE_TOP, NUM_QUANTITY_ROLLER);
-        var = NUM_ITEMS;
-        usedItemSlots = CountUsedPCItemSlots();
-        NUM_ITEMS = usedItemSlots;
+        oldNumItems = NUM_ITEMS;
+        NUM_ITEMS = CountUsedPCItemSlots();
 
-        if((s16)var != usedItemSlots && (s16)var < NUM_PAGE_ITEMS + ITEMS_ABOVE_TOP && ITEMS_ABOVE_TOP != 0)
+        if(oldNumItems != NUM_ITEMS && oldNumItems < NUM_PAGE_ITEMS + ITEMS_ABOVE_TOP && ITEMS_ABOVE_TOP != 0)
             ITEMS_ABOVE_TOP--;
 
-        sub_813A240(taskId);
-        sub_813A9EC(taskId);
+        ItemStorage_SetItemAndMailCount(taskId);
+        ItemStorage_HandleResumeProcessInput(taskId);
         InitMenu(0, 16, 2, NUM_PAGE_ITEMS, PAGE_INDEX, 0xD);
     }
 }
 
-void sub_813A984(u8 taskId)
+void ItemStorage_WaitPressHandleResumeProcessInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     if(gMain.newKeys & A_BUTTON || gMain.newKeys == B_BUTTON)
     {
-        GetPlayerPcResponseString(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId);
+        ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId);
         sub_80F98DC(0);
         sub_80F98DC(1);
         gTasks[taskId].func = ItemStorage_ProcessInput;
     }
 }
 
-void sub_813A9EC(u8 taskId)
+void ItemStorage_HandleResumeProcessInput(u8 taskId)
 {
     MenuZeroFillWindowRect(0x6, 0x6, 0xD, 0xB);
     sub_80F98DC(0);
@@ -754,11 +752,11 @@ void ItemStorage_DoItemSwap(u8 taskId, bool8 switchModeDisabled)
     }
     else if(trueIndex == NUM_ITEMS)
     {
-        GetPlayerPcResponseString(ITEMPC_GO_BACK_TO_PREV);
+        ItemStorage_PrintItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
     }
     else
     {
-        GetPlayerPcResponseString(gSaveBlock1.pcItems[trueIndex].itemId);
+        ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[trueIndex].itemId);
     }
 
     /*
@@ -771,71 +769,71 @@ void ItemStorage_DoItemSwap(u8 taskId, bool8 switchModeDisabled)
     without bringing the relevent debug menus back. The commented out line is intentionally left in below to show
     what it may have looked like.
     */
-    if(SWAP_ITEM_INDEX - ITEMS_ABOVE_TOP > 0) { // this check is arbitrary and used to generate the correct assembly using the subtraction, which is what matters. the 0 check doesn't.
+    if(SWAP_ITEM_INDEX - ITEMS_ABOVE_TOP <= 0) { // this check is arbitrary and used to generate the correct assembly using the subtraction, which is what matters. the 0 check doesn't.
         //gSaveBlock1.pcItems[SWAP_ITEM_INDEX].quantity += 100;
         gSaveBlock1.pcItems[SWAP_ITEM_INDEX].quantity += 0; // do not enforce item cap.
     }
 }
 
-void sub_813AAC4(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int arg5)
+void ItemStorage_DrawItemQuantity(u16 arg1, enum StringConvertMode arg2, u8 arg3, u8 arg4, int isSwapSelected)
 {
     sub_80A4164(gStringVar1, arg1, arg2, arg4);
 
-    if(arg5)
+    if(isSwapSelected != FALSE)
         MenuPrint(gUnknown_0840632A, 0x1A, arg3);
     else
         MenuPrint(gUnknown_08406327, 0x1A, arg3);
 }
 
-void sub_813AB10(u8 var)
+void ItemStorage_DrawItemVoidQuantity(u8 var)
 {
     MenuPrint(gUnknown_08406330, 0x19, var);
 }
 
-void sub_813AB28(struct ItemSlot *itemSlot, u8 var, int var2)
+void ItemStorage_DrawItemName(struct ItemSlot *itemSlot, u8 var, int isSwapSelected)
 {
     CopyItemName(itemSlot->itemId, gStringVar1);
 
-    if(var2)
+    if(isSwapSelected != FALSE)
         MenuPrint(gUnknown_0840631E, 16, var);
     else
         MenuPrint(gUnknown_08406318, 16, var);
 }
 
-void sub_813AB64(struct ItemSlot *itemSlot, u8 var, int var2)
+void ItemStorage_DrawNormalItemEntry(struct ItemSlot *itemSlot, u8 var, int var2)
 {
-    sub_813AB28(itemSlot, var, var2);
-    sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+    ItemStorage_DrawItemName(itemSlot, var, var2);
+    ItemStorage_DrawItemQuantity(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
 }
 
-void sub_813AB90(struct ItemSlot *itemSlot, u8 var, int var2)
+void ItemStorage_DrawKeyItemEntry(struct ItemSlot *itemSlot, u8 var, int var2)
 {
-    sub_813AB28(itemSlot, var, var2);
-    sub_813AB10(var);
+    ItemStorage_DrawItemName(itemSlot, var, var2);
+    ItemStorage_DrawItemVoidQuantity(var);
 }
 
-void sub_813ABAC(struct ItemSlot *itemSlot, u8 var, int var2)
+void ItemStorage_DrawTMHMEntry(struct ItemSlot *itemSlot, u8 var, int var2)
 {
-    sub_813AB28(itemSlot, var, var2);
+    ItemStorage_DrawItemName(itemSlot, var, var2);
 
     if(itemSlot->itemId < ITEM_HM01)
-        sub_813AAC4(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
+        ItemStorage_DrawItemQuantity(itemSlot->quantity, STR_CONV_MODE_RIGHT_ALIGN, var, 3, var2);
     else
-        sub_813AB10(var); // key items do not have a quantity.
+        ItemStorage_DrawItemVoidQuantity(var); // HMs do not have a quantity.
 }
 
 void ItemStorage_DrawItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 i;
     int tempArg;
-    u16 j = 0;
+    u16 i;
+    u16 yCoord = 0;
 
     // r5 is i and is unsigned 16-bit.
 
     for(i = ITEMS_ABOVE_TOP; i < ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS; i++)
     {
-        j = (i - ITEMS_ABOVE_TOP) * 2;
+        yCoord = (i - ITEMS_ABOVE_TOP) * 2;
 
         if(i != NUM_ITEMS)
         {
@@ -849,13 +847,13 @@ void ItemStorage_DrawItemList(u8 taskId)
                 case 0:
                 case 1:
                 case 3:
-                    sub_813AB64((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    ItemStorage_DrawNormalItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
                     break;
                 case 4:
-                    sub_813AB90((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    ItemStorage_DrawKeyItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
                     break;
                 case 2:
-                    sub_813ABAC((struct ItemSlot *)&gSaveBlock1.pcItems[i], j + 2, tempArg);
+                    ItemStorage_DrawTMHMEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
                     break;
             }
         }
@@ -867,7 +865,7 @@ void ItemStorage_DrawItemList(u8 taskId)
 
 beforeLabel:
     if(i - ITEMS_ABOVE_TOP < 8)
-        MenuFillWindowRectWithBlankTile(16, j + 4, 0x1C, 0x12);
+        MenuFillWindowRectWithBlankTile(16, yCoord + 4, 0x1C, 0x12);
 
     switch(ITEMS_ABOVE_TOP)
     {
@@ -875,7 +873,7 @@ beforeLabel:
             CreateVerticalScrollIndicators(0, 0xB8, 8);
             break;
 weirdCase:
-            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (j + 2) * 8, 0x68, 1);
+            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (yCoord + 2) * 8, 0x68, 1);
             goto beforeLabel;
         case 0:
             DestroyVerticalScrollIndicator(0);
@@ -888,7 +886,7 @@ weirdCase:
         DestroyVerticalScrollIndicator(1);
 }
 
-void GetPlayerPcResponseString(u16 itemId)
+void ItemStorage_PrintItemPcResponse(u16 itemId)
 {
     u8 *string;
 
@@ -939,29 +937,29 @@ void ItemStorage_DrawBothListAndDescription(u8 taskId)
     if(SWITCH_MODE_ACTIVE == FALSE)
     {
         if(trueIndex == NUM_ITEMS)
-            GetPlayerPcResponseString(ITEMPC_GO_BACK_TO_PREV);
+            ItemStorage_PrintItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
         else
-            GetPlayerPcResponseString(gSaveBlock1.pcItems[trueIndex].itemId);
+            ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[trueIndex].itemId);
     }
 }
 
-void sub_813AE6C(u8 taskId, u8 var)
+void ItemStorage_GoBackToItemPCMenu(u8 taskId, u8 var)
 {
     s16 *data = gTasks[taskId].data;
 
     sub_80F944C();
     LoadScrollIndicatorPalette();
-    sub_813AF04();
+    ItemStorage_LoadPalette();
     MenuDrawTextWindow(0xF, 0, 0x1D, 0x13);
     MenuDrawTextWindow(0, 0xC, 0xE, 0x13);
     MenuDrawTextWindow(0, 0, 0xB, 3);
-    GetPlayerPcResponseString(gSaveBlock1.pcItems[0].itemId);
+    ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[0].itemId);
     MenuPrint(gPCText_ItemPCOptionsText[var].text, 1, 1);
     ItemStorage_DrawItemList(taskId);
     InitMenu(0, 0x10, 2, NUM_PAGE_ITEMS, PAGE_INDEX, 0xD);
 }
 
-void sub_813AF04(void)
+void ItemStorage_LoadPalette(void)
 {
     u16 arr[3];
 

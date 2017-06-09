@@ -32,8 +32,8 @@ gPCText_ItemPCOptionsText:: @ 84062C0
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
-	.4byte sub_813A83C
-	.4byte sub_813A878
+	.4byte ItemStorage_ResumeInputFromYesToss
+	.4byte ItemStorage_ResumeInputFromNoToss
 
 	.align 2
 gUnknown_084062E8:: @ 84062E8

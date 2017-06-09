@@ -822,7 +822,7 @@ _0813B5CC:
 	strb r0, [r4, 0x2]
 _0813B5FC:
 	adds r0, r5, 0
-	bl sub_813A240
+	bl ItemStorage_SetItemAndMailCount
 _0813B602:
 	pop {r4-r6}
 	pop {r0}
@@ -938,7 +938,7 @@ sub_813B6A4: @ 813B6A4
 	strb r0, [r5, 0x2]
 _0813B6DA:
 	adds r0, r6, 0
-	bl sub_813A240
+	bl ItemStorage_SetItemAndMailCount
 	adds r0, r6, 0
 	bl sub_813B108
 	bl pal_fill_black
