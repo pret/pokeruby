@@ -1675,6 +1675,11 @@ bool8 sub_80877AC(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return FALSE;
 }
 
+void sub_80878C4(u8);
+extern u8 gUnknown_0839F380[5];
+extern const void (*gUnknown_0839F378[2])(struct Task *);
+void mapldr_080859D4(void);
+
 bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
@@ -1685,4 +1690,132 @@ bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite 
         DestroyTask(FindTaskIdByFunc(sub_808766C));
     }
     return FALSE;
+}
+
+u8 FldEff_PopOutOfAsh(void)
+{
+    u8 spriteId;
+    sub_8060470((s16 *)&gUnknown_0202FF84[0], (s16 *)&gUnknown_0202FF84[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[32], gUnknown_0202FF84[0], gUnknown_0202FF84[1], gUnknown_0202FF84[2]);
+    gSprites[spriteId].oam.priority = gUnknown_0202FF84[3];
+    gSprites[spriteId].coordOffsetEnabled = 1;
+    return spriteId;
+}
+
+void sub_808788C(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, FLDEFF_POP_OUT_OF_ASH);
+    }
+}
+
+void sub_80878A8(void)
+{
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    CreateTask(sub_80878C4, 0x50);
+}
+
+void sub_80878C4(u8 taskId)
+{
+    gUnknown_0839F378[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_80878F4(struct Task *task)
+{
+    task->data[0]++;
+    task->data[14] = 64;
+    task->data[15] = player_get_direction_lower_nybble();
+}
+
+void sub_8087914(struct Task *task)
+{
+    struct MapObject *mapObject;
+    u8 unknown_0839F380[5];
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    if (task->data[14] != 0 && (--task->data[14]) == 0)
+    {
+        sub_8053FF8();
+        fade_8080918();
+    }
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) || FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        if (task->data[14] == 0 && !gPaletteFade.active && sub_8054034() == TRUE)
+        {
+            FieldObjectSetDirection(mapObject, task->data[15]);
+            sub_8053678();
+            warp_in();
+            gUnknown_0300485C = mapldr_080859D4;
+            SetMainCallback2(CB2_LoadMap);
+            DestroyTask(FindTaskIdByFunc(sub_80878C4));
+        } else if (task->data[1] == 0 || (--task->data[1]) == 0)
+        {
+            FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(unknown_0839F380[mapObject->mapobj_unk_18]));
+            if (task->data[2] < 12)
+            {
+                task->data[2]++;
+            }
+            task->data[1] = 8 >> (task->data[2] >> 2);
+        }
+    }
+}
+
+void sub_8087A74(u8);
+extern const void (*gUnknown_0839F388[2])(struct Task *);
+
+void mapldr_080859D4(void)
+{
+    sub_8053E90();
+    pal_fill_for_map_transition();
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    gUnknown_0300485C = NULL;
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
+    CreateTask(sub_8087A74, 0);
+}
+
+void sub_8087A74(u8 taskId)
+{
+    gUnknown_0839F388[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_8087AA4(struct Task *task)
+{
+    if (sub_807D770())
+    {
+        task->data[0]++;
+        task->data[15] = player_get_direction_lower_nybble();
+    }
+}
+
+void sub_8087AC8(struct Task *task)
+{
+    struct MapObject *mapObject;
+    u8 unknown_0839F380[5];
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (task->data[1] == 0 || (--task->data[1]) == 0)
+    {
+        if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) && !FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+        {
+            return;
+        }
+        if (task->data[2] >= 32 && task->data[15] == player_get_direction_lower_nybble())
+        {
+            mapObject->mapobj_bit_13 = 0;
+            ScriptContext2_Disable();
+            UnfreezeMapObjects();
+            DestroyTask(FindTaskIdByFunc(sub_8087A74));
+            return;
+        }
+        FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(unknown_0839F380[mapObject->mapobj_unk_18]));
+        if (task->data[2] < 32)
+        {
+            task->data[2]++;
+        }
+        task->data[1] = task->data[2] >> 2;
+    }
+    mapObject->mapobj_bit_13 ^= 1;
 }
