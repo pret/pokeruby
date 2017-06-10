@@ -24,7 +24,7 @@ void sub_802E3E4(u8, int);
 void nullsub_8(u8);
 
 // asm/battle_7.o
-void sub_8032AA8(u8 index, int i);
+void sub_8032AA8(u8, u8);
 
 // src/pokemon_3.o
 u16 SpeciesToNationalPokedexNum(u16);

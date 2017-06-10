@@ -29,14 +29,18 @@ struct Struct2019348
 
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
+extern u8 gUnknown_02023A60[][0x200];
 extern u8 gUnknown_02024A60;
+extern u32 gUnknown_02024A64;
 extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
 extern u32 gUnknown_02024E70[];
+extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
+extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern u8 gBattleAnimPlayerMonIndex;
@@ -48,10 +52,13 @@ extern const u8 *const gBattleAnims_Unknown2[];
 extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct SpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct SpriteSheet gUnknown_0820A47C;
 extern const u8 gSubstituteDollTilemap[];
 extern const u8 gSubstituteDollGfx[];
 extern const u8 gSubstituteDollPal[];
+extern const struct SpriteSheet gUnknown_081FAF24;
+extern const struct SpriteTemplate gSpriteTemplate_81FAF34;
+extern void (*const gUnknown_081FAF5C[])(void);
+extern const struct SpriteSheet gUnknown_0820A47C;
 extern const struct SpriteSheet gUnknown_0820A484;
 extern const struct SpriteSheet gUnknown_0820A48C[];
 extern const struct SpriteSheet gUnknown_0820A49C[];
@@ -62,6 +69,7 @@ extern const u8 gUnknown_08D09C48[];
 
 #define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
 
+extern u8 sub_8077ABC();
 extern u8 sub_8078874(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);
@@ -77,8 +85,11 @@ void sub_80316CC(u8);
 void sub_8031F0C(void);
 void refresh_graphics_maybe(u8, u8, u8);
 void sub_80324E0(u8 a);
-
 void sub_80327CC(void);
+void sub_8032978(struct Sprite *);
+void sub_80328A4(struct Sprite *);
+void sub_8032AFC(void);
+void sub_80334EC(void);
 
 void sub_80312F0(struct Sprite *sprite)
 {
@@ -704,7 +715,7 @@ void sub_8032350(u8 a, u8 b)
     const u8 *gSubstituteDollPal_;
     void *src;
     s32 i;
-    
+
     if (b == 0)
     {
         if (IsContest())
@@ -762,7 +773,7 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
 {
     u16 hp = GetMonData(pkmn, MON_DATA_HP);
     u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
-    
+
     if (GetHPBarLevel(hp, maxHP) == 1)
     {
         if (!ewram17800[b].unk0_1)
@@ -791,7 +802,7 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
 void sub_80325B8(void)
 {
     u8 r4 = battle_get_side_with_given_state(0);
-    
+
     ewram17800[r4].unk0_1 = 0;
     if (IsDoubleBattle())
         ewram17800[r4 ^ 2].unk0_1 = 0;
@@ -802,7 +813,7 @@ u8 unref_sub_8032604(struct Pokemon *pkmn)
 {
     u16 hp = GetMonData(pkmn, MON_DATA_HP);
     u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
-    
+
     return GetHPBarLevel(hp, maxHP);
 }
 
@@ -814,7 +825,7 @@ void sub_8032638(void)
         u8 r9 = battle_get_side_with_given_state(2);
         u8 r4 = pokemon_order_func(gUnknown_02024A6A[r8]);
         u8 r5 = pokemon_order_func(gUnknown_02024A6A[r9]);
-        
+
         if (GetMonData(&gPlayerParty[r4], MON_DATA_HP) != 0)
             sub_80324F8(&gPlayerParty[r4], r8);
         if (IsDoubleBattle())
@@ -828,7 +839,7 @@ void sub_8032638(void)
 void sub_80326EC(u8 a)
 {
     s32 i;
-    
+
     for (i = 0; i < gUnknown_02024A68; i++)
     {
         if (sub_8078874(i) != 0)
@@ -844,5 +855,151 @@ void sub_80326EC(u8 a)
                 gSprites[gUnknown_02024BE0[i]].oam.matrixNum = ewram17810[i].unk6;
             }
         }
+    }
+}
+
+void sub_80327CC(void)
+{
+    u8 r5;
+
+    LoadCompressedObjectPic(&gUnknown_081FAF24);
+    r5 = battle_get_side_with_given_state(1);
+    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
+    gSprites[ewram17810[r5].unk7].data0 = r5;
+    if (IsDoubleBattle())
+    {
+        r5 = battle_get_side_with_given_state(3);
+        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
+        gSprites[ewram17810[r5].unk7].data0 = r5;
+    }
+}
+
+void sub_80328A4(struct Sprite *sprite)
+{
+    bool8 invisible = FALSE;
+    u8 r4 = sprite->data0;
+    struct Sprite *r7 = &gSprites[gUnknown_02024BE0[r4]];
+
+    if (!r7->inUse || sub_8078874(r4) == 0)
+    {
+        sprite->callback = sub_8032978;
+        return;
+    }
+    if (gAnimScriptActive || r7->invisible)
+        invisible = TRUE;
+    else if (ewram17800[r4].unk2 != 0 && gEnemyMonElevation[ewram17800[r4].unk2] == 0)
+        invisible = TRUE;
+    if (ewram17800[r4].unk0_2)
+        invisible = TRUE;
+    sprite->pos1.x = r7->pos1.x;
+    sprite->pos2.x = r7->pos2.x;
+    sprite->invisible = invisible;
+}
+
+void sub_8032978(struct Sprite *sprite)
+{
+    sprite->invisible = TRUE;
+}
+
+void sub_8032984(u8 a, u16 b)
+{
+    if (battle_side_get_owner(a) != 0)
+    {
+        if (ewram17800[a].unk2 != 0)
+            b = ewram17800[a].unk2;
+        if (gEnemyMonElevation[b] != 0)
+            gSprites[ewram17810[a].unk7].callback = sub_80328A4;
+        else
+            gSprites[ewram17810[a].unk7].callback = sub_8032978;
+    }
+}
+
+void sub_8032A08(u8 a)
+{
+    gSprites[ewram17810[a].unk7].callback = sub_8032978;
+}
+
+void sub_8032A38(void)
+{
+    u16 *ptr = (u16 *)(VRAM + 0x240);
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 9; i++)
+    {
+        for (j = 0; j < 16; j++)
+        {
+            if (!(*ptr & 0xF000))
+                *ptr |= 0xF000;
+            if (!(*ptr & 0x0F00))
+                *ptr |= 0x0F00;
+            if (!(*ptr & 0x00F0))
+                *ptr |= 0x00F0;
+            if (!(*ptr & 0x000F))
+                *ptr |= 0x000F;
+            ptr++;
+        }
+    }
+}
+
+void sub_8032AA8(u8 a, u8 b)
+{
+    ewram17800[a].unk2 = 0;
+    gBattleMonForms[a] = 0;
+    if (b == 0)
+        sub_80324E0(a);
+}
+
+void nullsub_45(void)
+{
+}
+
+void sub_8032AE0(void)
+{
+    gUnknown_03004330[gUnknown_02024A60] = sub_8032AFC;
+}
+
+void sub_8032AFC(void)
+{
+    if (gUnknown_02024A64 & gBitTable[gUnknown_02024A60])
+    {
+        if (gUnknown_02023A60[gUnknown_02024A60][0] <= 0x38)
+            gUnknown_081FAF5C[gUnknown_02023A60[gUnknown_02024A60][0]]();
+        else
+            sub_80334EC();
+    }
+}
+
+void sub_8032B4C(void)
+{
+    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback == SpriteCallbackDummy)
+        sub_80334EC();
+}
+
+// Duplicate of sub_8032B4C
+void sub_8032B84(void)
+{
+    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback == SpriteCallbackDummy)
+        sub_80334EC();
+}
+
+void sub_8032BBC(void)
+{
+    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].callback == SpriteCallbackDummy)
+    {
+        sub_8031B74(gSprites[gUnknown_02024BE0[gUnknown_02024A60]].oam.affineParam);
+        gSprites[gUnknown_02024BE0[gUnknown_02024A60]].oam.tileNum = gSprites[gUnknown_02024BE0[gUnknown_02024A60]].data5;
+        FreeSpriteOamMatrix(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        DestroySprite(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        sub_80334EC();
+    }
+}
+
+void sub_8032C4C(void)
+{
+    if ((--ewram17810[gUnknown_02024A60].unk9) == 0xFF)
+    {
+        ewram17810[gUnknown_02024A60].unk9 = 0;
+        sub_80334EC();
     }
 }
