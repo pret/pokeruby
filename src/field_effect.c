@@ -2008,3 +2008,35 @@ void sub_8087FDC(struct Task *task)
         }
     }
 }
+
+void sub_8088120(u8);
+void sub_808847C(u8);
+u8 sub_8088830(u32, u32, u32);
+
+bool8 FldEff_FieldMoveShowMon(void)
+{
+    u8 taskId;
+    if (is_light_level_1_2_3_5_or_6(sav1_map_get_light_level()) == TRUE)
+    {
+        taskId = CreateTask(sub_8088120, 0xff);
+    } else
+    {
+        taskId = CreateTask(sub_808847C, 0xff);
+    }
+    gTasks[taskId].data[15] = sub_8088830(gUnknown_0202FF84[0], gUnknown_0202FF84[1], gUnknown_0202FF84[2]);
+    return FALSE;
+}
+
+bool8 FldEff_FieldMoveShowMonInit(void)
+{
+    struct Pokemon *pokemon;
+    u32 flag = gUnknown_0202FF84[0] & 0x80000000;
+    pokemon = &gPlayerParty[(u8)gUnknown_0202FF84[0]];
+    gUnknown_0202FF84[0] = GetMonData(pokemon, MON_DATA_SPECIES);
+    gUnknown_0202FF84[1] = GetMonData(pokemon, MON_DATA_OT_ID);
+    gUnknown_0202FF84[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+    gUnknown_0202FF84[0] |= flag;
+    FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    return FALSE;
+}
