@@ -1821,7 +1821,7 @@ void sub_8010874(void)
 
 void sub_8010B88(void)
 {
-    struct UnknownStruct4 sp0 = gUnknown_02024CA8[gUnknown_02024A60];
+    struct UnkBattleStruct4 sp0 = gUnknown_02024CA8[gUnknown_02024A60];
     s32 i;
     u8 *ptr;
     u32 *ptr2;
