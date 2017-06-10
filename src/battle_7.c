@@ -14,6 +14,16 @@
 #include "task.h"
 #include "gba/m4a_internal.h"
 
+struct Struct2019348
+{
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[4];
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+};
+
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern u8 gUnknown_02024A60;
@@ -44,6 +54,9 @@ extern const struct SpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
 extern const u8 gUnknown_08D09C48[];
 
+#define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
+
+extern u8 sub_8077F68(u8);
 extern void sub_8094958(void);
 extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
@@ -571,4 +584,106 @@ void sub_8031F24(void)
 void sub_8031F88(u8 a)
 {
     ewram17800[a].unk0_0 = gSprites[gUnknown_02024BE0[a]].invisible;
+}
+
+void sub_8031FC4(u8 a, u8 b, bool8 c)
+{
+    u16 paletteOffset;
+    u16 species;
+    u32 personalityValue;
+    u32 otId;
+    u8 r10;
+    const u16 *palette;
+
+    if (c)
+    {
+        StartSpriteAnim(&gSprites[gUnknown_02024BE0[a]], ewram17840.unk0);
+        paletteOffset = 0x100 + a * 16;
+        LoadPalette(ewram + 0x16400 + ewram17840.unk0 * 32, paletteOffset, 32);
+        gBattleMonForms[a] = ewram17840.unk0;
+        if (ewram17800[a].unk2 != 0)
+        {
+            BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+            CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+        }
+        gSprites[gUnknown_02024BE0[a]].pos1.y = sub_8077F68(a);
+    }
+    else
+    {
+        const void *src;
+        void *dst;
+
+        if (IsContest())
+        {
+            r10 = 0;
+            species = ewram19348.unk2;
+            personalityValue = ewram19348.unk8;
+            otId = ewram19348.unkC;
+            HandleLoadSpecialPokePic(
+              &gMonBackPicTable[species],
+              gMonBackPicCoords[species].coords,
+              gMonBackPicCoords[species].y_offset,
+              0x02000000,
+              gUnknown_081FAF4C[0],
+              species,
+              ewram19348.unk10);
+        }
+        else
+        {
+            r10 = battle_get_per_side_status(a);
+            if (battle_side_get_owner(b) == 1)
+                species = GetMonData(&gEnemyParty[gUnknown_02024A6A[b]], MON_DATA_SPECIES);
+            else
+                species = GetMonData(&gPlayerParty[gUnknown_02024A6A[b]], MON_DATA_SPECIES);
+            if (battle_side_get_owner(a) == 0)
+            {
+                personalityValue = GetMonData(&gPlayerParty[gUnknown_02024A6A[a]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gUnknown_02024A6A[a]], MON_DATA_OT_ID);
+                HandleLoadSpecialPokePic(
+                  &gMonBackPicTable[species],
+                  gMonBackPicCoords[species].coords,
+                  gMonBackPicCoords[species].y_offset,
+                  0x02000000,
+                  gUnknown_081FAF4C[r10],
+                  species,
+                  gUnknown_02024E70[a]);
+            }
+            else
+            {
+                personalityValue = GetMonData(&gEnemyParty[gUnknown_02024A6A[a]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gUnknown_02024A6A[a]], MON_DATA_OT_ID);
+                HandleLoadSpecialPokePic(
+                  &gMonFrontPicTable[species],
+                  gMonFrontPicCoords[species].coords,
+                  gMonFrontPicCoords[species].y_offset,
+                  0x02000000,
+                  gUnknown_081FAF4C[r10],
+                  species,
+                  gUnknown_02024E70[a]);
+            }
+        }
+        src = gUnknown_081FAF4C[r10];
+        dst = (void *)(VRAM + 0x10000 + gSprites[gUnknown_02024BE0[a]].oam.tileNum * 32);
+        DmaCopy32(3, src, dst, 0x800);
+        paletteOffset = 0x100 + a * 16;
+        palette = species_and_otid_get_pal(species, otId, personalityValue);
+        sub_800D238(palette, ewram);
+        LoadPalette(ewram, paletteOffset, 32);
+        if (species == SPECIES_CASTFORM)
+        {
+            u16 *paletteSrc = (u16 *)(ewram + 0x16400);
+
+            sub_800D238(palette, paletteSrc);
+            LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
+        }
+        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+        if (!IsContest())
+        {
+            ewram17800[a].unk2 = species;
+            gBattleMonForms[a] = gBattleMonForms[b];
+        }
+        gSprites[gUnknown_02024BE0[a]].pos1.y = sub_8077F68(a);
+        StartSpriteAnim(&gSprites[gUnknown_02024BE0[a]], gBattleMonForms[a]);
+    }
 }
