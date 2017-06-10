@@ -21,24 +21,6 @@ struct UnknownStruct1
     u8 unk2[0x1FE];
 };
 
-struct UnknownStruct2
-{
-    u8 unk0_0:1;
-    u8 unk0_1:2;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 filler2[2];
-    u8 unk4;
-    u8 unk5;
-    u8 filler6[3];
-    u8 unk9;
-    u8 fillerA[2];
-};
-
 //Possibly PokemonSubstruct1
 struct UnknownStruct3
 {
@@ -47,24 +29,19 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct4
-{
-    u8 unk0_0:2;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-};
-
 struct UnknownStruct5
 {
     u8 unk0_0:7;
     u8 unk0_7:1;
 };
 
+/*
 struct UnknownStruct6
 {
     u8 filler0[9];
     u8 unk9;
 };
+*/
 
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
@@ -99,12 +76,6 @@ extern u8 gBattleMonForms[];
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern void (*const gUnknown_083FE4F4[])(void);
-
-extern u8 ewram[];
-
-#define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
-#define ewram17810 ((struct UnknownStruct2 *)(ewram + 0x17810))
-#define ewram17840 (*(struct UnknownStruct6 *)(ewram + 0x17840))
 
 extern u8 move_anim_start_t3();
 extern u8 sub_8078874();

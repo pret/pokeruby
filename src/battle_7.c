@@ -1,7 +1,6 @@
 #include "global.h"
 #include "asm.h"
-// Include this when my other PR gets merged
-//#include "battle.h"
+#include "battle.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "blend_palette.h"
@@ -14,48 +13,6 @@
 #include "sprite.h"
 #include "task.h"
 #include "gba/m4a_internal.h"
-
-// Probably the same one from battle_811DA74.c
-struct UnknownStruct2_
-{
-    u8 unk0_0:1;
-    u8 unk0_1:2;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 filler2[2];
-    u8 unk4;
-    u8 unk5;
-    u8 filler6[2];
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
-};
-
-struct UnknownStruct4_
-{
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u16 unk2;
-};
-
-struct UnknownStruct6
-{
-    u16 unk0;
-    u8 filler2[7];
-    u8 unk9;
-};
-
-extern u8 ewram[];
-
-#define ewram17800 ((struct UnknownStruct4_ *)(ewram + 0x17800))
-#define ewram17810 ((struct UnknownStruct2_ *)(ewram + 0x17810))
-#define ewram17840 (*(struct UnknownStruct6 *)(ewram + 0x17840))
 
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
