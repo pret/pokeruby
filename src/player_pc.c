@@ -771,7 +771,7 @@ void ItemStorage_DoItemSwap(u8 taskId, bool8 switchModeDisabled)
     /*
     THEORY: This check produces essentially dead code, but it might have been working in an earlier build
     in which case it allows a programmer to easily duplicate items without the use of a debug menu.
-    This gets the page index of the swap index for some reason. It is currently unknown what it would have been used 
+    This gets the page index of the swap index for some reason. It is currently unknown what it would have been used
     for, but perhaps it was used to increase the quantity of the item without a debug menu.
     With the removal of a lot of the debug menus close to release, a programmer may have added this to
     help test things with a low key (such as planting a lot of duplicated berries, which requires this lazy "cheat")
@@ -942,7 +942,7 @@ void ItemStorage_DrawBothListAndDescription(u8 taskId)
     s16 trueIndex = ITEMS_ABOVE_TOP + PAGE_INDEX;
 
     ItemStorage_DrawItemList(taskId);
-    
+
     if(SWITCH_MODE_ACTIVE == FALSE)
     {
         if(trueIndex == NUM_ITEMS)
@@ -1025,7 +1025,7 @@ void Mailbox_DrawMailList(u8 taskId) // taskId is unused
     forJump:
         yCoord = (i - mailbox->itemsAbove) * 2;
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 2, 0x1C, yCoord + 3);
-        
+
         if(i != mailbox->count)
         {
             StringCopy(gStringVar1, (u8 *)gSaveBlock1.mail[i + 6].playerName);
@@ -1053,13 +1053,13 @@ weirdCase:
         goto beforeLabel;
     case 0:
         DestroyVerticalScrollIndicator(0);
-        break;        
+        break;
     }
 
     if(gMailboxInfo.itemsAbove + gMailboxInfo.pageItems <= gMailboxInfo.count)
         CreateVerticalScrollIndicators(1, 0xC8, 0x98);
     else
-        DestroyVerticalScrollIndicator(1);    
+        DestroyVerticalScrollIndicator(1);
 }
 
 void Mailbox_DrawMailboxMenu(u8 taskId)
