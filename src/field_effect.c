@@ -1819,3 +1819,192 @@ void sub_8087AC8(struct Task *task)
     }
     mapObject->mapobj_bit_13 ^= 1;
 }
+
+void sub_8087BBC(u8);
+extern const void (*gUnknown_0839F390[4])(struct Task *);
+void mapldr_08085D88(void);
+
+void sub_8087BA8(void)
+{
+    CreateTask(sub_8087BBC, 0);
+}
+
+void sub_8087BBC(u8 taskId)
+{
+    gUnknown_0839F390[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_8087BEC(struct Task *task)
+{
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    CameraObjectReset2();
+    task->data[15] = player_get_direction_lower_nybble();
+    task->data[0]++;
+}
+
+void sub_8087C14(struct Task *task)
+{
+    struct MapObject *mapObject;
+    u8 unknown_0839F380[5];
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (task->data[1] == 0 || (--task->data[1]) == 0)
+    {
+        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+        task->data[1] = 8;
+        task->data[2]++;
+    }
+    if (task->data[2] > 7 && task->data[15] == mapObject->mapobj_unk_18)
+    {
+        task->data[0]++;
+        task->data[1] = 4;
+        task->data[2] = 8;
+        task->data[3] = 1;
+        PlaySE(SE_TK_WARPIN);
+    }
+}
+
+void sub_8087CA4(struct Task *task)
+{
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    u8 unknown_0839F380[5];
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    if ((--task->data[1]) <= 0)
+    {
+        task->data[1] = 4;
+        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+    }
+    sprite->pos1.y -= task->data[3];
+    task->data[4] += task->data[3];
+    if ((--task->data[2]) <= 0 && (task->data[2] = 4, task->data[3] < 8))
+    {
+        task->data[3] <<= 1;
+    }
+    if (task->data[4] > 8 && (sprite->oam.priority = 1, sprite->subspriteMode != 0))
+    {
+        sprite->subspriteMode = 2;
+    }
+    if (task->data[4] >= 0xa8)
+    {
+        task->data[0]++;
+        sub_8053FF8();
+        fade_8080918();
+    }
+}
+
+void sub_8087D78(struct Task *task)
+{
+    if (!gPaletteFade.active && sub_8054034() == TRUE)
+    {
+        sub_8053570();
+        warp_in();
+        SetMainCallback2(CB2_LoadMap);
+        gUnknown_0300485C = mapldr_08085D88;
+        DestroyTask(FindTaskIdByFunc(sub_8087BBC));
+    }
+}
+
+void sub_8087E1C(u8);
+extern const void (*gUnknown_0839F3A0[3])(struct Task *);
+
+void mapldr_08085D88(void)
+{
+    sub_8053E90();
+    pal_fill_for_map_transition();
+    ScriptContext2_Enable();
+    FreezeMapObjects();
+    gUnknown_0300485C = NULL;
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
+    CameraObjectReset2();
+    CreateTask(sub_8087E1C, 0);
+}
+
+void sub_8087E1C(u8 taskId)
+{
+    gUnknown_0839F3A0[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_8087E4C(struct Task *task)
+{
+    struct Sprite *sprite;
+    s16 centerToCornerVecY;
+    if (sub_807D770())
+    {
+        sprite = &gSprites[gPlayerAvatar.spriteId];
+        centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
+        sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
+        gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 0;
+        task->data[0]++;
+        task->data[1] = 8;
+        task->data[2] = 1;
+        task->data[14] = sprite->subspriteMode;
+        task->data[15] = player_get_direction_lower_nybble();
+        PlaySE(SE_TK_WARPIN);
+    }
+}
+
+void sub_8087ED8(struct Task *task)
+{
+    u8 unknown_0839F380[5];
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    if ((sprite->pos2.y += task->data[1]) >= -8)
+    {
+        if (task->data[13] == 0)
+        {
+            task->data[13]++;
+            mapObject->mapobj_bit_2 = 1;
+            sprite->subspriteMode = task->data[14];
+        }
+    } else
+    {
+        sprite->oam.priority = 1;
+        if (sprite->subspriteMode != 0)
+        {
+            sprite->subspriteMode = 2;
+        }
+    }
+    if (sprite->pos2.y >= -0x30 && task->data[1] > 1 && !(sprite->pos2.y & 1))
+    {
+        task->data[1]--;
+    }
+    if ((--task->data[2]) == 0)
+    {
+        task->data[2] = 4;
+        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+    }
+    if (sprite->pos2.y >= 0)
+    {
+        sprite->pos2.y = 0;
+        task->data[0]++;
+        task->data[1] = 1;
+        task->data[2] = 0;
+    }
+}
+
+void sub_8087FDC(struct Task *task)
+{
+    u8 unknown_0839F380[5];
+    struct MapObject *mapObject;
+    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if ((--task->data[1]) == 0)
+    {
+        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+        task->data[1] = 8;
+        if ((++task->data[2]) > 4 && task->data[14] == mapObject->mapobj_unk_18)
+        {
+            ScriptContext2_Disable();
+            CameraObjectReset1();
+            UnfreezeMapObjects();
+            DestroyTask(FindTaskIdByFunc(sub_8087E1C));
+        }
+    }
+}
