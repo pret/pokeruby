@@ -35,7 +35,7 @@ extern u8 unk_2000000[];
 // to do: maybe try to reduce the defines needed to match?
 #define BATTLE_STRUCT ((struct BattleStruct *)(unk_2000000))
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
-#define UNK_2016A00_STRUCT ((struct UnknownStruct1 *)(unk_2000000 + 0x16A00))
+#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *)(unk_2000000 + 0x16A00))
 #define AI_STACK ((struct AI_Stack *)(unk_2000000 + 0x16C00))
 #define AI_ARRAY_160CC     ((struct SmallItemStruct *)(unk_2000000 + 0x160CC))
 
@@ -61,7 +61,7 @@ struct Trainer
     /*0x24*/ void *party;
 };
 
-struct UnknownStruct1 // AI_Opponent_Info?
+struct UnkBattleStruct1 // AI_Opponent_Info?
 {
     /*0x00*/ u16 movesUsed[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
     /*0x20*/ u8 unk20[2];
@@ -119,10 +119,10 @@ struct BattleStruct /* 0x2000000 */
     u8 filler2[0x72E];
     /* 0x16800 */ struct AI_ThinkingStruct ai; /* 0x2016800 */
     u8 filler1681C[0x1E4];
-    /* 0x16A00 */ struct UnknownStruct1 unk_2016A00_2;
+    /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
-struct UnknownStruct4
+struct UnkBattleStruct4
 {
     /*0x00*/ u8 filler0[0x3];
     /*0x04*/ u16 unk4;
@@ -143,7 +143,7 @@ struct UnknownStruct4
 };
 
 extern struct UnknownStruct1 unk_2016A00;
-extern struct UnknownStruct4 gUnknown_02024CA8[];
+extern struct UnkBattleStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
 #endif // GUARD_BATTLE_H
