@@ -1015,7 +1015,7 @@ void Mailbox_DrawMailList(u8 taskId) // taskId is unused
     u16 i = gMailboxInfo.itemsAbove;
     register struct MailboxStruct *tempMailbox asm("r1") = &gMailboxInfo;
     register struct MailboxStruct *mailbox asm("r6");
-    
+
     if(i < i + tempMailbox->pageItems)
     {
         mailbox = tempMailbox;
@@ -1038,11 +1038,11 @@ void Mailbox_DrawMailList(u8 taskId) // taskId is unused
         }
     }
     }
-    
+
 beforeLabel:
     if(i - gMailboxInfo.itemsAbove != 8)
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 4, 0x1C, 0x12);
-    
+
     switch(gMailboxInfo.itemsAbove)
     {
     default:
@@ -1055,7 +1055,7 @@ weirdCase:
         DestroyVerticalScrollIndicator(0);
         break;        
     }
-    
+
     if(gMailboxInfo.itemsAbove + gMailboxInfo.pageItems <= gMailboxInfo.count)
         CreateVerticalScrollIndicators(1, 0xC8, 0x98);
     else
@@ -1243,7 +1243,7 @@ void sub_813B578(u8 taskId)
     struct MailStruct *mail = &gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos];
 
     MenuZeroFillWindowRect(0x14, 8, 0x1A, 0xD);
-    
+
     if(AddBagItem(mail->itemId, 1) == FALSE)
     {
         DisplayItemMessageOnField(taskId, gOtherText_BagIsFull, sub_813B758, 0);
@@ -1297,7 +1297,7 @@ void sub_813B6A4(void)
 
     gMailboxInfo.count = GetMailboxMailCount();
     Mailbox_UpdateMailList();
-    
+
     if(oldCount != gMailboxInfo.count && gMailboxInfo.count < gMailboxInfo.pageItems + gMailboxInfo.itemsAbove && gMailboxInfo.itemsAbove != 0) // did the count update?
         gMailboxInfo.itemsAbove--;
 
