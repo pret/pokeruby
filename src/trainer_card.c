@@ -14,6 +14,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "task.h"
 
 typedef void (*Callback)(void);
@@ -63,16 +64,6 @@ extern u16 gUnknown_083B5F4C[];
 
 extern u16 gUnknown_08E8CFC0[];
 extern u16 gUnknown_08E8D9C0[];
-
-extern u8 gOtherText_TrainersTrainerCard[];
-extern u8 gOtherText_FirstHOF[];
-extern u8 gOtherText_LinkCableBattles[];
-extern u8 gOtherText_BattleTowerWinRecord[];
-extern u8 gOtherText_ContestRecord[];
-extern u8 gOtherText_MixingRecord[];
-extern u8 gOtherText_TradeRecord[];
-extern u8 gOtherText_Boy[];
-extern u8 gOtherText_Girl[];
 
 extern bool8 (*const gUnknown_083B5EBC[])(struct Task *);
 extern bool8 (*const gUnknown_083B5ED8[])(struct Task *);
@@ -1831,7 +1822,7 @@ static void TrainerCard_Back_PrintPokemonTrades(void)
 
 void unref_sub_8094588(u16 left, u16 top)
 {
-    u8 *text = gOtherText_Boy;
+    const u8 *text = gOtherText_Boy;
 
     if (gSaveBlock2.playerGender == FEMALE)
     {

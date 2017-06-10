@@ -342,41 +342,41 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
         return gUnknown_081C6C02;
     switch (bgEvent->kind)
     {
-        case 0:
-        default:
-            return bgEvent->bgUnion.script;
-        case 1:
-            if (c != 2)
-                return NULL;
-            break;
-        case 2:
-            if (c != 1)
-                return NULL;
-            break;
-        case 3:
-            if (c != 4)
-                return NULL;
-            break;
-        case 4:
-            if (c != 3)
-                return NULL;
-            break;
-        case 5:
-        case 6:
-        case 7:
-            gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + 0x258;
-            gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
-            if (FlagGet(gSpecialVar_0x8004) == TRUE)
-                return NULL;
-            return HiddenItemScript;
-        case 8:
-            if (c == 2)
-            {
-                gSpecialVar_0x8004 = (u32)bgEvent->bgUnion.script;
-                if (sub_80BC050())
-                    return gUnknown_081A2C51;
-            }
+    case 0:
+    default:
+        return bgEvent->bgUnion.script;
+    case 1:
+        if (c != 2)
             return NULL;
+        break;
+    case 2:
+        if (c != 1)
+            return NULL;
+        break;
+    case 3:
+        if (c != 4)
+            return NULL;
+        break;
+    case 4:
+        if (c != 3)
+            return NULL;
+        break;
+    case 5:
+    case 6:
+    case 7:
+        gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + 0x258;
+        gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
+        if (FlagGet(gSpecialVar_0x8004) == TRUE)
+            return NULL;
+        return HiddenItemScript;
+    case 8:
+        if (c == 2)
+        {
+            gSpecialVar_0x8004 = (u32)bgEvent->bgUnion.script;
+            if (sub_80BC050())
+                return gUnknown_081A2C51;
+        }
+        return NULL;
     }
     return bgEvent->bgUnion.script;
 }

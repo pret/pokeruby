@@ -2,6 +2,7 @@
 #include "matsuda_debug_menu.h"
 #include "asm.h"
 #include "contest.h"
+#include "data2.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -55,7 +56,6 @@ extern struct SpriteTemplate gSpriteTemplate_83C92CC;
 extern void (*gUnknown_083C92E4[][2])(struct Sprite *, s8);
 extern u32 gUnknown_083C9400[2];
 
-extern u8 gMoveNames[][13];
 
 extern u8 gMatsudaDebugMenu_UnknownByteArray[];
 extern u8* gMatsudaDebugMenuTextList1[];
@@ -528,41 +528,41 @@ void sub_80AA754(struct Sprite *sprite)
 {
     switch (gMain.newAndRepeatedKeys)
     {
-        case 0x10:
-        case 0x20:
-            sprite->data0 ^= 1;
-            break;
-        case 0x40:
-            if (sprite->data1 == 0)
-                sprite->data1 = 8;
-            else
-                sprite->data1--;
-            break;
-        case 0x80:
-            if (sprite->data1 == 8)
-                sprite->data1 = 0;
-            else
-                sprite->data1++;
-            break;
-        case 0x1:
-            gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 1);
-            sub_80AA614(sprite->data2, sprite->data3);
-            break;
-        case 0x2:
-            gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -1);
-            sub_80AA614(sprite->data2, sprite->data3);
-            break;
-        case 0x100:
-            gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 10);
-            sub_80AA614(sprite->data2, sprite->data3);
-            break;
-        case 0x200:
-            gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -10);
-            sub_80AA614(sprite->data2, sprite->data3);
-            break;
-        case 0x8:
-            sub_80AAD08(sprite, 1);
-            break;
+    case DPAD_RIGHT:
+    case DPAD_LEFT:
+        sprite->data0 ^= 1;
+        break;
+    case DPAD_UP:
+        if (sprite->data1 == 0)
+            sprite->data1 = 8;
+        else
+            sprite->data1--;
+        break;
+    case DPAD_DOWN:
+        if (sprite->data1 == 8)
+            sprite->data1 = 0;
+        else
+            sprite->data1++;
+        break;
+    case A_BUTTON:
+        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 1);
+        sub_80AA614(sprite->data2, sprite->data3);
+        break;
+    case B_BUTTON:
+        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -1);
+        sub_80AA614(sprite->data2, sprite->data3);
+        break;
+    case R_BUTTON:
+        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 10);
+        sub_80AA614(sprite->data2, sprite->data3);
+        break;
+    case L_BUTTON:
+        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -10);
+        sub_80AA614(sprite->data2, sprite->data3);
+        break;
+    case START_BUTTON:
+        sub_80AAD08(sprite, 1);
+        break;
     }
     sprite->pos1.x = gUnknown_083C9296[sprite->data0 + sprite->data1 * 2];
     sprite->pos1.y = gUnknown_083C92A8[sprite->data1];

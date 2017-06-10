@@ -15,7 +15,6 @@ extern u8 unk_2000000[];
 extern u16 gBattleTypeFlags;
 extern const u32 gBitTable[];
 extern u16 gBattleWeather;
-extern const struct BattleMove gBattleMoves[];
 extern struct BattlePokemon gBattleMons[];
 
 extern u8 gUnknown_020238C4;
@@ -582,7 +581,7 @@ void sub_800C47C(u8 taskId)
     }
 }
 
-void dp01_build_cmdbuf_x00_a_b_0(u8 a, int b, int c)
+void dp01_build_cmdbuf_x00_a_b_0(u8 a, u8 b, u8 c)
 {
     gUnknown_03004040[0] = 0;
     gUnknown_03004040[1] = b;
@@ -591,7 +590,7 @@ void dp01_build_cmdbuf_x00_a_b_0(u8 a, int b, int c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x01_a_b_0(u8 a, int b, int c)
+void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c)
 {
     gUnknown_03004040[0] = 1;
     gUnknown_03004040[1] = b;
@@ -600,7 +599,7 @@ void dp01_build_cmdbuf_x01_a_b_0(u8 a, int b, int c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x02_a_b_varargs(u8 a, int b, int c, u8 d, u8 *e)
+void dp01_build_cmdbuf_x02_a_b_varargs(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
@@ -612,7 +611,7 @@ void dp01_build_cmdbuf_x02_a_b_varargs(u8 a, int b, int c, u8 d, u8 *e)
     dp01_prepare_buffer(a, gUnknown_03004040, d + 3);
 }
 
-void unref_sub_800C6A4(u8 a, int b, u8 c, u8 *d)
+void unref_sub_800C6A4(u8 a, u8 b, u8 c, u8 *d)
 {
     int i;
 
@@ -633,7 +632,7 @@ void dp01_build_cmdbuf_x04_4_4_4(u8 a)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void sub_800C704(u8 a, int b, int c)
+void sub_800C704(u8 a, u8 b, u8 c)
 {
     gUnknown_03004040[0] = 5;
     gUnknown_03004040[1] = b;
@@ -642,7 +641,7 @@ void sub_800C704(u8 a, int b, int c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x06_a(u8 a, int b)
+void dp01_build_cmdbuf_x06_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 6;
     gUnknown_03004040[1] = b;
@@ -703,7 +702,7 @@ void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x0D_a(u8 a, int b)
+void dp01_build_cmdbuf_x0D_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 13;
     gUnknown_03004040[1] = b;
@@ -721,7 +720,7 @@ void unref_sub_800C828(u8 a, u8 b, u8 *c)
     dp01_prepare_buffer(a, gUnknown_03004040, b * 3 + 2);
 }
 
-void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u8 c, u16 d, int e, u8 f, u8 *g)
+void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
 {
     gUnknown_03004040[0] = 15;
     gUnknown_03004040[1] = b;
@@ -1039,7 +1038,7 @@ _0800CB54: .4byte gUnknown_030041C0\n\
     .syntax divided\n");
 }
 
-void dp01_build_cmdbuf_x12_a_bb(u8 a, int b, u16 c)
+void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c)
 {
     gUnknown_03004040[0] = 18;
     gUnknown_03004040[1] = b;
@@ -1048,14 +1047,14 @@ void dp01_build_cmdbuf_x12_a_bb(u8 a, int b, u16 c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void unref_sub_800CB84(u8 a, int b)
+void unref_sub_800CB84(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 19;
     gUnknown_03004040[1] = b;
     dp01_prepare_buffer(a, gUnknown_03004040, 2);
 }
 
-void sub_800CBA4(u8 a, int b, int c, u8 *d)
+void sub_800CBA4(u8 a, u8 b, u8 c, u8 *d)
 {
     u32 i;
 
@@ -1078,7 +1077,7 @@ void sub_800CBE0(u8 a, u8 *b)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, int b, int c, int d, u8 *e)
+void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
@@ -1109,7 +1108,7 @@ void dp01_build_cmdbuf_x18_0_aa_health_bar_update(u8 a, s16 b)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x19_a_bb(u8 a, int b, s16 c)
+void dp01_build_cmdbuf_x19_a_bb(u8 a, u8 b, s16 c)
 {
     gUnknown_03004040[0] = 25;
     gUnknown_03004040[1] = b;
@@ -1132,7 +1131,7 @@ void dp01_build_cmdbuf_x1A_aaaa_bbbb(u8 a, u32 b, u32 c)
     dp01_prepare_buffer(a, gUnknown_03004040, 9);
 }
 
-void dp01_build_cmdbuf_x1B_aaaa_b(u8 a, int b, u32 c)
+void dp01_build_cmdbuf_x1B_aaaa_b(u8 a, u8 b, u32 c)
 {
     gUnknown_03004040[0] = 27;
     gUnknown_03004040[1] = b;
@@ -1143,7 +1142,7 @@ void dp01_build_cmdbuf_x1B_aaaa_b(u8 a, int b, u32 c)
     dp01_prepare_buffer(a, gUnknown_03004040, 6);
 }
 
-void dp01_build_cmdbuf_x1C_a(u8 a, int b)
+void dp01_build_cmdbuf_x1C_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 28;
     gUnknown_03004040[1] = b;
@@ -1203,7 +1202,7 @@ void unref_sub_800CE84(u8 a, u16 b, u8 *c)
     dp01_prepare_buffer(a, gUnknown_03004040, b + 3);
 }
 
-void dp01_build_cmdbuf_x21_a_bb(u8 a, int b, u16 c)
+void dp01_build_cmdbuf_x21_a_bb(u8 a, u8 b, u16 c)
 {
     gUnknown_03004040[0] = 33;
     gUnknown_03004040[1] = b;
@@ -1212,7 +1211,7 @@ void dp01_build_cmdbuf_x21_a_bb(u8 a, int b, u16 c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, int b, u8 *c)
+void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, u8 b, u8 *c)
 {
     int i;
 
@@ -1250,7 +1249,7 @@ void dp01_build_cmdbuf_x25_25_25_25(u8 a)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x26_a(u8 a, int b)
+void dp01_build_cmdbuf_x26_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 38;
     gUnknown_03004040[1] = b;
@@ -1320,7 +1319,7 @@ void dp01_build_cmdbuf_x2D_2D_2D_2D(u8 a)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x2E_a(u8 a, int b)
+void dp01_build_cmdbuf_x2E_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 46;
     gUnknown_03004040[1] = b;
@@ -1367,7 +1366,7 @@ void dp01_build_cmdbuf_x32_32_32_32(u8 a)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x33_a_33_33(u8 a, int b)
+void dp01_build_cmdbuf_x33_a_33_33(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 51;
     gUnknown_03004040[1] = b;
@@ -1376,7 +1375,7 @@ void dp01_build_cmdbuf_x33_a_33_33(u8 a, int b)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void dp01_build_cmdbuf_x34_a_bb_aka_battle_anim(u8 a, int b, u16 c)
+void dp01_build_cmdbuf_x34_a_bb_aka_battle_anim(u8 a, u8 b, u16 c)
 {
     gUnknown_03004040[0] = 52;
     gUnknown_03004040[1] = b;
@@ -1385,21 +1384,21 @@ void dp01_build_cmdbuf_x34_a_bb_aka_battle_anim(u8 a, int b, u16 c)
     dp01_prepare_buffer(a, gUnknown_03004040, 4);
 }
 
-void sub_800D1D8(u8 a, int b)
+void sub_800D1D8(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 53;
     gUnknown_03004040[1] = b;
     dp01_prepare_buffer(a, gUnknown_03004040, 2);
 }
 
-void dp01_build_cmdbuf_x38_a(u8 a, int b)
+void dp01_build_cmdbuf_x38_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 54;
     gUnknown_03004040[1] = b;
     dp01_prepare_buffer(a, gUnknown_03004040, 2);
 }
 
-void dp01_build_cmdbuf_x37_a(u8 a, int b)
+void dp01_build_cmdbuf_x37_a(u8 a, u8 b)
 {
     gUnknown_03004040[0] = 55;
     gUnknown_03004040[1] = b;

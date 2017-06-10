@@ -94,23 +94,24 @@ struct UCoords16
 
 struct SecretBaseRecord
 {
-    u8 sbr_field_0; // ID?
-    u8 sbr_field_1_0:4;
-    u8 gender:1;
-    u8 sbr_field_1_5:1;
-    u8 sbr_field_2[7]; // 0xFF bytes?
-    u8 trainerId[4]; // byte 0 is used for determining trainer class
-    u16 sbr_field_e;
-    u8 sbr_field_10;
-    u8 sbr_field_11;
-    u8 decorations[16];
-    u8 sbr_field_22[16];
-    u32 partyPersonality[6];
-    u16 partyMoves[6 * 4];
-    u16 partySpecies[6];
-    u16 partyHeldItems[6];
-    u8 partyLevels[6];
-    u8 partyEVs[6];
+    /*0x1A08*/ u8 sbr_field_0; // ID?
+    /*0x1A09*/ u8 sbr_field_1_0:4;
+    /*0x1A09*/ u8 gender:1;
+    /*0x1A09*/ u8 sbr_field_1_5:1;
+	/*0x1A09*/ u8 sbr_field_1_6:2;
+    /*0x1A0A*/ u8 sbr_field_2[7]; // 0xFF bytes?
+    /*0x1A12*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
+    /*0x1A16*/ u16 sbr_field_e;
+    /*0x1A18*/ u8 sbr_field_10;
+    /*0x1A19*/ u8 sbr_field_11;
+    /*0x1A1A*/ u8 decorations[16];
+    /*0x1A2A*/ u8 decorationPos[16];
+    /*0x1A3A*/ u32 partyPersonality[6];
+    /*0x1A54*/ u16 partyMoves[6 * 4];
+    /*0x1A84*/ u16 partySpecies[6];
+    /*0x1A90*/ u16 partyHeldItems[6];
+    /*0x1A9C*/ u8 partyLevels[6];
+    /*0x1AA2*/ u8 partyEVs[6];
 };
 
 #include "game_stat.h"
@@ -193,24 +194,60 @@ struct EasyChatPair
 struct TVShowCommon {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
+	/*0x02*/ u8 pad02[20];
+	/*0x16*/ u16 var16[3];
+	/*0x1C*/ u8 srcTrainerId3Lo;
+	/*0x1D*/ u8 srcTrainerId3Hi;
+	/*0x1E*/ u8 srcTrainerId2Lo;
+	/*0x1F*/ u8 srcTrainerId2Hi;
+	/*0x20*/ u8 srcTrainerIdLo;
+	/*0x21*/ u8 srcTrainerIdHi;
+	/*0x22*/ u8 trainerIdLo;
+	/*0x23*/ u8 trainerIdHi;
+};
+
+struct TVShowPokemonToday {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 language;
+    /*0x03*/ u8 language2;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 ball;
+    /*0x10*/ u16 species;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 playerName[8];
+};
+
+
+struct TVShowPokemonTodayFailed {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 language;
+    /*0x03*/ u8 pad03[9];
+    /*0x0c*/ u16 species;
+    /*0x0e*/ u16 species2;
+    /*0x10*/ u8 var10;
+    /*0x11*/ u8 var11;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 playerName[8];
 };
 
 struct TVShowFanClubLetter {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
     /*0x02*/ u16 species;
-    u8 pad04[12];
+    /*0x04*/ u16 pad04[6];
     /*0x10*/ u8 playerName[8];
-    /*0x18*/ u8 var18;
+    /*0x18*/ u8 language;
 };
 
 struct TVShowRecentHappenings {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
     /*0x02*/ u16 var02;
-    u8 pad04[12];
-    /*0x10*/ u8 var10[8];
-    /*0x18*/ u8 var18;
+	/*0x04*/ u16 var04[6];
+    /*0x10*/ u8 playerName[8];
+    /*0x18*/ u8 language;
     u8 pad19[10];
 };
 
@@ -220,11 +257,13 @@ struct TVShowFanclubOpinions {
     /*0x02*/ u16 var02;
     /*0x04*/ u8 var04A:4;
     u8 var04B:4;
-    /*0x04*/ u8 var05[8];
-    /*0x0D*/ u8 var0D;
+    /*0x05*/ u8 playerName[8];
+    /*0x0D*/ u8 language;
     /*0x0E*/ u8 var0E;
     /*0x0F*/ u8 var0F;
     /*0x10*/ u8 var10[8];
+    /*0x18*/ u16 var18[2];
+    /*0x1C*/ u16 var1C[4];
 };
 
 struct TVShowNameRaterShow {
@@ -237,7 +276,7 @@ struct TVShowNameRaterShow {
     /*0x1B*/ u8 random2;
     /*0x1C*/ u16 var1C;
     /*0x1E*/ u8 language;
-    /*0x1F*/ u8 var1F;
+    /*0x1F*/ u8 pokemonNameLanguage;
 };
 
 struct TVShowMassOutbreak {
@@ -255,8 +294,75 @@ struct TVShowMassOutbreak {
     /*0x14*/ u8 level;
     /*0x15*/ u8 var15;
     /*0x16*/ u16 var16;
-    /*0x18*/ u8 var18;
+    /*0x18*/ u8 language;
     u8 pad19[11];
+};
+
+struct TVShowPokemonAngler {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 var02;
+	/*0x03*/ u8 var03;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u8 language;
+	u8 pad07[12];
+	/*0x13*/ u8 playerName[8];
+};
+
+struct TVShowWorldOfMasters {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 var02;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u16 var06;
+	/*0x08*/ u16 var08;
+	/*0x0a*/ u8 var0a;
+	/*0x0b*/ u8 language;
+	u8 pad0c[7];
+	/*0x13*/ u8 playerName[8];
+};
+
+struct TVShowSmartShopper {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 priceReduced;
+	/*0x03*/ u8 language;
+	/*0x04*/ u8 pad04[2];
+	/*0x06*/ u16 itemIds[3];
+	/*0x0C*/ u16 itemAmounts[3];
+	/*0x12*/ u8 shopLocation;
+	/*0x13*/ u8 playerName[8];
+};
+
+struct TVShowBravoTrainerPokemonProfiles {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 species;
+	/*0x04*/ u16 var04[2];
+	/*0x08*/ u8 pokemonNickname[11];
+	/*0x13*/ u8 contestCategory:3;
+	/*0x13*/ u8 contestRank:2;
+	/*0x13*/ u8 var13_5:2;
+	/*0x13*/ u8 var13_7:1;
+	/*0x14*/ u16 var14;
+	/*0x16*/ u8 playerName[8];
+	/*0x1E*/ u8 language;
+	/*0x1F*/ u8 var1f;
+};
+
+struct TVShowBravoTrainerBattleTowerSpotlight {
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 trainerName[8];
+	/*0x0A*/ u16 species;
+	/*0x0C*/ u8 pokemonName[8];
+	/*0x14*/ u16 winningMove;
+	/*0x16*/ u16 var16;
+	/*0x18*/ u16 var18[1];
+	/*0x1A*/ u8 btLevel;
+	/*0x1B*/ u8 var1b;
+	/*0x1C*/ u8 var1c;
+	/*0x1D*/ u8 language;
 };
 
 typedef union TVShow {
@@ -266,6 +372,13 @@ typedef union TVShow {
     struct TVShowFanclubOpinions fanclubOpinions;
     struct TVShowNameRaterShow nameRaterShow;
     struct TVShowMassOutbreak massOutbreak;
+	struct TVShowPokemonAngler pokemonAngler;
+	struct TVShowWorldOfMasters worldOfMasters;
+	struct TVShowSmartShopper smartshopperShow;
+	struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
+	struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
+    struct TVShowPokemonToday pokemonToday;
+    struct TVShowPokemonTodayFailed pokemonTodayFailed;
 } TVShow;
 
 struct MailStruct
@@ -325,6 +438,36 @@ typedef union SB_Struct {
 } SB_Struct;
 // size is 0x198
 
+struct SaveTVStruct {
+    TVShow shows[24];
+	TVShow unknown_2A98;
+};
+
+struct UnknownSaveStruct2ABC {
+	u8 val0;
+	u8 val1;
+	u16 val2;
+};
+
+struct GabbyAndTyData {
+    u16 mon1;
+    u16 mon2;
+    u16 move1;
+    u16 move2;
+    u8 mapnum;
+    u8 val9;
+    u8 valA_0:1;
+    u8 valA_1:1;
+    u8 valA_2:1;
+    u8 valA_3:1;
+    u8 valA_4:4;
+    u8 valB;
+};
+
+struct RecordMixing_UnknownStruct {
+	u8 data[0x38];
+};
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -374,8 +517,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-    /*0x2738*/ TVShow tvShows[24];
-    /*0x2A98*/ u8 filler_2A98[0x64];
+    /*0x2738*/ struct SaveTVStruct tvShows;
+    /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
@@ -386,7 +529,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0C*/ u8 outbreakUnk4;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
-    /*0x2B10*/ u8 filler_2B0E[0xC];
+    /*0x2B18*/ struct GabbyAndTyData gabbyAndTyData;
     /*0x2B1C*/ u16 unk2B1C[6];
     /*0x2B28*/ u16 unk2B28[6];
     /*0x2B34*/ u16 unk2B34[6];
@@ -399,9 +542,9 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ u8 filler_2F9C[0xA0];
-    /*0x303C*/ u8 filler_303C[0x38];
-    /*0x3074*/ u8 filler_3074[0x42];
+    /*0x2F9C*/ struct BoxPokemon daycareData[2];
+    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C[2];
+    /*0x30AC*/ u8 filler_30AC[0xA];
     /*0x30B6*/ u8 filler_30B6;
     /*0x30B7*/ u8 filler_30B7[1];
     /*0x30B8*/ u8 linkBattleRecords[5][16];
@@ -440,7 +583,11 @@ struct Pokedex
 
 struct SaveBlock2_Sub
 {
-    /*0x0000, 0x00A8*/ u8 filler_000[0x4AE];
+    /*0x0000, 0x00A4*/ u8 filler_000[0x3D8];
+	/*0x03D8, 0x0480*/ u16 var_480;
+	/*0x03DA, 0x0482*/ u16 var_482;
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD1];
+    /*0x04AD, 0x0555*/ u8 var_4AD;
     /*0x04AE, 0x0556*/ u8 var_4AE;
     /*0x04AF, 0x0557*/ u8 var_4AF;
     /*0x04B0, 0x0558*/ u16 var_4B0;
@@ -450,7 +597,9 @@ struct SaveBlock2_Sub
     /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
+    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04D0, 0x0578*/ u8 var_4D0;
+    /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
 
 struct SaveBlock2 /* 0x02024EA4 */

@@ -25,16 +25,6 @@ extern s16 gUnknown_0300059A;
 extern u8 gUnknown_0300059C;
 extern void (*gUnknown_030005A0)(void);
 
-struct CameraSomething
-{
-    void (*callback)(struct CameraSomething *);
-    u32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-};
-
 extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
@@ -258,54 +248,54 @@ static void DrawMetatile(s32 a, u16 *b, u16 c)
 {
     switch (a)
     {
-        case 2:
-            gBGTilemapBuffers[3][c] = b[0];
-            gBGTilemapBuffers[3][c + 1] = b[1];
-            gBGTilemapBuffers[3][c + 0x20] = b[2];
-            gBGTilemapBuffers[3][c + 0x21] = b[3];
+    case 2:
+        gBGTilemapBuffers[3][c] = b[0];
+        gBGTilemapBuffers[3][c + 1] = b[1];
+        gBGTilemapBuffers[3][c + 0x20] = b[2];
+        gBGTilemapBuffers[3][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[2][c] = 0;
-            gBGTilemapBuffers[2][c + 1] = 0;
-            gBGTilemapBuffers[2][c + 0x20] = 0;
-            gBGTilemapBuffers[2][c + 0x21] = 0;
+        gBGTilemapBuffers[2][c] = 0;
+        gBGTilemapBuffers[2][c + 1] = 0;
+        gBGTilemapBuffers[2][c + 0x20] = 0;
+        gBGTilemapBuffers[2][c + 0x21] = 0;
 
-            gBGTilemapBuffers[1][c] = b[4];
-            gBGTilemapBuffers[1][c + 1] = b[5];
-            gBGTilemapBuffers[1][c + 0x20] = b[6];
-            gBGTilemapBuffers[1][c + 0x21] = b[7];
-            break;
-        case 1:
-            gBGTilemapBuffers[3][c] = b[0];
-            gBGTilemapBuffers[3][c + 1] = b[1];
-            gBGTilemapBuffers[3][c + 0x20] = b[2];
-            gBGTilemapBuffers[3][c + 0x21] = b[3];
+        gBGTilemapBuffers[1][c] = b[4];
+        gBGTilemapBuffers[1][c + 1] = b[5];
+        gBGTilemapBuffers[1][c + 0x20] = b[6];
+        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        break;
+    case 1:
+        gBGTilemapBuffers[3][c] = b[0];
+        gBGTilemapBuffers[3][c + 1] = b[1];
+        gBGTilemapBuffers[3][c + 0x20] = b[2];
+        gBGTilemapBuffers[3][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[2][c] = b[4];
-            gBGTilemapBuffers[2][c + 1] = b[5];
-            gBGTilemapBuffers[2][c + 0x20] = b[6];
-            gBGTilemapBuffers[2][c + 0x21] = b[7];
+        gBGTilemapBuffers[2][c] = b[4];
+        gBGTilemapBuffers[2][c + 1] = b[5];
+        gBGTilemapBuffers[2][c + 0x20] = b[6];
+        gBGTilemapBuffers[2][c + 0x21] = b[7];
 
-            gBGTilemapBuffers[1][c] = 0;
-            gBGTilemapBuffers[1][c + 1] = 0;
-            gBGTilemapBuffers[1][c + 0x20] = 0;
-            gBGTilemapBuffers[1][c + 0x21] = 0;
-            break;
-        case 0:
-            gBGTilemapBuffers[3][c] = 0x3014;
-            gBGTilemapBuffers[3][c + 1] = 0x3014;
-            gBGTilemapBuffers[3][c + 0x20] = 0x3014;
-            gBGTilemapBuffers[3][c + 0x21] = 0x3014;
+        gBGTilemapBuffers[1][c] = 0;
+        gBGTilemapBuffers[1][c + 1] = 0;
+        gBGTilemapBuffers[1][c + 0x20] = 0;
+        gBGTilemapBuffers[1][c + 0x21] = 0;
+        break;
+    case 0:
+        gBGTilemapBuffers[3][c] = 0x3014;
+        gBGTilemapBuffers[3][c + 1] = 0x3014;
+        gBGTilemapBuffers[3][c + 0x20] = 0x3014;
+        gBGTilemapBuffers[3][c + 0x21] = 0x3014;
 
-            gBGTilemapBuffers[2][c] = b[0];
-            gBGTilemapBuffers[2][c + 1] = b[1];
-            gBGTilemapBuffers[2][c + 0x20] = b[2];
-            gBGTilemapBuffers[2][c + 0x21] = b[3];
+        gBGTilemapBuffers[2][c] = b[0];
+        gBGTilemapBuffers[2][c + 1] = b[1];
+        gBGTilemapBuffers[2][c + 0x20] = b[2];
+        gBGTilemapBuffers[2][c + 0x21] = b[3];
 
-            gBGTilemapBuffers[1][c] = b[4];
-            gBGTilemapBuffers[1][c + 1] = b[5];
-            gBGTilemapBuffers[1][c + 0x20] = b[6];
-            gBGTilemapBuffers[1][c + 0x21] = b[7];
-            break;
+        gBGTilemapBuffers[1][c] = b[4];
+        gBGTilemapBuffers[1][c + 1] = b[5];
+        gBGTilemapBuffers[1][c + 0x20] = b[6];
+        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        break;
     }
 }
 

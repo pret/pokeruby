@@ -4,11 +4,11 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 8155ACA
 
 SlateportCity_OceanicMuseum_1F_MapScript1_155AD0:: @ 8155AD0
 	.ifdef SAPPHIRE
-	setvar 0x4010, 118
-	setvar 0x4011, 117
+	setvar 0x4010, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar 0x4011, MAP_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar 0x4010, 120
-	setvar 0x4011, 119
+	setvar 0x4010, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar 0x4011, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	end
 

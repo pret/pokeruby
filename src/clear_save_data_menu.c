@@ -7,10 +7,9 @@
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "strings2.h"
 #include "task.h"
 
-extern u8 gSystemText_ClearAllSaveDataPrompt[];
-extern u8 gSystemText_ClearingData[];
 extern const struct MenuAction gMenuYesNoItems[];
 
 static void VBlankCB_ClearSaveDataScreen(void);
@@ -99,65 +98,65 @@ static u8 InitClearSaveDataScreen(void)
 
     switch (gMain.state)
     {
-        case 0:
-        default:
-            SetVBlankCallback(NULL);
+    case 0:
+    default:
+        SetVBlankCallback(NULL);
 
-            REG_DISPCNT = 0;
-            REG_BG0HOFS = 0;
-            REG_BG0VOFS = 0;
-            REG_BG3HOFS = 0;
-            REG_BG3VOFS = 0;
-            REG_WIN0H = 0;
-            REG_WIN0V = 0;
-            REG_WININ = 0;
-            REG_WINOUT = 0;
-            REG_BLDCNT = 0;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0;
+        REG_DISPCNT = 0;
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 0;
+        REG_WIN0H = 0;
+        REG_WIN0V = 0;
+        REG_WININ = 0;
+        REG_WINOUT = 0;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0;
 
-            DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
-            DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
-            DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
+        DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
+        DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 
-            ResetPaletteFade();
+        ResetPaletteFade();
 
-            gPlttBufferUnfaded[0] = 0x7fff;
-            gPlttBufferFaded[0] = 0x7fff;
-            gPlttBufferUnfaded[1] = 0x3945;
-            gPlttBufferFaded[1] = 0x3945;
+        gPlttBufferUnfaded[0] = 0x7fff;
+        gPlttBufferFaded[0] = 0x7fff;
+        gPlttBufferUnfaded[1] = 0x3945;
+        gPlttBufferFaded[1] = 0x3945;
 
-            for (i = 0; i < 0x10; i++)
-                ((u16 *)(VRAM + 0x20))[i] = 0x1111;
+        for (i = 0; i < 0x10; i++)
+            ((u16 *)(VRAM + 0x20))[i] = 0x1111;
 
-            for (i = 0; i < 0x500; i++)
-                ((u16 *)(VRAM + 0x3800))[i] = 0x0001;
+        for (i = 0; i < 0x500; i++)
+            ((u16 *)(VRAM + 0x3800))[i] = 0x0001;
 
-            ResetTasks();
-            ResetSpriteData();
+        ResetTasks();
+        ResetSpriteData();
 
-            SetUpWindowConfig(&gWindowConfig_81E6C3C);
-            InitMenuWindow(&gWindowConfig_81E6CE4);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
+        SetUpWindowConfig(&gWindowConfig_81E6C3C);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
 
-            ime = REG_IME;
-            REG_IME = 0;
-            REG_IE |= INTR_FLAG_VBLANK;
-            REG_IME = ime;
-            REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+        ime = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = ime;
+        REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
-            SetVBlankCallback(VBlankCB_InitClearSaveDataScreen);
+        SetVBlankCallback(VBlankCB_InitClearSaveDataScreen);
 
-            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
-            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
-            gMain.state = 1;
+        REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
+        gMain.state = 1;
+        return 0;
+    case 1:
+        UpdatePaletteFade();
+        if (gPaletteFade.active)
             return 0;
-        case 1:
-            UpdatePaletteFade();
-            if (gPaletteFade.active)
-                return 0;
-            SetMainCallback2(CB2_ClearSaveDataScreen);
-            return 1;
+        SetMainCallback2(CB2_ClearSaveDataScreen);
+        return 1;
     }
 }
 
@@ -165,16 +164,16 @@ static void CB2_SoftReset(void)
 {
     switch (gMain.state)
     {
-        case 0:
-        default:
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xffff);
-            gMain.state = 1;
-            break;
-        case 1:
-            UpdatePaletteFade();
-            if (gPaletteFade.active)
-                return;
-            DoSoftReset();
-            break;
+    case 0:
+    default:
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xffff);
+        gMain.state = 1;
+        break;
+    case 1:
+        UpdatePaletteFade();
+        if (gPaletteFade.active)
+            return;
+        DoSoftReset();
+        break;
     }
 }

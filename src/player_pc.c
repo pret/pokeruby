@@ -10,8 +10,12 @@
 #include "script.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "songs.h"
+#include "name_string_util.h"
+#include "mail.h"
+#include "rom4.h"
 
 // task defines
 #define PAGE_INDEX data[0]
@@ -68,21 +72,18 @@ enum
 
 struct MailboxStruct
 {
-    u8 unk0;
-    u8 pageItems;
-    u8 unk2;
-    u8 count;
+ /*0x00*/ u8 cursorPos;
+ /*0x01*/ u8 pageItems; // number of items (not including Cancel) on the current page.
+ /*0x02*/ u8 itemsAbove; // number of items above the top item on the page.
+ /*0x03*/ u8 count; // total number of items in mailbox storage.
 };
 
 extern struct MailboxStruct gMailboxInfo;
 
-extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
+extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
 extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
-extern void sub_813AF78(void);
-extern void sub_813B108(u8);
-extern void sub_813B174(u8);
 extern void sub_80A6A30(void);
 extern u8 sub_807D770(void);
 extern void sub_80F996C(u8);
@@ -92,14 +93,11 @@ extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
 extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 extern void sub_80F944C(void);
 extern void LoadScrollIndicatorPalette(void);
-
-extern u8 gOtherText_NoItems[];
+extern void ClearMailStruct(struct MailStruct *);
+extern void sub_808B020(void);
 
 extern u16 gNewGamePCItems[];
 extern u16 gUnknown_08406334[3];
-
-extern u8 gOtherText_WhatWillYouDo[];
-extern u8 gOtherText_NoMailHere[];
 
 extern u8 *gPcItemMenuOptionOrder;
 extern struct MenuAction gPCText_PlayerPCOptionsText[];
@@ -111,25 +109,21 @@ extern u8 gUnknown_08406327[];
 extern u8 gUnknown_08406330[];
 extern u8 gUnknown_0840631E[];
 extern u8 gUnknown_08406318[];
-extern u8 gMenuText_GoBackToPrev[];
-extern u8 gOtherText_CancelNoTerminator[];
-extern u8 gOtherText_HowManyToWithdraw[];
-extern u8 gOtherText_WithdrewThing[];
-extern u8 gOtherText_HowManyToToss[];
-extern u8 gOtherText_ThrewAwayItem[];
-extern u8 gOtherText_NoMoreRoom[];
-extern u8 gOtherText_TooImportant[];
-extern u8 gOtherText_OkayToThrowAwayPrompt[];
-extern u8 gOtherText_SwitchWhichItem[];
+extern u8 gUnknown_0840633A[];
 
 extern u8 gPcItemMenuOptionsNum;
 
+extern u8 gUnknown_02038561;
 extern u8 gUnknown_08152850;
 extern u8 gUnknown_08152C75;
 
+extern void (*gUnknown_0300485C)(void);
+
 extern u32 gPCText_OptionDescList[];
 extern const struct MenuAction gPCText_ItemPCOptionsText[];
+extern const struct MenuAction gUnknown_084062F8[];
 extern const struct YesNoFuncTable gUnknown_084062E0;
+extern const struct YesNoFuncTable gUnknown_084062E8;
 
 void InitPlayerPCMenu(u8 taskId);
 void PlayerPCProcessMenuInput(u8 taskId);
@@ -153,6 +147,21 @@ void ItemStorage_DrawBothListAndDescription(u8);
 void ItemStorage_GoBackToItemPCMenu(u8, u8);
 void ItemStorage_LoadPalette(void);
 u8 GetMailboxMailCount(void);
+void Mailbox_UpdateMailList(void);
+void Mailbox_DrawMailboxMenu(u8);
+void Mailbox_ProcessInput(u8);
+void sub_813B27C(void);
+void sub_813B294(u8);
+void sub_813B320(u8);
+void sub_813B348(u8);
+void sub_813B3A0(u8);
+void sub_813B454(u8);
+void sub_813B4F0(void);
+void sub_813B554(u8);
+void sub_813B66C(u8);
+void sub_813B718(u8);
+void Mailbox_Cancel(u8);
+void sub_813B758(u8);
 
 void NewGameInitPCItems(void)
 {
@@ -232,12 +241,12 @@ void PlayerPC_Mailbox(u8 taskId)
         DisplayItemMessageOnField(taskId, gOtherText_NoMailHere, ReshowPlayerPC, 0);
     else
     {
-        gMailboxInfo.unk0 = 0;
-        gMailboxInfo.unk2 = 0;
-        sub_813AF78();
+        gMailboxInfo.cursorPos = 0;
+        gMailboxInfo.itemsAbove = 0;
+        Mailbox_UpdateMailList();
         ItemStorage_SetItemAndMailCount(taskId);
-        sub_813B108(taskId);
-        gTasks[taskId].func = sub_813B174;
+        Mailbox_DrawMailboxMenu(taskId);
+        gTasks[taskId].func = Mailbox_ProcessInput;
     }
 }
 
@@ -869,15 +878,15 @@ beforeLabel:
 
     switch(ITEMS_ABOVE_TOP)
     {
-        default:
-            CreateVerticalScrollIndicators(0, 0xB8, 8);
-            break;
+    default:
+        CreateVerticalScrollIndicators(0, 0xB8, 8);
+        break;
 weirdCase:
-            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (yCoord + 2) * 8, 0x68, 1);
-            goto beforeLabel;
-        case 0:
-            DestroyVerticalScrollIndicator(0);
-            break;
+        sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (yCoord + 2) * 8, 0x68, 1);
+        goto beforeLabel;
+    case 0:
+        DestroyVerticalScrollIndicator(0);
+        break;
     }
 
     if(ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS <= NUM_ITEMS)
@@ -893,31 +902,31 @@ void ItemStorage_PrintItemPcResponse(u16 itemId)
     switch(itemId)
     {
         case ITEMPC_GO_BACK_TO_PREV:
-            string = gMenuText_GoBackToPrev;
+            string = (u8 *)gMenuText_GoBackToPrev;
             break;
         case ITEMPC_HOW_MANY_TO_WITHDRAW:
-            string = gOtherText_HowManyToWithdraw;
+            string = (u8 *)gOtherText_HowManyToWithdraw;
             break;
         case ITEMPC_WITHDREW_THING:
-            string = gOtherText_WithdrewThing;
+            string = (u8 *)gOtherText_WithdrewThing;
             break;
         case ITEMPC_HOW_MANY_TO_TOSS:
-            string = gOtherText_HowManyToToss;
+            string = (u8 *)gOtherText_HowManyToToss;
             break;
         case ITEMPC_THREW_AWAY_ITEM:
-            string = gOtherText_ThrewAwayItem;
+            string = (u8 *)gOtherText_ThrewAwayItem;
             break;
         case ITEMPC_NO_MORE_ROOM:
-            string = gOtherText_NoMoreRoom;
+            string = (u8 *)gOtherText_NoMoreRoom;
             break;
         case ITEMPC_TOO_IMPORTANT:
-            string = gOtherText_TooImportant;
+            string = (u8 *)gOtherText_TooImportant;
             break;
         case ITEMPC_OKAY_TO_THROW_AWAY:
-            string = gOtherText_OkayToThrowAwayPrompt;
+            string = (u8 *)gOtherText_OkayToThrowAwayPrompt;
             break;
         case ITEMPC_SWITCH_WHICH_ITEM:
-            string = gOtherText_SwitchWhichItem;
+            string = (u8 *)gOtherText_SwitchWhichItem;
             break;
         default:
             string = ItemId_GetDescription(itemId);
@@ -978,4 +987,345 @@ u8 GetMailboxMailCount(void)
             i++;
 
     return i;
+}
+
+void Mailbox_UpdateMailList(void)
+{
+    struct MailStruct mailBuffer;
+    u8 i, j;
+
+    for (i=6; i<15; i++)
+    {
+        for (j=i+1; j<16; j++)
+        {
+            if (gSaveBlock1.mail[i].itemId == 0)
+            {
+                mailBuffer = gSaveBlock1.mail[i];
+                gSaveBlock1.mail[i] = gSaveBlock1.mail[j];
+                gSaveBlock1.mail[j] = mailBuffer;
+            }
+        }
+    }
+}
+
+// WWHHHHHYYYYYYYY SOMEBODY PLEASE FIX THIS
+void Mailbox_DrawMailList(u8 taskId) // taskId is unused
+{
+    u16 yCoord = 0;
+    u16 i = gMailboxInfo.itemsAbove;
+    register struct MailboxStruct *tempMailbox asm("r1") = &gMailboxInfo;
+    register struct MailboxStruct *mailbox asm("r6");
+    
+    if(i < i + tempMailbox->pageItems)
+    {
+        mailbox = tempMailbox;
+        goto forJump;
+    for(; i < mailbox->itemsAbove + mailbox->pageItems; i++)
+    {
+    forJump:
+        yCoord = (i - mailbox->itemsAbove) * 2;
+        MenuFillWindowRectWithBlankTile(0x15, yCoord + 2, 0x1C, yCoord + 3);
+        
+        if(i != mailbox->count)
+        {
+            StringCopy(gStringVar1, (u8 *)gSaveBlock1.mail[i + 6].playerName);
+            SanitizeNameString(gStringVar1);
+            MenuPrint(gStringVar1, 0x15, yCoord + 2);
+        }
+        else
+        {
+            goto weirdCase; // again, what???
+        }
+    }
+    }
+    
+beforeLabel:
+    if(i - gMailboxInfo.itemsAbove != 8)
+        MenuFillWindowRectWithBlankTile(0x15, yCoord + 4, 0x1C, 0x12);
+    
+    switch(gMailboxInfo.itemsAbove)
+    {
+    default:
+        CreateVerticalScrollIndicators(0, 0xC8, 8);
+        break;
+weirdCase:
+        MenuPrint(gOtherText_CancelNoTerminator, 0x15, yCoord + 2);
+        goto beforeLabel;
+    case 0:
+        DestroyVerticalScrollIndicator(0);
+        break;        
+    }
+    
+    if(gMailboxInfo.itemsAbove + gMailboxInfo.pageItems <= gMailboxInfo.count)
+        CreateVerticalScrollIndicators(1, 0xC8, 0x98);
+    else
+        DestroyVerticalScrollIndicator(1);    
+}
+
+void Mailbox_DrawMailboxMenu(u8 taskId)
+{
+    sub_80F944C();
+    LoadScrollIndicatorPalette();
+    MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+    MenuDrawTextWindow(0, 0, 0x8, 0x3);
+    MenuPrint(gPCText_Mailbox, 1, 1);
+    MenuDrawTextWindow(0x14, 0, 0x1D, 0x13);
+    Mailbox_DrawMailList(taskId);
+    InitMenu(0, 0x15, 2, gMailboxInfo.pageItems, gMailboxInfo.cursorPos, 8);
+}
+
+// Mailbox_ProcessInput
+void Mailbox_ProcessInput(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        if(gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            if(gMailboxInfo.cursorPos != 0)
+            {
+                PlaySE(5);
+                gMailboxInfo.cursorPos = MoveMenuCursor(-1);
+            }
+            else if(gMailboxInfo.itemsAbove != 0)
+            {
+                PlaySE(5);
+                gMailboxInfo.itemsAbove--;
+                Mailbox_DrawMailList(taskId);
+            }
+        }
+        else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            if(gMailboxInfo.cursorPos != gMailboxInfo.pageItems - 1)
+            {
+                PlaySE(5);
+                gMailboxInfo.cursorPos = MoveMenuCursor(1);
+            }
+            else if(gMailboxInfo.itemsAbove + gMailboxInfo.cursorPos != gMailboxInfo.count)
+            {
+                PlaySE(5);
+                gMailboxInfo.itemsAbove++;
+                Mailbox_DrawMailList(taskId);
+            }
+        }
+        else if(gMain.newKeys & A_BUTTON)
+        {
+            HandleDestroyMenuCursors();
+            PlaySE(5);
+
+            if(gMailboxInfo.itemsAbove + gMailboxInfo.cursorPos == gMailboxInfo.count)
+            {
+                sub_813B320(taskId);
+            }
+            else
+            {
+                sub_813B27C();
+                gTasks[taskId].func = sub_813B294;
+            }
+        }
+        else if(gMain.newKeys & B_BUTTON)
+        {
+            HandleDestroyMenuCursors();
+            PlaySE(5);
+            sub_813B320(taskId);
+        }
+    }
+}
+
+void sub_813B27C(void)
+{
+    BuyMenuFreeMemory();
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+}
+
+void sub_813B294(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+    StringCopy(gStringVar1, gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos].playerName);
+    SanitizeNameString(gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gOtherText_WhatWillYouDoMail);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_813B348, 0);
+}
+
+void sub_813B300(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+    ReshowPlayerPC(taskId);
+}
+
+void sub_813B320(u8 taskId)
+{
+    sub_813B27C();
+    gTasks[taskId].func = sub_813B300;
+}
+
+void sub_813B348(u8 taskId)
+{
+    MenuDrawTextWindow(0, 0, 0xC, 0x9);
+    PrintMenuItems(1, 1, 4, gUnknown_084062F8);
+    InitMenu(0, 1, 1, 4, 0, 0xB);
+    gTasks[taskId].func = sub_813B3A0;
+}
+
+void sub_813B3A0(u8 taskId)
+{
+    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        PlaySE(5);
+        MoveMenuCursor(-1);
+    }
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        PlaySE(5);
+        MoveMenuCursor(1);
+    }
+    else if(gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(5);
+        gUnknown_084062F8[GetMenuCursorPos()].func(taskId);
+    }
+    else if(gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(5);
+        Mailbox_Cancel(taskId);
+    }
+}
+
+void Mailbox_Read(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].func = sub_813B454;
+}
+
+void sub_813B454(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        HandleReadMail(&gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos], sub_813B4F0, 1);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_813B4A0(u8 taskId)
+{
+    if(sub_807D770() == TRUE)
+        gTasks[taskId].func = Mailbox_ProcessInput;
+}
+
+void sub_813B4D0(void)
+{
+    Mailbox_DrawMailboxMenu(CreateTask(sub_813B4A0, 0));
+    pal_fill_black();
+}
+
+void sub_813B4F0(void)
+{
+    gUnknown_0300485C = sub_813B4D0;
+    SetMainCallback2(c2_exit_to_overworld_2_switch);
+}
+
+void Mailbox_MoveToBag(u8 taskId)
+{
+    HandleDestroyMenuCursors();
+    StringCopy(gStringVar1, gOtherText_MoveToBag);
+    MenuPrint(gUnknown_0840633A, 1, 3);
+    DisplayItemMessageOnField(taskId, gOtherText_MessageWillBeLost, sub_813B554, 0);
+}
+
+void sub_813B554(u8 taskId)
+{
+    DisplayYesNoMenu(0x14, 0x8, 0x1);
+    sub_80F914C(taskId, &gUnknown_084062E8);
+}
+
+void sub_813B578(u8 taskId)
+{
+    struct MailStruct *mail = &gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos];
+
+    MenuZeroFillWindowRect(0x14, 8, 0x1A, 0xD);
+    
+    if(AddBagItem(mail->itemId, 1) == FALSE)
+    {
+        DisplayItemMessageOnField(taskId, gOtherText_BagIsFull, sub_813B758, 0);
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gOtherText_MailWasReturned, sub_813B758, 0);
+        ClearMailStruct(mail);
+        Mailbox_UpdateMailList();
+
+        gMailboxInfo.count--;
+
+        if(gMailboxInfo.count < gMailboxInfo.pageItems + gMailboxInfo.itemsAbove && gMailboxInfo.itemsAbove != 0)
+            gMailboxInfo.itemsAbove--;
+
+        ItemStorage_SetItemAndMailCount(taskId);
+    }
+}
+
+void sub_813B610(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x14, 0x8, 0x1A, 0xD);
+    sub_813B758(taskId);
+}
+
+void Mailbox_Give(u8 taskId)
+{
+    if(CalculatePlayerPartyCount() == 0)
+        sub_813B718(taskId);
+    else
+    {
+        fade_screen(1, 0);
+        gTasks[taskId].func = sub_813B66C;
+    }
+}
+
+void sub_813B66C(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        SetMainCallback2(sub_808B020);
+        gUnknown_02038561 = 3;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_813B6A4(void)
+{
+    u8 taskId = CreateTask(sub_813B4A0, 0);
+    u8 oldCount = gMailboxInfo.count;
+
+    gMailboxInfo.count = GetMailboxMailCount();
+    Mailbox_UpdateMailList();
+    
+    if(oldCount != gMailboxInfo.count && gMailboxInfo.count < gMailboxInfo.pageItems + gMailboxInfo.itemsAbove && gMailboxInfo.itemsAbove != 0) // did the count update?
+        gMailboxInfo.itemsAbove--;
+
+    ItemStorage_SetItemAndMailCount(taskId);
+    Mailbox_DrawMailboxMenu(taskId);
+    pal_fill_black();
+}
+
+void sub_813B6F8(void)
+{
+    gUnknown_0300485C = sub_813B6A4;
+    SetMainCallback2(c2_exit_to_overworld_2_switch);
+}
+
+void sub_813B718(u8 taskId)
+{
+    DisplayItemMessageOnField(taskId, gOtherText_NoPokemon, sub_813B758, 0);
+}
+
+void Mailbox_Cancel(u8 taskId)
+{
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(0, 0, 0xC, 0x9);
+    sub_813B758(taskId);
+}
+
+void sub_813B758(u8 taskId)
+{
+    Mailbox_DrawMailboxMenu(taskId);
+    gTasks[taskId].func = Mailbox_ProcessInput;
 }

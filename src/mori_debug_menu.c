@@ -1,6 +1,7 @@
 #include "global.h"
 #include "mori_debug_menu.h"
 #include "asm.h"
+#include "data2.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -19,8 +20,6 @@ extern u8 gUnknown_0839B255[];
 extern u8 gUnknown_0839B257[];
 
 extern const struct MenuAction gMoriDebugMenuActions[];
-
-extern u8 gSpeciesNames[][11];
 
 void unref_sub_8083CF0(void)
 {
@@ -65,7 +64,7 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 
 s8 MoriDebugMenu_Egg(void)
 {
-    if ( daycare_count_pokemon(gSaveBlock1.filler_2F9C) == 2 && daycare_relationship_score_from_savegame() )
+    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041940();
     CloseMenu();
 
@@ -74,7 +73,7 @@ s8 MoriDebugMenu_Egg(void)
 
 s8 MoriDebugMenu_MaleEgg(void)
 {
-    if ( daycare_count_pokemon(gSaveBlock1.filler_2F9C) == 2 && daycare_relationship_score_from_savegame() )
+    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041950();
     CloseMenu();
 

@@ -2,6 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "intro.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "libgncmultiboot.h"
 #include "link.h"
@@ -19,14 +20,7 @@
 #include "trig.h"
 
 extern void *species_and_otid_get_pal(/*TODO: arg types*/);
-extern void sub_8143648(int, u8);
 extern void sub_8143680(int, u8);
-
-struct MonCoords
-{
-    u8 x, y;
-};
-
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;
@@ -37,13 +31,6 @@ extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gMultibootProgramStruct;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
-extern struct SpriteSheet gMonFrontPicTable[];
-extern struct MonCoords gMonFrontPicCoords[];
-extern struct SpriteSheet gMonBackPicTable[];
-extern struct MonCoords gMonBackPicCoords[];
-extern struct SpriteSheet gTrainerBackPicTable[];
-extern struct MonCoords gTrainerBackPicCoords[];
-extern struct SpritePalette gTrainerBackPicPaletteTable[];
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u16 gInterfacePal_PokeBall[];
 extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
@@ -57,7 +44,6 @@ extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
 extern const u16 gUnknown_08393E64[];
 extern void *const gUnknown_0840B5A0[];
-extern const s16 gSineTable[];
 
 //--------------------------------------------------
 // Graphics Data
@@ -852,14 +838,14 @@ static void MainCB2_EndIntro(void)
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
-static void LoadCopyrightGraphics(u16 a1, u16 a2, u16 a3)
+static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteAddress)
 {
-    LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + a1));
-    LoadPalette(gIntroCopyright_Pal, a3, 0x20);
-    CpuCopy16(gIntroCopyright_Tilemap, (void *)(VRAM + a2), 0x500);
+    LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+    LoadPalette(gIntroCopyright_Pal, paletteAddress, 0x20);
+    CpuCopy16(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress), 0x500);
 }
 
-static void SerialCb_CopyrightScreen(void)
+static void SerialCB_CopyrightScreen(void)
 {
     GameCubeMultiBoot_HandleSerialInterrupt(&gMultibootProgramStruct);
 }
@@ -883,7 +869,7 @@ static u8 SetUpCopyrightScreen(void)
         DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 14336, 0);
+        LoadCopyrightGraphics(0, 0x3800, 0);
         remove_some_task();
         ResetTasks();
         ResetSpriteData();
@@ -901,7 +887,7 @@ static u8 SetUpCopyrightScreen(void)
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
         SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
-        SetSerialCallback(SerialCb_CopyrightScreen);
+        SetSerialCallback(SerialCB_CopyrightScreen);
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     default:
         UpdatePaletteFade();
@@ -912,7 +898,7 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFFu, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
             gMain.state++;
         }
         break;
@@ -936,7 +922,7 @@ static u8 SetUpCopyrightScreen(void)
     return 1;
 }
 
-void c2_copyright_1(void)
+void CB2_InitCopyrightScreenAfterBootup(void)
 {
     if (!SetUpCopyrightScreen())
     {
@@ -949,7 +935,7 @@ void c2_copyright_1(void)
     }
 }
 
-void CB2_InitCopyrightScreen(void)
+void CB2_InitCopyrightScreenAfterTitleScreen(void)
 {
     SetUpCopyrightScreen();
 }
@@ -1798,9 +1784,9 @@ static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
     u8 spriteId;
 
     if (front)
-        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].x, gMonFrontPicCoords[species].y, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
+        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
     else
-        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].x, gMonBackPicCoords[species].y, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
+        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].coords, gMonBackPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
     pal = species_and_otid_get_pal(species, 0, 0xFFFF);
     LoadCompressedPalette(pal, 0x100 + d * 0x10, 0x20);
     sub_8143648(d, d);
@@ -1814,7 +1800,7 @@ static u8 sub_813CFA8(u16 a, u16 b, u16 c, u16 d)
 {
     u8 spriteId;
 
-    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].x, gTrainerBackPicCoords[a].y, (void *)0x2000000, gUnknown_0840B5A0[d], a);
+    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].coords, gTrainerBackPicCoords[a].y_offset, (void *)0x2000000, gUnknown_0840B5A0[d], a);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + d * 0x10, 0x20);
     sub_8143680(d, d);
     gUnknown_02024E8C.anims = gUnknown_0840B064;
@@ -2085,29 +2071,29 @@ static void sub_813D788(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
-        case 0:
-            StartSpriteAnimIfDifferent(sprite, 0);
-            sprite->pos1.x--;
-            break;
-        case 1:
-            StartSpriteAnimIfDifferent(sprite, 0);
-            if (gIntroFrameCounter & 7)
-                return;
+    case 0:
+        StartSpriteAnimIfDifferent(sprite, 0);
+        sprite->pos1.x--;
+        break;
+    case 1:
+        StartSpriteAnimIfDifferent(sprite, 0);
+        if (gIntroFrameCounter & 7)
+            return;
+        sprite->pos1.x++;
+        break;
+    case 2:
+        StartSpriteAnimIfDifferent(sprite, 2);
+        if (sprite->pos1.x <= 120 || (gIntroFrameCounter & 7))
             sprite->pos1.x++;
-            break;
-        case 2:
-            StartSpriteAnimIfDifferent(sprite, 2);
-            if (sprite->pos1.x <= 120 || (gIntroFrameCounter & 7))
-                sprite->pos1.x++;
-            break;
-        case 3:
-            StartSpriteAnimIfDifferent(sprite, 3);
-            break;
-        case 4:
-            StartSpriteAnimIfDifferent(sprite, 0);
-            if (sprite->pos1.x > -32)
-                sprite->pos1.x -= 2;
-            break;
+        break;
+    case 3:
+        StartSpriteAnimIfDifferent(sprite, 3);
+        break;
+    case 4:
+        StartSpriteAnimIfDifferent(sprite, 0);
+        if (sprite->pos1.x > -32)
+            sprite->pos1.x -= 2;
+        break;
     }
     if (gIntroFrameCounter & 7)
         return;
@@ -2119,16 +2105,16 @@ static void sub_813D788(struct Sprite *sprite)
     {
         switch (Random() & 3)
         {
-            case 0:
-                sprite->pos2.y = -1;
-                break;
-            case 1:
-                sprite->pos2.y = 1;
-                break;
-            case 2:
-            case 3:
-                sprite->pos2.y = 0;
-                break;
+        case 0:
+            sprite->pos2.y = -1;
+            break;
+        case 1:
+            sprite->pos2.y = 1;
+            break;
+        case 2:
+        case 3:
+            sprite->pos2.y = 0;
+            break;
         }
     }
 }
@@ -2137,24 +2123,24 @@ static void sub_813D880(struct Sprite *sprite)
 {
     switch (sprite->data0)
     {
-        case 0:
-            break;
-        case 1:
-            if (sprite->pos2.x + sprite->pos1.x < 304)
-                sprite->pos2.x += 8;
-            else
-                sprite->data0 = 2;
-            break;
-        case 2:
-            if (sprite->pos2.x + sprite->pos1.x > 120)
-                sprite->pos2.x -= 1;
-            else
-                sprite->data0 = 3;
-            break;
-        case 3:
-            if (sprite->pos2.x > 0)
-                sprite->pos2.x -= 2;
-            break;
+    case 0:
+        break;
+    case 1:
+        if (sprite->pos2.x + sprite->pos1.x < 304)
+            sprite->pos2.x += 8;
+        else
+            sprite->data0 = 2;
+        break;
+    case 2:
+        if (sprite->pos2.x + sprite->pos1.x > 120)
+            sprite->pos2.x -= 1;
+        else
+            sprite->data0 = 3;
+        break;
+    case 3:
+        if (sprite->pos2.x > 0)
+            sprite->pos2.x -= 2;
+        break;
     }
     sprite->pos2.y = Sin((u8)sprite->data1, 8) - gUnknown_0203935A;
     sprite->data1 += 4;

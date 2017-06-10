@@ -462,4 +462,5 @@ void MonRestorePP(struct Pokemon *);
 
 u8 *sub_803F378(u16 itemId);
 
+u16 NationalPokedexNumToSpecies(u16 nationalNum);
 #endif // GUARD_POKEMON_H

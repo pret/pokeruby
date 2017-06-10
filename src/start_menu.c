@@ -21,6 +21,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
+#include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
 
@@ -54,24 +56,11 @@ EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 
 //Text strings
-extern u8 gSystemText_Saving[];
 extern u8 gSaveText_PlayerSavedTheGame[];
 extern u8 gSaveText_DontTurnOff[];
-extern u8 gSystemText_SaveErrorExchangeBackup[];
 extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
-extern u8 gOtherText_SafariStock[];
-extern u8 SystemText_Pokedex[];
-extern u8 SystemText_Pokemon[];
-extern u8 SystemText_BAG[];
-extern u8 SystemText_Pokenav[];
-extern u8 SystemText_Player[];
-extern u8 SystemText_Save[];
-extern u8 SystemText_Option[];
-extern u8 SystemText_Exit[];
-extern u8 SystemText_Retire[];
-extern u8 SystemText_Player[];
 
 static u8 StartMenu_PokedexCallback(void);
 static u8 StartMenu_PokemonCallback(void);
@@ -113,7 +102,7 @@ static u8 SaveCallback1(void);
 static u8 SaveCallback2(void);
 static void sub_807160C(void);
 static u8 RunSaveDialogCallback(void);
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void));
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void));
 static void Task_SaveDialog(u8 taskId);
 static void sub_8071700(void);
 static void HideSaveDialog(void);
@@ -227,30 +216,30 @@ static bool32 InitStartMenuMultistep(s16 *step, s16 *index)
 {
     switch (*step)
     {
-        case 1:
-            BuildStartMenuActions();
+    case 1:
+        BuildStartMenuActions();
+        (*step)++;
+        break;
+    case 2:
+        MenuDrawTextWindow(22, 0, 29, sNumStartMenuActions * 2 + 3);
+        *index = 0;
+        (*step)++;
+        break;
+    case 3:
+        if (GetSafariZoneFlag())
+            DisplaySafariBallsWindow();
+        (*step)++;
+        break;
+    case 4:
+        if (PrintStartMenuItemsMultistep(index, 2))
             (*step)++;
-            break;
-        case 2:
-            MenuDrawTextWindow(22, 0, 29, sNumStartMenuActions * 2 + 3);
-            *index = 0;
-            (*step)++;
-            break;
-        case 3:
-            if (GetSafariZoneFlag())
-                DisplaySafariBallsWindow();
-            (*step)++;
-            break;
-        case 4:
-            if (PrintStartMenuItemsMultistep(index, 2))
-                (*step)++;
-            break;
-        case 0:
-            (*step)++;
-            break;
-        case 5:
-            sStartMenuCursorPos = InitMenu(0, 0x17, 2, sNumStartMenuActions, sStartMenuCursorPos, 6);
-            return TRUE;
+        break;
+    case 0:
+        (*step)++;
+        break;
+    case 5:
+        sStartMenuCursorPos = InitMenu(0, 0x17, 2, sNumStartMenuActions, sStartMenuCursorPos, 6);
+        return TRUE;
     }
     return FALSE;
 }
@@ -288,14 +277,14 @@ void sub_80712B4(u8 taskId)
 
     switch (task->data[0])
     {
-        case 0:
-            gCallback_03004AE8 = StartMenu_InputProcessCallback;
-            task->data[0]++;
-            break;
-        case 1:
-            if (gCallback_03004AE8() == 1)
-                DestroyTask(taskId);
-            break;
+    case 0:
+        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        task->data[0]++;
+        break;
+    case 1:
+        if (gCallback_03004AE8() == 1)
+            DestroyTask(taskId);
+        break;
     }
 }
 
@@ -475,20 +464,20 @@ static u8 SaveCallback2(void)
 {
     switch (RunSaveDialogCallback())
     {
-        case SAVE_IN_PROGRESS:
-            return FALSE;
-        case SAVE_CANCELED:
-            //Go back to start menu
-            MenuZeroFillScreen();
-            InitStartMenu();
-            gCallback_03004AE8 = StartMenu_InputProcessCallback;
-            return FALSE;
-        case SAVE_SUCCESS:
-        case SAVE_ERROR:
-            MenuZeroFillScreen();
-            sub_8064E2C();
-            ScriptContext2_Disable();
-            return TRUE;
+    case SAVE_IN_PROGRESS:
+        return FALSE;
+    case SAVE_CANCELED:
+        //Go back to start menu
+        MenuZeroFillScreen();
+        InitStartMenu();
+        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        return FALSE;
+    case SAVE_SUCCESS:
+    case SAVE_ERROR:
+        MenuZeroFillScreen();
+        sub_8064E2C();
+        ScriptContext2_Disable();
+        return TRUE;
     }
     return FALSE;
 }
@@ -517,7 +506,7 @@ void InitSaveDialog(void)
     CreateTask(Task_SaveDialog, 0x50);
 }
 
-static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void))
+static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void))
 {
     StringExpandPlaceholders(gStringVar4, ptr);
     MenuDisplayMessageBox();
@@ -532,15 +521,15 @@ static void Task_SaveDialog(u8 taskId)
 
     switch (status)
     {
-        case SAVE_CANCELED:
-        case SAVE_ERROR:
-            gScriptResult = 0;
-            break;
-        case SAVE_SUCCESS:
-            gScriptResult = status;
-            break;
-        case SAVE_IN_PROGRESS:
-            return;
+    case SAVE_CANCELED:
+    case SAVE_ERROR:
+        gScriptResult = 0;
+        break;
+    case SAVE_SUCCESS:
+        gScriptResult = status;
+        break;
+    case SAVE_IN_PROGRESS:
+        return;
     }
     DestroyTask(taskId);
     EnableBothScriptContexts();
@@ -602,29 +591,29 @@ static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-        case 0:     //YES
-            HideSaveDialog();
-            switch (gSaveFileStatus)
+    case 0:     //YES
+        HideSaveDialog();
+        switch (gSaveFileStatus)
+        {
+        case 0:
+        case 2:
+            if (gDifferentSaveFile == FALSE)
             {
-                case 0:
-                case 2:
-                    if (gDifferentSaveFile == FALSE)
-                    {
-                        saveDialogCallback = SaveDialogCB_SaveFileExists;
-                        return SAVE_IN_PROGRESS;
-                    }
-                    saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
-                    return SAVE_IN_PROGRESS;
-                default:
-                    saveDialogCallback = SaveDialogCB_SaveFileExists;
-                    return SAVE_IN_PROGRESS;
+                saveDialogCallback = SaveDialogCB_SaveFileExists;
+                return SAVE_IN_PROGRESS;
             }
-            break;
-        case -1:    //B button
-        case 1:     //NO
-            HideSaveDialog();
-            sub_8071700();
-            return SAVE_CANCELED;
+            saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
+            return SAVE_IN_PROGRESS;
+        default:
+            saveDialogCallback = SaveDialogCB_SaveFileExists;
+            return SAVE_IN_PROGRESS;
+        }
+        break;
+    case -1:    //B button
+    case 1:     //NO
+        HideSaveDialog();
+        sub_8071700();
+        return SAVE_CANCELED;
     }
     return SAVE_IN_PROGRESS;
 }
@@ -648,15 +637,15 @@ static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
-        case 0:     //YES
-            HideSaveDialog();
-            saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
-            break;
-        case -1:    //B button
-        case 1:     //NO
-            HideSaveDialog();
-            sub_8071700();
-            return SAVE_CANCELED;
+    case 0:     //YES
+        HideSaveDialog();
+        saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
+        break;
+    case -1:    //B button
+    case 1:     //NO
+        HideSaveDialog();
+        sub_8071700();
+        return SAVE_CANCELED;
     }
     return SAVE_IN_PROGRESS;
 }
@@ -749,55 +738,55 @@ static bool32 sub_80719FC(u8 *step)
 {
     switch (*step)
     {
-        case 0:
-        {
-            u8 *addr;
-            u32 size;
+    case 0:
+    {
+        u8 *addr;
+        u32 size;
 
-            REG_DISPCNT = 0;
-            SetVBlankCallback(NULL);
-            remove_some_task();
-            DmaClear16(3, PLTT, PLTT_SIZE);
-            addr = (void *)VRAM;
-            size = 0x18000;
-            while (1)
+        REG_DISPCNT = 0;
+        SetVBlankCallback(NULL);
+        remove_some_task();
+        DmaClear16(3, PLTT, PLTT_SIZE);
+        addr = (void *)VRAM;
+        size = 0x18000;
+        while (1)
+        {
+            DmaFill16(3, 0, addr, 0x1000);
+            addr += 0x1000;
+            size -= 0x1000;
+            if (size <= 0x1000)
             {
-                DmaFill16(3, 0, addr, 0x1000);
-                addr += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaFill16(3, 0, addr, size);
-                    break;
-                }
+                DmaFill16(3, 0, addr, size);
+                break;
             }
-            break;
         }
-        case 1:
-            ResetSpriteData();
-            ResetTasks();
-            ResetPaletteFade();
-            dp12_8087EA4();
-            break;
-        case 2:
-            SetUpWindowConfig(&gWindowConfig_81E6CE4);
-            InitMenuWindow(&gWindowConfig_81E6CE4);
-            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
-            break;
-        case 3:
-        {
-            u32 savedIme;
+        break;
+    }
+    case 1:
+        ResetSpriteData();
+        ResetTasks();
+        ResetPaletteFade();
+        dp12_8087EA4();
+        break;
+    case 2:
+        SetUpWindowConfig(&gWindowConfig_81E6CE4);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
+        break;
+    case 3:
+    {
+        u32 savedIme;
 
-            BlendPalettes(-1, 0x10, 0);
-            SetVBlankCallback(sub_80719F0);
-            savedIme = REG_IME;
-            REG_IME = 0;
-            REG_IE |= 1;
-            REG_IME = savedIme;
-            break;
-        }
-        case 4:
-            return TRUE;
+        BlendPalettes(-1, 0x10, 0);
+        SetVBlankCallback(sub_80719F0);
+        savedIme = REG_IME;
+        REG_IME = 0;
+        REG_IE |= 1;
+        REG_IME = savedIme;
+        break;
+    }
+    case 4:
+        return TRUE;
     }
     (*step)++;
     return FALSE;
@@ -826,31 +815,31 @@ static void Task_8071B64(u8 taskId)
     {
         switch (*step)
         {
-            case 0:
-                MenuDisplayMessageBox();
-                MenuPrint(gSystemText_Saving, 2, 15);
-                BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-                (*step)++;
+        case 0:
+            MenuDisplayMessageBox();
+            MenuPrint(gSystemText_Saving, 2, 15);
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            (*step)++;
+            break;
+        case 1:
+            SetSecretBase2Field_9_AndHideBG();
+            sub_8125E2C();
+            (*step)++;
+            break;
+        case 2:
+            if (!sub_8125E6C())
                 break;
-            case 1:
-                SetSecretBase2Field_9_AndHideBG();
-                sub_8125E2C();
-                (*step)++;
-                break;
-            case 2:
-                if (!sub_8125E6C())
-                    break;
-                ClearSecretBase2Field_9_2();
-                (*step)++;
-                break;
-            case 3:
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-                (*step)++;
-                break;
-            case 4:
-                SetMainCallback2(gMain.savedCallback);
-                DestroyTask(taskId);
-                break;
+            ClearSecretBase2Field_9_2();
+            (*step)++;
+            break;
+        case 3:
+            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            (*step)++;
+            break;
+        case 4:
+            SetMainCallback2(gMain.savedCallback);
+            DestroyTask(taskId);
+            break;
         }
     }
 }

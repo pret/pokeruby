@@ -1,6 +1,7 @@
 #include "global.h"
 #include "asm.h"
 #include "battle.h"
+#include "data2.h"
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
@@ -74,9 +75,6 @@ extern u8 gEnemyMonIndex;
 extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024E6C;
 extern struct SpindaSpot gSpindaSpotGraphics[];
-extern void *gUnknown_081FAF4C[];
-extern u8 gSpeciesNames[][11];
-extern struct Trainer gTrainers[];
 extern s8 gNatureStatTable[][5];
 extern s8 gUnknown_082082FE[][3];
 extern u16 gTrainerBattleOpponent;
@@ -88,8 +86,6 @@ extern u32 gTMHMLearnsets[][2];
 extern const u16 *gLevelUpLearnsets[];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
-extern const struct SpritePalette gMonPaletteTable[];
-extern const struct SpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern s8 gUnknown_083F7E28[];
 extern u8 byte_2024C06;
@@ -169,28 +165,28 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 {
                     switch (j)
                     {
-                        case 2:
-                            if (val & 0x10)
-                                val &= 0xEF;
-                        case 0:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 1:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 3:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 7:
-                            if (i == effectByte)
-                                return 0;
-                            break;
+                    case 2:
+                        if (val & 0x10)
+                            val &= 0xEF;
+                    case 0:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 1:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 3:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 7:
+                        if (i == effectByte)
+                            return 0;
+                        break;
                     }
                 }
                 j++;
@@ -208,21 +204,21 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 {
                     switch (j)
                     {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            if (i == effectByte && (val & effectBit))
-                                return offset;
-                            offset++;
-                            break;
-                        case 7:
-                            if (i == effectByte)
-                                return 0;
-                            break;
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                        if (i == effectByte && (val & effectBit))
+                            return offset;
+                        offset++;
+                        break;
+                    case 7:
+                        if (i == effectByte)
+                            return 0;
+                        break;
                     }
                 }
                 j++;
@@ -1153,26 +1149,26 @@ u16 sub_8040728(void)
     {
         switch (gTrainers[gTrainerBattleOpponent].trainerClass)
         {
-            case 2:
-            case 0x31:
-                return BGM_BATTLE30;
-            case 3:
-            case 4:
-            case 0x32:
-            case 0x33:
-                return BGM_BATTLE31;
-            case 0x19:
-                return BGM_BATTLE32;
-            case 0x20:
-                return BGM_BATTLE33;
-            case 0x2E:
-                if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
-                    return BGM_BATTLE20;
-                return BGM_BATTLE35;
-            case 0x18:
-                return BGM_BATTLE38;
-            default:
+        case 2:
+        case 0x31:
+            return BGM_BATTLE30;
+        case 3:
+        case 4:
+        case 0x32:
+        case 0x33:
+            return BGM_BATTLE31;
+        case 0x19:
+            return BGM_BATTLE32;
+        case 0x20:
+            return BGM_BATTLE33;
+        case 0x2E:
+            if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
                 return BGM_BATTLE20;
+            return BGM_BATTLE35;
+        case 0x18:
+            return BGM_BATTLE38;
+        default:
+            return BGM_BATTLE20;
         }
     }
     return BGM_BATTLE27;

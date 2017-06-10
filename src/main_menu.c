@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main_menu.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "menu.h"
@@ -15,16 +16,12 @@
 #include "sound.h"
 #include "species.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
-
-struct MonCoords
-{
-    u8 x, y;
-};
 
 extern struct PaletteFadeControl gPaletteFade;
 
@@ -41,24 +38,8 @@ extern const u8 gBirchSpeech_WhatsYourName[];
 extern u8 gBirchSpeech_SoItsPlayer[];
 extern u8 gBirchSpeech_AhOkayYouArePlayer[];
 extern u8 gBirchSpeech_AreYouReady[];
-extern u8 gSaveFileDeletedMessage[];
-extern u8 gSaveFileCorruptMessage[];
-extern u8 gBoardNotInstalledMessage[];
-extern u8 gBatteryDryMessage[];
-extern u8 gMainMenuString_Continue[];
-extern u8 gMainMenuString_NewGame[];
-extern u8 gMainMenuString_MysteryEvents[];
-extern u8 gMainMenuString_Option[];
-extern u8 gMainMenuString_Player[];
-extern u8 gMainMenuString_Time[];
-extern u8 gMainMenuString_Pokedex[];
-extern u8 gMainMenuString_Badges[];
 
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct SpriteSheet gMonFrontPicTable[];
-extern const struct SpritePalette gMonPaletteTable[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern void * const gUnknown_081FAF4C[];
 extern u16 gUnknown_081E795C[];
 extern const struct MenuAction gUnknown_081E79B0[];
 extern const struct MenuAction gMalePresetNames[];
@@ -68,7 +49,6 @@ extern const u8 gUnknown_081E764C[];
 extern const u8 gBirchIntroShadowGfx[];
 extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
-extern const u8 gSystemText_NewPara[];
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 
@@ -115,7 +95,7 @@ static void Task_MainMenuProcessKeyInput(u8 taskId);
 static void Task_MainMenuPressedA(u8 taskId);
 static void Task_MainMenuPressedB(u8 taskId);
 static void HighlightCurrentMenuItem(u8 layout, u8 menuItem);
-static void PrintMainMenuItem(u8 *text, u8 left, u8 top);
+static void PrintMainMenuItem(const u8 *text, u8 left, u8 top);
 static void PrintSaveFileInfo(void);
 static void PrintPlayerName(void);
 static void PrintPlayTime(void);
@@ -657,7 +637,7 @@ void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
     }
 }
 
-void PrintMainMenuItem(u8 *text, u8 left, u8 top)
+void PrintMainMenuItem(const u8 *text, u8 left, u8 top)
 {
     u8 i;
     u8 buffer[32];
@@ -1412,8 +1392,8 @@ u8 CreateAzurillSprite(u8 x, u8 y)
 {
     DecompressPicFromTable_2(
         &gMonFrontPicTable[SPECIES_AZURILL],
-        gMonFrontPicCoords[SPECIES_AZURILL].x,
-        gMonFrontPicCoords[SPECIES_AZURILL].y,
+        gMonFrontPicCoords[SPECIES_AZURILL].coords,
+        gMonFrontPicCoords[SPECIES_AZURILL].y_offset,
         gUnknown_081FAF4C[0],
         gUnknown_081FAF4C[1],
         SPECIES_AZURILL);
@@ -1646,9 +1626,9 @@ static void SetPresetPlayerName(u8 index)
     u8 *name;
 
     if (gSaveBlock2.playerGender == MALE)
-        name = gMalePresetNames[index].text;
+        name = (u8 *) gMalePresetNames[index].text;
     else
-        name = gFemalePresetNames[index].text;
+        name = (u8 *) gFemalePresetNames[index].text;
 
     for (i = 0; i < 7; i++)
         gSaveBlock2.playerName[i] = name[i];

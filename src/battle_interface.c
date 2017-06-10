@@ -9,6 +9,7 @@
 #include "battle.h"
 #include "palette.h"
 #include "pokedex.h"
+#include "battle_interface.h"
 
 struct UnknownStruct5
 {
@@ -34,15 +35,6 @@ struct UnknownStruct6
 struct UnknownStruct7
 {
     u8 filler0[0x180];
-};
-
-struct UnknownStruct9
-{
-    s32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC_0:5;
-    u32 unk10;
 };
 
 extern u8 ewram[];
@@ -109,9 +101,8 @@ extern void load_gfxc_health_bar();
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);
-void sub_8044210(u8, s16, u8);
+static void sub_8044210(u8, s16, u8);
 static void draw_status_ailment_maybe(u8);
-void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c);
 extern void sub_8045180(struct Sprite *);
 static void sub_8045110(struct Sprite *);
 static void sub_8045048(struct Sprite *);
@@ -119,12 +110,11 @@ static void sub_8044F70(u8 taskId);
 static void sub_8044E74(u8 taskId);
 static void sub_8044ECC(u8 taskId);
 static u8 sub_80457E8(u8, u8);
-s32 sub_8045C78(u8, u8, u8, u8);
 static int sub_8045F58(s32, s32, int, int *, u8, u16);
 static u8 GetScaledExpFraction(int, int, int, u8);
 static void sub_8045D58(u8, u8);
 static u8 sub_804602C(int, int, int, int *, u8 *, u8);
-static void sub_8046128(struct UnknownStruct9 *a, int *b, void *c);
+static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, void *c);
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
@@ -937,7 +927,7 @@ _0804420C: .4byte 0x04000008\n\
 }
 #endif
 
-void sub_8044210(u8 a, s16 b, u8 c)
+static void sub_8044210(u8 a, s16 b, u8 c)
 {
     u8 str[0x14];
     u8 *ptr;
@@ -1377,15 +1367,9 @@ void sub_804454C(void)
     }
 }
 
-struct UnknownStruct8
-{
-    u16 unk0;
-    u32 unk4;
-};
-
 // This function almost matches except for just two instructions around 0x08044B52 that are swapped.
 #ifdef NONMATCHING
-u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
+u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
 {
     u8 r7;
     s16 x;
@@ -1594,7 +1578,7 @@ u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
 }
 #else
 __attribute__((naked))
-u8 sub_8044804(u8 a, const struct UnknownStruct8 *b, u8 c, u8 d)
+u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -2425,23 +2409,23 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
         gender = 100;
     switch (gender)
     {
-        default:
-            ptr[0] = 0xB;
-            ptr[1] = EOS;
-            ptr += 1;
-            break;
-        case MON_MALE:
-            ptr[0] = 0xB;
-            ptr[1] = CHAR_MALE;
-            ptr[2] = EOS;
-            ptr += 2;
-            break;
-        case MON_FEMALE:
-            ptr[0] = 0xA;
-            ptr[1] = CHAR_FEMALE;
-            ptr[2] = EOS;
-            ptr += 2;
-            break;
+    default:
+        ptr[0] = 0xB;
+        ptr[1] = EOS;
+        ptr += 1;
+        break;
+    case MON_MALE:
+        ptr[0] = 0xB;
+        ptr[1] = CHAR_MALE;
+        ptr[2] = EOS;
+        ptr += 2;
+        break;
+    case MON_FEMALE:
+        ptr[0] = 0xA;
+        ptr[1] = CHAR_FEMALE;
+        ptr[2] = EOS;
+        ptr += 2;
+        break;
     }
     ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 0x13;
@@ -3005,7 +2989,7 @@ static u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
     return r3;
 }
 
-s16 sub_80460C8(struct UnknownStruct9 *a, int *b, void *c, int d)
+s16 sub_80460C8(struct BattleInterfaceStruct1 *a, int *b, void *c, int d)
 {
     u16 r7;
     s16 r1;
@@ -3020,7 +3004,7 @@ s16 sub_80460C8(struct UnknownStruct9 *a, int *b, void *c, int d)
     return r7;
 }
 
-static void sub_8046128(struct UnknownStruct9 *a, int *b, void *c)
+static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, void *c)
 {
     u8 sp8[6];
     u16 sp10[6];

@@ -1,19 +1,24 @@
 #include "global.h"
 #include "easy_chat.h"
 #include "asm.h"
+#include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
 #include "rng.h"
+#include "string_util.h"
+#include "strings.h"
+#include "strings2.h"
 #include "text.h"
 
+u8 sub_80EB37C(u16);
 u8 sub_80EB8C0(void);
 u8 sub_80EB868(u8);
 u16 sub_80EAE88(u8);
 void sub_80EB890(u8);
 u16 sub_80EB784(u16 group);
 u8 sub_80EAD7C(u8 group);
-u8 sub_80EB680(u16 *, u16, u16, u16);
+static bool8 sub_80EB680(u16 *, u16, u16, u16);
 static u16 sub_80EB9D8(void);
 static u16 sub_80EB960(void);
 u16 sub_80EB72C(u16);
@@ -22,6 +27,229 @@ extern void *gEasyChatGroupWords[];
 extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
+
+#ifdef NONMATCHING
+u8 *sub_80EB3FC(u8 *dst, u16 word) {
+    int group, wordIndex;
+    u8 *src;
+    u16 i;
+
+
+    if (sub_80EB37C(word))
+    {
+        return StringCopy(dst, gOtherText_ThreeQuestions);
+    }
+
+    if (word != 0xFFFF)
+    {
+        group = word >> 9;
+        wordIndex = word & 0x1FF;
+        switch (group)
+        {
+        case EC_GROUP_POKEMON: // 0
+        case EC_GROUP_POKEMON_2: // 21
+            dst = StringCopy(dst, gSpeciesNames[wordIndex]);
+            break;
+
+        case EC_GROUP_MOVE_1: // 18
+        case EC_GROUP_MOVE_2: // 19
+            dst = StringCopy(dst, gMoveNames[wordIndex]);
+            break;
+
+        default:
+            src = gEasyChatGroupWords[group];
+
+            i = wordIndex - 1;
+            while (i != 0xFFFF)
+            {
+                while (*src++ != EOS)
+                {
+                }
+                i--;
+            }
+            dst = StringCopy(dst, src);
+            break;
+        }
+    }
+
+    dst[0] = EOS;
+    return dst;
+}
+#endif
+
+u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+    u16 i;
+    u16 n;
+
+    const u16 i1 = arg2 - 1;
+
+    for (i = 0; i < arg3; i++)
+    {
+        u16 word;
+
+        for (n = 0; n < i1; n++)
+        {
+            dst = sub_80EB3FC(dst, words[0]);
+
+            if (words[0] != 0xFFFF)
+            {
+                dst[0] = CHAR_SPACE;
+                dst++;
+            }
+
+            words++;
+        }
+
+        word = words[0];
+        words++;
+        dst = sub_80EB3FC(dst, word);
+
+        dst[0] = 0xFE;
+        dst++;
+    }
+
+    dst--;
+    dst[0] = EOS;
+
+    return dst;
+}
+
+u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+    u16 i;
+    u16 n;
+
+    const u16 i1 = arg2 - 1;
+
+    for (i = 0; i < arg3; i++)
+    {
+        u16 word;
+
+        for (n = 0; n < i1; n++)
+        {
+            dst = sub_80EB3FC(dst, words[0]);
+
+            if (words[0] != 0xFFFF)
+            {
+                dst[0] = CHAR_SPACE;
+                dst++;
+            }
+
+            words++;
+        }
+
+        word = words[0];
+        words++;
+        dst = sub_80EB3FC(dst, word);
+
+        // Only difference with ConvertEasyChatWordsToString
+        dst[0] = (i == 0) ? 0xFE : 0xFA;
+        dst++;
+    }
+
+    dst--;
+    dst[0] = EOS;
+
+    return dst;
+}
+
+
+u16 unref_sub_80EB5E0(u16 arg0) {
+    u8 *chars;
+    u16 i;
+    u16 strlen;
+    int group, word;
+
+
+    if (arg0 == 0xFFFF)
+    {
+        return 0;
+    }
+
+    group = arg0 >> 9;
+    word = arg0 & 0x1FF;
+    switch (group)
+    {
+    case EC_GROUP_POKEMON: // 0
+    case EC_GROUP_POKEMON_2: // 21
+        chars = (u8 *) gSpeciesNames[word];
+        break;
+
+    case EC_GROUP_MOVE_1: // 18
+    case EC_GROUP_MOVE_2: // 19
+        chars = gMoveNames[word];
+        break;
+
+    default:
+        chars = gEasyChatGroupWords[group];
+
+        i = word - 1;
+        while (i != 0xFFFF)
+        {
+            while (*chars++ != EOS)
+            {
+            }
+            i--;
+        }
+        break;
+    }
+
+    strlen = 0;
+    while (*chars != EOS)
+    {
+        chars++;
+        strlen += 1;
+    }
+
+    return strlen;
+}
+
+static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3) {
+    return FALSE;
+}
+
+void unref_sub_80EB684(u8 arg0, u16 arg1) {
+    u16 *ptr;
+    u16 c;
+
+    // FIXME: find actual tv shows used
+    switch (arg0)
+    {
+    case 5:
+        c = 6;
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x04);
+        break;
+    case 7:
+        c = 2;
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x1C);
+        break;
+    case 8:
+        c = 1;
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x02);
+        break;
+
+    default:
+        return;
+    }
+
+    c -= 1;
+    while (c != 0xFFFF)
+    {
+        *ptr = -1;
+        ptr++;
+        c -= 1;
+    }
+}
+
+void sub_80EB6FC(u16 *arg0, u16 arg1) {
+    u16 i;
+
+    for (i = arg1 - 1; i != 0xFFFF; i--)
+    {
+        *arg0 = 0xFFFF;
+        arg0++;
+    }
+
+}
 
 u16 sub_80EB72C(u16 group) {
     u16 local1;
@@ -260,3 +488,4 @@ static u16 sub_80EB9D8(void) {
 
     return -1;
 }
+

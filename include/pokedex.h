@@ -135,7 +135,7 @@ void sub_8090A3C(u8);
 void sub_8090C68(void);
 u8 *GetPokemonCategory(u16);
 
-bool8 GetNationalPokedexFlag(u16, u8);
+s8 GetNationalPokedexFlag(u16, u8);
 u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
 bool8 sub_8090FC0(void);

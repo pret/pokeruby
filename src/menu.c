@@ -6,6 +6,7 @@
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
+#include "strings.h"
 #include "text.h"
 #include "text_window.h"
 
@@ -21,9 +22,6 @@ struct Menu
     u8 menu_field_7;
     u8 columnXCoords[8];
 };
-
-extern u8 OtherText_Yes[];
-extern u8 OtherText_No[];
 
 static void MultistepInitMenuWindowInternal(const struct WindowConfig *, u16);
 static void InitMenuWindowInternal(const struct WindowConfig *, u16);
@@ -175,7 +173,7 @@ void MenuDrawTextWindow(u8 left, u8 top, u8 right, u8 bottom)
     DrawTextWindow(gMenuWindowPtr, left, top, right, bottom);
 }
 
-void sub_8071F40(u8 *str)
+void sub_8071F40(const u8 *str)
 {
     MenuDrawTextWindow(2, 14, 28, 19);
     MenuPrint(str, 3, 15);
@@ -598,12 +596,12 @@ s8 ProcessMenuInputNoWrap_(void)
     return ProcessMenuInputNoWrap();
 }
 
-u8 MenuPrint_PixelCoords(u8 *text, u8 left, u16 top, u8 a4)
+u8 MenuPrint_PixelCoords(const u8 *text, u8 left, u16 top, u8 a4)
 {
     return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }
 
-u8 sub_8072A18(u8 *text, u8 left, u16 top, u8 width, u32 a5)
+u8 sub_8072A18(const u8 *text, u8 left, u16 top, u8 width, u32 a5)
 {
     return sub_8004FD0(gMenuWindowPtr, 0, text, gMenuTextTileOffset, left, top, width, a5);
 }
@@ -639,7 +637,7 @@ void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
     sub_8003460(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
-void sub_8072BD8(u8 *a1, u8 a2, u8 a3, u16 a4)
+void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
 {
     sub_8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
@@ -659,7 +657,7 @@ u8 *sub_8072C74(u8 *a1, const u8 *a2, u8 a3, u8 a4)
     return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
-u8 sub_8072CA4(u8 *str)
+u8 sub_8072CA4(const u8 *str)
 {
     return GetStringWidth(gMenuWindowPtr, str);
 }

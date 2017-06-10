@@ -4,6 +4,7 @@
 #include "rng.h"
 #include "script.h"
 #include "string_util.h"
+#include "strings.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
@@ -14,8 +15,6 @@ extern void sub_80F83D0(void);
 extern void sub_80F7F80(u8);
 extern u16 sub_80EB8EC(void);
 extern void sub_80F7DC0(void);
-extern u8 gOtherText_Is[];
-extern u8 gOtherText_DontYouAgree[];
 extern u32 gUnknown_083E5388[];
 extern u32 gUnknown_083E53A8[];
 
@@ -65,21 +64,21 @@ void SetMauvilleOldMan(void)
 
     switch(var)
     {
-        case 0:
-            sub_80F7A34();
-            break;
-        case 1:
-            sub_80F7A6C();
-            break;
-        case 2:
-            sub_80F7A98();
-            break;
-        case 3:
-            sub_80F7A7C();
-            break;
-        case 4:
-            sub_80F7A88();
-            break;
+    case 0:
+        sub_80F7A34();
+        break;
+    case 1:
+        sub_80F7A6C();
+        break;
+    case 2:
+        sub_80F7A98();
+        break;
+    case 3:
+        sub_80F7A7C();
+        break;
+    case 4:
+        sub_80F7A88();
+        break;
     }
     sub_80F83D0();
 }

@@ -8,6 +8,14 @@
 
 enum
 {
+	NORMAL_RANK,
+	SUPER_RANK,
+	HYPER_RANK,
+	MASTER_RANK,
+};
+
+enum
+{
     CONTEST_COOL,
     CONTEST_BEAUTY,
     CONTEST_CUTE,

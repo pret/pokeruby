@@ -8,6 +8,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 
@@ -40,7 +41,6 @@ extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, con
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
 extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
-extern void sub_806E834();
 extern u8 sub_8094C20();
 extern void sub_8040B8C(void);
 extern u8 pokemon_order_func(u8);
@@ -59,16 +59,6 @@ extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
 extern void (*gUnknown_03004AE4)();  //don't know types yet
-extern const u8 gOtherText_CantSwitchPokeWithYours[];
-extern const u8 gOtherText_NoEnergyLeft[];
-extern const u8 gOtherText_EGGCantBattle[];
-extern const u8 gOtherText_AlreadySelected[];
-extern const u8 gOtherText_CantBeSwitched[];
-extern const u8 gOtherText_AlreadyBattle[];
-extern const u8 OtherText_Summary[];
-extern const u8 gOtherText_CancelNoTerminator[];
-extern const u8 OtherText_Shift[];
-extern const u8 OtherText_SendOut[];
 
 static void Task_809527C(u8);
 static void Task_80952B4(u8);

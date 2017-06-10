@@ -2,6 +2,7 @@
 #include "abilities.h"
 #include "battle.h"
 #include "berry.h"
+#include "data2.h"
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
@@ -11,6 +12,7 @@
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings2.h"
 #include "text.h"
 
 extern u8 gPlayerPartyCount;
@@ -34,15 +36,9 @@ extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u8 gEggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
-extern u8 gSpeciesNames[][11];
-extern struct BattleMove gBattleMoves[];
 extern struct SpriteTemplate gSpriteTemplate_8208288[];
-extern union AmimCmd *gSpriteAnimTable_81E7C64[];
-extern union AnimCmd **gUnknown_081EC2A4[];
-extern union AnimCmd **gUnknown_081ECACC[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];
