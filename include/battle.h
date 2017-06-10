@@ -158,7 +158,8 @@ struct Struct2017810
     //u8 filler2[2];
     u8 unk4;
     u8 unk5;
-    u8 filler6[2];
+    u8 unk6;
+    u8 unk7;
     u8 unk8;
     u8 unk9;
     u8 fillerA[2];

@@ -3032,7 +3032,7 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
     return result;
 }
 
-int GetHPBarLevel(s16 hp, s16 maxhp)
+u8 GetHPBarLevel(s16 hp, s16 maxhp)
 {
     int result;
 

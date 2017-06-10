@@ -1,13 +1,16 @@
 #include "global.h"
 #include "asm.h"
 #include "battle.h"
-#include "battle_interface.h"
 #include "battle_anim.h"
+#include "battle_interface.h"
 #include "blend_palette.h"
 #include "data2.h"
 #include "decompress.h"
+#include "main.h"
+#include "m4a.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "songs.h"
 #include "sound.h"
 #include "species.h"
 #include "sprite.h"
@@ -46,6 +49,9 @@ extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct SpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct SpriteSheet gUnknown_0820A47C;
+extern const u8 gSubstituteDollTilemap[];
+extern const u8 gSubstituteDollGfx[];
+extern const u8 gSubstituteDollPal[];
 extern const struct SpriteSheet gUnknown_0820A484;
 extern const struct SpriteSheet gUnknown_0820A48C[];
 extern const struct SpriteSheet gUnknown_0820A49C[];
@@ -56,19 +62,22 @@ extern const u8 gUnknown_08D09C48[];
 
 #define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
 
+extern u8 sub_8078874(u8);
 extern u8 sub_8077F68(u8);
+extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
 extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
 extern void move_anim_start_t2();
-extern void refresh_graphics_maybe();
-extern void sub_80324E0();
 extern const u16 *species_and_otid_get_pal();
 
 void sub_80315E8(u8);
 u8 sub_803163C(u8);
 void sub_80316CC(u8);
 void sub_8031F0C(void);
+void refresh_graphics_maybe(u8, u8, u8);
+void sub_80324E0(u8 a);
+
 void sub_80327CC(void);
 
 void sub_80312F0(struct Sprite *sprite)
@@ -685,5 +694,155 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         gSprites[gUnknown_02024BE0[a]].pos1.y = sub_8077F68(a);
         StartSpriteAnim(&gSprites[gUnknown_02024BE0[a]], gBattleMonForms[a]);
+    }
+}
+
+void sub_8032350(u8 a, u8 b)
+{
+    u8 r4;
+    u16 foo;
+    const u8 *gSubstituteDollPal_;
+    void *src;
+    s32 i;
+    
+    if (b == 0)
+    {
+        if (IsContest())
+            r4 = 0;
+        else
+            r4 = battle_get_per_side_status(a);
+        if (IsContest())
+            LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
+        else if (battle_side_get_owner(a) != 0)
+            LZDecompressVram(gSubstituteDollGfx, gUnknown_081FAF4C[r4]);
+        else
+            LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
+        // There is probably a way to do this without all the temp variables, but I couldn't figure it out.
+        foo = a * 16;
+        gSubstituteDollPal_ = gSubstituteDollPal;
+        src = gUnknown_081FAF4C[r4];
+        for (i = 0; i < 3; i++)
+            DmaCopy32(3, src, src + i * 0x800 + 0x800, 0x800);
+        LoadCompressedPalette(gSubstituteDollPal_, 0x100 + foo, 32);
+    }
+    else
+    {
+        if (!IsContest())
+        {
+            if (battle_side_get_owner(a) != 0)
+                sub_8031794(&gEnemyParty[gUnknown_02024A6A[a]], a);
+            else
+                sub_80318FC(&gPlayerParty[gUnknown_02024A6A[a]], a);
+        }
+    }
+}
+
+void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
+{
+    sub_8032350(a, b);
+    StartSpriteAnim(&gSprites[spriteId], gBattleMonForms[a]);
+    if (b == 0)
+        gSprites[spriteId].pos1.y = sub_8077F7C(a);
+    else
+        gSprites[spriteId].pos1.y = sub_8077F68(a);
+}
+
+void sub_80324BC(u8 a, u16 b)
+{
+    if (b == 0xA4)
+        ewram17800[a].unk0_2 = 1;
+}
+
+void sub_80324E0(u8 a)
+{
+    ewram17800[a].unk0_2 = 0;
+}
+
+void sub_80324F8(struct Pokemon *pkmn, u8 b)
+{
+    u16 hp = GetMonData(pkmn, MON_DATA_HP);
+    u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
+    
+    if (GetHPBarLevel(hp, maxHP) == 1)
+    {
+        if (!ewram17800[b].unk0_1)
+        {
+            if (!ewram17800[b ^ 2].unk0_1)
+                PlaySE(SE_HINSI);
+            ewram17800[b].unk0_1 = 1;
+        }
+    }
+    else
+    {
+        ewram17800[b].unk0_1 = 0;
+        if (!IsDoubleBattle())
+        {
+            m4aSongNumStop(SE_HINSI);
+            return;
+        }
+        if (IsDoubleBattle() && !ewram17800[b ^ 2].unk0_1)
+        {
+            m4aSongNumStop(SE_HINSI);
+            return;
+        }
+    }
+}
+
+void sub_80325B8(void)
+{
+    u8 r4 = battle_get_side_with_given_state(0);
+    
+    ewram17800[r4].unk0_1 = 0;
+    if (IsDoubleBattle())
+        ewram17800[r4 ^ 2].unk0_1 = 0;
+    m4aSongNumStop(SE_HINSI);
+}
+
+u8 unref_sub_8032604(struct Pokemon *pkmn)
+{
+    u16 hp = GetMonData(pkmn, MON_DATA_HP);
+    u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
+    
+    return GetHPBarLevel(hp, maxHP);
+}
+
+void sub_8032638(void)
+{
+    if (gMain.inBattle)
+    {
+        u8 r8 = battle_get_side_with_given_state(0);
+        u8 r9 = battle_get_side_with_given_state(2);
+        u8 r4 = pokemon_order_func(gUnknown_02024A6A[r8]);
+        u8 r5 = pokemon_order_func(gUnknown_02024A6A[r9]);
+        
+        if (GetMonData(&gPlayerParty[r4], MON_DATA_HP) != 0)
+            sub_80324F8(&gPlayerParty[r4], r8);
+        if (IsDoubleBattle())
+        {
+            if (GetMonData(&gPlayerParty[r5], MON_DATA_HP) != 0)
+                sub_80324F8(&gPlayerParty[r5], r9);
+        }
+    }
+}
+
+void sub_80326EC(u8 a)
+{
+    s32 i;
+    
+    for (i = 0; i < gUnknown_02024A68; i++)
+    {
+        if (sub_8078874(i) != 0)
+        {
+            gSprites[gUnknown_02024BE0[i]].oam.affineMode = a;
+            if (a == 0)
+            {
+                ewram17810[i].unk6 = gSprites[gUnknown_02024BE0[i]].oam.matrixNum;
+                gSprites[gUnknown_02024BE0[i]].oam.matrixNum = 0;
+            }
+            else
+            {
+                gSprites[gUnknown_02024BE0[i]].oam.matrixNum = ewram17810[i].unk6;
+            }
+        }
     }
 }
