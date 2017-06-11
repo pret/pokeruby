@@ -15,6 +15,7 @@
 #include "species.h"
 #include "sprite.h"
 #include "task.h"
+#include "text.h"
 #include "gba/m4a_internal.h"
 
 struct Struct2019348
@@ -27,8 +28,6 @@ struct Struct2019348
     u32 unk10;
 };
 
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
 extern u8 gUnknown_02023A60[][0x200];
 extern u8 gUnknown_02024A60;
 extern u32 gUnknown_02024A64;
@@ -37,9 +36,15 @@ extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_02024BE0[];
 extern u16 gUnknown_02024DE8;
+extern u8 gUnknown_02024E6D;
 extern u32 gUnknown_02024E70[];
+extern struct Window gUnknown_03004210;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
+extern u8 gUnknown_0300434C[];
+extern struct MusicPlayerInfo gMPlay_SE1;
+extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlay_BGM;
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
@@ -69,6 +74,10 @@ extern const u8 gUnknown_08D09C48[];
 
 #define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
 
+extern void c3_0802FDF4(u8);
+extern void sub_80440EC();
+extern void sub_804777C();
+extern void sub_8141828();
 extern u8 sub_8077ABC();
 extern u8 sub_8078874(u8);
 extern u8 sub_8077F68(u8);
@@ -89,6 +98,7 @@ void sub_80327CC(void);
 void sub_8032978(struct Sprite *);
 void sub_80328A4(struct Sprite *);
 void sub_8032AFC(void);
+void sub_80332D0(void);
 void sub_80334EC(void);
 
 void sub_80312F0(struct Sprite *sprite)
@@ -1002,4 +1012,225 @@ void sub_8032C4C(void)
         ewram17810[gUnknown_02024A60].unk9 = 0;
         sub_80334EC();
     }
+}
+
+void sub_8032C88(void)
+{
+    bool8 r6 = FALSE;
+
+    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
+    {
+        if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy)
+            r6 = TRUE;
+    }
+    else
+    {
+        if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy
+         && gSprites[gUnknown_03004340[gUnknown_02024A60 ^ 2]].callback == SpriteCallbackDummy)
+            r6 = TRUE;
+    }
+    if (IsCryPlayingOrClearCrySongs())
+        r6 = FALSE;
+
+    if (r6 && ewram17810[gUnknown_02024A60].unk1_0 && ewram17810[gUnknown_02024A60 ^ 2].unk1_0)
+    {
+        ewram17810[gUnknown_02024A60].unk0_7 = 0;
+        ewram17810[gUnknown_02024A60].unk1_0 = 0;
+        ewram17810[gUnknown_02024A60 ^ 2].unk0_7 = 0;
+        ewram17810[gUnknown_02024A60 ^ 2].unk1_0 = 0;
+        FreeSpriteTilesByTag(0x27F9);
+        FreeSpritePaletteByTag(0x27F9);
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            m4aMPlayContinue(&gMPlay_BGM);
+        else
+            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        ewram17810[gUnknown_02024A60].unk9 = 3;
+        gUnknown_03004330[gUnknown_02024A60] = sub_8032C4C;
+    }
+}
+
+void sub_8032E2C(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_3 && !ewram17810[gUnknown_02024A60].unk0_7)
+        sub_8141828(gUnknown_02024A60, &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]]);
+    if (!ewram17810[gUnknown_02024A60 ^ 2].unk0_3 && !ewram17810[gUnknown_02024A60 ^ 2].unk0_7)
+        sub_8141828(gUnknown_02024A60 ^ 2, &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60 ^ 2]]);
+    if (!ewram17810[gUnknown_02024A60].unk0_3 && !ewram17810[gUnknown_02024A60 ^ 2].unk0_3)
+    {
+        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        {
+            DestroySprite(&gSprites[gUnknown_0300434C[gUnknown_02024A60 ^ 2]]);
+            sub_8045A5C(
+              gUnknown_03004340[gUnknown_02024A60 ^ 2],
+              &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60 ^ 2]],
+              0);
+            sub_804777C(gUnknown_02024A60 ^ 2);
+            sub_8043DFC(gUnknown_03004340[gUnknown_02024A60 ^ 2]);
+            sub_8032984(
+              gUnknown_02024A60 ^ 2,
+              GetMonData(&gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60 ^ 2]], MON_DATA_SPECIES));
+        }
+        DestroySprite(&gSprites[gUnknown_0300434C[gUnknown_02024A60]]);
+        sub_8045A5C(
+          gUnknown_03004340[gUnknown_02024A60],
+          &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]],
+          0);
+        sub_804777C(gUnknown_02024A60);
+        sub_8043DFC(gUnknown_03004340[gUnknown_02024A60]);
+        sub_8032984(
+          gUnknown_02024A60,
+          GetMonData(&gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_SPECIES));
+
+        ewram17840.unk9_0 = 0;
+        gUnknown_03004330[gUnknown_02024A60] = sub_8032C88;
+    }
+}
+
+void sub_8033018(void)
+{
+    if (gSprites[gUnknown_02024BE0[gUnknown_02024A60]].animEnded == TRUE
+     && gSprites[gUnknown_02024BE0[gUnknown_02024A60]].pos2.x == 0)
+    {
+        if (!ewram17810[gUnknown_02024A60].unk0_7)
+        {
+            sub_8141828(gUnknown_02024A60, &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]]);
+            return;
+        }
+        if (ewram17810[gUnknown_02024A60].unk1_0)
+        {
+            ewram17810[gUnknown_02024A60].unk0_7 = 0;
+            ewram17810[gUnknown_02024A60].unk1_0 = 0;
+            FreeSpriteTilesByTag(0x27F9);
+            FreeSpritePaletteByTag(0x27F9);
+            sub_80334EC();
+            return;
+        }
+    }
+}
+
+void sub_80330C8(void)
+{
+    s16 r4 = sub_8045C78(gUnknown_02024A60, gUnknown_03004340[gUnknown_02024A60], 0, 0);
+
+    sub_8043DFC(gUnknown_03004340[gUnknown_02024A60]);
+    if (r4 != -1)
+        sub_80440EC(gUnknown_03004340[gUnknown_02024A60], r4, 0);
+    else
+        sub_80334EC();
+}
+
+void sub_803311C(void)
+{
+    if (!gSprites[gUnknown_02024BE0[gUnknown_02024A60]].inUse)
+    {
+        sub_8043DB0(gUnknown_03004340[gUnknown_02024A60]);
+        sub_80334EC();
+    }
+}
+
+void sub_8033160(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_6)
+    {
+        FreeSpriteOamMatrix(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        DestroySprite(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]]);
+        sub_8032A08(gUnknown_02024A60);
+        sub_8043DB0(gUnknown_03004340[gUnknown_02024A60]);
+        sub_80334EC();
+    }
+}
+
+void sub_80331D0(void)
+{
+    if (gUnknown_03004210.state == 0)
+        sub_80334EC();
+}
+
+void bx_blink_t7(void)
+{
+    u8 spriteId = gUnknown_02024BE0[gUnknown_02024A60];
+
+    if (gSprites[spriteId].data1 == 32)
+    {
+        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].invisible = FALSE;
+        gUnknown_02024E6D = 0;
+        sub_80334EC();
+    }
+    else
+    {
+        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+            gSprites[spriteId].invisible ^= 1;
+        gSprites[spriteId].data1++;
+    }
+}
+
+void sub_8033264(void)
+{
+    if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy)
+    {
+        if (ewram17800[gUnknown_02024A60].unk0_2)
+            move_anim_start_t4(gUnknown_02024A60, gUnknown_02024A60, gUnknown_02024A60, 6);
+        gUnknown_03004330[gUnknown_02024A60] = sub_80332D0;
+    }
+}
+
+void sub_80332D0(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_6)
+    {
+        CreateTask(c3_0802FDF4, 10);
+        sub_80334EC();
+    }
+}
+
+void sub_8033308(void)
+{
+    if (ewram17810[gUnknown_02024A60].unk1_0)
+    {
+        ewram17810[gUnknown_02024A60].unk0_7 = 0;
+        ewram17810[gUnknown_02024A60].unk1_0 = 0;
+        FreeSpriteTilesByTag(0x27F9);
+        FreeSpritePaletteByTag(0x27F9);
+        StartSpriteAnim(&gSprites[gUnknown_02024BE0[gUnknown_02024A60]], 0);
+        sub_8045A5C(
+          gUnknown_03004340[gUnknown_02024A60],
+          &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]],
+          0);
+        sub_804777C(gUnknown_02024A60);
+        sub_8043DFC(gUnknown_03004340[gUnknown_02024A60]);
+        sub_8031F88(gUnknown_02024A60);
+        gUnknown_03004330[gUnknown_02024A60] = sub_8033264;
+    }
+}
+
+void sub_80333D4(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_3 && !ewram17810[gUnknown_02024A60].unk0_7)
+        sub_8141828(gUnknown_02024A60, &gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]]);
+    if (gSprites[gUnknown_0300434C[gUnknown_02024A60]].callback == SpriteCallbackDummy
+     && !ewram17810[gUnknown_02024A60].unk0_3)
+    {
+        DestroySprite(&gSprites[gUnknown_0300434C[gUnknown_02024A60]]);
+        sub_8032984(gUnknown_02024A60, GetMonData(&gEnemyParty[gUnknown_02024A6A[gUnknown_02024A60]], MON_DATA_SPECIES));
+        gUnknown_03004330[gUnknown_02024A60] = sub_8033308;
+    }
+}
+
+void sub_8033494(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_4)
+        sub_80334EC();
+}
+
+void sub_80334C0(void)
+{
+    if (!ewram17810[gUnknown_02024A60].unk0_5)
+        sub_80334EC();
+}
+
+void sub_80334EC(void)
+{
+    gUnknown_03004330[gUnknown_02024A60] = sub_8032AFC;
+    gUnknown_02024A64 &= ~gBitTable[gUnknown_02024A60];
 }

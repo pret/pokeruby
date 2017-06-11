@@ -169,7 +169,7 @@ struct Struct2017840
 {
     u16 unk0;
     u8 filler2[7];
-    u8 unk9;
+    u8 unk9_0:1;
 };
 
 extern struct UnknownStruct1 unk_2016A00;

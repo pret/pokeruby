@@ -35,14 +35,6 @@ struct UnknownStruct5
     u8 unk0_7:1;
 };
 
-/*
-struct UnknownStruct6
-{
-    u8 filler0[9];
-    u8 unk9;
-};
-*/
-
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 
@@ -1489,7 +1481,7 @@ void sub_8120588(void)
     gTasks[taskId].data[0] = gUnknown_02024A60;
     if (ewram17810[gUnknown_02024A60].unk0_0)
         gTasks[gUnknown_02024E68[gUnknown_02024A60]].func = sub_8044CA0;
-    ewram17840.unk9 |= 1;
+    ewram17840.unk9_0 = 1;
     gUnknown_03004330[gUnknown_02024A60] = nullsub_74;
 }
 
