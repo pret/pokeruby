@@ -1,9 +1,9 @@
 #include "global.h"
 #include "pokemon.h"
 
-#define UNK_201606C_ARRAY (unk_2000000 + 0x1606C) // lazy define but whatever.
+extern u8 ewram[];
 
-extern u8 unk_2000000[];
+#define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
 extern struct PokemonStorage gPokemonStorage;
 extern u8 IsLinkDoubleBattle(void);
@@ -131,5 +131,43 @@ void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
         }
         for (i = 0; i <= 2; i++)
             arg[i] = (temp[i << 1] << 4) | temp[(i << 1) + 1];
+    }
+}
+
+void sub_8094B6C(u8 a, u8 b, u8 c)
+{
+    s32 i;
+    s32 j;
+    u8 temp[6];
+    u8 r3;
+    u8 r7 = 0;
+
+    if (IsLinkDoubleBattle())
+    {
+        u8 *arr = ewram + 0x1606C + a * 3;
+
+        for (i = 0, j = 0; i < 3; i++)
+        {
+            temp[j++] = arr[i] >> 4;
+            temp[j++] = arr[i] & 0xF;
+        }
+        r3 = temp[c];
+        for (i = 0; i < 6; i++)
+        {
+            if (temp[i] == b)
+            {
+                r7 = temp[i];
+                temp[i] = r3;
+                break;
+            }
+        }
+        if (i != 6)
+        {
+            temp[c] = r7;
+
+            arr[0] = (temp[0] << 4) | temp[1];
+            arr[1] = (temp[2] << 4) | temp[3];
+            arr[2] = (temp[4] << 4) | temp[5];
+        }
     }
 }
