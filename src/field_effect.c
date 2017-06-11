@@ -2085,17 +2085,18 @@ void sub_80881C0(struct Task *task)
     task->data[0]++;
 }
 
-#ifdef NONMATCHING
 void sub_8088228(struct Task *task)
 {
     s16 v0;
     s16 v2;
     s16 v3;
     task->data[5] -= 16;
-    // The order in which registers are loaded is incorrect.
-    v0 = ((u16)task->data[1] >> 8) - 0x10;
-    v2 = ((u16)task->data[2] >> 8) - 2;
-    v3 = ((u16)task->data[2] & 0xff) + 2;
+    v0 = ((u16)task->data[1] >> 8);
+    v2 = ((u16)task->data[2] >> 8);
+    v3 = ((u16)task->data[2] & 0xff);
+    v0 -= 16;
+    v2 -= 2;
+    v3 += 2;
     if (v0 < 0)
     {
         v0 = 0;
@@ -2116,103 +2117,25 @@ void sub_8088228(struct Task *task)
         task->data[0]++;
     }
 }
-#else
-__attribute__((naked))
-void sub_8088228(struct Task *task)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tadds r3, r0, 0\n"
-                "\tldrh r0, [r3, 0x12]\n"
-                "\tsubs r0, 0x10\n"
-                "\tstrh r0, [r3, 0x12]\n"
-                "\tldrh r6, [r3, 0xA]\n"
-                "\tldrh r2, [r3, 0xC]\n"
-                "\tmovs r7, 0xFF\n"
-                "\tlsrs r1, r6, 8\n"
-                "\tsubs r1, 0x10\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r0, r2, 8\n"
-                "\tsubs r0, 0x2\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r4, r0, 16\n"
-                "\tadds r0, r7, 0\n"
-                "\tands r0, r2\n"
-                "\tadds r5, r0, 0x2\n"
-                "\tlsrs r2, r1, 16\n"
-                "\tcmp r1, 0\n"
-                "\tbge _08088254\n"
-                "\tmovs r2, 0\n"
-                "_08088254:\n"
-                "\tlsls r0, r4, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x27\n"
-                "\tbgt _0808825E\n"
-                "\tmovs r4, 0x28\n"
-                "_0808825E:\n"
-                "\tcmp r5, 0x78\n"
-                "\tble _08088264\n"
-                "\tmovs r5, 0x78\n"
-                "_08088264:\n"
-                "\tlsls r2, 16\n"
-                "\tasrs r2, 16\n"
-                "\tlsls r1, r2, 8\n"
-                "\tadds r0, r7, 0\n"
-                "\tands r0, r6\n"
-                "\torrs r1, r0\n"
-                "\tstrh r1, [r3, 0xA]\n"
-                "\tlsls r0, r4, 16\n"
-                "\tasrs r4, r0, 16\n"
-                "\tlsls r0, r4, 8\n"
-                "\tadds r1, r5, 0\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r3, 0xC]\n"
-                "\tcmp r2, 0\n"
-                "\tbne _080882A4\n"
-                "\tcmp r4, 0x28\n"
-                "\tbne _080882A4\n"
-                "\tcmp r1, 0x78\n"
-                "\tbne _080882A4\n"
-                "\tldr r2, _080882AC @ =gSprites\n"
-                "\tmovs r0, 0x26\n"
-                "\tldrsh r1, [r3, r0]\n"
-                "\tlsls r0, r1, 4\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r2, 0x1C\n"
-                "\tadds r0, r2\n"
-                "\tldr r1, _080882B0 @ =sub_8088890\n"
-                "\tstr r1, [r0]\n"
-                "\tldrh r0, [r3, 0x8]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x8]\n"
-                "_080882A4:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080882AC: .4byte gSprites\n"
-                "_080882B0: .4byte sub_8088890");
-}
-#endif
 
 void sub_80882B4(struct Task *task)
 {
-    task->data[5] -= 0x10;
+    task->data[5] -= 16;
     if (gSprites[task->data[15]].data7)
     {
         task->data[0]++;
     }
 }
 
-#ifdef NONMATCHING
 void sub_80882E4(struct Task *task)
 {
     s16 v2;
     s16 v3;
-    task->data[5] -= 0x10;
-    // The order in which registers are loaded is incorrect.
-    v2 = (task->data[2] >> 8) + 6;
-    v3 = (task->data[2] & 0xff) - 6;
+    task->data[5] -= 16;
+    v2 = (task->data[2] >> 8);
+    v3 = (task->data[2] & 0xff);
+    v2 += 6;
+    v3 -= 6;
     if (v2 > 0x50)
     {
         v2 = 0x50;
@@ -2227,57 +2150,6 @@ void sub_80882E4(struct Task *task)
         task->data[0]++;
     }
 }
-#else
-__attribute__((naked))
-void sub_80882E4(struct Task *task)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tadds r3, r0, 0\n"
-                "\tldrh r0, [r3, 0x12]\n"
-                "\tsubs r0, 0x10\n"
-                "\tstrh r0, [r3, 0x12]\n"
-                "\tldrh r2, [r3, 0xC]\n"
-                "\tlsls r1, r2, 16\n"
-                "\tmovs r0, 0xFF\n"
-                "\tasrs r1, 24\n"
-                "\tadds r1, 0x6\n"
-                "\tlsls r1, 16\n"
-                "\tands r0, r2\n"
-                "\tsubs r0, 0x6\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r2, r0, 16\n"
-                "\tlsrs r4, r1, 16\n"
-                "\tasrs r1, 16\n"
-                "\tcmp r1, 0x50\n"
-                "\tble _0808830C\n"
-                "\tmovs r4, 0x50\n"
-                "_0808830C:\n"
-                "\tlsls r0, r2, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x50\n"
-                "\tbgt _08088316\n"
-                "\tmovs r2, 0x51\n"
-                "_08088316:\n"
-                "\tlsls r0, r4, 16\n"
-                "\tasrs r0, 16\n"
-                "\tlsls r1, r0, 8\n"
-                "\tlsls r2, 16\n"
-                "\tasrs r2, 16\n"
-                "\torrs r1, r2\n"
-                "\tstrh r1, [r3, 0xC]\n"
-                "\tcmp r0, 0x50\n"
-                "\tbne _08088332\n"
-                "\tcmp r2, 0x51\n"
-                "\tbne _08088332\n"
-                "\tldrh r0, [r3, 0x8]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x8]\n"
-                "_08088332:\n"
-                "\tpop {r4}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
-}
-#endif
 
 void sub_8088338(struct Task *task)
 {
