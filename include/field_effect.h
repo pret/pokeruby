@@ -106,4 +106,27 @@ void FieldEffectActiveListRemove(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);
 void sub_807DE38(u8 index);
 
+void SpriteCB_PokeballGlow(struct Sprite *);
+void SpriteCB_PokecenterMonitor(struct Sprite *);
+void SpriteCB_HallOfFameMonitor(struct Sprite *);
+
+void PokecenterHealEffect_0(struct Task *);
+void PokecenterHealEffect_1(struct Task *);
+void PokecenterHealEffect_2(struct Task *);
+void PokecenterHealEffect_3(struct Task *);
+
+void HallOfFameRecordEffect_0(struct Task *);
+void HallOfFameRecordEffect_1(struct Task *);
+void HallOfFameRecordEffect_2(struct Task *);
+void HallOfFameRecordEffect_3(struct Task *);
+
+void PokeballGlowEffect_0(struct Sprite *);
+void PokeballGlowEffect_1(struct Sprite *);
+void PokeballGlowEffect_2(struct Sprite *);
+void PokeballGlowEffect_3(struct Sprite *);
+void PokeballGlowEffect_4(struct Sprite *);
+void PokeballGlowEffect_5(struct Sprite *);
+void PokeballGlowEffect_6(struct Sprite *);
+void PokeballGlowEffect_7(struct Sprite *);
+
 #endif // GUARD_FIELD_EFFECT_H

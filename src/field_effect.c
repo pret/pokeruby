@@ -7,6 +7,7 @@
 #include "field_weather.h"
 #include "decompress.h"
 #include "sprite.h"
+#include "menu.h"
 #include "palette.h"
 #include "text.h"
 #include "rom4.h"
@@ -2012,6 +2013,13 @@ void sub_8087FDC(struct Task *task)
 void sub_8088120(u8);
 void sub_808847C(u8);
 u8 sub_8088830(u32, u32, u32);
+extern const void (*gUnknown_0839F3AC[7])(struct Task *);
+extern const void (*gUnknown_0839F3C8[7])(struct Task *);
+extern const u32 gFieldMoveStreaksTiles[];
+extern const u16 gFieldMoveStreaksPalette[16];
+void sub_80883DC(void);
+void sub_808843C(u16);
+void sub_8088890(struct Sprite *);
 
 bool8 FldEff_FieldMoveShowMon(void)
 {
@@ -2039,4 +2047,276 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     return FALSE;
+}
+
+void sub_8088120(u8 taskId)
+{
+    gUnknown_0839F3AC[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_8088150(struct Task *task)
+{
+    task->data[11] = REG_WININ;
+    task->data[12] = REG_WINOUT;
+    StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
+    task->data[1] = 0xf0f1;
+    task->data[2] = 0x5051;
+    task->data[3] = 0x3f;
+    task->data[4] = 0x3e;
+    REG_WIN0H = task->data[1];
+    REG_WIN0V = task->data[2];
+    REG_WININ = task->data[3];
+    REG_WINOUT = task->data[4];
+    SetVBlankCallback(sub_80883DC);
+    task->data[0]++;
+}
+
+void sub_80881C0(struct Task *task)
+{
+    u32 zero;
+    u16 offset;
+    u16 delta;
+    offset = ((REG_BG0CNT >> 2) << 14);
+    delta = ((REG_BG0CNT >> 8) << 11);
+    CpuSet(gFieldMoveStreaksTiles, (void *)(VRAM + offset), 0x100);
+    zero = 0;
+    CpuSet(&zero, (void *)(VRAM + delta), 0x5000200);
+    LoadPalette(gFieldMoveStreaksPalette, 0xf0, 0x20);
+    sub_808843C(delta);
+    task->data[0]++;
+}
+
+#ifdef NONMATCHING
+void sub_8088228(struct Task *task)
+{
+    s16 v0;
+    s16 v2;
+    s16 v3;
+    task->data[5] -= 16;
+    // The order in which registers are loaded is incorrect.
+    v0 = ((u16)task->data[1] >> 8) - 0x10;
+    v2 = ((u16)task->data[2] >> 8) - 2;
+    v3 = ((u16)task->data[2] & 0xff) + 2;
+    if (v0 < 0)
+    {
+        v0 = 0;
+    }
+    if (v2 < 0x28)
+    {
+        v2 = 0x28;
+    }
+    if (v3 > 0x78)
+    {
+        v3 = 0x78;
+    }
+    task->data[1] = (v0 << 8) | (task->data[1] & 0xff);
+    task->data[2] = (v2 << 8) | v3;
+    if (v0 == 0 && v2 == 0x28 && v3 == 0x78)
+    {
+        gSprites[task->data[15]].callback = sub_8088890;
+        task->data[0]++;
+    }
+}
+#else
+__attribute__((naked))
+void sub_8088228(struct Task *task)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tadds r3, r0, 0\n"
+                "\tldrh r0, [r3, 0x12]\n"
+                "\tsubs r0, 0x10\n"
+                "\tstrh r0, [r3, 0x12]\n"
+                "\tldrh r6, [r3, 0xA]\n"
+                "\tldrh r2, [r3, 0xC]\n"
+                "\tmovs r7, 0xFF\n"
+                "\tlsrs r1, r6, 8\n"
+                "\tsubs r1, 0x10\n"
+                "\tlsls r1, 16\n"
+                "\tlsrs r0, r2, 8\n"
+                "\tsubs r0, 0x2\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r4, r0, 16\n"
+                "\tadds r0, r7, 0\n"
+                "\tands r0, r2\n"
+                "\tadds r5, r0, 0x2\n"
+                "\tlsrs r2, r1, 16\n"
+                "\tcmp r1, 0\n"
+                "\tbge _08088254\n"
+                "\tmovs r2, 0\n"
+                "_08088254:\n"
+                "\tlsls r0, r4, 16\n"
+                "\tasrs r0, 16\n"
+                "\tcmp r0, 0x27\n"
+                "\tbgt _0808825E\n"
+                "\tmovs r4, 0x28\n"
+                "_0808825E:\n"
+                "\tcmp r5, 0x78\n"
+                "\tble _08088264\n"
+                "\tmovs r5, 0x78\n"
+                "_08088264:\n"
+                "\tlsls r2, 16\n"
+                "\tasrs r2, 16\n"
+                "\tlsls r1, r2, 8\n"
+                "\tadds r0, r7, 0\n"
+                "\tands r0, r6\n"
+                "\torrs r1, r0\n"
+                "\tstrh r1, [r3, 0xA]\n"
+                "\tlsls r0, r4, 16\n"
+                "\tasrs r4, r0, 16\n"
+                "\tlsls r0, r4, 8\n"
+                "\tadds r1, r5, 0\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3, 0xC]\n"
+                "\tcmp r2, 0\n"
+                "\tbne _080882A4\n"
+                "\tcmp r4, 0x28\n"
+                "\tbne _080882A4\n"
+                "\tcmp r1, 0x78\n"
+                "\tbne _080882A4\n"
+                "\tldr r2, _080882AC @ =gSprites\n"
+                "\tmovs r0, 0x26\n"
+                "\tldrsh r1, [r3, r0]\n"
+                "\tlsls r0, r1, 4\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r2, 0x1C\n"
+                "\tadds r0, r2\n"
+                "\tldr r1, _080882B0 @ =sub_8088890\n"
+                "\tstr r1, [r0]\n"
+                "\tldrh r0, [r3, 0x8]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r3, 0x8]\n"
+                "_080882A4:\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080882AC: .4byte gSprites\n"
+                "_080882B0: .4byte sub_8088890");
+}
+#endif
+
+void sub_80882B4(struct Task *task)
+{
+    task->data[5] -= 0x10;
+    if (gSprites[task->data[15]].data7)
+    {
+        task->data[0]++;
+    }
+}
+
+#ifdef NONMATCHING
+void sub_80882E4(struct Task *task)
+{
+    s16 v2;
+    s16 v3;
+    task->data[5] -= 0x10;
+    // The order in which registers are loaded is incorrect.
+    v2 = (task->data[2] >> 8) + 6;
+    v3 = (task->data[2] & 0xff) - 6;
+    if (v2 > 0x50)
+    {
+        v2 = 0x50;
+    }
+    if (v3 < 0x51)
+    {
+        v3 = 0x51;
+    }
+    task->data[2] = (v2 << 8) | v3;
+    if (v2 == 0x50 && v3 == 0x51)
+    {
+        task->data[0]++;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80882E4(struct Task *task)
+{
+    asm_unified("\tpush {r4,lr}\n"
+                "\tadds r3, r0, 0\n"
+                "\tldrh r0, [r3, 0x12]\n"
+                "\tsubs r0, 0x10\n"
+                "\tstrh r0, [r3, 0x12]\n"
+                "\tldrh r2, [r3, 0xC]\n"
+                "\tlsls r1, r2, 16\n"
+                "\tmovs r0, 0xFF\n"
+                "\tasrs r1, 24\n"
+                "\tadds r1, 0x6\n"
+                "\tlsls r1, 16\n"
+                "\tands r0, r2\n"
+                "\tsubs r0, 0x6\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r2, r0, 16\n"
+                "\tlsrs r4, r1, 16\n"
+                "\tasrs r1, 16\n"
+                "\tcmp r1, 0x50\n"
+                "\tble _0808830C\n"
+                "\tmovs r4, 0x50\n"
+                "_0808830C:\n"
+                "\tlsls r0, r2, 16\n"
+                "\tasrs r0, 16\n"
+                "\tcmp r0, 0x50\n"
+                "\tbgt _08088316\n"
+                "\tmovs r2, 0x51\n"
+                "_08088316:\n"
+                "\tlsls r0, r4, 16\n"
+                "\tasrs r0, 16\n"
+                "\tlsls r1, r0, 8\n"
+                "\tlsls r2, 16\n"
+                "\tasrs r2, 16\n"
+                "\torrs r1, r2\n"
+                "\tstrh r1, [r3, 0xC]\n"
+                "\tcmp r0, 0x50\n"
+                "\tbne _08088332\n"
+                "\tcmp r2, 0x51\n"
+                "\tbne _08088332\n"
+                "\tldrh r0, [r3, 0x8]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r3, 0x8]\n"
+                "_08088332:\n"
+                "\tpop {r4}\n"
+                "\tpop {r0}\n"
+                "\tbx r0");
+}
+#endif
+
+void sub_8088338(struct Task *task)
+{
+    u32 zero;
+    u16 bg0cnt;
+    bg0cnt = (REG_BG0CNT >> 8) << 11;
+    zero = 0;
+    CpuSet(&zero, (void *)VRAM + bg0cnt, 0x5000200);
+    task->data[1] = 0xf1;
+    task->data[2] = 0xa1;
+    task->data[3] = task->data[11];
+    task->data[4] = task->data[12];
+    task->data[0]++;
+}
+
+void sub_8088380(struct Task *task)
+{
+    IntrCallback callback;
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    SetVBlankCallback(callback);
+    SetUpWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    FreeResourcesAndDestroySprite(&gSprites[task->data[15]]);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+    DestroyTask(FindTaskIdByFunc(sub_8088120));
+}
+
+void sub_80883DC(void)
+{
+    struct Task *task;
+    IntrCallback callback;
+    task = &gTasks[FindTaskIdByFunc(sub_8088120)];
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    callback();
+    REG_WIN0H = task->data[1];
+    REG_WIN0V = task->data[2];
+    REG_WININ = task->data[3];
+    REG_WINOUT = task->data[4];
+    REG_BG0HOFS = task->data[5];
+    REG_BG0VOFS = task->data[6];
 }
