@@ -2015,9 +2015,12 @@ void sub_808847C(u8);
 u8 sub_8088830(u32, u32, u32);
 extern const void (*gUnknown_0839F3AC[7])(struct Task *);
 extern const void (*gUnknown_0839F3C8[7])(struct Task *);
-extern const u32 gFieldMoveStreaksTiles[];
+extern const u32 gFieldMoveStreaksTiles[0x200];
 extern const u16 gFieldMoveStreaksPalette[16];
 extern const u16 gFieldMoveStreaksTilemap[0x140];
+extern const u32 gDarknessFieldMoveStreaksTiles[0x80];
+extern const u16 gDarknessFieldMoveStreaksPalette[16];
+extern const u16 gDarknessFieldMoveStreaksTilemap[0x140];
 void sub_80883DC(void);
 void sub_808843C(u16);
 void sub_8088890(struct Sprite *);
@@ -2199,4 +2202,108 @@ void sub_808843C(u16 offs)
     {
         *dest = gFieldMoveStreaksTilemap[i] | 0xf000;
     }
+}
+
+void sub_80886B0(void);
+bool8 sub_8088708(struct Task *);
+void sub_80886F8(struct Task *);
+bool8 sub_80887C0(struct Task *);
+
+void sub_808847C(u8 taskId)
+{
+    gUnknown_0839F3C8[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_80884AC(struct Task *task)
+{
+    REG_BG0HOFS = task->data[1];
+    REG_BG0VOFS = task->data[2];
+    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
+    SetVBlankCallback(sub_80886B0);
+    task->data[0]++;
+}
+
+void sub_80884E8(struct Task *task)
+{
+    u16 offset;
+    u16 delta;
+    offset = ((REG_BG0CNT >> 2) << 14);
+    delta = ((REG_BG0CNT >> 8) << 11);
+    task->data[12] = delta;
+    CpuCopy16(gDarknessFieldMoveStreaksTiles, (void *)(VRAM + offset), 0x80);
+    CpuFill32(0, (void *)(VRAM + delta), 0x800);
+    LoadPalette(gDarknessFieldMoveStreaksPalette, 0xf0, 0x20);
+    task->data[0]++;
+}
+
+void sub_8088554(struct Task *task)
+{
+    if (sub_8088708(task))
+    {
+        REG_WIN1H = 0x00f0;
+        REG_WIN1V = 0x2878;
+        gSprites[task->data[15]].callback = sub_8088890;
+        task->data[0]++;
+    }
+    sub_80886F8(task);
+}
+
+void sub_80885A8(struct Task *task)
+{
+    sub_80886F8(task);
+    if (gSprites[task->data[15]].data7)
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_80885D8(struct Task *task)
+{
+    sub_80886F8(task);
+    task->data[3] = task->data[1] & 7;
+    task->data[4] = 0;
+    REG_WIN1H = 0xffff;
+    REG_WIN1V = 0xffff;
+    task->data[0]++;
+}
+
+void sub_808860C(struct Task *task)
+{
+    sub_80886F8(task);
+    if (sub_80887C0(task))
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_808862C(struct Task *task)
+{
+    IntrCallback intrCallback;
+    u16 bg0cnt;
+    bg0cnt = (REG_BG0CNT >> 8) << 11;
+    CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    SetVBlankCallback(intrCallback);
+    SetUpWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    FreeResourcesAndDestroySprite(&gSprites[task->data[15]]);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+    DestroyTask(FindTaskIdByFunc(sub_808847C));
+}
+
+void sub_80886B0(void)
+{
+    IntrCallback intrCallback;
+    struct Task *task;
+    task = &gTasks[FindTaskIdByFunc(sub_808847C)];
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    intrCallback();
+    REG_BG0HOFS = task->data[1];
+    REG_BG0VOFS = task->data[2];
+}
+
+void sub_80886F8(struct Task *task)
+{
+    task->data[1] -= 16;
+    task->data[3] += 16;
 }
