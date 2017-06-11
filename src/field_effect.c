@@ -2017,6 +2017,7 @@ extern const void (*gUnknown_0839F3AC[7])(struct Task *);
 extern const void (*gUnknown_0839F3C8[7])(struct Task *);
 extern const u32 gFieldMoveStreaksTiles[];
 extern const u16 gFieldMoveStreaksPalette[16];
+extern const u16 gFieldMoveStreaksTilemap[0x140];
 void sub_80883DC(void);
 void sub_808843C(u16);
 void sub_8088890(struct Sprite *);
@@ -2073,14 +2074,12 @@ void sub_8088150(struct Task *task)
 
 void sub_80881C0(struct Task *task)
 {
-    u32 zero;
     u16 offset;
     u16 delta;
     offset = ((REG_BG0CNT >> 2) << 14);
     delta = ((REG_BG0CNT >> 8) << 11);
-    CpuSet(gFieldMoveStreaksTiles, (void *)(VRAM + offset), 0x100);
-    zero = 0;
-    CpuSet(&zero, (void *)(VRAM + delta), 0x5000200);
+    CpuCopy16(gFieldMoveStreaksTiles, (void *)(VRAM + offset), 0x200);
+    CpuFill32(0, (void *)(VRAM + delta), 0x800);
     LoadPalette(gFieldMoveStreaksPalette, 0xf0, 0x20);
     sub_808843C(delta);
     task->data[0]++;
@@ -2282,11 +2281,9 @@ void sub_80882E4(struct Task *task)
 
 void sub_8088338(struct Task *task)
 {
-    u32 zero;
     u16 bg0cnt;
     bg0cnt = (REG_BG0CNT >> 8) << 11;
-    zero = 0;
-    CpuSet(&zero, (void *)VRAM + bg0cnt, 0x5000200);
+    CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
     task->data[1] = 0xf1;
     task->data[2] = 0xa1;
     task->data[3] = task->data[11];
@@ -2319,4 +2316,15 @@ void sub_80883DC(void)
     REG_WINOUT = task->data[4];
     REG_BG0HOFS = task->data[5];
     REG_BG0VOFS = task->data[6];
+}
+
+void sub_808843C(u16 offs)
+{
+    u16 i;
+    u16 *dest;
+    dest = (u16 *)(VRAM + 0x140 + offs);
+    for (i=0; i<0x140; i++, dest++)
+    {
+        *dest = gFieldMoveStreaksTilemap[i] | 0xf000;
+    }
 }

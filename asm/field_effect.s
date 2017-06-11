@@ -6,40 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_808843C
-sub_808843C: @ 808843C
-	push {r4,r5,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, _08088470 @ =0x06000140
-	adds r2, r0, r1
-	movs r1, 0
-	ldr r5, _08088474 @ =gFieldMoveStreaksTilemap
-	movs r0, 0xF0
-	lsls r0, 8
-	adds r4, r0, 0
-	ldr r3, _08088478 @ =0x0000013f
-_08088452:
-	lsls r0, r1, 1
-	adds r0, r5
-	ldrh r0, [r0]
-	orrs r0, r4
-	strh r0, [r2]
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	adds r2, 0x2
-	cmp r1, r3
-	bls _08088452
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08088470: .4byte 0x06000140
-_08088474: .4byte gFieldMoveStreaksTilemap
-_08088478: .4byte 0x0000013f
-	thumb_func_end sub_808843C
-
 	thumb_func_start sub_808847C
 sub_808847C: @ 808847C
 	push {lr}
