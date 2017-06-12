@@ -3784,7 +3784,7 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
     bool8 outputted = FALSE;
     u8 result;
 
-    result = a / 0x3E8;
+    result = a / 1000;
     if (result == 0)
     {
         str[0] = CHAR_SPACE;
@@ -3796,7 +3796,7 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    result = (a % 0x3E8) / 100;
+    result = (a % 1000) / 100;
     if (result == 0 && !outputted)
     {
         str[1] = CHAR_SPACE;
@@ -3808,9 +3808,9 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
         outputted = TRUE;
     }
 
-    str[2] = CHAR_0 + ((a % 0x3E8) % 100) / 10;
+    str[2] = CHAR_0 + ((a % 1000) % 100) / 10;
     str[3] = CHAR_PERIOD;
-    str[4] = CHAR_0 + ((a % 0x3E8) % 100) % 10;
+    str[4] = CHAR_0 + ((a % 1000) % 100) % 10;
     str[5] = EOS;
     MenuPrint(str, left, top);
 }
