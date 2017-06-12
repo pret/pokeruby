@@ -2639,3 +2639,234 @@ void sub_8088BC4(struct Sprite *sprite)
         FieldEffectStop(sprite, FLDEFF_NPCFLY_OUT);
     }
 }
+
+void sub_8088C70(u8);
+extern const void (*gUnknown_0839F3F8[9])(struct Task *);
+extern void sub_8127EFC(u8, u8);
+u8 sub_8088F60(void);
+bool8 sub_8088FA4(u8);
+void sub_8088FC0(u8);
+void sub_8088FFC(u8, u8);
+void sub_8089018(struct Sprite *);
+void sub_80890D8(struct Sprite *);
+extern const union AffineAnimCmd *gSpriteAffineAnimTable_0839F44C[];
+
+u8 FldEff_UseFly(void)
+{
+    u8 taskId;
+    taskId = CreateTask(sub_8088C70, 0xfe);
+    gTasks[taskId].data[1] = gUnknown_0202FF84[0];
+    return 0;
+}
+
+void sub_8088C70(u8 taskId)
+{
+    gUnknown_0839F3F8[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_8088CA0(struct Task *task)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) || FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        task->data[15] = gPlayerAvatar.flags;
+        gPlayerAvatar.unk6 = 0x01;
+        SetPlayerAvatarStateMask(1);
+        sub_8059BF4();
+        FieldObjectSetSpecialAnim(mapObject, 0x39);
+        task->data[0]++;
+    }
+}
+
+void sub_8088CF8(struct Task *task)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        task->data[0]++;
+        gUnknown_0202FF84[0] = task->data[1];
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    }
+}
+
+void sub_8088D3C(struct Task *task)
+{
+    struct MapObject *mapObject;
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        if (task->data[15] & 0x08)
+        {
+            sub_8127ED0(mapObject->mapobj_unk_1A, 2);
+            sub_8127EFC(mapObject->mapobj_unk_1A, 0);
+        }
+        task->data[1] = sub_8088F60();
+        task->data[0]++;
+    }
+}
+
+void sub_8088D94(struct Task *task)
+{
+    if (sub_8088FA4(task->data[1]))
+    {
+        task->data[0]++;
+        task->data[2] = 16;
+        SetPlayerAvatarTransitionFlags(0x01);
+        FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], 0x02);
+    }
+}
+
+void sub_8088DD8(struct Task *task)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if ((task->data[2] == 0 || (--task->data[2]) == 0) && FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        task->data[0]++;
+        PlaySE(SE_W019);
+        sub_8088FC0(task->data[1]);
+    }
+}
+
+void sub_8088E2C(struct Task *task)
+{
+    struct MapObject *mapObject;
+    if ((++task->data[2]) >= 8)
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
+        StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
+        mapObject->mapobj_bit_12 = 1;
+        FieldObjectSetSpecialAnim(mapObject, 0x48);
+        if (task->data[15] & 0x08)
+        {
+            DestroySprite(&gSprites[mapObject->mapobj_unk_1A]);
+        }
+        task->data[0]++;
+        task->data[2] = 0;
+    }
+}
+
+void sub_8088EB4(struct Task *task)
+{
+    struct MapObject *mapObject;
+    if ((++task->data[2]) >= 10)
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+        mapObject->mapobj_bit_12 = 0;
+        mapObject->mapobj_bit_22 = 0;
+        sub_8088FFC(task->data[1], mapObject->spriteId);
+        CameraObjectReset2();
+        task->data[0]++;
+    }
+}
+
+void sub_8088F10(struct Task *task)
+{
+    if (sub_8088FA4(task->data[1]))
+    {
+        fade_8080918();
+        task->data[0]++;
+    }
+}
+
+void sub_8088F30(struct Task *task)
+{
+    if (!gPaletteFade.active)
+    {
+        FieldEffectActiveListRemove(FLDEFF_USE_FLY);
+        DestroyTask(FindTaskIdByFunc(sub_8088C70));
+    }
+}
+
+u8 sub_8088F60(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0xff, 0xb4, 0x1);
+    sprite = &gSprites[spriteId];
+    sprite->oam.paletteNum = 0;
+    sprite->oam.priority = 1;
+    sprite->callback = sub_8089018;
+    return spriteId;
+}
+
+u8 sub_8088FA4(u8 spriteId)
+{
+    return gSprites[spriteId].data7;
+}
+
+void sub_8088FC0(u8 spriteId)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[spriteId];
+    sprite->callback = sub_80890D8;
+    sprite->pos1.x = 0x78;
+    sprite->pos1.y = 0x00;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    memset(&sprite->data0, 0, 8 * sizeof(u16) /* zero all data cells */);
+    sprite->data6 = 0x40;
+}
+
+void sub_8088FFC(u8 a0, u8 a1)
+{
+    gSprites[a0].data6 = a1;
+}
+
+void sub_8089018(struct Sprite *sprite)
+{
+    if (sprite->data7 == 0)
+    {
+        if (sprite->data0 == 0)
+        {
+            sprite->oam.affineMode = 3;
+            sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
+            InitSpriteAffineAnim(sprite);
+            StartSpriteAffineAnim(sprite, 0);
+            sprite->pos1.x = 0x76;
+            sprite->pos1.y = -0x30;
+            sprite->data0++;
+            sprite->data1 = 0x40;
+            sprite->data2 = 0x100;
+        }
+        sprite->data1 += (sprite->data2 >> 8);
+        sprite->pos2.x = Cos(sprite->data1, 0x78);
+        sprite->pos2.y = Sin(sprite->data1, 0x78);
+        if (sprite->data2 < 0x800)
+        {
+            sprite->data2 += 0x60;
+        }
+        if (sprite->data1 > 0x81)
+        {
+            sprite->data7++;
+            sprite->oam.affineMode = 0;
+            FreeOamMatrix(sprite->oam.matrixNum);
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+        }
+    }
+}
+
+void sub_80890D8(struct Sprite *sprite)
+{
+    struct Sprite *sprite1;
+    sprite->pos2.x = Cos(sprite->data2, 0x8c);
+    sprite->pos2.y = Sin(sprite->data2, 0x48);
+    sprite->data2 = (sprite->data2 + 4) & 0xff;
+    if (sprite->data6 != 0x40)
+    {
+        sprite1 = &gSprites[sprite->data6];
+        sprite1->coordOffsetEnabled = 0;
+        sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
+        sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
+        sprite1->pos2.x = 0;
+        sprite1->pos2.y = 0;
+    }
+    if (sprite->data2 >= 0x80)
+    {
+        sprite->data7 = 1;
+    }
+}
