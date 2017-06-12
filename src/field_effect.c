@@ -2920,3 +2920,135 @@ void sub_8089230(u8 spriteId)
     sub_8088FC0(spriteId);
     gSprites[spriteId].callback = sub_808914C;
 }
+
+void sub_8089270(u8);
+extern const void (*gUnknown_0839F454[7])(struct Task *);
+extern const s16 gUnknown_0839F470[18];
+
+u8 FldEff_FlyIn(void)
+{
+    CreateTask(sub_8089270, 0xfe);
+    return 0;
+}
+
+void sub_8089270(u8 taskId)
+{
+    gUnknown_0839F454[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void sub_80892A0(struct Task *task)
+{
+    struct MapObject *mapObject;
+    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) || FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        task->data[0]++;
+        task->data[2] = 17;
+        task->data[15] = gPlayerAvatar.flags;
+        gPlayerAvatar.unk6 = 1;
+        SetPlayerAvatarStateMask(0x01);
+        if (task->data[15] & 0x08)
+        {
+            sub_8127ED0(mapObject->mapobj_unk_1A, 0);
+        }
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(0x3));
+        CameraObjectReset2();
+        FieldObjectTurn(mapObject, DIR_WEST);
+        StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
+        mapObject->mapobj_bit_13 = 0;
+        task->data[1] = sub_8088F60();
+        sub_8088FC0(task->data[1]);
+        sub_8088FFC(task->data[1], mapObject->spriteId);
+    }
+}
+
+void sub_8089354(struct Task *task)
+{
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    if (task->data[2] == 0 || (--task->data[2]) == 0)
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        sprite = &gSprites[mapObject->spriteId];
+        sub_8088FFC(task->data[1], 0x40);
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0]++;
+        task->data[2] = 0;
+    }
+}
+
+void sub_80893C0(struct Task *task)
+{
+    s16 unknown_0839F470[18];
+    struct Sprite *sprite;
+    memcpy(unknown_0839F470, gUnknown_0839F470, sizeof gUnknown_0839F470);
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.y = unknown_0839F470[task->data[2]];
+    if ((++task->data[2]) >= 18)
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_8089414(struct Task *task)
+{
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    if (sub_8088FA4(task->data[1]))
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        sprite = &gSprites[mapObject->spriteId];
+        mapObject->mapobj_bit_12 = 0;
+        sub_805C058(mapObject, mapObject->coords2.x, mapObject->coords2.y);
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sprite->coordOffsetEnabled = 1;
+        sub_8059BF4();
+        FieldObjectSetSpecialAnim(mapObject, 0x39);
+        task->data[0]++;
+    }
+}
+
+void sub_808948C(struct Task *task)
+{
+    if (FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gPlayerAvatar.mapObjectId]))
+    {
+        task->data[0]++;
+        sub_8089230(task->data[1]);
+    }
+}
+
+void sub_80894C4(struct Task *task)
+{
+    if (sub_8088FA4(task->data[1]))
+    {
+        DestroySprite(&gSprites[task->data[1]]);
+        task->data[0]++;
+        task->data[1] = 0x10;
+    }
+}
+
+void fishE(struct Task *task)
+{
+    u8 state;
+    struct MapObject *mapObject;
+    if ((--task->data[1]) == 0)
+    {
+        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        state = 0;
+        if (task->data[15] & 0x08)
+        {
+            state = 3;
+            sub_8127ED0(mapObject->mapobj_unk_1A, 1);
+        }
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(state));
+        FieldObjectTurn(mapObject, DIR_SOUTH);
+        gPlayerAvatar.flags = task->data[15];
+        gPlayerAvatar.unk6 = 0;
+        FieldEffectActiveListRemove(FLDEFF_FLY_IN);
+        DestroyTask(FindTaskIdByFunc(sub_8089270));
+    }
+}
