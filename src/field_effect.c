@@ -2602,3 +2602,40 @@ void sub_8088AF4(struct Task *task)
         DestroyTask(FindTaskIdByFunc(sub_8088954));
     }
 }
+
+void sub_8088BC4(struct Sprite *);
+
+u8 FldEff_NPCFlyOut(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
+    sprite = &gSprites[spriteId];
+    sprite->oam.paletteNum = 0;
+    sprite->oam.priority = 1;
+    sprite->callback = sub_8088BC4;
+    sprite->data1 = gUnknown_0202FF84[0];
+    PlaySE(SE_W019);
+    return spriteId;
+}
+
+void sub_8088BC4(struct Sprite *sprite)
+{
+    struct Sprite *npcSprite;
+    sprite->pos2.x = Cos(sprite->data2, 0x8c);
+    sprite->pos2.y = Sin(sprite->data2, 0x48);
+    sprite->data2 = (sprite->data2 + 4) & 0xff;
+    if (sprite->data0)
+    {
+        npcSprite = &gSprites[sprite->data1];
+        npcSprite->coordOffsetEnabled = 0;
+        npcSprite->pos1.x = sprite->pos1.x + sprite->pos2.x;
+        npcSprite->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
+        npcSprite->pos2.x = 0;
+        npcSprite->pos2.y = 0;
+    }
+    if (sprite->data2 >= 0x80)
+    {
+        FieldEffectStop(sprite, FLDEFF_NPCFLY_OUT);
+    }
+}
