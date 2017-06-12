@@ -2998,7 +2998,7 @@ void sub_8090750(u8 taskId)
     u8 spriteId;
     u16 dexNum = gTasks[taskId].data[1];
     u16 i;
-    
+
     switch (gTasks[taskId].data[0])
     {
     case 0:
@@ -3421,7 +3421,7 @@ void sub_8090A3C(u8 taskId)
         if (gTasks[taskId].data[4] == 0)
         {
             u16 r4 = gTasks[taskId].data[1];
-            
+
             MenuZeroFillWindowRect(2, 13, 27, 19);
             MenuPrint(gPokedexEntries[r4].descriptionPage2, 2, 13);
             (*(u16 *)(VRAM + 0x7ACA))++;
@@ -3453,7 +3453,7 @@ void sub_8090B8C(u8 taskId)
         u32 personality;
         u8 paletteNum;
         const u16 *palette;
-        
+
         REG_DISPCNT = 0x1940;
         CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
         sub_800D74C();
@@ -3473,7 +3473,7 @@ void sub_8090C28(struct Sprite *sprite)
         sprite->pos1.x += 2;
     if (sprite->pos1.x > 0x78)
         sprite->pos1.x -= 2;
-    
+
     if (sprite->pos1.y < 0x50)
         sprite->pos1.y += 1;
     if (sprite->pos1.y > 0x50)
@@ -3529,7 +3529,7 @@ s8 sub_8090D90(u16 a, u8 b)
     u8 bit;
     u8 mask;
     s8 retVal;
-    
+
     a--;
     index = a / 8;
     bit = a % 8;
@@ -3585,7 +3585,7 @@ u16 GetNationalPokedexCount(u8 a)
 {
     u16 count = 0;
     u16 i;
-    
+
     for (i = 0; i < 386; i++)
     {
         switch (a)
@@ -3607,7 +3607,7 @@ u16 GetHoennPokedexCount(u8 a)
 {
     u16 count = 0;
     u16 i;
-    
+
     for (i = 0; i < 202; i++)
     {
         switch (a)
@@ -3628,7 +3628,7 @@ u16 GetHoennPokedexCount(u8 a)
 bool8 sub_8090FC0(void)
 {
     u16 i;
-    
+
     for (i = 0; i < 200; i++)
     {
         if (sub_8090D90(HoennToNationalOrder(i + 1), 1) == 0)
@@ -3640,7 +3640,7 @@ bool8 sub_8090FC0(void)
 u16 sub_8090FF4(void)
 {
     u16 i;
-    
+
     for (i = 0; i < 150; i++)
     {
         if (sub_8090D90(i + 1, 1) == 0)
@@ -3701,7 +3701,7 @@ void sub_8091060(u16 a)
 void sub_8091154(u16 order, u8 b, u8 c)
 {
     u8 str[4];
-    
+
     str[0] = 0xA1 + order / 100;
     str[1] = 0xA1 + (order % 100) / 10;
     str[2] = 0xA1 + (order % 100) % 10;
@@ -3713,7 +3713,7 @@ u8 sub_80911C8(u16 num, u8 b, u8 c)
 {
     u8 str[11];
     u8 i;
-    
+
     for (i = 0; i < 11; i++)
         str[i] = EOS;
     num = NationalPokedexNumToSpecies(num);
@@ -3737,7 +3737,7 @@ u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
     u8 str[40];  // Not exactly sure how long this needs to be
     u8 *end;
     u8 i;
-    
+
     end = StringCopy(str, gUnknown_083B5558);
     str[2] = d;
     num = NationalPokedexNumToSpecies(num);
@@ -3757,19 +3757,60 @@ u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
     return i;
 }
 
-void sub_8091304(u8 *name, u8 b, u8 c)
+void sub_8091304(u8 *name, u8 left, u8 top)
 {
     u8 str[32];  // Not exactly sure how long this needs to be
     u8 i;
+#if ENGLISH
     u8 j;
-    
+#endif
+
     for (i = 0; name[i] != EOS && i < 11; i++)
         str[i] = name[i];
+#if ENGLISH
     for (j = 0; gDexText_UnknownPoke[j] == 0xAC || gDexText_UnknownPoke[j] == 0; j++)
         ;
     j--;
     while (gDexText_UnknownPoke[j] != EOS)
         str[i++] = gDexText_UnknownPoke[j++];
+#endif
     str[i] = EOS;
-    sub_8072B80(str, b, c, gDexText_UnknownPoke);
+    sub_8072B80(str, left, top, gDexText_UnknownPoke);
+}
+
+void unref_sub_80913A4(u16 a, u8 left, u8 top)
+{
+    u8 str[6];
+    bool8 outputted = FALSE;
+    u8 result;
+
+    result = a / 0x3E8;
+    if (result == 0)
+    {
+        str[0] = CHAR_SPACE;
+        outputted = FALSE;
+    }
+    else
+    {
+        str[0] = CHAR_0 + result;
+        outputted = TRUE;
+    }
+
+    result = (a % 0x3E8) / 100;
+    if (result == 0 && !outputted)
+    {
+        str[1] = CHAR_SPACE;
+        outputted = FALSE;
+    }
+    else
+    {
+        str[1] = CHAR_0 + result;
+        outputted = TRUE;
+    }
+
+    str[2] = CHAR_0 + ((a % 0x3E8) % 100) / 10;
+    str[3] = CHAR_PERIOD;
+    str[4] = CHAR_0 + ((a % 0x3E8) % 100) % 10;
+    str[5] = EOS;
+    MenuPrint(str, left, top);
 }

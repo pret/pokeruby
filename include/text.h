@@ -2,6 +2,7 @@
 #define GUARD_TEXT_H
 
 #define CHAR_SPACE          0x00
+#define CHAR_0              0xA1
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_PERIOD         0xAD
 #define CHAR_HYPHEN         0xAE
