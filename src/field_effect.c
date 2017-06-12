@@ -2870,3 +2870,53 @@ void sub_80890D8(struct Sprite *sprite)
         sprite->data7 = 1;
     }
 }
+
+void sub_808914C(struct Sprite *sprite)
+{
+    if (sprite->data7 == 0)
+    {
+        if (sprite->data0 == 0)
+        {
+            sprite->oam.affineMode = 3;
+            sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
+            InitSpriteAffineAnim(sprite);
+            StartSpriteAffineAnim(sprite, 1);
+            sprite->pos1.x = 0x5e;
+            sprite->pos1.y = -0x20;
+            sprite->data0++;
+            sprite->data1 = 0xf0;
+            sprite->data2 = 0x800;
+            sprite->data4 = 0x80;
+        }
+        sprite->data1 += sprite->data2 >> 8;
+        sprite->data3 += sprite->data2 >> 8;
+        sprite->data1 &= 0xff;
+        sprite->pos2.x = Cos(sprite->data1, 0x20);
+        sprite->pos2.y = Sin(sprite->data1, 0x78);
+        if (sprite->data2 > 0x100)
+        {
+            sprite->data2 -= sprite->data4;
+        }
+        if (sprite->data4 < 0x100)
+        {
+            sprite->data4 += 24;
+        }
+        if (sprite->data2 < 0x100)
+        {
+            sprite->data2 = 0x100;
+        }
+        if (sprite->data3 >= 60)
+        {
+            sprite->data7++;
+            sprite->oam.affineMode = 0;
+            FreeOamMatrix(sprite->oam.matrixNum);
+            sprite->invisible = 1;
+        }
+    }
+}
+
+void sub_8089230(u8 spriteId)
+{
+    sub_8088FC0(spriteId);
+    gSprites[spriteId].callback = sub_808914C;
+}
