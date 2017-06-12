@@ -174,12 +174,6 @@ SECTIONS {
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
 		src/tv.o(.text);
-        asm/tv.o(.text);
-        src/tv.o(.text_a);
-        asm/tv.o(.text_80BE8EC);
-        src/tv.o(.dotvshow);
-        asm/tv.o(.dotvshow);
-        src/tv.o(.text_c);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);

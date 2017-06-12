@@ -216,15 +216,15 @@ void unref_sub_80EB684(u8 arg0, u16 arg1) {
     {
     case 5:
         c = 6;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x04);
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows[arg1] + 0x04);
         break;
     case 7:
         c = 2;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x1C);
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows[arg1] + 0x1C);
         break;
     case 8:
         c = 1;
-        ptr = (u16*)((void *)&gSaveBlock1.tvShows.shows[arg1] + 0x02);
+        ptr = (u16*)((void *)&gSaveBlock1.tvShows[arg1] + 0x02);
         break;
 
     default:
