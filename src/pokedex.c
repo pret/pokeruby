@@ -2,6 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
 #include "asm.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "m4a.h"
@@ -58,7 +59,9 @@ extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
 extern u16 gUnknown_0202FFB8;
 extern u8 gUnknown_0202FFBA;
+extern struct PokedexListItem *gUnknown_0202FFBC;
 extern u8 gUnknown_03005CE8;
+extern IntrCallback gUnknown_03005CEC;
 extern u8 gPokedexMenu_Gfx[];
 extern u8 gUnknown_08E96738[];
 extern u8 gUnknown_08E9C6DC[];
@@ -68,7 +71,8 @@ extern struct SpriteSheet gUnknown_083A05CC;
 extern struct SpritePalette gUnknown_083A05DC[];
 extern u8 gUnknown_0839FA7C[];
 extern u8 gUnknown_0839F67C[];
-extern u8 gPokedexMenu_Pal[];
+extern u16 gPokedexMenu_Pal[];
+extern u16 gPokedexMenu2_Pal[];
 extern u8 gUnknown_0839F73C[];
 extern u8 gUnknown_083A05EC[];
 extern u8 gUnknown_083A05F1[];
@@ -79,8 +83,8 @@ extern struct SpriteTemplate gSpriteTemplate_83A056C;
 extern struct SpriteTemplate gSpriteTemplate_83A0584;
 extern struct SpriteTemplate gSpriteTemplate_83A059C;
 extern struct SpriteTemplate gSpriteTemplate_83A05B4;
-extern struct PokedexListItem *gUnknown_0202FFBC;
-extern IntrCallback gUnknown_03005CEC;
+extern u8 gUnknown_083B5558[];
+extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
 extern u8 gUnknown_083A05F8[];
 extern u8 gUnknown_0839F8A0[];
@@ -92,6 +96,8 @@ extern u8 gUnknown_08E96B58[];
 
 extern struct PokedexEntry gPokedexEntries[];
 
+extern void sub_800D74C();
+extern const u16 *species_and_otid_get_pal(u16, u32, u32);
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
 extern void remove_some_task(void);
@@ -104,6 +110,8 @@ extern u16 gPokedexOrder_Alphabetical[];
 extern u16 gPokedexOrder_Weight[];
 extern u16 gPokedexOrder_Height[];
 
+void sub_8090B8C(u8);
+void sub_8090C28(struct Sprite *);
 u16 NationalPokedexNumToSpecies(u16);
 
 //  asm/pokedex_area_screen
@@ -806,7 +814,7 @@ void sub_808D640(void)
     if (gPokedexView->unk64C_1)
         LoadPalette(gUnknown_0839F67C + 0x2, 1, 0xBE);
     else if (!IsNationalPokedexEnabled())
-        LoadPalette(gPokedexMenu_Pal + 0x2, 1, 0xBE);
+        LoadPalette(gPokedexMenu_Pal + 1, 1, 0xBE);
     else
         LoadPalette(gUnknown_0839F73C + 0x2, 1, 0xBE);
 }
@@ -1084,126 +1092,29 @@ void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
     *(u16 *)(VRAM + 0x40 + d * 0x800 + c * 0x40 + b * 2) = unk[1];
 }
 
-#ifdef NONMATCHING
-//FixMe
-u8 sub_808DFE4(u16 a, u8 b, u8 c)
+u8 sub_808DFE4(u16 num, u8 b, u8 c)
 {
     u8 text[10];
     u8 i;
-    u32 species;
 
     for (i = 0; i < 10; i++)
         text[i] = 0;
     text[i] = EOS;
-    species = NationalPokedexNumToSpecies(a);
-    if (species)
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
     {
-        for (i = 0; gSpeciesNames[species][i] != EOS && i < 10; i++)
-            text[i] = gSpeciesNames[species][i];
-    }
-    else
-    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            text[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
         for (i = 0; i < 10; i++)
             text[i] = 0xAE;
+        break;
     }
     MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
+    return i;
 }
-#else
-__attribute__((naked))
-u8 sub_808DFE4(u16 a, u8 b, u8 c)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0xC\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    lsls r1, 24\n\
-    lsrs r5, r1, 24\n\
-    lsls r2, 24\n\
-    lsrs r6, r2, 24\n\
-    movs r4, 0\n\
-    movs r1, 0\n\
-_0808DFF8:\n\
-    mov r2, sp\n\
-    adds r0, r2, r4\n\
-    strb r1, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x9\n\
-    bls _0808DFF8\n\
-    adds r0, r2, r4\n\
-    movs r1, 0xFF\n\
-    strb r1, [r0]\n\
-    adds r0, r3, 0\n\
-    bl NationalPokedexNumToSpecies\n\
-    adds r3, r0, 0\n\
-    cmp r3, 0\n\
-    beq _0808E058\n\
-    movs r4, 0\n\
-    ldr r2, _0808E054\n\
-    movs r0, 0xB\n\
-    adds r1, r3, 0\n\
-    muls r1, r0\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    subs r5, 0x11\n\
-    lsls r6, 19\n\
-    cmp r0, 0xFF\n\
-    beq _0808E070\n\
-    adds r3, r1, 0\n\
-_0808E032:\n\
-    mov r0, sp\n\
-    adds r1, r0, r4\n\
-    adds r0, r4, r3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    adds r0, r4, r3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xFF\n\
-    beq _0808E070\n\
-    cmp r4, 0x9\n\
-    bls _0808E032\n\
-    b _0808E070\n\
-    .align 2, 0\n\
-_0808E054: .4byte gSpeciesNames\n\
-_0808E058:\n\
-    movs r4, 0\n\
-    subs r5, 0x11\n\
-    lsls r6, 19\n\
-    movs r1, 0xAE\n\
-_0808E060:\n\
-    mov r2, sp\n\
-    adds r0, r2, r4\n\
-    strb r1, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x9\n\
-    bls _0808E060\n\
-_0808E070:\n\
-    lsls r1, r5, 27\n\
-    movs r0, 0xFC\n\
-    lsls r0, 24\n\
-    adds r1, r0\n\
-    lsrs r1, 24\n\
-    lsrs r2, r6, 16\n\
-    mov r0, sp\n\
-    movs r3, 0\n\
-    bl MenuPrint_PixelCoords\n\
-    adds r0, r4, 0\n\
-    add sp, 0xC\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_808E090(u8 a, u8 b, u16 c)
 {
@@ -3081,15 +2992,17 @@ u8 sub_809070C(u16 dexNum, u32 b, u32 c)
     return taskId;
 }
 
-/*
+#ifdef NONMATCHING  // yet again...
 void sub_8090750(u8 taskId)
 {
+    u8 spriteId;
     u16 dexNum = gTasks[taskId].data[1];
-
+    u16 i;
+    
     switch (gTasks[taskId].data[0])
     {
-    default:
     case 0:
+    default:
         if (!gPaletteFade.active)
         {
             gUnknown_03005CEC = gMain.vblankCallback;
@@ -3099,19 +3012,15 @@ void sub_8090750(u8 taskId)
         }
         break;
     case 1:
-    {
-        u16 i;
-
         LZ77UnCompVram(gPokedexMenu_Gfx, (void *)(VRAM + 0x4000));
         LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
         for (i = 0; i < 0x280; i++)
             ((u16 *)(VRAM + 0x7800))[i] += 0x2000;
         sub_8091738(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
-        LoadPalette(gPokedexMenu_Pal + 2, 0x21, 0x9E);
+        LoadPalette(gPokedexMenu_Pal + 1, 0x21, 0x9E);
         gTasks[taskId].data[0]++;
         break;
-    }
     case 2:
         SetUpWindowConfig(&gWindowConfig_81E7064);
         InitMenuWindow(&gWindowConfig_81E7064);
@@ -3128,7 +3037,7 @@ void sub_8090750(u8 taskId)
         MenuPrint(gDexText_UnknownPoke, 11, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
-        sub_8091304(&gPokedexEntries[dexNum], 11, 5);
+        sub_8091304(gPokedexEntries[dexNum].categoryName, 11, 5);
         sub_8091458(gPokedexEntries[dexNum].height, 16, 7);
         sub_8091564(gPokedexEntries[dexNum].weight, 16, 9);
         MenuPrint(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
@@ -3136,16 +3045,13 @@ void sub_8090750(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 4:
-    {
-        u8 spriteId = sub_80918EC(dexNum, 0x30, 0x38, 0);
-
+        spriteId = sub_80918EC(dexNum, 0x30, 0x38, 0);
         gSprites[spriteId].oam.priority = 0;
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         SetVBlankCallback(gUnknown_03005CEC);
         gTasks[taskId].data[3] = spriteId;
         gTasks[taskId].data[0]++;
         break;
-    }
     case 5:
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
@@ -3165,4 +3071,705 @@ void sub_8090750(u8 taskId)
         break;
     }
 }
-*/
+#else
+__attribute__((naked))
+void sub_8090750(u8 taskId)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x8\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r1, _08090778 @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	ldrh r6, [r0, 0xA]\n\
+	movs r2, 0x8\n\
+	ldrsh r0, [r0, r2]\n\
+	adds r4, r1, 0\n\
+	cmp r0, 0x6\n\
+	bhi _0809079C\n\
+	lsls r0, 2\n\
+	ldr r1, _0809077C @ =_08090780\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_08090778: .4byte gTasks\n\
+_0809077C: .4byte _08090780\n\
+	.align 2, 0\n\
+_08090780:\n\
+	.4byte _0809079C\n\
+	.4byte _080907E0\n\
+	.4byte _0809085C\n\
+	.4byte _080908A0\n\
+	.4byte _08090960\n\
+	.4byte _080909B8\n\
+	.4byte _080909F4\n\
+_0809079C:\n\
+	ldr r0, _080907D0 @ =gPaletteFade\n\
+	ldrb r1, [r0, 0x7]\n\
+	movs r0, 0x80\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080907AA\n\
+	b _08090A26\n\
+_080907AA:\n\
+	ldr r1, _080907D4 @ =gUnknown_03005CEC\n\
+	ldr r0, _080907D8 @ =gMain\n\
+	ldr r0, [r0, 0xC]\n\
+	str r0, [r1]\n\
+	movs r0, 0\n\
+	bl SetVBlankCallback\n\
+	movs r0, 0x80\n\
+	lsls r0, 1\n\
+	bl sub_8091060\n\
+	ldr r1, _080907DC @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	movs r1, 0x1\n\
+	strh r1, [r0, 0x8]\n\
+	b _08090A26\n\
+	.align 2, 0\n\
+_080907D0: .4byte gPaletteFade\n\
+_080907D4: .4byte gUnknown_03005CEC\n\
+_080907D8: .4byte gMain\n\
+_080907DC: .4byte gTasks\n\
+_080907E0:\n\
+	ldr r0, _08090840 @ =gPokedexMenu_Gfx\n\
+	ldr r1, _08090844 @ =0x06004000\n\
+	bl LZ77UnCompVram\n\
+	ldr r0, _08090848 @ =gUnknown_08E96BD4\n\
+	ldr r4, _0809084C @ =0x06007800\n\
+	adds r1, r4, 0\n\
+	bl LZ77UnCompVram\n\
+	movs r2, 0\n\
+	lsls r5, r7, 2\n\
+	mov r12, r5\n\
+	movs r0, 0x80\n\
+	lsls r0, 6\n\
+	adds r6, r0, 0\n\
+	ldr r3, _08090850 @ =0x0000027f\n\
+_08090800:\n\
+	lsls r0, r2, 1\n\
+	adds r0, r4\n\
+	ldrh r5, [r0]\n\
+	adds r1, r6, r5\n\
+	strh r1, [r0]\n\
+	adds r0, r2, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 16\n\
+	cmp r2, r3\n\
+	bls _08090800\n\
+	ldr r0, _08090854 @ =gTasks\n\
+	mov r1, r12\n\
+	adds r4, r1, r7\n\
+	lsls r4, 3\n\
+	adds r4, r0\n\
+	ldrh r0, [r4, 0xA]\n\
+	movs r2, 0xFF\n\
+	lsls r2, 2\n\
+	movs r1, 0x2\n\
+	bl sub_8091738\n\
+	bl ResetPaletteFade\n\
+	ldr r0, _08090858 @ =gPokedexMenu_Pal + 0x2\n\
+	movs r1, 0x21\n\
+	movs r2, 0x9E\n\
+	bl LoadPalette\n\
+	ldrh r0, [r4, 0x8]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x8]\n\
+	b _08090A26\n\
+	.align 2, 0\n\
+_08090840: .4byte gPokedexMenu_Gfx\n\
+_08090844: .4byte 0x06004000\n\
+_08090848: .4byte gUnknown_08E96BD4\n\
+_0809084C: .4byte 0x06007800\n\
+_08090850: .4byte 0x0000027f\n\
+_08090854: .4byte gTasks\n\
+_08090858: .4byte gPokedexMenu_Pal + 0x2\n\
+_0809085C:\n\
+	ldr r4, _0809088C @ =gWindowConfig_81E7064\n\
+	adds r0, r4, 0\n\
+	bl SetUpWindowConfig\n\
+	adds r0, r4, 0\n\
+	bl InitMenuWindow\n\
+	ldr r2, _08090890 @ =0x0600c000\n\
+	add r1, sp, 0x4\n\
+	movs r0, 0\n\
+	strh r0, [r1]\n\
+	ldr r0, _08090894 @ =0x040000d4\n\
+	str r1, [r0]\n\
+	str r2, [r0, 0x4]\n\
+	ldr r1, _08090898 @ =0x81000100\n\
+	str r1, [r0, 0x8]\n\
+	ldr r0, [r0, 0x8]\n\
+	ldr r1, _0809089C @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	b _080909E0\n\
+	.align 2, 0\n\
+_0809088C: .4byte gWindowConfig_81E7064\n\
+_08090890: .4byte 0x0600c000\n\
+_08090894: .4byte 0x040000d4\n\
+_08090898: .4byte 0x81000100\n\
+_0809089C: .4byte gTasks\n\
+_080908A0:\n\
+	ldr r0, _080908C8 @ =gDexText_RegisterComplete\n\
+	movs r1, 0x2\n\
+	movs r2, 0\n\
+	movs r3, 0xD0\n\
+	bl sub_8072BD8\n\
+	bl IsNationalPokedexEnabled\n\
+	cmp r0, 0\n\
+	bne _080908CC\n\
+	adds r0, r6, 0\n\
+	bl NationalToHoennOrder\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	movs r1, 0xD\n\
+	movs r2, 0x3\n\
+	bl sub_8091154\n\
+	b _080908D6\n\
+	.align 2, 0\n\
+_080908C8: .4byte gDexText_RegisterComplete\n\
+_080908CC:\n\
+	adds r0, r6, 0\n\
+	movs r1, 0xD\n\
+	movs r2, 0x3\n\
+	bl sub_8091154\n\
+_080908D6:\n\
+	adds r0, r6, 0\n\
+	movs r1, 0x10\n\
+	movs r2, 0x3\n\
+	bl sub_80911C8\n\
+	ldr r0, _0809094C @ =gDexText_UnknownPoke\n\
+	movs r1, 0xB\n\
+	movs r2, 0x5\n\
+	bl MenuPrint\n\
+	ldr r0, _08090950 @ =gDexText_UnknownHeight\n\
+	movs r1, 0x10\n\
+	movs r2, 0x7\n\
+	bl MenuPrint\n\
+	ldr r0, _08090954 @ =gDexText_UnknownWeight\n\
+	movs r1, 0x10\n\
+	movs r2, 0x9\n\
+	bl MenuPrint\n\
+	lsls r4, r6, 3\n\
+	adds r4, r6\n\
+	lsls r4, 2\n\
+	ldr r6, _08090958 @ =gPokedexEntries\n\
+	adds r5, r4, r6\n\
+	adds r0, r5, 0\n\
+	movs r1, 0xB\n\
+	movs r2, 0x5\n\
+	bl sub_8091304\n\
+	ldrh r0, [r5, 0xC]\n\
+	movs r1, 0x10\n\
+	movs r2, 0x7\n\
+	bl sub_8091458\n\
+	ldrh r0, [r5, 0xE]\n\
+	movs r1, 0x10\n\
+	movs r2, 0x9\n\
+	bl sub_8091564\n\
+	adds r6, 0x10\n\
+	adds r4, r6\n\
+	ldr r0, [r4]\n\
+	movs r1, 0x2\n\
+	movs r2, 0xD\n\
+	bl MenuPrint\n\
+	movs r1, 0xFF\n\
+	lsls r1, 2\n\
+	movs r0, 0xE\n\
+	bl sub_80917CC\n\
+	ldr r1, _0809095C @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	b _080909E0\n\
+	.align 2, 0\n\
+_0809094C: .4byte gDexText_UnknownPoke\n\
+_08090950: .4byte gDexText_UnknownHeight\n\
+_08090954: .4byte gDexText_UnknownWeight\n\
+_08090958: .4byte gPokedexEntries\n\
+_0809095C: .4byte gTasks\n\
+_08090960:\n\
+	adds r0, r6, 0\n\
+	movs r1, 0x30\n\
+	movs r2, 0x38\n\
+	movs r3, 0\n\
+	bl sub_80918EC\n\
+	adds r4, r0, 0\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	ldr r0, _080909AC @ =gSprites\n\
+	lsls r1, r4, 4\n\
+	adds r1, r4\n\
+	lsls r1, 2\n\
+	adds r1, r0\n\
+	ldrb r2, [r1, 0x5]\n\
+	movs r0, 0xD\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	strb r0, [r1, 0x5]\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	movs r1, 0\n\
+	str r1, [sp]\n\
+	movs r2, 0x10\n\
+	movs r3, 0\n\
+	bl BeginNormalPaletteFade\n\
+	ldr r0, _080909B0 @ =gUnknown_03005CEC\n\
+	ldr r0, [r0]\n\
+	bl SetVBlankCallback\n\
+	ldr r1, _080909B4 @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	strh r4, [r0, 0xE]\n\
+	b _080909E0\n\
+	.align 2, 0\n\
+_080909AC: .4byte gSprites\n\
+_080909B0: .4byte gUnknown_03005CEC\n\
+_080909B4: .4byte gTasks\n\
+_080909B8:\n\
+	ldr r0, _080909E8 @ =REG_BLDCNT\n\
+	movs r1, 0\n\
+	strh r1, [r0]\n\
+	adds r0, 0x2\n\
+	strh r1, [r0]\n\
+	adds r0, 0x2\n\
+	strh r1, [r0]\n\
+	ldr r1, _080909EC @ =REG_BG3CNT\n\
+	ldr r2, _080909F0 @ =0x00000f07\n\
+	adds r0, r2, 0\n\
+	strh r0, [r1]\n\
+	subs r1, 0xE\n\
+	movs r5, 0xE2\n\
+	lsls r5, 5\n\
+	adds r0, r5, 0\n\
+	strh r0, [r1]\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r4\n\
+_080909E0:\n\
+	ldrh r1, [r0, 0x8]\n\
+	adds r1, 0x1\n\
+	strh r1, [r0, 0x8]\n\
+	b _08090A26\n\
+	.align 2, 0\n\
+_080909E8: .4byte 0x04000050\n\
+_080909EC: .4byte 0x0400000E\n\
+_080909F0: .4byte 0x00000f07\n\
+_080909F4:\n\
+	ldr r0, _08090A30 @ =gPaletteFade\n\
+	ldrb r1, [r0, 0x7]\n\
+	movs r0, 0x80\n\
+	ands r0, r1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0\n\
+	bne _08090A26\n\
+	adds r0, r6, 0\n\
+	bl NationalPokedexNumToSpecies\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	movs r1, 0\n\
+	bl PlayCry1\n\
+	ldr r1, _08090A34 @ =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	strh r5, [r0, 0xC]\n\
+	strh r5, [r0, 0x10]\n\
+	ldr r1, _08090A38 @ =sub_8090A3C\n\
+	str r1, [r0]\n\
+_08090A26:\n\
+	add sp, 0x8\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_08090A30: .4byte gPaletteFade\n\
+_08090A34: .4byte gTasks\n\
+_08090A38: .4byte sub_8090A3C\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_8090A3C(u8 taskId)
+{
+    if (gMain.newKeys & 2)
+    {
+        BeginNormalPaletteFade(0x0000FFFC, 0, 0, 16, 0);
+        gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
+        gTasks[taskId].func = sub_8090B8C;
+        return;
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[4] == 0)
+        {
+            u16 r4 = gTasks[taskId].data[1];
+            
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[r4].descriptionPage2, 2, 13);
+            (*(u16 *)(VRAM + 0x7ACA))++;
+            (*(u16 *)(VRAM + 0x7B0A))++;
+            gTasks[taskId].data[4] = 1;
+            PlaySE(SE_PIN);
+        }
+        else
+        {
+            BeginNormalPaletteFade(0x0000FFFC, 0, 0, 16, 0);
+            gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
+            gTasks[taskId].func = sub_8090B8C;
+            return;
+        }
+    }
+    gTasks[taskId].data[2]++;
+    if (gTasks[taskId].data[2] & 0x10)
+        LoadPalette(gPokedexMenu_Pal + 1, 0x51, 14);
+    else
+        LoadPalette(gPokedexMenu2_Pal + 1, 0x51, 14);
+}
+
+void sub_8090B8C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        u16 species;
+        u32 otId;
+        u32 personality;
+        u8 paletteNum;
+        const u16 *palette;
+        
+        REG_DISPCNT = 0x1940;
+        CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
+        sub_800D74C();
+        species = NationalPokedexNumToSpecies(gTasks[taskId].data[1]);
+        otId = ((u16)gTasks[taskId].data[13] << 16) | (u16)gTasks[taskId].data[12];
+        personality = ((u16)gTasks[taskId].data[15] << 16) | (u16)gTasks[taskId].data[14];
+        paletteNum = gSprites[gTasks[taskId].data[3]].oam.paletteNum;
+        palette = species_and_otid_get_pal(species, otId, personality);
+        LoadCompressedPalette(palette, 0x100 | paletteNum * 16, 32);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8090C28(struct Sprite *sprite)
+{
+    if (sprite->pos1.x < 0x78)
+        sprite->pos1.x += 2;
+    if (sprite->pos1.x > 0x78)
+        sprite->pos1.x -= 2;
+    
+    if (sprite->pos1.y < 0x50)
+        sprite->pos1.y += 1;
+    if (sprite->pos1.y > 0x50)
+        sprite->pos1.y -= 1;
+}
+
+void sub_8090C68(void)
+{
+    if (gUnknown_0202FFBC->owned)
+    {
+        if (gPokedexView->unk64E == 0)
+        {
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
+            gPokedexView->unk64E = 1;
+            (*(u16 *)(VRAM + 0x7ACA))++;
+            (*(u16 *)(VRAM + 0x7B0A))++;
+            PlaySE(SE_PIN);
+        }
+        else
+        {
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
+            gPokedexView->unk64E = 0;
+            (*(u16 *)(VRAM + 0x7ACA))--;
+            (*(u16 *)(VRAM + 0x7B0A))--;
+            PlaySE(SE_PIN);
+        }
+    }
+}
+
+const u8 *GetPokemonCategory(u16 dexNum)
+{
+    return gPokedexEntries[dexNum].categoryName;
+}
+
+u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
+{
+    switch (data)
+    {
+    case 0:  // height
+        return gPokedexEntries[dexNum].height;
+    case 1:  // weight
+        return gPokedexEntries[dexNum].weight;
+    default:
+        return 1;
+    }
+}
+
+s8 sub_8090D90(u16 a, u8 b)
+{
+    u8 index;
+    u8 bit;
+    u8 mask;
+    s8 retVal;
+    
+    a--;
+    index = a / 8;
+    bit = a % 8;
+    mask = 1 << bit;
+    retVal = 0;
+    switch (b)
+    {
+    case 0:
+        if (gSaveBlock2.pokedex.seen[index] & mask)
+        {
+            if ((gSaveBlock2.pokedex.seen[index] & mask) == (gSaveBlock1.unk938[index] & mask)
+             && (gSaveBlock2.pokedex.seen[index] & mask) == (gSaveBlock1.unk3A8C[index] & mask))
+                retVal = 1;
+            else
+            {
+                gSaveBlock2.pokedex.seen[index] &= ~mask;
+                gSaveBlock1.unk938[index] &= ~mask;
+                gSaveBlock1.unk3A8C[index] &= ~mask;
+                retVal = 0;
+            }
+        }
+        break;
+    case 1:
+        if (gSaveBlock2.pokedex.owned[index] & mask)
+        {
+            if ((gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock2.pokedex.seen[index] & mask)
+             && (gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock1.unk938[index] & mask)
+             && (gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock1.unk3A8C[index] & mask))
+                retVal = 1;
+            else
+            {
+                gSaveBlock2.pokedex.owned[index] &= ~mask;
+                gSaveBlock2.pokedex.seen[index] &= ~mask;
+                gSaveBlock1.unk938[index] &= ~mask;
+                gSaveBlock1.unk3A8C[index] &= ~mask;
+                retVal = 0;
+            }
+        }
+        break;
+    case 2:
+        gSaveBlock2.pokedex.seen[index] |= mask;
+        gSaveBlock1.unk938[index] |= mask;
+        gSaveBlock1.unk3A8C[index] |= mask;
+        break;
+    case 3:
+        gSaveBlock2.pokedex.owned[index] |= mask;
+        break;
+    }
+    return retVal;
+}
+
+u16 GetNationalPokedexCount(u8 a)
+{
+    u16 count = 0;
+    u16 i;
+    
+    for (i = 0; i < 386; i++)
+    {
+        switch (a)
+        {
+        case 0:
+            if (sub_8090D90(i + 1, 0) != 0)
+                count++;
+            break;
+        case 1:
+            if (sub_8090D90(i + 1, 1) != 0)
+                count++;
+            break;
+        }
+    }
+    return count;
+}
+
+u16 GetHoennPokedexCount(u8 a)
+{
+    u16 count = 0;
+    u16 i;
+    
+    for (i = 0; i < 202; i++)
+    {
+        switch (a)
+        {
+        case 0:
+            if (sub_8090D90(HoennToNationalOrder(i + 1), 0) != 0)
+                count++;
+            break;
+        case 1:
+            if (sub_8090D90(HoennToNationalOrder(i + 1), 1) != 0)
+                count++;
+            break;
+        }
+    }
+    return count;
+}
+
+bool8 sub_8090FC0(void)
+{
+    u16 i;
+    
+    for (i = 0; i < 200; i++)
+    {
+        if (sub_8090D90(HoennToNationalOrder(i + 1), 1) == 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+u16 sub_8090FF4(void)
+{
+    u16 i;
+    
+    for (i = 0; i < 150; i++)
+    {
+        if (sub_8090D90(i + 1, 1) == 0)
+            return 0;
+    }
+    for (i = 152; i < 250; i++)
+    {
+        if (sub_8090D90(i + 1, 1) == 0)
+            return 0;
+    }
+    for (i = 252; i < 384; i++)
+    {
+        if (sub_8090D90(i + 1, 1) == 0)
+            return 0;
+    }
+    return 1;
+}
+
+void sub_8091060(u16 a)
+{
+    if (!(a & 0x100))
+    {
+        REG_DISPCNT &= 0xFEFF;
+        REG_BG0CNT = 0;
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+    }
+    if (!(a & 0x200))
+    {
+        REG_DISPCNT &= 0xFDFF;
+        REG_BG1CNT = 0;
+        REG_BG1HOFS = 0;
+        REG_BG1VOFS = 0;
+    }
+    if (!(a & 0x400))
+    {
+        REG_DISPCNT &= 0xFBFF;
+        REG_BG2CNT = 0;
+        REG_BG2HOFS = 0;
+        REG_BG2VOFS = 0;
+    }
+    if (!(a & 0x800))
+    {
+        REG_DISPCNT &= 0xF7FF;
+        REG_BG3CNT = 0;
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 0;
+    }
+    if (!(a & 0x1000))
+    {
+        REG_DISPCNT &= 0xEFFF;
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 8;
+    }
+}
+
+void sub_8091154(u16 order, u8 b, u8 c)
+{
+    u8 str[4];
+    
+    str[0] = 0xA1 + order / 100;
+    str[1] = 0xA1 + (order % 100) / 10;
+    str[2] = 0xA1 + (order % 100) % 10;
+    str[3] = EOS;
+    MenuPrint(str, b, c);
+}
+
+u8 sub_80911C8(u16 num, u8 b, u8 c)
+{
+    u8 str[11];
+    u8 i;
+    
+    for (i = 0; i < 11; i++)
+        str[i] = EOS;
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            str[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
+        for (i = 0; i < 10; i++)
+            str[i] = 0xAE;
+        break;
+    }
+    MenuPrint(str, b, c);
+    return i;
+}
+
+u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
+{
+    u8 str[40];  // Not exactly sure how long this needs to be
+    u8 *end;
+    u8 i;
+    
+    end = StringCopy(str, gUnknown_083B5558);
+    str[2] = d;
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            end[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
+        for (i = 0; i < 10; i++)
+            end[i] = 0xAE;
+        break;
+    }
+    end[i] = EOS;
+    MenuPrint(str, b, c);
+    return i;
+}
+
+void sub_8091304(u8 *name, u8 b, u8 c)
+{
+    u8 str[32];  // Not exactly sure how long this needs to be
+    u8 i;
+    u8 j;
+    
+    for (i = 0; name[i] != EOS && i < 11; i++)
+        str[i] = name[i];
+    for (j = 0; gDexText_UnknownPoke[j] == 0xAC || gDexText_UnknownPoke[j] == 0; j++)
+        ;
+    j--;
+    while (gDexText_UnknownPoke[j] != EOS)
+        str[i++] = gDexText_UnknownPoke[j++];
+    str[i] = EOS;
+    sub_8072B80(str, b, c, (u8 *)gDexText_UnknownPoke);
+}

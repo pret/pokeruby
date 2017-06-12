@@ -45,7 +45,7 @@ struct PokedexView
     u8 unk64B;
     u8 unk64C_1:1;
     u8 selectedScreen;
-    u8 unk64E;
+    u8 unk64E;          // description page
     u8 unk64F;
     u8 menuIsOpen;      //menuIsOpen
     u8 unk651;
@@ -133,7 +133,7 @@ void sub_8090750(u8);
 void sub_8090A3C(u8);
 
 void sub_8090C68(void);
-u8 *GetPokemonCategory(u16);
+const u8 *GetPokemonCategory(u16);
 
 s8 sub_8090D90(u16, u8);
 u16 GetNationalPokedexCount(u8);
@@ -141,10 +141,10 @@ u16 GetHoennPokedexCount(u8);
 bool8 sub_8090FC0(void);
 u16 sub_8090FF4(void);
 void sub_8091060(u16);
-void sub_8091154(u16 order, int i, int i1);
-void sub_80911C8(u16 num, int i, int i1);
-void sub_8091260(u16 num, int i, int i1, int i2);
-void sub_8091304(u8 name[12], int i, int i1);
+void sub_8091154(u16 order, u8, u8);
+u8 sub_80911C8(u16 num, u8, u8);
+u8 sub_8091260(u16 num, u8, u8, u8);
+void sub_8091304(u8 *name, u8, u8);
 
 void sub_8091458(u16 height, int i, int i1);
 void sub_8091564(u16 weight, int i, int i1);
