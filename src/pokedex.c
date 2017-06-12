@@ -3771,5 +3771,5 @@ void sub_8091304(u8 *name, u8 b, u8 c)
     while (gDexText_UnknownPoke[j] != EOS)
         str[i++] = gDexText_UnknownPoke[j++];
     str[i] = EOS;
-    sub_8072B80(str, b, c, (u8 *)gDexText_UnknownPoke);
+    sub_8072B80(str, b, c, gDexText_UnknownPoke);
 }

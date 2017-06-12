@@ -629,7 +629,7 @@ void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
+void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
 {
     u8 buffer[64];
     u8 width = GetStringWidth(gMenuWindowPtr, a4);
