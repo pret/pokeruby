@@ -12,6 +12,14 @@
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
+#define nonmatching(fndec, x) {\
+__attribute__((naked))\
+fndec\
+{\
+	asm_unified(x);\
+}\
+}
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10

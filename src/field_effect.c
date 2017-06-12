@@ -2017,10 +2017,10 @@ extern const void (*gUnknown_0839F3AC[7])(struct Task *);
 extern const void (*gUnknown_0839F3C8[7])(struct Task *);
 extern const u32 gFieldMoveStreaksTiles[0x200];
 extern const u16 gFieldMoveStreaksPalette[16];
-extern const u16 gFieldMoveStreaksTilemap[0x140];
+extern const u16 gFieldMoveStreaksTilemap[10 * 32];
 extern const u32 gDarknessFieldMoveStreaksTiles[0x80];
 extern const u16 gDarknessFieldMoveStreaksPalette[16];
-extern const u16 gDarknessFieldMoveStreaksTilemap[0x140];
+extern const u16 gDarknessFieldMoveStreaksTilemap[10 * 32];
 void sub_80883DC(void);
 void sub_808843C(u16);
 void sub_8088890(struct Sprite *);
@@ -2306,4 +2306,212 @@ void sub_80886F8(struct Task *task)
 {
     task->data[1] -= 16;
     task->data[3] += 16;
+}
+
+#ifdef NONMATCHING
+bool8 sub_8088708(struct Task *task)
+{
+    u16 i;
+    u16 srcOffs;
+    u16 dstOffs;
+    u16 *dest;
+    if (task->data[4] >= 32)
+    {
+        return TRUE;
+    }
+    dstOffs = (task->data[3] >> 3) & 0x1f;
+    if (dstOffs >= task->data[4])
+    {
+        dstOffs = (32 - dstOffs) & 0x1f;
+        srcOffs = (32 - task->data[4]) & 0x1f;
+        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        for (i=0; i<10; i++)
+        {
+            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32] | 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] = gDarknessFieldMoveStreaksTilemap[((srcOffs + 1) & 0x1f) + i * 32] | 0xf000;
+        }
+        task->data[4] += 2;
+    }
+    return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 sub_8088708(struct Task *task)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x4\n"
+                    "\tadds r5, r0, 0\n"
+                    "\tldrh r2, [r5, 0x10]\n"
+                    "\tmovs r1, 0x10\n"
+                    "\tldrsh r0, [r5, r1]\n"
+                    "\tcmp r0, 0x1F\n"
+                    "\tble _08088724\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tb _080887A8\n"
+                    "_08088724:\n"
+                    "\tldrh r0, [r5, 0xE]\n"
+                    "\tlsls r0, 16\n"
+                    "\tasrs r3, r0, 19\n"
+                    "\tmovs r1, 0x1F\n"
+                    "\tands r3, r1\n"
+                    "\tmovs r4, 0x10\n"
+                    "\tldrsh r0, [r5, r4]\n"
+                    "\tcmp r3, r0\n"
+                    "\tblt _080887A6\n"
+                    "\tmovs r0, 0x20\n"
+                    "\tsubs r3, r0, r3\n"
+                    "\tands r3, r1\n"
+                    "\tsubs r0, r2\n"
+                    "\tmov r12, r0\n"
+                    "\tmov r7, r12\n"
+                    "\tands r7, r1\n"
+                    "\tmov r12, r7\n"
+                    "\tldrh r0, [r5, 0x20]\n"
+                    "\tldr r1, _080887B8 @ =0x06000140\n"
+                    "\tadds r1, r0\n"
+                    "\tmov r8, r1\n"
+                    "\tmovs r4, 0\n"
+                    "\tldr r7, _080887BC @ =gDarknessFieldMoveStreaksTilemap\n"
+                    "\tmov r10, r7\n"
+                    "\tmovs r0, 0xF0\n"
+                    "\tlsls r0, 8\n"
+                    "\tmov r9, r0\n"
+                    "\tadds r1, r3, 0x1\n"
+                    "\tmovs r0, 0x1F\n"
+                    "\tands r1, r0\n"
+                    "\tstr r1, [sp]\n"
+                    "\tmov r6, r12\n"
+                    "\tadds r6, 0x1\n"
+                    "\tands r6, r0\n"
+                    "_08088768:\n"
+                    "\tlsls r1, r4, 5\n"
+                    "\tadds r2, r1, r3\n"
+                    "\tlsls r2, 1\n"
+                    "\tadd r2, r8\n"
+                    "\tmov r7, r12\n"
+                    "\tadds r0, r7, r1\n"
+                    "\tlsls r0, 1\n"
+                    "\tadd r0, r10\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tmov r7, r9\n"
+                    "\torrs r0, r7\n"
+                    "\tstrh r0, [r2]\n"
+                    "\tldr r0, [sp]\n"
+                    "\tadds r2, r1, r0\n"
+                    "\tlsls r2, 1\n"
+                    "\tadd r2, r8\n"
+                    "\tadds r1, r6, r1\n"
+                    "\tlsls r1, 1\n"
+                    "\tadd r1, r10\n"
+                    "\tldrh r0, [r1]\n"
+                    "\tmov r1, r9\n"
+                    "\torrs r0, r1\n"
+                    "\tstrh r0, [r2]\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r4, r0, 16\n"
+                    "\tcmp r4, 0x9\n"
+                    "\tbls _08088768\n"
+                    "\tldrh r0, [r5, 0x10]\n"
+                    "\tadds r0, 0x2\n"
+                    "\tstrh r0, [r5, 0x10]\n"
+                    "_080887A6:\n"
+                    "\tmovs r0, 0\n"
+                    "_080887A8:\n"
+                    "\tadd sp, 0x4\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.align 2, 0\n"
+                    "_080887B8: .4byte 0x06000140\n"
+                    "_080887BC: .4byte gDarknessFieldMoveStreaksTilemap");
+}
+#endif
+
+bool8 sub_80887C0(struct Task *task)
+{
+    u16 i;
+    u16 dstOffs;
+    u16 *dest;
+    if (task->data[4] >= 32)
+    {
+        return TRUE;
+    }
+    dstOffs = task->data[3] >> 3;
+    if (dstOffs >= task->data[4])
+    {
+        dstOffs = (task->data[1] >> 3) & 0x1f;
+        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        for (i=0; i<10; i++)
+        {
+            dest[dstOffs + i * 32] = 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] = 0xf000;
+        }
+        task->data[4] += 2;
+    }
+    return FALSE;
+}
+
+u8 sub_8088830(u32 a0, u32 a1, u32 a2)
+{
+    u16 v0;
+    u8 monSprite;
+    struct Sprite *sprite;
+    v0 = (a0 & 0x80000000) >> 16;
+    a0 &= 0x7fffffff;
+    monSprite = CreateMonSprite_FieldMove(a0, a1, a2, 0x140, 0x50, 0);
+    sprite = &gSprites[monSprite];
+    sprite->callback = SpriteCallbackDummy;
+    sprite->oam.priority = 0;
+    sprite->data0 = a0;
+    sprite->data6 = v0;
+    return monSprite;
+}
+
+void sub_80888D4(struct Sprite *);
+
+void sub_8088890(struct Sprite *sprite)
+{
+    if ((sprite->pos1.x -= 20) <= 0x78)
+    {
+        sprite->pos1.x = 0x78;
+        sprite->data1 = 30;
+        sprite->callback = sub_80888D4;
+        if (sprite->data6)
+        {
+            PlayCry2(sprite->data0, 0, 0x7d, 0xa);
+        } else
+        {
+            PlayCry1(sprite->data0, 0);
+        }
+    }
+}
+
+void sub_80888F0(struct Sprite *);
+
+void sub_80888D4(struct Sprite *sprite)
+{
+    if ((--sprite->data1) == 0)
+    {
+        sprite->callback = sub_80888F0;
+    }
+}
+
+void sub_80888F0(struct Sprite *sprite)
+{
+    if (sprite->pos1.x < -0x40)
+    {
+        sprite->data7 = 1;
+    } else
+    {
+        sprite->pos1.x -= 20;
+    }
 }
