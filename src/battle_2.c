@@ -55,31 +55,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-struct UnknownStruct11
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5_0:1;
-    u8 unk5_1:1;
-    u16 unk6;
-    u8 unk8[10];
-    u8 unk12;
-    u8 unk13;
-    u8 unk14[10];
-    u8 filler1E[2];
-    u16 unk20;
-    u16 unk22;
-    u16 unk24;
-    u16 unk26;
-    u16 unk28;
-    u8 unk2A[10];
-    u8 filler34[2];
-    u8 unk36[10];
-};
-
 struct UnknownStruct12
 {
     u32 unk0;
@@ -217,7 +192,7 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_030042D4)(void);
-extern struct UnknownStruct11 gUnknown_030042E0;
+extern struct Struct30042E0 gUnknown_030042E0;
 extern u8 gUnknown_03004324;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];

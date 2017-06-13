@@ -132,6 +132,31 @@ struct UnkBattleStruct4
     /*0x17*/ u8 filler17[0x4];
 };
 
+struct Struct30042E0
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5_0:1;
+    u8 unk5_1:1;
+    u16 unk6;
+    u8 unk8[10];
+    u8 unk12;
+    u8 unk13;
+    u8 unk14[10];
+    u8 filler1E[2];
+    u16 unk20;
+    u16 unk22;
+    u16 unk24;
+    u16 unk26;
+    u16 unk28;
+    u8 unk2A[10];
+    u8 filler34[2];
+    u8 unk36[10];
+};
+
 struct Struct2017800
 {
     u8 unk0_0:1;
