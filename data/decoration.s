@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 83E9FD0
-	.include "data/decorations.inc"
-
 	.align 2
 gUnknown_083EC5E4:: @ 83EC5E4
 	.4byte SecretBaseText_Desk

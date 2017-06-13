@@ -144,8 +144,8 @@ struct Decoration
     /*0x12*/ u8 shape;
     /*0x13*/ u8 decor_field_13;
     /*0x14*/ u16 price;
-    /*0x18*/ u8 *description;
-    /*0x1c*/ u16 *tiles;
+    /*0x18*/ const u8 *description;
+    /*0x1c*/ const u16 *tiles;
 };
 
 struct DecoPCPointers
@@ -177,7 +177,7 @@ extern u8 ewram[];
 
 struct UnkStruct_02038900
 {
-    /*0x000; 0x02038900*/ struct Decoration *decoration;
+    /*0x000; 0x02038900*/ const struct Decoration *decoration;
     /*0x004; 0x02038904*/ u16 unk_004[0x40];
     /*0x084; 0x02038984*/ u8 unk_084[0x800];
     /*0x884; 0x02039184*/ u16 unk_884[16];
@@ -208,7 +208,7 @@ extern const struct SpritePalette gUnknown_083ECA64;
 extern const struct SpriteTemplate gSpriteTemplate_83EC93C;
 extern const struct SpriteTemplate gSpriteTemplate_83ECA88;
 
-extern struct Decoration gDecorations[0x77];
+extern const struct Decoration gDecorations[];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
 extern u8 gUnknown_081A2F7B[];
