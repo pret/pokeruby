@@ -194,9 +194,9 @@ struct DecorationInventory
 
 struct UnkStruct_803EC860
 {
-    const u8 *var0;
-    const u8 *var4;
-    const u8 *var8;
+    const u8 *tiles;
+    const u8 *y;
+    const u8 *x;
     u8 size;
 };
 
@@ -208,7 +208,7 @@ extern u8 ewram[];
 struct UnkStruct_02038900
 {
     /*0x000; 0x02038900*/ const struct Decoration *decoration;
-    /*0x004; 0x02038904*/ u16 unk_004[0x40];
+    /*0x004; 0x02038904*/ u16 tiles[0x40];
     /*0x084; 0x02038984*/ u8 image[0x800];
     /*0x884; 0x02039184*/ u16 palette[16];
 };
@@ -223,12 +223,10 @@ struct UnkStruct_083EC900
 
 struct UnkStruct_020391B4
 {
-    u8 var00;
+    u8 decorId;
     u8 width;
     u8 height;
-    u8 var03;
-    u16 var04;
-    u8 pad06[2];
+    u16 flagId;
 };
 
 extern const struct UnkStruct_083EC900 gUnknown_083EC900[];

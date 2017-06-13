@@ -31,7 +31,7 @@
 
 #define MENUACTION2(_text, _func) {.text = _text, .func = _func}
 #define MENUACTION3(_func1, _func2) {.func1 = _func1, .func2 = _func2}
-#define STRUCT_803EC860(_data1, _data2, _data3, _size) {.var0 = _data1, .var4 = _data2, .var8 = _data3, .size = _size}
+#define STRUCT_803EC860(_data1, _data2, _data3, _size) {.tiles = _data1, .y = _data2, .x = _data3, .size = _size}
 #define DECOSPRITETEMPLATE(_shape, _size, _x, _y) {.shape = _shape, .size = _size, .x = _x, .y = _y}
 
 const u8 DecorDesc_SMALL_DESK[] = _(
@@ -1421,6 +1421,7 @@ const u8 Unknown_3EC68C[] = {0, 1, 2, 3, 4, 5, 6, 7};
 const u8 Unknown_3EC694[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 const u8 Unknown_3EC6B4[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45};
 const u8 Unknown_3EC6D8[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29};
+
 const u8 Unknown_3EC6F0[] = {0, 0, 0, 0};
 const u8 Unknown_3EC6F4[] = {0, 0, 1, 1, 0, 0, 1, 1};
 const u8 Unknown_3EC6FC[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2};
@@ -1431,6 +1432,7 @@ const u8 Unknown_3EC740[] = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
 const u8 Unknown_3EC74C[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
 const u8 Unknown_3EC76C[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8};
 const u8 Unknown_3EC790[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5};
+
 const u8 Unknown_3EC7A8[] = {4, 5, 6, 7};
 const u8 Unknown_3EC7AC[] = {4, 5, 4, 5, 6, 7, 6, 7};
 const u8 Unknown_3EC7B4[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
@@ -3421,7 +3423,7 @@ void sub_81006D0(struct UnkStruct_02038900 *unk_02038900)
     }
     for (i=0; i<0x40; i++)
     {
-        unk_02038900->unk_004[i] = 0;
+        unk_02038900->tiles[i] = 0;
     }
 }
 
@@ -3487,7 +3489,7 @@ void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
 {
     u16 i;
     for (i=0; i<0x40; i++)
-        sub_8100740(&unk_02038900->image[i * 32], unk_02038900->unk_004[i]);
+        sub_8100740(&unk_02038900->image[i * 32], unk_02038900->tiles[i]);
 }
 
 u16 sub_810089C(u16 a0)
@@ -3502,7 +3504,7 @@ void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
     shape = unk_02038900->decoration->shape;
     for (i=0; i<gUnknown_083EC860[shape].size; i++)
     {
-        unk_02038900->unk_004[gUnknown_083EC860[shape].var0[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[shape].var4[i]] * 8 + gUnknown_083EC860[shape].var8[i]);
+        unk_02038900->tiles[gUnknown_083EC860[shape].tiles[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[shape].y[i]] * 8 + gUnknown_083EC860[shape].x[i]);
     }
 }
 
@@ -3578,10 +3580,10 @@ void sub_8100A7C(void)
     if (gSpecialVar_0x8004 == gUnknown_02039234)
     {
         gScriptResult = 1;
-    } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].var00]].permission == DECORPERM_SOLID_MAT)
+    } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
     {
-        gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].var04;
-        sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].var00);
+        gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;
+        sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].decorId);
         for (i=0; i<gMapHeader.events->mapObjectCount; i++)
         {
             if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8005)
@@ -3616,12 +3618,12 @@ void sub_8100B6C(void)
     u8 permission;
     for (i=0; i<gUnknown_02039234; i++)
     {
-        permission = gDecorations[ewram_1f000.items[gUnknown_020391B4[i].var00]].permission;
-        x = ewram_1f000.pos[gUnknown_020391B4[i].var00] >> 4;
-        y = ewram_1f000.pos[gUnknown_020391B4[i].var00] & 0xf;
+        permission = gDecorations[ewram_1f000.items[gUnknown_020391B4[i].decorId]].permission;
+        x = ewram_1f000.pos[gUnknown_020391B4[i].decorId] >> 4;
+        y = ewram_1f000.pos[gUnknown_020391B4[i].decorId] & 0xf;
         if (permission != DECORPERM_SOLID_MAT)
         {
-            if (ewram_1f000.items[gUnknown_020391B4[i].var00] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
+            if (ewram_1f000.items[gUnknown_020391B4[i].decorId] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
             {
                 gUnknown_020391B4[i].height++;
             }
@@ -3632,7 +3634,7 @@ void sub_8100B6C(void)
                     MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
                 }
             }
-            sub_8100A60(gUnknown_020391B4[i].var00);
+            sub_8100A60(gUnknown_020391B4[i].decorId);
         }
     }
 }
@@ -3875,13 +3877,13 @@ void sub_81012A0(void)
     u8 xOff;
     u8 yOff;
     u16 i;
-    xOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].var00] >> 4;
-    yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].var00] & 0xf;
+    xOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] >> 4;
+    yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] & 0xf;
     for (i=0; i<0x40; i++)
     {
         if (gSaveBlock1.mapObjectTemplates[i].x == xOff && gSaveBlock1.mapObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1.mapObjectTemplates[i].flagId))
         {
-            gUnknown_020391B4[gUnknown_02039234].var04 = gSaveBlock1.mapObjectTemplates[i].flagId;
+            gUnknown_020391B4[gUnknown_02039234].flagId = gSaveBlock1.mapObjectTemplates[i].flagId;
             break;
         }
     }
@@ -3899,7 +3901,7 @@ bool8 sub_8101340(u8 taskId)
                 sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
                 if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
                 {
-                    gUnknown_020391B4->var00 = i;
+                    gUnknown_020391B4->decorId = i;
                     sub_81012A0();
                     gUnknown_02039234 = 1;
                     return TRUE;
@@ -3923,7 +3925,7 @@ void sub_81013B8(u8 a0, u8 a1, u8 a2, u8 a3)
         yOff = ewram_1f000.pos[i] & 0xf;
         if (decorIdx != 0 && gDecorations[decorIdx].permission == DECORPERM_SOLID_MAT && a0 <= xOff && a1 <= yOff && a2 >= xOff && a3 >= yOff)
         {
-            gUnknown_020391B4[gUnknown_02039234].var00 = i;
+            gUnknown_020391B4[gUnknown_02039234].decorId = i;
             sub_81012A0();
             gUnknown_02039234++;
         }
@@ -3946,7 +3948,7 @@ void sub_8101460(u8 taskId)
                 sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
                 if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
                 {
-                    gUnknown_020391B4[0].var00 = i;
+                    gUnknown_020391B4[0].decorId = i;
                     gUnknown_02039234++;
                     break;
                 }
@@ -3954,8 +3956,8 @@ void sub_8101460(u8 taskId)
         }
         if (gUnknown_02039234 != 0)
         {
-            xOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] >> 4;
-            yOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] & 0xf;
+            xOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] >> 4;
+            yOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] & 0xf;
             sub_81013B8(xOff, yOff - gUnknown_020391B4[0].var02 + 1, xOff + gUnknown_020391B4[0].var01 - 1, yOff);
         }
     }
