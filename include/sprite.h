@@ -131,7 +131,7 @@ struct Subsprite
 struct SubspriteTable
 {
     u8 subspriteCount;
-    struct Subsprite *subsprites;
+    const struct Subsprite *subsprites;
 };
 
 struct Sprite;
@@ -142,7 +142,7 @@ struct SpriteTemplate
     u16 paletteTag;
     const struct OamData *oam;
     const union AnimCmd *const *anims;
-    struct SpriteFrameImage *images;
+    const struct SpriteFrameImage *images;
     const union AffineAnimCmd *const *affineAnims;
     void (*callback)(struct Sprite *);
 };

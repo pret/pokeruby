@@ -129,4 +129,110 @@ void PokeballGlowEffect_5(struct Sprite *);
 void PokeballGlowEffect_6(struct Sprite *);
 void PokeballGlowEffect_7(struct Sprite *);
 
+bool8 sub_80867AC(struct Task *);
+bool8 sub_8086854(struct Task *);
+bool8 sub_8086870(struct Task *);
+bool8 sub_80868E4(struct Task *);
+bool8 sub_808699C(struct Task *);
+bool8 sub_80869B8(struct Task *);
+bool8 sub_80869F8(struct Task *);
+
+bool8 sub_8086AA0(struct Task *);
+bool8 sub_8086AC0(struct Task *);
+bool8 sub_8086B30(struct Task *);
+bool8 sub_8086B54(struct Task *);
+bool8 sub_8086B64(struct Task *);
+bool8 sub_8086B88(struct Task *);
+
+bool8 sub_8086CF4(struct Task *);
+bool8 sub_8086D70(struct Task *);
+bool8 sub_8086DB0(struct Task *);
+bool8 sub_8086E10(struct Task *);
+bool8 sub_8086E50(struct Task *);
+bool8 sub_8086EB0(struct Task *);
+bool8 sub_8086ED4(struct Task *);
+
+bool8 sub_8086FB0(struct Task *, struct MapObject *);
+bool8 waterfall_1_do_anim_probably(struct Task *, struct MapObject *);
+bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct MapObject *);
+bool8 sub_8087030(struct Task *, struct MapObject *);
+bool8 sub_8087058(struct Task *, struct MapObject *);
+
+bool8 sub_8087124(struct Task *);
+bool8 dive_2_unknown(struct Task *);
+bool8 dive_3_unknown(struct Task *);
+
+bool8 sub_808722C(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_8087264(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_8087298(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80872E4(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80873D8(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80873F4(struct Task *, struct MapObject *, struct Sprite *);
+
+bool8 sub_80874CC(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80874FC(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_8087548(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_808759C(struct Task *, struct MapObject *, struct Sprite *);
+
+bool8 sub_80876C8(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80876F8(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_8087774(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80877AC(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80877D4(struct Task *, struct MapObject *, struct Sprite *);
+
+void sub_80878F4(struct Task *);
+void sub_8087914(struct Task *);
+
+void sub_8087AA4(struct Task *);
+void sub_8087AC8(struct Task *);
+
+void sub_8087BEC(struct Task *);
+void sub_8087C14(struct Task *);
+void sub_8087CA4(struct Task *);
+void sub_8087D78(struct Task *);
+
+void sub_8087E4C(struct Task *);
+void sub_8087ED8(struct Task *);
+void sub_8087FDC(struct Task *);
+
+void sub_8088150(struct Task *);
+void sub_80881C0(struct Task *);
+void sub_8088228(struct Task *);
+void sub_80882B4(struct Task *);
+void sub_80882E4(struct Task *);
+void sub_8088338(struct Task *);
+void sub_8088380(struct Task *);
+
+void sub_80884AC(struct Task *);
+void sub_80884E8(struct Task *);
+void sub_8088554(struct Task *);
+void sub_80885A8(struct Task *);
+void sub_80885D8(struct Task *);
+void sub_808860C(struct Task *);
+void sub_808862C(struct Task *);
+
+void sub_8088984(struct Task *);
+void sub_80889E4(struct Task *);
+void sub_8088A30(struct Task *);
+void sub_8088A78(struct Task *);
+void sub_8088AF4(struct Task *);
+
+void sub_8088CA0(struct Task *);
+void sub_8088CF8(struct Task *);
+void sub_8088D3C(struct Task *);
+void sub_8088D94(struct Task *);
+void sub_8088DD8(struct Task *);
+void sub_8088E2C(struct Task *);
+void sub_8088EB4(struct Task *);
+void sub_8088F10(struct Task *);
+void sub_8088F30(struct Task *);
+
+void sub_80892A0(struct Task *);
+void sub_8089354(struct Task *);
+void sub_80893C0(struct Task *);
+void sub_8089414(struct Task *);
+void sub_808948C(struct Task *);
+void sub_80894C4(struct Task *);
+void fishE(struct Task *);
+
 #endif // GUARD_FIELD_EFFECT_H
