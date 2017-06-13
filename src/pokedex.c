@@ -93,6 +93,7 @@ extern u8 gUnknown_03005E98;
 extern u8 gUnknown_083B4EC4[];
 extern u8 gUnknown_08E96ACC[];
 extern u8 gUnknown_08E96B58[];
+extern const u8 *const gMonFootprintTable[];
 
 extern struct PokedexEntry gPokedexEntries[];
 
@@ -3813,4 +3814,152 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
     str[4] = CHAR_0 + ((a % 1000) % 100) % 10;
     str[5] = EOS;
     MenuPrint(str, left, top);
+}
+
+#ifdef UNITS_IMPERIAL
+#define CHAR_PRIME (0xB4)
+#define CHAR_DOUBLE_PRIME (0xB2)
+void sub_8091458(u16 height, u8 left, u8 top)
+{
+    u8 buffer[16];
+    u32 inches, feet;
+    u8 i = 0;
+
+    inches = (height * 10000) / 254;
+    if (inches % 10 >= 5)
+        inches += 10;
+    feet = inches / 120;
+    inches = (inches - (feet * 120)) / 10;
+
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = 0x13;
+    if (feet / 10 == 0)
+    {
+        buffer[i++] = 18;
+        buffer[i++] = feet + CHAR_0;
+    }
+    else
+    {
+        buffer[i++] = 12;
+        buffer[i++] = feet / 10 + CHAR_0;
+        buffer[i++] = (feet % 10) + CHAR_0;
+    }
+    buffer[i++] = CHAR_PRIME;
+    buffer[i++] = (inches / 10) + CHAR_0;
+    buffer[i++] = (inches % 10) + CHAR_0;
+    buffer[i++] = CHAR_DOUBLE_PRIME;
+    buffer[i++] = EOS;
+    MenuPrint(buffer, left, top);
+}
+#else
+void sub_8091458(u16 height, u8 left, u8 top)
+{
+    unref_sub_80913A4(height, left, top);
+}
+#endif
+
+#ifdef UNITS_IMPERIAL
+#define CHAR_b (0xD6)
+#define CHAR_l (0xE0)
+#define CHAR_s (0xE7)
+void sub_8091564(u16 weight, u8 left, u8 top)
+{
+    u8 buffer[16];
+    u32 lbs;
+    u8 i = 0;
+    bool8 output;
+
+    lbs = (weight * 100000) / 4536;
+    if (lbs % 10 >= 5)
+        lbs += 10;
+    output = FALSE;
+
+    buffer[i] = (lbs / 100000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 100000);
+    buffer[i] = (lbs / 10000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 10000);
+    buffer[i] = (lbs / 1000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+    lbs = (lbs % 1000);
+    buffer[i++] = (lbs / 100) + CHAR_0;
+    lbs = (lbs % 100);
+    buffer[i++] = CHAR_PERIOD;
+    buffer[i++] = (lbs / 10) + CHAR_0;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_l;
+    buffer[i++] = CHAR_b;
+    buffer[i++] = CHAR_s;
+    buffer[i++] = CHAR_PERIOD;
+    buffer[i++] = EOS;
+    MenuPrint(buffer, left, top);
+}
+#else
+void sub_8091564(u16 arg0, u8 left, u8 top)
+{
+    unref_sub_80913A4(arg0, left, top);
+}
+#endif
+
+void sub_8091738(u16 a, u16 b, u16 c)
+{
+    u8 arr[0x80];
+    u16 i;
+    u16 j;
+    const u8 *r12;
+    u16 r7;
+    u8 r3;
+
+    r12 = gMonFootprintTable[NationalPokedexNumToSpecies(a)];
+    for (r7 = 0, i = 0; i < 32; i++)
+    {
+        r3 = r12[i];
+        for (j = 0; j < 4; j++)
+        {
+            u32 r1 = j * 2;
+            s32 r2 = (r3 >> r1) & 1;
+
+            if (r3 & (2 << r1))
+                r2 |= 0x10;
+
+// Needed to match
+#ifndef NONMATCHING
+            asm("");asm("");asm("");asm("");asm("");
+#endif
+
+            arr[r7] = r2;
+            r7++;
+        }
+    }
+    CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
 }

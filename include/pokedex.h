@@ -146,8 +146,8 @@ u8 sub_80911C8(u16 num, u8, u8);
 u8 sub_8091260(u16 num, u8, u8, u8);
 void sub_8091304(u8 *name, u8, u8);
 
-void sub_8091458(u16 height, int i, int i1);
-void sub_8091564(u16 weight, int i, int i1);
+void sub_8091458(u16 height, u8 i, u8 i1);
+void sub_8091564(u16 weight, u8 i, u8 i1);
 void sub_8091738(u16, u16, u16);
 void sub_80917CC(int i, int i1);
 u16 sub_8091818(u8, u16, u16, u16);
