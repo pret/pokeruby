@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "map_object_constants.h"
 #include "rom4.h"
 #include "sound.h"
 #include "songs.h"
@@ -17,7 +18,1532 @@
 #include "field_weather.h"
 #include "decoration.h"
 
-extern Script gUnknown_0815F399;
+#define DECORATION(_id, _name, _decor_field_11, _shape, _decor_field_13, _price, _description, _tiles) {\
+.id = _id,\
+.name = _name,\
+.decor_field_11 = _decor_field_11,\
+.shape = _shape,\
+.decor_field_13 = _decor_field_13,\
+.price = _price,\
+.description = _description,\
+.tiles = _tiles\
+}
+
+#define MENUACTION2(_text, _func) {.text = _text, .func = _func}
+#define MENUACTION3(_func1, _func2) {.func1 = _func1, .func2 = _func2}
+#define STRUCT_803EC860(_data1, _data2, _data3, _size) {.var0 = _data1, .var4 = _data2, .var8 = _data3, .size = _size}
+#define DECOSPRITETEMPLATE(_shape, _size, _x, _y) {.shape = _shape, .size = _size, .x = _x, .y = _y}
+
+const u8 DecorDesc_SMALL_DESK[] = _(
+    "A small desk built\n"
+    "for one.");
+
+const u8 DecorDesc_POKEMON_DESK[] = _(
+    "A small desk built in\n"
+    "the shape of a POKé\n"
+    "BALL.");
+
+const u8 DecorDesc_HEAVY_DESK[] = _(
+    "A large desk made\n"
+    "of steel. Put some\n"
+    "decorations on it.");
+
+const u8 DecorDesc_RAGGED_DESK[] = _(
+    "A large desk made\n"
+    "of wood. Put some\n"
+    "decorations on it.");
+
+const u8 DecorDesc_COMFORT_DESK[] = _(
+    "A large desk made\n"
+    "of leaves. Put some\n"
+    "decorations on it.");
+
+const u8 DecorDesc_PRETTY_DESK[] = _(
+    "A huge desk made\n"
+    "of glass. Holds lots\n"
+    "of decorations.");
+
+const u8 DecorDesc_BRICK_DESK[] = _(
+    "A huge desk made\n"
+    "of brick. Holds lots\n"
+    "of decorations.");
+
+const u8 DecorDesc_CAMP_DESK[] = _(
+    "A huge desk made\n"
+    "of logs. Put lots of\n"
+    "decorations on it.");
+
+const u8 DecorDesc_HARD_DESK[] = _(
+    "A huge desk made\n"
+    "of rocks. Holds\n"
+    "many decorations.");
+
+const u8 DecorDesc_SMALL_CHAIR[] = _(
+    "A small chair made\n"
+    "for one.");
+
+const u8 DecorDesc_POKEMON_CHAIR[] = _(
+    "A small chair built\n"
+    "in the shape of a\n"
+    "POKé BALL.");
+
+const u8 DecorDesc_HEAVY_CHAIR[] = _(
+    "A small chair made\n"
+    "of steel.");
+
+const u8 DecorDesc_PRETTY_CHAIR[] = _(
+    "A small chair made\n"
+    "of glass.");
+
+const u8 DecorDesc_COMFORT_CHAIR[] = _(
+    "A small chair made\n"
+    "of leaves.");
+
+const u8 DecorDesc_RAGGED_CHAIR[] = _(
+    "A small chair made\n"
+    "of wood.");
+
+const u8 DecorDesc_BRICK_CHAIR[] = _(
+    "A small chair made\n"
+    "of brick.");
+
+const u8 DecorDesc_CAMP_CHAIR[] = _(
+    "A small chair made\n"
+    "of logs.");
+
+const u8 DecorDesc_HARD_CHAIR[] = _(
+    "A small chair made\n"
+    "of rock.");
+
+const u8 DecorDesc_RED_PLANT[] = _(
+    "A vivid red potted\n"
+    "plant.");
+
+const u8 DecorDesc_TROPICAL_PLANT[] = _(
+    "A flowering tropical\n"
+    "plant in a pot.");
+
+const u8 DecorDesc_PRETTY_FLOWERS[] = _(
+    "A pot of cute\n"
+    "flowers.");
+
+const u8 DecorDesc_COLORFUL_PLANT[] = _(
+    "A large pot with\n"
+    "many colorful\n"
+    "flowers.");
+
+const u8 DecorDesc_BIG_PLANT[] = _(
+    "A large, umbrella-\n"
+    "shaped plant in a\n"
+    "big pot.");
+
+const u8 DecorDesc_GORGEOUS_PLANT[] = _(
+    "A large, impressive\n"
+    "plant in a big pot.");
+
+const u8 DecorDesc_RED_BRICK[] = _(
+    "A red-colored brick.\n"
+    "Decorations can be\n"
+    "placed on top.");
+
+const u8 DecorDesc_YELLOW_BRICK[] = _(
+    "A yellow-colored\n"
+    "brick. Put some\n"
+    "decorations on top.");
+
+const u8 DecorDesc_BLUE_BRICK[] = _(
+    "A blue-colored\n"
+    "brick. Put some\n"
+    "decorations on top.");
+
+const u8 DecorDesc_RED_BALLOON[] = _(
+    "A red balloon filled\n"
+    "with water. Bursts\n"
+    "if stepped on.");
+
+const u8 DecorDesc_BLUE_BALLOON[] = _(
+    "A blue balloon filled\n"
+    "with water. Bursts\n"
+    "if stepped on.");
+
+const u8 DecorDesc_YELLOW_BALLOON[] = _(
+    "A yellow balloon\n"
+    "filled with water.\n"
+    "Pops if stepped on.");
+
+const u8 DecorDesc_RED_TENT[] = _(
+    "A large red tent.\n"
+    "You can hide inside\n"
+    "it.");
+
+const u8 DecorDesc_BLUE_TENT[] = _(
+    "A large blue tent.\n"
+    "You can hide inside\n"
+    "it.");
+
+const u8 DecorDesc_SOLID_BOARD[] = _(
+    "Place over a hole to\n"
+    "cross to the other\n"
+    "side.");
+
+const u8 DecorDesc_SLIDE[] = _(
+    "Use to slide down\n"
+    "from the platform.");
+
+const u8 DecorDesc_FENCE_LENGTH[] = _(
+    "A small fence that\n"
+    "blocks passage.");
+
+const u8 DecorDesc_FENCE_WIDTH[] = _(
+    "A small fence that\n"
+    "blocks passage.");
+
+const u8 DecorDesc_TIRE[] = _(
+    "An old large tire.\n"
+    "Decorations can be\n"
+    "placed on top.");
+
+const u8 DecorDesc_STAND[] = _(
+    "A large pedestal\n"
+    "with steps.");
+
+const u8 DecorDesc_MUD_BALL[] = _(
+    "A large ball of mud.\n"
+    "Crumbles if stepped\n"
+    "on.");
+
+const u8 DecorDesc_BREAKABLE_DOOR[] = _(
+    "A weird door that\n"
+    "people can walk\n"
+    "right through.");
+
+const u8 DecorDesc_SAND_ORNAMENT[] = _(
+    "An ornament made\n"
+    "of sand. Crumbles if\n"
+    "touched.");
+
+const u8 DecorDesc_SILVER_SHIELD[] = _(
+    "Awarded for 50\n"
+    "straight wins at\n"
+    "the BATTLE TOWER.");
+
+const u8 DecorDesc_GOLD_SHIELD[] = _(
+    "Awarded for 100\n"
+    "straight wins at\n"
+    "the BATTLE TOWER.");
+
+const u8 DecorDesc_GLASS_ORNAMENT[] = _(
+    "A glass replica of\n"
+    "a famous sculpture\n"
+    "at the ART MUSEUM.");
+
+const u8 DecorDesc_TV[] = _(
+    "A small, gray-\n"
+    "colored toy TV.");
+
+const u8 DecorDesc_ROUND_TV[] = _(
+    "A toy TV modeled\n"
+    "in the image of a\n"
+    "SEEDOT.");
+
+const u8 DecorDesc_CUTE_TV[] = _(
+    "A toy TV modeled\n"
+    "in the image of a\n"
+    "SKITTY.");
+
+const u8 DecorDesc_GLITTER_MAT[] = _(
+    "An odd mat that\n"
+    "glitters if stepped\n"
+    "on.");
+
+const u8 DecorDesc_JUMP_MAT[] = _(
+    "A trick mat that\n"
+    "jumps when it is\n"
+    "stepped on.");
+
+const u8 DecorDesc_SPIN_MAT[] = _(
+    "A trick mat that\n"
+    "spins around when\n"
+    "stepped on.");
+
+const u8 DecorDesc_C_LOW_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "a low C note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_D_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "a D note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_E_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "an E note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_F_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "an F note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_G_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "a G note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_A_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "an A note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_B_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "a B note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_C_HIGH_NOTE_MAT[] = _(
+    "A mat that plays\n"
+    "a high C note when\n"
+    "stepped on.");
+
+const u8 DecorDesc_SURF_MAT[] = _(
+    "A mat designed with\n"
+    "a SURF image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_THUNDER_MAT[] = _(
+    "A mat designed with\n"
+    "a THUNDER image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_FIRE_BLAST_MAT[] = _(
+    "A mat designed with\n"
+    "a FIRE BLAST image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_POWDER_SNOW_MAT[] = _(
+    "A mat with a POWDER\n"
+    "SNOW image design.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_ATTRACT_MAT[] = _(
+    "A mat designed with\n"
+    "an ATTRACT image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_FISSURE_MAT[] = _(
+    "A mat designed with\n"
+    "a FISSURE image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_SPIKES_MAT[] = _(
+    "A mat designed with\n"
+    "a SPIKES image.\n"
+    "Put items on top.");
+
+const u8 DecorDesc_BALL_POSTER[] = _(
+    "A small poster\n"
+    "printed with POKé\n"
+    "BALLS.");
+
+const u8 DecorDesc_GREEN_POSTER[] = _(
+    "A small poster with\n"
+    "a TREECKO print.");
+
+const u8 DecorDesc_RED_POSTER[] = _(
+    "A small poster with\n"
+    "a TORCHIC print.");
+
+const u8 DecorDesc_BLUE_POSTER[] = _(
+    "A small poster with\n"
+    "a MUDKIP print.");
+
+const u8 DecorDesc_CUTE_POSTER[] = _(
+    "A small poster with\n"
+    "an AZURILL print.");
+
+const u8 DecorDesc_PIKA_POSTER[] = _(
+    "A large poster with\n"
+    "a PIKACHU and\n"
+    "PICHU print.");
+
+const u8 DecorDesc_LONG_POSTER[] = _(
+    "A large poster with\n"
+    "a SEVIPER print.");
+
+const u8 DecorDesc_SEA_POSTER[] = _(
+    "A large poster with\n"
+    "a RELICANTH print.");
+
+const u8 DecorDesc_SKY_POSTER[] = _(
+    "A large poster with\n"
+    "a WINGULL print.");
+
+const u8 DecorDesc_KISS_POSTER[] = _(
+    "A large poster with\n"
+    "a SMOOCHUM print.");
+
+const u8 DecorDesc_PICHU_DOLL[] = _(
+    "A PICHU doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_PIKACHU_DOLL[] = _(
+    "A PIKACHU doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_MARILL_DOLL[] = _(
+    "A MARILL doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_TOGEPI_DOLL[] = _(
+#if REVISION >= 1
+    "A TOGEPI doll.\n"
+#else
+    "A TOPGEPI doll.\n"
+#endif
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_CYNDAQUIL_DOLL[] = _(
+    "A CYNDAQUIL doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_CHIKORITA_DOLL[] = _(
+    "A CHIKORITA doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_TOTODILE_DOLL[] = _(
+    "A TOTODILE doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_JIGGLYPUFF_DOLL[] = _(
+    "A JIGGLYPUFF doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_MEOWTH_DOLL[] = _(
+    "A MEOWTH doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_CLEFAIRY_DOLL[] = _(
+    "A CLEFAIRY doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_DITTO_DOLL[] = _(
+    "A DITTO doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_SMOOCHUM_DOLL[] = _(
+    "A SMOOCHUM doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_TREECKO_DOLL[] = _(
+    "A TREECKO doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_TORCHIC_DOLL[] = _(
+    "A TORCHIC doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_MUDKIP_DOLL[] = _(
+    "A MUDKIP doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_DUSKULL_DOLL[] = _(
+    "A DUSKULL doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_WYNAUT_DOLL[] = _(
+    "A WYNAUT doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_BALTOY_DOLL[] = _(
+    "A BALTOY doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_KECLEON_DOLL[] = _(
+    "A KECLEON doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_AZURILL_DOLL[] = _(
+    "An AZURILL doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_SKITTY_DOLL[] = _(
+    "A SKITTY doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_SWABLU_DOLL[] = _(
+    "A SWABLU doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_GULPIN_DOLL[] = _(
+    "A GULPIN doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_LOTAD_DOLL[] = _(
+    "A LOTAD doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_SEEDOT_DOLL[] = _(
+    "A SEEDOT doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_PIKA_CUSHION[] = _(
+    "A PIKACHU cushion.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_ROUND_CUSHION[] = _(
+    "A MARILL cushion.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_KISS_CUSHION[] = _(
+    "A SMOOCHUM\n"
+    "cushion. Place it on\n"
+    "a mat or a desk.");
+
+const u8 DecorDesc_ZIGZAG_CUSHION[] = _(
+    "A ZIGZAGOON\n"
+    "cushion. Place it on\n"
+    "a mat or a desk.");
+
+const u8 DecorDesc_SPIN_CUSHION[] = _(
+    "A SPINDA cushion.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_DIAMOND_CUSHION[] = _(
+    "A SABLEYE cushion.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_BALL_CUSHION[] = _(
+    "A BALL cushion.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_GRASS_CUSHION[] = _(
+    "A grass-mark\n"
+    "cushion. Place it on\n"
+    "a mat or a desk.");
+
+const u8 DecorDesc_FIRE_CUSHION[] = _(
+    "A fire-mark\n"
+    "cushion. Place it on\n"
+    "a mat or a desk.");
+
+const u8 DecorDesc_WATER_CUSHION[] = _(
+    "A water-mark\n"
+    "cushion. Place it on\n"
+    "a mat or a desk.");
+
+const u8 DecorDesc_SNORLAX_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_RHYDON_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_LAPRAS_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_VENUSAUR_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_CHARIZARD_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_BLASTOISE_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_WAILMER_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_REGIROCK_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_REGICE_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u8 DecorDesc_REGISTEEL_DOLL[] = _(
+    "A large doll.\n"
+    "Place it on a mat\n"
+    "or a desk.");
+
+const u16 DecorGfx_SMALL_DESK[] = {
+    0x87
+};
+
+const u16 DecorGfx_POKEMON_DESK[] = {
+    0x8F
+};
+
+const u16 DecorGfx_HEAVY_DESK[] = {
+    0x90,
+    0x91,
+    0x92,
+    0x98,
+    0x99,
+    0x9A
+};
+
+const u16 DecorGfx_RAGGED_DESK[] = {
+    0x93,
+    0x94,
+    0x95,
+    0x9B,
+    0x9C,
+    0x9D
+};
+
+const u16 DecorGfx_COMFORT_DESK[] = {
+    0x96,
+    0x97,
+    0xA3,
+    0x9E,
+    0x9F,
+    0xAB
+};
+
+const u16 DecorGfx_PRETTY_DESK[] = {
+    0xBD,
+    0xBE,
+    0xBF,
+    0xC5,
+    0xC6,
+    0xC7,
+    0xCD,
+    0xCE,
+    0xCF
+};
+
+const u16 DecorGfx_BRICK_DESK[] = {
+    0xA0,
+    0xA1,
+    0xA2,
+    0xA8,
+    0xA9,
+    0xAA,
+    0xB0,
+    0xB1,
+    0xB2
+};
+
+const u16 DecorGfx_CAMP_DESK[] = {
+    0xA4,
+    0xA5,
+    0xA6,
+    0xAC,
+    0xAD,
+    0xAE,
+    0xB4,
+    0xB5,
+    0xB6
+};
+
+const u16 DecorGfx_HARD_DESK[] = {
+    0xA7,
+    0xBB,
+    0xBC,
+    0xAF,
+    0xC3,
+    0xC4,
+    0xB7,
+    0xCB,
+    0xCC
+};
+
+const u16 DecorGfx_SMALL_CHAIR[] = {
+    0xB8
+};
+
+const u16 DecorGfx_POKEMON_CHAIR[] = {
+    0xB9
+};
+
+const u16 DecorGfx_HEAVY_CHAIR[] = {
+    0xBA
+};
+
+const u16 DecorGfx_PRETTY_CHAIR[] = {
+    0xC0
+};
+
+const u16 DecorGfx_COMFORT_CHAIR[] = {
+    0xC1
+};
+
+const u16 DecorGfx_RAGGED_CHAIR[] = {
+    0xC2
+};
+
+const u16 DecorGfx_BRICK_CHAIR[] = {
+    0xC8
+};
+
+const u16 DecorGfx_CAMP_CHAIR[] = {
+    0xC9
+};
+
+const u16 DecorGfx_HARD_CHAIR[] = {
+    0xCA
+};
+
+const u16 DecorGfx_RED_PLANT[] = {
+    0xD0,
+    0xD8
+};
+
+const u16 DecorGfx_TROPICAL_PLANT[] = {
+    0xD2,
+    0xDA
+};
+
+const u16 DecorGfx_PRETTY_FLOWERS[] = {
+    0xD4,
+    0xDC
+};
+
+const u16 DecorGfx_COLORFUL_PLANT[] = {
+    0xE0,
+    0xE2,
+    0xE8,
+    0xE9
+};
+
+const u16 DecorGfx_BIG_PLANT[] = {
+    0xE4,
+    0xE6,
+    0xEC,
+    0xED
+};
+
+const u16 DecorGfx_GORGEOUS_PLANT[] = {
+    0xF0,
+    0xF2,
+    0xF8,
+    0xF9
+};
+
+const u16 DecorGfx_RED_BRICK[] = {
+    0x25,
+    0x2D
+};
+
+const u16 DecorGfx_YELLOW_BRICK[] = {
+    0x26,
+    0x2E
+};
+
+const u16 DecorGfx_BLUE_BRICK[] = {
+    0x27,
+    0x2F
+};
+
+const u16 DecorGfx_RED_BALLOON[] = {
+    0x138
+};
+
+const u16 DecorGfx_BLUE_BALLOON[] = {
+    0x13C
+};
+
+const u16 DecorGfx_YELLOW_BALLOON[] = {
+    0x140
+};
+
+const u16 DecorGfx_RED_TENT[] = {
+    0x30,
+    0x31,
+    0x32,
+    0x38,
+    0x39,
+    0x3A,
+    0x40,
+    0x41,
+    0x3B
+};
+
+const u16 DecorGfx_BLUE_TENT[] = {
+    0x48,
+    0x49,
+    0x68,
+    0x50,
+    0x51,
+    0x70,
+    0x58,
+    0x59,
+    0x69
+};
+
+const u16 DecorGfx_SOLID_BOARD[] = {
+    0x34,
+    0x3C
+};
+
+const u16 DecorGfx_SLIDE[] = {
+    0x35,
+    0x36,
+    0x3D,
+    0x3E,
+    0x63,
+    0x64,
+    0x6F,
+    0x77
+};
+
+const u16 DecorGfx_FENCE_LENGTH[] = {
+    0x33
+};
+
+const u16 DecorGfx_FENCE_WIDTH[] = {
+    0x2C
+};
+
+const u16 DecorGfx_TIRE[] = {
+    0x80,
+    0x81,
+    0x88,
+    0x89
+};
+
+const u16 DecorGfx_STAND[] = {
+    0x6A,
+    0x6B,
+    0x6C,
+    0x6D,
+    0x72,
+    0x73,
+    0x74,
+    0x75
+};
+
+const u16 DecorGfx_MUD_BALL[] = {
+    0x28
+};
+
+const u16 DecorGfx_BREAKABLE_DOOR[] = {
+    0x37,
+    0x3F
+};
+
+const u16 DecorGfx_SAND_ORNAMENT[] = {
+    0x85,
+    0x8D
+};
+
+const u16 DecorGfx_SILVER_SHIELD[] = {
+    0xD6,
+    0xDE
+};
+
+const u16 DecorGfx_GOLD_SHIELD[] = {
+    0x12E,
+    0x136
+};
+
+const u16 DecorGfx_GLASS_ORNAMENT[] = {
+    0x82,
+    0x8A
+};
+
+const u16 DecorGfx_TV[] = {
+    0xF4
+};
+
+const u16 DecorGfx_ROUND_TV[] = {
+    0xF5
+};
+
+const u16 DecorGfx_CUTE_TV[] = {
+    0xF6
+};
+
+const u16 DecorGfx_GLITTER_MAT[] = {
+    0x60
+};
+
+const u16 DecorGfx_JUMP_MAT[] = {
+    0x61
+};
+
+const u16 DecorGfx_SPIN_MAT[] = {
+    0x62
+};
+
+const u16 DecorGfx_C_LOW_NOTE_MAT[] = {
+    0x78
+};
+
+const u16 DecorGfx_D_NOTE_MAT[] = {
+    0x79
+};
+
+const u16 DecorGfx_E_NOTE_MAT[] = {
+    0x7A
+};
+
+const u16 DecorGfx_F_NOTE_MAT[] = {
+    0x7B
+};
+
+const u16 DecorGfx_G_NOTE_MAT[] = {
+    0x7C
+};
+
+const u16 DecorGfx_A_NOTE_MAT[] = {
+    0x7D
+};
+
+const u16 DecorGfx_B_NOTE_MAT[] = {
+    0x7E
+};
+
+const u16 DecorGfx_C_HIGH_NOTE_MAT[] = {
+    0xB3
+};
+
+const u16 DecorGfx_SURF_MAT[] = {
+    0x42,
+    0x43,
+    0x44,
+    0x4A,
+    0x4B,
+    0x4C,
+    0x52,
+    0x53,
+    0x54
+};
+
+const u16 DecorGfx_THUNDER_MAT[] = {
+    0x45,
+    0x46,
+    0x47,
+    0x4D,
+    0x4E,
+    0x4F,
+    0x55,
+    0x56,
+    0x57
+};
+
+const u16 DecorGfx_FIRE_BLAST_MAT[] = {
+    0x5A,
+    0x5B,
+    0x5C,
+    0x5D,
+    0x5E,
+    0x5F,
+    0x65,
+    0x66,
+    0x67
+};
+
+const u16 DecorGfx_POWDER_SNOW_MAT[] = {
+    0x100,
+    0x101,
+    0x102,
+    0x108,
+    0x109,
+    0x10A,
+    0x110,
+    0x111,
+    0x112
+};
+
+const u16 DecorGfx_ATTRACT_MAT[] = {
+    0x103,
+    0x104,
+    0x105,
+    0x10B,
+    0x10C,
+    0x10D,
+    0x113,
+    0x114,
+    0x115
+};
+
+const u16 DecorGfx_FISSURE_MAT[] = {
+    0x106,
+    0x107,
+    0x118,
+    0x10E,
+    0x10F,
+    0x120,
+    0x116,
+    0x117,
+    0x128
+};
+
+const u16 DecorGfx_SPIKES_MAT[] = {
+    0x119,
+    0x11A,
+    0x11B,
+    0x121,
+    0x122,
+    0x123,
+    0x129,
+    0x12A,
+    0x12B
+};
+
+const u16 DecorGfx_BALL_POSTER[] = {
+    0x130
+};
+
+const u16 DecorGfx_GREEN_POSTER[] = {
+    0x131
+};
+
+const u16 DecorGfx_RED_POSTER[] = {
+    0x132
+};
+
+const u16 DecorGfx_BLUE_POSTER[] = {
+    0x133
+};
+
+const u16 DecorGfx_CUTE_POSTER[] = {
+    0x134
+};
+
+const u16 DecorGfx_PIKA_POSTER[] = {
+    0x11C,
+    0x11D
+};
+
+const u16 DecorGfx_LONG_POSTER[] = {
+    0x11E,
+    0x11F
+};
+
+const u16 DecorGfx_SEA_POSTER[] = {
+    0x124,
+    0x125
+};
+
+const u16 DecorGfx_SKY_POSTER[] = {
+    0x126,
+    0x127
+};
+
+const u16 DecorGfx_KISS_POSTER[] = {
+    0x12C,
+    0x12D
+};
+
+const u16 DecorGfx_PICHU_DOLL[] = {
+    MAP_OBJ_GFX_PICHU_DOLL
+};
+
+const u16 DecorGfx_PIKACHU_DOLL[] = {
+    MAP_OBJ_GFX_PIKACHU_DOLL
+};
+
+const u16 DecorGfx_MARILL_DOLL[] = {
+    MAP_OBJ_GFX_MARILL_DOLL
+};
+
+const u16 DecorGfx_TOGEPI_DOLL[] = {
+    MAP_OBJ_GFX_TOGEPI_DOLL
+};
+
+const u16 DecorGfx_CYNDAQUIL_DOLL[] = {
+    MAP_OBJ_GFX_CYNDAQUIL_DOLL
+};
+
+const u16 DecorGfx_CHIKORITA_DOLL[] = {
+    MAP_OBJ_GFX_CHIKORITA_DOLL
+};
+
+const u16 DecorGfx_TOTODILE_DOLL[] = {
+    MAP_OBJ_GFX_TOTODILE_DOLL
+};
+
+const u16 DecorGfx_JIGGLYPUFF_DOLL[] = {
+    MAP_OBJ_GFX_JIGGLYPUFF_DOLL
+};
+
+const u16 DecorGfx_MEOWTH_DOLL[] = {
+    MAP_OBJ_GFX_MEOWTH_DOLL
+};
+
+const u16 DecorGfx_CLEFAIRY_DOLL[] = {
+    MAP_OBJ_GFX_CLEFAIRY_DOLL
+};
+
+const u16 DecorGfx_DITTO_DOLL[] = {
+    MAP_OBJ_GFX_DITTO_DOLL
+};
+
+const u16 DecorGfx_SMOOCHUM_DOLL[] = {
+    MAP_OBJ_GFX_SMOOCHUM_DOLL
+};
+
+const u16 DecorGfx_TREECKO_DOLL[] = {
+    MAP_OBJ_GFX_TREECKO_DOLL
+};
+
+const u16 DecorGfx_TORCHIC_DOLL[] = {
+    MAP_OBJ_GFX_TORCHIC_DOLL
+};
+
+const u16 DecorGfx_MUDKIP_DOLL[] = {
+    MAP_OBJ_GFX_MUDKIP_DOLL
+};
+
+const u16 DecorGfx_DUSKULL_DOLL[] = {
+    MAP_OBJ_GFX_DUSKULL_DOLL
+};
+
+const u16 DecorGfx_WYNAUT_DOLL[] = {
+    MAP_OBJ_GFX_WYNAUT_DOLL
+};
+
+const u16 DecorGfx_BALTOY_DOLL[] = {
+    MAP_OBJ_GFX_BALTOY_DOLL
+};
+
+const u16 DecorGfx_KECLEON_DOLL[] = {
+    MAP_OBJ_GFX_KECLEON_DOLL
+};
+
+const u16 DecorGfx_AZURILL_DOLL[] = {
+    MAP_OBJ_GFX_AZURILL_DOLL
+};
+
+const u16 DecorGfx_SKITTY_DOLL[] = {
+    MAP_OBJ_GFX_SKITTY_DOLL
+};
+
+const u16 DecorGfx_SWABLU_DOLL[] = {
+    MAP_OBJ_GFX_SWABLU_DOLL
+};
+
+const u16 DecorGfx_GULPIN_DOLL[] = {
+    MAP_OBJ_GFX_GULPIN_DOLL
+};
+
+const u16 DecorGfx_LOTAD_DOLL[] = {
+    MAP_OBJ_GFX_LOTAD_DOLL
+};
+
+const u16 DecorGfx_SEEDOT_DOLL[] = {
+    MAP_OBJ_GFX_SEEDOT_DOLL
+};
+
+const u16 DecorGfx_PIKA_CUSHION[] = {
+    MAP_OBJ_GFX_PIKA_CUSHION
+};
+
+const u16 DecorGfx_ROUND_CUSHION[] = {
+    MAP_OBJ_GFX_ROUND_CUSHION
+};
+
+const u16 DecorGfx_KISS_CUSHION[] = {
+    MAP_OBJ_GFX_KISS_CUSHION
+};
+
+const u16 DecorGfx_ZIGZAG_CUSHION[] = {
+    MAP_OBJ_GFX_ZIGZAG_CUSHION
+};
+
+const u16 DecorGfx_SPIN_CUSHION[] = {
+    MAP_OBJ_GFX_SPIN_CUSHION
+};
+
+const u16 DecorGfx_DIAMOND_CUSHION[] = {
+    MAP_OBJ_GFX_DIAMOND_CUSHION
+};
+
+const u16 DecorGfx_BALL_CUSHION[] = {
+    MAP_OBJ_GFX_BALL_CUSHION
+};
+
+const u16 DecorGfx_GRASS_CUSHION[] = {
+    MAP_OBJ_GFX_GRASS_CUSHION
+};
+
+const u16 DecorGfx_FIRE_CUSHION[] = {
+    MAP_OBJ_GFX_FIRE_CUSHION
+};
+
+const u16 DecorGfx_WATER_CUSHION[] = {
+    MAP_OBJ_GFX_WATER_CUSHION
+};
+
+const u16 DecorGfx_SNORLAX_DOLL[] = {
+    MAP_OBJ_GFX_BIG_SNORLAX_DOLL
+};
+
+const u16 DecorGfx_RHYDON_DOLL[] = {
+    MAP_OBJ_GFX_BIG_RHYDON_DOLL
+};
+
+const u16 DecorGfx_LAPRAS_DOLL[] = {
+    MAP_OBJ_GFX_BIG_LAPRAS_DOLL
+};
+
+const u16 DecorGfx_VENUSAUR_DOLL[] = {
+    MAP_OBJ_GFX_BIG_VENUSAUR_DOLL
+};
+
+const u16 DecorGfx_CHARIZARD_DOLL[] = {
+    MAP_OBJ_GFX_BIG_CHARIZARD_DOLL
+};
+
+const u16 DecorGfx_BLASTOISE_DOLL[] = {
+    MAP_OBJ_GFX_BIG_BLASTOISE_DOLL
+};
+
+const u16 DecorGfx_WAILMER_DOLL[] = {
+    MAP_OBJ_GFX_BIG_WAILMER_DOLL
+};
+
+const u16 DecorGfx_REGIROCK_DOLL[] = {
+    MAP_OBJ_GFX_BIG_REGIROCK_DOLL
+};
+
+const u16 DecorGfx_REGICE_DOLL[] = {
+    MAP_OBJ_GFX_BIG_REGICE_DOLL
+};
+
+const u16 DecorGfx_REGISTEEL_DOLL[] = {
+    MAP_OBJ_GFX_BIG_REGISTEEL_DOLL
+};
+
+const struct Decoration gDecorations[] = {
+    DECORATION(DECOR_NONE, _("SMALL DESK"), 0, 0, 0, 0, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK),
+    DECORATION(DECOR_SMALL_DESK, _("SMALL DESK"), 0, 0, 0, 3000, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK),
+    DECORATION(DECOR_POKEMON_DESK, _("POKéMON DESK"), 0, 0, 0, 3000, DecorDesc_POKEMON_DESK, DecorGfx_POKEMON_DESK),
+    DECORATION(DECOR_HEAVY_DESK, _("HEAVY DESK"), 0, 9, 0, 6000, DecorDesc_HEAVY_DESK, DecorGfx_HEAVY_DESK),
+    DECORATION(DECOR_RAGGED_DESK, _("RAGGED DESK"), 0, 9, 0, 6000, DecorDesc_RAGGED_DESK, DecorGfx_RAGGED_DESK),
+    DECORATION(DECOR_COMFORT_DESK, _("COMFORT DESK"), 0, 9, 0, 6000, DecorDesc_COMFORT_DESK, DecorGfx_COMFORT_DESK),
+    DECORATION(DECOR_PRETTY_DESK, _("PRETTY DESK"), 0, 8, 0, 9000, DecorDesc_PRETTY_DESK, DecorGfx_PRETTY_DESK),
+    DECORATION(DECOR_BRICK_DESK, _("BRICK DESK"), 0, 8, 0, 9000, DecorDesc_BRICK_DESK, DecorGfx_BRICK_DESK),
+    DECORATION(DECOR_CAMP_DESK, _("CAMP DESK"), 0, 8, 0, 9000, DecorDesc_CAMP_DESK, DecorGfx_CAMP_DESK),
+    DECORATION(DECOR_HARD_DESK, _("HARD DESK"), 0, 8, 0, 9000, DecorDesc_HARD_DESK, DecorGfx_HARD_DESK),
+    DECORATION(DECOR_SMALL_CHAIR, _("SMALL CHAIR"), 1, 0, 1, 2000, DecorDesc_SMALL_CHAIR, DecorGfx_SMALL_CHAIR),
+    DECORATION(DECOR_POKEMON_CHAIR, _("POKéMON CHAIR"), 1, 0, 1, 2000, DecorDesc_POKEMON_CHAIR, DecorGfx_POKEMON_CHAIR),
+    DECORATION(DECOR_HEAVY_CHAIR, _("HEAVY CHAIR"), 1, 0, 1, 2000, DecorDesc_HEAVY_CHAIR, DecorGfx_HEAVY_CHAIR),
+    DECORATION(DECOR_PRETTY_CHAIR, _("PRETTY CHAIR"), 1, 0, 1, 2000, DecorDesc_PRETTY_CHAIR, DecorGfx_PRETTY_CHAIR),
+    DECORATION(DECOR_COMFORT_CHAIR, _("COMFORT CHAIR"), 1, 0, 1, 2000, DecorDesc_COMFORT_CHAIR, DecorGfx_COMFORT_CHAIR),
+    DECORATION(DECOR_RAGGED_CHAIR, _("RAGGED CHAIR"), 1, 0, 1, 2000, DecorDesc_RAGGED_CHAIR, DecorGfx_RAGGED_CHAIR),
+    DECORATION(DECOR_BRICK_CHAIR, _("BRICK CHAIR"), 1, 0, 1, 2000, DecorDesc_BRICK_CHAIR, DecorGfx_BRICK_CHAIR),
+    DECORATION(DECOR_CAMP_CHAIR, _("CAMP CHAIR"), 1, 0, 1, 2000, DecorDesc_CAMP_CHAIR, DecorGfx_CAMP_CHAIR),
+    DECORATION(DECOR_HARD_CHAIR, _("HARD CHAIR"), 1, 0, 1, 2000, DecorDesc_HARD_CHAIR, DecorGfx_HARD_CHAIR),
+    DECORATION(DECOR_RED_PLANT, _("RED PLANT"), 2, 5, 2, 3000, DecorDesc_RED_PLANT, DecorGfx_RED_PLANT),
+    DECORATION(DECOR_TROPICAL_PLANT, _("TROPICAL PLANT"), 2, 5, 2, 3000, DecorDesc_TROPICAL_PLANT, DecorGfx_TROPICAL_PLANT),
+    DECORATION(DECOR_PRETTY_FLOWERS, _("PRETTY FLOWERS"), 2, 5, 2, 3000, DecorDesc_PRETTY_FLOWERS, DecorGfx_PRETTY_FLOWERS),
+    DECORATION(DECOR_COLORFUL_PLANT, _("COLORFUL PLANT"), 2, 4, 2, 5000, DecorDesc_COLORFUL_PLANT, DecorGfx_COLORFUL_PLANT),
+    DECORATION(DECOR_BIG_PLANT, _("BIG PLANT"), 2, 4, 2, 5000, DecorDesc_BIG_PLANT, DecorGfx_BIG_PLANT),
+    DECORATION(DECOR_GORGEOUS_PLANT, _("GORGEOUS PLANT"), 2, 4, 2, 5000, DecorDesc_GORGEOUS_PLANT, DecorGfx_GORGEOUS_PLANT),
+    DECORATION(DECOR_RED_BRICK, _("RED BRICK"), 0, 5, 3, 500, DecorDesc_RED_BRICK, DecorGfx_RED_BRICK),
+    DECORATION(DECOR_YELLOW_BRICK, _("YELLOW BRICK"), 0, 5, 3, 500, DecorDesc_YELLOW_BRICK, DecorGfx_YELLOW_BRICK),
+    DECORATION(DECOR_BLUE_BRICK, _("BLUE BRICK"), 0, 5, 3, 500, DecorDesc_BLUE_BRICK, DecorGfx_BLUE_BRICK),
+    DECORATION(DECOR_RED_BALLOON, _("RED BALLOON"), 1, 0, 3, 500, DecorDesc_RED_BALLOON, DecorGfx_RED_BALLOON),
+    DECORATION(DECOR_BLUE_BALLOON, _("BLUE BALLOON"), 1, 0, 3, 500, DecorDesc_BLUE_BALLOON, DecorGfx_BLUE_BALLOON),
+    DECORATION(DECOR_YELLOW_BALLOON, _("YELLOW BALLOON"), 1, 0, 3, 500, DecorDesc_YELLOW_BALLOON, DecorGfx_YELLOW_BALLOON),
+    DECORATION(DECOR_RED_TENT, _("RED TENT"), 1, 8, 3, 10000, DecorDesc_RED_TENT, DecorGfx_RED_TENT),
+    DECORATION(DECOR_BLUE_TENT, _("BLUE TENT"), 1, 8, 3, 10000, DecorDesc_BLUE_TENT, DecorGfx_BLUE_TENT),
+    DECORATION(DECOR_SOLID_BOARD, _("SOLID BOARD"), 1, 5, 3, 3000, DecorDesc_SOLID_BOARD, DecorGfx_SOLID_BOARD),
+    DECORATION(DECOR_SLIDE, _("SLIDE"), 1, 7, 3, 8000, DecorDesc_SLIDE, DecorGfx_SLIDE),
+    DECORATION(DECOR_FENCE_LENGTH, _("FENCE LENGTH"), 0, 0, 3, 500, DecorDesc_FENCE_LENGTH, DecorGfx_FENCE_LENGTH),
+    DECORATION(DECOR_FENCE_WIDTH, _("FENCE WIDTH"), 0, 0, 3, 500, DecorDesc_FENCE_WIDTH, DecorGfx_FENCE_WIDTH),
+    DECORATION(DECOR_TIRE, _("TIRE"), 0, 4, 3, 800, DecorDesc_TIRE, DecorGfx_TIRE),
+    DECORATION(DECOR_STAND, _("STAND"), 1, 3, 3, 7000, DecorDesc_STAND, DecorGfx_STAND),
+    DECORATION(DECOR_MUD_BALL, _("MUD BALL"), 1, 0, 3, 200, DecorDesc_MUD_BALL, DecorGfx_MUD_BALL),
+    DECORATION(DECOR_BREAKABLE_DOOR, _("BREAKABLE DOOR"), 1, 5, 3, 3000, DecorDesc_BREAKABLE_DOOR, DecorGfx_BREAKABLE_DOOR),
+    DECORATION(DECOR_SAND_ORNAMENT, _("SAND ORNAMENT"), 2, 5, 3, 3000, DecorDesc_SAND_ORNAMENT, DecorGfx_SAND_ORNAMENT),
+    DECORATION(DECOR_SILVER_SHIELD, _("SILVER SHIELD"), 2, 5, 3, 0, DecorDesc_SILVER_SHIELD, DecorGfx_SILVER_SHIELD),
+    DECORATION(DECOR_GOLD_SHIELD, _("GOLD SHIELD"), 2, 5, 3, 0, DecorDesc_GOLD_SHIELD, DecorGfx_GOLD_SHIELD),
+    DECORATION(DECOR_GLASS_ORNAMENT, _("GLASS ORNAMENT"), 2, 5, 3, 0, DecorDesc_GLASS_ORNAMENT, DecorGfx_GLASS_ORNAMENT),
+    DECORATION(DECOR_TV, _("TV"), 0, 0, 3, 3000, DecorDesc_TV, DecorGfx_TV),
+    DECORATION(DECOR_ROUND_TV, _("ROUND TV"), 0, 0, 3, 4000, DecorDesc_ROUND_TV, DecorGfx_ROUND_TV),
+    DECORATION(DECOR_CUTE_TV, _("CUTE TV"), 0, 0, 3, 4000, DecorDesc_CUTE_TV, DecorGfx_CUTE_TV),
+    DECORATION(DECOR_GLITTER_MAT, _("GLITTER MAT"), 1, 0, 4, 2000, DecorDesc_GLITTER_MAT, DecorGfx_GLITTER_MAT),
+    DECORATION(DECOR_JUMP_MAT, _("JUMP MAT"), 1, 0, 4, 2000, DecorDesc_JUMP_MAT, DecorGfx_JUMP_MAT),
+    DECORATION(DECOR_SPIN_MAT, _("SPIN MAT"), 1, 0, 4, 2000, DecorDesc_SPIN_MAT, DecorGfx_SPIN_MAT),
+    DECORATION(DECOR_C_LOW_NOTE_MAT, _("C Low NOTE MAT"), 1, 0, 4, 500, DecorDesc_C_LOW_NOTE_MAT, DecorGfx_C_LOW_NOTE_MAT),
+    DECORATION(DECOR_D_NOTE_MAT, _("D NOTE MAT"), 1, 0, 4, 500, DecorDesc_D_NOTE_MAT, DecorGfx_D_NOTE_MAT),
+    DECORATION(DECOR_E_NOTE_MAT, _("E NOTE MAT"), 1, 0, 4, 500, DecorDesc_E_NOTE_MAT, DecorGfx_E_NOTE_MAT),
+    DECORATION(DECOR_F_NOTE_MAT, _("F NOTE MAT"), 1, 0, 4, 500, DecorDesc_F_NOTE_MAT, DecorGfx_F_NOTE_MAT),
+    DECORATION(DECOR_G_NOTE_MAT, _("G NOTE MAT"), 1, 0, 4, 500, DecorDesc_G_NOTE_MAT, DecorGfx_G_NOTE_MAT),
+    DECORATION(DECOR_A_NOTE_MAT, _("A NOTE MAT"), 1, 0, 4, 500, DecorDesc_A_NOTE_MAT, DecorGfx_A_NOTE_MAT),
+    DECORATION(DECOR_B_NOTE_MAT, _("B NOTE MAT"), 1, 0, 4, 500, DecorDesc_B_NOTE_MAT, DecorGfx_B_NOTE_MAT),
+    DECORATION(DECOR_C_HIGH_NOTE_MAT, _("C High NOTE MAT"), 1, 0, 4, 500, DecorDesc_C_HIGH_NOTE_MAT, DecorGfx_C_HIGH_NOTE_MAT),
+    DECORATION(DECOR_SURF_MAT, _("SURF MAT"), 1, 8, 4, 4000, DecorDesc_SURF_MAT, DecorGfx_SURF_MAT),
+    DECORATION(DECOR_THUNDER_MAT, _("THUNDER MAT"), 1, 8, 4, 4000, DecorDesc_THUNDER_MAT, DecorGfx_THUNDER_MAT),
+    DECORATION(DECOR_FIRE_BLAST_MAT, _("FIRE BLAST MAT"), 1, 8, 4, 4000, DecorDesc_FIRE_BLAST_MAT, DecorGfx_FIRE_BLAST_MAT),
+    DECORATION(DECOR_POWDER_SNOW_MAT, _("POWDER SNOW MAT"), 1, 8, 4, 4000, DecorDesc_POWDER_SNOW_MAT, DecorGfx_POWDER_SNOW_MAT),
+    DECORATION(DECOR_ATTRACT_MAT, _("ATTRACT MAT"), 1, 8, 4, 4000, DecorDesc_ATTRACT_MAT, DecorGfx_ATTRACT_MAT),
+    DECORATION(DECOR_FISSURE_MAT, _("FISSURE MAT"), 1, 8, 4, 4000, DecorDesc_FISSURE_MAT, DecorGfx_FISSURE_MAT),
+    DECORATION(DECOR_SPIKES_MAT, _("SPIKES MAT"), 1, 8, 4, 4000, DecorDesc_SPIKES_MAT, DecorGfx_SPIKES_MAT),
+    DECORATION(DECOR_BALL_POSTER, _("BALL POSTER"), 3, 0, 5, 1000, DecorDesc_BALL_POSTER, DecorGfx_BALL_POSTER),
+    DECORATION(DECOR_GREEN_POSTER, _("GREEN POSTER"), 3, 0, 5, 1000, DecorDesc_GREEN_POSTER, DecorGfx_GREEN_POSTER),
+    DECORATION(DECOR_RED_POSTER, _("RED POSTER"), 3, 0, 5, 1000, DecorDesc_RED_POSTER, DecorGfx_RED_POSTER),
+    DECORATION(DECOR_BLUE_POSTER, _("BLUE POSTER"), 3, 0, 5, 1000, DecorDesc_BLUE_POSTER, DecorGfx_BLUE_POSTER),
+    DECORATION(DECOR_CUTE_POSTER, _("CUTE POSTER"), 3, 0, 5, 1000, DecorDesc_CUTE_POSTER, DecorGfx_CUTE_POSTER),
+    DECORATION(DECOR_PIKA_POSTER, _("PIKA POSTER"), 3, 1, 5, 1500, DecorDesc_PIKA_POSTER, DecorGfx_PIKA_POSTER),
+    DECORATION(DECOR_LONG_POSTER, _("LONG POSTER"), 3, 1, 5, 1500, DecorDesc_LONG_POSTER, DecorGfx_LONG_POSTER),
+    DECORATION(DECOR_SEA_POSTER, _("SEA POSTER"), 3, 1, 5, 1500, DecorDesc_SEA_POSTER, DecorGfx_SEA_POSTER),
+    DECORATION(DECOR_SKY_POSTER, _("SKY POSTER"), 3, 1, 5, 1500, DecorDesc_SKY_POSTER, DecorGfx_SKY_POSTER),
+    DECORATION(DECOR_KISS_POSTER, _("KISS POSTER"), 3, 1, 5, 1500, DecorDesc_KISS_POSTER, DecorGfx_KISS_POSTER),
+    DECORATION(DECOR_PICHU_DOLL, _("PICHU DOLL"), 4, 0, 6, 3000, DecorDesc_PICHU_DOLL, DecorGfx_PICHU_DOLL),
+    DECORATION(DECOR_PIKACHU_DOLL, _("PIKACHU DOLL"), 4, 0, 6, 3000, DecorDesc_PIKACHU_DOLL, DecorGfx_PIKACHU_DOLL),
+    DECORATION(DECOR_MARILL_DOLL, _("MARILL DOLL"), 4, 0, 6, 3000, DecorDesc_MARILL_DOLL, DecorGfx_MARILL_DOLL),
+    DECORATION(DECOR_TOGEPI_DOLL, _("TOGEPI DOLL"), 4, 0, 6, 3000, DecorDesc_TOGEPI_DOLL, DecorGfx_TOGEPI_DOLL),
+    DECORATION(DECOR_CYNDAQUIL_DOLL, _("CYNDAQUIL DOLL"), 4, 0, 6, 3000, DecorDesc_CYNDAQUIL_DOLL, DecorGfx_CYNDAQUIL_DOLL),
+    DECORATION(DECOR_CHIKORITA_DOLL, _("CHIKORITA DOLL"), 4, 0, 6, 3000, DecorDesc_CHIKORITA_DOLL, DecorGfx_CHIKORITA_DOLL),
+    DECORATION(DECOR_TOTODILE_DOLL, _("TOTODILE DOLL"), 4, 0, 6, 3000, DecorDesc_TOTODILE_DOLL, DecorGfx_TOTODILE_DOLL),
+    DECORATION(DECOR_JIGGLYPUFF_DOLL, _("JIGGLYPUFF DOLL"), 4, 0, 6, 3000, DecorDesc_JIGGLYPUFF_DOLL, DecorGfx_JIGGLYPUFF_DOLL),
+    DECORATION(DECOR_MEOWTH_DOLL, _("MEOWTH DOLL"), 4, 0, 6, 3000, DecorDesc_MEOWTH_DOLL, DecorGfx_MEOWTH_DOLL),
+    DECORATION(DECOR_CLEFAIRY_DOLL, _("CLEFAIRY DOLL"), 4, 0, 6, 3000, DecorDesc_CLEFAIRY_DOLL, DecorGfx_CLEFAIRY_DOLL),
+    DECORATION(DECOR_DITTO_DOLL, _("DITTO DOLL"), 4, 0, 6, 3000, DecorDesc_DITTO_DOLL, DecorGfx_DITTO_DOLL),
+    DECORATION(DECOR_SMOOCHUM_DOLL, _("SMOOCHUM DOLL"), 4, 0, 6, 3000, DecorDesc_SMOOCHUM_DOLL, DecorGfx_SMOOCHUM_DOLL),
+    DECORATION(DECOR_TREECKO_DOLL, _("TREECKO DOLL"), 4, 0, 6, 3000, DecorDesc_TREECKO_DOLL, DecorGfx_TREECKO_DOLL),
+    DECORATION(DECOR_TORCHIC_DOLL, _("TORCHIC DOLL"), 4, 0, 6, 3000, DecorDesc_TORCHIC_DOLL, DecorGfx_TORCHIC_DOLL),
+    DECORATION(DECOR_MUDKIP_DOLL, _("MUDKIP DOLL"), 4, 0, 6, 3000, DecorDesc_MUDKIP_DOLL, DecorGfx_MUDKIP_DOLL),
+    DECORATION(DECOR_DUSKULL_DOLL, _("DUSKULL DOLL"), 4, 0, 6, 3000, DecorDesc_DUSKULL_DOLL, DecorGfx_DUSKULL_DOLL),
+    DECORATION(DECOR_WYNAUT_DOLL, _("WYNAUT DOLL"), 4, 0, 6, 3000, DecorDesc_WYNAUT_DOLL, DecorGfx_WYNAUT_DOLL),
+    DECORATION(DECOR_BALTOY_DOLL, _("BALTOY DOLL"), 4, 0, 6, 3000, DecorDesc_BALTOY_DOLL, DecorGfx_BALTOY_DOLL),
+    DECORATION(DECOR_KECLEON_DOLL, _("KECLEON DOLL"), 4, 0, 6, 3000, DecorDesc_KECLEON_DOLL, DecorGfx_KECLEON_DOLL),
+    DECORATION(DECOR_AZURILL_DOLL, _("AZURILL DOLL"), 4, 0, 6, 3000, DecorDesc_AZURILL_DOLL, DecorGfx_AZURILL_DOLL),
+    DECORATION(DECOR_SKITTY_DOLL, _("SKITTY DOLL"), 4, 0, 6, 3000, DecorDesc_SKITTY_DOLL, DecorGfx_SKITTY_DOLL),
+    DECORATION(DECOR_SWABLU_DOLL, _("SWABLU DOLL"), 4, 0, 6, 3000, DecorDesc_SWABLU_DOLL, DecorGfx_SWABLU_DOLL),
+    DECORATION(DECOR_GULPIN_DOLL, _("GULPIN DOLL"), 4, 0, 6, 3000, DecorDesc_GULPIN_DOLL, DecorGfx_GULPIN_DOLL),
+    DECORATION(DECOR_LOTAD_DOLL, _("LOTAD DOLL"), 4, 0, 6, 3000, DecorDesc_LOTAD_DOLL, DecorGfx_LOTAD_DOLL),
+    DECORATION(DECOR_SEEDOT_DOLL, _("SEEDOT DOLL"), 4, 0, 6, 3000, DecorDesc_SEEDOT_DOLL, DecorGfx_SEEDOT_DOLL),
+    DECORATION(DECOR_PIKA_CUSHION, _("PIKA CUSHION"), 4, 0, 7, 2000, DecorDesc_PIKA_CUSHION, DecorGfx_PIKA_CUSHION),
+    DECORATION(DECOR_ROUND_CUSHION, _("ROUND CUSHION"), 4, 0, 7, 2000, DecorDesc_ROUND_CUSHION, DecorGfx_ROUND_CUSHION),
+    DECORATION(DECOR_KISS_CUSHION, _("KISS CUSHION"), 4, 0, 7, 2000, DecorDesc_KISS_CUSHION, DecorGfx_KISS_CUSHION),
+    DECORATION(DECOR_ZIGZAG_CUSHION, _("ZIGZAG CUSHION"), 4, 0, 7, 2000, DecorDesc_ZIGZAG_CUSHION, DecorGfx_ZIGZAG_CUSHION),
+    DECORATION(DECOR_SPIN_CUSHION, _("SPIN CUSHION"), 4, 0, 7, 2000, DecorDesc_SPIN_CUSHION, DecorGfx_SPIN_CUSHION),
+    DECORATION(DECOR_DIAMOND_CUSHION, _("DIAMOND CUSHION"), 4, 0, 7, 2000, DecorDesc_DIAMOND_CUSHION, DecorGfx_DIAMOND_CUSHION),
+    DECORATION(DECOR_BALL_CUSHION, _("BALL CUSHION"), 4, 0, 7, 2000, DecorDesc_BALL_CUSHION, DecorGfx_BALL_CUSHION),
+    DECORATION(DECOR_GRASS_CUSHION, _("GRASS CUSHION"), 4, 0, 7, 2000, DecorDesc_GRASS_CUSHION, DecorGfx_GRASS_CUSHION),
+    DECORATION(DECOR_FIRE_CUSHION, _("FIRE CUSHION"), 4, 0, 7, 2000, DecorDesc_FIRE_CUSHION, DecorGfx_FIRE_CUSHION),
+    DECORATION(DECOR_WATER_CUSHION, _("WATER CUSHION"), 4, 0, 7, 2000, DecorDesc_WATER_CUSHION, DecorGfx_WATER_CUSHION),
+    DECORATION(DECOR_SNORLAX_DOLL, _("SNORLAX DOLL"), 4, 5, 6, 10000, DecorDesc_SNORLAX_DOLL, DecorGfx_SNORLAX_DOLL),
+    DECORATION(DECOR_RHYDON_DOLL, _("RHYDON DOLL"), 4, 5, 6, 10000, DecorDesc_RHYDON_DOLL, DecorGfx_RHYDON_DOLL),
+    DECORATION(DECOR_LAPRAS_DOLL, _("LAPRAS DOLL"), 4, 5, 6, 10000, DecorDesc_LAPRAS_DOLL, DecorGfx_LAPRAS_DOLL),
+    DECORATION(DECOR_VENUSAUR_DOLL, _("VENUSAUR DOLL"), 4, 5, 6, 10000, DecorDesc_VENUSAUR_DOLL, DecorGfx_VENUSAUR_DOLL),
+    DECORATION(DECOR_CHARIZARD_DOLL, _("CHARIZARD DOLL"), 4, 5, 6, 10000, DecorDesc_CHARIZARD_DOLL, DecorGfx_CHARIZARD_DOLL),
+    DECORATION(DECOR_BLASTOISE_DOLL, _("BLASTOISE DOLL"), 4, 5, 6, 10000, DecorDesc_BLASTOISE_DOLL, DecorGfx_BLASTOISE_DOLL),
+    DECORATION(DECOR_WAILMER_DOLL, _("WAILMER DOLL"), 4, 5, 6, 10000, DecorDesc_WAILMER_DOLL, DecorGfx_WAILMER_DOLL),
+    DECORATION(DECOR_REGIROCK_DOLL, _("REGIROCK DOLL"), 4, 5, 6, 10000, DecorDesc_REGIROCK_DOLL, DecorGfx_REGIROCK_DOLL),
+    DECORATION(DECOR_REGICE_DOLL, _("REGICE DOLL"), 4, 5, 6, 10000, DecorDesc_REGICE_DOLL, DecorGfx_REGICE_DOLL),
+    DECORATION(DECOR_REGISTEEL_DOLL, _("REGISTEEL DOLL"), 4, 5, 6, 10000, DecorDesc_REGISTEEL_DOLL, DecorGfx_REGISTEEL_DOLL)
+};
+
+const u8 *const gUnknown_083EC5E4[] = {
+    SecretBaseText_Desk,
+    SecretBaseText_Chair,
+    SecretBaseText_Plant,
+    SecretBaseText_Ornament,
+    SecretBaseText_Mat,
+    SecretBaseText_Poster,
+    SecretBaseText_Doll,
+    SecretBaseText_Cushion
+};
+
+const struct MenuAction2 gUnknown_083EC604[] = {
+    MENUACTION2(SecretBaseText_Decorate, sub_80FF160),
+    MENUACTION2(SecretBaseText_PutAway, sub_8100A0C),
+    MENUACTION2(SecretBaseText_Toss, sub_8101700),
+    MENUACTION2(gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload)
+};
+
+const u8 *const gUnknown_083EC624[] = {
+    SecretBaseText_PutOutDecor,
+    SecretBaseText_StoreChosenDecor,
+    SecretBaseText_ThrowAwayDecor,
+    gMenuText_GoBackToPrev
+};
+
+const struct MenuAction3 gUnknown_083EC634[] = {
+    MENUACTION3(sub_80FF5BC, sub_80FF058),
+    MENUACTION3(sub_81017A0, sub_80FF058),
+    MENUACTION3(sub_81017A0, sub_80FF058),
+    MENUACTION3(sub_8109D04, sub_80FF058)
+};
+
+const u16 gUnknown_083EC654[] = {0x6318, 0x739C, 0x7FFF};
+const u8 gUnknown_083EC65A[] = _("{PALETTE 13}{STR_VAR_1}");
+
+const u8 Unknown_3EC660[] = {0, 1, 2, 3};
+const u8 Unknown_3EC664[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
+const u8 Unknown_3EC670[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+const u8 Unknown_3EC680[] = {0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21};
+const u8 Unknown_3EC68C[] = {0, 1, 2, 3, 4, 5, 6, 7};
+const u8 Unknown_3EC694[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+const u8 Unknown_3EC6B4[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45};
+const u8 Unknown_3EC6D8[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29};
+const u8 Unknown_3EC6F0[] = {0, 0, 0, 0};
+const u8 Unknown_3EC6F4[] = {0, 0, 1, 1, 0, 0, 1, 1};
+const u8 Unknown_3EC6FC[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2};
+const u8 Unknown_3EC708[] = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4, 4, 5, 5, 6, 6, 7, 7};
+const u8 Unknown_3EC728[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3};
+const u8 Unknown_3EC738[] = {0, 0, 0, 0, 1, 1, 1, 1};
+const u8 Unknown_3EC740[] = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
+const u8 Unknown_3EC74C[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
+const u8 Unknown_3EC76C[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8};
+const u8 Unknown_3EC790[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5};
+const u8 Unknown_3EC7A8[] = {4, 5, 6, 7};
+const u8 Unknown_3EC7AC[] = {4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7B4[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7C0[] = {4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7E0[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7F0[] = {4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC7F8[] = {4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC804[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC824[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC848[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+
+const struct UnkStruct_803EC860 gUnknown_083EC860[] = {
+    STRUCT_803EC860(Unknown_3EC660, Unknown_3EC6F0, Unknown_3EC7A8, 0x4),
+    STRUCT_803EC860(Unknown_3EC68C, Unknown_3EC6F4, Unknown_3EC7AC, 0x8),
+    STRUCT_803EC860(Unknown_3EC664, Unknown_3EC6FC, Unknown_3EC7B4, 0xc),
+    STRUCT_803EC860(Unknown_3EC694, Unknown_3EC708, Unknown_3EC7C0, 0x20),
+    STRUCT_803EC860(Unknown_3EC670, Unknown_3EC728, Unknown_3EC7E0, 0x10),
+    STRUCT_803EC860(Unknown_3EC68C, Unknown_3EC738, Unknown_3EC7F0, 0x8),
+    STRUCT_803EC860(Unknown_3EC680, Unknown_3EC740, Unknown_3EC7F8, 0xc),
+    STRUCT_803EC860(Unknown_3EC694, Unknown_3EC74C, Unknown_3EC804, 0x20),
+    STRUCT_803EC860(Unknown_3EC6B4, Unknown_3EC76C, Unknown_3EC824, 0x24),
+    STRUCT_803EC860(Unknown_3EC6D8, Unknown_3EC790, Unknown_3EC848, 0x18)
+};
+
+const struct UnkStruct_083EC900 gUnknown_083EC900[] = {
+    DECOSPRITETEMPLATE(0, 1, 0x78, 0x4e),
+    DECOSPRITETEMPLATE(1, 2, 0x80, 0x4e),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x56),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x46),
+    DECOSPRITETEMPLATE(0, 2, 0x80, 0x46),
+    DECOSPRITETEMPLATE(2, 2, 0x78, 0x46),
+    DECOSPRITETEMPLATE(2, 3, 0x80, 0x56),
+    DECOSPRITETEMPLATE(2, 3, 0x80, 0x36),
+    DECOSPRITETEMPLATE(0, 3, 0x90, 0x46),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x46)
+};
+
+const union AnimCmd gSpriteAnim_83EC928[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
+    gSpriteAnim_83EC928
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
+    {.data = (u8 *)&gUnknown_02038900.image, .size = sizeof gUnknown_02038900.image}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83EC93C = {
+    .tileTag = 0xffff,
+    .paletteTag = 3000,
+    .oam = &gUnknown_020391AC,
+    .anims = gSpriteAnimTable_83EC930,
+    .images = gSpriteImageTable_83EC934,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81009A8
+};
+
+const struct SpritePalette gUnknown_083EC954 = {.data = (u16 *)&gUnknown_02038900.palette, .tag = 3000};
+
+const struct YesNoFuncTable gUnknown_083EC95C = {.yesFunc = sub_81000C4, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC964 = {.yesFunc = sub_810026C, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC96C[] = {
+    {.yesFunc = sub_80FFAB0, .noFunc = sub_80FFB08},
+    {.yesFunc = sub_8100F88, .noFunc = sub_8100FB4}
+};
+
+const u8 gUnknown_083EC97C[] = {4, 4, 4, 4, 0, 3, 3, 0};
+const u8 gUnknown_083EC984[] = {4, 4, 4, 4, 0, 4, 3, 0};
+
+const u16 gUnknown_083EC98C[] = INCBIN_U16("graphics/unknown/83EC98C.gbapal");
+const u16 Unknown_3EC9AC[] = INCBIN_U16("graphics/unknown/83EC9AC.gbapal");
+const struct YesNoFuncTable gUnknown_083EC9CC = {.yesFunc = sub_810153C, .noFunc = sub_8100EEC};
+const struct YesNoFuncTable gUnknown_083EC9D4 = {.yesFunc = sub_8101590, .noFunc = sub_8100EEC};
+const u32 gSpriteImage_83EC9DC[] = INCBIN_U32("graphics/unknown_sprites/83EC9DC.4bpp");
+const struct SpritePalette gUnknown_083ECA5C = {.data = gUnknown_083EC98C, .tag = 8};
+const struct SpritePalette gUnknown_083ECA64 = {.data = Unknown_3EC9AC, .tag = 8};
+const struct OamData gOamData_83ECA6C = {
+    .size = 1, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_83ECA74[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ECA7C[] = {
+    gSpriteAnim_83ECA74
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ECA80[] = {
+    obj_frame_tiles(gSpriteImage_83EC9DC)
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
+    .tileTag = 0xffff,
+    .paletteTag = 8,
+    .oam = &gOamData_83ECA6C,
+    .anims = gSpriteAnimTable_83ECA7C,
+    .images = gSpriteImageTable_83ECA80,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8101698
+};
+
+const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
+
+u8 *const unref_label_083ECAA8[] = {ewram};
+
+// text
+
+extern u8 gUnknown_0815F399[];
 
 void sub_80FE1DC(void)
 {
@@ -684,7 +2210,7 @@ void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
 
 void sub_80FF394(u16 mapX, u16 mapY, u16 decIdx)
 {
-    switch (gDecorations[decIdx].decor_field_12)
+    switch (gDecorations[decIdx].shape)
     {
         case 0:
             sub_80FF1EC(mapX, mapY, 1, 1, decIdx);
@@ -839,16 +2365,16 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
     if (gDecorations[decoIdx].decor_field_11 != 4)
     {
         sub_81008BC(unk_02038900);
-        sub_8100930(unk_02038900->decoration->decor_field_12);
+        sub_8100930(unk_02038900->decoration->shape);
         sub_8100874(unk_02038900);
-        sub_810070C(unk_02038900->unk_884, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
+        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 0);
+        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
     } else
     {
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 1);
+        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
         gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
 }
@@ -856,8 +2382,8 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *unk_02038900)
 {
     u8 v0;
-    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2 - 8 * ((u8)gTasks[taskId].data[5] - 1);
-    if (unk_02038900->decoration->decor_field_12 == 2 || unk_02038900->decoration->decor_field_12 == 8 || unk_02038900->decoration->decor_field_12 == 9)
+    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->shape].x - 8 * ((u8)gTasks[taskId].data[5] - 1);
+    if (unk_02038900->decoration->shape == 2 || unk_02038900->decoration->shape == 8 || unk_02038900->decoration->shape == 9)
     {
         v0 -= 8;
     }
@@ -875,7 +2401,7 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *un
 
 void sub_80FF960(u8 taskId)
 {
-    switch (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].decor_field_12)
+    switch (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].shape)
     {
         case 0:
             gTasks[taskId].data[5] = 1;
@@ -974,7 +2500,7 @@ bool8 sub_80FFBDC(u16 a0, struct Decoration *decoration)
 }
 
 #ifdef NONMATCHING
-bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
+bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     u8 i;
     u8 j;
@@ -1080,7 +2606,7 @@ bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                if (decoration->decor_field_12 == 5)
+                if (decoration->shape == 5)
                 {
                     if (!sub_80572EC(behaviorAt))
                     {
@@ -1106,7 +2632,7 @@ bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
 }
 #else
 __attribute__((naked))
-bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
+bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     asm(".syntax unified\n"
     "\tpush {r4-r7,lr}\n"
@@ -1812,11 +3338,11 @@ void sub_8100494(u8 taskId)
     {
         if (gTasks[taskId].data[10] == 1)
         {
-            gUnknown_083EC96C[gTasks[taskId].data[12]][0](taskId);
+            gUnknown_083EC96C[gTasks[taskId].data[12]].yesFunc(taskId);
             return;
         } else if (gTasks[taskId].data[10] == 2)
         {
-            gUnknown_083EC96C[gTasks[taskId].data[12]][1](taskId);
+            gUnknown_083EC96C[gTasks[taskId].data[12]].noFunc(taskId);
             return;
         }
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
@@ -1891,7 +3417,7 @@ void sub_81006D0(struct UnkStruct_02038900 *unk_02038900)
     u16 i;
     for (i=0; i<0x800; i++)
     {
-        unk_02038900->unk_084[i] = 0;
+        unk_02038900->image[i] = 0;
     }
     for (i=0; i<0x40; i++)
     {
@@ -1961,7 +3487,7 @@ void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
 {
     u16 i;
     for (i=0; i<0x40; i++)
-        sub_8100740(&unk_02038900->unk_084[i * 32], unk_02038900->unk_004[i]);
+        sub_8100740(&unk_02038900->image[i * 32], unk_02038900->unk_004[i]);
 }
 
 u16 sub_810089C(u16 a0)
@@ -1973,14 +3499,14 @@ void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
 {
     u8 i;
     u8 idx;
-    idx = unk_02038900->decoration->decor_field_12;
+    idx = unk_02038900->decoration->shape;
     for (i=0; i<gUnknown_083EC860[idx].size; i++)
     {
         unk_02038900->unk_004[gUnknown_083EC860[idx].var0[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[idx].var4[i]] * 8 + gUnknown_083EC860[idx].var8[i]);
     }
 }
 
-void sub_8100930(u8 unk12)
+void sub_8100930(u8 decoShape)
 /*
  * This function sets an OAM object not directly referenced anywhere else
  * in the source.
@@ -1991,10 +3517,10 @@ void sub_8100930(u8 unk12)
     gUnknown_020391AC.objMode = 0;
     gUnknown_020391AC.mosaic = 0;
     gUnknown_020391AC.bpp = 0;
-    gUnknown_020391AC.shape = gUnknown_083EC900[unk12].unk_0;
+    gUnknown_020391AC.shape = gUnknown_083EC900[decoShape].shape;
     gUnknown_020391AC.x = 0;
     gUnknown_020391AC.matrixNum = 0;
-    gUnknown_020391AC.size = gUnknown_083EC900[unk12].unk_1;
+    gUnknown_020391AC.size = gUnknown_083EC900[decoShape].size;
     gUnknown_020391AC.tileNum = 0;
     gUnknown_020391AC.priority = 1;
     gUnknown_020391AC.paletteNum = 0;
@@ -2101,11 +3627,11 @@ void sub_8100B6C(void)
         {
             if (ewram_1f000.items[gUnknown_020391B4[i].var00] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
             {
-                gUnknown_020391B4[i].var02++;
+                gUnknown_020391B4[i].height++;
             }
-            for (j=0; j<gUnknown_020391B4[i].var02; j++)
+            for (j=0; j<gUnknown_020391B4[i].height; j++)
             {
-                for (k=0; k<gUnknown_020391B4[i].var01; k++)
+                for (k=0; k<gUnknown_020391B4[i].width; k++)
                 {
                     MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
                 }
@@ -2275,46 +3801,46 @@ void sub_81010F0(u8 taskId)
 
 void sub_8101118(u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
 {
-    if (gDecorations[decorIdx].decor_field_12 == 0)
+    if (gDecorations[decorIdx].shape == 0)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 1)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 1)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 2)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 2)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 3)
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 3)
     {
-        unk_020391B4->var01 = 4;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 4)
+        unk_020391B4->width = 4;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 4)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 5)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 5)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 6)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 6)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 3;
-    } else if (gDecorations[decorIdx].decor_field_12 == 7)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 3;
+    } else if (gDecorations[decorIdx].shape == 7)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 4;
-    } else if (gDecorations[decorIdx].decor_field_12 == 8)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 4;
+    } else if (gDecorations[decorIdx].shape == 8)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 3;
-    } else if (gDecorations[decorIdx].decor_field_12 == 9)
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 3;
+    } else if (gDecorations[decorIdx].shape == 9)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 2;
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 2;
     }
 }
 
@@ -2338,11 +3864,11 @@ bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B
     yOff = ewram_1f000.pos[decorIdx] & 0xf;
     if (ewram_1f000.items[decorIdx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28c)
     {
-        unk_020391B4->var02--;
+        unk_020391B4->height--;
     }
-    if (x >= xOff && x < xOff + unk_020391B4->var01 && y > yOff - unk_020391B4->var02 && y <= yOff)
+    if (x >= xOff && x < xOff + unk_020391B4->width && y > yOff - unk_020391B4->height && y <= yOff)
     {
-        sub_8101198(unk_020391B4->var01 - (x - xOff + 1), yOff - y);
+        sub_8101198(unk_020391B4->width - (x - xOff + 1), yOff - y);
         return TRUE;
     }
     return FALSE;
