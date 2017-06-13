@@ -134,7 +134,6 @@ SECTIONS {
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
-        asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
         asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
