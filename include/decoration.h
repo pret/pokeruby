@@ -235,7 +235,7 @@ extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
 extern u8 gUnknown_02039234;
 extern void (*gUnknown_0300485C)(void);
-const struct YesNoFuncTable gUnknown_083EC96C[];
+extern const struct YesNoFuncTable gUnknown_083EC96C[];
 extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 
 extern const u16 gUnknown_083EC654[3];
@@ -334,13 +334,15 @@ void sub_8101700(u8);
 void sub_81017A0(u8);
 void sub_8109D04(u8);
 
-void sub_81000C4(u8);
-void sub_810026C(u8);
+void sub_80FED3C(u8);
 void sub_80FFAB0(u8);
 void sub_80FFB08(u8);
+void sub_81000C4(u8);
+void sub_810026C(u8);
 void sub_8100F88(u8);
 void sub_8100FB4(u8);
 void sub_810153C(u8);
 void sub_8101590(u8);
+void sub_8101848(u8);
 
 #endif // GUARD_DECORATION_H

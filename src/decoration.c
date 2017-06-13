@@ -1508,6 +1508,38 @@ const u16 Unknown_3EC9AC[] = INCBIN_U16("graphics/unknown/83EC9AC.gbapal");
 const struct YesNoFuncTable gUnknown_083EC9CC = {.yesFunc = sub_810153C, .noFunc = sub_8100EEC};
 const struct YesNoFuncTable gUnknown_083EC9D4 = {.yesFunc = sub_8101590, .noFunc = sub_8100EEC};
 const u32 gSpriteImage_83EC9DC[] = INCBIN_U32("graphics/unknown_sprites/83EC9DC.4bpp");
+const struct SpritePalette gUnknown_083ECA5C = {.data = gUnknown_083EC98C, .tag = 8};
+const struct SpritePalette gUnknown_083ECA64 = {.data = Unknown_3EC9AC, .tag = 8};
+const struct OamData gOamData_83ECA6C = {
+    .size = 1, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_83ECA74[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ECA7C[] = {
+    gSpriteAnim_83ECA74
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ECA80[] = {
+    obj_frame_tiles(gSpriteImage_83EC9DC)
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
+    .tileTag = 0xffff,
+    .paletteTag = 8,
+    .oam = &gOamData_83ECA6C,
+    .anims = gSpriteAnimTable_83ECA7C,
+    .images = gSpriteImageTable_83ECA80,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8101698
+};
+
+const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
+
+u8 *const unref_label_083ECAA8[] = {ewram};
 
 // text
 
