@@ -12,6 +12,7 @@
 #include "rng.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -57,45 +58,50 @@ struct PokedexEntry
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_0202FFB8;
 extern u8 gUnknown_0202FFBA;
 extern struct PokedexListItem *gUnknown_0202FFBC;
 extern u8 gUnknown_03005CE8;
 extern IntrCallback gUnknown_03005CEC;
+extern u8 gUnknown_03005E98;
 extern u8 gPokedexMenu_Gfx[];
 extern u8 gUnknown_08E96738[];
 extern u8 gUnknown_08E9C6DC[];
 extern u8 gUnknown_08E96888[];
 extern u8 gUnknown_08E96994[];
-extern struct SpriteSheet gUnknown_083A05CC;
-extern struct SpritePalette gUnknown_083A05DC[];
 extern u8 gUnknown_0839FA7C[];
 extern u8 gUnknown_0839F67C[];
 extern u16 gPokedexMenu_Pal[];
 extern u16 gPokedexMenu2_Pal[];
 extern u8 gUnknown_0839F73C[];
-extern u8 gUnknown_083A05EC[];
-extern u8 gUnknown_083A05F1[];
-extern struct SpriteTemplate gSpriteTemplate_83A053C;
+extern u8 gUnknown_0839F8A0[];
+extern u8 gUnknown_0839F988[];
 extern struct SpriteTemplate gSpriteTemplate_83A0524;
+extern struct SpriteTemplate gSpriteTemplate_83A053C;
 extern struct SpriteTemplate gSpriteTemplate_83A0554;
 extern struct SpriteTemplate gSpriteTemplate_83A056C;
 extern struct SpriteTemplate gSpriteTemplate_83A0584;
 extern struct SpriteTemplate gSpriteTemplate_83A059C;
 extern struct SpriteTemplate gSpriteTemplate_83A05B4;
+extern struct SpriteSheet gUnknown_083A05CC;
+extern struct SpritePalette gUnknown_083A05DC[];
+extern u8 gUnknown_083A05EC[];
+extern u8 gUnknown_083A05F1[];
+extern u8 gUnknown_083A05F8[];
+extern u8 gUnknown_083B4EC4[];
 extern u8 gUnknown_083B5558[];
+extern void *const gUnknown_083B5584[];
 extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
-extern u8 gUnknown_083A05F8[];
-extern u8 gUnknown_0839F8A0[];
-extern u8 gUnknown_0839F988[];
-extern u8 gUnknown_03005E98;
-extern u8 gUnknown_083B4EC4[];
+extern const struct SpriteTemplate gUnknown_083B57A4;
+extern struct SpriteFrameImage *const gUnknown_083B5794[];
 extern u8 gUnknown_08E96ACC[];
 extern u8 gUnknown_08E96B58[];
 extern const u8 *const gMonFootprintTable[];
-
-extern struct PokedexEntry gPokedexEntries[];
+extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct MonCoords gTrainerFrontPicCoords[];
+extern const struct PokedexEntry gPokedexEntries[];
 
 extern void sub_800D74C();
 extern const u16 *species_and_otid_get_pal(u16, u32, u32);
@@ -2153,7 +2159,6 @@ void Task_InitPageScreenMultistep(u8 taskId)
             sub_8091154(NationalToHoennOrder(gUnknown_0202FFBC->dexNum), 0xD, 3);
         else
             sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
-        //_0808F45A
         sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
         MenuPrint(gDexText_UnknownPoke, 11, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
@@ -2166,7 +2171,6 @@ void Task_InitPageScreenMultistep(u8 taskId)
             MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             sub_80917CC(14, 0x3FC);
         }
-        //_0808F50C
         else
         {
             MenuPrint(gUnknown_083A05F8, 2, 13);
@@ -2177,7 +2181,6 @@ void Task_InitPageScreenMultistep(u8 taskId)
     case 5:
         if (gTasks[taskId].data[1] == 0)
         {
-            //_0808F540
             gTasks[taskId].data[4] = (u16)sub_80918EC(gUnknown_0202FFBC->dexNum, 0x30, 0x38, 0);
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
         }
@@ -2190,9 +2193,7 @@ void Task_InitPageScreenMultistep(u8 taskId)
         if (gTasks[taskId].data[2] != 0)
             r3 = 0x14;
         if (gTasks[taskId].data[1] != 0)
-        {
             r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 0x10));
-        }
         BeginNormalPaletteFade(~r3, 0, 0x10, 0, 0);
         SetVBlankCallback(gUnknown_03005CEC);
         gMain.state++;
@@ -3758,7 +3759,7 @@ u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
     return i;
 }
 
-void sub_8091304(u8 *name, u8 left, u8 top)
+void sub_8091304(const u8 *name, u8 left, u8 top)
 {
     u8 str[32];  // Not exactly sure how long this needs to be
     u8 i;
@@ -3962,4 +3963,123 @@ void sub_8091738(u16 a, u16 b, u16 c)
         }
     }
     CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
+}
+
+void sub_80917CC(u16 a, u16 b)
+{
+    *(u16 *)(VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
+    *(u16 *)(VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
+    *(u16 *)(VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
+    *(u16 *)(VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
+}
+
+u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
+{
+    switch (a)
+    {
+    case 1:
+        if (b > c)
+            b--;
+        break;
+    case 0:
+        if (b < d)
+            b++;
+        break;
+    case 3:
+        if (b > c)
+            b--;
+        else
+            b = d;
+        break;
+    case 2:
+        if (b < d)
+            b++;
+        else
+            b = c;
+        break;
+    }
+    return b;
+}
+
+void nullsub_59(void)
+{
+}
+
+void sub_8091878(u16 a, u8 b)
+{
+    gUnknown_02024E8C = gUnknown_083B57A4;
+    gUnknown_02024E8C.paletteTag = a;
+    gUnknown_02024E8C.images = gUnknown_083B5794[b];
+    gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
+}
+
+void sub_80918B0(u16 a, u8 b)
+{
+    gUnknown_02024E8C = gUnknown_083B57A4;
+    gUnknown_02024E8C.paletteTag = a;
+    gUnknown_02024E8C.images = gUnknown_083B5794[b];
+    gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
+}
+
+u16 sub_80918EC(u16 num, s16 b, s16 c, u16 d)
+{
+    u8 spriteId;
+    
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        DecompressPicFromTable_2(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          (void *)0x02000000,
+          gUnknown_083B5584[d],
+          num);
+        break;
+    case 0x134:
+        LoadSpecialPokePic(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          0x02000000,
+          gUnknown_083B5584[d],
+          num,
+          gSaveBlock2.pokedex.spindaPersonality,
+          1);
+        break;
+    case SPECIES_UNOWN:
+        LoadSpecialPokePic(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          0x02000000,
+          gUnknown_083B5584[d],
+          num,
+          gSaveBlock2.pokedex.unownPersonality,
+          1);
+        break;
+    }
+    LoadCompressedPalette(gMonPaletteTable[num].data, 0x100 + d * 16, 32);
+    sub_8091878(d, d);
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, 0);
+    gSprites[spriteId].oam.paletteNum = d;
+    return spriteId;
+}
+
+u8 sub_8091A4C(u16 gender, u16 b, u16 c, u16 d)
+{
+    u8 spriteId;
+    
+    DecompressPicFromTable_2(
+      &gTrainerFrontPicTable[gender],
+      gTrainerFrontPicCoords[gender].coords,
+      gTrainerFrontPicCoords[gender].y_offset,
+      (void *)0x02000000,
+      gUnknown_083B5584[0],
+      gender);
+    sub_80918B0(gender, 0);
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, 0);
+    gSprites[spriteId].oam.paletteNum = d;
+    return spriteId;
 }
