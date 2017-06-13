@@ -3,49 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_083EC5E4:: @ 83EC5E4
-	.4byte SecretBaseText_Desk
-	.4byte SecretBaseText_Chair
-	.4byte SecretBaseText_Plant
-	.4byte SecretBaseText_Ornament
-	.4byte SecretBaseText_Mat
-	.4byte SecretBaseText_Poster
-	.4byte SecretBaseText_Doll
-	.4byte SecretBaseText_Cushion
-
-	.align 2
-gUnknown_083EC604:: @ 83EC604
-	.4byte SecretBaseText_Decorate, sub_80FF160
-	.4byte SecretBaseText_PutAway, sub_8100A0C
-	.4byte SecretBaseText_Toss, sub_8101700
-	.4byte gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload
-
-	.align 2
-gUnknown_083EC624:: @ 83EC624
-	.4byte SecretBaseText_PutOutDecor
-	.4byte SecretBaseText_StoreChosenDecor
-	.4byte SecretBaseText_ThrowAwayDecor
-	.4byte gMenuText_GoBackToPrev
-
-	.align 2
-gUnknown_083EC634:: @ 83EC634
-	.4byte sub_80FF5BC
-	.4byte sub_80FF058
-	.4byte sub_81017A0
-	.4byte sub_80FF058
-	.4byte sub_81017A0
-	.4byte sub_80FF058
-	.4byte sub_8109D04
-	.4byte sub_80FF058
-
-	.align 2
-gUnknown_083EC654:: @ 83EC654
-	.2byte 0x6318, 0x739C, 0x7FFF
-
-gUnknown_083EC65A:: @ 83EC65A
-	.string "{PALETTE 13}{STR_VAR_1}$"
-
 Unknown_3EC660: @ 83EC660
 	.byte 0, 1, 2, 3
 

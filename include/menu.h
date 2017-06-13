@@ -12,13 +12,13 @@ struct MenuAction
 struct MenuAction2
 {
     const u8 *text;
-    u8 (*func)(u8);
+    void (*func)(u8);
 };
 
 struct MenuAction3
 {
-    u8 (*func1)(u8);
-    u8 (*func2)(u8);
+    void (*func1)(u8);
+    void (*func2)(u8);
 };
 
 void CloseMenu(void);

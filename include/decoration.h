@@ -240,8 +240,8 @@ extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 
 extern const u16 gUnknown_083EC654[3];
 extern const struct DecorationInventory gDecorationInventories[];
-extern const u8 *gUnknown_083EC5E4[];
-extern const u8 *gUnknown_083EC624[];
+extern const u8 *const gUnknown_083EC5E4[];
+extern const u8 *const gUnknown_083EC624[];
 extern u8 gUnknown_020388F7[];
 extern const struct MenuAction2 gUnknown_083EC604[];
 extern const struct MenuAction3 gUnknown_083EC634[];
@@ -325,5 +325,13 @@ void sub_81016C8(void);
 void sub_81016F4(void);
 void sub_8101824(u8);
 void sub_8109A30(u8);
+
+void sub_80FF160(u8);
+void sub_80FF5BC(u8);
+void sub_80FF058(u8);
+void sub_8100A0C(u8);
+void sub_8101700(u8);
+void sub_81017A0(u8);
+void sub_8109D04(u8);
 
 #endif // GUARD_DECORATION_H

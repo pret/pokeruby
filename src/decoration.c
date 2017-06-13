@@ -29,6 +29,9 @@
 .tiles = _tiles\
 }
 
+#define MENUACTION2(_text, _func) {.text = _text, .func = _func}
+#define MENUACTION3(_func1, _func2) {.func1 = _func1, .func2 = _func2}
+
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
     "for one.");
@@ -1372,6 +1375,43 @@ const struct Decoration gDecorations[] = {
     DECORATION(DECOR_REGICE_DOLL, _("REGICE DOLL"), 4, 5, 6, 10000, DecorDesc_REGICE_DOLL, DecorGfx_REGICE_DOLL),
     DECORATION(DECOR_REGISTEEL_DOLL, _("REGISTEEL DOLL"), 4, 5, 6, 10000, DecorDesc_REGISTEEL_DOLL, DecorGfx_REGISTEEL_DOLL)
 };
+
+const u8 *const gUnknown_083EC5E4[] = {
+    SecretBaseText_Desk,
+    SecretBaseText_Chair,
+    SecretBaseText_Plant,
+    SecretBaseText_Ornament,
+    SecretBaseText_Mat,
+    SecretBaseText_Poster,
+    SecretBaseText_Doll,
+    SecretBaseText_Cushion
+};
+
+const struct MenuAction2 gUnknown_083EC604[] = {
+    MENUACTION2(SecretBaseText_Decorate, sub_80FF160),
+    MENUACTION2(SecretBaseText_PutAway, sub_8100A0C),
+    MENUACTION2(SecretBaseText_Toss, sub_8101700),
+    MENUACTION2(gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload)
+};
+
+const u8 *const gUnknown_083EC624[] = {
+    SecretBaseText_PutOutDecor,
+    SecretBaseText_StoreChosenDecor,
+    SecretBaseText_ThrowAwayDecor,
+    gMenuText_GoBackToPrev
+};
+
+const struct MenuAction3 gUnknown_083EC634[] = {
+    MENUACTION3(sub_80FF5BC, sub_80FF058),
+    MENUACTION3(sub_81017A0, sub_80FF058),
+    MENUACTION3(sub_81017A0, sub_80FF058),
+    MENUACTION3(sub_8109D04, sub_80FF058)
+};
+
+const u16 gUnknown_083EC654[] = {0x6318, 0x739C, 0x7FFF};
+const u8 gUnknown_083EC65A[] = _("{PALETTE 13}{STR_VAR_1}");
+
+// text
 
 extern u8 gUnknown_0815F399[];
 
