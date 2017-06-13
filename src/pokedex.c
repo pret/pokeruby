@@ -3524,7 +3524,7 @@ static void sub_8090584(u8 a, u16 b)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8090584(u8 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -3668,7 +3668,7 @@ static void sub_8090644(u8 a, u16 b)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8090644(u8 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -5061,7 +5061,7 @@ void sub_8092810(u8 a, u8 b, u8 c, u8 d)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8092810(u8 a, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\

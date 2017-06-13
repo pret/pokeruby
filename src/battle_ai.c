@@ -991,7 +991,7 @@ static void BattleAICmd_is_most_powerful_move(void)
     gAIScriptPtr += 1;
 }
 #else
-__attribute__((naked))
+NAKED
 static void BattleAICmd_is_most_powerful_move(void)
 {
     asm(".syntax unified\n\

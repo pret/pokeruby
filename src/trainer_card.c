@@ -760,7 +760,7 @@ bool8 sub_8093AA0(struct Task *task)
     return FALSE;
 }
 
-__attribute__((naked))
+NAKED
 bool8 sub_8093AF0()
 {
     asm(".syntax unified\n\
@@ -927,7 +927,7 @@ bool8 sub_8093C0C(struct TrainerCard *trainerCard)
     return TRUE;
 }
 
-__attribute__((naked))
+NAKED
 bool8 sub_8093C38()
 {
     asm(".syntax unified\n\
@@ -1091,7 +1091,7 @@ bool8 sub_8093D50(void)
     return FALSE;
 }
 
-__attribute__((naked))
+NAKED
 void sub_8093D7C(void)
 {
     asm(".syntax unified\n\
@@ -1151,7 +1151,7 @@ static void sub_8093DEC(void)
     sub_8094188();
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8093E04()
 {
     asm(".syntax unified\n\
@@ -1175,7 +1175,7 @@ _08093E24: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8093E28(void)
 {
     asm(".syntax unified\n\
@@ -1251,7 +1251,7 @@ static void sub_8093EF8(void)
     LoadTrainerGfx_TrainerCard(ewram0.var_64.gender, 80, (void *)(VRAM + 0x1880));
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8093F14(void)
 {
     asm(".syntax unified\n\
@@ -1291,7 +1291,7 @@ static void sub_8093F64(void)
     CpuFastSet(gUnknown_08E8D9C0, (void *)(VRAM + 0x5000), 320);
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8093F80(void)
 {
     asm(".syntax unified\n\
@@ -1339,7 +1339,7 @@ _08093FCC: .4byte 0x06004000\n\
     .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8093FD0(void)
 {
     asm(".syntax unified\n\
@@ -1399,7 +1399,7 @@ _08094034: .4byte 0x0000408f\n\
     .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8094038(void)
 {
     asm(".syntax unified\n\
@@ -1490,7 +1490,7 @@ _080940E0: .4byte 0x00000402\n\
     .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 static void sub_80940E4()
 {
     asm(".syntax unified\n\
@@ -1519,7 +1519,7 @@ _0809410C: .4byte 0x000003ff\n\
     .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 static void sub_8094110()
 {
     asm(".syntax unified\n\

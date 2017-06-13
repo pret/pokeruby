@@ -2620,7 +2620,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     asm(".syntax unified\n"
@@ -3951,7 +3951,7 @@ void sub_8101460(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8101460(u8 taskId)
 {
     asm(".syntax unified\n"

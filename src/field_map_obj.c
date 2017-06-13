@@ -201,7 +201,7 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8
     return var;
 }
 #else
-__attribute__((naked))
+NAKED
 u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8 c)
 {
     asm(".syntax unified\n\
@@ -4273,7 +4273,7 @@ int state_to_direction(u8 a0, u8 a1, u8 a2)
     return gUnknown_08375767[a0 - 1][zffuOffset - 1];
 }
 #else
-__attribute__((naked))
+NAKED
 int state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     asm(".syntax unified\n\
@@ -6581,7 +6581,7 @@ void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\

@@ -122,7 +122,7 @@ u8 sub_803C434(u8 a1)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 u8 sub_803C434(u8 a1)
 {
     asm(".syntax unified\n\

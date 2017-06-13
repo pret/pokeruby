@@ -390,7 +390,7 @@ void sub_80BBDD0(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 void sub_80BBCCC(u8 flagIn)
 {
     asm(".syntax unified\n\
@@ -516,7 +516,7 @@ _080BBDCC: .4byte 0x00000e0a\n\
 .syntax divided\n");
 }
 
-__attribute__((naked))
+NAKED
 void sub_80BBDD0(void)
 {
     asm(".syntax unified\n\
@@ -898,7 +898,7 @@ void sub_80BC300(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80BC300(void)
 {
     asm(".syntax unified\n\

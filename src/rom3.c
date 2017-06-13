@@ -765,7 +765,7 @@ void EmitPrintString(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 0x44);
 }
 #else
-__attribute__((naked))
+NAKED
 void EmitPrintString(u8 a, u16 b)
 {
     asm(".syntax unified\n\
@@ -903,7 +903,7 @@ _0800CA64: .4byte gBattleTextBuff1\n\
 }
 #endif
 
-__attribute__((naked))
+NAKED
 void EmitPrintStringPlayerOnly()
 {
     asm(".syntax unified\n\
