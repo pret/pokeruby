@@ -2105,7 +2105,7 @@ void sub_8100B6C(void)
             }
             for (j=0; j<gUnknown_020391B4[i].var02; j++)
             {
-                for (k=0; k<gUnknown_020391B4[i].var01; k++)
+                for (k=0; k<gUnknown_020391B4[i].width; k++)
                 {
                     MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
                 }
@@ -2277,43 +2277,43 @@ void sub_8101118(u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
 {
     if (gDecorations[decorIdx].decor_field_12 == 0)
     {
-        unk_020391B4->var01 = 1;
+        unk_020391B4->width = 1;
         unk_020391B4->var02 = 1;
     } else if (gDecorations[decorIdx].decor_field_12 == 1)
     {
-        unk_020391B4->var01 = 2;
+        unk_020391B4->width = 2;
         unk_020391B4->var02 = 1;
     } else if (gDecorations[decorIdx].decor_field_12 == 2)
     {
-        unk_020391B4->var01 = 3;
+        unk_020391B4->width = 3;
         unk_020391B4->var02 = 1;
     } else if (gDecorations[decorIdx].decor_field_12 == 3)
     {
-        unk_020391B4->var01 = 4;
+        unk_020391B4->width = 4;
         unk_020391B4->var02 = 2;
     } else if (gDecorations[decorIdx].decor_field_12 == 4)
     {
-        unk_020391B4->var01 = 2;
+        unk_020391B4->width = 2;
         unk_020391B4->var02 = 2;
     } else if (gDecorations[decorIdx].decor_field_12 == 5)
     {
-        unk_020391B4->var01 = 1;
+        unk_020391B4->width = 1;
         unk_020391B4->var02 = 2;
     } else if (gDecorations[decorIdx].decor_field_12 == 6)
     {
-        unk_020391B4->var01 = 1;
+        unk_020391B4->width = 1;
         unk_020391B4->var02 = 3;
     } else if (gDecorations[decorIdx].decor_field_12 == 7)
     {
-        unk_020391B4->var01 = 2;
+        unk_020391B4->width = 2;
         unk_020391B4->var02 = 4;
     } else if (gDecorations[decorIdx].decor_field_12 == 8)
     {
-        unk_020391B4->var01 = 3;
+        unk_020391B4->width = 3;
         unk_020391B4->var02 = 3;
     } else if (gDecorations[decorIdx].decor_field_12 == 9)
     {
-        unk_020391B4->var01 = 3;
+        unk_020391B4->width = 3;
         unk_020391B4->var02 = 2;
     }
 }
@@ -2340,9 +2340,9 @@ bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B
     {
         unk_020391B4->var02--;
     }
-    if (x >= xOff && x < xOff + unk_020391B4->var01 && y > yOff - unk_020391B4->var02 && y <= yOff)
+    if (x >= xOff && x < xOff + unk_020391B4->width && y > yOff - unk_020391B4->var02 && y <= yOff)
     {
-        sub_8101198(unk_020391B4->var01 - (x - xOff + 1), yOff - y);
+        sub_8101198(unk_020391B4->width - (x - xOff + 1), yOff - y);
         return TRUE;
     }
     return FALSE;
@@ -2434,7 +2434,7 @@ void sub_8101460(u8 taskId)
         {
             xOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] >> 4;
             yOff = ewram_1f000.pos[gUnknown_020391B4[0].var00] & 0xf;
-            sub_81013B8(xOff, yOff - gUnknown_020391B4[0].var02 + 1, xOff + gUnknown_020391B4[0].var01 - 1, yOff);
+            sub_81013B8(xOff, yOff - gUnknown_020391B4[0].var02 + 1, xOff + gUnknown_020391B4[0].width - 1, yOff);
         }
     }
 }
