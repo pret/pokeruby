@@ -67,13 +67,11 @@ extern IntrCallback gUnknown_03005CEC;
 extern u8 gUnknown_03005E98;
 extern u8 gPokedexMenu_Gfx[];
 extern u8 gUnknown_08E96738[];
-extern u8 gUnknown_08E9C6DC[];
 extern u8 gUnknown_08E96888[];
 extern u8 gUnknown_08E96994[];
+extern u8 gUnknown_08E9C6DC[];
 extern u8 gUnknown_0839FA7C[];
 extern u8 gUnknown_0839F67C[];
-extern u16 gPokedexMenu_Pal[];
-extern u16 gPokedexMenu2_Pal[];
 extern u8 gUnknown_0839F73C[];
 extern u8 gUnknown_0839F8A0[];
 extern u8 gUnknown_0839F988[];
@@ -92,16 +90,20 @@ extern u8 gUnknown_083A05F8[];
 extern u8 gUnknown_083B4EC4[];
 extern u8 gUnknown_083B5558[];
 extern void *const gUnknown_083B5584[];
+extern struct SpriteFrameImage *const gUnknown_083B5794[];
+extern const struct SpriteTemplate gUnknown_083B57A4;
+extern const u8 gUnknown_083B57BC[][4];
 extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
-extern const struct SpriteTemplate gUnknown_083B57A4;
-extern struct SpriteFrameImage *const gUnknown_083B5794[];
 extern u8 gUnknown_08E96ACC[];
 extern u8 gUnknown_08E96B58[];
+extern u16 gPokedexMenu_Pal[];
+extern u16 gPokedexMenu2_Pal[];
 extern const u8 *const gMonFootprintTable[];
 extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
+extern const struct BaseStats gBaseStats[];
 
 extern void sub_800D74C();
 extern const u16 *species_and_otid_get_pal(u16, u32, u32);
@@ -4082,4 +4084,120 @@ u8 sub_8091A4C(u16 gender, u16 b, u16 c, u16 d)
     spriteId = CreateSprite(&gUnknown_02024E8C, b, c, 0);
     gSprites[spriteId].oam.paletteNum = d;
     return spriteId;
+}
+
+int sub_8091AF8(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
+{
+    u16 species;
+    u16 i;
+    u16 resultsCount;
+    u8 types[2];
+
+    SortPokedex(a, b);
+
+    for (i = 0, resultsCount = 0; i < 386; i++)
+    {
+        if (gPokedexView->unk0[i].seen)
+        {
+            gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+            resultsCount++;
+        }
+    }
+    gPokedexView->unk60C = resultsCount;
+
+    // Search by name
+    if (abcGroup != 0xFF)
+    {
+        for (i = 0, resultsCount = 0; i < gPokedexView->unk60C; i++)
+        {
+            u8 r3;
+
+            species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+            r3 = gSpeciesNames[species][0];
+            if ((r3 >= gUnknown_083B57BC[abcGroup][0] && r3 < gUnknown_083B57BC[abcGroup][0] + gUnknown_083B57BC[abcGroup][1])
+             || (r3 >= gUnknown_083B57BC[abcGroup][2] && r3 < gUnknown_083B57BC[abcGroup][2] + gUnknown_083B57BC[abcGroup][3]))
+            {
+                gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                resultsCount++;
+            }
+        }
+        gPokedexView->unk60C = resultsCount;
+    }
+
+    // Search by body color
+    if (bodyColor != 0xFF)
+    {
+        for (i = 0, resultsCount = 0; i < gPokedexView->unk60C; i++)
+        {
+            species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+            if (bodyColor == gBaseStats[species].bodyColor)
+            {
+                gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                resultsCount++;
+            }
+        }
+        gPokedexView->unk60C = resultsCount;
+    }
+
+    // Search by type
+    if (type1 != 0xFF || type2 != 0xFF)
+    {
+        if (type1 == 0xFF)
+        {
+            type1 = type2;
+            type2 = 0xFF;
+        }
+
+        if (type2 == 0xFF)
+        {
+            for (i = 0, resultsCount = 0; i < gPokedexView->unk60C; i++)
+            {
+                if (gPokedexView->unk0[i].owned)
+                {
+                    species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+                    types[0] = gBaseStats[species].type1;
+                    types[1] = gBaseStats[species].type2;
+                    if (types[0] == type1 || types[1] == type1)
+                    {
+                        gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                        resultsCount++;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (i = 0, resultsCount = 0; i < gPokedexView->unk60C; i++)
+            {
+                if (gPokedexView->unk0[i].owned)
+                {
+                    species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+                    types[0] = gBaseStats[species].type1;
+                    types[1] = gBaseStats[species].type2;
+                    if ((types[0] == type1 && types[1] == type2) || (types[0] == type2 && types[1] == type1))
+                    {
+                        gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                        resultsCount++;
+                    }
+                }
+            }
+        }
+        gPokedexView->unk60C = resultsCount;
+    }
+
+    if (gPokedexView->unk60C != 0)
+    {
+        for (i = gPokedexView->unk60C; i < 386; i++)
+        {
+            gPokedexView->unk0[i].dexNum = 0xFFFF;
+            gPokedexView->unk0[i].seen = FALSE;
+            gPokedexView->unk0[i].owned = FALSE;
+
+        }
+    }
+
+    return resultsCount;
 }

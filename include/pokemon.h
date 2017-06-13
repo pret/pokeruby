@@ -357,7 +357,8 @@ struct BaseStats
  /* 0x16 */ u8 ability1;
  /* 0x17 */ u8 ability2;
  /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor;
+ /* 0x19 */ u8 bodyColor:7;
+            u8 unk19_7:1;
 };
 
 struct BattleMove
