@@ -141,7 +141,7 @@ struct Decoration
     /*0x00*/ u8 id;
     /*0x01*/ u8 name[16];
     /*0x11*/ u8 decor_field_11;
-    /*0x12*/ u8 decor_field_12;
+    /*0x12*/ u8 shape;
     /*0x13*/ u8 decor_field_13;
     /*0x14*/ u16 price;
     /*0x18*/ u8 *description;
@@ -194,8 +194,8 @@ struct UnkStruct_083EC900
 struct UnkStruct_020391B4
 {
     u8 var00;
-    u8 var01;
-    u8 var02;
+    u8 width;
+    u8 height;
     u8 var03;
     u16 var04;
     u8 pad06[2];
@@ -209,8 +209,8 @@ extern const struct SpriteTemplate gSpriteTemplate_83ECA88;
 extern struct Decoration gDecorations[0x77];
 extern struct UnkStruct_02038900 gUnknown_02038900;
 extern u8 *gUnknown_020388D0;
-extern Script gUnknown_081A2F7B;
-extern Script gUnknown_081A2F8A;
+extern u8 gUnknown_081A2F7B[];
+extern u8 gUnknown_081A2F8A[];
 extern struct OamData gUnknown_020391AC;
 
 extern u8 gUnknown_020388D4;

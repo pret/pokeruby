@@ -684,7 +684,7 @@ void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
 
 void sub_80FF394(u16 mapX, u16 mapY, u16 decIdx)
 {
-    switch (gDecorations[decIdx].decor_field_12)
+    switch (gDecorations[decIdx].shape)
     {
         case 0:
             sub_80FF1EC(mapX, mapY, 1, 1, decIdx);
@@ -839,16 +839,16 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
     if (gDecorations[decoIdx].decor_field_11 != 4)
     {
         sub_81008BC(unk_02038900);
-        sub_8100930(unk_02038900->decoration->decor_field_12);
+        sub_8100930(unk_02038900->decoration->shape);
         sub_8100874(unk_02038900);
         sub_810070C(unk_02038900->unk_884, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 0);
+        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].unk_2,  gUnknown_083EC900[unk_02038900->decoration->shape].unk_3, 0);
     } else
     {
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2,  gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_3, 1);
+        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].unk_2,  gUnknown_083EC900[unk_02038900->decoration->shape].unk_3, 1);
         gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
 }
@@ -856,8 +856,8 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *unk_02038900)
 {
     u8 v0;
-    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->decor_field_12].unk_2 - 8 * ((u8)gTasks[taskId].data[5] - 1);
-    if (unk_02038900->decoration->decor_field_12 == 2 || unk_02038900->decoration->decor_field_12 == 8 || unk_02038900->decoration->decor_field_12 == 9)
+    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->shape].unk_2 - 8 * ((u8)gTasks[taskId].data[5] - 1);
+    if (unk_02038900->decoration->shape == 2 || unk_02038900->decoration->shape == 8 || unk_02038900->decoration->shape == 9)
     {
         v0 -= 8;
     }
@@ -875,7 +875,7 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *un
 
 void sub_80FF960(u8 taskId)
 {
-    switch (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].decor_field_12)
+    switch (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].shape)
     {
         case 0:
             gTasks[taskId].data[5] = 1;
@@ -1080,7 +1080,7 @@ bool8 sub_80FFC24(u8 taskId, struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                if (decoration->decor_field_12 == 5)
+                if (decoration->shape == 5)
                 {
                     if (!sub_80572EC(behaviorAt))
                     {
@@ -1973,7 +1973,7 @@ void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
 {
     u8 i;
     u8 idx;
-    idx = unk_02038900->decoration->decor_field_12;
+    idx = unk_02038900->decoration->shape;
     for (i=0; i<gUnknown_083EC860[idx].size; i++)
     {
         unk_02038900->unk_004[gUnknown_083EC860[idx].var0[i]] = sub_810089C(unk_02038900->decoration->tiles[gUnknown_083EC860[idx].var4[i]] * 8 + gUnknown_083EC860[idx].var8[i]);
@@ -2101,11 +2101,11 @@ void sub_8100B6C(void)
         {
             if (ewram_1f000.items[gUnknown_020391B4[i].var00] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
             {
-                gUnknown_020391B4[i].var02++;
+                gUnknown_020391B4[i].height++;
             }
-            for (j=0; j<gUnknown_020391B4[i].var02; j++)
+            for (j=0; j<gUnknown_020391B4[i].height; j++)
             {
-                for (k=0; k<gUnknown_020391B4[i].var01; k++)
+                for (k=0; k<gUnknown_020391B4[i].width; k++)
                 {
                     MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
                 }
@@ -2275,46 +2275,46 @@ void sub_81010F0(u8 taskId)
 
 void sub_8101118(u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
 {
-    if (gDecorations[decorIdx].decor_field_12 == 0)
+    if (gDecorations[decorIdx].shape == 0)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 1)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 1)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 2)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 2)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 1;
-    } else if (gDecorations[decorIdx].decor_field_12 == 3)
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 1;
+    } else if (gDecorations[decorIdx].shape == 3)
     {
-        unk_020391B4->var01 = 4;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 4)
+        unk_020391B4->width = 4;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 4)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 5)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 5)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 2;
-    } else if (gDecorations[decorIdx].decor_field_12 == 6)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 2;
+    } else if (gDecorations[decorIdx].shape == 6)
     {
-        unk_020391B4->var01 = 1;
-        unk_020391B4->var02 = 3;
-    } else if (gDecorations[decorIdx].decor_field_12 == 7)
+        unk_020391B4->width = 1;
+        unk_020391B4->height = 3;
+    } else if (gDecorations[decorIdx].shape == 7)
     {
-        unk_020391B4->var01 = 2;
-        unk_020391B4->var02 = 4;
-    } else if (gDecorations[decorIdx].decor_field_12 == 8)
+        unk_020391B4->width = 2;
+        unk_020391B4->height = 4;
+    } else if (gDecorations[decorIdx].shape == 8)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 3;
-    } else if (gDecorations[decorIdx].decor_field_12 == 9)
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 3;
+    } else if (gDecorations[decorIdx].shape == 9)
     {
-        unk_020391B4->var01 = 3;
-        unk_020391B4->var02 = 2;
+        unk_020391B4->width = 3;
+        unk_020391B4->height = 2;
     }
 }
 
@@ -2338,11 +2338,11 @@ bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B
     yOff = ewram_1f000.pos[decorIdx] & 0xf;
     if (ewram_1f000.items[decorIdx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28c)
     {
-        unk_020391B4->var02--;
+        unk_020391B4->height--;
     }
-    if (x >= xOff && x < xOff + unk_020391B4->var01 && y > yOff - unk_020391B4->var02 && y <= yOff)
+    if (x >= xOff && x < xOff + unk_020391B4->width && y > yOff - unk_020391B4->height && y <= yOff)
     {
-        sub_8101198(unk_020391B4->var01 - (x - xOff + 1), yOff - y);
+        sub_8101198(unk_020391B4->width - (x - xOff + 1), yOff - y);
         return TRUE;
     }
     return FALSE;
