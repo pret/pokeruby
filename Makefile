@@ -40,11 +40,10 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,src/data,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
 
 C_SRCS := $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
-DATA_C_SRCS := $(wildcard src/data/*.c)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
 SONG_SRCS := $(wildcard sound/songs/*.s)
@@ -110,33 +109,22 @@ define VERSION_RULES
 
 $1_C_OBJS := $$(C_SRCS:%.c=build/$1/%.o)
 $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
-$1_DATA_C_OBJS := $$(DATA_C_SRCS:%.c=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
 build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
-build/$1/src/data/%.o: c_dep = $$(shell $$(SCANINC) src/data/$$(*F).c)
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
 
-$1_OBJS := $$($1_C_OBJS) $$($1_DATA_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$(SONG_OBJS)
+$1_OBJS := $$($1_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$(SONG_OBJS)
 $1_OBJS_REL := $$($1_OBJS:build/$1/%=%)
 $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 
 $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
-build/$1/src/%.o : src/%.c $$$$(c_dep)
-	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
-	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
-	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
-	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
-
-$$($1_DATA_C_OBJS): VERSION := $2
-$$($1_DATA_C_OBJS): REVISION := $3
-$$($1_DATA_C_OBJS): LANGUAGE := $4
-build/$1/src/data/%.o : src/data/%.c $$$$(c_dep)
+build/$1/%.o : %.c $$$$(c_dep)
 	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
@@ -159,7 +147,7 @@ build/$1/sym_bss.ld: sym_bss.txt
 	cd build/$1 && ../../$$(RAMSCRGEN) .bss ../../sym_bss.txt $$(LANGUAGE) >sym_bss.ld
 
 build/$1/sym_common.ld: LANGUAGE := $4
-build/$1/sym_common.ld: sym_common.txt $$($1_C_OBJS) $$($1_DATA_C_OBJS) $$(wildcard common_syms/*.txt)
+build/$1/sym_common.ld: sym_common.txt $$($1_C_OBJS) $$(wildcard common_syms/*.txt)
 	cd build/$1 && ../../$$(RAMSCRGEN) COMMON ../../sym_common.txt $$(LANGUAGE) -c src,../../common_syms >sym_common.ld
 
 build/$1/sym_ewram.ld: LANGUAGE := $4
