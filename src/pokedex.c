@@ -4024,7 +4024,7 @@ void sub_80918B0(u16 a, u8 b)
 u16 sub_80918EC(u16 num, s16 b, s16 c, u16 d)
 {
     u8 spriteId;
-    
+
     num = NationalPokedexNumToSpecies(num);
     switch (num)
     {
@@ -4070,7 +4070,7 @@ u16 sub_80918EC(u16 num, s16 b, s16 c, u16 d)
 u8 sub_8091A4C(u16 gender, u16 b, u16 c, u16 d)
 {
     u8 spriteId;
-    
+
     DecompressPicFromTable_2(
       &gTrainerFrontPicTable[gender],
       gTrainerFrontPicCoords[gender].coords,
