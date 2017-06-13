@@ -286,7 +286,7 @@ void sub_80BD674(void *, u32, u8);
 
 // asm/tv.o
 void ClearTVShowData(void);
-void UpdateTVScreensOnMap(u32, u32);
+void UpdateTVScreensOnMap(int, int);
 void ResetGabbyAndTy(void);
 u8 sub_80BDEAC(u8 *);
 void sub_80BE160(TVShow *);
