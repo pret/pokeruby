@@ -3,6 +3,7 @@
 
 	.section .rodata
 
+.ifdef ENGLISH
 TrainerCardColorName_Bronze:
 	.string "BRONZE$", 7
 TrainerCardColorName_Copper:
@@ -11,6 +12,17 @@ TrainerCardColorName_Silver:
 	.string "SILVER$", 7
 TrainerCardColorName_Gold:
 	.string "GOLD$", 7
+.else
+TrainerCardColorName_Bronze:
+	.string "BRONZE$", 7
+TrainerCardColorName_Copper:
+	.string "KUPFER$", 7
+TrainerCardColorName_Silver:
+	.string "SILBER$", 7
+TrainerCardColorName_Gold:
+	.string "GOLD$", 7
+.endif
+
 
 	.align 2
 gTrainerCardColorNames:: @ 839B21C

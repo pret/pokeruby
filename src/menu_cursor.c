@@ -604,3 +604,9 @@ void sub_814ADF4(u8 a1)
         SetSubspriteTables(&gSprites[gUnknown_0203A3D2], &gSubspriteTables_842F6C0[a1]);
     return;
 }
+
+#if GERMAN
+void nullsub_814B200(void)
+{
+}
+#endif

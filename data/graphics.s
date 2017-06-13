@@ -4581,3 +4581,124 @@ gFont3JapaneseGlyphs:: @ 8EA8744
 	.align 2
 gFont4JapaneseGlyphs:: @ 8EAC6C4
 	.incbin "graphics/fonts/font4_jpn.4bpp"
+
+.ifdef GERMAN
+	.align 2
+gSummaryScreenTextTiles::
+	.incbin "graphics/summary_screen/text.4bpp"
+
+	.align 2
+gUnknown_0839FA7C::
+	.incbin "graphics/pokedex/noball.4bpp.lz"
+
+	.align 2
+gIntroTiles::
+	.incbin "graphics/intro/intro.4bpp.lz"
+
+	.align 2
+ConditionUpDownTiles::
+	.incbin "graphics/misc/condition_up_down.4bpp"
+
+	.align 2
+ConditionUpDownPalette::
+	.incbin "graphics/misc/condition_up_down.gbapal"
+
+	.align 2
+RouletteSpritePalette_01::
+	.incbin "graphics/roulette/shadow.gbapal"
+
+	.align 2
+RouletteSpritePalette_02::
+	.incbin "graphics/roulette/ball.gbapal"
+
+	.align 2
+RouletteSpritePalette_03::
+	.incbin "graphics/roulette/ball_counter.gbapal"
+
+	.align 2
+RouletteSpritePalette_04::
+	.incbin "graphics/roulette/cursor.gbapal"
+
+	.align 2
+RouletteSpritePalette_05::
+	.incbin "graphics/roulette/credit.gbapal"
+
+	.align 2
+RouletteSpritePalette_06::
+	.incbin "graphics/roulette/shroomish.gbapal"
+
+	.align 2
+RouletteSpritePalette_07::
+	.incbin "graphics/roulette/tailow.gbapal"
+
+	.align 2
+RouletteSpritePalette_08::
+	.incbin "graphics/roulette/poke_icons.gbapal"
+
+	.align 2
+RouletteSpritePalette_09::
+	.incbin "graphics/roulette/wynaut.gbapal"
+
+	.align 2
+RouletteSpritePalette_10::
+	.incbin "graphics/roulette/azurill.gbapal"
+
+	.align 2
+RouletteSpritePalette_11::
+	.incbin "graphics/roulette/skitty.gbapal"
+
+	.align 2
+RouletteSpritePalette_12::
+	.incbin "graphics/roulette/makuhita.gbapal"
+
+	.align 2
+RouletteSpritePalette_13::
+	.incbin "graphics/roulette/83F907C.gbapal"
+
+	.align 2
+RouletteSpritePalette_14::
+	.incbin "graphics/roulette/83F909C.gbapal"
+
+	.align 2
+RouletteSpritePalette_15::
+	.incbin "graphics/roulette/83F90BC.gbapal"
+
+	.align 2
+RouletteSpritePalette_16::
+	.incbin "graphics/roulette/83F90DC.gbapal"
+
+	.align 2
+gTilesetPalettes_Shop::
+	.incbin "data/tilesets/secondary/shop/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/12.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/13.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/14.gbapal"
+	.incbin "data/tilesets/secondary/shop/palettes/15.gbapal"
+
+	.align 2
+gTilesetTiles_Shop::
+	.incbin "data-de/tilesets/secondary/shop/tiles.4bpp.lz"
+
+	.align 2
+gUnknown_083FAF1C::
+	.incbin "graphics/pokedex/cry_meter.gbapal"
+
+	.align 2
+gUnknown_083FAF3C::
+	.incbin "graphics/pokedex/cry_meter.4bpp.lz"
+
+	.align 2
+gUnknown_083FAE7C::
+	.incbin "graphics/pokedex/cry_meter_map.bin"
+.endif
