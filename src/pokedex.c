@@ -104,6 +104,9 @@ extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
 extern const struct BaseStats gBaseStats[];
+extern const u8 gPokedexMenuSearch_Gfx[];
+extern const u8 gUnknown_08E96D2C[];
+extern const u16 gPokedexMenuSearch_Pal[];
 
 extern void sub_800D74C();
 extern const u16 *species_and_otid_get_pal(u16, u32, u32);
@@ -122,6 +125,14 @@ extern u16 gPokedexOrder_Height[];
 void sub_8090B8C(u8);
 void sub_8090C28(struct Sprite *);
 u16 NationalPokedexNumToSpecies(u16);
+void sub_8091E54(u8);
+void sub_809204C(u8);
+void sub_809207C(u8);
+
+void sub_8092AB0(u8);
+void sub_8092B68();
+void sub_8092EB0();
+void sub_809308C();
 
 //  asm/pokedex_area_screen
 void ShowPokedexAreaScreen(u16 species, u8 *string);
@@ -4200,4 +4211,81 @@ int sub_8091AF8(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
     }
 
     return resultsCount;
+}
+
+void sub_8091E20(u8 *str)
+{
+    sub_8072AB0(str, 9, 120, 208, 32, 1);
+}
+
+u8 sub_8091E3C(void)
+{
+    return CreateTask(sub_8091E54, 0);
+}
+
+void sub_8091E54(u8 taskId)
+{
+    u16 i;
+
+    switch (gMain.state)
+    {
+    default:
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            gPokedexView->unk64A = 2;
+            sub_8091060(0);
+            LZ77UnCompVram(gPokedexMenuSearch_Gfx, (void *)VRAM);
+            LZ77UnCompVram(gUnknown_08E96D2C, (void *)(VRAM + 0x7800));
+            LoadPalette(gPokedexMenuSearch_Pal + 1, 1, 0x7E);
+            if (!IsNationalPokedexEnabled())
+            {
+                for (i = 0; i < 17; i++)
+                {
+                    ((u16 *)(VRAM + 0x7A80))[i] = ((u16 *)(VRAM + 0x7B00))[i];
+                    ((u16 *)(VRAM + 0x7AC0))[i] = ((u16 *)(VRAM + 0x7B40))[i];
+                    ((u16 *)(VRAM + 0x7B00))[i] = 1;
+                    ((u16 *)(VRAM + 0x7B40))[i] = 1;
+                }
+            }
+            gMain.state = 1;
+        }
+        break;
+    case 1:
+        SetUpWindowConfig(&gWindowConfig_81E7064);
+        InitMenuWindow(&gWindowConfig_81E7064);
+        LoadCompressedObjectPic(&gUnknown_083A05CC);
+        LoadSpritePalettes(gUnknown_083A05DC);
+        sub_809308C(taskId);
+        for (i = 0; i < 16; i++)
+            gTasks[taskId].data[i] = 0;
+        sub_8092EB0(taskId);
+        sub_8092AB0(0);
+        sub_8092B68(taskId);
+        gMain.state++;
+        break;
+    case 2:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        gMain.state++;
+        break;
+    case 3:
+        REG_BG3CNT = 0x0F03;
+        REG_DISPCNT = 0x1C40;
+        gMain.state++;
+        break;
+    case 4:
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].func = sub_809204C;
+            gMain.state = 0;
+        }
+        break;
+    }
+}
+
+void sub_809204C(u8 taskId)
+{
+    sub_8092AB0(gTasks[taskId].data[0]);
+    sub_8092B68(taskId);
+    gTasks[taskId].func = sub_809207C;
 }
