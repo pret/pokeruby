@@ -31,6 +31,8 @@
 
 #define MENUACTION2(_text, _func) {.text = _text, .func = _func}
 #define MENUACTION3(_func1, _func2) {.func1 = _func1, .func2 = _func2}
+#define STRUCT_803EC860(_data1, _data2, _data3, _size) {.var0 = _data1, .var4 = _data2, .var8 = _data3, .size = _size}
+#define DECOSPRITETEMPLATE(_shape, _size, _x, _y) {.shape = _shape, .size = _size, .x = _x, .y = _y}
 
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
@@ -1411,6 +1413,66 @@ const struct MenuAction3 gUnknown_083EC634[] = {
 const u16 gUnknown_083EC654[] = {0x6318, 0x739C, 0x7FFF};
 const u8 gUnknown_083EC65A[] = _("{PALETTE 13}{STR_VAR_1}");
 
+const u8 Unknown_3EC660[] = {0, 1, 2, 3};
+const u8 Unknown_3EC664[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
+const u8 Unknown_3EC670[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+const u8 Unknown_3EC680[] = {0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21};
+const u8 Unknown_3EC68C[] = {0, 1, 2, 3, 4, 5, 6, 7};
+const u8 Unknown_3EC694[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+const u8 Unknown_3EC6B4[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45};
+const u8 Unknown_3EC6D8[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29};
+const u8 Unknown_3EC6F0[] = {0, 0, 0, 0};
+const u8 Unknown_3EC6F4[] = {0, 0, 1, 1, 0, 0, 1, 1};
+const u8 Unknown_3EC6FC[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2};
+const u8 Unknown_3EC708[] = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4, 4, 5, 5, 6, 6, 7, 7};
+const u8 Unknown_3EC728[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3};
+const u8 Unknown_3EC738[] = {0, 0, 0, 0, 1, 1, 1, 1};
+const u8 Unknown_3EC740[] = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
+const u8 Unknown_3EC74C[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
+const u8 Unknown_3EC76C[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8};
+const u8 Unknown_3EC790[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5};
+const u8 Unknown_3EC7A8[] = {4, 5, 6, 7};
+const u8 Unknown_3EC7AC[] = {4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7B4[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7C0[] = {4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7E0[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7F0[] = {4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC7F8[] = {4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC804[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC824[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC848[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+
+const struct UnkStruct_803EC860 gUnknown_083EC860[] = {
+    STRUCT_803EC860(Unknown_3EC660, Unknown_3EC6F0, Unknown_3EC7A8, 0x4),
+    STRUCT_803EC860(Unknown_3EC68C, Unknown_3EC6F4, Unknown_3EC7AC, 0x8),
+    STRUCT_803EC860(Unknown_3EC664, Unknown_3EC6FC, Unknown_3EC7B4, 0xc),
+    STRUCT_803EC860(Unknown_3EC694, Unknown_3EC708, Unknown_3EC7C0, 0x20),
+    STRUCT_803EC860(Unknown_3EC670, Unknown_3EC728, Unknown_3EC7E0, 0x10),
+    STRUCT_803EC860(Unknown_3EC68C, Unknown_3EC738, Unknown_3EC7F0, 0x8),
+    STRUCT_803EC860(Unknown_3EC680, Unknown_3EC740, Unknown_3EC7F8, 0xc),
+    STRUCT_803EC860(Unknown_3EC694, Unknown_3EC74C, Unknown_3EC804, 0x20),
+    STRUCT_803EC860(Unknown_3EC6B4, Unknown_3EC76C, Unknown_3EC824, 0x24),
+    STRUCT_803EC860(Unknown_3EC6D8, Unknown_3EC790, Unknown_3EC848, 0x18)
+};
+
+const struct UnkStruct_083EC900 gUnknown_083EC900[] = {
+    DECOSPRITETEMPLATE(0, 1, 0x78, 0x4e),
+    DECOSPRITETEMPLATE(1, 2, 0x80, 0x4e),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x56),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x46),
+    DECOSPRITETEMPLATE(0, 2, 0x80, 0x46),
+    DECOSPRITETEMPLATE(2, 2, 0x78, 0x46),
+    DECOSPRITETEMPLATE(2, 3, 0x80, 0x56),
+    DECOSPRITETEMPLATE(2, 3, 0x80, 0x36),
+    DECOSPRITETEMPLATE(0, 3, 0x90, 0x46),
+    DECOSPRITETEMPLATE(1, 3, 0x90, 0x46)
+};
+
+const union AnimCmd gSpriteAnim_83EC928[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
 // text
 
 extern u8 gUnknown_0815F399[];
@@ -2240,11 +2302,11 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
         sub_810070C(unk_02038900->unk_884, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].unk_2,  gUnknown_083EC900[unk_02038900->decoration->shape].unk_3, 0);
+        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
     } else
     {
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
-        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].unk_2,  gUnknown_083EC900[unk_02038900->decoration->shape].unk_3, 1);
+        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
         gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
 }
@@ -2252,7 +2314,7 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *unk_02038900)
 {
     u8 v0;
-    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->shape].unk_2 - 8 * ((u8)gTasks[taskId].data[5] - 1);
+    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_083EC900[unk_02038900->decoration->shape].x - 8 * ((u8)gTasks[taskId].data[5] - 1);
     if (unk_02038900->decoration->shape == 2 || unk_02038900->decoration->shape == 8 || unk_02038900->decoration->shape == 9)
     {
         v0 -= 8;
@@ -3376,7 +3438,7 @@ void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
     }
 }
 
-void sub_8100930(u8 unk12)
+void sub_8100930(u8 decoShape)
 /*
  * This function sets an OAM object not directly referenced anywhere else
  * in the source.
@@ -3387,10 +3449,10 @@ void sub_8100930(u8 unk12)
     gUnknown_020391AC.objMode = 0;
     gUnknown_020391AC.mosaic = 0;
     gUnknown_020391AC.bpp = 0;
-    gUnknown_020391AC.shape = gUnknown_083EC900[unk12].unk_0;
+    gUnknown_020391AC.shape = gUnknown_083EC900[decoShape].shape;
     gUnknown_020391AC.x = 0;
     gUnknown_020391AC.matrixNum = 0;
-    gUnknown_020391AC.size = gUnknown_083EC900[unk12].unk_1;
+    gUnknown_020391AC.size = gUnknown_083EC900[decoShape].size;
     gUnknown_020391AC.tileNum = 0;
     gUnknown_020391AC.priority = 1;
     gUnknown_020391AC.paletteNum = 0;

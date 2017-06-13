@@ -164,9 +164,9 @@ struct DecorationInventory
 
 struct UnkStruct_803EC860
 {
-    u8 *var0;
-    u8 *var4;
-    u8 *var8;
+    const u8 *var0;
+    const u8 *var4;
+    const u8 *var8;
     u8 size;
 };
 
@@ -185,10 +185,10 @@ struct UnkStruct_02038900
 
 struct UnkStruct_083EC900
 {
-    u8 unk_0;
-    u8 unk_1;
-    u8 unk_2;
-    u8 unk_3;
+    u8 shape;
+    u8 size;
+    u8 x;
+    u8 y;
 };
 
 struct UnkStruct_020391B4
@@ -201,7 +201,7 @@ struct UnkStruct_020391B4
     u8 pad06[2];
 };
 
-extern const struct UnkStruct_083EC900 gUnknown_083EC900[10];
+extern const struct UnkStruct_083EC900 gUnknown_083EC900[];
 extern const struct SpritePalette gUnknown_083EC954;
 extern const struct SpritePalette gUnknown_083ECA5C;
 extern const struct SpritePalette gUnknown_083ECA64;
