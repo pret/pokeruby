@@ -1,0 +1,91 @@
+LittlerootTown_BrendansHouse_2F_Text_17337E:: @ 817337E
+	.string "POKéMON: Bei guter Gesundheit!\n"
+	.string "Items: Verstaut. Fehlt noch... Was?$"
+
+LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
+	.string "Was?\n"
+	.string "Wer... Wer bist du denn?\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "Ach, du bist {PLAYER}{KUN}!\n"
+	.string "Du bist heute hierher gezogen.\p"
+	.string "Ähm... Ich bin MAIKE.\n"
+	.string "Schön, dich kennen zu lernen.\p"
+	.string "Ich... Ich habe diesen Traum...\n"
+	.string "Mit POKéMON in der ganzen Welt\l"
+	.string "Freundschaft zu schließen.\p"
+	.string "Ich... Ich habe schon von dir gehört.\n"
+	.string "Mein Vater, PROF. BIRK, hat mir von\l"
+	.string "dir erzählt.\p"
+	.string "Ich habe gehofft, dass du nett bist,\n"
+	.string "{PLAYER}{KUN}, und wir Freunde werden.\p"
+	.string "Ist das nicht albern? Ich... Ich habe\n"
+	.string "dich doch gerade erst kennen gelernt.\p"
+	.string "Hihihihi...\p"
+	.string "Oh, nein! Das habe ich ja total\n"
+	.string "vergessen!\p"
+	.string "Ich sollte Vati doch helfen, ein paar\n"
+	.string "wilde POKéMON zu fangen!\p"
+	.string "{PLAYER}{KUN}, wir treffen uns später!$"
+
+LittlerootTown_BrendansHouse_2F_Text_1735C9:: @ 81735C9
+	.string "POKéMON: Bei guter Gesundheit!\n"
+	.string "Items: Verstaut. Fehlt noch... Was?$"
+
+LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
+	.string "Hey!\n"
+	.string "Du...\p"
+	.string "Wer bist du denn?\p"
+	.string "Ach ja, du bist {PLAYER}, richtig?\n"
+	.string "Du bist nebenan eingezogen, stimmt’s?\p"
+	.string "Ich wusste nicht, dass du ein Mädchen\n"
+	.string "bist.\p"
+	.string "Vater, PROF. BIRK, hat mir erzählt, dass\n"
+	.string "nebenan das Kind eines ARENALEITERS\p"
+	.string "einzieht und irgendwie habe ich\n"
+	.string "gedacht, du seiest ein Junge.\p"
+	.string "Ich heiße übrigens BRIX.\n"
+	.string "Also: Hallo, Nachbarin!\p"
+	.string "Was? {PLAYER}, du hast kein einziges\n"
+	.string "POKéMON?\p"
+	.string "Soll ich eines für dich fangen?\p"
+	.string "Ach, Mist, das habe ich ganz vergessen...\p"
+	.string "Ich muss meinem Vater helfen, einige\n"
+	.string "wilde POKéMON zu fangen.\p"
+	.string "Ein anderes Mal, okay?$"
+
+LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
+	.string "MAIKE: {PLAYER}{KUN}!\p"
+	.string "Ich prüfe gerade meinen POKéDEX.\p"
+	.string "Es gibt eine Menge POKéMON, die ich\n"
+	.string "gesehen, aber nicht gefangen habe.\p"
+	.string "Und es gibt viele, von denen ich\n"
+	.string "annehme, dass sie sich bald entwickeln.\p"
+	.string "Jetzt überlege ich, wo ich hingehen soll,\n"
+	.string "um weitere POKéMON zu fangen.$"
+
+LittlerootTown_BrendansHouse_2F_Text_173883:: @ 8173883
+	.string "MAIKE: Ich überlege, wo ich hingehen\n"
+	.string "soll, um weitere POKéMON zu fangen.\p"
+	.string "Wäre es nicht lustig, wenn wir uns dabei\n"
+	.string "über den Weg laufen würden?$"
+
+LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
+	.string "BRIX: Hey, {PLAYER}!\p"
+	.string "Ich prüfe gerade meinen POKéDEX.\p"
+	.string "Es gibt noch viele POKéMON, die ich\n"
+	.string "fangen muss, aber er sieht schon sehr\l"
+	.string "gut aus.\p"
+	.string "Immer wenn ich den POKéDEX betrachte,\n"
+	.string "bekomme ich Lust zum Reisen.$"
+
+LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
+	.string "BRIX: Ich habe lange überlegt, wo ich\n"
+	.string "hingehen soll, um weitere POKéMON\l"
+	.string "zu fangen.\p"
+	.string "Hey, {PLAYER}, wenn ich dich auf meiner\n"
+	.string "Suche treffe, können wir ja einen\l"
+	.string "POKéMON-Kampf austragen.$"
+
+UnknownString_8173A76: @ 8173A76
+	.string "Dort stehen POKéMON-Bücher.$"
