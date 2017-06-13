@@ -1473,6 +1473,42 @@ const union AnimCmd gSpriteAnim_83EC928[] = {
     ANIMCMD_END
 };
 
+const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
+    gSpriteAnim_83EC928
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
+    {.data = (u8 *)&gUnknown_02038900.image, .size = sizeof gUnknown_02038900.image}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83EC93C = {
+    .tileTag = 0xffff,
+    .paletteTag = 3000,
+    .oam = &gUnknown_020391AC,
+    .anims = gSpriteAnimTable_83EC930,
+    .images = gSpriteImageTable_83EC934,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81009A8
+};
+
+const struct SpritePalette gUnknown_083EC954 = {.data = (u16 *)&gUnknown_02038900.palette, .tag = 3000};
+
+const struct YesNoFuncTable gUnknown_083EC95C = {.yesFunc = sub_81000C4, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC964 = {.yesFunc = sub_810026C, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC96C[] = {
+    {.yesFunc = sub_80FFAB0, .noFunc = sub_80FFB08},
+    {.yesFunc = sub_8100F88, .noFunc = sub_8100FB4}
+};
+
+const u8 gUnknown_083EC97C[] = {4, 4, 4, 4, 0, 3, 3, 0};
+const u8 gUnknown_083EC984[] = {4, 4, 4, 4, 0, 4, 3, 0};
+
+const u16 gUnknown_083EC98C[] = INCBIN_U16("graphics/unknown/83EC98C.gbapal");
+const u16 Unknown_3EC9AC[] = INCBIN_U16("graphics/unknown/83EC9AC.gbapal");
+const struct YesNoFuncTable gUnknown_083EC9CC = {.yesFunc = sub_810153C, .noFunc = sub_8100EEC};
+const struct YesNoFuncTable gUnknown_083EC9D4 = {.yesFunc = sub_8101590, .noFunc = sub_8100EEC};
+const u32 gSpriteImage_83EC9DC[] = INCBIN_U32("graphics/unknown_sprites/83EC9DC.4bpp");
+
 // text
 
 extern u8 gUnknown_0815F399[];
@@ -2299,7 +2335,7 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
         sub_81008BC(unk_02038900);
         sub_8100930(unk_02038900->decoration->shape);
         sub_8100874(unk_02038900);
-        sub_810070C(unk_02038900->unk_884, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
+        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
         gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
         gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
@@ -3270,11 +3306,11 @@ void sub_8100494(u8 taskId)
     {
         if (gTasks[taskId].data[10] == 1)
         {
-            gUnknown_083EC96C[gTasks[taskId].data[12]][0](taskId);
+            gUnknown_083EC96C[gTasks[taskId].data[12]].yesFunc(taskId);
             return;
         } else if (gTasks[taskId].data[10] == 2)
         {
-            gUnknown_083EC96C[gTasks[taskId].data[12]][1](taskId);
+            gUnknown_083EC96C[gTasks[taskId].data[12]].noFunc(taskId);
             return;
         }
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
@@ -3349,7 +3385,7 @@ void sub_81006D0(struct UnkStruct_02038900 *unk_02038900)
     u16 i;
     for (i=0; i<0x800; i++)
     {
-        unk_02038900->unk_084[i] = 0;
+        unk_02038900->image[i] = 0;
     }
     for (i=0; i<0x40; i++)
     {
@@ -3419,7 +3455,7 @@ void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
 {
     u16 i;
     for (i=0; i<0x40; i++)
-        sub_8100740(&unk_02038900->unk_084[i * 32], unk_02038900->unk_004[i]);
+        sub_8100740(&unk_02038900->image[i * 32], unk_02038900->unk_004[i]);
 }
 
 u16 sub_810089C(u16 a0)
