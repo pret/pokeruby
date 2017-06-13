@@ -12,10 +12,11 @@
 #include "map_constants.h"
 #include "task.h"
 #include "palette.h"
-#include "decoration.h"
 #include "field_weather.h"
 #include "metatile_behavior.h"
 #include "pokemon.h"
+#include "script.h"
+#include "decoration.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
