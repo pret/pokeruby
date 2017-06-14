@@ -269,7 +269,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
     s32 i;
     u8 *data = (u8 *)UNK_2016A00_STRUCT;
 
-    for (i = 0; (u32)i < sizeof(struct UnknownStruct1); i++)
+    for (i = 0; (u32)i < sizeof(struct UnkBattleStruct1); i++)
         data[i] = 0;
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
