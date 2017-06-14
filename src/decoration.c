@@ -2485,7 +2485,7 @@ bool8 sub_80FFB94(u8 taskId, s16 x, s16 y, u16 decoId)
     return TRUE;
 }
 
-bool8 sub_80FFBDC(u16 a0, struct Decoration *decoration)
+bool8 sub_80FFBDC(u16 a0, const struct Decoration *decoration)
 {
     if (sub_8057274(a0) != 1)
     {
@@ -2501,6 +2501,7 @@ bool8 sub_80FFBDC(u16 a0, struct Decoration *decoration)
     return FALSE;
 }
 
+// When behaviorBy is set, it is masked by 0xf000.  This is the step that fails to match when built.
 #ifdef NONMATCHING
 bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
@@ -2508,7 +2509,6 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     u8 j;
     u8 behaviorAt;
     u16 behaviorBy;
-    u8 fieldObjectId;
     u8 mapY;
     u8 mapX;
     s16 curY;
@@ -2526,7 +2526,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]);
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
                     if (!sub_80FFBDC(behaviorAt, decoration))
                     {
                         return FALSE;
@@ -2535,8 +2535,8 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
-                    if (fieldObjectId != 0 && fieldObjectId != 16)
+                    behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    if (behaviorAt != 0 && behaviorAt != 16)
                     {
                         return FALSE;
                     }
@@ -2551,7 +2551,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - i) * mapX + j]);
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
                     if (!sub_805729C(behaviorAt) && !sub_80FFB6C(behaviorAt, behaviorBy))
                     {
                         return FALSE;
@@ -2560,8 +2560,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
-                    if (fieldObjectId != 16)
+                    if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
                     {
                         return FALSE;
                     }
@@ -2572,7 +2571,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                behaviorBy = 0xf000 & GetBehaviorByMetatileId(0x200 + decoration->tiles[j]);
+                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
                 if (!sub_805729C(behaviorAt) && !sub_80572B0(behaviorAt))
                 {
                     return FALSE;
@@ -2581,8 +2580,8 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     return FALSE;
                 }
-                fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
-                if (fieldObjectId != 0 && fieldObjectId != 16)
+                behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                if (behaviorAt != 0 && behaviorAt != 16)
                 {
                     return FALSE;
                 }
@@ -2595,7 +2594,11 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 for (j=0; j<mapX; j++)
                 {
                     curX = gTasks[taskId].data[0] + j;
-                    if (!sub_80572B0(MapGridGetMetatileBehaviorAt(curX, curY)) || MapGridGetMetatileIdAt(curX, curY) == 0x28c)
+                    if (!sub_80572B0(MapGridGetMetatileBehaviorAt(curX, curY)))
+                    {
+                        return FALSE;
+                    }
+                    if (MapGridGetMetatileIdAt(curX, curY + 1) == 0x28c)
                     {
                         return FALSE;
                     }
@@ -2622,8 +2625,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                         return FALSE;
                     }
                 }
-                fieldObjectId = GetFieldObjectIdByXYZ(curX, curY, 0);
-                if (fieldObjectId != 16)
+                if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
                 {
                     return FALSE;
                 }
