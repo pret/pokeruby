@@ -8,6 +8,19 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 
+#define DECOR_INV(ptr) {.items = (u8 *)&ptr, .size = sizeof ptr}
+
+struct DecorationInventory const gDecorationInventories[] = {
+    DECOR_INV(gSaveBlock1.decorDesk),
+    DECOR_INV(gSaveBlock1.decorChair),
+    DECOR_INV(gSaveBlock1.decorPlant),
+    DECOR_INV(gSaveBlock1.decorOrnament),
+    DECOR_INV(gSaveBlock1.decorMat),
+    DECOR_INV(gSaveBlock1.decorPoster),
+    DECOR_INV(gSaveBlock1.decorDoll),
+    DECOR_INV(gSaveBlock1.decorCushion)
+};
+
 void ClearDecorationInventory(u8 invIdx)
 {
     u8 i;
