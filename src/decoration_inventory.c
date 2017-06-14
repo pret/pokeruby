@@ -56,7 +56,7 @@ bool8 sub_8133FE4(u8 decorIdx)
 {
     u8 invIdx;
     u8 i;
-    invIdx = gDecorations[decorIdx].decor_field_13;
+    invIdx = gDecorations[decorIdx].category;
     for (i=0; i<gDecorationInventories[invIdx].size; i++)
     {
         if (gDecorationInventories[invIdx].items[i] == decorIdx)
@@ -75,7 +75,7 @@ bool8 IsThereStorageSpaceForDecoration(u8 decorIdx)
     {
         return FALSE;
     }
-    invIdx = gDecorations[decorIdx].decor_field_13;
+    invIdx = gDecorations[decorIdx].category;
     invSlot = sub_8133F9C(invIdx);
     if (invSlot == -1)
     {
@@ -92,7 +92,7 @@ bool8 sub_8134074(u8 decorIdx)
     {
         return FALSE;
     }
-    invIdx = gDecorations[decorIdx].decor_field_13;
+    invIdx = gDecorations[decorIdx].category;
     if (sub_8133F9C(invIdx) == -1)
     {
         return FALSE;
@@ -109,9 +109,9 @@ bool8 sub_81340A8(u8 decorIdx)
     {
         return FALSE;
     }
-    for (i=0; i<gDecorationInventories[gDecorations[decorIdx].decor_field_13].size; i++)
+    for (i=0; i<gDecorationInventories[gDecorations[decorIdx].category].size; i++)
     {
-        invIdx = gDecorations[decorIdx].decor_field_13;
+        invIdx = gDecorations[decorIdx].category;
         if (gDecorationInventories[invIdx].items[i] == decorIdx)
         {
             gDecorationInventories[invIdx].items[i] = DECOR_NONE;
