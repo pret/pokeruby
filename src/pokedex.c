@@ -93,6 +93,10 @@ extern void *const gUnknown_083B5584[];
 extern struct SpriteFrameImage *const gUnknown_083B5794[];
 extern const struct SpriteTemplate gUnknown_083B57A4;
 extern const u8 gUnknown_083B57BC[][4];
+extern const u8 gUnknown_083B5850[][4];
+extern const u8 gUnknown_083B586C[][4];
+extern const u8 gUnknown_083B5888[][4];
+extern const u8 gUnknown_083B58A4[][4];
 extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
 extern u8 gUnknown_08E96ACC[];
@@ -128,9 +132,17 @@ u16 NationalPokedexNumToSpecies(u16);
 void sub_8091E54(u8);
 void sub_809204C(u8);
 void sub_809207C(u8);
-
+void sub_809217C(u8);
+void sub_80921B0(u8);
+void sub_80923FC(u8);
+void sub_80924A4(u8);
+void sub_8092508(u8);
+void sub_80925CC(u8);
+void sub_80927B8(u8);
 void sub_8092AB0(u8);
+void sub_8092AD4(u8, u8);
 void sub_8092B68();
+u8 sub_8092E10();
 void sub_8092EB0();
 void sub_809308C();
 
@@ -4213,7 +4225,7 @@ int sub_8091AF8(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
     return resultsCount;
 }
 
-void sub_8091E20(u8 *str)
+void sub_8091E20(const u8 *str)
 {
     sub_8072AB0(str, 9, 120, 208, 32, 1);
 }
@@ -4288,4 +4300,171 @@ void sub_809204C(u8 taskId)
     sub_8092AB0(gTasks[taskId].data[0]);
     sub_8092B68(taskId);
     gTasks[taskId].func = sub_809207C;
+}
+
+void sub_809207C(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_PC_OFF);
+        gTasks[taskId].func = sub_80927B8;
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        switch (gTasks[taskId].data[0])
+        {
+        case 0:
+            PlaySE(SE_PIN);
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].func = sub_809217C;
+            break;
+        case 1:
+            PlaySE(SE_PIN);
+            gTasks[taskId].data[1] = 4;
+            gTasks[taskId].func = sub_809217C;
+            break;
+        case 2:
+            PlaySE(SE_PC_OFF);
+            gTasks[taskId].func = sub_80927B8;
+            break;
+        }
+        return;
+    }
+    if ((gMain.newKeys & 0x20) && gTasks[taskId].data[0] > 0)
+    {
+        PlaySE(SE_Z_PAGE);
+        gTasks[taskId].data[0]--;
+        sub_8092AB0(gTasks[taskId].data[0]);
+    }
+    if ((gMain.newKeys & 0x10) && gTasks[taskId].data[0] < 2)
+    {
+        PlaySE(SE_Z_PAGE);
+        gTasks[taskId].data[0]++;
+        sub_8092AB0(gTasks[taskId].data[0]);
+    }
+}
+
+void sub_809217C(u8 taskId)
+{
+    sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    sub_8092B68(taskId);
+    gTasks[taskId].func = sub_80921B0;
+}
+
+void sub_80921B0(u8 taskId)
+{
+    const u8 (*r6)[4];
+
+    if (gTasks[taskId].data[0] != 0)
+    {
+        if (!IsNationalPokedexEnabled())
+            r6 = gUnknown_083B58A4;
+        else
+            r6 = gUnknown_083B586C;
+    }
+    else
+    {
+        if (!IsNationalPokedexEnabled())
+            r6 = gUnknown_083B5888;
+        else
+            r6 = gUnknown_083B5850;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_BOWA);
+        sub_8092EB0(taskId);
+        gTasks[taskId].func = sub_809204C;
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[1] == 6)
+        {
+            if (gTasks[taskId].data[0] != 0)
+            {
+                gUnknown_0202FFBA = 0x40;
+                gPokedexView->unk62A = 0x40;
+                gUnknown_0202FFB8 = 0;
+                gPokedexView->unk610 = 0;
+                gSaveBlock2.pokedex.unknown1 = sub_8092E10(taskId, 5);
+                if (!IsNationalPokedexEnabled())
+                    gSaveBlock2.pokedex.unknown1 = 0;
+                gPokedexView->unk614 = gSaveBlock2.pokedex.unknown1;
+                gSaveBlock2.pokedex.order = sub_8092E10(taskId, 4);
+                gPokedexView->unk618 = gSaveBlock2.pokedex.order;
+                PlaySE(SE_PC_OFF);
+                gTasks[taskId].func = sub_80927B8;
+            }
+            else
+            {
+                sub_8091E20(gDexText_Searching);
+                gTasks[taskId].func = sub_80923FC;
+                PlaySE(SE_Z_SEARCH);
+            }
+        }
+        else
+        {
+            PlaySE(SE_PIN);
+            gTasks[taskId].func = sub_80925CC;
+        }
+        return;
+    }
+
+    if ((gMain.newKeys & 0x20) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & 0x10) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & 0x40) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & 0x80) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+}
+
+void sub_80923FC(u8 taskId)
+{
+    u8 r10 = sub_8092E10(taskId, 5);
+    u8 r9 = sub_8092E10(taskId, 4);
+    u8 r8 = sub_8092E10(taskId, 0);
+    u8 r6 = sub_8092E10(taskId, 1);
+    u8 r4 = sub_8092E10(taskId, 2);
+    u8 r0 = sub_8092E10(taskId, 3);
+
+    sub_8091AF8(r10, r9, r8, r6, r4, r0);
+    gTasks[taskId].func = sub_80924A4;
+}
+
+void sub_80924A4(u8 taskId)
+{
+    if (!IsSEPlaying())
+    {
+        if (gPokedexView->unk60C != 0)
+        {
+            PlaySE(SE_SEIKAI);
+            sub_8091E20(gDexText_SearchComplete);
+        }
+        else
+        {
+            PlaySE(SE_HAZURE);
+            sub_8091E20(gDexText_NoMatching);
+        }
+        gTasks[taskId].func = sub_8092508;
+    }
 }
