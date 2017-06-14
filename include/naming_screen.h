@@ -45,7 +45,7 @@ struct NamingScreenData
  /*0x10*/ u8 unk10;
  /*0x11*/ u8 textBuffer[0x10];
  /*0x21*/ u8 filler21[0x13];
-			const struct NamingScreenTemplate *template;
+            const struct NamingScreenTemplate *template;
  /*0x38*/ u8 *destBuffer;
  /*0x3C*/ u16 unk3C;  //savedKeyRepeatStartDelay
  /*0x3E*/ u16 unk3E;

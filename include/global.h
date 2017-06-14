@@ -98,7 +98,7 @@ struct SecretBaseRecord
     /*0x1A09*/ u8 sbr_field_1_0:4;
     /*0x1A09*/ u8 gender:1;
     /*0x1A09*/ u8 sbr_field_1_5:1;
-	/*0x1A09*/ u8 sbr_field_1_6:2;
+    /*0x1A09*/ u8 sbr_field_1_6:2;
     /*0x1A0A*/ u8 sbr_field_2[7]; // 0xFF bytes?
     /*0x1A12*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1A16*/ u16 sbr_field_e;
@@ -219,7 +219,7 @@ struct TVShowRecentHappenings {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
     /*0x02*/ u16 var02;
-	/*0x04*/ u16 var04[6];
+    /*0x04*/ u16 var04[6];
     /*0x10*/ u8 playerName[8];
     /*0x18*/ u8 language;
     /*0x19*/ u8 pad19[10];
@@ -446,9 +446,9 @@ typedef union SB_Struct {
 // size is 0x198
 
 struct UnknownSaveStruct2ABC {
-	u8 val0;
-	u8 val1;
-	u16 val2;
+    u8 val0;
+    u8 val1;
+    u16 val2;
 };
 
 struct GabbyAndTyData {
@@ -473,7 +473,7 @@ struct GabbyAndTyData {
 };
 
 struct RecordMixing_UnknownStruct {
-	u8 data[0x38];
+    u8 data[0x38];
 };
 
 struct SaveBlock1 /* 0x02025734 */
@@ -525,7 +525,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-	/*0x2738*/ TVShow tvShows[25];
+    /*0x2738*/ TVShow tvShows[25];
     /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
@@ -592,8 +592,8 @@ struct Pokedex
 struct SaveBlock2_Sub
 {
     /*0x0000, 0x00A4*/ u8 filler_000[0x3D8];
-	/*0x03D8, 0x0480*/ u16 var_480;
-	/*0x03DA, 0x0482*/ u16 var_482;
+    /*0x03D8, 0x0480*/ u16 var_480;
+    /*0x03DA, 0x0482*/ u16 var_482;
     /*0x03DC, 0x0484*/ u8 filler_3DC[0xD1];
     /*0x04AD, 0x0555*/ u8 var_4AD;
     /*0x04AE, 0x0556*/ u8 var_4AE;

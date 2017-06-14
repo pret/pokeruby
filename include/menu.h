@@ -9,6 +9,18 @@ struct MenuAction
    u8 (*func)();
 };
 
+struct MenuAction2
+{
+    const u8 *text;
+    void (*func)(u8);
+};
+
+struct MenuAction3
+{
+    void (*func1)(u8);
+    void (*func2)(u8);
+};
+
 void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);
@@ -52,7 +64,7 @@ s8 ProcessMenuInputNoWrap_(void);
 u8 MenuPrint_PixelCoords(const u8 *, u8, u16, u8);
 u8 sub_8072A18(const u8 *, u8, u16, u8, u32);
 u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
-int sub_8072AB0(u8 *, u8, u16, u8, u8, u32);
+int sub_8072AB0(const u8 *, u8, u16, u8, u8, u32);
 void MenuPrint_RightAligned(u8 *, u8, u8);
 void sub_8072B80(u8 *, u8, u8, u8 *);
 void sub_8072BD8(const u8 *, u8, u8, u16);
