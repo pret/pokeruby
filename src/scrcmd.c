@@ -61,7 +61,6 @@ extern u8 *gStdScripts[];
 extern u8 *gStdScripts_End[];
 
 extern u8 * const gUnknown_083CE048[];
-extern struct Decoration gDecorations[];
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.

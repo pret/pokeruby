@@ -44,23 +44,23 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    bool8 isCompressed;
-    bool8 isSecondary;
-    void *tiles;
-    void *palettes;
-    void *metatiles;
-    void *metatileAttributes;
-    TilesetCB callback;
+    /*0x00*/ bool8 isCompressed;
+    /*0x01*/ bool8 isSecondary;
+    /*0x04*/ void *tiles;
+    /*0x08*/ void *palettes;
+    /*0x0c*/ void *metatiles;
+    /*0x10*/ void *metatileAttributes;
+    /*0x14*/ TilesetCB callback;
 };
 
 struct MapData
 {
-    s32 width;
-    s32 height;
-    u16 *border;
-    u16 *map;
-    struct Tileset *primaryTileset;
-    struct Tileset *secondaryTileset;
+    /*0x00*/ s32 width;
+    /*0x04*/ s32 height;
+    /*0x08*/ u16 *border;
+    /*0x0c*/ u16 *map;
+    /*0x10*/ struct Tileset *primaryTileset;
+    /*0x14*/ struct Tileset *secondaryTileset;
 };
 
 struct BackupMapData
