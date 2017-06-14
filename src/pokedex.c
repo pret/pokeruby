@@ -70,6 +70,25 @@ struct UnknownStruct1
     u16 unk6;
 };
 
+struct UnknownStruct3
+{
+    const u8 *text;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+};
+
+struct UnknownStruct4
+{
+    const u8 *text;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+};
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
@@ -86,7 +105,7 @@ extern u8 gUnknown_08E96888[];
 extern u8 gUnknown_08E96994[];
 extern u8 gUnknown_08E9C6DC[];
 extern u8 gUnknown_0839FA7C[];
-extern u8 gUnknown_0839F67C[];
+extern u16 gUnknown_0839F67C[];
 extern u8 gUnknown_0839F73C[];
 extern u8 gUnknown_0839F8A0[];
 extern u8 gUnknown_0839F988[];
@@ -108,11 +127,23 @@ extern void *const gUnknown_083B5584[];
 extern struct SpriteFrameImage *const gUnknown_083B5794[];
 extern const struct SpriteTemplate gUnknown_083B57A4;
 extern const u8 gUnknown_083B57BC[][4];
+extern const struct UnknownStruct3 gUnknown_083B57E4[];
+extern const struct UnknownStruct4 gUnknown_083B57FC[];
 extern const u8 gUnknown_083B5850[][4];
 extern const u8 gUnknown_083B586C[][4];
 extern const u8 gUnknown_083B5888[][4];
 extern const u8 gUnknown_083B58A4[][4];
+extern const struct UnknownStruct2 gUnknown_083B58C0[];
+extern const struct UnknownStruct2 gUnknown_083B58D8[];
+extern const struct UnknownStruct2 gUnknown_083B5910[];
+extern const struct UnknownStruct2 gUnknown_083B5968[];
+extern const struct UnknownStruct2 gUnknown_083B59C8[];
+extern const u8 gUnknown_083B5A60[];
+extern const u8 gUnknown_083B5A62[];
+extern const u8 gUnknown_083B5A68[];
 extern const struct UnknownStruct1 gUnknown_083B5A7C[];
+extern const u8 gUnknown_083B5AAC[];
+extern const u8 gUnknown_083B5AB2[];
 extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
 extern u8 gUnknown_08E96ACC[];
@@ -160,12 +191,12 @@ void sub_80927B8(u8);
 void sub_80927F0(u8);
 void sub_8092AB0(u8);
 void sub_8092AD4(u8, u8);
-void sub_8092B68();
-void sub_8092C8C();
-void sub_8092D78();
-u8 sub_8092E10();
-void sub_8092EB0();
-void sub_809308C();
+void sub_8092B68(u8);
+void sub_8092C8C(u8);
+void sub_8092D78(u8);
+u8 sub_8092E10(u8, u8);
+void sub_8092EB0(u8);
+void sub_809308C(u8);
 
 //  asm/pokedex_area_screen
 void ShowPokedexAreaScreen(u16 species, u8 *string);
@@ -865,7 +896,7 @@ bool8 sub_808D344(u8 a)
 void sub_808D640(void)
 {
     if (gPokedexView->unk64C_1)
-        LoadPalette(gUnknown_0839F67C + 0x2, 1, 0xBE);
+        LoadPalette(gUnknown_0839F67C + 1, 1, 0xBE);
     else if (!IsNationalPokedexEnabled())
         LoadPalette(gPokedexMenu_Pal + 1, 1, 0xBE);
     else
@@ -2692,7 +2723,6 @@ void Task_SizeScreenProcessInput(u8 taskId)
         gTasks[taskId].func = sub_8090498;
         PlaySE(SE_PC_OFF);
     }
-    //_08090430
     else if ((gMain.newKeys & DPAD_LEFT)
      || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
     {
@@ -3457,7 +3487,7 @@ _08090A38: .4byte sub_8090A3C\n\
 
 void sub_8090A3C(u8 taskId)
 {
-    if (gMain.newKeys & 2)
+    if (gMain.newKeys & B_BUTTON)
     {
         BeginNormalPaletteFade(0x0000FFFC, 0, 0, 16, 0);
         gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
@@ -3502,7 +3532,7 @@ void sub_8090B8C(u8 taskId)
         u8 paletteNum;
         const u16 *palette;
 
-        REG_DISPCNT = 0x1940;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
         CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
         sub_800D74C();
         species = NationalPokedexNumToSpecies(gTasks[taskId].data[1]);
@@ -4352,13 +4382,13 @@ void sub_809207C(u8 taskId)
         }
         return;
     }
-    if ((gMain.newKeys & 0x20) && gTasks[taskId].data[0] > 0)
+    if ((gMain.newKeys & DPAD_LEFT) && gTasks[taskId].data[0] > 0)
     {
         PlaySE(SE_Z_PAGE);
         gTasks[taskId].data[0]--;
         sub_8092AB0(gTasks[taskId].data[0]);
     }
-    if ((gMain.newKeys & 0x10) && gTasks[taskId].data[0] < 2)
+    if ((gMain.newKeys & DPAD_RIGHT) && gTasks[taskId].data[0] < 2)
     {
         PlaySE(SE_Z_PAGE);
         gTasks[taskId].data[0]++;
@@ -4433,25 +4463,25 @@ void sub_80921B0(u8 taskId)
         return;
     }
 
-    if ((gMain.newKeys & 0x20) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
         sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & 0x10) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
         sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & 0x40) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
         sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & 0x80) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
@@ -4568,7 +4598,7 @@ void sub_8092644(u8 taskId)
         return;
     }
     r3 = FALSE;
-    if (gMain.newAndRepeatedKeys & 0x40)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if (*p1 != 0)
         {
@@ -4591,7 +4621,7 @@ void sub_8092644(u8 taskId)
         }
         return;
     }
-    if (gMain.newAndRepeatedKeys & 0x80)
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         if (*p1 < 5 && *p1 < r2)
         {
@@ -4626,4 +4656,417 @@ void sub_80927F0(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyTask(taskId);
+}
+
+#ifdef NONMATCHING
+void sub_8092810(u8 a, u8 b, u8 c, u8 d)
+{
+    u16 i;
+
+    for (i = 0; i < d; i++)
+    {
+        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] &= 0xFFF;
+        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] |= a << 12;
+
+        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] &= 0xFFF;
+        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] |= a << 12;
+    }
+}
+#else
+__attribute__((naked))
+void sub_8092810(u8 a, u8 b, u8 c, u8 d)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	mov r12, r1\n\
+	lsls r2, 24\n\
+	lsrs r1, r2, 24\n\
+	lsls r3, 24\n\
+	lsrs r5, r3, 8\n\
+	movs r3, 0\n\
+	cmp r5, 0\n\
+	beq _0809285A\n\
+	lsls r7, r1, 6\n\
+	ldr r6, _08092860 @ =0x00000fff\n\
+	lsls r4, r0, 12\n\
+_08092830:\n\
+	mov r0, r12\n\
+	adds r1, r0, r3\n\
+	lsls r1, 1\n\
+	adds r1, r7, r1\n\
+	ldr r0, _08092864 @ =0x06007800\n\
+	adds r2, r1, r0\n\
+	ldrh r0, [r2]\n\
+	ands r0, r6\n\
+	orrs r0, r4\n\
+	strh r0, [r2]\n\
+	ldr r0, _08092868 @ =0x06007840\n\
+	adds r1, r0\n\
+	ldrh r0, [r1]\n\
+	ands r0, r6\n\
+	orrs r0, r4\n\
+	strh r0, [r1]\n\
+	adds r0, r3, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	cmp r0, r5\n\
+	bcc _08092830\n\
+_0809285A:\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_08092860: .4byte 0x00000fff\n\
+_08092864: .4byte 0x06007800\n\
+_08092868: .4byte 0x06007840\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_809286C(u8 a, u8 b, u8 c)
+{
+    u8 r5 = (b & 1) | ((c & 1) << 1);
+
+    switch (a)
+    {
+    case 0:
+    case 1:
+    case 2:
+        sub_8092810(r5, gUnknown_083B57E4[a].unk4, gUnknown_083B57E4[a].unk5, gUnknown_083B57E4[a].unk6);
+        break;
+    case 3:
+    case 4:
+    case 7:
+    case 8:
+        sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5, gUnknown_083B57FC[a - 3].unk6);
+        // fall through
+    case 5:
+    case 6:
+        sub_8092810(r5, gUnknown_083B57FC[a - 3].unk7, gUnknown_083B57FC[a - 3].unk8, gUnknown_083B57FC[a - 3].unk9);
+        break;
+    case 10:
+        sub_8092810(r5, gUnknown_083B57FC[2].unk4, gUnknown_083B57FC[2].unk5, gUnknown_083B57FC[2].unk6);
+        break;
+    case 9:
+        if (!IsNationalPokedexEnabled())
+            sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5 - 2, gUnknown_083B57FC[a - 3].unk6);
+        else
+            sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5, gUnknown_083B57FC[a - 3].unk6);
+        break;
+    }
+}
+
+void sub_8092964(u8 a)
+{
+    switch (a)
+    {
+    case 0:
+        sub_809286C(0, 0, 0);
+        sub_809286C(1, 1, 0);
+        sub_809286C(2, 1, 0);
+        sub_809286C(3, 1, 0);
+        sub_809286C(4, 1, 0);
+        sub_809286C(10, 1, 0);
+        sub_809286C(5, 1, 0);
+        sub_809286C(6, 1, 0);
+        sub_809286C(7, 1, 0);
+        sub_809286C(8, 1, 0);
+        sub_809286C(9, 1, 0);
+        break;
+    case 1:
+        sub_809286C(0, 1, 0);
+        sub_809286C(1, 0, 0);
+        sub_809286C(2, 1, 0);
+        sub_809286C(3, 1, 1);
+        sub_809286C(4, 1, 1);
+        sub_809286C(10, 1, 1);
+        sub_809286C(5, 1, 1);
+        sub_809286C(6, 1, 1);
+        sub_809286C(7, 1, 0);
+        sub_809286C(8, 1, 0);
+        sub_809286C(9, 1, 0);
+        break;
+    case 2:
+        sub_809286C(0, 1, 0);
+        sub_809286C(1, 1, 0);
+        sub_809286C(2, 0, 0);
+        sub_809286C(3, 1, 1);
+        sub_809286C(4, 1, 1);
+        sub_809286C(10, 1, 1);
+        sub_809286C(5, 1, 1);
+        sub_809286C(6, 1, 1);
+        sub_809286C(7, 1, 1);
+        sub_809286C(8, 1, 1);
+        sub_809286C(9, 1, 1);
+        break;
+    }
+}
+
+void sub_8092AB0(u8 a)
+{
+    sub_8092964(a);
+    sub_8091E20(gUnknown_083B57E4[a].text);
+}
+
+void sub_8092AD4(u8 a, u8 b)
+{
+    sub_8092964(a);
+    switch (b)
+    {
+    case 0:
+        sub_809286C(3, 0, 0);
+        break;
+    case 1:
+        sub_809286C(4, 0, 0);
+        break;
+    case 2:
+        sub_809286C(10, 0, 0);
+        sub_809286C(5, 0, 0);
+        break;
+    case 3:
+        sub_809286C(10, 0, 0);
+        sub_809286C(6, 0, 0);
+        break;
+    case 4:
+        sub_809286C(7, 0, 0);
+        break;
+    case 5:
+        sub_809286C(8, 0, 0);
+        break;
+    case 6:
+        sub_809286C(9, 0, 0);
+        break;
+    }
+    sub_8091E20(gUnknown_083B57FC[b].text);
+}
+
+void sub_8092B68(u8 taskId)
+{
+    u16 var;
+
+    var = gTasks[taskId].data[6] + gTasks[taskId].data[7];
+    StringCopy(gStringVar1, gUnknown_083B5910[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 16, 1);
+
+    var = gTasks[taskId].data[8] + gTasks[taskId].data[9];
+    StringCopy(gStringVar1, gUnknown_083B5968[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 32, 1);
+
+    var = gTasks[taskId].data[10] + gTasks[taskId].data[11];
+    StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AAC, 45, 48, 1);
+
+    var = gTasks[taskId].data[12] + gTasks[taskId].data[13];
+    StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AAC, 93, 48, 1);
+
+    var = gTasks[taskId].data[4] + gTasks[taskId].data[5];
+    StringCopy(gStringVar1, gUnknown_083B58D8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 64, 1);
+
+    if (IsNationalPokedexEnabled())
+    {
+        var = gTasks[taskId].data[2] + gTasks[taskId].data[3];
+        StringCopy(gStringVar1, gUnknown_083B58C0[var].text2);
+        MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 80, 1);
+    }
+}
+
+void sub_8092C8C(u8 a)
+{
+    u16 i;
+    u16 j;
+
+    if (a == 0)
+    {
+        *((u16 *)(VRAM + 0x7800 + 0x22)) = 0xC0B;
+        for (i = 0x12; i < 0x1D; i++)
+            *((u16 *)(VRAM + 0x7800 + i * 2)) = 0x80D;
+        *((u16 *)(VRAM + 0x7800 + 0x3A)) = 0x80B;
+        for (j = 1; j < 13; j++)
+        {
+            *((u16 *)(VRAM + 0x7800 + 0x22 + j * 64)) = 0x40A;
+            for (i = 0x12; i < 0x1D; i++)
+                *((u16 *)(VRAM + 0x7800 + j * 64 + i * 2)) = 2;
+            *((u16 *)(VRAM + 0x7800 + 0x3A + j * 64)) = 0xA;
+        }
+        *((u16 *)(VRAM + 0x7800 + 0x362)) = 0x40B;
+        for (i = 0x12; i < 0x1D; i++)
+            *((u16 *)(VRAM + 0x7800 + 0x340 + i * 2)) = 0xD;
+        *((u16 *)(VRAM + 0x7800 + 0x37A)) = 0xB;
+    }
+    else
+    {
+        for (j = 0; j < 14; j++)
+        {
+            for (i = 0x11; i < 0x1E; i++)
+            {
+                *((u16 *)(VRAM + 0x7800 + j * 64 + i * 2)) = 0x4F;
+            }
+        }
+    }
+}
+
+void sub_8092D78(u8 taskId)
+{
+    const struct UnknownStruct2 *r6 = gUnknown_083B5A7C[gTasks[taskId].data[1]].unk0;
+    const u16 *r8 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk4];
+    const u16 *r7 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk5];
+    u16 i;
+    u16 j;
+
+    MenuZeroFillWindowRect(18, 1, 28, 12);
+    for (i = 0, j = *r7; i < 6 && r6[j].text2 != NULL; i++, j++)
+    {
+#ifndef NONMATCHING
+        j += 0;  // Useless statement needed to match
+#endif
+        MenuPrint(r6[j].text2, 18, i * 2 + 1);
+    }
+    sub_8091E20(r6[*r8 + *r7].text1);
+}
+
+u8 sub_8092E10(u8 taskId, u8 b)
+{
+    const u16 *ptr1 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk4];
+    const u16 *ptr2 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk5];
+    u16 r2 = *ptr1 + *ptr2;
+
+    switch (b)
+    {
+    default:
+        return 0;
+    case 5:
+        return gUnknown_083B5A60[r2];
+    case 4:
+        return gUnknown_083B5A62[r2];
+    case 0:
+        if (r2 == 0)
+            return 0xFF;
+        else
+            return r2;
+    case 1:
+        if (r2 == 0)
+            return 0xFF;
+        else
+            return r2 - 1;
+    case 2:
+    case 3:
+        return gUnknown_083B5A68[r2];
+    }
+}
+
+void sub_8092EB0(u8 taskId)
+{
+    u16 r3;
+
+    switch (gPokedexView->unk614)
+    {
+    default:
+    case 0:
+        r3 = 0;
+        break;
+    case 1:
+        r3 = 1;
+        break;
+    }
+    gTasks[taskId].data[2] = r3;
+
+    switch (gPokedexView->unk618)
+    {
+    default:
+    case 0:
+        r3 = 0;
+        break;
+    case 1:
+        r3 = 1;
+        break;
+    case 2:
+        r3 = 2;
+        break;
+    case 3:
+        r3 = 3;
+        break;
+    case 4:
+        r3 = 4;
+        break;
+    case 5:
+        r3 = 5;
+        break;
+    }
+    gTasks[taskId].data[4] = r3;
+}
+
+bool8 sub_8092F44(u8 taskId)
+{
+    u8 val1 = gTasks[taskId].data[1];
+    const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
+    u16 val2 = gUnknown_083B5A7C[val1].unk6 - 1;
+
+    if (val2 > 5 && *ptr != 0)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool8 sub_8092F8C(u8 taskId)
+{
+    u8 val1 = gTasks[taskId].data[1];
+    const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
+    u16 val2 = gUnknown_083B5A7C[val1].unk6 - 1;
+
+    if (val2 > 5 && *ptr < val2 - 5)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_8092FD8(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].func == sub_8092644)
+    {
+        u8 val;
+
+        if (sprite->data1 != 0)
+        {
+            if (sub_8092F8C(sprite->data0))
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+        }
+        else
+        {
+            if (sub_8092F44(sprite->data0))
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+        }
+        val = sprite->data2 + sprite->data1 * 128;
+        sprite->pos2.y = gSineTable[val] / 128;
+        sprite->data2 += 8;
+    }
+    else
+    {
+        sprite->invisible = TRUE;
+    }
+}
+
+void sub_809308C(u8 taskId)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 4, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].callback = sub_8092FD8;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 108, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].vFlip = TRUE;
+    gSprites[spriteId].callback = sub_8092FD8;
 }
