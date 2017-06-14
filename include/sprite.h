@@ -16,6 +16,8 @@ struct SpriteFrameImage
     u16 size;
 };
 
+#define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
+
 struct SpritePalette
 {
     const u16 *data;
@@ -142,7 +144,7 @@ struct SpriteTemplate
     u16 paletteTag;
     const struct OamData *oam;
     const union AnimCmd *const *anims;
-    struct SpriteFrameImage *images;
+    const struct SpriteFrameImage *images;
     const union AffineAnimCmd *const *affineAnims;
     void (*callback)(struct Sprite *);
 };

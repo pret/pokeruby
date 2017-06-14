@@ -4302,39 +4302,39 @@ __attribute__((naked))
 int state_to_direction(u8 a0, u8 a1, u8 a2)
 {
     asm(".syntax unified\n\
-	push {r4,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	adds r0, r1, 0\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	cmp r1, 0\n\
-	beq _08060BFC\n\
-	cmp r2, 0\n\
-	beq _08060BFC\n\
-	cmp r1, 0x4\n\
-	bhi _08060BFC\n\
-	cmp r2, 0x4\n\
-	bls _08060C00\n\
+    push {r4,lr}\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    adds r0, r1, 0\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    cmp r1, 0\n\
+    beq _08060BFC\n\
+    cmp r2, 0\n\
+    beq _08060BFC\n\
+    cmp r1, 0x4\n\
+    bhi _08060BFC\n\
+    cmp r2, 0x4\n\
+    bls _08060C00\n\
 _08060BFC:\n\
-	movs r0, 0\n\
-	b _08060C12\n\
+    movs r0, 0\n\
+    b _08060C12\n\
 _08060C00:\n\
-	adds r1, r2, 0\n\
-	bl zffu_offset_calc\n\
-	ldr r2, _08060C18 @ =gUnknown_08375767\n\
-	lsls r1, r4, 2\n\
-	subs r1, 0x5\n\
-	adds r0, r1\n\
-	adds r0, r2\n\
-	ldrb r0, [r0]\n\
+    adds r1, r2, 0\n\
+    bl zffu_offset_calc\n\
+    ldr r2, _08060C18 @ =gUnknown_08375767\n\
+    lsls r1, r4, 2\n\
+    subs r1, 0x5\n\
+    adds r0, r1\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
 _08060C12:\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    pop {r4}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _08060C18: .4byte gUnknown_08375767\n\
 .syntax divided\n");
 }
@@ -6609,121 +6609,121 @@ void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
 __attribute__((naked))
 void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite) {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	adds r5, r0, 0\n\
-	adds r4, r1, 0\n\
-	ldrb r1, [r5, 0x1]\n\
-	movs r0, 0x41\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	strb r0, [r5, 0x1]\n\
-	ldrb r0, [r5, 0x5]\n\
-	bl GetFieldObjectGraphicsInfo\n\
-	adds r6, r0, 0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x3E\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0806354C\n\
-	ldrh r1, [r4, 0x24]\n\
-	ldrh r0, [r4, 0x20]\n\
-	adds r1, r0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x28\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	ldr r2, _08063544 @ =gSpriteCoordOffsetX\n\
-	adds r0, r1\n\
-	ldrh r2, [r2]\n\
-	adds r0, r2\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	ldrh r1, [r4, 0x26]\n\
-	ldrh r0, [r4, 0x22]\n\
-	adds r1, r0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x29\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	ldr r2, _08063548 @ =gSpriteCoordOffsetY\n\
-	adds r0, r1\n\
-	ldrh r2, [r2]\n\
-	adds r0, r2\n\
-	b _08063574\n\
-	.align 2, 0\n\
+    push {r4-r6,lr}\n\
+    adds r5, r0, 0\n\
+    adds r4, r1, 0\n\
+    ldrb r1, [r5, 0x1]\n\
+    movs r0, 0x41\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    strb r0, [r5, 0x1]\n\
+    ldrb r0, [r5, 0x5]\n\
+    bl GetFieldObjectGraphicsInfo\n\
+    adds r6, r0, 0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x3E\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0806354C\n\
+    ldrh r1, [r4, 0x24]\n\
+    ldrh r0, [r4, 0x20]\n\
+    adds r1, r0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x28\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    ldr r2, _08063544 @ =gSpriteCoordOffsetX\n\
+    adds r0, r1\n\
+    ldrh r2, [r2]\n\
+    adds r0, r2\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    ldrh r1, [r4, 0x26]\n\
+    ldrh r0, [r4, 0x22]\n\
+    adds r1, r0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x29\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    ldr r2, _08063548 @ =gSpriteCoordOffsetY\n\
+    adds r0, r1\n\
+    ldrh r2, [r2]\n\
+    adds r0, r2\n\
+    b _08063574\n\
+    .align 2, 0\n\
 _08063544: .4byte gSpriteCoordOffsetX\n\
 _08063548: .4byte gSpriteCoordOffsetY\n\
 _0806354C:\n\
-	ldrh r1, [r4, 0x24]\n\
-	ldrh r0, [r4, 0x20]\n\
-	adds r1, r0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x28\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	adds r0, r1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	ldrh r1, [r4, 0x26]\n\
-	ldrh r0, [r4, 0x22]\n\
-	adds r1, r0\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x29\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	adds r0, r1\n\
+    ldrh r1, [r4, 0x24]\n\
+    ldrh r0, [r4, 0x20]\n\
+    adds r1, r0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x28\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    adds r0, r1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    ldrh r1, [r4, 0x26]\n\
+    ldrh r0, [r4, 0x22]\n\
+    adds r1, r0\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x29\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    adds r0, r1\n\
 _08063574:\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	ldrh r0, [r6, 0x8]\n\
-	adds r0, r3\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	ldrh r0, [r6, 0xA]\n\
-	adds r0, r2\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0xFF\n\
-	bgt _0806359C\n\
-	lsls r0, r1, 16\n\
-	asrs r0, 16\n\
-	movs r1, 0x10\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	bge _080635A4\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    ldrh r0, [r6, 0x8]\n\
+    adds r0, r3\n\
+    lsls r0, 16\n\
+    lsrs r1, r0, 16\n\
+    ldrh r0, [r6, 0xA]\n\
+    adds r0, r2\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    lsls r0, r3, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0xFF\n\
+    bgt _0806359C\n\
+    lsls r0, r1, 16\n\
+    asrs r0, 16\n\
+    movs r1, 0x10\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    bge _080635A4\n\
 _0806359C:\n\
-	ldrb r0, [r5, 0x1]\n\
-	movs r1, 0x40\n\
-	orrs r0, r1\n\
-	strb r0, [r5, 0x1]\n\
+    ldrb r0, [r5, 0x1]\n\
+    movs r1, 0x40\n\
+    orrs r0, r1\n\
+    strb r0, [r5, 0x1]\n\
 _080635A4:\n\
-	lsls r0, r2, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0xAF\n\
-	bgt _080635B8\n\
-	lsls r0, r4, 16\n\
-	asrs r0, 16\n\
-	movs r1, 0x10\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	bge _080635C0\n\
+    lsls r0, r2, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0xAF\n\
+    bgt _080635B8\n\
+    lsls r0, r4, 16\n\
+    asrs r0, 16\n\
+    movs r1, 0x10\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    bge _080635C0\n\
 _080635B8:\n\
-	ldrb r0, [r5, 0x1]\n\
-	movs r1, 0x40\n\
-	orrs r0, r1\n\
-	strb r0, [r5, 0x1]\n\
+    ldrb r0, [r5, 0x1]\n\
+    movs r1, 0x40\n\
+    orrs r0, r1\n\
+    strb r0, [r5, 0x1]\n\
 _080635C0:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
 .syntax divided\n");
 }
 #endif

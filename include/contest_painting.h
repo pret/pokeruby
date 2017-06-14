@@ -8,10 +8,10 @@
 
 enum
 {
-	NORMAL_RANK,
-	SUPER_RANK,
-	HYPER_RANK,
-	MASTER_RANK,
+    NORMAL_RANK,
+    SUPER_RANK,
+    HYPER_RANK,
+    MASTER_RANK,
 };
 
 enum
