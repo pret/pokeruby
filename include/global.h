@@ -204,16 +204,16 @@ struct EasyChatPair
 struct TVShowCommon {
     /*0x00*/ u8 var00;
     /*0x01*/ u8 var01;
-    /*0x02*/ u8 pad02[20];
-    /*0x16*/ u16 var16[3];
-    /*0x1C*/ u8 srcTrainerId3Lo;
-    /*0x1D*/ u8 srcTrainerId3Hi;
-    /*0x1E*/ u8 srcTrainerId2Lo;
-    /*0x1F*/ u8 srcTrainerId2Hi;
-    /*0x20*/ u8 srcTrainerIdLo;
-    /*0x21*/ u8 srcTrainerIdHi;
-    /*0x22*/ u8 trainerIdLo;
-    /*0x23*/ u8 trainerIdHi;
+	/*0x02*/ u8 pad02[20];
+	/*0x16*/ u16 var16[3];
+	/*0x1C*/ u8 srcTrainerId3Lo;
+	/*0x1D*/ u8 srcTrainerId3Hi;
+	/*0x1E*/ u8 srcTrainerId2Lo;
+	/*0x1F*/ u8 srcTrainerId2Hi;
+	/*0x20*/ u8 srcTrainerIdLo;
+	/*0x21*/ u8 srcTrainerIdHi;
+	/*0x22*/ u8 trainerIdLo;
+	/*0x23*/ u8 trainerIdHi;
 };
 
 struct TVShowFanClubLetter {
@@ -251,10 +251,10 @@ struct TVShowFanclubOpinions {
 };
 
 struct TVShowUnknownType04 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u8 pad02[4];
-    /*0x06*/ u16 var06;
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 pad02[4];
+	/*0x06*/ u16 var06;
 };
 
 struct TVShowNameRaterShow {
@@ -271,34 +271,34 @@ struct TVShowNameRaterShow {
 };
 
 struct TVShowBravoTrainerPokemonProfiles {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u16 species;
-    /*0x04*/ u16 var04[2];
-    /*0x08*/ u8 pokemonNickname[11];
-    /*0x13*/ u8 contestCategory:3;
-    /*0x13*/ u8 contestRank:2;
-    /*0x13*/ u8 contestResult:2;
-    /*0x13*/ u8 var13_7:1;
-    /*0x14*/ u16 var14;
-    /*0x16*/ u8 playerName[8];
-    /*0x1E*/ u8 language;
-    /*0x1F*/ u8 var1f;
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 species;
+	/*0x04*/ u16 var04[2];
+	/*0x08*/ u8 pokemonNickname[11];
+	/*0x13*/ u8 contestCategory:3;
+	/*0x13*/ u8 contestRank:2;
+	/*0x13*/ u8 contestResult:2;
+	/*0x13*/ u8 var13_7:1;
+	/*0x14*/ u16 var14;
+	/*0x16*/ u8 playerName[8];
+	/*0x1E*/ u8 language;
+	/*0x1F*/ u8 var1f;
 };
 
 struct TVShowBravoTrainerBattleTowerSpotlight {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u8 trainerName[8];
-    /*0x0A*/ u16 species;
-    /*0x0C*/ u8 pokemonName[8];
-    /*0x14*/ u16 defeatedSpecies;
-    /*0x16*/ u16 var16;
-    /*0x18*/ u16 var18[1];
-    /*0x1A*/ u8 btLevel;
-    /*0x1B*/ u8 var1b;
-    /*0x1C*/ u8 var1c;
-    /*0x1D*/ u8 language;
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 trainerName[8];
+	/*0x0A*/ u16 species;
+	/*0x0C*/ u8 pokemonName[8];
+	/*0x14*/ u16 defeatedSpecies;
+	/*0x16*/ u16 var16;
+	/*0x18*/ u16 var18[1];
+	/*0x1A*/ u8 btLevel;
+	/*0x1B*/ u8 var1b;
+	/*0x1C*/ u8 var1c;
+	/*0x1D*/ u8 language;
 };
 
 struct TVShowPokemonToday {
@@ -314,15 +314,15 @@ struct TVShowPokemonToday {
 };
 
 struct TVShowSmartShopper {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u8 priceReduced;
-    /*0x03*/ u8 language;
-    /*0x04*/ u8 pad04[2];
-    /*0x06*/ u16 itemIds[3];
-    /*0x0C*/ u16 itemAmounts[3];
-    /*0x12*/ u8 shopLocation;
-    /*0x13*/ u8 playerName[8];
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 priceReduced;
+	/*0x03*/ u8 language;
+	/*0x04*/ u8 pad04[2];
+	/*0x06*/ u16 itemIds[3];
+	/*0x0C*/ u16 itemAmounts[3];
+	/*0x12*/ u8 shopLocation;
+	/*0x13*/ u8 playerName[8];
 };
 
 struct TVShowPokemonTodayFailed {
@@ -339,27 +339,27 @@ struct TVShowPokemonTodayFailed {
 };
 
 struct TVShowPokemonAngler {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u8 var02;
-    /*0x03*/ u8 var03;
-    /*0x04*/ u16 var04;
-    /*0x06*/ u8 language;
-    u8 pad07[12];
-    /*0x13*/ u8 playerName[8];
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u8 var02;
+	/*0x03*/ u8 var03;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u8 language;
+	u8 pad07[12];
+	/*0x13*/ u8 playerName[8];
 };
 
 struct TVShowWorldOfMasters {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u16 var04;
-    /*0x06*/ u16 var06;
-    /*0x08*/ u16 var08;
-    /*0x0a*/ u8 var0a;
-    /*0x0b*/ u8 language;
-    u8 pad0c[7];
-    /*0x13*/ u8 playerName[8];
+	/*0x00*/ u8 var00;
+	/*0x01*/ u8 var01;
+	/*0x02*/ u16 var02;
+	/*0x04*/ u16 var04;
+	/*0x06*/ u16 var06;
+	/*0x08*/ u16 var08;
+	/*0x0a*/ u8 var0a;
+	/*0x0b*/ u8 language;
+	u8 pad0c[7];
+	/*0x13*/ u8 playerName[8];
 };
 
 struct TVShowMassOutbreak {
@@ -386,15 +386,15 @@ typedef union TVShow {
     struct TVShowFanClubLetter fanclubLetter;
     struct TVShowRecentHappenings recentHappenings;
     struct TVShowFanclubOpinions fanclubOpinions;
-    struct TVShowUnknownType04 unkShow04;
+	struct TVShowUnknownType04 unkShow04;
     struct TVShowNameRaterShow nameRaterShow;
-    struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
-    struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
+	struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
+	struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
     struct TVShowPokemonToday pokemonToday;
-    struct TVShowSmartShopper smartshopperShow;
+	struct TVShowSmartShopper smartshopperShow;
     struct TVShowPokemonTodayFailed pokemonTodayFailed;
-    struct TVShowPokemonAngler pokemonAngler;
-    struct TVShowWorldOfMasters worldOfMasters;
+	struct TVShowPokemonAngler pokemonAngler;
+	struct TVShowWorldOfMasters worldOfMasters;
     struct TVShowMassOutbreak massOutbreak;
 } TVShow;
 
