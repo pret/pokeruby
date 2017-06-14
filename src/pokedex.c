@@ -19,6 +19,58 @@
 #include "task.h"
 #include "trig.h"
 
+struct PokedexListItem
+{
+    u16 dexNum;
+    u16 seen:1;
+    u16 owned:1;
+};
+
+struct PokedexView
+{
+    struct PokedexListItem unk0[386];
+    u16 unk608;
+    u8 unk60A_1:1;
+    u8 unk60A_2:1;
+    u8 unk60B;
+    u16 unk60C;
+    u16 selectedPokemon;
+    u16 unk610;
+    u16 dexMode;    //National or Hoenn
+    u16 unk614;
+    u16 dexOrder;
+    u16 unk618;
+    u16 unk61A;
+    u16 unk61C;
+    u16 unk61E[4];
+    u16 unk626;     //sprite id of selected Pokemon
+    u16 unk628;
+    u16 unk62A;
+    u8 unk62C;
+    u8 unk62D;
+    u8 unk62E;
+    u8 unk62F;
+    s16 unk630;
+    s16 unk632;
+    u16 unk634;
+    u16 unk636;
+    u16 unk638;
+    u16 unk63A[4];
+    u8 filler642[8];
+    u8 unk64A;
+    u8 unk64B;
+    u8 unk64C_1:1;
+    u8 selectedScreen;
+    u8 unk64E;          // description page
+    u8 unk64F;
+    u8 menuIsOpen;      //menuIsOpen
+    u8 unk651;
+    u16 menuCursorPos;     //Menu cursor position
+    s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
+    u8 unk656[8];
+    u8 unk65E[8];
+};
+
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon
 #define unk612 dexMode
@@ -1602,6 +1654,8 @@ const union AnimCmd *const gSpriteAnimTable_83A0520[] =
     gSpriteAnim_83A04CC,
 };
 
+static u8 sub_808F210(struct PokedexListItem *, u8);
+static u8 sub_808F284(struct PokedexListItem *, u8);
 void sub_8090B8C(u8);
 void sub_8090C28(struct Sprite *);
 u16 NationalPokedexNumToSpecies(u16);
@@ -1666,7 +1720,7 @@ void sub_808C0B8(void)
     TransferPlttBuffer();
 }
 
-void ClearPokedexView(struct PokedexView *pokedexView)
+static void ClearPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
 
@@ -3587,7 +3641,7 @@ void sub_808F168(struct Sprite *sprite)
     }
 }
 
-u8 sub_808F210(struct PokedexListItem *item, u8 b)
+static u8 sub_808F210(struct PokedexListItem *item, u8 b)
 {
     u8 taskId;
 
@@ -3609,7 +3663,7 @@ bool8 sub_808F250(u8 taskId)
         return 1;
 }
 
-u8 sub_808F284(struct PokedexListItem *item, u8 b)
+static u8 sub_808F284(struct PokedexListItem *item, u8 b)
 {
     gUnknown_0202FFBC = item;
     gTasks[b].data[0] = 1;
