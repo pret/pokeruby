@@ -399,6 +399,7 @@ SECTIONS {
         data/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
+        src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         src/battle_party_menu.o(.rodata);
