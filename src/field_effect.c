@@ -22,13 +22,401 @@
 #include "field_camera.h"
 #include "field_effect.h"
 
-typedef bool8 (*FldEffCmd)(u8 **, u32 *);
+#define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
+
+#define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
+
+const u32 gSpriteImage_839DC14[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
+const u16 gBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
+const u32 gSpriteImage_839E434[] = INCBIN_U32("graphics/misc/pokeball_glow.4bpp");
+const u16 gFieldEffectObjectPalette4[16] = INCBIN_U16("graphics/field_effect_objects/palettes/04.gbapal");
+const u32 gSpriteImage_839E474[] = INCBIN_U32("graphics/misc/pokecenter_monitor/0.4bpp");
+const u32 gSpriteImage_839E534[] = INCBIN_U32("graphics/misc/pokecenter_monitor/1.4bpp");
+const u32 gSpriteImage_839E5F4[] = INCBIN_U32("graphics/misc/big_hof_monitor.4bpp");
+const u32 gSpriteImage_839E7F4[] = INCBIN_U32("graphics/misc/small_hof_monitor.4bpp");
+const u16 gFieldEffectObjectPalette5[16] = INCBIN_U16("graphics/field_effect_objects/palettes/05.gbapal");
+
+// Graphics for the lights streaking past your Pokemon when it uses a field move.
+const u32 gFieldMoveStreaksTiles[] = INCBIN_U32("graphics/misc/field_move_streaks.4bpp");
+const u16 gFieldMoveStreaksPalette[16] = INCBIN_U16("graphics/misc/field_move_streaks.gbapal");
+const u16 gFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/misc/field_move_streaks_map.bin");
+
+// The following light streaks effect is used when the map is dark (e.g. a cave).
+const u32 gDarknessFieldMoveStreaksTiles[] = INCBIN_U32("graphics/misc/darkness_field_move_streaks.4bpp");
+const u16 gDarknessFieldMoveStreaksPalette[16] = INCBIN_U16("graphics/misc/darkness_field_move_streaks.gbapal");
+const u16 gDarknessFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/misc/darkness_field_move_streaks_map.bin");
+
+bool8 (*const gFieldEffectScriptFuncs[])(u8 **, u32 *) = {
+    FieldEffectCmd_loadtiles,
+    FieldEffectCmd_loadfadedpal,
+    FieldEffectCmd_loadpal,
+    FieldEffectCmd_callnative,
+    FieldEffectCmd_end,
+    FieldEffectCmd_loadgfx_callnative,
+    FieldEffectCmd_loadtiles_callnative,
+    FieldEffectCmd_loadfadedpal_callnative,
+};
+
+const struct OamData gOamData_839F0F4 = {.size = 3};
+const struct OamData gOamData_839F0FC = {.size = 0};
+const struct OamData gOamData_839F104 = {.size = 1};
+
+const struct SpriteFrameImage gSpriteImageTable_839F10C[] = {
+    obj_frame_tiles(gSpriteImage_839DC14)
+};
+const struct SpritePalette gUnknown_0839F114 = {.data = gBirchPalette, .tag = 0x1006};
+
+const union AnimCmd gSpriteAnim_839F11C[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_839F124[] = {
+    gSpriteAnim_839F11C
+};
+
+const struct SpriteTemplate gSpriteTemplate_839F128 = {
+    .tileTag = 0xffff,
+    .paletteTag = 4102,
+    .oam = &gOamData_839F0F4,
+    .anims = (const union AnimCmd *const *)&gSpriteAnimTable_839F124,
+    .images = gSpriteImageTable_839F10C,
+    .affineAnims = (const union AffineAnimCmd *const *)&gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo4 = {.data = gFieldEffectObjectPalette4, .tag = 0x1007};
+const struct SpritePalette gFieldEffectObjectPaletteInfo5 = {.data = gFieldEffectObjectPalette5, .tag = 0x1010};
+const struct OamData gOamData_839F150 = {
+    .shape = 1,
+    .size = 2
+};
+
+const struct SpriteFrameImage gSpriteImageTable_839F158[] = {
+    obj_frame_tiles(gSpriteImage_839E434)
+};
+
+const struct SpriteFrameImage gSpriteImageTable_839F160[] = {
+    obj_frame_tiles(gSpriteImage_839E474),
+    obj_frame_tiles(gSpriteImage_839E534)
+};
+
+const struct SpriteFrameImage gSpriteImageTable_839F170[] = {
+    obj_frame_tiles(gSpriteImage_839E5F4)
+};
+
+const struct SpriteFrameImage gSpriteImageTable_839F178[] = {
+    {.data = (u8 *)gSpriteImage_839E7F4, .size = 0x200} // the macro breaks down here
+};
+
+const struct Subsprite Unknown_39F180[] = {
+    {.x = -12, .y = -8, .priority = 2, .tileOffset = 0, .shape = 1, .size = 0},
+    {.x =   4, .y = -8, .priority = 2, .tileOffset = 2, .shape = 0, .size = 0},
+    {.x = -12, .y =  0, .priority = 2, .tileOffset = 3, .shape = 1, .size = 0},
+    {.x =   4, .y =  0, .priority = 2, .tileOffset = 5, .shape = 0, .size = 0}
+};
+
+const struct SubspriteTable gUnknown_0839F1A0 = subsprite_table(Unknown_39F180);
+
+const struct Subsprite Unknown_39F1A8[] = {
+    {.x = -32, .y = -8, .priority = 2, .tileOffset =  0, .shape = 1, .size = 1},
+    {.x =   0, .y = -8, .priority = 2, .tileOffset =  4, .shape = 1, .size = 1},
+    {.x = -32, .y =  0, .priority = 2, .tileOffset =  8, .shape = 1, .size = 1},
+    {.x =   0, .y =  0, .priority = 2, .tileOffset = 12, .shape = 1, .size = 1}
+};
+
+const struct SubspriteTable gUnknown_0839F1C8 = subsprite_table(Unknown_39F1A8);
+
+const union AnimCmd gSpriteAnim_839F1D0[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_839F1D8[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
+    ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_839F1FC[] = {
+    gSpriteAnim_839F1D0,
+    gSpriteAnim_839F1D8
+};
+
+const union AnimCmd *const gSpriteAnimTable_839F204[] = {
+    gSpriteAnim_839F1D0
+};
+
+const struct SpriteTemplate gSpriteTemplate_839F208 = {
+    .tileTag = 0xffff,
+    .paletteTag = 4103,
+    .oam = &gOamData_839F0FC,
+    .anims = gSpriteAnimTable_839F1FC,
+    .images = gSpriteImageTable_839F158,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_PokeballGlow
+};
+
+
+const struct SpriteTemplate gSpriteTemplate_839F220 = {
+    .tileTag = 0xffff,
+    .paletteTag = 4100,
+    .oam = &gOamData_839F104,
+    .anims = gSpriteAnimTable_839F1FC,
+    .images = gSpriteImageTable_839F160,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_PokecenterMonitor
+};
+
+
+const struct SpriteTemplate gSpriteTemplate_839F238 = {
+    .tileTag = 0xffff,
+    .paletteTag = 4112,
+    .oam = &gOamData_839F104,
+    .anims = gSpriteAnimTable_839F204,
+    .images = gSpriteImageTable_839F170,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HallOfFameMonitor
+};
+
+
+const struct SpriteTemplate gSpriteTemplate_839F250 = {
+    .tileTag = 0xffff,
+    .paletteTag = 4112,
+    .oam = &gOamData_839F150,
+    .anims = gSpriteAnimTable_839F204,
+    .images = gSpriteImageTable_839F178,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HallOfFameMonitor
+};
+
+void (*const gUnknown_0839F268[])(struct Task *) = {
+    PokecenterHealEffect_0,
+    PokecenterHealEffect_1,
+    PokecenterHealEffect_2,
+    PokecenterHealEffect_3
+};
+
+void (*const gUnknown_0839F278[])(struct Task *) = {
+    HallOfFameRecordEffect_0,
+    HallOfFameRecordEffect_1,
+    HallOfFameRecordEffect_2,
+    HallOfFameRecordEffect_3
+};
+
+void (*const gUnknown_0839F288[])(struct Sprite *) = {
+    PokeballGlowEffect_0,
+    PokeballGlowEffect_1,
+    PokeballGlowEffect_2,
+    PokeballGlowEffect_3,
+    PokeballGlowEffect_4,
+    PokeballGlowEffect_5,
+    PokeballGlowEffect_6,
+    PokeballGlowEffect_7
+};
+
+const struct Coords16 gUnknown_0839F2A8[] = {
+    {.x = 0, .y = 0},
+    {.x = 6, .y = 0},
+    {.x = 0, .y = 4},
+    {.x = 6, .y = 4},
+    {.x = 0, .y = 8},
+    {.x = 6, .y = 8}
+};
+
+const u8 gUnknown_0839F2C0[] = {16, 12, 8, 0};
+const u8 gUnknown_0839F2C4[] = {16, 12, 8, 0};
+const u8 gUnknown_0839F2C8[] = { 0,  0, 0, 0};
+
+bool8 (*const gUnknown_0839F2CC[])(struct Task *) = {
+    sub_80867AC,
+    sub_8086854,
+    sub_8086870,
+    sub_80868E4,
+    sub_808699C,
+    sub_80869B8,
+    sub_80869F8
+};
+
+bool8 (*const gUnknown_0839F2E8[])(struct Task *) = {
+    sub_8086AA0,
+    sub_8086AC0,
+    sub_8086B30,
+    sub_8086B54,
+    sub_8086B64,
+    sub_8086B88
+};
+
+bool8 (*const gUnknown_0839F300[])(struct Task *) = {
+    sub_8086CF4,
+    sub_8086D70,
+    sub_8086DB0,
+    sub_8086E10,
+    sub_8086E50,
+    sub_8086EB0,
+    sub_8086ED4
+};
+
+bool8 (*const gUnknown_0839F31C[])(struct Task *, struct MapObject *) = {
+    sub_8086FB0,
+    waterfall_1_do_anim_probably,
+    waterfall_2_wait_anim_finish_probably,
+    sub_8087030,
+    sub_8087058
+};
+
+bool8 (*const gUnknown_0839F330[])(struct Task *) = {
+    sub_8087124,
+    dive_2_unknown,
+    dive_3_unknown
+};
+
+bool8 (*const gUnknown_0839F33C[])(struct Task *, struct MapObject *, struct Sprite *) = {
+    sub_808722C,
+    sub_8087264,
+    sub_8087298,
+    sub_80872E4,
+    sub_80873D8,
+    sub_80873F4
+};
+
+bool8 (*const gUnknown_0839F354[])(struct Task *, struct MapObject *, struct Sprite *) = {
+    sub_80874CC,
+    sub_80874FC,
+    sub_8087548,
+    sub_808759C
+};
+
+bool8 (*const gUnknown_0839F364[])(struct Task *, struct MapObject *, struct Sprite *) = {
+    sub_80876C8,
+    sub_80876F8,
+    sub_8087774,
+    sub_80877AC,
+    sub_80877D4
+};
+
+void (*const gUnknown_0839F378[])(struct Task *) = {
+    sub_80878F4,
+    sub_8087914
+};
+
+const u8 gUnknown_0839F380[] = {1, 3, 4, 2, 1};
+
+void (*const gUnknown_0839F388[])(struct Task *) = {
+    sub_8087AA4,
+    sub_8087AC8
+};
+
+void (*const gUnknown_0839F390[])(struct Task *) = {
+    sub_8087BEC,
+    sub_8087C14,
+    sub_8087CA4,
+    sub_8087D78
+};
+
+void (*const gUnknown_0839F3A0[])(struct Task *) = {
+    sub_8087E4C,
+    sub_8087ED8,
+    sub_8087FDC
+};
+
+void (*const gUnknown_0839F3AC[])(struct Task *) = {
+    sub_8088150,
+    sub_80881C0,
+    sub_8088228,
+    sub_80882B4,
+    sub_80882E4,
+    sub_8088338,
+    sub_8088380
+};
+
+void (*const gUnknown_0839F3C8[])(struct Task *) = {
+    sub_80884AC,
+    sub_80884E8,
+    sub_8088554,
+    sub_80885A8,
+    sub_80885D8,
+    sub_808860C,
+    sub_808862C
+};
+
+void (*const gUnknown_0839F3E4[])(struct Task *) = {
+    sub_8088984,
+    sub_80889E4,
+    sub_8088A30,
+    sub_8088A78,
+    sub_8088AF4
+};
+
+void (*const gUnknown_0839F3F8[])(struct Task *) = {
+    sub_8088CA0,
+    sub_8088CF8,
+    sub_8088D3C,
+    sub_8088D94,
+    sub_8088DD8,
+    sub_8088E2C,
+    sub_8088EB4,
+    sub_8088F10,
+    sub_8088F30
+};
+
+const union AffineAnimCmd SpriteAffineAnim_839F41C[] = {
+    AFFINEANIMCMD_FRAME(8, 8, -30, 0),
+    AFFINEANIMCMD_FRAME(28, 28, 0, 30),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd SpriteAffineAnim_839F434[] = {
+    AFFINEANIMCMD_FRAME(256, 256, 64, 0),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 22),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_0839F44C[] = {
+    SpriteAffineAnim_839F41C,
+    SpriteAffineAnim_839F434
+};
+
+void (*const gUnknown_0839F454[])(struct Task *) = {
+    sub_80892A0,
+    sub_8089354,
+    sub_80893C0,
+    sub_8089414,
+    sub_808948C,
+    sub_80894C4,
+    fishE
+};
+
+const s16 gUnknown_0839F470[] = {
+    -2,
+    -4,
+    -5,
+    -6,
+    -7,
+    -8,
+    -8,
+    -8,
+    -7,
+    -7,
+    -6,
+    -5,
+    -3,
+    -2,
+    0,
+    2,
+    4,
+    8
+};
 
 static u8 sActiveList[32];
 
 extern u8 *gFieldEffectScriptPointers[];
-
-extern FldEffCmd gFieldEffectScriptFuncs[];
 
 u32 FieldEffectStart(u8 id)
 {
@@ -460,7 +848,6 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 #endif
 
 void Task_PokecenterHeal(u8 taskId);
-extern const void (*gUnknown_0839F268[4])(struct Task *);
 u8 CreatePokeballGlowSprite(s16, s16, s16, u16);
 u8 PokecenterHealEffectHelper(s16, s16);
 
@@ -521,7 +908,6 @@ void PokecenterHealEffect_3(struct Task *task)
 }
 
 void Task_HallOfFameRecord(u8 taskId);
-extern const void (*gUnknown_0839F278[4])(struct Task *);
 void HallOfFameRecordEffectHelper(s16, s16, s16, u8);
 
 bool8 FldEff_HallOfFameRecord(void)
@@ -585,14 +971,6 @@ void HallOfFameRecordEffect_3(struct Task *task)
 }
 
 void SpriteCB_PokeballGlowEffect(struct Sprite *);
-extern const void (*gUnknown_0839F288[8])(struct Sprite *);
-extern const struct SpriteTemplate gSpriteTemplate_839F208;
-extern const struct SpriteTemplate gSpriteTemplate_839F220;
-extern const struct SpriteTemplate gSpriteTemplate_839F238;
-extern const struct SpriteTemplate gSpriteTemplate_839F250;
-extern const struct SubspriteTable gUnknown_0839F1A0;
-extern const struct SubspriteTable gUnknown_0839F1C8;
-extern const struct Coords16 gUnknown_0839F2A8[6];
 
 u8 CreatePokeballGlowSprite(s16 data6, s16 x, s16 y, u16 data5)
 {
@@ -632,10 +1010,6 @@ void PokeballGlowEffect_0(struct Sprite *sprite)
         sprite->data0++;
     }
 }
-
-extern const u8 gUnknown_0839F2C0[4]; // red
-extern const u8 gUnknown_0839F2C4[4]; // green
-extern const u8 gUnknown_0839F2C8[4]; // blue
 
 void PokeballGlowEffect_1(struct Sprite *sprite)
 {
@@ -881,7 +1255,6 @@ void c3_080843F8(u8 taskId)
 
 extern void pal_fill_for_map_transition(void);
 void sub_8086774(u8);
-extern const bool8 (*gUnknown_0839F2CC[7])(struct Task *);
 extern void CameraObjectReset2(void);
 extern void CameraObjectReset1(void);
 
@@ -1015,8 +1388,6 @@ bool8 sub_80869F8(struct Task *task)
 }
 
 void sub_8086A68(u8);
-extern const bool8 (*gUnknown_0839F2E8[6])(struct Task *);
-extern const bool8 (*gUnknown_0839F300[7])(struct Task *);
 extern void sub_80B4824(u8);
 extern void sub_8053FF8(void);
 extern void fade_8080918(void);
@@ -1285,7 +1656,6 @@ bool8 sub_8086ED4(struct Task *task)
 }
 
 void sub_8086F64(u8);
-extern const bool8 (*gUnknown_0839F31C[5])(struct Task *, struct MapObject *);
 
 bool8 FldEff_UseWaterfall(void)
 {
@@ -1358,7 +1728,6 @@ bool8 sub_8087058(struct Task *task, struct MapObject *mapObject)
 }
 
 void Task_Dive(u8);
-extern const bool8 (*gUnknown_0839F330[3])(struct Task *);
 extern int dive_warp(struct MapPosition *, u16);
 
 bool8 FldEff_UseDive(void)
@@ -1406,7 +1775,6 @@ bool8 dive_3_unknown(struct Task *task)
 }
 
 void sub_80871D0(u8);
-extern const bool8 (*gUnknown_0839F33C[6])(struct Task *, struct MapObject *, struct Sprite *);
 void mapldr_080851BC(void);
 
 void sub_80871B8(u8 priority)
@@ -1522,7 +1890,6 @@ bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite 
 }
 
 void sub_8087470(u8);
-extern const bool8 (*gUnknown_0839F354[4])(struct Task *, struct MapObject *, struct Sprite *);
 extern u8 sub_80608A4(u8);
 
 void mapldr_080851BC(void)
@@ -1611,7 +1978,6 @@ void sub_8087638(struct Sprite *sprite)
 }
 
 void sub_808766C(u8);
-extern const bool8 (*gUnknown_0839F364[5])(struct Task *, struct MapObject *, struct Sprite *);
 
 void sub_8087654(u8 priority)
 {
@@ -1677,8 +2043,6 @@ bool8 sub_80877AC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 }
 
 void sub_80878C4(u8);
-extern u8 gUnknown_0839F380[5];
-extern const void (*gUnknown_0839F378[2])(struct Task *);
 void mapldr_080859D4(void);
 
 bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
@@ -1764,7 +2128,6 @@ void sub_8087914(struct Task *task)
 }
 
 void sub_8087A74(u8);
-extern const void (*gUnknown_0839F388[2])(struct Task *);
 
 void mapldr_080859D4(void)
 {
@@ -1822,7 +2185,6 @@ void sub_8087AC8(struct Task *task)
 }
 
 void sub_8087BBC(u8);
-extern const void (*gUnknown_0839F390[4])(struct Task *);
 void mapldr_08085D88(void);
 
 void sub_8087BA8(void)
@@ -1910,7 +2272,6 @@ void sub_8087D78(struct Task *task)
 }
 
 void sub_8087E1C(u8);
-extern const void (*gUnknown_0839F3A0[3])(struct Task *);
 
 void mapldr_08085D88(void)
 {
@@ -2013,14 +2374,6 @@ void sub_8087FDC(struct Task *task)
 void sub_8088120(u8);
 void sub_808847C(u8);
 u8 sub_8088830(u32, u32, u32);
-extern const void (*gUnknown_0839F3AC[7])(struct Task *);
-extern const void (*gUnknown_0839F3C8[7])(struct Task *);
-extern const u32 gFieldMoveStreaksTiles[0x200];
-extern const u16 gFieldMoveStreaksPalette[16];
-extern const u16 gFieldMoveStreaksTilemap[10 * 32];
-extern const u32 gDarknessFieldMoveStreaksTiles[0x80];
-extern const u16 gDarknessFieldMoveStreaksPalette[16];
-extern const u16 gDarknessFieldMoveStreaksTilemap[10 * 32];
 void sub_80883DC(void);
 void sub_808843C(u16);
 void sub_8088890(struct Sprite *);
@@ -2517,7 +2870,6 @@ void sub_80888F0(struct Sprite *sprite)
 }
 
 void sub_8088954(u8);
-extern const void (*gUnknown_0839F3E4[5])(struct Task *);
 
 u8 FldEff_UseSurf(void)
 {
@@ -2641,7 +2993,6 @@ void sub_8088BC4(struct Sprite *sprite)
 }
 
 void sub_8088C70(u8);
-extern const void (*gUnknown_0839F3F8[9])(struct Task *);
 extern void sub_8127EFC(u8, u8);
 u8 sub_8088F60(void);
 bool8 sub_8088FA4(u8);
@@ -2649,7 +3000,6 @@ void sub_8088FC0(u8);
 void sub_8088FFC(u8, u8);
 void sub_8089018(struct Sprite *);
 void sub_80890D8(struct Sprite *);
-extern const union AffineAnimCmd *gSpriteAffineAnimTable_0839F44C[];
 
 u8 FldEff_UseFly(void)
 {
@@ -2922,8 +3272,6 @@ void sub_8089230(u8 spriteId)
 }
 
 void sub_8089270(u8);
-extern const void (*gUnknown_0839F454[7])(struct Task *);
-extern const s16 gUnknown_0839F470[18];
 
 u8 FldEff_FlyIn(void)
 {
