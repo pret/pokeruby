@@ -8,6 +8,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_cursor.h"
 #include "palette.h"
 #include "rng.h"
 #include "songs.h"
@@ -55,6 +56,20 @@ struct PokedexEntry
     /*0x20*/ u16 trainerOffset;
 };  /*size = 0x24*/
 
+struct UnknownStruct2
+{
+    const u8 *text1;
+    const u8 *text2;
+};
+
+struct UnknownStruct1
+{
+    const struct UnknownStruct2 *unk0;
+    u8 unk4;
+    u8 unk5;
+    u16 unk6;
+};
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
@@ -97,6 +112,7 @@ extern const u8 gUnknown_083B5850[][4];
 extern const u8 gUnknown_083B586C[][4];
 extern const u8 gUnknown_083B5888[][4];
 extern const u8 gUnknown_083B58A4[][4];
+extern const struct UnknownStruct1 gUnknown_083B5A7C[];
 extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
 extern u8 gUnknown_08E96ACC[];
@@ -112,6 +128,7 @@ extern const u8 gPokedexMenuSearch_Gfx[];
 extern const u8 gUnknown_08E96D2C[];
 extern const u16 gPokedexMenuSearch_Pal[];
 
+extern void sub_814AD7C(u8, u8);
 extern void sub_800D74C();
 extern const u16 *species_and_otid_get_pal(u16, u32, u32);
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
@@ -138,10 +155,14 @@ void sub_80923FC(u8);
 void sub_80924A4(u8);
 void sub_8092508(u8);
 void sub_80925CC(u8);
+void sub_8092644(u8);
 void sub_80927B8(u8);
+void sub_80927F0(u8);
 void sub_8092AB0(u8);
 void sub_8092AD4(u8, u8);
 void sub_8092B68();
+void sub_8092C8C();
+void sub_8092D78();
 u8 sub_8092E10();
 void sub_8092EB0();
 void sub_809308C();
@@ -4467,4 +4488,142 @@ void sub_80924A4(u8 taskId)
         }
         gTasks[taskId].func = sub_8092508;
     }
+}
+
+void sub_8092508(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gPokedexView->unk60C != 0)
+        {
+            gPokedexView->unk64F = 1;
+            gPokedexView->unk612 = sub_8092E10(taskId, 5);
+            gPokedexView->unk616 = sub_8092E10(taskId, 4);
+            gTasks[taskId].func = sub_80927B8;
+            PlaySE(SE_PC_OFF);
+        }
+        else
+        {
+            gTasks[taskId].func = sub_809217C;
+            PlaySE(SE_BOWA);
+        }
+    }
+}
+
+void sub_80925B4(u16 a, int unused)
+{
+    sub_814AD7C(0x90, (a * 2 + 1) * 8);
+}
+
+void sub_80925CC(u8 taskId)
+{
+    u8 r0;
+    u16 *p1;
+    u16 *p2;
+
+    sub_8092C8C(0);
+    r0 = gTasks[taskId].data[1];
+    p1 = &gTasks[taskId].data[gUnknown_083B5A7C[r0].unk4];
+    p2 = &gTasks[taskId].data[gUnknown_083B5A7C[r0].unk5];
+    gTasks[taskId].data[14] = *p1;
+    gTasks[taskId].data[15] = *p2;
+    sub_8092D78(taskId);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 11);
+    sub_80925B4(*p1, 1);
+    gTasks[taskId].func = sub_8092644;
+}
+
+void sub_8092644(u8 taskId)
+{
+    u8 r1;
+    const struct UnknownStruct2 *r8;
+    u16 *p1;
+    u16 *p2;
+    u16 r2;
+    bool8 r3;
+
+    r1 = gTasks[taskId].data[1];
+    r8 = gUnknown_083B5A7C[r1].unk0;
+    p1 = &gTasks[taskId].data[gUnknown_083B5A7C[r1].unk4];
+    p2 = &gTasks[taskId].data[gUnknown_083B5A7C[r1].unk5];
+    r2 = gUnknown_083B5A7C[r1].unk6 - 1;
+    if (gMain.newKeys & A_BUTTON)
+    {
+        sub_814ADC8();
+        PlaySE(SE_PIN);
+        MenuZeroFillWindowRect(18, 1, 28, 12);
+        sub_8092C8C(1);
+        gTasks[taskId].func = sub_809217C;
+        return;
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        sub_814ADC8();
+        PlaySE(SE_BOWA);
+        MenuZeroFillWindowRect(18, 1, 28, 12);
+        sub_8092C8C(1);
+        *p1 = gTasks[taskId].data[14];
+        *p2 = gTasks[taskId].data[15];
+        gTasks[taskId].func = sub_809217C;
+        return;
+    }
+    r3 = FALSE;
+    if (gMain.newAndRepeatedKeys & 0x40)
+    {
+        if (*p1 != 0)
+        {
+            sub_80925B4(*p1, 0);
+            (*p1)--;
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        else if (*p2 != 0)
+        {
+            (*p2)--;
+            sub_8092D78(taskId);
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        if (r3)
+        {
+            PlaySE(SE_SELECT);
+            sub_8091E20(r8[*p1 + *p2].text1);
+        }
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & 0x80)
+    {
+        if (*p1 < 5 && *p1 < r2)
+        {
+            sub_80925B4(*p1, 0);
+            (*p1)++;
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        else if (r2 > 5 && *p2 < r2 - 5)
+        {
+            (*p2)++;
+            sub_8092D78(taskId);
+            sub_80925B4(5, 1);
+            r3 = TRUE;
+        }
+        if (r3)
+        {
+            PlaySE(SE_SELECT);
+            sub_8091E20(r8[*p1 + *p2].text1);
+        }
+        return;
+    }
+}
+
+void sub_80927B8(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_80927F0;
+}
+
+void sub_80927F0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        DestroyTask(taskId);
 }
