@@ -1,17 +1,6 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
-enum DecoCat {
-    /*0*/ DECOCAT_DESK,
-    /*1*/ DECOCAT_CHAIR,
-    /*2*/ DECOCAT_PLANT,
-    /*3*/ DECOCAT_ORNAMENT,
-    /*4*/ DECOCAT_MAT,
-    /*5*/ DECOCAT_POSTER,
-    /*6*/ DECOCAT_DOLL,
-    /*7*/ DECOCAT_CUSHION
-};
-
 enum DecoId {
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
@@ -136,13 +125,54 @@ enum DecoId {
     /*120*/ DECOR_REGISTEEL_DOLL
 };
 
+enum DecorPerm {
+    /*
+     * The nomenclature here describes collision and placement permissions, in that order.
+     */
+    DECORPERM_SOLID_FLOOR,
+    DECORPERM_PASS_FLOOR,
+    DECORPERM_BEHIND_FLOOR,
+    DECORPERM_NA_WALL,
+    DECORPERM_SOLID_MAT
+};
+
+enum DecorShape {
+    /*
+     * Width-x-height
+     */
+    DECORSHAPE_1x1,
+    DECORSHAPE_2x1,
+    DECORSHAPE_3x1, // unused
+    DECORSHAPE_4x2,
+    DECORSHAPE_2x2,
+    DECORSHAPE_1x2,
+    DECORSHAPE_1x3, // unused
+    DECORSHAPE_2x4,
+    DECORSHAPE_3x3,
+    DECORSHAPE_3x2
+};
+
+enum DecoCat {
+    /*
+     * In which category you can find the decoration in the PC.
+     */
+    /*0*/ DECORCAT_DESK,
+    /*1*/ DECORCAT_CHAIR,
+    /*2*/ DECORCAT_PLANT,
+    /*3*/ DECORCAT_ORNAMENT,
+    /*4*/ DECORCAT_MAT,
+    /*5*/ DECORCAT_POSTER,
+    /*6*/ DECORCAT_DOLL,
+    /*7*/ DECORCAT_CUSHION
+};
+
 struct Decoration
 {
     /*0x00*/ u8 id;
     /*0x01*/ u8 name[16];
-    /*0x11*/ u8 decor_field_11;
+    /*0x11*/ u8 permission;
     /*0x12*/ u8 shape;
-    /*0x13*/ u8 decor_field_13;
+    /*0x13*/ u8 category;
     /*0x14*/ u16 price;
     /*0x18*/ const u8 *description;
     /*0x1c*/ const u16 *tiles;
@@ -164,9 +194,9 @@ struct DecorationInventory
 
 struct UnkStruct_803EC860
 {
-    const u8 *var0;
-    const u8 *var4;
-    const u8 *var8;
+    const u8 *tiles;
+    const u8 *y;
+    const u8 *x;
     u8 size;
 };
 
@@ -178,7 +208,7 @@ extern u8 ewram[];
 struct UnkStruct_02038900
 {
     /*0x000; 0x02038900*/ const struct Decoration *decoration;
-    /*0x004; 0x02038904*/ u16 unk_004[0x40];
+    /*0x004; 0x02038904*/ u16 tiles[0x40];
     /*0x084; 0x02038984*/ u8 image[0x800];
     /*0x884; 0x02039184*/ u16 palette[16];
 };
@@ -193,12 +223,10 @@ struct UnkStruct_083EC900
 
 struct UnkStruct_020391B4
 {
-    u8 var00;
+    u8 decorId;
     u8 width;
     u8 height;
-    u8 var03;
-    u16 var04;
-    u8 pad06[2];
+    u16 flagId;
 };
 
 extern const struct UnkStruct_083EC900 gUnknown_083EC900[];
