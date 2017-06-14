@@ -3945,28 +3945,28 @@ void sub_8101460(u8 taskId)
     {
         for (i=0; i<ewram_1f000.size; i++)
         {
-            if (ewram_1f000.items[i] != 0) // This is using the wrong register!
+            if (ewram_1f000.items[i] == 0) // This is using the wrong register!
             {
-                sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
-                if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
-                {
-                    gUnknown_020391B4[0].decorId = i;
-                    gUnknown_02039234++;
-                    break;
-                }
+                continue;
+            }
+            sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
+            if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
+            {
+                gUnknown_020391B4[0].decorId = i;
+                gUnknown_02039234++;
+                break;
             }
         }
         if (gUnknown_02039234 != 0)
         {
             xOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] >> 4;
             yOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] & 0xf;
-            sub_81013B8(xOff, yOff - gUnknown_020391B4[0].var02 + 1, xOff + gUnknown_020391B4[0].var01 - 1, yOff);
+            sub_81013B8(xOff, yOff - gUnknown_020391B4[0].height + 1, xOff + gUnknown_020391B4[0].width - 1, yOff);
         }
     }
 }
 #else
 __attribute__((naked))
-
 void sub_8101460(u8 taskId)
 {
     asm(".syntax unified\n"
