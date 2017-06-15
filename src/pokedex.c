@@ -5,6 +5,7 @@
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -92,8 +93,8 @@ struct PokedexEntry
     /*0x00*/ u8 categoryName[12];
     /*0x0C*/ u16 height; //in decimeters
     /*0x0E*/ u16 weight; //in hectograms
-    /*0x10*/ u8 *descriptionPage1;
-    /*0x14*/ u8 *descriptionPage2;
+    /*0x10*/ const u8 *descriptionPage1;
+    /*0x14*/ const u8 *descriptionPage2;
     /*0x18*/ u16 unused;
     /*0x1A*/ u16 pokemonScale;
     /*0x1C*/ u16 pokemonOffset;
@@ -149,27 +150,9 @@ extern u8 gUnknown_08E96738[];
 extern u8 gUnknown_08E96888[];
 extern u8 gUnknown_08E96994[];
 extern u8 gUnknown_08E9C6DC[];
-extern struct SpriteTemplate gSpriteTemplate_83A0524;
-extern struct SpriteTemplate gSpriteTemplate_83A053C;
-extern struct SpriteTemplate gSpriteTemplate_83A0554;
-extern struct SpriteTemplate gSpriteTemplate_83A056C;
-extern struct SpriteTemplate gSpriteTemplate_83A0584;
-extern struct SpriteTemplate gSpriteTemplate_83A059C;
-extern struct SpriteTemplate gSpriteTemplate_83A05B4;
-extern struct SpriteSheet gUnknown_083A05CC;
-extern struct SpritePalette gUnknown_083A05DC[];
-extern u8 gUnknown_083A05EC[];
-extern u8 gUnknown_083A05F1[];
-extern u8 gUnknown_083A05F8[];
-extern u8 gUnknown_083B4EC4[];
-extern u8 gUnknown_083B5558[];
-extern void *const gUnknown_083B5584[];
-extern struct SpriteFrameImage *const gUnknown_083B5794[];
 extern const struct SpriteTemplate gUnknown_083B57A4;
-extern const u8 gUnknown_083B57BC[][4];
 extern const struct UnknownStruct3 gUnknown_083B57E4[];
 extern const struct UnknownStruct4 gUnknown_083B57FC[];
-extern const u8 gUnknown_083B5850[][4];
 extern const u8 gUnknown_083B586C[][4];
 extern const u8 gUnknown_083B5888[][4];
 extern const u8 gUnknown_083B58A4[][4];
@@ -188,8 +171,8 @@ extern u8 gUnknown_08D00524[];
 extern u8 gUnknown_08E96BD4[];
 extern u8 gUnknown_08E96ACC[];
 extern u8 gUnknown_08E96B58[];
-extern u16 gPokedexMenu_Pal[];
-extern u16 gPokedexMenu2_Pal[];
+extern const u16 gPokedexMenu_Pal[];
+extern const u16 gPokedexMenu2_Pal[];
 extern const u8 *const gMonFootprintTable[];
 extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
@@ -198,6 +181,8 @@ extern const struct BaseStats gBaseStats[];
 extern const u8 gPokedexMenuSearch_Gfx[];
 extern const u8 gUnknown_08E96D2C[];
 extern const u16 gPokedexMenuSearch_Pal[];
+extern const u8 gTypeNames[][7];
+extern const u8 gPokedexMenu2_Gfx[];
 
 extern void sub_814AD7C(u8, u8);
 extern void sub_800D74C();
@@ -217,1198 +202,7 @@ const u8 gEmptySpacce_839F7FC[0xA4] = {0};
 const u8 gUnknown_0839F8A0[] = INCBIN_U8("graphics/pokedex/pokedex_cry_layout.bin.lz");
 const u8 gUnknown_0839F988[] = INCBIN_U8("graphics/pokedex/pokedex_size_layout.bin.lz");
 const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz");
-const u16 gPokedexOrder_Alphabetical[] =
-{
-    387,
-    388,
-    389,
-    390,
-    391,
-    392,
-    393,
-    394,
-    395,
-    396,
-    397,
-    398,
-    399,
-    400,
-    401,
-    402,
-    403,
-    404,
-    405,
-    406,
-    407,
-    408,
-    409,
-    410,
-    411,
-     63,  // Abra
-    359,  // Absol
-    142,  // Aerodactyl
-    306,  // Aggron
-    190,  // Aipom
-     65,  // Alakazam
-    334,  // Altaria
-    181,  // Ampharos
-    347,  // Anorith
-     24,  // Arbok
-     59,  // Arcanine
-    168,  // Ariados
-    348,  // Armaldo
-    304,  // Aron
-    144,  // Articuno
-    184,  // Azumarill
-    298,  // Azurill
-    371,  // Bagon
-    343,  // Baltoy
-    354,  // Banette
-    339,  // Barboach
-    153,  // Bayleef
-    267,  // Beautifly
-     15,  // Beedrill
-    374,  // Beldum
-    182,  // Bellossom
-     69,  // Bellsprout
-      9,  // Blastoise
-    257,  // Blaziken
-    242,  // Blissey
-    286,  // Breloom
-      1,  // Bulbasaur
-     12,  // Butterfree
-    331,  // Cacnea
-    332,  // Cacturne
-    323,  // Camerupt
-    318,  // Carvanha
-    268,  // Cascoon
-    351,  // Castform
-     10,  // Caterpie
-    251,  // Celebi
-    113,  // Chansey
-      6,  // Charizard
-      4,  // Charmander
-      5,  // Charmeleon
-    152,  // Chikorita
-    358,  // Chimecho
-    170,  // Chinchou
-    366,  // Clamperl
-    344,  // Claydol
-     36,  // Clefable
-     35,  // Clefairy
-    173,  // Cleffa
-     91,  // Cloyster
-    256,  // Combusken
-    341,  // Corphish
-    222,  // Corsola
-    346,  // Cradily
-    342,  // Crawdaunt
-    169,  // Crobat
-    159,  // Croconaw
-    104,  // Cubone
-    155,  // Cyndaquil
-    301,  // Delcatty
-    225,  // Delibird
-    386,  // Deoxys
-     87,  // Dewgong
-     50,  // Diglett
-    132,  // Ditto
-     85,  // Dodrio
-     84,  // Doduo
-    232,  // Donphan
-    148,  // Dragonair
-    149,  // Dragonite
-    147,  // Dratini
-     96,  // Drowzee
-     51,  // Dugtrio
-    206,  // Dunsparce
-    356,  // Dusclops
-    355,  // Duskull
-    269,  // Dustox
-    133,  // Eevee
-     23,  // Ekans
-    125,  // Electabuzz
-    309,  // Electrike
-    101,  // Electrode
-    239,  // Elekid
-    244,  // Entei
-    196,  // Espeon
-    102,  // Exeggcute
-    103,  // Exeggutor
-    295,  // Exploud
-     83,  // Farfetch’d
-     22,  // Fearow
-    349,  // Feebas
-    160,  // Feraligatr
-    180,  // Flaaffy
-    136,  // Flareon
-    330,  // Flygon
-    205,  // Forretress
-    162,  // Furret
-    282,  // Gardevoir
-     92,  // Gastly
-     94,  // Gengar
-     74,  // Geodude
-    203,  // Girafarig
-    362,  // Glalie
-    207,  // Gligar
-     44,  // Gloom
-     42,  // Golbat
-    118,  // Goldeen
-     55,  // Golduck
-     76,  // Golem
-    368,  // Gorebyss
-    210,  // Granbull
-     75,  // Graveler
-     88,  // Grimer
-    383,  // Groudon
-    253,  // Grovyle
-     58,  // Growlithe
-    326,  // Grumpig
-    316,  // Gulpin
-    130,  // Gyarados
-    297,  // Hariyama
-     93,  // Haunter
-    214,  // Heracross
-    107,  // Hitmonchan
-    106,  // Hitmonlee
-    237,  // Hitmontop
-    250,  // Ho-Oh
-    163,  // Hoothoot
-    187,  // Hoppip
-    116,  // Horsea
-    229,  // Houndoom
-    228,  // Houndour
-    367,  // Huntail
-     97,  // Hypno
-    174,  // Igglybuff
-    314,  // Illumise
-      2,  // Ivysaur
-     39,  // Jigglypuff
-    385,  // Jirachi
-    135,  // Jolteon
-    189,  // Jumpluff
-    124,  // Jynx
-    140,  // Kabuto
-    141,  // Kabutops
-     64,  // Kadabra
-     14,  // Kakuna
-    115,  // Kangaskhan
-    352,  // Kecleon
-    230,  // Kingdra
-     99,  // Kingler
-    281,  // Kirlia
-    109,  // Koffing
-     98,  // Krabby
-    382,  // Kyogre
-    305,  // Lairon
-    171,  // Lanturn
-    131,  // Lapras
-    246,  // Larvitar
-    380,  // Latias
-    381,  // Latios
-    166,  // Ledian
-    165,  // Ledyba
-    108,  // Lickitung
-    345,  // Lileep
-    264,  // Linoone
-    271,  // Lombre
-    270,  // Lotad
-    294,  // Loudred
-    272,  // Ludicolo
-    249,  // Lugia
-    337,  // Lunatone
-    370,  // Luvdisc
-     68,  // Machamp
-     67,  // Machoke
-     66,  // Machop
-    240,  // Magby
-    219,  // Magcargo
-    129,  // Magikarp
-    126,  // Magmar
-     81,  // Magnemite
-     82,  // Magneton
-    296,  // Makuhita
-    310,  // Manectric
-     56,  // Mankey
-    226,  // Mantine
-    179,  // Mareep
-    183,  // Marill
-    105,  // Marowak
-    259,  // Marshtomp
-    284,  // Masquerain
-    303,  // Mawile
-    308,  // Medicham
-    307,  // Meditite
-    154,  // Meganium
-     52,  // Meowth
-    376,  // Metagross
-    375,  // Metang
-     11,  // Metapod
-    151,  // Mew
-    150,  // Mewtwo
-    262,  // Mightyena
-    350,  // Milotic
-    241,  // Miltank
-    312,  // Minun
-    200,  // Misdreavus
-    146,  // Moltres
-    122,  // Mr. mime
-    258,  // Mudkip
-     89,  // Muk
-    198,  // Murkrow
-    177,  // Natu
-     34,  // Nidoking
-     31,  // Nidoqueen
-     29,  // Nidoran♀
-     32,  // Nidoran♂
-     30,  // Nidorina
-     33,  // Nidorino
-    290,  // Nincada
-     38,  // Ninetales
-    291,  // Ninjask
-    164,  // Noctowl
-    299,  // Nosepass
-    322,  // Numel
-    274,  // Nuzleaf
-    224,  // Octillery
-     43,  // Oddish
-    138,  // Omanyte
-    139,  // Omastar
-     95,  // Onix
-     46,  // Paras
-     47,  // Parasect
-    279,  // Pelipper
-     53,  // Persian
-    231,  // Phanpy
-    172,  // Pichu
-     18,  // Pidgeot
-     17,  // Pidgeotto
-     16,  // Pidgey
-     25,  // Pikachu
-    221,  // Piloswine
-    204,  // Pineco
-    127,  // Pinsir
-    311,  // Plusle
-    186,  // Politoed
-     60,  // Poliwag
-     61,  // Poliwhirl
-     62,  // Poliwrath
-     77,  // Ponyta
-    261,  // Poochyena
-    137,  // Porygon
-    233,  // Porygon2
-     57,  // Primeape
-     54,  // Psyduck
-    247,  // Pupitar
-    195,  // Quagsire
-    156,  // Quilava
-    211,  // Qwilfish
-     26,  // Raichu
-    243,  // Raikou
-    280,  // Ralts
-     78,  // Rapidash
-     20,  // Raticate
-     19,  // Rattata
-    384,  // Rayquaza
-    378,  // Regice
-    377,  // Regirock
-    379,  // Registeel
-    369,  // Relicanth
-    223,  // Remoraid
-    112,  // Rhydon
-    111,  // Rhyhorn
-    315,  // Roselia
-    302,  // Sableye
-    373,  // Salamence
-     27,  // Sandshrew
-     28,  // Sandslash
-    254,  // Sceptile
-    212,  // Scizor
-    123,  // Scyther
-    117,  // Seadra
-    119,  // Seaking
-    364,  // Sealeo
-    273,  // Seedot
-     86,  // Seel
-    161,  // Sentret
-    336,  // Seviper
-    319,  // Sharpedo
-    292,  // Shedinja
-    372,  // Shelgon
-     90,  // Shellder
-    275,  // Shiftry
-    285,  // Shroomish
-    213,  // Shuckle
-    353,  // Shuppet
-    266,  // Silcoon
-    227,  // Skarmory
-    188,  // Skiploom
-    300,  // Skitty
-    289,  // Slaking
-    287,  // Slakoth
-     80,  // Slowbro
-    199,  // Slowking
-     79,  // Slowpoke
-    218,  // Slugma
-    235,  // Smeargle
-    238,  // Smoochum
-    215,  // Sneasel
-    143,  // Snorlax
-    361,  // Snorunt
-    209,  // Snubbull
-    338,  // Solrock
-     21,  // Spearow
-    363,  // Spheal
-    167,  // Spinarak
-    327,  // Spinda
-    325,  // Spoink
-      7,  // Squirtle
-    234,  // Stantler
-    121,  // Starmie
-    120,  // Staryu
-    208,  // Steelix
-    185,  // Sudowoodo
-    245,  // Suicune
-    192,  // Sunflora
-    191,  // Sunkern
-    283,  // Surskit
-    333,  // Swablu
-    317,  // Swalot
-    260,  // Swampert
-    277,  // Swellow
-    220,  // Swinub
-    276,  // Taillow
-    114,  // Tangela
-    128,  // Tauros
-    216,  // Teddiursa
-     72,  // Tentacool
-     73,  // Tentacruel
-    175,  // Togepi
-    176,  // Togetic
-    255,  // Torchic
-    324,  // Torkoal
-    158,  // Totodile
-    328,  // Trapinch
-    252,  // Treecko
-    357,  // Tropius
-    157,  // Typhlosion
-    248,  // Tyranitar
-    236,  // Tyrogue
-    197,  // Umbreon
-    201,  // Unown
-    217,  // Ursaring
-    134,  // Vaporeon
-     49,  // Venomoth
-     48,  // Venonat
-      3,  // Venusaur
-    329,  // Vibrava
-     71,  // Victreebel
-    288,  // Vigoroth
-     45,  // Vileplume
-    313,  // Volbeat
-    100,  // Voltorb
-     37,  // Vulpix
-    320,  // Wailmer
-    321,  // Wailord
-    365,  // Walrein
-      8,  // Wartortle
-     13,  // Weedle
-     70,  // Weepinbell
-    110,  // Weezing
-    340,  // Whiscash
-    293,  // Whismur
-     40,  // Wigglytuff
-    278,  // Wingull
-    202,  // Wobbuffet
-    194,  // Wooper
-    265,  // Wurmple
-    360,  // Wynaut
-    178,  // Xatu
-    193,  // Yanma
-    335,  // Zangoose
-    145,  // Zapdos
-    263,  // Zigzagoon
-     41,  // Zubat
-};
-const u16 gPokedexOrder_Weight[] =
-{
-     92,  // Gastly
-     93,  // Haunter
-    187,  // Hoppip
-     50,  // Diglett
-    351,  // Castform
-    109,  // Koffing
-    174,  // Igglybuff
-    200,  // Misdreavus
-    358,  // Chimecho
-    188,  // Skiploom
-    385,  // Jirachi
-    333,  // Swablu
-    292,  // Shedinja
-    175,  // Togepi
-    283,  // Surskit
-     16,  // Pidgey
-    191,  // Sunkern
-    339,  // Barboach
-    172,  // Pichu
-    298,  // Azurill
-    315,  // Roselia
-    177,  // Natu
-     21,  // Spearow
-    198,  // Murkrow
-    353,  // Shuppet
-    276,  // Taillow
-    102,  // Exeggcute
-    255,  // Torchic
-    270,  // Lotad
-     10,  // Caterpie
-    189,  // Jumpluff
-    173,  // Cleffa
-     13,  // Weedle
-    176,  // Togetic
-    147,  // Dratini
-     19,  // Rattata
-    284,  // Masquerain
-    265,  // Wurmple
-    211,  // Qwilfish
-    151,  // Mew
-     90,  // Shellder
-    273,  // Seedot
-    132,  // Ditto
-     69,  // Bellsprout
-    311,  // Plusle
-     52,  // Meowth
-    312,  // Minun
-    285,  // Shroomish
-    251,  // Celebi
-    222,  // Corsola
-    252,  // Treecko
-    327,  // Spinda
-    201,  // Unown
-     46,  // Paras
-     43,  // Oddish
-     39,  // Jigglypuff
-    290,  // Nincada
-    182,  // Bellossom
-     81,  // Magnemite
-     25,  // Pikachu
-    238,  // Smoochum
-    161,  // Sentret
-     70,  // Weepinbell
-    152,  // Chikorita
-    220,  // Swinub
-    133,  // Eevee
-     98,  // Krabby
-    104,  // Cubone
-    280,  // Ralts
-      1,  // Bulbasaur
-     23,  // Ekans
-     29,  // Nidoran♀
-    204,  // Pineco
-    349,  // Feebas
-    138,  // Omanyte
-     41,  // Zubat
-     35,  // Clefairy
-    258,  // Mudkip
-    209,  // Snubbull
-    179,  // Mareep
-    155,  // Cyndaquil
-    116,  // Horsea
-      4,  // Charmander
-    192,  // Sunflora
-    183,  // Marill
-    194,  // Wooper
-    167,  // Spinarak
-     44,  // Gloom
-    370,  // Luvdisc
-    216,  // Teddiursa
-     32,  // Nidoran♂
-      7,  // Squirtle
-    278,  // Wingull
-    158,  // Totodile
-    110,  // Weezing
-     37,  // Vulpix
-     11,  // Metapod
-    266,  // Silcoon
-    129,  // Magikarp
-     14,  // Kakuna
-    316,  // Gulpin
-    100,  // Voltorb
-    165,  // Ledyba
-    228,  // Houndour
-    300,  // Skitty
-    302,  // Sableye
-    307,  // Meditite
-    341,  // Corphish
-    190,  // Aipom
-    268,  // Cascoon
-    303,  // Mawile
-    140,  // Kabuto
-     40,  // Wigglytuff
-     27,  // Sandshrew
-    223,  // Remoraid
-    291,  // Ninjask
-    170,  // Chinchou
-     60,  // Poliwag
-    347,  // Anorith
-     49,  // Venomoth
-    354,  // Banette
-      2,  // Ivysaur
-    180,  // Flaaffy
-    261,  // Poochyena
-    360,  // Wynaut
-    206,  // Dunsparce
-    178,  // Xatu
-    355,  // Duskull
-     83,  // Farfetch’d
-    328,  // Trapinch
-    118,  // Goldeen
-    309,  // Electrike
-    329,  // Vibrava
-     71,  // Victreebel
-    153,  // Bayleef
-    225,  // Delibird
-    293,  // Whismur
-    148,  // Dragonair
-    361,  // Snorunt
-    263,  // Zigzagoon
-    314,  // Illumise
-    313,  // Volbeat
-     20,  // Raticate
-     45,  // Vileplume
-    156,  // Quilava
-      5,  // Charmeleon
-     58,  // Growlithe
-    256,  // Combusken
-     66,  // Machop
-     63,  // Abra
-     33,  // Nidorino
-     54,  // Psyduck
-    277,  // Swellow
-     38,  // Ninetales
-     30,  // Nidorina
-     61,  // Poliwhirl
-     74,  // Geodude
-    281,  // Kirlia
-    213,  // Shuckle
-    334,  // Altaria
-    318,  // Carvanha
-    236,  // Tyrogue
-    163,  // Hoothoot
-    240,  // Magby
-    343,  // Baltoy
-    253,  // Grovyle
-    352,  // Kecleon
-    171,  // Lanturn
-      8,  // Wartortle
-    368,  // Gorebyss
-    369,  // Relicanth
-    239,  // Elekid
-    340,  // Whiscash
-    345,  // Lileep
-    322,  // Numel
-    287,  // Slakoth
-    135,  // Jolteon
-    159,  // Croconaw
-    136,  // Flareon
-    117,  // Seadra
-    196,  // Espeon
-    367,  // Huntail
-    197,  // Umbreon
-    259,  // Marshtomp
-    274,  // Nuzleaf
-    215,  // Sneasel
-     56,  // Mankey
-    279,  // Pelipper
-    267,  // Beautifly
-    224,  // Octillery
-    184,  // Azumarill
-    202,  // Wobbuffet
-    134,  // Vaporeon
-     28,  // Sandslash
-     47,  // Parasect
-     15,  // Beedrill
-     89,  // Muk
-     17,  // Pidgeotto
-     88,  // Grimer
-     26,  // Raichu
-     77,  // Ponyta
-    125,  // Electabuzz
-     48,  // Venonat
-    325,  // Spoink
-    356,  // Dusclops
-    308,  // Medicham
-    269,  // Dustox
-     53,  // Persian
-     12,  // Butterfree
-     57,  // Primeape
-     96,  // Drowzee
-    162,  // Furret
-    233,  // Porygon2
-    271,  // Lombre
-    264,  // Linoone
-    301,  // Delcatty
-    342,  // Crawdaunt
-     51,  // Dugtrio
-    168,  // Ariados
-    231,  // Phanpy
-    186,  // Politoed
-    120,  // Staryu
-    113,  // Chansey
-    139,  // Omastar
-    114,  // Tangela
-    218,  // Slugma
-    229,  // Houndoom
-    166,  // Ledian
-     79,  // Slowpoke
-    137,  // Porygon
-    262,  // Mightyena
-    193,  // Yanma
-     22,  // Fearow
-    185,  // Sudowoodo
-    119,  // Seaking
-    286,  // Breloom
-     84,  // Doduo
-     18,  // Pidgeot
-    363,  // Spheal
-     36,  // Clefable
-    380,  // Latias
-    310,  // Manectric
-    335,  // Zangoose
-    141,  // Kabutops
-     94,  // Gengar
-    294,  // Loudred
-    124,  // Jynx
-    164,  // Noctowl
-    203,  // Girafarig
-    371,  // Bagon
-    126,  // Magmar
-    105,  // Marowak
-     72,  // Tentacool
-    288,  // Vigoroth
-    242,  // Blissey
-    359,  // Absol
-     65,  // Alakazam
-    237,  // Hitmontop
-    282,  // Gardevoir
-    210,  // Granbull
-    106,  // Hitmonlee
-    107,  // Hitmonchan
-    227,  // Skarmory
-    331,  // Cacnea
-    257,  // Blaziken
-    254,  // Sceptile
-    336,  // Seviper
-    366,  // Clamperl
-    145,  // Zapdos
-    214,  // Heracross
-     62,  // Poliwrath
-    122,  // Mr. mime
-    127,  // Pinsir
-    272,  // Ludicolo
-     73,  // Tentacruel
-     42,  // Golbat
-    219,  // Magcargo
-    144,  // Articuno
-    221,  // Piloswine
-    123,  // Scyther
-     64,  // Kadabra
-    235,  // Smeargle
-    142,  // Aerodactyl
-    275,  // Shiftry
-     99,  // Kingler
-     31,  // Nidoqueen
-     82,  // Magneton
-    304,  // Aron
-    381,  // Latios
-    146,  // Moltres
-    346,  // Cradily
-    386,  // Deoxys
-    181,  // Ampharos
-     34,  // Nidoking
-    207,  // Gligar
-     24,  // Arbok
-    108,  // Lickitung
-    101,  // Electrode
-    348,  // Armaldo
-     67,  // Machoke
-    234,  // Stantler
-    326,  // Grumpig
-    246,  // Larvitar
-    169,  // Crobat
-    195,  // Quagsire
-    241,  // Miltank
-     97,  // Hypno
-     55,  // Golduck
-    332,  // Cacturne
-     80,  // Slowbro
-    157,  // Typhlosion
-    199,  // Slowking
-    115,  // Kangaskhan
-    121,  // Starmie
-    317,  // Swalot
-    324,  // Torkoal
-    260,  // Swampert
-    330,  // Flygon
-    295,  // Exploud
-     85,  // Dodrio
-      9,  // Blastoise
-    296,  // Makuhita
-    364,  // Sealeo
-    128,  // Tauros
-    319,  // Sharpedo
-    160,  // Feraligatr
-     86,  // Seel
-      6,  // Charizard
-     78,  // Rapidash
-    374,  // Beldum
-    299,  // Nosepass
-      3,  // Venusaur
-    357,  // Tropius
-    154,  // Meganium
-    373,  // Salamence
-     75,  // Graveler
-    344,  // Claydol
-    372,  // Shelgon
-    111,  // Rhyhorn
-    212,  // Scizor
-     87,  // Dewgong
-    112,  // Rhydon
-    232,  // Donphan
-    103,  // Exeggutor
-    305,  // Lairon
-    150,  // Mewtwo
-    217,  // Ursaring
-    205,  // Forretress
-     68,  // Machamp
-    320,  // Wailmer
-    289,  // Slaking
-     91,  // Cloyster
-    365,  // Walrein
-    247,  // Pupitar
-    230,  // Kingdra
-    338,  // Solrock
-     59,  // Arcanine
-    350,  // Milotic
-    337,  // Lunatone
-    378,  // Regice
-    243,  // Raikou
-    245,  // Suicune
-    244,  // Entei
-    250,  // Ho-Oh
-    248,  // Tyranitar
-    375,  // Metang
-    379,  // Registeel
-    384,  // Rayquaza
-     95,  // Onix
-    149,  // Dragonite
-    249,  // Lugia
-    131,  // Lapras
-    323,  // Camerupt
-    226,  // Mantine
-    377,  // Regirock
-    130,  // Gyarados
-    297,  // Hariyama
-    362,  // Glalie
-     76,  // Golem
-    382,  // Kyogre
-    306,  // Aggron
-    321,  // Wailord
-    208,  // Steelix
-    143,  // Snorlax
-    376,  // Metagross
-    383,  // Groudon
-};
-const u16 gPokedexOrder_Height[] =
-{
-     50,  // Diglett
-    298,  // Azurill
-    177,  // Natu
-     13,  // Weedle
-    172,  // Pichu
-    173,  // Cleffa
-    175,  // Togepi
-    351,  // Castform
-    174,  // Igglybuff
-     10,  // Caterpie
-    276,  // Taillow
-    132,  // Ditto
-    133,  // Eevee
-    315,  // Roselia
-     21,  // Spearow
-     16,  // Pidgey
-    191,  // Sunkern
-     90,  // Shellder
-     19,  // Rattata
-     81,  // Magnemite
-     46,  // Paras
-    265,  // Wurmple
-    385,  // Jirachi
-    104,  // Cubone
-    258,  // Mudkip
-    194,  // Wooper
-    116,  // Horsea
-     52,  // Meowth
-     29,  // Nidoran♀
-    220,  // Swinub
-    151,  // Mew
-    333,  // Swablu
-    304,  // Aron
-    311,  // Plusle
-    312,  // Minun
-    102,  // Exeggcute
-     25,  // Pikachu
-    182,  // Bellossom
-    316,  // Gulpin
-    263,  // Zigzagoon
-    285,  // Shroomish
-    138,  // Omanyte
-    331,  // Cacnea
-     98,  // Krabby
-    280,  // Ralts
-    187,  // Hoppip
-    255,  // Torchic
-    366,  // Clamperl
-     74,  // Geodude
-    183,  // Marill
-    339,  // Barboach
-    238,  // Smoochum
-    100,  // Voltorb
-    290,  // Nincada
-    302,  // Sableye
-    198,  // Murkrow
-    211,  // Qwilfish
-      7,  // Squirtle
-    252,  // Treecko
-    343,  // Baltoy
-     43,  // Oddish
-    270,  // Lotad
-     39,  // Jigglypuff
-    283,  // Surskit
-    155,  // Cyndaquil
-    140,  // Kabuto
-    264,  // Linoone
-    324,  // Torkoal
-     32,  // Nidoran♂
-    167,  // Spinarak
-     56,  // Mankey
-    273,  // Seedot
-    261,  // Poochyena
-    231,  // Phanpy
-    201,  // Unown
-    170,  // Chinchou
-    233,  // Porygon2
-     60,  // Poliwag
-    371,  // Bagon
-    349,  // Feebas
-    353,  // Shuppet
-    158,  // Totodile
-    251,  // Celebi
-    360,  // Wynaut
-     27,  // Sandshrew
-    358,  // Chimecho
-    370,  // Luvdisc
-    228,  // Houndour
-    266,  // Silcoon
-    309,  // Electrike
-      4,  // Charmander
-    307,  // Meditite
-    278,  // Wingull
-    223,  // Remoraid
-    341,  // Corphish
-    222,  // Corsola
-    314,  // Illumise
-    209,  // Snubbull
-     37,  // Vulpix
-    246,  // Larvitar
-    374,  // Beldum
-    293,  // Whismur
-    204,  // Pineco
-    239,  // Elekid
-     35,  // Clefairy
-    213,  // Shuckle
-    216,  // Teddiursa
-     14,  // Kakuna
-    300,  // Skitty
-    176,  // Togetic
-    118,  // Goldeen
-    303,  // Mawile
-    179,  // Mareep
-    188,  // Skiploom
-    109,  // Koffing
-     51,  // Dugtrio
-    268,  // Cascoon
-    322,  // Numel
-    347,  // Anorith
-    313,  // Volbeat
-    163,  // Hoothoot
-    328,  // Trapinch
-    325,  // Spoink
-     11,  // Metapod
-     69,  // Bellsprout
-    361,  // Snorunt
-     20,  // Raticate
-    259,  // Marshtomp
-    277,  // Swellow
-    240,  // Magby
-     58,  // Growlithe
-    200,  // Misdreavus
-      1,  // Bulbasaur
-    236,  // Tyrogue
-    218,  // Slugma
-    287,  // Slakoth
-    281,  // Kirlia
-    190,  // Aipom
-    135,  // Jolteon
-     30,  // Nidorina
-    184,  // Azumarill
-    292,  // Shedinja
-     66,  // Machop
-    291,  // Ninjask
-    284,  // Masquerain
-    355,  // Duskull
-    192,  // Sunflora
-    189,  // Jumpluff
-    120,  // Staryu
-    180,  // Flaaffy
-    363,  // Spheal
-     54,  // Psyduck
-    219,  // Magcargo
-     83,  // Farfetch’d
-     41,  // Zubat
-    137,  // Porygon
-    161,  // Sentret
-    318,  // Carvanha
-     44,  // Gloom
-     26,  // Raichu
-    129,  // Magikarp
-    215,  // Sneasel
-    305,  // Lairon
-    256,  // Combusken
-    224,  // Octillery
-     33,  // Nidorino
-    136,  // Flareon
-    225,  // Delibird
-     72,  // Tentacool
-     63,  // Abra
-    253,  // Grovyle
-    340,  // Whiscash
-    156,  // Quilava
-    196,  // Espeon
-     88,  // Grimer
-    152,  // Chikorita
-    326,  // Grumpig
-    299,  // Nosepass
-     53,  // Persian
-    262,  // Mightyena
-     48,  // Venonat
-     82,  // Magneton
-     77,  // Ponyta
-    296,  // Makuhita
-    337,  // Lunatone
-     28,  // Sandslash
-     96,  // Drowzee
-    114,  // Tangela
-     57,  // Primeape
-    165,  // Ledyba
-     40,  // Wigglytuff
-     47,  // Parasect
-    139,  // Omastar
-    294,  // Loudred
-      8,  // Wartortle
-     75,  // Graveler
-    197,  // Umbreon
-    345,  // Lileep
-     61,  // Poliwhirl
-    134,  // Vaporeon
-     15,  // Beedrill
-    105,  // Marowak
-     70,  // Weepinbell
-    369,  // Relicanth
-    111,  // Rhyhorn
-      2,  // Ivysaur
-    352,  // Kecleon
-    274,  // Nuzleaf
-    267,  // Beautifly
-     17,  // Pidgeotto
-    168,  // Ariados
-     86,  // Seel
-    186,  // Politoed
-    159,  // Croconaw
-    113,  // Chansey
-    354,  // Banette
-    232,  // Donphan
-    121,  // Starmie
-      5,  // Charmeleon
-    221,  // Piloswine
-     12,  // Butterfree
-    329,  // Vibrava
-    125,  // Electabuzz
-    342,  // Crawdaunt
-    301,  // Delcatty
-    334,  // Altaria
-    372,  // Shelgon
-     38,  // Ninetales
-    207,  // Gligar
-    364,  // Sealeo
-    327,  // Spinda
-    247,  // Pupitar
-     79,  // Slowpoke
-    338,  // Solrock
-    241,  // Miltank
-     22,  // Fearow
-     45,  // Vileplume
-     89,  // Muk
-    205,  // Forretress
-    185,  // Sudowoodo
-    359,  // Absol
-    193,  // Yanma
-    269,  // Dustox
-    108,  // Lickitung
-    235,  // Smeargle
-    171,  // Lanturn
-    101,  // Electrode
-    271,  // Lombre
-    286,  // Breloom
-    153,  // Bayleef
-    117,  // Seadra
-    110,  // Weezing
-    279,  // Pelipper
-    375,  // Metang
-     31,  // Nidoqueen
-    332,  // Cacturne
-    275,  // Shiftry
-    308,  // Medicham
-    335,  // Zangoose
-    141,  // Kabutops
-     99,  // Kingler
-     64,  // Kadabra
-    119,  // Seaking
-     36,  // Clefable
-    126,  // Magmar
-    202,  // Wobbuffet
-     92,  // Gastly
-    122,  // Mr. mime
-     62,  // Poliwrath
-    128,  // Tauros
-    380,  // Latias
-    181,  // Ampharos
-    288,  // Vigoroth
-    166,  // Ledian
-     76,  // Golem
-    365,  // Walrein
-     84,  // Doduo
-    229,  // Houndoom
-     34,  // Nidoking
-    124,  // Jynx
-    107,  // Hitmonchan
-    234,  // Stantler
-    210,  // Granbull
-    237,  // Hitmontop
-    195,  // Quagsire
-    344,  // Claydol
-    260,  // Swampert
-    242,  // Blissey
-    272,  // Ludicolo
-    295,  // Exploud
-    206,  // Dunsparce
-    127,  // Pinsir
-     91,  // Cloyster
-     67,  // Machoke
-    203,  // Girafarig
-     18,  // Pidgeot
-    178,  // Xatu
-    346,  // Cradily
-    106,  // Hitmonlee
-     49,  // Venomoth
-     94,  // Gengar
-    214,  // Heracross
-    362,  // Glalie
-    123,  // Scyther
-    373,  // Salamence
-    310,  // Manectric
-    348,  // Armaldo
-     65,  // Alakazam
-     97,  // Hypno
-    164,  // Noctowl
-     73,  // Tentacruel
-    356,  // Dusclops
-    145,  // Zapdos
-     42,  // Golbat
-    376,  // Metagross
-    282,  // Gardevoir
-      9,  // Blastoise
-     80,  // Slowbro
-     93,  // Haunter
-     68,  // Machamp
-    377,  // Regirock
-    317,  // Swalot
-    254,  // Sceptile
-    227,  // Skarmory
-     55,  // Golduck
-    386,  // Deoxys
-     71,  // Victreebel
-     78,  // Rapidash
-      6,  // Charizard
-    367,  // Huntail
-     87,  // Dewgong
-    144,  // Articuno
-    157,  // Typhlosion
-    142,  // Aerodactyl
-    368,  // Gorebyss
-    217,  // Ursaring
-    154,  // Meganium
-    378,  // Regice
-    212,  // Scizor
-    230,  // Kingdra
-    147,  // Dratini
-     85,  // Dodrio
-    319,  // Sharpedo
-    169,  // Crobat
-    162,  // Furret
-     59,  // Arcanine
-    243,  // Raikou
-    257,  // Blaziken
-    323,  // Camerupt
-    112,  // Rhydon
-    379,  // Registeel
-     23,  // Ekans
-    330,  // Flygon
-    357,  // Tropius
-    381,  // Latios
-    245,  // Suicune
-    146,  // Moltres
-      3,  // Venusaur
-    103,  // Exeggutor
-    199,  // Slowking
-    248,  // Tyranitar
-    289,  // Slaking
-    320,  // Wailmer
-    150,  // Mewtwo
-    306,  // Aggron
-    143,  // Snorlax
-    226,  // Mantine
-    244,  // Entei
-    149,  // Dragonite
-    115,  // Kangaskhan
-    297,  // Hariyama
-    160,  // Feraligatr
-    131,  // Lapras
-    336,  // Seviper
-     24,  // Arbok
-    383,  // Groudon
-    250,  // Ho-Oh
-    148,  // Dragonair
-    382,  // Kyogre
-    249,  // Lugia
-    350,  // Milotic
-    130,  // Gyarados
-    384,  // Rayquaza
-     95,  // Onix
-    208,  // Steelix
-    321,  // Wailord
-};
+#include "data/pokedex_orders.h"
 const struct OamData gOamData_83A0404 =
 {
     .y = 160,
@@ -1646,6 +440,778 @@ const union AnimCmd *const gSpriteAnimTable_83A0520[] =
 {
     gSpriteAnim_83A04CC,
 };
+const struct SpriteTemplate gSpriteTemplate_83A0524 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0404,
+    .anims = gSpriteAnimTable_83A04D4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808EF38,
+};
+const struct SpriteTemplate gSpriteTemplate_83A053C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A040C,
+    .anims = gSpriteAnimTable_83A04D8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808EF8C,
+};
+const struct SpriteTemplate gSpriteTemplate_83A0554 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0414,
+    .anims = gSpriteAnimTable_83A04E0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F08C,
+};
+const struct SpriteTemplate gSpriteTemplate_83A056C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A041C,
+    .anims = gSpriteAnimTable_83A04DC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F0B4,
+};
+const struct SpriteTemplate gSpriteTemplate_83A0584 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0424,
+    .anims = gSpriteAnimTable_83A04F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808ED94,
+};
+const struct SpriteTemplate gSpriteTemplate_83A059C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A042C,
+    .anims = gSpriteAnimTable_83A04F8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808ED94,
+};
+const struct SpriteTemplate gSpriteTemplate_83A05B4 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A042C,
+    .anims = gSpriteAnimTable_83A0520,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F168,
+};
+const struct SpriteSheet gUnknown_083A05CC[] =
+{
+    {gPokedexMenu2_Gfx, 0x1F00, 0x1000},
+    {NULL, 0, 0},
+};
+const struct SpritePalette gUnknown_083A05DC[] =
+{
+    {gPokedexMenu_Pal, 0x1000},
+    {NULL, 0},
+};
+const u8 gUnknown_083A05EC[] = {2, 4, 8, 16, 32};
+const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
+const u8 gEmptySpacce_83A05F6[] = {0, 0};  // Padding, maybe?
+const u8 gUnknown_083A05F8[] = _("");
+// TODO: include German entries
+#include "data/pokedex_entries_en.h"
+const u16 gUnknown_083B4EC4[16] = {0};
+const u8 *const gMonFootprintTable[] =
+{
+    gMonFootprint_Bulbasaur,
+    gMonFootprint_Bulbasaur,
+    gMonFootprint_Ivysaur,
+    gMonFootprint_Venusaur,
+    gMonFootprint_Charmander,
+    gMonFootprint_Charmeleon,
+    gMonFootprint_Charizard,
+    gMonFootprint_Squirtle,
+    gMonFootprint_Wartortle,
+    gMonFootprint_Blastoise,
+    gMonFootprint_Caterpie,
+    gMonFootprint_Metapod,
+    gMonFootprint_Butterfree,
+    gMonFootprint_Weedle,
+    gMonFootprint_Kakuna,
+    gMonFootprint_Beedrill,
+    gMonFootprint_Pidgey,
+    gMonFootprint_Pidgeotto,
+    gMonFootprint_Pidgeot,
+    gMonFootprint_Rattata,
+    gMonFootprint_Raticate,
+    gMonFootprint_Spearow,
+    gMonFootprint_Fearow,
+    gMonFootprint_Ekans,
+    gMonFootprint_Arbok,
+    gMonFootprint_Pikachu,
+    gMonFootprint_Raichu,
+    gMonFootprint_Sandshrew,
+    gMonFootprint_Sandslash,
+    gMonFootprint_NidoranF,
+    gMonFootprint_Nidorina,
+    gMonFootprint_Nidoqueen,
+    gMonFootprint_NidoranM,
+    gMonFootprint_Nidorino,
+    gMonFootprint_Nidoking,
+    gMonFootprint_Clefairy,
+    gMonFootprint_Clefable,
+    gMonFootprint_Vulpix,
+    gMonFootprint_Ninetales,
+    gMonFootprint_Jigglypuff,
+    gMonFootprint_Wigglytuff,
+    gMonFootprint_Zubat,
+    gMonFootprint_Golbat,
+    gMonFootprint_Oddish,
+    gMonFootprint_Gloom,
+    gMonFootprint_Vileplume,
+    gMonFootprint_Paras,
+    gMonFootprint_Parasect,
+    gMonFootprint_Venonat,
+    gMonFootprint_Venomoth,
+    gMonFootprint_Diglett,
+    gMonFootprint_Dugtrio,
+    gMonFootprint_Meowth,
+    gMonFootprint_Persian,
+    gMonFootprint_Psyduck,
+    gMonFootprint_Golduck,
+    gMonFootprint_Mankey,
+    gMonFootprint_Primeape,
+    gMonFootprint_Growlithe,
+    gMonFootprint_Arcanine,
+    gMonFootprint_Poliwag,
+    gMonFootprint_Poliwhirl,
+    gMonFootprint_Poliwrath,
+    gMonFootprint_Abra,
+    gMonFootprint_Kadabra,
+    gMonFootprint_Alakazam,
+    gMonFootprint_Machop,
+    gMonFootprint_Machoke,
+    gMonFootprint_Machamp,
+    gMonFootprint_Bellsprout,
+    gMonFootprint_Weepinbell,
+    gMonFootprint_Victreebel,
+    gMonFootprint_Tentacool,
+    gMonFootprint_Tentacruel,
+    gMonFootprint_Geodude,
+    gMonFootprint_Graveler,
+    gMonFootprint_Golem,
+    gMonFootprint_Ponyta,
+    gMonFootprint_Rapidash,
+    gMonFootprint_Slowpoke,
+    gMonFootprint_Slowbro,
+    gMonFootprint_Magnemite,
+    gMonFootprint_Magneton,
+    gMonFootprint_Farfetchd,
+    gMonFootprint_Doduo,
+    gMonFootprint_Dodrio,
+    gMonFootprint_Seel,
+    gMonFootprint_Dewgong,
+    gMonFootprint_Grimer,
+    gMonFootprint_Muk,
+    gMonFootprint_Shellder,
+    gMonFootprint_Cloyster,
+    gMonFootprint_Gastly,
+    gMonFootprint_Haunter,
+    gMonFootprint_Gengar,
+    gMonFootprint_Onix,
+    gMonFootprint_Drowzee,
+    gMonFootprint_Hypno,
+    gMonFootprint_Krabby,
+    gMonFootprint_Kingler,
+    gMonFootprint_Voltorb,
+    gMonFootprint_Electrode,
+    gMonFootprint_Exeggcute,
+    gMonFootprint_Exeggutor,
+    gMonFootprint_Cubone,
+    gMonFootprint_Marowak,
+    gMonFootprint_Hitmonlee,
+    gMonFootprint_Hitmonchan,
+    gMonFootprint_Lickitung,
+    gMonFootprint_Koffing,
+    gMonFootprint_Weezing,
+    gMonFootprint_Rhyhorn,
+    gMonFootprint_Rhydon,
+    gMonFootprint_Chansey,
+    gMonFootprint_Tangela,
+    gMonFootprint_Kangaskhan,
+    gMonFootprint_Horsea,
+    gMonFootprint_Seadra,
+    gMonFootprint_Goldeen,
+    gMonFootprint_Seaking,
+    gMonFootprint_Staryu,
+    gMonFootprint_Starmie,
+    gMonFootprint_Mrmime,
+    gMonFootprint_Scyther,
+    gMonFootprint_Jynx,
+    gMonFootprint_Electabuzz,
+    gMonFootprint_Magmar,
+    gMonFootprint_Pinsir,
+    gMonFootprint_Tauros,
+    gMonFootprint_Magikarp,
+    gMonFootprint_Gyarados,
+    gMonFootprint_Lapras,
+    gMonFootprint_Ditto,
+    gMonFootprint_Eevee,
+    gMonFootprint_Vaporeon,
+    gMonFootprint_Jolteon,
+    gMonFootprint_Flareon,
+    gMonFootprint_Porygon,
+    gMonFootprint_Omanyte,
+    gMonFootprint_Omastar,
+    gMonFootprint_Kabuto,
+    gMonFootprint_Kabutops,
+    gMonFootprint_Aerodactyl,
+    gMonFootprint_Snorlax,
+    gMonFootprint_Articuno,
+    gMonFootprint_Zapdos,
+    gMonFootprint_Moltres,
+    gMonFootprint_Dratini,
+    gMonFootprint_Dragonair,
+    gMonFootprint_Dragonite,
+    gMonFootprint_Mewtwo,
+    gMonFootprint_Mew,
+    gMonFootprint_Chikorita,
+    gMonFootprint_Bayleef,
+    gMonFootprint_Meganium,
+    gMonFootprint_Cyndaquil,
+    gMonFootprint_Quilava,
+    gMonFootprint_Typhlosion,
+    gMonFootprint_Totodile,
+    gMonFootprint_Croconaw,
+    gMonFootprint_Feraligatr,
+    gMonFootprint_Sentret,
+    gMonFootprint_Furret,
+    gMonFootprint_Hoothoot,
+    gMonFootprint_Noctowl,
+    gMonFootprint_Ledyba,
+    gMonFootprint_Ledian,
+    gMonFootprint_Spinarak,
+    gMonFootprint_Ariados,
+    gMonFootprint_Crobat,
+    gMonFootprint_Chinchou,
+    gMonFootprint_Lanturn,
+    gMonFootprint_Pichu,
+    gMonFootprint_Cleffa,
+    gMonFootprint_Igglybuff,
+    gMonFootprint_Togepi,
+    gMonFootprint_Togetic,
+    gMonFootprint_Natu,
+    gMonFootprint_Xatu,
+    gMonFootprint_Mareep,
+    gMonFootprint_Flaaffy,
+    gMonFootprint_Ampharos,
+    gMonFootprint_Bellossom,
+    gMonFootprint_Marill,
+    gMonFootprint_Azumarill,
+    gMonFootprint_Sudowoodo,
+    gMonFootprint_Politoed,
+    gMonFootprint_Hoppip,
+    gMonFootprint_Skiploom,
+    gMonFootprint_Jumpluff,
+    gMonFootprint_Aipom,
+    gMonFootprint_Sunkern,
+    gMonFootprint_Sunflora,
+    gMonFootprint_Yanma,
+    gMonFootprint_Wooper,
+    gMonFootprint_Quagsire,
+    gMonFootprint_Espeon,
+    gMonFootprint_Umbreon,
+    gMonFootprint_Murkrow,
+    gMonFootprint_Slowking,
+    gMonFootprint_Misdreavus,
+    gMonFootprint_Unown,
+    gMonFootprint_Wobbuffet,
+    gMonFootprint_Girafarig,
+    gMonFootprint_Pineco,
+    gMonFootprint_Forretress,
+    gMonFootprint_Dunsparce,
+    gMonFootprint_Gligar,
+    gMonFootprint_Steelix,
+    gMonFootprint_Snubbull,
+    gMonFootprint_Granbull,
+    gMonFootprint_Qwilfish,
+    gMonFootprint_Scizor,
+    gMonFootprint_Shuckle,
+    gMonFootprint_Heracross,
+    gMonFootprint_Sneasel,
+    gMonFootprint_Teddiursa,
+    gMonFootprint_Ursaring,
+    gMonFootprint_Slugma,
+    gMonFootprint_Magcargo,
+    gMonFootprint_Swinub,
+    gMonFootprint_Piloswine,
+    gMonFootprint_Corsola,
+    gMonFootprint_Remoraid,
+    gMonFootprint_Octillery,
+    gMonFootprint_Delibird,
+    gMonFootprint_Mantine,
+    gMonFootprint_Skarmory,
+    gMonFootprint_Houndour,
+    gMonFootprint_Houndoom,
+    gMonFootprint_Kingdra,
+    gMonFootprint_Phanpy,
+    gMonFootprint_Donphan,
+    gMonFootprint_Porygon2,
+    gMonFootprint_Stantler,
+    gMonFootprint_Smeargle,
+    gMonFootprint_Tyrogue,
+    gMonFootprint_Hitmontop,
+    gMonFootprint_Smoochum,
+    gMonFootprint_Elekid,
+    gMonFootprint_Magby,
+    gMonFootprint_Miltank,
+    gMonFootprint_Blissey,
+    gMonFootprint_Raikou,
+    gMonFootprint_Entei,
+    gMonFootprint_Suicune,
+    gMonFootprint_Larvitar,
+    gMonFootprint_Pupitar,
+    gMonFootprint_Tyranitar,
+    gMonFootprint_Lugia,
+    gMonFootprint_HoOh,
+    gMonFootprint_Celebi,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_Treecko,
+    gMonFootprint_Grovyle,
+    gMonFootprint_Sceptile,
+    gMonFootprint_Torchic,
+    gMonFootprint_Combusken,
+    gMonFootprint_Blaziken,
+    gMonFootprint_Mudkip,
+    gMonFootprint_Marshtomp,
+    gMonFootprint_Swampert,
+    gMonFootprint_Poochyena,
+    gMonFootprint_Mightyena,
+    gMonFootprint_Zigzagoon,
+    gMonFootprint_Linoone,
+    gMonFootprint_Wurmple,
+    gMonFootprint_Silcoon,
+    gMonFootprint_Beautifly,
+    gMonFootprint_Cascoon,
+    gMonFootprint_Dustox,
+    gMonFootprint_Lotad,
+    gMonFootprint_Lombre,
+    gMonFootprint_Ludicolo,
+    gMonFootprint_Seedot,
+    gMonFootprint_Nuzleaf,
+    gMonFootprint_Shiftry,
+    gMonFootprint_Nincada,
+    gMonFootprint_Ninjask,
+    gMonFootprint_Shedinja,
+    gMonFootprint_Taillow,
+    gMonFootprint_Swellow,
+    gMonFootprint_Shroomish,
+    gMonFootprint_Breloom,
+    gMonFootprint_Spinda,
+    gMonFootprint_Wingull,
+    gMonFootprint_Pelipper,
+    gMonFootprint_Surskit,
+    gMonFootprint_Masquerain,
+    gMonFootprint_Wailmer,
+    gMonFootprint_Wailord,
+    gMonFootprint_Skitty,
+    gMonFootprint_Delcatty,
+    gMonFootprint_Kecleon,
+    gMonFootprint_Baltoy,
+    gMonFootprint_Claydol,
+    gMonFootprint_Nosepass,
+    gMonFootprint_Torkoal,
+    gMonFootprint_Sableye,
+    gMonFootprint_Barboach,
+    gMonFootprint_Whiscash,
+    gMonFootprint_Luvdisc,
+    gMonFootprint_Corphish,
+    gMonFootprint_Crawdaunt,
+    gMonFootprint_Feebas,
+    gMonFootprint_Milotic,
+    gMonFootprint_Carvanha,
+    gMonFootprint_Sharpedo,
+    gMonFootprint_Trapinch,
+    gMonFootprint_Vibrava,
+    gMonFootprint_Flygon,
+    gMonFootprint_Makuhita,
+    gMonFootprint_Hariyama,
+    gMonFootprint_Electrike,
+    gMonFootprint_Manectric,
+    gMonFootprint_Numel,
+    gMonFootprint_Camerupt,
+    gMonFootprint_Spheal,
+    gMonFootprint_Sealeo,
+    gMonFootprint_Walrein,
+    gMonFootprint_Cacnea,
+    gMonFootprint_Cacturne,
+    gMonFootprint_Snorunt,
+    gMonFootprint_Glalie,
+    gMonFootprint_Lunatone,
+    gMonFootprint_Solrock,
+    gMonFootprint_Azurill,
+    gMonFootprint_Spoink,
+    gMonFootprint_Grumpig,
+    gMonFootprint_Plusle,
+    gMonFootprint_Minun,
+    gMonFootprint_Mawile,
+    gMonFootprint_Meditite,
+    gMonFootprint_Medicham,
+    gMonFootprint_Swablu,
+    gMonFootprint_Altaria,
+    gMonFootprint_Wynaut,
+    gMonFootprint_Duskull,
+    gMonFootprint_Dusclops,
+    gMonFootprint_Roselia,
+    gMonFootprint_Slakoth,
+    gMonFootprint_Vigoroth,
+    gMonFootprint_Slaking,
+    gMonFootprint_Gulpin,
+    gMonFootprint_Swalot,
+    gMonFootprint_Tropius,
+    gMonFootprint_Whismur,
+    gMonFootprint_Loudred,
+    gMonFootprint_Exploud,
+    gMonFootprint_Clamperl,
+    gMonFootprint_Huntail,
+    gMonFootprint_Gorebyss,
+    gMonFootprint_Absol,
+    gMonFootprint_Shuppet,
+    gMonFootprint_Banette,
+    gMonFootprint_Seviper,
+    gMonFootprint_Zangoose,
+    gMonFootprint_Relicanth,
+    gMonFootprint_Aron,
+    gMonFootprint_Lairon,
+    gMonFootprint_Aggron,
+    gMonFootprint_Castform,
+    gMonFootprint_Volbeat,
+    gMonFootprint_Illumise,
+    gMonFootprint_Lileep,
+    gMonFootprint_Cradily,
+    gMonFootprint_Anorith,
+    gMonFootprint_Armaldo,
+    gMonFootprint_Ralts,
+    gMonFootprint_Kirlia,
+    gMonFootprint_Gardevoir,
+    gMonFootprint_Bagon,
+    gMonFootprint_Shelgon,
+    gMonFootprint_Salamence,
+    gMonFootprint_Beldum,
+    gMonFootprint_Metang,
+    gMonFootprint_Metagross,
+    gMonFootprint_Regirock,
+    gMonFootprint_Regice,
+    gMonFootprint_Registeel,
+    gMonFootprint_Kyogre,
+    gMonFootprint_Groudon,
+    gMonFootprint_Rayquaza,
+    gMonFootprint_Latias,
+    gMonFootprint_Latios,
+    gMonFootprint_Jirachi,
+    gMonFootprint_Deoxys,
+    gMonFootprint_Chimecho,
+    gMonFootprint_Bulbasaur,
+};
+const u8 gUnknown_083B5558[] = _("{CLEAR_TO 0}");
+const u8 gUnknown_083B555C[] = INCBIN_U8("graphics/unknown/unknown_3B555C.bin");
+const struct OamData gOamData_83B557C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+void *const gUnknown_083B5584[] =
+{
+    (void *)0x02008000,
+    (void *)0x0200C000,
+    (void *)0x02010000,
+    (void *)0x02014000,
+};
+const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
+{
+    {(u8 *)0x02008000, 0x800},
+    {(u8 *)0x02008800, 0x800},
+    {(u8 *)0x02009000, 0x800},
+    {(u8 *)0x02009800, 0x800},
+    {(u8 *)0x0200A000, 0x800},
+    {(u8 *)0x0200A800, 0x800},
+    {(u8 *)0x0200B000, 0x800},
+    {(u8 *)0x0200B800, 0x800},
+    {(u8 *)0x0200C000, 0x800},
+    {(u8 *)0x0200C800, 0x800},
+    {(u8 *)0x0200D000, 0x800},
+    {(u8 *)0x0200D800, 0x800},
+    {(u8 *)0x0200E000, 0x800},
+    {(u8 *)0x0200E800, 0x800},
+    {(u8 *)0x0200F000, 0x800},
+    {(u8 *)0x0200F800, 0x800},
+};
+const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
+{
+    {(u8 *)0x0200C000, 0x800},
+    {(u8 *)0x0200C800, 0x800},
+    {(u8 *)0x0200D000, 0x800},
+    {(u8 *)0x0200D800, 0x800},
+    {(u8 *)0x0200E000, 0x800},
+    {(u8 *)0x0200E800, 0x800},
+    {(u8 *)0x0200F000, 0x800},
+    {(u8 *)0x0200F800, 0x800},
+    {(u8 *)0x02010000, 0x800},
+    {(u8 *)0x02010800, 0x800},
+    {(u8 *)0x02011000, 0x800},
+    {(u8 *)0x02011800, 0x800},
+    {(u8 *)0x02012000, 0x800},
+    {(u8 *)0x02012800, 0x800},
+    {(u8 *)0x02013000, 0x800},
+    {(u8 *)0x02013800, 0x800},
+};
+const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
+{
+    {(u8 *)0x02010000, 0x800},
+    {(u8 *)0x02010800, 0x800},
+    {(u8 *)0x02011000, 0x800},
+    {(u8 *)0x02011800, 0x800},
+    {(u8 *)0x02012000, 0x800},
+    {(u8 *)0x02012800, 0x800},
+    {(u8 *)0x02013000, 0x800},
+    {(u8 *)0x02013800, 0x800},
+    {(u8 *)0x02014000, 0x800},
+    {(u8 *)0x02014800, 0x800},
+    {(u8 *)0x02015000, 0x800},
+    {(u8 *)0x02015800, 0x800},
+    {(u8 *)0x02016000, 0x800},
+    {(u8 *)0x02016800, 0x800},
+    {(u8 *)0x02017000, 0x800},
+    {(u8 *)0x02017800, 0x800},
+};
+const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
+{
+    {(u8 *)0x02014000, 0x800},
+    {(u8 *)0x02014800, 0x800},
+    {(u8 *)0x02015000, 0x800},
+    {(u8 *)0x02015800, 0x800},
+    {(u8 *)0x02016000, 0x800},
+    {(u8 *)0x02016800, 0x800},
+    {(u8 *)0x02017000, 0x800},
+    {(u8 *)0x02017800, 0x800},
+    {(u8 *)0x02018000, 0x800},
+    {(u8 *)0x02018800, 0x800},
+    {(u8 *)0x02019000, 0x800},
+    {(u8 *)0x02019800, 0x800},
+    {(u8 *)0x0201A000, 0x800},
+    {(u8 *)0x0201A800, 0x800},
+    {(u8 *)0x0201B000, 0x800},
+    {(u8 *)0x0201B800, 0x800},
+};
+const struct SpriteFrameImage *const gUnknown_083B5794[] =
+{
+    gSpriteImageTable_83B5594,
+    gSpriteImageTable_83B5614,
+    gSpriteImageTable_83B5694,
+    gSpriteImageTable_83B5714,
+};
+static void nullsub_59(struct Sprite *);
+const struct SpriteTemplate gUnknown_083B57A4 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 0,
+    .oam = &gOamData_83B557C,
+    .anims = NULL,
+    .images = gSpriteImageTable_83B5594,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_59,
+};
+const u8 gUnknown_083B57BC[][4] =
+{
+    {0,      0, 0,      0},
+    {CHAR_A, 3, CHAR_a, 3},
+    {CHAR_D, 3, CHAR_d, 3},
+    {CHAR_G, 3, CHAR_g, 3},
+    {CHAR_J, 3, CHAR_j, 3},
+    {CHAR_M, 3, CHAR_m, 3},
+    {CHAR_P, 3, CHAR_p, 3},
+    {CHAR_S, 3, CHAR_s, 3},
+    {CHAR_V, 3, CHAR_v, 3},
+    {CHAR_Y, 2, CHAR_y, 2},
+};
+const struct UnknownStruct3 gUnknown_083B57E4[] =
+{
+    {DexText_SearchForPoke, 0,  0, 5},
+    {DexText_SwitchDex,     6,  0, 5},
+    {DexText_ReturnToDex,  12,  0, 5},
+};
+const struct UnknownStruct4 gUnknown_083B57FC[] =
+{
+    {DexText_ListByABC,           0,  2,  5,  5,  2, 12},
+    {DexText_ListByColor,         0,  4,  5,  5,  4, 12},
+    {DexText_ListByType,          0,  6,  5,  5,  6,  6},
+    {DexText_ListByType,          0,  6,  5, 11,  6,  6},
+    {DexText_SelectDexList,       0,  8,  5,  5,  8, 12},
+    {DexText_SelectDexMode,       0, 10,  5,  5, 10, 12},
+    {DexText_ExecuteSearchSwitch, 0, 12,  5,  0,  0,  0},
+};
+const u8 gUnknown_083B5850[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+const u8 gUnknown_083B586C[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+const u8 gUnknown_083B5888[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+const u8 gUnknown_083B58A4[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+const struct UnknownStruct2 gUnknown_083B58C0[] =
+{
+    {DexText_HoennDex2,    DexText_HoennDex},
+    {DexText_NationalDex2, DexText_NationalDex},
+    {NULL, NULL},
+};
+const struct UnknownStruct2 gUnknown_083B58D8[] =
+{
+    {DexText_ListByNumber,          DexText_NumericalMode},
+    {DexText_ListByABC2,            DexText_ABCMode},
+    {DexText_ListByHeavyToLightest, DexText_HeaviestMode},
+    {DexText_ListByLightToHeaviest, DexText_LightestMode},
+    {DexText_ListByTallToSmallest,  DexText_TallestMode},
+    {DexText_ListBySmallToTallest,  DexText_SmallestMode},
+    {NULL, NULL},
+};
+const struct UnknownStruct2 gUnknown_083B5910[] =
+{
+    {DexText_Terminator5, DexText_DontSpecify},
+    {DexText_Terminator5, DexText_ABC},
+    {DexText_Terminator5, DexText_DEF},
+    {DexText_Terminator5, DexText_GHI},
+    {DexText_Terminator5, DexText_JKL},
+    {DexText_Terminator5, DexText_MNO},
+    {DexText_Terminator5, DexText_PQR},
+    {DexText_Terminator5, DexText_STU},
+    {DexText_Terminator5, DexText_VWX},
+    {DexText_Terminator5, DexText_YZ},
+    {NULL, NULL},
+};
+const struct UnknownStruct2 gUnknown_083B5968[] =
+{
+    {DexText_Terminator5, DexText_DontSpecify},
+    {DexText_Terminator5, DexText_Red},
+    {DexText_Terminator5, DexText_Blue},
+    {DexText_Terminator5, DexText_Yellow},
+    {DexText_Terminator5, DexText_Green},
+    {DexText_Terminator5, DexText_Black},
+    {DexText_Terminator5, DexText_Brown},
+    {DexText_Terminator5, DexText_Purple},
+    {DexText_Terminator5, DexText_Gray},
+    {DexText_Terminator5, DexText_White},
+    {DexText_Terminator5, DexText_Pink},
+    {NULL, NULL},
+};
+const struct UnknownStruct2 gUnknown_083B59C8[] =
+{
+    {DexText_Terminator5, DexText_None},
+    {DexText_Terminator5, gTypeNames[TYPE_NORMAL]},
+    {DexText_Terminator5, gTypeNames[TYPE_FIGHTING]},
+    {DexText_Terminator5, gTypeNames[TYPE_FLYING]},
+    {DexText_Terminator5, gTypeNames[TYPE_POISON]},
+    {DexText_Terminator5, gTypeNames[TYPE_GROUND]},
+    {DexText_Terminator5, gTypeNames[TYPE_ROCK]},
+    {DexText_Terminator5, gTypeNames[TYPE_BUG]},
+    {DexText_Terminator5, gTypeNames[TYPE_GHOST]},
+    {DexText_Terminator5, gTypeNames[TYPE_STEEL]},
+    {DexText_Terminator5, gTypeNames[TYPE_FIRE]},
+    {DexText_Terminator5, gTypeNames[TYPE_WATER]},
+    {DexText_Terminator5, gTypeNames[TYPE_GRASS]},
+    {DexText_Terminator5, gTypeNames[TYPE_ELECTRIC]},
+    {DexText_Terminator5, gTypeNames[TYPE_PSYCHIC]},
+    {DexText_Terminator5, gTypeNames[TYPE_ICE]},
+    {DexText_Terminator5, gTypeNames[TYPE_DRAGON]},
+    {DexText_Terminator5, gTypeNames[TYPE_DARK]},
+    {NULL, NULL},
+};
+const u8 gUnknown_083B5A60[] = {0, 1};
+const u8 gUnknown_083B5A62[] = {0, 1, 2, 3, 4, 5};
+const u8 gUnknown_083B5A68[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+const struct UnknownStruct1 gUnknown_083B5A7C[] =
+{
+    {gUnknown_083B5910,  6,  7, 10},
+    {gUnknown_083B5968,  8,  9, 11},
+    {gUnknown_083B59C8, 10, 11, 18},
+    {gUnknown_083B59C8, 12, 13, 18},
+    {gUnknown_083B58D8,  4,  5,  6},
+    {gUnknown_083B58C0,  2,  3,  2},
+};
+const u8 gUnknown_083B5AAC[] = _("{STR_VAR_1}{CLEAR_TO 43}");
+const u8 gUnknown_083B5AB2[] = _("{STR_VAR_1}{CLEAR_TO 96}");
 
 static u32 sub_808E8C8(u16 a, s16 b, s16 c);
 static u8 sub_808F210(struct PokedexListItem *, u8);
@@ -1771,30 +1337,30 @@ void CB2_InitPokedex(void)
     {
     case 0:
     default:
-    {
-        u8 *addr;
-        u32 size;
-
-        SetVBlankCallback(NULL);
-        sub_8091060(0);
-        addr = (u8 *)VRAM;
-        size = VRAM_SIZE;
-        while (1)
         {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
+            u8 *addr;
+            u32 size;
+
+            SetVBlankCallback(NULL);
+            sub_8091060(0);
+            addr = (u8 *)VRAM;
+            size = VRAM_SIZE;
+            while (1)
             {
-                DmaFill16(3, 0, addr, size);
-                break;
+                DmaFill16(3, 0, addr, 0x1000);
+                addr += 0x1000;
+                size -= 0x1000;
+                if (size <= 0x1000)
+                {
+                    DmaFill16(3, 0, addr, size);
+                    break;
+                }
             }
+            DmaClear32(3, OAM, OAM_SIZE);
+            DmaClear16(3, PLTT, PLTT_SIZE);
+            gMain.state = 1;
         }
-        DmaClear32(3, OAM, OAM_SIZE);
-        DmaClear16(3, PLTT, PLTT_SIZE);
-        gMain.state = 1;
         break;
-    }
     case 1:
         remove_some_task();
         ResetTasks();
@@ -1847,19 +1413,20 @@ void CB2_InitPokedex(void)
         gMain.state++;
         break;
     case 3:
-    {
-        u16 savedIme;
+        {
+            u16 savedIme;
 
-        savedIme = REG_IME;
-        REG_IME = 0;
-        REG_IE |= 1;
-        REG_IME = savedIme;
-        REG_DISPSTAT |= 8;
-        SetVBlankCallback(sub_808C0B8);
-        SetMainCallback2(MainCB);
-        SortPokedex(gPokedexView->dexMode, gPokedexView->dexOrder);
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
-    }
+            savedIme = REG_IME;
+            REG_IME = 0;
+            REG_IE |= 1;
+            REG_IME = savedIme;
+            REG_DISPSTAT |= 8;
+            SetVBlankCallback(sub_808C0B8);
+            SetMainCallback2(MainCB);
+            SortPokedex(gPokedexView->dexMode, gPokedexView->dexOrder);
+            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
+        }
+        break;
     }
 }
 
@@ -2310,7 +1877,7 @@ bool8 sub_808D344(u8 a)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LoadCompressedObjectPic(&gUnknown_083A05CC);
+        LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
         LoadSpritePalettes(gUnknown_083A05DC);
         sub_808E978(a);
         gMain.state++;
@@ -4164,7 +3731,7 @@ void Task_InitSizeScreenMultistep(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerOffset;
         SetOamMatrix(1, gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerScale);
-        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(gUnknown_083B4EC4));
         gMain.state++;
         break;
     case 6:
@@ -4174,7 +3741,7 @@ void Task_InitSizeScreenMultistep(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonOffset;
         SetOamMatrix(2, gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonScale);
-        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(gUnknown_083B4EC4));
         gMain.state++;
         break;
     case 7:
@@ -5423,9 +4990,6 @@ void sub_8091458(u16 height, u8 left, u8 top)
 #endif
 
 #ifdef UNITS_IMPERIAL
-#define CHAR_b (0xD6)
-#define CHAR_l (0xE0)
-#define CHAR_s (0xE7)
 void sub_8091564(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
@@ -5564,7 +5128,7 @@ u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
     return b;
 }
 
-void nullsub_59(void)
+static void nullsub_59(struct Sprite *sprite)
 {
 }
 
@@ -5804,7 +5368,7 @@ void sub_8091E54(u8 taskId)
     case 1:
         SetUpWindowConfig(&gWindowConfig_81E7064);
         InitMenuWindow(&gWindowConfig_81E7064);
-        LoadCompressedObjectPic(&gUnknown_083A05CC);
+        LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
         LoadSpritePalettes(gUnknown_083A05DC);
         sub_809308C(taskId);
         for (i = 0; i < 16; i++)
