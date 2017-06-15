@@ -107,7 +107,7 @@ static const struct TextStruct gPCText_OptionDescList[] =
     gMenuText_GoBackToPrev
 };
 
-static const struct MenuAction2 gPCText_PlayerPCOptionsText[] = 
+static const struct MenuAction2 gPCText_PlayerPCOptionsText[] =
 {
     { SecretBaseText_ItemStorage, PlayerPC_ItemStorage },
     { gPCText_Mailbox, PlayerPC_Mailbox },
@@ -115,8 +115,8 @@ static const struct MenuAction2 gPCText_PlayerPCOptionsText[] =
     { SecretBaseText_TurnOff, PlayerPC_TurnOff }
 };
 
-static const u8 gBedroomPC_OptionOrder[] = 
-{ 
+static const u8 gBedroomPC_OptionOrder[] =
+{
     PLAYERPC_MENU_ITEMSTORAGE,
     PLAYERPC_MENU_MAILBOX,
     PLAYERPC_MENU_DECORATION,
@@ -130,7 +130,7 @@ static const u8 gPlayerPC_OptionOrder[] =
     PLAYERPC_MENU_TURNOFF
 };
 
-static const struct MenuAction2 gPCText_ItemPCOptionsText[] = 
+static const struct MenuAction2 gPCText_ItemPCOptionsText[] =
 {
     { PCText_WithdrawItem, ItemStorage_Withdraw },
     { PCText_DepositItem, ItemStorage_Deposit },
@@ -171,7 +171,7 @@ static const u8 gNonSelectedItemQuantityFormatText[] = _("{STR_VAR_1}");
 static const u8 gSelectedItemQuantityFormatText[] = _("{COLOR RED}{STR_VAR_1}");
 static const u8 gUnknown_08406330[] = _("{CLEAR_TO 32}");
 
-static const u16 gUnknown_08406334[3] = 
+static const u16 gUnknown_08406334[3] =
 {
     0x5294,
     0x6B5A,
