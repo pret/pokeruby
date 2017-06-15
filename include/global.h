@@ -10,10 +10,23 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
+
+#define nonmatching(fndec, x) {\
+__attribute__((naked))\
+fndec\
+{\
+    asm_unified(x);\
+}\
+}
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+
+#define min(a, b) (a >= b ? a : b)
+#define max(a, b) (a <= b ? a : b)
 
 enum
 {
@@ -472,8 +485,14 @@ struct GabbyAndTyData {
     /*2b1b*/ u8 valB_5:3;
 };
 
-struct RecordMixing_UnknownStruct {
+struct RecordMixing_UnknownStructSub {
     u8 data[0x38];
+};
+
+struct RecordMixing_UnknownStruct {
+    struct RecordMixing_UnknownStructSub data[2];
+    u32 unk70;
+    u16 unk74[0x2];
 };
 
 struct SaveBlock1 /* 0x02025734 */
@@ -551,8 +570,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
     /*0x2F9C*/ struct BoxPokemon daycareData[2];
-    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C[2];
-    /*0x30AC*/ u8 filler_30AC[0xA];
+    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
+    /*0x30AC*/ u8 filler_30B4[0x2];
     /*0x30B6*/ u8 filler_30B6;
     /*0x30B7*/ u8 filler_30B7[1];
     /*0x30B8*/ u8 linkBattleRecords[5][16];

@@ -18,7 +18,7 @@ struct LinkPlayerMapObject
 };
 
 // sub_8052F5C
-// flag_var_implications_of_teleport_
+void flag_var_implications_of_teleport_(void);
 void new_game(void);
 void sub_8053014(void);
 void sub_8053050(void);
@@ -52,7 +52,7 @@ void sub_8053570(void);
 void sub_8053588(u8);
 void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// sub_8053678
+void sub_8053678(void);
 void sub_8053690(s8, s8, s8, s8, s8);
 // warp1_set_to_warp2
 void sub_80536E4(s8, s8, s8, s8, s8);

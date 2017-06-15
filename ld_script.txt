@@ -134,7 +134,6 @@ SECTIONS {
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
-        asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
         asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
@@ -250,7 +249,7 @@ SECTIONS {
         asm/battle_anim_812C144.o(.text);
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
-        asm/decoration_inventory.o(.text);
+        src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
@@ -386,7 +385,7 @@ SECTIONS {
         data/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);
-        data/field_effect.o(.rodata);
+        src/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
         data/pokedex.o(.rodata);
@@ -457,7 +456,7 @@ SECTIONS {
         data/battle_anim_81258BC.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
         data/learn_move.o(.rodata);
-        data/decoration_inventory.o(.rodata);
+        src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         data/use_pokeblock.o(.rodata);
