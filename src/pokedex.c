@@ -1218,6 +1218,7 @@ static u8 sub_808F210(struct PokedexListItem *, u8);
 static u8 sub_808F284(struct PokedexListItem *, u8);
 void sub_8090B8C(u8);
 void sub_8090C28(struct Sprite *);
+s8 GetNationalPokedexFlag(u16, u8);
 u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
 void sub_8091E54(u8);
 void sub_809204C(u8);
@@ -1273,7 +1274,7 @@ void sub_808C0A0(void)
     gUnknown_0202FFBA = 0x40;
 }
 
-void sub_808C0B8(void)
+static void sub_808C0B8(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -2014,7 +2015,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
-                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = sub_8090D90(vars[2], 1);
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = GetNationalPokedexFlag(vars[2], 1);
                 gPokedexView->pokemonListCount++;
             }
         }
@@ -4655,7 +4656,7 @@ u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
     }
 }
 
-s8 sub_8090D90(u16 a, u8 b)
+s8 GetNationalPokedexFlag(u16 a, u8 b)
 {
     u8 index;
     u8 bit;
@@ -4723,11 +4724,11 @@ u16 GetNationalPokedexCount(u8 a)
         switch (a)
         {
         case 0:
-            if (sub_8090D90(i + 1, 0) != 0)
+            if (GetNationalPokedexFlag(i + 1, 0) != 0)
                 count++;
             break;
         case 1:
-            if (sub_8090D90(i + 1, 1) != 0)
+            if (GetNationalPokedexFlag(i + 1, 1) != 0)
                 count++;
             break;
         }
@@ -4745,11 +4746,11 @@ u16 GetHoennPokedexCount(u8 a)
         switch (a)
         {
         case 0:
-            if (sub_8090D90(HoennToNationalOrder(i + 1), 0) != 0)
+            if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 0) != 0)
                 count++;
             break;
         case 1:
-            if (sub_8090D90(HoennToNationalOrder(i + 1), 1) != 0)
+            if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 1) != 0)
                 count++;
             break;
         }
@@ -4763,7 +4764,7 @@ bool8 sub_8090FC0(void)
 
     for (i = 0; i < 200; i++)
     {
-        if (sub_8090D90(HoennToNationalOrder(i + 1), 1) == 0)
+        if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 1) == 0)
             return FALSE;
     }
     return TRUE;
@@ -4775,17 +4776,17 @@ u16 sub_8090FF4(void)
 
     for (i = 0; i < 150; i++)
     {
-        if (sub_8090D90(i + 1, 1) == 0)
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
             return 0;
     }
     for (i = 152; i < 250; i++)
     {
-        if (sub_8090D90(i + 1, 1) == 0)
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
             return 0;
     }
     for (i = 252; i < 384; i++)
     {
-        if (sub_8090D90(i + 1, 1) == 0)
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
             return 0;
     }
     return 1;

@@ -5,7 +5,6 @@
 
 void ResetPokedex(void);
 void sub_808C0A0(void);
-void sub_808C0B8(void);
 void CB2_InitPokedex(void);
 void MainCB(void);
 void Task_PokedexShowMainScreen(u8 taskId);
