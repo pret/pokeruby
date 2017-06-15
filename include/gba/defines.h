@@ -58,7 +58,4 @@
 
 #define WIN_RANGE(a, b) (((a) << 8) | (b))
 
-#define min(a, b) (a >= b ? a : b)
-#define max(a, b) (a <= b ? a : b)
-
 #endif // GUARD_GBA_DEFINES

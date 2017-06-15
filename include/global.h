@@ -25,6 +25,9 @@ fndec\
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
+#define min(a, b) (a >= b ? a : b)
+#define max(a, b) (a <= b ? a : b)
+
 enum
 {
     VERSION_SAPPHIRE = 1,
