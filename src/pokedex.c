@@ -145,35 +145,17 @@ extern struct PokedexListItem *gUnknown_0202FFBC;
 extern u8 gUnknown_03005CE8;
 extern IntrCallback gUnknown_03005CEC;
 extern u8 gUnknown_03005E98;
-extern u8 gPokedexMenu_Gfx[];
-extern u8 gUnknown_08E96738[];
-extern u8 gUnknown_08E96888[];
-extern u8 gUnknown_08E96994[];
-extern u8 gUnknown_08E9C6DC[];
-extern const struct SpriteTemplate gUnknown_083B57A4;
-extern const struct UnknownStruct3 gUnknown_083B57E4[];
-extern const struct UnknownStruct4 gUnknown_083B57FC[];
-extern const u8 gUnknown_083B586C[][4];
-extern const u8 gUnknown_083B5888[][4];
-extern const u8 gUnknown_083B58A4[][4];
-extern const struct UnknownStruct2 gUnknown_083B58C0[];
-extern const struct UnknownStruct2 gUnknown_083B58D8[];
-extern const struct UnknownStruct2 gUnknown_083B5910[];
-extern const struct UnknownStruct2 gUnknown_083B5968[];
-extern const struct UnknownStruct2 gUnknown_083B59C8[];
-extern const u8 gUnknown_083B5A60[];
-extern const u8 gUnknown_083B5A62[];
-extern const u8 gUnknown_083B5A68[];
-extern const struct UnknownStruct1 gUnknown_083B5A7C[];
-extern const u8 gUnknown_083B5AAC[];
-extern const u8 gUnknown_083B5AB2[];
-extern u8 gUnknown_08D00524[];
-extern u8 gUnknown_08E96BD4[];
-extern u8 gUnknown_08E96ACC[];
-extern u8 gUnknown_08E96B58[];
+extern const u8 gPokedexMenu_Gfx[];
+extern const u8 gUnknown_08E96738[];
+extern const u8 gUnknown_08E96888[];
+extern const u8 gUnknown_08E96994[];
+extern const u8 gUnknown_08E9C6DC[];
+extern const u8 gUnknown_08D00524[];
+extern const u8 gUnknown_08E96BD4[];
+extern const u8 gUnknown_08E96ACC[];
+extern const u8 gUnknown_08E96B58[];
 extern const u16 gPokedexMenu_Pal[];
 extern const u16 gPokedexMenu2_Pal[];
-extern const u8 *const gMonFootprintTable[];
 extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
@@ -196,14 +178,14 @@ extern void sub_805469C(void);
 extern u16 HoennToNationalOrder(u16);
 extern u16 NationalToHoennOrder(u16);
 
-const u16 gUnknown_0839F67C[] = INCBIN_U16("graphics/pokedex/search.gbapal");
-const u16 gUnknown_0839F73C[] = INCBIN_U16("graphics/pokedex/national.gbapal");
+static const u16 sPokedexSearchPalette[] = INCBIN_U16("graphics/pokedex/search.gbapal");
+static const u16 sNationalPokedexPalette[] = INCBIN_U16("graphics/pokedex/national.gbapal");
 const u8 gEmptySpacce_839F7FC[0xA4] = {0};
-const u8 gUnknown_0839F8A0[] = INCBIN_U8("graphics/pokedex/pokedex_cry_layout.bin.lz");
-const u8 gUnknown_0839F988[] = INCBIN_U8("graphics/pokedex/pokedex_size_layout.bin.lz");
-const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz");
+static const u8 gUnknown_0839F8A0[] = INCBIN_U8("graphics/pokedex/pokedex_cry_layout.bin.lz");
+static const u8 gUnknown_0839F988[] = INCBIN_U8("graphics/pokedex/pokedex_size_layout.bin.lz");
+static const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz");
 #include "data/pokedex_orders.h"
-const struct OamData gOamData_83A0404 =
+static const struct OamData gOamData_83A0404 =
 {
     .y = 160,
     .affineMode = 0,
@@ -219,7 +201,7 @@ const struct OamData gOamData_83A0404 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_83A040C =
+static const struct OamData gOamData_83A040C =
 {
     .y = 160,
     .affineMode = 0,
@@ -235,7 +217,7 @@ const struct OamData gOamData_83A040C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_83A0414 =
+static const struct OamData gOamData_83A0414 =
 {
     .y = 160,
     .affineMode = 0,
@@ -251,7 +233,7 @@ const struct OamData gOamData_83A0414 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_83A041C =
+static const struct OamData gOamData_83A041C =
 {
     .y = 160,
     .affineMode = 0,
@@ -267,7 +249,7 @@ const struct OamData gOamData_83A041C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_83A0424 =
+static const struct OamData gOamData_83A0424 =
 {
     .y = 160,
     .affineMode = 0,
@@ -283,7 +265,7 @@ const struct OamData gOamData_83A0424 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const struct OamData gOamData_83A042C =
+static const struct OamData gOamData_83A042C =
 {
     .y = 160,
     .affineMode = 0,
@@ -299,131 +281,131 @@ const struct OamData gOamData_83A042C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const union AnimCmd gSpriteAnim_83A0434[] =
+static const union AnimCmd gSpriteAnim_83A0434[] =
 {
     ANIMCMD_FRAME(3, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A043C[] =
+static const union AnimCmd gSpriteAnim_83A043C[] =
 {
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0444[] =
+static const union AnimCmd gSpriteAnim_83A0444[] =
 {
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A044C[] =
+static const union AnimCmd gSpriteAnim_83A044C[] =
 {
     ANIMCMD_FRAME(32, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0454[] =
+static const union AnimCmd gSpriteAnim_83A0454[] =
 {
     ANIMCMD_FRAME(64, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A045C[] =
+static const union AnimCmd gSpriteAnim_83A045C[] =
 {
     ANIMCMD_FRAME(96, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0464[] =
+static const union AnimCmd gSpriteAnim_83A0464[] =
 {
     ANIMCMD_FRAME(128, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A046C[] =
+static const union AnimCmd gSpriteAnim_83A046C[] =
 {
     ANIMCMD_FRAME(160, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0474[] =
+static const union AnimCmd gSpriteAnim_83A0474[] =
 {
     ANIMCMD_FRAME(192, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A047C[] =
+static const union AnimCmd gSpriteAnim_83A047C[] =
 {
     ANIMCMD_FRAME(224, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0484[] =
+static const union AnimCmd gSpriteAnim_83A0484[] =
 {
     ANIMCMD_FRAME(226, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A048C[] =
+static const union AnimCmd gSpriteAnim_83A048C[] =
 {
     ANIMCMD_FRAME(228, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A0494[] =
+static const union AnimCmd gSpriteAnim_83A0494[] =
 {
     ANIMCMD_FRAME(230, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A049C[] =
+static const union AnimCmd gSpriteAnim_83A049C[] =
 {
     ANIMCMD_FRAME(232, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04A4[] =
+static const union AnimCmd gSpriteAnim_83A04A4[] =
 {
     ANIMCMD_FRAME(234, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04AC[] =
+static const union AnimCmd gSpriteAnim_83A04AC[] =
 {
     ANIMCMD_FRAME(236, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04B4[] =
+static const union AnimCmd gSpriteAnim_83A04B4[] =
 {
     ANIMCMD_FRAME(238, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04BC[] =
+static const union AnimCmd gSpriteAnim_83A04BC[] =
 {
     ANIMCMD_FRAME(240, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04C4[] =
+static const union AnimCmd gSpriteAnim_83A04C4[] =
 {
     ANIMCMD_FRAME(242, 30),
     ANIMCMD_END,
 };
-const union AnimCmd gSpriteAnim_83A04CC[] =
+static const union AnimCmd gSpriteAnim_83A04CC[] =
 {
     ANIMCMD_FRAME(4, 30),
     ANIMCMD_END,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04D4[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04D4[] =
 {
     gSpriteAnim_83A0434,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04D8[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04D8[] =
 {
     gSpriteAnim_83A043C,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04DC[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04DC[] =
 {
     gSpriteAnim_83A0444,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04E0[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04E0[] =
 {
     gSpriteAnim_83A044C,
     gSpriteAnim_83A0454,
     gSpriteAnim_83A045C,
     gSpriteAnim_83A0464,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04F0[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04F0[] =
 {
     gSpriteAnim_83A046C,
     gSpriteAnim_83A0474,
 };
-const union AnimCmd *const gSpriteAnimTable_83A04F8[] =
+static const union AnimCmd *const gSpriteAnimTable_83A04F8[] =
 {
     gSpriteAnim_83A047C,
     gSpriteAnim_83A0484,
@@ -436,11 +418,11 @@ const union AnimCmd *const gSpriteAnimTable_83A04F8[] =
     gSpriteAnim_83A04BC,
     gSpriteAnim_83A04C4,
 };
-const union AnimCmd *const gSpriteAnimTable_83A0520[] =
+static const union AnimCmd *const gSpriteAnimTable_83A0520[] =
 {
     gSpriteAnim_83A04CC,
 };
-const struct SpriteTemplate gSpriteTemplate_83A0524 =
+static const struct SpriteTemplate gSpriteTemplate_83A0524 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -450,7 +432,7 @@ const struct SpriteTemplate gSpriteTemplate_83A0524 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808EF38,
 };
-const struct SpriteTemplate gSpriteTemplate_83A053C =
+static const struct SpriteTemplate gSpriteTemplate_83A053C =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -460,7 +442,7 @@ const struct SpriteTemplate gSpriteTemplate_83A053C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808EF8C,
 };
-const struct SpriteTemplate gSpriteTemplate_83A0554 =
+static const struct SpriteTemplate gSpriteTemplate_83A0554 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -470,7 +452,7 @@ const struct SpriteTemplate gSpriteTemplate_83A0554 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F08C,
 };
-const struct SpriteTemplate gSpriteTemplate_83A056C =
+static const struct SpriteTemplate gSpriteTemplate_83A056C =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -480,7 +462,7 @@ const struct SpriteTemplate gSpriteTemplate_83A056C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F0B4,
 };
-const struct SpriteTemplate gSpriteTemplate_83A0584 =
+static const struct SpriteTemplate gSpriteTemplate_83A0584 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -490,7 +472,7 @@ const struct SpriteTemplate gSpriteTemplate_83A0584 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808ED94,
 };
-const struct SpriteTemplate gSpriteTemplate_83A059C =
+static const struct SpriteTemplate gSpriteTemplate_83A059C =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -500,7 +482,7 @@ const struct SpriteTemplate gSpriteTemplate_83A059C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808ED94,
 };
-const struct SpriteTemplate gSpriteTemplate_83A05B4 =
+static const struct SpriteTemplate gSpriteTemplate_83A05B4 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -510,24 +492,24 @@ const struct SpriteTemplate gSpriteTemplate_83A05B4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F168,
 };
-const struct SpriteSheet gUnknown_083A05CC[] =
+static const struct SpriteSheet gUnknown_083A05CC[] =
 {
     {gPokedexMenu2_Gfx, 0x1F00, 0x1000},
     {NULL, 0, 0},
 };
-const struct SpritePalette gUnknown_083A05DC[] =
+static const struct SpritePalette gUnknown_083A05DC[] =
 {
     {gPokedexMenu_Pal, 0x1000},
     {NULL, 0},
 };
-const u8 gUnknown_083A05EC[] = {2, 4, 8, 16, 32};
-const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
+static const u8 gUnknown_083A05EC[] = {2, 4, 8, 16, 32};
+static const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
 const u8 gEmptySpacce_83A05F6[] = {0, 0};  // Padding, maybe?
-const u8 gUnknown_083A05F8[] = _("");
+static const u8 gUnknown_083A05F8[] = _("");
 // TODO: include German entries
 #include "data/pokedex_entries_en.h"
-const u16 gUnknown_083B4EC4[16] = {0};
-const u8 *const gMonFootprintTable[] =
+static const u16 gUnknown_083B4EC4[16] = {0};
+static const u8 *const sMonFootprintTable[] =
 {
     gMonFootprint_Bulbasaur,
     gMonFootprint_Bulbasaur,
@@ -943,9 +925,9 @@ const u8 *const gMonFootprintTable[] =
     gMonFootprint_Chimecho,
     gMonFootprint_Bulbasaur,
 };
-const u8 gUnknown_083B5558[] = _("{CLEAR_TO 0}");
+static const u8 gUnknown_083B5558[] = _("{CLEAR_TO 0}");
 const u8 gUnknown_083B555C[] = INCBIN_U8("graphics/unknown/unknown_3B555C.bin");
-const struct OamData gOamData_83B557C =
+static const struct OamData gOamData_83B557C =
 {
     .y = 0,
     .affineMode = 0,
@@ -961,14 +943,14 @@ const struct OamData gOamData_83B557C =
     .paletteNum = 0,
     .affineParam = 0,
 };
-void *const gUnknown_083B5584[] =
+static void *const gUnknown_083B5584[] =
 {
     (void *)0x02008000,
     (void *)0x0200C000,
     (void *)0x02010000,
     (void *)0x02014000,
 };
-const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
+static const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
 {
     {(u8 *)0x02008000, 0x800},
     {(u8 *)0x02008800, 0x800},
@@ -987,7 +969,7 @@ const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
     {(u8 *)0x0200F000, 0x800},
     {(u8 *)0x0200F800, 0x800},
 };
-const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
+static const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
 {
     {(u8 *)0x0200C000, 0x800},
     {(u8 *)0x0200C800, 0x800},
@@ -1006,7 +988,7 @@ const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
     {(u8 *)0x02013000, 0x800},
     {(u8 *)0x02013800, 0x800},
 };
-const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
+static const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
 {
     {(u8 *)0x02010000, 0x800},
     {(u8 *)0x02010800, 0x800},
@@ -1025,7 +1007,7 @@ const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
     {(u8 *)0x02017000, 0x800},
     {(u8 *)0x02017800, 0x800},
 };
-const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
+static const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
 {
     {(u8 *)0x02014000, 0x800},
     {(u8 *)0x02014800, 0x800},
@@ -1044,7 +1026,7 @@ const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
     {(u8 *)0x0201B000, 0x800},
     {(u8 *)0x0201B800, 0x800},
 };
-const struct SpriteFrameImage *const gUnknown_083B5794[] =
+static const struct SpriteFrameImage *const gUnknown_083B5794[] =
 {
     gSpriteImageTable_83B5594,
     gSpriteImageTable_83B5614,
@@ -1052,7 +1034,7 @@ const struct SpriteFrameImage *const gUnknown_083B5794[] =
     gSpriteImageTable_83B5714,
 };
 static void nullsub_59(struct Sprite *);
-const struct SpriteTemplate gUnknown_083B57A4 =
+static const struct SpriteTemplate gUnknown_083B57A4 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0,
@@ -1062,7 +1044,7 @@ const struct SpriteTemplate gUnknown_083B57A4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = nullsub_59,
 };
-const u8 gUnknown_083B57BC[][4] =
+static const u8 gUnknown_083B57BC[][4] =
 {
     {0,      0, 0,      0},
     {CHAR_A, 3, CHAR_a, 3},
@@ -1075,13 +1057,13 @@ const u8 gUnknown_083B57BC[][4] =
     {CHAR_V, 3, CHAR_v, 3},
     {CHAR_Y, 2, CHAR_y, 2},
 };
-const struct UnknownStruct3 gUnknown_083B57E4[] =
+static const struct UnknownStruct3 gUnknown_083B57E4[] =
 {
     {DexText_SearchForPoke, 0,  0, 5},
     {DexText_SwitchDex,     6,  0, 5},
     {DexText_ReturnToDex,  12,  0, 5},
 };
-const struct UnknownStruct4 gUnknown_083B57FC[] =
+static const struct UnknownStruct4 gUnknown_083B57FC[] =
 {
     {DexText_ListByABC,           0,  2,  5,  5,  2, 12},
     {DexText_ListByColor,         0,  4,  5,  5,  4, 12},
@@ -1091,7 +1073,7 @@ const struct UnknownStruct4 gUnknown_083B57FC[] =
     {DexText_SelectDexMode,       0, 10,  5,  5, 10, 12},
     {DexText_ExecuteSearchSwitch, 0, 12,  5,  0,  0,  0},
 };
-const u8 gUnknown_083B5850[][4] =
+static const u8 gUnknown_083B5850[][4] =
 {
     {0xFF, 0xFF, 0xFF,    1},
     {0xFF, 0xFF,    0,    2},
@@ -1101,7 +1083,7 @@ const u8 gUnknown_083B5850[][4] =
     {0xFF, 0xFF,    4,    6},
     {0xFF, 0xFF,    5, 0xFF},
 };
-const u8 gUnknown_083B586C[][4] =
+static const u8 gUnknown_083B586C[][4] =
 {
     {0xFF, 0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF, 0xFF, 0xFF},
@@ -1111,7 +1093,7 @@ const u8 gUnknown_083B586C[][4] =
     {0xFF, 0xFF,    4,    6},
     {0xFF, 0xFF,    5, 0xFF},
 };
-const u8 gUnknown_083B5888[][4] =
+static const u8 gUnknown_083B5888[][4] =
 {
     {0xFF, 0xFF, 0xFF,    1},
     {0xFF, 0xFF,    0,    2},
@@ -1121,7 +1103,7 @@ const u8 gUnknown_083B5888[][4] =
     {0xFF, 0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF,    4, 0xFF},
 };
-const u8 gUnknown_083B58A4[][4] =
+static const u8 gUnknown_083B58A4[][4] =
 {
     {0xFF, 0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF, 0xFF, 0xFF},
@@ -1131,13 +1113,13 @@ const u8 gUnknown_083B58A4[][4] =
     {0xFF, 0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF,    4, 0xFF},
 };
-const struct UnknownStruct2 gUnknown_083B58C0[] =
+static const struct UnknownStruct2 gUnknown_083B58C0[] =
 {
     {DexText_HoennDex2,    DexText_HoennDex},
     {DexText_NationalDex2, DexText_NationalDex},
     {NULL, NULL},
 };
-const struct UnknownStruct2 gUnknown_083B58D8[] =
+static const struct UnknownStruct2 gUnknown_083B58D8[] =
 {
     {DexText_ListByNumber,          DexText_NumericalMode},
     {DexText_ListByABC2,            DexText_ABCMode},
@@ -1147,7 +1129,7 @@ const struct UnknownStruct2 gUnknown_083B58D8[] =
     {DexText_ListBySmallToTallest,  DexText_SmallestMode},
     {NULL, NULL},
 };
-const struct UnknownStruct2 gUnknown_083B5910[] =
+static const struct UnknownStruct2 gUnknown_083B5910[] =
 {
     {DexText_Terminator5, DexText_DontSpecify},
     {DexText_Terminator5, DexText_ABC},
@@ -1161,7 +1143,7 @@ const struct UnknownStruct2 gUnknown_083B5910[] =
     {DexText_Terminator5, DexText_YZ},
     {NULL, NULL},
 };
-const struct UnknownStruct2 gUnknown_083B5968[] =
+static const struct UnknownStruct2 gUnknown_083B5968[] =
 {
     {DexText_Terminator5, DexText_DontSpecify},
     {DexText_Terminator5, DexText_Red},
@@ -1176,7 +1158,7 @@ const struct UnknownStruct2 gUnknown_083B5968[] =
     {DexText_Terminator5, DexText_Pink},
     {NULL, NULL},
 };
-const struct UnknownStruct2 gUnknown_083B59C8[] =
+static const struct UnknownStruct2 gUnknown_083B59C8[] =
 {
     {DexText_Terminator5, DexText_None},
     {DexText_Terminator5, gTypeNames[TYPE_NORMAL]},
@@ -1198,10 +1180,10 @@ const struct UnknownStruct2 gUnknown_083B59C8[] =
     {DexText_Terminator5, gTypeNames[TYPE_DARK]},
     {NULL, NULL},
 };
-const u8 gUnknown_083B5A60[] = {0, 1};
-const u8 gUnknown_083B5A62[] = {0, 1, 2, 3, 4, 5};
-const u8 gUnknown_083B5A68[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
-const struct UnknownStruct1 gUnknown_083B5A7C[] =
+static const u8 gUnknown_083B5A60[] = {0, 1};
+static const u8 gUnknown_083B5A62[] = {0, 1, 2, 3, 4, 5};
+static const u8 gUnknown_083B5A68[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+static const struct UnknownStruct1 gUnknown_083B5A7C[] =
 {
     {gUnknown_083B5910,  6,  7, 10},
     {gUnknown_083B5968,  8,  9, 11},
@@ -1210,36 +1192,62 @@ const struct UnknownStruct1 gUnknown_083B5A7C[] =
     {gUnknown_083B58D8,  4,  5,  6},
     {gUnknown_083B58C0,  2,  3,  2},
 };
-const u8 gUnknown_083B5AAC[] = _("{STR_VAR_1}{CLEAR_TO 43}");
-const u8 gUnknown_083B5AB2[] = _("{STR_VAR_1}{CLEAR_TO 96}");
+static const u8 gUnknown_083B5AAC[] = _("{STR_VAR_1}{CLEAR_TO 43}");
+static const u8 gUnknown_083B5AB2[] = _("{STR_VAR_1}{CLEAR_TO 96}");
 
+static void MainCB(void);
+static void Task_PokedexShowMainScreen(u8 taskId);
+static void Task_PokedexMainScreen(u8 taskId);
+static void sub_808C898(u8 taskId);
+static void Task_PokedexMainScreenMenu(u8 taskId);
+static void sub_808CA64(u8 taskId);
+static void sub_808CAE4(u8 taskId);
+static void sub_808CB8C(u8 taskId);
+static void Task_ClosePokedex(u8 taskId);
+static void sub_808CCC4(u8 taskId);
+static void Task_PokedexResultsScreen(u8 taskId);
+static void sub_808CEF8(u8 taskId);
+static void Task_PokedexResultsScreenMenu(u8 taskId);
+static void sub_808D118(u8 taskId);
+static void sub_808D198(u8 taskId);
+static void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId);
+static void Task_PokedexResultsScreenExitPokedex(u8 taskId);
+static bool8 sub_808D344(u8 a);
+static void sub_808D640(void);
+static void SortPokedex(u8 dexMode, u8 sortMode);
+static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d);
+static void sub_808DF88(u16 a, u8 b, u8 c, u16 d);
+static u8 sub_808DFE4(u16 num, u8 b, u8 c);
+static void sub_808E090(u8 a, u8 b, u16 c);
+static void sub_808E0CC(u16 a, u16 b);
 static u32 sub_808E8C8(u16 a, s16 b, s16 c);
 static u8 sub_808F210(struct PokedexListItem *, u8);
 static u8 sub_808F284(struct PokedexListItem *, u8);
 void sub_8090B8C(u8);
 void sub_8090C28(struct Sprite *);
 s8 GetNationalPokedexFlag(u16, u8);
+static void sub_8091738(u16, u16, u16);
 u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
-void sub_8091E54(u8);
-void sub_809204C(u8);
-void sub_809207C(u8);
-void sub_809217C(u8);
-void sub_80921B0(u8);
-void sub_80923FC(u8);
-void sub_80924A4(u8);
-void sub_8092508(u8);
-void sub_80925CC(u8);
-void sub_8092644(u8);
-void sub_80927B8(u8);
-void sub_80927F0(u8);
-void sub_8092AB0(u8);
-void sub_8092AD4(u8, u8);
-void sub_8092B68(u8);
-void sub_8092C8C(u8);
-void sub_8092D78(u8);
-u8 sub_8092E10(u8, u8);
-void sub_8092EB0(u8);
-void sub_809308C(u8);
+static void sub_8091E54(u8);
+static void sub_809204C(u8);
+static void sub_809207C(u8);
+static void sub_809217C(u8);
+static void sub_80921B0(u8);
+static void sub_80923FC(u8);
+static void sub_80924A4(u8);
+static void sub_8092508(u8);
+static void sub_80925CC(u8);
+static void sub_8092644(u8);
+static void sub_80927B8(u8);
+static void sub_80927F0(u8);
+static void sub_8092AB0(u8);
+static void sub_8092AD4(u8, u8);
+static void sub_8092B68(u8);
+static void sub_8092C8C(u8);
+static void sub_8092D78(u8);
+static u8 sub_8092E10(u8, u8);
+static void sub_8092EB0(u8);
+static void sub_809308C(u8);
 
 extern u16 NationalPokedexNumToSpecies(u16);
 void ShowPokedexAreaScreen(u16 species, u8 *string);
@@ -1456,7 +1464,7 @@ u8 unref_sub_808C540(void (*func)(u8))
     return gTasks[taskId].data[0];
 }
 
-void MainCB(void)
+static void MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1464,13 +1472,11 @@ void MainCB(void)
     UpdatePaletteFade();
 }
 
-void Task_PokedexShowMainScreen(u8 taskId)
+static void Task_PokedexShowMainScreen(u8 taskId)
 {
     gPokedexView->unk64C_1 = 0;
     if (sub_808D344(0))
-    {
         gTasks[taskId].func = Task_PokedexMainScreen;
-    }
 }
 
 //Hide menu and process input on main screen
@@ -1531,14 +1537,14 @@ void Task_PokedexMainScreen(u8 taskId)
     }
 }
 
-void sub_808C898(u8 taskId)
+static void sub_808C898(u8 taskId)
 {
     if (sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636))
         gTasks[taskId].func = Task_PokedexMainScreen;
 }
 
 //Bring up menu and process menu input
-void Task_PokedexMainScreenMenu(u8 taskId)
+static void Task_PokedexMainScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
@@ -1597,7 +1603,7 @@ void Task_PokedexMainScreenMenu(u8 taskId)
     }
 }
 
-void sub_808CA64(u8 taskId)
+static void sub_808CA64(u8 taskId)
 {
     if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
      && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
@@ -1608,7 +1614,7 @@ void sub_808CA64(u8 taskId)
     }
 }
 
-void sub_808CAE4(u8 taskId)
+static void sub_808CAE4(u8 taskId)
 {
     if (gTasks[gTasks[taskId].data[0]].isActive)
     {
@@ -1623,7 +1629,7 @@ void sub_808CAE4(u8 taskId)
     }
 }
 
-void sub_808CB8C(u8 taskId)
+static void sub_808CB8C(u8 taskId)
 {
     bool8 isActive = gTasks[gTasks[taskId].data[0]].isActive;
 
@@ -1648,7 +1654,7 @@ void sub_808CB8C(u8 taskId)
     }
 }
 
-void Task_ClosePokedex(u8 taskId)
+static void Task_ClosePokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1662,14 +1668,14 @@ void Task_ClosePokedex(u8 taskId)
     }
 }
 
-void sub_808CCC4(u8 taskId)
+static void sub_808CCC4(u8 taskId)
 {
     gPokedexView->unk64C_1 = 1;
     if (sub_808D344(3))
         gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void Task_PokedexResultsScreen(u8 taskId)
+static void Task_PokedexResultsScreen(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
@@ -1722,13 +1728,13 @@ void Task_PokedexResultsScreen(u8 taskId)
     }
 }
 
-void sub_808CEF8(u8 taskId)
+static void sub_808CEF8(u8 taskId)
 {
     if (sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636))
         gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void Task_PokedexResultsScreenMenu(u8 taskId)
+static void Task_PokedexResultsScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
@@ -1793,7 +1799,7 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
     }
 }
 
-void sub_808D118(u8 taskId)
+static void sub_808D118(u8 taskId)
 {
     if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
      && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
@@ -1804,7 +1810,7 @@ void sub_808D118(u8 taskId)
     }
 }
 
-void sub_808D198(u8 taskId)
+static void sub_808D198(u8 taskId)
 {
     if (gTasks[gTasks[taskId].data[0]].isActive)
     {
@@ -1817,7 +1823,7 @@ void sub_808D198(u8 taskId)
     }
 }
 
-void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
+static void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1831,7 +1837,7 @@ void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
     }
 }
 
-void Task_PokedexResultsScreenExitPokedex(u8 taskId)
+static void Task_PokedexResultsScreenExitPokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1845,8 +1851,7 @@ void Task_PokedexResultsScreenExitPokedex(u8 taskId)
     }
 }
 
-
-bool8 sub_808D344(u8 a)
+static bool8 sub_808D344(u8 a)
 {
     switch (gMain.state)
     {
@@ -1929,17 +1934,17 @@ bool8 sub_808D344(u8 a)
     return FALSE;
 }
 
-void sub_808D640(void)
+static void sub_808D640(void)
 {
     if (gPokedexView->unk64C_1)
-        LoadPalette(gUnknown_0839F67C + 1, 1, sizeof(gUnknown_0839F67C) - sizeof(u16));
+        LoadPalette(sPokedexSearchPalette + 1, 1, sizeof(sPokedexSearchPalette) - sizeof(u16));
     else if (!IsNationalPokedexEnabled())
         LoadPalette(gPokedexMenu_Pal + 1, 1, 0xBE);
     else
-        LoadPalette(gUnknown_0839F73C + 1, 1, sizeof(gUnknown_0839F73C) - sizeof(u16));
+        LoadPalette(sNationalPokedexPalette + 1, 1, sizeof(sNationalPokedexPalette) - sizeof(u16));
 }
 
-void SortPokedex(u8 dexMode, u8 sortMode)
+static void SortPokedex(u8 dexMode, u8 sortMode)
 {
     u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
     s16 i;
@@ -2086,7 +2091,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
     }
 }
 
-void sub_808DBE8(u8 a, u16 b, u16 c)
+static void sub_808DBE8(u8 a, u16 b, u16 c)
 {
     s16 _b;
     u16 i;
@@ -2172,7 +2177,7 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
     }
 }
 
-void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
+static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
 {
     u8 text[4];
     u16 unk[2];
@@ -2191,7 +2196,7 @@ void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
     MenuPrint(text, b - 15, c);
 }
 
-void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
+static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
 {
     u16 unk[2];
 
@@ -2209,7 +2214,7 @@ void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
     *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
 }
 
-u8 sub_808DFE4(u16 num, u8 b, u8 c)
+static u8 sub_808DFE4(u16 num, u8 b, u8 c)
 {
     u8 text[10];
     u8 i;
@@ -2234,7 +2239,7 @@ u8 sub_808DFE4(u16 num, u8 b, u8 c)
     return i;
 }
 
-void sub_808E090(u8 a, u8 b, u16 c)
+static void sub_808E090(u8 a, u8 b, u16 c)
 {
     u8 i;
 
@@ -2245,7 +2250,7 @@ void sub_808E090(u8 a, u8 b, u16 c)
     }
 }
 
-void sub_808E0CC(u16 a, u16 b)
+static void sub_808E0CC(u16 a, u16 b)
 {
     u8 i;
     u16 unk;
@@ -2334,7 +2339,6 @@ void sub_808E398(u8 a, u16 b)
     switch (a)
     {
     case 1:
-    {
         unk = sub_808E888(b - 1);
         if (unk != 0xFFFF)
         {
@@ -2347,9 +2351,7 @@ void sub_808E398(u8 a, u16 b)
         else
             gPokedexView->unk630 = 15;
         break;
-    }
     case 2:
-    {
         unk = sub_808E888(b + 1);
         if (unk != 0xFFFF)
         {
@@ -2363,368 +2365,87 @@ void sub_808E398(u8 a, u16 b)
             gPokedexView->unk630 = 0;
         break;
     }
-    }
 }
-#ifdef NONMATCHING
-//This one's ridiculous. Fix later
+
 u16 sub_808E48C(u16 a, u16 b)
 {
     u8 r3;
     u8 r5;
-    u32 r10 = 0;
-    if (!(gMain.heldKeys & 0x40) || a == 0)
+    u8 i;
+    u16 r6;
+    u8 r10 = 0;
+    
+    if (!((gMain.heldKeys & 0x40) && (a > 0)))
     {
-        u8 i;
-        u16 r6;
-
         //_0808E4B6
-        if (gMain.heldKeys & 0x80)
-        {
-            if (a < gPokedexView->pokemonListCount - 1)
-                goto _0808E5C4;
-        }
+        if (!((gMain.heldKeys & 0x80) && (a < gPokedexView->pokemonListCount - 1)))
         //_0808E4CE
-
-        if ((gMain.newKeys & 0x20) && a != 0)
         {
-            r6 = a;
-            //_0808E4E0
-            for (i = 0; i < 7; i++)
+            if ((gMain.newKeys & 0x20) && (a > 0))
             {
-                a = sub_8091818(1, a, 0, gPokedexView->pokemonListCount - 1);
+                r6 = a;
+                //_0808E4E0
+                for (i = 0; i < 7; i++)
+                    a = sub_8091818(1, a, 0, gPokedexView->pokemonListCount - 1);
+                gPokedexView->unk62C += 16 * (a - r6);
+                sub_808E82C();
+                sub_808E0CC(a, 0xE);
+                PlaySE(0x6D);
             }
-
-            gPokedexView->unk62C += (a - r6) * 16;
-            sub_808E82C();
-            sub_808E0CC(a, 0xE);
-            PlaySE(SE_Z_PAGE);
-            goto _0808E5A2;
+            //_0808E53C
+            else if ((gMain.newKeys & 0x10) && (a < gPokedexView->pokemonListCount - 1))
+            {
+                r6 = a;
+                for (i = 0; i < 7; i++)
+                    a = sub_8091818(0, a, 0, gPokedexView->pokemonListCount - 1);
+                gPokedexView->unk62C += (a - r6) * 16;
+                sub_808E82C();
+                sub_808E0CC(a, 0xE);
+                PlaySE(0x6D);
+            }
+          _0808E5A2:
+            if (r10 == 0)
+            {
+                gPokedexView->unk638 = 0;
+                return a;
+            }
         }
-        //_0808E53C
-        if (!(gMain.newKeys & 0x10) || a >= gPokedexView->pokemonListCount - 1)
-            goto _0808E5A2;
-
-        r6 = a;
-        for (i = 0; i < 7; i++)
+        else
         {
+            // to _0808E5C4
+            r10 = 2;
             a = sub_8091818(0, a, 0, gPokedexView->pokemonListCount - 1);
+            sub_808E398(2, a);
+            //goto _0808E60E
+            sub_808DBE8(2, a, b);
+            PlaySE(0x6C);
+            goto _0808E5A2;
         }
-
-        gPokedexView->unk62C += (a - r6) * 16;
-        sub_808E82C();
-        sub_808E0CC(a, 0xE);
-        PlaySE(SE_Z_PAGE);
-        goto _0808E5A2;
-
-       _0808E5A2:
-        if (r10 != 0)
-            goto _0808E628;
-        gPokedexView->unk638 = r10;
-        return a;
-
-       _0808E5C4:
-        r10 = 2;
-        a = sub_8091818(0, a, 0, gPokedexView->pokemonListCount - 1);
-        sub_808E398(2, a);
-        //goto _0808E60E
-        sub_808DBE8(2, a, b);
-        PlaySE(SE_Z_SCROLL);
     }
-    //_0808E5E4
     else
     {
+        //to _0808E5E4
         r10 = 1;
         a = sub_8091818(1, a, 0, gPokedexView->pokemonListCount - 1);
         sub_808E398(1, a);
         //_0808E60E
         sub_808DBE8(1, a, b);
-        PlaySE(SE_Z_SCROLL);
+        PlaySE(0x6C);
+        goto _0808E5A2;
     }
-    //_0808E60E
-    goto _0808E5A2;
-
-  _0808E628:
+    //_0808E628
     r5 = gUnknown_083A05EC[gPokedexView->unk638 / 4];
     r3 = gUnknown_083A05F1[gPokedexView->unk638 / 4];
     gPokedexView->unk62E = r3;
     gPokedexView->unk636 = r3;
     gPokedexView->unk634 = r5;
     gPokedexView->unk62F = r10;
-    gPokedexView->unk628 = r5;
+    gPokedexView->unk628 = r5 / 2;
     sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636);
     if (gPokedexView->unk638 <= 0xB)
         gPokedexView->unk638++;
     return a;
 }
-#else
-__attribute__((naked))
-u16 sub_808E48C(u16 a, u16 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    lsls r1, 16\n\
-    lsrs r4, r1, 16\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    ldr r1, _0808E52C\n\
-    ldrh r2, [r1, 0x2C]\n\
-    movs r0, 0x40\n\
-    ands r0, r2\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0\n\
-    beq _0808E4B6\n\
-    cmp r7, 0\n\
-    beq _0808E4B6\n\
-    b _0808E5E4\n\
-_0808E4B6:\n\
-    movs r0, 0x80\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0808E4CE\n\
-    ldr r0, _0808E530\n\
-    ldr r0, [r0]\n\
-    ldr r1, _0808E534\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r7, r0\n\
-    blt _0808E5C4\n\
-_0808E4CE:\n\
-    ldrh r1, [r3, 0x2E]\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0808E53C\n\
-    cmp r7, 0\n\
-    beq _0808E53C\n\
-    adds r6, r7, 0\n\
-    movs r4, 0\n\
-_0808E4E0:\n\
-    ldr r5, _0808E530\n\
-    ldr r0, [r5]\n\
-    ldr r2, _0808E534\n\
-    adds r0, r2\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x6\n\
-    bls _0808E4E0\n\
-    ldr r1, [r5]\n\
-    ldr r3, _0808E538\n\
-    adds r1, r3\n\
-    subs r0, r7, r6\n\
-    lsls r0, 4\n\
-    ldrb r2, [r1]\n\
-    adds r0, r2\n\
-    strb r0, [r1]\n\
-    bl sub_808E82C\n\
-    adds r0, r7, 0\n\
-    movs r1, 0xE\n\
-    bl sub_808E0CC\n\
-    movs r0, 0x6D\n\
-    bl PlaySE\n\
-    b _0808E5A2\n\
-    .align 2, 0\n\
-_0808E52C: .4byte gMain\n\
-_0808E530: .4byte gPokedexView\n\
-_0808E534: .4byte 0x0000060c\n\
-_0808E538: .4byte 0x0000062c\n\
-_0808E53C:\n\
-    ldrh r1, [r3, 0x2E]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0808E5A2\n\
-    ldr r0, _0808E5B8\n\
-    ldr r0, [r0]\n\
-    ldr r3, _0808E5BC\n\
-    adds r0, r3\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r7, r0\n\
-    bge _0808E5A2\n\
-    adds r6, r7, 0\n\
-    movs r4, 0\n\
-_0808E55A:\n\
-    ldr r5, _0808E5B8\n\
-    ldr r0, [r5]\n\
-    ldr r1, _0808E5BC\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x6\n\
-    bls _0808E55A\n\
-    ldr r1, [r5]\n\
-    ldr r2, _0808E5C0\n\
-    adds r1, r2\n\
-    subs r0, r7, r6\n\
-    lsls r0, 4\n\
-    ldrb r3, [r1]\n\
-    adds r0, r3\n\
-    strb r0, [r1]\n\
-    bl sub_808E82C\n\
-    adds r0, r7, 0\n\
-    movs r1, 0xE\n\
-    bl sub_808E0CC\n\
-    movs r0, 0x6D\n\
-    bl PlaySE\n\
-_0808E5A2:\n\
-    mov r0, r10\n\
-    cmp r0, 0\n\
-    bne _0808E628\n\
-    ldr r0, _0808E5B8\n\
-    ldr r0, [r0]\n\
-    movs r1, 0xC7\n\
-    lsls r1, 3\n\
-    adds r0, r1\n\
-    mov r2, r10\n\
-    strh r2, [r0]\n\
-    b _0808E68E\n\
-    .align 2, 0\n\
-_0808E5B8: .4byte gPokedexView\n\
-_0808E5BC: .4byte 0x0000060c\n\
-_0808E5C0: .4byte 0x0000062c\n\
-_0808E5C4:\n\
-    movs r3, 0x2\n\
-    mov r10, r3\n\
-    lsls r3, r0, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    movs r0, 0x2\n\
-    adds r1, r7, 0\n\
-    bl sub_808E398\n\
-    movs r0, 0x2\n\
-    b _0808E60E\n\
-_0808E5E4:\n\
-    movs r0, 0x1\n\
-    mov r10, r0\n\
-    ldr r0, _0808E620\n\
-    ldr r0, [r0]\n\
-    ldr r1, _0808E624\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    bl sub_808E398\n\
-    movs r0, 0x1\n\
-_0808E60E:\n\
-    adds r1, r7, 0\n\
-    adds r2, r4, 0\n\
-    bl sub_808DBE8\n\
-    movs r0, 0x6C\n\
-    bl PlaySE\n\
-    b _0808E5A2\n\
-    .align 2, 0\n\
-_0808E620: .4byte gPokedexView\n\
-_0808E624: .4byte 0x0000060c\n\
-_0808E628:\n\
-    ldr r1, _0808E6A0\n\
-    ldr r6, _0808E6A4\n\
-    ldr r2, [r6]\n\
-    movs r3, 0xC7\n\
-    lsls r3, 3\n\
-    mov r9, r3\n\
-    adds r0, r2, r3\n\
-    ldrh r0, [r0]\n\
-    lsrs r0, 2\n\
-    adds r1, r0, r1\n\
-    ldrb r5, [r1]\n\
-    ldr r1, _0808E6A8\n\
-    adds r0, r1\n\
-    ldrb r3, [r0]\n\
-    ldr r0, _0808E6AC\n\
-    adds r2, r0\n\
-    strb r3, [r2]\n\
-    ldr r1, [r6]\n\
-    ldr r2, _0808E6B0\n\
-    mov r8, r2\n\
-    adds r0, r1, r2\n\
-    strh r3, [r0]\n\
-    ldr r4, _0808E6B4\n\
-    adds r0, r1, r4\n\
-    strh r5, [r0]\n\
-    ldr r3, _0808E6B8\n\
-    adds r1, r3\n\
-    mov r0, r10\n\
-    strb r0, [r1]\n\
-    ldr r2, [r6]\n\
-    lsrs r5, 1\n\
-    movs r1, 0xC5\n\
-    lsls r1, 3\n\
-    adds r0, r2, r1\n\
-    strh r5, [r0]\n\
-    adds r3, r2, r3\n\
-    ldrb r0, [r3]\n\
-    adds r4, r2, r4\n\
-    ldrb r1, [r4]\n\
-    add r2, r8\n\
-    ldrb r2, [r2]\n\
-    bl sub_808E208\n\
-    ldr r0, [r6]\n\
-    mov r2, r9\n\
-    adds r1, r0, r2\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0xB\n\
-    bhi _0808E68E\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_0808E68E:\n\
-    adds r0, r7, 0\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_0808E6A0: .4byte gUnknown_083A05EC\n\
-_0808E6A4: .4byte gPokedexView\n\
-_0808E6A8: .4byte gUnknown_083A05F1\n\
-_0808E6AC: .4byte 0x0000062e\n\
-_0808E6B0: .4byte 0x00000636\n\
-_0808E6B4: .4byte 0x00000634\n\
-_0808E6B8: .4byte 0x0000062f\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_808E6BC(void)
 {
@@ -4125,7 +3846,6 @@ u8 sub_809070C(u16 dexNum, u32 b, u32 c)
     return taskId;
 }
 
-#ifdef NONMATCHING  // yet again...
 void sub_8090750(u8 taskId)
 {
     u8 spriteId;
@@ -4148,7 +3868,12 @@ void sub_8090750(u8 taskId)
         LZ77UnCompVram(gPokedexMenu_Gfx, (void *)(VRAM + 0x4000));
         LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
         for (i = 0; i < 0x280; i++)
-            ((u16 *)(VRAM + 0x7800))[i] += 0x2000;
+        {
+#ifndef NONMATCHING
+            asm("");
+#endif
+            *(u16 *)(VRAM + 0x7800 + 2 * i) += 0x2000;
+        }
         sub_8091738(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
         LoadPalette(gPokedexMenu_Pal + 1, 0x21, 0x9E);
@@ -4204,341 +3929,6 @@ void sub_8090750(u8 taskId)
         break;
     }
 }
-#else
-__attribute__((naked))
-void sub_8090750(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    ldr r1, _08090778 @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrh r6, [r0, 0xA]\n\
-    movs r2, 0x8\n\
-    ldrsh r0, [r0, r2]\n\
-    adds r4, r1, 0\n\
-    cmp r0, 0x6\n\
-    bhi _0809079C\n\
-    lsls r0, 2\n\
-    ldr r1, _0809077C @ =_08090780\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08090778: .4byte gTasks\n\
-_0809077C: .4byte _08090780\n\
-    .align 2, 0\n\
-_08090780:\n\
-    .4byte _0809079C\n\
-    .4byte _080907E0\n\
-    .4byte _0809085C\n\
-    .4byte _080908A0\n\
-    .4byte _08090960\n\
-    .4byte _080909B8\n\
-    .4byte _080909F4\n\
-_0809079C:\n\
-    ldr r0, _080907D0 @ =gPaletteFade\n\
-    ldrb r1, [r0, 0x7]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080907AA\n\
-    b _08090A26\n\
-_080907AA:\n\
-    ldr r1, _080907D4 @ =gUnknown_03005CEC\n\
-    ldr r0, _080907D8 @ =gMain\n\
-    ldr r0, [r0, 0xC]\n\
-    str r0, [r1]\n\
-    movs r0, 0\n\
-    bl SetVBlankCallback\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    bl sub_8091060\n\
-    ldr r1, _080907DC @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    movs r1, 0x1\n\
-    strh r1, [r0, 0x8]\n\
-    b _08090A26\n\
-    .align 2, 0\n\
-_080907D0: .4byte gPaletteFade\n\
-_080907D4: .4byte gUnknown_03005CEC\n\
-_080907D8: .4byte gMain\n\
-_080907DC: .4byte gTasks\n\
-_080907E0:\n\
-    ldr r0, _08090840 @ =gPokedexMenu_Gfx\n\
-    ldr r1, _08090844 @ =0x06004000\n\
-    bl LZ77UnCompVram\n\
-    ldr r0, _08090848 @ =gUnknown_08E96BD4\n\
-    ldr r4, _0809084C @ =0x06007800\n\
-    adds r1, r4, 0\n\
-    bl LZ77UnCompVram\n\
-    movs r2, 0\n\
-    lsls r5, r7, 2\n\
-    mov r12, r5\n\
-    movs r0, 0x80\n\
-    lsls r0, 6\n\
-    adds r6, r0, 0\n\
-    ldr r3, _08090850 @ =0x0000027f\n\
-_08090800:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r4\n\
-    ldrh r5, [r0]\n\
-    adds r1, r6, r5\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, r3\n\
-    bls _08090800\n\
-    ldr r0, _08090854 @ =gTasks\n\
-    mov r1, r12\n\
-    adds r4, r1, r7\n\
-    lsls r4, 3\n\
-    adds r4, r0\n\
-    ldrh r0, [r4, 0xA]\n\
-    movs r2, 0xFF\n\
-    lsls r2, 2\n\
-    movs r1, 0x2\n\
-    bl sub_8091738\n\
-    bl ResetPaletteFade\n\
-    ldr r0, _08090858 @ =gPokedexMenu_Pal + 0x2\n\
-    movs r1, 0x21\n\
-    movs r2, 0x9E\n\
-    bl LoadPalette\n\
-    ldrh r0, [r4, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x8]\n\
-    b _08090A26\n\
-    .align 2, 0\n\
-_08090840: .4byte gPokedexMenu_Gfx\n\
-_08090844: .4byte 0x06004000\n\
-_08090848: .4byte gUnknown_08E96BD4\n\
-_0809084C: .4byte 0x06007800\n\
-_08090850: .4byte 0x0000027f\n\
-_08090854: .4byte gTasks\n\
-_08090858: .4byte gPokedexMenu_Pal + 0x2\n\
-_0809085C:\n\
-    ldr r4, _0809088C @ =gWindowConfig_81E7064\n\
-    adds r0, r4, 0\n\
-    bl SetUpWindowConfig\n\
-    adds r0, r4, 0\n\
-    bl InitMenuWindow\n\
-    ldr r2, _08090890 @ =0x0600c000\n\
-    add r1, sp, 0x4\n\
-    movs r0, 0\n\
-    strh r0, [r1]\n\
-    ldr r0, _08090894 @ =0x040000d4\n\
-    str r1, [r0]\n\
-    str r2, [r0, 0x4]\n\
-    ldr r1, _08090898 @ =0x81000100\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    ldr r1, _0809089C @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    b _080909E0\n\
-    .align 2, 0\n\
-_0809088C: .4byte gWindowConfig_81E7064\n\
-_08090890: .4byte 0x0600c000\n\
-_08090894: .4byte 0x040000d4\n\
-_08090898: .4byte 0x81000100\n\
-_0809089C: .4byte gTasks\n\
-_080908A0:\n\
-    ldr r0, _080908C8 @ =gDexText_RegisterComplete\n\
-    movs r1, 0x2\n\
-    movs r2, 0\n\
-    movs r3, 0xD0\n\
-    bl sub_8072BD8\n\
-    bl IsNationalPokedexEnabled\n\
-    cmp r0, 0\n\
-    bne _080908CC\n\
-    adds r0, r6, 0\n\
-    bl NationalToHoennOrder\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0xD\n\
-    movs r2, 0x3\n\
-    bl sub_8091154\n\
-    b _080908D6\n\
-    .align 2, 0\n\
-_080908C8: .4byte gDexText_RegisterComplete\n\
-_080908CC:\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xD\n\
-    movs r2, 0x3\n\
-    bl sub_8091154\n\
-_080908D6:\n\
-    adds r0, r6, 0\n\
-    movs r1, 0x10\n\
-    movs r2, 0x3\n\
-    bl sub_80911C8\n\
-    ldr r0, _0809094C @ =gDexText_UnknownPoke\n\
-    movs r1, 0xB\n\
-    movs r2, 0x5\n\
-    bl MenuPrint\n\
-    ldr r0, _08090950 @ =gDexText_UnknownHeight\n\
-    movs r1, 0x10\n\
-    movs r2, 0x7\n\
-    bl MenuPrint\n\
-    ldr r0, _08090954 @ =gDexText_UnknownWeight\n\
-    movs r1, 0x10\n\
-    movs r2, 0x9\n\
-    bl MenuPrint\n\
-    lsls r4, r6, 3\n\
-    adds r4, r6\n\
-    lsls r4, 2\n\
-    ldr r6, _08090958 @ =gPokedexEntries\n\
-    adds r5, r4, r6\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xB\n\
-    movs r2, 0x5\n\
-    bl sub_8091304\n\
-    ldrh r0, [r5, 0xC]\n\
-    movs r1, 0x10\n\
-    movs r2, 0x7\n\
-    bl sub_8091458\n\
-    ldrh r0, [r5, 0xE]\n\
-    movs r1, 0x10\n\
-    movs r2, 0x9\n\
-    bl sub_8091564\n\
-    adds r6, 0x10\n\
-    adds r4, r6\n\
-    ldr r0, [r4]\n\
-    movs r1, 0x2\n\
-    movs r2, 0xD\n\
-    bl MenuPrint\n\
-    movs r1, 0xFF\n\
-    lsls r1, 2\n\
-    movs r0, 0xE\n\
-    bl sub_80917CC\n\
-    ldr r1, _0809095C @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    b _080909E0\n\
-    .align 2, 0\n\
-_0809094C: .4byte gDexText_UnknownPoke\n\
-_08090950: .4byte gDexText_UnknownHeight\n\
-_08090954: .4byte gDexText_UnknownWeight\n\
-_08090958: .4byte gPokedexEntries\n\
-_0809095C: .4byte gTasks\n\
-_08090960:\n\
-    adds r0, r6, 0\n\
-    movs r1, 0x30\n\
-    movs r2, 0x38\n\
-    movs r3, 0\n\
-    bl sub_80918EC\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r0, _080909AC @ =gSprites\n\
-    lsls r1, r4, 4\n\
-    adds r1, r4\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    ldrb r2, [r1, 0x5]\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x5]\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    movs r1, 0\n\
-    str r1, [sp]\n\
-    movs r2, 0x10\n\
-    movs r3, 0\n\
-    bl BeginNormalPaletteFade\n\
-    ldr r0, _080909B0 @ =gUnknown_03005CEC\n\
-    ldr r0, [r0]\n\
-    bl SetVBlankCallback\n\
-    ldr r1, _080909B4 @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r4, [r0, 0xE]\n\
-    b _080909E0\n\
-    .align 2, 0\n\
-_080909AC: .4byte gSprites\n\
-_080909B0: .4byte gUnknown_03005CEC\n\
-_080909B4: .4byte gTasks\n\
-_080909B8:\n\
-    ldr r0, _080909E8 @ =REG_BLDCNT\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    adds r0, 0x2\n\
-    strh r1, [r0]\n\
-    adds r0, 0x2\n\
-    strh r1, [r0]\n\
-    ldr r1, _080909EC @ =REG_BG3CNT\n\
-    ldr r2, _080909F0 @ =0x00000f07\n\
-    adds r0, r2, 0\n\
-    strh r0, [r1]\n\
-    subs r1, 0xE\n\
-    movs r5, 0xE2\n\
-    lsls r5, 5\n\
-    adds r0, r5, 0\n\
-    strh r0, [r1]\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r4\n\
-_080909E0:\n\
-    ldrh r1, [r0, 0x8]\n\
-    adds r1, 0x1\n\
-    strh r1, [r0, 0x8]\n\
-    b _08090A26\n\
-    .align 2, 0\n\
-_080909E8: .4byte 0x04000050\n\
-_080909EC: .4byte 0x0400000E\n\
-_080909F0: .4byte 0x00000f07\n\
-_080909F4:\n\
-    ldr r0, _08090A30 @ =gPaletteFade\n\
-    ldrb r1, [r0, 0x7]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0\n\
-    bne _08090A26\n\
-    adds r0, r6, 0\n\
-    bl NationalPokedexNumToSpecies\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0\n\
-    bl PlayCry1\n\
-    ldr r1, _08090A34 @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r5, [r0, 0xC]\n\
-    strh r5, [r0, 0x10]\n\
-    ldr r1, _08090A38 @ =sub_8090A3C\n\
-    str r1, [r0]\n\
-_08090A26:\n\
-    add sp, 0x8\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08090A30: .4byte gPaletteFade\n\
-_08090A34: .4byte gTasks\n\
-_08090A38: .4byte sub_8090A3C\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_8090A3C(u8 taskId)
 {
@@ -5060,7 +4450,7 @@ void sub_8091564(u16 arg0, u8 left, u8 top)
 }
 #endif
 
-void sub_8091738(u16 a, u16 b, u16 c)
+static void sub_8091738(u16 num, u16 b, u16 c)
 {
     u8 arr[0x80];
     u16 i;
@@ -5069,7 +4459,7 @@ void sub_8091738(u16 a, u16 b, u16 c)
     u16 r7;
     u8 r3;
 
-    r12 = gMonFootprintTable[NationalPokedexNumToSpecies(a)];
+    r12 = sMonFootprintTable[NationalPokedexNumToSpecies(num)];
     for (r7 = 0, i = 0; i < 32; i++)
     {
         r3 = r12[i];
@@ -5338,7 +4728,7 @@ u8 sub_8091E3C(void)
     return CreateTask(sub_8091E54, 0);
 }
 
-void sub_8091E54(u8 taskId)
+static void sub_8091E54(u8 taskId)
 {
     u16 i;
 
@@ -5398,14 +4788,14 @@ void sub_8091E54(u8 taskId)
     }
 }
 
-void sub_809204C(u8 taskId)
+static void sub_809204C(u8 taskId)
 {
     sub_8092AB0(gTasks[taskId].data[0]);
     sub_8092B68(taskId);
     gTasks[taskId].func = sub_809207C;
 }
 
-void sub_809207C(u8 taskId)
+static void sub_809207C(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
     {
@@ -5448,14 +4838,14 @@ void sub_809207C(u8 taskId)
     }
 }
 
-void sub_809217C(u8 taskId)
+static void sub_809217C(u8 taskId)
 {
     sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     sub_8092B68(taskId);
     gTasks[taskId].func = sub_80921B0;
 }
 
-void sub_80921B0(u8 taskId)
+static void sub_80921B0(u8 taskId)
 {
     const u8 (*r6)[4];
 
@@ -5541,7 +4931,7 @@ void sub_80921B0(u8 taskId)
     }
 }
 
-void sub_80923FC(u8 taskId)
+static void sub_80923FC(u8 taskId)
 {
     u8 r10 = sub_8092E10(taskId, 5);
     u8 r9 = sub_8092E10(taskId, 4);
@@ -5554,7 +4944,7 @@ void sub_80923FC(u8 taskId)
     gTasks[taskId].func = sub_80924A4;
 }
 
-void sub_80924A4(u8 taskId)
+static void sub_80924A4(u8 taskId)
 {
     if (!IsSEPlaying())
     {
@@ -5572,7 +4962,7 @@ void sub_80924A4(u8 taskId)
     }
 }
 
-void sub_8092508(u8 taskId)
+static void sub_8092508(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -5592,12 +4982,12 @@ void sub_8092508(u8 taskId)
     }
 }
 
-void sub_80925B4(u16 a, int unused)
+static void sub_80925B4(u16 a, int unused)
 {
     sub_814AD7C(0x90, (a * 2 + 1) * 8);
 }
 
-void sub_80925CC(u8 taskId)
+static void sub_80925CC(u8 taskId)
 {
     u8 r0;
     u16 *p1;
@@ -5615,7 +5005,7 @@ void sub_80925CC(u8 taskId)
     gTasks[taskId].func = sub_8092644;
 }
 
-void sub_8092644(u8 taskId)
+static void sub_8092644(u8 taskId)
 {
     u8 r1;
     const struct UnknownStruct2 *r8;
@@ -5698,13 +5088,13 @@ void sub_8092644(u8 taskId)
     }
 }
 
-void sub_80927B8(u8 taskId)
+static void sub_80927B8(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_80927F0;
 }
 
-void sub_80927F0(u8 taskId)
+static void sub_80927F0(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyTask(taskId);
@@ -5779,7 +5169,7 @@ _08092868: .4byte 0x06007840\n\
 }
 #endif
 
-void sub_809286C(u8 a, u8 b, u8 c)
+static void sub_809286C(u8 a, u8 b, u8 c)
 {
     u8 r5 = (b & 1) | ((c & 1) << 1);
 
@@ -5812,7 +5202,7 @@ void sub_809286C(u8 a, u8 b, u8 c)
     }
 }
 
-void sub_8092964(u8 a)
+static void sub_8092964(u8 a)
 {
     switch (a)
     {
@@ -5858,13 +5248,13 @@ void sub_8092964(u8 a)
     }
 }
 
-void sub_8092AB0(u8 a)
+static void sub_8092AB0(u8 a)
 {
     sub_8092964(a);
     sub_8091E20(gUnknown_083B57E4[a].text);
 }
 
-void sub_8092AD4(u8 a, u8 b)
+static void sub_8092AD4(u8 a, u8 b)
 {
     sub_8092964(a);
     switch (b)
@@ -5896,7 +5286,7 @@ void sub_8092AD4(u8 a, u8 b)
     sub_8091E20(gUnknown_083B57FC[b].text);
 }
 
-void sub_8092B68(u8 taskId)
+static void sub_8092B68(u8 taskId)
 {
     u16 var;
 
@@ -5928,7 +5318,7 @@ void sub_8092B68(u8 taskId)
     }
 }
 
-void sub_8092C8C(u8 a)
+static void sub_8092C8C(u8 a)
 {
     u16 i;
     u16 j;
@@ -5963,7 +5353,7 @@ void sub_8092C8C(u8 a)
     }
 }
 
-void sub_8092D78(u8 taskId)
+static void sub_8092D78(u8 taskId)
 {
     const struct UnknownStruct2 *r6 = gUnknown_083B5A7C[gTasks[taskId].data[1]].unk0;
     const u16 *r8 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk4];
@@ -5982,7 +5372,7 @@ void sub_8092D78(u8 taskId)
     sub_8091E20(r6[*r8 + *r7].text1);
 }
 
-u8 sub_8092E10(u8 taskId, u8 b)
+static u8 sub_8092E10(u8 taskId, u8 b)
 {
     const u16 *ptr1 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk4];
     const u16 *ptr2 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk5];
@@ -6012,7 +5402,7 @@ u8 sub_8092E10(u8 taskId, u8 b)
     }
 }
 
-void sub_8092EB0(u8 taskId)
+static void sub_8092EB0(u8 taskId)
 {
     u16 r3;
 
@@ -6053,7 +5443,7 @@ void sub_8092EB0(u8 taskId)
     gTasks[taskId].data[4] = r3;
 }
 
-bool8 sub_8092F44(u8 taskId)
+static bool8 sub_8092F44(u8 taskId)
 {
     u8 val1 = gTasks[taskId].data[1];
     const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
@@ -6065,7 +5455,7 @@ bool8 sub_8092F44(u8 taskId)
         return TRUE;
 }
 
-bool8 sub_8092F8C(u8 taskId)
+static bool8 sub_8092F8C(u8 taskId)
 {
     u8 val1 = gTasks[taskId].data[1];
     const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
@@ -6077,7 +5467,7 @@ bool8 sub_8092F8C(u8 taskId)
         return TRUE;
 }
 
-void sub_8092FD8(struct Sprite *sprite)
+static void sub_8092FD8(struct Sprite *sprite)
 {
     if (gTasks[sprite->data0].func == sub_8092644)
     {
@@ -6107,7 +5497,7 @@ void sub_8092FD8(struct Sprite *sprite)
     }
 }
 
-void sub_809308C(u8 taskId)
+static void sub_809308C(u8 taskId)
 {
     u8 spriteId;
 

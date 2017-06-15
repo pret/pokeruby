@@ -1,4 +1,4 @@
-const u16 gPokedexOrder_Alphabetical[] =
+static const u16 gPokedexOrder_Alphabetical[] =
 {
     387,
     388,
@@ -412,7 +412,7 @@ const u16 gPokedexOrder_Alphabetical[] =
     263,  // Zigzagoon
      41,  // Zubat
 };
-const u16 gPokedexOrder_Weight[] =
+static const u16 gPokedexOrder_Weight[] =
 {
      92,  // Gastly
      93,  // Haunter
@@ -801,7 +801,7 @@ const u16 gPokedexOrder_Weight[] =
     376,  // Metagross
     383,  // Groudon
 };
-const u16 gPokedexOrder_Height[] =
+static const u16 gPokedexOrder_Height[] =
 {
      50,  // Diglett
     298,  // Azurill

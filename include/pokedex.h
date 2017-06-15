@@ -6,29 +6,6 @@
 void ResetPokedex(void);
 void sub_808C0A0(void);
 void CB2_InitPokedex(void);
-void MainCB(void);
-void Task_PokedexShowMainScreen(u8 taskId);
-void Task_PokedexMainScreen(u8 taskId);
-void sub_808C898(u8 taskId);
-void Task_PokedexMainScreenMenu(u8 taskId);
-void sub_808CA64(u8 taskId);
-void sub_808CAE4(u8 taskId);
-void sub_808CB8C(u8 taskId);
-void Task_ClosePokedex(u8 taskId);
-void sub_808CCC4(u8 taskId);
-void Task_PokedexResultsScreen(u8 taskId);
-void sub_808CEF8(u8 taskId);
-void Task_PokedexResultsScreenMenu(u8 taskId);
-void sub_808D118(u8 taskId);
-void sub_808D198(u8 taskId);
-void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId);
-void Task_PokedexResultsScreenExitPokedex(u8 taskId);
-bool8 sub_808D344(u8 a);
-void sub_808D640(void);
-void SortPokedex(u8 dexMode, u8 sortMode);
-void sub_808DBE8(u8 a, u16 b, u16 c);
-void sub_808DEB0(u16 a, u8 b, u8 c, u16 d);
-void sub_808DF88(u16 a, u8 b, u8 c, u16 d);
 u8 sub_808DFE4(u16 a, u8 b, u8 c);
 void sub_808E090(u8 a, u8 b, u16 c);
 void sub_808E0CC(u16 a, u16 b);
@@ -90,7 +67,6 @@ void sub_8091304(const u8 *name, u8, u8);
 
 void sub_8091458(u16 height, u8 i, u8 i1);
 void sub_8091564(u16 weight, u8 i, u8 i1);
-void sub_8091738(u16, u16, u16);
 void sub_80917CC(u16 i, u16 i1);
 u16 sub_8091818(u8, u16, u16, u16);
 
