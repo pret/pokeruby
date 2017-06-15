@@ -16,6 +16,8 @@ struct SpriteFrameImage
     u16 size;
 };
 
+#define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
+
 struct SpritePalette
 {
     const u16 *data;
@@ -131,7 +133,7 @@ struct Subsprite
 struct SubspriteTable
 {
     u8 subspriteCount;
-    struct Subsprite *subsprites;
+    const struct Subsprite *subsprites;
 };
 
 struct Sprite;

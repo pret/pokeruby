@@ -718,7 +718,7 @@ PokemonMenu_Switch: @ 808A02C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r0, _0808A054 @ =0x02001000
 	ldr r1, _0808A058 @ =sub_806CD5C
 	str r1, [r0, 0xC]
@@ -849,7 +849,7 @@ PokemonMenu_Item: @ 808A140
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r1, _0808A174 @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
@@ -1497,7 +1497,7 @@ PokemonMenu_TakeItem: @ 808A688
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x13
 	movs r1, 0
 	movs r2, 0x1D
@@ -1520,7 +1520,7 @@ PokemonMenu_TakeMail: @ 808A6B8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x13
 	movs r1, 0
 	movs r2, 0x1D
@@ -1543,7 +1543,7 @@ PokemonMenu_Mail: @ 808A6E8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r1, _0808A728 @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
@@ -1812,7 +1812,7 @@ PokemonMenu_Cancel: @ 808A918
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
@@ -1828,7 +1828,7 @@ PokemonMenu_CancelSubmenu: @ 808A938
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x13
@@ -1867,7 +1867,7 @@ PokemonMenu_FieldMove: @ 808A984
 	lsls r6, r0, 3
 	ldr r7, _0808A9D0 @ =gTasks + 0x8
 	adds r4, r6, r7
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r1, _0808A9D4 @ =gUnknown_0202FFAA
 	ldr r0, _0808A9D8 @ =gUnknown_0202FFA8
 	ldrb r0, [r0]

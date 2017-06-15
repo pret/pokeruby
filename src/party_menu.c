@@ -31,7 +31,7 @@ struct Unk201B000
     u8 unk260;
     u8 unk261;
     u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];
+    s16 unk264[DATA_COUNT * 2];  // This may be a union
     u8 filler27C[2];
     s16 unk27E;
     s16 unk280;
@@ -1286,7 +1286,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 b, TaskFunc c)
 
 void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     sub_806D5A4();
     gTasks[taskId].data[11] = GetMenuCursorPos();
@@ -1295,7 +1295,7 @@ void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 
 void ItemUseMoveMenu_HandleCancel(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     if (gMain.inBattle)
         gTasks[ewram1C000.unk4].func = SetUpBattlePokemonMenu;

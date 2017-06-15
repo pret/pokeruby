@@ -93,7 +93,7 @@ enum
     SE_T_KAMI,
     SE_T_KAMI2,
     SE_ELEBETA,
-    SE_HINSI,
+    /*0x5A*/ SE_HINSI,
     SE_EXPMAX,
     SE_TAMAKORO,
     SE_TAMAKORO_E,

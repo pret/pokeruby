@@ -1585,7 +1585,7 @@ static void sub_81458DC(void) {
 
     for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
     {
-        if (sub_8090D90(dexNum, 1))
+        if (GetNationalPokedexFlag(dexNum, 1))
         {
             unk201C000->unk90[seenTypesCount] = dexNum;
             seenTypesCount++;

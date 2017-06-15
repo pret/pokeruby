@@ -55,48 +55,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-struct UnknownStruct9
-{
-    u8 unk0;
-    u16 unk2;
-};
-
-struct UnknownStruct10
-{
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 filler1[1];
-    u8 unk2;
-    u8 unk3;
-    u8 filler4[8];
-};
-
-struct UnknownStruct11
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5_0:1;
-    u8 unk5_1:1;
-    u16 unk6;
-    u8 unk8[10];
-    u8 unk12;
-    u8 unk13;
-    u8 unk14[10];
-    u8 filler1E[2];
-    u16 unk20;
-    u16 unk22;
-    u16 unk24;
-    u16 unk26;
-    u16 unk28;
-    u8 unk2A[10];
-    u8 filler34[2];
-    u8 unk36[10];
-};
-
 struct UnknownStruct12
 {
     u32 unk0;
@@ -172,8 +130,6 @@ extern u8 ewram[];
 #define ewram17100 ((u32 *)(ewram + 0x17100))
 #define ewram17130 (ewram[0x17130])
 #define ewram17160 (ewram[0x17160])
-#define ewram17800 ((struct UnknownStruct9 *)(ewram + 0x17800))
-#define ewram17810 ((struct UnknownStruct10 *)(ewram + 0x17810))
 #define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
@@ -236,7 +192,7 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_030042D4)(void);
-extern struct UnknownStruct11 gUnknown_030042E0;
+extern struct Struct30042E0 gUnknown_030042E0;
 extern u8 gUnknown_03004324;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
@@ -282,7 +238,7 @@ extern void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
 extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
 extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
 extern void dp01_battle_side_mark_buffer_for_execution();
-extern u8 sub_8090D90();
+extern u8 GetNationalPokedexFlag();
 extern void sub_800C704(u8, u8, u8);
 extern u8 sub_8018324();
 extern u8 sub_801A02C();
@@ -2065,14 +2021,14 @@ void sub_8011384(void)
                 }
                 if (battle_side_get_owner(gUnknown_02024A60) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
             }
             else
             {
                 if (battle_side_get_owner(gUnknown_02024A60) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
-                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
                     dp01_build_cmdbuf_x04_4_4_4(0);
                     dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
                 }
@@ -2227,7 +2183,7 @@ void bc_801362C(void)
         {
             if (battle_side_get_owner(gUnknown_02024A60) == 1
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
         }
         gUnknown_030042D4 = sub_8011970;
     }

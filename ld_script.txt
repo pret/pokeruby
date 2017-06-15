@@ -59,7 +59,7 @@ SECTIONS {
         asm/battle_6.o(.text);
         src/battle_6.o(.text);
         asm/battle_6.o(.text_8030464);
-        asm/battle_7.o(.text);
+        src/battle_7.o(.text);
         asm/battle_8.o(.text);
         asm/battle_9.o(.text);
         asm/battle_10.o(.text);
@@ -134,15 +134,12 @@ SECTIONS {
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
-        asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
         asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
-        src/rom_8094928.o(.text);
-        asm/rom_8094928.o(.text);
         src/battle_party_menu.o(.text);
         asm/pokemon_storage_system.o(.text);
         src/pokemon_storage_system.o(.text);
@@ -173,12 +170,6 @@ SECTIONS {
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
 		src/tv.o(.text);
-        asm/tv.o(.text);
-        src/tv.o(.text_a);
-        asm/tv.o(.text_80BE8EC);
-        src/tv.o(.dotvshow);
-        asm/tv.o(.dotvshow);
-        src/tv.o(.text_c);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
@@ -206,9 +197,7 @@ SECTIONS {
         src/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
-        asm/decoration.o(.text);
         src/decoration.o(.text);
-        asm/decoration.o(.text_80FE868);
         asm/slot_machine.o(.text);
         src/slot_machine.o(.text);
         asm/slot_machine.o(.text_8104D30)
@@ -259,13 +248,12 @@ SECTIONS {
         asm/battle_anim_812C144.o(.text);
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
-        asm/decoration_inventory.o(.text);
+        src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
         asm/battle_anim_8137220.o(.text);
         src/player_pc.o(.text);
-        asm/player_pc.o(.text);
         src/intro.o(.text);
         src/field_region_map.o(.text);
         asm/battle_anim_813F0F4.o(.text);
@@ -396,7 +384,7 @@ SECTIONS {
         data/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);
-        data/field_effect.o(.rodata);
+        src/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
@@ -440,7 +428,7 @@ SECTIONS {
         src/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
-        data/decoration.o(.rodata);
+        src/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
         src/battle_ai.o(.rodata);
@@ -467,7 +455,7 @@ SECTIONS {
         data/battle_anim_81258BC.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
         data/learn_move.o(.rodata);
-        data/decoration_inventory.o(.rodata);
+        src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         data/use_pokeblock.o(.rodata);

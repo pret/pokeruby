@@ -9,6 +9,18 @@ struct MenuAction
    u8 (*func)();
 };
 
+struct MenuAction2
+{
+    const u8 *text;
+    void (*func)(u8);
+};
+
+struct MenuAction3
+{
+    void (*func1)(u8);
+    void (*func2)(u8);
+};
+
 void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);
@@ -69,6 +81,6 @@ void RedrawMenuCursor(u8, u8);
 void unref_sub_8072DC0(void);
 void sub_8072DCC(u8);
 void sub_8072DDC(u8);
-void sub_8072DEC(void);
+void HandleDestroyMenuCursors(void);
 
 #endif // GUARD_MENU_H

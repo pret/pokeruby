@@ -2,13 +2,6 @@
 #include "fieldmap.h"
 #include "palette.h"
 
-struct BackupMapData
-{
-    s32 width;
-    s32 height;
-    u16 *map;
-};
-
 extern struct MapHeader * const get_mapheader_by_bank_and_number(u8, u8);
 extern void mapheader_run_script_with_tag_x1(void);
 extern void sub_80BB970(struct MapEvents *);
@@ -32,7 +25,6 @@ struct Coords32
 };
 
 extern const struct Coords32 gUnknown_0821664C[];
-extern struct BackupMapData gUnknown_03004870;
 
 EWRAM_DATA static u16 gUnknown_02029828[0x2800] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
@@ -48,7 +40,6 @@ void fillSouthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillNorthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillWestConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillEastConnection(struct MapHeader *, struct MapHeader *, s32);
-u32 GetBehaviorByMetatileId(u16 metatile);
 struct MapConnection *sub_8056A64(u8 direction, int x, int y);
 bool8 sub_8056ABC(u8 direction, int x, int y, struct MapConnection *connection);
 bool8 sub_8056B20(int x, int src_width, int dest_width, int offset);

@@ -1522,7 +1522,7 @@ _081350AE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081350C6
@@ -1555,7 +1555,7 @@ AppendBattleTowerBannedSpeciesName: @ 81350E0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081351E6

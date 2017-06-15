@@ -1975,8 +1975,8 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             {
                 vars[2] = HoennToNationalOrder(i + 1);
                 gPokedexView->unk0[i].dexNum = vars[2];
-                gPokedexView->unk0[i].seen = sub_8090D90(vars[2], 0);
-                gPokedexView->unk0[i].owned = sub_8090D90(vars[2], 1);
+                gPokedexView->unk0[i].seen = GetNationalPokedexFlag(vars[2], 0);
+                gPokedexView->unk0[i].owned = GetNationalPokedexFlag(vars[2], 1);
                 if (gPokedexView->unk0[i].seen)
                     gPokedexView->pokemonListCount = i + 1;
             }
@@ -1990,14 +1990,14 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for (i = 0; i < vars[0]; i++)
             {
                 vars[2] = i + 1;
-                if (sub_8090D90(vars[2], 0))
+                if (GetNationalPokedexFlag(vars[2], 0))
                     r10 = 1;
                 if (r10)
                 {
                     asm("");    //Needed to match for some reason
                     gPokedexView->unk0[r5].dexNum = vars[2];
-                    gPokedexView->unk0[r5].seen = sub_8090D90(vars[2], 0);
-                    gPokedexView->unk0[r5].owned = sub_8090D90(vars[2], 1);
+                    gPokedexView->unk0[r5].seen = GetNationalPokedexFlag(vars[2], 0);
+                    gPokedexView->unk0[r5].owned = GetNationalPokedexFlag(vars[2], 1);
                     if (gPokedexView->unk0[r5].seen)
                         gPokedexView->pokemonListCount = r5 + 1;
                     r5++;
@@ -2010,7 +2010,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
         {
             vars[2] = gPokedexOrder_Alphabetical[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 0))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 0))
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
@@ -2024,7 +2024,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
         {
             vars[2] = gPokedexOrder_Weight[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
@@ -2038,7 +2038,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
         {
             vars[2] = gPokedexOrder_Weight[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
@@ -2052,7 +2052,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
         {
             vars[2] = gPokedexOrder_Height[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
@@ -2066,7 +2066,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
         {
             vars[2] = gPokedexOrder_Height[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
                 gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
                 gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;

@@ -4,27 +4,27 @@
 	.section .rodata
 
 	.align 2
-gUnknown_08406288:: @ 8406288
+gPCText_OptionDescList:: @ 8406288
 	.4byte PCText_TakeOutItems
 	.4byte PCText_StoreItems
 	.4byte PCText_ThrowAwayItems
 	.4byte gMenuText_GoBackToPrev
 
 	.align 2
-gUnknown_08406298:: @ 8406298
+gPCText_PlayerPCOptionsText:: @ 8406298
 	.4byte SecretBaseText_ItemStorage, PlayerPC_ItemStorage
 	.4byte gPCText_Mailbox, PlayerPC_Mailbox
 	.4byte SecretBaseText_Decoration, PlayerPC_Decoration
 	.4byte SecretBaseText_TurnOff, PlayerPC_TurnOff
 
-gUnknown_084062B8:: @ 84062B8
+gBedroomPC_OptionOrder:: @ 84062B8
 	.byte 0, 1, 2, 3
 
-gUnknown_084062BC:: @ 84062BC
+gPlayerPC_OptionOrder:: @ 84062BC
 	.byte 0, 1, 3
 
 	.align 2
-gUnknown_084062C0:: @ 84062C0
+gPCText_ItemPCOptionsText:: @ 84062C0
 	.4byte PCText_WithdrawItem, ItemStorage_Withdraw
 	.4byte PCText_DepositItem, ItemStorage_Deposit
 	.4byte PCText_TossItem, ItemStorage_Toss
@@ -32,8 +32,8 @@ gUnknown_084062C0:: @ 84062C0
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
-	.4byte sub_813A83C
-	.4byte sub_813A878
+	.4byte ItemStorage_ResumeInputFromYesToss
+	.4byte ItemStorage_ResumeInputFromNoToss
 
 	.align 2
 gUnknown_084062E8:: @ 84062E8

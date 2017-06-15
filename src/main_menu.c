@@ -945,14 +945,14 @@ static void Task_NewGameSpeech16(u8 taskId)
     switch (GenderMenuProcessInput())
     {
     case MALE:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     case FEMALE:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
@@ -1048,7 +1048,7 @@ static void Task_NewGameSpeech21(u8 taskId)
     case 2:
     case 3:
     case 4:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         SetPresetPlayerName(selection);
@@ -1060,7 +1060,7 @@ static void Task_NewGameSpeech21(u8 taskId)
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
