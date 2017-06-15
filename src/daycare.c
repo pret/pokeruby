@@ -35,7 +35,6 @@ u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
     return count;
 }
 
-#ifndef ASDF
 void sub_8041324(struct BoxPokemon * box_pokemon, struct RecordMixing_UnknownStruct * void_pointer)
 {
     u8 i;
@@ -60,7 +59,6 @@ void sub_8041324(struct BoxPokemon * box_pokemon, struct RecordMixing_UnknownStr
     }
     void_pointer->unk70 = specCount;
 }
-#endif
 
 s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
 {

@@ -674,7 +674,6 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-#undef NONMATCHING
 #ifdef NONMATCHING
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
