@@ -1616,7 +1616,7 @@ void sub_80FE394(void)
 
 void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 10, 9);
     MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
     FreeSpritePaletteByTag(6);
@@ -1683,7 +1683,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
 
 void sub_80FE5AC(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
     sub_80FE528(taskId);
     InitMenu(0, 1, 1, 9, gUnknown_020388F6, 13);
@@ -1720,7 +1720,7 @@ void sub_80FE604(u8 taskId)
                     gTasks[taskId].func = sub_80FE868;
                 } else
                 {
-                    sub_8072DEC();
+                    HandleDestroyMenuCursors();
                     MenuZeroFillWindowRect(0, 0, 14, 19);
                     DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE418, 0);
                 }
@@ -1749,7 +1749,7 @@ void sub_80FE728(u8 taskId)
 
 void sub_80FE758(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
     if (gTasks[taskId].data[11] != 2)
     {
@@ -1777,7 +1777,7 @@ void sub_80FE7D4(u8 *dest, u8 decClass)
 
 void sub_80FE7EC(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
 
     sub_80FEC94(taskId);
@@ -1850,7 +1850,7 @@ void sub_80FE948(u8 taskId)
         }
         if (gMain.newKeys & A_BUTTON)
         {
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
             gUnknown_020388F5 = gUnknown_020388F2 + gUnknown_020388F4;
             if (gUnknown_020388F5 == gUnknown_020388D5)
@@ -1862,7 +1862,7 @@ void sub_80FE948(u8 taskId)
             }
         } else if (gMain.newKeys & B_BUTTON)
         {
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
             gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
         }
@@ -2050,7 +2050,7 @@ void sub_80FEF74(void)
     sub_80F9520(gUnknown_020388F7, 8);
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
 }
 
@@ -2080,7 +2080,7 @@ void sub_80FEFF4(u8 taskId)
 
 void sub_80FF034(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
     sub_80FE5AC(taskId);
 }
@@ -3705,7 +3705,7 @@ void sub_8100E70(u8 taskId)
                 data[2] = 1;
                 data[6] = 1;
                 data[5] = 1;
-                sub_8072DEC();
+                HandleDestroyMenuCursors();
             }
             break;
         case 1:

@@ -802,7 +802,7 @@ bx_battle_menu_t6_2: @ 812B4D4
 	beq _0812B546
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r1, _0812B50C @ =gUnknown_02024E60
 	ldr r0, _0812B510 @ =gUnknown_02024A60
 	ldrb r0, [r0]

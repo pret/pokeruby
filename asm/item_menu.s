@@ -8369,7 +8369,7 @@ sub_80A73F0: @ 80A73F0
 	thumb_func_start sub_80A73FC
 sub_80A73FC: @ 80A73FC
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_814AD44
 	pop {r0}
 	bx r0

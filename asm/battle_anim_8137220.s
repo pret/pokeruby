@@ -234,7 +234,7 @@ _081373E8:
 	bne _08137410
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
@@ -3871,7 +3871,7 @@ sub_8139208: @ 8139208
 	ldrh r0, [r4]
 	cmp r0, 0x2
 	bne _0813922A
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 _0813922A:
 	ldrh r0, [r4]
 	bl sub_8120AA8
@@ -4061,7 +4061,7 @@ _081393B2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081393DE
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x5
 	bl PlaySE
 	movs r2, 0x80

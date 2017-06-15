@@ -3266,7 +3266,7 @@ _08049800: .4byte gUnknown_03004824
 	thumb_func_start sub_8049804
 sub_8049804: @ 8049804
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_804A80C
 	ldr r3, _08049850 @ =gUnknown_03004824
 	ldr r0, [r3]
@@ -4315,7 +4315,7 @@ _08049F8E:
 	lsls r0, 2
 	adds r0, r7
 	bl sub_8078A34
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r3, _0804A09C @ =gUnknown_03004824
 	ldr r0, [r3]
 	adds r0, 0x4
@@ -5363,7 +5363,7 @@ _0804A89C: .4byte gUnknown_03004824
 _0804A8A0: .4byte gUnknown_0820C330
 _0804A8A4: .4byte gTradePartyBoxTilemap
 _0804A8A8:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r4, _0804A924 @ =gUnknown_03004824
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -7560,10 +7560,10 @@ sub_804BA18: @ 804BA18
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _0804BA5A:
 	pop {r4}
 	pop {r0}

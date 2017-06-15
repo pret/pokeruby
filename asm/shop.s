@@ -1777,7 +1777,7 @@ _080B41CE:
 	adds r0, r1, 0
 	movs r2, 0x1
 	bl sub_80B39D0
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0xC
 	movs r2, 0xD

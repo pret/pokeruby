@@ -756,8 +756,8 @@ _08090D88:
 _08090D8C: .4byte gPokedexEntries
 	thumb_func_end GetPokedexHeightWeight
 
-	thumb_func_start sub_8090D90
-sub_8090D90: @ 8090D90
+	thumb_func_start GetNationalPokedexFlag
+GetNationalPokedexFlag: @ 8090D90
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsls r1, 24
@@ -951,7 +951,7 @@ _08090F0A:
 	bx r1
 	.align 2, 0
 _08090F14: .4byte gSaveBlock2
-	thumb_func_end sub_8090D90
+	thumb_func_end GetNationalPokedexFlag
 
 	thumb_func_start GetNationalPokedexCount
 GetNationalPokedexCount: @ 8090F18
@@ -982,7 +982,7 @@ _08090F3E:
 	lsrs r0, 16
 	movs r1, 0x1
 _08090F46:
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08090F56
@@ -1032,7 +1032,7 @@ _08090F90:
 	lsrs r0, 16
 	movs r1, 0x1
 _08090FA0:
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08090FB0
@@ -1063,7 +1063,7 @@ _08090FC4:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090FE4
@@ -1090,7 +1090,7 @@ _08090FF8:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08091046
@@ -1104,7 +1104,7 @@ _08091014:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08091046
@@ -1119,7 +1119,7 @@ _08091032:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08091050

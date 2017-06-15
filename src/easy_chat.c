@@ -471,7 +471,7 @@ static u16 sub_80EB9D8(void) {
     {
         const u16 dexNum = SpeciesToNationalPokedexNum(*speciesList);
 
-        const u8 local2 = sub_8090D90(dexNum, 0);
+        const u8 local2 = GetNationalPokedexFlag(dexNum, 0);
 
         if (local2)
         {

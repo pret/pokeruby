@@ -154,7 +154,7 @@ void sub_80B2F30(u8 taskId)
 
 void HandleShopMenuQuit(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 11, 8);
     sub_80BE3BC(); // in tv.s?
     ScriptContext2_Disable();

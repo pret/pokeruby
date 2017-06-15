@@ -9,6 +9,7 @@
 #include "songs.h"
 #include "battle.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "battle_interface.h"
 
 struct UnknownStruct5
@@ -84,7 +85,6 @@ extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
 
 extern int sub_8040D3C();
-extern u8 sub_8090D90();
 extern void load_gfxc_health_bar();
 
 static void sub_8043D5C(struct Sprite *);
@@ -2506,7 +2506,7 @@ static void sub_8045458(u8 a, u8 b)
     if (battle_side_get_owner(r4) != 0)
     {
         u16 species = GetMonData(&gEnemyParty[gUnknown_02024A6A[r4]], MON_DATA_SPECIES);
-        if (sub_8090D90(SpeciesToNationalPokedexNum(species), 1) != 0)
+        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
             r4 = gSprites[a].data5;
             if (b != 0)
