@@ -142,8 +142,6 @@ SECTIONS {
         asm/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
-        src/rom_8094928.o(.text);
-        asm/rom_8094928.o(.text);
         src/battle_party_menu.o(.text);
         asm/pokemon_storage_system.o(.text);
         src/pokemon_storage_system.o(.text);
