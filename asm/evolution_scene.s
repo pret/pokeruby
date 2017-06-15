@@ -1233,13 +1233,13 @@ _08112354:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -1739,13 +1739,13 @@ _081127BE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08112FD0
@@ -3047,13 +3047,13 @@ _08113316:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08113B3A
@@ -3517,7 +3517,7 @@ _08113768:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, _081137D8 @ =gUnknown_08400F8C
 	movs r1, 0x92
 	lsls r1, 3
@@ -3591,7 +3591,7 @@ _08113818:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, _08113874 @ =gUnknown_08400F8C
 	movs r1, 0x92
 	lsls r1, 3

@@ -399,7 +399,7 @@ static u8 StartMenu_PlayerCallback(void)
 //When player selects SAVE
 static u8 StartMenu_SaveCallback(void)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     gCallback_03004AE8 = SaveCallback1;
     return 0;
 }

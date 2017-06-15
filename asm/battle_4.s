@@ -13392,7 +13392,7 @@ sub_8022784: @ 8022784
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _080227D0:
 	ldr r2, _08022824 @ =gUnknown_02024C0C
 	ldr r1, _08022828 @ =gBitTable
@@ -15716,7 +15716,7 @@ sub_8023AD8: @ 8023AD8
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_802BBD4
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -31340,7 +31340,7 @@ _0802B73C:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	movs r4, 0xA
 	cmp r0, 0
@@ -31657,7 +31657,7 @@ sub_802B9E0: @ 802B9E0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802BA2C
@@ -31688,7 +31688,7 @@ _0802BA2C:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrb r0, [r6]
 	adds r2, r0, 0
 	muls r2, r5

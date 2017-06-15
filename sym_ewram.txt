@@ -976,7 +976,7 @@ gUnknown_02039310: @ 2039310
 gUnknown_02039312: @ 2039312
 	.space 0x2
 
-gUnknown_02039314: @ 2039314
+gPcItemMenuOptionOrder: @ 2039314
 	.space 0x4
 
 gUnknown_02039318: @ 2039318

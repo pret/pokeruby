@@ -1774,7 +1774,7 @@ u16 sub_80BF674(u16 species)
     u16 cspecies;
     rspecies = (Random() % (NUM_SPECIES - 1)) + 1;
     cspecies = rspecies;
-    while ((s8)sub_8090D90(SpeciesToNationalPokedexNum(cspecies), 0) != 1 || cspecies == species) {
+    while ((s8)GetNationalPokedexFlag(SpeciesToNationalPokedexNum(cspecies), 0) != 1 || cspecies == species) {
         if (cspecies == SPECIES_BULBASAUR)
             cspecies = NUM_SPECIES - 1;
         else
@@ -2718,7 +2718,7 @@ void sub_80C03A8(u8 showidx) {
 }
 
 void sub_80C03C8(u16 species, u8 showidx) {
-    if (!sub_8090D90(SpeciesToNationalPokedexNum(species), 0)) {
+    if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0) {
         gSaveBlock1.tvShows[showidx].common.var01 = 0;
     }
 }

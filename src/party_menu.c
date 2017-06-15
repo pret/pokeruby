@@ -1286,7 +1286,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 b, TaskFunc c)
 
 void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     sub_806D5A4();
     gTasks[taskId].data[11] = GetMenuCursorPos();
@@ -1295,7 +1295,7 @@ void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 
 void ItemUseMoveMenu_HandleCancel(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     if (gMain.inBattle)
         gTasks[ewram1C000.unk4].func = SetUpBattlePokemonMenu;

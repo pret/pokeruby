@@ -2279,7 +2279,7 @@ _0804279C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080427E8
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
 	ldr r3, _080427DC @ =gLastFieldPokeMenuOpened
@@ -2311,7 +2311,7 @@ _080427E8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08042816
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r0, _0804281C @ =gLastFieldPokeMenuOpened
 	ldr r1, _08042820 @ =gScriptResult
 	strh r4, [r1]

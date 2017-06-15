@@ -238,7 +238,7 @@ extern void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
 extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
 extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
 extern void dp01_battle_side_mark_buffer_for_execution();
-extern u8 sub_8090D90();
+extern u8 GetNationalPokedexFlag();
 extern void sub_800C704(u8, u8, u8);
 extern u8 sub_8018324();
 extern u8 sub_801A02C();
@@ -2021,14 +2021,14 @@ void sub_8011384(void)
                 }
                 if (battle_side_get_owner(gUnknown_02024A60) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
             }
             else
             {
                 if (battle_side_get_owner(gUnknown_02024A60) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
-                    sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
                     dp01_build_cmdbuf_x04_4_4_4(0);
                     dp01_battle_side_mark_buffer_for_execution(gUnknown_02024A60);
                 }
@@ -2183,7 +2183,7 @@ void bc_801362C(void)
         {
             if (battle_side_get_owner(gUnknown_02024A60) == 1
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                sub_8090D90(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
+                GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gUnknown_02024A60].species), 2);
         }
         gUnknown_030042D4 = sub_8011970;
     }

@@ -81,6 +81,6 @@ void RedrawMenuCursor(u8, u8);
 void unref_sub_8072DC0(void);
 void sub_8072DCC(u8);
 void sub_8072DDC(u8);
-void sub_8072DEC(void);
+void HandleDestroyMenuCursors(void);
 
 #endif // GUARD_MENU_H
