@@ -166,6 +166,8 @@ extern const u16 gPokedexMenuSearch_Pal[];
 extern const u8 gTypeNames[][7];
 extern const u8 gPokedexMenu2_Gfx[];
 
+extern u16 NationalPokedexNumToSpecies(u16);
+extern void ShowPokedexAreaScreen(u16 species, u8 *string);
 extern void sub_814AD7C(u8, u8);
 extern void sub_800D74C();
 extern const u16 *species_and_otid_get_pal(u16, u32, u32);
@@ -422,6 +424,7 @@ static const union AnimCmd *const gSpriteAnimTable_83A0520[] =
 {
     gSpriteAnim_83A04CC,
 };
+static void sub_808EF38(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A0524 =
 {
     .tileTag = 4096,
@@ -432,6 +435,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A0524 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808EF38,
 };
+static void sub_808EF8C(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A053C =
 {
     .tileTag = 4096,
@@ -442,6 +446,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A053C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808EF8C,
 };
+static void sub_808F08C(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A0554 =
 {
     .tileTag = 4096,
@@ -452,6 +457,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A0554 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F08C,
 };
+static void sub_808F0B4(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A056C =
 {
     .tileTag = 4096,
@@ -462,6 +468,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A056C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F0B4,
 };
+static void sub_808ED94(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A0584 =
 {
     .tileTag = 4096,
@@ -482,6 +489,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A059C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808ED94,
 };
+static void sub_808F168(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83A05B4 =
 {
     .tileTag = 4096,
@@ -1220,14 +1228,54 @@ static void sub_808DF88(u16 a, u8 b, u8 c, u16 d);
 static u8 sub_808DFE4(u16 num, u8 b, u8 c);
 static void sub_808E090(u8 a, u8 b, u16 c);
 static void sub_808E0CC(u16 a, u16 b);
+static bool8 sub_808E208(u8 a, u8 b, u8 c);
+static u16 sub_808E48C(u16 a, u16 b);
+static void sub_808E6BC(void);
+static u8 sub_808E71C(void);
+static u8 sub_808E82C(void);
+static u16 sub_808E888(u16 a1);
 static u32 sub_808E8C8(u16 a, s16 b, s16 c);
+static void sub_808E978(u8 a);
+static void sub_808EDB8(struct Sprite *sprite);
+static void sub_808EE28(struct Sprite *sprite);
 static u8 sub_808F210(struct PokedexListItem *, u8);
+static bool8 sub_808F250(u8 taskId);
 static u8 sub_808F284(struct PokedexListItem *, u8);
-void sub_8090B8C(u8);
-void sub_8090C28(struct Sprite *);
-s8 GetNationalPokedexFlag(u16, u8);
+static void Task_InitPageScreenMultistep(u8 taskId);
+static void Task_PageScreenProcessInput(u8 taskId);
+static void sub_808F888(u8 taskId);
+static void Task_ClosePageScreen(u8 taskId);
+static void Task_InitAreaScreenMultistep(u8 taskId);
+static void Task_AreaScreenProcessInput(u8 taskId);
+static void sub_808FA00(u8 taskId);
+static void Task_InitCryScreenMultistep(u8 taskId);
+static void Task_CryScreenProcessInput(u8 taskId);
+static void sub_808FFBC(u8 taskId);
+static void sub_8090040(u8 a);
+static void Task_InitSizeScreenMultistep(u8 taskId);
+static void Task_SizeScreenProcessInput(u8 taskId);
+static void sub_8090498(u8 taskId);
+static void sub_80904FC(u16 a);
+static void sub_8090540(u16 a);
+static void sub_8090584(u8 a, u16 b);
+static void sub_8090644(u8 a, u16 b);
+static void sub_8090750(u8);
+static void sub_8090A3C(u8);
+static void sub_8090B8C(u8);
+static void sub_8090C28(struct Sprite *);
+static void sub_8090C68(void);
+static void sub_8091060(u16);
+static void sub_8091154(u16 order, u8, u8);
+static u8 sub_80911C8(u16 num, u8, u8);
+static u8 sub_8091260(u16 num, u8, u8, u8);
+static void sub_8091304(const u8 *name, u8, u8);
+static void sub_8091458(u16 height, u8 i, u8 i1);
+static void sub_8091564(u16 weight, u8 i, u8 i1);
 static void sub_8091738(u16, u16, u16);
-u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
+static void sub_80917CC(u16 i, u16 i1);
+static u16 sub_8091818(u8, u16, u16, u16);
+static u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+static u8 sub_8091A4C(u16 gender, s16, s16, u16);
 static void sub_8091E54(u8);
 static void sub_809204C(u8);
 static void sub_809207C(u8);
@@ -1248,9 +1296,6 @@ static void sub_8092D78(u8);
 static u8 sub_8092E10(u8, u8);
 static void sub_8092EB0(u8);
 static void sub_809308C(u8);
-
-extern u16 NationalPokedexNumToSpecies(u16);
-void ShowPokedexAreaScreen(u16 species, u8 *string);
 
 void ResetPokedex(void)
 {
@@ -2290,7 +2335,7 @@ static void sub_808E0CC(u16 a, u16 b)
     gPokedexView->unk632 = 0;
 }
 
-bool8 sub_808E208(u8 a, u8 b, u8 c)
+static bool8 sub_808E208(u8 a, u8 b, u8 c)
 {
     u16 i;
     u8 foo;
@@ -2330,7 +2375,7 @@ bool8 sub_808E208(u8 a, u8 b, u8 c)
     }
 }
 
-void sub_808E398(u8 a, u16 b)
+static void sub_808E398(u8 a, u16 b)
 {
     u16 unk;
     u8 spriteId;
@@ -2367,14 +2412,15 @@ void sub_808E398(u8 a, u16 b)
     }
 }
 
-u16 sub_808E48C(u16 a, u16 b)
+// Ugly, ugly, ugly. I couldn't get it to match otherwise.
+static u16 sub_808E48C(u16 a, u16 b)
 {
     u8 r3;
     u8 r5;
     u8 i;
     u16 r6;
     u8 r10 = 0;
-    
+
     if (!((gMain.heldKeys & 0x40) && (a > 0)))
     {
         //_0808E4B6
@@ -2447,7 +2493,7 @@ u16 sub_808E48C(u16 a, u16 b)
     return a;
 }
 
-void sub_808E6BC(void)
+static void sub_808E6BC(void)
 {
     u16 i;
 
@@ -2460,7 +2506,7 @@ void sub_808E6BC(void)
     }
 }
 
-u8 sub_808E71C(void)
+static u8 sub_808E71C(void)
 {
     u16 r2;
     u16 r4 = gPokedexView->selectedPokemon;
@@ -2514,7 +2560,7 @@ u8 sub_808E71C(void)
     return 0;
 }
 
-u8 sub_808E82C(void)
+static u8 sub_808E82C(void)
 {
     u16 i;
 
@@ -2529,7 +2575,7 @@ u8 sub_808E82C(void)
     return 0;
 }
 
-u16 sub_808E888(u16 a1)
+static u16 sub_808E888(u16 a1)
 {
     if (a1 >= NATIONAL_DEX_COUNT || gPokedexView->unk0[a1].dexNum == 0xFFFF)
         return 0xFFFF;
@@ -2561,7 +2607,7 @@ static u32 sub_808E8C8(u16 a, s16 b, s16 c)
     return 0xFFFF;
 }
 
-void sub_808E978(u8 a)
+static void sub_808E978(u8 a)
 {
     u8 spriteId;
     u16 r5;
@@ -2571,7 +2617,7 @@ void sub_808E978(u8 a)
 
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 156, 0);
     gSprites[spriteId].data1 = 1;
-    gSprites[spriteId].vFlip = 1;
+    gSprites[spriteId].vFlip = TRUE;
 
     CreateSprite(&gSpriteTemplate_83A0524, 234, 20, 0);
     CreateSprite(&gSpriteTemplate_83A0554, 16, 138, 0);
@@ -2657,18 +2703,18 @@ void sub_808E978(u8 a)
     }
 }
 
-void nullsub_58(struct Sprite *sprite)
+static void nullsub_58(struct Sprite *sprite)
 {
 }
 
-void sub_808ED94(struct Sprite *sprite)
+static void sub_808ED94(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0)
         DestroySprite(sprite);
 }
 
 //Move Pokemon into position for description page
-void sub_808EDB8(struct Sprite *sprite)
+static void sub_808EDB8(struct Sprite *sprite)
 {
     sprite->oam.priority = 0;
     sprite->oam.affineMode = 0;
@@ -2692,7 +2738,7 @@ void sub_808EDB8(struct Sprite *sprite)
     }
 }
 
-void sub_808EE28(struct Sprite *sprite)
+static void sub_808EE28(struct Sprite *sprite)
 {
     u8 data1 = sprite->data1;
 
@@ -2730,7 +2776,7 @@ void sub_808EE28(struct Sprite *sprite)
     }
 }
 
-void sub_808EF38(struct Sprite *sprite)
+static void sub_808EF38(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
         DestroySprite(sprite);
@@ -2738,7 +2784,7 @@ void sub_808EF38(struct Sprite *sprite)
         sprite->pos2.y = gPokedexView->selectedPokemon * 120 / (gPokedexView->pokemonListCount - 1);
 }
 
-void sub_808EF8C(struct Sprite *sprite)
+static void sub_808EF8C(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
     {
@@ -2773,132 +2819,38 @@ void sub_808EF8C(struct Sprite *sprite)
     }
 }
 
-void sub_808F08C(struct Sprite *sprite)
+static void sub_808F08C(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
         DestroySprite(sprite);
 }
 
-#ifdef NONMATCHING
-void sub_808F0B4(struct Sprite *sprite)
+static void sub_808F0B4(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
+    {
         DestroySprite(sprite);
+    }
     else
     {
+        u8 val;
         s16 r3;
+        s16 r0;
 
-        u8 unk = gPokedexView->unk62C + sprite->data1;
-        u16 foo = gSineTable[unk];
-        //u8 unk2 = sprite->data0;
-        //u16 bar = gSineTable[unk + 0x40];
+        val = gPokedexView->unk62C + sprite->data1;
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        SetOamMatrix(sprite->data0, r0, r3, -r3, r0);
 
-        SetOamMatrix(sprite->data0, foo, gSineTable[unk + 0x40], (-(u16)foo) >> 16, gSineTable[unk + 0x40]);
-
-        r3 = gSineTable[sprite->data1 + gPokedexView->unk62C];
-        sprite->pos2.x = gSineTable[sprite->data1 + gPokedexView->unk62C + 0x40] * 5 / 256;
+        val = gPokedexView->unk62C + (sprite->data1 + 0x40);
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        sprite->pos2.x = r0 * 40 / 256;
         sprite->pos2.y = r3 * 40 / 256;
     }
 }
-#else
-__attribute__((naked))
-void sub_808F0B4(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x4\n\
-    adds r6, r0, 0\n\
-    ldr r1, _0808F0D8 @ =gPokedexView\n\
-    ldr r0, [r1]\n\
-    ldr r2, _0808F0DC @ =0x0000064a\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    adds r7, r1, 0\n\
-    cmp r0, 0\n\
-    beq _0808F0E0\n\
-    cmp r0, 0x3\n\
-    beq _0808F0E0\n\
-    adds r0, r6, 0\n\
-    bl DestroySprite\n\
-    b _0808F158\n\
-    .align 2, 0\n\
-_0808F0D8: .4byte gPokedexView\n\
-_0808F0DC: .4byte 0x0000064a\n\
-_0808F0E0:\n\
-    ldr r0, [r7]\n\
-    ldr r5, _0808F160 @ =0x0000062c\n\
-    adds r0, r5\n\
-    ldrb r1, [r0]\n\
-    ldrh r0, [r6, 0x30]\n\
-    adds r1, r0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    ldr r4, _0808F164 @ =gSineTable\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    ldrh r3, [r0]\n\
-    adds r1, 0x40\n\
-    lsls r1, 1\n\
-    adds r1, r4\n\
-    ldrh r0, [r6, 0x2E]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    ldrh r1, [r1]\n\
-    lsls r3, 16\n\
-    lsrs r2, r3, 16\n\
-    negs r3, r3\n\
-    lsrs r3, 16\n\
-    str r1, [sp]\n\
-    bl SetOamMatrix\n\
-    ldr r1, [r7]\n\
-    adds r1, r5\n\
-    ldrh r0, [r6, 0x30]\n\
-    adds r0, 0x40\n\
-    ldrb r1, [r1]\n\
-    adds r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r4\n\
-    ldrh r3, [r1]\n\
-    adds r0, 0x40\n\
-    lsls r0, 1\n\
-    adds r0, r4\n\
-    movs r2, 0\n\
-    ldrsh r1, [r0, r2]\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    cmp r0, 0\n\
-    bge _0808F140\n\
-    adds r0, 0xFF\n\
-_0808F140:\n\
-    asrs r0, 8\n\
-    strh r0, [r6, 0x24]\n\
-    lsls r1, r3, 16\n\
-    asrs r1, 16\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    cmp r0, 0\n\
-    bge _0808F154\n\
-    adds r0, 0xFF\n\
-_0808F154:\n\
-    asrs r0, 8\n\
-    strh r0, [r6, 0x26]\n\
-_0808F158:\n\
-    add sp, 0x4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0808F160: .4byte 0x0000062c\n\
-_0808F164: .4byte gSineTable\n\
-    .syntax divided\n");
-}
-#endif
 
-void sub_808F168(struct Sprite *sprite)
+static void sub_808F168(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
     {
@@ -2936,7 +2888,7 @@ static u8 sub_808F210(struct PokedexListItem *item, u8 b)
     return taskId;
 }
 
-bool8 sub_808F250(u8 taskId)
+static bool8 sub_808F250(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0 && gTasks[taskId].func == Task_PageScreenProcessInput)
         return FALSE;
@@ -2954,7 +2906,7 @@ static u8 sub_808F284(struct PokedexListItem *item, u8 b)
     return b;
 }
 
-void Task_InitPageScreenMultistep(u8 taskId)
+static void Task_InitPageScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -3078,7 +3030,7 @@ void Task_InitPageScreenMultistep(u8 taskId)
     }
 }
 
-void Task_PageScreenProcessInput(u8 taskId)
+static void Task_PageScreenProcessInput(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
     {
@@ -3146,19 +3098,19 @@ void Task_PageScreenProcessInput(u8 taskId)
     }
 }
 
-void sub_808F888(u8 taskId)
+static void sub_808F888(u8 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_InitPageScreenMultistep;
 }
 
-void Task_ClosePageScreen(u8 taskId)
+static void Task_ClosePageScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyTask(taskId);
 }
 
-void Task_InitAreaScreenMultistep(u8 taskId)
+static void Task_InitAreaScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -3191,13 +3143,13 @@ void Task_InitAreaScreenMultistep(u8 taskId)
     }
 }
 
-void Task_AreaScreenProcessInput(u8 taskId)
+static void Task_AreaScreenProcessInput(u8 taskId)
 {
     if (gPokedexView->unk64F != 0)
         gTasks[taskId].func = sub_808FA00;
 }
 
-void sub_808FA00(u8 taskId)
+static void sub_808FA00(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -3214,7 +3166,7 @@ void sub_808FA00(u8 taskId)
     }
 }
 
-void Task_InitCryScreenMultistep(u8 taskId)
+static void Task_InitCryScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -3312,7 +3264,7 @@ void Task_InitCryScreenMultistep(u8 taskId)
     }
 }
 
-void Task_CryScreenProcessInput(u8 taskId)
+static void Task_CryScreenProcessInput(u8 taskId)
 {
     sub_8119F88(0);
 
@@ -3368,7 +3320,7 @@ void Task_CryScreenProcessInput(u8 taskId)
     }
 }
 
-void sub_808FFBC(u8 taskId)
+static void sub_808FFBC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -3389,7 +3341,7 @@ void sub_808FFBC(u8 taskId)
     }
 }
 
-void sub_8090040(u8 a)
+static void sub_8090040(u8 a)
 {
     u16 unk;
 
@@ -3400,7 +3352,7 @@ void sub_8090040(u8 a)
     LoadPalette(&unk, 0x5D, 2);
 }
 
-void Task_InitSizeScreenMultistep(u8 taskId)
+static void Task_InitSizeScreenMultistep(u8 taskId)
 {
     u8 spriteId;
 
@@ -3490,7 +3442,7 @@ void Task_InitSizeScreenMultistep(u8 taskId)
     }
 }
 
-void Task_SizeScreenProcessInput(u8 taskId)
+static void Task_SizeScreenProcessInput(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
     {
@@ -3509,7 +3461,7 @@ void Task_SizeScreenProcessInput(u8 taskId)
     }
 }
 
-void sub_8090498(u8 taskId)
+static void sub_8090498(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -3526,20 +3478,20 @@ void sub_8090498(u8 taskId)
     }
 }
 
-void sub_80904FC(u16 a)
+static void sub_80904FC(u16 a)
 {
     LZ77UnCompVram(gUnknown_08E96ACC, (void *)(VRAM + a * 0x800));
     DmaClear16(3, (void *)(VRAM + a * 0x800 + 0xC0), 0x440);
 }
 
-void sub_8090540(u16 a)
+static void sub_8090540(u16 a)
 {
     LZ77UnCompVram(gUnknown_08E96B58, (void *)(VRAM + a * 0x800));
     DmaClear16(3, (void *)(VRAM + a * 0x800 + 0xC0), 0x440);
 }
 
 #ifdef NONMATCHING
-void sub_8090584(u8 a, u16 b)
+static void sub_8090584(u8 a, u16 b)
 {
     u8 i;   //r1
     u8 j;   //r3
@@ -3579,7 +3531,7 @@ void sub_8090584(u8 a, u16 b)
 }
 #else
 __attribute__((naked))
-void sub_8090584(u8 a, u16 b)
+static void sub_8090584(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -3685,7 +3637,7 @@ _08090640: .4byte 0x06000072\n\
 
 //Nope, can't get this one to match, either.
 #ifdef NONMATCHING
-void sub_8090644(u8 a, u16 b)
+static void sub_8090644(u8 a, u16 b)
 {
     u8 i;
     u8 j;
@@ -3723,7 +3675,7 @@ void sub_8090644(u8 a, u16 b)
 }
 #else
 __attribute__((naked))
-void sub_8090644(u8 a, u16 b)
+static void sub_8090644(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -3846,7 +3798,7 @@ u8 sub_809070C(u16 dexNum, u32 b, u32 c)
     return taskId;
 }
 
-void sub_8090750(u8 taskId)
+static void sub_8090750(u8 taskId)
 {
     u8 spriteId;
     u16 dexNum = gTasks[taskId].data[1];
@@ -3930,7 +3882,7 @@ void sub_8090750(u8 taskId)
     }
 }
 
-void sub_8090A3C(u8 taskId)
+static void sub_8090A3C(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
     {
@@ -3967,7 +3919,7 @@ void sub_8090A3C(u8 taskId)
         LoadPalette(gPokedexMenu2_Pal + 1, 0x51, 14);
 }
 
-void sub_8090B8C(u8 taskId)
+static void sub_8090B8C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -3990,7 +3942,7 @@ void sub_8090B8C(u8 taskId)
     }
 }
 
-void sub_8090C28(struct Sprite *sprite)
+static void sub_8090C28(struct Sprite *sprite)
 {
     if (sprite->pos1.x < 0x78)
         sprite->pos1.x += 2;
@@ -4003,7 +3955,7 @@ void sub_8090C28(struct Sprite *sprite)
         sprite->pos1.y -= 1;
 }
 
-void sub_8090C68(void)
+static void sub_8090C68(void)
 {
     if (gUnknown_0202FFBC->owned)
     {
@@ -4182,7 +4134,7 @@ u16 sub_8090FF4(void)
     return 1;
 }
 
-void sub_8091060(u16 a)
+static void sub_8091060(u16 a)
 {
     if (!(a & 0x100))
     {
@@ -4221,18 +4173,18 @@ void sub_8091060(u16 a)
     }
 }
 
-void sub_8091154(u16 order, u8 b, u8 c)
+static void sub_8091154(u16 order, u8 b, u8 c)
 {
     u8 str[4];
 
-    str[0] = 0xA1 + order / 100;
-    str[1] = 0xA1 + (order % 100) / 10;
-    str[2] = 0xA1 + (order % 100) % 10;
+    str[0] = CHAR_0 + order / 100;
+    str[1] = CHAR_0 + (order % 100) / 10;
+    str[2] = CHAR_0 + (order % 100) % 10;
     str[3] = EOS;
     MenuPrint(str, b, c);
 }
 
-u8 sub_80911C8(u16 num, u8 b, u8 c)
+static u8 sub_80911C8(u16 num, u8 b, u8 c)
 {
     u8 str[11];
     u8 i;
@@ -4255,9 +4207,9 @@ u8 sub_80911C8(u16 num, u8 b, u8 c)
     return i;
 }
 
-u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
+static u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
 {
-    u8 str[40];  // Not exactly sure how long this needs to be
+    u8 str[40];
     u8 *end;
     u8 i;
 
@@ -4280,9 +4232,9 @@ u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
     return i;
 }
 
-void sub_8091304(const u8 *name, u8 left, u8 top)
+static void sub_8091304(const u8 *name, u8 left, u8 top)
 {
-    u8 str[32];  // Not exactly sure how long this needs to be
+    u8 str[32];
     u8 i;
 #if ENGLISH
     u8 j;
@@ -4341,7 +4293,7 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
 #ifdef UNITS_IMPERIAL
 #define CHAR_PRIME (0xB4)
 #define CHAR_DOUBLE_PRIME (0xB2)
-void sub_8091458(u16 height, u8 left, u8 top)
+static void sub_8091458(u16 height, u8 left, u8 top)
 {
     u8 buffer[16];
     u32 inches, feet;
@@ -4374,14 +4326,14 @@ void sub_8091458(u16 height, u8 left, u8 top)
     MenuPrint(buffer, left, top);
 }
 #else
-void sub_8091458(u16 height, u8 left, u8 top)
+static void sub_8091458(u16 height, u8 left, u8 top)
 {
     unref_sub_80913A4(height, left, top);
 }
 #endif
 
 #ifdef UNITS_IMPERIAL
-void sub_8091564(u16 weight, u8 left, u8 top)
+static void sub_8091564(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
     u32 lbs;
@@ -4444,7 +4396,7 @@ void sub_8091564(u16 weight, u8 left, u8 top)
     MenuPrint(buffer, left, top);
 }
 #else
-void sub_8091564(u16 arg0, u8 left, u8 top)
+static void sub_8091564(u16 arg0, u8 left, u8 top)
 {
     unref_sub_80913A4(arg0, left, top);
 }
@@ -4483,7 +4435,7 @@ static void sub_8091738(u16 num, u16 b, u16 c)
     CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
 }
 
-void sub_80917CC(u16 a, u16 b)
+static void sub_80917CC(u16 a, u16 b)
 {
     *(u16 *)(VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
     *(u16 *)(VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
@@ -4491,7 +4443,7 @@ void sub_80917CC(u16 a, u16 b)
     *(u16 *)(VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
 }
 
-u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
+static u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
 {
     switch (a)
     {
@@ -4523,7 +4475,7 @@ static void nullsub_59(struct Sprite *sprite)
 {
 }
 
-void sub_8091878(u16 a, u8 b)
+static void sub_8091878(u16 a, u8 b)
 {
     gUnknown_02024E8C = gUnknown_083B57A4;
     gUnknown_02024E8C.paletteTag = a;
@@ -4531,7 +4483,7 @@ void sub_8091878(u16 a, u8 b)
     gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
 }
 
-void sub_80918B0(u16 a, u8 b)
+static void sub_80918B0(u16 a, u8 b)
 {
     gUnknown_02024E8C = gUnknown_083B57A4;
     gUnknown_02024E8C.paletteTag = a;
@@ -4585,7 +4537,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
     return spriteId;
 }
 
-u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
 {
     u8 spriteId;
 
