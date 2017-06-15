@@ -615,7 +615,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_WHTIE:
@@ -633,7 +633,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > 31)
                 b = 31;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_IN_FROM_BLACK:
@@ -659,7 +659,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_BLACK:
@@ -677,7 +677,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < 0)
                 b = 0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
     }
 

@@ -1,0 +1,8 @@
+//
+// Created by Scott Norton on 6/5/17.
+//
+
+#ifndef POKERUBY_DECORATION_INVENTORY_H
+#define POKERUBY_DECORATION_INVENTORY_H
+
+#endif //POKERUBY_DECORATION_INVENTORY_H

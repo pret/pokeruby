@@ -42,7 +42,7 @@ void LoadWordFromTwoHalfwords(u16 *, u32 *);
 u8 Daycare_CountPokemon(struct BoxPokemon *);
 
 // asm/daycare.o
-void sub_8041324(struct BoxPokemon *, void *);
+void sub_8041324(struct BoxPokemon *, struct RecordMixing_UnknownStruct *);
 void sub_8041790(int i);
 u16 sub_8041870(u16);
 void sub_8041940(void);
@@ -207,9 +207,9 @@ void sub_8083A84(TaskFunc);
 s32 sub_8083BF4(u8 id);
 
 // asm/field_effect.o
-u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
-void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
-u8 CreateBirchSprite(u8, u8, u8);
+u8 CreateTrainerSprite_BirchSpeech(u8, s16, s16, u8, u8 *);
+void LoadTrainerGfx_TrainerCard(u8 gender, u16, u8 *);
+u8 CreateBirchSprite(s16, s16, u8);
 
 // asm/unknown_task.o
 void remove_some_task(void);
