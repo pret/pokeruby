@@ -29,7 +29,7 @@ struct UnkTvStruct
     s8 var0;
 };
 
-extern struct UnknownStruct11 gUnknown_030042E0;
+extern struct Struct30042E0 gUnknown_030042E0;
 extern u8 gUnknown_0300430A[11];
 
 struct OutbreakPokemon
