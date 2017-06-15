@@ -1998,7 +1998,7 @@ static void BattleAICmd_get_item(void)
         index = gEnemyMonIndex;
 
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = unk_2000000[0x160CC + (index * 2)];
+    AI_THINKING_STRUCT->funcResult = ewram[0x160CC + (index * 2)];
 
     gAIScriptPtr += 2;
 }

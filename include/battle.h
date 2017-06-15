@@ -29,16 +29,6 @@
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
-
-// to do: maybe try to reduce the defines needed to match?
-#define BATTLE_STRUCT ((struct BattleStruct *)(unk_2000000))
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
-#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *)(unk_2000000 + 0x16A00))
-#define AI_STACK ((struct AI_Stack *)(unk_2000000 + 0x16C00))
-#define AI_ARRAY_160CC     ((struct SmallItemStruct *)(unk_2000000 + 0x160CC))
-
 enum
 {
     WEATHER_SUN,
@@ -142,11 +132,7 @@ struct UnkBattleStruct4
     /*0x17*/ u8 filler17[0x4];
 };
 
-extern struct UnknownStruct1 unk_2016A00;
-extern struct UnkBattleStruct4 gUnknown_02024CA8[];
-extern struct AI_ThinkingStruct gAIThinkingSpace;
-
-struct UnknownStruct11
+struct Struct30042E0
 {
     u8 unk0;
     u8 unk1;
@@ -170,5 +156,61 @@ struct UnknownStruct11
     u8 filler34[2];
     u8 unk36[10];
 };
+
+struct Struct2017800
+{
+    u8 unk0_0:1;
+    u8 unk0_1:1;
+    u8 unk0_2:1;
+    u8 unk0_3:1;
+    u8 unk0_4:1;
+    u16 unk2;
+};
+
+struct Struct2017810
+{
+    u8 unk0_0:1;
+    u8 unk0_1:1;
+    u8 unk0_2:1;
+    u8 unk0_3:1;
+    u8 unk0_4:1;
+    u8 unk0_5:1;
+    u8 unk0_6:1;
+    u8 unk0_7:1;
+    u8 unk1_0:1;
+    u8 unk2;
+    u8 unk3;
+    //u8 filler2[2];
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 fillerA[2];
+};
+
+struct Struct2017840
+{
+    u16 unk0;
+    u8 filler2[7];
+    u8 unk9_0:1;
+};
+
+extern struct UnknownStruct1 unk_2016A00;
+extern struct UnkBattleStruct4 gUnknown_02024CA8[];
+extern struct AI_ThinkingStruct gAIThinkingSpace;
+
+// TODO: move ewram to global.h
+extern u8 ewram[];
+
+#define BATTLE_STRUCT      ((struct BattleStruct *)     (ewram + 0x00000))
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(ewram + 0x16800))
+#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
+#define AI_STACK           ((struct AI_Stack *)         (ewram + 0x16C00))
+#define AI_ARRAY_160CC     ((struct SmallItemStruct *)  (ewram + 0x160CC))
+#define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
+#define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
+#define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
 
 #endif // GUARD_BATTLE_H

@@ -55,23 +55,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-struct UnknownStruct9
-{
-    u8 unk0;
-    u16 unk2;
-};
-
-struct UnknownStruct10
-{
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 filler1[1];
-    u8 unk2;
-    u8 unk3;
-    u8 filler4[8];
-};
-
 struct UnknownStruct12
 {
     u32 unk0;
@@ -147,8 +130,6 @@ extern u8 ewram[];
 #define ewram17100 ((u32 *)(ewram + 0x17100))
 #define ewram17130 (ewram[0x17130])
 #define ewram17160 (ewram[0x17160])
-#define ewram17800 ((struct UnknownStruct9 *)(ewram + 0x17800))
-#define ewram17810 ((struct UnknownStruct10 *)(ewram + 0x17810))
 #define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
@@ -211,7 +192,7 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gUnknown_030042D0;
 extern void (*gUnknown_030042D4)(void);
-extern struct UnknownStruct11 gUnknown_030042E0;
+extern struct Struct30042E0 gUnknown_030042E0;
 extern u8 gUnknown_03004324;
 extern void (*gUnknown_03004330[])(void);
 extern u8 gUnknown_03004340[];
