@@ -40,7 +40,6 @@ void sub_808E6BC(void);
 u8 sub_808E71C(void);
 u8 sub_808E82C(void);
 u16 sub_808E888(u16 a1);
-u32 sub_808E8C8(u16 a, u16 b, u16 c);
 void sub_808E978(u8 a);
 void nullsub_58(struct Sprite *sprite);
 void sub_808ED94(struct Sprite *sprite);
@@ -96,7 +95,6 @@ void sub_8091738(u16, u16, u16);
 void sub_80917CC(u16 i, u16 i1);
 u16 sub_8091818(u8, u16, u16, u16);
 
-u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
-u8 sub_8091A4C(u16 gender, u16, u16, u16);
+u8 sub_8091A4C(u16 gender, s16, s16, u16);
 
 #endif // GUARD_POKEDEX_H
