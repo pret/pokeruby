@@ -67,7 +67,7 @@ extern u16 (*gUnknown_03000584)(u32);
 extern u8 gUnknown_03000588;
 
 extern u16 word_3004858;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern u8 gUnknown_03004860;
 extern u8 gFieldLinkPlayerCount;
 
@@ -1082,11 +1082,11 @@ void sub_80543DC(u16 (*a1)(u32))
 
 void sub_80543E8(void)
 {
-    if (gUnknown_0300485C)
-        gUnknown_0300485C();
+    if (gFieldCallback)
+        gFieldCallback();
     else
         mapldr_default();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
 }
 
 void CB2_NewGame(void)
@@ -1099,7 +1099,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    gUnknown_0300485C = ExecuteTruckSequence;
+    gFieldCallback = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
     set_callback1(c1_overworld);
@@ -1119,7 +1119,7 @@ void CB2_WhiteOut(void)
         player_avatar_init_params_reset();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        gUnknown_0300485C = sub_8080B60;
+        gFieldCallback = sub_8080B60;
         val = 0;
         do_load_map_stuff_loop(&val);
         SetFieldVBlankCallback();
@@ -1166,7 +1166,7 @@ void sub_8054534(void)
 void sub_8054588(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_0300485C = sub_8080AC4;
+    gFieldCallback = sub_8080AC4;
     SetMainCallback2(c2_80567AC);
 }
 
@@ -1216,7 +1216,7 @@ void sub_805465C(void)
     sub_8054F70();
     set_callback1(sub_8055354);
     sub_80543DC(sub_8055390);
-    gUnknown_0300485C = sub_8080A3C;
+    gFieldCallback = sub_8080A3C;
     ScriptContext1_Init();
     ScriptContext2_Disable();
     c2_exit_to_overworld_2_switch();
@@ -1225,28 +1225,28 @@ void sub_805465C(void)
 void sub_805469C(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_0300485C = atk17_seteffectuser;
+    gFieldCallback = atk17_seteffectuser;
     c2_exit_to_overworld_2_switch();
 }
 
 void sub_80546B8(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_0300485C = sub_80809B0;
+    gFieldCallback = sub_80809B0;
     c2_exit_to_overworld_2_switch();
 }
 
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_0300485C = sub_8080990;
+    gFieldCallback = sub_8080990;
     c2_exit_to_overworld_2_switch();
 }
 
 void sub_80546F0(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_0300485C = sub_8080B60;
+    gFieldCallback = sub_8080B60;
     c2_exit_to_overworld_2_switch();
 }
 
@@ -1280,7 +1280,7 @@ void CB2_ContinueSavedGame(void)
     }
     else
     {
-        gUnknown_0300485C = sub_805470C;
+        gFieldCallback = sub_805470C;
         set_callback1(c1_overworld);
         c2_exit_to_overworld_2_switch();
     }

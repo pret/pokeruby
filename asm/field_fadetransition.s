@@ -617,7 +617,7 @@ sub_8080E88: @ 8080E88
 	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, _08080EB4 @ =gUnknown_0300485C
+	ldr r0, _08080EB4 @ =gFieldCallback
 	ldr r1, _08080EB8 @ =mapldr_default
 	str r1, [r0]
 	ldr r0, _08080EBC @ =task0A_fade_n_map_maybe
@@ -626,7 +626,7 @@ sub_8080E88: @ 8080E88
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080EB4: .4byte gUnknown_0300485C
+_08080EB4: .4byte gFieldCallback
 _08080EB8: .4byte mapldr_default
 _08080EBC: .4byte task0A_fade_n_map_maybe
 	thumb_func_end sub_8080E88
@@ -638,7 +638,7 @@ sp13E_warp_to_last_warp: @ 8080EC0
 	bl sub_8053FF8
 	bl fade_8080918
 	bl PlayRainSoundEffect
-	ldr r0, _08080EE4 @ =gUnknown_0300485C
+	ldr r0, _08080EE4 @ =gFieldCallback
 	ldr r1, _08080EE8 @ =mapldr_default
 	str r1, [r0]
 	ldr r0, _08080EEC @ =task0A_fade_n_map_maybe
@@ -647,7 +647,7 @@ sp13E_warp_to_last_warp: @ 8080EC0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080EE4: .4byte gUnknown_0300485C
+_08080EE4: .4byte gFieldCallback
 _08080EE8: .4byte mapldr_default
 _08080EEC: .4byte task0A_fade_n_map_maybe
 	thumb_func_end sp13E_warp_to_last_warp
@@ -656,7 +656,7 @@ _08080EEC: .4byte task0A_fade_n_map_maybe
 sub_8080EF0: @ 8080EF0
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _08080F08 @ =gUnknown_0300485C
+	ldr r0, _08080F08 @ =gFieldCallback
 	ldr r1, _08080F0C @ =mapldr_default
 	str r1, [r0]
 	ldr r0, _08080F10 @ =sub_808115C
@@ -665,7 +665,7 @@ sub_8080EF0: @ 8080EF0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080F08: .4byte gUnknown_0300485C
+_08080F08: .4byte gFieldCallback
 _08080F0C: .4byte mapldr_default
 _08080F10: .4byte sub_808115C
 	thumb_func_end sub_8080EF0
@@ -674,13 +674,13 @@ _08080F10: .4byte sub_808115C
 sp13F_fall_to_last_warp: @ 8080F14
 	push {lr}
 	bl sp13E_warp_to_last_warp
-	ldr r1, _08080F24 @ =gUnknown_0300485C
+	ldr r1, _08080F24 @ =gFieldCallback
 	ldr r0, _08080F28 @ =sub_8086748
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080F24: .4byte gUnknown_0300485C
+_08080F24: .4byte gFieldCallback
 _08080F28: .4byte sub_8086748
 	thumb_func_end sp13F_fall_to_last_warp
 
@@ -730,14 +730,14 @@ sub_8080F68: @ 8080F68
 	ldr r0, _08080F90 @ =task0A_fade_n_map_maybe
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _08080F94 @ =gUnknown_0300485C
+	ldr r1, _08080F94 @ =gFieldCallback
 	ldr r0, _08080F98 @ =sub_8080B78
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08080F90: .4byte task0A_fade_n_map_maybe
-_08080F94: .4byte gUnknown_0300485C
+_08080F94: .4byte gFieldCallback
 _08080F98: .4byte sub_8080B78
 	thumb_func_end sub_8080F68
 
@@ -749,14 +749,14 @@ sub_8080F9C: @ 8080F9C
 	ldr r0, _08080FB8 @ =task0A_fade_n_map_maybe
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _08080FBC @ =gUnknown_0300485C
+	ldr r1, _08080FBC @ =gFieldCallback
 	ldr r0, _08080FC0 @ =sub_80C791C
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08080FB8: .4byte task0A_fade_n_map_maybe
-_08080FBC: .4byte gUnknown_0300485C
+_08080FBC: .4byte gFieldCallback
 _08080FC0: .4byte sub_80C791C
 	thumb_func_end sub_8080F9C
 
@@ -1204,7 +1204,7 @@ sub_8081334: @ 8081334
 	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, _08081360 @ =gUnknown_0300485C
+	ldr r0, _08081360 @ =gFieldCallback
 	ldr r1, _08081364 @ =sub_8080B60
 	str r1, [r0]
 	ldr r0, _08081368 @ =sub_80812C8
@@ -1213,7 +1213,7 @@ sub_8081334: @ 8081334
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081360: .4byte gUnknown_0300485C
+_08081360: .4byte gFieldCallback
 _08081364: .4byte sub_8080B60
 _08081368: .4byte sub_80812C8
 	thumb_func_end sub_8081334

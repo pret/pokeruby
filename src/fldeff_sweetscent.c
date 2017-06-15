@@ -18,14 +18,14 @@ static void sub_812C118(u8);
 extern u32 gUnknown_0202FF84[];
 
 extern u8 gLastFieldPokeMenuOpened;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
 extern u8 SweetScentNothingHereScript[];
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
-    gUnknown_0300485C = sub_808AB90;
+    gFieldCallback = sub_808AB90;
     gUnknown_03005CE4 = sub_812BFD4;
     return TRUE;
 }

@@ -671,9 +671,9 @@ sub_80BC980: @ 80BC980
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0xC
@@ -840,7 +840,7 @@ sub_80BCAEC: @ 80BCAEC
 	bl DisplayYesNoMenu
 	ldr r1, _080BCB0C @ =gUnknown_083D13E4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -994,9 +994,9 @@ sub_80BCBF8: @ 80BCBF8
 	movs r3, 0x5
 	bl MenuZeroFillWindowRect
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	subs r5, 0x8
 	adds r4, r5
 	ldr r0, _080BCC50 @ =sub_80BC824

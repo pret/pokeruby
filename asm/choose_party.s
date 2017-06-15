@@ -2455,7 +2455,7 @@ sub_8123170: @ 8123170
 	ands r0, r1
 	cmp r0, 0
 	bne _08123194
-	ldr r0, _081231A0 @ =gUnknown_0300485C
+	ldr r0, _081231A0 @ =gFieldCallback
 	ldr r1, _081231A4 @ =sub_81231AC
 	str r1, [r0]
 	ldr r0, _081231A8 @ =c2_exit_to_overworld_2_switch
@@ -2468,7 +2468,7 @@ _08123194:
 	bx r0
 	.align 2, 0
 _0812319C: .4byte gPaletteFade
-_081231A0: .4byte gUnknown_0300485C
+_081231A0: .4byte gFieldCallback
 _081231A4: .4byte sub_81231AC
 _081231A8: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8123170

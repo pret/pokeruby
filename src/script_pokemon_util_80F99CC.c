@@ -18,7 +18,7 @@ extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038694;
 extern u16 gScriptResult;
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 
 extern void OpenPartyMenu(u8, u8);
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
@@ -284,7 +284,7 @@ void sub_80F9EEC(void)
 {
     sub_809D9F0(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, c2_exit_to_overworld_2_switch, 0);
     unk_2018000.unk8 = 3;
-    gUnknown_0300485C = sub_8080990;
+    gFieldCallback = sub_8080990;
 }
 
 void sub_80F9F3C(void) // count pokemon moves

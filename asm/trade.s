@@ -12051,7 +12051,7 @@ sub_804E1A0: @ 804E1A0
 	bne _0804E1C4
 	ldr r0, _0804E1D0 @ =sub_804B790
 	bl SetMainCallback2
-	ldr r1, _0804E1D4 @ =gUnknown_0300485C
+	ldr r1, _0804E1D4 @ =gFieldCallback
 	ldr r0, _0804E1D8 @ =sub_8080990
 	str r0, [r1]
 	adds r0, r4, 0
@@ -12063,7 +12063,7 @@ _0804E1C4:
 	.align 2, 0
 _0804E1CC: .4byte gPaletteFade
 _0804E1D0: .4byte sub_804B790
-_0804E1D4: .4byte gUnknown_0300485C
+_0804E1D4: .4byte gFieldCallback
 _0804E1D8: .4byte sub_8080990
 	thumb_func_end sub_804E1A0
 

@@ -5585,7 +5585,7 @@ sub_80ADFD8: @ 80ADFD8
 	bne _080ADFFC
 	adds r0, r2, 0
 	bl DestroyTask
-	ldr r0, _080AE004 @ =gUnknown_0300485C
+	ldr r0, _080AE004 @ =gFieldCallback
 	ldr r1, _080AE008 @ =sub_80AE010
 	str r1, [r0]
 	ldr r0, _080AE00C @ =c2_exit_to_overworld_2_switch
@@ -5595,7 +5595,7 @@ _080ADFFC:
 	bx r0
 	.align 2, 0
 _080AE000: .4byte gPaletteFade
-_080AE004: .4byte gUnknown_0300485C
+_080AE004: .4byte gFieldCallback
 _080AE008: .4byte sub_80AE010
 _080AE00C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80ADFD8

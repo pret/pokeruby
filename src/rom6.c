@@ -14,7 +14,7 @@
 extern u16 gScriptLastTalked;
 extern u32 gUnknown_0202FF84[];
 extern struct MapPosition gUnknown_0203923C;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
@@ -122,7 +122,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 {
     if (npc_before_player_of_type(0x56) == TRUE)
     {
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_810B53C;
         return TRUE;
     }
@@ -159,7 +159,7 @@ int SetUpFieldMove_Dig(void)
 {
     if (sub_80CA1C8() == TRUE)
     {
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_810B5D8;
         return TRUE;
     }

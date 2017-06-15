@@ -1171,7 +1171,7 @@ sub_80961A8: @ 80961A8
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x5]
 	strb r0, [r1]
-	ldr r1, _080961CC @ =gUnknown_0300485C
+	ldr r1, _080961CC @ =gFieldCallback
 	ldr r0, _080961D0 @ =sub_8096130
 	str r0, [r1]
 	ldr r0, _080961D4 @ =c2_exit_to_overworld_2_switch
@@ -1181,7 +1181,7 @@ sub_80961A8: @ 80961A8
 	.align 2, 0
 _080961C4: .4byte gUnknown_02038474
 _080961C8: .4byte gUnknown_083B6DB4
-_080961CC: .4byte gUnknown_0300485C
+_080961CC: .4byte gFieldCallback
 _080961D0: .4byte sub_8096130
 _080961D4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80961A8

@@ -250,7 +250,7 @@ void sub_80BBA48(u8 taskid)
             gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
         sub_80BBA14();
         warp_in();
-        gUnknown_0300485C = sub_8080990;
+        gFieldCallback = sub_8080990;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskid);
         break;
@@ -299,7 +299,7 @@ void sub_80BBBEC(u8 taskid)
         idx = 4 * (gUnknown_020387DC / 10);
         warp1_set(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
         warp_in();
-        gUnknown_0300485C = sub_80BBB90;
+        gFieldCallback = sub_80BBB90;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskid);
     }
@@ -793,7 +793,7 @@ void sub_80BC074(u8 taskid)
     case 2:
         copy_saved_warp2_bank_and_enter_x_to_warp1(0x7E);
         warp_in();
-        gUnknown_0300485C = mapldr_default;
+        gFieldCallback = mapldr_default;
         SetMainCallback2(CB2_LoadMap);
         ScriptContext2_Disable();
         DestroyTask(taskid);
