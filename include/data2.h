@@ -29,7 +29,7 @@ extern const union AnimCmd *const *const gUnknown_081EC2A4[];
 extern const union AnimCmd *const *const gUnknown_081ECACC[];
 extern struct MonCoords gTrainerBackPicCoords[];
 extern struct SpriteSheet gTrainerBackPicTable[];
-extern struct SpritePalette gTrainerBackPicPaletteTable[];
+extern const struct SpritePalette gTrainerBackPicPaletteTable[];
 extern u8 gEnemyMonElevation[];
 extern const u8 gTrainerClassNames[][13];
 extern const struct Trainer gTrainers[];
@@ -40,7 +40,7 @@ extern const u8 gUnknown_081F96C8[];
 extern struct SpriteSheet gUnknown_081FAEA4;
 extern struct SpritePalette gUnknown_081FAEAC;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF0C;
-extern void *gUnknown_081FAF4C[];
+extern void *const gUnknown_081FAF4C[];
 extern struct BattleMove gBattleMoves[];
 
 #endif // GUARD_DATA2_H
