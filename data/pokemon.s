@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FD070
-	.include "data/nature_stat_table.inc"
-
 @ 81FD0F0
 	.include "data/tm_hm_learnsets.inc"
 
