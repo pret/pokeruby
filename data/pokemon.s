@@ -3,12 +3,6 @@
 
 	.section .rodata
 
-@ 81FDDD0
-	.include "data/trainer_class_index_tables.inc"
-
-@ 81FDE6A
-	.include "data/cry_id_table.inc"
-
 @ 81FDF78
 	.include "data/experience_tables/tables.inc"
 
