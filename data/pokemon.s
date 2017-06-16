@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FDF78
-	.include "data/experience_tables/tables.inc"
-
 @ 81FEC18
 	.include "data/base_stats.inc"
 
