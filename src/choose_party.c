@@ -639,7 +639,7 @@ bool8 sub_8122854(void)
 void sub_81228E8(u8 a)
 {
     u8 i;
-    
+
     for (i = 0; i < 3; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
@@ -655,13 +655,13 @@ void sub_81228E8(u8 a)
 void sub_8122950(u8 a)
 {
     u8 i;
-    
+
     for (i = 0; i < 3; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
         {
             u16 item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            
+
             CreateHeldItemIcon_806DCD4(a, i, item);
         }
         if (gUnknown_02023A00[i].species != 0)
@@ -672,13 +672,13 @@ void sub_8122950(u8 a)
 void sub_81229B8(void)
 {
     u8 i;
-    
+
     for (i = 0; i < 3; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
         {
             u8 status;
-            
+
             PartyMenuPrintHP(i, 3, &gPlayerParty[i]);
             status = GetMonStatusAndPokerus(&gPlayerParty[i]);
             if (status != 0 && status != 6)
