@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FC1E0
-	.include "data/species_id_conversion_tables.inc"
-
 @ 81FCB84
 	.include "data/spinda_spot_graphics.inc"
 
