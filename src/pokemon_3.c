@@ -1255,7 +1255,7 @@ bool8 IsHMMove2(u16 move)
 
 bool8 sub_8040A3C(u16 species)
 {
-    return gBaseStats[species].bodyColor >> 7; // XXX: should this be a bitfield instead?
+    return gBaseStats[species].unk19_7;
 }
 
 s8 sub_8040A54(struct Pokemon *mon, u8 a2)

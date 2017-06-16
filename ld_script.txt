@@ -138,7 +138,6 @@ SECTIONS {
         asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
-        asm/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         src/battle_party_menu.o(.text);
@@ -388,7 +387,7 @@ SECTIONS {
         src/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
-        data/pokedex.o(.rodata);
+        src/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         src/battle_party_menu.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
