@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FD0F0
-	.include "data/tm_hm_learnsets.inc"
-
 @ 81FDDD0
 	.include "data/trainer_class_index_tables.inc"
 
