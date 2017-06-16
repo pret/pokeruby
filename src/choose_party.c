@@ -10,10 +10,25 @@
 #include "task.h"
 #include "text.h"
 
+struct UnknownPokemonStruct2
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 extern u8 gSelectedOrderFromParty[];
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
+extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
 
@@ -44,6 +59,18 @@ extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern void sub_806C890();
 extern void sub_806D5A4();
+extern void sub_806B908(void);
+extern void CreateMonIcon_806D99C(int, u8, int, struct UnknownPokemonStruct2 *);
+extern void sub_806D50C(int, u8);
+extern void CreatePartyMenuMonIcon();
+extern void CreateHeldItemIcon_806DCD4(int, u8, int);
+extern u8 GetMonStatusAndPokerus();
+extern void PartyMenuPrintHP();
+extern void PartyMenuPutStatusTilemap(int, int, u8);
+extern void PartyMenuPrintLevel();
+extern void PartyMenuPutNicknameTilemap();
+extern void PrintPartyMenuMonNickname();
+extern void PartyMenuDrawHPBar();
 
 void sub_8121E58(void);
 bool8 sub_8122030(struct Pokemon *);
@@ -52,6 +79,9 @@ void sub_8122450(u8);
 void sub_81224A8(u8);
 void sub_8122728(u8);
 void sub_8122838(u8);
+void sub_81228E8(u8);
+void sub_8122950(u8);
+void sub_81229B8(void);
 
 void sub_8121E10(void)
 {
@@ -74,9 +104,6 @@ void sub_8121E58(void)
     for (i = 0; i < 3; i++)
         gSelectedOrderFromParty[i] = 0;
 }
-
-//0x99 << 2 = 0x264
-//0x98 << 2 = 0x260
 
 bool8 sub_8121E78(void)
 {
@@ -580,4 +607,87 @@ void sub_8122838(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81227FC(taskId);
+}
+
+bool8 sub_8122854(void)
+{
+    switch (ewram1B000_alt.unk264)
+    {
+    case 0:
+        sub_81228E8(ewram1B000_alt.unk260);
+        ewram1B000_alt.unk264++;
+        break;
+    case 1:
+        LoadHeldItemIconGraphics();
+        ewram1B000_alt.unk264++;
+        break;
+    case 2:
+        sub_8122950(ewram1B000_alt.unk260);
+        ewram1B000_alt.unk264++;
+        break;
+    case 3:
+        sub_81229B8();
+        ewram1B000_alt.unk264++;
+        break;
+    case 4:
+        sub_806B908();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_81228E8(u8 a)
+{
+    u8 i;
+    
+    for (i = 0; i < 3; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
+            CreatePartyMenuMonIcon(a, i, 3, &gPlayerParty[i]);
+        if (gUnknown_02023A00[i].species != 0)
+        {
+            CreateMonIcon_806D99C(a, i + 3, 3, &gUnknown_02023A00[i]);
+            sub_806D50C(a, i + 3);
+        }
+    }
+}
+
+void sub_8122950(u8 a)
+{
+    u8 i;
+    
+    for (i = 0; i < 3; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
+        {
+            u16 item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            
+            CreateHeldItemIcon_806DCD4(a, i, item);
+        }
+        if (gUnknown_02023A00[i].species != 0)
+            CreateHeldItemIcon_806DCD4(a, i + 3, gUnknown_02023A00[i].heldItem);
+    }
+}
+
+void sub_81229B8(void)
+{
+    u8 i;
+    
+    for (i = 0; i < 3; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
+        {
+            u8 status;
+            
+            PartyMenuPrintHP(i, 3, &gPlayerParty[i]);
+            status = GetMonStatusAndPokerus(&gPlayerParty[i]);
+            if (status != 0 && status != 6)
+                PartyMenuPutStatusTilemap(i, 3, status - 1);
+            else
+                PartyMenuPrintLevel(i, 3, &gPlayerParty[i]);
+            PartyMenuPutNicknameTilemap(i, 3, &gPlayerParty[i]);
+            PrintPartyMenuMonNickname(i, 3, &gPlayerParty[i]);
+            PartyMenuDrawHPBar(i, 3, &gPlayerParty[i]);
+        }
+    }
 }
