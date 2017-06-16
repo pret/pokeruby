@@ -4,6 +4,7 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "songs.h"
 #include "sound.h"
@@ -12,28 +13,7 @@
 #include "task.h"
 #include "text.h"
 
-#define DATA_COUNT (6)
-
 extern u8 ewram[];
-
-struct Unk201B000
-{
-    //u8 filler0[0x260];
-    struct Pokemon unk0[6];
-    u8 filler258[1];
-    u8 unk259;
-    u8 filler25A[6];
-    u8 unk260;
-    u8 unk261;
-    u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];  // This may be a union
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
-};
-
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
 extern u8 IsLinkDoubleBattle(void);
@@ -61,7 +41,7 @@ extern void sub_806C994();
 extern void sub_806BF74();
 extern void sub_806AEDC(void);
 extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
+extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
@@ -589,7 +569,7 @@ static void Task_8095330(u8 taskId)
     }
 }
 
-static void Task_809535C(u8 taskId)
+static void Task_809535C(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
     sub_806AF4C(1, 0xFF, SetUpBattlePokemonMenu, 5);

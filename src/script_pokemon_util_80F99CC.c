@@ -2,6 +2,7 @@
 #include "asm.h"
 #include "battle_party_menu.h"
 #include "data2.h"
+#include "party_menu.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "rom4.h"
@@ -11,6 +12,8 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+
+
 
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;

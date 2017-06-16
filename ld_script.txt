@@ -231,6 +231,7 @@ SECTIONS {
         asm/battle_transition.o(.text);
         src/battle_811DA74.o(.text);
         asm/battle_message.o(.text);
+        src/choose_party.o(.text);
         asm/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
@@ -388,6 +389,7 @@ SECTIONS {
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
+        src/trainer_card.o(.rodata);
         data/trainer_card.o(.rodata);
         src/battle_party_menu.o(.rodata);
         data/pokemon_storage_system.o(.rodata);

@@ -15,27 +15,13 @@
 #include "item.h"
 #include "battle_interface.h"
 #include "species.h"
-
-#define DATA_COUNT (6)
+#include "party_menu.h"
 
 struct Unk2001000
 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
-};
-
-struct Unk201B000
-{
-    u8 filler0[0x260];
-    u8 unk260;
-    u8 unk261;
-    u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];  // This may be a union
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
 };
 
 struct Unk201C000
@@ -66,7 +52,6 @@ struct UnknownStruct5
 
 extern u8 ewram[];
 #define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
 
