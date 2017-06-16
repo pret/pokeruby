@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FCB84
-	.include "data/spinda_spot_graphics.inc"
-
 @ 81FCC14
 	.include "data/item_effects.inc"
 
