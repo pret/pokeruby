@@ -28,7 +28,7 @@
 #include "vars.h"
 
 extern void (* gUnknown_03005D00)(u8);
-extern void (* gUnknown_0300485C)(void);
+extern void (* gFieldCallback)(void);
 extern void (* gUnknown_03004AE4)(u8);
 
 extern u8 gUnknown_02038561;
@@ -150,7 +150,7 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 1)
     {
-        gUnknown_0300485C = (void *)ExecuteItemUseFromBlackPalette;
+        gFieldCallback = (void *)ExecuteItemUseFromBlackPalette;
         ItemMenu_ConfirmNormalFade(taskId);
     }
     else
@@ -772,7 +772,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     }
     else
     {
-        gUnknown_0300485C = (void *)sub_8080E28;
+        gFieldCallback = (void *)sub_8080E28;
         sub_810BA7C(1);
         ItemMenu_ConfirmComplexFade(taskId);
     }
@@ -825,7 +825,7 @@ void sub_80C9C7C(u8 taskId)
     if(IsPlayerFacingPlantedBerryTree() == TRUE)
     {
         gUnknown_03005D00 = sub_80C9D00;
-        gUnknown_0300485C = ExecuteItemUseFromBlackPalette;
+        gFieldCallback = ExecuteItemUseFromBlackPalette;
         gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
         gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
@@ -944,7 +944,7 @@ void sub_80C9F80(u8 var)
 {
     DisplayYesNoMenu(7, 7, 1);
     sub_80A3FA0(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
-    sub_80F914C(var, &gUnknown_083D61F4);
+    DoYesNoFuncWithChoice(var, &gUnknown_083D61F4);
 }
 
 void sub_80C9FC0(u8 var)

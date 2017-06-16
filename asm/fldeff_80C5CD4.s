@@ -814,7 +814,7 @@ SetUpFieldMove_SecretPower: @ 80C62C4
 	cmp r0, 0x1
 	bne _080C6330
 	bl sub_80C6264
-	ldr r1, _080C6320 @ =gUnknown_0300485C
+	ldr r1, _080C6320 @ =gFieldCallback
 	ldr r0, _080C6324 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6328 @ =gUnknown_03005CE4
@@ -823,7 +823,7 @@ SetUpFieldMove_SecretPower: @ 80C62C4
 	.align 2, 0
 _080C6318: .4byte gScriptResult
 _080C631C: .4byte gUnknown_0203923C
-_080C6320: .4byte gUnknown_0300485C
+_080C6320: .4byte gFieldCallback
 _080C6324: .4byte sub_808AB90
 _080C6328: .4byte gUnknown_03005CE4
 _080C632C: .4byte sub_80C639C
@@ -835,14 +835,14 @@ _080C6330:
 	cmp r0, 0x1
 	bne _080C6360
 	bl sub_80C6264
-	ldr r1, _080C6350 @ =gUnknown_0300485C
+	ldr r1, _080C6350 @ =gFieldCallback
 	ldr r0, _080C6354 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6358 @ =gUnknown_03005CE4
 	ldr r0, _080C635C @ =sub_80C64A8
 	b _080C6380
 	.align 2, 0
-_080C6350: .4byte gUnknown_0300485C
+_080C6350: .4byte gFieldCallback
 _080C6354: .4byte sub_808AB90
 _080C6358: .4byte gUnknown_03005CE4
 _080C635C: .4byte sub_80C64A8
@@ -858,7 +858,7 @@ _080C636E:
 	b _080C6384
 _080C6372:
 	bl sub_80C6264
-	ldr r1, _080C638C @ =gUnknown_0300485C
+	ldr r1, _080C638C @ =gFieldCallback
 	ldr r0, _080C6390 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6394 @ =gUnknown_03005CE4
@@ -871,7 +871,7 @@ _080C6384:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C638C: .4byte gUnknown_0300485C
+_080C638C: .4byte gFieldCallback
 _080C6390: .4byte sub_808AB90
 _080C6394: .4byte gUnknown_03005CE4
 _080C6398: .4byte sub_80C660C

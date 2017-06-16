@@ -262,7 +262,7 @@ extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
 extern u8 gUnknown_02039234;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern const struct YesNoFuncTable gUnknown_083EC96C[];
 extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 

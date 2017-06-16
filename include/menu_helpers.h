@@ -7,6 +7,6 @@ struct YesNoFuncTable
     void (*noFunc)(u8);
 };
 
-void sub_80F914C(u8, const struct YesNoFuncTable *);
+void DoYesNoFuncWithChoice(u8, const struct YesNoFuncTable *);
 
 #endif // GUARD_MENU_HELPERS_H

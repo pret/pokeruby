@@ -18,7 +18,7 @@ SetUpFieldMove_Flash: @ 810CBB4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810CBF4
-	ldr r1, _0810CBE4 @ =gUnknown_0300485C
+	ldr r1, _0810CBE4 @ =gFieldCallback
 	ldr r0, _0810CBE8 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0810CBEC @ =gUnknown_03005CE4
@@ -29,7 +29,7 @@ SetUpFieldMove_Flash: @ 810CBB4
 	.align 2, 0
 _0810CBDC: .4byte gMapHeader
 _0810CBE0: .4byte 0x00000828
-_0810CBE4: .4byte gUnknown_0300485C
+_0810CBE4: .4byte gFieldCallback
 _0810CBE8: .4byte sub_808AB90
 _0810CBEC: .4byte gUnknown_03005CE4
 _0810CBF0: .4byte sub_810CBFC

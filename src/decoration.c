@@ -3168,7 +3168,7 @@ void sub_8100038(u8 taskId)
 void sub_81000A0(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC95C);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC95C);
 }
 
 void sub_81000C4(u8 taskId)
@@ -3226,7 +3226,7 @@ void sub_8100174(u8 taskId)
 void sub_8100248(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC964);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC964);
 }
 
 void sub_810026C(u8 taskId)
@@ -3257,7 +3257,7 @@ void c1_overworld_prev_quest(u8 taskId)
         case 1:
             sub_81016F4();
             FreeSpritePaletteByTag(0xbb8);
-            gUnknown_0300485C = &sub_8100364;
+            gFieldCallback = &sub_8100364;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
             break;
@@ -4047,7 +4047,7 @@ void sub_8101460(u8 taskId)
 void sub_8101518(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC9CC);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC9CC);
 }
 
 void sub_810153C(u8 taskId)
@@ -4060,7 +4060,7 @@ void sub_810153C(u8 taskId)
 void sub_810156C(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC9D4);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC9D4);
 }
 
 void sub_8101590(u8 taskId)
@@ -4089,7 +4089,7 @@ void sub_81015E0(u8 taskId)
             break;
         case 1:
             sub_81016F4();
-            gUnknown_0300485C = sub_8101678;
+            gFieldCallback = sub_8101678;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
             break;
@@ -4184,7 +4184,7 @@ void sub_81017A0(u8 taskId)
 void sub_8101824(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083ECAA0);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083ECAA0);
 }
 
 void sub_8101848(u8 taskId)

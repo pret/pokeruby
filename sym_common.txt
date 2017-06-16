@@ -145,7 +145,7 @@ gUnknown_03004854: @ 3004854
 word_3004858: @ 3004858
 	.space 0x4
 
-gUnknown_0300485C: @ 300485C
+gFieldCallback: @ 300485C
 	.space 0x4
 
 gUnknown_03004860: @ 3004860

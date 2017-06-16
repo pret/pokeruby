@@ -31,7 +31,7 @@
 
 extern u16 gScriptResult;
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 
 extern struct Pokemon gEnemyParty[];
 extern struct Pokemon gPlayerParty[];
@@ -580,7 +580,7 @@ void HandleWildBattleEnd(void)
     else
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
-        gUnknown_0300485C = sub_8080E44;
+        gFieldCallback = sub_8080E44;
     }
 }
 

@@ -215,7 +215,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	releaseall
 	end
 
-gUnknown_08152C75:: @ 8152C75
+gMayHouse_TurnPCOff:: @ 8152C75
 	setvar 0x8004, 2
 	playsfx SE_PC_OFF
 	special 215

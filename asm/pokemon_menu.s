@@ -2215,7 +2215,7 @@ SetUpFieldMove_Surf: @ 808AC48
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AC84
-	ldr r1, _0808AC74 @ =gUnknown_0300485C
+	ldr r1, _0808AC74 @ =gFieldCallback
 	ldr r0, _0808AC78 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808AC7C @ =gUnknown_03005CE4
@@ -2224,7 +2224,7 @@ SetUpFieldMove_Surf: @ 808AC48
 	movs r0, 0x1
 	b _0808AC86
 	.align 2, 0
-_0808AC74: .4byte gUnknown_0300485C
+_0808AC74: .4byte gFieldCallback
 _0808AC78: .4byte sub_808AB90
 _0808AC7C: .4byte gUnknown_03005CE4
 _0808AC80: .4byte sub_808AC2C
@@ -2258,14 +2258,14 @@ SetUpFieldMove_Fly: @ 808ACA8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808ACD0
-	ldr r1, _0808ACC0 @ =gUnknown_0300485C
+	ldr r1, _0808ACC0 @ =gFieldCallback
 	ldr r0, _0808ACC4 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808ACC8 @ =gUnknown_03005CE4
 	ldr r0, _0808ACCC @ =DoBrailleFlyEffect
 	b _0808ACF2
 	.align 2, 0
-_0808ACC0: .4byte gUnknown_0300485C
+_0808ACC0: .4byte gFieldCallback
 _0808ACC4: .4byte sub_808AB90
 _0808ACC8: .4byte gUnknown_03005CE4
 _0808ACCC: .4byte DoBrailleFlyEffect
@@ -2282,7 +2282,7 @@ _0808ACD0:
 	.align 2, 0
 _0808ACE4: .4byte gMapHeader
 _0808ACE8:
-	ldr r1, _0808ACFC @ =gUnknown_0300485C
+	ldr r1, _0808ACFC @ =gFieldCallback
 	ldr r0, _0808AD00 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808AD04 @ =gUnknown_03005CE4
@@ -2294,7 +2294,7 @@ _0808ACF6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808ACFC: .4byte gUnknown_0300485C
+_0808ACFC: .4byte gFieldCallback
 _0808AD00: .4byte sub_808AB90
 _0808AD04: .4byte gUnknown_03005CE4
 _0808AD08: .4byte sub_808AC8C
@@ -2411,7 +2411,7 @@ SetUpFieldMove_Dive: @ 808ADC8
 	.align 2, 0
 _0808ADE0: .4byte gUnknown_0202FF84
 _0808ADE4:
-	ldr r1, _0808ADF8 @ =gUnknown_0300485C
+	ldr r1, _0808ADF8 @ =gFieldCallback
 	ldr r0, _0808ADFC @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808AE00 @ =gUnknown_03005CE4
@@ -2422,7 +2422,7 @@ _0808ADF2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808ADF8: .4byte gUnknown_0300485C
+_0808ADF8: .4byte gFieldCallback
 _0808ADFC: .4byte sub_808AB90
 _0808AE00: .4byte gUnknown_03005CE4
 _0808AE04: .4byte sub_808ADAC
@@ -2471,7 +2471,7 @@ SetUpFieldMove_Waterfall: @ 808AE24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AE80
-	ldr r1, _0808AE70 @ =gUnknown_0300485C
+	ldr r1, _0808AE70 @ =gFieldCallback
 	ldr r0, _0808AE74 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808AE78 @ =gUnknown_03005CE4
@@ -2480,7 +2480,7 @@ SetUpFieldMove_Waterfall: @ 808AE24
 	movs r0, 0x1
 	b _0808AE82
 	.align 2, 0
-_0808AE70: .4byte gUnknown_0300485C
+_0808AE70: .4byte gFieldCallback
 _0808AE74: .4byte sub_808AB90
 _0808AE78: .4byte gUnknown_03005CE4
 _0808AE7C: .4byte sub_808AE08
@@ -2997,7 +2997,7 @@ sub_808B288: @ 808B288
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B2A6
-	ldr r0, _0808B2B0 @ =sub_813B6F8
+	ldr r0, _0808B2B0 @ =Mailbox_ReturnToMailListAfterDeposit
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -3007,7 +3007,7 @@ _0808B2A6:
 	bx r0
 	.align 2, 0
 _0808B2AC: .4byte gPaletteFade
-_0808B2B0: .4byte sub_813B6F8
+_0808B2B0: .4byte Mailbox_ReturnToMailListAfterDeposit
 	thumb_func_end sub_808B288
 
 	thumb_func_start sub_808B2B4

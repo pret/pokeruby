@@ -7,7 +7,7 @@
 #include "task.h"
 
 extern void sub_81428CC(void);
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 
 static void ReshowPCMenuAfterHallOfFamePC(void);
 static void Task_WaitForPaletteFade(u8);
@@ -21,7 +21,7 @@ void AccessHallOfFamePC(void)
 void ReturnFromHallOfFamePC(void)
 {
     SetMainCallback2(c2_exit_to_overworld_2_switch);
-    gUnknown_0300485C = ReshowPCMenuAfterHallOfFamePC;
+    gFieldCallback = ReshowPCMenuAfterHallOfFamePC;
 }
 
 static void ReshowPCMenuAfterHallOfFamePC(void)

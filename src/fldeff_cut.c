@@ -16,7 +16,7 @@
 
 extern u8 gCutGrassSpriteArray[8]; // seems to be an array of 8 sprite IDs
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
 extern struct SpriteTemplate gSpriteTemplate_CutGrass;
@@ -48,7 +48,7 @@ bool8 SetUpFieldMove_Cut(void)
 
     if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
     {
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_80A2634;
         return TRUE;
     }
@@ -67,7 +67,7 @@ bool8 SetUpFieldMove_Cut(void)
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                     || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
-                        gUnknown_0300485C = sub_808AB90;
+                        gFieldCallback = sub_808AB90;
                         gUnknown_03005CE4 = sub_80A25E8;
                         return TRUE;
                     }

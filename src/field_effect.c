@@ -1176,7 +1176,7 @@ void c3_080843F8(u8);
 void sub_80865BC(void)
 {
     SetMainCallback2(c2_exit_to_overworld_2_switch);
-    gUnknown_0300485C = mapldr_080842E8;
+    gFieldCallback = mapldr_080842E8;
 }
 
 void mapldr_080842E8(void)
@@ -1185,7 +1185,7 @@ void mapldr_080842E8(void)
     CreateTask(task00_8084310, 0);
     ScriptContext2_Enable();
     FreezeMapObjects();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
 }
 
 void task00_8084310(u8 taskId)
@@ -1211,7 +1211,7 @@ void task00_8084310(u8 taskId)
         flag_var_implications_of_teleport_();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
-        gUnknown_0300485C = mapldr_08084390;
+        gFieldCallback = mapldr_08084390;
         DestroyTask(taskId);
     }
 }
@@ -1228,7 +1228,7 @@ void mapldr_08084390(void)
     }
     ScriptContext2_Enable();
     FreezeMapObjects();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
 }
 
 void c3_080843F8(u8 taskId)
@@ -1264,7 +1264,7 @@ void sub_8086748(void)
     ScriptContext2_Enable();
     FreezeMapObjects();
     CreateTask(sub_8086774, 0);
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
 }
 
 void sub_8086774(u8 taskId)
@@ -1520,7 +1520,7 @@ void sub_8086C40(void)
     {
         sub_80B483C();
         warp_in();
-        gUnknown_0300485C = sub_8086C94;
+        gFieldCallback = sub_8086C94;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_8086A68));
     }
@@ -1532,7 +1532,7 @@ void sub_8086C94(void)
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     CreateTask(sub_8086CBC, 0);
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
 }
 
 void sub_8086CBC(u8 taskId)
@@ -1881,7 +1881,7 @@ bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite 
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
         warp_in();
-        gUnknown_0300485C = mapldr_080851BC;
+        gFieldCallback = mapldr_080851BC;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80871D0));
     }
@@ -1896,7 +1896,7 @@ void mapldr_080851BC(void)
     sub_8053E90();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
     CreateTask(sub_8087470, 0);
 }
 
@@ -2049,7 +2049,7 @@ bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite 
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
         warp_in();
-        gUnknown_0300485C = sub_8086748;
+        gFieldCallback = sub_8086748;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_808766C));
     }
@@ -2111,7 +2111,7 @@ void sub_8087914(struct Task *task)
             FieldObjectSetDirection(mapObject, task->data[15]);
             sub_8053678();
             warp_in();
-            gUnknown_0300485C = mapldr_080859D4;
+            gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(FindTaskIdByFunc(sub_80878C4));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
@@ -2134,7 +2134,7 @@ void mapldr_080859D4(void)
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     FreezeMapObjects();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
     CreateTask(sub_8087A74, 0);
 }
@@ -2265,7 +2265,7 @@ void sub_8087D78(struct Task *task)
         sub_8053570();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
-        gUnknown_0300485C = mapldr_08085D88;
+        gFieldCallback = mapldr_08085D88;
         DestroyTask(FindTaskIdByFunc(sub_8087BBC));
     }
 }
@@ -2278,7 +2278,7 @@ void mapldr_08085D88(void)
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     FreezeMapObjects();
-    gUnknown_0300485C = NULL;
+    gFieldCallback = NULL;
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
     CameraObjectReset2();
     CreateTask(sub_8087E1C, 0);

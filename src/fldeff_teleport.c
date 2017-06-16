@@ -9,7 +9,7 @@ extern void sub_8087BA8(void);
 
 extern u32 gUnknown_0202FF84[];
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 
@@ -20,7 +20,7 @@ bool8 SetUpFieldMove_Teleport(void)
 {
     if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == TRUE)
     {
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = hm_teleport_run_dp02scr;
         return TRUE;
     }

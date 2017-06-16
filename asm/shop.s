@@ -1222,7 +1222,7 @@ sub_80B3D38: @ 80B3D38
 	bl sub_80A3FA0
 	ldr r1, _080B3D78 @ =gUnknown_083CC708
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -1767,9 +1767,9 @@ _080B41B8:
 	b _080B4350
 _080B41CE:
 	movs r0, 0
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
 	movs r1, 0x1
 	bl sub_80F979C
@@ -1978,9 +1978,9 @@ sub_80B4378: @ 80B4378
 	bl sub_80B3764
 	bl sub_80B37EC
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	bl sub_80B32A4
 	ldr r1, _080B43E8 @ =gTasks
 	lsls r0, r4, 2
@@ -2006,7 +2006,7 @@ sub_80B43F0: @ 80B43F0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _080B4428 @ =gUnknown_0300485C
+	ldr r1, _080B4428 @ =gFieldCallback
 	ldr r0, _080B442C @ =sub_80B3050
 	str r0, [r1]
 	movs r0, 0x1
@@ -2028,7 +2028,7 @@ sub_80B43F0: @ 80B43F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B4428: .4byte gUnknown_0300485C
+_080B4428: .4byte gFieldCallback
 _080B442C: .4byte sub_80B3050
 _080B4430: .4byte gTasks
 _080B4434: .4byte Task_ExitBuyMenu

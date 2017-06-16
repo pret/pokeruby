@@ -29,7 +29,7 @@ EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 gSafariZoneStepCounter = 0;
 EWRAM_DATA static struct PokeblockFeeder gPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 
 extern u8 gUnknown_081C340A;
 extern u8 gUnknown_081C342D;
@@ -103,7 +103,7 @@ void sub_80C824C(void)
     {
         ScriptContext2_RunNewScript(&gUnknown_081C340A);
         warp_in();
-        gUnknown_0300485C = sub_8080E44;
+        gFieldCallback = sub_8080E44;
         SetMainCallback2(CB2_LoadMap);
     }
     else if (gUnknown_02024D26 == 7)
