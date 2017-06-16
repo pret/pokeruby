@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 8203B68
-	.include "data/evolution_table.inc"
-
 @ 8207BC8
 	.include "data/level_up_learnset_pointers.inc"
 
