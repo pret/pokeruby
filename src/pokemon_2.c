@@ -42,7 +42,7 @@ extern const struct SpriteTemplate gSpriteTemplate_8208288[];
 //array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
-extern u8 gSecretBaseTrainerClasses[];
+extern u8 gSecretBaseTrainerClasses[][5];
 extern u8 gUnknown_08208238[];
 extern u8 gUnknown_0820823C[];
 extern u8 gStatStageRatios[][2];
@@ -1191,13 +1191,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[(gSecretBaseRecord.trainerId[0] % 5) + (5 * gSecretBaseRecord.gender)];
+    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
     return gTrainerClassToPicIndex[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[(gSecretBaseRecord.trainerId[0] % 5) + (5 * gSecretBaseRecord.gender)];
+    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
     return gTrainerClassToNameIndex[trainerClass];
 }
 

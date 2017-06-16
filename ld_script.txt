@@ -333,7 +333,6 @@ SECTIONS {
         data/main_menu.o(.rodata);
         data/data2.o(.rodata);
         src/pokemon_data.o(.rodata);
-        data/pokemon.o(.rodata);
         . = ALIGN(4);
         data/trig.o(.rodata);
         data/util.o(.rodata);
