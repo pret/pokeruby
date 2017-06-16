@@ -407,6 +407,11 @@ struct SpindaSpot
     u16 image[16];
 };
 
+struct __attribute__((packed)) LevelUpMove {
+    u16 move:9;
+    u16 level:7;
+};
+
 enum {
     GROWTH_MEDIUM_FAST,
     GROWTH_ERRATIC,
