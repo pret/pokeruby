@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 8207BC8
-	.include "data/level_up_learnset_pointers.inc"
-
 gUnknown_08208238:: @ 8208238
 	.byte 0x03, 0x0C, 0x30, 0xC0
 
