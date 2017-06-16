@@ -4507,7 +4507,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           gUnknown_083B5584[paletteNum],
           num);
         break;
-    case 0x134:
+    case SPECIES_SPINDA:
         LoadSpecialPokePic(
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
