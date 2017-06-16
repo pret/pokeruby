@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FCC14
-	.include "data/item_effects.inc"
-
 @ 81FD070
 	.include "data/nature_stat_table.inc"
 
