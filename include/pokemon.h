@@ -407,6 +407,28 @@ struct SpindaSpot
     u16 image[16];
 };
 
+enum {
+    GROWTH_MEDIUM_FAST,
+    GROWTH_ERRATIC,
+    GROWTH_FLUCTUATING,
+    GROWTH_MEDIUM_SLOW,
+    GROWTH_FAST,
+    GROWTH_SLOW
+};
+
+enum {
+    BODY_COLOR_RED,
+    BODY_COLOR_BLUE,
+    BODY_COLOR_YELLOW,
+    BODY_COLOR_GREEN,
+    BODY_COLOR_BLACK,
+    BODY_COLOR_BROWN,
+    BODY_COLOR_PURPLE,
+    BODY_COLOR_GRAY,
+    BODY_COLOR_WHITE,
+    BODY_COLOR_PINK
+};
+
 #define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220

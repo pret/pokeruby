@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 81FEC18
-	.include "data/base_stats.inc"
-
 @ 8201928
 	.include "data/level_up_learnsets.inc"
 
