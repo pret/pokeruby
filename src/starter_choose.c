@@ -483,7 +483,7 @@ static void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadow
 static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 {
     u8 labelText[72];
-    u8 *category;
+    const u8 *category;
     u8 srcIndex;
     u8 dstIndex;
     u16 species;
