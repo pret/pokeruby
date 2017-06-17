@@ -1,16 +1,18 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
-#include "sprite.h"
-#include "string_util.h"
-#include "text.h"
+#include "battle_interface.h"
 #include "decompress.h"
-#include "sound.h"
-#include "songs.h"
-#include "battle.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "battle_interface.h"
+#include "pokemon.h"
+#include "rom_8077ABC.h"
+#include "safari_zone.h"
+#include "songs.h"
+#include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
 
 struct UnknownStruct5
 {
@@ -39,9 +41,7 @@ extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_03004340[];
 
 extern u16 gBattleTypeFlags;
-extern u8 gNumSafariBalls;
 
-extern u32 gExperienceTables[8][101];
 extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
 extern const struct SpriteTemplate gSpriteTemplate_820A51C[];
 extern const struct SpriteTemplate gSpriteTemplate_820A54C;
@@ -71,21 +71,16 @@ extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
 extern const u8 gUnknown_0820A8B0[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
 extern const u8 gUnknown_08D1216C[][32];
 
-extern const u8 *const gNatureNames[];
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 #define ABS(n) ((n) >= 0 ? (n) : -(n))
 // Used for computing copy destination addresses
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
-
-extern int sub_8040D3C();
-extern void load_gfxc_health_bar();
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);

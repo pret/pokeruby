@@ -1,41 +1,19 @@
 #include "global.h"
 #include "wild_encounter.h"
 #include "abilities.h"
-#include "asm.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "pokeblock.h"
 #include "rng.h"
 #include "roamer.h"
 #include "rom4.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "species.h"
-
-struct WildPokemon
-{
-    u8 minLevel;
-    u8 maxLevel;
-    u16 species;
-};
-
-struct WildPokemonInfo
-{
-    u8 encounterRate;
-    const struct WildPokemon *wildPokemon;
-};
-
-struct WildPokemonHeader
-{
-    u8 mapGroup;
-    u8 mapNum;
-    struct WildPokemonInfo *landMonsInfo;
-    struct WildPokemonInfo *waterMonsInfo;
-    struct WildPokemonInfo *rockSmashMonsInfo;
-    struct WildPokemonInfo *fishingMonsInfo;
-};
-
+#include "tv.h"
 
 const struct WildPokemon PetalburgCity_WaterMons [] =
 {
@@ -2921,9 +2899,6 @@ const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMo
 
 
 extern u16 gRoute119WaterTileData[];
-extern struct WildPokemonHeader gWildMonHeaders[];
-extern struct Pokemon gEnemyParty[6];
-extern struct Pokemon gPlayerParty[6];
 extern u16 gScriptResult;
 extern struct WildPokemon gWildFeebasRoute119Data;
 extern u8 Event_RepelWoreOff[];

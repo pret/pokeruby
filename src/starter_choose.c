@@ -1,6 +1,5 @@
 #include "global.h"
 #include "starter_choose.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -15,6 +14,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern u16 gScriptResult;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -23,7 +23,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 // Graphics Data
 //--------------------------------------------------
 
-const u16 gBirchBagGrassPal[][16] =
+const u16 gBirchBagGrassPal[2][16] =
 {
     INCBIN_U16("graphics/misc/birch_bag.gbapal"),
     INCBIN_U16("graphics/misc/birch_grass.gbapal"),

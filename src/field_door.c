@@ -1,7 +1,7 @@
 #include "global.h"
 #include "field_door.h"
-#include "asm.h"
 #include "field_camera.h"
+#include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "task.h"
 
