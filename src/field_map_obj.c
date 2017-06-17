@@ -18,8 +18,3949 @@
 #include "trainer_see.h"
 #include "field_effect_helpers.h"
 
-extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
+// rodata
 
+const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
+
+void ObjectCB_CameraObject(struct Sprite *sprite);
+const struct SpriteTemplate gSpriteTemplate_830FD24 = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
+
+const u8 filler_830fd3c[12] = {};
+
+const u32 gMapObjectPic_BrendanNormal_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/00.4bpp");
+const u32 gMapObjectPic_BrendanNormal_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/01.4bpp");
+const u32 gMapObjectPic_BrendanNormal_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/02.4bpp");
+const u32 gMapObjectPic_BrendanNormal_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/03.4bpp");
+const u32 gMapObjectPic_BrendanNormal_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/04.4bpp");
+const u32 gMapObjectPic_BrendanNormal_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/05.4bpp");
+const u32 gMapObjectPic_BrendanNormal_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/06.4bpp");
+const u32 gMapObjectPic_BrendanNormal_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/07.4bpp");
+const u32 gMapObjectPic_BrendanNormal_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/08.4bpp");
+const u32 gMapObjectPic_BrendanNormal_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/09.4bpp");
+const u32 gMapObjectPic_BrendanNormal_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/10.4bpp");
+const u32 gMapObjectPic_BrendanNormal_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/11.4bpp");
+const u32 gMapObjectPic_BrendanNormal_12[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/12.4bpp");
+const u32 gMapObjectPic_BrendanNormal_13[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/13.4bpp");
+const u32 gMapObjectPic_BrendanNormal_14[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/14.4bpp");
+const u32 gMapObjectPic_BrendanNormal_15[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/15.4bpp");
+const u32 gMapObjectPic_BrendanNormal_16[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/16.4bpp");
+const u32 gMapObjectPic_BrendanNormal_17[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/17.4bpp");
+const u16 gMapObjectPalette8[] = INCBIN_U16("graphics/map_objects/palettes/08.gbapal");
+const u16 NullPalette_8310F68[16] = {};
+const u16 NullPalette_8310F88[16] = {};
+const u16 NullPalette_8310FA8[16] = {};
+const u16 NullPalette_8310FC8[16] = {};
+const u16 NullPalette_8310FE8[16] = {};
+const u16 NullPalette_8311008[16] = {};
+const u16 NullPalette_8311028[16] = {};
+const u16 NullPalette_8311048[16] = {};
+const u16 NullPalette_8311068[16] = {};
+const u16 NullPalette_8311088[16] = {};
+const u16 NullPalette_83110A8[16] = {};
+const u16 NullPalette_83110C8[16] = {};
+const u16 NullPalette_83110E8[16] = {};
+const u16 NullPalette_8311108[16] = {};
+const u16 NullPalette_8311128[16] = {};
+const u16 gMapObjectPalette9[] = INCBIN_U16("graphics/map_objects/palettes/09.gbapal");
+const u16 gMapObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/10.gbapal");
+const u32 gMapObjectPic_BrendanFieldMove_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/0.4bpp");
+const u32 gMapObjectPic_BrendanFieldMove_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/1.4bpp");
+const u32 gMapObjectPic_BrendanFieldMove_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/2.4bpp");
+const u32 gMapObjectPic_BrendanFieldMove_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/3.4bpp");
+const u32 gMapObjectPic_BrendanFieldMove_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/4.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/0.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/3.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/1.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/4.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/2.4bpp");
+const u32 gMapObjectPic_BrendanSurfing_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/5.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/0.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/1.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/2.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/3.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/4.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/5.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/6.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/7.4bpp");
+const u32 gMapObjectPic_BrendanMachBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/8.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/00.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/01.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/02.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/03.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/04.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/05.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/06.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/07.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/08.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/09.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/10.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/11.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_12[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/12.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_13[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/13.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_14[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/14.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_15[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/15.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_16[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/16.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_17[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/17.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_18[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/18.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_19[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/19.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_20[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/20.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_21[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/21.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_22[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/22.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_23[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/23.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_24[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/24.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_25[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/25.4bpp");
+const u32 gMapObjectPic_BrendanAcroBike_26[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/26.4bpp");
+const u32 gMapObjectPic_BrendanFishing_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/00.4bpp");
+const u32 gMapObjectPic_BrendanFishing_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/01.4bpp");
+const u32 gMapObjectPic_BrendanFishing_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/02.4bpp");
+const u32 gMapObjectPic_BrendanFishing_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/03.4bpp");
+const u32 gMapObjectPic_BrendanFishing_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/04.4bpp");
+const u32 gMapObjectPic_BrendanFishing_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/05.4bpp");
+const u32 gMapObjectPic_BrendanFishing_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/06.4bpp");
+const u32 gMapObjectPic_BrendanFishing_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/07.4bpp");
+const u32 gMapObjectPic_BrendanFishing_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/08.4bpp");
+const u32 gMapObjectPic_BrendanFishing_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/09.4bpp");
+const u32 gMapObjectPic_BrendanFishing_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/10.4bpp");
+const u32 gMapObjectPic_BrendanFishing_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/11.4bpp");
+const u32 gMapObjectPic_BrendanWatering_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/0.4bpp");
+const u32 gMapObjectPic_BrendanWatering_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/3.4bpp");
+const u32 gMapObjectPic_BrendanWatering_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/1.4bpp");
+const u32 gMapObjectPic_BrendanWatering_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/4.4bpp");
+const u32 gMapObjectPic_BrendanWatering_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/2.4bpp");
+const u32 gMapObjectPic_BrendanWatering_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/5.4bpp");
+const u32 gMapObjectPic_BrendanDecorating[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/decorating.4bpp");
+const u32 gMapObjectPic_MayDecorating[] = INCBIN_U32("graphics/map_objects/pics/people/may/decorating.4bpp");
+const u32 gMapObjectPic_BrendanUnderwater_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/0.4bpp");
+const u32 gMapObjectPic_BrendanUnderwater_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/1.4bpp");
+const u32 gMapObjectPic_BrendanUnderwater_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/2.4bpp");
+const u32 gMapObjectPic_BrendanUnderwater_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/3.4bpp");
+const u32 gMapObjectPic_MayUnderwater_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/0.4bpp");
+const u32 gMapObjectPic_MayUnderwater_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/1.4bpp");
+const u32 gMapObjectPic_MayUnderwater_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/2.4bpp");
+const u32 gMapObjectPic_MayUnderwater_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/3.4bpp");
+const u16 gMapObjectPalette11[] = INCBIN_U16("graphics/map_objects/palettes/11.gbapal");
+const u32 gMapObjectPic_MayNormal_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/00.4bpp");
+const u32 gMapObjectPic_MayNormal_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/01.4bpp");
+const u32 gMapObjectPic_MayNormal_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/02.4bpp");
+const u32 gMapObjectPic_MayNormal_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/03.4bpp");
+const u32 gMapObjectPic_MayNormal_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/04.4bpp");
+const u32 gMapObjectPic_MayNormal_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/05.4bpp");
+const u32 gMapObjectPic_MayNormal_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/06.4bpp");
+const u32 gMapObjectPic_MayNormal_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/07.4bpp");
+const u32 gMapObjectPic_MayNormal_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/08.4bpp");
+const u32 gMapObjectPic_MayNormal_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/09.4bpp");
+const u32 gMapObjectPic_MayNormal_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/10.4bpp");
+const u32 gMapObjectPic_MayNormal_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/11.4bpp");
+const u32 gMapObjectPic_MayNormal_12[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/12.4bpp");
+const u32 gMapObjectPic_MayNormal_13[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/13.4bpp");
+const u32 gMapObjectPic_MayNormal_14[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/14.4bpp");
+const u32 gMapObjectPic_MayNormal_15[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/15.4bpp");
+const u32 gMapObjectPic_MayNormal_16[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/16.4bpp");
+const u32 gMapObjectPic_MayNormal_17[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/17.4bpp");
+const u16 gMapObjectPalette17[] = INCBIN_U16("graphics/map_objects/palettes/17.gbapal");
+const u16 gMapObjectPalette18[] = INCBIN_U16("graphics/map_objects/palettes/18.gbapal");
+const u16 NullPalette_831B7E8[16] = {};
+const u16 NullPalette_831B808[16] = {};
+const u16 NullPalette_831B828[16] = {};
+const u16 NullPalette_831B848[16] = {};
+const u16 NullPalette_831B868[16] = {};
+const u16 NullPalette_831B888[16] = {};
+const u16 NullPalette_831B8A8[16] = {};
+const u16 NullPalette_831B8C8[16] = {};
+const u16 NullPalette_831B8E8[16] = {};
+const u16 NullPalette_831B908[16] = {};
+const u16 NullPalette_831B928[16] = {};
+const u16 NullPalette_831B948[16] = {};
+const u16 NullPalette_831B968[16] = {};
+const u16 NullPalette_831B988[16] = {};
+const u32 gMapObjectPic_MayMachBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/0.4bpp");
+const u32 gMapObjectPic_MayMachBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/1.4bpp");
+const u32 gMapObjectPic_MayMachBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/2.4bpp");
+const u32 gMapObjectPic_MayMachBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/3.4bpp");
+const u32 gMapObjectPic_MayMachBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/4.4bpp");
+const u32 gMapObjectPic_MayMachBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/5.4bpp");
+const u32 gMapObjectPic_MayMachBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/6.4bpp");
+const u32 gMapObjectPic_MayMachBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/7.4bpp");
+const u32 gMapObjectPic_MayMachBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/8.4bpp");
+const u32 gMapObjectPic_MayAcroBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/00.4bpp");
+const u32 gMapObjectPic_MayAcroBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/01.4bpp");
+const u32 gMapObjectPic_MayAcroBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/02.4bpp");
+const u32 gMapObjectPic_MayAcroBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/03.4bpp");
+const u32 gMapObjectPic_MayAcroBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/04.4bpp");
+const u32 gMapObjectPic_MayAcroBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/05.4bpp");
+const u32 gMapObjectPic_MayAcroBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/06.4bpp");
+const u32 gMapObjectPic_MayAcroBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/07.4bpp");
+const u32 gMapObjectPic_MayAcroBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/08.4bpp");
+const u32 gMapObjectPic_MayAcroBike_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/09.4bpp");
+const u32 gMapObjectPic_MayAcroBike_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/10.4bpp");
+const u32 gMapObjectPic_MayAcroBike_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/11.4bpp");
+const u32 gMapObjectPic_MayAcroBike_12[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/12.4bpp");
+const u32 gMapObjectPic_MayAcroBike_13[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/13.4bpp");
+const u32 gMapObjectPic_MayAcroBike_14[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/14.4bpp");
+const u32 gMapObjectPic_MayAcroBike_15[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/15.4bpp");
+const u32 gMapObjectPic_MayAcroBike_16[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/16.4bpp");
+const u32 gMapObjectPic_MayAcroBike_17[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/17.4bpp");
+const u32 gMapObjectPic_MayAcroBike_18[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/18.4bpp");
+const u32 gMapObjectPic_MayAcroBike_19[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/19.4bpp");
+const u32 gMapObjectPic_MayAcroBike_20[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/20.4bpp");
+const u32 gMapObjectPic_MayAcroBike_21[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/21.4bpp");
+const u32 gMapObjectPic_MayAcroBike_22[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/22.4bpp");
+const u32 gMapObjectPic_MayAcroBike_23[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/23.4bpp");
+const u32 gMapObjectPic_MayAcroBike_24[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/24.4bpp");
+const u32 gMapObjectPic_MayAcroBike_25[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/25.4bpp");
+const u32 gMapObjectPic_MayAcroBike_26[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/26.4bpp");
+const u32 gMapObjectPic_MaySurfing_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/0.4bpp");
+const u32 gMapObjectPic_MaySurfing_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/3.4bpp");
+const u32 gMapObjectPic_MaySurfing_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/1.4bpp");
+const u32 gMapObjectPic_MaySurfing_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/4.4bpp");
+const u32 gMapObjectPic_MaySurfing_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/2.4bpp");
+const u32 gMapObjectPic_MaySurfing_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/5.4bpp");
+const u32 gMapObjectPic_MayFieldMove_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/0.4bpp");
+const u32 gMapObjectPic_MayFieldMove_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/1.4bpp");
+const u32 gMapObjectPic_MayFieldMove_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/2.4bpp");
+const u32 gMapObjectPic_MayFieldMove_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/3.4bpp");
+const u32 gMapObjectPic_MayFieldMove_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/4.4bpp");
+const u32 gMapObjectPic_MayFishing_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/00.4bpp");
+const u32 gMapObjectPic_MayFishing_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/01.4bpp");
+const u32 gMapObjectPic_MayFishing_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/02.4bpp");
+const u32 gMapObjectPic_MayFishing_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/03.4bpp");
+const u32 gMapObjectPic_MayFishing_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/04.4bpp");
+const u32 gMapObjectPic_MayFishing_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/05.4bpp");
+const u32 gMapObjectPic_MayFishing_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/06.4bpp");
+const u32 gMapObjectPic_MayFishing_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/07.4bpp");
+const u32 gMapObjectPic_MayFishing_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/08.4bpp");
+const u32 gMapObjectPic_MayFishing_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/09.4bpp");
+const u32 gMapObjectPic_MayFishing_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/10.4bpp");
+const u32 gMapObjectPic_MayFishing_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/11.4bpp");
+const u32 gMapObjectPic_MayWatering_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/0.4bpp");
+const u32 gMapObjectPic_MayWatering_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/3.4bpp");
+const u32 gMapObjectPic_MayWatering_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/1.4bpp");
+const u32 gMapObjectPic_MayWatering_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/4.4bpp");
+const u32 gMapObjectPic_MayWatering_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/2.4bpp");
+const u32 gMapObjectPic_MayWatering_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/5.4bpp");
+const u16 gMapObjectPalette0[] = INCBIN_U16("graphics/map_objects/palettes/00.gbapal");
+const u16 gMapObjectPalette1[] = INCBIN_U16("graphics/map_objects/palettes/01.gbapal");
+const u16 gMapObjectPalette2[] = INCBIN_U16("graphics/map_objects/palettes/02.gbapal");
+const u16 gMapObjectPalette3[] = INCBIN_U16("graphics/map_objects/palettes/03.gbapal");
+const u16 gMapObjectPalette4[] = INCBIN_U16("graphics/map_objects/palettes/04.gbapal");
+const u16 gMapObjectPalette5[] = INCBIN_U16("graphics/map_objects/palettes/05.gbapal");
+const u16 gMapObjectPalette6[] = INCBIN_U16("graphics/map_objects/palettes/06.gbapal");
+const u16 gMapObjectPalette7[] = INCBIN_U16("graphics/map_objects/palettes/07.gbapal");
+const u32 gMapObjectPic_LittleBoy1_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/0.4bpp");
+const u32 gMapObjectPic_LittleBoy1_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/1.4bpp");
+const u32 gMapObjectPic_LittleBoy1_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/2.4bpp");
+const u32 gMapObjectPic_LittleBoy1_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/3.4bpp");
+const u32 gMapObjectPic_LittleBoy1_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/4.4bpp");
+const u32 gMapObjectPic_LittleBoy1_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/5.4bpp");
+const u32 gMapObjectPic_LittleBoy1_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/6.4bpp");
+const u32 gMapObjectPic_LittleBoy1_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/7.4bpp");
+const u32 gMapObjectPic_LittleBoy1_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/8.4bpp");
+const u32 gMapObjectPic_LittleGirl1_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/0.4bpp");
+const u32 gMapObjectPic_LittleGirl1_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/1.4bpp");
+const u32 gMapObjectPic_LittleGirl1_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/2.4bpp");
+const u32 gMapObjectPic_LittleGirl1_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/3.4bpp");
+const u32 gMapObjectPic_LittleGirl1_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/4.4bpp");
+const u32 gMapObjectPic_LittleGirl1_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/5.4bpp");
+const u32 gMapObjectPic_LittleGirl1_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/6.4bpp");
+const u32 gMapObjectPic_LittleGirl1_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/7.4bpp");
+const u32 gMapObjectPic_LittleGirl1_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/8.4bpp");
+const u32 gMapObjectPic_Boy1_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/0.4bpp");
+const u32 gMapObjectPic_Boy1_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/1.4bpp");
+const u32 gMapObjectPic_Boy1_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/2.4bpp");
+const u32 gMapObjectPic_Boy1_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/3.4bpp");
+const u32 gMapObjectPic_Boy1_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/4.4bpp");
+const u32 gMapObjectPic_Boy1_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/5.4bpp");
+const u32 gMapObjectPic_Boy1_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/6.4bpp");
+const u32 gMapObjectPic_Boy1_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/7.4bpp");
+const u32 gMapObjectPic_Boy1_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/8.4bpp");
+const u32 gMapObjectPic_Girl1_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/0.4bpp");
+const u32 gMapObjectPic_Girl1_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/1.4bpp");
+const u32 gMapObjectPic_Girl1_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/2.4bpp");
+const u32 gMapObjectPic_Girl1_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/3.4bpp");
+const u32 gMapObjectPic_Girl1_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/4.4bpp");
+const u32 gMapObjectPic_Girl1_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/5.4bpp");
+const u32 gMapObjectPic_Girl1_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/6.4bpp");
+const u32 gMapObjectPic_Girl1_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/7.4bpp");
+const u32 gMapObjectPic_Girl1_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/8.4bpp");
+const u32 gMapObjectPic_Boy2_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/0.4bpp");
+const u32 gMapObjectPic_Boy2_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/1.4bpp");
+const u32 gMapObjectPic_Boy2_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/2.4bpp");
+const u32 gMapObjectPic_Boy2_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/3.4bpp");
+const u32 gMapObjectPic_Boy2_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/4.4bpp");
+const u32 gMapObjectPic_Boy2_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/5.4bpp");
+const u32 gMapObjectPic_Boy2_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/6.4bpp");
+const u32 gMapObjectPic_Boy2_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/7.4bpp");
+const u32 gMapObjectPic_Boy2_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/8.4bpp");
+const u32 gMapObjectPic_Girl2_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/0.4bpp");
+const u32 gMapObjectPic_Girl2_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/1.4bpp");
+const u32 gMapObjectPic_Girl2_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/2.4bpp");
+const u32 gMapObjectPic_Girl2_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/3.4bpp");
+const u32 gMapObjectPic_Girl2_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/4.4bpp");
+const u32 gMapObjectPic_Girl2_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/5.4bpp");
+const u32 gMapObjectPic_Girl2_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/6.4bpp");
+const u32 gMapObjectPic_Girl2_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/7.4bpp");
+const u32 gMapObjectPic_Girl2_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/8.4bpp");
+const u32 gMapObjectPic_LittleBoy2_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/0.4bpp");
+const u32 gMapObjectPic_LittleBoy2_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/1.4bpp");
+const u32 gMapObjectPic_LittleBoy2_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/2.4bpp");
+const u32 gMapObjectPic_LittleBoy2_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/3.4bpp");
+const u32 gMapObjectPic_LittleBoy2_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/4.4bpp");
+const u32 gMapObjectPic_LittleBoy2_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/5.4bpp");
+const u32 gMapObjectPic_LittleBoy2_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/6.4bpp");
+const u32 gMapObjectPic_LittleBoy2_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/7.4bpp");
+const u32 gMapObjectPic_LittleBoy2_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/8.4bpp");
+const u32 gMapObjectPic_LittleGirl2_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/0.4bpp");
+const u32 gMapObjectPic_LittleGirl2_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/1.4bpp");
+const u32 gMapObjectPic_LittleGirl2_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/2.4bpp");
+const u32 gMapObjectPic_LittleGirl2_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/3.4bpp");
+const u32 gMapObjectPic_LittleGirl2_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/4.4bpp");
+const u32 gMapObjectPic_LittleGirl2_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/5.4bpp");
+const u32 gMapObjectPic_LittleGirl2_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/6.4bpp");
+const u32 gMapObjectPic_LittleGirl2_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/7.4bpp");
+const u32 gMapObjectPic_LittleGirl2_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/8.4bpp");
+const u32 gMapObjectPic_Boy3_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/0.4bpp");
+const u32 gMapObjectPic_Boy3_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/1.4bpp");
+const u32 gMapObjectPic_Boy3_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/2.4bpp");
+const u32 gMapObjectPic_Boy3_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/3.4bpp");
+const u32 gMapObjectPic_Boy3_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/4.4bpp");
+const u32 gMapObjectPic_Boy3_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/5.4bpp");
+const u32 gMapObjectPic_Boy3_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/6.4bpp");
+const u32 gMapObjectPic_Boy3_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/7.4bpp");
+const u32 gMapObjectPic_Boy3_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/8.4bpp");
+const u32 gMapObjectPic_Girl3_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/0.4bpp");
+const u32 gMapObjectPic_Girl3_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/1.4bpp");
+const u32 gMapObjectPic_Girl3_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/2.4bpp");
+const u32 gMapObjectPic_Girl3_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/3.4bpp");
+const u32 gMapObjectPic_Girl3_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/4.4bpp");
+const u32 gMapObjectPic_Girl3_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/5.4bpp");
+const u32 gMapObjectPic_Girl3_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/6.4bpp");
+const u32 gMapObjectPic_Girl3_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/7.4bpp");
+const u32 gMapObjectPic_Girl3_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/8.4bpp");
+const u32 gMapObjectPic_Boy4_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/0.4bpp");
+const u32 gMapObjectPic_Boy4_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/1.4bpp");
+const u32 gMapObjectPic_Boy4_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/2.4bpp");
+const u32 gMapObjectPic_Boy4_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/3.4bpp");
+const u32 gMapObjectPic_Boy4_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/4.4bpp");
+const u32 gMapObjectPic_Boy4_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/5.4bpp");
+const u32 gMapObjectPic_Boy4_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/6.4bpp");
+const u32 gMapObjectPic_Boy4_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/7.4bpp");
+const u32 gMapObjectPic_Boy4_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/8.4bpp");
+const u32 gMapObjectPic_Woman1_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/0.4bpp");
+const u32 gMapObjectPic_Woman1_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/1.4bpp");
+const u32 gMapObjectPic_Woman1_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/2.4bpp");
+const u32 gMapObjectPic_Woman1_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/3.4bpp");
+const u32 gMapObjectPic_Woman1_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/4.4bpp");
+const u32 gMapObjectPic_Woman1_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/5.4bpp");
+const u32 gMapObjectPic_Woman1_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/6.4bpp");
+const u32 gMapObjectPic_Woman1_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/7.4bpp");
+const u32 gMapObjectPic_Woman1_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/8.4bpp");
+const u32 gMapObjectPic_FatMan_0[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/0.4bpp");
+const u32 gMapObjectPic_FatMan_1[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/1.4bpp");
+const u32 gMapObjectPic_FatMan_2[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/2.4bpp");
+const u32 gMapObjectPic_FatMan_3[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/3.4bpp");
+const u32 gMapObjectPic_FatMan_4[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/4.4bpp");
+const u32 gMapObjectPic_FatMan_5[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/5.4bpp");
+const u32 gMapObjectPic_FatMan_6[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/6.4bpp");
+const u32 gMapObjectPic_FatMan_7[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/7.4bpp");
+const u32 gMapObjectPic_FatMan_8[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/8.4bpp");
+const u32 gMapObjectPic_Woman2_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/0.4bpp");
+const u32 gMapObjectPic_Woman2_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/1.4bpp");
+const u32 gMapObjectPic_Woman2_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/2.4bpp");
+const u32 gMapObjectPic_Woman2_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/3.4bpp");
+const u32 gMapObjectPic_Woman2_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/4.4bpp");
+const u32 gMapObjectPic_Woman2_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/5.4bpp");
+const u32 gMapObjectPic_Woman2_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/6.4bpp");
+const u32 gMapObjectPic_Woman2_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/7.4bpp");
+const u32 gMapObjectPic_Woman2_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/8.4bpp");
+const u32 gMapObjectPic_Man1_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/0.4bpp");
+const u32 gMapObjectPic_Man1_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/1.4bpp");
+const u32 gMapObjectPic_Man1_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/2.4bpp");
+const u32 gMapObjectPic_Man1_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/3.4bpp");
+const u32 gMapObjectPic_Man1_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/4.4bpp");
+const u32 gMapObjectPic_Man1_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/5.4bpp");
+const u32 gMapObjectPic_Man1_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/6.4bpp");
+const u32 gMapObjectPic_Man1_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/7.4bpp");
+const u32 gMapObjectPic_Man1_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/8.4bpp");
+const u32 gMapObjectPic_Woman3_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/0.4bpp");
+const u32 gMapObjectPic_Woman3_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/1.4bpp");
+const u32 gMapObjectPic_Woman3_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/2.4bpp");
+const u32 gMapObjectPic_Woman3_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/3.4bpp");
+const u32 gMapObjectPic_Woman3_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/4.4bpp");
+const u32 gMapObjectPic_Woman3_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/5.4bpp");
+const u32 gMapObjectPic_Woman3_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/6.4bpp");
+const u32 gMapObjectPic_Woman3_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/7.4bpp");
+const u32 gMapObjectPic_Woman3_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/8.4bpp");
+const u32 gMapObjectPic_OldMan1_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/0.4bpp");
+const u32 gMapObjectPic_OldMan1_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/1.4bpp");
+const u32 gMapObjectPic_OldMan1_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/2.4bpp");
+const u32 gMapObjectPic_OldMan1_3[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/3.4bpp");
+const u32 gMapObjectPic_OldMan1_4[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/4.4bpp");
+const u32 gMapObjectPic_OldMan1_5[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/5.4bpp");
+const u32 gMapObjectPic_OldMan1_6[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/6.4bpp");
+const u32 gMapObjectPic_OldMan1_7[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/7.4bpp");
+const u32 gMapObjectPic_OldMan1_8[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/8.4bpp");
+const u32 gMapObjectPic_OldWoman1_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/0.4bpp");
+const u32 gMapObjectPic_OldWoman1_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/1.4bpp");
+const u32 gMapObjectPic_OldWoman1_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/2.4bpp");
+const u32 gMapObjectPic_OldWoman1_3[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/3.4bpp");
+const u32 gMapObjectPic_OldWoman1_4[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/4.4bpp");
+const u32 gMapObjectPic_OldWoman1_5[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/5.4bpp");
+const u32 gMapObjectPic_OldWoman1_6[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/6.4bpp");
+const u32 gMapObjectPic_OldWoman1_7[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/7.4bpp");
+const u32 gMapObjectPic_OldWoman1_8[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/8.4bpp");
+const u32 gMapObjectPic_Man2_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/0.4bpp");
+const u32 gMapObjectPic_Man2_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/1.4bpp");
+const u32 gMapObjectPic_Man2_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/2.4bpp");
+const u32 gMapObjectPic_Man2_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/3.4bpp");
+const u32 gMapObjectPic_Man2_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/4.4bpp");
+const u32 gMapObjectPic_Man2_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/5.4bpp");
+const u32 gMapObjectPic_Man2_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/6.4bpp");
+const u32 gMapObjectPic_Man2_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/7.4bpp");
+const u32 gMapObjectPic_Man2_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/8.4bpp");
+const u32 gMapObjectPic_Woman4_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/0.4bpp");
+const u32 gMapObjectPic_Woman4_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/1.4bpp");
+const u32 gMapObjectPic_Woman4_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/2.4bpp");
+const u32 gMapObjectPic_Woman4_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/3.4bpp");
+const u32 gMapObjectPic_Woman4_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/4.4bpp");
+const u32 gMapObjectPic_Woman4_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/5.4bpp");
+const u32 gMapObjectPic_Woman4_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/6.4bpp");
+const u32 gMapObjectPic_Woman4_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/7.4bpp");
+const u32 gMapObjectPic_Woman4_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/8.4bpp");
+const u32 gMapObjectPic_Man3_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/0.4bpp");
+const u32 gMapObjectPic_Man3_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/1.4bpp");
+const u32 gMapObjectPic_Man3_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/2.4bpp");
+const u32 gMapObjectPic_Man3_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/3.4bpp");
+const u32 gMapObjectPic_Man3_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/4.4bpp");
+const u32 gMapObjectPic_Man3_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/5.4bpp");
+const u32 gMapObjectPic_Man3_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/6.4bpp");
+const u32 gMapObjectPic_Man3_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/7.4bpp");
+const u32 gMapObjectPic_Man3_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/8.4bpp");
+const u32 gMapObjectPic_Woman5_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/0.4bpp");
+const u32 gMapObjectPic_Woman5_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/1.4bpp");
+const u32 gMapObjectPic_Woman5_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/2.4bpp");
+const u32 gMapObjectPic_Woman5_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/3.4bpp");
+const u32 gMapObjectPic_Woman5_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/4.4bpp");
+const u32 gMapObjectPic_Woman5_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/5.4bpp");
+const u32 gMapObjectPic_Woman5_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/6.4bpp");
+const u32 gMapObjectPic_Woman5_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/7.4bpp");
+const u32 gMapObjectPic_Woman5_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/8.4bpp");
+const u32 gMapObjectPic_Cook_0[] = INCBIN_U32("graphics/map_objects/pics/people/cook/0.4bpp");
+const u32 gMapObjectPic_Cook_1[] = INCBIN_U32("graphics/map_objects/pics/people/cook/1.4bpp");
+const u32 gMapObjectPic_Cook_2[] = INCBIN_U32("graphics/map_objects/pics/people/cook/2.4bpp");
+const u32 gMapObjectPic_Woman6_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/0.4bpp");
+const u32 gMapObjectPic_Woman6_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/1.4bpp");
+const u32 gMapObjectPic_Woman6_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/2.4bpp");
+const u32 gMapObjectPic_Woman6_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/3.4bpp");
+const u32 gMapObjectPic_Woman6_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/4.4bpp");
+const u32 gMapObjectPic_Woman6_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/5.4bpp");
+const u32 gMapObjectPic_Woman6_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/6.4bpp");
+const u32 gMapObjectPic_Woman6_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/7.4bpp");
+const u32 gMapObjectPic_Woman6_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/8.4bpp");
+const u32 gMapObjectPic_OldMan2_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/0.4bpp");
+const u32 gMapObjectPic_OldMan2_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/1.4bpp");
+const u32 gMapObjectPic_OldMan2_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/2.4bpp");
+const u32 gMapObjectPic_OldWoman2_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/0.4bpp");
+const u32 gMapObjectPic_OldWoman2_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/1.4bpp");
+const u32 gMapObjectPic_OldWoman2_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/2.4bpp");
+const u32 gMapObjectPic_Camper_0[] = INCBIN_U32("graphics/map_objects/pics/people/camper/0.4bpp");
+const u32 gMapObjectPic_Camper_1[] = INCBIN_U32("graphics/map_objects/pics/people/camper/1.4bpp");
+const u32 gMapObjectPic_Camper_2[] = INCBIN_U32("graphics/map_objects/pics/people/camper/2.4bpp");
+const u32 gMapObjectPic_Camper_3[] = INCBIN_U32("graphics/map_objects/pics/people/camper/3.4bpp");
+const u32 gMapObjectPic_Camper_4[] = INCBIN_U32("graphics/map_objects/pics/people/camper/4.4bpp");
+const u32 gMapObjectPic_Camper_5[] = INCBIN_U32("graphics/map_objects/pics/people/camper/5.4bpp");
+const u32 gMapObjectPic_Camper_6[] = INCBIN_U32("graphics/map_objects/pics/people/camper/6.4bpp");
+const u32 gMapObjectPic_Camper_7[] = INCBIN_U32("graphics/map_objects/pics/people/camper/7.4bpp");
+const u32 gMapObjectPic_Camper_8[] = INCBIN_U32("graphics/map_objects/pics/people/camper/8.4bpp");
+const u32 gMapObjectPic_Picnicker_0[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/0.4bpp");
+const u32 gMapObjectPic_Picnicker_1[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/1.4bpp");
+const u32 gMapObjectPic_Picnicker_2[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/2.4bpp");
+const u32 gMapObjectPic_Picnicker_3[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/3.4bpp");
+const u32 gMapObjectPic_Picnicker_4[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/4.4bpp");
+const u32 gMapObjectPic_Picnicker_5[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/5.4bpp");
+const u32 gMapObjectPic_Picnicker_6[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/6.4bpp");
+const u32 gMapObjectPic_Picnicker_7[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/7.4bpp");
+const u32 gMapObjectPic_Picnicker_8[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/8.4bpp");
+const u32 gMapObjectPic_Man4_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/0.4bpp");
+const u32 gMapObjectPic_Man4_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/1.4bpp");
+const u32 gMapObjectPic_Man4_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/2.4bpp");
+const u32 gMapObjectPic_Man4_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/3.4bpp");
+const u32 gMapObjectPic_Man4_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/4.4bpp");
+const u32 gMapObjectPic_Man4_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/5.4bpp");
+const u32 gMapObjectPic_Man4_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/6.4bpp");
+const u32 gMapObjectPic_Man4_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/7.4bpp");
+const u32 gMapObjectPic_Man4_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/8.4bpp");
+const u32 gMapObjectPic_Woman7_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/0.4bpp");
+const u32 gMapObjectPic_Woman7_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/1.4bpp");
+const u32 gMapObjectPic_Woman7_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/2.4bpp");
+const u32 gMapObjectPic_Woman7_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/3.4bpp");
+const u32 gMapObjectPic_Woman7_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/4.4bpp");
+const u32 gMapObjectPic_Woman7_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/5.4bpp");
+const u32 gMapObjectPic_Woman7_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/6.4bpp");
+const u32 gMapObjectPic_Woman7_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/7.4bpp");
+const u32 gMapObjectPic_Woman7_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/8.4bpp");
+const u32 gMapObjectPic_Youngster_0[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/0.4bpp");
+const u32 gMapObjectPic_Youngster_1[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/1.4bpp");
+const u32 gMapObjectPic_Youngster_2[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/2.4bpp");
+const u32 gMapObjectPic_Youngster_3[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/3.4bpp");
+const u32 gMapObjectPic_Youngster_4[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/4.4bpp");
+const u32 gMapObjectPic_Youngster_5[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/5.4bpp");
+const u32 gMapObjectPic_Youngster_6[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/6.4bpp");
+const u32 gMapObjectPic_Youngster_7[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/7.4bpp");
+const u32 gMapObjectPic_Youngster_8[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/8.4bpp");
+const u32 gMapObjectPic_BugCatcher_0[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/0.4bpp");
+const u32 gMapObjectPic_BugCatcher_1[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/1.4bpp");
+const u32 gMapObjectPic_BugCatcher_2[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/2.4bpp");
+const u32 gMapObjectPic_BugCatcher_3[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/3.4bpp");
+const u32 gMapObjectPic_BugCatcher_4[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/4.4bpp");
+const u32 gMapObjectPic_BugCatcher_5[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/5.4bpp");
+const u32 gMapObjectPic_BugCatcher_6[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/6.4bpp");
+const u32 gMapObjectPic_BugCatcher_7[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/7.4bpp");
+const u32 gMapObjectPic_BugCatcher_8[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/8.4bpp");
+const u32 gMapObjectPic_PsychicM_0[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/0.4bpp");
+const u32 gMapObjectPic_PsychicM_1[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/1.4bpp");
+const u32 gMapObjectPic_PsychicM_2[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/2.4bpp");
+const u32 gMapObjectPic_PsychicM_3[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/3.4bpp");
+const u32 gMapObjectPic_PsychicM_4[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/4.4bpp");
+const u32 gMapObjectPic_PsychicM_5[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/5.4bpp");
+const u32 gMapObjectPic_PsychicM_6[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/6.4bpp");
+const u32 gMapObjectPic_PsychicM_7[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/7.4bpp");
+const u32 gMapObjectPic_PsychicM_8[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/8.4bpp");
+const u32 gMapObjectPic_SchoolKidM_0[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/0.4bpp");
+const u32 gMapObjectPic_SchoolKidM_1[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/1.4bpp");
+const u32 gMapObjectPic_SchoolKidM_2[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/2.4bpp");
+const u32 gMapObjectPic_SchoolKidM_3[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/3.4bpp");
+const u32 gMapObjectPic_SchoolKidM_4[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/4.4bpp");
+const u32 gMapObjectPic_SchoolKidM_5[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/5.4bpp");
+const u32 gMapObjectPic_SchoolKidM_6[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/6.4bpp");
+const u32 gMapObjectPic_SchoolKidM_7[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/7.4bpp");
+const u32 gMapObjectPic_SchoolKidM_8[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/8.4bpp");
+const u32 gMapObjectPic_Maniac_0[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/0.4bpp");
+const u32 gMapObjectPic_Maniac_1[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/1.4bpp");
+const u32 gMapObjectPic_Maniac_2[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/2.4bpp");
+const u32 gMapObjectPic_Maniac_3[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/3.4bpp");
+const u32 gMapObjectPic_Maniac_4[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/4.4bpp");
+const u32 gMapObjectPic_Maniac_5[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/5.4bpp");
+const u32 gMapObjectPic_Maniac_6[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/6.4bpp");
+const u32 gMapObjectPic_Maniac_7[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/7.4bpp");
+const u32 gMapObjectPic_Maniac_8[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/8.4bpp");
+const u32 gMapObjectPic_HexManiac_0[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/0.4bpp");
+const u32 gMapObjectPic_HexManiac_1[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/1.4bpp");
+const u32 gMapObjectPic_HexManiac_2[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/2.4bpp");
+const u32 gMapObjectPic_HexManiac_3[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/3.4bpp");
+const u32 gMapObjectPic_HexManiac_4[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/4.4bpp");
+const u32 gMapObjectPic_HexManiac_5[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/5.4bpp");
+const u32 gMapObjectPic_HexManiac_6[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/6.4bpp");
+const u32 gMapObjectPic_HexManiac_7[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/7.4bpp");
+const u32 gMapObjectPic_HexManiac_8[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/8.4bpp");
+const u32 gMapObjectPic_Woman8_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/0.4bpp");
+const u32 gMapObjectPic_Woman8_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/1.4bpp");
+const u32 gMapObjectPic_Woman8_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/2.4bpp");
+const u32 gMapObjectPic_Woman8_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/3.4bpp");
+const u32 gMapObjectPic_Woman8_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/4.4bpp");
+const u32 gMapObjectPic_Woman8_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/5.4bpp");
+const u32 gMapObjectPic_Woman8_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/6.4bpp");
+const u32 gMapObjectPic_Woman8_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/7.4bpp");
+const u32 gMapObjectPic_Woman8_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/8.4bpp");
+const u32 gMapObjectPic_SwimmerM_0[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/0.4bpp");
+const u32 gMapObjectPic_SwimmerM_1[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/1.4bpp");
+const u32 gMapObjectPic_SwimmerM_2[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/2.4bpp");
+const u32 gMapObjectPic_SwimmerM_3[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/3.4bpp");
+const u32 gMapObjectPic_SwimmerM_4[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/4.4bpp");
+const u32 gMapObjectPic_SwimmerM_5[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/5.4bpp");
+const u32 gMapObjectPic_SwimmerM_6[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/6.4bpp");
+const u32 gMapObjectPic_SwimmerM_7[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/7.4bpp");
+const u32 gMapObjectPic_SwimmerM_8[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/8.4bpp");
+const u32 gMapObjectPic_SwimmerF_0[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/0.4bpp");
+const u32 gMapObjectPic_SwimmerF_1[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/1.4bpp");
+const u32 gMapObjectPic_SwimmerF_2[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/2.4bpp");
+const u32 gMapObjectPic_SwimmerF_3[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/3.4bpp");
+const u32 gMapObjectPic_SwimmerF_4[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/4.4bpp");
+const u32 gMapObjectPic_SwimmerF_5[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/5.4bpp");
+const u32 gMapObjectPic_SwimmerF_6[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/6.4bpp");
+const u32 gMapObjectPic_SwimmerF_7[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/7.4bpp");
+const u32 gMapObjectPic_SwimmerF_8[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/8.4bpp");
+const u32 gMapObjectPic_BlackBelt_0[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/0.4bpp");
+const u32 gMapObjectPic_BlackBelt_1[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/1.4bpp");
+const u32 gMapObjectPic_BlackBelt_2[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/2.4bpp");
+const u32 gMapObjectPic_BlackBelt_3[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/3.4bpp");
+const u32 gMapObjectPic_BlackBelt_4[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/4.4bpp");
+const u32 gMapObjectPic_BlackBelt_5[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/5.4bpp");
+const u32 gMapObjectPic_BlackBelt_6[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/6.4bpp");
+const u32 gMapObjectPic_BlackBelt_7[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/7.4bpp");
+const u32 gMapObjectPic_BlackBelt_8[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/8.4bpp");
+const u32 gMapObjectPic_Beauty_0[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/0.4bpp");
+const u32 gMapObjectPic_Beauty_1[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/1.4bpp");
+const u32 gMapObjectPic_Beauty_2[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/2.4bpp");
+const u32 gMapObjectPic_Beauty_3[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/3.4bpp");
+const u32 gMapObjectPic_Beauty_4[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/4.4bpp");
+const u32 gMapObjectPic_Beauty_5[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/5.4bpp");
+const u32 gMapObjectPic_Beauty_6[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/6.4bpp");
+const u32 gMapObjectPic_Beauty_7[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/7.4bpp");
+const u32 gMapObjectPic_Beauty_8[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/8.4bpp");
+const u32 gMapObjectPic_Scientist1_0[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/0.4bpp");
+const u32 gMapObjectPic_Scientist1_1[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/1.4bpp");
+const u32 gMapObjectPic_Scientist1_2[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/2.4bpp");
+const u32 gMapObjectPic_Scientist1_3[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/3.4bpp");
+const u32 gMapObjectPic_Scientist1_4[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/4.4bpp");
+const u32 gMapObjectPic_Scientist1_5[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/5.4bpp");
+const u32 gMapObjectPic_Scientist1_6[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/6.4bpp");
+const u32 gMapObjectPic_Scientist1_7[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/7.4bpp");
+const u32 gMapObjectPic_Scientist1_8[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/8.4bpp");
+const u32 gMapObjectPic_Lass_0[] = INCBIN_U32("graphics/map_objects/pics/people/lass/0.4bpp");
+const u32 gMapObjectPic_Lass_1[] = INCBIN_U32("graphics/map_objects/pics/people/lass/1.4bpp");
+const u32 gMapObjectPic_Lass_2[] = INCBIN_U32("graphics/map_objects/pics/people/lass/2.4bpp");
+const u32 gMapObjectPic_Lass_3[] = INCBIN_U32("graphics/map_objects/pics/people/lass/3.4bpp");
+const u32 gMapObjectPic_Lass_4[] = INCBIN_U32("graphics/map_objects/pics/people/lass/4.4bpp");
+const u32 gMapObjectPic_Lass_5[] = INCBIN_U32("graphics/map_objects/pics/people/lass/5.4bpp");
+const u32 gMapObjectPic_Lass_6[] = INCBIN_U32("graphics/map_objects/pics/people/lass/6.4bpp");
+const u32 gMapObjectPic_Lass_7[] = INCBIN_U32("graphics/map_objects/pics/people/lass/7.4bpp");
+const u32 gMapObjectPic_Lass_8[] = INCBIN_U32("graphics/map_objects/pics/people/lass/8.4bpp");
+const u32 gMapObjectPic_Gentleman_0[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/0.4bpp");
+const u32 gMapObjectPic_Gentleman_1[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/1.4bpp");
+const u32 gMapObjectPic_Gentleman_2[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/2.4bpp");
+const u32 gMapObjectPic_Gentleman_3[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/3.4bpp");
+const u32 gMapObjectPic_Gentleman_4[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/4.4bpp");
+const u32 gMapObjectPic_Gentleman_5[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/5.4bpp");
+const u32 gMapObjectPic_Gentleman_6[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/6.4bpp");
+const u32 gMapObjectPic_Gentleman_7[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/7.4bpp");
+const u32 gMapObjectPic_Gentleman_8[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/8.4bpp");
+const u32 gMapObjectPic_Sailor_0[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/0.4bpp");
+const u32 gMapObjectPic_Sailor_1[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/1.4bpp");
+const u32 gMapObjectPic_Sailor_2[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/2.4bpp");
+const u32 gMapObjectPic_Sailor_3[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/3.4bpp");
+const u32 gMapObjectPic_Sailor_4[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/4.4bpp");
+const u32 gMapObjectPic_Sailor_5[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/5.4bpp");
+const u32 gMapObjectPic_Sailor_6[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/6.4bpp");
+const u32 gMapObjectPic_Sailor_7[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/7.4bpp");
+const u32 gMapObjectPic_Sailor_8[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/8.4bpp");
+const u32 gMapObjectPic_Fisherman_0[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/0.4bpp");
+const u32 gMapObjectPic_Fisherman_1[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/1.4bpp");
+const u32 gMapObjectPic_Fisherman_2[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/2.4bpp");
+const u32 gMapObjectPic_Fisherman_3[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/3.4bpp");
+const u32 gMapObjectPic_Fisherman_4[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/4.4bpp");
+const u32 gMapObjectPic_Fisherman_5[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/5.4bpp");
+const u32 gMapObjectPic_Fisherman_6[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/6.4bpp");
+const u32 gMapObjectPic_Fisherman_7[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/7.4bpp");
+const u32 gMapObjectPic_Fisherman_8[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/8.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_0[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/0.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_1[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/1.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_2[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/2.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_3[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/3.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_4[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/4.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_5[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/5.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_6[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/6.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_7[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/7.4bpp");
+const u32 gMapObjectPic_RunningTriathleteM_8[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/8.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_0[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/0.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_1[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/1.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_2[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/2.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_3[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/3.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_4[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/4.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_5[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/5.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_6[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/6.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_7[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/7.4bpp");
+const u32 gMapObjectPic_RunningTriathleteF_8[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/8.4bpp");
+const u32 gMapObjectPic_TuberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/0.4bpp");
+const u32 gMapObjectPic_TuberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/1.4bpp");
+const u32 gMapObjectPic_TuberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/2.4bpp");
+const u32 gMapObjectPic_TuberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/3.4bpp");
+const u32 gMapObjectPic_TuberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/4.4bpp");
+const u32 gMapObjectPic_TuberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/5.4bpp");
+const u32 gMapObjectPic_TuberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/6.4bpp");
+const u32 gMapObjectPic_TuberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/7.4bpp");
+const u32 gMapObjectPic_TuberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/8.4bpp");
+const u32 gMapObjectPic_TuberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/0.4bpp");
+const u32 gMapObjectPic_TuberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/1.4bpp");
+const u32 gMapObjectPic_TuberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/2.4bpp");
+const u32 gMapObjectPic_TuberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/3.4bpp");
+const u32 gMapObjectPic_TuberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/4.4bpp");
+const u32 gMapObjectPic_TuberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/5.4bpp");
+const u32 gMapObjectPic_TuberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/6.4bpp");
+const u32 gMapObjectPic_TuberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/7.4bpp");
+const u32 gMapObjectPic_TuberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/8.4bpp");
+const u32 gMapObjectPic_Hiker_0[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/0.4bpp");
+const u32 gMapObjectPic_Hiker_1[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/1.4bpp");
+const u32 gMapObjectPic_Hiker_2[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/2.4bpp");
+const u32 gMapObjectPic_Hiker_3[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/3.4bpp");
+const u32 gMapObjectPic_Hiker_4[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/4.4bpp");
+const u32 gMapObjectPic_Hiker_5[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/5.4bpp");
+const u32 gMapObjectPic_Hiker_6[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/6.4bpp");
+const u32 gMapObjectPic_Hiker_7[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/7.4bpp");
+const u32 gMapObjectPic_Hiker_8[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/8.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_0[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/0.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_1[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/1.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_2[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/2.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_3[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/3.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_4[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/4.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_5[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/5.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_6[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/6.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_7[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/7.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteM_8[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/8.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_0[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/0.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_1[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/1.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_2[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/2.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_3[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/3.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_4[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/4.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_5[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/5.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_6[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/6.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_7[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/7.4bpp");
+const u32 gMapObjectPic_CyclingTriathleteF_8[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/8.4bpp");
+const u32 gMapObjectPic_Man5_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/0.4bpp");
+const u32 gMapObjectPic_Man5_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/1.4bpp");
+const u32 gMapObjectPic_Man5_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/2.4bpp");
+const u32 gMapObjectPic_Man5_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/3.4bpp");
+const u32 gMapObjectPic_Man5_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/4.4bpp");
+const u32 gMapObjectPic_Man5_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/5.4bpp");
+const u32 gMapObjectPic_Man5_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/6.4bpp");
+const u32 gMapObjectPic_Man5_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/7.4bpp");
+const u32 gMapObjectPic_Man5_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/8.4bpp");
+const u32 gMapObjectPic_Man6_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/0.4bpp");
+const u32 gMapObjectPic_Man6_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/1.4bpp");
+const u32 gMapObjectPic_Man6_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/2.4bpp");
+const u32 gMapObjectPic_Man6_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/3.4bpp");
+const u32 gMapObjectPic_Man6_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/4.4bpp");
+const u32 gMapObjectPic_Man6_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/5.4bpp");
+const u32 gMapObjectPic_Man6_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/6.4bpp");
+const u32 gMapObjectPic_Man6_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/7.4bpp");
+const u32 gMapObjectPic_Man6_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/8.4bpp");
+const u32 gMapObjectPic_Nurse_0[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/0.4bpp");
+const u32 gMapObjectPic_Nurse_1[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/1.4bpp");
+const u32 gMapObjectPic_Nurse_2[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/2.4bpp");
+const u32 gMapObjectPic_Nurse_3[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/3.4bpp");
+const u32 gMapObjectPic_Nurse_4[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/4.4bpp");
+const u32 gMapObjectPic_Nurse_5[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/5.4bpp");
+const u32 gMapObjectPic_Nurse_6[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/6.4bpp");
+const u32 gMapObjectPic_Nurse_7[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/7.4bpp");
+const u32 gMapObjectPic_Nurse_8[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/8.4bpp");
+const u32 gMapObjectPic_Nurse_9[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/9.4bpp");
+const u32 gMapObjectPic_ItemBall[] = INCBIN_U32("graphics/map_objects/pics/misc/item_ball.4bpp");
+const u32 gMapObjectPic_ProfBirch_0[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/0.4bpp");
+const u32 gMapObjectPic_ProfBirch_1[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/1.4bpp");
+const u32 gMapObjectPic_ProfBirch_2[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/2.4bpp");
+const u32 gMapObjectPic_ProfBirch_3[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/3.4bpp");
+const u32 gMapObjectPic_ProfBirch_4[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/4.4bpp");
+const u32 gMapObjectPic_ProfBirch_5[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/5.4bpp");
+const u32 gMapObjectPic_ProfBirch_6[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/6.4bpp");
+const u32 gMapObjectPic_ProfBirch_7[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/7.4bpp");
+const u32 gMapObjectPic_ProfBirch_8[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/8.4bpp");
+const u32 gMapObjectPic_ReporterM_0[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/0.4bpp");
+const u32 gMapObjectPic_ReporterM_1[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/1.4bpp");
+const u32 gMapObjectPic_ReporterM_2[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/2.4bpp");
+const u32 gMapObjectPic_ReporterM_3[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/3.4bpp");
+const u32 gMapObjectPic_ReporterM_4[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/4.4bpp");
+const u32 gMapObjectPic_ReporterM_5[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/5.4bpp");
+const u32 gMapObjectPic_ReporterM_6[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/6.4bpp");
+const u32 gMapObjectPic_ReporterM_7[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/7.4bpp");
+const u32 gMapObjectPic_ReporterM_8[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/8.4bpp");
+const u32 gMapObjectPic_ReporterF_0[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/0.4bpp");
+const u32 gMapObjectPic_ReporterF_1[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/1.4bpp");
+const u32 gMapObjectPic_ReporterF_2[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/2.4bpp");
+const u32 gMapObjectPic_ReporterF_3[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/3.4bpp");
+const u32 gMapObjectPic_ReporterF_4[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/4.4bpp");
+const u32 gMapObjectPic_ReporterF_5[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/5.4bpp");
+const u32 gMapObjectPic_ReporterF_6[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/6.4bpp");
+const u32 gMapObjectPic_ReporterF_7[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/7.4bpp");
+const u32 gMapObjectPic_ReporterF_8[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/8.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_0[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/0.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_1[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/1.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_2[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/2.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_3[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/3.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_4[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/4.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_5[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/5.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_6[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/6.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_7[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/7.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan1_8[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/8.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_0[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/0.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_1[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/1.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_2[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/2.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_3[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/3.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_4[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/4.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_5[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/5.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_6[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/6.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_7[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/7.4bpp");
+const u32 gMapObjectPic_MauvilleOldMan2_8[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/8.4bpp");
+const u32 gMapObjectPic_MartEmployee_0[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/0.4bpp");
+const u32 gMapObjectPic_MartEmployee_1[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/1.4bpp");
+const u32 gMapObjectPic_MartEmployee_2[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/2.4bpp");
+const u32 gMapObjectPic_MartEmployee_3[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/3.4bpp");
+const u32 gMapObjectPic_MartEmployee_4[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/4.4bpp");
+const u32 gMapObjectPic_MartEmployee_5[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/5.4bpp");
+const u32 gMapObjectPic_MartEmployee_6[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/6.4bpp");
+const u32 gMapObjectPic_MartEmployee_7[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/7.4bpp");
+const u32 gMapObjectPic_MartEmployee_8[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/8.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_0[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/0.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_1[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/1.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_2[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/2.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_3[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/3.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_4[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/4.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_5[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/5.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_6[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/6.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_7[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/7.4bpp");
+const u32 gMapObjectPic_RooftopSaleWoman_8[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/8.4bpp");
+const u32 gMapObjectPic_Teala_0[] = INCBIN_U32("graphics/map_objects/pics/people/teala/0.4bpp");
+const u32 gMapObjectPic_Teala_1[] = INCBIN_U32("graphics/map_objects/pics/people/teala/1.4bpp");
+const u32 gMapObjectPic_Teala_2[] = INCBIN_U32("graphics/map_objects/pics/people/teala/2.4bpp");
+const u32 gMapObjectPic_Teala_3[] = INCBIN_U32("graphics/map_objects/pics/people/teala/3.4bpp");
+const u32 gMapObjectPic_Teala_4[] = INCBIN_U32("graphics/map_objects/pics/people/teala/4.4bpp");
+const u32 gMapObjectPic_Teala_5[] = INCBIN_U32("graphics/map_objects/pics/people/teala/5.4bpp");
+const u32 gMapObjectPic_Teala_6[] = INCBIN_U32("graphics/map_objects/pics/people/teala/6.4bpp");
+const u32 gMapObjectPic_Teala_7[] = INCBIN_U32("graphics/map_objects/pics/people/teala/7.4bpp");
+const u32 gMapObjectPic_Teala_8[] = INCBIN_U32("graphics/map_objects/pics/people/teala/8.4bpp");
+const u32 gMapObjectPic_Artist_0[] = INCBIN_U32("graphics/map_objects/pics/people/artist/0.4bpp");
+const u32 gMapObjectPic_Artist_1[] = INCBIN_U32("graphics/map_objects/pics/people/artist/1.4bpp");
+const u32 gMapObjectPic_Artist_2[] = INCBIN_U32("graphics/map_objects/pics/people/artist/2.4bpp");
+const u32 gMapObjectPic_Artist_3[] = INCBIN_U32("graphics/map_objects/pics/people/artist/3.4bpp");
+const u32 gMapObjectPic_Artist_4[] = INCBIN_U32("graphics/map_objects/pics/people/artist/4.4bpp");
+const u32 gMapObjectPic_Artist_5[] = INCBIN_U32("graphics/map_objects/pics/people/artist/5.4bpp");
+const u32 gMapObjectPic_Artist_6[] = INCBIN_U32("graphics/map_objects/pics/people/artist/6.4bpp");
+const u32 gMapObjectPic_Artist_7[] = INCBIN_U32("graphics/map_objects/pics/people/artist/7.4bpp");
+const u32 gMapObjectPic_Artist_8[] = INCBIN_U32("graphics/map_objects/pics/people/artist/8.4bpp");
+const u32 gMapObjectPic_Cameraman_0[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/0.4bpp");
+const u32 gMapObjectPic_Cameraman_1[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/1.4bpp");
+const u32 gMapObjectPic_Cameraman_2[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/2.4bpp");
+const u32 gMapObjectPic_Cameraman_3[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/3.4bpp");
+const u32 gMapObjectPic_Cameraman_4[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/4.4bpp");
+const u32 gMapObjectPic_Cameraman_5[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/5.4bpp");
+const u32 gMapObjectPic_Cameraman_6[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/6.4bpp");
+const u32 gMapObjectPic_Cameraman_7[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/7.4bpp");
+const u32 gMapObjectPic_Cameraman_8[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/8.4bpp");
+const u32 gMapObjectPic_Scientist2_0[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/0.4bpp");
+const u32 gMapObjectPic_Scientist2_1[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/1.4bpp");
+const u32 gMapObjectPic_Scientist2_2[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/2.4bpp");
+const u32 gMapObjectPic_Scientist2_3[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/3.4bpp");
+const u32 gMapObjectPic_Scientist2_4[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/4.4bpp");
+const u32 gMapObjectPic_Scientist2_5[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/5.4bpp");
+const u32 gMapObjectPic_Scientist2_6[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/6.4bpp");
+const u32 gMapObjectPic_Scientist2_7[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/7.4bpp");
+const u32 gMapObjectPic_Scientist2_8[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/8.4bpp");
+const u32 gMapObjectPic_Man7_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/0.4bpp");
+const u32 gMapObjectPic_Man7_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/1.4bpp");
+const u32 gMapObjectPic_Man7_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/2.4bpp");
+const u32 gMapObjectPic_Man7_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/3.4bpp");
+const u32 gMapObjectPic_Man7_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/4.4bpp");
+const u32 gMapObjectPic_Man7_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/5.4bpp");
+const u32 gMapObjectPic_Man7_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/6.4bpp");
+const u32 gMapObjectPic_Man7_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/7.4bpp");
+const u32 gMapObjectPic_Man7_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/8.4bpp");
+const u32 gMapObjectPic_AquaMemberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/0.4bpp");
+const u32 gMapObjectPic_AquaMemberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/1.4bpp");
+const u32 gMapObjectPic_AquaMemberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/2.4bpp");
+const u32 gMapObjectPic_AquaMemberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/3.4bpp");
+const u32 gMapObjectPic_AquaMemberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/4.4bpp");
+const u32 gMapObjectPic_AquaMemberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/5.4bpp");
+const u32 gMapObjectPic_AquaMemberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/6.4bpp");
+const u32 gMapObjectPic_AquaMemberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/7.4bpp");
+const u32 gMapObjectPic_AquaMemberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/8.4bpp");
+const u32 gMapObjectPic_AquaMemberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/0.4bpp");
+const u32 gMapObjectPic_AquaMemberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/1.4bpp");
+const u32 gMapObjectPic_AquaMemberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/2.4bpp");
+const u32 gMapObjectPic_AquaMemberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/3.4bpp");
+const u32 gMapObjectPic_AquaMemberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/4.4bpp");
+const u32 gMapObjectPic_AquaMemberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/5.4bpp");
+const u32 gMapObjectPic_AquaMemberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/6.4bpp");
+const u32 gMapObjectPic_AquaMemberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/7.4bpp");
+const u32 gMapObjectPic_AquaMemberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/8.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/0.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/1.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/2.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/3.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/4.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/5.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/6.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/7.4bpp");
+const u32 gMapObjectPic_MagmaMemberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/8.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/0.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/1.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/2.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/3.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/4.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/5.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/6.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/7.4bpp");
+const u32 gMapObjectPic_MagmaMemberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/8.4bpp");
+const u32 gMapObjectPic_Sidney_0[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/0.4bpp");
+const u32 gMapObjectPic_Sidney_1[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/1.4bpp");
+const u32 gMapObjectPic_Sidney_2[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/2.4bpp");
+const u32 gMapObjectPic_Phoebe_0[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/0.4bpp");
+const u32 gMapObjectPic_Phoebe_1[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/1.4bpp");
+const u32 gMapObjectPic_Phoebe_2[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/2.4bpp");
+const u32 gMapObjectPic_Glacia_0[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/0.4bpp");
+const u32 gMapObjectPic_Glacia_1[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/1.4bpp");
+const u32 gMapObjectPic_Glacia_2[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/2.4bpp");
+const u32 gMapObjectPic_Drake_0[] = INCBIN_U32("graphics/map_objects/pics/people/drake/0.4bpp");
+const u32 gMapObjectPic_Drake_1[] = INCBIN_U32("graphics/map_objects/pics/people/drake/1.4bpp");
+const u32 gMapObjectPic_Drake_2[] = INCBIN_U32("graphics/map_objects/pics/people/drake/2.4bpp");
+const u32 gMapObjectPic_Roxanne_0[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/0.4bpp");
+const u32 gMapObjectPic_Roxanne_1[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/1.4bpp");
+const u32 gMapObjectPic_Roxanne_2[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/2.4bpp");
+const u32 gMapObjectPic_Brawly_0[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/0.4bpp");
+const u32 gMapObjectPic_Brawly_1[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/1.4bpp");
+const u32 gMapObjectPic_Brawly_2[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/2.4bpp");
+const u32 gMapObjectPic_Wattson_0[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/0.4bpp");
+const u32 gMapObjectPic_Wattson_1[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/1.4bpp");
+const u32 gMapObjectPic_Wattson_2[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/2.4bpp");
+const u32 gMapObjectPic_Flannery_0[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/0.4bpp");
+const u32 gMapObjectPic_Flannery_1[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/1.4bpp");
+const u32 gMapObjectPic_Flannery_2[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/2.4bpp");
+const u32 gMapObjectPic_Norman_0[] = INCBIN_U32("graphics/map_objects/pics/people/norman/0.4bpp");
+const u32 gMapObjectPic_Norman_1[] = INCBIN_U32("graphics/map_objects/pics/people/norman/1.4bpp");
+const u32 gMapObjectPic_Norman_2[] = INCBIN_U32("graphics/map_objects/pics/people/norman/2.4bpp");
+const u32 gMapObjectPic_Norman_3[] = INCBIN_U32("graphics/map_objects/pics/people/norman/3.4bpp");
+const u32 gMapObjectPic_Norman_4[] = INCBIN_U32("graphics/map_objects/pics/people/norman/4.4bpp");
+const u32 gMapObjectPic_Norman_5[] = INCBIN_U32("graphics/map_objects/pics/people/norman/5.4bpp");
+const u32 gMapObjectPic_Norman_6[] = INCBIN_U32("graphics/map_objects/pics/people/norman/6.4bpp");
+const u32 gMapObjectPic_Norman_7[] = INCBIN_U32("graphics/map_objects/pics/people/norman/7.4bpp");
+const u32 gMapObjectPic_Norman_8[] = INCBIN_U32("graphics/map_objects/pics/people/norman/8.4bpp");
+const u32 gMapObjectPic_Winona_0[] = INCBIN_U32("graphics/map_objects/pics/people/winona/0.4bpp");
+const u32 gMapObjectPic_Winona_1[] = INCBIN_U32("graphics/map_objects/pics/people/winona/1.4bpp");
+const u32 gMapObjectPic_Winona_2[] = INCBIN_U32("graphics/map_objects/pics/people/winona/2.4bpp");
+const u32 gMapObjectPic_Liza_0[] = INCBIN_U32("graphics/map_objects/pics/people/liza/0.4bpp");
+const u32 gMapObjectPic_Liza_1[] = INCBIN_U32("graphics/map_objects/pics/people/liza/1.4bpp");
+const u32 gMapObjectPic_Liza_2[] = INCBIN_U32("graphics/map_objects/pics/people/liza/2.4bpp");
+const u32 gMapObjectPic_Tate_0[] = INCBIN_U32("graphics/map_objects/pics/people/tate/0.4bpp");
+const u32 gMapObjectPic_Tate_1[] = INCBIN_U32("graphics/map_objects/pics/people/tate/1.4bpp");
+const u32 gMapObjectPic_Tate_2[] = INCBIN_U32("graphics/map_objects/pics/people/tate/2.4bpp");
+const u32 gMapObjectPic_Wallace_0[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/0.4bpp");
+const u32 gMapObjectPic_Wallace_1[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/1.4bpp");
+const u32 gMapObjectPic_Wallace_2[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/2.4bpp");
+const u32 gMapObjectPic_Wallace_3[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/3.4bpp");
+const u32 gMapObjectPic_Wallace_4[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/4.4bpp");
+const u32 gMapObjectPic_Wallace_5[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/5.4bpp");
+const u32 gMapObjectPic_Wallace_6[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/6.4bpp");
+const u32 gMapObjectPic_Wallace_7[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/7.4bpp");
+const u32 gMapObjectPic_Wallace_8[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/8.4bpp");
+const u32 gMapObjectPic_Steven_0[] = INCBIN_U32("graphics/map_objects/pics/people/steven/0.4bpp");
+const u32 gMapObjectPic_Steven_1[] = INCBIN_U32("graphics/map_objects/pics/people/steven/1.4bpp");
+const u32 gMapObjectPic_Steven_2[] = INCBIN_U32("graphics/map_objects/pics/people/steven/2.4bpp");
+const u32 gMapObjectPic_Steven_3[] = INCBIN_U32("graphics/map_objects/pics/people/steven/3.4bpp");
+const u32 gMapObjectPic_Steven_4[] = INCBIN_U32("graphics/map_objects/pics/people/steven/4.4bpp");
+const u32 gMapObjectPic_Steven_5[] = INCBIN_U32("graphics/map_objects/pics/people/steven/5.4bpp");
+const u32 gMapObjectPic_Steven_6[] = INCBIN_U32("graphics/map_objects/pics/people/steven/6.4bpp");
+const u32 gMapObjectPic_Steven_7[] = INCBIN_U32("graphics/map_objects/pics/people/steven/7.4bpp");
+const u32 gMapObjectPic_Steven_8[] = INCBIN_U32("graphics/map_objects/pics/people/steven/8.4bpp");
+const u32 gMapObjectPic_Wally_0[] = INCBIN_U32("graphics/map_objects/pics/people/wally/0.4bpp");
+const u32 gMapObjectPic_Wally_1[] = INCBIN_U32("graphics/map_objects/pics/people/wally/1.4bpp");
+const u32 gMapObjectPic_Wally_2[] = INCBIN_U32("graphics/map_objects/pics/people/wally/2.4bpp");
+const u32 gMapObjectPic_Wally_3[] = INCBIN_U32("graphics/map_objects/pics/people/wally/3.4bpp");
+const u32 gMapObjectPic_Wally_4[] = INCBIN_U32("graphics/map_objects/pics/people/wally/4.4bpp");
+const u32 gMapObjectPic_Wally_5[] = INCBIN_U32("graphics/map_objects/pics/people/wally/5.4bpp");
+const u32 gMapObjectPic_Wally_6[] = INCBIN_U32("graphics/map_objects/pics/people/wally/6.4bpp");
+const u32 gMapObjectPic_Wally_7[] = INCBIN_U32("graphics/map_objects/pics/people/wally/7.4bpp");
+const u32 gMapObjectPic_Wally_8[] = INCBIN_U32("graphics/map_objects/pics/people/wally/8.4bpp");
+const u32 gMapObjectPic_LittleBoy3_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/0.4bpp");
+const u32 gMapObjectPic_LittleBoy3_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/1.4bpp");
+const u32 gMapObjectPic_LittleBoy3_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/2.4bpp");
+const u32 gMapObjectPic_LittleBoy3_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/3.4bpp");
+const u32 gMapObjectPic_LittleBoy3_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/4.4bpp");
+const u32 gMapObjectPic_LittleBoy3_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/5.4bpp");
+const u32 gMapObjectPic_LittleBoy3_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/6.4bpp");
+const u32 gMapObjectPic_LittleBoy3_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/7.4bpp");
+const u32 gMapObjectPic_LittleBoy3_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/8.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_0[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/0.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_1[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/1.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_2[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/2.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_3[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/3.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_4[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/4.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_5[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/5.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_6[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/6.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_7[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/7.4bpp");
+const u32 gMapObjectPic_HotSpringsOldWoman_8[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/8.4bpp");
+const u32 gMapObjectPic_LatiasLatios_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/0.4bpp");
+const u32 gMapObjectPic_LatiasLatios_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/1.4bpp");
+const u32 gMapObjectPic_LatiasLatios_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/2.4bpp");
+const u32 gMapObjectPic_Boy5_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/0.4bpp");
+const u32 gMapObjectPic_Boy5_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/1.4bpp");
+const u32 gMapObjectPic_Boy5_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/2.4bpp");
+const u32 gMapObjectPic_ContestJudge_0[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/0.4bpp");
+const u32 gMapObjectPic_ContestJudge_1[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/1.4bpp");
+const u32 gMapObjectPic_ContestJudge_2[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/2.4bpp");
+const u32 gMapObjectPic_ContestJudge_3[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/3.4bpp");
+const u32 gMapObjectPic_ContestJudge_4[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/4.4bpp");
+const u32 gMapObjectPic_ContestJudge_5[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/5.4bpp");
+const u32 gMapObjectPic_ContestJudge_6[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/6.4bpp");
+const u32 gMapObjectPic_ContestJudge_7[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/7.4bpp");
+const u32 gMapObjectPic_ContestJudge_8[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/8.4bpp");
+const u32 gMapObjectPic_Archie_0[] = INCBIN_U32("graphics/map_objects/pics/people/archie/0.4bpp");
+const u32 gMapObjectPic_Archie_1[] = INCBIN_U32("graphics/map_objects/pics/people/archie/1.4bpp");
+const u32 gMapObjectPic_Archie_2[] = INCBIN_U32("graphics/map_objects/pics/people/archie/2.4bpp");
+const u32 gMapObjectPic_Archie_3[] = INCBIN_U32("graphics/map_objects/pics/people/archie/3.4bpp");
+const u32 gMapObjectPic_Archie_4[] = INCBIN_U32("graphics/map_objects/pics/people/archie/4.4bpp");
+const u32 gMapObjectPic_Archie_5[] = INCBIN_U32("graphics/map_objects/pics/people/archie/5.4bpp");
+const u32 gMapObjectPic_Archie_6[] = INCBIN_U32("graphics/map_objects/pics/people/archie/6.4bpp");
+const u32 gMapObjectPic_Archie_7[] = INCBIN_U32("graphics/map_objects/pics/people/archie/7.4bpp");
+const u32 gMapObjectPic_Archie_8[] = INCBIN_U32("graphics/map_objects/pics/people/archie/8.4bpp");
+const u32 gMapObjectPic_Maxie_0[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/0.4bpp");
+const u32 gMapObjectPic_Maxie_1[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/1.4bpp");
+const u32 gMapObjectPic_Maxie_2[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/2.4bpp");
+const u32 gMapObjectPic_Maxie_3[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/3.4bpp");
+const u32 gMapObjectPic_Maxie_4[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/4.4bpp");
+const u32 gMapObjectPic_Maxie_5[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/5.4bpp");
+const u32 gMapObjectPic_Maxie_6[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/6.4bpp");
+const u32 gMapObjectPic_Maxie_7[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/7.4bpp");
+const u32 gMapObjectPic_Maxie_8[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/8.4bpp");
+const u32 gMapObjectPic_Kyogre_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kyogre/0.4bpp");
+const u32 gMapObjectPic_Kyogre_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kyogre/1.4bpp");
+const u32 gMapObjectPic_Groudon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/groudon/0.4bpp");
+const u32 gMapObjectPic_Groudon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/groudon/1.4bpp");
+const u32 gMapObjectPic_Regi[] = INCBIN_U32("graphics/map_objects/pics/pokemon/regi.4bpp");
+const u32 gMapObjectPic_Skitty_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/0.4bpp");
+const u32 gMapObjectPic_Skitty_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/1.4bpp");
+const u32 gMapObjectPic_Skitty_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/2.4bpp");
+const u32 gMapObjectPic_Kecleon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/0.4bpp");
+const u32 gMapObjectPic_Kecleon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/1.4bpp");
+const u32 gMapObjectPic_Kecleon_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/2.4bpp");
+const u32 gMapObjectPic_Rayquaza_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/rayquaza/0.4bpp");
+const u32 gMapObjectPic_Rayquaza_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/rayquaza/1.4bpp");
+const u32 gMapObjectPic_Zigzagoon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/0.4bpp");
+const u32 gMapObjectPic_Zigzagoon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/1.4bpp");
+const u32 gMapObjectPic_Zigzagoon_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/2.4bpp");
+const u32 gMapObjectPic_Pikachu_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/0.4bpp");
+const u32 gMapObjectPic_Pikachu_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/1.4bpp");
+const u32 gMapObjectPic_Pikachu_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/2.4bpp");
+const u32 gMapObjectPic_Azumarill_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/0.4bpp");
+const u32 gMapObjectPic_Azumarill_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/1.4bpp");
+const u32 gMapObjectPic_Azumarill_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/2.4bpp");
+const u32 gMapObjectPic_Wingull_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/0.4bpp");
+const u32 gMapObjectPic_Wingull_3[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/3.4bpp");
+const u32 gMapObjectPic_Wingull_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/1.4bpp");
+const u32 gMapObjectPic_Wingull_4[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/4.4bpp");
+const u32 gMapObjectPic_Wingull_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/2.4bpp");
+const u32 gMapObjectPic_Wingull_5[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/5.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/0.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/1.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/2.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/3.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/4.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/5.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/6.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/7.4bpp");
+const u32 gMapObjectPic_TuberMSwimming_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/8.4bpp");
+const u32 gMapObjectPic_Azurill_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/0.4bpp");
+const u32 gMapObjectPic_Azurill_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/1.4bpp");
+const u32 gMapObjectPic_Azurill_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/2.4bpp");
+const u32 gMapObjectPic_Mom_0[] = INCBIN_U32("graphics/map_objects/pics/people/mom/0.4bpp");
+const u32 gMapObjectPic_Mom_1[] = INCBIN_U32("graphics/map_objects/pics/people/mom/1.4bpp");
+const u32 gMapObjectPic_Mom_2[] = INCBIN_U32("graphics/map_objects/pics/people/mom/2.4bpp");
+const u32 gMapObjectPic_Mom_3[] = INCBIN_U32("graphics/map_objects/pics/people/mom/3.4bpp");
+const u32 gMapObjectPic_Mom_4[] = INCBIN_U32("graphics/map_objects/pics/people/mom/4.4bpp");
+const u32 gMapObjectPic_Mom_5[] = INCBIN_U32("graphics/map_objects/pics/people/mom/5.4bpp");
+const u32 gMapObjectPic_Mom_6[] = INCBIN_U32("graphics/map_objects/pics/people/mom/6.4bpp");
+const u32 gMapObjectPic_Mom_7[] = INCBIN_U32("graphics/map_objects/pics/people/mom/7.4bpp");
+const u32 gMapObjectPic_Mom_8[] = INCBIN_U32("graphics/map_objects/pics/people/mom/8.4bpp");
+const u16 gMapObjectPalette22[] = INCBIN_U16("graphics/map_objects/palettes/22.gbapal");
+const u16 gMapObjectPalette23[] = INCBIN_U16("graphics/map_objects/palettes/23.gbapal");
+const u16 gMapObjectPalette24[] = INCBIN_U16("graphics/map_objects/palettes/24.gbapal");
+const u16 gMapObjectPalette25[] = INCBIN_U16("graphics/map_objects/palettes/25.gbapal");
+const u32 gMapObjectPic_UnusedNatuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_natu_doll.4bpp");
+const u32 gMapObjectPic_UnusedMagnemiteDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_magnemite_doll.4bpp");
+const u32 gMapObjectPic_UnusedSquirtleDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_squirtle_doll.4bpp");
+const u32 gMapObjectPic_UnusedWooperDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_wooper_doll.4bpp");
+const u32 gMapObjectPic_UnusedPikachuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_pikachu_doll.4bpp");
+const u32 gMapObjectPic_UnusedPorygon2Doll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_porygon2_doll.4bpp");
+const u32 gMapObjectPic_PichuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/pichu_doll.4bpp");
+const u32 gMapObjectPic_PikachuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/pikachu_doll.4bpp");
+const u32 gMapObjectPic_MarillDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/marill_doll.4bpp");
+const u32 gMapObjectPic_TogepiDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/togepi_doll.4bpp");
+const u32 gMapObjectPic_CyndaquilDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/cyndaquil_doll.4bpp");
+const u32 gMapObjectPic_ChikoritaDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/chikorita_doll.4bpp");
+const u32 gMapObjectPic_TotodileDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/totodile_doll.4bpp");
+const u32 gMapObjectPic_JigglypuffDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/jigglypuff_doll.4bpp");
+const u32 gMapObjectPic_MeowthDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/meowth_doll.4bpp");
+const u32 gMapObjectPic_ClefairyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/clefairy_doll.4bpp");
+const u32 gMapObjectPic_DittoDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/ditto_doll.4bpp");
+const u32 gMapObjectPic_SmoochumDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/smoochum_doll.4bpp");
+const u32 gMapObjectPic_TreeckoDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/treecko_doll.4bpp");
+const u32 gMapObjectPic_TorchicDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/torchic_doll.4bpp");
+const u32 gMapObjectPic_MudkipDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/mudkip_doll.4bpp");
+const u32 gMapObjectPic_DuskullDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/duskull_doll.4bpp");
+const u32 gMapObjectPic_WynautDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/wynaut_doll.4bpp");
+const u32 gMapObjectPic_BaltoyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/baltoy_doll.4bpp");
+const u32 gMapObjectPic_KecleonDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/kecleon_doll.4bpp");
+const u32 gMapObjectPic_AzurillDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/azurill_doll.4bpp");
+const u32 gMapObjectPic_SkittyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/skitty_doll.4bpp");
+const u32 gMapObjectPic_SwabluDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/swablu_doll.4bpp");
+const u32 gMapObjectPic_GulpinDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/gulpin_doll.4bpp");
+const u32 gMapObjectPic_LotadDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/lotad_doll.4bpp");
+const u32 gMapObjectPic_SeedotDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/seedot_doll.4bpp");
+const u32 gMapObjectPic_PikaCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/pika_cushion.4bpp");
+const u32 gMapObjectPic_RoundCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/round_cushion.4bpp");
+const u32 gMapObjectPic_KissCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/kiss_cushion.4bpp");
+const u32 gMapObjectPic_ZigzagCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/zigzag_cushion.4bpp");
+const u32 gMapObjectPic_SpinCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/spin_cushion.4bpp");
+const u32 gMapObjectPic_DiamondCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/diamond_cushion.4bpp");
+const u32 gMapObjectPic_BallCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/ball_cushion.4bpp");
+const u32 gMapObjectPic_GrassCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/grass_cushion.4bpp");
+const u32 gMapObjectPic_FireCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/fire_cushion.4bpp");
+const u32 gMapObjectPic_WaterCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/water_cushion.4bpp");
+const u32 gMapObjectPic_BigSnorlaxDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_snorlax_doll.4bpp");
+const u32 gMapObjectPic_BigRhydonDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_rhydon_doll.4bpp");
+const u32 gMapObjectPic_BigLaprasDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_lapras_doll.4bpp");
+const u32 gMapObjectPic_BigVenusaurDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_venusaur_doll.4bpp");
+const u32 gMapObjectPic_BigCharizardDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_charizard_doll.4bpp");
+const u32 gMapObjectPic_BigBlastoiseDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_blastoise_doll.4bpp");
+const u32 gMapObjectPic_BigWailmerDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_wailmer_doll.4bpp");
+const u32 gMapObjectPic_BigRegirockDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_regirock_doll.4bpp");
+const u32 gMapObjectPic_BigRegiceDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_regice_doll.4bpp");
+const u32 gMapObjectPic_BigRegisteelDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_registeel_doll.4bpp");
+const u32 gMapObjectPic_CuttableTree_0[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/0.4bpp");
+const u32 gMapObjectPic_CuttableTree_1[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/1.4bpp");
+const u32 gMapObjectPic_CuttableTree_2[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/2.4bpp");
+const u32 gMapObjectPic_CuttableTree_3[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/3.4bpp");
+const u32 gMapObjectPic_BreakableRock_0[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/0.4bpp");
+const u32 gMapObjectPic_BreakableRock_1[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/1.4bpp");
+const u32 gMapObjectPic_BreakableRock_2[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/2.4bpp");
+const u32 gMapObjectPic_BreakableRock_3[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/3.4bpp");
+const u32 gMapObjectPic_PushableBoulder[] = INCBIN_U32("graphics/map_objects/pics/misc/pushable_boulder.4bpp");
+const u32 gMapObjectPic_MrBrineysBoat_0[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/0.4bpp");
+const u32 gMapObjectPic_MrBrineysBoat_1[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/1.4bpp");
+const u32 gMapObjectPic_MrBrineysBoat_2[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/2.4bpp");
+const u32 gMapObjectPic_Fossil[] = INCBIN_U32("graphics/map_objects/pics/misc/fossil.4bpp");
+const u32 gMapObjectPic_SubmarineShadow[] = INCBIN_U32("graphics/map_objects/pics/misc/submarine_shadow.4bpp");
+const u16 gMapObjectPalette26[] = INCBIN_U16("graphics/map_objects/palettes/26.gbapal");
+const u32 gMapObjectPic_Truck[] = INCBIN_U32("graphics/map_objects/pics/misc/truck.4bpp");
+const u16 gMapObjectPalette14[] = INCBIN_U16("graphics/map_objects/palettes/14.gbapal");
+const u32 gMapObjectPic_MachokeCarryingBox_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/0.4bpp");
+const u32 gMapObjectPic_MachokeCarryingBox_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/1.4bpp");
+const u32 gMapObjectPic_MachokeCarryingBox_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/2.4bpp");
+const u32 gMapObjectPic_MachokeFacingAway_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_facing_away/0.4bpp");
+const u32 gMapObjectPic_MachokeFacingAway_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_facing_away/1.4bpp");
+const u16 gMapObjectPalette15[] = INCBIN_U16("graphics/map_objects/palettes/15.gbapal");
+const u32 gMapObjectPic_BirchsBag[] = INCBIN_U32("graphics/map_objects/pics/misc/birchs_bag.4bpp");
+const u32 gMapObjectPic_Poochyena_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/0.4bpp");
+const u32 gMapObjectPic_Poochyena_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/1.4bpp");
+const u32 gMapObjectPic_Poochyena_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/2.4bpp");
+const u32 gMapObjectPic_Poochyena_3[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/3.4bpp");
+const u32 gMapObjectPic_Poochyena_4[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/4.4bpp");
+const u32 gMapObjectPic_Poochyena_5[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/5.4bpp");
+const u32 gMapObjectPic_Poochyena_6[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/6.4bpp");
+const u32 gMapObjectPic_Poochyena_7[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/7.4bpp");
+const u32 gMapObjectPic_Poochyena_8[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/8.4bpp");
+const u16 gMapObjectPalette16[] = INCBIN_U16("graphics/map_objects/palettes/16.gbapal");
+const u32 gMapObjectPic_CableCar[] = INCBIN_U32("graphics/map_objects/pics/misc/cable_car.4bpp");
+const u16 gMapObjectPalette20[] = INCBIN_U16("graphics/map_objects/palettes/20.gbapal");
+const u32 gMapObjectPic_SSTidal[] = INCBIN_U32("graphics/map_objects/pics/misc/ss_tidal.4bpp");
+const u16 gMapObjectPalette21[] = INCBIN_U16("graphics/map_objects/palettes/21.gbapal");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_0[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/0.4bpp");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_1[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/1.4bpp");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_2[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/2.4bpp");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_3[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/3.4bpp");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_4[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/4.4bpp");
+const u32 gFieldEffectPic_BerryTreeGrowthSparkle_5[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/5.4bpp");
+const u32 gMapObjectPic_BerryTreeDirtPile[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/dirt_pile.4bpp");
+const u32 gMapObjectPic_BerryTreeSprout_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sprout/0.4bpp");
+const u32 gMapObjectPic_BerryTreeSprout_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sprout/1.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/0.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/1.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/2.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/3.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/4.4bpp");
+const u32 gMapObjectPic_PechaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/5.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/0.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/1.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/2.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/3.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/4.4bpp");
+const u32 gMapObjectPic_KelpsyBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/5.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/0.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/1.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/2.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/3.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/4.4bpp");
+const u32 gMapObjectPic_WepearBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/5.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/0.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/1.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/2.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/3.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/4.4bpp");
+const u32 gMapObjectPic_IapapaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/5.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/0.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/1.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/2.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/3.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/4.4bpp");
+const u32 gMapObjectPic_CheriBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/5.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/0.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/1.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/2.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/3.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/4.4bpp");
+const u32 gMapObjectPic_FigyBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/5.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/0.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/1.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/2.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/3.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/4.4bpp");
+const u32 gMapObjectPic_MagoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/5.4bpp");
+const u32 gMapObjectPic_LumBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/0.4bpp");
+const u32 gMapObjectPic_LumBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/1.4bpp");
+const u32 gMapObjectPic_LumBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/2.4bpp");
+const u32 gMapObjectPic_LumBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/3.4bpp");
+const u32 gMapObjectPic_LumBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/4.4bpp");
+const u32 gMapObjectPic_LumBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/5.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/0.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/1.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/2.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/3.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/4.4bpp");
+const u32 gMapObjectPic_RazzBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/5.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/0.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/1.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/2.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/3.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/4.4bpp");
+const u32 gMapObjectPic_GrepaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/5.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/0.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/1.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/2.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/3.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/4.4bpp");
+const u32 gMapObjectPic_RabutaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/5.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/0.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/1.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/2.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/3.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/4.4bpp");
+const u32 gMapObjectPic_NomelBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/5.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/0.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/1.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/2.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/3.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/4.4bpp");
+const u32 gMapObjectPic_LeppaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/5.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/0.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/1.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/2.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/3.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/4.4bpp");
+const u32 gMapObjectPic_LiechiBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/5.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/0.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/1.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/2.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/3.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/4.4bpp");
+const u32 gMapObjectPic_HondewBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/5.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/0.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/1.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/2.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/3.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/4.4bpp");
+const u32 gMapObjectPic_AguavBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/5.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/0.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/1.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/2.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/3.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/4.4bpp");
+const u32 gMapObjectPic_WikiBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/5.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/0.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/1.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/2.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/3.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/4.4bpp");
+const u32 gMapObjectPic_PomegBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/5.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/0.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/1.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/2.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/3.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/4.4bpp");
+const u32 gMapObjectPic_RawstBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/5.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/0.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/1.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/2.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/3.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/4.4bpp");
+const u32 gMapObjectPic_SpelonBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/5.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/0.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/1.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/2.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/3.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/4.4bpp");
+const u32 gMapObjectPic_ChestoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/5.4bpp");
+const u32 gMapObjectPic_OranBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/0.4bpp");
+const u32 gMapObjectPic_OranBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/1.4bpp");
+const u32 gMapObjectPic_OranBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/2.4bpp");
+const u32 gMapObjectPic_OranBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/3.4bpp");
+const u32 gMapObjectPic_OranBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/4.4bpp");
+const u32 gMapObjectPic_OranBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/5.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/0.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/1.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/2.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/3.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/4.4bpp");
+const u32 gMapObjectPic_PersimBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/5.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/0.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/1.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/2.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/3.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/4.4bpp");
+const u32 gMapObjectPic_SitrusBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/5.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/0.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/1.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/2.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/3.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/4.4bpp");
+const u32 gMapObjectPic_AspearBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/5.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/0.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/1.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/2.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/3.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/4.4bpp");
+const u32 gMapObjectPic_PamtreBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/5.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/0.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/1.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/2.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/3.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/4.4bpp");
+const u32 gMapObjectPic_CornnBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/5.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/0.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/1.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/2.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/3.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/4.4bpp");
+const u32 gMapObjectPic_LansatBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/5.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/0.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/1.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/2.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/3.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/4.4bpp");
+const u32 gMapObjectPic_DurinBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/5.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/0.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/1.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/2.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/3.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/4.4bpp");
+const u32 gMapObjectPic_TamatoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/5.4bpp");
+const u32 gFieldEffectPic_SurfBlob_0[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/0.4bpp");
+const u32 gFieldEffectPic_SurfBlob_1[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/1.4bpp");
+const u32 gFieldEffectPic_SurfBlob_2[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/2.4bpp");
+const u32 gMapObjectPic_QuintyPlump_0[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/0.4bpp");
+const u32 gMapObjectPic_QuintyPlump_1[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/1.4bpp");
+const u32 gMapObjectPic_QuintyPlump_2[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/2.4bpp");
+const u32 gMapObjectPic_QuintyPlump_3[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/3.4bpp");
+const u32 gMapObjectPic_QuintyPlump_4[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/4.4bpp");
+const u32 gMapObjectPic_QuintyPlump_5[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/5.4bpp");
+const u32 gMapObjectPic_QuintyPlump_6[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/6.4bpp");
+const u16 gMapObjectPalette12[] = INCBIN_U16("graphics/map_objects/palettes/12.gbapal");
+const u16 gMapObjectPalette13[] = INCBIN_U16("graphics/map_objects/palettes/13.gbapal");
+
+const u32 gFieldEffectPic_ShadowSmall[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_small.4bpp");
+const u32 gFieldEffectPic_ShadowMedium[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_medium.4bpp");
+const u32 gFieldEffectPic_ShadowLarge[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_large.4bpp");
+const u32 gFieldEffectPic_ShadowExtraLarge[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_extra_large.4bpp");
+const u32 filler_8368A08[0x48] = {};
+const u32 gFieldEffectPic_CutGrass[] = INCBIN_U32("graphics/field_effect_objects/pics/cut_grass.4bpp");
+const u32 FieldEffectPic_CutGrass_Copy[] = INCBIN_U32("graphics/field_effect_objects/pics/cut_grass.4bpp");
+const u16 gFieldEffectObjectPalette6[] = INCBIN_U16("graphics/field_effect_objects/palettes/06.gbapal");
+const u32 gFieldEffectPic_Ripple_0[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/0.4bpp");
+const u32 gFieldEffectPic_Ripple_1[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/1.4bpp");
+const u32 gFieldEffectPic_Ripple_2[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/2.4bpp");
+const u32 gFieldEffectPic_Ripple_3[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/3.4bpp");
+const u32 gFieldEffectPic_Ripple_4[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/4.4bpp");
+const u32 gFieldEffectPic_Ash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/0.4bpp");
+const u32 gFieldEffectPic_Ash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/1.4bpp");
+const u32 gFieldEffectPic_Ash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/2.4bpp");
+const u32 gFieldEffectPic_Ash_3[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/3.4bpp");
+const u32 gFieldEffectPic_Ash_4[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/4.4bpp");
+const u32 gFieldEffectPic_Arrow_0[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/0.4bpp");
+const u32 gFieldEffectPic_Arrow_1[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/1.4bpp");
+const u32 gFieldEffectPic_Arrow_2[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/2.4bpp");
+const u32 gFieldEffectPic_Arrow_3[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/3.4bpp");
+const u32 gFieldEffectPic_Arrow_4[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/4.4bpp");
+const u32 gFieldEffectPic_Arrow_5[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/5.4bpp");
+const u32 gFieldEffectPic_Arrow_6[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/6.4bpp");
+const u32 gFieldEffectPic_Arrow_7[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/7.4bpp");
+const u16 gFieldEffectObjectPalette0[] = INCBIN_U16("graphics/field_effect_objects/palettes/00.gbapal");
+const u16 gFieldEffectObjectPalette1[] = INCBIN_U16("graphics/field_effect_objects/palettes/01.gbapal");
+const u32 gFieldEffectPic_Dust_0[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/0.4bpp");
+const u32 gFieldEffectPic_Dust_1[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/1.4bpp");
+const u32 gFieldEffectPic_Dust_2[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/2.4bpp");
+const u32 unknown_8369588[] = INCBIN_U32("graphics/field_effect_objects/unknown.bin");
+const u32 gFieldEffectPic_JumpTallGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/0.4bpp");
+const u32 gFieldEffectPic_JumpTallGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/1.4bpp");
+const u32 gFieldEffectPic_JumpTallGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/2.4bpp");
+const u32 gFieldEffectPic_JumpTallGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/3.4bpp");
+const u32 UnusedGrass0[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/0.4bpp");
+const u32 UnusedGrass1[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/1.4bpp");
+const u32 UnusedGrass2[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/2.4bpp");
+const u32 UnusedGrass3[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/3.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/0.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/1.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/2.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/3.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_4[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/4.4bpp");
+const u32 UnusedGrassLong[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/unused.4bpp");
+const u32 gFieldEffectPic_JumpLongGrass_5[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/5.4bpp");
+const u32 gFieldEffectPic_Unknown17_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/0.4bpp");
+const u32 gFieldEffectPic_Unknown17_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/1.4bpp");
+const u32 gFieldEffectPic_Unknown17_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/2.4bpp");
+const u32 gFieldEffectPic_Unknown17_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/3.4bpp");
+const u32 gFieldEffectPic_Unknown17_4[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/4.4bpp");
+const u32 gFieldEffectPic_Unknown17_5[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/5.4bpp");
+const u32 gFieldEffectPic_Unknown17_6[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/6.4bpp");
+const u32 gFieldEffectPic_Unknown17_7[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/7.4bpp");
+const u32 gFieldEffectPic_Unknown18_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/0.4bpp");
+const u32 gFieldEffectPic_Unknown18_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/1.4bpp");
+const u32 gFieldEffectPic_Unknown18_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/2.4bpp");
+const u32 gFieldEffectPic_Unknown18_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/3.4bpp");
+const u32 gFieldEffectPic_LongGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/0.4bpp");
+const u32 gFieldEffectPic_LongGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/1.4bpp");
+const u32 gFieldEffectPic_LongGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/2.4bpp");
+const u32 gFieldEffectPic_LongGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/3.4bpp");
+const u32 gFieldEffectPic_TallGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/0.4bpp");
+const u32 gFieldEffectPic_TallGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/1.4bpp");
+const u32 gFieldEffectPic_TallGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/2.4bpp");
+const u32 gFieldEffectPic_TallGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/3.4bpp");
+const u32 gFieldEffectPic_TallGrass_4[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/4.4bpp");
+const u32 gFieldEffectPic_ShortGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/short_grass/0.4bpp");
+const u32 gFieldEffectPic_ShortGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/short_grass/1.4bpp");
+const u32 gFieldEffectPic_SandFootprints_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_footprints/0.4bpp");
+const u32 gFieldEffectPic_SandFootprints_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_footprints/1.4bpp");
+const u32 gFieldEffectPic_DeepSandFootprints_0[] = INCBIN_U32("graphics/field_effect_objects/pics/deep_sand_footprints/0.4bpp");
+const u32 gFieldEffectPic_DeepSandFootprints_1[] = INCBIN_U32("graphics/field_effect_objects/pics/deep_sand_footprints/1.4bpp");
+const u32 gFieldEffectPic_BikeTireTracks_0[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/0.4bpp");
+const u32 gFieldEffectPic_BikeTireTracks_1[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/1.4bpp");
+const u32 gFieldEffectPic_BikeTireTracks_2[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/2.4bpp");
+const u32 gFieldEffectPic_BikeTireTracks_3[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/3.4bpp");
+const u32 gFieldEffectPic_Unknown19_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/0.4bpp");
+const u32 gFieldEffectPic_Unknown19_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/1.4bpp");
+const u32 gFieldEffectPic_Unknown19_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/2.4bpp");
+const u32 gFieldEffectPic_Unknown19_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/3.4bpp");
+const u32 gFieldEffectPic_SandPile_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/0.4bpp");
+const u32 gFieldEffectPic_SandPile_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/1.4bpp");
+const u32 gFieldEffectPic_SandPile_2[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/2.4bpp");
+const u32 gFieldEffectPic_JumpBigSplash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/0.4bpp");
+const u32 gFieldEffectPic_JumpBigSplash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/1.4bpp");
+const u32 gFieldEffectPic_JumpBigSplash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/2.4bpp");
+const u32 gFieldEffectPic_JumpBigSplash_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/3.4bpp");
+const u32 gFieldEffectPic_Splash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/splash/0.4bpp");
+const u32 gFieldEffectPic_Splash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/splash/1.4bpp");
+const u32 gFieldEffectPic_JumpSmallSplash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/0.4bpp");
+const u32 gFieldEffectPic_JumpSmallSplash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/1.4bpp");
+const u32 gFieldEffectPic_JumpSmallSplash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/2.4bpp");
+const u32 gFieldEffectPic_Unknown20_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/0.4bpp");
+const u32 gFieldEffectPic_Unknown20_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/1.4bpp");
+const u32 gFieldEffectPic_Unknown20_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/2.4bpp");
+const u32 gFieldEffectPic_Unknown20_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/3.4bpp");
+const u32 gFieldEffectPic_Unknown20_4[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/4.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/0.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/1.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/2.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/3.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/4.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/5.4bpp");
+const u32 gFieldEffectPic_TreeDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/6.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/0.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/1.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/2.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/3.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/4.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/5.4bpp");
+const u32 gFieldEffectPic_MountainDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/6.4bpp");
+const u32 gFieldEffectPic_SandDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/0.4bpp");
+const u32 gFieldEffectPic_SandDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/1.4bpp");
+const u32 gFieldEffectPic_SandDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/2.4bpp");
+const u32 gFieldEffectPic_SandDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/3.4bpp");
+const u32 gFieldEffectPic_SandDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/4.4bpp");
+const u32 gFieldEffectPic_SandDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/5.4bpp");
+const u32 gFieldEffectPic_SandDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/6.4bpp");
+const u32 gFieldEffectPic_HotSpringsWater[] = INCBIN_U32("graphics/field_effect_objects/pics/hot_springs_water.4bpp");
+const u16 gFieldEffectObjectPalette2[] = INCBIN_U16("graphics/field_effect_objects/palettes/02.gbapal");
+const u32 gFieldEffectPic_PopOutOfAsh_0[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/0.4bpp");
+const u32 gFieldEffectPic_PopOutOfAsh_1[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/1.4bpp");
+const u32 gFieldEffectPic_PopOutOfAsh_2[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/2.4bpp");
+const u32 gFieldEffectPic_PopOutOfAsh_3[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/3.4bpp");
+const u32 gFieldEffectPic_PopOutOfAsh_4[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/4.4bpp");
+const u32 gFieldEffectPic_LavaridgeGymWarp_0[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/0.4bpp");
+const u32 gFieldEffectPic_LavaridgeGymWarp_1[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/1.4bpp");
+const u32 gFieldEffectPic_LavaridgeGymWarp_2[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/2.4bpp");
+const u32 gFieldEffectPic_LavaridgeGymWarp_3[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/3.4bpp");
+const u32 gFieldEffectPic_LavaridgeGymWarp_4[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/4.4bpp");
+const u32 gFieldEffectPic_Bubbles_0[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/0.4bpp");
+const u32 gFieldEffectPic_Bubbles_1[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/1.4bpp");
+const u32 gFieldEffectPic_Bubbles_2[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/2.4bpp");
+const u32 gFieldEffectPic_Bubbles_3[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/3.4bpp");
+const u32 gFieldEffectPic_Bubbles_4[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/4.4bpp");
+const u32 gFieldEffectPic_Bubbles_5[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/5.4bpp");
+const u32 gFieldEffectPic_Bubbles_6[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/6.4bpp");
+const u32 gFieldEffectPic_Bubbles_7[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/7.4bpp");
+const u32 gFieldEffectPic_Sparkle_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sparkle/0.4bpp");
+const u32 gFieldEffectPic_Sparkle_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sparkle/1.4bpp");
+const u16 gFieldEffectObjectPalette3[] = INCBIN_U16("graphics/field_effect_objects/palettes/03.gbapal");
+const u32 gFieldEffectPic_Bird[] = INCBIN_U32("graphics/field_effect_objects/pics/bird.4bpp");
+
+void (*const gUnknown_0836DA88[])(struct Sprite *) =
+{
+    sub_805C884,
+    sub_805CDE8,
+    sub_805C8AC,
+    sub_805CF28,
+    sub_805CF28,
+    sub_805D0AC,
+    sub_805D0AC,
+    sub_805D230,
+    sub_805D230,
+    sub_805D230,
+    sub_805D230,
+    sub_80587B4,
+    FieldObjectCB_BerryTree,
+    sub_805D4F4,
+    sub_805D634,
+    sub_805D774,
+    sub_805D8B4,
+    sub_805D9F4,
+    sub_805DB34,
+    sub_805DC74,
+    sub_805DDB4,
+    sub_805DEF4,
+    sub_805E034,
+    sub_805E174,
+    sub_805E278,
+    sub_805E37C,
+    sub_805E37C,
+    sub_805E37C,
+    sub_805E37C,
+    sub_805E5DC,
+    sub_805E668,
+    sub_805E6F4,
+    sub_805E780,
+    sub_805E80C,
+    sub_805E898,
+    sub_805E924,
+    sub_805E9B0,
+    sub_805EA3C,
+    sub_805EAC8,
+    sub_805EB54,
+    sub_805EBE0,
+    sub_805EC6C,
+    sub_805ECF8,
+    sub_805ED84,
+    sub_805EE10,
+    sub_805EE9C,
+    sub_805EF28,
+    sub_805EFB4,
+    sub_805F040,
+    sub_805F0CC,
+    sub_805F158,
+    sub_805F1E4,
+    sub_805F270,
+    sub_805F2FC,
+    sub_805F2FC,
+    sub_805F2FC,
+    sub_805F2FC,
+    FieldObjectCB_TreeDisguise,
+    FieldObjectCB_MountainDisguise,
+    sub_805F8E0,
+    sub_805F8E0,
+    sub_805F8E0,
+    sub_805F8E0,
+    FieldObjectCB_Hidden1,
+    sub_805FB20,
+    sub_805FB20,
+    sub_805FB20,
+    sub_805FB20,
+    sub_805FB90,
+    sub_805FB90,
+    sub_805FB90,
+    sub_805FB90,
+    sub_805FC00,
+    sub_805FC00,
+    sub_805FC00,
+    sub_805FC00,
+    sub_805FC70
+};
+
+const u8 gUnknown_0836DBBC[] = {0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+const u8 gUnknown_0836DC09[] = {DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_EAST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH};
+
+
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanNormal;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanMachBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanSurfing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanFieldMove;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_QuintyPlump;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleGirl1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleGirl2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy3;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl3;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy4;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_FatMan;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman3;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldMan1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldWoman1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman4;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man3;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman5;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Cook;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman6;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldMan2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldWoman2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Camper;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Picnicker;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man4;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman7;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Youngster;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BugCatcher;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PsychicM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SchoolKidM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Maniac;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_HexManiac;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman8;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwimmerM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwimmerF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BlackBelt;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Beauty;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Scientist1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Lass;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Gentleman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Sailor;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Fisherman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RunningTriathleteM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RunningTriathleteF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Hiker;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyclingTriathleteM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyclingTriathleteF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Nurse;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ItemBall;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTree;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTreeEarlyStages;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTreeLateStages;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanAcroBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ProfBirch;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man5;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man6;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ReporterM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ReporterF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Bard;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Hipster;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Trader;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Storyteller;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Giddy;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMauvilleOldMan1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMauvilleOldMan2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedNatuDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMagnemiteDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedSquirtleDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedWooperDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedPikachuDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedPorygon2Doll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CuttableTree;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MartEmployee;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RooftopSaleWoman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Teala;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BreakableRock;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PushableBoulder;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MrBrineysBoat;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayNormal;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayMachBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayAcroBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MaySurfing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayFieldMove;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Truck;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MachokeCarryingBox;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MachokeFacingAway;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BirchsBag;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Poochyena;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Artist;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanNormal;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanMachBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanAcroBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanSurfing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanFieldMove;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayNormal;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayMachBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayAcroBike;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMaySurfing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayFieldMove;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Cameraman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanUnderwater;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayUnderwater;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MovingBox;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CableCar;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Scientist2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man7;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AquaMemberM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AquaMemberF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MagmaMemberM;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MagmaMemberF;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Sidney;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Phoebe;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Glacia;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Drake;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Roxanne;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Brawly;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wattson;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Flannery;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Norman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Winona;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Liza;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Tate;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wallace;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Steven;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wally;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy3;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanFishing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayFishing;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_HotSpringsOldWoman;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SSTidal;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SubmarineShadow;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PichuDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PikachuDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MarillDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TogepiDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyndaquilDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ChikoritaDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TotodileDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_JigglypuffDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MeowthDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ClefairyDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DittoDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SmoochumDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TreeckoDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TorchicDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MudkipDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DuskullDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_WynautDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BaltoyDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_KecleonDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AzurillDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SkittyDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwabluDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_GulpinDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LotadDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SeedotDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PikaCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RoundCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_KissCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ZigzagCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SpinCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DiamondCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BallCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_GrassCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_FireCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_WaterCushion;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigSnorlaxDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRhydonDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigLaprasDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigVenusaurDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigCharizardDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigBlastoiseDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigWailmerDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegirockDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegiceDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegisteelDoll;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Latias;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Latios;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy5;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ContestJudge;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanWatering;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayWatering;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanDecorating;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayDecorating;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Archie;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Maxie;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kyogre1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Groudon1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Fossil;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Regirock;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Regice;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Registeel;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Skitty;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kecleon1;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kyogre2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Groudon2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Rayquaza;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Zigzagoon;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Pikachu;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Azumarill;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wingull;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kecleon2;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberMSwimming;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Azurill;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Mom;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LinkBrendan;
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LinkMay;
+
+const struct MapObjectGraphicsInfo *const gMapObjectGraphicsInfoPointers[] = {
+    &gMapObjectGraphicsInfo_BrendanNormal,
+    &gMapObjectGraphicsInfo_BrendanMachBike,
+    &gMapObjectGraphicsInfo_BrendanSurfing,
+    &gMapObjectGraphicsInfo_BrendanFieldMove,
+    &gMapObjectGraphicsInfo_QuintyPlump,
+    &gMapObjectGraphicsInfo_LittleBoy1,
+    &gMapObjectGraphicsInfo_LittleGirl1,
+    &gMapObjectGraphicsInfo_Boy1,
+    &gMapObjectGraphicsInfo_Girl1,
+    &gMapObjectGraphicsInfo_Boy2,
+    &gMapObjectGraphicsInfo_Girl2,
+    &gMapObjectGraphicsInfo_LittleBoy2,
+    &gMapObjectGraphicsInfo_LittleGirl2,
+    &gMapObjectGraphicsInfo_Boy3,
+    &gMapObjectGraphicsInfo_Girl3,
+    &gMapObjectGraphicsInfo_Boy4,
+    &gMapObjectGraphicsInfo_Woman1,
+    &gMapObjectGraphicsInfo_FatMan,
+    &gMapObjectGraphicsInfo_Woman2,
+    &gMapObjectGraphicsInfo_Man1,
+    &gMapObjectGraphicsInfo_Woman3,
+    &gMapObjectGraphicsInfo_OldMan1,
+    &gMapObjectGraphicsInfo_OldWoman1,
+    &gMapObjectGraphicsInfo_Man2,
+    &gMapObjectGraphicsInfo_Woman4,
+    &gMapObjectGraphicsInfo_Man3,
+    &gMapObjectGraphicsInfo_Woman5,
+    &gMapObjectGraphicsInfo_Cook,
+    &gMapObjectGraphicsInfo_Woman6,
+    &gMapObjectGraphicsInfo_OldMan2,
+    &gMapObjectGraphicsInfo_OldWoman2,
+    &gMapObjectGraphicsInfo_Camper,
+    &gMapObjectGraphicsInfo_Picnicker,
+    &gMapObjectGraphicsInfo_Man4,
+    &gMapObjectGraphicsInfo_Woman7,
+    &gMapObjectGraphicsInfo_Youngster,
+    &gMapObjectGraphicsInfo_BugCatcher,
+    &gMapObjectGraphicsInfo_PsychicM,
+    &gMapObjectGraphicsInfo_SchoolKidM,
+    &gMapObjectGraphicsInfo_Maniac,
+    &gMapObjectGraphicsInfo_HexManiac,
+    &gMapObjectGraphicsInfo_Woman8,
+    &gMapObjectGraphicsInfo_SwimmerM,
+    &gMapObjectGraphicsInfo_SwimmerF,
+    &gMapObjectGraphicsInfo_BlackBelt,
+    &gMapObjectGraphicsInfo_Beauty,
+    &gMapObjectGraphicsInfo_Scientist1,
+    &gMapObjectGraphicsInfo_Lass,
+    &gMapObjectGraphicsInfo_Gentleman,
+    &gMapObjectGraphicsInfo_Sailor,
+    &gMapObjectGraphicsInfo_Fisherman,
+    &gMapObjectGraphicsInfo_RunningTriathleteM,
+    &gMapObjectGraphicsInfo_RunningTriathleteF,
+    &gMapObjectGraphicsInfo_TuberF,
+    &gMapObjectGraphicsInfo_TuberM,
+    &gMapObjectGraphicsInfo_Hiker,
+    &gMapObjectGraphicsInfo_CyclingTriathleteM,
+    &gMapObjectGraphicsInfo_CyclingTriathleteF,
+    &gMapObjectGraphicsInfo_Nurse,
+    &gMapObjectGraphicsInfo_ItemBall,
+    &gMapObjectGraphicsInfo_BerryTree,
+    &gMapObjectGraphicsInfo_BerryTreeEarlyStages,
+    &gMapObjectGraphicsInfo_BerryTreeLateStages,
+    &gMapObjectGraphicsInfo_BrendanAcroBike,
+    &gMapObjectGraphicsInfo_ProfBirch,
+    &gMapObjectGraphicsInfo_Man5,
+    &gMapObjectGraphicsInfo_Man6,
+    &gMapObjectGraphicsInfo_ReporterM,
+    &gMapObjectGraphicsInfo_ReporterF,
+    &gMapObjectGraphicsInfo_Bard,
+    &gMapObjectGraphicsInfo_Hipster,
+    &gMapObjectGraphicsInfo_Trader,
+    &gMapObjectGraphicsInfo_Storyteller,
+    &gMapObjectGraphicsInfo_Giddy,
+    &gMapObjectGraphicsInfo_UnusedMauvilleOldMan1,
+    &gMapObjectGraphicsInfo_UnusedMauvilleOldMan2,
+    &gMapObjectGraphicsInfo_UnusedNatuDoll,
+    &gMapObjectGraphicsInfo_UnusedMagnemiteDoll,
+    &gMapObjectGraphicsInfo_UnusedSquirtleDoll,
+    &gMapObjectGraphicsInfo_UnusedWooperDoll,
+    &gMapObjectGraphicsInfo_UnusedPikachuDoll,
+    &gMapObjectGraphicsInfo_UnusedPorygon2Doll,
+    &gMapObjectGraphicsInfo_CuttableTree,
+    &gMapObjectGraphicsInfo_MartEmployee,
+    &gMapObjectGraphicsInfo_RooftopSaleWoman,
+    &gMapObjectGraphicsInfo_Teala,
+    &gMapObjectGraphicsInfo_BreakableRock,
+    &gMapObjectGraphicsInfo_PushableBoulder,
+    &gMapObjectGraphicsInfo_MrBrineysBoat,
+    &gMapObjectGraphicsInfo_MayNormal,
+    &gMapObjectGraphicsInfo_MayMachBike,
+    &gMapObjectGraphicsInfo_MayAcroBike,
+    &gMapObjectGraphicsInfo_MaySurfing,
+    &gMapObjectGraphicsInfo_MayFieldMove,
+    &gMapObjectGraphicsInfo_Truck,
+    &gMapObjectGraphicsInfo_MachokeCarryingBox,
+    &gMapObjectGraphicsInfo_MachokeFacingAway,
+    &gMapObjectGraphicsInfo_BirchsBag,
+    &gMapObjectGraphicsInfo_Poochyena,
+    &gMapObjectGraphicsInfo_Artist,
+    &gMapObjectGraphicsInfo_RivalBrendanNormal,
+    &gMapObjectGraphicsInfo_RivalBrendanMachBike,
+    &gMapObjectGraphicsInfo_RivalBrendanAcroBike,
+    &gMapObjectGraphicsInfo_RivalBrendanSurfing,
+    &gMapObjectGraphicsInfo_RivalBrendanFieldMove,
+    &gMapObjectGraphicsInfo_RivalMayNormal,
+    &gMapObjectGraphicsInfo_RivalMayMachBike,
+    &gMapObjectGraphicsInfo_RivalMayAcroBike,
+    &gMapObjectGraphicsInfo_RivalMaySurfing,
+    &gMapObjectGraphicsInfo_RivalMayFieldMove,
+    &gMapObjectGraphicsInfo_Cameraman,
+    &gMapObjectGraphicsInfo_BrendanUnderwater,
+    &gMapObjectGraphicsInfo_MayUnderwater,
+    &gMapObjectGraphicsInfo_MovingBox,
+    &gMapObjectGraphicsInfo_CableCar,
+    &gMapObjectGraphicsInfo_Scientist2,
+    &gMapObjectGraphicsInfo_Man7,
+    &gMapObjectGraphicsInfo_AquaMemberM,
+    &gMapObjectGraphicsInfo_AquaMemberF,
+    &gMapObjectGraphicsInfo_MagmaMemberM,
+    &gMapObjectGraphicsInfo_MagmaMemberF,
+    &gMapObjectGraphicsInfo_Sidney,
+    &gMapObjectGraphicsInfo_Phoebe,
+    &gMapObjectGraphicsInfo_Glacia,
+    &gMapObjectGraphicsInfo_Drake,
+    &gMapObjectGraphicsInfo_Roxanne,
+    &gMapObjectGraphicsInfo_Brawly,
+    &gMapObjectGraphicsInfo_Wattson,
+    &gMapObjectGraphicsInfo_Flannery,
+    &gMapObjectGraphicsInfo_Norman,
+    &gMapObjectGraphicsInfo_Winona,
+    &gMapObjectGraphicsInfo_Liza,
+    &gMapObjectGraphicsInfo_Tate,
+    &gMapObjectGraphicsInfo_Wallace,
+    &gMapObjectGraphicsInfo_Steven,
+    &gMapObjectGraphicsInfo_Wally,
+    &gMapObjectGraphicsInfo_LittleBoy3,
+    &gMapObjectGraphicsInfo_BrendanFishing,
+    &gMapObjectGraphicsInfo_MayFishing,
+    &gMapObjectGraphicsInfo_HotSpringsOldWoman,
+    &gMapObjectGraphicsInfo_SSTidal,
+    &gMapObjectGraphicsInfo_SubmarineShadow,
+    &gMapObjectGraphicsInfo_PichuDoll,
+    &gMapObjectGraphicsInfo_PikachuDoll,
+    &gMapObjectGraphicsInfo_MarillDoll,
+    &gMapObjectGraphicsInfo_TogepiDoll,
+    &gMapObjectGraphicsInfo_CyndaquilDoll,
+    &gMapObjectGraphicsInfo_ChikoritaDoll,
+    &gMapObjectGraphicsInfo_TotodileDoll,
+    &gMapObjectGraphicsInfo_JigglypuffDoll,
+    &gMapObjectGraphicsInfo_MeowthDoll,
+    &gMapObjectGraphicsInfo_ClefairyDoll,
+    &gMapObjectGraphicsInfo_DittoDoll,
+    &gMapObjectGraphicsInfo_SmoochumDoll,
+    &gMapObjectGraphicsInfo_TreeckoDoll,
+    &gMapObjectGraphicsInfo_TorchicDoll,
+    &gMapObjectGraphicsInfo_MudkipDoll,
+    &gMapObjectGraphicsInfo_DuskullDoll,
+    &gMapObjectGraphicsInfo_WynautDoll,
+    &gMapObjectGraphicsInfo_BaltoyDoll,
+    &gMapObjectGraphicsInfo_KecleonDoll,
+    &gMapObjectGraphicsInfo_AzurillDoll,
+    &gMapObjectGraphicsInfo_SkittyDoll,
+    &gMapObjectGraphicsInfo_SwabluDoll,
+    &gMapObjectGraphicsInfo_GulpinDoll,
+    &gMapObjectGraphicsInfo_LotadDoll,
+    &gMapObjectGraphicsInfo_SeedotDoll,
+    &gMapObjectGraphicsInfo_PikaCushion,
+    &gMapObjectGraphicsInfo_RoundCushion,
+    &gMapObjectGraphicsInfo_KissCushion,
+    &gMapObjectGraphicsInfo_ZigzagCushion,
+    &gMapObjectGraphicsInfo_SpinCushion,
+    &gMapObjectGraphicsInfo_DiamondCushion,
+    &gMapObjectGraphicsInfo_BallCushion,
+    &gMapObjectGraphicsInfo_GrassCushion,
+    &gMapObjectGraphicsInfo_FireCushion,
+    &gMapObjectGraphicsInfo_WaterCushion,
+    &gMapObjectGraphicsInfo_BigSnorlaxDoll,
+    &gMapObjectGraphicsInfo_BigRhydonDoll,
+    &gMapObjectGraphicsInfo_BigLaprasDoll,
+    &gMapObjectGraphicsInfo_BigVenusaurDoll,
+    &gMapObjectGraphicsInfo_BigCharizardDoll,
+    &gMapObjectGraphicsInfo_BigBlastoiseDoll,
+    &gMapObjectGraphicsInfo_BigWailmerDoll,
+    &gMapObjectGraphicsInfo_BigRegirockDoll,
+    &gMapObjectGraphicsInfo_BigRegiceDoll,
+    &gMapObjectGraphicsInfo_BigRegisteelDoll,
+    &gMapObjectGraphicsInfo_Latias,
+    &gMapObjectGraphicsInfo_Latios,
+    &gMapObjectGraphicsInfo_Boy5,
+    &gMapObjectGraphicsInfo_ContestJudge,
+    &gMapObjectGraphicsInfo_BrendanWatering,
+    &gMapObjectGraphicsInfo_MayWatering,
+    &gMapObjectGraphicsInfo_BrendanDecorating,
+    &gMapObjectGraphicsInfo_MayDecorating,
+    &gMapObjectGraphicsInfo_Archie,
+    &gMapObjectGraphicsInfo_Maxie,
+    &gMapObjectGraphicsInfo_Kyogre1,
+    &gMapObjectGraphicsInfo_Groudon1,
+    &gMapObjectGraphicsInfo_Fossil,
+    &gMapObjectGraphicsInfo_Regirock,
+    &gMapObjectGraphicsInfo_Regice,
+    &gMapObjectGraphicsInfo_Registeel,
+    &gMapObjectGraphicsInfo_Skitty,
+    &gMapObjectGraphicsInfo_Kecleon1,
+    &gMapObjectGraphicsInfo_Kyogre2,
+    &gMapObjectGraphicsInfo_Groudon2,
+    &gMapObjectGraphicsInfo_Rayquaza,
+    &gMapObjectGraphicsInfo_Zigzagoon,
+    &gMapObjectGraphicsInfo_Pikachu,
+    &gMapObjectGraphicsInfo_Azumarill,
+    &gMapObjectGraphicsInfo_Wingull,
+    &gMapObjectGraphicsInfo_Kecleon2,
+    &gMapObjectGraphicsInfo_TuberMSwimming,
+    &gMapObjectGraphicsInfo_Azurill,
+    &gMapObjectGraphicsInfo_Mom,
+    &gMapObjectGraphicsInfo_LinkBrendan,
+    &gMapObjectGraphicsInfo_LinkMay
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowSmall;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowMedium;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowLarge;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowExtraLarge;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_TallGrass;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Ripple;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Ash;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SurfBlob;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Arrow;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Dust;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpTallGrass;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandFootprints;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpBigSplash;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Splash;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpSmallSplash;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_LongGrass;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpLongGrass;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown17;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown18;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown19;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown20;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown21;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_DeepSandFootprints;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_TreeDisguise;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_MountainDisguise;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Bird;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_BikeTireTracks;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandDisguise;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandPile;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShortGrass;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_HotSpringsWater;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_PopOutOfAsh;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_LavaridgeGymWarp;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Bubbles;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Sparkle;
+
+const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
+    &gFieldEffectSpriteTemplate_ShadowSmall,
+    &gFieldEffectSpriteTemplate_ShadowMedium,
+    &gFieldEffectSpriteTemplate_ShadowLarge,
+    &gFieldEffectSpriteTemplate_ShadowExtraLarge,
+    &gFieldEffectSpriteTemplate_TallGrass,
+    &gFieldEffectSpriteTemplate_Ripple,
+    &gFieldEffectSpriteTemplate_Ash,
+    &gFieldEffectSpriteTemplate_SurfBlob,
+    &gFieldEffectSpriteTemplate_Arrow,
+    &gFieldEffectSpriteTemplate_Dust,
+    &gFieldEffectSpriteTemplate_JumpTallGrass,
+    &gFieldEffectSpriteTemplate_SandFootprints,
+    &gFieldEffectSpriteTemplate_JumpBigSplash,
+    &gFieldEffectSpriteTemplate_Splash,
+    &gFieldEffectSpriteTemplate_JumpSmallSplash,
+    &gFieldEffectSpriteTemplate_LongGrass,
+    &gFieldEffectSpriteTemplate_JumpLongGrass,
+    &gFieldEffectSpriteTemplate_Unknown17,
+    &gFieldEffectSpriteTemplate_Unknown18,
+    &gFieldEffectSpriteTemplate_Unknown19,
+    &gFieldEffectSpriteTemplate_Unknown20,
+    &gFieldEffectSpriteTemplate_Unknown21,
+    &gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle,
+    &gFieldEffectSpriteTemplate_DeepSandFootprints,
+    &gFieldEffectSpriteTemplate_TreeDisguise,
+    &gFieldEffectSpriteTemplate_MountainDisguise,
+    &gFieldEffectSpriteTemplate_Bird,
+    &gFieldEffectSpriteTemplate_BikeTireTracks,
+    &gFieldEffectSpriteTemplate_SandDisguise,
+    &gFieldEffectSpriteTemplate_SandPile,
+    &gFieldEffectSpriteTemplate_ShortGrass,
+    &gFieldEffectSpriteTemplate_HotSpringsWater,
+    &gFieldEffectSpriteTemplate_PopOutOfAsh,
+    &gFieldEffectSpriteTemplate_LavaridgeGymWarp,
+    &gFieldEffectSpriteTemplate_Bubbles,
+    &gFieldEffectSpriteTemplate_Sparkle
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanNormal[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_0),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_1),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_2),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_3),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_4),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_5),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_6),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_7),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_8),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_9),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_10),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_11),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_12),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_13),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_14),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_15),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_16),
+    obj_frame_tiles(gMapObjectPic_BrendanNormal_17)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanMachBike[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_0),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_1),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_2),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_3),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_4),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_5),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_6),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_7),
+    obj_frame_tiles(gMapObjectPic_BrendanMachBike_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanAcroBike[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_0),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_1),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_2),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_3),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_4),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_5),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_6),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_7),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_8),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_9),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_10),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_11),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_12),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_13),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_14),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_15),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_16),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_17),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_18),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_19),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_20),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_21),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_22),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_23),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_24),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_25),
+    obj_frame_tiles(gMapObjectPic_BrendanAcroBike_26)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanSurfing[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_0),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_1),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_2),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_0),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_0),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_1),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_1),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_2),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_2),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_3),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_4),
+    obj_frame_tiles(gMapObjectPic_BrendanSurfing_5)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanUnderwater[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_2),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_2),
+    obj_frame_tiles(gMapObjectPic_BrendanUnderwater_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanFieldMove[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanFieldMove_0),
+    obj_frame_tiles(gMapObjectPic_BrendanFieldMove_1),
+    obj_frame_tiles(gMapObjectPic_BrendanFieldMove_2),
+    obj_frame_tiles(gMapObjectPic_BrendanFieldMove_3),
+    obj_frame_tiles(gMapObjectPic_BrendanFieldMove_4)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_QuintyPlump[] = {
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_0),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_1),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_2),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_3),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_4),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_5),
+    obj_frame_tiles(gMapObjectPic_QuintyPlump_6)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LittleBoy1[] = {
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_0),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_1),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_2),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_3),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_4),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_5),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_6),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_7),
+    obj_frame_tiles(gMapObjectPic_LittleBoy1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LittleGirl1[] = {
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_0),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_1),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_2),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_3),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_4),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_5),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_6),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_7),
+    obj_frame_tiles(gMapObjectPic_LittleGirl1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Boy1[] = {
+    obj_frame_tiles(gMapObjectPic_Boy1_0),
+    obj_frame_tiles(gMapObjectPic_Boy1_1),
+    obj_frame_tiles(gMapObjectPic_Boy1_2),
+    obj_frame_tiles(gMapObjectPic_Boy1_3),
+    obj_frame_tiles(gMapObjectPic_Boy1_4),
+    obj_frame_tiles(gMapObjectPic_Boy1_5),
+    obj_frame_tiles(gMapObjectPic_Boy1_6),
+    obj_frame_tiles(gMapObjectPic_Boy1_7),
+    obj_frame_tiles(gMapObjectPic_Boy1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Girl1[] = {
+    obj_frame_tiles(gMapObjectPic_Girl1_0),
+    obj_frame_tiles(gMapObjectPic_Girl1_1),
+    obj_frame_tiles(gMapObjectPic_Girl1_2),
+    obj_frame_tiles(gMapObjectPic_Girl1_3),
+    obj_frame_tiles(gMapObjectPic_Girl1_4),
+    obj_frame_tiles(gMapObjectPic_Girl1_5),
+    obj_frame_tiles(gMapObjectPic_Girl1_6),
+    obj_frame_tiles(gMapObjectPic_Girl1_7),
+    obj_frame_tiles(gMapObjectPic_Girl1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Boy2[] = {
+    obj_frame_tiles(gMapObjectPic_Boy2_0),
+    obj_frame_tiles(gMapObjectPic_Boy2_1),
+    obj_frame_tiles(gMapObjectPic_Boy2_2),
+    obj_frame_tiles(gMapObjectPic_Boy2_3),
+    obj_frame_tiles(gMapObjectPic_Boy2_4),
+    obj_frame_tiles(gMapObjectPic_Boy2_5),
+    obj_frame_tiles(gMapObjectPic_Boy2_6),
+    obj_frame_tiles(gMapObjectPic_Boy2_7),
+    obj_frame_tiles(gMapObjectPic_Boy2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Girl2[] = {
+    obj_frame_tiles(gMapObjectPic_Girl2_0),
+    obj_frame_tiles(gMapObjectPic_Girl2_1),
+    obj_frame_tiles(gMapObjectPic_Girl2_2),
+    obj_frame_tiles(gMapObjectPic_Girl2_3),
+    obj_frame_tiles(gMapObjectPic_Girl2_4),
+    obj_frame_tiles(gMapObjectPic_Girl2_5),
+    obj_frame_tiles(gMapObjectPic_Girl2_6),
+    obj_frame_tiles(gMapObjectPic_Girl2_7),
+    obj_frame_tiles(gMapObjectPic_Girl2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LittleBoy2[] = {
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_0),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_1),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_2),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_3),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_4),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_5),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_6),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_7),
+    obj_frame_tiles(gMapObjectPic_LittleBoy2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LittleGirl2[] = {
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_0),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_1),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_2),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_3),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_4),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_5),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_6),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_7),
+    obj_frame_tiles(gMapObjectPic_LittleGirl2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Boy3[] = {
+    obj_frame_tiles(gMapObjectPic_Boy3_0),
+    obj_frame_tiles(gMapObjectPic_Boy3_1),
+    obj_frame_tiles(gMapObjectPic_Boy3_2),
+    obj_frame_tiles(gMapObjectPic_Boy3_3),
+    obj_frame_tiles(gMapObjectPic_Boy3_4),
+    obj_frame_tiles(gMapObjectPic_Boy3_5),
+    obj_frame_tiles(gMapObjectPic_Boy3_6),
+    obj_frame_tiles(gMapObjectPic_Boy3_7),
+    obj_frame_tiles(gMapObjectPic_Boy3_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Girl3[] = {
+    obj_frame_tiles(gMapObjectPic_Girl3_0),
+    obj_frame_tiles(gMapObjectPic_Girl3_1),
+    obj_frame_tiles(gMapObjectPic_Girl3_2),
+    obj_frame_tiles(gMapObjectPic_Girl3_3),
+    obj_frame_tiles(gMapObjectPic_Girl3_4),
+    obj_frame_tiles(gMapObjectPic_Girl3_5),
+    obj_frame_tiles(gMapObjectPic_Girl3_6),
+    obj_frame_tiles(gMapObjectPic_Girl3_7),
+    obj_frame_tiles(gMapObjectPic_Girl3_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Boy4[] = {
+    obj_frame_tiles(gMapObjectPic_Boy4_0),
+    obj_frame_tiles(gMapObjectPic_Boy4_1),
+    obj_frame_tiles(gMapObjectPic_Boy4_2),
+    obj_frame_tiles(gMapObjectPic_Boy4_3),
+    obj_frame_tiles(gMapObjectPic_Boy4_4),
+    obj_frame_tiles(gMapObjectPic_Boy4_5),
+    obj_frame_tiles(gMapObjectPic_Boy4_6),
+    obj_frame_tiles(gMapObjectPic_Boy4_7),
+    obj_frame_tiles(gMapObjectPic_Boy4_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman1[] = {
+    obj_frame_tiles(gMapObjectPic_Woman1_0),
+    obj_frame_tiles(gMapObjectPic_Woman1_1),
+    obj_frame_tiles(gMapObjectPic_Woman1_2),
+    obj_frame_tiles(gMapObjectPic_Woman1_3),
+    obj_frame_tiles(gMapObjectPic_Woman1_4),
+    obj_frame_tiles(gMapObjectPic_Woman1_5),
+    obj_frame_tiles(gMapObjectPic_Woman1_6),
+    obj_frame_tiles(gMapObjectPic_Woman1_7),
+    obj_frame_tiles(gMapObjectPic_Woman1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_FatMan[] = {
+    obj_frame_tiles(gMapObjectPic_FatMan_0),
+    obj_frame_tiles(gMapObjectPic_FatMan_1),
+    obj_frame_tiles(gMapObjectPic_FatMan_2),
+    obj_frame_tiles(gMapObjectPic_FatMan_3),
+    obj_frame_tiles(gMapObjectPic_FatMan_4),
+    obj_frame_tiles(gMapObjectPic_FatMan_5),
+    obj_frame_tiles(gMapObjectPic_FatMan_6),
+    obj_frame_tiles(gMapObjectPic_FatMan_7),
+    obj_frame_tiles(gMapObjectPic_FatMan_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman2[] = {
+    obj_frame_tiles(gMapObjectPic_Woman2_0),
+    obj_frame_tiles(gMapObjectPic_Woman2_1),
+    obj_frame_tiles(gMapObjectPic_Woman2_2),
+    obj_frame_tiles(gMapObjectPic_Woman2_3),
+    obj_frame_tiles(gMapObjectPic_Woman2_4),
+    obj_frame_tiles(gMapObjectPic_Woman2_5),
+    obj_frame_tiles(gMapObjectPic_Woman2_6),
+    obj_frame_tiles(gMapObjectPic_Woman2_7),
+    obj_frame_tiles(gMapObjectPic_Woman2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man1[] = {
+    obj_frame_tiles(gMapObjectPic_Man1_0),
+    obj_frame_tiles(gMapObjectPic_Man1_1),
+    obj_frame_tiles(gMapObjectPic_Man1_2),
+    obj_frame_tiles(gMapObjectPic_Man1_3),
+    obj_frame_tiles(gMapObjectPic_Man1_4),
+    obj_frame_tiles(gMapObjectPic_Man1_5),
+    obj_frame_tiles(gMapObjectPic_Man1_6),
+    obj_frame_tiles(gMapObjectPic_Man1_7),
+    obj_frame_tiles(gMapObjectPic_Man1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman3[] = {
+    obj_frame_tiles(gMapObjectPic_Woman3_0),
+    obj_frame_tiles(gMapObjectPic_Woman3_1),
+    obj_frame_tiles(gMapObjectPic_Woman3_2),
+    obj_frame_tiles(gMapObjectPic_Woman3_3),
+    obj_frame_tiles(gMapObjectPic_Woman3_4),
+    obj_frame_tiles(gMapObjectPic_Woman3_5),
+    obj_frame_tiles(gMapObjectPic_Woman3_6),
+    obj_frame_tiles(gMapObjectPic_Woman3_7),
+    obj_frame_tiles(gMapObjectPic_Woman3_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_OldMan1[] = {
+    obj_frame_tiles(gMapObjectPic_OldMan1_0),
+    obj_frame_tiles(gMapObjectPic_OldMan1_1),
+    obj_frame_tiles(gMapObjectPic_OldMan1_2),
+    obj_frame_tiles(gMapObjectPic_OldMan1_3),
+    obj_frame_tiles(gMapObjectPic_OldMan1_4),
+    obj_frame_tiles(gMapObjectPic_OldMan1_5),
+    obj_frame_tiles(gMapObjectPic_OldMan1_6),
+    obj_frame_tiles(gMapObjectPic_OldMan1_7),
+    obj_frame_tiles(gMapObjectPic_OldMan1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_OldWoman1[] = {
+    obj_frame_tiles(gMapObjectPic_OldWoman1_0),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_1),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_2),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_3),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_4),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_5),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_6),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_7),
+    obj_frame_tiles(gMapObjectPic_OldWoman1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man2[] = {
+    obj_frame_tiles(gMapObjectPic_Man2_0),
+    obj_frame_tiles(gMapObjectPic_Man2_1),
+    obj_frame_tiles(gMapObjectPic_Man2_2),
+    obj_frame_tiles(gMapObjectPic_Man2_3),
+    obj_frame_tiles(gMapObjectPic_Man2_4),
+    obj_frame_tiles(gMapObjectPic_Man2_5),
+    obj_frame_tiles(gMapObjectPic_Man2_6),
+    obj_frame_tiles(gMapObjectPic_Man2_7),
+    obj_frame_tiles(gMapObjectPic_Man2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman4[] = {
+    obj_frame_tiles(gMapObjectPic_Woman4_0),
+    obj_frame_tiles(gMapObjectPic_Woman4_1),
+    obj_frame_tiles(gMapObjectPic_Woman4_2),
+    obj_frame_tiles(gMapObjectPic_Woman4_3),
+    obj_frame_tiles(gMapObjectPic_Woman4_4),
+    obj_frame_tiles(gMapObjectPic_Woman4_5),
+    obj_frame_tiles(gMapObjectPic_Woman4_6),
+    obj_frame_tiles(gMapObjectPic_Woman4_7),
+    obj_frame_tiles(gMapObjectPic_Woman4_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man3[] = {
+    obj_frame_tiles(gMapObjectPic_Man3_0),
+    obj_frame_tiles(gMapObjectPic_Man3_1),
+    obj_frame_tiles(gMapObjectPic_Man3_2),
+    obj_frame_tiles(gMapObjectPic_Man3_3),
+    obj_frame_tiles(gMapObjectPic_Man3_4),
+    obj_frame_tiles(gMapObjectPic_Man3_5),
+    obj_frame_tiles(gMapObjectPic_Man3_6),
+    obj_frame_tiles(gMapObjectPic_Man3_7),
+    obj_frame_tiles(gMapObjectPic_Man3_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman5[] = {
+    obj_frame_tiles(gMapObjectPic_Woman5_0),
+    obj_frame_tiles(gMapObjectPic_Woman5_1),
+    obj_frame_tiles(gMapObjectPic_Woman5_2),
+    obj_frame_tiles(gMapObjectPic_Woman5_3),
+    obj_frame_tiles(gMapObjectPic_Woman5_4),
+    obj_frame_tiles(gMapObjectPic_Woman5_5),
+    obj_frame_tiles(gMapObjectPic_Woman5_6),
+    obj_frame_tiles(gMapObjectPic_Woman5_7),
+    obj_frame_tiles(gMapObjectPic_Woman5_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Cook[] = {
+    obj_frame_tiles(gMapObjectPic_Cook_0),
+    obj_frame_tiles(gMapObjectPic_Cook_1),
+    obj_frame_tiles(gMapObjectPic_Cook_2),
+    obj_frame_tiles(gMapObjectPic_Cook_0),
+    obj_frame_tiles(gMapObjectPic_Cook_0),
+    obj_frame_tiles(gMapObjectPic_Cook_1),
+    obj_frame_tiles(gMapObjectPic_Cook_1),
+    obj_frame_tiles(gMapObjectPic_Cook_2),
+    obj_frame_tiles(gMapObjectPic_Cook_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman6[] = {
+    obj_frame_tiles(gMapObjectPic_Woman6_0),
+    obj_frame_tiles(gMapObjectPic_Woman6_1),
+    obj_frame_tiles(gMapObjectPic_Woman6_2),
+    obj_frame_tiles(gMapObjectPic_Woman6_3),
+    obj_frame_tiles(gMapObjectPic_Woman6_4),
+    obj_frame_tiles(gMapObjectPic_Woman6_5),
+    obj_frame_tiles(gMapObjectPic_Woman6_6),
+    obj_frame_tiles(gMapObjectPic_Woman6_7),
+    obj_frame_tiles(gMapObjectPic_Woman6_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_OldMan2[] = {
+    obj_frame_tiles(gMapObjectPic_OldMan2_0),
+    obj_frame_tiles(gMapObjectPic_OldMan2_1),
+    obj_frame_tiles(gMapObjectPic_OldMan2_2),
+    obj_frame_tiles(gMapObjectPic_OldMan2_0),
+    obj_frame_tiles(gMapObjectPic_OldMan2_0),
+    obj_frame_tiles(gMapObjectPic_OldMan2_1),
+    obj_frame_tiles(gMapObjectPic_OldMan2_1),
+    obj_frame_tiles(gMapObjectPic_OldMan2_2),
+    obj_frame_tiles(gMapObjectPic_OldMan2_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_OldWoman2[] = {
+    obj_frame_tiles(gMapObjectPic_OldWoman2_0),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_1),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_2),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_0),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_0),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_1),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_1),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_2),
+    obj_frame_tiles(gMapObjectPic_OldWoman2_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Camper[] = {
+    obj_frame_tiles(gMapObjectPic_Camper_0),
+    obj_frame_tiles(gMapObjectPic_Camper_1),
+    obj_frame_tiles(gMapObjectPic_Camper_2),
+    obj_frame_tiles(gMapObjectPic_Camper_3),
+    obj_frame_tiles(gMapObjectPic_Camper_4),
+    obj_frame_tiles(gMapObjectPic_Camper_5),
+    obj_frame_tiles(gMapObjectPic_Camper_6),
+    obj_frame_tiles(gMapObjectPic_Camper_7),
+    obj_frame_tiles(gMapObjectPic_Camper_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Picnicker[] = {
+    obj_frame_tiles(gMapObjectPic_Picnicker_0),
+    obj_frame_tiles(gMapObjectPic_Picnicker_1),
+    obj_frame_tiles(gMapObjectPic_Picnicker_2),
+    obj_frame_tiles(gMapObjectPic_Picnicker_3),
+    obj_frame_tiles(gMapObjectPic_Picnicker_4),
+    obj_frame_tiles(gMapObjectPic_Picnicker_5),
+    obj_frame_tiles(gMapObjectPic_Picnicker_6),
+    obj_frame_tiles(gMapObjectPic_Picnicker_7),
+    obj_frame_tiles(gMapObjectPic_Picnicker_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man4[] = {
+    obj_frame_tiles(gMapObjectPic_Man4_0),
+    obj_frame_tiles(gMapObjectPic_Man4_1),
+    obj_frame_tiles(gMapObjectPic_Man4_2),
+    obj_frame_tiles(gMapObjectPic_Man4_3),
+    obj_frame_tiles(gMapObjectPic_Man4_4),
+    obj_frame_tiles(gMapObjectPic_Man4_5),
+    obj_frame_tiles(gMapObjectPic_Man4_6),
+    obj_frame_tiles(gMapObjectPic_Man4_7),
+    obj_frame_tiles(gMapObjectPic_Man4_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman7[] = {
+    obj_frame_tiles(gMapObjectPic_Woman7_0),
+    obj_frame_tiles(gMapObjectPic_Woman7_1),
+    obj_frame_tiles(gMapObjectPic_Woman7_2),
+    obj_frame_tiles(gMapObjectPic_Woman7_3),
+    obj_frame_tiles(gMapObjectPic_Woman7_4),
+    obj_frame_tiles(gMapObjectPic_Woman7_5),
+    obj_frame_tiles(gMapObjectPic_Woman7_6),
+    obj_frame_tiles(gMapObjectPic_Woman7_7),
+    obj_frame_tiles(gMapObjectPic_Woman7_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Youngster[] = {
+    obj_frame_tiles(gMapObjectPic_Youngster_0),
+    obj_frame_tiles(gMapObjectPic_Youngster_1),
+    obj_frame_tiles(gMapObjectPic_Youngster_2),
+    obj_frame_tiles(gMapObjectPic_Youngster_3),
+    obj_frame_tiles(gMapObjectPic_Youngster_4),
+    obj_frame_tiles(gMapObjectPic_Youngster_5),
+    obj_frame_tiles(gMapObjectPic_Youngster_6),
+    obj_frame_tiles(gMapObjectPic_Youngster_7),
+    obj_frame_tiles(gMapObjectPic_Youngster_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BugCatcher[] = {
+    obj_frame_tiles(gMapObjectPic_BugCatcher_0),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_1),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_2),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_3),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_4),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_5),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_6),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_7),
+    obj_frame_tiles(gMapObjectPic_BugCatcher_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PsychicM[] = {
+    obj_frame_tiles(gMapObjectPic_PsychicM_0),
+    obj_frame_tiles(gMapObjectPic_PsychicM_1),
+    obj_frame_tiles(gMapObjectPic_PsychicM_2),
+    obj_frame_tiles(gMapObjectPic_PsychicM_3),
+    obj_frame_tiles(gMapObjectPic_PsychicM_4),
+    obj_frame_tiles(gMapObjectPic_PsychicM_5),
+    obj_frame_tiles(gMapObjectPic_PsychicM_6),
+    obj_frame_tiles(gMapObjectPic_PsychicM_7),
+    obj_frame_tiles(gMapObjectPic_PsychicM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SchoolKidM[] = {
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_0),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_1),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_2),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_3),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_4),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_5),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_6),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_7),
+    obj_frame_tiles(gMapObjectPic_SchoolKidM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Maniac[] = {
+    obj_frame_tiles(gMapObjectPic_Maniac_0),
+    obj_frame_tiles(gMapObjectPic_Maniac_1),
+    obj_frame_tiles(gMapObjectPic_Maniac_2),
+    obj_frame_tiles(gMapObjectPic_Maniac_3),
+    obj_frame_tiles(gMapObjectPic_Maniac_4),
+    obj_frame_tiles(gMapObjectPic_Maniac_5),
+    obj_frame_tiles(gMapObjectPic_Maniac_6),
+    obj_frame_tiles(gMapObjectPic_Maniac_7),
+    obj_frame_tiles(gMapObjectPic_Maniac_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_HexManiac[] = {
+    obj_frame_tiles(gMapObjectPic_HexManiac_0),
+    obj_frame_tiles(gMapObjectPic_HexManiac_1),
+    obj_frame_tiles(gMapObjectPic_HexManiac_2),
+    obj_frame_tiles(gMapObjectPic_HexManiac_3),
+    obj_frame_tiles(gMapObjectPic_HexManiac_4),
+    obj_frame_tiles(gMapObjectPic_HexManiac_5),
+    obj_frame_tiles(gMapObjectPic_HexManiac_6),
+    obj_frame_tiles(gMapObjectPic_HexManiac_7),
+    obj_frame_tiles(gMapObjectPic_HexManiac_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Woman8[] = {
+    obj_frame_tiles(gMapObjectPic_Woman8_0),
+    obj_frame_tiles(gMapObjectPic_Woman8_1),
+    obj_frame_tiles(gMapObjectPic_Woman8_2),
+    obj_frame_tiles(gMapObjectPic_Woman8_3),
+    obj_frame_tiles(gMapObjectPic_Woman8_4),
+    obj_frame_tiles(gMapObjectPic_Woman8_5),
+    obj_frame_tiles(gMapObjectPic_Woman8_6),
+    obj_frame_tiles(gMapObjectPic_Woman8_7),
+    obj_frame_tiles(gMapObjectPic_Woman8_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SwimmerM[] = {
+    obj_frame_tiles(gMapObjectPic_SwimmerM_0),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_1),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_2),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_3),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_4),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_5),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_6),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_7),
+    obj_frame_tiles(gMapObjectPic_SwimmerM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SwimmerF[] = {
+    obj_frame_tiles(gMapObjectPic_SwimmerF_0),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_1),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_2),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_3),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_4),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_5),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_6),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_7),
+    obj_frame_tiles(gMapObjectPic_SwimmerF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BlackBelt[] = {
+    obj_frame_tiles(gMapObjectPic_BlackBelt_0),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_1),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_2),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_3),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_4),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_5),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_6),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_7),
+    obj_frame_tiles(gMapObjectPic_BlackBelt_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Beauty[] = {
+    obj_frame_tiles(gMapObjectPic_Beauty_0),
+    obj_frame_tiles(gMapObjectPic_Beauty_1),
+    obj_frame_tiles(gMapObjectPic_Beauty_2),
+    obj_frame_tiles(gMapObjectPic_Beauty_3),
+    obj_frame_tiles(gMapObjectPic_Beauty_4),
+    obj_frame_tiles(gMapObjectPic_Beauty_5),
+    obj_frame_tiles(gMapObjectPic_Beauty_6),
+    obj_frame_tiles(gMapObjectPic_Beauty_7),
+    obj_frame_tiles(gMapObjectPic_Beauty_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Scientist1[] = {
+    obj_frame_tiles(gMapObjectPic_Scientist1_0),
+    obj_frame_tiles(gMapObjectPic_Scientist1_1),
+    obj_frame_tiles(gMapObjectPic_Scientist1_2),
+    obj_frame_tiles(gMapObjectPic_Scientist1_3),
+    obj_frame_tiles(gMapObjectPic_Scientist1_4),
+    obj_frame_tiles(gMapObjectPic_Scientist1_5),
+    obj_frame_tiles(gMapObjectPic_Scientist1_6),
+    obj_frame_tiles(gMapObjectPic_Scientist1_7),
+    obj_frame_tiles(gMapObjectPic_Scientist1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Lass[] = {
+    obj_frame_tiles(gMapObjectPic_Lass_0),
+    obj_frame_tiles(gMapObjectPic_Lass_1),
+    obj_frame_tiles(gMapObjectPic_Lass_2),
+    obj_frame_tiles(gMapObjectPic_Lass_3),
+    obj_frame_tiles(gMapObjectPic_Lass_4),
+    obj_frame_tiles(gMapObjectPic_Lass_5),
+    obj_frame_tiles(gMapObjectPic_Lass_6),
+    obj_frame_tiles(gMapObjectPic_Lass_7),
+    obj_frame_tiles(gMapObjectPic_Lass_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Gentleman[] = {
+    obj_frame_tiles(gMapObjectPic_Gentleman_0),
+    obj_frame_tiles(gMapObjectPic_Gentleman_1),
+    obj_frame_tiles(gMapObjectPic_Gentleman_2),
+    obj_frame_tiles(gMapObjectPic_Gentleman_3),
+    obj_frame_tiles(gMapObjectPic_Gentleman_4),
+    obj_frame_tiles(gMapObjectPic_Gentleman_5),
+    obj_frame_tiles(gMapObjectPic_Gentleman_6),
+    obj_frame_tiles(gMapObjectPic_Gentleman_7),
+    obj_frame_tiles(gMapObjectPic_Gentleman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Sailor[] = {
+    obj_frame_tiles(gMapObjectPic_Sailor_0),
+    obj_frame_tiles(gMapObjectPic_Sailor_1),
+    obj_frame_tiles(gMapObjectPic_Sailor_2),
+    obj_frame_tiles(gMapObjectPic_Sailor_3),
+    obj_frame_tiles(gMapObjectPic_Sailor_4),
+    obj_frame_tiles(gMapObjectPic_Sailor_5),
+    obj_frame_tiles(gMapObjectPic_Sailor_6),
+    obj_frame_tiles(gMapObjectPic_Sailor_7),
+    obj_frame_tiles(gMapObjectPic_Sailor_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Fisherman[] = {
+    obj_frame_tiles(gMapObjectPic_Fisherman_0),
+    obj_frame_tiles(gMapObjectPic_Fisherman_1),
+    obj_frame_tiles(gMapObjectPic_Fisherman_2),
+    obj_frame_tiles(gMapObjectPic_Fisherman_3),
+    obj_frame_tiles(gMapObjectPic_Fisherman_4),
+    obj_frame_tiles(gMapObjectPic_Fisherman_5),
+    obj_frame_tiles(gMapObjectPic_Fisherman_6),
+    obj_frame_tiles(gMapObjectPic_Fisherman_7),
+    obj_frame_tiles(gMapObjectPic_Fisherman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_RunningTriathleteM[] = {
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_0),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_1),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_2),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_3),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_4),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_5),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_6),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_7),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_RunningTriathleteF[] = {
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_0),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_1),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_2),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_3),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_4),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_5),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_6),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_7),
+    obj_frame_tiles(gMapObjectPic_RunningTriathleteF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TuberF[] = {
+    obj_frame_tiles(gMapObjectPic_TuberF_0),
+    obj_frame_tiles(gMapObjectPic_TuberF_1),
+    obj_frame_tiles(gMapObjectPic_TuberF_2),
+    obj_frame_tiles(gMapObjectPic_TuberF_3),
+    obj_frame_tiles(gMapObjectPic_TuberF_4),
+    obj_frame_tiles(gMapObjectPic_TuberF_5),
+    obj_frame_tiles(gMapObjectPic_TuberF_6),
+    obj_frame_tiles(gMapObjectPic_TuberF_7),
+    obj_frame_tiles(gMapObjectPic_TuberF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TuberM[] = {
+    obj_frame_tiles(gMapObjectPic_TuberM_0),
+    obj_frame_tiles(gMapObjectPic_TuberM_1),
+    obj_frame_tiles(gMapObjectPic_TuberM_2),
+    obj_frame_tiles(gMapObjectPic_TuberM_3),
+    obj_frame_tiles(gMapObjectPic_TuberM_4),
+    obj_frame_tiles(gMapObjectPic_TuberM_5),
+    obj_frame_tiles(gMapObjectPic_TuberM_6),
+    obj_frame_tiles(gMapObjectPic_TuberM_7),
+    obj_frame_tiles(gMapObjectPic_TuberM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Hiker[] = {
+    obj_frame_tiles(gMapObjectPic_Hiker_0),
+    obj_frame_tiles(gMapObjectPic_Hiker_1),
+    obj_frame_tiles(gMapObjectPic_Hiker_2),
+    obj_frame_tiles(gMapObjectPic_Hiker_3),
+    obj_frame_tiles(gMapObjectPic_Hiker_4),
+    obj_frame_tiles(gMapObjectPic_Hiker_5),
+    obj_frame_tiles(gMapObjectPic_Hiker_6),
+    obj_frame_tiles(gMapObjectPic_Hiker_7),
+    obj_frame_tiles(gMapObjectPic_Hiker_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_CyclingTriathleteM[] = {
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_0),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_1),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_2),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_3),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_4),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_5),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_6),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_7),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_CyclingTriathleteF[] = {
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_0),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_1),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_2),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_3),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_4),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_5),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_6),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_7),
+    obj_frame_tiles(gMapObjectPic_CyclingTriathleteF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Nurse[] = {
+    obj_frame_tiles(gMapObjectPic_Nurse_0),
+    obj_frame_tiles(gMapObjectPic_Nurse_1),
+    obj_frame_tiles(gMapObjectPic_Nurse_2),
+    obj_frame_tiles(gMapObjectPic_Nurse_3),
+    obj_frame_tiles(gMapObjectPic_Nurse_4),
+    obj_frame_tiles(gMapObjectPic_Nurse_5),
+    obj_frame_tiles(gMapObjectPic_Nurse_6),
+    obj_frame_tiles(gMapObjectPic_Nurse_7),
+    obj_frame_tiles(gMapObjectPic_Nurse_8),
+    obj_frame_tiles(gMapObjectPic_Nurse_9)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ItemBall[] = {
+    obj_frame_tiles(gMapObjectPic_ItemBall)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ProfBirch[] = {
+    obj_frame_tiles(gMapObjectPic_ProfBirch_0),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_1),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_2),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_3),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_4),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_5),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_6),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_7),
+    obj_frame_tiles(gMapObjectPic_ProfBirch_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man5[] = {
+    obj_frame_tiles(gMapObjectPic_Man5_0),
+    obj_frame_tiles(gMapObjectPic_Man5_1),
+    obj_frame_tiles(gMapObjectPic_Man5_2),
+    obj_frame_tiles(gMapObjectPic_Man5_3),
+    obj_frame_tiles(gMapObjectPic_Man5_4),
+    obj_frame_tiles(gMapObjectPic_Man5_5),
+    obj_frame_tiles(gMapObjectPic_Man5_6),
+    obj_frame_tiles(gMapObjectPic_Man5_7),
+    obj_frame_tiles(gMapObjectPic_Man5_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man6[] = {
+    obj_frame_tiles(gMapObjectPic_Man6_0),
+    obj_frame_tiles(gMapObjectPic_Man6_1),
+    obj_frame_tiles(gMapObjectPic_Man6_2),
+    obj_frame_tiles(gMapObjectPic_Man6_3),
+    obj_frame_tiles(gMapObjectPic_Man6_4),
+    obj_frame_tiles(gMapObjectPic_Man6_5),
+    obj_frame_tiles(gMapObjectPic_Man6_6),
+    obj_frame_tiles(gMapObjectPic_Man6_7),
+    obj_frame_tiles(gMapObjectPic_Man6_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ReporterM[] = {
+    obj_frame_tiles(gMapObjectPic_ReporterM_0),
+    obj_frame_tiles(gMapObjectPic_ReporterM_1),
+    obj_frame_tiles(gMapObjectPic_ReporterM_2),
+    obj_frame_tiles(gMapObjectPic_ReporterM_3),
+    obj_frame_tiles(gMapObjectPic_ReporterM_4),
+    obj_frame_tiles(gMapObjectPic_ReporterM_5),
+    obj_frame_tiles(gMapObjectPic_ReporterM_6),
+    obj_frame_tiles(gMapObjectPic_ReporterM_7),
+    obj_frame_tiles(gMapObjectPic_ReporterM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ReporterF[] = {
+    obj_frame_tiles(gMapObjectPic_ReporterF_0),
+    obj_frame_tiles(gMapObjectPic_ReporterF_1),
+    obj_frame_tiles(gMapObjectPic_ReporterF_2),
+    obj_frame_tiles(gMapObjectPic_ReporterF_3),
+    obj_frame_tiles(gMapObjectPic_ReporterF_4),
+    obj_frame_tiles(gMapObjectPic_ReporterF_5),
+    obj_frame_tiles(gMapObjectPic_ReporterF_6),
+    obj_frame_tiles(gMapObjectPic_ReporterF_7),
+    obj_frame_tiles(gMapObjectPic_ReporterF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MauvilleOldMan1[] = {
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_0),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_1),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_2),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_3),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_4),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_5),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_6),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_7),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan1_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MauvilleOldMan2[] = {
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_0),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_1),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_2),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_3),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_4),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_5),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_6),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_7),
+    obj_frame_tiles(gMapObjectPic_MauvilleOldMan2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedNatuDoll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedNatuDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedMagnemiteDoll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedMagnemiteDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedSquirtleDoll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedSquirtleDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedWooperDoll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedWooperDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedPikachuDoll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedPikachuDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_UnusedPorygon2Doll[] = {
+    obj_frame_tiles(gMapObjectPic_UnusedPorygon2Doll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_CuttableTree[] = {
+    obj_frame_tiles(gMapObjectPic_CuttableTree_0),
+    obj_frame_tiles(gMapObjectPic_CuttableTree_1),
+    obj_frame_tiles(gMapObjectPic_CuttableTree_2),
+    obj_frame_tiles(gMapObjectPic_CuttableTree_3)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MartEmployee[] = {
+    obj_frame_tiles(gMapObjectPic_MartEmployee_0),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_1),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_2),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_3),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_4),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_5),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_6),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_7),
+    obj_frame_tiles(gMapObjectPic_MartEmployee_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_RooftopSaleWoman[] = {
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_0),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_1),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_2),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_3),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_4),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_5),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_6),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_7),
+    obj_frame_tiles(gMapObjectPic_RooftopSaleWoman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Teala[] = {
+    obj_frame_tiles(gMapObjectPic_Teala_0),
+    obj_frame_tiles(gMapObjectPic_Teala_1),
+    obj_frame_tiles(gMapObjectPic_Teala_2),
+    obj_frame_tiles(gMapObjectPic_Teala_3),
+    obj_frame_tiles(gMapObjectPic_Teala_4),
+    obj_frame_tiles(gMapObjectPic_Teala_5),
+    obj_frame_tiles(gMapObjectPic_Teala_6),
+    obj_frame_tiles(gMapObjectPic_Teala_7),
+    obj_frame_tiles(gMapObjectPic_Teala_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BreakableRock[] = {
+    obj_frame_tiles(gMapObjectPic_BreakableRock_0),
+    obj_frame_tiles(gMapObjectPic_BreakableRock_1),
+    obj_frame_tiles(gMapObjectPic_BreakableRock_2),
+    obj_frame_tiles(gMapObjectPic_BreakableRock_3)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PushableBoulder[] = {
+    obj_frame_tiles(gMapObjectPic_PushableBoulder)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MrBrineysBoat[] = {
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_0),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_1),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_2),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_0),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_0),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_1),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_1),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_2),
+    obj_frame_tiles(gMapObjectPic_MrBrineysBoat_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Truck[] = {
+    obj_frame_tiles(gMapObjectPic_Truck)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MachokeCarryingBox[] = {
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_0),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_0),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_0),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_1),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_2),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_1),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_2),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_1),
+    obj_frame_tiles(gMapObjectPic_MachokeCarryingBox_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MachokeFacingAway[] = {
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_0),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_0),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_0),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1),
+    obj_frame_tiles(gMapObjectPic_MachokeFacingAway_1)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BirchsBag[] = {
+    obj_frame_tiles(gMapObjectPic_BirchsBag)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Poochyena[] = {
+    obj_frame_tiles(gMapObjectPic_Poochyena_0),
+    obj_frame_tiles(gMapObjectPic_Poochyena_1),
+    obj_frame_tiles(gMapObjectPic_Poochyena_2),
+    obj_frame_tiles(gMapObjectPic_Poochyena_3),
+    obj_frame_tiles(gMapObjectPic_Poochyena_4),
+    obj_frame_tiles(gMapObjectPic_Poochyena_5),
+    obj_frame_tiles(gMapObjectPic_Poochyena_6),
+    obj_frame_tiles(gMapObjectPic_Poochyena_7),
+    obj_frame_tiles(gMapObjectPic_Poochyena_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Artist[] = {
+    obj_frame_tiles(gMapObjectPic_Artist_0),
+    obj_frame_tiles(gMapObjectPic_Artist_1),
+    obj_frame_tiles(gMapObjectPic_Artist_2),
+    obj_frame_tiles(gMapObjectPic_Artist_3),
+    obj_frame_tiles(gMapObjectPic_Artist_4),
+    obj_frame_tiles(gMapObjectPic_Artist_5),
+    obj_frame_tiles(gMapObjectPic_Artist_6),
+    obj_frame_tiles(gMapObjectPic_Artist_7),
+    obj_frame_tiles(gMapObjectPic_Artist_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayNormal[] = {
+    obj_frame_tiles(gMapObjectPic_MayNormal_0),
+    obj_frame_tiles(gMapObjectPic_MayNormal_1),
+    obj_frame_tiles(gMapObjectPic_MayNormal_2),
+    obj_frame_tiles(gMapObjectPic_MayNormal_3),
+    obj_frame_tiles(gMapObjectPic_MayNormal_4),
+    obj_frame_tiles(gMapObjectPic_MayNormal_5),
+    obj_frame_tiles(gMapObjectPic_MayNormal_6),
+    obj_frame_tiles(gMapObjectPic_MayNormal_7),
+    obj_frame_tiles(gMapObjectPic_MayNormal_8),
+    obj_frame_tiles(gMapObjectPic_MayNormal_9),
+    obj_frame_tiles(gMapObjectPic_MayNormal_10),
+    obj_frame_tiles(gMapObjectPic_MayNormal_11),
+    obj_frame_tiles(gMapObjectPic_MayNormal_12),
+    obj_frame_tiles(gMapObjectPic_MayNormal_13),
+    obj_frame_tiles(gMapObjectPic_MayNormal_14),
+    obj_frame_tiles(gMapObjectPic_MayNormal_15),
+    obj_frame_tiles(gMapObjectPic_MayNormal_16),
+    obj_frame_tiles(gMapObjectPic_MayNormal_17)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayMachBike[] = {
+    obj_frame_tiles(gMapObjectPic_MayMachBike_0),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_1),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_2),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_3),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_4),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_5),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_6),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_7),
+    obj_frame_tiles(gMapObjectPic_MayMachBike_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayAcroBike[] = {
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_0),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_1),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_2),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_3),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_4),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_5),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_6),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_7),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_8),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_9),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_10),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_11),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_12),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_13),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_14),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_15),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_16),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_17),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_18),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_19),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_20),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_21),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_22),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_23),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_24),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_25),
+    obj_frame_tiles(gMapObjectPic_MayAcroBike_26)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MaySurfing[] = {
+    obj_frame_tiles(gMapObjectPic_MaySurfing_0),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_1),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_2),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_0),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_0),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_1),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_1),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_2),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_2),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_3),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_4),
+    obj_frame_tiles(gMapObjectPic_MaySurfing_5)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayUnderwater[] = {
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_2),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_0),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_1),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_2),
+    obj_frame_tiles(gMapObjectPic_MayUnderwater_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayFieldMove[] = {
+    obj_frame_tiles(gMapObjectPic_MayFieldMove_0),
+    obj_frame_tiles(gMapObjectPic_MayFieldMove_1),
+    obj_frame_tiles(gMapObjectPic_MayFieldMove_2),
+    obj_frame_tiles(gMapObjectPic_MayFieldMove_3),
+    obj_frame_tiles(gMapObjectPic_MayFieldMove_4)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Cameraman[] = {
+    obj_frame_tiles(gMapObjectPic_Cameraman_0),
+    obj_frame_tiles(gMapObjectPic_Cameraman_1),
+    obj_frame_tiles(gMapObjectPic_Cameraman_2),
+    obj_frame_tiles(gMapObjectPic_Cameraman_3),
+    obj_frame_tiles(gMapObjectPic_Cameraman_4),
+    obj_frame_tiles(gMapObjectPic_Cameraman_5),
+    obj_frame_tiles(gMapObjectPic_Cameraman_6),
+    obj_frame_tiles(gMapObjectPic_Cameraman_7),
+    obj_frame_tiles(gMapObjectPic_Cameraman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MovingBox[] = {
+    obj_frame_tiles(gMapObjectPic_MovingBox)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_CableCar[] = {
+    obj_frame_tiles(gMapObjectPic_CableCar)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Scientist2[] = {
+    obj_frame_tiles(gMapObjectPic_Scientist2_0),
+    obj_frame_tiles(gMapObjectPic_Scientist2_1),
+    obj_frame_tiles(gMapObjectPic_Scientist2_2),
+    obj_frame_tiles(gMapObjectPic_Scientist2_3),
+    obj_frame_tiles(gMapObjectPic_Scientist2_4),
+    obj_frame_tiles(gMapObjectPic_Scientist2_5),
+    obj_frame_tiles(gMapObjectPic_Scientist2_6),
+    obj_frame_tiles(gMapObjectPic_Scientist2_7),
+    obj_frame_tiles(gMapObjectPic_Scientist2_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Man7[] = {
+    obj_frame_tiles(gMapObjectPic_Man7_0),
+    obj_frame_tiles(gMapObjectPic_Man7_1),
+    obj_frame_tiles(gMapObjectPic_Man7_2),
+    obj_frame_tiles(gMapObjectPic_Man7_3),
+    obj_frame_tiles(gMapObjectPic_Man7_4),
+    obj_frame_tiles(gMapObjectPic_Man7_5),
+    obj_frame_tiles(gMapObjectPic_Man7_6),
+    obj_frame_tiles(gMapObjectPic_Man7_7),
+    obj_frame_tiles(gMapObjectPic_Man7_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_AquaMemberM[] = {
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_0),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_1),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_2),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_3),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_4),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_5),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_6),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_7),
+    obj_frame_tiles(gMapObjectPic_AquaMemberM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_AquaMemberF[] = {
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_0),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_1),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_2),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_3),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_4),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_5),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_6),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_7),
+    obj_frame_tiles(gMapObjectPic_AquaMemberF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MagmaMemberM[] = {
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_0),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_1),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_2),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_3),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_4),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_5),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_6),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_7),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberM_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MagmaMemberF[] = {
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_0),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_1),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_2),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_3),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_4),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_5),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_6),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_7),
+    obj_frame_tiles(gMapObjectPic_MagmaMemberF_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Sidney[] = {
+    obj_frame_tiles(gMapObjectPic_Sidney_0),
+    obj_frame_tiles(gMapObjectPic_Sidney_1),
+    obj_frame_tiles(gMapObjectPic_Sidney_2),
+    obj_frame_tiles(gMapObjectPic_Sidney_0),
+    obj_frame_tiles(gMapObjectPic_Sidney_0),
+    obj_frame_tiles(gMapObjectPic_Sidney_1),
+    obj_frame_tiles(gMapObjectPic_Sidney_1),
+    obj_frame_tiles(gMapObjectPic_Sidney_2),
+    obj_frame_tiles(gMapObjectPic_Sidney_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Phoebe[] = {
+    obj_frame_tiles(gMapObjectPic_Phoebe_0),
+    obj_frame_tiles(gMapObjectPic_Phoebe_1),
+    obj_frame_tiles(gMapObjectPic_Phoebe_2),
+    obj_frame_tiles(gMapObjectPic_Phoebe_0),
+    obj_frame_tiles(gMapObjectPic_Phoebe_0),
+    obj_frame_tiles(gMapObjectPic_Phoebe_1),
+    obj_frame_tiles(gMapObjectPic_Phoebe_1),
+    obj_frame_tiles(gMapObjectPic_Phoebe_2),
+    obj_frame_tiles(gMapObjectPic_Phoebe_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Glacia[] = {
+    obj_frame_tiles(gMapObjectPic_Glacia_0),
+    obj_frame_tiles(gMapObjectPic_Glacia_1),
+    obj_frame_tiles(gMapObjectPic_Glacia_2),
+    obj_frame_tiles(gMapObjectPic_Glacia_0),
+    obj_frame_tiles(gMapObjectPic_Glacia_0),
+    obj_frame_tiles(gMapObjectPic_Glacia_1),
+    obj_frame_tiles(gMapObjectPic_Glacia_1),
+    obj_frame_tiles(gMapObjectPic_Glacia_2),
+    obj_frame_tiles(gMapObjectPic_Glacia_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Drake[] = {
+    obj_frame_tiles(gMapObjectPic_Drake_0),
+    obj_frame_tiles(gMapObjectPic_Drake_1),
+    obj_frame_tiles(gMapObjectPic_Drake_2),
+    obj_frame_tiles(gMapObjectPic_Drake_0),
+    obj_frame_tiles(gMapObjectPic_Drake_0),
+    obj_frame_tiles(gMapObjectPic_Drake_1),
+    obj_frame_tiles(gMapObjectPic_Drake_1),
+    obj_frame_tiles(gMapObjectPic_Drake_2),
+    obj_frame_tiles(gMapObjectPic_Drake_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Roxanne[] = {
+    obj_frame_tiles(gMapObjectPic_Roxanne_0),
+    obj_frame_tiles(gMapObjectPic_Roxanne_1),
+    obj_frame_tiles(gMapObjectPic_Roxanne_2),
+    obj_frame_tiles(gMapObjectPic_Roxanne_0),
+    obj_frame_tiles(gMapObjectPic_Roxanne_0),
+    obj_frame_tiles(gMapObjectPic_Roxanne_1),
+    obj_frame_tiles(gMapObjectPic_Roxanne_1),
+    obj_frame_tiles(gMapObjectPic_Roxanne_2),
+    obj_frame_tiles(gMapObjectPic_Roxanne_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Brawly[] = {
+    obj_frame_tiles(gMapObjectPic_Brawly_0),
+    obj_frame_tiles(gMapObjectPic_Brawly_1),
+    obj_frame_tiles(gMapObjectPic_Brawly_2),
+    obj_frame_tiles(gMapObjectPic_Brawly_0),
+    obj_frame_tiles(gMapObjectPic_Brawly_0),
+    obj_frame_tiles(gMapObjectPic_Brawly_1),
+    obj_frame_tiles(gMapObjectPic_Brawly_1),
+    obj_frame_tiles(gMapObjectPic_Brawly_2),
+    obj_frame_tiles(gMapObjectPic_Brawly_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Wattson[] = {
+    obj_frame_tiles(gMapObjectPic_Wattson_0),
+    obj_frame_tiles(gMapObjectPic_Wattson_1),
+    obj_frame_tiles(gMapObjectPic_Wattson_2),
+    obj_frame_tiles(gMapObjectPic_Wattson_0),
+    obj_frame_tiles(gMapObjectPic_Wattson_0),
+    obj_frame_tiles(gMapObjectPic_Wattson_1),
+    obj_frame_tiles(gMapObjectPic_Wattson_1),
+    obj_frame_tiles(gMapObjectPic_Wattson_2),
+    obj_frame_tiles(gMapObjectPic_Wattson_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Flannery[] = {
+    obj_frame_tiles(gMapObjectPic_Flannery_0),
+    obj_frame_tiles(gMapObjectPic_Flannery_1),
+    obj_frame_tiles(gMapObjectPic_Flannery_2),
+    obj_frame_tiles(gMapObjectPic_Flannery_0),
+    obj_frame_tiles(gMapObjectPic_Flannery_0),
+    obj_frame_tiles(gMapObjectPic_Flannery_1),
+    obj_frame_tiles(gMapObjectPic_Flannery_1),
+    obj_frame_tiles(gMapObjectPic_Flannery_2),
+    obj_frame_tiles(gMapObjectPic_Flannery_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Norman[] = {
+    obj_frame_tiles(gMapObjectPic_Norman_0),
+    obj_frame_tiles(gMapObjectPic_Norman_1),
+    obj_frame_tiles(gMapObjectPic_Norman_2),
+    obj_frame_tiles(gMapObjectPic_Norman_3),
+    obj_frame_tiles(gMapObjectPic_Norman_4),
+    obj_frame_tiles(gMapObjectPic_Norman_5),
+    obj_frame_tiles(gMapObjectPic_Norman_6),
+    obj_frame_tiles(gMapObjectPic_Norman_7),
+    obj_frame_tiles(gMapObjectPic_Norman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Winona[] = {
+    obj_frame_tiles(gMapObjectPic_Winona_0),
+    obj_frame_tiles(gMapObjectPic_Winona_1),
+    obj_frame_tiles(gMapObjectPic_Winona_2),
+    obj_frame_tiles(gMapObjectPic_Winona_0),
+    obj_frame_tiles(gMapObjectPic_Winona_0),
+    obj_frame_tiles(gMapObjectPic_Winona_1),
+    obj_frame_tiles(gMapObjectPic_Winona_1),
+    obj_frame_tiles(gMapObjectPic_Winona_2),
+    obj_frame_tiles(gMapObjectPic_Winona_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Liza[] = {
+    obj_frame_tiles(gMapObjectPic_Liza_0),
+    obj_frame_tiles(gMapObjectPic_Liza_1),
+    obj_frame_tiles(gMapObjectPic_Liza_2),
+    obj_frame_tiles(gMapObjectPic_Liza_0),
+    obj_frame_tiles(gMapObjectPic_Liza_0),
+    obj_frame_tiles(gMapObjectPic_Liza_1),
+    obj_frame_tiles(gMapObjectPic_Liza_1),
+    obj_frame_tiles(gMapObjectPic_Liza_2),
+    obj_frame_tiles(gMapObjectPic_Liza_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Tate[] = {
+    obj_frame_tiles(gMapObjectPic_Tate_0),
+    obj_frame_tiles(gMapObjectPic_Tate_1),
+    obj_frame_tiles(gMapObjectPic_Tate_2),
+    obj_frame_tiles(gMapObjectPic_Tate_0),
+    obj_frame_tiles(gMapObjectPic_Tate_0),
+    obj_frame_tiles(gMapObjectPic_Tate_1),
+    obj_frame_tiles(gMapObjectPic_Tate_1),
+    obj_frame_tiles(gMapObjectPic_Tate_2),
+    obj_frame_tiles(gMapObjectPic_Tate_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Wallace[] = {
+    obj_frame_tiles(gMapObjectPic_Wallace_0),
+    obj_frame_tiles(gMapObjectPic_Wallace_1),
+    obj_frame_tiles(gMapObjectPic_Wallace_2),
+    obj_frame_tiles(gMapObjectPic_Wallace_3),
+    obj_frame_tiles(gMapObjectPic_Wallace_4),
+    obj_frame_tiles(gMapObjectPic_Wallace_5),
+    obj_frame_tiles(gMapObjectPic_Wallace_6),
+    obj_frame_tiles(gMapObjectPic_Wallace_7),
+    obj_frame_tiles(gMapObjectPic_Wallace_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Steven[] = {
+    obj_frame_tiles(gMapObjectPic_Steven_0),
+    obj_frame_tiles(gMapObjectPic_Steven_1),
+    obj_frame_tiles(gMapObjectPic_Steven_2),
+    obj_frame_tiles(gMapObjectPic_Steven_3),
+    obj_frame_tiles(gMapObjectPic_Steven_4),
+    obj_frame_tiles(gMapObjectPic_Steven_5),
+    obj_frame_tiles(gMapObjectPic_Steven_6),
+    obj_frame_tiles(gMapObjectPic_Steven_7),
+    obj_frame_tiles(gMapObjectPic_Steven_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Wally[] = {
+    obj_frame_tiles(gMapObjectPic_Wally_0),
+    obj_frame_tiles(gMapObjectPic_Wally_1),
+    obj_frame_tiles(gMapObjectPic_Wally_2),
+    obj_frame_tiles(gMapObjectPic_Wally_3),
+    obj_frame_tiles(gMapObjectPic_Wally_4),
+    obj_frame_tiles(gMapObjectPic_Wally_5),
+    obj_frame_tiles(gMapObjectPic_Wally_6),
+    obj_frame_tiles(gMapObjectPic_Wally_7),
+    obj_frame_tiles(gMapObjectPic_Wally_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LittleBoy3[] = {
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_0),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_1),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_2),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_3),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_4),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_5),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_6),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_7),
+    obj_frame_tiles(gMapObjectPic_LittleBoy3_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanFishing[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_0),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_1),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_2),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_3),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_4),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_5),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_6),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_7),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_8),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_9),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_10),
+    obj_frame_tiles(gMapObjectPic_BrendanFishing_11)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayFishing[] = {
+    obj_frame_tiles(gMapObjectPic_MayFishing_0),
+    obj_frame_tiles(gMapObjectPic_MayFishing_1),
+    obj_frame_tiles(gMapObjectPic_MayFishing_2),
+    obj_frame_tiles(gMapObjectPic_MayFishing_3),
+    obj_frame_tiles(gMapObjectPic_MayFishing_4),
+    obj_frame_tiles(gMapObjectPic_MayFishing_5),
+    obj_frame_tiles(gMapObjectPic_MayFishing_6),
+    obj_frame_tiles(gMapObjectPic_MayFishing_7),
+    obj_frame_tiles(gMapObjectPic_MayFishing_8),
+    obj_frame_tiles(gMapObjectPic_MayFishing_9),
+    obj_frame_tiles(gMapObjectPic_MayFishing_10),
+    obj_frame_tiles(gMapObjectPic_MayFishing_11)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_HotSpringsOldWoman[] = {
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_0),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_1),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_2),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_3),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_4),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_5),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_6),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_7),
+    obj_frame_tiles(gMapObjectPic_HotSpringsOldWoman_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SSTidal[] = {
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal),
+    obj_frame_tiles(gMapObjectPic_SSTidal)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SubmarineShadow[] = {
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow),
+    obj_frame_tiles(gMapObjectPic_SubmarineShadow)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PichuDoll[] = {
+    obj_frame_tiles(gMapObjectPic_PichuDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PikachuDoll[] = {
+    obj_frame_tiles(gMapObjectPic_PikachuDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MarillDoll[] = {
+    obj_frame_tiles(gMapObjectPic_MarillDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TogepiDoll[] = {
+    obj_frame_tiles(gMapObjectPic_TogepiDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_CyndaquilDoll[] = {
+    obj_frame_tiles(gMapObjectPic_CyndaquilDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ChikoritaDoll[] = {
+    obj_frame_tiles(gMapObjectPic_ChikoritaDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TotodileDoll[] = {
+    obj_frame_tiles(gMapObjectPic_TotodileDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_JigglypuffDoll[] = {
+    obj_frame_tiles(gMapObjectPic_JigglypuffDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MeowthDoll[] = {
+    obj_frame_tiles(gMapObjectPic_MeowthDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ClefairyDoll[] = {
+    obj_frame_tiles(gMapObjectPic_ClefairyDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_DittoDoll[] = {
+    obj_frame_tiles(gMapObjectPic_DittoDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SmoochumDoll[] = {
+    obj_frame_tiles(gMapObjectPic_SmoochumDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TreeckoDoll[] = {
+    obj_frame_tiles(gMapObjectPic_TreeckoDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TorchicDoll[] = {
+    obj_frame_tiles(gMapObjectPic_TorchicDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MudkipDoll[] = {
+    obj_frame_tiles(gMapObjectPic_MudkipDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_DuskullDoll[] = {
+    obj_frame_tiles(gMapObjectPic_DuskullDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_WynautDoll[] = {
+    obj_frame_tiles(gMapObjectPic_WynautDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BaltoyDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BaltoyDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_KecleonDoll[] = {
+    obj_frame_tiles(gMapObjectPic_KecleonDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_AzurillDoll[] = {
+    obj_frame_tiles(gMapObjectPic_AzurillDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SkittyDoll[] = {
+    obj_frame_tiles(gMapObjectPic_SkittyDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SwabluDoll[] = {
+    obj_frame_tiles(gMapObjectPic_SwabluDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_GulpinDoll[] = {
+    obj_frame_tiles(gMapObjectPic_GulpinDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LotadDoll[] = {
+    obj_frame_tiles(gMapObjectPic_LotadDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SeedotDoll[] = {
+    obj_frame_tiles(gMapObjectPic_SeedotDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PikaCushion[] = {
+    obj_frame_tiles(gMapObjectPic_PikaCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_RoundCushion[] = {
+    obj_frame_tiles(gMapObjectPic_RoundCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_KissCushion[] = {
+    obj_frame_tiles(gMapObjectPic_KissCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ZigzagCushion[] = {
+    obj_frame_tiles(gMapObjectPic_ZigzagCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_SpinCushion[] = {
+    obj_frame_tiles(gMapObjectPic_SpinCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_DiamondCushion[] = {
+    obj_frame_tiles(gMapObjectPic_DiamondCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BallCushion[] = {
+    obj_frame_tiles(gMapObjectPic_BallCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_GrassCushion[] = {
+    obj_frame_tiles(gMapObjectPic_GrassCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_FireCushion[] = {
+    obj_frame_tiles(gMapObjectPic_FireCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_WaterCushion[] = {
+    obj_frame_tiles(gMapObjectPic_WaterCushion)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigSnorlaxDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigSnorlaxDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigRhydonDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigRhydonDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigLaprasDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigLaprasDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigVenusaurDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigVenusaurDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigCharizardDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigCharizardDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigBlastoiseDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigBlastoiseDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigWailmerDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigWailmerDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigRegirockDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigRegirockDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigRegiceDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigRegiceDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BigRegisteelDoll[] = {
+    obj_frame_tiles(gMapObjectPic_BigRegisteelDoll)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_LatiasLatios[] = {
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_0),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_0),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_0),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_1),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_2),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_1),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_2),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_1),
+    obj_frame_tiles(gMapObjectPic_LatiasLatios_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Boy5[] = {
+    obj_frame_tiles(gMapObjectPic_Boy5_0),
+    obj_frame_tiles(gMapObjectPic_Boy5_1),
+    obj_frame_tiles(gMapObjectPic_Boy5_2),
+    obj_frame_tiles(gMapObjectPic_Boy5_0),
+    obj_frame_tiles(gMapObjectPic_Boy5_0),
+    obj_frame_tiles(gMapObjectPic_Boy5_1),
+    obj_frame_tiles(gMapObjectPic_Boy5_1),
+    obj_frame_tiles(gMapObjectPic_Boy5_2),
+    obj_frame_tiles(gMapObjectPic_Boy5_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_ContestJudge[] = {
+    obj_frame_tiles(gMapObjectPic_ContestJudge_0),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_1),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_2),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_3),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_4),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_5),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_6),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_7),
+    obj_frame_tiles(gMapObjectPic_ContestJudge_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanWatering[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_0),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_1),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_2),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_3),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_3),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_4),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_4),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_5),
+    obj_frame_tiles(gMapObjectPic_BrendanWatering_5)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayWatering[] = {
+    obj_frame_tiles(gMapObjectPic_MayWatering_0),
+    obj_frame_tiles(gMapObjectPic_MayWatering_1),
+    obj_frame_tiles(gMapObjectPic_MayWatering_2),
+    obj_frame_tiles(gMapObjectPic_MayWatering_3),
+    obj_frame_tiles(gMapObjectPic_MayWatering_3),
+    obj_frame_tiles(gMapObjectPic_MayWatering_4),
+    obj_frame_tiles(gMapObjectPic_MayWatering_4),
+    obj_frame_tiles(gMapObjectPic_MayWatering_5),
+    obj_frame_tiles(gMapObjectPic_MayWatering_5)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_BrendanDecorating[] = {
+    obj_frame_tiles(gMapObjectPic_BrendanDecorating)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_MayDecorating[] = {
+    obj_frame_tiles(gMapObjectPic_MayDecorating)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Archie[] = {
+    obj_frame_tiles(gMapObjectPic_Archie_0),
+    obj_frame_tiles(gMapObjectPic_Archie_1),
+    obj_frame_tiles(gMapObjectPic_Archie_2),
+    obj_frame_tiles(gMapObjectPic_Archie_3),
+    obj_frame_tiles(gMapObjectPic_Archie_4),
+    obj_frame_tiles(gMapObjectPic_Archie_5),
+    obj_frame_tiles(gMapObjectPic_Archie_6),
+    obj_frame_tiles(gMapObjectPic_Archie_7),
+    obj_frame_tiles(gMapObjectPic_Archie_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Maxie[] = {
+    obj_frame_tiles(gMapObjectPic_Maxie_0),
+    obj_frame_tiles(gMapObjectPic_Maxie_1),
+    obj_frame_tiles(gMapObjectPic_Maxie_2),
+    obj_frame_tiles(gMapObjectPic_Maxie_3),
+    obj_frame_tiles(gMapObjectPic_Maxie_4),
+    obj_frame_tiles(gMapObjectPic_Maxie_5),
+    obj_frame_tiles(gMapObjectPic_Maxie_6),
+    obj_frame_tiles(gMapObjectPic_Maxie_7),
+    obj_frame_tiles(gMapObjectPic_Maxie_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Kyogre[] = {
+    obj_frame_tiles(gMapObjectPic_Kyogre_0),
+    obj_frame_tiles(gMapObjectPic_Kyogre_0),
+    obj_frame_tiles(gMapObjectPic_Kyogre_0),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1),
+    obj_frame_tiles(gMapObjectPic_Kyogre_1)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Groudon[] = {
+    obj_frame_tiles(gMapObjectPic_Groudon_0),
+    obj_frame_tiles(gMapObjectPic_Groudon_0),
+    obj_frame_tiles(gMapObjectPic_Groudon_0),
+    obj_frame_tiles(gMapObjectPic_Groudon_1),
+    obj_frame_tiles(gMapObjectPic_Groudon_1),
+    obj_frame_tiles(gMapObjectPic_Groudon_1),
+    obj_frame_tiles(gMapObjectPic_Groudon_1),
+    obj_frame_tiles(gMapObjectPic_Groudon_1),
+    obj_frame_tiles(gMapObjectPic_Groudon_1)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Fossil[] = {
+    obj_frame_tiles(gMapObjectPic_Fossil)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Regi[] = {
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi),
+    obj_frame_tiles(gMapObjectPic_Regi)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Skitty[] = {
+    obj_frame_tiles(gMapObjectPic_Skitty_0),
+    obj_frame_tiles(gMapObjectPic_Skitty_1),
+    obj_frame_tiles(gMapObjectPic_Skitty_2),
+    obj_frame_tiles(gMapObjectPic_Skitty_0),
+    obj_frame_tiles(gMapObjectPic_Skitty_0),
+    obj_frame_tiles(gMapObjectPic_Skitty_1),
+    obj_frame_tiles(gMapObjectPic_Skitty_1),
+    obj_frame_tiles(gMapObjectPic_Skitty_2),
+    obj_frame_tiles(gMapObjectPic_Skitty_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Kecleon[] = {
+    obj_frame_tiles(gMapObjectPic_Kecleon_0),
+    obj_frame_tiles(gMapObjectPic_Kecleon_1),
+    obj_frame_tiles(gMapObjectPic_Kecleon_2),
+    obj_frame_tiles(gMapObjectPic_Kecleon_0),
+    obj_frame_tiles(gMapObjectPic_Kecleon_0),
+    obj_frame_tiles(gMapObjectPic_Kecleon_1),
+    obj_frame_tiles(gMapObjectPic_Kecleon_1),
+    obj_frame_tiles(gMapObjectPic_Kecleon_2),
+    obj_frame_tiles(gMapObjectPic_Kecleon_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Rayquaza[] = {
+    obj_frame_tiles(gMapObjectPic_Rayquaza_0),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_0),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_0),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1),
+    obj_frame_tiles(gMapObjectPic_Rayquaza_1)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Zigzagoon[] = {
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_0),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_1),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_2),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_0),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_0),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_1),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_1),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_2),
+    obj_frame_tiles(gMapObjectPic_Zigzagoon_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Pikachu[] = {
+    obj_frame_tiles(gMapObjectPic_Pikachu_0),
+    obj_frame_tiles(gMapObjectPic_Pikachu_1),
+    obj_frame_tiles(gMapObjectPic_Pikachu_2),
+    obj_frame_tiles(gMapObjectPic_Pikachu_0),
+    obj_frame_tiles(gMapObjectPic_Pikachu_0),
+    obj_frame_tiles(gMapObjectPic_Pikachu_1),
+    obj_frame_tiles(gMapObjectPic_Pikachu_1),
+    obj_frame_tiles(gMapObjectPic_Pikachu_2),
+    obj_frame_tiles(gMapObjectPic_Pikachu_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Azumarill[] = {
+    obj_frame_tiles(gMapObjectPic_Azumarill_0),
+    obj_frame_tiles(gMapObjectPic_Azumarill_1),
+    obj_frame_tiles(gMapObjectPic_Azumarill_2),
+    obj_frame_tiles(gMapObjectPic_Azumarill_0),
+    obj_frame_tiles(gMapObjectPic_Azumarill_0),
+    obj_frame_tiles(gMapObjectPic_Azumarill_1),
+    obj_frame_tiles(gMapObjectPic_Azumarill_1),
+    obj_frame_tiles(gMapObjectPic_Azumarill_2),
+    obj_frame_tiles(gMapObjectPic_Azumarill_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Wingull[] = {
+    obj_frame_tiles(gMapObjectPic_Wingull_0),
+    obj_frame_tiles(gMapObjectPic_Wingull_1),
+    obj_frame_tiles(gMapObjectPic_Wingull_2),
+    obj_frame_tiles(gMapObjectPic_Wingull_3),
+    obj_frame_tiles(gMapObjectPic_Wingull_3),
+    obj_frame_tiles(gMapObjectPic_Wingull_4),
+    obj_frame_tiles(gMapObjectPic_Wingull_4),
+    obj_frame_tiles(gMapObjectPic_Wingull_5),
+    obj_frame_tiles(gMapObjectPic_Wingull_5)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_TuberMSwimming[] = {
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_0),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_1),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_2),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_3),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_4),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_5),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_6),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_7),
+    obj_frame_tiles(gMapObjectPic_TuberMSwimming_8)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Azurill[] = {
+    obj_frame_tiles(gMapObjectPic_Azurill_0),
+    obj_frame_tiles(gMapObjectPic_Azurill_1),
+    obj_frame_tiles(gMapObjectPic_Azurill_2),
+    obj_frame_tiles(gMapObjectPic_Azurill_0),
+    obj_frame_tiles(gMapObjectPic_Azurill_0),
+    obj_frame_tiles(gMapObjectPic_Azurill_1),
+    obj_frame_tiles(gMapObjectPic_Azurill_1),
+    obj_frame_tiles(gMapObjectPic_Azurill_2),
+    obj_frame_tiles(gMapObjectPic_Azurill_2)
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_Mom[] = {
+    obj_frame_tiles(gMapObjectPic_Mom_0),
+    obj_frame_tiles(gMapObjectPic_Mom_1),
+    obj_frame_tiles(gMapObjectPic_Mom_2),
+    obj_frame_tiles(gMapObjectPic_Mom_3),
+    obj_frame_tiles(gMapObjectPic_Mom_4),
+    obj_frame_tiles(gMapObjectPic_Mom_5),
+    obj_frame_tiles(gMapObjectPic_Mom_6),
+    obj_frame_tiles(gMapObjectPic_Mom_7),
+    obj_frame_tiles(gMapObjectPic_Mom_8),
+};
+
+
+// text
 
 extern void strange_npc_table_clear(void);
 extern void ClearPlayerAvatarInfo(void);
@@ -55,9 +3996,6 @@ extern u8 gReservedSpritePaletteCount;
 extern struct Camera gUnknown_0202E844;
 extern u8 gUnknown_030005A4;
 extern u16 gUnknown_030005A6;
-extern const u8 gUnknown_0836DBBC[];
-extern const u8 gUnknown_0836DC09[];
-extern void (*const gUnknown_0836DA88[])(struct Sprite *);
 extern const u8 *const gBerryTreeGraphicsIdTablePointers[];
 extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
 extern const u8 *const gBerryTreePaletteSlotTablePointers[];
@@ -65,7 +4003,6 @@ extern const struct MapObjectGraphicsInfo *const gMapObjectGraphicsInfoPointers[
 extern const struct SpritePalette gUnknown_0837377C[];
 extern const struct PairedPalettes gUnknown_08373874[];
 extern const struct PairedPalettes gUnknown_083738E4[];
-extern const struct SpriteTemplate gSpriteTemplate_830FD24;
 extern const u16 *const gUnknown_0837399C[];
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
@@ -1052,8 +4989,6 @@ u8 FindFieldObjectPaletteIndexByTag(u16 tag)
     return 0xFF;
 }
 
-const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
-
 void npc_load_two_palettes__no_record(u16 a, u8 b)
 {
     u8 i;
@@ -1201,18 +5136,6 @@ void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
     sub_805B55C(x, y);
     RemoveFieldObjectsOutsideView();
 }
-
-void ObjectCB_CameraObject(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_830FD24 =
-{
-    .tileTag = 0,
-    .paletteTag = 0xFFFF,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = ObjectCB_CameraObject,
-};
 
 u8 AddCameraObject(u8 a)
 {
@@ -4339,6 +8262,8 @@ _08060C18: .4byte gUnknown_08375767\n\
 .syntax divided\n");
 }
 #endif
+
+extern u8 (**const gUnknown_08375778[])(struct MapObject *, struct Sprite *);
 
 void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
