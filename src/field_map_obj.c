@@ -15,6 +15,7 @@
 #include "field_camera.h"
 #include "metatile_behavior.h"
 #include "map_constants.h"
+#include "map_object_constants.h"
 #include "trainer_see.h"
 #include "field_effect_helpers.h"
 
@@ -25,7 +26,15 @@ const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0
 void ObjectCB_CameraObject(struct Sprite *sprite);
 const struct SpriteTemplate gSpriteTemplate_830FD24 = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
 
-const u8 filler_830fd3c[12] = {};
+void CameraObject_0(struct Sprite *);
+void CameraObject_1(struct Sprite *);
+void CameraObject_2(struct Sprite *);
+void (*const gCameraObjectFuncs[])(struct Sprite *) =
+    {
+        CameraObject_0,
+        CameraObject_1,
+        CameraObject_2,
+    };
 
 const u32 gMapObjectPic_BrendanNormal_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/00.4bpp");
 const u32 gMapObjectPic_BrendanNormal_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/01.4bpp");
@@ -3959,6 +3968,3144 @@ const struct SpriteFrameImage gMapObjectPicTable_Mom[] = {
     obj_frame_tiles(gMapObjectPic_Mom_8),
 };
 
+const union AnimCmd gMapObjectImageAnim_83708C8[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83708DC[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83708E4[] = {
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83708EC[] = {
+    ANIMCMD_FRAME(2, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83708F4[] = {
+    ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83708FC[] = {
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(3, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370910[] = {
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370924[] = {
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370938[] = {
+    ANIMCMD_FRAME(5, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(6, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_837094C[] = {
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(3, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370960[] = {
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370974[] = {
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370988[] = {
+    ANIMCMD_FRAME(5, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(6, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_837099C[] = {
+    ANIMCMD_FRAME(3, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(3, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83709B0[] = {
+    ANIMCMD_FRAME(4, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(4, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83709C4[] = {
+    ANIMCMD_FRAME(5, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(6, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83709D8[] = {
+    ANIMCMD_FRAME(5, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(6, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_83709EC[] = {
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(3, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A00[] = {
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(4, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A14[] = {
+    ANIMCMD_FRAME(5, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(6, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A28[] = {
+    ANIMCMD_FRAME(5, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(6, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A3C[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A44[] = {
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A4C[] = {
+    ANIMCMD_FRAME(2, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A54[] = {
+    ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A5C[] = {
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A70[] = {
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A84[] = {
+    ANIMCMD_FRAME(7, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(8, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370A98[] = {
+    ANIMCMD_FRAME(7, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370AAC[] = {
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370AC0[] = {
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370AD4[] = {
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370AE8[] = {
+    ANIMCMD_FRAME(7, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370AFC[] = {
+    ANIMCMD_FRAME(3, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(4, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B10[] = {
+    ANIMCMD_FRAME(5, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(6, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B24[] = {
+    ANIMCMD_FRAME(7, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(8, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B38[] = {
+    ANIMCMD_FRAME(7, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B4C[] = {
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B60[] = {
+    ANIMCMD_FRAME(5, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(6, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B74[] = {
+    ANIMCMD_FRAME(7, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B88[] = {
+    ANIMCMD_FRAME(7, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 1, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370B9C[] = {
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(9, 3),
+    ANIMCMD_FRAME(13, 5),
+    ANIMCMD_FRAME(9, 3),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370BB0[] = {
+    ANIMCMD_FRAME(14, 5),
+    ANIMCMD_FRAME(10, 3),
+    ANIMCMD_FRAME(15, 5),
+    ANIMCMD_FRAME(10, 3),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370BC4[] = {
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(11, 3),
+    ANIMCMD_FRAME(17, 5),
+    ANIMCMD_FRAME(11, 3),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370BD8[] = {
+    ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(17, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370BEC[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C04[] = {
+    ANIMCMD_FRAME(9, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C0C[] = {
+    ANIMCMD_FRAME(10, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C14[] = {
+    ANIMCMD_FRAME(11, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C1C[] = {
+    ANIMCMD_FRAME(11, 32, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C24[] = {
+    ANIMCMD_FRAME(9, 4),
+    ANIMCMD_FRAME(10, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C30[] = {
+    ANIMCMD_FRAME(13, 4),
+    ANIMCMD_FRAME(14, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C3C[] = {
+    ANIMCMD_FRAME(17, 4),
+    ANIMCMD_FRAME(18, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C48[] = {
+    ANIMCMD_FRAME(17, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C54[] = {
+    ANIMCMD_FRAME(11, 4),
+    ANIMCMD_FRAME(12, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C60[] = {
+    ANIMCMD_FRAME(15, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C6C[] = {
+    ANIMCMD_FRAME(19, 4),
+    ANIMCMD_FRAME(20, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C78[] = {
+    ANIMCMD_FRAME(19, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(20, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C84[] = {
+    ANIMCMD_FRAME(9, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C90[] = {
+    ANIMCMD_FRAME(13, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370C9C[] = {
+    ANIMCMD_FRAME(17, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CA8[] = {
+    ANIMCMD_FRAME(17, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CB4[] = {
+    ANIMCMD_FRAME(11, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CC0[] = {
+    ANIMCMD_FRAME(15, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CCC[] = {
+    ANIMCMD_FRAME(19, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CD8[] = {
+    ANIMCMD_FRAME(19, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CE4[] = {
+    ANIMCMD_FRAME(21, 4),
+    ANIMCMD_FRAME(10, 4),
+    ANIMCMD_FRAME(22, 4),
+    ANIMCMD_FRAME(10, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370CF8[] = {
+    ANIMCMD_FRAME(23, 4),
+    ANIMCMD_FRAME(14, 4),
+    ANIMCMD_FRAME(24, 4),
+    ANIMCMD_FRAME(14, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D0C[] = {
+    ANIMCMD_FRAME(25, 4),
+    ANIMCMD_FRAME(18, 4),
+    ANIMCMD_FRAME(26, 4),
+    ANIMCMD_FRAME(18, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D20[] = {
+    ANIMCMD_FRAME(25, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(26, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D34[] = {
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D3C[] = {
+    ANIMCMD_FRAME(1, 32),
+    ANIMCMD_FRAME(2, 32),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D48[] = {
+    ANIMCMD_FRAME(3, 48),
+    ANIMCMD_FRAME(4, 48),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D54[] = {
+    ANIMCMD_FRAME(5, 32),
+    ANIMCMD_FRAME(5, 32),
+    ANIMCMD_FRAME(6, 32),
+    ANIMCMD_FRAME(6, 32),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D68[] = {
+    ANIMCMD_FRAME(7, 48),
+    ANIMCMD_FRAME(7, 48),
+    ANIMCMD_FRAME(8, 48),
+    ANIMCMD_FRAME(8, 48),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D7C[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(9, 32),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370D8C[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370DA0[] = {
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370DB4[] = {
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_FRAME(9, 4),
+    ANIMCMD_FRAME(10, 4),
+    ANIMCMD_FRAME(11, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370DC8[] = {
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370DDC[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370DF0[] = {
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E04[] = {
+    ANIMCMD_FRAME(11, 4),
+    ANIMCMD_FRAME(10, 6),
+    ANIMCMD_FRAME(9, 6),
+    ANIMCMD_FRAME(8, 6),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E18[] = {
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_FRAME(6, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E2C[] = {
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E40[] = {
+    ANIMCMD_FRAME(3, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E54[] = {
+    ANIMCMD_FRAME(10, 6),
+    ANIMCMD_FRAME(11, 6),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(11, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E68[] = {
+    ANIMCMD_FRAME(6, 6),
+    ANIMCMD_FRAME(7, 6),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(7, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E7C[] = {
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gMapObjectImageAnim_8370E90[] = {
+    ANIMCMD_FRAME(2, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 6, .hFlip = TRUE),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(3, 30, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd gMapObjectRotScalAnim_8370EA4[] = {
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_LOOP(7),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd gMapObjectRotScalAnim_8370ED4[] = {
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_LOOP(15),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_LOOP(15),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_Inanimate[] = {
+    gMapObjectImageAnim_83708C8
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_QuintyPlump[] = {
+    gMapObjectImageAnim_83708DC,
+    gMapObjectImageAnim_83708E4,
+    gMapObjectImageAnim_83708EC,
+    gMapObjectImageAnim_83708F4,
+    gMapObjectImageAnim_83708FC,
+    gMapObjectImageAnim_8370910,
+    gMapObjectImageAnim_8370924,
+    gMapObjectImageAnim_8370938,
+    gMapObjectImageAnim_837094C,
+    gMapObjectImageAnim_8370960,
+    gMapObjectImageAnim_8370974,
+    gMapObjectImageAnim_8370988,
+    gMapObjectImageAnim_837099C,
+    gMapObjectImageAnim_83709B0,
+    gMapObjectImageAnim_83709C4,
+    gMapObjectImageAnim_83709D8,
+    gMapObjectImageAnim_83709EC,
+    gMapObjectImageAnim_8370A00,
+    gMapObjectImageAnim_8370A14,
+    gMapObjectImageAnim_8370A28
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_Standard[] = {
+    gMapObjectImageAnim_8370A3C,
+    gMapObjectImageAnim_8370A44,
+    gMapObjectImageAnim_8370A4C,
+    gMapObjectImageAnim_8370A54,
+    gMapObjectImageAnim_8370A5C,
+    gMapObjectImageAnim_8370A70,
+    gMapObjectImageAnim_8370A84,
+    gMapObjectImageAnim_8370A98,
+    gMapObjectImageAnim_8370AAC,
+    gMapObjectImageAnim_8370AC0,
+    gMapObjectImageAnim_8370AD4,
+    gMapObjectImageAnim_8370AE8,
+    gMapObjectImageAnim_8370AFC,
+    gMapObjectImageAnim_8370B10,
+    gMapObjectImageAnim_8370B24,
+    gMapObjectImageAnim_8370B38,
+    gMapObjectImageAnim_8370B4C,
+    gMapObjectImageAnim_8370B60,
+    gMapObjectImageAnim_8370B74,
+    gMapObjectImageAnim_8370B88
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_BrendanMayNormal[] = {
+    gMapObjectImageAnim_8370A3C,
+    gMapObjectImageAnim_8370A44,
+    gMapObjectImageAnim_8370A4C,
+    gMapObjectImageAnim_8370A54,
+    gMapObjectImageAnim_8370A5C,
+    gMapObjectImageAnim_8370A70,
+    gMapObjectImageAnim_8370A84,
+    gMapObjectImageAnim_8370A98,
+    gMapObjectImageAnim_8370AAC,
+    gMapObjectImageAnim_8370AC0,
+    gMapObjectImageAnim_8370AD4,
+    gMapObjectImageAnim_8370AE8,
+    gMapObjectImageAnim_8370AFC,
+    gMapObjectImageAnim_8370B10,
+    gMapObjectImageAnim_8370B24,
+    gMapObjectImageAnim_8370B38,
+    gMapObjectImageAnim_8370B4C,
+    gMapObjectImageAnim_8370B60,
+    gMapObjectImageAnim_8370B74,
+    gMapObjectImageAnim_8370B88,
+    gMapObjectImageAnim_8370B9C,
+    gMapObjectImageAnim_8370BB0,
+    gMapObjectImageAnim_8370BC4,
+    gMapObjectImageAnim_8370BD8
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_AcroBike[] = {
+    gMapObjectImageAnim_8370A3C,
+    gMapObjectImageAnim_8370A44,
+    gMapObjectImageAnim_8370A4C,
+    gMapObjectImageAnim_8370A54,
+    gMapObjectImageAnim_8370A5C,
+    gMapObjectImageAnim_8370A70,
+    gMapObjectImageAnim_8370A84,
+    gMapObjectImageAnim_8370A98,
+    gMapObjectImageAnim_8370AAC,
+    gMapObjectImageAnim_8370AC0,
+    gMapObjectImageAnim_8370AD4,
+    gMapObjectImageAnim_8370AE8,
+    gMapObjectImageAnim_8370AFC,
+    gMapObjectImageAnim_8370B10,
+    gMapObjectImageAnim_8370B24,
+    gMapObjectImageAnim_8370B38,
+    gMapObjectImageAnim_8370B4C,
+    gMapObjectImageAnim_8370B60,
+    gMapObjectImageAnim_8370B74,
+    gMapObjectImageAnim_8370B88,
+    gMapObjectImageAnim_8370C24,
+    gMapObjectImageAnim_8370C30,
+    gMapObjectImageAnim_8370C3C,
+    gMapObjectImageAnim_8370C48,
+    gMapObjectImageAnim_8370C54,
+    gMapObjectImageAnim_8370C60,
+    gMapObjectImageAnim_8370C6C,
+    gMapObjectImageAnim_8370C78,
+    gMapObjectImageAnim_8370C84,
+    gMapObjectImageAnim_8370C90,
+    gMapObjectImageAnim_8370C9C,
+    gMapObjectImageAnim_8370CA8,
+    gMapObjectImageAnim_8370CB4,
+    gMapObjectImageAnim_8370CC0,
+    gMapObjectImageAnim_8370CCC,
+    gMapObjectImageAnim_8370CD8,
+    gMapObjectImageAnim_8370CE4,
+    gMapObjectImageAnim_8370CF8,
+    gMapObjectImageAnim_8370D0C,
+    gMapObjectImageAnim_8370D20
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_Surfing[] = {
+    gMapObjectImageAnim_8370A3C,
+    gMapObjectImageAnim_8370A44,
+    gMapObjectImageAnim_8370A4C,
+    gMapObjectImageAnim_8370A54,
+    gMapObjectImageAnim_8370A5C,
+    gMapObjectImageAnim_8370A70,
+    gMapObjectImageAnim_8370A84,
+    gMapObjectImageAnim_8370A98,
+    gMapObjectImageAnim_8370AAC,
+    gMapObjectImageAnim_8370AC0,
+    gMapObjectImageAnim_8370AD4,
+    gMapObjectImageAnim_8370AE8,
+    gMapObjectImageAnim_8370AFC,
+    gMapObjectImageAnim_8370B10,
+    gMapObjectImageAnim_8370B24,
+    gMapObjectImageAnim_8370B38,
+    gMapObjectImageAnim_8370B4C,
+    gMapObjectImageAnim_8370B60,
+    gMapObjectImageAnim_8370B74,
+    gMapObjectImageAnim_8370B88,
+    gMapObjectImageAnim_8370C04,
+    gMapObjectImageAnim_8370C0C,
+    gMapObjectImageAnim_8370C14,
+    gMapObjectImageAnim_8370C1C
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_Nurse[] = {
+    gMapObjectImageAnim_8370A3C,
+    gMapObjectImageAnim_8370A44,
+    gMapObjectImageAnim_8370A4C,
+    gMapObjectImageAnim_8370A54,
+    gMapObjectImageAnim_8370A5C,
+    gMapObjectImageAnim_8370A70,
+    gMapObjectImageAnim_8370A84,
+    gMapObjectImageAnim_8370A98,
+    gMapObjectImageAnim_8370AAC,
+    gMapObjectImageAnim_8370AC0,
+    gMapObjectImageAnim_8370AD4,
+    gMapObjectImageAnim_8370AE8,
+    gMapObjectImageAnim_8370AFC,
+    gMapObjectImageAnim_8370B10,
+    gMapObjectImageAnim_8370B24,
+    gMapObjectImageAnim_8370B38,
+    gMapObjectImageAnim_8370B4C,
+    gMapObjectImageAnim_8370B60,
+    gMapObjectImageAnim_8370B74,
+    gMapObjectImageAnim_8370B88,
+    gMapObjectImageAnim_8370D7C
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_FieldMove[] = {
+    gMapObjectImageAnim_8370BEC
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_BerryTree[] = {
+    gMapObjectImageAnim_8370D34,
+    gMapObjectImageAnim_8370D3C,
+    gMapObjectImageAnim_8370D48,
+    gMapObjectImageAnim_8370D54,
+    gMapObjectImageAnim_8370D68
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_BreakableRock[] = {
+    gMapObjectImageAnim_83708C8,
+    gMapObjectImageAnim_8370D8C
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_CuttableTree[] = {
+    gMapObjectImageAnim_83708C8,
+    gMapObjectImageAnim_8370DA0
+};
+
+const union AnimCmd *const gMapObjectImageAnimTable_Fishing[] = {
+    gMapObjectImageAnim_8370DB4,
+    gMapObjectImageAnim_8370DC8,
+    gMapObjectImageAnim_8370DDC,
+    gMapObjectImageAnim_8370DF0,
+    gMapObjectImageAnim_8370E04,
+    gMapObjectImageAnim_8370E18,
+    gMapObjectImageAnim_8370E2C,
+    gMapObjectImageAnim_8370E40,
+    gMapObjectImageAnim_8370E54,
+    gMapObjectImageAnim_8370E68,
+    gMapObjectImageAnim_8370E7C,
+    gMapObjectImageAnim_8370E90
+};
+
+const union AffineAnimCmd *const gMapObjectRotScalAnimTable_KyogreGroudon[] = {
+    gMapObjectRotScalAnim_8370EA4,
+    gMapObjectRotScalAnim_8370ED4
+};
+
+const struct OamData gFieldOamData_8x8 = {
+    .shape = 0,
+    .size = 0,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_16x8 = {
+    .shape = 1,
+    .size = 0,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_16x16 = {
+    .shape = 0,
+    .size = 1,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_32x8 = {
+    .shape = 1,
+    .size = 1,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_64x32 = {
+    .shape = 1,
+    .size = 3,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_16x32 = {
+    .shape = 2,
+    .size = 2,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_32x32 = {
+    .shape = 0,
+    .size = 2,
+    .priority = 2
+};
+
+const struct OamData gFieldOamData_64x64 = {
+    .shape = 0,
+    .size = 3,
+    .priority = 2
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x16_0[] = {
+    { -8,  -8, 0, 1, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x16_1[] = {
+    { -8,  -8, 0, 1, 0, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x16_2[] = {
+    { -8,  -8, 1, 0, 0, 2},
+    { -8,   0, 1, 0, 2, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x16_3[] = {
+    { -8,  -8, 0, 1, 0, 2},
+    { -8,  -8, 0, 1, 0, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x16_4[] = {
+    { -8,  -8, 0, 1, 0, 1},
+    { -8,  -8, 0, 1, 0, 3}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_16x16[] = {
+    {0, NULL},
+    {1, gMapObjectSubspriteTable_16x16_0},
+    {1, gMapObjectSubspriteTable_16x16_1},
+    {2, gMapObjectSubspriteTable_16x16_2},
+    {2, gMapObjectSubspriteTable_16x16_3},
+    {2, gMapObjectSubspriteTable_16x16_4}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x32_0[] = {
+    { -8, -16, 2, 2, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x32_1[] = {
+    { -8, -16, 2, 2, 0, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x32_2[] = {
+    { -8, -16, 0, 1, 0, 2},
+    { -8,   0, 1, 0, 4, 2},
+    { -8,   8, 1, 0, 6, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x32_3[] = {
+    { -8, -16, 0, 1, 0, 2},
+    { -8,   0, 0, 1, 4, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_16x32_4[] = {
+    { -8, -16, 0, 1, 0, 1},
+    { -8,   0, 0, 1, 4, 3}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_16x32[] = {
+    {0, NULL},
+    {1, gMapObjectSubspriteTable_16x32_0},
+    {1, gMapObjectSubspriteTable_16x32_1},
+    {3, gMapObjectSubspriteTable_16x32_2},
+    {2, gMapObjectSubspriteTable_16x32_3},
+    {2, gMapObjectSubspriteTable_16x32_4}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_32x32_0[] = {
+    {-16, -16, 0, 2, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_32x32_1[] = {
+    {-16, -16, 0, 2, 0, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_32x32_2[] = {
+    {-16, -16, 1, 2, 0, 2},
+    {-16,   0, 1, 1, 8, 2},
+    {-16,   8, 1, 1, 12, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_32x32_3[] = {
+    {-16, -16, 1, 2, 0, 2},
+    {-16,   0, 1, 2, 8, 3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_32x32_4[] = {
+    {-16, -16, 1, 2, 0, 1},
+    {-16,   0, 1, 2, 8, 3}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_32x32[] = {
+    {0, NULL},
+    {1, gMapObjectSubspriteTable_32x32_0},
+    {1, gMapObjectSubspriteTable_32x32_1},
+    {3, gMapObjectSubspriteTable_32x32_2},
+    {2, gMapObjectSubspriteTable_32x32_3},
+    {2, gMapObjectSubspriteTable_32x32_4}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_Truck_0[] = {
+    {-24, -24, 1, 1, 0, 2},
+    {  8, -24, 1, 0, 4, 2},
+    {-24, -16, 1, 1, 6, 2},
+    {  8, -16, 1, 0, 10, 2},
+    {-24,  -8, 1, 1, 12, 2},
+    {  8,  -8, 1, 0, 16, 2},
+    {-24,   0, 1, 1, 18, 2},
+    {  8,   0, 1, 0, 22, 2},
+    {-24,   8, 1, 1, 24, 2},
+    {  8,   8, 1, 0, 28, 2},
+    {-24,  16, 1, 1, 30, 2},
+    {  8,  16, 1, 0, 34, 2}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_Truck[] = {
+    {12, gMapObjectSubspriteTable_Truck_0},
+    {12, gMapObjectSubspriteTable_Truck_0},
+    {12, gMapObjectSubspriteTable_Truck_0},
+    {12, gMapObjectSubspriteTable_Truck_0},
+    {12, gMapObjectSubspriteTable_Truck_0},
+    {12, gMapObjectSubspriteTable_Truck_0}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_Unused_0[] = {
+    {-32, -16, 1, 3, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_Unused_1[] = {
+    {-32, -16, 1, 3, 0, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_Unused_2[] = {
+    {-32, -16, 1, 3, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_Unused_3[] = {
+    {-32, -16, 1, 3, 0, 2}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_Unused[] = {
+    {0, NULL},
+    {1, gMapObjectSubspriteTable_Unused_0},
+    {1, gMapObjectSubspriteTable_Unused_1},
+    {1, gMapObjectSubspriteTable_Unused_2},
+    {1, gMapObjectSubspriteTable_Unused_3},
+    {1, gMapObjectSubspriteTable_Unused_3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_CableCar_0[] = {
+    {-32, -32, 0, 3, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_CableCar_1[] = {
+    {-32, -32, 0, 3, 0, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_CableCar_2[] = {
+    {-32, -32, 0, 3, 0, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_CableCar_3[] = {
+    {-32, -32, 0, 3, 0, 2}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_CableCar[] = {
+    {0, NULL},
+    {1, gMapObjectSubspriteTable_CableCar_0},
+    {1, gMapObjectSubspriteTable_CableCar_1},
+    {1, gMapObjectSubspriteTable_CableCar_2},
+    {1, gMapObjectSubspriteTable_CableCar_3},
+    {1, gMapObjectSubspriteTable_CableCar_3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SSTidal_0[] = {
+    {-48, -20, 1, 1, 0, 2},
+    {-16, -20, 1, 1, 4, 2},
+    { 16, -20, 1, 1, 8, 2},
+    {-48, -12, 1, 1, 12, 2},
+    {-16, -12, 1, 1, 16, 2},
+    { 16, -12, 1, 1, 20, 2},
+    {-48,  -4, 1, 1, 24, 2},
+    {-16,  -4, 1, 1, 28, 2},
+    { 16,  -4, 1, 1, 32, 2},
+    {-48,   4, 1, 1, 36, 2},
+    {-16,   4, 1, 1, 40, 2},
+    { 16,   4, 1, 1, 44, 2},
+    {-48,  12, 1, 1, 48, 2},
+    {-16,  12, 1, 1, 52, 2},
+    { 16,  12, 1, 1, 56, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SSTidal_1[] = {
+    {-48, -20, 1, 1, 0, 1},
+    {-16, -20, 1, 1, 4, 1},
+    { 16, -20, 1, 1, 8, 1},
+    {-48, -12, 1, 1, 12, 1},
+    {-16, -12, 1, 1, 16, 1},
+    { 16, -12, 1, 1, 20, 1},
+    {-48,  -4, 1, 1, 24, 1},
+    {-16,  -4, 1, 1, 28, 1},
+    { 16,  -4, 1, 1, 32, 1},
+    {-48,   4, 1, 1, 36, 1},
+    {-16,   4, 1, 1, 40, 1},
+    { 16,   4, 1, 1, 44, 1},
+    {-48,  12, 1, 1, 48, 1},
+    {-16,  12, 1, 1, 52, 1},
+    { 16,  12, 1, 1, 56, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SSTidal_2[] = {
+    {-48, -20, 1, 1, 0, 2},
+    {-16, -20, 1, 1, 4, 2},
+    { 16, -20, 1, 1, 8, 2},
+    {-48, -12, 1, 1, 12, 2},
+    {-16, -12, 1, 1, 16, 2},
+    { 16, -12, 1, 1, 20, 2},
+    {-48,  -4, 1, 1, 24, 2},
+    {-16,  -4, 1, 1, 28, 2},
+    { 16,  -4, 1, 1, 32, 2},
+    {-48,   4, 1, 1, 36, 2},
+    {-16,   4, 1, 1, 40, 2},
+    { 16,   4, 1, 1, 44, 2},
+    {-48,  12, 1, 1, 48, 2},
+    {-16,  12, 1, 1, 52, 2},
+    { 16,  12, 1, 1, 56, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SSTidal_3[] = {
+    {-48, -20, 1, 1, 0, 1},
+    {-16, -20, 1, 1, 4, 1},
+    { 16, -20, 1, 1, 8, 1},
+    {-48, -12, 1, 1, 12, 1},
+    {-16, -12, 1, 1, 16, 1},
+    { 16, -12, 1, 1, 20, 1},
+    {-48,  -4, 1, 1, 24, 2},
+    {-16,  -4, 1, 1, 28, 2},
+    { 16,  -4, 1, 1, 32, 2},
+    {-48,   4, 1, 1, 36, 2},
+    {-16,   4, 1, 1, 40, 2},
+    { 16,   4, 1, 1, 44, 2},
+    {-48,  12, 1, 1, 48, 2},
+    {-16,  12, 1, 1, 52, 2},
+    { 16,  12, 1, 1, 56, 2}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_SSTidal[] = {
+    {15, gMapObjectSubspriteTable_SSTidal_0},
+    {15, gMapObjectSubspriteTable_SSTidal_0},
+    {15, gMapObjectSubspriteTable_SSTidal_1},
+    {15, gMapObjectSubspriteTable_SSTidal_2},
+    {15, gMapObjectSubspriteTable_SSTidal_3},
+    {15, gMapObjectSubspriteTable_SSTidal_3}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SubmarineShadow_0[] = {
+    {-48, -20, 1, 1, 0, 2},
+    {-16, -20, 1, 1, 4, 2},
+    { 16, -20, 1, 0, 8, 2},
+    { 32, -20, 0, 0, 10, 2},
+    {-48, -12, 1, 1, 11, 2},
+    {-16, -12, 1, 1, 15, 2},
+    { 16, -12, 1, 0, 19, 2},
+    { 32, -12, 0, 0, 21, 2},
+    {-48,  -4, 1, 1, 22, 2},
+    {-16,  -4, 1, 1, 26, 2},
+    { 16,  -4, 1, 0, 30, 2},
+    { 32,  -4, 0, 0, 32, 2},
+    {-48,   4, 1, 1, 33, 2},
+    {-16,   4, 1, 1, 37, 2},
+    { 16,   4, 1, 0, 41, 2},
+    { 32,   4, 0, 0, 43, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SubmarineShadow_1[] = {
+    {-48, -20, 1, 1, 0, 1},
+    {-16, -20, 1, 1, 4, 1},
+    { 16, -20, 1, 0, 8, 1},
+    { 32, -20, 0, 0, 10, 1},
+    {-48, -12, 1, 1, 11, 1},
+    {-16, -12, 1, 1, 15, 1},
+    { 16, -12, 1, 0, 19, 1},
+    { 32, -12, 0, 0, 21, 1},
+    {-48,  -4, 1, 1, 22, 1},
+    {-16,  -4, 1, 1, 26, 1},
+    { 16,  -4, 1, 0, 30, 1},
+    { 32,  -4, 0, 0, 32, 1},
+    {-48,   4, 1, 1, 33, 1},
+    {-16,   4, 1, 1, 37, 1},
+    { 16,   4, 1, 0, 41, 1},
+    { 32,   4, 0, 0, 43, 1}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SubmarineShadow_2[] = {
+    {-48, -20, 1, 1, 0, 2},
+    {-16, -20, 1, 1, 4, 2},
+    { 16, -20, 1, 0, 8, 2},
+    { 32, -20, 0, 0, 10, 2},
+    {-48, -12, 1, 1, 11, 2},
+    {-16, -12, 1, 1, 15, 2},
+    { 16, -12, 1, 0, 19, 2},
+    { 32, -12, 0, 0, 21, 2},
+    {-48,  -4, 1, 1, 22, 2},
+    {-16,  -4, 1, 1, 26, 2},
+    { 16,  -4, 1, 0, 30, 2},
+    { 32,  -4, 0, 0, 32, 2},
+    {-48,   4, 1, 1, 33, 2},
+    {-16,   4, 1, 1, 37, 2},
+    { 16,   4, 1, 0, 41, 2},
+    { 32,   4, 0, 0, 43, 2}
+};
+
+const struct Subsprite gMapObjectSubspriteTable_SubmarineShadow_3[] = {
+    {-48, -20, 1, 1, 0, 1},
+    {-16, -20, 1, 1, 4, 1},
+    { 16, -20, 1, 0, 8, 1},
+    { 32, -20, 0, 0, 10, 1},
+    {-48, -12, 1, 1, 11, 1},
+    {-16, -12, 1, 1, 15, 1},
+    { 16, -12, 1, 0, 19, 1},
+    { 32, -12, 0, 0, 21, 1},
+    {-48,  -4, 1, 1, 22, 2},
+    {-16,  -4, 1, 1, 26, 2},
+    { 16,  -4, 1, 0, 30, 2},
+    { 32,  -4, 0, 0, 32, 2},
+    {-48,   4, 1, 1, 33, 2},
+    {-16,   4, 1, 1, 37, 2},
+    { 16,   4, 1, 0, 41, 2},
+    { 32,   4, 0, 0, 43, 2}
+};
+
+const struct SubspriteTable gMapObjectSubspriteTables_SubmarineShadow[] = {
+    {16, gMapObjectSubspriteTable_SubmarineShadow_0},
+    {16, gMapObjectSubspriteTable_SubmarineShadow_0},
+    {16, gMapObjectSubspriteTable_SubmarineShadow_1},
+    {16, gMapObjectSubspriteTable_SubmarineShadow_2},
+    {16, gMapObjectSubspriteTable_SubmarineShadow_3},
+    {16, gMapObjectSubspriteTable_SubmarineShadow_3}
+};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanNormal = {0xffff, 0x1100, 0x1102, 512, 16, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanMachBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BrendanMachBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanAcroBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_BrendanAcroBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanSurfing = {0xffff, 0x1100, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Surfing, gMapObjectPicTable_BrendanSurfing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanFieldMove = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_FieldMove, gMapObjectPicTable_BrendanFieldMove, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_QuintyPlump = {0xffff, 0x110b, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_L, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_QuintyPlump, gMapObjectPicTable_QuintyPlump, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy1 = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LittleBoy1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleGirl1 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LittleGirl1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Boy1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl1 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Girl1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy2 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Boy2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Girl2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy2 = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LittleBoy2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleGirl2 = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LittleGirl2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy3 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Boy3, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Girl3 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Girl3, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy4 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Boy4, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman1 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_FatMan = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_FatMan, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman2 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman3 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman3, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldMan1 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_OldMan1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldWoman1 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_OldWoman1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman4 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman4, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man3 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man3, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman5 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman5, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Cook = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Cook, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman6 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman6, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldMan2 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_OldMan2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_OldWoman2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_OldWoman2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Camper = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Camper, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Picnicker = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Picnicker, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man4 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man4, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman7 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman7, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Youngster = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Youngster, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BugCatcher = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BugCatcher, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PsychicM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_PsychicM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SchoolKidM = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_SchoolKidM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Maniac = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Maniac, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_HexManiac = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_HexManiac, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Woman8 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Woman8, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwimmerM = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_SwimmerM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwimmerF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_SwimmerF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BlackBelt = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BlackBelt, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Beauty = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Beauty, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Scientist1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Scientist1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Lass = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Lass, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Gentleman = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Gentleman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Sailor = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Sailor, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Fisherman = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Fisherman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RunningTriathleteM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_RunningTriathleteM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RunningTriathleteF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_RunningTriathleteF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberF = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_TuberF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberM = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_TuberM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Hiker = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Hiker, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyclingTriathleteM = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_CyclingTriathleteM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyclingTriathleteF = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_CyclingTriathleteF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Nurse = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Nurse, gMapObjectPicTable_Nurse, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ItemBall = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_ItemBall, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTree = {0xffff, 0x1103, 0x11ff, 256, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, NULL, gMapObjectImageAnimTable_BerryTree, gMapObjectPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTreeEarlyStages = {0xffff, 0x1103, 0x11ff, 256, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_BerryTree, gMapObjectPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BerryTreeLateStages = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BerryTree, gMapObjectPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ProfBirch = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_ProfBirch, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man5 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man5, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man6 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man6, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ReporterM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_ReporterM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ReporterF = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_ReporterF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Bard = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Hipster = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Trader = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Storyteller = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Giddy = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMauvilleOldMan1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMauvilleOldMan2 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedNatuDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedNatuDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedMagnemiteDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedMagnemiteDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedSquirtleDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedSquirtleDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedWooperDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedWooperDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedPikachuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedPikachuDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_UnusedPorygon2Doll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_UnusedPorygon2Doll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CuttableTree = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_CuttableTree, gMapObjectPicTable_CuttableTree, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MartEmployee = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MartEmployee, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RooftopSaleWoman = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_RooftopSaleWoman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Teala = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Teala, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BreakableRock = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_BreakableRock, gMapObjectPicTable_BreakableRock, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PushableBoulder = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_PushableBoulder, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MrBrineysBoat = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MrBrineysBoat, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayNormal = {0xffff, 0x1110, 0x1102, 512, 16, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_MayNormal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayMachBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MayMachBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayAcroBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_MayAcroBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MaySurfing = {0xffff, 0x1110, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Surfing, gMapObjectPicTable_MaySurfing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayFieldMove = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_FieldMove, gMapObjectPicTable_MayFieldMove, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Truck = {0xffff, 0x110d, 0x11ff, 1152, 48, 48, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_Truck, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_Truck, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MachokeCarryingBox = {0xffff, 0x110e, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MachokeCarryingBox, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MachokeFacingAway = {0xffff, 0x110e, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MachokeFacingAway, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BirchsBag = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BirchsBag, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Poochyena = {0xffff, 0x110f, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Poochyena, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Artist = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Artist, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanNormal = {0xffff, 0x1100, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanMachBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BrendanMachBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanAcroBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_BrendanAcroBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanSurfing = {0xffff, 0x1100, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Surfing, gMapObjectPicTable_BrendanSurfing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalBrendanFieldMove = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_FieldMove, gMapObjectPicTable_BrendanFieldMove, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayNormal = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_MayNormal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayMachBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MayMachBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayAcroBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_AcroBike, gMapObjectPicTable_MayAcroBike, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMaySurfing = {0xffff, 0x1110, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Surfing, gMapObjectPicTable_MaySurfing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RivalMayFieldMove = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_FieldMove, gMapObjectPicTable_MayFieldMove, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Cameraman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Cameraman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanUnderwater = {0xffff, 0x1115, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BrendanUnderwater, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayUnderwater = {0xffff, 0x1115, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MayUnderwater, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MovingBox = {0xffff, 0x1112, 0x11ff, 128, 16, 16, 10, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_MovingBox, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CableCar = {0xffff, 0x1113, 0x11ff, 2048, 64, 64, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_64x64, gMapObjectSubspriteTables_CableCar, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_CableCar, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Scientist2 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Scientist2, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Man7 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Man7, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AquaMemberM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_AquaMemberM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AquaMemberF = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_AquaMemberF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MagmaMemberM = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MagmaMemberM, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MagmaMemberF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MagmaMemberF, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Sidney = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Sidney, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Phoebe = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Phoebe, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Glacia = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Glacia, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Drake = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Drake, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Roxanne = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Roxanne, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Brawly = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Brawly, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wattson = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Wattson, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Flannery = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Flannery, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Norman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Norman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Winona = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Winona, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Liza = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Liza, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Tate = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Tate, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wallace = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Wallace, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Steven = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Steven, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wally = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Wally, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LittleBoy3 = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LittleBoy3, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanFishing = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Fishing, gMapObjectPicTable_BrendanFishing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayFishing = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Fishing, gMapObjectPicTable_MayFishing, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_HotSpringsOldWoman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_HotSpringsOldWoman, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SSTidal = {0xffff, 0x1114, 0x11ff, 1920, 96, 40, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_8x8, gMapObjectSubspriteTables_SSTidal, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_SSTidal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SubmarineShadow = {0xffff, 0x111a, 0x11ff, 1408, 88, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_8x8, gMapObjectSubspriteTables_SubmarineShadow, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_SubmarineShadow, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PichuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_PichuDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PikachuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_PikachuDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MarillDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_MarillDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TogepiDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_TogepiDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_CyndaquilDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_CyndaquilDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ChikoritaDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_ChikoritaDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TotodileDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_TotodileDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_JigglypuffDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_JigglypuffDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MeowthDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_MeowthDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ClefairyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_ClefairyDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DittoDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_DittoDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SmoochumDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_SmoochumDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TreeckoDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_TreeckoDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TorchicDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_TorchicDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MudkipDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_MudkipDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DuskullDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_DuskullDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_WynautDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_WynautDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BaltoyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BaltoyDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_KecleonDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_KecleonDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_AzurillDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_AzurillDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SkittyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_SkittyDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SwabluDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_SwabluDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_GulpinDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_GulpinDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LotadDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_LotadDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SeedotDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_SeedotDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_PikaCushion = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_PikaCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_RoundCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_RoundCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_KissCushion = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_KissCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ZigzagCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_ZigzagCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_SpinCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_SpinCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_DiamondCushion = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_DiamondCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BallCushion = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BallCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_GrassCushion = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_GrassCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_FireCushion = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_FireCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_WaterCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_WaterCushion, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigSnorlaxDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigSnorlaxDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRhydonDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigRhydonDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigLaprasDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigLaprasDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigVenusaurDoll = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigVenusaurDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigCharizardDoll = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigCharizardDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigBlastoiseDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigBlastoiseDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigWailmerDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigWailmerDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegirockDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigRegirockDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegiceDoll = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigRegiceDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BigRegisteelDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BigRegisteelDoll, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Latias = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LatiasLatios, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Latios = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_LatiasLatios, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Boy5 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Boy5, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_ContestJudge = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_ContestJudge, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanWatering = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_BrendanWatering, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayWatering = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_MayWatering, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_BrendanDecorating = {0xffff, 0x1100, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_BrendanDecorating, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_MayDecorating = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_MayDecorating, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Archie = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Archie, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Maxie = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Maxie, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kyogre1 = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Kyogre, gMapObjectRotScalAnimTable_KyogreGroudon};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Groudon1 = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Groudon, gMapObjectRotScalAnimTable_KyogreGroudon};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Fossil = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Inanimate, gMapObjectPicTable_Fossil, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Regirock = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Regi, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Regice = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Regi, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Registeel = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Regi, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Skitty = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Skitty, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kecleon1 = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Kecleon, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kyogre2 = {0xffff, 0x1116, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Kyogre, gMapObjectRotScalAnimTable_KyogreGroudon};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Groudon2 = {0xffff, 0x1118, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Groudon, gMapObjectRotScalAnimTable_KyogreGroudon};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Rayquaza = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gMapObjectSubspriteTables_32x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Rayquaza, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Zigzagoon = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Zigzagoon, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Pikachu = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Pikachu, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Azumarill = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Azumarill, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Wingull = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Wingull, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Kecleon2 = {0xffff, 0x1105, 0x1102, 128, 16, 16, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Kecleon, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_TuberMSwimming = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_TuberMSwimming, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Azurill = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gMapObjectSubspriteTables_16x16, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Azurill, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_Mom = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_Standard, gMapObjectPicTable_Mom, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LinkBrendan = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
+const struct MapObjectGraphicsInfo gMapObjectGraphicsInfo_LinkMay = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gMapObjectSubspriteTables_16x32, gMapObjectImageAnimTable_BrendanMayNormal, gMapObjectPicTable_MayNormal, gDummySpriteAffineAnimTable};
+
+const struct SpritePalette gUnknown_0837377C[] = {
+    {gMapObjectPalette0, 0x1103},
+    {gMapObjectPalette1, 0x1104},
+    {gMapObjectPalette2, 0x1105},
+    {gMapObjectPalette3, 0x1106},
+    {gMapObjectPalette4, 0x1107},
+    {gMapObjectPalette5, 0x1108},
+    {gMapObjectPalette6, 0x1109},
+    {gMapObjectPalette7, 0x110A},
+    {gMapObjectPalette8, 0x1100},
+    {gMapObjectPalette9, 0x1101},
+    {gMapObjectPalette10, 0x1102},
+    {gMapObjectPalette11, 0x1115},
+    {gMapObjectPalette12, 0x110B},
+    {gMapObjectPalette13, 0x110C},
+    {gMapObjectPalette14, 0x110D},
+    {gMapObjectPalette15, 0x110E},
+    {gMapObjectPalette16, 0x110F},
+    {gMapObjectPalette17, 0x1110},
+    {gMapObjectPalette18, 0x1111},
+    {gMapObjectPalette19, 0x1112},
+    {gMapObjectPalette20, 0x1113},
+    {gMapObjectPalette21, 0x1114},
+    {gMapObjectPalette22, 0x1116},
+    {gMapObjectPalette23, 0x1117},
+    {gMapObjectPalette24, 0x1118},
+    {gMapObjectPalette25, 0x1119},
+    {gMapObjectPalette26, 0x111A},
+    {NULL,                0x0000}
+};
+
+const u16 Palettes_837385C[] = {
+    0x1101,
+    0x1101,
+    0x1101,
+    0x1101
+};
+
+const u16 Palettes_8373864[] = {
+    0x1111,
+    0x1111,
+    0x1111,
+    0x1111
+};
+
+const u16 Palettes_837386C[] = {
+    0x1115,
+    0x1115,
+    0x1115,
+    0x1115
+};
+
+const struct PairedPalettes gUnknown_08373874[] = {
+    {0x1100, Palettes_837385C},
+    {0x1110, Palettes_837385C},
+    {0x1115, Palettes_837386C},
+    {0x11FF, NULL}
+};
+
+const u16 Palettes_8373894[] = {
+    0x110C,
+    0x110C,
+    0x110C,
+    0x110C
+};
+
+const u16 Palettes_837389C[] = {
+    0x110D,
+    0x110D,
+    0x110D,
+    0x110D
+};
+
+const u16 Palettes_83738A4[] = {
+    0x110E,
+    0x110E,
+    0x110E,
+    0x110E
+};
+
+const u16 Palettes_83738AC[] = {
+    0x1112,
+    0x1112,
+    0x1112,
+    0x1112
+};
+
+const u16 Palettes_83738B4[] = {
+    0x1113,
+    0x1113,
+    0x1113,
+    0x1113
+};
+
+const u16 Palettes_83738BC[] = {
+    0x1114,
+    0x1114,
+    0x1114,
+    0x1114
+};
+
+const u16 Palettes_83738C4[] = {
+    0x111A,
+    0x111A,
+    0x111A,
+    0x111A
+};
+
+const u16 Palettes_83738CC[] = {
+    0x1117,
+    0x1117,
+    0x1117,
+    0x1117
+};
+
+const u16 Palettes_83738D4[] = {
+    0x1119,
+    0x1119,
+    0x1119,
+    0x1119
+};
+
+const u16 Palettes_83738DC[] = {
+    0x1109,
+    0x1109,
+    0x1109,
+    0x1109
+};
+
+const struct PairedPalettes gUnknown_083738E4[] = {
+    {0x1100, Palettes_837385C},
+    {0x1110, Palettes_837385C},
+    {0x110B, Palettes_8373894},
+    {0x110D, Palettes_837389C},
+    {0x110E, Palettes_83738A4},
+    {0x1112, Palettes_83738AC},
+    {0x1113, Palettes_83738B4},
+    {0x1114, Palettes_83738BC},
+    {0x1116, Palettes_83738CC},
+    {0x1118, Palettes_83738D4},
+    {0x1105, Palettes_83738DC},
+    {0x111A, Palettes_83738C4},
+    {0x11FF, NULL}
+};
+
+const u16 Unknown_837394C[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A
+};
+
+const u16 Unknown_8373960[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A
+};
+
+const u16 Unknown_8373974[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A
+};
+
+const u16 Unknown_8373988[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A
+};
+
+const u16 *const gUnknown_0837399C[] = {
+    Unknown_837394C,
+    Unknown_8373960,
+    Unknown_8373974,
+    Unknown_8373988
+};
+
+const struct SpriteFrameImage gMapObjectPicTable_PechaBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_PechaBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Pecha[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_KelpsyBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_KelpsyBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Kelpsy[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_WepearBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_WepearBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Wepear[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_IapapaBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_IapapaBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Iapapa[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_CheriBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_CheriBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Cheri[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_FigyBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_FigyBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Figy[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_MagoBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_MagoBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Mago[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_LumBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_LumBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Lum[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_RazzBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_RazzBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Razz[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_GrepaBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_GrepaBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Grepa[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_RabutaBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_RabutaBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Rabuta[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_NomelBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_NomelBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Nomel[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_LeppaBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_LeppaBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Leppa[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_LiechiBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_LiechiBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Liechi[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_HondewBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_HondewBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Hondew[] = {3, 4, 5, 5, 5};
+
+const struct SpriteFrameImage gMapObjectPicTable_AguavBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_AguavBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Aguav[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_WikiBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_WikiBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Wiki[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_PomegBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_PomegBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Pomeg[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_RawstBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_RawstBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Rawst[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_SpelonBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_SpelonBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Spelon[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_ChestoBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_ChestoBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Chesto[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_OranBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_OranBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Oran[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_PersimBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_PersimBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Persim[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_SitrusBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_SitrusBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Sitrus[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_AspearBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_AspearBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Aspear[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gMapObjectPicTable_PamtreBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_PamtreBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Pamtre[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_CornnBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_CornnBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Cornn[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_LansatBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_LansatBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Lansat[] = {3, 4, 2, 2, 2};
+
+const struct SpriteFrameImage gMapObjectPicTable_DurinBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_DurinBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Durin[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gMapObjectPicTable_TamatoBerryTree[] = {
+    obj_frame_tiles(gMapObjectPic_BerryTreeDirtPile),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_0),
+    obj_frame_tiles(gMapObjectPic_BerryTreeSprout_1),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_0),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_1),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_2),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_3),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_4),
+    obj_frame_tiles(gMapObjectPic_TamatoBerryTree_5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Tamato[] = {3, 4, 2, 2, 2};
+
+const u8 gDeadBerryTreeGraphicsIdTable[] = {MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES};
+
+const u8 gBerryTreeGraphicsIdTable[] = {MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES, MAP_OBJ_GFX_BERRY_TREE_LATE_STAGES, MAP_OBJ_GFX_BERRY_TREE_LATE_STAGES, MAP_OBJ_GFX_BERRY_TREE_LATE_STAGES};
+
+const struct SpriteFrameImage *const gBerryTreePicTablePointers[] = {
+    gMapObjectPicTable_CheriBerryTree,
+    gMapObjectPicTable_ChestoBerryTree,
+    gMapObjectPicTable_PechaBerryTree,
+    gMapObjectPicTable_RawstBerryTree,
+    gMapObjectPicTable_AspearBerryTree,
+    gMapObjectPicTable_LeppaBerryTree,
+    gMapObjectPicTable_OranBerryTree,
+    gMapObjectPicTable_PersimBerryTree,
+    gMapObjectPicTable_LumBerryTree,
+    gMapObjectPicTable_SitrusBerryTree,
+    gMapObjectPicTable_FigyBerryTree,
+    gMapObjectPicTable_WikiBerryTree,
+    gMapObjectPicTable_MagoBerryTree,
+    gMapObjectPicTable_AguavBerryTree,
+    gMapObjectPicTable_IapapaBerryTree,
+    gMapObjectPicTable_RazzBerryTree,
+    gMapObjectPicTable_RazzBerryTree,
+    gMapObjectPicTable_MagoBerryTree,
+    gMapObjectPicTable_WepearBerryTree,
+    gMapObjectPicTable_IapapaBerryTree,
+    gMapObjectPicTable_PomegBerryTree,
+    gMapObjectPicTable_KelpsyBerryTree,
+    gMapObjectPicTable_WepearBerryTree,
+    gMapObjectPicTable_HondewBerryTree,
+    gMapObjectPicTable_GrepaBerryTree,
+    gMapObjectPicTable_TamatoBerryTree,
+    gMapObjectPicTable_CornnBerryTree,
+    gMapObjectPicTable_PomegBerryTree,
+    gMapObjectPicTable_RabutaBerryTree,
+    gMapObjectPicTable_NomelBerryTree,
+    gMapObjectPicTable_SpelonBerryTree,
+    gMapObjectPicTable_PamtreBerryTree,
+    gMapObjectPicTable_RabutaBerryTree,
+    gMapObjectPicTable_DurinBerryTree,
+    gMapObjectPicTable_HondewBerryTree,
+    gMapObjectPicTable_LiechiBerryTree,
+    gMapObjectPicTable_HondewBerryTree,
+    gMapObjectPicTable_AguavBerryTree,
+    gMapObjectPicTable_PomegBerryTree,
+    gMapObjectPicTable_GrepaBerryTree,
+    gMapObjectPicTable_LansatBerryTree,
+    gMapObjectPicTable_CornnBerryTree,
+    gMapObjectPicTable_DurinBerryTree
+};
+
+const u8 *const gBerryTreePaletteSlotTablePointers[] = {
+    gBerryTreePaletteSlotTable_Cheri,
+    gBerryTreePaletteSlotTable_Chesto,
+    gBerryTreePaletteSlotTable_Pecha,
+    gBerryTreePaletteSlotTable_Rawst,
+    gBerryTreePaletteSlotTable_Aspear,
+    gBerryTreePaletteSlotTable_Leppa,
+    gBerryTreePaletteSlotTable_Oran,
+    gBerryTreePaletteSlotTable_Persim,
+    gBerryTreePaletteSlotTable_Lum,
+    gBerryTreePaletteSlotTable_Sitrus,
+    gBerryTreePaletteSlotTable_Figy,
+    gBerryTreePaletteSlotTable_Wiki,
+    gBerryTreePaletteSlotTable_Mago,
+    gBerryTreePaletteSlotTable_Aguav,
+    gBerryTreePaletteSlotTable_Iapapa,
+    gBerryTreePaletteSlotTable_Razz,
+    gBerryTreePaletteSlotTable_Razz,
+    gBerryTreePaletteSlotTable_Mago,
+    gBerryTreePaletteSlotTable_Wepear,
+    gBerryTreePaletteSlotTable_Iapapa,
+    gBerryTreePaletteSlotTable_Pomeg,
+    gBerryTreePaletteSlotTable_Kelpsy,
+    gBerryTreePaletteSlotTable_Wepear,
+    gBerryTreePaletteSlotTable_Hondew,
+    gBerryTreePaletteSlotTable_Grepa,
+    gBerryTreePaletteSlotTable_Tamato,
+    gBerryTreePaletteSlotTable_Cornn,
+    gBerryTreePaletteSlotTable_Pomeg,
+    gBerryTreePaletteSlotTable_Rabuta,
+    gBerryTreePaletteSlotTable_Nomel,
+    gBerryTreePaletteSlotTable_Spelon,
+    gBerryTreePaletteSlotTable_Pamtre,
+    gBerryTreePaletteSlotTable_Rabuta,
+    gBerryTreePaletteSlotTable_Durin,
+    gBerryTreePaletteSlotTable_Hondew,
+    gBerryTreePaletteSlotTable_Liechi,
+    gBerryTreePaletteSlotTable_Hondew,
+    gBerryTreePaletteSlotTable_Aguav,
+    gBerryTreePaletteSlotTable_Pomeg,
+    gBerryTreePaletteSlotTable_Grepa,
+    gBerryTreePaletteSlotTable_Lansat,
+    gBerryTreePaletteSlotTable_Cornn,
+    gBerryTreePaletteSlotTable_Durin
+};
+
+const u8 *const gBerryTreeGraphicsIdTablePointers[] = {
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable,
+    gBerryTreeGraphicsIdTable
+};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo0 = {gFieldEffectObjectPalette0, 0x1004};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo1 = {gFieldEffectObjectPalette1, 0x1005};
+
+const union AnimCmd gFieldEffectAnim_8374534[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Shadow[] = {
+    gFieldEffectAnim_8374534
+};
+
+const struct SpriteFrameImage gFieldEffectPicTable_ShadowSmall[] = {
+    obj_frame_tiles(gFieldEffectPic_ShadowSmall)
+};
+
+const struct SpriteFrameImage gFieldEffectPicTable_ShadowMedium[] = {
+    obj_frame_tiles(gFieldEffectPic_ShadowMedium)
+};
+
+const struct SpriteFrameImage gFieldEffectPicTable_ShadowLarge[] = {
+    obj_frame_tiles(gFieldEffectPic_ShadowLarge)
+};
+
+const struct SpriteFrameImage gFieldEffectPicTable_ShadowExtraLarge[] = {
+    obj_frame_tiles(gFieldEffectPic_ShadowExtraLarge)
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowSmall = {0xFFFF, 0xFFFF, &gFieldOamData_8x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowSmall, gDummySpriteAffineAnimTable, oamc_shadow};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowMedium = {0xFFFF, 0xFFFF, &gFieldOamData_16x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowMedium, gDummySpriteAffineAnimTable, oamc_shadow};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowLarge = {0xFFFF, 0xFFFF, &gFieldOamData_32x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowLarge, gDummySpriteAffineAnimTable, oamc_shadow};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShadowExtraLarge = {0xFFFF, 0xFFFF, &gFieldOamData_64x32, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowExtraLarge, gDummySpriteAffineAnimTable, oamc_shadow};
+
+const struct SpriteFrameImage gFieldEffectPicTable_TallGrass[] = {
+    obj_frame_tiles(gFieldEffectPic_TallGrass_0),
+    obj_frame_tiles(gFieldEffectPic_TallGrass_1),
+    obj_frame_tiles(gFieldEffectPic_TallGrass_2),
+    obj_frame_tiles(gFieldEffectPic_TallGrass_3),
+    obj_frame_tiles(gFieldEffectPic_TallGrass_4)
+};
+
+const union AnimCmd gFieldEffectAnim_83745E8[] = {
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(2, 10),
+    ANIMCMD_FRAME(3, 10),
+    ANIMCMD_FRAME(4, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_TallGrass[] = {
+    gFieldEffectAnim_83745E8
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_TallGrass = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_TallGrass, gFieldEffectPicTable_TallGrass, gDummySpriteAffineAnimTable, unc_grass_normal};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Ripple[] = {
+    obj_frame_tiles(gFieldEffectPic_Ripple_0),
+    obj_frame_tiles(gFieldEffectPic_Ripple_1),
+    obj_frame_tiles(gFieldEffectPic_Ripple_2),
+    obj_frame_tiles(gFieldEffectPic_Ripple_3),
+    obj_frame_tiles(gFieldEffectPic_Ripple_4)
+};
+
+const union AnimCmd gFieldEffectAnim_8374644[] = {
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(2, 9),
+    ANIMCMD_FRAME(3, 9),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(2, 11),
+    ANIMCMD_FRAME(4, 11),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Ripple[] = {
+    gFieldEffectAnim_8374644
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Ripple = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_Ripple, gFieldEffectPicTable_Ripple, gDummySpriteAffineAnimTable, sub_8128800};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Ash[] = {
+    obj_frame_tiles(gFieldEffectPic_Ash_0),
+    obj_frame_tiles(gFieldEffectPic_Ash_1),
+    obj_frame_tiles(gFieldEffectPic_Ash_2),
+    obj_frame_tiles(gFieldEffectPic_Ash_3),
+    obj_frame_tiles(gFieldEffectPic_Ash_4)
+};
+
+const union AnimCmd gFieldEffectAnim_83746AC[] = {
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(1, 12),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 12),
+    ANIMCMD_FRAME(4, 12),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Ash[] = {
+    gFieldEffectAnim_83746AC
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Ash = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_Ash, gFieldEffectPicTable_Ash, gDummySpriteAffineAnimTable, sub_8127D84};
+
+const struct SpriteFrameImage gFieldEffectPicTable_SurfBlob[] = {
+    obj_frame_tiles(gFieldEffectPic_SurfBlob_0),
+    obj_frame_tiles(gFieldEffectPic_SurfBlob_1),
+    obj_frame_tiles(gFieldEffectPic_SurfBlob_2)
+};
+
+const union AnimCmd gFieldEffectAnim_83746F8[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_8374700[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_8374708[] = {
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_8374710[] = {
+    ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_SurfBlob[] = {
+    gFieldEffectAnim_83746F8,
+    gFieldEffectAnim_8374700,
+    gFieldEffectAnim_8374708,
+    gFieldEffectAnim_8374710
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SurfBlob = {0xFFFF, 0xFFFF, &gFieldOamData_32x32, gFieldEffectAnimTable_SurfBlob, gFieldEffectPicTable_SurfBlob, gDummySpriteAffineAnimTable, sub_8127F7C};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Arrow[] = {
+    obj_frame_tiles(gFieldEffectPic_Arrow_0),
+    obj_frame_tiles(gFieldEffectPic_Arrow_1),
+    obj_frame_tiles(gFieldEffectPic_Arrow_2),
+    obj_frame_tiles(gFieldEffectPic_Arrow_3),
+    obj_frame_tiles(gFieldEffectPic_Arrow_4),
+    obj_frame_tiles(gFieldEffectPic_Arrow_5),
+    obj_frame_tiles(gFieldEffectPic_Arrow_6),
+    obj_frame_tiles(gFieldEffectPic_Arrow_7)
+};
+
+const union AnimCmd gFieldEffectAnim_8374780[] = {
+    ANIMCMD_FRAME(3, 32),
+    ANIMCMD_FRAME(7, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_837478C[] = {
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(4, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_8374798[] = {
+    ANIMCMD_FRAME(1, 32),
+    ANIMCMD_FRAME(5, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gFieldEffectAnim_83747A4[] = {
+    ANIMCMD_FRAME(2, 32),
+    ANIMCMD_FRAME(6, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Arrow[] = {
+    gFieldEffectAnim_8374780,
+    gFieldEffectAnim_837478C,
+    gFieldEffectAnim_8374798,
+    gFieldEffectAnim_83747A4
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Arrow = {0xFFFF, 0xFFFF, &gFieldOamData_16x16, gFieldEffectAnimTable_Arrow, gFieldEffectPicTable_Arrow, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Dust[] = {
+    obj_frame_tiles(gFieldEffectPic_Dust_0),
+    obj_frame_tiles(gFieldEffectPic_Dust_1),
+    obj_frame_tiles(gFieldEffectPic_Dust_2)
+};
+
+const union AnimCmd gFieldEffectAnim_83747F0[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Dust[] = {
+    gFieldEffectAnim_83747F0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Dust = {0xFFFF, 0x1004, &gFieldOamData_16x8, gFieldEffectAnimTable_Dust, gFieldEffectPicTable_Dust, gDummySpriteAffineAnimTable, sub_81287C4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_JumpTallGrass[] = {
+    obj_frame_tiles(gFieldEffectPic_JumpTallGrass_0),
+    obj_frame_tiles(gFieldEffectPic_JumpTallGrass_1),
+    obj_frame_tiles(gFieldEffectPic_JumpTallGrass_2),
+    obj_frame_tiles(gFieldEffectPic_JumpTallGrass_3)
+};
+
+const union AnimCmd gFieldEffectAnim_837483C[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_JumpTallGrass[] = {
+    gFieldEffectAnim_837483C
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpTallGrass = {0xFFFF, 0x1005, &gFieldOamData_16x8, gFieldEffectAnimTable_JumpTallGrass, gFieldEffectPicTable_JumpTallGrass, gDummySpriteAffineAnimTable, sub_81287C4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_SandFootprints[] = {
+    obj_frame_tiles(gFieldEffectPic_SandFootprints_0),
+    obj_frame_tiles(gFieldEffectPic_SandFootprints_1)
+};
+
+const union AnimCmd gFieldEffectAnim_837487C[] = {
+    ANIMCMD_FRAME(0, 1, .vFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374884[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_837488C[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374894[] = {
+    ANIMCMD_FRAME(1, 1, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_SandFootprints[] = {
+    gFieldEffectAnim_837487C,
+    gFieldEffectAnim_837487C,
+    gFieldEffectAnim_8374884,
+    gFieldEffectAnim_837488C,
+    gFieldEffectAnim_8374894
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandFootprints = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_SandFootprints, gFieldEffectPicTable_SandFootprints, gDummySpriteAffineAnimTable, sub_8127584};
+
+const struct SpriteFrameImage gFieldEffectPicTable_DeepSandFootprints[] = {
+    obj_frame_tiles(gFieldEffectPic_DeepSandFootprints_0),
+    obj_frame_tiles(gFieldEffectPic_DeepSandFootprints_1)
+};
+
+const union AnimCmd gFieldEffectAnim_83748D8[] = {
+    ANIMCMD_FRAME(0, 1, .vFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_83748E0[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_83748E8[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_83748F0[] = {
+    ANIMCMD_FRAME(1, 1, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_DeepSandFootprints[] = {
+    gFieldEffectAnim_83748D8,
+    gFieldEffectAnim_83748D8,
+    gFieldEffectAnim_83748E0,
+    gFieldEffectAnim_83748E8,
+    gFieldEffectAnim_83748F0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_DeepSandFootprints = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_DeepSandFootprints, gFieldEffectPicTable_DeepSandFootprints, gDummySpriteAffineAnimTable, sub_8127584};
+
+const struct SpriteFrameImage gFieldEffectPicTable_BikeTireTracks[] = {
+    obj_frame_tiles(gFieldEffectPic_BikeTireTracks_0),
+    obj_frame_tiles(gFieldEffectPic_BikeTireTracks_1),
+    obj_frame_tiles(gFieldEffectPic_BikeTireTracks_2),
+    obj_frame_tiles(gFieldEffectPic_BikeTireTracks_3)
+};
+
+const union AnimCmd gFieldEffectAnim_8374944[] = {
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_837494C[] = {
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374954[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_837495C[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374964[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_837496C[] = {
+    ANIMCMD_FRAME(0, 1, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374974[] = {
+    ANIMCMD_FRAME(3, 1, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_837497C[] = {
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_BikeTireTracks[] = {
+    gFieldEffectAnim_8374944,
+    gFieldEffectAnim_8374944,
+    gFieldEffectAnim_837494C,
+    gFieldEffectAnim_8374954,
+    gFieldEffectAnim_837495C,
+    gFieldEffectAnim_8374964,
+    gFieldEffectAnim_837496C,
+    gFieldEffectAnim_8374974,
+    gFieldEffectAnim_837497C
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_BikeTireTracks = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_BikeTireTracks, gFieldEffectPicTable_BikeTireTracks, gDummySpriteAffineAnimTable, sub_8127584};
+
+const struct SpriteFrameImage gFieldEffectPicTable_JumpBigSplash[] = {
+    obj_frame_tiles(gFieldEffectPic_JumpBigSplash_0),
+    obj_frame_tiles(gFieldEffectPic_JumpBigSplash_1),
+    obj_frame_tiles(gFieldEffectPic_JumpBigSplash_2),
+    obj_frame_tiles(gFieldEffectPic_JumpBigSplash_3)
+};
+
+const union AnimCmd gFieldEffectAnim_83749E0[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_JumpBigSplash[] = {
+    gFieldEffectAnim_83749E0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpBigSplash = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_JumpBigSplash, gFieldEffectPicTable_JumpBigSplash, gDummySpriteAffineAnimTable, sub_81287C4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Splash[] = {
+    obj_frame_tiles(gFieldEffectPic_Splash_0),
+    obj_frame_tiles(gFieldEffectPic_Splash_1)
+};
+
+const union AnimCmd gFieldEffectAnim_8374A20[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374A2C[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Splash[] = {
+    gFieldEffectAnim_8374A20,
+    gFieldEffectAnim_8374A2C
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Splash = {0xFFFF, 0x1004, &gFieldOamData_16x8, gFieldEffectAnimTable_Splash, gFieldEffectPicTable_Splash, gDummySpriteAffineAnimTable, sub_81276B4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_JumpSmallSplash[] = {
+    obj_frame_tiles(gFieldEffectPic_JumpSmallSplash_0),
+    obj_frame_tiles(gFieldEffectPic_JumpSmallSplash_1),
+    obj_frame_tiles(gFieldEffectPic_JumpSmallSplash_2)
+};
+
+const union AnimCmd gFieldEffectAnim_8374A88[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_JumpSmallSplash[] = {
+    gFieldEffectAnim_8374A88
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpSmallSplash = {0xFFFF, 0x1004, &gFieldOamData_16x8, gFieldEffectAnimTable_JumpSmallSplash, gFieldEffectPicTable_JumpSmallSplash, gDummySpriteAffineAnimTable, sub_81287C4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_LongGrass[] = {
+    obj_frame_tiles(gFieldEffectPic_LongGrass_0),
+    obj_frame_tiles(gFieldEffectPic_LongGrass_1),
+    obj_frame_tiles(gFieldEffectPic_LongGrass_2),
+    obj_frame_tiles(gFieldEffectPic_LongGrass_3)
+};
+
+const union AnimCmd gFieldEffectAnim_8374AD4[] = {
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_LongGrass[] = {
+    gFieldEffectAnim_8374AD4
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_LongGrass = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_LongGrass, gFieldEffectPicTable_LongGrass, gDummySpriteAffineAnimTable, unc_grass_tall};
+
+const struct SpriteFrameImage gFieldEffectPicTable_JumpLongGrass[] = {
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_0),
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_1),
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_2),
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_3),
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_4),
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_5)
+};
+
+const union AnimCmd gFieldEffectAnim_8374B40[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_JumpLongGrass[] = {
+    gFieldEffectAnim_8374B40
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_JumpLongGrass = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_JumpLongGrass, gFieldEffectPicTable_JumpLongGrass, gDummySpriteAffineAnimTable, sub_81287C4};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Unknown17[] = {
+    obj_frame_tiles(gFieldEffectPic_JumpLongGrass_5),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_0),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_1),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_2),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_3),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_4),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_5),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_6),
+    obj_frame_tiles(gFieldEffectPic_Unknown17_7)
+};
+
+const union AnimCmd gFieldEffectAnim_8374BC0[] = {
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_JUMP(7)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Unknown17[] = {
+    gFieldEffectAnim_8374BC0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown17 = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_Unknown17, gFieldEffectPicTable_Unknown17, gDummySpriteAffineAnimTable, sub_8128800};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Unknown18[] = {
+    obj_frame_tiles(gFieldEffectPic_Unknown18_0),
+    obj_frame_tiles(gFieldEffectPic_Unknown18_1),
+    obj_frame_tiles(gFieldEffectPic_Unknown18_2),
+    obj_frame_tiles(gFieldEffectPic_Unknown18_3)
+};
+
+const union AnimCmd gFieldEffectAnim_8374C24[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Unknown18[] = {
+    gFieldEffectAnim_8374C24
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown18 = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_Unknown18, gFieldEffectPicTable_Unknown18, gDummySpriteAffineAnimTable, sub_8128800};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Unknown19[] = {
+    obj_frame_tiles(gFieldEffectPic_Unknown19_0),
+    obj_frame_tiles(gFieldEffectPic_Unknown19_1),
+    obj_frame_tiles(gFieldEffectPic_Unknown19_2),
+    obj_frame_tiles(gFieldEffectPic_Unknown19_3)
+};
+
+const union AnimCmd gFieldEffectAnim_8374C7C[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Unknown19[] = {
+    gFieldEffectAnim_8374C7C
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown19 = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_Unknown19, gFieldEffectPicTable_Unknown19, gDummySpriteAffineAnimTable, sub_8128800};
+
+const struct SpriteFrameImage gFieldEffectPicTable_SandPile[] = {
+    obj_frame_tiles(gFieldEffectPic_SandPile_0),
+    obj_frame_tiles(gFieldEffectPic_SandPile_1),
+    obj_frame_tiles(gFieldEffectPic_SandPile_2)
+};
+
+const union AnimCmd gFieldEffectAnim_8374CC4[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_SandPile[] = {
+    gFieldEffectAnim_8374CC4
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandPile = {0xFFFF, 0x1004, &gFieldOamData_16x8, gFieldEffectAnimTable_SandPile, gFieldEffectPicTable_SandPile, gDummySpriteAffineAnimTable, sub_81282E0};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Unknown20[] = {
+    obj_frame_tiles(gFieldEffectPic_Unknown20_0),
+    obj_frame_tiles(gFieldEffectPic_Unknown20_1),
+    obj_frame_tiles(gFieldEffectPic_Unknown20_2),
+    obj_frame_tiles(gFieldEffectPic_Unknown20_3)
+};
+
+const union AnimCmd gFieldEffectAnim_8374D10[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Unknown20[] = {
+    gFieldEffectAnim_8374D10
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown20 = {0xFFFF, 0x1004, &gFieldOamData_16x16, gFieldEffectAnimTable_Unknown20, gFieldEffectPicTable_Unknown20, gDummySpriteAffineAnimTable, sub_8128800};
+
+const union AffineAnimCmd gFieldEffectAffineAnim_8374D48[] = {
+    AFFINEANIMCMD_FRAME(0xFF00, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0x1, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFFF, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFFF, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x1, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+const union AffineAnimCmd gFieldEffectAffineAnim_8374D98[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0xFFFF, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x1, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x1, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFFF, 0x0, 0, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+const union AffineAnimCmd *const gFieldEffectAffineAnimTable_Unknown21[] = {
+    gFieldEffectAffineAnim_8374D48,
+    gFieldEffectAffineAnim_8374D98
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown21 = {0x0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gFieldEffectAffineAnimTable_Unknown21, SpriteCallbackDummy};
+
+const struct SpriteFrameImage gFieldEffectPicTable_BerryTreeGrowthSparkle[] = {
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_0),
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_1),
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_2),
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_3),
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_4),
+    obj_frame_tiles(gFieldEffectPic_BerryTreeGrowthSparkle_5)
+};
+
+const union AnimCmd gFieldEffectAnim_8374E38[] = {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_LOOP(0),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_LOOP(3),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_BerryTreeGrowthSparkle[] = {
+    gFieldEffectAnim_8374E38
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle = {0xFFFF, 0xFFFF, &gFieldOamData_16x16, gFieldEffectAnimTable_BerryTreeGrowthSparkle, gFieldEffectPicTable_BerryTreeGrowthSparkle, gDummySpriteAffineAnimTable, sub_8128800};
+
+const struct SpriteFrameImage gFieldEffectPicTable_TreeDisguise[] = {
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_0),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_1),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_2),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_3),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_4),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_5),
+    obj_frame_tiles(gFieldEffectPic_TreeDisguise_6)
+};
+
+const union AnimCmd gFieldEffectAnim_8374EE0[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374EE8[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_TreeDisguise[] = {
+    gFieldEffectAnim_8374EE0,
+    gFieldEffectAnim_8374EE8
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_TreeDisguise = {0xFFFF, 0xFFFF, &gFieldOamData_16x32, gFieldEffectAnimTable_TreeDisguise, gFieldEffectPicTable_TreeDisguise, gDummySpriteAffineAnimTable, sub_81285AC};
+
+const struct SpriteFrameImage gFieldEffectPicTable_MountainDisguise[] = {
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_0),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_1),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_2),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_3),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_4),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_5),
+    obj_frame_tiles(gFieldEffectPic_MountainDisguise_6)
+};
+
+const union AnimCmd gFieldEffectAnim_8374F60[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd gFieldEffectAnim_8374F68[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_MountainDisguise[] = {
+    gFieldEffectAnim_8374F60,
+    gFieldEffectAnim_8374F68
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_MountainDisguise = {0xFFFF, 0xFFFF, &gFieldOamData_16x32, gFieldEffectAnimTable_MountainDisguise, gFieldEffectPicTable_MountainDisguise, gDummySpriteAffineAnimTable, sub_81285AC};
+
+const struct SpriteFrameImage gFieldEffectPicTable_SandDisguise[] = {
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_0),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_1),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_2),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_3),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_4),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_5),
+    obj_frame_tiles(gFieldEffectPic_SandDisguise_6)
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_SandDisguise = {0xFFFF, 0xFFFF, &gFieldOamData_16x32, gFieldEffectAnimTable_TreeDisguise, gFieldEffectPicTable_SandDisguise, gDummySpriteAffineAnimTable, sub_81285AC};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Bird[] = {
+    obj_frame_tiles(gFieldEffectPic_Bird)
+};
+
+const union AnimCmd gFieldEffectAnim_8375000[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Bird[] = {
+    gFieldEffectAnim_8375000
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Bird = {0xFFFF, 0xFFFF, &gFieldOamData_32x32, gFieldEffectAnimTable_Bird, gFieldEffectPicTable_Bird, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct SpriteFrameImage gFieldEffectPicTable_ShortGrass[] = {
+    obj_frame_tiles(gFieldEffectPic_ShortGrass_0),
+    obj_frame_tiles(gFieldEffectPic_ShortGrass_1)
+};
+
+const union AnimCmd gFieldEffectAnim_8375034[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_ShortGrass[] = {
+    gFieldEffectAnim_8375034
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_ShortGrass = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_ShortGrass, gFieldEffectPicTable_ShortGrass, gDummySpriteAffineAnimTable, sub_8127334};
+
+const struct SpriteFrameImage gFieldEffectPicTable_HotSpringsWater[] = {
+    obj_frame_tiles(gFieldEffectPic_HotSpringsWater)
+};
+
+const union AnimCmd gFieldEffectAnim_8375064[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_HotSpringsWater[] = {
+    gFieldEffectAnim_8375064
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_HotSpringsWater = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_HotSpringsWater, gFieldEffectPicTable_HotSpringsWater, gDummySpriteAffineAnimTable, sub_8127A7C};
+
+const struct SpriteFrameImage gFieldEffectPicTable_PopOutOfAsh[] = {
+    obj_frame_tiles(gFieldEffectPic_PopOutOfAsh_0),
+    obj_frame_tiles(gFieldEffectPic_PopOutOfAsh_1),
+    obj_frame_tiles(gFieldEffectPic_PopOutOfAsh_2),
+    obj_frame_tiles(gFieldEffectPic_PopOutOfAsh_3),
+    obj_frame_tiles(gFieldEffectPic_PopOutOfAsh_4)
+};
+
+const union AnimCmd gFieldEffectAnim_83750B0[] = {
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_PopOutOfAsh[] = {
+    gFieldEffectAnim_83750B0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_PopOutOfAsh = {0xFFFF, 0x100D, &gFieldOamData_16x16, gFieldEffectAnimTable_PopOutOfAsh, gFieldEffectPicTable_PopOutOfAsh, gDummySpriteAffineAnimTable, sub_808788C};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo2 = {gFieldEffectObjectPalette2, 0x100D};
+
+const struct SpriteFrameImage gFieldEffectPicTable_LavaridgeGymWarp[] = {
+    obj_frame_tiles(gFieldEffectPic_LavaridgeGymWarp_0),
+    obj_frame_tiles(gFieldEffectPic_LavaridgeGymWarp_1),
+    obj_frame_tiles(gFieldEffectPic_LavaridgeGymWarp_2),
+    obj_frame_tiles(gFieldEffectPic_LavaridgeGymWarp_3),
+    obj_frame_tiles(gFieldEffectPic_LavaridgeGymWarp_4)
+};
+
+const union AnimCmd gFieldEffectAnim_8375114[] = {
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_LavaridgeGymWarp[] = {
+    gFieldEffectAnim_8375114
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_LavaridgeGymWarp = {0xFFFF, 0x100D, &gFieldOamData_16x16, gFieldEffectAnimTable_LavaridgeGymWarp, gFieldEffectPicTable_LavaridgeGymWarp, gDummySpriteAffineAnimTable, sub_8087638};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Bubbles[] = {
+    obj_frame_tiles(gFieldEffectPic_Bubbles_0),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_1),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_2),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_3),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_4),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_5),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_6),
+    obj_frame_tiles(gFieldEffectPic_Bubbles_7)
+};
+
+const union AnimCmd gFieldEffectAnim_8375188[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Bubbles[] = {
+    gFieldEffectAnim_8375188
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Bubbles = {0xFFFF, 0x1004, &gFieldOamData_16x32, gFieldEffectAnimTable_Bubbles, gFieldEffectPicTable_Bubbles, gDummySpriteAffineAnimTable, sub_8128410};
+
+const struct SpriteFrameImage gFieldEffectPicTable_Sparkle[] = {
+    obj_frame_tiles(gFieldEffectPic_Sparkle_0),
+    obj_frame_tiles(gFieldEffectPic_Sparkle_1)
+};
+
+const union AnimCmd gFieldEffectAnim_83751D8[] = {
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_Sparkle[] = {
+    gFieldEffectAnim_83751D8
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Sparkle = {0xFFFF, 0x100F, &gFieldOamData_16x16, gFieldEffectAnimTable_Sparkle, gFieldEffectPicTable_Sparkle, gDummySpriteAffineAnimTable, sub_8128774};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo3 = {gFieldEffectObjectPalette3, 0x100F};
 
 // text
 
@@ -3978,18 +7125,12 @@ u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void RemoveFieldObjectInternal(struct MapObject *);
 u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables);
+void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
 struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 void sub_805BDF8(u16);
 u8 sub_805BE58(const struct SpritePalette *);
 u8 FindFieldObjectPaletteIndexByTag(u16);
-
-struct PairedPalettes
-{
-    u16 tag;
-    u16 *data;
-};
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u8 gReservedSpritePaletteCount;
@@ -3999,11 +7140,6 @@ extern u16 gUnknown_030005A6;
 extern const u8 *const gBerryTreeGraphicsIdTablePointers[];
 extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
 extern const u8 *const gBerryTreePaletteSlotTablePointers[];
-extern const struct MapObjectGraphicsInfo *const gMapObjectGraphicsInfoPointers[];
-extern const struct SpritePalette gUnknown_0837377C[];
-extern const struct PairedPalettes gUnknown_08373874[];
-extern const struct PairedPalettes gUnknown_083738E4[];
-extern const u16 *const gUnknown_0837399C[];
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {
@@ -4453,7 +7589,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
 u8 SpawnFieldObject(struct MapObjectTemplate *mapObjTemplate, u8 b, u8 c, s16 d, s16 e)
 {
     struct SpriteTemplate spriteTemplate;
-    struct SubspriteTable *subspriteTables = NULL;
+    const struct SubspriteTable *subspriteTables = NULL;
     struct SpriteFrameImage spriteFrameImage;
     const struct MapObjectGraphicsInfo *gfxInfo;
     u8 mapObjectId;
@@ -4513,7 +7649,7 @@ u8 show_sprite(u8 a, u8 b, u8 c)
     return SpawnFieldObject(r5, b, c, x, y);
 }
 
-void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
 
@@ -4527,12 +7663,12 @@ void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callba
     *subspriteTables = gfxInfo->subspriteTables;
 }
 
-void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, gUnknown_0836DA88[callbackIndex], sprTemplate, subspriteTables);
 }
 
-void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, struct SubspriteTable **subspriteTables)
+void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObjTemplate->graphicsId, mapObjTemplate->movementType, sprTemplate, subspriteTables);
 }
@@ -4540,7 +7676,7 @@ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjT
 u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority)
 {
     struct SpriteTemplate spriteTemplate;
-    struct SubspriteTable *subspriteTables;
+    const struct SubspriteTable *subspriteTables;
     u8 spriteId;
 
     MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
@@ -4563,7 +7699,7 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
 {
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct SpriteTemplate spriteTemplate;
-    struct SubspriteTable *subspriteTables;
+    const struct SubspriteTable *subspriteTables;
     u8 spriteId;
 
     gfxInfo = GetFieldObjectGraphicsInfo(a);
@@ -4691,7 +7827,7 @@ void sub_805B75C(u8 a, s16 b, s16 c)
 {
     struct SpriteTemplate sp0;
     struct SpriteFrameImage sp18;
-    struct SubspriteTable *subspriteTables;
+    const struct SubspriteTable *subspriteTables;
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct MapObject *mapObject;
     u8 spriteId;
@@ -5146,19 +8282,10 @@ u8 AddCameraObject(u8 a)
     return spriteId;
 }
 
-void CameraObject_0(struct Sprite *);
-void CameraObject_1(struct Sprite *);
-void CameraObject_2(struct Sprite *);
-
 void ObjectCB_CameraObject(struct Sprite *sprite)
 {
-    void (*const cameraObjectFuncs[])(struct Sprite *) =
-    {
-        CameraObject_0,
-        CameraObject_1,
-        CameraObject_2,
-    };
-
+    void (*cameraObjectFuncs[3])(struct Sprite *);
+    memcpy(cameraObjectFuncs, gCameraObjectFuncs, sizeof gCameraObjectFuncs);
     cameraObjectFuncs[sprite->data1](sprite);
 }
 
