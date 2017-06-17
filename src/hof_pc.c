@@ -1,4 +1,5 @@
 #include "global.h"
+#include "hall_of_fame.h"
 #include "main.h"
 #include "palette.h"
 #include "rom4.h"
@@ -6,7 +7,6 @@
 #include "script_menu.h"
 #include "task.h"
 
-extern void sub_81428CC(void);
 extern void (*gFieldCallback)(void);
 
 static void ReshowPCMenuAfterHallOfFamePC(void);

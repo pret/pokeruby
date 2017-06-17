@@ -1,14 +1,17 @@
 #include "global.h"
 #include "battle_setup.h"
-#include "asm.h"
 #include "battle.h"
+#include "battle_transition.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_control_avatar.h"
+#include "field_fadetransition.h"
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "fieldmap.h"
+#include "fldeff_80C5CD4.h"
 #include "main.h"
 #include "map_constants.h"
 #include "metatile_behavior.h"
@@ -19,6 +22,7 @@
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -32,9 +36,6 @@
 extern u16 gScriptResult;
 
 extern void (*gFieldCallback)(void);
-
-extern struct Pokemon gEnemyParty[];
-extern struct Pokemon gPlayerParty[];
 
 EWRAM_DATA u16 gTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;

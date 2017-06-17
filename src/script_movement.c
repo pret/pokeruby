@@ -1,13 +1,11 @@
 #include "global.h"
-#include "asm.h"
+#include "script_movement.h"
+#include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "task.h"
+#include "util.h"
 
-extern const u32 gBitTable[];
 extern u8 *gUnknown_020384F8[];
-
-extern void UnfreezeMapObject(struct MapObject *);
-extern bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 
 static void sub_80A2198(u8);
 static u8 sub_80A21E0(void);

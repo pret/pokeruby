@@ -8,10 +8,10 @@
 
 enum
 {
-    NORMAL_RANK,
-    SUPER_RANK,
-    HYPER_RANK,
-    MASTER_RANK,
+	NORMAL_RANK,
+	SUPER_RANK,
+	HYPER_RANK,
+	MASTER_RANK,
 };
 
 enum
@@ -60,26 +60,7 @@ struct LabelPair
     const u8 *suffix;
 };
 
-struct Unk03005E20
-{
-    u8 var_0;
-    u8 pad1[3];
-    u16 (*var_4)[][32];
-    u16 (*var_8)[];
-    u8 pad0C[4];
-    u32 var_10;
-    u16 var_14;
-    u16 var_16;
-    u8 var_18;
-    u8 var_19;
-    u8 var_1A;
-    u8 var_1B;
-    u8 var_1C;
-    u8 var_1D;
-    u8 var_1E;
-    u8 var_1F;
-};
-
 void sub_8106630(u32);
+void CB2_ContestPainting(void);
 
 #endif

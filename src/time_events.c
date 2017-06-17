@@ -1,5 +1,7 @@
 #include "global.h"
+#include "time_events.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
@@ -7,16 +9,14 @@
 #include "script.h"
 #include "task.h"
 
-extern bool8 sub_807DDFC(void);
-
-u32 GetMirageRnd(void)
+static u32 GetMirageRnd(void)
 {
     u32 hi = VarGet(VAR_MIRAGE_RND_H);
     u32 lo = VarGet(VAR_MIRAGE_RND_L);
     return (hi << 16) | lo;
 }
 
-void SetMirageRnd(u32 rnd)
+static void SetMirageRnd(u32 rnd)
 {
     VarSet(VAR_MIRAGE_RND_H, rnd >> 16);
     VarSet(VAR_MIRAGE_RND_L, rnd);

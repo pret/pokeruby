@@ -54,7 +54,7 @@ void CloseMenu(void)
     MenuZeroFillScreen();
     sub_8064E2C();
     ScriptContext2_Disable();
-    HandleDestroyMenuCursors();
+    sub_8072DEC();
 }
 
 void AppendToList(u8 *list, u8 *pindex, u32 value)
@@ -270,14 +270,14 @@ s8 ProcessMenuInput(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         return -1;
     }
 
@@ -305,14 +305,14 @@ s8 ProcessMenuInputNoWrap(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         return -1;
     }
 
@@ -517,7 +517,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & A_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         PlaySE(SE_SELECT);
         return GetMenuCursorPos();
     }
@@ -525,7 +525,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            sub_8072DEC();
         return -1;
     }
 
@@ -611,7 +611,7 @@ u8 unref_sub_8072A5C(u8 *dest, u8 *src, u8 left, u16 top, u8 width, u32 a6)
     return sub_8004FD0(gMenuWindowPtr, dest, src, gMenuTextTileOffset, left, top, width, a6);
 }
 
-int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
+int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     u8 newlineCount = sub_8004FD0(gMenuWindowPtr, NULL, str, gMenuTextTileOffset, left, top, width, a6);
 
@@ -629,7 +629,7 @@ void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
+void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
 {
     u8 buffer[64];
     u8 width = GetStringWidth(gMenuWindowPtr, a4);
@@ -731,7 +731,7 @@ void sub_8072DDC(u8 a1)
     sub_8072DCC(8 * a1);
 }
 
-void HandleDestroyMenuCursors(void)
+void sub_8072DEC(void)
 {
-    DestroyMenuCursor();
+    sub_814A7FC();
 }

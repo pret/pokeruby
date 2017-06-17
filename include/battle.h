@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+#include "sprite.h"
+
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004
@@ -29,6 +31,16 @@
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
+extern u8 unk_2000000[];
+
+// to do: maybe try to reduce the defines needed to match?
+#define BATTLE_STRUCT ((struct BattleStruct *)(unk_2000000))
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
+#define UNK_2016A00_STRUCT ((struct UnknownStruct1B *)(unk_2000000 + 0x16A00))
+#define AI_STACK ((struct AI_Stack *)(unk_2000000 + 0x16C00))
+#define AI_ARRAY_160CC     ((struct SmallItemStruct *)(unk_2000000 + 0x160CC))
+
 enum
 {
     WEATHER_SUN,
@@ -51,7 +63,7 @@ struct Trainer
     /*0x24*/ void *party;
 };
 
-struct UnkBattleStruct1 // AI_Opponent_Info?
+struct UnknownStruct1B // AI_Opponent_Info?
 {
     /*0x00*/ u16 movesUsed[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
     /*0x20*/ u8 unk20[2];
@@ -97,9 +109,9 @@ struct SmallItemStruct
 struct BattleStruct /* 0x2000000 */
 {
     u8 filler0[0x15DDE];
-    /*0x15DDE*/ u8 unk15DDE;
-    /*0x15DDF*/ u8 unk15DDF;
-    /*0x15DE0*/ u8 filler15DE0[0x23C]; // 0xAF off?
+	/*0x15DDE*/ u8 unk15DDE;
+	/*0x15DDF*/ u8 unk15DDF;
+	/*0x15DE0*/ u8 filler15DE0[0x23C]; // 0xAF off?
     struct SmallBattleStruct1 unk;
     u8 filler1[0x68];
     /* 0x16089 */ u8 safariFleeRate;
@@ -109,10 +121,10 @@ struct BattleStruct /* 0x2000000 */
     u8 filler2[0x72E];
     /* 0x16800 */ struct AI_ThinkingStruct ai; /* 0x2016800 */
     u8 filler1681C[0x1E4];
-    /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
+    /* 0x16A00 */ struct UnknownStruct1B unk_2016A00_2;
 };
 
-struct UnkBattleStruct4
+struct UnknownStruct4
 {
     /*0x00*/ u8 filler0[0x3];
     /*0x04*/ u16 unk4;
@@ -132,85 +144,107 @@ struct UnkBattleStruct4
     /*0x17*/ u8 filler17[0x4];
 };
 
-struct Struct30042E0
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5_0:1;
-    u8 unk5_1:1;
-    u16 unk6;
-    u8 unk8[10];
-    u8 unk12;
-    u8 unk13;
-    u8 unk14[10];
-    u8 filler1E[2];
-    u16 unk20;
-    u16 unk22;
-    u16 unk24;
-    u16 unk26;
-    u16 unk28;
-    u8 unk2A[10];
-    u8 filler34[2];
-    u8 unk36[10];
-};
-
-struct Struct2017800
-{
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u16 unk2;
-};
-
-struct Struct2017810
-{
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 unk2;
-    u8 unk3;
-    //u8 filler2[2];
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
-};
-
-struct Struct2017840
-{
-    u16 unk0;
-    u8 filler2[7];
-    u8 unk9_0:1;
-};
-
-extern struct UnknownStruct1 unk_2016A00;
-extern struct UnkBattleStruct4 gUnknown_02024CA8[];
+extern struct UnknownStruct1B unk_2016A00;
+extern struct UnknownStruct4 gUnknown_02024CA8[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
-// TODO: move ewram to global.h
-extern u8 ewram[];
+// asm/battle_1.o
+void sub_800D6D4();
+void sub_800D74C();
+void sub_800D7B8(void);
+void sub_800DAB8();
+void sub_800DE30(u8);
+void sub_800E23C();
 
-#define BATTLE_STRUCT      ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK           ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC     ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
+// src/battle_2.o
+void sub_800E7C4(void);
+void InitBattle(void);
+void sub_800EC9C(void);
+void sub_800F104(void);
+void sub_800F298(void);
+void sub_800F808(void);
+void sub_800F838(struct Sprite *);
+u8 CreateNPCTrainerParty(struct Pokemon *, u16);
+void sub_800FCFC(void);
+void c2_8011A1C(void);
+void sub_80101B8(void);
+void c2_081284E0(void);
+void sub_8010278(struct Sprite *);
+void sub_80102AC(struct Sprite *);
+void nullsub_37(struct Sprite *);
+void sub_8010320(struct Sprite *);
+void sub_8010494(struct Sprite *);
+void sub_801053C(struct Sprite *);
+void oac_poke_ally_(struct Sprite *);
+void nullsub_86(struct Sprite *);
+void objc_dp11b_pingpong(struct Sprite *);
+void nullsub_41(void);
+void sub_8010800(void);
+void sub_8010824(void);
+void sub_8010874(void);
+void bc_8012FAC(void);
+void bc_load_battlefield(void);
+void sub_8011384(void);
+void bc_801333C(void);
+void bc_battle_begin_message(void);
+void bc_8013568(void);
+void sub_8011800(void);
+void sub_8011834(void);
+void bc_801362C(void);
+void sub_8011970(void);
+void sub_80119B4(void);
+void sub_8011B00(void);
+void sub_8011E8C(void);
+
+// asm/battle_2.o
+void sub_8012324(void);
+void sub_8012FBC(u8, u8);
+u8 b_first_side(u8, u8, u8);
+void sub_801365C(u8);
+void sub_801377C(void);
+void sub_80138F0(void);
+void dp01_battle_side_mark_buffer_for_execution();
+void sub_80155A4();
+void b_cancel_multi_turn_move_maybe(u8);
+void b_std_message();
+void sub_80156DC();
+void sub_80157C4(u8 index);
+
+// asm/battle_3.o
+u8 sub_8015A98(u8, u8, u8);
+u8 sub_8015DFC();
+u8 sub_8016558();
+u8 sub_80170DC();
+u8 sub_80173A4();
+u8 sub_8018324(u8, u8, u8, u8, u16);
+u8 sub_801A02C();
+
+// asm/battle_4.o
+void sub_801CAF8(u8, u8);
+void move_effectiveness_something(u16, u8, u8);
+
+// asm/battle_5.o
+void nullsub_91(void);
+void sub_802BF74(void);
+void sub_802C098();
+void c3_0802FDF4(u8);
+void sub_802E3E4(u8, int);
+void nullsub_8(u8);
+void sub_802E414(void);
+
+// asm/battle_7.o
+void move_anim_start_t4();
+void nullsub_9(u16);
+void nullsub_10();
+void load_gfxc_health_bar();
+u8 battle_load_something();
+void sub_8031F88();
+void sub_80324F8();
+void sub_8032638();
+void sub_8032AA8(u8 index, int i);
+void sub_8032AE0(void);
+
+// asm/battle_9.o
+void sub_8037510(void);
 
 #endif // GUARD_BATTLE_H

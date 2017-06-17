@@ -1,75 +1,22 @@
 #include "global.h"
 #include "battle_party_menu.h"
-#include "asm.h"
+#include "battle.h"
+#include "item_menu.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-
-#define DATA_COUNT (6)
-
-extern u8 ewram[];
-
-struct Unk201B000
-{
-    //u8 filler0[0x260];
-    struct Pokemon unk0[6];
-    u8 filler258[1];
-    u8 unk259;
-    u8 filler25A[6];
-    u8 unk260;
-    u8 unk261;
-    u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];  // This may be a union
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
-};
-
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
-#define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
-
-extern u8 IsLinkDoubleBattle(void);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34();
-extern u8 sub_806BD58(u8, u8);
-extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern void PartyMenuTryPrintMonsHP(void);
-extern void nullsub_13(void);
-extern void PartyMenuDrawHPBars(void);
-extern u8 sub_806B58C(u8);
-extern u8 GetItemEffectType();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern u16 sub_806BD80();
-extern u8 sub_806CA38();
-extern void sub_806D5A4(void);
-extern void sub_802E414(void);
-extern void sub_80A6DCC(void);
-extern void sub_806AF4C();
-extern u8 sub_80F9344(void);
-extern u8 sub_806B124(void);
-extern void sub_806C994();
-extern void sub_806BF74();
-extern void sub_806AEDC(void);
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
-extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
-extern u8 *sub_8040D08();
-extern void sub_8040B8C(void);
-extern void sub_806E6F0();
-extern void sub_806D538();
-extern void nullsub_14();
-extern void OpenPartyMenu();
-extern u8 sub_803FBBC(void);
 
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;
@@ -79,17 +26,10 @@ extern u8 gUnknown_02024E6C;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
-extern u8 gUnknown_02038470[3];
 extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
 extern void (*gUnknown_03004AE4)();  //don't know types yet
-extern struct PokemonStorage gPokemonStorage;
 
-void sub_8094C98(u8, u8);
-static void sub_8094998(u8[3], u8);
-static void sub_8094A74(u8[3], u8, u32);
-u8 pokemon_order_func(u8);
-static void sub_8094D60(void);
 static void Task_809527C(u8);
 static void Task_80952B4(u8);
 static void Task_80952E4(u8);
@@ -117,276 +57,11 @@ static const struct PartyPopupMenu sBattlePartyPopupMenus[] =
     {ARRAY_COUNT(Unknown_83B5FF2), 9, Unknown_83B5FF2},
 };
 
-void unref_sub_8094928(struct PokemonStorage *ptr)
-{
-    *ptr = gPokemonStorage;
-}
-
-void unref_sub_8094940(struct PokemonStorage *ptr)
-{
-    gPokemonStorage = *ptr;
-}
-
-void sub_8094958(void)
-{
-    sub_8094998(gUnknown_02038470, sub_803FBBC());
-}
-
-void sub_8094978(u8 arg1, u8 arg2)
-{
-    sub_8094A74((UNK_201606C_ARRAY) + arg1 * 3, arg2, arg1);
-}
-
-static void sub_8094998(u8 arg[3], u8 player_number)
-{
-    int i;
-    u32 pos;
-    u8 temp[6];
-    if (IsLinkDoubleBattle() == TRUE)
-    {
-        if (player_number)
-        {
-            *arg = 0x30;
-            arg[1] = 0x45;
-            arg[2] = 0x12;
-        }
-        else
-        {
-            *arg = 0x03;
-            arg[1] = 0x12;
-            arg[2] = 0x45;
-        }
-    }
-    else
-    {
-        if (!IsDoubleBattle())
-        {
-            pos = 1;
-            *temp = gUnknown_02024A6A[battle_get_side_with_given_state(0)];
-            for (i = 0; i <= 5; i++)
-                if (i != *temp)
-                    temp[pos++] = i;
-        }
-        else
-        {
-            pos = 2;
-            *temp = gUnknown_02024A6A[battle_get_side_with_given_state(0)];
-            temp[1] = gUnknown_02024A6A[battle_get_side_with_given_state(2)];
-            for (i = 0; i <= 5; i++)
-                if ((i != *temp) && (i != temp[1]))
-                    temp[pos++] = i;
-        }
-        for (i = 0; i <= 2; i++)
-            arg[i] = (temp[i << 1] << 4) | temp[(i << 1) + 1];
-    }
-}
-
-static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
-{
-    int i, j;
-    u8 temp[6];
-    if (!battle_side_get_owner(arg3))
-    {
-        i = battle_get_side_with_given_state(0);
-        j = battle_get_side_with_given_state(2);
-    }
-    else
-    {
-        i = battle_get_side_with_given_state(1);
-        j = battle_get_side_with_given_state(3);
-    }
-    if (IsLinkDoubleBattle() == TRUE)
-    {
-        if (player_number)
-        {
-            *arg = 0x30;
-            arg[1] = 0x45;
-            arg[2] = 0x12;
-        }
-        else
-        {
-            *arg = 0x03;
-            arg[1] = 0x12;
-            arg[2] = 0x45;
-        }
-    }
-    else
-    {
-        if (!IsDoubleBattle())
-        {
-            int pos = 1;
-            *temp = gUnknown_02024A6A[i];
-            for (i = 0; i <= 5; i++)
-                if (i != *temp)
-                    temp[pos++] = i;
-        }
-        else
-        {
-            int pos = 2;
-            *temp = gUnknown_02024A6A[i];
-            temp[1] = gUnknown_02024A6A[j];
-            for (i = 0; i <= 5; i++)
-                if ((i != *temp) && (i != temp[1]))
-                    temp[pos++] = i;
-        }
-        for (i = 0; i <= 2; i++)
-            arg[i] = (temp[i << 1] << 4) | temp[(i << 1) + 1];
-    }
-}
-
-void sub_8094B6C(u8 a, u8 b, u8 c)
-{
-    s32 i;
-    s32 j;
-    u8 temp[6];
-    u8 r3;
-    u8 r7 = 0;
-
-    if (IsLinkDoubleBattle())
-    {
-        u8 *arr = ewram + 0x1606C + a * 3;
-
-        for (i = 0, j = 0; i < 3; i++)
-        {
-            temp[j++] = arr[i] >> 4;
-            temp[j++] = arr[i] & 0xF;
-        }
-        r3 = temp[c];
-        for (i = 0; i < 6; i++)
-        {
-            if (temp[i] == b)
-            {
-                r7 = temp[i];
-                temp[i] = r3;
-                break;
-            }
-        }
-        if (i != 6)
-        {
-            temp[c] = r7;
-
-            arr[0] = (temp[0] << 4) | temp[1];
-            arr[1] = (temp[2] << 4) | temp[3];
-            arr[2] = (temp[4] << 4) | temp[5];
-        }
-    }
-}
-
-u8 sub_8094C20(u8 a)
-{
-    u8 retVal;
-    u8 val = a & 1;
-
-    a /= 2;
-    if (val)
-        retVal = gUnknown_02038470[a] & 0xF;
-    else
-        retVal = gUnknown_02038470[a] >> 4;
-    return retVal;
-}
-
-void sub_8094C54(u8 a, u8 b)
-{
-    u8 val = a & 1;
-
-    a /= 2;
-    if (val)
-        gUnknown_02038470[a] = (gUnknown_02038470[a] & 0xF0) | b;
-    else
-        gUnknown_02038470[a] = (gUnknown_02038470[a] & 0xF) | (b << 4);
-}
-
-void sub_8094C98(u8 a, u8 b)
-{
-    u8 r4 = sub_8094C20(a);
-    u8 r1 = sub_8094C20(b);
-
-    sub_8094C54(a, r1);
-    sub_8094C54(b, r4);
-}
-
-u8 pokemon_order_func(u8 a)
-{
-    u8 i;
-    u8 r2;
-
-    for (i = 0, r2 = 0; i < 3; i++)
-    {
-        if ((gUnknown_02038470[i] >> 4) == a)
-            return r2;
-        r2++;
-        if ((gUnknown_02038470[i] & 0xF) == a)
-            return r2;
-        r2++;
-    }
-    return 0;
-}
-
-void pokemon_change_order(void)
-{
-    u8 i;
-
-    memcpy(ewram1B000.unk0, gPlayerParty, sizeof(gPlayerParty));
-    for (i = 0; i < 6; i++)
-    {
-        u8 n = pokemon_order_func(i);
-
-        memcpy(&gPlayerParty[n], &ewram1B000.unk0[i], sizeof(struct Pokemon));
-    }
-}
-
-static void sub_8094D60(void)
-{
-    struct Pokemon temp[6];
-    u8 i;
-
-    memcpy(temp, gPlayerParty, sizeof(gPlayerParty));
-    for (i = 0; i < 6; i++)
-    {
-        u8 n = sub_8094C20(i);
-
-        memcpy(&gPlayerParty[n], &temp[i], sizeof(struct Pokemon));
-    }
-}
-
-void unref_sub_8094DB0(void)
-{
-    u8 i;
-    u8 r4;
-
-    for (i = 1; i < 6; i++)
-    {
-        u8 n = sub_8094C20(i);
-
-        if (GetMonData(&gPlayerParty[n], MON_DATA_SPECIES) != 0
-         && GetMonData(&gPlayerParty[n], MON_DATA_HP) != 0)
-        {
-            r4 = sub_8094C20(0);
-            sub_8094C98(0, i);
-            sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[n]);
-            break;
-        }
-    }
-}
-
-void sub_8094E20(u8 a)
-{
-    gPaletteFade.bufferTransferDisabled = TRUE;
-    gUnknown_02038473 = a;
-    nullsub_14();
-    pokemon_change_order();
-    OpenPartyMenu(1, 0xFF);
-}
-
-void sub_8094E4C(void)
-{
-    sub_8094E20(3);
-}
+// rom_8094928 is part of this file, has yet to be decompiled.
 
 int SetUpBattlePartyMenu(void)
 {
     switch (EWRAM_1B000.unk264)
-    //switch (ewram1B000.unk264[0])
     {
     case 0:
         //TODO: try to get rid of this duplicate code
@@ -467,9 +142,9 @@ int SetUpBattlePartyMenu(void)
         if (gUnknown_02038473 == 3)
         {
             if (GetItemEffectType(gScriptItemId) == 10)
-                ewram1B000.unk259 = 0xFF;
+                EWRAM_1B000.unk259 = 0xFF;
             else
-                ewram1B000.unk259 = 3;
+                EWRAM_1B000.unk259 = 3;
         }
         return TRUE;
     }
@@ -762,7 +437,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
 
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    sub_8072DEC();
     sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
     sub_806D538(0, 0);

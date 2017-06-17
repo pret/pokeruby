@@ -1,9 +1,9 @@
 #include "global.h"
 #include "save_menu_util.h"
-#include "asm.h"
 #include "event_data.h"
 #include "menu.h"
 #include "pokedex.h"
+#include "region_map.h"
 #include "string_util.h"
 #include "strings2.h"
 
