@@ -17,8 +17,15 @@ struct LinkPlayerMapObject
     u8 mode;
 };
 
+struct UCoords32
+{
+    u32 x, y;
+};
+
+extern struct UCoords32 gUnknown_0821664C[];
+
 // sub_8052F5C
-void flag_var_implications_of_teleport_(void);
+// flag_var_implications_of_teleport_
 void new_game(void);
 void sub_8053014(void);
 void sub_8053050(void);
@@ -37,7 +44,7 @@ void update_saveblock1_field_object_movement_behavior(u8, u8);
 // warp_set
 // warp_data_is_not_neg_1
 struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum);
-// warp1_get_mapheader
+struct MapHeader * const warp1_get_mapheader(void);
 // set_current_map_header_from_sav1_save_old_name
 // sub_805338C
 // sub_80533CC
@@ -52,7 +59,7 @@ void sub_8053570(void);
 void sub_8053588(u8);
 void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void sub_8053678(void);
+// sub_8053678
 void sub_8053690(s8, s8, s8, s8, s8);
 // warp1_set_to_warp2
 void sub_80536E4(s8, s8, s8, s8, s8);
@@ -65,10 +72,10 @@ void gpu_sync_bg_hide();
 // sub_8053850
 bool8 sub_80538B0(u16 x, u16 y);
 bool8 sub_80538D0(u16 x, u16 y);
-// sub_80538F0
+void sub_80538F0(u8 mapGroup, u8 mapNum);
 // sub_8053994
 void player_avatar_init_params_reset(void);
-// walkrun_find_lowest_active_bit_in_bitfield
+void walkrun_find_lowest_active_bit_in_bitfield(void);
 // sub_8053AA8
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
@@ -200,7 +207,7 @@ u32 sub_80558AC(void);
 u32 sub_8055910(void);
 u32 sub_8055940(void);
 // ZeroLinkPlayerMapObject
-// strange_npc_table_clear
+void strange_npc_table_clear(void);
 // ZeroMapObject
 void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
 void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);

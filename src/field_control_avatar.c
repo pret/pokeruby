@@ -1,17 +1,25 @@
 #include "global.h"
 #include "field_control_avatar.h"
-#include "asm.h"
 #include "battle_setup.h"
 #include "bike.h"
+#include "coord_event_weather.h"
+#include "daycare.h"
 #include "event_data.h"
+#include "field_fadetransition.h"
 #include "field_player_avatar.h"
+#include "field_poison.h"
+#include "field_specials.h"
+#include "fieldmap.h"
 #include "flags.h"
+#include "item_menu.h"
 #include "metatile_behavior.h"
 #include "rom4.h"
 #include "safari_zone.h"
 #include "script.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
+#include "start_menu.h"
 #include "trainer_see.h"
 #include "vars.h"
 #include "wild_encounter.h"
@@ -22,7 +30,6 @@ struct Coords32
     s32 y;
 };
 
-extern const struct Coords32 gUnknown_0821664C[];
 extern u16 gScriptLastTalked;
 extern u16 gScriptFacing;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
@@ -82,14 +89,10 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
 static bool32 sub_8068770(void);
 static bool32 sub_80687A4(void);
 static bool8 sub_80687E4(struct MapPosition *, u16, u16);
-bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *);
-bool8 sub_8068870(u16 a);
-bool8 sub_8068894(void);
 static void happiness_algorithm_step(void);
 static bool8 overworld_poison_step(void);
 static bool8 is_it_battle_time_3(u16);
 static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
-bool8 sub_8068A64(struct MapPosition *, u16);
 static bool8 sub_8068B30(u16);
 static bool8 is_non_stair_warp_tile(u16, u8);
 static s8 map_warp_check_packed(struct MapHeader *, struct MapPosition *);
@@ -98,21 +101,6 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
 static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
 static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
 static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);
-u8 sub_8068F18(void);
-
-extern u8 mapheader_run_first_tag2_script_list_match(void);
-extern void sub_8071310(void);
-extern int sub_80A6D1C(void);
-extern u8 sub_80BC050();
-extern u8 sub_80422A0(void);
-extern s32 overworld_poison(void);
-extern void sub_8080E88();
-extern void walkrun_find_lowest_active_bit_in_bitfield(void);
-extern void sub_8080F2C(u8);
-extern void sub_8080F48(void);
-extern void sub_8080F58(void);
-extern void sub_80BC038();
-extern void DoCoordEventWeather(u8);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {

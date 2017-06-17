@@ -1,9 +1,11 @@
 #include "global.h"
 #include "rom6.h"
-#include "asm.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
+#include "field_map_obj.h"
 #include "field_player_avatar.h"
+#include "item_use.h"
+#include "pokemon_menu.h"
 #include "rom4.h"
 #include "script.h"
 #include "songs.h"
@@ -18,10 +20,6 @@ extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
-
-extern void sub_808AB90(void);
-extern void task08_080A1C44(u8);
-extern u8 sub_80CA1C8(void);
 
 static void task08_080C9820(u8);
 static void sub_810B3DC(u8);

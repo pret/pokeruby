@@ -9,7 +9,6 @@
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
-extern struct Pokemon gPlayerParty[6];
 extern struct PokemonStorage gPokemonStorage;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;

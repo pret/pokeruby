@@ -3,6 +3,8 @@
 
 #include "sprite.h"
 
+extern const u16 gUnknown_08393E64[];
+
 void SpriteCallback_VersionBannerLeft(struct Sprite *sprite);
 void SpriteCallback_VersionBannerRight(struct Sprite *sprite);
 void SpriteCallback_PressStartCopyrightBanner(struct Sprite *sprite);

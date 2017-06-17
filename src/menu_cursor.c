@@ -45,7 +45,7 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
     struct Sprite *v10;
 
     if (gUnknown_0203A3D0 != 0x40 || gUnknown_0203A3D1 != 0x40)
-        DestroyMenuCursor();
+        sub_814A7FC();
 
     v9 = 1;
     if (a2 == 0xFFFF)
@@ -120,7 +120,7 @@ u8 unref_sub_814A7AC(u8 a1, u16 a2, u8 a3)
     return sub_814A758(a1, val1, val2, a3);
 }
 
-void DestroyMenuCursor(void)
+void sub_814A7FC(void)
 {
     if (gUnknown_0203A3D0 != 0x40)
     {

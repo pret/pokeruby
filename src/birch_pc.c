@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
@@ -9,31 +8,31 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 
-extern const u8 gBirchDexRatingText_LessThan10[];
-extern const u8 gBirchDexRatingText_LessThan20[];
-extern const u8 gBirchDexRatingText_LessThan30[];
-extern const u8 gBirchDexRatingText_LessThan40[];
-extern const u8 gBirchDexRatingText_LessThan50[];
-extern const u8 gBirchDexRatingText_LessThan60[];
-extern const u8 gBirchDexRatingText_LessThan70[];
-extern const u8 gBirchDexRatingText_LessThan80[];
-extern const u8 gBirchDexRatingText_LessThan90[];
-extern const u8 gBirchDexRatingText_LessThan100[];
-extern const u8 gBirchDexRatingText_LessThan110[];
-extern const u8 gBirchDexRatingText_LessThan120[];
-extern const u8 gBirchDexRatingText_LessThan130[];
-extern const u8 gBirchDexRatingText_LessThan140[];
-extern const u8 gBirchDexRatingText_LessThan150[];
-extern const u8 gBirchDexRatingText_LessThan160[];
-extern const u8 gBirchDexRatingText_LessThan170[];
-extern const u8 gBirchDexRatingText_LessThan180[];
-extern const u8 gBirchDexRatingText_LessThan190[];
-extern const u8 gBirchDexRatingText_LessThan200[];
-extern const u8 gBirchDexRatingText_DexCompleted[];
+extern const u8 gUnknown_081C4520[];
+extern const u8 gUnknown_081C456A[];
+extern const u8 gUnknown_081C45B0[];
+extern const u8 gUnknown_081C45F9[];
+extern const u8 gUnknown_081C4648[];
+extern const u8 gUnknown_081C467E[];
+extern const u8 gUnknown_081C46B9[];
+extern const u8 gUnknown_081C46FE[];
+extern const u8 gUnknown_081C4747[];
+extern const u8 gUnknown_081C4780[];
+extern const u8 gUnknown_081C47DF[];
+extern const u8 gUnknown_081C4828[];
+extern const u8 gUnknown_081C4863[];
+extern const u8 gUnknown_081C489C[];
+extern const u8 gUnknown_081C48EB[];
+extern const u8 gUnknown_081C4936[];
+extern const u8 gUnknown_081C49A2[];
+extern const u8 gUnknown_081C4A06[];
+extern const u8 gUnknown_081C4A4F[];
+extern const u8 gUnknown_081C4A91[];
+extern const u8 gUnknown_081C4ADA[];
 
 bool16 ScriptGetPokedexInfo(void)
 {
-    if (gSpecialVar_0x8004 == 0) // is national dex not present?
+    if (!gSpecialVar_0x8004)
     {
         gSpecialVar_0x8005 = GetHoennPokedexCount(0);
         gSpecialVar_0x8006 = GetHoennPokedexCount(1);
@@ -47,66 +46,65 @@ bool16 ScriptGetPokedexInfo(void)
     return IsNationalPokedexEnabled();
 }
 
-// This shows your Hoenn Pokedex rating and not your National Dex.
 const u8 *GetPokedexRatingText(u16 count)
 {
     if (count < 10)
-        return gBirchDexRatingText_LessThan10;
+        return gUnknown_081C4520;
     if (count < 20)
-        return gBirchDexRatingText_LessThan20;
+        return gUnknown_081C456A;
     if (count < 30)
-        return gBirchDexRatingText_LessThan30;
+        return gUnknown_081C45B0;
     if (count < 40)
-        return gBirchDexRatingText_LessThan40;
+        return gUnknown_081C45F9;
     if (count < 50)
-        return gBirchDexRatingText_LessThan50;
+        return gUnknown_081C4648;
     if (count < 60)
-        return gBirchDexRatingText_LessThan60;
+        return gUnknown_081C467E;
     if (count < 70)
-        return gBirchDexRatingText_LessThan70;
+        return gUnknown_081C46B9;
     if (count < 80)
-        return gBirchDexRatingText_LessThan80;
+        return gUnknown_081C46FE;
     if (count < 90)
-        return gBirchDexRatingText_LessThan90;
+        return gUnknown_081C4747;
     if (count < 100)
-        return gBirchDexRatingText_LessThan100;
+        return gUnknown_081C4780;
     if (count < 110)
-        return gBirchDexRatingText_LessThan110;
+        return gUnknown_081C47DF;
     if (count < 120)
-        return gBirchDexRatingText_LessThan120;
+        return gUnknown_081C4828;
     if (count < 130)
-        return gBirchDexRatingText_LessThan130;
+        return gUnknown_081C4863;
     if (count < 140)
-        return gBirchDexRatingText_LessThan140;
+        return gUnknown_081C489C;
     if (count < 150)
-        return gBirchDexRatingText_LessThan150;
+        return gUnknown_081C48EB;
     if (count < 160)
-        return gBirchDexRatingText_LessThan160;
+        return gUnknown_081C4936;
     if (count < 170)
-        return gBirchDexRatingText_LessThan170;
+        return gUnknown_081C49A2;
     if (count < 180)
-        return gBirchDexRatingText_LessThan180;
+        return gUnknown_081C4A06;
     if (count < 190)
-        return gBirchDexRatingText_LessThan190;
+        return gUnknown_081C4A4F;
     if (count < 200)
-        return gBirchDexRatingText_LessThan200;
+        return gUnknown_081C4A91;
     if (count == 200)
     {
-        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         || GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // Jirachi or Deoxys is not counted towards the dex completion. If either of these flags are enabled, it means the actual count is less than 200.
-            return gBirchDexRatingText_LessThan200;
-        return gBirchDexRatingText_DexCompleted;
+        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
+         || sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
+            return gUnknown_081C4A91;
+        return gUnknown_081C4ADA;
     }
     if (count == 201)
     {
-        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         && GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // If both of these flags are enabled, it means the actual count is less than 200.
-            return gBirchDexRatingText_LessThan200;
-        return gBirchDexRatingText_DexCompleted;
+        if (sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
+         && sub_8090D90(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1))
+            return gUnknown_081C4A91;
+        return gUnknown_081C4ADA;
     }
     if (count == 202)
-        return gBirchDexRatingText_DexCompleted; // Hoenn dex is considered complete, even though the hoenn dex count is 210.
-    return gBirchDexRatingText_LessThan10;
+        return gUnknown_081C4ADA;
+    return gUnknown_081C4520;
 }
 
 void ShowPokedexRatingMessage(void)

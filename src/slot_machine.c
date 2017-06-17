@@ -1,4 +1,5 @@
 #include "global.h"
+#include "slot_machine.h"
 #include "decompress.h"
 #include "palette.h"
 #include "task.h"
@@ -30,11 +31,6 @@ extern const u16 gUnknown_08E95A18[];
 
 extern u16 gUnknown_08E95AB8[];
 extern u16 gUnknown_08E95FB8[];
-
-
-void sub_8104DA4(void);
-
-u8 sub_8105BB4(u8, u8, s16);
 
 static void LoadSlotMachineWheelOverlay(void);
 

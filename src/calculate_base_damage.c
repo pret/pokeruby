@@ -16,9 +16,7 @@
 #include "text.h"
 
 extern u8 gPlayerPartyCount;
-extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
-extern struct Pokemon gEnemyParty[6];
 
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
@@ -36,20 +34,9 @@ extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u32 gBitTable[];
-extern struct BaseStats gBaseStats[];
 extern struct SpriteTemplate gSpriteTemplate_8208288[];
-extern u8 gTrainerClassToPicIndex[];
-extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];
-extern u8 gUnknown_08208238[];
-extern u8 gUnknown_0820823C[];
-extern u8 gStatStageRatios[];
 extern u8 gHoldEffectToType[][2];
-
-extern u8 battle_side_get_owner(u8);
-extern u8 sub_8018324(u8, u8, u8, u8, u16);
-extern u8 sub_803C348(u8);
 
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                            \
 {                                                                            \

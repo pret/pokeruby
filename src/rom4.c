@@ -1,24 +1,31 @@
 #include "global.h"
 #include "rom4.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
+#include "cable_club.h"
 #include "clock.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "field_fadetransition.h"
+#include "field_ground_effect.h"
 #include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "field_weather.h"
+#include "field_screen_effect.h"
 #include "field_special_scene.h"
+#include "field_specials.h"
+#include "field_tasks.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "fldeff_flash.h"
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
+#include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "new_game.h"
@@ -26,14 +33,19 @@
 #include "play_time.h"
 #include "rng.h"
 #include "roamer.h"
+#include "rotating_gate.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
+#include "time_events.h"
+#include "tv.h"
+#include "unknown_task.h"
 #include "wild_encounter.h"
 
 #ifdef SAPPHIRE
@@ -46,11 +58,6 @@ struct UnkTVStruct
 {
     u32 tv_field_0;
     u32 tv_field_4;
-};
-
-struct UCoords32
-{
-    u32 x, y;
 };
 
 extern struct WarpData gUnknown_020297F0;
@@ -96,8 +103,6 @@ extern u8 TradeRoom_TooBusyToNotice[];
 extern u8 TradeRoom_PromptToCancelLink[];
 extern u8 TradeRoom_TerminateLink[];
 extern u8 gUnknown_081A4508[];
-
-extern struct UCoords32 gUnknown_0821664C[];
 
 extern u8 (*gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
 extern u8 (*gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
