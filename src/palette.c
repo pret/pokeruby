@@ -1,6 +1,5 @@
 #include "global.h"
 #include "palette.h"
-#include "asm.h"
 #include "blend_palette.h"
 #include "decompress.h"
 

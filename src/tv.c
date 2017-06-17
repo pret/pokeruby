@@ -1,7 +1,9 @@
 #include "global.h"
-#include "asm.h"
 #include "tv.h"
+#include "battle_tower.h"
+#include "contest_painting.h"
 #include "data2.h"
+#include "easy_chat.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_message_box.h"
@@ -19,10 +21,23 @@
 #include "battle.h"
 #include "link.h"
 #include "easy_chat.h"
+#include "field_map_obj.h"
+#include "field_specials.h"
 #include "item.h"
 #include "items.h"
-#include "contest_painting.h"
+#include "link.h"
+#include "map_constants.h"
+#include "naming_screen.h"
+#include "pokedex.h"
+#include "region_map.h"
+#include "rng.h"
+#include "rom4.h"
 #include "rtc.h"
+#include "script_menu.h"
+#include "species.h"
+#include "string_util.h"
+#include "strings.h"
+#include "text.h"
 
 struct UnkTvStruct
 {
@@ -40,13 +55,13 @@ struct OutbreakPokemon
     /*0x0B*/ u8 location;
 };
 
-extern u8 *gUnknown_083D1464[3];
-extern u8 gUnknown_02038694;
-
 struct TVSaleItem {
     u16 item_id;
     u16 item_amount;
 };
+
+extern u8 gUnknown_02038694;
+
 extern struct TVSaleItem gUnknown_02038724[3];
 
 extern u16 gSpecialVar_0x8004;
@@ -73,11 +88,8 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern void sub_80BEBF4(void);
-
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
-extern const u8 *gUnknown_083CE048[];
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
@@ -85,7 +97,20 @@ extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
 
-u32 GetPlayerTrainerId(void);
+
+extern u8 gScriptContestCategory;
+extern u8 gScriptContestRank;
+extern u8 gUnknown_03004316[11];
+extern u8 gUnknown_02024D26;
+
+extern u16 gUnknown_02024C04;
+
+extern u8 ewram[];
+#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
+extern u8 gUnknown_020387E4;
+
+extern u8 gUnknown_03000720;
+extern s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -302,7 +327,7 @@ void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80BECA0(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
-void UpdateTVScreensOnMap(int a0, int a1)
+void UpdateTVScreensOnMap(int width, int height)
 {
     u8 bigMovieOrEmergencyNewsOnTv;
     FlagSet(SYS_TV_WATCH);
@@ -310,19 +335,19 @@ void UpdateTVScreensOnMap(int a0, int a1)
     switch (bigMovieOrEmergencyNewsOnTv)
     {
         case 1:
-            SetTVMetatilesOnMap(a0, a1, 0x3);
+            SetTVMetatilesOnMap(width, height, 0x3);
             break;
         case 2:
             break;
         default:
             if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
             {
-                SetTVMetatilesOnMap(a0, a1, 0x3);
+                SetTVMetatilesOnMap(width, height, 0x3);
             }
             else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagReset(SYS_TV_WATCH);
-                SetTVMetatilesOnMap(a0, a1, 0x3);
+                SetTVMetatilesOnMap(width, height, 0x3);
             }
     }
 }
@@ -1141,8 +1166,6 @@ void UpdateMassOutbreakTimeLeft(u16 arg0)
         gSaveBlock1.outbreakUnk5 -= arg0;
 }
 
-void sub_80BE9D4();
-
 void sub_80BE97C(bool8 flag)
 {
     u8 var0, var1;
@@ -1240,15 +1263,6 @@ void sub_80BEA88(void)
         }
     }
 }
-
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0);
-void sub_80BEC10(u8);
-void sub_80BF588(TVShow tvShows[]);
-void sub_80BF6D8(void);
-bool8 sub_80BF77C(u16);
-bool8 sub_80BEE48(u8);
-
-bool8 IsPriceDiscounted(u8);
 
 void sub_80BEB20(void) {
     u16 rval;
@@ -1453,16 +1467,16 @@ void sub_80BEF10(u8 strvaridx, u8 rank)
     switch (rank)
     {
     case NORMAL_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5].text);
         break;
     case SUPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5].text);
         break;
     case HYPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5].text);
         break;
     case MASTER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5].text);
         break;
     }
 }
@@ -1472,19 +1486,19 @@ void CopyContestCategoryToStringVar(u8 strvaridx, u8 category)
     switch (category)
     {
     case CONTEST_COOL:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL].text);
         break;
     case CONTEST_BEAUTY:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY].text);
         break;
     case CONTEST_CUTE:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE].text);
         break;
     case CONTEST_SMART:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART].text);
         break;
     case CONTEST_TOUGH:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH].text);
         break;
     }
 }
@@ -2158,10 +2172,6 @@ void sub_80BFD20(void)
     RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
-extern u8 ewram[];
-#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
-
 typedef union ewramStruct_02007000 {
     TVShow tvshows[4][25];
     struct UnknownSaveStruct2ABC unknown_2abc[4][16];
@@ -2449,9 +2459,6 @@ s8 sub_80C019C(TVShow tvShows[]) {
     }
     return -1;
 }
-
-void sub_80C03A8(u8 showidx);
-void sub_80C03C8(u16 species, u8 showidx);
 
 #ifdef NONMATCHING
 void sub_80C01D4(void)
@@ -2875,22 +2882,6 @@ void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2A
     }
 }
 
-void DoTVShowPokemonFanClubLetter(void);
-void DoTVShowRecentHappenings(void);
-void DoTVShowPokemonFanClubOpinions(void);
-void nullsub_22(void);
-void DoTVShowPokemonNewsMassOutbreak(void);
-void DoTVShowBravoTrainerPokemonProfile(void);
-void DoTVShowBravoTrainerBattleTowerProfile(void);
-void DoTVShowPokemonTodaySuccessfulCapture(void);
-void DoTVShowTodaysSmartShopper(void);
-void DoTVShowTheNameRaterShow(void);
-void DoTVShowPokemonTodayFailedCapture(void);
-void DoTVShowPokemonAngler(void);
-void DoTVShowTheWorldOfMasters(void);
-
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
-
 void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruct2ABC *arg1[16]) {
     struct UnknownSaveStruct2ABC *str0;
     struct UnknownSaveStruct2ABC *str1;
@@ -3297,10 +3288,6 @@ void DoTVShowTodaysSmartShopper(void)
     }
     ShowFieldMessage(gTVSmartShopperTextGroup[switchval]);
 }
-
-void TVShowConvertInternationalString(u8 *, u8 *, u8);
-
-void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 void DoTVShowTheNameRaterShow(void) {
     TVShow *tvShow;

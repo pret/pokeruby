@@ -1,7 +1,8 @@
+
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
-#include "asm.h"
+#include "battle.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -11,7 +12,11 @@
 #include "menu.h"
 #include "menu_cursor.h"
 #include "palette.h"
+#include "pokedex_area_screen.h"
+#include "pokedex_cry_screen.h"
+#include "pokemon.h"
 #include "rng.h"
+#include "rom4.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -19,6 +24,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 #define NATIONAL_DEX_COUNT 386
 
@@ -159,26 +165,13 @@ extern const u16 gPokedexMenu2_Pal[];
 extern const struct SpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 gPokedexMenuSearch_Gfx[];
 extern const u8 gUnknown_08E96D2C[];
 extern const u16 gPokedexMenuSearch_Pal[];
 extern const u8 gTypeNames[][7];
 extern const u8 gPokedexMenu2_Gfx[];
 
-extern u16 NationalPokedexNumToSpecies(u16);
-extern void ShowPokedexAreaScreen(u16 species, u8 *string);
-extern void sub_814AD7C(u8, u8);
-extern void sub_800D74C();
-extern const u16 *species_and_otid_get_pal(u16, u32, u32);
-extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
-extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-extern void remove_some_task(void);
-extern u8 sub_8091E3C(void);
-extern void DisableNationalPokedex(void);
-extern void sub_805469C(void);
-extern u16 HoennToNationalOrder(u16);
-extern u16 NationalToHoennOrder(u16);
+static u8 sub_8091E3C(void);
 
 static const u16 sPokedexSearchPalette[] = INCBIN_U16("graphics/pokedex/search.gbapal");
 static const u16 sNationalPokedexPalette[] = INCBIN_U16("graphics/pokedex/national.gbapal");
@@ -1296,6 +1289,7 @@ static void sub_8092D78(u8);
 static u8 sub_8092E10(u8, u8);
 static void sub_8092EB0(u8);
 static void sub_809308C(u8);
+
 
 void ResetPokedex(void)
 {

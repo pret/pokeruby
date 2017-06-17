@@ -1,18 +1,24 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
 #include "battle_interface.h"
 #include "data2.h"
+#include "battle_811DA74.h"
+#include "battle_anim_813F0F4.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "pokemon.h"
+#include "rom3.h"
+#include "rom_8077ABC.h"
 #include "sound.h"
 #include "songs.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
+#include "util.h"
 
 struct UnknownStruct1
 {
@@ -35,7 +41,6 @@ struct UnknownStruct5
     u8 unk0_7:1;
 };
 
-extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 
 extern struct UnknownStruct5 gUnknown_020238C8;
@@ -113,8 +118,6 @@ extern void c3_0802FDF4(u8);
 extern void sub_8031F88();
 extern void sub_8141828();
 extern void c2_8011A1C(void);
-extern void dp01_prepare_buffer_wireless_probably();
-extern void dp01_build_cmdbuf_x1D_1D_numargs_varargs(int, u16, void *);
 
 void sub_811DA94(void);
 void sub_811E0A0(void);
@@ -126,6 +129,7 @@ void sub_811FA5C(void);
 void sub_811FF30(void);
 void sub_812071C(u8);
 void sub_81208E0(void);
+
 
 void nullsub_74(void)
 {

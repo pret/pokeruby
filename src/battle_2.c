@@ -1,22 +1,31 @@
 #include "global.h"
-#include "asm.h"
+#include "abilities.h"
 #include "battle.h"
+#include "battle_interface.h"
+#include "battle_setup.h"
 #include "data2.h"
+#include "item.h"
+#include "link.h"
 #include "main.h"
-#include "text.h"
+#include "name_string_util.h"
 #include "palette.h"
+#include "party_menu.h"
+#include "pokeball.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "rng.h"
+#include "rom3.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
+#include "songs.h"
+#include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "task.h"
-#include "pokemon.h"
-#include "species.h"
-#include "link.h"
-#include "name_string_util.h"
-#include "battle_setup.h"
-#include "rng.h"
-#include "sound.h"
-#include "songs.h"
+#include "text.h"
 #include "trig.h"
-#include "abilities.h"
+#include "unknown_task.h"
+#include "util.h"
 
 struct UnknownStruct6
 {
@@ -87,8 +96,6 @@ struct UnknownStruct13
 
 extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
-extern const struct BaseStats gBaseStats[];
-extern const u32 gBitTable[];
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
@@ -212,86 +219,6 @@ extern u32 gBattleMoveDamage;
 extern struct BattlePokemon gBattleMons[];
 extern u8 gBattleMoveFlags;
 
-extern void sub_800B858(void);
-extern void dp12_8087EA4(void);
-extern void sub_80895F8();
-extern void sub_800D6D4();
-extern void sub_800DAB8();
-extern void sub_800E23C();
-extern void setup_poochyena_battle();
-extern void SetWildMonHeldItem(void);
-extern void AdjustFriendship(struct Pokemon *, u8);
-extern void sub_800DE30(u8);
-extern void sub_800B950(void);
-extern u8 battle_load_something();
-extern void OpenPartyMenu();
-extern void sub_8089668();
-extern void sub_800D74C();
-extern void sub_804777C(u8);
-extern void sub_8043DFC();
-extern u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
-extern void dp01_build_cmdbuf_x00_a_b_0(u8 a, u8 b, u8 c);
-extern void dp01_build_cmdbuf_x04_4_4_4(u8 a);
-extern void dp01_build_cmdbuf_x07_7_7_7(u8 a);
-extern void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c);
-extern void dp01_build_cmdbuf_x2E_a(u8 a, u8 b);
-extern void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a);
-extern void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c);
-extern void dp01_battle_side_mark_buffer_for_execution();
-extern u8 GetNationalPokedexFlag();
-extern void sub_800C704(u8, u8, u8);
-extern u8 sub_8018324();
-extern u8 sub_801A02C();
-extern u8 sub_8015DFC();
-extern u8 sub_8016558();
-extern u8 sub_80173A4();
-extern u8 sub_80170DC();
-extern u8 ItemId_GetHoldEffect(u16);
-extern void sub_8094C98();
-
-void InitBattle(void);
-void sub_800EC9C(void);
-void sub_800F104(void);
-void sub_800F298(void);
-void sub_800F808(void);
-void sub_800F838(struct Sprite *);
-u8 CreateNPCTrainerParty(struct Pokemon *, u16);
-void sub_800FCFC(void);
-void sub_8010824(void);
-void sub_80101B8(void);
-void c2_081284E0(void);
-void sub_8010278(struct Sprite *);
-void sub_80102AC(struct Sprite *);
-void nullsub_37(struct Sprite *);
-void sub_8010320(struct Sprite *);
-void sub_8010494(struct Sprite *);
-void sub_801053C(struct Sprite *);
-void oac_poke_ally_(struct Sprite *);
-void nullsub_86(struct Sprite *);
-void objc_dp11b_pingpong(struct Sprite *);
-void sub_8010874(void);
-void bc_8012FAC(void);
-void bc_load_battlefield(void);
-void sub_8011384(void);
-void bc_801333C(void);
-void bc_battle_begin_message(void);
-void bc_8013568(void);
-void sub_8011800(void);
-void sub_8011834(void);
-void bc_801362C(void);
-void sub_8011970(void);
-void sub_80119B4(void);
-void sub_8011B00(void);
-void sub_8011E8C(void);
-void sub_8012324(void);
-void sub_8012FBC(u8, u8);
-u8 b_first_side();
-void sub_801365C(u8);
-void sub_801377C(void);
-void sub_80138F0(void);
-void b_cancel_multi_turn_move_maybe(u8);
-void b_std_message();
-void sub_80156DC();
 
 void sub_800E7C4(void)
 {

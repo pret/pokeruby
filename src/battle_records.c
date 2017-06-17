@@ -1,10 +1,7 @@
 #include "global.h"
+#include "battle_records.h"
 #include "menu.h"
 #include "strings2.h"
-
-void PrintLinkBattleWinsLossesDraws(void *);
-
-void PrintLinkBattleRecord(void *, u8);
 
 void ShowLinkBattleRecords(void) {
     s32 i;

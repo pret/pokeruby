@@ -57,7 +57,6 @@ static void ClearSpriteCopyRequests(void);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
 static s16 AllocSpriteTiles(u16 tileCount);
-u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 static void ResetAllSprites(void);
 static void BeginAnim(struct Sprite *sprite);

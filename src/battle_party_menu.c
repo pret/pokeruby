@@ -1,10 +1,16 @@
 #include "global.h"
 #include "battle_party_menu.h"
-#include "asm.h"
+#include "battle.h"
+#include "item_menu.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
@@ -36,41 +42,6 @@ struct Unk201B000
 #define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
-extern u8 IsLinkDoubleBattle(void);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34();
-extern u8 sub_806BD58(u8, u8);
-extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern void PartyMenuTryPrintMonsHP(void);
-extern void nullsub_13(void);
-extern void PartyMenuDrawHPBars(void);
-extern u8 sub_806B58C(u8);
-extern u8 GetItemEffectType();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern u16 sub_806BD80();
-extern u8 sub_806CA38();
-extern void sub_806D5A4(void);
-extern void sub_802E414(void);
-extern void sub_80A6DCC(void);
-extern void sub_806AF4C();
-extern u8 sub_80F9344(void);
-extern u8 sub_806B124(void);
-extern void sub_806C994();
-extern void sub_806BF74();
-extern void sub_806AEDC(void);
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
-extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
-extern u8 *sub_8040D08();
-extern void sub_8040B8C(void);
-extern void sub_806E6F0();
-extern void sub_806D538();
-extern void nullsub_14();
-extern void OpenPartyMenu();
-extern u8 sub_803FBBC(void);
-
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;
 extern u8 gUnknown_02024A68;
@@ -84,11 +55,13 @@ extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
 extern void (*gUnknown_03004AE4)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
+extern void nullsub_14();
 
 void sub_8094C98(u8, u8);
+u8 pokemon_order_func(u8);
+
 static void sub_8094998(u8[3], u8);
 static void sub_8094A74(u8[3], u8, u32);
-u8 pokemon_order_func(u8);
 static void sub_8094D60(void);
 static void Task_809527C(u8);
 static void Task_80952B4(u8);

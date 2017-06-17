@@ -1,6 +1,5 @@
 #include "global.h"
 #include "field_weather.h"
-#include "asm.h"
 #include "palette.h"
 #include "sprite.h"
 #include "task.h"

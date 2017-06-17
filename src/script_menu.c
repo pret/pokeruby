@@ -1,6 +1,7 @@
 #include "global.h"
 #include "script_menu.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "menu.h"
 #include "palette.h"
 #include "script.h"
@@ -572,10 +573,6 @@ const struct TextStruct gUnknown_083CE048[] =
 extern u8 gPCText_WhichPCShouldBeAccessed[];
 
 extern u16 gScriptResult;
-
-// field_effect
-extern void FreeResourcesAndDestroySprite(struct Sprite *sprite);
-extern u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {

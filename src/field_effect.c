@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "script.h"
 #include "trig.h"
@@ -21,6 +20,11 @@
 #include "metatile_behavior.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "field_fadetransition.h"
+#include "fieldmap.h"
+#include "field_map_obj.h"
+#include "util.h"
+#include "field_effect_helpers.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
