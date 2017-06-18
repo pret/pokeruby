@@ -341,6 +341,8 @@ const s16 gUnknown_0837520C[] = {0x20, 0x40, 0x60, 0x80};
 const s16 gUnknown_08375204[] = {0x20, 0x40, 0x80, 0xc0};
 const s16 gUnknown_0837521C[] = {0x20, 0x30, 0x40, 0x50};
 
+#include "data/field_map_obj/callback_subroutine_pointers.h"
+
 // text
 
 extern void strange_npc_table_clear(void);
@@ -2333,7 +2335,6 @@ u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
-extern u8 (*const gUnknown_083752D0[])(struct MapObject *mapObject, struct Sprite *sprite);
 
 void FieldObjectCB_BerryTree(struct Sprite *sprite)
 {
@@ -3481,8 +3482,6 @@ u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite
     return 1;
 }
 
-extern u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-
 u8 sub_805F364(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
@@ -3587,7 +3586,6 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
 }
 
 u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite);
-extern u8 (*const gUnknown_083755CC[])(struct MapObject *, struct Sprite *);
 
 void FieldObjectCB_Hidden1(struct Sprite *sprite)
 {
@@ -4701,8 +4699,8 @@ extern u8 (*const gUnknown_083759C0[5])(u8);
 
 void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
-    u8 (*functions[5])(u8);
-    memcpy(functions, gUnknown_083759C0, sizeof(gUnknown_083759C0));
+    u8 (*const functions[5])(u8);
+    memcpy((void *)functions, gUnknown_083759C0, sizeof(gUnknown_083759C0));
     sub_8060D20(mapObject, sprite, direction, a3);
     sub_805FE28(mapObject, sprite, functions[a3](mapObject->mapobj_unk_18));
 }
