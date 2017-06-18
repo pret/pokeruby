@@ -1,12 +1,19 @@
 #include "global.h"
-#include "asm.h"
+#include "decoration.h"
+#include "field_fadetransition.h"
+#include "main.h"
 #include "menu.h"
+#include "name_string_util.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
+#include "rom4.h"
+#include "script.h"
 #include "songs.h"
 #include "sound.h"
 #include "strings.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 
@@ -35,6 +42,8 @@ extern struct Pokemon gUnknown_030042FC[];
 extern const u16 gBattleTowerBanlist[];
 extern const struct PartyMenuItem gUnknown_084017B0[];
 extern const struct PartyPopupMenu gUnknown_084017D8[];
+extern const struct PartyMenuItem gUnknown_084017F0[];
+extern const struct PartyPopupMenu gUnknown_08401810[];
 
 extern void OpenPartyMenu();
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
@@ -46,7 +55,6 @@ extern void PrintPartyMenuMonNicknames(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
 extern void sub_806D538();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
 extern u16 sub_806BE38();
 extern u8 sub_806CA38();
 extern void sub_808B5B4();
@@ -66,11 +74,22 @@ extern void CreatePartyMenuMonIcon();
 extern void CreateHeldItemIcon_806DCD4(int, u8, int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
-extern void PartyMenuPutStatusTilemap(int, int, u8);
+extern void PartyMenuPutStatusTilemap(u8, int, u8);
 extern void PartyMenuPrintLevel();
 extern void PartyMenuPutNicknameTilemap();
 extern void PrintPartyMenuMonNickname();
 extern void PartyMenuDrawHPBar();
+extern bool8 sub_80F9344(void);
+extern void sub_806D4AC();
+extern void sub_806D3B4();
+extern void PartyMenuDoPrintLevel(u8, u8, u8);
+extern void PartyMenuDoDrawHPBar(u8, u8, u16, u16);
+extern void PartyMenuDoPutNicknameTilemap(u16, u8, u8, u8, const u8 *);
+extern void box_print(u8, int, const u8 *);
+extern void sub_806BCE8(void);
+extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
+extern u16 sub_806BD80();
+extern void sub_806BF74();
 
 void sub_8121E58(void);
 bool8 sub_8122030(struct Pokemon *);
@@ -82,6 +101,14 @@ void sub_8122838(u8);
 void sub_81228E8(u8);
 void sub_8122950(u8);
 void sub_81229B8(void);
+void sub_8122AB8(u8);
+void sub_8122B10(u8);
+void sub_8122C18(u8);
+void sub_8122EAC(u8);
+void sub_81230F4(u8);
+void sub_8123138(u8);
+void sub_8123170(u8);
+void sub_81231AC(void);
 
 void sub_8121E10(void)
 {
@@ -689,5 +716,309 @@ void sub_81229B8(void)
             PrintPartyMenuMonNickname(i, 3, &gPlayerParty[i]);
             PartyMenuDrawHPBar(i, 3, &gPlayerParty[i]);
         }
+    }
+}
+
+void sub_8122A48(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        gTasks[taskId].data[0] = 30;
+        sub_806D4AC(taskId, gUnknown_02023A00[0].species, 0);
+        sub_806D4AC(taskId, gUnknown_02023A00[1].species, 1);
+        sub_806D4AC(taskId, gUnknown_02023A00[2].species, 2);
+        gTasks[taskId].func = sub_8122AB8;
+        ewram1B000.unk261 = 1;
+    }
+}
+
+void sub_8122AB8(u8 taskId)
+{
+    sub_806D3B4(taskId, gUnknown_02023A00[1].species, gUnknown_02023A00[2].species);
+    if (gTasks[taskId].data[0] == 0)
+    {
+        gTasks[taskId].func = sub_8122B10;
+        ewram1B000.unk261 = 2;
+        PlaySE(SE_W231);
+    }
+}
+
+void sub_8122B10(u8 taskId)
+{
+    u8 i;
+    
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02023A00[i].species != 0)
+        {
+            u8 r2;
+            
+            PartyMenuDoPrintHP(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
+            if (gUnknown_02023A00[i].hp == 0)
+                r2 = 7;
+            else
+                r2 = pokemon_ailments_get_primary(gUnknown_02023A00[i].status);
+            if (r2 != 0)
+                PartyMenuPutStatusTilemap(i + 3, 3, r2 - 1);
+            else
+                PartyMenuDoPrintLevel(i + 3, 3, gUnknown_02023A00[i].level);
+            PartyMenuDoPutNicknameTilemap(gUnknown_02023A00[i].species, gUnknown_02023A00[i].gender, 3, i + 3, gUnknown_02023A00[i].nickname);
+            StringCopy(gStringVar1, gUnknown_02023A00[i].nickname);
+            StringGetEnd10(gStringVar1);
+            SanitizeNameString(gStringVar1);
+            box_print(i + 3, 3, gStringVar1);
+            PartyMenuDoDrawHPBar(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
+        }
+    }
+    gTasks[taskId].func = sub_8122C18;
+    gTasks[taskId].data[0] = 0;
+}
+
+void sub_8122C18(u8 taskId)
+{
+    gTasks[taskId].data[0]++;
+    if (gTasks[taskId].data[0] == 256)
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_8122450;
+    }
+}
+
+// Exactly the same as sub_8121E78 except for case 6
+bool8 unref_sub_8122C60(void)
+{
+    switch (ewram1B000_alt.unk264)
+    {
+    case 0:
+        if (ewram1B000_alt.unk266 < gPlayerPartyCount)
+        {
+            TryCreatePartyMenuMonIcon(ewram1B000_alt.unk260, ewram1B000_alt.unk266, &gPlayerParty[ewram1B000_alt.unk266]);
+            ewram1B000_alt.unk266++;
+        }
+        else
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264++;
+        }
+        break;
+    case 1:
+        LoadHeldItemIconGraphics();
+        ewram1B000_alt.unk264++;
+        break;
+    case 2:
+        CreateHeldItemIcons_806DC34(ewram1B000_alt.unk260);
+        ewram1B000_alt.unk264++;
+        break;
+    case 3:
+        if (sub_806BD58(ewram1B000_alt.unk260, ewram1B000_alt.unk266) == 1)
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264++;
+        }
+        else
+        {
+            ewram1B000_alt.unk266++;
+        }
+        break;
+    case 4:
+        PartyMenuPrintMonsLevelOrStatus();
+        ewram1B000_alt.unk264++;
+        break;
+    case 5:
+        PrintPartyMenuMonNicknames();
+        ewram1B000_alt.unk264++;
+        break;
+    case 6:
+        sub_806BCE8();
+        ewram1B000_alt.unk264++;
+        break;
+    case 7:
+        if (sub_806B58C(ewram1B000_alt.unk266) == 1)
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264 = 0;
+            return TRUE;
+        }
+        else
+        {
+            ewram1B000_alt.unk266++;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+void sub_8122D94(u8 taskId)
+{
+    if (!GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_IS_EGG))
+    {
+        gTasks[taskId].data[4] = 0;
+        sub_806E750(0, gUnknown_08401810, gUnknown_084017F0, 0);
+    }
+    else
+    {
+        gTasks[taskId].data[4] = 1;
+        sub_806E750(1, gUnknown_08401810, gUnknown_084017F0, 0);
+    }
+}
+
+void sub_8122E0C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        switch (sub_806BD80(taskId))
+        {
+        case 1:
+            PlaySE(SE_SELECT);
+            gLastFieldPokeMenuOpened = sub_806CA38(taskId);
+            GetMonNickname(&gPlayerParty[gLastFieldPokeMenuOpened], gStringVar1);
+            sub_8122D94(taskId);
+            gTasks[taskId].func = sub_8122EAC;
+            break;
+        case 2:
+            PlaySE(SE_SELECT);
+            gLastFieldPokeMenuOpened = 0xFF;
+            gSpecialVar_0x8004 = 0xFF;
+            sub_8123138(taskId);
+            break;
+        }
+    }
+}
+
+void sub_8122EAC(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gMain.newAndRepeatedKeys & 0x40)
+        {
+            if (GetMenuCursorPos() != 0)
+            {
+                PlaySE(SE_SELECT);
+                MoveMenuCursor(-1);
+            }
+            return;
+        }
+        if (gMain.newAndRepeatedKeys & 0x80)
+        {
+            if (GetMenuCursorPos() != 3)
+            {
+                PlaySE(SE_SELECT);
+                MoveMenuCursor(1);
+            }
+            return;
+        }
+        if (gMain.newKeys & A_BUTTON)
+        {
+            TaskFunc popupMenuFunc;
+
+            PlaySE(SE_SELECT);
+            popupMenuFunc = PartyMenuGetPopupMenuFunc(
+              gTasks[taskId].data[4],
+              gUnknown_08401810,
+              gUnknown_084017F0,
+              GetMenuCursorPos());
+            popupMenuFunc(taskId);
+            return;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            sub_81230F4(taskId);
+            return;
+        }
+    }
+}
+
+void sub_8122F70(u8 taskId)
+{
+    gSpecialVar_0x8004 = gLastFieldPokeMenuOpened;
+    sub_8123138(taskId);
+}
+
+void sub_8122F90(void)
+{
+    while (1)
+    {
+        if (sub_806B124() == 1)
+        {
+            sub_806C994(ewram1B000.unk260, gUnknown_020384F0);
+            sub_806BF74(ewram1B000.unk260, 0);
+            GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
+            gLastFieldPokeMenuOpened = gUnknown_020384F0;
+            sub_8122D94(ewram1B000.unk260);
+            SetMainCallback2(sub_806AEDC);
+            break;
+        }
+        if (sub_80F9344() == 1)
+            break;
+    }
+}
+
+void sub_8123004(void)
+{
+    gPaletteFade.bufferTransferDisabled = TRUE;
+    sub_806AF4C(6, 0xFF, sub_8122EAC, 5);
+    SetMainCallback2(sub_8122F90);
+}
+
+void sub_8123034(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
+        
+        DestroyTask(taskId);
+        ewram1B000.unk262 = 1;
+        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, 0);
+    }
+}
+
+void sub_81230BC(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_8123034;
+}
+
+void sub_81230F4(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    MenuZeroFillWindowRect(20, 10, 29, 19);
+    HandleDestroyMenuCursors();
+    sub_806D538(15, 0);
+    gTasks[taskId].func = sub_8122E0C;
+}
+
+void sub_8123138(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_8123170;
+}
+
+void sub_8123170(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        gFieldCallback = sub_81231AC;
+        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        DestroyTask(taskId);
+    }
+}
+
+// Do these last two functions really belong in here?
+
+void sub_81231C4(u8);
+
+void sub_81231AC(void)
+{
+    pal_fill_black();
+    CreateTask(sub_81231C4, 10);
+}
+
+void sub_81231C4(u8 taskId)
+{
+    if (sub_807D770() == TRUE)
+    {
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        EnableBothScriptContexts();
     }
 }

@@ -46,7 +46,6 @@ extern void sub_806C994();
 extern void sub_806BF74();
 extern void sub_806AEDC(void);
 extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);

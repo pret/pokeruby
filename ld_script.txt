@@ -232,7 +232,6 @@ SECTIONS {
         src/battle_811DA74.o(.text);
         asm/battle_message.o(.text);
         src/choose_party.o(.text);
-        asm/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
