@@ -1,20 +1,16 @@
 #include "global.h"
-#include "asm.h"
+#include "mauville_old_man.h"
+#include "easy_chat.h"
 #include "menu.h"
 #include "rng.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"
+#include "trader.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
 
-extern void sub_80F83F8(void);
-extern void sub_81099CC(void);
-extern void sub_80F83D0(void);
-extern void sub_80F7F80(u8);
-extern u16 sub_80EB8EC(void);
-extern void sub_80F7DC0(void);
 extern u32 gUnknown_083E5388[];
 extern u32 gUnknown_083E53A8[];
 

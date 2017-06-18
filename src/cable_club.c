@@ -1,5 +1,5 @@
 #include "global.h"
-#include "asm.h"
+#include "cable_club.h"
 #include "field_message_box.h"
 #include "link.h"
 #include "main.h"
@@ -20,20 +20,9 @@ extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_081A4932[];
 extern const u8 gUnknown_081A4975[];
 
-void sub_8082D4C();
-void sub_8082D60(u8, u8);
-u16 sub_8082D9C(u8, u8);
-u32 sub_8082DF4(u8);
-u32 sub_8082E28(u8);
-u32 sub_8082EB8(u8);
-void sub_8082FEC(u8 taskId);
 static void sub_80830E4(u8 taskId);
-void sub_8083188(u8 taskId);
 static void sub_8083288(u8 taskId);
 static void sub_8083314(u8 taskId);
-void sub_80833C4(u8 taskId);
-void sub_8083418(u8 taskId);
-u8 sub_8083444(u8 taskId);
 
 void sub_808303C(u8 taskId) {
     s32 linkPlayerCount;

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "decompress.h"
-#include "asm.h"
 #include "data2.h"
 #include "species.h"
 #include "text.h"

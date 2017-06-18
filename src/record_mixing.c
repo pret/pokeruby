@@ -1,17 +1,24 @@
 #include "global.h"
 #include "record_mixing.h"
-#include "asm.h"
+#include "battle_tower.h"
+#include "cable_club.h"
+#include "daycare.h"
 #include "dewford_trend.h"
 #include "event_data.h"
+#include "fldeff_80C5CD4.h"
 #include "link.h"
+#include "mauville_old_man.h"
 #include "menu.h"
+#include "mystery_event_script.h"
 #include "rom4.h"
 #include "script.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
+#include "tv.h"
 
 
 extern void *recordMixingSecretBases;
@@ -52,9 +59,6 @@ struct PlayerRecords {
 
 extern struct PlayerRecords unk_2008000;
 extern struct PlayerRecords unk_2018000;
-
-void sub_80BC300();
-void sub_80C045C();
 
 void RecordMixing_PrepareExchangePacket(void)
 {

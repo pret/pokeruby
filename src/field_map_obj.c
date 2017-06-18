@@ -1,23 +1,22 @@
 #include "global.h"
 #include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
-#include "fieldmap.h"
-#include "asm.h"
 #include "berry.h"
 #include "event_data.h"
-#include "field_player_avatar.h"
-#include "field_effect.h"
-#include "field_ground_effect.h"
-#include "palette.h"
-#include "rom4.h"
-#include "rng.h"
-#include "sprite.h"
 #include "field_camera.h"
+#include "field_effect.h"
+#include "field_effect_helpers.h"
+#include "field_ground_effect.h"
+#include "field_map_obj_helpers.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
+#include "palette.h"
+#include "rng.h"
+#include "rom4.h"
+#include "sprite.h"
 #include "metatile_behavior.h"
 #include "map_constants.h"
 #include "map_object_constants.h"
 #include "trainer_see.h"
-#include "field_effect_helpers.h"
 
 // rodata
 
@@ -443,28 +442,11 @@ void sub_80634D0(struct MapObject *, struct Sprite *);
 extern void pal_patch_for_npc(u16, u16);
 extern void CameraObjectReset1(void);
 
-void sub_805AAB0(void);
-u8 GetFieldObjectIdByLocalId(u8);
-u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
-u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
-void RemoveFieldObjectInternal(struct MapObject *);
-u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
-struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
-void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
-void sub_805BDF8(u16);
-u8 sub_805BE58(const struct SpritePalette *);
-u8 FindFieldObjectPaletteIndexByTag(u16);
-
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u8 gReservedSpritePaletteCount;
 extern struct Camera gUnknown_0202E844;
 extern u8 gUnknown_030005A4;
 extern u16 gUnknown_030005A6;
-extern const u8 *const gBerryTreeGraphicsIdTablePointers[];
-extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
-extern const u8 *const gBerryTreePaletteSlotTablePointers[];
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {

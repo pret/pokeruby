@@ -1,10 +1,13 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "asm.h"
 #include "data2.h"
+#include "field_effect.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokemon_icon.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -13,11 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
-
-extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
-extern u8 CreateMonIcon();
-extern void sub_809D51C(void);
-extern void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
+#include "util.h"
 
 extern u16 gKeyRepeatStartDelay;
 
@@ -51,7 +50,6 @@ extern const struct SpriteTemplate gSpriteTemplate_83CE688;
 extern const struct SpriteSheet gUnknown_083CE6A0[];
 extern const struct SpritePalette gUnknown_083CE708[];
 extern const u8 gNamingScreenMenu_Gfx[];
-extern u16 gMenuMessageBoxContentTileOffset;
 extern const u16 gNamingScreenPalettes[];
 extern const u16 gUnknown_083CE748[];
 extern const u16 gUnknown_083CEBF8[];
