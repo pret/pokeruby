@@ -66,10 +66,6 @@ u8 oac_hopping(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 
-extern bool8 (*const gUnknown_08375684[4])(u8);
-extern bool8 (*const gUnknown_08375694[4])(u8);
-
-extern const u8 gUnknown_0837567B[9];
 extern const u8 gUnknown_0837574F[8];
 
 extern const u8 gUnknown_08375757[4][4];
