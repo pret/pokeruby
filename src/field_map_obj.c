@@ -35,8 +35,8 @@ void (*const gCameraObjectFuncs[])(struct Sprite *) = {
     CameraObject_2,
 };
 
-#include "data/map_object_graphics.h"
-#include "data/field_effect_object_graphics.h"
+#include "data/field_map_obj/map_object_graphics.h"
+#include "data/field_map_obj/field_effect_object_graphics.h"
 
 void (*const gUnknown_0836DA88[])(struct Sprite *) =
 {
@@ -122,13 +122,13 @@ void (*const gUnknown_0836DA88[])(struct Sprite *) =
 const u8 gUnknown_0836DBBC[] = {0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 const u8 gUnknown_0836DC09[] = {DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_EAST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH};
 
-#include "data/map_object_graphics_info_pointers.h"
-#include "data/field_effect_object_template_pointers.h"
-#include "data/map_object_pic_tables.h"
-#include "data/map_object_anims.h"
-#include "data/base_oam.h"
-#include "data/map_object_subsprites.h"
-#include "data/map_object_graphics_info.h"
+#include "data/field_map_obj/map_object_graphics_info_pointers.h"
+#include "data/field_map_obj/field_effect_object_template_pointers.h"
+#include "data/field_map_obj/map_object_pic_tables.h"
+#include "data/field_map_obj/map_object_anims.h"
+#include "data/field_map_obj/base_oam.h"
+#include "data/field_map_obj/map_object_subsprites.h"
+#include "data/field_map_obj/map_object_graphics_info.h"
 
 const struct SpritePalette gUnknown_0837377C[] = {
     {gMapObjectPalette0, 0x1103},
@@ -334,8 +334,8 @@ const u16 *const gUnknown_0837399C[] = {
     Unknown_8373988
 };
 
-#include "data/berry_tree_graphics_tables.h"
-#include "data/field_effect_objects.h"
+#include "data/field_map_obj/berry_tree_graphics_tables.h"
+#include "data/field_map_obj/field_effect_objects.h"
 
 const s16 gUnknown_0837520C[] = {0x20, 0x40, 0x60, 0x80};
 const s16 gUnknown_08375204[] = {0x20, 0x40, 0x80, 0xc0};
