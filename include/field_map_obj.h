@@ -66,13 +66,6 @@ u8 oac_hopping(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
 
-extern const u8 gUnknown_0837574F[8];
-
-extern const u8 gUnknown_08375757[4][4];
-extern const u8 gUnknown_08375767[4][4];
-
-extern const struct Coords16 gDirectionToVector[];
-
 extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;

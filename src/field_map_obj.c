@@ -374,7 +374,61 @@ bool8 (*const gUnknown_08375694[])(u8) = {
     MetatileBehavior_IsWestBlocked
 };
 
+const struct Coords16 gDirectionToVector[] = {
+    { 0,  0},
+    { 0,  1},
+    { 0, -1},
+    {-1,  0},
+    { 1,  0},
+    {-1,  1},
+    { 1,  1},
+    {-1, -1},
+    { 1, -1}
+};
 
+const u8 gUnknown_083756C8[] = {0x00, 0x00, 0x01, 0x02, 0x03};
+const u8 gUnknown_083756CD[] = {0x04, 0x04, 0x05, 0x06, 0x07};
+const u8 gUnknown_083756D2[] = {0x08, 0x08, 0x09, 0x0A, 0x0B};
+const u8 gUnknown_083756D7[] = {0x15, 0x15, 0x16, 0x17, 0x18};
+const u8 gUnknown_083756DC[] = {0x29, 0x29, 0x2A, 0x2B, 0x2C};
+const u8 gUnknown_083756E1[] = {0x2D, 0x2D, 0x2E, 0x2F, 0x30};
+const u8 gUnknown_083756E6[] = {0x31, 0x31, 0x32, 0x33, 0x34};
+const u8 gUnknown_083756EB[] = {0x35, 0x35, 0x36, 0x37, 0x38};
+const u8 gUnknown_083756F0[] = {0x0C, 0x0C, 0x0D, 0x0E, 0x0F};
+const u8 gUnknown_083756F5[] = {0x46, 0x46, 0x47, 0x48, 0x49};
+const u8 gUnknown_083756FA[] = {0x4B, 0x4B, 0x4A, 0x4D, 0x4C};
+const u8 gUnknown_083756FF[] = {0x42, 0x42, 0x43, 0x44, 0x45};
+const u8 gUnknown_08375704[] = {0x3A, 0x3A, 0x3B, 0x3C, 0x3D};
+const u8 gUnknown_08375709[] = {0x19, 0x19, 0x1A, 0x1B, 0x1C};
+const u8 gUnknown_0837570E[] = {0x1D, 0x1D, 0x1E, 0x1F, 0x20};
+const u8 gUnknown_08375713[] = {0x21, 0x21, 0x22, 0x23, 0x24};
+const u8 gUnknown_08375718[] = {0x25, 0x25, 0x26, 0x27, 0x28};
+const u8 gUnknown_0837571D[] = {0x62, 0x62, 0x63, 0x64, 0x65};
+const u8 gUnknown_08375722[] = {0x66, 0x66, 0x67, 0x68, 0x69};
+const u8 gUnknown_08375727[] = {0x6A, 0x6A, 0x6B, 0x6C, 0x6D};
+const u8 gUnknown_0837572C[] = {0x6E, 0x6E, 0x6F, 0x70, 0x71};
+const u8 gUnknown_08375731[] = {0x72, 0x72, 0x73, 0x74, 0x75};
+const u8 gUnknown_08375736[] = {0x76, 0x76, 0x77, 0x78, 0x79};
+const u8 gUnknown_0837573B[] = {0x7A, 0x7A, 0x7B, 0x7C, 0x7D};
+const u8 gUnknown_08375740[] = {0x7E, 0x7E, 0x7F, 0x80, 0x81};
+const u8 gUnknown_08375745[] = {0x82, 0x82, 0x83, 0x84, 0x85};
+const u8 gUnknown_0837574A[] = {0x86, 0x86, 0x87, 0x88, 0x89};
+
+const u8 gUnknown_0837574F[] = {2, 1, 4, 3, 8, 7, 6, 5};
+
+const u8 gUnknown_08375757[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {3, 4, 2, 1},
+    {4, 3, 1, 2}
+};
+
+const u8 gUnknown_08375767[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {4, 3, 1, 2},
+    {3, 4, 2, 1}
+};
 
 // text
 
@@ -4210,8 +4264,6 @@ void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback
 }
 
 
-extern const u8 gUnknown_083756C8[5];
-
 u8 GetFaceDirectionAnimId(u8 index)
 {
     u8 directions[5];
@@ -4222,8 +4274,6 @@ u8 GetFaceDirectionAnimId(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756CD[5];
 
 u8 GetSimpleGoAnimId(u8 index)
 {
@@ -4236,8 +4286,6 @@ u8 GetSimpleGoAnimId(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_083756D2[5];
-
 u8 GetGoSpeed0AnimId(u8 index)
 {
     u8 directions[5];
@@ -4248,8 +4296,6 @@ u8 GetGoSpeed0AnimId(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756D7[5];
 
 u8 sub_8060744(u8 index)
 {
@@ -4262,8 +4308,6 @@ u8 sub_8060744(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_083756DC[5];
-
 u8 d2s_08064034(u8 index)
 {
     u8 directions[5];
@@ -4274,8 +4318,6 @@ u8 d2s_08064034(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756E1[5];
 
 u8 sub_806079C(u8 index)
 {
@@ -4288,8 +4330,6 @@ u8 sub_806079C(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_083756E6[5];
-
 u8 sub_80607C8(u8 index)
 {
     u8 directions[5];
@@ -4300,8 +4340,6 @@ u8 sub_80607C8(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756EB[5];
 
 u8 sub_80607F4(u8 index)
 {
@@ -4314,8 +4352,6 @@ u8 sub_80607F4(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_083756F0[5];
-
 u8 GetJumpLedgeAnimId(u8 index)
 {
     u8 directions[5];
@@ -4326,8 +4362,6 @@ u8 GetJumpLedgeAnimId(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756F5[5];
 
 u8 sub_806084C(u8 index)
 {
@@ -4340,8 +4374,6 @@ u8 sub_806084C(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_083756FA[5];
-
 u8 sub_8060878(u8 index)
 {
     u8 directions[5];
@@ -4352,8 +4384,6 @@ u8 sub_8060878(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_083756FF[5];
 
 u8 sub_80608A4(u8 index)
 {
@@ -4366,8 +4396,6 @@ u8 sub_80608A4(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_08375704[5];
-
 u8 sub_80608D0(u8 index)
 {
     u8 directions[5];
@@ -4378,8 +4406,6 @@ u8 sub_80608D0(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_08375709[5];
 
 u8 GetStepInPlaceDelay32AnimId(u8 index)
 {
@@ -4392,8 +4418,6 @@ u8 GetStepInPlaceDelay32AnimId(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_0837570E[5];
-
 u8 GetStepInPlaceDelay16AnimId(u8 index)
 {
     u8 directions[5];
@@ -4405,8 +4429,6 @@ u8 GetStepInPlaceDelay16AnimId(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_08375713[5];
-
 u8 GetStepInPlaceDelay8AnimId(u8 index)
 {
     u8 directions[5];
@@ -4417,8 +4439,6 @@ u8 GetStepInPlaceDelay8AnimId(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_08375718[5];
 
 u8 GetStepInPlaceDelay4AnimId(u8 index)
 {
@@ -4436,8 +4456,6 @@ u8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
     return FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
 }
 
-extern const u8 gUnknown_0837571D[5];
-
 u8 sub_80609D8(u8 index)
 {
     u8 directions[5];
@@ -4448,8 +4466,6 @@ u8 sub_80609D8(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_08375722[5];
 
 u8 sub_8060A04(u8 index)
 {
@@ -4462,8 +4478,6 @@ u8 sub_8060A04(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_08375727[5];
-
 u8 sub_8060A30(u8 index)
 {
     u8 directions[5];
@@ -4474,8 +4488,6 @@ u8 sub_8060A30(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_0837572C[5];
 
 u8 sub_8060A5C(u8 index)
 {
@@ -4488,8 +4500,6 @@ u8 sub_8060A5C(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_08375731[5];
-
 u8 sub_8060A88(u8 index)
 {
     u8 directions[5];
@@ -4500,8 +4510,6 @@ u8 sub_8060A88(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_08375736[5];
 
 u8 sub_8060AB4(u8 index)
 {
@@ -4514,8 +4522,6 @@ u8 sub_8060AB4(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_0837573B[5];
-
 u8 sub_8060AE0(u8 index)
 {
     u8 directions[5];
@@ -4526,8 +4532,6 @@ u8 sub_8060AE0(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_08375740[5];
 
 u8 sub_8060B0C(u8 index)
 {
@@ -4540,8 +4544,6 @@ u8 sub_8060B0C(u8 index)
     return directions[index];
 }
 
-extern const u8 gUnknown_08375745[5];
-
 u8 sub_8060B38(u8 index)
 {
     u8 directions[5];
@@ -4552,8 +4554,6 @@ u8 sub_8060B38(u8 index)
     }
     return directions[index];
 }
-
-extern const u8 gUnknown_0837574A[5];
 
 u8 sub_8060B64(u8 index)
 {
