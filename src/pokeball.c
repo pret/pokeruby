@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "battle.h"
+#include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
 #include "rom_8077ABC.h"
@@ -39,6 +40,8 @@ void sub_8046E7C(struct Sprite *);
 void sub_8046E9C(struct Sprite *);
 void sub_8046FBC(struct Sprite *);
 void sub_8047074(struct Sprite *);
+void sub_80470C4(struct Sprite *);
+void sub_8047230(struct Sprite *);
 void sub_8047254(struct Sprite *);
 void sub_80478DC();
 void sub_804794C(u8);
@@ -514,6 +517,98 @@ void sub_8046E9C(struct Sprite *sprite)
         {
             for (i = 0; i < 12; i++)
                 sub_804794C(i);
+        }
+    }
+}
+
+void sub_8046FBC(struct Sprite *sprite)
+{
+    u8 r7 = sprite->data6;
+
+    sprite->data4++;
+    if (sprite->data4 == 40)
+    {
+        return;
+    }
+    else if (sprite->data4 == 95)
+    {
+        gDoingBattleAnim = 0;
+        m4aMPlayAllStop();
+        PlaySE(BGM_FANFA5);
+    }
+    else if (sprite->data4 == 315)
+    {
+        FreeOamMatrix(gSprites[gObjectBankIDs[sprite->data6]].oam.matrixNum);
+        DestroySprite(&gSprites[gObjectBankIDs[sprite->data6]]);
+        DestroySpriteAndFreeResources(sprite);
+        if (gMain.inBattle)
+            ewram17810[r7].unk0_3 = 0;
+    }
+}
+
+void sub_8047074(struct Sprite *sprite)
+{
+    sprite->data0 = 25;
+    sprite->data2 = sub_8077ABC(sprite->data6, 2);
+    sprite->data4 = sub_8077ABC(sprite->data6, 3) + 0x18;
+    sprite->data5 = -30;
+    sprite->oam.affineParam = sprite->data6;
+    sub_80786EC(sprite);
+    sprite->callback = sub_80470C4;
+}
+
+#define HIBYTE(x) (((x) >> 8) & 0xFF)
+
+void sub_80470C4(struct Sprite *sprite)
+{
+    u32 r6;
+    u32 r7;
+
+    if (HIBYTE(sprite->data7) >= 35 && HIBYTE(sprite->data7) < 80)
+    {
+        s16 r4;
+
+        if ((sprite->oam.affineParam & 0xFF00) == 0)
+        {
+            r6 = sprite->data1 & 1;
+            r7 = sprite->data2 & 1;
+            sprite->data1 = ((sprite->data1 / 3) & ~1) | r6;
+            sprite->data2 = ((sprite->data2 / 3) & ~1) | r7;
+            StartSpriteAffineAnim(sprite, 4);
+        }
+        r4 = sprite->data0;
+        sub_8078B5C(sprite);
+        sprite->data7 += sprite->data6 / 3;
+        sprite->pos2.y += Sin(HIBYTE(sprite->data7), sprite->data5);
+        sprite->oam.affineParam += 0x100;
+        if ((sprite->oam.affineParam >> 8) % 3 != 0)
+            sprite->data0 = r4;
+        else
+            sprite->data0 = r4 - 1;
+        if (HIBYTE(sprite->data7) >= 80)
+        {
+            r6 = sprite->data1 & 1;
+            r7 = sprite->data2 & 1;
+            sprite->data1 = ((sprite->data1 * 3) & ~1) | r6;
+            sprite->data2 = ((sprite->data2 * 3) & ~1) | r7;
+        }
+    }
+    else
+    {
+        if (sub_8078718(sprite))
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.y = 0;
+            sprite->pos2.x = 0;
+            sprite->data6 = sprite->oam.affineParam & 0xFF;
+            sprite->data0 = 0;
+            if (IsDoubleBattle() && ewram17840.unk9_0
+             && sprite->data6 == GetBankByPlayerAI(2))
+                sprite->callback = sub_8047230;
+            else
+                sprite->callback = sub_8046C78;
+            StartSpriteAffineAnim(sprite, 0);
         }
     }
 }
