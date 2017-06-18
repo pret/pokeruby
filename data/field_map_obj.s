@@ -3,14 +3,6 @@
 
 	.section .rodata
 
-	.align 1
-gUnknown_0837520C:: @ 837520C
-	.2byte 0x20, 0x40, 0x60, 0x80, 0x20, 0x40, 0x80, 0xC0
-
-	.align 1
-gUnknown_0837521C:: @ 837521C
-	.2byte 0x20, 0x30, 0x40, 0x50
-
 	.align 2
 gUnknown_08375224:: @ 8375224
 	.4byte sub_805C8F0

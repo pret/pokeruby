@@ -337,6 +337,10 @@ const u16 *const gUnknown_0837399C[] = {
 #include "data/berry_tree_graphics_tables.h"
 #include "data/field_effect_objects.h"
 
+const s16 gUnknown_0837520C[] = {0x20, 0x40, 0x60, 0x80};
+const s16 gUnknown_08375204[] = {0x20, 0x40, 0x80, 0xc0};
+const s16 gUnknown_0837521C[] = {0x20, 0x30, 0x40, 0x50};
+
 // text
 
 extern void strange_npc_table_clear(void);
@@ -1813,8 +1817,6 @@ u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 extern u8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
-extern const s16 gUnknown_0837520C[];
-extern const s16 gUnknown_0837521C[];
 extern void sub_8064820(struct Sprite *, s16);
 
 u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
