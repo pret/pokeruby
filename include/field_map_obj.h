@@ -312,5 +312,11 @@ u8 sub_805FCB4(struct MapObject *, struct Sprite *);
 u8 sub_805FCE8(struct MapObject *, struct Sprite *);
 u8 sub_805FD08(struct MapObject *, struct Sprite *);
 
+u8 get_go_image_anim_num(u8);
+u8 get_go_fast_image_anim_num(u8);
+u8 get_go_fast_image_anim_num(u8);
+u8 get_go_faster_image_anim_num(u8);
+u8 sub_805FD78(u8);
+
 int state_to_direction(u8, u8, u8);
 #endif // GUARD_FIELD_MAP_OBJ_H

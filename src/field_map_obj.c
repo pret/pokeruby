@@ -430,6 +430,8 @@ const u8 gUnknown_08375767[][4] = {
     {3, 4, 2, 1}
 };
 
+#include "data/field_map_obj/anim_func_ptrs.h"
+
 // text
 
 extern void strange_npc_table_clear(void);
@@ -4637,8 +4639,6 @@ _08060C18: .4byte gUnknown_08375767\n\
 }
 #endif
 
-extern u8 (**const gUnknown_08375778[])(struct MapObject *, struct Sprite *);
-
 void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
@@ -4918,9 +4918,6 @@ bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
-
-extern const s16 gUnknown_08375A34[3];
-extern const s16 gUnknown_08375A3A[3];
 
 void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a4, u8 a5)
 {
