@@ -1,11 +1,16 @@
 #include "global.h"
 #include "battle_party_menu.h"
-#include "asm.h"
+#include "battle.h"
+#include "item_menu.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
@@ -64,11 +69,13 @@ extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
 extern void (*gUnknown_03004AE4)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
+extern void nullsub_14();
 
 void sub_8094C98(u8, u8);
+u8 pokemon_order_func(u8);
+
 static void sub_8094998(u8[3], u8);
 static void sub_8094A74(u8[3], u8, u32);
-u8 pokemon_order_func(u8);
 static void sub_8094D60(void);
 static void Task_809527C(u8);
 static void Task_80952B4(u8);

@@ -100,7 +100,7 @@ bool8 sub_8134074(u8 decorIdx)
     return TRUE;
 }
 
-bool8 sub_81340A8(u8 decorIdx)
+s8 sub_81340A8(u8 decorIdx)
 {
     u8 i;
     u8 invIdx;

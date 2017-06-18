@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "items.h"
 #include "main.h"
@@ -17,16 +16,9 @@
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-extern struct Pokemon gPlayerParty[6]; // 0x3004360
-extern struct Pokemon gEnemyParty[6]; // 0x30045C0
-
 extern u8 unk_2000000[];
 extern u16 word_2024E82;
 extern u8 byte_2024E88;
-
-extern u32 gExperienceTables[8][101];
-extern struct BaseStats gBaseStats[];
-extern const u16 *gLevelUpLearnsets[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {

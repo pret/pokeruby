@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDMAPOBJHELP_H
 #define GUARD_FIELDMAPOBJHELP_H
 
+#include "sprite.h"
+
 bool8 FreezeMapObject(struct MapObject *);
 void FreezeMapObjects(void);
 void FreezeMapObjectsExceptOne(u8);

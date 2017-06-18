@@ -1,7 +1,9 @@
 #include "global.h"
 #include "link.h"
-#include "asm.h"
 #include "battle.h"
+#include "berry.h"
+#include "berry_blender.h"
+#include "hall_of_fame.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -75,6 +77,7 @@ static void sub_80083E0(void);
 static void sub_8008454(void);
 static void sub_80084C8(void);
 static void sub_80084F4(void);
+
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);

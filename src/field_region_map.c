@@ -1,17 +1,12 @@
 #include "global.h"
-#include "asm.h"
+#include "field_region_map.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "region_map.h"
 #include "sprite.h"
-#include "text.h"
 #include "strings2.h"
-
-extern void sub_80FA8EC(u32, u8);
-extern void sub_80FAB10(void);
-extern u8 sub_80FAB60(void);
-extern void sub_80FBCF0(u32, u8);
-extern void sub_80FBB3C(u16, u16);
+#include "text.h"
 
 struct RegionMapStruct
 {
@@ -29,12 +24,6 @@ struct UnkStruct
 };
 
 extern struct UnkStruct unk_2000000;
-
-void CB2_FieldInitRegionMap(void);
-void CB2_FieldRegionMap(void);
-void VBlankCB_FieldRegionMap(void);
-void sub_813EFDC(void);
-void sub_813F0C8(void);
 
 void FieldInitRegionMap(MainCallback callback)
 {

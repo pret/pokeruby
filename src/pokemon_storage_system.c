@@ -1,4 +1,5 @@
 #include "global.h"
+#include "pokemon_storage_system.h"
 #include "menu.h"
 #include "string_util.h"
 

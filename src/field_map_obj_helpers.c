@@ -1,14 +1,14 @@
 #include "global.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
+#include "field_map_obj_helpers.h"
 #include "field_effect.h"
+#include "field_ground_effect.h"
+#include "field_map_obj.h"
 #include "sprite.h"
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
 extern u32 gUnknown_0202FF84[];
 
-extern struct UCoords16 gDirectionToVector[];
 extern s16 gUnknown_08376194[];
 extern SpriteStepFunc *gUnknown_08376180[];
 extern s8 *gUnknown_083761D0[];
@@ -76,26 +76,26 @@ void Step1(struct Sprite *sprite, u8 dir)
 
 void Step2(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * gDirectionToVector[dir].x;
-    sprite->pos1.y += 2 * gDirectionToVector[dir].y;
+    sprite->pos1.x += 2 * (u16) gDirectionToVector[dir].x;
+    sprite->pos1.y += 2 * (u16) gDirectionToVector[dir].y;
 }
 
 void Step3(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * gDirectionToVector[dir].x + gDirectionToVector[dir].x;
-    sprite->pos1.y += 2 * gDirectionToVector[dir].y + gDirectionToVector[dir].y;
+    sprite->pos1.x += 2 * (u16) gDirectionToVector[dir].x + (u16) gDirectionToVector[dir].x;
+    sprite->pos1.y += 2 * (u16) gDirectionToVector[dir].y + (u16) gDirectionToVector[dir].y;
 }
 
 void Step4(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 4 * gDirectionToVector[dir].x;
-    sprite->pos1.y += 4 * gDirectionToVector[dir].y;
+    sprite->pos1.x += 4 * (u16) gDirectionToVector[dir].x;
+    sprite->pos1.y += 4 * (u16) gDirectionToVector[dir].y;
 }
 
 void Step8(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 8 * gDirectionToVector[dir].x;
-    sprite->pos1.y += 8 * gDirectionToVector[dir].y;
+    sprite->pos1.x += 8 * (u16) gDirectionToVector[dir].x;
+    sprite->pos1.y += 8 * (u16) gDirectionToVector[dir].y;
 }
 
 void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3)

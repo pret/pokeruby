@@ -1,4 +1,5 @@
 #include "global.h"
+#include "strings.h"
 
 #if ENGLISH
 // placeholder strings
@@ -923,7 +924,6 @@ const u8 gSystemText_NoSaveFileNoTime[] = _("There is no save file, so the time\
 const u8 gSystemText_ClockAdjustmentUsable[] = _("The in-game clock adjustment system\nis now useable.");
 const u8 gSystemText_Saving[] = _("SAVING...\nDON’T TURN OFF THE POWER.");
 #elif GERMAN
-#include "global.h"
 
 // placeholder strings
 const u8 gExpandedPlaceholder_Empty[] = _("");

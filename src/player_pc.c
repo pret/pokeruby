@@ -1,7 +1,10 @@
 #include "global.h"
-#include "asm.h"
+#include "player_pc.h"
+#include "decoration.h"
+#include "field_fadetransition.h"
 #include "field_weather.h"
 #include "item.h"
+#include "item_menu.h"
 #include "items.h"
 #include "main.h"
 #include "menu.h"
@@ -24,7 +27,6 @@ extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
 extern void PauseVerticalScrollIndicator(u8);
 extern void StartVerticalScrollIndicators(int);
-extern void CreateVerticalScrollIndicators(u32, u32, u32); // unknown args
 extern void LoadScrollIndicatorPalette(void);
 extern void ClearMailStruct(struct MailStruct *);
 extern u8 sub_807D770(void);
@@ -179,6 +181,26 @@ static const u16 gUnknown_08406334[3] =
 };
 
 static const u8 gHighlightedMoveToBagFormatText[] = _("{COLOR RED}{STR_VAR_1}");
+
+extern u8 *gUnknown_02039314;
+extern struct MenuAction gUnknown_08406298[];
+
+extern u8 gUnknown_084062B8[];
+extern u8 gUnknown_084062BC[];
+extern u8 gUnknown_0840632A[];
+extern u8 gUnknown_08406327[];
+extern u8 gUnknown_0840631E[];
+extern u8 gUnknown_08406318[];
+
+extern u8 gUnknown_030007B4;
+extern u8 unk_201FE00[];
+
+extern u8 gUnknown_08152850;
+extern u8 gUnknown_08152C75;
+
+extern u32 gUnknown_08406288[];
+extern const struct MenuAction gUnknown_084062C0[];
+extern const struct YesNoFuncTable gUnknown_084062E0;
 
 void NewGameInitPCItems(void)
 {
