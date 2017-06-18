@@ -448,7 +448,7 @@ SECTIONS {
         data/battle_transition.o(.rodata);
         data/battle_811DA74.o(.rodata);
         data/battle_message.o(.rodata);
-        data/choose_party.o(.rodata);
+        src/choose_party.o(.rodata);
         data/cable_car.o(.rodata);
         src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);

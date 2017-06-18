@@ -38,12 +38,7 @@ extern u8 gUnknown_020384F0;
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
-
 extern const u16 gBattleTowerBanlist[];
-extern const struct PartyMenuItem gUnknown_084017B0[];
-extern const struct PartyPopupMenu gUnknown_084017D8[];
-extern const struct PartyMenuItem gUnknown_084017F0[];
-extern const struct PartyPopupMenu gUnknown_08401810[];
 
 extern void OpenPartyMenu();
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
@@ -91,40 +86,39 @@ extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMen
 extern u16 sub_806BD80();
 extern void sub_806BF74();
 
-void sub_8121E58(void);
-bool8 sub_8122030(struct Pokemon *);
-void sub_812238C(u8);
-void sub_8122450(u8);
-void sub_81224A8(u8);
-void sub_8122728(u8);
-void sub_8122838(u8);
-void sub_81228E8(u8);
-void sub_8122950(u8);
-void sub_81229B8(void);
-void sub_8122AB8(u8);
-void sub_8122B10(u8);
-void sub_8122C18(u8);
-void sub_8122EAC(u8);
-void sub_81230F4(u8);
+static void ClearPartySelection(void);
+static bool8 IsMonAllowedInBattleTower(struct Pokemon *);
+static void sub_812238C(u8);
+static void sub_8122450(u8);
+static void sub_81224A8(u8);
+static void sub_8122728(u8);
+static void BattleTowerEntryMenuCallback_Exit(u8);
+static void sub_81228E8(u8);
+static void sub_8122950(u8);
+static void sub_81229B8(void);
+static void sub_8122AB8(u8);
+static void sub_8122B10(u8);
+static void sub_8122C18(u8);
+static void Task_DaycareStorageMenu8122EAC(u8);
 void sub_8123138(u8);
-void sub_8123170(u8);
-void sub_81231AC(void);
+static void sub_8123170(u8);
+static void sub_81231AC(void);
 
 void sub_8121E10(void)
 {
-    sub_8121E58();
+    ClearPartySelection();
     ewram1B000.unk263 = 0;
     OpenPartyMenu(4, 0);
 }
 
 void sub_8121E34(void)
 {
-    sub_8121E58();
+    ClearPartySelection();
     ewram1B000.unk263 = 1;
     OpenPartyMenu(4, 0);
 }
 
-void sub_8121E58(void)
+static void ClearPartySelection(void)
 {
     u8 i;
 
@@ -192,7 +186,7 @@ bool8 sub_8121E78(void)
             }
             if (j == 3)
             {
-                if (sub_8122030(&gPlayerParty[i]) == TRUE)
+                if (IsMonAllowedInBattleTower(&gPlayerParty[i]) == TRUE)
                     sub_806BC3C(i, 0x70);
                 else
                     sub_806BC3C(i, 0x7E);
@@ -217,7 +211,7 @@ bool8 sub_8121E78(void)
 }
 
 #ifdef NONMATCHING
-bool8 sub_8122030(struct Pokemon *pkmn)
+static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
 {
     u16 r3;
     s32 i;
@@ -248,7 +242,7 @@ bool8 sub_8122030(struct Pokemon *pkmn)
 }
 #else
 __attribute__((naked))
-bool8 sub_8122030(struct Pokemon *pkmn)
+static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
 {
     asm_unified(
 	"push {r4,lr}\n\
@@ -329,7 +323,7 @@ _081220C4: .4byte 0x0000ffff\n"
 }
 #endif
 
-u8 sub_81220C8(void)
+static u8 sub_81220C8(void)
 {
     u8 i;
 
@@ -354,38 +348,67 @@ u8 sub_81220C8(void)
     return 0xFF;
 }
 
-bool8 sub_81221CC(u8 a)
+//------------------------------------------------------------------------------
+// Battle Tower Entry Menu
+//------------------------------------------------------------------------------
+
+static void BattleTowerEntryMenuCallback_Summary(u8);
+static void BattleTowerEntryMenuCallback_Enter(u8);
+static void BattleTowerEntryMenuCallback_NoEntry(u8);
+static void BattleTowerEntryMenuCallback_Exit(u8);
+
+static const struct PartyMenuItem sBattleTowerEntryMenuItems[] =
+{
+    {OtherText_Summary, BattleTowerEntryMenuCallback_Summary},
+    {OtherText_Enter2, BattleTowerEntryMenuCallback_Enter},
+    {OtherText_NoEntry, BattleTowerEntryMenuCallback_NoEntry},
+    {gUnknownText_Exit, BattleTowerEntryMenuCallback_Exit},
+};
+
+static const u8 gUnknown_084017D0[] = {1, 0, 3};
+static const u8 gUnknown_084017D3[] = {2, 0, 3};
+static const u8 gUnknown_084017D6[] = {0, 3};
+
+static const struct PartyPopupMenu sBattleTowerEntryMenu[] =
+{
+    {ARRAY_COUNT(gUnknown_084017D0), 9, gUnknown_084017D0},
+    {ARRAY_COUNT(gUnknown_084017D3), 9, gUnknown_084017D3},
+    {ARRAY_COUNT(gUnknown_084017D6), 9, gUnknown_084017D6},
+};
+
+
+static bool8 IsPartyMemberAlreadySelected(u8 partyMember)
 {
     u8 i;
 
     for (i = 0; i < 3; i++)
     {
-        if (gSelectedOrderFromParty[i] == a)
+        if (gSelectedOrderFromParty[i] == partyMember)
             return TRUE;
     }
     return FALSE;
 }
 
-void sub_81221F8(u8 taskId)
+static void sub_81221F8(u8 taskId)
 {
     sub_806D538(5, 1);
-    if (sub_8122030(&gPlayerParty[gLastFieldPokeMenuOpened]) == TRUE)
+    if (IsMonAllowedInBattleTower(&gPlayerParty[gLastFieldPokeMenuOpened]) == TRUE)
     {
-        if (sub_81221CC(gLastFieldPokeMenuOpened + 1) == TRUE)
+        if (IsPartyMemberAlreadySelected(gLastFieldPokeMenuOpened + 1) == TRUE)
         {
             gTasks[taskId].data[4] = 1;
-            sub_806E750(1, gUnknown_084017D8, gUnknown_084017B0, 0);
+            sub_806E750(1, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
         }
         else
         {
             gTasks[taskId].data[4] = 0;
-            sub_806E750(0, gUnknown_084017D8, gUnknown_084017B0, 0);
+            sub_806E750(0, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
         }
     }
     else
     {
         gTasks[taskId].data[4] = 2;
-        sub_806E750(2, gUnknown_084017D8, gUnknown_084017B0, 0);
+        sub_806E750(2, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
     }
 }
 
@@ -412,7 +435,7 @@ void sub_81222B0(u8 taskId)
             break;
         case 2:
             PlaySE(SE_SELECT);
-            sub_8121E58();
+            ClearPartySelection();
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             gTasks[taskId].func = sub_8122450;
             break;
@@ -421,7 +444,7 @@ void sub_81222B0(u8 taskId)
 }
 
 // Handle input
-void sub_812238C(u8 taskId)
+static void sub_812238C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -450,22 +473,22 @@ void sub_812238C(u8 taskId)
             PlaySE(SE_SELECT);
             popupMenuFunc = PartyMenuGetPopupMenuFunc(
               gTasks[taskId].data[4],
-              gUnknown_084017D8,
-              gUnknown_084017B0,
+              sBattleTowerEntryMenu,
+              sBattleTowerEntryMenuItems,
               GetMenuCursorPos());
             popupMenuFunc(taskId);
             return;
         }
         if (gMain.newKeys & B_BUTTON)
         {
-            sub_8122838(taskId);
+            BattleTowerEntryMenuCallback_Exit(taskId);
             return;
         }
     }
 }
 
 // Return from menu?
-void sub_8122450(u8 taskId)
+static void sub_8122450(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -475,13 +498,13 @@ void sub_8122450(u8 taskId)
 }
 
 // Wait for A or B press
-void sub_8122480(u8 taskId)
+static void sub_8122480(u8 taskId)
 {
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
-        sub_8122838(taskId);
+        BattleTowerEntryMenuCallback_Exit(taskId);
 }
 
-void sub_81224A8(u8 taskId)
+static void sub_81224A8(u8 taskId)
 {
     u8 val = sub_81220C8();
 
@@ -507,7 +530,7 @@ void sub_81224A8(u8 taskId)
 }
 
 // CB2 for menu?
-void sub_8122530(void)
+static void sub_8122530(void)
 {
     while (1)
     {
@@ -526,7 +549,7 @@ void sub_8122530(void)
     }
 }
 
-void sub_81225A4(void)
+static void sub_81225A4(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
     sub_806AF4C(4, 0xFF, sub_812238C, 5);
@@ -534,7 +557,7 @@ void sub_81225A4(void)
 }
 
 // Wait for fade, then show summary screen
-void sub_81225D4(u8 taskId)
+static void sub_81225D4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -547,13 +570,13 @@ void sub_81225D4(u8 taskId)
 }
 
 // Summary callback?
-void sub_812265C(u8 taskId)
+static void BattleTowerEntryMenuCallback_Summary(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_81225D4;
 }
 
-void sub_8122694(u8 taskId)
+static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
 {
     u8 i;
 
@@ -565,7 +588,7 @@ void sub_8122694(u8 taskId)
             sub_806BC3C(gLastFieldPokeMenuOpened, i * 14 + 0x1C);
             if (i == 2)
                 sub_806C890(taskId);
-            sub_8122838(taskId);
+            BattleTowerEntryMenuCallback_Exit(taskId);
             return;
         }
     }
@@ -577,7 +600,7 @@ void sub_8122694(u8 taskId)
     gTasks[taskId].func = sub_8122728;
 }
 
-void sub_8122728(u8 taskId)
+static void sub_8122728(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 1)
         return;
@@ -586,11 +609,11 @@ void sub_8122728(u8 taskId)
     {
         MenuZeroFillWindowRect(0, 14, 29, 19);
         HandleDestroyMenuCursors();
-        sub_8122838(taskId);
+        BattleTowerEntryMenuCallback_Exit(taskId);
     }
 }
 
-void sub_8122770(u8 taskId)
+static void BattleTowerEntryMenuCallback_NoEntry(u8 taskId)
 {
     u8 i;
 
@@ -619,10 +642,10 @@ void sub_8122770(u8 taskId)
         sub_806BC3C(gSelectedOrderFromParty[0] - 1, 0x1C);
     if (gSelectedOrderFromParty[1] != 0)
         sub_806BC3C(gSelectedOrderFromParty[1] - 1, 0x2A);
-    sub_8122838(taskId);
+    BattleTowerEntryMenuCallback_Exit(taskId);
 }
 
-void sub_81227FC(u8 taskId)
+static void sub_81227FC(u8 taskId)
 {
     MenuZeroFillWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
@@ -630,7 +653,7 @@ void sub_81227FC(u8 taskId)
     gTasks[taskId].func = sub_81222B0;
 }
 
-void sub_8122838(u8 taskId)
+static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81227FC(taskId);
@@ -663,7 +686,7 @@ bool8 sub_8122854(void)
     return FALSE;
 }
 
-void sub_81228E8(u8 a)
+static void sub_81228E8(u8 a)
 {
     u8 i;
 
@@ -679,7 +702,7 @@ void sub_81228E8(u8 a)
     }
 }
 
-void sub_8122950(u8 a)
+static void sub_8122950(u8 a)
 {
     u8 i;
 
@@ -696,7 +719,7 @@ void sub_8122950(u8 a)
     }
 }
 
-void sub_81229B8(void)
+static void sub_81229B8(void)
 {
     u8 i;
 
@@ -732,7 +755,7 @@ void sub_8122A48(u8 taskId)
     }
 }
 
-void sub_8122AB8(u8 taskId)
+static void sub_8122AB8(u8 taskId)
 {
     sub_806D3B4(taskId, gUnknown_02023A00[1].species, gUnknown_02023A00[2].species);
     if (gTasks[taskId].data[0] == 0)
@@ -743,16 +766,16 @@ void sub_8122AB8(u8 taskId)
     }
 }
 
-void sub_8122B10(u8 taskId)
+static void sub_8122B10(u8 taskId)
 {
     u8 i;
-    
+
     for (i = 0; i < 3; i++)
     {
         if (gUnknown_02023A00[i].species != 0)
         {
             u8 r2;
-            
+
             PartyMenuDoPrintHP(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
             if (gUnknown_02023A00[i].hp == 0)
                 r2 = 7;
@@ -774,7 +797,7 @@ void sub_8122B10(u8 taskId)
     gTasks[taskId].data[0] = 0;
 }
 
-void sub_8122C18(u8 taskId)
+static void sub_8122C18(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 256)
@@ -848,17 +871,41 @@ bool8 unref_sub_8122C60(void)
     return FALSE;
 }
 
-void sub_8122D94(u8 taskId)
+//------------------------------------------------------------------------------
+// Daycare Pokemon Storage Menu
+//------------------------------------------------------------------------------
+
+static void DaycareStorageMenuCallback_Store(u8);
+static void DaycareStorageMenuCallback_Summary(u8);
+static void DaycareStorageMenuCallback_Exit(u8);
+
+static const struct PartyMenuItem sDaycareStorageMenuItems[] =
+{
+    {OtherText_Store, DaycareStorageMenuCallback_Store},
+    {OtherText_Summary, DaycareStorageMenuCallback_Summary},
+    {gUnknownText_Exit, DaycareStorageMenuCallback_Exit},
+};
+
+static const u8 gUnknown_08401808[] = {0, 1, 2};
+static const u8 gUnknown_0840180B[] = {1, 2};
+
+static const struct PartyPopupMenu sDaycareStorageMenus[] =
+{
+    {ARRAY_COUNT(gUnknown_08401808), 9, gUnknown_08401808},
+    {ARRAY_COUNT(gUnknown_0840180B), 9, gUnknown_0840180B},
+};
+
+static void sub_8122D94(u8 taskId)
 {
     if (!GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_IS_EGG))
     {
         gTasks[taskId].data[4] = 0;
-        sub_806E750(0, gUnknown_08401810, gUnknown_084017F0, 0);
+        sub_806E750(0, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
     }
     else
     {
         gTasks[taskId].data[4] = 1;
-        sub_806E750(1, gUnknown_08401810, gUnknown_084017F0, 0);
+        sub_806E750(1, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
     }
 }
 
@@ -873,7 +920,7 @@ void sub_8122E0C(u8 taskId)
             gLastFieldPokeMenuOpened = sub_806CA38(taskId);
             GetMonNickname(&gPlayerParty[gLastFieldPokeMenuOpened], gStringVar1);
             sub_8122D94(taskId);
-            gTasks[taskId].func = sub_8122EAC;
+            gTasks[taskId].func = Task_DaycareStorageMenu8122EAC;
             break;
         case 2:
             PlaySE(SE_SELECT);
@@ -885,7 +932,7 @@ void sub_8122E0C(u8 taskId)
     }
 }
 
-void sub_8122EAC(u8 taskId)
+static void Task_DaycareStorageMenu8122EAC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -914,27 +961,27 @@ void sub_8122EAC(u8 taskId)
             PlaySE(SE_SELECT);
             popupMenuFunc = PartyMenuGetPopupMenuFunc(
               gTasks[taskId].data[4],
-              gUnknown_08401810,
-              gUnknown_084017F0,
+              sDaycareStorageMenus,
+              sDaycareStorageMenuItems,
               GetMenuCursorPos());
             popupMenuFunc(taskId);
             return;
         }
         if (gMain.newKeys & B_BUTTON)
         {
-            sub_81230F4(taskId);
+            DaycareStorageMenuCallback_Exit(taskId);
             return;
         }
     }
 }
 
-void sub_8122F70(u8 taskId)
+static void DaycareStorageMenuCallback_Store(u8 taskId)
 {
     gSpecialVar_0x8004 = gLastFieldPokeMenuOpened;
     sub_8123138(taskId);
 }
 
-void sub_8122F90(void)
+static void sub_8122F90(void)
 {
     while (1)
     {
@@ -953,32 +1000,32 @@ void sub_8122F90(void)
     }
 }
 
-void sub_8123004(void)
+static void sub_8123004(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    sub_806AF4C(6, 0xFF, sub_8122EAC, 5);
+    sub_806AF4C(6, 0xFF, Task_DaycareStorageMenu8122EAC, 5);
     SetMainCallback2(sub_8122F90);
 }
 
-void sub_8123034(u8 taskId)
+static void sub_8123034(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
-        
+
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
         ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, 0);
     }
 }
 
-void sub_81230BC(u8 taskId)
+static void DaycareStorageMenuCallback_Summary(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_8123034;
 }
 
-void sub_81230F4(u8 taskId)
+static void DaycareStorageMenuCallback_Exit(u8 taskId)
 {
     PlaySE(SE_SELECT);
     MenuZeroFillWindowRect(20, 10, 29, 19);
@@ -993,7 +1040,7 @@ void sub_8123138(u8 taskId)
     gTasks[taskId].func = sub_8123170;
 }
 
-void sub_8123170(u8 taskId)
+static void sub_8123170(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1005,7 +1052,7 @@ void sub_8123170(u8 taskId)
 
 // Do these last two functions really belong in here?
 
-void sub_81231C4(u8);
+static void sub_81231C4(u8);
 
 void sub_81231AC(void)
 {
@@ -1013,7 +1060,7 @@ void sub_81231AC(void)
     CreateTask(sub_81231C4, 10);
 }
 
-void sub_81231C4(u8 taskId)
+static void sub_81231C4(u8 taskId)
 {
     if (sub_807D770() == TRUE)
     {
