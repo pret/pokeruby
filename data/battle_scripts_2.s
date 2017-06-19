@@ -52,7 +52,7 @@ BattleScript_1D9EBC: @ 81D9EBC
 	pokemoncatchfunction
 
 gUnknown_081D9EC2:: @ 81D9EC2
-	jumpifhalfword 0, gUnknown_02024C04, 5, BattleScript_1D9ED0
+	jumpifhalfword 0, gLastUsedItem, 5, BattleScript_1D9ED0
 	atk60 11
 
 BattleScript_1D9ED0: @ 81D9ED0
@@ -60,25 +60,25 @@ BattleScript_1D9ED0: @ 81D9ED0
 	capturesomethingf1 BattleScript_1D9EE3
 	printstring BATTLE_TEXT_AddedToDex
 	waitstateatk
-	setbyte gUnknown_02024D1E, 0
+	setbyte gBattleCommunication, 0
 	capturesomethingf2
 
 BattleScript_1D9EE3: @ 81D9EE3
 	printstring BATTLE_TEXT_GiveNickname
 	waitstateatk
-	setbyte gUnknown_02024D1E, 0
+	setbyte gBattleCommunication, 0
 	capturesomethingf3 BattleScript_1D9EF8
 	printstring BATTLE_TEXT_SentToPC
 	waitmessage 64
 
 BattleScript_1D9EF8: @ 81D9EF8
 	catchpoke
-	setbyte gUnknown_02024D26, 7
+	setbyte gBattleOutcome, 7
 	activesidesomething
 
 gUnknown_081D9F00:: @ 81D9F00
 	printstring BATTLE_TEXT_BallCaught2
-	setbyte gUnknown_02024D26, 7
+	setbyte gBattleOutcome, 7
 	activesidesomething
 
 gUnknown_081D9F0A:: @ 81D9F0A
@@ -88,7 +88,7 @@ gUnknown_081D9F0A:: @ 81D9F0A
 	jumpifbyte 1, gNumSafariBalls, 0, BattleScript_1D9F34
 	printstring BATTLE_TEXT_SafariOver
 	waitmessage 64
-	setbyte gUnknown_02024D26, 8
+	setbyte gBattleOutcome, 8
 
 BattleScript_1D9F34: @ 81D9F34
 	atkf6
@@ -112,7 +112,7 @@ BattleScript_1D9F4F: @ 81D9F4F
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
 	atk75
-	orword gUnknown_02024C6C, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_RestoredHealth
@@ -161,7 +161,7 @@ BattleScript_1D9FBB: @ 81D9FBB
 
 BattleScript_1D9FDA: @ 81D9FDA
 	atk54 17
-	setbyte gUnknown_02024D26, 4
+	setbyte gBattleOutcome, 4
 	activesidesomething
 
 BattleScript_1D9FE4: @ 81D9FE4

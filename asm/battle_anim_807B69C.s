@@ -17,7 +17,7 @@ unref_sub_807B69C: @ 807B69C
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _0807B740 @ =gUnknown_02024BE0
+	ldr r0, _0807B740 @ =gObjectBankIDs
 	adds r0, r4, r0
 	ldrb r6, [r0]
 	ldr r0, _0807B744 @ =sub_807B7E0
@@ -89,7 +89,7 @@ _0807B734:
 	bls _0807B6F0
 	b _0807B7BC
 	.align 2, 0
-_0807B740: .4byte gUnknown_02024BE0
+_0807B740: .4byte gObjectBankIDs
 _0807B744: .4byte sub_807B7E0
 _0807B748: .4byte gBattleAnimPicTable + (136 * 8)
 _0807B74C: .4byte gBattleAnimPaletteTable + (136 * 8)

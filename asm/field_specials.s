@@ -1196,11 +1196,11 @@ _0810E2FC: .4byte gOtherText_Son
 
 	thumb_func_start sub_810E300
 sub_810E300: @ 810E300
-	ldr r0, _0810E308 @ =gUnknown_02024D26
+	ldr r0, _0810E308 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0810E308: .4byte gUnknown_02024D26
+_0810E308: .4byte gBattleOutcome
 	thumb_func_end sub_810E300
 
 	thumb_func_start CableCarWarp
@@ -4871,7 +4871,7 @@ sub_810FEFC: @ 810FEFC
 	cmp r0, 0x2
 	bne _0810FF2C
 	bl sub_810FA74
-	ldr r0, _0810FF24 @ =gUnknown_02024D26
+	ldr r0, _0810FF24 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0810FF28
@@ -4879,7 +4879,7 @@ sub_810FEFC: @ 810FEFC
 	b _0810FF2C
 	.align 2, 0
 _0810FF20: .4byte 0x00004095
-_0810FF24: .4byte gUnknown_02024D26
+_0810FF24: .4byte gBattleOutcome
 _0810FF28:
 	bl sub_810FC18
 _0810FF2C:

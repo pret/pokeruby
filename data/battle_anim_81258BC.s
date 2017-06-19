@@ -4,8 +4,8 @@
 	.section .rodata
 
 	.align 2
-gUnknown_08402080:: @ 8402080
-	.4byte sub_812B864
+gSafariBufferCommands:: @ 8402080
+	.4byte SafariHandleGetAttributes
 	.4byte sub_812B870
 	.4byte sub_812B87C
 	.4byte sub_812B888
@@ -21,8 +21,8 @@ gUnknown_08402080:: @ 8402080
 	.4byte sub_812BA14
 	.4byte sub_812BA70
 	.4byte sub_812BA7C
-	.4byte dp01t_10_6_message
-	.4byte dp01t_11_6_message_for_player_only
+	.4byte SafariHandlePrintString
+	.4byte SafariHandlePrintStringPlayerOnly
 	.4byte sub_812BB10
 	.4byte sub_812BBFC
 	.4byte sub_812BC08

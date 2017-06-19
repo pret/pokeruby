@@ -28,33 +28,33 @@ extern u8 gUnknown_020238C4;
 extern u8 gUnknown_020238C5;
 extern u8 gUnknown_020238C6;
 extern u32 gUnknown_020239FC;
-extern u8 gUnknown_02023A60[][0x200];
-extern u8 gUnknown_02024260[][0x200];
-extern u8 gUnknown_02024A60;
-extern u32 gUnknown_02024A64;
-extern u8 gUnknown_02024A68;
-extern u16 gUnknown_02024A6A[];
-extern u8 gUnknown_02024A72[];
-extern u16 gUnknown_02024BE6;
+extern u8 gBattleBufferA[][0x200];
+extern u8 gBattleBufferB[][0x200];
+extern u8 gActiveBank;
+extern u32 gBattleExecBuffer;
+extern u8 gNoOfAllBanks;
+extern u16 gBattlePartyID[];
+extern u8 gBanksBySide[];
+extern u16 gCurrentMove;
 extern u16 gUnknown_02024BE8;
-extern u16 gUnknown_02024C04;
-extern u8 byte_2024C06;
-extern u8 gPlayerMonIndex;
-extern u8 gEnemyMonIndex;
-extern u8 gUnknown_02024C0A;
-extern u8 gUnknown_02024C0B;
-extern u8 gUnknown_02024C0C;
-extern u8 gUnknown_02024C0E;
+extern u16 gLastUsedItem;
+extern u8 gLastUsedAbility;
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
+extern u8 gEffectBank;
+extern u8 gStringBank;
+extern u8 gAbsentBankFlags;
+extern u8 gMultiHitCounter;
 extern u8 gUnknown_02024C78;
-extern u8 gUnknown_02024D26;
-extern u8 gUnknown_02024E60[];
-extern u8 gUnknown_02024E64[];
-extern u8 gUnknown_03004040[];
-extern u8 gUnknown_030041C0[];
-extern u8 gUnknown_03004290[];
-extern u8 gUnknown_030042B0[];
-extern void (*gUnknown_030042D4)(void);
-extern void (*gUnknown_03004330[])(void);
+extern u8 gBattleOutcome;
+extern u8 gActionSelectionCursor[];
+extern u8 gMoveSelectionCursor[];
+extern u8 gBattleBuffersTransferData[];
+extern u8 gBattleTextBuff1[];
+extern u8 gBattleTextBuff2[];
+extern u8 gBattleTextBuff3[];
+extern void (*gBattleMainFunc)(void);
+extern void (*gBattleBankFunc[])(void);
 
 void sub_800B858(void)
 {
@@ -70,16 +70,16 @@ void setup_poochyena_battle(void)
 {
     s32 i;
 
-    gUnknown_030042D4 = nullsub_41;
+    gBattleMainFunc = nullsub_41;
     for (i = 0; i < 4; i++)
     {
-        gUnknown_03004330[i] = nullsub_91;
-        gUnknown_02024A72[i] = 0xFF;
-        gUnknown_02024E60[i] = 0;
-        gUnknown_02024E64[i] = 0;
+        gBattleBankFunc[i] = nullsub_91;
+        gBanksBySide[i] = 0xFF;
+        gActionSelectionCursor[i] = 0;
+        gMoveSelectionCursor[i] = 0;
     }
     sub_800B858();
-    gUnknown_02024A64 = 0;
+    gBattleExecBuffer = 0;
     battle_anim_clear_some_data();
     ClearBattleMonForms();
     BattleAI_HandleItemUseBeforeAISetup();
@@ -105,7 +105,7 @@ void sub_800B950(void)
     sub_800BD54();
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gUnknown_02024A68; i++)
+        for (i = 0; i < gNoOfAllBanks; i++)
             sub_8094978(i, 0);
     }
 }
@@ -114,30 +114,30 @@ void sub_800B9A8(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        gUnknown_030042D4 = sub_8010800;
+        gBattleMainFunc = sub_8010800;
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            gUnknown_03004330[0] = sub_812B468;
+            gBattleBankFunc[0] = SetBankFuncToSafariBufferRunCommand;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-            gUnknown_03004330[0] = sub_8137224;
+            gBattleBankFunc[0] = SetBankFuncToWallyBufferRunCommand;
         else
-            gUnknown_03004330[0] = sub_802BF74;
-        gUnknown_02024A72[0] = 0;
-        gUnknown_03004330[1] = sub_8032AE0;
-        gUnknown_02024A72[1] = 1;
-        gUnknown_02024A68 = 2;
+            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+        gBanksBySide[0] = 0;
+        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBanksBySide[1] = 1;
+        gNoOfAllBanks = 2;
     }
     else
     {
-        gUnknown_030042D4 = sub_8010800;
-        gUnknown_03004330[0] = sub_802BF74;
-        gUnknown_02024A72[0] = 0;
-        gUnknown_03004330[1] = sub_8032AE0;
-        gUnknown_02024A72[1] = 1;
-        gUnknown_03004330[2] = sub_802BF74;
-        gUnknown_02024A72[2] = 2;
-        gUnknown_03004330[3] = sub_8032AE0;
-        gUnknown_02024A72[3] = 3;
-        gUnknown_02024A68 = 4;
+        gBattleMainFunc = sub_8010800;
+        gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+        gBanksBySide[0] = 0;
+        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBanksBySide[1] = 1;
+        gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+        gBanksBySide[2] = 2;
+        gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+        gBanksBySide[3] = 3;
+        gNoOfAllBanks = 4;
     }
 }
 
@@ -150,20 +150,20 @@ void sub_800BA78(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
-            gUnknown_030042D4 = sub_8010800;
-            gUnknown_03004330[0] = sub_802BF74;
-            gUnknown_02024A72[0] = 0;
-            gUnknown_03004330[1] = sub_8037510;
-            gUnknown_02024A72[1] = 1;
-            gUnknown_02024A68 = 2;
+            gBattleMainFunc = sub_8010800;
+            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[0] = 0;
+            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[1] = 1;
+            gNoOfAllBanks = 2;
         }
         else
         {
-            gUnknown_03004330[1] = sub_802BF74;
-            gUnknown_02024A72[1] = 0;
-            gUnknown_03004330[0] = sub_8037510;
-            gUnknown_02024A72[0] = 1;
-            gUnknown_02024A68 = 2;
+            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[1] = 0;
+            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[0] = 1;
+            gNoOfAllBanks = 2;
         }
         return;
     }
@@ -171,35 +171,35 @@ void sub_800BA78(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
-            gUnknown_030042D4 = sub_8010800;
-            gUnknown_03004330[0] = sub_802BF74;
-            gUnknown_02024A72[0] = 0;
-            gUnknown_03004330[1] = sub_8037510;
-            gUnknown_02024A72[1] = 1;
-            gUnknown_03004330[2] = sub_802BF74;
-            gUnknown_02024A72[2] = 2;
-            gUnknown_03004330[3] = sub_8037510;
-            gUnknown_02024A72[3] = 3;
-            gUnknown_02024A68 = 4;
+            gBattleMainFunc = sub_8010800;
+            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[0] = 0;
+            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[1] = 1;
+            gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[2] = 2;
+            gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[3] = 3;
+            gNoOfAllBanks = 4;
         }
         else
         {
-            gUnknown_03004330[1] = sub_802BF74;
-            gUnknown_02024A72[1] = 0;
-            gUnknown_03004330[0] = sub_8037510;
-            gUnknown_02024A72[0] = 1;
-            gUnknown_03004330[3] = sub_802BF74;
-            gUnknown_02024A72[3] = 2;
-            gUnknown_03004330[2] = sub_8037510;
-            gUnknown_02024A72[2] = 3;
-            gUnknown_02024A68 = 4;
+            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[1] = 0;
+            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[0] = 1;
+            gBattleBankFunc[3] = SetBankFuncToPlayerBufferRunCommand;
+            gBanksBySide[3] = 2;
+            gBattleBankFunc[2] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBanksBySide[2] = 3;
+            gNoOfAllBanks = 4;
 
         }
         return;
     }
     multiplayerId = GetMultiplayerId();
     if (gBattleTypeFlags & BATTLE_TYPE_WILD)
-        gUnknown_030042D4 = sub_8010800;
+        gBattleMainFunc = sub_8010800;
     for (i = 0; i < 4; i++)
     {
         switch (gLinkPlayers[i].lp_field_18)
@@ -216,18 +216,18 @@ void sub_800BA78(void)
 
         if (i == multiplayerId)
         {
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_802BF74;
+            gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToPlayerBufferRunCommand;
             switch (gLinkPlayers[i].lp_field_18)
             {
             case 0:
             case 3:
-                gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
+                gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
+                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                 break;
             case 1:
             case 2:
-                gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
+                gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
+                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                 break;
             }
         }
@@ -236,41 +236,41 @@ void sub_800BA78(void)
             if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
              || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
             {
-                gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_811DA78;
+                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkPartnerBufferRunCommand;
                 switch (gLinkPlayers[i].lp_field_18)
                 {
                 case 0:
                 case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
+                    gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
+                    gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
+                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
             else
             {
-                gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_8037510;
+                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkOpponentBufferRunCommand;
                 switch (gLinkPlayers[i].lp_field_18)
                 {
                 case 0:
                 case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 1;
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
+                    gBanksBySide[gLinkPlayers[i].lp_field_18] = 1;
+                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 3;
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
+                    gBanksBySide[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
         }
     }
-    gUnknown_02024A68 = 4;
+    gNoOfAllBanks = 4;
 }
 
 void sub_800BD54(void)
@@ -280,20 +280,20 @@ void sub_800BD54(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gUnknown_02024A68; i++)
+        for (i = 0; i < gNoOfAllBanks; i++)
         {
             for (j = 0; j < 6; j++)
             {
                 if (i < 2)
                 {
-                    if (!(gUnknown_02024A72[i] & 1))
+                    if (!(gBanksBySide[i] & 1))
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gUnknown_02024A6A[i] = j;
+                            gBattlePartyID[i] = j;
                             break;
                         }
                     }
@@ -304,22 +304,22 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gUnknown_02024A6A[i] = j;
+                            gBattlePartyID[i] = j;
                             break;
                         }
                     }
                 }
                 else
                 {
-                    if (!(gUnknown_02024A72[i] & 1))
+                    if (!(gBanksBySide[i] & 1))
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Probably a typo by Game Freak. The rest use SPECIES2
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gUnknown_02024A6A[i - 2] != j)
+                         && gBattlePartyID[i - 2] != j)
                         {
-                            gUnknown_02024A6A[i] = j;
+                            gBattlePartyID[i] = j;
                             break;
                         }
                     }
@@ -329,9 +329,9 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gUnknown_02024A6A[i - 2] != j)
+                         && gBattlePartyID[i - 2] != j)
                         {
-                            gUnknown_02024A6A[i] = j;
+                            gBattlePartyID[i] = j;
                             break;
                         }
                     }
@@ -356,14 +356,14 @@ void dp01_prepare_buffer(u8 a, u8 *b, u16 c)
         case 0:
             for (i = 0; i < c; i++)
             {
-                gUnknown_02023A60[gUnknown_02024A60][i] = *b;
+                gBattleBufferA[gActiveBank][i] = *b;
                 b++;
             }
             break;
         case 1:
             for (i = 0; i < c; i++)
             {
-                gUnknown_02024260[gUnknown_02024A60][i] = *b;
+                gBattleBufferB[gActiveBank][i] = *b;
                 b++;
             }
             break;
@@ -400,13 +400,13 @@ void dp01_prepare_buffer_wireless_probably(u8 a, u16 b, u8 *c)
         gTasks[gUnknown_020238C4].data[14] = 0;
     }
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14000] = a;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14001] = gUnknown_02024A60;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gPlayerMonIndex;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gEnemyMonIndex;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14001] = gActiveBank;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gBankAttacker;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gBankTarget;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14004] = r9;
     unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14005] = (r9 & 0x0000FF00) >> 8;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14006] = gUnknown_02024C0C;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14007] = gUnknown_02024C0A;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14006] = gAbsentBankFlags;
+    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14007] = gEffectBank;
     for (i = 0; i < b; i++)
         unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14008 + i] = c[i];
     gTasks[gUnknown_020238C4].data[14] = gTasks[gUnknown_020238C4].data[14] + r9 + 8;
@@ -538,235 +538,235 @@ void sub_800C47C(u8 taskId)
         switch (unk_2000000[0x15000 + gTasks[taskId].data[15] + 0])
         {
         case 0:
-            if (gUnknown_02024A64 & gBitTable[r4])
+            if (gBattleExecBuffer & gBitTable[r4])
                 return;
-            memcpy(gUnknown_02023A60[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferA[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
             sub_80155A4(r4);
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gPlayerMonIndex = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
-                gEnemyMonIndex = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
-                gUnknown_02024C0C = unk_2000000[0x15000 + gTasks[taskId].data[15] + 6];
-                gUnknown_02024C0A = unk_2000000[0x15000 + gTasks[taskId].data[15] + 7];
+                gBankAttacker = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
+                gBankTarget = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
+                gAbsentBankFlags = unk_2000000[0x15000 + gTasks[taskId].data[15] + 6];
+                gEffectBank = unk_2000000[0x15000 + gTasks[taskId].data[15] + 7];
             }
             break;
         case 1:
-            memcpy(gUnknown_02024260[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferB[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
             break;
         case 2:
             r2 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 8];
-            gUnknown_02024A64 &= ~(gBitTable[r4] << (r2 * 4));
+            gBattleExecBuffer &= ~(gBitTable[r4] << (r2 * 4));
             break;
         }
         gTasks[taskId].data[15] = gTasks[taskId].data[15] + r7 + 8;
     }
 }
 
-void dp01_build_cmdbuf_x00_a_b_0(u8 a, u8 b, u8 c)
+void EmitGetAttributes(u8 a, u8 b, u8 c)
 {
-    gUnknown_03004040[0] = 0;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 0;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c)
 {
-    gUnknown_03004040[0] = 1;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 1;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x02_a_b_varargs(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
-    gUnknown_03004040[0] = 2;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
+    gBattleBuffersTransferData[0] = 2;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
     for (i = 0; i < d; i++)
-        gUnknown_03004040[3 + i] = *(e++);
-    dp01_prepare_buffer(a, gUnknown_03004040, d + 3);
+        gBattleBuffersTransferData[3 + i] = *(e++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, d + 3);
 }
 
 void unref_sub_800C6A4(u8 a, u8 b, u8 c, u8 *d)
 {
     int i;
 
-    gUnknown_03004040[0] = 3;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
+    gBattleBuffersTransferData[0] = 3;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
     for (i = 0; i < c; i++)
-        gUnknown_03004040[3 + i] = *(d++);
-    dp01_prepare_buffer(a, gUnknown_03004040, c + 3);
+        gBattleBuffersTransferData[3 + i] = *(d++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, c + 3);
 }
 
 void dp01_build_cmdbuf_x04_4_4_4(u8 a)
 {
-    gUnknown_03004040[0] = 4;
-    gUnknown_03004040[1] = 4;
-    gUnknown_03004040[2] = 4;
-    gUnknown_03004040[3] = 4;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 4;
+    gBattleBuffersTransferData[1] = 4;
+    gBattleBuffersTransferData[2] = 4;
+    gBattleBuffersTransferData[3] = 4;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void sub_800C704(u8 a, u8 b, u8 c)
 {
-    gUnknown_03004040[0] = 5;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = 5;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 5;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = 5;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x06_a(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 6;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 6;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void dp01_build_cmdbuf_x07_7_7_7(u8 a)
 {
-    gUnknown_03004040[0] = 7;
-    gUnknown_03004040[1] = 7;
-    gUnknown_03004040[2] = 7;
-    gUnknown_03004040[3] = 7;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 7;
+    gBattleBuffersTransferData[1] = 7;
+    gBattleBuffersTransferData[2] = 7;
+    gBattleBuffersTransferData[3] = 7;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x08_8_8_8(u8 a)
 {
-    gUnknown_03004040[0] = 8;
-    gUnknown_03004040[1] = 8;
-    gUnknown_03004040[2] = 8;
-    gUnknown_03004040[3] = 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 8;
+    gBattleBuffersTransferData[1] = 8;
+    gBattleBuffersTransferData[2] = 8;
+    gBattleBuffersTransferData[3] = 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x09_9_9_9(u8 a)
 {
-    gUnknown_03004040[0] = 9;
-    gUnknown_03004040[1] = 9;
-    gUnknown_03004040[2] = 9;
-    gUnknown_03004040[3] = 9;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 9;
+    gBattleBuffersTransferData[1] = 9;
+    gBattleBuffersTransferData[2] = 9;
+    gBattleBuffersTransferData[3] = 9;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x0A_A_A_A(u8 a)
+void EmitFaintAnimation(u8 a)
 {
-    gUnknown_03004040[0] = 10;
-    gUnknown_03004040[1] = 10;
-    gUnknown_03004040[2] = 10;
-    gUnknown_03004040[3] = 10;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 10;
+    gBattleBuffersTransferData[1] = 10;
+    gBattleBuffersTransferData[2] = 10;
+    gBattleBuffersTransferData[3] = 10;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x0B_B_B_B(u8 a)
 {
-    gUnknown_03004040[0] = 11;
-    gUnknown_03004040[1] = 11;
-    gUnknown_03004040[2] = 11;
-    gUnknown_03004040[3] = 11;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 11;
+    gBattleBuffersTransferData[1] = 11;
+    gBattleBuffersTransferData[2] = 11;
+    gBattleBuffersTransferData[3] = 11;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
 {
-    gUnknown_03004040[0] = 12;
-    gUnknown_03004040[1] = 12;
-    gUnknown_03004040[2] = 12;
-    gUnknown_03004040[3] = 12;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 12;
+    gBattleBuffersTransferData[1] = 12;
+    gBattleBuffersTransferData[2] = 12;
+    gBattleBuffersTransferData[3] = 12;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x0D_a(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 13;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 13;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void unref_sub_800C828(u8 a, u8 b, u8 *c)
 {
     int i;
 
-    gUnknown_03004040[0] = 14;
-    gUnknown_03004040[1] = b;
+    gBattleBuffersTransferData[0] = 14;
+    gBattleBuffersTransferData[1] = b;
     for (i = 0; i < b * 3; i++)
-        gUnknown_03004040[2 + i] = *(c++);
-    dp01_prepare_buffer(a, gUnknown_03004040, b * 3 + 2);
+        gBattleBuffersTransferData[2 + i] = *(c++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, b * 3 + 2);
 }
 
-void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
+void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
 {
-    gUnknown_03004040[0] = 15;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
-    gUnknown_03004040[3] = c;
-    gUnknown_03004040[4] = d;
-    gUnknown_03004040[5] = (d & 0xFF00) >> 8;
-    gUnknown_03004040[6] = e;
-    gUnknown_03004040[7] = (e & 0x0000FF00) >> 8;
-    gUnknown_03004040[8] = (e & 0x00FF0000) >> 16;
-    gUnknown_03004040[9] = (e & 0xFF000000) >> 24;
-    gUnknown_03004040[10] = f;
-    gUnknown_03004040[11] = gUnknown_02024C0E;
-    if (sub_8018324(14, 0, 13, 0, 0) == 0 && sub_8018324(14, 0, 0x4D, 0, 0) == 0)
+    gBattleBuffersTransferData[0] = 15;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = c;
+    gBattleBuffersTransferData[4] = d;
+    gBattleBuffersTransferData[5] = (d & 0xFF00) >> 8;
+    gBattleBuffersTransferData[6] = e;
+    gBattleBuffersTransferData[7] = (e & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[8] = (e & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[9] = (e & 0xFF000000) >> 24;
+    gBattleBuffersTransferData[10] = f;
+    gBattleBuffersTransferData[11] = gMultiHitCounter;
+    if (AbilityBattleEffects(14, 0, 13, 0, 0) == 0 && AbilityBattleEffects(14, 0, 0x4D, 0, 0) == 0)
     {
-        gUnknown_03004040[12] = gBattleWeather;
-        gUnknown_03004040[13] = (gBattleWeather & 0xFF00) >> 8;
+        gBattleBuffersTransferData[12] = gBattleWeather;
+        gBattleBuffersTransferData[13] = (gBattleWeather & 0xFF00) >> 8;
     }
     else
     {
-        gUnknown_03004040[12] = 0;
-        gUnknown_03004040[13] = 0;
+        gBattleBuffersTransferData[12] = 0;
+        gBattleBuffersTransferData[13] = 0;
     }
-    gUnknown_03004040[14] = 0;
-    gUnknown_03004040[15] = 0;
-    memcpy(&gUnknown_03004040[16], g, 0x1C);
-    dp01_prepare_buffer(a, gUnknown_03004040, 0x2C);
+    gBattleBuffersTransferData[14] = 0;
+    gBattleBuffersTransferData[15] = 0;
+    memcpy(&gBattleBuffersTransferData[16], g, 0x1C);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 0x2C);
 }
 
 #ifdef NONMATCHING
-void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
+void EmitPrintString(u8 a, u16 b)
 {
     int i;
     //u16 *r12;
 
-    gUnknown_03004040[0] = 16;
-    gUnknown_03004040[1] = gUnknown_02024D26;
-    gUnknown_03004040[2] = b;
-    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = 16;
+    gBattleBuffersTransferData[1] = gBattleOutcome;
+    gBattleBuffersTransferData[2] = b;
+    gBattleBuffersTransferData[3] = (b & 0xFF00) >> 8;
 
-    *((u16 *)&gUnknown_03004040[4]) = gUnknown_02024BE6;
-    *((u16 *)&gUnknown_03004040[6]) = gUnknown_02024BE8;
-    *((u16 *)&gUnknown_03004040[8]) = gUnknown_02024C04;
+    *((u16 *)&gBattleBuffersTransferData[4]) = gCurrentMove;
+    *((u16 *)&gBattleBuffersTransferData[6]) = gUnknown_02024BE8;
+    *((u16 *)&gBattleBuffersTransferData[8]) = gLastUsedItem;
 
-    gUnknown_03004040[10] = byte_2024C06;
-    gUnknown_03004040[11] = unk_2000000[0x16000 + 3];
-    gUnknown_03004040[12] = unk_2000000[0x16000 + 0x5E];
-    gUnknown_03004040[13] = unk_2000000[0x16000 + 0xC1];
-    gUnknown_03004040[14] = gUnknown_02024C0B;
-    gUnknown_03004040[15] = gBattleMoves[gUnknown_02024BE6].type;
+    gBattleBuffersTransferData[10] = gLastUsedAbility;
+    gBattleBuffersTransferData[11] = unk_2000000[0x16000 + 3];
+    gBattleBuffersTransferData[12] = unk_2000000[0x16000 + 0x5E];
+    gBattleBuffersTransferData[13] = unk_2000000[0x16000 + 0xC1];
+    gBattleBuffersTransferData[14] = gStringBank;
+    gBattleBuffersTransferData[15] = gBattleMoves[gCurrentMove].type;
     for (i = 0; i < 4; i++)
     {
-        gUnknown_03004040[16 + i] = gBattleMons[i].ability;
+        gBattleBuffersTransferData[16 + i] = gBattleMons[i].ability;
     }
     for (i = 0; i < 16; i++)
     {
-        gUnknown_03004040[20 + i] = gUnknown_030041C0[i];
-        gUnknown_03004040[36 + i] = gUnknown_03004290[i];
-        gUnknown_03004040[52 + i] = gUnknown_030042B0[i];
+        gBattleBuffersTransferData[20 + i] = gBattleTextBuff1[i];
+        gBattleBuffersTransferData[36 + i] = gBattleTextBuff2[i];
+        gBattleBuffersTransferData[52 + i] = gBattleTextBuff3[i];
     }
-    dp01_prepare_buffer(a, gUnknown_03004040, 0x44);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 0x44);
 }
 #else
 __attribute__((naked))
-void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
+void EmitPrintString(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -779,10 +779,10 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     mov r10, r0\n\
     lsls r1, 16\n\
     lsrs r1, 16\n\
-    ldr r2, _0800CA2C @ =gUnknown_03004040\n\
+    ldr r2, _0800CA2C @ =gBattleBuffersTransferData\n\
     movs r0, 0x10\n\
     strb r0, [r2]\n\
-    ldr r0, _0800CA30 @ =gUnknown_02024D26\n\
+    ldr r0, _0800CA30 @ =gBattleOutcome\n\
     ldrb r0, [r0]\n\
     strb r0, [r2, 0x1]\n\
     strb r1, [r2, 0x2]\n\
@@ -790,17 +790,17 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     strb r1, [r2, 0x3]\n\
     adds r0, r2, 0x4\n\
     mov r12, r0\n\
-    ldr r4, _0800CA34 @ =gUnknown_02024BE6\n\
+    ldr r4, _0800CA34 @ =gCurrentMove\n\
     ldrh r0, [r4]\n\
     strh r0, [r2, 0x4]\n\
     ldr r0, _0800CA38 @ =gUnknown_02024BE8\n\
     ldrh r0, [r0]\n\
     mov r1, r12\n\
     strh r0, [r1, 0x2]\n\
-    ldr r0, _0800CA3C @ =gUnknown_02024C04\n\
+    ldr r0, _0800CA3C @ =gLastUsedItem\n\
     ldrh r0, [r0]\n\
     strh r0, [r1, 0x4]\n\
-    ldr r0, _0800CA40 @ =byte_2024C06\n\
+    ldr r0, _0800CA40 @ =gLastUsedAbility\n\
     ldrb r0, [r0]\n\
     strb r0, [r1, 0x6]\n\
     ldr r1, _0800CA44 @ =0x02000000\n\
@@ -818,7 +818,7 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     ldrb r0, [r1]\n\
     mov r1, r12\n\
     strb r0, [r1, 0x9]\n\
-    ldr r0, _0800CA50 @ =gUnknown_02024C0B\n\
+    ldr r0, _0800CA50 @ =gStringBank\n\
     ldrb r0, [r0]\n\
     strb r0, [r1, 0xA]\n\
     ldr r3, _0800CA54 @ =gBattleMoves\n\
@@ -832,7 +832,7 @@ void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
     strb r0, [r3, 0xB]\n\
     movs r3, 0\n\
     mov r9, r2\n\
-    ldr r7, _0800CA58 @ =gUnknown_030042B0\n\
+    ldr r7, _0800CA58 @ =gBattleTextBuff3\n\
     mov r8, r7\n\
     adds r2, 0x10\n\
     ldr r0, _0800CA5C @ =gBattleMons\n\
@@ -851,12 +851,12 @@ _0800C9D2:\n\
     adds r5, 0x10\n\
     mov r4, r12\n\
     adds r4, 0x20\n\
-    ldr r6, _0800CA60 @ =gUnknown_03004290\n\
+    ldr r6, _0800CA60 @ =gBattleTextBuff2\n\
     mov r2, r12\n\
     adds r2, 0x30\n\
 _0800C9F0:\n\
     adds r1, r5, r3\n\
-    ldr r7, _0800CA64 @ =gUnknown_030041C0\n\
+    ldr r7, _0800CA64 @ =gBattleTextBuff1\n\
     adds r0, r3, r7\n\
     ldrb r0, [r0]\n\
     strb r0, [r1]\n\
@@ -884,27 +884,27 @@ _0800C9F0:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0800CA2C: .4byte gUnknown_03004040\n\
-_0800CA30: .4byte gUnknown_02024D26\n\
-_0800CA34: .4byte gUnknown_02024BE6\n\
+_0800CA2C: .4byte gBattleBuffersTransferData\n\
+_0800CA30: .4byte gBattleOutcome\n\
+_0800CA34: .4byte gCurrentMove\n\
 _0800CA38: .4byte gUnknown_02024BE8\n\
-_0800CA3C: .4byte gUnknown_02024C04\n\
-_0800CA40: .4byte byte_2024C06\n\
+_0800CA3C: .4byte gLastUsedItem\n\
+_0800CA40: .4byte gLastUsedAbility\n\
 _0800CA44: .4byte 0x02000000\n\
 _0800CA48: .4byte 0x00016003\n\
 _0800CA4C: .4byte 0x000160c1\n\
-_0800CA50: .4byte gUnknown_02024C0B\n\
+_0800CA50: .4byte gStringBank\n\
 _0800CA54: .4byte gBattleMoves\n\
-_0800CA58: .4byte gUnknown_030042B0\n\
+_0800CA58: .4byte gBattleTextBuff3\n\
 _0800CA5C: .4byte gBattleMons\n\
-_0800CA60: .4byte gUnknown_03004290\n\
-_0800CA64: .4byte gUnknown_030041C0\n\
+_0800CA60: .4byte gBattleTextBuff2\n\
+_0800CA64: .4byte gBattleTextBuff1\n\
     .syntax divided\n");
 }
 #endif
 
 __attribute__((naked))
-void dp01_build_cmdbuf_x11_TODO()
+void EmitPrintStringPlayerOnly()
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -917,7 +917,7 @@ void dp01_build_cmdbuf_x11_TODO()
     mov r10, r0\n\
     lsls r1, 16\n\
     lsrs r1, 16\n\
-    ldr r2, _0800CB28 @ =gUnknown_03004040\n\
+    ldr r2, _0800CB28 @ =gBattleBuffersTransferData\n\
     movs r0, 0x11\n\
     strb r0, [r2]\n\
     strb r0, [r2, 0x1]\n\
@@ -926,17 +926,17 @@ void dp01_build_cmdbuf_x11_TODO()
     strb r1, [r2, 0x3]\n\
     adds r0, r2, 0x4\n\
     mov r12, r0\n\
-    ldr r0, _0800CB2C @ =gUnknown_02024BE6\n\
+    ldr r0, _0800CB2C @ =gCurrentMove\n\
     ldrh r0, [r0]\n\
     strh r0, [r2, 0x4]\n\
     ldr r0, _0800CB30 @ =gUnknown_02024BE8\n\
     ldrh r0, [r0]\n\
     mov r1, r12\n\
     strh r0, [r1, 0x2]\n\
-    ldr r0, _0800CB34 @ =gUnknown_02024C04\n\
+    ldr r0, _0800CB34 @ =gLastUsedItem\n\
     ldrh r0, [r0]\n\
     strh r0, [r1, 0x4]\n\
-    ldr r0, _0800CB38 @ =byte_2024C06\n\
+    ldr r0, _0800CB38 @ =gLastUsedAbility\n\
     ldrb r0, [r0]\n\
     strb r0, [r1, 0x6]\n\
     ldr r0, _0800CB3C @ =0x02000000\n\
@@ -951,7 +951,7 @@ void dp01_build_cmdbuf_x11_TODO()
     strb r0, [r7, 0x8]\n\
     movs r3, 0\n\
     mov r9, r2\n\
-    ldr r7, _0800CB48 @ =gUnknown_030042B0\n\
+    ldr r7, _0800CB48 @ =gBattleTextBuff3\n\
     mov r8, r7\n\
     mov r4, r9\n\
     adds r4, 0x10\n\
@@ -971,12 +971,12 @@ _0800CACE:\n\
     adds r5, 0x10\n\
     mov r4, r12\n\
     adds r4, 0x20\n\
-    ldr r6, _0800CB50 @ =gUnknown_03004290\n\
+    ldr r6, _0800CB50 @ =gBattleTextBuff2\n\
     mov r2, r12\n\
     adds r2, 0x30\n\
 _0800CAEC:\n\
     adds r1, r5, r3\n\
-    ldr r7, _0800CB54 @ =gUnknown_030041C0\n\
+    ldr r7, _0800CB54 @ =gBattleTextBuff1\n\
     adds r0, r3, r7\n\
     ldrb r0, [r0]\n\
     strb r0, [r1]\n\
@@ -1004,384 +1004,384 @@ _0800CAEC:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0800CB28: .4byte gUnknown_03004040\n\
-_0800CB2C: .4byte gUnknown_02024BE6\n\
+_0800CB28: .4byte gBattleBuffersTransferData\n\
+_0800CB2C: .4byte gCurrentMove\n\
 _0800CB30: .4byte gUnknown_02024BE8\n\
-_0800CB34: .4byte gUnknown_02024C04\n\
-_0800CB38: .4byte byte_2024C06\n\
+_0800CB34: .4byte gLastUsedItem\n\
+_0800CB38: .4byte gLastUsedAbility\n\
 _0800CB3C: .4byte 0x02000000\n\
 _0800CB40: .4byte 0x00016003\n\
 _0800CB44: .4byte 0x0001605e\n\
-_0800CB48: .4byte gUnknown_030042B0\n\
+_0800CB48: .4byte gBattleTextBuff3\n\
 _0800CB4C: .4byte gBattleMons\n\
-_0800CB50: .4byte gUnknown_03004290\n\
-_0800CB54: .4byte gUnknown_030041C0\n\
+_0800CB50: .4byte gBattleTextBuff2\n\
+_0800CB54: .4byte gBattleTextBuff1\n\
     .syntax divided\n");
 }
 
 void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c)
 {
-    gUnknown_03004040[0] = 18;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 18;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void unref_sub_800CB84(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 19;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 19;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void sub_800CBA4(u8 a, u8 b, u8 c, u8 *d)
 {
     u32 i;
 
-    gUnknown_03004040[0] = 20;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = 0;
+    gBattleBuffersTransferData[0] = 20;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = 0;
     for (i = 0; i < 20; i++)
-        gUnknown_03004040[4 + i] = d[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 24);
+        gBattleBuffersTransferData[4 + i] = d[i];
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 24);
 }
 
 void sub_800CBE0(u8 a, u8 *b)
 {
     int i;
 
-    gUnknown_03004040[0] = 21;
+    gBattleBuffersTransferData[0] = 21;
     for (i = 0; i < 3; i++)
-        gUnknown_03004040[1 + i] = b[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+        gBattleBuffersTransferData[1 + i] = b[i];
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
-    gUnknown_03004040[0] = 22;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = d;
+    gBattleBuffersTransferData[0] = 22;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = d;
     for (i = 0; i < 3; i++)
-        gUnknown_03004040[4 + i] = e[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 8);  //but only 7 bytes were written
+        gBattleBuffersTransferData[4 + i] = e[i];
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 8);  //but only 7 bytes were written
 }
 
 void dp01_build_cmdbuf_x17_17_17_17(u8 a)
 {
-    gUnknown_03004040[0] = 23;
-    gUnknown_03004040[1] = 23;
-    gUnknown_03004040[2] = 23;
-    gUnknown_03004040[3] = 23;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 23;
+    gBattleBuffersTransferData[1] = 23;
+    gBattleBuffersTransferData[2] = 23;
+    gBattleBuffersTransferData[3] = 23;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x18_0_aa_health_bar_update(u8 a, s16 b)
+void EmitHealthBarUpdate(u8 a, s16 b)
 {
-    gUnknown_03004040[0] = 24;
-    gUnknown_03004040[1] = 0;
-    gUnknown_03004040[2] = b;
-    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 24;
+    gBattleBuffersTransferData[1] = 0;
+    gBattleBuffersTransferData[2] = b;
+    gBattleBuffersTransferData[3] = (b & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x19_a_bb(u8 a, u8 b, s16 c)
+void EmitExpBarUpdate(u8 a, u8 b, s16 c)
 {
-    gUnknown_03004040[0] = 25;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 25;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x1A_aaaa_bbbb(u8 a, u32 b, u32 c)
+void EmitStatusIconUpdate(u8 a, u32 b, u32 c)
 {
-    gUnknown_03004040[0] = 26;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0x0000FF00) >> 8;
-    gUnknown_03004040[3] = (b & 0x00FF0000) >> 16;
-    gUnknown_03004040[4] = (b & 0xFF000000) >> 24;
-    gUnknown_03004040[5] = c;
-    gUnknown_03004040[6] = (c & 0x0000FF00) >> 8;
-    gUnknown_03004040[7] = (c & 0x00FF0000) >> 16;
-    gUnknown_03004040[8] = (c & 0xFF000000) >> 24;
-    dp01_prepare_buffer(a, gUnknown_03004040, 9);
+    gBattleBuffersTransferData[0] = 26;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[3] = (b & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[4] = (b & 0xFF000000) >> 24;
+    gBattleBuffersTransferData[5] = c;
+    gBattleBuffersTransferData[6] = (c & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[7] = (c & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[8] = (c & 0xFF000000) >> 24;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 9);
 }
 
-void dp01_build_cmdbuf_x1B_aaaa_b(u8 a, u8 b, u32 c)
+void EmitStatusAnimation(u8 a, u8 b, u32 c)
 {
-    gUnknown_03004040[0] = 27;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = (c & 0x0000FF00) >> 8;
-    gUnknown_03004040[4] = (c & 0x00FF0000) >> 16;
-    gUnknown_03004040[5] = (c & 0xFF000000) >> 24;
-    dp01_prepare_buffer(a, gUnknown_03004040, 6);
+    gBattleBuffersTransferData[0] = 27;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = (c & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[4] = (c & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[5] = (c & 0xFF000000) >> 24;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 6);
 }
 
-void dp01_build_cmdbuf_x1C_a(u8 a, u8 b)
+void EmitStatusXor(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 28;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 28;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void dp01_build_cmdbuf_x1D_1D_numargs_varargs(u8 a, u16 b, u8 *c)
 {
     int i;
 
-    gUnknown_03004040[0] = 29;
-    gUnknown_03004040[1] = 29;
-    gUnknown_03004040[2] = b;
-    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = 29;
+    gBattleBuffersTransferData[1] = 29;
+    gBattleBuffersTransferData[2] = b;
+    gBattleBuffersTransferData[3] = (b & 0xFF00) >> 8;
     for (i = 0; i < b; i++)
-        gUnknown_03004040[4 + i] = *(c++);
-    dp01_prepare_buffer(a, gUnknown_03004040, b + 4);
+        gBattleBuffersTransferData[4 + i] = *(c++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 4);
 }
 
 void unref_sub_800CDD4(u8 a, u32 b, u16 c, u8 *d)
 {
     int i;
 
-    gUnknown_03004040[0] = 30;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0x0000FF00) >> 8;
-    gUnknown_03004040[3] = (b & 0x00FF0000) >> 16;
-    gUnknown_03004040[4] = (b & 0xFF000000) >> 24;
-    gUnknown_03004040[5] = c;
-    gUnknown_03004040[6] = (c & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = 30;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[3] = (b & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[4] = (b & 0xFF000000) >> 24;
+    gBattleBuffersTransferData[5] = c;
+    gBattleBuffersTransferData[6] = (c & 0xFF00) >> 8;
     for (i = 0; i < c; i++)
-        gUnknown_03004040[7 + i] = *(d++);
-    dp01_prepare_buffer(a, gUnknown_03004040, c + 7);
+        gBattleBuffersTransferData[7 + i] = *(d++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, c + 7);
 }
 
 void unref_sub_800CE3C(u8 a, u16 b, u8 *c)
 {
     int i;
 
-    gUnknown_03004040[0] = 31;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = 31;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
     for (i = 0; i < b; i++)
-        gUnknown_03004040[3 + i] = *(c++);
-    dp01_prepare_buffer(a, gUnknown_03004040, b + 3);
+        gBattleBuffersTransferData[3 + i] = *(c++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 3);
 }
 
 void unref_sub_800CE84(u8 a, u16 b, u8 *c)
 {
     int i;
 
-    gUnknown_03004040[0] = 32;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = 32;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
     for (i = 0; i < b; i++)
-        gUnknown_03004040[3 + i] = *(c++);
-    dp01_prepare_buffer(a, gUnknown_03004040, b + 3);
+        gBattleBuffersTransferData[3 + i] = *(c++);
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 3);
 }
 
 void dp01_build_cmdbuf_x21_a_bb(u8 a, u8 b, u16 c)
 {
-    gUnknown_03004040[0] = 33;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 33;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, u8 b, u8 *c)
 {
     int i;
 
-    gUnknown_03004040[0] = 34;
-    gUnknown_03004040[1] = b;
+    gBattleBuffersTransferData[0] = 34;
+    gBattleBuffersTransferData[1] = b;
     for (i = 0; i < 3; i++)
-        gUnknown_03004040[2 + i] = c[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 5);
+        gBattleBuffersTransferData[2 + i] = c[i];
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 5);
 }
 
 void dp01_build_cmdbuf_x23_aa_0(u8 a, u16 b)
 {
-    gUnknown_03004040[0] = 35;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 35;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x24_aa_0(u8 a, u16 b)
 {
-    gUnknown_03004040[0] = 36;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 36;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x25_25_25_25(u8 a)
 {
-    gUnknown_03004040[0] = 37;
-    gUnknown_03004040[1] = 37;
-    gUnknown_03004040[2] = 37;
-    gUnknown_03004040[3] = 37;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 37;
+    gBattleBuffersTransferData[1] = 37;
+    gBattleBuffersTransferData[2] = 37;
+    gBattleBuffersTransferData[3] = 37;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x26_a(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 38;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 38;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void dp01_build_cmdbuf_x27_27_27_27(u8 a)
 {
-    gUnknown_03004040[0] = 39;
-    gUnknown_03004040[1] = 39;
-    gUnknown_03004040[2] = 39;
-    gUnknown_03004040[3] = 39;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 39;
+    gBattleBuffersTransferData[1] = 39;
+    gBattleBuffersTransferData[2] = 39;
+    gBattleBuffersTransferData[3] = 39;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x28_28_28_28(u8 a)
 {
-    gUnknown_03004040[0] = 40;
-    gUnknown_03004040[1] = 40;
-    gUnknown_03004040[2] = 40;
-    gUnknown_03004040[3] = 40;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 40;
+    gBattleBuffersTransferData[1] = 40;
+    gBattleBuffersTransferData[2] = 40;
+    gBattleBuffersTransferData[3] = 40;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x29_29_29_29(u8 a)
+void EmitHitAnimation(u8 a)
 {
-    gUnknown_03004040[0] = 41;
-    gUnknown_03004040[1] = 41;
-    gUnknown_03004040[2] = 41;
-    gUnknown_03004040[3] = 41;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 41;
+    gBattleBuffersTransferData[1] = 41;
+    gBattleBuffersTransferData[2] = 41;
+    gBattleBuffersTransferData[3] = 41;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x2A_2A_2A_2A(u8 a)
 {
-    gUnknown_03004040[0] = 42;
-    gUnknown_03004040[1] = 42;
-    gUnknown_03004040[2] = 42;
-    gUnknown_03004040[3] = 42;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 42;
+    gBattleBuffersTransferData[1] = 42;
+    gBattleBuffersTransferData[2] = 42;
+    gBattleBuffersTransferData[3] = 42;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x2B_aa_0(u8 a, u16 b)
+void EmitEffectivenessSound(u8 a, u16 b)
 {
-    gUnknown_03004040[0] = 43;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 43;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void sub_800D074(u8 a, u16 b)
 {
-    gUnknown_03004040[0] = 44;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
-    gUnknown_03004040[3] = 0;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 44;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = 0;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x2D_2D_2D_2D(u8 a)
+void EmitFaintingCry(u8 a)
 {
-    gUnknown_03004040[0] = 45;
-    gUnknown_03004040[1] = 45;
-    gUnknown_03004040[2] = 45;
-    gUnknown_03004040[3] = 45;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 45;
+    gBattleBuffersTransferData[1] = 45;
+    gBattleBuffersTransferData[2] = 45;
+    gBattleBuffersTransferData[3] = 45;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x2E_a(u8 a, u8 b)
+void EmitBattleIntroSlide(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 46;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 46;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a)
 {
-    gUnknown_03004040[0] = 47;
-    gUnknown_03004040[1] = 47;
-    gUnknown_03004040[2] = 47;
-    gUnknown_03004040[3] = 47;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 47;
+    gBattleBuffersTransferData[1] = 47;
+    gBattleBuffersTransferData[2] = 47;
+    gBattleBuffersTransferData[3] = 47;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c)
 {
     int i;
 
-    gUnknown_03004040[0] = 48;
-    gUnknown_03004040[1] = c & 0x7F;
-    gUnknown_03004040[2] = (c & 0x80) >> 7;
-    gUnknown_03004040[3] = 48;
+    gBattleBuffersTransferData[0] = 48;
+    gBattleBuffersTransferData[1] = c & 0x7F;
+    gBattleBuffersTransferData[2] = (c & 0x80) >> 7;
+    gBattleBuffersTransferData[3] = 48;
     for (i = 0; i < 48; i++)
-        gUnknown_03004040[4 + i] = b[i];
-    dp01_prepare_buffer(a, gUnknown_03004040, 52);
+        gBattleBuffersTransferData[4 + i] = b[i];
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 52);
 }
 
 void dp01_build_cmdbuf_x31_31_31_31(u8 a)
 {
-    gUnknown_03004040[0] = 49;
-    gUnknown_03004040[1] = 49;
-    gUnknown_03004040[2] = 49;
-    gUnknown_03004040[3] = 49;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 49;
+    gBattleBuffersTransferData[1] = 49;
+    gBattleBuffersTransferData[2] = 49;
+    gBattleBuffersTransferData[3] = 49;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
 void dp01_build_cmdbuf_x32_32_32_32(u8 a)
 {
-    gUnknown_03004040[0] = 50;
-    gUnknown_03004040[1] = 50;
-    gUnknown_03004040[2] = 50;
-    gUnknown_03004040[3] = 50;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 50;
+    gBattleBuffersTransferData[1] = 50;
+    gBattleBuffersTransferData[2] = 50;
+    gBattleBuffersTransferData[3] = 50;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x33_a_33_33(u8 a, u8 b)
+void EmitSpriteInvisibility(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 51;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = 51;
-    gUnknown_03004040[3] = 51;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 51;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = 51;
+    gBattleBuffersTransferData[3] = 51;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x34_a_bb_aka_battle_anim(u8 a, u8 b, u16 c)
+void EmitBattleAnimation(u8 a, u8 b, u16 c)
 {
-    gUnknown_03004040[0] = 52;
-    gUnknown_03004040[1] = b;
-    gUnknown_03004040[2] = c;
-    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
-    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+    gBattleBuffersTransferData[0] = 52;
+    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void sub_800D1D8(u8 a, u8 b)
+void EmitLinkStandbyMsg(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 53;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 53;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x38_a(u8 a, u8 b)
+void EmitResetActionMoveSelection(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 54;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 54;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
 void dp01_build_cmdbuf_x37_a(u8 a, u8 b)
 {
-    gUnknown_03004040[0] = 55;
-    gUnknown_03004040[1] = b;
-    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+    gBattleBuffersTransferData[0] = 55;
+    gBattleBuffersTransferData[1] = b;
+    dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
