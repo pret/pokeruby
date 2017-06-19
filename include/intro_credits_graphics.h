@@ -1,14 +1,14 @@
 #ifndef GUARD_INTRO_CREDITS_GRAPHICS_H
 #define GUARD_INTRO_CREDITS_GRAPHICS_H
 
-extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
-extern const struct SpriteSheet gIntro2MaySpriteSheet;
-extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
-extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
-extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
+extern const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet;
+extern const struct CompressedSpriteSheet gIntro2MaySpriteSheet;
+extern const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet;
+extern const struct CompressedSpriteSheet gIntro2LatiosSpriteSheet;
+extern const struct CompressedSpriteSheet gIntro2LatiasSpriteSheet;
 extern const struct SpritePalette gIntro2SpritePalettes[];
-extern const struct SpriteSheet gUnknown_08416E24;
-extern const struct SpriteSheet gUnknown_08416E34;
+extern const struct CompressedSpriteSheet gUnknown_08416E24;
+extern const struct CompressedSpriteSheet gUnknown_08416E34;
 
 void load_intro_part2_graphics(/*TODO: arg types*/);
 void sub_8148C78(/*TODO: arg types*/);

@@ -152,7 +152,7 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_VersionBannerRight,
 };
-static const struct SpriteSheet gUnknown_08393EFC[] =
+static const struct CompressedSpriteSheet gUnknown_08393EFC[] =
 {
     {gVersionTiles, 0x1000, 1000},
     {NULL},
@@ -234,7 +234,7 @@ static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PressStartCopyrightBanner,
 };
-static const struct SpriteSheet gUnknown_08393F8C[] =
+static const struct CompressedSpriteSheet gUnknown_08393F8C[] =
 {
     {gTitleScreenPressStart_Gfx, 0x520, 1001},
     {NULL},
@@ -279,7 +279,7 @@ static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PokemonLogoShine,
 };
-static const struct SpriteSheet sPokemonLogoShineSpriteSheet[] =
+static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 {
     {sLogoShineTiles, 0x800, 1002},
     {NULL},

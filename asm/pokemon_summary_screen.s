@@ -8398,7 +8398,7 @@ sub_80A1DE8: @ 80A1DE8
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _080A1E48 @ =gSpriteTemplate_820AAB4
+	ldr r1, _080A1E48 @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x6
 	movs r2, 0x88
@@ -8429,7 +8429,7 @@ sub_80A1DE8: @ 80A1DE8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1E48: .4byte gSpriteTemplate_820AAB4
+_080A1E48: .4byte gBallSpriteTemplates
 _080A1E4C: .4byte 0x02018000
 _080A1E50: .4byte gSprites
 _080A1E54: .4byte SpriteCallbackDummy
