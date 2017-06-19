@@ -58,8 +58,8 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 
 extern const u16 gUnknown_081C7160[];
 extern const u8 *const gBattleAnims_Moves[];
-extern const struct SpriteSheet gBattleAnimPicTable[];
-extern const struct SpritePalette gBattleAnimPaletteTable[];
+extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
+extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
 
 static void RunAnimScriptCommand(void);

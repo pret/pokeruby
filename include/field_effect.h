@@ -72,14 +72,12 @@ enum FieldEffectScriptIdx
     FLDEFF_USE_TELEPORT
 };
 
-extern const struct SpritePalette gTrainerFrontPicPaletteTable[2];
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[2];
 extern const struct SpritePalette gUnknown_0839F114;
-extern const struct SpriteSheet gTrainerFrontPicTable[2];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[2];
 extern const struct SpriteTemplate gSpriteTemplate_839F128;
 extern const struct OamData gOamData_839F0F4;
 extern struct SpriteTemplate gUnknown_02024E8C;
-
-extern const struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 extern u8 gLastFieldPokeMenuOpened;
 

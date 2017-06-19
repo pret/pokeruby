@@ -2,6 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "battle.h"
 #include "decompress.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "pokeball.h"
@@ -23,10 +24,276 @@ extern u8 gObjectBankIDs[];
 extern u8 gDoingBattleAnim;
 extern u8 gHealthboxIDs[];
 
-extern const struct SpriteSheet gUnknown_0820A92C[];
-extern const struct SpritePalette gUnknown_0820A98C[];
-extern const struct SpriteTemplate gSpriteTemplate_820AAB4[];
-extern const u8 gUnknown_08D030D0[];
+#define GFX_TAG_POKEBALL    55000
+#define GFX_TAG_GREATBALL   55001
+#define GFX_TAG_SAFARIBALL  55002
+#define GFX_TAG_ULTRABALL   55003
+#define GFX_TAG_MASTERBALL  55004
+#define GFX_TAG_NETBALL     55005
+#define GFX_TAG_DIVEBALL    55006
+#define GFX_TAG_NESTBALL    55007
+#define GFX_TAG_REPEATBALL  55008
+#define GFX_TAG_TIMERBALL   55009
+#define GFX_TAG_LUXURYBALL  55010
+#define GFX_TAG_PREMIERBALL 55011
+
+static const struct CompressedSpriteSheet sBallSpriteSheets[] =
+{
+    {gInterfaceGfx_PokeBall,    384, GFX_TAG_POKEBALL},
+    {gInterfaceGfx_GreatBall,   384, GFX_TAG_GREATBALL},
+    {gInterfaceGfx_SafariBall,  384, GFX_TAG_SAFARIBALL},
+    {gInterfaceGfx_UltraBall,   384, GFX_TAG_ULTRABALL},
+    {gInterfaceGfx_MasterBall,  384, GFX_TAG_MASTERBALL},
+    {gInterfaceGfx_NetBall,     384, GFX_TAG_NETBALL},
+    {gInterfaceGfx_DiveBall,    384, GFX_TAG_DIVEBALL},
+    {gInterfaceGfx_NestBall,    384, GFX_TAG_NESTBALL},
+    {gInterfaceGfx_RepeatBall,  384, GFX_TAG_REPEATBALL},
+    {gInterfaceGfx_TimerBall,   384, GFX_TAG_TIMERBALL},
+    {gInterfaceGfx_LuxuryBall,  384, GFX_TAG_LUXURYBALL},
+    {gInterfaceGfx_PremierBall, 384, GFX_TAG_PREMIERBALL},
+};
+
+static const struct CompressedSpritePalette sBallSpritePalettes[] =
+{
+    {gInterfacePal_PokeBall,    GFX_TAG_POKEBALL},
+    {gInterfacePal_GreatBall,   GFX_TAG_GREATBALL},
+    {gInterfacePal_SafariBall,  GFX_TAG_SAFARIBALL},
+    {gInterfacePal_UltraBall,   GFX_TAG_ULTRABALL},
+    {gInterfacePal_MasterBall,  GFX_TAG_MASTERBALL},
+    {gInterfacePal_NetBall,     GFX_TAG_NETBALL},
+    {gInterfacePal_DiveBall,    GFX_TAG_DIVEBALL},
+    {gInterfacePal_NestBall,    GFX_TAG_NESTBALL},
+    {gInterfacePal_RepeatBall,  GFX_TAG_REPEATBALL},
+    {gInterfacePal_TimerBall,   GFX_TAG_TIMERBALL},
+    {gInterfacePal_LuxuryBall,  GFX_TAG_LUXURYBALL},
+    {gInterfacePal_PremierBall, GFX_TAG_PREMIERBALL},
+};
+
+static const struct OamData sBallOamData =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sBallAnimSeq3[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq5[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq4[] =
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq6[] =
+{
+    ANIMCMD_FRAME(12, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq0[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBallAnimSeq1[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBallAnimSeq2[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sBallAnimSequences[] =
+{
+    sBallAnimSeq0,
+    sBallAnimSeq1,
+    sBallAnimSeq2,
+    
+    // unused?
+    sBallAnimSeq3,
+    sBallAnimSeq4,
+    sBallAnimSeq5,
+    sBallAnimSeq6,
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq0[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq1[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -3, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq2[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 3, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq3[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq4[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 25, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd *const sBallAffineAnimSequences[] =
+{
+    sBallAffineAnimSeq0,
+    sBallAffineAnimSeq1,
+    sBallAffineAnimSeq2,
+    sBallAffineAnimSeq3,
+    sBallAffineAnimSeq4,
+};
+
+static void objc_0804ABD4(struct Sprite *sprite);
+const struct SpriteTemplate gBallSpriteTemplates[] =
+{
+    {
+        .tileTag = GFX_TAG_POKEBALL,
+        .paletteTag = GFX_TAG_POKEBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_GREATBALL,
+        .paletteTag = GFX_TAG_GREATBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_SAFARIBALL,
+        .paletteTag = GFX_TAG_SAFARIBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_ULTRABALL,
+        .paletteTag = GFX_TAG_ULTRABALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_MASTERBALL,
+        .paletteTag = GFX_TAG_MASTERBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_NETBALL,
+        .paletteTag = GFX_TAG_NETBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_DIVEBALL,
+        .paletteTag = GFX_TAG_DIVEBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_NESTBALL,
+        .paletteTag = GFX_TAG_NESTBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_REPEATBALL,
+        .paletteTag = GFX_TAG_REPEATBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_TIMERBALL,
+        .paletteTag = GFX_TAG_TIMERBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_LUXURYBALL,
+        .paletteTag = GFX_TAG_LUXURYBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+    {
+        .tileTag = GFX_TAG_PREMIERBALL,
+        .paletteTag = GFX_TAG_PREMIERBALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = objc_0804ABD4,
+    },
+};
 
 extern u32 ball_number_to_ball_processing_index(u16);  // not sure of return type
 extern void sub_80786EC();
@@ -95,7 +362,7 @@ static void sub_8046464(u8 taskId)
         ball = GetMonData(&gPlayerParty[gBattlePartyID[r5]], MON_DATA_POKEBALL);
     r4 = ball_number_to_ball_processing_index(ball);
     sub_80478DC(r4);
-    spriteId = CreateSprite(&gSpriteTemplate_820AAB4[r4], 32, 80, 0x1D);
+    spriteId = CreateSprite(&gBallSpriteTemplates[r4], 32, 80, 0x1D);
     gSprites[spriteId].data0 = 0x80;
     gSprites[spriteId].data1 = 0;
     gSprites[spriteId].data7 = r8;
@@ -103,13 +370,13 @@ static void sub_8046464(u8 taskId)
     {
     case 0xFF:
         gBankTarget = r5;
-        gSprites[spriteId].pos1.x = 0x18;
-        gSprites[spriteId].pos1.y = 0x44;
+        gSprites[spriteId].pos1.x = 24;
+        gSprites[spriteId].pos1.y = 68;
         gSprites[spriteId].callback = sub_8047074;
         break;
     case 0xFE:
         gSprites[spriteId].pos1.x = sub_8077ABC(r5, 0);
-        gSprites[spriteId].pos1.y = sub_8077ABC(r5, 1) + 0x18;
+        gSprites[spriteId].pos1.y = sub_8077ABC(r5, 1) + 24;
         gBankTarget = r5;
         gSprites[spriteId].data0 = 0;
         gSprites[spriteId].callback = sub_8047254;
@@ -136,7 +403,7 @@ static void sub_8046464(u8 taskId)
     PlaySE(SE_NAGERU);
 }
 
-void objc_0804ABD4(struct Sprite *sprite)
+static void objc_0804ABD4(struct Sprite *sprite)
 {
     if (sub_8078718(sprite))
     {
@@ -563,7 +830,7 @@ static void sub_8047074(struct Sprite *sprite)
 {
     sprite->data0 = 25;
     sprite->data2 = sub_8077ABC(sprite->data6, 2);
-    sprite->data4 = sub_8077ABC(sprite->data6, 3) + 0x18;
+    sprite->data4 = sub_8077ABC(sprite->data6, 3) + 24;
     sprite->data5 = -30;
     sprite->oam.affineParam = sprite->data6;
     sub_80786EC(sprite);
@@ -628,7 +895,7 @@ static void sub_80470C4(struct Sprite *sprite)
 
 static void sub_8047230(struct Sprite *sprite)
 {
-    if (sprite->data0++ > 0x18)
+    if (sprite->data0++ > 24)
     {
         sprite->data0 = 0;
         sprite->callback = sub_8046C78;
@@ -663,9 +930,9 @@ void CreatePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 e, u8 f, u8 g, u32 h)
 {
     u8 spriteId;
 
-    LoadCompressedObjectPic(&gUnknown_0820A92C[0]);
-    LoadCompressedObjectPalette(&gUnknown_0820A98C[0]);
-    spriteId = CreateSprite(&gSpriteTemplate_820AAB4[0], x, y, f);
+    LoadCompressedObjectPic(&sBallSpriteSheets[0]);
+    LoadCompressedObjectPalette(&sBallSpritePalettes[0]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, f);
     gSprites[spriteId].data0 = a;
     gSprites[spriteId].data5 = gSprites[a].pos1.x;
     gSprites[spriteId].data6 = gSprites[a].pos1.y;
@@ -752,9 +1019,9 @@ u8 sub_8047580(u8 a, u8 b, u8 x, u8 y, u8 e, u8 f, u8 g, u32 h)
 {
     u8 spriteId;
 
-    LoadCompressedObjectPic(&gUnknown_0820A92C[0]);
-    LoadCompressedObjectPalette(&gUnknown_0820A98C[0]);
-    spriteId = CreateSprite(&gSpriteTemplate_820AAB4[0], x, y, f);
+    LoadCompressedObjectPic(&sBallSpriteSheets[0]);
+    LoadCompressedObjectPalette(&sBallSpritePalettes[0]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, f);
     gSprites[spriteId].data0 = a;
     gSprites[spriteId].data1 = g;
     gSprites[spriteId].data2 = b;
@@ -893,10 +1160,10 @@ void sub_80478DC(u8 a)
 {
     u16 var;
 
-    if (GetSpriteTileStartByTag(gUnknown_0820A92C[a].tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(sBallSpriteSheets[a].tag) == 0xFFFF)
     {
-        LoadCompressedObjectPic(&gUnknown_0820A92C[a]);
-        LoadCompressedObjectPalette(&gUnknown_0820A98C[a]);
+        LoadCompressedObjectPic(&sBallSpriteSheets[a]);
+        LoadCompressedObjectPalette(&sBallSpritePalettes[a]);
     }
     switch (a)
     {
@@ -905,7 +1172,7 @@ void sub_80478DC(u8 a)
     case 11:
         break;
     default:
-        var = GetSpriteTileStartByTag(gUnknown_0820A92C[a].tag);
+        var = GetSpriteTileStartByTag(sBallSpriteSheets[a].tag);
         LZDecompressVram(gUnknown_08D030D0, (void *)(VRAM + 0x10100 + var * 32));
         break;
     }
@@ -913,8 +1180,8 @@ void sub_80478DC(u8 a)
 
 void sub_804794C(u8 a)
 {
-    FreeSpriteTilesByTag(gUnknown_0820A92C[a].tag);
-    FreeSpritePaletteByTag(gUnknown_0820A98C[a].tag);
+    FreeSpriteTilesByTag(sBallSpriteSheets[a].tag);
+    FreeSpritePaletteByTag(sBallSpritePalettes[a].tag);
 }
 
 static u16 sub_8047978(u8 a)

@@ -55,21 +55,21 @@ extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_Unknown1[];
 extern const u8 *const gBattleAnims_Unknown2[];
-extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
-extern const struct SpritePalette gTrainerFrontPicPaletteTable[];
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const u8 gSubstituteDollTilemap[];
 extern const u8 gSubstituteDollGfx[];
 extern const u8 gSubstituteDollPal[];
-extern const struct SpriteSheet gUnknown_081FAF24;
+extern const struct CompressedSpriteSheet gUnknown_081FAF24;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF34;
 extern void (*const gOpponentBufferCommands[])(void);
-extern const struct SpriteSheet gUnknown_0820A47C;
-extern const struct SpriteSheet gUnknown_0820A484;
-extern const struct SpriteSheet gUnknown_0820A48C[];
-extern const struct SpriteSheet gUnknown_0820A49C[];
-extern const struct SpriteSheet gUnknown_0820A4AC;
-extern const struct SpriteSheet gUnknown_0820A4B4[];
+extern const struct CompressedSpriteSheet gUnknown_0820A47C;
+extern const struct CompressedSpriteSheet gUnknown_0820A484;
+extern const struct CompressedSpriteSheet gUnknown_0820A48C[];
+extern const struct CompressedSpriteSheet gUnknown_0820A49C[];
+extern const struct CompressedSpriteSheet gUnknown_0820A4AC;
+extern const struct CompressedSpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
 extern const u8 gUnknown_08D09C48[];
 
@@ -84,10 +84,8 @@ extern u8 sub_8078874(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
-extern const u16 *pokemon_get_pal(struct Pokemon *);
 extern void sub_80105DC(struct Sprite *);
 extern void move_anim_start_t2();
-extern const u16 *species_and_otid_get_pal();
 
 void sub_80315E8(u8);
 u8 sub_803163C(u8);
@@ -283,7 +281,7 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
     u32 otId;
     u8 var;
     u16 paletteOffset;
-    const u16 *palette;
+    const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
     if (ewram17800[b].unk2 == 0)
@@ -308,16 +306,16 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
       r7);
     paletteOffset = 0x100 + b * 16;
     if (ewram17800[b].unk2 == 0)
-        palette = pokemon_get_pal(pkmn);
+        lzPaletteData = pokemon_get_pal(pkmn);
     else
-        palette = species_and_otid_get_pal(species, otId, personalityValue);
-    sub_800D238(palette, ewram);
+        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
+    sub_800D238(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
     LoadPalette(ewram, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        sub_800D238(palette, ewram + 0x16400);
+        sub_800D238(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].unk2 != 0)
@@ -335,7 +333,7 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
     u32 otId;
     u8 var;
     u16 paletteOffset;
-    const u16 *palette;
+    const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
     if (ewram17800[b].unk2 == 0)
@@ -360,16 +358,16 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
       r7);
     paletteOffset = 0x100 + b * 16;
     if (ewram17800[b].unk2 == 0)
-        palette = pokemon_get_pal(pkmn);
+        lzPaletteData = pokemon_get_pal(pkmn);
     else
-        palette = species_and_otid_get_pal(species, otId, personalityValue);
-    sub_800D238(palette, ewram);
+        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
+    sub_800D238(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
     LoadPalette(ewram, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        sub_800D238(palette, ewram + 0x16400);
+        sub_800D238(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].unk2 != 0)
@@ -390,7 +388,7 @@ void nullsub_9(u16 unused)
 void sub_8031A6C(u16 a, u8 b)
 {
     u8 status;
-    struct SpriteSheet spriteSheet;
+    struct CompressedSpriteSheet spriteSheet;
 
     status = GetBankIdentity(b);
     DecompressPicFromTable_2(
@@ -624,7 +622,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
     u32 personalityValue;
     u32 otId;
     u8 r10;
-    const u16 *palette;
+    const u8 *lzPaletteData;
 
     if (c)
     {
@@ -697,14 +695,14 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         dst = (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + a * 16;
-        palette = species_and_otid_get_pal(species, otId, personalityValue);
-        sub_800D238(palette, ewram);
+        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
+        sub_800D238(lzPaletteData, ewram);
         LoadPalette(ewram, paletteOffset, 32);
         if (species == SPECIES_CASTFORM)
         {
             u16 *paletteSrc = (u16 *)(ewram + 0x16400);
 
-            sub_800D238(palette, paletteSrc);
+            sub_800D238(lzPaletteData, paletteSrc);
             LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
         }
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
