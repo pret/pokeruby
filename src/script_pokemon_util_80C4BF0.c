@@ -1,9 +1,13 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
 #include "berry.h"
+#include "choose_party.h"
 #include "contest.h"
+#include "contest_link_80C2020.h"
+#include "contest_painting.h"
 #include "data2.h"
+#include "daycare.h"
+#include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "items.h"
@@ -22,19 +26,7 @@
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
-extern void sub_80C46EC(void);
-extern void sub_80C4740(void);
-extern void sub_80C48F4(void);
-extern void sub_80B2A7C(u8);
-extern void sub_80AAF30(void); // matsuda debug?
-extern u8 sub_80B2C4C(u8, u8);
-extern void CB2_ContestPainting(void);
-extern void sub_8042044(struct Pokemon *mon, u16, u8);
-extern void sub_8121E10(void);
-extern void sub_8121E34(void);
-
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
@@ -436,7 +428,7 @@ void ShowContestEntryMonPic(void)
         HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
         gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
         (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
-        paletteData = sub_80409C8(species, var2, var1);
+        paletteData = (struct SpritePalette *) sub_80409C8(species, var2, var1);
         LoadCompressedObjectPalette(paletteData);
         GetMonSpriteTemplate_803C56C(species, 1);
         gUnknown_02024E8C.paletteTag = paletteData->tag;
@@ -560,16 +552,16 @@ u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
     nationalSpecies = SpeciesToNationalPokedexNum(species);
 
     // nested if check to fool compiler
-    if(sentToPc < 2)
+    switch(sentToPc)
     {
-        if(sentToPc >= 0)
-        {
-            // set both the seen and caught flags
-            sub_8090D90(nationalSpecies, 2);
-            sub_8090D90(nationalSpecies, 3);
-        }
+        case 0:
+        case 1:
+            GetNationalPokedexFlag(nationalSpecies, 2);
+            GetNationalPokedexFlag(nationalSpecies, 3);
+            return sentToPc;
+        default:
+            return sentToPc;
     }
-    return sentToPc;
 }
 
 u8 ScriptGiveEgg(u16 value)

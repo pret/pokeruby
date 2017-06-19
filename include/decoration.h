@@ -1,6 +1,8 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
+#include "task.h"
+
 enum DecoId {
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
@@ -262,7 +264,7 @@ extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
 extern u8 gUnknown_02039234;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern const struct YesNoFuncTable gUnknown_083EC96C[];
 extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 
@@ -372,5 +374,6 @@ void sub_8100FB4(u8);
 void sub_810153C(u8);
 void sub_8101590(u8);
 void sub_8101848(u8);
+void DoPlayerPCDecoration(u8);
 
 #endif // GUARD_DECORATION_H

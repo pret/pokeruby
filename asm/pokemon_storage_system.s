@@ -931,7 +931,7 @@ _08095FA2:
 _08095FC0: .4byte gMain
 _08095FC4: .4byte gUnknown_083B600C
 _08095FC8:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xD
@@ -1171,7 +1171,7 @@ sub_80961A8: @ 80961A8
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x5]
 	strb r0, [r1]
-	ldr r1, _080961CC @ =gUnknown_0300485C
+	ldr r1, _080961CC @ =gFieldCallback
 	ldr r0, _080961D0 @ =sub_8096130
 	str r0, [r1]
 	ldr r0, _080961D4 @ =c2_exit_to_overworld_2_switch
@@ -1181,7 +1181,7 @@ sub_80961A8: @ 80961A8
 	.align 2, 0
 _080961C4: .4byte gUnknown_02038474
 _080961C8: .4byte gUnknown_083B6DB4
-_080961CC: .4byte gUnknown_0300485C
+_080961CC: .4byte gFieldCallback
 _080961D0: .4byte sub_8096130
 _080961D4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80961A8
@@ -5915,7 +5915,7 @@ sub_8098A38: @ 8098A38
 	thumb_func_start sub_8098A5C
 sub_8098A5C: @ 8098A5C
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0xA
 	movs r1, 0x10
 	movs r2, 0x1D
@@ -14831,7 +14831,7 @@ _0809CF8E:
 	negs r0, r0
 	cmp r5, r0
 	beq _0809CFB2
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r0, _0809CFD0 @ =gUnknown_083B6DB4
 	ldr r1, [r0]
 	ldr r2, _0809CFD4 @ =0x000011ba

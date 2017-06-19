@@ -1,42 +1,30 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
 #include "battle_interface.h"
 #include "data2.h"
+#include "battle_811DA74.h"
+#include "battle_anim_813F0F4.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "pokemon.h"
+#include "rom3.h"
+#include "rom_8077ABC.h"
 #include "sound.h"
 #include "songs.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
+#include "util.h"
 
 struct UnknownStruct1
 {
     u8 unk0;
     u8 unk1;
     u8 unk2[0x1FE];
-};
-
-struct UnknownStruct2
-{
-    u8 unk0_0:1;
-    u8 unk0_1:2;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 filler2[2];
-    u8 unk4;
-    u8 unk5;
-    u8 filler6[3];
-    u8 unk9;
-    u8 fillerA[2];
 };
 
 //Possibly PokemonSubstruct1
@@ -47,26 +35,12 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct4
-{
-    u8 unk0_0:2;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-};
-
 struct UnknownStruct5
 {
     u8 unk0_0:7;
     u8 unk0_7:1;
 };
 
-struct UnknownStruct6
-{
-    u8 filler0[9];
-    u8 unk9;
-};
-
-extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 
 extern struct UnknownStruct5 gUnknown_020238C8;
@@ -99,12 +73,6 @@ extern u8 gBattleMonForms[];
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern void (*const gUnknown_083FE4F4[])(void);
-
-extern u8 ewram[];
-
-#define ewram17800 ((struct UnknownStruct4 *)(ewram + 0x17800))
-#define ewram17810 ((struct UnknownStruct2 *)(ewram + 0x17810))
-#define ewram17840 (*(struct UnknownStruct6 *)(ewram + 0x17840))
 
 extern u8 move_anim_start_t3();
 extern u8 sub_8078874();
@@ -150,8 +118,6 @@ extern void c3_0802FDF4(u8);
 extern void sub_8031F88();
 extern void sub_8141828();
 extern void c2_8011A1C(void);
-extern void dp01_prepare_buffer_wireless_probably();
-extern void dp01_build_cmdbuf_x1D_1D_numargs_varargs(int, u16, void *);
 
 void sub_811DA94(void);
 void sub_811E0A0(void);
@@ -163,6 +129,7 @@ void sub_811FA5C(void);
 void sub_811FF30(void);
 void sub_812071C(u8);
 void sub_81208E0(void);
+
 
 void nullsub_74(void)
 {
@@ -1518,7 +1485,7 @@ void sub_8120588(void)
     gTasks[taskId].data[0] = gUnknown_02024A60;
     if (ewram17810[gUnknown_02024A60].unk0_0)
         gTasks[gUnknown_02024E68[gUnknown_02024A60]].func = sub_8044CA0;
-    ewram17840.unk9 |= 1;
+    ewram17840.unk9_0 = 1;
     gUnknown_03004330[gUnknown_02024A60] = nullsub_74;
 }
 

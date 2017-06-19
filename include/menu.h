@@ -21,6 +21,14 @@ struct MenuAction3
     void (*func2)(u8);
 };
 
+extern const struct MenuAction gMenuYesNoItems[];
+
+extern struct Window gMenuWindow;
+extern struct Window *gMenuWindowPtr;
+extern u16 gMenuTextTileOffset;
+extern u16 gMenuTextWindowContentTileOffset;
+extern u16 gMenuMessageBoxContentTileOffset;
+
 void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);
@@ -66,7 +74,7 @@ u8 sub_8072A18(const u8 *, u8, u16, u8, u32);
 u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
 int sub_8072AB0(const u8 *, u8, u16, u8, u8, u32);
 void MenuPrint_RightAligned(u8 *, u8, u8);
-void sub_8072B80(u8 *, u8, u8, u8 *);
+void sub_8072B80(const u8 *, u8, u8, const u8 *);
 void sub_8072BD8(const u8 *, u8, u8, u16);
 u8 *sub_8072C14(u8 *, s32, u8, u8);
 u8 *sub_8072C44(u8 *, s32, u8, u8);
@@ -81,6 +89,6 @@ void RedrawMenuCursor(u8, u8);
 void unref_sub_8072DC0(void);
 void sub_8072DCC(u8);
 void sub_8072DDC(u8);
-void sub_8072DEC(void);
+void HandleDestroyMenuCursors(void);
 
 #endif // GUARD_MENU_H

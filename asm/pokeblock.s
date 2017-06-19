@@ -1539,7 +1539,7 @@ sub_810C2C8: @ 810C2C8
 	ldrb r0, [r4]
 	cmp r0, 0x3
 	bne _0810C2E8
-	ldr r1, _0810C310 @ =gUnknown_0300485C
+	ldr r1, _0810C310 @ =gFieldCallback
 	ldr r0, _0810C314 @ =sub_8080990
 	str r0, [r1]
 _0810C2E8:
@@ -1559,7 +1559,7 @@ _0810C300:
 	.align 2, 0
 _0810C308: .4byte gPaletteFade
 _0810C30C: .4byte gUnknown_02039244
-_0810C310: .4byte gUnknown_0300485C
+_0810C310: .4byte gFieldCallback
 _0810C314: .4byte sub_8080990
 _0810C318: .4byte gUnknown_083F7EA8
 	thumb_func_end sub_810C2C8
@@ -1830,7 +1830,7 @@ sub_810C540: @ 810C540
 	lsrs r5, 24
 	ldr r0, _0810C5A0 @ =gWindowConfig_81E6E50
 	bl BasicInitMenuWindow
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x7
 	movs r1, 0x4
 	movs r2, 0xD
@@ -1912,7 +1912,7 @@ sub_810C5EC: @ 810C5EC
 	bl DisplayYesNoMenu
 	ldr r1, _0810C60C @ =gUnknown_083F7F24
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1965,9 +1965,9 @@ sub_810C668: @ 810C668
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	ldr r2, _0810C6CC @ =gUnknown_02039248
 	ldrb r0, [r2, 0x2]
 	ldrb r1, [r2, 0x3]
@@ -2075,10 +2075,10 @@ sub_810C748: @ 810C748
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
-	bl sub_8072DEC
+	bl StartVerticalScrollIndicators
+	bl HandleDestroyMenuCursors
 	movs r0, 0x7
 	movs r1, 0x4
 	movs r2, 0xD

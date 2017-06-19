@@ -7,7 +7,7 @@ extern u8 (*gCallback_03004AE8)(void);
 
 extern const struct MenuAction gUnknown_0842C29C[];
 
-u8 sub_814A464(void);
+static u8 sub_814A464(void);
 
 int unref_sub_814A414(void)
 {
@@ -19,7 +19,7 @@ int unref_sub_814A414(void)
     return 0;
 }
 
-u8 sub_814A464(void)
+static u8 sub_814A464(void)
 {
     s8 result = ProcessMenuInput();
     if (result == -2)

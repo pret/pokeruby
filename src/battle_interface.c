@@ -1,14 +1,18 @@
 #include "global.h"
-#include "asm.h"
+#include "battle.h"
+#include "battle_interface.h"
+#include "decompress.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "rom_8077ABC.h"
+#include "safari_zone.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
-#include "decompress.h"
-#include "sound.h"
-#include "songs.h"
-#include "battle.h"
-#include "palette.h"
-#include "battle_interface.h"
 
 struct UnknownStruct5
 {
@@ -17,18 +21,6 @@ struct UnknownStruct5
     u32 unk8;
     u32 unkC;
     u32 unk10;
-};
-
-struct UnknownStruct6
-{
-    u8 bit_0:1;
-    u8 bit_1:1;
-    u8 bit_2:1;
-    u8 bit_3:1;
-    u8 bit_4:1;
-    u8 bit_5:1;
-    u8 bit_6:1;
-    u8 bit_7:1;
 };
 
 struct UnknownStruct7
@@ -40,7 +32,6 @@ extern u8 ewram[];
 #define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
 #define ewram16088 (*(u8 *)                  (ewram + 0x16088))
 #define ewram16089 (*(u8 *)                  (ewram + 0x16089))
-#define ewram17800 ((struct UnknownStruct6 *)(ewram + 0x17800))
 #define ewram17850 ((struct UnknownStruct5 *)(ewram + 0x17850))
 
 extern u8 gUnknown_020238CC[];
@@ -50,9 +41,7 @@ extern u8 gUnknown_02024A72[];
 extern u8 gUnknown_03004340[];
 
 extern u16 gBattleTypeFlags;
-extern u8 gNumSafariBalls;
 
-extern u32 gExperienceTables[8][101];
 extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
 extern const struct SpriteTemplate gSpriteTemplate_820A51C[];
 extern const struct SpriteTemplate gSpriteTemplate_820A54C;
@@ -82,22 +71,16 @@ extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
 extern const u8 gUnknown_0820A8B0[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
 extern const u8 gUnknown_08D1216C[][32];
 
-extern const u8 *const gNatureNames[];
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 #define ABS(n) ((n) >= 0 ? (n) : -(n))
 // Used for computing copy destination addresses
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
-
-extern int sub_8040D3C();
-extern u8 sub_8090D90();
-extern void load_gfxc_health_bar();
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);
@@ -939,7 +922,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A89C, sizeof(str));
     r4 = gSprites[a].data6;
-    if ((ewram17800[r4].bit_4) == 0)
+    if ((ewram17800[r4].unk0_4) == 0)
         return;
     ptr = str + 6;
     if (c == 0)
@@ -1312,8 +1295,8 @@ void sub_804454C(void)
         {
             u8 r6;
 
-            ewram17800[i].bit_4 ^= 1;
-            r6 = ewram17800[i].bit_4;
+            ewram17800[i].unk0_4 ^= 1;
+            r6 = ewram17800[i].unk0_4;
             if (battle_side_get_owner(i) == 0)
             {
 
@@ -2518,7 +2501,7 @@ static void sub_8045458(u8 a, u8 b)
     if (battle_side_get_owner(r4) != 0)
     {
         u16 species = GetMonData(&gEnemyParty[gUnknown_02024A6A[r4]], MON_DATA_SPECIES);
-        if (sub_8090D90(SpeciesToNationalPokedexNum(species), 1) != 0)
+        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
             r4 = gSprites[a].data5;
             if (b != 0)
@@ -2587,7 +2570,7 @@ static void draw_status_ailment_maybe(u8 a)
         for (i = 0; i < 3; i++)
             CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32), 32);
 
-        if (!ewram17800[r7].bit_4)
+        if (!ewram17800[r7].unk0_4)
             CpuCopy32(sub_8043CDC(1), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 64);
 
         sub_8045458(a, 1);
@@ -2602,7 +2585,7 @@ static void draw_status_ailment_maybe(u8 a)
     CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32), 96);
     if (IsDoubleBattle() == TRUE || battle_side_get_owner(r7) == TRUE)
     {
-        if (!ewram17800[r7].bit_4)
+        if (!ewram17800[r7].unk0_4)
         {
             CpuCopy32(sub_8043CDC(0), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 32);
             CpuCopy32(sub_8043CDC(0x41), (void *)(OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32), 32);
@@ -2809,7 +2792,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
         r5 = ABS(r8 / r5);
         r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, r8, &ewram17850[a].unk10, 8, r5);
     }
-    if (c == 1 || (c == 0 && (!ewram17800[a].bit_4)))
+    if (c == 1 || (c == 0 && (!ewram17800[a].unk0_4)))
         sub_8045D58(a, c);
     if (r6 == -1)
         ewram17850[a].unk10 = 0;
@@ -3044,7 +3027,7 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
     return result;
 }
 
-int GetHPBarLevel(s16 hp, s16 maxhp)
+u8 GetHPBarLevel(s16 hp, s16 maxhp)
 {
     int result;
 

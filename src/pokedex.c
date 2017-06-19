@@ -1,29 +1,84 @@
+
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
-#include "asm.h"
+#include "battle.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_cursor.h"
 #include "palette.h"
+#include "pokedex_area_screen.h"
+#include "pokedex_cry_screen.h"
+#include "pokemon.h"
 #include "rng.h"
+#include "rom4.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
-// I'm #define-ing these just for now so I can keep using the old unkXXX member names
-#define unk60E selectedPokemon
-#define unk612 dexMode
-#define unk616 dexOrder
-#define unk64D selectedScreen
-#define unk650 menuIsOpen
-#define unk652 menuCursorPos
-#define unk654 menuY
+#define NATIONAL_DEX_COUNT 386
+
+struct PokedexListItem
+{
+    u16 dexNum;
+    u16 seen:1;
+    u16 owned:1;
+};
+
+struct PokedexView
+{
+    struct PokedexListItem unk0[NATIONAL_DEX_COUNT];
+    u16 unk608;
+    u8 unk60A_1:1;
+    u8 unk60A_2:1;
+    u8 unk60B;
+    u16 pokemonListCount;
+    u16 selectedPokemon;
+    u16 unk610;
+    u16 dexMode;
+    u16 unk614;
+    u16 dexOrder;
+    u16 unk618;
+    u16 unk61A;
+    u16 unk61C;
+    u16 unk61E[4];
+    u16 selectedMonSpriteId;
+    u16 unk628;
+    u16 unk62A;
+    u8 unk62C;
+    u8 unk62D;
+    u8 unk62E;
+    u8 unk62F;
+    s16 unk630;
+    s16 unk632;
+    u16 unk634;
+    u16 unk636;
+    u16 unk638;
+    u16 unk63A[4];
+    u8 filler642[8];
+    u8 unk64A;
+    u8 unk64B;
+    u8 unk64C_1:1;
+    u8 selectedScreen;
+    u8 descriptionPageNum;
+    u8 unk64F;
+    u8 menuIsOpen;      //menuIsOpen
+    u8 unk651;
+    u16 menuCursorPos;     //Menu cursor position
+    s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
+    u8 unk656[8];
+    u8 unk65E[8];
+};
 
 enum
 {
@@ -44,8 +99,8 @@ struct PokedexEntry
     /*0x00*/ u8 categoryName[12];
     /*0x0C*/ u16 height; //in decimeters
     /*0x0E*/ u16 weight; //in hectograms
-    /*0x10*/ u8 *descriptionPage1;
-    /*0x14*/ u8 *descriptionPage2;
+    /*0x10*/ const u8 *descriptionPage1;
+    /*0x14*/ const u8 *descriptionPage2;
     /*0x18*/ u16 unused;
     /*0x1A*/ u16 pokemonScale;
     /*0x1C*/ u16 pokemonOffset;
@@ -53,61 +108,1188 @@ struct PokedexEntry
     /*0x20*/ u16 trainerOffset;
 };  /*size = 0x24*/
 
+struct UnknownStruct2
+{
+    const u8 *text1;
+    const u8 *text2;
+};
+
+struct UnknownStruct1
+{
+    const struct UnknownStruct2 *unk0;
+    u8 unk4;
+    u8 unk5;
+    u16 unk6;
+};
+
+struct UnknownStruct3
+{
+    const u8 *text;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+};
+
+struct UnknownStruct4
+{
+    const u8 *text;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+};
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gPokedexView;
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_0202FFB8;
 extern u8 gUnknown_0202FFBA;
-extern u8 gUnknown_03005CE8;
-extern u8 gPokedexMenu_Gfx[];
-extern u8 gUnknown_08E96738[];
-extern u8 gUnknown_08E9C6DC[];
-extern u8 gUnknown_08E96888[];
-extern u8 gUnknown_08E96994[];
-extern struct SpriteSheet gUnknown_083A05CC;
-extern struct SpritePalette gUnknown_083A05DC[];
-extern u8 gUnknown_0839FA7C[];
-extern u8 gUnknown_0839F67C[];
-extern u8 gPokedexMenu_Pal[];
-extern u8 gUnknown_0839F73C[];
-extern u8 gUnknown_083A05EC[];
-extern u8 gUnknown_083A05F1[];
-extern struct SpriteTemplate gSpriteTemplate_83A053C;
-extern struct SpriteTemplate gSpriteTemplate_83A0524;
-extern struct SpriteTemplate gSpriteTemplate_83A0554;
-extern struct SpriteTemplate gSpriteTemplate_83A056C;
-extern struct SpriteTemplate gSpriteTemplate_83A0584;
-extern struct SpriteTemplate gSpriteTemplate_83A059C;
-extern struct SpriteTemplate gSpriteTemplate_83A05B4;
 extern struct PokedexListItem *gUnknown_0202FFBC;
+extern u8 gUnknown_03005CE8;
 extern IntrCallback gUnknown_03005CEC;
-extern u8 gUnknown_08E96BD4[];
-extern u8 gUnknown_083A05F8[];
-extern u8 gUnknown_0839F8A0[];
-extern u8 gUnknown_0839F988[];
 extern u8 gUnknown_03005E98;
-extern u8 gUnknown_083B4EC4[];
-extern u8 gUnknown_08E96ACC[];
-extern u8 gUnknown_08E96B58[];
+extern const u8 gPokedexMenu_Gfx[];
+extern const u8 gUnknown_08E96738[];
+extern const u8 gUnknown_08E96888[];
+extern const u8 gUnknown_08E96994[];
+extern const u8 gUnknown_08E9C6DC[];
+extern const u8 gUnknown_08D00524[];
+extern const u8 gUnknown_08E96BD4[];
+extern const u8 gUnknown_08E96ACC[];
+extern const u8 gUnknown_08E96B58[];
+extern const u16 gPokedexMenu_Pal[];
+extern const u16 gPokedexMenu2_Pal[];
+extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct MonCoords gTrainerFrontPicCoords[];
+extern const struct PokedexEntry gPokedexEntries[];
+extern const u8 gPokedexMenuSearch_Gfx[];
+extern const u8 gUnknown_08E96D2C[];
+extern const u16 gPokedexMenuSearch_Pal[];
+extern const u8 gTypeNames[][7];
+extern const u8 gPokedexMenu2_Gfx[];
 
-extern struct PokedexEntry gPokedexEntries[];
+static u8 sub_8091E3C(void);
 
-extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
-extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-extern void remove_some_task(void);
-extern u8 sub_8091E3C(void);
-extern void DisableNationalPokedex(void);
-extern void sub_805469C(void);
-extern u16 HoennToNationalOrder(u16);
-extern u16 NationalToHoennOrder(u16);
-extern u16 gPokedexOrder_Alphabetical[];
-extern u16 gPokedexOrder_Weight[];
-extern u16 gPokedexOrder_Height[];
+static const u16 sPokedexSearchPalette[] = INCBIN_U16("graphics/pokedex/search.gbapal");
+static const u16 sNationalPokedexPalette[] = INCBIN_U16("graphics/pokedex/national.gbapal");
+const u8 gEmptySpacce_839F7FC[0xA4] = {0};
+static const u8 gUnknown_0839F8A0[] = INCBIN_U8("graphics/pokedex/pokedex_cry_layout.bin.lz");
+static const u8 gUnknown_0839F988[] = INCBIN_U8("graphics/pokedex/pokedex_size_layout.bin.lz");
+static const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz");
+#include "data/pokedex_orders.h"
+static const struct OamData gOamData_83A0404 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct OamData gOamData_83A040C =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct OamData gOamData_83A0414 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct OamData gOamData_83A041C =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 2,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct OamData gOamData_83A0424 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct OamData gOamData_83A042C =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 2,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const union AnimCmd gSpriteAnim_83A0434[] =
+{
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A043C[] =
+{
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0444[] =
+{
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A044C[] =
+{
+    ANIMCMD_FRAME(32, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0454[] =
+{
+    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A045C[] =
+{
+    ANIMCMD_FRAME(96, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0464[] =
+{
+    ANIMCMD_FRAME(128, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A046C[] =
+{
+    ANIMCMD_FRAME(160, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0474[] =
+{
+    ANIMCMD_FRAME(192, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A047C[] =
+{
+    ANIMCMD_FRAME(224, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0484[] =
+{
+    ANIMCMD_FRAME(226, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A048C[] =
+{
+    ANIMCMD_FRAME(228, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A0494[] =
+{
+    ANIMCMD_FRAME(230, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A049C[] =
+{
+    ANIMCMD_FRAME(232, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04A4[] =
+{
+    ANIMCMD_FRAME(234, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04AC[] =
+{
+    ANIMCMD_FRAME(236, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04B4[] =
+{
+    ANIMCMD_FRAME(238, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04BC[] =
+{
+    ANIMCMD_FRAME(240, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04C4[] =
+{
+    ANIMCMD_FRAME(242, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_83A04CC[] =
+{
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04D4[] =
+{
+    gSpriteAnim_83A0434,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04D8[] =
+{
+    gSpriteAnim_83A043C,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04DC[] =
+{
+    gSpriteAnim_83A0444,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04E0[] =
+{
+    gSpriteAnim_83A044C,
+    gSpriteAnim_83A0454,
+    gSpriteAnim_83A045C,
+    gSpriteAnim_83A0464,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04F0[] =
+{
+    gSpriteAnim_83A046C,
+    gSpriteAnim_83A0474,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A04F8[] =
+{
+    gSpriteAnim_83A047C,
+    gSpriteAnim_83A0484,
+    gSpriteAnim_83A048C,
+    gSpriteAnim_83A0494,
+    gSpriteAnim_83A049C,
+    gSpriteAnim_83A04A4,
+    gSpriteAnim_83A04AC,
+    gSpriteAnim_83A04B4,
+    gSpriteAnim_83A04BC,
+    gSpriteAnim_83A04C4,
+};
+static const union AnimCmd *const gSpriteAnimTable_83A0520[] =
+{
+    gSpriteAnim_83A04CC,
+};
+static void sub_808EF38(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A0524 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0404,
+    .anims = gSpriteAnimTable_83A04D4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808EF38,
+};
+static void sub_808EF8C(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A053C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A040C,
+    .anims = gSpriteAnimTable_83A04D8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808EF8C,
+};
+static void sub_808F08C(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A0554 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0414,
+    .anims = gSpriteAnimTable_83A04E0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F08C,
+};
+static void sub_808F0B4(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A056C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A041C,
+    .anims = gSpriteAnimTable_83A04DC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F0B4,
+};
+static void sub_808ED94(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A0584 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A0424,
+    .anims = gSpriteAnimTable_83A04F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808ED94,
+};
+static const struct SpriteTemplate gSpriteTemplate_83A059C =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A042C,
+    .anims = gSpriteAnimTable_83A04F8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808ED94,
+};
+static void sub_808F168(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_83A05B4 =
+{
+    .tileTag = 4096,
+    .paletteTag = 4096,
+    .oam = &gOamData_83A042C,
+    .anims = gSpriteAnimTable_83A0520,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_808F168,
+};
+static const struct SpriteSheet gUnknown_083A05CC[] =
+{
+    {gPokedexMenu2_Gfx, 0x1F00, 0x1000},
+    {NULL, 0, 0},
+};
+static const struct SpritePalette gUnknown_083A05DC[] =
+{
+    {gPokedexMenu_Pal, 0x1000},
+    {NULL, 0},
+};
+static const u8 gUnknown_083A05EC[] = {2, 4, 8, 16, 32};
+static const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
+const u8 gEmptySpacce_83A05F6[] = {0, 0};  // Padding, maybe?
+static const u8 gUnknown_083A05F8[] = _("");
+// TODO: include German entries
+#include "data/pokedex_entries_en.h"
+static const u16 gUnknown_083B4EC4[16] = {0};
+static const u8 *const sMonFootprintTable[] =
+{
+    gMonFootprint_Bulbasaur,
+    gMonFootprint_Bulbasaur,
+    gMonFootprint_Ivysaur,
+    gMonFootprint_Venusaur,
+    gMonFootprint_Charmander,
+    gMonFootprint_Charmeleon,
+    gMonFootprint_Charizard,
+    gMonFootprint_Squirtle,
+    gMonFootprint_Wartortle,
+    gMonFootprint_Blastoise,
+    gMonFootprint_Caterpie,
+    gMonFootprint_Metapod,
+    gMonFootprint_Butterfree,
+    gMonFootprint_Weedle,
+    gMonFootprint_Kakuna,
+    gMonFootprint_Beedrill,
+    gMonFootprint_Pidgey,
+    gMonFootprint_Pidgeotto,
+    gMonFootprint_Pidgeot,
+    gMonFootprint_Rattata,
+    gMonFootprint_Raticate,
+    gMonFootprint_Spearow,
+    gMonFootprint_Fearow,
+    gMonFootprint_Ekans,
+    gMonFootprint_Arbok,
+    gMonFootprint_Pikachu,
+    gMonFootprint_Raichu,
+    gMonFootprint_Sandshrew,
+    gMonFootprint_Sandslash,
+    gMonFootprint_NidoranF,
+    gMonFootprint_Nidorina,
+    gMonFootprint_Nidoqueen,
+    gMonFootprint_NidoranM,
+    gMonFootprint_Nidorino,
+    gMonFootprint_Nidoking,
+    gMonFootprint_Clefairy,
+    gMonFootprint_Clefable,
+    gMonFootprint_Vulpix,
+    gMonFootprint_Ninetales,
+    gMonFootprint_Jigglypuff,
+    gMonFootprint_Wigglytuff,
+    gMonFootprint_Zubat,
+    gMonFootprint_Golbat,
+    gMonFootprint_Oddish,
+    gMonFootprint_Gloom,
+    gMonFootprint_Vileplume,
+    gMonFootprint_Paras,
+    gMonFootprint_Parasect,
+    gMonFootprint_Venonat,
+    gMonFootprint_Venomoth,
+    gMonFootprint_Diglett,
+    gMonFootprint_Dugtrio,
+    gMonFootprint_Meowth,
+    gMonFootprint_Persian,
+    gMonFootprint_Psyduck,
+    gMonFootprint_Golduck,
+    gMonFootprint_Mankey,
+    gMonFootprint_Primeape,
+    gMonFootprint_Growlithe,
+    gMonFootprint_Arcanine,
+    gMonFootprint_Poliwag,
+    gMonFootprint_Poliwhirl,
+    gMonFootprint_Poliwrath,
+    gMonFootprint_Abra,
+    gMonFootprint_Kadabra,
+    gMonFootprint_Alakazam,
+    gMonFootprint_Machop,
+    gMonFootprint_Machoke,
+    gMonFootprint_Machamp,
+    gMonFootprint_Bellsprout,
+    gMonFootprint_Weepinbell,
+    gMonFootprint_Victreebel,
+    gMonFootprint_Tentacool,
+    gMonFootprint_Tentacruel,
+    gMonFootprint_Geodude,
+    gMonFootprint_Graveler,
+    gMonFootprint_Golem,
+    gMonFootprint_Ponyta,
+    gMonFootprint_Rapidash,
+    gMonFootprint_Slowpoke,
+    gMonFootprint_Slowbro,
+    gMonFootprint_Magnemite,
+    gMonFootprint_Magneton,
+    gMonFootprint_Farfetchd,
+    gMonFootprint_Doduo,
+    gMonFootprint_Dodrio,
+    gMonFootprint_Seel,
+    gMonFootprint_Dewgong,
+    gMonFootprint_Grimer,
+    gMonFootprint_Muk,
+    gMonFootprint_Shellder,
+    gMonFootprint_Cloyster,
+    gMonFootprint_Gastly,
+    gMonFootprint_Haunter,
+    gMonFootprint_Gengar,
+    gMonFootprint_Onix,
+    gMonFootprint_Drowzee,
+    gMonFootprint_Hypno,
+    gMonFootprint_Krabby,
+    gMonFootprint_Kingler,
+    gMonFootprint_Voltorb,
+    gMonFootprint_Electrode,
+    gMonFootprint_Exeggcute,
+    gMonFootprint_Exeggutor,
+    gMonFootprint_Cubone,
+    gMonFootprint_Marowak,
+    gMonFootprint_Hitmonlee,
+    gMonFootprint_Hitmonchan,
+    gMonFootprint_Lickitung,
+    gMonFootprint_Koffing,
+    gMonFootprint_Weezing,
+    gMonFootprint_Rhyhorn,
+    gMonFootprint_Rhydon,
+    gMonFootprint_Chansey,
+    gMonFootprint_Tangela,
+    gMonFootprint_Kangaskhan,
+    gMonFootprint_Horsea,
+    gMonFootprint_Seadra,
+    gMonFootprint_Goldeen,
+    gMonFootprint_Seaking,
+    gMonFootprint_Staryu,
+    gMonFootprint_Starmie,
+    gMonFootprint_Mrmime,
+    gMonFootprint_Scyther,
+    gMonFootprint_Jynx,
+    gMonFootprint_Electabuzz,
+    gMonFootprint_Magmar,
+    gMonFootprint_Pinsir,
+    gMonFootprint_Tauros,
+    gMonFootprint_Magikarp,
+    gMonFootprint_Gyarados,
+    gMonFootprint_Lapras,
+    gMonFootprint_Ditto,
+    gMonFootprint_Eevee,
+    gMonFootprint_Vaporeon,
+    gMonFootprint_Jolteon,
+    gMonFootprint_Flareon,
+    gMonFootprint_Porygon,
+    gMonFootprint_Omanyte,
+    gMonFootprint_Omastar,
+    gMonFootprint_Kabuto,
+    gMonFootprint_Kabutops,
+    gMonFootprint_Aerodactyl,
+    gMonFootprint_Snorlax,
+    gMonFootprint_Articuno,
+    gMonFootprint_Zapdos,
+    gMonFootprint_Moltres,
+    gMonFootprint_Dratini,
+    gMonFootprint_Dragonair,
+    gMonFootprint_Dragonite,
+    gMonFootprint_Mewtwo,
+    gMonFootprint_Mew,
+    gMonFootprint_Chikorita,
+    gMonFootprint_Bayleef,
+    gMonFootprint_Meganium,
+    gMonFootprint_Cyndaquil,
+    gMonFootprint_Quilava,
+    gMonFootprint_Typhlosion,
+    gMonFootprint_Totodile,
+    gMonFootprint_Croconaw,
+    gMonFootprint_Feraligatr,
+    gMonFootprint_Sentret,
+    gMonFootprint_Furret,
+    gMonFootprint_Hoothoot,
+    gMonFootprint_Noctowl,
+    gMonFootprint_Ledyba,
+    gMonFootprint_Ledian,
+    gMonFootprint_Spinarak,
+    gMonFootprint_Ariados,
+    gMonFootprint_Crobat,
+    gMonFootprint_Chinchou,
+    gMonFootprint_Lanturn,
+    gMonFootprint_Pichu,
+    gMonFootprint_Cleffa,
+    gMonFootprint_Igglybuff,
+    gMonFootprint_Togepi,
+    gMonFootprint_Togetic,
+    gMonFootprint_Natu,
+    gMonFootprint_Xatu,
+    gMonFootprint_Mareep,
+    gMonFootprint_Flaaffy,
+    gMonFootprint_Ampharos,
+    gMonFootprint_Bellossom,
+    gMonFootprint_Marill,
+    gMonFootprint_Azumarill,
+    gMonFootprint_Sudowoodo,
+    gMonFootprint_Politoed,
+    gMonFootprint_Hoppip,
+    gMonFootprint_Skiploom,
+    gMonFootprint_Jumpluff,
+    gMonFootprint_Aipom,
+    gMonFootprint_Sunkern,
+    gMonFootprint_Sunflora,
+    gMonFootprint_Yanma,
+    gMonFootprint_Wooper,
+    gMonFootprint_Quagsire,
+    gMonFootprint_Espeon,
+    gMonFootprint_Umbreon,
+    gMonFootprint_Murkrow,
+    gMonFootprint_Slowking,
+    gMonFootprint_Misdreavus,
+    gMonFootprint_Unown,
+    gMonFootprint_Wobbuffet,
+    gMonFootprint_Girafarig,
+    gMonFootprint_Pineco,
+    gMonFootprint_Forretress,
+    gMonFootprint_Dunsparce,
+    gMonFootprint_Gligar,
+    gMonFootprint_Steelix,
+    gMonFootprint_Snubbull,
+    gMonFootprint_Granbull,
+    gMonFootprint_Qwilfish,
+    gMonFootprint_Scizor,
+    gMonFootprint_Shuckle,
+    gMonFootprint_Heracross,
+    gMonFootprint_Sneasel,
+    gMonFootprint_Teddiursa,
+    gMonFootprint_Ursaring,
+    gMonFootprint_Slugma,
+    gMonFootprint_Magcargo,
+    gMonFootprint_Swinub,
+    gMonFootprint_Piloswine,
+    gMonFootprint_Corsola,
+    gMonFootprint_Remoraid,
+    gMonFootprint_Octillery,
+    gMonFootprint_Delibird,
+    gMonFootprint_Mantine,
+    gMonFootprint_Skarmory,
+    gMonFootprint_Houndour,
+    gMonFootprint_Houndoom,
+    gMonFootprint_Kingdra,
+    gMonFootprint_Phanpy,
+    gMonFootprint_Donphan,
+    gMonFootprint_Porygon2,
+    gMonFootprint_Stantler,
+    gMonFootprint_Smeargle,
+    gMonFootprint_Tyrogue,
+    gMonFootprint_Hitmontop,
+    gMonFootprint_Smoochum,
+    gMonFootprint_Elekid,
+    gMonFootprint_Magby,
+    gMonFootprint_Miltank,
+    gMonFootprint_Blissey,
+    gMonFootprint_Raikou,
+    gMonFootprint_Entei,
+    gMonFootprint_Suicune,
+    gMonFootprint_Larvitar,
+    gMonFootprint_Pupitar,
+    gMonFootprint_Tyranitar,
+    gMonFootprint_Lugia,
+    gMonFootprint_HoOh,
+    gMonFootprint_Celebi,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_QuestionMark,
+    gMonFootprint_Treecko,
+    gMonFootprint_Grovyle,
+    gMonFootprint_Sceptile,
+    gMonFootprint_Torchic,
+    gMonFootprint_Combusken,
+    gMonFootprint_Blaziken,
+    gMonFootprint_Mudkip,
+    gMonFootprint_Marshtomp,
+    gMonFootprint_Swampert,
+    gMonFootprint_Poochyena,
+    gMonFootprint_Mightyena,
+    gMonFootprint_Zigzagoon,
+    gMonFootprint_Linoone,
+    gMonFootprint_Wurmple,
+    gMonFootprint_Silcoon,
+    gMonFootprint_Beautifly,
+    gMonFootprint_Cascoon,
+    gMonFootprint_Dustox,
+    gMonFootprint_Lotad,
+    gMonFootprint_Lombre,
+    gMonFootprint_Ludicolo,
+    gMonFootprint_Seedot,
+    gMonFootprint_Nuzleaf,
+    gMonFootprint_Shiftry,
+    gMonFootprint_Nincada,
+    gMonFootprint_Ninjask,
+    gMonFootprint_Shedinja,
+    gMonFootprint_Taillow,
+    gMonFootprint_Swellow,
+    gMonFootprint_Shroomish,
+    gMonFootprint_Breloom,
+    gMonFootprint_Spinda,
+    gMonFootprint_Wingull,
+    gMonFootprint_Pelipper,
+    gMonFootprint_Surskit,
+    gMonFootprint_Masquerain,
+    gMonFootprint_Wailmer,
+    gMonFootprint_Wailord,
+    gMonFootprint_Skitty,
+    gMonFootprint_Delcatty,
+    gMonFootprint_Kecleon,
+    gMonFootprint_Baltoy,
+    gMonFootprint_Claydol,
+    gMonFootprint_Nosepass,
+    gMonFootprint_Torkoal,
+    gMonFootprint_Sableye,
+    gMonFootprint_Barboach,
+    gMonFootprint_Whiscash,
+    gMonFootprint_Luvdisc,
+    gMonFootprint_Corphish,
+    gMonFootprint_Crawdaunt,
+    gMonFootprint_Feebas,
+    gMonFootprint_Milotic,
+    gMonFootprint_Carvanha,
+    gMonFootprint_Sharpedo,
+    gMonFootprint_Trapinch,
+    gMonFootprint_Vibrava,
+    gMonFootprint_Flygon,
+    gMonFootprint_Makuhita,
+    gMonFootprint_Hariyama,
+    gMonFootprint_Electrike,
+    gMonFootprint_Manectric,
+    gMonFootprint_Numel,
+    gMonFootprint_Camerupt,
+    gMonFootprint_Spheal,
+    gMonFootprint_Sealeo,
+    gMonFootprint_Walrein,
+    gMonFootprint_Cacnea,
+    gMonFootprint_Cacturne,
+    gMonFootprint_Snorunt,
+    gMonFootprint_Glalie,
+    gMonFootprint_Lunatone,
+    gMonFootprint_Solrock,
+    gMonFootprint_Azurill,
+    gMonFootprint_Spoink,
+    gMonFootprint_Grumpig,
+    gMonFootprint_Plusle,
+    gMonFootprint_Minun,
+    gMonFootprint_Mawile,
+    gMonFootprint_Meditite,
+    gMonFootprint_Medicham,
+    gMonFootprint_Swablu,
+    gMonFootprint_Altaria,
+    gMonFootprint_Wynaut,
+    gMonFootprint_Duskull,
+    gMonFootprint_Dusclops,
+    gMonFootprint_Roselia,
+    gMonFootprint_Slakoth,
+    gMonFootprint_Vigoroth,
+    gMonFootprint_Slaking,
+    gMonFootprint_Gulpin,
+    gMonFootprint_Swalot,
+    gMonFootprint_Tropius,
+    gMonFootprint_Whismur,
+    gMonFootprint_Loudred,
+    gMonFootprint_Exploud,
+    gMonFootprint_Clamperl,
+    gMonFootprint_Huntail,
+    gMonFootprint_Gorebyss,
+    gMonFootprint_Absol,
+    gMonFootprint_Shuppet,
+    gMonFootprint_Banette,
+    gMonFootprint_Seviper,
+    gMonFootprint_Zangoose,
+    gMonFootprint_Relicanth,
+    gMonFootprint_Aron,
+    gMonFootprint_Lairon,
+    gMonFootprint_Aggron,
+    gMonFootprint_Castform,
+    gMonFootprint_Volbeat,
+    gMonFootprint_Illumise,
+    gMonFootprint_Lileep,
+    gMonFootprint_Cradily,
+    gMonFootprint_Anorith,
+    gMonFootprint_Armaldo,
+    gMonFootprint_Ralts,
+    gMonFootprint_Kirlia,
+    gMonFootprint_Gardevoir,
+    gMonFootprint_Bagon,
+    gMonFootprint_Shelgon,
+    gMonFootprint_Salamence,
+    gMonFootprint_Beldum,
+    gMonFootprint_Metang,
+    gMonFootprint_Metagross,
+    gMonFootprint_Regirock,
+    gMonFootprint_Regice,
+    gMonFootprint_Registeel,
+    gMonFootprint_Kyogre,
+    gMonFootprint_Groudon,
+    gMonFootprint_Rayquaza,
+    gMonFootprint_Latias,
+    gMonFootprint_Latios,
+    gMonFootprint_Jirachi,
+    gMonFootprint_Deoxys,
+    gMonFootprint_Chimecho,
+    gMonFootprint_Bulbasaur,
+};
+static const u8 gUnknown_083B5558[] = _("{CLEAR_TO 0}");
+const u8 gUnknown_083B555C[] = INCBIN_U8("graphics/unknown/unknown_3B555C.bin");
+static const struct OamData gOamData_83B557C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static void *const gUnknown_083B5584[] =
+{
+    (void *)0x02008000,
+    (void *)0x0200C000,
+    (void *)0x02010000,
+    (void *)0x02014000,
+};
+static const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
+{
+    {(u8 *)0x02008000, 0x800},
+    {(u8 *)0x02008800, 0x800},
+    {(u8 *)0x02009000, 0x800},
+    {(u8 *)0x02009800, 0x800},
+    {(u8 *)0x0200A000, 0x800},
+    {(u8 *)0x0200A800, 0x800},
+    {(u8 *)0x0200B000, 0x800},
+    {(u8 *)0x0200B800, 0x800},
+    {(u8 *)0x0200C000, 0x800},
+    {(u8 *)0x0200C800, 0x800},
+    {(u8 *)0x0200D000, 0x800},
+    {(u8 *)0x0200D800, 0x800},
+    {(u8 *)0x0200E000, 0x800},
+    {(u8 *)0x0200E800, 0x800},
+    {(u8 *)0x0200F000, 0x800},
+    {(u8 *)0x0200F800, 0x800},
+};
+static const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
+{
+    {(u8 *)0x0200C000, 0x800},
+    {(u8 *)0x0200C800, 0x800},
+    {(u8 *)0x0200D000, 0x800},
+    {(u8 *)0x0200D800, 0x800},
+    {(u8 *)0x0200E000, 0x800},
+    {(u8 *)0x0200E800, 0x800},
+    {(u8 *)0x0200F000, 0x800},
+    {(u8 *)0x0200F800, 0x800},
+    {(u8 *)0x02010000, 0x800},
+    {(u8 *)0x02010800, 0x800},
+    {(u8 *)0x02011000, 0x800},
+    {(u8 *)0x02011800, 0x800},
+    {(u8 *)0x02012000, 0x800},
+    {(u8 *)0x02012800, 0x800},
+    {(u8 *)0x02013000, 0x800},
+    {(u8 *)0x02013800, 0x800},
+};
+static const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
+{
+    {(u8 *)0x02010000, 0x800},
+    {(u8 *)0x02010800, 0x800},
+    {(u8 *)0x02011000, 0x800},
+    {(u8 *)0x02011800, 0x800},
+    {(u8 *)0x02012000, 0x800},
+    {(u8 *)0x02012800, 0x800},
+    {(u8 *)0x02013000, 0x800},
+    {(u8 *)0x02013800, 0x800},
+    {(u8 *)0x02014000, 0x800},
+    {(u8 *)0x02014800, 0x800},
+    {(u8 *)0x02015000, 0x800},
+    {(u8 *)0x02015800, 0x800},
+    {(u8 *)0x02016000, 0x800},
+    {(u8 *)0x02016800, 0x800},
+    {(u8 *)0x02017000, 0x800},
+    {(u8 *)0x02017800, 0x800},
+};
+static const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
+{
+    {(u8 *)0x02014000, 0x800},
+    {(u8 *)0x02014800, 0x800},
+    {(u8 *)0x02015000, 0x800},
+    {(u8 *)0x02015800, 0x800},
+    {(u8 *)0x02016000, 0x800},
+    {(u8 *)0x02016800, 0x800},
+    {(u8 *)0x02017000, 0x800},
+    {(u8 *)0x02017800, 0x800},
+    {(u8 *)0x02018000, 0x800},
+    {(u8 *)0x02018800, 0x800},
+    {(u8 *)0x02019000, 0x800},
+    {(u8 *)0x02019800, 0x800},
+    {(u8 *)0x0201A000, 0x800},
+    {(u8 *)0x0201A800, 0x800},
+    {(u8 *)0x0201B000, 0x800},
+    {(u8 *)0x0201B800, 0x800},
+};
+static const struct SpriteFrameImage *const gUnknown_083B5794[] =
+{
+    gSpriteImageTable_83B5594,
+    gSpriteImageTable_83B5614,
+    gSpriteImageTable_83B5694,
+    gSpriteImageTable_83B5714,
+};
+static void nullsub_59(struct Sprite *);
+static const struct SpriteTemplate gUnknown_083B57A4 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 0,
+    .oam = &gOamData_83B557C,
+    .anims = NULL,
+    .images = gSpriteImageTable_83B5594,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_59,
+};
+static const u8 gUnknown_083B57BC[][4] =
+{
+    {0,      0, 0,      0},
+    {CHAR_A, 3, CHAR_a, 3},
+    {CHAR_D, 3, CHAR_d, 3},
+    {CHAR_G, 3, CHAR_g, 3},
+    {CHAR_J, 3, CHAR_j, 3},
+    {CHAR_M, 3, CHAR_m, 3},
+    {CHAR_P, 3, CHAR_p, 3},
+    {CHAR_S, 3, CHAR_s, 3},
+    {CHAR_V, 3, CHAR_v, 3},
+    {CHAR_Y, 2, CHAR_y, 2},
+};
+static const struct UnknownStruct3 gUnknown_083B57E4[] =
+{
+    {DexText_SearchForPoke, 0,  0, 5},
+    {DexText_SwitchDex,     6,  0, 5},
+    {DexText_ReturnToDex,  12,  0, 5},
+};
+static const struct UnknownStruct4 gUnknown_083B57FC[] =
+{
+    {DexText_ListByABC,           0,  2,  5,  5,  2, 12},
+    {DexText_ListByColor,         0,  4,  5,  5,  4, 12},
+    {DexText_ListByType,          0,  6,  5,  5,  6,  6},
+    {DexText_ListByType,          0,  6,  5, 11,  6,  6},
+    {DexText_SelectDexList,       0,  8,  5,  5,  8, 12},
+    {DexText_SelectDexMode,       0, 10,  5,  5, 10, 12},
+    {DexText_ExecuteSearchSwitch, 0, 12,  5,  0,  0,  0},
+};
+static const u8 gUnknown_083B5850[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+static const u8 gUnknown_083B586C[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+static const u8 gUnknown_083B5888[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+static const u8 gUnknown_083B58A4[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+static const struct UnknownStruct2 gUnknown_083B58C0[] =
+{
+    {DexText_HoennDex2,    DexText_HoennDex},
+    {DexText_NationalDex2, DexText_NationalDex},
+    {NULL, NULL},
+};
+static const struct UnknownStruct2 gUnknown_083B58D8[] =
+{
+    {DexText_ListByNumber,          DexText_NumericalMode},
+    {DexText_ListByABC2,            DexText_ABCMode},
+    {DexText_ListByHeavyToLightest, DexText_HeaviestMode},
+    {DexText_ListByLightToHeaviest, DexText_LightestMode},
+    {DexText_ListByTallToSmallest,  DexText_TallestMode},
+    {DexText_ListBySmallToTallest,  DexText_SmallestMode},
+    {NULL, NULL},
+};
+static const struct UnknownStruct2 gUnknown_083B5910[] =
+{
+    {DexText_Terminator5, DexText_DontSpecify},
+    {DexText_Terminator5, DexText_ABC},
+    {DexText_Terminator5, DexText_DEF},
+    {DexText_Terminator5, DexText_GHI},
+    {DexText_Terminator5, DexText_JKL},
+    {DexText_Terminator5, DexText_MNO},
+    {DexText_Terminator5, DexText_PQR},
+    {DexText_Terminator5, DexText_STU},
+    {DexText_Terminator5, DexText_VWX},
+    {DexText_Terminator5, DexText_YZ},
+    {NULL, NULL},
+};
+static const struct UnknownStruct2 gUnknown_083B5968[] =
+{
+    {DexText_Terminator5, DexText_DontSpecify},
+    {DexText_Terminator5, DexText_Red},
+    {DexText_Terminator5, DexText_Blue},
+    {DexText_Terminator5, DexText_Yellow},
+    {DexText_Terminator5, DexText_Green},
+    {DexText_Terminator5, DexText_Black},
+    {DexText_Terminator5, DexText_Brown},
+    {DexText_Terminator5, DexText_Purple},
+    {DexText_Terminator5, DexText_Gray},
+    {DexText_Terminator5, DexText_White},
+    {DexText_Terminator5, DexText_Pink},
+    {NULL, NULL},
+};
+static const struct UnknownStruct2 gUnknown_083B59C8[] =
+{
+    {DexText_Terminator5, DexText_None},
+    {DexText_Terminator5, gTypeNames[TYPE_NORMAL]},
+    {DexText_Terminator5, gTypeNames[TYPE_FIGHTING]},
+    {DexText_Terminator5, gTypeNames[TYPE_FLYING]},
+    {DexText_Terminator5, gTypeNames[TYPE_POISON]},
+    {DexText_Terminator5, gTypeNames[TYPE_GROUND]},
+    {DexText_Terminator5, gTypeNames[TYPE_ROCK]},
+    {DexText_Terminator5, gTypeNames[TYPE_BUG]},
+    {DexText_Terminator5, gTypeNames[TYPE_GHOST]},
+    {DexText_Terminator5, gTypeNames[TYPE_STEEL]},
+    {DexText_Terminator5, gTypeNames[TYPE_FIRE]},
+    {DexText_Terminator5, gTypeNames[TYPE_WATER]},
+    {DexText_Terminator5, gTypeNames[TYPE_GRASS]},
+    {DexText_Terminator5, gTypeNames[TYPE_ELECTRIC]},
+    {DexText_Terminator5, gTypeNames[TYPE_PSYCHIC]},
+    {DexText_Terminator5, gTypeNames[TYPE_ICE]},
+    {DexText_Terminator5, gTypeNames[TYPE_DRAGON]},
+    {DexText_Terminator5, gTypeNames[TYPE_DARK]},
+    {NULL, NULL},
+};
+static const u8 gUnknown_083B5A60[] = {0, 1};
+static const u8 gUnknown_083B5A62[] = {0, 1, 2, 3, 4, 5};
+static const u8 gUnknown_083B5A68[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+static const struct UnknownStruct1 gUnknown_083B5A7C[] =
+{
+    {gUnknown_083B5910,  6,  7, 10},
+    {gUnknown_083B5968,  8,  9, 11},
+    {gUnknown_083B59C8, 10, 11, 18},
+    {gUnknown_083B59C8, 12, 13, 18},
+    {gUnknown_083B58D8,  4,  5,  6},
+    {gUnknown_083B58C0,  2,  3,  2},
+};
+static const u8 gUnknown_083B5AAC[] = _("{STR_VAR_1}{CLEAR_TO 43}");
+static const u8 gUnknown_083B5AB2[] = _("{STR_VAR_1}{CLEAR_TO 96}");
 
-u16 NationalPokedexNumToSpecies(u16);
+static void MainCB(void);
+static void Task_PokedexShowMainScreen(u8 taskId);
+static void Task_PokedexMainScreen(u8 taskId);
+static void sub_808C898(u8 taskId);
+static void Task_PokedexMainScreenMenu(u8 taskId);
+static void sub_808CA64(u8 taskId);
+static void sub_808CAE4(u8 taskId);
+static void sub_808CB8C(u8 taskId);
+static void Task_ClosePokedex(u8 taskId);
+static void sub_808CCC4(u8 taskId);
+static void Task_PokedexResultsScreen(u8 taskId);
+static void sub_808CEF8(u8 taskId);
+static void Task_PokedexResultsScreenMenu(u8 taskId);
+static void sub_808D118(u8 taskId);
+static void sub_808D198(u8 taskId);
+static void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId);
+static void Task_PokedexResultsScreenExitPokedex(u8 taskId);
+static bool8 sub_808D344(u8 a);
+static void sub_808D640(void);
+static void SortPokedex(u8 dexMode, u8 sortMode);
+static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d);
+static void sub_808DF88(u16 a, u8 b, u8 c, u16 d);
+static u8 sub_808DFE4(u16 num, u8 b, u8 c);
+static void sub_808E090(u8 a, u8 b, u16 c);
+static void sub_808E0CC(u16 a, u16 b);
+static bool8 sub_808E208(u8 a, u8 b, u8 c);
+static u16 sub_808E48C(u16 a, u16 b);
+static void sub_808E6BC(void);
+static u8 sub_808E71C(void);
+static u8 sub_808E82C(void);
+static u16 sub_808E888(u16 a1);
+static u32 sub_808E8C8(u16 a, s16 b, s16 c);
+static void sub_808E978(u8 a);
+static void sub_808EDB8(struct Sprite *sprite);
+static void sub_808EE28(struct Sprite *sprite);
+static u8 sub_808F210(struct PokedexListItem *, u8);
+static bool8 sub_808F250(u8 taskId);
+static u8 sub_808F284(struct PokedexListItem *, u8);
+static void Task_InitPageScreenMultistep(u8 taskId);
+static void Task_PageScreenProcessInput(u8 taskId);
+static void sub_808F888(u8 taskId);
+static void Task_ClosePageScreen(u8 taskId);
+static void Task_InitAreaScreenMultistep(u8 taskId);
+static void Task_AreaScreenProcessInput(u8 taskId);
+static void sub_808FA00(u8 taskId);
+static void Task_InitCryScreenMultistep(u8 taskId);
+static void Task_CryScreenProcessInput(u8 taskId);
+static void sub_808FFBC(u8 taskId);
+static void sub_8090040(u8 a);
+static void Task_InitSizeScreenMultistep(u8 taskId);
+static void Task_SizeScreenProcessInput(u8 taskId);
+static void sub_8090498(u8 taskId);
+static void sub_80904FC(u16 a);
+static void sub_8090540(u16 a);
+static void sub_8090584(u8 a, u16 b);
+static void sub_8090644(u8 a, u16 b);
+static void sub_8090750(u8);
+static void sub_8090A3C(u8);
+static void sub_8090B8C(u8);
+static void sub_8090C28(struct Sprite *);
+static void sub_8090C68(void);
+static void sub_8091060(u16);
+static void sub_8091154(u16 order, u8, u8);
+static u8 sub_80911C8(u16 num, u8, u8);
+static u8 sub_8091260(u16 num, u8, u8, u8);
+static void sub_8091304(const u8 *name, u8, u8);
+static void sub_8091458(u16 height, u8 i, u8 i1);
+static void sub_8091564(u16 weight, u8 i, u8 i1);
+static void sub_8091738(u16, u16, u16);
+static void sub_80917CC(u16 i, u16 i1);
+static u16 sub_8091818(u8, u16, u16, u16);
+static u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+static u8 sub_8091A4C(u16 gender, s16, s16, u16);
+static void sub_8091E54(u8);
+static void sub_809204C(u8);
+static void sub_809207C(u8);
+static void sub_809217C(u8);
+static void sub_80921B0(u8);
+static void sub_80923FC(u8);
+static void sub_80924A4(u8);
+static void sub_8092508(u8);
+static void sub_80925CC(u8);
+static void sub_8092644(u8);
+static void sub_80927B8(u8);
+static void sub_80927F0(u8);
+static void sub_8092AB0(u8);
+static void sub_8092AD4(u8, u8);
+static void sub_8092B68(u8);
+static void sub_8092C8C(u8);
+static void sub_8092D78(u8);
+static u8 sub_8092E10(u8, u8);
+static void sub_8092EB0(u8);
+static void sub_809308C(u8);
 
-//  asm/pokedex_area_screen
-void ShowPokedexAreaScreen(u16 species, u8 *string);
 
 void ResetPokedex(void)
 {
@@ -139,18 +1321,18 @@ void sub_808C0A0(void)
     gUnknown_0202FFBA = 0x40;
 }
 
-void sub_808C0B8(void)
+static void sub_808C0B8(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void ClearPokedexView(struct PokedexView *pokedexView)
+static void ClearPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
 
-    for (i = 0; i <= 385; i++)
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
     {
         pokedexView->unk0[i].dexNum |= 0xFFFF;
         pokedexView->unk0[i].seen = 0;
@@ -159,7 +1341,7 @@ void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->unk608 = 0;
     pokedexView->unk60A_1 = 0;
     pokedexView->unk60A_2 = 0;
-    pokedexView->unk60C = 0;
+    pokedexView->pokemonListCount = 0;
     pokedexView->selectedPokemon = 0;
     pokedexView->unk610 = 0;
     pokedexView->dexMode = 0;
@@ -203,30 +1385,30 @@ void CB2_InitPokedex(void)
     {
     case 0:
     default:
-    {
-        u8 *addr;
-        u32 size;
-
-        SetVBlankCallback(NULL);
-        sub_8091060(0);
-        addr = (u8 *)VRAM;
-        size = VRAM_SIZE;
-        while (1)
         {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
+            u8 *addr;
+            u32 size;
+
+            SetVBlankCallback(NULL);
+            sub_8091060(0);
+            addr = (u8 *)VRAM;
+            size = VRAM_SIZE;
+            while (1)
             {
-                DmaFill16(3, 0, addr, size);
-                break;
+                DmaFill16(3, 0, addr, 0x1000);
+                addr += 0x1000;
+                size -= 0x1000;
+                if (size <= 0x1000)
+                {
+                    DmaFill16(3, 0, addr, size);
+                    break;
+                }
             }
+            DmaClear32(3, OAM, OAM_SIZE);
+            DmaClear16(3, PLTT, PLTT_SIZE);
+            gMain.state = 1;
         }
-        DmaClear32(3, OAM, OAM_SIZE);
-        DmaClear16(3, PLTT, PLTT_SIZE);
-        gMain.state = 1;
         break;
-    }
     case 1:
         remove_some_task();
         ResetTasks();
@@ -264,7 +1446,7 @@ void CB2_InitPokedex(void)
         gPokedexView->selectedPokemon = gUnknown_0202FFB8;
         gPokedexView->unk62C = gUnknown_0202FFBA;
         gPokedexView->selectedScreen = PAGE_SCREEN;
-        gPokedexView->unk64E = 0;
+        gPokedexView->descriptionPageNum = 0;
         if (!IsNationalPokedexEnabled())
         {
             gPokedexView->unk61A = GetHoennPokedexCount(0);
@@ -279,19 +1461,20 @@ void CB2_InitPokedex(void)
         gMain.state++;
         break;
     case 3:
-    {
-        u16 savedIme;
+        {
+            u16 savedIme;
 
-        savedIme = REG_IME;
-        REG_IME = 0;
-        REG_IE |= 1;
-        REG_IME = savedIme;
-        REG_DISPSTAT |= 8;
-        SetVBlankCallback(sub_808C0B8);
-        SetMainCallback2(MainCB);
-        SortPokedex(gPokedexView->dexMode, gPokedexView->dexOrder);
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
-    }
+            savedIme = REG_IME;
+            REG_IME = 0;
+            REG_IE |= 1;
+            REG_IME = savedIme;
+            REG_DISPSTAT |= 8;
+            SetVBlankCallback(sub_808C0B8);
+            SetMainCallback2(MainCB);
+            SortPokedex(gPokedexView->dexMode, gPokedexView->dexOrder);
+            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
+        }
+        break;
     }
 }
 
@@ -320,7 +1503,7 @@ u8 unref_sub_808C540(void (*func)(u8))
     return gTasks[taskId].data[0];
 }
 
-void MainCB(void)
+static void MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -328,13 +1511,11 @@ void MainCB(void)
     UpdatePaletteFade();
 }
 
-void Task_PokedexShowMainScreen(u8 taskId)
+static void Task_PokedexShowMainScreen(u8 taskId)
 {
     gPokedexView->unk64C_1 = 0;
     if (sub_808D344(0))
-    {
         gTasks[taskId].func = Task_PokedexMainScreen;
-    }
 }
 
 //Hide menu and process input on main screen
@@ -351,9 +1532,9 @@ void Task_PokedexMainScreen(u8 taskId)
         {
             sub_808E6BC();
             BeginNormalPaletteFade(
-              ~(1 << (gSprites[gPokedexView->unk626].oam.paletteNum + 16)),
+              ~(1 << (gSprites[gPokedexView->selectedMonSpriteId].oam.paletteNum + 16)),
               0, 0, 0x10, 0);
-            gSprites[gPokedexView->unk626].callback = sub_808EDB8;
+            gSprites[gPokedexView->selectedMonSpriteId].callback = sub_808EDB8;
             gTasks[taskId].func = sub_808CA64;
             PlaySE(SE_PIN);
         }
@@ -395,16 +1576,14 @@ void Task_PokedexMainScreen(u8 taskId)
     }
 }
 
-void sub_808C898(u8 taskId)
+static void sub_808C898(u8 taskId)
 {
     if (sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636))
-    {
         gTasks[taskId].func = Task_PokedexMainScreen;
-    }
 }
 
 //Bring up menu and process menu input
-void Task_PokedexMainScreenMenu(u8 taskId)
+static void Task_PokedexMainScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
@@ -429,8 +1608,8 @@ void Task_PokedexMainScreenMenu(u8 taskId)
                 gMain.newKeys |= START_BUTTON;  //Exit menu
                 break;
             case 2: //LIST BOTTOM
-                gPokedexView->selectedPokemon = gPokedexView->unk60C - 1;
-                gPokedexView->unk62C = gPokedexView->unk60C * 16 + 0x30;
+                gPokedexView->selectedPokemon = gPokedexView->pokemonListCount - 1;
+                gPokedexView->unk62C = gPokedexView->pokemonListCount * 16 + 0x30;
                 sub_808E82C();
                 sub_808E0CC(gPokedexView->selectedPokemon, 0xE);
                 gMain.newKeys |= START_BUTTON;  //Exit menu
@@ -463,27 +1642,23 @@ void Task_PokedexMainScreenMenu(u8 taskId)
     }
 }
 
-void sub_808CA64(u8 taskId)
+static void sub_808CA64(u8 taskId)
 {
-    if (gSprites[gPokedexView->unk626].pos1.x == 0x30 &&
-    gSprites[gPokedexView->unk626].pos1.y == 0x38)
+    if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
+     && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
     {
         gPokedexView->unk64B = gPokedexView->unk64A;
-        gTasks[taskId].data[0] = sub_808F210(&gPokedexView->unk0[gPokedexView->selectedPokemon], gPokedexView->unk626);
+        gTasks[taskId].data[0] = sub_808F210(&gPokedexView->unk0[gPokedexView->selectedPokemon], gPokedexView->selectedMonSpriteId);
         gTasks[taskId].func = sub_808CAE4;
     }
 }
 
-void sub_808CAE4(u8 taskId)
+static void sub_808CAE4(u8 taskId)
 {
     if (gTasks[gTasks[taskId].data[0]].isActive)
     {
-        if (gPokedexView->unk64A == 1 &&
-        !sub_808F250(gTasks[taskId].data[0]) &&
-        sub_808E71C())
-        {
+        if (gPokedexView->unk64A == 1 && !sub_808F250(gTasks[taskId].data[0]) && sub_808E71C())
             sub_808F284(&gPokedexView->unk0[gPokedexView->selectedPokemon], gTasks[taskId].data[0]);
-        }
     }
     else
     {
@@ -493,13 +1668,13 @@ void sub_808CAE4(u8 taskId)
     }
 }
 
-void sub_808CB8C(u8 taskId)
+static void sub_808CB8C(u8 taskId)
 {
     bool8 isActive = gTasks[gTasks[taskId].data[0]].isActive;
 
     if (!isActive)
     {
-        if (gPokedexView->unk64F)
+        if (gPokedexView->unk64F != 0)
         {
             gPokedexView->selectedPokemon = isActive;
             gPokedexView->unk62C = 0x40;
@@ -518,7 +1693,7 @@ void sub_808CB8C(u8 taskId)
     }
 }
 
-void Task_ClosePokedex(u8 taskId)
+static void Task_ClosePokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -532,19 +1707,21 @@ void Task_ClosePokedex(u8 taskId)
     }
 }
 
-void sub_808CCC4(u8 taskId)
+static void sub_808CCC4(u8 taskId)
 {
     gPokedexView->unk64C_1 = 1;
     if (sub_808D344(3))
         gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void Task_PokedexResultsScreen(u8 taskId)
+static void Task_PokedexResultsScreen(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
     if (gPokedexView->menuY)
+    {
         gPokedexView->menuY -= 8;
+    }
     else
     {
         if ((gMain.newKeys & A_BUTTON) && gPokedexView->unk0[gPokedexView->selectedPokemon].seen)
@@ -552,8 +1729,8 @@ void Task_PokedexResultsScreen(u8 taskId)
             u32 a;
 
             sub_808E6BC();
-            a = (1 << (gSprites[gPokedexView->unk626].oam.paletteNum + 16));
-            gSprites[gPokedexView->unk626].callback = sub_808EDB8;
+            a = (1 << (gSprites[gPokedexView->selectedMonSpriteId].oam.paletteNum + 16));
+            gSprites[gPokedexView->selectedMonSpriteId].callback = sub_808EDB8;
             BeginNormalPaletteFade(~a, 0, 0, 0x10, 0);
             gTasks[taskId].func = sub_808D118;
             PlaySE(SE_PIN);
@@ -590,18 +1767,20 @@ void Task_PokedexResultsScreen(u8 taskId)
     }
 }
 
-void sub_808CEF8(u8 taskId)
+static void sub_808CEF8(u8 taskId)
 {
     if (sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636))
         gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void Task_PokedexResultsScreenMenu(u8 taskId)
+static void Task_PokedexResultsScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gPokedexView->menuY;
 
-    if (gPokedexView->menuY != 0x60)
+    if (gPokedexView->menuY != 96)
+    {
         gPokedexView->menuY += 8;
+    }
     else
     {
         if (gMain.newKeys & A_BUTTON)
@@ -620,8 +1799,8 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
                 gMain.newKeys |= START_BUTTON;
                 break;
             case 2: //LIST BOTTOM
-                gPokedexView->selectedPokemon = gPokedexView->unk60C - 1;
-                gPokedexView->unk62C = gPokedexView->unk60C * 16 + 0x30;
+                gPokedexView->selectedPokemon = gPokedexView->pokemonListCount - 1;
+                gPokedexView->unk62C = gPokedexView->pokemonListCount * 16 + 0x30;
                 sub_808E82C();
                 sub_808E0CC(gPokedexView->selectedPokemon, 0xE);
                 gMain.newKeys |= START_BUTTON;
@@ -659,27 +1838,23 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
     }
 }
 
-void sub_808D118(u8 taskId)
+static void sub_808D118(u8 taskId)
 {
-    if (gSprites[gPokedexView->unk626].pos1.x == 0x30 &&
-    gSprites[gPokedexView->unk626].pos1.y == 0x38)
+    if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
+     && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
     {
         gPokedexView->unk64B = gPokedexView->unk64A;
-        gTasks[taskId].data[0] = sub_808F210(&gPokedexView->unk0[gPokedexView->selectedPokemon], gPokedexView->unk626);
+        gTasks[taskId].data[0] = sub_808F210(&gPokedexView->unk0[gPokedexView->selectedPokemon], gPokedexView->selectedMonSpriteId);
         gTasks[taskId].func = sub_808D198;
     }
 }
 
-void sub_808D198(u8 taskId)
+static void sub_808D198(u8 taskId)
 {
     if (gTasks[gTasks[taskId].data[0]].isActive)
     {
-        if (gPokedexView->unk64A == 1 &&
-        !sub_808F250(gTasks[taskId].data[0]) &&
-        sub_808E71C())
-        {
+        if (gPokedexView->unk64A == 1 && !sub_808F250(gTasks[taskId].data[0]) && sub_808E71C())
             sub_808F284(&gPokedexView->unk0[gPokedexView->selectedPokemon], gTasks[taskId].data[0]);
-        }
     }
     else
     {
@@ -687,7 +1862,7 @@ void sub_808D198(u8 taskId)
     }
 }
 
-void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
+static void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -701,7 +1876,7 @@ void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
     }
 }
 
-void Task_PokedexResultsScreenExitPokedex(u8 taskId)
+static void Task_PokedexResultsScreenExitPokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -715,8 +1890,7 @@ void Task_PokedexResultsScreenExitPokedex(u8 taskId)
     }
 }
 
-
-bool8 sub_808D344(u8 a)
+static bool8 sub_808D344(u8 a)
 {
     switch (gMain.state)
     {
@@ -724,7 +1898,6 @@ bool8 sub_808D344(u8 a)
     default:
         if (gPaletteFade.active)
             return 0;
-        //_0808D39E
         SetVBlankCallback(NULL);
         gPokedexView->unk64A = a;
         sub_8091060(0);
@@ -749,7 +1922,7 @@ bool8 sub_808D344(u8 a)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LoadCompressedObjectPic(&gUnknown_083A05CC);
+        LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
         LoadSpritePalettes(gUnknown_083A05DC);
         sub_808E978(a);
         gMain.state++;
@@ -793,30 +1966,29 @@ bool8 sub_808D344(u8 a)
         if (!gPaletteFade.active)
         {
             gMain.state = 0;
-            return 1;
+            return TRUE;
         }
-        else
-            return 0;
+        break;
     }
-    return 0;
+    return FALSE;
 }
 
-void sub_808D640(void)
+static void sub_808D640(void)
 {
     if (gPokedexView->unk64C_1)
-        LoadPalette(gUnknown_0839F67C + 0x2, 1, 0xBE);
+        LoadPalette(sPokedexSearchPalette + 1, 1, sizeof(sPokedexSearchPalette) - sizeof(u16));
     else if (!IsNationalPokedexEnabled())
-        LoadPalette(gPokedexMenu_Pal + 0x2, 1, 0xBE);
+        LoadPalette(gPokedexMenu_Pal + 1, 1, 0xBE);
     else
-        LoadPalette(gUnknown_0839F73C + 0x2, 1, 0xBE);
+        LoadPalette(sNationalPokedexPalette + 1, 1, sizeof(sNationalPokedexPalette) - sizeof(u16));
 }
 
-void SortPokedex(u8 dexMode, u8 sortMode)
+static void SortPokedex(u8 dexMode, u8 sortMode)
 {
     u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
     s16 i;
 
-    gPokedexView->unk60C = 0;
+    gPokedexView->pokemonListCount = 0;
 
     switch (dexMode)
     {
@@ -828,7 +2000,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
     case DEX_MODE_NATIONAL:
         if (IsNationalPokedexEnabled())
         {
-            vars[0] = 386;
+            vars[0] = NATIONAL_DEX_COUNT;
             vars[1] = 0;
         }
         else
@@ -842,17 +2014,16 @@ void SortPokedex(u8 dexMode, u8 sortMode)
     switch (sortMode)
     {
     case 0:
-    {
         if (vars[1])
         {
             for (i = 0; i < vars[0]; i++)
             {
                 vars[2] = HoennToNationalOrder(i + 1);
                 gPokedexView->unk0[i].dexNum = vars[2];
-                gPokedexView->unk0[i].seen = sub_8090D90(vars[2], 0);
-                gPokedexView->unk0[i].owned = sub_8090D90(vars[2], 1);
+                gPokedexView->unk0[i].seen = GetNationalPokedexFlag(vars[2], 0);
+                gPokedexView->unk0[i].owned = GetNationalPokedexFlag(vars[2], 1);
                 if (gPokedexView->unk0[i].seen)
-                    gPokedexView->unk60C = i + 1;
+                    gPokedexView->pokemonListCount = i + 1;
             }
         }
         else
@@ -864,94 +2035,94 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             for (i = 0; i < vars[0]; i++)
             {
                 vars[2] = i + 1;
-                if (sub_8090D90(vars[2], 0))
+                if (GetNationalPokedexFlag(vars[2], 0))
                     r10 = 1;
                 if (r10)
                 {
                     asm("");    //Needed to match for some reason
                     gPokedexView->unk0[r5].dexNum = vars[2];
-                    gPokedexView->unk0[r5].seen = sub_8090D90(vars[2], 0);
-                    gPokedexView->unk0[r5].owned = sub_8090D90(vars[2], 1);
+                    gPokedexView->unk0[r5].seen = GetNationalPokedexFlag(vars[2], 0);
+                    gPokedexView->unk0[r5].owned = GetNationalPokedexFlag(vars[2], 1);
                     if (gPokedexView->unk0[r5].seen)
-                        gPokedexView->unk60C = r5 + 1;
+                        gPokedexView->pokemonListCount = r5 + 1;
                     r5++;
                 }
             }
         }
         break;
-    }
     case 1:
         for (i = 0; i < 411; i++)
         {
             vars[2] = gPokedexOrder_Alphabetical[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 0))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 0))
             {
-                gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
-                gPokedexView->unk0[gPokedexView->unk60C].seen = 1;
-                gPokedexView->unk0[gPokedexView->unk60C].owned = sub_8090D90(vars[2], 1);
-                gPokedexView->unk60C++;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
+                gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = GetNationalPokedexFlag(vars[2], 1);
+                gPokedexView->pokemonListCount++;
             }
         }
         break;
     case 2:
-        for (i = 385; i >= 0; i--)
+        for (i = NATIONAL_DEX_COUNT - 1; i >= 0; i--)
         {
             vars[2] = gPokedexOrder_Weight[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
-                gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
-                gPokedexView->unk0[gPokedexView->unk60C].seen = 1;
-                gPokedexView->unk0[gPokedexView->unk60C].owned = 1;
-                gPokedexView->unk60C++;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
+                gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = 1;
+                gPokedexView->pokemonListCount++;
             }
         }
         break;
     case 3:
-        for (i = 0; i < 386; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             vars[2] = gPokedexOrder_Weight[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
-                gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
-                gPokedexView->unk0[gPokedexView->unk60C].seen = 1;
-                gPokedexView->unk0[gPokedexView->unk60C].owned = 1;
-                gPokedexView->unk60C++;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
+                gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = 1;
+                gPokedexView->pokemonListCount++;
             }
         }
         break;
     case 4:
-        for (i = 385; i >=0; i--)
+        for (i = NATIONAL_DEX_COUNT - 1; i >=0; i--)
         {
             vars[2] = gPokedexOrder_Height[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
-                gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
-                gPokedexView->unk0[gPokedexView->unk60C].seen = 1;
-                gPokedexView->unk0[gPokedexView->unk60C].owned = 1;
-                gPokedexView->unk60C++;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
+                gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = 1;
+                gPokedexView->pokemonListCount++;
             }
         }
         break;
     case 5:
-        for (i = 0; i < 386; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             vars[2] = gPokedexOrder_Height[i];
 
-            if (NationalToHoennOrder(vars[2]) <= vars[0] && sub_8090D90(vars[2], 1))
+            if (NationalToHoennOrder(vars[2]) <= vars[0] && GetNationalPokedexFlag(vars[2], 1))
             {
-                gPokedexView->unk0[gPokedexView->unk60C].dexNum = vars[2];
-                gPokedexView->unk0[gPokedexView->unk60C].seen = 1;
-                gPokedexView->unk0[gPokedexView->unk60C].owned = 1;
-                gPokedexView->unk60C++;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].dexNum = vars[2];
+                gPokedexView->unk0[gPokedexView->pokemonListCount].seen = 1;
+                gPokedexView->unk0[gPokedexView->pokemonListCount].owned = 1;
+                gPokedexView->pokemonListCount++;
             }
         }
         break;
     }
-    for (i = gPokedexView->unk60C; i < 386; i++)
+
+    for (i = gPokedexView->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
     {
         gPokedexView->unk0[i].dexNum |= 0xFFFF;
         gPokedexView->unk0[i].seen = 0;
@@ -959,20 +2130,23 @@ void SortPokedex(u8 dexMode, u8 sortMode)
     }
 }
 
-void sub_808DBE8(u8 a, u16 b, u16 c)
+static void sub_808DBE8(u8 a, u16 b, u16 c)
 {
+    s16 _b;
+    u16 i;
+    u16 r2;
+
     switch (a)
     {
     case 0:
     default:
-    {
-        u16 i;
-        s16 _b = b - 5;
-
+        _b = b - 5;
         for (i = 0; i <= 10; i++)
         {
-            if ((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
+            if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gPokedexView->unk0[_b].dexNum == 0xFFFF)
+            {
                 sub_808E090(0x11, i * 2, c);
+            }
             else
             {
                 sub_808E090(0x11, i * 2, c);
@@ -992,13 +2166,12 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
             _b++;
         }
         break;
-    }
     case 1:
-    {
-        s16 _b = b - 5;
-
-        if ((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
+        _b = b - 5;
+        if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gPokedexView->unk0[_b].dexNum == 0xFFFF)
+        {
             sub_808E090(0x11, gPokedexView->unk630 * 2, c);
+        }
         else
         {
             sub_808E090(0x11, gPokedexView->unk630 * 2, c);
@@ -1016,15 +2189,12 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
             }
         }
         break;
-    }
     case 2:
-    {
-        s16 _b = b + 5;
-        u16 r2 = gPokedexView->unk630 + 10;
-
+        _b = b + 5;
+        r2 = gPokedexView->unk630 + 10;
         if (r2 > 15)
             r2 -= 16;
-        if ((u16)_b > 385 || gPokedexView->unk0[_b].dexNum == 0xFFFF)
+        if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gPokedexView->unk0[_b].dexNum == 0xFFFF)
             sub_808E090(0x11, r2 * 2, c);
         else
         {
@@ -1044,10 +2214,9 @@ void sub_808DBE8(u8 a, u16 b, u16 c)
         }
         break;
     }
-    }
 }
 
-void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
+static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
 {
     u8 text[4];
     u16 unk[2];
@@ -1057,16 +2226,16 @@ void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
         r7 = NationalToHoennOrder(r7);
     unk[0] = 0x3FC;
     unk[1] = 0x3FD;
-    text[0] = r7 / 100 + 0xA1;
-    text[1] = (r7 % 100) / 10 + 0xA1;
-    text[2] = (r7 % 100) % 10 + 0xA1;
-    text[3] = 0xFF;
+    text[0] = CHAR_0 + r7 / 100;
+    text[1] = CHAR_0 + (r7 % 100) / 10;
+    text[2] = CHAR_0 + (r7 % 100) % 10;
+    text[3] = EOS;
     *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + 0x40 + d * 0x800 + c * 0x40 + b * 2) = unk[1];
+    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
     MenuPrint(text, b - 15, c);
 }
 
-void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
+static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
 {
     u16 unk[2];
 
@@ -1081,152 +2250,57 @@ void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
         unk[1] = 0;
     }
     *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + 0x40 + d * 0x800 + c * 0x40 + b * 2) = unk[1];
+    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
 }
 
-#ifdef NONMATCHING
-//FixMe
-u8 sub_808DFE4(u16 a, u8 b, u8 c)
+static u8 sub_808DFE4(u16 num, u8 b, u8 c)
 {
     u8 text[10];
     u8 i;
-    u32 species;
 
     for (i = 0; i < 10; i++)
-        text[i] = 0;
+        text[i] = CHAR_SPACE;
     text[i] = EOS;
-    species = NationalPokedexNumToSpecies(a);
-    if (species)
+
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
     {
-        for (i = 0; gSpeciesNames[species][i] != EOS && i < 10; i++)
-            text[i] = gSpeciesNames[species][i];
-    }
-    else
-    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            text[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
         for (i = 0; i < 10; i++)
-            text[i] = 0xAE;
+            text[i] = CHAR_HYPHEN;
+        break;
     }
     MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
+    return i;
 }
-#else
-__attribute__((naked))
-u8 sub_808DFE4(u16 a, u8 b, u8 c)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0xC\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    lsls r1, 24\n\
-    lsrs r5, r1, 24\n\
-    lsls r2, 24\n\
-    lsrs r6, r2, 24\n\
-    movs r4, 0\n\
-    movs r1, 0\n\
-_0808DFF8:\n\
-    mov r2, sp\n\
-    adds r0, r2, r4\n\
-    strb r1, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x9\n\
-    bls _0808DFF8\n\
-    adds r0, r2, r4\n\
-    movs r1, 0xFF\n\
-    strb r1, [r0]\n\
-    adds r0, r3, 0\n\
-    bl NationalPokedexNumToSpecies\n\
-    adds r3, r0, 0\n\
-    cmp r3, 0\n\
-    beq _0808E058\n\
-    movs r4, 0\n\
-    ldr r2, _0808E054\n\
-    movs r0, 0xB\n\
-    adds r1, r3, 0\n\
-    muls r1, r0\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    subs r5, 0x11\n\
-    lsls r6, 19\n\
-    cmp r0, 0xFF\n\
-    beq _0808E070\n\
-    adds r3, r1, 0\n\
-_0808E032:\n\
-    mov r0, sp\n\
-    adds r1, r0, r4\n\
-    adds r0, r4, r3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    adds r0, r4, r3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xFF\n\
-    beq _0808E070\n\
-    cmp r4, 0x9\n\
-    bls _0808E032\n\
-    b _0808E070\n\
-    .align 2, 0\n\
-_0808E054: .4byte gSpeciesNames\n\
-_0808E058:\n\
-    movs r4, 0\n\
-    subs r5, 0x11\n\
-    lsls r6, 19\n\
-    movs r1, 0xAE\n\
-_0808E060:\n\
-    mov r2, sp\n\
-    adds r0, r2, r4\n\
-    strb r1, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x9\n\
-    bls _0808E060\n\
-_0808E070:\n\
-    lsls r1, r5, 27\n\
-    movs r0, 0xFC\n\
-    lsls r0, 24\n\
-    adds r1, r0\n\
-    lsrs r1, 24\n\
-    lsrs r2, r6, 16\n\
-    mov r0, sp\n\
-    movs r3, 0\n\
-    bl MenuPrint_PixelCoords\n\
-    adds r0, r4, 0\n\
-    add sp, 0xC\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
-void sub_808E090(u8 a, u8 b, u16 c)
+static void sub_808E090(u8 a, u8 b, u16 c)
 {
     u8 i;
 
     for (i = 0; i < 12; i++)
     {
         *(u16 *)(VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
-        *(u16 *)(VRAM + 0x40 + c * 0x800 + b * 64 + (a + i) * 2) = 0;
+        *(u16 *)(VRAM + c * 0x800 + (b + 1) * 64 + (a + i) * 2) = 0;
     }
 }
 
-void sub_808E0CC(u16 a, u16 b)
+static void sub_808E0CC(u16 a, u16 b)
 {
     u8 i;
     u16 unk;
     u8 spriteId;
 
     for (i = 0; i < 4; i++)
-        gPokedexView->unk61E[i] |= 0xFFFF;
-    gPokedexView->unk626 = 0xFFFF;
+        gPokedexView->unk61E[i] = 0xFFFF;
+    gPokedexView->selectedMonSpriteId = 0xFFFF;
     sub_808DBE8(0, a, b);
     REG_BG2VOFS = gPokedexView->unk62D;
+
     unk = sub_808E888(a - 1);
     if (unk != 0xFFFF)
     {
@@ -1234,6 +2308,7 @@ void sub_808E0CC(u16 a, u16 b)
         gSprites[spriteId].callback = sub_808EE28;
         gSprites[spriteId].data5 = -32;
     }
+
     unk = sub_808E888(a);
     if (unk != 0xFFFF)
     {
@@ -1241,6 +2316,7 @@ void sub_808E0CC(u16 a, u16 b)
         gSprites[spriteId].callback = sub_808EE28;
         gSprites[spriteId].data5 = 0;
     }
+
     unk = sub_808E888(a + 1);
     if (unk != 0xFFFF)
     {
@@ -1248,11 +2324,12 @@ void sub_808E0CC(u16 a, u16 b)
         gSprites[spriteId].callback = sub_808EE28;
         gSprites[spriteId].data5 = 32;
     }
+
     gPokedexView->unk630 = 0;
     gPokedexView->unk632 = 0;
 }
 
-bool8 sub_808E208(u8 a, u8 b, u8 c)
+static bool8 sub_808E208(u8 a, u8 b, u8 c)
 {
     u16 i;
     u8 foo;
@@ -1283,17 +2360,16 @@ bool8 sub_808E208(u8 a, u8 b, u8 c)
             gPokedexView->unk62C += gPokedexView->unk628;
             break;
         }
-        return 0;
+        return FALSE;
     }
-    //_0808E36C
     else
     {
         REG_BG2VOFS = gPokedexView->unk62D + gPokedexView->unk630 * 16;
-        return 1;
+        return TRUE;
     }
 }
 
-void sub_808E398(u8 a, u16 b)
+static void sub_808E398(u8 a, u16 b)
 {
     u16 unk;
     u8 spriteId;
@@ -1302,22 +2378,19 @@ void sub_808E398(u8 a, u16 b)
     switch (a)
     {
     case 1:
-    {
         unk = sub_808E888(b - 1);
         if (unk != 0xFFFF)
         {
             spriteId = sub_808E8C8(unk, 0x60, 0x50);
             gSprites[spriteId].callback = sub_808EE28;
-            gSprites[spriteId].data5 = 0xFFC0;
+            gSprites[spriteId].data5 = -64;
         }
         if (gPokedexView->unk630 > 0)
             gPokedexView->unk630--;
         else
-            gPokedexView->unk630 = 0xF;
+            gPokedexView->unk630 = 15;
         break;
-    }
     case 2:
-    {
         unk = sub_808E888(b + 1);
         if (unk != 0xFFFF)
         {
@@ -1331,370 +2404,90 @@ void sub_808E398(u8 a, u16 b)
             gPokedexView->unk630 = 0;
         break;
     }
-    }
 }
-#ifdef NONMATCHING
-//This one's ridiculous. Fix later
-u16 sub_808E48C(u16 a, u16 b)
+
+// Ugly, ugly, ugly. I couldn't get it to match otherwise.
+static u16 sub_808E48C(u16 a, u16 b)
 {
     u8 r3;
     u8 r5;
-    u32 r10 = 0;
-    if (!(gMain.heldKeys & 0x40) || a == 0)
+    u8 i;
+    u16 r6;
+    u8 r10 = 0;
+
+    if (!((gMain.heldKeys & 0x40) && (a > 0)))
     {
-        u8 i;
-        u16 r6;
-
         //_0808E4B6
-        if (gMain.heldKeys & 0x80)
-        {
-            if (a < gPokedexView->unk60C - 1)
-                goto _0808E5C4;
-        }
+        if (!((gMain.heldKeys & 0x80) && (a < gPokedexView->pokemonListCount - 1)))
         //_0808E4CE
-
-        if ((gMain.newKeys & 0x20) && a != 0)
         {
-            r6 = a;
-            //_0808E4E0
-            for (i = 0; i < 7; i++)
+            if ((gMain.newKeys & 0x20) && (a > 0))
             {
-                a = sub_8091818(1, a, 0, gPokedexView->unk60C - 1);
+                r6 = a;
+                //_0808E4E0
+                for (i = 0; i < 7; i++)
+                    a = sub_8091818(1, a, 0, gPokedexView->pokemonListCount - 1);
+                gPokedexView->unk62C += 16 * (a - r6);
+                sub_808E82C();
+                sub_808E0CC(a, 0xE);
+                PlaySE(0x6D);
             }
-
-            gPokedexView->unk62C += (a - r6) * 16;
-            sub_808E82C();
-            sub_808E0CC(a, 0xE);
-            PlaySE(SE_Z_PAGE);
-            goto _0808E5A2;
+            //_0808E53C
+            else if ((gMain.newKeys & 0x10) && (a < gPokedexView->pokemonListCount - 1))
+            {
+                r6 = a;
+                for (i = 0; i < 7; i++)
+                    a = sub_8091818(0, a, 0, gPokedexView->pokemonListCount - 1);
+                gPokedexView->unk62C += (a - r6) * 16;
+                sub_808E82C();
+                sub_808E0CC(a, 0xE);
+                PlaySE(0x6D);
+            }
+          _0808E5A2:
+            if (r10 == 0)
+            {
+                gPokedexView->unk638 = 0;
+                return a;
+            }
         }
-        //_0808E53C
-        if (!(gMain.newKeys & 0x10) || a >= gPokedexView->unk60C - 1)
-            goto _0808E5A2;
-
-        r6 = a;
-        for (i = 0; i < 7; i++)
+        else
         {
-            a = sub_8091818(0, a, 0, gPokedexView->unk60C - 1);
+            // to _0808E5C4
+            r10 = 2;
+            a = sub_8091818(0, a, 0, gPokedexView->pokemonListCount - 1);
+            sub_808E398(2, a);
+            //goto _0808E60E
+            sub_808DBE8(2, a, b);
+            PlaySE(0x6C);
+            goto _0808E5A2;
         }
-
-        gPokedexView->unk62C += (a - r6) * 16;
-        sub_808E82C();
-        sub_808E0CC(a, 0xE);
-        PlaySE(SE_Z_PAGE);
-        goto _0808E5A2;
-
-       _0808E5A2:
-        if (r10 != 0)
-            goto _0808E628;
-        gPokedexView->unk638 = r10;
-        return a;
-
-       _0808E5C4:
-        r10 = 2;
-        a = sub_8091818(0, a, 0, gPokedexView->unk60C - 1);
-        sub_808E398(2, a);
-        //goto _0808E60E
-        sub_808DBE8(2, a, b);
-        PlaySE(SE_Z_SCROLL);
     }
-    //_0808E5E4
     else
     {
+        //to _0808E5E4
         r10 = 1;
-        a = sub_8091818(1, a, 0, gPokedexView->unk60C - 1);
+        a = sub_8091818(1, a, 0, gPokedexView->pokemonListCount - 1);
         sub_808E398(1, a);
         //_0808E60E
         sub_808DBE8(1, a, b);
-        PlaySE(SE_Z_SCROLL);
+        PlaySE(0x6C);
+        goto _0808E5A2;
     }
-    //_0808E60E
-    goto _0808E5A2;
-
-  _0808E628:
+    //_0808E628
     r5 = gUnknown_083A05EC[gPokedexView->unk638 / 4];
     r3 = gUnknown_083A05F1[gPokedexView->unk638 / 4];
     gPokedexView->unk62E = r3;
     gPokedexView->unk636 = r3;
     gPokedexView->unk634 = r5;
     gPokedexView->unk62F = r10;
-    gPokedexView->unk628 = r5;
+    gPokedexView->unk628 = r5 / 2;
     sub_808E208(gPokedexView->unk62F, gPokedexView->unk634, gPokedexView->unk636);
     if (gPokedexView->unk638 <= 0xB)
         gPokedexView->unk638++;
     return a;
 }
-#else
-__attribute__((naked))
-u16 sub_808E48C(u16 a, u16 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    lsls r1, 16\n\
-    lsrs r4, r1, 16\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    ldr r1, _0808E52C\n\
-    ldrh r2, [r1, 0x2C]\n\
-    movs r0, 0x40\n\
-    ands r0, r2\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0\n\
-    beq _0808E4B6\n\
-    cmp r7, 0\n\
-    beq _0808E4B6\n\
-    b _0808E5E4\n\
-_0808E4B6:\n\
-    movs r0, 0x80\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0808E4CE\n\
-    ldr r0, _0808E530\n\
-    ldr r0, [r0]\n\
-    ldr r1, _0808E534\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r7, r0\n\
-    blt _0808E5C4\n\
-_0808E4CE:\n\
-    ldrh r1, [r3, 0x2E]\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0808E53C\n\
-    cmp r7, 0\n\
-    beq _0808E53C\n\
-    adds r6, r7, 0\n\
-    movs r4, 0\n\
-_0808E4E0:\n\
-    ldr r5, _0808E530\n\
-    ldr r0, [r5]\n\
-    ldr r2, _0808E534\n\
-    adds r0, r2\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x6\n\
-    bls _0808E4E0\n\
-    ldr r1, [r5]\n\
-    ldr r3, _0808E538\n\
-    adds r1, r3\n\
-    subs r0, r7, r6\n\
-    lsls r0, 4\n\
-    ldrb r2, [r1]\n\
-    adds r0, r2\n\
-    strb r0, [r1]\n\
-    bl sub_808E82C\n\
-    adds r0, r7, 0\n\
-    movs r1, 0xE\n\
-    bl sub_808E0CC\n\
-    movs r0, 0x6D\n\
-    bl PlaySE\n\
-    b _0808E5A2\n\
-    .align 2, 0\n\
-_0808E52C: .4byte gMain\n\
-_0808E530: .4byte gPokedexView\n\
-_0808E534: .4byte 0x0000060c\n\
-_0808E538: .4byte 0x0000062c\n\
-_0808E53C:\n\
-    ldrh r1, [r3, 0x2E]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0808E5A2\n\
-    ldr r0, _0808E5B8\n\
-    ldr r0, [r0]\n\
-    ldr r3, _0808E5BC\n\
-    adds r0, r3\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r7, r0\n\
-    bge _0808E5A2\n\
-    adds r6, r7, 0\n\
-    movs r4, 0\n\
-_0808E55A:\n\
-    ldr r5, _0808E5B8\n\
-    ldr r0, [r5]\n\
-    ldr r1, _0808E5BC\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x6\n\
-    bls _0808E55A\n\
-    ldr r1, [r5]\n\
-    ldr r2, _0808E5C0\n\
-    adds r1, r2\n\
-    subs r0, r7, r6\n\
-    lsls r0, 4\n\
-    ldrb r3, [r1]\n\
-    adds r0, r3\n\
-    strb r0, [r1]\n\
-    bl sub_808E82C\n\
-    adds r0, r7, 0\n\
-    movs r1, 0xE\n\
-    bl sub_808E0CC\n\
-    movs r0, 0x6D\n\
-    bl PlaySE\n\
-_0808E5A2:\n\
-    mov r0, r10\n\
-    cmp r0, 0\n\
-    bne _0808E628\n\
-    ldr r0, _0808E5B8\n\
-    ldr r0, [r0]\n\
-    movs r1, 0xC7\n\
-    lsls r1, 3\n\
-    adds r0, r1\n\
-    mov r2, r10\n\
-    strh r2, [r0]\n\
-    b _0808E68E\n\
-    .align 2, 0\n\
-_0808E5B8: .4byte gPokedexView\n\
-_0808E5BC: .4byte 0x0000060c\n\
-_0808E5C0: .4byte 0x0000062c\n\
-_0808E5C4:\n\
-    movs r3, 0x2\n\
-    mov r10, r3\n\
-    lsls r3, r0, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    movs r0, 0x2\n\
-    adds r1, r7, 0\n\
-    bl sub_808E398\n\
-    movs r0, 0x2\n\
-    b _0808E60E\n\
-_0808E5E4:\n\
-    movs r0, 0x1\n\
-    mov r10, r0\n\
-    ldr r0, _0808E620\n\
-    ldr r0, [r0]\n\
-    ldr r1, _0808E624\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    subs r3, 0x1\n\
-    lsls r3, 16\n\
-    lsrs r3, 16\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    movs r2, 0\n\
-    bl sub_8091818\n\
-    adds r7, r0, 0\n\
-    movs r0, 0x1\n\
-    adds r1, r7, 0\n\
-    bl sub_808E398\n\
-    movs r0, 0x1\n\
-_0808E60E:\n\
-    adds r1, r7, 0\n\
-    adds r2, r4, 0\n\
-    bl sub_808DBE8\n\
-    movs r0, 0x6C\n\
-    bl PlaySE\n\
-    b _0808E5A2\n\
-    .align 2, 0\n\
-_0808E620: .4byte gPokedexView\n\
-_0808E624: .4byte 0x0000060c\n\
-_0808E628:\n\
-    ldr r1, _0808E6A0\n\
-    ldr r6, _0808E6A4\n\
-    ldr r2, [r6]\n\
-    movs r3, 0xC7\n\
-    lsls r3, 3\n\
-    mov r9, r3\n\
-    adds r0, r2, r3\n\
-    ldrh r0, [r0]\n\
-    lsrs r0, 2\n\
-    adds r1, r0, r1\n\
-    ldrb r5, [r1]\n\
-    ldr r1, _0808E6A8\n\
-    adds r0, r1\n\
-    ldrb r3, [r0]\n\
-    ldr r0, _0808E6AC\n\
-    adds r2, r0\n\
-    strb r3, [r2]\n\
-    ldr r1, [r6]\n\
-    ldr r2, _0808E6B0\n\
-    mov r8, r2\n\
-    adds r0, r1, r2\n\
-    strh r3, [r0]\n\
-    ldr r4, _0808E6B4\n\
-    adds r0, r1, r4\n\
-    strh r5, [r0]\n\
-    ldr r3, _0808E6B8\n\
-    adds r1, r3\n\
-    mov r0, r10\n\
-    strb r0, [r1]\n\
-    ldr r2, [r6]\n\
-    lsrs r5, 1\n\
-    movs r1, 0xC5\n\
-    lsls r1, 3\n\
-    adds r0, r2, r1\n\
-    strh r5, [r0]\n\
-    adds r3, r2, r3\n\
-    ldrb r0, [r3]\n\
-    adds r4, r2, r4\n\
-    ldrb r1, [r4]\n\
-    add r2, r8\n\
-    ldrb r2, [r2]\n\
-    bl sub_808E208\n\
-    ldr r0, [r6]\n\
-    mov r2, r9\n\
-    adds r1, r0, r2\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0xB\n\
-    bhi _0808E68E\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_0808E68E:\n\
-    adds r0, r7, 0\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_0808E6A0: .4byte gUnknown_083A05EC\n\
-_0808E6A4: .4byte gPokedexView\n\
-_0808E6A8: .4byte gUnknown_083A05F1\n\
-_0808E6AC: .4byte 0x0000062e\n\
-_0808E6B0: .4byte 0x00000636\n\
-_0808E6B4: .4byte 0x00000634\n\
-_0808E6B8: .4byte 0x0000062f\n\
-    .syntax divided\n");
-}
-#endif
 
-void sub_808E6BC(void)
+static void sub_808E6BC(void)
 {
     u16 i;
 
@@ -1703,11 +2496,11 @@ void sub_808E6BC(void)
         u16 spriteId = gPokedexView->unk61E[i];
 
         if (gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != 0xFFFF)
-            gPokedexView->unk626 = spriteId;
+            gPokedexView->selectedMonSpriteId = spriteId;
     }
 }
 
-u8 sub_808E71C(void)
+static u8 sub_808E71C(void)
 {
     u16 r2;
     u16 r4 = gPokedexView->selectedPokemon;
@@ -1717,7 +2510,7 @@ u8 sub_808E71C(void)
         r2 = r4;
         while (r2 != 0)
         {
-            r2 = sub_8091818(1, r2, 0, gPokedexView->unk60C - 1);
+            r2 = sub_8091818(1, r2, 0, gPokedexView->pokemonListCount - 1);
 
             if (gPokedexView->unk0[r2].seen)
             {
@@ -1735,12 +2528,12 @@ u8 sub_808E71C(void)
             return 1;
         }
     }
-    else if ((gMain.newKeys & DPAD_DOWN) && r4 < gPokedexView->unk60C - 1)
+    else if ((gMain.newKeys & DPAD_DOWN) && r4 < gPokedexView->pokemonListCount - 1)
     {
         r2 = r4;
-        while (r2 < gPokedexView->unk60C - 1)
+        while (r2 < gPokedexView->pokemonListCount - 1)
         {
-            r2 = sub_8091818(0, r2, 0, gPokedexView->unk60C - 1);
+            r2 = sub_8091818(0, r2, 0, gPokedexView->pokemonListCount - 1);
 
             if (gPokedexView->unk0[r2].seen)
             {
@@ -1761,7 +2554,7 @@ u8 sub_808E71C(void)
     return 0;
 }
 
-u8 sub_808E82C(void)
+static u8 sub_808E82C(void)
 {
     u16 i;
 
@@ -1776,9 +2569,9 @@ u8 sub_808E82C(void)
     return 0;
 }
 
-u16 sub_808E888(u16 a1)
+static u16 sub_808E888(u16 a1)
 {
-    if (a1 > 385 || gPokedexView->unk0[a1].dexNum == 0xFFFF)
+    if (a1 >= NATIONAL_DEX_COUNT || gPokedexView->unk0[a1].dexNum == 0xFFFF)
         return 0xFFFF;
     else if (gPokedexView->unk0[a1].seen)
         return gPokedexView->unk0[a1].dexNum;
@@ -1786,7 +2579,7 @@ u16 sub_808E888(u16 a1)
         return 0;
 }
 
-u32 sub_808E8C8(u16 a, u16 b, u16 c)
+static u32 sub_808E8C8(u16 a, s16 b, s16 c)
 {
     u8 i;
 
@@ -1794,7 +2587,7 @@ u32 sub_808E8C8(u16 a, u16 b, u16 c)
     {
         if (gPokedexView->unk61E[i] == 0xFFFF)
         {
-            u8 spriteId = sub_80918EC(a, (s16)b, (s16)c, i);
+            u8 spriteId = sub_80918EC(a, b, c, i);
 
             gSprites[spriteId].oam.affineMode = 1;
             gSprites[spriteId].oam.priority = 3;
@@ -1808,38 +2601,38 @@ u32 sub_808E8C8(u16 a, u16 b, u16 c)
     return 0xFFFF;
 }
 
-void sub_808E978(u8 a)
+static void sub_808E978(u8 a)
 {
     u8 spriteId;
     u16 r5;
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 4, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 4, 0);
     gSprites[spriteId].data1 = 0;
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 0x9C, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 156, 0);
     gSprites[spriteId].data1 = 1;
-    gSprites[spriteId].vFlip = 1;
+    gSprites[spriteId].vFlip = TRUE;
 
-    CreateSprite(&gSpriteTemplate_83A0524, 0xEA, 0x14, 0);
-    CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x8A, 0);
+    CreateSprite(&gSpriteTemplate_83A0524, 234, 20, 0);
+    CreateSprite(&gSpriteTemplate_83A0554, 16, 138, 0);
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x8A, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 48, 138, 0);
     StartSpriteAnim(&gSprites[spriteId], 3);
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x9E, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 16, 158, 0);
     StartSpriteAnim(&gSprites[spriteId], 2);
     gSprites[spriteId].data2 = 0x80;
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x9E, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 48, 158, 0);
     StartSpriteAnim(&gSprites[spriteId], 1);
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
+    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 80, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 30;
     gSprites[spriteId].data0 = 0x1E;
     gSprites[spriteId].data1 = 0;
 
-    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
+    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 80, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 31;
     gSprites[spriteId].data0 = 0x1F;
@@ -1849,95 +2642,97 @@ void sub_808E978(u8 a)
     {
         u32 _a;
 
-        CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x28, 1);
+        CreateSprite(&gSpriteTemplate_83A0584, 32, 40, 1);
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x48, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A0584, 32, 72, 1);
         StartSpriteAnim(&gSprites[spriteId], 1);
         _a = 0;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x30, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 28, 48, 1);
         r5 = gPokedexView->unk61A / 100;
         StartSpriteAnim(&gSprites[spriteId], r5);
         if (r5 != 0)
             _a = 1;
         else
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x30, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 34, 48, 1);
         r5 = (gPokedexView->unk61A % 100) / 10;
         if (r5 != 0 || _a != 0)
             StartSpriteAnim(&gSprites[spriteId], r5);
         else
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x30, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 40, 48, 1);
         r5 = (gPokedexView->unk61A % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], r5);
         _a = 0;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x50, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 28, 80, 1);
         r5 = gPokedexView->unk61C / 100;
         StartSpriteAnim(&gSprites[spriteId], r5);
         if (r5 != 0)
             _a = 1;
         else
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x50, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 34, 80, 1);
         r5 = (gPokedexView->unk61C % 100) / 10;
         if (r5 != 0 || _a != 0)
             StartSpriteAnim(&gSprites[spriteId], r5);
         else
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x50, 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 40, 80, 1);
         r5 = (gPokedexView->unk61C % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], r5);
 
-        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 0x8C, 0x60, 1);
-        gSprites[spriteId].invisible = 1;
+        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 140, 96, 1);
+        gSprites[spriteId].invisible = TRUE;
     }
     else
     {
-        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 0x8C, 0x50, 1);
-        gSprites[spriteId].invisible = 1;
+        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 140, 80, 1);
+        gSprites[spriteId].invisible = TRUE;
     }
 }
 
-void nullsub_58(struct Sprite *sprite)
+static void nullsub_58(struct Sprite *sprite)
 {
 }
 
-void sub_808ED94(struct Sprite *sprite)
+static void sub_808ED94(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0)
         DestroySprite(sprite);
 }
 
 //Move Pokemon into position for description page
-void sub_808EDB8(struct Sprite *sprite)
+static void sub_808EDB8(struct Sprite *sprite)
 {
     sprite->oam.priority = 0;
     sprite->oam.affineMode = 0;
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
-    if (sprite->pos1.x != 0x30 || sprite->pos1.y != 0x38)
+    if (sprite->pos1.x != 48 || sprite->pos1.y != 56)
     {
-        if (sprite->pos1.x > 0x30)
+        if (sprite->pos1.x > 48)
             sprite->pos1.x--;
-        if (sprite->pos1.x < 0x30)
+        if (sprite->pos1.x < 48)
             sprite->pos1.x++;
-        if (sprite->pos1.y > 0x38)
+
+        if (sprite->pos1.y > 56)
             sprite->pos1.y--;
-        if (sprite->pos1.y <0x38)
+        if (sprite->pos1.y < 56)
             sprite->pos1.y++;
     }
-    //_0808EE1C
     else
+    {
         sprite->callback = nullsub_58;
+    }
 }
 
-void sub_808EE28(struct Sprite *sprite)
+static void sub_808EE28(struct Sprite *sprite)
 {
     u8 data1 = sprite->data1;
 
@@ -1948,223 +2743,132 @@ void sub_808EE28(struct Sprite *sprite)
     }
     else
     {
-        //_0808EE58
-        s32 var;
+        u32 var;
 
         sprite->pos2.y = gSineTable[(u8)sprite->data5] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data5 + 0x40];
-        if ((u32)var > 0xFFFF)
+        if (var > 0xFFFF)
             var = 0xFFFF;
         SetOamMatrix(sprite->data1 + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
 
-        //ToDo: clean up these inequalities
-        if ((u16)(sprite->data5 + 0x3F) <= 0x7E)
+        if (sprite->data5 > -64 && sprite->data5 < 64)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->data0 = 1;
         }
         else
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
-        //_0808EEF8
-        if ((u16)(sprite->data5 + 0x3F) > 0x7E && sprite->data0 != 0)
+
+        if ((sprite->data5 <= -64 || sprite->data5 >= 64) && sprite->data0 != 0)
         {
             DestroySprite(sprite);
             gPokedexView->unk61E[data1] = 0xFFFF;
         }
     }
-    //_0808EF16
 }
 
-void sub_808EF38(struct Sprite *sprite)
+static void sub_808EF38(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
         DestroySprite(sprite);
     else
-        sprite->pos2.y = gPokedexView->selectedPokemon * 120 / (gPokedexView->unk60C - 1);
+        sprite->pos2.y = gPokedexView->selectedPokemon * 120 / (gPokedexView->pokemonListCount - 1);
 }
 
-void sub_808EF8C(struct Sprite *sprite)
+static void sub_808EF8C(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
+    {
         DestroySprite(sprite);
+    }
     else
     {
         u8 r0;
 
         if (sprite->data1 != 0)
         {
-            if (gPokedexView->selectedPokemon == gPokedexView->unk60C - 1)
-                sprite->invisible = 1;
+            if (gPokedexView->selectedPokemon == gPokedexView->pokemonListCount - 1)
+                sprite->invisible = TRUE;
             else
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             r0 = sprite->data2;
         }
         else
         {
             if (gPokedexView->selectedPokemon == 0)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
             else
-                sprite->invisible = 0;
-            r0 = sprite->data2 - 0x80;
+                sprite->invisible = FALSE;
+            r0 = sprite->data2 - 128;
         }
         sprite->pos2.y = gSineTable[r0] / 64;
         sprite->data2 = sprite->data2 + 8;
         if (gPokedexView->menuIsOpen == 0 && gPokedexView->menuY == 0 && sprite->invisible == 0)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         else
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
     }
 }
 
-void sub_808F08C(struct Sprite *sprite)
+static void sub_808F08C(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
         DestroySprite(sprite);
 }
 
-#ifdef NONMATCHING
-void sub_808F0B4(struct Sprite *sprite)
+static void sub_808F0B4(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
+    {
         DestroySprite(sprite);
+    }
     else
     {
+        u8 val;
         s16 r3;
+        s16 r0;
 
-        u8 unk = gPokedexView->unk62C + sprite->data1;
-        u16 foo = gSineTable[unk];
-        //u8 unk2 = sprite->data0;
-        //u16 bar = gSineTable[unk + 0x40];
+        val = gPokedexView->unk62C + sprite->data1;
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        SetOamMatrix(sprite->data0, r0, r3, -r3, r0);
 
-        SetOamMatrix(sprite->data0, foo, gSineTable[unk + 0x40], (-(u16)foo) >> 16, gSineTable[unk + 0x40]);
-
-        r3 = gSineTable[sprite->data1 + gPokedexView->unk62C];
-        sprite->pos2.x = gSineTable[sprite->data1 + gPokedexView->unk62C + 0x40] * 5 / 256;
+        val = gPokedexView->unk62C + (sprite->data1 + 0x40);
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        sprite->pos2.x = r0 * 40 / 256;
         sprite->pos2.y = r3 * 40 / 256;
     }
 }
-#else
-__attribute__((naked))
-void sub_808F0B4(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x4\n\
-    adds r6, r0, 0\n\
-    ldr r1, _0808F0D8 @ =gPokedexView\n\
-    ldr r0, [r1]\n\
-    ldr r2, _0808F0DC @ =0x0000064a\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    adds r7, r1, 0\n\
-    cmp r0, 0\n\
-    beq _0808F0E0\n\
-    cmp r0, 0x3\n\
-    beq _0808F0E0\n\
-    adds r0, r6, 0\n\
-    bl DestroySprite\n\
-    b _0808F158\n\
-    .align 2, 0\n\
-_0808F0D8: .4byte gPokedexView\n\
-_0808F0DC: .4byte 0x0000064a\n\
-_0808F0E0:\n\
-    ldr r0, [r7]\n\
-    ldr r5, _0808F160 @ =0x0000062c\n\
-    adds r0, r5\n\
-    ldrb r1, [r0]\n\
-    ldrh r0, [r6, 0x30]\n\
-    adds r1, r0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    ldr r4, _0808F164 @ =gSineTable\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    ldrh r3, [r0]\n\
-    adds r1, 0x40\n\
-    lsls r1, 1\n\
-    adds r1, r4\n\
-    ldrh r0, [r6, 0x2E]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    ldrh r1, [r1]\n\
-    lsls r3, 16\n\
-    lsrs r2, r3, 16\n\
-    negs r3, r3\n\
-    lsrs r3, 16\n\
-    str r1, [sp]\n\
-    bl SetOamMatrix\n\
-    ldr r1, [r7]\n\
-    adds r1, r5\n\
-    ldrh r0, [r6, 0x30]\n\
-    adds r0, 0x40\n\
-    ldrb r1, [r1]\n\
-    adds r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r4\n\
-    ldrh r3, [r1]\n\
-    adds r0, 0x40\n\
-    lsls r0, 1\n\
-    adds r0, r4\n\
-    movs r2, 0\n\
-    ldrsh r1, [r0, r2]\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    cmp r0, 0\n\
-    bge _0808F140\n\
-    adds r0, 0xFF\n\
-_0808F140:\n\
-    asrs r0, 8\n\
-    strh r0, [r6, 0x24]\n\
-    lsls r1, r3, 16\n\
-    asrs r1, 16\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    cmp r0, 0\n\
-    bge _0808F154\n\
-    adds r0, 0xFF\n\
-_0808F154:\n\
-    asrs r0, 8\n\
-    strh r0, [r6, 0x26]\n\
-_0808F158:\n\
-    add sp, 0x4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0808F160: .4byte 0x0000062c\n\
-_0808F164: .4byte gSineTable\n\
-    .syntax divided\n");
-}
-#endif
 
-void sub_808F168(struct Sprite *sprite)
+static void sub_808F168(struct Sprite *sprite)
 {
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
+    {
         DestroySprite(sprite);
+    }
     else
     {
-        u16 r1 = gPokedexView->unk64A == 0 ? 0x50 : 0x60;
+        u16 r1 = gPokedexView->unk64A == 0 ? 80 : 96;
 
         if (gPokedexView->menuIsOpen != 0 && gPokedexView->menuY == r1)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->pos2.y = gPokedexView->menuCursorPos * 16;
             sprite->pos2.x = gSineTable[(u8)sprite->data2] / 64;
             sprite->data2 += 8;
         }
         else
-            sprite->invisible = 1;
+        {
+            sprite->invisible = TRUE;
+        }
     }
 }
 
-u8 sub_808F210(struct PokedexListItem *item, u8 b)
+static u8 sub_808F210(struct PokedexListItem *item, u8 b)
 {
     u8 taskId;
 
@@ -2178,15 +2882,15 @@ u8 sub_808F210(struct PokedexListItem *item, u8 b)
     return taskId;
 }
 
-bool8 sub_808F250(u8 taskId)
+static bool8 sub_808F250(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0 && gTasks[taskId].func == Task_PageScreenProcessInput)
-        return 0;
+        return FALSE;
     else
-        return 1;
+        return TRUE;
 }
 
-u8 sub_808F284(struct PokedexListItem *item, u8 b)
+static u8 sub_808F284(struct PokedexListItem *item, u8 b)
 {
     gUnknown_0202FFBC = item;
     gTasks[b].data[0] = 1;
@@ -2196,7 +2900,7 @@ u8 sub_808F284(struct PokedexListItem *item, u8 b)
     return b;
 }
 
-void Task_InitPageScreenMultistep(u8 taskId)
+static void Task_InitPageScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -2207,7 +2911,7 @@ void Task_InitPageScreenMultistep(u8 taskId)
             u16 r2;
 
             gPokedexView->unk64A = 1;
-            gPokedexView->unk64E = 0;
+            gPokedexView->descriptionPageNum = 0;
             gUnknown_03005CEC = gMain.vblankCallback;
             SetVBlankCallback(NULL);
             r2 = 0;
@@ -2241,7 +2945,6 @@ void Task_InitPageScreenMultistep(u8 taskId)
             sub_8091154(NationalToHoennOrder(gUnknown_0202FFBC->dexNum), 0xD, 3);
         else
             sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
-        //_0808F45A
         sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
         MenuPrint(gDexText_UnknownPoke, 11, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
@@ -2254,7 +2957,6 @@ void Task_InitPageScreenMultistep(u8 taskId)
             MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             sub_80917CC(14, 0x3FC);
         }
-        //_0808F50C
         else
         {
             MenuPrint(gUnknown_083A05F8, 2, 13);
@@ -2265,27 +2967,24 @@ void Task_InitPageScreenMultistep(u8 taskId)
     case 5:
         if (gTasks[taskId].data[1] == 0)
         {
-            //_0808F540
             gTasks[taskId].data[4] = (u16)sub_80918EC(gUnknown_0202FFBC->dexNum, 0x30, 0x38, 0);
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
         }
         gMain.state++;
         break;
     case 6:
-    {
-        u32 r3 = 0;
-
-        if (gTasks[taskId].data[2] != 0)
-            r3 = 0x14;
-        if (gTasks[taskId].data[1] != 0)
         {
-            r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 0x10));
+            u32 r3 = 0;
+
+            if (gTasks[taskId].data[2] != 0)
+                r3 = 0x14;
+            if (gTasks[taskId].data[1] != 0)
+                r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 16));
+            BeginNormalPaletteFade(~r3, 0, 16, 0, 0);
+            SetVBlankCallback(gUnknown_03005CEC);
+            gMain.state++;
         }
-        BeginNormalPaletteFade(~r3, 0, 0x10, 0, 0);
-        SetVBlankCallback(gUnknown_03005CEC);
-        gMain.state++;
         break;
-    }
     case 7:
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
@@ -2305,7 +3004,9 @@ void Task_InitPageScreenMultistep(u8 taskId)
                 PlayCry2(NationalPokedexNumToSpecies(gUnknown_0202FFBC->dexNum), 0, 0x7D, 0xA);
             }
             else
+            {
                 gMain.state++;
+            }
         }
         break;
     case 9:
@@ -2323,21 +3024,23 @@ void Task_InitPageScreenMultistep(u8 taskId)
     }
 }
 
-void Task_PageScreenProcessInput(u8 taskId)
+static void Task_PageScreenProcessInput(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = sub_808F888;
         PlaySE(SE_Z_SCROLL);
+        return;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    if (gMain.newKeys & B_BUTTON)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = Task_ClosePageScreen;
         PlaySE(SE_PC_OFF);
+        return;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
         switch (gPokedexView->selectedScreen)
         {
@@ -2356,7 +3059,9 @@ void Task_PageScreenProcessInput(u8 taskId)
             break;
         case SIZE_SCREEN:
             if (!gUnknown_0202FFBC->owned)
+            {
                 PlaySE(SE_HAZURE);
+            }
             else
             {
                 BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
@@ -2365,38 +3070,41 @@ void Task_PageScreenProcessInput(u8 taskId)
             }
             break;
         }
+        return;
     }
-    else if (((gMain.newKeys & DPAD_LEFT)
+    if (((gMain.newKeys & DPAD_LEFT)
      || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && gPokedexView->selectedScreen > 0)
     {
         gPokedexView->selectedScreen--;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
         PlaySE(SE_Z_PAGE);
+        return;
     }
-    else if (((gMain.newKeys & DPAD_RIGHT)
+    if (((gMain.newKeys & DPAD_RIGHT)
      || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && gPokedexView->selectedScreen < 3)
     {
         gPokedexView->selectedScreen++;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
         PlaySE(SE_Z_PAGE);
+        return;
     }
 }
 
-void sub_808F888(u8 taskId)
+static void sub_808F888(u8 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_InitPageScreenMultistep;
 }
 
-void Task_ClosePageScreen(u8 taskId)
+static void Task_ClosePageScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyTask(taskId);
 }
 
-void Task_InitAreaScreenMultistep(u8 taskId)
+static void Task_InitAreaScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -2429,13 +3137,13 @@ void Task_InitAreaScreenMultistep(u8 taskId)
     }
 }
 
-void Task_AreaScreenProcessInput(u8 taskId)
+static void Task_AreaScreenProcessInput(u8 taskId)
 {
     if (gPokedexView->unk64F != 0)
         gTasks[taskId].func = sub_808FA00;
 }
 
-void sub_808FA00(u8 taskId)
+static void sub_808FA00(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2452,7 +3160,7 @@ void sub_808FA00(u8 taskId)
     }
 }
 
-void Task_InitCryScreenMultistep(u8 taskId)
+static void Task_InitCryScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -2499,36 +3207,34 @@ void Task_InitCryScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 6:
-    {
-        struct CryRelatedStruct sp8;
-
-        sp8.unk0 = 0x4020;
-        sp8.unk2 = 0x1F;
-        sp8.paletteNo = 8;
-        sp8.yPos = 0x1E;
-        sp8.xPos = 0xC;
-        if (sub_8119E3C(&sp8, 0) != 0)
         {
-            gMain.state++;
-            gUnknown_03005E98 = 0;
+            struct CryRelatedStruct sp8;
+
+            sp8.unk0 = 0x4020;
+            sp8.unk2 = 0x1F;
+            sp8.paletteNo = 8;
+            sp8.yPos = 0x1E;
+            sp8.xPos = 0xC;
+            if (sub_8119E3C(&sp8, 0) != 0)
+            {
+                gMain.state++;
+                gUnknown_03005E98 = 0;
+            }
         }
         break;
-    }
     case 7:
-    {
-        struct CryRelatedStruct sp10;
-
-        sp10.unk0 = 0x3000;
-        sp10.unk2 = 0xE;
-        sp10.paletteNo = 9;
-        sp10.xPos = 0x12;
-        sp10.yPos = 3;
-        if (ShowPokedexCryScreen(&sp10, 1) != 0)
         {
-            gMain.state++;
+            struct CryRelatedStruct sp10;
+
+            sp10.unk0 = 0x3000;
+            sp10.unk2 = 0xE;
+            sp10.paletteNo = 9;
+            sp10.xPos = 0x12;
+            sp10.yPos = 3;
+            if (ShowPokedexCryScreen(&sp10, 1) != 0)
+                gMain.state++;
         }
         break;
-    }
     case 8:
         BeginNormalPaletteFade(-0x15, 0, 0x10, 0, 0);
         SetVBlankCallback(gUnknown_03005CEC);
@@ -2552,7 +3258,7 @@ void Task_InitCryScreenMultistep(u8 taskId)
     }
 }
 
-void Task_CryScreenProcessInput(u8 taskId)
+static void Task_CryScreenProcessInput(u8 taskId)
 {
     sub_8119F88(0);
 
@@ -2576,8 +3282,9 @@ void Task_CryScreenProcessInput(u8 taskId)
             gPokedexView->unk64F = 1;
             gTasks[taskId].func = sub_808FFBC;
             PlaySE(SE_PC_OFF);
+            return;
         }
-        else if ((gMain.newKeys & DPAD_LEFT)
+        if ((gMain.newKeys & DPAD_LEFT)
          || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
@@ -2585,12 +3292,15 @@ void Task_CryScreenProcessInput(u8 taskId)
             gPokedexView->unk64F = 2;
             gTasks[taskId].func = sub_808FFBC;
             PlaySE(SE_Z_PAGE);
+            return;
         }
-        else if ((gMain.newKeys & DPAD_RIGHT)
+        if ((gMain.newKeys & DPAD_RIGHT)
          || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!gUnknown_0202FFBC->owned)
+            {
                 PlaySE(SE_HAZURE);
+            }
             else
             {
                 BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
@@ -2599,11 +3309,12 @@ void Task_CryScreenProcessInput(u8 taskId)
                 gTasks[taskId].func = sub_808FFBC;
                 PlaySE(SE_Z_PAGE);
             }
+            return;
         }
     }
 }
 
-void sub_808FFBC(u8 taskId)
+static void sub_808FFBC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2619,11 +3330,12 @@ void sub_808FFBC(u8 taskId)
             break;
         case 3:
             gTasks[taskId].func = Task_InitSizeScreenMultistep;
+            break;
         }
     }
 }
 
-void sub_8090040(u8 a)
+static void sub_8090040(u8 a)
 {
     u16 unk;
 
@@ -2634,7 +3346,7 @@ void sub_8090040(u8 a)
     LoadPalette(&unk, 0x5D, 2);
 }
 
-void Task_InitSizeScreenMultistep(u8 taskId)
+static void Task_InitSizeScreenMultistep(u8 taskId)
 {
     u8 spriteId;
 
@@ -2664,40 +3376,40 @@ void Task_InitSizeScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 3:
-    {
-        u8 string[40];  //I hope this is the correct size
+        {
+            u8 string[40];  //I hope this is the correct size
 
-        SetUpWindowConfig(&gWindowConfig_81E702C);
-        InitMenuWindow(&gWindowConfig_81E702C);
-        string[0] = EOS;
-        StringAppend(string, gDexText_SizeComparedTo);
-        StringAppend(string, gSaveBlock2.playerName);
-        sub_8072BD8(string, 3, 15, 0xC0);
-        gMain.state++;
+            SetUpWindowConfig(&gWindowConfig_81E702C);
+            InitMenuWindow(&gWindowConfig_81E702C);
+            string[0] = EOS;
+            StringAppend(string, gDexText_SizeComparedTo);
+            StringAppend(string, gSaveBlock2.playerName);
+            sub_8072BD8(string, 3, 15, 0xC0);
+            gMain.state++;
+        }
         break;
-    }
     case 4:
         ResetPaletteFade();
         gMain.state++;
         break;
     case 5:
-        spriteId = sub_8091A4C(gSaveBlock2.playerGender, 0x98, 0x38, 0);
+        spriteId = sub_8091A4C(gSaveBlock2.playerGender, 152, 56, 0);
         gSprites[spriteId].oam.affineMode = 1;
         gSprites[spriteId].oam.matrixNum = 1;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerOffset;
         SetOamMatrix(1, gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->dexNum].trainerScale);
-        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(gUnknown_083B4EC4));
         gMain.state++;
         break;
     case 6:
-        spriteId = sub_80918EC(gUnknown_0202FFBC->dexNum, 0x58, 0x38, 1);
+        spriteId = sub_80918EC(gUnknown_0202FFBC->dexNum, 88, 56, 1);
         gSprites[spriteId].oam.affineMode = 1;
         gSprites[spriteId].oam.matrixNum = 2;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonOffset;
         SetOamMatrix(2, gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->dexNum].pokemonScale);
-        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(gUnknown_083B4EC4));
         gMain.state++;
         break;
     case 7:
@@ -2724,7 +3436,7 @@ void Task_InitSizeScreenMultistep(u8 taskId)
     }
 }
 
-void Task_SizeScreenProcessInput(u8 taskId)
+static void Task_SizeScreenProcessInput(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
     {
@@ -2733,7 +3445,6 @@ void Task_SizeScreenProcessInput(u8 taskId)
         gTasks[taskId].func = sub_8090498;
         PlaySE(SE_PC_OFF);
     }
-    //_08090430
     else if ((gMain.newKeys & DPAD_LEFT)
      || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
     {
@@ -2744,7 +3455,7 @@ void Task_SizeScreenProcessInput(u8 taskId)
     }
 }
 
-void sub_8090498(u8 taskId)
+static void sub_8090498(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2761,20 +3472,20 @@ void sub_8090498(u8 taskId)
     }
 }
 
-void sub_80904FC(u16 a)
+static void sub_80904FC(u16 a)
 {
     LZ77UnCompVram(gUnknown_08E96ACC, (void *)(VRAM + a * 0x800));
     DmaClear16(3, (void *)(VRAM + a * 0x800 + 0xC0), 0x440);
 }
 
-void sub_8090540(u16 a)
+static void sub_8090540(u16 a)
 {
     LZ77UnCompVram(gUnknown_08E96B58, (void *)(VRAM + a * 0x800));
     DmaClear16(3, (void *)(VRAM + a * 0x800 + 0xC0), 0x440);
 }
 
 #ifdef NONMATCHING
-void sub_8090584(u8 a, u16 b)
+static void sub_8090584(u8 a, u16 b)
 {
     u8 i;   //r1
     u8 j;   //r3
@@ -2814,7 +3525,7 @@ void sub_8090584(u8 a, u16 b)
 }
 #else
 __attribute__((naked))
-void sub_8090584(u8 a, u16 b)
+static void sub_8090584(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -2920,7 +3631,7 @@ _08090640: .4byte 0x06000072\n\
 
 //Nope, can't get this one to match, either.
 #ifdef NONMATCHING
-void sub_8090644(u8 a, u16 b)
+static void sub_8090644(u8 a, u16 b)
 {
     u8 i;
     u8 j;
@@ -2958,7 +3669,7 @@ void sub_8090644(u8 a, u16 b)
 }
 #else
 __attribute__((naked))
-void sub_8090644(u8 a, u16 b)
+static void sub_8090644(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -3081,15 +3792,16 @@ u8 sub_809070C(u16 dexNum, u32 b, u32 c)
     return taskId;
 }
 
-/*
-void sub_8090750(u8 taskId)
+static void sub_8090750(u8 taskId)
 {
+    u8 spriteId;
     u16 dexNum = gTasks[taskId].data[1];
+    u16 i;
 
     switch (gTasks[taskId].data[0])
     {
-    default:
     case 0:
+    default:
         if (!gPaletteFade.active)
         {
             gUnknown_03005CEC = gMain.vblankCallback;
@@ -3099,19 +3811,20 @@ void sub_8090750(u8 taskId)
         }
         break;
     case 1:
-    {
-        u16 i;
-
         LZ77UnCompVram(gPokedexMenu_Gfx, (void *)(VRAM + 0x4000));
         LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
         for (i = 0; i < 0x280; i++)
-            ((u16 *)(VRAM + 0x7800))[i] += 0x2000;
+        {
+#ifndef NONMATCHING
+            asm("");
+#endif
+            *(u16 *)(VRAM + 0x7800 + 2 * i) += 0x2000;
+        }
         sub_8091738(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
-        LoadPalette(gPokedexMenu_Pal + 2, 0x21, 0x9E);
+        LoadPalette(gPokedexMenu_Pal + 1, 0x21, 0x9E);
         gTasks[taskId].data[0]++;
         break;
-    }
     case 2:
         SetUpWindowConfig(&gWindowConfig_81E7064);
         InitMenuWindow(&gWindowConfig_81E7064);
@@ -3128,7 +3841,7 @@ void sub_8090750(u8 taskId)
         MenuPrint(gDexText_UnknownPoke, 11, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
-        sub_8091304(&gPokedexEntries[dexNum], 11, 5);
+        sub_8091304(gPokedexEntries[dexNum].categoryName, 11, 5);
         sub_8091458(gPokedexEntries[dexNum].height, 16, 7);
         sub_8091564(gPokedexEntries[dexNum].weight, 16, 9);
         MenuPrint(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
@@ -3136,16 +3849,13 @@ void sub_8090750(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 4:
-    {
-        u8 spriteId = sub_80918EC(dexNum, 0x30, 0x38, 0);
-
+        spriteId = sub_80918EC(dexNum, 0x30, 0x38, 0);
         gSprites[spriteId].oam.priority = 0;
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         SetVBlankCallback(gUnknown_03005CEC);
         gTasks[taskId].data[3] = spriteId;
         gTasks[taskId].data[0]++;
         break;
-    }
     case 5:
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
@@ -3165,4 +3875,1586 @@ void sub_8090750(u8 taskId)
         break;
     }
 }
-*/
+
+static void sub_8090A3C(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        BeginNormalPaletteFade(0x0000FFFC, 0, 0, 16, 0);
+        gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
+        gTasks[taskId].func = sub_8090B8C;
+        return;
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[4] == 0)
+        {
+            u16 r4 = gTasks[taskId].data[1];
+
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[r4].descriptionPage2, 2, 13);
+            (*(u16 *)(VRAM + 0x7ACA))++;
+            (*(u16 *)(VRAM + 0x7B0A))++;
+            gTasks[taskId].data[4] = 1;
+            PlaySE(SE_PIN);
+        }
+        else
+        {
+            BeginNormalPaletteFade(0x0000FFFC, 0, 0, 16, 0);
+            gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
+            gTasks[taskId].func = sub_8090B8C;
+            return;
+        }
+    }
+    gTasks[taskId].data[2]++;
+    if (gTasks[taskId].data[2] & 0x10)
+        LoadPalette(gPokedexMenu_Pal + 1, 0x51, 14);
+    else
+        LoadPalette(gPokedexMenu2_Pal + 1, 0x51, 14);
+}
+
+static void sub_8090B8C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        u16 species;
+        u32 otId;
+        u32 personality;
+        u8 paletteNum;
+        const u16 *palette;
+
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
+        CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
+        sub_800D74C();
+        species = NationalPokedexNumToSpecies(gTasks[taskId].data[1]);
+        otId = ((u16)gTasks[taskId].data[13] << 16) | (u16)gTasks[taskId].data[12];
+        personality = ((u16)gTasks[taskId].data[15] << 16) | (u16)gTasks[taskId].data[14];
+        paletteNum = gSprites[gTasks[taskId].data[3]].oam.paletteNum;
+        palette = species_and_otid_get_pal(species, otId, personality);
+        LoadCompressedPalette(palette, 0x100 | paletteNum * 16, 32);
+        DestroyTask(taskId);
+    }
+}
+
+static void sub_8090C28(struct Sprite *sprite)
+{
+    if (sprite->pos1.x < 0x78)
+        sprite->pos1.x += 2;
+    if (sprite->pos1.x > 0x78)
+        sprite->pos1.x -= 2;
+
+    if (sprite->pos1.y < 0x50)
+        sprite->pos1.y += 1;
+    if (sprite->pos1.y > 0x50)
+        sprite->pos1.y -= 1;
+}
+
+static void sub_8090C68(void)
+{
+    if (gUnknown_0202FFBC->owned)
+    {
+        if (gPokedexView->descriptionPageNum == 0)
+        {
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
+            gPokedexView->descriptionPageNum = 1;
+            (*(u16 *)(VRAM + 0x7ACA))++;
+            (*(u16 *)(VRAM + 0x7B0A))++;
+            PlaySE(SE_PIN);
+        }
+        else
+        {
+            MenuZeroFillWindowRect(2, 13, 27, 19);
+            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
+            gPokedexView->descriptionPageNum = 0;
+            (*(u16 *)(VRAM + 0x7ACA))--;
+            (*(u16 *)(VRAM + 0x7B0A))--;
+            PlaySE(SE_PIN);
+        }
+    }
+}
+
+const u8 *GetPokemonCategory(u16 dexNum)
+{
+    return gPokedexEntries[dexNum].categoryName;
+}
+
+u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
+{
+    switch (data)
+    {
+    case 0:  // height
+        return gPokedexEntries[dexNum].height;
+    case 1:  // weight
+        return gPokedexEntries[dexNum].weight;
+    default:
+        return 1;
+    }
+}
+
+s8 GetNationalPokedexFlag(u16 a, u8 b)
+{
+    u8 index;
+    u8 bit;
+    u8 mask;
+    s8 retVal;
+
+    a--;
+    index = a / 8;
+    bit = a % 8;
+    mask = 1 << bit;
+    retVal = 0;
+    switch (b)
+    {
+    case 0:
+        if (gSaveBlock2.pokedex.seen[index] & mask)
+        {
+            if ((gSaveBlock2.pokedex.seen[index] & mask) == (gSaveBlock1.unk938[index] & mask)
+             && (gSaveBlock2.pokedex.seen[index] & mask) == (gSaveBlock1.unk3A8C[index] & mask))
+                retVal = 1;
+            else
+            {
+                gSaveBlock2.pokedex.seen[index] &= ~mask;
+                gSaveBlock1.unk938[index] &= ~mask;
+                gSaveBlock1.unk3A8C[index] &= ~mask;
+                retVal = 0;
+            }
+        }
+        break;
+    case 1:
+        if (gSaveBlock2.pokedex.owned[index] & mask)
+        {
+            if ((gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock2.pokedex.seen[index] & mask)
+             && (gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock1.unk938[index] & mask)
+             && (gSaveBlock2.pokedex.owned[index] & mask) == (gSaveBlock1.unk3A8C[index] & mask))
+                retVal = 1;
+            else
+            {
+                gSaveBlock2.pokedex.owned[index] &= ~mask;
+                gSaveBlock2.pokedex.seen[index] &= ~mask;
+                gSaveBlock1.unk938[index] &= ~mask;
+                gSaveBlock1.unk3A8C[index] &= ~mask;
+                retVal = 0;
+            }
+        }
+        break;
+    case 2:
+        gSaveBlock2.pokedex.seen[index] |= mask;
+        gSaveBlock1.unk938[index] |= mask;
+        gSaveBlock1.unk3A8C[index] |= mask;
+        break;
+    case 3:
+        gSaveBlock2.pokedex.owned[index] |= mask;
+        break;
+    }
+    return retVal;
+}
+
+u16 GetNationalPokedexCount(u8 a)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    {
+        switch (a)
+        {
+        case 0:
+            if (GetNationalPokedexFlag(i + 1, 0) != 0)
+                count++;
+            break;
+        case 1:
+            if (GetNationalPokedexFlag(i + 1, 1) != 0)
+                count++;
+            break;
+        }
+    }
+    return count;
+}
+
+u16 GetHoennPokedexCount(u8 a)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 0; i < 202; i++)
+    {
+        switch (a)
+        {
+        case 0:
+            if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 0) != 0)
+                count++;
+            break;
+        case 1:
+            if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 1) != 0)
+                count++;
+            break;
+        }
+    }
+    return count;
+}
+
+bool8 sub_8090FC0(void)
+{
+    u16 i;
+
+    for (i = 0; i < 200; i++)
+    {
+        if (GetNationalPokedexFlag(HoennToNationalOrder(i + 1), 1) == 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+u16 sub_8090FF4(void)
+{
+    u16 i;
+
+    for (i = 0; i < 150; i++)
+    {
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
+            return 0;
+    }
+    for (i = 152; i < 250; i++)
+    {
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
+            return 0;
+    }
+    for (i = 252; i < 384; i++)
+    {
+        if (GetNationalPokedexFlag(i + 1, 1) == 0)
+            return 0;
+    }
+    return 1;
+}
+
+static void sub_8091060(u16 a)
+{
+    if (!(a & 0x100))
+    {
+        REG_DISPCNT &= 0xFEFF;
+        REG_BG0CNT = 0;
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+    }
+    if (!(a & 0x200))
+    {
+        REG_DISPCNT &= 0xFDFF;
+        REG_BG1CNT = 0;
+        REG_BG1HOFS = 0;
+        REG_BG1VOFS = 0;
+    }
+    if (!(a & 0x400))
+    {
+        REG_DISPCNT &= 0xFBFF;
+        REG_BG2CNT = 0;
+        REG_BG2HOFS = 0;
+        REG_BG2VOFS = 0;
+    }
+    if (!(a & 0x800))
+    {
+        REG_DISPCNT &= 0xF7FF;
+        REG_BG3CNT = 0;
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 0;
+    }
+    if (!(a & 0x1000))
+    {
+        REG_DISPCNT &= 0xEFFF;
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 8;
+    }
+}
+
+static void sub_8091154(u16 order, u8 b, u8 c)
+{
+    u8 str[4];
+
+    str[0] = CHAR_0 + order / 100;
+    str[1] = CHAR_0 + (order % 100) / 10;
+    str[2] = CHAR_0 + (order % 100) % 10;
+    str[3] = EOS;
+    MenuPrint(str, b, c);
+}
+
+static u8 sub_80911C8(u16 num, u8 b, u8 c)
+{
+    u8 str[11];
+    u8 i;
+
+    for (i = 0; i < 11; i++)
+        str[i] = EOS;
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            str[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
+        for (i = 0; i < 10; i++)
+            str[i] = 0xAE;
+        break;
+    }
+    MenuPrint(str, b, c);
+    return i;
+}
+
+static u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
+{
+    u8 str[40];
+    u8 *end;
+    u8 i;
+
+    end = StringCopy(str, gUnknown_083B5558);
+    str[2] = d;
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+            end[i] = gSpeciesNames[num][i];
+        break;
+    case 0:
+        for (i = 0; i < 10; i++)
+            end[i] = 0xAE;
+        break;
+    }
+    end[i] = EOS;
+    MenuPrint(str, b, c);
+    return i;
+}
+
+static void sub_8091304(const u8 *name, u8 left, u8 top)
+{
+    u8 str[32];
+    u8 i;
+#if ENGLISH
+    u8 j;
+#endif
+
+    for (i = 0; name[i] != EOS && i < 11; i++)
+        str[i] = name[i];
+#if ENGLISH
+    for (j = 0; gDexText_UnknownPoke[j] == 0xAC || gDexText_UnknownPoke[j] == 0; j++)
+        ;
+    j--;
+    while (gDexText_UnknownPoke[j] != EOS)
+        str[i++] = gDexText_UnknownPoke[j++];
+#endif
+    str[i] = EOS;
+    sub_8072B80(str, left, top, gDexText_UnknownPoke);
+}
+
+void unref_sub_80913A4(u16 a, u8 left, u8 top)
+{
+    u8 str[6];
+    bool8 outputted = FALSE;
+    u8 result;
+
+    result = a / 1000;
+    if (result == 0)
+    {
+        str[0] = CHAR_SPACE;
+        outputted = FALSE;
+    }
+    else
+    {
+        str[0] = CHAR_0 + result;
+        outputted = TRUE;
+    }
+
+    result = (a % 1000) / 100;
+    if (result == 0 && !outputted)
+    {
+        str[1] = CHAR_SPACE;
+        outputted = FALSE;
+    }
+    else
+    {
+        str[1] = CHAR_0 + result;
+        outputted = TRUE;
+    }
+
+    str[2] = CHAR_0 + ((a % 1000) % 100) / 10;
+    str[3] = CHAR_PERIOD;
+    str[4] = CHAR_0 + ((a % 1000) % 100) % 10;
+    str[5] = EOS;
+    MenuPrint(str, left, top);
+}
+
+#ifdef UNITS_IMPERIAL
+#define CHAR_PRIME (0xB4)
+#define CHAR_DOUBLE_PRIME (0xB2)
+static void sub_8091458(u16 height, u8 left, u8 top)
+{
+    u8 buffer[16];
+    u32 inches, feet;
+    u8 i = 0;
+
+    inches = (height * 10000) / 254;
+    if (inches % 10 >= 5)
+        inches += 10;
+    feet = inches / 120;
+    inches = (inches - (feet * 120)) / 10;
+
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = 0x13;
+    if (feet / 10 == 0)
+    {
+        buffer[i++] = 18;
+        buffer[i++] = feet + CHAR_0;
+    }
+    else
+    {
+        buffer[i++] = 12;
+        buffer[i++] = feet / 10 + CHAR_0;
+        buffer[i++] = (feet % 10) + CHAR_0;
+    }
+    buffer[i++] = CHAR_PRIME;
+    buffer[i++] = (inches / 10) + CHAR_0;
+    buffer[i++] = (inches % 10) + CHAR_0;
+    buffer[i++] = CHAR_DOUBLE_PRIME;
+    buffer[i++] = EOS;
+    MenuPrint(buffer, left, top);
+}
+#else
+static void sub_8091458(u16 height, u8 left, u8 top)
+{
+    unref_sub_80913A4(height, left, top);
+}
+#endif
+
+#ifdef UNITS_IMPERIAL
+static void sub_8091564(u16 weight, u8 left, u8 top)
+{
+    u8 buffer[16];
+    u32 lbs;
+    u8 i = 0;
+    bool8 output;
+
+    lbs = (weight * 100000) / 4536;
+    if (lbs % 10 >= 5)
+        lbs += 10;
+    output = FALSE;
+
+    buffer[i] = (lbs / 100000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 100000);
+    buffer[i] = (lbs / 10000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+
+    lbs = (lbs % 10000);
+    buffer[i] = (lbs / 1000) + CHAR_0;
+    if (buffer[i] == CHAR_0 && output == FALSE)
+    {
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+    }
+    else
+    {
+        output = TRUE;
+        i++;
+    }
+    lbs = (lbs % 1000);
+    buffer[i++] = (lbs / 100) + CHAR_0;
+    lbs = (lbs % 100);
+    buffer[i++] = CHAR_PERIOD;
+    buffer[i++] = (lbs / 10) + CHAR_0;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_l;
+    buffer[i++] = CHAR_b;
+    buffer[i++] = CHAR_s;
+    buffer[i++] = CHAR_PERIOD;
+    buffer[i++] = EOS;
+    MenuPrint(buffer, left, top);
+}
+#else
+static void sub_8091564(u16 arg0, u8 left, u8 top)
+{
+    unref_sub_80913A4(arg0, left, top);
+}
+#endif
+
+static void sub_8091738(u16 num, u16 b, u16 c)
+{
+    u8 arr[0x80];
+    u16 i;
+    u16 j;
+    const u8 *r12;
+    u16 r7;
+    u8 r3;
+
+    r12 = sMonFootprintTable[NationalPokedexNumToSpecies(num)];
+    for (r7 = 0, i = 0; i < 32; i++)
+    {
+        r3 = r12[i];
+        for (j = 0; j < 4; j++)
+        {
+            u32 r1 = j * 2;
+            s32 r2 = (r3 >> r1) & 1;
+
+            if (r3 & (2 << r1))
+                r2 |= 0x10;
+
+// Needed to match
+#ifndef NONMATCHING
+            asm("");asm("");asm("");asm("");asm("");
+#endif
+
+            arr[r7] = r2;
+            r7++;
+        }
+    }
+    CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
+}
+
+static void sub_80917CC(u16 a, u16 b)
+{
+    *(u16 *)(VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
+    *(u16 *)(VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
+    *(u16 *)(VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
+    *(u16 *)(VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
+}
+
+static u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
+{
+    switch (a)
+    {
+    case 1:
+        if (b > c)
+            b--;
+        break;
+    case 0:
+        if (b < d)
+            b++;
+        break;
+    case 3:
+        if (b > c)
+            b--;
+        else
+            b = d;
+        break;
+    case 2:
+        if (b < d)
+            b++;
+        else
+            b = c;
+        break;
+    }
+    return b;
+}
+
+static void nullsub_59(struct Sprite *sprite)
+{
+}
+
+static void sub_8091878(u16 a, u8 b)
+{
+    gUnknown_02024E8C = gUnknown_083B57A4;
+    gUnknown_02024E8C.paletteTag = a;
+    gUnknown_02024E8C.images = gUnknown_083B5794[b];
+    gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
+}
+
+static void sub_80918B0(u16 a, u8 b)
+{
+    gUnknown_02024E8C = gUnknown_083B57A4;
+    gUnknown_02024E8C.paletteTag = a;
+    gUnknown_02024E8C.images = gUnknown_083B5794[b];
+    gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
+}
+
+u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
+{
+    u8 spriteId;
+
+    num = NationalPokedexNumToSpecies(num);
+    switch (num)
+    {
+    default:
+        DecompressPicFromTable_2(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          (void *)0x02000000,
+          gUnknown_083B5584[paletteNum],
+          num);
+        break;
+    case SPECIES_SPINDA:
+        LoadSpecialPokePic(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          0x02000000,
+          gUnknown_083B5584[paletteNum],
+          num,
+          gSaveBlock2.pokedex.spindaPersonality,
+          1);
+        break;
+    case SPECIES_UNOWN:
+        LoadSpecialPokePic(
+          &gMonFrontPicTable[num],
+          gMonFrontPicCoords[num].coords,
+          gMonFrontPicCoords[num].y_offset,
+          0x02000000,
+          gUnknown_083B5584[paletteNum],
+          num,
+          gSaveBlock2.pokedex.unownPersonality,
+          1);
+        break;
+    }
+    LoadCompressedPalette(gMonPaletteTable[num].data, 0x100 + paletteNum * 16, 32);
+    sub_8091878(paletteNum, paletteNum);
+    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    gSprites[spriteId].oam.paletteNum = paletteNum;
+    return spriteId;
+}
+
+static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+{
+    u8 spriteId;
+
+    DecompressPicFromTable_2(
+      &gTrainerFrontPicTable[gender],
+      gTrainerFrontPicCoords[gender].coords,
+      gTrainerFrontPicCoords[gender].y_offset,
+      (void *)0x02000000,
+      gUnknown_083B5584[0],
+      gender);
+    sub_80918B0(gender, 0);
+    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    gSprites[spriteId].oam.paletteNum = paletteNum;
+    return spriteId;
+}
+
+int sub_8091AF8(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
+{
+    u16 species;
+    u16 i;
+    u16 resultsCount;
+    u8 types[2];
+
+    SortPokedex(a, b);
+
+    for (i = 0, resultsCount = 0; i < NATIONAL_DEX_COUNT; i++)
+    {
+        if (gPokedexView->unk0[i].seen)
+        {
+            gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+            resultsCount++;
+        }
+    }
+    gPokedexView->pokemonListCount = resultsCount;
+
+    // Search by name
+    if (abcGroup != 0xFF)
+    {
+        for (i = 0, resultsCount = 0; i < gPokedexView->pokemonListCount; i++)
+        {
+            u8 r3;
+
+            species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+            r3 = gSpeciesNames[species][0];
+            if ((r3 >= gUnknown_083B57BC[abcGroup][0] && r3 < gUnknown_083B57BC[abcGroup][0] + gUnknown_083B57BC[abcGroup][1])
+             || (r3 >= gUnknown_083B57BC[abcGroup][2] && r3 < gUnknown_083B57BC[abcGroup][2] + gUnknown_083B57BC[abcGroup][3]))
+            {
+                gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                resultsCount++;
+            }
+        }
+        gPokedexView->pokemonListCount = resultsCount;
+    }
+
+    // Search by body color
+    if (bodyColor != 0xFF)
+    {
+        for (i = 0, resultsCount = 0; i < gPokedexView->pokemonListCount; i++)
+        {
+            species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+            if (bodyColor == gBaseStats[species].bodyColor)
+            {
+                gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                resultsCount++;
+            }
+        }
+        gPokedexView->pokemonListCount = resultsCount;
+    }
+
+    // Search by type
+    if (type1 != 0xFF || type2 != 0xFF)
+    {
+        if (type1 == 0xFF)
+        {
+            type1 = type2;
+            type2 = 0xFF;
+        }
+
+        if (type2 == 0xFF)
+        {
+            for (i = 0, resultsCount = 0; i < gPokedexView->pokemonListCount; i++)
+            {
+                if (gPokedexView->unk0[i].owned)
+                {
+                    species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+                    types[0] = gBaseStats[species].type1;
+                    types[1] = gBaseStats[species].type2;
+                    if (types[0] == type1 || types[1] == type1)
+                    {
+                        gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                        resultsCount++;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (i = 0, resultsCount = 0; i < gPokedexView->pokemonListCount; i++)
+            {
+                if (gPokedexView->unk0[i].owned)
+                {
+                    species = NationalPokedexNumToSpecies(gPokedexView->unk0[i].dexNum);
+
+                    types[0] = gBaseStats[species].type1;
+                    types[1] = gBaseStats[species].type2;
+                    if ((types[0] == type1 && types[1] == type2) || (types[0] == type2 && types[1] == type1))
+                    {
+                        gPokedexView->unk0[resultsCount] = gPokedexView->unk0[i];
+                        resultsCount++;
+                    }
+                }
+            }
+        }
+        gPokedexView->pokemonListCount = resultsCount;
+    }
+
+    if (gPokedexView->pokemonListCount != 0)
+    {
+        for (i = gPokedexView->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
+        {
+            gPokedexView->unk0[i].dexNum = 0xFFFF;
+            gPokedexView->unk0[i].seen = FALSE;
+            gPokedexView->unk0[i].owned = FALSE;
+
+        }
+    }
+
+    return resultsCount;
+}
+
+void sub_8091E20(const u8 *str)
+{
+    sub_8072AB0(str, 9, 120, 208, 32, 1);
+}
+
+u8 sub_8091E3C(void)
+{
+    return CreateTask(sub_8091E54, 0);
+}
+
+static void sub_8091E54(u8 taskId)
+{
+    u16 i;
+
+    switch (gMain.state)
+    {
+    default:
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            gPokedexView->unk64A = 2;
+            sub_8091060(0);
+            LZ77UnCompVram(gPokedexMenuSearch_Gfx, (void *)VRAM);
+            LZ77UnCompVram(gUnknown_08E96D2C, (void *)(VRAM + 0x7800));
+            LoadPalette(gPokedexMenuSearch_Pal + 1, 1, 0x7E);
+            if (!IsNationalPokedexEnabled())
+            {
+                for (i = 0; i < 17; i++)
+                {
+                    ((u16 *)(VRAM + 0x7A80))[i] = ((u16 *)(VRAM + 0x7B00))[i];
+                    ((u16 *)(VRAM + 0x7AC0))[i] = ((u16 *)(VRAM + 0x7B40))[i];
+                    ((u16 *)(VRAM + 0x7B00))[i] = 1;
+                    ((u16 *)(VRAM + 0x7B40))[i] = 1;
+                }
+            }
+            gMain.state = 1;
+        }
+        break;
+    case 1:
+        SetUpWindowConfig(&gWindowConfig_81E7064);
+        InitMenuWindow(&gWindowConfig_81E7064);
+        LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
+        LoadSpritePalettes(gUnknown_083A05DC);
+        sub_809308C(taskId);
+        for (i = 0; i < 16; i++)
+            gTasks[taskId].data[i] = 0;
+        sub_8092EB0(taskId);
+        sub_8092AB0(0);
+        sub_8092B68(taskId);
+        gMain.state++;
+        break;
+    case 2:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        gMain.state++;
+        break;
+    case 3:
+        REG_BG3CNT = 0x0F03;
+        REG_DISPCNT = 0x1C40;
+        gMain.state++;
+        break;
+    case 4:
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].func = sub_809204C;
+            gMain.state = 0;
+        }
+        break;
+    }
+}
+
+static void sub_809204C(u8 taskId)
+{
+    sub_8092AB0(gTasks[taskId].data[0]);
+    sub_8092B68(taskId);
+    gTasks[taskId].func = sub_809207C;
+}
+
+static void sub_809207C(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_PC_OFF);
+        gTasks[taskId].func = sub_80927B8;
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        switch (gTasks[taskId].data[0])
+        {
+        case 0:
+            PlaySE(SE_PIN);
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].func = sub_809217C;
+            break;
+        case 1:
+            PlaySE(SE_PIN);
+            gTasks[taskId].data[1] = 4;
+            gTasks[taskId].func = sub_809217C;
+            break;
+        case 2:
+            PlaySE(SE_PC_OFF);
+            gTasks[taskId].func = sub_80927B8;
+            break;
+        }
+        return;
+    }
+    if ((gMain.newKeys & DPAD_LEFT) && gTasks[taskId].data[0] > 0)
+    {
+        PlaySE(SE_Z_PAGE);
+        gTasks[taskId].data[0]--;
+        sub_8092AB0(gTasks[taskId].data[0]);
+    }
+    if ((gMain.newKeys & DPAD_RIGHT) && gTasks[taskId].data[0] < 2)
+    {
+        PlaySE(SE_Z_PAGE);
+        gTasks[taskId].data[0]++;
+        sub_8092AB0(gTasks[taskId].data[0]);
+    }
+}
+
+static void sub_809217C(u8 taskId)
+{
+    sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    sub_8092B68(taskId);
+    gTasks[taskId].func = sub_80921B0;
+}
+
+static void sub_80921B0(u8 taskId)
+{
+    const u8 (*r6)[4];
+
+    if (gTasks[taskId].data[0] != 0)
+    {
+        if (!IsNationalPokedexEnabled())
+            r6 = gUnknown_083B58A4;
+        else
+            r6 = gUnknown_083B586C;
+    }
+    else
+    {
+        if (!IsNationalPokedexEnabled())
+            r6 = gUnknown_083B5888;
+        else
+            r6 = gUnknown_083B5850;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_BOWA);
+        sub_8092EB0(taskId);
+        gTasks[taskId].func = sub_809204C;
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[1] == 6)
+        {
+            if (gTasks[taskId].data[0] != 0)
+            {
+                gUnknown_0202FFBA = 0x40;
+                gPokedexView->unk62A = 0x40;
+                gUnknown_0202FFB8 = 0;
+                gPokedexView->unk610 = 0;
+                gSaveBlock2.pokedex.unknown1 = sub_8092E10(taskId, 5);
+                if (!IsNationalPokedexEnabled())
+                    gSaveBlock2.pokedex.unknown1 = 0;
+                gPokedexView->unk614 = gSaveBlock2.pokedex.unknown1;
+                gSaveBlock2.pokedex.order = sub_8092E10(taskId, 4);
+                gPokedexView->unk618 = gSaveBlock2.pokedex.order;
+                PlaySE(SE_PC_OFF);
+                gTasks[taskId].func = sub_80927B8;
+            }
+            else
+            {
+                sub_8091E20(gDexText_Searching);
+                gTasks[taskId].func = sub_80923FC;
+                PlaySE(SE_Z_SEARCH);
+            }
+        }
+        else
+        {
+            PlaySE(SE_PIN);
+            gTasks[taskId].func = sub_80925CC;
+        }
+        return;
+    }
+
+    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
+        sub_8092AD4(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    }
+}
+
+static void sub_80923FC(u8 taskId)
+{
+    u8 r10 = sub_8092E10(taskId, 5);
+    u8 r9 = sub_8092E10(taskId, 4);
+    u8 r8 = sub_8092E10(taskId, 0);
+    u8 r6 = sub_8092E10(taskId, 1);
+    u8 r4 = sub_8092E10(taskId, 2);
+    u8 r0 = sub_8092E10(taskId, 3);
+
+    sub_8091AF8(r10, r9, r8, r6, r4, r0);
+    gTasks[taskId].func = sub_80924A4;
+}
+
+static void sub_80924A4(u8 taskId)
+{
+    if (!IsSEPlaying())
+    {
+        if (gPokedexView->pokemonListCount != 0)
+        {
+            PlaySE(SE_SEIKAI);
+            sub_8091E20(gDexText_SearchComplete);
+        }
+        else
+        {
+            PlaySE(SE_HAZURE);
+            sub_8091E20(gDexText_NoMatching);
+        }
+        gTasks[taskId].func = sub_8092508;
+    }
+}
+
+static void sub_8092508(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gPokedexView->pokemonListCount != 0)
+        {
+            gPokedexView->unk64F = 1;
+            gPokedexView->dexMode = sub_8092E10(taskId, 5);
+            gPokedexView->dexOrder = sub_8092E10(taskId, 4);
+            gTasks[taskId].func = sub_80927B8;
+            PlaySE(SE_PC_OFF);
+        }
+        else
+        {
+            gTasks[taskId].func = sub_809217C;
+            PlaySE(SE_BOWA);
+        }
+    }
+}
+
+static void sub_80925B4(u16 a, int unused)
+{
+    sub_814AD7C(0x90, (a * 2 + 1) * 8);
+}
+
+static void sub_80925CC(u8 taskId)
+{
+    u8 r0;
+    u16 *p1;
+    u16 *p2;
+
+    sub_8092C8C(0);
+    r0 = gTasks[taskId].data[1];
+    p1 = &gTasks[taskId].data[gUnknown_083B5A7C[r0].unk4];
+    p2 = &gTasks[taskId].data[gUnknown_083B5A7C[r0].unk5];
+    gTasks[taskId].data[14] = *p1;
+    gTasks[taskId].data[15] = *p2;
+    sub_8092D78(taskId);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 11);
+    sub_80925B4(*p1, 1);
+    gTasks[taskId].func = sub_8092644;
+}
+
+static void sub_8092644(u8 taskId)
+{
+    u8 r1;
+    const struct UnknownStruct2 *r8;
+    u16 *p1;
+    u16 *p2;
+    u16 r2;
+    bool8 r3;
+
+    r1 = gTasks[taskId].data[1];
+    r8 = gUnknown_083B5A7C[r1].unk0;
+    p1 = &gTasks[taskId].data[gUnknown_083B5A7C[r1].unk4];
+    p2 = &gTasks[taskId].data[gUnknown_083B5A7C[r1].unk5];
+    r2 = gUnknown_083B5A7C[r1].unk6 - 1;
+    if (gMain.newKeys & A_BUTTON)
+    {
+        sub_814ADC8();
+        PlaySE(SE_PIN);
+        MenuZeroFillWindowRect(18, 1, 28, 12);
+        sub_8092C8C(1);
+        gTasks[taskId].func = sub_809217C;
+        return;
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        sub_814ADC8();
+        PlaySE(SE_BOWA);
+        MenuZeroFillWindowRect(18, 1, 28, 12);
+        sub_8092C8C(1);
+        *p1 = gTasks[taskId].data[14];
+        *p2 = gTasks[taskId].data[15];
+        gTasks[taskId].func = sub_809217C;
+        return;
+    }
+    r3 = FALSE;
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (*p1 != 0)
+        {
+            sub_80925B4(*p1, 0);
+            (*p1)--;
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        else if (*p2 != 0)
+        {
+            (*p2)--;
+            sub_8092D78(taskId);
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        if (r3)
+        {
+            PlaySE(SE_SELECT);
+            sub_8091E20(r8[*p1 + *p2].text1);
+        }
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (*p1 < 5 && *p1 < r2)
+        {
+            sub_80925B4(*p1, 0);
+            (*p1)++;
+            sub_80925B4(*p1, 1);
+            r3 = TRUE;
+        }
+        else if (r2 > 5 && *p2 < r2 - 5)
+        {
+            (*p2)++;
+            sub_8092D78(taskId);
+            sub_80925B4(5, 1);
+            r3 = TRUE;
+        }
+        if (r3)
+        {
+            PlaySE(SE_SELECT);
+            sub_8091E20(r8[*p1 + *p2].text1);
+        }
+        return;
+    }
+}
+
+static void sub_80927B8(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_80927F0;
+}
+
+static void sub_80927F0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        DestroyTask(taskId);
+}
+
+#ifdef NONMATCHING
+void sub_8092810(u8 a, u8 b, u8 c, u8 d)
+{
+    u16 i;
+
+    for (i = 0; i < d; i++)
+    {
+        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] &= 0xFFF;
+        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] |= a << 12;
+
+        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] &= 0xFFF;
+        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] |= a << 12;
+    }
+}
+#else
+__attribute__((naked))
+void sub_8092810(u8 a, u8 b, u8 c, u8 d)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r12, r1\n\
+    lsls r2, 24\n\
+    lsrs r1, r2, 24\n\
+    lsls r3, 24\n\
+    lsrs r5, r3, 8\n\
+    movs r3, 0\n\
+    cmp r5, 0\n\
+    beq _0809285A\n\
+    lsls r7, r1, 6\n\
+    ldr r6, _08092860 @ =0x00000fff\n\
+    lsls r4, r0, 12\n\
+_08092830:\n\
+    mov r0, r12\n\
+    adds r1, r0, r3\n\
+    lsls r1, 1\n\
+    adds r1, r7, r1\n\
+    ldr r0, _08092864 @ =0x06007800\n\
+    adds r2, r1, r0\n\
+    ldrh r0, [r2]\n\
+    ands r0, r6\n\
+    orrs r0, r4\n\
+    strh r0, [r2]\n\
+    ldr r0, _08092868 @ =0x06007840\n\
+    adds r1, r0\n\
+    ldrh r0, [r1]\n\
+    ands r0, r6\n\
+    orrs r0, r4\n\
+    strh r0, [r1]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r0, r5\n\
+    bcc _08092830\n\
+_0809285A:\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_08092860: .4byte 0x00000fff\n\
+_08092864: .4byte 0x06007800\n\
+_08092868: .4byte 0x06007840\n\
+    .syntax divided\n");
+}
+#endif
+
+static void sub_809286C(u8 a, u8 b, u8 c)
+{
+    u8 r5 = (b & 1) | ((c & 1) << 1);
+
+    switch (a)
+    {
+    case 0:
+    case 1:
+    case 2:
+        sub_8092810(r5, gUnknown_083B57E4[a].unk4, gUnknown_083B57E4[a].unk5, gUnknown_083B57E4[a].unk6);
+        break;
+    case 3:
+    case 4:
+    case 7:
+    case 8:
+        sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5, gUnknown_083B57FC[a - 3].unk6);
+        // fall through
+    case 5:
+    case 6:
+        sub_8092810(r5, gUnknown_083B57FC[a - 3].unk7, gUnknown_083B57FC[a - 3].unk8, gUnknown_083B57FC[a - 3].unk9);
+        break;
+    case 10:
+        sub_8092810(r5, gUnknown_083B57FC[2].unk4, gUnknown_083B57FC[2].unk5, gUnknown_083B57FC[2].unk6);
+        break;
+    case 9:
+        if (!IsNationalPokedexEnabled())
+            sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5 - 2, gUnknown_083B57FC[a - 3].unk6);
+        else
+            sub_8092810(r5, gUnknown_083B57FC[a - 3].unk4, gUnknown_083B57FC[a - 3].unk5, gUnknown_083B57FC[a - 3].unk6);
+        break;
+    }
+}
+
+static void sub_8092964(u8 a)
+{
+    switch (a)
+    {
+    case 0:
+        sub_809286C(0, 0, 0);
+        sub_809286C(1, 1, 0);
+        sub_809286C(2, 1, 0);
+        sub_809286C(3, 1, 0);
+        sub_809286C(4, 1, 0);
+        sub_809286C(10, 1, 0);
+        sub_809286C(5, 1, 0);
+        sub_809286C(6, 1, 0);
+        sub_809286C(7, 1, 0);
+        sub_809286C(8, 1, 0);
+        sub_809286C(9, 1, 0);
+        break;
+    case 1:
+        sub_809286C(0, 1, 0);
+        sub_809286C(1, 0, 0);
+        sub_809286C(2, 1, 0);
+        sub_809286C(3, 1, 1);
+        sub_809286C(4, 1, 1);
+        sub_809286C(10, 1, 1);
+        sub_809286C(5, 1, 1);
+        sub_809286C(6, 1, 1);
+        sub_809286C(7, 1, 0);
+        sub_809286C(8, 1, 0);
+        sub_809286C(9, 1, 0);
+        break;
+    case 2:
+        sub_809286C(0, 1, 0);
+        sub_809286C(1, 1, 0);
+        sub_809286C(2, 0, 0);
+        sub_809286C(3, 1, 1);
+        sub_809286C(4, 1, 1);
+        sub_809286C(10, 1, 1);
+        sub_809286C(5, 1, 1);
+        sub_809286C(6, 1, 1);
+        sub_809286C(7, 1, 1);
+        sub_809286C(8, 1, 1);
+        sub_809286C(9, 1, 1);
+        break;
+    }
+}
+
+static void sub_8092AB0(u8 a)
+{
+    sub_8092964(a);
+    sub_8091E20(gUnknown_083B57E4[a].text);
+}
+
+static void sub_8092AD4(u8 a, u8 b)
+{
+    sub_8092964(a);
+    switch (b)
+    {
+    case 0:
+        sub_809286C(3, 0, 0);
+        break;
+    case 1:
+        sub_809286C(4, 0, 0);
+        break;
+    case 2:
+        sub_809286C(10, 0, 0);
+        sub_809286C(5, 0, 0);
+        break;
+    case 3:
+        sub_809286C(10, 0, 0);
+        sub_809286C(6, 0, 0);
+        break;
+    case 4:
+        sub_809286C(7, 0, 0);
+        break;
+    case 5:
+        sub_809286C(8, 0, 0);
+        break;
+    case 6:
+        sub_809286C(9, 0, 0);
+        break;
+    }
+    sub_8091E20(gUnknown_083B57FC[b].text);
+}
+
+static void sub_8092B68(u8 taskId)
+{
+    u16 var;
+
+    var = gTasks[taskId].data[6] + gTasks[taskId].data[7];
+    StringCopy(gStringVar1, gUnknown_083B5910[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 16, 1);
+
+    var = gTasks[taskId].data[8] + gTasks[taskId].data[9];
+    StringCopy(gStringVar1, gUnknown_083B5968[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 32, 1);
+
+    var = gTasks[taskId].data[10] + gTasks[taskId].data[11];
+    StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AAC, 45, 48, 1);
+
+    var = gTasks[taskId].data[12] + gTasks[taskId].data[13];
+    StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AAC, 93, 48, 1);
+
+    var = gTasks[taskId].data[4] + gTasks[taskId].data[5];
+    StringCopy(gStringVar1, gUnknown_083B58D8[var].text2);
+    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 64, 1);
+
+    if (IsNationalPokedexEnabled())
+    {
+        var = gTasks[taskId].data[2] + gTasks[taskId].data[3];
+        StringCopy(gStringVar1, gUnknown_083B58C0[var].text2);
+        MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 80, 1);
+    }
+}
+
+static void sub_8092C8C(u8 a)
+{
+    u16 i;
+    u16 j;
+
+    if (a == 0)
+    {
+        *((u16 *)(VRAM + 0x7800 + 0x22)) = 0xC0B;
+        for (i = 0x12; i < 0x1D; i++)
+            *((u16 *)(VRAM + 0x7800 + i * 2)) = 0x80D;
+        *((u16 *)(VRAM + 0x7800 + 0x3A)) = 0x80B;
+        for (j = 1; j < 13; j++)
+        {
+            *((u16 *)(VRAM + 0x7800 + 0x22 + j * 64)) = 0x40A;
+            for (i = 0x12; i < 0x1D; i++)
+                *((u16 *)(VRAM + 0x7800 + j * 64 + i * 2)) = 2;
+            *((u16 *)(VRAM + 0x7800 + 0x3A + j * 64)) = 0xA;
+        }
+        *((u16 *)(VRAM + 0x7800 + 0x362)) = 0x40B;
+        for (i = 0x12; i < 0x1D; i++)
+            *((u16 *)(VRAM + 0x7800 + 0x340 + i * 2)) = 0xD;
+        *((u16 *)(VRAM + 0x7800 + 0x37A)) = 0xB;
+    }
+    else
+    {
+        for (j = 0; j < 14; j++)
+        {
+            for (i = 0x11; i < 0x1E; i++)
+            {
+                *((u16 *)(VRAM + 0x7800 + j * 64 + i * 2)) = 0x4F;
+            }
+        }
+    }
+}
+
+static void sub_8092D78(u8 taskId)
+{
+    const struct UnknownStruct2 *r6 = gUnknown_083B5A7C[gTasks[taskId].data[1]].unk0;
+    const u16 *r8 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk4];
+    const u16 *r7 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk5];
+    u16 i;
+    u16 j;
+
+    MenuZeroFillWindowRect(18, 1, 28, 12);
+    for (i = 0, j = *r7; i < 6 && r6[j].text2 != NULL; i++, j++)
+    {
+#ifndef NONMATCHING
+        j += 0;  // Useless statement needed to match
+#endif
+        MenuPrint(r6[j].text2, 18, i * 2 + 1);
+    }
+    sub_8091E20(r6[*r8 + *r7].text1);
+}
+
+static u8 sub_8092E10(u8 taskId, u8 b)
+{
+    const u16 *ptr1 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk4];
+    const u16 *ptr2 = &gTasks[taskId].data[gUnknown_083B5A7C[b].unk5];
+    u16 r2 = *ptr1 + *ptr2;
+
+    switch (b)
+    {
+    default:
+        return 0;
+    case 5:
+        return gUnknown_083B5A60[r2];
+    case 4:
+        return gUnknown_083B5A62[r2];
+    case 0:
+        if (r2 == 0)
+            return 0xFF;
+        else
+            return r2;
+    case 1:
+        if (r2 == 0)
+            return 0xFF;
+        else
+            return r2 - 1;
+    case 2:
+    case 3:
+        return gUnknown_083B5A68[r2];
+    }
+}
+
+static void sub_8092EB0(u8 taskId)
+{
+    u16 r3;
+
+    switch (gPokedexView->unk614)
+    {
+    default:
+    case 0:
+        r3 = 0;
+        break;
+    case 1:
+        r3 = 1;
+        break;
+    }
+    gTasks[taskId].data[2] = r3;
+
+    switch (gPokedexView->unk618)
+    {
+    default:
+    case 0:
+        r3 = 0;
+        break;
+    case 1:
+        r3 = 1;
+        break;
+    case 2:
+        r3 = 2;
+        break;
+    case 3:
+        r3 = 3;
+        break;
+    case 4:
+        r3 = 4;
+        break;
+    case 5:
+        r3 = 5;
+        break;
+    }
+    gTasks[taskId].data[4] = r3;
+}
+
+static bool8 sub_8092F44(u8 taskId)
+{
+    u8 val1 = gTasks[taskId].data[1];
+    const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
+    u16 val2 = gUnknown_083B5A7C[val1].unk6 - 1;
+
+    if (val2 > 5 && *ptr != 0)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+static bool8 sub_8092F8C(u8 taskId)
+{
+    u8 val1 = gTasks[taskId].data[1];
+    const u16 *ptr = &gTasks[taskId].data[gUnknown_083B5A7C[val1].unk5];
+    u16 val2 = gUnknown_083B5A7C[val1].unk6 - 1;
+
+    if (val2 > 5 && *ptr < val2 - 5)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+static void sub_8092FD8(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].func == sub_8092644)
+    {
+        u8 val;
+
+        if (sprite->data1 != 0)
+        {
+            if (sub_8092F8C(sprite->data0))
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+        }
+        else
+        {
+            if (sub_8092F44(sprite->data0))
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+        }
+        val = sprite->data2 + sprite->data1 * 128;
+        sprite->pos2.y = gSineTable[val] / 128;
+        sprite->data2 += 8;
+    }
+    else
+    {
+        sprite->invisible = TRUE;
+    }
+}
+
+static void sub_809308C(u8 taskId)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 4, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].callback = sub_8092FD8;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 108, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].vFlip = TRUE;
+    gSprites[spriteId].callback = sub_8092FD8;
+}

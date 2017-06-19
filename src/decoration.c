@@ -1,5 +1,5 @@
 #include "global.h"
-#include "asm.h"
+#include "main.h"
 #include "map_object_constants.h"
 #include "rom4.h"
 #include "sound.h"
@@ -12,6 +12,7 @@
 #include "palette.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "field_fadetransition.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "event_data.h"
@@ -1616,7 +1617,7 @@ void sub_80FE394(void)
 
 void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 10, 9);
     MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
     FreeSpritePaletteByTag(6);
@@ -1683,7 +1684,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
 
 void sub_80FE5AC(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
     sub_80FE528(taskId);
     InitMenu(0, 1, 1, 9, gUnknown_020388F6, 13);
@@ -1720,7 +1721,7 @@ void sub_80FE604(u8 taskId)
                     gTasks[taskId].func = sub_80FE868;
                 } else
                 {
-                    sub_8072DEC();
+                    HandleDestroyMenuCursors();
                     MenuZeroFillWindowRect(0, 0, 14, 19);
                     DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE418, 0);
                 }
@@ -1749,7 +1750,7 @@ void sub_80FE728(u8 taskId)
 
 void sub_80FE758(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
     if (gTasks[taskId].data[11] != 2)
     {
@@ -1777,7 +1778,7 @@ void sub_80FE7D4(u8 *dest, u8 decClass)
 
 void sub_80FE7EC(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
 
     sub_80FEC94(taskId);
@@ -1850,7 +1851,7 @@ void sub_80FE948(u8 taskId)
         }
         if (gMain.newKeys & A_BUTTON)
         {
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
             gUnknown_020388F5 = gUnknown_020388F2 + gUnknown_020388F4;
             if (gUnknown_020388F5 == gUnknown_020388D5)
@@ -1862,7 +1863,7 @@ void sub_80FE948(u8 taskId)
             }
         } else if (gMain.newKeys & B_BUTTON)
         {
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
             gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
         }
@@ -2050,7 +2051,7 @@ void sub_80FEF74(void)
     sub_80F9520(gUnknown_020388F7, 8);
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
 }
 
@@ -2080,7 +2081,7 @@ void sub_80FEFF4(u8 taskId)
 
 void sub_80FF034(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 14, 19);
     sub_80FE5AC(taskId);
 }
@@ -3168,7 +3169,7 @@ void sub_8100038(u8 taskId)
 void sub_81000A0(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC95C);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC95C);
 }
 
 void sub_81000C4(u8 taskId)
@@ -3226,7 +3227,7 @@ void sub_8100174(u8 taskId)
 void sub_8100248(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC964);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC964);
 }
 
 void sub_810026C(u8 taskId)
@@ -3257,7 +3258,7 @@ void c1_overworld_prev_quest(u8 taskId)
         case 1:
             sub_81016F4();
             FreeSpritePaletteByTag(0xbb8);
-            gUnknown_0300485C = &sub_8100364;
+            gFieldCallback = &sub_8100364;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
             break;
@@ -3705,7 +3706,7 @@ void sub_8100E70(u8 taskId)
                 data[2] = 1;
                 data[6] = 1;
                 data[5] = 1;
-                sub_8072DEC();
+                HandleDestroyMenuCursors();
             }
             break;
         case 1:
@@ -4047,7 +4048,7 @@ void sub_8101460(u8 taskId)
 void sub_8101518(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC9CC);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC9CC);
 }
 
 void sub_810153C(u8 taskId)
@@ -4060,7 +4061,7 @@ void sub_810153C(u8 taskId)
 void sub_810156C(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083EC9D4);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083EC9D4);
 }
 
 void sub_8101590(u8 taskId)
@@ -4089,7 +4090,7 @@ void sub_81015E0(u8 taskId)
             break;
         case 1:
             sub_81016F4();
-            gUnknown_0300485C = sub_8101678;
+            gFieldCallback = sub_8101678;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
             break;
@@ -4184,7 +4185,7 @@ void sub_81017A0(u8 taskId)
 void sub_8101824(u8 taskId)
 {
     DisplayYesNoMenu(20, 8, 1);
-    sub_80F914C(taskId, &gUnknown_083ECAA0);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083ECAA0);
 }
 
 void sub_8101848(u8 taskId)

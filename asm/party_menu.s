@@ -7423,7 +7423,7 @@ sub_806E7D0: @ 806E7D0
 	lsls r3, 24
 	lsrs r3, 24
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}

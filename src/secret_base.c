@@ -1,22 +1,25 @@
 #include "global.h"
+#include "secret_base.h"
+#include "decoration.h"
+#include "event_data.h"
+#include "field_camera.h"
+#include "field_fadetransition.h"
+#include "field_player_avatar.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "main.h"
+#include "map_constants.h"
+#include "map_name_popup.h"
+#include "metatile_behavior.h"
+#include "palette.h"
+#include "pokemon.h"
+#include "rom4.h"
+#include "script.h"
 #include "string_util.h"
 #include "strings.h"
-#include "text.h"
-#include "event_data.h"
-#include "vars.h"
-#include "rom4.h"
-#include "asm.h"
-#include "script.h"
-#include "field_player_avatar.h"
-#include "field_camera.h"
-#include "map_constants.h"
 #include "task.h"
-#include "palette.h"
-#include "field_weather.h"
-#include "metatile_behavior.h"
-#include "pokemon.h"
-#include "script.h"
-#include "decoration.h"
+#include "text.h"
+#include "vars.h"
 
 extern u8 gUnknown_020387DC;
 extern u16 gSpecialVar_0x8004;
@@ -30,8 +33,8 @@ extern const struct
     u16 unk_083D1358_1;
 } gUnknown_083D1358[7];
 extern const u8 gUnknown_083D1374[4 * 16];
+extern void *gUnknown_0300485C;
 extern const u8 gUnknown_083D13EC[12];
-extern const u8 sub_80BCCA4(u8);
 extern u8 gUnknown_081A2E14[];
 
 
@@ -250,7 +253,7 @@ void sub_80BBA48(u8 taskid)
             gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
         sub_80BBA14();
         warp_in();
-        gUnknown_0300485C = sub_8080990;
+        gFieldCallback = sub_8080990;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskid);
         break;
@@ -299,7 +302,7 @@ void sub_80BBBEC(u8 taskid)
         idx = 4 * (gUnknown_020387DC / 10);
         warp1_set(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
         warp_in();
-        gUnknown_0300485C = sub_80BBB90;
+        gFieldCallback = sub_80BBB90;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskid);
     }
@@ -793,7 +796,7 @@ void sub_80BC074(u8 taskid)
     case 2:
         copy_saved_warp2_bank_and_enter_x_to_warp1(0x7E);
         warp_in();
-        gUnknown_0300485C = mapldr_default;
+        gFieldCallback = mapldr_default;
         SetMainCallback2(CB2_LoadMap);
         ScriptContext2_Disable();
         DestroyTask(taskid);
@@ -822,8 +825,6 @@ u8 sub_80BC14C(u8 sbid)
     }
     return 0;
 }
-
-
 
 u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     u8 local1;

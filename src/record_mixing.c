@@ -1,30 +1,38 @@
 #include "global.h"
 #include "record_mixing.h"
-#include "asm.h"
+#include "battle_tower.h"
+#include "cable_club.h"
+#include "daycare.h"
 #include "dewford_trend.h"
 #include "event_data.h"
+#include "fldeff_80C5CD4.h"
 #include "link.h"
+#include "mauville_old_man.h"
 #include "menu.h"
+#include "mystery_event_script.h"
 #include "rom4.h"
 #include "script.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
+#include "tv.h"
+
 
 extern void *recordMixingSecretBases;
 extern void *recordMixingTvShows;
 extern void *gUnknown_083D0274;
 extern void *gUnknown_083D0278;
 extern void *recordMixingEasyChatPairs;
-extern void *gUnknown_083D0280;
 extern void *gUnknown_083D0284;
 extern u8 gUnknown_083D0288[2];
 extern u8 gUnknown_083D028A[2][3];
 extern u8 gUnknown_083D0290[9][4];
 
-extern struct RecordMixing_UnknownStruct gUnknown_02038738[2];  //Don't know what type this points to
+extern struct RecordMixing_UnknownStruct gUnknown_02038738;  //Don't know what type this points to
+extern struct RecordMixing_UnknownStruct *gUnknown_083D0280;
 extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
@@ -40,20 +48,17 @@ void sub_80B929C(void)
 
 struct PlayerRecords {
     struct SecretBaseRecord secretBases[20];
-    u8 tvShows[25][36];
+    TVShow tvShows[25];
     u8 filler1004[0x40];
     u8 filler1044[0x40];
     struct EasyChatPair easyChatPairs[5];
-    u8 filler10AC[0x78];
+    struct RecordMixing_UnknownStruct filler10AC;
     u8 filler1124[0xA4];
     u16 filler11C8[0x34];
 };
 
 extern struct PlayerRecords unk_2008000;
 extern struct PlayerRecords unk_2018000;
-
-void sub_80BC300();
-void sub_80C045C();
 
 void RecordMixing_PrepareExchangePacket(void)
 {
@@ -65,10 +70,10 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(unk_2018000.filler1004, gUnknown_083D0274, 0x40);
     memcpy(unk_2018000.filler1044, gUnknown_083D0278, 0x40);
     memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, 0x28);
-    gUnknown_02038738[0] = gSaveBlock1.filler_303C[0];
-    gUnknown_02038738[1] = gSaveBlock1.filler_303C[1];
-    sub_8041324(gSaveBlock1.daycareData, gUnknown_02038738);
-    memcpy(unk_2018000.filler10AC, gUnknown_083D0280, 0x78);
+    gUnknown_02038738.data[0] = gSaveBlock1.filler_303C.data[0];
+    gUnknown_02038738.data[1] = gSaveBlock1.filler_303C.data[1];
+    sub_8041324(gSaveBlock1.daycareData, &gUnknown_02038738);
+    memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixing_UnknownStruct));
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
 
     if (GetMultiplayerId() == 0)
@@ -83,7 +88,7 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
     //UB: Too many arguments for function "sub_80FA4E4"
     sub_80FA4E4(unk_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
-    sub_80B9C6C(unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
+    sub_80B9C6C(&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
     sub_80B9B70(unk_2008000.filler1124, sizeof(struct PlayerRecords), a);
     sub_80B9F3C(unk_2008000.filler11C8, a);
 }
@@ -428,14 +433,20 @@ u8 sub_80B9BBC(u16 *a)
 #undef NONMATCHING
 #ifdef NONMATCHING
 
-void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
+void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
+    struct RecordMixing_UnknownStructSub *offA;
+    struct RecordMixing_UnknownStructSub *offB;
+    struct RecordMixing_UnknownStructSub v0;
+    v0 = (offA = ((struct RecordMixing_UnknownStruct *)(b * c[d][0] + (u32)&a))->data)[c[d][1]];
+    offA[c[d][1]] = (offB = ((struct RecordMixing_UnknownStruct *)(b * c[e][0] + (u32)&a))->data)[c[e][1]];
+    offB[c[e][1]] = v0;
     //ToDo: Figure out what this strange stack usage is
 }
 
 #else
 __attribute__((naked))
-void sub_80B9BC4(u32 a, u32 b, u32 c, u32 d)
+void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
@@ -516,76 +527,4 @@ u8 sub_80B9C4C(u8 *a)
         r2 += a[i];
     return r2;
 }
-
-struct UnkStruct1
-{
-    u8 unk0[4];
-    u8 unk4[4];
-    u8 unk8[4];
-    u8 fillerC[0x10];
-    u8 unk1C[4][2];
-    u8 filler24[8];
-    void *unk2C;
-    u32 unk30;
-    u32 unk34;
-    void *unk38;
-    u32 unk3C;
-    u32 unk40;
-    u8 filler44[4];
-    u32 unk48;
-    u32 unk4C;
-    u32 unk50;
-
-};
-
-/*
-//Not finished
-extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
-{
-    struct UnkStruct1 s;
-    u16 r8;
-    u16 r3;
-
-    s.unk2C = a;
-    s.unk30 = b;
-    s.unk38 = d;
-    s.unk34 = c;
-    s.unk40 = Random();
-    SeedRng(gLinkPlayers[0].trainerId);
-    r8 = GetLinkPlayerCount();
-    r3 = 0;
-
-    s.unk4C = 12;
-
-    while (r3 < 4)
-    {
-
-        s.unk4[r3] |= 0xFF;
-        s.unk8[r3] = 0;
-
-        s.unk1C[r3][0] = 0;
-        s.unk1C[r3][1] = 0;
-        r3++;
-    }
-    s.unk3C = 0;
-    r3 = 0;
-    s.unk50 = r8 << 16;
-    s.unk48 = s.unk30 * s.unk34;
-
-    if (s.unk3C < r8)
-    {
-        do  //_080B9D00
-        {
-            u32 *r6 = (u32 *)(s.unk2C + s.unk30 * r3);
-            if (r6[0x1C] != 0 && r6[0x1C] > 0)
-            {
-
-            }
-            //_080B9D3C
-        }
-        while (r3 < r8);
-    }
-    //_080B9D46
-}
-*/
 

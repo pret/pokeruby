@@ -1,7 +1,6 @@
 #include "global.h"
 #include "battle_ai.h"
 #include "abilities.h"
-#include "asm.h"
 #include "battle.h"
 #include "battle_move_effects.h"
 #include "data2.h"
@@ -9,11 +8,9 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "rng.h"
+#include "rom_8077ABC.h"
 #include "species.h"
-
-extern void sub_801CAF8(u8, u8);
-
-extern void move_effectiveness_something(u16, u8, u8);
+#include "util.h"
 
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
@@ -35,9 +32,7 @@ extern struct BattlePokemon gUnknown_02024A8C[];
 extern u8 gUnknown_030042E0[];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
-extern u32 gBitTable[];
 extern u8 *BattleAIs[];
-extern struct BaseStats gBaseStats[];
 
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
@@ -1998,7 +1993,7 @@ static void BattleAICmd_get_item(void)
         index = gEnemyMonIndex;
 
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = unk_2000000[0x160CC + (index * 2)];
+    AI_THINKING_STRUCT->funcResult = ewram[0x160CC + (index * 2)];
 
     gAIScriptPtr += 2;
 }

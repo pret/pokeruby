@@ -5484,7 +5484,7 @@ _08050ED8:
 	adds r0, 0x6F
 	movs r1, 0x3
 	strb r1, [r0]
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1C
@@ -5513,7 +5513,7 @@ _08050F18:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1C
@@ -5794,7 +5794,7 @@ _0805116E:
 	adds r0, 0x6F
 	movs r1, 0x3
 	strb r1, [r0]
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1C
@@ -5810,7 +5810,7 @@ _08051190:
 	ldrb r1, [r0]
 	adds r1, 0x1
 	strb r1, [r0]
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1C

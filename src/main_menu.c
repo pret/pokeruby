@@ -1,14 +1,15 @@
 #include "global.h"
 #include "main_menu.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
 #include "option_menu.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "save_menu_util.h"
@@ -20,6 +21,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
+#include "unknown_task.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -945,14 +947,14 @@ static void Task_NewGameSpeech16(u8 taskId)
     switch (GenderMenuProcessInput())
     {
     case MALE:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     case FEMALE:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
@@ -1048,7 +1050,7 @@ static void Task_NewGameSpeech21(u8 taskId)
     case 2:
     case 3:
     case 4:
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         SetPresetPlayerName(selection);
@@ -1060,7 +1062,7 @@ static void Task_NewGameSpeech21(u8 taskId)
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu

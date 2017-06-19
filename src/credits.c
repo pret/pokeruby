@@ -1,8 +1,9 @@
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "hall_of_fame.h"
+#include "intro_credits_graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -13,6 +14,7 @@
 #include "sound.h"
 #include "species.h"
 #include "starter_choose.h"
+#include "task.h"
 #include "trig.h"
 
 asm(".set REG_BASE, 0x4000000");
@@ -20,8 +22,6 @@ asm(".set OFFSET_REG_BLDCNT,      0x50");
 asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
-extern void *species_and_otid_get_pal(u32, u16, u16);
 
 enum
 {
@@ -187,11 +187,6 @@ extern s16 gUnknown_0203935C;
 
 extern u8 gReservedSpritePaletteCount;
 
-// data/starter_choose
-extern u16 gBirchBagGrassPal[32];
-extern u8 gBirchGrassTilemap[];
-extern u8 gBirchHelpGfx[];
-
 // data/hall_of_fame
 extern void *gUnknown_0840B5A0[];
 
@@ -210,14 +205,6 @@ extern struct SpritePalette gUnknown_0840CAB0;
 extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
 extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
 extern struct SpriteTemplate gSpriteTemplate_840CAEC;
-
-// data/intro_credits_graphics
-extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
-extern const struct SpriteSheet gIntro2MaySpriteSheet;
-extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
-extern const struct SpritePalette gIntro2SpritePalettes[];
-extern const struct SpriteSheet gUnknown_08416E24;
-extern const struct SpriteSheet gUnknown_08416E34;
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];
@@ -246,7 +233,7 @@ static void sub_8145128(u16, u16, u16);
 static void sub_81452D0(u16 arg0, u16 palette);
 static void spritecb_player_8145378(struct Sprite *sprite);
 static void spritecb_rival_8145420(struct Sprite *sprite);
-static u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position);
+static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position);
 static void sub_81458DC(void);
 
 static void vblank_8143948(void)
@@ -461,7 +448,7 @@ void task_a_8143D04(u8 taskIdA)
         gReservedSpritePaletteCount = 8;
         LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
         LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-        LoadPalette(gBirchBagGrassPal + 1, 1, 31 * 2);
+        LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
             HALL_OF_FAME_SHEET_0[i] = 0x11;
@@ -1508,7 +1495,7 @@ void spritecb_81454E0(struct Sprite *sprite) {
 static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 {
     u32 personality;
-    void *palette;
+    const u16 *palette;
     u8 spriteId;
     u8 spriteId2;
 
@@ -1585,7 +1572,7 @@ static void sub_81458DC(void) {
 
     for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
     {
-        if (sub_8090D90(dexNum, 1))
+        if (GetNationalPokedexFlag(dexNum, 1))
         {
             unk201C000->unk90[seenTypesCount] = dexNum;
             seenTypesCount++;

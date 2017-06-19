@@ -1,42 +1,51 @@
 #include "global.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
 #include "coins.h"
+#include "contest_link_80C2020.h"
 #include "contest_painting.h"
 #include "data2.h"
 #include "decoration.h"
+#include "decoration_inventory.h"
 #include "event_data.h"
 #include "field_door.h"
 #include "field_effect.h"
+#include "field_fadetransition.h"
+#include "field_map_obj.h"
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
+#include "field_screen_effect.h"
+#include "field_specials.h"
+#include "field_tasks.h"
 #include "field_weather.h"
+#include "fieldmap.h"
 #include "item.h"
 #include "main.h"
 #include "map_obj_lock.h"
 #include "menu.h"
 #include "money.h"
+#include "mystery_event_script.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
+#include "script_movement.h"
 #include "script_pokemon_80C4.h"
 #include "script_pokemon_80F9.h"
+#include "shop.h"
+#include "slot_machine.h"
 #include "sound.h"
 #include "string_util.h"
+#include "tv.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
-
-extern struct Pokemon gPlayerParty[6]; // 0x3004360
-extern struct Pokemon gEnemyParty[6]; // 0x30045C0
 
 extern u32 gUnknown_0202E8AC;
 extern u32 gUnknown_0202E8B0;
@@ -59,8 +68,6 @@ extern u16 gScriptContestCategory;
 extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
 extern u8 *gStdScripts_End[];
-
-extern u8 * const gUnknown_083CE048[];
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1409,7 +1416,7 @@ bool8 ScrCmd_bufferstd(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(sScriptStringVars[stringVarIndex], gUnknown_083CE048[index]);
+    StringCopy(sScriptStringVars[stringVarIndex], gUnknown_083CE048[index].text);
     return FALSE;
 }
 
