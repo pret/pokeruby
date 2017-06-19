@@ -1,8 +1,10 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "battle.h"
+#include "decompress.h"
 #include "m4a.h"
 #include "main.h"
+#include "pokeball.h"
 #include "pokemon.h"
 #include "rom_8077ABC.h"
 #include "songs.h"
@@ -10,6 +12,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "util.h"
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gBattleTypeFlags;
@@ -18,34 +21,44 @@ extern u8 gActiveBank;
 extern u16 gBattlePartyID[];
 extern u8 gObjectBankIDs[];
 extern u8 gDoingBattleAnim;
+extern u8 gHealthboxIDs[];
 
+extern const struct SpriteSheet gUnknown_0820A92C[];
+extern const struct SpritePalette gUnknown_0820A98C[];
 extern const struct SpriteTemplate gSpriteTemplate_820AAB4[];
+extern const u8 gUnknown_08D030D0[];
 
 extern u32 ball_number_to_ball_processing_index(u16);  // not sure of return type
 extern void sub_80786EC();
 extern bool8 sub_8078718(struct Sprite *);
-extern void sub_814086C(u8, u8, int, int, u8);
-extern u8 sub_8141314(u8, u8, u8, u8);
+extern u8 sub_814086C(u8, u8, int, int, u8);
+extern u8 sub_8141314(u8, u8, int, u8);
 
-void sub_8046464(u8);
-void sub_80466E8(struct Sprite *);
-void sub_80466F4(struct Sprite *);
-void sub_8046760(struct Sprite *);
-void sub_80467F8(struct Sprite *);
-void sub_804684C(struct Sprite *);
-void sub_8046944(struct Sprite *);
-void sub_8046984(struct Sprite *);
-void sub_8046C78(struct Sprite *);
-void sub_8046E7C(struct Sprite *);
-void sub_8046E9C(struct Sprite *);
-void sub_8046FBC(struct Sprite *);
-void sub_8047074(struct Sprite *);
-void sub_80470C4(struct Sprite *);
-void sub_8047230(struct Sprite *);
-void sub_8047254(struct Sprite *);
-void sub_80478DC();
-void sub_804794C(u8);
-u16 sub_8047978();
+static void sub_8046464(u8);
+static void sub_80466E8(struct Sprite *);
+static void sub_80466F4(struct Sprite *);
+static void sub_8046760(struct Sprite *);
+static void sub_80467F8(struct Sprite *);
+static void sub_804684C(struct Sprite *);
+static void sub_8046944(struct Sprite *);
+static void sub_8046984(struct Sprite *);
+static void sub_8046C78(struct Sprite *);
+static void sub_8046E7C(struct Sprite *);
+static void sub_8046E9C(struct Sprite *);
+static void sub_8046FBC(struct Sprite *);
+static void sub_8047074(struct Sprite *);
+static void sub_80470C4(struct Sprite *);
+static void sub_8047230(struct Sprite *);
+static void sub_8047254(struct Sprite *);
+static void sub_80473D0(struct Sprite *);
+static void sub_804748C(struct Sprite *);
+static void sub_8047638(struct Sprite *);
+static void sub_80476E0(struct Sprite *);
+static void sub_8047754(struct Sprite *);
+static void sub_804780C(struct Sprite *);
+static void sub_8047830(struct Sprite *);
+static void oamc_804BEB4(struct Sprite *);
+static u16 sub_8047978(u8);
 
 u8 sub_8046400(u16 a, u8 b)
 {
@@ -60,7 +73,7 @@ u8 sub_8046400(u16 a, u8 b)
     return 0;
 }
 
-void sub_8046464(u8 taskId)
+static void sub_8046464(u8 taskId)
 {
     bool8 sp0 = FALSE;
     u16 r8;
@@ -149,12 +162,12 @@ void objc_0804ABD4(struct Sprite *sprite)
     }
 }
 
-void sub_80466E8(struct Sprite *sprite)
+static void sub_80466E8(struct Sprite *sprite)
 {
     sprite->callback = sub_80466F4;
 }
 
-void sub_80466F4(struct Sprite *sprite)
+static void sub_80466F4(struct Sprite *sprite)
 {
     sprite->data5++;
     if (sprite->data5 == 10)
@@ -167,7 +180,7 @@ void sub_80466F4(struct Sprite *sprite)
     }
 }
 
-void sub_8046760(struct Sprite *sprite)
+static void sub_8046760(struct Sprite *sprite)
 {
     sprite->data5++;
     if (sprite->data5 == 11)
@@ -186,7 +199,7 @@ void sub_8046760(struct Sprite *sprite)
     }
 }
 
-void sub_80467F8(struct Sprite *sprite)
+static void sub_80467F8(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -203,7 +216,7 @@ void sub_80467F8(struct Sprite *sprite)
     }
 }
 
-void sub_804684C(struct Sprite *sprite)
+static void sub_804684C(struct Sprite *sprite)
 {
     bool8 r5 = FALSE;
 
@@ -263,7 +276,7 @@ void sub_804684C(struct Sprite *sprite)
     }
 }
 
-void sub_8046944(struct Sprite *sprite)
+static void sub_8046944(struct Sprite *sprite)
 {
     sprite->data3++;
     if (sprite->data3 == 31)
@@ -276,7 +289,7 @@ void sub_8046944(struct Sprite *sprite)
     }
 }
 
-void sub_8046984(struct Sprite *sprite)
+static void sub_8046984(struct Sprite *sprite)
 {
     switch (sprite->data3 & 0xFF)
     {
@@ -347,7 +360,7 @@ void sub_8046984(struct Sprite *sprite)
     }
 }
 
-void sub_8046AD0(u8 taskId)
+static void sub_8046AD0(u8 taskId)
 {
     u8 r6 = gTasks[taskId].data[2];
     u8 r3 = gTasks[taskId].data[1];
@@ -412,7 +425,7 @@ void sub_8046AD0(u8 taskId)
     }
 }
 
-void sub_8046C78(struct Sprite *sprite)
+static void sub_8046C78(struct Sprite *sprite)
 {
     u8 r5 = sprite->data6;
     u32 r4;  // not sure of this type
@@ -471,7 +484,7 @@ void sub_8046C78(struct Sprite *sprite)
     gSprites[gObjectBankIDs[sprite->data6]].data1 = 0x1000;
 }
 
-void sub_8046E7C(struct Sprite *sprite)
+static void sub_8046E7C(struct Sprite *sprite)
 {
     sprite->animPaused = TRUE;
     sprite->callback = sub_8046FBC;
@@ -480,7 +493,7 @@ void sub_8046E7C(struct Sprite *sprite)
     sprite->data5 = 0;
 }
 
-void sub_8046E9C(struct Sprite *sprite)
+static void sub_8046E9C(struct Sprite *sprite)
 {
     bool8 r7 = FALSE;
     u8 r4 = sprite->data6;
@@ -521,7 +534,7 @@ void sub_8046E9C(struct Sprite *sprite)
     }
 }
 
-void sub_8046FBC(struct Sprite *sprite)
+static void sub_8046FBC(struct Sprite *sprite)
 {
     u8 r7 = sprite->data6;
 
@@ -546,7 +559,7 @@ void sub_8046FBC(struct Sprite *sprite)
     }
 }
 
-void sub_8047074(struct Sprite *sprite)
+static void sub_8047074(struct Sprite *sprite)
 {
     sprite->data0 = 25;
     sprite->data2 = sub_8077ABC(sprite->data6, 2);
@@ -559,7 +572,7 @@ void sub_8047074(struct Sprite *sprite)
 
 #define HIBYTE(x) (((x) >> 8) & 0xFF)
 
-void sub_80470C4(struct Sprite *sprite)
+static void sub_80470C4(struct Sprite *sprite)
 {
     u32 r6;
     u32 r7;
@@ -611,4 +624,303 @@ void sub_80470C4(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 0);
         }
     }
+}
+
+static void sub_8047230(struct Sprite *sprite)
+{
+    if (sprite->data0++ > 0x18)
+    {
+        sprite->data0 = 0;
+        sprite->callback = sub_8046C78;
+    }
+}
+
+static void sub_8047254(struct Sprite *sprite)
+{
+    sprite->data0++;
+    if (sprite->data0 > 15)
+    {
+        sprite->data0 = 0;
+        if (IsDoubleBattle() && ewram17840.unk9_0
+         && sprite->data6 == GetBankByPlayerAI(3))
+            sprite->callback = sub_8047230;
+        else
+            sprite->callback = sub_8046C78;
+    }
+}
+
+static u8 sub_80472B0(u8 a, u8 b, u8 c, u8 d)
+{
+    return sub_814086C(a, b, c, d, 0);
+}
+
+static u8 sub_80472D8(u8 a, u8 b, u32 c)
+{
+    return sub_8141314(a, b, c, 0);
+}
+
+void CreatePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 e, u8 f, u8 g, u32 h)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_0820A92C[0]);
+    LoadCompressedObjectPalette(&gUnknown_0820A98C[0]);
+    spriteId = CreateSprite(&gSpriteTemplate_820AAB4[0], x, y, f);
+    gSprites[spriteId].data0 = a;
+    gSprites[spriteId].data5 = gSprites[a].pos1.x;
+    gSprites[spriteId].data6 = gSprites[a].pos1.y;
+    gSprites[a].pos1.x = x;
+    gSprites[a].pos1.y = y;
+    gSprites[spriteId].data1 = g;
+    gSprites[spriteId].data2 = b;
+    gSprites[spriteId].data3 = h;
+    gSprites[spriteId].data4 = h >> 16;
+    gSprites[spriteId].oam.priority = e;
+    gSprites[spriteId].callback = sub_80473D0;
+    gSprites[a].invisible = TRUE;
+}
+
+static void sub_80473D0(struct Sprite *sprite)
+{
+    if (sprite->data1 == 0)
+    {
+        u8 r5;
+        u8 r7 = sprite->data0;
+        u8 r8 = sprite->data2;
+        u32 r4 = (u16)sprite->data3 | ((u16)sprite->data4 << 16);
+
+        if (sprite->subpriority != 0)
+            r5 = sprite->subpriority - 1;
+        else
+            r5 = 0;
+        StartSpriteAnim(sprite, 1);
+        sub_80472B0(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r5);
+        sprite->data1 = sub_80472D8(1, r8, r4);
+        sprite->callback = sub_804748C;
+        gSprites[r7].invisible = FALSE;
+        StartSpriteAffineAnim(&gSprites[r7], 1);
+        AnimateSprite(&gSprites[r7]);
+        gSprites[r7].data1 = 0x1000;
+        sprite->data7 = 0;
+    }
+    else
+    {
+        sprite->data1--;
+    }
+}
+
+static void sub_804748C(struct Sprite *sprite)
+{
+    bool8 r12 = FALSE;
+    bool8 r6 = FALSE;
+    u8 r3 = sprite->data0;
+    u16 var1;
+    u16 var2;
+
+    if (sprite->animEnded)
+        sprite->invisible = TRUE;
+    if (gSprites[r3].affineAnimEnded)
+    {
+        StartSpriteAffineAnim(&gSprites[r3], 0);
+        r12 = TRUE;
+    }
+    var1 = (sprite->data5 - sprite->pos1.x) * sprite->data7 / 128 + sprite->pos1.x;
+    var2 = (sprite->data6 - sprite->pos1.y) * sprite->data7 / 128 + sprite->pos1.y;
+    gSprites[r3].pos1.x = var1;
+    gSprites[r3].pos1.y = var2;
+    if (sprite->data7 < 128)
+    {
+        s16 sine = -(gSineTable[(u8)sprite->data7] / 8);
+
+        sprite->data7 += 4;
+        gSprites[r3].pos2.x = sine;
+        gSprites[r3].pos2.y = sine;
+    }
+    else
+    {
+        gSprites[r3].pos1.x = sprite->data5;
+        gSprites[r3].pos1.y = sprite->data6;
+        gSprites[r3].pos2.x = 0;
+        gSprites[r3].pos2.y = 0;
+        r6 = TRUE;
+    }
+    if (sprite->animEnded && r12 && r6)
+        DestroySpriteAndFreeResources(sprite);
+}
+
+u8 sub_8047580(u8 a, u8 b, u8 x, u8 y, u8 e, u8 f, u8 g, u32 h)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_0820A92C[0]);
+    LoadCompressedObjectPalette(&gUnknown_0820A98C[0]);
+    spriteId = CreateSprite(&gSpriteTemplate_820AAB4[0], x, y, f);
+    gSprites[spriteId].data0 = a;
+    gSprites[spriteId].data1 = g;
+    gSprites[spriteId].data2 = b;
+    gSprites[spriteId].data3 = h;
+    gSprites[spriteId].data4 = h >> 16;
+    gSprites[spriteId].oam.priority = e;
+    gSprites[spriteId].callback = sub_8047638;
+    return spriteId;
+}
+
+static void sub_8047638(struct Sprite *sprite)
+{
+    if (sprite->data1 == 0)
+    {
+        u8 r6;
+        u8 r7 = sprite->data0;
+        u8 r8 = sprite->data2;
+        u32 r5 = (u16)sprite->data3 | ((u16)sprite->data4 << 16);
+
+        if (sprite->subpriority != 0)
+            r6 = sprite->subpriority - 1;
+        else
+            r6 = 0;
+        StartSpriteAnim(sprite, 1);
+        sub_80472B0(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r6);
+        sprite->data1 = sub_80472D8(1, r8, r5);
+        sprite->callback = sub_80476E0;
+        StartSpriteAffineAnim(&gSprites[r7], 2);
+        AnimateSprite(&gSprites[r7]);
+        gSprites[r7].data1 = 0;
+    }
+    else
+    {
+        sprite->data1--;
+    }
+}
+
+static void sub_80476E0(struct Sprite *sprite)
+{
+    u8 r1;
+
+    sprite->data5++;
+    if (sprite->data5 == 11)
+        PlaySE(SE_SUIKOMU);
+    r1 = sprite->data0;
+    if (gSprites[r1].affineAnimEnded)
+    {
+        StartSpriteAnim(sprite, 2);
+        gSprites[r1].invisible = TRUE;
+        sprite->data5 = 0;
+        sprite->callback = sub_8047754;
+    }
+    else
+    {
+        gSprites[r1].data1 += 96;
+        gSprites[r1].pos2.y = -gSprites[r1].data1 >> 8;
+    }
+}
+
+static void sub_8047754(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+void obj_delete_and_free_associated_resources_(struct Sprite *sprite)
+{
+    DestroySpriteAndFreeResources(sprite);
+}
+
+void sub_804777C(u8 a)
+{
+    struct Sprite *sprite = &gSprites[gHealthboxIDs[a]];
+
+    sprite->data0 = 5;
+    sprite->data1 = 0;
+    sprite->pos2.x = 0x73;
+    sprite->pos2.y = 0;
+    sprite->callback = sub_8047830;
+    if (GetBankSide(a) != 0)
+    {
+        sprite->data0 = -sprite->data0;
+        sprite->data1 = -sprite->data1;
+        sprite->pos2.x = -sprite->pos2.x;
+        sprite->pos2.y = -sprite->pos2.y;
+    }
+    gSprites[sprite->data5].callback(&gSprites[sprite->data5]);
+    if (GetBankIdentity(a) == 2)
+        sprite->callback = sub_804780C;
+}
+
+static void sub_804780C(struct Sprite *sprite)
+{
+    sprite->data1++;
+    if (sprite->data1 == 20)
+    {
+        sprite->data1 = 0;
+        sprite->callback = sub_8047830;
+    }
+}
+
+static void sub_8047830(struct Sprite *sprite)
+{
+    sprite->pos2.x -= sprite->data0;
+    sprite->pos2.y -= sprite->data1;
+    if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+void sub_8047858(u8 a)
+{
+    u8 spriteId;
+
+    spriteId = CreateInvisibleSpriteWithCallback(oamc_804BEB4);
+    gSprites[spriteId].data0 = 1;
+    gSprites[spriteId].data1 = gHealthboxIDs[a];
+    gSprites[spriteId].callback = oamc_804BEB4;
+}
+
+static void oamc_804BEB4(struct Sprite *sprite)
+{
+    u8 r1 = sprite->data1;
+
+    gSprites[r1].pos2.y = sprite->data0;
+    sprite->data0 = -sprite->data0;
+    sprite->data2++;
+    if (sprite->data2 == 21)
+    {
+        gSprites[r1].pos2.x = 0;
+        gSprites[r1].pos2.y = 0;
+        DestroySprite(sprite);
+    }
+}
+
+void sub_80478DC(u8 a)
+{
+    u16 var;
+
+    if (GetSpriteTileStartByTag(gUnknown_0820A92C[a].tag) == 0xFFFF)
+    {
+        LoadCompressedObjectPic(&gUnknown_0820A92C[a]);
+        LoadCompressedObjectPalette(&gUnknown_0820A98C[a]);
+    }
+    switch (a)
+    {
+    case 6:
+    case 10:
+    case 11:
+        break;
+    default:
+        var = GetSpriteTileStartByTag(gUnknown_0820A92C[a].tag);
+        LZDecompressVram(gUnknown_08D030D0, (void *)(VRAM + 0x10100 + var * 32));
+        break;
+    }
+}
+
+void sub_804794C(u8 a)
+{
+    FreeSpriteTilesByTag(gUnknown_0820A92C[a].tag);
+    FreeSpritePaletteByTag(gUnknown_0820A98C[a].tag);
+}
+
+static u16 sub_8047978(u8 a)
+{
+    if (GetBankSide(a) == 0)
+        return GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_POKEBALL);
+    else
+        return GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_POKEBALL);
 }

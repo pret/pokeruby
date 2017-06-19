@@ -79,7 +79,6 @@ SECTIONS {
         src/battle_interface.o(.text);
         src/smokescreen.o(.text);
         src/pokeball.o(.text);
-        asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);
