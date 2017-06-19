@@ -135,7 +135,7 @@ static const union AnimCmd *const sBallAnimSequences[] =
     sBallAnimSeq0,
     sBallAnimSeq1,
     sBallAnimSeq2,
-    
+
     // unused?
     sBallAnimSeq3,
     sBallAnimSeq4,
