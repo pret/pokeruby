@@ -934,10 +934,16 @@ void EndLotteryCornerComputerEffect(void)
 static void sub_810E874(void);
 void sub_810E944(void);
 void sub_810E984(u8);
-void sub_810EAC8(u8, u8);
+bool8 sub_810EAC8(u8, u8);
+void sub_810EB90(u8, u8);
 void sub_810EBEC(void);
+void sub_810EC34(u8);
 void sub_810EC9C(u8);
+void sub_810ECB0(void);
 void sub_810ECD4(void);
+void sub_810ECFC(void);
+void sub_810ED40(u8);
+void sub_810ED60(struct Task *);
 void sub_810EEDC(void);
 
 const u8 *const gUnknown_083F8380[] = {
@@ -1099,4 +1105,308 @@ void sub_810E984(u8 taskId)
         MenuZeroFillWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
+}
+
+// This function, as written, swaps the roles of r4 and r5 throughout.
+#ifdef NONMATCHING
+bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
+{
+    u8 i;
+    bool8 flag = 0;
+    u8 newPos = 0;
+    if (gUnknown_0203925A < 5)
+    {
+        return FALSE;
+    }
+    if (dpadInput == DPAD_UP)
+    {
+        if (prevMenuPos == 0)
+        {
+            newPos = gUnknown_0203925B;
+            flag = 1;
+        }
+    }
+    else if (dpadInput == DPAD_DOWN)
+    {
+        if (prevMenuPos == 4)
+        {
+            newPos = gUnknown_0203925B - 4;
+            flag = 1;
+        }
+    }
+    if (flag)
+    {
+        sub_810EB90(newPos, 5);
+        MenuFillWindowRectWithBlankTile(2, 1, 7, 10);
+        for (i=0; i<5 && gUnknown_03000760[newPos].var0 != 16; newPos++, i++)
+        {
+            MenuPrint(gUnknown_083F8380[gUnknown_03000760[newPos].var0], 1, i * 2 + 1);
+        }
+    }
+    return flag;
+}
+#else
+__attribute__((naked))
+bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r8\n"
+                    "\tpush {r7}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r2, r0, 24\n"
+                    "\tadds r5, r2, 0\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r1, 24\n"
+                    "\tadds r3, r1, 0\n"
+                    "\tmovs r7, 0\n"
+                    "\tmovs r4, 0\n"
+                    "\tldr r0, _0810EAEC @ =gUnknown_0203925A\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0x4\n"
+                    "\tbhi _0810EAF0\n"
+                    "\tmovs r0, 0\n"
+                    "\tb _0810EB78\n"
+                    "\t.align 2, 0\n"
+                    "_0810EAEC: .4byte gUnknown_0203925A\n"
+                    "_0810EAF0:\n"
+                    "\tcmp r1, 0x40\n"
+                    "\tbne _0810EB04\n"
+                    "\tcmp r2, 0\n"
+                    "\tbne _0810EB18\n"
+                    "\tldr r0, _0810EB00 @ =gUnknown_0203925B\n"
+                    "\tldrb r4, [r0]\n"
+                    "\tmovs r7, 0x1\n"
+                    "\tb _0810EB1C\n"
+                    "\t.align 2, 0\n"
+                    "_0810EB00: .4byte gUnknown_0203925B\n"
+                    "_0810EB04:\n"
+                    "\tcmp r3, 0x80\n"
+                    "\tbne _0810EB18\n"
+                    "\tcmp r5, 0x4\n"
+                    "\tbne _0810EB18\n"
+                    "\tldr r0, _0810EB84 @ =gUnknown_0203925B\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tsubs r0, 0x4\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tmovs r7, 0x1\n"
+                    "_0810EB18:\n"
+                    "\tcmp r7, 0\n"
+                    "\tbeq _0810EB76\n"
+                    "_0810EB1C:\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x5\n"
+                    "\tbl sub_810EB90\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tmovs r2, 0x7\n"
+                    "\tmovs r3, 0xA\n"
+                    "\tbl MenuFillWindowRectWithBlankTile\n"
+                    "\tmovs r5, 0\n"
+                    "\tldr r2, _0810EB88 @ =gUnknown_03000760\n"
+                    "\tlsls r1, r4, 2\n"
+                    "\tadds r0, r1, r2\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0x10\n"
+                    "\tbeq _0810EB76\n"
+                    "\tldr r0, _0810EB8C @ =gUnknown_083F8380\n"
+                    "\tmov r8, r0\n"
+                    "\tadds r6, r2, 0\n"
+                    "_0810EB44:\n"
+                    "\tadds r0, r1, r6\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tlsls r0, 2\n"
+                    "\tadd r0, r8\n"
+                    "\tldr r0, [r0]\n"
+                    "\tlsls r2, r5, 1\n"
+                    "\tadds r2, 0x1\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r2, 24\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tbl MenuPrint\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tadds r0, r5, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tcmp r5, 0x4\n"
+                    "\tbhi _0810EB76\n"
+                    "\tlsls r1, r4, 2\n"
+                    "\tadds r0, r1, r6\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0x10\n"
+                    "\tbne _0810EB44\n"
+                    "_0810EB76:\n"
+                    "\tadds r0, r7, 0\n"
+                    "_0810EB78:\n"
+                    "\tpop {r3}\n"
+                    "\tmov r8, r3\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.align 2, 0\n"
+                    "_0810EB84: .4byte gUnknown_0203925B\n"
+                    "_0810EB88: .4byte gUnknown_03000760\n"
+                    "_0810EB8C: .4byte gUnknown_083F8380");
+}
+#endif
+
+void sub_810EB90(u8 newPos, u8 maxItems)
+{
+    if (newPos == 0)
+    {
+        gUnknown_0203925C ^= 0x02;
+        DestroyVerticalScrollIndicator(0);
+    }
+    else
+    {
+        sub_810ECB0();
+    }
+    if (newPos + maxItems < gUnknown_0203925A)
+    {
+        sub_810ECD4();
+    }
+    else if (newPos + maxItems == gUnknown_0203925A)
+    {
+        gUnknown_0203925C ^= 0x01;
+        DestroyVerticalScrollIndicator(1);
+    }
+}
+
+void sub_810EBEC(void)
+{
+    u8 taskId = CreateTask(sub_810EC34, 9);
+    gTasks[taskId].data[0] = 1;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].data[4] = 1;
+    gTasks[taskId].data[5] = 3;
+    SetCameraPanningCallback(NULL);
+    sub_810ECFC();
+    PlaySE(SE_ELEBETA);
+}
+
+void sub_810EC34(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    task->data[1] ++;
+    if (task->data[1] % task->data[5] == 0)
+    {
+        task->data[1] = 0;
+        task->data[2] ++;
+        if (task->data[3] == 0)
+        {
+            task->data[4] = -task->data[4];
+            SetCameraPanning(0, task->data[4]);
+            if (task->data[2] == 23)
+            {
+                PlaySE(SE_PINPON);
+                sub_810EC9C(taskId);
+                InstallCameraPanAheadCallback();
+            }
+        }
+    }
+}
+
+void sub_810EC9C(u8 taskId)
+{
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
+}
+
+void sub_810ECB0(void)
+{
+    if (gUnknown_0203925C >> 1 != 1)
+    {
+        gUnknown_0203925C |= 0x2;
+        CreateVerticalScrollIndicators(0, 0x24, 0x08);
+    }
+}
+
+void sub_810ECD4(void)
+{
+    if ((gUnknown_0203925C & 1) == 0)
+    {
+        gUnknown_0203925C |= 0x1;
+        CreateVerticalScrollIndicators(1, 0x24, 0x48);
+    }
+}
+
+void sub_810ECFC(void)
+{
+    if (FuncIsActiveTask(sub_810ED40) != TRUE)
+    {
+        u8 taskId = CreateTask(sub_810ED40, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = taskId;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[4] = 0;
+    }
+}
+
+void sub_810ED40(u8 taskId)
+{
+    sub_810ED60(&gTasks[taskId]);
+}
+
+void sub_810ED60(struct Task *task)
+{
+    if (task->data[3] == 8)
+    {
+        task->data[3] = 0;
+        if (task->data[4] != 0)
+        {
+            MapGridSetMetatileIdAt( 7,  7, 0xe68);
+            MapGridSetMetatileIdAt( 8,  7, 0xe69);
+            MapGridSetMetatileIdAt( 9,  7, 0xe69);
+            MapGridSetMetatileIdAt(10,  7, 0xe6a);
+            MapGridSetMetatileIdAt( 7,  8, 0xe70);
+            MapGridSetMetatileIdAt( 8,  8, 0xe71);
+            MapGridSetMetatileIdAt( 9,  8, 0xe71);
+            MapGridSetMetatileIdAt(10,  8, 0xe72);
+            MapGridSetMetatileIdAt( 7,  9, 0xe78);
+            MapGridSetMetatileIdAt( 8,  9, 0xe79);
+            MapGridSetMetatileIdAt( 9,  9, 0xe79);
+            MapGridSetMetatileIdAt(10,  9, 0xe7a);
+        }
+        else
+        {
+            MapGridSetMetatileIdAt( 7,  7, 0xe6b);
+            MapGridSetMetatileIdAt( 8,  7, 0xe6c);
+            MapGridSetMetatileIdAt( 9,  7, 0xe6c);
+            MapGridSetMetatileIdAt(10,  7, 0xe6d);
+            MapGridSetMetatileIdAt( 7,  8, 0xe73);
+            MapGridSetMetatileIdAt( 8,  8, 0xe74);
+            MapGridSetMetatileIdAt( 9,  8, 0xe74);
+            MapGridSetMetatileIdAt(10,  8, 0xe75);
+            MapGridSetMetatileIdAt( 7,  9, 0xe7b);
+            MapGridSetMetatileIdAt( 8,  9, 0xe7c);
+            MapGridSetMetatileIdAt( 9,  9, 0xe7c);
+            MapGridSetMetatileIdAt(10,  9, 0xe7d);
+        }
+        DrawWholeMapView();
+        task->data[4] ^= 1;
+        task->data[2]++;
+        if (task->data[2] == 8)
+        {
+            DestroyTask(task->data[1]);
+        }
+    }
+    task->data[3]++;
+}
+
+void sub_810EEDC(void)
+{
+    if ((gUnknown_0203925C & 1) != 0)
+    {
+        DestroyVerticalScrollIndicator(1);
+    }
+    if ((gUnknown_0203925C >> 1) == 1)
+    {
+        DestroyVerticalScrollIndicator(0);
+    }
+    BuyMenuFreeMemory();
 }
