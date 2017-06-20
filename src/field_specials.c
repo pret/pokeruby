@@ -1,6 +1,7 @@
 #include "global.h"
 #include "field_specials.h"
 #include "diploma.h"
+#include "fieldmap.h"
 #include "event_data.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
@@ -345,6 +346,33 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
             {
                 j = 0;
             }
+        }
+    }
+}
+
+struct Coords8 {
+    u8 x;
+    u8 y;
+};
+
+const struct Coords8 gUnknown_083F8364[3] = {
+    { 7, 16},
+    {15, 18},
+    {11, 22}
+};
+
+void MauvilleGymSpecial1(void)
+{
+    u8 i;
+    for (i=0; i<3; i++)
+    {
+        if (i == gSpecialVar_0x8004)
+        {
+            MapGridSetMetatileIdAt(gUnknown_083F8364[i].x, gUnknown_083F8364[i].y, 0x206);
+        }
+        else
+        {
+            MapGridSetMetatileIdAt(gUnknown_083F8364[i].x, gUnknown_083F8364[i].y, 0x205);
         }
     }
 }

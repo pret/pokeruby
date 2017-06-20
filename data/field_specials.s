@@ -3,12 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_083F8364:: @ 83F8364
-	.byte    7,  16,   0,   0
-	.byte   15,  18,   0,   0
-	.byte   11,  22,   0,   0
-
 gUnknown_083F8370:: @ 83F8370
 	.byte 0, 1, 1, 1, 1
 

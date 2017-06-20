@@ -6,47 +6,6 @@
 
 	.text
 
-	thumb_func_start MauvilleGymSpecial1
-MauvilleGymSpecial1: @ 810DC7C
-	push {r4,r5,lr}
-	movs r4, 0
-	ldr r5, _0810DC9C @ =gUnknown_083F8364
-_0810DC82:
-	ldr r0, _0810DCA0 @ =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	cmp r4, r0
-	bne _0810DCA8
-	lsls r1, r4, 2
-	adds r1, r5
-	ldrb r0, [r1]
-	ldrb r1, [r1, 0x1]
-	ldr r2, _0810DCA4 @ =0x00000206
-	bl MapGridSetMetatileIdAt
-	b _0810DCB6
-	.align 2, 0
-_0810DC9C: .4byte gUnknown_083F8364
-_0810DCA0: .4byte gSpecialVar_0x8004
-_0810DCA4: .4byte 0x00000206
-_0810DCA8:
-	lsls r1, r4, 2
-	adds r1, r5
-	ldrb r0, [r1]
-	ldrb r1, [r1, 0x1]
-	ldr r2, _0810DCC8 @ =0x00000205
-	bl MapGridSetMetatileIdAt
-_0810DCB6:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x2
-	bls _0810DC82
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DCC8: .4byte 0x00000205
-	thumb_func_end MauvilleGymSpecial1
-
 	thumb_func_start MauvilleGymSpecial2
 MauvilleGymSpecial2: @ 810DCCC
 	push {r4-r6,lr}
