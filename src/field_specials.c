@@ -928,3 +928,33 @@ void EndLotteryCornerComputerEffect(void)
     MapGridSetMetatileIdAt(18, 9, 0xea5);
     DrawWholeMapView();
 }
+
+void SetDepartmentStoreFloorVar(void)
+{
+    u8 deptStoreFloor;
+    switch (gSaveBlock1.warp2.mapNum)
+    {
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_1F:
+            deptStoreFloor = 0;
+            break;
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_2F:
+            deptStoreFloor = 1;
+            break;
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_3F:
+            deptStoreFloor = 2;
+            break;
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_4F:
+            deptStoreFloor = 3;
+            break;
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_5F:
+            deptStoreFloor = 4;
+            break;
+        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP:
+            deptStoreFloor = 15;
+            break;
+        default:
+            deptStoreFloor = 0;
+            break;
+    }
+    VarSet(VAR_DEPT_STORE_FLOOR, deptStoreFloor);
+}

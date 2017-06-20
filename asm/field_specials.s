@@ -6,58 +6,6 @@
 
 	.text
 
-	thumb_func_start SetDepartmentStoreFloorVar
-SetDepartmentStoreFloorVar: @ 810E74C
-	push {lr}
-	ldr r0, _0810E768 @ =gSaveBlock1
-	ldrb r0, [r0, 0x15]
-	subs r0, 0x11
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0x5
-	bhi _0810E79C
-	lsls r0, 2
-	ldr r1, _0810E76C @ =_0810E770
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0810E768: .4byte gSaveBlock1
-_0810E76C: .4byte _0810E770
-	.align 2, 0
-_0810E770:
-	.4byte _0810E79C
-	.4byte _0810E788
-	.4byte _0810E78C
-	.4byte _0810E790
-	.4byte _0810E794
-	.4byte _0810E798
-_0810E788:
-	movs r1, 0x1
-	b _0810E79E
-_0810E78C:
-	movs r1, 0x2
-	b _0810E79E
-_0810E790:
-	movs r1, 0x3
-	b _0810E79E
-_0810E794:
-	movs r1, 0x4
-	b _0810E79E
-_0810E798:
-	movs r1, 0xF
-	b _0810E79E
-_0810E79C:
-	movs r1, 0
-_0810E79E:
-	ldr r0, _0810E7A8 @ =0x00004043
-	bl VarSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810E7A8: .4byte 0x00004043
-	thumb_func_end SetDepartmentStoreFloorVar
-
 	thumb_func_start ScriptAddElevatorMenuItem
 ScriptAddElevatorMenuItem: @ 810E7AC
 	push {r4-r7,lr}
