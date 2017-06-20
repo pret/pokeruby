@@ -18,7 +18,7 @@ enum
     TVSHOW_MASS_OUTBREAK = 41,
 };
 
-extern u8 *gUnknown_083D1464[3];
+extern u8 *const gUnknown_083D1464[3];
 
 void ClearTVShowData(void);
 u8 sub_80BDEAC(u8 *);

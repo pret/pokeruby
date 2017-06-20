@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start GetLinkPartnerNames
-GetLinkPartnerNames: @ 810DAC8
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r6, 0
-	bl sub_8008218
-	lsls r0, 24
-	lsrs r7, r0, 24
-	bl sub_800820C
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r4, 0
-	cmp r4, r5
-	bcs _0810DB12
-	ldr r0, _0810DB20 @ =gUnknown_083D1464
-	mov r8, r0
-_0810DAEA:
-	cmp r7, r4
-	beq _0810DB08
-	lsls r0, r6, 2
-	add r0, r8
-	ldr r0, [r0]
-	lsls r1, r4, 3
-	subs r1, r4
-	lsls r1, 2
-	ldr r2, _0810DB24 @ =gLinkPlayers + 0x8
-	adds r1, r2
-	bl StringCopy
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0810DB08:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, r5
-	bcc _0810DAEA
-_0810DB12:
-	adds r0, r5, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0810DB20: .4byte gUnknown_083D1464
-_0810DB24: .4byte gLinkPlayers + 0x8
-	thumb_func_end GetLinkPartnerNames
-
 	thumb_func_start SpawnBerryBlenderLinkPlayerSprites
 SpawnBerryBlenderLinkPlayerSprites: @ 810DB28
 	push {r4-r7,lr}

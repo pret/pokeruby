@@ -12,6 +12,8 @@
 #include "strings.h"
 #include "text.h"
 #include "wallclock.h"
+#include "tv.h"
+#include "link.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
@@ -263,4 +265,21 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
     *mapGroup = MAP_GROUP_ROUTE132;
     *y = 20;
     return 0;
+}
+
+u8 GetLinkPartnerNames(void)
+{
+    u8 i;
+    u8 j = 0;
+    u8 myLinkPlayerNumber = sub_8008218();
+    u8 nLinkPlayers = sub_800820C();
+    for (i=0; i<nLinkPlayers; i++)
+    {
+        if (myLinkPlayerNumber != i)
+        {
+            StringCopy(gUnknown_083D1464[j], gLinkPlayers[i].name);
+            j++;
+        }
+    }
+    return nLinkPlayers;
 }
