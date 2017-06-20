@@ -31,7 +31,7 @@ extern struct GcmbStruct gMultibootProgramStruct;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
 extern const u8 gInterfaceGfx_PokeBall[];
-extern const u16 gInterfacePal_PokeBall[];
+extern const u8 gInterfacePal_PokeBall[];
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
@@ -411,12 +411,12 @@ static const struct SpriteTemplate gSpriteTemplate_840AFF0 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813DA64,
 };
-const struct SpriteSheet gUnknown_0840B008[] =
+const struct CompressedSpriteSheet gUnknown_0840B008[] =
 {
     {gIntroTiles, 0x1400, 2000},
     {NULL},
 };
-const struct SpriteSheet gUnknown_0840B018[] =
+const struct CompressedSpriteSheet gUnknown_0840B018[] =
 {
     {gIntro1EonTiles, 0x400, 2002},
     {NULL},
@@ -738,17 +738,17 @@ static const struct SpriteTemplate gSpriteTemplate_840B1F4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_813EDFC,
 };
-const struct SpriteSheet gIntro3PokeballGfx_Table[] =
+const struct CompressedSpriteSheet gIntro3PokeballGfx_Table[] =
 {
     {gInterfaceGfx_PokeBall, 0x100, 2002},
     {NULL},
 };
-const struct SpriteSheet gIntro3MiscGfx_Table[] =
+const struct CompressedSpriteSheet gIntro3MiscGfx_Table[] =
 {
     {gIntro3MiscTiles, 0xa00, 2003},
     {NULL},
 };
-const struct SpritePalette gInterfacePokeballPal_Table[] =
+const struct CompressedSpritePalette gInterfacePokeballPal_Table[] =
 {
     {gInterfacePal_PokeBall, 2002},
     {NULL},
@@ -1772,15 +1772,15 @@ void sub_813CE30(u16 scrX, u16 scrY, u16 zoom, u16 alpha)
 
 static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
 {
-    const u16 *pal;
+    const u8 *lzPaletteData;
     u8 spriteId;
 
     if (front)
         LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
     else
         LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].coords, gMonBackPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
-    pal = species_and_otid_get_pal(species, 0, 0xFFFF);
-    LoadCompressedPalette(pal, 0x100 + d * 0x10, 0x20);
+    lzPaletteData = species_and_otid_get_pal(species, 0, 0xFFFF);
+    LoadCompressedPalette(lzPaletteData, 0x100 + d * 0x10, 0x20);
     sub_8143648(d, d);
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, (d + 1) * 4);
     gSprites[spriteId].oam.paletteNum = d;

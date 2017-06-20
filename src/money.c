@@ -10,8 +10,8 @@
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038734;
 
-extern const struct SpriteSheet gUnknown_083CF584;
-extern const struct SpritePalette gUnknown_083CF58C;
+extern const struct CompressedSpriteSheet gUnknown_083CF584;
+extern const struct CompressedSpritePalette gUnknown_083CF58C;
 extern const struct SpriteTemplate gSpriteTemplate_83CF56C;
 
 bool8 IsEnoughMoney(u32 budget, u32 cost)

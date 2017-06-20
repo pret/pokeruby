@@ -1172,7 +1172,7 @@ void current_map_music_set__default_for_battle(u16 song)
         PlayNewMapMusic(sub_8040728());
 }
 
-const u16 *pokemon_get_pal(struct Pokemon *mon)
+const u8 *pokemon_get_pal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -1186,7 +1186,7 @@ const u16 *pokemon_get_pal(struct Pokemon *mon)
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u16 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
+const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -1200,7 +1200,7 @@ const u16 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
         return gMonPaletteTable[species].data;
 }
 
-const struct SpritePalette *sub_8040990(struct Pokemon *mon)
+const struct CompressedSpritePalette *sub_8040990(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -1208,7 +1208,7 @@ const struct SpritePalette *sub_8040990(struct Pokemon *mon)
     return sub_80409C8(species, otId, personality);
 }
 
-const struct SpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
+const struct CompressedSpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
 
