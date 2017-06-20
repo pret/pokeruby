@@ -4,25 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083F8380:: @ 83F8380
-	.4byte OtherText_1F
-	.4byte OtherText_2F
-	.4byte OtherText_3F
-	.4byte OtherText_4F
-	.4byte OtherText_5F
-	.4byte OtherText_6F
-	.4byte OtherText_7F
-	.4byte OtherText_8F
-	.4byte OtherText_9F
-	.4byte OtherText_10F
-	.4byte OtherText_11F
-	.4byte OtherText_B1F
-	.4byte OtherText_B2F
-	.4byte OtherText_B3F
-	.4byte OtherText_B4F
-	.4byte OtherText_Rooftop
-
-	.align 2
 gUnknown_083F83C0:: @ 83F83C0
 	.4byte OtherText_BlueFlute
 	.4byte OtherText_YellowFlute

@@ -22,6 +22,8 @@
 #include "link.h"
 #include "songs.h"
 #include "sound.h"
+#include "menu.h"
+#include "menu_helpers.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
@@ -929,6 +931,30 @@ void EndLotteryCornerComputerEffect(void)
     DrawWholeMapView();
 }
 
+static void sub_810E874(void);
+void sub_810E944(void);
+void sub_810E984(u8);
+void sub_810ECD4(void);
+
+const u8 *const gUnknown_083F8380[] = {
+    OtherText_1F,
+    OtherText_2F,
+    OtherText_3F,
+    OtherText_4F,
+    OtherText_5F,
+    OtherText_6F,
+    OtherText_7F,
+    OtherText_8F,
+    OtherText_9F,
+    OtherText_10F,
+    OtherText_11F,
+    OtherText_B1F,
+    OtherText_B2F,
+    OtherText_B3F,
+    OtherText_B4F,
+    OtherText_Rooftop
+};
+
 void SetDepartmentStoreFloorVar(void)
 {
     u8 deptStoreFloor;
@@ -957,4 +983,61 @@ void SetDepartmentStoreFloorVar(void)
             break;
     }
     VarSet(VAR_DEPT_STORE_FLOOR, deptStoreFloor);
+}
+
+void ScriptAddElevatorMenuItem(u8 a0, u8 a1, u8 a2, u8 a3)
+{
+    u8 i;
+    if (gSpecialVar_0x8004 == 0)
+    {
+        for (i=0; i<20; i++)
+        {
+            gUnknown_03000760[i].var0 = 16;
+        }
+    }
+    gUnknown_03000760[gSpecialVar_0x8004].var0 = a0;
+    gUnknown_03000760[gSpecialVar_0x8004].var1 = a1;
+    gUnknown_03000760[gSpecialVar_0x8004].var2 = a2;
+    gUnknown_03000760[gSpecialVar_0x8004].var3 = a3;
+    gSpecialVar_0x8004++;
+}
+
+void ScriptShowElevatorMenu(void)
+{
+    u8 i = 0;
+    gUnknown_0203925A = 0;
+    gUnknown_0203925B = 0;
+    ScriptAddElevatorMenuItem(16, 0, 0, 0);
+    while (gUnknown_03000760[i].var0 != 16)
+    {
+        gUnknown_0203925A++;
+        i++;
+    }
+    sub_810E874();
+}
+
+static void sub_810E874(void)
+{
+    u8 i;
+    ScriptContext2_Enable();
+    if (gUnknown_0203925A > 5)
+    {
+        MenuDrawTextWindow(0, 0, 8, 11);
+        InitMenu(0, 1, 1, 5, 0, 7);
+        gUnknown_0203925C = 0;
+        sub_80F944C();
+        LoadScrollIndicatorPalette();
+        sub_810ECD4();
+    }
+    else
+    {
+        MenuDrawTextWindow(0, 0, 8, 2 * gUnknown_0203925A + 1);
+        InitMenu(0, 1, 1, gUnknown_0203925A, 0, 7);
+    }
+    for (i = 0; i < 5 && gUnknown_03000760[i].var0 != 16; i ++)
+    {
+        MenuPrint(gUnknown_083F8380[gUnknown_03000760[i].var0], 1, 2 * i + 1);
+    }
+    sub_810E944();
+    CreateTask(sub_810E984, 8);
 }
