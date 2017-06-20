@@ -889,3 +889,60 @@ static void PCTurnOffEffect(void)
     MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | 0xc00);
     DrawWholeMapView();
 }
+
+static void Task_LotteryCornerComputerEffect(u8);
+static void LotteryCornerComputerEffect(struct Task *);
+
+void DoLotteryCornerComputerEffect(void)
+{
+    if (FuncIsActiveTask(Task_LotteryCornerComputerEffect) != TRUE)
+    {
+        u8 taskId = CreateTask(Task_LotteryCornerComputerEffect, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = taskId;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[4] = 0;
+    }
+}
+
+static void Task_LotteryCornerComputerEffect(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    if (task->data[0] == 0)
+    {
+        LotteryCornerComputerEffect(task);
+    }
+}
+
+static void LotteryCornerComputerEffect(struct Task *task)
+{
+    if (task->data[3] == 6)
+    {
+        task->data[3] = 0;
+        if (task->data[4] != 0)
+        {
+            MapGridSetMetatileIdAt(18, 8, 0xe9d);
+            MapGridSetMetatileIdAt(18, 9, 0xea5);
+        }
+        else
+        {
+            MapGridSetMetatileIdAt(18, 8, 0xe58);
+            MapGridSetMetatileIdAt(18, 9, 0xe60);
+        }
+        DrawWholeMapView();
+        task->data[4] ^= 1;
+        if ((++task->data[2]) == 5)
+        {
+            DestroyTask(task->data[1]);
+        }
+    }
+    task->data[3]++;
+}
+
+void EndLotteryCornerComputerEffect(void)
+{
+    MapGridSetMetatileIdAt(18, 8, 0xe9d);
+    MapGridSetMetatileIdAt(18, 9, 0xea5);
+    DrawWholeMapView();
+}
