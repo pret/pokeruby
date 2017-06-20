@@ -2,6 +2,7 @@
 #include "field_specials.h"
 #include "diploma.h"
 #include "event_data.h"
+#include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "main.h"
 #include "map_constants.h"
@@ -26,6 +27,7 @@ extern u16 gScriptResult;
 extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u32 gUnknown_02039254;
+extern u16 gSpecialVar_0x8004;
 
 static void RecordCyclingRoadResults(u32, u8);
 
@@ -282,4 +284,67 @@ u8 GetLinkPartnerNames(void)
         }
     }
     return nLinkPlayers;
+}
+
+const u8 gUnknown_083F8358[4] = {7, 9, 8, 10};
+const s8 gUnknown_083F835C[4][2] = {
+    { 0,  1},
+    { 1,  0},
+    { 0, -1},
+    {-1,  0}
+};
+
+void SpawnBerryBlenderLinkPlayerSprites(void)
+{
+    u8 unknown_083F8358[4];
+    u8 unknown_083F835C[4][2];
+    u8 myLinkPlayerNumber;
+    u8 playerDirectionLowerNybble;
+    s16 x;
+    s16 y;
+    u8 i;
+    u8 j;
+    u8 rivalAvatarGraphicsId;
+
+    j = 0;
+    x = 0;
+    y = 0;
+    memcpy(unknown_083F8358, gUnknown_083F8358, sizeof gUnknown_083F8358);
+    memcpy(unknown_083F835C, gUnknown_083F835C, sizeof gUnknown_083F835C);
+    myLinkPlayerNumber = sub_8008218();
+    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    switch (playerDirectionLowerNybble)
+    {
+        case DIR_WEST:
+            j = 2;
+            x = gSaveBlock1.pos.x - 1;
+            y = gSaveBlock1.pos.y;
+            break;
+        case DIR_NORTH:
+            j = 1;
+            x = gSaveBlock1.pos.x;
+            y = gSaveBlock1.pos.y - 1;
+            break;
+        case DIR_EAST:
+            x = gSaveBlock1.pos.x + 1;
+            y = gSaveBlock1.pos.y;
+            break;
+        case DIR_SOUTH:
+            j = 3;
+            x = gSaveBlock1.pos.x;
+            y = gSaveBlock1.pos.y + 1;
+    }
+    for (i=0; i<gSpecialVar_0x8004; i++)
+    {
+        if (myLinkPlayerNumber != i)
+        {
+            rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gLinkPlayers[i].gender);
+            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, (s8)unknown_083F835C[j][0] + x + 7, (s8)unknown_083F835C[j][1] + y + 7, 0);
+            j++;
+            if (j == 4)
+            {
+                j = 0;
+            }
+        }
+    }
 }
