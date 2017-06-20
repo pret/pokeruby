@@ -147,12 +147,9 @@ void FinishCyclingRoadChallenge(void) {
 }
 
 static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
-    u16 high, low;
-    u32 record;
-
-    high = VarGet(0x4028);
-    low = VarGet(0x4029);
-    record = high + (low << 16);
+    u16 high = VarGet(0x4028);
+    u16 low = VarGet(0x4029);
+    u32 record = high + (low << 16);
 
     if (record > arg0 || record == 0)
     {
@@ -163,12 +160,9 @@ static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
 }
 
 u16 GetRecordedCyclingRoadResults(void) {
-    u16 high, low;
-    u32 record;
-
-    high = VarGet(0x4028);
-    low = VarGet(0x4029);
-    record = high + (low << 16);
+    u16 high = VarGet(0x4028);
+    u16 low = VarGet(0x4029);
+    u32 record = high + (low << 16);
 
     if (record == 0)
     {
@@ -299,15 +293,12 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 unknown_083F835C[4][2];
     u8 myLinkPlayerNumber;
     u8 playerDirectionLowerNybble;
-    s16 x;
-    s16 y;
-    u8 i;
-    u8 j;
     u8 rivalAvatarGraphicsId;
+    u8 i;
+    u8 j = 0;
+    s16 x = 0;
+    s16 y = 0;
 
-    j = 0;
-    x = 0;
-    y = 0;
     memcpy(unknown_083F8358, gUnknown_083F8358, sizeof gUnknown_083F8358);
     memcpy(unknown_083F835C, gUnknown_083F835C, sizeof gUnknown_083F835C);
     myLinkPlayerNumber = sub_8008218();
@@ -564,8 +555,7 @@ static void PetalburgGymFunc(u8 a0, u16 a1)
     u16 x[4];
     u16 y[4];
     u8 i;
-    u8 nDoors;
-    nDoors = 0;
+    u8 nDoors = 0;
     switch (a0)
     {
         case 1:
@@ -749,10 +739,9 @@ static void PCTurnOffEffect(void);
 
 void DoPCTurnOnEffect(void)
 {
-    u8 taskId;
     if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
     {
-        taskId = CreateTask(Task_PCTurnOnEffect, 8);
+        u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = taskId;
         gTasks[taskId].data[2] = 0;
@@ -763,8 +752,7 @@ void DoPCTurnOnEffect(void)
 
 static void Task_PCTurnOnEffect(u8 taskId)
 {
-    struct Task *task;
-    task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (task->data[0] == 0)
     {
         PCTurnOffEffect_0(task);
@@ -774,9 +762,8 @@ static void Task_PCTurnOnEffect(u8 taskId)
 static void PCTurnOffEffect_0(struct Task *task)
 {
     u8 playerDirectionLowerNybble;
-    s8 dx, dy;
-    dx = 0;
-    dy = 0;
+    s8 dx = 0;
+    s8 dy = 0;
     if (task->data[3] == 6)
     {
         task->data[3] = 0;
@@ -809,8 +796,7 @@ static void PCTurnOffEffect_0(struct Task *task)
 
 static void PCTurnOffEffect_1(s16 flag, s8 dx, s8 dy)
 {
-    u16 tileId;
-    tileId = 0;
+    u16 tileId = 0;
     if (flag != 0)
     {
         if (gSpecialVar_0x8004 == 0)
@@ -851,14 +837,10 @@ void DoPCTurnOffEffect(void)
 
 static void PCTurnOffEffect(void)
 {
-    u16 tileId;
-    s8 dx, dy;
-    u8 playerDirectionLowerNybble;
-
-    dx = 0;
-    dy = 0;
-    tileId = 0;
-    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    s8 dx = 0;
+    s8 dy = 0;
+    u16 tileId = 0;
+    u8 playerDirectionLowerNybble = player_get_direction_lower_nybble();
     switch (playerDirectionLowerNybble)
     {
         case DIR_NORTH:
