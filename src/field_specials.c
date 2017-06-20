@@ -472,3 +472,60 @@ void MauvilleGymSpecial2(void)
         }
     }
 }
+
+void MauvilleGymSpecial3(void)
+{
+    int i, x, y;
+    const struct Coords8 *switchCoords = gUnknown_083F8364;
+    for (i=ARRAY_COUNT(gUnknown_083F8364)-1; i>=0; i--)
+    {
+        MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, 0x206);
+        switchCoords++;
+    }
+    for (y=12; y<24; y++)
+    {
+        for (x=7; x<16; x++)
+        {
+            switch (MapGridGetMetatileIdAt(x, y))
+            {
+                case 0x220:
+                    MapGridSetMetatileIdAt(x, y, 0x230);
+                    break;
+                case 0x221:
+                    MapGridSetMetatileIdAt(x, y, 0x231);
+                    break;
+                case 0x228:
+                    MapGridSetMetatileIdAt(x, y, 0x238);
+                    break;
+                case 0x229:
+                    MapGridSetMetatileIdAt(x, y, 0x239);
+                    break;
+                case 0x222:
+                    MapGridSetMetatileIdAt(x, y, 0x232);
+                    break;
+                case 0x223:
+                    MapGridSetMetatileIdAt(x, y, 0x233);
+                    break;
+                case 0x22a:
+                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                    break;
+                case 0x22b:
+                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                    break;
+                case 0x240:
+                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                    break;
+                case 0x241:
+                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                    break;
+                case 0x248:
+                case 0x249:
+                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                    break;
+                case 0x250:
+                    MapGridSetMetatileIdAt(x, y, 0x251);
+                    break;
+            }
+        }
+    }
+}
