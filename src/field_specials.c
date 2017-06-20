@@ -376,3 +376,99 @@ void MauvilleGymSpecial1(void)
         }
     }
 }
+
+void MauvilleGymSpecial2(void)
+{
+    int x, y;
+    for (y=12; y<24; y++)
+    {
+        for (x=7; x<16; x++)
+        {
+            switch (MapGridGetMetatileIdAt(x, y))
+            {
+                case 0x220:
+                    MapGridSetMetatileIdAt(x, y, 0x230);
+                    break;
+                case 0x221:
+                    MapGridSetMetatileIdAt(x, y, 0x231);
+                    break;
+                case 0x228:
+                    MapGridSetMetatileIdAt(x, y, 0x238);
+                    break;
+                case 0x229:
+                    MapGridSetMetatileIdAt(x, y, 0x239);
+                    break;
+                case 0x230:
+                    MapGridSetMetatileIdAt(x, y, 0x220);
+                    break;
+                case 0x231:
+                    MapGridSetMetatileIdAt(x, y, 0x221);
+                    break;
+                case 0x238:
+                    MapGridSetMetatileIdAt(x, y, 0xe28);
+                    break;
+                case 0x239:
+                    MapGridSetMetatileIdAt(x, y, 0xe29);
+                    break;
+                case 0x222:
+                    MapGridSetMetatileIdAt(x, y, 0x232);
+                    break;
+                case 0x223:
+                    MapGridSetMetatileIdAt(x, y, 0x233);
+                    break;
+                case 0x22a:
+                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                    break;
+                case 0x22b:
+                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                    break;
+                case 0x232:
+                    MapGridSetMetatileIdAt(x, y, 0x222);
+                    break;
+                case 0x233:
+                    MapGridSetMetatileIdAt(x, y, 0x223);
+                    break;
+                case 0x23a:
+                    MapGridSetMetatileIdAt(x, y, 0xe2a);
+                    break;
+                case 0x23b:
+                    MapGridSetMetatileIdAt(x, y, 0xe2b);
+                    break;
+                case 0x240:
+                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                    break;
+                case 0x248:
+                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                    break;
+                case 0x241:
+                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                    break;
+                case 0x249:
+                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                    break;
+                case 0x242:
+                    MapGridSetMetatileIdAt(x, y, 0xe40);
+                    break;
+                case 0x21a:
+                    if (MapGridGetMetatileIdAt(x, y - 1) == 0x240)
+                    {
+                        MapGridSetMetatileIdAt(x, y, 0xe48);
+                    }
+                    else
+                    {
+                        MapGridSetMetatileIdAt(x, y, 0xe49);
+                    }
+                    break;
+                case 0x243:
+                    MapGridSetMetatileIdAt(x, y, 0xe41);
+                    break;
+                case 0x251:
+                    MapGridSetMetatileIdAt(x, y, 0xe50);
+                    break;
+                case 0x250:
+                    MapGridSetMetatileIdAt(x, y, 0x251);
+                    break;
+            }
+        }
+    }
+}
