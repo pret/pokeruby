@@ -334,7 +334,7 @@ SECTIONS {
         data/data2.o(.rodata);
         data/pokemon.o(.rodata);
         . = ALIGN(4);
-        data/trig.o(.rodata);
+        src/trig.o(.rodata);
         data/util.o(.rodata);
         data/daycare.o(.rodata);
         data/egg_hatch.o(.rodata);
