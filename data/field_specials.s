@@ -3,13 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083F8370:: @ 83F8370
-	.byte 0, 1, 1, 1, 1
-
-	.align 1
-gUnknown_083F8376:: @ 83F8376
-	.2byte 0x218, 0x219, 0x21A, 0x21B, 0x21C
-
 	.align 2
 gUnknown_083F8380:: @ 83F8380
 	.4byte OtherText_1F

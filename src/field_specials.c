@@ -4,6 +4,7 @@
 #include "fieldmap.h"
 #include "event_data.h"
 #include "field_map_obj.h"
+#include "field_camera.h"
 #include "field_player_avatar.h"
 #include "main.h"
 #include "map_constants.h"
@@ -16,20 +17,14 @@
 #include "wallclock.h"
 #include "tv.h"
 #include "link.h"
+#include "songs.h"
+#include "sound.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
 #elif GERMAN
 #define CHAR_DECIMAL_SEPARATOR CHAR_COMMA
 #endif
-
-extern struct WarpData gUnknown_020297F0;
-extern u16 gScriptResult;
-extern u8 gUnknown_02039250;
-extern u8 gUnknown_02039251;
-extern u32 gUnknown_02039254;
-extern u16 gSpecialVar_0x8004;
-
 static void RecordCyclingRoadResults(u32, u8);
 
 void sub_810D6A4(void) {
@@ -528,4 +523,106 @@ void MauvilleGymSpecial3(void)
             }
         }
     }
+}
+
+static void Task_PetalburgGym(u8);
+static void PetalburgGymFunc(u8, u16);
+const u8 gUnknown_083F8370[] = {0, 1, 1, 1, 1};
+const u16 gUnknown_083F8376[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
+
+void PetalburgGymSpecial1(void)
+{
+    gUnknown_02039258 = 0;
+    gUnknown_02039259 = 0;
+    PlaySE(SE_KI_GASYAN);
+    CreateTask(Task_PetalburgGym, 8);
+}
+
+static void Task_PetalburgGym(u8 taskId)
+{
+    if (gUnknown_083F8370[gUnknown_02039259] == gUnknown_02039258)
+    {
+        PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_083F8376[gUnknown_02039259]);
+        gUnknown_02039258 = 0;
+        if ((++gUnknown_02039259) == 5)
+        {
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+        }
+    }
+    else
+    {
+        gUnknown_02039258++;
+    }
+}
+
+static void PetalburgGymFunc(u8 a0, u16 a1)
+{
+    u16 x[4];
+    u16 y[4];
+    u8 i;
+    u8 nDoors;
+    nDoors = 0;
+    switch (a0)
+    {
+        case 1:
+            nDoors = 2;
+            x[0] = 1;
+            x[1] = 7;
+            y[0] = 0x68;
+            y[1] = 0x68;
+            break;
+        case 2:
+            nDoors = 2;
+            x[0] = 1;
+            x[1] = 7;
+            y[0] = 0x4e;
+            y[1] = 0x4e;
+            break;
+        case 3:
+            nDoors = 2;
+            x[0] = 1;
+            x[1] = 7;
+            y[0] = 0x5b;
+            y[1] = 0x5b;
+            break;
+        case 4:
+            nDoors = 1;
+            x[0] = 7;
+            y[0] = 0x27;
+            break;
+        case 5:
+            nDoors = 2;
+            x[0] = 1;
+            x[1] = 7;
+            y[0] = 0x34;
+            y[1] = 0x34;
+            break;
+        case 6:
+            nDoors = 1;
+            x[0] = 1;
+            y[0] = 0x41;
+            break;
+        case 7:
+            nDoors = 1;
+            x[0] = 7;
+            y[0] = 0xd;
+            break;
+        case 8:
+            nDoors = 1;
+            x[0] = 1;
+            y[0] = 0x1a;
+            break;
+    }
+    for (i=0; i<nDoors; i++)
+    {
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | 0xc00);
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | 0xc00);
+    }
+    DrawWholeMapView();
+}
+
+void PetalburgGymSpecial2(void)
+{
+    PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_083F8376[4]);
 }
