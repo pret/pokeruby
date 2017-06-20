@@ -15,10 +15,10 @@ sub_8046400: @ 8046400
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, _08046450 @ =gUnknown_02024E6D
+	ldr r1, _08046450 @ =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r6, _08046454 @ =gUnknown_02024A60
+	ldr r6, _08046454 @ =gActiveBank
 	ldrb r1, [r6]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -48,8 +48,8 @@ sub_8046400: @ 8046400
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046450: .4byte gUnknown_02024E6D
-_08046454: .4byte gUnknown_02024A60
+_08046450: .4byte gDoingBattleAnim
+_08046454: .4byte gActiveBank
 _08046458: .4byte 0x02017810
 _0804645C: .4byte sub_8046464
 _08046460: .4byte gTasks
@@ -89,11 +89,11 @@ _0804649C:
 	mov r8, r0
 	ldrb r5, [r1, 0xE]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080464C8
-	ldr r1, _080464C0 @ =gUnknown_02024A6A
+	ldr r1, _080464C0 @ =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -102,10 +102,10 @@ _0804649C:
 	ldr r1, _080464C4 @ =gEnemyParty
 	b _080464D6
 	.align 2, 0
-_080464C0: .4byte gUnknown_02024A6A
+_080464C0: .4byte gBattlePartyID
 _080464C4: .4byte gEnemyParty
 _080464C8:
-	ldr r1, _08046544 @ =gUnknown_02024A6A
+	ldr r1, _08046544 @ =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -152,7 +152,7 @@ _080464D6:
 	beq _0804655C
 	cmp r2, 0xFF
 	bne _08046598
-	ldr r0, _08046554 @ =gEnemyMonIndex
+	ldr r0, _08046554 @ =gBankTarget
 	strb r5, [r0]
 	movs r0, 0x18
 	strh r0, [r4, 0x20]
@@ -165,11 +165,11 @@ _080464D6:
 	str r1, [r0]
 	b _080465A6
 	.align 2, 0
-_08046544: .4byte gUnknown_02024A6A
+_08046544: .4byte gBattlePartyID
 _08046548: .4byte gPlayerParty
 _0804654C: .4byte gSpriteTemplate_820AAB4
 _08046550: .4byte gSprites
-_08046554: .4byte gEnemyMonIndex
+_08046554: .4byte gBankTarget
 _08046558: .4byte sub_8047074
 _0804655C:
 	adds r0, r5, 0
@@ -185,7 +185,7 @@ _0804655C:
 	lsrs r0, 24
 	adds r0, 0x18
 	strh r0, [r4, 0x22]
-	ldr r0, _08046590 @ =gEnemyMonIndex
+	ldr r0, _08046590 @ =gBankTarget
 	strb r5, [r0]
 	movs r3, 0
 	strh r3, [r4, 0x2E]
@@ -196,12 +196,12 @@ _0804655C:
 	str r1, [r0]
 	b _080465A6
 	.align 2, 0
-_08046590: .4byte gEnemyMonIndex
+_08046590: .4byte gBankTarget
 _08046594: .4byte sub_8047254
 _08046598:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	ldr r1, _080465C4 @ =gEnemyMonIndex
+	bl GetBankByPlayerAI
+	ldr r1, _080465C4 @ =gBankTarget
 	strb r0, [r1]
 	movs r0, 0x1
 	str r0, [sp]
@@ -211,7 +211,7 @@ _080465A6:
 	adds r1, r7
 	lsls r1, 2
 	adds r4, r1, r0
-	ldr r5, _080465C4 @ =gEnemyMonIndex
+	ldr r5, _080465C4 @ =gBankTarget
 	ldrb r0, [r5]
 	strh r0, [r4, 0x3A]
 	ldr r2, [sp]
@@ -221,7 +221,7 @@ _080465A6:
 	bl DestroyTask
 	b _08046616
 	.align 2, 0
-_080465C4: .4byte gEnemyMonIndex
+_080465C4: .4byte gBankTarget
 _080465C8: .4byte gSprites
 _080465CC:
 	movs r0, 0x22
@@ -383,7 +383,7 @@ sub_80466F4: @ 80466F4
 	strh r7, [r6, 0x38]
 	ldr r0, _08046754 @ =sub_8046760
 	str r0, [r6, 0x1C]
-	ldr r5, _08046758 @ =gUnknown_02024BE0
+	ldr r5, _08046758 @ =gObjectBankIDs
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -419,7 +419,7 @@ _0804674E:
 	bx r0
 	.align 2, 0
 _08046754: .4byte sub_8046760
-_08046758: .4byte gUnknown_02024BE0
+_08046758: .4byte gObjectBankIDs
 _0804675C: .4byte gSprites
 	thumb_func_end sub_80466F4
 
@@ -438,7 +438,7 @@ sub_8046760: @ 8046760
 	bl PlaySE
 _08046778:
 	ldr r6, _080467C4 @ =gSprites
-	ldr r5, _080467C8 @ =gUnknown_02024BE0
+	ldr r5, _080467C8 @ =gObjectBankIDs
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	adds r0, r5
@@ -476,7 +476,7 @@ _08046778:
 	b _080467F0
 	.align 2, 0
 _080467C4: .4byte gSprites
-_080467C8: .4byte gUnknown_02024BE0
+_080467C8: .4byte gObjectBankIDs
 _080467CC: .4byte sub_80467F8
 _080467D0:
 	ldrh r0, [r1, 0x30]
@@ -1124,11 +1124,11 @@ sub_8046C78: @ 8046C78
 	b _08046E1C
 _08046CE8:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046D20
-	ldr r1, _08046D18 @ =gUnknown_02024A6A
+	ldr r1, _08046D18 @ =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1143,10 +1143,10 @@ _08046CE8:
 _08046D0C: .4byte sub_8046E9C
 _08046D10: .4byte gMain
 _08046D14: .4byte 0x0000043d
-_08046D18: .4byte gUnknown_02024A6A
+_08046D18: .4byte gBattlePartyID
 _08046D1C: .4byte gEnemyParty
 _08046D20:
-	ldr r1, _08046D90 @ =gUnknown_02024A6A
+	ldr r1, _08046D90 @ =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1162,13 +1162,13 @@ _08046D34:
 	lsls r0, 16
 	lsrs r7, r0, 16
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08046D5A
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1198,7 +1198,7 @@ _08046D5A:
 	bl m4aMPlayStop
 	b _08046DAE
 	.align 2, 0
-_08046D90: .4byte gUnknown_02024A6A
+_08046D90: .4byte gBattlePartyID
 _08046D94: .4byte gPlayerParty
 _08046D98: .4byte 0x02017840
 _08046D9C: .4byte gBattleTypeFlags
@@ -1228,13 +1228,13 @@ _08046DCC: .4byte 0x0000ffff
 _08046DD0: .4byte 0x02017840
 _08046DD4:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08046DF0
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1264,7 +1264,7 @@ _08046DF6:
 	strh r4, [r1, 0xC]
 	strh r2, [r1, 0x26]
 _08046E1C:
-	ldr r5, _08046E74 @ =gUnknown_02024BE0
+	ldr r5, _08046E74 @ =gObjectBankIDs
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -1305,7 +1305,7 @@ _08046E1C:
 	.align 2, 0
 _08046E6C: .4byte sub_8046AD0
 _08046E70: .4byte gTasks
-_08046E74: .4byte gUnknown_02024BE0
+_08046E74: .4byte gObjectBankIDs
 _08046E78: .4byte gSprites
 	thumb_func_end sub_8046C78
 
@@ -1337,7 +1337,7 @@ sub_8046E9C: @ 8046E9C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r6, _08046F00 @ =gSprites
-	ldr r0, _08046F04 @ =gUnknown_02024BE0
+	ldr r0, _08046F04 @ =gObjectBankIDs
 	adds r3, r4, r0
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -1382,7 +1382,7 @@ _08046EDE:
 	b _08046F24
 	.align 2, 0
 _08046F00: .4byte gSprites
-_08046F04: .4byte gUnknown_02024BE0
+_08046F04: .4byte gObjectBankIDs
 _08046F08:
 	ldr r2, _08046FA8 @ =0xfffffee0
 	adds r0, r2, 0
@@ -1409,7 +1409,7 @@ _08046F24:
 	cmp r7, 0
 	beq _08046FA0
 	ldr r2, _08046FAC @ =gSprites
-	ldr r0, _08046FB0 @ =gUnknown_02024BE0
+	ldr r0, _08046FB0 @ =gObjectBankIDs
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1419,7 +1419,7 @@ _08046F24:
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0, 0x26]
-	ldr r0, _08046FB4 @ =gUnknown_02024E6D
+	ldr r0, _08046FB4 @ =gDoingBattleAnim
 	strb r2, [r0]
 	lsls r1, r4, 1
 	adds r1, r4
@@ -1468,8 +1468,8 @@ _08046FA0:
 	.align 2, 0
 _08046FA8: .4byte 0xfffffee0
 _08046FAC: .4byte gSprites
-_08046FB0: .4byte gUnknown_02024BE0
-_08046FB4: .4byte gUnknown_02024E6D
+_08046FB0: .4byte gObjectBankIDs
+_08046FB4: .4byte gDoingBattleAnim
 _08046FB8: .4byte 0x02017810
 	thumb_func_end sub_8046E9C
 
@@ -1489,7 +1489,7 @@ sub_8046FBC: @ 8046FBC
 	beq _08047056
 	cmp r1, 0x5F
 	bne _08046FF4
-	ldr r0, _08046FEC @ =gUnknown_02024E6D
+	ldr r0, _08046FEC @ =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	bl m4aMPlayAllStop
@@ -1497,14 +1497,14 @@ sub_8046FBC: @ 8046FBC
 	bl PlaySE
 	b _08047056
 	.align 2, 0
-_08046FEC: .4byte gUnknown_02024E6D
+_08046FEC: .4byte gDoingBattleAnim
 _08046FF0: .4byte 0x00000173
 _08046FF4:
 	ldr r0, _0804705C @ =0x0000013b
 	cmp r1, r0
 	bne _08047056
 	ldr r5, _08047060 @ =gSprites
-	ldr r4, _08047064 @ =gUnknown_02024BE0
+	ldr r4, _08047064 @ =gObjectBankIDs
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -1553,7 +1553,7 @@ _08047056:
 	.align 2, 0
 _0804705C: .4byte 0x0000013b
 _08047060: .4byte gSprites
-_08047064: .4byte gUnknown_02024BE0
+_08047064: .4byte gObjectBankIDs
 _08047068: .4byte gMain
 _0804706C: .4byte 0x0000043d
 _08047070: .4byte 0x02017810
@@ -1751,7 +1751,7 @@ _080471B8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1826,7 +1826,7 @@ sub_8047254: @ 8047254
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2485,7 +2485,7 @@ sub_804777C: @ 804777C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r0, _080477FC @ =gUnknown_03004340
+	ldr r0, _080477FC @ =gHealthboxIDs
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2503,7 +2503,7 @@ sub_804777C: @ 804777C
 	ldr r0, _08047804 @ =sub_8047830
 	str r0, [r4, 0x1C]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080477CA
@@ -2532,7 +2532,7 @@ _080477CA:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2544,7 +2544,7 @@ _080477F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080477FC: .4byte gUnknown_03004340
+_080477FC: .4byte gHealthboxIDs
 _08047800: .4byte gSprites
 _08047804: .4byte sub_8047830
 _08047808: .4byte sub_804780C
@@ -2614,7 +2614,7 @@ sub_8047858: @ 8047858
 	adds r3, r1, r2
 	movs r0, 0x1
 	strh r0, [r3, 0x2E]
-	ldr r0, _08047898 @ =gUnknown_03004340
+	ldr r0, _08047898 @ =gHealthboxIDs
 	adds r4, r0
 	ldrb r0, [r4]
 	strh r0, [r3, 0x30]
@@ -2627,7 +2627,7 @@ sub_8047858: @ 8047858
 	.align 2, 0
 _08047890: .4byte oamc_804BEB4
 _08047894: .4byte gSprites
-_08047898: .4byte gUnknown_03004340
+_08047898: .4byte gHealthboxIDs
 	thumb_func_end sub_8047858
 
 	thumb_func_start oamc_804BEB4
@@ -2747,11 +2747,11 @@ sub_8047978: @ 8047978
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080479A4
-	ldr r1, _0804799C @ =gUnknown_02024A6A
+	ldr r1, _0804799C @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -2760,10 +2760,10 @@ sub_8047978: @ 8047978
 	ldr r1, _080479A0 @ =gEnemyParty
 	b _080479B2
 	.align 2, 0
-_0804799C: .4byte gUnknown_02024A6A
+_0804799C: .4byte gBattlePartyID
 _080479A0: .4byte gEnemyParty
 _080479A4:
-	ldr r1, _080479C4 @ =gUnknown_02024A6A
+	ldr r1, _080479C4 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -2780,7 +2780,7 @@ _080479B2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080479C4: .4byte gUnknown_02024A6A
+_080479C4: .4byte gBattlePartyID
 _080479C8: .4byte gPlayerParty
 	thumb_func_end sub_8047978
 

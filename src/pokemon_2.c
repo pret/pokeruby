@@ -20,13 +20,13 @@ extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
 extern u32 dword_2017100[];
 extern u16 gBattleTypeFlags;
-extern u8 gUnknown_02024A60;
+extern u8 gActiveBank;
 extern struct BattlePokemon gBattleMons[4];
-extern u16 gUnknown_02024BE6;
-extern u8 byte_2024C06;
-extern u8 gPlayerMonIndex;
-extern u8 gEnemyMonIndex;
-extern u8 gUnknown_02024C0C;
+extern u16 gCurrentMove;
+extern u8 gLastUsedAbility;
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
+extern u8 gAbsentBankFlags;
 extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -41,7 +41,7 @@ extern const struct SpriteTemplate gSpriteTemplate_8208288[];
 extern u8 gSecretBaseTrainerClasses[];
 extern u8 gHoldEffectToType[][2];
 
-u8 sub_803C348(u8 a1)
+u8 CountAliveMons(u8 a1)
 {
     s32 i;
     u8 retVal = 0;
@@ -51,21 +51,21 @@ u8 sub_803C348(u8 a1)
     case 0:
         for (i = 0; i < 4; i++)
         {
-            if (i != gUnknown_02024A60 && !(gUnknown_02024C0C & gBitTable[i]))
+            if (i != gActiveBank && !(gAbsentBankFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gPlayerMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (GetBankSide(i) == GetBankSide(gBankAttacker) && !(gAbsentBankFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) == battle_side_get_owner(gEnemyMonIndex) && !(gUnknown_02024C0C & gBitTable[i]))
+            if (GetBankSide(i) == GetBankSide(gBankTarget) && !(gAbsentBankFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -77,7 +77,7 @@ u8 sub_803C348(u8 a1)
 #ifdef NONMATCHING
 u8 sub_803C434(u8 a1)
 {
-    u32 status0 = battle_get_per_side_status(a1);
+    u32 status0 = GetBankIdentity(a1);
     register u8 status_ asm("r4");
     u8 status;
     register u32 mask1 asm("r1") = 1;
@@ -93,11 +93,11 @@ u8 sub_803C434(u8 a1)
         val &= val_;
         if (!val)
         {
-            return battle_get_side_with_given_state(status);
+            return GetBankByPlayerAI(status);
         }
     }
 
-    if (sub_803C348(0) > 1)
+    if (CountAliveMons(0) > 1)
     {
         u16 r = Random();
         register u32 val asm("r1") = mask2;
@@ -106,19 +106,19 @@ u8 sub_803C434(u8 a1)
         {
             u32 status2 = 2;
             status2 ^= status;
-            return battle_get_side_with_given_state(status2);
+            return GetBankByPlayerAI(status2);
         }
         else
         {
-            return battle_get_side_with_given_state(status);
+            return GetBankByPlayerAI(status);
         }
     }
     else
     {
-        if (gUnknown_02024C0C & gBitTable[status])
-            return battle_get_side_with_given_state(status ^ 2);
+        if (gAbsentBankFlags & gBitTable[status])
+            return GetBankByPlayerAI(status ^ 2);
         else
-            return battle_get_side_with_given_state(status);
+            return GetBankByPlayerAI(status);
     }
 }
 #else
@@ -129,7 +129,7 @@ u8 sub_803C434(u8 a1)
     push {r4-r6,lr}\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
-    bl battle_get_per_side_status\n\
+    bl GetBankIdentity\n\
     movs r1, 0x1\n\
     movs r6, 0x1\n\
     adds r4, r6, 0\n\
@@ -148,7 +148,7 @@ u8 sub_803C434(u8 a1)
 _0803C45C: .4byte gBattleTypeFlags\n\
 _0803C460:\n\
     movs r0, 0\n\
-    bl sub_803C348\n\
+    bl CountAliveMons\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -177,14 +177,14 @@ _0803C484:\n\
     adds r0, r4, 0\n\
     b _0803C4AA\n\
     .align 2, 0\n\
-_0803C49C: .4byte gUnknown_02024C0C\n\
+_0803C49C: .4byte gAbsentBankFlags\n\
 _0803C4A0: .4byte gBitTable\n\
 _0803C4A4:\n\
     movs r0, 0x2\n\
     eors r5, r0\n\
     adds r0, r5, 0\n\
 _0803C4AA:\n\
-    bl battle_get_side_with_given_state\n\
+    bl GetBankByPlayerAI\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     pop {r4-r6}\n\
@@ -1131,11 +1131,11 @@ u8 sub_803DAA0(void)
 u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
 {
     if (altAbility)
-        byte_2024C06 = gBaseStats[species].ability2;
+        gLastUsedAbility = gBaseStats[species].ability2;
     else
-        byte_2024C06 = gBaseStats[species].ability1;
+        gLastUsedAbility = gBaseStats[species].ability1;
 
-    return byte_2024C06;
+    return gLastUsedAbility;
 }
 
 u8 GetMonAbility(struct Pokemon *mon)
@@ -1295,7 +1295,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    *(unk_20160BC + battle_side_get_owner(battleIndex)) = gBattleMons[battleIndex].hp;
+    *(unk_20160BC + GetBankSide(battleIndex)) = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

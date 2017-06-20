@@ -260,11 +260,11 @@ _0807AF80:
 _0807AF88:
 	bl sub_80327CC
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r7, _0807B000 @ =gUnknown_02024A6A
+	ldr r7, _0807B000 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r7
 	ldrh r0, [r0]
@@ -284,7 +284,7 @@ _0807AF88:
 	cmp r0, 0
 	beq _0807AFEC
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -301,8 +301,8 @@ _0807AF88:
 	adds r0, r4, 0
 	bl sub_8032984
 _0807AFEC:
-	ldr r1, _0807B008 @ =gUnknown_02024E60
-	ldr r0, _0807B00C @ =gUnknown_02024E6C
+	ldr r1, _0807B008 @ =gActionSelectionCursor
+	ldr r0, _0807B00C @ =gBankInMenu
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -310,10 +310,10 @@ _0807AFEC:
 	bl sub_802E3E4
 	b _0807B040
 	.align 2, 0
-_0807B000: .4byte gUnknown_02024A6A
+_0807B000: .4byte gBattlePartyID
 _0807B004: .4byte gEnemyParty
-_0807B008: .4byte gUnknown_02024E60
-_0807B00C: .4byte gUnknown_02024E6C
+_0807B008: .4byte gActionSelectionCursor
+_0807B00C: .4byte gBankInMenu
 _0807B010:
 	ldr r0, _0807B054 @ =sub_800FCD4
 	bl SetHBlankCallback
@@ -381,12 +381,12 @@ sub_807B094: @ 807B094
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0807B0D8 @ =gUnknown_02024A68
+	ldr r0, _0807B0D8 @ =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0807B172
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B0F2
@@ -398,7 +398,7 @@ sub_807B094: @ 807B094
 	ands r0, r1
 	cmp r0, 0
 	bne _0807B0E8
-	ldr r1, _0807B0E0 @ =gUnknown_02024A6A
+	ldr r1, _0807B0E0 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -410,9 +410,9 @@ sub_807B094: @ 807B094
 	bl sub_8031794
 	b _0807B168
 	.align 2, 0
-_0807B0D8: .4byte gUnknown_02024A68
+_0807B0D8: .4byte gNoOfAllBanks
 _0807B0DC: .4byte 0x02017800
-_0807B0E0: .4byte gUnknown_02024A6A
+_0807B0E0: .4byte gBattlePartyID
 _0807B0E4: .4byte gEnemyParty
 _0807B0E8:
 	adds r0, r4, 0
@@ -457,7 +457,7 @@ _0807B12A:
 	ands r0, r1
 	cmp r0, 0
 	bne _0807B160
-	ldr r1, _0807B158 @ =gUnknown_02024A6A
+	ldr r1, _0807B158 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -470,7 +470,7 @@ _0807B12A:
 	b _0807B168
 	.align 2, 0
 _0807B154: .4byte 0x02017800
-_0807B158: .4byte gUnknown_02024A6A
+_0807B158: .4byte gBattlePartyID
 _0807B15C: .4byte gPlayerParty
 _0807B160:
 	adds r0, r4, 0
@@ -502,7 +502,7 @@ sub_807B184: @ 807B184
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _0807B1B8 @ =gUnknown_02024A68
+	ldr r0, _0807B1B8 @ =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r7, r0
 	bcc _0807B19E
@@ -521,7 +521,7 @@ _0807B19E:
 	bl sub_8077F7C
 	b _0807B1C6
 	.align 2, 0
-_0807B1B8: .4byte gUnknown_02024A68
+_0807B1B8: .4byte gNoOfAllBanks
 _0807B1BC: .4byte 0x02017800
 _0807B1C0:
 	adds r0, r7, 0
@@ -531,13 +531,13 @@ _0807B1C6:
 	lsrs r0, 24
 	mov r8, r0
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B1DA
 	b _0807B2D8
 _0807B1DA:
-	ldr r1, _0807B2BC @ =gUnknown_02024A6A
+	ldr r1, _0807B2BC @ =gBattlePartyID
 	lsls r0, r7, 1
 	adds r6, r0, r1
 	ldrh r0, [r6]
@@ -566,7 +566,7 @@ _0807B1FE:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -588,7 +588,7 @@ _0807B1FE:
 	adds r1, r4, 0
 	mov r2, r8
 	bl CreateSprite
-	ldr r4, _0807B2C8 @ =gUnknown_02024BE0
+	ldr r4, _0807B2C8 @ =gObjectBankIDs
 	adds r4, r7, r4
 	strb r0, [r4]
 	ldr r5, _0807B2CC @ =gSprites
@@ -642,10 +642,10 @@ _0807B1FE:
 	bl StartSpriteAnim
 	b _0807B4AC
 	.align 2, 0
-_0807B2BC: .4byte gUnknown_02024A6A
+_0807B2BC: .4byte gBattlePartyID
 _0807B2C0: .4byte gEnemyParty
 _0807B2C4: .4byte gUnknown_02024E8C
-_0807B2C8: .4byte gUnknown_02024BE0
+_0807B2C8: .4byte gObjectBankIDs
 _0807B2CC: .4byte gSprites
 _0807B2D0: .4byte SpriteCallbackDummy
 _0807B2D4: .4byte gBattleMonForms
@@ -661,7 +661,7 @@ _0807B2D8:
 	ldr r5, _0807B32C @ =gSaveBlock2
 	ldrb r4, [r5, 0x8]
 	movs r0, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -702,7 +702,7 @@ _0807B338:
 	cmp r7, 0
 	bne _0807B3D0
 	movs r0, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -728,7 +728,7 @@ _0807B37C:
 	movs r1, 0x50
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r3, _0807B3C4 @ =gUnknown_02024BE0
+	ldr r3, _0807B3C4 @ =gObjectBankIDs
 	strb r0, [r3]
 	ldr r4, _0807B3C8 @ =gSprites
 	ldrb r0, [r3]
@@ -759,11 +759,11 @@ _0807B37C:
 	.align 2, 0
 _0807B3BC: .4byte gUnknown_02024E8C
 _0807B3C0: .4byte gTrainerBackPicCoords
-_0807B3C4: .4byte gUnknown_02024BE0
+_0807B3C4: .4byte gObjectBankIDs
 _0807B3C8: .4byte gSprites
 _0807B3CC: .4byte SpriteCallbackDummy
 _0807B3D0:
-	ldr r1, _0807B4E8 @ =gUnknown_02024A6A
+	ldr r1, _0807B4E8 @ =gBattlePartyID
 	lsls r0, r7, 1
 	adds r6, r0, r1
 	ldrh r0, [r6]
@@ -790,7 +790,7 @@ _0807B3D0:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -812,7 +812,7 @@ _0807B3D0:
 	adds r1, r4, 0
 	mov r2, r8
 	bl CreateSprite
-	ldr r4, _0807B4F4 @ =gUnknown_02024BE0
+	ldr r4, _0807B4F4 @ =gObjectBankIDs
 	adds r4, r7, r4
 	strb r0, [r4]
 	ldr r5, _0807B4F8 @ =gSprites
@@ -866,7 +866,7 @@ _0807B3D0:
 	bl StartSpriteAnim
 _0807B4AC:
 	ldr r1, _0807B4F8 @ =gSprites
-	ldr r0, _0807B4F4 @ =gUnknown_02024BE0
+	ldr r0, _0807B4F4 @ =gObjectBankIDs
 	adds r0, r7, r0
 	ldrb r0, [r0]
 	lsls r2, r0, 4
@@ -897,10 +897,10 @@ _0807B4D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B4E8: .4byte gUnknown_02024A6A
+_0807B4E8: .4byte gBattlePartyID
 _0807B4EC: .4byte gPlayerParty
 _0807B4F0: .4byte gUnknown_02024E8C
-_0807B4F4: .4byte gUnknown_02024BE0
+_0807B4F4: .4byte gObjectBankIDs
 _0807B4F8: .4byte gSprites
 _0807B4FC: .4byte SpriteCallbackDummy
 _0807B500: .4byte gBattleMonForms
@@ -912,7 +912,7 @@ sub_807B508: @ 807B508
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0807B530 @ =gUnknown_02024A68
+	ldr r0, _0807B530 @ =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _0807B518
@@ -929,7 +929,7 @@ _0807B518:
 	bl battle_make_oam_safari_battle
 	b _0807B550
 	.align 2, 0
-_0807B530: .4byte gUnknown_02024A68
+_0807B530: .4byte gNoOfAllBanks
 _0807B534: .4byte gBattleTypeFlags
 _0807B538:
 	ldrh r1, [r2]
@@ -947,7 +947,7 @@ _0807B54A:
 _0807B550:
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _0807B58C @ =gUnknown_03004340
+	ldr r0, _0807B58C @ =gHealthboxIDs
 	adds r4, r5, r0
 	strb r6, [r4]
 	adds r0, r5, 0
@@ -955,12 +955,12 @@ _0807B550:
 	adds r0, r6, 0
 	bl sub_8043DFC
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B598
 	ldrb r0, [r4]
-	ldr r1, _0807B590 @ =gUnknown_02024A6A
+	ldr r1, _0807B590 @ =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -972,8 +972,8 @@ _0807B550:
 	bl sub_8045A5C
 	b _0807B5E4
 	.align 2, 0
-_0807B58C: .4byte gUnknown_03004340
-_0807B590: .4byte gUnknown_02024A6A
+_0807B58C: .4byte gHealthboxIDs
+_0807B590: .4byte gBattlePartyID
 _0807B594: .4byte gEnemyParty
 _0807B598:
 	ldr r0, _0807B5C0 @ =gBattleTypeFlags
@@ -983,7 +983,7 @@ _0807B598:
 	cmp r0, 0
 	beq _0807B5CC
 	ldrb r0, [r4]
-	ldr r1, _0807B5C4 @ =gUnknown_02024A6A
+	ldr r1, _0807B5C4 @ =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -996,11 +996,11 @@ _0807B598:
 	b _0807B5E4
 	.align 2, 0
 _0807B5C0: .4byte gBattleTypeFlags
-_0807B5C4: .4byte gUnknown_02024A6A
+_0807B5C4: .4byte gBattlePartyID
 _0807B5C8: .4byte gPlayerParty
 _0807B5CC:
 	ldrb r0, [r4]
-	ldr r1, _0807B610 @ =gUnknown_02024A6A
+	ldr r1, _0807B610 @ =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -1012,41 +1012,41 @@ _0807B5CC:
 	bl sub_8045A5C
 _0807B5E4:
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _0807B600
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0807B61C
 _0807B600:
-	ldr r0, _0807B618 @ =gUnknown_03004340
+	ldr r0, _0807B618 @ =gHealthboxIDs
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl nullsub_11
 	b _0807B628
 	.align 2, 0
-_0807B610: .4byte gUnknown_02024A6A
+_0807B610: .4byte gBattlePartyID
 _0807B614: .4byte gPlayerParty
-_0807B618: .4byte gUnknown_03004340
+_0807B618: .4byte gHealthboxIDs
 _0807B61C:
-	ldr r0, _0807B654 @ =gUnknown_03004340
+	ldr r0, _0807B654 @ =gHealthboxIDs
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0
 	bl nullsub_11
 _0807B628:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B660
-	ldr r0, _0807B658 @ =gUnknown_02024A6A
+	ldr r0, _0807B658 @ =gBattlePartyID
 	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
@@ -1061,8 +1061,8 @@ _0807B628:
 	bl sub_8043DB0
 	b _0807B68A
 	.align 2, 0
-_0807B654: .4byte gUnknown_03004340
-_0807B658: .4byte gUnknown_02024A6A
+_0807B654: .4byte gHealthboxIDs
+_0807B658: .4byte gBattlePartyID
 _0807B65C: .4byte gEnemyParty
 _0807B660:
 	ldr r0, _0807B690 @ =gBattleTypeFlags
@@ -1071,7 +1071,7 @@ _0807B660:
 	ands r0, r1
 	cmp r0, 0
 	bne _0807B68A
-	ldr r0, _0807B694 @ =gUnknown_02024A6A
+	ldr r0, _0807B694 @ =gBattlePartyID
 	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
@@ -1090,7 +1090,7 @@ _0807B68A:
 	bx r0
 	.align 2, 0
 _0807B690: .4byte gBattleTypeFlags
-_0807B694: .4byte gUnknown_02024A6A
+_0807B694: .4byte gBattlePartyID
 _0807B698: .4byte gPlayerParty
 	thumb_func_end sub_807B508
 
