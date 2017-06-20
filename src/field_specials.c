@@ -934,7 +934,11 @@ void EndLotteryCornerComputerEffect(void)
 static void sub_810E874(void);
 void sub_810E944(void);
 void sub_810E984(u8);
+void sub_810EAC8(u8, u8);
+void sub_810EBEC(void);
+void sub_810EC9C(u8);
 void sub_810ECD4(void);
+void sub_810EEDC(void);
 
 const u8 *const gUnknown_083F8380[] = {
     OtherText_1F,
@@ -1040,4 +1044,59 @@ static void sub_810E874(void)
     }
     sub_810E944();
     CreateTask(sub_810E984, 8);
+}
+
+void sub_810E944(void)
+{
+    MenuDrawTextWindow(20, 0, 29, 5);
+    sub_8072BD8(gOtherText_NowOn, 21, 1, 64);
+    sub_8072BD8(gUnknown_083F8380[gSpecialVar_0x8005], 21, 3, 64);
+}
+
+void sub_810E984(u8 taskId)
+{
+    u8 curMenuPos;
+    if (gMain.newKeys == DPAD_UP && gUnknown_0203925B != 0)
+    {
+        gUnknown_0203925B--;
+        curMenuPos = GetMenuCursorPos();
+        MoveMenuCursorNoWrap(-1);
+        sub_810EAC8(curMenuPos, DPAD_UP);
+    }
+    if (gMain.newKeys == DPAD_DOWN && gUnknown_0203925B != gUnknown_0203925A - 1)
+    {
+        gUnknown_0203925B++;
+        curMenuPos = GetMenuCursorPos();
+        MoveMenuCursorNoWrap(+1);
+        sub_810EAC8(curMenuPos, DPAD_DOWN);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        saved_warp2_set_2(0, gUnknown_03000760[gUnknown_0203925B].var1, gUnknown_03000760[gUnknown_0203925B].var2, -1, 2, 1);
+        if (gSpecialVar_0x8005 == gUnknown_0203925B)
+        {
+            gScriptResult = 0;
+            PlaySE(SE_SELECT);
+            MenuZeroFillWindowRect(0, 0, 29, 12);
+            sub_810EC9C(taskId);
+        }
+        else
+        {
+            gScriptResult = 1;
+            gSpecialVar_0x8005 = gUnknown_0203925B;
+            sub_810EBEC();
+            FieldObjectTurnByLocalIdAndMap(gScriptLastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
+            sub_810EEDC();
+            MenuZeroFillScreen();
+            DestroyTask(taskId);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gScriptResult = 0;
+        PlaySE(SE_SELECT);
+        sub_810EEDC();
+        MenuZeroFillWindowRect(0, 0, 29, 12);
+        sub_810EC9C(taskId);
+    }
 }

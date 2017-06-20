@@ -3,8 +3,8 @@
 
 struct ElevatorMenu {
     u8 var0;
-    u8 var1;
-    u8 var2;
+    s8 var1;
+    s8 var2;
     u8 var3;
 };
 
