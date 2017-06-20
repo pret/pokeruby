@@ -73,7 +73,7 @@ sub_803E1B0: @ 803E1B0
 	cmp r0, 0
 	beq _0803E22C
 	ldr r2, _0803E224 @ =gEnigmaBerries
-	ldr r0, _0803E228 @ =gUnknown_02024E6C
+	ldr r0, _0803E228 @ =gBankInMenu
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -85,7 +85,7 @@ sub_803E1B0: @ 803E1B0
 _0803E21C: .4byte gMain
 _0803E220: .4byte 0x0000043d
 _0803E224: .4byte gEnigmaBerries
-_0803E228: .4byte gUnknown_02024E6C
+_0803E228: .4byte gBankInMenu
 _0803E22C:
 	ldr r0, _0803E238 @ =gSaveBlock1
 	ldr r5, _0803E23C @ =0x00003688
@@ -101,8 +101,8 @@ _0803E240:
 	lsrs r0, 24
 _0803E248:
 	str r0, [sp, 0x30]
-	ldr r1, _0803E2A4 @ =gUnknown_02024C0B
-	ldr r0, _0803E2A8 @ =gUnknown_02024E6C
+	ldr r1, _0803E2A4 @ =gStringBank
+	ldr r0, _0803E2A8 @ =gBankInMenu
 	ldrb r2, [r0]
 	strb r2, [r1]
 	ldr r0, _0803E2AC @ =gMain
@@ -115,23 +115,23 @@ _0803E248:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0803E2E8
-	ldr r0, _0803E2B4 @ =gUnknown_02024A60
+	ldr r0, _0803E2B4 @ =gActiveBank
 	strb r2, [r0]
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
 	orrs r1, r0
 	lsrs r1, 31
 	str r1, [sp, 0x18]
-	ldr r0, _0803E2B8 @ =gUnknown_02024A68
+	ldr r0, _0803E2B8 @ =gNoOfAllBanks
 	ldr r4, [sp, 0x8]
 	subs r4, 0xD
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0803E2F4
-	ldr r2, _0803E2BC @ =gUnknown_02024A6A
+	ldr r2, _0803E2BC @ =gBattlePartyID
 	lsls r0, r1, 1
 	adds r0, r2
 	ldrh r3, [r0]
@@ -145,18 +145,18 @@ _0803E248:
 	str r0, [sp, 0x34]
 	b _0803E2F4
 	.align 2, 0
-_0803E2A4: .4byte gUnknown_02024C0B
-_0803E2A8: .4byte gUnknown_02024E6C
+_0803E2A4: .4byte gStringBank
+_0803E2A8: .4byte gBankInMenu
 _0803E2AC: .4byte gMain
 _0803E2B0: .4byte 0x0000043d
-_0803E2B4: .4byte gUnknown_02024A60
-_0803E2B8: .4byte gUnknown_02024A68
-_0803E2BC: .4byte gUnknown_02024A6A
+_0803E2B4: .4byte gActiveBank
+_0803E2B8: .4byte gNoOfAllBanks
+_0803E2BC: .4byte gBattlePartyID
 _0803E2C0:
 	ldr r1, [sp, 0x18]
 	adds r1, 0x2
 	str r1, [sp, 0x18]
-	ldr r0, _0803E2E4 @ =gUnknown_02024A68
+	ldr r0, _0803E2E4 @ =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0803E2F4
@@ -172,9 +172,9 @@ _0803E2C0:
 	str r0, [sp, 0x34]
 	b _0803E2F4
 	.align 2, 0
-_0803E2E4: .4byte gUnknown_02024A68
+_0803E2E4: .4byte gNoOfAllBanks
 _0803E2E8:
-	ldr r0, _0803E310 @ =gUnknown_02024A60
+	ldr r0, _0803E310 @ =gActiveBank
 	strb r1, [r0]
 	movs r3, 0x4
 	str r3, [sp, 0x34]
@@ -196,7 +196,7 @@ _0803E2F4:
 	beq _0803E31E
 	b _0803E36C
 	.align 2, 0
-_0803E310: .4byte gUnknown_02024A60
+_0803E310: .4byte gActiveBank
 _0803E314: .4byte gItemEffectTable
 _0803E318:
 	ldr r5, [sp, 0x8]
@@ -211,7 +211,7 @@ _0803E31E:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803E350
-	ldr r0, _0803E348 @ =gUnknown_02024A60
+	ldr r0, _0803E348 @ =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -222,7 +222,7 @@ _0803E31E:
 	.align 2, 0
 _0803E340: .4byte gMain
 _0803E344: .4byte 0x0000043d
-_0803E348: .4byte gUnknown_02024A60
+_0803E348: .4byte gActiveBank
 _0803E34C: .4byte gUnknown_02024DF8
 _0803E350:
 	ldr r2, _0803E358 @ =gSaveBlock1 + 0x3676
@@ -310,7 +310,7 @@ _0803E3F0:
 	cmp r0, 0
 	beq _0803E41E
 	ldr r1, _0803E468 @ =gBattleMons
-	ldr r0, _0803E470 @ =gUnknown_02024A60
+	ldr r0, _0803E470 @ =gActiveBank
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -336,7 +336,7 @@ _0803E41E:
 	bl _0803F14C
 _0803E42C:
 	ldr r6, _0803E468 @ =gBattleMons
-	ldr r5, _0803E470 @ =gUnknown_02024A60
+	ldr r5, _0803E470 @ =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -367,7 +367,7 @@ _0803E460: .4byte gMain
 _0803E464: .4byte 0x0000043d
 _0803E468: .4byte gBattleMons
 _0803E46C: .4byte 0xfff0ffff
-_0803E470: .4byte gUnknown_02024A60
+_0803E470: .4byte gActiveBank
 _0803E474:
 	ldr r0, [sp, 0x20]
 	ldr r1, [sp, 0x18]
@@ -380,7 +380,7 @@ _0803E474:
 	cmp r3, 0
 	beq _0803E4BA
 	ldr r7, _0803E500 @ =gBattleMons
-	ldr r5, _0803E504 @ =gUnknown_02024A60
+	ldr r5, _0803E504 @ =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -414,7 +414,7 @@ _0803E4BA:
 	bl _0803F14C
 _0803E4C8:
 	ldr r6, _0803E500 @ =gBattleMons
-	ldr r5, _0803E504 @ =gUnknown_02024A60
+	ldr r5, _0803E504 @ =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -443,7 +443,7 @@ _0803E4F8:
 	bl _0803F14C
 	.align 2, 0
 _0803E500: .4byte gBattleMons
-_0803E504: .4byte gUnknown_02024A60
+_0803E504: .4byte gActiveBank
 _0803E508:
 	ldr r4, [sp, 0x20]
 	ldr r5, [sp, 0x18]
@@ -456,7 +456,7 @@ _0803E508:
 	cmp r3, 0
 	beq _0803E54E
 	ldr r7, _0803E594 @ =gBattleMons
-	ldr r5, _0803E598 @ =gUnknown_02024A60
+	ldr r5, _0803E598 @ =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -490,7 +490,7 @@ _0803E54E:
 	bl _0803F14C
 _0803E55C:
 	ldr r6, _0803E594 @ =gBattleMons
-	ldr r5, _0803E598 @ =gUnknown_02024A60
+	ldr r5, _0803E598 @ =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -519,7 +519,7 @@ _0803E58C:
 	bl _0803F14C
 	.align 2, 0
 _0803E594: .4byte gBattleMons
-_0803E598: .4byte gUnknown_02024A60
+_0803E598: .4byte gActiveBank
 _0803E59C:
 	ldr r3, [sp, 0x20]
 	ldr r4, [sp, 0x18]
@@ -530,10 +530,10 @@ _0803E59C:
 	adds r6, r2, 0
 	cmp r0, 0
 	beq _0803E5E4
-	ldr r5, _0803E758 @ =gUnknown_02024C80
-	ldr r4, _0803E75C @ =gUnknown_02024A60
+	ldr r5, _0803E758 @ =gSideTimer
+	ldr r4, _0803E75C @ =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -544,7 +544,7 @@ _0803E59C:
 	cmp r0, 0
 	bne _0803E5E4
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -739,8 +739,8 @@ _0803E74E:
 	str r5, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E758: .4byte gUnknown_02024C80
-_0803E75C: .4byte gUnknown_02024A60
+_0803E758: .4byte gSideTimer
+_0803E75C: .4byte gActiveBank
 _0803E760: .4byte gExperienceTables
 _0803E764: .4byte gBaseStats
 _0803E768: .4byte gBattleMons
@@ -984,7 +984,7 @@ _0803E954:
 	ldr r2, [sp, 0x34]
 	cmp r2, 0x4
 	beq _0803E9B4
-	ldr r2, _0803E9A4 @ =gUnknown_02024C0C
+	ldr r2, _0803E9A4 @ =gAbsentBankFlags
 	ldr r1, _0803E9A8 @ =gBitTable
 	ldr r3, [sp, 0x34]
 	lsls r0, r3, 2
@@ -993,7 +993,7 @@ _0803E954:
 	ldrb r0, [r2]
 	bics r0, r1
 	strb r0, [r2]
-	ldr r1, _0803E9AC @ =gUnknown_02024A6A
+	ldr r1, _0803E9AC @ =gBattlePartyID
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1003,20 +1003,20 @@ _0803E954:
 	lsrs r1, 24
 	ldr r0, [sp, 0x34]
 	bl CopyPlayerPartyMonToBattleData
-	ldr r0, _0803E9B0 @ =gUnknown_02024A60
+	ldr r0, _0803E9B0 @ =gActiveBank
 	ldrb r0, [r0]
 	b _0803E9CC
 	.align 2, 0
 _0803E99C: .4byte gMain
 _0803E9A0: .4byte 0x0000043d
-_0803E9A4: .4byte gUnknown_02024C0C
+_0803E9A4: .4byte gAbsentBankFlags
 _0803E9A8: .4byte gBitTable
-_0803E9AC: .4byte gUnknown_02024A6A
-_0803E9B0: .4byte gUnknown_02024A60
+_0803E9AC: .4byte gBattlePartyID
+_0803E9B0: .4byte gActiveBank
 _0803E9B4:
-	ldr r3, _0803E9E4 @ =gUnknown_02024C0C
+	ldr r3, _0803E9E4 @ =gAbsentBankFlags
 	ldr r1, _0803E9E8 @ =gBitTable
-	ldr r2, _0803E9EC @ =gUnknown_02024A60
+	ldr r2, _0803E9EC @ =gActiveBank
 	ldrb r0, [r2]
 	eors r0, r4
 	lsls r0, 2
@@ -1027,11 +1027,11 @@ _0803E9B4:
 	strb r0, [r3]
 	ldrb r0, [r2]
 _0803E9CC:
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EA0A
-	ldr r1, _0803E9F0 @ =gUnknown_030042E0
+	ldr r1, _0803E9F0 @ =gBattleResults
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0xFE
 	bhi _0803EA0A
@@ -1039,10 +1039,10 @@ _0803E9CC:
 	strb r0, [r1, 0x4]
 	b _0803EA0A
 	.align 2, 0
-_0803E9E4: .4byte gUnknown_02024C0C
+_0803E9E4: .4byte gAbsentBankFlags
 _0803E9E8: .4byte gBitTable
-_0803E9EC: .4byte gUnknown_02024A60
-_0803E9F0: .4byte gUnknown_030042E0
+_0803E9EC: .4byte gActiveBank
+_0803E9F0: .4byte gBattleResults
 _0803E9F4:
 	mov r0, r8
 	movs r1, 0x39
@@ -1166,13 +1166,13 @@ _0803EAB8:
 	ands r0, r3
 	cmp r0, 0
 	bne _0803EB48
-	ldr r4, _0803EB38 @ =gUnknown_02024A60
+	ldr r4, _0803EB38 @ =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EB48
-	ldr r1, _0803EB3C @ =gUnknown_030042E0
+	ldr r1, _0803EB3C @ =gBattleResults
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0xFE
 	bhi _0803EB08
@@ -1186,9 +1186,9 @@ _0803EB08:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x00_a_b_0
+	bl EmitGetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	strb r5, [r4]
 	b _0803EB48
 	.align 2, 0
@@ -1197,8 +1197,8 @@ _0803EB28: .4byte 0x000160fa
 _0803EB2C: .4byte gMain
 _0803EB30: .4byte 0x0000043d
 _0803EB34: .4byte gBattleMons
-_0803EB38: .4byte gUnknown_02024A60
-_0803EB3C: .4byte gUnknown_030042E0
+_0803EB38: .4byte gActiveBank
+_0803EB3C: .4byte gBattleResults
 _0803EB40:
 	ldr r1, _0803EB58 @ =gBattleMoveDamage
 	ldr r0, [sp]
@@ -1340,7 +1340,7 @@ _0803EC28:
 	ands r1, r0
 	cmp r1, 0
 	bne _0803EC8E
-	ldr r1, _0803ECB0 @ =gUnknown_02024CA8
+	ldr r1, _0803ECB0 @ =gDisableStructs
 	ldr r2, [sp, 0x34]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -1380,7 +1380,7 @@ _0803EC9E:
 _0803ECA4: .4byte gMain
 _0803ECA8: .4byte 0x0000043d
 _0803ECAC: .4byte gBattleMons
-_0803ECB0: .4byte gUnknown_02024CA8
+_0803ECB0: .4byte gDisableStructs
 _0803ECB4: .4byte gBitTable
 _0803ECB8:
 	ldr r6, [sp, 0x10]
@@ -1497,7 +1497,7 @@ _0803ED74:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803EDD8
-	ldr r1, _0803EDEC @ =gUnknown_02024CA8
+	ldr r1, _0803EDEC @ =gDisableStructs
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -1526,7 +1526,7 @@ _0803EDD8:
 _0803EDE0: .4byte gMain
 _0803EDE4: .4byte 0x0000043d
 _0803EDE8: .4byte gBattleMons
-_0803EDEC: .4byte gUnknown_02024CA8
+_0803EDEC: .4byte gDisableStructs
 _0803EDF0: .4byte gBitTable
 _0803EDF4:
 	mov r0, r8

@@ -1177,7 +1177,7 @@ gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooSour
 
 	.align 2
-gUnknown_08400F8C:: @ 8400F8C
+gBattleStringsTable:: @ 8400F8C
 	.4byte BattleText_UnknownString
 	.4byte BattleText_GainExpPoints
 	.4byte BattleText_GrewLevel
@@ -1531,8 +1531,8 @@ gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_NoEffectOn
 
 	.align 1
-gUnknown_08401508:: @ 8401508
-@ Each entry refers to a text pointer in gUnknown_08400F8C, but the values are offset
+gMissStrings:: @ 8401508
+@ Each entry refers to a text pointer in gBattleStringsTable, but the values are offset
 @ by 0xc. For example, 0x0017 refers to BattleText_AttackMissed because it is the
 @ 11th entry in the pointer table.
 	.2byte BATTLE_TEXT_AttackMissed
@@ -1790,13 +1790,13 @@ BattleTextList_401648:: @ 8401648
 	.2byte BATTLE_TEXT_RaisedFirePower
 	.2byte BATTLE_TEXT_MadeIneffective
 
-gUnknown_0840164C:: @ 840164C
-	.2byte BATTLE_TEXT_StopLearning
-	.2byte BATTLE_TEXT_FellAsleep
-	.2byte BATTLE_TEXT_SpeltHealthy
-	.2byte BATTLE_TEXT_SubTookDamage
-	.2byte BATTLE_TEXT_CoinScatter
-	.2byte BATTLE_TEXT_SandTombTrapped
+gTrappingMoves:: @ 840164C
+	.2byte MOVE_BIND
+	.2byte MOVE_WRAP
+	.2byte MOVE_FIRE_SPIN
+	.2byte MOVE_CLAMP
+	.2byte MOVE_WHIRLPOOL
+	.2byte MOVE_SAND_TOMB
 	.2byte 0xFFFF
 
 	.align 2

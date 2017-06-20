@@ -57,9 +57,9 @@ extern u8 sub_803FBBC(void);
 
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;
-extern u8 gUnknown_02024A68;
-extern u16 gUnknown_02024A6A[];
-extern u8 gUnknown_02024E6C;
+extern u8 gNoOfAllBanks;
+extern u16 gBattlePartyID[];
+extern u8 gBankInMenu;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
@@ -148,7 +148,7 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         if (!IsDoubleBattle())
         {
             pos = 1;
-            *temp = gUnknown_02024A6A[battle_get_side_with_given_state(0)];
+            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
             for (i = 0; i <= 5; i++)
                 if (i != *temp)
                     temp[pos++] = i;
@@ -156,8 +156,8 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         else
         {
             pos = 2;
-            *temp = gUnknown_02024A6A[battle_get_side_with_given_state(0)];
-            temp[1] = gUnknown_02024A6A[battle_get_side_with_given_state(2)];
+            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
+            temp[1] = gBattlePartyID[GetBankByPlayerAI(2)];
             for (i = 0; i <= 5; i++)
                 if ((i != *temp) && (i != temp[1]))
                     temp[pos++] = i;
@@ -171,15 +171,15 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
 {
     int i, j;
     u8 temp[6];
-    if (!battle_side_get_owner(arg3))
+    if (!GetBankSide(arg3))
     {
-        i = battle_get_side_with_given_state(0);
-        j = battle_get_side_with_given_state(2);
+        i = GetBankByPlayerAI(0);
+        j = GetBankByPlayerAI(2);
     }
     else
     {
-        i = battle_get_side_with_given_state(1);
-        j = battle_get_side_with_given_state(3);
+        i = GetBankByPlayerAI(1);
+        j = GetBankByPlayerAI(3);
     }
     if (IsLinkDoubleBattle() == TRUE)
     {
@@ -201,7 +201,7 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
         if (!IsDoubleBattle())
         {
             int pos = 1;
-            *temp = gUnknown_02024A6A[i];
+            *temp = gBattlePartyID[i];
             for (i = 0; i <= 5; i++)
                 if (i != *temp)
                     temp[pos++] = i;
@@ -209,8 +209,8 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
         else
         {
             int pos = 2;
-            *temp = gUnknown_02024A6A[i];
-            temp[1] = gUnknown_02024A6A[j];
+            *temp = gBattlePartyID[i];
+            temp[1] = gBattlePartyID[j];
             for (i = 0; i <= 5; i++)
                 if ((i != *temp) && (i != temp[1]))
                     temp[pos++] = i;
@@ -687,10 +687,10 @@ static void Task_BattlePartyMenuShift(u8 taskId)
         gTasks[taskId].func = Task_80954C0;
         return;
     }
-    for (i = 0; i < gUnknown_02024A68; i++)
+    for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (battle_side_get_owner(i) == 0
-         && sub_8094C20(partySelection) == gUnknown_02024A6A[i])
+        if (GetBankSide(i) == 0
+         && sub_8094C20(partySelection) == gBattlePartyID[i])
         {
             sub_806D5A4();
             GetMonNickname(&gPlayerParty[partySelection], gStringVar1);
@@ -728,10 +728,10 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     if (gUnknown_02038473 == 2)
     {
         u8 r0;
-        u8 r4 = gUnknown_02024E6C;
+        u8 r4 = gBankInMenu;
 
         sub_806D5A4();
-        r0 = pokemon_order_func(gUnknown_02024A6A[r4]);
+        r0 = pokemon_order_func(gBattlePartyID[r4]);
         GetMonNickname(&gPlayerParty[r0], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gOtherText_CantBeSwitched);
         sub_806E834(gStringVar4, 0);
@@ -740,7 +740,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     }
     gUnknown_0202E8F5 = sub_8094C20(partySelection);
     gUnknown_0202E8F4 = 1;
-    r4 = pokemon_order_func(gUnknown_02024A6A[gUnknown_02024E6C]);
+    r4 = pokemon_order_func(gBattlePartyID[gBankInMenu]);
     sub_8094C98(r4, partySelection);
     sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[partySelection]);
     gTasks[taskId].func = Task_809527C;
