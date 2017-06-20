@@ -17,6 +17,7 @@
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
+#include "rtc.h"
 #include "link.h"
 #include "songs.h"
 #include "sound.h"
@@ -671,4 +672,61 @@ void GetRivalSonDaughterString(void)
 u8 sub_810E300(void)
 {
     return gUnknown_02024D26;
+}
+
+void CableCarWarp(void)
+{
+    if (gSpecialVar_0x8004 != 0)
+    {
+        warp1_set(MAP_GROUP_ROUTE112_CABLE_CAR_STATION, MAP_ID_ROUTE112_CABLE_CAR_STATION, -1, 6, 4);
+    }
+    else
+    {
+        warp1_set(MAP_GROUP_MT_CHIMNEY_CABLE_CAR_STATION, MAP_ID_MT_CHIMNEY_CABLE_CAR_STATION, -1, 6, 4);
+    }
+}
+
+void SetFlagInVar(void)
+{
+    FlagSet(gSpecialVar_0x8004);
+}
+
+u16 GetWeekCount(void)
+{
+    u16 weekCount = gLocalTime.days / 7;
+    if (weekCount > 9999)
+    {
+        weekCount = 9999;
+    }
+    return weekCount;
+}
+
+u8 GetLeadMonFriendshipScore(void)
+{
+    struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+    {
+        return 6;
+    }
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+    {
+        return 5;
+    }
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+    {
+        return 4;
+    }
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+    {
+        return 3;
+    }
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+    {
+        return 2;
+    }
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
+    {
+        return 1;
+    }
+    return 0;
 }
