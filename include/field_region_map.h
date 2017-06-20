@@ -1,6 +1,7 @@
 #ifndef GUARD_FIELD_REGION_MAP_H
 #define GUARD_FIELD_REGION_MAP_H
 
+void FieldInitRegionMap(void(void));
 void CB2_FieldInitRegionMap(void);
 void VBlankCB_FieldRegionMap(void);
 void CB2_FieldRegionMap(void);

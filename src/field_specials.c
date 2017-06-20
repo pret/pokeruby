@@ -4,6 +4,7 @@
 #include "fieldmap.h"
 #include "event_data.h"
 #include "field_map_obj.h"
+#include "field_region_map.h"
 #include "field_message_box.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
@@ -729,4 +730,115 @@ u8 GetLeadMonFriendshipScore(void)
         return 1;
     }
     return 0;
+}
+
+void CB2_FieldShowRegionMap(void)
+{
+    FieldInitRegionMap(c2_exit_to_overworld_1_continue_scripts_restart_music);
+}
+
+void FieldShowRegionMap(void)
+{
+    SetMainCallback2(CB2_FieldShowRegionMap);
+}
+
+static void Task_PCTurnOnEffect(u8);
+static void PCTurnOffEffect_0(struct Task *);
+static void PCTurnOffEffect_1(s16, s8, s8);
+
+void DoPCTurnOnEffect(void)
+{
+    u8 taskId;
+    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
+    {
+        taskId = CreateTask(Task_PCTurnOnEffect, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = taskId;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[4] = 0;
+    }
+}
+
+static void Task_PCTurnOnEffect(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    if (task->data[0] == 0)
+    {
+        PCTurnOffEffect_0(task);
+    }
+}
+
+static void PCTurnOffEffect_0(struct Task *task)
+{
+    u8 playerDirectionLowerNybble;
+    s8 dx, dy;
+    dx = 0;
+    dy = 0;
+    if (task->data[3] == 6)
+    {
+        task->data[3] = 0;
+        playerDirectionLowerNybble = player_get_direction_lower_nybble();
+        switch (playerDirectionLowerNybble)
+        {
+            case DIR_NORTH:
+                dx = 0;
+                dy = -1;
+                break;
+            case DIR_WEST:
+                dx = -1;
+                dy = -1;
+                break;
+            case DIR_EAST:
+                dx = 1;
+                dy = -1;
+                break;
+        }
+        PCTurnOffEffect_1(task->data[4], dx, dy);
+        DrawWholeMapView();
+        task->data[4] ^= 1;
+        if ((++task->data[2]) == 5)
+        {
+            DestroyTask(task->data[1]);
+        }
+    }
+    task->data[3]++;
+}
+
+static void PCTurnOffEffect_1(s16 flag, s8 dx, s8 dy)
+{
+    u16 tileId;
+    tileId = 0;
+    if (flag != 0)
+    {
+        if (gSpecialVar_0x8004 == 0)
+        {
+            tileId = 0x4;
+        }
+        else if (gSpecialVar_0x8004 == 1)
+        {
+            tileId = 0x25a;
+        }
+        else if (gSpecialVar_0x8004 == 2)
+        {
+            tileId = 0x259;
+        }
+    }
+    else
+    {
+        if (gSpecialVar_0x8004 == 0)
+        {
+            tileId = 0x5;
+        }
+        else if (gSpecialVar_0x8004 == 1)
+        {
+            tileId = 0x27f;
+        }
+        else if (gSpecialVar_0x8004 == 2)
+        {
+            tileId = 0x27e;
+        }
+    }
+    MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | 0xc00);
 }
