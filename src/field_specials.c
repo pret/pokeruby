@@ -745,6 +745,7 @@ void FieldShowRegionMap(void)
 static void Task_PCTurnOnEffect(u8);
 static void PCTurnOffEffect_0(struct Task *);
 static void PCTurnOffEffect_1(s16, s8, s8);
+static void PCTurnOffEffect(void);
 
 void DoPCTurnOnEffect(void)
 {
@@ -841,4 +842,50 @@ static void PCTurnOffEffect_1(s16 flag, s8 dx, s8 dy)
         }
     }
     MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | 0xc00);
+}
+
+void DoPCTurnOffEffect(void)
+{
+    PCTurnOffEffect();
+}
+
+static void PCTurnOffEffect(void)
+{
+    u16 tileId;
+    s8 dx, dy;
+    u8 playerDirectionLowerNybble;
+
+    dx = 0;
+    dy = 0;
+    tileId = 0;
+    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    switch (playerDirectionLowerNybble)
+    {
+        case DIR_NORTH:
+            dx = 0;
+            dy = -1;
+            break;
+        case DIR_WEST:
+            dx = -1;
+            dy = -1;
+            break;
+        case DIR_EAST:
+            dx = 1;
+            dy = -1;
+            break;
+    }
+    if (gSpecialVar_0x8004 == 0)
+    {
+        tileId = 0x4;
+    }
+    else if (gSpecialVar_0x8004 == 1)
+    {
+        tileId = 0x25a;
+    }
+    else if (gSpecialVar_0x8004 == 2)
+    {
+        tileId = 0x259;
+    }
+    MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | 0xc00);
+    DrawWholeMapView();
 }
