@@ -1,3 +1,7 @@
+ifneq ($(VERBOSE), 1)
+  QUIET := @
+endif
+
 SHELL := /bin/bash -o pipefail
 
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
@@ -78,16 +82,41 @@ include misc.mk
 %.pal: ;
 %.aif: ;
 
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
-sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
-%.bin: %.aif ; $(AIF) $< $@
+%.1bpp: %.png
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+%.4bpp: %.png
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+%.8bpp: %.png
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+%.gbapal: %.pal
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+%.lz: %
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+%.rl: %
+	@echo "GFX	$<"
+	$(QUIET) $(GFX) $< $@
+
+sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif
+	@echo "AIF	$<"
+	$(QUIET) $(AIF) $< $@ --compress
+
+%.bin: %.aif
+	@echo "AIF	$<"
+	$(QUIET) $(AIF) $< $@
+
 sound/songs/%.s: sound/songs/%.mid
-	cd $(@D) && ../../$(MID) $(<F)
+	@echo "MID	$<"
+	$(QUIET) cd $(@D) && ../../$(MID) $(<F)
 
 %src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 %src/libc.o: CFLAGS := -O2
@@ -102,7 +131,8 @@ sound/songs/%.s: sound/songs/%.mid
 %src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(SONG_OBJS): %.o: %.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
+	@echo "AS	$<"
+	$(QUIET) $(AS) $(ASFLAGS) -I sound -o $@ $<
 
 
 define VERSION_RULES
@@ -125,22 +155,25 @@ $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
 build/$1/%.o : %.c $$$$(c_dep)
+	@echo "CC	$$<"
 	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
-	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
+	$$(QUIET) $$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
 
 $$($1_ASM_OBJS): VERSION := $2
 $$($1_ASM_OBJS): REVISION := $3
 $$($1_ASM_OBJS): LANGUAGE := $4
 build/$1/asm/%.o: asm/%.s $$$$(asm_dep)
-	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@ $$<
+	@echo "AS	$$<"
+	$$(QUIET) $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@ $$<
 
 $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+	@echo "AS	$$<"
+	$$(QUIET) $$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
