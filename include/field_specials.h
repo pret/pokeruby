@@ -11,6 +11,7 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02039258;
 extern u8 gUnknown_02039259;
+extern u8 gUnknown_02024D26;
 
 void ResetCyclingRoadChallengeData(void);
 bool32 CountSSTidalStep(u16);

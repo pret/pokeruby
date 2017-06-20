@@ -6,69 +6,6 @@
 
 	.text
 
-	thumb_func_start GetPlayerBigGuyGirlString
-GetPlayerBigGuyGirlString: @ 810E298
-	push {lr}
-	ldr r0, _0810E2AC @ =gSaveBlock2
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _0810E2B8
-	ldr r0, _0810E2B0 @ =gStringVar1
-	ldr r1, _0810E2B4 @ =gOtherText_BigGuy
-	bl StringCopy
-	b _0810E2C0
-	.align 2, 0
-_0810E2AC: .4byte gSaveBlock2
-_0810E2B0: .4byte gStringVar1
-_0810E2B4: .4byte gOtherText_BigGuy
-_0810E2B8:
-	ldr r0, _0810E2C4 @ =gStringVar1
-	ldr r1, _0810E2C8 @ =gOtherText_BigGirl
-	bl StringCopy
-_0810E2C0:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810E2C4: .4byte gStringVar1
-_0810E2C8: .4byte gOtherText_BigGirl
-	thumb_func_end GetPlayerBigGuyGirlString
-
-	thumb_func_start GetRivalSonDaughterString
-GetRivalSonDaughterString: @ 810E2CC
-	push {lr}
-	ldr r0, _0810E2E0 @ =gSaveBlock2
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _0810E2EC
-	ldr r0, _0810E2E4 @ =gStringVar1
-	ldr r1, _0810E2E8 @ =gOtherText_Daughter
-	bl StringCopy
-	b _0810E2F4
-	.align 2, 0
-_0810E2E0: .4byte gSaveBlock2
-_0810E2E4: .4byte gStringVar1
-_0810E2E8: .4byte gOtherText_Daughter
-_0810E2EC:
-	ldr r0, _0810E2F8 @ =gStringVar1
-	ldr r1, _0810E2FC @ =gOtherText_Son
-	bl StringCopy
-_0810E2F4:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810E2F8: .4byte gStringVar1
-_0810E2FC: .4byte gOtherText_Son
-	thumb_func_end GetRivalSonDaughterString
-
-	thumb_func_start sub_810E300
-sub_810E300: @ 810E300
-	ldr r0, _0810E308 @ =gUnknown_02024D26
-	ldrb r0, [r0]
-	bx lr
-	.align 2, 0
-_0810E308: .4byte gUnknown_02024D26
-	thumb_func_end sub_810E300
-
 	thumb_func_start CableCarWarp
 CableCarWarp: @ 810E30C
 	push {lr}

@@ -643,3 +643,32 @@ u8 GetPlayerTrainerIdOnesDigit(void)
 {
     return (u16)((gSaveBlock2.playerTrainerId[1] << 8) | gSaveBlock2.playerTrainerId[0]) % 10;
 }
+
+void GetPlayerBigGuyGirlString(void)
+{
+    if (gSaveBlock2.playerGender == MALE)
+    {
+        StringCopy(gStringVar1, gOtherText_BigGuy);
+    }
+    else
+    {
+        StringCopy(gStringVar1, gOtherText_BigGirl);
+    }
+}
+
+void GetRivalSonDaughterString(void)
+{
+    if (gSaveBlock2.playerGender == MALE)
+    {
+        StringCopy(gStringVar1, gOtherText_Daughter);
+    }
+    else
+    {
+        StringCopy(gStringVar1, gOtherText_Son);
+    }
+}
+
+u8 sub_810E300(void)
+{
+    return gUnknown_02024D26;
+}
