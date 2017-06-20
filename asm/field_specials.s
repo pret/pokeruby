@@ -6,51 +6,6 @@
 
 	.text
 
-	thumb_func_start ShowFieldMessageStringVar4
-ShowFieldMessageStringVar4: @ 810E24C
-	push {lr}
-	ldr r0, _0810E258 @ =gStringVar4
-	bl ShowFieldMessage
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810E258: .4byte gStringVar4
-	thumb_func_end ShowFieldMessageStringVar4
-
-	thumb_func_start StorePlayerCoordsInVars
-StorePlayerCoordsInVars: @ 810E25C
-	ldr r1, _0810E26C @ =gSpecialVar_0x8004
-	ldr r2, _0810E270 @ =gSaveBlock1
-	ldrh r0, [r2]
-	strh r0, [r1]
-	ldr r1, _0810E274 @ =gSpecialVar_0x8005
-	ldrh r0, [r2, 0x2]
-	strh r0, [r1]
-	bx lr
-	.align 2, 0
-_0810E26C: .4byte gSpecialVar_0x8004
-_0810E270: .4byte gSaveBlock1
-_0810E274: .4byte gSpecialVar_0x8005
-	thumb_func_end StorePlayerCoordsInVars
-
-	thumb_func_start GetPlayerTrainerIdOnesDigit
-GetPlayerTrainerIdOnesDigit: @ 810E278
-	push {lr}
-	ldr r0, _0810E294 @ =gSaveBlock2
-	ldrb r1, [r0, 0xB]
-	lsls r1, 8
-	ldrb r0, [r0, 0xA]
-	orrs r0, r1
-	movs r1, 0xA
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0810E294: .4byte gSaveBlock2
-	thumb_func_end GetPlayerTrainerIdOnesDigit
-
 	thumb_func_start GetPlayerBigGuyGirlString
 GetPlayerBigGuyGirlString: @ 810E298
 	push {lr}

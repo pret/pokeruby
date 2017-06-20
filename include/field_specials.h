@@ -8,6 +8,7 @@ extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u32 gUnknown_02039254;
 extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02039258;
 extern u8 gUnknown_02039259;
 

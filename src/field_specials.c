@@ -4,6 +4,7 @@
 #include "fieldmap.h"
 #include "event_data.h"
 #include "field_map_obj.h"
+#include "field_message_box.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "main.h"
@@ -625,4 +626,20 @@ static void PetalburgGymFunc(u8 a0, u16 a1)
 void PetalburgGymSpecial2(void)
 {
     PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_083F8376[4]);
+}
+
+void ShowFieldMessageStringVar4(void)
+{
+    ShowFieldMessage(gStringVar4);
+}
+
+void StorePlayerCoordsInVars(void)
+{
+    gSpecialVar_0x8004 = gSaveBlock1.pos.x;
+    gSpecialVar_0x8005 = gSaveBlock1.pos.y;
+}
+
+u8 GetPlayerTrainerIdOnesDigit(void)
+{
+    return (u16)((gSaveBlock2.playerTrainerId[1] << 8) | gSaveBlock2.playerTrainerId[0]) % 10;
 }
