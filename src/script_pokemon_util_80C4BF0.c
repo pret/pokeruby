@@ -31,7 +31,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u8 gPlayerPartyCount;
-extern u8 gBufferedMoves[];
+extern u8 gSelectedOrderFromParty[];
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
@@ -648,7 +648,7 @@ void sub_80C5568(void)
 
 void sub_80C5580(void)
 {
-    u8 var = gBufferedMoves[0];
+    u8 var = gSelectedOrderFromParty[0];
 
     switch(var)
     {
@@ -671,7 +671,7 @@ void ChooseBattleTowerPlayerParty(void)
 
 void SetBattleTowerPlayerParty(void)
 {
-    u8 var = gBufferedMoves[0];
+    u8 var = gSelectedOrderFromParty[0];
 
     switch(var)
     {
@@ -697,8 +697,8 @@ void ReducePlayerPartyToThree(void)
 
     // copy the selected pokemon according to the order.
     for(i = 0; i < 3; i++)
-        if(gBufferedMoves[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
-            party[i] = gPlayerParty[gBufferedMoves[i] - 1]; // index is 0 based, not literal
+        if(gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
+            party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
 
     // delete the last 3 pokemon
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
