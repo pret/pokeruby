@@ -188,3 +188,79 @@ void UpdateCyclingRoadState(void) {
         sav1_set_battle_music_maybe(SE_STOP);
     }
 }
+
+void SetSSTidalFlag(void)
+{
+    FlagSet(SYS_CRUISE_MODE);
+    *GetVarPointer(VAR_CRUISE_STEP_COUNT) = 0;
+}
+
+void ResetSSTidalFlag(void)
+{
+    FlagReset(SYS_CRUISE_MODE);
+}
+
+bool32 CountSSTidalStep(u16 delta)
+{
+    if (!FlagGet(SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
+{
+    u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
+    switch (*GetVarPointer(VAR_PORTHOLE))
+    {
+        case 1:
+        case 8:
+            return 1;
+        case 3:
+        case 9:
+            return 4;
+        case 4:
+        case 5:
+            return 2;
+        case 6:
+        case 10:
+            return 3;
+        case 2:
+            if (*varCruiseStepCount < 60)
+            {
+                *mapNum = MAP_ID_ROUTE134;
+                *x = *varCruiseStepCount + 19;
+            }
+            else if (*varCruiseStepCount < 140)
+            {
+                *mapNum = MAP_ID_ROUTE133;
+                *x = *varCruiseStepCount - 60;
+            }
+            else
+            {
+                *mapNum = MAP_ID_ROUTE132;
+                *x = *varCruiseStepCount - 140;
+            }
+            break;
+        case 7:
+            if (*varCruiseStepCount < 66)
+            {
+                *mapNum = MAP_ID_ROUTE132;
+                *x = 65 - *varCruiseStepCount;
+            }
+            else if (*varCruiseStepCount < 146) {
+                *mapNum = MAP_ID_ROUTE133;
+                *x = 145 - *varCruiseStepCount;
+            }
+            else
+            {
+                *mapNum = MAP_ID_ROUTE134;
+                *x = 224 - *varCruiseStepCount;
+            }
+            break;
+    }
+    *mapGroup = MAP_GROUP_ROUTE132;
+    *y = 20;
+    return 0;
+}
