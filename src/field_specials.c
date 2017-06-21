@@ -3,7 +3,9 @@
 #include "diploma.h"
 #include "fieldmap.h"
 #include "event_data.h"
+#include "battle_tower.h"
 #include "field_map_obj.h"
+#include "region_map.h"
 #include "field_region_map.h"
 #include "field_message_box.h"
 #include "field_camera.h"
@@ -15,6 +17,7 @@
 #include "songs.h"
 #include "string_util.h"
 #include "strings.h"
+#include "pokeblock.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
@@ -1741,4 +1744,38 @@ void RemoveCameraDummy(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
     RemoveFieldObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+}
+
+u8 GetPokeblockNameByMonNature(void)
+{
+    return sub_810CB68(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
+}
+
+void GetSecretBaseNearbyMapName(void)
+{
+    sub_80FBFB4(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
+}
+
+u16 sub_810F404(void)
+{
+    return GetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK);
+}
+
+void sub_810F414(void)
+{
+    sub_8135FF4(gStringVar1);
+}
+
+const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+const u8 gUnknown_083F83EC[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
+const u8 gUnknown_083F83F8[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
+
+u8 sub_810F424(void)
+{
+    u32 v0 = gSaveBlock1.easyChatPairs[0].unk0_0 + gSaveBlock1.easyChatPairs[0].unk2 + gUnknown_083F83E0[gSpecialVar_0x8004];
+    if (GetPriceReduction(2))
+    {
+        return gUnknown_083F83F8[v0 % 12];
+    }
+    return gUnknown_083F83EC[v0 % 12];
 }

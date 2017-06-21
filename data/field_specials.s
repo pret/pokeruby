@@ -3,15 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083F83E0:: @ 83F83E0
-	.byte 12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6
-
-gUnknown_083F83EC:: @ 83F83EC
-	.byte 0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5
-
-gUnknown_083F83F8:: @ 83F83F8
-	.byte 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5
-
 gUnknown_083F8404:: @ 83F8404
 	.byte 2, 1, 2, 1
 
