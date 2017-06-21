@@ -510,5 +510,6 @@ void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
+u16 GetMonEVCount(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H

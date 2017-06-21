@@ -1779,3 +1779,74 @@ u8 sub_810F424(void)
     }
     return gUnknown_083F83EC[v0 % 12];
 }
+
+bool8 sub_810F488(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x277;
+    *specVar = flag;
+    if (!FlagGet(flag))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_810F4B0(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x278;
+    *specVar = flag;
+    if (!FlagGet(flag))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_810F4D4(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x279;
+    *specVar = flag;
+    if (!FlagGet(flag))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_810F4FC(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x27a;
+    *specVar = flag;
+    if (!FlagGet(flag))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 LeadMonHasEffortRibbon(void)
+{
+    return GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, NULL);
+}
+
+void GivLeadMonEffortRibbon(void)
+{
+    bool8 ribbonSet;
+    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
+    FlagSet(SYS_RIBBON_GET);
+    ribbonSet = TRUE;
+    SetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, &ribbonSet);
+}
+
+bool8 GetLeadMonEVCount(void)
+{
+    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= 510)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
