@@ -18,6 +18,9 @@
 #include "string_util.h"
 #include "strings.h"
 #include "pokeblock.h"
+#include "species.h"
+#include "abilities.h"
+#include "moves.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
@@ -26,6 +29,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "menu.h"
+#include "starter_choose.h"
 #include "menu_helpers.h"
 
 #if ENGLISH
@@ -1847,6 +1851,58 @@ bool8 GetLeadMonEVCount(void)
     if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= 510)
     {
         return TRUE;
+    }
+    return FALSE;
+}
+
+u8 sub_810F5BC(void)
+{
+    if (!FlagGet(0xc7) && gSaveBlock1.location.mapGroup == MAP_GROUP_RUSTURF_TUNNEL && gSaveBlock1.location.mapNum == MAP_ID_RUSTURF_TUNNEL)
+    {
+        if (FlagGet(0x3a3))
+        {
+            VarSet(VAR_0x409a, 4);
+            return TRUE;
+        }
+        else if (FlagGet(0x3a4))
+        {
+            VarSet(VAR_0x409a, 5);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void SetShoalItemFlag(u16 v0)
+{
+    FlagSet(0x85f);
+}
+
+void PutZigzagoonInPlayerParty(void)
+{
+    u16 monData;
+    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 0x20, FALSE, 0, FALSE, 0);
+    monData = ABILITY_STENCH;
+    SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, (u8 *)&monData);
+    monData = MOVE_TACKLE;
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (u8 *)&monData);
+    monData = MOVE_NONE;
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (u8 *)&monData);
+}
+
+bool8 IsStarterInParty(void)
+{
+    u8 i;
+    u16 starter = GetStarterPokemon(VarGet(VAR_FIRST_POKE));
+    u8 partyCount = CalculatePlayerPartyCount();
+    for (i=0; i<partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == starter)
+        {
+            return TRUE;
+        }
     }
     return FALSE;
 }

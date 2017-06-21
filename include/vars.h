@@ -33,7 +33,7 @@
 
 #define VAR_0x4089                 0x4089
 #define VAR_0x4097                 0x4097
-
+#define VAR_0x409a                 0x409a
 #define VAR_PORTHOLE               0x40B4
 
 #define VAR_0x40BC                 0x40BC
