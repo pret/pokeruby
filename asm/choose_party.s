@@ -47,7 +47,7 @@ _08121E54: .4byte 0x00000263
 sub_8121E58: @ 8121E58
 	push {lr}
 	movs r1, 0
-	ldr r3, _08121E74 @ =gSelectedOrderFromParty
+	ldr r3, _08121E74 @ =gBufferedMoves
 	movs r2, 0
 _08121E60:
 	adds r0, r1, r3
@@ -60,7 +60,7 @@ _08121E60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121E74: .4byte gSelectedOrderFromParty
+_08121E74: .4byte gBufferedMoves
 	thumb_func_end sub_8121E58
 
 	thumb_func_start sub_8121E78
@@ -192,7 +192,7 @@ _08121F78:
 _08121F7E:
 	cmp r4, 0x2
 	bhi _08121FA0
-	ldr r0, _08121FC4 @ =gSelectedOrderFromParty
+	ldr r0, _08121FC4 @ =gBufferedMoves
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, r6
@@ -223,7 +223,7 @@ _08121FA0:
 	bl sub_806BC3C
 	b _08121FD4
 	.align 2, 0
-_08121FC4: .4byte gSelectedOrderFromParty
+_08121FC4: .4byte gBufferedMoves
 _08121FC8: .4byte gPlayerParty
 _08121FCC:
 	adds r0, r5, 0
@@ -372,7 +372,7 @@ sub_81220C8: @ 81220C8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081221A2
-	ldr r0, _081220F4 @ =gSelectedOrderFromParty
+	ldr r0, _081220F4 @ =gBufferedMoves
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0
 	bne _08122100
@@ -381,7 +381,7 @@ sub_81220C8: @ 81220C8
 	.align 2, 0
 _081220EC: .4byte 0x0201b000
 _081220F0: .4byte 0x00000263
-_081220F4: .4byte gSelectedOrderFromParty
+_081220F4: .4byte gBufferedMoves
 _081220F8:
 	movs r0, 0x12
 	b _081221A4
@@ -391,7 +391,7 @@ _081220FC:
 _08122100:
 	movs r5, 0
 _08122102:
-	ldr r4, _081221B4 @ =gSelectedOrderFromParty
+	ldr r4, _081221B4 @ =gBufferedMoves
 	adds r4, r5, r4
 	ldrb r0, [r4]
 	movs r1, 0x64
@@ -430,7 +430,7 @@ _0812214A:
 	add r0, r9
 	movs r1, 0
 	ldrsh r4, [r0, r1]
-	ldr r0, _081221B4 @ =gSelectedOrderFromParty
+	ldr r0, _081221B4 @ =gBufferedMoves
 	adds r6, r5, r0
 	ldrb r0, [r6]
 	mov r2, r8
@@ -481,7 +481,7 @@ _081221A4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081221B4: .4byte gSelectedOrderFromParty
+_081221B4: .4byte gBufferedMoves
 _081221B8: .4byte gUnknown_030042FC
 _081221BC: .4byte 0x0201b000
 _081221C0: .4byte 0x00000282
@@ -495,7 +495,7 @@ sub_81221CC: @ 81221CC
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, _081221E4 @ =gSelectedOrderFromParty
+	ldr r3, _081221E4 @ =gBufferedMoves
 _081221D6:
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -504,7 +504,7 @@ _081221D6:
 	movs r0, 0x1
 	b _081221F4
 	.align 2, 0
-_081221E4: .4byte gSelectedOrderFromParty
+_081221E4: .4byte gBufferedMoves
 _081221E8:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -868,7 +868,7 @@ sub_81224A8: @ 81224A8
 	.align 2, 0
 _081224CC: .4byte gTasks
 _081224D0:
-	ldr r0, _081224F8 @ =gSelectedOrderFromParty
+	ldr r0, _081224F8 @ =gBufferedMoves
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08122504
@@ -888,7 +888,7 @@ _081224D0:
 	str r1, [r0]
 	b _08122520
 	.align 2, 0
-_081224F8: .4byte gSelectedOrderFromParty
+_081224F8: .4byte gBufferedMoves
 _081224FC: .4byte gTasks
 _08122500: .4byte sub_8122450
 _08122504:
@@ -1088,7 +1088,7 @@ sub_8122694: @ 8122694
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r3, _081226D4 @ =gSelectedOrderFromParty
+	ldr r3, _081226D4 @ =gBufferedMoves
 	ldr r2, _081226D8 @ =gLastFieldPokeMenuOpened
 _081226A0:
 	adds r1, r4, r3
@@ -1116,7 +1116,7 @@ _081226CC:
 	bl sub_8122838
 	b _08122716
 	.align 2, 0
-_081226D4: .4byte gSelectedOrderFromParty
+_081226D4: .4byte gBufferedMoves
 _081226D8: .4byte gLastFieldPokeMenuOpened
 _081226DC:
 	adds r0, r4, 0x1
@@ -1131,7 +1131,7 @@ _081226DC:
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_806D5A4
 	ldr r0, _0812271C @ =gOtherText_NoMoreThreePoke
 	movs r1, 0x1
@@ -1178,7 +1178,7 @@ _0812274A:
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	adds r0, r4, 0
 	bl sub_8122838
 _08122760:
@@ -1197,7 +1197,7 @@ sub_8122770: @ 8122770
 	lsrs r6, r0, 24
 	movs r4, 0
 	ldr r5, _08122798 @ =gLastFieldPokeMenuOpened
-	ldr r3, _0812279C @ =gSelectedOrderFromParty
+	ldr r3, _0812279C @ =gBufferedMoves
 _0812277C:
 	adds r2, r4, r3
 	ldrb r1, [r2]
@@ -1214,7 +1214,7 @@ _0812277C:
 	b _081227BE
 	.align 2, 0
 _08122798: .4byte gLastFieldPokeMenuOpened
-_0812279C: .4byte gSelectedOrderFromParty
+_0812279C: .4byte gBufferedMoves
 _081227A0:
 	ldrb r0, [r3, 0x1]
 	strb r0, [r3]
@@ -1237,7 +1237,7 @@ _081227BE:
 	ldrb r0, [r5]
 	movs r1, 0x70
 	bl sub_806BC3C
-	ldr r4, _081227F8 @ =gSelectedOrderFromParty
+	ldr r4, _081227F8 @ =gBufferedMoves
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _081227DA
@@ -1262,7 +1262,7 @@ _081227EC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081227F8: .4byte gSelectedOrderFromParty
+_081227F8: .4byte gBufferedMoves
 	thumb_func_end sub_8122770
 
 	thumb_func_start sub_81227FC
@@ -1276,7 +1276,7 @@ sub_81227FC: @ 81227FC
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
@@ -2395,7 +2395,7 @@ sub_81230F4: @ 81230F4
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0xF
 	movs r1, 0
 	bl sub_806D538
@@ -2455,7 +2455,7 @@ sub_8123170: @ 8123170
 	ands r0, r1
 	cmp r0, 0
 	bne _08123194
-	ldr r0, _081231A0 @ =gUnknown_0300485C
+	ldr r0, _081231A0 @ =gFieldCallback
 	ldr r1, _081231A4 @ =sub_81231AC
 	str r1, [r0]
 	ldr r0, _081231A8 @ =c2_exit_to_overworld_2_switch
@@ -2468,7 +2468,7 @@ _08123194:
 	bx r0
 	.align 2, 0
 _0812319C: .4byte gPaletteFade
-_081231A0: .4byte gUnknown_0300485C
+_081231A0: .4byte gFieldCallback
 _081231A4: .4byte sub_81231AC
 _081231A8: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8123170

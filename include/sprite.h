@@ -5,8 +5,15 @@
 
 struct SpriteSheet
 {
-    const u8 *data;
+    const u8 *data;  // Raw uncompressed pixel data
     u16 size;
+    u16 tag;
+};
+
+struct CompressedSpriteSheet
+{
+    const u8 *data;  // LZ77 compressed pixel data
+    u16 size;        // Uncompressed size of pixel data
     u16 tag;
 };
 
@@ -16,9 +23,17 @@ struct SpriteFrameImage
     u16 size;
 };
 
+#define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
+
 struct SpritePalette
 {
-    const u16 *data;
+    const u16 *data;  // Raw uncompressed palette data
+    u16 tag;
+};
+
+struct CompressedSpritePalette
+{
+    const u8 *data;  // LZ77 compressed palette data
     u16 tag;
 };
 
@@ -97,6 +112,10 @@ union AffineAnimCmd
 
 #define AFFINEANIMCMD_FRAME(_xScale, _yScale, _rotation, _duration) \
     {.frame = {.xScale = _xScale, .yScale = _yScale, .rotation = _rotation, .duration = _duration}}
+#define AFFINEANIMCMD_LOOP(_count) \
+    {.loop = {.type = AFFINEANIMCMDTYPE_LOOP, .count = _count}}
+#define AFFINEANIMCMD_JUMP(_target) \
+    {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 #define AFFINEANIMCMD_END \
     {.type = AFFINEANIMCMDTYPE_END}
 
@@ -131,7 +150,7 @@ struct Subsprite
 struct SubspriteTable
 {
     u8 subspriteCount;
-    struct Subsprite *subsprites;
+    const struct Subsprite *subsprites;
 };
 
 struct Sprite;
@@ -142,7 +161,7 @@ struct SpriteTemplate
     u16 paletteTag;
     const struct OamData *oam;
     const union AnimCmd *const *anims;
-    struct SpriteFrameImage *images;
+    const struct SpriteFrameImage *images;
     const union AffineAnimCmd *const *affineAnims;
     void (*callback)(struct Sprite *);
 };

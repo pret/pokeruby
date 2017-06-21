@@ -46,10 +46,10 @@ AddHatchedMonToParty: @ 80429EC
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldr r1, _08042AA4 @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNick
@@ -351,7 +351,7 @@ Task_EggHatch: @ 8042CAC
 	bne _08042CD0
 	ldr r0, _08042CDC @ =CB2_EggHatch_0
 	bl SetMainCallback2
-	ldr r1, _08042CE0 @ =gUnknown_0300485C
+	ldr r1, _08042CE0 @ =gFieldCallback
 	ldr r0, _08042CE4 @ =sub_8080990
 	str r0, [r1]
 	adds r0, r4, 0
@@ -363,7 +363,7 @@ _08042CD0:
 	.align 2, 0
 _08042CD8: .4byte gPaletteFade
 _08042CDC: .4byte CB2_EggHatch_0
-_08042CE0: .4byte gUnknown_0300485C
+_08042CE0: .4byte gFieldCallback
 _08042CE4: .4byte sub_8080990
 	thumb_func_end Task_EggHatch
 

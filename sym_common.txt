@@ -5,7 +5,7 @@
 	.include "rtc.o"
 
 	.align 4
-gUnknown_03004040: @ 3004040
+gBattleBuffersTransferData: @ 3004040
 	.space 0x170
 
 gUnknown_030041B0: @ 30041B0
@@ -17,7 +17,7 @@ gUnknown_030041B4: @ 30041B4
 gUnknown_030041B8: @ 30041B8
 	.space 0x8
 
-gUnknown_030041C0: @ 30041C0
+gBattleTextBuff1: @ 30041C0
 	.space 0x10
 
 gUnknown_030041D0: @ 30041D0
@@ -50,7 +50,7 @@ gUnknown_03004288: @ 3004288
 gBattleTerrain: @ 300428C
 	.space 0x4
 
-gUnknown_03004290: @ 3004290
+gBattleTextBuff2: @ 3004290
 	.space 0x10
 
 gUnknown_030042A0: @ 30042A0
@@ -59,7 +59,7 @@ gUnknown_030042A0: @ 30042A0
 gUnknown_030042A4: @ 30042A4
 	.space 0xC
 
-gUnknown_030042B0: @ 30042B0
+gBattleTextBuff3: @ 30042B0
 	.space 0x10
 
 gUnknown_030042C0: @ 30042C0
@@ -68,13 +68,13 @@ gUnknown_030042C0: @ 30042C0
 gUnknown_030042C4: @ 30042C4
 	.space 0xC
 
-gUnknown_030042D0: @ 30042D0
+gPreBattleCallback1: @ 30042D0
 	.space 0x4
 
-gUnknown_030042D4: @ 30042D4
+gBattleMainFunc: @ 30042D4
 	.space 0xC
 
-gUnknown_030042E0: @ 30042E0
+gBattleResults: @ 30042E0
 	.space 0x1C
 
 gUnknown_030042FC: @ 30042FC
@@ -86,13 +86,13 @@ gUnknown_0300430A: @ 300430A
 gUnknown_03004316: @ 3004316
 	.space 0xE
 
-gUnknown_03004324: @ 3004324
+gLeveledUpInBattle: @ 3004324
 	.space 0xC
 
-gUnknown_03004330: @ 3004330
+gBattleBankFunc: @ 3004330
 	.space 0x10
 
-gUnknown_03004340: @ 3004340
+gHealthboxIDs: @ 3004340
 	.space 0x4
 
 gUnknown_03004344: @ 3004344
@@ -145,7 +145,7 @@ gUnknown_03004854: @ 3004854
 word_3004858: @ 3004858
 	.space 0x4
 
-gUnknown_0300485C: @ 300485C
+gFieldCallback: @ 300485C
 	.space 0x4
 
 gUnknown_03004860: @ 3004860

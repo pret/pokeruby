@@ -27,5 +27,6 @@ void BattleAI_DoAIProcessing(void);
 void sub_810745C(void);
 void AIStackPushVar(u8 *);
 u8 AIStackPop(void);
+void BattleAI_HandleItemUseBeforeAISetup(void);
 
 #endif

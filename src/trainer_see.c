@@ -1,7 +1,5 @@
 #include "global.h"
 #include "trainer_see.h"
-#include "asm.h"
-#include "asm_fieldmap.h"
 #include "battle_setup.h"
 #include "field_effect.h"
 #include "field_map_obj.h"
@@ -9,6 +7,7 @@
 #include "script.h"
 #include "sprite.h"
 #include "task.h"
+#include "util.h"
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);
@@ -373,9 +372,9 @@ void sub_80846E4(u8 taskId)
         mapObj->mapobj_bit_7 = 0;
 }
 
-void sub_8084794(u32 var)
+void sub_8084794(struct MapObject *var)
 {
-    StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80846E4, 0)].data[1], var);
+    StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80846E4, 0)].data[1], (u32)var);
 }
 
 void sub_80847C8(void)

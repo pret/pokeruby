@@ -1410,7 +1410,7 @@ _080F8840:
 	ldr r0, _080F8870 @ =gUnknown_03000748
 	strb r4, [r0]
 _080F8848:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x19

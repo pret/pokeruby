@@ -4,7 +4,7 @@
 	.section .rodata
 
 	.align 2
-gUnknown_084061A4:: @ 84061A4
+gWallyBufferCommands:: @ 84061A4
 	.4byte dp01t_00_5_getattr
 	.4byte sub_8138230
 	.4byte sub_813823C

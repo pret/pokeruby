@@ -1,8 +1,9 @@
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "hall_of_fame.h"
+#include "intro_credits_graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -13,6 +14,7 @@
 #include "sound.h"
 #include "species.h"
 #include "starter_choose.h"
+#include "task.h"
 #include "trig.h"
 
 asm(".set REG_BASE, 0x4000000");
@@ -20,8 +22,6 @@ asm(".set OFFSET_REG_BLDCNT,      0x50");
 asm(".set OFFSET_REG_BLDALPHA,    0x52");
 asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
 asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
-extern void *species_and_otid_get_pal(u32, u16, u16);
 
 enum
 {
@@ -70,18 +70,37 @@ enum
     PAGE_PROGRAMMERS,
     PAGE_GRAPHIC_DESIGNERS,
     PAGE_PRODUCT_SUPPORT,
+
+#if ENGLISH
     PAGE_ARTWORK,
     PAGE_TEXT_EDITOR,
     PAGE_NOA_TESTING,
     PAGE_BRAILLE_CODE_CHECK_1,
     PAGE_BRAILLE_CODE_CHECK_2,
+#elif GERMAN
+    PAGE_NOE_TESTING,
+    PAGE_BRAILLE_CODE_CHECK_1,
+#endif
+
     PAGE_SPECIAL_THANKS_4,
     PAGE_SPECIAL_THANKS_5,
 
     PAGE_COUNT
 };
 
+#if ENGLISH
+#define POKEMON_TILE_COUNT 68
+#define LAST_PAGE (PAGE_TEXT_EDITOR)
+#define UNK_DEFINE_45 (0x45)
 #define UNK_DEFINE_82 (0x82)
+#define UNK_DEF_1F3 (499)
+#elif GERMAN
+#define POKEMON_TILE_COUNT 65
+#define LAST_PAGE (PAGE_NOE_TESTING)
+#define UNK_DEFINE_45 (8)
+#define UNK_DEFINE_82 (0x8D)
+#define UNK_DEF_1F3 (554)
+#endif
 
 #define COLOR_DARK_GREEN 0x1967
 #define COLOR_LIGHT_GREEN 0x328D
@@ -125,7 +144,6 @@ enum
     TDE_TASK_A_ID = 2,
 };
 
-#define POKEMON_TILE_COUNT 68
 
 struct Unk201C000
 {
@@ -169,11 +187,6 @@ extern s16 gUnknown_0203935C;
 
 extern u8 gReservedSpritePaletteCount;
 
-// data/starter_choose
-extern u16 gBirchBagGrassPal[32];
-extern u8 gBirchGrassTilemap[];
-extern u8 gBirchHelpGfx[];
-
 // data/hall_of_fame
 extern void *gUnknown_0840B5A0[];
 
@@ -192,14 +205,6 @@ extern struct SpritePalette gUnknown_0840CAB0;
 extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
 extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
 extern struct SpriteTemplate gSpriteTemplate_840CAEC;
-
-// data/intro_credits_graphics
-extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
-extern const struct SpriteSheet gIntro2MaySpriteSheet;
-extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
-extern const struct SpritePalette gIntro2SpritePalettes[];
-extern const struct SpriteSheet gUnknown_08416E24;
-extern const struct SpriteSheet gUnknown_08416E34;
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];
@@ -228,7 +233,7 @@ static void sub_8145128(u16, u16, u16);
 static void sub_81452D0(u16 arg0, u16 palette);
 static void spritecb_player_8145378(struct Sprite *sprite);
 static void spritecb_rival_8145420(struct Sprite *sprite);
-static u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 position);
+static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position);
 static void sub_81458DC(void);
 
 static void vblank_8143948(void)
@@ -443,7 +448,7 @@ void task_a_8143D04(u8 taskIdA)
         gReservedSpritePaletteCount = 8;
         LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
         LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-        LoadPalette(gBirchBagGrassPal + 1, 1, 31 * 2);
+        LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
             HALL_OF_FAME_SHEET_0[i] = 0x11;
@@ -746,8 +751,6 @@ static void task_b_81441B8(u8 taskIdB)
     }
 }
 
-#define LAST_PAGE (PAGE_TEXT_EDITOR)
-
 static u8 sub_8144454(u8 page, u8 taskIdA)
 {
     // Starts with bike + ocean + morning
@@ -942,8 +945,6 @@ void task_c_8144664(u8 taskIdC)
     }
 }
 
-#define UNK_DEF_1F3 (499)
-
 void task_e_8144934(u8 taskIdE)
 {
     s16 taskIdC;
@@ -1007,8 +1008,6 @@ void task_e_8144934(u8 taskIdE)
         break;
     }
 }
-
-#define UNK_DEFINE_45 (0x45)
 
 static void sub_8144A68(u8 data, u8 taskIdA)
 {
@@ -1280,12 +1279,19 @@ static void sub_81452D0(u16 arg0, u16 palette)
     for (pos = 0; pos < 32 * 32; pos++)
         ((u16 *) (VRAM + arg0))[pos] = baseTile + 1;
 
+#if ENGLISH
     sub_814524C(gUnknown_0840B83C, 3, 7, arg0, palette);
     sub_814524C(gUnknown_0840B84B, 7, 7, arg0, palette);
     sub_814524C(gUnknown_0840B85A, 11, 7, arg0, palette);
     sub_814524C(gUnknown_0840B85A, 16, 7, arg0, palette);
     sub_814524C(gUnknown_0840B869, 20, 7, arg0, palette);
     sub_814524C(gUnknown_0840B878, 24, 7, arg0, palette);
+#elif GERMAN
+    sub_814524C(gUnknown_0840B85A, 7, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B869, 11, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B878, 15, 7, arg0, palette);
+    sub_814524C(gUnknown_0840B85A, 19, 7, arg0, palette);
+#endif
 }
 
 static void spritecb_player_8145378(struct Sprite *sprite)
@@ -1489,7 +1495,7 @@ void spritecb_81454E0(struct Sprite *sprite) {
 static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 {
     u32 personality;
-    void *palette;
+    const u8 *lzPaletteData;
     u8 spriteId;
     u8 spriteId2;
 
@@ -1521,8 +1527,8 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         1
     );
 
-    palette = species_and_otid_get_pal(species, 0, 0xFFFF);
-    LoadCompressedPalette(palette, 0x100 + (position * 16), 0x20);
+    lzPaletteData = species_and_otid_get_pal(species, 0, 0xFFFF);
+    LoadCompressedPalette(lzPaletteData, 0x100 + (position * 16), 0x20);
     sub_8143648(position, position);
 
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
@@ -1566,7 +1572,7 @@ static void sub_81458DC(void) {
 
     for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
     {
-        if (sub_8090D90(dexNum, 1))
+        if (GetNationalPokedexFlag(dexNum, 1))
         {
             unk201C000->unk90[seenTypesCount] = dexNum;
             seenTypesCount++;

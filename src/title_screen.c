@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "title_screen.h"
-#include "asm.h"
 #include "clear_save_data_menu.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -10,9 +9,11 @@
 #include "main.h"
 #include "main_menu.h"
 #include "palette.h"
+#include "reset_rtc_screen.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "unknown_task.h"
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -151,7 +152,7 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_VersionBannerRight,
 };
-static const struct SpriteSheet gUnknown_08393EFC[] =
+static const struct CompressedSpriteSheet gUnknown_08393EFC[] =
 {
     {gVersionTiles, 0x1000, 1000},
     {NULL},
@@ -233,7 +234,7 @@ static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PressStartCopyrightBanner,
 };
-static const struct SpriteSheet gUnknown_08393F8C[] =
+static const struct CompressedSpriteSheet gUnknown_08393F8C[] =
 {
     {gTitleScreenPressStart_Gfx, 0x520, 1001},
     {NULL},
@@ -278,7 +279,7 @@ static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_PokemonLogoShine,
 };
-static const struct SpriteSheet sPokemonLogoShineSpriteSheet[] =
+static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 {
     {sLogoShineTiles, 0x800, 1002},
     {NULL},

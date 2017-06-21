@@ -1,6 +1,7 @@
 #include "global.h"
 #include "script_menu.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "menu.h"
 #include "palette.h"
 #include "script.h"
@@ -573,10 +574,6 @@ extern u8 gPCText_WhichPCShouldBeAccessed[];
 
 extern u16 gScriptResult;
 
-// field_effect
-extern void FreeResourcesAndDestroySprite(struct Sprite *sprite);
-extern u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
-
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
     if (FuncIsActiveTask(sub_80B52B4) == 1)
@@ -684,7 +681,7 @@ void sub_80B52B4(u8 taskId)
             {
                 gScriptResult = var;
             }
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
             MenuZeroFillWindowRect(gTasks[taskId].data[0], gTasks[taskId].data[1], gTasks[taskId].data[2], gTasks[taskId].data[3]);
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -847,7 +844,7 @@ void sub_80B5684(u8 taskId)
         {
             gScriptResult = var;
         }
-        sub_8072DEC();
+        HandleDestroyMenuCursors();
         MenuZeroFillWindowRect(gTasks[taskId].data[0], gTasks[taskId].data[1], gTasks[taskId].data[2], gTasks[taskId].data[3]);
         DestroyTask(taskId);
         EnableBothScriptContexts();

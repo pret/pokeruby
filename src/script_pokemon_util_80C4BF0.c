@@ -1,9 +1,13 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
 #include "berry.h"
+#include "choose_party.h"
 #include "contest.h"
+#include "contest_link_80C2020.h"
+#include "contest_painting.h"
 #include "data2.h"
+#include "daycare.h"
+#include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "items.h"
@@ -22,24 +26,12 @@
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
-extern void sub_80C46EC(void);
-extern void sub_80C4740(void);
-extern void sub_80C48F4(void);
-extern void sub_80B2A7C(u8);
-extern void sub_80AAF30(void); // matsuda debug?
-extern u8 sub_80B2C4C(u8, u8);
-extern void CB2_ContestPainting(void);
-extern void sub_8042044(struct Pokemon *mon, u16, u8);
-extern void sub_8121E10(void);
-extern void sub_8121E34(void);
-
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u8 gPlayerPartyCount;
-extern u8 gSelectedOrderFromParty[];
+extern u8 gBufferedMoves[];
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
@@ -415,7 +407,7 @@ u8 sub_80C5044(void)
 
 void ShowContestEntryMonPic(void)
 {
-    struct SpritePalette *paletteData;
+    const struct CompressedSpritePalette *palette;
     u32 var1, var2;
     u16 species;
     u8 spriteId;
@@ -433,13 +425,18 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
-        HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
-        gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
-        (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
-        paletteData = sub_80409C8(species, var2, var1);
-        LoadCompressedObjectPalette(paletteData);
+        HandleLoadSpecialPokePic(
+          &gMonFrontPicTable[species],
+          gMonFrontPicCoords[species].coords,
+          gMonFrontPicCoords[species].y_offset,
+          (u32)gUnknown_081FAF4C[0],
+          gUnknown_081FAF4C[1],
+          species,
+          var1);
+        palette = sub_80409C8(species, var2, var1);
+        LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
-        gUnknown_02024E8C.paletteTag = paletteData->tag;
+        gUnknown_02024E8C.paletteTag = palette->tag;
         spriteId = CreateSprite(&gUnknown_02024E8C, 0x78, 0x40, 0);
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;
@@ -560,16 +557,16 @@ u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
     nationalSpecies = SpeciesToNationalPokedexNum(species);
 
     // nested if check to fool compiler
-    if(sentToPc < 2)
+    switch(sentToPc)
     {
-        if(sentToPc >= 0)
-        {
-            // set both the seen and caught flags
-            sub_8090D90(nationalSpecies, 2);
-            sub_8090D90(nationalSpecies, 3);
-        }
+        case 0:
+        case 1:
+            GetNationalPokedexFlag(nationalSpecies, 2);
+            GetNationalPokedexFlag(nationalSpecies, 3);
+            return sentToPc;
+        default:
+            return sentToPc;
     }
-    return sentToPc;
 }
 
 u8 ScriptGiveEgg(u16 value)
@@ -656,7 +653,7 @@ void sub_80C5568(void)
 
 void sub_80C5580(void)
 {
-    u8 var = gSelectedOrderFromParty[0];
+    u8 var = gBufferedMoves[0];
 
     switch(var)
     {
@@ -679,7 +676,7 @@ void ChooseBattleTowerPlayerParty(void)
 
 void SetBattleTowerPlayerParty(void)
 {
-    u8 var = gSelectedOrderFromParty[0];
+    u8 var = gBufferedMoves[0];
 
     switch(var)
     {
@@ -705,8 +702,8 @@ void ReducePlayerPartyToThree(void)
 
     // copy the selected pokemon according to the order.
     for(i = 0; i < 3; i++)
-        if(gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
-            party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
+        if(gBufferedMoves[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
+            party[i] = gPlayerParty[gBufferedMoves[i] - 1]; // index is 0 based, not literal
 
     // delete the last 3 pokemon
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);

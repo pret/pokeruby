@@ -1522,7 +1522,7 @@ _081350AE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081350C6
@@ -1555,7 +1555,7 @@ AppendBattleTowerBannedSpeciesName: @ 81350E0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081351E6
@@ -2324,7 +2324,7 @@ _08135750: .4byte 0x00000564
 _08135754:
 	movs r2, 0
 	ldr r4, _0813576C @ =gSaveBlock2 + 0x565
-	ldr r3, _08135770 @ =gSelectedOrderFromParty
+	ldr r3, _08135770 @ =gBufferedMoves
 _0813575A:
 	adds r0, r2, r4
 	adds r1, r2, r3
@@ -2336,7 +2336,7 @@ _0813575A:
 	b _0813589A
 	.align 2, 0
 _0813576C: .4byte gSaveBlock2 + 0x565
-_08135770: .4byte gSelectedOrderFromParty
+_08135770: .4byte gBufferedMoves
 _08135774:
 	ldr r3, _081357C0 @ =0x00000564
 	adds r0, r5, r3
@@ -2665,7 +2665,7 @@ _08135A10: .4byte 0x00000554
 sub_8135A14: @ 8135A14
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, _08135A34 @ =gSelectedOrderFromParty
+	ldr r4, _08135A34 @ =gBufferedMoves
 	ldr r3, _08135A38 @ =gSaveBlock2 + 0x565
 _08135A1C:
 	adds r0, r2, r4
@@ -2680,7 +2680,7 @@ _08135A1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135A34: .4byte gSelectedOrderFromParty
+_08135A34: .4byte gBufferedMoves
 _08135A38: .4byte gSaveBlock2 + 0x565
 	thumb_func_end sub_8135A14
 
@@ -2891,7 +2891,7 @@ _08135BD4:
 _08135BD8:
 	bl sub_8135CFC
 	ldr r4, _08135C1C @ =gSaveBlock2
-	ldr r0, _08135C2C @ =gUnknown_02024D26
+	ldr r0, _08135C2C @ =gBattleOutcome
 	ldrb r1, [r0]
 	ldr r2, _08135C30 @ =0x00000555
 	adds r0, r4, r2
@@ -2925,7 +2925,7 @@ _08135C1C: .4byte gSaveBlock2
 _08135C20: .4byte 0x00000554
 _08135C24: .4byte gSpecialVar_0x8004
 _08135C28: .4byte 0x0000055c
-_08135C2C: .4byte gUnknown_02024D26
+_08135C2C: .4byte gBattleOutcome
 _08135C30: .4byte 0x00000555
 _08135C34: .4byte 0x00000556
 	thumb_func_end sub_8135BA0
@@ -3553,7 +3553,7 @@ _081360CC: .4byte gSaveBlock2 + 0x4A8
 	thumb_func_start sub_81360D0
 sub_81360D0: @ 81360D0
 	push {lr}
-	ldr r0, _081360E4 @ =gUnknown_02024D26
+	ldr r0, _081360E4 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bne _081360EC
@@ -3562,7 +3562,7 @@ sub_81360D0: @ 81360D0
 	strb r0, [r1]
 	b _08136102
 	.align 2, 0
-_081360E4: .4byte gUnknown_02024D26
+_081360E4: .4byte gBattleOutcome
 _081360E8: .4byte gStringVar4
 _081360EC:
 	cmp r0, 0x1

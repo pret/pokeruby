@@ -67,7 +67,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	releaseall
 	end
 
-gUnknown_08152850:: @ 8152850
+gBrendanHouse_TurnPCOff:: @ 8152850
 	setvar 0x8004, 1
 	playsfx SE_PC_OFF
 	special 215

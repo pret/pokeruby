@@ -27,6 +27,12 @@
 #define BUGFIX_EVO_NAME
 #endif
 
+#ifdef ENGLISH
+#define UNITS_IMPERIAL
+#elif GERMAN
+#define UNITS_METRIC
+#endif
+
 // Fixed in Emerald.
 // #define BUGFIX_SETMONIVS
 

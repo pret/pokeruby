@@ -584,7 +584,7 @@ _080BC8C2:
 	ldrsh r1, [r4, r2]
 	cmp r0, r1
 	bne _080BC8FC
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -594,7 +594,7 @@ _080BC8C2:
 	bl sub_80BCC54
 	b _080BC940
 _080BC8FC:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x2]
 	adds r0, r1
@@ -614,7 +614,7 @@ _080BC91C:
 	beq _080BC940
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -671,9 +671,9 @@ sub_80BC980: @ 80BC980
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0xC
@@ -799,7 +799,7 @@ sub_80BCA84: @ 80BCA84
 	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
 	bl DestroyVerticalScrollIndicator
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -840,7 +840,7 @@ sub_80BCAEC: @ 80BCAEC
 	bl DisplayYesNoMenu
 	ldr r1, _080BCB0C @ =gUnknown_083D13E4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -994,9 +994,9 @@ sub_80BCBF8: @ 80BCBF8
 	movs r3, 0x5
 	bl MenuZeroFillWindowRect
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	subs r5, 0x8
 	adds r4, r5
 	ldr r0, _080BCC50 @ =sub_80BC824

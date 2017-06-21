@@ -1,17 +1,19 @@
 #include "global.h"
-#include "asm.h"
 #include "battle.h"
+#include "battle_message.h"
 #include "data2.h"
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
 #include "items.h"
 #include "link.h"
-#include "main.h"
 #include "m4a.h"
+#include "main.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "rom4.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
 #include "rtc.h"
 #include "songs.h"
 #include "sound.h"
@@ -19,6 +21,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
+#include "util.h"
 
 #define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
@@ -36,18 +39,6 @@
 #define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
 
-struct Evolution
-{
-    u16 method;
-    u16 param;
-    u16 targetSpecies;
-};
-
-struct EvolutionData
-{
-    struct Evolution evolutions[5];
-};
-
 struct SpindaSpot
 {
     u8 x, y;
@@ -55,42 +46,34 @@ struct SpindaSpot
 };
 
 extern u8 gPlayerPartyCount;
-extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
-extern struct Pokemon gEnemyParty[6];
 extern struct BattlePokemon gBattleMons[4];
-extern u8 * const gItemEffectTable[];
-extern u8 gUnknown_02024A60;
+extern u8 gActiveBank;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
-extern struct EvolutionData gEvolutionTable[];
 extern u16 gSpeciesToHoennPokedexNum[];
 extern u16 gSpeciesToNationalPokedexNum[];
 extern u16 gHoennToNationalOrder[];
 extern u16 gSpeciesIdToCryId[];
-extern u8 gUnknown_030041C0[];
-extern u8 gUnknown_03004290[];
-extern u8 gUnknown_020238CC[];
-extern u8 gPlayerMonIndex;
-extern u8 gEnemyMonIndex;
-extern u8 gUnknown_02024C0B;
-extern u8 gUnknown_02024E6C;
+extern u8 gBattleTextBuff1[];
+extern u8 gBattleTextBuff2[];
+extern u8 gDisplayedStringBattle[];
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
+extern u8 gStringBank;
+extern u8 gBankInMenu;
 extern struct SpindaSpot gSpindaSpotGraphics[];
 extern s8 gNatureStatTable[][5];
 extern s8 gUnknown_082082FE[][3];
 extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
-extern struct BaseStats gBaseStats[];
-extern u32 gBitTable[];
-extern u32 gExperienceTables[8][101];
 extern u32 gTMHMLearnsets[][2];
-extern const u16 *gLevelUpLearnsets[];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
 extern const u16 gHMMoves[];
 extern s8 gUnknown_083F7E28[];
-extern u8 byte_2024C06;
+extern u8 gLastUsedAbility;
 extern const u8 BattleText_PreventedSwitch[];
-extern u16 gUnknown_02024A6A[];
+extern u16 gBattlePartyID[];
 extern u8 gJapaneseNidoranNames[][11];
 
 extern u8 gUnknown_082082F8[];
@@ -99,8 +82,6 @@ extern u8 gUnknown_083FFDD3[];
 extern u8 gUnknown_083FEE5D[];
 extern u8 gUnknown_083FEE92[];
 extern u8 *gUnknown_08400F58[];
-
-u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -131,14 +112,14 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = 6;
 
-    temp = gItemEffectTable[itemId - 13];
+    temp = (u8 *) gItemEffectTable[itemId - 13];
 
     if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gUnknown_02024A60].itemEffect;
+        temp = gEnigmaBerries[gActiveBank].itemEffect;
     }
 
     itemEffect = temp;
@@ -235,10 +216,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_803F324(int stat)
 {
-    gEnemyMonIndex = gUnknown_02024E6C;
-    StringCopy(gUnknown_030041C0, gUnknown_08400F58[gUnknown_082082F8[stat]]);
-    StringCopy(gUnknown_03004290, gUnknown_083FFDB3);
-    get_battle_strings_(gUnknown_083FFDD3);
+    gBankTarget = gBankInMenu;
+    StringCopy(gBattleTextBuff1, gUnknown_08400F58[gUnknown_082082F8[stat]]);
+    StringCopy(gBattleTextBuff2, gUnknown_083FFDB3);
+    StrCpyDecodeToDisplayedStringBattle(gUnknown_083FFDD3);
 }
 
 u8 *sub_803F378(u16 itemId)
@@ -250,7 +231,7 @@ u8 *sub_803F378(u16 itemId)
     {
         if (gMain.inBattle)
         {
-            itemEffect = gEnigmaBerries[gUnknown_02024E6C].itemEffect;
+            itemEffect = gEnigmaBerries[gBankInMenu].itemEffect;
         }
         else
         {
@@ -259,10 +240,10 @@ u8 *sub_803F378(u16 itemId)
     }
     else
     {
-        itemEffect = gItemEffectTable[itemId - 13];
+        itemEffect = (u8 *) gItemEffectTable[itemId - 13];
     }
 
-    gUnknown_02024C0B = gUnknown_02024E6C;
+    gStringBank = gBankInMenu;
 
     for (i = 0; i < 3; i++)
     {
@@ -276,19 +257,19 @@ u8 *sub_803F378(u16 itemId)
             }
             else
             {
-                gPlayerMonIndex = gUnknown_02024E6C;
-                get_battle_strings_(gUnknown_083FEE92);
+                gBankAttacker = gBankInMenu;
+                StrCpyDecodeToDisplayedStringBattle(gUnknown_083FEE92);
             }
         }
     }
 
     if (itemEffect[3] & 0x80)
     {
-        gPlayerMonIndex = gUnknown_02024E6C;
-        get_battle_strings_(gUnknown_083FEE5D);
+        gBankAttacker = gBankInMenu;
+        StrCpyDecodeToDisplayedStringBattle(gUnknown_083FEE5D);
     }
 
-    return gUnknown_020238CC;
+    return gDisplayedStringBattle;
 }
 
 u8 GetNature(struct Pokemon *mon)
@@ -1191,9 +1172,7 @@ void current_map_music_set__default_for_battle(u16 song)
         PlayNewMapMusic(sub_8040728());
 }
 
-const u16 *species_and_otid_get_pal(u16, u32, u32);
-
-const u16 *pokemon_get_pal(struct Pokemon *mon)
+const u8 *pokemon_get_pal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -1207,7 +1186,7 @@ const u16 *pokemon_get_pal(struct Pokemon *mon)
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
+const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -1221,9 +1200,7 @@ const u16 *species_and_otid_get_pal(u16 species, u32 otId , u32 personality)
         return gMonPaletteTable[species].data;
 }
 
-const struct SpritePalette *sub_80409C8(u16, u32, u32);
-
-const struct SpritePalette *sub_8040990(struct Pokemon *mon)
+const struct CompressedSpritePalette *sub_8040990(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -1231,7 +1208,7 @@ const struct SpritePalette *sub_8040990(struct Pokemon *mon)
     return sub_80409C8(species, otId, personality);
 }
 
-const struct SpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
+const struct CompressedSpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
 
@@ -1255,7 +1232,7 @@ bool8 IsHMMove2(u16 move)
 
 bool8 sub_8040A3C(u16 species)
 {
-    return gBaseStats[species].bodyColor >> 7; // XXX: should this be a bitfield instead?
+    return gBaseStats[species].unk19_7;
 }
 
 s8 sub_8040A54(struct Pokemon *mon, u8 a2)
@@ -1269,8 +1246,6 @@ s8 sub_8040A7C(u32 personality, u8 a2)
     u8 nature = GetNatureFromPersonality(personality);
     return gUnknown_083F7E28[nature * 5 + a2];
 }
-
-bool8 IsOtherTrainer(u32, u8 *);
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
@@ -1321,21 +1296,21 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 
 void sub_8040B8C(void)
 {
-    byte_2024C06 = BATTLE_STRUCT->filler1_2[0x37];
-    gUnknown_030041C0[0] = 0xFD;
-    gUnknown_030041C0[1] = 4;
-    gUnknown_030041C0[2] = BATTLE_STRUCT->filler1[0x34];
-    gUnknown_030041C0[4] = EOS;
-    if (!battle_side_get_owner(BATTLE_STRUCT->filler1[0x34]))
-        gUnknown_030041C0[3] = pokemon_order_func(gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]]);
+    gLastUsedAbility = BATTLE_STRUCT->filler1_2[0x37];
+    gBattleTextBuff1[0] = 0xFD;
+    gBattleTextBuff1[1] = 4;
+    gBattleTextBuff1[2] = BATTLE_STRUCT->filler1[0x34];
+    gBattleTextBuff1[4] = EOS;
+    if (!GetBankSide(BATTLE_STRUCT->filler1[0x34]))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[BATTLE_STRUCT->filler1[0x34]]);
     else
-        gUnknown_030041C0[3] = gUnknown_02024A6A[BATTLE_STRUCT->filler1[0x34]];
-    gUnknown_03004290[0] = 0xFD;
-    gUnknown_03004290[1] = 4;
-    gUnknown_03004290[2] = gUnknown_02024E6C;
-    gUnknown_03004290[3] = pokemon_order_func(gUnknown_02024A6A[gUnknown_02024E6C]);
-    gUnknown_03004290[4] = EOS;
-    sub_8120FFC(BattleText_PreventedSwitch, gStringVar4);
+        gBattleTextBuff1[3] = gBattlePartyID[BATTLE_STRUCT->filler1[0x34]];
+    gBattleTextBuff2[0] = 0xFD;
+    gBattleTextBuff2[1] = 4;
+    gBattleTextBuff2[2] = gBankInMenu;
+    gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
+    gBattleTextBuff2[4] = EOS;
+    StrCpyDecodeBattle(BattleText_PreventedSwitch, gStringVar4);
 }
 
 void SetWildMonHeldItem(void)

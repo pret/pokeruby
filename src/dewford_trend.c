@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dewford_trend.h"
-#include "asm.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "link.h"

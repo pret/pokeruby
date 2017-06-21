@@ -1,19 +1,14 @@
 #include "global.h"
-#include "asm.h"
+#include "pokemon_summary_screen.h"
 #include "link.h"
 #include "menu.h"
 #include "pokemon.h"
+#include "region_map.h"
 #include "string_util.h"
 #include "strings2.h"
+#include "tv.h"
 
 extern struct Pokemon *unk_2018000;
-
-extern u8 *(gNatureNames[]);
-
-u8 *sub_80A1E9C(u8 *dest, u8 *src, u8);
-u8 PokemonSummaryScreen_CheckOT(struct Pokemon *pokemon);
-u8 *PokemonSummaryScreen_CopyPokemonLevel(u8 *dest, u8 level);
-u32 GetPlayerTrainerId(void);
 
 bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {

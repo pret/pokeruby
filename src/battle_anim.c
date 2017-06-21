@@ -1,9 +1,14 @@
 #include "global.h"
 #include "battle_anim.h"
-#include "asm.h"
+#include "battle.h"
+#include "battle_anim_80CA710.h"
+#include "battle_interface.h"
+#include "contest.h"
 #include "decompress.h"
 #include "m4a.h"
+#include "main.h"
 #include "palette.h"
+#include "rom_8077ABC.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -12,10 +17,10 @@
 #define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
 
 extern u8 unk_2000000[];
-extern u16 gUnknown_02024A6A[4];
-extern u8 gUnknown_02024BE0[];
-extern u8 gPlayerMonIndex;
-extern u8 gEnemyMonIndex;
+extern u16 gBattlePartyID[4];
+extern u8 gObjectBankIDs[];
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
 EWRAM_DATA const u8 *gBattleAnimScriptPtr = NULL;
 EWRAM_DATA const u8 *gBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
@@ -23,11 +28,11 @@ EWRAM_DATA s8 gAnimFramesToWait = 0;
 EWRAM_DATA u8 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
 EWRAM_DATA u8 gAnimSoundTaskCount = 0;
-EWRAM_DATA u32 gUnknown_0202F7B4 = 0;
-EWRAM_DATA u32 gUnknown_0202F7B8 = 0;
-EWRAM_DATA u16 gUnknown_0202F7BC = 0;
-EWRAM_DATA u8 gUnknown_0202F7BE = 0;
-EWRAM_DATA u16 gUnknown_0202F7C0 = 0;
+EWRAM_DATA u32 gDisableStructMoveAnim = 0;
+EWRAM_DATA u32 gMoveDmgMoveAnim = 0;
+EWRAM_DATA u16 gMovePowerMoveAnim = 0;
+EWRAM_DATA u8 gHappinessMoveAnim = 0;
+EWRAM_DATA u16 gWeatherMoveAnim = 0;
 EWRAM_DATA u8 gMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gUnknown_0202F7C4 = 0;
 EWRAM_DATA u8 gUnknown_0202F7C5 = 0;
@@ -53,23 +58,9 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 
 extern const u16 gUnknown_081C7160[];
 extern const u8 *const gBattleAnims_Moves[];
-extern const struct SpriteSheet gBattleAnimPicTable[];
-extern const struct SpritePalette gBattleAnimPaletteTable[];
+extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
+extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
-
-extern void sub_8079E24();
-extern void sub_8043EB4();
-extern u8 sub_8079E90();
-extern u8 sub_8077ABC();
-extern u8 sub_8078874(u8);
-extern void sub_8078914();
-extern u8 sub_80AEB1C();
-extern void sub_80E4EF8(int, int, int, int, u16, u8, int);
-extern u8 sub_80789BC();
-extern void sub_80AB2AC(void);
-extern void sub_800D7B8(void);
-extern u8 obj_id_for_side_relative_to_move();
-extern u8 battle_get_per_side_status_permutated();
 
 static void RunAnimScriptCommand(void);
 static void ScriptCmd_loadsprite(void);
@@ -190,10 +181,10 @@ void battle_anim_clear_some_data(void)
     gAnimScriptActive = FALSE;
     gAnimVisualTaskCount = 0;
     gAnimSoundTaskCount = 0;
-    gUnknown_0202F7B4 = 0;
-    gUnknown_0202F7B8 = 0;
-    gUnknown_0202F7BC = 0;
-    gUnknown_0202F7BE = 0;
+    gDisableStructMoveAnim = 0;
+    gMoveDmgMoveAnim = 0;
+    gMovePowerMoveAnim = 0;
+    gHappinessMoveAnim = 0;
 
     // clear index array.
     for (i = 0; i < 8; i++)
@@ -215,8 +206,8 @@ void battle_anim_clear_some_data(void)
 
 void ExecuteMoveAnim(u16 move)
 {
-    gBattleAnimPlayerMonIndex = gPlayerMonIndex;
-    gBattleAnimEnemyMonIndex = gEnemyMonIndex;
+    gBattleAnimPlayerMonIndex = gBankAttacker;
+    gBattleAnimEnemyMonIndex = gBankTarget;
     DoMoveAnim(gBattleAnims_Moves, move, 1);
 }
 
@@ -230,10 +221,10 @@ void DoMoveAnim(const u8 *const moveAnims[], u16 move, u8 c)
         sub_8043EB4(0);
         for (i = 0; i < 4; i++)
         {
-            if (battle_side_get_owner(i) != 0)
-                gUnknown_0202F7CA[i] = GetMonData(&gEnemyParty[gUnknown_02024A6A[i]], MON_DATA_SPECIES);
+            if (GetBankSide(i) != 0)
+                gUnknown_0202F7CA[i] = GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_SPECIES);
             else
-                gUnknown_0202F7CA[i] = GetMonData(&gPlayerParty[gUnknown_02024A6A[i]], MON_DATA_SPECIES);
+                gUnknown_0202F7CA[i] = GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_SPECIES);
         }
     }
     else
@@ -698,14 +689,14 @@ static void ScriptCmd_monbg(void)
         r5 = gBattleAnimEnemyMonIndex;
     if (b_side_obj__get_some_boolean(r5))
     {
-        r0 = battle_get_per_side_status(r5);
+        r0 = GetBankIdentity(r5);
         r0 += 0xFF;
         if (r0 <= 1 || IsContest() != 0)
             r7 = 0;
         else
             r7 = 1;
         sub_8076034(r5, r7);
-        r4 = gUnknown_02024BE0[r5];
+        r4 = gObjectBankIDs[r5];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = r4;
         gTasks[taskId].data[1] = gSprites[r4].pos1.x + gSprites[r4].pos2.x;
@@ -728,14 +719,14 @@ static void ScriptCmd_monbg(void)
     r5 ^= 2;
     if (r6 > 1 && b_side_obj__get_some_boolean(r5))
     {
-        r0 = battle_get_per_side_status(r5);
+        r0 = GetBankIdentity(r5);
         r0 += 0xFF;
         if (r0 <= 1 || IsContest() != 0)
             r7 = 0;
         else
             r7 = 1;
         sub_8076034(r5, r7);
-        r4 = gUnknown_02024BE0[r5];
+        r4 = gObjectBankIDs[r5];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = r4;
         gTasks[taskId].data[1] = gSprites[r4].pos1.x + gSprites[r4].pos2.x;
@@ -773,7 +764,7 @@ bool8 b_side_obj__get_some_boolean(u8 a)
         return TRUE; // this line wont ever be reached.
     if ((EWRAM_17800[a].unk0 & 1) == 0)
         return TRUE;
-    if (gSprites[gUnknown_02024BE0[a]].invisible)
+    if (gSprites[gObjectBankIDs[a]].invisible)
         return FALSE;
     return TRUE;
 }
@@ -816,7 +807,7 @@ _08075FDC:\n\
     cmp r0, 0\n\
     beq _0807601C\n\
     ldr r2, _08076024 @ =gSprites\n\
-    ldr r0, _08076028 @ =gUnknown_02024BE0\n\
+    ldr r0, _08076028 @ =gObjectBankIDs\n\
     adds r0, r5, r0\n\
     ldrb r1, [r0]\n\
     lsls r0, r1, 4\n\
@@ -834,7 +825,7 @@ _0807601C:\n\
     .align 2, 0\n\
 _08076020: .4byte 0x02017800\n\
 _08076024: .4byte gSprites\n\
-_08076028: .4byte gUnknown_02024BE0\n\
+_08076028: .4byte gObjectBankIDs\n\
 _0807602C:\n\
     movs r0, 0\n\
 _0807602E:\n\
@@ -882,12 +873,12 @@ void sub_8076034(u8 a, u8 b)
         REG_BG1CNT_BITFIELD.screenSize = 1;
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gUnknown_02024BE0[a];
+        spriteId = gObjectBankIDs[a];
         gUnknown_030042C0 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         if (IsContest() != 0 && sub_80AEB1C(EWRAM_19348) != 0)
             gUnknown_030042C0--;
         gUnknown_030041B4 = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
+        gSprites[gObjectBankIDs[a]].invisible = TRUE;
 
         REG_BG1HOFS = gUnknown_030042C0;
         REG_BG1VOFS = gUnknown_030041B4;
@@ -899,7 +890,7 @@ void sub_8076034(u8 a, u8 b)
         if (IsContest() != 0)
             r2 = 0;
         else
-            r2 = battle_get_per_side_status(a);
+            r2 = GetBankIdentity(a);
         sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (IsContest() != 0)
             sub_8076380();
@@ -932,10 +923,10 @@ void sub_8076034(u8 a, u8 b)
         REG_BG2CNT_BITFIELD.screenSize = 1;
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gUnknown_02024BE0[a];
+        spriteId = gObjectBankIDs[a];
         gUnknown_03004288 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         gUnknown_03004280 = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
+        gSprites[gObjectBankIDs[a]].invisible = TRUE;
 
         REG_BG2HOFS = gUnknown_03004288;
         REG_BG2VOFS = gUnknown_03004280;
@@ -944,7 +935,7 @@ void sub_8076034(u8 a, u8 b)
         addr3 = (void *)(PLTT + 0x120);
         DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
 
-        sub_80E4EF8(0, 0, battle_get_per_side_status(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
+        sub_80E4EF8(0, 0, GetBankIdentity(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
 }
 
@@ -1107,9 +1098,9 @@ static void ScriptCmd_clearmonbg(void)
     else
         r5 = gBattleAnimEnemyMonIndex;
     if (gMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gUnknown_02024BE0[r5]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r5]].invisible = FALSE;
     if (r4 > 1 && gMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gUnknown_02024BE0[r5 ^ 2]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r5 ^ 2]].invisible = FALSE;
     else
         r4 = 0;
     taskId = CreateTask(sub_807672C, 5);
@@ -1126,7 +1117,7 @@ static void sub_807672C(u8 taskId)
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
-        var = battle_get_per_side_status(gTasks[taskId].data[2]);
+        var = GetBankIdentity(gTasks[taskId].data[2]);
         var += 0xFF;
         if (var <= 1 || IsContest() != 0)
             r4 = 0;
@@ -1167,26 +1158,26 @@ static void ScriptCmd_monbg_22(void)
         r4 = gBattleAnimEnemyMonIndex;
     if (b_side_obj__get_some_boolean(r4))
     {
-        r0 = battle_get_per_side_status(r4);
+        r0 = GetBankIdentity(r4);
         r0 += 0xFF;
         if (r0 <= 1 || IsContest() != 0)
             r1 = 0;
         else
             r1 = 1;
         sub_8076034(r4, r1);
-        gSprites[gUnknown_02024BE0[r4]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r4]].invisible = FALSE;
     }
     r4 ^= 2;
     if (r5 > 1 && b_side_obj__get_some_boolean(r4))
     {
-        r0 = battle_get_per_side_status(r4);
+        r0 = GetBankIdentity(r4);
         r0 += 0xFF;
         if (r0 <= 1 || IsContest() != 0)
             r1 = 0;
         else
             r1 = 1;
         sub_8076034(r4, r1);
-        gSprites[gUnknown_02024BE0[r4]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r4]].invisible = FALSE;
     }
     gBattleAnimScriptPtr++;
 }
@@ -1208,9 +1199,9 @@ static void ScriptCmd_clearmonbg_23(void)
     else
         r6 = gBattleAnimEnemyMonIndex;
     if (b_side_obj__get_some_boolean(r6))
-        gSprites[gUnknown_02024BE0[r6]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r6]].invisible = FALSE;
     if (r5 > 1 && b_side_obj__get_some_boolean(r6 ^ 2))
-        gSprites[gUnknown_02024BE0[r6 ^ 2]].invisible = FALSE;
+        gSprites[gObjectBankIDs[r6 ^ 2]].invisible = FALSE;
     else
         r5 = 0;
     taskId = CreateTask(sub_80769A4, 5);
@@ -1229,7 +1220,7 @@ static void sub_80769A4(u8 taskId)
     if (gTasks[taskId].data[1] != 1)
     {
         r4 = gTasks[taskId].data[2];
-        r0 = battle_get_per_side_status(r4);
+        r0 = GetBankIdentity(r4);
         r0 += 0xFF;
         if (r0 <= 1 || IsContest() != 0)
             r5 = 0;
@@ -1378,7 +1369,7 @@ static void ScriptCmd_fadetobg_25(void)
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     if (IsContest() != 0)
         gTasks[taskId].data[0] = r6;
-    else if (battle_side_get_owner(gBattleAnimEnemyMonIndex) == 0)
+    else if (GetBankSide(gBattleAnimEnemyMonIndex) == 0)
         gTasks[taskId].data[0] = r7;
     else
         gTasks[taskId].data[0] = r8;
@@ -1502,7 +1493,7 @@ s8 sub_8076F98(s8 a)
 {
     if (!IsContest() && (EWRAM_17810[gBattleAnimPlayerMonIndex].unk0 & 0x10))
     {
-        a = battle_side_get_owner(gBattleAnimPlayerMonIndex) ? 0xC0 : 0x3F;
+        a = GetBankSide(gBattleAnimPlayerMonIndex) ? 0xC0 : 0x3F;
     }
     //_08076FDC
     else
@@ -1521,9 +1512,9 @@ s8 sub_8076F98(s8 a)
         //_08077004
         else
         {
-            if (battle_side_get_owner(gBattleAnimPlayerMonIndex) == 0)
+            if (GetBankSide(gBattleAnimPlayerMonIndex) == 0)
             {
-                if (battle_side_get_owner(gBattleAnimEnemyMonIndex) == 0)
+                if (GetBankSide(gBattleAnimEnemyMonIndex) == 0)
             }
             //_08077042
             else
@@ -1560,7 +1551,7 @@ s8 sub_8076F98(s8 a)
     cmp r0, 0\n\
     beq _08076FDC\n\
     adds r0, r2, 0\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     movs r4, 0xC0\n\
     cmp r0, 0\n\
@@ -1592,13 +1583,13 @@ _08077000: .4byte gBattleAnimEnemyMonIndex\n\
 _08077004:\n\
     ldr r0, _0807702C @ =gBattleAnimPlayerMonIndex\n\
     ldrb r0, [r0]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _08077042\n\
     ldr r0, _08077030 @ =gBattleAnimEnemyMonIndex\n\
     ldrb r0, [r0]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0807706E\n\
@@ -1622,7 +1613,7 @@ _08077034:\n\
 _08077042:\n\
     ldr r0, _08077064 @ =gBattleAnimEnemyMonIndex\n\
     ldrb r0, [r0]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -1670,14 +1661,14 @@ s8 sub_8077094(s8 a)
 {
     if (!IsContest() && (EWRAM_17810[gBattleAnimPlayerMonIndex].unk0 & 0x10))
     {
-        if (battle_side_get_owner(gBattleAnimPlayerMonIndex) != 0)
+        if (GetBankSide(gBattleAnimPlayerMonIndex) != 0)
             a = 0x3F;
         else
             a = 0xC0;
     }
     else
     {
-        if (battle_side_get_owner(gBattleAnimPlayerMonIndex) != 0 || IsContest() != 0)
+        if (GetBankSide(gBattleAnimPlayerMonIndex) != 0 || IsContest() != 0)
             a = -a;
     }
     return a;
@@ -2138,7 +2129,7 @@ static void ScriptCmd_monbgprio_28(void)
         r0 = gBattleAnimEnemyMonIndex;
     else
         r0 = gBattleAnimPlayerMonIndex;
-    r4 = battle_get_per_side_status(r0);
+    r4 = GetBankIdentity(r0);
     if (!IsContest() && (r4 == 0 || r4 == 3))
     {
         REG_BG1CNT_BITFIELD.priority = 1;
@@ -2164,13 +2155,13 @@ static void ScriptCmd_monbgprio_2A(void)
 
     r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
-    if (battle_side_get_owner(gBattleAnimPlayerMonIndex) != battle_side_get_owner(gBattleAnimEnemyMonIndex))
+    if (GetBankSide(gBattleAnimPlayerMonIndex) != GetBankSide(gBattleAnimEnemyMonIndex))
     {
         if (r6 != 0)
             r0 = gBattleAnimEnemyMonIndex;
         else
             r0 = gBattleAnimPlayerMonIndex;
-        r4 = battle_get_per_side_status(r0);
+        r4 = GetBankIdentity(r0);
         if (!IsContest() && (r4 == 0 || r4 == 3))
         {
             REG_BG1CNT_BITFIELD.priority = 1;
@@ -2216,16 +2207,16 @@ static void ScriptCmd_doublebattle_2D(void)
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
+     && GetBankSide(gBattleAnimPlayerMonIndex) == GetBankSide(gBattleAnimEnemyMonIndex))
     {
         if (r7 == 0)
         {
-            r4 = battle_get_per_side_status_permutated(gBattleAnimPlayerMonIndex);
+            r4 = GetBankIdentity_permutated(gBattleAnimPlayerMonIndex);
             spriteId = obj_id_for_side_relative_to_move(0);
         }
         else
         {
-            r4 = battle_get_per_side_status_permutated(gBattleAnimEnemyMonIndex);
+            r4 = GetBankIdentity_permutated(gBattleAnimEnemyMonIndex);
             spriteId = obj_id_for_side_relative_to_move(1);
         }
         if (spriteId != 0xFF)
@@ -2250,16 +2241,16 @@ static void ScriptCmd_doublebattle_2E(void)
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
     gBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && battle_side_get_owner(gBattleAnimPlayerMonIndex) == battle_side_get_owner(gBattleAnimEnemyMonIndex))
+     && GetBankSide(gBattleAnimPlayerMonIndex) == GetBankSide(gBattleAnimEnemyMonIndex))
     {
         if (r7 == 0)
         {
-            r4 = battle_get_per_side_status_permutated(gBattleAnimPlayerMonIndex);
+            r4 = GetBankIdentity_permutated(gBattleAnimPlayerMonIndex);
             spriteId = obj_id_for_side_relative_to_move(0);
         }
         else
         {
-            r4 = battle_get_per_side_status_permutated(gBattleAnimEnemyMonIndex);
+            r4 = GetBankIdentity_permutated(gBattleAnimEnemyMonIndex);
             spriteId = obj_id_for_side_relative_to_move(1);
         }
         if (spriteId != 0xFF && r4 == 2)

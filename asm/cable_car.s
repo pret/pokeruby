@@ -742,7 +742,7 @@ _081237E0:
 	str r3, [r2, 0x8]
 	ldr r0, [r2, 0x8]
 	bl warp_in
-	ldr r0, _08123870 @ =gUnknown_0300485C
+	ldr r0, _08123870 @ =gFieldCallback
 	str r4, [r0]
 	ldr r0, _08123874 @ =CB2_LoadMap
 	bl SetMainCallback2
@@ -760,7 +760,7 @@ _08123860: .4byte 0x040000d4
 _08123864: .4byte 0x85000400
 _08123868: .4byte gUnknown_02039274
 _0812386C: .4byte 0x81000800
-_08123870: .4byte gUnknown_0300485C
+_08123870: .4byte gFieldCallback
 _08123874: .4byte CB2_LoadMap
 	thumb_func_end sub_8123740
 

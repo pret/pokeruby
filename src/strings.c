@@ -1,4 +1,5 @@
 #include "global.h"
+#include "strings.h"
 
 #if ENGLISH
 // placeholder strings
@@ -923,7 +924,6 @@ const u8 gSystemText_NoSaveFileNoTime[] = _("There is no save file, so the time\
 const u8 gSystemText_ClockAdjustmentUsable[] = _("The in-game clock adjustment system\nis now useable.");
 const u8 gSystemText_Saving[] = _("SAVING...\nDON’T TURN OFF THE POWER.");
 #elif GERMAN
-#include "global.h"
 
 // placeholder strings
 const u8 gExpandedPlaceholder_Empty[] = _("");
@@ -1149,7 +1149,7 @@ const u8 gOtherText_OkayToThrowAwayPrompt[] = _("Willst du wirklich\n{STR_VAR_2}
 const u8 gOtherText_DadsAdvice[] = _("VATI sagt immer...\n{PLAYER}, dies ist weder der rechte\lOrt noch der rechte Zeitpunkt dafür!{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_CantGetOffBike[] = _("Du kannst hier nicht vom RAD steigen.{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_ItemfinderResponding[] = _("Oh!\nDas Gerät zeigt etwas an!\pHier muss ein Item vergraben sein!{PAUSE_UNTIL_PRESS}");
-const u8     gOtherText_ItemfinderItemUnderfoot[] = _("Das Gerät macht direkt unter\ndeinen Füßen etwas aus!{PAUSE_UNTIL_PRESS}");
+const u8 gOtherText_ItemfinderItemUnderfoot[] = _("Das Gerät macht direkt unter\ndeinen Füßen etwas aus!{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_NoResponse[] = _("... ... ... ... Nichts!\nKeine Anzeige.{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_Coins3[] = _("Deine MÜNZEN:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 const u8 gOtherText_BootedTM[] = _("Eine TM wurde aktiviert.");

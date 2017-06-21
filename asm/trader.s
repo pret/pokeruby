@@ -290,7 +290,7 @@ _08109B54:
 	ldr r0, _08109B78 @ =gSpecialVar_0x8004
 	strh r1, [r0]
 _08109B58:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xC
@@ -509,7 +509,7 @@ sub_8109D04: @ 8109D04
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -581,7 +581,7 @@ sub_8109DAC: @ 8109DAC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D

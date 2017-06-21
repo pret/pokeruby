@@ -6,13 +6,13 @@
 
 	.text
 	
-	thumb_func_start dp01t_00_4_getattr
-dp01t_00_4_getattr: @ 803807C
+	thumb_func_start LinkOpponentHandleGetAttributes
+LinkOpponentHandleGetAttributes: @ 803807C
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
-	ldr r1, _080380A8 @ =gUnknown_02023A60
-	ldr r0, _080380AC @ =gUnknown_02024A60
+	ldr r1, _080380A8 @ =gBattleBufferA
+	ldr r0, _080380AC @ =gActiveBank
 	ldrb r2, [r0]
 	lsls r0, r2, 9
 	adds r1, 0x2
@@ -20,7 +20,7 @@ dp01t_00_4_getattr: @ 803807C
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080380B4
-	ldr r0, _080380B0 @ =gUnknown_02024A6A
+	ldr r0, _080380B0 @ =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
@@ -29,9 +29,9 @@ dp01t_00_4_getattr: @ 803807C
 	adds r6, r0, 0
 	b _080380D6
 	.align 2, 0
-_080380A8: .4byte gUnknown_02023A60
-_080380AC: .4byte gUnknown_02024A60
-_080380B0: .4byte gUnknown_02024A6A
+_080380A8: .4byte gBattleBufferA
+_080380AC: .4byte gActiveBank
+_080380B0: .4byte gBattlePartyID
 _080380B4:
 	ldrb r4, [r1]
 	movs r5, 0
@@ -62,7 +62,7 @@ _080380D6:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_4_getattr
+	thumb_func_end LinkOpponentHandleGetAttributes
 
 	thumb_func_start dp01_getattr_by_ch1_for_player_pokemon__
 dp01_getattr_by_ch1_for_player_pokemon__: @ 80380F0
@@ -76,8 +76,8 @@ dp01_getattr_by_ch1_for_player_pokemon__: @ 80380F0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0
-	ldr r2, _08038124 @ =gUnknown_02023A60
-	ldr r3, _08038128 @ =gUnknown_02024A60
+	ldr r2, _08038124 @ =gBattleBufferA
+	ldr r3, _08038128 @ =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
 	adds r1, r2, 0x1
@@ -93,8 +93,8 @@ _0803811A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08038124: .4byte gUnknown_02023A60
-_08038128: .4byte gUnknown_02024A60
+_08038124: .4byte gBattleBufferA
+_08038128: .4byte gActiveBank
 _0803812C: .4byte _08038130
 	.align 2, 0
 _08038130:
@@ -1009,8 +1009,8 @@ sub_803889C: @ 803889C
 	thumb_func_start sub_80388A8
 sub_80388A8: @ 80388A8
 	push {r4,r5,lr}
-	ldr r1, _080388CC @ =gUnknown_02023A60
-	ldr r0, _080388D0 @ =gUnknown_02024A60
+	ldr r1, _080388CC @ =gBattleBufferA
+	ldr r0, _080388D0 @ =gActiveBank
 	ldrb r2, [r0]
 	lsls r0, r2, 9
 	adds r1, 0x2
@@ -1018,16 +1018,16 @@ sub_80388A8: @ 80388A8
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080388D8
-	ldr r0, _080388D4 @ =gUnknown_02024A6A
+	ldr r0, _080388D4 @ =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
 	bl sub_8038900
 	b _080388F6
 	.align 2, 0
-_080388CC: .4byte gUnknown_02023A60
-_080388D0: .4byte gUnknown_02024A60
-_080388D4: .4byte gUnknown_02024A6A
+_080388CC: .4byte gBattleBufferA
+_080388D0: .4byte gActiveBank
+_080388D4: .4byte gBattlePartyID
 _080388D8:
 	ldrb r4, [r1]
 	movs r5, 0
@@ -1062,7 +1062,7 @@ sub_8038900: @ 8038900
 	sub sp, 0x38
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r3, _08038938 @ =gUnknown_02024A60
+	ldr r3, _08038938 @ =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
 	ldr r2, _0803893C @ =gUnknown_02023A63
@@ -1083,7 +1083,7 @@ _0803892E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08038938: .4byte gUnknown_02024A60
+_08038938: .4byte gActiveBank
 _0803893C: .4byte gUnknown_02023A63
 _08038940: .4byte _08038944
 	.align 2, 0
@@ -1402,7 +1402,7 @@ _08038C58:
 	muls r0, r5
 	ldr r1, _08038C70 @ =gEnemyParty
 	adds r0, r1
-	ldr r3, _08038C74 @ =gUnknown_02023A60
+	ldr r3, _08038C74 @ =gBattleBufferA
 	ldrb r2, [r6]
 	lsls r2, 9
 	adds r1, r3, 0x1
@@ -1412,7 +1412,7 @@ _08038C58:
 	b _08038CF6
 	.align 2, 0
 _08038C70: .4byte gEnemyParty
-_08038C74: .4byte gUnknown_02023A60
+_08038C74: .4byte gBattleBufferA
 _08038C78:
 	movs r0, 0x64
 	adds r4, r5, 0
@@ -1466,7 +1466,7 @@ _08038CE0:
 	muls r0, r5
 	ldr r1, _08038D00 @ =gEnemyParty
 	adds r0, r1
-	ldr r3, _08038D04 @ =gUnknown_02023A60
+	ldr r3, _08038D04 @ =gBattleBufferA
 	ldrb r2, [r6]
 	lsls r2, 9
 	adds r1, r3, 0x1
@@ -1480,7 +1480,7 @@ _08038CF6:
 	b _0803920C
 	.align 2, 0
 _08038D00: .4byte gEnemyParty
-_08038D04: .4byte gUnknown_02023A60
+_08038D04: .4byte gBattleBufferA
 _08038D08:
 	movs r0, 0x64
 	muls r0, r5
@@ -2095,8 +2095,8 @@ _0803921C: .4byte gEnemyParty
 	thumb_func_start sub_8039220
 sub_8039220: @ 8039220
 	push {r4-r7,lr}
-	ldr r1, _08039284 @ =gUnknown_02024A6A
-	ldr r7, _08039288 @ =gUnknown_02024A60
+	ldr r1, _08039284 @ =gBattlePartyID
+	ldr r7, _08039288 @ =gActiveBank
 	ldrb r2, [r7]
 	lsls r0, r2, 1
 	adds r0, r1
@@ -2104,7 +2104,7 @@ sub_8039220: @ 8039220
 	movs r0, 0x64
 	adds r3, r1, 0
 	muls r3, r0
-	ldr r4, _0803928C @ =gUnknown_02023A60
+	ldr r4, _0803928C @ =gBattleBufferA
 	lsls r2, 9
 	adds r0, r4, 0x1
 	adds r0, r2, r0
@@ -2145,9 +2145,9 @@ _08039278:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039284: .4byte gUnknown_02024A6A
-_08039288: .4byte gUnknown_02024A60
-_0803928C: .4byte gUnknown_02023A60
+_08039284: .4byte gBattlePartyID
+_08039288: .4byte gActiveBank
+_0803928C: .4byte gBattleBufferA
 _08039290: .4byte gEnemyParty
 	thumb_func_end sub_8039220
 
@@ -2158,8 +2158,8 @@ sub_8039294: @ 8039294
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r7, _080393BC @ =gUnknown_02024A6A
-	ldr r6, _080393C0 @ =gUnknown_02024A60
+	ldr r7, _080393BC @ =gBattlePartyID
+	ldr r6, _080393C0 @ =gActiveBank
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r7
@@ -2187,7 +2187,7 @@ sub_8039294: @ 8039294
 	add r0, r9
 	bl sub_8031794
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2215,7 +2215,7 @@ sub_8039294: @ 8039294
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r4, _080393CC @ =gUnknown_02024BE0
+	ldr r4, _080393CC @ =gObjectBankIDs
 	ldrb r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -2276,7 +2276,7 @@ sub_8039294: @ 8039294
 	lsrs r1, 16
 	adds r0, r4, 0
 	bl sub_8032984
-	ldr r1, _080393DC @ =gUnknown_03004330
+	ldr r1, _080393DC @ =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -2290,27 +2290,27 @@ sub_8039294: @ 8039294
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080393BC: .4byte gUnknown_02024A6A
-_080393C0: .4byte gUnknown_02024A60
+_080393BC: .4byte gBattlePartyID
+_080393C0: .4byte gActiveBank
 _080393C4: .4byte gEnemyParty
 _080393C8: .4byte gUnknown_02024E8C
-_080393CC: .4byte gUnknown_02024BE0
+_080393CC: .4byte gObjectBankIDs
 _080393D0: .4byte gSprites
 _080393D4: .4byte 0x0000ff10
 _080393D8: .4byte gBattleMonForms
-_080393DC: .4byte gUnknown_03004330
+_080393DC: .4byte gBattleBankFunc
 _080393E0: .4byte sub_8037A74
 	thumb_func_end sub_8039294
 
 	thumb_func_start sub_80393E4
 sub_80393E4: @ 80393E4
 	push {r4,lr}
-	ldr r1, _0803941C @ =gUnknown_02024A6A
-	ldr r4, _08039420 @ =gUnknown_02024A60
+	ldr r1, _0803941C @ =gBattlePartyID
+	ldr r4, _08039420 @ =gActiveBank
 	ldrb r0, [r4]
 	lsls r2, r0, 1
 	adds r2, r1
-	ldr r3, _08039424 @ =gUnknown_02023A60
+	ldr r3, _08039424 @ =gBattleBufferA
 	lsls r0, 9
 	adds r1, r3, 0x1
 	adds r0, r1
@@ -2322,7 +2322,7 @@ sub_80393E4: @ 80393E4
 	adds r1, r3
 	ldrb r1, [r1]
 	bl sub_8039430
-	ldr r1, _08039428 @ =gUnknown_03004330
+	ldr r1, _08039428 @ =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -2332,10 +2332,10 @@ sub_80393E4: @ 80393E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803941C: .4byte gUnknown_02024A6A
-_08039420: .4byte gUnknown_02024A60
-_08039424: .4byte gUnknown_02023A60
-_08039428: .4byte gUnknown_03004330
+_0803941C: .4byte gBattlePartyID
+_08039420: .4byte gActiveBank
+_08039424: .4byte gBattleBufferA
+_08039428: .4byte gBattleBankFunc
 _0803942C: .4byte sub_8037E30
 	thumb_func_end sub_80393E4
 
@@ -2353,10 +2353,10 @@ sub_8039430: @ 8039430
 	lsrs r1, 24
 	adds r0, r6, 0
 	bl sub_8032AA8
-	ldr r0, _0803958C @ =gUnknown_02024A6A
+	ldr r0, _0803958C @ =gBattlePartyID
 	lsls r4, r6, 1
 	adds r4, r0
-	ldr r0, _08039590 @ =gUnknown_02023A60
+	ldr r0, _08039590 @ =gBattleBufferA
 	lsls r1, r6, 9
 	adds r0, 0x1
 	adds r1, r0
@@ -2391,7 +2391,7 @@ sub_8039430: @ 8039430
 	adds r1, r6, 0
 	bl sub_8031794
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2419,7 +2419,7 @@ sub_8039430: @ 8039430
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r4, _080395A4 @ =gUnknown_02024BE0
+	ldr r4, _080395A4 @ =gObjectBankIDs
 	adds r4, r6, r4
 	strb r0, [r4]
 	ldr r5, _080395A8 @ =gSprites
@@ -2503,13 +2503,13 @@ sub_8039430: @ 8039430
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803958C: .4byte gUnknown_02024A6A
-_08039590: .4byte gUnknown_02023A60
+_0803958C: .4byte gBattlePartyID
+_08039590: .4byte gBattleBufferA
 _08039594: .4byte gEnemyParty
 _08039598: .4byte sub_80312F0
 _0803959C: .4byte gUnknown_0300434C
 _080395A0: .4byte gUnknown_02024E8C
-_080395A4: .4byte gUnknown_02024BE0
+_080395A4: .4byte gObjectBankIDs
 _080395A8: .4byte gSprites
 _080395AC: .4byte gBattleMonForms
 _080395B0: .4byte SpriteCallbackDummy
@@ -2518,8 +2518,8 @@ _080395B0: .4byte SpriteCallbackDummy
 	thumb_func_start sub_80395B4
 sub_80395B4: @ 80395B4
 	push {r4-r6,lr}
-	ldr r1, _080395E4 @ =gUnknown_02023A60
-	ldr r6, _080395E8 @ =gUnknown_02024A60
+	ldr r1, _080395E4 @ =gBattleBufferA
+	ldr r6, _080395E8 @ =gActiveBank
 	ldrb r2, [r6]
 	lsls r0, r2, 9
 	adds r1, 0x1
@@ -2533,7 +2533,7 @@ sub_80395B4: @ 80395B4
 	ldr r1, _080395EC @ =0x02017810
 	adds r0, r1
 	strb r3, [r0, 0x4]
-	ldr r1, _080395F0 @ =gUnknown_03004330
+	ldr r1, _080395F0 @ =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -2541,13 +2541,13 @@ sub_80395B4: @ 80395B4
 	str r1, [r0]
 	b _08039634
 	.align 2, 0
-_080395E4: .4byte gUnknown_02023A60
-_080395E8: .4byte gUnknown_02024A60
+_080395E4: .4byte gBattleBufferA
+_080395E8: .4byte gActiveBank
 _080395EC: .4byte 0x02017810
-_080395F0: .4byte gUnknown_03004330
+_080395F0: .4byte gBattleBankFunc
 _080395F4: .4byte sub_8039648
 _080395F8:
-	ldr r5, _0803963C @ =gUnknown_02024BE0
+	ldr r5, _0803963C @ =gObjectBankIDs
 	adds r0, r2, r5
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2566,7 +2566,7 @@ _080395F8:
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_8032A08
-	ldr r1, _08039644 @ =gUnknown_03004340
+	ldr r1, _08039644 @ =gHealthboxIDs
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2577,15 +2577,15 @@ _08039634:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803963C: .4byte gUnknown_02024BE0
+_0803963C: .4byte gObjectBankIDs
 _08039640: .4byte gSprites
-_08039644: .4byte gUnknown_03004340
+_08039644: .4byte gHealthboxIDs
 	thumb_func_end sub_80395B4
 
 	thumb_func_start sub_8039648
 sub_8039648: @ 8039648
 	push {r4,r5,lr}
-	ldr r5, _08039664 @ =gUnknown_02024A60
+	ldr r5, _08039664 @ =gActiveBank
 	ldrb r2, [r5]
 	lsls r0, r2, 1
 	adds r0, r2
@@ -2599,7 +2599,7 @@ sub_8039648: @ 8039648
 	beq _08039698
 	b _080396C0
 	.align 2, 0
-_08039664: .4byte gUnknown_02024A60
+_08039664: .4byte gActiveBank
 _08039668: .4byte 0x02017810
 _0803966C:
 	lsls r0, r2, 2
@@ -2638,7 +2638,7 @@ _08039698:
 	adds r1, r2, 0
 	movs r3, 0x2
 	bl move_anim_start_t4
-	ldr r1, _080396C8 @ =gUnknown_03004330
+	ldr r1, _080396C8 @ =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -2649,7 +2649,7 @@ _080396C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080396C8: .4byte gUnknown_03004330
+_080396C8: .4byte gBattleBankFunc
 _080396CC: .4byte sub_8037BBC
 	thumb_func_end sub_8039648
 
@@ -2665,9 +2665,9 @@ sub_80396D0: @ 80396D0
 	ands r0, r1
 	cmp r0, 0
 	beq _08039714
-	ldr r6, _08039708 @ =gUnknown_02024A60
+	ldr r6, _08039708 @ =gActiveBank
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r5, 0x10
@@ -2681,7 +2681,7 @@ _080396F8:
 	b _08039724
 	.align 2, 0
 _08039704: .4byte gBattleTypeFlags
-_08039708: .4byte gUnknown_02024A60
+_08039708: .4byte gActiveBank
 _0803970C: .4byte 0x0000fff0
 _08039710: .4byte gLinkPlayers
 _08039714:
@@ -2699,14 +2699,14 @@ _08039724:
 	adds r1, r4
 	ldrb r0, [r1, 0x13]
 	mov r9, r0
-	ldr r0, _08039870 @ =gUnknown_02024A60
+	ldr r0, _08039870 @ =gActiveBank
 	mov r8, r0
 	ldrb r1, [r0]
 	mov r0, r9
 	bl sub_8031A6C
 	mov r1, r8
 	ldrb r0, [r1]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2740,7 +2740,7 @@ _08039724:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r5, _0803987C @ =gUnknown_02024BE0
+	ldr r5, _0803987C @ =gObjectBankIDs
 	mov r2, r8
 	ldrb r1, [r2]
 	adds r1, r5
@@ -2836,7 +2836,7 @@ _08039724:
 	adds r0, r4
 	ldr r1, _08039898 @ =sub_80313A0
 	str r1, [r0]
-	ldr r1, _0803989C @ =gUnknown_03004330
+	ldr r1, _0803989C @ =gBattleBankFunc
 	mov r2, r8
 	ldrb r0, [r2]
 	lsls r0, 2
@@ -2851,10 +2851,10 @@ _08039724:
 	bx r0
 	.align 2, 0
 _0803986C: .4byte gLinkPlayers
-_08039870: .4byte gUnknown_02024A60
+_08039870: .4byte gActiveBank
 _08039874: .4byte gUnknown_02024E8C
 _08039878: .4byte gTrainerFrontPicCoords
-_0803987C: .4byte gUnknown_02024BE0
+_0803987C: .4byte gObjectBankIDs
 _08039880: .4byte gSprites
 _08039884: .4byte 0x0000ff10
 _08039888: .4byte gTrainerFrontPicPaletteTable
@@ -2862,7 +2862,7 @@ _0803988C: .4byte gTrainerFrontPicTable
 _08039890: .4byte 0x000003ff
 _08039894: .4byte 0xfffffc00
 _08039898: .4byte sub_80313A0
-_0803989C: .4byte gUnknown_03004330
+_0803989C: .4byte gBattleBankFunc
 _080398A0: .4byte sub_803757C
 	thumb_func_end sub_80396D0
 
@@ -2877,8 +2877,8 @@ sub_80398A4: @ 80398A4
 	thumb_func_start sub_80398B0
 sub_80398B0: @ 80398B0
 	push {r4-r6,lr}
-	ldr r6, _08039940 @ =gUnknown_02024BE0
-	ldr r4, _08039944 @ =gUnknown_02024A60
+	ldr r6, _08039940 @ =gObjectBankIDs
+	ldr r4, _08039944 @ =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -2936,7 +2936,7 @@ sub_80398B0: @ 80398B0
 	adds r0, r5
 	ldr r1, _08039950 @ =SpriteCallbackDummy
 	bl oamt_set_x3A_32
-	ldr r1, _08039954 @ =gUnknown_03004330
+	ldr r1, _08039954 @ =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -2946,19 +2946,19 @@ sub_80398B0: @ 80398B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039940: .4byte gUnknown_02024BE0
-_08039944: .4byte gUnknown_02024A60
+_08039940: .4byte gObjectBankIDs
+_08039944: .4byte gActiveBank
 _08039948: .4byte gSprites
 _0803994C: .4byte sub_8078B34
 _08039950: .4byte SpriteCallbackDummy
-_08039954: .4byte gUnknown_03004330
+_08039954: .4byte gBattleBankFunc
 _08039958: .4byte sub_80375B4
 	thumb_func_end sub_80398B0
 
 	thumb_func_start sub_803995C
 sub_803995C: @ 803995C
 	push {r4,r5,lr}
-	ldr r5, _080399A0 @ =gUnknown_02024A60
+	ldr r5, _080399A0 @ =gActiveBank
 	ldrb r2, [r5]
 	lsls r0, r2, 1
 	adds r0, r2
@@ -2992,7 +2992,7 @@ _0803998E:
 	strb r0, [r1, 0x4]
 	b _080399E4
 	.align 2, 0
-_080399A0: .4byte gUnknown_02024A60
+_080399A0: .4byte gActiveBank
 _080399A4: .4byte 0x02017810
 _080399A8:
 	ldrb r1, [r3]
@@ -3007,7 +3007,7 @@ _080399A8:
 	movs r1, 0x3F
 	bl PlaySE12WithPanning
 	ldr r2, _080399EC @ =gSprites
-	ldr r1, _080399F0 @ =gUnknown_02024BE0
+	ldr r1, _080399F0 @ =gObjectBankIDs
 	ldrb r0, [r5]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3018,7 +3018,7 @@ _080399A8:
 	adds r0, r2
 	ldr r1, _080399F4 @ =sub_8010384
 	str r1, [r0]
-	ldr r1, _080399F8 @ =gUnknown_03004330
+	ldr r1, _080399F8 @ =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -3030,9 +3030,9 @@ _080399E4:
 	bx r0
 	.align 2, 0
 _080399EC: .4byte gSprites
-_080399F0: .4byte gUnknown_02024BE0
+_080399F0: .4byte gObjectBankIDs
 _080399F4: .4byte sub_8010384
-_080399F8: .4byte gUnknown_03004330
+_080399F8: .4byte gBattleBankFunc
 _080399FC: .4byte sub_8037B78
 	thumb_func_end sub_803995C
 
@@ -3071,7 +3071,7 @@ sub_8039A24: @ 8039A24
 	thumb_func_start sub_8039A30
 sub_8039A30: @ 8039A30
 	push {r4-r6,lr}
-	ldr r6, _08039B14 @ =gUnknown_02024A60
+	ldr r6, _08039B14 @ =gActiveBank
 	ldrb r0, [r6]
 	bl mplay_80342A4
 	lsls r0, 24
@@ -3079,7 +3079,7 @@ sub_8039A30: @ 8039A30
 	beq _08039A42
 	b _08039B52
 _08039A42:
-	ldr r0, _08039B18 @ =gUnknown_02023A60
+	ldr r0, _08039B18 @ =gBattleBufferA
 	mov r12, r0
 	ldrb r2, [r6]
 	lsls r2, 9
@@ -3098,7 +3098,7 @@ _08039A42:
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, _08039B20 @ =gUnknown_0202F7BC
+	ldr r4, _08039B20 @ =gMovePowerMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -3112,7 +3112,7 @@ _08039A42:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, _08039B24 @ =gUnknown_0202F7B8
+	ldr r4, _08039B24 @ =gMoveDmgMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -3138,7 +3138,7 @@ _08039A42:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, _08039B28 @ =gUnknown_0202F7BE
+	ldr r3, _08039B28 @ =gHappinessMoveAnim
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -3146,7 +3146,7 @@ _08039A42:
 	adds r1, r2
 	ldrb r1, [r1]
 	strb r1, [r3]
-	ldr r4, _08039B2C @ =gUnknown_0202F7C0
+	ldr r4, _08039B2C @ =gWeatherMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -3160,14 +3160,14 @@ _08039A42:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, _08039B30 @ =gUnknown_0202F7B4
+	ldr r3, _08039B30 @ =gDisableStructMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, _08039B34 @ =gUnknown_02024E70
+	ldr r3, _08039B34 @ =gPID_perBank
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
@@ -3182,15 +3182,15 @@ _08039A42:
 	bl dp01_tbl4_exec_completed
 	b _08039B52
 	.align 2, 0
-_08039B14: .4byte gUnknown_02024A60
-_08039B18: .4byte gUnknown_02023A60
+_08039B14: .4byte gActiveBank
+_08039B18: .4byte gBattleBufferA
 _08039B1C: .4byte gUnknown_0202F7C4
-_08039B20: .4byte gUnknown_0202F7BC
-_08039B24: .4byte gUnknown_0202F7B8
-_08039B28: .4byte gUnknown_0202F7BE
-_08039B2C: .4byte gUnknown_0202F7C0
-_08039B30: .4byte gUnknown_0202F7B4
-_08039B34: .4byte gUnknown_02024E70
+_08039B20: .4byte gMovePowerMoveAnim
+_08039B24: .4byte gMoveDmgMoveAnim
+_08039B28: .4byte gHappinessMoveAnim
+_08039B2C: .4byte gWeatherMoveAnim
+_08039B30: .4byte gDisableStructMoveAnim
+_08039B34: .4byte gPID_perBank
 _08039B38:
 	ldrb r1, [r6]
 	lsls r0, r1, 1
@@ -3199,7 +3199,7 @@ _08039B38:
 	ldr r1, _08039B58 @ =0x02017810
 	adds r0, r1
 	strb r2, [r0, 0x4]
-	ldr r1, _08039B5C @ =gUnknown_03004330
+	ldr r1, _08039B5C @ =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -3211,7 +3211,7 @@ _08039B52:
 	bx r0
 	.align 2, 0
 _08039B58: .4byte 0x02017810
-_08039B5C: .4byte gUnknown_03004330
+_08039B5C: .4byte gBattleBankFunc
 _08039B60: .4byte sub_8039B64
 	thumb_func_end sub_8039A30
 
@@ -3221,8 +3221,8 @@ sub_8039B64: @ 8039B64
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r2, _08039BA8 @ =gUnknown_02023A60
-	ldr r5, _08039BAC @ =gUnknown_02024A60
+	ldr r2, _08039BA8 @ =gBattleBufferA
+	ldr r5, _08039BAC @ =gActiveBank
 	ldrb r3, [r5]
 	lsls r1, r3, 9
 	adds r0, r2, 0x1
@@ -3252,8 +3252,8 @@ sub_8039B64: @ 8039B64
 	beq _08039BBE
 	b _08039CBC
 	.align 2, 0
-_08039BA8: .4byte gUnknown_02023A60
-_08039BAC: .4byte gUnknown_02024A60
+_08039BA8: .4byte gBattleBufferA
+_08039BAC: .4byte gActiveBank
 _08039BB0: .4byte 0x02017810
 _08039BB4:
 	cmp r2, 0x2
@@ -3341,7 +3341,7 @@ _08039C18:
 	ands r1, r2
 	strb r1, [r0]
 _08039C60:
-	ldr r0, _08039C7C @ =gUnknown_02024A60
+	ldr r0, _08039C7C @ =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -3354,7 +3354,7 @@ _08039C60:
 	.align 2, 0
 _08039C74: .4byte gAnimScriptCallback
 _08039C78: .4byte gAnimScriptActive
-_08039C7C: .4byte gUnknown_02024A60
+_08039C7C: .4byte gActiveBank
 _08039C80: .4byte 0x02017810
 _08039C84:
 	ldrb r1, [r0]
@@ -3400,21 +3400,21 @@ sub_8039CC8: @ 8039CC8
 	strh r1, [r0]
 	ldr r0, _08039D10 @ =gUnknown_030042A0
 	strh r1, [r0]
-	ldr r4, _08039D14 @ =gUnknown_02024A60
+	ldr r4, _08039D14 @ =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
 	ldr r1, _08039D18 @ =gUnknown_02023A62
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_8120AA8
+	bl BufferStringBattle
 	ldr r0, _08039D1C @ =gUnknown_03004210
-	ldr r1, _08039D20 @ =gUnknown_020238CC
+	ldr r1, _08039D20 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
 	movs r3, 0x2
 	bl sub_8002EB0
-	ldr r1, _08039D24 @ =gUnknown_03004330
+	ldr r1, _08039D24 @ =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -3427,11 +3427,11 @@ sub_8039CC8: @ 8039CC8
 	.align 2, 0
 _08039D0C: .4byte gUnknown_030042A4
 _08039D10: .4byte gUnknown_030042A0
-_08039D14: .4byte gUnknown_02024A60
+_08039D14: .4byte gActiveBank
 _08039D18: .4byte gUnknown_02023A62
 _08039D1C: .4byte gUnknown_03004210
-_08039D20: .4byte gUnknown_020238CC
-_08039D24: .4byte gUnknown_03004330
+_08039D20: .4byte gDisplayedStringBattle
+_08039D24: .4byte gBattleBankFunc
 _08039D28: .4byte sub_8037C2C
 	thumb_func_end sub_8039CC8
 
@@ -3500,8 +3500,8 @@ sub_8039D80: @ 8039D80
 	sub sp, 0x4
 	movs r0, 0
 	bl load_gfxc_health_bar
-	ldr r3, _08039DF8 @ =gUnknown_02023A60
-	ldr r0, _08039DFC @ =gUnknown_02024A60
+	ldr r3, _08039DF8 @ =gBattleBufferA
+	ldr r0, _08039DFC @ =gActiveBank
 	mov r9, r0
 	ldrb r4, [r0]
 	lsls r2, r4, 9
@@ -3518,7 +3518,7 @@ sub_8039D80: @ 8039D80
 	ldr r0, _08039E00 @ =0x00007fff
 	cmp r7, r0
 	beq _08039E10
-	ldr r6, _08039E04 @ =gUnknown_02024A6A
+	ldr r6, _08039E04 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r6
 	ldrh r0, [r0]
@@ -3541,7 +3541,7 @@ sub_8039D80: @ 8039D80
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, _08039E0C @ =gUnknown_03004340
+	ldr r1, _08039E0C @ =gHealthboxIDs
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -3549,14 +3549,14 @@ sub_8039D80: @ 8039D80
 	bl sub_8043D84
 	b _08039E3A
 	.align 2, 0
-_08039DF8: .4byte gUnknown_02023A60
-_08039DFC: .4byte gUnknown_02024A60
+_08039DF8: .4byte gBattleBufferA
+_08039DFC: .4byte gActiveBank
 _08039E00: .4byte 0x00007fff
-_08039E04: .4byte gUnknown_02024A6A
+_08039E04: .4byte gBattlePartyID
 _08039E08: .4byte gEnemyParty
-_08039E0C: .4byte gUnknown_03004340
+_08039E0C: .4byte gHealthboxIDs
 _08039E10:
-	ldr r1, _08039E58 @ =gUnknown_02024A6A
+	ldr r1, _08039E58 @ =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -3569,15 +3569,15 @@ _08039E10:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, _08039E60 @ =gUnknown_03004340
+	ldr r1, _08039E60 @ =gHealthboxIDs
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
 	bl sub_8043D84
 _08039E3A:
-	ldr r1, _08039E64 @ =gUnknown_03004330
-	ldr r0, _08039E68 @ =gUnknown_02024A60
+	ldr r1, _08039E64 @ =gBattleBankFunc
+	ldr r0, _08039E68 @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -3591,11 +3591,11 @@ _08039E3A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039E58: .4byte gUnknown_02024A6A
+_08039E58: .4byte gBattlePartyID
 _08039E5C: .4byte gEnemyParty
-_08039E60: .4byte gUnknown_03004340
-_08039E64: .4byte gUnknown_03004330
-_08039E68: .4byte gUnknown_02024A60
+_08039E60: .4byte gHealthboxIDs
+_08039E64: .4byte gBattleBankFunc
+_08039E68: .4byte gActiveBank
 _08039E6C: .4byte sub_8037B24
 	thumb_func_end sub_8039D80
 
@@ -3610,17 +3610,17 @@ sub_8039E70: @ 8039E70
 	thumb_func_start sub_8039E7C
 sub_8039E7C: @ 8039E7C
 	push {r4,lr}
-	ldr r4, _08039ED4 @ =gUnknown_02024A60
+	ldr r4, _08039ED4 @ =gActiveBank
 	ldrb r0, [r4]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039ECC
-	ldr r0, _08039ED8 @ =gUnknown_03004340
+	ldr r0, _08039ED8 @ =gHealthboxIDs
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	ldr r2, _08039EDC @ =gUnknown_02024A6A
+	ldr r2, _08039EDC @ =gBattlePartyID
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
@@ -3641,7 +3641,7 @@ sub_8039E7C: @ 8039E7C
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	ldr r1, _08039EE8 @ =gUnknown_03004330
+	ldr r1, _08039EE8 @ =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -3652,25 +3652,25 @@ _08039ECC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039ED4: .4byte gUnknown_02024A60
-_08039ED8: .4byte gUnknown_03004340
-_08039EDC: .4byte gUnknown_02024A6A
+_08039ED4: .4byte gActiveBank
+_08039ED8: .4byte gHealthboxIDs
+_08039EDC: .4byte gBattlePartyID
 _08039EE0: .4byte gEnemyParty
 _08039EE4: .4byte 0x02017810
-_08039EE8: .4byte gUnknown_03004330
+_08039EE8: .4byte gBattleBankFunc
 _08039EEC: .4byte sub_8037FAC
 	thumb_func_end sub_8039E7C
 
 	thumb_func_start sub_8039EF0
 sub_8039EF0: @ 8039EF0
 	push {r4,r5,lr}
-	ldr r5, _08039F48 @ =gUnknown_02024A60
+	ldr r5, _08039F48 @ =gActiveBank
 	ldrb r0, [r5]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039F40
-	ldr r4, _08039F4C @ =gUnknown_02023A60
+	ldr r4, _08039F4C @ =gBattleBufferA
 	ldrb r3, [r5]
 	lsls r3, 9
 	adds r0, r4, 0x1
@@ -3695,7 +3695,7 @@ sub_8039EF0: @ 8039EF0
 	lsls r2, 24
 	orrs r1, r2
 	bl move_anim_start_t2_for_situation
-	ldr r1, _08039F50 @ =gUnknown_03004330
+	ldr r1, _08039F50 @ =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -3706,9 +3706,9 @@ _08039F40:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039F48: .4byte gUnknown_02024A60
-_08039F4C: .4byte gUnknown_02023A60
-_08039F50: .4byte gUnknown_03004330
+_08039F48: .4byte gActiveBank
+_08039F4C: .4byte gBattleBufferA
+_08039F50: .4byte gBattleBankFunc
 _08039F54: .4byte sub_8037FAC
 	thumb_func_end sub_8039EF0
 
@@ -3804,8 +3804,8 @@ _08039FDC: .4byte gUnknown_020238C8
 sub_8039FE0: @ 8039FE0
 	push {lr}
 	ldr r3, _0803A00C @ =gUnknown_020238C8
-	ldr r1, _0803A010 @ =gUnknown_02023A60
-	ldr r0, _0803A014 @ =gUnknown_02024A60
+	ldr r1, _0803A010 @ =gBattleBufferA
+	ldr r0, _0803A014 @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
 	adds r1, 0x1
@@ -3824,8 +3824,8 @@ sub_8039FE0: @ 8039FE0
 	bx r0
 	.align 2, 0
 _0803A00C: .4byte gUnknown_020238C8
-_0803A010: .4byte gUnknown_02023A60
-_0803A014: .4byte gUnknown_02024A60
+_0803A010: .4byte gBattleBufferA
+_0803A014: .4byte gActiveBank
 	thumb_func_end sub_8039FE0
 
 	thumb_func_start sub_803A018
@@ -3869,8 +3869,8 @@ _0803A054: .4byte gUnknown_020238C8
 dp01t_29_4_blink: @ 803A058
 	push {r4,lr}
 	ldr r3, _0803A080 @ =gSprites
-	ldr r2, _0803A084 @ =gUnknown_02024BE0
-	ldr r4, _0803A088 @ =gUnknown_02024A60
+	ldr r2, _0803A084 @ =gObjectBankIDs
+	ldr r4, _0803A088 @ =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r2
 	ldrb r1, [r0]
@@ -3887,10 +3887,10 @@ dp01t_29_4_blink: @ 803A058
 	b _0803A0B6
 	.align 2, 0
 _0803A080: .4byte gSprites
-_0803A084: .4byte gUnknown_02024BE0
-_0803A088: .4byte gUnknown_02024A60
+_0803A084: .4byte gObjectBankIDs
+_0803A088: .4byte gActiveBank
 _0803A08C:
-	ldr r1, _0803A0BC @ =gUnknown_02024E6D
+	ldr r1, _0803A0BC @ =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -3904,7 +3904,7 @@ _0803A08C:
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
 	bl sub_8047858
-	ldr r1, _0803A0C0 @ =gUnknown_03004330
+	ldr r1, _0803A0C0 @ =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -3915,8 +3915,8 @@ _0803A0B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A0BC: .4byte gUnknown_02024E6D
-_0803A0C0: .4byte gUnknown_03004330
+_0803A0BC: .4byte gDoingBattleAnim
+_0803A0C0: .4byte gBattleBankFunc
 _0803A0C4: .4byte dp01t_0F_4_move_anim
 	thumb_func_end dp01t_29_4_blink
 
@@ -3931,16 +3931,16 @@ sub_803A0C8: @ 803A0C8
 	thumb_func_start sub_803A0D4
 sub_803A0D4: @ 803A0D4
 	push {r4,lr}
-	ldr r4, _0803A110 @ =gUnknown_02024A60
+	ldr r4, _0803A110 @ =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
 	bne _0803A0E8
 	movs r3, 0xC0
 _0803A0E8:
-	ldr r2, _0803A114 @ =gUnknown_02023A60
+	ldr r2, _0803A114 @ =gBattleBufferA
 	ldrb r1, [r4]
 	lsls r1, 9
 	adds r0, r2, 0x1
@@ -3959,15 +3959,15 @@ _0803A0E8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A110: .4byte gUnknown_02024A60
-_0803A114: .4byte gUnknown_02023A60
+_0803A110: .4byte gActiveBank
+_0803A114: .4byte gBattleBufferA
 	thumb_func_end sub_803A0D4
 
 	thumb_func_start sub_803A118
 sub_803A118: @ 803A118
 	push {lr}
-	ldr r2, _0803A140 @ =gUnknown_02023A60
-	ldr r0, _0803A144 @ =gUnknown_02024A60
+	ldr r2, _0803A140 @ =gBattleBufferA
+	ldr r0, _0803A144 @ =gActiveBank
 	ldrb r1, [r0]
 	lsls r1, 9
 	adds r0, r2, 0x1
@@ -3983,15 +3983,15 @@ sub_803A118: @ 803A118
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A140: .4byte gUnknown_02023A60
-_0803A144: .4byte gUnknown_02024A60
+_0803A140: .4byte gBattleBufferA
+_0803A144: .4byte gActiveBank
 	thumb_func_end sub_803A118
 
 	thumb_func_start sub_803A148
 sub_803A148: @ 803A148
 	push {lr}
-	ldr r1, _0803A178 @ =gUnknown_02024A6A
-	ldr r0, _0803A17C @ =gUnknown_02024A60
+	ldr r1, _0803A178 @ =gBattlePartyID
+	ldr r0, _0803A17C @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -4011,16 +4011,16 @@ sub_803A148: @ 803A148
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A178: .4byte gUnknown_02024A6A
-_0803A17C: .4byte gUnknown_02024A60
+_0803A178: .4byte gBattlePartyID
+_0803A17C: .4byte gActiveBank
 _0803A180: .4byte gEnemyParty
 	thumb_func_end sub_803A148
 
 	thumb_func_start dp01t_2E_4_battle_intro
 dp01t_2E_4_battle_intro: @ 803A184
 	push {lr}
-	ldr r1, _0803A1AC @ =gUnknown_02023A60
-	ldr r0, _0803A1B0 @ =gUnknown_02024A60
+	ldr r1, _0803A1AC @ =gBattleBufferA
+	ldr r0, _0803A1B0 @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
 	adds r1, 0x1
@@ -4036,16 +4036,16 @@ dp01t_2E_4_battle_intro: @ 803A184
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A1AC: .4byte gUnknown_02023A60
-_0803A1B0: .4byte gUnknown_02024A60
+_0803A1AC: .4byte gBattleBufferA
+_0803A1B0: .4byte gActiveBank
 _0803A1B4: .4byte gUnknown_02024DE8
 	thumb_func_end dp01t_2E_4_battle_intro
 
 	thumb_func_start sub_803A1B8
 sub_803A1B8: @ 803A1B8
 	push {r4-r6,lr}
-	ldr r5, _0803A294 @ =gUnknown_02024BE0
-	ldr r6, _0803A298 @ =gUnknown_02024A60
+	ldr r5, _0803A294 @ =gObjectBankIDs
+	ldr r6, _0803A298 @ =gActiveBank
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -4141,7 +4141,7 @@ _0803A276:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2, 0x9]
-	ldr r1, _0803A2BC @ =gUnknown_03004330
+	ldr r1, _0803A2BC @ =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -4151,8 +4151,8 @@ _0803A276:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A294: .4byte gUnknown_02024BE0
-_0803A298: .4byte gUnknown_02024A60
+_0803A294: .4byte gObjectBankIDs
+_0803A298: .4byte gActiveBank
 _0803A29C: .4byte gSprites
 _0803A2A0: .4byte sub_8078B34
 _0803A2A4: .4byte sub_803A3A8
@@ -4161,7 +4161,7 @@ _0803A2AC: .4byte gTasks
 _0803A2B0: .4byte 0x02017810
 _0803A2B4: .4byte gUnknown_02024E68
 _0803A2B8: .4byte sub_8044CA0
-_0803A2BC: .4byte gUnknown_03004330
+_0803A2BC: .4byte gBattleBankFunc
 _0803A2C0: .4byte nullsub_47
 	thumb_func_end sub_803A1B8
 
@@ -4174,7 +4174,7 @@ sub_803A2C4: @ 803A2C4
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r7, _0803A31C @ =gUnknown_02024A60
+	ldr r7, _0803A31C @ =gActiveBank
 	ldrb r0, [r7]
 	mov r9, r0
 	ldr r1, _0803A320 @ =gTasks
@@ -4196,12 +4196,12 @@ sub_803A2C4: @ 803A2C4
 	cmp r0, 0
 	beq _0803A330
 _0803A2FE:
-	ldr r0, _0803A328 @ =gUnknown_02023A60
+	ldr r0, _0803A328 @ =gBattleBufferA
 	ldrb r1, [r7]
 	lsls r2, r1, 9
 	adds r0, 0x1
 	adds r2, r0
-	ldr r0, _0803A32C @ =gUnknown_02024A6A
+	ldr r0, _0803A32C @ =gBattlePartyID
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -4211,18 +4211,18 @@ _0803A2FE:
 	bl sub_8039430
 	b _0803A370
 	.align 2, 0
-_0803A31C: .4byte gUnknown_02024A60
+_0803A31C: .4byte gActiveBank
 _0803A320: .4byte gTasks
 _0803A324: .4byte gBattleTypeFlags
-_0803A328: .4byte gUnknown_02023A60
-_0803A32C: .4byte gUnknown_02024A6A
+_0803A328: .4byte gBattleBufferA
+_0803A32C: .4byte gBattlePartyID
 _0803A330:
-	ldr r4, _0803A394 @ =gUnknown_02023A60
+	ldr r4, _0803A394 @ =gBattleBufferA
 	ldrb r0, [r7]
 	lsls r1, r0, 9
 	adds r4, 0x1
 	adds r1, r4
-	ldr r6, _0803A398 @ =gUnknown_02024A6A
+	ldr r6, _0803A398 @ =gBattlePartyID
 	lsls r0, 1
 	adds r0, r6
 	ldrh r0, [r0]
@@ -4248,8 +4248,8 @@ _0803A330:
 	eors r0, r5
 	strb r0, [r7]
 _0803A370:
-	ldr r1, _0803A39C @ =gUnknown_03004330
-	ldr r2, _0803A3A0 @ =gUnknown_02024A60
+	ldr r1, _0803A39C @ =gBattleBankFunc
+	ldr r2, _0803A3A0 @ =gActiveBank
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
@@ -4266,10 +4266,10 @@ _0803A370:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A394: .4byte gUnknown_02023A60
-_0803A398: .4byte gUnknown_02024A6A
-_0803A39C: .4byte gUnknown_03004330
-_0803A3A0: .4byte gUnknown_02024A60
+_0803A394: .4byte gBattleBufferA
+_0803A398: .4byte gBattlePartyID
+_0803A39C: .4byte gBattleBankFunc
+_0803A3A0: .4byte gActiveBank
 _0803A3A4: .4byte sub_8037840
 	thumb_func_end sub_803A2C4
 
@@ -4302,8 +4302,8 @@ _0803A3D8: .4byte 0xfffffc00
 	thumb_func_start sub_803A3DC
 sub_803A3DC: @ 803A3DC
 	push {r4-r6,lr}
-	ldr r1, _0803A404 @ =gUnknown_02023A60
-	ldr r0, _0803A408 @ =gUnknown_02024A60
+	ldr r1, _0803A404 @ =gBattleBufferA
+	ldr r0, _0803A408 @ =gActiveBank
 	ldrb r2, [r0]
 	lsls r0, r2, 9
 	adds r1, 0x1
@@ -4312,17 +4312,17 @@ sub_803A3DC: @ 803A3DC
 	cmp r0, 0
 	beq _0803A40C
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803A40C
 	bl dp01_tbl4_exec_completed
 	b _0803A4C6
 	.align 2, 0
-_0803A404: .4byte gUnknown_02023A60
-_0803A408: .4byte gUnknown_02024A60
+_0803A404: .4byte gBattleBufferA
+_0803A408: .4byte gActiveBank
 _0803A40C:
-	ldr r3, _0803A45C @ =gUnknown_02024A60
+	ldr r3, _0803A45C @ =gActiveBank
 	ldrb r1, [r3]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -4333,7 +4333,7 @@ _0803A40C:
 	movs r2, 0x1
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r1, _0803A464 @ =gUnknown_02023A60
+	ldr r1, _0803A464 @ =gBattleBufferA
 	ldrb r2, [r3]
 	lsls r0, r2, 9
 	adds r1, 0x2
@@ -4362,9 +4362,9 @@ _0803A40C:
 	strb r1, [r3, 0x1]
 	b _0803A4C6
 	.align 2, 0
-_0803A45C: .4byte gUnknown_02024A60
+_0803A45C: .4byte gActiveBank
 _0803A460: .4byte 0x02017810
-_0803A464: .4byte gUnknown_02023A60
+_0803A464: .4byte gBattleBufferA
 _0803A468:
 	movs r0, 0x3F
 	negs r0, r0
@@ -4408,7 +4408,7 @@ _0803A470:
 	movs r1, 0x5D
 	strb r1, [r0, 0x5]
 _0803A4BA:
-	ldr r0, _0803A4D8 @ =gUnknown_03004330
+	ldr r0, _0803A4D8 @ =gBattleBankFunc
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
@@ -4422,14 +4422,14 @@ _0803A4C6:
 _0803A4CC: .4byte gUnknown_02023A64
 _0803A4D0: .4byte gUnknown_02024E68
 _0803A4D4: .4byte 0x02017810
-_0803A4D8: .4byte gUnknown_03004330
+_0803A4D8: .4byte gBattleBankFunc
 _0803A4DC: .4byte sub_803A4E0
 	thumb_func_end sub_803A3DC
 
 	thumb_func_start sub_803A4E0
 sub_803A4E0: @ 803A4E0
 	push {r4,lr}
-	ldr r4, _0803A518 @ =gUnknown_02024A60
+	ldr r4, _0803A518 @ =gActiveBank
 	ldrb r1, [r4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -4456,14 +4456,14 @@ _0803A510:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A518: .4byte gUnknown_02024A60
+_0803A518: .4byte gActiveBank
 _0803A51C: .4byte 0x02017810
 	thumb_func_end sub_803A4E0
 
 	thumb_func_start sub_803A520
 sub_803A520: @ 803A520
 	push {lr}
-	ldr r0, _0803A558 @ =gUnknown_02024A60
+	ldr r0, _0803A558 @ =gActiveBank
 	ldrb r3, [r0]
 	lsls r0, r3, 1
 	adds r0, r3
@@ -4490,7 +4490,7 @@ _0803A54E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A558: .4byte gUnknown_02024A60
+_0803A558: .4byte gActiveBank
 _0803A55C: .4byte 0x02017810
 _0803A560: .4byte gTasks
 _0803A564: .4byte gUnknown_02024E68
@@ -4508,14 +4508,14 @@ sub_803A56C: @ 803A56C
 	thumb_func_start sub_803A578
 sub_803A578: @ 803A578
 	push {r4,lr}
-	ldr r4, _0803A5C8 @ =gUnknown_02024A60
+	ldr r4, _0803A5C8 @ =gActiveBank
 	ldrb r0, [r4]
 	bl sub_8078874
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803A5BE
 	ldr r3, _0803A5CC @ =gSprites
-	ldr r0, _0803A5D0 @ =gUnknown_02024BE0
+	ldr r0, _0803A5D0 @ =gObjectBankIDs
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -4523,7 +4523,7 @@ sub_803A578: @ 803A578
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r3
-	ldr r0, _0803A5D4 @ =gUnknown_02023A60
+	ldr r0, _0803A5D4 @ =gBattleBufferA
 	lsls r1, 9
 	adds r0, 0x1
 	adds r1, r0
@@ -4546,23 +4546,23 @@ _0803A5BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A5C8: .4byte gUnknown_02024A60
+_0803A5C8: .4byte gActiveBank
 _0803A5CC: .4byte gSprites
-_0803A5D0: .4byte gUnknown_02024BE0
-_0803A5D4: .4byte gUnknown_02023A60
+_0803A5D0: .4byte gObjectBankIDs
+_0803A5D4: .4byte gBattleBufferA
 	thumb_func_end sub_803A578
 
 	thumb_func_start bx_exec_buffer_A_ch0_tbl4
 bx_exec_buffer_A_ch0_tbl4: @ 803A5D8
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r6, _0803A61C @ =gUnknown_02024A60
+	ldr r6, _0803A61C @ =gActiveBank
 	ldrb r0, [r6]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803A630
-	ldr r5, _0803A620 @ =gUnknown_02023A60
+	ldr r5, _0803A620 @ =gBattleBufferA
 	ldrb r2, [r6]
 	lsls r1, r2, 9
 	adds r0, r5, 0x1
@@ -4586,10 +4586,10 @@ bx_exec_buffer_A_ch0_tbl4: @ 803A5D8
 	bl dp01_tbl4_exec_completed
 	b _0803A630
 	.align 2, 0
-_0803A61C: .4byte gUnknown_02024A60
-_0803A620: .4byte gUnknown_02023A60
+_0803A61C: .4byte gActiveBank
+_0803A620: .4byte gBattleBufferA
 _0803A624:
-	ldr r0, _0803A638 @ =gUnknown_03004330
+	ldr r0, _0803A638 @ =gBattleBankFunc
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
@@ -4601,7 +4601,7 @@ _0803A630:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A638: .4byte gUnknown_03004330
+_0803A638: .4byte gBattleBankFunc
 _0803A63C: .4byte sub_8037FD8
 	thumb_func_end bx_exec_buffer_A_ch0_tbl4
 
@@ -4624,8 +4624,8 @@ sub_803A64C: @ 803A64C
 	thumb_func_start sub_803A658
 sub_803A658: @ 803A658
 	push {lr}
-	ldr r1, _0803A674 @ =gUnknown_02023A60
-	ldr r0, _0803A678 @ =gUnknown_02024A60
+	ldr r1, _0803A674 @ =gBattleBufferA
+	ldr r0, _0803A678 @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
 	adds r1, 0x1
@@ -4633,15 +4633,15 @@ sub_803A658: @ 803A658
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _0803A680
-	ldr r0, _0803A67C @ =gUnknown_02024D26
+	ldr r0, _0803A67C @ =gBattleOutcome
 	strb r2, [r0]
 	b _0803A688
 	.align 2, 0
-_0803A674: .4byte gUnknown_02023A60
-_0803A678: .4byte gUnknown_02024A60
-_0803A67C: .4byte gUnknown_02024D26
+_0803A674: .4byte gBattleBufferA
+_0803A678: .4byte gActiveBank
+_0803A67C: .4byte gBattleOutcome
 _0803A680:
-	ldr r0, _0803A6AC @ =gUnknown_02024D26
+	ldr r0, _0803A6AC @ =gBattleOutcome
 	movs r1, 0x3
 	eors r1, r2
 	strb r1, [r0]
@@ -4651,8 +4651,8 @@ _0803A688:
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl4_exec_completed
-	ldr r1, _0803A6B0 @ =gUnknown_03004330
-	ldr r0, _0803A6B4 @ =gUnknown_02024A60
+	ldr r1, _0803A6B0 @ =gBattleBankFunc
+	ldr r0, _0803A6B4 @ =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -4661,9 +4661,9 @@ _0803A688:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803A6AC: .4byte gUnknown_02024D26
-_0803A6B0: .4byte gUnknown_03004330
-_0803A6B4: .4byte gUnknown_02024A60
+_0803A6AC: .4byte gBattleOutcome
+_0803A6B0: .4byte gBattleBankFunc
+_0803A6B4: .4byte gActiveBank
 _0803A6B8: .4byte sub_8037F34
 	thumb_func_end sub_803A658
 

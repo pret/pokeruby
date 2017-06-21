@@ -1,6 +1,5 @@
 #include "global.h"
 #include "starter_choose.h"
-#include "asm.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -15,6 +14,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern u16 gScriptResult;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -23,7 +23,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 // Graphics Data
 //--------------------------------------------------
 
-const u16 gBirchBagGrassPal[][16] =
+const u16 gBirchBagGrassPal[2][16] =
 {
     INCBIN_U16("graphics/misc/birch_bag.gbapal"),
     INCBIN_U16("graphics/misc/birch_grass.gbapal"),
@@ -172,12 +172,12 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] =
 {
     gSpriteAffineAnim_83F7774,
 };
-static const struct SpriteSheet gUnknown_083F7794[] =
+static const struct CompressedSpriteSheet gUnknown_083F7794[] =
 {
     {gBirchBallarrow_Gfx, 0x0800, 0x1000},
     {NULL},
 };
-static const struct SpriteSheet gUnknown_083F77A4[] =
+static const struct CompressedSpriteSheet gUnknown_083F77A4[] =
 {
     {gBirchCircle_Gfx, 0x0800, 0x1001},
     {NULL},
@@ -483,7 +483,7 @@ static void AddTextColorCtrlCode(u8 *string, u8 bgColor, u8 textColor, u8 shadow
 static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 {
     u8 labelText[72];
-    u8 *category;
+    const u8 *category;
     u8 srcIndex;
     u8 dstIndex;
     u16 species;

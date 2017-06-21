@@ -667,10 +667,10 @@ _0812668C:
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _081266C6:
 	adds r0, r7, 0
 	movs r1, 0xC

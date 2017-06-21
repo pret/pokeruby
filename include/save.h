@@ -39,12 +39,12 @@ enum
 // Do save types
 enum
 {
-	NORMAL_SAVE,
-	LINK_SAVE,
-	EREADER_SAVE, // mossdeep event
-	HOF_SAVE,
-	DIFFERENT_FILE_SAVE,
-	HOF_DELETE_SAVE // unused
+    NORMAL_SAVE,
+    LINK_SAVE,
+    EREADER_SAVE, // mossdeep event
+    HOF_SAVE,
+    DIFFERENT_FILE_SAVE,
+    HOF_DELETE_SAVE // unused
 };
 
 void ClearSaveData(void);
