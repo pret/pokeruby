@@ -1886,7 +1886,7 @@ void PutZigzagoonInPlayerParty(void)
 {
     u16 monData;
     CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 0x20, FALSE, 0, FALSE, 0);
-    monData = ABILITY_STENCH;
+    monData = TRUE;
     SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, (u8 *)&monData);
     monData = MOVE_TACKLE;
     SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (u8 *)&monData);
