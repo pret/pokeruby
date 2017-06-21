@@ -407,7 +407,7 @@ u8 sub_80C5044(void)
 
 void ShowContestEntryMonPic(void)
 {
-    struct SpritePalette *paletteData;
+    const struct CompressedSpritePalette *palette;
     u32 var1, var2;
     u16 species;
     u8 spriteId;
@@ -425,13 +425,18 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
-        HandleLoadSpecialPokePic((struct SpriteSheet *)&gMonFrontPicTable[species].data,
-        gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
-        (u32)gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], species, var1);
-        paletteData = (struct SpritePalette *) sub_80409C8(species, var2, var1);
-        LoadCompressedObjectPalette(paletteData);
+        HandleLoadSpecialPokePic(
+          &gMonFrontPicTable[species],
+          gMonFrontPicCoords[species].coords,
+          gMonFrontPicCoords[species].y_offset,
+          (u32)gUnknown_081FAF4C[0],
+          gUnknown_081FAF4C[1],
+          species,
+          var1);
+        palette = sub_80409C8(species, var2, var1);
+        LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
-        gUnknown_02024E8C.paletteTag = paletteData->tag;
+        gUnknown_02024E8C.paletteTag = palette->tag;
         spriteId = CreateSprite(&gUnknown_02024E8C, 0x78, 0x40, 0);
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;

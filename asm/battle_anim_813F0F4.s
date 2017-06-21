@@ -1218,7 +1218,7 @@ sub_813FA94: @ 813FA94
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0813FB5C @ =gSpriteTemplate_820AAB4
+	ldr r1, _0813FB5C @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	movs r2, 0x50
@@ -1295,7 +1295,7 @@ sub_813FA94: @ 813FA94
 	bx r0
 	.align 2, 0
 _0813FB58: .4byte gLastUsedItem
-_0813FB5C: .4byte gSpriteTemplate_820AAB4
+_0813FB5C: .4byte gBallSpriteTemplates
 _0813FB60: .4byte gSprites
 _0813FB64: .4byte gBattleAnimEnemyMonIndex
 _0813FB68: .4byte sub_813FD90
@@ -1378,7 +1378,7 @@ _0813FBE0:
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0813FCA0 @ =gSpriteTemplate_820AAB4
+	ldr r1, _0813FCA0 @ =gBallSpriteTemplates
 	adds r0, r1
 	adds r1, r6, 0
 	adds r1, 0x20
@@ -1447,7 +1447,7 @@ _0813FBE0:
 	bx r0
 	.align 2, 0
 _0813FC9C: .4byte gLastUsedItem
-_0813FCA0: .4byte gSpriteTemplate_820AAB4
+_0813FCA0: .4byte gBallSpriteTemplates
 _0813FCA4: .4byte gSprites
 _0813FCA8: .4byte gBattleAnimEnemyMonIndex
 _0813FCAC: .4byte SpriteCallbackDummy

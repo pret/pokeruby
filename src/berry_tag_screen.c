@@ -38,8 +38,8 @@ extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gScriptItemId;
 extern u16 gUnknown_030041B4;
 
-extern const struct SpriteSheet gUnknown_083C1F74;
-extern const struct SpritePalette gUnknown_083C1F7C;
+extern const struct CompressedSpriteSheet gUnknown_083C1F74;
+extern const struct CompressedSpritePalette gUnknown_083C1F7C;
 
 extern u8 *gUnknown_0841192C[];
 

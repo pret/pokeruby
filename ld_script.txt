@@ -78,7 +78,7 @@ SECTIONS {
         asm/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         src/smokescreen.o(.text);
-        asm/pokeball.o(.text);
+        src/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);
@@ -339,7 +339,7 @@ SECTIONS {
         data/daycare.o(.rodata);
         data/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
-        data/pokeball.o(.rodata);
+        src/pokeball.o(.rodata);
         data/trade.o(.rodata);
         data/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
