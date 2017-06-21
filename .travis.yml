@@ -21,6 +21,7 @@ install:
 matrix:
   include:
     - os: linux
+      env: _="Build"
       script:
         - cd $TRAVIS_BUILD_DIR
         - ./build_tools.sh
@@ -32,6 +33,7 @@ matrix:
         - make -j2 compare_sapphire_rev2
         - make -j2 ruby_de
     - os: linux
+      env: _="Formatting"
       addons:
         apt:
           sources:
