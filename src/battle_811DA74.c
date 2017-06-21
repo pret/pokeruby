@@ -35,15 +35,7 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct5
-{
-    u8 unk0_0:7;
-    u8 unk0_7:1;
-};
-
 extern u16 gBattleTypeFlags;
-
-extern struct UnknownStruct5 gUnknown_020238C8;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
