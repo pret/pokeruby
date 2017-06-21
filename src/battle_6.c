@@ -30,6 +30,7 @@ extern u8 gHealthboxIDs[];
 extern u8 gDoingBattleAnim;
 extern u8 gObjectBankIDs[];
 extern u16 gBattleTypeFlags;
+extern u8 gBattleOutcome;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern u8 gUnknown_02038470[];
@@ -84,6 +85,7 @@ extern bool8 sub_8078874(u8);
 extern bool8 move_anim_start_t3();
 extern void sub_802E460(void);
 extern void b_link_standby_message(void);
+extern void sub_802D18C(void);
 
 void sub_80304A8(void);
 void sub_8030E38(struct Sprite *);
@@ -543,4 +545,35 @@ void PlayerHandleLinkStandbyMsg(void)
         break;
     }
     PlayerBufferExecCompleted();
+}
+
+void PlayerHandleResetActionMoveSelection(void)
+{
+    switch (gBattleBufferA[gActiveBank][1])
+    {
+    case 0:
+        gActionSelectionCursor[gActiveBank] = 0;
+        gMoveSelectionCursor[gActiveBank] = 0;
+        break;
+    case 1:
+        gActionSelectionCursor[gActiveBank] = 0;
+        break;
+    case 2:
+        gMoveSelectionCursor[gActiveBank] = 0;
+        break;
+    }
+    PlayerBufferExecCompleted();
+}
+
+void sub_80312A0(void)
+{
+    gBattleOutcome = gBattleBufferA[gActiveBank][1];
+    FadeOutMapMusic(5);
+    BeginFastPaletteFade(3);
+    PlayerBufferExecCompleted();
+    gBattleBankFunc[gActiveBank] = sub_802D18C;
+}
+
+void nullsub_43(void)
+{
 }
