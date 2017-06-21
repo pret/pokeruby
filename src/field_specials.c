@@ -2241,3 +2241,125 @@ void sub_810FCE8(void)
         }
     }
 }
+
+bool8 sub_810FD60(void)
+{
+    return (gSaveBlock1.vars[0x41] >> gSpecialVar_0x8004) & 0x01;
+}
+
+void sub_810FD80(void)
+{
+    gSaveBlock1.vars[0x41] |= 0x2000;
+    gSaveBlock1.vars[0x41] |= 0x100;
+    gSaveBlock1.vars[0x41] |= 0x400;
+}
+
+void sub_810FE1C(void *, u8, u8);
+
+void sub_810FDAC(void)
+{
+    u8 a = 0;
+    u8 b = 0;
+    switch (gSpecialVar_0x8004)
+    {
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            a = 0;
+            b = 3;
+            break;
+        case 11:
+            a = 0;
+            b = 1;
+            break;
+        case 12:
+            a = 1;
+            b = 0;
+            break;
+        case 13:
+            a = 0;
+            b = 4;
+            break;
+        case 14:
+            a = 1;
+            b = 5;
+            break;
+        case 15:
+            break;
+    }
+    sub_810FE1C(gSaveBlock1.linkBattleRecords, a, b);
+}
+
+void sub_810FE1C(void *linkRecords, u8 a, u8 b)
+{
+    u8 *curRecord = (linkRecords + 16 * a);
+    if (*curRecord == EOS)
+    {
+        switch (b)
+        {
+            case 0:
+                StringCopy(gStringVar1, gOtherText_Wallace);
+                break;
+            case 1:
+                StringCopy(gStringVar1, gOtherText_Steven);
+                break;
+            case 2:
+                StringCopy(gStringVar1, gOtherText_Brawly);
+                break;
+            case 3:
+                StringCopy(gStringVar1, gOtherText_Winona);
+                break;
+            case 4:
+                StringCopy(gStringVar1, gOtherText_Phoebe);
+                break;
+            case 5:
+                StringCopy(gStringVar1, gOtherText_Glacia);
+                break;
+            default:
+                StringCopy(gStringVar1, gOtherText_Wallace);
+                break;
+        }
+    }
+    else
+    {
+        StringCopyN(gStringVar1, curRecord, 7);
+        gStringVar1[7] = EOS;
+        if (gStringVar1[0] == 0xfc && gStringVar1[1] == 0x15)
+        {
+            ConvertInternationalString(gStringVar1, 1);
+        }
+    }
+}
+
+void sub_810FEFC(void)
+{
+    if (VarGet(VAR_0x4095) == 2)
+    {
+        sub_810FA74();
+        if (gUnknown_02024D26 == 1)
+        {
+            sub_810FB9C();
+        }
+        else
+        {
+            sub_810FC18();
+        }
+    }
+}
+
+bool8 sub_810FF30(void)
+{
+    return (gSaveBlock1.vars[0x41] >> 7) & 0x01;
+}
+
+void sub_810FF48(void)
+{
+    gSaveBlock1.vars[0x41] |= 0x80;
+}
+
+u8 sub_810FF60(void)
+{
+    return sub_810FB10(gSpecialVar_0x8004);
+}

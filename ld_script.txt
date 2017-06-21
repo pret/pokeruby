@@ -215,7 +215,6 @@ SECTIONS {
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
-        asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         src/battle_records.o(.text);
         asm/battle_records.o(.text_8110494);
