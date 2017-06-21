@@ -106,6 +106,6 @@ void DoTVShowTodaysSmartShopper(void);
 void sub_80BE3BC(void);
 void UpdateTVShowsPerDay(u16);
 void sub_80C045C();
-void sub_80BF088(u8, u32);
+void sub_80BF088(u8, s32);
 
 #endif // GUARD_TV_H
