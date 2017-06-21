@@ -26,6 +26,9 @@
 #include "trig.h"
 #include "unknown_task.h"
 #include "util.h"
+#include "items.h"
+#include "hold_effects.h"
+#include "battle_move_effects.h"
 
 struct UnknownStruct6
 {
@@ -68,30 +71,6 @@ struct UnknownStruct12
 {
     u32 unk0;
     u8 filler4[0x54];
-};
-
-struct UnknownStruct13
-{
-    u32 unk0_0:1;
-    u32 unk0_1:1;
-    u32 unk0_2:1;
-    u32 unk0_3:1;
-    u32 unk0_4:1;
-    u32 unk0_5:1;
-    u32 unk0_6:1;
-    u32 unk0_7:1;
-    u32 unk1_0:1;
-    u32 unk1_1:1;
-    u32 unk1_2:1;
-    u32 unk1_3:2;
-    u32 unk1_5:1;
-    u32 unk1_6:1;
-    u32 unk1_7:1;
-    u32 unk2_0:1;
-    u32 unk2_1:1;
-    u32 unk2_2:1;
-    u32 unk2_3:1;
-    u8 filler4[12];
 };
 
 extern const u16 gUnknown_08D004E0[];
@@ -166,7 +145,6 @@ extern u16 gChosenMovesByBanks[];
 extern u32 gHitMarker;
 extern u8 gUnknown_02024C70[];
 extern u16 gSideAffecting[];
-extern u8 gSideTimer[][12];
 extern u32 gStatuses3[];
 //extern u8 gDisableStructs[][0x1C];
 extern u16 gPauseCounterBattle;
@@ -175,8 +153,6 @@ extern u16 gRandomTurnNumber;
 extern u8 gBattleCommunication[];
 extern u8 gUnknown_02024D1F[];  // I don't actually know what type this is.
 extern u8 gBattleOutcome;
-extern struct UnknownStruct13 gProtectStructs[];
-extern u8 gWishFutureKnock[];
 extern u16 gUnknown_02024DE8;
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
@@ -199,7 +175,6 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattleMainFunc)(void);
-extern struct Struct30042E0 gBattleResults;
 extern u8 gLeveledUpInBattle;
 extern void (*gBattleBankFunc[])(void);
 extern u8 gHealthboxIDs[];
@@ -219,6 +194,7 @@ extern u32 gBattleMoveDamage;
 extern struct BattlePokemon gBattleMons[];
 extern u8 gBattleMoveFlags;
 
+static void BattlePrepIntroSlide(void);
 
 void sub_800E7C4(void)
 {
@@ -1495,43 +1471,43 @@ void sub_80105EC(struct Sprite *sprite)
     }
 }
 
-void dp11b_obj_instanciate(u8 a, u8 b, s8 c, s8 d)
+void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
 {
     u8 spriteId;
-    u8 r7;
+    u8 objectID;
 
     if (b)
     {
-        if (ewram17810[a].unk0_1)
+        if (ewram17810[bank].unk0_1)
             return;
     }
     else
     {
-        if (ewram17810[a].unk0_2)
+        if (ewram17810[bank].unk0_2)
             return;
     }
 
     spriteId = CreateInvisibleSpriteWithCallback(objc_dp11b_pingpong);
     if (b == TRUE)
     {
-        r7 = gHealthboxIDs[a];
-        ewram17810[a].unk2 = spriteId;
-        ewram17810[a].unk0_1 = 1;
+        objectID = gHealthboxIDs[bank];
+        ewram17810[bank].unk2 = spriteId;
+        ewram17810[bank].unk0_1 = 1;
         gSprites[spriteId].data0 = 0x80;
     }
     else
     {
-        r7 = gObjectBankIDs[a];
-        ewram17810[a].unk3 = spriteId;
-        ewram17810[a].unk0_2 = 1;
+        objectID = gObjectBankIDs[bank];
+        ewram17810[bank].unk3 = spriteId;
+        ewram17810[bank].unk0_2 = 1;
         gSprites[spriteId].data0 = 0xC0;
     }
     gSprites[spriteId].data1 = c;
     gSprites[spriteId].data2 = d;
-    gSprites[spriteId].data3 = r7;
+    gSprites[spriteId].data3 = objectID;
     gSprites[spriteId].data4 = b;
-    gSprites[r7].pos2.x = 0;
-    gSprites[r7].pos2.y = 0;
+    gSprites[objectID].pos2.x = 0;
+    gSprites[objectID].pos2.y = 0;
 }
 
 void dp11b_obj_free(u8 a, u8 b)
@@ -1586,7 +1562,6 @@ void sub_8010800(void)
 void sub_8010824(void)
 {
     gBattleMainFunc();
-    gActiveBank = 0;
 
     for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
         gBattleBankFunc[gActiveBank]();
@@ -1595,7 +1570,7 @@ void sub_8010824(void)
 void sub_8010874(void)
 {
     s32 i;
-    s32 j;
+    u32 j;
     u8 *r4;
 
     TurnValuesCleanUp(0);
@@ -1609,7 +1584,7 @@ void sub_8010874(void)
         for (j = 0; j < (u32)0x1C; j++)
             r4[j] = 0;
 
-        gDisableStructs[i].unk16 = 2;
+        gDisableStructs[i].IsFirstTurn = 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
         gMoveHitWith[i] = 0;
@@ -1626,7 +1601,7 @@ void sub_8010874(void)
         gSideAffecting[i] = 0;
 
         r4 = (u8 *)&gSideTimer[i];
-        for (j = 0; j < (u32)12; j++)
+        for (j = 0; j < 12; j++)
             r4[j] = 0;
     }
 
@@ -1639,8 +1614,8 @@ void sub_8010874(void)
         r4[i] = 0;
 
     gHitMarker = 0;
-    if ((gBattleTypeFlags & 2) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
-        gHitMarker = 0x80;
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
+        gHitMarker = HITMARKER_NO_ANIMATIONS;
     ewram16084 = gSaveBlock2.optionsBattleStyle;
     gMultiHitCounter = 0;
     gBattleOutcome = 0;
@@ -1679,37 +1654,37 @@ void sub_8010874(void)
     ewram160C9 = 6;
     ewram16113 = 0;
     for (i = 0; i < 11; i++)
-        gBattleResults.unk36[i] = 0;
-    gBattleResults.unk13 = 0;
-    gBattleResults.unk0 = 0;
-    gBattleResults.unk1 = 0;
+		gBattleResults.unk36[i] = 0;
+    gBattleResults.BattleTurnCounter = 0;
+    gBattleResults.PlayerFaintCounter = 0;
+    gBattleResults.OpponentFaintCounter = 0;
     gBattleResults.unk2 = 0;
     gBattleResults.unk3 = 0;
     gBattleResults.unk4 = 0;
     gBattleResults.unk5_0 = 0;
     gBattleResults.unk5_1 = 0;
-    gBattleResults.unk20 = 0;
-    gBattleResults.unk22 = 0;
-    gBattleResults.unk24 = 0;
-    gBattleResults.unk6 = 0;
-    gBattleResults.unk26 = 0;
-    gBattleResults.unk28 = 0;
+    gBattleResults.LastOpponentSpecies = 0;
+    gBattleResults.LastUsedMove = 0;
+    gBattleResults.OpponentMove = 0;
+    gBattleResults.Poke1Species = 0;
+    gBattleResults.OpponentSpecies = 0;
+    gBattleResults.CaughtPoke = 0;
     for (i = 0; i < 10; i++)
     {
-        gBattleResults.unk8[i] = 0;
-        gBattleResults.unk14[i] = 0;
-        gBattleResults.unk2A[i] = 0;
+        gBattleResults.PokeString1[i] = 0;
+        gBattleResults.PokeString2[i] = 0;
+        gBattleResults.CaughtNick[i] = 0;
     }
 }
 
-void sub_8010B88(void)
+void SwitchInClearStructs(void)
 {
-    struct UnkBattleStruct4 sp0 = gDisableStructs[gActiveBank];
+    struct DisableStruct sp0 = gDisableStructs[gActiveBank];
     s32 i;
     u8 *ptr;
     u32 *ptr2;
 
-    if (gBattleMoves[gCurrentMove].effect != 0x7F)
+    if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
         for (i = 0; i < 8; i++)
             gBattleMons[gActiveBank].statStages[i] = 6;
@@ -1717,27 +1692,27 @@ void sub_8010B88(void)
         {
             struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
 
-            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].unk14 == gActiveBank)
+            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].BankPreventingEscape == gActiveBank)
                 sp20->unk0 &= ~0x04000000;
-            if ((gStatuses3[i] & 0x18) && gDisableStructs[i].unk15 == gActiveBank)
+            if ((gStatuses3[i] & STATUS3_ALWAYS_HITS) && gDisableStructs[i].BankWithSureHit == gActiveBank)
             {
-                gStatuses3[i] &= ~0x18;
-                gDisableStructs[i].unk15 = 0;
+                gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
+                gDisableStructs[i].BankWithSureHit = 0;
             }
         }
     }
-    if (gBattleMoves[gCurrentMove].effect == 0x7F)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
-        gBattleMons[gActiveBank].status2 &= 0x15100007;
-        gStatuses3[gActiveBank] &= 0x3043F;
+        gBattleMons[gActiveBank].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGRY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
+        gStatuses3[gActiveBank] &= (STATUS3_LEECHSEED_RECEIVER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
 
         for (i = 0; i < gNoOfAllBanks; i++)
         {
             if (GetBankSide(gActiveBank) != GetBankSide(i)
-             && (gStatuses3[i] & 0x18) != 0
-             && (gDisableStructs[i].unk15 == gActiveBank))
+             && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
+             && (gDisableStructs[i].BankWithSureHit == gActiveBank))
             {
-                gStatuses3[i] &= ~0x18;
+                gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
                 gStatuses3[i] |= 0x10;
             }
         }
@@ -1763,15 +1738,15 @@ void sub_8010B88(void)
     for (i = 0; i < (u32)0x1C; i++)
         ptr[i] = 0;
 
-    if (gBattleMoves[gCurrentMove].effect == 0x7F)
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
-        gDisableStructs[gActiveBank].unkA = sp0.unkA;
-        gDisableStructs[gActiveBank].unk15 = sp0.unk15;
+        gDisableStructs[gActiveBank].SubstituteHP = sp0.SubstituteHP;
+        gDisableStructs[gActiveBank].BankWithSureHit = sp0.BankWithSureHit;
         gDisableStructs[gActiveBank].unkF_0 = sp0.unkF_0;
         gDisableStructs[gActiveBank].unkF_4 = sp0.unkF_4;
     }
 
-    gDisableStructs[gActiveBank].unk16 = 2;
+    gDisableStructs[gActiveBank].IsFirstTurn = 2;
     gLastUsedMove[gActiveBank] = 0;
     gMoveHitWith[gActiveBank] = 0;
     gUnknown_02024C44[gActiveBank] = 0;
@@ -1806,12 +1781,12 @@ void UndoEffectsAfterFainting(void)
     gStatuses3[gActiveBank] = 0;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if ((gBattleMons[i].status2 & 0x4000000) && gDisableStructs[i].unk14 == gActiveBank)
-            gBattleMons[i].status2 &= ~0x4000000;
+        if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].BankPreventingEscape == gActiveBank)
+            gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
         if (gBattleMons[i].status2 & (gBitTable[gActiveBank] << 16))
             gBattleMons[i].status2 &= ~(gBitTable[gActiveBank] << 16);
-        if ((gBattleMons[i].status2 & 0xE000) && ewram[0x16020 + i] == gActiveBank)
-            gBattleMons[i].status2 &= ~0xE000;
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram[0x16020 + i] == gActiveBank)
+            gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
@@ -1819,27 +1794,27 @@ void UndoEffectsAfterFainting(void)
     ptr = (u8 *)&gDisableStructs[gActiveBank];
     for (i = 0; i < (u32)0x1C; i++)
         ptr[i] = 0;
-    gProtectStructs[gActiveBank].unk0_0 = 0;
-    gProtectStructs[gActiveBank].unk0_1 = 0;
-    gProtectStructs[gActiveBank].unk0_2 = 0;
-    gProtectStructs[gActiveBank].unk0_3 = 0;
-    gProtectStructs[gActiveBank].unk0_4 = 0;
-    gProtectStructs[gActiveBank].unk0_5 = 0;
-    gProtectStructs[gActiveBank].unk0_6 = 0;
-    gProtectStructs[gActiveBank].unk0_7 = 0;
-    gProtectStructs[gActiveBank].unk1_0 = 0;
-    gProtectStructs[gActiveBank].unk1_1 = 0;
-    gProtectStructs[gActiveBank].unk1_2 = 0;
-    gProtectStructs[gActiveBank].unk1_3 = 0;
-    gProtectStructs[gActiveBank].unk1_5 = 0;
-    gProtectStructs[gActiveBank].unk1_6 = 0;
-    gProtectStructs[gActiveBank].unk1_7 = 0;
-    gProtectStructs[gActiveBank].unk2_0 = 0;
-    gProtectStructs[gActiveBank].unk2_1 = 0;
-    gProtectStructs[gActiveBank].unk2_2 = 0;
-    gProtectStructs[gActiveBank].unk2_3 = 0;
+    gProtectStructs[gActiveBank].Protected = 0;
+    gProtectStructs[gActiveBank].Endured = 0;
+    gProtectStructs[gActiveBank].OnlyStruggle = 0;
+    gProtectStructs[gActiveBank].HelpingHand = 0;
+    gProtectStructs[gActiveBank].BounceMove = 0;
+    gProtectStructs[gActiveBank].StealMove = 0;
+    gProtectStructs[gActiveBank].Flag0Unknown = 0;
+    gProtectStructs[gActiveBank].PrlzImmobility = 0;
+    gProtectStructs[gActiveBank].ConfusionSelfDmg = 0;
+    gProtectStructs[gActiveBank].NotEffective = 0;
+    gProtectStructs[gActiveBank].ChargingTurn = 0;
+    gProtectStructs[gActiveBank].FleeFlag = 0;
+    gProtectStructs[gActiveBank].UsedImprisionedMove = 0;
+    gProtectStructs[gActiveBank].LoveImmobility = 0;
+    gProtectStructs[gActiveBank].UsedDisabledMove = 0;
+    gProtectStructs[gActiveBank].UsedTauntedMove = 0;
+    gProtectStructs[gActiveBank].Flag2Unknown = 0;
+    gProtectStructs[gActiveBank].FlinchImmobility = 0;
+    gProtectStructs[gActiveBank].NotFirstStrike = 0;
 
-    gDisableStructs[gActiveBank].unk16 = 2;
+    gDisableStructs[gActiveBank].IsFirstTurn = 2;
     gLastUsedMove[gActiveBank] = 0;
     gMoveHitWith[gActiveBank] = 0;
     gUnknown_02024C44[gActiveBank] = 0;
@@ -1878,7 +1853,7 @@ void bc_8012FAC(void)
         {
             gBattleCommunication[1]++;
             if (gBattleCommunication[1] == gNoOfAllBanks)
-                gBattleMainFunc = bc_load_battlefield;
+                gBattleMainFunc = BattlePrepIntroSlide;
             else
                 gBattleCommunication[0] = 0;
         }
@@ -1886,7 +1861,7 @@ void bc_8012FAC(void)
     }
 }
 
-void bc_load_battlefield(void)
+static void BattlePrepIntroSlide(void)
 {
     if (gBattleExecBuffer == 0)
     {
@@ -2294,7 +2269,7 @@ void BattleTurnPassed(void)
     if (sub_80170DC() != 0)
         return;
     TurnValuesCleanUp(0);
-    gHitMarker &= ~0x200;
+    gHitMarker &= ~HITMARKER_NO_ATTACKSTRING;
     gHitMarker &= ~0x80000;
     gHitMarker &= ~0x400000;
     gHitMarker &= ~0x100000;
@@ -2311,8 +2286,8 @@ void BattleTurnPassed(void)
         gBattleMainFunc = sub_80138F0;
         return;
     }
-    if (gBattleResults.unk13 < 0xFF)
-        gBattleResults.unk13++;
+    if (gBattleResults.BattleTurnCounter < 0xFF)
+        gBattleResults.BattleTurnCounter++;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
         gActionForBanks[i] = 0xFF;
@@ -2331,12 +2306,12 @@ u8 CanRunFromBattle(void)
     u8 r6;
     s32 i;
 
-    if (gBattleMons[gActiveBank].item == 0xAF)
+    if (gBattleMons[gActiveBank].item == ITEM_ENIGMA_BERRY)
         r2 = gEnigmaBerries[gActiveBank].holdEffect;
     else
         r2 = ItemId_GetHoldEffect(gBattleMons[gActiveBank].item);
     gStringBank = gActiveBank;
-    if (r2 == 0x25)
+    if (r2 == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return 0;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         return 0;
@@ -2346,7 +2321,7 @@ u8 CanRunFromBattle(void)
     for (i = 0; i < gNoOfAllBanks; i++)
     {
         if (r6 != GetBankSide(i)
-         && gBattleMons[i].ability == 0x17)
+         && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
         {
             ewram16003 = i;
             gLastUsedAbility = gBattleMons[i].ability;
@@ -2357,7 +2332,7 @@ u8 CanRunFromBattle(void)
          && gBattleMons[gActiveBank].ability != ABILITY_LEVITATE
          && gBattleMons[gActiveBank].type1 != 2
          && gBattleMons[gActiveBank].type2 != 2
-         && gBattleMons[i].ability == 0x47)
+         && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
         {
             ewram16003 = i;
             gLastUsedAbility = gBattleMons[i].ability;
@@ -2365,7 +2340,7 @@ u8 CanRunFromBattle(void)
             return 2;
         }
     }
-    i = AbilityBattleEffects(15, gActiveBank, 0x2A, 0, 0);
+    i = AbilityBattleEffects(15, gActiveBank, ABILITY_MAGNET_PULL, 0, 0);
     if (i != 0 && (gBattleMons[gActiveBank].type1 == 8 || gBattleMons[gActiveBank].type2 == 8))
     {
         ewram16003 = i - 1;
@@ -2373,7 +2348,7 @@ u8 CanRunFromBattle(void)
         gBattleCommunication[5] = 2;
         return 2;
     }
-    if ((gBattleMons[gActiveBank].status2 & 0x0400E000) || (gStatuses3[gActiveBank] & 0x400))
+    if ((gBattleMons[gActiveBank].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED)) || (gStatuses3[gActiveBank] & STATUS3_ROOTED))
     {
         gBattleCommunication[5] = 0;
         return 1;

@@ -4092,7 +4092,7 @@ _08014522:
 	adds r1, r2
 	adds r1, 0x20
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r2, _08014568 @ =gSpecialStatuses
 	ldrb r1, [r4]
 	lsls r0, r1, 2
