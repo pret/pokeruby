@@ -199,5 +199,6 @@ u8 GetOppositeDirection(u8);
 void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
+void sub_805ADDC(u8);
 
 #endif // GUARD_FIELD_MAP_OBJ_H

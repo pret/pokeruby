@@ -31,6 +31,9 @@
 #include "menu.h"
 #include "starter_choose.h"
 #include "menu_helpers.h"
+#include "battle_tower.h"
+#include "field_weather.h"
+#include "pokemon_summary_screen.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
@@ -1905,4 +1908,148 @@ bool8 IsStarterInParty(void)
         }
     }
     return FALSE;
+}
+
+bool8 CheckFreePokemonStorageSpace(void)
+{
+    u16 i, j;
+    for (i=0; i<14; i++)
+    {
+        for (j=0; j<30; j++)
+        {
+            if (GetBoxMonData(&gPokemonStorage.boxes[i][j], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool8 IsPokerusInParty(void)
+{
+    if (!CheckPartyPokerus(gPlayerParty, 0x3f))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static void sub_810F7A8(u8);
+static void sub_810F814(u8);
+
+void sub_810F758(void)
+{
+    u8 taskId = CreateTask(sub_810F7A8, 9);
+    gTasks[taskId].data[0] = gSpecialVar_0x8005;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].data[4] = gSpecialVar_0x8004;
+    gTasks[taskId].data[5] = 5;
+    SetCameraPanningCallback(NULL);
+    PlaySE(SE_W070);
+}
+
+static void sub_810F7A8(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    task->data[1]++;
+    if ((task->data[1] % task->data[5]) == 0)
+    {
+        task->data[1] = 0;
+        task->data[2]++;
+        if (task->data[3] == 0)
+        {
+            task->data[0] = -task->data[0];
+            task->data[4] = -task->data[4];
+            SetCameraPanning(task->data[0], task->data[4]);
+            if (task->data[2] == 8)
+            {
+                sub_810F814(taskId);
+                InstallCameraPanAheadCallback();
+            }
+        }
+    }
+}
+
+static void sub_810F814(u8 taskId)
+{
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
+}
+
+bool8 sub_810F828(void)
+{
+    return FlagGet(0x2b8);
+}
+
+void SetRoute119Weather(void)
+{
+    if (is_light_level_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    {
+        SetSav1Weather(0x14);
+    }
+}
+
+void SetRoute123Weather(void)
+{
+    if (is_light_level_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    {
+        SetSav1Weather(0x15);
+    }
+}
+
+u8 GetLeadMonIndex(void)
+{
+    u8 i;
+    u8 partyCount = CalculatePlayerPartyCount();
+    for (i=0; i<partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
+u16 ScriptGetPartyMonSpecies(void)
+{
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+}
+
+void sub_810F8FC(void)
+{
+    sub_805ADDC(6);
+}
+
+u16 sub_810F908(void)
+{
+    u16 var40c2 = VarGet(VAR_0x40C2);
+    if (gLocalTime.days - var40c2 >= 7)
+    {
+        return 0;
+    }
+    else if (gLocalTime.days < 0)
+    {
+        return 8;
+    }
+    return 7 - (gLocalTime.days - var40c2);
+}
+
+u16 sub_810F950(void)
+{
+    VarSet(VAR_0x40C2, gLocalTime.days);
+    return gLocalTime.days;
+}
+
+bool8 sub_810F96C(void)
+{
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+    if (!StringCompareWithoutExtCtrlCodes(gSaveBlock2.playerName, gStringVar1))
+    {
+        return FALSE;
+    }
+    return TRUE;
 }
