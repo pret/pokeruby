@@ -2200,3 +2200,44 @@ int sub_810FC18(void)
     }
     return retval;
 }
+
+u16 sub_810FCB0(void)
+{
+    u8 i;
+    u8 retval = 0;
+    for (i=0; i<8; i++)
+    {
+        if ((gSaveBlock1.vars[0x41] >> (i + 8)) & 1)
+        {
+            retval ++;
+        }
+    }
+    return retval;
+}
+
+void sub_810FCE8(void)
+{
+    u8 i = 0;
+    if (gSaveBlock2.playTimeHours < 999)
+    {
+        while (1)
+        {
+            if (sub_810FCB0() < 5)
+            {
+                gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+                break;
+            }
+            else if (i == 8)
+            {
+                break;
+            }
+            else if (gSaveBlock2.playTimeHours - gSaveBlock1.vars[0x42] < 12)
+            {
+                return;
+            }
+            sub_810FC18();
+            gSaveBlock1.vars[0x42] += 12;
+            i++;
+        }
+    }
+}
