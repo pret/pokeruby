@@ -1410,3 +1410,85 @@ void sub_810EEDC(void)
     }
     BuyMenuFreeMemory();
 }
+
+void SetTrickHouseEndRoomFlag(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x259;
+    *specVar = flag;
+    FlagSet(flag);
+}
+
+void ResetTrickHouseEndRoomFlag(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag = 0x259;
+    *specVar = flag;
+    FlagReset(flag);
+}
+
+bool8 CheckLeadMonCool(void)
+{
+    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_COOL) < 200)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 CheckLeadMonBeauty(void)
+{
+    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_BEAUTY) < 200)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 CheckLeadMonCute(void)
+{
+    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_CUTE) < 200)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 CheckLeadMonSmart(void)
+{
+    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SMART) < 200)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 CheckLeadMonTough(void)
+{
+    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_TOUGH) < 200)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void IsGrassTypeInParty(void)
+{
+    u8 i;
+    u16 species;
+    struct Pokemon *pokemon;
+    for (i=0; i<PARTY_SIZE; i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_BIT2) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
+            {
+                gScriptResult = TRUE;
+                return;
+            }
+        }
+    }
+    gScriptResult = FALSE;
+}
