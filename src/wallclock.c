@@ -24,7 +24,7 @@ extern u16 gMiscClockFemale_Pal[];
 //--------------------------------------------------
 
 static const u8 ClockGfx_Misc[] = INCBIN_U8("graphics/misc/clock_misc.4bpp.lz");
-static const struct SpriteSheet gUnknown_083F7A90[] =
+static const struct CompressedSpriteSheet gUnknown_083F7A90[] =
 {
     {ClockGfx_Misc, 0x2000, 0x1000},
     {NULL},

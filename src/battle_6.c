@@ -9,11 +9,11 @@ extern u16 gUnknown_030042A0;
 
 extern struct Window gUnknown_03004210;
 
-extern void (*gUnknown_03004330[])(void);
+extern void (*gBattleBankFunc[])(void);
 
-extern u8 gUnknown_02024A60;
-extern u8 gUnknown_02024E60[];
-extern u8 gUnknown_020238CC[];
+extern u8 gActiveBank;
+extern u8 gActionSelectionCursor[];
+extern u8 gDisplayedStringBattle[];
 
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030041B4;
@@ -39,7 +39,7 @@ void sub_803037C(void) {
     FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
     FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
 
-    gUnknown_03004330[gUnknown_02024A60] = sub_802C098;
+    gBattleBankFunc[gActiveBank] = sub_802C098;
 
     InitWindow(&gUnknown_03004210, gUnknown_08400CF3, 400, 18, 35);
     sub_8002F44(&gUnknown_03004210);
@@ -50,9 +50,9 @@ void sub_803037C(void) {
         nullsub_8(r4);
     }
 
-    sub_802E3E4(gUnknown_02024E60[gUnknown_02024A60], 0);
+    sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
 
-    get_battle_strings_((u8 *) gUnknown_08400CA8);
-    InitWindow(&gUnknown_03004210, gUnknown_020238CC, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
+    StrCpyDecodeToDisplayedStringBattle((u8 *) gUnknown_08400CA8);
+    InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);
 }

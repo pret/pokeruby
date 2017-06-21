@@ -675,7 +675,7 @@ void GetRivalSonDaughterString(void)
 
 u8 sub_810E300(void)
 {
-    return gUnknown_02024D26;
+    return gBattleOutcome;
 }
 
 void CableCarWarp(void)
@@ -2338,7 +2338,7 @@ void sub_810FEFC(void)
     if (VarGet(VAR_0x4095) == 2)
     {
         sub_810FA74();
-        if (gUnknown_02024D26 == 1)
+        if (gBattleOutcome == 1)
         {
             sub_810FB9C();
         }

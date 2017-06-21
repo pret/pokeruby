@@ -10,7 +10,7 @@ struct ElevatorMenu {
 
 extern struct ElevatorMenu gUnknown_03000760[20];
 extern struct WarpData gUnknown_020297F0;
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 extern u16 gScriptResult;
 extern u8 gUnknown_02039250;

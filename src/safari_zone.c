@@ -23,7 +23,7 @@ struct PokeblockFeeder
 static void ClearAllPokeblockFeeders(void);
 static void DecrementFeederStepCounters(void);
 
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 gSafariZoneStepCounter = 0;
@@ -99,14 +99,14 @@ void sub_80C824C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
     }
-    else if (gUnknown_02024D26 == 8)
+    else if (gBattleOutcome == 8)
     {
         ScriptContext2_RunNewScript(&gUnknown_081C340A);
         warp_in();
         gFieldCallback = sub_8080E44;
         SetMainCallback2(CB2_LoadMap);
     }
-    else if (gUnknown_02024D26 == 7)
+    else if (gBattleOutcome == 7)
     {
         ScriptContext1_SetupScript(&gUnknown_081C3459);
         ScriptContext1_Stop();

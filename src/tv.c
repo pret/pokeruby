@@ -44,7 +44,7 @@ struct UnkTvStruct
     s8 var0;
 };
 
-extern struct Struct30042E0 gUnknown_030042E0;
+extern struct Struct30042E0 gBattleResults;
 extern u8 gUnknown_0300430A[11];
 
 struct OutbreakPokemon
@@ -101,9 +101,9 @@ extern u16 gScriptLastTalked;
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
 extern u8 gUnknown_03004316[11];
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
-extern u16 gUnknown_02024C04;
+extern u16 gLastUsedItem;
 
 extern u8 ewram[];
 #define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
@@ -132,7 +132,7 @@ extern u16 sub_8135D3C(u8);
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
 extern u8 gUnknown_03004316[11];
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 void sub_80BF334(void);
 void sub_80BF3A4(void);
@@ -156,7 +156,7 @@ void sub_80BEA88(void);
 
 void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
-extern u16 gUnknown_02024C04;
+extern u16 gLastUsedItem;
 
 void sub_80BE5FC(void);
 void sub_80BE65C(void);
@@ -430,33 +430,33 @@ void TakeTVShowInSearchOfTrainersOffTheAir(void);
 void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
-    gSaveBlock1.gabbyAndTyData.mon1 = gUnknown_030042E0.unk6;
-    gSaveBlock1.gabbyAndTyData.mon2 = gUnknown_030042E0.unk26;
-    gSaveBlock1.gabbyAndTyData.lastMove = gUnknown_030042E0.unk22;
+    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.unk6;
+    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.unk26;
+    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.unk22;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
     {
         gSaveBlock1.gabbyAndTyData.battleNum ++;
     }
-    gSaveBlock1.gabbyAndTyData.valA_0 = gUnknown_030042E0.unk5_0;
-    if (gUnknown_030042E0.unk0)
+    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    if (gBattleResults.unk0)
     {
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
     } else
     {
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
     }
-    if (gUnknown_030042E0.unk3)
+    if (gBattleResults.unk3)
     {
         gSaveBlock1.gabbyAndTyData.valA_2 = 1;
     } else
     {
         gSaveBlock1.gabbyAndTyData.valA_2 = 0;
     }
-    if (!gUnknown_030042E0.unk5_1)
+    if (!gBattleResults.unk5_1)
     {
         for (i=0; i<11; i++)
         {
-            if (gUnknown_030042E0.unk36[i] != 0)
+            if (gBattleResults.unk36[i] != 0)
             {
                 gSaveBlock1.gabbyAndTyData.valA_3 = 1;
                 break;
@@ -612,38 +612,38 @@ void sub_80BDEC8(void) {
     total = 0;
     sub_80BEB20();
     sub_80BE778();
-    if (gUnknown_030042E0.unk28 == 0) {
+    if (gBattleResults.unk28 == 0) {
         sub_80BE074();
     } else {
         sub_80BE028();
-        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gUnknown_030042E0.unk28], gUnknown_030042E0.unk2A) != 0) {
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.unk28], gBattleResults.unk2A) != 0) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1) {
                 for (i=0; i<11; i++) {
-                    total += gUnknown_030042E0.unk36[i];
+                    total += gBattleResults.unk36[i];
                 }
-                if (total != 0 || gUnknown_030042E0.unk5_1 != 0) {
+                if (total != 0 || gBattleResults.unk5_1 != 0) {
                     total = FALSE;
                     show = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
                     show->pokemonToday.var00 = TVSHOW_POKEMON_TODAY_CAUGHT;
                     show->pokemonToday.var01 = total;
-                    if (gUnknown_030042E0.unk5_1 != 0) {
+                    if (gBattleResults.unk5_1 != 0) {
                         total = 1;
                         item = ITEM_MASTER_BALL;
                     } else {
                         for (i=0; i<11; i++) {
-                            total += gUnknown_030042E0.unk36[i];
+                            total += gBattleResults.unk36[i];
                         }
                         if (total > 0xff) {
                             total = 0xff;
                         }
-                        item = gUnknown_02024C04;
+                        item = gLastUsedItem;
                     }
                     show->pokemonToday.var12 = total;
                     show->pokemonToday.ball = item;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2.playerName);
-                    StringCopy(show->pokemonToday.nickname, gUnknown_030042E0.unk2A);
-                    show->pokemonToday.species = gUnknown_030042E0.unk28;
+                    StringCopy(show->pokemonToday.nickname, gBattleResults.unk2A);
+                    show->pokemonToday.species = gBattleResults.unk28;
                     sub_80BE138(show);
                     show->pokemonToday.language = GAME_LANGUAGE;
                     show->pokemonToday.language2 = sub_80BDEAC(show->pokemonToday.nickname);
@@ -663,8 +663,8 @@ void sub_80BE028(void) {
         buffer->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
     }
     buffer->worldOfMasters.var02++;
-    buffer->worldOfMasters.var04 = gUnknown_030042E0.unk28;
-    buffer->worldOfMasters.var08 = gUnknown_030042E0.unk6;
+    buffer->worldOfMasters.var04 = gBattleResults.unk28;
+    buffer->worldOfMasters.var08 = gBattleResults.unk6;
     buffer->worldOfMasters.var0a = gMapHeader.name;
 }
 
@@ -681,7 +681,7 @@ void sub_80BE074(void) {
         if (total > 0xff) {
             total = 0xff;
         }
-        if (total > 2 && gUnknown_02024D26 == 1) {
+        if (total > 2 && gBattleOutcome == 1) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_FAILED) != 1) {
                 flag = FALSE;
@@ -689,10 +689,10 @@ void sub_80BE074(void) {
                 asm_comment("Here the wrong registers are used to hold the show ID and flag.");
                 show->pokemonTodayFailed.var00 = TVSHOW_POKEMON_TODAY_FAILED;
                 show->pokemonTodayFailed.var01 = flag;
-                show->pokemonTodayFailed.species = gUnknown_030042E0.unk6;
-                show->pokemonTodayFailed.species2 = gUnknown_030042E0.unk20;
+                show->pokemonTodayFailed.species = gBattleResults.unk6;
+                show->pokemonTodayFailed.species2 = gBattleResults.unk20;
                 show->pokemonTodayFailed.var10 = total;
-                show->pokemonTodayFailed.var11 = gUnknown_02024D26;
+                show->pokemonTodayFailed.var11 = gBattleOutcome;
                 show->pokemonTodayFailed.var12 = gMapHeader.name;
                 StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2.playerName);
                 sub_80BE138(show);
@@ -731,7 +731,7 @@ _080BE088:\n\
 _080BE0A2:\n\
     cmp r5, 0x2\n\
     bls _080BE112\n\
-    ldr r7, _080BE120 @ =gUnknown_02024D26\n\
+    ldr r7, _080BE120 @ =gBattleOutcome\n\
     ldrb r0, [r7]\n\
     cmp r0, 0x1\n\
     bne _080BE112\n\
@@ -763,7 +763,7 @@ _080BE0A2:\n\
     movs r0, 0x17\n\
     strb r0, [r4]\n\
     strb r1, [r4, 0x1]\n\
-    ldr r1, _080BE12C @ =gUnknown_030042E0\n\
+    ldr r1, _080BE12C @ =gBattleResults\n\
     ldrh r0, [r1, 0x6]\n\
     strh r0, [r4, 0xC]\n\
     ldrh r0, [r1, 0x20]\n\
@@ -789,10 +789,10 @@ _080BE112:\n\
     .align 2, 0\n\
 _080BE118: .4byte 0x0000ffff\n\
 _080BE11C: .4byte gUnknown_03004316\n\
-_080BE120: .4byte gUnknown_02024D26\n\
+_080BE120: .4byte gBattleOutcome\n\
 _080BE124: .4byte gSaveBlock1 + 0x2738\n\
 _080BE128: .4byte gUnknown_03005D38\n\
-_080BE12C: .4byte gUnknown_030042E0\n\
+_080BE12C: .4byte gBattleResults\n\
 _080BE130: .4byte gMapHeader\n\
 _080BE134: .4byte gSaveBlock2\n\
 .syntax divided\n");

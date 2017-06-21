@@ -280,7 +280,7 @@ BattleScript_1D6F48: @ 81D6F48
 	seteffectwithchancetarget
 	faintpokemon TARGET, 0, 0x0
 
-BattleScript_1D6F62:: @ 81D6F62
+BattleScript_EndTurn:: @ 81D6F62
 	setbyte 0x201600c, 0
 	atk49 0, 0
 	end
@@ -299,7 +299,7 @@ BattleScript_1D6F77: @ 81D6F77
 	missmessage
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Sleep: @ 81D6F81
 	attackcanceler
@@ -315,25 +315,25 @@ MoveEffect_Sleep: @ 81D6F81
 	waitanimation
 	setbyte 0x2024d21, 1
 	seteffecttarget
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D6FC4: @ 81D6FC4
 	pause 32
 	printstring BATTLE_TEXT_DefendingAsleep
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D6FD2: @ 81D6FD2
 	pause 32
 	printstring BATTLE_TEXT_WasntAffected
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D6FE0: @ 81D6FE0
 	pause 32
 	printfromtable BattleTextList_40156A
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_PoisonHit: @ 81D6FF0
 MoveEffect_PoisonTail: @ 81D6FF0
@@ -380,7 +380,7 @@ BattleScript_1D703F: @ 81D703F
 BattleScript_1D7056: @ 81D7056
 	faintpokemon USER, 0, 0x0
 	faintpokemon TARGET, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_BlazeKick: @ 81D7069
 MoveEffect_BurnHit: @ 81D7069
@@ -490,7 +490,7 @@ BattleScript_1D7129: @ 81D7129
 
 BattleScript_1D7167: @ 81D7167
 	faintpokemon TARGET, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_MirrorMove: @ 81D7173
 	attackcanceler
@@ -501,7 +501,7 @@ MoveEffect_MirrorMove: @ 81D7173
 	orbyte 0x2024c68, 32
 	printstring BATTLE_TEXT_MirrorFail
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_AttackUp: @ 81D718B
 	setbyte 0x201601e, 17
@@ -542,9 +542,9 @@ BattleScript_1D71D8: @ 81D71D8
 	waitmessage 64
 
 BattleScript_1D71E0: @ 81D71E0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
-gUnknown_081D71E5:: @ 81D71E5
+BattleScript_StatUp:: @ 81D71E5
 	playanimation 2, 1, 0x20160a4
 	printfromtable BattleTextList_401570
 	waitmessage 64
@@ -592,9 +592,9 @@ BattleScript_1D7269: @ 81D7269
 	waitmessage 64
 
 BattleScript_1D7271: @ 81D7271
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
-gUnknown_081D7276:: @ 81D7276
+BattleScript_StatDown:: @ 81D7276
 	playanimation 2, 1, 0x20160a4
 	printfromtable BattleTextList_40157C
 	waitmessage 64
@@ -609,7 +609,7 @@ MoveEffect_Haze: @ 81D7286
 	normalisebuffs
 	printstring BATTLE_TEXT_StatElim
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Bide: @ 81D7297
 	attackcanceler
@@ -619,7 +619,7 @@ MoveEffect_Bide: @ 81D7297
 	waitanimation
 	orword 0x2024c6c, 0x8000000
 	setbide
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Rampage: @ 81D72AB
 	attackcanceler
@@ -690,7 +690,7 @@ BattleScript_1D7377: @ 81D7377
 	resultmessage
 	waitmessage 64
 	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7396
-	copyarray gUnknown_030041C0, 0x20160e0, 6
+	copyarray gBattleTextBuff1, 0x20160e0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 
@@ -712,7 +712,7 @@ MoveEffect_Conversion: @ 81D73B1
 	waitanimation
 	printstring BATTLE_TEXT_TypeTransform
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_FlinchHit: @ 81D73C6
 	setbyte 0x2024d21, 8
@@ -730,7 +730,7 @@ MoveEffect_RestoreHp: @ 81D73D1
 	datahpupdate USER
 	printstring BATTLE_TEXT_RegainedHealth
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Toxic: @ 81D73F4
 	attackcanceler
@@ -751,19 +751,19 @@ MoveEffect_Toxic: @ 81D73F4
 	seteffecttarget
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7455: @ 81D7455
 	pause 64
 	printstring BATTLE_TEXT_AlreadyPoisoned
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7463: @ 81D7463
 	copyarray 0x2024c0a, 0x2024c08, 1
 	setbyte 0x2024d23, 0
-	callatk BattleScript_1D98BD
-	jump BattleScript_1D6F62
+	callatk BattleScript_PSNPrevention
+	jump BattleScript_EndTurn
 
 MoveEffect_PayDay: @ 81D747D
 	setbyte 0x2024d21, 11
@@ -798,13 +798,13 @@ BattleScript_1D74C6: @ 81D74C6
 	pause 64
 	printfromtable BattleTextList_40156A
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D74D6: @ 81D74D6
 	pause 32
 	printstring BATTLE_TEXT_AttackingAsleep
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Ohko: @ 81D74E4
 	attackcanceler
@@ -821,14 +821,14 @@ BattleScript_1D7505: @ 81D7505
 	pause 64
 	printfromtable BattleTextList_4015C8
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_RazorWind: @ 81D7515
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D753D
 	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
 	setbyte 0x2016055, 0
 	callatk BattleScript_1D756C
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D753D: @ 81D753D
 	attackcanceler
@@ -909,7 +909,7 @@ BattleScript_1D7632: @ 81D7632
 	pause 64
 	resultmessage
 	waitmessage 64
-	jumpifbyte 4, 0x2024c68, 8, BattleScript_1D6F62
+	jumpifbyte 4, 0x2024c68, 8, BattleScript_EndTurn
 	printstring BATTLE_TEXT_KeptGoingCrash
 	waitmessage 64
 	atk5
@@ -922,7 +922,7 @@ BattleScript_1D7632: @ 81D7632
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
 	orbyte 0x2024c68, 1
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Mist: @ 81D7676
 	attackcanceler
@@ -933,7 +933,7 @@ MoveEffect_Mist: @ 81D7676
 	waitanimation
 	printfromtable BattleTextList_4015A0
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_FocusEnergy: @ 81D7689
 	attackcanceler
@@ -945,7 +945,7 @@ MoveEffect_FocusEnergy: @ 81D7689
 	waitanimation
 	printfromtable BattleTextList_4015A4
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Recoil: @ 81D76A6
 	setbyte 0x2024d21, 206
@@ -968,13 +968,13 @@ MoveEffect_Confuse: @ 81D76BF
 	seteffecttarget
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D76FE: @ 81D76FE
 	pause 32
 	printstring BATTLE_TEXT_AlreadyConfused
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_AttackUp2: @ 81D770C
 	setbyte 0x201601e, 33
@@ -1005,7 +1005,7 @@ MoveEffect_Transform: @ 81D7743
 	waitanimation
 	printfromtable BattleTextList_4015A8
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_AttackDown2: @ 81D7756
 	setbyte 0x201601e, 161
@@ -1034,7 +1034,7 @@ BattleScript_1D7786: @ 81D7786
 	waitanimation
 	printfromtable BattleTextList_401540
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Poison: @ 81D7795
 	attackcanceler
@@ -1055,7 +1055,7 @@ MoveEffect_Poison: @ 81D7795
 	seteffecttarget
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Paralyze: @ 81D77F6
 	attackcanceler
@@ -1075,19 +1075,19 @@ MoveEffect_Paralyze: @ 81D77F6
 	seteffecttarget
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D784B: @ 81D784B
 	pause 32
 	printstring BATTLE_TEXT_AlreadyParalyzed
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7859: @ 81D7859
 	copyarray 0x2024c0a, 0x2024c08, 1
 	setbyte 0x2024d23, 0
-	callatk BattleScript_1D98B1
-	jump BattleScript_1D6F62
+	callatk BattleScript_PRLZPrevention
+	jump BattleScript_EndTurn
 
 MoveEffect_AttackDownHit: @ 81D7873
 	setbyte 0x2024d21, 22
@@ -1118,7 +1118,7 @@ MoveEffect_SkyAttack: @ 81D78B5
 	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
 	setbyte 0x2016055, 3
 	callatk BattleScript_1D756C
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_ConfuseHit: @ 81D78DD
 	setbyte 0x2024d21, 7
@@ -1154,13 +1154,13 @@ BattleScript_1D7922: @ 81D7922
 BattleScript_1D7928: @ 81D7928
 	printfromtable BattleTextList_4015AC
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7935: @ 81D7935
 	pause 32
 	printstring BATTLE_TEXT_SubAlready
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Recharge: @ 81D7943
 	attackcanceler
@@ -1171,7 +1171,7 @@ MoveEffect_Recharge: @ 81D7943
 gUnknown_081D7956:: @ 81D7956
 	printstring BATTLE_TEXT_MustRecharge
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Rage: @ 81D7961
 	attackcanceler
@@ -1197,7 +1197,7 @@ MoveEffect_Mimic: @ 81D7988
 	waitanimation
 	printstring BATTLE_TEXT_LearnedMove2
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Metronome: @ 81D79AE
 	attackcanceler
@@ -1223,7 +1223,7 @@ BattleScript_1D79D9: @ 81D79D9
 	waitanimation
 	printfromtable BattleTextList_40154C
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Splash: @ 81D79E9
 	attackcanceler
@@ -1234,7 +1234,7 @@ MoveEffect_Splash: @ 81D79E9
 	atk60 26
 	printstring BATTLE_TEXT_Nothing
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Disable: @ 81D79FB
 	attackcanceler
@@ -1246,7 +1246,7 @@ MoveEffect_Disable: @ 81D79FB
 	waitanimation
 	printstring BATTLE_TEXT_MoveWasDisabled
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_LevelDamage: @ 81D7A17
 	attackcanceler
@@ -1290,7 +1290,7 @@ MoveEffect_Encore: @ 81D7A5D
 	waitanimation
 	printstring BATTLE_TEXT_EncoreGot
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_PainSplit: @ 81D7A79
 	attackcanceler
@@ -1308,7 +1308,7 @@ MoveEffect_PainSplit: @ 81D7A79
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_PainSplit
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Snore: @ 81D7AB0
 	attackcanceler
@@ -1339,7 +1339,7 @@ MoveEffect_Conversion2: @ 81D7AEA
 	waitanimation
 	printstring BATTLE_TEXT_TypeTransform
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_LockOn: @ 81D7AFF
 	attackcanceler
@@ -1352,7 +1352,7 @@ MoveEffect_LockOn: @ 81D7AFF
 	waitanimation
 	printstring BATTLE_TEXT_TookAim
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Sketch: @ 81D7B21
 	attackcanceler
@@ -1364,7 +1364,7 @@ MoveEffect_Sketch: @ 81D7B21
 	waitanimation
 	printstring BATTLE_TEXT_SketchedMove
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_SleepTalk: @ 81D7B40
 	attackcanceler
@@ -1400,7 +1400,7 @@ MoveEffect_DestinyBond: @ 81D7B82
 	waitanimation
 	printstring BATTLE_TEXT_DestinyBondTake
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Flail: @ 81D7B93
 	remaininghptopower
@@ -1416,7 +1416,7 @@ MoveEffect_Spite: @ 81D7B99
 	waitanimation
 	printstring BATTLE_TEXT_ReducedBy
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_HealBell: @ 81D7BB5
 	attackcanceler
@@ -1441,7 +1441,7 @@ BattleScript_1D7BE1: @ 81D7BE1
 BattleScript_1D7BF2: @ 81D7BF2
 	atk98 4
 	waitstateatk
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_TripleKick: @ 81D7BFA
 	attackcanceler
@@ -1493,7 +1493,7 @@ BattleScript_1D7C90: @ 81D7C90
 	resultmessage
 	waitmessage 64
 	jumpifbyte 0, 0x20160e4, 0, BattleScript_1D7CAF
-	copyarray gUnknown_030041C0, 0x20160e0, 6
+	copyarray gBattleTextBuff1, 0x20160e0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 
@@ -1520,7 +1520,7 @@ MoveEffect_MeanLook: @ 81D7CCC
 	seteffecttarget
 	printstring BATTLE_TEXT_CantEscapeNow
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Nightmare: @ 81D7CF4
 	attackcanceler
@@ -1538,7 +1538,7 @@ BattleScript_1D7D1A: @ 81D7D1A
 	seteffecttarget
 	printstring BATTLE_TEXT_NightmareStart
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Minimize: @ 81D7D2E
 	attackcanceler
@@ -1578,7 +1578,7 @@ BattleScript_1D7D9A: @ 81D7D9A
 	waitmessage 64
 
 BattleScript_1D7DAE: @ 81D7DAE
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7DB3: @ 81D7DB3
 	jumpifarraynotequal 0x2024c07, 0x2024c08, 1, BattleScript_1D7DC4
@@ -1599,7 +1599,7 @@ BattleScript_1D7DC4: @ 81D7DC4
 	printstring BATTLE_TEXT_CurseLay
 	waitmessage 64
 	faintpokemon USER, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Endure: @ 81D7DFD
 MoveEffect_Protect: @ 81D7DFD
@@ -1611,7 +1611,7 @@ MoveEffect_Protect: @ 81D7DFD
 	waitanimation
 	printfromtable BattleTextList_40153A
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Spikes: @ 81D7E10
 	attackcanceler
@@ -1622,7 +1622,7 @@ MoveEffect_Spikes: @ 81D7E10
 	waitanimation
 	printstring BATTLE_TEXT_SpikesScattered
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Foresight: @ 81D7E25
 	attackcanceler
@@ -1634,7 +1634,7 @@ MoveEffect_Foresight: @ 81D7E25
 	waitanimation
 	printstring BATTLE_TEXT_IdentifiedPoke
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_PerishSong: @ 81D7E3D
 	attackcanceler
@@ -1653,7 +1653,7 @@ BattleScript_1D7E53: @ 81D7E53
 BattleScript_1D7E5A: @ 81D7E5A
 	addbyte 0x2016003, 1
 	jumpifarraynotequal 0x2016003, 0x2024a68, 1, BattleScript_1D7E53
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D7E73: @ 81D7E73
 	printstring BATTLE_TEXT_BlocksOther2
@@ -1703,7 +1703,7 @@ BattleScript_1D7EE5: @ 81D7EE5
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	setbyte 0x2024d21, 7
 	seteffecttarget
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_FuryCutter: @ 81D7F00
 	attackcanceler
@@ -1730,7 +1730,7 @@ MoveEffect_Attract: @ 81D7F1F
 	waitanimation
 	printstring BATTLE_TEXT_FellLove
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Frustration: @ 81D7F3B
 MoveEffect_Return: @ 81D7F3B
@@ -1788,7 +1788,7 @@ MoveEffect_BatonPass: @ 81D7F7C
 	switch3 USER, 1
 	waitstateatk
 	atk52 USER
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_RapidSpin: @ 81D7FA9
 	setbyte 0x2024d21, 163
@@ -1833,7 +1833,7 @@ BattleScript_1D7FFA: @ 81D7FFA
 	printfromtable BattleTextList_40151C
 	waitmessage 64
 	callatk BattleScript_1D9761
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_SunnyDay: @ 81D800E
 	attackcanceler
@@ -1866,7 +1866,7 @@ MoveEffect_BellyDrum: @ 81D8038
 	datahpupdate USER
 	printstring BATTLE_TEXT_CutHPMaxATK
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_PsychUp: @ 81D805A
 	attackcanceler
@@ -1877,7 +1877,7 @@ MoveEffect_PsychUp: @ 81D805A
 	waitanimation
 	printstring BATTLE_TEXT_CopyStatChanges
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_MirrorCoat: @ 81D806F
 	attackcanceler
@@ -1903,7 +1903,7 @@ MoveEffect_SkullBash: @ 81D8085
 	waitmessage 64
 
 BattleScript_1D80CF: @ 81D80CF
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Twister: @ 81D80D4
 	jumpifspecialstatusflag TARGET, 0x40, 1, BattleScript_1D80EE
@@ -1976,7 +1976,7 @@ MoveEffect_FutureSight: @ 81D817D
 	waitanimation
 	printfromtable BattleTextList_4015E2
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Gust: @ 81D8194
 	jumpifspecialstatusflag TARGET, 0x40, 1, BattleScript_1D6F14
@@ -1999,7 +1999,7 @@ BattleScript_1D81E1: @ 81D81E1
 	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
 	setbyte 0x2016055, 1
 	callatk BattleScript_1D756C
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D8209: @ 81D8209
 	orword 0x2024c6c, 0x8000000
@@ -2026,7 +2026,7 @@ MoveEffect_Teleport: @ 81D8233
 	printstring BATTLE_TEXT_FledBattle
 	waitmessage 64
 	setbyte 0x2024d26, 5
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_BeatUp: @ 81D826E
 	attackcanceler
@@ -2088,7 +2088,7 @@ BattleScript_1D8322: @ 81D8322
 BattleScript_1D8328: @ 81D8328
 	callatk BattleScript_1D756C
 	hidepreattack
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D8333: @ 81D8333
 	attackcanceler
@@ -2136,13 +2136,13 @@ BattleScript_1D839B:: @ 81D839B
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_RegainedHealth
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D83B5:: @ 81D83B5
 	pause 32
 	printstring BATTLE_TEXT_HPFull
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_FakeOut: @ 81D83C3
 	attackcanceler
@@ -2161,14 +2161,14 @@ BattleScript_1D83D6:: @ 81D83D6
 	orbyte 0x2024c68, 32
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D83E8: @ 81D83E8
 	pause 32
 	orbyte 0x2024c68, 8
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Uproar: @ 81D83FA
 	attackcanceler
@@ -2191,7 +2191,7 @@ MoveEffect_Stockpile: @ 81D841A
 	waitanimation
 	printfromtable BattleTextList_40155E
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_SpitUp: @ 81D842D
 	attackcanceler
@@ -2208,7 +2208,7 @@ BattleScript_1D844E: @ 81D844E
 	pause 32
 	printstring BATTLE_TEXT_SpitUpFail
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D845C: @ 81D845C
 	attackstring
@@ -2217,7 +2217,7 @@ BattleScript_1D845C: @ 81D845C
 	stockpiletobasedamage BattleScript_1D844E
 	resultmessage
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Swallow: @ 81D846F
 	attackcanceler
@@ -2230,7 +2230,7 @@ BattleScript_1D847C: @ 81D847C
 	pause 32
 	printfromtable BattleTextList_401566
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Hail: @ 81D848C
 	attackcanceler
@@ -2249,7 +2249,7 @@ MoveEffect_Torment: @ 81D8495
 	waitanimation
 	printstring BATTLE_TEXT_TormentSubject
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Flatter: @ 81D84B1
 	attackcanceler
@@ -2273,7 +2273,7 @@ BattleScript_1D84F4: @ 81D84F4
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	setbyte 0x2024d21, 7
 	seteffecttarget
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_WillOWisp: @ 81D850F
 	attackcanceler
@@ -2290,19 +2290,19 @@ MoveEffect_WillOWisp: @ 81D850F
 	waitanimation
 	setbyte 0x2024d21, 3
 	seteffecttarget
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D855B: @ 81D855B
 	copyarray 0x2024c0a, 0x2024c08, 1
 	setbyte 0x2024d23, 0
-	callatk BattleScript_1D98A5
-	jump BattleScript_1D6F62
+	callatk BattleScript_BRNPrevention
+	jump BattleScript_EndTurn
 
 BattleScript_1D8575: @ 81D8575
 	pause 32
 	printstring BATTLE_TEXT_AlreadyBurned
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Memento: @ 81D8583
 	attackcanceler
@@ -2333,7 +2333,7 @@ BattleScript_1D85D0: @ 81D85D0
 
 BattleScript_1D85F3: @ 81D85F3
 	faintpokemon USER, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D85FF: @ 81D85FF
 	printstring BATTLE_TEXT_NoEffect
@@ -2352,7 +2352,7 @@ BattleScript_1D8611: @ 81D8611
 	resultmessage
 	waitmessage 64
 	faintpokemon USER, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Facade: @ 81D8626
 	jumpifstatus USER, PSN | BRN | PAR | TOX, BattleScript_1D8635
@@ -2368,7 +2368,7 @@ MoveEffect_FocusPunch: @ 81D8640
 	ppreduce
 	printstring BATTLE_TEXT_LostFocus
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Smellingsalt: @ 81D8652
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_1D6F14
@@ -2389,7 +2389,7 @@ MoveEffect_FollowMe: @ 81D867C
 	waitanimation
 	printstring BATTLE_TEXT_CenterAttention
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_NaturePower: @ 81D868D
 	attackcanceler
@@ -2409,7 +2409,7 @@ MoveEffect_Charge: @ 81D869A
 	waitanimation
 	printstring BATTLE_TEXT_ChargingPower
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Taunt: @ 81D86AB
 	attackcanceler
@@ -2421,7 +2421,7 @@ MoveEffect_Taunt: @ 81D86AB
 	waitanimation
 	printstring BATTLE_TEXT_TauntFell
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_HelpingHand: @ 81D86C7
 	attackcanceler
@@ -2432,7 +2432,7 @@ MoveEffect_HelpingHand: @ 81D86C7
 	waitanimation
 	printstring BATTLE_TEXT_ReadyToHelp
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Trick: @ 81D86DC
 	attackcanceler
@@ -2447,7 +2447,7 @@ MoveEffect_Trick: @ 81D86DC
 	waitmessage 64
 	printfromtable BattleTextList_401642
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_RolePlay: @ 81D870A
 	attackcanceler
@@ -2459,7 +2459,7 @@ MoveEffect_RolePlay: @ 81D870A
 	waitanimation
 	printstring BATTLE_TEXT_CopiedObject
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Wish: @ 81D8726
 	attackcanceler
@@ -2468,7 +2468,7 @@ MoveEffect_Wish: @ 81D8726
 	atkd4 0, BattleScript_1D83D6
 	attackanimation
 	waitanimation
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Assist: @ 81D8736
 	attackcanceler
@@ -2489,7 +2489,7 @@ MoveEffect_Ingrain: @ 81D874D
 	waitanimation
 	printstring BATTLE_TEXT_PlantedRoots
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Superpower: @ 81D8762
 	setbyte 0x2024d21, 229
@@ -2504,7 +2504,7 @@ MoveEffect_MagicCoat: @ 81D876D
 	waitanimation
 	printstring BATTLE_TEXT_ShroudedItself
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Recycle: @ 81D8782
 	attackcanceler
@@ -2515,7 +2515,7 @@ MoveEffect_Recycle: @ 81D8782
 	waitanimation
 	printstring BATTLE_TEXT_FoundOne
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Revenge: @ 81D8797
 	doubledamagedealtifdamaged
@@ -2554,7 +2554,7 @@ BattleScript_1D87D0: @ 81D87D0
 	waitmessage 64
 	seteffectwithchancetarget
 	faintpokemon TARGET, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Yawn: @ 81D87EE
 	attackcanceler
@@ -2571,7 +2571,7 @@ MoveEffect_Yawn: @ 81D87EE
 	waitanimation
 	printstring BATTLE_TEXT_DrowsyMade
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D882F: @ 81D882F
 	copyarray 0x2016003, 0x20160f8, 1
@@ -2580,7 +2580,7 @@ BattleScript_1D8839: @ 81D8839
 	pause 32
 	printstring BATTLE_TEXT_MadeIneffective2
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_KnockOff: @ 81D8847
 	setbyte 0x2024d21, 54
@@ -2614,7 +2614,7 @@ MoveEffect_SkillSwap: @ 81D8893
 	waitanimation
 	printstring BATTLE_TEXT_AbilitySwap
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Imprison: @ 81D88AF
 	attackcanceler
@@ -2625,7 +2625,7 @@ MoveEffect_Imprison: @ 81D88AF
 	waitanimation
 	printstring BATTLE_TEXT_SealedMove
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Refresh: @ 81D88C4
 	attackcanceler
@@ -2637,7 +2637,7 @@ MoveEffect_Refresh: @ 81D88C4
 	printstring BATTLE_TEXT_StatusNormal
 	waitmessage 64
 	atk98 1
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Grudge: @ 81D88DB
 	attackcanceler
@@ -2648,7 +2648,7 @@ MoveEffect_Grudge: @ 81D88DB
 	waitanimation
 	printstring BATTLE_TEXT_GrudgeBear
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Snatch: @ 81D88F0
 	attackcanceler
@@ -2660,7 +2660,7 @@ MoveEffect_Snatch: @ 81D88F0
 	pause 32
 	printstring BATTLE_TEXT_AwaitMove
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_LowKick: @ 81D8908
 	attackcanceler
@@ -2745,7 +2745,7 @@ MoveEffect_WaterSport: @ 81D89D7
 	waitanimation
 	printfromtable BattleTextList_4015D4
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_PoisonFang: @ 81D89EE
 	setbyte 0x2024d21, 6
@@ -2788,14 +2788,14 @@ BattleScript_1D8A55: @ 81D8A55
 	waitmessage 64
 
 BattleScript_1D8A78: @ 81D8A78
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D8A7D: @ 81D8A7D
 	pause 32
 	orbyte 0x2024c68, 32
 	printstring BATTLE_TEXT_StatNoLower
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_CosmicPower: @ 81D8A91
 	attackcanceler
@@ -2823,7 +2823,7 @@ BattleScript_1D8AD1: @ 81D8AD1
 	waitmessage 64
 
 BattleScript_1D8AF0: @ 81D8AF0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_SkyUppercut: @ 81D8AF5
 	orword 0x2024c6c, 0x10000
@@ -2855,7 +2855,7 @@ BattleScript_1D8B43: @ 81D8B43
 	waitmessage 64
 
 BattleScript_1D8B62: @ 81D8B62
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_CalmMind: @ 81D8B67
 	attackcanceler
@@ -2883,14 +2883,14 @@ BattleScript_1D8BA7: @ 81D8BA7
 	waitmessage 64
 
 BattleScript_1D8BC6: @ 81D8BC6
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D8BCB: @ 81D8BCB
 	pause 32
 	orbyte 0x2024c68, 32
 	printstring BATTLE_TEXT_StatNoHigher
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_DragonDance: @ 81D8BDF
 	attackcanceler
@@ -2918,7 +2918,7 @@ BattleScript_1D8C1F: @ 81D8C1F
 	waitmessage 64
 
 BattleScript_1D8C3E: @ 81D8C3E
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 MoveEffect_Camouflage: @ 81D8C43
 	attackcanceler
@@ -2929,7 +2929,7 @@ MoveEffect_Camouflage: @ 81D8C43
 	waitanimation
 	printstring BATTLE_TEXT_TypeTransform
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D8C58:: @ 81D8C58
 	atk56 1
@@ -3188,11 +3188,11 @@ BattleScript_1D8EAD: @ 81D8EAD
 BattleScript_1D8EEE: @ 81D8EEE
 	return
 
-gUnknown_081D8EEF:: @ 81D8EEF
+BattleScript_Pausex20:: @ 81D8EEF
 	pause 32
 	return
 
-gUnknown_081D8EF3:: @ 81D8EF3
+BattleScript_LevelUp:: @ 81D8EF3
 	atk55 0xe10016f
 	attackcanceler
 	setbyte 0x201609c, 0
@@ -3338,7 +3338,7 @@ BattleScript_1D9083: @ 81D9083
 gUnknown_081D90A7:: @ 81D90A7
 	printstring BATTLE_TEXT_StoringEnergy
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D90B2:: @ 81D90B2
 	printstring BATTLE_TEXT_UnleashedEnergy
@@ -3359,7 +3359,7 @@ gUnknown_081D90B2:: @ 81D90B2
 	resultmessage
 	waitmessage 64
 	faintpokemon TARGET, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D90F1:: @ 81D90F1
 	printstring BATTLE_TEXT_UnleashedEnergy
@@ -3383,7 +3383,7 @@ BattleScript_1D9116: @ 81D9116
 	waitstateatk
 	printstring BATTLE_TEXT_DraggedOut
 	atk52 TARGET
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9128:: @ 81D9128
 	pause 32
@@ -3399,7 +3399,7 @@ gUnknown_081D9132:: @ 81D9132
 gUnknown_081D9139:: @ 81D9139
 	printstring BATTLE_TEXT_MoveIsDisabled
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9144:: @ 81D9144
 	printstring2 BATTLE_TEXT_MoveIsDisabled
@@ -3527,7 +3527,7 @@ BattleScript_1D92AB: @ 81D92AB
 BattleScript_1D92BF: @ 81D92BF
 	return
 
-gUnknown_081D92C0:: @ 81D92C0
+BattleScript_RapidSpinAway:: @ 81D92C0
 	breakfree
 	return
 
@@ -3601,19 +3601,19 @@ gUnknown_081D9369:: @ 81D9369
 	printstring2 BATTLE_TEXT_NoPP1
 	atk44
 
-gUnknown_081D936D:: @ 81D936D
+BattleScript_NoPPForMove:: @ 81D936D
 	attackstring
 	pause 32
 	printstring BATTLE_TEXT_NoPP2
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D937C:: @ 81D937C
 	printstring2 BATTLE_TEXT_TormentNoUse
 	atk44
 	printstring BATTLE_TEXT_TormentNoUse
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D938B:: @ 81D938B
 	printstring2 BATTLE_TEXT_TauntNoUse
@@ -3622,7 +3622,7 @@ gUnknown_081D938B:: @ 81D938B
 gUnknown_081D938F:: @ 81D938F
 	printstring BATTLE_TEXT_TauntNoUse
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D939A:: @ 81D939A
 	atkd4 1, BattleScript_1D93C1
@@ -3657,7 +3657,7 @@ BattleScript_1D93EC: @ 81D93EC
 	pause 32
 	printstring BATTLE_TEXT_AnchoredItself
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D93FA:: @ 81D93FA
 	setbyte 0x20160dc, 0
@@ -3680,7 +3680,7 @@ BattleScript_1D9427: @ 81D9427
 BattleScript_1D944A: @ 81D944A
 	return
 
-gUnknown_081D944B:: @ 81D944B
+BattleScript_KnockedOff:: @ 81D944B
 	playanimation TARGET, 5, 0x0
 	printstring BATTLE_TEXT_KnockedOffItem
 	waitmessage 64
@@ -3689,7 +3689,7 @@ gUnknown_081D944B:: @ 81D944B
 gUnknown_081D9459:: @ 81D9459
 	printstring BATTLE_TEXT_SealedNoUse
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9464:: @ 81D9464
 	printstring2 BATTLE_TEXT_SealedNoUse
@@ -3700,7 +3700,7 @@ gUnknown_081D9468:: @ 81D9468
 	waitmessage 64
 	return
 
-gUnknown_081D946F:: @ 81D946F
+BattleScript_MagicCoatBounce:: @ 81D946F
 	attackstring
 	ppreduce
 	pause 32
@@ -3710,7 +3710,7 @@ gUnknown_081D946F:: @ 81D946F
 	atk76 USER, 1
 	return
 
-gUnknown_081D9487:: @ 81D9487
+BattleScript_SnatchedMove:: @ 81D9487
 	attackstring
 	ppreduce
 	snatchmove
@@ -3721,12 +3721,12 @@ gUnknown_081D9487:: @ 81D9487
 	atk5f
 	return
 
-gUnknown_081D94A2:: @ 81D94A2
+BattleScript_EnduredMsg:: @ 81D94A2
 	printstring BATTLE_TEXT_EnduredHit
 	waitmessage 64
 	return
 
-gUnknown_081D94A9:: @ 81D94A9
+BattleScript_OneHitKOMsg:: @ 81D94A9
 	printstring BATTLE_TEXT_GrandSlam
 	waitmessage 64
 	return
@@ -3755,7 +3755,7 @@ gUnknown_081D94EE:: @ 81D94EE
 	printstring BATTLE_TEXT_FastAsleep
 	waitmessage 64
 	statusanimation USER
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D94FB:: @ 81D94FB
 	bicword 0x2024c6c, 0x10
@@ -3796,7 +3796,7 @@ gUnknown_081D9545:: @ 81D9545
 	printstring BATTLE_TEXT_FrozenSolid
 	waitmessage 64
 	statusanimation USER
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9552:: @ 81D9552
 	printfromtable BattleTextList_4015C4
@@ -3814,12 +3814,12 @@ gUnknown_081D9566:: @ 81D9566
 	printstring BATTLE_TEXT_Paralyzed3
 	waitmessage 64
 	statusanimation USER
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9573:: @ 81D9573
 	printstring BATTLE_TEXT_Flinched
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D957E:: @ 81D957E
 	printfromtable BattleTextList_40155A
@@ -3850,7 +3850,7 @@ BattleScript_1D95AC: @ 81D95AC
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D95D3: @ 81D95D3
 	return
@@ -3885,7 +3885,7 @@ gUnknown_081D95FB:: @ 81D95FB
 gUnknown_081D9608:: @ 81D9608
 	printstring BATTLE_TEXT_ImmobilizedBy
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9613:: @ 81D9613
 	printstring BATTLE_TEXT_NightmareLock
@@ -3899,7 +3899,7 @@ gUnknown_081D9624:: @ 81D9624
 	atk65 1, 0x10000000
 	jump BattleScript_1D9520
 
-gUnknown_081D9635:: @ 81D9635
+BattleScript_TargetPRLZHeal:: @ 81D9635
 	printstring BATTLE_TEXT_ParalysisHealed
 	waitmessage 64
 	atk98 0
@@ -3990,7 +3990,7 @@ BattleScript_1D96DB: @ 81D96DB
 BattleScript_1D96F5: @ 81D96F5
 	return
 
-gUnknown_081D96F6:: @ 81D96F6
+BattleScript_ItemSteal:: @ 81D96F6
 	playanimation TARGET, 16, 0x0
 	printstring BATTLE_TEXT_StoleSomething
 	waitmessage 64
@@ -4103,7 +4103,7 @@ gUnknown_081D97FE:: @ 81D97FE
 	callatk BattleScript_1D9761
 	end3
 
-gUnknown_081D9812:: @ 81D9812
+BattleScript_TookAttack:: @ 81D9812
 	attackstring
 	pause 32
 	printstring BATTLE_TEXT_TookAttack2
@@ -4115,13 +4115,13 @@ gUnknown_081D9826:: @ 81D9826
 	pause 32
 	printstring BATTLE_TEXT_ProtectedBy
 	pause 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9834:: @ 81D9834
 	pause 32
 	printstring BATTLE_TEXT_PreventedBy
 	pause 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9842:: @ 81D9842
 	ppreduce
@@ -4135,7 +4135,7 @@ gUnknown_081D9843:: @ 81D9843
 	printstring BATTLE_TEXT_HPRestoredUsing
 	waitmessage 64
 	orbyte 0x2024c68, 8
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9865:: @ 81D9865
 	ppreduce
@@ -4146,7 +4146,7 @@ gUnknown_081D9866:: @ 81D9866
 	printstring BATTLE_TEXT_MadeUseless
 	waitmessage 64
 	orbyte 0x2024c68, 8
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D987B:: @ 81D987B
 	ppreduce
@@ -4156,13 +4156,13 @@ gUnknown_081D987C:: @ 81D987C
 	pause 32
 	printfromtable BattleTextList_401648
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D988D: @ 81D988D
 	pause 32
 	printstring BATTLE_TEXT_AnchorsItself
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D989B:: @ 81D989B
 	pause 32
@@ -4170,19 +4170,19 @@ gUnknown_081D989B:: @ 81D989B
 	waitmessage 64
 	return
 
-BattleScript_1D98A5:: @ 81D98A5
+BattleScript_BRNPrevention:: @ 81D98A5
 	pause 32
 	printfromtable BattleTextList_401630
 	waitmessage 64
 	return
 
-BattleScript_1D98B1:: @ 81D98B1
+BattleScript_PRLZPrevention:: @ 81D98B1
 	pause 32
 	printfromtable BattleTextList_401636
 	waitmessage 64
 	return
 
-BattleScript_1D98BD:: @ 81D98BD
+BattleScript_PSNPrevention:: @ 81D98BD
 	pause 32
 	printfromtable BattleTextList_40163C
 	waitmessage 64
@@ -4192,19 +4192,19 @@ gUnknown_081D98C9:: @ 81D98C9
 	pause 32
 	printstring BATTLE_TEXT_PreventedRomance
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
-gUnknown_081D98D7:: @ 81D98D7
+BattleScript_FlinchPrevention:: @ 81D98D7
 	pause 32
 	printstring BATTLE_TEXT_PreventedFlinching
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 BattleScript_1D98E5: @ 81D98E5
 	pause 32
 	printstring BATTLE_TEXT_PreventedConfusion
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D98F3:: @ 81D98F3
 	attackstring
@@ -4212,7 +4212,7 @@ gUnknown_081D98F3:: @ 81D98F3
 	pause 32
 	printstring BATTLE_TEXT_BlocksOther
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9903:: @ 81D9903
 	pause 32
@@ -4221,11 +4221,11 @@ gUnknown_081D9903:: @ 81D9903
 	setbyte 0x2024d23, 3
 	return
 
-gUnknown_081D9913:: @ 81D9913
+BattleScript_NoItemSteal:: @ 81D9913
 	pause 32
 	printstring BATTLE_TEXT_MadeIneffective
 	waitmessage 64
-	jump BattleScript_1D6F62
+	jump BattleScript_EndTurn
 
 gUnknown_081D9921:: @ 81D9921
 	printstring BATTLE_TEXT_MadeType
@@ -4296,7 +4296,7 @@ gUnknown_081D99A0:: @ 81D99A0
 	waitmessage 64
 	jump BattleScript_1D95AC
 
-gUnknown_081D99AB:: @ 81D99AB
+BattleScript_SubstituteFade:: @ 81D99AB
 	playanimation TARGET, 2, 0x0
 	printstring BATTLE_TEXT_SubFaded
 	return
@@ -4429,7 +4429,7 @@ gUnknown_081D9AC2:: @ 81D9AC2
 	printstring2 BATTLE_TEXT_ChoiceBand
 	atk44
 
-gUnknown_081D9AC6:: @ 81D9AC6
+BattleScript_HangedOnMsg:: @ 81D9AC6
 	playanimation TARGET, 9, 0x0
 	printstring BATTLE_TEXT_FocusSash
 	waitmessage 64
@@ -4455,7 +4455,7 @@ gUnknown_081D9AFE:: @ 81D9AFE
 
 BattleScript_1D9B0B: @ 81D9B0B
 	setbyte 0x2024d23, 4
-	callatk gUnknown_081D71E5
+	callatk BattleScript_StatUp
 	removeitem USER
 	end2
 
