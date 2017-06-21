@@ -197,7 +197,8 @@ struct Struct2017810
 struct Struct2017840
 {
     u16 unk0;
-    u8 filler2[7];
+    u8 filler2[6];
+    u8 unk8;
     u8 unk9_0:1;
 };
 
