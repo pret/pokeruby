@@ -1,5 +1,4 @@
-static const u8 sFontType3Map[] =
-{
+static const u8 sFontType3Map[] = {
     0x00, 0x10,
     0x01, 0x10,
     0x02, 0x10,
