@@ -34,6 +34,7 @@
 #include "battle_tower.h"
 #include "field_weather.h"
 #include "pokemon_summary_screen.h"
+#include "rng.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
@@ -2088,10 +2089,16 @@ void sub_810F9AC(void)
     }
 }
 
+const u8 gUnknown_083F8404[] = {2, 1, 2, 1};
+const u8 gUnknown_083F8408[] = {8,  9, 10, 11, 12, 13, 14, 15};
+const u8 gUnknown_083F8410[] = {8, 13, 14, 11, 10, 12, 15,  9};
+
 bool8 sub_810FF30(void);
 void sub_810FCE8(void);
 void sub_810FF48(void);
 void sub_810FD80(void);
+u16 sub_810FCB0(void);
+int sub_810FB9C(void);
 
 void ResetFanClub(void)
 {
@@ -2121,4 +2128,75 @@ void sub_810FAA0(void)
         FlagReset(0x318);
         VarSet(VAR_0x4095, 1);
     }
+}
+
+u8 sub_810FB10(u8 a0)
+{
+    if (VarGet(VAR_0x4095) == 2)
+    {
+        if ((gSaveBlock1.vars[0x41] & 0x7f) + gUnknown_083F8404[a0] >= 20)
+        {
+            if (sub_810FCB0() < 3)
+            {
+                sub_810FB9C();
+                gSaveBlock1.vars[0x41] &= 0xff80;
+            }
+            else
+            {
+                gSaveBlock1.vars[0x41] = (gSaveBlock1.vars[0x41] & 0xff80) | 20;
+            }
+        }
+        else
+        {
+            gSaveBlock1.vars[0x41] += gUnknown_083F8404[a0];
+        }
+    }
+    return gSaveBlock1.vars[0x41] & 0x7f;
+}
+
+int sub_810FB9C(void)
+{
+    u8 i;
+    int retval = 0;
+    for (i=0; i<8; i++)
+    {
+        if (!((gSaveBlock1.vars[0x41] >> gUnknown_083F8408[i]) & 0x01))
+        {
+            retval = i;
+            if (Random() & 1)
+            {
+                gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[i]);
+                return retval;
+            }
+        }
+    }
+    gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[retval]);
+    return retval;
+}
+
+int sub_810FC18(void)
+{
+    u8 i;
+    int retval = 0;
+    if (sub_810FCB0() == TRUE)
+    {
+        return 0;
+    }
+    for (i=0; i<8; i++)
+    {
+        if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[i]) & 1)
+        {
+            retval = i;
+            if (Random() & 1)
+            {
+                gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[i]);
+                return retval;
+            }
+        }
+    }
+    if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[retval]) & 1)
+    {
+        gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[retval]);
+    }
+    return retval;
 }

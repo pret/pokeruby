@@ -439,7 +439,6 @@ SECTIONS {
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
-        data/field_specials.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         data/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
