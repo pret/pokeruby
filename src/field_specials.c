@@ -2053,3 +2053,72 @@ bool8 sub_810F96C(void)
     }
     return TRUE;
 }
+
+void sub_810F9AC(void)
+{
+    if (gScriptResult >= 10000)
+    {
+        sub_80BF088(0, gScriptResult);
+    }
+    else if (gScriptResult >= 1000)
+    {
+        gStringVar1[0] = 0xa1; // "0"
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+    }
+    else if (gScriptResult >= 100)
+    {
+        gStringVar1[0] = 0xa1; // "0"
+        gStringVar1[1] = 0xa1; // "0"
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+    }
+    else if (gScriptResult >= 10)
+    {
+        gStringVar1[0] = 0xa1; // "0"
+        gStringVar1[1] = 0xa1; // "0"
+        gStringVar1[2] = 0xa1; // "0"
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+    }
+    else
+    {
+        gStringVar1[0] = 0xa1; // "0"
+        gStringVar1[1] = 0xa1; // "0"
+        gStringVar1[2] = 0xa1; // "0"
+        gStringVar1[3] = 0xa1; // "0"
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+    }
+}
+
+bool8 sub_810FF30(void);
+void sub_810FCE8(void);
+void sub_810FF48(void);
+void sub_810FD80(void);
+
+void ResetFanClub(void)
+{
+    gSaveBlock1.vars[0x41] = 0;
+    gSaveBlock1.vars[0x42] = 0;
+}
+
+void sub_810FA74(void)
+{
+    if (sub_810FF30())
+    {
+        sub_810FCE8();
+        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+    }
+}
+
+void sub_810FAA0(void)
+{
+    if (!((gSaveBlock1.vars[0x41] >> 7) & 1))
+    {
+        sub_810FF48();
+        sub_810FD80();
+        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+        FlagReset(0x315);
+        FlagReset(0x316);
+        FlagReset(0x317);
+        FlagReset(0x318);
+        VarSet(VAR_0x4095, 1);
+    }
+}
