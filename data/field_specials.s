@@ -3,17 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_083F83C0:: @ 83F83C0
-	.4byte OtherText_BlueFlute
-	.4byte OtherText_YellowFlute
-	.4byte OtherText_RedFlute
-	.4byte OtherText_WhiteFlute
-	.4byte OtherText_BlackFlute
-	.4byte OtherText_PrettyChair
-	.4byte OtherText_PrettyDesk
-	.4byte gOtherText_CancelNoTerminator
-
 gUnknown_083F83E0:: @ 83F83E0
 	.byte 12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6
 
