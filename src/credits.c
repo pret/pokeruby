@@ -1495,7 +1495,7 @@ void spritecb_81454E0(struct Sprite *sprite) {
 static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 {
     u32 personality;
-    const u16 *palette;
+    const u8 *lzPaletteData;
     u8 spriteId;
     u8 spriteId2;
 
@@ -1527,8 +1527,8 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         1
     );
 
-    palette = species_and_otid_get_pal(species, 0, 0xFFFF);
-    LoadCompressedPalette(palette, 0x100 + (position * 16), 0x20);
+    lzPaletteData = species_and_otid_get_pal(species, 0, 0xFFFF);
+    LoadCompressedPalette(lzPaletteData, 0x100 + (position * 16), 0x20);
     sub_8143648(position, position);
 
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);

@@ -49,7 +49,7 @@ EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
 
 extern u16 gBattleTypeFlags;
 extern u16 gScriptLastTalked;
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 extern struct MapObject gMapObjects[];
 
@@ -574,7 +574,7 @@ void HandleWildBattleEnd(void)
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -590,7 +590,7 @@ void HandleScriptedWildBattleEnd(void)
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -1051,7 +1051,7 @@ void sub_808260C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -1068,7 +1068,7 @@ void do_choose_name_or_words_screen(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }

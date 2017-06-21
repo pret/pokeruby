@@ -172,12 +172,12 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7790[] =
 {
     gSpriteAffineAnim_83F7774,
 };
-static const struct SpriteSheet gUnknown_083F7794[] =
+static const struct CompressedSpriteSheet gUnknown_083F7794[] =
 {
     {gBirchBallarrow_Gfx, 0x0800, 0x1000},
     {NULL},
 };
-static const struct SpriteSheet gUnknown_083F77A4[] =
+static const struct CompressedSpriteSheet gUnknown_083F77A4[] =
 {
     {gBirchCircle_Gfx, 0x0800, 0x1001},
     {NULL},

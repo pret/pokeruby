@@ -203,7 +203,7 @@ struct Struct2017840
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;
-extern struct UnkBattleStruct4 gUnknown_02024CA8[];
+extern struct UnkBattleStruct4 gDisableStructs[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
 // TODO: move ewram to global.h
@@ -263,30 +263,30 @@ void sub_8011834(void);
 void bc_801362C(void);
 void sub_8011970(void);
 void sub_80119B4(void);
-void sub_8011B00(void);
-void sub_8011E8C(void);
+void BattleBeginFirstTurn(void);
+void BattleTurnPassed(void);
 
 // asm/battle_2.o
 void sub_8012324(void);
 void sub_8012FBC(u8, u8);
 u8 b_first_side(u8, u8, u8);
-void sub_801365C(u8);
-void sub_801377C(void);
+void TurnValuesCleanUp(u8);
+void SpecialStatusesClear(void);
 void sub_80138F0(void);
-void dp01_battle_side_mark_buffer_for_execution();
+void MarkBufferBankForExecution();
 void sub_80155A4();
-void b_cancel_multi_turn_move_maybe(u8);
-void b_std_message();
+void CancelMultiTurnMoves(u8);
+void PrepareStringBattle();
 void sub_80156DC();
 void sub_80157C4(u8 index);
 
 // asm/battle_3.o
 u8 sub_8015A98(u8, u8, u8);
-u8 sub_8015DFC();
-u8 sub_8016558();
+u8 UpdateTurnCounters();
+u8 TurnBasedEffects();
 u8 sub_80170DC();
 u8 sub_80173A4();
-u8 sub_8018324(u8, u8, u8, u8, u16);
+u8 AbilityBattleEffects(u8, u8, u8, u8, u16);
 u8 sub_801A02C();
 
 // asm/battle_4.o
@@ -295,7 +295,7 @@ void move_effectiveness_something(u16, u8, u8);
 
 // asm/battle_5.o
 void nullsub_91(void);
-void sub_802BF74(void);
+void SetBankFuncToPlayerBufferRunCommand(void);
 void sub_802C098();
 void c3_0802FDF4(u8);
 void sub_802E3E4(u8, int);
@@ -312,9 +312,9 @@ void sub_8031F88(u8);
 void sub_80324F8(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
-void sub_8032AE0(void);
+void SetBankFuncToOpponentBufferRunCommand(void);
 
 // asm/battle_9.o
-void sub_8037510(void);
+void SetBankFuncToLinkOpponentBufferRunCommand(void);
 
 #endif // GUARD_BATTLE_H

@@ -4,7 +4,7 @@
 #include "text.h"
 
 extern u16 gBattleTypeFlags;
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 extern struct Window gUnknown_03004210;
 
@@ -37,7 +37,7 @@ extern u8 BattleText_Tie[];
 void PrintLinkBattleWinLossTie(void)
 {
 
-    if (gUnknown_02024D26 == 3)
+    if (gBattleOutcome == 3)
     {
         PRINT_MESSAGE(BattleText_Tie, TILE_OFFSET_WIN, CENTER_MESSAGE_X);
         return;
@@ -47,7 +47,7 @@ void PrintLinkBattleWinLossTie(void)
     {
         // Double battle?
 
-        if (gUnknown_02024D26 == 1)
+        if (gBattleOutcome == 1)
         {
 
             // lp_field_18 = player position?
@@ -89,7 +89,7 @@ void PrintLinkBattleWinLossTie(void)
     }
 
 
-    if (gUnknown_02024D26 == 1)
+    if (gBattleOutcome == 1)
     {
         if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
         {

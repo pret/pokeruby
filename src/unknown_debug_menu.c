@@ -1,7 +1,7 @@
 #include "global.h"
 #include "menu.h"
 
-extern u8 gUnknown_02024D1E[];
+extern u8 gBattleCommunication[];
 
 extern u8 (*gCallback_03004AE8)(void);
 
@@ -33,7 +33,7 @@ static u8 sub_814A464(void)
     }
     else
     {
-        gUnknown_02024D1E[0] = result;
+        gBattleCommunication[0] = result;
         gCallback_03004AE8 = gUnknown_0842C29C[result].func;
         return 0;
     }
@@ -43,8 +43,8 @@ u8 sub_814A4B8(void)
 {
     gSaveBlock2.filler_A8.var_4AE = 3;
     gSaveBlock2.filler_A8.var_4AF = 3;
-    gSaveBlock2.filler_A8.var_4B4 = gUnknown_02024D1E[0] + 1;
-    gSaveBlock2.filler_A8.var_4B6 = gUnknown_02024D1E[0] + 1;
+    gSaveBlock2.filler_A8.var_4B4 = gBattleCommunication[0] + 1;
+    gSaveBlock2.filler_A8.var_4B6 = gBattleCommunication[0] + 1;
     gSaveBlock2.filler_A8.var_4B0 = 1;
     gSaveBlock2.filler_A8.var_4B2 = 1;
     CloseMenu();

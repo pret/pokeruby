@@ -2121,7 +2121,7 @@ sub_810C788: @ 810C788
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _0810C840 @ =gUnknown_030041C0
+	ldr r0, _0810C840 @ =gBattleTextBuff1
 	ldr r2, _0810C844 @ =gPokeblockNames
 	ldr r1, _0810C848 @ =0xfffff808
 	adds r5, r1
@@ -2189,7 +2189,7 @@ _0810C808:
 _0810C834: .4byte gEnemyParty
 _0810C838: .4byte gScriptItemId
 _0810C83C: .4byte gSaveBlock1 + 0x7F8
-_0810C840: .4byte gUnknown_030041C0
+_0810C840: .4byte gBattleTextBuff1
 _0810C844: .4byte gPokeblockNames
 _0810C848: .4byte 0xfffff808
 _0810C84C: .4byte gTasks

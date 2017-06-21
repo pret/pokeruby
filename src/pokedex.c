@@ -162,7 +162,7 @@ extern const u8 gUnknown_08E96ACC[];
 extern const u8 gUnknown_08E96B58[];
 extern const u16 gPokedexMenu_Pal[];
 extern const u16 gPokedexMenu2_Pal[];
-extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
 extern const u8 gPokedexMenuSearch_Gfx[];
@@ -493,7 +493,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A05B4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F168,
 };
-static const struct SpriteSheet gUnknown_083A05CC[] =
+static const struct CompressedSpriteSheet gUnknown_083A05CC[] =
 {
     {gPokedexMenu2_Gfx, 0x1F00, 0x1000},
     {NULL, 0, 0},
@@ -3921,7 +3921,7 @@ static void sub_8090B8C(u8 taskId)
         u32 otId;
         u32 personality;
         u8 paletteNum;
-        const u16 *palette;
+        const u8 *lzPaletteData;
 
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
         CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
@@ -3930,8 +3930,8 @@ static void sub_8090B8C(u8 taskId)
         otId = ((u16)gTasks[taskId].data[13] << 16) | (u16)gTasks[taskId].data[12];
         personality = ((u16)gTasks[taskId].data[15] << 16) | (u16)gTasks[taskId].data[14];
         paletteNum = gSprites[gTasks[taskId].data[3]].oam.paletteNum;
-        palette = species_and_otid_get_pal(species, otId, personality);
-        LoadCompressedPalette(palette, 0x100 | paletteNum * 16, 32);
+        lzPaletteData = species_and_otid_get_pal(species, otId, personality);
+        LoadCompressedPalette(lzPaletteData, 0x100 | paletteNum * 16, 32);
         DestroyTask(taskId);
     }
 }

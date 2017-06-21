@@ -2,6 +2,32 @@
 #define GUARD_GRAPHICS_H
 
 // data/graphics.s
+extern const u8 gInterfaceGfx_PokeBall[];
+extern const u8 gInterfacePal_PokeBall[];
+extern const u8 gInterfaceGfx_GreatBall[];
+extern const u8 gInterfacePal_GreatBall[];
+extern const u8 gInterfaceGfx_SafariBall[];
+extern const u8 gInterfacePal_SafariBall[];
+extern const u8 gInterfaceGfx_UltraBall[];
+extern const u8 gInterfacePal_UltraBall[];
+extern const u8 gInterfaceGfx_MasterBall[];
+extern const u8 gInterfacePal_MasterBall[];
+extern const u8 gInterfaceGfx_NetBall[];
+extern const u8 gInterfacePal_NetBall[];
+extern const u8 gInterfaceGfx_DiveBall[];
+extern const u8 gInterfacePal_DiveBall[];
+extern const u8 gInterfaceGfx_NestBall[];
+extern const u8 gInterfacePal_NestBall[];
+extern const u8 gInterfaceGfx_RepeatBall[];
+extern const u8 gInterfacePal_RepeatBall[];
+extern const u8 gInterfaceGfx_TimerBall[];
+extern const u8 gInterfacePal_TimerBall[];
+extern const u8 gInterfaceGfx_LuxuryBall[];
+extern const u8 gInterfacePal_LuxuryBall[];
+extern const u8 gInterfaceGfx_PremierBall[];
+extern const u8 gInterfacePal_PremierBall[];
+extern const u8 gUnknown_08D030D0[];
+
 extern const u8 gMonFootprint_QuestionMark[];
 
 // data/graphics/pokemon/graphics.inc
