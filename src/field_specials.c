@@ -1729,3 +1729,16 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
         DestroyVerticalScrollIndicator(1);
     }
 }
+
+void SpawnCameraDummy(void)
+{
+    u8 mapObjectId = SpawnSpecialFieldObjectParametrized(7, 8, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
+    gMapObjects[mapObjectId].mapobj_bit_13 = 1;
+    CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
+}
+
+void RemoveCameraDummy(void)
+{
+    CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
+    RemoveFieldObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+}

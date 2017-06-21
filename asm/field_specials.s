@@ -6,65 +6,6 @@
 
 	.text
 
-	thumb_func_start SpawnCameraDummy
-SpawnCameraDummy: @ 810F338
-	push {lr}
-	sub sp, 0x8
-	ldr r0, _0810F380 @ =gSaveBlock1
-	ldrh r3, [r0]
-	adds r3, 0x7
-	lsls r3, 16
-	asrs r3, 16
-	ldrh r0, [r0, 0x2]
-	adds r0, 0x7
-	lsls r0, 16
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x3
-	str r0, [sp, 0x4]
-	movs r0, 0x7
-	movs r1, 0x8
-	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0810F384 @ =gMapObjects
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0x1]
-	movs r2, 0x20
-	orrs r0, r2
-	strb r0, [r1, 0x1]
-	ldrb r0, [r1, 0x4]
-	bl CameraObjectSetFollowedObjectId
-	add sp, 0x8
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810F380: .4byte gSaveBlock1
-_0810F384: .4byte gMapObjects
-	thumb_func_end SpawnCameraDummy
-
-	thumb_func_start RemoveCameraDummy
-RemoveCameraDummy: @ 810F388
-	push {lr}
-	bl GetPlayerAvatarObjectId
-	lsls r0, 24
-	lsrs r0, 24
-	bl CameraObjectSetFollowedObjectId
-	ldr r0, _0810F3A8 @ =gSaveBlock1
-	ldrb r1, [r0, 0x5]
-	ldrb r2, [r0, 0x4]
-	movs r0, 0x7F
-	bl RemoveFieldObjectByLocalIdAndMap
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810F3A8: .4byte gSaveBlock1
-	thumb_func_end RemoveCameraDummy
-
 	thumb_func_start GetPokeblockNameByMonNature
 GetPokeblockNameByMonNature: @ 810F3AC
 	push {lr}
