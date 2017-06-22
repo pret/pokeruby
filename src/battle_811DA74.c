@@ -425,7 +425,7 @@ void LinkPartnerHandleGetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
-// Duplicate of dp01_getattr_by_ch1_for_player_pokemon
+// Duplicate of dp01_getattr_by_ch1_for_player_pokemon_
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
