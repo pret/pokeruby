@@ -10,9 +10,18 @@
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
+
+//Possibly PokemonSubstruct1
+struct UnknownStruct3
+{
+    u16 moves[4];
+    u8 pp[4];
+    u8 ppBonuses;
+};
 
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
@@ -121,7 +130,11 @@ extern void sub_80312F0(struct Sprite *);
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8046400();
+extern void sub_802D798(void);
+extern void bx_0802E404(void);
 
+u32 dp01_getattr_by_ch1_for_player_pokemon_(u8, u8 *);
+void dp01_setattr_by_ch1_for_player_pokemon(u8);
 void sub_802F934(u8, u8);
 void sub_802FB2C(void);
 void sub_8030190(void);
@@ -129,6 +142,618 @@ void sub_80304A8(void);
 void sub_8030E38(struct Sprite *);
 void task05_08033660(u8);
 void sub_8031064(void);
+
+void PlayerHandleGetAttributes(void)
+{
+    u8 unkData[0x100];
+    u32 offset = 0;
+    u8 r4;
+    s32 i;
+
+    if (gBattleBufferA[gActiveBank][2] == 0)
+    {
+        offset += dp01_getattr_by_ch1_for_player_pokemon_(gBattlePartyID[gActiveBank], unkData);
+    }
+    else
+    {
+        r4 = gBattleBufferA[gActiveBank][2];
+        for (i = 0; i < 6; i++)
+        {
+            if (r4 & 1)
+                offset += dp01_getattr_by_ch1_for_player_pokemon_(i, unkData + offset);
+            r4 >>= 1;
+        }
+    }
+    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, offset, unkData);
+    PlayerBufferExecCompleted();
+}
+
+// Duplicate of dp01_getattr_by_ch1_for_player_pokemon
+u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
+{
+    struct BattlePokemon battlePokemon;
+    struct UnknownStruct3 moveData;
+    u8 nickname[20];
+    u8 *src;
+    s16 data16;
+    u32 data32;
+    s32 size = 0;
+
+    switch (gBattleBufferA[gActiveBank][1])
+    {
+    case 0:
+        battlePokemon.species = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
+        battlePokemon.item = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
+        for (size = 0; size < 4; size++)
+        {
+            battlePokemon.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
+            battlePokemon.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+        }
+        battlePokemon.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
+        battlePokemon.friendship = GetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP);
+        battlePokemon.experience = GetMonData(&gPlayerParty[a], MON_DATA_EXP);
+        battlePokemon.hpIV = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
+        battlePokemon.attackIV = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
+        battlePokemon.defenseIV = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
+        battlePokemon.speedIV = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        battlePokemon.spAttackIV = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
+        battlePokemon.spDefenseIV = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
+        battlePokemon.personality = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
+        battlePokemon.status1 = GetMonData(&gPlayerParty[a], MON_DATA_STATUS);
+        battlePokemon.level = GetMonData(&gPlayerParty[a], MON_DATA_LEVEL);
+        battlePokemon.hp = GetMonData(&gPlayerParty[a], MON_DATA_HP);
+        battlePokemon.maxHP = GetMonData(&gPlayerParty[a], MON_DATA_MAX_HP);
+        battlePokemon.attack = GetMonData(&gPlayerParty[a], MON_DATA_ATK);
+        battlePokemon.defense = GetMonData(&gPlayerParty[a], MON_DATA_DEF);
+        battlePokemon.speed = GetMonData(&gPlayerParty[a], MON_DATA_SPD);
+        battlePokemon.spAttack = GetMonData(&gPlayerParty[a], MON_DATA_SPATK);
+        battlePokemon.spDefense = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF);
+        battlePokemon.isEgg = GetMonData(&gPlayerParty[a], MON_DATA_IS_EGG);
+        battlePokemon.altAbility = GetMonData(&gPlayerParty[a], MON_DATA_ALT_ABILITY);
+        battlePokemon.otId = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
+        GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
+        StringCopy10(battlePokemon.nickname, nickname);
+        GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
+        src = (u8 *)&battlePokemon;
+        for (size = 0; size < sizeof(battlePokemon); size++)
+            buffer[size] = src[size];
+        break;
+    case 1:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 2:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 3:
+        for (size = 0; size < 4; size++)
+        {
+            moveData.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
+            moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+        }
+        moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
+        src = (u8 *)&moveData;
+        for (size = 0; size < sizeof(moveData); size++)
+            buffer[size] = src[size];
+        break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBank][1] - 4);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 8:
+        for (size = 0; size < 4; size++)
+            buffer[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+        buffer[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
+        size++;
+        break;
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBank][1] - 9);
+        size = 1;
+        break;
+    case 17:
+        data32 = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
+        buffer[0] = (data32 & 0x000000FF);
+        buffer[1] = (data32 & 0x0000FF00) >> 8;
+        buffer[2] = (data32 & 0x00FF0000) >> 16;
+        size = 3;
+        break;
+    case 18:
+        data32 = GetMonData(&gPlayerParty[a], MON_DATA_EXP);
+        buffer[0] = (data32 & 0x000000FF);
+        buffer[1] = (data32 & 0x0000FF00) >> 8;
+        buffer[2] = (data32 & 0x00FF0000) >> 16;
+        size = 3;
+        break;
+    case 19:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_EV);
+        size = 1;
+        break;
+    case 20:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_EV);
+        size = 1;
+        break;
+    case 21:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_EV);
+        size = 1;
+        break;
+    case 22:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_EV);
+        size = 1;
+        break;
+    case 23:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV);
+        size = 1;
+        break;
+    case 24:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV);
+        size = 1;
+        break;
+    case 25:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP);
+        size = 1;
+        break;
+    case 26:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_POKERUS);
+        size = 1;
+        break;
+    case 27:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION);
+        size = 1;
+        break;
+    case 28:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL);
+        size = 1;
+        break;
+    case 29:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_GAME);
+        size = 1;
+        break;
+    case 30:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_POKEBALL);
+        size = 1;
+        break;
+    case 31:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
+        buffer[1] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
+        buffer[2] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
+        buffer[3] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        buffer[4] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
+        buffer[5] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
+        size = 6;
+        break;
+    case 32:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
+        size = 1;
+        break;
+    case 33:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
+        size = 1;
+        break;
+    case 34:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
+        size = 1;
+        break;
+    case 35:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        size = 1;
+        break;
+    case 36:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
+        size = 1;
+        break;
+    case 37:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
+        size = 1;
+        break;
+    case 38:
+        data32 = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
+        buffer[0] = (data32 & 0x000000FF);
+        buffer[1] = (data32 & 0x0000FF00) >> 8;
+        buffer[2] = (data32 & 0x00FF0000) >> 16;
+        buffer[3] = (data32 & 0xFF000000) >> 24;
+        size = 4;
+        break;
+    case 39:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 40:
+        data32 = GetMonData(&gPlayerParty[a], MON_DATA_STATUS);
+        buffer[0] = (data32 & 0x000000FF);
+        buffer[1] = (data32 & 0x0000FF00) >> 8;
+        buffer[2] = (data32 & 0x00FF0000) >> 16;
+        buffer[3] = (data32 & 0xFF000000) >> 24;
+        size = 4;
+        break;
+    case 41:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_LEVEL);
+        size = 1;
+        break;
+    case 42:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_HP);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 43:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MAX_HP);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 44:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_ATK);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 45:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_DEF);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 46:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPD);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 47:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPATK);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 48:
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF);
+        buffer[0] = data16;
+        buffer[1] = data16 >> 8;
+        size = 2;
+        break;
+    case 49:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_COOL);
+        size = 1;
+        break;
+    case 50:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_BEAUTY);
+        size = 1;
+        break;
+    case 51:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_CUTE);
+        size = 1;
+        break;
+    case 52:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SMART);
+        size = 1;
+        break;
+    case 53:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_TOUGH);
+        size = 1;
+        break;
+    case 54:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SHEEN);
+        size = 1;
+        break;
+    case 55:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON);
+        size = 1;
+        break;
+    case 56:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON);
+        size = 1;
+        break;
+    case 57:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON);
+        size = 1;
+        break;
+    case 58:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON);
+        size = 1;
+        break;
+    case 59:
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON);
+        size = 1;
+        break;
+    }
+    return size;
+}
+
+void sub_802ECF0(void)
+{
+    struct BattlePokemon battleMon;  // I think this is a BattlePokemon
+    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst = (u8 *)&battleMon + gBattleBufferA[gActiveBank][1];
+    u8 i;
+
+    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
+        dst[i] = src[i];
+    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, gBattleBufferA[gActiveBank][2], dst);
+    PlayerBufferExecCompleted();
+}
+
+void PlayerHandleSetAttributes(void)
+{
+    u8 r4;
+    u8 i;
+
+    if (gBattleBufferA[gActiveBank][2] == 0)
+    {
+        dp01_setattr_by_ch1_for_player_pokemon(gBattlePartyID[gActiveBank]);
+    }
+    else
+    {
+        r4 = gBattleBufferA[gActiveBank][2];
+        for (i = 0; i < 6; i++)
+        {
+            if (r4 & 1)
+                dp01_setattr_by_ch1_for_player_pokemon(i);
+            r4 >>= 1;
+        }
+    }
+    PlayerBufferExecCompleted();
+}
+
+// Duplicate of sub_811EC68
+void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
+{
+    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
+    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gBattleBufferA[gActiveBank][3];
+    s32 i;
+
+    switch (gBattleBufferA[gActiveBank][1])
+    {
+    case 0:
+        {
+            u8 iv;
+
+            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
+            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            for (i = 0; i < 4; i++)
+            {
+                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+            }
+            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
+            SetMonData(&gPlayerParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            iv = battlePokemon->hpIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            iv = battlePokemon->attackIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            iv = battlePokemon->defenseIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            iv = battlePokemon->speedIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, (u8 *)&iv);
+            iv = battlePokemon->spAttackIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            iv = battlePokemon->spDefenseIV;
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
+            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
+            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPD, (u8 *)&battlePokemon->speed);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+        }
+        break;
+    case 1:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 2:
+        SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 3:
+        for (i = 0; i < 4; i++)
+        {
+            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+        }
+        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
+        break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBank][1] - 4, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 8:
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP2, &gBattleBufferA[gActiveBank][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP3, &gBattleBufferA[gActiveBank][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP4, &gBattleBufferA[gActiveBank][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &gBattleBufferA[gActiveBank][7]);
+        break;
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBank][1] - 9, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 17:
+        SetMonData(&gPlayerParty[a], MON_DATA_OT_ID, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 18:
+        SetMonData(&gPlayerParty[a], MON_DATA_EXP, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 19:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 20:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 21:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 22:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 23:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 24:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 25:
+        SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 26:
+        SetMonData(&gPlayerParty[a], MON_DATA_POKERUS, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 27:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 28:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 29:
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 30:
+        SetMonData(&gPlayerParty[a], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 31:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][7]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][8]);
+        break;
+    case 32:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 33:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 34:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 35:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 36:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 37:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 38:
+        SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 39:
+        SetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 40:
+        SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 41:
+        SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 42:
+        SetMonData(&gPlayerParty[a], MON_DATA_HP, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 43:
+        SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 44:
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 45:
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 46:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPD, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 47:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 48:
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 49:
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 50:
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 51:
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 52:
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 53:
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 54:
+        SetMonData(&gPlayerParty[a], MON_DATA_SHEEN, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 55:
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 56:
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 57:
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 58:
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        break;
+    case 59:
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        break;
+    }
+    sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+}
+
+void sub_802F7CC(void)
+{
+    u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 i;
+
+    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
+        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    PlayerBufferExecCompleted();
+}
+
+void PlayerHandleLoadPokeSprite(void)
+{
+    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
+    gBattleBankFunc[gActiveBank] = bx_0802E404;
+}
+
+void PlayerHandleSendOutPoke(void)
+{
+    sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
+    gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
+    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    gActionSelectionCursor[gActiveBank] = 0;
+    gMoveSelectionCursor[gActiveBank] = 0;
+    sub_802F934(gActiveBank, gBattleBufferA[gActiveBank][2]);
+    gBattleBankFunc[gActiveBank] = sub_802D798;
+}
 
 void sub_802F934(u8 bank, u8 b)
 {
@@ -297,8 +922,10 @@ void PlayerHandlePuase(void)
 {
     u8 var = gBattleBufferA[gActiveBank][1];
 
+    // WTF is this??
     while (var != 0)
         var--;
+
     PlayerBufferExecCompleted();
 }
 

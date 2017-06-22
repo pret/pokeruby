@@ -182,41 +182,41 @@ struct PokemonSubstruct2
 
 struct PokemonSubstruct3
 {
- /* 0x00 */ u8 pokerus;
- /* 0x01 */ u8 metLocation;
+    /*0x00*/ u8 pokerus;
+    /*0x01*/ u8 metLocation;
 
- /* 0x02 */ u16 metLevel:7;
- /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 pokeball:4;
- /* 0x03 */ u16 otGender:1;
+    /*0x02*/ u16 metLevel:7;
+    /*0x02*/ u16 metGame:4;
+    /*0x03*/ u16 pokeball:4;
+    /*0x03*/ u16 otGender:1;
 
- /* 0x04 */ u32 hpIV:5;
- /* 0x04 */ u32 attackIV:5;
- /* 0x05 */ u32 defenseIV:5;
- /* 0x05 */ u32 speedIV:5;
- /* 0x05 */ u32 spAttackIV:5;
- /* 0x06 */ u32 spDefenseIV:5;
- /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 altAbility:1;
+    /*0x04*/ u32 hpIV:5;
+    /*0x04*/ u32 attackIV:5;
+    /*0x05*/ u32 defenseIV:5;
+    /*0x05*/ u32 speedIV:5;
+    /*0x05*/ u32 spAttackIV:5;
+    /*0x06*/ u32 spDefenseIV:5;
+    /*0x07*/ u32 isEgg:1;
+    /*0x07*/ u32 altAbility:1;
 
- /* 0x08 */ u32 coolRibbon:3;
- /* 0x08 */ u32 beautyRibbon:3;
- /* 0x08 */ u32 cuteRibbon:3;
- /* 0x09 */ u32 smartRibbon:3;
- /* 0x09 */ u32 toughRibbon:3;
- /* 0x09 */ u32 championRibbon:1;
- /* 0x0A */ u32 winningRibbon:1;
- /* 0x0A */ u32 victoryRibbon:1;
- /* 0x0A */ u32 artistRibbon:1;
- /* 0x0A */ u32 effortRibbon:1;
- /* 0x0A */ u32 giftRibbon1:1;
- /* 0x0A */ u32 giftRibbon2:1;
- /* 0x0A */ u32 giftRibbon3:1;
- /* 0x0A */ u32 giftRibbon4:1;
- /* 0x0B */ u32 giftRibbon5:1;
- /* 0x0B */ u32 giftRibbon6:1;
- /* 0x0B */ u32 giftRibbon7:1;
- /* 0x0B */ u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
+    /*0x08*/ u32 coolRibbon:3;
+    /*0x08*/ u32 beautyRibbon:3;
+    /*0x08*/ u32 cuteRibbon:3;
+    /*0x09*/ u32 smartRibbon:3;
+    /*0x09*/ u32 toughRibbon:3;
+    /*0x09*/ u32 championRibbon:1;
+    /*0x0A*/ u32 winningRibbon:1;
+    /*0x0A*/ u32 victoryRibbon:1;
+    /*0x0A*/ u32 artistRibbon:1;
+    /*0x0A*/ u32 effortRibbon:1;
+    /*0x0A*/ u32 giftRibbon1:1;
+    /*0x0A*/ u32 giftRibbon2:1;
+    /*0x0A*/ u32 giftRibbon3:1;
+    /*0x0A*/ u32 giftRibbon4:1;
+    /*0x0B*/ u32 giftRibbon5:1;
+    /*0x0B*/ u32 giftRibbon6:1;
+    /*0x0B*/ u32 giftRibbon7:1;
+    /*0x0B*/ u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
 };
 
 union PokemonSubstruct
@@ -230,39 +230,39 @@ union PokemonSubstruct
 
 struct BoxPokemon
 {
-    u32 personality;
-    u32 otId;
-    u8 nickname[POKEMON_NAME_LENGTH];
-    u8 language;
-    u8 isBadEgg:1;
-    u8 hasSpecies:1;
-    u8 isEgg:1;
-    u8 unused:5;
-    u8 otName[OT_NAME_LENGTH];
-    u8 markings;
-    u16 checksum;
-    u16 unknown;
+    /*0x00*/ u32 personality;
+    /*0x04*/ u32 otId;
+    /*0x08*/ u8 nickname[POKEMON_NAME_LENGTH];
+    /*0x12*/ u8 language;
+    /*0x13*/ u8 isBadEgg:1;
+             u8 hasSpecies:1;
+             u8 isEgg:1;
+             u8 unused:5;
+    /*0x14*/ u8 otName[OT_NAME_LENGTH];
+    /*0x1B*/ u8 markings;
+    /*0x1C*/ u16 checksum;
+    /*0x1E*/ u16 unknown;
 
     union
     {
         u32 raw[12];
         union PokemonSubstruct substructs[4];
     } secure;
-};
+}; /*size = 0x50*/
 
 struct Pokemon
 {
-    struct BoxPokemon box;
-    u32 status;
-    u8 level;
-    u8 mail;
-    u16 hp;
-    u16 maxHP;
-    u16 attack;
-    u16 defense;
-    u16 speed;
-    u16 spAttack;
-    u16 spDefense;
+    /*0x00*/ struct BoxPokemon box;
+    /*0x50*/ u32 status;
+    /*0x54*/ u8 level;
+    /*0x55*/ u8 mail;
+    /*0x56*/ u16 hp;
+    /*0x58*/ u16 maxHP;
+    /*0x5A*/ u16 attack;
+    /*0x5C*/ u16 defense;
+    /*0x5E*/ u16 speed;
+    /*0x60*/ u16 spAttack;
+    /*0x62*/ u16 spDefense;
 };
 
 struct UnknownPokemonStruct
@@ -294,73 +294,73 @@ struct UnknownPokemonStruct
 
 struct BattlePokemon
 {
- /* 0x00 */ u16 species;
- /* 0x02 */ u16 attack;
- /* 0x04 */ u16 defense;
- /* 0x06 */ u16 speed;
- /* 0x08 */ u16 spAttack;
- /* 0x0A */ u16 spDefense;
- /* 0x0C */ u16 moves[4];
- /* 0x14 */ u32 hpIV:5;
- /* 0x14 */ u32 attackIV:5;
- /* 0x15 */ u32 defenseIV:5;
- /* 0x15 */ u32 speedIV:5;
- /* 0x16 */ u32 spAttackIV:5;
- /* 0x17 */ u32 spDefenseIV:5;
- /* 0x17 */ u32 isEgg:1;
- /* 0x17 */ u32 altAbility:1;
- /* 0x18 */ s8 statStages[8];
- /* 0x20 */ u8 ability;
- /* 0x21 */ u8 type1;
- /* 0x22 */ u8 type2;
- /* 0x23 */ u8 unknown;
- /* 0x24 */ u8 pp[4];
- /* 0x28 */ u16 hp;
- /* 0x2A */ u8 level;
- /* 0x2B */ u8 friendship;
- /* 0x2C */ u16 maxHP;
- /* 0x2E */ u16 item;
- /* 0x30 */ u8 nickname[POKEMON_NAME_LENGTH + 1];
- /* 0x3B */ u8 ppBonuses;
- /* 0x3C */ u8 otName[8];
- /* 0x44 */ u32 experience;
- /* 0x48 */ u32 personality;
- /* 0x4C */ u32 status1;
- /* 0x50 */ u32 status2;
- /* 0x54 */ u32 otId;
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 attack;
+    /*0x04*/ u16 defense;
+    /*0x06*/ u16 speed;
+    /*0x08*/ u16 spAttack;
+    /*0x0A*/ u16 spDefense;
+    /*0x0C*/ u16 moves[4];
+    /*0x14*/ u32 hpIV:5;
+    /*0x14*/ u32 attackIV:5;
+    /*0x15*/ u32 defenseIV:5;
+    /*0x15*/ u32 speedIV:5;
+    /*0x16*/ u32 spAttackIV:5;
+    /*0x17*/ u32 spDefenseIV:5;
+    /*0x17*/ u32 isEgg:1;
+    /*0x17*/ u32 altAbility:1;
+    /*0x18*/ s8 statStages[8];
+    /*0x20*/ u8 ability;
+    /*0x21*/ u8 type1;
+    /*0x22*/ u8 type2;
+    /*0x23*/ u8 unknown;
+    /*0x24*/ u8 pp[4];
+    /*0x28*/ u16 hp;
+    /*0x2A*/ u8 level;
+    /*0x2B*/ u8 friendship;
+    /*0x2C*/ u16 maxHP;
+    /*0x2E*/ u16 item;
+    /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x3B*/ u8 ppBonuses;
+    /*0x3C*/ u8 otName[8];
+    /*0x44*/ u32 experience;
+    /*0x48*/ u32 personality;
+    /*0x4C*/ u32 status1;
+    /*0x50*/ u32 status2;
+    /*0x54*/ u32 otId;
 };
 
 struct BaseStats
 {
- /* 0x00 */ u8 baseHP;
- /* 0x01 */ u8 baseAttack;
- /* 0x02 */ u8 baseDefense;
- /* 0x03 */ u8 baseSpeed;
- /* 0x04 */ u8 baseSpAttack;
- /* 0x05 */ u8 baseSpDefense;
- /* 0x06 */ u8 type1;
- /* 0x07 */ u8 type2;
- /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 item1;
- /* 0x0E */ u16 item2;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroup1;
- /* 0x15 */ u8 eggGroup2;
- /* 0x16 */ u8 ability1;
- /* 0x17 */ u8 ability2;
- /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor:7;
-            u8 unk19_7:1;
+    /*0x00*/ u8 baseHP;
+    /*0x01*/ u8 baseAttack;
+    /*0x02*/ u8 baseDefense;
+    /*0x03*/ u8 baseSpeed;
+    /*0x04*/ u8 baseSpAttack;
+    /*0x05*/ u8 baseSpDefense;
+    /*0x06*/ u8 type1;
+    /*0x07*/ u8 type2;
+    /*0x08*/ u8 catchRate;
+    /*0x09*/ u8 expYield;
+    /*0x0A*/ u16 evYield_HP:2;
+    /*0x0A*/ u16 evYield_Attack:2;
+    /*0x0A*/ u16 evYield_Defense:2;
+    /*0x0A*/ u16 evYield_Speed:2;
+    /*0x0B*/ u16 evYield_SpAttack:2;
+    /*0x0B*/ u16 evYield_SpDefense:2;
+    /*0x0C*/ u16 item1;
+    /*0x0E*/ u16 item2;
+    /*0x10*/ u8 genderRatio;
+    /*0x11*/ u8 eggCycles;
+    /*0x12*/ u8 friendship;
+    /*0x13*/ u8 growthRate;
+    /*0x14*/ u8 eggGroup1;
+    /*0x15*/ u8 eggGroup2;
+    /*0x16*/ u8 ability1;
+    /*0x17*/ u8 ability2;
+    /*0x18*/ u8 safariZoneFleeRate;
+    /*0x19*/ u8 bodyColor:7;
+             u8 unk19_7:1;
 };
 
 struct BattleMove
@@ -378,10 +378,10 @@ struct BattleMove
 
 struct PokemonStorage
 {
- /* 0x00 */ u8 currentBox;
- /* 0x01 */ struct BoxPokemon boxes[14][30];
-    u8 boxNames[14][9];
-    u8 unkArray[14];
+    /*0x00*/ u8 currentBox;
+    /*0x01*/ struct BoxPokemon boxes[14][30];
+             u8 boxNames[14][9];
+             u8 unkArray[14];
 };
 
 struct Evolution

@@ -425,6 +425,7 @@ void LinkPartnerHandleGetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_getattr_by_ch1_for_player_pokemon
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
@@ -757,6 +758,7 @@ void LinkPartnerHandleSetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_setattr_by_ch1_for_player_pokemon
 void sub_811EC68(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
