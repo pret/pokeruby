@@ -4,7 +4,8 @@
 #include "sprite.h"
 #include "task.h"
 
-enum DecoId {
+enum DecoId
+{
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
     /*002*/ DECOR_POKEMON_DESK,
@@ -128,7 +129,8 @@ enum DecoId {
     /*120*/ DECOR_REGISTEEL_DOLL
 };
 
-enum DecorPerm {
+enum DecorPerm
+{
     /*
      * The nomenclature here describes collision and placement permissions, in that order.
      */
@@ -139,7 +141,8 @@ enum DecorPerm {
     DECORPERM_SOLID_MAT
 };
 
-enum DecorShape {
+enum DecorShape
+{
     /*
      * Width-x-height
      */
@@ -155,7 +158,8 @@ enum DecorShape {
     DECORSHAPE_3x2
 };
 
-enum DecoCat {
+enum DecoCat
+{
     /*
      * In which category you can find the decoration in the PC.
      */
@@ -279,29 +283,11 @@ extern const struct MenuAction3 gUnknown_083EC634[];
 extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
-extern void sub_80B3068(u8); // src/shop
 extern const struct YesNoFuncTable gUnknown_083EC95C;
 extern const struct YesNoFuncTable gUnknown_083EC964;
 extern const struct YesNoFuncTable gUnknown_083EC9CC;
 extern const struct YesNoFuncTable gUnknown_083EC9D4;
 extern const struct YesNoFuncTable gUnknown_083ECAA0;
-
-extern u8 sub_8134194(u8); // src/decoration_inventory
-extern bool8 sub_81341D4(void); // src/decoration_inventory
-extern void sub_8134104(u8); // src/decoration_inventory
-extern bool8 sub_807D770(void);
-extern void sub_80F944C(void); // src/menu_helpers
-extern void sub_80F9480(u8 *, u8); // src/menu_helpers
-extern void sub_80F94A4(u8, u8 *, u8, s16); // src/menu_helpers
-extern void sub_80F94F8(u8 *); // src/menu_helpers
-extern void sub_80F9520(u8 *, u8); // src/menu_helpers
-extern void DestroyVerticalScrollIndicator(u8); // src/menu_helpers
-extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
-extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
-extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16); // src/menu_helpers
-extern void BuyMenuFreeMemory(void); // src/menu_helpers
-extern void sub_8109DAC(u8); // src/trader
-extern void ReshowPlayerPC(u8); // src/player_pc
 
 void sub_80FE2B4(void);
 void Task_DecorationPCProcessMenuInput(u8);
