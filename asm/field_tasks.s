@@ -6,59 +6,6 @@
 
 	.text
 
-	thumb_func_start DummyPerStepCallback
-DummyPerStepCallback: @ 80695DC
-	bx lr
-	thumb_func_end DummyPerStepCallback
-
-	thumb_func_start sub_80695E0
-sub_80695E0: @ 80695E0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	adds r0, r4, 0
-	bl sub_80576A0
-	lsls r0, 24
-	cmp r0, 0
-	beq _080695F8
-	adds r0, r5, 0
-	b _08069630
-_080695F8:
-	adds r0, r4, 0
-	bl sub_80576B4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0806960A
-	adds r0, r5, 0
-	adds r0, 0x8
-	b _08069630
-_0806960A:
-	adds r0, r4, 0
-	bl sub_80576C8
-	lsls r0, 24
-	cmp r0, 0
-	beq _0806961C
-	adds r0, r5, 0
-	adds r0, 0x10
-	b _08069630
-_0806961C:
-	adds r0, r4, 0
-	bl sub_80576DC
-	lsls r0, 24
-	cmp r0, 0
-	bne _0806962C
-	movs r0, 0
-	b _08069630
-_0806962C:
-	adds r0, r5, 0
-	adds r0, 0x18
-_08069630:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80695E0
-
 	thumb_func_start sub_8069638
 sub_8069638: @ 8069638
 	push {r4-r7,lr}

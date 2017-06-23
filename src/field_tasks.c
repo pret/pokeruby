@@ -10,6 +10,7 @@
 #include "script.h"
 #include "field_special_scene.h"
 #include "secret_base.h"
+#include "metatile_behavior.h"
 #include "field_tasks.h"
 
 void DummyPerStepCallback(u8);
@@ -126,5 +127,52 @@ void ResetFieldTasksArgs(void)
         taskData = gTasks[taskId].data;
         taskData[1] = 0;
         taskData[2] = 0;
+    }
+}
+
+const struct MetatileOffset gUnknown_08376384[][2] = {
+    {{  0,  0,0x259}, {  0,  1,0x261}},
+    {{  0, -1,0x259}, {  0,  0,0x261}},
+    {{  0,  0,0x252}, {  1,  0,0x253}},
+    {{ -1,  0,0x252}, {  0,  0,0x253}}
+};
+
+const struct MetatileOffset gUnknown_083763A4[][2] = {
+    {{  0,  0,0x25A}, {  0,  1,0x262}},
+    {{  0, -1,0x25A}, {  0,  0,0x262}},
+    {{  0,  0,0x254}, {  1,  0,0x255}},
+    {{ -1,  0,0x254}, {  0,  0,0x255}}
+};
+
+const struct MetatileOffset gUnknown_083763C4[][2] = {
+    {{  0,  0,0x258}, {  0,  1,0x260}},
+    {{  0, -1,0x258}, {  0,  0,0x260}},
+    {{  0,  0,0x250}, {  1,  0,0x251}},
+    {{ -1,  0,0x250}, {  0,  0,0x251}}
+};
+
+void DummyPerStepCallback(u8 taskId) {}
+
+const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8 a1)
+{
+    if (sub_80576A0(a1))
+    {
+        return a0[0];
+    }
+    else if (sub_80576B4(a1))
+    {
+        return a0[1];
+    }
+    else if (sub_80576C8(a1))
+    {
+        return a0[2];
+    }
+    else if (sub_80576DC(a1))
+    {
+        return a0[3];
+    }
+    else
+    {
+        return NULL;
     }
 }
