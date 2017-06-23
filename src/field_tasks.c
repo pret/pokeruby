@@ -36,7 +36,7 @@ void Task_RunPerStepCallback(u8 taskId)
     gUnknown_08376364[idx](taskId);
 }
 
-void RunTimeBasedEvents(s16 *taskData)
+static void RunTimeBasedEvents(s16 *taskData)
 {
     switch (*taskData)
     {
@@ -63,5 +63,68 @@ void Task_RunTimeBasedEvents(u8 taskId)
     {
         RunTimeBasedEvents(taskData);
         sub_80540D0(taskData + 1, taskData + 2);
+    }
+}
+
+void Task_MuddySlope(u8);
+
+void SetUpFieldTasks(void)
+{
+    if (!FuncIsActiveTask(Task_RunPerStepCallback))
+    {
+        u8 taskId = CreateTask(Task_RunPerStepCallback, 0x50);
+        gTasks[taskId].data[0] = 0;
+    }
+    if (!FuncIsActiveTask(Task_MuddySlope))
+    {
+        CreateTask(Task_MuddySlope, 0x50);
+    }
+    if (!FuncIsActiveTask(Task_RunTimeBasedEvents))
+    {
+        CreateTask(Task_RunTimeBasedEvents, 0x50);
+    }
+}
+
+void ActivatePerStepCallback(u8 callback)
+{
+    s16 *dataPointer;
+    s16 *dataStart;
+    s16 zero;
+    u8 taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
+    if (taskId != 0xff)
+    {
+        dataStart = gTasks[taskId].data;
+        zero = 0;
+        dataPointer = &dataStart[15];
+        do
+        {
+            *dataPointer-- = zero;
+        } while ((int)dataPointer >= (int)dataStart);
+        if (callback >= ARRAY_COUNT(gUnknown_08376364))
+        {
+            *dataStart = 0;
+        }
+        else
+        {
+            *dataStart = callback;
+        }
+    }
+}
+
+void ResetFieldTasksArgs(void)
+{
+    u8 taskId;
+    s16 *taskData;
+    taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
+    if (taskId != 0xff)
+    {
+        taskData = gTasks[taskId].data;
+    }
+    taskId = FindTaskIdByFunc(Task_RunTimeBasedEvents);
+    if (taskId != 0xff)
+    {
+        taskData = gTasks[taskId].data;
+        taskData[1] = 0;
+        taskData[2] = 0;
     }
 }
