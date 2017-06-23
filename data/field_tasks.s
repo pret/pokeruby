@@ -3,17 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_08376364:: @ 8376364
-	.4byte DummyPerStepCallback
-	.4byte PerStepCallback_8069F64
-	.4byte PerStepCallback_8069AA0
-	.4byte PerStepCallback_8069864
-	.4byte PerStepCallback_8069DD4
-	.4byte EndTruckSequence
-	.4byte sub_80BCF1C
-	.4byte PerStepCallback_806A07C
-
 gUnknown_08376384:: @ 8376384
 	.byte   0,  0,0x59,  2,  0,  1,0x61,  2
 	.byte   0, -1,0x59,  2,  0,  0,0x61,  2
