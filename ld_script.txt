@@ -235,7 +235,7 @@ SECTIONS {
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
-        asm/unused_8124F94.o(.text);
+        src/unused_8124F94.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/mystery_event_script.o(.text);
