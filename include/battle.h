@@ -185,7 +185,6 @@ struct Struct2017810
     u8 unk1_0:1;
     u8 unk2;
     u8 unk3;
-    //u8 filler2[2];
     u8 unk4;
     u8 unk5;
     u8 unk6;
