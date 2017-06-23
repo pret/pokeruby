@@ -12,18 +12,18 @@ addons:
 cache:
   apt: true
 install:
-  - cd $HOME
+  - pushd $HOME
   - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
   - tar xf devkitARM*.tar.bz2
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
+  - popd
 
 matrix:
   include:
     - os: linux
       env: _="Build"
       script:
-        - cd $TRAVIS_BUILD_DIR
         - ./build_tools.sh
         - make -j2 compare_ruby
         - make -j2 compare_ruby_rev1
@@ -31,7 +31,6 @@ matrix:
         - make -j2 compare_sapphire
         - make -j2 compare_sapphire_rev1
         - make -j2 compare_sapphire_rev2
-        - make -j2 ruby_de
     - os: linux
       env: _="Formatting"
       addons:
@@ -46,3 +45,11 @@ matrix:
         - cp .travis/colordiffrc ~/.colordiffrc
       script:
         .travis/check-git-clang-format-output.sh
+    - os: linux
+      env: _="Build German"
+      before_script:
+        - rsync -avh --progress data-de data
+        - rsync -avh --progress graphics-de graphics
+      script:
+        - ./build_tools.sh
+        - make -j2 compare_ruby_de
