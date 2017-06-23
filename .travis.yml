@@ -1,6 +1,4 @@
 language: generic
-os:
-  - linux
 dist: trusty
 sudo: false
 env:
@@ -19,14 +17,32 @@ install:
   - tar xf devkitARM*.tar.bz2
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
-script:
-  - cd $TRAVIS_BUILD_DIR
-  - ./whitespace.sh
-  - ./build_tools.sh
-  - make -j2 compare_ruby
-  - make -j2 compare_ruby_rev1
-  - make -j2 compare_ruby_rev2
-  - make -j2 compare_sapphire
-  - make -j2 compare_sapphire_rev1
-  - make -j2 compare_sapphire_rev2
-  - make -j2 ruby_de
+
+matrix:
+  include:
+    - os: linux
+      env: _="Build"
+      script:
+        - cd $TRAVIS_BUILD_DIR
+        - ./build_tools.sh
+        - make -j2 compare_ruby
+        - make -j2 compare_ruby_rev1
+        - make -j2 compare_ruby_rev2
+        - make -j2 compare_sapphire
+        - make -j2 compare_sapphire_rev1
+        - make -j2 compare_sapphire_rev2
+        - make -j2 ruby_de
+    - os: linux
+      env: _="Formatting"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty
+          packages:
+            - clang-format-5.0
+            - colordiff
+      install: [ ]
+      before_script:
+        - cp .travis/colordiffrc ~/.colordiffrc
+      script:
+        .travis/check-git-clang-format-output.sh
