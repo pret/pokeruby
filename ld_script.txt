@@ -179,7 +179,7 @@ SECTIONS {
         src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
         src/field_special_scene.o(.text);
-        asm/rotating_gate.o(.text);
+        src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
         src/contest_link_80C857C.o(.text);
