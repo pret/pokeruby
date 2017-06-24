@@ -1662,7 +1662,7 @@ gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooSour
 
 	.align 2
-gUnknown_08400F8C:: @ 8400F8C
+gBattleStringsTable:: @ 8400F8C
 	.4byte BattleText_UnknownString
 	.4byte BattleText_GainExpPoints
 	.4byte BattleText_GrewLevel
@@ -2016,7 +2016,7 @@ gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_NoEffectOn
 
 	.align 1
-gUnknown_08401508:: @ 8401508
+gMissStrings:: @ 8401508
 @ Each entry refers to a text pointer in gUnknown_08400F8C, but the values are offset
 @ by 0xc. For example, 0x0017 refers to BattleText_AttackMissed because it is the
 @ 11th entry in the pointer table.
@@ -2275,7 +2275,7 @@ BattleTextList_401648:: @ 8401648
 	.2byte BATTLE_TEXT_RaisedFirePower
 	.2byte BATTLE_TEXT_MadeIneffective
 
-gUnknown_0840164C:: @ 840164C
+gTrappingMoves:: @ 840164C
 	.2byte BATTLE_TEXT_StopLearning
 	.2byte BATTLE_TEXT_FellAsleep
 	.2byte BATTLE_TEXT_SpeltHealthy
