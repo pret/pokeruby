@@ -19,6 +19,7 @@
 #include "field_weather.h"
 #include "decoration.h"
 
+#if ENGLISH
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
     "for one.");
@@ -596,6 +597,9 @@ const u8 DecorDesc_REGISTEEL_DOLL[] = _(
     "A large doll.\n"
     "Place it on a mat\n"
     "or a desk.");
+#elif GERMAN
+#include "data/decoration/descriptions_de.h"
+#endif
 
 const u16 DecorGfx_SMALL_DESK[] = {
     0x87
@@ -1239,6 +1243,7 @@ const u16 DecorGfx_REGISTEEL_DOLL[] = {
     MAP_OBJ_GFX_BIG_REGISTEEL_DOLL
 };
 
+#if ENGLISH
 const struct Decoration gDecorations[] = {
     {DECOR_NONE,            _("SMALL DESK"),      DECORPERM_SOLID_FLOOR,  DECORSHAPE_1x1, DECORCAT_DESK,         0, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK},
     {DECOR_SMALL_DESK,      _("SMALL DESK"),      DECORPERM_SOLID_FLOOR,  DECORSHAPE_1x1, DECORCAT_DESK,      3000, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK},
@@ -1362,6 +1367,9 @@ const struct Decoration gDecorations[] = {
     {DECOR_REGICE_DOLL,     _("REGICE DOLL"),      DECORPERM_SOLID_MAT,   DECORSHAPE_1x2, DECORCAT_DOLL,     10000, DecorDesc_REGICE_DOLL, DecorGfx_REGICE_DOLL},
     {DECOR_REGISTEEL_DOLL,  _("REGISTEEL DOLL"),   DECORPERM_SOLID_MAT,   DECORSHAPE_1x2, DECORCAT_DOLL,     10000, DecorDesc_REGISTEEL_DOLL, DecorGfx_REGISTEEL_DOLL}
 };
+#elif GERMAN
+#include "data/decoration/decorations.h"
+#endif
 
 const u8 *const gUnknown_083EC5E4[] = {
     SecretBaseText_Desk,
