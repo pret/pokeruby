@@ -1929,6 +1929,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 
 static const u8 sKeyboardCharacters[][4][20] =
 {
+#if ENGLISH
     {
         _(" A B C  D E F    . "),
         _(" G H I  J K L    , "),
@@ -1941,6 +1942,20 @@ static const u8 sKeyboardCharacters[][4][20] =
         _(" m n o  p q r s    "),
         _(" t u v  w x y z    "),
     },
+#elif GERMAN
+    {
+        _("  ABCD   EFGH   .  "),
+        _("  IJKL   MNOP   ,  "),
+        _("  QRST   UVWX      "),
+        _("  YZ     ÄÖÜ       "),
+    },
+    {
+        _("  abcd   efgh   .  "),
+        _("  ijkl   mnop   ,  "),
+        _("  qrst   uvwx      "),
+        _("  yz     äöü       "),
+    },
+#endif
     {
         _(" 0  1  2  3  4     "),
         _(" 5  6  7  8  9     "),
