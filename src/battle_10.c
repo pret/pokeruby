@@ -3,8 +3,11 @@
 #include "data2.h"
 #include "link.h"
 #include "rom3.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "text.h"
 #include "util.h"
 
 struct UnknownStruct3
@@ -12,6 +15,12 @@ struct UnknownStruct3
     u16 moves[4];
     u8 pp[4];
     u8 ppBonuses;
+};
+
+struct UnknownStruct5
+{
+    u8 unk0_0:7;
+    u8 unk0_7:1;
 };
 
 extern u8 gActiveBank;
@@ -22,7 +31,21 @@ extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern void (*gBattleBankFunc[])(void);
+extern u32 *gDisableStructMoveAnim;
+extern u32 gMoveDmgMoveAnim;
+extern u16 gMovePowerMoveAnim;
+extern u8 gHappinessMoveAnim;
+extern u16 gWeatherMoveAnim;
+extern u32 gPID_perBank[];
+extern u8 gAnimScriptActive;
+extern void (*gAnimScriptCallback)(void);
+extern u8 gDisplayedStringBattle[];
+extern struct UnknownStruct5 gUnknown_020238C8;
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern u8 gUnknown_0202F7C4;
+extern struct Window gUnknown_03004210;
+extern u16 gUnknown_030042A0;
+extern u16 gUnknown_030042A4;
 extern u8 gUnknown_0300434C[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 
@@ -47,11 +70,27 @@ extern void oamt_add_pos2_onto_pos1();
 extern void oamt_set_x3A_32();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80375B4(void);
+extern void sub_8010384(struct Sprite *);
+extern void sub_8037B78(void);
+extern u8 sub_8031720();
+extern u8 mplay_80342A4();
+extern void ExecuteMoveAnim();
+extern void sub_80326EC();
+extern void sub_8031F24(void);
+extern void sub_80324BC();
+extern void BufferStringBattle();
+extern void sub_8037C2C(void);
+extern void sub_8043D84();
+extern void sub_8037B24(void);
+extern void sub_8045A5C();
+extern void sub_8037FAC(void);
+extern void move_anim_start_t2_for_situation();
 
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8, u8 *);
 void sub_8038900(u8);
 void sub_8039430(u8, u8);
 void sub_8039648(void);
+void sub_8039B64(void);
 void dp01_tbl4_exec_completed(void);
 
 void LinkOpponentHandleGetAttributes(void)
@@ -774,4 +813,288 @@ void sub_80398B0(void)
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
     oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     gBattleBankFunc[gActiveBank] = sub_80375B4;
+}
+
+void sub_803995C(void)
+{
+    if (ewram17810[gActiveBank].unk4 == 0)
+    {
+        if (ewram17800[gActiveBank].unk0_2)
+            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
+        ewram17810[gActiveBank].unk4++;
+    }
+    else if (!ewram17810[gActiveBank].unk0_6)
+    {
+        ewram17810[gActiveBank].unk4 = 0;
+        PlaySE12WithPanning(SE_POKE_DEAD, 63);
+        gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8010384;
+        gBattleBankFunc[gActiveBank] = sub_8037B78;
+    }
+}
+
+void sub_8039A00(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039A0C(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039A18(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039A24(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039A30(void)
+{
+    if (!mplay_80342A4(gActiveBank))
+    {
+        u32 r0 = gBattleBufferA[gActiveBank][1]
+               | (gBattleBufferA[gActiveBank][2] << 8);
+
+        gUnknown_0202F7C4 = gBattleBufferA[gActiveBank][3];
+        gMovePowerMoveAnim = gBattleBufferA[gActiveBank][4]
+                          | (gBattleBufferA[gActiveBank][5] << 8);
+        gMoveDmgMoveAnim = gBattleBufferA[gActiveBank][6]
+                          | (gBattleBufferA[gActiveBank][7] << 8)
+                          | (gBattleBufferA[gActiveBank][8] << 16)
+                          | (gBattleBufferA[gActiveBank][9] << 24);
+        gHappinessMoveAnim = gBattleBufferA[gActiveBank][10];
+        gWeatherMoveAnim = gBattleBufferA[gActiveBank][12]
+                          | (gBattleBufferA[gActiveBank][13] << 8);
+        gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
+        gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
+
+        if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+        {
+            dp01_tbl4_exec_completed();
+        }
+        else
+        {
+            ewram17810[gActiveBank].unk4 = 0;
+            gBattleBankFunc[gActiveBank] = sub_8039B64;
+        }
+    }
+}
+
+void sub_8039B64(void)
+{
+    u16 r4 = gBattleBufferA[gActiveBank][1]
+           | (gBattleBufferA[gActiveBank][2] << 8);
+    u8 r7 = gBattleBufferA[gActiveBank][11];
+
+    switch (ewram17810[gActiveBank].unk4)
+    {
+    case 0:
+        if (ewram17800[gActiveBank].unk0_2 && !ewram17800[gActiveBank].unk0_3)
+        {
+            ewram17800[gActiveBank].unk0_3 = 1;
+            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
+        }
+        ewram17810[gActiveBank].unk4 = 1;
+        break;
+    case 1:
+        if (!ewram17810[gActiveBank].unk0_6)
+        {
+            sub_80326EC(0);
+            ExecuteMoveAnim(r4);
+            ewram17810[gActiveBank].unk4 = 2;
+        }
+        break;
+    case 2:
+        gAnimScriptCallback();
+        if (!gAnimScriptActive)
+        {
+            sub_80326EC(1);
+            if ((ewram17800[gActiveBank].unk0_2) && r7 <= 1)
+            {
+                move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
+                ewram17800[gActiveBank].unk0_3 = 0;
+            }
+            ewram17810[gActiveBank].unk4 = 3;
+        }
+        break;
+    case 3:
+        if (!ewram17810[gActiveBank].unk0_6)
+        {
+            sub_8031F24();
+            sub_80324BC(
+              gActiveBank,
+              gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+            ewram17810[gActiveBank].unk4 = 0;
+            dp01_tbl4_exec_completed();
+        }
+        break;
+    }
+}
+
+void sub_8039CC8(void)
+{
+    gUnknown_030042A4 = 0;
+    gUnknown_030042A0 = 0;
+    BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
+    sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    gBattleBankFunc[gActiveBank] = sub_8037C2C;
+}
+
+void sub_8039D2C(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D38(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D44(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D50(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D5C(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D68(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D74(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039D80(void)
+{
+    s16 r7;
+
+    load_gfxc_health_bar(0);
+    r7 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+    if (r7 != 0x7FFF)
+    {
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
+        u32 hp = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_HP);
+
+        sub_8043D84(gActiveBank, gHealthboxIDs[gActiveBank], maxHP, hp, r7);
+    }
+    else
+    {
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
+
+        sub_8043D84(gActiveBank, gHealthboxIDs[gActiveBank], maxHP, 0, r7);
+    }
+    gBattleBankFunc[gActiveBank] = sub_8037B24;
+}
+
+void sub_8039E70(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039E7C(void)
+{
+    if (mplay_80342A4(gActiveBank) == 0)
+    {
+        sub_8045A5C(gHealthboxIDs[gActiveBank], &gEnemyParty[gBattlePartyID[gActiveBank]], 9);
+        ewram17810[gActiveBank].unk0_4 = 0;
+        gBattleBankFunc[gActiveBank] = sub_8037FAC;
+    }
+}
+
+void sub_8039EF0(void)
+{
+    if (mplay_80342A4(gActiveBank) == 0)
+    {
+        move_anim_start_t2_for_situation(
+          gBattleBufferA[gActiveBank][1],
+          gBattleBufferA[gActiveBank][2]
+          | (gBattleBufferA[gActiveBank][3] << 8)
+          | (gBattleBufferA[gActiveBank][4] << 16)
+          | (gBattleBufferA[gActiveBank][5] << 24));
+        gBattleBankFunc[gActiveBank] = sub_8037FAC;
+    }
+}
+
+void sub_8039F58(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039F64(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039F70(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039F7C(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039F88(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039F94(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039FA0(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039FAC(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039FB8(void)
+{
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039FC4(void)
+{
+    gUnknown_020238C8.unk0_0 = 0;
+    dp01_tbl4_exec_completed();
+}
+
+void sub_8039FE0(void)
+{
+    gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
+    dp01_tbl4_exec_completed();
+}
+
+void sub_803A018(void)
+{
+    gUnknown_020238C8.unk0_7 = 0;
+    dp01_tbl4_exec_completed();
+}
+
+void sub_803A030(void)
+{
+    gUnknown_020238C8.unk0_7 ^= 1;
+    dp01_tbl4_exec_completed();
 }

@@ -1169,7 +1169,7 @@ void sub_811FDF0(void)
 
 void sub_811FDFC(void)
 {
-    if (mplay_80342A4(gActiveBank) == 0)
+    if (!mplay_80342A4(gActiveBank))
     {
         u32 r0 = gBattleBufferA[gActiveBank][1]
                | (gBattleBufferA[gActiveBank][2] << 8);
