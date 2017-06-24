@@ -81,6 +81,7 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
     u8 *ptr = gStringVar4;
     u8 nature = GetNature(pokemon);
 
+#if ENGLISH
     ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
 
     if (nature != NATURE_BOLD && nature != NATURE_GENTLE)
@@ -89,6 +90,11 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
     }
 
     ptr = StringCopy(ptr, gOtherText_Nature);
+#elif GERMAN
+    ptr = StringCopy(gStringVar4, gOtherText_Nature);
+    ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
+    ptr = StringCopy(ptr, gOtherText_Terminator4);
+#endif
 
     if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE)
     {

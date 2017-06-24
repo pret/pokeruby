@@ -263,15 +263,23 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     {
         ptr = StringCopy(ptr, gUnknown_083F60AC[type]);
         ptr = StringCopy(ptr, gContestText_ContestWinner);
+#if ENGLISH
         ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+#elif GERMAN
+        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+#endif
 
-        // {ENG}
+        // {LATIN}
         ptr[0] = 0xFC;
         ptr[1] = 0x16;
         ptr += 2;
 
         ptr = StringCopy(ptr, gOtherText_Unknown1);
+#if ENGLISH
         ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+#elif GERMAN
+        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+#endif
 
         xPos = 6;
         yPos = 14;

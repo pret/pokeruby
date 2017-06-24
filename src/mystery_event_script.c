@@ -4,10 +4,16 @@
 #include "string_util.h"
 #include "text.h"
 
+#if ENGLISH
+#define UNK_MASK_1 0x2
+#elif GERMAN
+#define UNK_MASK_1 0x4
+#endif
+
 #ifdef SAPPHIRE
-#define UNK_MASK 0x100
+#define UNK_MASK_2 0x100
 #else
-#define UNK_MASK 0x80
+#define UNK_MASK_2 0x80
 #endif
 
 extern struct ScriptContext gUnknown_02039288;
@@ -19,16 +25,16 @@ extern u8 gOtherText_DataCannotUseVersion[];
 
 bool32 sub_8126098(u16 a1, u32 a2, u16 a3, u32 a4)
 {
-    if (!(a1 & 0x2))
+    if (!(a1 & UNK_MASK_1))
         return FALSE;
 
-    if (!(a2 & 0x2))
+    if (!(a2 & UNK_MASK_1))
         return FALSE;
 
     if (!(a3 & 0x4))
         return FALSE;
 
-    if (!(a4 & UNK_MASK))
+    if (!(a4 & UNK_MASK_2))
         return FALSE;
 
     return TRUE;
