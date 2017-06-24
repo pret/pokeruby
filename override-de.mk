@@ -1,4 +1,6 @@
-// misc.mk
+#
+# misc.mk
+#
 MENUGFXDIR := graphics/interface
 INTROGFXDIR := graphics/intro
 MISCGFXDIR := graphics/misc
@@ -14,7 +16,9 @@ $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 $(MISCGFXDIR)/end_copyright.4bpp: $(MISCGFXDIR)/end_copyright.png
 	$(GFX) $< $@ -num_tiles 92
 
-// tilesets.mk
+#
+# tilesets.mk
+#
 TILESETDIR := data/tilesets
 
 $(TILESETDIR)/secondary/shop/tiles.4bpp: $(TILESETDIR)/secondary/shop/tiles.png

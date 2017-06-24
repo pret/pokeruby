@@ -49,8 +49,8 @@ matrix:
       env: _="Build German"
       before_script:
         - cp override-de.mk override.mk
-        - rsync -avh data-de/ data/
-        - rsync -avh graphics-de/ graphics/
+        - rsync -avhI data-de/ data/
+        - rsync -avhI graphics-de/ graphics/
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby_de

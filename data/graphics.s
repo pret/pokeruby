@@ -4696,7 +4696,7 @@ gTilesetPalettes_Shop::
 
 	.align 2
 gTilesetTiles_Shop::
-	.incbin "data-de/tilesets/secondary/shop/tiles.4bpp.lz"
+	.incbin "data/tilesets/secondary/shop/tiles.4bpp.lz"
 
 	.align 2
 gUnknown_083FAF1C::
