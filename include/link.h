@@ -130,6 +130,10 @@ extern u32 gLinkStatus;
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
+#if GERMAN
+extern u8 deUnkValue1;
+extern u8 deUnkValue2;
+#endif
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;

@@ -1792,7 +1792,14 @@ void sub_80FE7EC(u8 taskId)
     sub_80FEC94(taskId);
     sub_80FECB8(gUnknown_020388F6);
 
+#if ENGLISH
     MenuDrawTextWindow(15, 12, 29, 19);
+#elif GERMAN
+    if ((gUnknown_020388F2 + gUnknown_020388F4) != gUnknown_020388D5)
+    {
+        MenuDrawTextWindow(15, 12, 29, 19);
+    }
+#endif
 
     sub_80FECE0(gUnknown_020388F2 + gUnknown_020388F4);
     InitMenu(0, 1, 2, gUnknown_020388F3 + 1, gUnknown_020388F2, 13);
