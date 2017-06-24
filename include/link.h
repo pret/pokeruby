@@ -122,6 +122,13 @@ struct Link
     struct RecvQueue recvQueue;
 };
 
+struct BlockRequest {
+    void * address;
+    u32 size;
+};
+
+extern const struct BlockRequest sBlockRequestLookupTable[5];
+
 extern struct Link gLink;
 extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
