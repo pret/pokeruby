@@ -3992,7 +3992,11 @@ _0813930C:
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r4, _08139354 @ =gUnknown_03004210
 	ldr r1, _08139374 @ =gDisplayedStringBattle
+.ifdef ENGLISH
 	movs r2, 0xDC
+.else
+	movs r2, 0xDE
+.endif
 	lsls r2, 1
 	movs r0, 0x23
 	str r0, [sp]

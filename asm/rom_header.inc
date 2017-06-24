@@ -30,9 +30,14 @@ RomHeaderGameTitle:
 
 RomHeaderGameCode:
 	.ifdef SAPPHIRE
-	.ascii "AXPE"
+	.ascii "AXP"
 	.else
-	.ascii "AXVE"
+	.ascii "AXV"
+	.endif
+	.ifdef ENGLISH
+	.ascii "E"
+	.else
+	.ascii "D"
 	.endif
 
 RomHeaderMakerCode:

@@ -1956,10 +1956,56 @@ void sub_80FECB8(u8 decoCat)
     sub_80FE470(decoCat, 16, 1, 0xff);
 }
 
+#if ENGLISH
 void sub_80FECE0(u8 decoCat)
 {
     sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
+#elif GERMAN
+__attribute__((naked))
+void sub_80FECE0(u8 decoCat)
+{
+    asm(".syntax unified\n\
+    push {lr}\n\
+    sub sp, 0x8\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    ldr r0, _080FED18 @ =gUnknown_020388D5\n\
+    ldrb r0, [r0]\n\
+    cmp r2, r0\n\
+    beq _080FED24\n\
+    ldr r1, _080FED1C @ =gDecorations\n\
+    ldr r0, _080FED20 @ =gUnknown_020388D0\n\
+    ldr r0, [r0]\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 5\n\
+    adds r1, 0x18\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    movs r1, 0x30\n\
+    str r1, [sp]\n\
+    movs r1, 0x1\n\
+    str r1, [sp, 0x4]\n\
+    movs r1, 0x80\n\
+    movs r2, 0x68\n\
+    movs r3, 0x68\n\
+    bl sub_8072AB0\n\
+    movs r0, 0x1\n\
+    b _080FED26\n\
+    .align 2, 0\n\
+    80FED18: .4byte gUnknown_020388D5\n\
+    80FED1C: .4byte gDecorations\n\
+    80FED20: .4byte gUnknown_020388D0\n\
+    80FED24:\n\
+    movs r0, 0\n\
+    80FED26:\n\
+    add sp, 0x8\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 void sub_80FED1C(void)
 {
