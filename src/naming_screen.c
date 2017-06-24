@@ -751,8 +751,8 @@ static void HandleDpadMovement(struct Task *task)
 
     //Wrap cursor position in the X direction
     if (cursorX < 0)
-        cursorX = 8;
-    if (cursorX > 8)
+        cursorX = COLUMN_COUNT - 1;
+    if (cursorX > COLUMN_COUNT - 1)
         cursorX = 0;
 
     //Handle cursor movement in X direction
@@ -762,18 +762,18 @@ static void HandleDpadMovement(struct Task *task)
         if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
         {
             if (sDpadDeltaX[dpadDir] > 0)
-                cursorX = 8;
+                cursorX = COLUMN_COUNT - 1;
             else
                 cursorX = 5;
         }
 
-        if (cursorX == 8)
+        if (cursorX == COLUMN_COUNT - 1)
         {
             //We are now on the last column
             task->tKbFunctionKey = cursorY;
             cursorY = s4RowTo3RowTableY[cursorY];
         }
-        else if (prevCursorX == 8)
+        else if (prevCursorX == COLUMN_COUNT - 1)
         {
             if (cursorY == 1)
                 cursorY = task->tKbFunctionKey;
@@ -782,7 +782,7 @@ static void HandleDpadMovement(struct Task *task)
         }
     }
 
-    if (cursorX == 8)
+    if (cursorX == COLUMN_COUNT - 1)
     {
         //There are only 3 keys on the last column, unlike the others,
         //so wrap Y accordingly
@@ -1048,7 +1048,7 @@ static void GetCursorPos(s16 *x, s16 *y)
 
 static void MoveCursorToOKButton(void)
 {
-    SetCursorPos(8, 2);
+    SetCursorPos(COLUMN_COUNT - 1, 2);
 }
 
 static void sub_80B6888(u8 a)
