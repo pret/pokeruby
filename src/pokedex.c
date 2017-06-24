@@ -2910,7 +2910,7 @@ static u8 sub_808F284(struct PokedexListItem *item, u8 b)
 
 #if ENGLISH
 #define CATEGORY_LEFT (11)
-#if GERMAN
+#elif GERMAN
 #define CATEGORY_LEFT (16)
 #endif
 
