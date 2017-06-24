@@ -2908,6 +2908,12 @@ static u8 sub_808F284(struct PokedexListItem *item, u8 b)
     return b;
 }
 
+#if ENGLISH
+#define CATEGORY_LEFT (11)
+#if GERMAN
+#define CATEGORY_LEFT (16)
+#endif
+
 static void Task_InitPageScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
@@ -2954,12 +2960,12 @@ static void Task_InitPageScreenMultistep(u8 taskId)
         else
             sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
         sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
-        MenuPrint(gDexText_UnknownPoke, 11, 5);
+        MenuPrint(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
         if (gUnknown_0202FFBC->owned)
         {
-            sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, 11, 5);
+            sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, CATEGORY_LEFT, 5);
             sub_8091458(gPokedexEntries[gUnknown_0202FFBC->dexNum].height, 16, 7);
             sub_8091564(gPokedexEntries[gUnknown_0202FFBC->dexNum].weight, 16, 9);
             MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);

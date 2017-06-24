@@ -213,6 +213,18 @@ static const union AnimCmd gSpriteAnim_8393F4C[] =
     ANIMCMD_FRAME(28, 4),
     ANIMCMD_END,
 };
+#if GERMAN
+static const union AnimCmd gSpriteAnim_839F73C[] =
+{
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_839F744[] =
+{
+    ANIMCMD_FRAME(36, 4),
+    ANIMCMD_END,
+};
+#endif
 static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
 {
     gSpriteAnim_8393F14,
@@ -223,6 +235,10 @@ static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
     gSpriteAnim_8393F3C,
     gSpriteAnim_8393F44,
     gSpriteAnim_8393F4C,
+#if GERMAN
+    gSpriteAnim_839F73C,
+    gSpriteAnim_839F744,
+#endif
 };
 static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
 {
