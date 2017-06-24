@@ -48,8 +48,8 @@ matrix:
     - os: linux
       env: _="Build German"
       before_script:
-        - rsync -avh data-de data
-        - rsync -avh graphics-de graphics
+        - rsync -avh data-de/ data/
+        - rsync -avh graphics-de/ graphics/
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby_de
