@@ -18,6 +18,12 @@
 #include "trig.h"
 #include "util.h"
 
+#ifdef ENGLISH
+#define COLUMN_COUNT 9
+#elif GERMAN
+#define COLUMN_COUNT 10
+#endif
+
 extern u16 gKeyRepeatStartDelay;
 
 extern u8 unk_2000000[];
@@ -1003,11 +1009,16 @@ static void CursorInit(void)
     SetCursorPos(0, 0);
 }
 
-static const u8 sKeyboardSymbolPositions[][9] =
-{
+static const u8 sKeyboardSymbolPositions[][COLUMN_COUNT] = {
+#if ENGLISH
     {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Upper page
     {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Lower page
     {1,  4,  7, 10, 13, 16, 16, 16, 19},  //Others page
+#elif GERMAN
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Upper page
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Lower page
+    {1, 4, 7, 10, 13, 16, 16, 16, 16, 19},  //Others page
+#endif
 };
 
 static u8 CursorColToKeyboardCol(s16 x)
@@ -1070,7 +1081,7 @@ static u8 GetKeyRoleAtCursorPos(void)
     s16 cursorY;
 
     GetCursorPos(&cursorX, &cursorY);
-    if (cursorX < 8)
+    if (cursorX < COLUMN_COUNT - 1)
         return KEY_ROLE_CHAR;
     else
         return keyRoles[cursorY];
@@ -1081,7 +1092,7 @@ void sub_80B6998(struct Sprite *sprite)
     if (sprite->animEnded)
         StartSpriteAnim(sprite, 0);
     sprite->invisible = (sprite->data4 & 0xFF);
-    if (sprite->data0 == 8)
+    if (sprite->data0 == COLUMN_COUNT - 1)
         sprite->invisible = TRUE;
     if (sprite->invisible || (sprite->data4 & 0xFF00) == 0
      || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
