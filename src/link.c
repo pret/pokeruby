@@ -560,7 +560,7 @@ static void ProcessRecvCmds(u8 unusedParam)
             break;
         case 0xCCCC:
 #if defined(ENGLISH)
-            SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+            SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
 #elif defined(GERMAN)
             if (deUnkValue2 == 1)
             {
