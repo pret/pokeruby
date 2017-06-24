@@ -473,8 +473,13 @@ static bool8 MainState_WaitPageSwap(struct Task *task)
         sub_80B77F8();
         SetInputState(INPUT_STATE_ENABLED);
         GetCursorPos(&cursorX, &cursorY);
+#if ENGLISH
         if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
             cursorX = 5;
+#elif GERMAN
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 7 || cursorX == 8))
+            cursorX = 6;
+#endif
         SetCursorPos(cursorX, cursorY);
         sub_80B6888(0);
     }
@@ -759,7 +764,11 @@ static void HandleDpadMovement(struct Task *task)
     if (sDpadDeltaX[dpadDir] != 0)
     {
         //The "others" page only has 5 columns
+#if ENGLISH
         if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
+#elif GERMAN
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7 || cursorX == 8))
+#endif
         {
             if (sDpadDeltaX[dpadDir] > 0)
                 cursorX = COLUMN_COUNT - 1;
