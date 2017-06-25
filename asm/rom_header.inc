@@ -59,11 +59,15 @@ RomHeaderSoftwareVersion:
 	.byte REVISION
 
 RomHeaderChecksum:
+	.ifdef ENGLISH
 	.ifdef SAPPHIRE
 	.byte 0x55 - REVISION
 	.else
 	.byte 0x41 - REVISION
 	.endif
+	.else
+	.byte 0x42
+	.end
 
 RomHeaderReserved2:
 	.space 2
