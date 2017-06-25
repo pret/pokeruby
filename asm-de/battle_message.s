@@ -16,7 +16,7 @@ BufferStringBattle: @ 8120AA8
 	lsls r0, 16
 	lsrs r7, r0, 16
 	movs r6, 0
-	ldr r5, _08120B70 @ =gBufferedMoves
+	ldr r5, _08120B70 @ =gSelectedOrderFromParty
 	ldr r4, _08120B74 @ =gActiveBank
 	ldrb r1, [r4]
 	lsls r1, 9
@@ -73,7 +73,7 @@ _08120B10:
 	movs r2, 0
 	ldr r0, _08120B9C @ =gBattleTextBuff1
 	mov r8, r0
-	ldr r3, _08120B70 @ =gBufferedMoves
+	ldr r3, _08120B70 @ =gSelectedOrderFromParty
 	ldr r1, _08120BA4 @ =gBattleTextBuff2
 	mov r12, r1
 	ldr r5, _08120BA8 @ =gBattleTextBuff3
@@ -111,7 +111,7 @@ _08120B64:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08120B70: .4byte gBufferedMoves
+_08120B70: .4byte gSelectedOrderFromParty
 _08120B74: .4byte gActiveBank
 _08120B78: .4byte gUnknown_02023A64
 _08120B7C: .4byte gLastUsedItem
@@ -424,7 +424,7 @@ _d08120E0C: .4byte 0x0000ffff
 _08120DE8:
 	mov r0, r10
 	bl sub_8121D1C
-	ldr r0, _08120E14 @ =gBufferedMoves
+	ldr r0, _08120E14 @ =gSelectedOrderFromParty
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -443,7 +443,7 @@ _08120DE8:
 	bl StringCopy
 	b _08120E38
 	.align 2, 0
-_08120E14: .4byte gBufferedMoves
+_08120E14: .4byte gSelectedOrderFromParty
 _08120E18: .4byte gBattleTextBuff2
 _08120E1C: .4byte gUnknown_08401674
 _08120E20: .4byte 0x02000000
@@ -1309,7 +1309,7 @@ _081215E8:
 	.align 2, 0
 _081215F4: .4byte gBattlePartyID
 _081215F8:
-	ldr r0, _08de121568 @ =gBufferedMoves
+	ldr r0, _08de121568 @ =gSelectedOrderFromParty
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -1321,14 +1321,14 @@ _081215F8:
 	adds r0, r3
 	b _08de12158C
 	.align 2, 0
-_08de121568: .4byte gBufferedMoves
+_08de121568: .4byte gSelectedOrderFromParty
 _08de12156C: .4byte 0x02000000
 _08de121570: .4byte 0x000160a0
 _08de121574:
 	ldrh r1, [r2]
 	b _08de1215AA
 _08121620:
-	ldr r0, _08de121598 @ =gBufferedMoves
+	ldr r0, _08de121598 @ =gSelectedOrderFromParty
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x2]
 	movs r0, 0xB1
@@ -1345,7 +1345,7 @@ _08de12158C:
 	adds r4, r0, r1
 	b _081219E6
 	.align 2, 0
-_08de121598: .4byte gBufferedMoves
+_08de121598: .4byte gSelectedOrderFromParty
 _08de12159C: .4byte 0x02000000
 _08de1215A0: .4byte 0x000160a0
 _08de1215A4: .4byte gUnknown_08401674
@@ -2213,7 +2213,7 @@ sub_8121D1C: @ 8121D1C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r2, 0
-	ldr r5, _08121D50 @ =gBufferedMoves
+	ldr r5, _08121D50 @ =gSelectedOrderFromParty
 	ldr r3, _08121D54 @ =gUnknown_084016BC
 _08121D26:
 	cmp r2, 0x4
@@ -2238,7 +2238,7 @@ _08121D3C:
 	bl StringCopy
 	b _08121D68
 	.align 2, 0
-_08121D50: .4byte gBufferedMoves
+_08121D50: .4byte gSelectedOrderFromParty
 _08121D54: .4byte gUnknown_084016BC
 _08121D58: .4byte gUnknown_08400E5E
 _08121D5C:
@@ -2268,7 +2268,7 @@ _08121D7E:
 	cmp r0, 0xFF
 	bne _08121D7C
 	ldr r1, _08121DB4 @ =gUnknown_084016BC
-	ldr r5, _08121DB8 @ =gBufferedMoves
+	ldr r5, _08121DB8 @ =gSelectedOrderFromParty
 	movs r0, 0
 	lsls r0, 1
 	adds r2, r0, r1
@@ -2295,7 +2295,7 @@ _08121DA8:
 	mov pc, r0
 	.align 2, 0
 _08121DB4: .4byte gUnknown_084016BC
-_08121DB8: .4byte gBufferedMoves
+_08121DB8: .4byte gSelectedOrderFromParty
 _08121DBC: .4byte _08121DC0
 	.align 2, 0
 _08121DC0:
