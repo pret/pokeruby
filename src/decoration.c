@@ -1994,12 +1994,12 @@ void sub_80FECE0(u8 decoCat)
     movs r0, 0x1\n\
     b _080FED26\n\
     .align 2, 0\n\
-    80FED18: .4byte gUnknown_020388D5\n\
-    80FED1C: .4byte gDecorations\n\
-    80FED20: .4byte gUnknown_020388D0\n\
-    80FED24:\n\
+_080FED18: .4byte gUnknown_020388D5\n\
+_080FED1C: .4byte gDecorations\n\
+_080FED20: .4byte gUnknown_020388D0\n\
+_080FED24:\n\
     movs r0, 0\n\
-    80FED26:\n\
+_080FED26:\n\
     add sp, 0x8\n\
     pop {r1}\n\
     bx r1\n\
