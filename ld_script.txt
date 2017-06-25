@@ -250,7 +250,7 @@ SECTIONS {
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
-        asm/battle_anim_8137220.o(.text);
+        src/battle_anim_8137220.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
         src/field_region_map.o(.text);
