@@ -6,6 +6,10 @@
 
 	.text
 
+.ifdef ENGLISH
+	.set sub_804A96C_alt, sub_804A96C
+.endif
+
 	thumb_func_start sub_8047CD8
 sub_8047CD8: @ 8047CD8
 	push {lr}
@@ -4348,7 +4352,7 @@ _08049F8E:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, [sp, 0x6C]
 	cmp r0, 0
 	beq _0804A08C
@@ -4407,7 +4411,7 @@ _0804A0E4:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, _0804A22C @ =gUnknown_03004824
 	ldr r3, [r0]
 	ldr r1, [sp, 0x6C]
@@ -5347,7 +5351,7 @@ sub_804A840: @ 804A840
 	str r5, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0
 	bl sub_804A6DC
 	movs r0, 0
@@ -5387,7 +5391,7 @@ _0804A8A8:
 	str r1, [sp, 0x8]
 	movs r1, 0xF
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0x1
 	bl sub_804A6DC
 	movs r0, 0x1

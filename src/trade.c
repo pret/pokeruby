@@ -56,7 +56,7 @@ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 widt
 }
 
 #if GERMAN
-void sub_804AD20(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
+void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
     sub_804A96C(arg0, left, top, tilemap, width, height, sp8);
 
     arg0->var10 = 1;
