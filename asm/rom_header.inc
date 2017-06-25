@@ -67,7 +67,7 @@ RomHeaderChecksum:
 	.endif
 	.else
 	.byte 0x42
-	.end
+	.endif
 
 RomHeaderReserved2:
 	.space 2
