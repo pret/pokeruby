@@ -22,25 +22,338 @@ struct UnknownStruct2
     u8 d;
 };
 
-extern const struct SpriteSheet gRotatingGatesGraphicsTable[];
-extern /* const */ struct UnknownStruct gUnknown_083D2964[];
-extern /* const */ struct UnknownStruct gUnknown_083D299C[];
-extern const struct SpriteTemplate gSpriteTemplate_83D60A4;
-extern const struct SpriteTemplate gSpriteTemplate_83D608C;
+static const struct UnknownStruct sUnknown_083D2964[] = {
+    { { 12, 5 }, 3, 0, 0, 0 },
+    { { 14, 7 }, 3, 3, 0, 0 },
+    { { 16, 4 }, 5, 1, 0, 0 },
+    { { 15, 14 }, 1, 0, 0, 0 },
+    { { 18, 13 }, 4, 2, 0, 0 },
+    { { 8, 20 }, 4, 2, 0, 0 },
+    { { 16, 20 }, 7, 1, 0, 0 },
+};
+
+static const struct UnknownStruct sUnknown_083D299C[] = {
+    { { 13, 3 }, 4, 3, 0, 0 },
+    { { 12, 6 }, 4, 2, 0, 0 },
+    { { 3, 6 }, 4, 2, 0, 0 },
+    { { 3, 9 }, 5, 3, 0, 0 },
+    { { 8, 8 }, 0, 1, 0, 0 },
+    { { 2, 12 }, 6, 2, 0, 0 },
+    { { 9, 13 }, 1, 0, 0, 0 },
+    { { 3, 14 }, 2, 1, 0, 0 },
+    { { 9, 15 }, 3, 2, 0, 0 },
+    { { 3, 18 }, 5, 2, 0, 0 },
+    { { 2, 19 }, 4, 0, 0, 0 },
+    { { 5, 21 }, 0, 0, 0, 0 },
+    { { 9, 19 }, 3, 3, 0, 0 },
+    { { 12, 20 }, 4, 1, 0, 0 },
+};
+
+static const u8 RotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/1.4bpp");
+static const u8 RotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/2.4bpp");
+static const u8 RotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/3.4bpp");
+static const u8 RotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/5.4bpp");
+static const u8 RotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/6.4bpp");
+static const u8 RotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/7.4bpp");
+static const u8 RotatingGateTiles_0[] = INCBIN_U8("graphics/rotating_gates/0.4bpp");
+static const u8 RotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/4.4bpp");
+
+static const struct OamData gOamData_83D5E0C = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 5,
+    .affineParam = 0,
+};
+
+// Smaller
+static const struct OamData gOamData_83D5E14 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 5,
+    .affineParam = 0,
+};
+
+static const struct SpriteSheet gRotatingGatesGraphicsTable[] = {
+    { RotatingGateTiles_0, 0x200, 0x1300 },
+    { RotatingGateTiles_1, 0x800, 0x1301 },
+    { RotatingGateTiles_2, 0x800, 0x1302 },
+    { RotatingGateTiles_3, 0x800, 0x1303 },
+    { RotatingGateTiles_4, 0x200, 0x1304 },
+    { RotatingGateTiles_5, 0x800, 0x1305 },
+    { RotatingGateTiles_6, 0x800, 0x1306 },
+    { RotatingGateTiles_7, 0x800, 0x1307 },
+    { NULL },
+};
+
+static const union AnimCmd gSpriteAnim_83D5E64[] = {
+    ANIMCMD_FRAME(0, 0), ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_83D5E6C[] = {
+    ANIMCMD_FRAME(0, 0), ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_83D5E74[] = {
+    gSpriteAnim_83D5E64,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_83D5E78[] = {
+    gSpriteAnim_83D5E6C,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5E7C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0), AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5E8C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0), AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5E9C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0), AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5EAC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0), AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5EBC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5ED4[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5EEC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F04[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F1C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F34[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F4C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F64[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F7C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5F94[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5FAC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5FC4[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5FDC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0), AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8), AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D5FF4[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D600C[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_83D6024[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83D603C[] = {
+    gSpriteAffineAnim_83D5E7C,
+    gSpriteAffineAnim_83D5E8C,
+    gSpriteAffineAnim_83D5E9C,
+    gSpriteAffineAnim_83D5EAC,
+    gSpriteAffineAnim_83D5F1C,
+    gSpriteAffineAnim_83D5F64,
+    gSpriteAffineAnim_83D5F4C,
+    gSpriteAffineAnim_83D5F34,
+    gSpriteAffineAnim_83D5EBC,
+    gSpriteAffineAnim_83D5ED4,
+    gSpriteAffineAnim_83D5EEC,
+    gSpriteAffineAnim_83D5F04,
+    gSpriteAffineAnim_83D5FDC,
+    gSpriteAffineAnim_83D6024,
+    gSpriteAffineAnim_83D600C,
+    gSpriteAffineAnim_83D5FF4,
+    gSpriteAffineAnim_83D5F7C,
+    gSpriteAffineAnim_83D5F94,
+    gSpriteAffineAnim_83D5FAC,
+    gSpriteAffineAnim_83D5FC4,
+};
+
+void sub_80C7C94(struct Sprite *sprite);
+
+static const struct SpriteTemplate gSpriteTemplate_83D608C = {
+    .tileTag = 4864,
+    .paletteTag = 0xFFFF,
+    .oam = &gOamData_83D5E0C,
+    .anims = gSpriteAnimTable_83D5E74,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D603C,
+    .callback = sub_80C7C94,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_83D60A4 = {
+    .tileTag = 4864,
+    .paletteTag = 0xFFFF,
+    .oam = &gOamData_83D5E14,
+    .anims = gSpriteAnimTable_83D5E78,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D603C,
+    .callback = sub_80C7C94,
+};
+
+static const u8 sUnknown_083D60BC[4][4] = {
+    { 255, 255, 255, 255 }, { 39, 38, 18, 19 }, { 255, 255, 255, 255 }, { 255, 255, 255, 255 },
+};
+
+static const u8 sUnknown_083D60CC[4][4] = {
+    { 255, 255, 255, 255 }, { 255, 255, 255, 255 }, { 23, 22, 34, 35 }, { 255, 255, 255, 255 },
+};
+
+static const u8 sUnknown_083D60DC[4][4] = {
+    { 255, 17, 255, 255 }, { 255, 16, 255, 255 }, { 255, 36, 255, 255 }, { 255, 37, 255, 255 },
+};
+
+static const u8 sUnknown_083D60EC[4][4] = {
+    { 255, 255, 33, 255 }, { 255, 255, 32, 255 }, { 255, 255, 20, 255 }, { 255, 255, 21, 255 },
+};
+
+static const struct UnknownStruct2 sUnknown_083D60FC[] = {
+    { 0, -1, 0, 0 },
+    { 1, -2, 0, 0 },
+    { 0, 0, 0, 0 },
+    { 1, 0, 0, 0 },
+    { -1, 0, 0, 0 },
+    { -1, 1, 0, 0 },
+    { -1, -1, 0, 0 },
+    { -2, -1, 0, 0 },
+};
+
+static const struct UnknownStruct2 sUnknown_083D611C[] = {
+    { -1, -1, 0, 0 },
+    { -1, -2, 0, 0 },
+    { 0, -1, 0, 0 },
+    { 1, -1, 0, 0 },
+    { 0, 0, 0, 0 },
+    { 0, 1, 0, 0 },
+    { -1, 0, 0, 0 },
+    { -2, 0, 0, 0 },
+};
+
+static const u8 sUnknown_083D613C[12][8] = {
+    {
+        1, 0, 1, 0, 0, 0, 0, 0,
+    },
+    {
+        1, 1, 1, 0, 0, 0, 0, 0,
+    },
+    {
+        1, 0, 1, 1, 0, 0, 0, 0,
+    },
+    {
+        1, 1, 1, 1, 0, 0, 0, 0,
+    },
+    {
+        1, 0, 1, 0, 1, 0, 0, 0,
+    },
+    {
+        1, 1, 1, 0, 1, 0, 0, 0,
+    },
+    {
+        1, 0, 1, 1, 1, 0, 0, 0,
+    },
+    {
+        1, 0, 1, 0, 1, 1, 0, 0,
+    },
+    {
+        1, 1, 1, 1, 1, 0, 0, 0,
+    },
+    {
+        1, 1, 1, 0, 1, 1, 0, 0,
+    },
+    {
+        1, 0, 1, 1, 1, 1, 0, 0,
+    },
+    {
+        1, 1, 1, 1, 1, 1, 0, 0,
+    },
+};
 
 extern u8 gUnknown_020387F0[10]; // puzzle oam ID list
-
-extern struct UnknownStruct *gUnknown_02038800;
+extern const struct UnknownStruct *gUnknown_02038800;
 extern u8 gUnknown_02038804; // puzzle count
-
-extern struct UnknownStruct2 gUnknown_083D611C[5];
-extern struct UnknownStruct2 gUnknown_083D60FC[5];
-extern const u8 gUnknown_083D613C[12][8];
-
-extern const u8 gUnknown_083D60BC[4][4];
-extern const u8 gUnknown_083D60CC[4][4];
-extern const u8 gUnknown_083D60DC[4][4];
-extern const u8 gUnknown_083D60EC[4][4];
 
 u8 sub_80C7BAC(u8 i, s16 a, s16 b);
 void sub_8060388(s16 x, s16 y, s16 *outX, s16 *outY);
@@ -125,11 +438,11 @@ void sub_80C7A80(void)
     switch (a)
     {
     case 1:
-        gUnknown_02038800 = gUnknown_083D2964;
+        gUnknown_02038800 = sUnknown_083D2964;
         gUnknown_02038804 = 7;
         break;
     case 2:
-        gUnknown_02038800 = gUnknown_083D299C;
+        gUnknown_02038800 = sUnknown_083D299C;
         gUnknown_02038804 = 0xE;
         break;
     case 0:
@@ -170,7 +483,7 @@ u8 sub_80C7BAC(u8 i, s16 a, s16 b)
 {
     struct Sprite *sprite; // r4
     struct SpriteTemplate template;
-    struct UnknownStruct *unk;
+    const struct UnknownStruct *unk;
     u8 id; //  r5
     s16 x, y;
 
@@ -312,7 +625,7 @@ void sub_80C7DC0(void)
 #ifdef NONMATCHING
 int sub_80C7E8C(u8 a, int puzzleType)
 {
-    struct UnknownStruct2 *unk1;
+    const struct UnknownStruct2 *unk1;
     u8 unk2;
     s16 x;
     s16 y;
@@ -326,9 +639,9 @@ int sub_80C7E8C(u8 a, int puzzleType)
     int wat;
 
     if (puzzleType == 1)
-        unk1 = gUnknown_083D611C;
+        unk1 = sUnknown_083D611C;
     else if (puzzleType == 2)
-        unk1 = gUnknown_083D60FC;
+        unk1 = sUnknown_083D60FC;
     else
         return 0;
 
@@ -343,7 +656,7 @@ int sub_80C7E8C(u8 a, int puzzleType)
         j = 0;
         unk4 = unk2 + i;
         wat = unk2 + i;
-        unk5 = &gUnknown_083D613C[unk3][i * 2];
+        unk5 = &sUnknown_083D613C[unk3][i * 2];
 
         for (; j <= 1; j++)
         {
@@ -378,11 +691,11 @@ __attribute__((naked)) int sub_80C7E8C(u8 a, int puzzleType)
 	lsrs r4, r0, 24\n\
 	cmp r1, 0x1\n\
 	bne _080C7EAC\n\
-	ldr r0, _080C7EA8 @ =gUnknown_083D611C\n\
+	ldr r0, _080C7EA8 @ =sUnknown_083D611C\n\
 	mov r10, r0\n\
 	b _080C7EB8\n\
 	.align 2, 0\n\
-_080C7EA8: .4byte gUnknown_083D611C\n\
+_080C7EA8: .4byte sUnknown_083D611C\n\
 _080C7EAC:\n\
 	cmp r1, 0x2\n\
 	beq _080C7EB4\n\
@@ -390,7 +703,7 @@ _080C7EB0:\n\
 	movs r0, 0\n\
 	b _080C7F48\n\
 _080C7EB4:\n\
-	ldr r1, _080C7F58 @ =gUnknown_083D60FC\n\
+	ldr r1, _080C7F58 @ =sUnknown_083D60FC\n\
 	mov r10, r1\n\
 _080C7EB8:\n\
 	adds r0, r4, 0\n\
@@ -424,7 +737,7 @@ _080C7EE8:\n\
 	adds r5, r7, 0\n\
 	ldr r1, [sp, 0x4]\n\
 	adds r0, r1\n\
-	ldr r2, _080C7F60 @ =gUnknown_083D613C\n\
+	ldr r2, _080C7F60 @ =sUnknown_083D613C\n\
 	adds r4, r0, r2\n\
 _080C7EFA:\n\
 	adds r0, r5, 0\n\
@@ -477,9 +790,9 @@ _080C7F48:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_080C7F58: .4byte gUnknown_083D60FC\n\
+_080C7F58: .4byte sUnknown_083D60FC\n\
 _080C7F5C: .4byte gUnknown_02038800\n\
-_080C7F60: .4byte gUnknown_083D613C\n\
+_080C7F60: .4byte sUnknown_083D613C\n\
 .syntax divided\n");
 }
 #endif
@@ -500,7 +813,7 @@ int sub_80C7F64(u8 a, u8 b)
     unk7 = unk2 < 0 ? unk2 + 3 : unk2;
     unk4 = (unk7 - ((unk7 >> 2) << 2));
     unk6 = gUnknown_02038800[a].e;
-    return gUnknown_083D613C[unk6][(s8)unk4 * 2 + unk1];
+    return sUnknown_083D613C[unk6][(s8)unk4 * 2 + unk1];
 }
 #else
 __attribute__((naked)) int sub_80C7F64(u8 a, u8 b)
@@ -533,7 +846,7 @@ _080C7F8A:\n\
 	lsls r1, r6, 3\n\
 	adds r1, r2\n\
 	ldrb r1, [r1, 0x4]\n\
-	ldr r2, _080C7FB4 @ =gUnknown_083D613C\n\
+	ldr r2, _080C7FB4 @ =sUnknown_083D613C\n\
 	lsls r0, 24\n\
 	asrs r0, 23\n\
 	adds r0, r5\n\
@@ -546,7 +859,7 @@ _080C7F8A:\n\
 	bx r1\n\
 	.align 2, 0\n\
 _080C7FB0: .4byte gUnknown_02038800\n\
-_080C7FB4: .4byte gUnknown_083D613C\n\
+_080C7FB4: .4byte sUnknown_083D613C\n\
 .syntax divided\n");
 }
 #endif
@@ -569,13 +882,13 @@ u8 sub_80C7FEC(u8 a, s16 b, s16 c)
     register const u8(*ptr)[][4] asm("r3");
 
     if (a == 2)
-        ptr = &gUnknown_083D60BC;
+        ptr = &sUnknown_083D60BC;
     else if (a == 1)
-        ptr = &gUnknown_083D60CC;
+        ptr = &sUnknown_083D60CC;
     else if (a == 3)
-        ptr = &gUnknown_083D60DC;
+        ptr = &sUnknown_083D60DC;
     else if (a == 4)
-        ptr = &gUnknown_083D60EC;
+        ptr = &sUnknown_083D60EC;
     else
         return 0xFF;
 
@@ -595,31 +908,31 @@ __attribute__((naked)) u8 sub_80C7FEC(u8 a, s16 b, s16 c)
 	lsrs r2, 16\n\
 	cmp r0, 0x2\n\
 	bne _080C8008\n\
-	ldr r3, _080C8004 @ =gUnknown_083D60BC\n\
+	ldr r3, _080C8004 @ =sUnknown_083D60BC\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C8004: .4byte gUnknown_083D60BC\n\
+_080C8004: .4byte sUnknown_083D60BC\n\
 _080C8008:\n\
 	cmp r0, 0x1\n\
 	bne _080C8014\n\
-	ldr r3, _080C8010 @ =gUnknown_083D60CC\n\
+	ldr r3, _080C8010 @ =sUnknown_083D60CC\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C8010: .4byte gUnknown_083D60CC\n\
+_080C8010: .4byte sUnknown_083D60CC\n\
 _080C8014:\n\
 	cmp r0, 0x3\n\
 	bne _080C8020\n\
-	ldr r3, _080C801C @ =gUnknown_083D60DC\n\
+	ldr r3, _080C801C @ =sUnknown_083D60DC\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C801C: .4byte gUnknown_083D60DC\n\
+_080C801C: .4byte sUnknown_083D60DC\n\
 _080C8020:\n\
 	cmp r3, 0x4\n\
 	beq _080C8028\n\
 	movs r0, 0xFF\n\
 	b _080C8038\n\
 _080C8028:\n\
-	ldr r3, _080C803C @ =gUnknown_083D60EC\n\
+	ldr r3, _080C803C @ =sUnknown_083D60EC\n\
 _080C802A:\n\
 	lsls r0, r2, 16\n\
 	lsls r1, 16\n\
@@ -632,7 +945,7 @@ _080C8038:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_080C803C: .4byte gUnknown_083D60EC\n\
+_080C803C: .4byte sUnknown_083D60EC\n\
 .syntax divided\n");
 }
 #endif
