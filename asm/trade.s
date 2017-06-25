@@ -5126,6 +5126,13 @@ _0804A690:
 _0804A6CA:
 	strh r0, [r1]
 _0804A6CC:
+.ifdef GERMAN
+	ldr r0, _0804A6E8 @ =gUnknown_03004824
+	ldr r0, [r0]
+	adds r0, 0xD8
+	movs r1, 0x1
+	strb r1, [r0]
+.endif
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -5134,6 +5141,10 @@ _0804A6CC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
+.ifdef GERMAN
+	.align 2, 0
+_0804A6E8: .4byte gUnknown_03004824
+.endif
 	thumb_func_end sub_804A51C
 
 	thumb_func_start sub_804A6DC
