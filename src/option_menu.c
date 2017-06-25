@@ -334,6 +334,17 @@ static u8 TextSpeed_ProcessInput(u8 selection)
     return selection;
 }
 
+#if ENGLISH
+#define TEXTSPEED_SLOW_LEFT (120)
+#define TEXTSPEED_MIX_LEFT (155)
+#define TEXTSPEED_FAST_LEFT (184)
+#endif
+#if GERMAN
+#define TEXTSPEED_SLOW_LEFT (120)
+#define TEXTSPEED_MIX_LEFT (161)
+#define TEXTSPEED_FAST_LEFT (202)
+#endif
+
 static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[3];
@@ -343,9 +354,9 @@ static void TextSpeed_DrawChoices(u8 selection)
     styles[2] = 0xF;
     styles[selection] = 0x8;
 
-    DrawOptionMenuChoice(gSystemText_Slow, 120, 40, styles[0]);
-    DrawOptionMenuChoice(gSystemText_Mid, 155, 40, styles[1]);
-    DrawOptionMenuChoice(gSystemText_Fast, 184, 40, styles[2]);
+    DrawOptionMenuChoice(gSystemText_Slow, TEXTSPEED_SLOW_LEFT, 40, styles[0]);
+    DrawOptionMenuChoice(gSystemText_Mid, TEXTSPEED_MIX_LEFT, 40, styles[1]);
+    DrawOptionMenuChoice(gSystemText_Fast, TEXTSPEED_FAST_LEFT, 40, styles[2]);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)
@@ -374,6 +385,14 @@ static u8 BattleStyle_ProcessInput(u8 selection)
     return selection;
 }
 
+#if ENGLISH
+#define BATTLESTYLE_SHIFT (120)
+#define BATTLESTYLE_SET (190)
+#elif GERMAN
+#define BATTLESTYLE_SHIFT (120)
+#define BATTLESTYLE_SET (178)
+#endif
+
 static void BattleStyle_DrawChoices(u8 selection)
 {
     u8 styles[2];
@@ -382,8 +401,8 @@ static void BattleStyle_DrawChoices(u8 selection)
     styles[1] = 0xF;
     styles[selection] = 0x8;
 
-    DrawOptionMenuChoice(gSystemText_Shift, 120, 72, styles[0]);
-    DrawOptionMenuChoice(gSystemText_Set, 190, 72, styles[1]);
+    DrawOptionMenuChoice(gSystemText_Shift, BATTLESTYLE_SHIFT, 72, styles[0]);
+    DrawOptionMenuChoice(gSystemText_Set, BATTLESTYLE_SET, 72, styles[1]);
 }
 
 static u8 Sound_ProcessInput(u8 selection)
@@ -431,6 +450,7 @@ static u8 FrameType_ProcessInput(u8 selection)
 
 #define CHAR_0 0xA1 //Character code of '0' character
 
+#if ENGLISH
 static void FrameType_DrawChoices(u8 selection)
 {
     u8 text[8];
@@ -460,6 +480,69 @@ static void FrameType_DrawChoices(u8 selection)
     MenuPrint(gSystemText_Type, 15, 15);
     MenuPrint(text, 18, 15);
 }
+#elif GERMAN
+__attribute__((naked))
+static void FrameType_DrawChoices(u8 selection)
+{
+    asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	sub sp, 0x10\n\
+	lsls r0, 24\n\
+	movs r1, 0x80\n\
+	lsls r1, 17\n\
+	adds r0, r1\n\
+	lsrs r5, r0, 24\n\
+	ldr r1, _0808C368 @ =gSystemText_Type\n\
+	mov r0, sp\n\
+	bl StringCopy\n\
+	ldr r1, _0808C36C @ =gSystemText_Terminator\n\
+	mov r0, sp\n\
+	bl StringAppend\n\
+	adds r4, r0, 0\n\
+	adds r0, r5, 0\n\
+	movs r1, 0xA\n\
+	bl __udivsi3\n\
+	adds r1, r0, 0\n\
+	lsls r0, r1, 24\n\
+	lsrs r6, r0, 24\n\
+	cmp r6, 0\n\
+	beq _0808C370\n\
+	adds r0, r1, 0\n\
+	adds r0, 0xA1\n\
+	strb r0, [r4]\n\
+	adds r4, 0x1\n\
+	adds r0, r5, 0\n\
+	movs r1, 0xA\n\
+	bl __umodsi3\n\
+	adds r0, 0xA1\n\
+	strb r0, [r4]\n\
+	b _0808C380\n\
+	.align 2, 0\n\
+_0808C368: .4byte gSystemText_Type\n\
+_0808C36C: .4byte gSystemText_Terminator\n\
+_0808C370:\n\
+	adds r0, r5, 0\n\
+	movs r1, 0xA\n\
+	bl __umodsi3\n\
+	adds r0, 0xA1\n\
+	strb r0, [r4]\n\
+	adds r4, 0x1\n\
+	strb r6, [r4]\n\
+_0808C380:\n\
+	adds r4, 0x1\n\
+	movs r0, 0xFF\n\
+	strb r0, [r4]\n\
+	mov r0, sp\n\
+	movs r1, 0xF\n\
+	movs r2, 0xF\n\
+	bl MenuPrint\n\
+	add sp, 0x10\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+#endif
 
 static u8 ButtonMode_ProcessInput(u8 selection)
 {

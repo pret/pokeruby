@@ -1154,7 +1154,11 @@ void sub_8139298(void)
         nullsub_8(i);
     sub_802E3E4(0, 0);
     StrCpyDecodeToDisplayedStringBattle(gUnknown_08400CCC);
+#ifdef ENGLISH
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 440, 2, 35);
+#else
+    InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 444, 2, 35);
+#endif
     sub_8002F44(&gUnknown_03004210);
 }
 

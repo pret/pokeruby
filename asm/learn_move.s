@@ -1037,7 +1037,7 @@ _08132F58:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08132FD6
-	ldr r0, _08132F78 @ =gOtherText_ForgotOrDidNotLearnMove
+	ldr r0, _08132F78 @ =gOtherText_ForgotOrDidNotLearnMove / deuOtherText_ForgotAndLearned
 	bl sub_81328E8
 	ldr r0, _08132F7C @ =gUnknown_030007B0
 	ldr r1, [r0]
@@ -1047,7 +1047,11 @@ _08132F58:
 	bl PlayFanfare
 	b _08132FD6
 	.align 2, 0
+.ifdef ENGLISH
 _08132F78: .4byte gOtherText_ForgotOrDidNotLearnMove
+.else
+_08132F78: .4byte deuOtherText_ForgotAndLearned
+.endif
 _08132F7C: .4byte gUnknown_030007B0
 _08132F80: .4byte 0x0000016f
 _08132F84:

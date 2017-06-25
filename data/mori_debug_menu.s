@@ -53,7 +53,11 @@ Text_39B2AF: @ 839B2AF
 	.string "Long name$"
 
 Text_39B2B9: @ 839B2B9
+.ifdef ENGLISH
 	.string "ポロックけす$" @ "{POKEBLOCK} CASE$"
+.else
+	.string "Delete {POKEBLOCK}$"
+.endif
 
 	.align 2
 gMoriDebugMenuActions:: @ 839B2C0

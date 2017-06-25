@@ -15,6 +15,26 @@
 #include "task.h"
 #include "unknown_task.h"
 
+#if ENGLISH
+#define VERSION_BANNER_SHAPE 1
+#define VERSION_BANNER_RIGHT_TILEOFFSET 64
+#define VERSION_BANNER_BYTES 0x1000
+#define VERSION_BANNER_LEFT_X 98
+#define VERSION_BANNER_RIGHT_X 162
+#define VERSION_BANNER_Y 26
+#define VERSION_BANNER_Y_GOAL 66
+#define START_BANNER_X DISPLAY_WIDTH / 2
+#elif GERMAN
+#define VERSION_BANNER_SHAPE 0
+#define VERSION_BANNER_RIGHT_TILEOFFSET 128
+#define VERSION_BANNER_BYTES 0x2000
+#define VERSION_BANNER_LEFT_X 108
+#define VERSION_BANNER_RIGHT_X 172
+#define VERSION_BANNER_Y 44
+#define VERSION_BANNER_Y_GOAL 84
+#define START_BANNER_X DISPLAY_WIDTH / 2 - 2
+#endif
+
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_0202F7E4;
@@ -89,7 +109,7 @@ static const struct OamData sVersionBannerLeftOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 1,
-    .shape = 1,
+    .shape = VERSION_BANNER_SHAPE,
     .x = 0,
     .matrixNum = 0,
     .size = 3,
@@ -105,7 +125,7 @@ static const struct OamData sVersionBannerRightOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 1,
-    .shape = 1,
+    .shape = VERSION_BANNER_SHAPE,
     .x = 0,
     .matrixNum = 0,
     .size = 3,
@@ -121,7 +141,7 @@ static const union AnimCmd sVersionBannerLeftAnimSequence[] =
 };
 static const union AnimCmd sVersionBannerRightAnimSequence[] =
 {
-    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_FRAME(VERSION_BANNER_RIGHT_TILEOFFSET, 30),
     ANIMCMD_END,
 };
 static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
@@ -154,7 +174,7 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
 };
 static const struct CompressedSpriteSheet gUnknown_08393EFC[] =
 {
-    {gVersionTiles, 0x1000, 1000},
+    {gVersionTiles, VERSION_BANNER_BYTES, 1000},
     {NULL},
 };
 static const struct OamData gOamData_8393F0C =
@@ -213,6 +233,18 @@ static const union AnimCmd gSpriteAnim_8393F4C[] =
     ANIMCMD_FRAME(28, 4),
     ANIMCMD_END,
 };
+#if GERMAN
+static const union AnimCmd gSpriteAnim_839F73C[] =
+{
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_END,
+};
+static const union AnimCmd gSpriteAnim_839F744[] =
+{
+    ANIMCMD_FRAME(36, 4),
+    ANIMCMD_END,
+};
+#endif
 static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
 {
     gSpriteAnim_8393F14,
@@ -223,6 +255,10 @@ static const union AnimCmd *const sStartCopyrightBannerAnimTable[] =
     gSpriteAnim_8393F3C,
     gSpriteAnim_8393F44,
     gSpriteAnim_8393F4C,
+#if GERMAN
+    gSpriteAnim_839F73C,
+    gSpriteAnim_839F744,
+#endif
 };
 static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
 {
@@ -322,7 +358,7 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
-        sprite->pos1.y = 66;
+        sprite->pos1.y = VERSION_BANNER_Y_GOAL;
         sprite->invisible = FALSE;
     }
     else
@@ -332,7 +368,7 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
         if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
-            if (sprite->pos1.y != 66)
+            if (sprite->pos1.y != VERSION_BANNER_Y_GOAL)
                 sprite->pos1.y++;
             REG_BLDALPHA = gUnknown_08393E64[task->data[5] / 2];
         }
@@ -346,7 +382,7 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
-        sprite->pos1.y = 66;
+        sprite->pos1.y = VERSION_BANNER_Y_GOAL;
         sprite->invisible = FALSE;
     }
     else
@@ -354,7 +390,7 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
         if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
-            if (sprite->pos1.y != 66)
+            if (sprite->pos1.y != VERSION_BANNER_Y_GOAL)
                 sprite->pos1.y++;
         }
     }
@@ -375,6 +411,7 @@ void SpriteCallback_PressStartCopyrightBanner(struct Sprite *sprite)
         sprite->invisible = FALSE;
 }
 
+#if ENGLISH
 static void CreatePressStartBanner(s16 x, s16 y)
 {
     u8 i;
@@ -388,6 +425,110 @@ static void CreatePressStartBanner(s16 x, s16 y)
         gSprites[spriteId].data0 = 1;
     }
 }
+#elif GERMAN
+__attribute__((naked))
+static void CreatePressStartBanner(s16 x, s16 y)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	lsls r0, 16\n\
+	ldr r2, _0807C3AC @ =0xffe00000\n\
+	adds r0, r2\n\
+	lsrs r0, 16\n\
+	movs r6, 0\n\
+	lsls r1, 16\n\
+	mov r10, r1\n\
+	mov r8, r10\n\
+_0807C302:\n\
+	lsls r5, r0, 16\n\
+	asrs r5, 16\n\
+	ldr r0, _0807C3B0 @ =sStartCopyrightBannerSpriteTemplate\n\
+	adds r1, r5, 0\n\
+	mov r3, r8\n\
+	asrs r2, r3, 16\n\
+	movs r3, 0\n\
+	bl CreateSprite\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r4, r0, 4\n\
+	adds r4, r0\n\
+	lsls r4, 2\n\
+	ldr r0, _0807C3B4 @ =gSprites\n\
+	mov r9, r0\n\
+	add r4, r9\n\
+	adds r0, r4, 0\n\
+	adds r1, r6, 0\n\
+	bl StartSpriteAnim\n\
+	movs r7, 0x1\n\
+	strh r7, [r4, 0x2E]\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	adds r5, 0x20\n\
+	lsls r5, 16\n\
+	lsrs r0, r5, 16\n\
+	cmp r6, 0x2\n\
+	bls _0807C302\n\
+	ldr r1, _0807C3B0 @ =sStartCopyrightBannerSpriteTemplate\n\
+	mov r8, r1\n\
+	lsls r5, r0, 16\n\
+	asrs r5, 16\n\
+	mov r2, r10\n\
+	asrs r6, r2, 16\n\
+	mov r0, r8\n\
+	adds r1, r5, 0\n\
+	adds r2, r6, 0\n\
+	movs r3, 0\n\
+	bl CreateSprite\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r4, r0, 4\n\
+	adds r4, r0\n\
+	lsls r4, 2\n\
+	add r4, r9\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x8\n\
+	bl StartSpriteAnim\n\
+	strh r7, [r4, 0x2E]\n\
+	subs r5, 0x60\n\
+	lsls r5, 16\n\
+	asrs r5, 16\n\
+	subs r6, 0x8\n\
+	lsls r6, 16\n\
+	asrs r6, 16\n\
+	mov r0, r8\n\
+	adds r1, r5, 0\n\
+	adds r2, r6, 0\n\
+	movs r3, 0\n\
+	bl CreateSprite\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r4, r0, 4\n\
+	adds r4, r0\n\
+	lsls r4, 2\n\
+	add r4, r9\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x9\n\
+	bl StartSpriteAnim\n\
+	strh r7, [r4, 0x2E]\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_0807C3AC: .4byte 0xffe00000\n\
+_0807C3B0: .4byte sStartCopyrightBannerSpriteTemplate\n\
+_0807C3B4: .4byte gSprites\n\
+    .syntax divided\n");
+}
+#endif
 
 static void CreateCopyrightBanner(s16 x, s16 y)
 {
@@ -608,12 +749,12 @@ static void Task_TitleScreenPhase1(u8 taskId)
         REG_BLDY = 0;
 
         //Create left side of version banner
-        spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, 0x62, 0x1A, 0);
+        spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, VERSION_BANNER_LEFT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
 
         //Create right side of version banner
-        spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, 0xA2, 0x1A, 0);
+        spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
 
@@ -644,7 +785,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
                     | DISPCNT_BG1_ON
                     | DISPCNT_BG2_ON
                     | DISPCNT_OBJ_ON;
-        CreatePressStartBanner(DISPLAY_WIDTH / 2, 108);
+        CreatePressStartBanner(START_BANNER_X, 108);
         CreateCopyrightBanner(DISPLAY_WIDTH / 2, 148);
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;

@@ -109,14 +109,22 @@ void sub_806AEDC(void)
 }
 */
 
+#if ENGLISH
+#define WINDOW_LEFT (3)
+#define WINDOW_RIGHT (26)
+#elif GERMAN
+#define WINDOW_LEFT (0)
+#define WINDOW_RIGHT (29)
+#endif
+
 u8 sub_806E834(const u8 *message, u8 arg1)
 {
     u8 taskId;
 
     gUnknown_0202E8F6 = 1;
 
-    MenuDrawTextWindow(3, 14, 26, 19);
-    MenuPrintMessage(message, 4, 15);
+    MenuDrawTextWindow(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
+    MenuPrintMessage(message, WINDOW_LEFT + 1, 15);
 
     taskId = CreateTask(sub_806E884, 1);
     gTasks[taskId].data[0] = arg1;
@@ -130,7 +138,7 @@ static void sub_806E884(u8 taskId)
     {
         gUnknown_0202E8F6 = 0;
         if (gTasks[taskId].data[0] == 0)
-            MenuZeroFillWindowRect(3, 14, 26, 19);
+            MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
         DestroyTask(taskId);
     }
 }
@@ -1100,7 +1108,7 @@ void sub_8070088(u8 taskId)
         else
         {
             gUnknown_0202E8F4 = 1;
-            MenuZeroFillWindowRect(3, 14, 26, 19);
+            MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
             PlaySE(SE_KAIFUKU);
             PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.unk5);
             task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.unk5 * 2], 9);
@@ -1338,6 +1346,7 @@ void Task_RareCandy2(u8 taskId)
     }
 }
 
+#if ENGLISH
 void sub_8070848(u8 taskId)
 {
     u8 i;
@@ -1374,3 +1383,123 @@ void sub_8070848(u8 taskId)
         MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 12, y * 8, 0);
     }
 }
+#elif GERMAN
+__attribute__((naked))
+void sub_8070848(u8 taskId) {
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    movs r0, 0xB\n\
+    movs r1, 0\n\
+    movs r2, 0x1D\n\
+    movs r3, 0x7\n\
+    bl MenuDrawTextWindow\n\
+    movs r7, 0\n\
+    ldr r0, _0807092C @ =gStringVar1\n\
+    mov r10, r0\n\
+    movs r1, 0xFC\n\
+    mov r9, r1\n\
+    movs r2, 0x13\n\
+    mov r8, r2\n\
+_0807086C:\n\
+    ldr r1, _08070930 @ =0x0201c000\n\
+    ldr r0, [r1]\n\
+    ldr r1, _08070934 @ =gUnknown_08376D1C\n\
+    adds r1, r7, r1\n\
+    ldrb r1, [r1]\n\
+    bl GetMonData\n\
+    adds r1, r7, 0x6\n\
+    lsls r1, 1\n\
+    ldr r2, _08070938 @ =0x0201b264\n\
+    adds r1, r2, r1\n\
+    strh r0, [r1]\n\
+    lsls r6, r7, 1\n\
+    adds r6, r2, r6\n\
+    ldrh r1, [r6]\n\
+    subs r0, r1\n\
+    strh r0, [r6]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x3\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r4, r0, 3\n\
+    adds r4, r0\n\
+    adds r4, 0xB\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x3\n\
+    bl __umodsi3\n\
+    adds r5, r0, 0\n\
+    lsls r5, 1\n\
+    adds r5, 0x1\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    ldr r1, _0807093C @ =gUnknown_08376D04\n\
+    lsls r0, r7, 2\n\
+    adds r0, r1\n\
+    ldr r1, [r0]\n\
+    mov r0, r10\n\
+    bl StringCopy\n\
+    adds r2, r0, 0\n\
+    mov r0, r9\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    mov r1, r8\n\
+    strb r1, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0x2E\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    adds r0, r2, 0\n\
+    ldr r1, _08070940 @ =gOtherText_TallPlusAndRightArrow\n\
+    bl StringCopy\n\
+    adds r2, r0, 0\n\
+    mov r0, r9\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    mov r1, r8\n\
+    strb r1, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0x34\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0\n\
+    ldrsh r1, [r6, r0]\n\
+    adds r0, r2, 0\n\
+    movs r2, 0x1\n\
+    movs r3, 0x2\n\
+    bl ConvertIntToDecimalStringN\n\
+    adds r4, 0x1\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    mov r0, r10\n\
+    adds r1, r4, 0\n\
+    adds r2, r5, 0\n\
+    bl MenuPrint\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r7, r0, 24\n\
+    cmp r7, 0x5\n\
+    bls _0807086C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0807092C: .4byte gStringVar1\n\
+_08070930: .4byte 0x0201c000\n\
+_08070934: .4byte gUnknown_08376D1C\n\
+_08070938: .4byte 0x0201b264\n\
+_0807093C: .4byte gUnknown_08376D04\n\
+_08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
+    .syntax divided\n");
+}
+#endif
