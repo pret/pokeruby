@@ -1,6 +1,7 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
+// clang-format off
 #define CHAR_SPACE          0x00
 #define CHAR_0              0xA1
 #define CHAR_QUESTION_MARK  0xAC
@@ -68,6 +69,7 @@
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
+// clang-format on
 
 struct WindowConfig
 {

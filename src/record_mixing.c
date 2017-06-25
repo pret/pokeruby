@@ -445,7 +445,7 @@ void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d
 }
 
 #else
-__attribute__((naked))
+NAKED
 void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
     asm(".syntax unified\n\

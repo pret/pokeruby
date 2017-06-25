@@ -238,11 +238,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_not_taunted,
 };
 
-#ifdef NONMATCHING
-static
-#endif
-const u16 sDiscouragedPowerfulMoveEffects[] =
-{
+const u16 sDiscouragedPowerfulMoveEffects[] = {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
     EFFECT_RAZOR_WIND,
@@ -995,7 +991,7 @@ static void BattleAICmd_is_most_powerful_move(void)
     gAIScriptPtr += 1;
 }
 #else
-__attribute__((naked))
+NAKED
 static void BattleAICmd_is_most_powerful_move(void)
 {
     asm(".syntax unified\n\

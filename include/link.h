@@ -6,6 +6,7 @@
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
 
+// clang-format off
 #define LINK_STAT_LOCAL_ID               0x00000003
 #define LINK_STAT_PLAYER_COUNT           0x0000001C
 #define LINK_STAT_PLAYER_COUNT_SHIFT     2
@@ -16,6 +17,7 @@
 #define LINK_STAT_RECEIVED_NOTHING       0x00000100
 #define LINK_STAT_RECEIVED_NOTHING_SHIFT 8
 #define LINK_STAT_ERRORS                 0x0007F000
+// clang-format on
 
 #define EXTRACT_PLAYER_COUNT(status) \
 (((status) & LINK_STAT_PLAYER_COUNT) >> LINK_STAT_PLAYER_COUNT_SHIFT)

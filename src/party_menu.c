@@ -304,7 +304,7 @@ void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func)
     }
 }
 */
-__attribute__((naked))
+NAKED
 void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func)
 {
     asm(".syntax unified\n\

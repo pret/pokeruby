@@ -4,6 +4,7 @@
 void sub_80B2E38(u8);
 void HandleShopMenuQuit(u8);
 void sub_80B2FA0(u8);
+void sub_80B3068(u8);
 void BuyMenuDrawGraphics(void);
 void sub_80B3240(void);
 void sub_80B3270(void);

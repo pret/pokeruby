@@ -1,6 +1,7 @@
 #ifndef GUARD_GAME_STAT_H
 #define GUARD_GAME_STAT_H
 
+// clang-format off
 #define GAME_STAT_SAVED_GAME                 0
 #define GAME_STAT_FIRST_HOF_PLAY_TIME        1
 #define GAME_STAT_STARTED_TRENDS             2
@@ -52,5 +53,6 @@
 #define GAME_STAT_RODE_CABLE_CAR            48
 #define GAME_STAT_ENTERED_HOT_SPRINGS       49
 #define NUM_GAME_STATS                      50
+// clang-format on
 
 #endif // GUARD_GAME_STAT_H

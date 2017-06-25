@@ -1,23 +1,27 @@
 #include "global.h"
-#include "main.h"
-#include "map_object_constants.h"
-#include "rom4.h"
-#include "sound.h"
-#include "songs.h"
-#include "string_util.h"
-#include "menu.h"
-#include "menu_helpers.h"
-#include "strings.h"
-#include "script.h"
-#include "palette.h"
-#include "field_player_avatar.h"
+#include "decoration.h"
+#include "decoration_inventory.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "field_fadetransition.h"
-#include "fieldmap.h"
-#include "metatile_behavior.h"
-#include "event_data.h"
+#include "field_player_avatar.h"
 #include "field_weather.h"
-#include "decoration.h"
+#include "fieldmap.h"
+#include "main.h"
+#include "map_object_constants.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "metatile_behavior.h"
+#include "palette.h"
+#include "player_pc.h"
+#include "rom4.h"
+#include "script.h"
+#include "shop.h"
+#include "songs.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings.h"
+#include "trader.h"
 
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
@@ -2620,7 +2624,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     asm(".syntax unified\n"
@@ -3951,7 +3955,7 @@ void sub_8101460(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8101460(u8 taskId)
 {
     asm(".syntax unified\n"

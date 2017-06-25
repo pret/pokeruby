@@ -3,6 +3,7 @@
 
 #include "siirtc.h"
 
+// clang-format off
 #define RTC_INIT_ERROR         0x0001
 #define RTC_INIT_WARNING       0x0002
 
@@ -16,6 +17,7 @@
 #define RTC_ERR_INVALID_SECOND 0x0800
 
 #define RTC_ERR_FLAG_MASK      0x0FF0
+// clang-format on
 
 extern struct Time gLocalTime;
 

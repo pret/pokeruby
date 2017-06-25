@@ -1,6 +1,7 @@
 #ifndef GUARD_HOLD_EFFECTS_H
 #define GUARD_HOLD_EFFECTS_H
 
+// clang-format off
 #define HOLD_EFFECT_NONE            0
 #define HOLD_EFFECT_RESTORE_HP      1
 #define HOLD_EFFECT_CURE_PAR        2
@@ -68,5 +69,6 @@
 #define HOLD_EFFECT_METAL_POWDER   64
 #define HOLD_EFFECT_THICK_CLUB     65
 #define HOLD_EFFECT_STICK          66
+// clang-format on
 
 #endif // GUARD_HOLD_EFFECTS_H

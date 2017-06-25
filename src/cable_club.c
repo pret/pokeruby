@@ -84,7 +84,7 @@ static void sub_80830E4(u8 taskId) {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80830E4(u8 taskId) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\

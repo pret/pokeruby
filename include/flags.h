@@ -1,26 +1,27 @@
 #ifndef GUARD_FLAGS_H
 #define GUARD_FLAGS_H
 
-#define TRAINER_FLAG_START 0x500
+// clang-format off
+#define TRAINER_FLAG_START   0x500
 
 // SYSTEM FLAGS
 
-#define SYS_POKEMON_GET  0x800
-#define SYS_POKEDEX_GET  0x801
-#define SYS_POKENAV_GET  0x802
-#define SYS_GAME_CLEAR   0x804
-#define SYS_CHAT_USED    0x805
-#define SYS_HIPSTER_MEET 0x806
+#define SYS_POKEMON_GET      0x800
+#define SYS_POKEDEX_GET      0x801
+#define SYS_POKENAV_GET      0x802
+#define SYS_GAME_CLEAR       0x804
+#define SYS_CHAT_USED        0x805
+#define SYS_HIPSTER_MEET     0x806
 
 // badges
-#define BADGE01_GET 0x807
-#define BADGE02_GET 0x808
-#define BADGE03_GET 0x809
-#define BADGE04_GET 0x80A
-#define BADGE05_GET 0x80B
-#define BADGE06_GET 0x80C
-#define BADGE07_GET 0x80D
-#define BADGE08_GET 0x80E
+#define BADGE01_GET          0x807
+#define BADGE02_GET          0x808
+#define BADGE03_GET          0x809
+#define BADGE04_GET          0x80A
+#define BADGE05_GET          0x80B
+#define BADGE06_GET          0x80C
+#define BADGE07_GET          0x80D
+#define BADGE08_GET          0x80E
 
 #define SYS_USE_FLASH        0x828
 #define SYS_USE_STRENGTH     0x829
@@ -60,8 +61,10 @@
 
 // SPECIAL FLAGS (unknown purpose)
 
-#define SPECIAL_FLAG_1 0x4001
+#define SPECIAL_FLAG_1       0x4001
+// clang-format on
 
-#endif // GUARD_FLAGS_H
 
 bool8 FlagGet(u16 flag);
+
+#endif // GUARD_FLAGS_H

@@ -254,7 +254,7 @@ void sub_814A958(u8 a1)
     return;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_814A958(u8 a1)
 {
     asm(".syntax unified\n\

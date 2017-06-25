@@ -1,6 +1,7 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+// clang-format off
 #define VAR_0x4003                 0x4003
 #define VAR_0x401F                 0x401F
 #define VAR_RECYCLE_GOODS          0x4020
@@ -36,5 +37,6 @@
 #define VAR_PORTHOLE               0x40B4
 
 #define VAR_0x40BC                 0x40BC
+// clang-format on
 
 #endif // GUARD_VARS_H

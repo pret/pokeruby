@@ -418,7 +418,7 @@ static void ScriptCmd_sprite(void)
     gAnimVisualTaskCount++;
 }
 #else
-__attribute__((naked))
+NAKED
 static void ScriptCmd_sprite(void)
 {
     asm(".syntax unified\n\
@@ -769,7 +769,7 @@ bool8 b_side_obj__get_some_boolean(u8 a)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 b_side_obj__get_some_boolean(u8 a)
 {
     asm(".syntax unified\n\
@@ -1527,7 +1527,7 @@ s8 sub_8076F98(s8 a)
     //_0807706E
 }
 */
-__attribute__((naked))
+NAKED
 s8 sub_8076F98(s8 a)
 {
     asm(".syntax unified\n\
@@ -1805,7 +1805,7 @@ static void c3_08073CEC(u8 taskId)
     //_08077314
 }
 #else
-__attribute__((naked))
+NAKED
 static void c3_08073CEC(u8 taskId)
 {
     asm(".syntax unified\n\
