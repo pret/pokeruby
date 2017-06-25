@@ -35,15 +35,7 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct5
-{
-    u8 unk0_0:7;
-    u8 unk0_7:1;
-};
-
 extern u16 gBattleTypeFlags;
-
-extern struct UnknownStruct5 gUnknown_020238C8;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
@@ -433,6 +425,7 @@ void LinkPartnerHandleGetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_getattr_by_ch1_for_player_pokemon_
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
@@ -765,6 +758,7 @@ void LinkPartnerHandleSetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_setattr_by_ch1_for_player_pokemon
 void sub_811EC68(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
