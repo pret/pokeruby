@@ -49,6 +49,7 @@ matrix:
       env: _="Build German"
       before_script:
         - cp override-de.mk override.mk
+        - rsync -avhI asm-de/ asm/
         - rsync -avhI data-de/ data/
         - rsync -avhI graphics-de/ graphics/
       script:
