@@ -14,7 +14,7 @@ gDebugText_BGM:: @ 83D02D1
 gDebugText_SE:: @ 83D02D5
 	.string "SE $"
 
-gUnknown_083D02D9:: @ 83D02D9
+gDebugText_ABDesc:: @ 83D02D9
 	.string "A‥さいせい　B‥おわり$"
 
 gDebugText_UpDown:: @ 83D02E6
