@@ -317,3 +317,37 @@ bool8 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
     }
     return TRUE;
 }
+
+bool8 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
+{
+    s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x1, y1);
+    if (sub_80576A0(metatileBehavior))
+    {
+        if (y1 < y2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576B4(metatileBehavior))
+    {
+        if (y1 > y2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576C8(metatileBehavior))
+    {
+        if (x1 < x2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576DC(metatileBehavior))
+    {
+        if (x1 > x2)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
