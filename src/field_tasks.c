@@ -11,6 +11,8 @@
 #include "field_special_scene.h"
 #include "secret_base.h"
 #include "metatile_behavior.h"
+#include "fieldmap.h"
+#include "field_camera.h"
 #include "field_tasks.h"
 
 void DummyPerStepCallback(u8);
@@ -175,4 +177,109 @@ const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8
     {
         return NULL;
     }
+}
+
+#ifdef NONMATCHING
+void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
+{
+    const struct MetatileOffset *offsetData = sub_80695E0(offsets, MapGridGetMetatileBehaviorAt(x, y));
+    const struct MetatileOffset *offsetData2 = offsetData;
+    if (offsetData != NULL)
+    {
+        MapGridSetMetatileIdAt(x + offsetData[0].x, y + offsetData[0].y, offsetData[0].tileId);
+        if (flag)
+        {
+            CurrentMapDrawMetatileAt(x + offsetData[0].x, y + offsetData[0].y);
+        }
+        MapGridSetMetatileIdAt(x + offsetData2[1].x, y + offsetData2[1].y, offsetData2[1].tileId);
+        if (flag)
+        {
+            CurrentMapDrawMetatileAt(x + offsetData2[1].x, y + offsetData2[1].y);
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r8\n"
+                    "\tpush {r7}\n"
+                    "\tadds r5, r0, 0\n"
+                    "\tmov r8, r3\n"
+                    "\tlsls r1, 16\n"
+                    "\tasrs r6, r1, 16\n"
+                    "\tlsls r2, 16\n"
+                    "\tasrs r7, r2, 16\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tadds r1, r7, 0\n"
+                    "\tbl MapGridGetMetatileBehaviorAt\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tlsls r1, 16\n"
+                    "\tlsrs r1, 16\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tbl sub_80695E0\n"
+                    "\tadds r4, r0, 0\n"
+                    "\tadds r5, r4, 0\n"
+                    "\tcmp r4, 0\n"
+                    "\tbeq _080696B6\n"
+                    "\tmovs r0, 0\n"
+                    "\tldrsb r0, [r4, r0]\n"
+                    "\tadds r0, r6, r0\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tldrsb r1, [r4, r1]\n"
+                    "\tadds r1, r7, r1\n"
+                    "\tldrh r2, [r4, 0x2]\n"
+                    "\tbl MapGridSetMetatileIdAt\n"
+                    "\tmov r0, r8\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0806968E\n"
+                    "\tmovs r0, 0\n"
+                    "\tldrsb r0, [r4, r0]\n"
+                    "\tadds r0, r6, r0\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tldrsb r1, [r4, r1]\n"
+                    "\tadds r1, r7, r1\n"
+                    "\tbl CurrentMapDrawMetatileAt\n"
+                    "_0806968E:\n"
+                    "\tmovs r0, 0x4\n"
+                    "\tldrsb r0, [r5, r0]\n"
+                    "\tadds r0, r6, r0\n"
+                    "\tmovs r1, 0x5\n"
+                    "\tldrsb r1, [r5, r1]\n"
+                    "\tadds r1, r7, r1\n"
+                    "\tldrh r2, [r5, 0x6]\n"
+                    "\tbl MapGridSetMetatileIdAt\n"
+                    "\tmov r0, r8\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080696B6\n"
+                    "\tmovs r0, 0x4\n"
+                    "\tldrsb r0, [r5, r0]\n"
+                    "\tadds r0, r6, r0\n"
+                    "\tmovs r1, 0x5\n"
+                    "\tldrsb r1, [r5, r1]\n"
+                    "\tadds r1, r7, r1\n"
+                    "\tbl CurrentMapDrawMetatileAt\n"
+                    "_080696B6:\n"
+                    "\tpop {r3}\n"
+                    "\tmov r8, r3\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0");
+}
+#endif
+
+void sub_80696C0(s16 x, s16 y, bool32 flag)
+{
+    sub_8069638(gUnknown_08376384, x, y, flag);
+}
+
+void sub_80696E4(s16 x, s16 y, bool32 flag)
+{
+    sub_8069638(gUnknown_083763A4, x, y, flag);
+}
+
+void sub_8069708(s16 x, s16 y, bool32 flag)
+{
+    sub_8069638(gUnknown_083763C4, x, y, flag);
 }
