@@ -12,7 +12,10 @@
 #include "secret_base.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
+#include "field_player_avatar.h"
 #include "field_camera.h"
+#include "songs.h"
+#include "sound.h"
 #include "field_tasks.h"
 
 void DummyPerStepCallback(u8);
@@ -350,4 +353,61 @@ bool8 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
         }
     }
     return TRUE;
+}
+
+void PerStepCallback_8069864(u8 taskId)
+{
+    s16 x, y;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    switch (data[1])
+    {
+        case 0:
+            data[2] = x;
+            data[3] = y;
+            sub_80696E4(x, y, TRUE);
+            data[1] = 1;
+            break;
+        case 1:
+            if (x != data[2] || y != data[3])
+            {
+                if (sub_806972C(x, y, data[2], data[3]))
+                {
+                    sub_80696C0(data[2], data[3], TRUE);
+                    sub_8069708(data[2], data[3], FALSE);
+                    data[4] = data[2];
+                    data[5] = data[3];
+                    data[1] = 2;
+                    data[6] = 8;
+                }
+                else
+                {
+                    data[4] = -1;
+                    data[5] = -1;
+                }
+                if (sub_80697C8(x, y, data[2], data[3]))
+                {
+                    sub_80696C0(x, y, TRUE);
+                    data[1] = 2;
+                    data[6] = 8;
+                }
+                data[2] = x;
+                data[3] = y;
+                if (MetatileBehavior_IsPacifidlogLog(MapGridGetMetatileBehaviorAt(x, y)))
+                {
+                    PlaySE(SE_MIZU);
+                }
+                break;
+            }
+        case 2:
+            if ((--data[6]) == 0)
+            {
+                sub_80696E4(x, y, TRUE);
+                if (data[4] != -1 && data[5] != -1)
+                {
+                    sub_8069708(data[4], data[5], TRUE);
+                }
+                data[1] = 1;
+            }
+    }
 }
