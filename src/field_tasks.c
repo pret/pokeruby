@@ -287,7 +287,7 @@ void sub_8069708(s16 x, s16 y, bool32 flag)
     sub_8069638(gUnknown_083763C4, x, y, flag);
 }
 
-bool8 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
+bool32 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x2, y2);
     if (sub_80576A0(metatileBehavior))
@@ -321,7 +321,7 @@ bool8 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
     return TRUE;
 }
 
-bool8 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
+bool32 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x1, y1);
     if (sub_80576A0(metatileBehavior))
@@ -357,8 +357,9 @@ bool8 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
 
 void PerStepCallback_8069864(u8 taskId)
 {
+    s16 *data;
     s16 x, y;
-    s16 *data = gTasks[taskId].data;
+    data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     switch (data[1])
     {
@@ -397,8 +398,8 @@ void PerStepCallback_8069864(u8 taskId)
                 {
                     PlaySE(SE_MIZU);
                 }
-                break;
             }
+            break;
         case 2:
             if ((--data[6]) == 0)
             {
@@ -409,5 +410,6 @@ void PerStepCallback_8069864(u8 taskId)
                 }
                 data[1] = 1;
             }
+            break;
     }
 }
