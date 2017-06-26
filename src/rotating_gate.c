@@ -1,64 +1,236 @@
 #include "global.h"
 #include "bike.h"
 #include "event_data.h"
+#include "field_map_obj.h"
 #include "fieldmap.h"
+#include "map_constants.h"
+#include "songs.h"
 #include "sound.h"
 #include "sprite.h"
 
-struct UnknownStruct
+#define ROTATING_GATE_TILE_TAG 0x1300
+#define ROTATING_GATE_PUZZLE_MAX 14
+#define GATE_ARM_MAX_LENGTH 2
+
+#define GATE_ROTATION(rotationDirection, arm, longArm)                                             \
+    ((rotationDirection & 15) << 4) | ((arm & 7) << 1) | (longArm & 1)
+#define GATE_ROTATION_CLOCKWISE(arm, longArm) GATE_ROTATION(ROTATE_CLOCKWISE, arm, longArm)
+#define GATE_ROTATION_ANTICLOCKWISE(arm, longArm) GATE_ROTATION(ROTATE_ANTICLOCKWISE, arm, longArm)
+#define GATE_ROTATION_NONE 255
+
+static void SpriteCallback_RotatingGate(struct Sprite *sprite);
+static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY);
+static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite);
+
+enum
 {
-    /* 0x0 */ struct Coords16 pos;
-    /* 0x4 */ u8 e;
-    /* 0x5 */ u8 f;
-    /* 0x6 */ u8 g;
-    /* 0x7 */ u8 h;
+    /*
+     * |
+     * +--
+     */
+    GATE_SHAPE_L1,
+
+    /*
+     * |
+     * |
+     * +--
+     */
+    GATE_SHAPE_L2,
+
+    /*
+     * |
+     * +----
+     */
+    GATE_SHAPE_L3,
+
+    /*
+     * |
+     * |
+     * +----
+     */
+    GATE_SHAPE_L4,
+
+    /*
+     * |
+     * +--
+     * |
+     */
+    GATE_SHAPE_T1,
+
+    /*
+     * |
+     * |
+     * +--
+     * |
+     */
+    GATE_SHAPE_T2,
+
+    /*
+     * |
+     * +----
+     * |
+     */
+    GATE_SHAPE_T3,
+
+    /*
+     * An unused T-shape gate
+     * |
+     * +--
+     * |
+     * |
+     */
+    GATE_SHAPE_T4,
+
+    /*
+     * An unused T-shape gate
+     * |
+     * |
+     * +----
+     * |
+     */
+    GATE_SHAPE_UNUSED_T1,
+
+    /*
+     * An unused T-shape gate
+     * |
+     * |
+     * +--
+     * |
+     * |
+     */
+    GATE_SHAPE_UNUSED_T2,
+
+    /*
+     * An unused T-shape gate
+     * |
+     * +----
+     * |
+     * |
+     */
+    GATE_SHAPE_UNUSED_T3,
+
+    /*
+     * An unused T-shape gate
+     * |
+     * |
+     * +----
+     * |
+     * |
+     */
+    GATE_SHAPE_UNUSED_T4,
 };
 
-struct UnknownStruct2
+enum
 {
-    s8 a;
-    s8 b;
-    u8 c;
-    u8 d;
+    /*
+     * 0 degrees (clockwise)
+     * |
+     * +--
+     * |
+     */
+    GATE_ORIENTATION_0,
+
+    /*
+     * 90 degress (clockwise)
+     * --+--
+     *   |
+     */
+    GATE_ORIENTATION_90,
+
+    /*
+     * 180 degrees (clockwise)
+     *   |
+     * --+
+     *   |
+     */
+    GATE_ORIENTATION_180,
+
+    /*
+     * 270 degrees (clockwise)
+     *   |
+     * --+--
+     */
+    GATE_ORIENTATION_270,
+
+    GATE_ORIENTATION_MAX,
 };
 
-static const struct UnknownStruct sUnknown_083D2964[] = {
-    { { 12, 5 }, 3, 0, 0, 0 },
-    { { 14, 7 }, 3, 3, 0, 0 },
-    { { 16, 4 }, 5, 1, 0, 0 },
-    { { 15, 14 }, 1, 0, 0, 0 },
-    { { 18, 13 }, 4, 2, 0, 0 },
-    { { 8, 20 }, 4, 2, 0, 0 },
-    { { 16, 20 }, 7, 1, 0, 0 },
+// Describes the location of the gates "arms" when the gate has not
+// been rotated (i.e. rotated 0 degrees)
+enum
+{
+    GATE_ARM_NORTH,
+    GATE_ARM_EAST,
+    GATE_ARM_SOUTH,
+    GATE_ARM_WEST,
 };
 
-static const struct UnknownStruct sUnknown_083D299C[] = {
-    { { 13, 3 }, 4, 3, 0, 0 },
-    { { 12, 6 }, 4, 2, 0, 0 },
-    { { 3, 6 }, 4, 2, 0, 0 },
-    { { 3, 9 }, 5, 3, 0, 0 },
-    { { 8, 8 }, 0, 1, 0, 0 },
-    { { 2, 12 }, 6, 2, 0, 0 },
-    { { 9, 13 }, 1, 0, 0, 0 },
-    { { 3, 14 }, 2, 1, 0, 0 },
-    { { 9, 15 }, 3, 2, 0, 0 },
-    { { 3, 18 }, 5, 2, 0, 0 },
-    { { 2, 19 }, 4, 0, 0, 0 },
-    { { 5, 21 }, 0, 0, 0, 0 },
-    { { 9, 19 }, 3, 3, 0, 0 },
-    { { 12, 20 }, 4, 1, 0, 0 },
+enum
+{
+    ROTATE_NONE,
+    ROTATE_ANTICLOCKWISE,
+    ROTATE_CLOCKWISE,
 };
 
-static const u8 RotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/1.4bpp");
-static const u8 RotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/2.4bpp");
-static const u8 RotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/3.4bpp");
-static const u8 RotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/5.4bpp");
-static const u8 RotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/6.4bpp");
-static const u8 RotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/7.4bpp");
-static const u8 RotatingGateTiles_0[] = INCBIN_U8("graphics/rotating_gates/0.4bpp");
-static const u8 RotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/4.4bpp");
+enum
+{
+    PUZZLE_NONE,
+    PUZZLE_FORTREE_CITY_GYM,
+    PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6,
+};
 
-static const struct OamData gOamData_83D5E0C = {
+struct RotatingGatePuzzle
+{
+    struct Coords16 pos;
+    u8 shape;
+    u8 orientation;
+};
+
+struct Coords8
+{
+    s8 deltaX;
+    s8 deltaY;
+};
+
+// Fortree
+static const struct RotatingGatePuzzle sRotatingGate_FortreePuzzleConfig[] = {
+    { { 12, 5 }, GATE_SHAPE_L4, GATE_ORIENTATION_0 },
+    { { 14, 7 }, GATE_SHAPE_L4, GATE_ORIENTATION_270 },
+    { { 16, 4 }, GATE_SHAPE_T2, GATE_ORIENTATION_90 },
+    { { 15, 14 }, GATE_SHAPE_L2, GATE_ORIENTATION_0 },
+    { { 18, 13 }, GATE_SHAPE_T1, GATE_ORIENTATION_180 },
+    { { 8, 20 }, GATE_SHAPE_T1, GATE_ORIENTATION_180 },
+    { { 16, 20 }, GATE_SHAPE_T4, GATE_ORIENTATION_90 },
+};
+
+// Trickhouse
+static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] = {
+    { { 13, 3 }, GATE_SHAPE_T1, GATE_ORIENTATION_270 },
+    { { 12, 6 }, GATE_SHAPE_T1, GATE_ORIENTATION_180 },
+    { { 3, 6 }, GATE_SHAPE_T1, GATE_ORIENTATION_180 },
+    { { 3, 9 }, GATE_SHAPE_T2, GATE_ORIENTATION_270 },
+    { { 8, 8 }, GATE_SHAPE_L1, GATE_ORIENTATION_90 },
+    { { 2, 12 }, GATE_SHAPE_T3, GATE_ORIENTATION_180 },
+    { { 9, 13 }, GATE_SHAPE_L2, GATE_ORIENTATION_0 },
+    { { 3, 14 }, GATE_SHAPE_L3, GATE_ORIENTATION_90 },
+    { { 9, 15 }, GATE_SHAPE_L4, GATE_ORIENTATION_180 },
+    { { 3, 18 }, GATE_SHAPE_T2, GATE_ORIENTATION_180 },
+    { { 2, 19 }, GATE_SHAPE_T1, GATE_ORIENTATION_0 },
+    { { 5, 21 }, GATE_SHAPE_L1, GATE_ORIENTATION_0 },
+    { { 9, 19 }, GATE_SHAPE_L4, GATE_ORIENTATION_270 },
+    { { 12, 20 }, GATE_SHAPE_T1, GATE_ORIENTATION_90 },
+};
+
+static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/1.4bpp");
+static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/2.4bpp");
+static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/3.4bpp");
+static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/5.4bpp");
+static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/6.4bpp");
+static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/7.4bpp");
+static const u8 sRotatingGateTiles_0[] = INCBIN_U8("graphics/rotating_gates/0.4bpp");
+static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/4.4bpp");
+
+static const struct OamData sOamData_RotatingGateLarge = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = 0,
@@ -74,8 +246,7 @@ static const struct OamData gOamData_83D5E0C = {
     .affineParam = 0,
 };
 
-// Smaller
-static const struct OamData gOamData_83D5E14 = {
+static const struct OamData sOamData_RotatingGateRegular = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = 0,
@@ -91,291 +262,331 @@ static const struct OamData gOamData_83D5E14 = {
     .affineParam = 0,
 };
 
-static const struct SpriteSheet gRotatingGatesGraphicsTable[] = {
-    { RotatingGateTiles_0, 0x200, 0x1300 },
-    { RotatingGateTiles_1, 0x800, 0x1301 },
-    { RotatingGateTiles_2, 0x800, 0x1302 },
-    { RotatingGateTiles_3, 0x800, 0x1303 },
-    { RotatingGateTiles_4, 0x200, 0x1304 },
-    { RotatingGateTiles_5, 0x800, 0x1305 },
-    { RotatingGateTiles_6, 0x800, 0x1306 },
-    { RotatingGateTiles_7, 0x800, 0x1307 },
+static const struct SpriteSheet sRotatingGatesGraphicsTable[] = {
+    { sRotatingGateTiles_0, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1 },
+    { sRotatingGateTiles_1, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2 },
+    { sRotatingGateTiles_2, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3 },
+    { sRotatingGateTiles_3, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4 },
+    { sRotatingGateTiles_4, 0x200, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1 },
+    { sRotatingGateTiles_5, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2 },
+    { sRotatingGateTiles_6, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3 },
+    { sRotatingGateTiles_7, 0x800, ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4 },
     { NULL },
 };
 
-static const union AnimCmd gSpriteAnim_83D5E64[] = {
+static const union AnimCmd sSpriteAnim_RotatingGateLarge[] = {
     ANIMCMD_FRAME(0, 0), ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_83D5E6C[] = {
+static const union AnimCmd sSpriteAnim_RotatingGateRegular[] = {
     ANIMCMD_FRAME(0, 0), ANIMCMD_END,
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83D5E74[] = {
-    gSpriteAnim_83D5E64,
+static const union AnimCmd *const sSpriteAnimTable_RotatingGateLarge[] = {
+    sSpriteAnim_RotatingGateLarge,
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83D5E78[] = {
-    gSpriteAnim_83D5E6C,
+static const union AnimCmd *const sSpriteAnimTable_RotatingGateRegular[] = {
+    sSpriteAnim_RotatingGateRegular,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5E7C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_Rotated0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0), AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5E8C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_Rotated90[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0), AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5E9C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_Rotated180[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0), AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5EAC[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_Rotated270[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0), AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5EBC[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise0to90[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5ED4[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise90to180[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5EEC[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise180to270[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F04[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise270to360[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F1C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise360to270[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F34[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise270to180[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F4C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise180to90[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F64[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise90to0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F7C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise0to90Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5F94[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise90to180Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5FAC[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise180to270Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5FC4[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingClockwise270to360Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5FDC[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise360to270Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0), AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8), AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D5FF4[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise270to180Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D600C[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise180to90Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -128, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_83D6024[] = {
+static const union AffineAnimCmd sSpriteAffineAnim_RotatingAnticlockwise90to0Faster[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_83D603C[] = {
-    gSpriteAffineAnim_83D5E7C,
-    gSpriteAffineAnim_83D5E8C,
-    gSpriteAffineAnim_83D5E9C,
-    gSpriteAffineAnim_83D5EAC,
-    gSpriteAffineAnim_83D5F1C,
-    gSpriteAffineAnim_83D5F64,
-    gSpriteAffineAnim_83D5F4C,
-    gSpriteAffineAnim_83D5F34,
-    gSpriteAffineAnim_83D5EBC,
-    gSpriteAffineAnim_83D5ED4,
-    gSpriteAffineAnim_83D5EEC,
-    gSpriteAffineAnim_83D5F04,
-    gSpriteAffineAnim_83D5FDC,
-    gSpriteAffineAnim_83D6024,
-    gSpriteAffineAnim_83D600C,
-    gSpriteAffineAnim_83D5FF4,
-    gSpriteAffineAnim_83D5F7C,
-    gSpriteAffineAnim_83D5F94,
-    gSpriteAffineAnim_83D5FAC,
-    gSpriteAffineAnim_83D5FC4,
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_RotatingGate[] = {
+    sSpriteAffineAnim_Rotated0,
+    sSpriteAffineAnim_Rotated90,
+    sSpriteAffineAnim_Rotated180,
+    sSpriteAffineAnim_Rotated270,
+    sSpriteAffineAnim_RotatingAnticlockwise360to270,
+    sSpriteAffineAnim_RotatingAnticlockwise90to0,
+    sSpriteAffineAnim_RotatingAnticlockwise180to90,
+    sSpriteAffineAnim_RotatingAnticlockwise270to180,
+    sSpriteAffineAnim_RotatingClockwise0to90,
+    sSpriteAffineAnim_RotatingClockwise90to180,
+    sSpriteAffineAnim_RotatingClockwise180to270,
+    sSpriteAffineAnim_RotatingClockwise270to360,
+    sSpriteAffineAnim_RotatingAnticlockwise360to270Faster,
+    sSpriteAffineAnim_RotatingAnticlockwise90to0Faster,
+    sSpriteAffineAnim_RotatingAnticlockwise180to90Faster,
+    sSpriteAffineAnim_RotatingAnticlockwise270to180Faster,
+    sSpriteAffineAnim_RotatingClockwise0to90Faster,
+    sSpriteAffineAnim_RotatingClockwise90to180Faster,
+    sSpriteAffineAnim_RotatingClockwise180to270Faster,
+    sSpriteAffineAnim_RotatingClockwise270to360Faster,
 };
 
-void sub_80C7C94(struct Sprite *sprite);
-
-static const struct SpriteTemplate gSpriteTemplate_83D608C = {
-    .tileTag = 4864,
+static const struct SpriteTemplate sSpriteTemplate_RotatingGateLarge = {
+    .tileTag = ROTATING_GATE_TILE_TAG,
     .paletteTag = 0xFFFF,
-    .oam = &gOamData_83D5E0C,
-    .anims = gSpriteAnimTable_83D5E74,
+    .oam = &sOamData_RotatingGateLarge,
+    .anims = sSpriteAnimTable_RotatingGateLarge,
     .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_83D603C,
-    .callback = sub_80C7C94,
+    .affineAnims = sSpriteAffineAnimTable_RotatingGate,
+    .callback = SpriteCallback_RotatingGate,
 };
 
-static const struct SpriteTemplate gSpriteTemplate_83D60A4 = {
-    .tileTag = 4864,
+static const struct SpriteTemplate sSpriteTemplate_RotatingGateRegular = {
+    .tileTag = ROTATING_GATE_TILE_TAG,
     .paletteTag = 0xFFFF,
-    .oam = &gOamData_83D5E14,
-    .anims = gSpriteAnimTable_83D5E78,
+    .oam = &sOamData_RotatingGateRegular,
+    .anims = sSpriteAnimTable_RotatingGateRegular,
     .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_83D603C,
-    .callback = sub_80C7C94,
+    .affineAnims = sSpriteAffineAnimTable_RotatingGate,
+    .callback = SpriteCallback_RotatingGate,
 };
 
-static const u8 sUnknown_083D60BC[4][4] = {
-    { 255, 255, 255, 255 }, { 39, 38, 18, 19 }, { 255, 255, 255, 255 }, { 255, 255, 255, 255 },
+// These structures describe what happens to the gate if you hit it at
+// a given coordinate in a 4x4 grid when walking in the specified
+// direction. Either the gate does not rotate, or it rotates in the
+// given direction. This information is compared against the gate
+// "arm" layout to see if there is an arm at the position in order to
+// produce the final rotation.
+static const u8 sRotatingGate_RotationInfoNorth[4][4] = {
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
+    { GATE_ROTATION_CLOCKWISE(GATE_ARM_WEST, 1),
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_WEST, 0),
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_EAST, 0),
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_EAST, 1) },
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
 };
 
-static const u8 sUnknown_083D60CC[4][4] = {
-    { 255, 255, 255, 255 }, { 255, 255, 255, 255 }, { 23, 22, 34, 35 }, { 255, 255, 255, 255 },
+static const u8 sRotatingGate_RotationInfoSouth[4][4] = {
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
+    { GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_WEST, 1),
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_WEST, 0),
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_EAST, 0),
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_EAST, 1) },
+    { GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE, GATE_ROTATION_NONE },
 };
 
-static const u8 sUnknown_083D60DC[4][4] = {
-    { 255, 17, 255, 255 }, { 255, 16, 255, 255 }, { 255, 36, 255, 255 }, { 255, 37, 255, 255 },
+static const u8 sRotatingGate_RotationInfoWest[4][4] = {
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_NORTH, 1),
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_NORTH, 0),
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_SOUTH, 0),
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_SOUTH, 1),
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE },
 };
 
-static const u8 sUnknown_083D60EC[4][4] = {
-    { 255, 255, 33, 255 }, { 255, 255, 32, 255 }, { 255, 255, 20, 255 }, { 255, 255, 21, 255 },
+static const u8 sRotatingGate_RotationInfoEast[4][4] = {
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_NORTH, 1),
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_CLOCKWISE(GATE_ARM_NORTH, 0),
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_SOUTH, 0),
+        GATE_ROTATION_NONE },
+    { GATE_ROTATION_NONE,
+        GATE_ROTATION_NONE,
+        GATE_ROTATION_ANTICLOCKWISE(GATE_ARM_SOUTH, 1),
+        GATE_ROTATION_NONE },
 };
 
-static const struct UnknownStruct2 sUnknown_083D60FC[] = {
-    { 0, -1, 0, 0 },
-    { 1, -2, 0, 0 },
-    { 0, 0, 0, 0 },
-    { 1, 0, 0, 0 },
-    { -1, 0, 0, 0 },
-    { -1, 1, 0, 0 },
-    { -1, -1, 0, 0 },
-    { -2, -1, 0, 0 },
+// These tables describe the relative coordinate positions the arms
+// must move through in order to be rotated.
+static const struct Coords8 sRotatingGate_ArmPositionsClockwiseRotation[] = {
+    { 0, -1 }, { 1, -2 }, { 0, 0 }, { 1, 0 }, { -1, 0 }, { -1, 1 }, { -1, -1 }, { -2, -1 },
 };
 
-static const struct UnknownStruct2 sUnknown_083D611C[] = {
-    { -1, -1, 0, 0 },
-    { -1, -2, 0, 0 },
-    { 0, -1, 0, 0 },
-    { 1, -1, 0, 0 },
-    { 0, 0, 0, 0 },
-    { 0, 1, 0, 0 },
-    { -1, 0, 0, 0 },
-    { -2, 0, 0, 0 },
+static const struct Coords8 sRotatingGate_ArmPositionsAntiClockwiseRotation[] = {
+    { -1, -1 }, { -1, -2 }, { 0, -1 }, { 1, -1 }, { 0, 0 }, { 0, 1 }, { -1, 0 }, { -2, 0 },
 };
 
-static const u8 sUnknown_083D613C[12][8] = {
+// Describes where the gates "arms" are in the order north, east, south, west.
+// These are adjusted using the current orientation to perform collision checking
+static const u8 sRotatingGate_ArmLayout[][GATE_ARM_WEST + 1][GATE_ARM_MAX_LENGTH] = {
+    // L-shape gates
     {
-        1, 0, 1, 0, 0, 0, 0, 0,
+        { 1, 0 }, { 1, 0 }, { 0, 0 }, { 0, 0 },
     },
     {
-        1, 1, 1, 0, 0, 0, 0, 0,
+        { 1, 1 }, { 1, 0 }, { 0, 0 }, { 0, 0 },
     },
     {
-        1, 0, 1, 1, 0, 0, 0, 0,
+        { 1, 0 }, { 1, 1 }, { 0, 0 }, { 0, 0 },
     },
     {
-        1, 1, 1, 1, 0, 0, 0, 0,
+        { 1, 1 }, { 1, 1 }, { 0, 0 }, { 0, 0 },
+    },
+
+    // T-shape gates
+    {
+        { 1, 0 }, { 1, 0 }, { 1, 0 }, { 0, 0 },
     },
     {
-        1, 0, 1, 0, 1, 0, 0, 0,
+        { 1, 1 }, { 1, 0 }, { 1, 0 }, { 0, 0 },
     },
     {
-        1, 1, 1, 0, 1, 0, 0, 0,
+        { 1, 0 }, { 1, 1 }, { 1, 0 }, { 0, 0 },
     },
     {
-        1, 0, 1, 1, 1, 0, 0, 0,
+        { 1, 0 }, { 1, 0 }, { 1, 1 }, { 0, 0 },
+    },
+
+    // Unused T-shape gates
+    // These have 2-3 long arms and cannot actually be used anywhere
+    // since configuration for them is missing from the other tables.
+    {
+        { 1, 1 }, { 1, 1 }, { 1, 0 }, { 0, 0 },
     },
     {
-        1, 0, 1, 0, 1, 1, 0, 0,
+        { 1, 1 }, { 1, 0 }, { 1, 1 }, { 0, 0 },
     },
     {
-        1, 1, 1, 1, 1, 0, 0, 0,
+        { 1, 0 }, { 1, 1 }, { 1, 1 }, { 0, 0 },
     },
     {
-        1, 1, 1, 0, 1, 1, 0, 0,
-    },
-    {
-        1, 0, 1, 1, 1, 1, 0, 0,
-    },
-    {
-        1, 1, 1, 1, 1, 1, 0, 0,
+        { 1, 1 }, { 1, 1 }, { 1, 1 }, { 0, 0 },
     },
 };
 
-extern u8 gUnknown_020387F0[10]; // puzzle oam ID list
-extern const struct UnknownStruct *gUnknown_02038800;
+extern u8 gUnknown_020387F0[ROTATING_GATE_PUZZLE_MAX]; // puzzle oam ID list
+extern const struct RotatingGatePuzzle *gUnknown_02038800; // sRotatingGatePuzzleConfiguration
 extern u8 gUnknown_02038804; // puzzle count
 
-u8 sub_80C7BAC(u8 i, s16 a, s16 b);
-void sub_8060388(s16 x, s16 y, s16 *outX, s16 *outY);
-void sub_80C7D14(struct Sprite *sprite);
-
-int GetCurrentMapRotatingGatePuzzleType(void)
+static int GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1.location.mapGroup == 0xC && gSaveBlock1.location.mapNum == 0x1)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_FORTREE_CITY_GYM &&
+        gSaveBlock1.location.mapNum == MAP_ID_FORTREE_CITY_GYM)
     {
-        return 1;
+        return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1.location.mapGroup == 0x1d && gSaveBlock1.location.mapNum == 0x8)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_TRICK_HOUSE_PUZZLE6 &&
+        gSaveBlock1.location.mapNum == MAP_ID_ROUTE110_TRICK_HOUSE_PUZZLE6)
     {
-        return 2;
+        return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }
 
-    return 0;
+    return PUZZLE_NONE;
 }
 
-// ResetSomething
-void sub_80C79CC(void)
+static void RotatingGate_ResetAllGateOrientations(void)
 {
     int i;
     u8 *ptr;
@@ -384,81 +595,77 @@ void sub_80C79CC(void)
 
     for (i = 0; i < gUnknown_02038804; i++)
     {
-        ptr[i] = gUnknown_02038800[i].f;
+        ptr[i] = gUnknown_02038800[i].orientation;
     }
 }
 
-// GetSomething
-/* u8 */ int sub_80C7A08(u8 a)
+static int RotatingGate_GetGateOrientation(u8 gateId)
 {
-    u8 *ptr;
-    ptr = (u8 *)GetVarPointer(0x4000);
-    return ptr[a];
+    return ((u8 *)GetVarPointer(0x4000))[gateId];
 }
 
-// SetSomething
-void sub_80C7A24(u8 a, u8 b)
+static void RotatingGate_SetGateOrientation(u8 gateId, u8 orientation)
 {
-    u8 *ptr;
-    ptr = (u8 *)GetVarPointer(0x4000);
-    ptr[a] = b;
+    ((u8 *)GetVarPointer(0x4000))[gateId] = orientation;
 }
 
-// RotateInDirectionProbably
-void sub_80C7A44(u8 a, u32 b)
+static void RotatingGate_RotateInDirection(u8 gateId, u32 rotationDirection)
 {
-    u8 r1;
-    r1 = sub_80C7A08(a);
+    u8 orientation = RotatingGate_GetGateOrientation(gateId);
 
-    if (b == 1)
+    if (rotationDirection == ROTATE_ANTICLOCKWISE)
     {
-        if (r1)
+        if (orientation)
         {
-            r1--;
+            orientation--;
         }
         else
         {
-            r1 = 3;
+            orientation = GATE_ORIENTATION_270;
         }
     }
     else
     {
-        r1 = ++r1 % 4;
+        orientation = ++orientation % GATE_ORIENTATION_MAX;
     }
 
-    sub_80C7A24(a, r1);
+    RotatingGate_SetGateOrientation(gateId, orientation);
 }
 
-// Configure
-void sub_80C7A80(void)
+static void RotatingGate_LoadPuzzleConfig(void)
 {
-    int a = GetCurrentMapRotatingGatePuzzleType();
+    int puzzleType = GetCurrentMapRotatingGatePuzzleType();
     u32 i;
 
-    switch (a)
+    switch (puzzleType)
     {
-    case 1:
-        gUnknown_02038800 = sUnknown_083D2964;
-        gUnknown_02038804 = 7;
+    case PUZZLE_FORTREE_CITY_GYM:
+        gUnknown_02038800 = sRotatingGate_FortreePuzzleConfig;
+        gUnknown_02038804 =
+            sizeof(sRotatingGate_FortreePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
         break;
-    case 2:
-        gUnknown_02038800 = sUnknown_083D299C;
-        gUnknown_02038804 = 0xE;
+    case PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6:
+        gUnknown_02038800 = sRotatingGate_TrickHousePuzzleConfig;
+        gUnknown_02038804 =
+            sizeof(sRotatingGate_TrickHousePuzzleConfig) / sizeof(struct RotatingGatePuzzle);
         break;
-    case 0:
+    case PUZZLE_NONE:
     default:
         return;
     }
 
-    for (i = 0; i < 14; i++)
+    for (i = 0; i < ROTATING_GATE_PUZZLE_MAX; i++)
     {
         gUnknown_020387F0[i] = MAX_SPRITES;
     }
 }
 
-void sub_80C7ADC(s16 a, s16 b)
+static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
 {
     u8 i;
+
+    // Calculate the bounding box of the camera
+    // Same as RotatingGate_DestroyGatesOutsideViewport
     s16 x = gSaveBlock1.pos.x - 2;
     s16 x2 = gSaveBlock1.pos.x + 0x11;
     s16 y = gSaveBlock1.pos.y - 2;
@@ -473,91 +680,88 @@ void sub_80C7ADC(s16 a, s16 b)
 
         if (y <= y3 && y2 >= y3 && x <= x3 && x2 >= x3 && gUnknown_020387F0[i] == MAX_SPRITES)
         {
-            gUnknown_020387F0[i] = sub_80C7BAC(i, a, b);
+            gUnknown_020387F0[i] = RotatingGate_CreateGate(i, deltaX, deltaY);
         }
     }
 }
 
-// CreateSprite
-u8 sub_80C7BAC(u8 i, s16 a, s16 b)
+static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
 {
-    struct Sprite *sprite; // r4
+    struct Sprite *sprite;
     struct SpriteTemplate template;
-    const struct UnknownStruct *unk;
-    u8 id; //  r5
+    const struct RotatingGatePuzzle *gate;
+    u8 spriteId;
     s16 x, y;
 
-    unk = &gUnknown_02038800[i];
+    gate = &gUnknown_02038800[gateId];
 
-    if (unk->e == 0 || unk->e == 4)
+    if (gate->shape == GATE_SHAPE_L1 || gate->shape == GATE_SHAPE_T1)
     {
-        template = gSpriteTemplate_83D60A4;
+        template = sSpriteTemplate_RotatingGateRegular;
     }
     else
     {
-        template = gSpriteTemplate_83D608C;
+        template = sSpriteTemplate_RotatingGateLarge;
     }
 
-    template.tileTag = unk->e + 0x1300;
+    template.tileTag = gate->shape + ROTATING_GATE_TILE_TAG;
 
-    id = CreateSprite(&template, 0, 0, 0x94);
-    if (id == MAX_SPRITES)
+    spriteId = CreateSprite(&template, 0, 0, 0x94);
+    if (spriteId == MAX_SPRITES)
     {
         return MAX_SPRITES;
     }
 
-    x = unk->pos.x + 7;
-    y = unk->pos.y + 7;
+    x = gate->pos.x + 7;
+    y = gate->pos.y + 7;
 
-    sprite = &gSprites[id];
-    sprite->data0 = i;
+    sprite = &gSprites[spriteId];
+    sprite->data0 = gateId;
     sprite->coordOffsetEnabled = 1;
 
-    sub_8060388(x + a, y + b, &sprite->pos1.x, &sprite->pos1.y);
-    sub_80C7D14(sprite);
-    StartSpriteAffineAnim(sprite, sub_80C7A08(i));
+    sub_8060388(x + deltaX, y + deltaY, &sprite->pos1.x, &sprite->pos1.y);
+    RotatingGate_HideGatesOutsideViewport(sprite);
+    StartSpriteAffineAnim(sprite, RotatingGate_GetGateOrientation(gateId));
 
-    return id;
+    return spriteId;
 }
 
-// RotateGateWithSE
-void sub_80C7C94(struct Sprite *sprite)
+static void SpriteCallback_RotatingGate(struct Sprite *sprite)
 {
-    u8 a; // r5
-    u8 b;
+    u8 rotationDirection;
+    u8 orientation;
     u8 affineAnimation;
 
-    a = sprite->data1;
-    b = sprite->data2;
+    rotationDirection = sprite->data1;
+    orientation = sprite->data2;
 
-    sub_80C7D14(sprite);
+    RotatingGate_HideGatesOutsideViewport(sprite);
 
-    if (a == 1)
+    if (rotationDirection == ROTATE_ANTICLOCKWISE)
     {
-        affineAnimation = b + 4;
+        affineAnimation = orientation + 4;
 
         if (GetPlayerSpeed() != 1)
             affineAnimation += 8;
 
-        PlaySE(48);
+        PlaySE(SE_HI_TURUN);
         StartSpriteAffineAnim(sprite, affineAnimation);
     }
-    else if (a == 2)
+    else if (rotationDirection == ROTATE_CLOCKWISE)
     {
-        affineAnimation = b + 8;
+        affineAnimation = orientation + 8;
 
         if (GetPlayerSpeed() != 1)
             affineAnimation += 8;
 
-        PlaySE(48);
+        PlaySE(SE_HI_TURUN);
         StartSpriteAffineAnim(sprite, affineAnimation);
     }
 
-    sprite->data1 = 0;
+    sprite->data1 = ROTATE_NONE;
 }
 
-// See sub_806487C (field_map_obj_helpers.c)
-void sub_80C7D14(struct Sprite *sprite)
+static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
 {
     u16 x;
     s16 x2;
@@ -571,7 +775,6 @@ void sub_80C7D14(struct Sprite *sprite)
     x2 = x + 0x40; // Dimensions of the rotating gate
     y2 = y + 0x40;
 
-    // TODO: Make this 0x10 a constant
     if ((s16)x > DISPLAY_WIDTH + 0x10 - 1 || x2 < -0x10)
     {
         sprite->invisible = 1;
@@ -583,12 +786,12 @@ void sub_80C7D14(struct Sprite *sprite)
     }
 }
 
-void LoadRotatingGatePics(void)
+static void LoadRotatingGatePics(void)
 {
-    LoadSpriteSheets(gRotatingGatesGraphicsTable);
+    LoadSpriteSheets(sRotatingGatesGraphicsTable);
 }
 
-void sub_80C7DC0(void)
+static void RotatingGate_DestroyGatesOutsideViewport(void)
 {
     s16 x;
     s16 x2;
@@ -599,10 +802,11 @@ void sub_80C7DC0(void)
     int i;
     struct Sprite *sprite;
 
+    // Same as RotatingGate_CreateGatesWithinViewport
     x = gSaveBlock1.pos.x - 2;
-    x2 = gSaveBlock1.pos.x + 17;
+    x2 = gSaveBlock1.pos.x + 0x11;
     y = gSaveBlock1.pos.y - 2;
-    y2 = gSaveBlock1.pos.y + 14;
+    y2 = gSaveBlock1.pos.y + 0xe;
 
     for (i = 0; i < gUnknown_02038804; i++)
     {
@@ -623,62 +827,57 @@ void sub_80C7DC0(void)
 }
 
 #ifdef NONMATCHING
-int sub_80C7E8C(u8 a, int puzzleType)
+static int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
 {
-    const struct UnknownStruct2 *unk1;
-    u8 unk2;
+    const struct Coords8 *armPos;
+    u8 orientation;
     s16 x;
     s16 y;
-    int unk3;
+    int shape;
     int i;
     int j;
-    int unk4;
-    const u8 *unk5;
-    int unk6;
-    u8 unk7;
-    int wat;
+    int armOrientation;
+    const u8 *gateArmCollisionData;
+    u8 armIndex;
 
-    if (puzzleType == 1)
-        unk1 = sUnknown_083D611C;
-    else if (puzzleType == 2)
-        unk1 = sUnknown_083D60FC;
+    if (rotationDirection == ROTATE_ANTICLOCKWISE)
+        armPos = sRotatingGate_ArmPositionsAntiClockwiseRotation;
+    else if (rotationDirection == ROTATE_CLOCKWISE)
+        armPos = sRotatingGate_ArmPositionsClockwiseRotation;
     else
         return 0;
 
-    unk2 = sub_80C7A08(a);
+    orientation = RotatingGate_GetGateOrientation(gateId);
 
-    unk3 = gUnknown_02038800[a].e;
-    x = gUnknown_02038800[a].pos.x + 7;
-    y = gUnknown_02038800[a].pos.y + 7;
+    shape = gUnknown_02038800[gateId].shape;
+    x = gUnknown_02038800[gateId].pos.x + 7;
+    y = gUnknown_02038800[gateId].pos.y + 7;
 
-    for (i = 0; i <= 3; i++)
+    // Loop through the gate's "arms" clockwise (north, south, east, west)
+    for (i = GATE_ARM_NORTH; i <= GATE_ARM_WEST; i++)
     {
-        j = 0;
-        unk4 = unk2 + i;
-        wat = unk2 + i;
-        unk5 = &sUnknown_083D613C[unk3][i * 2];
+        armOrientation = orientation + i;
+        gateArmCollisionData = sRotatingGate_ArmLayout[shape][i];
 
-        for (; j <= 1; j++)
+        // Ensure that no part of the arm collides with the map
+        for (j = 0; j < GATE_ARM_MAX_LENGTH; j++)
         {
-            unk6 = wat;
-            if (wat < 0)
-                unk6 = unk4 + 3;
+            armIndex = 2 * (armOrientation % 4) + j;
 
-            unk7 = (2 * (wat - ((unk6 >> 2) << 2)) + j);
-
-            if (*unk5)
+            if (*gateArmCollisionData)
             {
-                if (MapGridIsImpassableAt(unk1[unk7].a + x, unk1[unk7].b + y) == 1)
+                if (MapGridIsImpassableAt(
+                        armPos[armIndex].deltaX + x, armPos[armIndex].deltaY + y) == 1)
                     return 0;
             }
-            unk5++;
+            gateArmCollisionData++;
         }
     }
 
     return 1;
 }
 #else
-__attribute__((naked)) int sub_80C7E8C(u8 a, int puzzleType)
+__attribute__((naked)) static int RotatingGate_CanRotate(u8 a, int puzzleType)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -691,11 +890,11 @@ __attribute__((naked)) int sub_80C7E8C(u8 a, int puzzleType)
 	lsrs r4, r0, 24\n\
 	cmp r1, 0x1\n\
 	bne _080C7EAC\n\
-	ldr r0, _080C7EA8 @ =sUnknown_083D611C\n\
+	ldr r0, _080C7EA8 @ =sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
 	mov r10, r0\n\
 	b _080C7EB8\n\
 	.align 2, 0\n\
-_080C7EA8: .4byte sUnknown_083D611C\n\
+_080C7EA8: .4byte sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
 _080C7EAC:\n\
 	cmp r1, 0x2\n\
 	beq _080C7EB4\n\
@@ -703,11 +902,11 @@ _080C7EB0:\n\
 	movs r0, 0\n\
 	b _080C7F48\n\
 _080C7EB4:\n\
-	ldr r1, _080C7F58 @ =sUnknown_083D60FC\n\
+	ldr r1, _080C7F58 @ =sRotatingGate_ArmPositionsClockwiseRotation\n\
 	mov r10, r1\n\
 _080C7EB8:\n\
 	adds r0, r4, 0\n\
-	bl sub_80C7A08\n\
+	bl RotatingGate_GetGateOrientation\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
 	str r0, [sp]\n\
@@ -737,7 +936,7 @@ _080C7EE8:\n\
 	adds r5, r7, 0\n\
 	ldr r1, [sp, 0x4]\n\
 	adds r0, r1\n\
-	ldr r2, _080C7F60 @ =sUnknown_083D613C\n\
+	ldr r2, _080C7F60 @ =sRotatingGate_ArmLayout\n\
 	adds r4, r0, r2\n\
 _080C7EFA:\n\
 	adds r0, r5, 0\n\
@@ -790,33 +989,30 @@ _080C7F48:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_080C7F58: .4byte sUnknown_083D60FC\n\
+_080C7F58: .4byte sRotatingGate_ArmPositionsClockwiseRotation\n\
 _080C7F5C: .4byte gUnknown_02038800\n\
-_080C7F60: .4byte sUnknown_083D613C\n\
+_080C7F60: .4byte sRotatingGate_ArmLayout\n\
 .syntax divided\n");
 }
 #endif
 
 #ifdef NONMATCHING
-int sub_80C7F64(u8 a, u8 b)
+static int RotatingGate_HasArm(u8 gateId, u8 armInfo)
 {
-    int unk1;
-    int unk2;
-    int unk4;
-    int unk5;
-    int unk6;
-    int unk7;
+    int isLongArm;
+    s8 armOrientation;
+    int arm;
+    int shape;
 
-    unk5 = a >> 1;
-    unk1 = b & 1;
-    unk2 = unk5 - sub_80C7A08(a) + 4;
-    unk7 = unk2 < 0 ? unk2 + 3 : unk2;
-    unk4 = (unk7 - ((unk7 >> 2) << 2));
-    unk6 = gUnknown_02038800[a].e;
-    return sUnknown_083D613C[unk6][(s8)unk4 * 2 + unk1];
+    arm = armInfo >> 1;
+    isLongArm = armInfo & 1;
+
+    armOrientation = (arm - RotatingGate_GetGateOrientation(gateId) + 4) % 4;
+    shape = gUnknown_02038800[gateId].shape;
+    return sRotatingGate_ArmLayout[shape][armOrientation][isLongArm];
 }
 #else
-__attribute__((naked)) int sub_80C7F64(u8 a, u8 b)
+__attribute__((naked)) static int RotatingGate_HasArm(u8 a, u8 b)
 {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
@@ -830,7 +1026,7 @@ __attribute__((naked)) int sub_80C7F64(u8 a, u8 b)
 	movs r0, 0x1\n\
 	ands r5, r0\n\
 	adds r0, r6, 0\n\
-	bl sub_80C7A08\n\
+	bl RotatingGate_GetGateOrientation\n\
 	subs r4, r0\n\
 	adds r1, r4, 0x4\n\
 	adds r0, r1, 0\n\
@@ -846,7 +1042,7 @@ _080C7F8A:\n\
 	lsls r1, r6, 3\n\
 	adds r1, r2\n\
 	ldrb r1, [r1, 0x4]\n\
-	ldr r2, _080C7FB4 @ =sUnknown_083D613C\n\
+	ldr r2, _080C7FB4 @ =sRotatingGate_ArmLayout\n\
 	lsls r0, 24\n\
 	asrs r0, 23\n\
 	adds r0, r5\n\
@@ -859,43 +1055,43 @@ _080C7F8A:\n\
 	bx r1\n\
 	.align 2, 0\n\
 _080C7FB0: .4byte gUnknown_02038800\n\
-_080C7FB4: .4byte sUnknown_083D613C\n\
+_080C7FB4: .4byte sRotatingGate_ArmLayout\n\
 .syntax divided\n");
 }
 #endif
 
-void sub_80C7FB8(u8 a, int b)
+static void RotatingGate_TriggerRotationAnimation(u8 gateId, int rotationDirection)
 {
     struct Sprite *sprite;
 
-    if (gUnknown_020387F0[a] != MAX_SPRITES)
+    if (gUnknown_020387F0[gateId] != MAX_SPRITES)
     {
-        sprite = &gSprites[gUnknown_020387F0[a]];
-        sprite->data1 = b;
-        sprite->data2 = sub_80C7A08(a);
+        sprite = &gSprites[gUnknown_020387F0[gateId]];
+        sprite->data1 = rotationDirection;
+        sprite->data2 = RotatingGate_GetGateOrientation(gateId);
     }
 }
 
 #ifdef NONMATCHING
-u8 sub_80C7FEC(u8 a, s16 b, s16 c)
+static u8 RotatingGate_GetRotationInfo(u8 direction, s16 x, s16 y)
 {
     register const u8(*ptr)[][4] asm("r3");
 
-    if (a == 2)
-        ptr = &sUnknown_083D60BC;
-    else if (a == 1)
-        ptr = &sUnknown_083D60CC;
-    else if (a == 3)
-        ptr = &sUnknown_083D60DC;
-    else if (a == 4)
-        ptr = &sUnknown_083D60EC;
+    if (direction == DIR_NORTH)
+        ptr = &sRotatingGate_RotationInfoNorth;
+    else if (direction == DIR_SOUTH)
+        ptr = &sRotatingGate_RotationInfoSouth;
+    else if (direction == DIR_WEST)
+        ptr = &sRotatingGate_RotationInfoWest;
+    else if (direction == DIR_EAST)
+        ptr = &sRotatingGate_RotationInfoEast;
     else
-        return 0xFF;
+        return GATE_ROTATION_NONE;
 
-    return (*ptr)[c][b];
+    return (*ptr)[y][x];
 }
 #else
-__attribute__((naked)) u8 sub_80C7FEC(u8 a, s16 b, s16 c)
+__attribute__((naked)) static u8 RotatingGate_GetRotationInfo(u8 a, s16 b, s16 c)
 {
     asm(".syntax unified\n\
     	push {lr}\n\
@@ -908,31 +1104,31 @@ __attribute__((naked)) u8 sub_80C7FEC(u8 a, s16 b, s16 c)
 	lsrs r2, 16\n\
 	cmp r0, 0x2\n\
 	bne _080C8008\n\
-	ldr r3, _080C8004 @ =sUnknown_083D60BC\n\
+	ldr r3, _080C8004 @ =sRotatingGate_RotationInfoNorth\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C8004: .4byte sUnknown_083D60BC\n\
+_080C8004: .4byte sRotatingGate_RotationInfoNorth\n\
 _080C8008:\n\
 	cmp r0, 0x1\n\
 	bne _080C8014\n\
-	ldr r3, _080C8010 @ =sUnknown_083D60CC\n\
+	ldr r3, _080C8010 @ =sRotatingGate_RotationInfoSouth\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C8010: .4byte sUnknown_083D60CC\n\
+_080C8010: .4byte sRotatingGate_RotationInfoSouth\n\
 _080C8014:\n\
 	cmp r0, 0x3\n\
 	bne _080C8020\n\
-	ldr r3, _080C801C @ =sUnknown_083D60DC\n\
+	ldr r3, _080C801C @ =sRotatingGate_RotationInfoWest\n\
 	b _080C802A\n\
 	.align 2, 0\n\
-_080C801C: .4byte sUnknown_083D60DC\n\
+_080C801C: .4byte sRotatingGate_RotationInfoWest\n\
 _080C8020:\n\
 	cmp r3, 0x4\n\
 	beq _080C8028\n\
 	movs r0, 0xFF\n\
 	b _080C8038\n\
 _080C8028:\n\
-	ldr r3, _080C803C @ =sUnknown_083D60EC\n\
+	ldr r3, _080C803C @ =sRotatingGate_RotationInfoEast\n\
 _080C802A:\n\
 	lsls r0, r2, 16\n\
 	lsls r1, 16\n\
@@ -945,7 +1141,7 @@ _080C8038:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_080C803C: .4byte sUnknown_083D60EC\n\
+_080C803C: .4byte sRotatingGate_RotationInfoEast\n\
 .syntax divided\n");
 }
 #endif
@@ -954,17 +1150,17 @@ void sub_80C8040(void)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {
-        sub_80C7A80();
-        sub_80C79CC();
+        RotatingGate_LoadPuzzleConfig();
+        RotatingGate_ResetAllGateOrientations();
     }
 }
 
-void RotatingGatePuzzleCameraUpdate(u16 a, u16 b)
+void RotatingGatePuzzleCameraUpdate(u16 deltaX, u16 deltaY)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {
-        sub_80C7ADC(a, b);
-        sub_80C7DC0();
+        RotatingGate_CreateGatesWithinViewport(deltaX, deltaY);
+        RotatingGate_DestroyGatesOutsideViewport();
     }
 }
 
@@ -973,21 +1169,21 @@ void sub_80C8080(void)
     if (GetCurrentMapRotatingGatePuzzleType())
     {
         LoadRotatingGatePics();
-        sub_80C7A80();
-        sub_80C7ADC(0, 0);
+        RotatingGate_LoadPuzzleConfig();
+        RotatingGate_CreateGatesWithinViewport(0, 0);
     }
 }
 
-bool8 CheckForRotatingGatePuzzleCollision(u8 a, s16 x, s16 y)
+bool8 CheckForRotatingGatePuzzleCollision(u8 direction, s16 x, s16 y)
 {
     int i;
     s16 gateX;
     s16 gateY;
-    register u32 check asm("r0");
-    int upperNibble;
-    int lowerNibble;
-    s16 finalX;
-    s16 finalY;
+    register u32 rotationInfo asm("r0");
+    int rotationDirection;
+    int armInfo;
+    s16 centerX;
+    s16 centerY;
 
     if (!GetCurrentMapRotatingGatePuzzleType())
     {
@@ -1001,23 +1197,23 @@ bool8 CheckForRotatingGatePuzzleCollision(u8 a, s16 x, s16 y)
 
         if (gateX - 2 <= x && x <= gateX + 1 && gateY - 2 <= y && y <= gateY + 1)
         {
-            finalX = x - gateX + 2;
-            finalY = y - gateY + 2;
-            check = sub_80C7FEC(a, finalX, finalY);
+            centerX = x - gateX + 2;
+            centerY = y - gateY + 2;
+            rotationInfo = RotatingGate_GetRotationInfo(direction, centerX, centerY);
 
-            if (check != 255)
+            if (rotationInfo != GATE_ROTATION_NONE)
             {
-                upperNibble = check >> 4;
-                lowerNibble = check & 0xF;
+                rotationDirection = rotationInfo >> 4;
+                armInfo = rotationInfo & 0xF;
 
-                asm("" ::"r"(lowerNibble));
+                asm("" ::"r"(armInfo));
 
-                if (sub_80C7F64(i, lowerNibble))
+                if (RotatingGate_HasArm(i, armInfo))
                 {
-                    if (sub_80C7E8C(i, upperNibble))
+                    if (RotatingGate_CanRotate(i, rotationDirection))
                     {
-                        sub_80C7FB8(i, upperNibble);
-                        sub_80C7A44(i, upperNibble);
+                        RotatingGate_TriggerRotationAnimation(i, rotationDirection);
+                        RotatingGate_RotateInDirection(i, rotationDirection);
                         return 0;
                     }
 
