@@ -20,12 +20,6 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct5
-{
-    u8 unk0_0:7;
-    u8 unk0_7:1;
-};
-
 extern u8 gActiveBank;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gObjectBankIDs[];
@@ -45,7 +39,6 @@ extern void (*gAnimScriptCallback)(void);
 extern u8 gDisplayedStringBattle[];
 extern bool8 gDoingBattleAnim;
 extern u8 gBattleOutcome;
-extern struct UnknownStruct5 gUnknown_020238C8;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
