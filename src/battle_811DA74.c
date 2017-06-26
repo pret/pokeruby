@@ -1415,10 +1415,12 @@ void sub_81203FC(void)
 void LinkPartnerHandleHitAnimation(void)
 {
     if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
+    {
         LinkPartnerBufferExecCompleted();
+    }
     else
     {
-        gDoingBattleAnim = 1;
+        gDoingBattleAnim = TRUE;
         gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t3;
@@ -1578,9 +1580,8 @@ void sub_81209D8(void)
     {
         u8 r3 = gBattleBufferA[gActiveBank][1];
         u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
-        u8 var = gActiveBank;
 
-        if (move_anim_start_t3(var, var, var, r3, r4) != 0)
+        if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
             LinkPartnerBufferExecCompleted();
         else
             gBattleBankFunc[gActiveBank] = sub_811E3B8;

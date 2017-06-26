@@ -63,7 +63,6 @@ SECTIONS {
         asm/battle_8.o(.text);
         asm/battle_9.o(.text);
         src/battle_10.o(.text);
-        asm/battle_10.o(.text);
         src/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
