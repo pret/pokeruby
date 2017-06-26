@@ -283,3 +283,37 @@ void sub_8069708(s16 x, s16 y, bool32 flag)
 {
     sub_8069638(gUnknown_083763C4, x, y, flag);
 }
+
+bool8 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
+{
+    s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x2, y2);
+    if (sub_80576A0(metatileBehavior))
+    {
+        if (y1 > y2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576B4(metatileBehavior))
+    {
+        if (y1 < y2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576C8(metatileBehavior))
+    {
+        if (x1 > x2)
+        {
+            return FALSE;
+        }
+    }
+    else if (sub_80576DC(metatileBehavior))
+    {
+        if (x1 < x2)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
