@@ -335,9 +335,11 @@ gSpriteTemplate_83C1304:: @ 83C1304
 gSummaryScreenMonMarkingsPalette:: @ 83C131C
 	.incbin "graphics/summary_screen/mon_markings.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gSummaryScreenTextTiles:: @ 83C133C
 	.incbin "graphics/summary_screen/text.4bpp"
+.endif
 
 	.align 2
 gSummaryScreenButtonTiles:: @ 83C147C

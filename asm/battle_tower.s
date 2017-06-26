@@ -2324,7 +2324,7 @@ _08135750: .4byte 0x00000564
 _08135754:
 	movs r2, 0
 	ldr r4, _0813576C @ =gSaveBlock2 + 0x565
-	ldr r3, _08135770 @ =gBufferedMoves
+	ldr r3, _08135770 @ =gSelectedOrderFromParty
 _0813575A:
 	adds r0, r2, r4
 	adds r1, r2, r3
@@ -2336,7 +2336,7 @@ _0813575A:
 	b _0813589A
 	.align 2, 0
 _0813576C: .4byte gSaveBlock2 + 0x565
-_08135770: .4byte gBufferedMoves
+_08135770: .4byte gSelectedOrderFromParty
 _08135774:
 	ldr r3, _081357C0 @ =0x00000564
 	adds r0, r5, r3
@@ -2665,7 +2665,7 @@ _08135A10: .4byte 0x00000554
 sub_8135A14: @ 8135A14
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, _08135A34 @ =gBufferedMoves
+	ldr r4, _08135A34 @ =gSelectedOrderFromParty
 	ldr r3, _08135A38 @ =gSaveBlock2 + 0x565
 _08135A1C:
 	adds r0, r2, r4
@@ -2680,7 +2680,7 @@ _08135A1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135A34: .4byte gBufferedMoves
+_08135A34: .4byte gSelectedOrderFromParty
 _08135A38: .4byte gSaveBlock2 + 0x565
 	thumb_func_end sub_8135A14
 
@@ -3603,5 +3603,61 @@ _0813611E:
 	.align 2, 0
 _0813612C: .4byte gSaveBlock2 + 0x556
 	thumb_func_end sub_813610C
-	
+
+.ifdef GERMAN
+	thumb_func_start de_sub_81364AC
+de_sub_81364AC: @ 81364AC
+	push {lr}
+	ldr r2, _DE_081364C0 @ =gSaveBlock2
+	ldr r0, _DE_081364C4 @ =0x00000564
+	adds r1, r2, r0
+	ldrb r0, [r1]
+	cmp r0, 0xC8
+	bne _DE_081364CC
+	ldr r1, _DE_081364C8 @ =0x00000499
+	adds r0, r2, r1
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364C0: .4byte gSaveBlock2
+_DE_081364C4: .4byte 0x00000564
+_DE_081364C8: .4byte 0x00000499
+_DE_081364CC:
+	cmp r0, 0x63
+	bhi _DE_081364E4
+	ldr r2, _DE_081364E0 @ =gBattleTowerTrainers
+	ldrb r1, [r1]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 3
+	adds r0, r2
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364E0: .4byte gBattleTowerTrainers
+_DE_081364E4:
+	ldrb r0, [r1]
+	subs r0, 0x64
+	movs r1, 0xA4
+	muls r0, r1
+	adds r0, r2
+	adds r1, 0xA9
+	adds r0, r1
+_DE_081364F2:
+	ldrb r0, [r0]
+	pop {r1}
+	bx r1
+	thumb_func_end de_sub_81364AC
+
+	thumb_func_start de_sub_81364F8
+de_sub_81364F8: @ 81364F8
+	ldr r0, _DE_08136504 @ =gSaveBlock2
+	ldr r1, _DE_08136508 @ =0x00000499
+	adds r0, r1
+	ldrb r0, [r0]
+	bx lr
+	.align 2, 0
+_DE_08136504: .4byte gSaveBlock2
+_DE_08136508: .4byte 0x00000499
+	thumb_func_end de_sub_81364F8
+.endif
+
 	.align 2, 0 @ Don't pad with nop.

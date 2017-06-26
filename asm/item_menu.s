@@ -2516,7 +2516,11 @@ _080A4470:
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
+.ifdef ENGLISH
 	movs r2, 0x60
+.else
+	movs r2, 0x63
+.endif
 	movs r3, 0
 	bl sub_8072C74
 	ldr r0, _080A44F0 @ =gStringVar1

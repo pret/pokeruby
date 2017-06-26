@@ -6,6 +6,10 @@
 
 	.text
 
+.ifdef ENGLISH
+	.set sub_804A96C_alt, sub_804A96C
+.endif
+
 	thumb_func_start sub_8047CD8
 sub_8047CD8: @ 8047CD8
 	push {lr}
@@ -4348,7 +4352,7 @@ _08049F8E:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, [sp, 0x6C]
 	cmp r0, 0
 	beq _0804A08C
@@ -4407,7 +4411,7 @@ _0804A0E4:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, _0804A22C @ =gUnknown_03004824
 	ldr r3, [r0]
 	ldr r1, [sp, 0x6C]
@@ -5122,6 +5126,13 @@ _0804A690:
 _0804A6CA:
 	strh r0, [r1]
 _0804A6CC:
+.ifdef GERMAN
+	ldr r0, _0804A6E8 @ =gUnknown_03004824
+	ldr r0, [r0]
+	adds r0, 0xD8
+	movs r1, 0x1
+	strb r1, [r0]
+.endif
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -5130,6 +5141,10 @@ _0804A6CC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
+.ifdef GERMAN
+	.align 2, 0
+_0804A6E8: .4byte gUnknown_03004824
+.endif
 	thumb_func_end sub_804A51C
 
 	thumb_func_start sub_804A6DC
@@ -5347,7 +5362,7 @@ sub_804A840: @ 804A840
 	str r5, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0
 	bl sub_804A6DC
 	movs r0, 0
@@ -5387,7 +5402,7 @@ _0804A8A8:
 	str r1, [sp, 0x8]
 	movs r1, 0xF
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0x1
 	bl sub_804A6DC
 	movs r0, 0x1
@@ -5462,81 +5477,7 @@ sub_804A964: @ 804A964
 	bx lr
 	thumb_func_end sub_804A964
 
-	thumb_func_start sub_804A96C
-sub_804A96C: @ 804A96C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	str r0, [sp]
-	mov r10, r3
-	ldr r0, [sp, 0x24]
-	ldr r3, [sp, 0x28]
-	ldr r4, [sp, 0x2C]
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r6, r2, 24
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r3, 24
-	lsrs r3, 24
-	mov r12, r3
-	lsls r4, 16
-	lsrs r7, r4, 16
-	movs r2, 0
-	cmp r2, r12
-	bge _0804A9DE
-	ldr r0, [sp]
-	adds r0, 0x12
-	mov r9, r0
-	lsls r0, r6, 5
-	adds r0, r1
-	mov r8, r0
-_0804A9AA:
-	movs r4, 0
-	adds r6, r2, 0x1
-	cmp r4, r5
-	bge _0804A9D8
-	lsls r1, r2, 5
-	add r1, r8
-	adds r0, r5, 0
-	muls r0, r2
-	lsls r0, 1
-	mov r2, r10
-	adds r3, r0, r2
-	lsls r1, 1
-	mov r0, r9
-	adds r2, r1, r0
-_0804A9C6:
-	ldrh r1, [r3]
-	adds r0, r7, 0
-	orrs r0, r1
-	strh r0, [r2]
-	adds r3, 0x2
-	adds r2, 0x2
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0804A9C6
-_0804A9D8:
-	adds r2, r6, 0
-	cmp r2, r12
-	blt _0804A9AA
-_0804A9DE:
-	movs r0, 0x1
-	ldr r1, [sp]
-	strb r0, [r1, 0x10]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804A96C
+.section .text.sub_804A9F4
 
 	thumb_func_start sub_804A9F4
 sub_804A9F4: @ 804A9F4
@@ -11309,52 +11250,7 @@ _0804DAC0:
 _0804DAD0: .4byte gEnemyParty
 	thumb_func_end sub_804D948
 
-	thumb_func_start sub_804DAD4
-sub_804DAD4: @ 804DAD4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r2, _0804DB28 @ =gIngameTradeMail
-	adds r0, r5, 0
-	adds r0, 0x2A
-	ldrb r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0, r2
-	adds r1, r4, 0
-	movs r3, 0x8
-_0804DAEE:
-	ldrh r0, [r2]
-	strh r0, [r1]
-	adds r2, 0x2
-	adds r1, 0x2
-	subs r3, 0x1
-	cmp r3, 0
-	bge _0804DAEE
-	adds r0, r4, 0
-	adds r0, 0x12
-	adds r1, r5, 0
-	adds r1, 0x2B
-	bl StringCopy
-	ldr r1, [r5, 0x18]
-	lsrs r0, r1, 24
-	strb r0, [r4, 0x1A]
-	lsrs r0, r1, 16
-	strb r0, [r4, 0x1B]
-	lsrs r0, r1, 8
-	strb r0, [r4, 0x1C]
-	strb r1, [r4, 0x1D]
-	ldrh r0, [r5, 0xC]
-	strh r0, [r4, 0x1E]
-	ldrh r0, [r5, 0x28]
-	strh r0, [r4, 0x20]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804DB28: .4byte gIngameTradeMail
-	thumb_func_end sub_804DAD4
+.section .text.sub_804DB2C
 
 	thumb_func_start sub_804DB2C
 sub_804DB2C: @ 804DB2C

@@ -1,4 +1,4 @@
-#if REVISION >= 1
+#if REVISION >= 1 || GERMAN
 static const u8 sFont1Widths[] = {
     5, 3, 8, 8, 8, 8, 8, 8, 8, 4, 5, 4, 4, 8, 8, 8,
     8, 8, 8, 8, 8, 8, 8, 5, 8, 8, 8, 8, 8, 4, 8, 8,

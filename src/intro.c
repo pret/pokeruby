@@ -43,7 +43,11 @@ extern void *const gUnknown_0840B5A0[];
 
 static const u16 Palette_406340[] = INCBIN_U16("graphics/intro/unknown1.gbapal");
 static const u16 Palette_406360[] = INCBIN_U16("graphics/intro/unknown2.gbapal");
+#if ENGLISH
 static const u8 gIntroTiles[] = INCBIN_U8("graphics/intro/intro.4bpp.lz");
+#elif GERMAN
+extern const u8 gIntroTiles[];
+#endif
 static const u16 gIntro1BGPals[][16] =
 {
     INCBIN_U16("graphics/intro/intro1_bgpal1.gbapal"),

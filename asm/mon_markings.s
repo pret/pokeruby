@@ -720,7 +720,11 @@ _080F7770:
 	ldr r2, [r1, 0x24]
 	ldr r3, [sp, 0x58]
 	asrs r0, r3, 16
+.ifdef ENGLISH
 	adds r0, 0x20
+.else
+	adds r0, 0x18
+.endif
 	strh r0, [r2, 0x20]
 	ldr r2, [r1, 0x24]
 	mov r0, r8
