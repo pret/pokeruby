@@ -19,19 +19,23 @@ extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
 
-#ifdef NONMATCHING
-u8 *sub_80EB3FC(u8 *dst, u16 word) {
-    int group, wordIndex;
+
+u8 *sub_80EB3FC(u8 *dst, u16 word)
+{
+    u16 group;
+    u16 wordIndex;
     u8 *src;
     u16 i;
 
-
     if (sub_80EB37C(word))
-    {
         return StringCopy(dst, gOtherText_ThreeQuestions);
-    }
 
-    if (word != 0xFFFF)
+    if (word == 0xFFFF)
+    {
+        dst[0] = EOS;
+        return dst;
+    }
+    else
     {
         group = word >> 9;
         wordIndex = word & 0x1FF;
@@ -41,34 +45,27 @@ u8 *sub_80EB3FC(u8 *dst, u16 word) {
         case EC_GROUP_POKEMON_2: // 21
             dst = StringCopy(dst, gSpeciesNames[wordIndex]);
             break;
-
         case EC_GROUP_MOVE_1: // 18
         case EC_GROUP_MOVE_2: // 19
             dst = StringCopy(dst, gMoveNames[wordIndex]);
             break;
-
         default:
             src = gEasyChatGroupWords[group];
-
-            i = wordIndex - 1;
-            while (i != 0xFFFF)
+            for (i = wordIndex - 1; i != 0xFFFF; i--)
             {
                 while (*src++ != EOS)
-                {
-                }
-                i--;
+                    ;
             }
             dst = StringCopy(dst, src);
             break;
         }
+        dst[0] = EOS;
+        return dst;
     }
-
-    dst[0] = EOS;
-    return dst;
 }
-#endif
 
-u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3)
+{
     u16 i;
     u16 n;
 
@@ -95,7 +92,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
         words++;
         dst = sub_80EB3FC(dst, word);
 
-        dst[0] = 0xFE;
+        dst[0] = CHAR_NEWLINE;
         dst++;
     }
 
@@ -105,7 +102,8 @@ u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
     return dst;
 }
 
-u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
+u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
+{
     u16 i;
     u16 n;
 
@@ -133,7 +131,7 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
         dst = sub_80EB3FC(dst, word);
 
         // Only difference with ConvertEasyChatWordsToString
-        dst[0] = (i == 0) ? 0xFE : 0xFA;
+        dst[0] = (i == 0) ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
         dst++;
     }
 
@@ -144,17 +142,16 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3) {
 }
 
 
-u16 unref_sub_80EB5E0(u16 arg0) {
+u16 unref_sub_80EB5E0(u16 arg0)
+{
     u8 *chars;
     u16 i;
-    u16 strlen;
+    u16 length;
     int group, word;
 
 
     if (arg0 == 0xFFFF)
-    {
         return 0;
-    }
 
     group = arg0 >> 9;
     word = arg0 & 0x1FF;
@@ -164,41 +161,37 @@ u16 unref_sub_80EB5E0(u16 arg0) {
     case EC_GROUP_POKEMON_2: // 21
         chars = (u8 *) gSpeciesNames[word];
         break;
-
     case EC_GROUP_MOVE_1: // 18
     case EC_GROUP_MOVE_2: // 19
         chars = gMoveNames[word];
         break;
-
     default:
         chars = gEasyChatGroupWords[group];
-
-        i = word - 1;
-        while (i != 0xFFFF)
+        for (i = word - 1; i != 0xFFFF; i--)
         {
             while (*chars++ != EOS)
-            {
-            }
-            i--;
+                ;
         }
         break;
     }
 
-    strlen = 0;
+    length = 0;
     while (*chars != EOS)
     {
         chars++;
-        strlen += 1;
+        length++;
     }
 
-    return strlen;
+    return length;
 }
 
-static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3) {
+static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3)
+{
     return FALSE;
 }
 
-void unref_sub_80EB684(u8 arg0, u16 arg1) {
+void unref_sub_80EB684(u8 arg0, u16 arg1)
+{
     u16 *ptr;
     u16 c;
 
@@ -217,7 +210,6 @@ void unref_sub_80EB684(u8 arg0, u16 arg1) {
         c = 1;
         ptr = (u16*)((void *)&gSaveBlock1.tvShows[arg1] + 0x02);
         break;
-
     default:
         return;
     }
@@ -231,7 +223,8 @@ void unref_sub_80EB684(u8 arg0, u16 arg1) {
     }
 }
 
-void sub_80EB6FC(u16 *arg0, u16 arg1) {
+void sub_80EB6FC(u16 *arg0, u16 arg1)
+{
     u16 i;
 
     for (i = arg1 - 1; i != 0xFFFF; i--)
@@ -242,35 +235,30 @@ void sub_80EB6FC(u16 *arg0, u16 arg1) {
 
 }
 
-u16 sub_80EB72C(u16 group) {
-    u16 local1;
+u16 sub_80EB72C(u16 group)
+{
+    u16 local1 = Random() % gEasyChatGroupSizes[group];
 
-    local1 = Random() % gEasyChatGroupSizes[group];
-
-    if (group == EC_GROUP_POKEMON ||
-        group == EC_GROUP_POKEMON_2 ||
-        group == EC_GROUP_MOVE_1 ||
-        group == EC_GROUP_MOVE_2)
+    if (group == EC_GROUP_POKEMON
+     || group == EC_GROUP_POKEMON_2
+     || group == EC_GROUP_MOVE_1
+     || group == EC_GROUP_MOVE_2)
     {
         local1 = ((u16 *) gEasyChatGroupWords[group])[local1];
     }
 
-
     return ((group & 0x7F) << 9) | (local1 & 0x1FF);
 }
 
-u16 sub_80EB784(u16 group) {
+u16 sub_80EB784(u16 group)
+{
     if (!sub_80EAD7C(group))
-    {
         return -1;
-    }
 
     if (group != EC_GROUP_POKEMON)
     {
         if (group == EC_GROUP_TRENDY_SAYING)
-        {
             return sub_80EB960();
-        }
     }
     else
     {
@@ -280,10 +268,10 @@ u16 sub_80EB784(u16 group) {
     return sub_80EB72C(group);
 }
 
-void sub_80EB7C4(void) {
+void sub_80EB7C4(void)
+{
     u16 *words;
     u16 arg1, arg2;
-
 
     switch (gSpecialVar_0x8004)
     {
@@ -292,7 +280,6 @@ void sub_80EB7C4(void) {
         arg1 = 2;
         arg2 = 2;
         break;
-
     case 1:
         words = gSaveBlock1.unk2B28;
         if (sub_80EB680(gSaveBlock1.unk2B28, 3, 2, 20))
@@ -306,19 +293,16 @@ void sub_80EB7C4(void) {
             arg2 = 2;
         }
         break;
-
     case 2:
         words = gSaveBlock1.unk2B34;
         arg1 = 3;
         arg2 = 2;
         break;
-
     case 3:
         words = gSaveBlock1.unk2B40;
         arg1 = 3;
         arg2 = 2;
         break;
-
     default:
         return;
     }
@@ -327,74 +311,65 @@ void sub_80EB7C4(void) {
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
-void sub_80EB83C(void) {
+void sub_80EB83C(void)
+{
     u16 group, local2;
 
     if (Random() & 1)
-    {
         group = EC_GROUP_HOBBIES;
-    }
     else
-    {
         group = EC_GROUP_LIFESTYLE;
-    }
 
     local2 = sub_80EB784(group);
     sub_80EB3FC(gStringVar2, local2);
 }
 
-u8 sub_80EB868(u8 arg0) {
+u8 sub_80EB868(u8 arg0)
+{
     int offset;
     int index;
 
     index = arg0 / 8;
-    offset = arg0 & 7;
+    offset = arg0 % 8;
     return (gSaveBlock1.unk2D8C[index] >> offset) & 1;
 }
 
-void sub_80EB890(u8 arg0) {
+void sub_80EB890(u8 arg0)
+{
     int offset;
     int index;
 
-    if (arg0 > 32)
+    if (arg0 < 33)
     {
-        return;
+        index = arg0 / 8;
+        offset = arg0 % 8;
+        gSaveBlock1.unk2D8C[index] |= 1 << offset;
     }
-
-    index = arg0 / 8;
-    offset = arg0 & 7;
-    gSaveBlock1.unk2D8C[index] |= 1 << offset;
 }
 
-u8 sub_80EB8C0(void) {
-    u8 i, retval;
+u8 sub_80EB8C0(void)
+{
+    u8 i, count;
 
-    i = 0;
-    retval = 0;
-    for (; i < 33; i++)
+    for (i = 0, count = 0; i < 33; i++)
     {
         if (sub_80EB868(i))
-        {
-            retval += 1;
-        }
+            count++;
     }
-
-    return retval;
+    return count;
 }
 
-u16 sub_80EB8EC(void) {
+u16 sub_80EB8EC(void)
+{
     u16 i;
     u16 local1, local2;
 
     local1 = sub_80EB8C0();
     if (local1 == 33)
-    {
         return -1;
-    }
 
     local2 = Random() % (33 - local1);
-
-    for (i = 0; i <= 0x20; i++)
+    for (i = 0; i < 33; i++)
     {
         if (sub_80EB868(i) == 0)
         {
@@ -403,35 +378,28 @@ u16 sub_80EB8EC(void) {
                 sub_80EB890(i);
                 return (i & 0x1FF) | 0x2800;
             }
-
             local2--;
         }
     }
-
     return -1;
 }
 
-static u16 sub_80EB960(void) {
+static u16 sub_80EB960(void)
+{
     u16 i;
     u16 local1;
 
     local1 = sub_80EB8C0();
     if (local1 == 0)
-    {
         return -1;
-    }
 
     local1 = Random() % local1;
-
-    for (i = 0; i <= 0x20; i++)
+    for (i = 0; i < 33; i++)
     {
         if (sub_80EB868(i))
         {
             if (local1 == 0)
-            {
                 return (i & 0x1FF) | 0x2800;
-            }
-
             local1--;
         }
     }
@@ -439,11 +407,13 @@ static u16 sub_80EB960(void) {
     return -1;
 }
 
-u8 sub_80EB9C8(void) {
+u8 sub_80EB9C8(void)
+{
     return IsNationalPokedexEnabled();
 }
 
-static u16 sub_80EB9D8(void) {
+static u16 sub_80EB9D8(void)
+{
     u16 *speciesList;
     u16 local1;
     u16 i;
@@ -451,32 +421,22 @@ static u16 sub_80EB9D8(void) {
     local1 = sub_80EAE88(0);
 
     if (local1 == 0)
-    {
         return -1;
-    }
 
     local1 = Random() % local1;
     speciesList = (u16 *) gEasyChatGroupWords[EC_GROUP_POKEMON];
-
     for (i = 0; i < gEasyChatGroupSizes[EC_GROUP_POKEMON]; i++)
     {
         const u16 dexNum = SpeciesToNationalPokedexNum(*speciesList);
-
         const u8 local2 = GetNationalPokedexFlag(dexNum, 0);
 
         if (local2)
         {
             if (local1 == 0)
-            {
                 return *speciesList & 0x1FF;
-            }
-
             local1--;
         }
-
         speciesList++;
     }
-
     return -1;
 }
-
