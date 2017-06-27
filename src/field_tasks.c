@@ -794,3 +794,66 @@ void sub_806A18C(s16 *data, s16 x, s16 y)
     CurrentMapDrawMetatileAt(x, y);
     MapGridSetMetatileIdAt(x, y, 0xe8);
 }
+
+void Task_MuddySlope(u8 taskId)
+{
+    s16 x, y, x2, y2;
+    int i;
+    u16 mapIndices;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    mapIndices = (gSaveBlock1.location.mapGroup << 8) | gSaveBlock1.location.mapNum;
+    switch (data[1])
+    {
+        case 0:
+            data[0] = mapIndices;
+            data[2] = x;
+            data[3] = y;
+            data[1] = 1;
+            data[4] = 0;
+            data[7] = 0;
+            data[10] = 0;
+            data[13] = 0;
+            break;
+        case 1:
+            if (data[2] != x || data[3] != y)
+            {
+                data[2] = x;
+                data[3] = y;
+                if (MetatileBehavior_IsMuddySlope(MapGridGetMetatileBehaviorAt(x, y)))
+                {
+                    for (i=4; i<14; i+=3)
+                    {
+                        if (data[i] == 0)
+                        {
+                            data[i] = 32;
+                            data[i + 1] = x;
+                            data[i + 2] = y;
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+    }
+    if (gUnknown_0202E844.field_0 && mapIndices != data[0])
+    {
+        data[0] = mapIndices;
+        x2 = gUnknown_0202E844.x;
+        y2 = gUnknown_0202E844.y;
+    }
+    else
+    {
+        x2 = 0;
+        y2 = 0;
+    }
+    for (i=4; i<14; i+=3)
+    {
+        if (data[i])
+        {
+            data[i + 1] -= x2;
+            data[i + 2] -= y2;
+            sub_806A18C(&data[i], data[i + 1], data[i + 2]);
+        }
+    }
+}

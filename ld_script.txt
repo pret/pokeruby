@@ -105,7 +105,6 @@ SECTIONS {
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);
-        asm/field_tasks.o(.text);
         src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
