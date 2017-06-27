@@ -1,4 +1,5 @@
 #include "global.h"
+#include "pokemon_storage_system.h"
 #include "menu.h"
 #include "string_util.h"
 
@@ -41,10 +42,13 @@ void sub_8098898(u8 index) {
         break;
 
     case 4:
-        // TODO: fix for German
         // {var} + " was released."
         ptr = StringCopy(gUnk2002694, gUnk20026e4);
+#if ENGLISH
         ptr = StringCopy(ptr, gUnknown_083B6DF4[index].text);
+#elif GERMAN
+        ptr = de_sub_8073174(gUnk2002694, gUnknown_083B6DF4[index].text);
+#endif
         break;
 
     case 3:

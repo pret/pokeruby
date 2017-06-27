@@ -1,9 +1,9 @@
 #include "global.h"
+#include "daycare.h"
 #include "pokemon.h"
 #include "species.h"
 #include "items.h"
 #include "string_util.h"
-#include "asm.h"
 
 extern u8 gLastFieldPokeMenuOpened;
 

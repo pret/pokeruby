@@ -22,5 +22,19 @@ struct ContestPokemon
 }; // wow
 
 extern struct ContestPokemon gContestMons[];
+void ResetLinkContestBoolean(void);
+void sub_80AB2AC(void);
+void sub_80AB47C(void);
+void sub_80AE098(u8);
+void sub_80AE398(u8, u8);
+u8 sub_80AE47C(struct Pokemon *party);
+u32 sub_80AE770(u8, u8);
+void sub_80AE82C(u8);
+u8 sub_80AEB1C();
+void sub_80AF668(void);
+void sub_80B0F28(u8);
+int sub_80B2A7C(u8);  //Don't know return type size
+u8 sub_80B2C4C(u8, u8);
+void sub_80B2D1C(void);
 
 #endif // GUARD_CONTEST_H

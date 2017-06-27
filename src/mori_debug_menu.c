@@ -1,10 +1,12 @@
 #include "global.h"
 #include "mori_debug_menu.h"
-#include "asm.h"
 #include "data2.h"
+#include "daycare.h"
+#include "learn_move.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
+#include "pokeblock.h"
 #include "start_menu.h"
 #include "string_util.h"
 

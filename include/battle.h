@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+#include "sprite.h"
+
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004
@@ -28,6 +30,9 @@
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
+
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
+extern u8 unk_2000000[];
 
 enum
 {
@@ -180,7 +185,6 @@ struct Struct2017810
     u8 unk1_0:1;
     u8 unk2;
     u8 unk3;
-    //u8 filler2[2];
     u8 unk4;
     u8 unk5;
     u8 unk6;
@@ -193,13 +197,21 @@ struct Struct2017810
 struct Struct2017840
 {
     u16 unk0;
-    u8 filler2[7];
+    u8 filler2[6];
+    u8 unk8;
     u8 unk9_0:1;
 };
 
-extern struct UnknownStruct1 unk_2016A00;
-extern struct UnkBattleStruct4 gUnknown_02024CA8[];
+struct Struct20238C8
+{
+    u8 unk0_0:7;
+    u8 unk0_7:1;
+};
+
+extern struct UnkBattleStruct1 unk_2016A00;
+extern struct UnkBattleStruct4 gDisableStructs[];
 extern struct AI_ThinkingStruct gAIThinkingSpace;
+extern struct Struct20238C8 gUnknown_020238C8;
 
 // TODO: move ewram to global.h
 extern u8 ewram[];
@@ -212,5 +224,104 @@ extern u8 ewram[];
 #define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
 #define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
 #define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
+
+// asm/battle_1.o
+void sub_800D6D4();
+void sub_800D74C();
+void sub_800D7B8(void);
+void sub_800DAB8();
+void sub_800DE30(u8);
+void sub_800E23C();
+
+// src/battle_2.o
+void sub_800E7C4(void);
+void InitBattle(void);
+void sub_800EC9C(void);
+void sub_800F104(void);
+void sub_800F298(void);
+void sub_800F808(void);
+void sub_800F838(struct Sprite *);
+u8 CreateNPCTrainerParty(struct Pokemon *, u16);
+void sub_800FCFC(void);
+void c2_8011A1C(void);
+void sub_80101B8(void);
+void c2_081284E0(void);
+void sub_8010278(struct Sprite *);
+void sub_80102AC(struct Sprite *);
+void nullsub_37(struct Sprite *);
+void sub_8010320(struct Sprite *);
+void sub_8010494(struct Sprite *);
+void sub_801053C(struct Sprite *);
+void oac_poke_ally_(struct Sprite *);
+void nullsub_86(struct Sprite *);
+void objc_dp11b_pingpong(struct Sprite *);
+void nullsub_41(void);
+void sub_8010800(void);
+void sub_8010824(void);
+void sub_8010874(void);
+void bc_8012FAC(void);
+void bc_load_battlefield(void);
+void sub_8011384(void);
+void bc_801333C(void);
+void bc_battle_begin_message(void);
+void bc_8013568(void);
+void sub_8011800(void);
+void sub_8011834(void);
+void bc_801362C(void);
+void sub_8011970(void);
+void sub_80119B4(void);
+void BattleBeginFirstTurn(void);
+void BattleTurnPassed(void);
+
+// asm/battle_2.o
+void sub_8012324(void);
+void sub_8012FBC(u8, u8);
+u8 b_first_side(u8, u8, u8);
+void TurnValuesCleanUp(u8);
+void SpecialStatusesClear(void);
+void sub_80138F0(void);
+void MarkBufferBankForExecution();
+void sub_80155A4();
+void CancelMultiTurnMoves(u8);
+void PrepareStringBattle();
+void sub_80156DC();
+void sub_80157C4(u8 index);
+
+// asm/battle_3.o
+u8 sub_8015A98(u8, u8, u8);
+u8 UpdateTurnCounters();
+u8 TurnBasedEffects();
+u8 sub_80170DC();
+u8 sub_80173A4();
+u8 AbilityBattleEffects(u8, u8, u8, u8, u16);
+u8 sub_801A02C();
+
+// asm/battle_4.o
+void sub_801CAF8(u8, u8);
+void move_effectiveness_something(u16, u8, u8);
+
+// asm/battle_5.o
+void nullsub_91(void);
+void SetBankFuncToPlayerBufferRunCommand(void);
+void sub_802C098();
+void c3_0802FDF4(u8);
+void sub_802E3E4(u8, int);
+void nullsub_8(u8);
+void sub_802E414(void);
+
+// asm/battle_7.o
+void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);
+void nullsub_9(u16);
+void nullsub_10(int);
+void load_gfxc_health_bar();
+u8 battle_load_something();
+void sub_8031F88(u8);
+void sub_80324F8(struct Pokemon *, u8);
+void sub_8032638();
+void sub_8032AA8(u8, u8);
+void SetBankFuncToOpponentBufferRunCommand(void);
+
+// asm/battle_9.o
+void SetBankFuncToLinkOpponentBufferRunCommand(void);
 
 #endif // GUARD_BATTLE_H

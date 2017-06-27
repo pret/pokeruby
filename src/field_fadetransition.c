@@ -1,25 +1,15 @@
 #include "global.h"
 #include "gba/syscall.h"
+#include "field_fadetransition.h"
+#include "field_player_avatar.h"
 #include "field_weather.h"
+#include "fldeff_flash.h"
 #include "global.fieldmap.h"
+#include "rom4.h"
 #include "script.h"
 #include "task.h"
 
-void palette_bg_fill_white(void);
-void palette_bg_fill_black(void);
-void pal_fill_black(void);
-void task0A_asap_script_env_2_enable_and_set_ctx_running(u8);
-
-extern u8 get_map_light_from_warp0(void);
-extern u8 sav1_map_get_light_level(void);
-extern u8 fade_type_for_given_maplight_pair(u8, u8);
 extern u16 gPlttBufferFaded[];
-extern struct MapHeader * warp1_get_mapheader(void);
-extern void sub_8059B88(u8);
-extern void sub_8053E90(void);
-
-extern u8 sub_810CDB8(u8, u8);
-extern int sub_8080E70(void);
 
 void palette_bg_fill_white(void)
 {

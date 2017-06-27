@@ -1,10 +1,13 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "asm.h"
 #include "data2.h"
+#include "field_effect.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokemon_icon.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -13,11 +16,13 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
+#include "util.h"
 
-extern u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
-extern u8 CreateMonIcon();
-extern void sub_809D51C(void);
-extern void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
+#ifdef ENGLISH
+#define COLUMN_COUNT 9
+#elif GERMAN
+#define COLUMN_COUNT 10
+#endif
 
 extern u16 gKeyRepeatStartDelay;
 
@@ -51,7 +56,6 @@ extern const struct SpriteTemplate gSpriteTemplate_83CE688;
 extern const struct SpriteSheet gUnknown_083CE6A0[];
 extern const struct SpritePalette gUnknown_083CE708[];
 extern const u8 gNamingScreenMenu_Gfx[];
-extern u16 gMenuMessageBoxContentTileOffset;
 extern const u16 gNamingScreenPalettes[];
 extern const u16 gUnknown_083CE748[];
 extern const u16 gUnknown_083CEBF8[];
@@ -469,8 +473,13 @@ static bool8 MainState_WaitPageSwap(struct Task *task)
         sub_80B77F8();
         SetInputState(INPUT_STATE_ENABLED);
         GetCursorPos(&cursorX, &cursorY);
+#if ENGLISH
         if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
             cursorX = 5;
+#elif GERMAN
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 7 || cursorX == 8))
+            cursorX = 6;
+#endif
         SetCursorPos(cursorX, cursorY);
         sub_80B6888(0);
     }
@@ -747,29 +756,33 @@ static void HandleDpadMovement(struct Task *task)
 
     //Wrap cursor position in the X direction
     if (cursorX < 0)
-        cursorX = 8;
-    if (cursorX > 8)
+        cursorX = COLUMN_COUNT - 1;
+    if (cursorX > COLUMN_COUNT - 1)
         cursorX = 0;
 
     //Handle cursor movement in X direction
     if (sDpadDeltaX[dpadDir] != 0)
     {
         //The "others" page only has 5 columns
+#if ENGLISH
         if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
+#elif GERMAN
+        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7 || cursorX == 8))
+#endif
         {
             if (sDpadDeltaX[dpadDir] > 0)
-                cursorX = 8;
+                cursorX = COLUMN_COUNT - 1;
             else
                 cursorX = 5;
         }
 
-        if (cursorX == 8)
+        if (cursorX == COLUMN_COUNT - 1)
         {
             //We are now on the last column
             task->tKbFunctionKey = cursorY;
             cursorY = s4RowTo3RowTableY[cursorY];
         }
-        else if (prevCursorX == 8)
+        else if (prevCursorX == COLUMN_COUNT - 1)
         {
             if (cursorY == 1)
                 cursorY = task->tKbFunctionKey;
@@ -778,7 +791,7 @@ static void HandleDpadMovement(struct Task *task)
         }
     }
 
-    if (cursorX == 8)
+    if (cursorX == COLUMN_COUNT - 1)
     {
         //There are only 3 keys on the last column, unlike the others,
         //so wrap Y accordingly
@@ -1005,11 +1018,16 @@ static void CursorInit(void)
     SetCursorPos(0, 0);
 }
 
-static const u8 sKeyboardSymbolPositions[][9] =
-{
+static const u8 sKeyboardSymbolPositions[][COLUMN_COUNT] = {
+#if ENGLISH
     {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Upper page
     {1,  3,  5,  8, 10, 12, 14, 17, 19},  //Lower page
     {1,  4,  7, 10, 13, 16, 16, 16, 19},  //Others page
+#elif GERMAN
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Upper page
+    {2, 3, 4, 5,  9,  10, 11, 12, 16, 19},  //Lower page
+    {1, 4, 7, 10, 13, 16, 16, 16, 16, 19},  //Others page
+#endif
 };
 
 static u8 CursorColToKeyboardCol(s16 x)
@@ -1039,7 +1057,7 @@ static void GetCursorPos(s16 *x, s16 *y)
 
 static void MoveCursorToOKButton(void)
 {
-    SetCursorPos(8, 2);
+    SetCursorPos(COLUMN_COUNT - 1, 2);
 }
 
 static void sub_80B6888(u8 a)
@@ -1072,7 +1090,7 @@ static u8 GetKeyRoleAtCursorPos(void)
     s16 cursorY;
 
     GetCursorPos(&cursorX, &cursorY);
-    if (cursorX < 8)
+    if (cursorX < COLUMN_COUNT - 1)
         return KEY_ROLE_CHAR;
     else
         return keyRoles[cursorY];
@@ -1083,7 +1101,7 @@ void sub_80B6998(struct Sprite *sprite)
     if (sprite->animEnded)
         StartSpriteAnim(sprite, 0);
     sprite->invisible = (sprite->data4 & 0xFF);
-    if (sprite->data0 == 8)
+    if (sprite->data0 == COLUMN_COUNT - 1)
         sprite->invisible = TRUE;
     if (sprite->invisible || (sprite->data4 & 0xFF00) == 0
      || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
@@ -1931,6 +1949,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 
 static const u8 sKeyboardCharacters[][4][20] =
 {
+#if ENGLISH
     {
         _(" A B C  D E F    . "),
         _(" G H I  J K L    , "),
@@ -1943,6 +1962,20 @@ static const u8 sKeyboardCharacters[][4][20] =
         _(" m n o  p q r s    "),
         _(" t u v  w x y z    "),
     },
+#elif GERMAN
+    {
+        _("  ABCD   EFGH   .  "),
+        _("  IJKL   MNOP   ,  "),
+        _("  QRST   UVWX      "),
+        _("  YZ     ÄÖÜ       "),
+    },
+    {
+        _("  abcd   efgh   .  "),
+        _("  ijkl   mnop   ,  "),
+        _("  qrst   uvwx      "),
+        _("  yz     äöü       "),
+    },
+#endif
     {
         _(" 0  1  2  3  4     "),
         _(" 5  6  7  8  9     "),

@@ -1,7 +1,8 @@
+
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "pokedex.h"
-#include "asm.h"
+#include "battle.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -11,7 +12,11 @@
 #include "menu.h"
 #include "menu_cursor.h"
 #include "palette.h"
+#include "pokedex_area_screen.h"
+#include "pokedex_cry_screen.h"
+#include "pokemon.h"
 #include "rng.h"
+#include "rom4.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -19,6 +24,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 #define NATIONAL_DEX_COUNT 386
 
@@ -156,36 +162,28 @@ extern const u8 gUnknown_08E96ACC[];
 extern const u8 gUnknown_08E96B58[];
 extern const u16 gPokedexMenu_Pal[];
 extern const u16 gPokedexMenu2_Pal[];
-extern const struct SpriteSheet gTrainerFrontPicTable[];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct PokedexEntry gPokedexEntries[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 gPokedexMenuSearch_Gfx[];
 extern const u8 gUnknown_08E96D2C[];
 extern const u16 gPokedexMenuSearch_Pal[];
 extern const u8 gTypeNames[][7];
 extern const u8 gPokedexMenu2_Gfx[];
 
-extern u16 NationalPokedexNumToSpecies(u16);
-extern void ShowPokedexAreaScreen(u16 species, u8 *string);
-extern void sub_814AD7C(u8, u8);
-extern void sub_800D74C();
-extern const u16 *species_and_otid_get_pal(u16, u32, u32);
-extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
-extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-extern void remove_some_task(void);
-extern u8 sub_8091E3C(void);
-extern void DisableNationalPokedex(void);
-extern void sub_805469C(void);
-extern u16 HoennToNationalOrder(u16);
-extern u16 NationalToHoennOrder(u16);
+static u8 sub_8091E3C(void);
 
 static const u16 sPokedexSearchPalette[] = INCBIN_U16("graphics/pokedex/search.gbapal");
 static const u16 sNationalPokedexPalette[] = INCBIN_U16("graphics/pokedex/national.gbapal");
 const u8 gEmptySpacce_839F7FC[0xA4] = {0};
 static const u8 gUnknown_0839F8A0[] = INCBIN_U8("graphics/pokedex/pokedex_cry_layout.bin.lz");
 static const u8 gUnknown_0839F988[] = INCBIN_U8("graphics/pokedex/pokedex_size_layout.bin.lz");
+#if ENGLISH
 static const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz");
+#elif GERMAN
+extern const u8 gUnknown_0839FA7C[];
+#endif
+
 #include "data/pokedex_orders.h"
 static const struct OamData gOamData_83A0404 =
 {
@@ -500,7 +498,7 @@ static const struct SpriteTemplate gSpriteTemplate_83A05B4 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_808F168,
 };
-static const struct SpriteSheet gUnknown_083A05CC[] =
+static const struct CompressedSpriteSheet gUnknown_083A05CC[] =
 {
     {gPokedexMenu2_Gfx, 0x1F00, 0x1000},
     {NULL, 0, 0},
@@ -514,8 +512,11 @@ static const u8 gUnknown_083A05EC[] = {2, 4, 8, 16, 32};
 static const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
 const u8 gEmptySpacce_83A05F6[] = {0, 0};  // Padding, maybe?
 static const u8 gUnknown_083A05F8[] = _("");
-// TODO: include German entries
+#if ENGLISH
 #include "data/pokedex_entries_en.h"
+#elif GERMAN
+#include "data/pokedex_entries_de.h"
+#endif
 static const u16 gUnknown_083B4EC4[16] = {0};
 static const u8 *const sMonFootprintTable[] =
 {
@@ -1296,6 +1297,7 @@ static void sub_8092D78(u8);
 static u8 sub_8092E10(u8, u8);
 static void sub_8092EB0(u8);
 static void sub_809308C(u8);
+
 
 void ResetPokedex(void)
 {
@@ -2906,6 +2908,12 @@ static u8 sub_808F284(struct PokedexListItem *item, u8 b)
     return b;
 }
 
+#if ENGLISH
+#define CATEGORY_LEFT (11)
+#elif GERMAN
+#define CATEGORY_LEFT (16)
+#endif
+
 static void Task_InitPageScreenMultistep(u8 taskId)
 {
     switch (gMain.state)
@@ -2952,12 +2960,12 @@ static void Task_InitPageScreenMultistep(u8 taskId)
         else
             sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
         sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
-        MenuPrint(gDexText_UnknownPoke, 11, 5);
+        MenuPrint(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
         if (gUnknown_0202FFBC->owned)
         {
-            sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, 11, 5);
+            sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, CATEGORY_LEFT, 5);
             sub_8091458(gPokedexEntries[gUnknown_0202FFBC->dexNum].height, 16, 7);
             sub_8091564(gPokedexEntries[gUnknown_0202FFBC->dexNum].weight, 16, 9);
             MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
@@ -3844,10 +3852,10 @@ static void sub_8090750(u8 taskId)
         else
             sub_8091154(dexNum, 13, 3);
         sub_80911C8(dexNum, 16, 3);
-        MenuPrint(gDexText_UnknownPoke, 11, 5);
+        MenuPrint(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
         MenuPrint(gDexText_UnknownHeight, 16, 7);
         MenuPrint(gDexText_UnknownWeight, 16, 9);
-        sub_8091304(gPokedexEntries[dexNum].categoryName, 11, 5);
+        sub_8091304(gPokedexEntries[dexNum].categoryName, CATEGORY_LEFT, 5);
         sub_8091458(gPokedexEntries[dexNum].height, 16, 7);
         sub_8091564(gPokedexEntries[dexNum].weight, 16, 9);
         MenuPrint(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
@@ -3927,7 +3935,7 @@ static void sub_8090B8C(u8 taskId)
         u32 otId;
         u32 personality;
         u8 paletteNum;
-        const u16 *palette;
+        const u8 *lzPaletteData;
 
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
         CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
@@ -3936,8 +3944,8 @@ static void sub_8090B8C(u8 taskId)
         otId = ((u16)gTasks[taskId].data[13] << 16) | (u16)gTasks[taskId].data[12];
         personality = ((u16)gTasks[taskId].data[15] << 16) | (u16)gTasks[taskId].data[14];
         paletteNum = gSprites[gTasks[taskId].data[3]].oam.paletteNum;
-        palette = species_and_otid_get_pal(species, otId, personality);
-        LoadCompressedPalette(palette, 0x100 | paletteNum * 16, 32);
+        lzPaletteData = species_and_otid_get_pal(species, otId, personality);
+        LoadCompressedPalette(lzPaletteData, 0x100 | paletteNum * 16, 32);
         DestroyTask(taskId);
     }
 }
@@ -4253,6 +4261,7 @@ static void sub_8091304(const u8 *name, u8 left, u8 top)
     sub_8072B80(str, left, top, gDexText_UnknownPoke);
 }
 
+#if ENGLISH
 void unref_sub_80913A4(u16 a, u8 left, u8 top)
 {
     u8 str[6];
@@ -4289,6 +4298,51 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
     str[5] = EOS;
     MenuPrint(str, left, top);
 }
+#elif GERMAN
+void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
+    u8 buffer[8];
+    int offset;
+    u8 result;
+
+    u8 r6 = 0;
+    offset = 0;
+
+
+    buffer[r6++] = 0xFC;
+    buffer[r6++] = 0x13;
+    r6++;
+
+    result = (arg0 / 1000);
+    if (result == 0)
+    {
+        offset = 6;
+    }
+    else
+    {
+        buffer[r6++] = result + CHAR_0;
+    }
+
+
+    result = (arg0 % 1000) / 100;
+
+    if (result == 0 && offset != 0)
+    {
+        offset += 6;
+    }
+    else
+    {
+        buffer[r6++] = result + CHAR_0;
+    }
+
+    buffer[r6++] = (((arg0 % 1000) % 100) / 10) + CHAR_0;
+    buffer[r6++] = CHAR_COMMA;
+    buffer[r6++] = (((arg0 % 1000) % 100) % 10) + CHAR_0;
+
+    buffer[r6++] = EOS;
+    buffer[2] = offset;
+    MenuPrint(buffer, left, top);
+}
+#endif
 
 #ifdef UNITS_IMPERIAL
 #define CHAR_PRIME (0xB4)
@@ -4670,9 +4724,15 @@ int sub_8091AF8(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
     return resultsCount;
 }
 
+#if ENGLISH
+#define SUB_8091E20_WIDTH (208)
+#elif GERMAN
+#define SUB_8091E20_WIDTH (216)
+#endif
+
 void sub_8091E20(const u8 *str)
 {
-    sub_8072AB0(str, 9, 120, 208, 32, 1);
+    sub_8072AB0(str, 9, 120, SUB_8091E20_WIDTH, 32, 1);
 }
 
 u8 sub_8091E3C(void)

@@ -16,17 +16,15 @@
 #include "text.h"
 
 extern u8 gPlayerPartyCount;
-extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
-extern struct Pokemon gEnemyParty[6];
 
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
 extern u32 dword_2017100[];
 extern u16 gBattleTypeFlags;
 extern struct BattlePokemon gBattleMons[4];
-extern u16 gUnknown_02024BE6;
-extern u8 byte_2024C06;
+extern u16 gCurrentMove;
+extern u8 gLastUsedAbility;
 extern u8 gCritMultiplier;
 extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -36,20 +34,13 @@ extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u32 gBitTable[];
-extern struct BaseStats gBaseStats[];
 extern struct SpriteTemplate gSpriteTemplate_8208288[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
-// extern u8 gSecretBaseTrainerClasses[];
 extern u8 gUnknown_08208238[];
 extern u8 gUnknown_0820823C[];
 extern u8 gStatStageRatios[];
 extern u8 gHoldEffectToType[][2];
-
-extern u8 battle_side_get_owner(u8);
-extern u8 sub_8018324(u8, u8, u8, u8, u16);
-extern u8 sub_803C348(u8);
 
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                            \
 {                                                                            \
@@ -116,7 +107,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             && gTrainerBattleOpponent != 1024
             && FlagGet(BADGE01_GET)
-            && !battle_side_get_owner(a7))
+            && !GetBankSide(a7))
             attack = (110 * attack) / 100;
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
@@ -124,7 +115,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                 && gTrainerBattleOpponent != 1024
                 && FlagGet(BADGE05_GET)
-                && !battle_side_get_owner(a8))
+                && !GetBankSide(a8))
                 defense = (110 * defense) / 100;
 
             if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
@@ -132,7 +123,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     && gTrainerBattleOpponent != 1024
                     && FlagGet(BADGE07_GET)
-                    && !battle_side_get_owner(a7))
+                    && !GetBankSide(a7))
                     spAttack = (110 * spAttack) / 100;
 
                 if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
@@ -140,7 +131,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         && gTrainerBattleOpponent != 1024
                         && FlagGet(BADGE07_GET)
-                        && !battle_side_get_owner(a8))
+                        && !GetBankSide(a8))
                         spDefense = (110 * spDefense) / 100;
                 }
             }
@@ -180,17 +171,17 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
-    if (attacker->ability == ABILITY_PLUS && sub_8018324(0xE, 0, ABILITY_MINUS, 0, 0))
+    if (attacker->ability == ABILITY_PLUS && AbilityBattleEffects(0xE, 0, ABILITY_MINUS, 0, 0))
         spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_MINUS && sub_8018324(0xE, 0, ABILITY_PLUS, 0, 0))
+    if (attacker->ability == ABILITY_MINUS && AbilityBattleEffects(0xE, 0, ABILITY_PLUS, 0, 0))
         spAttack = (150 * spAttack) / 100;
     if (attacker->ability == ABILITY_GUTS && attacker->status1)
         attack = (150 * attack) / 100;
     if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
         defense = (150 * defense) / 100;
-    if (type == TYPE_ELECTRIC && sub_8018324(0xE, 0, 0, 0xFD, 0))
+    if (type == TYPE_ELECTRIC && AbilityBattleEffects(0xE, 0, 0, 0xFD, 0))
         gBattleMovePower /= 2;
-    if (type == TYPE_FIRE && sub_8018324(0xE, 0, 0, 0xFE, 0))
+    if (type == TYPE_FIRE && AbilityBattleEffects(0xE, 0, 0, 0xFE, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_GRASS && attacker->ability == ABILITY_OVERGROW && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
@@ -200,7 +191,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (gBattleMoves[gUnknown_02024BE6].effect == 7)
+    if (gBattleMoves[gCurrentMove].effect == 7)
         defense /= 2;
 
     if (type < TYPE_MYSTERY) // is physical?
@@ -234,13 +225,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 1) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMons(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMons(2) == 2)
             damage /= 2;
 
         // moves always do at least 1 damage.
@@ -279,17 +270,17 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 2) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMons(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMons(2) == 2)
             damage /= 2;
 
         // are effects of weather negated with cloud nine or air lock?
-        if (!sub_8018324(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !sub_8018324(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
+        if (!AbilityBattleEffects(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
         {
             // rain?
             if (gBattleWeather & 1)
@@ -301,7 +292,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
 
             // does lack of sun half solar beam damage?
-            if ((gBattleWeather & 0x9F) && gUnknown_02024BE6 == 76)
+            if ((gBattleWeather & 0x9F) && gCurrentMove == 76)
                 damage /= 2;
 
             // sunny?
@@ -498,7 +489,7 @@ _0803BB5E:\n\
     cmp r0, 0\n\
     beq _0803BB98\n\
     ldr r0, [sp, 0x10]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0803BB98\n\
@@ -531,7 +522,7 @@ _0803BB98:\n\
     cmp r0, 0\n\
     beq _0803BBE2\n\
     adds r0, r4, 0\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0803BBE2\n\
@@ -566,7 +557,7 @@ _0803BBE2:\n\
     cmp r0, 0\n\
     beq _0803BC2E\n\
     ldr r0, [sp, 0x10]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0803BC2E\n\
@@ -602,7 +593,7 @@ _0803BC2E:\n\
     cmp r0, 0\n\
     beq _0803BC78\n\
     adds r0, r4, 0\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0803BC78\n\
@@ -820,7 +811,7 @@ _0803BDFC:\n\
     movs r1, 0\n\
     movs r2, 0x3A\n\
     movs r3, 0\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _0803BE2A\n\
@@ -844,7 +835,7 @@ _0803BE2A:\n\
     movs r1, 0\n\
     movs r2, 0x39\n\
     movs r3, 0\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _0803BE5C\n\
@@ -898,7 +889,7 @@ _0803BE9A:\n\
     movs r1, 0\n\
     movs r2, 0\n\
     movs r3, 0xFD\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _0803BEBE\n\
@@ -916,7 +907,7 @@ _0803BEBE:\n\
     movs r1, 0\n\
     movs r2, 0\n\
     movs r3, 0xFE\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _0803BEE2\n\
@@ -1018,7 +1009,7 @@ _0803BF72:\n\
     strh r0, [r4]\n\
 _0803BFA2:\n\
     ldr r2, _0803BFEC @ =gBattleMoves\n\
-    ldr r0, _0803BFF0 @ =gUnknown_02024BE6\n\
+    ldr r0, _0803BFF0 @ =gCurrentMove\n\
     ldrh r1, [r0]\n\
     lsls r0, r1, 1\n\
     adds r0, r1\n\
@@ -1053,7 +1044,7 @@ _0803BFE0: .4byte 0xfffffe69\n\
 _0803BFE4: .4byte 0x00000175\n\
 _0803BFE8: .4byte gBattleMovePower\n\
 _0803BFEC: .4byte gBattleMoves\n\
-_0803BFF0: .4byte gUnknown_02024BE6\n\
+_0803BFF0: .4byte gCurrentMove\n\
 _0803BFF4: .4byte gCritMultiplier\n\
 _0803BFF8: .4byte gStatStageRatios\n\
 _0803BFFC:\n\
@@ -1159,7 +1150,7 @@ _0803C0A8:\n\
     cmp r1, 0\n\
     beq _0803C0E4\n\
     movs r0, 0x2\n\
-    bl sub_803C348\n\
+    bl CountAliveMons\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x2\n\
@@ -1193,7 +1184,7 @@ _0803C0EA:\n\
     cmp r0, 0x8\n\
     bne _0803C11C\n\
     movs r0, 0x2\n\
-    bl sub_803C348\n\
+    bl CountAliveMons\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x2\n\
@@ -1319,7 +1310,7 @@ _0803C1D6:\n\
     cmp r1, 0\n\
     beq _0803C224\n\
     movs r0, 0x2\n\
-    bl sub_803C348\n\
+    bl CountAliveMons\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x2\n\
@@ -1353,7 +1344,7 @@ _0803C22A:\n\
     cmp r0, 0x8\n\
     bne _0803C25C\n\
     movs r0, 0x2\n\
-    bl sub_803C348\n\
+    bl CountAliveMons\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x2\n\
@@ -1368,7 +1359,7 @@ _0803C25C:\n\
     movs r1, 0\n\
     movs r2, 0xD\n\
     movs r3, 0\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0\n\
@@ -1378,7 +1369,7 @@ _0803C25C:\n\
     movs r1, 0\n\
     movs r2, 0x4D\n\
     movs r3, 0\n\
-    bl sub_8018324\n\
+    bl AbilityBattleEffects\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0803C30C\n\
@@ -1416,7 +1407,7 @@ _0803C2C4:\n\
     ands r0, r1\n\
     cmp r0, 0\n\
     beq _0803C2DC\n\
-    ldr r0, _0803C2F4 @ =gUnknown_02024BE6\n\
+    ldr r0, _0803C2F4 @ =gCurrentMove\n\
     ldrh r0, [r0]\n\
     cmp r0, 0x4C\n\
     bne _0803C2DC\n\
@@ -1436,7 +1427,7 @@ _0803C2DC:\n\
     beq _0803C306\n\
     b _0803C30C\n\
     .align 2, 0\n\
-_0803C2F4: .4byte gUnknown_02024BE6\n\
+_0803C2F4: .4byte gCurrentMove\n\
 _0803C2F8:\n\
     lsls r0, r5, 4\n\
     subs r0, r5\n\

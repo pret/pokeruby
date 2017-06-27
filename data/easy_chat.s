@@ -12,6 +12,7 @@ gMysteryEventPhrase:: @ 83DB678
 
 	.align 1
 gBerryMasterWifePhrases:: @ 83DB680
+.ifdef ENGLISH
 	ec_word GREAT
 	ec_word BATTLE
 
@@ -26,6 +27,22 @@ gBerryMasterWifePhrases:: @ 83DB680
 
 	ec_word SUPER
 	ec_word HUSTLE
+.else
+	ec_word GREAT
+	ec_word FIGHT
+
+	ec_word CONTEST
+	ec_word CHALLENGE
+
+	ec_pokemon1 LATIAS
+	ec_word OVERWHELMING
+
+	ec_pokemon1 LATIOS
+	ec_word COOL
+
+	ec_word SUPER
+	.2byte 0xFFFF
+.endif
 
 gUnknown_083DB694:: @ 83DB694
 	.4byte 0x02001000
@@ -96,17 +113,31 @@ gUnknown_083DB7C0:: @ 83DB7C0
 
 	.align 2
 gUnknown_083DB7DC:: @ 83DB7DC
+.ifdef ENGLISH
 	.4byte 0x0200ac80
 	.4byte 0x0200acc9
 	.4byte 0x0200ad12
 	.4byte 0x0200ad5b
+.else
+	.4byte 0x0200AFAC
+	.4byte 0x0200AFF5
+	.4byte 0x0200B03E
+	.4byte 0x0200B087
+.endif
 
 	.align 1
 gUnknown_083DB7EC:: @ 83DB7EC
+.ifdef ENGLISH
 	ec_word I_AM
 	ec_word A
 	ec_word POKEMON
 	ec_word GREAT
+.else
+	ec_word I_AM
+	ec_word BIG
+	ec_word IN
+	ec_word POKEMON
+.endif
 
 	.align 1
 gUnknown_083DB7F4:: @ 83DB7F4
@@ -182,7 +213,11 @@ gSpriteAnim_83DBC1C:: @ 83DBC1C
 
 	.align 2
 gSpriteAnim_83DBC24:: @ 83DBC24
+.ifdef ENGLISH
 	obj_image_anim_frame 8, 5
+.else
+	obj_image_anim_frame 0, 5
+.endif
 	obj_image_anim_end
 
 	.align 2
@@ -222,7 +257,11 @@ gSpriteAnim_83DBC5C:: @ 83DBC5C
 
 	.align 2
 gSpriteAnim_83DBC64:: @ 83DBC64
+.ifdef ENGLISH
 	obj_image_anim_frame 40, 5
+.else
+	obj_image_anim_frame 16, 5
+.endif
 	obj_image_anim_end
 
 	.align 2
@@ -413,12 +452,33 @@ gUnknown_083DBE40:: @ 83DBE40
 gUnknown_083DBEA8:: @ 83DBEA8
 	.string "{CLEAR_TO 88}$"
 
+.ifdef GERMAN
+unk_83E7EB0:
+	.string "{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}"
+unk_83E7EC5:
+	.string "mehr$"
+unk_83E7ECA::
+	.string "{UNKNOWN_14 8} G H I  J K L      $"
+unk_83E7EE1:
+	.string "{UNKNOWN_14 8} M N O  P Q R S    $"
+unk_83E7EF8:
+	.string "{UNKNOWN_14 8} T U V  W X Y Z    $"
+.endif
+
 	.align 2
 gUnknown_083DBEAC:: @ 83DBEAC
+.ifdef ENGLISH
 	.string "{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}others$", 0x20
 	.string "{UNKNOWN_14 8} G H I  J K L      $", 0x20
 	.string "{UNKNOWN_14 8} M N O  P Q R S    $", 0x20
 	.string "{UNKNOWN_14 8} T U V  W X Y Z    $", 0x20
+.else
+	.4byte unk_83E7EB0
+	.4byte unk_83E7ECA
+	.4byte unk_83E7EE1
+	.4byte unk_83E7EF8
+	.4byte unk_83E7EC5
+.endif
 
 @ 83DBF2C
 	.include "data/text/easy_chat/group_words.inc"

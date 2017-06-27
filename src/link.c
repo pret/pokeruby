@@ -1,7 +1,9 @@
 #include "global.h"
 #include "link.h"
-#include "asm.h"
 #include "battle.h"
+#include "berry.h"
+#include "berry_blender.h"
+#include "hall_of_fame.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -75,6 +77,7 @@ static void sub_80083E0(void);
 static void sub_8008454(void);
 static void sub_80084C8(void);
 static void sub_80084F4(void);
+
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);
@@ -175,13 +178,13 @@ static const u8 sDebugMessages[7][12] =
 
 static const u8 sColorCodes[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}");
 
-static const u32 sBlockRequestLookupTable[5 * 2] =
+const struct BlockRequest sBlockRequestLookupTable[5] =
 {
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 100,
-    (u32)gBlockSendBuffer, 220,
-    (u32)gBlockSendBuffer,  40,
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 100},
+    {gBlockSendBuffer, 220},
+    {gBlockSendBuffer, 40},
 };
 
 static const u8 sTestString[] = _("テストな");
@@ -557,7 +560,7 @@ static void ProcessRecvCmds(u8 unusedParam)
             break;
         case 0xCCCC:
 #if defined(ENGLISH)
-            SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+            SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
 #elif defined(GERMAN)
             if (deUnkValue2 == 1)
             {
@@ -566,7 +569,7 @@ static void ProcessRecvCmds(u8 unusedParam)
             }
             else if (deUnkValue2 == 2 || deUnkValue2 == 3)
             {
-                SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+                SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
 
                 if (deUnkValue2 == 2)
                     deUnkValue2 = 1;
@@ -575,7 +578,7 @@ static void ProcessRecvCmds(u8 unusedParam)
             }
             else
             {
-                SendBlock(0, (void *)(sBlockRequestLookupTable)[gRecvCmds[1][i] * 2], (sBlockRequestLookupTable + 1)[gRecvCmds[1][i] * 2]);
+                SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
             }
 #endif
             break;

@@ -1,11 +1,13 @@
 #include "global.h"
 #include "berry_tag_screen.h"
-#include "asm.h"
 #include "berry.h"
 #include "decompress.h"
+#include "field_map_obj.h"
+#include "item_menu.h"
 #include "items.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
 #include "rom4.h"
 #include "songs.h"
@@ -36,8 +38,8 @@ extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gScriptItemId;
 extern u16 gUnknown_030041B4;
 
-extern const struct SpriteSheet gUnknown_083C1F74;
-extern const struct SpritePalette gUnknown_083C1F7C;
+extern const struct CompressedSpriteSheet gUnknown_083C1F74;
+extern const struct CompressedSpritePalette gUnknown_083C1F7C;
 
 extern u8 *gUnknown_0841192C[];
 

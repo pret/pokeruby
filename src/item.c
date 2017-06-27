@@ -1,9 +1,9 @@
 #include "global.h"
 #include "item.h"
+#include "items.h"
+#include "berry.h"
 #include "string_util.h"
 #include "strings.h"
-
-extern struct Berry *GetBerryInfo(u8 berry);
 
 extern u8 gUnknown_02038560;
 extern struct Item gItems[];
@@ -29,9 +29,9 @@ static void CompactPCItems(void);
 
 void CopyItemName(u16 itemId, u8 *string)
 {
-    if (itemId == 0xAF)
+    if (itemId == ITEM_ENIGMA_BERRY)
     {
-        StringCopy(string, GetBerryInfo(0x2B)->name);
+        StringCopy(string, GetBerryInfo(0x2B)->name); // berry 0x2b = enigma berry
         StringAppend(string, gOtherText_Berry2);
     }
     else

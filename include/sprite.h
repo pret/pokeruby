@@ -5,8 +5,15 @@
 
 struct SpriteSheet
 {
-    const u8 *data;
+    const u8 *data;  // Raw uncompressed pixel data
     u16 size;
+    u16 tag;
+};
+
+struct CompressedSpriteSheet
+{
+    const u8 *data;  // LZ77 compressed pixel data
+    u16 size;        // Uncompressed size of pixel data
     u16 tag;
 };
 
@@ -20,7 +27,13 @@ struct SpriteFrameImage
 
 struct SpritePalette
 {
-    const u16 *data;
+    const u16 *data;  // Raw uncompressed palette data
+    u16 tag;
+};
+
+struct CompressedSpritePalette
+{
+    const u8 *data;  // LZ77 compressed palette data
     u16 tag;
 };
 
@@ -60,6 +73,8 @@ union AnimCmd
 
 #define ANIMCMD_FRAME(...) \
     {.frame = {__VA_ARGS__}}
+#define ANIMCMD_LOOP(_count) \
+    {.loop = {.type = -3, .count = _count}}
 #define ANIMCMD_JUMP(_target) \
     {.jump = {.type = -2, .target = _target}}
 #define ANIMCMD_END \
@@ -99,8 +114,16 @@ union AffineAnimCmd
 
 #define AFFINEANIMCMD_FRAME(_xScale, _yScale, _rotation, _duration) \
     {.frame = {.xScale = _xScale, .yScale = _yScale, .rotation = _rotation, .duration = _duration}}
+#define AFFINEANIMCMD_LOOP(_count) \
+    {.loop = {.type = AFFINEANIMCMDTYPE_LOOP, .count = _count}}
+#define AFFINEANIMCMD_JUMP(_target) \
+    {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 #define AFFINEANIMCMD_END \
     {.type = AFFINEANIMCMDTYPE_END}
+#define AFFINEANIMCMD_LOOP(_count) \
+    {.loop = {.type = AFFINEANIMCMDTYPE_LOOP, .count = _count}}
+#define AFFINEANIMCMD_JUMP(_target) \
+    {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 
 struct AffineAnimState
 {

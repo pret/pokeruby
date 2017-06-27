@@ -1,5 +1,4 @@
 #include "global.h"
-#include "asm.h"
 #include "data2.h"
 #include "script.h"
 #include "trig.h"
@@ -21,10 +20,13 @@
 #include "metatile_behavior.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "field_fadetransition.h"
+#include "fieldmap.h"
+#include "field_map_obj.h"
+#include "util.h"
+#include "field_effect_helpers.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
-
-#define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
 
 const u32 gSpriteImage_839DC14[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 const u16 gBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
@@ -653,7 +655,8 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
-    const struct SpritePalette *spritePalette;
+    const struct CompressedSpritePalette *spritePalette;
+
     HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gUnknown_081FAF4C[3] /* this is actually u8* or something, pointing to ewram */, gUnknown_081FAF4C[3], species, g);
     spritePalette = sub_80409C8(species, d, g);
     LoadCompressedObjectPalette(spritePalette);

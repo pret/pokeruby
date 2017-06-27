@@ -1,5 +1,5 @@
 #include "global.h"
-#include "asm.h"
+#include "pokedex_cry_screen.h"
 #include "palette.h"
 #include "sprite.h"
 

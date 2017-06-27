@@ -2,6 +2,7 @@
 #define GUARD_FIELD_EFFECT_H
 
 #include "sprite.h"
+#include "task.h"
 
 enum FieldEffectScriptIdx
 {
@@ -71,14 +72,12 @@ enum FieldEffectScriptIdx
     FLDEFF_USE_TELEPORT
 };
 
-extern const struct SpritePalette gTrainerFrontPicPaletteTable[2];
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[2];
 extern const struct SpritePalette gUnknown_0839F114;
-extern const struct SpriteSheet gTrainerFrontPicTable[2];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[2];
 extern const struct SpriteTemplate gSpriteTemplate_839F128;
 extern const struct OamData gOamData_839F0F4;
 extern struct SpriteTemplate gUnknown_02024E8C;
-
-extern const struct SpritePalette *sub_80409C8(u16, u32, u32);
 
 extern u8 gLastFieldPokeMenuOpened;
 
@@ -234,5 +233,14 @@ void sub_8089414(struct Task *);
 void sub_808948C(struct Task *);
 void sub_80894C4(struct Task *);
 void fishE(struct Task *);
+
+u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer);
+void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest);
+u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority);
+u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
+void FreeResourcesAndDestroySprite(struct Sprite *sprite);
+void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
+void sub_80878A8(void);
+void sub_8087BA8(void);
 
 #endif // GUARD_FIELD_EFFECT_H

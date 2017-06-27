@@ -1,4 +1,5 @@
 #include "global.h"
+#include "metatile_behavior.h"
 #include "metatile_behaviors.h"
 
 #define TILE_ATTRIBUTES(three, two, one) (((one) ? 1 : 0) | ((two) ? 2 : 0) | ((three) ? 4 : 0))
@@ -246,8 +247,6 @@ static const u8 sTileBitAttributes[] =
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE)
 };
-
-bool8 MetatileBehavior_IsWaterfall(u8);
 
 // only used as default case for checking jump landing in field_ground_effect.
 bool8 MetatileBehavior_IsATile(u8 var)

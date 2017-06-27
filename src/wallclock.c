@@ -1,6 +1,5 @@
 #include "global.h"
 #include "wallclock.h"
-#include "asm.h"
 #include "decompress.h"
 #include "main.h"
 #include "menu.h"
@@ -11,12 +10,12 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
-extern const struct MenuAction gMenuYesNoItems[];
 extern u16 gMiscClockMale_Pal[];
 extern u16 gMiscClockFemale_Pal[];
 
@@ -25,7 +24,7 @@ extern u16 gMiscClockFemale_Pal[];
 //--------------------------------------------------
 
 static const u8 ClockGfx_Misc[] = INCBIN_U8("graphics/misc/clock_misc.4bpp.lz");
-static const struct SpriteSheet gUnknown_083F7A90[] =
+static const struct CompressedSpriteSheet gUnknown_083F7A90[] =
 {
     {ClockGfx_Misc, 0x2000, 0x1000},
     {NULL},

@@ -1,6 +1,8 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
+#include "task.h"
+
 enum DecoId {
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
@@ -372,5 +374,6 @@ void sub_8100FB4(u8);
 void sub_810153C(u8);
 void sub_8101590(u8);
 void sub_8101848(u8);
+void DoPlayerPCDecoration(u8);
 
 #endif // GUARD_DECORATION_H

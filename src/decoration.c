@@ -1,5 +1,5 @@
 #include "global.h"
-#include "asm.h"
+#include "main.h"
 #include "map_object_constants.h"
 #include "rom4.h"
 #include "sound.h"
@@ -12,12 +12,14 @@
 #include "palette.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "field_fadetransition.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
 
+#if ENGLISH
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
     "for one.");
@@ -595,6 +597,9 @@ const u8 DecorDesc_REGISTEEL_DOLL[] = _(
     "A large doll.\n"
     "Place it on a mat\n"
     "or a desk.");
+#elif GERMAN
+#include "data/decoration/descriptions_de.h"
+#endif
 
 const u16 DecorGfx_SMALL_DESK[] = {
     0x87
@@ -1238,6 +1243,7 @@ const u16 DecorGfx_REGISTEEL_DOLL[] = {
     MAP_OBJ_GFX_BIG_REGISTEEL_DOLL
 };
 
+#if ENGLISH
 const struct Decoration gDecorations[] = {
     {DECOR_NONE,            _("SMALL DESK"),      DECORPERM_SOLID_FLOOR,  DECORSHAPE_1x1, DECORCAT_DESK,         0, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK},
     {DECOR_SMALL_DESK,      _("SMALL DESK"),      DECORPERM_SOLID_FLOOR,  DECORSHAPE_1x1, DECORCAT_DESK,      3000, DecorDesc_SMALL_DESK, DecorGfx_SMALL_DESK},
@@ -1361,6 +1367,9 @@ const struct Decoration gDecorations[] = {
     {DECOR_REGICE_DOLL,     _("REGICE DOLL"),      DECORPERM_SOLID_MAT,   DECORSHAPE_1x2, DECORCAT_DOLL,     10000, DecorDesc_REGICE_DOLL, DecorGfx_REGICE_DOLL},
     {DECOR_REGISTEEL_DOLL,  _("REGISTEEL DOLL"),   DECORPERM_SOLID_MAT,   DECORSHAPE_1x2, DECORCAT_DOLL,     10000, DecorDesc_REGISTEEL_DOLL, DecorGfx_REGISTEEL_DOLL}
 };
+#elif GERMAN
+#include "data/decoration/decorations.h"
+#endif
 
 const u8 *const gUnknown_083EC5E4[] = {
     SecretBaseText_Desk,
@@ -1783,7 +1792,14 @@ void sub_80FE7EC(u8 taskId)
     sub_80FEC94(taskId);
     sub_80FECB8(gUnknown_020388F6);
 
+#if ENGLISH
     MenuDrawTextWindow(15, 12, 29, 19);
+#elif GERMAN
+    if ((gUnknown_020388F2 + gUnknown_020388F4) != gUnknown_020388D5)
+    {
+        MenuDrawTextWindow(15, 12, 29, 19);
+    }
+#endif
 
     sub_80FECE0(gUnknown_020388F2 + gUnknown_020388F4);
     InitMenu(0, 1, 2, gUnknown_020388F3 + 1, gUnknown_020388F2, 13);
@@ -1940,10 +1956,56 @@ void sub_80FECB8(u8 decoCat)
     sub_80FE470(decoCat, 16, 1, 0xff);
 }
 
+#if ENGLISH
 void sub_80FECE0(u8 decoCat)
 {
     sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
+#elif GERMAN
+__attribute__((naked))
+void sub_80FECE0(u8 decoCat)
+{
+    asm(".syntax unified\n\
+    push {lr}\n\
+    sub sp, 0x8\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    ldr r0, _080FED18 @ =gUnknown_020388D5\n\
+    ldrb r0, [r0]\n\
+    cmp r2, r0\n\
+    beq _080FED24\n\
+    ldr r1, _080FED1C @ =gDecorations\n\
+    ldr r0, _080FED20 @ =gUnknown_020388D0\n\
+    ldr r0, [r0]\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 5\n\
+    adds r1, 0x18\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    movs r1, 0x30\n\
+    str r1, [sp]\n\
+    movs r1, 0x1\n\
+    str r1, [sp, 0x4]\n\
+    movs r1, 0x80\n\
+    movs r2, 0x68\n\
+    movs r3, 0x68\n\
+    bl sub_8072AB0\n\
+    movs r0, 0x1\n\
+    b _080FED26\n\
+    .align 2, 0\n\
+_080FED18: .4byte gUnknown_020388D5\n\
+_080FED1C: .4byte gDecorations\n\
+_080FED20: .4byte gUnknown_020388D0\n\
+_080FED24:\n\
+    movs r0, 0\n\
+_080FED26:\n\
+    add sp, 0x8\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 void sub_80FED1C(void)
 {
