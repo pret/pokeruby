@@ -10,6 +10,7 @@
 #include "main.h"
 #include "map_constants.h"
 #include "map_name_popup.h"
+#include "menu.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "pokemon.h"
@@ -835,7 +836,11 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].sbr_field_2, local1);
     str[0] = EOS;
 
+#if ENGLISH
     return StringAppend(dest, gOtherText_PlayersBase);
+#elif GERMAN
+    return de_sub_8073174(dest, gOtherText_PlayersBase);
+#endif
 }
 
 u8 *GetSecretBaseMapName(u8 *dest) {

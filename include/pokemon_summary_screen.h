@@ -3,7 +3,7 @@
 
 extern const u8 *const gNatureNames[];
 
-void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(u8), int);
+void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 void sub_809D9F0(struct Pokemon *party, u8, u8, void *, u32);
 void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 u8 sub_809FA30(void);

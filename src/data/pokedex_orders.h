@@ -1,3 +1,4 @@
+#if ENGLISH
 static const u16 gPokedexOrder_Alphabetical[] =
 {
     387,
@@ -117,7 +118,7 @@ static const u16 gPokedexOrder_Alphabetical[] =
     102,  // Exeggcute
     103,  // Exeggutor
     295,  // Exploud
-     83,  // Farfetch’d
+     83,  // Farfetch'd
      22,  // Fearow
     349,  // Feebas
     160,  // Feraligatr
@@ -412,6 +413,422 @@ static const u16 gPokedexOrder_Alphabetical[] =
     263,  // Zigzagoon
      41,  // Zubat
 };
+#elif GERMAN
+static const u16 gPokedexOrder_Alphabetical[] = {
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400,
+    401,
+    402,
+    403,
+    404,
+    405,
+    406,
+    407,
+    408,
+    409,
+    410,
+    411,
+    367, // Aalabyss
+    63, // Abra
+    359, // Absol
+    142, // Aerodactyl
+    93, // Alpollo
+    334, // Altaria
+    138, // Amonitas
+    139, // Amoroso
+    181, // Ampharos
+    347, // Anorith
+    134, // Aquana
+    24, // Arbok
+    168, // Ariados
+    59, // Arkani
+    144, // Arktos
+    348, // Armaldo
+    91, // Austos
+    184, // Azumarill
+    298, // Azurill
+    211, // Baldorfish
+    354, // Banette
+    349, // Barschwa
+    15, // Bibor
+    3, // Bisaflor
+    2, // Bisaknosp
+    1, // Bisasam
+    274, // Blanas
+    135, // Blitza
+    182, // Blubella
+    48, // Bluzuk
+    225, // Botogel
+    373, // Brutalanda
+    287, // Bummelz
+    322, // Camaub
+    323, // Camerupt
+    251, // Celebi
+    113, // Chaneira
+    222, // Corasonn
+    234, // Damhirplex
+    386, // Deoxys
+    248, // Despotar
+    50, // Digda
+    51, // Digdri
+    132, // Ditto
+    85, // Dodri
+    84, // Dodu
+    232, // Donphan
+    148, // Dragonir
+    149, // Dragoran
+    372, // Draschel
+    147, // Dratini
+    44, // Duflor
+    206, // Dummisel
+    239, // Elekid
+    125, // Elektek
+    152, // Endivie
+    300, // Eneco
+    301, // Enekoro
+    244, // Entei
+    54, // Enton
+    55, // Entoron
+    133, // Evoli
+    235, // Farbeagle
+    194, // Felino
+    155, // Feurigel
+    261, // Fiffyen
+    362, // Firnontor
+    136, // Flamara
+    79, // Flegmon
+    255, // Flemmli
+    174, // Fluffeluff
+    303, // Flunkifer
+    293, // Flurmel
+    351, // Formeo
+    205, // Forstellka
+    309, // Frizelbliz
+    58, // Fukano
+    78, // Gallopa
+    130, // Garados
+    252, // Geckarbor
+    283, // Gehweiher
+    94, // Gengar
+    75, // Georok
+    76, // Geowaz
+    264, // Geradaks
+    254, // Gewaldro
+    45, // Giflor
+    203, // Girafarig
+    4, // Glumanda
+    6, // Glurak
+    5, // Glutexo
+    42, // Golbat
+    118, // Goldini
+    119, // Golking
+    210, // Granbull
+    190, // Griffel
+    326, // Groink
+    383, // Groudon
+    282, // Guardevoir
+    21, // Habitak
+    297, // Hariyama
+    242, // Heiteira
+    250, // Ho-oh
+    163, // Hoothoot
+    187, // Hoppspross
+    13, // Hornliu
+    188, // Hubelupf
+    229, // Hundemon
+    228, // Hunduster
+    258, // Hydropi
+    97, // Hypno
+    22, // Ibitak
+    201, // Icognito
+    156, // Igelavar
+    169, // Iksbat
+    314, // Illumise
+    160, // Impergator
+    360, // Isso
+    385, // Jirachi
+    87, // Jugong
+    256, // Jungglut
+    86, // Jurob
+    140, // Kabuto
+    141, // Kabutops
+    64, // Kadabra
+    115, // Kangama
+    318, // Kanivanha
+    286, // Kapilz
+    237, // Kapoera
+    272, // Kappalores
+    158, // Karnimani
+    129, // Karpador
+    352, // Kecleon
+    221, // Keifel
+    106, // Kicklee
+    371, // Kindwurm
+    99, // Kingler
+    281, // Kirlia
+    74, // Kleinstein
+    328, // Knacklion
+    285, // Knilz
+    69, // Knofensa
+    105, // Knogga
+    40, // Knuddeluff
+    103, // Kokowei
+    14, // Kokuna
+    98, // Krabby
+    294, // Krakeelo
+    198, // Kramurx
+    295, // Krawumms
+    341, // Krebscorps
+    342, // Krebutack
+    238, // Kussilla
+    382, // Kyogre
+    80, // Lahmus
+    170, // Lampi
+    171, // Lanturn
+    131, // Lapras
+    246, // Larvitar
+    199, // Laschoking
+    380, // Latias
+    381, // Latios
+    146, // Lavados
+    166, // Ledian
+    165, // Ledyba
+    101, // Lektrobal
+    344, // Lepumentas
+    289, // Letarking
+    330, // Libelldra
+    370, // Liebiskus
+    345, // Liliep
+    257, // Lohgock
+    271, // Lombrero
+    153, // Lorblatt
+    270, // Loturzel
+    249, // Lugia
+    337, // Lunastein
+    66, // Machollo
+    68, // Machomei
+    240, // Magby
+    219, // Magcargo
+    126, // Magmar
+    262, // Magnayen
+    81, // Magnetilo
+    82, // Magneton
+    296, // Makuhita
+    226, // Mantax
+    183, // Marill
+    67, // Maschock
+    284, // Maskeregen
+    52, // Mauzi
+    308, // Meditalis
+    307, // Meditie
+    154, // Meganie
+    56, // Menki
+    376, // Metagross
+    375, // Metang
+    151, // Mew
+    150, // Mewtu
+    350, // Milotic
+    241, // Miltank
+    312, // Minun
+    185, // Mogelbaum
+    259, // Moorabbel
+    195, // Morlord
+    288, // Muntier
+    90, // Muschas
+    43, // Myrapla
+    197, // Nachtara
+    299, // Nasgnet
+    177, // Natu
+    92, // Nebulak
+    34, // Nidoking
+    31, // Nidoqueen
+    29, // Nidoranâ™€
+    32, // Nidoranâ™‚
+    30, // Nidorina
+    33, // Nidorino
+    290, // Nincada
+    291, // Ninjask
+    292, // Ninjatom
+    107, // Nockchan
+    164, // Noctuh
+    332, // Noktuska
+    224, // Octillery
+    49, // Omot
+    95, // Onix
+    102, // Owei
+    358, // Palimpalim
+    327, // Pandir
+    268, // Panekon
+    122, // Pantimos
+    227, // Panzaeron
+    267, // Papinella
+    189, // Papungha
+    46, // Paras
+    47, // Parasek
+    279, // Pelipper
+    366, // Perlu
+    231, // Phanpy
+    172, // Pichu
+    35, // Piepi
+    173, // Pii
+    25, // Pikachu
+    127, // Pinsir
+    36, // Pixi
+    311, // Plusle
+    77, // Ponita
+    83, // Porenta
+    137, // Porygon
+    233, // Porygon2
+    213, // Pottrott
+    196, // Psiana
+    269, // Pudox
+    39, // Pummeluff
+    247, // Pupitar
+    343, // Puppance
+    62, // Quappo
+    60, // Quapsel
+    61, // Quaputzi
+    186, // Quaxo
+    220, // Quiekel
+    324, // Qurtel
+    236, // Rabauz
+    26, // Raichu
+    243, // Raikou
+    57, // Rasaff
+    19, // Rattfratz
+    20, // Rattikarl
+    10, // Raupy
+    384, // Rayquaza
+    378, // Regice
+    377, // Regirock
+    379, // Registeel
+    143, // Relaxo
+    369, // Relicanth
+    223, // Remoraid
+    253, // Reptain
+    23, // Rettan
+    111, // Rihorn
+    112, // Rizeros
+    315, // Roselia
+    124, // Rossana
+    11, // Safcon
+    368, // Saganabyss
+    273, // Samurzel
+    28, // Sandamer
+    27, // Sandan
+    71, // Sarzenia
+    266, // Schaloko
+    212, // Scherox
+    7, // Schiggy
+    8, // Schillok
+    317, // Schlukwech
+    316, // Schluppuck
+    108, // Schlurp
+    339, // Schmerbe
+    218, // Schneckmag
+    361, // Schneppke
+    276, // Schwalbini
+    277, // Schwalboss
+    230, // Seedraking
+    364, // Seejong
+    117, // Seemon
+    363, // Seemops
+    116, // Seeper
+    335, // Sengo
+    353, // Shuppet
+    123, // Sichlor
+    65, // Simsala
+    214, // Skaraborn
+    207, // Skorgla
+    88, // Sleima
+    89, // Sleimok
+    12, // Smettbo
+    110, // Smogmog
+    109, // Smogon
+    215, // Sniebel
+    53, // Snobilikat
+    209, // Snubbull
+    338, // Sonnfel
+    192, // Sonnflora
+    191, // Sonnkern
+    325, // Spoink
+    208, // Stahlos
+    121, // Starmie
+    120, // Sterndu
+    306, // Stolloss
+    305, // Stollrak
+    304, // Stollunior
+    245, // Suicune
+    260, // Sumpex
+    114, // Tangela
+    374, // Tanhel
+    204, // Tannza
+    17, // Tauboga
+    18, // Tauboss
+    16, // Taubsi
+    128, // Tauros
+    216, // Teddiursa
+    275, // Tengulist
+    72, // Tentacha
+    73, // Tentoxa
+    175, // Togepi
+    176, // Togetic
+    319, // Tohaido
+    157, // Tornupto
+    104, // Tragosso
+    280, // Trasla
+    96, // Traumato
+    200, // Traunfugil
+    357, // Tropius
+    9, // Turtok
+    331, // Tuska
+    159, // Tyracroc
+    70, // Ultrigaria
+    217, // Ursaring
+    329, // Vibrava
+    336, // Vipitis
+    313, // Volbeat
+    310, // Voltenso
+    179, // Voltilamm
+    100, // Voltobal
+    38, // Vulnona
+    37, // Vulpix
+    180, // Waaty
+    333, // Wablu
+    320, // Wailmer
+    321, // Wailord
+    365, // Walraisa
+    265, // Waumpel
+    167, // Webarak
+    340, // Welsar
+    346, // Wielie
+    162, // Wiesenior
+    161, // Wiesor
+    278, // Wingull
+    202, // Woingenau
+    178, // Xatu
+    193, // Yanma
+    145, // Zapdos
+    263, // Zigzachs
+    302, // Zobiris
+    41, // Zubat
+    356, // Zwirrklop
+    355, // Zwirrlicht
+};
+#endif
+
 static const u16 gPokedexOrder_Weight[] =
 {
      92,  // Gastly
@@ -542,7 +959,7 @@ static const u16 gPokedexOrder_Weight[] =
     206,  // Dunsparce
     178,  // Xatu
     355,  // Duskull
-     83,  // Farfetch’d
+     83,  // Farfetch'd
     328,  // Trapinch
     118,  // Goldeen
     309,  // Electrike
@@ -956,7 +1373,7 @@ static const u16 gPokedexOrder_Height[] =
     363,  // Spheal
      54,  // Psyduck
     219,  // Magcargo
-     83,  // Farfetch’d
+     83,  // Farfetch'd
      41,  // Zubat
     137,  // Porygon
     161,  // Sentret

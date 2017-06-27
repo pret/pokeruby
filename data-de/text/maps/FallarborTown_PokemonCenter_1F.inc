@@ -1,0 +1,31 @@
+FallarborTown_PokemonCenter_1F_Text_1774D4:: @ 81774D4
+	.string "Oh, hallo.\n"
+	.string "Wer bist du?\p"
+	.string "Du heißt {PLAYER}{KUN}?\n"
+	.string "Ich sehe schon, du bist ein TRAINER.\p"
+	.string "Und das bedeutet, du nutzt das\n"
+	.string "POKéMON-Lagerungs-System, das ich\l"
+	.string "entwickelt habe.\p"
+	.string "Ich bin durch simple Deduktion zu\n"
+	.string "diesem Schluss gekommen.\p"
+	.string "Du hast mich angesprochen, weil du\n"
+	.string "mit diesem PC arbeiten willst.\p"
+	.string "Ach, ich habe mich gar nicht vorgestellt.\n"
+	.string "Ich bin LANETTE.\p"
+	.string "Ich bin ehrlich erfreut, dich kennen zu\n"
+	.string "lernen. Und ich freue mich, dass du das\l"
+	.string "Lagerungs-System benutzt.\p"
+	.string "Wenn du magst, besuche mich doch mal.\n"
+	.string "Ich wohne an der ROUTE 114.$"
+
+FallarborTown_PokemonCenter_1F_Text_17768C:: @ 817768C
+	.string "Ich frage mich, wie die POKéMON wohl\n"
+	.string "vor langer, langer Zeit aussahen.\p"
+	.string "Vielleicht kann mir der FOSSILMANIAC\n"
+	.string "am Ortsrand etwas dazu sagen.$"
+
+FallarborTown_PokemonCenter_1F_Text_1776F5:: @ 81776F5
+	.string "Auf den Feldern von LAUBWECHSELFELD\n"
+	.string "haben wir widerstandsfähige Bäume\p"
+	.string "gepflanzt, die auch in der Vulkanasche\n"
+	.string "gedeihen.$"

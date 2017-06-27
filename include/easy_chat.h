@@ -41,4 +41,8 @@ void sub_80EB890(u8);
 u8 sub_80EB8C0(void);
 u16 sub_80EB8EC(void);
 
+#if GERMAN
+u32 de_sub_80EB748(u32, u32);
+#endif
+
 #endif // GUARD_EASYCHAT_H

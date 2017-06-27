@@ -3,6 +3,7 @@
 
 	.section .rodata
 
+.ifndef GERMAN
 	.align 2
 ConditionUpDownPalette:
 	.incbin "graphics/misc/condition_up_down.gbapal"
@@ -10,6 +11,7 @@ ConditionUpDownPalette:
 	.align 2
 ConditionUpDownTiles:
 	.incbin "graphics/misc/condition_up_down.4bpp"
+.endif
 
 gUnknown_08406118:: @ 8406118
 	.4byte 22 @ MON_DATA_COOL
