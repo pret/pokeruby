@@ -6,6 +6,7 @@
 #include "task.h"
 #include "main.h"
 #include "vars.h"
+#include "bike.h"
 #include "item.h"
 #include "items.h"
 #include "event_data.h"
@@ -729,4 +730,49 @@ void sub_806A040(s16 x, s16 y)
 {
     MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);
     CurrentMapDrawMetatileAt(x, y);
+}
+
+void PerStepCallback_806A07C(u8 taskId)
+{
+    s16 x, y;
+    u16 behavior;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
+    if (data[4] != 0 && (--data[4]) == 0)
+    {
+        sub_806A040(data[5], data[6]);
+    }
+    if (data[7] != 0 && (--data[7]) == 0)
+    {
+        sub_806A040(data[8], data[9]);
+    }
+    if (MetatileBehavior_IsCrackedFloorHole(behavior))
+    {
+        VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
+    }
+    if ((x != data[2] || y != data[3]))
+    {
+        data[2] = x;
+        data[3] = y;
+        if (MetatileBehavior_IsCrackedFloor(behavior))
+        {
+            if (GetPlayerSpeed() != 4)
+            {
+                VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
+            }
+            if (data[4] == 0)
+            {
+                data[4] = 3;
+                data[5] = x;
+                data[6] = y;
+            }
+            else if (data[7] == 0)
+            {
+                data[7] = 3;
+                data[8] = x;
+                data[9] = y;
+            }
+        }
+    }
 }
