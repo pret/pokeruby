@@ -6,43 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8069CB8
-sub_8069CB8: @ 8069CB8
-	push {lr}
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r0, 16
-	ldr r2, _08069CE8 @ =0xfffd0000
-	adds r0, r2
-	lsrs r0, 16
-	cmp r0, 0xA
-	bhi _08069CF4
-	lsls r0, r1, 16
-	asrs r1, r0, 16
-	ldr r2, _08069CEC @ =0xfffa0000
-	adds r0, r2
-	lsrs r0, 16
-	cmp r0, 0xD
-	bhi _08069CF4
-	ldr r0, _08069CF0 @ =gUnknown_083763E4
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	cmp r0, 0
-	beq _08069CF4
-	movs r0, 0x1
-	b _08069CF6
-	.align 2, 0
-_08069CE8: .4byte 0xfffd0000
-_08069CEC: .4byte 0xfffa0000
-_08069CF0: .4byte gUnknown_083763E4
-_08069CF4:
-	movs r0, 0
-_08069CF6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8069CB8
-
 	thumb_func_start sub_8069CFC
 sub_8069CFC: @ 8069CFC
 	push {r4,r5,lr}
