@@ -615,3 +615,77 @@ void sub_8069D78(void)
         }
     }
 }
+
+void PerStepCallback_8069DD4(u8 taskId)
+{
+    s16 x, y;
+    u16 tileBehavior;
+    u16 *var;
+    s16 *data = gTasks[taskId].data;
+    switch (data[1])
+    {
+        case 0:
+            PlayerGetDestCoords(&x, &y);
+            data[2] = x;
+            data[3] = y;
+            data[1] = 1;
+            break;
+        case 1:
+            PlayerGetDestCoords(&x, &y);
+            if (x != data[2] || y != data[3])
+            {
+                data[2] = x;
+                data[3] = y;
+                tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+                var = GetVarPointer(VAR_ICE_STEP_COUNT);
+                if (MetatileBehavior_IsThinIce(tileBehavior) == TRUE)
+                {
+                    (*var)++;
+                    data[6] = 4;
+                    data[1] = 2;
+                    data[4] = x;
+                    data[5] = y;
+                }
+                else if (MetatileBehavior_IsCrackedIce(tileBehavior) == TRUE)
+                {
+                    *var = 0;
+                    data[6] = 4;
+                    data[1] = 3;
+                    data[4] = x;
+                    data[5] = y;
+                }
+            }
+            break;
+        case 2:
+            if (data[6] != 0)
+            {
+                data[6]--;
+            }
+            else
+            {
+                x = data[4];
+                y = data[5];
+                PlaySE(SE_RU_BARI);
+                MapGridSetMetatileIdAt(x, y, 0x20e);
+                CurrentMapDrawMetatileAt(x, y);
+                sub_8069CFC(x - 7, y - 7);
+                data[1] = 1;
+            }
+            break;
+        case 3:
+            if (data[6] != 0)
+            {
+                data[6]--;
+            }
+            else
+            {
+                x = data[4];
+                y = data[5];
+                PlaySE(SE_RU_GASYAN);
+                MapGridSetMetatileIdAt(x, y, 0x206);
+                CurrentMapDrawMetatileAt(x, y);
+                data[1] = 1;
+            }
+            break;
+    }
+}
