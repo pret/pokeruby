@@ -34,11 +34,11 @@ gUnknown_083D0300:: @ 83D0300
 	.byte  1, 15
 	.byte  1, 17
 
-gUnknown_083D0312:: @ 83D0312
-	.string "Bぼたんで　もどる$"
+gDebugText_BBack:: @ 83D0312
+	.string "Bぼたんで　もどる$" @ back
 
-gUnknown_083D031C:: @ 83D031C
-	.string "Aぼたんで　さいせい$"
+gDebugText_APlay:: @ 83D031C
+	.string "Aぼたんで　さいせい$" @ play
 
 gDebugText_Voice:: @ 83D0327
 	.string "VOICE‥‥‥‥$"
@@ -67,13 +67,13 @@ gDebugText_Chorus:: @ 83D036D
 gDebugText_Priority:: @ 83D0377
 	.string "PRIORITY‥$"
 
-gUnknown_083D0381:: @ 83D0381
+gDebugText_Playing:: @ 83D0381
 	.string "さいせいちゆう‥$" @ 再生中 (playing)
 
-gUnknown_083D038A:: @ 83D038A
+gDebugText_Reverse:: @ 83D038A
 	.string "はんてん‥‥‥‥$" @ 反転 (reverse)
 
-gUnknown_083D0393:: @ 83D0393
+gDebugText_Stereo:: @ 83D0393
 	.string "すてれお‥‥‥‥$" @ stereo
 
 	.align 2
