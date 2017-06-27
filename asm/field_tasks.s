@@ -6,58 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8069D78
-sub_8069D78: @ 8069D78
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r0, _08069DCC @ =gMapHeader
-	ldr r0, [r0]
-	ldr r1, [r0]
-	mov r9, r1
-	ldr r7, [r0, 0x4]
-	movs r5, 0
-	cmp r5, r9
-	bge _08069DC0
-_08069D90:
-	movs r4, 0
-	adds r0, r5, 0x1
-	mov r8, r0
-	cmp r4, r7
-	bge _08069DBA
-	lsls r6, r5, 16
-_08069D9C:
-	lsls r1, r4, 16
-	asrs r1, 16
-	asrs r0, r6, 16
-	bl sub_8069D34
-	cmp r0, 0x1
-	bne _08069DB4
-	adds r1, r4, 0x7
-	adds r0, r5, 0x7
-	ldr r2, _08069DD0 @ =0x0000020e
-	bl MapGridSetMetatileIdAt
-_08069DB4:
-	adds r4, 0x1
-	cmp r4, r7
-	blt _08069D9C
-_08069DBA:
-	mov r5, r8
-	cmp r5, r9
-	blt _08069D90
-_08069DC0:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08069DCC: .4byte gMapHeader
-_08069DD0: .4byte 0x0000020e
-	thumb_func_end sub_8069D78
-
 	thumb_func_start PerStepCallback_8069DD4
 PerStepCallback_8069DD4: @ 8069DD4
 	push {r4-r7,lr}
