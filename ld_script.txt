@@ -362,7 +362,6 @@ SECTIONS {
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
         src/field_tasks.o(.rodata);
-        data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         data/party_menu.o(.rodata);
         src/start_menu.o(.rodata);

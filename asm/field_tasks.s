@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_806A18C
-sub_806A18C: @ 806A18C
-	push {r4,r5,lr}
-	adds r3, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	lsls r2, 16
-	lsrs r4, r2, 16
-	ldrh r0, [r3]
-	subs r0, 0x1
-	strh r0, [r3]
-	lsls r0, 16
-	cmp r0, 0
-	bne _0806A1A8
-	movs r2, 0xE8
-	b _0806A1BC
-_0806A1A8:
-	ldr r1, _0806A1E4 @ =gUnknown_08376418
-	movs r2, 0
-	ldrsh r0, [r3, r2]
-	cmp r0, 0
-	bge _0806A1B4
-	adds r0, 0x7
-_0806A1B4:
-	asrs r0, 3
-	lsls r0, 1
-	adds r0, r1
-	ldrh r2, [r0]
-_0806A1BC:
-	lsls r5, 16
-	asrs r5, 16
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl MapGridSetMetatileIdAt
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl CurrentMapDrawMetatileAt
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xE8
-	bl MapGridSetMetatileIdAt
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A1E4: .4byte gUnknown_08376418
-	thumb_func_end sub_806A18C
-
 	thumb_func_start Task_MuddySlope
 Task_MuddySlope: @ 806A1E8
 	push {r4-r7,lr}

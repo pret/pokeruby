@@ -776,3 +776,21 @@ void PerStepCallback_806A07C(u8 taskId)
         }
     }
 }
+
+const u16 gUnknown_08376418[] = {0xe8, 0xeb, 0xea, 0xe9};
+
+void sub_806A18C(s16 *data, s16 x, s16 y)
+{
+    u16 tile;
+    if ((--data[0]) == 0)
+    {
+        tile = 0xe8;
+    }
+    else
+    {
+        tile = gUnknown_08376418[data[0] / 8];
+    }
+    MapGridSetMetatileIdAt(x, y, tile);
+    CurrentMapDrawMetatileAt(x, y);
+    MapGridSetMetatileIdAt(x, y, 0xe8);
+}
