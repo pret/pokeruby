@@ -6,11 +6,14 @@
 #include "task.h"
 #include "main.h"
 #include "vars.h"
+#include "item.h"
+#include "items.h"
 #include "event_data.h"
 #include "rom4.h"
 #include "clock.h"
 #include "script.h"
 #include "field_special_scene.h"
+#include "field_effect_helpers.h"
 #include "secret_base.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
@@ -687,5 +690,37 @@ void PerStepCallback_8069DD4(u8 taskId)
                 data[1] = 1;
             }
             break;
+    }
+}
+
+void PerStepCallback_8069F64(u8 taskId)
+{
+    s16 x, y;
+    u16 *var;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    if (x != data[1] || y != data[2])
+    {
+        data[1] = x;
+        data[2] = y;
+        if (MetatileBehavior_IsAshGrass(MapGridGetMetatileBehaviorAt(x, y)))
+        {
+            if (MapGridGetMetatileIdAt(x, y) == 0x20a)
+            {
+                ash(x, y, 0x212, 4);
+            }
+            else
+            {
+                ash(x, y, 0x206, 4);
+            }
+            if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
+            {
+                var = GetVarPointer(VAR_ASH_GATHER_COUNT);
+                if (*var < 9999)
+                {
+                    (*var)++;
+                }
+            }
+        }
     }
 }
