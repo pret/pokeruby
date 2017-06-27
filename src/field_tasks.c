@@ -413,3 +413,125 @@ void PerStepCallback_8069864(u8 taskId)
             break;
     }
 }
+
+void sub_80699D8(s16 x, s16 y)
+{
+    u8 z = PlayerGetZCoord();
+    if (!(z & 0x01))
+    {
+        switch (MapGridGetMetatileIdAt(x, y))
+        {
+            case 0x24e:
+                MapGridSetMetatileIdAt(x, y, 0x24f);
+                break;
+            case 0x256:
+                MapGridSetMetatileIdAt(x, y, 0x257);
+                break;
+        }
+    }
+}
+
+void sub_8069A3C(s16 x, s16 y)
+{
+    u8 z = PlayerGetZCoord();
+    if (!(z & 0x01))
+    {
+        switch (MapGridGetMetatileIdAt(x, y))
+        {
+            case 0x24f:
+                MapGridSetMetatileIdAt(x, y, 0x24e);
+                break;
+            case 0x257:
+                MapGridSetMetatileIdAt(x, y, 0x256);
+                break;
+        }
+    }
+}
+
+void PerStepCallback_8069AA0(u8 taskId)
+{
+    bool8 isFortreeBridgeCur;
+    bool8 isFortreeBridgePrev;
+    u8 z, flag;
+    s16 x, y, x2, y2;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    switch (data[1])
+    {
+        default:
+            break;
+        case 0:
+            data[2] = x;
+            data[3] = y;
+            if (MetatileBehavior_IsFortreeBridge(MapGridGetMetatileBehaviorAt(x, y)))
+            {
+                sub_80699D8(x, y);
+                CurrentMapDrawMetatileAt(x, y);
+            }
+            data[1] = 1;
+            break;
+        case 1:
+            x2 = data[2];
+            y2 = data[3];
+            if (x == x2 && y == y2)
+            {
+                break;
+            }
+            isFortreeBridgeCur = MetatileBehavior_IsFortreeBridge(MapGridGetMetatileBehaviorAt(x, y));
+            isFortreeBridgePrev = MetatileBehavior_IsFortreeBridge(MapGridGetMetatileBehaviorAt(x2, y2));
+            z = PlayerGetZCoord();
+            flag = 0;
+            if ((u8)(z & 1) == 0)
+            {
+                flag = 1;
+            }
+            if (flag && (isFortreeBridgeCur == 1 || isFortreeBridgePrev == 1))
+            {
+                PlaySE(SE_HASHI);
+            }
+            if (isFortreeBridgePrev)
+            {
+                sub_8069A3C(x2, y2);
+                CurrentMapDrawMetatileAt(x2, y2);
+                sub_80699D8(x, y);
+                CurrentMapDrawMetatileAt(x, y);
+            }
+            data[4] = x2;
+            data[5] = y2;
+            data[2] = x;
+            data[3] = y;
+            if (!isFortreeBridgePrev)
+            {
+                break;
+            }
+            data[6] = 16;
+            data[1] = 2;
+            // fallthrough
+        case 2:
+            data[6]--;
+            x2 = data[4];
+            y2 = data[5];
+            switch (data[6] % 7)
+            {
+                case 0:
+                    CurrentMapDrawMetatileAt(x2, y2);
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                case 4:
+                    sub_80699D8(x2, y2);
+                    CurrentMapDrawMetatileAt(x2, y2);
+                    sub_8069A3C(x2, y2);
+                case 5:
+                case 6:
+                case 7:
+                    break;
+            }
+            if (data[6] == 0)
+            {
+                data[1] = 1;
+            }
+            break;
+    }
+}
