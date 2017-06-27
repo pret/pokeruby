@@ -724,3 +724,9 @@ void PerStepCallback_8069F64(u8 taskId)
         }
     }
 }
+
+void sub_806A040(s16 x, s16 y)
+{
+    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);
+    CurrentMapDrawMetatileAt(x, y);
+}

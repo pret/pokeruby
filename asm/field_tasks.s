@@ -6,36 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_806A040
-sub_806A040: @ 806A040
-	push {r4,r5,lr}
-	lsls r0, 16
-	asrs r5, r0, 16
-	lsls r1, 16
-	asrs r4, r1, 16
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl MapGridGetMetatileIdAt
-	ldr r1, _0806A074 @ =0x0000022f
-	ldr r2, _0806A078 @ =0x00000237
-	cmp r0, r1
-	bne _0806A05C
-	subs r2, 0x31
-_0806A05C:
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl MapGridSetMetatileIdAt
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl CurrentMapDrawMetatileAt
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A074: .4byte 0x0000022f
-_0806A078: .4byte 0x00000237
-	thumb_func_end sub_806A040
-
 	thumb_func_start PerStepCallback_806A07C
 PerStepCallback_806A07C: @ 806A07C
 	push {r4-r7,lr}
