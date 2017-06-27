@@ -5,6 +5,8 @@
 #include "global.h"
 #include "task.h"
 #include "main.h"
+#include "vars.h"
+#include "event_data.h"
 #include "rom4.h"
 #include "clock.h"
 #include "script.h"
@@ -537,37 +539,60 @@ void PerStepCallback_8069AA0(u8 taskId)
 }
 
 const u16 gUnknown_083763E4[] = {
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-    0x4001,
-    0x4002,
-    0x4003,
-    0x4004,
-         0,
-         0,
-    0x4005,
-    0x4006,
-    0x4007,
-         0,
-         0,
-    0x4008,
-    0x4009,
-    0x400A,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    VAR_0x4001,
+    VAR_0x4002,
+    VAR_0x4003,
+    VAR_0x4004,
+    0,
+    0,
+    VAR_0x4005,
+    VAR_0x4006,
+    VAR_0x4007,
+    0,
+    0,
+    VAR_0x4008,
+    VAR_0x4009,
+    VAR_0x400A,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
 };
 
-bool8 sub_8069CB8(s16 x, s16 y)
+bool32 sub_8069CB8(s16 x, s16 y)
 {
     if ((u16)(x - 3) < 11 && (u16)(y - 6) < 14 && gUnknown_083763E4[y])
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8069CFC(s16 x, s16 y)
+{
+    if (sub_8069CB8(x, y))
+    {
+        *GetVarPointer(gUnknown_083763E4[y]) |= (1 << (x - 3));
+    }
+}
+
+bool32 sub_8069D34(s16 x, s16 y)
+{
+    u32 var;
+    if (!sub_8069CB8(x, y))
+    {
+        return FALSE;
+    }
+    var = VarGet(gUnknown_083763E4[y]) << 16;
+    if (((1 << 16) << (x - 3)) & var)
     {
         return TRUE;
     }
