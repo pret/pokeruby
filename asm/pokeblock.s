@@ -6,40 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810B674
-sub_810B674: @ 810B674
-	push {lr}
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl RunTasks
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810B674
-
-	thumb_func_start sub_810B68C
-sub_810B68C: @ 810B68C
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	ldr r1, _0810B6B0 @ =gBGTilemapBuffers + 0x1000
-	ldr r2, _0810B6B4 @ =0x06007800
-	ldr r0, _0810B6B8 @ =0x040000d4
-	str r1, [r0]
-	str r2, [r0, 0x4]
-	ldr r1, _0810B6BC @ =0x80000400
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810B6B0: .4byte gBGTilemapBuffers + 0x1000
-_0810B6B4: .4byte 0x06007800
-_0810B6B8: .4byte 0x040000d4
-_0810B6BC: .4byte 0x80000400
-	thumb_func_end sub_810B68C
-
 	thumb_func_start sub_810B6C0
 sub_810B6C0: @ 810B6C0
 	push {r4,lr}
