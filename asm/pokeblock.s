@@ -6,32 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810B96C
-sub_810B96C: @ 810B96C
-	push {lr}
-_0810B96E:
-	bl sub_810B6C0
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0810B988
-	ldr r0, _0810B984 @ =sub_810BF7C
-	movs r1, 0
-	bl CreateTask
-	b _0810B994
-	.align 2, 0
-_0810B984: .4byte sub_810BF7C
-_0810B988:
-	bl sub_80F9344
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0810B96E
-_0810B994:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810B96C
-
 	thumb_func_start sub_810B998
 sub_810B998: @ 810B998
 	push {lr}

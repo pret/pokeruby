@@ -14,7 +14,7 @@
 #include "menu_helpers.h"
 #include "pokeblock.h"
 
-void sub_810B674(void)
+static void sub_810B674(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -22,7 +22,7 @@ void sub_810B674(void)
     UpdatePaletteFade();
 }
 
-void sub_810B68C(void)
+static void sub_810B68C(void)
 {
     u16 *src;
     vu16 *dest;
@@ -42,7 +42,7 @@ void sub_810BB0C(void);
 void sub_810BB30(void);
 void sub_810BC84(u8);
 
-bool32 sub_810B6C0(void)
+static bool8 sub_810B6C0(void)
 {
     u16 ime;
     switch (gMain.state)
@@ -134,7 +134,7 @@ bool32 sub_810B6C0(void)
         case 16:
             ime = REG_IME;
             REG_IME = 0;
-            REG_IE |= 1;
+            REG_IE |= INTR_FLAG_VBLANK;
             REG_IME = ime;
             REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
             SetVBlankCallback(sub_810B68C);
@@ -154,4 +154,17 @@ bool32 sub_810B6C0(void)
             return TRUE;
     }
     return FALSE;
+}
+
+void sub_810BF7C(u8);
+
+void sub_810B96C(void)
+{
+    do {
+        if (sub_810B6C0() == TRUE)
+        {
+            CreateTask(sub_810BF7C, 0);
+            break;
+        }
+    } while (sub_80F9344() != TRUE);
 }
