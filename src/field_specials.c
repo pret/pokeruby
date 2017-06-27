@@ -2063,28 +2063,28 @@ void sub_810F9AC(void)
     }
     else if (gScriptResult >= 1000)
     {
-        gStringVar1[0] = 0xa1; // "0"
+        gStringVar1[0] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 1, gScriptResult, 0, sub_80BF0B8(gScriptResult));
     }
     else if (gScriptResult >= 100)
     {
-        gStringVar1[0] = 0xa1; // "0"
-        gStringVar1[1] = 0xa1; // "0"
+        gStringVar1[0] = CHAR_0;
+        gStringVar1[1] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 2, gScriptResult, 0, sub_80BF0B8(gScriptResult));
     }
     else if (gScriptResult >= 10)
     {
-        gStringVar1[0] = 0xa1; // "0"
-        gStringVar1[1] = 0xa1; // "0"
-        gStringVar1[2] = 0xa1; // "0"
+        gStringVar1[0] = CHAR_0;
+        gStringVar1[1] = CHAR_0;
+        gStringVar1[2] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 3, gScriptResult, 0, sub_80BF0B8(gScriptResult));
     }
     else
     {
-        gStringVar1[0] = 0xa1; // "0"
-        gStringVar1[1] = 0xa1; // "0"
-        gStringVar1[2] = 0xa1; // "0"
-        gStringVar1[3] = 0xa1; // "0"
+        gStringVar1[0] = CHAR_0;
+        gStringVar1[1] = CHAR_0;
+        gStringVar1[2] = CHAR_0;
+        gStringVar1[3] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 4, gScriptResult, 0, sub_80BF0B8(gScriptResult));
     }
 }
