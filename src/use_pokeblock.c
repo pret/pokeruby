@@ -10,6 +10,8 @@
 #include "palette.h"
 #include "text.h"
 #include "menu.h"
+#include "sound.h"
+#include "songs.h"
 #include "use_pokeblock.h"
 
 asm(".text\n"
@@ -33,7 +35,14 @@ void sub_81365C8(void);
 void sub_8136638(void);
 void sub_81368A4(void);
 void sub_8089668(void);
+void sub_8136B44(void);
 u8 sub_81370E4(u8);
+void sub_8136BB8(void);
+s8 sub_8136C40(void);
+bool8 sub_8137058(void);
+void sub_8136D60(void);
+void sub_8136808(void);
+void sub_8136D8C(void);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -198,7 +207,7 @@ void sub_8136294(void)
             gUnknown_02039304->unk50++;
             break;
         case 16:
-            DmaClear32(3, 0x600f800, 0x800);
+            DmaClear32(3, BG_SCREEN_ADDR(31), 0x800);
             REG_BG1VOFS = 0;
             REG_BG1HOFS = 0;
             REG_BG1CNT = BGCNT_SCREENBASE(31);
@@ -263,6 +272,96 @@ void sub_81365C8(void)
                 sub_80F3C94();
                 sub_80F3D00();
                 launch_c3_walk_stairs_and_run_once(sub_8136638);
+            }
+            break;
+    }
+}
+
+void sub_8136638(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            if (gMain.heldKeys & DPAD_UP)
+            {
+                PlaySE(SE_SELECT);
+                sub_80F5060(TRUE);
+                move_anim_execute();
+                gUnknown_02039304->unk50 = 1;
+            }
+            else if (gMain.heldKeys & DPAD_DOWN)
+            {
+                PlaySE(SE_SELECT);
+                sub_80F5060(FALSE);
+                move_anim_execute();
+                gUnknown_02039304->unk50 = 1;
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_02039304->unk50 = 3;
+            }
+            else if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                if (gUnknown_083DFEC4->unk87DC == gUnknown_083DFEC4->unk87DA - 1)
+                {
+                    gUnknown_02039304->unk50 = 3;
+                }
+                else
+                {
+                    gUnknown_02039304->unk50 = 5;
+                }
+            }
+            break;
+        case 1:
+            if (!gpu_sync_bg_show())
+            {
+                gUnknown_02039304->unk50++;
+            }
+            break;
+        case 2:
+            if (!sub_8055870())
+            {
+                sub_80F1934();
+                sub_80F3D00();
+                gUnknown_02039304->unk50 = 0;
+            }
+            break;
+        case 3:
+            launch_c3_walk_stairs_and_run_once(sub_8136B44);
+            break;
+        case 4:
+            break;
+        case 5:
+            sub_8136BB8();
+            gUnknown_02039304->unk50++;
+            break;
+        case 6:
+            switch (sub_8136C40())
+            {
+                case 1:
+                case -1:
+                    gUnknown_02039304->unk50 = 0;
+                    break;
+                case 0:
+                    if (sub_8137058())
+                    {
+                        sub_8136D60();
+                        gUnknown_02039304->unk50 = 7;
+                    }
+                    else
+                    {
+                        launch_c3_walk_stairs_and_run_once(sub_8136808);
+                    }
+                    break;
+            }
+            break;
+        case 7:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            {
+                sub_8136D8C();
+                gUnknown_02039304->unk50 = 0;
             }
             break;
     }
