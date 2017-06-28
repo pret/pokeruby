@@ -17,6 +17,8 @@
 #include "menu_helpers.h"
 #include "battle.h"
 #include "item_menu.h"
+#include "item.h"
+#include "items.h"
 #include "pokeblock.h"
 
 // rodata
@@ -338,4 +340,88 @@ static bool8 sub_810B998(void)
             return TRUE;
     }
     return FALSE;
+}
+
+u8 sub_810BA50(s16 x, s16 y, u8 subpriority)
+{
+    return CreateSprite(&gSpriteTemplate_83F7F84, x, y, subpriority);
+}
+
+void sub_810BA7C(u8 a0)
+{
+    gUnknown_02039244 = a0;
+    switch (gUnknown_02039244)
+    {
+        default:
+            gUnknown_03000758 = gUnknown_083F7F1C;
+            gUnknown_0203924C = sizeof gUnknown_083F7F1C;
+            break;
+        case 2:
+            gUnknown_03000758 = gUnknown_083F7F1F;
+            gUnknown_0203924C = sizeof gUnknown_083F7F1F;
+            break;
+        case 3:
+            gUnknown_03000758 = gUnknown_083F7F21;
+            gUnknown_0203924C = sizeof gUnknown_083F7F21;
+            break;
+    }
+}
+
+void sub_810BADC(void)
+{
+    sub_810BA7C(2);
+    SetMainCallback2(sub_810B96C);
+}
+
+void sub_810BAF4(void)
+{
+    sub_810BA7C(3);
+    SetMainCallback2(sub_810B96C);
+}
+
+void sub_810BB0C(void)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
+}
+
+void sub_810BB30(void)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    MenuPrint(gContestStatsText_Spicy,   2, 13);
+    MenuPrint(gContestStatsText_Dry,     2, 15);
+    MenuPrint(gContestStatsText_Sweet,   2, 17);
+    MenuPrint(gContestStatsText_Bitter,  8, 13);
+    MenuPrint(gContestStatsText_Sour,    8, 15);
+}
+
+u8 sub_810C9B0(struct Pokeblock *);
+
+void sub_810BB88(u8 a0)
+{
+    u8 i;
+    u8 y;
+    u8 *buf;
+    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    for (i=a0; i<=a0+8; i++)
+    {
+        y = (i - a0) << 1;
+        if (i == gUnknown_02039248[2])
+        {
+            buf = sub_8072C74(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
+            MenuPrint(gStringVar1, 15, y + 1);
+            if (i != a0 + 8)
+            {
+                MenuZeroFillWindowRect(15, y + 3, 29, 18);
+            }
+            break;
+        }
+        buf = sub_8072C74(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[i].color], 0x5e, 0);
+        buf[0] = EXT_CTRL_CODE_BEGIN;
+        buf[1] = 0x14;
+        buf[2] = 0x06;
+        buf += 3;
+        ConvertIntToDecimalStringN(buf, sub_810C9B0(&gSaveBlock1.pokeblocks[i]), STR_CONV_MODE_RIGHT_ALIGN, 3);
+        MenuPrint(gStringVar1, 15, y + 1);
+    }
 }
