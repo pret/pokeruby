@@ -19,6 +19,7 @@
 #include "menu_helpers.h"
 #include "battle.h"
 #include "item_menu.h"
+#include "item_use.h"
 #include "item.h"
 #include "items.h"
 #include "sound.h"

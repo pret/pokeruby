@@ -56,6 +56,5 @@ void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 u8 *GetRamScript(u8 objectId, u8 *script);
 u16 gScriptResult;
-u16 gScriptItemId;
 
 #endif // GUARD_SCRIPT_H

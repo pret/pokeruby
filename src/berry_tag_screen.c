@@ -5,6 +5,7 @@
 #include "field_map_obj.h"
 #include "item_menu.h"
 #include "items.h"
+#include "item_use.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -35,7 +36,6 @@ struct BerryTagStatus
 extern struct Struct2000000 unk_2000000;
 extern u8 gUnknown_0203932C;
 extern struct BerryTagStatus gUnknown_0203932E;
-extern u16 gScriptItemId;
 extern u16 gUnknown_030041B4;
 
 extern const struct CompressedSpriteSheet gUnknown_083C1F74;

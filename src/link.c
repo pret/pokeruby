@@ -4,6 +4,7 @@
 #include "berry.h"
 #include "berry_blender.h"
 #include "hall_of_fame.h"
+#include "item_use.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -38,7 +39,6 @@ struct LinkTestBGInfo
 extern u8 unk_2000000[];
 extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
-extern u16 gScriptItemId;
 
 extern u16 word_3004858;
 

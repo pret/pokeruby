@@ -2,6 +2,7 @@
 #include "battle_party_menu.h"
 #include "battle.h"
 #include "item_menu.h"
+#include "item_use.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -55,7 +56,6 @@ extern void nullsub_14();
 extern void OpenPartyMenu();
 extern u8 sub_803FBBC(void);
 
-extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
