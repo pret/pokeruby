@@ -474,3 +474,14 @@ void sub_810BD08(void)
         gUnknown_02039248[1]--;
     }
 }
+
+void sub_810BD64(u16 a0)
+{
+    u8 i;
+    int y;
+    for (i=0; i<14; i++)
+    {
+        (gBGTilemapBuffers)[2][(2 * gUnknown_02039248[0] + 1) * 32 + (y = i + 15)] = a0;
+        (gBGTilemapBuffers)[2][(2 * gUnknown_02039248[0] + 2) * 32 + y] = a0;
+    }
+}

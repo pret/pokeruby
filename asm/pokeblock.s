@@ -6,45 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810BD64
-sub_810BD64: @ 810BD64
-	push {r4,r5,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0
-	ldr r5, _0810BDA4 @ =gUnknown_02039248
-	ldr r4, _0810BDA8 @ =gBGTilemapBuffers + 0x1000
-_0810BD70:
-	ldrb r0, [r5]
-	lsls r0, 1
-	adds r0, 0x1
-	lsls r0, 5
-	adds r1, r2, 0
-	adds r1, 0xF
-	adds r0, r1
-	lsls r0, 1
-	adds r0, r4
-	strh r3, [r0]
-	ldrb r0, [r5]
-	lsls r0, 6
-	adds r0, 0x40
-	adds r0, r1
-	lsls r0, 1
-	adds r0, r4
-	strh r3, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xD
-	bls _0810BD70
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810BDA4: .4byte gUnknown_02039248
-_0810BDA8: .4byte gBGTilemapBuffers + 0x1000
-	thumb_func_end sub_810BD64
-
 	thumb_func_start sub_810BDAC
 sub_810BDAC: @ 810BDAC
 	push {r4-r7,lr}
