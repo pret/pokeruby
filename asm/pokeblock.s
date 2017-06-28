@@ -6,66 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810C23C
-sub_810C23C: @ 810C23C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r7, _0810C25C @ =gUnknown_02039248
-	ldrb r0, [r7]
-	ldrb r2, [r7, 0x1]
-	adds r0, r2
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r2, [r7, 0x2]
-	cmp r0, r2
-	bne _0810C260
-	movs r0, 0
-	bl sub_810BDAC
-	b _0810C2A2
-	.align 2, 0
-_0810C25C: .4byte gUnknown_02039248
-_0810C260:
-	ldr r4, _0810C2A8 @ =gSaveBlock1
-	lsls r3, r0, 3
-	movs r0, 0xFF
-	lsls r0, 3
-	adds r4, r0
-	adds r3, r4
-	ldr r5, [r3]
-	ldr r6, [r3, 0x4]
-	ldr r0, _0810C2AC @ =gTasks
-	lsls r2, r1, 2
-	adds r2, r1
-	lsls r2, 3
-	adds r2, r0
-	movs r1, 0x8
-	ldrsh r0, [r2, r1]
-	lsls r0, 3
-	adds r0, r4
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r3]
-	str r1, [r3, 0x4]
-	movs r1, 0x8
-	ldrsh r0, [r2, r1]
-	lsls r0, 3
-	adds r0, r4
-	str r5, [r0]
-	str r6, [r0, 0x4]
-	ldrb r0, [r7, 0x1]
-	bl sub_810BB88
-	movs r0, 0
-	bl sub_810BDAC
-_0810C2A2:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810C2A8: .4byte gSaveBlock1
-_0810C2AC: .4byte gTasks
-	thumb_func_end sub_810C23C
-
 	thumb_func_start sub_810C2B0
 sub_810C2B0: @ 810C2B0
 	push {lr}

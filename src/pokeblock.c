@@ -710,3 +710,21 @@ void sub_810C1C8(u8 taskId, u8 flag)
         }
     }
 }
+
+void sub_810C23C(u8 taskId)
+{
+    struct Pokeblock buf;
+    u8 selidx = gUnknown_02039248[1] + gUnknown_02039248[0];
+    if (selidx == gUnknown_02039248[2])
+    {
+        sub_810BDAC(FALSE);
+    }
+    else
+    {
+        buf = gSaveBlock1.pokeblocks[selidx];
+        gSaveBlock1.pokeblocks[selidx] = gSaveBlock1.pokeblocks[gTasks[taskId].data[0]];
+        gSaveBlock1.pokeblocks[gTasks[taskId].data[0]] = buf;
+        sub_810BB88(gUnknown_02039248[1]);
+        sub_810BDAC(FALSE);
+    }
+}
