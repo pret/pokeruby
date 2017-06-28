@@ -43,6 +43,9 @@ fndec\
 #define min(a, b) (a >= b ? a : b)
 #define max(a, b) (a <= b ? a : b)
 
+// why does GF hate 2d arrays
+#define ARR_2D(x, y) ((x) * 2 + (y))
+
 enum
 {
     VERSION_SAPPHIRE = 1,

@@ -22,37 +22,54 @@ enum
     SE_WINDOW
 };
 
-extern void sub_80BA6B8(u8);
-extern void sub_80BA800(u8);
+// driver test cry enums
+enum
+{
+    CRY_TEST_UNK0,
+    CRY_TEST_VOLUME,
+    CRY_TEST_PANPOT,
+    CRY_TEST_PITCH,
+    CRY_TEST_LENGTH,
+    CRY_TEST_RELEASE,
+    CRY_TEST_PROGRESS,
+    CRY_TEST_CHORUS,
+    CRY_TEST_PRIORITY
+};
+
+// minmax range enums
+enum
+{
+    MIN,
+    MAX
+};
+
 extern void sub_80BAF84(u8);
 extern void sub_80BB25C(u8);
 extern void sub_80BA68C(u8);
-extern void sub_80BAD5C(void);
-extern void sub_80BAE10(u8, u8);
-extern void sub_80BAA48(u8);
+extern void sub_80BAE78(int, int, int, int);
 
-struct Struct_20387B4
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    u32 unk20;
-};
+extern struct ToneData voicegroup_84537C0[];
+extern struct ToneData voicegroup_8452590[];
+extern struct ToneData voicegroup_8453DC0[];
+extern struct ToneData voicegroup_8452B90[];
+extern struct ToneData voicegroup_84543C0[];
+extern struct ToneData voicegroup_8453190[];
+extern struct ToneData voicegroup_84549C0[];
+extern struct ToneData voicegroup_8453790[];
 
-extern struct Struct_20387B4 gUnknown_020387B4;
+extern u8 gUnknown_083D0300[18];
 
-extern u8 gUnknown_020387B3;
+extern int gUnknown_020387B4[9];
+extern int gUnknown_083D039C[16];
+
+extern s8 gUnknown_020387B3;
 extern u8 gUnknown_020387B1;
 extern u8 gUnknown_020387B2;
-extern u32 gUnknown_03005D30;
 extern u8 gUnknown_020387D8;
 extern u8 gUnknown_020387D9;
 extern u8 gUnknown_020387B0;
+
+extern struct MusicPlayerInfo *gUnknown_03005D30;
 
 extern u8 *gBGMNames[];
 extern u8 *gSENames[];
@@ -77,12 +94,20 @@ extern u8 gDebugText_Priority[];
 extern u8 gDebugText_Playing[];
 extern u8 gDebugText_Reverse[];
 extern u8 gDebugText_Stereo[];
+extern u8 gUnknown_083D03DC[];
+extern u8 gUnknown_083D03DE[];
 
 void sub_80BA258(u8);
 void sub_80BA384(u8);
 void sub_80BA65C(u8);
+void sub_80BA6B8(u8);
 void sub_80BA700(u16, u16, u16);
 void sub_80BA79C(u8 *, u16, u16);
+void sub_80BA800(u8);
+void sub_80BAA48(u8);
+void sub_80BACDC(s8);
+void sub_80BAD5C(void);
+void sub_80BAE10(u8, u8);
 
 void sub_80BA0A8(void)
 {
@@ -744,7 +769,7 @@ void sub_80BA79C(u8 *string, u16 x, u16 y)
     MenuPrint(str, x, y);
 }
 
-void sub_80BA800(u8 taskId)
+void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
 {
     u8 bbackStr[10];
     u8 aplayStr[11];
@@ -797,19 +822,184 @@ void sub_80BA800(u8 taskId)
     gUnknown_020387B3 = 0;
     gUnknown_020387B1 = 0;
     gUnknown_020387B2 = 0;
-    gUnknown_03005D30 = 0;
+    gUnknown_03005D30 = NULL;
     gUnknown_020387D8 = 0;
     gUnknown_020387D9 = 1;
-    gUnknown_020387B4.unk0 = 0;
-    gUnknown_020387B4.unk4 = 0x78;
-    gUnknown_020387B4.unk8 = 0;
-    gUnknown_020387B4.unkC = 0x3C00;
-    gUnknown_020387B4.unk10 = 0xB4;
-    gUnknown_020387B4.unk18 = 0;
-    gUnknown_020387B4.unk14 = 0;
-    gUnknown_020387B4.unk1C = 0;
-    gUnknown_020387B4.unk20 = 2;
+    gUnknown_020387B4[CRY_TEST_UNK0] = 0;
+    gUnknown_020387B4[CRY_TEST_VOLUME] = 0x78;
+    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    gUnknown_020387B4[CRY_TEST_PITCH] = 0x3C00;
+    gUnknown_020387B4[CRY_TEST_LENGTH] = 0xB4;
+    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
+    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
+    gUnknown_020387B4[CRY_TEST_PRIORITY] = 2;
     sub_80BAD5C();
     sub_80BAE10(0, 0);
     gTasks[taskId].func = sub_80BAA48;
+}
+
+void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
+{
+    if(gMain.newKeys & 0x2)
+    {
+        REG_DISPCNT = 0x7140;
+        REG_WIN0H = 0x11DF;
+        REG_WIN0V = 0x11F;
+        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+        gTasks[taskId].func = sub_80BA258;
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x40) // _080BAAA8
+    {
+        u8 backupVar = gUnknown_020387B3;
+        if(--gUnknown_020387B3 < 0)
+            gUnknown_020387B3 = 8;
+
+        sub_80BAE10(backupVar, gUnknown_020387B3);
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x80) // _080BAAD0
+    {
+        u8 backupVar = gUnknown_020387B3;
+        if(++gUnknown_020387B3 > 8)
+            gUnknown_020387B3 = 0;
+
+        sub_80BAE10(backupVar, gUnknown_020387B3);
+        return;
+    }
+    if(gMain.newKeys & 0x8) // _080BAAF8
+    {
+        gUnknown_020387D8 ^= 1;
+        sub_80BAD5C();
+        return;
+    }
+    if(gMain.newKeys & 0x4) // _080BAB14
+    {
+        gUnknown_020387D9 ^= 1;
+        sub_80BAD5C();
+        SetPokemonCryStereo(gUnknown_020387D9);
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x100) // _080BAB38
+    {
+        sub_80BACDC(10);
+        sub_80BAD5C();
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x200) // _080BAB46
+    {
+        sub_80BACDC(-10);
+        sub_80BAD5C();
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x20) // _080BAB56
+    {
+        sub_80BACDC(-1);
+        sub_80BAD5C();
+        return;
+    }
+    if(gMain.newAndRepeatedKeys & 0x10) // _080BAB64
+    {
+        sub_80BACDC(1);
+        sub_80BAD5C();
+        return;
+    }
+    if(gMain.newKeys & 0x1) // _080BAB78
+    {
+        u8 divide, remaining;
+
+        SetPokemonCryVolume(gUnknown_020387B4[CRY_TEST_VOLUME]);
+        SetPokemonCryPanpot(gUnknown_020387B4[CRY_TEST_PANPOT]);
+        SetPokemonCryPitch(gUnknown_020387B4[CRY_TEST_PITCH]);
+        SetPokemonCryLength(gUnknown_020387B4[CRY_TEST_LENGTH]);
+        SetPokemonCryProgress(gUnknown_020387B4[CRY_TEST_PROGRESS]);
+        SetPokemonCryRelease(gUnknown_020387B4[CRY_TEST_RELEASE]);
+        SetPokemonCryChorus(gUnknown_020387B4[CRY_TEST_CHORUS]);
+        SetPokemonCryPriority(gUnknown_020387B4[CRY_TEST_PRIORITY]);
+
+        remaining = gUnknown_020387B4[CRY_TEST_UNK0] % 128;
+        divide = gUnknown_020387B4[CRY_TEST_UNK0] / 128;
+
+        switch(divide)
+        {
+            case 0:
+                if(gUnknown_020387D8)
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84537C0[remaining]);
+                else
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452590[remaining]);
+                break;
+            case 1:
+                if(gUnknown_020387D8)
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453DC0[remaining]);
+                else
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452B90[remaining]);
+                break;
+            case 2:
+                if(gUnknown_020387D8)
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84543C0[remaining]);
+                else
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453190[remaining]);
+                break;
+            case 3:
+                if(gUnknown_020387D8)
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84549C0[remaining]);
+                else
+                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453790[remaining]);
+                break;
+        }
+    }
+
+    // _080BACA2
+    if(gUnknown_03005D30 != NULL)
+    {
+        gUnknown_020387B1 = IsPokemonCryPlaying(gUnknown_03005D30);
+
+        if(gUnknown_020387B1 != gUnknown_020387B2)
+            sub_80BAD5C();
+
+        gUnknown_020387B2 = gUnknown_020387B1;
+    }
+}
+
+void sub_80BACDC(s8 var)
+{
+    int minMaxArray[16];
+
+    memcpy(minMaxArray, gUnknown_083D039C, sizeof minMaxArray);
+    gUnknown_020387B4[gUnknown_020387B3] += var;
+
+    if(gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[ARR_2D(gUnknown_020387B3, MAX)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[ARR_2D(gUnknown_020387B3, MIN)];
+
+    if(gUnknown_020387B4[gUnknown_020387B3] < minMaxArray[ARR_2D(gUnknown_020387B3, MIN)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[ARR_2D(gUnknown_020387B3, MAX)];
+}
+
+void sub_80BAD5C(void)
+{
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0] + 1, 0xB, 0x1, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_VOLUME], 0xB, 0x3, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PANPOT], 0xB, 0x5, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PITCH], 0xB, 0x7, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_LENGTH], 0xB, 0x9, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_RELEASE], 0xB, 0xB, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PROGRESS], 0xB, 0xD, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_CHORUS], 0xB, 0xF, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PRIORITY], 0xB, 0x11, 0x5);
+    sub_80BAE78(gUnknown_020387B1, 0x1B, 0x10, 0x1);
+    sub_80BAE78(gUnknown_020387D8, 0x1B, 0xE, 0x1);
+    sub_80BAE78(gUnknown_020387D9, 0x1B, 0xC, 0x1);
+}
+
+void sub_80BAE10(u8 var1, u8 var2)
+{
+    u8 str1[2];
+    u8 str2[2];
+
+    memcpy(str1, gUnknown_083D03DC, sizeof str1);
+    memcpy(str2, gUnknown_083D03DE, sizeof str2);
+
+    MenuPrint(str2, gUnknown_083D0300[ARR_2D(var1, 0)], gUnknown_083D0300[ARR_2D(var1, 1)]);
+    MenuPrint(str1, gUnknown_083D0300[ARR_2D(var2, 0)], gUnknown_083D0300[ARR_2D(var2, 1)]);
 }
