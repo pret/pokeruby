@@ -213,7 +213,6 @@ SECTIONS {
         src/wallclock.o(.text);
         src/rom6.o(.text);
         src/pokeblock.o(.text);
-        asm/pokeblock.o(.text);
         asm/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);

@@ -23,37 +23,38 @@
 #include "items.h"
 #include "sound.h"
 #include "songs.h"
+#include "safari_zone.h"
 #include "pokeblock.h"
 
 // rodata
 
-const s8 gPokeblockFlavorCompatibilityTable[][5] = {
+const s8 gPokeblockFlavorCompatibilityTable[] = {
     // Cool, Beauty, Cute, Smart, Tough
-    {     0,      0,    0,     0,     0}, // Hardy
-    {     1,      0,    0,     0,    -1}, // Lonely
-    {     1,      0,   -1,     0,     0}, // Brave
-    {     1,     -1,    0,     0,     0}, // Adamant
-    {     1,      0,    0,    -1,     0}, // Naughty
-    {    -1,      0,    0,     0,     1}, // Bold
-    {     0,      0,    0,     0,     0}, // Docile
-    {     0,      0,   -1,     0,     1}, // Relaxed
-    {     0,     -1,    0,     0,     1}, // Impish
-    {     0,      0,    0,    -1,     1}, // Lax
-    {    -1,      0,    1,     0,     0}, // Timid
-    {     0,      0,    1,     0,    -1}, // Hasty
-    {     0,      0,    0,     0,     0}, // Serious
-    {     0,     -1,    1,     0,     0}, // Jolly
-    {     0,      0,    1,    -1,     0}, // Naive
-    {    -1,      1,    0,     0,     0}, // Modest
-    {     0,      1,    0,     0,    -1}, // Mild
-    {     0,      1,   -1,     0,     0}, // Quiet
-    {     0,      0,    0,     0,     0}, // Bashful
-    {     0,      1,    0,    -1,     0}, // Rash
-    {    -1,      0,    0,     1,     0}, // Calm
-    {     0,      0,    0,     1,    -1}, // Gentle
-    {     0,      0,   -1,     1,     0}, // Sassy
-    {     0,     -1,    0,     1,     0}, // Careful
-    {     0,      0,    0,     0,     0}  // Quirky
+          0,      0,    0,     0,     0, // Hardy
+          1,      0,    0,     0,    -1, // Lonely
+          1,      0,   -1,     0,     0, // Brave
+          1,     -1,    0,     0,     0, // Adamant
+          1,      0,    0,    -1,     0, // Naughty
+         -1,      0,    0,     0,     1, // Bold
+          0,      0,    0,     0,     0, // Docile
+          0,      0,   -1,     0,     1, // Relaxed
+          0,     -1,    0,     0,     1, // Impish
+          0,      0,    0,    -1,     1, // Lax
+         -1,      0,    1,     0,     0, // Timid
+          0,      0,    1,     0,    -1, // Hasty
+          0,      0,    0,     0,     0, // Serious
+          0,     -1,    1,     0,     0, // Jolly
+          0,      0,    1,    -1,     0, // Naive
+         -1,      1,    0,     0,     0, // Modest
+          0,      1,    0,     0,    -1, // Mild
+          0,      1,   -1,     0,     0, // Quiet
+          0,      0,    0,     0,     0, // Bashful
+          0,      1,    0,    -1,     0, // Rash
+         -1,      0,    0,     1,     0, // Calm
+          0,      0,    0,     1,    -1, // Gentle
+          0,      0,   -1,     1,     0, // Sassy
+          0,     -1,    0,     1,     0, // Careful
+          0,      0,    0,     0,     0  // Quirky
 };
 
 void (*const gUnknown_083F7EA8[])(void) = {
@@ -153,12 +154,12 @@ const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
     SpriteCallbackDummy
 };
 
-const u8 gUnknown_083F7F9C[][8] = {
-    { 1, 20,  0,  0,  0,  0, 20,  0},
-    { 2,  0, 20,  0,  0,  0, 20,  0},
-    { 3,  0,  0, 20,  0,  0, 20,  0},
-    { 4,  0,  0,  0, 20,  0, 20,  0},
-    { 5,  0,  0,  0,  0, 20, 20,  0}
+const struct Pokeblock gUnknown_083F7F9C[] = {
+    { PBLOCK_CLR_RED,    20,  0,  0,  0,  0, 20},
+    { PBLOCK_CLR_BLUE,    0, 20,  0,  0,  0, 20},
+    { PBLOCK_CLR_PINK,    0,  0, 20,  0,  0, 20},
+    { PBLOCK_CLR_GREEN,   0,  0,  0, 20,  0, 20},
+    { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
 };
 
 // text
@@ -490,7 +491,7 @@ void sub_810BD64(u16 a0, u16 a1)
     }
 }
 
-s16 sub_810CA9C(struct Pokeblock *, u8);
+s16 sub_810CA9C(const struct Pokeblock *, u8);
 u8 sub_810C9E8(struct Pokeblock *);
 
 void sub_810BDAC(bool8 flag)
@@ -921,4 +922,175 @@ void sub_810C788(u8 taskId)
     }
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
+}
+
+void sub_810C854(u8 taskId)
+{
+    SafariZoneActivatePokeblockFeeder(gScriptItemId);
+    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
+    gScriptResult = gScriptItemId;
+    sub_810CA6C(gScriptItemId);
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_810C2C8;
+}
+
+void sub_810C8D4(struct Sprite *sprite)
+{
+    if (sprite->data0 > 1)
+    {
+        sprite->data0 = 0;
+    }
+    switch (sprite->data0)
+    {
+        case 0:
+            sprite->oam.affineMode = 1;
+            sprite->affineAnims = gSpriteAffineAnimTable_83F7F70;
+            InitSpriteAffineAnim(sprite);
+            sprite->data0 = 1;
+            sprite->data1 = 0;
+            break;
+        case 1:
+            if (++sprite->data1 > 11)
+            {
+                sprite->oam.affineMode = 0;
+                sprite->data0 = 0;
+                sprite->data1 = 0;
+                FreeOamMatrix(sprite->oam.matrixNum);
+                sprite->callback = SpriteCallbackDummy;
+            }
+            break;
+    }
+}
+
+void ClearPokeblock(u8 pokeblockIdx)
+{
+    gSaveBlock1.pokeblocks[pokeblockIdx].color  = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].spicy  = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].dry    = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].sweet  = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].bitter = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].sour   = 0;
+    gSaveBlock1.pokeblocks[pokeblockIdx].feel   = 0;
+}
+
+void ClearPokeblocks(void)
+{
+    u8 pokeblockIdx;
+    for (pokeblockIdx=0; pokeblockIdx<ARRAY_COUNT(gSaveBlock1.pokeblocks); pokeblockIdx++)
+    {
+        ClearPokeblock(pokeblockIdx);
+    }
+}
+
+u8 sub_810C9B0(struct Pokeblock *pokeblock)
+{
+    u8 contestStat;
+    u8 maxRating;
+    u8 rating = sub_810CA9C(pokeblock, 1);
+    for (contestStat=1; contestStat<5; contestStat++)
+    {
+        maxRating = sub_810CA9C(pokeblock, contestStat + 1);
+        if (rating < maxRating)
+        {
+            rating = maxRating;
+        }
+    }
+    return rating;
+}
+
+u8 sub_810C9E8(struct Pokeblock *pokeblock)
+{
+    u8 feel = sub_810CA9C(pokeblock, 6);
+    if (feel > 99)
+        feel = 99;
+    return feel;
+}
+
+s8 sub_810CA00(void)
+{
+    u8 i;
+    for (i=0; i<ARRAY_COUNT(gSaveBlock1.pokeblocks); i++)
+    {
+        if (gSaveBlock1.pokeblocks[i].color == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool8 sub_810CA34(struct Pokeblock *pokeblock)
+{
+    s8 idx = sub_810CA00();
+    if (idx == -1)
+    {
+        return FALSE;
+    }
+    gSaveBlock1.pokeblocks[idx] = *pokeblock;
+    return TRUE;
+}
+
+bool8 sub_810CA6C(u8 pokeblockIdx)
+{
+    if (gSaveBlock1.pokeblocks[pokeblockIdx].color == 0)
+    {
+        return FALSE;
+    }
+    ClearPokeblock(pokeblockIdx);
+    return TRUE;
+}
+
+s16 sub_810CA9C(const struct Pokeblock *pokeblock, u8 field)
+{
+    if (field == 0)
+        return pokeblock->color;
+    if (field == 1)
+        return pokeblock->spicy;
+    if (field == 2)
+        return pokeblock->dry;
+    if (field == 3)
+        return pokeblock->sweet;
+    if (field == 4)
+        return pokeblock->bitter;
+    if (field == 5)
+        return pokeblock->sour;
+    if (field == 6)
+        return pokeblock->feel;
+    return 0;
+}
+
+s16 sub_810CAE4(u8 nature, const struct Pokeblock *pokeblock)
+{
+    u8 flavor;
+    s16 curGain;
+    s16 totalGain = 0;
+    for (flavor=0; flavor<5; flavor++)
+    {
+        curGain = sub_810CA9C(pokeblock, flavor + 1);
+        if (curGain > 0)
+        {
+            totalGain += curGain * gPokeblockFlavorCompatibilityTable[5 * nature + flavor];
+        }
+    }
+    return totalGain;
+}
+
+void sub_810CB44(struct Pokeblock *pokeblock, u8 *dest)
+{
+    u8 color = sub_810CA9C(pokeblock, 0);
+    StringCopy(dest, gPokeblockNames[color]);
+}
+
+bool8 sub_810CB68(u8 nature, u8 *dest)
+{
+    u8 flavor;
+    for (flavor=0; flavor<5; flavor++)
+    {
+        if (sub_810CAE4(nature, &gUnknown_083F7F9C[flavor]) > 0)
+        {
+            StringCopy(dest, gPokeblockNames[flavor + 1]);
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
