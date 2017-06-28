@@ -10,8 +10,6 @@
 #include "strings2.h"
 #include "task.h"
 
-extern const struct MenuAction gMenuYesNoItems[];
-
 static void VBlankCB_ClearSaveDataScreen(void);
 static void Task_InitMenu(u8);
 static void Task_ProcessMenuInput(u8);

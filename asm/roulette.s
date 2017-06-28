@@ -733,7 +733,7 @@ sub_8115734: @ 8115734
 	bl MenuPrint
 	ldr r1, _08115778 @ =gUnknown_083F8EBC
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3245,7 +3245,7 @@ sub_8116B40: @ 8116B40
 	strh r4, [r0]
 	adds r0, 0x2
 	strh r4, [r0]
-	ldr r1, _08116BB4 @ =gUnknown_0300485C
+	ldr r1, _08116BB4 @ =gFieldCallback
 	ldr r0, _08116BB8 @ =sub_8080990
 	str r0, [r1]
 	ldr r0, _08116BBC @ =c2_exit_to_overworld_2_switch
@@ -3261,7 +3261,7 @@ _08116BA4: .4byte 0x02019000
 _08116BA8: .4byte gSpriteCoordOffsetX
 _08116BAC: .4byte gSpriteCoordOffsetY
 _08116BB0: .4byte REG_BLDCNT
-_08116BB4: .4byte gUnknown_0300485C
+_08116BB4: .4byte gFieldCallback
 _08116BB8: .4byte sub_8080990
 _08116BBC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8116B40
@@ -4483,7 +4483,7 @@ sub_81174F8: @ 81174F8
 	bl sub_814AAF8
 	ldr r1, _08117524 @ =gUnknown_083F8EB4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0

@@ -176,15 +176,26 @@ gUnknown_083CA4D4:: @ 83CA4D4
 	.include "data/text/contest_strings.inc"
 
 gUnknownText_MissedTurn:: @ 83CC355
+.ifdef ENGLISH
 	.string "Missed turn$"
+.else
+	.string "Verpasste Chance$"
+.endif
 
 gUnknownText_LinkStandbyAndWinner:: @ 83CC361
+.ifdef ENGLISH
 	.string "Link standby...$"
 	.string "{COLOR WHITE2}$"
 	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+.else
+	.string "Verbindung...$"
+	.string "{COLOR WHITE2}$"
+	.string "Der Sieger ist {STR_VAR_2} von\n"
+	.string "{STR_VAR_1}! Herzlichen Glückwunsch!$"
+.endif
 
+    .align 1
 @ unknown, unreferenced data
-	.byte 0x00
 	.byte 0x9C
 	.byte 0x77
 
@@ -350,54 +361,94 @@ gUnknown_083CC5D0:: @ 83CC5D0
 	.4byte 0xFFFF
 	.2byte SPECIES_TAILLOW
 	.byte CONTEST_SMART
+.ifdef ENGLISH
 	.string "TAILTA$", 11
 	.string "WYATT$", 10
+.else
+	.string "SCHWALBI$", 11
+	.string "ROSEL$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_BRELOOM
 	.byte CONTEST_BEAUTY
+.ifdef ENGLISH
 	.string "BRELO$", 11
 	.string "LIANA$", 10
+.else
+	.string "TUFUNG$", 11
+	.string "WITOLD$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
+.ifdef ENGLISH
 	.string "PELEP$", 11
 	.string "TIERA$", 10
+.else
+	.string "LIPPER$", 11
+	.string "RUFUS$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
+.ifdef ENGLISH
 	.string "PELEP$", 11
 	.string "TIERA$", 10
+.else
+	.string "LIPPER$", 11
+	.string "ELLEN$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_PELIPPER
 	.byte CONTEST_COOL
+.ifdef ENGLISH
 	.string "PELEP$", 11
 	.string "TIERA$", 10
+.else
+	.string "LIPPER$", 11
+	.string "AVIA$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_DELCATTY
 	.byte CONTEST_SMART
+.ifdef ENGLISH
 	.string "KITSY$", 11
 	.string "OMAR$", 10
+.else
+	.string "CONEC$", 11
+	.string "HAUBERT$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_GULPIN
 	.byte CONTEST_CUTE
+.ifdef ENGLISH
 	.string "GULPS$", 11
 	.string "MACIE$", 10
+.else
+	.string "SCHLUCKI$", 11
+	.string "HEILWIG$", 10
+.endif
 
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_LOUDRED
 	.byte CONTEST_TOUGH
+.ifdef ENGLISH
 	.string "LOUDED$", 11
 	.string "BRYANT$", 10
+.else
+	.string "KEELO$", 11
+	.string "ISEGRIM$", 10
+.endif

@@ -246,7 +246,7 @@ _080F7434:
 	lsrs r3, r0, 16
 	cmp r3, 0x3
 	bls _080F7434
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	lsls r0, r5, 16
 	asrs r0, 16
 	lsls r1, r6, 16
@@ -322,7 +322,7 @@ _080F74C8:
 	lsrs r4, r0, 16
 	cmp r4, 0x3
 	bls _080F74C8
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, [r5]
 	ldr r0, [r0, 0x24]
 	cmp r0, 0
@@ -720,7 +720,11 @@ _080F7770:
 	ldr r2, [r1, 0x24]
 	ldr r3, [sp, 0x58]
 	asrs r0, r3, 16
+.ifdef ENGLISH
 	adds r0, 0x20
+.else
+	adds r0, 0x18
+.endif
 	strh r0, [r2, 0x20]
 	ldr r2, [r1, 0x24]
 	mov r0, r8

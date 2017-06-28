@@ -1522,7 +1522,7 @@ _081350AE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081350C6
@@ -1555,7 +1555,7 @@ AppendBattleTowerBannedSpeciesName: @ 81350E0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081351E6
@@ -2891,7 +2891,7 @@ _08135BD4:
 _08135BD8:
 	bl sub_8135CFC
 	ldr r4, _08135C1C @ =gSaveBlock2
-	ldr r0, _08135C2C @ =gUnknown_02024D26
+	ldr r0, _08135C2C @ =gBattleOutcome
 	ldrb r1, [r0]
 	ldr r2, _08135C30 @ =0x00000555
 	adds r0, r4, r2
@@ -2925,7 +2925,7 @@ _08135C1C: .4byte gSaveBlock2
 _08135C20: .4byte 0x00000554
 _08135C24: .4byte gSpecialVar_0x8004
 _08135C28: .4byte 0x0000055c
-_08135C2C: .4byte gUnknown_02024D26
+_08135C2C: .4byte gBattleOutcome
 _08135C30: .4byte 0x00000555
 _08135C34: .4byte 0x00000556
 	thumb_func_end sub_8135BA0
@@ -3553,7 +3553,7 @@ _081360CC: .4byte gSaveBlock2 + 0x4A8
 	thumb_func_start sub_81360D0
 sub_81360D0: @ 81360D0
 	push {lr}
-	ldr r0, _081360E4 @ =gUnknown_02024D26
+	ldr r0, _081360E4 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bne _081360EC
@@ -3562,7 +3562,7 @@ sub_81360D0: @ 81360D0
 	strb r0, [r1]
 	b _08136102
 	.align 2, 0
-_081360E4: .4byte gUnknown_02024D26
+_081360E4: .4byte gBattleOutcome
 _081360E8: .4byte gStringVar4
 _081360EC:
 	cmp r0, 0x1
@@ -3603,5 +3603,61 @@ _0813611E:
 	.align 2, 0
 _0813612C: .4byte gSaveBlock2 + 0x556
 	thumb_func_end sub_813610C
-	
+
+.ifdef GERMAN
+	thumb_func_start de_sub_81364AC
+de_sub_81364AC: @ 81364AC
+	push {lr}
+	ldr r2, _DE_081364C0 @ =gSaveBlock2
+	ldr r0, _DE_081364C4 @ =0x00000564
+	adds r1, r2, r0
+	ldrb r0, [r1]
+	cmp r0, 0xC8
+	bne _DE_081364CC
+	ldr r1, _DE_081364C8 @ =0x00000499
+	adds r0, r2, r1
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364C0: .4byte gSaveBlock2
+_DE_081364C4: .4byte 0x00000564
+_DE_081364C8: .4byte 0x00000499
+_DE_081364CC:
+	cmp r0, 0x63
+	bhi _DE_081364E4
+	ldr r2, _DE_081364E0 @ =gBattleTowerTrainers
+	ldrb r1, [r1]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 3
+	adds r0, r2
+	b _DE_081364F2
+	.align 2, 0
+_DE_081364E0: .4byte gBattleTowerTrainers
+_DE_081364E4:
+	ldrb r0, [r1]
+	subs r0, 0x64
+	movs r1, 0xA4
+	muls r0, r1
+	adds r0, r2
+	adds r1, 0xA9
+	adds r0, r1
+_DE_081364F2:
+	ldrb r0, [r0]
+	pop {r1}
+	bx r1
+	thumb_func_end de_sub_81364AC
+
+	thumb_func_start de_sub_81364F8
+de_sub_81364F8: @ 81364F8
+	ldr r0, _DE_08136504 @ =gSaveBlock2
+	ldr r1, _DE_08136508 @ =0x00000499
+	adds r0, r1
+	ldrb r0, [r0]
+	bx lr
+	.align 2, 0
+_DE_08136504: .4byte gSaveBlock2
+_DE_08136508: .4byte 0x00000499
+	thumb_func_end de_sub_81364F8
+.endif
+
 	.align 2, 0 @ Don't pad with nop.

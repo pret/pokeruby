@@ -1,15 +1,19 @@
 #include "global.h"
-#include "asm.h"
+#include "item_use.h"
 #include "battle.h"
 #include "berry.h"
+#include "bike.h"
 #include "coins.h"
 #include "data2.h"
 #include "event_data.h"
+#include "field_effect.h"
+#include "field_fadetransition.h"
 #include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "item.h"
+#include "item_menu.h"
 #include "items.h"
 #include "mail.h"
 #include "main.h"
@@ -18,7 +22,12 @@
 #include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "palette.h"
+#include "party_menu.h"
+#include "pokeblock.h"
+#include "pokemon_item_effect.h"
+#include "pokemon_menu.h"
 #include "rom4.h"
+#include "rom_8094928.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -28,73 +37,21 @@
 #include "vars.h"
 
 extern void (* gUnknown_03005D00)(u8);
+extern void (* gFieldCallback)(void);
 extern void (* gUnknown_0300485C)(void);
-extern void (* gUnknown_03004AE4)(u8);
+extern void (* gUnknown_03004AE4)(u8, u16, TaskFunc);
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
-extern u8 gUnknown_02024E6C;
+extern u8 gBankInMenu;
 
 extern u8 gUnknown_081A1654[];
 extern u8 gUnknown_081A168F[];
 
-extern u16 gUnknown_02024A6A[];
-
-extern void HandleItemMenuPaletteFade(u8);
-extern void ExecuteItemUseFromBlackPalette(void);
-extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16);
-extern void CleanUpItemMenuMessage(u8);
-extern void CleanUpOverworldMessage(u8);
-extern void ItemUseOnFieldCB_Bike(u8);
-extern void ItemUseOnFieldCB_Rod(u8);
-extern void ItemUseOnFieldCB_Itemfinder(u8);
-extern void sub_80A5D04(void);
-extern bool8 IsBikingDisallowedByPlayer(void);
-extern void GetOnOffBike(u8);
-extern struct MapConnection *sub_8056BA0(s16 x, s16 y); // fieldmap.c
-extern void sub_810BA7C(u8);
-extern void sub_8080E28(void);
-extern void UseMedicine(u8);
-extern void sub_8070048(u8);
-extern void DoPPRecoveryItemEffect(u8);
-extern void DoPPUpItemEffect(u8);
-extern void DoRareCandyItemEffect(u8);
-extern void DoEvolutionStoneItemEffect(u8);
-extern u16 ItemIdToBattleMoveId(u16);
-extern void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
-extern void sub_80A3E0C(void);
-extern void TeachMonTMMove(u8);
-extern void sub_80878A8(void);
-extern void sub_8053014(void);
-extern void sub_80A7094(u8);
-extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon *mon, u16, u8, u16);
-extern void sub_8094E4C(void);
-extern u8 ExecuteTableBasedItemEffect__(u8 u8, u16 u16, int i);
-extern u8 GetItemEffectType();
-extern void sub_808B020(void);
-extern void sub_810B96C(void);
+extern u16 gBattlePartyID[];
 
 extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;
-
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId);
-void RunItemfinderResults(u8);
-void ExitItemfinder(u8);
-void sub_80C9720(u8);
-void sub_80C9838(u8, s16, s16);
-u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
-void SetPlayerDirectionTowardsItem(u8);
-void DisplayItemRespondingMessageAndExitItemfinder(u8);
-void RotatePlayerAndExitItemfinder(u8);
-void sub_80C9D00(u8);
-void sub_80C9D74(u8);
-void sub_80C9EE4(u8);
-void sub_80C9F10(u8);
-void sub_80C9F80(u8);
-void sub_80C9FC0(u8);
-void ItemUseOutOfBattle_TMHM(u8);
-void ItemUseOutOfBattle_EvolutionStone(u8);
-void ItemUseOutOfBattle_CannotUse(u8);
 
 static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 static const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
@@ -150,7 +107,7 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 1)
     {
-        gUnknown_0300485C = (void *)ExecuteItemUseFromBlackPalette;
+        gFieldCallback = (void *)ExecuteItemUseFromBlackPalette;
         ItemMenu_ConfirmNormalFade(taskId);
     }
     else
@@ -772,7 +729,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     }
     else
     {
-        gUnknown_0300485C = (void *)sub_8080E28;
+        gFieldCallback = (void *)sub_8080E28;
         sub_810BA7C(1);
         ItemMenu_ConfirmComplexFade(taskId);
     }
@@ -825,7 +782,7 @@ void sub_80C9C7C(u8 taskId)
     if(IsPlayerFacingPlantedBerryTree() == TRUE)
     {
         gUnknown_03005D00 = sub_80C9D00;
-        gUnknown_0300485C = ExecuteItemUseFromBlackPalette;
+        gFieldCallback = ExecuteItemUseFromBlackPalette;
         gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
         gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
@@ -944,7 +901,7 @@ void sub_80C9F80(u8 var)
 {
     DisplayYesNoMenu(7, 7, 1);
     sub_80A3FA0(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
-    sub_80F914C(var, &gUnknown_083D61F4);
+    DoYesNoFuncWithChoice(var, &gUnknown_083D61F4);
 }
 
 void sub_80C9FC0(u8 var)
@@ -1086,7 +1043,7 @@ void sub_80CA2BC(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gUnknown_02024A6A[gUnknown_02024E6C];
+    u16 partyId = gBattlePartyID[gBankInMenu];
 
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
 

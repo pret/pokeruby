@@ -1,6 +1,5 @@
 #include "global.h"
 #include "decompress.h"
-#include "asm.h"
 #include "data2.h"
 #include "species.h"
 #include "text.h"
@@ -17,57 +16,57 @@ void LZDecompressVram(const void *src, void *dest)
     LZ77UnCompVram(src, dest);
 }
 
-void LoadCompressedObjectPic(const struct SpriteSheet *a)
+void LoadCompressedObjectPic(const struct CompressedSpriteSheet *src)
 {
-    struct SpriteSheet spriteSheet;
+    struct SpriteSheet dest;
 
-    LZ77UnCompWram(a->data, (void *)WRAM);
-    spriteSheet.data = (void *)WRAM;
-    spriteSheet.size = a->size;
-    spriteSheet.tag = a->tag;
-    LoadSpriteSheet(&spriteSheet);
+    LZ77UnCompWram(src->data, (void *)WRAM);
+    dest.data = (void *)WRAM;
+    dest.size = src->size;
+    dest.tag = src->tag;
+    LoadSpriteSheet(&dest);
 }
 
-void LoadCompressedObjectPicOverrideBuffer(const struct SpriteSheet *a, void *buffer)
+void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)
 {
-    struct SpriteSheet spriteSheet;
+    struct SpriteSheet dest;
+
+    LZ77UnCompWram(src->data, buffer);
+    dest.data = buffer;
+    dest.size = src->size;
+    dest.tag = src->tag;
+    LoadSpriteSheet(&dest);
+}
+
+void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
+{
+    struct SpritePalette dest;
+
+    LZ77UnCompWram(src->data, (void *)WRAM);
+    dest.data = (void *)WRAM;
+    dest.tag = src->tag;
+    LoadSpritePalette(&dest);
+}
+
+void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
+{
+    struct SpritePalette dest;
 
     LZ77UnCompWram(a->data, buffer);
-    spriteSheet.data = buffer;
-    spriteSheet.size = a->size;
-    spriteSheet.tag = a->tag;
-    LoadSpriteSheet(&spriteSheet);
+    dest.data = buffer;
+    dest.tag = a->tag;
+    LoadSpritePalette(&dest);
 }
 
-void LoadCompressedObjectPalette(const struct SpritePalette *a)
-{
-    struct SpritePalette spritePalette;
-
-    LZ77UnCompWram(a->data, (void *)WRAM);
-    spritePalette.data = (void *)WRAM;
-    spritePalette.tag = a->tag;
-    LoadSpritePalette(&spritePalette);
-}
-
-void LoadCompressedObjectPaletteOverrideBuffer(const struct SpritePalette *a, void *buffer)
-{
-    struct SpritePalette spritePalette;
-
-    LZ77UnCompWram(a->data, buffer);
-    spritePalette.data = buffer;
-    spritePalette.tag = a->tag;
-    LoadSpritePalette(&spritePalette);
-}
-
-void DecompressPicFromTable_2(const struct SpriteSheet *a, u8 b, u8 c, void *d, void *e, s32 species)
+void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, u8 b, u8 c, void *d, void *buffer, s32 species)
 {
     if (species > SPECIES_EGG)
-        LZ77UnCompWram(gMonFrontPicTable[0].data, e);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
     else
-        LZ77UnCompWram(a->data, e);
+        LZ77UnCompWram(src->data, buffer);
 }
 
-void HandleLoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g)
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g)
 {
     u32 frontOrBack;
 
@@ -77,10 +76,10 @@ void HandleLoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 
     else
         frontOrBack = 1; // frontPic
 
-    LoadSpecialPokePic(spriteSheet, b, c, d, dest, species, g, frontOrBack);
+    LoadSpecialPokePic(src, b, c, d, dest, species, g, frontOrBack);
 }
 
-void LoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g, u32 frontOrBack)
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g, u32 frontOrBack)
 {
     u8 frontOrBack8 = frontOrBack;
 
@@ -102,7 +101,7 @@ void LoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32
     else if (species > SPECIES_EGG) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
-        LZ77UnCompWram(spriteSheet->data, dest);
+        LZ77UnCompWram(src->data, dest);
 
     DrawSpindaSpots(species, g, dest, frontOrBack8);
 }

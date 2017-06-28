@@ -415,7 +415,7 @@ _08110250: .4byte 0x0000270f
 sub_8110254: @ 8110254
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08110268 @ =gUnknown_02024D26
+	ldr r0, _08110268 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0811026C
@@ -423,7 +423,7 @@ sub_8110254: @ 8110254
 	beq _0811027A
 	b _08110288
 	.align 2, 0
-_08110268: .4byte gUnknown_02024D26
+_08110268: .4byte gBattleOutcome
 _0811026C:
 	eors r0, r4
 	bl sub_81101FC
@@ -457,7 +457,7 @@ sub_8110290: @ 8110290
 	subs r3, 0x30
 	adds r2, r3
 	ldrh r2, [r2, 0xE]
-	ldr r3, _081102DC @ =gUnknown_02024D26
+	ldr r3, _081102DC @ =gBattleOutcome
 	ldrb r3, [r3]
 	ldr r6, _081102E0 @ =gLinkPlayers
 	ldr r5, _081102E4 @ =gLinkPlayerMapObjects
@@ -478,7 +478,7 @@ sub_8110290: @ 8110290
 	.align 2, 0
 _081102D4: .4byte gSaveBlock1 + 0x30B8
 _081102D8: .4byte gTrainerCards + 0x30
-_081102DC: .4byte gUnknown_02024D26
+_081102DC: .4byte gBattleOutcome
 _081102E0: .4byte gLinkPlayers
 _081102E4: .4byte gLinkPlayerMapObjects
 	thumb_func_end sub_8110290

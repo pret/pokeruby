@@ -1,6 +1,6 @@
 #include "global.h"
 #include "contest_painting.h"
-#include "asm.h"
+#include "cute_sketch.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -11,6 +11,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "unknown_task.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_03000750;
@@ -104,11 +105,6 @@ static void ContestPaintingInitVars(u8 arg0);
 static void VBlankCB_ContestPainting(void);
 void sub_8106B90();  //should be static
 static void sub_8107090(u8 arg0, u8 arg1);
-
-extern void sub_80FC7A0(struct Unk03005E20*);
-extern void sub_80FDA18(struct Unk03005E20*);
-extern void sub_80FD8CC(struct Unk03005E20*);
-extern void *species_and_otid_get_pal();
 
 __attribute__((naked))
 void sub_8106630(u32 arg0)
@@ -267,15 +263,23 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     {
         ptr = StringCopy(ptr, gUnknown_083F60AC[type]);
         ptr = StringCopy(ptr, gContestText_ContestWinner);
+#if ENGLISH
         ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+#elif GERMAN
+        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+#endif
 
-        // {ENG}
+        // {LATIN}
         ptr[0] = 0xFC;
         ptr[1] = 0x16;
         ptr += 2;
 
         ptr = StringCopy(ptr, gOtherText_Unknown1);
+#if ENGLISH
         ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+#elif GERMAN
+        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+#endif
 
         xPos = 6;
         yPos = 14;

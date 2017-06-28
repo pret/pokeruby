@@ -11,6 +11,7 @@ CryMeterNeedlePalette: @ 83FA65C
 CryMeterNeedleTiles: @ 83FA67C
 	.incbin "graphics/pokedex/cry_meter_needle.4bpp"
 
+.ifdef ENGLISH
 	.align 1
 gUnknown_083FAE7C:: @ 83FAE7C
 	.incbin "graphics/pokedex/cry_meter_map.bin"
@@ -22,6 +23,7 @@ gUnknown_083FAF1C:: @ 83FAF1C
 	.align 2
 gUnknown_083FAF3C:: @ 83FAF3C
 	.incbin "graphics/pokedex/cry_meter.4bpp.lz"
+.endif
 
 	.align 1
 gUnknown_083FB274:: @ 83FB274

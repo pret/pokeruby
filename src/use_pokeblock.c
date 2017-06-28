@@ -4,7 +4,6 @@
 
 #include "global.h"
 #include "main.h"
-#include "asm.h"
 #include "rom4.h"
 #include "pokemon.h"
 #include "pokenav.h"
@@ -33,9 +32,10 @@ void sub_81365A0(void);
 void sub_81365C8(void);
 void sub_8136638(void);
 void sub_81368A4(void);
+void sub_8089668(void);
 u8 sub_81370E4(u8);
 
-void sub_8136130(void *a0, void *a1)
+void sub_8136130(struct Pokeblock *a0, MainCallback a1)
 {
     gUnknown_02039304 = &gUnknown_083DFEC4->unkD164;
     gUnknown_02039304->unk8 = a0;

@@ -812,13 +812,13 @@ sub_80A37C0: @ 80A37C0
 	ldr r0, _080A37F4 @ =sub_80A50C8
 	str r0, [r1]
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x2
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x3
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2516,7 +2516,11 @@ _080A4470:
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
+.ifdef ENGLISH
 	movs r2, 0x60
+.else
+	movs r2, 0x63
+.endif
 	movs r3, 0
 	bl sub_8072C74
 	ldr r0, _080A44F0 @ =gStringVar1
@@ -3784,13 +3788,13 @@ sub_80A4E8C: @ 80A4E8C
 	movs r1, 0x1
 	bl sub_80F979C
 	movs r0, 0
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x2
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x3
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	ldr r5, _080A4F04 @ =gBGTilemapBuffers + 0x1000
 	lsls r4, 24
 	asrs r4, 24
@@ -5786,7 +5790,7 @@ sub_80A5EA0: @ 80A5EA0
 	bl sub_80A5DA0
 	ldr r1, _080A5EF4 @ =gUnknown_083C16F4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	b _080A5F0C
 	.align 2, 0
 _080A5EE8: .4byte gMain
@@ -6302,7 +6306,7 @@ sub_80A631C: @ 80A631C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080A6344 @ =gUnknown_0300485C
+	ldr r2, _080A6344 @ =gFieldCallback
 	ldr r1, _080A6348 @ =sub_80B3050
 	str r1, [r2]
 	ldr r2, _080A634C @ =gTasks
@@ -6318,7 +6322,7 @@ sub_80A631C: @ 80A631C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6344: .4byte gUnknown_0300485C
+_080A6344: .4byte gFieldCallback
 _080A6348: .4byte sub_80B3050
 _080A634C: .4byte gTasks
 _080A6350: .4byte c2_exit_to_overworld_2_switch
@@ -6695,7 +6699,7 @@ sub_80A6650: @ 80A6650
 	bl sub_80A5D78
 	ldr r1, _080A666C @ =gUnknown_083C16FC
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7202,8 +7206,8 @@ sub_80A6A4C: @ 80A6A4C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080A6A74 @ =gUnknown_0300485C
-	ldr r1, _080A6A78 @ =sub_813A0F8
+	ldr r2, _080A6A74 @ =gFieldCallback
+	ldr r1, _080A6A78 @ =ItemStorage_ReturnToMenuAfterDeposit
 	str r1, [r2]
 	ldr r2, _080A6A7C @ =gTasks
 	lsls r1, r0, 2
@@ -7218,8 +7222,8 @@ sub_80A6A4C: @ 80A6A4C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6A74: .4byte gUnknown_0300485C
-_080A6A78: .4byte sub_813A0F8
+_080A6A74: .4byte gFieldCallback
+_080A6A78: .4byte ItemStorage_ReturnToMenuAfterDeposit
 _080A6A7C: .4byte gTasks
 _080A6A80: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A6A4C
@@ -8369,7 +8373,7 @@ sub_80A73F0: @ 80A73F0
 	thumb_func_start sub_80A73FC
 sub_80A73FC: @ 80A73FC
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_814AD44
 	pop {r0}
 	bx r0

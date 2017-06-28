@@ -1196,11 +1196,11 @@ _0810E2FC: .4byte gOtherText_Son
 
 	thumb_func_start sub_810E300
 sub_810E300: @ 810E300
-	ldr r0, _0810E308 @ =gUnknown_02024D26
+	ldr r0, _0810E308 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0810E308: .4byte gUnknown_02024D26
+_0810E308: .4byte gBattleOutcome
 	thumb_func_end sub_810E300
 
 	thumb_func_start CableCarWarp
@@ -3086,7 +3086,7 @@ _0810F17A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0810F1AE
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r0, _0810F1F0 @ =gScriptResult
 	ldr r1, _0810F1E8 @ =gUnknown_0203925B
 	ldrb r1, [r1]
@@ -3107,7 +3107,7 @@ _0810F1AE:
 	ands r0, r1
 	cmp r0, 0
 	beq _0810F1DE
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r1, _0810F1F0 @ =gScriptResult
 	movs r0, 0x7F
 	strh r0, [r1]
@@ -4871,7 +4871,7 @@ sub_810FEFC: @ 810FEFC
 	cmp r0, 0x2
 	bne _0810FF2C
 	bl sub_810FA74
-	ldr r0, _0810FF24 @ =gUnknown_02024D26
+	ldr r0, _0810FF24 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0810FF28
@@ -4879,7 +4879,7 @@ sub_810FEFC: @ 810FEFC
 	b _0810FF2C
 	.align 2, 0
 _0810FF20: .4byte 0x00004095
-_0810FF24: .4byte gUnknown_02024D26
+_0810FF24: .4byte gBattleOutcome
 _0810FF28:
 	bl sub_810FC18
 _0810FF2C:

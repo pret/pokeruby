@@ -1,14 +1,18 @@
 #include "global.h"
-#include "asm.h"
+#include "battle.h"
+#include "battle_interface.h"
+#include "decompress.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "rom_8077ABC.h"
+#include "safari_zone.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
-#include "decompress.h"
-#include "sound.h"
-#include "songs.h"
-#include "battle.h"
-#include "palette.h"
-#include "battle_interface.h"
 
 struct UnknownStruct5
 {
@@ -17,18 +21,6 @@ struct UnknownStruct5
     u32 unk8;
     u32 unkC;
     u32 unk10;
-};
-
-struct UnknownStruct6
-{
-    u8 bit_0:1;
-    u8 bit_1:1;
-    u8 bit_2:1;
-    u8 bit_3:1;
-    u8 bit_4:1;
-    u8 bit_5:1;
-    u8 bit_6:1;
-    u8 bit_7:1;
 };
 
 struct UnknownStruct7
@@ -40,19 +32,16 @@ extern u8 ewram[];
 #define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
 #define ewram16088 (*(u8 *)                  (ewram + 0x16088))
 #define ewram16089 (*(u8 *)                  (ewram + 0x16089))
-#define ewram17800 ((struct UnknownStruct6 *)(ewram + 0x17800))
 #define ewram17850 ((struct UnknownStruct5 *)(ewram + 0x17850))
 
-extern u8 gUnknown_020238CC[];
-extern u8 gUnknown_02024A68;
-extern u16 gUnknown_02024A6A[];
-extern u8 gUnknown_02024A72[];
-extern u8 gUnknown_03004340[];
+extern u8 gDisplayedStringBattle[];
+extern u8 gNoOfAllBanks;
+extern u16 gBattlePartyID[];
+extern u8 gBanksBySide[];
+extern u8 gHealthboxIDs[];
 
 extern u16 gBattleTypeFlags;
-extern u8 gNumSafariBalls;
 
-extern u32 gExperienceTables[8][101];
 extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
 extern const struct SpriteTemplate gSpriteTemplate_820A51C[];
 extern const struct SpriteTemplate gSpriteTemplate_820A54C;
@@ -82,22 +71,16 @@ extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
 extern const u8 gUnknown_0820A8B0[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
 extern const u8 gUnknown_08D1216C[][32];
 
-extern const u8 *const gNatureNames[];
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 #define ABS(n) ((n) >= 0 ? (n) : -(n))
 // Used for computing copy destination addresses
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
-
-extern int sub_8040D3C();
-extern u8 sub_8090D90();
-extern void load_gfxc_health_bar();
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);
@@ -441,7 +424,7 @@ u8 battle_make_oam_normal_battle(u8 a)
 
     if (!IsDoubleBattle())
     {
-        if (battle_side_get_owner(a) == 0)
+        if (GetBankSide(a) == 0)
         {
             spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
             spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
@@ -467,10 +450,10 @@ u8 battle_make_oam_normal_battle(u8 a)
     //_08043A28
     else
     {
-        if (battle_side_get_owner(a) == 0)
+        if (GetBankSide(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[battle_get_per_side_status(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data5 = spriteId1;
@@ -481,8 +464,8 @@ u8 battle_make_oam_normal_battle(u8 a)
         //_08043ACC
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[battle_get_per_side_status(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data5 = spriteId1;
@@ -494,9 +477,9 @@ u8 battle_make_oam_normal_battle(u8 a)
     }
     //_08043B50
 
-    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplate_820A56C[gUnknown_02024A72[a]], 140, 60, 0);
+    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplate_820A56C[gBanksBySide[a]], 140, 60, 0);
     sprite = &gSprites[spriteId3];
-    SetSubspriteTables(sprite, &gSubspriteTables_820A684[battle_side_get_owner(a)]);
+    SetSubspriteTables(sprite, &gSubspriteTables_820A684[GetBankSide(a)]);
     sprite->subspriteMode = 2;
     sprite->oam.priority = 1;
     CpuCopy32(sub_8043CDC(1), (void *)(OBJ_VRAM0 + sprite->oam.tileNum * 32), 64);
@@ -609,13 +592,13 @@ void sub_8043EB4(u8 priority)
 {
     s32 i;
 
-    for (i = 0; i < gUnknown_02024A68; i++)
+    for (i = 0; i < gNoOfAllBanks; i++)
     {
         u8 spriteId1;
         u8 spriteId2;
         u8 spriteId3;
 
-        spriteId1 = gUnknown_03004340[i];
+        spriteId1 = gHealthboxIDs[i];
         spriteId2 = gSprites[spriteId1].oam.affineParam;
         spriteId3 = gSprites[spriteId1].data5;
         gSprites[spriteId1].oam.priority = priority;
@@ -631,7 +614,7 @@ void sub_8043F44(u8 a)
 
     if (!IsDoubleBattle())
     {
-        if (battle_side_get_owner(a) != 0)
+        if (GetBankSide(a) != 0)
         {
             x = 44;
             y = 30;
@@ -644,7 +627,7 @@ void sub_8043F44(u8 a)
     }
     else
     {
-        switch (battle_get_per_side_status(a))
+        switch (GetBankIdentity(a))
         {
         case 0:
             x = 159;
@@ -664,7 +647,7 @@ void sub_8043F44(u8 a)
             break;
         }
     }
-    sub_8043E50(gUnknown_03004340[a], x, y);
+    sub_8043E50(gHealthboxIDs[a], x, y);
 }
 
 #if ENGLISH
@@ -685,14 +668,14 @@ static void sub_8043FC0(u8 a, u8 b)
     memcpy(str, gUnknown_0820A81C, sizeof(str));
     if (!IsDoubleBattle())
     {
-        if (battle_side_get_owner(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data6) == 0)
             r7 = gUnknown_0820A804;
         else
             r7 = gUnknown_0820A80C;
     }
     else
     {
-        if (battle_side_get_owner(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data6) == 0)
             r7 = gUnknown_0820A814;
         else
             r7 = gUnknown_0820A80C;
@@ -742,7 +725,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     memcpy(str, gUnknown_0820A864, sizeof(str));
     foo = gSprites[a].data6;
 
-    if (IsDoubleBattle() == TRUE || battle_side_get_owner(foo) == 1)
+    if (IsDoubleBattle() == TRUE || GetBankSide(foo) == 1)
     {
         //_08044136
         sub_8044210(a, b, c);
@@ -752,7 +735,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     ptr = str + 6;
     if (c == 0)
     {
-        if (battle_side_get_owner(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data6) == 0)
             r4 = gUnknown_0820A83C;
         else
             r4 = gUnknown_0820A848;
@@ -764,7 +747,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     }
     else
     {
-        if (battle_side_get_owner(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data6) == 0)
             r4 = gUnknown_0820A854;
         else
             r4 = gUnknown_0820A85C;
@@ -814,7 +797,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     beq _08044136\n\
     lsls r0, r5, 24\n\
     lsrs r0, 24\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -838,7 +821,7 @@ _0804414C:\n\
     ldrh r0, [r4, 0x3A]\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     ldr r4, _08044188 @ =gUnknown_0820A848\n\
     cmp r0, 0\n\
@@ -866,7 +849,7 @@ _08044190:\n\
     ldrh r0, [r4, 0x3A]\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     ldr r4, _080441FC @ =gUnknown_0820A85C\n\
     cmp r0, 0\n\
@@ -939,7 +922,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A89C, sizeof(str));
     r4 = gSprites[a].data6;
-    if ((ewram17800[r4].bit_4) == 0)
+    if ((ewram17800[r4].unk0_4) == 0)
         return;
     ptr = str + 6;
     if (c == 0)
@@ -955,7 +938,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
         r7 = gUnknown_0820A894;
         r10 = 2;
         sub_8003504(ptr, b, 0xF, 1);
-        if (battle_side_get_owner(r4) == 0)
+        if (GetBankSide(r4) == 0)
         {
             CpuCopy32(sub_8043CDC(0x74), (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32), 32);
         }
@@ -981,7 +964,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = ewram520[battle_get_per_side_status(gSprites[a].data6)].filler0;
+    r6 = ewram520[GetBankIdentity(gSprites[a].data6)].filler0;
     r8 = 5;
     nature = GetNature(pkmn);
     StringCopy(str + 6, gNatureNames[nature]);
@@ -1065,7 +1048,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     ldrh r0, [r0, 0x3A]\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
-    bl battle_get_per_side_status\n\
+    bl GetBankIdentity\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     lsls r1, r0, 1\n\
@@ -1304,17 +1287,17 @@ void sub_804454C(void)
     s32 i;
     u8 spriteId;
 
-    for (i = 0; i < gUnknown_02024A68; i++)
+    for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (gSprites[gUnknown_03004340[i]].callback == SpriteCallbackDummy
-         && battle_side_get_owner(i) != 1
-         && (IsDoubleBattle() || battle_side_get_owner(i) != 0))
+        if (gSprites[gHealthboxIDs[i]].callback == SpriteCallbackDummy
+         && GetBankSide(i) != 1
+         && (IsDoubleBattle() || GetBankSide(i) != 0))
         {
             u8 r6;
 
-            ewram17800[i].bit_4 ^= 1;
-            r6 = ewram17800[i].bit_4;
-            if (battle_side_get_owner(i) == 0)
+            ewram17800[i].unk0_4 ^= 1;
+            r6 = ewram17800[i].unk0_4;
+            if (GetBankSide(i) == 0)
             {
 
                 if (!IsDoubleBattle())
@@ -1324,17 +1307,17 @@ void sub_804454C(void)
 
                 if (r6 == 1)
                 {
-                    spriteId = gSprites[gUnknown_03004340[i]].data5;
+                    spriteId = gSprites[gHealthboxIDs[i]].data5;
 
                     CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
-                    sub_8044210(gUnknown_03004340[i], GetMonData(&gPlayerParty[gUnknown_02024A6A[i]], MON_DATA_HP), 0);
-                    sub_8044210(gUnknown_03004340[i], GetMonData(&gPlayerParty[gUnknown_02024A6A[i]], MON_DATA_MAX_HP), 1);
+                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), 0);
+                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
                 }
                 else
                 {
-                    draw_status_ailment_maybe(gUnknown_03004340[i]);
-                    sub_8045A5C(gUnknown_03004340[i], &gPlayerParty[gUnknown_02024A6A[i]], 5);
-                    CpuCopy32(sub_8043CDC(0x75), (void *)(OBJ_VRAM0 + 0x680 + gSprites[gUnknown_03004340[i]].oam.tileNum * 32), 32);
+                    draw_status_ailment_maybe(gHealthboxIDs[i]);
+                    sub_8045A5C(gHealthboxIDs[i], &gPlayerParty[gBattlePartyID[i]], 5);
+                    CpuCopy32(sub_8043CDC(0x75), (void *)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxIDs[i]].oam.tileNum * 32), 32);
                 }
             }
             else
@@ -1343,26 +1326,26 @@ void sub_804454C(void)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
-                        sub_8044338(gUnknown_03004340[i], &gEnemyParty[gUnknown_02024A6A[i]]);
+                        sub_8044338(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]]);
                     }
                     else
                     {
-                        spriteId = gSprites[gUnknown_03004340[i]].data5;
+                        spriteId = gSprites[gHealthboxIDs[i]].data5;
 
                         CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
-                        sub_8044210(gUnknown_03004340[i], GetMonData(&gEnemyParty[gUnknown_02024A6A[i]], MON_DATA_HP), 0);
-                        sub_8044210(gUnknown_03004340[i], GetMonData(&gEnemyParty[gUnknown_02024A6A[i]], MON_DATA_MAX_HP), 1);
+                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), 0);
+                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
                     }
                 }
                 else
                 {
-                    draw_status_ailment_maybe(gUnknown_03004340[i]);
-                    sub_8045A5C(gUnknown_03004340[i], &gEnemyParty[gUnknown_02024A6A[i]], 5);
+                    draw_status_ailment_maybe(gHealthboxIDs[i]);
+                    sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]], 5);
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                        sub_8045A5C(gUnknown_03004340[i], &gEnemyParty[gUnknown_02024A6A[i]], 4);
+                        sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]], 4);
                 }
             }
-            gSprites[gUnknown_03004340[i]].data7 ^= 1;
+            gSprites[gHealthboxIDs[i]].data7 ^= 1;
         }
     }
 }
@@ -1383,9 +1366,9 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     u8 sp18;
     u8 taskId;
 
-    if (c == 0 || battle_get_per_side_status(a) != 3)
+    if (c == 0 || GetBankIdentity(a) != 3)
     {
-        if (battle_side_get_owner(a) == 0)
+        if (GetBankSide(a) == 0)
         {
             r7 = 0;
             x = 136;
@@ -1478,7 +1461,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         gSprites[sp[i]].data2 = r7;
     }
     //_08044A76
-    if (battle_side_get_owner(a) == 0)
+    if (GetBankSide(a) == 0)
     {
         for (i = 0; i < 6; i++)  //_08044A9A
         {
@@ -1599,14 +1582,14 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     str r3, [sp, 0x10]\n\
     cmp r4, 0\n\
     beq _08044834\n\
-    bl battle_get_per_side_status\n\
+    bl GetBankIdentity\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x3\n\
     beq _08044878\n\
 _08044834:\n\
     ldr r0, [sp, 0x8]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _08044854\n\
@@ -1888,7 +1871,7 @@ _08044A56:\n\
     b _08044970\n\
 _08044A76:\n\
     ldr r0, [sp, 0x8]\n\
-    bl battle_side_get_owner\n\
+    bl GetBankSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _08044B5E\n\
@@ -2194,7 +2177,7 @@ void sub_8044CA0(u8 taskId)
     {
         for (i = 0; i < 6; i++)
         {
-            if (battle_side_get_owner(sp8) != 0)
+            if (GetBankSide(sp8) != 0)
             {
                 gSprites[sp[5 - i]].data1 = 7 * i;
                 gSprites[sp[5 - i]].data3 = 0;
@@ -2392,10 +2375,10 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     s32 _7;
     u8 *const *r1;
 
-    StringCopy(gUnknown_020238CC, gUnknown_0820A8B0);
+    StringCopy(gDisplayedStringBattle, gUnknown_0820A8B0);
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
     StringGetEnd10(nickname);
-    ptr = StringCopy(gUnknown_020238CC + 3, nickname);
+    ptr = StringCopy(gDisplayedStringBattle + 3, nickname);
     ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 3;
     ptr[2] = 2;
@@ -2431,15 +2414,15 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     ptr[1] = 0x13;
     ptr[2] = 0x37;
     ptr[3] = EOS;
-    ptr = (u8 *)0x02000520 + battle_get_per_side_status(gSprites[a].data6) * 0x180;
-    sub_80034D4(ptr, gUnknown_020238CC);
+    ptr = (u8 *)0x02000520 + GetBankIdentity(gSprites[a].data6) * 0x180;
+    sub_80034D4(ptr, gDisplayedStringBattle);
 
     i = 0;
     _7 = 7;
     if (GetMonData(pkmn, MON_DATA_LANGUAGE) == 1
      && GetMonData(pkmn, MON_DATA_IS_EGG) == 0)
     {
-        u8 *p = gUnknown_020238CC;
+        u8 *p = gDisplayedStringBattle;
 
         while (*p != EOS)
         {
@@ -2468,7 +2451,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     for (; i < _7; i++)
         CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
 
-    if (battle_side_get_owner(gSprites[a].data6) == 0 && !IsDoubleBattle())
+    if (GetBankSide(gSprites[a].data6) == 0 && !IsDoubleBattle())
     {
         r1 = (u8 *const *)gUnknown_0820A8B4;
         for (i = 0; i < _7; i++)
@@ -2486,7 +2469,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     }
     else
     {
-        if (battle_side_get_owner(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data6) == 0)
             r1 = (u8 *const *)gUnknown_0820A904;
         else
             r1 = (u8 *const *)gUnknown_0820A8DC;
@@ -2515,10 +2498,10 @@ static void sub_8045458(u8 a, u8 b)
         return;
 
     r4 = gSprites[a].data6;
-    if (battle_side_get_owner(r4) != 0)
+    if (GetBankSide(r4) != 0)
     {
-        u16 species = GetMonData(&gEnemyParty[gUnknown_02024A6A[r4]], MON_DATA_SPECIES);
-        if (sub_8090D90(SpeciesToNationalPokedexNum(species), 1) != 0)
+        u16 species = GetMonData(&gEnemyParty[gBattlePartyID[r4]], MON_DATA_SPECIES);
+        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
             r4 = gSprites[a].data5;
             if (b != 0)
@@ -2542,9 +2525,9 @@ static void draw_status_ailment_maybe(u8 a)
 
     r7 = gSprites[a].data6;
     r10 = gSprites[a].data5;
-    if (battle_side_get_owner(r7) == 0)
+    if (GetBankSide(r7) == 0)
     {
-        r4 = GetMonData(&gPlayerParty[gUnknown_02024A6A[r7]], MON_DATA_STATUS);
+        r4 = GetMonData(&gPlayerParty[gBattlePartyID[r7]], MON_DATA_STATUS);
         if (!IsDoubleBattle())
             r8 = 0x1A;
         else
@@ -2552,7 +2535,7 @@ static void draw_status_ailment_maybe(u8 a)
     }
     else
     {
-        r4 = GetMonData(&gEnemyParty[gUnknown_02024A6A[r7]], MON_DATA_STATUS);
+        r4 = GetMonData(&gEnemyParty[gBattlePartyID[r7]], MON_DATA_STATUS);
         r8 = 0x11;
     }
     if (r4 & 7)
@@ -2587,7 +2570,7 @@ static void draw_status_ailment_maybe(u8 a)
         for (i = 0; i < 3; i++)
             CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32), 32);
 
-        if (!ewram17800[r7].bit_4)
+        if (!ewram17800[r7].unk0_4)
             CpuCopy32(sub_8043CDC(1), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 64);
 
         sub_8045458(a, 1);
@@ -2600,9 +2583,9 @@ static void draw_status_ailment_maybe(u8 a)
     FillPalette(r0[gBattleInterfaceStatusIcons_DynPal], r4_2 + 0x100, 2);
     CpuCopy16(gPlttBufferUnfaded + 0x100 + r4_2, (void *)(OBJ_PLTT + r4_2 * 2), 2);
     CpuCopy32(r6, (void *)(OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32), 96);
-    if (IsDoubleBattle() == TRUE || battle_side_get_owner(r7) == TRUE)
+    if (IsDoubleBattle() == TRUE || GetBankSide(r7) == TRUE)
     {
-        if (!ewram17800[r7].bit_4)
+        if (!ewram17800[r7].unk0_4)
         {
             CpuCopy32(sub_8043CDC(0), (void *)(OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32), 32);
             CpuCopy32(sub_8043CDC(0x41), (void *)(OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32), 32);
@@ -2679,7 +2662,7 @@ static void sub_80458B0(u8 a)
     s32 r7;
     u8 *addr;
 
-    r6 = (u8 *)0x02000520 + battle_get_per_side_status(gSprites[a].data6) * 0x180;
+    r6 = (u8 *)0x02000520 + GetBankIdentity(gSprites[a].data6) * 0x180;
     r8 = 7;
     sub_80034D4(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
@@ -2704,13 +2687,13 @@ static void sub_8045998(u8 a)
     s32 r6;
     s32 i;
 
-    r7 = StringCopy(gUnknown_020238CC, BattleText_SafariBallsLeft);
+    r7 = StringCopy(gDisplayedStringBattle, BattleText_SafariBallsLeft);
     r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
     StringAppend(r7, BattleText_HighlightRed);
-    status = battle_get_per_side_status(gSprites[a].data6);
+    status = GetBankIdentity(gSprites[a].data6);
     r7 = (u8 *)0x02000520 + status * 0x180;
     r6 = 5;
-    sub_80034D4(r7, gUnknown_020238CC);
+    sub_80034D4(r7, gDisplayedStringBattle);
     r7 = (u8 *)0x02000520 + status * 0x180 + 32;
     for (i = 6; i < 6 + r6; i++)
     {
@@ -2726,7 +2709,7 @@ void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
     u32 currhp;
 
     r10 = gSprites[a].data6;
-    if (battle_side_get_owner(r10) == 0)
+    if (GetBankSide(r10) == 0)
     {
         if (c == 3 || c == 0)
             sub_8043FC0(a, GetMonData(pkmn, MON_DATA_LEVEL));
@@ -2809,7 +2792,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
         r5 = ABS(r8 / r5);
         r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, r8, &ewram17850[a].unk10, 8, r5);
     }
-    if (c == 1 || (c == 0 && (!ewram17800[a].bit_4)))
+    if (c == 1 || (c == 0 && (!ewram17800[a].unk0_4)))
         sub_8045D58(a, c);
     if (r6 == -1)
         ewram17850[a].unk10 = 0;
@@ -2845,7 +2828,7 @@ static void sub_8045D58(u8 a, u8 b)
         break;
     case 1:
         sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 8);
-        r0 = GetMonData(&gPlayerParty[gUnknown_02024A6A[a]], MON_DATA_LEVEL);
+        r0 = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_LEVEL);
         if (r0 == 100)
         {
             for (i = 0; i < 8; i++)
@@ -3044,7 +3027,7 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
     return result;
 }
 
-int GetHPBarLevel(s16 hp, s16 maxhp)
+u8 GetHPBarLevel(s16 hp, s16 maxhp)
 {
     int result;
 

@@ -1,14 +1,17 @@
 #include "global.h"
 #include "battle_setup.h"
-#include "asm.h"
 #include "battle.h"
+#include "battle_transition.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_control_avatar.h"
+#include "field_fadetransition.h"
 #include "field_map_obj_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "fieldmap.h"
+#include "fldeff_80C5CD4.h"
 #include "main.h"
 #include "map_constants.h"
 #include "metatile_behavior.h"
@@ -19,6 +22,7 @@
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -31,10 +35,7 @@
 
 extern u16 gScriptResult;
 
-extern void (*gUnknown_0300485C)(void);
-
-extern struct Pokemon gEnemyParty[];
-extern struct Pokemon gPlayerParty[];
+extern void (*gFieldCallback)(void);
 
 EWRAM_DATA u16 gTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;
@@ -48,7 +49,7 @@ EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
 
 extern u16 gBattleTypeFlags;
 extern u16 gScriptLastTalked;
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 extern struct MapObject gMapObjects[];
 
@@ -573,14 +574,14 @@ void HandleWildBattleEnd(void)
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
-        gUnknown_0300485C = sub_8080E44;
+        gFieldCallback = sub_8080E44;
     }
 }
 
@@ -589,7 +590,7 @@ void HandleScriptedWildBattleEnd(void)
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -1050,7 +1051,7 @@ void sub_808260C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -1067,7 +1068,7 @@ void do_choose_name_or_words_screen(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }

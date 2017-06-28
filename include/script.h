@@ -4,6 +4,7 @@
 struct ScriptContext;
 
 typedef bool8 (*ScrCmdFunc)(struct ScriptContext *);
+typedef u8 Script[];
 
 struct ScriptContext
 {
@@ -54,5 +55,6 @@ u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 u8 *GetRamScript(u8 objectId, u8 *script);
+u16 gScriptResult;
 
 #endif // GUARD_SCRIPT_H

@@ -1,10 +1,25 @@
 #include "global.h"
-#include "asm.h"
+#include "party_menu.h"
+#include "battle.h"
+#include "battle_interface.h"
+#include "battle_party_menu.h"
 #include "data2.h"
+#include "event_data.h"
+#include "item.h"
+#include "mail_data.h"
+#include "main.h"
 #include "menu.h"
+#include "palette.h"
 #include "pokemon.h"
+#include "pokemon_item_effect.h"
+#include "pokemon_menu.h"
+#include "pokemon_summary_screen.h"
+#include "rom_8077ABC.h"
+#include "rom_8094928.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -15,6 +30,7 @@
 #include "item.h"
 #include "battle_interface.h"
 #include "species.h"
+#include "party_menu.h"
 
 #define DATA_COUNT (6)
 
@@ -23,19 +39,6 @@ struct Unk2001000
     u8 unk0;
     u8 unk1;
     u8 unk2;
-};
-
-struct Unk201B000
-{
-    u8 filler0[0x260];
-    u8 unk260;
-    u8 unk261;
-    u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
 };
 
 struct Unk201C000
@@ -66,7 +69,6 @@ struct UnknownStruct5
 
 extern u8 ewram[];
 #define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
 
@@ -88,75 +90,8 @@ extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[DATA_COUNT];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
-extern const u8 *const gItemEffectTable[];
 
-extern bool8 IsDoubleBattle(void);
-extern void SetUpBattlePokemonMenu(u8);
-extern void sub_808B0C0(u8);
-extern u8 GiveMailToMon(struct Pokemon *, u16);
-extern bool8 ItemIsMail(u16);
-extern void ClearMailStruct(struct MailStruct *);
-extern u8 GiveMailToMon2(struct Pokemon *, struct MailStruct *);
-extern void TakeMailFromMon(struct Pokemon *);
-extern u8 TakeMailFromMon2(struct Pokemon *);
-extern u32 CanMonLearnTMHM(struct Pokemon *, u8);
-extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
-extern void sub_808B564();
-extern u8 sub_809FA30(void);
-extern void sub_808B508(u8);
-extern void sub_8032638();
-extern u8 sub_8094C20();
-extern bool8 ExecuteTableBasedItemEffect_();
-extern u8 GetMonStatusAndPokerus();
-
-u8 sub_806CA38(u8);
-void task_pc_turn_off();
 static void sub_806E884(u8 taskId);
-void sub_806F8AC(u8 taskId);
-void sub_806FB0C(u8 taskId);
-void PartyMenuUpdateLevelOrStatus(struct Pokemon *, u8);
-bool8 ExecuteTableBasedItemEffect__(u8, u16, u8);
-void sub_80701DC(u8 taskId);
-void DoRecoverPP(u8);
-void Task_RareCandy1(u8);
-void Task_RareCandy2(u8);
-void Task_RareCandy3(u8);
-void sub_806D538();
-void sub_806D5A4(void);
-void sub_806E8D0(u8 taskId, u16 b, TaskFunc c);
-void GetMedicineItemEffectMessage(u16);
-void sub_8070A20();
-void sub_8070848(u8 taskId);
-void sub_8070968();
-void party_menu_link_mon_held_item_object(u8);
-void Task_ConfirmGiveHeldItem(u8);
-void DisplayGiveHeldItemMessage(u8, u16, u8);
-void SetHeldItemIconVisibility();
-void DisplayTakeHeldItemMessage(u8, u16, u8);
-void Task_ConfirmTakeHeldMail(u8);
-void Task_TeamMonTMMove(u8);
-void Task_TeamMonTMMove2(u8);
-void Task_TeamMonTMMove3(u8);
-void Task_TeamMonTMMove4(u8);
-void sub_806F358(u8);
-void sub_806F390(u8);
-void sub_806F44C(u8);
-void TMMoveUpdateMoveSlot(u8);
-void StopTryingToTeachMove_806F614(u8);
-void StopTryingToTeachMove_806F67C(u8);
-void StopTryingToTeachMove_806F6B4(u8);
-void sub_806FB44(u8);
-void sub_8070C54();
-void SetMonIconAnim();
-u8 GetMonIconSpriteId_maybe();
-void PartyMenuDoPrintHP(u8, int, u16, u16);
-void PartyMenuClearLevelStatusTilemap();
-void PartyMenuPrintMonLevelOrStatus();
-u8 GetItemEffectType();
-bool8 IsBlueYellowRedFlute(u16);
-void TryPrintPartyMenuMonNickname();
-void sub_8070088(u8);
-
 
 /*
 void sub_806AEDC(void)
@@ -174,14 +109,22 @@ void sub_806AEDC(void)
 }
 */
 
+#if ENGLISH
+#define WINDOW_LEFT (3)
+#define WINDOW_RIGHT (26)
+#elif GERMAN
+#define WINDOW_LEFT (0)
+#define WINDOW_RIGHT (29)
+#endif
+
 u8 sub_806E834(const u8 *message, u8 arg1)
 {
     u8 taskId;
 
     gUnknown_0202E8F6 = 1;
 
-    MenuDrawTextWindow(3, 14, 26, 19);
-    MenuPrintMessage(message, 4, 15);
+    MenuDrawTextWindow(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
+    MenuPrintMessage(message, WINDOW_LEFT + 1, 15);
 
     taskId = CreateTask(sub_806E884, 1);
     gTasks[taskId].data[0] = arg1;
@@ -195,7 +138,7 @@ static void sub_806E884(u8 taskId)
     {
         gUnknown_0202E8F6 = 0;
         if (gTasks[taskId].data[0] == 0)
-            MenuZeroFillWindowRect(3, 14, 26, 19);
+            MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
         DestroyTask(taskId);
     }
 }
@@ -1165,7 +1108,7 @@ void sub_8070088(u8 taskId)
         else
         {
             gUnknown_0202E8F4 = 1;
-            MenuZeroFillWindowRect(3, 14, 26, 19);
+            MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
             PlaySE(SE_KAIFUKU);
             PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.unk5);
             task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.unk5 * 2], 9);
@@ -1286,7 +1229,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 b, TaskFunc c)
 
 void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     sub_806D5A4();
     gTasks[taskId].data[11] = GetMenuCursorPos();
@@ -1295,7 +1238,7 @@ void ItemUseMoveMenu_HandleMoveSelection(u8 taskId)
 
 void ItemUseMoveMenu_HandleCancel(u8 taskId)
 {
-    sub_8072DEC();
+    HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     if (gMain.inBattle)
         gTasks[ewram1C000.unk4].func = SetUpBattlePokemonMenu;
@@ -1403,6 +1346,7 @@ void Task_RareCandy2(u8 taskId)
     }
 }
 
+#if ENGLISH
 void sub_8070848(u8 taskId)
 {
     u8 i;
@@ -1439,3 +1383,123 @@ void sub_8070848(u8 taskId)
         MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 12, y * 8, 0);
     }
 }
+#elif GERMAN
+__attribute__((naked))
+void sub_8070848(u8 taskId) {
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    movs r0, 0xB\n\
+    movs r1, 0\n\
+    movs r2, 0x1D\n\
+    movs r3, 0x7\n\
+    bl MenuDrawTextWindow\n\
+    movs r7, 0\n\
+    ldr r0, _0807092C @ =gStringVar1\n\
+    mov r10, r0\n\
+    movs r1, 0xFC\n\
+    mov r9, r1\n\
+    movs r2, 0x13\n\
+    mov r8, r2\n\
+_0807086C:\n\
+    ldr r1, _08070930 @ =0x0201c000\n\
+    ldr r0, [r1]\n\
+    ldr r1, _08070934 @ =gUnknown_08376D1C\n\
+    adds r1, r7, r1\n\
+    ldrb r1, [r1]\n\
+    bl GetMonData\n\
+    adds r1, r7, 0x6\n\
+    lsls r1, 1\n\
+    ldr r2, _08070938 @ =0x0201b264\n\
+    adds r1, r2, r1\n\
+    strh r0, [r1]\n\
+    lsls r6, r7, 1\n\
+    adds r6, r2, r6\n\
+    ldrh r1, [r6]\n\
+    subs r0, r1\n\
+    strh r0, [r6]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x3\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r4, r0, 3\n\
+    adds r4, r0\n\
+    adds r4, 0xB\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x3\n\
+    bl __umodsi3\n\
+    adds r5, r0, 0\n\
+    lsls r5, 1\n\
+    adds r5, 0x1\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    ldr r1, _0807093C @ =gUnknown_08376D04\n\
+    lsls r0, r7, 2\n\
+    adds r0, r1\n\
+    ldr r1, [r0]\n\
+    mov r0, r10\n\
+    bl StringCopy\n\
+    adds r2, r0, 0\n\
+    mov r0, r9\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    mov r1, r8\n\
+    strb r1, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0x2E\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    adds r0, r2, 0\n\
+    ldr r1, _08070940 @ =gOtherText_TallPlusAndRightArrow\n\
+    bl StringCopy\n\
+    adds r2, r0, 0\n\
+    mov r0, r9\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    mov r1, r8\n\
+    strb r1, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0x34\n\
+    strb r0, [r2]\n\
+    adds r2, 0x1\n\
+    movs r0, 0\n\
+    ldrsh r1, [r6, r0]\n\
+    adds r0, r2, 0\n\
+    movs r2, 0x1\n\
+    movs r3, 0x2\n\
+    bl ConvertIntToDecimalStringN\n\
+    adds r4, 0x1\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    mov r0, r10\n\
+    adds r1, r4, 0\n\
+    adds r2, r5, 0\n\
+    bl MenuPrint\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r7, r0, 24\n\
+    cmp r7, 0x5\n\
+    bls _0807086C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0807092C: .4byte gStringVar1\n\
+_08070930: .4byte 0x0201c000\n\
+_08070934: .4byte gUnknown_08376D1C\n\
+_08070938: .4byte 0x0201b264\n\
+_0807093C: .4byte gUnknown_08376D04\n\
+_08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
+    .syntax divided\n");
+}
+#endif

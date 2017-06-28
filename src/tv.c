@@ -1,7 +1,9 @@
 #include "global.h"
-#include "asm.h"
 #include "tv.h"
+#include "battle_tower.h"
+#include "contest_painting.h"
 #include "data2.h"
+#include "easy_chat.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_message_box.h"
@@ -19,17 +21,30 @@
 #include "battle.h"
 #include "link.h"
 #include "easy_chat.h"
+#include "field_map_obj.h"
+#include "field_specials.h"
 #include "item.h"
 #include "items.h"
-#include "contest_painting.h"
+#include "link.h"
+#include "map_constants.h"
+#include "naming_screen.h"
+#include "pokedex.h"
+#include "region_map.h"
+#include "rng.h"
+#include "rom4.h"
 #include "rtc.h"
+#include "script_menu.h"
+#include "species.h"
+#include "string_util.h"
+#include "strings.h"
+#include "text.h"
 
 struct UnkTvStruct
 {
     s8 var0;
 };
 
-extern struct UnknownStruct11 gUnknown_030042E0;
+extern struct Struct30042E0 gBattleResults;
 extern u8 gUnknown_0300430A[11];
 
 struct OutbreakPokemon
@@ -40,13 +55,13 @@ struct OutbreakPokemon
     /*0x0B*/ u8 location;
 };
 
-extern u8 *gUnknown_083D1464[3];
-extern u8 gUnknown_02038694;
-
 struct TVSaleItem {
     u16 item_id;
     u16 item_amount;
 };
+
+extern u8 gUnknown_02038694;
+
 extern struct TVSaleItem gUnknown_02038724[3];
 
 extern u16 gSpecialVar_0x8004;
@@ -73,11 +88,8 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern void sub_80BEBF4(void);
-
 extern u16 gUnknown_020387E0;
 extern u16 gUnknown_020387E2;
-extern const u8 *gUnknown_083CE048[];
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
@@ -85,7 +97,20 @@ extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
 
-u32 GetPlayerTrainerId(void);
+
+extern u8 gScriptContestCategory;
+extern u8 gScriptContestRank;
+extern u8 gUnknown_03004316[11];
+extern u8 gBattleOutcome;
+
+extern u16 gLastUsedItem;
+
+extern u8 ewram[];
+#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
+extern u8 gUnknown_020387E4;
+
+extern u8 gUnknown_03000720;
+extern s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -107,7 +132,7 @@ extern u16 sub_8135D3C(u8);
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
 extern u8 gUnknown_03004316[11];
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 void sub_80BF334(void);
 void sub_80BF3A4(void);
@@ -131,7 +156,7 @@ void sub_80BEA88(void);
 
 void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
-extern u16 gUnknown_02024C04;
+extern u16 gLastUsedItem;
 
 void sub_80BE5FC(void);
 void sub_80BE65C(void);
@@ -182,100 +207,100 @@ __attribute__((naked))
 u8 special_0x44(void)
 {
     asm(".syntax unified\n"
-    "	push {r4-r7,lr}\n"
-    "	mov r7, r9\n"
-    "	mov r6, r8\n"
-    "	push {r6,r7}\n"
-    "	movs r4, 0x5\n"
-    "	ldr r1, _080BD874 @ =gSaveBlock1\n"
-    "	ldr r2, _080BD878 @ =0x000027ec\n"
-    "	adds r0, r1, r2\n"
-    "	ldrb r0, [r0]\n"
-    "	cmp r0, 0\n"
-    "	beq _080BD834\n"
-    "	adds r2, r1, 0\n"
-    "	ldr r1, _080BD87C @ =0x00002738\n"
+    "    push {r4-r7,lr}\n"
+    "    mov r7, r9\n"
+    "    mov r6, r8\n"
+    "    push {r6,r7}\n"
+    "    movs r4, 0x5\n"
+    "    ldr r1, _080BD874 @ =gSaveBlock1\n"
+    "    ldr r2, _080BD878 @ =0x000027ec\n"
+    "    adds r0, r1, r2\n"
+    "    ldrb r0, [r0]\n"
+    "    cmp r0, 0\n"
+    "    beq _080BD834\n"
+    "    adds r2, r1, 0\n"
+    "    ldr r1, _080BD87C @ =0x00002738\n"
     "_080BD81A:\n"
-    "	adds r0, r4, 0x1\n"
-    "	lsls r0, 24\n"
-    "	lsrs r4, r0, 24\n"
-    "	cmp r4, 0x17\n"
-    "	bhi _080BD834\n"
-    "	lsls r0, r4, 3\n"
-    "	adds r0, r4\n"
-    "	lsls r0, 2\n"
-    "	adds r0, r2\n"
-    "	adds r0, r1\n"
-    "	ldrb r0, [r0]\n"
-    "	cmp r0, 0\n"
-    "	bne _080BD81A\n"
+    "    adds r0, r4, 0x1\n"
+    "    lsls r0, 24\n"
+    "    lsrs r4, r0, 24\n"
+    "    cmp r4, 0x17\n"
+    "    bhi _080BD834\n"
+    "    lsls r0, r4, 3\n"
+    "    adds r0, r4\n"
+    "    lsls r0, 2\n"
+    "    adds r0, r2\n"
+    "    adds r0, r1\n"
+    "    ldrb r0, [r0]\n"
+    "    cmp r0, 0\n"
+    "    bne _080BD81A\n"
     "_080BD834:\n"
-    "	bl Random\n"
-    "	lsls r0, 16\n"
-    "	lsrs r0, 16\n"
-    "	adds r1, r4, 0\n"
-    "	bl __modsi3\n"
-    "	lsls r0, 24\n"
-    "	lsrs r4, r0, 24\n"
-    "	mov r8, r4\n"
-    "	ldr r7, _080BD874 @ =gSaveBlock1\n"
-    "	ldr r0, _080BD87C @ =0x00002738\n"
-    "	adds r0, r7\n"
-    "	mov r9, r0\n"
+    "    bl Random\n"
+    "    lsls r0, 16\n"
+    "    lsrs r0, 16\n"
+    "    adds r1, r4, 0\n"
+    "    bl __modsi3\n"
+    "    lsls r0, 24\n"
+    "    lsrs r4, r0, 24\n"
+    "    mov r8, r4\n"
+    "    ldr r7, _080BD874 @ =gSaveBlock1\n"
+    "    ldr r0, _080BD87C @ =0x00002738\n"
+    "    adds r0, r7\n"
+    "    mov r9, r0\n"
     "_080BD850:\n"
-    "	lsls r0, r4, 3\n"
-    "	adds r0, r4\n"
-    "	lsls r6, r0, 2\n"
-    "	adds r5, r6, r7\n"
-    "	ldr r1, _080BD87C @ =0x00002738\n"
-    "	adds r0, r5, r1\n"
-    "	ldrb r0, [r0]\n"
-    "	bl sub_80BFB54\n"
-    "	lsls r0, 24\n"
-    "	lsrs r0, 24\n"
-    "	cmp r0, 0x4\n"
-    "	beq _080BD884\n"
-    "	ldr r2, _080BD880 @ =0x00002739\n"
-    "	adds r0, r5, r2\n"
-    "	ldrb r0, [r0]\n"
-    "	b _080BD890\n"
-    "	.align 2, 0\n"
+    "    lsls r0, r4, 3\n"
+    "    adds r0, r4\n"
+    "    lsls r6, r0, 2\n"
+    "    adds r5, r6, r7\n"
+    "    ldr r1, _080BD87C @ =0x00002738\n"
+    "    adds r0, r5, r1\n"
+    "    ldrb r0, [r0]\n"
+    "    bl sub_80BFB54\n"
+    "    lsls r0, 24\n"
+    "    lsrs r0, 24\n"
+    "    cmp r0, 0x4\n"
+    "    beq _080BD884\n"
+    "    ldr r2, _080BD880 @ =0x00002739\n"
+    "    adds r0, r5, r2\n"
+    "    ldrb r0, [r0]\n"
+    "    b _080BD890\n"
+    "    .align 2, 0\n"
     "_080BD874: .4byte gSaveBlock1\n"
     "_080BD878: .4byte 0x000027ec\n"
     "_080BD87C: .4byte 0x00002738\n"
     "_080BD880: .4byte 0x00002739\n"
     "_080BD884:\n"
-    "	mov r0, r9\n"
-    "	adds r1, r6, r0\n"
-    "	ldrh r0, [r1, 0x16]\n"
-    "	cmp r0, 0\n"
-    "	bne _080BD898\n"
-    "	ldrb r0, [r1, 0x1]\n"
+    "    mov r0, r9\n"
+    "    adds r1, r6, r0\n"
+    "    ldrh r0, [r1, 0x16]\n"
+    "    cmp r0, 0\n"
+    "    bne _080BD898\n"
+    "    ldrb r0, [r1, 0x1]\n"
     "_080BD890:\n"
-    "	cmp r0, 0x1\n"
-    "	bne _080BD898\n"
-    "	adds r0, r4, 0\n"
-    "	b _080BD8AC\n"
+    "    cmp r0, 0x1\n"
+    "    bne _080BD898\n"
+    "    adds r0, r4, 0\n"
+    "    b _080BD8AC\n"
     "_080BD898:\n"
-    "	cmp r4, 0\n"
-    "	bne _080BD8A0\n"
-    "	movs r4, 0x17\n"
-    "	b _080BD8A6\n"
+    "    cmp r4, 0\n"
+    "    bne _080BD8A0\n"
+    "    movs r4, 0x17\n"
+    "    b _080BD8A6\n"
     "_080BD8A0:\n"
-    "	subs r0, r4, 0x1\n"
-    "	lsls r0, 24\n"
-    "	lsrs r4, r0, 24\n"
+    "    subs r0, r4, 0x1\n"
+    "    lsls r0, 24\n"
+    "    lsrs r4, r0, 24\n"
     "_080BD8A6:\n"
-    "	cmp r4, r8\n"
-    "	bne _080BD850\n"
-    "	movs r0, 0xFF\n"
+    "    cmp r4, r8\n"
+    "    bne _080BD850\n"
+    "    movs r0, 0xFF\n"
     "_080BD8AC:\n"
-    "	pop {r3,r4}\n"
-    "	mov r8, r3\n"
-    "	mov r9, r4\n"
-    "	pop {r4-r7}\n"
-    "	pop {r1}\n"
-    "	bx r1\n"
+    "    pop {r3,r4}\n"
+    "    mov r8, r3\n"
+    "    mov r9, r4\n"
+    "    pop {r4-r7}\n"
+    "    pop {r1}\n"
+    "    bx r1\n"
     ".syntax divided\n");
 }
 #endif
@@ -302,7 +327,7 @@ void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80BECA0(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
-void UpdateTVScreensOnMap(int a0, int a1)
+void UpdateTVScreensOnMap(int width, int height)
 {
     u8 bigMovieOrEmergencyNewsOnTv;
     FlagSet(SYS_TV_WATCH);
@@ -310,19 +335,19 @@ void UpdateTVScreensOnMap(int a0, int a1)
     switch (bigMovieOrEmergencyNewsOnTv)
     {
         case 1:
-            SetTVMetatilesOnMap(a0, a1, 0x3);
+            SetTVMetatilesOnMap(width, height, 0x3);
             break;
         case 2:
             break;
         default:
             if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
             {
-                SetTVMetatilesOnMap(a0, a1, 0x3);
+                SetTVMetatilesOnMap(width, height, 0x3);
             }
             else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagReset(SYS_TV_WATCH);
-                SetTVMetatilesOnMap(a0, a1, 0x3);
+                SetTVMetatilesOnMap(width, height, 0x3);
             }
     }
 }
@@ -405,33 +430,33 @@ void TakeTVShowInSearchOfTrainersOffTheAir(void);
 void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
-    gSaveBlock1.gabbyAndTyData.mon1 = gUnknown_030042E0.unk6;
-    gSaveBlock1.gabbyAndTyData.mon2 = gUnknown_030042E0.unk26;
-    gSaveBlock1.gabbyAndTyData.lastMove = gUnknown_030042E0.unk22;
+    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.unk6;
+    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.unk26;
+    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.unk22;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
     {
         gSaveBlock1.gabbyAndTyData.battleNum ++;
     }
-    gSaveBlock1.gabbyAndTyData.valA_0 = gUnknown_030042E0.unk5_0;
-    if (gUnknown_030042E0.unk0)
+    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    if (gBattleResults.unk0)
     {
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
     } else
     {
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
     }
-    if (gUnknown_030042E0.unk3)
+    if (gBattleResults.unk3)
     {
         gSaveBlock1.gabbyAndTyData.valA_2 = 1;
     } else
     {
         gSaveBlock1.gabbyAndTyData.valA_2 = 0;
     }
-    if (!gUnknown_030042E0.unk5_1)
+    if (!gBattleResults.unk5_1)
     {
         for (i=0; i<11; i++)
         {
-            if (gUnknown_030042E0.unk36[i] != 0)
+            if (gBattleResults.unk36[i] != 0)
             {
                 gSaveBlock1.gabbyAndTyData.valA_3 = 1;
                 break;
@@ -587,38 +612,38 @@ void sub_80BDEC8(void) {
     total = 0;
     sub_80BEB20();
     sub_80BE778();
-    if (gUnknown_030042E0.unk28 == 0) {
+    if (gBattleResults.unk28 == 0) {
         sub_80BE074();
     } else {
         sub_80BE028();
-        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gUnknown_030042E0.unk28], gUnknown_030042E0.unk2A) != 0) {
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.unk28], gBattleResults.unk2A) != 0) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1) {
                 for (i=0; i<11; i++) {
-                    total += gUnknown_030042E0.unk36[i];
+                    total += gBattleResults.unk36[i];
                 }
-                if (total != 0 || gUnknown_030042E0.unk5_1 != 0) {
+                if (total != 0 || gBattleResults.unk5_1 != 0) {
                     total = FALSE;
                     show = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
                     show->pokemonToday.var00 = TVSHOW_POKEMON_TODAY_CAUGHT;
                     show->pokemonToday.var01 = total;
-                    if (gUnknown_030042E0.unk5_1 != 0) {
+                    if (gBattleResults.unk5_1 != 0) {
                         total = 1;
                         item = ITEM_MASTER_BALL;
                     } else {
                         for (i=0; i<11; i++) {
-                            total += gUnknown_030042E0.unk36[i];
+                            total += gBattleResults.unk36[i];
                         }
                         if (total > 0xff) {
                             total = 0xff;
                         }
-                        item = gUnknown_02024C04;
+                        item = gLastUsedItem;
                     }
                     show->pokemonToday.var12 = total;
                     show->pokemonToday.ball = item;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2.playerName);
-                    StringCopy(show->pokemonToday.nickname, gUnknown_030042E0.unk2A);
-                    show->pokemonToday.species = gUnknown_030042E0.unk28;
+                    StringCopy(show->pokemonToday.nickname, gBattleResults.unk2A);
+                    show->pokemonToday.species = gBattleResults.unk28;
                     sub_80BE138(show);
                     show->pokemonToday.language = GAME_LANGUAGE;
                     show->pokemonToday.language2 = sub_80BDEAC(show->pokemonToday.nickname);
@@ -638,8 +663,8 @@ void sub_80BE028(void) {
         buffer->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
     }
     buffer->worldOfMasters.var02++;
-    buffer->worldOfMasters.var04 = gUnknown_030042E0.unk28;
-    buffer->worldOfMasters.var08 = gUnknown_030042E0.unk6;
+    buffer->worldOfMasters.var04 = gBattleResults.unk28;
+    buffer->worldOfMasters.var08 = gBattleResults.unk6;
     buffer->worldOfMasters.var0a = gMapHeader.name;
 }
 
@@ -656,7 +681,7 @@ void sub_80BE074(void) {
         if (total > 0xff) {
             total = 0xff;
         }
-        if (total > 2 && gUnknown_02024D26 == 1) {
+        if (total > 2 && gBattleOutcome == 1) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_FAILED) != 1) {
                 flag = FALSE;
@@ -664,10 +689,10 @@ void sub_80BE074(void) {
                 asm_comment("Here the wrong registers are used to hold the show ID and flag.");
                 show->pokemonTodayFailed.var00 = TVSHOW_POKEMON_TODAY_FAILED;
                 show->pokemonTodayFailed.var01 = flag;
-                show->pokemonTodayFailed.species = gUnknown_030042E0.unk6;
-                show->pokemonTodayFailed.species2 = gUnknown_030042E0.unk20;
+                show->pokemonTodayFailed.species = gBattleResults.unk6;
+                show->pokemonTodayFailed.species2 = gBattleResults.unk20;
                 show->pokemonTodayFailed.var10 = total;
-                show->pokemonTodayFailed.var11 = gUnknown_02024D26;
+                show->pokemonTodayFailed.var11 = gBattleOutcome;
                 show->pokemonTodayFailed.var12 = gMapHeader.name;
                 StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2.playerName);
                 sub_80BE138(show);
@@ -680,94 +705,98 @@ void sub_80BE074(void) {
 __attribute__((naked))
 void sub_80BE074(void) {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	ldr r0, _080BE118 @ =0x0000ffff\n\
-	bl sub_80BF77C\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _080BE112\n\
-	movs r1, 0\n\
-	movs r5, 0\n\
-	ldr r2, _080BE11C @ =gUnknown_03004316\n\
+    push {r4-r7,lr}\n\
+    ldr r0, _080BE118 @ =0x0000ffff\n\
+    bl sub_80BF77C\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _080BE112\n\
+    movs r1, 0\n\
+    movs r5, 0\n\
+    ldr r2, _080BE11C @ =gUnknown_03004316\n\
 _080BE088:\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	adds r0, r5, r0\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0xA\n\
-	bls _080BE088\n\
-	cmp r5, 0xFF\n\
-	bls _080BE0A2\n\
-	movs r5, 0xFF\n\
+    adds r0, r1, r2\n\
+    ldrb r0, [r0]\n\
+    adds r0, r5, r0\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0xA\n\
+    bls _080BE088\n\
+    cmp r5, 0xFF\n\
+    bls _080BE0A2\n\
+    movs r5, 0xFF\n\
 _080BE0A2:\n\
-	cmp r5, 0x2\n\
-	bls _080BE112\n\
-	ldr r7, _080BE120 @ =gUnknown_02024D26\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0x1\n\
-	bne _080BE112\n\
-	ldr r6, _080BE124 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r6, 0\n\
-	bl sub_80BF74C\n\
-	ldr r4, _080BE128 @ =gUnknown_03005D38\n\
-	strb r0, [r4]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	beq _080BE112\n\
-	movs r0, 0x17\n\
-	bl sub_80BF1B4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _080BE112\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	lsls r4, r0, 3\n\
-	adds r4, r0\n\
-	lsls r4, 2\n\
-	adds r4, r6\n\
+    cmp r5, 0x2\n\
+    bls _080BE112\n\
+    ldr r7, _080BE120 @ =gBattleOutcome\n\
+    ldrb r0, [r7]\n\
+    cmp r0, 0x1\n\
+    bne _080BE112\n\
+    ldr r6, _080BE124 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r6, 0\n\
+    bl sub_80BF74C\n\
+    ldr r4, _080BE128 @ =gUnknown_03005D38\n\
+    strb r0, [r4]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0x1\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    beq _080BE112\n\
+    movs r0, 0x17\n\
+    bl sub_80BF1B4\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    beq _080BE112\n\
+    movs r0, 0\n\
+    ldrsb r0, [r4, r0]\n\
+    lsls r4, r0, 3\n\
+    adds r4, r0\n\
+    lsls r4, 2\n\
+    adds r4, r6\n\
     @ -- Here the compiler puts the status flag in the wrong register. --\n\
-	movs r1, 0\n\
-	movs r0, 0x17\n\
-	strb r0, [r4]\n\
-	strb r1, [r4, 0x1]\n\
-	ldr r1, _080BE12C @ =gUnknown_030042E0\n\
-	ldrh r0, [r1, 0x6]\n\
-	strh r0, [r4, 0xC]\n\
-	ldrh r0, [r1, 0x20]\n\
-	strh r0, [r4, 0xE]\n\
-	strb r5, [r4, 0x10]\n\
-	ldrb r0, [r7]\n\
-	strb r0, [r4, 0x11]\n\
-	ldr r0, _080BE130 @ =gMapHeader\n\
-	ldrb r0, [r0, 0x14]\n\
-	strb r0, [r4, 0x12]\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x13\n\
-	ldr r1, _080BE134 @ =gSaveBlock2\n\
-	bl StringCopy\n\
-	adds r0, r4, 0\n\
-	bl sub_80BE138\n\
-	movs r0, 2 @ GAME_LANGUAGE\n\
-	strb r0, [r4, 0x2]\n\
+    movs r1, 0\n\
+    movs r0, 0x17\n\
+    strb r0, [r4]\n\
+    strb r1, [r4, 0x1]\n\
+    ldr r1, _080BE12C @ =gBattleResults\n\
+    ldrh r0, [r1, 0x6]\n\
+    strh r0, [r4, 0xC]\n\
+    ldrh r0, [r1, 0x20]\n\
+    strh r0, [r4, 0xE]\n\
+    strb r5, [r4, 0x10]\n\
+    ldrb r0, [r7]\n\
+    strb r0, [r4, 0x11]\n\
+    ldr r0, _080BE130 @ =gMapHeader\n\
+    ldrb r0, [r0, 0x14]\n\
+    strb r0, [r4, 0x12]\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x13\n\
+    ldr r1, _080BE134 @ =gSaveBlock2\n\
+    bl StringCopy\n\
+    adds r0, r4, 0\n\
+    bl sub_80BE138\n");
+#if ENGLISH
+    asm("movs r0, 2 @ GAME_LANGUAGE\n");
+#elif GERMAN
+    asm("movs r0, 5 @ GAME_LANGUAGE\n");
+#endif
+    asm("strb r0, [r4, 0x2]\n\
 _080BE112:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080BE118: .4byte 0x0000ffff\n\
 _080BE11C: .4byte gUnknown_03004316\n\
-_080BE120: .4byte gUnknown_02024D26\n\
+_080BE120: .4byte gBattleOutcome\n\
 _080BE124: .4byte gSaveBlock1 + 0x2738\n\
 _080BE128: .4byte gUnknown_03005D38\n\
-_080BE12C: .4byte gUnknown_030042E0\n\
+_080BE12C: .4byte gBattleResults\n\
 _080BE130: .4byte gMapHeader\n\
 _080BE134: .4byte gSaveBlock2\n\
 .syntax divided\n");
@@ -1141,8 +1170,6 @@ void UpdateMassOutbreakTimeLeft(u16 arg0)
         gSaveBlock1.outbreakUnk5 -= arg0;
 }
 
-void sub_80BE9D4();
-
 void sub_80BE97C(bool8 flag)
 {
     u8 var0, var1;
@@ -1240,15 +1267,6 @@ void sub_80BEA88(void)
         }
     }
 }
-
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0);
-void sub_80BEC10(u8);
-void sub_80BF588(TVShow tvShows[]);
-void sub_80BF6D8(void);
-bool8 sub_80BF77C(u16);
-bool8 sub_80BEE48(u8);
-
-bool8 IsPriceDiscounted(u8);
 
 void sub_80BEB20(void) {
     u16 rval;
@@ -1453,16 +1471,16 @@ void sub_80BEF10(u8 strvaridx, u8 rank)
     switch (rank)
     {
     case NORMAL_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5].text);
         break;
     case SUPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5].text);
         break;
     case HYPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5].text);
         break;
     case MASTER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5].text);
         break;
     }
 }
@@ -1472,19 +1490,19 @@ void CopyContestCategoryToStringVar(u8 strvaridx, u8 category)
     switch (category)
     {
     case CONTEST_COOL:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL].text);
         break;
     case CONTEST_BEAUTY:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY].text);
         break;
     case CONTEST_CUTE:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE].text);
         break;
     case CONTEST_SMART:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART].text);
         break;
     case CONTEST_TOUGH:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH]);
+        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH].text);
         break;
     }
 }
@@ -1702,6 +1720,7 @@ void sub_80BF4BC(void)
     }
 }
 
+#if ENGLISH
 u8 sub_80BF4F4(u8 arg0)
 {
     u32 species;
@@ -1717,6 +1736,31 @@ u8 sub_80BF4F4(u8 arg0)
 
     return TRUE;
 }
+#elif GERMAN
+u8 sub_80BF4F4(u8 arg0)
+{
+    u8 langData[4];
+    u32 species;
+
+    u8 *tmp;
+
+    GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
+
+    tmp = langData;
+    tmp[0] = GetMonData(&gPlayerParty[arg0], MON_DATA_LANGUAGE, &langData);
+    if (tmp[0] != GAME_LANGUAGE) {
+        return TRUE;
+    }
+
+    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
+
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+#endif
 
 u8 sub_80BF544(void)
 {
@@ -1774,7 +1818,7 @@ u16 sub_80BF674(u16 species)
     u16 cspecies;
     rspecies = (Random() % (NUM_SPECIES - 1)) + 1;
     cspecies = rspecies;
-    while ((s8)sub_8090D90(SpeciesToNationalPokedexNum(cspecies), 0) != 1 || cspecies == species) {
+    while ((s8)GetNationalPokedexFlag(SpeciesToNationalPokedexNum(cspecies), 0) != 1 || cspecies == species) {
         if (cspecies == SPECIES_BULBASAUR)
             cspecies = NUM_SPECIES - 1;
         else
@@ -2033,119 +2077,119 @@ __attribute__((naked))
 void GetMomOrDadStringForTVMessage(void)
 {
     asm(".syntax unified\n\
-	push {r4,lr}\n\
-	ldr r1, _080BFC40 @ =gSaveBlock1\n\
-	movs r0, 0x4\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, 0x1\n\
-	bne _080BFC6C\n\
-	ldr r0, _080BFC44 @ =gSaveBlock2\n\
-	ldrb r0, [r0, 0x8]\n\
-	cmp r0, 0\n\
-	bne _080BFC54\n\
-	movs r0, 0x5\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, 0\n\
-	bne _080BFC6C\n\
-	ldr r0, _080BFC48 @ =gStringVar1\n\
-	ldr r1, _080BFC4C @ =gOtherText_Mom\n\
-	bl StringCopy\n\
-	ldr r0, _080BFC50 @ =0x00004003\n\
-	movs r1, 0x1\n\
-	bl VarSet\n\
-	b _080BFC6C\n\
-	.align 2, 0\n\
+    push {r4,lr}\n\
+    ldr r1, _080BFC40 @ =gSaveBlock1\n\
+    movs r0, 0x4\n\
+    ldrsb r0, [r1, r0]\n\
+    cmp r0, 0x1\n\
+    bne _080BFC6C\n\
+    ldr r0, _080BFC44 @ =gSaveBlock2\n\
+    ldrb r0, [r0, 0x8]\n\
+    cmp r0, 0\n\
+    bne _080BFC54\n\
+    movs r0, 0x5\n\
+    ldrsb r0, [r1, r0]\n\
+    cmp r0, 0\n\
+    bne _080BFC6C\n\
+    ldr r0, _080BFC48 @ =gStringVar1\n\
+    ldr r1, _080BFC4C @ =gOtherText_Mom\n\
+    bl StringCopy\n\
+    ldr r0, _080BFC50 @ =0x00004003\n\
+    movs r1, 0x1\n\
+    bl VarSet\n\
+    b _080BFC6C\n\
+    .align 2, 0\n\
 _080BFC40: .4byte gSaveBlock1\n\
 _080BFC44: .4byte gSaveBlock2\n\
 _080BFC48: .4byte gStringVar1\n\
 _080BFC4C: .4byte gOtherText_Mom\n\
 _080BFC50: .4byte 0x00004003\n\
 _080BFC54:\n\
-	movs r0, 0x5\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, 0x2\n\
-	bne _080BFC6C\n\
-	ldr r0, _080BFCB4 @ =gStringVar1\n\
-	ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
-	bl StringCopy\n\
-	ldr r0, _080BFCBC @ =0x00004003\n\
-	movs r1, 0x1\n\
-	bl VarSet\n\
+    movs r0, 0x5\n\
+    ldrsb r0, [r1, r0]\n\
+    cmp r0, 0x2\n\
+    bne _080BFC6C\n\
+    ldr r0, _080BFCB4 @ =gStringVar1\n\
+    ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
+    bl StringCopy\n\
+    ldr r0, _080BFCBC @ =0x00004003\n\
+    movs r1, 0x1\n\
+    bl VarSet\n\
 _080BFC6C:\n\
-	ldr r4, _080BFCBC @ =0x00004003\n\
-	adds r0, r4, 0\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x1\n\
-	beq _080BFCAA\n\
-	adds r0, r4, 0\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x2\n\
-	beq _080BFCC0\n\
-	adds r0, r4, 0\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x2\n\
-	bls _080BFCD4\n\
-	adds r0, r4, 0\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080BFCC0\n\
+    ldr r4, _080BFCBC @ =0x00004003\n\
+    adds r0, r4, 0\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x1\n\
+    beq _080BFCAA\n\
+    adds r0, r4, 0\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x2\n\
+    beq _080BFCC0\n\
+    adds r0, r4, 0\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x2\n\
+    bls _080BFCD4\n\
+    adds r0, r4, 0\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080BFCC0\n\
 _080BFCAA:\n\
-	ldr r0, _080BFCB4 @ =gStringVar1\n\
-	ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
-	bl StringCopy\n\
-	b _080BFD10\n\
-	.align 2, 0\n\
+    ldr r0, _080BFCB4 @ =gStringVar1\n\
+    ldr r1, _080BFCB8 @ =gOtherText_Mom\n\
+    bl StringCopy\n\
+    b _080BFD10\n\
+    .align 2, 0\n\
 _080BFCB4: .4byte gStringVar1\n\
 _080BFCB8: .4byte gOtherText_Mom\n\
 _080BFCBC: .4byte 0x00004003\n\
 _080BFCC0:\n\
-	ldr r0, _080BFCCC @ =gStringVar1\n\
-	ldr r1, _080BFCD0 @ =gOtherText_Dad\n\
-	bl StringCopy\n\
-	b _080BFD10\n\
-	.align 2, 0\n\
+    ldr r0, _080BFCCC @ =gStringVar1\n\
+    ldr r1, _080BFCD0 @ =gOtherText_Dad\n\
+    bl StringCopy\n\
+    b _080BFD10\n\
+    .align 2, 0\n\
 _080BFCCC: .4byte gStringVar1\n\
 _080BFCD0: .4byte gOtherText_Dad\n\
 _080BFCD4:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080BFD00\n\
-	ldr r0, _080BFCF8 @ =gStringVar1\n\
-	ldr r1, _080BFCFC @ =gOtherText_Mom\n\
-	bl StringCopy\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x1\n\
-	bl VarSet\n\
-	b _080BFD10\n\
-	.align 2, 0\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BFD00\n\
+    ldr r0, _080BFCF8 @ =gStringVar1\n\
+    ldr r1, _080BFCFC @ =gOtherText_Mom\n\
+    bl StringCopy\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x1\n\
+    bl VarSet\n\
+    b _080BFD10\n\
+    .align 2, 0\n\
 _080BFCF8: .4byte gStringVar1\n\
 _080BFCFC: .4byte gOtherText_Mom\n\
 _080BFD00:\n\
-	ldr r0, _080BFD18 @ =gStringVar1\n\
-	ldr r1, _080BFD1C @ =gOtherText_Dad\n\
-	bl StringCopy\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x2\n\
-	bl VarSet\n\
+    ldr r0, _080BFD18 @ =gStringVar1\n\
+    ldr r1, _080BFD1C @ =gOtherText_Dad\n\
+    bl StringCopy\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x2\n\
+    bl VarSet\n\
 _080BFD10:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080BFD18: .4byte gStringVar1\n\
 _080BFD1C: .4byte gOtherText_Dad\n\
 .syntax divided\n");
@@ -2157,10 +2201,6 @@ void sub_80BFD20(void)
     VarSet(VAR_0x40BC, 0);
     RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
-
-extern u8 ewram[];
-#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
 
 typedef union ewramStruct_02007000 {
     TVShow tvshows[4][25];
@@ -2276,119 +2316,119 @@ bool8 sub_80BFF68(TVShow * arg1[25], TVShow * arg2[25], u8 idx) {
 __attribute__((naked))
 bool8 sub_80BFF68(TVShow * arg1[25], TVShow * arg2[25], u8 idx) {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	sub sp, 0x4\n\
-	lsls r2, 24\n\
-	lsrs r7, r2, 24\n\
-	ldr r4, [r0]\n\
-	ldr r6, [r1]\n\
-	movs r5, 0\n\
-	ldr r2, _080BFFA4 @ =gUnknown_03000722\n\
-	movs r1, 0\n\
-	ldrsb r1, [r2, r1]\n\
-	lsls r0, r1, 3\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r6 @ this is the only mimsmatch\n\
-	ldrb r0, [r0]\n\
-	str r2, [sp]\n\
-	bl sub_80BFB54\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r1, r0, 0\n\
-	ldr r2, [sp]\n\
-	cmp r0, 0x3\n\
-	beq _080BFFD8\n\
-	cmp r0, 0x3\n\
-	bgt _080BFFA8\n\
-	cmp r0, 0x2\n\
-	beq _080BFFAE\n\
-	b _080C0026\n\
-	.align 2, 0\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x4\n\
+    lsls r2, 24\n\
+    lsrs r7, r2, 24\n\
+    ldr r4, [r0]\n\
+    ldr r6, [r1]\n\
+    movs r5, 0\n\
+    ldr r2, _080BFFA4 @ =gUnknown_03000722\n\
+    movs r1, 0\n\
+    ldrsb r1, [r2, r1]\n\
+    lsls r0, r1, 3\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r6 @ this is the only mimsmatch\n\
+    ldrb r0, [r0]\n\
+    str r2, [sp]\n\
+    bl sub_80BFB54\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    adds r1, r0, 0\n\
+    ldr r2, [sp]\n\
+    cmp r0, 0x3\n\
+    beq _080BFFD8\n\
+    cmp r0, 0x3\n\
+    bgt _080BFFA8\n\
+    cmp r0, 0x2\n\
+    beq _080BFFAE\n\
+    b _080C0026\n\
+    .align 2, 0\n\
 _080BFFA4: .4byte gUnknown_03000722\n\
 _080BFFA8:\n\
-	cmp r1, 0x4\n\
-	beq _080C0000\n\
-	b _080C0026\n\
+    cmp r1, 0x4\n\
+    beq _080C0000\n\
+    b _080C0026\n\
 _080BFFAE:\n\
-	ldr r0, _080BFFD4 @ =gUnknown_03005D38\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	lsls r0, r1, 3\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4, r0\n\
-	ldrb r2, [r2]\n\
-	lsls r2, 24\n\
-	asrs r2, 24\n\
-	lsls r1, r2, 3\n\
-	adds r1, r2\n\
-	lsls r1, 2\n\
-	adds r1, r6, r1\n\
-	adds r2, r7, 0\n\
-	bl sub_80C004C\n\
-	b _080C0022\n\
-	.align 2, 0\n\
+    ldr r0, _080BFFD4 @ =gUnknown_03005D38\n\
+    movs r1, 0\n\
+    ldrsb r1, [r0, r1]\n\
+    lsls r0, r1, 3\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r4, r0\n\
+    ldrb r2, [r2]\n\
+    lsls r2, 24\n\
+    asrs r2, 24\n\
+    lsls r1, r2, 3\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r6, r1\n\
+    adds r2, r7, 0\n\
+    bl sub_80C004C\n\
+    b _080C0022\n\
+    .align 2, 0\n\
 _080BFFD4: .4byte gUnknown_03005D38\n\
 _080BFFD8:\n\
-	ldr r0, _080BFFFC @ =gUnknown_03005D38\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	lsls r0, r1, 3\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4, r0\n\
-	ldrb r2, [r2]\n\
-	lsls r2, 24\n\
-	asrs r2, 24\n\
-	lsls r1, r2, 3\n\
-	adds r1, r2\n\
-	lsls r1, 2\n\
-	adds r1, r6, r1\n\
-	adds r2, r7, 0\n\
-	bl sub_80C00B4\n\
-	b _080C0022\n\
-	.align 2, 0\n\
+    ldr r0, _080BFFFC @ =gUnknown_03005D38\n\
+    movs r1, 0\n\
+    ldrsb r1, [r0, r1]\n\
+    lsls r0, r1, 3\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r4, r0\n\
+    ldrb r2, [r2]\n\
+    lsls r2, 24\n\
+    asrs r2, 24\n\
+    lsls r1, r2, 3\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r6, r1\n\
+    adds r2, r7, 0\n\
+    bl sub_80C00B4\n\
+    b _080C0022\n\
+    .align 2, 0\n\
 _080BFFFC: .4byte gUnknown_03005D38\n\
 _080C0000:\n\
-	ldr r0, _080C0030 @ =gUnknown_03005D38\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	lsls r0, r1, 3\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4, r0\n\
-	ldrb r2, [r2]\n\
-	lsls r2, 24\n\
-	asrs r2, 24\n\
-	lsls r1, r2, 3\n\
-	adds r1, r2\n\
-	lsls r1, 2\n\
-	adds r1, r6, r1\n\
-	adds r2, r7, 0\n\
-	bl sub_80C0134\n\
+    ldr r0, _080C0030 @ =gUnknown_03005D38\n\
+    movs r1, 0\n\
+    ldrsb r1, [r0, r1]\n\
+    lsls r0, r1, 3\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r4, r0\n\
+    ldrb r2, [r2]\n\
+    lsls r2, 24\n\
+    asrs r2, 24\n\
+    lsls r1, r2, 3\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r6, r1\n\
+    adds r2, r7, 0\n\
+    bl sub_80C0134\n\
 _080C0022:\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
 _080C0026:\n\
-	cmp r5, 0x1\n\
-	beq _080C0034\n\
-	movs r0, 0\n\
-	b _080C0040\n\
-	.align 2, 0\n\
+    cmp r5, 0x1\n\
+    beq _080C0034\n\
+    movs r0, 0\n\
+    b _080C0040\n\
+    .align 2, 0\n\
 _080C0030: .4byte gUnknown_03005D38\n\
 _080C0034:\n\
-	ldr r0, _080C0048 @ =gUnknown_03000722\n\
-	ldrb r1, [r0]\n\
-	adds r0, r6, 0\n\
-	bl sub_80BF55C\n\
-	movs r0, 0x1\n\
+    ldr r0, _080C0048 @ =gUnknown_03000722\n\
+    ldrb r1, [r0]\n\
+    adds r0, r6, 0\n\
+    bl sub_80BF55C\n\
+    movs r0, 0x1\n\
 _080C0040:\n\
-	add sp, 0x4\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    add sp, 0x4\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _080C0048: .4byte gUnknown_03000722\n\
 .syntax divided\n");
 }
@@ -2450,9 +2490,6 @@ s8 sub_80C019C(TVShow tvShows[]) {
     return -1;
 }
 
-void sub_80C03A8(u8 showidx);
-void sub_80C03C8(u16 species, u8 showidx);
-
 #ifdef NONMATCHING
 void sub_80C01D4(void)
 {
@@ -2509,206 +2546,206 @@ void sub_80C01D4(void)
 __attribute__((naked))
 void sub_80C01D4(void) {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	movs r6, 0\n\
+    push {r4-r6,lr}\n\
+    movs r6, 0\n\
 _080C01D8:\n\
-	ldr r0, _080C01F8 @ =gSaveBlock1\n\
-	lsls r2, r6, 3\n\
-	adds r1, r2, r6\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldr r0, _080C01FC @ =0x00002738\n\
-	adds r1, r0\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0x29\n\
-	bls _080C01EE\n\
-	b _default\n\
+    ldr r0, _080C01F8 @ =gSaveBlock1\n\
+    lsls r2, r6, 3\n\
+    adds r1, r2, r6\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    ldr r0, _080C01FC @ =0x00002738\n\
+    adds r1, r0\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x29\n\
+    bls _080C01EE\n\
+    b _default\n\
 _080C01EE:\n\
-	lsls r0, 2\n\
-	ldr r1, _080C0200 @ =_080C0204\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
+    lsls r0, 2\n\
+    ldr r1, _080C0200 @ =_080C0204\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
 _080C01F8: .4byte gSaveBlock1\n\
 _080C01FC: .4byte 0x00002738\n\
 _080C0200: .4byte _080C0204\n\
-	.align 2, 0\n\
+    .align 2, 0\n\
 _080C0204:\n\
-	.4byte _break\n\
-	.4byte _fanclubLetter @ TVSHOW_FAN_CLUB_LETTER\n\
-	.4byte _break    @ TVSHOW_RECENT_HAPPENINGS\n\
-	.4byte _fanclubOpinions @ TVSHOW_PKMN_FAN_CLUB_OPINIONS\n\
-	.4byte _showtype4 @ TVSHOW_UNKN_SHOWTYPE_04\n\
-	.4byte _nameRater @ TVSHOW_NAME_RATER_SHOW\n\
-	.4byte _bravoTrainerContest @ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE\n\
-	.4byte _bravoTrainerTower @ TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _pokemonTodayS @ TVSHOW_POKEMON_TODAY_CAUGHT\n\
-	.4byte _break    @ TVSHOW_SMART_SHOPPER\n\
-	.4byte _pokemonTodayF @ TVSHOW_POKEMON_TODAY_FAILED\n\
-	.4byte _fishing @ TVSHOW_FISHING_ADVICE\n\
-	.4byte _worldOfMasters @ TVSHOW_WORLD_OF_MASTERS\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _default\n\
-	.4byte _break    @ TVSHOW_MASS_OUTBREAK\n\
+    .4byte _break\n\
+    .4byte _fanclubLetter @ TVSHOW_FAN_CLUB_LETTER\n\
+    .4byte _break    @ TVSHOW_RECENT_HAPPENINGS\n\
+    .4byte _fanclubOpinions @ TVSHOW_PKMN_FAN_CLUB_OPINIONS\n\
+    .4byte _showtype4 @ TVSHOW_UNKN_SHOWTYPE_04\n\
+    .4byte _nameRater @ TVSHOW_NAME_RATER_SHOW\n\
+    .4byte _bravoTrainerContest @ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE\n\
+    .4byte _bravoTrainerTower @ TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _pokemonTodayS @ TVSHOW_POKEMON_TODAY_CAUGHT\n\
+    .4byte _break    @ TVSHOW_SMART_SHOPPER\n\
+    .4byte _pokemonTodayF @ TVSHOW_POKEMON_TODAY_FAILED\n\
+    .4byte _fishing @ TVSHOW_FISHING_ADVICE\n\
+    .4byte _worldOfMasters @ TVSHOW_WORLD_OF_MASTERS\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _default\n\
+    .4byte _break    @ TVSHOW_MASS_OUTBREAK\n\
 _fanclubLetter:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C02B8 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C02B8 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x2]\n\
+    b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C02B8: .4byte gSaveBlock1 + 0x2738\n\
 _fanclubOpinions:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C02C8 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C02C8 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x2]\n\
+    b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C02C8: .4byte gSaveBlock1 + 0x2738\n\
 _showtype4:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C02D8 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x6]\n\
-	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C02D8 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x6]\n\
+    b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C02D8: .4byte gSaveBlock1 + 0x2738\n\
 _nameRater:\n\
-	adds r4, r2, r6\n\
-	lsls r4, 2\n\
-	ldr r0, _080C02F4 @ =gSaveBlock1 + 0x2738\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0x2]\n\
-	lsls r5, r6, 24\n\
-	lsrs r5, 24\n\
-	adds r1, r5, 0\n\
-	bl sub_80C03C8\n\
-	ldrh r0, [r4, 0x1C]\n\
-	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r4, r2, r6\n\
+    lsls r4, 2\n\
+    ldr r0, _080C02F4 @ =gSaveBlock1 + 0x2738\n\
+    adds r4, r0\n\
+    ldrh r0, [r4, 0x2]\n\
+    lsls r5, r6, 24\n\
+    lsrs r5, 24\n\
+    adds r1, r5, 0\n\
+    bl sub_80C03C8\n\
+    ldrh r0, [r4, 0x1C]\n\
+    b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C02F4: .4byte gSaveBlock1 + 0x2738\n\
 _bravoTrainerContest:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C0304 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C0304 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x2]\n\
+    b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C0304: .4byte gSaveBlock1 + 0x2738\n\
 _bravoTrainerTower:\n\
-	adds r4, r2, r6\n\
-	lsls r4, 2\n\
-	ldr r0, _080C0320 @ =gSaveBlock1 + 0x2738\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0xA]\n\
-	lsls r5, r6, 24\n\
-	lsrs r5, 24\n\
-	adds r1, r5, 0\n\
-	bl sub_80C03C8\n\
-	ldrh r0, [r4, 0x14]\n\
-	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r4, r2, r6\n\
+    lsls r4, 2\n\
+    ldr r0, _080C0320 @ =gSaveBlock1 + 0x2738\n\
+    adds r4, r0\n\
+    ldrh r0, [r4, 0xA]\n\
+    lsls r5, r6, 24\n\
+    lsrs r5, 24\n\
+    adds r1, r5, 0\n\
+    bl sub_80C03C8\n\
+    ldrh r0, [r4, 0x14]\n\
+    b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C0320: .4byte gSaveBlock1 + 0x2738\n\
 _pokemonTodayS:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C0330 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x10]\n\
-	b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C0330 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x10]\n\
+    b _checkSpecies1 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C0330: .4byte gSaveBlock1 + 0x2738\n\
 _pokemonTodayF:\n\
-	adds r4, r2, r6\n\
-	lsls r4, 2\n\
-	ldr r0, _080C034C @ =gSaveBlock1 + 0x2738\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0xC]\n\
-	lsls r5, r6, 24\n\
-	lsrs r5, 24\n\
-	adds r1, r5, 0\n\
-	bl sub_80C03C8\n\
-	ldrh r0, [r4, 0xE]\n\
-	b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
-	.align 2, 0\n\
+    adds r4, r2, r6\n\
+    lsls r4, 2\n\
+    ldr r0, _080C034C @ =gSaveBlock1 + 0x2738\n\
+    adds r4, r0\n\
+    ldrh r0, [r4, 0xC]\n\
+    lsls r5, r6, 24\n\
+    lsrs r5, 24\n\
+    adds r1, r5, 0\n\
+    bl sub_80C03C8\n\
+    ldrh r0, [r4, 0xE]\n\
+    b _checkSpecies2 @ sub_80C03C8(r0, i)\n\
+    .align 2, 0\n\
 _080C034C: .4byte gSaveBlock1 + 0x2738\n\
 _fishing:\n\
-	adds r0, r2, r6\n\
-	lsls r0, 2\n\
-	ldr r1, _080C0364 @ =gSaveBlock1 + 0x2738\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x4]\n\
+    adds r0, r2, r6\n\
+    lsls r0, 2\n\
+    ldr r1, _080C0364 @ =gSaveBlock1 + 0x2738\n\
+    adds r0, r1\n\
+    ldrh r0, [r0, 0x4]\n\
 _checkSpecies1:\n\
-	lsls r1, r6, 24\n\
-	lsrs r1, 24\n\
-	bl sub_80C03C8\n\
-	b _break\n\
-	.align 2, 0\n\
+    lsls r1, r6, 24\n\
+    lsrs r1, 24\n\
+    bl sub_80C03C8\n\
+    b _break\n\
+    .align 2, 0\n\
 _080C0364: .4byte gSaveBlock1 + 0x2738\n\
 _worldOfMasters:\n\
-	adds r4, r2, r6\n\
-	lsls r4, 2\n\
-	ldr r0, _080C0388 @ =gSaveBlock1 + 0x2738\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0x8]\n\
-	lsls r5, r6, 24\n\
-	lsrs r5, 24\n\
-	adds r1, r5, 0\n\
-	bl sub_80C03C8\n\
-	ldrh r0, [r4, 0x4]\n\
+    adds r4, r2, r6\n\
+    lsls r4, 2\n\
+    ldr r0, _080C0388 @ =gSaveBlock1 + 0x2738\n\
+    adds r4, r0\n\
+    ldrh r0, [r4, 0x8]\n\
+    lsls r5, r6, 24\n\
+    lsrs r5, 24\n\
+    adds r1, r5, 0\n\
+    bl sub_80C03C8\n\
+    ldrh r0, [r4, 0x4]\n\
 _checkSpecies2:\n\
-	adds r1, r5, 0\n\
-	bl sub_80C03C8\n\
-	b _break\n\
-	.align 2, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_80C03C8\n\
+    b _break\n\
+    .align 2, 0\n\
 _080C0388: .4byte gSaveBlock1 + 0x2738\n\
 _default:\n\
-	lsls r0, r6, 24\n\
-	lsrs r0, 24\n\
-	bl sub_80C03A8\n\
+    lsls r0, r6, 24\n\
+    lsrs r0, 24\n\
+    bl sub_80C03A8\n\
 _break:\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	cmp r6, 0x17\n\
-	bhi _080C03A0\n\
-	b _080C01D8\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    cmp r6, 0x17\n\
+    bhi _080C03A0\n\
+    b _080C01D8\n\
 _080C03A0:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
 .syntax divided\n");
 }
 #endif
@@ -2718,7 +2755,7 @@ void sub_80C03A8(u8 showidx) {
 }
 
 void sub_80C03C8(u16 species, u8 showidx) {
-    if (!sub_8090D90(SpeciesToNationalPokedexNum(species), 0)) {
+    if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0) {
         gSaveBlock1.tvShows[showidx].common.var01 = 0;
     }
 }
@@ -2738,43 +2775,43 @@ void sub_80C0408(void) {
 __attribute__((naked))
 void sub_80C0408(void) {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	ldr r0, _080C044C @ =0x00000804\n\
-	bl FlagGet\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _080C0444\n\
-	movs r2, 0\n\
-	ldr r6, _080C0450 @ =gSaveBlock1\n\
-	ldr r4, _080C0454 @ =0x00002739\n\
-	movs r3, 0\n\
-	ldr r5, _080C0458 @ =0x00002738\n\
+    push {r4-r6,lr}\n\
+    ldr r0, _080C044C @ =0x00000804\n\
+    bl FlagGet\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    beq _080C0444\n\
+    movs r2, 0\n\
+    ldr r6, _080C0450 @ =gSaveBlock1\n\
+    ldr r4, _080C0454 @ =0x00002739\n\
+    movs r3, 0\n\
+    ldr r5, _080C0458 @ =0x00002738\n\
 _080C0422:\n\
-	lsls r0, r2, 3\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r1, r0, r6\n\
-	adds r0, r1, r5\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x7\n\
-	beq _080C0436\n\
-	cmp r0, 0x29\n\
-	bne _080C043A\n\
+    lsls r0, r2, 3\n\
+    adds r0, r2\n\
+    lsls r0, 2\n\
+    adds r1, r0, r6\n\
+    adds r0, r1, r5\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x7\n\
+    beq _080C0436\n\
+    cmp r0, 0x29\n\
+    bne _080C043A\n\
 _080C0436:\n\
-	adds r0, r1, r4\n\
-	strb r3, [r0]\n\
+    adds r0, r1, r4\n\
+    strb r3, [r0]\n\
 _080C043A:\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x17\n\
-	bls _080C0422\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x17\n\
+    bls _080C0422\n\
 _080C0444:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _080C044C: .4byte 0x00000804\n\
 _080C0450: .4byte gSaveBlock1\n\
 _080C0454: .4byte 0x00002739\n\
@@ -2874,22 +2911,6 @@ void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2A
         }
     }
 }
-
-void DoTVShowPokemonFanClubLetter(void);
-void DoTVShowRecentHappenings(void);
-void DoTVShowPokemonFanClubOpinions(void);
-void nullsub_22(void);
-void DoTVShowPokemonNewsMassOutbreak(void);
-void DoTVShowBravoTrainerPokemonProfile(void);
-void DoTVShowBravoTrainerBattleTowerProfile(void);
-void DoTVShowPokemonTodaySuccessfulCapture(void);
-void DoTVShowTodaysSmartShopper(void);
-void DoTVShowTheNameRaterShow(void);
-void DoTVShowPokemonTodayFailedCapture(void);
-void DoTVShowPokemonAngler(void);
-void DoTVShowTheWorldOfMasters(void);
-
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
 
 void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruct2ABC *arg1[16]) {
     struct UnknownSaveStruct2ABC *str0;
@@ -3297,10 +3318,6 @@ void DoTVShowTodaysSmartShopper(void)
     }
     ShowFieldMessage(gTVSmartShopperTextGroup[switchval]);
 }
-
-void TVShowConvertInternationalString(u8 *, u8 *, u8);
-
-void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 void DoTVShowTheNameRaterShow(void) {
     TVShow *tvShow;

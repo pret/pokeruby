@@ -44,23 +44,23 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    bool8 isCompressed;
-    bool8 isSecondary;
-    void *tiles;
-    void *palettes;
-    void *metatiles;
-    void *metatileAttributes;
-    TilesetCB callback;
+    /*0x00*/ bool8 isCompressed;
+    /*0x01*/ bool8 isSecondary;
+    /*0x04*/ void *tiles;
+    /*0x08*/ void *palettes;
+    /*0x0c*/ void *metatiles;
+    /*0x10*/ void *metatileAttributes;
+    /*0x14*/ TilesetCB callback;
 };
 
 struct MapData
 {
-    s32 width;
-    s32 height;
-    u16 *border;
-    u16 *map;
-    struct Tileset *primaryTileset;
-    struct Tileset *secondaryTileset;
+    /*0x00*/ s32 width;
+    /*0x04*/ s32 height;
+    /*0x08*/ u16 *border;
+    /*0x0c*/ u16 *map;
+    /*0x10*/ struct Tileset *primaryTileset;
+    /*0x14*/ struct Tileset *secondaryTileset;
 };
 
 struct BackupMapData
@@ -312,10 +312,10 @@ struct MapObjectGraphicsInfo
              u8 inanimate:1;
              u8 disableReflectionPaletteLoad:1;
     /*0x0D*/ u8 tracks;
-    /*0x10*/ struct OamData *oam;
-    /*0x14*/ struct SubspriteTable *subspriteTables;
+    /*0x10*/ const struct OamData *oam;
+    /*0x14*/ const struct SubspriteTable *subspriteTables;
     /*0x18*/ const union AnimCmd *const *anims;
-    /*0x1C*/ struct SpriteFrameImage *images;
+    /*0x1C*/ const struct SpriteFrameImage *images;
     /*0x20*/ const union AffineAnimCmd *const *affineAnims;
 };
 

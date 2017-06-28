@@ -281,17 +281,17 @@ sub_80C226C: @ 80C226C
 	ldrb r0, [r0]
 	cmp r5, r0
 	bne _080C2294
-	ldr r0, _080C228C @ =gUnknown_020238CC
+	ldr r0, _080C228C @ =gDisplayedStringBattle
 	ldr r1, _080C2290 @ =gUnknown_083D17DC
 	bl StringCopy
 	adds r2, r0, 0
 	b _080C2296
 	.align 2, 0
 _080C2288: .4byte gContestPlayerMonIndex
-_080C228C: .4byte gUnknown_020238CC
+_080C228C: .4byte gDisplayedStringBattle
 _080C2290: .4byte gUnknown_083D17DC
 _080C2294:
-	ldr r2, _080C22E8 @ =gUnknown_020238CC
+	ldr r2, _080C22E8 @ =gDisplayedStringBattle
 _080C2296:
 	movs r4, 0xFC
 	strb r4, [r2]
@@ -331,7 +331,7 @@ _080C2296:
 	bl StringCopy
 	b _080C230A
 	.align 2, 0
-_080C22E8: .4byte gUnknown_020238CC
+_080C22E8: .4byte gDisplayedStringBattle
 _080C22EC: .4byte gContestMons + 0x2
 _080C22F0: .4byte gUnknown_083D17E0
 _080C22F4: .4byte gIsLinkContest
@@ -345,7 +345,7 @@ _080C22FC:
 	lsls r4, r5, 3
 _080C230A:
 	ldr r0, _080C2334 @ =gMenuWindow
-	ldr r1, _080C2338 @ =gUnknown_020238CC
+	ldr r1, _080C2338 @ =gDisplayedStringBattle
 	adds r2, r4, r5
 	lsls r2, 18
 	ldr r3, _080C233C @ =0x03020000
@@ -365,7 +365,7 @@ _080C230A:
 	bx r0
 	.align 2, 0
 _080C2334: .4byte gMenuWindow
-_080C2338: .4byte gUnknown_020238CC
+_080C2338: .4byte gDisplayedStringBattle
 _080C233C: .4byte 0x03020000
 	thumb_func_end sub_80C226C
 
@@ -1601,7 +1601,7 @@ _080C2D42:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0
@@ -2198,7 +2198,7 @@ _080C31CE:
 	bl GetStringWidthGivenWindowConfig
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, _080C32D4 @ =gUnknown_020238CC
+	ldr r2, _080C32D4 @ =gDisplayedStringBattle
 	ldr r1, _080C32D8 @ =gUnknown_083D17E2
 	adds r0, r2, 0
 	bl StringCopy
@@ -2237,7 +2237,7 @@ _080C3218:
 	strb r0, [r2, 0x3]
 	ldr r0, _080C32DC @ =0x02018068
 	mov r10, r0
-	ldr r1, _080C32D4 @ =gUnknown_020238CC
+	ldr r1, _080C32D4 @ =gDisplayedStringBattle
 	bl sub_80034D4
 	mov r0, sp
 	ldrh r4, [r0]
@@ -2301,7 +2301,7 @@ _080C32C4: .4byte gWindowConfig_81E7278
 _080C32C8: .4byte 0x06010000
 _080C32CC: .4byte 0x040000d4
 _080C32D0: .4byte 0x85000100
-_080C32D4: .4byte gUnknown_020238CC
+_080C32D4: .4byte gDisplayedStringBattle
 _080C32D8: .4byte gUnknown_083D17E2
 _080C32DC: .4byte 0x02018068
 _080C32E0: .4byte gUnknown_083D1624

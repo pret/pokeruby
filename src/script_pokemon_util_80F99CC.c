@@ -1,9 +1,14 @@
 #include "global.h"
-#include "asm.h"
 #include "battle_party_menu.h"
+#include "choose_party.h"
+#include "contest.h"
 #include "data2.h"
+#include "party_menu.h"
+#include "field_fadetransition.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "rom4.h"
 #include "script.h"
 #include "script_pokemon_80F9.h"
@@ -12,29 +17,15 @@
 #include "task.h"
 #include "text.h"
 
+
+
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038694;
 extern u16 gScriptResult;
 
-extern void (*gUnknown_0300485C)(void);
-
-extern void OpenPartyMenu(u8, u8);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34(); // undefined args
-extern u8 sub_806BD58(u8, u8);
-extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern u8 sub_806B58C(u8);
-extern u8 sub_80AE47C(struct Pokemon *party);
-extern void sub_806BC3C(u8, u8);
-extern u16 sub_806BD80(); // undefined args in battle_party_menu.c
-extern u8 sub_806CA38();
-extern void sub_8123138(u8);
-extern u8 sub_8040574(struct Pokemon *party);
-extern void sub_809D9F0(struct Pokemon *party, u8, u8, void *, u32);
+extern void (*gFieldCallback)(void);
 
 void sub_80F99CC(void)
 {
@@ -71,7 +62,7 @@ void sub_80F9A8C(u8 taskId)
     if(!gPaletteFade.active)
     {
         gPaletteFade.bufferTransferDisabled = 1;
-        OpenPartyMenu(gTasks[taskId].data[0], 0);
+        OpenPartyMenu((u8) gTasks[taskId].data[0], 0);
         DestroyTask(taskId);
     }
 }
@@ -284,7 +275,7 @@ void sub_80F9EEC(void)
 {
     sub_809D9F0(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, c2_exit_to_overworld_2_switch, 0);
     unk_2018000.unk8 = 3;
-    gUnknown_0300485C = sub_8080990;
+    gFieldCallback = sub_8080990;
 }
 
 void sub_80F9F3C(void) // count pokemon moves

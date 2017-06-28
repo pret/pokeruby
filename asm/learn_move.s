@@ -51,7 +51,7 @@ sub_813269C: @ 813269C
 	bne _081326C0
 	ldr r0, _081326CC @ =sub_81326D8
 	bl SetMainCallback2
-	ldr r1, _081326D0 @ =gUnknown_0300485C
+	ldr r1, _081326D0 @ =gFieldCallback
 	ldr r0, _081326D4 @ =sub_8080990
 	str r0, [r1]
 	adds r0, r4, 0
@@ -63,7 +63,7 @@ _081326C0:
 	.align 2, 0
 _081326C8: .4byte gPaletteFade
 _081326CC: .4byte sub_81326D8
-_081326D0: .4byte gUnknown_0300485C
+_081326D0: .4byte gFieldCallback
 _081326D4: .4byte sub_8080990
 	thumb_func_end sub_813269C
 
@@ -1037,7 +1037,7 @@ _08132F58:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08132FD6
-	ldr r0, _08132F78 @ =gOtherText_ForgotOrDidNotLearnMove
+	ldr r0, _08132F78 @ =gOtherText_ForgotOrDidNotLearnMove / deuOtherText_ForgotAndLearned
 	bl sub_81328E8
 	ldr r0, _08132F7C @ =gUnknown_030007B0
 	ldr r1, [r0]
@@ -1047,7 +1047,11 @@ _08132F58:
 	bl PlayFanfare
 	b _08132FD6
 	.align 2, 0
+.ifdef ENGLISH
 _08132F78: .4byte gOtherText_ForgotOrDidNotLearnMove
+.else
+_08132F78: .4byte deuOtherText_ForgotAndLearned
+.endif
 _08132F7C: .4byte gUnknown_030007B0
 _08132F80: .4byte 0x0000016f
 _08132F84:

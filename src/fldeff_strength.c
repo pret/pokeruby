@@ -1,8 +1,9 @@
 #include "global.h"
-#include "asm.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
+#include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_menu.h"
 #include "rom6.h"
 #include "script.h"
 #include "task.h"
@@ -16,7 +17,7 @@ extern u32 gUnknown_0202FF84[];
 
 extern u8 gLastFieldPokeMenuOpened;
 extern u16 gScriptResult;
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
 extern u8 UseStrengthScript[];
@@ -26,7 +27,7 @@ bool8 SetUpFieldMove_Strength(void)
     if (ShouldDoBrailleStrengthEffect())
     {
         gScriptResult = gLastFieldPokeMenuOpened;
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_811AA38;
     }
     else
@@ -34,7 +35,7 @@ bool8 SetUpFieldMove_Strength(void)
         if (npc_before_player_of_type(87) != TRUE)
             return 0;
         gScriptResult = gLastFieldPokeMenuOpened;
-        gUnknown_0300485C = sub_808AB90;
+        gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_811AA18;
     }
 

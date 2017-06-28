@@ -1,9 +1,5 @@
-//
-// Created by Scott Norton on 5/31/17.
-//
-
-#ifndef POKERUBY_POKENAV_H
-#define POKERUBY_POKENAV_H
+#ifndef GUARD_POKENAV_H
+#define GUARD_POKENAV_H
 
 struct UnkPokenavStruct_Sub {
     /*0x0*/ u16 unk0;
@@ -73,5 +69,6 @@ void sub_80F567C(void *, void *);
 void sub_80F5B38(void);
 bool8 sub_80F5B50(void);
 void sub_80F5CDC(u8);
+void sub_80EBA5C(void);
 
-#endif //POKERUBY_POKENAV_H
+#endif // GUARD_POKENAV_H

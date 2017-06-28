@@ -1,0 +1,24 @@
+BasedOnStyle: LLVM
+AllowShortFunctionsOnASingleLine: None
+BreakBeforeBraces: Allman
+ColumnLimit: 100
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+AlignAfterOpenBracket: DontAlign
+Cpp11BracedListStyle: false
+BreakStringLiterals: false
+IndentCaseLabels: false
+BinPackArguments: false
+BinPackParameters: false
+IncludeCategories:
+  - Regex:           '^"gba/types\.h"$'
+    Priority:        -4
+  - Regex:           '^"global\.h"$'
+    Priority:        -3
+  - Regex:           '^"gba/gba\.h"$'
+    Priority:        -2
+  - Regex:           '^"gba/'
+    Priority:        -1
+  - Regex:           '.\*'
+    Priority:        1

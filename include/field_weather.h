@@ -31,6 +31,8 @@ void sub_807D874(u8);
 // ...
 void sub_807DB64(u8, u8);
 // ...
+void sub_807DE68(void);
+// ...
 void PlayRainSoundEffect(void);
 // ...
 void SetSav1Weather(u32);
@@ -39,5 +41,10 @@ void sub_80806E4(void);
 // ...
 void DoCurrentWeather(void);
 void sub_8080750();
+
+u8 sub_807D770(void);
+bool8 sub_807DDFC(void);
+void SetWeather(u32);
+void UpdateWeatherPerDay(u16);
 
 #endif // GUARD_WEATHER_H

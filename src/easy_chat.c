@@ -1,6 +1,5 @@
 #include "global.h"
 #include "easy_chat.h"
-#include "asm.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
@@ -11,17 +10,9 @@
 #include "strings2.h"
 #include "text.h"
 
-u8 sub_80EB37C(u16);
-u8 sub_80EB8C0(void);
-u8 sub_80EB868(u8);
-u16 sub_80EAE88(u8);
-void sub_80EB890(u8);
-u16 sub_80EB784(u16 group);
-u8 sub_80EAD7C(u8 group);
 static bool8 sub_80EB680(u16 *, u16, u16, u16);
 static u16 sub_80EB9D8(void);
 static u16 sub_80EB960(void);
-u16 sub_80EB72C(u16);
 
 extern void *gEasyChatGroupWords[];
 extern const u8 gEasyChatGroupSizes[];
@@ -471,7 +462,7 @@ static u16 sub_80EB9D8(void) {
     {
         const u16 dexNum = SpeciesToNationalPokedexNum(*speciesList);
 
-        const u8 local2 = sub_8090D90(dexNum, 0);
+        const u8 local2 = GetNationalPokedexFlag(dexNum, 0);
 
         if (local2)
         {

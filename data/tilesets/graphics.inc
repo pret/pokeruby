@@ -348,13 +348,12 @@ gTilesetPalettes_Building:: @ 8225FA4
 	.incbin "data/tilesets/primary/building/palettes/14.gbapal"
 	.incbin "data/tilesets/primary/building/palettes/15.gbapal"
 
+.ifndef GERMAN
 	.align 2
-
 gTilesetTiles_Shop:: @ 82261A4
 	.incbin "data/tilesets/secondary/shop/tiles.4bpp.lz"
 
 	.align 2
-
 gTilesetPalettes_Shop:: @ 8227788
 	.incbin "data/tilesets/secondary/shop/palettes/00.gbapal"
 	.incbin "data/tilesets/secondary/shop/palettes/01.gbapal"
@@ -372,6 +371,7 @@ gTilesetPalettes_Shop:: @ 8227788
 	.incbin "data/tilesets/secondary/shop/palettes/13.gbapal"
 	.incbin "data/tilesets/secondary/shop/palettes/14.gbapal"
 	.incbin "data/tilesets/secondary/shop/palettes/15.gbapal"
+.endif
 
 	.align 2
 

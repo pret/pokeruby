@@ -1,14 +1,10 @@
 #include "global.h"
 #include "fieldmap.h"
 #include "palette.h"
-
-extern struct MapHeader * const get_mapheader_by_bank_and_number(u8, u8);
-extern void mapheader_run_script_with_tag_x1(void);
-extern void sub_80BB970(struct MapEvents *);
-extern void sub_80BBCCC();
-extern void sub_8056670();
-extern void UpdateTVScreensOnMap();
-extern void sub_80538F0(u8 mapGroup, u8 mapNum);
+#include "rom4.h"
+#include "script.h"
+#include "secret_base.h"
+#include "tv.h"
 
 struct ConnectionFlags
 {
@@ -24,26 +20,12 @@ struct Coords32
     s32 y;
 };
 
-extern const struct Coords32 gUnknown_0821664C[];
-
 EWRAM_DATA static u16 gUnknown_02029828[0x2800] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gUnknown_0202E844 = {0};
 EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
 
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
-
-void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader);
-void sub_80560AC(struct MapHeader *);
-void map_copy_with_padding(u16 *map, u16 width, u16 height);
-void fillSouthConnection(struct MapHeader *, struct MapHeader *, s32);
-void fillNorthConnection(struct MapHeader *, struct MapHeader *, s32);
-void fillWestConnection(struct MapHeader *, struct MapHeader *, s32);
-void fillEastConnection(struct MapHeader *, struct MapHeader *, s32);
-u32 GetBehaviorByMetatileId(u16 metatile);
-struct MapConnection *sub_8056A64(u8 direction, int x, int y);
-bool8 sub_8056ABC(u8 direction, int x, int y, struct MapConnection *connection);
-bool8 sub_8056B20(int x, int src_width, int dest_width, int offset);
 
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection)
 {
@@ -353,7 +335,7 @@ union Block
     u16 value;
 };
 
-u16 MapGridGetZCoordAt(int x, int y)
+u8 MapGridGetZCoordAt(int x, int y)
 {
     u16 block;
     int i;
@@ -379,7 +361,7 @@ u16 MapGridGetZCoordAt(int x, int y)
     return block >> 12;
 }
 
-u16 MapGridIsImpassableAt(int x, int y)
+u8 MapGridIsImpassableAt(int x, int y)
 {
     u16 block;
     int i;
@@ -405,7 +387,7 @@ u16 MapGridIsImpassableAt(int x, int y)
     return (block & 0xc00) >> 10;
 }
 
-u16 MapGridGetMetatileIdAt(int x, int y)
+u32 MapGridGetMetatileIdAt(int x, int y)
 {
     u16 block;
     int i;
@@ -445,7 +427,7 @@ u32 MapGridGetMetatileBehaviorAt(int x, int y)
     return GetBehaviorByMetatileId(metatile) & 0xff;
 }
 
-u16 MapGridGetMetatileLayerTypeAt(int x, int y)
+u8 MapGridGetMetatileLayerTypeAt(int x, int y)
 {
     u16 metatile;
     metatile = MapGridGetMetatileIdAt(x, y);
