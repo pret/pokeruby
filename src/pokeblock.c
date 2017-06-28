@@ -417,6 +417,17 @@ void sub_810BAF4(void)
     SetMainCallback2(sub_810B96C);
 }
 
+#ifdef DEBUG
+void debug_sub_8120F98(void)
+{
+    u8 i;
+    for (i=0; i<40 && gUnknown_083F7F9C[i].color != 0; i++)
+    {
+        gSaveBlock1.pokeblocks[i] = gUnknown_083F7F9C[i];
+    }
+}
+#endif
+
 static void sub_810BB0C(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
