@@ -440,7 +440,6 @@ SECTIONS {
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
-        data/pokeblock.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         data/field_specials.o(.rodata);

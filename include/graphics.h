@@ -2435,4 +2435,12 @@ extern const u8 gMonFrontPic_UnownQuestionMark[];
 extern const u8 gMonBackPic_UnownQuestionMark[];
 extern const u8 gMonIcon_UnownQuestionMark[];
 
+// src/pokeblock.c
+extern const u8 gMenuPokeblock_Gfx[];
+extern const u8 gMenuPokeblock_Tilemap[];
+extern const u8 gMenuPokeblock_Pal[];
+
+extern const u8 gMenuPokeblockDevice_Gfx[];
+extern const u8 gMenuPokeblockDevice_Pal[];
+
 #endif  // GUARD_GRAPHICS_H

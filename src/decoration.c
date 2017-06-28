@@ -1396,7 +1396,7 @@ const u8 *const gUnknown_083EC624[] = {
     gMenuText_GoBackToPrev
 };
 
-const struct MenuAction3 gUnknown_083EC634[] = {
+const struct YesNoFuncTable gUnknown_083EC634[] = {
     {sub_80FF5BC, sub_80FF058},
     {sub_81017A0, sub_80FF058},
     {sub_81017A0, sub_80FF058},
@@ -1871,16 +1871,16 @@ void sub_80FE948(u8 taskId)
             gUnknown_020388F5 = gUnknown_020388F2 + gUnknown_020388F4;
             if (gUnknown_020388F5 == gUnknown_020388D5)
             {
-                gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
+                gUnknown_083EC634[gTasks[taskId].data[11]].noFunc(taskId);
             } else
             {
-                gUnknown_083EC634[gTasks[taskId].data[11]].func1(taskId);
+                gUnknown_083EC634[gTasks[taskId].data[11]].yesFunc(taskId);
             }
         } else if (gMain.newKeys & B_BUTTON)
         {
             HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
-            gUnknown_083EC634[gTasks[taskId].data[11]].func2(taskId);
+            gUnknown_083EC634[gTasks[taskId].data[11]].noFunc(taskId);
         }
     }
 }

@@ -5,14 +5,157 @@
 #include "global.h"
 #include "rom4.h"
 #include "sprite.h"
+#include "strings.h"
 #include "task.h"
 #include "unknown_task.h"
 #include "text.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "graphics.h"
+#include "decompress.h"
 #include "menu_helpers.h"
+#include "battle.h"
+#include "item_menu.h"
 #include "pokeblock.h"
+
+// rodata
+
+const s8 gPokeblockFlavorCompatibilityTable[][5] = {
+    // Cool, Beauty, Cute, Smart, Tough
+    {     0,      0,    0,     0,     0}, // Hardy
+    {     1,      0,    0,     0,    -1}, // Lonely
+    {     1,      0,   -1,     0,     0}, // Brave
+    {     1,     -1,    0,     0,     0}, // Adamant
+    {     1,      0,    0,    -1,     0}, // Naughty
+    {    -1,      0,    0,     0,     1}, // Bold
+    {     0,      0,    0,     0,     0}, // Docile
+    {     0,      0,   -1,     0,     1}, // Relaxed
+    {     0,     -1,    0,     0,     1}, // Impish
+    {     0,      0,    0,    -1,     1}, // Lax
+    {    -1,      0,    1,     0,     0}, // Timid
+    {     0,      0,    1,     0,    -1}, // Hasty
+    {     0,      0,    0,     0,     0}, // Serious
+    {     0,     -1,    1,     0,     0}, // Jolly
+    {     0,      0,    1,    -1,     0}, // Naive
+    {    -1,      1,    0,     0,     0}, // Modest
+    {     0,      1,    0,     0,    -1}, // Mild
+    {     0,      1,   -1,     0,     0}, // Quiet
+    {     0,      0,    0,     0,     0}, // Bashful
+    {     0,      1,    0,    -1,     0}, // Rash
+    {    -1,      0,    0,     1,     0}, // Calm
+    {     0,      0,    0,     1,    -1}, // Gentle
+    {     0,      0,   -1,     1,     0}, // Sassy
+    {     0,     -1,    0,     1,     0}, // Careful
+    {     0,      0,    0,     0,     0}  // Quirky
+};
+
+void (*const gUnknown_083F7EA8[])(void) = {
+    sub_80A5B40,
+    c2_exit_to_overworld_2_switch,
+    sub_802E424,
+    c2_exit_to_overworld_2_switch
+};
+
+const u8 *const gPokeblockNames[] = {
+    NULL,
+    ContestStatsText_RedPokeBlock,
+    ContestStatsText_BluePokeBlock,
+    ContestStatsText_PinkPokeBlock,
+    ContestStatsText_GreenPokeBlock,
+    ContestStatsText_YellowPokeBlock,
+    ContestStatsText_PurplePokeBlock,
+    ContestStatsText_IndigoPokeBlock,
+    ContestStatsText_BrownPokeBlock,
+    ContestStatsText_LiteBluePokeBlock,
+    ContestStatsText_OlivePokeBlock,
+    ContestStatsText_GrayPokeBlock,
+    ContestStatsText_BlackPokeBlock,
+    ContestStatsText_WhitePokeBlock,
+    ContestStatsText_GoldPokeBlock
+};
+
+void sub_810C508(u8);
+void sub_810C5C0(u8);
+void sub_810C748(u8);
+void sub_810C788(u8);
+void sub_810C854(u8);
+
+const struct MenuAction2 gUnknown_083F7EF4[] = {
+    OtherText_Use,     sub_810C508,
+    OtherText_Toss,    sub_810C5C0,
+    gOtherText_CancelNoTerminator, sub_810C748,
+    OtherText_Use,     sub_810C788,
+    OtherText_Use,     sub_810C854,
+};
+
+const u8 gUnknown_083F7F1C[] = {0, 1, 2};
+const u8 gUnknown_083F7F1F[] = {3, 2};
+const u8 gUnknown_083F7F21[] = {4, 2};
+
+void sub_810C610(u8);
+void sub_810C668(u8);
+
+const struct YesNoFuncTable gUnknown_083F7F24[] = {sub_810C610, sub_810C668};
+
+const u8 UnreferencedData_083F7F2C[] = {0x16, 0x17, 0x18, 0x21, 0x2f};
+
+const struct OamData gOamData_83F7F34 = {
+    .size = 3,
+    .priority = 2
+};
+
+const union AnimCmd gSpriteAnim_83F7F3C[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F7F44[] = {
+    gSpriteAnim_83F7F3C
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] = {
+    AFFINEANIMCMD_FRAME(0, 0, -2,  2),
+    AFFINEANIMCMD_FRAME(0, 0,  2,  4),
+    AFFINEANIMCMD_FRAME(0, 0, -2,  4),
+    AFFINEANIMCMD_FRAME(0, 0,  2,  2),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] = {
+    gSpriteAffineAnim_83F7F48
+};
+
+const struct CompressedSpriteSheet gUnknown_083F7F74 = {
+    gMenuPokeblockDevice_Gfx,
+    0x800,
+    0x39d0
+};
+
+const struct CompressedSpritePalette gUnknown_083F7F7C = {
+    gMenuPokeblockDevice_Pal,
+    0x39d0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
+    0x39d0,
+    0x39d0,
+    &gOamData_83F7F34,
+    gSpriteAnimTable_83F7F44,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const u8 gUnknown_083F7F9C[][8] = {
+    { 1, 20,  0,  0,  0,  0, 20,  0},
+    { 2,  0, 20,  0,  0,  0, 20,  0},
+    { 3,  0,  0, 20,  0,  0, 20,  0},
+    { 4,  0,  0,  0, 20,  0, 20,  0},
+    { 5,  0,  0,  0,  0, 20, 20,  0}
+};
+
+// text
 
 static void sub_810B674(void)
 {
@@ -34,7 +177,7 @@ static void sub_810B68C(void)
     DmaCopy16(3, src, dest, sizeof gBGTilemapBuffers[2]);
 }
 
-bool8 sub_810B998(void);
+static bool8 sub_810B998(void);
 u8 sub_810BA50(s16, s16, u8);
 void sub_810BC98(void);
 void sub_810BD08(void);
@@ -167,4 +310,32 @@ void sub_810B96C(void)
             break;
         }
     } while (sub_80F9344() != TRUE);
+}
+
+static bool8 sub_810B998(void)
+{
+    switch (ewram[0x1ffff])
+    {
+        case 0:
+            LZDecompressVram(gMenuPokeblock_Gfx, (void *)VRAM + 0x8000);
+            ewram[0x1ffff]++;
+            break;
+        case 1:
+            sub_800D238(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
+            ewram[0x1ffff]++;
+            break;
+        case 2:
+            LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xc0);
+            ewram[0x1ffff]++;
+            break;
+        case 3:
+            LoadCompressedObjectPic(&gUnknown_083F7F74);
+            ewram[0x1ffff]++;
+            break;
+        case 4:
+            LoadCompressedObjectPalette(&gUnknown_083F7F7C);
+            ewram[0x1ffff] = 0;
+            return TRUE;
+    }
+    return FALSE;
 }

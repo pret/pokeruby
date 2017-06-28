@@ -15,12 +15,6 @@ struct MenuAction2
     void (*func)(u8);
 };
 
-struct MenuAction3
-{
-    void (*func1)(u8);
-    void (*func2)(u8);
-};
-
 extern const struct MenuAction gMenuYesNoItems[];
 
 extern struct Window gMenuWindow;

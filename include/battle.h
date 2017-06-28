@@ -308,6 +308,7 @@ void c3_0802FDF4(u8);
 void sub_802E3E4(u8, int);
 void nullsub_8(u8);
 void sub_802E414(void);
+void sub_802E424(void);
 
 // asm/battle_7.o
 void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);

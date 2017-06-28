@@ -1,6 +1,11 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
+struct YesNoCBTable {
+    void (*yesFunc)(void);
+    void (*noFunc)(void);
+};
+
 extern u8 ewram[];
 extern u8 gUnknown_02039244;
 extern u8 gUnknown_02039248[2];

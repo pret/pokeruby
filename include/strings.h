@@ -902,4 +902,19 @@ extern const u8 gSystemText_NoSaveFileNoTime[];
 extern const u8 gSystemText_ClockAdjustmentUsable[];
 extern const u8 gSystemText_Saving[];
 
+extern const u8 ContestStatsText_RedPokeBlock[];
+extern const u8 ContestStatsText_BluePokeBlock[];
+extern const u8 ContestStatsText_PinkPokeBlock[];
+extern const u8 ContestStatsText_GreenPokeBlock[];
+extern const u8 ContestStatsText_YellowPokeBlock[];
+extern const u8 ContestStatsText_PurplePokeBlock[];
+extern const u8 ContestStatsText_IndigoPokeBlock[];
+extern const u8 ContestStatsText_BrownPokeBlock[];
+extern const u8 ContestStatsText_LiteBluePokeBlock[];
+extern const u8 ContestStatsText_OlivePokeBlock[];
+extern const u8 ContestStatsText_GrayPokeBlock[];
+extern const u8 ContestStatsText_BlackPokeBlock[];
+extern const u8 ContestStatsText_WhitePokeBlock[];
+extern const u8 ContestStatsText_GoldPokeBlock[];
+
 #endif

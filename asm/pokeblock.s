@@ -6,91 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810B998
-sub_810B998: @ 810B998
-	push {lr}
-	ldr r0, _0810B9B0 @ =0x02000000
-	ldr r1, _0810B9B4 @ =0x0001ffff
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bhi _0810BA48
-	lsls r0, 2
-	ldr r1, _0810B9B8 @ =_0810B9BC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0810B9B0: .4byte 0x02000000
-_0810B9B4: .4byte 0x0001ffff
-_0810B9B8: .4byte _0810B9BC
-	.align 2, 0
-_0810B9BC:
-	.4byte _0810B9D0
-	.4byte _0810B9E4
-	.4byte _0810B9F8
-	.4byte _0810BA08
-	.4byte _0810BA28
-_0810B9D0:
-	ldr r0, _0810B9DC @ =gMenuPokeblock_Gfx
-	ldr r1, _0810B9E0 @ =0x06008000
-	bl LZDecompressVram
-	b _0810BA0E
-	.align 2, 0
-_0810B9DC: .4byte gMenuPokeblock_Gfx
-_0810B9E0: .4byte 0x06008000
-_0810B9E4:
-	ldr r0, _0810B9F0 @ =gMenuPokeblock_Tilemap
-	ldr r1, _0810B9F4 @ =gBGTilemapBuffers + 0x1000
-	bl sub_800D238
-	b _0810BA0E
-	.align 2, 0
-_0810B9F0: .4byte gMenuPokeblock_Tilemap
-_0810B9F4: .4byte gBGTilemapBuffers + 0x1000
-_0810B9F8:
-	ldr r0, _0810BA04 @ =gMenuPokeblock_Pal
-	movs r1, 0
-	movs r2, 0xC0
-	bl LoadCompressedPalette
-	b _0810BA0E
-	.align 2, 0
-_0810BA04: .4byte gMenuPokeblock_Pal
-_0810BA08:
-	ldr r0, _0810BA1C @ =gUnknown_083F7F74
-	bl LoadCompressedObjectPic
-_0810BA0E:
-	ldr r1, _0810BA20 @ =0x02000000
-	ldr r0, _0810BA24 @ =0x0001ffff
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0810BA48
-	.align 2, 0
-_0810BA1C: .4byte gUnknown_083F7F74
-_0810BA20: .4byte 0x02000000
-_0810BA24: .4byte 0x0001ffff
-_0810BA28:
-	ldr r0, _0810BA3C @ =gUnknown_083F7F7C
-	bl LoadCompressedObjectPalette
-	ldr r0, _0810BA40 @ =0x02000000
-	ldr r1, _0810BA44 @ =0x0001ffff
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	movs r0, 0x1
-	b _0810BA4A
-	.align 2, 0
-_0810BA3C: .4byte gUnknown_083F7F7C
-_0810BA40: .4byte 0x02000000
-_0810BA44: .4byte 0x0001ffff
-_0810BA48:
-	movs r0, 0
-_0810BA4A:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_810B998
-
 	thumb_func_start sub_810BA50
 sub_810BA50: @ 810BA50
 	push {r4,r5,lr}
@@ -2213,7 +2128,7 @@ sub_810CAE4: @ 810CAE4
 	lsrs r0, 24
 	movs r6, 0
 	movs r4, 0
-	ldr r1, _0810CB40 @ =gUnknown_083F7E28
+	ldr r1, _0810CB40 @ =gPokeblockFlavorCompatibilityTable
 	mov r9, r1
 	lsls r1, r0, 2
 	adds r7, r1, r0
@@ -2252,7 +2167,7 @@ _0810CB2A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0810CB40: .4byte gUnknown_083F7E28
+_0810CB40: .4byte gPokeblockFlavorCompatibilityTable
 	thumb_func_end sub_810CAE4
 
 	thumb_func_start sub_810CB44
