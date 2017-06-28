@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "songs.h"
+#include "pokeblock.h"
 #include "pokeblock_feed.h"
 #include "use_pokeblock.h"
 
@@ -24,6 +25,7 @@ u8 gUnknown_02039310;
 
 extern struct UnkPokenavStruct_Sub1 *gUnknown_02039304;
 extern u16 gKeyRepeatStartDelay;
+extern u16 gScriptItemId; // remove after merge of #349 Pokeblock
 
 void launch_c3_walk_stairs_and_run_once(void (*const)(void));
 void sub_81361E4(void);
@@ -46,6 +48,10 @@ void sub_8136808(void);
 void sub_8136D8C(void);
 u8 sub_81370A4(u8);
 void sub_81369CC(void);
+void sub_8136EF0(void);
+void sub_8137138(void);
+void sub_8136C6C(void);
+bool8 sub_8136D00(void);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -217,7 +223,7 @@ void sub_8136294(void)
             gUnknown_02039304->unk50++;
             break;
         case 17:
-            sub_80F567C(&gUnknown_083DFEC4->unk8ff0, &gUnknown_083DFEC4->unk9004);
+            sub_80F567C(&gUnknown_083DFEC4->unk8ff0, gUnknown_083DFEC4->unk9004);
             sub_80F5B38();
             gUnknown_02039304->unk50++;
             break;
@@ -228,7 +234,7 @@ void sub_8136294(void)
             }
             break;
         case 19:
-            sub_80F556C(&gUnknown_083DFEC4->unk9004);
+            sub_80F556C(gUnknown_083DFEC4->unk9004);
             gUnknown_02039304->unk50++;
             break;
         case 20:
@@ -439,6 +445,53 @@ void sub_81368A4(void)
                 sub_80F3D00();
                 launch_c3_walk_stairs_and_run_once(sub_81369CC);
                 SetMainCallback2(sub_8136244);
+            }
+            break;
+    }
+}
+
+void sub_81369CC(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            gUnknown_02039304->pokemon = &gPlayerParty[0];
+            gUnknown_02039304->pokemon = &gPlayerParty[gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx];
+            move_anim_execute();
+            gUnknown_02039304->unk50++;
+            break;
+        case 1:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+                gUnknown_02039304->unk50++;
+            break;
+        case 2:
+            sub_8136EF0();
+            sub_80F567C(gUnknown_02039304->unk5c, gUnknown_083DFEC4->unk9040);
+            sub_80F5550(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9040);
+            sub_8137138();
+            gUnknown_02039304->unk50++;
+            break;
+        case 3:
+            if (!sub_80F555C())
+            {
+                sub_80F7224(sub_81370A4(gUnknown_083DFEC4->unk87DC));
+                sub_80F3D00();
+                gUnknown_02039304->unk52 = 0;
+                gUnknown_02039304->unk50++;
+            }
+            break;
+        case 4:
+            if ((++gUnknown_02039304->unk52) > 16)
+            {
+                sub_8136C6C();
+                gUnknown_02039304->unk50++;
+            }
+            break;
+        case 5:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8136D00())
+            {
+                sub_810CA6C((u8)gScriptItemId);
+                launch_c3_walk_stairs_and_run_once(sub_8136B44);
             }
             break;
     }
