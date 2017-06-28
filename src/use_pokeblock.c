@@ -45,6 +45,7 @@ void sub_8136D60(void);
 void sub_8136808(void);
 void sub_8136D8C(void);
 u8 sub_81370A4(u8);
+void sub_81369CC(void);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -385,6 +386,59 @@ void sub_8136808(void)
             {
                 gMain.savedCallback = sub_8136174;
                 SetMainCallback2(sub_8147ADC);
+            }
+            break;
+    }
+}
+
+void sub_81368A4(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            if (gUnknown_083DFEC4->unk87DC != gUnknown_02039310)
+            {
+                sub_80F5060(gUnknown_02039304->unk56);
+                gUnknown_02039304->unk50++;
+            }
+            else
+            {
+                gUnknown_02039304->unk50 = 3;
+            }
+            break;
+        case 1:
+            if (!gpu_sync_bg_show())
+            {
+                gUnknown_02039304->unk50++;
+            }
+            break;
+        case 2:
+            if (!sub_8055870())
+            {
+                sub_80F1934();
+                gUnknown_02039304->unk50 = 0;
+            }
+            break;
+        case 3:
+            BlendPalettes(-1, 16, 0);
+            gUnknown_02039304->unk50++;
+            break;
+        case 4:
+            REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
+            gUnknown_02039304->unk50++;
+            break;
+        case 5:
+            SetVBlankCallback(sub_8136264);
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gUnknown_02039304->unk50++;
+            break;
+        case 6:
+            if (!gPaletteFade.active)
+            {
+                sub_80F3C94();
+                sub_80F3D00();
+                launch_c3_walk_stairs_and_run_once(sub_81369CC);
+                SetMainCallback2(sub_8136244);
             }
             break;
     }
