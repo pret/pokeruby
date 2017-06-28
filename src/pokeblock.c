@@ -807,3 +807,33 @@ void sub_810C40C(u8 taskId)
         sub_810C748(taskId);
     }
 }
+
+void sub_8136130(struct Pokeblock *, MainCallback);
+
+void sub_810C4C4(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_810C2B0();
+        sub_8136130(&gSaveBlock1.pokeblocks[gScriptItemId], sub_810B96C);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_810C508(u8 taskId)
+{
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_810C4C4;
+}
+
+void sub_810C5EC(u8);
+
+void sub_810C540(u8 taskId)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(7, 4, 13, 11);
+    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]].color]);
+    StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
+}
