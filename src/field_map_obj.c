@@ -3104,13 +3104,13 @@ void CameraObjectReset1(void)
     }
 }
 
-void CameraObjectSetFollowedObjectId(u8 state)
+void CameraObjectSetFollowedObjectId(u8 spriteId)
 {
     struct Sprite *cameraSprite = FindCameraObject();
 
     if (cameraSprite != NULL)
     {
-        cameraSprite->data0 = state;
+        cameraSprite->data0 = spriteId;
         CameraObjectReset1();
     }
 }

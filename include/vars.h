@@ -17,6 +17,7 @@
 
 #define VAR_DAYS                   0x4040
 
+#define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_POKELOT_PRIZE          0x4045
 #define VAR_NATIONAL_DEX           0x4046
 #define VAR_SHROOMISH_SIZE_RECORD  0x4047
@@ -31,10 +32,12 @@
 #define VAR_0x4054                 0x4054
 
 #define VAR_0x4089                 0x4089
+#define VAR_0x4095                 0x4095
 #define VAR_0x4097                 0x4097
-
+#define VAR_0x409a                 0x409a
 #define VAR_PORTHOLE               0x40B4
 
 #define VAR_0x40BC                 0x40BC
+#define VAR_0x40C2                 0x40C2
 
 #endif // GUARD_VARS_H

@@ -18,7 +18,7 @@ enum
     TVSHOW_MASS_OUTBREAK = 41,
 };
 
-extern u8 *gUnknown_083D1464[3];
+extern u8 *const gUnknown_083D1464[3];
 
 void ClearTVShowData(void);
 u8 sub_80BDEAC(u8 *);
@@ -106,5 +106,6 @@ void DoTVShowTodaysSmartShopper(void);
 void sub_80BE3BC(void);
 void UpdateTVShowsPerDay(u16);
 void sub_80C045C();
+void sub_80BF088(u8, s32);
 
 #endif // GUARD_TV_H
