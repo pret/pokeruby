@@ -689,3 +689,24 @@ void sub_810C0C8(u8 taskId)
         gTasks[taskId].func = sub_810BF7C;
     }
 }
+
+void sub_810C1C8(u8 taskId, u8 flag)
+{
+    u8 i;
+    u32 x;
+    s16 y;
+    u16 v0 = 0x1005;
+    if (!flag)
+    {
+        v0 = 0x0005;
+    }
+    y = gTasks[taskId].data[0] - gUnknown_02039248[1];
+    if ((u16)y <= 8 && y != gUnknown_02039248[0])
+    {
+        for (i=0; i<14; i++)
+        {
+            gBGTilemapBuffers[2][(2 * y + 1) * 32 + (x = i + 15)] = v0;
+            gBGTilemapBuffers[2][(2 * y + 2) * 32 + x] = v0;
+        }
+    }
+}

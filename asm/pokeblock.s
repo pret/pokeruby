@@ -6,68 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_810C1C8
-sub_810C1C8: @ 810C1C8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r1, 24
-	ldr r6, _0810C22C @ =0x00001005
-	cmp r1, 0
-	bne _0810C1D8
-	movs r6, 0x5
-_0810C1D8:
-	ldr r1, _0810C230 @ =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, _0810C234 @ =gUnknown_02039248
-	ldrb r1, [r2, 0x1]
-	ldrh r0, [r0, 0x8]
-	subs r0, r1
-	lsls r1, r0, 16
-	lsrs r0, r1, 16
-	cmp r0, 0x8
-	bhi _0810C226
-	asrs r0, r1, 16
-	ldrb r2, [r2]
-	cmp r0, r2
-	beq _0810C226
-	movs r2, 0
-	lsls r0, 1
-	adds r1, r0, 0x1
-	lsls r5, r1, 5
-	ldr r3, _0810C238 @ =gBGTilemapBuffers + 0x1000
-	adds r0, 0x2
-	lsls r4, r0, 5
-_0810C208:
-	adds r0, r2, 0
-	adds r0, 0xF
-	adds r1, r5, r0
-	lsls r1, 1
-	adds r1, r3
-	strh r6, [r1]
-	adds r0, r4, r0
-	lsls r0, 1
-	adds r0, r3
-	strh r6, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xD
-	bls _0810C208
-_0810C226:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810C22C: .4byte 0x00001005
-_0810C230: .4byte gTasks
-_0810C234: .4byte gUnknown_02039248
-_0810C238: .4byte gBGTilemapBuffers + 0x1000
-	thumb_func_end sub_810C1C8
-
 	thumb_func_start sub_810C23C
 sub_810C23C: @ 810C23C
 	push {r4-r7,lr}
