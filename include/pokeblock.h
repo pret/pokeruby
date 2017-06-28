@@ -15,7 +15,7 @@ extern const u8 *gUnknown_03000758;
 void sub_810B96C(void);
 void sub_810BA7C(u8);
 void ClearPokeblocks(void);
-void sub_810CA6C(s32);
+void sub_810CA6C(u8);
 s16 sub_810CAE4(u8, struct Pokeblock *);
 
 #endif // GUARD_POKEBLOCK_H

@@ -837,3 +837,88 @@ void sub_810C540(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
 }
+
+void sub_810C5C0(u8 taskId)
+{
+    sub_80F979C(1, 1);
+    gTasks[taskId].func = sub_810C540;
+}
+
+void sub_810C5EC(u8 taskId)
+{
+    DisplayYesNoMenu(7, 6, 1);
+    DoYesNoFuncWithChoice(taskId, gUnknown_083F7F24);
+}
+
+void sub_810C704(u8);
+
+void sub_810C610(u8 taskId)
+{
+    MenuZeroFillWindowRect(7, 6, 13, 11);
+    sub_810CA6C((gUnknown_02039248[0] + gUnknown_02039248[1]));
+    StringExpandPlaceholders(gStringVar4, gContestStatsText_WasThrownAway);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_810C704, 0);
+    sub_810BC98();
+    sub_810BD08();
+}
+
+void sub_810C668(u8 taskId)
+{
+    StartVerticalScrollIndicators(0);
+    StartVerticalScrollIndicators(1);
+    if (gUnknown_02039248[2] > gUnknown_02039248[3] && gUnknown_02039248[1] + gUnknown_02039248[3] != gUnknown_02039248[2])
+    {
+        sub_80F979C(1, 0);
+    }
+    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    MenuZeroFillWindowRect(7, 6, 13, 11);
+    MenuZeroFillWindowRect(0, 14, 29, 19);
+    gTasks[taskId].func = sub_810BF7C;
+}
+
+void sub_810C6DC(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        sub_810C668(taskId);
+    }
+}
+
+void sub_810C704(u8 taskId)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    sub_810BC84(gUnknown_02039248[1]);
+    sub_80F979C(1, 1);
+    gTasks[taskId].func = sub_810C6DC;
+}
+
+void sub_810C748(u8 taskId)
+{
+    StartVerticalScrollIndicators(0);
+    StartVerticalScrollIndicators(1);
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(7, 4, 13, 11);
+    gTasks[taskId].func = sub_810BF7C;
+}
+
+void sub_810C788(u8 taskId)
+{
+    s16 v0 = sub_810CAE4(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
+    StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
+    sub_810CA6C(gScriptItemId);
+    gScriptItemId = gSaveBlock1.pokeblocks[gScriptItemId].color << 8;
+    if (v0 == 0)
+    {
+        gScriptItemId += 1;
+    }
+    if (v0 > 0)
+    {
+        gScriptItemId += 2;
+    }
+    if (v0 < 0)
+    {
+        gScriptItemId += 3;
+    }
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_810C2C8;
+}
