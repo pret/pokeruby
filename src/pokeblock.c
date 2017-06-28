@@ -632,3 +632,60 @@ void sub_810BF7C(u8 taskId)
         }
     }
 }
+
+void sub_810C1C8(u8, u8);
+void sub_810C23C(u8);
+
+void sub_810C0C8(u8 taskId)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (gUnknown_02039248[0] != 0)
+        {
+            sub_810BD64(5, 20);
+            gUnknown_02039248[0]--;
+            sub_810BF38(TRUE);
+            sub_810C1C8(taskId, 1);
+        }
+        else if (gUnknown_02039248[1] != 0)
+        {
+            sub_810C1C8(taskId, 0);
+            gUnknown_02039248[1]--;
+            sub_810BB88(gUnknown_02039248[1]);
+            sub_810BF38(TRUE);
+            sub_810C1C8(taskId, 1);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (gUnknown_02039248[0] != gUnknown_02039248[3])
+        {
+            sub_810BD64(5, 20);
+            gUnknown_02039248[0]++;
+            sub_810BF38(TRUE);
+            sub_810C1C8(taskId, 1);
+        }
+        else if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+        {
+            sub_810C1C8(taskId, 0);
+            gUnknown_02039248[1]++;
+            sub_810BB88(gUnknown_02039248[1]);
+            sub_810BF38(TRUE);
+            sub_810C1C8(taskId, 1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON || gMain.newKeys & SELECT_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_810C1C8(taskId, 0);
+        sub_810C23C(taskId);
+        gTasks[taskId].func = sub_810BF7C;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_810C1C8(taskId, 0);
+        sub_810BDAC(0);
+        gTasks[taskId].func = sub_810BF7C;
+    }
+}
