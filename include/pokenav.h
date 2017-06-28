@@ -8,8 +8,8 @@ struct UnkPokenavStruct_Sub {
 
 struct UnkPokenavStruct_Sub1 {
     /*0x00*/ void (*unk0)(void);
-    /*0x04*/ void *unk4;
-    /*0x08*/ void *unk8;
+    /*0x04*/ MainCallback callback;
+    /*0x08*/ struct Pokeblock *pokeblock;
     /*0x0C*/ u8 fillerC[0x44];
     /*0x50*/ u8 unk50;
     /*0x51*/ u8 unk51[4];
@@ -50,7 +50,7 @@ struct UnkPokenavStruct {
     /*0xd164*/ struct UnkPokenavStruct_Sub1 unkD164;
 };
 
-extern struct UnkPokenavStruct *gUnknown_083DFEC4;
+extern struct UnkPokenavStruct *const gUnknown_083DFEC4;
 
 bool8 sub_80F170C(void);
 bool8 sub_80F1778(void);
