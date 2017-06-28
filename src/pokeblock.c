@@ -475,13 +475,78 @@ void sub_810BD08(void)
     }
 }
 
-void sub_810BD64(u16 a0)
+void sub_810BD64(u16 a0, u16 a1)
 {
     u8 i;
     int y;
     for (i=0; i<14; i++)
     {
-        (gBGTilemapBuffers)[2][(2 * gUnknown_02039248[0] + 1) * 32 + (y = i + 15)] = a0;
-        (gBGTilemapBuffers)[2][(2 * gUnknown_02039248[0] + 2) * 32 + y] = a0;
+        gBGTilemapBuffers[2][(2 * gUnknown_02039248[0] + 1) * 32 + (y = i + 15)] = a0;
+        gBGTilemapBuffers[2][(2 * gUnknown_02039248[0] + 2) * 32 + y] = a0;
+    }
+}
+
+s16 sub_810CA9C(struct Pokeblock *, u8);
+u8 sub_810C9E8(struct Pokeblock *);
+
+void sub_810BDAC(bool8 flag)
+{
+    u8 i;
+    u16 v0;
+    if (!flag)
+    {
+        sub_810BD64(0x1005, 0x1014);
+    }
+    else
+    {
+        sub_810BD64(0x2005, 0x2014);
+    }
+    if (gUnknown_02039248[1])
+    {
+        sub_80F979C(0, 0);
+    }
+    else
+    {
+        sub_80F979C(0, 1);
+    }
+    if (gUnknown_02039248[2] > gUnknown_02039248[3] && gUnknown_02039248[1] + gUnknown_02039248[3] != gUnknown_02039248[2])
+    {
+        sub_80F979C(1, 0);
+    }
+    else
+    {
+        sub_80F979C(1, 1);
+    }
+    for (i=0; i<5; i++)
+    {
+        v0 = ((i % 3) << 6) + 0x1a1 + (i / 3) * 6;
+        if (gUnknown_02039248[0] + gUnknown_02039248[1] != gUnknown_02039248[2])
+        {
+            if (sub_810CA9C(&gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]], i + 1) > 0)
+            {
+                gBGTilemapBuffers[2][v0] = (i << 12) + 23;
+                gBGTilemapBuffers[2][v0 + 32] = (i << 12) + 24;
+            }
+            else
+            {
+                gBGTilemapBuffers[2][v0] = 15;
+                gBGTilemapBuffers[2][v0 + 32] = 15;
+            }
+        }
+        else
+        {
+            gBGTilemapBuffers[2][v0] = 15;
+            gBGTilemapBuffers[2][v0 + 32] = 15;
+        }
+    }
+    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    if (gUnknown_02039248[0] + gUnknown_02039248[1] != gUnknown_02039248[2])
+    {
+        sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]]), 16, 1);
+        MenuPrint(gStringVar1, 11, 17);
+    }
+    else
+    {
+        MenuZeroFillWindowRect(11, 17, 12, 18);
     }
 }
