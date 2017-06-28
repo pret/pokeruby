@@ -8,7 +8,7 @@ struct YesNoCBTable {
 
 extern u8 ewram[];
 extern u8 gUnknown_02039244;
-extern u8 gUnknown_02039248[3];
+extern u8 gUnknown_02039248[4];
 extern u8 gUnknown_0203924C;
 extern const u8 *gUnknown_03000758;
 

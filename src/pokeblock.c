@@ -425,3 +425,52 @@ void sub_810BB88(u8 a0)
         MenuPrint(gStringVar1, 15, y + 1);
     }
 }
+
+void sub_810BDAC(bool8);
+
+void sub_810BC84(u8 a0)
+{
+    sub_810BB88(a0);
+    sub_810BDAC(FALSE);
+}
+
+void sub_810BC98(void)
+{
+    u16 i, j;
+    struct Pokeblock buf;
+    for (i=0; i<39; i++)
+    {
+        for (j=i+1; j<40; j++)
+        {
+            if (gSaveBlock1.pokeblocks[i].color == 0)
+            {
+                buf = gSaveBlock1.pokeblocks[i];
+                gSaveBlock1.pokeblocks[i] = gSaveBlock1.pokeblocks[j];
+                gSaveBlock1.pokeblocks[j] = buf;
+            }
+        }
+    }
+}
+
+void sub_810BD08(void)
+{
+    u8 i;
+    gUnknown_02039248[2] = 0;
+    for (i=0; i<40; i++)
+    {
+        if (gSaveBlock1.pokeblocks[i].color != 0)
+            gUnknown_02039248[2]++;
+    }
+    if (gUnknown_02039248[2] < 8)
+    {
+        gUnknown_02039248[3] = gUnknown_02039248[2];
+    }
+    else
+    {
+        gUnknown_02039248[3] = 8;
+    }
+    if (gUnknown_02039248[1] + 8 > gUnknown_02039248[2] && gUnknown_02039248[1] != 0)
+    {
+        gUnknown_02039248[1]--;
+    }
+}
