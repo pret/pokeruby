@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "songs.h"
+#include "pokeblock_feed.h"
 #include "use_pokeblock.h"
 
 asm(".text\n"
@@ -43,6 +44,7 @@ bool8 sub_8137058(void);
 void sub_8136D60(void);
 void sub_8136808(void);
 void sub_8136D8C(void);
+u8 sub_81370A4(u8);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -362,6 +364,27 @@ void sub_8136638(void)
             {
                 sub_8136D8C();
                 gUnknown_02039304->unk50 = 0;
+            }
+            break;
+    }
+}
+
+void sub_8136808(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            gUnknown_02039310 = sub_81370A4(gUnknown_083DFEC4->unk87DC);
+            gUnknown_02039308 = gUnknown_02039304->callback;
+            gUnknown_0203930C = gUnknown_02039304->pokeblock;
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_02039304->unk50++;
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                gMain.savedCallback = sub_8136174;
+                SetMainCallback2(sub_8147ADC);
             }
             break;
     }
