@@ -5,6 +5,7 @@
 #include "global.h"
 #include "rom4.h"
 #include "sprite.h"
+#include "script.h"
 #include "strings.h"
 #include "task.h"
 #include "unknown_task.h"
@@ -19,6 +20,8 @@
 #include "item_menu.h"
 #include "item.h"
 #include "items.h"
+#include "sound.h"
+#include "songs.h"
 #include "pokeblock.h"
 
 // rodata
@@ -548,5 +551,84 @@ void sub_810BDAC(bool8 flag)
     else
     {
         MenuZeroFillWindowRect(11, 17, 12, 18);
+    }
+}
+
+void sub_810C8D4(struct Sprite *);
+
+void sub_810BF38(bool8 flag)
+{
+    PlaySE(SE_SELECT);
+    gSprites[ewram[0x1fffe]].callback = sub_810C8D4;
+    sub_810BDAC(flag);
+}
+
+void sub_810C0C8(u8);
+void sub_810C31C(u8);
+void sub_810C368(u8);
+
+void sub_810BF7C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            if (gUnknown_02039248[0] != 0)
+            {
+                sub_810BD64(5, 20);
+                gUnknown_02039248[0]--;
+                sub_810BF38(FALSE);
+            }
+            else if (gUnknown_02039248[1] != 0)
+            {
+                gUnknown_02039248[1]--;
+                sub_810BB88(gUnknown_02039248[1]);
+                sub_810BF38(FALSE);
+            }
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            if (gUnknown_02039248[0] != gUnknown_02039248[3])
+            {
+                sub_810BD64(5, 20);
+                gUnknown_02039248[0]++;
+                sub_810BF38(FALSE);
+            }
+            else if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+            {
+                gUnknown_02039248[1]++;
+                sub_810BB88(gUnknown_02039248[1]);
+                sub_810BF38(FALSE);
+            }
+        }
+        else if (gMain.newKeys & SELECT_BUTTON)
+        {
+            if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+            {
+                PlaySE(SE_SELECT);
+                sub_810BDAC(TRUE);
+                gTasks[taskId].data[0] = gUnknown_02039248[1] + gUnknown_02039248[0];
+                gTasks[taskId].func = sub_810C0C8;
+            }
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            if (gUnknown_02039248[1] + gUnknown_02039248[0] == gUnknown_02039248[2])
+            {
+                gScriptResult = 0xffff;
+                sub_810C31C(taskId);
+            }
+            else
+            {
+                sub_810C368(taskId);
+            }
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            gScriptResult = 0xffff;
+            sub_810C31C(taskId);
+        }
     }
 }
