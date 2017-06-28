@@ -24,5 +24,6 @@ void BuyMenuFreeMemory(void);
 void sub_80F98DC(int);
 void sub_80F996C(u8);
 void LoadScrollIndicatorPalette(void);
+void sub_80F98A4(u8);
 
 #endif // GUARD_MENU_HELPERS_H

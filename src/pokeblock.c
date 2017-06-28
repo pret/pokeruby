@@ -12,6 +12,7 @@
 #include "text.h"
 #include "main.h"
 #include "menu.h"
+#include "field_fadetransition.h"
 #include "palette.h"
 #include "graphics.h"
 #include "decompress.h"
@@ -727,4 +728,52 @@ void sub_810C23C(u8 taskId)
         sub_810BB88(gUnknown_02039248[1]);
         sub_810BDAC(FALSE);
     }
+}
+
+void sub_810C2B0(void)
+{
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    BuyMenuFreeMemory();
+}
+
+void sub_810C2C8(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gUnknown_02039244 == 3)
+        {
+            gFieldCallback = sub_8080990;
+        }
+        sub_810C2B0();
+        SetMainCallback2(gUnknown_083F7EA8[gUnknown_02039244]);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_810C31C(u8 taskId)
+{
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    if (gUnknown_02039244 > 1)
+    {
+        gScriptItemId = ITEM_NONE;
+    }
+    gTasks[taskId].func = sub_810C2C8;
+}
+
+void sub_810C40C(u8);
+
+void sub_810C368(u8 taskId)
+{
+    int v0 = 0;
+    if (gUnknown_02039244 > 1)
+        v0 = 2;
+    sub_80F98A4(0);
+    sub_80F98A4(1);
+    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    MenuDrawTextWindow(7, v0 + 4, 13, 11);
+    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, (const struct MenuAction *)gUnknown_083F7EF4, gUnknown_03000758);
+    InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
+    gScriptItemId = gUnknown_02039248[0] + gUnknown_02039248[1];
+    gTasks[taskId].func = sub_810C40C;
 }

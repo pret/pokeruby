@@ -571,7 +571,7 @@ void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction m
         MenuPrint(menuItems[i].text, left, top + 2 * i);
 }
 
-void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 *order)
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], const u8 *order)
 {
     u8 i;
 
