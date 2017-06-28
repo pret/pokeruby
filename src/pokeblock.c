@@ -24,9 +24,60 @@
 #include "sound.h"
 #include "songs.h"
 #include "safari_zone.h"
+#include "use_pokeblock.h"
 #include "pokeblock.h"
 
+// function declarations
+
+// gUnknown_083F7EF4
+static void sub_810C508(u8);
+static void sub_810C5C0(u8);
+static void sub_810C748(u8);
+static void sub_810C788(u8);
+static void sub_810C854(u8);
+
+// gUnknown_083F7F24
+static void sub_810C610(u8);
+static void sub_810C668(u8);
+
+// sub_810B6C0
+static bool8 sub_810B998(void);
+static void sub_810BC98(void);
+static void sub_810BD08(void);
+static void sub_810BB0C(void);
+static void sub_810BB30(void);
+static void sub_810BC84(u8);
+
+// sub_810B96C
+static void sub_810BF7C(u8);
+
+// sub_810BC84
+static void sub_810BDAC(bool8);
+
+// sub_810BF38
+static void sub_810C8D4(struct Sprite *);
+
+// sub_810BF7C
+static void sub_810C0C8(u8);
+static void sub_810C31C(u8);
+static void sub_810C368(u8);
+
+// sub_810C0C8
+static void sub_810C1C8(u8, u8);
+static void sub_810C23C(u8);
+
+// sub_810C368
+static void sub_810C40C(u8);
+
+// sub_810C540
+static void sub_810C5EC(u8);
+
+// sub_810C610
+static void sub_810C704(u8);
+
 // rodata
+
+#define GFX_TAG_POKEBLOCK_CASE 14800
 
 const s8 gPokeblockFlavorCompatibilityTable[] = {
     // Cool, Beauty, Cute, Smart, Tough
@@ -82,28 +133,19 @@ const u8 *const gPokeblockNames[] = {
     ContestStatsText_GoldPokeBlock
 };
 
-void sub_810C508(u8);
-void sub_810C5C0(u8);
-void sub_810C748(u8);
-void sub_810C788(u8);
-void sub_810C854(u8);
-
 const struct MenuAction2 gUnknown_083F7EF4[] = {
-    OtherText_Use,     sub_810C508,
-    OtherText_Toss,    sub_810C5C0,
-    gOtherText_CancelNoTerminator, sub_810C748,
-    OtherText_Use,     sub_810C788,
-    OtherText_Use,     sub_810C854,
+    {OtherText_Use,     sub_810C508},
+    {OtherText_Toss,    sub_810C5C0},
+    {gOtherText_CancelNoTerminator, sub_810C748},
+    {OtherText_Use,     sub_810C788},
+    {OtherText_Use,     sub_810C854},
 };
 
 const u8 gUnknown_083F7F1C[] = {0, 1, 2};
 const u8 gUnknown_083F7F1F[] = {3, 2};
 const u8 gUnknown_083F7F21[] = {4, 2};
 
-void sub_810C610(u8);
-void sub_810C668(u8);
-
-const struct YesNoFuncTable gUnknown_083F7F24[] = {sub_810C610, sub_810C668};
+const struct YesNoFuncTable gUnknown_083F7F24 = {sub_810C610, sub_810C668};
 
 const u8 UnreferencedData_083F7F2C[] = {0x16, 0x17, 0x18, 0x21, 0x2f};
 
@@ -136,17 +178,17 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] = {
 const struct CompressedSpriteSheet gUnknown_083F7F74 = {
     gMenuPokeblockDevice_Gfx,
     0x800,
-    0x39d0
+    GFX_TAG_POKEBLOCK_CASE
 };
 
 const struct CompressedSpritePalette gUnknown_083F7F7C = {
     gMenuPokeblockDevice_Pal,
-    0x39d0
+    GFX_TAG_POKEBLOCK_CASE
 };
 
 const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
-    0x39d0,
-    0x39d0,
+    GFX_TAG_POKEBLOCK_CASE,
+    GFX_TAG_POKEBLOCK_CASE,
     &gOamData_83F7F34,
     gSpriteAnimTable_83F7F44,
     NULL,
@@ -183,14 +225,6 @@ static void sub_810B68C(void)
     dest = (vu16 *)(VRAM + 0x7800);
     DmaCopy16(3, src, dest, sizeof gBGTilemapBuffers[2]);
 }
-
-static bool8 sub_810B998(void);
-u8 sub_810BA50(s16, s16, u8);
-void sub_810BC98(void);
-void sub_810BD08(void);
-void sub_810BB0C(void);
-void sub_810BB30(void);
-void sub_810BC84(u8);
 
 static bool8 sub_810B6C0(void)
 {
@@ -306,8 +340,6 @@ static bool8 sub_810B6C0(void)
     return FALSE;
 }
 
-void sub_810BF7C(u8);
-
 void sub_810B96C(void)
 {
     do {
@@ -324,7 +356,7 @@ static bool8 sub_810B998(void)
     switch (ewram[0x1ffff])
     {
         case 0:
-            LZDecompressVram(gMenuPokeblock_Gfx, (void *)VRAM + 0x8000);
+            LZDecompressVram(gMenuPokeblock_Gfx, (u8 *)BG_CHAR_ADDR(2));
             ewram[0x1ffff]++;
             break;
         case 1:
@@ -384,13 +416,13 @@ void sub_810BAF4(void)
     SetMainCallback2(sub_810B96C);
 }
 
-void sub_810BB0C(void)
+static void sub_810BB0C(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
     sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
 }
 
-void sub_810BB30(void)
+static void sub_810BB30(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
     MenuPrint(gContestStatsText_Spicy,   2, 13);
@@ -400,9 +432,7 @@ void sub_810BB30(void)
     MenuPrint(gContestStatsText_Sour,    8, 15);
 }
 
-u8 sub_810C9B0(struct Pokeblock *);
-
-void sub_810BB88(u8 a0)
+static void sub_810BB88(u8 a0)
 {
     u8 i;
     u8 y;
@@ -431,15 +461,13 @@ void sub_810BB88(u8 a0)
     }
 }
 
-void sub_810BDAC(bool8);
-
-void sub_810BC84(u8 a0)
+static void sub_810BC84(u8 a0)
 {
     sub_810BB88(a0);
     sub_810BDAC(FALSE);
 }
 
-void sub_810BC98(void)
+static void sub_810BC98(void)
 {
     u16 i, j;
     struct Pokeblock buf;
@@ -457,7 +485,7 @@ void sub_810BC98(void)
     }
 }
 
-void sub_810BD08(void)
+static void sub_810BD08(void)
 {
     u8 i;
     gUnknown_02039248[2] = 0;
@@ -480,7 +508,7 @@ void sub_810BD08(void)
     }
 }
 
-void sub_810BD64(u16 a0, u16 a1)
+static void sub_810BD64(u16 a0, u16 a1)
 {
     u8 i;
     int y;
@@ -491,10 +519,7 @@ void sub_810BD64(u16 a0, u16 a1)
     }
 }
 
-s16 sub_810CA9C(const struct Pokeblock *, u8);
-u8 sub_810C9E8(struct Pokeblock *);
-
-void sub_810BDAC(bool8 flag)
+static void sub_810BDAC(bool8 flag)
 {
     u8 i;
     u16 v0;
@@ -556,20 +581,14 @@ void sub_810BDAC(bool8 flag)
     }
 }
 
-void sub_810C8D4(struct Sprite *);
-
-void sub_810BF38(bool8 flag)
+static void sub_810BF38(bool8 flag)
 {
     PlaySE(SE_SELECT);
     gSprites[ewram[0x1fffe]].callback = sub_810C8D4;
     sub_810BDAC(flag);
 }
 
-void sub_810C0C8(u8);
-void sub_810C31C(u8);
-void sub_810C368(u8);
-
-void sub_810BF7C(u8 taskId)
+static void sub_810BF7C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -635,10 +654,7 @@ void sub_810BF7C(u8 taskId)
     }
 }
 
-void sub_810C1C8(u8, u8);
-void sub_810C23C(u8);
-
-void sub_810C0C8(u8 taskId)
+static void sub_810C0C8(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -692,7 +708,7 @@ void sub_810C0C8(u8 taskId)
     }
 }
 
-void sub_810C1C8(u8 taskId, u8 flag)
+static void sub_810C1C8(u8 taskId, u8 flag)
 {
     u8 i;
     u32 x;
@@ -713,7 +729,7 @@ void sub_810C1C8(u8 taskId, u8 flag)
     }
 }
 
-void sub_810C23C(u8 taskId)
+static void sub_810C23C(u8 taskId)
 {
     struct Pokeblock buf;
     u8 selidx = gUnknown_02039248[1] + gUnknown_02039248[0];
@@ -731,14 +747,14 @@ void sub_810C23C(u8 taskId)
     }
 }
 
-void sub_810C2B0(void)
+static void sub_810C2B0(void)
 {
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
     BuyMenuFreeMemory();
 }
 
-void sub_810C2C8(u8 taskId)
+static void sub_810C2C8(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -752,7 +768,7 @@ void sub_810C2C8(u8 taskId)
     }
 }
 
-void sub_810C31C(u8 taskId)
+static void sub_810C31C(u8 taskId)
 {
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     if (gUnknown_02039244 > 1)
@@ -762,9 +778,7 @@ void sub_810C31C(u8 taskId)
     gTasks[taskId].func = sub_810C2C8;
 }
 
-void sub_810C40C(u8);
-
-void sub_810C368(u8 taskId)
+static void sub_810C368(u8 taskId)
 {
     int v0 = 0;
     if (gUnknown_02039244 > 1)
@@ -779,7 +793,7 @@ void sub_810C368(u8 taskId)
     gTasks[taskId].func = sub_810C40C;
 }
 
-void sub_810C40C(u8 taskId)
+static void sub_810C40C(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -809,9 +823,7 @@ void sub_810C40C(u8 taskId)
     }
 }
 
-void sub_8136130(struct Pokeblock *, MainCallback);
-
-void sub_810C4C4(u8 taskId)
+static void sub_810C4C4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -821,15 +833,13 @@ void sub_810C4C4(u8 taskId)
     }
 }
 
-void sub_810C508(u8 taskId)
+static void sub_810C508(u8 taskId)
 {
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C4C4;
 }
 
-void sub_810C5EC(u8);
-
-void sub_810C540(u8 taskId)
+static void sub_810C540(u8 taskId)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E50);
     HandleDestroyMenuCursors();
@@ -839,21 +849,19 @@ void sub_810C540(u8 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
 }
 
-void sub_810C5C0(u8 taskId)
+static void sub_810C5C0(u8 taskId)
 {
     sub_80F979C(1, 1);
     gTasks[taskId].func = sub_810C540;
 }
 
-void sub_810C5EC(u8 taskId)
+static void sub_810C5EC(u8 taskId)
 {
     DisplayYesNoMenu(7, 6, 1);
-    DoYesNoFuncWithChoice(taskId, gUnknown_083F7F24);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083F7F24);
 }
 
-void sub_810C704(u8);
-
-void sub_810C610(u8 taskId)
+static void sub_810C610(u8 taskId)
 {
     MenuZeroFillWindowRect(7, 6, 13, 11);
     sub_810CA6C((gUnknown_02039248[0] + gUnknown_02039248[1]));
@@ -863,7 +871,7 @@ void sub_810C610(u8 taskId)
     sub_810BD08();
 }
 
-void sub_810C668(u8 taskId)
+static void sub_810C668(u8 taskId)
 {
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
@@ -877,7 +885,7 @@ void sub_810C668(u8 taskId)
     gTasks[taskId].func = sub_810BF7C;
 }
 
-void sub_810C6DC(u8 taskId)
+static void sub_810C6DC(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
@@ -885,7 +893,7 @@ void sub_810C6DC(u8 taskId)
     }
 }
 
-void sub_810C704(u8 taskId)
+static void sub_810C704(u8 taskId)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
     sub_810BC84(gUnknown_02039248[1]);
@@ -893,7 +901,7 @@ void sub_810C704(u8 taskId)
     gTasks[taskId].func = sub_810C6DC;
 }
 
-void sub_810C748(u8 taskId)
+static void sub_810C748(u8 taskId)
 {
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
@@ -902,7 +910,7 @@ void sub_810C748(u8 taskId)
     gTasks[taskId].func = sub_810BF7C;
 }
 
-void sub_810C788(u8 taskId)
+static void sub_810C788(u8 taskId)
 {
     s16 v0 = sub_810CAE4(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
     StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
@@ -924,7 +932,7 @@ void sub_810C788(u8 taskId)
     gTasks[taskId].func = sub_810C2C8;
 }
 
-void sub_810C854(u8 taskId)
+static void sub_810C854(u8 taskId)
 {
     SafariZoneActivatePokeblockFeeder(gScriptItemId);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
@@ -934,7 +942,7 @@ void sub_810C854(u8 taskId)
     gTasks[taskId].func = sub_810C2C8;
 }
 
-void sub_810C8D4(struct Sprite *sprite)
+static void sub_810C8D4(struct Sprite *sprite)
 {
     if (sprite->data0 > 1)
     {
@@ -962,7 +970,7 @@ void sub_810C8D4(struct Sprite *sprite)
     }
 }
 
-void ClearPokeblock(u8 pokeblockIdx)
+static void ClearPokeblock(u8 pokeblockIdx)
 {
     gSaveBlock1.pokeblocks[pokeblockIdx].color  = 0;
     gSaveBlock1.pokeblocks[pokeblockIdx].spicy  = 0;

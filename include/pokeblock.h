@@ -22,6 +22,10 @@ extern u8 gUnknown_0203924C;
 extern const u8 *gUnknown_03000758;
 
 void sub_810B96C(void);
+u8 sub_810BA50(s16, s16, u8);
+u8 sub_810C9B0(struct Pokeblock *);
+s16 sub_810CA9C(const struct Pokeblock *, u8);
+u8 sub_810C9E8(struct Pokeblock *);
 void sub_810BA7C(u8);
 void ClearPokeblocks(void);
 bool8 sub_810CA6C(u8);
