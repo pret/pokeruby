@@ -777,3 +777,33 @@ void sub_810C368(u8 taskId)
     gScriptItemId = gUnknown_02039248[0] + gUnknown_02039248[1];
     gTasks[taskId].func = sub_810C40C;
 }
+
+void sub_810C40C(u8 taskId)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (GetMenuCursorPos())
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(-1);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (GetMenuCursorPos() != gUnknown_0203924C - 1)
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(+1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_083F7EF4[gUnknown_03000758[GetMenuCursorPos()]].func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_810C748(taskId);
+    }
+}
