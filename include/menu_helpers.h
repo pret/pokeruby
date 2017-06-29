@@ -23,5 +23,6 @@ void DestroyVerticalScrollIndicator(u8);
 void BuyMenuFreeMemory(void);
 void sub_80F98DC(int);
 void sub_80F996C(u8);
+void LoadScrollIndicatorPalette(void);
 
 #endif // GUARD_MENU_HELPERS_H
