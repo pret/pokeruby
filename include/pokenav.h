@@ -11,7 +11,7 @@ struct UnkPokenavStruct_Sub1 {
     /*0x04*/ MainCallback callback;
     /*0x08*/ struct Pokeblock *pokeblock;
     /*0x0C*/ struct Pokemon *pokemon;
-    /*0x10*/ u8 fillerC[0x40];
+    /*0x10*/ u8 stringBuffer[0x40];
     /*0x50*/ u8 unk50;
     /*0x51*/ u8 unk51;
     /*0x52*/ u8 unk52;
@@ -94,5 +94,6 @@ bool8 gpu_sync_bg_show(void);
 void sub_80F5550(void *, void *);
 bool8 sub_80F555C(void);
 void sub_80F7224(u8);
+void sub_80F5BDC(void);
 
 #endif // GUARD_POKENAV_H

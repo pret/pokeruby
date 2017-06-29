@@ -5,6 +5,8 @@
 #include "global.h"
 #include "main.h"
 #include "rom4.h"
+#include "string_util.h"
+#include "strings.h"
 #include "pokemon.h"
 #include "pokenav.h"
 #include "palette.h"
@@ -495,4 +497,51 @@ void sub_81369CC(void)
             }
             break;
     }
+}
+
+void sub_8136B44(void)
+{
+    switch (gUnknown_02039304->unk50)
+    {
+        case 0:
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_02039304->unk50++;
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02039304->unk50 = 2;
+            }
+            break;
+        case 2:
+            sub_80F5BDC();
+            gUnknown_02039304->unk50++;
+            break;
+        case 3:
+            SetMainCallback2(gUnknown_02039304->callback);
+            break;
+    }
+}
+
+void sub_8136BB8(void)
+{
+    GetMonData(&gPlayerParty[sub_81370A4(gUnknown_083DFEC4->unk87DC)], MON_DATA_NICKNAME, gUnknown_02039304->stringBuffer);
+    StringGetEnd10(gUnknown_02039304->stringBuffer);
+    StringAppend(gUnknown_02039304->stringBuffer, gOtherText_GetsAPokeBlock);
+    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    MenuDrawTextWindow(0, 16, 29, 19);
+    MenuPrint(gUnknown_02039304->stringBuffer, 1, 17);
+    DisplayYesNoMenu(23, 10, 1);
+    MoveMenuCursor(0);
+}
+
+s8 sub_8136C40(void)
+{
+    s8 retval = ProcessMenuInputNoWrap();
+    if ((u8)(retval + 1) < 3)
+    {
+        MenuZeroFillScreen();
+        BasicInitMenuWindow(&gWindowConfig_81E7080);
+    }
+    return retval;
 }
