@@ -21,11 +21,11 @@
 asm(".text\n"
     ".include \"constants/gba_constants.inc\"");
 
+extern struct UnkPokenavStruct_Sub1 *gUnknown_02039304;
 extern MainCallback gUnknown_02039308;
 extern struct Pokeblock *gUnknown_0203930C;
-u8 gUnknown_02039310;
+extern u8 gUnknown_02039310;
 
-extern struct UnkPokenavStruct_Sub1 *gUnknown_02039304;
 extern u16 gKeyRepeatStartDelay;
 extern u16 gScriptItemId; // remove after merge of #349 Pokeblock
 
@@ -563,3 +563,78 @@ void sub_8136C6C(void)
     }
     sub_8136DA0(gUnknown_02039304->stringBuffer);
 }
+
+#ifdef NONMATCHING
+bool8 sub_8136D00(void)
+{
+    while (1)
+    {
+        if (++gUnknown_02039304->unk53 >= 5)
+        {
+            break;
+        }
+        if (gUnknown_02039304->unk61[gUnknown_02039304->unk53] != 0)
+        {
+            sub_8136DC0(gUnknown_02039304->stringBuffer, gUnknown_02039304->unk53, gUnknown_02039304->unk61[gUnknown_02039304->unk53]);
+            sub_8136DA0(gUnknown_02039304->stringBuffer);
+            return TRUE;
+        }
+    }
+    gUnknown_02039304->unk53 = 5;
+    return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 sub_8136D00(void)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                    "\tldr r4, _08136D30 @ =gUnknown_02039304\n"
+                    "\tadds r3, r4, 0\n"
+                    "\tmovs r5, 0x5\n"
+                    "_08136D08:\n"
+                    "\tldr r0, [r3]\n"
+                    "\tadds r0, 0x53\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tadds r1, 0x1\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r2, [r3]\n"
+                    "\tadds r1, r2, 0\n"
+                    "\tadds r1, 0x53\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tcmp r0, 0x4\n"
+                    "\tbhi _08136D34\n"
+                    "\tadds r0, r2, 0\n"
+                    "\tadds r0, 0x61\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _08136D3A\n"
+                    "\tb _08136D08\n"
+                    "\t.align 2, 0\n"
+                    "_08136D30: .4byte gUnknown_02039304\n"
+                    "_08136D34:\n"
+                    "\tstrb r5, [r1]\n"
+                    "\tmovs r0, 0\n"
+                    "\tb _08136D5A\n"
+                    "_08136D3A:\n"
+                    "\tldr r2, [r4]\n"
+                    "\tadds r0, r2, 0\n"
+                    "\tadds r0, 0x10\n"
+                    "\tadds r1, r2, 0\n"
+                    "\tadds r1, 0x53\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tadds r2, 0x61\n"
+                    "\tadds r2, r1\n"
+                    "\tldrb r2, [r2]\n"
+                    "\tbl sub_8136DC0\n"
+                    "\tldr r0, [r4]\n"
+                    "\tadds r0, 0x10\n"
+                    "\tbl sub_8136DA0\n"
+                    "\tmovs r0, 0x1\n"
+                    "_08136D5A:\n"
+                    "\tpop {r4,r5}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1");
+}
+#endif
