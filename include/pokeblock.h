@@ -30,5 +30,6 @@ void sub_810BA7C(u8);
 void ClearPokeblocks(void);
 bool8 sub_810CA6C(u8);
 s16 sub_810CAE4(u8, const struct Pokeblock *);
+u8 sub_810CB68(u8, u8*);
 
 #endif // GUARD_POKEBLOCK_H
