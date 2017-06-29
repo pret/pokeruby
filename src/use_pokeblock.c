@@ -54,6 +54,8 @@ void sub_8136EF0(void);
 void sub_8137138(void);
 void sub_8136C6C(void);
 bool8 sub_8136D00(void);
+void sub_8136DC0(u8 *, u8, u8);
+void sub_8136DA0(u8 *);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -544,4 +546,20 @@ s8 sub_8136C40(void)
         BasicInitMenuWindow(&gWindowConfig_81E7080);
     }
     return retval;
+}
+
+void sub_8136C6C(void)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    MenuDrawTextWindow(0, 16, 29, 19);
+    for (gUnknown_02039304->unk53 = 0; gUnknown_02039304->unk53 < 5 && gUnknown_02039304->unk61[gUnknown_02039304->unk53] == 0; gUnknown_02039304->unk53++);
+    if (gUnknown_02039304->unk53 < 5)
+    {
+        sub_8136DC0(gUnknown_02039304->stringBuffer, gUnknown_02039304->unk53, gUnknown_02039304->unk61[gUnknown_02039304->unk53]);
+    }
+    else
+    {
+        sub_8136DC0(gUnknown_02039304->stringBuffer, gUnknown_02039304->unk53, 0);
+    }
+    sub_8136DA0(gUnknown_02039304->stringBuffer);
 }
