@@ -969,20 +969,19 @@ void CB2_StartSoundCheckMenu(void)
 // Task_InitSoundCheckMenu
 void sub_80BA258(u8 taskId)
 {
-    u8 soundcheckStr[9];
-    u8 bgmStr[4];
-    u8 seStr[4];
-    u8 abDescStr[13];
-    u8 upDownStr[12];
-    u8 driverStr[14];
+    u8 soundcheckStr[sizeof gDebugText_SoundCheckJap];
+    u8 bgmStr[sizeof gDebugText_BGM];
+    u8 seStr[sizeof gDebugText_SE];
+    u8 abDescStr[sizeof gDebugText_ABDesc];
+    u8 upDownStr[sizeof gDebugText_UpDown];
+    u8 driverStr[sizeof gDebugText_DriverTest];
 
-    // these probably used size of the strings themselves, but they are not in the C file yet.
-    memcpy(soundcheckStr, gDebugText_SoundCheckJap, sizeof soundcheckStr);
-    memcpy(bgmStr, gDebugText_BGM, sizeof bgmStr);
-    memcpy(seStr, gDebugText_SE, sizeof seStr);
-    memcpy(abDescStr, gDebugText_ABDesc, sizeof abDescStr);
-    memcpy(upDownStr, gDebugText_UpDown, sizeof upDownStr);
-    memcpy(driverStr, gDebugText_DriverTest, sizeof driverStr);
+    memcpy(soundcheckStr, gDebugText_SoundCheckJap, sizeof gDebugText_SoundCheckJap);
+    memcpy(bgmStr, gDebugText_BGM, sizeof gDebugText_BGM);
+    memcpy(seStr, gDebugText_SE, sizeof gDebugText_SE);
+    memcpy(abDescStr, gDebugText_ABDesc, sizeof gDebugText_ABDesc);
+    memcpy(upDownStr, gDebugText_UpDown, sizeof gDebugText_UpDown);
+    memcpy(driverStr, gDebugText_DriverTest, sizeof gDebugText_DriverTest);
 
     if(!gPaletteFade.active)
     {
@@ -1556,35 +1555,35 @@ void sub_80BA79C(const u8 *const string, u16 x, u16 y)
 
 void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
 {
-    u8 bbackStr[10];
-    u8 aplayStr[11];
-    u8 voiceStr[10];
-    u8 volumeStr[10];
-    u8 panpotStr[10];
-    u8 pitchStr[10];
-    u8 lengthStr[10];
-    u8 releaseStr[10];
-    u8 progressStr[10];
-    u8 chorusStr[10];
-    u8 priorityStr[10];
-    u8 playingStr[9];
-    u8 reverseStr[9];
-    u8 stereoStr[9];
+    u8 bbackStr[sizeof gDebugText_BBack];
+    u8 aplayStr[sizeof gDebugText_APlay];
+    u8 voiceStr[sizeof gDebugText_Voice];
+    u8 volumeStr[sizeof gDebugText_Volume];
+    u8 panpotStr[sizeof gDebugText_Panpot];
+    u8 pitchStr[sizeof gDebugText_Pitch];
+    u8 lengthStr[sizeof gDebugText_Length];
+    u8 releaseStr[sizeof gDebugText_Release];
+    u8 progressStr[sizeof gDebugText_Progress];
+    u8 chorusStr[sizeof gDebugText_Chorus];
+    u8 priorityStr[sizeof gDebugText_Priority];
+    u8 playingStr[sizeof gDebugText_Playing];
+    u8 reverseStr[sizeof gDebugText_Reverse];
+    u8 stereoStr[sizeof gDebugText_Stereo];
 
-    memcpy(bbackStr, gDebugText_BBack, sizeof bbackStr);
-    memcpy(aplayStr, gDebugText_APlay, sizeof aplayStr);
-    memcpy(voiceStr, gDebugText_Voice, sizeof voiceStr);
-    memcpy(volumeStr, gDebugText_Volume, sizeof volumeStr);
-    memcpy(panpotStr, gDebugText_Panpot, sizeof panpotStr);
-    memcpy(pitchStr, gDebugText_Pitch, sizeof pitchStr);
-    memcpy(lengthStr, gDebugText_Length, sizeof lengthStr);
-    memcpy(releaseStr, gDebugText_Release, sizeof releaseStr);
-    memcpy(progressStr, gDebugText_Progress, sizeof progressStr);
-    memcpy(chorusStr, gDebugText_Chorus, sizeof chorusStr);
-    memcpy(priorityStr, gDebugText_Priority, sizeof priorityStr);
-    memcpy(playingStr, gDebugText_Playing, sizeof playingStr);
-    memcpy(reverseStr, gDebugText_Reverse, sizeof reverseStr);
-    memcpy(stereoStr, gDebugText_Stereo, sizeof stereoStr);
+    memcpy(bbackStr, gDebugText_BBack, sizeof gDebugText_BBack);
+    memcpy(aplayStr, gDebugText_APlay, sizeof gDebugText_APlay);
+    memcpy(voiceStr, gDebugText_Voice, sizeof gDebugText_Voice);
+    memcpy(volumeStr, gDebugText_Volume, sizeof gDebugText_Volume);
+    memcpy(panpotStr, gDebugText_Panpot, sizeof gDebugText_Panpot);
+    memcpy(pitchStr, gDebugText_Pitch, sizeof gDebugText_Pitch);
+    memcpy(lengthStr, gDebugText_Length, sizeof gDebugText_Length);
+    memcpy(releaseStr, gDebugText_Release, sizeof gDebugText_Release);
+    memcpy(progressStr, gDebugText_Progress, sizeof gDebugText_Progress);
+    memcpy(chorusStr, gDebugText_Chorus, sizeof gDebugText_Chorus);
+    memcpy(priorityStr, gDebugText_Priority, sizeof gDebugText_Priority);
+    memcpy(playingStr, gDebugText_Playing, sizeof gDebugText_Playing);
+    memcpy(reverseStr, gDebugText_Reverse, sizeof gDebugText_Reverse);
+    memcpy(stereoStr, gDebugText_Stereo, sizeof gDebugText_Stereo);
 
     REG_DISPCNT = 0x3140;
     MenuDrawTextWindow(0, 0, 0x1D, 0x13);
@@ -1749,9 +1748,9 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
 
 void sub_80BACDC(s8 var)
 {
-    int minMaxArray[16];
+    int minMaxArray[ARRAY_COUNT(gUnknown_083D039C)];
 
-    memcpy(minMaxArray, gUnknown_083D039C, sizeof minMaxArray);
+    memcpy(minMaxArray, gUnknown_083D039C, sizeof gUnknown_083D039C);
     gUnknown_020387B4[gUnknown_020387B3] += var;
 
     if(gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)])
@@ -1779,11 +1778,11 @@ void sub_80BAD5C(void)
 
 void sub_80BAE10(u8 var1, u8 var2)
 {
-    u8 str1[2];
-    u8 str2[2];
+    u8 str1[sizeof gUnknown_083D03DC];
+    u8 str2[sizeof gUnknown_083D03DE];
 
-    memcpy(str1, gUnknown_083D03DC, sizeof str1);
-    memcpy(str2, gUnknown_083D03DE, sizeof str2);
+    memcpy(str1, gUnknown_083D03DC, sizeof gUnknown_083D03DC);
+    memcpy(str2, gUnknown_083D03DE, sizeof gUnknown_083D03DE);
 
     MenuPrint(str2, gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 1)]);
     MenuPrint(str1, gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 1)]);
@@ -1972,13 +1971,13 @@ _080BAF80: .4byte gUnknown_083D03E0\n\
 
 void sub_80BAF84(u8 taskId)
 {
-    u8 seStr[3];
-    u8 panStr[4];
-    u8 playingStr[9];
+    u8 seStr[sizeof gOtherText_SE];
+    u8 panStr[sizeof gOtherText_Pan];
+    u8 playingStr[sizeof gDebugText_Playing];
 
-    memcpy(seStr, gOtherText_SE, sizeof seStr);
-    memcpy(panStr, gOtherText_Pan, sizeof panStr);
-    memcpy(playingStr, gDebugText_Playing, sizeof playingStr);
+    memcpy(seStr, gOtherText_SE, sizeof gOtherText_SE);
+    memcpy(panStr, gOtherText_Pan, sizeof gOtherText_Pan);
+    memcpy(playingStr, gDebugText_Playing, sizeof gDebugText_Playing);
 
     REG_DISPCNT = 0x3140;
     MenuDrawTextWindow(0, 0, 0x1D, 0x13);
