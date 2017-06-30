@@ -16,6 +16,9 @@
 #define BGM_INDEX data[1]
 #define SE_INDEX data[2]
 #define UNK_DATA3 data[3]
+#define UNK_DATA4 data[4]
+// data 5-7 are not used
+// i dont have a define for data 8 yet because its used in a nonmatching and I can't be sure yet its actually used.
 
 // window selections
 enum
@@ -245,65 +248,65 @@ bool8 sub_80BA400(u8 taskId) // Task_ProcessSoundCheckMenuInput
 {
     if(gMain.newKeys & R_BUTTON) // driver test
     {
-        gTasks[taskId].func = sub_80BA800;
+        TASK.FUNC = sub_80BA800;
         return FALSE;
     }
     if(gMain.newKeys & L_BUTTON)
     {
-        gTasks[taskId].func = sub_80BAF84;
+        TASK.FUNC = sub_80BAF84;
         return FALSE;
     }
     if(gMain.newKeys & START_BUTTON)
     {
-        gTasks[taskId].func = sub_80BB25C;
+        TASK.FUNC = sub_80BB25C;
         return FALSE;
     }
     if(gMain.newKeys & A_BUTTON) // both these cases insist on non reuses of certain data variables and cause the function to not match.
     {
-        if(gTasks[taskId].data[0] != 0) // is playing?
+        if(TASK.WINDOW_SELECTED != 0) // is playing?
         {
-            if(gTasks[taskId].data[4] != 0)
+            if(TASK.UNK_DATA4 != 0)
             {
-                if(gTasks[taskId].data[2] != 0) // why are you insiting on a non signed halfword?
+                if(TASK.SE_INDEX != 0) // why are you insiting on a non signed halfword?
                 {
-                    m4aSongNumStop(gTasks[taskId].data[4]);
+                    m4aSongNumStop(TASK.UNK_DATA4);
                 }
                 else
                 {
-                    m4aSongNumStop(gTasks[taskId].data[2]);
-                    gTasks[taskId].data[4] = gTasks[taskId].data[2];
+                    m4aSongNumStop(TASK.SE_INDEX);
+                    TASK.UNK_DATA4 = TASK.SE_INDEX;
                     return FALSE;
                 }
             }
-            else if(gTasks[taskId].data[2] == 0) // _080BA4BA
+            else if(TASK.SE_INDEX == 0) // _080BA4BA
             {
                 return FALSE;
             }
             // _080BA4C4
-            m4aSongNumStart(gTasks[taskId].data[2]);
-            gTasks[taskId].data[4] = gTasks[taskId].data[2];
+            m4aSongNumStart(TASK.SE_INDEX);
+            TASK.UNK_DATA4 = TASK.SE_INDEX;
             return FALSE;
         }
         else // _080BA4D0
         {
-            if(gTasks[taskId].data[3] != 0)
+            if(TASK.UNK_DATA3 != 0)
             {
-                if(gTasks[taskId].data[1] != 0)
+                if(TASK.BGM_INDEX != 0)
                 {
-                    m4aSongNumStop(gTasks[taskId].data[3] + BGM_STOP);
+                    m4aSongNumStop(TASK.UNK_DATA3 + BGM_STOP);
                 }
                 else // _080BA500
                 {
-                    m4aSongNumStop(gTasks[taskId].data[3] + BGM_STOP);
-                    gTasks[taskId].data[3] = gTasks[taskId].data[1];
+                    m4aSongNumStop(TASK.UNK_DATA3 + BGM_STOP);
+                    TASK.UNK_DATA3 = TASK.BGM_INDEX;
                     return FALSE;
                 }
             }
-            else if(gTasks[taskId].data[1] == 0) // _080BA514
+            else if(TASK.BGM_INDEX == 0) // _080BA514
                 return FALSE;
 
-            m4aSongNumStart(gTasks[taskId].data[1] + BGM_STOP);
-            gTasks[taskId].data[3] = gTasks[taskId].data[1];
+            m4aSongNumStart(TASK.BGM_INDEX + BGM_STOP);
+            TASK.UNK_DATA3 = TASK.BGM_INDEX;
         }
         return FALSE;
     }
@@ -311,17 +314,17 @@ bool8 sub_80BA400(u8 taskId) // Task_ProcessSoundCheckMenuInput
     {
         m4aSongNumStart(5);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        gTasks[taskId].func = sub_80BA68C;
+        TASK.FUNC = sub_80BA68C;
         return FALSE;
     }
     if(gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        gTasks[taskId].data[8] ^= A_BUTTON; // huh?
+        TASK.data[8] ^= A_BUTTON; // huh?
         return TRUE;
     }
     if(gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        gTasks[taskId].data[8] ^= A_BUTTON; // huh?
+        TASK.data[8] ^= A_BUTTON; // huh?
         return TRUE;
     }
     else
@@ -329,48 +332,48 @@ bool8 sub_80BA400(u8 taskId) // Task_ProcessSoundCheckMenuInput
     u16 keys = gMain.newAndRepeatedKeys & DPAD_RIGHT;
     if(keys)
     {
-        if(gTasks[taskId].data[0] != 0)
+        if(TASK.WINDOW_SELECTED != 0)
         {
-            if(gTasks[taskId].data[2] > 0)
+            if(TASK.SE_INDEX > 0)
             {
-                gTasks[taskId].data[2]--;
+                TASK.SE_INDEX--;
             }
             else
             {
-                gTasks[taskId].data[2] = 0xF7;
+                TASK.SE_INDEX = 0xF7;
             }
         }
-        else if(gTasks[taskId].data[1] > 0)
+        else if(TASK.BGM_INDEX > 0)
         {
-            gTasks[taskId].data[1]--;
+            TASK.BGM_INDEX--;
         }
         else
         {
-            gTasks[taskId].data[1] = 0x75;
+            TASK.BGM_INDEX = 0x75;
         }
         return TRUE;
     }
     if(gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        if(gTasks[taskId].data[0] != 0)
+        if(TASK.WINDOW_SELECTED != 0)
         {
-            if(gTasks[taskId].data[2] < 0xF7)
+            if(TASK.SE_INDEX < 0xF7)
             {
-                gTasks[taskId].data[2]++;
+                TASK.SE_INDEX++;
             }
             else
             {
-                gTasks[taskId].data[2] = keys; // ??
+                TASK.SE_INDEX = keys; // ??
             }
         }
-        else if(gTasks[taskId].data[1] < 0x75)
+        else if(TASK.BGM_INDEX < 0x75)
         {
-            gTasks[taskId].data[1]++;
+            TASK.BGM_INDEX++;
             return TRUE;
         }
         else
         {
-            gTasks[taskId].data[1] = gTasks[taskId].data[2];
+            TASK.BGM_INDEX = TASK.SE_INDEX;
             return TRUE;
         }
         return TRUE;
@@ -709,7 +712,7 @@ _080BA658: .4byte gUnknown_020387B0\n\
 void sub_80BA65C(u8 taskId)
 {
     if(sub_80BA400(taskId) != FALSE)
-        gTasks[taskId].func = sub_80BA384;
+        TASK.FUNC = sub_80BA384;
 }
 
 void sub_80BA68C(u8 taskId)
@@ -849,7 +852,7 @@ void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
     gUnknown_020387B4[CRY_TEST_PRIORITY] = 2;
     sub_80BAD5C();
     sub_80BAE10(0, 0);
-    gTasks[taskId].func = sub_80BAA48;
+    TASK.FUNC = sub_80BAA48;
 }
 
 void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
@@ -860,7 +863,7 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
         REG_WIN0H = 0x11DF;
         REG_WIN0V = 0x11F;
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        gTasks[taskId].func = sub_80BA258;
+        TASK.FUNC = sub_80BA258;
         return;
     }
     if(gMain.newAndRepeatedKeys & 0x40) // _080BAAA8
@@ -1221,7 +1224,7 @@ void sub_80BAF84(u8 taskId)
     gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
     gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
     sub_80BB1D4();
-    gTasks[taskId].func = sub_80BB038;
+    TASK.FUNC = sub_80BB038;
 }
 
 void sub_80BB038(u8 taskId)
@@ -1260,7 +1263,7 @@ void sub_80BB038(u8 taskId)
         REG_WIN0H = 0x11DF;
         REG_WIN0V = 0x11F;
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        gTasks[taskId].func = sub_80BA258;
+        TASK.FUNC = sub_80BA258;
         return;
     }
     if(gMain.newKeys & 0x1) // _080BB104
@@ -1383,7 +1386,7 @@ void sub_80BB25C(u8 taskId)
     REG_BG3CNT = 0x1D03;
     REG_DISPCNT = 0x1d40;
     m4aMPlayFadeOutTemporarily(&gMPlay_BGM, 2);
-    gTasks[taskId].func = sub_80BB3B4;
+    TASK.FUNC = sub_80BB3B4;
 }
 
 void sub_80BB3B4(u8 taskId)
@@ -1407,7 +1410,7 @@ void sub_80BB3B4(u8 taskId)
     if(gMain.newAndRepeatedKeys & 0x80)
     {
         if(++gUnknown_03005D34 > 384)
-            gUnknown_03005D34 = 1; // total species
+            gUnknown_03005D34 = 1;
         sub_80BB494();
     }
     if(gMain.newKeys & 0x2)
@@ -1416,7 +1419,7 @@ void sub_80BB3B4(u8 taskId)
         REG_WIN0H = 0x11DF;
         REG_WIN0V = 0x11F;
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        gTasks[taskId].func = sub_80BA258;
+        TASK.FUNC = sub_80BA258;
         DestroyCryMeterNeedleSprite();
     }
 }
