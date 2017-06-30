@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_81370E4
-sub_81370E4: @ 81370E4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r4, 0
-	movs r6, 0
-	cmp r6, r5
-	bcs _08137114
-_081370F2:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, _08137120 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	beq _0813710A
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0813710A:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, r5
-	bcc _081370F2
-_08137114:
-	subs r0, r5, r6
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08137120: .4byte gPlayerParty
-	thumb_func_end sub_81370E4
-
-	thumb_func_start sub_8137124
-sub_8137124: @ 8137124
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_81370A4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8137124
-
 	thumb_func_start sub_8137138
 sub_8137138: @ 8137138
 	push {r4-r7,lr}

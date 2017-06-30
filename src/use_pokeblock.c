@@ -852,3 +852,22 @@ u8 sub_81370A4(u8 a0)
     }
     return 0;
 }
+
+u8 sub_81370E4(u8 a0)
+{
+    u8 ct;
+    u8 i;
+    for (i=0, ct=0; i<a0; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            ct++;
+        }
+    }
+    return a0 - ct;
+}
+
+u8 sub_8137124(u8 a0)
+{
+    return sub_81370A4(a0);
+}
