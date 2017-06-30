@@ -85,6 +85,7 @@ void sub_8136C6C(void);
 bool8 sub_8136D00(void);
 void sub_8136DC0(u8 *, u8, s16);
 void sub_8136DA0(const u8 *);
+void sub_8136F74(struct Pokeblock *, struct Pokemon *);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -745,3 +746,40 @@ void sub_8136DC0(u8 *dest, u8 a1, s16 a2)
                     "_08136E0C: .4byte gOtherText_NothingChanged");
 }
 #endif
+
+void sub_8136E10(struct Pokemon *pokemon, u8 *data)
+{
+    u16 i;
+    for (i=0; i<5; i++)
+    {
+        data[i] = GetMonData(pokemon, gUnknown_08406118[i]);
+    }
+}
+
+void sub_8136E40(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
+{
+    u16 i;
+    s16 cstat;
+    u8 data;
+    if (GetMonData(pokemon, MON_DATA_SHEEN) != 255)
+    {
+        sub_8136F74(pokeblock, pokemon);
+        for (i=0; i<5; i++)
+        {
+            data = GetMonData(pokemon, gUnknown_08406118[i]);
+            cstat = data + gUnknown_02039304->unk66[i];
+            if (cstat < 0)
+                cstat = 0;
+            if (cstat > 255)
+                cstat = 255;
+            data = cstat;
+            SetMonData(pokemon, gUnknown_08406118[i], &data);
+        }
+        cstat = (u8)GetMonData(pokemon, MON_DATA_SHEEN);
+        cstat = cstat + pokeblock->feel;
+        if (cstat > 255)
+            cstat = 255;
+        data = cstat;
+        SetMonData(pokemon, MON_DATA_SHEEN, &data);
+    }
+}

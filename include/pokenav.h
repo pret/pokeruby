@@ -23,6 +23,7 @@ struct UnkPokenavStruct_Sub1 {
     /*0x5c*/ u8 unk5c[1];
     /*0x5d*/ u8 fil5d[4];
     /*0x61*/ u8 unk61[5];
+    /*0x66*/ s16 unk66[5];
 };
 
 struct UnkPokenavStruct_Sub2 {
