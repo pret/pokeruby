@@ -21,7 +21,10 @@
 
 #define GFX_TAG_CONDITIONUPDOWN 0
 
-#ifndef GERMAN
+#ifdef GERMAN
+const u16 ConditionUpDownPalette[16];
+const u32 ConditionUpDownTiles[0x80];
+#else
 const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
 const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
 #endif
