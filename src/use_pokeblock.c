@@ -22,8 +22,8 @@
 #define GFX_TAG_CONDITIONUPDOWN 0
 
 #ifdef GERMAN
-const u16 ConditionUpDownPalette[16];
-const u32 ConditionUpDownTiles[0x80];
+extern const u16 ConditionUpDownPalette[16];
+extern const u32 ConditionUpDownTiles[0x80];
 #else
 const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
 const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
@@ -108,7 +108,7 @@ extern struct Pokeblock *gUnknown_0203930C;
 extern u8 gUnknown_02039310;
 
 extern u16 gKeyRepeatStartDelay;
-extern u16 gScriptItemId; // remove after merge of #349 Pokeblock
+extern u16 gScriptItemId; // FIXME: remove after merge of #349 Pokeblock
 
 void launch_c3_walk_stairs_and_run_once(void (*const)(void));
 void sub_81361E4(void);
