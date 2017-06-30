@@ -1147,7 +1147,7 @@ _080C803C: .4byte sRotatingGate_RotationInfoEast\n\
 }
 #endif
 
-void sub_80C8040(void)
+void RotatingGate_InitPuzzle(void)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {
@@ -1165,7 +1165,7 @@ void RotatingGatePuzzleCameraUpdate(u16 deltaX, u16 deltaY)
     }
 }
 
-void sub_80C8080(void)
+void RotatingGate_InitPuzzleAndGraphics(void)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {

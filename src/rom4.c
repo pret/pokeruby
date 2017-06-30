@@ -1672,7 +1672,7 @@ void mli4_mapscripts_and_other(void)
 void sub_8054E20(void)
 {
     sub_805B710(0, 0);
-    sub_80C8080();
+    RotatingGate_InitPuzzleAndGraphics();
 }
 
 void sub_8054E34(void)
