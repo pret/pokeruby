@@ -1993,7 +1993,7 @@ static void BattleAICmd_get_item(void)
         index = gBankTarget;
 
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = ewram[0x160CC + (index * 2)];
+	AI_THINKING_STRUCT->funcResult = ewram[MULTI_DIM_ARR(index, B_16, 0x160CC)];
 
     gAIScriptPtr += 2;
 }

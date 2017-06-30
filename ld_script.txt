@@ -170,7 +170,6 @@ SECTIONS {
         src/record_mixing.o(.text);
         asm/record_mixing.o(.text);
         src/sound_check_menu.o(.text);
-        asm/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
 		src/tv.o(.text);

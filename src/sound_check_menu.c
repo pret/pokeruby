@@ -8,6 +8,8 @@
 #include "menu.h"
 #include "songs.h"
 #include "title_screen.h"
+#include "sound.h"
+#include "pokedex_cry_screen.h"
 
 // local task defines
 #define WINDOW_SELECTED data[0]
@@ -43,11 +45,6 @@ enum
     MAX
 };
 
-extern void sub_80BAF84(u8);
-extern void sub_80BB25C(u8);
-extern void sub_80BA68C(u8);
-extern void sub_80BAE78(int, int, int, int);
-
 extern struct ToneData voicegroup_84537C0[];
 extern struct ToneData voicegroup_8452590[];
 extern struct ToneData voicegroup_8453DC0[];
@@ -58,6 +55,7 @@ extern struct ToneData voicegroup_84549C0[];
 extern struct ToneData voicegroup_8453790[];
 
 extern u8 gUnknown_083D0300[18];
+extern s8 gUnknown_083D03F8[5];
 
 extern int gUnknown_020387B4[9];
 extern int gUnknown_083D039C[16];
@@ -68,8 +66,11 @@ extern u8 gUnknown_020387B2;
 extern u8 gUnknown_020387D8;
 extern u8 gUnknown_020387D9;
 extern u8 gUnknown_020387B0;
+extern u16 gUnknown_03005D34;
+extern u8 gUnknown_03005E98;
 
 extern struct MusicPlayerInfo *gUnknown_03005D30;
+extern struct MusicPlayerInfo gMPlay_BGM;
 
 extern u8 *gBGMNames[];
 extern u8 *gSENames[];
@@ -96,10 +97,15 @@ extern u8 gDebugText_Reverse[];
 extern u8 gDebugText_Stereo[];
 extern u8 gUnknown_083D03DC[];
 extern u8 gUnknown_083D03DE[];
+extern u8 gOtherText_SE[];
+extern u8 gOtherText_Pan[];
+extern u8 gOtherText_LR[];
+extern u8 gOtherText_RL[];
 
 void sub_80BA258(u8);
 void sub_80BA384(u8);
 void sub_80BA65C(u8);
+void sub_80BA68C(u8);
 void sub_80BA6B8(u8);
 void sub_80BA700(u16, u16, u16);
 void sub_80BA79C(u8 *, u16, u16);
@@ -108,6 +114,13 @@ void sub_80BAA48(u8);
 void sub_80BACDC(s8);
 void sub_80BAD5C(void);
 void sub_80BAE10(u8, u8);
+void sub_80BAE78(int, u16, u16, u8);
+void sub_80BAF84(u8);
+void sub_80BB038(u8);
+void sub_80BB1D4(void);
+void sub_80BB25C(u8);
+void sub_80BB3B4(u8);
+void sub_80BB494(void);
 
 void sub_80BA0A8(void)
 {
@@ -969,11 +982,11 @@ void sub_80BACDC(s8 var)
     memcpy(minMaxArray, gUnknown_083D039C, sizeof minMaxArray);
     gUnknown_020387B4[gUnknown_020387B3] += var;
 
-    if(gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[ARR_2D(gUnknown_020387B3, MAX)])
-        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[ARR_2D(gUnknown_020387B3, MIN)];
+    if(gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)];
 
-    if(gUnknown_020387B4[gUnknown_020387B3] < minMaxArray[ARR_2D(gUnknown_020387B3, MIN)])
-        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[ARR_2D(gUnknown_020387B3, MAX)];
+    if(gUnknown_020387B4[gUnknown_020387B3] < minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)];
 }
 
 void sub_80BAD5C(void)
@@ -1000,6 +1013,415 @@ void sub_80BAE10(u8 var1, u8 var2)
     memcpy(str1, gUnknown_083D03DC, sizeof str1);
     memcpy(str2, gUnknown_083D03DE, sizeof str2);
 
-    MenuPrint(str2, gUnknown_083D0300[ARR_2D(var1, 0)], gUnknown_083D0300[ARR_2D(var1, 1)]);
-    MenuPrint(str1, gUnknown_083D0300[ARR_2D(var2, 0)], gUnknown_083D0300[ARR_2D(var2, 1)]);
+    MenuPrint(str2, gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 1)]);
+    MenuPrint(str1, gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 1)]);
+}
+
+/*void sub_80BAE78(int var1, u16 var2, u16 var3, u8 var4)
+{
+    u32 powers[6];
+    u8 str[8];
+    u8 i;
+    u8 someVar, someVar2;
+
+    memcpy(powers, gUnknown_083D03E0, sizeof powers);
+
+    for(i = 0; i < var4; i++)
+        str[i] = 0;
+
+    str[var4 + 1] = 0xFF;
+    someVar = 0;
+
+    if(var1 < 0) // make absolute value? wtf
+    {
+        var1 = -var1; // just use abs?
+        someVar = 1;
+    }
+
+    // _080BAED6
+    someVar2 = 0;
+    if(var4 == 1)
+        someVar2 = 1;
+
+    // _080BAEE2
+    for(;;)
+    {
+        
+    }
+}*/
+
+// no.
+__attribute__((naked))
+void sub_80BAE78(int var1, u16 var2, u16 var3, u8 var4)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x2C\n\
+    mov r8, r0\n\
+    lsls r1, 16\n\
+    lsrs r6, r1, 16\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    lsls r3, 24\n\
+    lsrs r7, r3, 24\n\
+    mov r1, sp\n\
+    ldr r0, _080BAF80 @ =gUnknown_083D03E0\n\
+    ldm r0!, {r3-r5}\n\
+    stm r1!, {r3-r5}\n\
+    ldm r0!, {r3-r5}\n\
+    stm r1!, {r3-r5}\n\
+    movs r5, 0\n\
+    add r0, sp, 0x18\n\
+    mov r9, r0\n\
+    cmp r5, r7\n\
+    bgt _080BAEC0\n\
+    mov r4, r9\n\
+    movs r3, 0\n\
+_080BAEAC:\n\
+    lsls r0, r5, 24\n\
+    asrs r0, 24\n\
+    adds r1, r4, r0\n\
+    strb r3, [r1]\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, r7\n\
+    ble _080BAEAC\n\
+_080BAEC0:\n\
+    adds r0, r7, 0x1\n\
+    add r0, r9\n\
+    movs r1, 0xFF\n\
+    strb r1, [r0]\n\
+    movs r1, 0\n\
+    mov r3, r8\n\
+    cmp r3, 0\n\
+    bge _080BAED6\n\
+    negs r3, r3\n\
+    mov r8, r3\n\
+    movs r1, 0x1\n\
+_080BAED6:\n\
+    movs r4, 0\n\
+    mov r10, r4\n\
+    cmp r7, 0x1\n\
+    bne _080BAEE2\n\
+    movs r5, 0x1\n\
+    mov r10, r5\n\
+_080BAEE2:\n\
+    subs r0, r7, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    lsls r0, r5, 24\n\
+    lsls r6, 24\n\
+    str r6, [sp, 0x24]\n\
+    lsls r2, 24\n\
+    str r2, [sp, 0x28]\n\
+    cmp r0, 0\n\
+    blt _080BAF62\n\
+    str r1, [sp, 0x20]\n\
+_080BAEF8:\n\
+    asrs r6, r0, 24\n\
+    lsls r0, r6, 2\n\
+    add r0, sp\n\
+    ldr r1, [r0]\n\
+    mov r0, r8\n\
+    bl __divsi3\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r0, 0\n\
+    bne _080BAF1A\n\
+    mov r0, r10\n\
+    cmp r0, 0\n\
+    bne _080BAF1A\n\
+    lsls r4, r5, 24\n\
+    cmp r6, 0\n\
+    bne _080BAF46\n\
+_080BAF1A:\n\
+    lsls r4, r5, 24\n\
+    ldr r3, [sp, 0x20]\n\
+    cmp r3, 0\n\
+    beq _080BAF34\n\
+    mov r5, r10\n\
+    cmp r5, 0\n\
+    bne _080BAF34\n\
+    asrs r0, r4, 24\n\
+    subs r0, r7, r0\n\
+    subs r0, 0x1\n\
+    add r0, r9\n\
+    movs r1, 0xAE\n\
+    strb r1, [r0]\n\
+_080BAF34:\n\
+    asrs r1, r4, 24\n\
+    subs r1, r7, r1\n\
+    add r1, r9\n\
+    lsls r0, r2, 24\n\
+    asrs r0, 24\n\
+    subs r0, 0x5F\n\
+    strb r0, [r1]\n\
+    movs r0, 0x1\n\
+    mov r10, r0\n\
+_080BAF46:\n\
+    asrs r4, 24\n\
+    lsls r0, r4, 2\n\
+    add r0, sp\n\
+    ldr r1, [r0]\n\
+    mov r0, r8\n\
+    bl __modsi3\n\
+    mov r8, r0\n\
+    subs r4, 0x1\n\
+    lsls r4, 24\n\
+    lsrs r5, r4, 24\n\
+    lsls r0, r5, 24\n\
+    cmp r0, 0\n\
+    bge _080BAEF8\n\
+_080BAF62:\n\
+    ldr r3, [sp, 0x24]\n\
+    lsrs r1, r3, 24\n\
+    ldr r4, [sp, 0x28]\n\
+    lsrs r2, r4, 24\n\
+    mov r0, r9\n\
+    bl MenuPrint\n\
+    add sp, 0x2C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080BAF80: .4byte gUnknown_083D03E0\n\
+    .syntax divided");
+}
+
+void sub_80BAF84(u8 taskId)
+{
+    u8 seStr[3];
+    u8 panStr[4];
+    u8 playingStr[9];
+
+    memcpy(seStr, gOtherText_SE, sizeof seStr);
+    memcpy(panStr, gOtherText_Pan, sizeof panStr);
+    memcpy(playingStr, gDebugText_Playing, sizeof playingStr);
+
+    REG_DISPCNT = 0x3140;
+    MenuDrawTextWindow(0, 0, 0x1D, 0x13);
+    MenuPrint(seStr, 3, 2);
+    MenuPrint(panStr, 3, 4);
+    MenuPrint(playingStr, 3, 8);
+    REG_WIN0H = 0xF0;
+    REG_WIN0V = 0xA0;
+    gUnknown_020387B4[CRY_TEST_UNK0] = 1;
+    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
+    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
+    sub_80BB1D4();
+    gTasks[taskId].func = sub_80BB038;
+}
+
+void sub_80BB038(u8 taskId)
+{
+    sub_80BB1D4();
+    if(gUnknown_020387B4[CRY_TEST_PROGRESS])
+    {
+        if(gUnknown_020387B4[CRY_TEST_RELEASE])
+        {
+            gUnknown_020387B4[CRY_TEST_RELEASE]--;
+        }
+        else // _080BB05C
+        {
+            s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
+            if(panpot != -128)
+            {
+                if(panpot == 0x7F)
+                {
+                    gUnknown_020387B4[CRY_TEST_CHORUS] += 2;
+                    if(gUnknown_020387B4[CRY_TEST_CHORUS] < 0x3F)
+                        SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
+                }
+            }
+            else // _080BB08C
+            {
+                gUnknown_020387B4[CRY_TEST_CHORUS] -= 2;
+                if(gUnknown_020387B4[CRY_TEST_CHORUS] > -0x40)
+                    SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
+            }
+        }
+    }
+     // _080BB0A2
+    if(gMain.newKeys & 0x2)
+    {
+        REG_DISPCNT = 0x7140;
+        REG_WIN0H = 0x11DF;
+        REG_WIN0V = 0x11F;
+        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+        gTasks[taskId].func = sub_80BA258;
+        return;
+    }
+    if(gMain.newKeys & 0x1) // _080BB104
+    {
+        s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
+        if(panpot != -128)
+        {
+            if(panpot == 0x7F)
+            {
+                PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], -0x40);
+                gUnknown_020387B4[CRY_TEST_CHORUS] = -0x40;
+                gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
+                gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
+                return;
+            }
+        }
+        else // _080BB140
+        {
+            PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], 0x3F);
+            gUnknown_020387B4[CRY_TEST_CHORUS] = 0x3F;
+            gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
+            gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
+            return;
+        }
+        // _080BB154
+        PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], panpot);
+        gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+        return;
+    }
+    if(gMain.newKeys & 0x200) // _080BB15E
+    {
+        gUnknown_020387B4[CRY_TEST_PANPOT]++;
+        if(gUnknown_020387B4[CRY_TEST_PANPOT] > 4)
+            gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    }
+    if(gMain.newKeys & 0x100) // _080BB176
+    {
+        gUnknown_020387B4[CRY_TEST_PANPOT]--;
+        if(gUnknown_020387B4[CRY_TEST_PANPOT] < 0)
+            gUnknown_020387B4[CRY_TEST_PANPOT] = 4;
+    }
+    if(gMain.newAndRepeatedKeys & 0x10) // _080BB192
+    {
+        gUnknown_020387B4[CRY_TEST_UNK0]++;
+        if(gUnknown_020387B4[CRY_TEST_UNK0] > 0xF7)
+            gUnknown_020387B4[CRY_TEST_UNK0] = 0;
+    }
+    else if(gMain.newAndRepeatedKeys & 0x20) // _080BB1B0
+    {
+        gUnknown_020387B4[CRY_TEST_UNK0]--;
+        if(gUnknown_020387B4[CRY_TEST_UNK0] < 0)
+            gUnknown_020387B4[CRY_TEST_UNK0] = 0xF7;
+    }
+}
+
+void sub_80BB1D4(void)
+{
+    u8 lrStr[5];
+    u8 rlStr[5];
+
+    memcpy(lrStr, gOtherText_LR, sizeof lrStr);
+    memcpy(rlStr, gOtherText_RL, sizeof rlStr);
+
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0], 7, 2, 3);
+
+    switch(gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]])
+    {
+        case 0x7F:
+            MenuPrint(lrStr, 7, 4);
+            break;
+        case -0x80:
+            MenuPrint(rlStr, 7, 4);
+            break;
+        default:
+            sub_80BAE78(gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]], 7, 4, 3);
+            break;
+    }
+    sub_80BAE78(IsSEPlaying(), 12, 8, 1);
+}
+
+void sub_80BB25C(u8 taskId)
+{
+    struct CryRelatedStruct cryStruct, cryStruct2;
+    u8 zero;
+
+    SetUpWindowConfig(&gWindowConfig_81E6C3C);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    gUnknown_03005D34 = 1;
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+
+    cryStruct.unk0 = 0x2000;
+    cryStruct.unk2 = 29;
+    cryStruct.paletteNo = 12;
+    cryStruct.yPos = 30;
+    cryStruct.xPos = 4;
+
+    zero = 0; // wtf?
+    gUnknown_03005E98 = 0;
+
+    while(sub_8119E3C(&cryStruct, 3) == FALSE);
+
+    cryStruct2.unk0 = 0;
+    cryStruct2.unk2 = 15;
+    cryStruct2.paletteNo = 13;
+    cryStruct2.xPos = 12;
+    cryStruct2.yPos = 12;
+
+    zero = 0; // wtf?
+    gUnknown_03005E98 = 0;
+
+    while(ShowPokedexCryScreen(&cryStruct2, 2) == FALSE);
+
+    MenuDrawTextWindow(0, 16, 5, 19);
+    sub_80BB494();
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG2CNT = 0xF01;
+    REG_BG3CNT = 0x1D03;
+    REG_DISPCNT = 0x1d40;
+    m4aMPlayFadeOutTemporarily(&gMPlay_BGM, 2);
+    gTasks[taskId].func = sub_80BB3B4;
+}
+
+void sub_80BB3B4(u8 taskId)
+{
+    sub_8119F88(3);
+
+    if(gMain.newKeys & 0x1)
+    {
+        sub_811A050(gUnknown_03005D34);
+    }
+    if(gMain.newKeys & 0x100)
+    {
+        StopCryAndClearCrySongs();
+    }
+    if(gMain.newAndRepeatedKeys & 0x40)
+    {
+        if(--gUnknown_03005D34 == 0)
+            gUnknown_03005D34 = 384; // total species
+        sub_80BB494();
+    }
+    if(gMain.newAndRepeatedKeys & 0x80)
+    {
+        if(++gUnknown_03005D34 > 384)
+            gUnknown_03005D34 = 1; // total species
+        sub_80BB494();
+    }
+    if(gMain.newKeys & 0x2)
+    {
+        REG_DISPCNT = 0x7140;
+        REG_WIN0H = 0x11DF;
+        REG_WIN0V = 0x11F;
+        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+        gTasks[taskId].func = sub_80BA258;
+        DestroyCryMeterNeedleSprite();
+    }
+}
+
+void sub_80BB494(void)
+{
+    sub_80BAE78(gUnknown_03005D34, 1, 17, 3);
 }
