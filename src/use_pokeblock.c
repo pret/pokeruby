@@ -46,6 +46,56 @@ const u8 *const gUnknown_08406134[] = {
     OtherText_Beauty
 };
 
+const struct SpriteSheet gSpriteSheet_ConditionUpDown = {
+    (u8 *)ConditionUpDownTiles,
+    sizeof ConditionUpDownTiles,
+    GFX_TAG_CONDITIONUPDOWN
+};
+
+const struct SpritePalette gSpritePalette_ConditionUpDown = {
+    ConditionUpDownPalette,
+    GFX_TAG_CONDITIONUPDOWN
+};
+
+const struct Coords16 gUnknown_08406158[] = {
+    {0x9c, 0x1e},
+    {0x75, 0x35},
+    {0x75, 0x70},
+    {0xc5, 0x70},
+    {0xc5, 0x35}
+};
+
+const struct OamData gOamData_840616C = {
+    .shape = 1,
+    .size = 2,
+    .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_8406174[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_840617C[] = {
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8406184[] = {
+    gSpriteAnim_8406174,
+    gSpriteAnim_840617C
+};
+
+const struct SpriteTemplate gSpriteTemplate_840618C = {
+    GFX_TAG_CONDITIONUPDOWN,
+    GFX_TAG_CONDITIONUPDOWN,
+    &gOamData_840616C,
+    gSpriteAnimTable_8406184,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
 asm(".text\n"
     ".include \"constants/gba_constants.inc\"");
 
