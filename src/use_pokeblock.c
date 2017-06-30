@@ -57,7 +57,7 @@ const struct SpritePalette gSpritePalette_ConditionUpDown = {
     GFX_TAG_CONDITIONUPDOWN
 };
 
-const struct Coords16 gUnknown_08406158[] = {
+const s16 gUnknown_08406158[][2] = {
     {0x9c, 0x1e},
     {0x75, 0x35},
     {0x75, 0x70},
@@ -135,6 +135,7 @@ bool8 sub_8136D00(void);
 void sub_8136DC0(u8 *, u8, s16);
 void sub_8136DA0(const u8 *);
 void sub_8136F74(struct Pokeblock *, struct Pokemon *);
+void sub_81371DC(struct Sprite *);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -920,4 +921,41 @@ u8 sub_81370E4(u8 a0)
 u8 sub_8137124(u8 a0)
 {
     return sub_81370A4(a0);
+}
+
+void sub_8137138(void)
+{
+    u16 flavor;
+    u8 spriteidx;
+    LoadSpriteSheet(&gSpriteSheet_ConditionUpDown);
+    LoadSpritePalette(&gSpritePalette_ConditionUpDown);
+    gUnknown_02039304->unk54 = 0;
+    for (flavor=0; flavor<5; flavor++)
+    {
+        if (gUnknown_02039304->unk61[flavor] != 0)
+        {
+            spriteidx = CreateSprite(&gSpriteTemplate_840618C, gUnknown_08406158[flavor][0], gUnknown_08406158[flavor][1], 0);
+            if (spriteidx != MAX_SPRITES)
+            {
+                if (gUnknown_02039304->unk61[flavor] != 0)
+                {
+                    gSprites[spriteidx].callback = sub_81371DC;
+                }
+                gUnknown_02039304->unk54++;
+            }
+        }
+    }
+}
+
+void sub_81371DC(struct Sprite *sprite)
+{
+    if (sprite->data0 <= 5)
+        sprite->pos2.y -= 2;
+    else if (sprite->data0 <= 11)
+        sprite->pos2.y += 2;
+    if ((++sprite->data0) > 60)
+    {
+        DestroySprite(sprite);
+        gUnknown_02039304->unk54--;
+    }
 }
