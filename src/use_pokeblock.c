@@ -783,3 +783,17 @@ void sub_8136E40(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
         SetMonData(pokemon, MON_DATA_SHEEN, &data);
     }
 }
+
+void sub_8136EF0(void)
+{
+    u16 i;
+    struct Pokemon *pokemon = gPlayerParty;
+    pokemon += gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx;
+    sub_8136E10(pokemon, gUnknown_02039304->unk57);
+    sub_8136E40(gUnknown_02039304->pokeblock, pokemon);
+    sub_8136E10(pokemon, gUnknown_02039304->unk5c);
+    for (i=0; i<5; i++)
+    {
+        gUnknown_02039304->unk61[i] = gUnknown_02039304->unk5c[i] - gUnknown_02039304->unk57[i];
+    }
+}
