@@ -7,6 +7,7 @@
 #include "rom4.h"
 #include "string_util.h"
 #include "strings.h"
+#include "sprite.h"
 #include "pokemon.h"
 #include "pokenav.h"
 #include "palette.h"
@@ -17,6 +18,34 @@
 #include "pokeblock.h"
 #include "pokeblock_feed.h"
 #include "use_pokeblock.h"
+
+#define GFX_TAG_CONDITIONUPDOWN 0
+#define GFX_TAG_UNKNOWN02030400 1
+
+#ifndef GERMAN
+const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
+const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
+#endif
+
+const u32 gUnknown_08406118[] = {
+    MON_DATA_COOL,
+    MON_DATA_TOUGH,
+    MON_DATA_SMART,
+    MON_DATA_CUTE,
+    MON_DATA_BEAUTY
+};
+
+const struct SpritePalette gUnknown_0840612C = {
+    (u16 *const)&gUnknown_02030400, GFX_TAG_UNKNOWN02030400
+};
+
+const u8 *const gUnknown_08406134[] = {
+    OtherText_Coolness,
+    OtherText_Toughness,
+    OtherText_Smartness,
+    OtherText_Cuteness,
+    OtherText_Beauty
+};
 
 asm(".text\n"
     ".include \"constants/gba_constants.inc\"");
@@ -54,8 +83,8 @@ void sub_8136EF0(void);
 void sub_8137138(void);
 void sub_8136C6C(void);
 bool8 sub_8136D00(void);
-void sub_8136DC0(u8 *, u8, u8);
-void sub_8136DA0(u8 *);
+void sub_8136DC0(u8 *, u8, s16);
+void sub_8136DA0(const u8 *);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
@@ -636,5 +665,83 @@ bool8 sub_8136D00(void)
                     "\tpop {r4,r5}\n"
                     "\tpop {r1}\n"
                     "\tbx r1");
+}
+#endif
+
+void sub_8136D60(void)
+{
+    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    MenuDrawTextWindow(0, 16, 29, 19);
+    MenuPrint(gOtherText_WontEat, 1, 17);
+}
+
+void sub_8136D8C(void)
+{
+    MenuZeroFillScreen();
+    BasicInitMenuWindow(&gWindowConfig_81E7080);
+}
+
+void sub_8136DA0(const u8 *message)
+{
+    MenuDrawTextWindow(0, 16, 29, 19);
+    MenuPrint(message, 1, 17);
+}
+
+#ifdef NONMATCHING
+void sub_8136DC0(u8 *dest, u8 a1, s16 a2)
+{
+    u16 v0 = a2;
+    if (a2 != 0)
+    {
+        if ((v0 = max(a2, 0)) == 0);
+        StringCopy(dest, gUnknown_08406134[a1]);
+        StringAppend(dest, gOtherText_WasEnhanced);
+    }
+    else
+    {
+        StringCopy(dest, gOtherText_NothingChanged);
+    }
+}
+#else
+__attribute__((naked))
+void sub_8136DC0(u8 *dest, u8 a1, s16 a2)
+{
+    asm_unified("\tpush {r4,lr}\n"
+                    "\tadds r4, r0, 0\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r3, r1, 24\n"
+                    "\tlsls r2, 16\n"
+                    "\tlsrs r0, r2, 16\n"
+                    "\tasrs r2, 16\n"
+                    "\tcmp r2, 0\n"
+                    "\tbeq _08136DFC\n"
+                    "\tcmp r2, 0\n"
+                    "\tble _08136DD8\n"
+                    "\tmovs r0, 0\n"
+                    "_08136DD8:\n"
+                    "\tlsls r0, 16\n"
+                    "\tldr r1, _08136DF4 @ =gUnknown_08406134\n"
+                    "\tlsls r0, r3, 2\n"
+                    "\tadds r0, r1\n"
+                    "\tldr r1, [r0]\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl StringCopy\n"
+                    "\tldr r1, _08136DF8 @ =gOtherText_WasEnhanced\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl StringAppend\n"
+                    "\tb _08136E04\n"
+                    "\t.align 2, 0\n"
+                    "_08136DF4: .4byte gUnknown_08406134\n"
+                    "_08136DF8: .4byte gOtherText_WasEnhanced\n"
+                    "_08136DFC:\n"
+                    "\tldr r1, _08136E0C @ =gOtherText_NothingChanged\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl StringCopy\n"
+                    "_08136E04:\n"
+                    "\tpop {r4}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_08136E0C: .4byte gOtherText_NothingChanged");
 }
 #endif
