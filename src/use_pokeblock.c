@@ -20,7 +20,6 @@
 #include "use_pokeblock.h"
 
 #define GFX_TAG_CONDITIONUPDOWN 0
-#define GFX_TAG_UNKNOWN02030400 1
 
 #ifndef GERMAN
 const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
@@ -35,8 +34,8 @@ const u32 gUnknown_08406118[] = {
     MON_DATA_BEAUTY
 };
 
-const struct SpritePalette gUnknown_0840612C = {
-    (u16 *const)&gUnknown_02030400, GFX_TAG_UNKNOWN02030400
+const u8 gUnknown_0840612C[] = {
+    0, 4, 3, 2, 1
 };
 
 const u8 *const gUnknown_08406134[] = {
@@ -795,5 +794,37 @@ void sub_8136EF0(void)
     for (i=0; i<5; i++)
     {
         gUnknown_02039304->unk61[i] = gUnknown_02039304->unk5c[i] - gUnknown_02039304->unk57[i];
+    }
+}
+
+void sub_8136F74(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
+{
+    s8 direction;
+    s8 i;
+    s16 amount;
+    s8 boost;
+    s8 taste;
+    gUnknown_02039304->unk66[0] = pokeblock->spicy;
+    gUnknown_02039304->unk66[1] = pokeblock->sour;
+    gUnknown_02039304->unk66[2] = pokeblock->bitter;
+    gUnknown_02039304->unk66[3] = pokeblock->sweet;
+    gUnknown_02039304->unk66[4] = pokeblock->dry;
+    if (gUnknown_02039312 > 0)
+        direction = 1;
+    else if (gUnknown_02039312 < 0)
+        direction = -1;
+    else
+        return;
+    for (i=0; i<5; i++)
+    {
+        amount = gUnknown_02039304->unk66[i];
+        boost = amount / 10;
+        if (amount % 10 >= 5) // round to the nearest
+            boost++;
+        taste = sub_8040A54(pokemon, gUnknown_0840612C[i]);
+        if (taste == direction)
+        {
+            gUnknown_02039304->unk66[i] += boost * taste;
+        }
     }
 }
