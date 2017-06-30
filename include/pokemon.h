@@ -409,6 +409,7 @@ extern u8 gStatStageRatios[][2];
 
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
+extern struct PokemonStorage gPokemonStorage;
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -512,5 +513,6 @@ void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
 s8 sub_8040A54(struct Pokemon *, u8);
+u16 GetMonEVCount(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H
