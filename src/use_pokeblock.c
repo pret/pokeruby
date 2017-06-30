@@ -828,3 +828,27 @@ void sub_8136F74(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
         }
     }
 }
+
+bool8 sub_8137058(void)
+{
+    struct Pokemon *pokemon = gPlayerParty;
+    pokemon += gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx;
+    if (GetMonData(pokemon, MON_DATA_SHEEN) == 255)
+        return TRUE;
+    return FALSE;
+}
+
+u8 sub_81370A4(u8 a0)
+{
+    u8 i;
+    for (i=0; i<PARTY_SIZE; i++)
+    {
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            if (a0 == 0)
+                return i;
+            a0--;
+        }
+    }
+    return 0;
+}
