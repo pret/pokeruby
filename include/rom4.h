@@ -9,23 +9,31 @@ struct UnkPlayerStruct
     u8 player_field_1;
 };
 
-struct LinkPlayerMapObject {
+struct LinkPlayerMapObject
+{
     u8 active;
     u8 linkPlayerId;
     u8 mapObjId;
     u8 mode;
 };
 
+struct UCoords32
+{
+    u32 x, y;
+};
+
+extern struct UCoords32 gUnknown_0821664C[];
+
 // sub_8052F5C
-// flag_var_implications_of_teleport_
-// new_game
-// sub_8053014
+void flag_var_implications_of_teleport_(void);
+void new_game(void);
+void sub_8053014(void);
 void sub_8053050(void);
 // sub_805308C
-void sub_80530AC(void);
-void sav12_xor_increment(u8 index);
-u32 sub_8053108(u8 index);
-// sav12_xor_set
+void ResetGameStats(void);
+void IncrementGameStat(u8 index);
+u32 GetGameStat(u8 index);
+void SetGameStat(u8, u32);
 // sub_8053154
 // sub_8053198
 void update_saveblock1_field_object_coords(u8, s16, s16);
@@ -35,44 +43,44 @@ void update_saveblock1_field_object_movement_behavior(u8, u8);
 // warp_shift
 // warp_set
 // warp_data_is_not_neg_1
-// get_mapheader_by_bank_and_number
-// warp1_get_mapheader
+struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum);
+struct MapHeader * const warp1_get_mapheader(void);
 // set_current_map_header_from_sav1_save_old_name
 // sub_805338C
 // sub_80533CC
 void warp_in(void);
 void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// warp1_set_2
-// saved_warp2_set
+void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// copy_saved_warp2_bank_and_enter_x_to_warp1
+void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 // sub_8053538
 void sub_8053570(void);
 void sub_8053588(u8);
-// sub_80535C4
+void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// sub_8053678
+void sub_8053678(void);
 void sub_8053690(s8, s8, s8, s8, s8);
 // warp1_set_to_warp2
 void sub_80536E4(s8, s8, s8, s8, s8);
 void sub_8053720(s16, s16);
 // sub_8053778
 // unref_sub_8053790
-// sub_80537CC
+void sub_80537CC(u8);
 void gpu_sync_bg_hide();
 // sub_8053818
 // sub_8053850
-// sub_80538B0
-// sub_80538D0
-// sub_80538F0
+bool8 sub_80538B0(u16 x, u16 y);
+bool8 sub_80538D0(u16 x, u16 y);
+void sub_80538F0(u8 mapGroup, u8 mapNum);
 // sub_8053994
 void player_avatar_init_params_reset(void);
-// walkrun_find_lowest_active_bit_in_bitfield
+void walkrun_find_lowest_active_bit_in_bitfield(void);
 // sub_8053AA8
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
 u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
-bool32 sub_8053C44(void);
+bool32 IsBikingAllowedByMap(void);
 void sub_8053C98(void);
 void sub_8053CE4(s32 a1);
 u8 sav1_get_flash_used_on_map(void);
@@ -83,7 +91,7 @@ void sub_8053D14(u16);
 // sav1_map_get_music
 // warp1_target_get_music
 // call_map_music_set_to_zero
-// sub_8053E90
+void sub_8053E90(void);
 void sav1_set_battle_music_maybe(u16);
 void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
@@ -99,9 +107,9 @@ void sub_8054164(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 // get_map_light_level_from_warp
 u8 sav1_map_get_light_level(void);
-// get_map_light_from_warp0
+u8 get_map_light_from_warp0(void);
 bool8 is_light_level_1_2_3_5_or_6(u8 a1);
-// is_light_level_1_2_3_or_6
+bool8 is_light_level_1_2_3_or_6(u8 a1);
 u8 is_light_level_8_or_9(u8);
 // unref_sub_8054260
 u8 sav1_map_get_name();
@@ -117,7 +125,7 @@ void c2_overworld(void);
 // sub_80543DC
 // sub_80543E8
 void CB2_NewGame(void);
-void c2_whiteout(void);
+void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
 // sub_8054534
@@ -199,7 +207,7 @@ u32 sub_80558AC(void);
 u32 sub_8055910(void);
 u32 sub_8055940(void);
 // ZeroLinkPlayerMapObject
-// strange_npc_table_clear
+void strange_npc_table_clear(void);
 // ZeroMapObject
 void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
 void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);

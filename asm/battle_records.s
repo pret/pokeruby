@@ -47,13 +47,13 @@ _0810FFAE:
 	bge _0810FFAE
 	movs r0, 0x17
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x18
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x19
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -264,12 +264,12 @@ _0811013A:
 	movs r4, 0x19
 _0811013C:
 	adds r0, r4, 0
-	bl sub_8053108
+	bl GetGameStat
 	ldr r1, _08110154 @ =0x0000270e
 	cmp r0, r1
 	bhi _0811014E
 	adds r0, r4, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0811014E:
 	pop {r4}
 	pop {r0}
@@ -415,7 +415,7 @@ _08110250: .4byte 0x0000270f
 sub_8110254: @ 8110254
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08110268 @ =gUnknown_02024D26
+	ldr r0, _08110268 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0811026C
@@ -423,7 +423,7 @@ sub_8110254: @ 8110254
 	beq _0811027A
 	b _08110288
 	.align 2, 0
-_08110268: .4byte gUnknown_02024D26
+_08110268: .4byte gBattleOutcome
 _0811026C:
 	eors r0, r4
 	bl sub_81101FC
@@ -457,7 +457,7 @@ sub_8110290: @ 8110290
 	subs r3, 0x30
 	adds r2, r3
 	ldrh r2, [r2, 0xE]
-	ldr r3, _081102DC @ =gUnknown_02024D26
+	ldr r3, _081102DC @ =gBattleOutcome
 	ldrb r3, [r3]
 	ldr r6, _081102E0 @ =gLinkPlayers
 	ldr r5, _081102E4 @ =gLinkPlayerMapObjects
@@ -478,7 +478,7 @@ sub_8110290: @ 8110290
 	.align 2, 0
 _081102D4: .4byte gSaveBlock1 + 0x30B8
 _081102D8: .4byte gTrainerCards + 0x30
-_081102DC: .4byte gUnknown_02024D26
+_081102DC: .4byte gBattleOutcome
 _081102E0: .4byte gLinkPlayers
 _081102E4: .4byte gLinkPlayerMapObjects
 	thumb_func_end sub_8110290
@@ -488,7 +488,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	push {r4,lr}
 	ldr r4, _08110338 @ =gStringVar1
 	movs r0, 0x17
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -496,7 +496,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	bl ConvertIntToDecimalStringN_DigitWidth6
 	ldr r4, _0811033C @ =gStringVar2
 	movs r0, 0x18
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -504,7 +504,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	bl ConvertIntToDecimalStringN_DigitWidth6
 	ldr r4, _08110340 @ =gStringVar3
 	movs r0, 0x19
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -635,47 +635,7 @@ _0811042E:
 _08110438: .4byte gStringVar1
 	thumb_func_end PrintLinkBattleRecord
 
-	thumb_func_start ShowLinkBattleRecords
-ShowLinkBattleRecords: @ 811043C
-	push {r4,lr}
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1C
-	movs r3, 0x12
-	bl MenuDrawTextWindow
-	ldr r0, _08110488 @ =gOtherText_BattleResults
-	movs r1, 0
-	movs r2, 0x1
-	movs r3, 0xF0
-	bl sub_8072BD8
-	ldr r0, _0811048C @ =gSaveBlock1 + 0x30B8
-	bl PrintLinkBattleWinsLossesDraws
-	ldr r0, _08110490 @ =gOtherText_WinLoseDraw
-	movs r1, 0xC
-	movs r2, 0x6
-	bl MenuPrint
-	movs r4, 0
-_08110468:
-	lsls r0, r4, 4
-	ldr r1, _0811048C @ =gSaveBlock1 + 0x30B8
-	adds r0, r1
-	adds r4, 0x1
-	lsls r1, r4, 25
-	movs r2, 0xC0
-	lsls r2, 19
-	adds r1, r2
-	lsrs r1, 24
-	bl PrintLinkBattleRecord
-	cmp r4, 0x4
-	ble _08110468
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08110488: .4byte gOtherText_BattleResults
-_0811048C: .4byte gSaveBlock1 + 0x30B8
-_08110490: .4byte gOtherText_WinLoseDraw
-	thumb_func_end ShowLinkBattleRecords
+.section .text_8110494
 
 	thumb_func_start sub_8110494
 sub_8110494: @ 8110494

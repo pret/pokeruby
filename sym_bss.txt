@@ -160,7 +160,7 @@ gUnknown_03000760: @ 3000760
 gUnknown_030007B0: @ 30007B0
 	.space 0x4
 
-gUnknown_030007B4: @ 30007B4
+gPcItemMenuOptionsNum: @ 30007B4
 	.space 0x4
 
 gUnknown_030007B8: @ 30007B8

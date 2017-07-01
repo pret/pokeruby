@@ -1,6 +1,16 @@
 #ifndef GUARD_FIELD_CAMERA_H
 #define GUARD_FIELD_CAMERA_H
 
+struct CameraSomething
+{
+    void (*callback)(struct CameraSomething *);
+    u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+};
+
 void move_tilemap_camera_to_upper_left_corner(void);
 void sub_8057A58(void);
 void sub_8057B14(u16 *a, u16 *b);

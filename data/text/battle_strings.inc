@@ -1,63 +1,3 @@
-	.align 2
-gUnknown_083FE4F4:: @ 83FE4F4
-	.4byte dp01t_00_3_getattr
-	.4byte sub_811EC04
-	.4byte sub_811EC10
-	.4byte sub_811F664
-	.4byte sub_811F6D8
-	.4byte sub_811F7F4
-	.4byte sub_811F9D0
-	.4byte sub_811FAE4
-	.4byte sub_811FC30
-	.4byte sub_811FC3C
-	.4byte sub_811FCE8
-	.4byte sub_811FDCC
-	.4byte sub_811FDD8
-	.4byte sub_811FDE4
-	.4byte sub_811FDF0
-	.4byte sub_811FDFC
-	.4byte sub_8120094
-	.4byte sub_81200F8
-	.4byte sub_8120104
-	.4byte sub_8120110
-	.4byte sub_812011C
-	.4byte sub_8120128
-	.4byte sub_8120134
-	.4byte sub_8120140
-	.4byte sub_812014C
-	.4byte sub_812023C
-	.4byte sub_8120248
-	.4byte sub_81202BC
-	.4byte sub_8120324
-	.4byte sub_8120330
-	.4byte sub_812033C
-	.4byte sub_8120348
-	.4byte sub_8120354
-	.4byte sub_8120360
-	.4byte sub_812036C
-	.4byte sub_8120378
-	.4byte sub_8120384
-	.4byte sub_8120390
-	.4byte sub_81203AC
-	.4byte sub_81203E4
-	.4byte sub_81203FC
-	.4byte dp01t_29_3_blink
-	.4byte sub_8120494
-	.4byte sub_81204A0
-	.4byte sub_81204E4
-	.4byte sub_8120514
-	.4byte dp01t_2E_3_battle_intro
-	.4byte sub_8120588
-	.4byte dp01t_30_3_80EB11C
-	.4byte sub_8120920
-	.4byte sub_812096C
-	.4byte sub_8120978
-	.4byte sub_81209D8
-	.4byte sub_8120A40
-	.4byte sub_8120A4C
-	.4byte sub_8120A58
-	.4byte nullsub_75
-
 BattleText_UnknownString:
 	.string "{STRING 33}$"
 BattleText_GainExpPoints:
@@ -540,7 +480,7 @@ BattleText_TookAttack2:
 	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
 
 gUnknown_083FFCCA:: @ 83FFCCA
-BattleText_PreventedSwitch:
+BattleText_PreventedSwitch::
 	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
 BattleText_PreventedOther:
 	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"
@@ -1103,29 +1043,30 @@ BattleText_SpDef:
 	.string "SP. DEF$"
 
 gUnknown_08400DD6:: @ 8400DD6
-BattleText_SafariBalls:
+BattleText_SafariBalls::
 	.string "{HIGHLIGHT RED}SAFARI BALLS$"
 
 gUnknown_08400DE6:: @ 8400DE6
-BattleText_SafariBallsLeft:
+BattleText_SafariBallsLeft::
 	.string "{HIGHLIGHT RED}Left: $"
 
 gUnknown_08400DF0:: @ 8400DF0
-BattleText_HighlightRed:
+BattleText_HighlightRed::
 	.string "{HIGHLIGHT RED}$"
-BattleText_Sleep:
+
+BattleText_Sleep::
 	.string "sleep$"
-BattleText_PoisonStatus:
+BattleText_PoisonStatus::
 	.string "poison$"
-BattleText_Burn:
+BattleText_Burn::
 	.string "burn$"
-BattleText_Paralysis:
+BattleText_Paralysis::
 	.string "paralysis$"
-BattleText_IceStatus:
+BattleText_IceStatus::
 	.string "ice$"
-BattleText_Confusion:
+BattleText_Confusion::
 	.string "confusion$"
-BattleText_Love:
+BattleText_Love::
 	.string "love$"
 
 gUnknown_08400E23:: @ 8400E23
@@ -1160,19 +1101,16 @@ gBadEggNickname:: @ 8400E3A
 	.string "Bad EGG$"
 
 gUnknown_08400E42:: @ 8400E42
-BattleText_Wally:
+BattleText_Wally::
 	.string "WALLY$"
 
-gUnknown_08400E48:: @ 8400E48
-BattleText_Win:
+BattleText_Win:: @ 8400E48
 	.string "{HIGHLIGHT TRANSPARENT}Win$"
 
-gUnknown_08400E4F:: @ 8400E4F
-BattleText_Loss:
+BattleText_Loss:: @ 8400E4F
 	.string "{HIGHLIGHT TRANSPARENT}Loss$"
 
-gUnknown_08400E57:: @ 8400E57
-BattleText_Tie:
+BattleText_Tie:: @ 8400E57
 	.string "{HIGHLIGHT TRANSPARENT}Tie$"
 
 gUnknown_08400E5E:: @ 8400E5E
@@ -1239,7 +1177,7 @@ gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooSour
 
 	.align 2
-gUnknown_08400F8C:: @ 8400F8C
+gBattleStringsTable:: @ 8400F8C
 	.4byte BattleText_UnknownString
 	.4byte BattleText_GainExpPoints
 	.4byte BattleText_GrewLevel
@@ -1593,8 +1531,8 @@ gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_NoEffectOn
 
 	.align 1
-gUnknown_08401508:: @ 8401508
-@ Each entry refers to a text pointer in gUnknown_08400F8C, but the values are offset
+gMissStrings:: @ 8401508
+@ Each entry refers to a text pointer in gBattleStringsTable, but the values are offset
 @ by 0xc. For example, 0x0017 refers to BattleText_AttackMissed because it is the
 @ 11th entry in the pointer table.
 	.2byte BATTLE_TEXT_AttackMissed
@@ -1852,13 +1790,13 @@ BattleTextList_401648:: @ 8401648
 	.2byte BATTLE_TEXT_RaisedFirePower
 	.2byte BATTLE_TEXT_MadeIneffective
 
-gUnknown_0840164C:: @ 840164C
-	.2byte BATTLE_TEXT_StopLearning
-	.2byte BATTLE_TEXT_FellAsleep
-	.2byte BATTLE_TEXT_SpeltHealthy
-	.2byte BATTLE_TEXT_SubTookDamage
-	.2byte BATTLE_TEXT_CoinScatter
-	.2byte BATTLE_TEXT_SandTombTrapped
+gTrappingMoves:: @ 840164C
+	.2byte MOVE_BIND
+	.2byte MOVE_WRAP
+	.2byte MOVE_FIRE_SPIN
+	.2byte MOVE_CLAMP
+	.2byte MOVE_WHIRLPOOL
+	.2byte MOVE_SAND_TOMB
 	.2byte 0xFFFF
 
 	.align 2

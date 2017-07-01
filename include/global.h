@@ -2,9 +2,21 @@
 #define GUARD_GLOBAL_H
 
 #include "gba/gba.h"
+#include "config.h"
 
-#ifndef REVISION
-#define REVISION 0
+// IDE support
+#ifdef __APPLE__
+#define _(x) x
+#define __(x) x
+#define INCBIN_U8 {0}
+#define INCBIN_U16 {0}
+#define INCBIN_U32 {0}
+#define INCBIN_S8 {0}
+#define INCBIN_S16 {0}
+#define INCBIN_S32 {0}
+void *     memcpy (void *, const void *, size_t);
+void *     memset (void *, int, size_t);
+int     strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
@@ -13,21 +25,43 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
+
+#define nonmatching(fndec, x) {\
+__attribute__((naked))\
+fndec\
+{\
+    asm_unified(x);\
+}\
+}
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
+#define min(a, b) (a >= b ? a : b)
+#define max(a, b) (a <= b ? a : b)
 
 enum
 {
     VERSION_SAPPHIRE = 1,
     VERSION_RUBY = 2,
+    VERSION_EMERALD = 3,
 };
+
+enum LanguageId
+{
+    LANGUAGE_JAPANESE = 1,
+    LANGUAGE_ENGLISH = 2,
+    LANGUAGE_GERMAN = 5,
+};
+
+#if defined(ENGLISH)
+#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#elif defined(GERMAN)
+#define GAME_LANGUAGE (LANGUAGE_GERMAN)
+#endif
 
 enum
 {
@@ -61,6 +95,20 @@ enum
     OPTIONS_BATTLE_STYLE_SET
 };
 
+enum
+{
+    BAG_ITEMS = 1,
+    BAG_POKEBALLS,
+    BAG_TMsHMs,
+    BAG_BERRIES,
+    BAG_KEYITEMS
+};
+
+struct TextStruct
+{
+    const u8 *text;
+};
+
 struct Coords16
 {
     s16 x;
@@ -75,23 +123,24 @@ struct UCoords16
 
 struct SecretBaseRecord
 {
-    u8 sbr_field_0; // ID?
-    u8 sbr_field_1_0:4;
-    u8 gender:1;
-    u8 sbr_field_1_5:1;
-    u8 sbr_field_2[7]; // 0xFF bytes?
-    u8 trainerId[4]; // byte 0 is used for determining trainer class
-    u16 sbr_field_e;
-    u8 sbr_field_10;
-    u8 sbr_field_11;
-    u8 decorations[16];
-    u8 sbr_field_22[16];
-    u32 partyPersonality[6];
-    u16 partyMoves[6 * 4];
-    u16 partySpecies[6];
-    u16 partyHeldItems[6];
-    u8 partyLevels[6];
-    u8 partyEVs[6];
+    /*ID?*/ /*0x1A08*/ u8 sbr_field_0;
+    /*0x1A09*/ u8 sbr_field_1_0:4;
+    /*0x1A09*/ u8 gender:1;
+    /*0x1A09*/ u8 sbr_field_1_5:1;
+    /*0x1A09*/ u8 sbr_field_1_6:2;
+    /*0x1A0A*/ u8 sbr_field_2[7]; // 0xFF bytes?
+    /*0x1A12*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
+    /*0x1A16*/ u16 sbr_field_e;
+    /*0x1A18*/ u8 sbr_field_10;
+    /*0x1A19*/ u8 sbr_field_11;
+    /*0x1A1A*/ u8 decorations[16];
+    /*0x1A2A*/ u8 decorationPos[16];
+    /*0x1A3A*/ u32 partyPersonality[6];
+    /*0x1A54*/ u16 partyMoves[6 * 4];
+    /*0x1A84*/ u16 partySpecies[6];
+    /*0x1A90*/ u16 partyHeldItems[6];
+    /*0x1A9C*/ u8 partyLevels[6];
+    /*0x1AA2*/ u8 partyEVs[6];
 };
 
 #include "game_stat.h"
@@ -137,7 +186,8 @@ struct Roamer
     /*0x10*/ u8 cute;
     /*0x11*/ u8 smart;
     /*0x12*/ u8 tough;
-    /*0x13*/ u8 active;
+    /*0x13*/ bool8 active;
+    /*0x14*/ u8 filler[0x8];
 };
 
 struct RamScriptData
@@ -157,7 +207,8 @@ struct RamScript
 
 struct SB1_2EFC_Struct
 {
-    u8 unknown[0x20];
+    u16 var;
+    u8 unknown[0x1E];
 };
 
 struct EasyChatPair
@@ -169,12 +220,317 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
-struct SaveBlock1_2B4C_Struct
-{ 
-	u8 filler[0x24]; 
+struct TVShowCommon
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 pad02[20];
+    /*0x16*/ u16 var16[3];
+    /*0x1C*/ u8 srcTrainerId3Lo;
+    /*0x1D*/ u8 srcTrainerId3Hi;
+    /*0x1E*/ u8 srcTrainerId2Lo;
+    /*0x1F*/ u8 srcTrainerId2Hi;
+    /*0x20*/ u8 srcTrainerIdLo;
+    /*0x21*/ u8 srcTrainerIdHi;
+    /*0x22*/ u8 trainerIdLo;
+    /*0x23*/ u8 trainerIdHi;
 };
 
-struct SaveBlock1
+struct TVShowFanClubLetter
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 species;
+    /*0x04*/ u16 pad04[6];
+    /*0x10*/ u8 playerName[8];
+    /*0x18*/ u8 language;
+};
+
+struct TVShowRecentHappenings
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u16 var04[6];
+    /*0x10*/ u8 playerName[8];
+    /*0x18*/ u8 language;
+    /*0x19*/ u8 pad19[10];
+};
+
+struct TVShowFanclubOpinions
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u8 var04A:4;
+    /*0x04*/ u8 var04B:4;
+    /*0x05*/ u8 playerName[8];
+    /*0x0D*/ u8 language;
+    /*0x0E*/ u8 var0E;
+    /*0x0F*/ u8 var0F;
+    /*0x10*/ u8 var10[8];
+    /*0x18*/ u16 var18[2];
+    /*0x1C*/ u16 var1C[4];
+};
+
+struct TVShowUnknownType04
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 pad02[4];
+    /*0x06*/ u16 var06;
+};
+
+struct TVShowNameRaterShow
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 species;
+    /*0x04*/ u8 pokemonName[11];
+    /*0x0F*/ u8 trainerName[11];
+    /*0x1A*/ u8 random;
+    /*0x1B*/ u8 random2;
+    /*0x1C*/ u16 var1C;
+    /*0x1E*/ u8 language;
+    /*0x1F*/ u8 pokemonNameLanguage;
+};
+
+struct TVShowBravoTrainerPokemonProfiles
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 species;
+    /*0x04*/ u16 var04[2];
+    /*0x08*/ u8 pokemonNickname[11];
+    /*0x13*/ u8 contestCategory:3;
+    /*0x13*/ u8 contestRank:2;
+    /*0x13*/ u8 contestResult:2;
+    /*0x13*/ u8 var13_7:1;
+    /*0x14*/ u16 var14;
+    /*0x16*/ u8 playerName[8];
+    /*0x1E*/ u8 language;
+    /*0x1F*/ u8 var1f;
+};
+
+struct TVShowBravoTrainerBattleTowerSpotlight
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 trainerName[8];
+    /*0x0A*/ u16 species;
+    /*0x0C*/ u8 pokemonName[8];
+    /*0x14*/ u16 defeatedSpecies;
+    /*0x16*/ u16 var16;
+    /*0x18*/ u16 var18[1];
+    /*0x1A*/ u8 btLevel;
+    /*0x1B*/ u8 var1b;
+    /*0x1C*/ u8 var1c;
+    /*0x1D*/ u8 language;
+};
+
+struct TVShowPokemonToday
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 language;
+    /*0x03*/ u8 language2;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 ball;
+    /*0x10*/ u16 species;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 playerName[8];
+};
+
+struct TVShowSmartShopper
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 priceReduced;
+    /*0x03*/ u8 language;
+    /*0x04*/ u8 pad04[2];
+    /*0x06*/ u16 itemIds[3];
+    /*0x0C*/ u16 itemAmounts[3];
+    /*0x12*/ u8 shopLocation;
+    /*0x13*/ u8 playerName[8];
+};
+
+struct TVShowPokemonTodayFailed
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 language;
+    /*0x03*/ u8 pad03[9];
+    /*0x0c*/ u16 species;
+    /*0x0e*/ u16 species2;
+    /*0x10*/ u8 var10;
+    /*0x11*/ u8 var11;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 playerName[8];
+};
+
+struct TVShowPokemonAngler
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 var02;
+    /*0x03*/ u8 var03;
+    /*0x04*/ u16 var04;
+    /*0x06*/ u8 language;
+             u8 pad07[12];
+    /*0x13*/ u8 playerName[8];
+};
+
+struct TVShowWorldOfMasters
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u16 var04;
+    /*0x06*/ u16 var06;
+    /*0x08*/ u16 var08;
+    /*0x0a*/ u8 var0a;
+    /*0x0b*/ u8 language;
+             u8 pad0c[7];
+    /*0x13*/ u8 playerName[8];
+};
+
+struct TVShowMassOutbreak
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 var02;
+    /*0x03*/ u8 var03;
+    /*0x04*/ u16 moves[4];
+    /*0x0C*/ u16 species;
+    /*0x0E*/ u16 var0E;
+    /*0x10*/ u8 locationMapNum;
+    /*0x11*/ u8 locationMapGroup;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 probability;
+    /*0x14*/ u8 level;
+    /*0x15*/ u8 var15;
+    /*0x16*/ u16 var16;
+    /*0x18*/ u8 language;
+             u8 pad19[11];
+};
+
+typedef union TVShow
+{
+    struct TVShowCommon common;
+    struct TVShowFanClubLetter fanclubLetter;
+    struct TVShowRecentHappenings recentHappenings;
+    struct TVShowFanclubOpinions fanclubOpinions;
+    struct TVShowUnknownType04 unkShow04;
+    struct TVShowNameRaterShow nameRaterShow;
+    struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
+    struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
+    struct TVShowPokemonToday pokemonToday;
+    struct TVShowSmartShopper smartshopperShow;
+    struct TVShowPokemonTodayFailed pokemonTodayFailed;
+    struct TVShowPokemonAngler pokemonAngler;
+    struct TVShowWorldOfMasters worldOfMasters;
+    struct TVShowMassOutbreak massOutbreak;
+} TVShow;
+
+struct MailStruct
+{
+    /*0x00*/ u16 words[9];
+    /*0x12*/ u8 playerName[8];
+    /*0x1A*/ u8 trainerId[4];
+    /*0x1E*/ u16 species;
+    /*0x20*/ u16 itemId;
+};
+
+struct UnkMauvilleOldManStruct
+{
+               u8 unk_2D94;
+               u8 unk_2D95;
+    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x2DAE*/ u8 playerName[8];
+    /*0x2DB6*/ u8 filler_2DB6[0x3];
+    /*0x2DB9*/ u8 playerTrainerId[4];
+               u8 unk_2DBD;
+}; /*size = 0x2C*/
+
+struct UnkMauvilleOldManStruct2
+{
+    u8 filler0;
+    u8 unk1;
+    u8 unk2;
+    u16 mauvilleOldMan_ecArray[10];
+    u8 mauvilleOldMan_ecArray2[12];
+    u8 fillerF[0x2];
+}; /*size = 0x2C*/
+
+typedef union OldMan
+{
+    struct UnkMauvilleOldManStruct oldMan1;
+    struct UnkMauvilleOldManStruct2 oldMan2;
+} OldMan;
+
+struct Unk_SB_Access_Struct1
+{
+    u8 filler0[0xF8];
+    struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+};
+
+struct Unk_SB_Access_Struct2
+{
+    /*0x0000*/ struct SB1_2EFC_Struct sb1_2EFC_struct2[12]; // each is 0x20
+    /*0x2F84*/ u8 filler[0x18];
+};
+
+/*0x2E04*/
+typedef union SB_Struct
+{
+    struct Unk_SB_Access_Struct1 unkSB1;
+    struct Unk_SB_Access_Struct2 unkSB2;
+} SB_Struct;
+// size is 0x198
+
+struct UnknownSaveStruct2ABC
+{
+    u8 val0;
+    u8 val1;
+    u16 val2;
+};
+
+struct GabbyAndTyData
+{
+    /*2b10*/ u16 mon1;
+    /*2b12*/ u16 mon2;
+    /*2b14*/ u16 lastMove;
+    /*2b16*/ u16 quote;
+    /*2b18*/ u8 mapnum;
+    /*2b19*/ u8 battleNum;
+    /*2b1a*/ u8 valA_0:1;
+    /*2b1a*/ u8 valA_1:1;
+    /*2b1a*/ u8 valA_2:1;
+    /*2b1a*/ u8 valA_3:1;
+    /*2b1a*/ u8 valA_4:1;
+    /*2b1a*/ u8 valA_5:3;
+    /*2b1b*/ u8 valB_0:1;
+    /*2b1b*/ u8 valB_1:1;
+    /*2b1b*/ u8 valB_2:1;
+    /*2b1b*/ u8 valB_3:1;
+    /*2b1b*/ u8 valB_4:1;
+    /*2b1b*/ u8 valB_5:3;
+};
+
+struct RecordMixing_UnknownStructSub
+{
+    u8 data[0x38];
+};
+
+struct RecordMixing_UnknownStruct
+{
+    struct RecordMixing_UnknownStructSub data[2];
+    u32 unk70;
+    u16 unk74[0x2];
+};
+
+struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
@@ -223,33 +579,41 @@ struct SaveBlock1
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-    /*0x2738*/ u8 tvShows[24][36]; // TODO: TV show struct
-    /*0x2A98*/ u8 filler_2A98[0x64];
+    /*0x2738*/ TVShow tvShows[25];
+    /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
     /*0x2B00*/ u8 outbreakPokemonLevel;
-    /*0x2B01*/ u8 filler_2B01[3];
+    /*0x2B01*/ u8 outbreakUnk1;
+    /*0x2B02*/ u16 outbreakUnk2;
     /*0x2B04*/ u16 outbreakPokemonMoves[4];
-    /*0x2B0C*/ u8 unk2B0C;
+    /*0x2B0C*/ u8 outbreakUnk4;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
-    /*0x2B0E*/ u8 filler_2B0E[0xE];
-    /*0x2B1C*/ u16 unk2B1C[4];
-    /*0x2B24*/ u8 filler_2B24[0x28];
-    /*0x2B4C*/ struct SaveBlock1_2B4C_Struct unkSave[16];
-    /*0x2D8C*/ u8 filler_2D8C[0x48];
+    /*0x2B0E*/ u16 outbreakUnk5;
+    /*0x2B10*/ struct GabbyAndTyData gabbyAndTyData;
+    /*0x2B1C*/ u16 unk2B1C[6];
+    /*0x2B28*/ u16 unk2B28[6];
+    /*0x2B34*/ u16 unk2B34[6];
+    /*0x2B40*/ u16 unk2B40[6];
+    /*0x2B4C*/ struct MailStruct mail[16];
+    /*0x2D8C*/ u8 unk2D8C[4];
+    /*0x2D90*/ u8 filler_2D90[0x4];
+    /*0x2D94*/ OldMan oldMan;
+    /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2DFC*/ u8 filler_2DFC[0x100];
-    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    /*0x2F9C*/ u8 filler_2F9C[0xA0];
-    /*0x303C*/ u8 filler_303C[0x38];
-    /*0x3074*/ u8 filler_3074[0x42];
+    /*0x2DFC*/ u8 filler_2DFC[0x8];
+    /*0x2E04*/ SB_Struct sbStruct;
+    /*0x2F9C*/ struct BoxPokemon daycareData[2];
+    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
+    /*0x30AC*/ u8 filler_30B4[0x2];
     /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[0x59];
+    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
-    /*0x3158*/ u8 filler_3158[0x8];
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
     /*0x3A7C*/ u8 filler_3A7C[0x10];
@@ -260,10 +624,10 @@ extern struct SaveBlock1 gSaveBlock1;
 
 struct Time
 {
-    s16 days;
-    s8 hours;
-    s8 minutes;
-    s8 seconds;
+    /*0x00*/ s16 days;
+    /*0x02*/ s8 hours;
+    /*0x03*/ s8 minutes;
+    /*0x04*/ s8 seconds;
 };
 
 struct Pokedex
@@ -281,13 +645,27 @@ struct Pokedex
 
 struct SaveBlock2_Sub
 {
-	/*0x0000, 0x00A8*/ u8 filler_000[0x4C8];
-	/*0x04C8, 0x0570*/ u16 var_4C8;
-	/*0x04CA, 0x0572*/ u16 var_4CA;
-	/*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
+    /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
+    /*0x03D8, 0x0480*/ u16 var_480;
+    /*0x03DA, 0x0482*/ u16 var_482;
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD0];
+    /*0x04AC, 0x0554*/ u8 var_4AC;
+    /*0x04AD, 0x0555*/ u8 var_4AD;
+    /*0x04AE, 0x0556*/ u8 var_4AE;
+    /*0x04AF, 0x0557*/ u8 var_4AF;
+    /*0x04B0, 0x0558*/ u16 var_4B0;
+    /*0x04B2, 0x055A*/ u16 var_4B2;
+    /*0x04B4, 0x055C*/ u16 var_4B4;
+    /*0x04B6, 0x055E*/ u16 var_4B6;
+    /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
+    /*0x04C8, 0x0570*/ u16 var_4C8;
+    /*0x04CA, 0x0572*/ u16 var_4CA;
+    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04D0, 0x0578*/ u8 var_4D0;
+    /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
 
-struct SaveBlock2
+struct SaveBlock2 /* 0x02024EA4 */
 {
     /*0x00*/ u8 playerName[8];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
@@ -297,13 +675,13 @@ struct SaveBlock2
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-             u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    /*0x13*/ u8 optionsButtonMode;         // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+    /*0x14*/ u16 optionsTextSpeed:3;       // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-             u16 regionMapZoom:1; // whether the map is zoomed in
+             u16 optionsSound:1;           // OPTIONS_SOUND_[MONO/STEREO]
+             u16 optionsBattleStyle:1;     // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+             u16 optionsBattleSceneOff:1;  // whether battle animations are disabled
+             u16 regionMapZoom:1;          // whether the map is zoomed in
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
@@ -311,23 +689,30 @@ struct SaveBlock2
     /*0xA8*/ struct SaveBlock2_Sub filler_A8;
 };
 
-struct UnkStruct_8054FF8_Substruct
+struct MapPosition
 {
-	s16 x;
-	s16 y;
-	u8 field_8;
+    s16 x;
+    s16 y;
+    u8 height;
 };
 
 struct UnkStruct_8054FF8
 {
-	u8 a;
-	u8 b;
-	u8 c;
-	u8 d;
-	struct UnkStruct_8054FF8_Substruct sub;
-	u16 field_C;
+    u8 a;
+    u8 b;
+    u8 c;
+    u8 d;
+    struct MapPosition sub;
+    u16 field_C;
 };
 
+// wasnt defined so I had to define it
+struct HallOfFame
+{
+    u8 filler[0x1F00];
+};
+
+extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
 
 #endif // GUARD_GLOBAL_H

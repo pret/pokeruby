@@ -1,30 +1,11 @@
 #include "global.h"
 #include "item.h"
+#include "items.h"
+#include "berry.h"
 #include "string_util.h"
+#include "strings.h"
 
-extern struct Berry *GetBerryInfo(u8 berry);
-
-extern u8 gOtherText_Berry2[];
 extern u8 gUnknown_02038560;
-
-struct Item
-{
-    u8 name[14];
-    u16 itemId;
-    u16 price;
-    u8 holdEffect;
-    u8 holdEffectParam;
-    u8 *description;
-    u8 importance;
-    u8 unk19;
-    u8 pocket;
-    u8 type;
-    ItemUseFunc fieldUseFunc;
-    u8 battleUsage;
-    ItemUseFunc battleUseFunc;
-    u8 secondaryId;
-};
-
 extern struct Item gItems[];
 
 struct BagPocket
@@ -48,9 +29,9 @@ static void CompactPCItems(void);
 
 void CopyItemName(u16 itemId, u8 *string)
 {
-    if (itemId == 0xAF)
+    if (itemId == ITEM_ENIGMA_BERRY)
     {
-        StringCopy(string, GetBerryInfo(0x2B)->name);
+        StringCopy(string, GetBerryInfo(0x2B)->name); // berry 0x2b = enigma berry
         StringAppend(string, gOtherText_Berry2);
     }
     else
@@ -61,7 +42,7 @@ void CopyItemName(u16 itemId, u8 *string)
 s8 CountUsedBagPocketSlots(u8 pocket)
 {
     u8 i;
-    
+
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
         if (gBagPockets[pocket].itemSlots[i].itemId == 0)
@@ -73,7 +54,7 @@ s8 CountUsedBagPocketSlots(u8 pocket)
 bool8 IsBagPocketNonEmpty(u8 pocket)
 {
     u8 i;
-    
+
     for (i = 0; i < gBagPockets[pocket - 1].capacity; i++)
     {
         if (gBagPockets[pocket - 1].itemSlots[i].itemId != 0)
@@ -86,7 +67,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
 {
     u8 i;
     u8 pocket;
-    
+
     if (ItemId_GetPocket(itemId) == 0)
         return FALSE;
     pocket = ItemId_GetPocket(itemId) - 1;
@@ -112,7 +93,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     u8 i;
     u8 pocket;
     u16 slotCapacity;
-    
+
     if (ItemId_GetPocket(itemId) == 0)
         return FALSE;
     pocket = ItemId_GetPocket(itemId) - 1;
@@ -120,7 +101,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
         slotCapacity = 99;
     else
         slotCapacity = 999;
-    
+
     //Check space in any existing item slots that already contain this item
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
@@ -135,7 +116,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
                 return TRUE;
         }
     }
-    
+
     //Check space in empty item slots
     if (count > 0)
     {
@@ -152,7 +133,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
         if (count > 0)
             return FALSE; //No more item slots. The bag is full
     }
-    
+
     return TRUE;
 }
 
@@ -162,7 +143,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
     u8 pocket;
     u16 slotCapacity;
     struct ItemSlot newItems[64];
-    
+
     if (ItemId_GetPocket(itemId) == 0)
         return FALSE;
     pocket = ItemId_GetPocket(itemId) - 1;
@@ -172,7 +153,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         slotCapacity = 99;
     else
         slotCapacity = 999;
-    
+
     //Use any item slots that already contain this item
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
@@ -193,7 +174,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 goto copy_items;
         }
     }
-    
+
     //Put any remaining items into new item slots.
     if (count > 0)
     {
@@ -214,7 +195,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         if (count > 0)
             return FALSE;   //No more empty item slots. The bag is full.
     }
-    
+
   copy_items:
     //Copy pocket back into the bag.
     memcpy(gBagPockets[pocket].itemSlots, newItems, gBagPockets[pocket].capacity * sizeof(struct ItemSlot));
@@ -226,11 +207,11 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     u8 i;
     u8 pocket;
     u16 totalQuantity = 0;
-    
+
     if (ItemId_GetPocket(itemId) == 0 || itemId == 0)
         return FALSE;
     pocket = ItemId_GetPocket(itemId) - 1;
-    
+
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
         if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
@@ -238,7 +219,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     }
     if (totalQuantity < count)
         return FALSE;   //We don't have enough of the item
-    
+
     if (gBagPockets[pocket].capacity > gUnknown_02038560
      && gBagPockets[pocket].itemSlots[gUnknown_02038560].itemId == itemId)
     {
@@ -257,7 +238,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
         if (count == 0)
             return TRUE;
     }
-    
+
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
         if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
@@ -289,7 +270,7 @@ u8 GetPocketByItemId(u16 itemId)
 void ClearItemSlots(struct ItemSlot *itemSlots, u8 b)
 {
     u16 i;
-    
+
     for (i = 0; i < b; i++)
     {
         itemSlots[i].itemId = 0;
@@ -300,7 +281,7 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 b)
 static s32 FindFreePCItemSlot(void)
 {
     s8 i;
-    
+
     for (i = 0; i < 50; i++)
     {
         if (gSaveBlock1.pcItems[i].itemId == 0)
@@ -313,7 +294,7 @@ u8 CountUsedPCItemSlots(void)
 {
     u8 usedSlots = 0;
     u8 i;
-    
+
     for (i = 0; i < 50; i++)
     {
         if (gSaveBlock1.pcItems[i].itemId != 0)
@@ -325,7 +306,7 @@ u8 CountUsedPCItemSlots(void)
 bool8 CheckPCHasItem(u16 itemId, u16 count)
 {
     u8 i;
-    
+
     for (i = 0; i < 50; i++)
     {
         if (gSaveBlock1.pcItems[i].itemId == itemId && gSaveBlock1.pcItems[i].quantity >= count)
@@ -339,10 +320,10 @@ bool8 AddPCItem(u16 itemId, u16 count)
     u8 i;
     s8 freeSlot;
     struct ItemSlot newItems[50];
-    
+
     //Copy PC items
     memcpy(newItems, gSaveBlock1.pcItems, sizeof(newItems));
-    
+
     //Use any item slots that already contain this item
     for (i = 0; i < 50; i++)
     {
@@ -363,7 +344,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
             }
         }
     }
-    
+
     //Put any remaining items into a new item slot.
     if (count > 0)
     {
@@ -373,7 +354,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
         newItems[freeSlot].itemId = itemId;
         newItems[freeSlot].quantity = count;
     }
-    
+
     //Copy items back to the PC
     memcpy(gSaveBlock1.pcItems, newItems, sizeof(gSaveBlock1.pcItems));
     return TRUE;
@@ -393,7 +374,7 @@ static void CompactPCItems(void)
 {
     u16 i;
     u16 j;
-    
+
     for (i = 0; i < 49; i++)
     {
         for (j = i + 1; j <= 49; j++)
@@ -410,7 +391,7 @@ static void CompactPCItems(void)
 
 void SwapRegisteredBike(void)
 {
-    switch(gSaveBlock1.registeredItem)
+    switch (gSaveBlock1.registeredItem)
     {
     case 0x103:
         gSaveBlock1.registeredItem = 0x110;
@@ -464,7 +445,7 @@ bool8 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
     u32 r5 = c + 1;
     u8 *description = gItems[SanitizeItemId(itemId)].description;
     u8 *str = a;
-    
+
     for (;;)
     {
         if (*description == 0xFF || *description == 0xFE)

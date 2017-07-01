@@ -1,8 +1,8 @@
 gKeyRepeatStartDelay
-gUnknown_3001764
+gLinkTransferringData
 gMain
 gKeyRepeatContinueDelay
-gUnknown_3001BB4
+gSoftResetDisabled
 gIntrTable
 gLinkVSyncDisabled
 IntrMain_Buffer

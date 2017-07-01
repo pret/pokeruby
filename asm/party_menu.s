@@ -71,7 +71,7 @@ sub_806AF4C: @ 806AF4C
 	lsrs r3, 24
 	cmp r1, 0xFF
 	beq _0806AF64
-	ldr r0, _0806AF84 @ =gUnknown_020239F8
+	ldr r0, _0806AF84 @ =gBattleTypeFlags
 	strh r1, [r0]
 _0806AF64:
 	ldr r0, _0806AF88 @ =0x0201b000
@@ -90,7 +90,7 @@ _0806AF64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806AF84: .4byte gUnknown_020239F8
+_0806AF84: .4byte gBattleTypeFlags
 _0806AF88: .4byte 0x0201b000
 	thumb_func_end sub_806AF4C
 
@@ -185,7 +185,7 @@ _0806B020:
 	muls r2, r3
 	ldr r3, _0806B050 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _0806B114
 	.align 2, 0
 _0806B048: .4byte 0x00000266
@@ -199,14 +199,14 @@ _0806B054:
 	adds r1, r4, r0
 	b _0806B0E0
 _0806B060:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _0806B0D8
 _0806B066:
 	movs r1, 0x98
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -233,10 +233,10 @@ _0806B07A:
 	.align 2, 0
 _0806B0A0: .4byte 0x00000266
 _0806B0A4:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	b _0806B0D8
 _0806B0AA:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	ldr r1, _0806B0B8 @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2
@@ -245,7 +245,7 @@ _0806B0AA:
 	.align 2, 0
 _0806B0B8: .4byte 0x0201b000
 _0806B0BC:
-	bl sub_806E53C
+	bl PartyMenuTryPrintMonsHP
 	b _0806B0D8
 _0806B0C2:
 	bl nullsub_13
@@ -257,7 +257,7 @@ _0806B0C2:
 	.align 2, 0
 _0806B0D0: .4byte 0x0201b000
 _0806B0D4:
-	bl sub_806E6C8
+	bl PartyMenuDrawHPBars
 _0806B0D8:
 	ldr r1, _0806B0E8 @ =0x0201b000
 	movs r2, 0x99
@@ -774,10 +774,10 @@ _0806B520: .4byte REG_BG3VOFS
 _0806B524: .4byte 0x0000ffff
 	thumb_func_end sub_806B4A8
 
-	thumb_func_start sub_806B528
-sub_806B528: @ 806B528
+	thumb_func_start IsLinkDoubleBattle
+IsLinkDoubleBattle: @ 806B528
 	push {lr}
-	ldr r0, _0806B53C @ =gUnknown_020239F8
+	ldr r0, _0806B53C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x4B
 	ands r0, r1
@@ -786,13 +786,13 @@ sub_806B528: @ 806B528
 	movs r0, 0
 	b _0806B542
 	.align 2, 0
-_0806B53C: .4byte gUnknown_020239F8
+_0806B53C: .4byte gBattleTypeFlags
 _0806B540:
 	movs r0, 0x1
 _0806B542:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B528
+	thumb_func_end IsLinkDoubleBattle
 
 	thumb_func_start sub_806B548
 sub_806B548: @ 806B548
@@ -833,7 +833,7 @@ sub_806B58C: @ 806B58C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -844,7 +844,7 @@ sub_806B58C: @ 806B58C
 	.align 2, 0
 _0806B5A4: .4byte gUnknown_0202E8FA
 _0806B5A8:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -909,7 +909,7 @@ _0806B628:
 	movs r1, 0
 	b _0806B8A8
 _0806B638:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B666
@@ -932,7 +932,7 @@ _0806B660:
 	ldrb r1, [r4, 0x3]
 	b _0806B8BC
 _0806B666:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -954,7 +954,7 @@ _0806B684:
 	movs r1, 0x1
 	b _0806B8A8
 _0806B694:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B6C2
@@ -977,7 +977,7 @@ _0806B6BC:
 	ldrb r1, [r4, 0x5]
 	b _0806B8BC
 _0806B6C2:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1021,7 +1021,7 @@ _0806B714:
 	ldrb r1, [r4, 0x5]
 	b _0806B8BC
 _0806B71A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B74A
@@ -1044,7 +1044,7 @@ _0806B744:
 	ldrb r1, [r4, 0x7]
 	b _0806B8BC
 _0806B74A:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1088,7 +1088,7 @@ _0806B79C:
 	ldrb r1, [r4, 0x7]
 	b _0806B8BC
 _0806B7A2:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B7D2
@@ -1112,7 +1112,7 @@ _0806B7CC:
 	ldrb r1, [r4, 0x9]
 	b _0806B8BC
 _0806B7D2:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1159,7 +1159,7 @@ _0806B82C:
 	ldrb r1, [r4, 0x9]
 	b _0806B8BC
 _0806B832:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B84C
@@ -1171,7 +1171,7 @@ _0806B832:
 	.align 2, 0
 _0806B848: .4byte gPlayerPartyCount
 _0806B84C:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1714,7 +1714,7 @@ sub_806BC3C: @ 806BC3C
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806BCB0 @ =gUnknown_08376918
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -1861,7 +1861,7 @@ sub_806BD58: @ 806BD58
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _0806BD7C @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2176,8 +2176,8 @@ sub_806BF74: @ 806BF74
 	mov r0, r9
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_806DA44
-	bl sub_806B528
+	bl UpdateMonIconFrame_806DA44
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2328,7 +2328,7 @@ _0806C0CC: .4byte 0x0201b000
 _0806C0D0: .4byte 0x00000261
 _0806C0D4: .4byte gUnknown_083768B8
 _0806C0D8:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r5, 0x5
@@ -2436,7 +2436,7 @@ _0806C1A4:
 	lsrs r1, 24
 	mov r0, r9
 	movs r2, 0x1
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	cmp r5, r0
@@ -3082,7 +3082,7 @@ sub_806C658: @ 806C658
 	mov r0, r8
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	cmp r6, 0x5
 	bhi _0806C6A8
 	lsls r0, r6, 1
@@ -3321,7 +3321,7 @@ _0806C84A:
 	lsrs r1, 24
 	mov r0, r8
 	movs r2, 0x1
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	cmp r6, r0
@@ -3362,7 +3362,7 @@ sub_806C890: @ 806C890
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	cmp r4, 0x5
 	bhi _0806C8DC
 	lsls r0, r4, 1
@@ -3430,7 +3430,7 @@ sub_806C92C: @ 806C92C
 	ldrh r0, [r1, 0x30]
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C96A
@@ -3606,7 +3606,7 @@ sub_806CA60: @ 806CA60
 	movs r1, 0
 	bl CreateTask
 	ldr r0, _0806CAE8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	strb r0, [r5, 0x1]
 	ldrb r1, [r5, 0x1]
 	adds r0, r4, 0
@@ -4020,11 +4020,11 @@ _0806CDCC:
 	ldr r4, _0806CE1C @ =0x02001000
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	strb r0, [r4, 0x3]
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x6]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	strb r0, [r4, 0x4]
 	ldrb r3, [r4, 0x5]
 	cmp r3, 0
@@ -4515,12 +4515,12 @@ sub_806D198: @ 806D198
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x5]
 	ldrb r2, [r4, 0x4]
-	bl sub_806DE50
+	bl SetMonIconSpriteId_maybe
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x6]
 	ldrb r2, [r4, 0x3]
-	bl sub_806DE50
-	bl battle_type_is_double
+	bl SetMonIconSpriteId_maybe
+	bl IsDoubleBattle
 	ldr r5, _0806D368 @ =gSprites
 	ldrb r1, [r4, 0x3]
 	lsls r3, r1, 4
@@ -4541,7 +4541,7 @@ sub_806D198: @ 806D198
 	movs r1, 0
 	mov r8, r1
 	strh r0, [r3, 0x20]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x3]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4580,9 +4580,9 @@ sub_806D198: @ 806D198
 	adds r1, r5
 	mov r9, r1
 	add r0, r9
-	ldr r7, _0806D370 @ =sub_806DA38
+	ldr r7, _0806D370 @ =UpdateMonIconFrame_806DA38
 	str r7, [r0]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x4]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4599,7 +4599,7 @@ sub_806D198: @ 806D198
 	adds r2, r6
 	ldrb r0, [r2]
 	strh r0, [r3, 0x20]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x4]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4645,14 +4645,14 @@ sub_806D198: @ 806D198
 	ldrh r1, [r1, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
 	add r1, r9
-	ldr r0, _0806D374 @ =sub_806DA0C
+	ldr r0, _0806D374 @ =UpdateMonIconFrame_806DA0C
 	str r0, [r1]
 	ldrb r0, [r4, 0x5]
 	movs r6, 0x64
@@ -4667,17 +4667,17 @@ sub_806D198: @ 806D198
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E4E8
+	bl PartyMenuTryPrintHP
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
@@ -4687,23 +4687,23 @@ sub_806D198: @ 806D198
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E4E8
+	bl PartyMenuTryPrintHP
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
 	bl nullsub_12
-	bl sub_806E6C8
+	bl PartyMenuDrawHPBars
 	mov r0, r10
 	bl sub_806CC74
 	pop {r3-r5}
@@ -4717,8 +4717,8 @@ sub_806D198: @ 806D198
 _0806D364: .4byte 0x02001000
 _0806D368: .4byte gSprites
 _0806D36C: .4byte gUnknown_08376678
-_0806D370: .4byte sub_806DA38
-_0806D374: .4byte sub_806DA0C
+_0806D370: .4byte UpdateMonIconFrame_806DA38
+_0806D374: .4byte UpdateMonIconFrame_806DA0C
 _0806D378: .4byte gPlayerParty
 	thumb_func_end sub_806D198
 
@@ -4726,7 +4726,7 @@ _0806D378: .4byte gPlayerParty
 sub_806D37C: @ 806D37C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	ldrh r2, [r4, 0x24]
 	movs r0, 0x24
 	ldrsh r1, [r4, r0]
@@ -4740,11 +4740,11 @@ sub_806D37C: @ 806D37C
 	movs r1, 0
 	strh r0, [r4, 0x2E]
 	strh r1, [r4, 0x32]
-	ldr r0, _0806D3A4 @ =sub_806DA38
+	ldr r0, _0806D3A4 @ =UpdateMonIconFrame_806DA38
 	str r0, [r4, 0x1C]
 	b _0806D3AE
 	.align 2, 0
-_0806D3A4: .4byte sub_806DA38
+_0806D3A4: .4byte UpdateMonIconFrame_806DA38
 _0806D3A8:
 	ldrh r0, [r4, 0x2E]
 	adds r0, r2, r0
@@ -4890,7 +4890,7 @@ sub_806D4AC: @ 806D4AC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0806D4FC @ =gSprites
@@ -4932,7 +4932,7 @@ sub_806D50C: @ 806D50C
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	ldr r2, _0806D534 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -5036,7 +5036,7 @@ sub_806D5B8: @ 806D5B8
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806D658 @ =gUnknown_08376948
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, r5, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -5047,7 +5047,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1]
 	mov r10, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5057,7 +5057,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1, 0x1]
 	mov r9, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5067,7 +5067,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1, 0x2]
 	mov r8, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5118,7 +5118,7 @@ sub_806D668: @ 806D668
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806D708 @ =gUnknown_08376978
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, r5, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -5129,7 +5129,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1]
 	mov r10, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5139,7 +5139,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1, 0x1]
 	mov r9, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5149,7 +5149,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1, 0x2]
 	mov r8, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5297,5 +5297,2929 @@ _0806D7EC: .4byte gStatusGfx_Icons
 _0806D7F0: .4byte 0x06007180
 _0806D7F4: .4byte gStatusPal_Icons
 	thumb_func_end sub_806D718
+
+	thumb_func_start SetMonIconAnimByHP
+SetMonIconAnimByHP: @ 806D7F8
+	push {r4-r6,lr}
+	lsls r0, 24
+	lsrs r6, r0, 24
+	lsls r1, 16
+	lsls r2, 16
+	lsrs r5, r1, 16
+	asrs r1, 16
+	lsrs r4, r2, 16
+	asrs r2, 16
+	adds r0, r1, 0
+	adds r1, r2, 0
+	bl GetHPBarLevel
+	lsls r0, 24
+	lsrs r0, 24
+	movs r2, 0
+	cmp r5, r4
+	beq _0806D830
+	movs r2, 0x1
+	cmp r0, 0x3
+	beq _0806D830
+	movs r2, 0x2
+	cmp r0, 0x2
+	beq _0806D830
+	movs r2, 0x4
+	cmp r0, 0x1
+	bne _0806D830
+	movs r2, 0x3
+_0806D830:
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	ldr r1, _0806D848 @ =gSprites
+	adds r0, r1
+	adds r1, r2, 0
+	bl sub_809D824
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806D848: .4byte gSprites
+	thumb_func_end SetMonIconAnimByHP
+
+	thumb_func_start SetMonIconAnim
+SetMonIconAnim: @ 806D84C
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	adds r6, r1, 0
+	lsls r5, 24
+	lsrs r5, 24
+	adds r0, r6, 0
+	movs r1, 0x39
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	adds r0, r6, 0
+	movs r1, 0x3A
+	bl GetMonData
+	adds r2, r0, 0
+	lsls r2, 16
+	lsrs r2, 16
+	adds r0, r5, 0
+	adds r1, r4, 0
+	bl SetMonIconAnimByHP
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end SetMonIconAnim
+
+	thumb_func_start CreatePartyMenuMonIcon
+CreatePartyMenuMonIcon: @ 806D880
+	push {r4-r6,lr}
+	mov r6, r10
+	mov r5, r9
+	mov r4, r8
+	push {r4-r6}
+	sub sp, 0x8
+	adds r6, r0, 0
+	adds r5, r1, 0
+	mov r8, r3
+	lsls r6, 24
+	lsrs r6, 24
+	lsls r5, 24
+	lsrs r5, 24
+	lsls r2, 24
+	lsrs r2, 24
+	ldr r3, _0806D904 @ =gUnknown_08376678
+	lsls r1, r5, 2
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 3
+	adds r1, r0
+	adds r1, r3
+	ldrb r0, [r1]
+	mov r9, r0
+	ldrb r1, [r1, 0x1]
+	mov r10, r1
+	mov r0, r8
+	movs r1, 0x41
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	mov r0, r8
+	movs r1, 0
+	bl GetMonData
+	ldr r1, _0806D908 @ =sub_809D62C
+	movs r2, 0x5
+	str r2, [sp]
+	str r0, [sp, 0x4]
+	adds r0, r4, 0
+	mov r2, r9
+	mov r3, r10
+	bl CreateMonIcon
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	adds r0, r6, 0
+	adds r1, r5, 0
+	adds r2, r4, 0
+	bl SetMonIconSpriteId_maybe
+	adds r0, r4, 0
+	mov r1, r8
+	bl SetMonIconAnim
+	add sp, 0x8
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806D904: .4byte gUnknown_08376678
+_0806D908: .4byte sub_809D62C
+	thumb_func_end CreatePartyMenuMonIcon
+
+	thumb_func_start TryCreatePartyMenuMonIcon
+TryCreatePartyMenuMonIcon: @ 806D90C
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	adds r4, r2, 0
+	lsls r0, 24
+	lsrs r6, r0, 24
+	mov r8, r6
+	lsls r1, 24
+	lsrs r5, r1, 24
+	adds r7, r5, 0
+	adds r0, r4, 0
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806D95A
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806D946
+	adds r0, r6, 0
+	adds r1, r5, 0
+	movs r2, 0x2
+	adds r3, r4, 0
+	bl CreatePartyMenuMonIcon
+	b _0806D95A
+_0806D946:
+	bl IsDoubleBattle
+	adds r2, r0, 0
+	lsls r2, 24
+	lsrs r2, 24
+	mov r0, r8
+	adds r1, r7, 0
+	adds r3, r4, 0
+	bl CreatePartyMenuMonIcon
+_0806D95A:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end TryCreatePartyMenuMonIcon
+
+	thumb_func_start unref_sub_806D964
+unref_sub_806D964: @ 806D964
+	push {r4,r5,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	movs r4, 0
+	b _0806D986
+_0806D96E:
+	movs r0, 0x64
+	adds r2, r4, 0
+	muls r2, r0
+	ldr r0, _0806D994 @ =gPlayerParty
+	adds r2, r0
+	adds r0, r5, 0
+	adds r1, r4, 0
+	bl TryCreatePartyMenuMonIcon
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+_0806D986:
+	ldr r0, _0806D998 @ =gPlayerPartyCount
+	ldrb r0, [r0]
+	cmp r4, r0
+	bcc _0806D96E
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806D994: .4byte gPlayerParty
+_0806D998: .4byte gPlayerPartyCount
+	thumb_func_end unref_sub_806D964
+
+	thumb_func_start CreateMonIcon_806D99C
+CreateMonIcon_806D99C: @ 806D99C
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	sub sp, 0x8
+	adds r6, r0, 0
+	adds r5, r1, 0
+	mov r8, r3
+	lsls r6, 24
+	lsrs r6, 24
+	lsls r5, 24
+	lsrs r5, 24
+	lsls r2, 24
+	lsrs r2, 24
+	ldr r3, _0806DA04 @ =gUnknown_08376678
+	lsls r1, r5, 2
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 3
+	adds r1, r0
+	adds r1, r3
+	ldrb r2, [r1]
+	ldrb r3, [r1, 0x1]
+	mov r1, r8
+	ldrh r0, [r1]
+	ldr r1, _0806DA08 @ =sub_809D62C
+	movs r4, 0x5
+	str r4, [sp]
+	mov r7, r8
+	ldr r4, [r7, 0x18]
+	str r4, [sp, 0x4]
+	bl CreateMonIcon
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	adds r0, r6, 0
+	adds r1, r5, 0
+	adds r2, r4, 0
+	bl SetMonIconSpriteId_maybe
+	ldrh r1, [r7, 0x10]
+	ldrh r2, [r7, 0x12]
+	adds r0, r4, 0
+	bl SetMonIconAnimByHP
+	add sp, 0x8
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DA04: .4byte gUnknown_08376678
+_0806DA08: .4byte sub_809D62C
+	thumb_func_end CreateMonIcon_806D99C
+
+	thumb_func_start UpdateMonIconFrame_806DA0C
+UpdateMonIconFrame_806DA0C: @ 806DA0C
+	push {r4,lr}
+	adds r4, r0, 0
+	bl UpdateMonIconFrame
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	beq _0806DA32
+	movs r1, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _0806DA30
+	ldr r0, _0806DA2C @ =0x0000fffd
+	strh r0, [r4, 0x26]
+	b _0806DA32
+	.align 2, 0
+_0806DA2C: .4byte 0x0000fffd
+_0806DA30:
+	strh r1, [r4, 0x26]
+_0806DA32:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end UpdateMonIconFrame_806DA0C
+
+	thumb_func_start UpdateMonIconFrame_806DA38
+UpdateMonIconFrame_806DA38: @ 806DA38
+	push {lr}
+	bl UpdateMonIconFrame
+	pop {r0}
+	bx r0
+	thumb_func_end UpdateMonIconFrame_806DA38
+
+	thumb_func_start UpdateMonIconFrame_806DA44
+UpdateMonIconFrame_806DA44: @ 806DA44
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r2, 24
+	lsrs r4, r2, 24
+	cmp r1, 0x5
+	bhi _0806DA8E
+	bl GetMonIconSpriteId_maybe
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r3, _0806DA7C @ =gSprites
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r2, r1, 2
+	adds r1, r2, r3
+	movs r0, 0
+	strh r0, [r1, 0x26]
+	strh r0, [r1, 0x2E]
+	cmp r4, 0
+	bne _0806DA84
+	adds r0, r3, 0
+	adds r0, 0x1C
+	adds r0, r2, r0
+	ldr r1, _0806DA80 @ =UpdateMonIconFrame_806DA38
+	b _0806DA8C
+	.align 2, 0
+_0806DA7C: .4byte gSprites
+_0806DA80: .4byte UpdateMonIconFrame_806DA38
+_0806DA84:
+	adds r0, r3, 0
+	adds r0, 0x1C
+	adds r0, r2, r0
+	ldr r1, _0806DA94 @ =UpdateMonIconFrame_806DA0C
+_0806DA8C:
+	str r1, [r0]
+_0806DA8E:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DA94: .4byte UpdateMonIconFrame_806DA0C
+	thumb_func_end UpdateMonIconFrame_806DA44
+
+	thumb_func_start LoadHeldItemIconGraphics
+LoadHeldItemIconGraphics: @ 806DA98
+	push {lr}
+	ldr r0, _0806DAAC @ =gUnknown_083765DC
+	bl LoadSpriteSheet
+	ldr r0, _0806DAB0 @ =gUnknown_083765E4
+	bl LoadSpritePalette
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DAAC: .4byte gUnknown_083765DC
+_0806DAB0: .4byte gUnknown_083765E4
+	thumb_func_end LoadHeldItemIconGraphics
+
+	thumb_func_start SpriteCB_HeldItemIcon
+SpriteCB_HeldItemIcon: @ 806DAB4
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r1, [r4, 0x3C]
+	lsls r1, 24
+	lsrs r1, 24
+	ldr r2, _0806DAE4 @ =gSprites
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, r0, r2
+	adds r0, r2, 0
+	adds r0, 0x3E
+	ldrb r0, [r0]
+	lsls r0, 29
+	cmp r0, 0
+	bge _0806DAE8
+	adds r0, r4, 0
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	movs r2, 0x4
+	orrs r1, r2
+	strb r1, [r0]
+	b _0806DB06
+	.align 2, 0
+_0806DAE4: .4byte gSprites
+_0806DAE8:
+	adds r3, r4, 0
+	adds r3, 0x3E
+	ldrb r1, [r3]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r3]
+	ldrh r0, [r2, 0x24]
+	ldrh r1, [r2, 0x20]
+	adds r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r2, 0x26]
+	ldrh r2, [r2, 0x22]
+	adds r0, r2
+	strh r0, [r4, 0x22]
+_0806DB06:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end SpriteCB_HeldItemIcon
+
+	thumb_func_start CreateHeldItemIcon
+CreateHeldItemIcon: @ 806DB0C
+	push {r4-r6,lr}
+	mov r6, r9
+	mov r5, r8
+	push {r5,r6}
+	adds r6, r0, 0
+	mov r9, r1
+	lsls r6, 24
+	lsrs r6, 24
+	mov r0, r9
+	lsls r0, 24
+	lsrs r0, 24
+	mov r9, r0
+	ldr r0, _0806DB84 @ =gSprites
+	mov r8, r0
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	add r0, r8
+	adds r0, 0x43
+	ldrb r3, [r0]
+	ldr r0, _0806DB88 @ =gSpriteTemplate_837660C
+	subs r3, 0x1
+	lsls r3, 24
+	lsrs r3, 24
+	movs r1, 0xFA
+	movs r2, 0xAA
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r4, r0, 4
+	adds r4, r0
+	lsls r4, 2
+	mov r0, r8
+	adds r5, r4, r0
+	movs r0, 0x4
+	strh r0, [r5, 0x24]
+	movs r0, 0xA
+	strh r0, [r5, 0x26]
+	movs r0, 0x1C
+	add r8, r0
+	add r4, r8
+	ldr r0, _0806DB8C @ =SpriteCB_HeldItemIcon
+	str r0, [r4]
+	strh r6, [r5, 0x3C]
+	adds r0, r5, 0
+	mov r1, r9
+	bl StartSpriteAnim
+	ldr r1, [r4]
+	adds r0, r5, 0
+	bl _call_via_r1
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DB84: .4byte gSprites
+_0806DB88: .4byte gSpriteTemplate_837660C
+_0806DB8C: .4byte SpriteCB_HeldItemIcon
+	thumb_func_end CreateHeldItemIcon
+
+	thumb_func_start CreateHeldItemIcons
+CreateHeldItemIcons: @ 806DB90
+	push {r4-r7,lr}
+	adds r6, r0, 0
+	adds r7, r1, 0
+	lsls r2, 24
+	lsrs r2, 24
+	cmp r2, 0
+	beq _0806DBA4
+	cmp r2, 0x1
+	beq _0806DBEC
+	b _0806DC28
+_0806DBA4:
+	movs r5, 0
+	ldrb r0, [r6]
+	cmp r5, r0
+	bcs _0806DC28
+_0806DBAC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0806DBE8 @ =gPlayerParty
+	adds r0, r1
+	movs r1, 0xC
+	bl GetMonData
+	lsls r0, 16
+	lsrs r1, r0, 16
+	cmp r1, 0
+	beq _0806DBD8
+	adds r0, r7, r5
+	ldrb r4, [r0]
+	adds r0, r1, 0
+	bl ItemIsMail
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r4, 0
+	bl CreateHeldItemIcon
+_0806DBD8:
+	adds r0, r5, 0x1
+	lsls r0, 16
+	lsrs r5, r0, 16
+	ldrb r0, [r6]
+	cmp r5, r0
+	bcc _0806DBAC
+	b _0806DC28
+	.align 2, 0
+_0806DBE8: .4byte gPlayerParty
+_0806DBEC:
+	movs r5, 0
+	b _0806DC22
+_0806DBF0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0806DC30 @ =gEnemyParty
+	adds r0, r1
+	movs r1, 0xC
+	bl GetMonData
+	lsls r0, 16
+	lsrs r1, r0, 16
+	cmp r1, 0
+	beq _0806DC1C
+	adds r0, r5, r7
+	ldrb r4, [r0, 0x6]
+	adds r0, r1, 0
+	bl ItemIsMail
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r4, 0
+	bl CreateHeldItemIcon
+_0806DC1C:
+	adds r0, r5, 0x1
+	lsls r0, 16
+	lsrs r5, r0, 16
+_0806DC22:
+	ldrb r0, [r6, 0x1]
+	cmp r5, r0
+	bcc _0806DBF0
+_0806DC28:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DC30: .4byte gEnemyParty
+	thumb_func_end CreateHeldItemIcons
+
+	thumb_func_start CreateHeldItemIcons_806DC34
+CreateHeldItemIcons_806DC34: @ 806DC34
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	movs r7, 0
+	ldr r0, _0806DCC8 @ =gSprites
+	mov r9, r0
+	movs r1, 0x1C
+	add r1, r9
+	mov r10, r1
+_0806DC50:
+	movs r0, 0x64
+	muls r0, r7
+	ldr r1, _0806DCCC @ =gPlayerParty
+	adds r0, r1
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806DCB0
+	mov r0, r8
+	adds r1, r7, 0
+	bl GetMonIconSpriteId_maybe
+	adds r5, r0, 0
+	lsls r5, 24
+	lsrs r5, 24
+	ldr r0, _0806DCD0 @ =gSpriteTemplate_837660C
+	movs r1, 0xFA
+	movs r2, 0xAA
+	movs r3, 0x4
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r4, r0, 4
+	adds r4, r0
+	lsls r4, 2
+	mov r1, r9
+	adds r6, r4, r1
+	movs r1, 0x4
+	strh r1, [r6, 0x24]
+	movs r1, 0xA
+	strh r1, [r6, 0x26]
+	strh r5, [r6, 0x3C]
+	lsls r1, r5, 4
+	adds r1, r5
+	lsls r1, 2
+	add r1, r9
+	strh r0, [r1, 0x3C]
+	mov r0, r8
+	adds r1, r7, 0
+	bl SetHeldItemIconVisibility
+	add r4, r10
+	ldr r1, [r4]
+	adds r0, r6, 0
+	bl _call_via_r1
+_0806DCB0:
+	adds r0, r7, 0x1
+	lsls r0, 24
+	lsrs r7, r0, 24
+	cmp r7, 0x5
+	bls _0806DC50
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DCC8: .4byte gSprites
+_0806DCCC: .4byte gPlayerParty
+_0806DCD0: .4byte gSpriteTemplate_837660C
+	thumb_func_end CreateHeldItemIcons_806DC34
+
+	thumb_func_start CreateHeldItemIcon_806DCD4
+CreateHeldItemIcon_806DCD4: @ 806DCD4
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r2, 16
+	lsrs r7, r2, 16
+	bl GetMonIconSpriteId_maybe
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	ldr r0, _0806DD2C @ =gSpriteTemplate_837660C
+	movs r1, 0xFA
+	movs r2, 0xAA
+	movs r3, 0x4
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r6, r0, 24
+	ldr r1, _0806DD30 @ =gSprites
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	adds r5, r0, r1
+	movs r0, 0x4
+	strh r0, [r5, 0x24]
+	movs r0, 0xA
+	strh r0, [r5, 0x26]
+	strh r4, [r5, 0x3C]
+	lsls r0, r4, 4
+	adds r0, r4
+	lsls r0, 2
+	adds r0, r1
+	strh r6, [r0, 0x3C]
+	cmp r7, 0
+	bne _0806DD34
+	adds r0, r5, 0
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	movs r2, 0x4
+	orrs r1, r2
+	strb r1, [r0]
+	b _0806DD5C
+	.align 2, 0
+_0806DD2C: .4byte gSpriteTemplate_837660C
+_0806DD30: .4byte gSprites
+_0806DD34:
+	adds r0, r7, 0
+	bl ItemIsMail
+	lsls r0, 24
+	cmp r0, 0
+	beq _0806DD46
+	adds r0, r5, 0
+	movs r1, 0x1
+	b _0806DD4A
+_0806DD46:
+	adds r0, r5, 0
+	movs r1, 0
+_0806DD4A:
+	bl StartSpriteAnim
+	adds r2, r5, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+_0806DD5C:
+	ldr r2, _0806DD78 @ =gSprites
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	adds r1, r2, 0
+	adds r1, 0x1C
+	adds r1, r0, r1
+	adds r0, r2
+	ldr r1, [r1]
+	bl _call_via_r1
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DD78: .4byte gSprites
+	thumb_func_end CreateHeldItemIcon_806DCD4
+
+	thumb_func_start SpriteCB_HeldItemIcon_806DD7C
+SpriteCB_HeldItemIcon_806DD7C: @ 806DD7C
+	ldrh r2, [r0, 0x3C]
+	lsls r2, 24
+	lsrs r2, 24
+	ldr r3, _0806DD9C @ =gSprites
+	lsls r1, r2, 4
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r3
+	ldrh r2, [r1, 0x24]
+	ldrh r3, [r1, 0x20]
+	adds r2, r3
+	strh r2, [r0, 0x20]
+	ldrh r1, [r1, 0x22]
+	strh r1, [r0, 0x22]
+	bx lr
+	.align 2, 0
+_0806DD9C: .4byte gSprites
+	thumb_func_end SpriteCB_HeldItemIcon_806DD7C
+
+	thumb_func_start GetMonIconSpriteId_maybe
+GetMonIconSpriteId_maybe: @ 806DDA0
+	push {lr}
+	lsls r0, 24
+	lsrs r2, r0, 24
+	lsls r1, 24
+	lsrs r0, r1, 24
+	cmp r0, 0x5
+	bhi _0806DE38
+	lsls r0, 2
+	ldr r1, _0806DDB8 @ =_0806DDBC
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_0806DDB8: .4byte _0806DDBC
+	.align 2, 0
+_0806DDBC:
+	.4byte _0806DE38
+	.4byte _0806DDD4
+	.4byte _0806DDE8
+	.4byte _0806DDFC
+	.4byte _0806DE10
+	.4byte _0806DE24
+_0806DDD4:
+	ldr r0, _0806DDE4 @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrb r0, [r1, 0x8]
+	b _0806DE46
+	.align 2, 0
+_0806DDE4: .4byte gTasks
+_0806DDE8:
+	ldr r0, _0806DDF8 @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrh r0, [r1, 0xA]
+	b _0806DE44
+	.align 2, 0
+_0806DDF8: .4byte gTasks
+_0806DDFC:
+	ldr r0, _0806DE0C @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrb r0, [r1, 0xA]
+	b _0806DE46
+	.align 2, 0
+_0806DE0C: .4byte gTasks
+_0806DE10:
+	ldr r0, _0806DE20 @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrh r0, [r1, 0xC]
+	b _0806DE44
+	.align 2, 0
+_0806DE20: .4byte gTasks
+_0806DE24:
+	ldr r0, _0806DE34 @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrb r0, [r1, 0xC]
+	b _0806DE46
+	.align 2, 0
+_0806DE34: .4byte gTasks
+_0806DE38:
+	ldr r0, _0806DE4C @ =gTasks
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r0
+	ldrh r0, [r1, 0x8]
+_0806DE44:
+	lsrs r0, 8
+_0806DE46:
+	pop {r1}
+	bx r1
+	.align 2, 0
+_0806DE4C: .4byte gTasks
+	thumb_func_end GetMonIconSpriteId_maybe
+
+	thumb_func_start SetMonIconSpriteId_maybe
+SetMonIconSpriteId_maybe: @ 806DE50
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r3, r0, 24
+	lsls r1, 24
+	lsrs r0, r1, 24
+	lsls r2, 24
+	lsrs r4, r2, 24
+	cmp r0, 0x5
+	bhi _0806DF24
+	lsls r0, 2
+	ldr r1, _0806DE6C @ =_0806DE70
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_0806DE6C: .4byte _0806DE70
+	.align 2, 0
+_0806DE70:
+	.4byte _0806DE88
+	.4byte _0806DEA0
+	.4byte _0806DEC0
+	.4byte _0806DED8
+	.4byte _0806DEF8
+	.4byte _0806DF10
+_0806DE88:
+	ldr r1, _0806DE9C @ =gTasks
+	lsls r0, r3, 2
+	adds r0, r3
+	lsls r0, 3
+	adds r0, r1
+	ldrb r1, [r0, 0x8]
+	lsls r2, r4, 8
+	orrs r1, r2
+	strh r1, [r0, 0x8]
+	b _0806DF24
+	.align 2, 0
+_0806DE9C: .4byte gTasks
+_0806DEA0:
+	ldr r0, _0806DEB8 @ =gTasks
+	lsls r1, r3, 2
+	adds r1, r3
+	lsls r1, 3
+	adds r1, r0
+	ldrh r2, [r1, 0x8]
+	ldr r0, _0806DEBC @ =0xffffff00
+	ands r0, r2
+	orrs r0, r4
+	strh r0, [r1, 0x8]
+	b _0806DF24
+	.align 2, 0
+_0806DEB8: .4byte gTasks
+_0806DEBC: .4byte 0xffffff00
+_0806DEC0:
+	ldr r1, _0806DED4 @ =gTasks
+	lsls r0, r3, 2
+	adds r0, r3
+	lsls r0, 3
+	adds r0, r1
+	ldrb r1, [r0, 0xA]
+	lsls r2, r4, 8
+	orrs r1, r2
+	strh r1, [r0, 0xA]
+	b _0806DF24
+	.align 2, 0
+_0806DED4: .4byte gTasks
+_0806DED8:
+	ldr r0, _0806DEF0 @ =gTasks
+	lsls r1, r3, 2
+	adds r1, r3
+	lsls r1, 3
+	adds r1, r0
+	ldrh r2, [r1, 0xA]
+	ldr r0, _0806DEF4 @ =0xffffff00
+	ands r0, r2
+	orrs r0, r4
+	strh r0, [r1, 0xA]
+	b _0806DF24
+	.align 2, 0
+_0806DEF0: .4byte gTasks
+_0806DEF4: .4byte 0xffffff00
+_0806DEF8:
+	ldr r1, _0806DF0C @ =gTasks
+	lsls r0, r3, 2
+	adds r0, r3
+	lsls r0, 3
+	adds r0, r1
+	ldrb r1, [r0, 0xC]
+	lsls r2, r4, 8
+	orrs r1, r2
+	strh r1, [r0, 0xC]
+	b _0806DF24
+	.align 2, 0
+_0806DF0C: .4byte gTasks
+_0806DF10:
+	ldr r0, _0806DF2C @ =gTasks
+	lsls r1, r3, 2
+	adds r1, r3
+	lsls r1, 3
+	adds r1, r0
+	ldrh r2, [r1, 0xC]
+	ldr r0, _0806DF30 @ =0xffffff00
+	ands r0, r2
+	orrs r0, r4
+	strh r0, [r1, 0xC]
+_0806DF24:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DF2C: .4byte gTasks
+_0806DF30: .4byte 0xffffff00
+	thumb_func_end SetMonIconSpriteId_maybe
+
+	thumb_func_start GetHeldItemIconSpriteIdByMon_maybe
+GetHeldItemIconSpriteIdByMon_maybe: @ 806DF34
+	push {lr}
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	bl GetMonIconSpriteId_maybe
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r2, _0806DF5C @ =gSprites
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r2
+	ldrh r0, [r1, 0x3C]
+	lsls r0, 24
+	lsrs r0, 24
+	pop {r1}
+	bx r1
+	.align 2, 0
+_0806DF5C: .4byte gSprites
+	thumb_func_end GetHeldItemIconSpriteIdByMon_maybe
+
+	thumb_func_start SetHeldItemIconVisibility
+SetHeldItemIconVisibility: @ 806DF60
+	push {r4-r6,lr}
+	adds r4, r1, 0
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r4, 24
+	lsrs r4, 24
+	adds r1, r4, 0
+	bl GetHeldItemIconSpriteIdByMon_maybe
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r6, r5, 0
+	movs r0, 0x64
+	adds r1, r4, 0
+	muls r1, r0
+	ldr r0, _0806DFA4 @ =gPlayerParty
+	adds r4, r1, r0
+	adds r0, r4, 0
+	movs r1, 0xC
+	bl GetMonData
+	cmp r0, 0
+	bne _0806DFAC
+	ldr r1, _0806DFA8 @ =gSprites
+	lsls r0, r5, 4
+	adds r0, r5
+	lsls r0, 2
+	adds r0, r1
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	movs r2, 0x4
+	orrs r1, r2
+	strb r1, [r0]
+	b _0806DFF6
+	.align 2, 0
+_0806DFA4: .4byte gPlayerParty
+_0806DFA8: .4byte gSprites
+_0806DFAC:
+	adds r0, r4, 0
+	movs r1, 0xC
+	bl GetMonData
+	lsls r0, 16
+	lsrs r0, 16
+	bl ItemIsMail
+	lsls r0, 24
+	cmp r0, 0
+	beq _0806DFD8
+	lsls r4, r5, 4
+	adds r4, r5
+	lsls r4, 2
+	ldr r0, _0806DFD4 @ =gSprites
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0x1
+	b _0806DFE6
+	.align 2, 0
+_0806DFD4: .4byte gSprites
+_0806DFD8:
+	lsls r4, r6, 4
+	adds r4, r6
+	lsls r4, 2
+	ldr r0, _0806DFFC @ =gSprites
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0
+_0806DFE6:
+	bl StartSpriteAnim
+	adds r4, 0x3E
+	ldrb r1, [r4]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4]
+_0806DFF6:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806DFFC: .4byte gSprites
+	thumb_func_end SetHeldItemIconVisibility
+
+	thumb_func_start box_print
+box_print: @ 806E000
+	push {r4-r6,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r6, r2, 0
+	lsls r4, 24
+	lsrs r4, 24
+	movs r0, 0
+	str r0, [sp]
+	ldr r5, _0806E040 @ =gTileBuffer
+	ldr r2, _0806E044 @ =0x01000100
+	mov r0, sp
+	adds r1, r5, 0
+	bl CpuFastSet
+	ldr r0, _0806E048 @ =gWindowConfig_81E6CAC
+	adds r1, r5, 0
+	adds r2, r6, 0
+	bl sub_8004E3C
+	lsls r4, 10
+	ldr r0, _0806E04C @ =0x06014000
+	adds r4, r0
+	adds r0, r5, 0
+	adds r1, r4, 0
+	movs r2, 0x80
+	bl CpuFastSet
+	add sp, 0x4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E040: .4byte gTileBuffer
+_0806E044: .4byte 0x01000100
+_0806E048: .4byte gWindowConfig_81E6CAC
+_0806E04C: .4byte 0x06014000
+	thumb_func_end box_print
+
+	thumb_func_start PrintPartyMenuMonNickname
+PrintPartyMenuMonNickname: @ 806E050
+	push {r4,r5,lr}
+	sub sp, 0xC
+	adds r4, r0, 0
+	adds r5, r1, 0
+	adds r0, r2, 0
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r5, 24
+	lsrs r5, 24
+	mov r1, sp
+	bl GetMonNickname
+	adds r0, r4, 0
+	adds r1, r5, 0
+	mov r2, sp
+	bl box_print
+	add sp, 0xC
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end PrintPartyMenuMonNickname
+
+	thumb_func_start TryPrintPartyMenuMonNickname
+TryPrintPartyMenuMonNickname: @ 806E07C
+	push {r4-r6,lr}
+	adds r4, r1, 0
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r6, r5, 0
+	adds r0, r4, 0
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806E0BC
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806E0AA
+	adds r0, r5, 0
+	movs r1, 0x2
+	adds r2, r4, 0
+	bl PrintPartyMenuMonNickname
+	b _0806E0BC
+_0806E0AA:
+	bl IsDoubleBattle
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r6, 0
+	adds r2, r4, 0
+	bl PrintPartyMenuMonNickname
+_0806E0BC:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end TryPrintPartyMenuMonNickname
+
+	thumb_func_start PrintPartyMenuMonNicknames
+PrintPartyMenuMonNicknames: @ 806E0C4
+	push {r4-r6,lr}
+	movs r4, 0
+	movs r6, 0x64
+	ldr r5, _0806E0E8 @ =gPlayerParty
+_0806E0CC:
+	adds r1, r4, 0
+	muls r1, r6
+	adds r1, r5
+	adds r0, r4, 0
+	bl TryPrintPartyMenuMonNickname
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	cmp r4, 0x5
+	bls _0806E0CC
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E0E8: .4byte gPlayerParty
+	thumb_func_end PrintPartyMenuMonNicknames
+
+	thumb_func_start GetMonNickname
+GetMonNickname: @ 806E0EC
+	push {r4,lr}
+	adds r4, r1, 0
+	movs r1, 0x2
+	adds r2, r4, 0
+	bl GetMonData
+	adds r0, r4, 0
+	bl StringGetEnd10
+	pop {r4}
+	pop {r1}
+	bx r1
+	thumb_func_end GetMonNickname
+
+	thumb_func_start PartyMenuPutStatusTilemap
+PartyMenuPutStatusTilemap: @ 806E104
+	push {r4,r5,lr}
+	lsls r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	ldr r4, _0806E15C @ =gUnknown_08376738
+	lsrs r0, 22
+	lsls r3, r1, 1
+	adds r3, r1
+	lsls r3, 3
+	adds r0, r3
+	adds r0, r4
+	ldrb r1, [r0]
+	subs r1, 0x1
+	lsls r1, 24
+	lsrs r1, 24
+	ldrb r0, [r0, 0x1]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r0, 19
+	adds r1, r0
+	lsls r1, 1
+	ldr r0, _0806E160 @ =0x0600f000
+	adds r4, r1, r0
+	lsls r2, 26
+	lsrs r2, 24
+	movs r3, 0
+	movs r0, 0xC6
+	lsls r0, 1
+	adds r2, r0
+	ldr r0, _0806E164 @ =0xffffb000
+	adds r5, r0, 0
+_0806E142:
+	lsls r0, r3, 1
+	adds r0, r4
+	adds r1, r2, r3
+	orrs r1, r5
+	strh r1, [r0]
+	adds r0, r3, 0x1
+	lsls r0, 24
+	lsrs r3, r0, 24
+	cmp r3, 0x3
+	bls _0806E142
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E15C: .4byte gUnknown_08376738
+_0806E160: .4byte 0x0600f000
+_0806E164: .4byte 0xffffb000
+	thumb_func_end PartyMenuPutStatusTilemap
+
+	thumb_func_start PartyMenuClearLevelStatusTilemap
+PartyMenuClearLevelStatusTilemap: @ 806E168
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806E17E
+	movs r3, 0x2
+	b _0806E186
+_0806E17E:
+	bl IsDoubleBattle
+	lsls r0, 24
+	lsrs r3, r0, 24
+_0806E186:
+	ldr r1, _0806E1C8 @ =gUnknown_08376738
+	lsls r2, r4, 2
+	lsls r0, r3, 1
+	adds r0, r3
+	lsls r0, 3
+	adds r2, r0
+	adds r2, r1
+	ldrb r1, [r2]
+	subs r1, 0x1
+	lsls r1, 24
+	lsrs r1, 24
+	ldrb r0, [r2, 0x1]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r0, 19
+	adds r1, r0
+	lsls r1, 1
+	ldr r0, _0806E1CC @ =0x0600f000
+	adds r1, r0
+	movs r3, 0
+	movs r2, 0
+_0806E1B0:
+	lsls r0, r3, 1
+	adds r0, r1
+	strh r2, [r0]
+	adds r0, r3, 0x1
+	lsls r0, 24
+	lsrs r3, r0, 24
+	cmp r3, 0x3
+	bls _0806E1B0
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E1C8: .4byte gUnknown_08376738
+_0806E1CC: .4byte 0x0600f000
+	thumb_func_end PartyMenuClearLevelStatusTilemap
+
+	thumb_func_start PartyMenuWriteTilemap
+PartyMenuWriteTilemap: @ 806E1D0
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r2, 24
+	lsrs r2, 19
+	adds r1, r2
+	lsls r1, 1
+	ldr r2, _0806E1F0 @ =0x0600f000
+	adds r1, r2
+	movs r2, 0x86
+	lsls r2, 1
+	adds r0, r2
+	strh r0, [r1]
+	bx lr
+	.align 2, 0
+_0806E1F0: .4byte 0x0600f000
+	thumb_func_end PartyMenuWriteTilemap
+
+	thumb_func_start PartyMenuDoPrintLevel
+PartyMenuDoPrintLevel: @ 806E1F4
+	push {r4-r6,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r5, r2, 0
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r5, 24
+	lsrs r5, 24
+	ldr r3, _0806E278 @ =gUnknown_08376738
+	lsls r2, r4, 2
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 3
+	adds r2, r0
+	adds r2, r3
+	ldrb r1, [r2]
+	ldrb r2, [r2, 0x1]
+	subs r1, 0x1
+	lsls r1, 24
+	lsrs r1, 24
+	adds r2, 0x1
+	lsls r2, 24
+	lsrs r2, 24
+	movs r0, 0x40
+	bl PartyMenuWriteTilemap
+	ldr r6, _0806E27C @ =gStringVar1
+	movs r0, 0xFC
+	strb r0, [r6]
+	movs r0, 0x12
+	strb r0, [r6, 0x1]
+	movs r0, 0x8
+	strb r0, [r6, 0x2]
+	adds r0, r6, 0x3
+	adds r1, r5, 0
+	bl ConvertIntToDecimalString
+	movs r0, 0
+	str r0, [sp]
+	ldr r5, _0806E280 @ =gUnknown_02039460
+	ldr r2, _0806E284 @ =0x01000020
+	mov r0, sp
+	adds r1, r5, 0
+	bl CpuFastSet
+	ldr r0, _0806E288 @ =gWindowConfig_81E6CAC
+	ldr r2, _0806E28C @ =0xffffff00
+	adds r1, r5, r2
+	adds r2, r6, 0
+	bl sub_8004E3C
+	lsls r4, 10
+	ldr r0, _0806E290 @ =0x06014200
+	adds r4, r0
+	adds r0, r5, 0
+	adds r1, r4, 0
+	movs r2, 0x20
+	bl CpuFastSet
+	add sp, 0x4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E278: .4byte gUnknown_08376738
+_0806E27C: .4byte gStringVar1
+_0806E280: .4byte gUnknown_02039460
+_0806E284: .4byte 0x01000020
+_0806E288: .4byte gWindowConfig_81E6CAC
+_0806E28C: .4byte 0xffffff00
+_0806E290: .4byte 0x06014200
+	thumb_func_end PartyMenuDoPrintLevel
+
+	thumb_func_start PartyMenuPrintLevel
+PartyMenuPrintLevel: @ 806E294
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	adds r0, r2, 0
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r5, 24
+	lsrs r5, 24
+	movs r1, 0x38
+	bl GetMonData
+	adds r2, r0, 0
+	lsls r2, 24
+	lsrs r2, 24
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl PartyMenuDoPrintLevel
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuPrintLevel
+
+	thumb_func_start PartyMenuPrintMonLevelOrStatus
+PartyMenuPrintMonLevelOrStatus: @ 806E2C0
+	push {r4-r7,lr}
+	adds r5, r1, 0
+	lsls r0, 24
+	lsrs r7, r0, 24
+	adds r0, r5, 0
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806E32E
+	adds r0, r5, 0
+	movs r1, 0x2D
+	bl GetMonData
+	cmp r0, 0
+	bne _0806E32E
+	adds r0, r5, 0
+	bl GetMonStatusAndPokerus
+	lsls r0, 24
+	lsrs r4, r0, 24
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806E2FA
+	movs r6, 0x2
+	b _0806E302
+_0806E2FA:
+	bl IsDoubleBattle
+	lsls r0, 24
+	lsrs r6, r0, 24
+_0806E302:
+	cmp r4, 0
+	beq _0806E31A
+	cmp r4, 0x6
+	beq _0806E31A
+	subs r2, r4, 0x1
+	lsls r2, 24
+	lsrs r2, 24
+	adds r0, r7, 0
+	adds r1, r6, 0
+	bl PartyMenuPutStatusTilemap
+	b _0806E324
+_0806E31A:
+	adds r0, r7, 0
+	adds r1, r6, 0
+	adds r2, r5, 0
+	bl PartyMenuPrintLevel
+_0806E324:
+	adds r0, r7, 0
+	adds r1, r6, 0
+	adds r2, r5, 0
+	bl PartyMenuPutNicknameTilemap
+_0806E32E:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuPrintMonLevelOrStatus
+
+	thumb_func_start PartyMenuPrintMonsLevelOrStatus
+PartyMenuPrintMonsLevelOrStatus: @ 806E334
+	push {r4-r6,lr}
+	movs r4, 0
+	movs r6, 0x64
+	ldr r5, _0806E358 @ =gPlayerParty
+_0806E33C:
+	adds r1, r4, 0
+	muls r1, r6
+	adds r1, r5
+	adds r0, r4, 0
+	bl PartyMenuPrintMonLevelOrStatus
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	cmp r4, 0x5
+	bls _0806E33C
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E358: .4byte gPlayerParty
+	thumb_func_end PartyMenuPrintMonsLevelOrStatus
+
+	thumb_func_start PartyMenuDoPutNicknameTilemap
+PartyMenuDoPutNicknameTilemap: @ 806E35C
+	push {r4-r7,lr}
+	ldr r4, [sp, 0x14]
+	lsls r0, 16
+	lsrs r0, 16
+	lsls r1, 24
+	lsrs r7, r1, 24
+	lsls r2, 24
+	lsrs r5, r2, 24
+	lsls r3, 24
+	lsrs r6, r3, 24
+	adds r1, r4, 0
+	bl sub_8040D8C
+	cmp r0, 0
+	bne _0806E3BA
+	ldr r2, _0806E3A4 @ =gUnknown_08376738
+	lsls r1, r6, 2
+	lsls r0, r5, 1
+	adds r0, r5
+	lsls r0, 3
+	adds r1, r0
+	adds r1, r2
+	ldrb r0, [r1]
+	adds r0, 0x3
+	lsls r0, 24
+	lsrs r3, r0, 24
+	ldrb r0, [r1, 0x1]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r2, r0, 24
+	cmp r7, 0
+	beq _0806E3A8
+	cmp r7, 0xFE
+	beq _0806E3B2
+	b _0806E3BA
+	.align 2, 0
+_0806E3A4: .4byte gUnknown_08376738
+_0806E3A8:
+	movs r0, 0x42
+	adds r1, r3, 0
+	bl PartyMenuWriteTilemap
+	b _0806E3BA
+_0806E3B2:
+	movs r0, 0x44
+	adds r1, r3, 0
+	bl PartyMenuWriteTilemap
+_0806E3BA:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuDoPutNicknameTilemap
+
+	thumb_func_start PartyMenuPutNicknameTilemap
+PartyMenuPutNicknameTilemap: @ 806E3C0
+	push {r4-r6,lr}
+	mov r6, r9
+	mov r5, r8
+	push {r5,r6}
+	sub sp, 0x4
+	mov r8, r0
+	adds r6, r1, 0
+	adds r5, r2, 0
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	lsls r6, 24
+	lsrs r6, 24
+	ldr r0, _0806E41C @ =gStringVar1
+	mov r9, r0
+	adds r0, r5, 0
+	mov r1, r9
+	bl GetMonNickname
+	adds r0, r5, 0
+	movs r1, 0x41
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	adds r0, r5, 0
+	bl GetMonGender
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	mov r0, r9
+	str r0, [sp]
+	adds r0, r4, 0
+	adds r2, r6, 0
+	mov r3, r8
+	bl PartyMenuDoPutNicknameTilemap
+	add sp, 0x4
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E41C: .4byte gStringVar1
+	thumb_func_end PartyMenuPutNicknameTilemap
+
+	thumb_func_start PartyMenuDoPrintHP
+PartyMenuDoPrintHP: @ 806E420
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r1, r2, 0
+	adds r5, r3, 0
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r1, 16
+	lsrs r1, 16
+	lsls r5, 16
+	lsrs r5, 16
+	ldr r2, _0806E48C @ =gStringVar1
+	adds r0, r2, 0
+	movs r2, 0xF
+	movs r3, 0x1
+	bl sub_8072C14
+	adds r2, r0, 0
+	movs r0, 0xBA
+	strb r0, [r2]
+	adds r2, 0x1
+	adds r0, r2, 0
+	adds r1, r5, 0
+	movs r2, 0x23
+	movs r3, 0x1
+	bl sub_8072C14
+	movs r0, 0
+	str r0, [sp]
+	ldr r5, _0806E490 @ =gUnknown_02039460
+	ldr r2, _0806E494 @ =0x01000040
+	mov r0, sp
+	adds r1, r5, 0
+	bl CpuFastSet
+	ldr r0, _0806E498 @ =gWindowConfig_81E6CAC
+	ldr r2, _0806E49C @ =0xffffff00
+	adds r1, r5, r2
+	ldr r2, _0806E48C @ =gStringVar1
+	bl sub_8004E3C
+	lsls r4, 10
+	ldr r0, _0806E4A0 @ =0x06014300
+	adds r4, r0
+	adds r0, r5, 0
+	adds r1, r4, 0
+	movs r2, 0x40
+	bl CpuFastSet
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E48C: .4byte gStringVar1
+_0806E490: .4byte gUnknown_02039460
+_0806E494: .4byte 0x01000040
+_0806E498: .4byte gWindowConfig_81E6CAC
+_0806E49C: .4byte 0xffffff00
+_0806E4A0: .4byte 0x06014300
+	thumb_func_end PartyMenuDoPrintHP
+
+	thumb_func_start PartyMenuPrintHP
+PartyMenuPrintHP: @ 806E4A4
+	push {r4-r6,lr}
+	mov r6, r8
+	push {r6}
+	adds r5, r0, 0
+	adds r6, r1, 0
+	mov r8, r2
+	lsls r5, 24
+	lsrs r5, 24
+	lsls r6, 24
+	lsrs r6, 24
+	mov r0, r8
+	movs r1, 0x39
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	mov r0, r8
+	movs r1, 0x3A
+	bl GetMonData
+	adds r3, r0, 0
+	lsls r3, 16
+	lsrs r3, 16
+	adds r0, r5, 0
+	adds r1, r6, 0
+	adds r2, r4, 0
+	bl PartyMenuDoPrintHP
+	pop {r3}
+	mov r8, r3
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuPrintHP
+
+	thumb_func_start PartyMenuTryPrintHP
+PartyMenuTryPrintHP: @ 806E4E8
+	push {r4-r6,lr}
+	adds r4, r1, 0
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r6, r5, 0
+	adds r0, r4, 0
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806E534
+	adds r0, r4, 0
+	movs r1, 0x2D
+	bl GetMonData
+	cmp r0, 0
+	bne _0806E534
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806E522
+	adds r0, r5, 0
+	movs r1, 0x2
+	adds r2, r4, 0
+	bl PartyMenuPrintHP
+	b _0806E534
+_0806E522:
+	bl IsDoubleBattle
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r6, 0
+	adds r2, r4, 0
+	bl PartyMenuPrintHP
+_0806E534:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuTryPrintHP
+
+	thumb_func_start PartyMenuTryPrintMonsHP
+PartyMenuTryPrintMonsHP: @ 806E53C
+	push {r4-r6,lr}
+	movs r4, 0
+	movs r6, 0x64
+	ldr r5, _0806E560 @ =gPlayerParty
+_0806E544:
+	adds r1, r4, 0
+	muls r1, r6
+	adds r1, r5
+	adds r0, r4, 0
+	bl PartyMenuTryPrintHP
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	cmp r4, 0x5
+	bls _0806E544
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E560: .4byte gPlayerParty
+	thumb_func_end PartyMenuTryPrintMonsHP
+
+	thumb_func_start unref_sub_806E564
+unref_sub_806E564: @ 806E564
+	bx lr
+	thumb_func_end unref_sub_806E564
+
+	thumb_func_start unref_sub_806E568
+unref_sub_806E568: @ 806E568
+	bx lr
+	thumb_func_end unref_sub_806E568
+
+	thumb_func_start nullsub_12
+nullsub_12: @ 806E56C
+	bx lr
+	thumb_func_end nullsub_12
+
+	thumb_func_start nullsub_13
+nullsub_13: @ 806E570
+	bx lr
+	thumb_func_end nullsub_13
+
+	thumb_func_start PartyMenuDoDrawHPBar
+PartyMenuDoDrawHPBar: @ 806E574
+	push {r4-r6,lr}
+	sub sp, 0x18
+	lsls r0, 24
+	lsrs r6, r0, 24
+	lsls r1, 24
+	lsrs r5, r1, 24
+	lsls r2, 16
+	lsrs r2, 16
+	lsls r3, 16
+	lsrs r3, 16
+	ldr r0, _0806E624 @ =0xffff8000
+	str r0, [sp, 0x14]
+	str r3, [sp]
+	str r2, [sp, 0x4]
+	movs r0, 0
+	str r0, [sp, 0x8]
+	lsls r2, 16
+	asrs r2, 16
+	lsls r3, 16
+	asrs r3, 16
+	adds r0, r2, 0
+	adds r1, r3, 0
+	bl GetHPBarLevel
+	lsls r0, 24
+	lsrs r3, r0, 24
+	adds r4, r3, 0
+	cmp r3, 0x2
+	bls _0806E5BE
+	mov r2, sp
+	ldrb r1, [r2, 0xC]
+	movs r0, 0x20
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2, 0xC]
+_0806E5BE:
+	cmp r3, 0x2
+	bne _0806E5D2
+	mov r2, sp
+	ldrb r1, [r2, 0xC]
+	movs r0, 0x20
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x5
+	orrs r0, r1
+	strb r0, [r2, 0xC]
+_0806E5D2:
+	cmp r4, 0x1
+	bhi _0806E5E6
+	mov r2, sp
+	ldrb r1, [r2, 0xC]
+	movs r0, 0x20
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x6
+	orrs r0, r1
+	strb r0, [r2, 0xC]
+_0806E5E6:
+	movs r0, 0x80
+	lsls r0, 1
+	str r0, [sp, 0x10]
+	ldr r2, _0806E628 @ =gUnknown_08376858
+	lsls r1, r6, 2
+	lsls r0, r5, 1
+	adds r0, r5
+	lsls r0, 3
+	adds r1, r0
+	adds r1, r2
+	ldr r4, [r1]
+	add r1, sp, 0x14
+	mov r0, sp
+	adds r2, r4, 0
+	movs r3, 0
+	bl sub_80460C8
+	subs r4, 0x4
+	ldr r1, _0806E62C @ =0x00003109
+	adds r0, r1, 0
+	strh r0, [r4]
+	adds r1, 0x1
+	adds r0, r1, 0
+	strh r0, [r4, 0x2]
+	adds r1, 0x1
+	adds r0, r1, 0
+	strh r0, [r4, 0x10]
+	add sp, 0x18
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E624: .4byte 0xffff8000
+_0806E628: .4byte gUnknown_08376858
+_0806E62C: .4byte 0x00003109
+	thumb_func_end PartyMenuDoDrawHPBar
+
+	thumb_func_start PartyMenuDrawHPBar
+PartyMenuDrawHPBar: @ 806E630
+	push {r4-r6,lr}
+	mov r6, r8
+	push {r6}
+	adds r5, r0, 0
+	adds r6, r1, 0
+	mov r8, r2
+	lsls r5, 24
+	lsrs r5, 24
+	lsls r6, 24
+	lsrs r6, 24
+	mov r0, r8
+	movs r1, 0x39
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	mov r0, r8
+	movs r1, 0x3A
+	bl GetMonData
+	adds r3, r0, 0
+	lsls r3, 16
+	lsrs r3, 16
+	adds r0, r5, 0
+	adds r1, r6, 0
+	adds r2, r4, 0
+	bl PartyMenuDoDrawHPBar
+	pop {r3}
+	mov r8, r3
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuDrawHPBar
+
+	thumb_func_start PartyMenuTryDrawHPBar
+PartyMenuTryDrawHPBar: @ 806E674
+	push {r4-r6,lr}
+	adds r4, r1, 0
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r6, r5, 0
+	adds r0, r4, 0
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	beq _0806E6C0
+	adds r0, r4, 0
+	movs r1, 0x2D
+	bl GetMonData
+	cmp r0, 0
+	bne _0806E6C0
+	bl IsLinkDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0806E6AE
+	adds r0, r5, 0
+	movs r1, 0x2
+	adds r2, r4, 0
+	bl PartyMenuDrawHPBar
+	b _0806E6C0
+_0806E6AE:
+	bl IsDoubleBattle
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r6, 0
+	adds r2, r4, 0
+	bl PartyMenuDrawHPBar
+_0806E6C0:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end PartyMenuTryDrawHPBar
+
+	thumb_func_start PartyMenuDrawHPBars
+PartyMenuDrawHPBars: @ 806E6C8
+	push {r4-r6,lr}
+	movs r4, 0
+	movs r6, 0x64
+	ldr r5, _0806E6EC @ =gPlayerParty
+_0806E6D0:
+	adds r1, r4, 0
+	muls r1, r6
+	adds r1, r5
+	adds r0, r4, 0
+	bl PartyMenuTryDrawHPBar
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	cmp r4, 0x5
+	bls _0806E6D0
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806E6EC: .4byte gPlayerParty
+	thumb_func_end PartyMenuDrawHPBars
+
+	thumb_func_start sub_806E6F0
+sub_806E6F0: @ 806E6F0
+	push {r4,r5,lr}
+	sub sp, 0x64
+	adds r4, r0, 0
+	adds r5, r1, 0
+	mov r0, sp
+	adds r1, r4, 0
+	movs r2, 0x64
+	bl memcpy
+	adds r0, r4, 0
+	adds r1, r5, 0
+	movs r2, 0x64
+	bl memcpy
+	adds r0, r5, 0
+	mov r1, sp
+	movs r2, 0x64
+	bl memcpy
+	add sp, 0x64
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_806E6F0
+
+	thumb_func_start sub_806E720
+sub_806E720: @ 806E720
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r0, 21
+	adds r0, r3
+	ldrb r4, [r0]
+	lsls r4, 25
+	movs r3, 0x80
+	lsls r3, 18
+	adds r4, r3
+	lsrs r4, 24
+	ldrb r0, [r0, 0x1]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+	movs r3, 0x1E
+	subs r3, r0
+	strb r3, [r1]
+	movs r0, 0x14
+	subs r0, r4
+	strb r0, [r2]
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_806E720
+
+	thumb_func_start sub_806E750
+sub_806E750: @ 806E750
+	push {r4-r6,lr}
+	mov r6, r9
+	mov r5, r8
+	push {r5,r6}
+	sub sp, 0xC
+	adds r5, r0, 0
+	adds r4, r1, 0
+	mov r9, r2
+	adds r6, r3, 0
+	lsls r5, 24
+	lsrs r5, 24
+	lsls r6, 24
+	lsrs r6, 24
+	movs r0, 0x9
+	add r0, sp
+	mov r8, r0
+	adds r0, r5, 0
+	add r1, sp, 0x8
+	mov r2, r8
+	adds r3, r4, 0
+	bl sub_806E720
+	add r0, sp, 0x8
+	ldrb r0, [r0]
+	mov r2, r8
+	ldrb r1, [r2]
+	lsls r5, 3
+	adds r5, r4
+	ldrb r2, [r5, 0x1]
+	ldrb r3, [r5]
+	mov r4, r9
+	str r4, [sp]
+	ldr r4, [r5, 0x4]
+	str r4, [sp, 0x4]
+	bl sub_8089C50
+	add r0, sp, 0x8
+	ldrb r1, [r0]
+	adds r1, 0x1
+	lsls r1, 24
+	lsrs r1, 24
+	mov r0, r8
+	ldrb r2, [r0]
+	adds r2, 0x1
+	lsls r2, 24
+	lsrs r2, 24
+	ldrb r3, [r5]
+	str r6, [sp]
+	ldrb r0, [r5, 0x1]
+	subs r0, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+	str r0, [sp, 0x4]
+	movs r0, 0
+	bl InitMenu
+	add sp, 0xC
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_806E750
+
+	thumb_func_start sub_806E7D0
+sub_806E7D0: @ 806E7D0
+	push {r4-r6,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r6, r1, 0
+	lsls r4, 24
+	lsrs r4, 24
+	mov r5, sp
+	adds r5, 0x1
+	adds r0, r4, 0
+	mov r1, sp
+	adds r2, r5, 0
+	adds r3, r6, 0
+	bl sub_806E720
+	mov r0, sp
+	ldrb r0, [r0]
+	ldrb r1, [r5]
+	lsls r4, 3
+	adds r4, r6
+	ldrb r2, [r4, 0x1]
+	adds r2, r0, r2
+	lsls r2, 24
+	lsrs r2, 24
+	ldrb r3, [r4]
+	lsls r3, 1
+	adds r3, r1, r3
+	adds r3, 0x1
+	lsls r3, 24
+	lsrs r3, 24
+	bl MenuZeroFillWindowRect
+	bl HandleDestroyMenuCursors
+	add sp, 0x4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_806E7D0
+
+	thumb_func_start PartyMenuGetPopupMenuFunc
+PartyMenuGetPopupMenuFunc: @ 806E81C
+	lsls r0, 24
+	lsls r3, 24
+	lsrs r3, 24
+	lsrs r0, 21
+	adds r0, r1
+	ldr r0, [r0, 0x4]
+	adds r0, r3
+	ldrb r0, [r0]
+	lsls r0, 3
+	adds r0, r2
+	ldr r0, [r0, 0x4]
+	bx lr
+	thumb_func_end PartyMenuGetPopupMenuFunc
+
+    .section .text_8070968
+
+	thumb_func_start sub_8070968
+sub_8070968: @ 8070968
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	movs r7, 0
+	ldr r0, _08070A10 @ =0x0201c000
+	mov r9, r0
+	ldr r1, _08070A14 @ =0xfffff264
+	add r1, r9
+	mov r10, r1
+	ldr r0, _08070A18 @ =gStringVar1
+	mov r8, r0
+_08070982:
+	mov r1, r9
+	ldr r0, [r1]
+	ldr r1, _08070A1C @ =gUnknown_08376D1C
+	adds r1, r7, r1
+	ldrb r1, [r1]
+	bl GetMonData
+	adds r6, r7, 0x6
+	lsls r6, 1
+	add r6, r10
+	strh r0, [r6]
+	adds r0, r7, 0
+	movs r1, 0x3
+	bl __udivsi3
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r4, r0, 3
+	adds r4, r0
+	adds r4, 0xB
+	lsls r4, 24
+	lsrs r4, 24
+	adds r0, r7, 0
+	movs r1, 0x3
+	bl __umodsi3
+	adds r5, r0, 0
+	lsls r5, 1
+	adds r5, 0x1
+	lsls r5, 24
+	lsrs r5, 24
+	movs r0, 0xFC
+	mov r1, r8
+	strb r0, [r1]
+	movs r0, 0x14
+	strb r0, [r1, 0x1]
+	movs r0, 0x6
+	strb r0, [r1, 0x2]
+	movs r0, 0
+	ldrsh r1, [r6, r0]
+	mov r0, r8
+	adds r0, 0x3
+	movs r2, 0x1
+	movs r3, 0x3
+	bl ConvertIntToDecimalStringN
+	adds r4, 0x6
+	lsls r4, 3
+	adds r4, 0x6
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r5, 3
+	mov r0, r8
+	adds r1, r4, 0
+	adds r2, r5, 0
+	movs r3, 0
+	bl MenuPrint_PixelCoords
+	adds r0, r7, 0x1
+	lsls r0, 24
+	lsrs r7, r0, 24
+	cmp r7, 0x5
+	bls _08070982
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070A10: .4byte 0x0201c000
+_08070A14: .4byte 0xfffff264
+_08070A18: .4byte gStringVar1
+_08070A1C: .4byte gUnknown_08376D1C
+	thumb_func_end sub_8070968
+
+	thumb_func_start sub_8070A20
+sub_8070A20: @ 8070A20
+	push {r4-r7,lr}
+	adds r6, r1, 0
+	lsls r0, 24
+	lsrs r7, r0, 24
+	adds r0, r6, 0
+	bl GetMonStatusAndPokerus
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	beq _08070A3A
+	cmp r0, 0x6
+	bne _08070A42
+_08070A3A:
+	adds r0, r6, 0
+	adds r1, r7, 0
+	bl PartyMenuUpdateLevelOrStatus
+_08070A42:
+	bl IsDoubleBattle
+	adds r5, r0, 0
+	lsls r5, 24
+	lsrs r5, 24
+	adds r0, r6, 0
+	movs r1, 0x39
+	bl GetMonData
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	adds r0, r6, 0
+	movs r1, 0x3A
+	bl GetMonData
+	adds r3, r0, 0
+	lsls r3, 16
+	lsrs r3, 16
+	adds r0, r7, 0
+	adds r1, r5, 0
+	adds r2, r4, 0
+	bl PartyMenuDoPrintHP
+	adds r0, r7, 0
+	adds r1, r6, 0
+	bl PartyMenuTryDrawHPBar
+	ldr r4, _08070ABC @ =0x0201c000
+	ldrb r0, [r4, 0x4]
+	adds r1, r7, 0
+	bl GetMonIconSpriteId_maybe
+	lsls r0, 24
+	lsrs r0, 24
+	adds r1, r6, 0
+	bl SetMonIconAnim
+	bl IsDoubleBattle
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	lsls r1, r7, 1
+	adds r0, r1
+	ldr r1, _08070AC0 @ =gUnknown_083769A8
+	adds r0, r1
+	movs r1, 0x7
+	bl task_pc_turn_off
+	ldr r0, _08070AC4 @ =0xfffff261
+	adds r4, r0
+	movs r0, 0x2
+	strb r0, [r4]
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070ABC: .4byte 0x0201c000
+_08070AC0: .4byte gUnknown_083769A8
+_08070AC4: .4byte 0xfffff261
+	thumb_func_end sub_8070A20
+
+	thumb_func_start Task_RareCandy3
+Task_RareCandy3: @ 8070AC8
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r6, r0, 24
+	movs r0, 0
+	bl WaitFanfare
+	lsls r0, 24
+	cmp r0, 0
+	bne _08070ADC
+	b _08070C2C
+_08070ADC:
+	ldr r0, _08070B24 @ =gMain
+	ldrh r1, [r0, 0x2E]
+	movs r5, 0x1
+	adds r0, r5, 0
+	ands r0, r1
+	cmp r0, 0
+	bne _08070AF4
+	movs r0, 0x2
+	ands r0, r1
+	cmp r0, 0
+	bne _08070AF4
+	b _08070C2C
+_08070AF4:
+	movs r0, 0xB
+	movs r1, 0
+	movs r2, 0x1D
+	movs r3, 0x7
+	bl MenuZeroFillWindowRect
+	ldr r7, _08070B28 @ =0x0201c000
+	ldr r0, [r7]
+	movs r1, 0x1
+	bl sub_803B7C8
+	lsls r0, 16
+	lsrs r4, r0, 16
+	ldr r1, _08070B2C @ =0xfffff282
+	adds r0, r7, r1
+	strh r5, [r0]
+	ldr r0, _08070B30 @ =0x0000fffe
+	cmp r4, r0
+	beq _08070BDC
+	cmp r4, r0
+	bgt _08070B34
+	cmp r4, 0
+	beq _08070B40
+	b _08070BF4
+	.align 2, 0
+_08070B24: .4byte gMain
+_08070B28: .4byte 0x0201c000
+_08070B2C: .4byte 0xfffff282
+_08070B30: .4byte 0x0000fffe
+_08070B34:
+	ldr r0, _08070B3C @ =0x0000ffff
+	cmp r4, r0
+	beq _08070B7C
+	b _08070BF4
+	.align 2, 0
+_08070B3C: .4byte 0x0000ffff
+_08070B40:
+	ldr r0, [r7]
+	movs r1, 0
+	movs r2, 0
+	bl GetEvolutionTargetSpecies
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0
+	beq _08070B74
+	ldr r1, _08070B6C @ =gUnknown_03005E94
+	ldr r0, _08070B70 @ =sub_80A53F8
+	str r0, [r1]
+	ldr r0, [r7]
+	ldrb r3, [r7, 0x5]
+	adds r1, r2, 0
+	movs r2, 0x1
+	bl BeginEvolutionScene
+	adds r0, r6, 0
+	bl DestroyTask
+	b _08070C2C
+	.align 2, 0
+_08070B6C: .4byte gUnknown_03005E94
+_08070B70: .4byte sub_80A53F8
+_08070B74:
+	adds r0, r6, 0
+	bl sub_8070D90
+	b _08070C2C
+_08070B7C:
+	ldr r0, [r7]
+	ldr r1, _08070BBC @ =gStringVar1
+	bl GetMonNickname
+	ldr r0, _08070BC0 @ =gStringVar2
+	ldr r5, _08070BC4 @ =word_2024E82
+	ldrh r2, [r5]
+	movs r1, 0xD
+	muls r1, r2
+	ldr r2, _08070BC8 @ =gMoveNames
+	adds r1, r2
+	bl StringCopy
+	ldr r4, _08070BCC @ =gStringVar4
+	ldr r1, _08070BD0 @ =gOtherText_WantsToLearn
+	adds r0, r4, 0
+	bl StringExpandPlaceholders
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl sub_806E834
+	ldrh r0, [r5]
+	strh r0, [r7, 0x8]
+	ldr r1, _08070BD4 @ =gTasks
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _08070BD8 @ =sub_806F358
+	b _08070C2A
+	.align 2, 0
+_08070BBC: .4byte gStringVar1
+_08070BC0: .4byte gStringVar2
+_08070BC4: .4byte word_2024E82
+_08070BC8: .4byte gMoveNames
+_08070BCC: .4byte gStringVar4
+_08070BD0: .4byte gOtherText_WantsToLearn
+_08070BD4: .4byte gTasks
+_08070BD8: .4byte sub_806F358
+_08070BDC:
+	ldr r0, _08070BEC @ =gTasks
+	lsls r1, r6, 2
+	adds r1, r6
+	lsls r1, 3
+	adds r1, r0
+	ldr r0, _08070BF0 @ =sub_8070C54
+	str r0, [r1]
+	b _08070C2C
+	.align 2, 0
+_08070BEC: .4byte gTasks
+_08070BF0: .4byte sub_8070C54
+_08070BF4:
+	ldr r0, _08070C34 @ =0x0201c000
+	ldr r0, [r0]
+	ldr r1, _08070C38 @ =gStringVar1
+	bl GetMonNickname
+	ldr r0, _08070C3C @ =gStringVar2
+	movs r1, 0xD
+	muls r1, r4
+	ldr r2, _08070C40 @ =gMoveNames
+	adds r1, r2
+	bl StringCopy
+	ldr r4, _08070C44 @ =gStringVar4
+	ldr r1, _08070C48 @ =gOtherText_LearnedMove
+	adds r0, r4, 0
+	bl StringExpandPlaceholders
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl sub_806E834
+	ldr r1, _08070C4C @ =gTasks
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _08070C50 @ =Task_TeamMonTMMove3
+_08070C2A:
+	str r1, [r0]
+_08070C2C:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070C34: .4byte 0x0201c000
+_08070C38: .4byte gStringVar1
+_08070C3C: .4byte gStringVar2
+_08070C40: .4byte gMoveNames
+_08070C44: .4byte gStringVar4
+_08070C48: .4byte gOtherText_LearnedMove
+_08070C4C: .4byte gTasks
+_08070C50: .4byte Task_TeamMonTMMove3
+	thumb_func_end Task_RareCandy3
+
+	thumb_func_start sub_8070C54
+sub_8070C54: @ 8070C54
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r6, r0, 24
+	ldr r7, _08070C78 @ =0x0201c000
+	ldr r0, [r7]
+	movs r1, 0
+	bl sub_803B7C8
+	lsls r0, 16
+	lsrs r4, r0, 16
+	ldr r0, _08070C7C @ =0x0000fffe
+	cmp r4, r0
+	beq _08070D28
+	cmp r4, r0
+	bgt _08070C80
+	cmp r4, 0
+	beq _08070C8C
+	b _08070D30
+	.align 2, 0
+_08070C78: .4byte 0x0201c000
+_08070C7C: .4byte 0x0000fffe
+_08070C80:
+	ldr r0, _08070C88 @ =0x0000ffff
+	cmp r4, r0
+	beq _08070CC8
+	b _08070D30
+	.align 2, 0
+_08070C88: .4byte 0x0000ffff
+_08070C8C:
+	ldr r0, [r7]
+	movs r1, 0
+	movs r2, 0
+	bl GetEvolutionTargetSpecies
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0
+	beq _08070CC0
+	ldr r1, _08070CB8 @ =gUnknown_03005E94
+	ldr r0, _08070CBC @ =sub_80A53F8
+	str r0, [r1]
+	ldr r0, [r7]
+	ldrb r3, [r7, 0x5]
+	adds r1, r2, 0
+	movs r2, 0x1
+	bl BeginEvolutionScene
+	adds r0, r6, 0
+	bl DestroyTask
+	b _08070D68
+	.align 2, 0
+_08070CB8: .4byte gUnknown_03005E94
+_08070CBC: .4byte sub_80A53F8
+_08070CC0:
+	adds r0, r6, 0
+	bl sub_8070D90
+	b _08070D68
+_08070CC8:
+	ldr r0, [r7]
+	ldr r1, _08070D08 @ =gStringVar1
+	bl GetMonNickname
+	ldr r0, _08070D0C @ =gStringVar2
+	ldr r5, _08070D10 @ =word_2024E82
+	ldrh r2, [r5]
+	movs r1, 0xD
+	muls r1, r2
+	ldr r2, _08070D14 @ =gMoveNames
+	adds r1, r2
+	bl StringCopy
+	ldr r4, _08070D18 @ =gStringVar4
+	ldr r1, _08070D1C @ =gOtherText_WantsToLearn
+	adds r0, r4, 0
+	bl StringExpandPlaceholders
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl sub_806E834
+	ldrh r0, [r5]
+	strh r0, [r7, 0x8]
+	ldr r1, _08070D20 @ =gTasks
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _08070D24 @ =sub_806F358
+	b _08070D66
+	.align 2, 0
+_08070D08: .4byte gStringVar1
+_08070D0C: .4byte gStringVar2
+_08070D10: .4byte word_2024E82
+_08070D14: .4byte gMoveNames
+_08070D18: .4byte gStringVar4
+_08070D1C: .4byte gOtherText_WantsToLearn
+_08070D20: .4byte gTasks
+_08070D24: .4byte sub_806F358
+_08070D28:
+	adds r0, r6, 0
+	bl sub_8070C54
+	b _08070D68
+_08070D30:
+	ldr r0, _08070D70 @ =0x0201c000
+	ldr r0, [r0]
+	ldr r1, _08070D74 @ =gStringVar1
+	bl GetMonNickname
+	ldr r0, _08070D78 @ =gStringVar2
+	movs r1, 0xD
+	muls r1, r4
+	ldr r2, _08070D7C @ =gMoveNames
+	adds r1, r2
+	bl StringCopy
+	ldr r4, _08070D80 @ =gStringVar4
+	ldr r1, _08070D84 @ =gOtherText_LearnedMove
+	adds r0, r4, 0
+	bl StringExpandPlaceholders
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl sub_806E834
+	ldr r1, _08070D88 @ =gTasks
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _08070D8C @ =Task_TeamMonTMMove3
+_08070D66:
+	str r1, [r0]
+_08070D68:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070D70: .4byte 0x0201c000
+_08070D74: .4byte gStringVar1
+_08070D78: .4byte gStringVar2
+_08070D7C: .4byte gMoveNames
+_08070D80: .4byte gStringVar4
+_08070D84: .4byte gOtherText_LearnedMove
+_08070D88: .4byte gTasks
+_08070D8C: .4byte Task_TeamMonTMMove3
+	thumb_func_end sub_8070C54
+
+	thumb_func_start sub_8070D90
+sub_8070D90: @ 8070D90
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r4, _08070DB4 @ =gTasks
+	ldr r3, _08070DB8 @ =0x0201c000
+	ldrb r2, [r3, 0x4]
+	lsls r1, r2, 2
+	adds r1, r2
+	lsls r1, 3
+	adds r1, r4
+	ldr r2, [r3, 0x10]
+	str r2, [r1]
+	bl DestroyTask
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070DB4: .4byte gTasks
+_08070DB8: .4byte 0x0201c000
+	thumb_func_end sub_8070D90
+
+	thumb_func_start DoEvolutionStoneItemEffect
+DoEvolutionStoneItemEffect: @ 8070DBC
+	push {r4-r6,lr}
+	adds r4, r0, 0
+	adds r5, r2, 0
+	lsls r4, 24
+	lsrs r4, 24
+	lsls r1, 16
+	lsrs r6, r1, 16
+	movs r0, 0x5
+	bl PlaySE
+	ldr r1, _08070E18 @ =gTasks
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _08070E1C @ =TaskDummy
+	str r1, [r0]
+	adds r0, r4, 0
+	adds r1, r6, 0
+	adds r2, r5, 0
+	bl sub_806E8D0
+	ldr r1, _08070E20 @ =gUnknown_03005E94
+	ldr r0, _08070E24 @ =sub_80A53F8
+	str r0, [r1]
+	ldr r0, _08070E28 @ =0x0201c000
+	ldrb r0, [r0, 0x5]
+	adds r1, r6, 0
+	movs r2, 0
+	bl ExecuteTableBasedItemEffect__
+	lsls r0, 24
+	cmp r0, 0
+	beq _08070E38
+	ldr r1, _08070E2C @ =gUnknown_0202E8F4
+	movs r0, 0
+	strb r0, [r1]
+	ldr r0, _08070E30 @ =gOtherText_WontHaveAnyEffect
+	movs r1, 0x1
+	bl sub_806E834
+	ldr r0, _08070E34 @ =sub_806FB0C
+	movs r1, 0x5
+	bl CreateTask
+	b _08070E40
+	.align 2, 0
+_08070E18: .4byte gTasks
+_08070E1C: .4byte TaskDummy
+_08070E20: .4byte gUnknown_03005E94
+_08070E24: .4byte sub_80A53F8
+_08070E28: .4byte 0x0201c000
+_08070E2C: .4byte gUnknown_0202E8F4
+_08070E30: .4byte gOtherText_WontHaveAnyEffect
+_08070E34: .4byte sub_806FB0C
+_08070E38:
+	adds r0, r6, 0
+	movs r1, 0x1
+	bl RemoveBagItem
+_08070E40:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end DoEvolutionStoneItemEffect
+
+	thumb_func_start GetItemEffectType
+GetItemEffectType: @ 8070E48
+	push {r4,r5,lr}
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0xAF
+	bne _08070E5C
+	ldr r4, _08070E58 @ =gSaveBlock1 + 0x3676
+	b _08070E66
+	.align 2, 0
+_08070E58: .4byte gSaveBlock1 + 0x3676
+_08070E5C:
+	ldr r1, _08070E8C @ =gItemEffectTable
+	subs r0, 0xD
+	lsls r0, 2
+	adds r0, r1
+	ldr r4, [r0]
+_08070E66:
+	ldrb r1, [r4]
+	movs r5, 0x3F
+	adds r0, r5, 0
+	ands r0, r1
+	cmp r0, 0
+	bne _08070E88
+	ldrb r0, [r4, 0x1]
+	cmp r0, 0
+	bne _08070E88
+	ldrb r0, [r4, 0x2]
+	cmp r0, 0
+	bne _08070E88
+	ldrb r3, [r4, 0x3]
+	movs r0, 0x80
+	ands r0, r3
+	cmp r0, 0
+	beq _08070E90
+_08070E88:
+	movs r0, 0
+	b _08070F8A
+	.align 2, 0
+_08070E8C: .4byte gItemEffectTable
+_08070E90:
+	movs r2, 0x40
+	adds r0, r2, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _08070E9E
+	movs r0, 0xA
+	b _08070F8A
+_08070E9E:
+	adds r0, r2, 0
+	ands r0, r3
+	cmp r0, 0
+	beq _08070EAA
+	movs r0, 0x1
+	b _08070F8A
+_08070EAA:
+	adds r2, r5, 0
+	ands r2, r3
+	cmp r2, 0
+	bne _08070EB8
+	lsrs r0, r1, 7
+	cmp r0, 0
+	beq _08070EFA
+_08070EB8:
+	cmp r2, 0x20
+	bne _08070EC0
+	movs r0, 0x4
+	b _08070F8A
+_08070EC0:
+	cmp r2, 0x10
+	bne _08070EC8
+	movs r0, 0x3
+	b _08070F8A
+_08070EC8:
+	cmp r2, 0x8
+	bne _08070ED0
+	movs r0, 0x5
+	b _08070F8A
+_08070ED0:
+	cmp r2, 0x4
+	bne _08070ED8
+	movs r0, 0x6
+	b _08070F8A
+_08070ED8:
+	cmp r2, 0x2
+	bne _08070EE0
+	movs r0, 0x7
+	b _08070F8A
+_08070EE0:
+	cmp r2, 0x1
+	bne _08070EE8
+	movs r0, 0x8
+	b _08070F8A
+_08070EE8:
+	lsrs r0, r1, 7
+	cmp r0, 0
+	beq _08070EF6
+	cmp r2, 0
+	bne _08070EF6
+	movs r0, 0x9
+	b _08070F8A
+_08070EF6:
+	movs r0, 0xB
+	b _08070F8A
+_08070EFA:
+	ldrb r1, [r4, 0x4]
+	movs r0, 0x44
+	ands r0, r1
+	adds r2, r1, 0
+	cmp r0, 0
+	beq _08070F0A
+	movs r0, 0x2
+	b _08070F8A
+_08070F0A:
+	movs r5, 0x2
+	adds r0, r5, 0
+	ands r0, r2
+	cmp r0, 0
+	beq _08070F18
+	movs r0, 0xC
+	b _08070F8A
+_08070F18:
+	movs r3, 0x1
+	adds r0, r3, 0
+	ands r0, r2
+	cmp r0, 0
+	beq _08070F26
+	movs r0, 0xD
+	b _08070F8A
+_08070F26:
+	ldrb r1, [r4, 0x5]
+	movs r0, 0x8
+	ands r0, r1
+	cmp r0, 0
+	beq _08070F34
+	movs r0, 0xE
+	b _08070F8A
+_08070F34:
+	movs r0, 0x4
+	ands r0, r1
+	cmp r0, 0
+	beq _08070F40
+	movs r0, 0xF
+	b _08070F8A
+_08070F40:
+	adds r0, r5, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _08070F4C
+	movs r0, 0x10
+	b _08070F8A
+_08070F4C:
+	adds r0, r3, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _08070F58
+	movs r0, 0x11
+	b _08070F8A
+_08070F58:
+	movs r0, 0x80
+	ands r0, r2
+	cmp r0, 0
+	beq _08070F64
+	movs r0, 0x12
+	b _08070F8A
+_08070F64:
+	movs r0, 0x20
+	ands r0, r2
+	cmp r0, 0
+	beq _08070F70
+	movs r0, 0x13
+	b _08070F8A
+_08070F70:
+	movs r0, 0x10
+	ands r0, r1
+	cmp r0, 0
+	beq _08070F7C
+	movs r0, 0x14
+	b _08070F8A
+_08070F7C:
+	movs r0, 0x18
+	ands r0, r2
+	cmp r0, 0
+	bne _08070F88
+	movs r0, 0x16
+	b _08070F8A
+_08070F88:
+	movs r0, 0x15
+_08070F8A:
+	pop {r4,r5}
+	pop {r1}
+	bx r1
+	thumb_func_end GetItemEffectType
+
+	thumb_func_start unref_sub_8070F90
+unref_sub_8070F90: @ 8070F90
+	push {lr}
+	ldr r0, _08070FAC @ =0x00000801
+	bl FlagSet
+	movs r0, 0x80
+	lsls r0, 4
+	bl FlagSet
+	ldr r0, _08070FB0 @ =0x00000802
+	bl FlagSet
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08070FAC: .4byte 0x00000801
+_08070FB0: .4byte 0x00000802
+	thumb_func_end unref_sub_8070F90
 
 	.align 2, 0 @ Don't pad with nop.

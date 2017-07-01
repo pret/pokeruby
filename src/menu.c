@@ -1,11 +1,15 @@
 #include "global.h"
 #include "menu.h"
 #include "main.h"
-#include "text.h"
-#include "songs.h"
-#include "text_window.h"
-#include "sound.h"
+#include "map_obj_lock.h"
 #include "menu_cursor.h"
+#include "script.h"
+#include "songs.h"
+#include "sound.h"
+#include "strings.h"
+#include "text.h"
+#include "text_window.h"
+#include "string_util.h"
 
 struct Menu
 {
@@ -24,8 +28,8 @@ static void MultistepInitMenuWindowInternal(const struct WindowConfig *, u16);
 static void InitMenuWindowInternal(const struct WindowConfig *, u16);
 static bool8 sub_80723D4(void);
 static u8 sub_8072484(u8, u8, u8, u8, u8, u8, u32);
-static u8 sub_80724F4(u8, u8, u8, u8 * const [][2], u8);
-static void sub_8072620(u8, u8, u8, u8 * const [][2], u8);
+static u8 sub_80724F4(u8, u8, u8, const struct MenuAction[], u8);
+static void sub_8072620(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072D18(u8, u8);
 
 static struct Menu gMenu;
@@ -39,7 +43,26 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-extern const struct MenuAction gUnknown_08376D74[];
+const struct MenuAction gMenuYesNoItems[] =
+{
+    { OtherText_Yes, NULL },
+    { OtherText_No, NULL },
+};
+
+void CloseMenu(void)
+{
+    PlaySE(SE_SELECT);
+    MenuZeroFillScreen();
+    sub_8064E2C();
+    ScriptContext2_Disable();
+    HandleDestroyMenuCursors();
+}
+
+void AppendToList(u8 *list, u8 *pindex, u32 value)
+{
+    list[*pindex] = value;
+    (*pindex)++;
+}
 
 void InitMenuWindow(const struct WindowConfig *winConfig)
 {
@@ -126,7 +149,7 @@ void BasicInitMenuWindow(const struct WindowConfig *winConfig)
     gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;
 }
 
-void MenuPrint(u8 *str, u8 left, u8 top)
+void MenuPrint(const u8 *str, u8 left, u8 top)
 {
     sub_8003460(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
@@ -151,7 +174,7 @@ void MenuDrawTextWindow(u8 left, u8 top, u8 right, u8 bottom)
     DrawTextWindow(gMenuWindowPtr, left, top, right, bottom);
 }
 
-void sub_8071F40(u8 *str)
+void sub_8071F40(const u8 *str)
 {
     MenuDrawTextWindow(2, 14, 28, 19);
     MenuPrint(str, 3, 15);
@@ -248,14 +271,14 @@ s8 ProcessMenuInput(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -283,14 +306,14 @@ s8 ProcessMenuInputNoWrap(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -390,7 +413,7 @@ static u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u3
     return a4;
 }
 
-static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
+static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -402,7 +425,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i][0]) + 7) / 8;
+        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -448,7 +471,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][
     return maxWidth;
 }
 
-static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
+static void sub_8072620(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -459,7 +482,7 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i][0]) + 7) / 8;
+        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -478,11 +501,11 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[
         u8 row = 0;
         u8 j;
         for (j = 0; i + j < menuItemCount; j += columnCount, row++)
-            MenuPrint(menuItems[i + j][0], left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
+            MenuPrint(menuItems[i + j].text, left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
     }
 }
 
-void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, u8 * const menuItems[][2], u8 columnCount, u32 a7)
+void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, const struct MenuAction menuItems[], u8 columnCount, u32 a7)
 {
     u8 maxWidth = sub_80724F4(left, top, menuItemCount, menuItems, columnCount);
 
@@ -495,7 +518,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & A_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
         return GetMenuCursorPos();
     }
@@ -503,7 +526,7 @@ s8 sub_80727CC(void)
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            sub_8072DEC();
+            HandleDestroyMenuCursors();
         return -1;
     }
 
@@ -558,7 +581,7 @@ void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct Men
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
 {
-    PrintMenuItems(left + 1, top + 1, 2, gUnknown_08376D74);
+    PrintMenuItems(left + 1, top + 1, 2, gMenuYesNoItems);
     InitMenu(0, left + 1, top + 1, 2, 0, a3);
 }
 
@@ -574,12 +597,12 @@ s8 ProcessMenuInputNoWrap_(void)
     return ProcessMenuInputNoWrap();
 }
 
-u8 MenuPrint_PixelCoords(u8 *text, u8 left, u16 top, u8 a4)
+u8 MenuPrint_PixelCoords(const u8 *text, u8 left, u16 top, u8 a4)
 {
     return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }
 
-u8 sub_8072A18(u8 *text, u8 left, u16 top, u8 width, u32 a5)
+u8 sub_8072A18(const u8 *text, u8 left, u16 top, u8 width, u32 a5)
 {
     return sub_8004FD0(gMenuWindowPtr, 0, text, gMenuTextTileOffset, left, top, width, a5);
 }
@@ -589,7 +612,8 @@ u8 unref_sub_8072A5C(u8 *dest, u8 *src, u8 left, u16 top, u8 width, u32 a6)
     return sub_8004FD0(gMenuWindowPtr, dest, src, gMenuTextTileOffset, left, top, width, a6);
 }
 
-int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
+#if ENGLISH
+int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     u8 newlineCount = sub_8004FD0(gMenuWindowPtr, NULL, str, gMenuTextTileOffset, left, top, width, a6);
 
@@ -601,13 +625,97 @@ int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
     if (newlineCount < height)
         MenuFillWindowRectWithBlankTile(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
+#elif GERMAN
+__attribute__((naked))
+int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x10\n\
+	mov r12, r0\n\
+	ldr r0, [sp, 0x24]\n\
+	ldr r4, [sp, 0x28]\n\
+	str r4, [sp, 0xC]\n\
+	lsls r1, 24\n\
+	lsrs r5, r1, 24\n\
+	lsls r2, 16\n\
+	lsrs r4, r2, 16\n\
+	lsls r3, 24\n\
+	lsrs r6, r3, 24\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r0, _08072AF8 @ =gMenuWindowPtr\n\
+	ldr r0, [r0]\n\
+	ldr r1, _08072AFC @ =gMenuTextTileOffset\n\
+	ldrh r3, [r1]\n\
+	str r5, [sp]\n\
+	str r4, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r1, 0\n\
+	mov r2, r12\n\
+	bl sub_8004FD0\n\
+	adds r1, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r2, r1, 24\n\
+	movs r3, 0x7\n\
+	ands r3, r5\n\
+	cmp r3, 0\n\
+	bne _08072B00\n\
+	adds r1, r6, 0x7\n\
+	asrs r1, 3\n\
+	subs r1, 0x1\n\
+	b _08072B0C\n\
+	.align 2, 0\n\
+_08072AF8: .4byte gMenuWindowPtr\n\
+_08072AFC: .4byte gMenuTextTileOffset\n\
+_08072B00:\n\
+	adds r3, r6, r3\n\
+	subs r1, r3, 0x1\n\
+	cmp r1, 0\n\
+	bge _08072B0A\n\
+	adds r1, r3, 0x6\n\
+_08072B0A:\n\
+	asrs r1, 3\n\
+_08072B0C:\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r6, r1, 0\n\
+	lsrs r5, 3\n\
+	adds r1, r7, 0x7\n\
+	asrs r1, 3\n\
+	lsls r1, 24\n\
+	lsrs r7, r1, 24\n\
+	lsrs r4, 3\n\
+	cmp r2, r7\n\
+	bcs _08072B3E\n\
+	lsls r1, r2, 1\n\
+	adds r1, r4, r1\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r2, r5, r6\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	adds r3, r7, r4\n\
+	subs r3, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	adds r0, r5, 0\n\
+	bl MenuFillWindowRectWithBlankTile\n\
+_08072B3E:\n\
+	add sp, 0x10\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
 {
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
+void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
 {
     u8 buffer[64];
     u8 width = GetStringWidth(gMenuWindowPtr, a4);
@@ -615,7 +723,7 @@ void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
     sub_8003460(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
-void sub_8072BD8(u8 *a1, u8 a2, u8 a3, u16 a4)
+void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
 {
     sub_8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
@@ -630,12 +738,12 @@ u8 *sub_8072C44(u8 *a1, s32 a2, u8 a3, u8 a4)
     return AlignInt2(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
-u8 *sub_8072C74(u8 *a1, u8 *a2, u8 a3, u8 a4)
+u8 *sub_8072C74(u8 *a1, const u8 *a2, u8 a3, u8 a4)
 {
     return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
-u8 sub_8072CA4(u8 *str)
+u8 sub_8072CA4(const u8 *str)
 {
     return GetStringWidth(gMenuWindowPtr, str);
 }
@@ -709,7 +817,55 @@ void sub_8072DDC(u8 a1)
     sub_8072DCC(8 * a1);
 }
 
-void sub_8072DEC(void)
+void HandleDestroyMenuCursors(void)
 {
-    sub_814A7FC();
+    DestroyMenuCursor();
 }
+
+#if GERMAN
+void de_sub_8073110(u8 * buffer, u8 * name) {
+    u8 * ptr, *ptr2, *ptr3;
+
+    ptr2 = buffer;
+    ptr = &gStringVar1[1 + StringLengthN(gStringVar1, 256)];
+    ptr3 = ptr;
+
+    for (;;)
+    {
+        if (*ptr2 == EOS)
+            break;
+
+        if (*ptr2 == 0xFD)
+        {
+
+            *ptr3 = EOS;
+            ptr2 += 2;
+
+            StringAppend(ptr, name);
+            StringAppend(ptr, ptr2);
+
+            buffer[0] = EOS;
+            StringAppend(buffer, ptr);
+            break;
+        }
+
+        *ptr3 = *ptr2;
+        ptr2 += 1;
+        ptr3 += 1;
+    }
+}
+
+u8 *de_sub_8073174(u8 *name, const u8 *format) {
+    u32 offset;
+    u8 *ptr;
+
+    offset = StringLengthN(gStringVar2, 0x100);
+    ptr = &gStringVar2[1 + offset];
+
+    StringCopy(ptr, format);
+
+    de_sub_8073110(ptr, name);
+
+    return StringCopy(name, ptr);
+}
+#endif

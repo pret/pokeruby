@@ -246,7 +246,7 @@ _080F7434:
 	lsrs r3, r0, 16
 	cmp r3, 0x3
 	bls _080F7434
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	lsls r0, r5, 16
 	asrs r0, 16
 	lsls r1, r6, 16
@@ -322,7 +322,7 @@ _080F74C8:
 	lsrs r4, r0, 16
 	cmp r4, 0x3
 	bls _080F74C8
-	bl sub_814A7FC
+	bl DestroyMenuCursor
 	ldr r0, [r5]
 	ldr r0, [r0, 0x24]
 	cmp r0, 0
@@ -560,7 +560,7 @@ sub_80F761C: @ 80F761C
 	add r2, sp, 0x54
 	ldrh r2, [r2]
 	strh r2, [r4, 0x2]
-	ldr r0, _080F782C @ =gUnknown_083E5214
+	ldr r0, _080F782C @ =gOamData_83E5214
 	str r0, [r4, 0x4]
 	ldr r0, _080F7830 @ =gSpriteAnimTable_83E52AC
 	str r0, [r4, 0x8]
@@ -640,7 +640,7 @@ _080F7718:
 	str r0, [r4, 0x8]
 	ldr r0, _080F7844 @ =sub_80F78CC
 	str r0, [r4, 0x14]
-	ldr r0, _080F7848 @ =gUnknown_083E521C
+	ldr r0, _080F7848 @ =gOamData_83E521C
 	str r0, [r4, 0x4]
 	movs r5, 0
 	ldr r0, [sp, 0x58]
@@ -720,7 +720,11 @@ _080F7770:
 	ldr r2, [r1, 0x24]
 	ldr r3, [sp, 0x58]
 	asrs r0, r3, 16
+.ifdef ENGLISH
 	adds r0, 0x20
+.else
+	adds r0, 0x18
+.endif
 	strh r0, [r2, 0x20]
 	ldr r2, [r1, 0x24]
 	mov r0, r8
@@ -736,14 +740,14 @@ _080F7770:
 _080F7820: .4byte gUnknown_020388B8
 _080F7824: .4byte gPokenavConditionMenuMisc_Gfx
 _080F7828: .4byte gUnknown_08E966B8
-_080F782C: .4byte gUnknown_083E5214
+_080F782C: .4byte gOamData_83E5214
 _080F7830: .4byte gSpriteAnimTable_83E52AC
 _080F7834: .4byte gDummySpriteAffineAnimTable
 _080F7838: .4byte nullsub_65
 _080F783C: .4byte gSprites
 _080F7840: .4byte gSpriteAnimTable_83E5274
 _080F7844: .4byte sub_80F78CC
-_080F7848: .4byte gUnknown_083E521C
+_080F7848: .4byte gOamData_83E521C
 _080F784C: .4byte SpriteCallbackDummy
 _080F7850:
 	ldr r0, _080F785C @ =gUnknown_020388B8
@@ -927,7 +931,7 @@ sub_80F7960: @ 80F7960
 	movs r2, 0
 	strh r6, [r0]
 	strh r1, [r0, 0x2]
-	ldr r0, _080F79E4 @ =gUnknown_083E52B4
+	ldr r0, _080F79E4 @ =gOamData_83E52B4
 	str r0, [sp, 0x4]
 	ldr r0, _080F79E8 @ =gSpriteAnimTable_83E533C
 	str r0, [sp, 0x8]
@@ -961,7 +965,7 @@ sub_80F7960: @ 80F7960
 	.align 2, 0
 _080F79DC: .4byte gUnknown_083E4A14
 _080F79E0: .4byte 0xffff0000
-_080F79E4: .4byte gUnknown_083E52B4
+_080F79E4: .4byte gOamData_83E52B4
 _080F79E8: .4byte gSpriteAnimTable_83E533C
 _080F79EC: .4byte gDummySpriteAffineAnimTable
 _080F79F0: .4byte nullsub_65

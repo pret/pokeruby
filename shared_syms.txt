@@ -8,13 +8,21 @@ unk_2007900 = 0x2007900;
 
 unk_2008000 = 0x2008000;
 
+unk_2015de0 = 0x2015de0;
+unk_2015e00 = 0x2015e00;
 unk_2016000 = 0x2016000;
+
+unk_201606C = 0x201606C;
 
 unk_20160BC = 0x20160BC;
 
-unk_2016800 = 0x2016800;
 unk_2016A00 = 0x2016A00;
 unk_2016C00 = 0x2016C00;
+
+gTransformStatuses = 0x2017800;
+unk_2017810 = 0x2017810;
+
+gMailboxInfo = 0x201FE00;
 
 gSecretBaseRecord = 0x2017000;
 
@@ -22,4 +30,12 @@ dword_2017100 = 0x2017100;
 
 unk_2018000 = 0x2018000;
 
+unk_2019348 = 0x2019348;
+
+unk_201B260 = 0x201b260;
+unk_201B264 = 0x201B264;
+unk_201C000 = 0x201C000;
+
 gHallOfFame = 0x201E000;
+unk_201f800 = 0x201F800;
+gCutGrassSpriteArray = 0x201FFF0;

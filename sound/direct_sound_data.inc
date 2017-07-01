@@ -1,2259 +1,2023 @@
 	.align 2
 DirectSoundWaveData_8456330:: @ 8456330
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8456330.bin"
-	.incbin "sound/direct_sound_samples/8456330.pcm"
 
 	.align 2
 DirectSoundWaveData_84569D4:: @ 84569D4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84569D4.bin"
-	.incbin "sound/direct_sound_samples/84569D4.pcm"
 
 	.align 2
 DirectSoundWaveData_84571CC:: @ 84571CC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84571CC.bin"
-	.incbin "sound/direct_sound_samples/84571CC.pcm"
 
 	.align 2
 DirectSoundWaveData_8457D98:: @ 8457D98
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8457D98.bin"
-	.incbin "sound/direct_sound_samples/8457D98.pcm"
 
 	.align 2
 DirectSoundWaveData_8458CD0:: @ 8458CD0
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8458CD0.bin"
-	.incbin "sound/direct_sound_samples/8458CD0.pcm"
 
 	.align 2
 DirectSoundWaveData_8459944:: @ 8459944
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8459944.bin"
-	.incbin "sound/direct_sound_samples/8459944.pcm"
 
 	.align 2
 DirectSoundWaveData_845AE14:: @ 845AE14
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845AE14.bin"
-	.incbin "sound/direct_sound_samples/845AE14.pcm"
 
 	.align 2
 DirectSoundWaveData_845B2B4:: @ 845B2B4
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845B2B4.bin"
-	.incbin "sound/direct_sound_samples/845B2B4.pcm"
 
 	.align 2
 DirectSoundWaveData_845B9A8:: @ 845B9A8
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845B9A8.bin"
-	.incbin "sound/direct_sound_samples/845B9A8.pcm"
 
 	.align 2
 DirectSoundWaveData_845C238:: @ 845C238
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845C238.bin"
-	.incbin "sound/direct_sound_samples/845C238.pcm"
 
 	.align 2
 DirectSoundWaveData_845CAB0:: @ 845CAB0
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/845CAB0.bin"
-	.incbin "sound/direct_sound_samples/845CAB0.pcm"
 
 	.align 2
 DirectSoundWaveData_845DAF0:: @ 845DAF0
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845DAF0.bin"
-	.incbin "sound/direct_sound_samples/845DAF0.pcm"
 
 	.align 2
 DirectSoundWaveData_845DF04:: @ 845DF04
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/845DF04.bin"
-	.incbin "sound/direct_sound_samples/845DF04.pcm"
 
 	.align 2
 DirectSoundWaveData_845ED34:: @ 845ED34
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/845ED34.bin"
-	.incbin "sound/direct_sound_samples/845ED34.pcm"
 
 	.align 2
 DirectSoundWaveData_845FCC8:: @ 845FCC8
-	.4byte 0
 	.incbin "sound/direct_sound_samples/845FCC8.bin"
-	.incbin "sound/direct_sound_samples/845FCC8.pcm"
 
 	.align 2
 DirectSoundWaveData_846057C:: @ 846057C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/846057C.bin"
-	.incbin "sound/direct_sound_samples/846057C.pcm"
 
 	.align 2
 DirectSoundWaveData_8460E60:: @ 8460E60
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8460E60.bin"
-	.incbin "sound/direct_sound_samples/8460E60.pcm"
 
 	.align 2
 DirectSoundWaveData_8461D8C:: @ 8461D8C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8461D8C.bin"
-	.incbin "sound/direct_sound_samples/8461D8C.pcm"
 
 	.align 2
 DirectSoundWaveData_84622A4:: @ 84622A4
-	.4byte 0
 	.incbin "sound/direct_sound_samples/84622A4.bin"
-	.incbin "sound/direct_sound_samples/84622A4.pcm"
 
 	.align 2
 DirectSoundWaveData_846286C:: @ 846286C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/846286C.bin"
-	.incbin "sound/direct_sound_samples/846286C.pcm"
 
 	.align 2
 DirectSoundWaveData_84637CC:: @ 84637CC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84637CC.bin"
-	.incbin "sound/direct_sound_samples/84637CC.pcm"
 
 	.align 2
 DirectSoundWaveData_8464E2C:: @ 8464E2C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8464E2C.bin"
-	.incbin "sound/direct_sound_samples/8464E2C.pcm"
 
 	.align 2
 DirectSoundWaveData_8466388:: @ 8466388
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8466388.bin"
-	.incbin "sound/direct_sound_samples/8466388.pcm"
 
 	.align 2
 DirectSoundWaveData_8466F14:: @ 8466F14
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8466F14.bin"
-	.incbin "sound/direct_sound_samples/8466F14.pcm"
 
 	.align 2
 DirectSoundWaveData_846A4B8:: @ 846A4B8
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/846A4B8.bin"
-	.incbin "sound/direct_sound_samples/846A4B8.pcm"
 
 	.align 2
 DirectSoundWaveData_846C7D4:: @ 846C7D4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/846C7D4.bin"
-	.incbin "sound/direct_sound_samples/846C7D4.pcm"
 
 	.align 2
 DirectSoundWaveData_846FEA0:: @ 846FEA0
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/846FEA0.bin"
-	.incbin "sound/direct_sound_samples/846FEA0.pcm"
 
 	.align 2
 DirectSoundWaveData_84711F0:: @ 84711F0
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84711F0.bin"
-	.incbin "sound/direct_sound_samples/84711F0.pcm"
 
 	.align 2
 DirectSoundWaveData_8472700:: @ 8472700
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8472700.bin"
-	.incbin "sound/direct_sound_samples/8472700.pcm"
 
 	.align 2
 DirectSoundWaveData_8473B20:: @ 8473B20
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8473B20.bin"
-	.incbin "sound/direct_sound_samples/8473B20.pcm"
 
 	.align 2
 DirectSoundWaveData_8474BBC:: @ 8474BBC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8474BBC.bin"
-	.incbin "sound/direct_sound_samples/8474BBC.pcm"
 
 	.align 2
 DirectSoundWaveData_8475C18:: @ 8475C18
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8475C18.bin"
-	.incbin "sound/direct_sound_samples/8475C18.pcm"
 
 	.align 2
 DirectSoundWaveData_847CBAC:: @ 847CBAC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/847CBAC.bin"
-	.incbin "sound/direct_sound_samples/847CBAC.pcm"
 
 	.align 2
 DirectSoundWaveData_8481130:: @ 8481130
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8481130.bin"
-	.incbin "sound/direct_sound_samples/8481130.pcm"
 
 	.align 2
 DirectSoundWaveData_84830A0:: @ 84830A0
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84830A0.bin"
-	.incbin "sound/direct_sound_samples/84830A0.pcm"
 
 	.align 2
 DirectSoundWaveData_8483804:: @ 8483804
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8483804.bin"
-	.incbin "sound/direct_sound_samples/8483804.pcm"
 
 	.align 2
 DirectSoundWaveData_8485454:: @ 8485454
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8485454.bin"
-	.incbin "sound/direct_sound_samples/8485454.pcm"
 
 	.align 2
 DirectSoundWaveData_8486924:: @ 8486924
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8486924.bin"
-	.incbin "sound/direct_sound_samples/8486924.pcm"
 
 	.align 2
 DirectSoundWaveData_8487330:: @ 8487330
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8487330.bin"
-	.incbin "sound/direct_sound_samples/8487330.pcm"
 
 	.align 2
 DirectSoundWaveData_8488F44:: @ 8488F44
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8488F44.bin"
-	.incbin "sound/direct_sound_samples/8488F44.pcm"
 
 	.align 2
 DirectSoundWaveData_848A8A4:: @ 848A8A4
-	.4byte 0
 	.incbin "sound/direct_sound_samples/848A8A4.bin"
-	.incbin "sound/direct_sound_samples/848A8A4.pcm"
 
 	.align 2
 DirectSoundWaveData_848BD68:: @ 848BD68
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/848BD68.bin"
-	.incbin "sound/direct_sound_samples/848BD68.pcm"
 
 	.align 2
 DirectSoundWaveData_848C4A4:: @ 848C4A4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/848C4A4.bin"
-	.incbin "sound/direct_sound_samples/848C4A4.pcm"
 
 	.align 2
 DirectSoundWaveData_848E094:: @ 848E094
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/848E094.bin"
-	.incbin "sound/direct_sound_samples/848E094.pcm"
 
 	.align 2
 DirectSoundWaveData_848F448:: @ 848F448
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/848F448.bin"
-	.incbin "sound/direct_sound_samples/848F448.pcm"
 
 	.align 2
 DirectSoundWaveData_8491ACC:: @ 8491ACC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8491ACC.bin"
-	.incbin "sound/direct_sound_samples/8491ACC.pcm"
 
 	.align 2
 DirectSoundWaveData_8492D10:: @ 8492D10
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8492D10.bin"
-	.incbin "sound/direct_sound_samples/8492D10.pcm"
 
 	.align 2
 DirectSoundWaveData_8493D20:: @ 8493D20
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8493D20.bin"
-	.incbin "sound/direct_sound_samples/8493D20.pcm"
 
 	.align 2
 DirectSoundWaveData_8495028:: @ 8495028
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8495028.bin"
-	.incbin "sound/direct_sound_samples/8495028.pcm"
 
 	.align 2
 DirectSoundWaveData_8497134:: @ 8497134
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8497134.bin"
-	.incbin "sound/direct_sound_samples/8497134.pcm"
 
 	.align 2
 DirectSoundWaveData_8499110:: @ 8499110
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8499110.bin"
-	.incbin "sound/direct_sound_samples/8499110.pcm"
 
 	.align 2
 DirectSoundWaveData_849B320:: @ 849B320
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/849B320.bin"
-	.incbin "sound/direct_sound_samples/849B320.pcm"
 
 	.align 2
 DirectSoundWaveData_849BAEC:: @ 849BAEC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/849BAEC.bin"
-	.incbin "sound/direct_sound_samples/849BAEC.pcm"
 
 	.align 2
 DirectSoundWaveData_849D45C:: @ 849D45C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/849D45C.bin"
-	.incbin "sound/direct_sound_samples/849D45C.pcm"
 
 	.align 2
 DirectSoundWaveData_849F40C:: @ 849F40C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/849F40C.bin"
-	.incbin "sound/direct_sound_samples/849F40C.pcm"
 
 	.align 2
 DirectSoundWaveData_84A26EC:: @ 84A26EC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A26EC.bin"
-	.incbin "sound/direct_sound_samples/84A26EC.pcm"
 
 	.align 2
 DirectSoundWaveData_84A311C:: @ 84A311C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A311C.bin"
-	.incbin "sound/direct_sound_samples/84A311C.pcm"
 
 	.align 2
 DirectSoundWaveData_84A3B50:: @ 84A3B50
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A3B50.bin"
-	.incbin "sound/direct_sound_samples/84A3B50.pcm"
 
 	.align 2
 DirectSoundWaveData_84A5690:: @ 84A5690
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A5690.bin"
-	.incbin "sound/direct_sound_samples/84A5690.pcm"
 
 	.align 2
 DirectSoundWaveData_84A5F58:: @ 84A5F58
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A5F58.bin"
-	.incbin "sound/direct_sound_samples/84A5F58.pcm"
 
 	.align 2
 DirectSoundWaveData_84A7328:: @ 84A7328
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A7328.bin"
-	.incbin "sound/direct_sound_samples/84A7328.pcm"
 
 	.align 2
 DirectSoundWaveData_84A7F38:: @ 84A7F38
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A7F38.bin"
-	.incbin "sound/direct_sound_samples/84A7F38.pcm"
 
 	.align 2
 DirectSoundWaveData_84A8AC8:: @ 84A8AC8
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A8AC8.bin"
-	.incbin "sound/direct_sound_samples/84A8AC8.pcm"
 
 	.align 2
 DirectSoundWaveData_84A9564:: @ 84A9564
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A9564.bin"
-	.incbin "sound/direct_sound_samples/84A9564.pcm"
 
 	.align 2
 DirectSoundWaveData_84A9EAC:: @ 84A9EAC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84A9EAC.bin"
-	.incbin "sound/direct_sound_samples/84A9EAC.pcm"
 
 	.align 2
 DirectSoundWaveData_84AA8F4:: @ 84AA8F4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/84AA8F4.bin"
-	.incbin "sound/direct_sound_samples/84AA8F4.pcm"
 
 	.align 2
-CryDirectSound_4AB57C:: @ 84AB57C
-	.incbin "baserom.gba", 0x4ab57c, 0x108c
+Cry_Bulbasaur:: @ 84AB57C
+	.incbin "sound/direct_sound_samples/cry_bulbasaur.bin"
 
 	.align 2
-CryDirectSound_4AC608:: @ 84AC608
-	.incbin "baserom.gba", 0x4ac608, 0x1090
+Cry_Ivysaur:: @ 84AC608
+	.incbin "sound/direct_sound_samples/cry_ivysaur.bin"
 
 	.align 2
-CryDirectSound_4AD698:: @ 84AD698
-	.incbin "baserom.gba", 0x4ad698, 0x1358
+Cry_Venusaur:: @ 84AD698
+	.incbin "sound/direct_sound_samples/cry_venusaur.bin"
 
 	.align 2
-CryDirectSound_4AE9F0:: @ 84AE9F0
-	.incbin "baserom.gba", 0x4ae9f0, 0xe70
+Cry_Charmander:: @ 84AE9F0
+	.incbin "sound/direct_sound_samples/cry_charmander.bin"
 
 	.align 2
-CryDirectSound_4AF860:: @ 84AF860
-	.incbin "baserom.gba", 0x4af860, 0xe80
+Cry_Charmeleon:: @ 84AF860
+	.incbin "sound/direct_sound_samples/cry_charmeleon.bin"
 
 	.align 2
-CryDirectSound_4B06E0:: @ 84B06E0
-	.incbin "baserom.gba", 0x4b06e0, 0x1348
+Cry_Charizard:: @ 84B06E0
+	.incbin "sound/direct_sound_samples/cry_charizard.bin"
 
 	.align 2
-CryDirectSound_4B1A28:: @ 84B1A28
-	.incbin "baserom.gba", 0x4b1a28, 0xe74
+Cry_Squirtle:: @ 84B1A28
+	.incbin "sound/direct_sound_samples/cry_squirtle.bin"
 
 	.align 2
-CryDirectSound_4B289C:: @ 84B289C
-	.incbin "baserom.gba", 0x4b289c, 0x1140
+Cry_Wartortle:: @ 84B289C
+	.incbin "sound/direct_sound_samples/cry_wartortle.bin"
 
 	.align 2
-CryDirectSound_4B39DC:: @ 84B39DC
-	.incbin "baserom.gba", 0x4b39dc, 0x1348
+Cry_Blastoise:: @ 84B39DC
+	.incbin "sound/direct_sound_samples/cry_blastoise.bin"
 
 	.align 2
-CryDirectSound_4B4D24:: @ 84B4D24
-	.incbin "baserom.gba", 0x4b4d24, 0x858
+Cry_Caterpie:: @ 84B4D24
+	.incbin "sound/direct_sound_samples/cry_caterpie.bin"
 
 	.align 2
-CryDirectSound_4B557C:: @ 84B557C
-	.incbin "baserom.gba", 0x4b557c, 0x1750
+Cry_Metapod:: @ 84B557C
+	.incbin "sound/direct_sound_samples/cry_metapod.bin"
 
 	.align 2
-CryDirectSound_4B6CCC:: @ 84B6CCC
-	.incbin "baserom.gba", 0x4b6ccc, 0xa08
+Cry_Butterfree:: @ 84B6CCC
+	.incbin "sound/direct_sound_samples/cry_butterfree.bin"
 
 	.align 2
-CryDirectSound_4B76D4:: @ 84B76D4
-	.incbin "baserom.gba", 0x4b76d4, 0x1044
+Cry_Weedle:: @ 84B76D4
+	.incbin "sound/direct_sound_samples/cry_weedle.bin"
 
 	.align 2
-CryDirectSound_4B8718:: @ 84B8718
-	.incbin "baserom.gba", 0x4b8718, 0x123c
+Cry_Kakuna:: @ 84B8718
+	.incbin "sound/direct_sound_samples/cry_kakuna.bin"
 
 	.align 2
-CryDirectSound_4B9954:: @ 84B9954
-	.incbin "baserom.gba", 0x4b9954, 0x135c
+Cry_Beedrill:: @ 84B9954
+	.incbin "sound/direct_sound_samples/cry_beedrill.bin"
 
 	.align 2
-CryDirectSound_4BACB0:: @ 84BACB0
-	.incbin "baserom.gba", 0x4bacb0, 0x3e8
+Cry_Pidgey:: @ 84BACB0
+	.incbin "sound/direct_sound_samples/cry_pidgey.bin"
 
 	.align 2
-CryDirectSound_4BB098:: @ 84BB098
-	.incbin "baserom.gba", 0x4bb098, 0xf08
+Cry_Pidgeotto:: @ 84BB098
+	.incbin "sound/direct_sound_samples/cry_pidgeotto.bin"
 
 	.align 2
-CryDirectSound_4BBFA0:: @ 84BBFA0
-	.incbin "baserom.gba", 0x4bbfa0, 0x1134
+Cry_Pidgeot:: @ 84BBFA0
+	.incbin "sound/direct_sound_samples/cry_pidgeot.bin"
 
 	.align 2
-CryDirectSound_4BD0D4:: @ 84BD0D4
-	.incbin "baserom.gba", 0x4bd0d4, 0x7e0
+Cry_Rattata:: @ 84BD0D4
+	.incbin "sound/direct_sound_samples/cry_rattata.bin"
 
 	.align 2
-CryDirectSound_4BD8B4:: @ 84BD8B4
-	.incbin "baserom.gba", 0x4bd8b4, 0x984
+Cry_Raticate:: @ 84BD8B4
+	.incbin "sound/direct_sound_samples/cry_raticate.bin"
 
 	.align 2
-CryDirectSound_4BE238:: @ 84BE238
-	.incbin "baserom.gba", 0x4be238, 0x11a4
+Cry_Spearow:: @ 84BE238
+	.incbin "sound/direct_sound_samples/cry_spearow.bin"
 
 	.align 2
-CryDirectSound_4BF3DC:: @ 84BF3DC
-	.incbin "baserom.gba", 0x4bf3dc, 0x113c
+Cry_Fearow:: @ 84BF3DC
+	.incbin "sound/direct_sound_samples/cry_fearow.bin"
 
 	.align 2
-CryDirectSound_4C0518:: @ 84C0518
-	.incbin "baserom.gba", 0x4c0518, 0x134c
+Cry_Ekans:: @ 84C0518
+	.incbin "sound/direct_sound_samples/cry_ekans.bin"
 
 	.align 2
-CryDirectSound_4C1864:: @ 84C1864
-	.incbin "baserom.gba", 0x4c1864, 0x1358
+Cry_Arbok:: @ 84C1864
+	.incbin "sound/direct_sound_samples/cry_arbok.bin"
 
 	.align 2
-CryDirectSound_4C2BBC:: @ 84C2BBC
-	.incbin "baserom.gba", 0x4c2bbc, 0x10a8
+Cry_Pikachu:: @ 84C2BBC
+	.incbin "sound/direct_sound_samples/cry_pikachu.bin"
 
 	.align 2
-CryDirectSound_4C3C64:: @ 84C3C64
-	.incbin "baserom.gba", 0x4c3c64, 0x17c0
+Cry_Raichu:: @ 84C3C64
+	.incbin "sound/direct_sound_samples/cry_raichu.bin"
 
 	.align 2
-CryDirectSound_4C5424:: @ 84C5424
-	.incbin "baserom.gba", 0x4c5424, 0x954
+Cry_Sandshrew:: @ 84C5424
+	.incbin "sound/direct_sound_samples/cry_sandshrew.bin"
 
 	.align 2
-CryDirectSound_4C5D78:: @ 84C5D78
-	.incbin "baserom.gba", 0x4c5d78, 0xd90
+Cry_Sandslash:: @ 84C5D78
+	.incbin "sound/direct_sound_samples/cry_sandslash.bin"
 
 	.align 2
-CryDirectSound_4C6B08:: @ 84C6B08
-	.incbin "baserom.gba", 0x4c6b08, 0x9b0
+Cry_NidoranF:: @ 84C6B08
+	.incbin "sound/direct_sound_samples/cry_nidoran_f.bin"
 
 	.align 2
-CryDirectSound_4C74B8:: @ 84C74B8
-	.incbin "baserom.gba", 0x4c74b8, 0xcc8
+Cry_Nidorina:: @ 84C74B8
+	.incbin "sound/direct_sound_samples/cry_nidorina.bin"
 
 	.align 2
-CryDirectSound_4C8180:: @ 84C8180
-	.incbin "baserom.gba", 0x4c8180, 0x10e0
+Cry_Nidoqueen:: @ 84C8180
+	.incbin "sound/direct_sound_samples/cry_nidoqueen.bin"
 
 	.align 2
-CryDirectSound_4C9260:: @ 84C9260
-	.incbin "baserom.gba", 0x4c9260, 0xa68
+Cry_NidoranM:: @ 84C9260
+	.incbin "sound/direct_sound_samples/cry_nidoran_m.bin"
 
 	.align 2
-CryDirectSound_4C9CC8:: @ 84C9CC8
-	.incbin "baserom.gba", 0x4c9cc8, 0xc14
+Cry_Nidorino:: @ 84C9CC8
+	.incbin "sound/direct_sound_samples/cry_nidorino.bin"
 
 	.align 2
-CryDirectSound_4CA8DC:: @ 84CA8DC
-	.incbin "baserom.gba", 0x4ca8dc, 0x186c
+Cry_Nidoking:: @ 84CA8DC
+	.incbin "sound/direct_sound_samples/cry_nidoking.bin"
 
 	.align 2
-CryDirectSound_4CC148:: @ 84CC148
-	.incbin "baserom.gba", 0x4cc148, 0x870
+Cry_Clefairy:: @ 84CC148
+	.incbin "sound/direct_sound_samples/cry_clefairy.bin"
 
 	.align 2
-CryDirectSound_4CC9B8:: @ 84CC9B8
-	.incbin "baserom.gba", 0x4cc9b8, 0xa90
+Cry_Clefable:: @ 84CC9B8
+	.incbin "sound/direct_sound_samples/cry_clefable.bin"
 
 	.align 2
-CryDirectSound_4CD448:: @ 84CD448
-	.incbin "baserom.gba", 0x4cd448, 0x17d0
+Cry_Vulpix:: @ 84CD448
+	.incbin "sound/direct_sound_samples/cry_vulpix.bin"
 
 	.align 2
-CryDirectSound_4CEC18:: @ 84CEC18
-	.incbin "baserom.gba", 0x4cec18, 0x186c
+Cry_Ninetales:: @ 84CEC18
+	.incbin "sound/direct_sound_samples/cry_ninetales.bin"
 
 	.align 2
-CryDirectSound_4D0484:: @ 84D0484
-	.incbin "baserom.gba", 0x4d0484, 0x564
+Cry_Jigglypuff:: @ 84D0484
+	.incbin "sound/direct_sound_samples/cry_jigglypuff.bin"
 
 	.align 2
-CryDirectSound_4D09E8:: @ 84D09E8
-	.incbin "baserom.gba", 0x4d09e8, 0x6c8
+Cry_Wigglytuff:: @ 84D09E8
+	.incbin "sound/direct_sound_samples/cry_wigglytuff.bin"
 
 	.align 2
-CryDirectSound_4D10B0:: @ 84D10B0
-	.incbin "baserom.gba", 0x4d10b0, 0x136c
+Cry_Zubat:: @ 84D10B0
+	.incbin "sound/direct_sound_samples/cry_zubat.bin"
 
 	.align 2
-CryDirectSound_4D241C:: @ 84D241C
-	.incbin "baserom.gba", 0x4d241c, 0x1364
+Cry_Golbat:: @ 84D241C
+	.incbin "sound/direct_sound_samples/cry_golbat.bin"
 
 	.align 2
-CryDirectSound_4D3780:: @ 84D3780
-	.incbin "baserom.gba", 0x4d3780, 0xe9c
+Cry_Oddish:: @ 84D3780
+	.incbin "sound/direct_sound_samples/cry_oddish.bin"
 
 	.align 2
-CryDirectSound_4D461C:: @ 84D461C
-	.incbin "baserom.gba", 0x4d461c, 0xc7c
+Cry_Gloom:: @ 84D461C
+	.incbin "sound/direct_sound_samples/cry_gloom.bin"
 
 	.align 2
-CryDirectSound_4D5298:: @ 84D5298
-	.incbin "baserom.gba", 0x4d5298, 0x199c
+Cry_Vileplume:: @ 84D5298
+	.incbin "sound/direct_sound_samples/cry_vileplume.bin"
 
 	.align 2
-CryDirectSound_4D6C34:: @ 84D6C34
-	.incbin "baserom.gba", 0x4d6c34, 0x1bf4
+Cry_Paras:: @ 84D6C34
+	.incbin "sound/direct_sound_samples/cry_paras.bin"
 
 	.align 2
-CryDirectSound_4D8828:: @ 84D8828
-	.incbin "baserom.gba", 0x4d8828, 0x1e68
+Cry_Parasect:: @ 84D8828
+	.incbin "sound/direct_sound_samples/cry_parasect.bin"
 
 	.align 2
-CryDirectSound_4DA690:: @ 84DA690
-	.incbin "baserom.gba", 0x4da690, 0xf80
+Cry_Venonat:: @ 84DA690
+	.incbin "sound/direct_sound_samples/cry_venonat.bin"
 
 	.align 2
-CryDirectSound_4DB610:: @ 84DB610
-	.incbin "baserom.gba", 0x4db610, 0x1004
+Cry_Venomoth:: @ 84DB610
+	.incbin "sound/direct_sound_samples/cry_venomoth.bin"
 
 	.align 2
-CryDirectSound_4DC614:: @ 84DC614
-	.incbin "baserom.gba", 0x4dc614, 0x1370
+Cry_Diglett:: @ 84DC614
+	.incbin "sound/direct_sound_samples/cry_diglett.bin"
 
 	.align 2
-CryDirectSound_4DD984:: @ 84DD984
-	.incbin "baserom.gba", 0x4dd984, 0x136c
+Cry_Dugtrio:: @ 84DD984
+	.incbin "sound/direct_sound_samples/cry_dugtrio.bin"
 
 	.align 2
-CryDirectSound_4DECF0:: @ 84DECF0
-	.incbin "baserom.gba", 0x4decf0, 0x990
+Cry_Meowth:: @ 84DECF0
+	.incbin "sound/direct_sound_samples/cry_meowth.bin"
 
 	.align 2
-CryDirectSound_4DF680:: @ 84DF680
-	.incbin "baserom.gba", 0x4df680, 0x12dc
+Cry_Persian:: @ 84DF680
+	.incbin "sound/direct_sound_samples/cry_persian.bin"
 
 	.align 2
-CryDirectSound_4E095C:: @ 84E095C
-	.incbin "baserom.gba", 0x4e095c, 0xd28
+Cry_Psyduck:: @ 84E095C
+	.incbin "sound/direct_sound_samples/cry_psyduck.bin"
 
 	.align 2
-CryDirectSound_4E1684:: @ 84E1684
-	.incbin "baserom.gba", 0x4e1684, 0xb48
+Cry_Golduck:: @ 84E1684
+	.incbin "sound/direct_sound_samples/cry_golduck.bin"
 
 	.align 2
-CryDirectSound_4E21CC:: @ 84E21CC
-	.incbin "baserom.gba", 0x4e21cc, 0x1060
+Cry_Mankey:: @ 84E21CC
+	.incbin "sound/direct_sound_samples/cry_mankey.bin"
 
 	.align 2
-CryDirectSound_4E322C:: @ 84E322C
-	.incbin "baserom.gba", 0x4e322c, 0x1030
+Cry_Primeape:: @ 84E322C
+	.incbin "sound/direct_sound_samples/cry_primeape.bin"
 
 	.align 2
-CryDirectSound_4E425C:: @ 84E425C
-	.incbin "baserom.gba", 0x4e425c, 0xd64
+Cry_Growlithe:: @ 84E425C
+	.incbin "sound/direct_sound_samples/cry_growlithe.bin"
 
 	.align 2
-CryDirectSound_4E4FC0:: @ 84E4FC0
-	.incbin "baserom.gba", 0x4e4fc0, 0x113c
+Cry_Arcanine:: @ 84E4FC0
+	.incbin "sound/direct_sound_samples/cry_arcanine.bin"
 
 	.align 2
-CryDirectSound_4E60FC:: @ 84E60FC
-	.incbin "baserom.gba", 0x4e60fc, 0xb1c
+Cry_Poliwag:: @ 84E60FC
+	.incbin "sound/direct_sound_samples/cry_poliwag.bin"
 
 	.align 2
-CryDirectSound_4E6C18:: @ 84E6C18
-	.incbin "baserom.gba", 0x4e6c18, 0x6a8
+Cry_Poliwhirl:: @ 84E6C18
+	.incbin "sound/direct_sound_samples/cry_poliwhirl.bin"
 
 	.align 2
-CryDirectSound_4E72C0:: @ 84E72C0
-	.incbin "baserom.gba", 0x4e72c0, 0xb24
+Cry_Poliwrath:: @ 84E72C0
+	.incbin "sound/direct_sound_samples/cry_poliwrath.bin"
 
 	.align 2
-CryDirectSound_4E7DE4:: @ 84E7DE4
-	.incbin "baserom.gba", 0x4e7de4, 0x1764
+Cry_Abra:: @ 84E7DE4
+	.incbin "sound/direct_sound_samples/cry_abra.bin"
 
 	.align 2
-CryDirectSound_4E9548:: @ 84E9548
-	.incbin "baserom.gba", 0x4e9548, 0x1ae8
+Cry_Kadabra:: @ 84E9548
+	.incbin "sound/direct_sound_samples/cry_kadabra.bin"
 
 	.align 2
-CryDirectSound_4EB030:: @ 84EB030
-	.incbin "baserom.gba", 0x4eb030, 0x1f9c
+Cry_Alakazam:: @ 84EB030
+	.incbin "sound/direct_sound_samples/cry_alakazam.bin"
 
 	.align 2
-CryDirectSound_4ECFCC:: @ 84ECFCC
-	.incbin "baserom.gba", 0x4ecfcc, 0xd64
+Cry_Machop:: @ 84ECFCC
+	.incbin "sound/direct_sound_samples/cry_machop.bin"
 
 	.align 2
-CryDirectSound_4EDD30:: @ 84EDD30
-	.incbin "baserom.gba", 0x4edd30, 0xd90
+Cry_Machoke:: @ 84EDD30
+	.incbin "sound/direct_sound_samples/cry_machoke.bin"
 
 	.align 2
-CryDirectSound_4EEAC0:: @ 84EEAC0
-	.incbin "baserom.gba", 0x4eeac0, 0x1088
+Cry_Machamp:: @ 84EEAC0
+	.incbin "sound/direct_sound_samples/cry_machamp.bin"
 
 	.align 2
-CryDirectSound_4EFB48:: @ 84EFB48
-	.incbin "baserom.gba", 0x4efb48, 0x78c
+Cry_Bellsprout:: @ 84EFB48
+	.incbin "sound/direct_sound_samples/cry_bellsprout.bin"
 
 	.align 2
-CryDirectSound_4F02D4:: @ 84F02D4
-	.incbin "baserom.gba", 0x4f02d4, 0xea0
+Cry_Weepinbell:: @ 84F02D4
+	.incbin "sound/direct_sound_samples/cry_weepinbell.bin"
 
 	.align 2
-CryDirectSound_4F1174:: @ 84F1174
-	.incbin "baserom.gba", 0x4f1174, 0x134c
+Cry_Victreebel:: @ 84F1174
+	.incbin "sound/direct_sound_samples/cry_victreebel.bin"
 
 	.align 2
-CryDirectSound_4F24C0:: @ 84F24C0
-	.incbin "baserom.gba", 0x4f24c0, 0xff0
+Cry_Tentacool:: @ 84F24C0
+	.incbin "sound/direct_sound_samples/cry_tentacool.bin"
 
 	.align 2
-CryDirectSound_4F34B0:: @ 84F34B0
-	.incbin "baserom.gba", 0x4f34b0, 0x16fc
+Cry_Tentacruel:: @ 84F34B0
+	.incbin "sound/direct_sound_samples/cry_tentacruel.bin"
 
 	.align 2
-CryDirectSound_4F4BAC:: @ 84F4BAC
-	.incbin "baserom.gba", 0x4f4bac, 0x17b4
+Cry_Geodude:: @ 84F4BAC
+	.incbin "sound/direct_sound_samples/cry_geodude.bin"
 
 	.align 2
-CryDirectSound_4F6360:: @ 84F6360
-	.incbin "baserom.gba", 0x4f6360, 0x1be8
+Cry_Graveler:: @ 84F6360
+	.incbin "sound/direct_sound_samples/cry_graveler.bin"
 
 	.align 2
-CryDirectSound_4F7F48:: @ 84F7F48
-	.incbin "baserom.gba", 0x4f7f48, 0xe2c
+Cry_Golem:: @ 84F7F48
+	.incbin "sound/direct_sound_samples/cry_golem.bin"
 
 	.align 2
-CryDirectSound_4F8D74:: @ 84F8D74
-	.incbin "baserom.gba", 0x4f8d74, 0xf10
+Cry_Ponyta:: @ 84F8D74
+	.incbin "sound/direct_sound_samples/cry_ponyta.bin"
 
 	.align 2
-CryDirectSound_4F9C84:: @ 84F9C84
-	.incbin "baserom.gba", 0x4f9c84, 0x12a0
+Cry_Rapidash:: @ 84F9C84
+	.incbin "sound/direct_sound_samples/cry_rapidash.bin"
 
 	.align 2
-CryDirectSound_4FAF24:: @ 84FAF24
-	.incbin "baserom.gba", 0x4faf24, 0x768
+Cry_Slowpoke:: @ 84FAF24
+	.incbin "sound/direct_sound_samples/cry_slowpoke.bin"
 
 	.align 2
-CryDirectSound_4FB68C:: @ 84FB68C
-	.incbin "baserom.gba", 0x4fb68c, 0xd70
+Cry_Slowbro:: @ 84FB68C
+	.incbin "sound/direct_sound_samples/cry_slowbro.bin"
 
 	.align 2
-CryDirectSound_4FC3FC:: @ 84FC3FC
-	.incbin "baserom.gba", 0x4fc3fc, 0x1344
+Cry_Magnemite:: @ 84FC3FC
+	.incbin "sound/direct_sound_samples/cry_magnemite.bin"
 
 	.align 2
-CryDirectSound_4FD740:: @ 84FD740
-	.incbin "baserom.gba", 0x4fd740, 0x17e8
+Cry_Magneton:: @ 84FD740
+	.incbin "sound/direct_sound_samples/cry_magneton.bin"
 
 	.align 2
-CryDirectSound_4FEF28:: @ 84FEF28
-	.incbin "baserom.gba", 0x4fef28, 0x77c
+Cry_Farfetchd:: @ 84FEF28
+	.incbin "sound/direct_sound_samples/cry_farfetchd.bin"
 
 	.align 2
-CryDirectSound_4FF6A4:: @ 84FF6A4
-	.incbin "baserom.gba", 0x4ff6a4, 0x1344
+Cry_Doduo:: @ 84FF6A4
+	.incbin "sound/direct_sound_samples/cry_doduo.bin"
 
 	.align 2
-CryDirectSound_5009E8:: @ 85009E8
-	.incbin "baserom.gba", 0x5009e8, 0x1378
+Cry_Dodrio:: @ 85009E8
+	.incbin "sound/direct_sound_samples/cry_dodrio.bin"
 
 	.align 2
-CryDirectSound_501D60:: @ 8501D60
-	.incbin "baserom.gba", 0x501d60, 0x11f0
+Cry_Seel:: @ 8501D60
+	.incbin "sound/direct_sound_samples/cry_seel.bin"
 
 	.align 2
-CryDirectSound_502F50:: @ 8502F50
-	.incbin "baserom.gba", 0x502f50, 0x1524
+Cry_Dewgong:: @ 8502F50
+	.incbin "sound/direct_sound_samples/cry_dewgong.bin"
 
 	.align 2
-CryDirectSound_504474:: @ 8504474
-	.incbin "baserom.gba", 0x504474, 0xa88
+Cry_Grimer:: @ 8504474
+	.incbin "sound/direct_sound_samples/cry_grimer.bin"
 
 	.align 2
-CryDirectSound_504EFC:: @ 8504EFC
-	.incbin "baserom.gba", 0x504efc, 0xec0
+Cry_Muk:: @ 8504EFC
+	.incbin "sound/direct_sound_samples/cry_muk.bin"
 
 	.align 2
-CryDirectSound_505DBC:: @ 8505DBC
-	.incbin "baserom.gba", 0x505dbc, 0xf74
+Cry_Shellder:: @ 8505DBC
+	.incbin "sound/direct_sound_samples/cry_shellder.bin"
 
 	.align 2
-CryDirectSound_506D30:: @ 8506D30
-	.incbin "baserom.gba", 0x506d30, 0x14c4
+Cry_Cloyster:: @ 8506D30
+	.incbin "sound/direct_sound_samples/cry_cloyster.bin"
 
 	.align 2
-CryDirectSound_5081F4:: @ 85081F4
-	.incbin "baserom.gba", 0x5081f4, 0x1750
+Cry_Gastly:: @ 85081F4
+	.incbin "sound/direct_sound_samples/cry_gastly.bin"
 
 	.align 2
-CryDirectSound_509944:: @ 8509944
-	.incbin "baserom.gba", 0x509944, 0x1780
+Cry_Haunter:: @ 8509944
+	.incbin "sound/direct_sound_samples/cry_haunter.bin"
 
 	.align 2
-CryDirectSound_50B0C4:: @ 850B0C4
-	.incbin "baserom.gba", 0x50b0c4, 0xec0
+Cry_Gengar:: @ 850B0C4
+	.incbin "sound/direct_sound_samples/cry_gengar.bin"
 
 	.align 2
-CryDirectSound_50BF84:: @ 850BF84
-	.incbin "baserom.gba", 0x50bf84, 0x18c4
+Cry_Onix:: @ 850BF84
+	.incbin "sound/direct_sound_samples/cry_onix.bin"
 
 	.align 2
-CryDirectSound_50D848:: @ 850D848
-	.incbin "baserom.gba", 0x50d848, 0x1d18
+Cry_Drowzee:: @ 850D848
+	.incbin "sound/direct_sound_samples/cry_drowzee.bin"
 
 	.align 2
-CryDirectSound_50F560:: @ 850F560
-	.incbin "baserom.gba", 0x50f560, 0x1d04
+Cry_Hypno:: @ 850F560
+	.incbin "sound/direct_sound_samples/cry_hypno.bin"
 
 	.align 2
-CryDirectSound_511264:: @ 8511264
-	.incbin "baserom.gba", 0x511264, 0x184c
+Cry_Krabby:: @ 8511264
+	.incbin "sound/direct_sound_samples/cry_krabby.bin"
 
 	.align 2
-CryDirectSound_512AB0:: @ 8512AB0
-	.incbin "baserom.gba", 0x512ab0, 0x1858
+Cry_Kingler:: @ 8512AB0
+	.incbin "sound/direct_sound_samples/cry_kingler.bin"
 
 	.align 2
-CryDirectSound_514308:: @ 8514308
-	.incbin "baserom.gba", 0x514308, 0x18c4
+Cry_Voltorb:: @ 8514308
+	.incbin "sound/direct_sound_samples/cry_voltorb.bin"
 
 	.align 2
-CryDirectSound_515BCC:: @ 8515BCC
-	.incbin "baserom.gba", 0x515bcc, 0x1938
+Cry_Electrode:: @ 8515BCC
+	.incbin "sound/direct_sound_samples/cry_electrode.bin"
 
 	.align 2
-CryDirectSound_517504:: @ 8517504
-	.incbin "baserom.gba", 0x517504, 0x12e0
+Cry_Exeggcute:: @ 8517504
+	.incbin "sound/direct_sound_samples/cry_exeggcute.bin"
 
 	.align 2
-CryDirectSound_5187E4:: @ 85187E4
-	.incbin "baserom.gba", 0x5187e4, 0x1fe4
+Cry_Exeggutor:: @ 85187E4
+	.incbin "sound/direct_sound_samples/cry_exeggutor.bin"
 
 	.align 2
-CryDirectSound_51A7C8:: @ 851A7C8
-	.incbin "baserom.gba", 0x51a7c8, 0xf20
+Cry_Cubone:: @ 851A7C8
+	.incbin "sound/direct_sound_samples/cry_cubone.bin"
 
 	.align 2
-CryDirectSound_51B6E8:: @ 851B6E8
-	.incbin "baserom.gba", 0x51b6e8, 0xe70
+Cry_Marowak:: @ 851B6E8
+	.incbin "sound/direct_sound_samples/cry_marowak.bin"
 
 	.align 2
-CryDirectSound_51C558:: @ 851C558
-	.incbin "baserom.gba", 0x51c558, 0x12ac
+Cry_Hitmonlee:: @ 851C558
+	.incbin "sound/direct_sound_samples/cry_hitmonlee.bin"
 
 	.align 2
-CryDirectSound_51D804:: @ 851D804
-	.incbin "baserom.gba", 0x51d804, 0x11d8
+Cry_Hitmonchan:: @ 851D804
+	.incbin "sound/direct_sound_samples/cry_hitmonchan.bin"
 
 	.align 2
-CryDirectSound_51E9DC:: @ 851E9DC
-	.incbin "baserom.gba", 0x51e9dc, 0xf28
+Cry_Lickitung:: @ 851E9DC
+	.incbin "sound/direct_sound_samples/cry_lickitung.bin"
 
 	.align 2
-CryDirectSound_51F904:: @ 851F904
-	.incbin "baserom.gba", 0x51f904, 0x145c
+Cry_Koffing:: @ 851F904
+	.incbin "sound/direct_sound_samples/cry_koffing.bin"
 
 	.align 2
-CryDirectSound_520D60:: @ 8520D60
-	.incbin "baserom.gba", 0x520d60, 0x15ac
+Cry_Weezing:: @ 8520D60
+	.incbin "sound/direct_sound_samples/cry_weezing.bin"
 
 	.align 2
-CryDirectSound_52230C:: @ 852230C
-	.incbin "baserom.gba", 0x52230c, 0x136c
+Cry_Rhyhorn:: @ 852230C
+	.incbin "sound/direct_sound_samples/cry_rhyhorn.bin"
 
 	.align 2
-CryDirectSound_523678:: @ 8523678
-	.incbin "baserom.gba", 0x523678, 0x146c
+Cry_Rhydon:: @ 8523678
+	.incbin "sound/direct_sound_samples/cry_rhydon.bin"
 
 	.align 2
-CryDirectSound_524AE4:: @ 8524AE4
-	.incbin "baserom.gba", 0x524ae4, 0xecc
+Cry_Chansey:: @ 8524AE4
+	.incbin "sound/direct_sound_samples/cry_chansey.bin"
 
 	.align 2
-CryDirectSound_5259B0:: @ 85259B0
-	.incbin "baserom.gba", 0x5259b0, 0xf1c
+Cry_Tangela:: @ 85259B0
+	.incbin "sound/direct_sound_samples/cry_tangela.bin"
 
 	.align 2
-CryDirectSound_5268CC:: @ 85268CC
-	.incbin "baserom.gba", 0x5268cc, 0x12b4
+Cry_Kangaskhan:: @ 85268CC
+	.incbin "sound/direct_sound_samples/cry_kangaskhan.bin"
 
 	.align 2
-CryDirectSound_527B80:: @ 8527B80
-	.incbin "baserom.gba", 0x527b80, 0x97c
+Cry_Horsea:: @ 8527B80
+	.incbin "sound/direct_sound_samples/cry_horsea.bin"
 
 	.align 2
-CryDirectSound_5284FC:: @ 85284FC
-	.incbin "baserom.gba", 0x5284fc, 0x86c
+Cry_Seadra:: @ 85284FC
+	.incbin "sound/direct_sound_samples/cry_seadra.bin"
 
 	.align 2
-CryDirectSound_528D68:: @ 8528D68
-	.incbin "baserom.gba", 0x528d68, 0x9d8
+Cry_Goldeen:: @ 8528D68
+	.incbin "sound/direct_sound_samples/cry_goldeen.bin"
 
 	.align 2
-CryDirectSound_529740:: @ 8529740
-	.incbin "baserom.gba", 0x529740, 0x1358
+Cry_Seaking:: @ 8529740
+	.incbin "sound/direct_sound_samples/cry_seaking.bin"
 
 	.align 2
-CryDirectSound_52AA98:: @ 852AA98
-	.incbin "baserom.gba", 0x52aa98, 0x13e8
+Cry_Staryu:: @ 852AA98
+	.incbin "sound/direct_sound_samples/cry_staryu.bin"
 
 	.align 2
-CryDirectSound_52BE80:: @ 852BE80
-	.incbin "baserom.gba", 0x52be80, 0x14dc
+Cry_Starmie:: @ 852BE80
+	.incbin "sound/direct_sound_samples/cry_starmie.bin"
 
 	.align 2
-CryDirectSound_52D35C:: @ 852D35C
-	.incbin "baserom.gba", 0x52d35c, 0x12f0
+Cry_MrMime:: @ 852D35C
+	.incbin "sound/direct_sound_samples/cry_mr_mime.bin"
 
 	.align 2
-CryDirectSound_52E64C:: @ 852E64C
-	.incbin "baserom.gba", 0x52e64c, 0xd5c
+Cry_Scyther:: @ 852E64C
+	.incbin "sound/direct_sound_samples/cry_scyther.bin"
 
 	.align 2
-CryDirectSound_52F3A8:: @ 852F3A8
-	.incbin "baserom.gba", 0x52f3a8, 0x2f74
+Cry_Jynx:: @ 852F3A8
+	.incbin "sound/direct_sound_samples/cry_jynx.bin"
 
 	.align 2
-CryDirectSound_53231C:: @ 853231C
-	.incbin "baserom.gba", 0x53231c, 0x1ee4
+Cry_Electabuzz:: @ 853231C
+	.incbin "sound/direct_sound_samples/cry_electabuzz.bin"
 
 	.align 2
-CryDirectSound_534200:: @ 8534200
-	.incbin "baserom.gba", 0x534200, 0xf7c
+Cry_Magmar:: @ 8534200
+	.incbin "sound/direct_sound_samples/cry_magmar.bin"
 
 	.align 2
-CryDirectSound_53517C:: @ 853517C
-	.incbin "baserom.gba", 0x53517c, 0xc5c
+Cry_Pinsir:: @ 853517C
+	.incbin "sound/direct_sound_samples/cry_pinsir.bin"
 
 	.align 2
-CryDirectSound_535DD8:: @ 8535DD8
-	.incbin "baserom.gba", 0x535dd8, 0x1254
+Cry_Tauros:: @ 8535DD8
+	.incbin "sound/direct_sound_samples/cry_tauros.bin"
 
 	.align 2
-CryDirectSound_53702C:: @ 853702C
-	.incbin "baserom.gba", 0x53702c, 0x1308
+Cry_Magikarp:: @ 853702C
+	.incbin "sound/direct_sound_samples/cry_magikarp.bin"
 
 	.align 2
-CryDirectSound_538334:: @ 8538334
-	.incbin "baserom.gba", 0x538334, 0x1434
+Cry_Gyarados:: @ 8538334
+	.incbin "sound/direct_sound_samples/cry_gyarados.bin"
 
 	.align 2
-CryDirectSound_539768:: @ 8539768
-	.incbin "baserom.gba", 0x539768, 0xed4
+Cry_Lapras:: @ 8539768
+	.incbin "sound/direct_sound_samples/cry_lapras.bin"
 
 	.align 2
-CryDirectSound_53A63C:: @ 853A63C
-	.incbin "baserom.gba", 0x53a63c, 0xb1c
+Cry_Ditto:: @ 853A63C
+	.incbin "sound/direct_sound_samples/cry_ditto.bin"
 
 	.align 2
-CryDirectSound_53B158:: @ 853B158
-	.incbin "baserom.gba", 0x53b158, 0xe38
+Cry_Eevee:: @ 853B158
+	.incbin "sound/direct_sound_samples/cry_eevee.bin"
 
 	.align 2
-CryDirectSound_53BF90:: @ 853BF90
-	.incbin "baserom.gba", 0x53bf90, 0x1618
+Cry_Vaporeon:: @ 853BF90
+	.incbin "sound/direct_sound_samples/cry_vaporeon.bin"
 
 	.align 2
-CryDirectSound_53D5A8:: @ 853D5A8
-	.incbin "baserom.gba", 0x53d5a8, 0xfd4
+Cry_Jolteon:: @ 853D5A8
+	.incbin "sound/direct_sound_samples/cry_jolteon.bin"
 
 	.align 2
-CryDirectSound_53E57C:: @ 853E57C
-	.incbin "baserom.gba", 0x53e57c, 0xf84
+Cry_Flareon:: @ 853E57C
+	.incbin "sound/direct_sound_samples/cry_flareon.bin"
 
 	.align 2
-CryDirectSound_53F500:: @ 853F500
-	.incbin "baserom.gba", 0x53f500, 0x140c
+Cry_Porygon:: @ 853F500
+	.incbin "sound/direct_sound_samples/cry_porygon.bin"
 
 	.align 2
-CryDirectSound_54090C:: @ 854090C
-	.incbin "baserom.gba", 0x54090c, 0xd58
+Cry_Omanyte:: @ 854090C
+	.incbin "sound/direct_sound_samples/cry_omanyte.bin"
 
 	.align 2
-CryDirectSound_541664:: @ 8541664
-	.incbin "baserom.gba", 0x541664, 0xd54
+Cry_Omastar:: @ 8541664
+	.incbin "sound/direct_sound_samples/cry_omastar.bin"
 
 	.align 2
-CryDirectSound_5423B8:: @ 85423B8
-	.incbin "baserom.gba", 0x5423b8, 0xc54
+Cry_Kabuto:: @ 85423B8
+	.incbin "sound/direct_sound_samples/cry_kabuto.bin"
 
 	.align 2
-CryDirectSound_54300C:: @ 854300C
-	.incbin "baserom.gba", 0x54300c, 0xdbc
+Cry_Kabutops:: @ 854300C
+	.incbin "sound/direct_sound_samples/cry_kabutops.bin"
 
 	.align 2
-CryDirectSound_543DC8:: @ 8543DC8
-	.incbin "baserom.gba", 0x543dc8, 0x185c
+Cry_Aerodactyl:: @ 8543DC8
+	.incbin "sound/direct_sound_samples/cry_aerodactyl.bin"
 
 	.align 2
-CryDirectSound_545624:: @ 8545624
-	.incbin "baserom.gba", 0x545624, 0x53c
+Cry_Snorlax:: @ 8545624
+	.incbin "sound/direct_sound_samples/cry_snorlax.bin"
 
 	.align 2
-CryDirectSound_545B60:: @ 8545B60
-	.incbin "baserom.gba", 0x545b60, 0x17a8
+Cry_Articuno:: @ 8545B60
+	.incbin "sound/direct_sound_samples/cry_articuno.bin"
 
 	.align 2
-CryDirectSound_547308:: @ 8547308
-	.incbin "baserom.gba", 0x547308, 0xf78
+Cry_Zapdos:: @ 8547308
+	.incbin "sound/direct_sound_samples/cry_zapdos.bin"
 
 	.align 2
-CryDirectSound_548280:: @ 8548280
-	.incbin "baserom.gba", 0x548280, 0x17ac
+Cry_Moltres:: @ 8548280
+	.incbin "sound/direct_sound_samples/cry_moltres.bin"
 
 	.align 2
-CryDirectSound_549A2C:: @ 8549A2C
-	.incbin "baserom.gba", 0x549a2c, 0xb9c
+Cry_Dratini:: @ 8549A2C
+	.incbin "sound/direct_sound_samples/cry_dratini.bin"
 
 	.align 2
-CryDirectSound_54A5C8:: @ 854A5C8
-	.incbin "baserom.gba", 0x54a5c8, 0x10a8
+Cry_Dragonair:: @ 854A5C8
+	.incbin "sound/direct_sound_samples/cry_dragonair.bin"
 
 	.align 2
-CryDirectSound_54B670:: @ 854B670
-	.incbin "baserom.gba", 0x54b670, 0x130c
+Cry_Dragonite:: @ 854B670
+	.incbin "sound/direct_sound_samples/cry_dragonite.bin"
 
 	.align 2
-CryDirectSound_54C97C:: @ 854C97C
-	.incbin "baserom.gba", 0x54c97c, 0x1e68
+Cry_Mewtwo:: @ 854C97C
+	.incbin "sound/direct_sound_samples/cry_mewtwo.bin"
 
 	.align 2
-CryDirectSound_54E7E4:: @ 854E7E4
-	.incbin "baserom.gba", 0x54e7e4, 0x1e68
+Cry_Mew:: @ 854E7E4
+	.incbin "sound/direct_sound_samples/cry_mew.bin"
 
 	.align 2
-CryDirectSound_55064C:: @ 855064C
-	.incbin "baserom.gba", 0x55064c, 0x540
+Cry_Chikorita:: @ 855064C
+	.incbin "sound/direct_sound_samples/cry_chikorita.bin"
 
 	.align 2
-CryDirectSound_550B8C:: @ 8550B8C
-	.incbin "baserom.gba", 0x550b8c, 0x8cc
+Cry_Bayleef:: @ 8550B8C
+	.incbin "sound/direct_sound_samples/cry_bayleef.bin"
 
 	.align 2
-CryDirectSound_551458:: @ 8551458
-	.incbin "baserom.gba", 0x551458, 0x1038
+Cry_Meganium:: @ 8551458
+	.incbin "sound/direct_sound_samples/cry_meganium.bin"
 
 	.align 2
-CryDirectSound_552490:: @ 8552490
-	.incbin "baserom.gba", 0x552490, 0x704
+Cry_Cyndaquil:: @ 8552490
+	.incbin "sound/direct_sound_samples/cry_cyndaquil.bin"
 
 	.align 2
-CryDirectSound_552B94:: @ 8552B94
-	.incbin "baserom.gba", 0x552b94, 0xbe8
+Cry_Quilava:: @ 8552B94
+	.incbin "sound/direct_sound_samples/cry_quilava.bin"
 
 	.align 2
-CryDirectSound_55377C:: @ 855377C
-	.incbin "baserom.gba", 0x55377c, 0x2610
+Cry_Typhlosion:: @ 855377C
+	.incbin "sound/direct_sound_samples/cry_typhlosion.bin"
 
 	.align 2
-CryDirectSound_555D8C:: @ 8555D8C
-	.incbin "baserom.gba", 0x555d8c, 0x1258
+Cry_Totodile:: @ 8555D8C
+	.incbin "sound/direct_sound_samples/cry_totodile.bin"
 
 	.align 2
-CryDirectSound_556FE4:: @ 8556FE4
-	.incbin "baserom.gba", 0x556fe4, 0x143c
+Cry_Croconaw:: @ 8556FE4
+	.incbin "sound/direct_sound_samples/cry_croconaw.bin"
 
 	.align 2
-CryDirectSound_558420:: @ 8558420
-	.incbin "baserom.gba", 0x558420, 0x1984
+Cry_Feraligatr:: @ 8558420
+	.incbin "sound/direct_sound_samples/cry_feraligatr.bin"
 
 	.align 2
-CryDirectSound_559DA4:: @ 8559DA4
-	.incbin "baserom.gba", 0x559da4, 0x428
+Cry_Sentret:: @ 8559DA4
+	.incbin "sound/direct_sound_samples/cry_sentret.bin"
 
 	.align 2
-CryDirectSound_55A1CC:: @ 855A1CC
-	.incbin "baserom.gba", 0x55a1cc, 0x648
+Cry_Furret:: @ 855A1CC
+	.incbin "sound/direct_sound_samples/cry_furret.bin"
 
 	.align 2
-CryDirectSound_55A814:: @ 855A814
-	.incbin "baserom.gba", 0x55a814, 0xae4
+Cry_Hoothoot:: @ 855A814
+	.incbin "sound/direct_sound_samples/cry_hoothoot.bin"
 
 	.align 2
-CryDirectSound_55B2F8:: @ 855B2F8
-	.incbin "baserom.gba", 0x55b2f8, 0x1530
+Cry_Noctowl:: @ 855B2F8
+	.incbin "sound/direct_sound_samples/cry_noctowl.bin"
 
 	.align 2
-CryDirectSound_55C828:: @ 855C828
-	.incbin "baserom.gba", 0x55c828, 0x6f8
+Cry_Ledyba:: @ 855C828
+	.incbin "sound/direct_sound_samples/cry_ledyba.bin"
 
 	.align 2
-CryDirectSound_55CF20:: @ 855CF20
-	.incbin "baserom.gba", 0x55cf20, 0x864
+Cry_Ledian:: @ 855CF20
+	.incbin "sound/direct_sound_samples/cry_ledian.bin"
 
 	.align 2
-CryDirectSound_55D784:: @ 855D784
-	.incbin "baserom.gba", 0x55d784, 0xd64
+Cry_Spinarak:: @ 855D784
+	.incbin "sound/direct_sound_samples/cry_spinarak.bin"
 
 	.align 2
-CryDirectSound_55E4E8:: @ 855E4E8
-	.incbin "baserom.gba", 0x55e4e8, 0xc54
+Cry_Ariados:: @ 855E4E8
+	.incbin "sound/direct_sound_samples/cry_ariados.bin"
 
 	.align 2
-CryDirectSound_55F13C:: @ 855F13C
-	.incbin "baserom.gba", 0x55f13c, 0x1730
+Cry_Crobat:: @ 855F13C
+	.incbin "sound/direct_sound_samples/cry_crobat.bin"
 
 	.align 2
-CryDirectSound_56086C:: @ 856086C
-	.incbin "baserom.gba", 0x56086c, 0xcb0
+Cry_Chinchou:: @ 856086C
+	.incbin "sound/direct_sound_samples/cry_chinchou.bin"
 
 	.align 2
-CryDirectSound_56151C:: @ 856151C
-	.incbin "baserom.gba", 0x56151c, 0xa8c
+Cry_Lanturn:: @ 856151C
+	.incbin "sound/direct_sound_samples/cry_lanturn.bin"
 
 	.align 2
-CryDirectSound_561FA8:: @ 8561FA8
-	.incbin "baserom.gba", 0x561fa8, 0x754
+Cry_Pichu:: @ 8561FA8
+	.incbin "sound/direct_sound_samples/cry_pichu.bin"
 
 	.align 2
-CryDirectSound_5626FC:: @ 85626FC
-	.incbin "baserom.gba", 0x5626fc, 0x5f0
+Cry_Cleffa:: @ 85626FC
+	.incbin "sound/direct_sound_samples/cry_cleffa.bin"
 
 	.align 2
-CryDirectSound_562CEC:: @ 8562CEC
-	.incbin "baserom.gba", 0x562cec, 0x6fc
+Cry_Igglybuff:: @ 8562CEC
+	.incbin "sound/direct_sound_samples/cry_igglybuff.bin"
 
 	.align 2
-CryDirectSound_5633E8:: @ 85633E8
-	.incbin "baserom.gba", 0x5633e8, 0xae8
+Cry_Togepi:: @ 85633E8
+	.incbin "sound/direct_sound_samples/cry_togepi.bin"
 
 	.align 2
-CryDirectSound_563ED0:: @ 8563ED0
-	.incbin "baserom.gba", 0x563ed0, 0x700
+Cry_Togetic:: @ 8563ED0
+	.incbin "sound/direct_sound_samples/cry_togetic.bin"
 
 	.align 2
-CryDirectSound_5645D0:: @ 85645D0
-	.incbin "baserom.gba", 0x5645d0, 0xa90
+Cry_Natu:: @ 85645D0
+	.incbin "sound/direct_sound_samples/cry_natu.bin"
 
 	.align 2
-CryDirectSound_565060:: @ 8565060
-	.incbin "baserom.gba", 0x565060, 0xecc
+Cry_Xatu:: @ 8565060
+	.incbin "sound/direct_sound_samples/cry_xatu.bin"
 
 	.align 2
-CryDirectSound_565F2C:: @ 8565F2C
-	.incbin "baserom.gba", 0x565f2c, 0x758
+Cry_Mareep:: @ 8565F2C
+	.incbin "sound/direct_sound_samples/cry_mareep.bin"
 
 	.align 2
-CryDirectSound_566684:: @ 8566684
-	.incbin "baserom.gba", 0x566684, 0xdb4
+Cry_Flaaffy:: @ 8566684
+	.incbin "sound/direct_sound_samples/cry_flaaffy.bin"
 
 	.align 2
-CryDirectSound_567438:: @ 8567438
-	.incbin "baserom.gba", 0x567438, 0x1080
+Cry_Ampharos:: @ 8567438
+	.incbin "sound/direct_sound_samples/cry_ampharos.bin"
 
 	.align 2
-CryDirectSound_5684B8:: @ 85684B8
-	.incbin "baserom.gba", 0x5684b8, 0xe18
+Cry_Bellossom:: @ 85684B8
+	.incbin "sound/direct_sound_samples/cry_bellossom.bin"
 
 	.align 2
-CryDirectSound_5692D0:: @ 85692D0
-	.incbin "baserom.gba", 0x5692d0, 0xd14
+Cry_Marill:: @ 85692D0
+	.incbin "sound/direct_sound_samples/cry_marill.bin"
 
 	.align 2
-CryDirectSound_569FE4:: @ 8569FE4
-	.incbin "baserom.gba", 0x569fe4, 0x10ec
+Cry_Azumarill:: @ 8569FE4
+	.incbin "sound/direct_sound_samples/cry_azumarill.bin"
 
 	.align 2
-CryDirectSound_56B0D0:: @ 856B0D0
-	.incbin "baserom.gba", 0x56b0d0, 0x1030
+Cry_Sudowoodo:: @ 856B0D0
+	.incbin "sound/direct_sound_samples/cry_sudowoodo.bin"
 
 	.align 2
-CryDirectSound_56C100:: @ 856C100
-	.incbin "baserom.gba", 0x56c100, 0x1244
+Cry_Politoed:: @ 856C100
+	.incbin "sound/direct_sound_samples/cry_politoed.bin"
 
 	.align 2
-CryDirectSound_56D344:: @ 856D344
-	.incbin "baserom.gba", 0x56d344, 0x86c
+Cry_Hoppip:: @ 856D344
+	.incbin "sound/direct_sound_samples/cry_hoppip.bin"
 
 	.align 2
-CryDirectSound_56DBB0:: @ 856DBB0
-	.incbin "baserom.gba", 0x56dbb0, 0xd08
+Cry_Skiploom:: @ 856DBB0
+	.incbin "sound/direct_sound_samples/cry_skiploom.bin"
 
 	.align 2
-CryDirectSound_56E8B8:: @ 856E8B8
-	.incbin "baserom.gba", 0x56e8b8, 0x103c
+Cry_Jumpluff:: @ 856E8B8
+	.incbin "sound/direct_sound_samples/cry_jumpluff.bin"
 
 	.align 2
-CryDirectSound_56F8F4:: @ 856F8F4
-	.incbin "baserom.gba", 0x56f8f4, 0xe20
+Cry_Aipom:: @ 856F8F4
+	.incbin "sound/direct_sound_samples/cry_aipom.bin"
 
 	.align 2
-CryDirectSound_570714:: @ 8570714
-	.incbin "baserom.gba", 0x570714, 0x814
+Cry_Sunkern:: @ 8570714
+	.incbin "sound/direct_sound_samples/cry_sunkern.bin"
 
 	.align 2
-CryDirectSound_570F28:: @ 8570F28
-	.incbin "baserom.gba", 0x570f28, 0xfe0
+Cry_Sunflora:: @ 8570F28
+	.incbin "sound/direct_sound_samples/cry_sunflora.bin"
 
 	.align 2
-CryDirectSound_571F08:: @ 8571F08
-	.incbin "baserom.gba", 0x571f08, 0x1108
+Cry_Yanma:: @ 8571F08
+	.incbin "sound/direct_sound_samples/cry_yanma.bin"
 
 	.align 2
-CryDirectSound_573010:: @ 8573010
-	.incbin "baserom.gba", 0x573010, 0x760
+Cry_Wooper:: @ 8573010
+	.incbin "sound/direct_sound_samples/cry_wooper.bin"
 
 	.align 2
-CryDirectSound_573770:: @ 8573770
-	.incbin "baserom.gba", 0x573770, 0xd60
+Cry_Quagsire:: @ 8573770
+	.incbin "sound/direct_sound_samples/cry_quagsire.bin"
 
 	.align 2
-CryDirectSound_5744D0:: @ 85744D0
-	.incbin "baserom.gba", 0x5744d0, 0x13b4
+Cry_Espeon:: @ 85744D0
+	.incbin "sound/direct_sound_samples/cry_espeon.bin"
 
 	.align 2
-CryDirectSound_575884:: @ 8575884
-	.incbin "baserom.gba", 0x575884, 0xf80
+Cry_Umbreon:: @ 8575884
+	.incbin "sound/direct_sound_samples/cry_umbreon.bin"
 
 	.align 2
-CryDirectSound_576804:: @ 8576804
-	.incbin "baserom.gba", 0x576804, 0x10c4
+Cry_Murkrow:: @ 8576804
+	.incbin "sound/direct_sound_samples/cry_murkrow.bin"
 
 	.align 2
-CryDirectSound_5778C8:: @ 85778C8
-	.incbin "baserom.gba", 0x5778c8, 0x17e4
+Cry_Slowking:: @ 85778C8
+	.incbin "sound/direct_sound_samples/cry_slowking.bin"
 
 	.align 2
-CryDirectSound_5790AC:: @ 85790AC
-	.incbin "baserom.gba", 0x5790ac, 0xba0
+Cry_Misdreavus:: @ 85790AC
+	.incbin "sound/direct_sound_samples/cry_misdreavus.bin"
 
 	.align 2
-CryDirectSound_579C4C:: @ 8579C4C
-	.incbin "baserom.gba", 0x579c4c, 0xd28
+Cry_Unown:: @ 8579C4C
+	.incbin "sound/direct_sound_samples/cry_unown.bin"
 
 	.align 2
-CryDirectSound_57A974:: @ 857A974
-	.incbin "baserom.gba", 0x57a974, 0x149c
+Cry_Wobbuffet:: @ 857A974
+	.incbin "sound/direct_sound_samples/cry_wobbuffet.bin"
 
 	.align 2
-CryDirectSound_57BE10:: @ 857BE10
-	.incbin "baserom.gba", 0x57be10, 0xeb4
+Cry_Girafarig:: @ 857BE10
+	.incbin "sound/direct_sound_samples/cry_girafarig.bin"
 
 	.align 2
-CryDirectSound_57CCC4:: @ 857CCC4
-	.incbin "baserom.gba", 0x57ccc4, 0xd60
+Cry_Pineco:: @ 857CCC4
+	.incbin "sound/direct_sound_samples/cry_pineco.bin"
 
 	.align 2
-CryDirectSound_57DA24:: @ 857DA24
-	.incbin "baserom.gba", 0x57da24, 0x1408
+Cry_Forretress:: @ 857DA24
+	.incbin "sound/direct_sound_samples/cry_forretress.bin"
 
 	.align 2
-CryDirectSound_57EE2C:: @ 857EE2C
-	.incbin "baserom.gba", 0x57ee2c, 0xfe0
+Cry_Dunsparce:: @ 857EE2C
+	.incbin "sound/direct_sound_samples/cry_dunsparce.bin"
 
 	.align 2
-CryDirectSound_57FE0C:: @ 857FE0C
-	.incbin "baserom.gba", 0x57fe0c, 0xc20
+Cry_Gligar:: @ 857FE0C
+	.incbin "sound/direct_sound_samples/cry_gligar.bin"
 
 	.align 2
-CryDirectSound_580A2C:: @ 8580A2C
-	.incbin "baserom.gba", 0x580a2c, 0x2628
+Cry_Steelix:: @ 8580A2C
+	.incbin "sound/direct_sound_samples/cry_steelix.bin"
 
 	.align 2
-CryDirectSound_583054:: @ 8583054
-	.incbin "baserom.gba", 0x583054, 0xe74
+Cry_Snubbull:: @ 8583054
+	.incbin "sound/direct_sound_samples/cry_snubbull.bin"
 
 	.align 2
-CryDirectSound_583EC8:: @ 8583EC8
-	.incbin "baserom.gba", 0x583ec8, 0x17a4
+Cry_Granbull:: @ 8583EC8
+	.incbin "sound/direct_sound_samples/cry_granbull.bin"
 
 	.align 2
-CryDirectSound_58566C:: @ 858566C
-	.incbin "baserom.gba", 0x58566c, 0xb9c
+Cry_Qwilfish:: @ 858566C
+	.incbin "sound/direct_sound_samples/cry_qwilfish.bin"
 
 	.align 2
-CryDirectSound_586208:: @ 8586208
-	.incbin "baserom.gba", 0x586208, 0x16fc
+Cry_Scizor:: @ 8586208
+	.incbin "sound/direct_sound_samples/cry_scizor.bin"
 
 	.align 2
-CryDirectSound_587904:: @ 8587904
-	.incbin "baserom.gba", 0x587904, 0xa34
+Cry_Shuckle:: @ 8587904
+	.incbin "sound/direct_sound_samples/cry_shuckle.bin"
 
 	.align 2
-CryDirectSound_588338:: @ 8588338
-	.incbin "baserom.gba", 0x588338, 0x1254
+Cry_Heracross:: @ 8588338
+	.incbin "sound/direct_sound_samples/cry_heracross.bin"
 
 	.align 2
-CryDirectSound_58958C:: @ 858958C
-	.incbin "baserom.gba", 0x58958c, 0x924
+Cry_Sneasel:: @ 858958C
+	.incbin "sound/direct_sound_samples/cry_sneasel.bin"
 
 	.align 2
-CryDirectSound_589EB0:: @ 8589EB0
-	.incbin "baserom.gba", 0x589eb0, 0x108c
+Cry_Teddiursa:: @ 8589EB0
+	.incbin "sound/direct_sound_samples/cry_teddiursa.bin"
 
 	.align 2
-CryDirectSound_58AF3C:: @ 858AF3C
-	.incbin "baserom.gba", 0x58af3c, 0x1dd8
+Cry_Ursaring:: @ 858AF3C
+	.incbin "sound/direct_sound_samples/cry_ursaring.bin"
 
 	.align 2
-CryDirectSound_58CD14:: @ 858CD14
-	.incbin "baserom.gba", 0x58cd14, 0x1118
+Cry_Slugma:: @ 858CD14
+	.incbin "sound/direct_sound_samples/cry_slugma.bin"
 
 	.align 2
-CryDirectSound_58DE2C:: @ 858DE2C
-	.incbin "baserom.gba", 0x58de2c, 0x1508
+Cry_Magcargo:: @ 858DE2C
+	.incbin "sound/direct_sound_samples/cry_magcargo.bin"
 
 	.align 2
-CryDirectSound_58F334:: @ 858F334
-	.incbin "baserom.gba", 0x58f334, 0xca8
+Cry_Swinub:: @ 858F334
+	.incbin "sound/direct_sound_samples/cry_swinub.bin"
 
 	.align 2
-CryDirectSound_58FFDC:: @ 858FFDC
-	.incbin "baserom.gba", 0x58ffdc, 0xcf4
+Cry_Piloswine:: @ 858FFDC
+	.incbin "sound/direct_sound_samples/cry_piloswine.bin"
 
 	.align 2
-CryDirectSound_590CD0:: @ 8590CD0
-	.incbin "baserom.gba", 0x590cd0, 0xce0
+Cry_Corsola:: @ 8590CD0
+	.incbin "sound/direct_sound_samples/cry_corsola.bin"
 
 	.align 2
-CryDirectSound_5919B0:: @ 85919B0
-	.incbin "baserom.gba", 0x5919b0, 0xa90
+Cry_Remoraid:: @ 85919B0
+	.incbin "sound/direct_sound_samples/cry_remoraid.bin"
 
 	.align 2
-CryDirectSound_592440:: @ 8592440
-	.incbin "baserom.gba", 0x592440, 0x1a44
+Cry_Octillery:: @ 8592440
+	.incbin "sound/direct_sound_samples/cry_octillery.bin"
 
 	.align 2
-CryDirectSound_593E84:: @ 8593E84
-	.incbin "baserom.gba", 0x593e84, 0x1034
+Cry_Delibird:: @ 8593E84
+	.incbin "sound/direct_sound_samples/cry_delibird.bin"
 
 	.align 2
-CryDirectSound_594EB8:: @ 8594EB8
-	.incbin "baserom.gba", 0x594eb8, 0xfc8
+Cry_Mantine:: @ 8594EB8
+	.incbin "sound/direct_sound_samples/cry_mantine.bin"
 
 	.align 2
-CryDirectSound_595E80:: @ 8595E80
-	.incbin "baserom.gba", 0x595e80, 0x1808
+Cry_Skarmory:: @ 8595E80
+	.incbin "sound/direct_sound_samples/cry_skarmory.bin"
 
 	.align 2
-CryDirectSound_597688:: @ 8597688
-	.incbin "baserom.gba", 0x597688, 0xca8
+Cry_Houndour:: @ 8597688
+	.incbin "sound/direct_sound_samples/cry_houndour.bin"
 
 	.align 2
-CryDirectSound_598330:: @ 8598330
-	.incbin "baserom.gba", 0x598330, 0x13b0
+Cry_Houndoom:: @ 8598330
+	.incbin "sound/direct_sound_samples/cry_houndoom.bin"
 
 	.align 2
-CryDirectSound_5996E0:: @ 85996E0
-	.incbin "baserom.gba", 0x5996e0, 0xdd8
+Cry_Kingdra:: @ 85996E0
+	.incbin "sound/direct_sound_samples/cry_kingdra.bin"
 
 	.align 2
-CryDirectSound_59A4B8:: @ 859A4B8
-	.incbin "baserom.gba", 0x59a4b8, 0xb50
+Cry_Phanpy:: @ 859A4B8
+	.incbin "sound/direct_sound_samples/cry_phanpy.bin"
 
 	.align 2
-CryDirectSound_59B008:: @ 859B008
-	.incbin "baserom.gba", 0x59b008, 0x1124
+Cry_Donphan:: @ 859B008
+	.incbin "sound/direct_sound_samples/cry_donphan.bin"
 
 	.align 2
-CryDirectSound_59C12C:: @ 859C12C
-	.incbin "baserom.gba", 0x59c12c, 0xfb8
+Cry_Porygon2:: @ 859C12C
+	.incbin "sound/direct_sound_samples/cry_porygon2.bin"
 
 	.align 2
-CryDirectSound_59D0E4:: @ 859D0E4
-	.incbin "baserom.gba", 0x59d0e4, 0x167c
+Cry_Stantler:: @ 859D0E4
+	.incbin "sound/direct_sound_samples/cry_stantler.bin"
 
 	.align 2
-CryDirectSound_59E760:: @ 859E760
-	.incbin "baserom.gba", 0x59e760, 0xa34
+Cry_Smeargle:: @ 859E760
+	.incbin "sound/direct_sound_samples/cry_smeargle.bin"
 
 	.align 2
-CryDirectSound_59F194:: @ 859F194
-	.incbin "baserom.gba", 0x59f194, 0x1028
+Cry_Tyrogue:: @ 859F194
+	.incbin "sound/direct_sound_samples/cry_tyrogue.bin"
 
 	.align 2
-CryDirectSound_5A01BC:: @ 85A01BC
-	.incbin "baserom.gba", 0x5a01bc, 0xde0
+Cry_Hitmontop:: @ 85A01BC
+	.incbin "sound/direct_sound_samples/cry_hitmontop.bin"
 
 	.align 2
-CryDirectSound_5A0F9C:: @ 85A0F9C
-	.incbin "baserom.gba", 0x5a0f9c, 0xbb4
+Cry_Smoochum:: @ 85A0F9C
+	.incbin "sound/direct_sound_samples/cry_smoochum.bin"
 
 	.align 2
-CryDirectSound_5A1B50:: @ 85A1B50
-	.incbin "baserom.gba", 0x5a1b50, 0xa8c
+Cry_Elekid:: @ 85A1B50
+	.incbin "sound/direct_sound_samples/cry_elekid.bin"
 
 	.align 2
-CryDirectSound_5A25DC:: @ 85A25DC
-	.incbin "baserom.gba", 0x5a25dc, 0xe70
+Cry_Magby:: @ 85A25DC
+	.incbin "sound/direct_sound_samples/cry_magby.bin"
 
 	.align 2
-CryDirectSound_5A344C:: @ 85A344C
-	.incbin "baserom.gba", 0x5a344c, 0xedc
+Cry_Miltank:: @ 85A344C
+	.incbin "sound/direct_sound_samples/cry_miltank.bin"
 
 	.align 2
-CryDirectSound_5A4328:: @ 85A4328
-	.incbin "baserom.gba", 0x5a4328, 0x1094
+Cry_Blissey:: @ 85A4328
+	.incbin "sound/direct_sound_samples/cry_blissey.bin"
 
 	.align 2
-CryDirectSound_5A53BC:: @ 85A53BC
-	.incbin "baserom.gba", 0x5a53bc, 0x1170
+Cry_Raikou:: @ 85A53BC
+	.incbin "sound/direct_sound_samples/cry_raikou.bin"
 
 	.align 2
-CryDirectSound_5A652C:: @ 85A652C
-	.incbin "baserom.gba", 0x5a652c, 0x1474
+Cry_Entei:: @ 85A652C
+	.incbin "sound/direct_sound_samples/cry_entei.bin"
 
 	.align 2
-CryDirectSound_5A79A0:: @ 85A79A0
-	.incbin "baserom.gba", 0x5a79a0, 0x1248
+Cry_Suicune:: @ 85A79A0
+	.incbin "sound/direct_sound_samples/cry_suicune.bin"
 
 	.align 2
-CryDirectSound_5A8BE8:: @ 85A8BE8
-	.incbin "baserom.gba", 0x5a8be8, 0xcb0
+Cry_Larvitar:: @ 85A8BE8
+	.incbin "sound/direct_sound_samples/cry_larvitar.bin"
 
 	.align 2
-CryDirectSound_5A9898:: @ 85A9898
-	.incbin "baserom.gba", 0x5a9898, 0x870
+Cry_Pupitar:: @ 85A9898
+	.incbin "sound/direct_sound_samples/cry_pupitar.bin"
 
 	.align 2
-CryDirectSound_5AA108:: @ 85AA108
-	.incbin "baserom.gba", 0x5aa108, 0x1760
+Cry_Tyranitar:: @ 85AA108
+	.incbin "sound/direct_sound_samples/cry_tyranitar.bin"
 
 	.align 2
-CryDirectSound_5AB868:: @ 85AB868
-	.incbin "baserom.gba", 0x5ab868, 0x25f8
+Cry_Lugia:: @ 85AB868
+	.incbin "sound/direct_sound_samples/cry_lugia.bin"
 
 	.align 2
-CryDirectSound_5ADE60:: @ 85ADE60
-	.incbin "baserom.gba", 0x5ade60, 0x1694
+Cry_HoOh:: @ 85ADE60
+	.incbin "sound/direct_sound_samples/cry_ho_oh.bin"
 
 	.align 2
-CryDirectSound_5AF4F4:: @ 85AF4F4
-	.incbin "baserom.gba", 0x5af4f4, 0xe78
+Cry_Celebi:: @ 85AF4F4
+	.incbin "sound/direct_sound_samples/cry_celebi.bin"
 
 	.align 2
-CryDirectSound_5B036C:: @ 85B036C
-	.incbin "baserom.gba", 0x5b036c, 0x860
+Cry_Kecleon:: @ 85B036C
+	.incbin "sound/direct_sound_samples/cry_kecleon.bin"
 
 	.align 2
-CryDirectSound_5B0BCC:: @ 85B0BCC
-	.incbin "baserom.gba", 0x5b0bcc, 0xac0
+Cry_Roselia:: @ 85B0BCC
+	.incbin "sound/direct_sound_samples/cry_roselia.bin"
 
 	.align 2
-CryDirectSound_5B168C:: @ 85B168C
-	.incbin "baserom.gba", 0x5b168c, 0x94c
+Cry_Torkoal:: @ 85B168C
+	.incbin "sound/direct_sound_samples/cry_torkoal.bin"
 
 	.align 2
-CryDirectSound_5B1FD8:: @ 85B1FD8
-	.incbin "baserom.gba", 0x5b1fd8, 0xc5c
+Cry_Electrike:: @ 85B1FD8
+	.incbin "sound/direct_sound_samples/cry_electrike.bin"
 
 	.align 2
-CryDirectSound_5B2C34:: @ 85B2C34
-	.incbin "baserom.gba", 0x5b2c34, 0x1508
+Cry_Manectric:: @ 85B2C34
+	.incbin "sound/direct_sound_samples/cry_manectric.bin"
 
 	.align 2
-CryDirectSound_5B413C:: @ 85B413C
-	.incbin "baserom.gba", 0x5b413c, 0xa98
+Cry_Duskull:: @ 85B413C
+	.incbin "sound/direct_sound_samples/cry_duskull.bin"
 
 	.align 2
-CryDirectSound_5B4BD4:: @ 85B4BD4
-	.incbin "baserom.gba", 0x5b4bd4, 0xc30
+Cry_Latias:: @ 85B4BD4
+	.incbin "sound/direct_sound_samples/cry_latias.bin"
 
 	.align 2
-CryDirectSound_5B5804:: @ 85B5804
-	.incbin "baserom.gba", 0x5b5804, 0xde0
+Cry_Wynaut:: @ 85B5804
+	.incbin "sound/direct_sound_samples/cry_wynaut.bin"
 
 	.align 2
-CryDirectSound_5B65E4:: @ 85B65E4
-	.incbin "baserom.gba", 0x5b65e4, 0xba0
+Cry_Seviper:: @ 85B65E4
+	.incbin "sound/direct_sound_samples/cry_seviper.bin"
 
 	.align 2
-CryDirectSound_5B7184:: @ 85B7184
-	.incbin "baserom.gba", 0x5b7184, 0x170c
+Cry_Sharpedo:: @ 85B7184
+	.incbin "sound/direct_sound_samples/cry_sharpedo.bin"
 
 	.align 2
-CryDirectSound_5B8890:: @ 85B8890
-	.incbin "baserom.gba", 0x5b8890, 0x990
+Cry_Zangoose:: @ 85B8890
+	.incbin "sound/direct_sound_samples/cry_zangoose.bin"
 
 	.align 2
-CryDirectSound_5B9220:: @ 85B9220
-	.incbin "baserom.gba", 0x5b9220, 0xa68
+Cry_Azurill:: @ 85B9220
+	.incbin "sound/direct_sound_samples/cry_azurill.bin"
 
 	.align 2
-CryDirectSound_5B9C88:: @ 85B9C88
-	.incbin "baserom.gba", 0x5b9c88, 0x598
+Cry_Swablu:: @ 85B9C88
+	.incbin "sound/direct_sound_samples/cry_swablu.bin"
 
 	.align 2
-CryDirectSound_5BA220:: @ 85BA220
-	.incbin "baserom.gba", 0x5ba220, 0xb1c
+Cry_Altaria:: @ 85BA220
+	.incbin "sound/direct_sound_samples/cry_altaria.bin"
 
 	.align 2
-CryDirectSound_5BAD3C:: @ 85BAD3C
-	.incbin "baserom.gba", 0x5bad3c, 0x954
+Cry_Unused265:: @ 85BAD3C
+	.incbin "sound/direct_sound_samples/cry_unused_265.bin"
 
 	.align 2
-CryDirectSound_5BB690:: @ 85BB690
-	.incbin "baserom.gba", 0x5bb690, 0x600
+Cry_Taillow:: @ 85BB690
+	.incbin "sound/direct_sound_samples/cry_taillow.bin"
 
 	.align 2
-CryDirectSound_5BBC90:: @ 85BBC90
-	.incbin "baserom.gba", 0x5bbc90, 0x904
+Cry_Swellow:: @ 85BBC90
+	.incbin "sound/direct_sound_samples/cry_swellow.bin"
 
 	.align 2
-CryDirectSound_5BC594:: @ 85BC594
-	.incbin "baserom.gba", 0x5bc594, 0x11b0
+Cry_Unused268:: @ 85BC594
+	.incbin "sound/direct_sound_samples/cry_unused_268.bin"
 
 	.align 2
-CryDirectSound_5BD744:: @ 85BD744
-	.incbin "baserom.gba", 0x5bd744, 0xc6c
+Cry_Spinda:: @ 85BD744
+	.incbin "sound/direct_sound_samples/cry_spinda.bin"
 
 	.align 2
-CryDirectSound_5BE3B0:: @ 85BE3B0
-	.incbin "baserom.gba", 0x5be3b0, 0x9a8
+Cry_Torchic:: @ 85BE3B0
+	.incbin "sound/direct_sound_samples/cry_torchic.bin"
 
 	.align 2
-CryDirectSound_5BED58:: @ 85BED58
-	.incbin "baserom.gba", 0x5bed58, 0x1cd4
+Cry_Combusken:: @ 85BED58
+	.incbin "sound/direct_sound_samples/cry_combusken.bin"
 
 	.align 2
-CryDirectSound_5C0A2C:: @ 85C0A2C
-	.incbin "baserom.gba", 0x5c0a2c, 0x1f80
+Cry_Blaziken:: @ 85C0A2C
+	.incbin "sound/direct_sound_samples/cry_blaziken.bin"
 
 	.align 2
-CryDirectSound_5C29AC:: @ 85C29AC
-	.incbin "baserom.gba", 0x5c29ac, 0xba8
+Cry_Treecko:: @ 85C29AC
+	.incbin "sound/direct_sound_samples/cry_treecko.bin"
 
 	.align 2
-CryDirectSound_5C3554:: @ 85C3554
-	.incbin "baserom.gba", 0x5c3554, 0x1474
+Cry_Grovyle:: @ 85C3554
+	.incbin "sound/direct_sound_samples/cry_grovyle.bin"
 
 	.align 2
-CryDirectSound_5C49C8:: @ 85C49C8
-	.incbin "baserom.gba", 0x5c49c8, 0x1a1c
+Cry_Sceptile:: @ 85C49C8
+	.incbin "sound/direct_sound_samples/cry_sceptile.bin"
 
 	.align 2
-CryDirectSound_5C63E4:: @ 85C63E4
-	.incbin "baserom.gba", 0x5c63e4, 0x784
+Cry_Mudkip:: @ 85C63E4
+	.incbin "sound/direct_sound_samples/cry_mudkip.bin"
 
 	.align 2
-CryDirectSound_5C6B68:: @ 85C6B68
-	.incbin "baserom.gba", 0x5c6b68, 0x1104
+Cry_Marshtomp:: @ 85C6B68
+	.incbin "sound/direct_sound_samples/cry_marshtomp.bin"
 
 	.align 2
-CryDirectSound_5C7C6C:: @ 85C7C6C
-	.incbin "baserom.gba", 0x5c7c6c, 0x1680
+Cry_Swampert:: @ 85C7C6C
+	.incbin "sound/direct_sound_samples/cry_swampert.bin"
 
 	.align 2
-CryDirectSound_5C92EC:: @ 85C92EC
-	.incbin "baserom.gba", 0x5c92ec, 0xbc8
+Cry_Pelipper:: @ 85C92EC
+	.incbin "sound/direct_sound_samples/cry_pelipper.bin"
 
 	.align 2
-CryDirectSound_5C9EB4:: @ 85C9EB4
-	.incbin "baserom.gba", 0x5c9eb4, 0xc40
+Cry_Wingull:: @ 85C9EB4
+	.incbin "sound/direct_sound_samples/cry_wingull.bin"
 
 	.align 2
-CryDirectSound_5CAAF4:: @ 85CAAF4
-	.incbin "baserom.gba", 0x5caaf4, 0xca8
+Cry_Banette:: @ 85CAAF4
+	.incbin "sound/direct_sound_samples/cry_banette.bin"
 
 	.align 2
-CryDirectSound_5CB79C:: @ 85CB79C
-	.incbin "baserom.gba", 0x5cb79c, 0x840
+Cry_Shuppet:: @ 85CB79C
+	.incbin "sound/direct_sound_samples/cry_shuppet.bin"
 
 	.align 2
-CryDirectSound_5CBFDC:: @ 85CBFDC
-	.incbin "baserom.gba", 0x5cbfdc, 0x468
+Cry_Lotad:: @ 85CBFDC
+	.incbin "sound/direct_sound_samples/cry_lotad.bin"
 
 	.align 2
-CryDirectSound_5CC444:: @ 85CC444
-	.incbin "baserom.gba", 0x5cc444, 0xe94
+Cry_Lombre:: @ 85CC444
+	.incbin "sound/direct_sound_samples/cry_lombre.bin"
 
 	.align 2
-CryDirectSound_5CD2D8:: @ 85CD2D8
-	.incbin "baserom.gba", 0x5cd2d8, 0x10d0
+Cry_Ludicolo:: @ 85CD2D8
+	.incbin "sound/direct_sound_samples/cry_ludicolo.bin"
 
 	.align 2
-CryDirectSound_5CE3A8:: @ 85CE3A8
-	.incbin "baserom.gba", 0x5ce3a8, 0x82c
+Cry_Seedot:: @ 85CE3A8
+	.incbin "sound/direct_sound_samples/cry_seedot.bin"
 
 	.align 2
-CryDirectSound_5CEBD4:: @ 85CEBD4
-	.incbin "baserom.gba", 0x5cebd4, 0xb68
+Cry_Nuzleaf:: @ 85CEBD4
+	.incbin "sound/direct_sound_samples/cry_nuzleaf.bin"
 
 	.align 2
-CryDirectSound_5CF73C:: @ 85CF73C
-	.incbin "baserom.gba", 0x5cf73c, 0x13c4
+Cry_Shiftry:: @ 85CF73C
+	.incbin "sound/direct_sound_samples/cry_shiftry.bin"
 
 	.align 2
-CryDirectSound_5D0B00:: @ 85D0B00
-	.incbin "baserom.gba", 0x5d0b00, 0xa14
+Cry_Carvanha:: @ 85D0B00
+	.incbin "sound/direct_sound_samples/cry_carvanha.bin"
 
 	.align 2
-CryDirectSound_5D1514:: @ 85D1514
-	.incbin "baserom.gba", 0x5d1514, 0x8cc
+Cry_Wurmple:: @ 85D1514
+	.incbin "sound/direct_sound_samples/cry_wurmple.bin"
 
 	.align 2
-CryDirectSound_5D1DE0:: @ 85D1DE0
-	.incbin "baserom.gba", 0x5d1de0, 0x102c
+Cry_Silcoon:: @ 85D1DE0
+	.incbin "sound/direct_sound_samples/cry_silcoon.bin"
 
 	.align 2
-CryDirectSound_5D2E0C:: @ 85D2E0C
-	.incbin "baserom.gba", 0x5d2e0c, 0x838
+Cry_Beautifly:: @ 85D2E0C
+	.incbin "sound/direct_sound_samples/cry_beautifly.bin"
 
 	.align 2
-CryDirectSound_5D3644:: @ 85D3644
-	.incbin "baserom.gba", 0x5d3644, 0x1044
+Cry_Cascoon:: @ 85D3644
+	.incbin "sound/direct_sound_samples/cry_cascoon.bin"
 
 	.align 2
-CryDirectSound_5D4688:: @ 85D4688
-	.incbin "baserom.gba", 0x5d4688, 0xcac
+Cry_Dustox:: @ 85D4688
+	.incbin "sound/direct_sound_samples/cry_dustox.bin"
 
 	.align 2
-CryDirectSound_5D5334:: @ 85D5334
-	.incbin "baserom.gba", 0x5d5334, 0xa1c
+Cry_Ralts:: @ 85D5334
+	.incbin "sound/direct_sound_samples/cry_ralts.bin"
 
 	.align 2
-CryDirectSound_5D5D50:: @ 85D5D50
-	.incbin "baserom.gba", 0x5d5d50, 0xc30
+Cry_Kirlia:: @ 85D5D50
+	.incbin "sound/direct_sound_samples/cry_kirlia.bin"
 
 	.align 2
-CryDirectSound_5D6980:: @ 85D6980
-	.incbin "baserom.gba", 0x5d6980, 0x1864
+Cry_Gardevoir:: @ 85D6980
+	.incbin "sound/direct_sound_samples/cry_gardevoir.bin"
 
 	.align 2
-CryDirectSound_5D81E4:: @ 85D81E4
-	.incbin "baserom.gba", 0x5d81e4, 0x884
+Cry_Slakoth:: @ 85D81E4
+	.incbin "sound/direct_sound_samples/cry_slakoth.bin"
 
 	.align 2
-CryDirectSound_5D8A68:: @ 85D8A68
-	.incbin "baserom.gba", 0x5d8a68, 0xe58
+Cry_Vigoroth:: @ 85D8A68
+	.incbin "sound/direct_sound_samples/cry_vigoroth.bin"
 
 	.align 2
-CryDirectSound_5D98C0:: @ 85D98C0
-	.incbin "baserom.gba", 0x5d98c0, 0x9ec
+Cry_Slaking:: @ 85D98C0
+	.incbin "sound/direct_sound_samples/cry_slaking.bin"
 
 	.align 2
-CryDirectSound_5DA2AC:: @ 85DA2AC
-	.incbin "baserom.gba", 0x5da2ac, 0x670
+Cry_Nincada:: @ 85DA2AC
+	.incbin "sound/direct_sound_samples/cry_nincada.bin"
 
 	.align 2
-CryDirectSound_5DA91C:: @ 85DA91C
-	.incbin "baserom.gba", 0x5da91c, 0xc28
+Cry_Ninjask:: @ 85DA91C
+	.incbin "sound/direct_sound_samples/cry_ninjask.bin"
 
 	.align 2
-CryDirectSound_5DB544:: @ 85DB544
-	.incbin "baserom.gba", 0x5db544, 0x7b8
+Cry_Shedinja:: @ 85DB544
+	.incbin "sound/direct_sound_samples/cry_shedinja.bin"
 
 	.align 2
-CryDirectSound_5DBCFC:: @ 85DBCFC
-	.incbin "baserom.gba", 0x5dbcfc, 0x75c
+Cry_Makuhita:: @ 85DBCFC
+	.incbin "sound/direct_sound_samples/cry_makuhita.bin"
 
 	.align 2
-CryDirectSound_5DC458:: @ 85DC458
-	.incbin "baserom.gba", 0x5dc458, 0x10b8
+Cry_Hariyama:: @ 85DC458
+	.incbin "sound/direct_sound_samples/cry_hariyama.bin"
 
 	.align 2
-CryDirectSound_5DD510:: @ 85DD510
-	.incbin "baserom.gba", 0x5dd510, 0xd64
+Cry_Nosepass:: @ 85DD510
+	.incbin "sound/direct_sound_samples/cry_nosepass.bin"
 
 	.align 2
-CryDirectSound_5DE274:: @ 85DE274
-	.incbin "baserom.gba", 0x5de274, 0x14e4
+Cry_Glalie:: @ 85DE274
+	.incbin "sound/direct_sound_samples/cry_glalie.bin"
 
 	.align 2
-CryDirectSound_5DF758:: @ 85DF758
-	.incbin "baserom.gba", 0x5df758, 0x8fc
+Cry_Plusle:: @ 85DF758
+	.incbin "sound/direct_sound_samples/cry_plusle.bin"
 
 	.align 2
-CryDirectSound_5E0054:: @ 85E0054
-	.incbin "baserom.gba", 0x5e0054, 0x1008
+Cry_Minun:: @ 85E0054
+	.incbin "sound/direct_sound_samples/cry_minun.bin"
 
 	.align 2
-CryDirectSound_5E105C:: @ 85E105C
-	.incbin "baserom.gba", 0x5e105c, 0xa80
+Cry_Surskit:: @ 85E105C
+	.incbin "sound/direct_sound_samples/cry_surskit.bin"
 
 	.align 2
-CryDirectSound_5E1ADC:: @ 85E1ADC
-	.incbin "baserom.gba", 0x5e1adc, 0x13b4
+Cry_Masquerain:: @ 85E1ADC
+	.incbin "sound/direct_sound_samples/cry_masquerain.bin"
 
 	.align 2
-CryDirectSound_5E2E90:: @ 85E2E90
-	.incbin "baserom.gba", 0x5e2e90, 0x714
+Cry_Skitty:: @ 85E2E90
+	.incbin "sound/direct_sound_samples/cry_skitty.bin"
 
 	.align 2
-CryDirectSound_5E35A4:: @ 85E35A4
-	.incbin "baserom.gba", 0x5e35a4, 0x1518
+Cry_Delcatty:: @ 85E35A4
+	.incbin "sound/direct_sound_samples/cry_delcatty.bin"
 
 	.align 2
-CryDirectSound_5E4ABC:: @ 85E4ABC
-	.incbin "baserom.gba", 0x5e4abc, 0x804
+Cry_Gulpin:: @ 85E4ABC
+	.incbin "sound/direct_sound_samples/cry_gulpin.bin"
 
 	.align 2
-CryDirectSound_5E52C0:: @ 85E52C0
-	.incbin "baserom.gba", 0x5e52c0, 0x1160
+Cry_Swalot:: @ 85E52C0
+	.incbin "sound/direct_sound_samples/cry_swalot.bin"
 
 	.align 2
-CryDirectSound_5E6420:: @ 85E6420
-	.incbin "baserom.gba", 0x5e6420, 0x94c
+Cry_Numel:: @ 85E6420
+	.incbin "sound/direct_sound_samples/cry_numel.bin"
 
 	.align 2
-CryDirectSound_5E6D6C:: @ 85E6D6C
-	.incbin "baserom.gba", 0x5e6d6c, 0x1720
+Cry_Camerupt:: @ 85E6D6C
+	.incbin "sound/direct_sound_samples/cry_camerupt.bin"
 
 	.align 2
-CryDirectSound_5E848C:: @ 85E848C
-	.incbin "baserom.gba", 0x5e848c, 0x93c
+Cry_Barboach:: @ 85E848C
+	.incbin "sound/direct_sound_samples/cry_barboach.bin"
 
 	.align 2
-CryDirectSound_5E8DC8:: @ 85E8DC8
-	.incbin "baserom.gba", 0x5e8dc8, 0x10fc
+Cry_Whiscash:: @ 85E8DC8
+	.incbin "sound/direct_sound_samples/cry_whiscash.bin"
 
 	.align 2
-CryDirectSound_5E9EC4:: @ 85E9EC4
-	.incbin "baserom.gba", 0x5e9ec4, 0xc04
+Cry_Corphish:: @ 85E9EC4
+	.incbin "sound/direct_sound_samples/cry_corphish.bin"
 
 	.align 2
-CryDirectSound_5EAAC8:: @ 85EAAC8
-	.incbin "baserom.gba", 0x5eaac8, 0x18b8
+Cry_Crawdaunt:: @ 85EAAC8
+	.incbin "sound/direct_sound_samples/cry_crawdaunt.bin"
 
 	.align 2
-CryDirectSound_5EC380:: @ 85EC380
-	.incbin "baserom.gba", 0x5ec380, 0x740
+Cry_Spoink:: @ 85EC380
+	.incbin "sound/direct_sound_samples/cry_spoink.bin"
 
 	.align 2
-CryDirectSound_5ECAC0:: @ 85ECAC0
-	.incbin "baserom.gba", 0x5ecac0, 0xca0
+Cry_Grumpig:: @ 85ECAC0
+	.incbin "sound/direct_sound_samples/cry_grumpig.bin"
 
 	.align 2
-CryDirectSound_5ED760:: @ 85ED760
-	.incbin "baserom.gba", 0x5ed760, 0xa24
+Cry_Trapinch:: @ 85ED760
+	.incbin "sound/direct_sound_samples/cry_trapinch.bin"
 
 	.align 2
-CryDirectSound_5EE184:: @ 85EE184
-	.incbin "baserom.gba", 0x5ee184, 0xe04
+Cry_Vibrava:: @ 85EE184
+	.incbin "sound/direct_sound_samples/cry_vibrava.bin"
 
 	.align 2
-CryDirectSound_5EEF88:: @ 85EEF88
-	.incbin "baserom.gba", 0x5eef88, 0x1a08
+Cry_Flygon:: @ 85EEF88
+	.incbin "sound/direct_sound_samples/cry_flygon.bin"
 
 	.align 2
-CryDirectSound_5F0990:: @ 85F0990
-	.incbin "baserom.gba", 0x5f0990, 0x8f0
+Cry_Cacnea:: @ 85F0990
+	.incbin "sound/direct_sound_samples/cry_cacnea.bin"
 
 	.align 2
-CryDirectSound_5F1280:: @ 85F1280
-	.incbin "baserom.gba", 0x5f1280, 0x16b0
+Cry_Cacturne:: @ 85F1280
+	.incbin "sound/direct_sound_samples/cry_cacturne.bin"
 
 	.align 2
-CryDirectSound_5F2930:: @ 85F2930
-	.incbin "baserom.gba", 0x5f2930, 0xc84
+Cry_Baltoy:: @ 85F2930
+	.incbin "sound/direct_sound_samples/cry_baltoy.bin"
 
 	.align 2
-CryDirectSound_5F35B4:: @ 85F35B4
-	.incbin "baserom.gba", 0x5f35b4, 0x1360
+Cry_Claydol:: @ 85F35B4
+	.incbin "sound/direct_sound_samples/cry_claydol.bin"
 
 	.align 2
-CryDirectSound_5F4914:: @ 85F4914
-	.incbin "baserom.gba", 0x5f4914, 0x17fc
+Cry_Lunatone:: @ 85F4914
+	.incbin "sound/direct_sound_samples/cry_lunatone.bin"
 
 	.align 2
-CryDirectSound_5F6110:: @ 85F6110
-	.incbin "baserom.gba", 0x5f6110, 0x102c
+Cry_Solrock:: @ 85F6110
+	.incbin "sound/direct_sound_samples/cry_solrock.bin"
 
 	.align 2
-CryDirectSound_5F713C:: @ 85F713C
-	.incbin "baserom.gba", 0x5f713c, 0x7d4
+Cry_Feebas:: @ 85F713C
+	.incbin "sound/direct_sound_samples/cry_feebas.bin"
 
 	.align 2
-CryDirectSound_5F7910:: @ 85F7910
-	.incbin "baserom.gba", 0x5f7910, 0x2744
+Cry_Milotic:: @ 85F7910
+	.incbin "sound/direct_sound_samples/cry_milotic.bin"
 
 	.align 2
-CryDirectSound_5FA054:: @ 85FA054
-	.incbin "baserom.gba", 0x5fa054, 0xa7c
+Cry_Absol:: @ 85FA054
+	.incbin "sound/direct_sound_samples/cry_absol.bin"
 
 	.align 2
-CryDirectSound_5FAAD0:: @ 85FAAD0
-	.incbin "baserom.gba", 0x5faad0, 0x820
+Cry_Meditite:: @ 85FAAD0
+	.incbin "sound/direct_sound_samples/cry_meditite.bin"
 
 	.align 2
-CryDirectSound_5FB2F0:: @ 85FB2F0
-	.incbin "baserom.gba", 0x5fb2f0, 0x1084
+Cry_Medicham:: @ 85FB2F0
+	.incbin "sound/direct_sound_samples/cry_medicham.bin"
 
 	.align 2
-CryDirectSound_5FC374:: @ 85FC374
-	.incbin "baserom.gba", 0x5fc374, 0x5b4
+Cry_Spheal:: @ 85FC374
+	.incbin "sound/direct_sound_samples/cry_spheal.bin"
 
 	.align 2
-CryDirectSound_5FC928:: @ 85FC928
-	.incbin "baserom.gba", 0x5fc928, 0xbd8
+Cry_Sealeo:: @ 85FC928
+	.incbin "sound/direct_sound_samples/cry_sealeo.bin"
 
 	.align 2
-CryDirectSound_5FD500:: @ 85FD500
-	.incbin "baserom.gba", 0x5fd500, 0x244c
+Cry_Walrein:: @ 85FD500
+	.incbin "sound/direct_sound_samples/cry_walrein.bin"
 
 	.align 2
-CryDirectSound_5FF94C:: @ 85FF94C
-	.incbin "baserom.gba", 0x5ff94c, 0x1250
+Cry_Clamperl:: @ 85FF94C
+	.incbin "sound/direct_sound_samples/cry_clamperl.bin"
 
 	.align 2
-CryDirectSound_600B9C:: @ 8600B9C
-	.incbin "baserom.gba", 0x600b9c, 0xfe8
+Cry_Huntail:: @ 8600B9C
+	.incbin "sound/direct_sound_samples/cry_huntail.bin"
 
 	.align 2
-CryDirectSound_601B84:: @ 8601B84
-	.incbin "baserom.gba", 0x601b84, 0x166c
+Cry_Gorebyss:: @ 8601B84
+	.incbin "sound/direct_sound_samples/cry_gorebyss.bin"
 
 	.align 2
-CryDirectSound_6031F0:: @ 86031F0
-	.incbin "baserom.gba", 0x6031f0, 0x9a8
+Cry_Lileep:: @ 86031F0
+	.incbin "sound/direct_sound_samples/cry_lileep.bin"
 
 	.align 2
-CryDirectSound_603B98:: @ 8603B98
-	.incbin "baserom.gba", 0x603b98, 0x1d30
+Cry_Cradily:: @ 8603B98
+	.incbin "sound/direct_sound_samples/cry_cradily.bin"
 
 	.align 2
-CryDirectSound_6058C8:: @ 86058C8
-	.incbin "baserom.gba", 0x6058c8, 0xbb8
+Cry_Anorith:: @ 86058C8
+	.incbin "sound/direct_sound_samples/cry_anorith.bin"
 
 	.align 2
-CryDirectSound_606480:: @ 8606480
-	.incbin "baserom.gba", 0x606480, 0x16d4
+Cry_Armaldo:: @ 8606480
+	.incbin "sound/direct_sound_samples/cry_armaldo.bin"
 
 	.align 2
-CryDirectSound_607B54:: @ 8607B54
-	.incbin "baserom.gba", 0x607b54, 0x9a0
+Cry_Beldum:: @ 8607B54
+	.incbin "sound/direct_sound_samples/cry_beldum.bin"
 
 	.align 2
-CryDirectSound_6084F4:: @ 86084F4
-	.incbin "baserom.gba", 0x6084f4, 0x12d4
+Cry_Metang:: @ 86084F4
+	.incbin "sound/direct_sound_samples/cry_metang.bin"
 
 	.align 2
-CryDirectSound_6097C8:: @ 86097C8
-	.incbin "baserom.gba", 0x6097c8, 0x2778
+Cry_Metagross:: @ 86097C8
+	.incbin "sound/direct_sound_samples/cry_metagross.bin"
 
 	.align 2
-CryDirectSound_60BF40:: @ 860BF40
-	.incbin "baserom.gba", 0x60bf40, 0x7d4
+Cry_Bagon:: @ 860BF40
+	.incbin "sound/direct_sound_samples/cry_bagon.bin"
 
 	.align 2
-CryDirectSound_60C714:: @ 860C714
-	.incbin "baserom.gba", 0x60c714, 0x1408
+Cry_Shelgon:: @ 860C714
+	.incbin "sound/direct_sound_samples/cry_shelgon.bin"
 
 	.align 2
-CryDirectSound_60DB1C:: @ 860DB1C
-	.incbin "baserom.gba", 0x60db1c, 0x1fdc
+Cry_Regirock:: @ 860DB1C
+	.incbin "sound/direct_sound_samples/cry_regirock.bin"
 
 	.align 2
-CryDirectSound_60FAF8:: @ 860FAF8
-	.incbin "baserom.gba", 0x60faf8, 0x2000
+Cry_Regice:: @ 860FAF8
+	.incbin "sound/direct_sound_samples/cry_regice.bin"
 
 	.align 2
-CryDirectSound_611AF8:: @ 8611AF8
-	.incbin "baserom.gba", 0x611af8, 0x1704
+Cry_Registeel:: @ 8611AF8
+	.incbin "sound/direct_sound_samples/cry_registeel.bin"
 
 	.align 2
-CryDirectSound_6131FC:: @ 86131FC
-	.incbin "baserom.gba", 0x6131fc, 0xc98
+Cry_Castform:: @ 86131FC
+	.incbin "sound/direct_sound_samples/cry_castform.bin"
 
 	.align 2
-CryDirectSound_613E94:: @ 8613E94
-	.incbin "baserom.gba", 0x613e94, 0xb88
+Cry_Volbeat:: @ 8613E94
+	.incbin "sound/direct_sound_samples/cry_volbeat.bin"
 
 	.align 2
-CryDirectSound_614A1C:: @ 8614A1C
-	.incbin "baserom.gba", 0x614a1c, 0x1118
+Cry_Illumise:: @ 8614A1C
+	.incbin "sound/direct_sound_samples/cry_illumise.bin"
 
 	.align 2
-CryDirectSound_615B34:: @ 8615B34
-	.incbin "baserom.gba", 0x615b34, 0x948
+Cry_Poochyena:: @ 8615B34
+	.incbin "sound/direct_sound_samples/cry_poochyena.bin"
 
 	.align 2
-CryDirectSound_61647C:: @ 861647C
-	.incbin "baserom.gba", 0x61647c, 0x138c
+Cry_Mightyena:: @ 861647C
+	.incbin "sound/direct_sound_samples/cry_mightyena.bin"
 
 	.align 2
-CryDirectSound_617808:: @ 8617808
-	.incbin "baserom.gba", 0x617808, 0xdb8
+Cry_Dusclops:: @ 8617808
+	.incbin "sound/direct_sound_samples/cry_dusclops.bin"
 
 	.align 2
-CryDirectSound_6185C0:: @ 86185C0
-	.incbin "baserom.gba", 0x6185c0, 0xba4
+Cry_Sableye:: @ 86185C0
+	.incbin "sound/direct_sound_samples/cry_sableye.bin"
 
 	.align 2
-CryDirectSound_619164:: @ 8619164
-	.incbin "baserom.gba", 0x619164, 0xb80
+Cry_Mawile:: @ 8619164
+	.incbin "sound/direct_sound_samples/cry_mawile.bin"
 
 	.align 2
-CryDirectSound_619CE4:: @ 8619CE4
-	.incbin "baserom.gba", 0x619ce4, 0x92c
+Cry_Aron:: @ 8619CE4
+	.incbin "sound/direct_sound_samples/cry_aron.bin"
 
 	.align 2
-CryDirectSound_61A610:: @ 861A610
-	.incbin "baserom.gba", 0x61a610, 0x14d8
+Cry_Lairon:: @ 861A610
+	.incbin "sound/direct_sound_samples/cry_lairon.bin"
 
 	.align 2
-CryDirectSound_61BAE8:: @ 861BAE8
-	.incbin "baserom.gba", 0x61bae8, 0x19a4
+Cry_Aggron:: @ 861BAE8
+	.incbin "sound/direct_sound_samples/cry_aggron.bin"
 
 	.align 2
-CryDirectSound_61D48C:: @ 861D48C
-	.incbin "baserom.gba", 0x61d48c, 0x1430
+Cry_Relicanth:: @ 861D48C
+	.incbin "sound/direct_sound_samples/cry_relicanth.bin"
 
 	.align 2
-CryDirectSound_61E8BC:: @ 861E8BC
-	.incbin "baserom.gba", 0x61e8bc, 0x4dc
+Cry_Luvdisc:: @ 861E8BC
+	.incbin "sound/direct_sound_samples/cry_luvdisc.bin"
 
 	.align 2
-CryDirectSound_61ED98:: @ 861ED98
-	.incbin "baserom.gba", 0x61ed98, 0x250c
+Cry_Groudon:: @ 861ED98
+	.incbin "sound/direct_sound_samples/cry_groudon.bin"
 
 	.align 2
-CryDirectSound_6212A4:: @ 86212A4
-	.incbin "baserom.gba", 0x6212a4, 0x23b8
+Cry_Kyogre:: @ 86212A4
+	.incbin "sound/direct_sound_samples/cry_kyogre.bin"
 
 	.align 2
-CryDirectSound_62365C:: @ 862365C
-	.incbin "baserom.gba", 0x62365c, 0x1d2c
+Cry_Rayquaza:: @ 862365C
+	.incbin "sound/direct_sound_samples/cry_rayquaza.bin"
 
 	.align 2
-CryDirectSound_625388:: @ 8625388
-	.incbin "baserom.gba", 0x625388, 0x191c
+Cry_Salamence:: @ 8625388
+	.incbin "sound/direct_sound_samples/cry_salamence.bin"
 
 	.align 2
-CryDirectSound_626CA4:: @ 8626CA4
-	.incbin "baserom.gba", 0x626ca4, 0xcc0
+Cry_Breloom:: @ 8626CA4
+	.incbin "sound/direct_sound_samples/cry_breloom.bin"
 
 	.align 2
-CryDirectSound_627964:: @ 8627964
-	.incbin "baserom.gba", 0x627964, 0x8d8
+Cry_Shroomish:: @ 8627964
+	.incbin "sound/direct_sound_samples/cry_shroomish.bin"
 
 	.align 2
-CryDirectSound_62823C:: @ 862823C
-	.incbin "baserom.gba", 0x62823c, 0x1e9c
+Cry_Linoone:: @ 862823C
+	.incbin "sound/direct_sound_samples/cry_linoone.bin"
 
 	.align 2
-CryDirectSound_62A0D8:: @ 862A0D8
-	.incbin "baserom.gba", 0x62a0d8, 0x20c4
+Cry_Tropius:: @ 862A0D8
+	.incbin "sound/direct_sound_samples/cry_tropius.bin"
 
 	.align 2
-CryDirectSound_62C19C:: @ 862C19C
-	.incbin "baserom.gba", 0x62c19c, 0x1c60
+Cry_Wailmer:: @ 862C19C
+	.incbin "sound/direct_sound_samples/cry_wailmer.bin"
 
 	.align 2
-CryDirectSound_62DDFC:: @ 862DDFC
-	.incbin "baserom.gba", 0x62ddfc, 0xb90
+Cry_Zigzagoon:: @ 862DDFC
+	.incbin "sound/direct_sound_samples/cry_zigzagoon.bin"
 
 	.align 2
-CryDirectSound_62E98C:: @ 862E98C
-	.incbin "baserom.gba", 0x62e98c, 0x1c48
+Cry_Exploud:: @ 862E98C
+	.incbin "sound/direct_sound_samples/cry_exploud.bin"
 
 	.align 2
-CryDirectSound_6305D4:: @ 86305D4
-	.incbin "baserom.gba", 0x6305d4, 0xd28
+Cry_Loudred:: @ 86305D4
+	.incbin "sound/direct_sound_samples/cry_loudred.bin"
 
 	.align 2
-CryDirectSound_6312FC:: @ 86312FC
-	.incbin "baserom.gba", 0x6312fc, 0x2a10
+Cry_Wailord:: @ 86312FC
+	.incbin "sound/direct_sound_samples/cry_wailord.bin"
 
 	.align 2
-CryDirectSound_633D0C:: @ 8633D0C
-	.incbin "baserom.gba", 0x633d0c, 0x824
+Cry_Whismur:: @ 8633D0C
+	.incbin "sound/direct_sound_samples/cry_whismur.bin"
 
 	.align 2
-CryDirectSound_634530:: @ 8634530
-	.incbin "baserom.gba", 0x634530, 0x1108
+Cry_Snorunt:: @ 8634530
+	.incbin "sound/direct_sound_samples/cry_snorunt.bin"
 
 	.align 2
-CryDirectSound_635638:: @ 8635638
-	.incbin "baserom.gba", 0x635638, 0x15f8
+Cry_Latios:: @ 8635638
+	.incbin "sound/direct_sound_samples/cry_latios.bin"
 
 	.align 2
-CryDirectSound_636C30:: @ 8636C30
-	.incbin "baserom.gba", 0x636c30, 0xd84
+Cry_Jirachi:: @ 8636C30
+	.incbin "sound/direct_sound_samples/cry_jirachi.bin"
 
 	.align 2
-CryDirectSound_6379B4:: @ 86379B4
-	.incbin "baserom.gba", 0x6379b4, 0x14d4
+Cry_Deoxys:: @ 86379B4
+	.incbin "sound/direct_sound_samples/cry_deoxys.bin"
 
 	.align 2
-CryDirectSound_638E88:: @ 8638E88
-	.incbin "baserom.gba", 0x638e88, 0xa10
+Cry_Chimecho:: @ 8638E88
+	.incbin "sound/direct_sound_samples/cry_chimecho.bin"
 
 	.align 2
 DirectSoundWaveData_8639898:: @ 8639898
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8639898.bin"
-	.incbin "sound/direct_sound_samples/8639898.pcm"
 
 	.align 2
 DirectSoundWaveData_8639EF8:: @ 8639EF8
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8639EF8.bin"
-	.incbin "sound/direct_sound_samples/8639EF8.pcm"
 
 	.align 2
 DirectSoundWaveData_863A3DC:: @ 863A3DC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863A3DC.bin"
-	.incbin "sound/direct_sound_samples/863A3DC.pcm"
 
 	.align 2
 DirectSoundWaveData_863AD2C:: @ 863AD2C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863AD2C.bin"
-	.incbin "sound/direct_sound_samples/863AD2C.pcm"
 
 	.align 2
 DirectSoundWaveData_863B79C:: @ 863B79C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/863B79C.bin"
-	.incbin "sound/direct_sound_samples/863B79C.pcm"
 
 	.align 2
 DirectSoundWaveData_863BABC:: @ 863BABC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863BABC.bin"
-	.incbin "sound/direct_sound_samples/863BABC.pcm"
 
 	.align 2
 DirectSoundWaveData_863C744:: @ 863C744
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863C744.bin"
-	.incbin "sound/direct_sound_samples/863C744.pcm"
 
 	.align 2
 DirectSoundWaveData_863CD64:: @ 863CD64
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/863CD64.bin"
-	.incbin "sound/direct_sound_samples/863CD64.pcm"
 
 	.align 2
 DirectSoundWaveData_863D0EC:: @ 863D0EC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863D0EC.bin"
-	.incbin "sound/direct_sound_samples/863D0EC.pcm"
 
 	.align 2
 DirectSoundWaveData_863DED0:: @ 863DED0
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863DED0.bin"
-	.incbin "sound/direct_sound_samples/863DED0.pcm"
 
 	.align 2
 DirectSoundWaveData_863E840:: @ 863E840
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/863E840.bin"
-	.incbin "sound/direct_sound_samples/863E840.pcm"
 
 	.align 2
 DirectSoundWaveData_863EBDC:: @ 863EBDC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863EBDC.bin"
-	.incbin "sound/direct_sound_samples/863EBDC.pcm"
 
 	.align 2
 DirectSoundWaveData_863F390:: @ 863F390
-	.4byte 0
 	.incbin "sound/direct_sound_samples/863F390.bin"
-	.incbin "sound/direct_sound_samples/863F390.pcm"
 
 	.align 2
 DirectSoundWaveData_86400EC:: @ 86400EC
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/86400EC.bin"
-	.incbin "sound/direct_sound_samples/86400EC.pcm"
 
 	.align 2
 DirectSoundWaveData_8640330:: @ 8640330
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8640330.bin"
-	.incbin "sound/direct_sound_samples/8640330.pcm"
 
 	.align 2
 DirectSoundWaveData_8641170:: @ 8641170
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8641170.bin"
-	.incbin "sound/direct_sound_samples/8641170.pcm"
 
 	.align 2
 DirectSoundWaveData_8641AC4:: @ 8641AC4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8641AC4.bin"
-	.incbin "sound/direct_sound_samples/8641AC4.pcm"
 
 	.align 2
 DirectSoundWaveData_8641E18:: @ 8641E18
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8641E18.bin"
-	.incbin "sound/direct_sound_samples/8641E18.pcm"
 
 	.align 2
 DirectSoundWaveData_864244C:: @ 864244C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864244C.bin"
-	.incbin "sound/direct_sound_samples/864244C.pcm"
 
 	.align 2
 DirectSoundWaveData_86430B8:: @ 86430B8
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/86430B8.bin"
-	.incbin "sound/direct_sound_samples/86430B8.pcm"
 
 	.align 2
 DirectSoundWaveData_8643650:: @ 8643650
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8643650.bin"
-	.incbin "sound/direct_sound_samples/8643650.pcm"
 
 	.align 2
 DirectSoundWaveData_8644154:: @ 8644154
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8644154.bin"
-	.incbin "sound/direct_sound_samples/8644154.pcm"
 
 	.align 2
 DirectSoundWaveData_8644758:: @ 8644758
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8644758.bin"
-	.incbin "sound/direct_sound_samples/8644758.pcm"
 
 	.align 2
 DirectSoundWaveData_8644950:: @ 8644950
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8644950.bin"
-	.incbin "sound/direct_sound_samples/8644950.pcm"
 
 	.align 2
 DirectSoundWaveData_86452B4:: @ 86452B4
-	.4byte 0
 	.incbin "sound/direct_sound_samples/86452B4.bin"
-	.incbin "sound/direct_sound_samples/86452B4.pcm"
 
 	.align 2
 DirectSoundWaveData_8646240:: @ 8646240
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8646240.bin"
-	.incbin "sound/direct_sound_samples/8646240.pcm"
 
 	.align 2
 DirectSoundWaveData_8646878:: @ 8646878
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8646878.bin"
-	.incbin "sound/direct_sound_samples/8646878.pcm"
 
 	.align 2
 DirectSoundWaveData_864734C:: @ 864734C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864734C.bin"
-	.incbin "sound/direct_sound_samples/864734C.pcm"
 
 	.align 2
 DirectSoundWaveData_8648290:: @ 8648290
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8648290.bin"
-	.incbin "sound/direct_sound_samples/8648290.pcm"
 
 	.align 2
 DirectSoundWaveData_8648808:: @ 8648808
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8648808.bin"
-	.incbin "sound/direct_sound_samples/8648808.pcm"
 
 	.align 2
 DirectSoundWaveData_8649654:: @ 8649654
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8649654.bin"
-	.incbin "sound/direct_sound_samples/8649654.pcm"
 
 	.align 2
 DirectSoundWaveData_864A55C:: @ 864A55C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/864A55C.bin"
-	.incbin "sound/direct_sound_samples/864A55C.pcm"
 
 	.align 2
 DirectSoundWaveData_864B030:: @ 864B030
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864B030.bin"
-	.incbin "sound/direct_sound_samples/864B030.pcm"
 
 	.align 2
 DirectSoundWaveData_864BBC4:: @ 864BBC4
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864BBC4.bin"
-	.incbin "sound/direct_sound_samples/864BBC4.pcm"
 
 	.align 2
 DirectSoundWaveData_864C59C:: @ 864C59C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/864C59C.bin"
-	.incbin "sound/direct_sound_samples/864C59C.pcm"
 
 	.align 2
 DirectSoundWaveData_864CBDC:: @ 864CBDC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864CBDC.bin"
-	.incbin "sound/direct_sound_samples/864CBDC.pcm"
 
 	.align 2
 DirectSoundWaveData_864D6BC:: @ 864D6BC
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864D6BC.bin"
-	.incbin "sound/direct_sound_samples/864D6BC.pcm"
 
 	.align 2
 DirectSoundWaveData_864DCF8:: @ 864DCF8
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/864DCF8.bin"
-	.incbin "sound/direct_sound_samples/864DCF8.pcm"
 
 	.align 2
 DirectSoundWaveData_864E410:: @ 864E410
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864E410.bin"
-	.incbin "sound/direct_sound_samples/864E410.pcm"
 
 	.align 2
 DirectSoundWaveData_864ED4C:: @ 864ED4C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864ED4C.bin"
-	.incbin "sound/direct_sound_samples/864ED4C.pcm"
 
 	.align 2
 DirectSoundWaveData_864F508:: @ 864F508
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/864F508.bin"
-	.incbin "sound/direct_sound_samples/864F508.pcm"
 
 	.align 2
 DirectSoundWaveData_864FA6C:: @ 864FA6C
-	.4byte 0
 	.incbin "sound/direct_sound_samples/864FA6C.bin"
-	.incbin "sound/direct_sound_samples/864FA6C.pcm"
 
 	.align 2
 DirectSoundWaveData_86507E0:: @ 86507E0
-	.4byte 0
 	.incbin "sound/direct_sound_samples/86507E0.bin"
-	.incbin "sound/direct_sound_samples/86507E0.pcm"
 
 	.align 2
 DirectSoundWaveData_8650C5C:: @ 8650C5C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8650C5C.bin"
-	.incbin "sound/direct_sound_samples/8650C5C.pcm"
 
 	.align 2
 DirectSoundWaveData_8651148:: @ 8651148
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8651148.bin"
-	.incbin "sound/direct_sound_samples/8651148.pcm"
 
 	.align 2
 DirectSoundWaveData_8651910:: @ 8651910
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8651910.bin"
-	.incbin "sound/direct_sound_samples/8651910.pcm"
 
 	.align 2
 DirectSoundWaveData_865250C:: @ 865250C
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/865250C.bin"
-	.incbin "sound/direct_sound_samples/865250C.pcm"
 
 	.align 2
 DirectSoundWaveData_8652884:: @ 8652884
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8652884.bin"
-	.incbin "sound/direct_sound_samples/8652884.pcm"
 
 	.align 2
 DirectSoundWaveData_8653040:: @ 8653040
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8653040.bin"
-	.incbin "sound/direct_sound_samples/8653040.pcm"
 
 	.align 2
 DirectSoundWaveData_8653CA4:: @ 8653CA4
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8653CA4.bin"
-	.incbin "sound/direct_sound_samples/8653CA4.pcm"
 
 	.align 2
 DirectSoundWaveData_8654170:: @ 8654170
-	.4byte 0
 	.incbin "sound/direct_sound_samples/8654170.bin"
-	.incbin "sound/direct_sound_samples/8654170.pcm"
 
 	.align 2
 DirectSoundWaveData_8654C20:: @ 8654C20
-	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8654C20.bin"
-	.incbin "sound/direct_sound_samples/8654C20.pcm"

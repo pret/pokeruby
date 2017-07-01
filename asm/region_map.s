@@ -1759,7 +1759,7 @@ sub_80FB600: @ 80FB600
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_810D9EC
+	bl GetSSTidalLocation
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r5
@@ -2623,9 +2623,9 @@ sub_80FBCF0: @ 80FBCF0
 	movs r2, 0
 	strh r3, [r0]
 	strh r1, [r0, 0x2]
-	ldr r0, _080FBDA4 @ =gUnknown_083E7708
+	ldr r0, _080FBDA4 @ =gOamData_083E7708
 	str r0, [sp, 0x4]
-	ldr r0, _080FBDA8 @ =gUnknown_083E7718
+	ldr r0, _080FBDA8 @ =gSpriteAnimTable_083E7718
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
 	ldr r0, _080FBDAC @ =gDummySpriteAffineAnimTable
@@ -2685,8 +2685,8 @@ _080FBD42:
 _080FBD98: .4byte gRegionMapBrendanIconTiles
 _080FBD9C: .4byte gRegionMapBrendanIconPalette
 _080FBDA0: .4byte 0xffff0000
-_080FBDA4: .4byte gUnknown_083E7708
-_080FBDA8: .4byte gUnknown_083E7718
+_080FBDA4: .4byte gOamData_083E7708
+_080FBDA8: .4byte gSpriteAnimTable_083E7718
 _080FBDAC: .4byte gDummySpriteAffineAnimTable
 _080FBDB0: .4byte SpriteCallbackDummy
 _080FBDB4: .4byte gSaveBlock2
@@ -3034,8 +3034,8 @@ _080FC026:
 	bx r1
 	thumb_func_end CopyMapName
 
-	thumb_func_start sub_80FC02C
-sub_80FC02C: @ 80FC02C
+	thumb_func_start CopyLocationName
+CopyLocationName: @ 80FC02C
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -3051,7 +3051,7 @@ _080FC042:
 	bx r1
 	.align 2, 0
 _080FC048: .4byte gOtherText_Hideout
-	thumb_func_end sub_80FC02C
+	thumb_func_end CopyLocationName
 
 	thumb_func_start sub_80FC04C
 sub_80FC04C: @ 80FC04C

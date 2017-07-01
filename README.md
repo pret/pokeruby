@@ -1,4 +1,4 @@
-# Pokémon Ruby and Sapphire
+# Pokémon Ruby and Sapphire [![Build Status][travis-badge]][travis]
 
 This is a disassembly of Pokémon Ruby and Sapphire.
 
@@ -9,8 +9,8 @@ It builds the following roms:
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
-## See also
-
-irc: [freenode#pret][irc]
+### irc: [freenode#pret][irc]
 
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[travis]: https://travis-ci.org/pret/pokeruby
+[travis-badge]: https://travis-ci.org/pret/pokeruby.svg?branch=master

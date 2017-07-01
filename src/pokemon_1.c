@@ -1,13 +1,14 @@
 #include "global.h"
-#include "asm.h"
-#include "text.h"
-#include "string_util.h"
+#include "data2.h"
+#include "items.h"
+#include "main.h"
 #include "pokemon.h"
+#include "rng.h"
 #include "rom4.h"
 #include "species.h"
-#include "main.h"
-#include "rng.h"
 #include "sprite.h"
+#include "string_util.h"
+#include "text.h"
 
 //Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -15,17 +16,9 @@
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-extern struct Pokemon gPlayerParty[6]; // 0x3004360
-extern struct Pokemon gEnemyParty[6]; // 0x30045C0
-
 extern u8 unk_2000000[];
 extern u16 word_2024E82;
 extern u8 byte_2024E88;
-
-extern u32 gExperienceTables[8][101];
-extern struct BaseStats gBaseStats[];
-extern struct BattleMove gBattleMoves[];
-extern const u16 *gLevelUpLearnsets[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
@@ -50,7 +43,7 @@ void ZeroMonData(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_SPATK, (u8 *)&arg);
     SetMonData(mon, MON_DATA_SPDEF, (u8 *)&arg);
     arg = 255;
-    SetMonData(mon, MON_DATA_64, (u8 *)&arg);
+    SetMonData(mon, MON_DATA_MAIL, (u8 *)&arg);
 }
 
 void ZeroPlayerPartyMons(void)
@@ -74,7 +67,7 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     arg = 255;
-    SetMonData(mon, MON_DATA_64, (u8 *)&arg);
+    SetMonData(mon, MON_DATA_MAIL, (u8 *)&arg);
     CalculateMonStats(mon);
 }
 
@@ -302,9 +295,9 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     StringCopy(nickname, src->nickname);
 
     if (nickname[0] == 0xFC && nickname[1] == 0x15)
-        language = 1;
+        language = LANGUAGE_JAPANESE;
     else
-        language = 2;
+        language = GAME_LANGUAGE;
 
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     StripExtCtrlCodes(nickname);
@@ -341,7 +334,7 @@ void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
     dest->species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
 
-    if (heldItem == 175)
+    if (heldItem == ITEM_ENIGMA_BERRY)
         heldItem = 0;
 
     dest->heldItem = heldItem;
@@ -477,7 +470,7 @@ void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest)
     SetMonData(dest, MON_DATA_HP, (u8 *)&value);
     SetMonData(dest, MON_DATA_MAX_HP, (u8 *)&value);
     value = 255;
-    SetMonData(dest, MON_DATA_64, (u8 *)&value);
+    SetMonData(dest, MON_DATA_MAIL, (u8 *)&value);
     CalculateMonStats(dest);
 }
 

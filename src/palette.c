@@ -1,6 +1,5 @@
 #include "global.h"
 #include "palette.h"
-#include "asm.h"
 #include "blend_palette.h"
 #include "decompress.h"
 
@@ -30,7 +29,7 @@ struct PaletteStructTemplate
 
 struct PaletteStruct
 {
-    struct PaletteStructTemplate *base;
+    const struct PaletteStructTemplate *base;
     u32 ps_field_4_0:1;
     u16 ps_field_4_1:1;
     u32 baseDestOffset:9;
@@ -48,7 +47,19 @@ EWRAM_DATA u32 gFiller_202F394 = 0;
 EWRAM_DATA static u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA static u8 sPaletteDecompressionBuffer[0x400] = {0};
 
-extern struct PaletteStructTemplate gDummyPaletteStructTemplate;
+static const struct PaletteStructTemplate sDummyPaletteStructTemplate =
+{
+    0xFFFF,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+};
 
 static void unused_sub_8073DFC(struct PaletteStruct *, u32 *);
 static void unused_sub_8073F60(struct PaletteStruct *, u32 *);
@@ -332,7 +343,7 @@ void ResetPaletteStructByUid(u16 a1)
 
 void ResetPaletteStruct(u8 paletteNum)
 {
-    sPaletteStructs[paletteNum].base = &gDummyPaletteStructTemplate;
+    sPaletteStructs[paletteNum].base = &sDummyPaletteStructTemplate;
     sPaletteStructs[paletteNum].ps_field_4_0 = 0;
     sPaletteStructs[paletteNum].baseDestOffset = 0;
     sPaletteStructs[paletteNum].destOffset = 0;
@@ -603,7 +614,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_WHTIE:
@@ -621,7 +632,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > 31)
                 b = 31;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_IN_FROM_BLACK:
@@ -647,7 +658,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_BLACK:
@@ -665,7 +676,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < 0)
                 b = 0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
     }
 

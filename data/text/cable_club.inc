@@ -127,22 +127,22 @@ OldaleTown_PokemonCenter_2F_Text_1A4C38:: @ 81A4C38
 	.string "Please confirm the number of players\n"
 	.string "and start again.$"
 
-UnknownString_81A4C6E: @ 81A4C6E
+TradeRoom_WillLinkBeTerminated: @ 81A4C6E
 	.string "The link will be terminated if you\n"
 	.string "leave the room. Is that okay?$"
 
-UnknownString_81A4CAF: @ 81A4CAF
+TradeRoom_TerminatingLink: @ 81A4CAF
 	.string "Terminating link... You will be\n"
 	.string "escorted out of the room. Please wait.$"
 
-UnknownString_81A4CF6: @ 81A4CF6
+CableClub_TooBusyToNotice: @ 81A4CF6
 	.string "This TRAINER is too busy to notice...$"
 
-UnknownString_81A4D1C: @ 81A4D1C
+CableClub_LookAtTrainerCard1: @ 81A4D1C
 	.string "Score! Got to look at {STR_VAR_1}’s\n"
 	.string "TRAINER CARD!$"
 
-UnknownString_81A4D45: @ 81A4D45
+CableClub_LookAtTrainerCard2: @ 81A4D45
 	.string "Score! Got to look at {STR_VAR_1}’s\n"
 	.string "TRAINER CARD! It’s a {STR_VAR_2} card!$"
 

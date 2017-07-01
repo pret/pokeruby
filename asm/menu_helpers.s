@@ -161,8 +161,8 @@ _080F9140:
 _080F9148: .4byte gUnknown_020388C4
 	thumb_func_end Task_CallYesOrNoCallback
 
-	thumb_func_start sub_80F914C
-sub_80F914C: @ 80F914C
+	thumb_func_start DoYesNoFuncWithChoice
+DoYesNoFuncWithChoice: @ 80F914C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080F916C @ =gUnknown_020388C4
@@ -182,7 +182,7 @@ sub_80F914C: @ 80F914C
 _080F916C: .4byte gUnknown_020388C4
 _080F9170: .4byte gTasks
 _080F9174: .4byte Task_CallYesOrNoCallback
-	thumb_func_end sub_80F914C
+	thumb_func_end DoYesNoFuncWithChoice
 
 	thumb_func_start brm_trade_1
 brm_trade_1: @ 80F9178
@@ -420,7 +420,7 @@ sub_80F931C: @ 80F931C
 	cmp r0, 0x1
 	bne _080F933C
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1207,8 +1207,8 @@ _080F98D4: .4byte gSprites
 _080F98D8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80F98A4
 
-	thumb_func_start sub_80F98DC
-sub_80F98DC: @ 80F98DC
+	thumb_func_start StartVerticalScrollIndicators
+StartVerticalScrollIndicators: @ 80F98DC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -1235,7 +1235,7 @@ _080F9902:
 _080F9908: .4byte gUnknown_020388C0
 _080F990C: .4byte gSprites
 _080F9910: .4byte sub_80F9834
-	thumb_func_end sub_80F98DC
+	thumb_func_end StartVerticalScrollIndicators
 
 	thumb_func_start sub_80F9914
 sub_80F9914: @ 80F9914
@@ -1284,8 +1284,8 @@ _080F9964: .4byte gUnknown_020388C0
 _080F9968: .4byte gSprites
 	thumb_func_end sub_80F9914
 
-	thumb_func_start sub_80F996C
-sub_80F996C: @ 80F996C
+	thumb_func_start PauseVerticalScrollIndicator
+PauseVerticalScrollIndicator: @ 80F996C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1297,7 +1297,7 @@ sub_80F996C: @ 80F996C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F996C
+	thumb_func_end PauseVerticalScrollIndicator
 
 	thumb_func_start sub_80F9988
 sub_80F9988: @ 80F9988

@@ -38,7 +38,7 @@ gUnknown_081D9E98:: @ 81D9E98
 	.4byte BattleScript_1DA00A
 
 BattleScript_1D9EA8: @ 81D9EA8
-	jumpifhalfword 4, 0x20239f8, 512, BattleScript_1D9EB8
+	jumpifhalfword 4, gBattleTypeFlags, 512, BattleScript_1D9EB8
 	printstring BATTLE_TEXT_Used1
 	pokemoncatchfunction
 
@@ -52,7 +52,7 @@ BattleScript_1D9EBC: @ 81D9EBC
 	pokemoncatchfunction
 
 gUnknown_081D9EC2:: @ 81D9EC2
-	jumpifhalfword 0, 0x2024c04, 5, BattleScript_1D9ED0
+	jumpifhalfword 0, gLastUsedItem, 5, BattleScript_1D9ED0
 	atk60 11
 
 BattleScript_1D9ED0: @ 81D9ED0
@@ -60,35 +60,35 @@ BattleScript_1D9ED0: @ 81D9ED0
 	capturesomethingf1 BattleScript_1D9EE3
 	printstring BATTLE_TEXT_AddedToDex
 	waitstateatk
-	setbyte 0x2024d1e, 0
+	setbyte gBattleCommunication, 0
 	capturesomethingf2
 
 BattleScript_1D9EE3: @ 81D9EE3
 	printstring BATTLE_TEXT_GiveNickname
 	waitstateatk
-	setbyte 0x2024d1e, 0
+	setbyte gBattleCommunication, 0
 	capturesomethingf3 BattleScript_1D9EF8
 	printstring BATTLE_TEXT_SentToPC
 	waitmessage 64
 
 BattleScript_1D9EF8: @ 81D9EF8
 	catchpoke
-	setbyte 0x2024d26, 7
+	setbyte gBattleOutcome, 7
 	activesidesomething
 
 gUnknown_081D9F00:: @ 81D9F00
 	printstring BATTLE_TEXT_BallCaught2
-	setbyte 0x2024d26, 7
+	setbyte gBattleOutcome, 7
 	activesidesomething
 
 gUnknown_081D9F0A:: @ 81D9F0A
 	printfromtable BattleTextList_4015E6
 	waitmessage 64
-	jumpifbyte 5, 0x20239f8, 128, BattleScript_1D9F34
-	jumpifbyte 1, 0x2038808, 0, BattleScript_1D9F34
+	jumpifbyte 5, gBattleTypeFlags, 128, BattleScript_1D9F34
+	jumpifbyte 1, gNumSafariBalls, 0, BattleScript_1D9F34
 	printstring BATTLE_TEXT_SafariOver
 	waitmessage 64
-	setbyte 0x2024d26, 8
+	setbyte gBattleOutcome, 8
 
 BattleScript_1D9F34: @ 81D9F34
 	atkf6
@@ -112,7 +112,7 @@ BattleScript_1D9F4F: @ 81D9F4F
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
 	atk75
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_RestoredHealth
@@ -161,7 +161,7 @@ BattleScript_1D9FBB: @ 81D9FBB
 
 BattleScript_1D9FDA: @ 81D9FDA
 	atk54 17
-	setbyte 0x2024d26, 4
+	setbyte gBattleOutcome, 4
 	activesidesomething
 
 BattleScript_1D9FE4: @ 81D9FE4

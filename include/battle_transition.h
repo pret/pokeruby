@@ -1,0 +1,8 @@
+#ifndef GUARD_BATTLE_TRANSITION_H
+#define GUARD_BATTLE_TRANSITION_H
+
+void sub_811AABC(u8);
+void sub_811AAD8(u8);
+u8 sub_811AAE8(void);
+
+#endif // GUARD_BATTLE_TRANSITION_H

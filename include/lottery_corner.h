@@ -1,12 +1,12 @@
 #ifndef GUARD_LOTTERY_CORNER_H
 #define GUARD_LOTTERY_CORNER_H
 
-void sub_8145A78(void);
-void sub_8145AA4(u16 a);
-void sub_8145AEC(void);
+void ResetLotteryCorner(void);
+void SetRandomLotteryNumber(u16 i);
+void RetrieveLotteryNumber(void);
 void PickLotteryCornerTicket(void);
-void sub_8145D14(u32 a);
-u32 sub_8145D3C(void);
-void unref_sub_8145D64(u16 a);
+void SetLotteryNumber(u32 lotteryNum);
+u32 GetLotteryNumber(void);
+void SetLotteryNumber16_Unused(u16 lotteryNum);
 
 #endif // GUARD_LOTTERY_CORNER_H

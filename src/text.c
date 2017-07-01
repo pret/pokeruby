@@ -1,16 +1,11 @@
 #include "global.h"
 #include "text.h"
+#include "battle.h"
 #include "main.h"
-#include "string_util.h"
-#include "songs.h"
 #include "palette.h"
+#include "songs.h"
 #include "sound.h"
-
-enum
-{
-    CHARSET_JAPANESE = 1,
-    CHARSET_LATIN
-};
+#include "string_util.h"
 
 enum
 {
@@ -184,8 +179,8 @@ EWRAM_DATA u8 gStringVar2[0x100] = {0};
 EWRAM_DATA u8 gStringVar3[0x100] = {0};
 EWRAM_DATA u8 gStringVar4[0x100] = {0};
 
-extern u16 gUnknown_020239F8;
-extern u8 gUnknown_0203869A;
+extern u16 gBattleTypeFlags;
+extern u8 gIsLinkContest;
 extern u8 gTileBuffer[];
 
 vu16 *const gBGControlRegs[] =
@@ -216,20 +211,24 @@ const u16 gUnknown_081E29D8[] = { 0x100, 0x200, 0x400, 0x800 };
 const u16 gUnknown_081E29E0[] = { 0x100, 0x200, 0x400, 0x800 };
 const u16 gUnknown_081E29E8[] = { 1, 2, 4, 8 };
 
-#include "fonts/font0_lat_glyphs.h"
-#include "fonts/font1_lat_glyphs.h"
-#include "fonts/font0_jpn_glyphs.h"
-#include "fonts/font1_jpn_glyphs.h"
-#include "fonts/braille_glyphs.h"
-#include "fonts/down_arrow_tiles.h"
-#include "fonts/type1_map.h"
-#include "fonts/type3_map.h"
-#include "fonts/font1_widths.h"
-#include "fonts/font4_widths.h"
-#include "fonts/font0_widths.h"
-#include "fonts/font3_widths.h"
-#include "fonts/unknown_palette_81E6692.h"
-#include "fonts/default_palette.h"
+static const u8 sFont0LatinGlyphs[] = INCBIN_U8("graphics/fonts/font0_lat.1bpp");
+static const u8 sFont1LatinGlyphs[] = INCBIN_U8("graphics/fonts/font1_lat.1bpp");
+static const u8 sFont0JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font0_jpn.1bpp");
+static const u8 sFont1JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font1_jpn.1bpp");
+static const u8 sBrailleGlyphs[] = INCBIN_U8("graphics/fonts/font6_braille.1bpp");
+static const u32 sDownArrowTiles[] = INCBIN_U32("graphics/fonts/down_arrow.4bpp");
+
+// clang-format off
+#include "data/text/type1_map.h"
+#include "data/text/type3_map.h"
+#include "data/text/font1_widths.h"
+#include "data/text/font4_widths.h"
+#include "data/text/font0_widths.h"
+#include "data/text/font3_widths.h"
+// clang-format on
+
+const u16 gUnknownPalette_81E6692[] = INCBIN_U16("graphics/fonts/unknown_81E6692.gbapal");
+const u16 gFontDefaultPalette[] = INCBIN_U16("graphics/fonts/default.gbapal");
 
 const u8 sBlankTile[8] = { 0, 0, 0, 0, 0, 0, 0, 0, };
 
@@ -361,7 +360,7 @@ static const WriteGlyphTilemapFunc sWriteGlyphTilemapFuncs[] =
     WriteGlyphTilemap_Font6,
 };
 
-static const struct Window sDefaultWindow = { .charset = CHARSET_LATIN };
+static const struct Window sDefaultWindow = { .language = GAME_LANGUAGE };
 
 typedef u8 (*ExtCtrlCodeFunc)(struct Window *);
 
@@ -1758,21 +1757,21 @@ u16 InitWindowTileData(struct Window *win, u16 startOffset)
     case 1:
         switch (win->config->fontNum)
         {
-            case 0:
-            case 3:
-                retVal = LoadFixedWidthFont(win, startOffset);
-                break;
-            case 1:
-            case 2:
-                retVal = LoadFixedWidthFont_Font1Latin(win, startOffset);
-                break;
-            case 4:
-            case 5:
-                retVal = LoadFixedWidthFont_Font4Latin(win, startOffset);
-                break;
-            case 6:
-                retVal = LoadFixedWidthFont_Braille(win, startOffset);
-                break;
+        case 0:
+        case 3:
+            retVal = LoadFixedWidthFont(win, startOffset);
+            break;
+        case 1:
+        case 2:
+            retVal = LoadFixedWidthFont_Font1Latin(win, startOffset);
+            break;
+        case 4:
+        case 5:
+            retVal = LoadFixedWidthFont_Font4Latin(win, startOffset);
+            break;
+        case 6:
+            retVal = LoadFixedWidthFont_Braille(win, startOffset);
+            break;
         }
         break;
     }
@@ -1891,30 +1890,30 @@ static void MultistepLoadFont_LoadGlyph(struct Window *win, u16 startOffset, u8 
 
     switch (win->config->fontNum)
     {
-        case 0:
-        case 3:
-            buffer = win->tileData + 32 * startOffset + 64 * glyph;
-            LoadFixedWidthGlyph(win, glyph, buffer);
-            break;
-        case 1:
-        case 2:
-            buffer = win->tileData + 32 * (glyph + startOffset);
-            ApplyColors_UnshadowedFont(
-                &sFont1LatinGlyphs[8 * glyph],
-                (u32 *)buffer,
-                win->foregroundColor,
-                win->backgroundColor);
-            break;
-        case 4:
-        case 5:
-            buffer = win->tileData + 32 * (glyph + startOffset);
-            ApplyColors_ShadowedFont(
-                &gFont4LatinGlyphs[8 * glyph],
-                buffer,
-                win->foregroundColor,
-                win->shadowColor,
-                win->backgroundColor);
-            break;
+    case 0:
+    case 3:
+        buffer = win->tileData + 32 * startOffset + 64 * glyph;
+        LoadFixedWidthGlyph(win, glyph, buffer);
+        break;
+    case 1:
+    case 2:
+        buffer = win->tileData + 32 * (glyph + startOffset);
+        ApplyColors_UnshadowedFont(
+            &sFont1LatinGlyphs[8 * glyph],
+            (u32 *)buffer,
+            win->foregroundColor,
+            win->backgroundColor);
+        break;
+    case 4:
+    case 5:
+        buffer = win->tileData + 32 * (glyph + startOffset);
+        ApplyColors_ShadowedFont(
+            &gFont4LatinGlyphs[8 * glyph],
+            buffer,
+            win->foregroundColor,
+            win->shadowColor,
+            win->backgroundColor);
+        break;
     }
 }
 
@@ -1947,7 +1946,7 @@ void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 
     struct WindowConfig *winConfig = win->config;
     win->textMode = winConfig->textMode;
     win->fontNum = winConfig->fontNum;
-    win->charset = CHARSET_LATIN;
+    win->language = GAME_LANGUAGE;
     win->paletteNum = winConfig->paletteNum;
     win->win_field_B = 0;
     win->win_field_C = 0;
@@ -2045,7 +2044,7 @@ u8 sub_8002F44(struct Window *win)
 static u8 sub_8002FA0(struct Window *win, const u8 *text)
 {
     u8 retVal;
-    u8 savedCharset = win->charset;
+    u8 savedLanguage = win->language;
     const u8 *savedText = win->text;
     u16 savedTextIndex = win->textIndex;
     win->text = text;
@@ -2055,7 +2054,7 @@ static u8 sub_8002FA0(struct Window *win, const u8 *text)
     win->text = savedText;
     win->textIndex = savedTextIndex;
     win->state = WIN_STATE_NORMAL;
-    win->charset = savedCharset;
+    win->language = savedLanguage;
     return retVal;
 }
 
@@ -2291,13 +2290,13 @@ static u8 ExtCtrlCode_Spacing(struct Window *win)
 
 static u8 ExtCtrlCode_Japanese(struct Window *win)
 {
-    win->charset = CHARSET_JAPANESE;
+    win->language = LANGUAGE_JAPANESE;
     return 2;
 }
 
 static u8 ExtCtrlCode_Latin(struct Window *win)
 {
-    win->charset = CHARSET_LATIN;
+    win->language = GAME_LANGUAGE;
     return 2;
 }
 
@@ -2341,7 +2340,7 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
     return retVal;
 }
 
-void sub_80034D4(u8 *tileData, u8 *text)
+void sub_80034D4(u8 *tileData, const u8 *text)
 {
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6C74, tileData, text);
 }
@@ -2477,12 +2476,18 @@ static u8 UpdateWindowText(struct Window *win)
     return 0;
 }
 
+#if defined(ENGLISH)
+#define SUB_800374C_LINE_LENGTH 26
+#elif defined(GERMAN)
+#define SUB_800374C_LINE_LENGTH 27
+#endif
+
 u8 sub_800374C(struct Window *win)
 {
     u8 retVal;
 
     sWaitType = 1;
-    sLineLength = 26;
+    sLineLength = SUB_800374C_LINE_LENGTH;
     retVal = UpdateWindowText(win);
     sLineLength = 26;
     sWaitType = 0;
@@ -2596,7 +2601,7 @@ static void LoadFixedWidthGlyph(struct Window *win, u32 glyph, u8 *dest)
     u8 *upperTile;
     u8 *lowerTile;
 
-    GetGlyphTilePointers(win->fontNum, win->charset, glyph, &upperTile, &lowerTile);
+    GetGlyphTilePointers(win->fontNum, win->language, glyph, &upperTile, &lowerTile);
 
     switch (win->fontNum)
     {
@@ -2627,17 +2632,17 @@ static void WriteGlyphTilemap(struct Window *win, u16 upperTileNum, u16 lowerTil
     }
 }
 
-static void GetGlyphTilePointers(u8 fontNum, u8 charset, u16 glyph, u8 **upperTilePtr, u8 **lowerTilePtr)
+static void GetGlyphTilePointers(u8 fontNum, u8 language, u16 glyph, u8 **upperTilePtr, u8 **lowerTilePtr)
 {
     u16 index;
     const struct Font *font;
 
-    if (charset == CHARSET_JAPANESE)
-        charset = 0;
+    if (language == LANGUAGE_JAPANESE)
+        language = 0;
     else
-        charset = 7;
+        language = 7;
 
-    font = &sFonts[charset + fontNum];
+    font = &sFonts[language + fontNum];
 
     switch (font->type)
     {
@@ -2912,12 +2917,10 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
         retVal = FALSE;
         break;
     case 3:
-        retVal = FALSE;
-        if (!gUnknown_0203869A)
-            retVal = TRUE;
+        retVal = gIsLinkContest ? FALSE : TRUE;
         break;
     case 1:
-        retVal &= ~(gUnknown_020239F8 >> 1);
+        retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
         break;
     }
 
@@ -3137,7 +3140,7 @@ static void DrawDownArrow(struct Window *win)
             {
                 u8 *upperTile;
                 u8 *lowerTile;
-                GetGlyphTilePointers(win->fontNum, win->charset, 0, &upperTile, &lowerTile);
+                GetGlyphTilePointers(win->fontNum, win->language, 0, &upperTile, &lowerTile);
                 glyphTileInfo.width = 8 - glyphTileInfo.startPixel;
                 glyphTileInfo.src = upperTile;
                 glyphTileInfo.dest = (u32 *)(win->tileData + 32 * GetCursorTileNum(win, 1, 0));
@@ -3340,10 +3343,10 @@ static u8 GetGlyphWidth(struct Window *win, u32 glyph)
 {
     u8 width = 8;
 
-#if REVISION >= 1
-    if (win->charset != CHARSET_JAPANESE)
+#ifdef BUGFIX_GLYPHWIDTH
+    if (win->language != LANGUAGE_JAPANESE)
 #else
-    if (win->charset == CHARSET_LATIN)
+    if (win->language == LANGUAGE_ENGLISH)
 #endif
     {
         width = win->spacing;
@@ -3539,7 +3542,7 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
 {
     u8 width = 0;
     u8 savedFontNum = win->fontNum;
-    u8 savedCharset = win->charset;
+    u8 savedCharset = win->language;
     u8 savedSpacing = win->spacing;
     s32 i = 0;
 
@@ -3552,9 +3555,9 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
         {
             u8 temp;
             i++;
-            temp = win->charset;
+            temp = win->language;
             width += GetStringWidth(win, GetExpandedPlaceholder(s[i]));
-            win->charset = temp;
+            win->language = temp;
             i++;
             break;
         }
@@ -3580,10 +3583,10 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
                 win->spacing = s[i + 1];
                 break;
             case 0x15:
-                win->charset = 1;
+                win->language = LANGUAGE_JAPANESE;
                 break;
             case 0x16:
-                win->charset = 2;
+                win->language = GAME_LANGUAGE;
                 break;
             }
 
@@ -3596,7 +3599,7 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
     }
 
     win->spacing = savedSpacing;
-    win->charset = savedCharset;
+    win->language = savedCharset;
     win->fontNum = savedFontNum;
 
     return width;
@@ -3659,7 +3662,7 @@ u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s)
 
 void ConvertInternationalString(u8 *s, u8 language)
 {
-    if (language == CHARSET_JAPANESE)
+    if (language == LANGUAGE_JAPANESE)
     {
         u8 i;
 
@@ -4253,7 +4256,7 @@ static s32 DrawGlyphTiles(struct Window *win, u32 glyph, u32 glyphWidth)
     u8 *lowerTile;
     s32 retVal = 0;
 
-    GetGlyphTilePointers(win->fontNum, win->charset, glyph, &upperTile, &lowerTile);
+    GetGlyphTilePointers(win->fontNum, win->language, glyph, &upperTile, &lowerTile);
     glyphTileInfo.textMode = win->textMode;
     glyphTileInfo.startPixel = (win->left + win->cursorX) & 7;
     glyphTileInfo.width = glyphWidth;

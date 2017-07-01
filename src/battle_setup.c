@@ -1,81 +1,41 @@
 #include "global.h"
 #include "battle_setup.h"
-#include "asm.h"
-#include "safari_zone.h"
-#include "weather.h"
-#include "palette.h"
-#include "field_player_avatar.h"
-#include "rom4.h"
 #include "battle.h"
+#include "battle_transition.h"
+#include "data2.h"
+#include "event_data.h"
+#include "field_control_avatar.h"
+#include "field_fadetransition.h"
+#include "field_map_obj_helpers.h"
+#include "field_message_box.h"
+#include "field_player_avatar.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "fldeff_80C5CD4.h"
 #include "main.h"
-#include "species.h"
+#include "map_constants.h"
+#include "metatile_behavior.h"
+#include "opponent_constants.h"
+#include "palette.h"
+#include "rng.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "script.h"
+#include "script_pokemon_80C4.h"
+#include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
-#include "task.h"
-#include "string_util.h"
-#include "rng.h"
-#include "flag.h"
-#include "var.h"
-#include "script.h"
-#include "field_message_box.h"
-#include "trainer.h"
+#include "species.h"
 #include "starter_choose.h"
-
-#define NUM_TRAINER_EYE_TRAINERS 56
-#define TRAINER_REMATCH_STEPS 255
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text.h"
+#include "trainer.h"
 
 extern u16 gScriptResult;
 
-struct TrainerPartyMember0
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-};
-
-struct TrainerPartyMember1
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 moves[4];
-};
-
-struct TrainerPartyMember2
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 heldItem;
-};
-
-struct TrainerPartyMember3
-{
-    u16 iv;
-    u8 level;
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-};
-
-struct TrainerBattleSpec
-{
-    void *ptr;
-    u8 ptrType;
-};
-
-struct TrainerEyeTrainer
-{
-   u16 trainerNums[5];
-   u16 mapGroup;
-   u16 mapNum;
-};
-
-extern void (*gUnknown_0300485C)(void);
-
-extern struct Pokemon gEnemyParty[];
-extern struct Pokemon gPlayerParty[];
-extern struct Trainer gTrainers[];
+extern void (*gFieldCallback)(void);
 
 EWRAM_DATA u16 gTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;
@@ -87,14 +47,9 @@ EWRAM_DATA u8 *gTrainerCannotBattleSpeech = NULL;
 EWRAM_DATA u8 *gTrainerBattleScriptReturnAddress = NULL;
 EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
 
-extern struct TrainerEyeTrainer gTrainerEyeTrainers[];
-
-extern u8 gOtherText_CancelWithTerminator[];
-
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u16 gScriptLastTalked;
-extern u8 gUnknown_02024D26;
-extern u16 gBadgeFlags[];
+extern u8 gBattleOutcome;
 
 extern struct MapObject gMapObjects[];
 
@@ -107,16 +62,367 @@ extern u8 gUnknown_0819F8AE[];
 extern u8 gUnknown_0819F80B[];
 extern u8 gUnknown_081C6C02[];
 
-extern struct TrainerBattleSpec gTrainerBattleSpecs_0[];
-extern struct TrainerBattleSpec gTrainerBattleSpecs_1[];
-extern struct TrainerBattleSpec gTrainerBattleSpecs_2[];
-extern struct TrainerBattleSpec gTrainerBattleSpecs_3[];
-extern struct TrainerBattleSpec gTrainerBattleSpecs_4[];
 
-extern u8 gStringVar4[];
+static const u8 gBattleTransitionTable_Wild[][2] =
+{
+    {8, 9},
+    {5, 10},
+    {0, 10},
+    {7, 6},
+};
+static const u8 gBattleTransitionTable_Trainer[][2] =
+{
+    {4, 11},
+    {2, 3},
+    {0, 10},
+    {1, 6},
+};
+static const struct TrainerBattleSpec gTrainerBattleSpecs_0[] =
+{
+    {&gTrainerBattleMode, 0},
+    {&gTrainerBattleOpponent, 1},
+    {&gTrainerMapObjectLocalId, 1},
+    {&gTrainerIntroSpeech, 2},
+    {&gTrainerDefeatSpeech, 2},
+    {&gTrainerVictorySpeech, 5},
+    {&gTrainerCannotBattleSpeech, 5},
+    {&gTrainerBattleEndScript, 5},
+    {&gTrainerBattleScriptReturnAddress, 6},
+};
+static const struct TrainerBattleSpec gTrainerBattleSpecs_1[] =
+{
+    {&gTrainerBattleMode, 0},
+    {&gTrainerBattleOpponent, 1},
+    {&gTrainerMapObjectLocalId, 1},
+    {&gTrainerIntroSpeech, 2},
+    {&gTrainerDefeatSpeech, 2},
+    {&gTrainerVictorySpeech, 5},
+    {&gTrainerCannotBattleSpeech, 5},
+    {&gTrainerBattleEndScript, 2},
+    {&gTrainerBattleScriptReturnAddress, 6},
+};
+static const struct TrainerBattleSpec gTrainerBattleSpecs_2[] =
+{
+    {&gTrainerBattleMode, 0},
+    {&gTrainerBattleOpponent, 1},
+    {&gTrainerMapObjectLocalId, 1},
+    {&gTrainerIntroSpeech, 2},
+    {&gTrainerDefeatSpeech, 2},
+    {&gTrainerVictorySpeech, 5},
+    {&gTrainerCannotBattleSpeech, 2},
+    {&gTrainerBattleEndScript, 5},
+    {&gTrainerBattleScriptReturnAddress, 6},
+};
+static const struct TrainerBattleSpec gTrainerBattleSpecs_3[] =
+{
+    {&gTrainerBattleMode, 0},
+    {&gTrainerBattleOpponent, 1},
+    {&gTrainerMapObjectLocalId, 1},
+    {&gTrainerIntroSpeech, 5},
+    {&gTrainerDefeatSpeech, 2},
+    {&gTrainerVictorySpeech, 5},
+    {&gTrainerCannotBattleSpeech, 5},
+    {&gTrainerBattleEndScript, 5},
+    {&gTrainerBattleScriptReturnAddress, 6},
+};
+static const struct TrainerBattleSpec gTrainerBattleSpecs_4[] =
+{
+    {&gTrainerBattleMode, 0},
+    {&gTrainerBattleOpponent, 1},
+    {&gTrainerMapObjectLocalId, 1},
+    {&gTrainerIntroSpeech, 2},
+    {&gTrainerDefeatSpeech, 2},
+    {&gTrainerVictorySpeech, 5},
+    {&gTrainerCannotBattleSpeech, 2},
+    {&gTrainerBattleEndScript, 2},
+    {&gTrainerBattleScriptReturnAddress, 6},
+};
 
-extern u8 gBattleTransitionTable_Wild[][2];
-extern u8 gBattleTransitionTable_Trainer[][2];
+const struct TrainerEyeTrainer gTrainerEyeTrainers[] =
+{
+    {
+        {OPPONENT_ROSE_1, OPPONENT_ROSE_2, OPPONENT_ROSE_3, OPPONENT_ROSE_4, OPPONENT_ROSE_5},
+        MAP_GROUP_ROUTE118,
+        MAP_ID_ROUTE118,
+    },
+    {
+        {OPPONENT_DUSTY_1, OPPONENT_DUSTY_2, OPPONENT_DUSTY_3, OPPONENT_DUSTY_4, OPPONENT_DUSTY_5},
+        MAP_GROUP_ROUTE111,
+        MAP_ID_ROUTE111,
+    },
+    {
+        {OPPONENT_LOLA_1, OPPONENT_LOLA_2, OPPONENT_LOLA_3, OPPONENT_LOLA_4, OPPONENT_LOLA_5},
+        MAP_GROUP_ROUTE109,
+        MAP_ID_ROUTE109,
+    },
+    {
+        {OPPONENT_RICKY_1, OPPONENT_RICKY_2, OPPONENT_RICKY_3, OPPONENT_RICKY_4, OPPONENT_RICKY_5},
+        MAP_GROUP_ROUTE109,
+        MAP_ID_ROUTE109,
+    },
+    {
+        {OPPONENT_RITA_AND_SAM_1, OPPONENT_RITA_AND_SAM_2, OPPONENT_RITA_AND_SAM_3, OPPONENT_RITA_AND_SAM_4, OPPONENT_RITA_AND_SAM_5},
+        MAP_GROUP_ROUTE124,
+        MAP_ID_ROUTE124,
+    },
+    {
+        {OPPONENT_BROOKE_1, OPPONENT_BROOKE_2, OPPONENT_BROOKE_3, OPPONENT_BROOKE_4, OPPONENT_BROOKE_5},
+        MAP_GROUP_ROUTE111,
+        MAP_ID_ROUTE111,
+    },
+    {
+        {OPPONENT_WILTON_1, OPPONENT_WILTON_2, OPPONENT_WILTON_3, OPPONENT_WILTON_4, OPPONENT_WILTON_5},
+        MAP_GROUP_ROUTE111,
+        MAP_ID_ROUTE111,
+    },
+    {
+        {OPPONENT_VALERIE_1, OPPONENT_VALERIE_2, OPPONENT_VALERIE_3, OPPONENT_VALERIE_4, OPPONENT_VALERIE_5},
+        MAP_GROUP_MT_PYRE_6F,
+        MAP_ID_MT_PYRE_6F,
+    },
+    {
+        {OPPONENT_CINDY_1, OPPONENT_CINDY_3, OPPONENT_CINDY_4, OPPONENT_CINDY_5, OPPONENT_CINDY_6},
+        MAP_GROUP_ROUTE104,
+        MAP_ID_ROUTE104,
+    },
+    {
+        {OPPONENT_JESSICA_1, OPPONENT_JESSICA_2, OPPONENT_JESSICA_3, OPPONENT_JESSICA_4, OPPONENT_JESSICA_5},
+        MAP_GROUP_ROUTE121,
+        MAP_ID_ROUTE121,
+    },
+    {
+        {OPPONENT_WINSTON_1, OPPONENT_WINSTON_2, OPPONENT_WINSTON_3, OPPONENT_WINSTON_4, OPPONENT_WINSTON_5},
+        MAP_GROUP_ROUTE104,
+        MAP_ID_ROUTE104,
+    },
+    {
+        {OPPONENT_STEVE_1, OPPONENT_STEVE_2, OPPONENT_STEVE_3, OPPONENT_STEVE_4, OPPONENT_STEVE_5},
+        MAP_GROUP_ROUTE114,
+        MAP_ID_ROUTE114,
+    },
+    {
+        {OPPONENT_TONY_1, OPPONENT_TONY_2, OPPONENT_TONY_3, OPPONENT_TONY_4, OPPONENT_TONY_5},
+        MAP_GROUP_ROUTE107,
+        MAP_ID_ROUTE107,
+    },
+    {
+        {OPPONENT_NOB_1, OPPONENT_NOB_2, OPPONENT_NOB_3, OPPONENT_NOB_4, OPPONENT_NOB_5},
+        MAP_GROUP_ROUTE115,
+        MAP_ID_ROUTE115,
+    },
+    {
+        {OPPONENT_DALTON_1, OPPONENT_DALTON_2, OPPONENT_DALTON_3, OPPONENT_DALTON_4, OPPONENT_DALTON_5},
+        MAP_GROUP_ROUTE118,
+        MAP_ID_ROUTE118,
+    },
+    {
+        {OPPONENT_BERNIE_1, OPPONENT_BERNIE_2, OPPONENT_BERNIE_3, OPPONENT_BERNIE_4, OPPONENT_BERNIE_5},
+        MAP_GROUP_ROUTE114,
+        MAP_ID_ROUTE114,
+    },
+    {
+        {OPPONENT_ETHAN_1, OPPONENT_ETHAN_2, OPPONENT_ETHAN_3, OPPONENT_ETHAN_4, OPPONENT_ETHAN_5},
+        MAP_GROUP_JAGGED_PASS,
+        MAP_ID_JAGGED_PASS,
+    },
+    {
+        {OPPONENT_JOHN_AND_JAY_1, OPPONENT_JOHN_AND_JAY_2, OPPONENT_JOHN_AND_JAY_3, OPPONENT_JOHN_AND_JAY_4, OPPONENT_JOHN_AND_JAY_5},
+        MAP_GROUP_METEOR_FALLS_1F_2R,
+        MAP_ID_METEOR_FALLS_1F_2R,
+    },
+    {
+        {OPPONENT_BRANDON_1, OPPONENT_BRANDON_2, OPPONENT_BRANDON_3, OPPONENT_BRANDON_4, OPPONENT_BRANDON_5},
+        MAP_GROUP_ROUTE120,
+        MAP_ID_ROUTE120,
+    },
+    {
+        {OPPONENT_CAMERON_1, OPPONENT_CAMERON_2, OPPONENT_CAMERON_3, OPPONENT_CAMERON_4, OPPONENT_CAMERON_5},
+        MAP_GROUP_ROUTE123,
+        MAP_ID_ROUTE123,
+    },
+    {
+        {OPPONENT_JACKI_1, OPPONENT_JACKI_2, OPPONENT_JACKI_3, OPPONENT_JACKI_4, OPPONENT_JACKI_5},
+        MAP_GROUP_ROUTE123,
+        MAP_ID_ROUTE123,
+    },
+    {
+        {OPPONENT_WALTER_1, OPPONENT_WALTER_2, OPPONENT_WALTER_3, OPPONENT_WALTER_4, OPPONENT_WALTER_5},
+        MAP_GROUP_ROUTE121,
+        MAP_ID_ROUTE121,
+    },
+    {
+        {OPPONENT_KAREN_1, OPPONENT_KAREN_2, OPPONENT_KAREN_3, OPPONENT_KAREN_4, OPPONENT_KAREN_5},
+        MAP_GROUP_ROUTE116,
+        MAP_ID_ROUTE116,
+    },
+    {
+        {OPPONENT_JERRY_1, OPPONENT_JERRY_2, OPPONENT_JERRY_3, OPPONENT_JERRY_4, OPPONENT_JERRY_5},
+        MAP_GROUP_ROUTE116,
+        MAP_ID_ROUTE116,
+    },
+    {
+        {OPPONENT_ANNA_AND_MEG_1, OPPONENT_ANNA_AND_MEG_2, OPPONENT_ANNA_AND_MEG_3, OPPONENT_ANNA_AND_MEG_4, OPPONENT_ANNA_AND_MEG_5},
+        MAP_GROUP_ROUTE117,
+        MAP_ID_ROUTE117,
+    },
+    {
+        {OPPONENT_ISABEL_1, OPPONENT_ISABEL_2, OPPONENT_ISABEL_3, OPPONENT_ISABEL_4, OPPONENT_ISABEL_5},
+        MAP_GROUP_ROUTE110,
+        MAP_ID_ROUTE110,
+    },
+    {
+        {OPPONENT_MIGUEL_1, OPPONENT_MIGUEL_2, OPPONENT_MIGUEL_3, OPPONENT_MIGUEL_4, OPPONENT_MIGUEL_5},
+        MAP_GROUP_ROUTE103,
+        MAP_ID_ROUTE103,
+    },
+    {
+        {OPPONENT_TIMOTHY_1, OPPONENT_TIMOTHY_2, OPPONENT_TIMOTHY_3, OPPONENT_TIMOTHY_4, OPPONENT_TIMOTHY_5},
+        MAP_GROUP_ROUTE115,
+        MAP_ID_ROUTE115,
+    },
+    {
+        {OPPONENT_SHELBY_1, OPPONENT_SHELBY_2, OPPONENT_SHELBY_3, OPPONENT_SHELBY_4, OPPONENT_SHELBY_5},
+        MAP_GROUP_MT_CHIMNEY,
+        MAP_ID_MT_CHIMNEY,
+    },
+    {
+        {OPPONENT_CALVIN_1, OPPONENT_CALVIN_2, OPPONENT_CALVIN_3, OPPONENT_CALVIN_4, OPPONENT_CALVIN_5},
+        MAP_GROUP_ROUTE102,
+        MAP_ID_ROUTE102,
+    },
+    {
+        {OPPONENT_ELLIOT_1, OPPONENT_ELLIOT_2, OPPONENT_ELLIOT_3, OPPONENT_ELLIOT_4, OPPONENT_ELLIOT_5},
+        MAP_GROUP_ROUTE106,
+        MAP_ID_ROUTE106,
+    },
+    {
+        {OPPONENT_ABIGAIL_1, OPPONENT_ABIGAIL_2, OPPONENT_ABIGAIL_3, OPPONENT_ABIGAIL_4, OPPONENT_ABIGAIL_5},
+        MAP_GROUP_ROUTE110,
+        MAP_ID_ROUTE110,
+    },
+    {
+        {OPPONENT_BENJAMIN_1, OPPONENT_BENJAMIN_2, OPPONENT_BENJAMIN_3, OPPONENT_BENJAMIN_4, OPPONENT_BENJAMIN_5},
+        MAP_GROUP_ROUTE110,
+        MAP_ID_ROUTE110,
+    },
+    {
+        {OPPONENT_ISAIAH_1, OPPONENT_ISAIAH_2, OPPONENT_ISAIAH_3, OPPONENT_ISAIAH_4, OPPONENT_ISAIAH_5},
+        MAP_GROUP_ROUTE128,
+        MAP_ID_ROUTE128,
+    },
+    {
+        {OPPONENT_KATELYN_1, OPPONENT_KATELYN_2, OPPONENT_KATELYN_3, OPPONENT_KATELYN_4, OPPONENT_KATELYN_5},
+        MAP_GROUP_ROUTE128,
+        MAP_ID_ROUTE128,
+    },
+    {
+        {OPPONENT_MARIA_1, OPPONENT_MARIA_2, OPPONENT_MARIA_3, OPPONENT_MARIA_4, OPPONENT_MARIA_5},
+        MAP_GROUP_ROUTE117,
+        MAP_ID_ROUTE117,
+    },
+    {
+        {OPPONENT_DYLAN_1, OPPONENT_DYLAN_2, OPPONENT_DYLAN_3, OPPONENT_DYLAN_4, OPPONENT_DYLAN_5},
+        MAP_GROUP_ROUTE117,
+        MAP_ID_ROUTE117,
+    },
+    {
+        {OPPONENT_NICOLAS_1, OPPONENT_NICOLAS_2, OPPONENT_NICOLAS_3, OPPONENT_NICOLAS_4, OPPONENT_NICOLAS_5},
+        MAP_GROUP_METEOR_FALLS_1F_2R,
+        MAP_ID_METEOR_FALLS_1F_2R,
+    },
+    {
+        {OPPONENT_ROBERT_1, OPPONENT_ROBERT_2, OPPONENT_ROBERT_3, OPPONENT_ROBERT_4, OPPONENT_ROBERT_5},
+        MAP_GROUP_ROUTE120,
+        MAP_ID_ROUTE120,
+    },
+    {
+        {OPPONENT_LAO_1, OPPONENT_LAO_2, OPPONENT_LAO_3, OPPONENT_LAO_4, OPPONENT_LAO_5},
+        MAP_GROUP_ROUTE113,
+        MAP_ID_ROUTE113,
+    },
+    {
+        {OPPONENT_CYNDY_1, OPPONENT_CYNDY_2, OPPONENT_CYNDY_3, OPPONENT_CYNDY_4, OPPONENT_CYNDY_5},
+        MAP_GROUP_ROUTE115,
+        MAP_ID_ROUTE115,
+    },
+    {
+        {OPPONENT_MADELINE_1, OPPONENT_MADELINE_2, OPPONENT_MADELINE_3, OPPONENT_MADELINE_4, OPPONENT_MADELINE_5},
+        MAP_GROUP_ROUTE113,
+        MAP_ID_ROUTE113,
+    },
+    {
+        {OPPONENT_JENNY_1, OPPONENT_JENNY_2, OPPONENT_JENNY_3, OPPONENT_JENNY_4, OPPONENT_JENNY_5},
+        MAP_GROUP_ROUTE124,
+        MAP_ID_ROUTE124,
+    },
+    {
+        {OPPONENT_DIANA_1, OPPONENT_DIANA_2, OPPONENT_DIANA_3, OPPONENT_DIANA_4, OPPONENT_DIANA_5},
+        MAP_GROUP_JAGGED_PASS,
+        MAP_ID_JAGGED_PASS,
+    },
+    {
+        {OPPONENT_AMY_AND_LIV_1, OPPONENT_AMY_AND_LIV_2, OPPONENT_AMY_AND_LIV_4, OPPONENT_AMY_AND_LIV_5, OPPONENT_AMY_AND_LIV_6},
+        MAP_GROUP_ROUTE103,
+        MAP_ID_ROUTE103,
+    },
+    {
+        {OPPONENT_ERNEST_1, OPPONENT_ERNEST_2, OPPONENT_ERNEST_3, OPPONENT_ERNEST_4, OPPONENT_ERNEST_5},
+        MAP_GROUP_ROUTE125,
+        MAP_ID_ROUTE125,
+    },
+    {
+        {OPPONENT_EDWIN_1, OPPONENT_EDWIN_2, OPPONENT_EDWIN_3, OPPONENT_EDWIN_4, OPPONENT_EDWIN_5},
+        MAP_GROUP_ROUTE110,
+        MAP_ID_ROUTE110,
+    },
+    {
+        {OPPONENT_LYDIA_1, OPPONENT_LYDIA_2, OPPONENT_LYDIA_3, OPPONENT_LYDIA_4, OPPONENT_LYDIA_5},
+        MAP_GROUP_ROUTE117,
+        MAP_ID_ROUTE117,
+    },
+    {
+        {OPPONENT_ISAAC_1, OPPONENT_ISAAC_2, OPPONENT_ISAAC_3, OPPONENT_ISAAC_4, OPPONENT_ISAAC_5},
+        MAP_GROUP_ROUTE117,
+        MAP_ID_ROUTE117,
+    },
+    {
+        {OPPONENT_CATHERINE_1, OPPONENT_CATHERINE_2, OPPONENT_CATHERINE_3, OPPONENT_CATHERINE_4, OPPONENT_CATHERINE_5},
+        MAP_GROUP_ROUTE119,
+        MAP_ID_ROUTE119,
+    },
+    {
+        {OPPONENT_JACKSON_1, OPPONENT_JACKSON_2, OPPONENT_JACKSON_3, OPPONENT_JACKSON_4, OPPONENT_JACKSON_5},
+        MAP_GROUP_ROUTE119,
+        MAP_ID_ROUTE119,
+    },
+    {
+        {OPPONENT_HALEY_1, OPPONENT_HALEY_2, OPPONENT_HALEY_3, OPPONENT_HALEY_4, OPPONENT_HALEY_5},
+        MAP_GROUP_ROUTE104,
+        MAP_ID_ROUTE104,
+    },
+    {
+        {OPPONENT_JAMES_1, OPPONENT_JAMES_2, OPPONENT_JAMES_3, OPPONENT_JAMES_4, OPPONENT_JAMES_5},
+        MAP_GROUP_PETALBURG_WOODS,
+        MAP_ID_PETALBURG_WOODS,
+    },
+    {
+        {OPPONENT_TRENT_1, OPPONENT_TRENT_2, OPPONENT_TRENT_3, OPPONENT_TRENT_4, OPPONENT_TRENT_5},
+        MAP_GROUP_ROUTE112,
+        MAP_ID_ROUTE112,
+    },
+    {
+        {OPPONENT_LOIS_AND_HAL_1, OPPONENT_LOIS_AND_HAL_2, OPPONENT_LOIS_AND_HAL_3, OPPONENT_LOIS_AND_HAL_4, OPPONENT_LOIS_AND_HAL_5},
+        MAP_GROUP_ABANDONED_SHIP_ROOMS2_1F,
+        MAP_ID_ABANDONED_SHIP_ROOMS2_1F,
+    },
+    {
+        {OPPONENT_WALLY_3, OPPONENT_WALLY_4, OPPONENT_WALLY_5, OPPONENT_WALLY_6, OPPONENT_NONE},
+        MAP_GROUP_VICTORY_ROAD_1F,
+        MAP_ID_VICTORY_ROAD_1F,
+    },
+};
+
+static const u16 sBadgeFlags[] = {BADGE01_GET, BADGE02_GET, BADGE03_GET, BADGE04_GET, BADGE05_GET, BADGE06_GET, BADGE07_GET, BADGE08_GET};
 
 void task01_battle_start(u8 taskId)
 {
@@ -154,143 +460,143 @@ void task_add_01_battle_start(u8 transition, u16 song)
 void CheckForSafariZoneAndProceed(void)
 {
     if (GetSafariZoneFlag())
-        sub_8081AA4();
+        StartBattle_Safari();
     else
-        sub_8081A18();
+        StartBattle_StandardWild();
 }
 
-void sub_8081A18(void)
+void StartBattle_StandardWild(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = sub_8081C8C;
-    gUnknown_020239F8 = 0;
+    gMain.savedCallback = HandleWildBattleEnd;
+    gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081A5C(void)
+void StartBattle_Roamer(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = sub_8081C8C;
-    gUnknown_020239F8 = 1024;
+    gMain.savedCallback = HandleWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081AA4(void)
+void StartBattle_Safari(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = sub_80C824C;
-    gUnknown_020239F8 = 128;
+    gMain.savedCallback = sub_80C824C;
+    gBattleTypeFlags = BATTLE_TYPE_SAFARI;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
 }
 
 void task_add_01_battle_start_with_music_and_stats(void)
 {
     task_add_01_battle_start(GetTrainerBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(9);
+    IncrementGameStat(7);
+    IncrementGameStat(9);
 }
 
 //Initiates battle where Wally catches Ralts
-void sub_8081AFC(void)
+void StartBattle_WallyTutorial(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
-    gMain.field_8 = c2_exit_to_overworld_1_continue_scripts_restart_music;
-    gUnknown_020239F8 = 512;
+    gMain.savedCallback = c2_exit_to_overworld_1_continue_scripts_restart_music;
+    gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     task_add_01_battle_start(8, 0);
 }
 
-void sub_8081B3C(void)
+void StartBattle_ScriptedWild(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gUnknown_020239F8 = 0;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081B78(void)
+void StartBattle_SouthernIsland(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gUnknown_020239F8 = 0x2000;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081BB8(void)
+void StartBattle_Rayquaza(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gUnknown_020239F8 = 0x2000;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081BF8(void)
+void StartBattle_GroudonKyogre(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gUnknown_020239F8 = 12288;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == 2)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
         task_add_01_battle_start(0x6, BGM_BATTLE34); // GROUDON
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081C50(void)
+void StartBattle_Regi(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gUnknown_020239F8 = 24576;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
-void sub_8081C8C(void)
+void HandleWildBattleEnd(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
-        gUnknown_0300485C = sub_8080E44;
+        gFieldCallback = sub_8080E44;
     }
 }
 
-void sub_8081CEC(void)
+void HandleScriptedWildBattleEnd(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
-        SetMainCallback2(c2_whiteout);
+    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
+        SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-s8 sub_8081D3C(void)
+s8 GetBattleTerrain(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -304,24 +610,24 @@ s8 sub_8081D3C(void)
         return 1;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return 2;
-    switch (gMapHeader.light)
+    switch (gMapHeader.mapType)
     {
-    case 1:
-    case 2:
-    case 3:
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
         break;
-    case 4:
+    case MAP_TYPE_UNDERGROUND:
         if (sub_80574C4(tileBehavior))
             return 8;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return 5;
         return 7;
-    case 8:
-    case 9:
+    case MAP_TYPE_INDOOR:
+    case MAP_TYPE_SECRET_BASE:
         return 8;
-    case 5:
+    case MAP_TYPE_UNDERWATER:
         return 3;
-    case 6:
+    case MAP_TYPE_6:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return 4;
         return 9;
@@ -346,7 +652,7 @@ s8 sub_8081D3C(void)
     return 9;
 }
 
-s8 sub_8081E90(void)
+s8 GetBattleTransitionTypeByMap(void)
 {
     u8 flashUsed;
     u16 tileBehavior;
@@ -362,11 +668,11 @@ s8 sub_8081E90(void)
 
     if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
-        switch (gMapHeader.light)
+        switch (gMapHeader.mapType)
         {
-        case 4:
+        case MAP_TYPE_UNDERGROUND:
             return 1;
-        case 5:
+        case MAP_TYPE_UNDERWATER:
             return 3;
         default:
             return 0;
@@ -383,8 +689,8 @@ u16 GetSumOfPartyMonLevel(u8 numMons)
     for (i = 0; i < 6; i++)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        
-        if (species != 412 && species != 0 && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
+
+        if (species != SPECIES_EGG && species != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
             sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
             numMons--;
@@ -436,7 +742,7 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
 
 u8 GetWildBattleTransition(void)
 {
-    u8 flashVar = sub_8081E90();
+    u8 flashVar = GetBattleTransitionTypeByMap();
     u8 level = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
 
     if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
@@ -447,8 +753,8 @@ u8 GetWildBattleTransition(void)
 
 u8 GetTrainerBattleTransition(void)
 {
-    struct Trainer *trainer;
-    u8 partyCount;
+    const struct Trainer *trainer;
+    u8 minPartyCount;
     u8 flashVar;
     u8 level;
 
@@ -474,14 +780,14 @@ u8 GetTrainerBattleTransition(void)
         return 16;
 
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
-        partyCount = 2; // double battles always at least have 2 pokemon.
+        minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
-        partyCount = 1;
+        minPartyCount = 1;
 
-    flashVar = sub_8081E90();
-    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
+    flashVar = GetBattleTransitionTypeByMap();
+    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, minPartyCount);
 
-    if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
+    if (level < (u8)GetSumOfPartyMonLevel(minPartyCount)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Trainer[flashVar][0];
     else
         return gBattleTransitionTable_Trainer[flashVar][1];
@@ -497,13 +803,13 @@ u8 GetBattleTowerBattleTransition(void)
         return 3;
 }
 
-void sub_8082168(void)
+void ChooseStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
-    gMain.field_8 = sub_8082188;
+    gMain.savedCallback = CB2_GiveStarter;
 }
 
-void sub_8082188(void)
+void CB2_GiveStarter(void)
 {
     u16 starterPoke;
 
@@ -512,28 +818,28 @@ void sub_8082188(void)
     ScriptGiveMon(starterPoke, 5, 0, 0, 0, 0);
     ResetTasks();
     sub_80408BC();
-    SetMainCallback2(sub_80821D8);
+    SetMainCallback2(CB2_StartFirstBattle);
     sub_811AAD8(0);
 }
 
-void sub_80821D8(void)
+void CB2_StartFirstBattle(void)
 {
     UpdatePaletteFade();
     RunTasks();
 
     if (sub_811AAE8() == TRUE)
     {
-        gUnknown_020239F8 = 16;
-        gMain.field_8 = sub_8082228;
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+        gMain.savedCallback = HandleFirstBattleEnd;
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
-        sav12_xor_increment(7);
-        sav12_xor_increment(8);
+        IncrementGameStat(7);
+        IncrementGameStat(8);
     }
 }
 
-void sub_8082228(void)
+void HandleFirstBattleEnd(void)
 {
     sav1_reset_battle_music_maybe();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -589,7 +895,7 @@ void sub_80822BC(void)
     gTrainerBattleEndScript = 0;
 }
 
-void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
+void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, u8 *data)
 {
     while (1)
     {
@@ -733,8 +1039,8 @@ void trainer_flag_clear(u16 flag)
 
 void sub_80825E4(void)
 {
-    gUnknown_020239F8 = 8;
-    gMain.field_8 = sub_808260C;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gMain.savedCallback = sub_808260C;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
 }
@@ -745,9 +1051,9 @@ void sub_808260C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -762,9 +1068,9 @@ void do_choose_name_or_words_screen(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
+    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -776,8 +1082,8 @@ void do_choose_name_or_words_screen(void)
 
 void sub_80826B0(void)
 {
-    gUnknown_020239F8 = 8;
-    gMain.field_8 = do_choose_name_or_words_screen;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gMain.savedCallback = do_choose_name_or_words_screen;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
 }
@@ -803,7 +1109,7 @@ u8 *sub_8082700(void)
         return gUnknown_081C6C02;
 }
 
-void sub_8082718()
+void sub_8082718(void)
 {
     ShowFieldMessage(sub_8082880());
 }
@@ -863,12 +1169,12 @@ void PlayTrainerEncounterMusic(void)
 }
 
 //Returns an empty string if a null pointer was passed, otherwise returns str
-u8 *SanitizeString(u8 *str)
+u8 *SanitizeString(const u8 *str)
 {
     if (str)
-        return str;
+        return (u8 *) str;
     else
-        return gOtherText_CancelWithTerminator;
+        return (u8 *) gOtherText_CancelWithTerminator;
 }
 
 u8 *sub_808281C(void)
@@ -899,7 +1205,7 @@ u8 *sub_8082880(void)
     return SanitizeString(gTrainerCannotBattleSpeech);
 }
 
-s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+s32 sub_8082894(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 i;
 
@@ -911,7 +1217,7 @@ s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
     return -1;
 }
 
-s32 sub_80828B8(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+s32 sub_80828B8(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 i;
     s32 j;
@@ -927,7 +1233,7 @@ s32 sub_80828B8(struct TrainerEyeTrainer *trainers, u16 trainerNum)
     return -1;
 }
 
-bool32 sub_80828FC(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+bool32 sub_80828FC(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     int i;
     bool32 ret = FALSE;
@@ -952,7 +1258,7 @@ bool32 sub_80828FC(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
    return ret;
 }
 
-s32 sub_80829A8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+s32 sub_80829A8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     s32 i;
 
@@ -964,7 +1270,7 @@ s32 sub_80829A8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
     return 0;
 }
 
-s32 sub_80829E8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+s32 sub_80829E8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     s32 i;
 
@@ -976,7 +1282,7 @@ s32 sub_80829E8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
     return 0;
 }
 
-bool8 sub_8082A18(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
 
@@ -986,7 +1292,7 @@ bool8 sub_8082A18(struct TrainerEyeTrainer *trainers, u16 trainerNum)
         return FALSE;
 }
 
-bool8 sub_8082A54(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 sub_8082A54(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
 
@@ -996,10 +1302,10 @@ bool8 sub_8082A54(struct TrainerEyeTrainer *trainers, u16 trainerNum)
         return FALSE;
 }
 
-u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+u16 sub_8082A90(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     int i;
-    struct TrainerEyeTrainer *trainer;
+    const struct TrainerEyeTrainer *trainer;
     s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
 
     if (trainerEyeIndex == -1)
@@ -1015,7 +1321,7 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
     return trainer->trainerNums[4];
 }
 
-void sub_8082AE4(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+void sub_8082AE4(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
 
@@ -1023,7 +1329,7 @@ void sub_8082AE4(struct TrainerEyeTrainer *trainers, u16 trainerNum)
         gSaveBlock1.trainerRematches[trainerEyeIndex] = 0;
 }
 
-bool8 sub_8082B10(struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 sub_8082B10(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
 
@@ -1040,7 +1346,7 @@ bool32 sub_8082B44(void)
 
     for (i = 0; i < 8; i++)
     {
-        if (FlagGet(gBadgeFlags[i]) == TRUE)
+        if (FlagGet(sBadgeFlags[i]) == TRUE)
         {
             badgeCount++;
             if (badgeCount >= 5)

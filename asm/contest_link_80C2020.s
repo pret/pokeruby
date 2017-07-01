@@ -281,17 +281,17 @@ sub_80C226C: @ 80C226C
 	ldrb r0, [r0]
 	cmp r5, r0
 	bne _080C2294
-	ldr r0, _080C228C @ =gUnknown_020238CC
+	ldr r0, _080C228C @ =gDisplayedStringBattle
 	ldr r1, _080C2290 @ =gUnknown_083D17DC
 	bl StringCopy
 	adds r2, r0, 0
 	b _080C2296
 	.align 2, 0
 _080C2288: .4byte gContestPlayerMonIndex
-_080C228C: .4byte gUnknown_020238CC
+_080C228C: .4byte gDisplayedStringBattle
 _080C2290: .4byte gUnknown_083D17DC
 _080C2294:
-	ldr r2, _080C22E8 @ =gUnknown_020238CC
+	ldr r2, _080C22E8 @ =gDisplayedStringBattle
 _080C2296:
 	movs r4, 0xFC
 	strb r4, [r2]
@@ -316,7 +316,7 @@ _080C2296:
 	adds r0, r2, 0
 	bl StringCopy
 	adds r2, r0, 0
-	ldr r0, _080C22F4 @ =gUnknown_0203869A
+	ldr r0, _080C22F4 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -331,10 +331,10 @@ _080C2296:
 	bl StringCopy
 	b _080C230A
 	.align 2, 0
-_080C22E8: .4byte gUnknown_020238CC
+_080C22E8: .4byte gDisplayedStringBattle
 _080C22EC: .4byte gContestMons + 0x2
 _080C22F0: .4byte gUnknown_083D17E0
-_080C22F4: .4byte gUnknown_0203869A
+_080C22F4: .4byte gIsLinkContest
 _080C22F8: .4byte gLinkPlayers + 0x8
 _080C22FC:
 	adds r1, r7, 0
@@ -345,7 +345,7 @@ _080C22FC:
 	lsls r4, r5, 3
 _080C230A:
 	ldr r0, _080C2334 @ =gMenuWindow
-	ldr r1, _080C2338 @ =gUnknown_020238CC
+	ldr r1, _080C2338 @ =gDisplayedStringBattle
 	adds r2, r4, r5
 	lsls r2, 18
 	ldr r3, _080C233C @ =0x03020000
@@ -365,7 +365,7 @@ _080C230A:
 	bx r0
 	.align 2, 0
 _080C2334: .4byte gMenuWindow
-_080C2338: .4byte gUnknown_020238CC
+_080C2338: .4byte gDisplayedStringBattle
 _080C233C: .4byte 0x03020000
 	thumb_func_end sub_80C226C
 
@@ -564,7 +564,7 @@ sub_80C24F4: @ 80C24F4
 	ands r0, r1
 	cmp r0, 0
 	bne _080C254E
-	ldr r0, _080C2530 @ =gUnknown_0203869A
+	ldr r0, _080C2530 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -582,7 +582,7 @@ sub_80C24F4: @ 80C24F4
 	b _080C254E
 	.align 2, 0
 _080C252C: .4byte gPaletteFade
-_080C2530: .4byte gUnknown_0203869A
+_080C2530: .4byte gIsLinkContest
 _080C2534: .4byte gOtherText_LinkStandby
 _080C2538: .4byte gTasks
 _080C253C: .4byte sub_80C255C
@@ -1169,7 +1169,7 @@ _080C299C:
 	movs r4, 0
 	ldr r2, _080C29F4 @ =gUnknown_02038690
 	ldrb r0, [r2]
-	ldr r1, _080C29F8 @ =gUnknown_0203869A
+	ldr r1, _080C29F8 @ =gIsLinkContest
 	ldr r3, _080C29FC @ =gStringVar1
 	cmp r0, 0
 	beq _080C29D4
@@ -1198,7 +1198,7 @@ _080C29D4:
 	b _080C2A10
 	.align 2, 0
 _080C29F4: .4byte gUnknown_02038690
-_080C29F8: .4byte gUnknown_0203869A
+_080C29F8: .4byte gIsLinkContest
 _080C29FC: .4byte gStringVar1
 _080C2A00: .4byte gLinkPlayers + 0x8
 _080C2A04:
@@ -1357,7 +1357,7 @@ _080C2B14:
 	str r6, [sp, 0x4]
 	str r4, [sp, 0x8]
 	ldr r3, _080C2BE4 @ =0x02000000
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r6, 0
 	ldr r1, [sp, 0xC]
 	adds r2, r4, 0
@@ -1586,7 +1586,7 @@ sub_80C2D1C: @ 80C2D1C
 	ands r0, r1
 	cmp r0, 0
 	beq _080C2D66
-	ldr r0, _080C2D70 @ =gUnknown_0203869A
+	ldr r0, _080C2D70 @ =gIsLinkContest
 	ldrb r1, [r0]
 	adds r0, r2, 0
 	ands r0, r1
@@ -1601,7 +1601,7 @@ _080C2D42:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0
@@ -1619,7 +1619,7 @@ _080C2D66:
 	bx r0
 	.align 2, 0
 _080C2D6C: .4byte gMain
-_080C2D70: .4byte gUnknown_0203869A
+_080C2D70: .4byte gIsLinkContest
 _080C2D74: .4byte gContestMons
 _080C2D78: .4byte gTasks
 _080C2D7C: .4byte sub_80C2D80
@@ -1630,7 +1630,7 @@ sub_80C2D80: @ 80C2D80
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080C2DAC @ =gUnknown_0203869A
+	ldr r0, _080C2DAC @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -1648,7 +1648,7 @@ sub_80C2D80: @ 80C2D80
 	str r1, [r0]
 	b _080C2DCA
 	.align 2, 0
-_080C2DAC: .4byte gUnknown_0203869A
+_080C2DAC: .4byte gIsLinkContest
 _080C2DB0: .4byte gOtherText_LinkStandby
 _080C2DB4: .4byte gTasks
 _080C2DB8: .4byte sub_80C2DD8
@@ -1678,7 +1678,7 @@ sub_80C2DD8: @ 80C2DD8
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080C2DFC
-	ldr r0, _080C2E08 @ =gUnknown_0203869A
+	ldr r0, _080C2E08 @ =gIsLinkContest
 	strb r1, [r0]
 	bl sub_80C3764
 	ldr r1, _080C2E0C @ =gTasks
@@ -1694,7 +1694,7 @@ _080C2DFC:
 	bx r0
 	.align 2, 0
 _080C2E04: .4byte gReceivedRemoteLinkPlayers
-_080C2E08: .4byte gUnknown_0203869A
+_080C2E08: .4byte gIsLinkContest
 _080C2E0C: .4byte gTasks
 _080C2E10: .4byte sub_80C2E14
 	thumb_func_end sub_80C2DD8
@@ -1973,7 +1973,7 @@ sub_80C3024: @ 80C3024
 	cmp r3, 0
 	beq _080C30B0
 	adds r1, r6, 0
-	bl sub_809D4F4
+	bl GetMonIconPtr
 	lsls r1, r5, 9
 	adds r0, r1
 	adds r0, 0x80
@@ -2031,7 +2031,7 @@ _080C30A8: .4byte 0x84000060
 _080C30AC: .4byte 0x0600c000
 _080C30B0:
 	adds r1, r6, 0
-	bl sub_809D4F4
+	bl GetMonIconPtr
 	lsls r1, r5, 9
 	adds r0, r1
 	adds r0, 0x80
@@ -2198,7 +2198,7 @@ _080C31CE:
 	bl GetStringWidthGivenWindowConfig
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, _080C32D4 @ =gUnknown_020238CC
+	ldr r2, _080C32D4 @ =gDisplayedStringBattle
 	ldr r1, _080C32D8 @ =gUnknown_083D17E2
 	adds r0, r2, 0
 	bl StringCopy
@@ -2237,7 +2237,7 @@ _080C3218:
 	strb r0, [r2, 0x3]
 	ldr r0, _080C32DC @ =0x02018068
 	mov r10, r0
-	ldr r1, _080C32D4 @ =gUnknown_020238CC
+	ldr r1, _080C32D4 @ =gDisplayedStringBattle
 	bl sub_80034D4
 	mov r0, sp
 	ldrh r4, [r0]
@@ -2301,7 +2301,7 @@ _080C32C4: .4byte gWindowConfig_81E7278
 _080C32C8: .4byte 0x06010000
 _080C32CC: .4byte 0x040000d4
 _080C32D0: .4byte 0x85000100
-_080C32D4: .4byte gUnknown_020238CC
+_080C32D4: .4byte gDisplayedStringBattle
 _080C32D8: .4byte gUnknown_083D17E2
 _080C32DC: .4byte 0x02018068
 _080C32E0: .4byte gUnknown_083D1624
@@ -2954,7 +2954,7 @@ sub_80C37E4: @ 80C37E4
 	sub sp, 0x10
 	movs r5, 0x1
 	movs r4, 0
-	ldr r0, _080C3808 @ =gUnknown_0203869A
+	ldr r0, _080C3808 @ =gIsLinkContest
 	ldrb r0, [r0]
 	adds r1, r5, 0
 	ands r1, r0
@@ -2968,7 +2968,7 @@ sub_80C37E4: @ 80C37E4
 	str r2, [sp, 0x4]
 	b _080C386A
 	.align 2, 0
-_080C3808: .4byte gUnknown_0203869A
+_080C3808: .4byte gIsLinkContest
 _080C380C: .4byte 0x0600e000
 _080C3810: .4byte gUnknown_08E964B8
 _080C3814:
@@ -4871,7 +4871,7 @@ sub_80C4698: @ 80C4698
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
-	ldr r0, _080C46E4 @ =gUnknown_0203869A
+	ldr r0, _080C46E4 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -4898,14 +4898,14 @@ _080C46DA:
 	bx r0
 	.align 2, 0
 _080C46E0: .4byte gContestMons + 0x2
-_080C46E4: .4byte gUnknown_0203869A
+_080C46E4: .4byte gIsLinkContest
 _080C46E8: .4byte gLinkPlayers
 	thumb_func_end sub_80C4698
 
 	thumb_func_start sub_80C46EC
 sub_80C46EC: @ 80C46EC
 	push {lr}
-	ldr r0, _080C4710 @ =gUnknown_0203869A
+	ldr r0, _080C4710 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -4922,7 +4922,7 @@ sub_80C46EC: @ 80C46EC
 	bl sub_80C4674
 	b _080C4730
 	.align 2, 0
-_080C4710: .4byte gUnknown_0203869A
+_080C4710: .4byte gIsLinkContest
 _080C4714: .4byte gStringVar1
 _080C4718: .4byte gSpecialVar_0x8006
 _080C471C: .4byte gLinkPlayers + 0x8
@@ -5047,7 +5047,7 @@ sub_80C47F0: @ 80C47F0
 	movs r2, 0
 	ldr r3, _080C4830 @ =gUnknown_02038690
 	ldrb r0, [r3]
-	ldr r1, _080C4834 @ =gUnknown_0203869A
+	ldr r1, _080C4834 @ =gIsLinkContest
 	ldr r4, _080C4838 @ =gStringVar3
 	cmp r0, 0
 	beq _080C4812
@@ -5077,7 +5077,7 @@ _080C4812:
 	b _080C484C
 	.align 2, 0
 _080C4830: .4byte gUnknown_02038690
-_080C4834: .4byte gUnknown_0203869A
+_080C4834: .4byte gIsLinkContest
 _080C4838: .4byte gStringVar3
 _080C483C: .4byte gLinkPlayers + 0x8
 _080C4840:

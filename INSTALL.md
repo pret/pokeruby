@@ -1,12 +1,10 @@
-First, you must put a Pokémon Ruby 1.0 (US) ROM in the root directory of the repository and name it `baserom.gba`. It should have a SHA1 checksum of `f28b6ffc97847e94a6c21a63cacf633ee5c8df1e`. Then, follow the OS-specific instructions below.
-
 # Linux
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
-Then get the compiler from https://github.com/YamaArashi/agbcc and run the following commands.
+Then get the compiler from https://github.com/pret/agbcc and run the following commands.
 
 	build.sh
 	install.sh PATH_OF_POKERUBY_DIRECTORY
@@ -23,7 +21,7 @@ Finally, build the rom.
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
+Then get the compiled tools from https://github.com/pret/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
 
 You can then build pokeruby using `make` in the MSYS environment provided with devkitARM.
 
@@ -54,5 +52,3 @@ Pokémon Sapphire 1.1
 Pokémon Sapphire 1.2
 
 	make sapphire_rev2
-
-Note that if you have already built a ROM, you must run `make tidy` before building a different one. This command will delete the ROM you built as well as intermediate files, so you should copy the ROM to another directory before running `make tidy` if you would like to keep the ROM.

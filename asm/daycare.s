@@ -6,510 +6,6 @@
 
 	.text
 
-	thumb_func_start pokemon_get_nick
-pokemon_get_nick: @ 80412B0
-	push {r4,lr}
-	sub sp, 0x14
-	adds r4, r1, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	adds r0, r4, 0
-	mov r1, sp
-	bl StringCopy10
-	add sp, 0x14
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end pokemon_get_nick
-
-	thumb_func_start pokemon_get_nick_
-pokemon_get_nick_: @ 80412D0
-	push {r4,lr}
-	sub sp, 0x14
-	adds r4, r1, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl GetBoxMonData
-	adds r0, r4, 0
-	mov r1, sp
-	bl StringCopy10
-	add sp, 0x14
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end pokemon_get_nick_
-
-	thumb_func_start daycare_count_pokemon
-daycare_count_pokemon: @ 80412F0
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	movs r4, 0
-_080412F8:
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 4
-	adds r0, r6, r0
-	movs r1, 0xB
-	bl GetBoxMonData
-	cmp r0, 0
-	beq _08041310
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-_08041310:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x1
-	bls _080412F8
-	adds r0, r5, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end daycare_count_pokemon
-
-	thumb_func_start sub_8041324
-sub_8041324: @ 8041324
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	mov r9, r0
-	mov r10, r1
-	movs r7, 0
-	movs r5, 0
-	mov r6, r10
-	adds r6, 0x74
-	movs r0, 0x1
-	mov r8, r0
-_0804133E:
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 4
-	mov r1, r9
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetBoxMonData
-	cmp r0, 0
-	beq _0804136E
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r4, 0
-	movs r1, 0xC
-	bl GetBoxMonData
-	adds r1, r0, 0
-	cmp r1, 0
-	bne _0804136E
-	lsls r0, r5, 1
-	adds r0, r6, r0
-	b _08041374
-_0804136E:
-	lsls r0, r5, 1
-	adds r0, r6, r0
-	mov r1, r8
-_08041374:
-	strh r1, [r0]
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bls _0804133E
-	mov r0, r10
-	str r7, [r0, 0x70]
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8041324
-
-	thumb_func_start daycare_empty_slot
-daycare_empty_slot: @ 8041394
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r4, 0
-_0804139A:
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 4
-	adds r0, r5, r0
-	movs r1, 0xB
-	bl GetBoxMonData
-	cmp r0, 0
-	bne _080413B2
-	lsls r0, r4, 24
-	asrs r0, 24
-	b _080413C0
-_080413B2:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x1
-	bls _0804139A
-	movs r0, 0x1
-	negs r0, r0
-_080413C0:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end daycare_empty_slot
-
-	thumb_func_start sub_80413C8
-sub_80413C8: @ 80413C8
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	adds r7, r0, 0
-	mov r8, r1
-	mov r0, r8
-	bl daycare_empty_slot
-	lsls r0, 24
-	lsrs r4, r0, 24
-	mov r9, r4
-	adds r0, r7, 0
-	bl sub_80A2B94
-	lsls r0, 24
-	cmp r0, 0
-	beq _0804144A
-	lsls r0, r4, 24
-	asrs r0, 24
-	lsls r4, r0, 3
-	subs r4, r0
-	lsls r4, 3
-	adds r5, r4, 0
-	adds r5, 0xA0
-	add r5, r8
-	adds r6, r5, 0
-	adds r6, 0x24
-	ldr r1, _08041490 @ =gSaveBlock2
-	adds r0, r6, 0
-	bl StringCopy
-	adds r0, r6, 0
-	movs r1, 0xFC
-	bl sub_814A518
-	adds r6, 0x8
-	adds r0, r7, 0
-	adds r1, r6, 0
-	bl pokemon_get_nick
-	adds r0, r7, 0
-	movs r1, 0x40
-	bl GetMonData
-	lsls r0, 24
-	lsrs r0, 24
-	add r4, r8
-	ldr r2, _08041494 @ =gSaveBlock1
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	adds r4, 0xA0
-	ldr r0, _08041498 @ =0x00002b4c
-	adds r1, r0
-	ldm r1!, {r0,r2,r3}
-	stm r4!, {r0,r2,r3}
-	ldm r1!, {r0,r2,r3}
-	stm r4!, {r0,r2,r3}
-	ldm r1!, {r0,r2,r3}
-	stm r4!, {r0,r2,r3}
-	adds r0, r7, 0
-	bl sub_80A2DF8
-_0804144A:
-	mov r2, r9
-	lsls r4, r2, 24
-	asrs r4, 24
-	lsls r5, r4, 2
-	adds r4, r5, r4
-	lsls r4, 4
-	add r4, r8
-	adds r0, r4, 0
-	adds r1, r7, 0
-	movs r2, 0x50
-	bl memcpy
-	adds r0, r4, 0
-	bl pokemon_restore_pp
-	movs r0, 0x88
-	lsls r0, 1
-	add r0, r8
-	adds r0, r5
-	movs r1, 0
-	str r1, [r0]
-	adds r0, r7, 0
-	bl ZeroMonData
-	bl party_compaction
-	bl CalculatePlayerPartyCount
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08041490: .4byte gSaveBlock2
-_08041494: .4byte gSaveBlock1
-_08041498: .4byte 0x00002b4c
-	thumb_func_end sub_80413C8
-
-	thumb_func_start daycare_send
-daycare_send: @ 804149C
-	push {lr}
-	ldr r0, _080414B4 @ =gUnknown_03005CE0
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _080414B8 @ =gPlayerParty
-	adds r0, r1
-	ldr r1, _080414BC @ =gSaveBlock1 + 0x2F9C
-	bl sub_80413C8
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080414B4: .4byte gUnknown_03005CE0
-_080414B8: .4byte gPlayerParty
-_080414BC: .4byte gSaveBlock1 + 0x2F9C
-	thumb_func_end daycare_send
-
-	thumb_func_start sub_80414C0
-sub_80414C0: @ 80414C0
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r4, r5, 0
-	adds r4, 0x50
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetBoxMonData
-	cmp r0, 0
-	beq _08041516
-	adds r0, r5, 0
-	movs r1, 0xB
-	bl GetBoxMonData
-	adds r6, r0, 0
-	cmp r6, 0
-	bne _08041516
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0x50
-	bl memcpy
-	adds r0, r4, 0
-	bl ZeroBoxMonData
-	adds r0, r5, 0
-	adds r0, 0xA0
-	adds r4, 0x88
-	adds r1, r4, 0
-	movs r2, 0x38
-	bl memcpy
-	movs r0, 0x88
-	lsls r0, 1
-	adds r2, r5, r0
-	adds r0, 0x4
-	adds r1, r5, r0
-	ldr r0, [r1]
-	str r0, [r2]
-	str r6, [r1]
-	adds r0, r4, 0
-	bl sub_80417F4
-_08041516:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80414C0
-
-	thumb_func_start sub_804151C
-sub_804151C: @ 804151C
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	movs r5, 0
-	ldr r7, _08041538 @ =0x0000ffff
-_08041524:
-	adds r0, r4, 0
-	bl TryIncrementMonLevel
-	lsls r0, 24
-	cmp r0, 0
-	beq _08041560
-	movs r6, 0x1
-	adds r5, 0x1
-	b _0804154C
-	.align 2, 0
-_08041538: .4byte 0x0000ffff
-_0804153C:
-	movs r6, 0
-	cmp r0, r7
-	bne _0804154C
-	ldr r0, _0804156C @ =word_2024E82
-	ldrh r1, [r0]
-	adds r0, r4, 0
-	bl DeleteFirstMoveAndGiveMoveToMon
-_0804154C:
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_803B7C8
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0
-	bne _0804153C
-	cmp r5, 0x63
-	ble _08041524
-_08041560:
-	adds r0, r4, 0
-	bl CalculateMonStats
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804156C: .4byte word_2024E82
-	thumb_func_end sub_804151C
-
-	thumb_func_start sub_8041570
-sub_8041570: @ 8041570
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x68
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r7, r4, 2
-	adds r0, r7, r4
-	lsls r0, 4
-	adds r6, r5, r0
-	ldr r1, _08041640 @ =gStringVar1
-	adds r0, r6, 0
-	bl pokemon_get_nick_
-	adds r0, r6, 0
-	movs r1, 0xB
-	bl GetBoxMonData
-	lsls r0, 16
-	lsrs r0, 16
-	mov r9, r0
-	adds r0, r6, 0
-	mov r1, sp
-	bl sub_803B4B4
-	mov r0, sp
-	movs r1, 0x38
-	bl GetMonData
-	cmp r0, 0x64
-	beq _080415D8
-	mov r0, sp
-	movs r1, 0x19
-	bl GetMonData
-	movs r2, 0x88
-	lsls r2, 1
-	adds r1, r5, r2
-	adds r1, r7
-	ldr r1, [r1]
-	adds r0, r1
-	str r0, [sp, 0x64]
-	add r2, sp, 0x64
-	mov r0, sp
-	movs r1, 0x19
-	bl SetMonData
-	mov r0, sp
-	bl sub_804151C
-_080415D8:
-	ldr r0, _08041644 @ =gPlayerParty
-	movs r1, 0xFA
-	lsls r1, 1
-	adds r1, r0
-	mov r8, r1
-	mov r0, r8
-	mov r1, sp
-	movs r2, 0x64
-	bl memcpy
-	lsls r0, r4, 3
-	subs r0, r4
-	lsls r1, r0, 3
-	adds r0, r5, r1
-	adds r0, 0xC0
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _08041610
-	adds r4, r1, 0
-	adds r4, 0xA0
-	adds r4, r5, r4
-	mov r0, r8
-	adds r1, r4, 0
-	bl sub_80A2D88
-	adds r0, r4, 0
-	bl sub_80417F4
-_08041610:
-	bl party_compaction
-	adds r0, r6, 0
-	bl ZeroBoxMonData
-	movs r2, 0x88
-	lsls r2, 1
-	adds r0, r5, r2
-	adds r0, r7
-	movs r1, 0
-	str r1, [r0]
-	adds r0, r5, 0
-	bl sub_80414C0
-	bl CalculatePlayerPartyCount
-	mov r0, r9
-	add sp, 0x68
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08041640: .4byte gStringVar1
-_08041644: .4byte gPlayerParty
-	thumb_func_end sub_8041570
-
-	thumb_func_start sub_8041648
-sub_8041648: @ 8041648
-	push {lr}
-	ldr r0, _0804165C @ =gSaveBlock1 + 0x2F9C
-	ldr r1, _08041660 @ =gSpecialVar_0x8004
-	ldrb r1, [r1]
-	bl sub_8041570
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0804165C: .4byte gSaveBlock1 + 0x2F9C
-_08041660: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_8041648
-
-	thumb_func_start sub_8041664
-sub_8041664: @ 8041664
-	push {r4,r5,lr}
-	sub sp, 0x54
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r0, sp
-	adds r1, r4, 0
-	movs r2, 0x50
-	bl memcpy
-	adds r0, r4, 0
-	movs r1, 0x19
-	bl GetBoxMonData
-	adds r0, r5
-	str r0, [sp, 0x50]
-	add r2, sp, 0x50
-	mov r0, sp
-	movs r1, 0x19
-	bl SetBoxMonData
-	mov r0, sp
-	bl GetLevelFromBoxMonExp
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x54
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8041664
-
 	thumb_func_start sub_80416A0
 sub_80416A0: @ 80416A0
 	push {r4-r6,lr}
@@ -534,7 +30,7 @@ sub_80416A0: @ 80416A0
 	add r5, r8
 	ldr r1, [r5]
 	adds r0, r4, 0
-	bl sub_8041664
+	bl Daycare_GetLevelAfterSteps
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, r6
@@ -564,7 +60,7 @@ sub_80416E8: @ 80416E8
 	adds r6, r0
 	ldr r1, _08041720 @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	ldr r0, _08041724 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0
@@ -596,7 +92,7 @@ sub_8041728: @ 8041728
 	adds r6, r0
 	ldr r1, _08041768 @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -708,7 +204,7 @@ _08041812:
 	subs r1, 0x1
 	cmp r1, r2
 	bge _08041812
-	bl sub_80A2B40
+	bl ClearMailStruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80417F4
@@ -1266,7 +762,7 @@ _08041C18:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08041CD8 @ =gUnknown_03000470
-	bl sub_804051C
+	bl GetLevelUpMovesBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -2129,7 +1625,7 @@ sub_80422C4: @ 80422C4
 	beq _080422FC
 	ldr r1, _0804231C @ =gStringVar1
 	adds r0, r6, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r6, 0
 	movs r1, 0x3
 	bl GetBoxMonData
@@ -2154,7 +1650,7 @@ _080422FC:
 	beq _08042314
 	ldr r1, _08042324 @ =gStringVar2
 	adds r0, r4, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 _08042314:
 	pop {r4-r6}
 	pop {r0}
@@ -2168,14 +1664,14 @@ _08042324: .4byte gStringVar2
 	thumb_func_start sub_8042328
 sub_8042328: @ 8042328
 	push {r4-r6,lr}
-	ldr r6, _08042354 @ =gUnknown_03005CE0
+	ldr r6, _08042354 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
 	ldr r4, _08042358 @ =gPlayerParty
 	adds r0, r4
 	ldr r1, _0804235C @ =gStringVar1
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -2187,7 +1683,7 @@ sub_8042328: @ 8042328
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042354: .4byte gUnknown_03005CE0
+_08042354: .4byte gLastFieldPokeMenuOpened
 _08042358: .4byte gPlayerParty
 _0804235C: .4byte gStringVar1
 	thumb_func_end sub_8042328
@@ -2218,7 +1714,7 @@ sp0B6_daycare: @ 8042370
 _08042384: .4byte gSaveBlock1 + 0x2F9C
 _08042388:
 	adds r0, r4, 0
-	bl daycare_count_pokemon
+	bl Daycare_CountPokemon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2622,7 +2118,7 @@ _08042648:
 	adds r5, r1, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl MonAppendGenderSymbol
@@ -2682,7 +2178,7 @@ _080426C6:
 	adds r1, r6, r3
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8041664
+	bl Daycare_GetLevelAfterSteps
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2783,10 +2279,10 @@ _0804279C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080427E8
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	movs r0, 0x5
 	bl PlaySE
-	ldr r3, _080427DC @ =gUnknown_03005CE0
+	ldr r3, _080427DC @ =gLastFieldPokeMenuOpened
 	ldr r2, _080427E0 @ =gScriptResult
 	ldr r1, _080427E4 @ =gTasks
 	lsls r0, r4, 2
@@ -2806,7 +2302,7 @@ _0804279C:
 	bl EnableBothScriptContexts
 	b _08042816
 	.align 2, 0
-_080427DC: .4byte gUnknown_03005CE0
+_080427DC: .4byte gLastFieldPokeMenuOpened
 _080427E0: .4byte gScriptResult
 _080427E4: .4byte gTasks
 _080427E8:
@@ -2815,8 +2311,8 @@ _080427E8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08042816
-	bl sub_8072DEC
-	ldr r0, _0804281C @ =gUnknown_03005CE0
+	bl HandleDestroyMenuCursors
+	ldr r0, _0804281C @ =gLastFieldPokeMenuOpened
 	ldr r1, _08042820 @ =gScriptResult
 	strh r4, [r1]
 	movs r1, 0x2
@@ -2834,7 +2330,7 @@ _08042816:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804281C: .4byte gUnknown_03005CE0
+_0804281C: .4byte gLastFieldPokeMenuOpened
 _08042820: .4byte gScriptResult
 	thumb_func_end DaycareLevelMenuProcessKeyInput
 

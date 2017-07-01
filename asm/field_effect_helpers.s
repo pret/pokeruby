@@ -715,7 +715,7 @@ _08126D3E:
 	cmp r0, r1
 	bne _08126DBC
 	ldrb r0, [r4, 0x1E]
-	bl sub_8056E14
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126DBC

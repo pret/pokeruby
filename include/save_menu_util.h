@@ -2,8 +2,8 @@
 #define GUARD_SAVE_MENU_UTIL_H
 
 void HandleDrawSaveWindowInfo(s16 left, s16 top);
-void sub_80946C8(u16 left, u16 top);
-u8 sub_809473C(void);
+void HandleCloseSaveWindow(u16 left, u16 top);
+u8 IsResizeSaveWindowEnabled(void);
 void PrintSavePlayerName(s16 x, s16 y);
 void PrintSaveMapName(s16 x, s16 y);
 void PrintSaveBadges(s16 x, s16 y);

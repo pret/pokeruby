@@ -5,6 +5,10 @@ gLinkErrorOccurred
 4
 gLinkDebugValue2
 4
+#begin GERMAN
+deUnkValue1
+deUnkValue2
+#end
 gLinkPlayerPending
 gLinkPlayers
 gBlockReceived

@@ -3,11 +3,12 @@
 
 #include "sprite.h"
 
+extern const u16 gBirchBagGrassPal[2][16];
+extern const u8 gBirchBagTilemap[];
+extern const u8 gBirchGrassTilemap[];
+extern const u8 gBirchHelpGfx[];
+
 u16 GetStarterPokemon(u16);
 void CB2_ChooseStarter(void);
-void nullsub_72(struct Sprite *sprite);
-void sub_810A62C(struct Sprite *sprite);
-void sub_810A68C(struct Sprite *sprite);
-void StarterPokemonSpriteAnimCallback(struct Sprite *sprite);
 
 #endif // GUARD_STARTER_CHOOSE_H

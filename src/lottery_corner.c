@@ -1,109 +1,119 @@
 #include "global.h"
 #include "lottery_corner.h"
+#include "event_data.h"
+#include "items.h"
 #include "rng.h"
+#include "species.h"
 #include "string_util.h"
-#include "var.h"
+#include "text.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
-extern struct Pokemon gPlayerParty[6];
 extern struct PokemonStorage gPokemonStorage;
 extern u16 gSpecialVar_0x8005;
-extern u16 gUnknown_0840CB04[];
 extern u16 gSpecialVar_0x8006;
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
 
+static const u16 sLotteryPrizes[] =
+{
+    ITEM_PP_UP,
+    ITEM_EXP_SHARE,
+    ITEM_MAX_REVIVE,
+    ITEM_MASTER_BALL,
+};
+
 static u8 GetMatchingDigits(u16, u16);
 
-void sub_8145A78(void)
+void ResetLotteryCorner(void)
 {
     u16 rand = Random();
 
-    sub_8145D14((Random() << 16) | rand);
-    VarSet(0x4045, 0);
+    SetLotteryNumber((Random() << 16) | rand);
+    VarSet(VAR_POKELOT_PRIZE, 0);
 }
 
-void sub_8145AA4(u16 a)
+void SetRandomLotteryNumber(u16 i)
 {
     u32 var = Random();
-    
-    while(--a != 0xFFFF)
-    {
+
+    while (--i != 0xFFFF)
         var = var * 1103515245 + 12345;
-    }
-    sub_8145D14(var);    
+
+    SetLotteryNumber(var);
 }
 
-void sub_8145AEC(void)
+void RetrieveLotteryNumber(void)
 {
-    u16 a = sub_8145D3C();
-    gScriptResult = a;
+    u16 lottoNumber = GetLotteryNumber();
+    gScriptResult = lottoNumber;
 }
 
-//Script special function
 void PickLotteryCornerTicket(void)
 {
     u16 i;
     u16 j;
     u32 box;
     u32 slot;
-    
+
     gSpecialVar_0x8004 = 0;
     slot = 0;
     box = 0;
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
     {
         struct Pokemon *pkmn = &gPlayerParty[i];
-        
+
         // UB: Too few arguments for function GetMonData
-        if(GetMonData(pkmn, MON_DATA_SPECIES) != 0)
+        if (GetMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            if(!GetMonData(pkmn, MON_DATA_IS_EGG))
+            // do not calculate ticket values for eggs.
+            if (!GetMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
-                u8 a = GetMatchingDigits(gScriptResult, otId);
-                
-                if(a > gSpecialVar_0x8004 && a > 1)
+                u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
+
+                if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
-                    gSpecialVar_0x8004 = a - 1;
+                    gSpecialVar_0x8004 = numMatchingDigits - 1;
                     box = 14;
                     slot = i;
                 }
             }
         }
-        else
+        else // pokemon are always arranged from populated spots first to unpopulated, so the moment a NONE species is found, that's the end of the list.
             break;
     }
-    
-    for(i = 0; i < 14; i++)
+
+    // player has 14 boxes.
+    for (i = 0; i < 14; i++)
     {
-        for(j = 0; j < 0x1E; j++)
+        // player has 30 slots per box.
+        for (j = 0; j < 30; j++)
         {
             struct BoxPokemon *pkmn = &gPokemonStorage.boxes[i][j];
-            
+
             // UB: Too few arguments for function GetMonData
-            if(GetBoxMonData(pkmn, MON_DATA_SPECIES) != 0 &&
+            if (GetBoxMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE &&
             !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
-                u8 a = GetMatchingDigits(gScriptResult, otId);
-                
-                if(a > gSpecialVar_0x8004 && a > 1)
+                u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
+
+                if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
-                    gSpecialVar_0x8004 = a - 1;
+                    gSpecialVar_0x8004 = numMatchingDigits - 1;
                     box = i;
                     slot = j;
                 }
             }
         }
     }
-    
-    if(gSpecialVar_0x8004 != 0)
+
+    if (gSpecialVar_0x8004 != 0)
     {
-        gSpecialVar_0x8005 = gUnknown_0840CB04[gSpecialVar_0x8004 - 1];
-        
-        if(box == 14)
+        gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
+
+        if (box == 14)
         {
             gSpecialVar_0x8006 = 0;
             GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
@@ -120,14 +130,14 @@ void PickLotteryCornerTicket(void)
 static u8 GetMatchingDigits(u16 winNumber, u16 otId)
 {
     u8 i;
-    u8 matchingDigits = 0;  //Why not just use i?
-    
-    for(i = 0; i < 5; i++)
+    u8 matchingDigits = 0;
+
+    for (i = 0; i < 5; i++)
     {
         sWinNumberDigit = winNumber % 10;
         sOtIdDigit = otId % 10;
-        
-        if(sWinNumberDigit == sOtIdDigit)
+
+        if (sWinNumberDigit == sOtIdDigit)
         {
             winNumber = winNumber / 10;
             otId = otId / 10;
@@ -139,24 +149,26 @@ static u8 GetMatchingDigits(u16 winNumber, u16 otId)
     return matchingDigits;
 }
 
-void sub_8145D14(u32 a)
+// lottery numbers go from 0 to 99999, not 65535 (0xFFFF). interestingly enough, the function that calls GetLotteryNumber shifts to u16, so it cant be anything above 65535 anyway.
+void SetLotteryNumber(u32 lotteryNum)
 {
-    u16 b = a >> 16;
-    u16 c = a;
-    
-    VarSet(0x404B, c);
-    VarSet(0x404C, b);
+    u16 lowNum = lotteryNum >> 16;
+    u16 highNum = lotteryNum;
+
+    VarSet(VAR_POKELOT_RND1, highNum);
+    VarSet(VAR_POKELOT_RND2, lowNum);
 }
 
-u32 sub_8145D3C(void)
+u32 GetLotteryNumber(void)
 {
-    u16 var1 = VarGet(0x404B);
-    u16 var2 = VarGet(0x404C);
-    
-    return (var2 << 16) | var1;
+    u16 highNum = VarGet(VAR_POKELOT_RND1);
+    u16 lowNum = VarGet(VAR_POKELOT_RND2);
+
+    return (lowNum << 16) | highNum;
 }
 
-void unref_sub_8145D64(u16 a)
+// interestingly, this may have been the original lottery number set function, but GF tried to change it to 32-bit later but didnt finish changing all calls as one GetLotteryNumber still shifts to u16.
+void SetLotteryNumber16_Unused(u16 lotteryNum)
 {
-    sub_8145D14(a);
+    SetLotteryNumber(lotteryNum);
 }

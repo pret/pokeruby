@@ -7,7 +7,7 @@ void sub_814A590(void);
 u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 u8 sub_814A758(u8 a1, u8 a2, u8 a3, u8 a4);
 u8 unref_sub_814A7AC(u8 a1, u16 a2, u8 a3);
-void sub_814A7FC(void);
+void DestroyMenuCursor(void);
 void sub_814A880(u8 a1, u8 a2);
 void sub_814A904(void);
 void sub_814A958(u8 a1);

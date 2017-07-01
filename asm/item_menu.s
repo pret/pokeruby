@@ -709,8 +709,8 @@ _080A370A:
 	bx r0
 	thumb_func_end sub_80A36B8
 
-	thumb_func_start sub_80A3714
-sub_80A3714: @ 80A3714
+	thumb_func_start ClearBag
+ClearBag: @ 80A3714
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080A373C @ =gBagPockets
@@ -731,7 +731,7 @@ _080A371A:
 	bx r0
 	.align 2, 0
 _080A373C: .4byte gBagPockets
-	thumb_func_end sub_80A3714
+	thumb_func_end ClearBag
 
 	thumb_func_start sub_80A3740
 sub_80A3740: @ 80A3740
@@ -812,13 +812,13 @@ sub_80A37C0: @ 80A37C0
 	ldr r0, _080A37F4 @ =sub_80A50C8
 	str r0, [r1]
 	movs r0, 0
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x1
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x2
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	movs r0, 0x3
-	bl sub_80F98DC
+	bl StartVerticalScrollIndicators
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2516,7 +2516,11 @@ _080A4470:
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
+.ifdef ENGLISH
 	movs r2, 0x60
+.else
+	movs r2, 0x63
+.endif
 	movs r3, 0
 	bl sub_8072C74
 	ldr r0, _080A44F0 @ =gStringVar1
@@ -3413,7 +3417,7 @@ _080A4BB4: .4byte 0x00000103
 _080A4BB8: .4byte gOtherText_Walk
 _080A4BBC:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3784,13 +3788,13 @@ sub_80A4E8C: @ 80A4E8C
 	movs r1, 0x1
 	bl sub_80F979C
 	movs r0, 0
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x1
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x2
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	movs r0, 0x3
-	bl sub_80F996C
+	bl PauseVerticalScrollIndicator
 	ldr r5, _080A4F04 @ =gBGTilemapBuffers + 0x1000
 	lsls r4, 24
 	asrs r4, 24
@@ -5128,7 +5132,7 @@ sub_80A599C: @ 80A599C
 	movs r4, 0
 	strh r2, [r1, 0x18]
 	strh r3, [r1, 0x1A]
-	ldr r1, _080A59CC @ =gUnknown_03005CE0
+	ldr r1, _080A59CC @ =gLastFieldPokeMenuOpened
 	strb r4, [r1]
 	bl sub_80A5AE4
 	pop {r4}
@@ -5137,7 +5141,7 @@ sub_80A599C: @ 80A599C
 	.align 2, 0
 _080A59C4: .4byte gTasks
 _080A59C8: .4byte sub_805469C
-_080A59CC: .4byte gUnknown_03005CE0
+_080A59CC: .4byte gLastFieldPokeMenuOpened
 	thumb_func_end sub_80A599C
 
 	thumb_func_start sub_80A59D0
@@ -5261,7 +5265,7 @@ sub_80A5AAC: @ 80A5AAC
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080A5AE0 @ =sub_80A5B00
+	ldr r1, _080A5AE0 @ =HandleItemMenuPaletteFade
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -5269,7 +5273,7 @@ sub_80A5AAC: @ 80A5AAC
 	bx r0
 	.align 2, 0
 _080A5ADC: .4byte gTasks
-_080A5AE0: .4byte sub_80A5B00
+_080A5AE0: .4byte HandleItemMenuPaletteFade
 	thumb_func_end sub_80A5AAC
 
 	thumb_func_start sub_80A5AE4
@@ -5287,8 +5291,8 @@ sub_80A5AE4: @ 80A5AE4
 	bx r0
 	thumb_func_end sub_80A5AE4
 
-	thumb_func_start sub_80A5B00
-sub_80A5B00: @ 80A5B00
+	thumb_func_start HandleItemMenuPaletteFade
+HandleItemMenuPaletteFade: @ 80A5B00
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5318,7 +5322,7 @@ _080A5B32:
 	.align 2, 0
 _080A5B38: .4byte gTasks + 0x8
 _080A5B3C: .4byte gPaletteFade
-	thumb_func_end sub_80A5B00
+	thumb_func_end HandleItemMenuPaletteFade
 
 	thumb_func_start sub_80A5B40
 sub_80A5B40: @ 80A5B40
@@ -5420,7 +5424,7 @@ sub_80A5BF8: @ 80A5BF8
 	bl sub_80A73FC
 	bl sub_80A7590
 	ldr r1, _080A5C1C @ =gOtherText_NoPokemon
-	ldr r2, _080A5C20 @ =sub_80A5C48
+	ldr r2, _080A5C20 @ =CleanUpItemMenuMessage
 	adds r0, r4, 0
 	movs r3, 0x1
 	bl DisplayCannotUseItemMessage
@@ -5429,7 +5433,7 @@ sub_80A5BF8: @ 80A5BF8
 	bx r0
 	.align 2, 0
 _080A5C1C: .4byte gOtherText_NoPokemon
-_080A5C20: .4byte sub_80A5C48
+_080A5C20: .4byte CleanUpItemMenuMessage
 	thumb_func_end sub_80A5BF8
 
 	thumb_func_start sub_80A5C24
@@ -5450,8 +5454,8 @@ sub_80A5C24: @ 80A5C24
 	bx r0
 	thumb_func_end sub_80A5C24
 
-	thumb_func_start sub_80A5C48
-sub_80A5C48: @ 80A5C48
+	thumb_func_start CleanUpItemMenuMessage
+CleanUpItemMenuMessage: @ 80A5C48
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -5489,10 +5493,10 @@ sub_80A5C48: @ 80A5C48
 _080A5C90: .4byte gBGTilemapBuffers + 0x800
 _080A5C94: .4byte gTasks
 _080A5C98: .4byte sub_80A5C24
-	thumb_func_end sub_80A5C48
+	thumb_func_end CleanUpItemMenuMessage
 
-	thumb_func_start sub_80A5C9C
-sub_80A5C9C: @ 80A5C9C
+	thumb_func_start CleanUpOverworldMessage
+CleanUpOverworldMessage: @ 80A5C9C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -5509,10 +5513,10 @@ sub_80A5C9C: @ 80A5C9C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A5C9C
+	thumb_func_end CleanUpOverworldMessage
 
-	thumb_func_start sub_80A5CC4
-sub_80A5CC4: @ 80A5CC4
+	thumb_func_start ExecuteItemUseFromBlackPalette
+ExecuteItemUseFromBlackPalette: @ 80A5CC4
 	push {lr}
 	bl pal_fill_black
 	ldr r0, _080A5CD8 @ =Task_CallItemUseOnFieldCallback
@@ -5522,7 +5526,7 @@ sub_80A5CC4: @ 80A5CC4
 	bx r0
 	.align 2, 0
 _080A5CD8: .4byte Task_CallItemUseOnFieldCallback
-	thumb_func_end sub_80A5CC4
+	thumb_func_end ExecuteItemUseFromBlackPalette
 
 	thumb_func_start Task_CallItemUseOnFieldCallback
 Task_CallItemUseOnFieldCallback: @ 80A5CDC
@@ -5786,7 +5790,7 @@ sub_80A5EA0: @ 80A5EA0
 	bl sub_80A5DA0
 	ldr r1, _080A5EF4 @ =gUnknown_083C16F4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	b _080A5F0C
 	.align 2, 0
 _080A5EE8: .4byte gMain
@@ -6064,7 +6068,7 @@ _080A6128:
 	lsrs r1, r2, 16
 	strh r1, [r0, 0x18]
 	strh r2, [r0, 0x1A]
-	ldr r1, _080A6160 @ =sub_80A5B00
+	ldr r1, _080A6160 @ =HandleItemMenuPaletteFade
 	str r1, [r0]
 	ldr r1, _080A6164 @ =gUnknown_02038561
 	movs r0, 0x1
@@ -6080,7 +6084,7 @@ _080A6128:
 	.align 2, 0
 _080A6158: .4byte gTasks
 _080A615C: .4byte sub_808B020
-_080A6160: .4byte sub_80A5B00
+_080A6160: .4byte HandleItemMenuPaletteFade
 _080A6164: .4byte gUnknown_02038561
 _080A6168:
 	adds r0, r6, 0
@@ -6302,7 +6306,7 @@ sub_80A631C: @ 80A631C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080A6344 @ =gUnknown_0300485C
+	ldr r2, _080A6344 @ =gFieldCallback
 	ldr r1, _080A6348 @ =sub_80B3050
 	str r1, [r2]
 	ldr r2, _080A634C @ =gTasks
@@ -6318,7 +6322,7 @@ sub_80A631C: @ 80A631C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6344: .4byte gUnknown_0300485C
+_080A6344: .4byte gFieldCallback
 _080A6348: .4byte sub_80B3050
 _080A634C: .4byte gTasks
 _080A6350: .4byte c2_exit_to_overworld_2_switch
@@ -6695,7 +6699,7 @@ sub_80A6650: @ 80A6650
 	bl sub_80A5D78
 	ldr r1, _080A666C @ =gUnknown_083C16FC
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7202,8 +7206,8 @@ sub_80A6A4C: @ 80A6A4C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080A6A74 @ =gUnknown_0300485C
-	ldr r1, _080A6A78 @ =sub_813A0F8
+	ldr r2, _080A6A74 @ =gFieldCallback
+	ldr r1, _080A6A78 @ =ItemStorage_ReturnToMenuAfterDeposit
 	str r1, [r2]
 	ldr r2, _080A6A7C @ =gTasks
 	lsls r1, r0, 2
@@ -7218,8 +7222,8 @@ sub_80A6A4C: @ 80A6A4C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6A74: .4byte gUnknown_0300485C
-_080A6A78: .4byte sub_813A0F8
+_080A6A74: .4byte gFieldCallback
+_080A6A78: .4byte ItemStorage_ReturnToMenuAfterDeposit
 _080A6A7C: .4byte gTasks
 _080A6A80: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A6A4C
@@ -7539,7 +7543,7 @@ _080A6D14:
 	thumb_func_start sub_80A6D1C
 sub_80A6D1C: @ 80A6D1C
 	push {r4,r5,lr}
-	bl HideMapNamePopUpWindow
+	bl HideMapNamePopup
 	ldr r0, _080A6D70 @ =gSaveBlock1
 	ldr r1, _080A6D74 @ =0x00000496
 	adds r4, r0, r1
@@ -7553,7 +7557,7 @@ sub_80A6D1C: @ 80A6D1C
 	cmp r5, 0x1
 	bne _080A6D80
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_80594C0
 	bl sub_80597F4
 	ldr r1, _080A6D78 @ =gScriptItemId
@@ -7968,7 +7972,7 @@ sub_80A7094: @ 80A7094
 	movs r3, 0
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	ldr r0, _080A70D4 @ =sub_80A5B00
+	ldr r0, _080A70D4 @ =HandleItemMenuPaletteFade
 	str r0, [r1]
 	movs r0, 0x1
 	negs r0, r0
@@ -7983,7 +7987,7 @@ sub_80A7094: @ 80A7094
 	.align 2, 0
 _080A70CC: .4byte gTasks
 _080A70D0: .4byte sub_802E424
-_080A70D4: .4byte sub_80A5B00
+_080A70D4: .4byte HandleItemMenuPaletteFade
 	thumb_func_end sub_80A7094
 
 	thumb_func_start sub_80A70D8
@@ -8264,7 +8268,7 @@ _080A72F4:
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _080A7354 @ =sub_80A5B00
+	ldr r1, _080A7354 @ =HandleItemMenuPaletteFade
 	str r1, [r0]
 	movs r0, 0x1
 	negs r0, r0
@@ -8279,7 +8283,7 @@ _080A7344: .4byte gBGTilemapBuffers + 0x800
 _080A7348: .4byte gSaveBlock1 + 0x560
 _080A734C: .4byte 0x0201e000
 _080A7350: .4byte sub_802E424
-_080A7354: .4byte sub_80A5B00
+_080A7354: .4byte HandleItemMenuPaletteFade
 _080A7358:
 	ldrh r0, [r7, 0x1E]
 	adds r0, 0x1
@@ -8369,7 +8373,7 @@ sub_80A73F0: @ 80A73F0
 	thumb_func_start sub_80A73FC
 sub_80A73FC: @ 80A73FC
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_814AD44
 	pop {r0}
 	bx r0
@@ -9682,7 +9686,7 @@ sub_80A7CF8: @ 80A7CF8
 	lsrs r4, r0, 24
 	cmp r4, 0x2A
 	bne _080A7D44
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _080A7D44
 	ldr r4, _080A7D34 @ =gSaveBlock1 + 0x317C

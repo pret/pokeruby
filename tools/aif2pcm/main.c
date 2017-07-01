@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <limits.h>
 
 /* extended.c */
 void ieee754_write_extended (double, uint8_t*);
@@ -52,43 +53,94 @@ typedef struct {
 	unsigned long num_samples;
 	uint8_t *samples;
 	uint8_t midi_note;
+	bool has_loop;
 	unsigned long loop_offset;
 	double sample_rate;
+	unsigned long real_num_samples;
 } AifData;
 
+struct Bytes {
+	unsigned long length;
+	uint8_t *data;
+};
 
-char * get_file_extension(char *filename)
+struct Bytes *read_bytearray(const char *filename)
 {
-	char *dot = strrchr(filename, '.');
-	if (!dot || dot == filename)
+	struct Bytes *bytes = malloc(sizeof(struct Bytes));
+	FILE *f = fopen(filename, "rb");
+	if (!f)
 	{
-		FATAL_ERROR("Input file has no file extension.\n");
+		FATAL_ERROR("Failed to open '%s' for reading!\n", filename);
 	}
-
-	return dot + 1;
+	fseek(f, 0, SEEK_END);
+	bytes->length = ftell(f);
+	fseek(f, 0, SEEK_SET);
+	bytes->data = malloc(bytes->length);
+	unsigned long read = fread(bytes->data, bytes->length, 1, f);
+	fclose(f);
+	if (read <= 0)
+	{
+		FATAL_ERROR("Failed to read data from '%s'!\n", filename);
+	}
+	return bytes;
 }
 
-void change_file_extension(char *filename, const char *new_extension)
+void write_bytearray(const char *filename, struct Bytes *bytes)
 {
-	char *dot = strrchr(filename, '.');
-	if (!dot || dot == filename)
+	FILE *f = fopen(filename, "wb");
+	if (!f)
 	{
-		FATAL_ERROR("Input file has no file extension.\n");
+		FATAL_ERROR("Failed to open '%s' for writing!\n", filename);
 	}
-
-	memcpy(dot + 1, new_extension, 3);
+	fwrite(bytes->data, bytes->length, 1, f);
+	fclose(f);
 }
 
-AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
+void free_bytearray(struct Bytes *bytes)
 {
-	AifData *aif_data = (AifData *)malloc(sizeof(AifData));
+	free(bytes->data);
+	free(bytes);
+}
+
+char *get_file_extension(char *filename)
+{
+	char *index = strrchr(filename, '.');
+	if (!index || index == filename)
+	{
+		return NULL;
+	}
+	return index + 1;
+}
+
+char *new_file_extension(char *filename, char *ext)
+{
+	char *index = strrchr(filename, '.');
+	if (!index || index == filename)
+	{
+		index = filename + strlen(filename);
+	}
+	int length = index - filename;
+	char *new_filename = malloc(length + 1 + strlen(ext) + 1);
+	if (new_filename)
+	{
+		strcpy(new_filename, filename);
+		new_filename[length] = '.';
+		strcpy(new_filename + length + 1, ext);
+	}
+	return new_filename;
+}
+
+void read_aif(struct Bytes *aif, AifData *aif_data)
+{
+	aif_data->has_loop = false;
+	aif_data->num_samples = 0;
 
 	unsigned long pos = 0;
 	char chunk_name[5]; chunk_name[4] = '\0';
 	char chunk_type[5]; chunk_type[4] = '\0';
 
 	// Check for FORM Chunk
-	memcpy(chunk_name, aif_file_data + pos, 4);
+	memcpy(chunk_name, &aif->data[pos], 4);
 	pos += 4;
 	if (strcmp(chunk_name, "FORM") != 0)
 	{
@@ -96,19 +148,19 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 	}
 
 	// Read size of whole file.
-	unsigned long whole_chunk_size = aif_file_data[pos++] << 24;
-	whole_chunk_size |= (aif_file_data[pos++] << 16);
-	whole_chunk_size |= (aif_file_data[pos++] <<  8);
-	whole_chunk_size |= (uint8_t)aif_file_data[pos++];
+	unsigned long whole_chunk_size = aif->data[pos++] << 24;
+	whole_chunk_size |= (aif->data[pos++] << 16);
+	whole_chunk_size |= (aif->data[pos++] <<  8);
+	whole_chunk_size |= (uint8_t)aif->data[pos++];
 
-	unsigned long expected_whole_chunk_size = aif_file_data_size - 8;
+	unsigned long expected_whole_chunk_size = aif->length - 8;
 	if (whole_chunk_size != expected_whole_chunk_size)
 	{
 		FATAL_ERROR("FORM Chunk ckSize '%lu' doesn't match actual size '%lu'!\n", whole_chunk_size, expected_whole_chunk_size);
 	}
 
 	// Check for AIFF Form Type
-	memcpy(chunk_type, aif_file_data + pos, 4);
+	memcpy(chunk_type, &aif->data[pos], 4);
 	pos += 4;
 	if (strcmp(chunk_type, "AIFF") != 0)
 	{
@@ -118,44 +170,44 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 	unsigned long num_sample_frames = 0;
 
 	// Read all the Chunks to populate the AifData struct.
-	while ((pos + 8) < aif_file_data_size)
+	while ((pos + 8) < aif->length)
 	{
 		// Read Chunk id
-		memcpy(chunk_name, aif_file_data + pos, 4);
+		memcpy(chunk_name, &aif->data[pos], 4);
 		pos += 4;
 
-		unsigned long chunk_size = (aif_file_data[pos++] << 24);
-		chunk_size |= (aif_file_data[pos++] << 16);
-		chunk_size |= (aif_file_data[pos++] <<  8);
-		chunk_size |=  aif_file_data[pos++];
+		unsigned long chunk_size = (aif->data[pos++] << 24);
+		chunk_size |= (aif->data[pos++] << 16);
+		chunk_size |= (aif->data[pos++] <<  8);
+		chunk_size |=  aif->data[pos++];
 
-		if ((pos + chunk_size) > aif_file_data_size)
+		if ((pos + chunk_size) > aif->length)
 		{
 			FATAL_ERROR("%s chunk at 0x%lx reached end of file before finishing\n", chunk_name, pos);
 		}
 
 		if (strcmp(chunk_name, "COMM") == 0)
 		{
-			short num_channels = (aif_file_data[pos++] << 8);
-			num_channels |= (uint8_t)aif_file_data[pos++];
+			short num_channels = (aif->data[pos++] << 8);
+			num_channels |= (uint8_t)aif->data[pos++];
 			if (num_channels != 1)
 			{
 				FATAL_ERROR("numChannels (%d) in the COMM Chunk must be 1!\n", num_channels);
 			}
 
-			num_sample_frames =  (aif_file_data[pos++] << 24);
-			num_sample_frames |= (aif_file_data[pos++] << 16);
-			num_sample_frames |= (aif_file_data[pos++] <<  8);
-			num_sample_frames |=  (uint8_t)aif_file_data[pos++];
+			num_sample_frames =  (aif->data[pos++] << 24);
+			num_sample_frames |= (aif->data[pos++] << 16);
+			num_sample_frames |= (aif->data[pos++] <<  8);
+			num_sample_frames |=  (uint8_t)aif->data[pos++];
 
-			short sample_size = (aif_file_data[pos++] << 8);
-			sample_size |= (uint8_t)aif_file_data[pos++];
+			short sample_size = (aif->data[pos++] << 8);
+			sample_size |= (uint8_t)aif->data[pos++];
 			if (sample_size != 8)
 			{
 				FATAL_ERROR("sampleSize (%d) in the COMM Chunk must be 8!\n", sample_size);
 			}
 
-			double sample_rate = ieee754_read_extended((uint8_t*)(aif_file_data + pos));
+			double sample_rate = ieee754_read_extended((uint8_t*)(aif->data + pos));
 			pos += 10;
 
 			aif_data->sample_rate = sample_rate;
@@ -167,46 +219,47 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 		}
 		else if (strcmp(chunk_name, "MARK") == 0)
 		{
-			unsigned short num_markers = (aif_file_data[pos++] << 8);
-			num_markers |= (uint8_t)aif_file_data[pos++];
-
-			unsigned long loop_start = 0;
+			unsigned short num_markers = (aif->data[pos++] << 8);
+			num_markers |= (uint8_t)aif->data[pos++];
 
 			// Read each marker and look for the "START" marker.
 			for (int i = 0; i < num_markers; i++)
 			{
-				unsigned short marker_id = (aif_file_data[pos++] << 8);
-				marker_id |= (uint8_t)aif_file_data[pos++];
+				unsigned short marker_id = (aif->data[pos++] << 8);
+				marker_id |= (uint8_t)aif->data[pos++];
 
-				unsigned long marker_position = (aif_file_data[pos++] << 24);
-				marker_position |= (aif_file_data[pos++] << 16);
-				marker_position |= (aif_file_data[pos++] << 8);
-				marker_position |=  (uint8_t)aif_file_data[pos++];
+				unsigned long marker_position = (aif->data[pos++] << 24);
+				marker_position |= (aif->data[pos++] << 16);
+				marker_position |= (aif->data[pos++] << 8);
+				marker_position |=  (uint8_t)aif->data[pos++];
 
 				// Marker id is a pascal-style string.
-				uint8_t marker_name_size = aif_file_data[pos++];
+				uint8_t marker_name_size = aif->data[pos++];
 				char *marker_name = (char *)malloc((marker_name_size + 1) * sizeof(char));
-				memcpy(marker_name, aif_file_data + pos, marker_name_size);
+				memcpy(marker_name, &aif->data[pos], marker_name_size);
 				marker_name[marker_name_size] = '\0';
 				pos += marker_name_size;
 
 				if (strcmp(marker_name, "START") == 0)
 				{
-					loop_start = marker_position;
+					aif_data->loop_offset = marker_position;
+					aif_data->has_loop = true;
 				}
 				else if (strcmp(marker_name, "END") == 0)
 				{
+					if (!aif_data->has_loop) {
+						aif_data->loop_offset = marker_position;
+						aif_data->has_loop = true;
+					}
 					aif_data->num_samples = marker_position;
 				}
 
 				free(marker_name);
 			}
-
-			aif_data->loop_offset = loop_start;
 		}
 		else if (strcmp(chunk_name, "INST") == 0)
 		{
-			uint8_t midi_note = (uint8_t)aif_file_data[pos++];
+			uint8_t midi_note = (uint8_t)aif->data[pos++];
 
 			aif_data->midi_note = midi_note;
 
@@ -218,384 +271,559 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 			// SKip offset and blockSize
 			pos += 8;
 
-			uint8_t *sample_data = (uint8_t *)malloc(num_sample_frames * sizeof(uint8_t));
-			memcpy(sample_data, aif_file_data + pos, num_sample_frames);
+			unsigned long num_samples = chunk_size - 8;
+			uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
+			memcpy(sample_data, &aif->data[pos], num_samples);
 
 			aif_data->samples = sample_data;
-			pos += num_sample_frames;
+			aif_data->real_num_samples = num_samples;
+			pos += chunk_size - 8;
 		}
 		else
 		{
-			// Skip over stuff we unsupported chunks.
+			// Skip over unsupported chunks.
 			pos += chunk_size;
 		}
 	}
-
-	return aif_data;
 }
 
-// Reads an .aif file and produces a .pcm file containing an array of 8-bit samples.
-void aif2pcm(const char *aif_filename)
+// This is a table of deltas between sample values in compressed PCM data.
+const int gDeltaEncodingTable[] = {
+	0, 1, 4, 9, 16, 25, 36, 49,
+	-64, -49, -36, -25, -16, -9, -4, -1,
+};
+
+struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length)
 {
-	// Get .pcm filename.
-	char *pcm_filename = malloc(strlen(aif_filename) + 1);
+	struct Bytes *pcm = malloc(sizeof(struct Bytes));
+	pcm->length = expected_length;
+	pcm->data = malloc(pcm->length + 0x40);
 
-	if (!pcm_filename)
+	uint8_t hi, lo;
+	unsigned int i = 0;
+	unsigned int j = 0;
+	int k;
+	int8_t base;
+	while (i < delta->length)
 	{
-		FATAL_ERROR("Failed to allocate space for pcm filename.\n");
+		base = (int8_t)delta->data[i++];
+		pcm->data[j++] = (uint8_t)base;
+		if (i >= delta->length)
+		{
+			break;
+		}
+		if (j >= pcm->length)
+		{
+			break;
+		}
+		lo = delta->data[i] & 0xf;
+		base += gDeltaEncodingTable[lo];
+		pcm->data[j++] = base;
+		i++;
+		if (i >= delta->length)
+		{
+			break;
+		}
+		if (j >= pcm->length)
+		{
+			break;
+		}
+		for (k = 0; k < 31; k++)
+		{
+			hi = (delta->data[i] >> 4) & 0xf;
+			base += gDeltaEncodingTable[hi];
+			pcm->data[j++] = base;
+			if (j >= pcm->length)
+			{
+				break;
+			}
+			lo = delta->data[i] & 0xf;
+			base += gDeltaEncodingTable[lo];
+			pcm->data[j++] = base;
+			i++;
+			if (i >= delta->length)
+			{
+				break;
+			}
+			if (j >= pcm->length)
+			{
+				break;
+			}
+		}
+		if (j >= pcm->length)
+		{
+			break;
+		}
 	}
 
-	strcpy(pcm_filename, aif_filename);
-	change_file_extension(pcm_filename, "pcm");
+	pcm->length = j;
+	return pcm;
+}
 
-	// Get .metadata filename.
-	char *metadata_filename = malloc(strlen(aif_filename) + 1);
+int get_delta_index(uint8_t sample, uint8_t prev_sample)
+{
+	int best_error = INT_MAX;
+	int best_index = -1;
 
-	if (!metadata_filename)
+	for (int i = 0; i < 16; i++)
 	{
-		FATAL_ERROR("Failed to allocate space for metadata filename.\n");
+		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
+		int error = sample > new_sample ? sample - new_sample : new_sample - sample;
+
+		if (error < best_error)
+		{
+			best_error = error;
+			best_index = i;
+		}
 	}
 
-	strcpy(metadata_filename, aif_filename);
-	change_file_extension(metadata_filename, "bin");
+	return best_index;
+}
 
-	// Open the given .aif file so we can read its contents.
-	FILE *aif_file;
-	aif_file = fopen(aif_filename, "rb");
-	if (!aif_file)
+struct Bytes *delta_compress(struct Bytes *pcm)
+{
+	struct Bytes *delta = malloc(sizeof(struct Bytes));
+	// estimate the length so we can malloc
+	int num_blocks = pcm->length / 64;
+	delta->length = num_blocks * 33;
+
+	int extra = pcm->length % 64;
+	if (extra)
 	{
-		FATAL_ERROR("Failed to open '%s' for reading!\n", aif_filename);
+		delta->length += 1;
+		extra -= 1;
+	}
+	if (extra)
+	{
+		delta->length += 1;
+		extra -= 1;
+	}
+	if (extra)
+	{
+		delta->length += (extra + 1) / 2;
 	}
 
-	// Get file length.
-	fseek(aif_file, 0, SEEK_END);
-	unsigned long aif_file_length = ftell(aif_file);
-	fseek(aif_file, 0, SEEK_SET);
+	delta->data = malloc(delta->length + 33);
 
-	// Create buffer for samples.
-	uint8_t *aif_file_data = (uint8_t *)malloc(aif_file_length * sizeof(uint8_t));
-	if (!aif_file_data)
+	unsigned int i = 0;
+	unsigned int j = 0;
+	int k;
+	uint8_t base;
+	int delta_index;
+
+	while (i < pcm->length)
 	{
-		FATAL_ERROR("Failed to allocate buffer for aif file data!\n");
+		base = pcm->data[i++];
+		delta->data[j++] = base;
+
+		if (i >= pcm->length)
+		{
+			break;
+		}
+		delta_index = get_delta_index(pcm->data[i++], base);
+		base += gDeltaEncodingTable[delta_index];
+		delta->data[j++] = delta_index;
+
+		for (k = 0; k < 31; k++)
+		{
+			if (i >= pcm->length)
+			{
+				break;
+			}
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j] = (delta_index << 4);
+
+			if (i >= pcm->length)
+			{
+				break;
+			}
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j++] |= delta_index;
+		}
 	}
 
-	// Populate buffer from file.
-	unsigned long read = fread(aif_file_data, aif_file_length, 1, aif_file);
-	fclose(aif_file);
-	if (read <= 0)
+	delta->length = j;
+
+	return delta;
+}
+
+#define STORE_U32_LE(dest, value) \
+do { \
+	*(dest) = (value) & 0xff; \
+	*((dest) + 1) = ((value) >> 8) & 0xff; \
+	*((dest) + 2) = ((value) >> 16) & 0xff; \
+	*((dest) + 3) = ((value) >> 24) & 0xff; \
+} while (0)
+
+#define LOAD_U32_LE(var, src) \
+do { \
+	(var) = *(src); \
+	(var) |= (*((src) + 1) << 8); \
+	(var) |= (*((src) + 2) << 16); \
+	(var) |= (*((src) + 3) << 24); \
+} while (0)
+
+// Reads an .aif file and produces a .pcm file containing an array of 8-bit samples.
+void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
+{
+	struct Bytes *aif = read_bytearray(aif_filename);
+	AifData aif_data = {0};
+	read_aif(aif, &aif_data);
+
+	int header_size = 0x10;
+	struct Bytes *pcm;
+	struct Bytes output = {0};
+
+	if (compress)
 	{
-		FATAL_ERROR("Failed to read data from '%s'!\n", aif_filename);
+		struct Bytes *input = malloc(sizeof(struct Bytes));
+		input->data = aif_data.samples;
+		input->length = aif_data.real_num_samples;
+		pcm = delta_compress(input);
+		free(input);
 	}
+	else
+	{
+		pcm = malloc(sizeof(struct Bytes));
+		pcm->data = aif_data.samples;
+		pcm->length = aif_data.real_num_samples;
+	}
+	output.length = header_size + pcm->length;
+	output.data = malloc(output.length);
 
-	AifData *aif_data = read_aif(aif_file_data, aif_file_length);
+	uint32_t pitch_adjust = (uint32_t)(aif_data.sample_rate * 1024);
+	uint32_t loop_offset = (uint32_t)(aif_data.loop_offset);
+	uint32_t adjusted_num_samples = (uint32_t)(aif_data.num_samples - 1);
+	uint32_t flags = 0;
+	if (aif_data.has_loop) flags |= 0x40000000;
+	if (compress) flags |= 1;
+	STORE_U32_LE(output.data + 0, flags);
+	STORE_U32_LE(output.data + 4, pitch_adjust);
+	STORE_U32_LE(output.data + 8, loop_offset);
+	STORE_U32_LE(output.data + 12, adjusted_num_samples);
+	memcpy(&output.data[header_size], pcm->data, pcm->length);
+	write_bytearray(pcm_filename, &output);
 
-	// Write the output .pcm file
-	FILE *pcm_file;
-	pcm_file = fopen(pcm_filename, "wb");
-	fwrite(aif_data->samples, aif_data->num_samples, 1, pcm_file);
-	fclose(pcm_file);
-
-	// Write the output .bin file containing .aif metadata.
-	FILE *metadata_file;
-	metadata_file = fopen(metadata_filename, "wb");
-	uint32_t pitch_adjust = (uint32_t)(aif_data->sample_rate * 1024);
-	fwrite(&pitch_adjust, sizeof(uint32_t), 1, metadata_file);
-	fwrite(&(aif_data->loop_offset), sizeof(uint32_t), 1, metadata_file);
-	uint32_t adjusted_num_samples = (uint32_t)(aif_data->num_samples - 1);
-	fwrite(&adjusted_num_samples, sizeof(uint32_t), 1, metadata_file);
-	fclose(metadata_file);
-
-	free(aif_data->samples);
-	free(aif_data);
-	free(aif_file_data);
-	free(metadata_filename);
-	free(pcm_filename);
+	free(aif->data);
+	free(aif);
+	free(pcm);
+	free(output.data);
+	free(aif_data.samples);
 }
 
 // Reads a .pcm file containing an array of 8-bit samples and produces an .aif file.
 // See http://www-mmsp.ece.mcgill.ca/documents/audioformats/aiff/Docs/AIFF-1.3.pdf for .aif file specification.
-void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long loop_start)
+void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_note)
 {
-	// Get .aif filename.
-	char *aif_filename = malloc(strlen(pcm_filename) + 1);
+	struct Bytes *pcm = read_bytearray(pcm_filename);
 
-	if (!aif_filename)
+	AifData *aif_data = malloc(sizeof(AifData));
+
+	uint32_t flags;
+	LOAD_U32_LE(flags, pcm->data + 0);
+	aif_data->has_loop = flags & 0x40000000;
+	bool compressed = flags & 1;
+
+	uint32_t pitch_adjust;
+	LOAD_U32_LE(pitch_adjust, pcm->data + 4);
+	aif_data->sample_rate = pitch_adjust / 1024.0;
+
+	LOAD_U32_LE(aif_data->loop_offset, pcm->data + 8);
+	LOAD_U32_LE(aif_data->num_samples, pcm->data + 12);
+	aif_data->num_samples += 1;
+
+	if (compressed)
 	{
-		FATAL_ERROR("Failed to allocate space for aif filename.\n");
+		struct Bytes *delta = pcm;
+		uint8_t *pcm_data = pcm->data;
+		delta->length -= 0x10;
+		delta->data += 0x10;
+		pcm = delta_decompress(delta, aif_data->num_samples);
+		free(pcm_data);
+		free(delta);
+	}
+	else
+	{
+		pcm->length -= 0x10;
+		pcm->data += 0x10;
 	}
 
-	strcpy(aif_filename, pcm_filename);
-	change_file_extension(aif_filename, "aif");
+	aif_data->samples = malloc(pcm->length);
+	memcpy(aif_data->samples, pcm->data, pcm->length);
 
-	// Open the given .pcm file so we can read its 8-bit samples.
-	FILE *pcm_file;
-	pcm_file = fopen(pcm_filename, "rb");
-	if (!pcm_file)
-	{
-		FATAL_ERROR("Failed to open '%s' for reading!\n", pcm_filename);
-	}
-
-	// Get file length.
-	fseek(pcm_file, 0, SEEK_END);
-	unsigned long num_samples = ftell(pcm_file);
-	fseek(pcm_file, 0, SEEK_SET);
-
-	unsigned long num_samples_extended = num_samples * 1;
-
-	// Create buffer for samples.
-	signed char *pcm_samples = (signed char *)malloc(num_samples_extended * sizeof(signed char));
-	if (!pcm_samples)
-	{
-		FATAL_ERROR("Failed to allocate buffer for pcm samples!\n");
-	}
-
-	// Populate buffer from file.
-	unsigned long read = fread(pcm_samples, num_samples, 1, pcm_file);
-	fclose(pcm_file);
-	if (read <= 0)
-	{
-		FATAL_ERROR("Failed to read data from '%s'!\n", pcm_filename);
-	}
-
-	// Allocate buffer for output .aif file.
-	unsigned long aif_file_size = 54 + 60 + num_samples_extended;
-	char *aif_buffer = (char *)malloc(aif_file_size * sizeof(char));
-	if (!aif_buffer)
-	{
-		FATAL_ERROR("Failed to allocate buffer for aif file!\n");
-	}
+	struct Bytes *aif = malloc(sizeof(struct Bytes));
+	aif->length = 54 + 60 + pcm->length;
+	aif->data = malloc(aif->length);
 
 	long pos = 0;
 
 	// First, write the FORM header chunk.
 	// FORM Chunk ckID
-	aif_buffer[pos++] = 'F';
-	aif_buffer[pos++] = 'O';
-	aif_buffer[pos++] = 'R';
-	aif_buffer[pos++] = 'M';
+	aif->data[pos++] = 'F';
+	aif->data[pos++] = 'O';
+	aif->data[pos++] = 'R';
+	aif->data[pos++] = 'M';
 
 	// FORM Chunk ckSize
-	unsigned long data_size = aif_file_size - 8;
-	aif_buffer[pos++] = ((data_size >> 24) & 0xFF);
-	aif_buffer[pos++] = ((data_size >> 16) & 0xFF);
-	aif_buffer[pos++] = ((data_size >>  8) & 0xFF);
-	aif_buffer[pos++] = (data_size & 0xFF);
+	unsigned long form_size = pos;
+	unsigned long data_size = aif->length - 8;
+	aif->data[pos++] = ((data_size >> 24) & 0xFF);
+	aif->data[pos++] = ((data_size >> 16) & 0xFF);
+	aif->data[pos++] = ((data_size >>  8) & 0xFF);
+	aif->data[pos++] = (data_size & 0xFF);
 
 	// FORM Chunk formType
-	aif_buffer[pos++]  = 'A';
-	aif_buffer[pos++]  = 'I';
-	aif_buffer[pos++] = 'F';
-	aif_buffer[pos++] = 'F';
+	aif->data[pos++] = 'A';
+	aif->data[pos++] = 'I';
+	aif->data[pos++] = 'F';
+	aif->data[pos++] = 'F';
 
 	// Next, write the Common Chunk
 	// Common Chunk ckID
-	aif_buffer[pos++] = 'C';
-	aif_buffer[pos++] = 'O';
-	aif_buffer[pos++] = 'M';
-	aif_buffer[pos++] = 'M';
+	aif->data[pos++] = 'C';
+	aif->data[pos++] = 'O';
+	aif->data[pos++] = 'M';
+	aif->data[pos++] = 'M';
 
 	// Common Chunk ckSize
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 18;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 18;
 
 	// Common Chunk numChannels
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1;  // 1 channel
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 1;  // 1 channel
 
 	// Common Chunk numSampleFrames
-	aif_buffer[pos++] = ((num_samples_extended >> 24) & 0xFF);
-	aif_buffer[pos++] = ((num_samples_extended >> 16) & 0xFF);
-	aif_buffer[pos++] = ((num_samples_extended >> 8)  & 0xFF);
-	aif_buffer[pos++] = (num_samples_extended & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 24) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 16) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 8)  & 0xFF);
+	aif->data[pos++] = (aif_data->num_samples & 0xFF);
 
 	// Common Chunk sampleSize
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 8;  // 8 bits per sample
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 8;  // 8 bits per sample
 
 	// Common Chunk sampleRate
-	double sample_rate = pitch_adjust / 1024.0;
+	//double sample_rate = pitch_adjust / 1024.0;
 	uint8_t sample_rate_buffer[10];
-	ieee754_write_extended(sample_rate, sample_rate_buffer);
+	ieee754_write_extended(aif_data->sample_rate, sample_rate_buffer);
 	for (int i = 0; i < 10; i++)
 	{
-		aif_buffer[pos++] = sample_rate_buffer[i];
+		aif->data[pos++] = sample_rate_buffer[i];
 	}
 
-	// Marker Chunk ckID
-	aif_buffer[pos++] = 'M';
-	aif_buffer[pos++] = 'A';
-	aif_buffer[pos++] = 'R';
-	aif_buffer[pos++] = 'K';
+	if (aif_data->has_loop)
+	{
 
-	// Marker Chunk ckSize
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 24;
+		// Marker Chunk ckID
+		aif->data[pos++] = 'M';
+		aif->data[pos++] = 'A';
+		aif->data[pos++] = 'R';
+		aif->data[pos++] = 'K';
 
-	// Marker Chunk numMarkers
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 2;
+		// Marker Chunk ckSize
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 12 + (aif_data->has_loop ? 12 : 0);
 
-	// Marker loop start
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1;  // id = 1
+		// Marker Chunk numMarkers
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);
 
-	aif_buffer[pos++] = ((loop_start >> 24) & 0xFF);
-	aif_buffer[pos++] = ((loop_start >> 16) & 0xFF);
-	aif_buffer[pos++] = ((loop_start >> 8)  & 0xFF);
-	aif_buffer[pos++] = (loop_start & 0xFF);  // position
+		// Marker loop start
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 1;  // id = 1
 
-	aif_buffer[pos++] = 5;  // pascal-style string length
-	aif_buffer[pos++] = 'S';
-	aif_buffer[pos++] = 'T';
-	aif_buffer[pos++] = 'A';
-	aif_buffer[pos++] = 'R';
-	aif_buffer[pos++] = 'T';  // markerName
+		long loop_start = aif_data->loop_offset;
+		aif->data[pos++] = ((loop_start >> 24) & 0xFF);
+		aif->data[pos++] = ((loop_start >> 16) & 0xFF);
+		aif->data[pos++] = ((loop_start >> 8)  & 0xFF);
+		aif->data[pos++] = (loop_start & 0xFF);  // position
 
-	// Marker loop end
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 2;  // id = 2
+		aif->data[pos++] = 5;  // pascal-style string length
+		aif->data[pos++] = 'S';
+		aif->data[pos++] = 'T';
+		aif->data[pos++] = 'A';
+		aif->data[pos++] = 'R';
+		aif->data[pos++] = 'T';  // markerName
 
-	long loop_end = num_samples;
-	aif_buffer[pos++] = ((loop_end >> 24) & 0xFF);
-	aif_buffer[pos++] = ((loop_end >> 16) & 0xFF);
-	aif_buffer[pos++] = ((loop_end >> 8)  & 0xFF);
-	aif_buffer[pos++] = (loop_end & 0xFF);  // position
+		// Marker loop end
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);  // id = 2
 
-	aif_buffer[pos++] = 3;  // pascal-style string length
-	aif_buffer[pos++] = 'E';
-	aif_buffer[pos++] = 'N';
-	aif_buffer[pos++] = 'D';
+		long loop_end = aif_data->num_samples;
+		aif->data[pos++] = ((loop_end >> 24) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 16) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 8)  & 0xFF);
+		aif->data[pos++] = (loop_end & 0xFF);  // position
 
+		aif->data[pos++] = 3;  // pascal-style string length
+		aif->data[pos++] = 'E';
+		aif->data[pos++] = 'N';
+		aif->data[pos++] = 'D';
+	}
 
 	// Instrument Chunk ckID
-	aif_buffer[pos++] = 'I';
-	aif_buffer[pos++] = 'N';
-	aif_buffer[pos++] = 'S';
-	aif_buffer[pos++] = 'T';
+	aif->data[pos++] = 'I';
+	aif->data[pos++] = 'N';
+	aif->data[pos++] = 'S';
+	aif->data[pos++] = 'T';
 
 	// Instrument Chunk ckSize
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 20;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 20;
 
-	aif_buffer[pos++] = base_note;  // baseNote
-	aif_buffer[pos++] = 0;          // detune
-	aif_buffer[pos++] = 0;          // lowNote
-	aif_buffer[pos++] = 127;        // highNote
-	aif_buffer[pos++] = 1;          // lowVelocity
-	aif_buffer[pos++] = 127;        // highVelocity
-	aif_buffer[pos++] = 0;          // gain (hi)
-	aif_buffer[pos++] = 0;          // gain (lo)
+	aif->data[pos++] = base_note;  // baseNote
+	aif->data[pos++] = 0;          // detune
+	aif->data[pos++] = 0;          // lowNote
+	aif->data[pos++] = 127;        // highNote
+	aif->data[pos++] = 1;          // lowVelocity
+	aif->data[pos++] = 127;        // highVelocity
+	aif->data[pos++] = 0;          // gain (hi)
+	aif->data[pos++] = 0;          // gain (lo)
 
 	// Instrument Chunk sustainLoop
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1; // playMode = ForwardLooping
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 1; // playMode = ForwardLooping
 
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1;  // beginLoop marker id
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 1;  // beginLoop marker id
 
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 2;  // endLoop marker id
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 2;  // endLoop marker id
 
 		// Instrument Chunk releaseLoop
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1; // playMode = ForwardLooping
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 1; // playMode = ForwardLooping
 
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 1;  // beginLoop marker id
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 1;  // beginLoop marker id
 
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 2;  // endLoop marker id
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 2;  // endLoop marker id
 
 	// Finally, write the Sound Data Chunk
 	// Sound Data Chunk ckID
-	aif_buffer[pos++] = 'S';
-	aif_buffer[pos++] = 'S';
-	aif_buffer[pos++] = 'N';
-	aif_buffer[pos++] = 'D';
+	aif->data[pos++] = 'S';
+	aif->data[pos++] = 'S';
+	aif->data[pos++] = 'N';
+	aif->data[pos++] = 'D';
 
 	// Sound Data Chunk ckSize
-	unsigned long sound_data_size = num_samples_extended + 8;
-	aif_buffer[pos++] = ((sound_data_size >> 24) & 0xFF);
-	aif_buffer[pos++] = ((sound_data_size >> 16) & 0xFF);
-	aif_buffer[pos++] = ((sound_data_size >> 8)  & 0xFF);
-	aif_buffer[pos++] = (sound_data_size & 0xFF);
+	unsigned long sound_data_size = pcm->length + 8;
+	aif->data[pos++] = ((sound_data_size >> 24) & 0xFF);
+	aif->data[pos++] = ((sound_data_size >> 16) & 0xFF);
+	aif->data[pos++] = ((sound_data_size >> 8)  & 0xFF);
+	aif->data[pos++] = (sound_data_size & 0xFF);
 
 	// Sound Data Chunk offset
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
 
 	// Sound Data Chunk blockSize
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
-	aif_buffer[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
+	aif->data[pos++] = 0;
 
 	// Sound Data Chunk soundData
-	for (int i = 0; i < loop_start; i++)
+	for (unsigned int i = 0; i < aif_data->loop_offset; i++)
 	{
-		aif_buffer[pos++] = pcm_samples[i];
+		aif->data[pos++] = aif_data->samples[i];
 	}
 
 	int j = 0;
-	for (unsigned int i = loop_start; i < num_samples_extended; i++)
+	for (unsigned int i = aif_data->loop_offset; i < pcm->length; i++)
 	{
-		int pcm_index = loop_start + (j++ % (num_samples - loop_start - 1));
-		aif_buffer[pos++] = pcm_samples[pcm_index];
+		int pcm_index = aif_data->loop_offset + (j++ % (pcm->length - aif_data->loop_offset));
+		aif->data[pos++] = aif_data->samples[pcm_index];
 	}
 
-	// Write the .aif file contents.
-	FILE *aif_file;
-	aif_file = fopen(aif_filename, "wb");
-	if (!aif_file)
-	{
-		FATAL_ERROR("Failed to open '%s' for writing!\n", aif_filename);
-	}
+	aif->length = pos;
 
-	fwrite(aif_buffer, 1, aif_file_size, aif_file);
-	fclose(aif_file);
+	// Go back and rewrite ckSize
+	data_size = aif->length - 8;
+	aif->data[form_size + 0] = ((data_size >> 24) & 0xFF);
+	aif->data[form_size + 1] = ((data_size >> 16) & 0xFF);
+	aif->data[form_size + 2] = ((data_size >>  8) & 0xFF);
+	aif->data[form_size + 3] = (data_size & 0xFF);
 
-	free(aif_buffer);
-	free(pcm_samples);
-	free(aif_filename);
+	write_bytearray(aif_filename, aif);
+
+	free(aif->data);
+	free(aif);
+}
+
+void usage(void)
+{
+	fprintf(stderr, "Usage: aif2pcm bin_file [aif_file]\n");
+	fprintf(stderr, "       aif2pcm aif_file [bin_file] [--compress]\n");
 }
 
 int main(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		FATAL_ERROR("Usage: aif2pcm <aif_file>\n");
+		usage();
+		exit(1);
 	}
 
-	char *input_filename = argv[1];
-	char *extension = get_file_extension(input_filename);
+	char *input_file = argv[1];
+	char *extension = get_file_extension(input_file);
+	char *output_file;
+	bool compressed = false;
 
-	if (strcmp(extension, "aif") == 0)
+	if (argc > 3)
 	{
-		aif2pcm(input_filename);
-	}
-	else if (strcmp(extension, "pcm") == 0)
-	{
-		if (argc < 5)
+		for (int i = 3; i < argc; i++)
 		{
-			FATAL_ERROR("Usage: aif2pcm <pcm_file> <midi_note> <pitch_adjust> <loop_start>\n");
+			if (strcmp(argv[i], "--compress") == 0)
+			{
+				compressed = true;
+			}
 		}
+	}
 
-		char base_note = atoi(argv[2]);
-		long pitch_adjust = atol(argv[3]);
-		long loop_start = atol(argv[4]);
-		pcm2aif(input_filename, base_note, pitch_adjust, loop_start);
+	if (strcmp(extension, "aif") == 0 || strcmp(extension, "aiff") == 0)
+	{
+		if (argc >= 3)
+		{
+			output_file = argv[2];
+			aif2pcm(input_file, output_file, compressed);
+		}
+		else
+		{
+			output_file = new_file_extension(input_file, "bin");
+			aif2pcm(input_file, output_file, compressed);
+			free(output_file);
+		}
+	}
+	else if (strcmp(extension, "bin") == 0)
+	{
+		if (argc >= 3)
+		{
+			output_file = argv[2];
+			pcm2aif(input_file, output_file, 60);
+		}
+		else
+		{
+			output_file = new_file_extension(input_file, "aif");
+			pcm2aif(input_file, output_file, 60);
+			free(output_file);
+		}
 	}
 	else
 	{
-		FATAL_ERROR("Input file must be .aif or .pcm: '%s'\n", input_filename);
+		FATAL_ERROR("Input file must be .aif or .bin: '%s'\n", input_file);
 	}
 
 	return 0;

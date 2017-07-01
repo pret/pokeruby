@@ -24,6 +24,7 @@
 #include <cstdarg>
 #include <cstdint>
 #include <string>
+#include <memory>
 #include "preproc.h"
 
 class CFile
@@ -42,6 +43,13 @@ private:
     long m_lineNum;
     std::string m_filename;
 
+    bool ConsumeHorizontalWhitespace();
+    bool ConsumeNewline();
+    void SkipWhitespace();
+    void TryConvertString();
+    std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
+    bool CheckIdentifier(const std::string& ident);
+    void TryConvertIncbin();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);

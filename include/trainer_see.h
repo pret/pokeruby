@@ -1,6 +1,7 @@
 #ifndef GUARD_TRAINER_SEE_H
 #define GUARD_TRAINER_SEE_H
 
+#include "sprite.h"
 #include "task.h"
 
 bool8 CheckTrainers(void);
@@ -27,8 +28,10 @@ s8 sub_80845FC(u8 taskId, struct Task *task, struct MapObject *trainerObj);
 s8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainerObj);
 s8 sub_80846C8(u8 taskId, struct Task *task, struct MapObject *trainerObj);
 void sub_80846E4(u8 taskId);
-void sub_8084794(u32 var);
+void sub_8084794(struct MapObject *var);
 void sub_80847C8(void);
 void sub_80847D8(u8);
+void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
+void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 #endif // GUARD_TRAINER_SEE_H

@@ -461,3 +461,4 @@
 
 	new_map_group
 	map_group Route124_DivingTreasureHuntersHouse     @ 33.0
+

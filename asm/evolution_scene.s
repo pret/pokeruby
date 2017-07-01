@@ -201,7 +201,7 @@ EvolutionScene: @ 8111984
 	ldr r0, _08111C3C @ =gUnknown_03004210
 	adds r1, r4, 0
 	bl InitWindowFromConfig
-	ldr r1, _08111C40 @ =gUnknown_0300428C
+	ldr r1, _08111C40 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800D6D4
@@ -435,7 +435,7 @@ _08111C30: .4byte gUnknown_03004280
 _08111C34: .4byte gUnknown_030041B0
 _08111C38: .4byte gUnknown_030041B8
 _08111C3C: .4byte gUnknown_03004210
-_08111C40: .4byte gUnknown_0300428C
+_08111C40: .4byte gBattleTerrain
 _08111C44: .4byte gReservedSpritePaletteCount
 _08111C48: .4byte gStringVar1
 _08111C4C: .4byte gStringVar2
@@ -540,7 +540,7 @@ CB2_EvolutionSceneLoadGraphics: @ 8111C90
 	ldr r0, _08111E4C @ =gUnknown_03004210
 	adds r1, r4, 0
 	bl InitWindowFromConfig
-	ldr r1, _08111E50 @ =gUnknown_0300428C
+	ldr r1, _08111E50 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800D6D4
@@ -647,7 +647,7 @@ _08111E40: .4byte gUnknown_03004280
 _08111E44: .4byte gUnknown_030041B0
 _08111E48: .4byte gUnknown_030041B8
 _08111E4C: .4byte gUnknown_03004210
-_08111E50: .4byte gUnknown_0300428C
+_08111E50: .4byte gBattleTerrain
 _08111E54: .4byte gReservedSpritePaletteCount
 _08111E58: .4byte gMonFrontPicTable
 _08111E5C: .4byte gMonFrontPicCoords
@@ -1233,13 +1233,13 @@ _08112354:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -1321,7 +1321,7 @@ Task_EvolutionScene: @ 811240C
 	beq _0811246E
 	movs r0, 0x10
 	strh r0, [r3, 0x8]
-	ldr r0, _08112498 @ =gUnknown_02024D1E
+	ldr r0, _08112498 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1351,7 +1351,7 @@ _08112484:
 	.align 2, 0
 _08112490: .4byte gTasks
 _08112494: .4byte gMain
-_08112498: .4byte gUnknown_02024D1E
+_08112498: .4byte gBattleCommunication
 _0811249C: .4byte _081124A0
 	.align 2, 0
 _081124A0:
@@ -1503,7 +1503,7 @@ _081125FC:
 _0811260C:
 	movs r0, 0x11
 	bl sub_8149970
-	ldr r1, _08112628 @ =gUnknown_02024D1E
+	ldr r1, _08112628 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _0811262C @ =gTasks
 	mov r2, r8
@@ -1513,10 +1513,10 @@ _0811260C:
 	b _08112A2E
 	.align 2, 0
 _08112624: .4byte gPaletteFade
-_08112628: .4byte gUnknown_02024D1E
+_08112628: .4byte gBattleCommunication
 _0811262C: .4byte gTasks
 _08112630:
-	ldr r4, _08112664 @ =gUnknown_02024D1E
+	ldr r4, _08112664 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1541,10 +1541,10 @@ _08112646:
 	strb r0, [r4, 0x2]
 	bl _08112FD0
 	.align 2, 0
-_08112664: .4byte gUnknown_02024D1E
+_08112664: .4byte gBattleCommunication
 _08112668: .4byte 0x02014800
 _0811266C:
-	ldr r4, _08112698 @ =gUnknown_02024D1E
+	ldr r4, _08112698 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1566,7 +1566,7 @@ _08112682:
 	adds r1, r6
 	b _08112A2E
 	.align 2, 0
-_08112698: .4byte gUnknown_02024D1E
+_08112698: .4byte gBattleCommunication
 _0811269C: .4byte 0x02014800
 _081126A0:
 	ldr r1, _081126D8 @ =0x02014800
@@ -1580,7 +1580,7 @@ _081126A0:
 _081126B2:
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, _081126DC @ =gUnknown_02024D1E
+	ldr r0, _081126DC @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1598,10 +1598,10 @@ _081126CC:
 	b _08112A2E
 	.align 2, 0
 _081126D8: .4byte 0x02014800
-_081126DC: .4byte gUnknown_02024D1E
+_081126DC: .4byte gBattleCommunication
 _081126E0:
 	bl sub_8149B44
-	ldr r1, _081126F4 @ =gUnknown_02024D1E
+	ldr r1, _081126F4 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _081126F8 @ =gTasks
 	mov r3, r8
@@ -1610,10 +1610,10 @@ _081126E0:
 	adds r1, r0
 	b _08112A2E
 	.align 2, 0
-_081126F4: .4byte gUnknown_02024D1E
+_081126F4: .4byte gBattleCommunication
 _081126F8: .4byte gTasks
 _081126FC:
-	ldr r5, _08112724 @ =gUnknown_02024D1E
+	ldr r5, _08112724 @ =gBattleCommunication
 	ldrb r0, [r5, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1633,9 +1633,9 @@ _08112712:
 	strb r0, [r5, 0x2]
 	b _08112992
 	.align 2, 0
-_08112724: .4byte gUnknown_02024D1E
+_08112724: .4byte gBattleCommunication
 _08112728:
-	ldr r0, _08112750 @ =gUnknown_02024D1E
+	ldr r0, _08112750 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1654,7 +1654,7 @@ _0811273E:
 	adds r1, r6
 	b _08112A2E
 	.align 2, 0
-_08112750: .4byte gUnknown_02024D1E
+_08112750: .4byte gBattleCommunication
 _08112754:
 	bl IsSEPlaying
 	lsls r0, 24
@@ -1733,21 +1733,21 @@ _081127BE:
 	ldrh r1, [r4, 0xE]
 	ldrh r2, [r4, 0x10]
 	mov r0, r9
-	bl sub_803FB68
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08112FD0
 	.align 2, 0
 _08112834: .4byte gPaletteFade
@@ -1789,7 +1789,7 @@ _08112856:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, _081128A8 @ =gUnknown_030041C0
+	ldr r0, _081128A8 @ =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, _081128AC @ =0x0000ffff
@@ -1800,7 +1800,7 @@ _08112856:
 	b _08112FD0
 	.align 2, 0
 _081128A4: .4byte gUnknown_03004210
-_081128A8: .4byte gUnknown_030041C0
+_081128A8: .4byte gBattleTextBuff1
 _081128AC: .4byte 0x0000ffff
 _081128B0:
 	ldr r0, _081128C0 @ =0x0000fffe
@@ -1868,7 +1868,7 @@ _0811291A:
 _0811292C: .4byte gPaletteFade
 _08112930: .4byte gUnknown_03005E94
 _08112934:
-	ldr r0, _08112968 @ =gUnknown_02024D1E
+	ldr r0, _08112968 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1893,7 +1893,7 @@ _08112948:
 	adds r1, r6
 	b _08112A2E
 	.align 2, 0
-_08112968: .4byte gUnknown_02024D1E
+_08112968: .4byte gBattleCommunication
 _0811296C: .4byte 0x0006001c
 _08112970: .4byte 0x00007fff
 _08112974:
@@ -1967,10 +1967,10 @@ _081129FE:
 	bl sub_8024CEC
 	ldr r0, _08112A3C @ =0x0000016f
 	bl PlayFanfare
-	ldr r0, _08112A40 @ =gUnknown_08400F8C
+	ldr r0, _08112A40 @ =gBattleStringsTable
 	ldr r0, [r0, 0xC]
-	bl get_battle_strings_
-	ldr r1, _08112A44 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112A44 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -1992,8 +1992,8 @@ _08112A2E:
 	.align 2, 0
 _08112A38: .4byte gUnknown_03004210
 _08112A3C: .4byte 0x0000016f
-_08112A40: .4byte gUnknown_08400F8C
-_08112A44: .4byte gUnknown_020238CC
+_08112A40: .4byte gBattleStringsTable
+_08112A44: .4byte gDisplayedStringBattle
 _08112A48: .4byte gTasks
 _08112A4C:
 	ldr r0, _08112A80 @ =gUnknown_03004210
@@ -2073,10 +2073,10 @@ _08112AE2:
 	b _08112FD0
 _08112AEE:
 	bl sub_8024CEC
-	ldr r0, _08112B20 @ =gUnknown_08400F8C
+	ldr r0, _08112B20 @ =gBattleStringsTable
 	ldr r0, [r0, 0x10]
-	bl get_battle_strings_
-	ldr r1, _08112B24 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112B24 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -2093,8 +2093,8 @@ _08112AEE:
 	b _08112FCE
 	.align 2, 0
 _08112B1C: .4byte gUnknown_03004210
-_08112B20: .4byte gUnknown_08400F8C
-_08112B24: .4byte gUnknown_020238CC
+_08112B20: .4byte gBattleStringsTable
+_08112B24: .4byte gDisplayedStringBattle
 _08112B28: .4byte gTasks
 _08112B2C:
 	ldr r4, _08112B6C @ =gUnknown_03004210
@@ -2109,10 +2109,10 @@ _08112B36:
 	beq _08112B42
 	b _08112FD0
 _08112B42:
-	ldr r0, _08112B70 @ =gUnknown_08400F8C
+	ldr r0, _08112B70 @ =gBattleStringsTable
 	ldr r0, [r0, 0x14]
-	bl get_battle_strings_
-	ldr r1, _08112B74 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112B74 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -2129,8 +2129,8 @@ _08112B42:
 	b _08112FCE
 	.align 2, 0
 _08112B6C: .4byte gUnknown_03004210
-_08112B70: .4byte gUnknown_08400F8C
-_08112B74: .4byte gUnknown_020238CC
+_08112B70: .4byte gBattleStringsTable
+_08112B74: .4byte gDisplayedStringBattle
 _08112B78: .4byte gTasks
 _08112B7C:
 	ldr r4, _08112BF8 @ =gUnknown_03004210
@@ -2143,10 +2143,10 @@ _08112B86:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08112BC0
-	ldr r0, _08112BFC @ =gUnknown_08400F8C
+	ldr r0, _08112BFC @ =gBattleStringsTable
 	ldr r0, [r0, 0x18]
-	bl get_battle_strings_
-	ldr r1, _08112C00 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112C00 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -2188,16 +2188,16 @@ _08112BD6:
 	adds r0, 0x1
 	movs r2, 0
 	strh r0, [r1, 0x18]
-	ldr r0, _08112C08 @ =gUnknown_02024D1E
+	ldr r0, _08112C08 @ =gBattleCommunication
 	strb r2, [r0, 0x1]
 	bl sub_802BC6C
 	b _08112FD0
 	.align 2, 0
 _08112BF8: .4byte gUnknown_03004210
-_08112BFC: .4byte gUnknown_08400F8C
-_08112C00: .4byte gUnknown_020238CC
+_08112BFC: .4byte gBattleStringsTable
+_08112C00: .4byte gDisplayedStringBattle
 _08112C04: .4byte gTasks
-_08112C08: .4byte gUnknown_02024D1E
+_08112C08: .4byte gBattleCommunication
 _08112C0C:
 	ldr r0, _08112CA4 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2205,7 +2205,7 @@ _08112C0C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08112C32
-	ldr r4, _08112CA8 @ =gUnknown_02024D1E
+	ldr r4, _08112CA8 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _08112C32
@@ -2222,7 +2222,7 @@ _08112C32:
 	ands r0, r1
 	cmp r0, 0
 	beq _08112C58
-	ldr r4, _08112CA8 @ =gUnknown_02024D1E
+	ldr r4, _08112CA8 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _08112C58
@@ -2240,14 +2240,14 @@ _08112C58:
 	cmp r0, 0
 	beq _08112CE2
 	bl sub_8023AD8
-	ldr r0, _08112CAC @ =gUnknown_08400F8C
+	ldr r0, _08112CAC @ =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112CB0 @ =gUnknown_03004210
-	ldr r1, _08112CB4 @ =gUnknown_020238CC
+	ldr r1, _08112CB4 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2255,7 +2255,7 @@ _08112C58:
 	bl sub_8002EB0
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _08112CA8 @ =gUnknown_02024D1E
+	ldr r0, _08112CA8 @ =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
 	beq _08112CBC
@@ -2269,10 +2269,10 @@ _08112C58:
 	b _08112CE2
 	.align 2, 0
 _08112CA4: .4byte gMain
-_08112CA8: .4byte gUnknown_02024D1E
-_08112CAC: .4byte gUnknown_08400F8C
+_08112CA8: .4byte gBattleCommunication
+_08112CAC: .4byte gBattleStringsTable
 _08112CB0: .4byte gUnknown_03004210
-_08112CB4: .4byte gUnknown_020238CC
+_08112CB4: .4byte gDisplayedStringBattle
 _08112CB8: .4byte gTasks
 _08112CBC:
 	ldr r0, _08112D28 @ =gTasks
@@ -2303,14 +2303,14 @@ _08112CE2:
 	b _08112FD0
 _08112CF0:
 	bl sub_8023AD8
-	ldr r0, _08112D30 @ =gUnknown_08400F8C
+	ldr r0, _08112D30 @ =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112D34 @ =gUnknown_03004210
-	ldr r1, _08112D38 @ =gUnknown_020238CC
+	ldr r1, _08112D38 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2329,9 +2329,9 @@ _08112CF0:
 	.align 2, 0
 _08112D28: .4byte gTasks
 _08112D2C: .4byte gMain
-_08112D30: .4byte gUnknown_08400F8C
+_08112D30: .4byte gBattleStringsTable
 _08112D34: .4byte gUnknown_03004210
-_08112D38: .4byte gUnknown_020238CC
+_08112D38: .4byte gDisplayedStringBattle
 _08112D3C:
 	ldr r0, _08112D78 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -2408,16 +2408,16 @@ _08112DCC:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8040A00
+	bl IsHMMove2
 	cmp r0, 0
 	beq _08112E24
-	ldr r0, _08112E10 @ =gUnknown_08400F8C
+	ldr r0, _08112E10 @ =gBattleStringsTable
 	ldr r3, _08112E14 @ =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112E18 @ =gUnknown_03004210
-	ldr r1, _08112E1C @ =gUnknown_020238CC
+	ldr r1, _08112E1C @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2432,13 +2432,13 @@ _08112DCC:
 	strh r1, [r0, 0x18]
 	b _08112FD0
 	.align 2, 0
-_08112E10: .4byte gUnknown_08400F8C
+_08112E10: .4byte gBattleStringsTable
 _08112E14: .4byte 0x000004cc
 _08112E18: .4byte gUnknown_03004210
-_08112E1C: .4byte gUnknown_020238CC
+_08112E1C: .4byte gDisplayedStringBattle
 _08112E20: .4byte gTasks
 _08112E24:
-	ldr r1, _08112E80 @ =gUnknown_03004290
+	ldr r1, _08112E80 @ =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2458,14 +2458,14 @@ _08112E24:
 	mov r0, r9
 	adds r2, r4, 0
 	bl SetMonMoveSlot
-	ldr r0, _08112E88 @ =gUnknown_08400F8C
+	ldr r0, _08112E88 @ =gBattleStringsTable
 	movs r3, 0xCF
 	lsls r3, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112E8C @ =gUnknown_03004210
-	ldr r1, _08112E90 @ =gUnknown_020238CC
+	ldr r1, _08112E90 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2480,11 +2480,11 @@ _08112E24:
 	adds r0, 0x1
 	b _08112FCE
 	.align 2, 0
-_08112E80: .4byte gUnknown_03004290
+_08112E80: .4byte gBattleTextBuff2
 _08112E84: .4byte word_2024E82
-_08112E88: .4byte gUnknown_08400F8C
+_08112E88: .4byte gBattleStringsTable
 _08112E8C: .4byte gUnknown_03004210
-_08112E90: .4byte gUnknown_020238CC
+_08112E90: .4byte gDisplayedStringBattle
 _08112E94: .4byte gTasks
 _08112E98:
 	ldr r4, _08112ED8 @ =gUnknown_03004210
@@ -2499,10 +2499,10 @@ _08112EA2:
 	beq _08112EAE
 	b _08112FD0
 _08112EAE:
-	ldr r0, _08112EDC @ =gUnknown_08400F8C
+	ldr r0, _08112EDC @ =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
-	bl get_battle_strings_
-	ldr r1, _08112EE0 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112EE0 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -2519,8 +2519,8 @@ _08112EAE:
 	b _08112FCE
 	.align 2, 0
 _08112ED8: .4byte gUnknown_03004210
-_08112EDC: .4byte gUnknown_08400F8C
-_08112EE0: .4byte gUnknown_020238CC
+_08112EDC: .4byte gBattleStringsTable
+_08112EE0: .4byte gDisplayedStringBattle
 _08112EE4: .4byte gTasks
 _08112EE8:
 	ldr r4, _08112F28 @ =gUnknown_03004210
@@ -2531,13 +2531,13 @@ _08112EE8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08112FD0
-	ldr r0, _08112F2C @ =gUnknown_08400F8C
+	ldr r0, _08112F2C @ =gBattleStringsTable
 	movs r1, 0xD0
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, _08112F30 @ =gUnknown_020238CC
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, _08112F30 @ =gDisplayedStringBattle
 	movs r0, 0xF
 	str r0, [sp]
 	adds r0, r4, 0
@@ -2554,15 +2554,15 @@ _08112EE8:
 	b _08112FD0
 	.align 2, 0
 _08112F28: .4byte gUnknown_03004210
-_08112F2C: .4byte gUnknown_08400F8C
-_08112F30: .4byte gUnknown_020238CC
+_08112F2C: .4byte gBattleStringsTable
+_08112F30: .4byte gDisplayedStringBattle
 _08112F34: .4byte gTasks
 _08112F38:
-	ldr r0, _08112F68 @ =gUnknown_08400F8C
+	ldr r0, _08112F68 @ =gBattleStringsTable
 	ldr r0, [r0, 0x20]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112F6C @ =gUnknown_03004210
-	ldr r1, _08112F70 @ =gUnknown_020238CC
+	ldr r1, _08112F70 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2581,16 +2581,16 @@ _08112F38:
 	strh r1, [r0, 0x18]
 	b _08112FD0
 	.align 2, 0
-_08112F68: .4byte gUnknown_08400F8C
+_08112F68: .4byte gBattleStringsTable
 _08112F6C: .4byte gUnknown_03004210
-_08112F70: .4byte gUnknown_020238CC
+_08112F70: .4byte gDisplayedStringBattle
 _08112F74: .4byte gTasks
 _08112F78:
-	ldr r0, _08112FA0 @ =gUnknown_08400F8C
+	ldr r0, _08112FA0 @ =gBattleStringsTable
 	ldr r0, [r0, 0x24]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08112FA4 @ =gUnknown_03004210
-	ldr r1, _08112FA8 @ =gUnknown_020238CC
+	ldr r1, _08112FA8 @ =gDisplayedStringBattle
 	movs r2, 0xF
 	str r2, [sp]
 	movs r2, 0x90
@@ -2606,9 +2606,9 @@ _08112F9A:
 	strh r1, [r0, 0x8]
 	b _08112FD0
 	.align 2, 0
-_08112FA0: .4byte gUnknown_08400F8C
+_08112FA0: .4byte gBattleStringsTable
 _08112FA4: .4byte gUnknown_03004210
-_08112FA8: .4byte gUnknown_020238CC
+_08112FA8: .4byte gDisplayedStringBattle
 _08112FAC: .4byte gTasks
 _08112FB0:
 	ldr r0, _08112FE0 @ =gUnknown_03004210
@@ -2808,7 +2808,7 @@ _0811315C:
 	strh r0, [r1]
 	movs r0, 0x11
 	bl sub_8149970
-	ldr r1, _08113184 @ =gUnknown_02024D1E
+	ldr r1, _08113184 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, _08113188 @ =gTasks
 	lsls r0, r7, 2
@@ -2818,10 +2818,10 @@ _0811315C:
 	b _08113298
 	.align 2, 0
 _08113180: .4byte gPaletteFade
-_08113184: .4byte gUnknown_02024D1E
+_08113184: .4byte gBattleCommunication
 _08113188: .4byte gTasks
 _0811318C:
-	ldr r4, _081131C0 @ =gUnknown_02024D1E
+	ldr r4, _081131C0 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2846,10 +2846,10 @@ _081131A2:
 	strb r0, [r4, 0x2]
 	bl _08113B3A
 	.align 2, 0
-_081131C0: .4byte gUnknown_02024D1E
+_081131C0: .4byte gBattleCommunication
 _081131C4: .4byte 0x02014800
 _081131C8:
-	ldr r4, _081131EC @ =gUnknown_02024D1E
+	ldr r4, _081131EC @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2867,7 +2867,7 @@ _081131DE:
 	strb r0, [r4, 0x2]
 	b _08113290
 	.align 2, 0
-_081131EC: .4byte gUnknown_02024D1E
+_081131EC: .4byte gBattleCommunication
 _081131F0: .4byte 0x02014800
 _081131F4:
 	ldr r1, _08113224 @ =0x02014800
@@ -2881,7 +2881,7 @@ _081131F4:
 _08113206:
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, _08113228 @ =gUnknown_02024D1E
+	ldr r0, _08113228 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2895,10 +2895,10 @@ _08113220:
 	b _08113290
 	.align 2, 0
 _08113224: .4byte 0x02014800
-_08113228: .4byte gUnknown_02024D1E
+_08113228: .4byte gBattleCommunication
 _0811322C:
 	bl sub_8149B44
-	ldr r1, _08113240 @ =gUnknown_02024D1E
+	ldr r1, _08113240 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, _08113244 @ =gTasks
 	lsls r0, r7, 2
@@ -2907,10 +2907,10 @@ _0811322C:
 	adds r0, r1
 	b _08113298
 	.align 2, 0
-_08113240: .4byte gUnknown_02024D1E
+_08113240: .4byte gBattleCommunication
 _08113244: .4byte gTasks
 _08113248:
-	ldr r5, _08113270 @ =gUnknown_02024D1E
+	ldr r5, _08113270 @ =gBattleCommunication
 	ldrb r0, [r5, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2930,9 +2930,9 @@ _0811325E:
 	strb r0, [r5, 0x2]
 	b _081132E2
 	.align 2, 0
-_08113270: .4byte gUnknown_02024D1E
+_08113270: .4byte gBattleCommunication
 _08113274:
-	ldr r0, _081132A4 @ =gUnknown_02024D1E
+	ldr r0, _081132A4 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2956,7 +2956,7 @@ _08113298:
 	strh r1, [r0, 0x8]
 	bl _08113B3A
 	.align 2, 0
-_081132A4: .4byte gUnknown_02024D1E
+_081132A4: .4byte gBattleCommunication
 _081132A8:
 	bl IsSEPlaying
 	lsls r0, 24
@@ -3041,21 +3041,21 @@ _08113316:
 	ldrh r1, [r4, 0xE]
 	ldrh r2, [r4, 0x10]
 	mov r0, r8
-	bl sub_803FB68
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08113B3A
 	.align 2, 0
 _08113390: .4byte gPaletteFade
@@ -3106,7 +3106,7 @@ _081133C2:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, _08113418 @ =gUnknown_030041C0
+	ldr r0, _08113418 @ =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, _0811341C @ =0x0000ffff
@@ -3118,7 +3118,7 @@ _081133C2:
 	.align 2, 0
 _08113410: .4byte gUnknown_03004828
 _08113414: .4byte gTasks
-_08113418: .4byte gUnknown_030041C0
+_08113418: .4byte gBattleTextBuff1
 _0811341C: .4byte 0x0000ffff
 _08113420:
 	ldr r0, _08113430 @ =0x0000fffe
@@ -3189,12 +3189,12 @@ _081134A8:
 	bl sub_8024CEC
 	ldr r0, _081134E8 @ =0x0000016f
 	bl PlayFanfare
-	ldr r0, _081134EC @ =gUnknown_08400F8C
+	ldr r0, _081134EC @ =gBattleStringsTable
 	ldr r0, [r0, 0xC]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _081134F0 @ =gUnknown_020238CC
+	ldr r1, _081134F0 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3216,8 +3216,8 @@ _081134DC:
 	.align 2, 0
 _081134E4: .4byte gUnknown_03004828
 _081134E8: .4byte 0x0000016f
-_081134EC: .4byte gUnknown_08400F8C
-_081134F0: .4byte gUnknown_020238CC
+_081134EC: .4byte gBattleStringsTable
+_081134F0: .4byte gDisplayedStringBattle
 _081134F4: .4byte gTasks
 _081134F8:
 	ldr r0, _08113530 @ =gUnknown_03004828
@@ -3301,12 +3301,12 @@ _08113598:
 	b _08113B3A
 _081135A4:
 	bl sub_8024CEC
-	ldr r0, _081135D8 @ =gUnknown_08400F8C
+	ldr r0, _081135D8 @ =gBattleStringsTable
 	ldr r0, [r0, 0x10]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _081135DC @ =gUnknown_020238CC
+	ldr r1, _081135DC @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3323,8 +3323,8 @@ _081135A4:
 	b _08113B38
 	.align 2, 0
 _081135D4: .4byte gUnknown_03004828
-_081135D8: .4byte gUnknown_08400F8C
-_081135DC: .4byte gUnknown_020238CC
+_081135D8: .4byte gBattleStringsTable
+_081135DC: .4byte gDisplayedStringBattle
 _081135E0: .4byte gTasks
 _081135E4:
 	ldr r4, _08113628 @ =gUnknown_03004828
@@ -3340,12 +3340,12 @@ _081135F0:
 	beq _081135FC
 	b _08113B3A
 _081135FC:
-	ldr r0, _0811362C @ =gUnknown_08400F8C
+	ldr r0, _0811362C @ =gBattleStringsTable
 	ldr r0, [r0, 0x14]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _08113630 @ =gUnknown_020238CC
+	ldr r1, _08113630 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3362,8 +3362,8 @@ _081135FC:
 	b _08113B38
 	.align 2, 0
 _08113628: .4byte gUnknown_03004828
-_0811362C: .4byte gUnknown_08400F8C
-_08113630: .4byte gUnknown_020238CC
+_0811362C: .4byte gBattleStringsTable
+_08113630: .4byte gDisplayedStringBattle
 _08113634: .4byte gTasks
 _08113638:
 	ldr r4, _081136FC @ =gUnknown_03004828
@@ -3377,12 +3377,12 @@ _08113644:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08113682
-	ldr r0, _08113700 @ =gUnknown_08400F8C
+	ldr r0, _08113700 @ =gBattleStringsTable
 	ldr r0, [r0, 0x18]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _08113704 @ =gUnknown_020238CC
+	ldr r1, _08113704 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3424,7 +3424,7 @@ _0811369C:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl DrawTextWindow
-	ldr r4, _0811370C @ =gUnknown_02024D1E
+	ldr r4, _0811370C @ =gBattleCommunication
 	strb r6, [r4, 0x1]
 	ldr r2, [r5]
 	adds r0, r2, 0x4
@@ -3460,10 +3460,10 @@ _0811369C:
 	b _08113B3A
 	.align 2, 0
 _081136FC: .4byte gUnknown_03004828
-_08113700: .4byte gUnknown_08400F8C
-_08113704: .4byte gUnknown_020238CC
+_08113700: .4byte gBattleStringsTable
+_08113704: .4byte gDisplayedStringBattle
 _08113708: .4byte gTasks
-_0811370C: .4byte gUnknown_02024D1E
+_0811370C: .4byte gBattleCommunication
 _08113710: .4byte gOtherText_YesNoAndPlayer
 _08113714: .4byte 0x0000ffff
 _08113718: .4byte 0x00002d9f
@@ -3474,7 +3474,7 @@ _0811371C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08113742
-	ldr r4, _081137D0 @ =gUnknown_02024D1E
+	ldr r4, _081137D0 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _08113742
@@ -3491,7 +3491,7 @@ _08113742:
 	ands r0, r1
 	cmp r0, 0
 	beq _08113768
-	ldr r4, _081137D0 @ =gUnknown_02024D1E
+	ldr r4, _081137D0 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _08113768
@@ -3517,16 +3517,16 @@ _08113768:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
-	ldr r0, _081137D8 @ =gUnknown_08400F8C
+	bl DestroyMenuCursor
+	ldr r0, _081137D8 @ =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _081137DC @ =gUnknown_020238CC
+	ldr r1, _081137DC @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3535,7 +3535,7 @@ _08113768:
 	bl sub_8002EB0
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _081137D0 @ =gUnknown_02024D1E
+	ldr r0, _081137D0 @ =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
 	beq _081137E4
@@ -3549,10 +3549,10 @@ _08113768:
 	b _0811380A
 	.align 2, 0
 _081137CC: .4byte gMain
-_081137D0: .4byte gUnknown_02024D1E
+_081137D0: .4byte gBattleCommunication
 _081137D4: .4byte gUnknown_03004828
-_081137D8: .4byte gUnknown_08400F8C
-_081137DC: .4byte gUnknown_020238CC
+_081137D8: .4byte gBattleStringsTable
+_081137DC: .4byte gDisplayedStringBattle
 _081137E0: .4byte gTasks
 _081137E4:
 	ldr r0, _08113868 @ =gTasks
@@ -3591,16 +3591,16 @@ _08113818:
 	movs r2, 0x8
 	movs r3, 0x1D
 	bl ZeroFillWindowRect
-	bl sub_814A7FC
-	ldr r0, _08113874 @ =gUnknown_08400F8C
+	bl DestroyMenuCursor
+	ldr r0, _08113874 @ =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _08113878 @ =gUnknown_020238CC
+	ldr r1, _08113878 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3621,8 +3621,8 @@ _08113818:
 _08113868: .4byte gTasks
 _0811386C: .4byte gMain
 _08113870: .4byte gUnknown_03004828
-_08113874: .4byte gUnknown_08400F8C
-_08113878: .4byte gUnknown_020238CC
+_08113874: .4byte gBattleStringsTable
+_08113878: .4byte gDisplayedStringBattle
 _0811387C:
 	ldr r0, _081138B8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -3701,18 +3701,18 @@ _08113910:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8040A00
+	bl IsHMMove2
 	cmp r0, 0
 	beq _08113970
-	ldr r0, _0811395C @ =gUnknown_08400F8C
+	ldr r0, _0811395C @ =gBattleStringsTable
 	ldr r3, _08113960 @ =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08113964 @ =gUnknown_03004828
 	ldr r2, [r0]
 	adds r0, r2, 0x4
-	ldr r1, _08113968 @ =gUnknown_020238CC
+	ldr r1, _08113968 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3728,13 +3728,13 @@ _08113910:
 	strh r1, [r0, 0x18]
 	b _08113B3A
 	.align 2, 0
-_0811395C: .4byte gUnknown_08400F8C
+_0811395C: .4byte gBattleStringsTable
 _08113960: .4byte 0x000004cc
 _08113964: .4byte gUnknown_03004828
-_08113968: .4byte gUnknown_020238CC
+_08113968: .4byte gDisplayedStringBattle
 _0811396C: .4byte gTasks
 _08113970:
-	ldr r1, _081139D0 @ =gUnknown_03004290
+	ldr r1, _081139D0 @ =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3754,16 +3754,16 @@ _08113970:
 	mov r0, r8
 	adds r2, r4, 0
 	bl SetMonMoveSlot
-	ldr r0, _081139D8 @ =gUnknown_08400F8C
+	ldr r0, _081139D8 @ =gBattleStringsTable
 	movs r3, 0xCF
 	lsls r3, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _081139DC @ =gUnknown_03004828
 	ldr r2, [r0]
 	adds r0, r2, 0x4
-	ldr r1, _081139E0 @ =gUnknown_020238CC
+	ldr r1, _081139E0 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3779,11 +3779,11 @@ _08113970:
 	adds r0, 0x1
 	b _08113B38
 	.align 2, 0
-_081139D0: .4byte gUnknown_03004290
+_081139D0: .4byte gBattleTextBuff2
 _081139D4: .4byte word_2024E82
-_081139D8: .4byte gUnknown_08400F8C
+_081139D8: .4byte gBattleStringsTable
 _081139DC: .4byte gUnknown_03004828
-_081139E0: .4byte gUnknown_020238CC
+_081139E0: .4byte gDisplayedStringBattle
 _081139E4: .4byte gTasks
 _081139E8:
 	ldr r4, _08113A2C @ =gUnknown_03004828
@@ -3799,12 +3799,12 @@ _081139F4:
 	beq _08113A00
 	b _08113B3A
 _08113A00:
-	ldr r0, _08113A30 @ =gUnknown_08400F8C
+	ldr r0, _08113A30 @ =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _08113A34 @ =gUnknown_020238CC
+	ldr r1, _08113A34 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3821,8 +3821,8 @@ _08113A00:
 	b _08113B38
 	.align 2, 0
 _08113A2C: .4byte gUnknown_03004828
-_08113A30: .4byte gUnknown_08400F8C
-_08113A34: .4byte gUnknown_020238CC
+_08113A30: .4byte gBattleStringsTable
+_08113A34: .4byte gDisplayedStringBattle
 _08113A38: .4byte gTasks
 _08113A3C:
 	ldr r4, _08113A80 @ =gUnknown_03004828
@@ -3834,15 +3834,15 @@ _08113A3C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08113B3A
-	ldr r0, _08113A84 @ =gUnknown_08400F8C
+	ldr r0, _08113A84 @ =gBattleStringsTable
 	movs r1, 0xD0
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r2, [r4]
 	adds r0, r2, 0x4
-	ldr r1, _08113A88 @ =gUnknown_020238CC
+	ldr r1, _08113A88 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r4, 0xF
@@ -3858,17 +3858,17 @@ _08113A3C:
 	b _08113B3A
 	.align 2, 0
 _08113A80: .4byte gUnknown_03004828
-_08113A84: .4byte gUnknown_08400F8C
-_08113A88: .4byte gUnknown_020238CC
+_08113A84: .4byte gBattleStringsTable
+_08113A88: .4byte gDisplayedStringBattle
 _08113A8C: .4byte gTasks
 _08113A90:
-	ldr r0, _08113AC8 @ =gUnknown_08400F8C
+	ldr r0, _08113AC8 @ =gBattleStringsTable
 	ldr r0, [r0, 0x20]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08113ACC @ =gUnknown_03004828
 	ldr r2, [r0]
 	adds r0, r2, 0x4
-	ldr r1, _08113AD0 @ =gUnknown_020238CC
+	ldr r1, _08113AD0 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3888,18 +3888,18 @@ _08113A90:
 	strh r1, [r0, 0x18]
 	b _08113B3A
 	.align 2, 0
-_08113AC8: .4byte gUnknown_08400F8C
+_08113AC8: .4byte gBattleStringsTable
 _08113ACC: .4byte gUnknown_03004828
-_08113AD0: .4byte gUnknown_020238CC
+_08113AD0: .4byte gDisplayedStringBattle
 _08113AD4: .4byte gTasks
 _08113AD8:
-	ldr r0, _08113B08 @ =gUnknown_08400F8C
+	ldr r0, _08113B08 @ =gBattleStringsTable
 	ldr r0, [r0, 0x24]
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, _08113B0C @ =gUnknown_03004828
 	ldr r2, [r0]
 	adds r0, r2, 0x4
-	ldr r1, _08113B10 @ =gUnknown_020238CC
+	ldr r1, _08113B10 @ =gDisplayedStringBattle
 	adds r2, 0x34
 	ldrb r2, [r2]
 	movs r3, 0xF
@@ -3915,9 +3915,9 @@ _08113AD8:
 	strh r1, [r0, 0x8]
 	b _08113B3A
 	.align 2, 0
-_08113B08: .4byte gUnknown_08400F8C
+_08113B08: .4byte gBattleStringsTable
 _08113B0C: .4byte gUnknown_03004828
-_08113B10: .4byte gUnknown_020238CC
+_08113B10: .4byte gDisplayedStringBattle
 _08113B14: .4byte gTasks
 _08113B18:
 	ldr r0, _08113B48 @ =gUnknown_03004828
@@ -6694,7 +6694,7 @@ _081150D4: .4byte gUnknown_030041B8
 	thumb_func_start sub_81150D8
 sub_81150D8: @ 81150D8
 	push {lr}
-	ldr r0, _081150F4 @ =gUnknown_02024D1E
+	ldr r0, _081150F4 @ =gBattleCommunication
 	ldrb r1, [r0, 0x1]
 	lsls r1, 28
 	movs r0, 0x90
@@ -6706,7 +6706,7 @@ sub_81150D8: @ 81150D8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081150F4: .4byte gUnknown_02024D1E
+_081150F4: .4byte gBattleCommunication
 	thumb_func_end sub_81150D8
 
 	thumb_func_start HBlankCB_TradeEvolutionScene

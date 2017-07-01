@@ -1,21 +1,21 @@
 #include "global.h"
-#include "main.h"
-#include "asm.h"
 #include "gba/flash_internal.h"
 #include "gba/m4a_internal.h"
+#include "main.h"
 #include "intro.h"
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
 #include "play_time.h"
 #include "rng.h"
+#include "rom3.h"
 #include "rom4.h"
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"
+#include "unknown_task.h"
 
 extern struct SoundInfo gSoundInfo;
-extern u32 gUnknown_3004820;
 extern u32 IntrMain[];
 
 static void VBlankIntr(void);
@@ -32,9 +32,13 @@ static void IntrDummy(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
-const u8 gGameLanguage = 2; // English
+const u8 gGameLanguage = GAME_LANGUAGE;
 
+#if defined(ENGLISH)
 const char BuildDateTime[] = "2002 10 15 20:34";
+#elif defined(GERMAN)
+const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
+#endif
 
 const IntrFunc gIntrTableTemplate[] =
 {
@@ -57,10 +61,10 @@ const IntrFunc gIntrTableTemplate[] =
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
 u16 gKeyRepeatStartDelay;
-u8 gUnknown_3001764;
+bool8 gLinkTransferringData;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
-u8 gUnknown_3001BB4;
+u8 gSoftResetDisabled;
 IntrFunc gIntrTable[INTR_COUNT];
 bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
@@ -91,31 +95,31 @@ void AgbMain()
     InitMapMusic();
     SeedRngWithRtc();
 
-    gUnknown_3001BB4 = 0;
+    gSoftResetDisabled = FALSE;
 
-    if (gUnknown_3004820 != 1)
-        SetMainCallback2(0);
+    if (gFlashMemoryPresent != TRUE)
+        SetMainCallback2(NULL);
 
-    gUnknown_3001764 = 0;
+    gLinkTransferringData = FALSE;
 
     for (;;)
     {
         ReadKeys();
 
-        if (!gUnknown_3001BB4
+        if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
             DoSoftReset();
 
         if (gLink.sendQueue.count > 1 && sub_8055910() == 1)
         {
-            gUnknown_3001764 = 1;
+            gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
-            gUnknown_3001764 = 0;
+            gLinkTransferringData = FALSE;
         }
         else
         {
-            gUnknown_3001764 = 0;
+            gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
             if (gLink.recvQueue.count > 1)
@@ -123,9 +127,9 @@ void AgbMain()
                 if (sub_80558AC() == 1)
                 {
                     gMain.newKeys = 0;
-                    gUnknown_3001764 = 1;
+                    gLinkTransferringData = TRUE;
                     UpdateLinkAndCallCallbacks();
-                    gUnknown_3001764 = 0;
+                    gLinkTransferringData = FALSE;
                 }
             }
         }
@@ -149,7 +153,7 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(c2_copyright_1);
+    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
 }
 
 static void CallCallbacks(void)
@@ -333,8 +337,7 @@ static void SerialIntr(void)
 }
 
 static void IntrDummy(void)
-{
-}
+{}
 
 static void WaitForVBlank(void)
 {

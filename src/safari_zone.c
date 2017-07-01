@@ -1,12 +1,13 @@
 #include "global.h"
 #include "safari_zone.h"
-#include "asm.h"
+#include "event_data.h"
+#include "field_fadetransition.h"
 #include "field_player_avatar.h"
-#include "flag.h"
 #include "main.h"
+#include "rom4.h"
 #include "script.h"
 #include "string_util.h"
-#include "rom4.h"
+#include "text.h"
 
 struct PokeblockFeeder
 {
@@ -22,13 +23,13 @@ struct PokeblockFeeder
 static void ClearAllPokeblockFeeders(void);
 static void DecrementFeederStepCounters(void);
 
-extern u8 gUnknown_02024D26;
+extern u8 gBattleOutcome;
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 gSafariZoneStepCounter = 0;
 EWRAM_DATA static struct PokeblockFeeder gPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
 
-extern void (*gUnknown_0300485C)(void);
+extern void (*gFieldCallback)(void);
 
 extern u8 gUnknown_081C340A;
 extern u8 gUnknown_081C342D;
@@ -55,7 +56,7 @@ void ResetSafariZoneFlag(void)
 
 void EnterSafariMode(void)
 {
-    sav12_xor_increment(0x11);
+    IncrementGameStat(0x11);
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = 30;
@@ -98,14 +99,14 @@ void sub_80C824C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
     }
-    else if (gUnknown_02024D26 == 8)
+    else if (gBattleOutcome == 8)
     {
         ScriptContext2_RunNewScript(&gUnknown_081C340A);
         warp_in();
-        gUnknown_0300485C = sub_8080E44;
+        gFieldCallback = sub_8080E44;
         SetMainCallback2(CB2_LoadMap);
     }
-    else if (gUnknown_02024D26 == 7)
+    else if (gBattleOutcome == 7)
     {
         ScriptContext1_SetupScript(&gUnknown_081C3459);
         ScriptContext1_Stop();

@@ -6,181 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8126098
-sub_8126098: @ 8126098
-	push {r4,lr}
-	adds r4, r3, 0
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r2, 16
-	lsrs r2, 16
-	movs r3, 0x2
-	ands r0, r3
-	cmp r0, 0
-	beq _081260C6
-	ands r1, r3
-	cmp r1, 0
-	beq _081260C6
-	movs r0, 0x4
-	ands r2, r0
-	cmp r2, 0
-	beq _081260C6
-	movs r0, 0x80
-	.ifdef SAPPHIRE
-	lsls r0, 1 @ unknown difference
-	.endif
-	ands r0, r4
-	cmp r0, 0
-	beq _081260C6
-	movs r0, 0x1
-	b _081260C8
-_081260C6:
-	movs r0, 0
-_081260C8:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8126098
-
-	thumb_func_start sub_81260D0
-sub_81260D0: @ 81260D0
-	push {lr}
-	ldr r0, _081260E4 @ =gStringVar4
-	ldr r1, _081260E8 @ =gOtherText_DataCannotUseVersion
-	bl StringExpandPlaceholders
-	movs r0, 0x3
-	bl sub_8126160
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081260E4: .4byte gStringVar4
-_081260E8: .4byte gOtherText_DataCannotUseVersion
-	thumb_func_end sub_81260D0
-
-	thumb_func_start sub_81260EC
-sub_81260EC: @ 81260EC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r1, _08126114 @ =gScriptFuncs
-	ldr r2, _08126118 @ =gScriptFuncs_End
-	bl InitScriptContext
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl SetupBytecodeScript
-	str r5, [r4, 0x64]
-	movs r0, 0
-	str r0, [r4, 0x68]
-	str r0, [r4, 0x6C]
-	str r0, [r4, 0x70]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08126114: .4byte gScriptFuncs
-_08126118: .4byte gScriptFuncs_End
-	thumb_func_end sub_81260EC
-
-	thumb_func_start sub_812611C
-sub_812611C: @ 812611C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl RunScript
-	lsls r0, 24
-	cmp r0, 0
-	beq _08126134
-	ldr r0, [r4, 0x70]
-	cmp r0, 0
-	beq _08126134
-	movs r0, 0x1
-	b _08126136
-_08126134:
-	movs r0, 0
-_08126136:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_812611C
-
-	thumb_func_start sub_812613C
-sub_812613C: @ 812613C
-	push {r4,lr}
-	adds r1, r0, 0
-	ldr r4, _0812615C @ =gUnknown_02039288
-	adds r0, r4, 0
-	bl sub_81260EC
-_08126148:
-	adds r0, r4, 0
-	bl sub_812611C
-	cmp r0, 0
-	bne _08126148
-	ldr r0, [r4, 0x6C]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0812615C: .4byte gUnknown_02039288
-	thumb_func_end sub_812613C
-
-	thumb_func_start sub_8126160
-sub_8126160: @ 8126160
-	ldr r1, _08126168 @ =gUnknown_02039288
-	str r0, [r1, 0x6C]
-	bx lr
-	.align 2, 0
-_08126168: .4byte gUnknown_02039288
-	thumb_func_end sub_8126160
-
-	thumb_func_start sub_812616C
-sub_812616C: @ 812616C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r3, 0
-	movs r2, 0
-	cmp r3, r1
-	bcs _08126184
-_08126178:
-	adds r0, r4, r2
-	ldrb r0, [r0]
-	adds r3, r0
-	adds r2, 0x1
-	cmp r2, r1
-	bcc _08126178
-_08126184:
-	adds r0, r3, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_812616C
-
-	thumb_func_start sub_812618C
-sub_812618C: @ 812618C
-	adds r2, r0, 0
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	orrs r0, r1
-	ldrb r1, [r2, 0x2]
-	lsls r1, 16
-	orrs r0, r1
-	ldrb r1, [r2, 0x3]
-	lsls r1, 24
-	orrs r0, r1
-	bx lr
-	thumb_func_end sub_812618C
-
-	thumb_func_start sub_81261A4
-sub_81261A4: @ 81261A4
-	strb r1, [r0]
-	lsrs r2, r1, 8
-	strb r2, [r0, 0x1]
-	lsrs r2, r1, 16
-	strb r2, [r0, 0x2]
-	lsrs r1, 24
-	strb r1, [r0, 0x3]
-	bx lr
-	thumb_func_end sub_81261A4
-
 	thumb_func_start unref_sub_81261B4
 unref_sub_81261B4: @ 81261B4
 	push {r4-r7,lr}
@@ -257,7 +82,7 @@ unref_sub_812620C: @ 812620C
 	adds r1, r5
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -544,7 +369,7 @@ sub_8126438: @ 8126438
 	mov r7, r8
 	push {r7}
 	adds r7, r0, 0
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	mov r8, r0
 	adds r0, r7, 0
 	bl ScriptReadWord
@@ -560,7 +385,7 @@ sub_8126438: @ 8126438
 	movs r2, 0x7
 	bl StringCopyN
 	adds r0, r4, 0
-	bl sub_80B48A8
+	bl SetEnigmaBerry
 	ldr r4, _0812648C @ =gStringVar2
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -597,7 +422,7 @@ _081264B8:
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r7, 0x6C]
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _081264E0
 	ldr r0, _081264DC @ =0x0000402d
@@ -702,7 +527,7 @@ sub_8126524: @ 8126524
 sub_812658C: @ 812658C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80690F0
+	bl EnableNationalPokedex
 	ldr r0, _081265A8 @ =gStringVar4
 	ldr r1, _081265AC @ =gOtherText_DexUpgraded
 	bl StringExpandPlaceholders
@@ -842,23 +667,23 @@ _0812668C:
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _081266C6:
 	adds r0, r7, 0
 	movs r1, 0xC
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081266E4
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80A2D88
+	bl GiveMailToMon2
 _081266E4:
 	bl party_compaction
 	bl CalculatePlayerPartyCount
@@ -914,7 +739,7 @@ _08126750: .4byte gOtherText_NewTrainerInHoenn
 sub_8126754: @ 8126754
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80691BC
+	bl EnableResetRTC
 	ldr r0, _08126770 @ =gStringVar4
 	ldr r1, _08126774 @ =gSystemText_ClockAdjustmentUsable
 	bl StringExpandPlaceholders
@@ -987,7 +812,7 @@ sub_81267C0: @ 81267C0
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r5, r0

@@ -30,9 +30,14 @@ RomHeaderGameTitle:
 
 RomHeaderGameCode:
 	.ifdef SAPPHIRE
-	.ascii "AXPE"
+	.ascii "AXP"
 	.else
-	.ascii "AXVE"
+	.ascii "AXV"
+	.endif
+	.ifdef ENGLISH
+	.ascii "E"
+	.else
+	.ascii "D"
 	.endif
 
 RomHeaderMakerCode:
@@ -54,10 +59,14 @@ RomHeaderSoftwareVersion:
 	.byte REVISION
 
 RomHeaderChecksum:
+	.ifdef ENGLISH
 	.ifdef SAPPHIRE
 	.byte 0x55 - REVISION
 	.else
 	.byte 0x41 - REVISION
+	.endif
+	.else
+	.byte 0x42
 	.endif
 
 RomHeaderReserved2:

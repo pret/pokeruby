@@ -1,16 +1,20 @@
 #include "global.h"
 #include "link.h"
-#include "asm.h"
+#include "battle.h"
+#include "berry.h"
+#include "berry_blender.h"
+#include "hall_of_fame.h"
 #include "main.h"
-#include "task.h"
-#include "text.h"
-#include "sprite.h"
-#include "songs.h"
+#include "menu.h"
 #include "palette.h"
 #include "rng.h"
-#include "menu.h"
-#include "sound.h"
 #include "save.h"
+#include "songs.h"
+#include "sound.h"
+#include "sprite.h"
+#include "strings2.h"
+#include "task.h"
+#include "text.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -33,12 +37,10 @@ struct LinkTestBGInfo
 
 extern u8 unk_2000000[];
 extern u8 unk_2004000[];
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u16 gScriptItemId;
 
 extern u16 word_3004858;
-
-extern u8 gMultiText_LinkError[];
 
 static void InitLinkTestBG(u8, u8, u8, u8);
 void InitLinkTestBG_Unused(u8, u8, u8, u8);
@@ -75,6 +77,7 @@ static void sub_80083E0(void);
 static void sub_8008454(void);
 static void sub_80084C8(void);
 static void sub_80084F4(void);
+
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);
@@ -148,42 +151,47 @@ struct Link gLink;
 u8 gLastRecvQueueCount;
 u16 gLinkSavedIme;
 
+#ifdef GERMAN
+u8 deUnkValue1;
+u8 deUnkValue2;
+#endif
+
 EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = {0};
 EWRAM_DATA bool8 gLinkTestDummyBool = {0};
 EWRAM_DATA u32 gFiller_20238B8 = {0};
 EWRAM_DATA u32 dword_20238BC = {0};
 EWRAM_DATA bool8 gLinkOpen = {0};
 
-#include "link/digit_palette.h"
-#include "link/digit_tiles.h"
+static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
+static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");
 
 static const u8 sDebugMessages[7][12] =
 {
-    _"せつぞく　ちゅうです",
-    _"せつぞく　できません",
-    _"かくにん　ちゅうです",
-    _"かくにん　できました",
-    _"かくにん　できません",
-    _"かくにん　を　かくにん",
-    _"かくにん　は　しっぱい",
+    _("せつぞく　ちゅうです"),
+    _("せつぞく　できません"),
+    _("かくにん　ちゅうです"),
+    _("かくにん　できました"),
+    _("かくにん　できません"),
+    _("かくにん　を　かくにん"),
+    _("かくにん　は　しっぱい"),
 };
 
-static const u8 sColorCodes[] = _"{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}";
+static const u8 sColorCodes[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}");
 
-static const u32 sBlockRequestLookupTable[5 * 2] =
+const struct BlockRequest sBlockRequestLookupTable[5] =
 {
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 100,
-    (u32)gBlockSendBuffer, 220,
-    (u32)gBlockSendBuffer,  40,
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 100},
+    {gBlockSendBuffer, 220},
+    {gBlockSendBuffer, 40},
 };
 
-static const u8 sTestString[] = _"テストな";
+static const u8 sTestString[] = _("テストな");
 
 ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) static const u8 sEmptyString[] = _"";
+ALIGNED(4) static const u8 sEmptyString[] = _("");
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -201,13 +209,13 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
     switch (bgNum)
     {
     case 1:
-        REG_BG1CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     case 2:
-        REG_BG2CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG2CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     case 3:
-        REG_BG3CNT = 1 | (screenBaseBlock << 8) | (charBaseBlock << 2);
+        REG_BG3CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock);
         break;
     }
 }
@@ -249,7 +257,7 @@ void LinkTestScreen(void)
     }
 
     InitLinkTestBG(0, 2, 4, 0);
-    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP;
     CreateTask(Task_DestroySelf, 0);
     RunTasks();
     AnimateSprites();
@@ -401,7 +409,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)
-        sub_8125D44(1);
+        TrySavingData(LINK_SAVE);
     if (gMain.newKeys & SELECT_BUTTON)
         sub_800832C();
     if (gLinkTestDebugValuesEnabled)
@@ -461,7 +469,7 @@ static void HandleReceiveRemoteLinkPlayer(u8 multiplayerId)
         gReceivedRemoteLinkPlayers = TRUE;
 }
 
-static void ProcessRecvCmds(u8 a1)
+static void ProcessRecvCmds(u8 unusedParam)
 {
     u16 i;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -474,9 +482,12 @@ static void ProcessRecvCmds(u8 a1)
         case 0x2222:
             InitLocalLinkPlayer();
             localLinkPlayerBlock.linkPlayer = localLinkPlayer;
-            memcpy(localLinkPlayerBlock.magic1, sMagic, 15);
-            memcpy(localLinkPlayerBlock.magic2, sMagic, 15);
+            memcpy(localLinkPlayerBlock.magic1, sMagic, sizeof(localLinkPlayerBlock.magic1) - 1);
+            memcpy(localLinkPlayerBlock.magic2, sMagic, sizeof(localLinkPlayerBlock.magic2) - 1);
             InitBlockSend(&localLinkPlayerBlock, sizeof(localLinkPlayerBlock));
+            break;
+        case 0x4444:
+            word_3002910[i] = gRecvCmds[1][i];
             break;
         case 0x5555:
             byte_3002A68 = 1;
@@ -548,23 +559,28 @@ static void ProcessRecvCmds(u8 a1)
             sub_80516C4(i, gRecvCmds[1][i]);
             break;
         case 0xCCCC:
-        {
-            const u32 *addresses;
-            const u32 *sizes;
-            void *data;
-            u16 size;
+#if defined(ENGLISH)
+            SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
+#elif defined(GERMAN)
+            if (deUnkValue2 == 1)
+            {
+                deUnkValue2 = 2;
+                deUnkValue1 = gRecvCmds[1][i];
+            }
+            else if (deUnkValue2 == 2 || deUnkValue2 == 3)
+            {
+                SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
 
-            addresses = sBlockRequestLookupTable;
-            data = (void *)addresses[gRecvCmds[1][i] * 2];
-
-            sizes = addresses + 1;
-            size = sizes[gRecvCmds[1][i] * 2];
-
-            SendBlock(0, data, size);
-            break;
-        }
-        case 0x4444:
-            word_3002910[i] = gRecvCmds[1][i];
+                if (deUnkValue2 == 2)
+                    deUnkValue2 = 1;
+                else
+                    deUnkValue2 = 0;
+            }
+            else
+            {
+                SendBlock(0, sBlockRequestLookupTable[gRecvCmds[1][i]].address, sBlockRequestLookupTable[gRecvCmds[1][i]].size);
+            }
+#endif
             break;
         case 0xCAFE:
             word_3002910[i] = gRecvCmds[1][i];
@@ -629,7 +645,7 @@ static void BuildSendCmd(u16 code)
         gSendCmd[0] = 0x5FFF;
         break;
     case 0xCAFE:
-        if (!word_3004858 || gUnknown_3001764)
+        if (!word_3004858 || gLinkTransferringData)
             break;
         gSendCmd[0] = 0xCAFE;
         gSendCmd[1] = word_3004858;
@@ -675,6 +691,9 @@ void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
     gLinkTimeOutCounter = 0;
+#if defined(GERMAN)
+    ResetBlockSend();
+#endif
     OpenLink();
 }
 
@@ -829,7 +848,7 @@ static void LinkCB_BlockSendEnd(void)
 
 static void sub_8007E04(void)
 {
-    GetMultiplayerId();
+    GetMultiplayerId(); // whats the point of calling this if you dont use the multiplayer ID?
     BuildSendCmd(0x4444);
     dword_20238BC++;
 }
@@ -1107,7 +1126,7 @@ static void sub_800837C(void)
 
     if (count == totalCount)
     {
-        gUnknown_020239F8 &= 0xFFDF;
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
@@ -1131,7 +1150,7 @@ static void sub_80083E0(void)
 
     if (count == totalCount)
     {
-        gUnknown_020239F8 &= 0xFFDF;
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = 0;
@@ -1224,7 +1243,7 @@ void CB2_LinkError(void)
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
-    gUnknown_3001BB4 = 0;
+    gSoftResetDisabled = FALSE;
     CreateTask(Task_DestroySelf, 0);
     StopMapMusic();
     RunTasks();

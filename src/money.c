@@ -10,55 +10,78 @@
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038734;
 
-extern const struct SpriteSheet gUnknown_083CF584;
-extern const struct SpritePalette gUnknown_083CF58C;
+extern const struct CompressedSpriteSheet gUnknown_083CF584;
+extern const struct CompressedSpritePalette gUnknown_083CF58C;
 extern const struct SpriteTemplate gSpriteTemplate_83CF56C;
 
-bool8 IsEnoughMoney(u32 budget, u32 cost) {
-    if (budget >= cost) {
+bool8 IsEnoughMoney(u32 budget, u32 cost)
+{
+    if (budget >= cost)
+    {
         return TRUE;
     }
 
     return FALSE;
 }
 
-void sub_80B79B8(u32 *arg0, u32 arg1) {
-    if (*arg0 > *arg0 + arg1) {
+void sub_80B79B8(u32 *arg0, u32 arg1)
+{
+    if (*arg0 > *arg0 + arg1)
+    {
         *arg0 = 999999;
         return;
     }
 
     *arg0 = *arg0 + arg1;
-    if (*arg0 > 999999) {
+    if (*arg0 > 999999)
+    {
         *arg0 = 999999;
     }
 }
 
-void sub_80B79E0(u32 *arg0, u32 arg1) {
-    if (*arg0 < arg1) {
+void sub_80B79E0(u32 *arg0, u32 arg1)
+{
+    if (*arg0 < arg1)
+    {
         *arg0 = 0;
-    } else {
+    }
+    else
+    {
         *arg0 = *arg0 - arg1;
     }
 }
 
-void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2) {
+void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2)
+{
     u8 width;
     u8 i;
 
-    if (arg1 > 999999) {
+    if (arg1 > 999999)
+    {
         width = 7;
-    } else if (arg1 > 99999) {
+    }
+    else if (arg1 > 99999)
+    {
         width = 6;
-    } else if (arg1 > 10000) {
+    }
+    else if (arg1 > 10000)
+    {
         width = 5;
-    } else if (arg1 > 999) {
+    }
+    else if (arg1 > 999)
+    {
         width = 4;
-    } else if (arg1 > 99) {
+    }
+    else if (arg1 > 99)
+    {
         width = 3;
-    } else if (arg1 > 9) {
+    }
+    else if (arg1 > 9)
+    {
         width = 2;
-    } else {
+    }
+    else
+    {
         width = 1;
     }
 
@@ -67,7 +90,8 @@ void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2) {
     buffer[2] = 0x06;
     buffer += 3;
 
-    for (i = 0; i < arg2 - width; i++) {
+    for (i = 0; i < arg2 - width; i++)
+    {
         buffer[0] = CHAR_SPACE;
         buffer += 1;
     }
@@ -83,74 +107,25 @@ void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2) {
     buffer[3] = EOS;
 }
 
-#ifdef NONMATCHING
-void sub_80B7A94(u32 arg0, u8 size, u8 x, u8 y) {
+void sub_80B7A94(u32 arg0, u8 size, u8 x, u8 y)
+{
     u8 buffer[16];
     u8 stringWidth;
 
     sub_80B79F8(buffer, arg0, size);
     stringWidth = sub_8072CA4(buffer);
 
-    if (stringWidth >= (size + 1) * 8) {
+    if (stringWidth >= (size + 1) * 8)
         MenuPrint(buffer, x, y);
-    } else {
-        u8 pixelX = (size + 1) * 8 - stringWidth;
-        MenuPrint_PixelCoords(buffer, pixelX, y * 8, 1);
+    else
+    {
+        int xPlusOne = x + 1;
+        MenuPrint_PixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
     }
 }
-#else
 
-__attribute__((naked))
-void sub_80B7A94(u32 arg0, u8 arg1, u8 x, u8 y) {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x10\n\
-    adds r4, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r5, r1, 24\n\
-    lsls r2, 24\n\
-    lsrs r6, r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r7, r3, 24\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    adds r2, r5, 0\n\
-    bl sub_80B79F8\n\
-    mov r0, sp\n\
-    bl sub_8072CA4\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 3\n\
-    cmp r2, r0\n\
-    blt _080B7ACE\n\
-    mov r0, sp\n\
-    adds r1, r6, 0\n\
-    adds r2, r7, 0\n\
-    bl MenuPrint\n\
-    b _080B7AE4\n\
-_080B7ACE:\n\
-    adds r1, r6, 0x1\n\
-    adds r1, r5\n\
-    lsls r1, 3\n\
-    subs r1, r2\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r2, r7, 3\n\
-    mov r0, sp\n\
-    movs r3, 0x1\n\
-    bl MenuPrint_PixelCoords\n\
-_080B7AE4:\n\
-    add sp, 0x10\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-
-#endif
-
-void sub_80B7AEC(u32 arg0, u8 left, u8 top) {
+void sub_80B7AEC(u32 arg0, u8 left, u8 top)
+{
     u8 buffer[32];
     u8 *ptr;
 
@@ -163,14 +138,17 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top) {
 
     MenuPrint_RightAligned(buffer, left, top);
 
+#ifdef ENGLISH
     ptr[0] = 0xFC;
     ptr[1] = 0x14;
     ptr[2] = 0x00;
     ptr[3] = 0xFF;
+#endif
 }
 
 __attribute__((naked))
-void sub_80B7B34(void) {
+void sub_80B7B34(void)
+{
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
     mov r7, r9\n\
@@ -262,11 +240,13 @@ _080B7BE8: .4byte 0x0600f840\n\
     .syntax divided\n");
 }
 
-void sub_80B7BEC(u32 arg0, u8 x, u8 y) {
+void sub_80B7BEC(u32 arg0, u8 x, u8 y)
+{
     sub_80B7A94(arg0, 6, x + 6, y + 1);
 }
 
-void sub_80B7C14(u32 arg0, u8 x, u8 y) {
+void sub_80B7C14(u32 arg0, u8 x, u8 y)
+{
     MenuDrawTextWindow(x, y, x + 13, y + 3);
     sub_80B7BEC(arg0, x, y);
 
@@ -276,16 +256,19 @@ void sub_80B7C14(u32 arg0, u8 x, u8 y) {
     gUnknown_02038734 = CreateSprite(&gSpriteTemplate_83CF56C, x * 8 + 19, y * 8 + 11, 0);
 }
 
-void RemoveMoneyLabelObject(u8 x, u8 y) {
+void RemoveMoneyLabelObject(u8 x, u8 y)
+{
     DestroySpriteAndFreeResources(&gSprites[gUnknown_02038734]);
     FreeSpritePaletteByTag(SPRITE_TAG_MONEY);
     MenuZeroFillWindowRect(x, y, x + 13, y + 3);
 }
 
-bool8 sub_80B7CE8(void) {
+bool8 sub_80B7CE8(void)
+{
     return IsEnoughMoney(gSaveBlock1.money, gSpecialVar_0x8005);
 }
 
-void sub_80B7D0C(void) {
+void sub_80B7D0C(void)
+{
     sub_80B79E0(&gSaveBlock1.money, gSpecialVar_0x8005);
 }

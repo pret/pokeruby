@@ -25,7 +25,7 @@
 #include "sym_file.h"
 #include "elf.h"
 
-void HandleCommonInclude(std::string filename, std::string sourcePath, std::string symOrderPath)
+void HandleCommonInclude(std::string filename, std::string sourcePath, std::string symOrderPath, std::string lang)
 {
     auto commonSymbols = GetCommonSymbols(sourcePath + "/" + filename);
 
@@ -40,6 +40,8 @@ void HandleCommonInclude(std::string filename, std::string sourcePath, std::stri
 
     while (!symFile.IsAtEnd())
     {
+        symFile.HandleLangConditional(lang);
+
         std::string label = symFile.GetLabel(false);
 
         if (label.length() == 0)
@@ -71,12 +73,14 @@ void HandleCommonInclude(std::string filename, std::string sourcePath, std::stri
     }
 }
 
-void ConvertSymFile(std::string filename, std::string sectionName, bool common, std::string sourcePath, std::string commonSymPath)
+void ConvertSymFile(std::string filename, std::string sectionName, std::string lang, bool common, std::string sourcePath, std::string commonSymPath)
 {
     SymFile symFile(filename);
 
     while (!symFile.IsAtEnd())
     {
+        symFile.HandleLangConditional(lang);
+
         Directive directive = symFile.GetDirective();
 
         switch (directive)
@@ -87,10 +91,9 @@ void ConvertSymFile(std::string filename, std::string sectionName, bool common, 
             symFile.ExpectEmptyRestOfLine();
             printf(". = ALIGN(4);\n");
             if (common)
-                HandleCommonInclude(incFilename, sourcePath, commonSymPath);
+                HandleCommonInclude(incFilename, sourcePath, commonSymPath, lang);
             else
                 printf("%s(%s);\n", incFilename.c_str(), sectionName.c_str());
-            printf(". = ALIGN(4);\n");
             break;
         }
         case Directive::Space:
@@ -133,28 +136,29 @@ void ConvertSymFile(std::string filename, std::string sectionName, bool common, 
 
 int main(int argc, char **argv)
 {
-    if (argc < 3)
+    if (argc < 4)
     {
-        fprintf(stderr, "Usage: %s SECTION_NAME SYM_FILE [-c SRC_PATH,COMMON_SYM_PATH]", argv[0]);
+        fprintf(stderr, "Usage: %s SECTION_NAME SYM_FILE LANG [-c SRC_PATH,COMMON_SYM_PATH]", argv[0]);
         return 1;
     }
 
     bool common = false;
     std::string sectionName = std::string(argv[1]);
     std::string symFileName = std::string(argv[2]);
+    std::string lang = std::string(argv[3]);
     std::string sourcePath;
     std::string commonSymPath;
 
-    if (argc > 3)
+    if (argc > 4)
     {
-        if (std::strcmp(argv[3], "-c") != 0)
+        if (std::strcmp(argv[4], "-c") != 0)
             FATAL_ERROR("error: unrecognized argument \"%s\"\n", argv[4]);
 
-        if (argc < 5)
+        if (argc < 6)
             FATAL_ERROR("error: missing SRC_PATH,COMMON_SYM_PATH after \"-c\"\n");
 
         common = true;
-        std::string paths = std::string(argv[4]);
+        std::string paths = std::string(argv[5]);
         std::size_t commaPos = paths.find(',');
 
         if (commaPos == std::string::npos)
@@ -164,6 +168,6 @@ int main(int argc, char **argv)
         commonSymPath = paths.substr(commaPos + 1);
     }
 
-    ConvertSymFile(symFileName, sectionName, common, sourcePath, commonSymPath);
+    ConvertSymFile(symFileName, sectionName, lang, common, sourcePath, commonSymPath);
     return 0;
 }

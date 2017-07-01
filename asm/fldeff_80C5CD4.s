@@ -808,13 +808,13 @@ SetUpFieldMove_SecretPower: @ 80C62C4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80571EC
+	bl MetatileBehavior_IsSecretBaseCave
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080C6330
 	bl sub_80C6264
-	ldr r1, _080C6320 @ =gUnknown_0300485C
+	ldr r1, _080C6320 @ =gFieldCallback
 	ldr r0, _080C6324 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6328 @ =gUnknown_03005CE4
@@ -823,32 +823,32 @@ SetUpFieldMove_SecretPower: @ 80C62C4
 	.align 2, 0
 _080C6318: .4byte gScriptResult
 _080C631C: .4byte gUnknown_0203923C
-_080C6320: .4byte gUnknown_0300485C
+_080C6320: .4byte gFieldCallback
 _080C6324: .4byte sub_808AB90
 _080C6328: .4byte gUnknown_03005CE4
 _080C632C: .4byte sub_80C639C
 _080C6330:
 	adds r0, r4, 0
-	bl sub_805720C
+	bl MetatileBehavior_IsSecretBaseTree
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080C6360
 	bl sub_80C6264
-	ldr r1, _080C6350 @ =gUnknown_0300485C
+	ldr r1, _080C6350 @ =gFieldCallback
 	ldr r0, _080C6354 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6358 @ =gUnknown_03005CE4
 	ldr r0, _080C635C @ =sub_80C64A8
 	b _080C6380
 	.align 2, 0
-_080C6350: .4byte gUnknown_0300485C
+_080C6350: .4byte gFieldCallback
 _080C6354: .4byte sub_808AB90
 _080C6358: .4byte gUnknown_03005CE4
 _080C635C: .4byte sub_80C64A8
 _080C6360:
 	adds r0, r4, 0
-	bl is_tile_x98
+	bl MetatileBehavior_IsSecretBaseShrub
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -858,7 +858,7 @@ _080C636E:
 	b _080C6384
 _080C6372:
 	bl sub_80C6264
-	ldr r1, _080C638C @ =gUnknown_0300485C
+	ldr r1, _080C638C @ =gFieldCallback
 	ldr r0, _080C6390 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _080C6394 @ =gUnknown_03005CE4
@@ -871,7 +871,7 @@ _080C6384:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C638C: .4byte gUnknown_0300485C
+_080C638C: .4byte gFieldCallback
 _080C6390: .4byte sub_808AB90
 _080C6394: .4byte gUnknown_03005CE4
 _080C6398: .4byte sub_80C660C
@@ -881,7 +881,7 @@ _080C6398: .4byte sub_80C660C
 sub_80C639C: @ 80C639C
 	push {lr}
 	ldr r1, _080C63B0 @ =gUnknown_0202FF84
-	ldr r0, _080C63B4 @ =gUnknown_03005CE0
+	ldr r0, _080C63B4 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C63B8 @ =gUnknown_081A2CE6
@@ -890,7 +890,7 @@ sub_80C639C: @ 80C639C
 	bx r0
 	.align 2, 0
 _080C63B0: .4byte gUnknown_0202FF84
-_080C63B4: .4byte gUnknown_03005CE0
+_080C63B4: .4byte gLastFieldPokeMenuOpened
 _080C63B8: .4byte gUnknown_081A2CE6
 	thumb_func_end sub_80C639C
 
@@ -1026,7 +1026,7 @@ sub_80C6498: @ 80C6498
 sub_80C64A8: @ 80C64A8
 	push {lr}
 	ldr r1, _080C64BC @ =gUnknown_0202FF84
-	ldr r0, _080C64C0 @ =gUnknown_03005CE0
+	ldr r0, _080C64C0 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C64C4 @ =gUnknown_081A2D3E
@@ -1035,7 +1035,7 @@ sub_80C64A8: @ 80C64A8
 	bx r0
 	.align 2, 0
 _080C64BC: .4byte gUnknown_0202FF84
-_080C64C0: .4byte gUnknown_03005CE0
+_080C64C0: .4byte gLastFieldPokeMenuOpened
 _080C64C4: .4byte gUnknown_081A2D3E
 	thumb_func_end sub_80C64A8
 
@@ -1213,7 +1213,7 @@ sub_80C65FC: @ 80C65FC
 sub_80C660C: @ 80C660C
 	push {lr}
 	ldr r1, _080C6620 @ =gUnknown_0202FF84
-	ldr r0, _080C6624 @ =gUnknown_03005CE0
+	ldr r0, _080C6624 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
 	ldr r0, _080C6628 @ =gUnknown_081A2D96
@@ -1222,7 +1222,7 @@ sub_80C660C: @ 80C660C
 	bx r0
 	.align 2, 0
 _080C6620: .4byte gUnknown_0202FF84
-_080C6624: .4byte gUnknown_03005CE0
+_080C6624: .4byte gLastFieldPokeMenuOpened
 _080C6628: .4byte gUnknown_081A2D96
 	thumb_func_end sub_80C660C
 

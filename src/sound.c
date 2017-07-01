@@ -1,10 +1,11 @@
 #include "global.h"
-#include "sound.h"
-#include "asm.h"
 #include "gba/m4a_internal.h"
-#include "task.h"
-#include "songs.h"
+#include "sound.h"
+#include "battle.h"
 #include "m4a.h"
+#include "main.h"
+#include "songs.h"
+#include "task.h"
 
 struct Fanfare
 {
@@ -12,7 +13,10 @@ struct Fanfare
     u16 duration;
 };
 
-extern u16 gUnknown_020239F8;
+// FIXME: different prototype than definition
+u32 SpeciesToCryId(u32);
+
+extern u16 gBattleTypeFlags;
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;
 extern u8 gPokemonCryBGMDuckingCounter;
 
@@ -28,8 +32,6 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
 
-extern struct Fanfare gFanfares[];
-
 extern struct ToneData voicegroup_8452590[];
 extern struct ToneData voicegroup_8452B90[];
 extern struct ToneData voicegroup_8453190[];
@@ -39,6 +41,22 @@ extern struct ToneData voicegroup_84537C0[];
 extern struct ToneData voicegroup_8453DC0[];
 extern struct ToneData voicegroup_84543C0[];
 extern struct ToneData voicegroup_84549C0[];
+
+static const struct Fanfare sFanfares[] =
+{
+    { BGM_FANFA1,      80 },
+    { BGM_FANFA4,     160 },
+    { BGM_FANFA5,     220 },
+    { BGM_ME_WAZA,    220 },
+    { BGM_ME_ASA,     160 },
+    { BGM_ME_BACHI,   340 },
+    { BGM_ME_WASURE,  180 },
+    { BGM_ME_KINOMI,  120 },
+    { BGM_ME_TAMA,    710 },
+    { BGM_ME_B_BIG,   250 },
+    { BGM_ME_B_SMALL, 150 },
+    { BGM_ME_ZANNEN,  160 },
+};
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
@@ -170,14 +188,10 @@ bool8 IsNotWaitingForBGMStop(void)
 
 void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
-    struct Fanfare *fanfares;
-    struct Fanfare *fanfare;
     u16 songNum;
     m4aMPlayStop(&gMPlay_BGM);
-    fanfares = gFanfares;
-    fanfare = &fanfares[fanfareNum];
-    songNum = fanfare->songNum;
-    sFanfareCounter = fanfare->duration;
+    songNum = sFanfares[fanfareNum].songNum;
+    sFanfareCounter = sFanfares[fanfareNum].duration;
     m4aSongNumStart(songNum);
 }
 
@@ -201,7 +215,7 @@ bool8 WaitFanfare(bool8 stop)
 
 void StopFanfareByFanfareNum(u8 fanfareNum)
 {
-    m4aSongNumStop(gFanfares[fanfareNum].songNum);
+    m4aSongNumStop(sFanfares[fanfareNum].songNum);
 }
 
 void PlayFanfare(u16 songNum)
@@ -209,8 +223,7 @@ void PlayFanfare(u16 songNum)
     s32 i;
     for (i = 0; (u32)i < 12; i++)
     {
-        struct Fanfare *fanfare = &gFanfares[i];
-        if (fanfare->songNum == songNum)
+        if (sFanfares[i].songNum == songNum)
         {
             PlayFanfareByFanfareNum(i);
             CreateFanfareTask();
@@ -326,7 +339,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        if (!(gUnknown_020239F8 & 0x40))
+        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
         PlayCryInternal(species, pan, 125, 10, mode);
     }
@@ -513,7 +526,7 @@ void PlaySE(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
-void PlaySE12WithPanning(u16 songNum, u8 pan)
+void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
@@ -522,21 +535,21 @@ void PlaySE12WithPanning(u16 songNum, u8 pan)
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
 }
 
-void PlaySE1WithPanning(u16 songNum, u8 pan)
+void PlaySE1WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE1);
     m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
 }
 
-void PlaySE2WithPanning(u16 songNum, u8 pan)
+void PlaySE2WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlay_SE2);
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
 }
 
-void SE12PanpotControl(u8 pan)
+void SE12PanpotControl(s8 pan)
 {
     m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
     m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);

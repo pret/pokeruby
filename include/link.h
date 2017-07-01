@@ -62,14 +62,14 @@ enum
 
 struct LinkPlayer
 {
-    u16 version;
-    u16 lp_field_2;
-    u32 trainerId;
-    u8 name[11];
-    u8 gender;
-    u32 linkType;
-    u16 lp_field_18;
-    u16 language;
+    /* 0x00 */ u16 version;
+    /* 0x02 */ u16 lp_field_2;
+    /* 0x04 */ u32 trainerId;
+    /* 0x08 */ u8 name[11];
+    /* 0x13 */ u8 gender;
+    /* 0x14 */ u32 linkType;
+    /* 0x18 */ u16 lp_field_18;
+    /* 0x1A */ u16 language;
 };
 
 struct LinkPlayerBlock
@@ -122,13 +122,28 @@ struct Link
     struct RecvQueue recvQueue;
 };
 
+struct BlockRequest {
+    void * address;
+    u32 size;
+};
+
+extern const struct BlockRequest sBlockRequestLookupTable[5];
+
 extern struct Link gLink;
 extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
+extern u16 gLinkType;
 extern u32 gLinkStatus;
+extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
+#if GERMAN
+extern u8 deUnkValue1;
+extern u8 deUnkValue2;
+#endif
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
+extern bool8 gReceivedRemoteLinkPlayers;
 
 void Task_DestroySelf(u8);
 void sub_8007270(u8);

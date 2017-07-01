@@ -1254,7 +1254,7 @@ sub_81021FC: @ 81021FC
 	cmp r0, 0
 	beq _08102220
 	movs r0, 0x1C
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _08102220:
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x4
@@ -7048,72 +7048,7 @@ _08104CA4: .4byte gTasks
 _08104CA8: .4byte 0x0000ffff
 	thumb_func_end sub_8104C5C
 
-	thumb_func_start sub_8104CAC
-sub_8104CAC: @ 8104CAC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl sub_8104DA4
-	ldr r0, _08104D24 @ =0x02000000
-	adds r0, 0x3D
-	ldrb r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	ldr r1, _08104D28 @ =gTasks
-	adds r7, r0, r1
-	strh r4, [r7, 0xA]
-	movs r6, 0
-	ldr r1, _08104D2C @ =gUnknown_083ED048
-	lsls r5, r4, 2
-	adds r0, r5, r1
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	beq _08104D18
-	mov r8, r1
-_08104CE0:
-	mov r0, r8
-	adds r4, r5, r0
-	ldr r0, [r4]
-	lsls r2, r6, 2
-	adds r2, r0
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	movs r3, 0x2
-	ldrsh r2, [r2, r3]
-	bl sub_8105BB4
-	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r6, 0x4
-	lsls r2, 1
-	adds r1, r7, 0
-	adds r1, 0x8
-	adds r1, r2
-	strh r0, [r1]
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, [r4]
-	lsls r0, r6, 2
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _08104CE0
-_08104D18:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08104D24: .4byte 0x02000000
-_08104D28: .4byte gTasks
-_08104D2C: .4byte gUnknown_083ED048
-	thumb_func_end sub_8104CAC
+.section .text_8104D30
 
 	thumb_func_start sub_8104D30
 sub_8104D30: @ 8104D30
@@ -7609,14 +7544,14 @@ sub_81050C4: @ 81050C4
 	movs r2, 0xC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
-	ldr r1, _081050FC @ =gUnknown_083ED704
+	ldr r1, _081050FC @ =gSubspriteTables_83ED704
 	bl SetSubspriteTables
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081050F4: .4byte gSpriteTemplate_83ED444
 _081050F8: .4byte gSprites
-_081050FC: .4byte gUnknown_083ED704
+_081050FC: .4byte gSubspriteTables_83ED704
 	thumb_func_end sub_81050C4
 
 	thumb_func_start sub_8105100
@@ -7764,7 +7699,7 @@ sub_81051C0: @ 81051C0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r1]
-	ldr r1, _08105274 @ =gUnknown_083ED73C
+	ldr r1, _08105274 @ =gSubspriteTables_83ED73C
 	adds r0, r2, 0
 	bl SetSubspriteTables
 	ldr r6, _08105278 @ =0x02000000
@@ -7795,7 +7730,7 @@ sub_81051C0: @ 81051C0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r1]
-	ldr r1, _08105280 @ =gUnknown_083ED75C
+	ldr r1, _08105280 @ =gSubspriteTables_83ED75C
 	adds r0, r2, 0
 	bl SetSubspriteTables
 	adds r6, 0x4A
@@ -7810,10 +7745,10 @@ sub_81051C0: @ 81051C0
 	.align 2, 0
 _0810526C: .4byte gSpriteTemplate_83ED474
 _08105270: .4byte gSprites
-_08105274: .4byte gUnknown_083ED73C
+_08105274: .4byte gSubspriteTables_83ED73C
 _08105278: .4byte 0x02000000
 _0810527C: .4byte gSpriteTemplate_83ED48C
-_08105280: .4byte gUnknown_083ED75C
+_08105280: .4byte gSubspriteTables_83ED75C
 	thumb_func_end sub_81051C0
 
 	thumb_func_start sub_8105284
@@ -7850,7 +7785,7 @@ sub_8105284: @ 8105284
 	movs r2, 0x2
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r1, _081052E4 @ =gUnknown_083ED78C
+	ldr r1, _081052E4 @ =gSubspriteTables_83ED78C
 	bl SetSubspriteTables
 	ldr r0, _081052E8 @ =0x02000000
 	adds r0, 0x42
@@ -7862,7 +7797,7 @@ sub_8105284: @ 8105284
 _081052D8: .4byte gSpriteTemplate_83ED4A4
 _081052DC: .4byte gSpriteCoordOffsetX
 _081052E0: .4byte gSprites
-_081052E4: .4byte gUnknown_083ED78C
+_081052E4: .4byte gSubspriteTables_83ED78C
 _081052E8: .4byte 0x02000000
 	thumb_func_end sub_8105284
 
@@ -7997,7 +7932,7 @@ sub_81053A0: @ 81053A0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r2, 0x5]
-	ldr r0, _08105454 @ =gUnknown_083ED7B4
+	ldr r0, _08105454 @ =gSubspriteTables_83ED7B4
 	mov r9, r0
 	adds r0, r2, 0
 	mov r1, r9
@@ -8045,7 +7980,7 @@ sub_81053A0: @ 81053A0
 	.align 2, 0
 _0810544C: .4byte gSpriteTemplate_83ED4D4
 _08105450: .4byte gSprites
-_08105454: .4byte gUnknown_083ED7B4
+_08105454: .4byte gSubspriteTables_83ED7B4
 _08105458: .4byte 0x02000000
 	thumb_func_end sub_81053A0
 
@@ -8079,7 +8014,7 @@ sub_810545C: @ 810545C
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r0, 0x5]
-	ldr r1, _081054B0 @ =gUnknown_083ED7D4
+	ldr r1, _081054B0 @ =gSubspriteTables_83ED7D4
 	bl SetSubspriteTables
 	ldr r0, _081054B4 @ =0x02000000
 	adds r0, 0x40
@@ -8090,7 +8025,7 @@ sub_810545C: @ 810545C
 	.align 2, 0
 _081054A8: .4byte gSpriteTemplate_83ED4EC
 _081054AC: .4byte gSprites
-_081054B0: .4byte gUnknown_083ED7D4
+_081054B0: .4byte gSubspriteTables_83ED7D4
 _081054B4: .4byte 0x02000000
 	thumb_func_end sub_810545C
 
@@ -10220,250 +10155,5 @@ _0810643C: .4byte 0x02010000
 _08106440: .4byte gUnknown_083EDCDC
 _08106444: .4byte gUnknown_083EDCE4
 	thumb_func_end sub_8106404
-
-	thumb_func_start sub_8106448
-sub_8106448: @ 8106448
-	push {r4-r7,lr}
-	ldr r0, _081064A0 @ =gSlotMachine_Gfx
-	ldr r4, _081064A4 @ =0x02010000
-	adds r1, r4, 0
-	bl sub_800D238
-	movs r3, 0xC0
-	lsls r3, 19
-	movs r5, 0xE9
-	lsls r5, 5
-	ldr r1, _081064A8 @ =0x040000d4
-	ldr r6, _081064AC @ =0x80000800
-	movs r2, 0x80
-	lsls r2, 5
-	movs r7, 0x80
-	lsls r7, 24
-_08106468:
-	str r4, [r1]
-	str r3, [r1, 0x4]
-	str r6, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	adds r4, r2
-	adds r3, r2
-	subs r5, r2
-	cmp r5, r2
-	bhi _08106468
-	str r4, [r1]
-	str r3, [r1, 0x4]
-	lsrs r0, r5, 1
-	orrs r0, r7
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	ldr r0, _081064B0 @ =gUnknown_08E95A18
-	movs r1, 0
-	movs r2, 0xA0
-	bl LoadPalette
-	ldr r0, _081064B4 @ =gUnknown_083EDE24
-	movs r1, 0xD0
-	movs r2, 0x20
-	bl LoadPalette
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081064A0: .4byte gSlotMachine_Gfx
-_081064A4: .4byte 0x02010000
-_081064A8: .4byte 0x040000d4
-_081064AC: .4byte 0x80000800
-_081064B0: .4byte gUnknown_08E95A18
-_081064B4: .4byte gUnknown_083EDE24
-	thumb_func_end sub_8106448
-
-	thumb_func_start sub_81064B8
-sub_81064B8: @ 81064B8
-	push {lr}
-	ldr r0, _081064D0 @ =gUnknown_08E95AB8
-	ldr r1, _081064D4 @ =0x0600e800
-	movs r2, 0xA0
-	lsls r2, 2
-	bl CpuSet
-	bl sub_81064D8
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081064D0: .4byte gUnknown_08E95AB8
-_081064D4: .4byte 0x0600e800
-	thumb_func_end sub_81064B8
-
-	thumb_func_start sub_81064D8
-sub_81064D8: @ 81064D8
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r6, _0810658C @ =0x0600f000
-	movs r3, 0x4
-	movs r0, 0xC0
-	lsls r0, 1
-	mov r12, r0
-	movs r1, 0xC0
-	lsls r1, 2
-	mov r9, r1
-	movs r2, 0xA0
-	lsls r2, 1
-	mov r8, r2
-_081064F6:
-	movs r0, 0
-	lsls r4, r3, 16
-	asrs r5, r4, 16
-_081064FC:
-	lsls r2, r0, 16
-	asrs r2, 16
-	adds r1, r5, r2
-	lsls r1, 1
-	adds r1, r6
-	mov r7, r8
-	adds r3, r1, r7
-	ldr r7, _08106590 @ =0x00002051
-	adds r0, r7, 0
-	strh r0, [r3]
-	movs r0, 0xD0
-	lsls r0, 2
-	adds r3, r1, r0
-	ldr r7, _08106594 @ =0x00002851
-	adds r0, r7, 0
-	strh r0, [r3]
-	mov r0, r12
-	adds r3, r1, r0
-	ldr r7, _08106598 @ =0x00002061
-	adds r0, r7, 0
-	strh r0, [r3]
-	add r1, r9
-	ldr r3, _0810659C @ =0x00002861
-	adds r0, r3, 0
-	strh r0, [r1]
-	adds r2, 0x1
-	lsls r2, 16
-	lsrs r0, r2, 16
-	asrs r2, 16
-	cmp r2, 0x3
-	ble _081064FC
-	asrs r3, r4, 16
-	lsls r1, r3, 1
-	adds r1, r6
-	mov r5, r12
-	adds r2, r1, r5
-	adds r7, 0x5D
-	adds r0, r7, 0
-	strh r0, [r2]
-	add r1, r9
-	ldr r2, _081065A0 @ =0x000028be
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r0, 0x7
-	ldr r5, _081065A4 @ =0x000020bf
-	adds r2, r5, 0
-_08106558:
-	lsls r1, r0, 16
-	asrs r1, 16
-	lsls r0, r1, 5
-	adds r0, r3
-	lsls r0, 1
-	adds r0, r6
-	strh r2, [r0]
-	adds r1, 0x1
-	lsls r1, 16
-	lsrs r0, r1, 16
-	asrs r1, 16
-	cmp r1, 0xB
-	ble _08106558
-	movs r7, 0xA0
-	lsls r7, 11
-	adds r0, r4, r7
-	lsrs r3, r0, 16
-	asrs r0, 16
-	cmp r0, 0x11
-	ble _081064F6
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810658C: .4byte 0x0600f000
-_08106590: .4byte 0x00002051
-_08106594: .4byte 0x00002851
-_08106598: .4byte 0x00002061
-_0810659C: .4byte 0x00002861
-_081065A0: .4byte 0x000028be
-_081065A4: .4byte 0x000020bf
-	thumb_func_end sub_81064D8
-
-	thumb_func_start sub_81065A8
-sub_81065A8: @ 81065A8
-	push {r4-r6,lr}
-	ldr r5, [sp, 0x10]
-	lsls r0, 16
-	asrs r0, 15
-	ldr r6, _081065D0 @ =0x0600ebc0
-	adds r4, r0, r6
-	strh r1, [r4]
-	ldr r4, _081065D4 @ =0x0600ebc2
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r6, 0x40
-	adds r1, r0, r6
-	strh r3, [r1]
-	ldr r1, _081065D8 @ =0x0600ec02
-	adds r0, r1
-	strh r5, [r0]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081065D0: .4byte 0x0600ebc0
-_081065D4: .4byte 0x0600ebc2
-_081065D8: .4byte 0x0600ec02
-	thumb_func_end sub_81065A8
-
-	thumb_func_start sub_81065DC
-sub_81065DC: @ 81065DC
-	push {r4,r5,lr}
-	ldr r0, _08106624 @ =gUnknown_08E95FB8
-	ldr r1, _08106628 @ =0x0600e800
-	movs r2, 0xA0
-	lsls r2, 2
-	bl CpuSet
-	ldr r5, _0810662C @ =0x0600f000
-	movs r1, 0
-	movs r4, 0
-_081065F0:
-	movs r0, 0
-	lsls r3, r1, 16
-	asrs r2, r3, 11
-_081065F6:
-	lsls r1, r0, 16
-	asrs r1, 16
-	adds r0, r2, r1
-	lsls r0, 1
-	adds r0, r5
-	strh r4, [r0]
-	adds r1, 0x1
-	lsls r1, 16
-	lsrs r0, r1, 16
-	asrs r1, 16
-	cmp r1, 0x1D
-	ble _081065F6
-	movs r1, 0x80
-	lsls r1, 9
-	adds r0, r3, r1
-	lsrs r1, r0, 16
-	asrs r0, 16
-	cmp r0, 0x13
-	ble _081065F0
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08106624: .4byte gUnknown_08E95FB8
-_08106628: .4byte 0x0600e800
-_0810662C: .4byte 0x0600f000
-	thumb_func_end sub_81065DC
 
 	.align 2, 0 @ Don't pad with nop.

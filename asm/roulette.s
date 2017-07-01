@@ -369,7 +369,7 @@ _081153D0:
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, _08115434 @ =gUnknown_08E81098
+	ldr r0, _08115434 @ =gRouletteWheelTiles
 	ldr r1, _08115438 @ =0x06004000
 	bl LZ77UnCompVram
 	ldr r1, _0811543C @ =gMain
@@ -382,7 +382,7 @@ _08115424: .4byte 0x00004686
 _08115428: .4byte 0x00004401
 _0811542C: .4byte 0x0000060a
 _08115430: .4byte gUnknown_08E8096C
-_08115434: .4byte gUnknown_08E81098
+_08115434: .4byte gRouletteWheelTiles
 _08115438: .4byte 0x06004000
 _0811543C: .4byte gMain
 _08115440: .4byte 0x0000043c
@@ -733,7 +733,7 @@ sub_8115734: @ 8115734
 	bl MenuPrint
 	ldr r1, _08115778 @ =gUnknown_083F8EBC
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2555,7 +2555,7 @@ sub_811659C: @ 811659C
 	cmp r0, 0
 	beq _08116624
 	movs r0, 0x1D
-	bl sub_8053108
+	bl GetGameStat
 	ldrh r1, [r4, 0x1E]
 	adds r1, 0x1
 	strh r1, [r4, 0x1E]
@@ -2566,7 +2566,7 @@ sub_811659C: @ 811659C
 	movs r0, 0x1E
 	ldrsh r1, [r4, r0]
 	movs r0, 0x1D
-	bl sav12_xor_set
+	bl SetGameStat
 _081165E4:
 	ldr r1, _081165F8 @ =sub_811677C
 	ldr r2, _081165FC @ =0x0000ffff
@@ -3245,7 +3245,7 @@ sub_8116B40: @ 8116B40
 	strh r4, [r0]
 	adds r0, 0x2
 	strh r4, [r0]
-	ldr r1, _08116BB4 @ =gUnknown_0300485C
+	ldr r1, _08116BB4 @ =gFieldCallback
 	ldr r0, _08116BB8 @ =sub_8080990
 	str r0, [r1]
 	ldr r0, _08116BBC @ =c2_exit_to_overworld_2_switch
@@ -3261,7 +3261,7 @@ _08116BA4: .4byte 0x02019000
 _08116BA8: .4byte gSpriteCoordOffsetX
 _08116BAC: .4byte gSpriteCoordOffsetY
 _08116BB0: .4byte REG_BLDCNT
-_08116BB4: .4byte gUnknown_0300485C
+_08116BB4: .4byte gFieldCallback
 _08116BB8: .4byte sub_8080990
 _08116BBC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8116B40
@@ -3571,7 +3571,7 @@ _08116DEE:
 	cmp r3, 0x3
 	bls _08116DC8
 	movs r2, 0
-	ldr r0, _08116E54 @ =gUnknown_083F8D94
+	ldr r0, _08116E54 @ =gUnknown_083F8D90 + 0x4
 	add r0, r12
 	ldr r7, [r0]
 	ldr r4, _08116E58 @ =0x02019016
@@ -3617,7 +3617,7 @@ _08116E38:
 _08116E48: .4byte 0x02019000
 _08116E4C: .4byte gTasks
 _08116E50: .4byte gUnknown_083F8D90
-_08116E54: .4byte gUnknown_083F8D94
+_08116E54: .4byte gUnknown_083F8D90 + 0x4
 _08116E58: .4byte 0x02019016
 	thumb_func_end sub_8116D54
 
@@ -4483,7 +4483,7 @@ sub_81174F8: @ 81174F8
 	bl sub_814AAF8
 	ldr r1, _08117524 @ =gUnknown_083F8EB4
 	adds r0, r4, 0
-	bl sub_80F914C
+	bl DoYesNoFuncWithChoice
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8689,10 +8689,10 @@ _081196A8:
 	cmp r5, r9
 	bcs _0811970E
 	ldr r6, _08119734 @ =0x02019000
-	ldr r7, _08119738 @ =gUnknown_083F8C0C
+	ldr r7, _08119738 @ =gUnknown_083F8C00 + 0xC
 _081196B6:
 	lsls r0, r3, 3
-	ldr r1, _0811973C @ =gUnknown_083F8D94
+	ldr r1, _0811973C @ =gUnknown_083F8D90 + 0x4
 	adds r0, r1
 	ldr r1, [r6, 0x8]
 	ldr r2, [r0]
@@ -8757,8 +8757,8 @@ _0811970E:
 	b _08119766
 	.align 2, 0
 _08119734: .4byte 0x02019000
-_08119738: .4byte gUnknown_083F8C0C
-_0811973C: .4byte gUnknown_083F8D94
+_08119738: .4byte gUnknown_083F8C00 + 0xC
+_0811973C: .4byte gUnknown_083F8D90 + 0x4
 _08119740: .4byte 0x0201901b
 _08119744:
 	ldr r0, [sp, 0x10]

@@ -495,12 +495,12 @@
 // I/O register fields
 
 // DISPCNT
-#define DISPCNT_MODE_0       0x0000
-#define DISPCNT_MODE_1       0x0001
-#define DISPCNT_MODE_2       0x0002
-#define DISPCNT_MODE_3       0x0003
-#define DISPCNT_MODE_4       0x0004
-#define DISPCNT_MODE_5       0x0005
+#define DISPCNT_MODE_0       0x0000 // BG0: text, BG1: text, BG2: text,   BG3: text
+#define DISPCNT_MODE_1       0x0001 // BG0: text, BG1: text, BG2: affine, BG3: off
+#define DISPCNT_MODE_2       0x0002 // BG0: off,  BG1: off,  BG2: affine, BG3: affine
+#define DISPCNT_MODE_3       0x0003 // Bitmap mode, 240x160, BGR555 color
+#define DISPCNT_MODE_4       0x0004 // Bitmap mode, 240x160, 256 color palette
+#define DISPCNT_MODE_5       0x0005 // Bitmap mode, 160x128, BGR555 color
 #define DISPCNT_OBJ_1D_MAP   0x0040
 #define DISPCNT_FORCED_BLANK 0x0080
 #define DISPCNT_BG0_ON       0x0100
@@ -520,6 +520,26 @@
 #define DISPSTAT_VBLANK_INTR 0x0008 // V-Blank interrupt enabled
 #define DISPSTAT_HBLANK_INTR 0x0010 // H-Blank interrupt enabled
 #define DISPSTAT_VCOUNT_INTR 0x0020 // V-Count interrupt enabled
+
+// BGCNT
+#define BGCNT_PRIORITY(n)          (n) // Values 0 - 3. Lower priority BGs will be drawn on top of higher priority BGs.
+#define BGCNT_CHARBASE(n)   ((n) << 2) // Values 0 - 3. Base block for tile pixel data.
+#define BGCNT_MOSAIC            0x0040
+#define BGCNT_16COLOR           0x0000 // 4 bits per pixel
+#define BGCNT_256COLOR          0x0080 // 8 bits per pixel
+#define BGCNT_SCREENBASE(n) ((n) << 8) // Values 0 - 31. Base block for tile map.
+#define BGCNT_WRAP              0x2000 // Only affects affine BGs. Text BGs wrap by default.
+#define BGCNT_TXT256x256        0x0000 // Internal screen size size of text mode BG in pixels.
+#define BGCNT_TXT512x256        0x4000
+#define BGCNT_TXT256x512        0x8000
+#define BGCNT_TXT512x512        0xC000
+#define BGCNT_AFF128x128        0x0000 // Internal screen size size of affine mode BG in pixels.
+#define BGCNT_AFF256x256        0x4000
+#define BGCNT_AFF512x512        0x8000
+#define BGCNT_AFF1024x1024      0xC000
+
+// BLDCNT
+
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
@@ -577,6 +597,8 @@
 #define TIMER_ENABLE      0x80
 
 // serial
+#define SIO_ID             0x0030 // Communication ID
+
 #define SIO_8BIT_MODE      0x0000 // Normal 8-bit communication mode
 #define SIO_32BIT_MODE     0x1000 // Normal 32-bit communication mode
 #define SIO_MULTI_MODE     0x2000 // Multi-player communication mode
@@ -589,6 +611,7 @@
 
 #define SIO_MULTI_SI       0x0004 // Multi-player communication SI terminal
 #define SIO_MULTI_SD       0x0008 //                            SD terminal
+#define SIO_MULTI_BUSY     0x0080
 
 #define SIO_ERROR          0x0040 // Detect error
 #define SIO_START          0x0080 // Start transfer
@@ -616,6 +639,8 @@
 #define KEY_INTR_ENABLE 0x0400
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
+#define DPAD_ANY        0x00F0
+#define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)

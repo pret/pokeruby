@@ -38,7 +38,7 @@ gSpecials::
 	.4byte sub_8083820
 	.4byte sub_8083614
 	.4byte GetLinkPartnerNames
-	.4byte sub_810DB28
+	.4byte SpawnBerryBlenderLinkPlayerSprites
 	.4byte SavePlayerParty
 	.4byte LoadPlayerParty
 	.4byte sub_80C5568
@@ -50,7 +50,7 @@ gSpecials::
 	.4byte FieldObjectInteractionRemoveBerryTree
 	.4byte FieldObjectInteractionWaterBerryTree
 	.4byte PlayerHasBerries
-	.4byte sub_80B4940
+	.4byte IsEnigmaBerryValid
 	.4byte sub_8082558
 	.4byte sub_80826D8
 	.4byte sub_8082718
@@ -60,7 +60,7 @@ gSpecials::
 	.4byte sub_8082C68
 	.4byte sub_8082C9C
 	.4byte sub_80826B0
-	.4byte sub_8096100
+	.4byte ShowPokemonStorageSystem
 	.4byte CheckForAlivePartyMons
 	.4byte TurnOffTVScreen
 	.4byte DoTVShow
@@ -139,14 +139,14 @@ gSpecials::
 	.4byte sub_80C4C78
 	.4byte sub_80C4D50
 	.4byte ShowContestWinner
-	.4byte sub_810DCCC
-	.4byte sub_810DC7C
+	.4byte MauvilleGymSpecial2
+	.4byte MauvilleGymSpecial1
 	.4byte ShowFieldMessageStringVar4
 	.4byte DrawWholeMapView
 	.4byte StorePlayerCoordsInVars
-	.4byte sub_810DEDC
-	.4byte sub_810E070
-	.4byte sub_810E230
+	.4byte MauvilleGymSpecial3
+	.4byte PetalburgGymSpecial1
+	.4byte PetalburgGymSpecial2
 	.4byte GetPlayerTrainerIdOnesDigit
 	.4byte GetPlayerBigGuyGirlString
 	.4byte GetRivalSonDaughterString
@@ -154,10 +154,10 @@ gSpecials::
 	.4byte CableCarWarp
 	.4byte sub_8123218
 	.4byte sub_8053E90
-	.4byte sub_806A460
+	.4byte StartWallClock
 	.4byte sub_810D6B8
-	.4byte sub_8082168
-	.4byte sub_8081AFC
+	.4byte ChooseStarter
+	.4byte StartBattle_WallyTutorial
 	.4byte sub_80BF9F8
 	.4byte sub_80F9A0C
 	.4byte sub_810CA00
@@ -187,7 +187,7 @@ gSpecials::
 	.4byte sp0B8_daycare
 	.4byte sp0B9_daycare_relationship_comment
 	.4byte sub_8042328
-	.4byte daycare_send
+	.4byte Daycare_SendPokemon_Special
 	.4byte ChooseSendDaycareMon
 	.4byte ShowDaycareLevelMenu
 	.4byte sub_80417B8
@@ -199,7 +199,7 @@ gSpecials::
 	.4byte ShowLinkBattleRecords
 	.4byte sub_80B7CE8
 	.4byte sub_80B7D0C
-	.4byte DoWhiteOut
+	.4byte ExecuteWhiteOut
 	.4byte sp0C8_whiteout_maybe
 	.4byte sub_80C8040
 	.4byte sub_80C8080
@@ -209,9 +209,9 @@ gSpecials::
 	.4byte ExitSafariMode
 	.4byte SafariZoneGetPokeblockNameInFeeder
 	.4byte sub_810BAF4
-	.4byte sub_810D32C
-	.4byte sub_810D378
-	.4byte sub_810D3FC
+	.4byte IsMirageIslandPresent
+	.4byte UpdateShoalTideFlag
+	.4byte InitBirchState
 	.4byte ScriptGetPokedexInfo
 	.4byte ShowPokedexRatingMessage
 	.4byte DoPCTurnOnEffect
@@ -257,12 +257,12 @@ gSpecials::
 	.4byte sub_804E174
 	.4byte sub_804DB2C
 	.4byte GetWeekCount
-	.4byte sub_8145AEC
+	.4byte RetrieveLotteryNumber
 	.4byte PickLotteryCornerTicket
 	.4byte ShowBerryBlenderRecordWindow
 	.4byte ResetTrickHouseEndRoomFlag
 	.4byte SetTrickHouseEndRoomFlag
-	.4byte sp109_CreatePCMenu
+	.4byte TryCreatePCMenu
 	.4byte AccessHallOfFamePC
 	.4byte sub_810D6A4
 	.4byte CheckLeadMonCool
@@ -272,19 +272,19 @@ gSpecials::
 	.4byte CheckLeadMonTough
 	.4byte sub_80C7958
 	.4byte DoSoftReset
-	.4byte sub_810D180
+	.4byte GameClear
 	.4byte sub_810EBEC
 	.4byte ShowGlassWorkshopMenu
 	.4byte SpawnCameraDummy
 	.4byte RemoveCameraDummy
 	.4byte GetPokeblockNameByMonNature
 	.4byte GetSecretBaseNearbyMapName
-	.4byte sub_8147478
-	.4byte sub_814768C
+	.4byte CheckRelicanthWailord
+	.4byte DoBrailleWait
 	.4byte sub_80818A4
 	.4byte sub_80818FC
 	.4byte ShowBattleTowerRecords
-	.4byte sub_810D3E8
+	.4byte WaitWeather
 	.4byte sub_810F414
 	.4byte sub_810F424
 	.4byte player_get_direction_lower_nybble
@@ -297,7 +297,7 @@ gSpecials::
 	.4byte GetLeadMonEVCount
 	.4byte sub_8064EAC
 	.4byte sub_8064ED4
-	.4byte sub_813430C
+	.4byte InitRoamer
 	.4byte sub_810F5BC
 	.4byte IsGrassTypeInParty
 	.4byte sub_8081334
@@ -305,17 +305,17 @@ gSpecials::
 	.4byte IsStarterInParty
 	.4byte sub_80BC224
 	.4byte CheckFreePokemonStorageSpace
-	.4byte sub_81477B4
+	.4byte DoSealedChamberShakingEffect1
 	.4byte sub_810E944
 	.4byte GetShieldToyTVDecorationInfo
 	.4byte IsPokerusInParty
 	.4byte sub_8069D78
 	.4byte sub_810F758
-	.4byte sub_8081BF8
-	.4byte sub_8081BB8
-	.4byte sub_8081C50
+	.4byte StartBattle_GroudonKyogre
+	.4byte StartBattle_Rayquaza
+	.4byte StartBattle_Regi
 	.4byte sub_8082524
-	.4byte sub_81477F0
+	.4byte DoSealedChamberShakingEffect2
 	.4byte sub_810F828
 	.4byte sub_807E25C
 	.4byte sp13E_warp_to_last_warp
@@ -323,7 +323,7 @@ gSpecials::
 	.4byte ShowContestEntryMonPic
 	.4byte sub_80C5164
 	.4byte sub_8134AB4
-	.4byte sub_8081B78
+	.4byte StartBattle_SouthernIsland
 	.4byte SetRoute119Weather
 	.4byte SetRoute123Weather
 	.4byte ScriptGetMultiplayerId
@@ -331,7 +331,7 @@ gSpecials::
 	.4byte sub_80FA148
 	.4byte sub_810F8FC
 	.4byte sub_80BC50C
-	.4byte LoadPlayerData
+	.4byte LoadPlayerBag
 	.4byte sub_8081924
 	.4byte sub_810F950
 	.4byte sub_810F908
@@ -342,3 +342,6 @@ gSpecials::
 	.4byte GetNameOfEnigmaBerryInPlayerParty
 	.4byte ScriptRandom
 	.4byte sub_80835D8
+.ifdef GERMAN
+	.4byte nullsub_814B200
+.endif

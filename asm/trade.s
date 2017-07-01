@@ -6,6 +6,10 @@
 
 	.text
 
+.ifdef ENGLISH
+	.set sub_804A96C_alt, sub_804A96C
+.endif
+
 	thumb_func_start sub_8047CD8
 sub_8047CD8: @ 8047CD8
 	push {lr}
@@ -604,7 +608,7 @@ _080481BA:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080482AC @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x34
@@ -661,7 +665,7 @@ _0804822C:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080482AC @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x3A
@@ -689,14 +693,14 @@ _080482A8: .4byte 0xfff40000
 _080482AC: .4byte sub_809D62C
 _080482B0: .4byte gEnemyParty
 _080482B4:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	ldr r0, _080482D0 @ =gUnknown_03004824
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _080482D4 @ =gMain
 	ldr r0, _080482D8 @ =0x0000043c
 	adds r1, r0
@@ -712,7 +716,7 @@ _080482DC:
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0x1
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _080482F8 @ =gMain
 	ldr r2, _080482FC @ =0x0000043c
 	adds r1, r2
@@ -1176,7 +1180,7 @@ _080486DE:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080487D8 @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x34
@@ -1233,7 +1237,7 @@ _08048752:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080487D8 @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x3A
@@ -1266,14 +1270,14 @@ _080487DC: .4byte gEnemyParty
 _080487E0: .4byte gMain
 _080487E4: .4byte 0x0000043c
 _080487E8:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	ldr r0, _08048804 @ =gUnknown_03004824
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _08048808 @ =gMain
 	ldr r5, _0804880C @ =0x0000043c
 	adds r1, r5
@@ -1289,7 +1293,7 @@ _08048810:
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0x1
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _0804882C @ =gMain
 	ldr r0, _08048830 @ =0x0000043c
 	adds r1, r0
@@ -3266,7 +3270,7 @@ _08049800: .4byte gUnknown_03004824
 	thumb_func_start sub_8049804
 sub_8049804: @ 8049804
 	push {lr}
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	bl sub_804A80C
 	ldr r3, _08049850 @ =gUnknown_03004824
 	ldr r0, [r3]
@@ -3475,7 +3479,7 @@ sub_804997C: @ 804997C
 	ldr r3, _080499C0 @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 	b _080499E0
 	.align 2, 0
 _080499B4: .4byte gPaletteFade
@@ -3495,7 +3499,7 @@ _080499C4:
 	ldr r3, _080499EC @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _080499E0:
 	add sp, 0x4
 	pop {r4}
@@ -4315,7 +4319,7 @@ _08049F8E:
 	lsls r0, 2
 	adds r0, r7
 	bl sub_8078A34
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r3, _0804A09C @ =gUnknown_03004824
 	ldr r0, [r3]
 	adds r0, 0x4
@@ -4348,7 +4352,7 @@ _08049F8E:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, [sp, 0x6C]
 	cmp r0, 0
 	beq _0804A08C
@@ -4407,7 +4411,7 @@ _0804A0E4:
 	movs r5, 0
 	str r5, [sp, 0x8]
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	ldr r0, _0804A22C @ =gUnknown_03004824
 	ldr r3, [r0]
 	ldr r1, [sp, 0x6C]
@@ -5122,6 +5126,13 @@ _0804A690:
 _0804A6CA:
 	strh r0, [r1]
 _0804A6CC:
+.ifdef GERMAN
+	ldr r0, _0804A6E8 @ =gUnknown_03004824
+	ldr r0, [r0]
+	adds r0, 0xD8
+	movs r1, 0x1
+	strb r1, [r0]
+.endif
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -5130,6 +5141,10 @@ _0804A6CC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
+.ifdef GERMAN
+	.align 2, 0
+_0804A6E8: .4byte gUnknown_03004824
+.endif
 	thumb_func_end sub_804A51C
 
 	thumb_func_start sub_804A6DC
@@ -5347,7 +5362,7 @@ sub_804A840: @ 804A840
 	str r5, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0
 	bl sub_804A6DC
 	movs r0, 0
@@ -5363,7 +5378,7 @@ _0804A89C: .4byte gUnknown_03004824
 _0804A8A0: .4byte gUnknown_0820C330
 _0804A8A4: .4byte gTradePartyBoxTilemap
 _0804A8A8:
-	bl sub_8072DEC
+	bl HandleDestroyMenuCursors
 	ldr r4, _0804A924 @ =gUnknown_03004824
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -5387,7 +5402,7 @@ _0804A8A8:
 	str r1, [sp, 0x8]
 	movs r1, 0xF
 	movs r2, 0
-	bl sub_804A96C
+	bl sub_804A96C_alt
 	movs r0, 0x1
 	bl sub_804A6DC
 	movs r0, 0x1
@@ -5462,81 +5477,7 @@ sub_804A964: @ 804A964
 	bx lr
 	thumb_func_end sub_804A964
 
-	thumb_func_start sub_804A96C
-sub_804A96C: @ 804A96C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	str r0, [sp]
-	mov r10, r3
-	ldr r0, [sp, 0x24]
-	ldr r3, [sp, 0x28]
-	ldr r4, [sp, 0x2C]
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r6, r2, 24
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r3, 24
-	lsrs r3, 24
-	mov r12, r3
-	lsls r4, 16
-	lsrs r7, r4, 16
-	movs r2, 0
-	cmp r2, r12
-	bge _0804A9DE
-	ldr r0, [sp]
-	adds r0, 0x12
-	mov r9, r0
-	lsls r0, r6, 5
-	adds r0, r1
-	mov r8, r0
-_0804A9AA:
-	movs r4, 0
-	adds r6, r2, 0x1
-	cmp r4, r5
-	bge _0804A9D8
-	lsls r1, r2, 5
-	add r1, r8
-	adds r0, r5, 0
-	muls r0, r2
-	lsls r0, 1
-	mov r2, r10
-	adds r3, r0, r2
-	lsls r1, 1
-	mov r0, r9
-	adds r2, r1, r0
-_0804A9C6:
-	ldrh r1, [r3]
-	adds r0, r7, 0
-	orrs r0, r1
-	strh r0, [r2]
-	adds r3, 0x2
-	adds r2, 0x2
-	adds r4, 0x1
-	cmp r4, r5
-	blt _0804A9C6
-_0804A9D8:
-	adds r2, r6, 0
-	cmp r2, r12
-	blt _0804A9AA
-_0804A9DE:
-	movs r0, 0x1
-	ldr r1, [sp]
-	strb r0, [r1, 0x10]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804A96C
+.section .text.sub_804A9F4
 
 	thumb_func_start sub_804A9F4
 sub_804A9F4: @ 804A9F4
@@ -6137,7 +6078,7 @@ _0804AE5C:
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8046200
+	bl GetHPBarLevel
 	ldr r1, [r7]
 	adds r1, 0x69
 	adds r1, r6
@@ -6182,7 +6123,7 @@ _0804AEBC:
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8046200
+	bl GetHPBarLevel
 	ldr r1, [r7]
 	adds r1, 0x6F
 	adds r1, r6
@@ -6539,7 +6480,7 @@ sub_804B128: @ 804B128
 	ldrh r0, [r0]
 	str r0, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_8040F34
+	bl DoBgAffineSet
 	ldr r1, _0804B1B8 @ =REG_BG2PA
 	add r0, sp, 0x10
 	ldrh r0, [r0]
@@ -6805,7 +6746,7 @@ _0804B330:
 	str r5, [sp, 0x4]
 	mov r4, r9
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r0, r10
 	bl sub_8040990
 	bl LoadCompressedObjectPalette
@@ -7560,10 +7501,10 @@ sub_804BA18: @ 804BA18
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 _0804BA5A:
 	pop {r4}
 	pop {r0}
@@ -7591,7 +7532,7 @@ sub_804BA64: @ 804BA64
 	lsls r0, 8
 	cmp r1, r0
 	bne _0804BA8C
-	bl sub_80690F0
+	bl EnableNationalPokedex
 _0804BA8C:
 	pop {r0}
 	bx r0
@@ -7639,7 +7580,7 @@ sub_804BA94: @ 804BA94
 	lsls r0, 2
 	ldr r1, _0804BB68 @ =gSaveBlock1 + 0x2B4C
 	adds r0, r1
-	bl sub_80A2B40
+	bl ClearMailStruct
 _0804BAE8:
 	ldr r4, _0804BB6C @ =gUnknown_03004828
 	ldr r0, [r4]
@@ -7678,7 +7619,7 @@ _0804BB28:
 	ldr r0, _0804BB70 @ =gUnknown_02029700
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80A2D88
+	bl GiveMailToMon2
 _0804BB3E:
 	mov r0, r9
 	bl sub_804BA18
@@ -10676,11 +10617,11 @@ _0804D5A4: .4byte 0x0000043c
 _0804D5A8:
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r1, _0804D5B4 @ =gUnknown_3001BB4
+	ldr r1, _0804D5B4 @ =gSoftResetDisabled
 	movs r0, 0x1
 	b _0804D612
 	.align 2, 0
-_0804D5B4: .4byte gUnknown_3001BB4
+_0804D5B4: .4byte gSoftResetDisabled
 _0804D5B8:
 	ldr r0, _0804D5F4 @ =gUnknown_03005E94
 	ldr r1, _0804D5F8 @ =sub_804DC88
@@ -11262,7 +11203,7 @@ sub_804D948: @ 804D948
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _0804DAC0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804DAB4
@@ -11309,52 +11250,7 @@ _0804DAC0:
 _0804DAD0: .4byte gEnemyParty
 	thumb_func_end sub_804D948
 
-	thumb_func_start sub_804DAD4
-sub_804DAD4: @ 804DAD4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r2, _0804DB28 @ =gIngameTradeMail
-	adds r0, r5, 0
-	adds r0, 0x2A
-	ldrb r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0, r2
-	adds r1, r4, 0
-	movs r3, 0x8
-_0804DAEE:
-	ldrh r0, [r2]
-	strh r0, [r1]
-	adds r2, 0x2
-	adds r1, 0x2
-	subs r3, 0x1
-	cmp r3, 0
-	bge _0804DAEE
-	adds r0, r4, 0
-	adds r0, 0x12
-	adds r1, r5, 0
-	adds r1, 0x2B
-	bl StringCopy
-	ldr r1, [r5, 0x18]
-	lsrs r0, r1, 24
-	strb r0, [r4, 0x1A]
-	lsrs r0, r1, 16
-	strb r0, [r4, 0x1B]
-	lsrs r0, r1, 8
-	strb r0, [r4, 0x1C]
-	strb r1, [r4, 0x1D]
-	ldrh r0, [r5, 0xC]
-	strh r0, [r4, 0x1E]
-	ldrh r0, [r5, 0x28]
-	strh r0, [r4, 0x20]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804DB28: .4byte gIngameTradeMail
-	thumb_func_end sub_804DAD4
+.section .text.sub_804DB2C
 
 	thumb_func_start sub_804DB2C
 sub_804DB2C: @ 804DB2C
@@ -11767,7 +11663,7 @@ _0804DF50: .4byte gSystemText_Saving
 _0804DF54:
 	bl SetSecretBase2Field_9_AndHideBG
 	movs r0, 0x15
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_8125D80
 	ldr r1, _0804DF74 @ =gMain
 	ldr r2, _0804DF78 @ =0x0000043c
@@ -11886,7 +11782,7 @@ _0804E04C:
 	cmp r0, 0
 	beq _0804E11A
 	bl sub_8125E04
-	ldr r1, _0804E06C @ =gUnknown_3001BB4
+	ldr r1, _0804E06C @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0804E070 @ =gMain
@@ -11896,7 +11792,7 @@ _0804E04C:
 	strb r1, [r0]
 	b _0804E11A
 	.align 2, 0
-_0804E06C: .4byte gUnknown_3001BB4
+_0804E06C: .4byte gSoftResetDisabled
 _0804E070: .4byte gMain
 _0804E074: .4byte 0x0000043c
 _0804E078:
@@ -12051,7 +11947,7 @@ sub_804E1A0: @ 804E1A0
 	bne _0804E1C4
 	ldr r0, _0804E1D0 @ =sub_804B790
 	bl SetMainCallback2
-	ldr r1, _0804E1D4 @ =gUnknown_0300485C
+	ldr r1, _0804E1D4 @ =gFieldCallback
 	ldr r0, _0804E1D8 @ =sub_8080990
 	str r0, [r1]
 	adds r0, r4, 0
@@ -12063,7 +11959,7 @@ _0804E1C4:
 	.align 2, 0
 _0804E1CC: .4byte gPaletteFade
 _0804E1D0: .4byte sub_804B790
-_0804E1D4: .4byte gUnknown_0300485C
+_0804E1D4: .4byte gFieldCallback
 _0804E1D8: .4byte sub_8080990
 	thumb_func_end sub_804E1A0
 

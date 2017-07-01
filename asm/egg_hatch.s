@@ -6,162 +6,6 @@
 
 	.text
 
-	thumb_func_start CreatedHatchedMon
-CreatedHatchedMon: @ 80428A4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x48
-	adds r6, r0, 0
-	adds r5, r1, 0
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	mov r10, r0
-	movs r4, 0
-	add r7, sp, 0x18
-	mov r0, sp
-	adds r0, 0x31
-	str r0, [sp, 0x38]
-	mov r1, sp
-	adds r1, 0x32
-	str r1, [sp, 0x3C]
-	add r0, sp, 0x30
-	mov r9, r0
-	adds r1, 0x1
-	str r1, [sp, 0x40]
-	mov r0, sp
-	adds r0, 0x34
-	str r0, [sp, 0x44]
-_080428DE:
-	adds r1, r4, 0
-	adds r1, 0xD
-	adds r0, r6, 0
-	bl GetMonData
-	lsls r1, r4, 1
-	add r1, sp
-	adds r1, 0x10
-	strh r0, [r1]
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _080428DE
-	adds r0, r6, 0
-	movs r1, 0
-	bl GetMonData
-	mov r8, r0
-	movs r4, 0
-_08042906:
-	adds r1, r4, 0
-	adds r1, 0x27
-	adds r0, r6, 0
-	bl GetMonData
-	lsls r1, r4, 2
-	adds r1, r7, r1
-	str r0, [r1]
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	bls _08042906
-	adds r0, r6, 0
-	movs r1, 0x25
-	bl GetMonData
-	ldr r1, [sp, 0x38]
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0x8
-	bl GetMonData
-	ldr r1, [sp, 0x3C]
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0x22
-	bl GetMonData
-	str r0, [sp, 0x34]
-	movs r0, 0x1
-	str r0, [sp]
-	mov r0, r8
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	adds r0, r5, 0
-	mov r1, r10
-	movs r2, 0x5
-	movs r3, 0x20
-	bl CreateMon
-	movs r4, 0
-_0804295E:
-	adds r1, r4, 0
-	adds r1, 0xD
-	lsls r0, r4, 1
-	mov r2, sp
-	adds r2, r0
-	adds r2, 0x10
-	adds r0, r5, 0
-	bl SetMonData
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _0804295E
-	movs r4, 0
-_0804297C:
-	adds r1, r4, 0
-	adds r1, 0x27
-	lsls r2, r4, 2
-	adds r2, r7, r2
-	adds r0, r5, 0
-	bl SetMonData
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	bls _0804297C
-	movs r0, 0x2
-	mov r1, r9
-	strb r0, [r1]
-	adds r0, r5, 0
-	movs r1, 0x3
-	mov r2, r9
-	bl SetMonData
-	adds r0, r5, 0
-	movs r1, 0x25
-	ldr r2, [sp, 0x38]
-	bl SetMonData
-	adds r0, r5, 0
-	movs r1, 0x8
-	ldr r2, [sp, 0x3C]
-	bl SetMonData
-	movs r0, 0x78
-	ldr r1, [sp, 0x40]
-	strb r0, [r1]
-	adds r0, r5, 0
-	movs r1, 0x20
-	ldr r2, [sp, 0x40]
-	bl SetMonData
-	adds r0, r5, 0
-	movs r1, 0x22
-	ldr r2, [sp, 0x44]
-	bl SetMonData
-	adds r0, r6, 0
-	adds r1, r5, 0
-	movs r2, 0x64
-	bl memcpy
-	add sp, 0x48
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end CreatedHatchedMon
-
 	thumb_func_start AddHatchedMonToParty
 AddHatchedMonToParty: @ 80429EC
 	push {r4-r6,lr}
@@ -202,13 +46,13 @@ AddHatchedMonToParty: @ 80429EC
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8090D90
+	bl GetNationalPokedexFlag
 	ldr r1, _08042AA4 @ =gStringVar1
 	adds r0, r5, 0
-	bl pokemon_get_nick
+	bl GetMonNick
 	mov r2, sp
 	adds r2, 0xE
 	movs r0, 0x4
@@ -229,7 +73,7 @@ AddHatchedMonToParty: @ 80429EC
 	movs r1, 0x23
 	bl SetMonData
 	adds r0, r5, 0
-	bl sub_8040B1C
+	bl MonRestorePP
 	adds r0, r5, 0
 	bl CalculateMonStats
 	add sp, 0x14
@@ -266,7 +110,7 @@ sub_8042ABC: @ 8042ABC
 	lsls r0, 4
 	adds r0, r5, r0
 	mov r1, sp
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r1, r0, 3
@@ -304,7 +148,7 @@ _08042B08:
 	adds r1, r6, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_814A568
+	bl SanitizeNameString
 	movs r0, 0x1
 	b _08042B42
 	.align 2, 0
@@ -409,7 +253,7 @@ _08042BB4:
 	str r5, [sp, 0x4]
 	mov r4, r8
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r7, 0
 	bl sub_8040990
 	bl LoadCompressedObjectPalette
@@ -507,7 +351,7 @@ Task_EggHatch: @ 8042CAC
 	bne _08042CD0
 	ldr r0, _08042CDC @ =CB2_EggHatch_0
 	bl SetMainCallback2
-	ldr r1, _08042CE0 @ =gUnknown_0300485C
+	ldr r1, _08042CE0 @ =gFieldCallback
 	ldr r0, _08042CE4 @ =sub_8080990
 	str r0, [r1]
 	adds r0, r4, 0
@@ -519,7 +363,7 @@ _08042CD0:
 	.align 2, 0
 _08042CD8: .4byte gPaletteFade
 _08042CDC: .4byte CB2_EggHatch_0
-_08042CE0: .4byte gUnknown_0300485C
+_08042CE0: .4byte gFieldCallback
 _08042CE4: .4byte sub_8080990
 	thumb_func_end Task_EggHatch
 
@@ -1013,7 +857,7 @@ _08043124:
 	ldr r1, _08043150 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _08043154 @ =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, _08043158 @ =gStringVar4
 	ldr r1, _0804315C @ =gOtherText_HatchedFromEgg
 	adds r0, r4, 0
@@ -1054,7 +898,7 @@ _08043180:
 	ldr r1, _080431A8 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080431AC @ =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, _080431B0 @ =gStringVar4
 	ldr r1, _080431B4 @ =gOtherText_NickHatchPrompt
 	adds r0, r4, 0
@@ -1113,7 +957,7 @@ _080431DA:
 	adds r0, r6
 	ldr r1, _08043280 @ =gStringVar3
 	mov r10, r1
-	bl pokemon_get_nick
+	bl GetMonNick
 	mov r2, r9
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x4]
