@@ -1625,7 +1625,7 @@ void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
 
 void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
 {
-    if(gMain.newKeys & 0x2)
+    if(gMain.newKeys & B_BUTTON)
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
@@ -1634,7 +1634,7 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
         TASK.FUNC = sub_80BA258;
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x40) // _080BAAA8
+    if(gMain.newAndRepeatedKeys & DPAD_UP) // _080BAAA8
     {
         u8 backupVar = gUnknown_020387B3;
         if(--gUnknown_020387B3 < 0)
@@ -1643,7 +1643,7 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
         sub_80BAE10(backupVar, gUnknown_020387B3);
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x80) // _080BAAD0
+    if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _080BAAD0
     {
         u8 backupVar = gUnknown_020387B3;
         if(++gUnknown_020387B3 > 8)
@@ -1652,44 +1652,44 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
         sub_80BAE10(backupVar, gUnknown_020387B3);
         return;
     }
-    if(gMain.newKeys & 0x8) // _080BAAF8
+    if(gMain.newKeys & START_BUTTON) // _080BAAF8
     {
         gUnknown_020387D8 ^= 1;
         sub_80BAD5C();
         return;
     }
-    if(gMain.newKeys & 0x4) // _080BAB14
+    if(gMain.newKeys & SELECT_BUTTON) // _080BAB14
     {
         gUnknown_020387D9 ^= 1;
         sub_80BAD5C();
         SetPokemonCryStereo(gUnknown_020387D9);
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x100) // _080BAB38
+    if(gMain.newAndRepeatedKeys & R_BUTTON) // _080BAB38
     {
         sub_80BACDC(10);
         sub_80BAD5C();
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x200) // _080BAB46
+    if(gMain.newAndRepeatedKeys & L_BUTTON) // _080BAB46
     {
         sub_80BACDC(-10);
         sub_80BAD5C();
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x20) // _080BAB56
+    if(gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BAB56
     {
         sub_80BACDC(-1);
         sub_80BAD5C();
         return;
     }
-    if(gMain.newAndRepeatedKeys & 0x10) // _080BAB64
+    if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BAB64
     {
         sub_80BACDC(1);
         sub_80BAD5C();
         return;
     }
-    if(gMain.newKeys & 0x1) // _080BAB78
+    if(gMain.newKeys & A_BUTTON) // _080BAB78
     {
         u8 divide, remaining;
 
@@ -2025,7 +2025,7 @@ void sub_80BB038(u8 taskId)
         }
     }
      // _080BB0A2
-    if(gMain.newKeys & 0x2)
+    if(gMain.newKeys & B_BUTTON)
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
@@ -2034,7 +2034,7 @@ void sub_80BB038(u8 taskId)
         TASK.FUNC = sub_80BA258;
         return;
     }
-    if(gMain.newKeys & 0x1) // _080BB104
+    if(gMain.newKeys & A_BUTTON) // _080BB104
     {
         s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
         if(panpot != -128)
@@ -2061,25 +2061,25 @@ void sub_80BB038(u8 taskId)
         gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
         return;
     }
-    if(gMain.newKeys & 0x200) // _080BB15E
+    if(gMain.newKeys & L_BUTTON) // _080BB15E
     {
         gUnknown_020387B4[CRY_TEST_PANPOT]++;
         if(gUnknown_020387B4[CRY_TEST_PANPOT] > 4)
             gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
     }
-    if(gMain.newKeys & 0x100) // _080BB176
+    if(gMain.newKeys & R_BUTTON) // _080BB176
     {
         gUnknown_020387B4[CRY_TEST_PANPOT]--;
         if(gUnknown_020387B4[CRY_TEST_PANPOT] < 0)
             gUnknown_020387B4[CRY_TEST_PANPOT] = 4;
     }
-    if(gMain.newAndRepeatedKeys & 0x10) // _080BB192
+    if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BB192
     {
         gUnknown_020387B4[CRY_TEST_UNK0]++;
         if(gUnknown_020387B4[CRY_TEST_UNK0] > 0xF7)
             gUnknown_020387B4[CRY_TEST_UNK0] = 0;
     }
-    else if(gMain.newAndRepeatedKeys & 0x20) // _080BB1B0
+    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BB1B0
     {
         gUnknown_020387B4[CRY_TEST_UNK0]--;
         if(gUnknown_020387B4[CRY_TEST_UNK0] < 0)
@@ -2161,27 +2161,27 @@ void sub_80BB3B4(u8 taskId)
 {
     sub_8119F88(3);
 
-    if(gMain.newKeys & 0x1)
+    if(gMain.newKeys & A_BUTTON)
     {
         sub_811A050(gUnknown_03005D34);
     }
-    if(gMain.newKeys & 0x100)
+    if(gMain.newKeys & R_BUTTON)
     {
         StopCryAndClearCrySongs();
     }
-    if(gMain.newAndRepeatedKeys & 0x40)
+    if(gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if(--gUnknown_03005D34 == 0)
             gUnknown_03005D34 = 384; // total species
         sub_80BB494();
     }
-    if(gMain.newAndRepeatedKeys & 0x80)
+    if(gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         if(++gUnknown_03005D34 > 384)
             gUnknown_03005D34 = 1;
         sub_80BB494();
     }
-    if(gMain.newKeys & 0x2)
+    if(gMain.newKeys & B_BUTTON)
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
