@@ -1518,7 +1518,7 @@ void sub_80BA700(u16 soundIndex, u16 x, u16 y) // PrintSoundNumber ?
     for(i = 0; i < 3; i++)
         str[i] = 0; // initialize array
 
-    str[3] = CHAR_3PERIODS;
+    str[3] = CHAR_ELLIPSIS;
     str[4] = EOS;
     someBool = FALSE;
 
