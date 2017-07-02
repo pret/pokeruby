@@ -1518,22 +1518,22 @@ void sub_80BA700(u16 soundIndex, u16 x, u16 y) // PrintSoundNumber ?
     for(i = 0; i < 3; i++)
         str[i] = 0; // initialize array
 
-    str[3] = 0xB0;
-    str[4] = 0xFF;
+    str[3] = CHAR_3PERIODS;
+    str[4] = EOS;
     someBool = FALSE;
 
     divisorValue = soundIndex / 100;
     if(divisorValue)
     {
-        str[0] = divisorValue + 0xA1;
+        str[0] = divisorValue + CHAR_0;
         someBool = TRUE;
     }
 
     divisorValue = (soundIndex % 100) / 10;
     if(divisorValue || someBool != FALSE)
-        str[1] = divisorValue + 0xA1;
+        str[1] = divisorValue + CHAR_0;
 
-    str[2] = ((soundIndex % 100) % 10) + 0xA1;
+    str[2] = ((soundIndex % 100) % 10) + CHAR_0;
     MenuPrint(str, x, y);
 }
 
@@ -1545,9 +1545,9 @@ void sub_80BA79C(const u8 *const string, u16 x, u16 y)
     for(i = 0; i < 11; i++)
         str[i] = 0; // format string.
 
-    str[10] = 0xFF; // the above for loop formats the last element of the array unnecessarily.
+    str[10] = EOS; // the above for loop formats the last element of the array unnecessarily.
 
-    for(i = 0; string[i] != 0xFF && i < 10; i++)
+    for(i = 0; string[i] != EOS && i < 10; i++)
         str[i] = string[i];
 
     MenuPrint(str, x, y);
@@ -1800,7 +1800,7 @@ void sub_80BAE10(u8 var1, u8 var2)
     for(i = 0; i < var4; i++)
         str[i] = 0;
 
-    str[var4 + 1] = 0xFF;
+    str[var4 + 1] = CHAR_0;
     someVar = 0;
 
     if(var1 < 0) // make absolute value? wtf
