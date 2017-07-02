@@ -941,10 +941,10 @@ void CB2_StartSoundCheckMenu(void)
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
     InitMenuWindow(&gWindowConfig_81E6CE4);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-    REG_WIN0H = 0;
-    REG_WIN0V = 0;
-    REG_WIN1H = 0;
-    REG_WIN1V = 0;
+    REG_WIN0H = WIN_RANGE(0, 0);
+    REG_WIN0V = WIN_RANGE(0, 0);
+    REG_WIN1H = WIN_RANGE(0, 0);
+    REG_WIN1V = WIN_RANGE(0, 0);
     REG_WININ = 0x1111;
     REG_WINOUT = 0x31;
     REG_BLDCNT = 0xE1;
@@ -996,8 +996,8 @@ void sub_80BA258(u8 taskId)
         MenuPrint(upDownStr, 14, 13);
         MenuPrint(driverStr, 14, 18);
         TASK.FUNC = sub_80BA384;
-        REG_WIN0H = 0x11DF;
-        REG_WIN0V = 0x11F; 
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31); 
     }
 }
 
@@ -1498,12 +1498,12 @@ void sub_80BA6B8(u8 windowType)
     {
         case BGM_WINDOW:
         default:
-            REG_WIN1H = 0x11DF;
-            REG_WIN1V = 0x2957;
+            REG_WIN1H = WIN_RANGE(17, 223);
+            REG_WIN1V = WIN_RANGE(41, 87);
             break;
         case SE_WINDOW:
-            REG_WIN1H = 0x11DF;
-            REG_WIN1V = 0x618F;
+            REG_WIN1H = WIN_RANGE(17, 223);
+            REG_WIN1V = WIN_RANGE(97, 143);
             break;
     }
 }
@@ -1601,8 +1601,8 @@ void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
     MenuPrint(playingStr, 0x13, 0x10);
     MenuPrint(reverseStr, 0x13, 0xE);
     MenuPrint(stereoStr, 0x13, 0xC);
-    REG_WIN0H = 0xF0;
-    REG_WIN0V = 0xA0;
+    REG_WIN0H = WIN_RANGE(0, 240);
+    REG_WIN0V = WIN_RANGE(0, 160);
     gUnknown_020387B3 = 0;
     gUnknown_020387B1 = 0;
     gUnknown_020387B2 = 0;
@@ -1628,8 +1628,8 @@ void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
     if(gMain.newKeys & 0x2)
     {
         REG_DISPCNT = 0x7140;
-        REG_WIN0H = 0x11DF;
-        REG_WIN0V = 0x11F;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
         TASK.FUNC = sub_80BA258;
         return;
@@ -1984,8 +1984,8 @@ void sub_80BAF84(u8 taskId)
     MenuPrint(seStr, 3, 2);
     MenuPrint(panStr, 3, 4);
     MenuPrint(playingStr, 3, 8);
-    REG_WIN0H = 0xF0;
-    REG_WIN0V = 0xA0;
+    REG_WIN0H = WIN_RANGE(0, 240);
+    REG_WIN0V = WIN_RANGE(0, 160);
     gUnknown_020387B4[CRY_TEST_UNK0] = 1;
     gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
     gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
@@ -2028,8 +2028,8 @@ void sub_80BB038(u8 taskId)
     if(gMain.newKeys & 0x2)
     {
         REG_DISPCNT = 0x7140;
-        REG_WIN0H = 0x11DF;
-        REG_WIN0V = 0x11F;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
         TASK.FUNC = sub_80BA258;
         return;
@@ -2184,8 +2184,8 @@ void sub_80BB3B4(u8 taskId)
     if(gMain.newKeys & 0x2)
     {
         REG_DISPCNT = 0x7140;
-        REG_WIN0H = 0x11DF;
-        REG_WIN0V = 0x11F;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
         TASK.FUNC = sub_80BA258;
         DestroyCryMeterNeedleSprite();
