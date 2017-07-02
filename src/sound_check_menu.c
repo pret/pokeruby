@@ -71,6 +71,26 @@ extern u8 gUnknown_03005E98;
 extern struct MusicPlayerInfo *gUnknown_03005D30;
 extern struct MusicPlayerInfo gMPlay_BGM;
 
+void sub_80BA258(u8);
+void sub_80BA384(u8);
+void sub_80BA65C(u8);
+void sub_80BA68C(u8);
+void sub_80BA6B8(u8);
+void sub_80BA700(u16, u16, u16);
+void sub_80BA79C(const u8 *const, u16, u16);
+void sub_80BA800(u8);
+void sub_80BAA48(u8);
+void sub_80BACDC(s8);
+void sub_80BAD5C(void);
+void sub_80BAE10(u8, u8);
+void sub_80BAE78(int, u16, u16, u8);
+void sub_80BAF84(u8);
+void sub_80BB038(u8);
+void sub_80BB1D4(void);
+void sub_80BB25C(u8);
+void sub_80BB3B4(u8);
+void sub_80BB494(void);
+
 static const u8 gDebugText_SoundCheckJap[] = _("サウンドチェック");
 static const u8 gDebugText_BGM[] = _("BGM");
 static const u8 gDebugText_SE[] = _("SE ");
@@ -873,26 +893,6 @@ static const u8 *const gSENames[] =
     SEName_W114,
     SEName_W063B
 };
-
-void sub_80BA258(u8);
-void sub_80BA384(u8);
-void sub_80BA65C(u8);
-void sub_80BA68C(u8);
-void sub_80BA6B8(u8);
-void sub_80BA700(u16, u16, u16);
-void sub_80BA79C(const u8 *const, u16, u16);
-void sub_80BA800(u8);
-void sub_80BAA48(u8);
-void sub_80BACDC(s8);
-void sub_80BAD5C(void);
-void sub_80BAE10(u8, u8);
-void sub_80BAE78(int, u16, u16, u8);
-void sub_80BAF84(u8);
-void sub_80BB038(u8);
-void sub_80BB1D4(void);
-void sub_80BB25C(u8);
-void sub_80BB3B4(u8);
-void sub_80BB494(void);
 
 void sub_80BA0A8(void)
 {
