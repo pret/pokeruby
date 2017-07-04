@@ -18,6 +18,15 @@ struct MonCoords
     u8 y_offset;
 };
 
+extern const struct OamData gOamData_81F96F0;
+extern const struct OamData gOamData_81F96E8;
+extern const struct SpriteFrameImage gSpriteImageTable_81E7A10[];
+extern const struct SpriteFrameImage gSpriteImageTable_81E7A30[];
+extern const struct SpriteFrameImage gSpriteImageTable_81E7A50[];
+extern const struct SpriteFrameImage gSpriteImageTable_81E7A70[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7B70[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
+
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18;
 extern const union AnimCmd *const gSpriteAnimTable_81E7C64[];
 extern struct MonCoords gMonFrontPicCoords[];

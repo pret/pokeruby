@@ -35,7 +35,11 @@ extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
 extern struct SpriteTemplate gSpriteTemplate_8208288[];
-extern u8 gSecretBaseTrainerClasses[];
+extern u8 gTrainerClassToPicIndex[];
+extern u8 gTrainerClassToNameIndex[];
+extern u8 gUnknown_08208238[];
+extern u8 gUnknown_0820823C[];
+extern u8 gStatStageRatios[];
 extern u8 gHoldEffectToType[][2];
 
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                            \

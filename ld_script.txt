@@ -335,7 +335,7 @@ SECTIONS {
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
         data/data2.o(.rodata);
-        data/pokemon.o(.rodata);
+        src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
         data/util.o(.rodata);
