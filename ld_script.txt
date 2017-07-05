@@ -169,7 +169,7 @@ SECTIONS {
         asm/contest_effect.o(.text);
         src/record_mixing.o(.text);
         asm/record_mixing.o(.text);
-        asm/sound_check_menu.o(.text);
+        src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
 		src/tv.o(.text);
@@ -409,7 +409,7 @@ SECTIONS {
         data/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
-        data/sound_check_menu.o(.rodata);
+        src/sound_check_menu.o(.rodata);
         data/secret_base.o(.rodata);
         data/tv.o(.rodata);
         data/contest_link_80C2020.o(.rodata);
