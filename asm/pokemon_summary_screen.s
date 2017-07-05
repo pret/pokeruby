@@ -4544,7 +4544,7 @@ _0809FC3C:
 	ldr r1, _0809FCD4 @ =gOtherText_OriginalTrainer
 	bl StringCopy
 	adds r5, r0, 0
-	ldr r4, _0809FCD8 @ =gOtherText_FiveQuestionsAndSlash
+	ldr r4, _0809FCD8 @ =gOtherText_FiveQuestions
 	adds r1, r4, 0
 	bl StringCopy
 	adds r5, r0, 0
@@ -4585,7 +4585,7 @@ _0809FC3C:
 	.align 2, 0
 _0809FCD0: .4byte gStringVar1
 _0809FCD4: .4byte gOtherText_OriginalTrainer
-_0809FCD8: .4byte gOtherText_FiveQuestionsAndSlash
+_0809FCD8: .4byte gOtherText_FiveQuestions
 _0809FCDC: .4byte gOtherText_EggAbout
 _0809FCE0:
 	cmp r0, 0xA

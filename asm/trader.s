@@ -204,13 +204,13 @@ _08109A98:
 	lsls r0, 18
 	adds r2, r0
 	lsrs r2, 24
-	ldr r0, _08109ABC @ =gOtherText_FiveQuestionsAndSlash
+	ldr r0, _08109ABC @ =gOtherText_FiveQuestions
 	movs r1, 0x1
 	bl MenuPrint
 	b _08109AD8
 	.align 2, 0
 _08109AB8: .4byte gSaveBlock1 + 0x2D94
-_08109ABC: .4byte gOtherText_FiveQuestionsAndSlash
+_08109ABC: .4byte gOtherText_FiveQuestions
 _08109AC0:
 	ldrb r0, [r1]
 	lsls r0, 5

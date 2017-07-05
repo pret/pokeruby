@@ -173,7 +173,8 @@ const u8 gOtherText_None[] = _("NONE");
 
 const u8 gOtherText_ThreeQuestions2[] = _("???");
 
-const u8 gOtherText_FiveQuestionsAndSlash[] = _("?????$/");
+const u8 gOtherText_FiveQuestions[] = _("?????");
+const u8 gOtherText_Slash[] = _("/");
 
 const u8 gOtherText_OneDash[] = _("-");
 const u8 gOtherText_TwoDashes[] = _("--");
@@ -267,7 +268,9 @@ const u8 gContestStatsText_Spicy[] = _("SPICY");
 const u8 gContestStatsText_Dry[] = _("DRY");
 const u8 gContestStatsText_Sweet[] = _("SWEET");
 const u8 gContestStatsText_Bitter[] = _("BITTER");
-const u8 gContestStatsText_Sour[] = _("SOUR$TASTY$FEEL"); // tasty is unused, feel might not be
+const u8 gContestStatsText_Sour[] = _("SOUR");
+const u8 gContestStatsText_Tasty[] = _("TASTY");
+const u8 gContestStatsText_Feel[] = _("FEEL");
 
 const u8 gContestStatsText_StowCase[] = _("Stow CASE.");
 const u8 gContestStatsText_ThrowAwayPrompt[] = _("Throw away this\n{STR_VAR_1}?");
@@ -1096,7 +1099,8 @@ const u8 gOtherText_None[] = _("KEINES");
 
 const u8 gOtherText_ThreeQuestions2[] = _("???");
 
-const u8 gOtherText_FiveQuestionsAndSlash[] = _("?????$/");
+const u8 gOtherText_FiveQuestions[] = _("?????");
+const u8 gOtherText_Slash[] = _("/");
 
 const u8 gOtherText_OneDash[] = _("-");
 const u8 gOtherText_TwoDashes[] = _("--");
@@ -1190,7 +1194,9 @@ const u8 gContestStatsText_Spicy[] = _("SCHARF");
 const u8 gContestStatsText_Dry[] = _("TROCKEN");
 const u8 gContestStatsText_Sweet[] = _("SÜSS");
 const u8 gContestStatsText_Bitter[] = _("BITTER");
-const u8 gContestStatsText_Sour[] = _("SAUER$LECKER$WÜRZE");
+const u8 gContestStatsText_Sour[] = _("SAUER");
+const u8 gContestStatsText_Tasty[] = _("LECKER");
+const u8 gContestStatsText_Feel[] = _("WÜRZE");
 
 const u8 gContestStatsText_StowCase[] = _("BOX verstauen.");
 const u8 gContestStatsText_ThrowAwayPrompt[] = _("{STR_VAR_1}\nwegwerfen?");
