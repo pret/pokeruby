@@ -1654,7 +1654,7 @@ void sub_8010874(void)
     ewram160C9 = 6;
     ewram16113 = 0;
     for (i = 0; i < 11; i++)
-		gBattleResults.unk36[i] = 0;
+        gBattleResults.unk36[i] = 0;
     gBattleResults.BattleTurnCounter = 0;
     gBattleResults.PlayerFaintCounter = 0;
     gBattleResults.OpponentFaintCounter = 0;

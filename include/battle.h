@@ -58,7 +58,7 @@
 #define STATUS3_UNDERGROUND             0x80
 #define STATUS3_MINIMIZED               0x100
 #define STATUS3_CHARGED_UP              0x200
-#define STATUS3_ROOTED					0x400
+#define STATUS3_ROOTED                  0x400
 #define STATUS3_GRUDGE                  0x4000
 #define STATUS3_CANT_SCORE_A_CRIT       0x8000
 #define STATUS3_MUDSPORT                0x10000
@@ -77,7 +77,7 @@
 #define HITMARKER_IGNORE_ON_AIR         0x0010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x0020000
 #define HITMARKER_IGNORE_UNDERWATER     0x0040000
-#define HITMARKER_x80000				0x0080000
+#define HITMARKER_x80000                0x0080000
 #define HITMARKER_x100000               0x0100000
 #define HITMARKER_x400000               0x0400000
 #define HITMARKER_x800000               0x0800000
@@ -164,16 +164,16 @@ struct BattleStruct /* 0x2000000 */
     u8 filler0[0x15DDE];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
-	/*0x15DE0*/ u8 filler15DE0[0x222];
-	/*0x16002*/ u8 AnimTurn;
-	/*0x16003*/ u8 ScriptingActive;
-	/*0x16004*/ u8 WrappedMove1[4];
-	/*0x16008*/ u8 WrappedMove2[4];
-	/*0x1600C*/ u8 cmd49StateTracker;
-	/*0x1600D*/ u8 unk1600D;
-	/*0x1600E*/ u8 unk1600E;
-	/*0x1600F*/ u8 atk23StateTracker;
-	/*0x16010*/ u8 unk16010;
+    /*0x15DE0*/ u8 filler15DE0[0x222];
+    /*0x16002*/ u8 AnimTurn;
+    /*0x16003*/ u8 ScriptingActive;
+    /*0x16004*/ u8 WrappedMove1[4];
+    /*0x16008*/ u8 WrappedMove2[4];
+    /*0x1600C*/ u8 cmd49StateTracker;
+    /*0x1600D*/ u8 unk1600D;
+    /*0x1600E*/ u8 unk1600E;
+    /*0x1600F*/ u8 atk23StateTracker;
+    /*0x16010*/ u8 unk16010;
     /*0x16011*/ u8 unk16011;
     /*0x16012*/ u8 unk16012;
     /*0x16013*/ u8 unk16013;
@@ -185,10 +185,10 @@ struct BattleStruct /* 0x2000000 */
     /*0x16019*/ u8 unk16019;
     /*0x1601A*/ u8 unk1601A;
     /*0x1601B*/ u8 wildVictorySong;
-	/*0x1601C*/ u8 DynamicMoveType;
-	/*0x1601D*/ u8 unk1601D;
-	/*0x1601E*/ u8 statChanger;
-	/*0x1601F*/ u8 DmgMultiplier;
+    /*0x1601C*/ u8 DynamicMoveType;
+    /*0x1601D*/ u8 unk1601D;
+    /*0x1601E*/ u8 statChanger;
+    /*0x1601F*/ u8 DmgMultiplier;
     /*0x16020*/ u8 WrappedBy[4];
     /*0x16024*/ u8 unk16024;
     /*0x16025*/ u8 unk16025;
@@ -323,7 +323,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160AD*/ u8 unk160AD;
     /*0x160AE*/ u8 unk160AE;
     /*0x160AF*/ u8 unk160AF;
-	/*0x160B0*/ u8 unk160B0;
+    /*0x160B0*/ u8 unk160B0;
     /*0x160B1*/ u8 unk160B1;
     /*0x160B2*/ u8 unk160B2;
     /*0x160B3*/ u8 unk160B3;
@@ -339,7 +339,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160BD*/ u8 unk160BD;
     /*0x160BE*/ u8 unk160BE;
     /*0x160BF*/ u8 unk160BF;
-	/*0x160C0*/ u8 unk160C0;
+    /*0x160C0*/ u8 unk160C0;
     /*0x160C1*/ u8 unk160C1;
     /*0x160C2*/ u8 unk160C2;
     /*0x160C3*/ u8 unk160C3;
@@ -381,25 +381,25 @@ struct DisableStruct
 
 struct BattleResults
 {
-    u8 PlayerFaintCounter;			//0x0
-    u8 OpponentFaintCounter;		//0x1
-    u8 unk2;								//0x2
-    u8 unk3;								//0x3
-    u8 unk4;								//0x4
-    u8 unk5_0:1;							//0x5
-    u8 unk5_1:1;							//0x5
-    u16 Poke1Species;					//0x6
-    u8 PokeString1[10];				//0x8
+    u8 PlayerFaintCounter;    // 0x0
+    u8 OpponentFaintCounter;  // 0x1
+    u8 unk2;                  // 0x2
+    u8 unk3;                  // 0x3
+    u8 unk4;                  // 0x4
+    u8 unk5_0:1;              // 0x5
+    u8 unk5_1:1;              // 0x5
+    u16 Poke1Species;         // 0x6
+    u8 PokeString1[10];       // 0x8
     u8 unk12;
-    u8 BattleTurnCounter;			//0x13
-    u8 PokeString2[10];				//0x14
+    u8 BattleTurnCounter;     // 0x13
+    u8 PokeString2[10];       // 0x14
     u8 filler1E[2];
-    u16 LastOpponentSpecies;		//0x20
-    u16 LastUsedMove;				//0x22
-    u16 OpponentMove;				//0x24
-    u16 OpponentSpecies;			//0x26
-    u16 CaughtPoke;					//0x28
-    u8 CaughtNick[10];				//0x2A
+    u16 LastOpponentSpecies;  // 0x20
+    u16 LastUsedMove;         // 0x22
+    u16 OpponentMove;         // 0x24
+    u16 OpponentSpecies;      // 0x26
+    u16 CaughtPoke;           // 0x28
+    u8 CaughtNick[10];        // 0x2A
     u8 filler34[2];
     u8 unk36[10];
 };
@@ -446,7 +446,7 @@ struct Struct2017840
 
 struct ProtectStruct
 {
-	/*field0*/
+    /*field0*/
     u32 Protected:1;
     u32 Endured:1;
     u32 OnlyStruggle:1;
@@ -455,7 +455,7 @@ struct ProtectStruct
     u32 StealMove:1;
     u32 Flag0Unknown:1;
     u32 PrlzImmobility:1;
-	/*field1*/
+    /*field1*/
     u32 ConfusionSelfDmg:1;
     u32 NotEffective:1;
     u32 ChargingTurn:1;
@@ -463,24 +463,24 @@ struct ProtectStruct
     u32 UsedImprisionedMove:1;
     u32 LoveImmobility:1;
     u32 UsedDisabledMove:1;
-	/*field2*/
+    /*field2*/
     u32 UsedTauntedMove:1;
     u32 Flag2Unknown:1;
     u32 FlinchImmobility:1;
     u32 NotFirstStrike:1;
-	u32 Free : 4;
-	/*field3*/
-	u32 field3 : 8;
-	u32 PhysicalDmg;
-	u32 SpecialDmg;
-	u8 PhysicalBank;
-	u8 SpecialBank;
-	u16 fieldE;
+    u32 Free : 4;
+    /*field3*/
+    u32 field3 : 8;
+    u32 PhysicalDmg;
+    u32 SpecialDmg;
+    u8 PhysicalBank;
+    u8 SpecialBank;
+    u16 fieldE;
 };
 
 struct SpecialStatus
 {
-	u8 statLowered : 1;
+    u8 statLowered : 1;
     u8 lightningRodRedirected : 1;
     u8 restoredBankSprite: 1;
     u8 intimidatedPoke : 1;
@@ -495,7 +495,7 @@ struct SpecialStatus
     u8 moveturnPhysicalBank;
     u8 moveturnSpecialBank;
     u8 field12;
-	u8 field13;
+    u8 field13;
 };
 
 struct sideTimer
