@@ -15,12 +15,6 @@ struct MenuAction2
     void (*func)(u8);
 };
 
-struct MenuAction3
-{
-    void (*func1)(u8);
-    void (*func2)(u8);
-};
-
 extern const struct MenuAction gMenuYesNoItems[];
 
 extern struct Window gMenuWindow;
@@ -65,7 +59,7 @@ void sub_807274C(u8, u8, u8, u8, const struct MenuAction[], u8, u32);
 s8 sub_80727CC(void);
 u8 sub_807288C(u8);
 void PrintMenuItems(u8, u8, u8, const struct MenuAction[]);
-void PrintMenuItemsReordered(u8, u8, u8, const struct MenuAction[], u8*);
+void PrintMenuItemsReordered(u8, u8, u8, const struct MenuAction[], const u8*);
 void InitYesNoMenu(u8, u8, u8);
 void DisplayYesNoMenu(u8, u8, u32);
 s8 ProcessMenuInputNoWrap_(void);

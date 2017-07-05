@@ -23,6 +23,7 @@ struct UCoords32
 };
 
 extern struct UCoords32 gUnknown_0821664C[];
+extern void (*gFieldCallback)(void);
 
 // sub_8052F5C
 void flag_var_implications_of_teleport_(void);

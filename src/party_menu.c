@@ -6,6 +6,7 @@
 #include "data2.h"
 #include "event_data.h"
 #include "item.h"
+#include "item_use.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
@@ -78,7 +79,6 @@ extern u16 gUnknown_0202E8F8;
 extern u8 gUnknown_0202E8FA;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
-extern u16 gScriptItemId;
 extern s32 gBattleMoveDamage;
 
 //extern const u16 gUnknown_083769A8[][6];

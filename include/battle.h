@@ -555,6 +555,8 @@ extern u8 ewram[];
 #define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
 #define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
 
+extern u8 gBattleTextBuff1[];
+
 // asm/battle_1.o
 void sub_800D6D4();
 void sub_800D74C();
@@ -637,6 +639,7 @@ void c3_0802FDF4(u8);
 void sub_802E3E4(u8, int);
 void nullsub_8(u8);
 void sub_802E414(void);
+void sub_802E424(void);
 
 // asm/battle_7.o
 void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);
