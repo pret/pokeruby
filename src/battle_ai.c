@@ -15,7 +15,7 @@
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern u8 gActiveBank;
-extern u8 gBattlePartyID[][2];
+extern u16 gBattlePartyID[MAX_BANKS_BATTLE];
 extern u16 gCurrentMove;
 extern int gBattleMoveDamage;
 extern u8 gBankAttacker;
@@ -23,13 +23,10 @@ extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
 extern u8 gBattleMoveFlags;
 extern u16 gDynamicBasePower;
-extern u16 gLastUsedMove[];
-extern u32 gUnknown_02024ACC[];
-extern u32 gStatuses3[];
-extern u16 gSideAffecting[];
-extern struct BattlePokemon gBattleMons[];
-extern struct BattlePokemon gUnknown_02024A8C[];
-extern u8 gBattleResults[];
+extern u16 gLastUsedMove[MAX_BANKS_BATTLE];
+extern u32 gStatuses3[MAX_BANKS_BATTLE];
+extern u16 gSideAffecting[2];
+extern struct BattlePokemon gBattleMons[MAX_BANKS_BATTLE];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u8 *BattleAIs[];
@@ -120,7 +117,7 @@ static void BattleAICmd_get_gender(void);
 static void BattleAICmd_is_first_turn(void);
 static void BattleAICmd_get_stockpile_count(void);
 static void BattleAICmd_is_double_battle(void);
-static void BattleAICmd_get_item(void);
+static void BattleAICmd_get_used_item(void);
 static void BattleAICmd_get_move_type_from_result(void);
 static void BattleAICmd_get_move_power_from_result(void);
 static void BattleAICmd_get_move_effect_from_result(void);
@@ -142,100 +139,100 @@ typedef void (*BattleAICmdFunc)(void);
 
 static const BattleAICmdFunc sBattleAICmdTable[] =
 {
-    BattleAICmd_if_random_less_than,
-    BattleAICmd_if_random_greater_than,
-    BattleAICmd_if_random_equal,
-    BattleAICmd_if_random_not_equal,
-    BattleAICmd_score,
-    BattleAICmd_if_hp_less_than,
-    BattleAICmd_if_hp_more_than,
-    BattleAICmd_if_hp_equal,
-    BattleAICmd_if_hp_not_equal,
-    BattleAICmd_if_status,
-    BattleAICmd_if_not_status,
-    BattleAICmd_if_status2,
-    BattleAICmd_if_not_status2,
-    BattleAICmd_if_status3,
-    BattleAICmd_if_not_status3,
-    BattleAICmd_if_status4,
-    BattleAICmd_if_not_status4,
-    BattleAICmd_if_less_than,
-    BattleAICmd_if_more_than,
-    BattleAICmd_if_equal,
-    BattleAICmd_if_not_equal,
-    BattleAICmd_if_less_than_32,
-    BattleAICmd_if_more_than_32,
-    BattleAICmd_if_equal_32,
-    BattleAICmd_if_not_equal_32,
-    BattleAICmd_if_move,
-    BattleAICmd_if_not_move,
-    BattleAICmd_if_in_bytes,
-    BattleAICmd_if_not_in_bytes,
-    BattleAICmd_if_in_words,
-    BattleAICmd_if_not_in_words,
-    BattleAICmd_if_user_can_damage,
-    BattleAICmd_if_user_cant_damage,
-    BattleAICmd_get_turn_count,
-    BattleAICmd_get_type,
-    BattleAICmd_get_move_power,
-    BattleAICmd_is_most_powerful_move,
-    BattleAICmd_get_move,
-    BattleAICmd_if_arg_equal,
-    BattleAICmd_if_arg_not_equal,
-    BattleAICmd_if_would_go_first,
-    BattleAICmd_if_would_not_go_first,
-    BattleAICmd_nullsub_2A,
-    BattleAICmd_nullsub_2B,
-    BattleAICmd_count_alive_pokemon,
-    BattleAICmd_get_considered_move,
-    BattleAICmd_get_considered_move_effect,
-    BattleAICmd_get_ability,
-    BattleAICmd_get_highest_possible_damage,
-    BattleAICmd_if_damage_bonus,
-    BattleAICmd_nullsub_32,
-    BattleAICmd_nullsub_33,
-    BattleAICmd_if_status_in_party,
-    BattleAICmd_if_status_not_in_party,
-    BattleAICmd_get_weather,
-    BattleAICmd_if_effect,
-    BattleAICmd_if_not_effect,
-    BattleAICmd_if_stat_level_less_than,
-    BattleAICmd_if_stat_level_more_than,
-    BattleAICmd_if_stat_level_equal,
-    BattleAICmd_if_stat_level_not_equal,
-    BattleAICmd_if_can_faint,
-    BattleAICmd_if_cant_faint,
-    BattleAICmd_if_has_move,
-    BattleAICmd_if_dont_have_move,
-    BattleAICmd_if_move_effect,
-    BattleAICmd_if_not_move_effect,
-    BattleAICmd_if_last_move_did_damage,
-    BattleAICmd_if_encored,
-    BattleAICmd_flee,
-    BattleAICmd_if_random_100,
-    BattleAICmd_watch,
-    BattleAICmd_get_hold_effect,
-    BattleAICmd_get_gender,
-    BattleAICmd_is_first_turn,
-    BattleAICmd_get_stockpile_count,
-    BattleAICmd_is_double_battle,
-    BattleAICmd_get_item,
-    BattleAICmd_get_move_type_from_result,
-    BattleAICmd_get_move_power_from_result,
-    BattleAICmd_get_move_effect_from_result,
-    BattleAICmd_get_protect_count,
-    BattleAICmd_nullsub_52,
-    BattleAICmd_nullsub_53,
-    BattleAICmd_nullsub_54,
-    BattleAICmd_nullsub_55,
-    BattleAICmd_nullsub_56,
-    BattleAICmd_nullsub_57,
-    BattleAICmd_call,
-    BattleAICmd_jump,
-    BattleAICmd_end,
-    BattleAICmd_if_level_compare,
-    BattleAICmd_if_taunted,
-    BattleAICmd_if_not_taunted,
+    BattleAICmd_if_random_less_than,         // 0x0
+    BattleAICmd_if_random_greater_than,      // 0x1
+    BattleAICmd_if_random_equal,             // 0x2
+    BattleAICmd_if_random_not_equal,         // 0x3
+    BattleAICmd_score,                       // 0x4
+    BattleAICmd_if_hp_less_than,             // 0x5
+    BattleAICmd_if_hp_more_than,             // 0x6
+    BattleAICmd_if_hp_equal,                 // 0x7
+    BattleAICmd_if_hp_not_equal,             // 0x8
+    BattleAICmd_if_status,                   // 0x9
+    BattleAICmd_if_not_status,               // 0xA
+    BattleAICmd_if_status2,                  // 0xB
+    BattleAICmd_if_not_status2,              // 0xC
+    BattleAICmd_if_status3,                  // 0xD
+    BattleAICmd_if_not_status3,              // 0xE
+    BattleAICmd_if_status4,                  // 0xF
+    BattleAICmd_if_not_status4,              // 0x10
+    BattleAICmd_if_less_than,                // 0x11
+    BattleAICmd_if_more_than,                // 0x12
+    BattleAICmd_if_equal,                    // 0x13
+    BattleAICmd_if_not_equal,                // 0x14
+    BattleAICmd_if_less_than_32,             // 0x15
+    BattleAICmd_if_more_than_32,             // 0x16
+    BattleAICmd_if_equal_32,                 // 0x17
+    BattleAICmd_if_not_equal_32,             // 0x18
+    BattleAICmd_if_move,                     // 0x19
+    BattleAICmd_if_not_move,                 // 0x1A
+    BattleAICmd_if_in_bytes,                 // 0x1B
+    BattleAICmd_if_not_in_bytes,             // 0x1C
+    BattleAICmd_if_in_words,                 // 0x1D
+    BattleAICmd_if_not_in_words,             // 0x1E
+    BattleAICmd_if_user_can_damage,          // 0x1F
+    BattleAICmd_if_user_cant_damage,         // 0x20
+    BattleAICmd_get_turn_count,              // 0x21
+    BattleAICmd_get_type,                    // 0x22
+    BattleAICmd_get_move_power,              // 0x23
+    BattleAICmd_is_most_powerful_move,       // 0x24
+    BattleAICmd_get_move,                    // 0x25
+    BattleAICmd_if_arg_equal,                // 0x26
+    BattleAICmd_if_arg_not_equal,            // 0x27
+    BattleAICmd_if_would_go_first,           // 0x28
+    BattleAICmd_if_would_not_go_first,       // 0x29
+    BattleAICmd_nullsub_2A,                  // 0x2A
+    BattleAICmd_nullsub_2B,                  // 0x2B
+    BattleAICmd_count_alive_pokemon,         // 0x2C
+    BattleAICmd_get_considered_move,         // 0x2D
+    BattleAICmd_get_considered_move_effect,  // 0x2E
+    BattleAICmd_get_ability,                 // 0x2F
+    BattleAICmd_get_highest_possible_damage, // 0x30
+    BattleAICmd_if_damage_bonus,             // 0x31
+    BattleAICmd_nullsub_32,                  // 0x32
+    BattleAICmd_nullsub_33,                  // 0x33
+    BattleAICmd_if_status_in_party,          // 0x34
+    BattleAICmd_if_status_not_in_party,      // 0x35
+    BattleAICmd_get_weather,                 // 0x36
+    BattleAICmd_if_effect,                   // 0x37
+    BattleAICmd_if_not_effect,               // 0x38
+    BattleAICmd_if_stat_level_less_than,     // 0x39
+    BattleAICmd_if_stat_level_more_than,     // 0x3A
+    BattleAICmd_if_stat_level_equal,         // 0x3B
+    BattleAICmd_if_stat_level_not_equal,     // 0x3C
+    BattleAICmd_if_can_faint,                // 0x3D
+    BattleAICmd_if_cant_faint,               // 0x3E
+    BattleAICmd_if_has_move,                 // 0x3F
+    BattleAICmd_if_dont_have_move,           // 0x40
+    BattleAICmd_if_move_effect,              // 0x41
+    BattleAICmd_if_not_move_effect,          // 0x42
+    BattleAICmd_if_last_move_did_damage,     // 0x43
+    BattleAICmd_if_encored,                  // 0x44
+    BattleAICmd_flee,                        // 0x45
+    BattleAICmd_if_random_100,               // 0x46
+    BattleAICmd_watch,                       // 0x47
+    BattleAICmd_get_hold_effect,             // 0x48
+    BattleAICmd_get_gender,                  // 0x49
+    BattleAICmd_is_first_turn,               // 0x4A
+    BattleAICmd_get_stockpile_count,         // 0x4B
+    BattleAICmd_is_double_battle,            // 0x4C
+    BattleAICmd_get_used_item,               // 0x4D
+    BattleAICmd_get_move_type_from_result,   // 0x4E
+    BattleAICmd_get_move_power_from_result,  // 0x4F
+    BattleAICmd_get_move_effect_from_result, // 0x50
+    BattleAICmd_get_protect_count,           // 0x51
+    BattleAICmd_nullsub_52,                  // 0x52
+    BattleAICmd_nullsub_53,                  // 0x53
+    BattleAICmd_nullsub_54,                  // 0x54
+    BattleAICmd_nullsub_55,                  // 0x55
+    BattleAICmd_nullsub_56,                  // 0x56
+    BattleAICmd_nullsub_57,                  // 0x57
+    BattleAICmd_call,                        // 0x58
+    BattleAICmd_jump,                        // 0x59
+    BattleAICmd_end,                         // 0x5A
+    BattleAICmd_if_level_compare,            // 0x5B
+    BattleAICmd_if_taunted,                  // 0x5C
+    BattleAICmd_if_not_taunted,              // 0x5D
 };
 
 #ifdef NONMATCHING
@@ -449,13 +446,13 @@ void unref_sub_81074A0(u8 a)
         UNK_2016A00_STRUCT->movesUsed[a / 2][i] = 0;
 }
 
-void sub_81074C4(u8 a, u8 b)
+void RecordAbilityBattle(u8 a, u8 b)
 {
     if (GetBankSide(a) == 0)
         UNK_2016A00_STRUCT->unk20[GetBankIdentity(a) & 1] = b;
 }
 
-void sub_81074F8(u8 a, u8 b)
+void RecordItemBattle(u8 a, u8 b)
 {
     if (GetBankSide(a) == 0)
         UNK_2016A00_STRUCT->unk22[GetBankIdentity(a) & 1] = b;
@@ -899,7 +896,7 @@ static void BattleAICmd_if_user_cant_damage(void)
 
 static void BattleAICmd_get_turn_count(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleResults[19];
+    AI_THINKING_STRUCT->funcResult = gBattleResults.BattleTurnCounter;
     gAIScriptPtr += 1;
 }
 
@@ -946,8 +943,8 @@ static void BattleAICmd_is_most_powerful_move(void)
      && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        unk_2000000[0x1601C] = 0; // why is this a manual array?
-        unk_2000000[0x1601F] = 1;
+        ewram[0x1601C] = 0; // why is this a manual array?
+        ewram[0x1601F] = 1;
         gBattleMoveFlags = 0;
         gCritMultiplier = 1;
 
@@ -965,8 +962,8 @@ static void BattleAICmd_is_most_powerful_move(void)
              && gBattleMoves[gBattleMons[gBankAttacker].moves[i]].power > 1)
             {
                 gCurrentMove = gBattleMons[gBankAttacker].moves[i];
-                sub_801CAF8(gBankAttacker, gBankTarget);
-                move_effectiveness_something(gCurrentMove, gBankAttacker, gBankTarget);
+                AI_CalcDmg(gBankAttacker, gBankTarget);
+                TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
                 damages[i] = (gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[i]) / 100;
 
                 if (damages[i] == 0) // moves always do at least 1 damage.
@@ -1135,11 +1132,11 @@ _081082BA:\n\
     ldrb r0, [r7]\n\
     ldr r4, _08108354 @ =gBankTarget\n\
     ldrb r1, [r4]\n\
-    bl sub_801CAF8\n\
+    bl AI_CalcDmg\n\
     ldrh r0, [r5]\n\
     ldrb r1, [r7]\n\
     ldrb r2, [r4]\n\
-    bl move_effectiveness_something\n\
+    bl TypeCalc\n\
     mov r4, sp\n\
     add r4, r8\n\
     ldr r2, _08108358 @ =gBattleMoveDamage\n\
@@ -1312,14 +1309,14 @@ static void BattleAICmd_count_alive_pokemon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         u32 status;
-        var = gBattlePartyID[index][0];
+        var = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlePartyID[GetBankByPlayerAI(status)][0];
+        var2 = gBattlePartyID[GetBankByPlayerAI(status)];
     }
     else
     {
-        var = gBattlePartyID[index][0];
-        var2 = gBattlePartyID[index][0];
+        var = gBattlePartyID[index];
+        var2 = gBattlePartyID[index];
     }
 
     for (i = 0; i < 6; i++)
@@ -1415,8 +1412,8 @@ static void BattleAICmd_get_highest_possible_damage(void)
     s32 i;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->unk.unk1 = 0;
-    BATTLE_STRUCT->unk.unk4 = 1;
+    BATTLE_STRUCT->DynamicMoveType = 0;
+    BATTLE_STRUCT->DmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1428,7 +1425,7 @@ static void BattleAICmd_get_highest_possible_damage(void)
 
         if (gCurrentMove)
         {
-            move_effectiveness_something(gCurrentMove, gBankAttacker, gBankTarget);
+            TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
 
             // reduce by 1/3.
             if (gBattleMoveDamage == 120)
@@ -1455,15 +1452,15 @@ static void BattleAICmd_if_damage_bonus(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->unk.unk1 = 0;
-    BATTLE_STRUCT->unk.unk4 = 1;
+    BATTLE_STRUCT->DynamicMoveType = 0;
+    BATTLE_STRUCT->DmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
     gBattleMoveDamage = 40;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
 
-    move_effectiveness_something(gCurrentMove, gBankAttacker, gBankTarget);
+    TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
 
     if (gBattleMoveDamage == 120)
         gBattleMoveDamage = 80;
@@ -1565,13 +1562,13 @@ static void BattleAICmd_if_status_not_in_party(void)
 
 static void BattleAICmd_get_weather(void)
 {
-    if (gBattleWeather & 7)
+    if (gBattleWeather & WEATHER_RAINY)
         AI_THINKING_STRUCT->funcResult = WEATHER_RAIN;
-    if (gBattleWeather & 0x18)
+    if (gBattleWeather & WEATHER_SANDSTORMY)
         AI_THINKING_STRUCT->funcResult = WEATHER_SANDSTORM;
-    if (gBattleWeather & 0x60)
+    if (gBattleWeather & WEATHER_SUNNY)
         AI_THINKING_STRUCT->funcResult = WEATHER_SUN;
-    if (gBattleWeather & 0x80)
+    if (gBattleWeather & weather_hail)
         AI_THINKING_STRUCT->funcResult = WEATHER_HAIL;
 
     gAIScriptPtr += 1;
@@ -1662,13 +1659,13 @@ static void BattleAICmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->unk.unk1 = 0;
-    BATTLE_STRUCT->unk.unk4 = 1;
+    BATTLE_STRUCT->DynamicMoveType = 0;
+    BATTLE_STRUCT->DmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    sub_801CAF8(gBankAttacker, gBankTarget);
-    move_effectiveness_something(gCurrentMove, gBankAttacker, gBankTarget);
+    AI_CalcDmg(gBankAttacker, gBankTarget);
+    TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
 
     gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
@@ -1691,13 +1688,13 @@ static void BattleAICmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->unk.unk1 = 0;
-    BATTLE_STRUCT->unk.unk4 = 1;
+    BATTLE_STRUCT->DynamicMoveType = 0;
+    BATTLE_STRUCT->DmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    sub_801CAF8(gBankAttacker, gBankTarget);
-    move_effectiveness_something(gCurrentMove, gBankAttacker, gBankTarget);
+    AI_CalcDmg(gBankAttacker, gBankTarget);
+    TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
 
     gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
@@ -1846,7 +1843,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[index].unk4 == 0)
+        if (gDisableStructs[index].DisabledMove == 0)
         {
             gAIScriptPtr += 7;
             return;
@@ -1859,7 +1856,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[index].unk6 != 0)
+    else if (gDisableStructs[index].EncoredMove != 0)
     {
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         return;
@@ -1872,7 +1869,7 @@ static void BattleAICmd_if_encored(void)
     switch (gAIScriptPtr[1])
     {
     case 0: // _08109348
-        if (gDisableStructs[gActiveBank].unk4 == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].DisabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1880,7 +1877,7 @@ static void BattleAICmd_if_encored(void)
         gAIScriptPtr += 6;
         return;
     case 1: // _08109370
-        if (gDisableStructs[gActiveBank].unk6 == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].EncoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1957,7 +1954,7 @@ static void BattleAICmd_is_first_turn(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].unk16;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].IsFirstTurn;
 
     gAIScriptPtr += 2;
 }
@@ -1971,7 +1968,7 @@ static void BattleAICmd_get_stockpile_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].unk9;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].StockpileCounter;
 
     gAIScriptPtr += 2;
 }
@@ -1983,7 +1980,7 @@ static void BattleAICmd_is_double_battle(void)
     gAIScriptPtr += 1;
 }
 
-static void BattleAICmd_get_item(void)
+static void BattleAICmd_get_used_item(void)
 {
     u8 index;
 
@@ -2028,7 +2025,7 @@ static void BattleAICmd_get_protect_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].unk8;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].ProtectUses;
 
     gAIScriptPtr += 2;
 }
