@@ -223,4 +223,17 @@ enum
     MAP_OBJ_GFX_LINK_MAY,
 };
 
+enum {
+    SHADOW_SIZE_S,
+    SHADOW_SIZE_M,
+    SHADOW_SIZE_L,
+    SHADOW_SIZE_XL
+};
+
+enum {
+    TRACKS_NONE,
+    TRACKS_FOOT,
+    TRACKS_BIKE_TIRE
+};
+
 #endif // GUARD_MAP_OBJECT_CONSTANTS_H

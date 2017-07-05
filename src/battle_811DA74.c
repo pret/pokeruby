@@ -35,15 +35,7 @@ struct UnknownStruct3
     u8 ppBonuses;
 };
 
-struct UnknownStruct5
-{
-    u8 unk0_0:7;
-    u8 unk0_7:1;
-};
-
 extern u16 gBattleTypeFlags;
-
-extern struct UnknownStruct5 gUnknown_020238C8;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
@@ -433,6 +425,7 @@ void LinkPartnerHandleGetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_getattr_by_ch1_for_player_pokemon_
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
@@ -765,6 +758,7 @@ void LinkPartnerHandleSetAttributes(void)
     LinkPartnerBufferExecCompleted();
 }
 
+// Duplicate of dp01_setattr_by_ch1_for_player_pokemon
 void sub_811EC68(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
@@ -1169,7 +1163,7 @@ void sub_811FDF0(void)
 
 void sub_811FDFC(void)
 {
-    if (mplay_80342A4(gActiveBank) == 0)
+    if (!mplay_80342A4(gActiveBank))
     {
         u32 r0 = gBattleBufferA[gActiveBank][1]
                | (gBattleBufferA[gActiveBank][2] << 8);
@@ -1415,10 +1409,12 @@ void sub_81203FC(void)
 void LinkPartnerHandleHitAnimation(void)
 {
     if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
+    {
         LinkPartnerBufferExecCompleted();
+    }
     else
     {
-        gDoingBattleAnim = 1;
+        gDoingBattleAnim = TRUE;
         gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t3;
@@ -1578,9 +1574,8 @@ void sub_81209D8(void)
     {
         u8 r3 = gBattleBufferA[gActiveBank][1];
         u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
-        u8 var = gActiveBank;
 
-        if (move_anim_start_t3(var, var, var, r3, r4) != 0)
+        if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
             LinkPartnerBufferExecCompleted();
         else
             gBattleBankFunc[gActiveBank] = sub_811E3B8;

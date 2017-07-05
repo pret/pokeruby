@@ -778,9 +778,13 @@ _080BE0A2:\n\
     ldr r1, _080BE134 @ =gSaveBlock2\n\
     bl StringCopy\n\
     adds r0, r4, 0\n\
-    bl sub_80BE138\n\
-    movs r0, 2 @ GAME_LANGUAGE\n\
-    strb r0, [r4, 0x2]\n\
+    bl sub_80BE138\n");
+#if ENGLISH
+    asm("movs r0, 2 @ GAME_LANGUAGE\n");
+#elif GERMAN
+    asm("movs r0, 5 @ GAME_LANGUAGE\n");
+#endif
+    asm("strb r0, [r4, 0x2]\n\
 _080BE112:\n\
     pop {r4-r7}\n\
     pop {r0}\n\
@@ -1715,6 +1719,7 @@ void sub_80BF4BC(void)
     }
 }
 
+#if ENGLISH
 u8 sub_80BF4F4(u8 arg0)
 {
     u32 species;
@@ -1730,6 +1735,31 @@ u8 sub_80BF4F4(u8 arg0)
 
     return TRUE;
 }
+#elif GERMAN
+u8 sub_80BF4F4(u8 arg0)
+{
+    u8 langData[4];
+    u32 species;
+
+    u8 *tmp;
+
+    GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
+
+    tmp = langData;
+    tmp[0] = GetMonData(&gPlayerParty[arg0], MON_DATA_LANGUAGE, &langData);
+    if (tmp[0] != GAME_LANGUAGE) {
+        return TRUE;
+    }
+
+    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
+
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+#endif
 
 u8 sub_80BF544(void)
 {

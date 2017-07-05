@@ -56,18 +56,17 @@ SECTIONS {
         asm/battle_3.o(.text);
         asm/battle_4.o(.text);
         asm/battle_5.o(.text);
-        asm/battle_6.o(.text);
         src/battle_6.o(.text);
-        asm/battle_6.o(.text_8030464);
         src/battle_7.o(.text);
         asm/battle_8.o(.text);
         asm/battle_9.o(.text);
-        asm/battle_10.o(.text);
+        src/battle_10.o(.text);
         src/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon_3.o(.text);
+        src/de_rom_8040FE0.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
         src/util.o(.text);
@@ -81,6 +80,10 @@ SECTIONS {
         src/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
+        src/trade.o(.text);
+        asm/trade.o(.text.sub_804A9F4);
+        src/trade.o(.text.sub_804DAD4);
+        asm/trade.o(.text.sub_804DB2C);
         asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
@@ -179,6 +182,7 @@ SECTIONS {
         asm/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
+        src/contest_link_80C857C.o(.text);
         src/item_use.o(.text);
         asm/battle_anim_80CA710.o(.text);
         src/bike.o(.text);
@@ -215,7 +219,6 @@ SECTIONS {
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
-        asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         src/battle_records.o(.text);
         asm/battle_records.o(.text_8110494);
@@ -231,11 +234,11 @@ SECTIONS {
         asm/battle_transition.o(.text);
         src/battle_811DA74.o(.text);
         asm/battle_message.o(.text);
-        asm/choose_party.o(.text);
+        src/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
-        asm/unused_8124F94.o(.text);
+        src/unused_8124F94.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/mystery_event_script.o(.text);
@@ -252,7 +255,7 @@ SECTIONS {
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
-        asm/battle_anim_8137220.o(.text);
+        src/battle_anim_8137220.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
         src/field_region_map.o(.text);
@@ -332,7 +335,7 @@ SECTIONS {
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
         data/data2.o(.rodata);
-        data/pokemon.o(.rodata);
+        src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
         data/util.o(.rodata);
@@ -350,9 +353,7 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         data/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
-        data/field_player_avatar.o(.rodata);
         src/field_map_obj.o(.rodata);
-        data/field_map_obj.o(.rodata);
         src/field_ground_effect.o(.rodata);
         data/field_ground_effect.o(.rodata);
         data/field_map_obj_helpers.o(.rodata);
@@ -388,6 +389,7 @@ SECTIONS {
         data/pokemon_menu.o(.rodata);
         data/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
+        src/trainer_card.o(.rodata);
         data/trainer_card.o(.rodata);
         src/battle_party_menu.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
@@ -438,7 +440,7 @@ SECTIONS {
         data/pokeblock.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
-        data/field_specials.o(.rodata);
+        src/field_specials.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         data/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
@@ -447,7 +449,7 @@ SECTIONS {
         data/battle_transition.o(.rodata);
         data/battle_811DA74.o(.rodata);
         data/battle_message.o(.rodata);
-        data/choose_party.o(.rodata);
+        src/choose_party.o(.rodata);
         data/cable_car.o(.rodata);
         src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);

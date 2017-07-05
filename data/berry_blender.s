@@ -56,12 +56,21 @@ gUnknown_08216284:: @ 8216284
 	.string "3P$", 4
 	.string "4P$", 4
 
+.ifdef ENGLISH
 UnknownText_Mister:
 	.string "MISTER$"
 UnknownText_Laddie:
 	.string "LADDIE$"
 UnknownText_Lassie:
 	.string "LASSIE$"
+.else
+UnknownText_Mister:
+	.string "OPI$"
+UnknownText_Laddie:
+	.string "KUMPEL$"
+UnknownText_Lassie:
+	.string "TUSSI$"
+.endif
 
 	.align 2
 gUnknown_082162B8:: @ 82162B8

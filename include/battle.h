@@ -425,9 +425,9 @@ struct Struct2017810
     u8 unk0_6:1;
     u8 unk0_7:1;
     u8 unk1_0:1;
+    u8 unk1_1:5;
     u8 unk2;
     u8 unk3;
-    //u8 filler2[2];
     u8 unk4;
     u8 unk5;
     u8 unk6;
@@ -440,8 +440,15 @@ struct Struct2017810
 struct Struct2017840
 {
     u16 unk0;
-    u8 filler2[7];
+    u8 filler2[6];
+    u8 unk8;
     u8 unk9_0:1;
+};
+
+struct Struct20238C8
+{
+    u8 unk0_0:7;
+    u8 unk0_7:1;
 };
 
 struct ProtectStruct
@@ -534,6 +541,7 @@ extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
 extern struct sideTimer gSideTimer[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
+extern struct Struct20238C8 gUnknown_020238C8;
 
 // TODO: move ewram to global.h
 extern u8 ewram[];

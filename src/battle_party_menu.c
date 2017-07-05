@@ -18,29 +18,42 @@
 #include "task.h"
 #include "text.h"
 
-#define DATA_COUNT (6)
-
 extern u8 ewram[];
-
-struct Unk201B000
-{
-    //u8 filler0[0x260];
-    struct Pokemon unk0[6];
-    u8 filler258[1];
-    u8 unk259;
-    u8 filler25A[6];
-    u8 unk260;
-    u8 unk261;
-    u8 filler262[2];
-    s16 unk264[DATA_COUNT * 2];  // This may be a union
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
-};
-
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
+
+extern u8 IsLinkDoubleBattle(void);
+extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
+extern void LoadHeldItemIconGraphics(void);
+extern void CreateHeldItemIcons_806DC34();
+extern u8 sub_806BD58(u8, u8);
+extern void PartyMenuPrintMonsLevelOrStatus(void);
+extern void PrintPartyMenuMonNicknames(void);
+extern void PartyMenuTryPrintMonsHP(void);
+extern void nullsub_13(void);
+extern void PartyMenuDrawHPBars(void);
+extern u8 sub_806B58C(u8);
+extern u8 GetItemEffectType();
+extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
+extern u16 sub_806BD80();
+extern u8 sub_806CA38();
+extern void sub_806D5A4(void);
+extern void sub_802E414(void);
+extern void sub_80A6DCC(void);
+extern void sub_806AF4C();
+extern u8 sub_80F9344(void);
+extern u8 sub_806B124(void);
+extern void sub_806C994();
+extern void sub_806BF74();
+extern void sub_806AEDC(void);
+extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
+extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
+extern u8 *sub_8040D08();
+extern void sub_8040B8C(void);
+extern void sub_806E6F0();
+extern void sub_806D538();
+extern void nullsub_14();
+extern void OpenPartyMenu();
+extern u8 sub_803FBBC(void);
 
 extern u16 gScriptItemId;
 extern u8 gPlayerPartyCount;
@@ -562,7 +575,7 @@ static void Task_8095330(u8 taskId)
     }
 }
 
-static void Task_809535C(u8 taskId)
+static void Task_809535C(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
     sub_806AF4C(1, 0xFF, SetUpBattlePokemonMenu, 5);

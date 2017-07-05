@@ -133,6 +133,7 @@ gUnknown_083F8EE8:: @ 83F8EE8
 gUnknown_083F8EF4:: @ 83F8EF4
 	.byte 0, 3, 4, 6, 12
 
+.ifdef ENGLISH
 	.align 2
 RouletteSpritePalette_01:
 	.incbin "graphics/roulette/shadow.gbapal"
@@ -196,6 +197,7 @@ RouletteSpritePalette_15:
 	.align 2
 RouletteSpritePalette_16:
 	.incbin "graphics/roulette/83F90DC.gbapal"
+.endif
 
 	.align 2
 gUnknown_083F90FC:: @ 83F90FC

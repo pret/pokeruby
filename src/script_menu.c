@@ -863,6 +863,7 @@ bool8 TryCreatePCMenu(void)
     }
 }
 
+#if ENGLISH
 void CreatePCMenu(void)
 {
     u16 playersPCWidth = GetStringWidthInTilesForScriptMenu(gPCText_PlayersPC);
@@ -897,6 +898,170 @@ void CreatePCMenu(void)
     InitMenu(0, 1, 1, numChoices, 0, width + 1);
     sub_80B5230(0, 0, width + 2, 2 * numChoices + 1, 0, numChoices);
 }
+#elif GERMAN
+__attribute__((naked))
+void CreatePCMenu(void) {
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x18\n\
+	ldr r0, _080B5748 @ =0x0000084b\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080B5750\n\
+	ldr r0, _080B574C @ =gPCText_LanettesPC\n\
+	b _080B5752\n\
+	.align 2, 0\n\
+_080B5748: .4byte 0x0000084b\n\
+_080B574C: .4byte gPCText_LanettesPC\n\
+_080B5750:\n\
+	ldr r0, _080B57E8 @ =gPCText_SomeonesPC\n\
+_080B5752:\n\
+	bl GetStringWidthInTilesForScriptMenu\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [sp, 0x8]\n\
+	movs r4, 0x1\n\
+	ldr r0, _080B57EC @ =gPCText_PlayersPC\n\
+	bl GetStringWidthInTilesForScriptMenu\n\
+	lsls r1, r4, 2\n\
+	add r1, sp\n\
+	adds r1, 0x8\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [r1]\n\
+	ldr r0, _080B57F0 @ =gPCText_LogOff\n\
+	bl GetStringWidthInTilesForScriptMenu\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [sp, 0x10]\n\
+	movs r4, 0x3\n\
+	ldr r0, _080B57F4 @ =0x00000804\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080B5798\n\
+	ldr r0, _080B57F8 @ =gPCText_HallOfFame\n\
+	bl GetStringWidthInTilesForScriptMenu\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [sp, 0x14]\n\
+	movs r4, 0x4\n\
+_080B5798:\n\
+	movs r5, 0\n\
+	cmp r5, r4\n\
+	bge _080B57B4\n\
+	add r2, sp, 0x8\n\
+	adds r1, r4, 0\n\
+_080B57A2:\n\
+	ldr r0, [r2]\n\
+	cmp r5, r0\n\
+	bge _080B57AC\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+_080B57AC:\n\
+	adds r2, 0x4\n\
+	subs r1, 0x1\n\
+	cmp r1, 0\n\
+	bne _080B57A2\n\
+_080B57B4:\n\
+	ldr r0, _080B57F4 @ =0x00000804\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080B57FC\n\
+	movs r7, 0x4\n\
+	adds r4, r5, 0x2\n\
+	lsls r2, r4, 24\n\
+	lsrs r2, 24\n\
+	movs r0, 0\n\
+	movs r1, 0\n\
+	movs r3, 0x9\n\
+	bl MenuDrawTextWindow\n\
+	ldr r0, _080B57F8 @ =gPCText_HallOfFame\n\
+	movs r1, 0x1\n\
+	movs r2, 0x5\n\
+	bl MenuPrint\n\
+	ldr r0, _080B57F0 @ =gPCText_LogOff\n\
+	movs r1, 0x1\n\
+	movs r2, 0x7\n\
+	bl MenuPrint\n\
+	b _080B5818\n\
+	.align 2, 0\n\
+_080B57E8: .4byte gPCText_SomeonesPC\n\
+_080B57EC: .4byte gPCText_PlayersPC\n\
+_080B57F0: .4byte gPCText_LogOff\n\
+_080B57F4: .4byte 0x00000804\n\
+_080B57F8: .4byte gPCText_HallOfFame\n\
+_080B57FC:\n\
+	movs r7, 0x3\n\
+	adds r4, r5, 0x2\n\
+	lsls r2, r4, 24\n\
+	lsrs r2, 24\n\
+	movs r0, 0\n\
+	movs r1, 0\n\
+	movs r3, 0x7\n\
+	bl MenuDrawTextWindow\n\
+	ldr r0, _080B5834 @ =gPCText_LogOff\n\
+	movs r1, 0x1\n\
+	movs r2, 0x5\n\
+	bl MenuPrint\n\
+_080B5818:\n\
+	adds r6, r4, 0\n\
+	ldr r0, _080B5838 @ =0x0000084b\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080B5840\n\
+	ldr r0, _080B583C @ =gPCText_LanettesPC\n\
+	movs r1, 0x1\n\
+	movs r2, 0x1\n\
+	bl MenuPrint\n\
+	b _080B584A\n\
+	.align 2, 0\n\
+_080B5834: .4byte gPCText_LogOff\n\
+_080B5838: .4byte 0x0000084b\n\
+_080B583C: .4byte gPCText_LanettesPC\n\
+_080B5840:\n\
+	ldr r0, _080B5888 @ =gPCText_SomeonesPC\n\
+	movs r1, 0x1\n\
+	movs r2, 0x1\n\
+	bl MenuPrint\n\
+_080B584A:\n\
+	ldr r0, _080B588C @ =gPCText_PlayersPC\n\
+	movs r1, 0x1\n\
+	movs r2, 0x3\n\
+	bl MenuPrint\n\
+	movs r4, 0\n\
+	str r4, [sp]\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x4]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	movs r2, 0x1\n\
+	adds r3, r7, 0\n\
+	bl InitMenu\n\
+	lsls r2, r6, 24\n\
+	lsrs r2, 24\n\
+	lsls r3, r7, 1\n\
+	adds r3, 0x1\n\
+	str r4, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	movs r0, 0\n\
+	movs r1, 0\n\
+	bl sub_80B5230\n\
+	add sp, 0x18\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080B5888: .4byte gPCText_SomeonesPC\n\
+_080B588C: .4byte gPCText_PlayersPC\n\
+    .syntax divided\n");
+}
+#endif
 
 void sub_80B5838(void)
 {
