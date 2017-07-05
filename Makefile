@@ -26,7 +26,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
 
-VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_de
+VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_de ruby_de_debug
 
 # Clear the default suffixes.
 .SUFFIXES:
@@ -125,8 +125,9 @@ $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
+$$($1_C_OBJS): DEBUG := $(if $(filter $5,DEBUG),-DDEBUG=1,)
 build/$1/%.o : %.c $$$$(c_dep)
-	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
+	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$(DEBUG) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
 	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
@@ -134,14 +135,16 @@ build/$1/%.o : %.c $$$$(c_dep)
 $$($1_ASM_OBJS): VERSION := $2
 $$($1_ASM_OBJS): REVISION := $3
 $$($1_ASM_OBJS): LANGUAGE := $4
+$$($1_ASM_OBJS): DEBUG := $(if $(filter $5,DEBUG),--defsym DEBUG=1,)
 build/$1/asm/%.o: asm/%.s $$$$(asm_dep)
-	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@ $$<
+	$$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 $$(DEBUG) -o $$@ $$<
 
 $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
+$$($1_DATA_ASM_OBJS): DEBUG := $(if $(filter $5,DEBUG),--defsym DEBUG=1,)
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 $$(DEBUG) -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
@@ -178,3 +181,4 @@ $(eval $(call VERSION_RULES,sapphire,SAPPHIRE,0,ENGLISH))
 $(eval $(call VERSION_RULES,sapphire_rev1,SAPPHIRE,1,ENGLISH))
 $(eval $(call VERSION_RULES,sapphire_rev2,SAPPHIRE,2,ENGLISH))
 $(eval $(call VERSION_RULES,ruby_de,RUBY,0,GERMAN))
+$(eval $(call VERSION_RULES,ruby_de_debug,RUBY,0,GERMAN,DEBUG))

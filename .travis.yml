@@ -23,6 +23,8 @@ matrix:
   include:
     - os: linux
       env: _="Build"
+      before_script:
+        - touch baserom-debug.gba
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby
@@ -48,6 +50,7 @@ matrix:
     - os: linux
       env: _="Build German"
       before_script:
+        - touch baserom-debug.gba
         - cp override-de.mk override.mk
         - rsync -avhI asm-de/ asm/
         - rsync -avhI data-de/ data/
@@ -55,5 +58,16 @@ matrix:
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby_de
+    - os: linux
+      env: _="Build German debug"
+      before_script:
+        - dd if=/dev/zero of=baserom-debug.gba bs=1048576 count=16 # 16 MiB
+        - cp override-de.mk override.mk
+        - rsync -avhI asm-de/ asm/
+        - rsync -avhI data-de/ data/
+        - rsync -avhI graphics-de/ graphics/
+      script:
+        - ./build_tools.sh
+        - make -j2 ruby_de_debug
   allow_failures:
     - env: _="Formatting"
