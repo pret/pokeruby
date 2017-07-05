@@ -4,6 +4,7 @@
 #include "data2.h"
 #include "link.h"
 #include "palette.h"
+#include "rom_8077ABC.h"
 #include "rom3.h"
 #include "songs.h"
 #include "sound.h"
@@ -47,9 +48,7 @@ extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 extern u8 gUnknown_0300434C[];
-extern const struct MonCoords gTrainerFrontPicCoords[];
 
-extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern u8 GetBankIdentity(u8);
@@ -1318,6 +1317,6 @@ void sub_803A658(void)
     gBattleBankFunc[gActiveBank] = sub_8037F34;
 }
 
-extern void nullsub_48(void)
+void nullsub_48(void)
 {
 }
