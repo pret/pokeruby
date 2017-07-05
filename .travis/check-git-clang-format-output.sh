@@ -17,5 +17,5 @@ if [ "$output" == "no modified files to format" ] || [ "$output" == "clang-forma
 else
     echo "clang-format failed:"
     echo "$output" | colordiff
-    exit 0
+    exit 1
 fi
