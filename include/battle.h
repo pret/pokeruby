@@ -183,6 +183,7 @@ struct Struct2017810
     u8 unk0_6:1;
     u8 unk0_7:1;
     u8 unk1_0:1;
+    u8 unk1_1:5;
     u8 unk2;
     u8 unk3;
     u8 unk4;

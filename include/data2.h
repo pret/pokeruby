@@ -53,4 +53,14 @@ extern const struct SpriteTemplate gSpriteTemplate_81FAF0C;
 extern void *const gUnknown_081FAF4C[];
 extern struct BattleMove gBattleMoves[];
 
+// data/graphics/trainers/front_pic_coords.inc
+extern const struct MonCoords gTrainerFrontPicCoords[];
+
+// data/graphics/trainers/front_pic_table.inc
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
+
+// data/graphics/trainers/front_pic_palette_table.inc
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+
+
 #endif // GUARD_DATA2_H
