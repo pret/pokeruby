@@ -291,7 +291,7 @@ _0801BE7E:
 	mov r2, r8
 	ldrb r0, [r2]
 	ldrb r1, [r4]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0801BFF4
 	.align 2, 0
 _0801BEB8: .4byte gNoOfAllBanks
@@ -1812,8 +1812,8 @@ _0801CAF0: .4byte gProtectStructs
 _0801CAF4: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk05_damagecalc1
 
-	thumb_func_start sub_801CAF8
-sub_801CAF8: @ 801CAF8
+	thumb_func_start AI_CalcDmg
+AI_CalcDmg: @ 801CAF8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1923,7 +1923,7 @@ _0801CBDC: .4byte 0x0001601f
 _0801CBE0: .4byte gStatuses3
 _0801CBE4: .4byte gBattleMoves
 _0801CBE8: .4byte gProtectStructs
-	thumb_func_end sub_801CAF8
+	thumb_func_end AI_CalcDmg
 
 	thumb_func_start battle_attack_damage_modulate_by_effectivity
 battle_attack_damage_modulate_by_effectivity: @ 801CBEC
@@ -2143,7 +2143,7 @@ _0801CD44:
 	strb r2, [r0, 0x6]
 	ldrb r0, [r4]
 	ldrb r1, [r3]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0801CE58
 	.align 2, 0
 _0801CD94: .4byte gBattleMoves
@@ -2300,7 +2300,7 @@ _0801CE94:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r5]
 	ldrb r1, [r3]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 _0801CED6:
 	ldr r0, _0801CF1C @ =gBattleMoveFlags
 	ldrb r1, [r0]
@@ -2412,7 +2412,7 @@ _0801CF94:
 	strb r1, [r0, 0x6]
 	ldrb r0, [r3]
 	movs r1, 0x1A
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0801D1A4
 	.align 2, 0
 _0801CFC8: .4byte gBattleMons
@@ -2657,7 +2657,7 @@ _0801D14E:
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x19
-	bl sub_81074C4
+	bl RecordAbilityBattle
 _0801D1A4:
 	pop {r3,r4}
 	mov r8, r3
@@ -2778,8 +2778,8 @@ _0801D27A:
 	bx r0
 	thumb_func_end b_attack_effectivity_adapt
 
-	thumb_func_start move_effectiveness_something
-move_effectiveness_something: @ 801D280
+	thumb_func_start TypeCalc
+TypeCalc: @ 801D280
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3020,7 +3020,7 @@ _0801D44C: .4byte gTypeEffectiveness
 _0801D450: .4byte gBattleMons
 _0801D454: .4byte gBankTarget
 _0801D458: .4byte gBattleMoves
-	thumb_func_end move_effectiveness_something
+	thumb_func_end TypeCalc
 
 	thumb_func_start ai_rate_move
 ai_rate_move: @ 801D45C
@@ -3280,7 +3280,7 @@ _0801D632:
 	bcs _0801D670
 	ldrb r0, [r5]
 	movs r1, 0x27
-	bl sub_81074F8
+	bl RecordItemBattle
 	ldr r2, _0801D6FC @ =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
@@ -3484,7 +3484,7 @@ _0801D7E2:
 	bcs _0801D820
 	ldrb r0, [r5]
 	movs r1, 0x27
-	bl sub_81074F8
+	bl RecordItemBattle
 	ldr r2, _0801D890 @ =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
@@ -5294,7 +5294,7 @@ _0801E64A:
 	mov r3, r8
 	ldrb r0, [r3]
 	movs r1, 0x11
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r4, _0801E67C @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5417,7 +5417,7 @@ _0801E72E:
 	mov r3, r8
 	ldrb r0, [r3]
 	movs r1, 0x29
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r4, _0801E750 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5608,7 +5608,7 @@ _0801E8A6:
 	mov r3, r8
 	ldrb r0, [r3]
 	movs r1, 0x7
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r4, _0801E8C8 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5651,7 +5651,7 @@ _0801E8FE:
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x11
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r4, _0801E93C @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -6081,7 +6081,7 @@ _0801ECF4:
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x27
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r1, _0801ED10 @ =gBattlescriptCurrInstr
 	ldr r0, _0801ED14 @ =BattleScript_FlinchPrevention
 	str r0, [r1]
@@ -6712,7 +6712,7 @@ _0801F214:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0801F5FA
 	.align 2, 0
 _0801F254: .4byte gBankAttacker
@@ -7044,7 +7044,7 @@ _0801F500:
 	str r0, [r1]
 	ldrb r0, [r5]
 	movs r1, 0x3C
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0801F5FA
 	.align 2, 0
 _0801F534: .4byte gLastUsedAbility
@@ -8058,7 +8058,7 @@ _0801FD5C:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 _0801FD80:
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r0, _0801FD98 @ =0x02000000
 	ldr r1, _0801FD9C @ =0x000160f8
 	adds r0, r1
@@ -12829,7 +12829,7 @@ atk4A_damageflags: @ 80222DC
 	strb r2, [r0, 0x6]
 	ldrb r0, [r7]
 	ldrb r1, [r3]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _08022452
 	.align 2, 0
 _08022340: .4byte gBattleMoves
@@ -13030,7 +13030,7 @@ _08022494:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r2]
 	ldrb r1, [r3]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 _080224CE:
 	ldr r0, _08022518 @ =gBattleMoveFlags
 	ldrb r1, [r0]
@@ -13310,7 +13310,7 @@ _080226EA:
 	ldr r1, [sp, 0x50]
 	str r1, [r0]
 _08022710:
-	bl sub_8010B88
+	bl SwitchInClearStructs
 	ldr r0, _08022778 @ =0x02000000
 	ldr r3, _08022754 @ =gActiveBank
 	ldrb r2, [r3]
@@ -17237,7 +17237,7 @@ _08024726:
 	bcs _08024764
 	ldrb r0, [r5]
 	movs r1, 0x27
-	bl sub_81074F8
+	bl RecordItemBattle
 	ldr r2, _080247F0 @ =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
@@ -17919,7 +17919,7 @@ atk70_record_ability_usage_of_side: @ 8024CB8
 	ldrb r0, [r1]
 	ldr r1, _08024CE8 @ =gLastUsedAbility
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -18739,7 +18739,7 @@ _08025354:
 	adds r1, r6
 	adds r1, 0x20
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r1, _08025380 @ =gBattlescriptCurrInstr
 	ldr r0, _08025384 @ =gUnknown_081D9834
 	str r0, [r1]
@@ -19746,7 +19746,7 @@ _08025B2C:
 	str r4, [r5]
 	ldrb r1, [r2]
 	adds r0, r3, 0
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _08025B56
 	.align 2, 0
 _08025B44: .4byte gBattleMons
@@ -20345,7 +20345,7 @@ _08025FE0:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r0, _0802602C @ =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -20401,7 +20401,7 @@ _08026040:
 	strb r0, [r1]
 	ldrb r0, [r3]
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _08025F74
 	.align 2, 0
 _08026090: .4byte gActiveBank
@@ -20449,7 +20449,7 @@ _080260CA:
 	strb r0, [r1]
 	ldrb r0, [r3]
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _08025F74
 	.align 2, 0
 _080260FC: .4byte gActiveBank
@@ -21840,7 +21840,7 @@ _08026BCE:
 	bcs _08026C0C
 	ldrb r0, [r5]
 	movs r1, 0x27
-	bl sub_81074F8
+	bl RecordItemBattle
 	ldr r2, _08026C54 @ =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
@@ -21880,7 +21880,7 @@ _08026C0C:
 	ldr r1, _08026C50 @ =gBankTarget
 	ldrb r0, [r1]
 	movs r1, 0x5
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _08026E40
 	.align 2, 0
 _08026C4C: .4byte gStringBank
@@ -22497,7 +22497,7 @@ _080270F0:
 	strb r2, [r0]
 	ldrb r0, [r5]
 	movs r1, 0xC
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0802721C
 	.align 2, 0
 _0802714C: .4byte gBattlePartyID
@@ -25469,7 +25469,7 @@ _080288C0: .4byte gBattleMons
 _080288C4:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldrb r0, [r5, 0x5]
 	movs r1, 0x1
 	orrs r0, r1
@@ -25532,7 +25532,7 @@ _08028950: .4byte gBattleMons
 _08028954:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r1, _080289AC @ =gBattleCommunication
 	ldrb r0, [r1, 0x5]
 	orrs r0, r6
@@ -28815,7 +28815,7 @@ _0802A334:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	b _0802A49A
 	.align 2, 0
 _0802A360: .4byte gBattlescriptCurrInstr

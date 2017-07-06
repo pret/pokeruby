@@ -50,7 +50,6 @@ extern u8 gUnknown_081A168F[];
 
 extern u16 gBattlePartyID[];
 
-extern u16 gScriptItemId;
 extern u16 gBattleTypeFlags;
 
 static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");

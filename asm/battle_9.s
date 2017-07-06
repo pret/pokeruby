@@ -1847,7 +1847,7 @@ _08036EA4:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	mov r2, r10
-	bl move_effectiveness_something
+	bl TypeCalc
 	movs r1, 0x2
 	ands r1, r0
 	cmp r1, 0
@@ -1976,11 +1976,11 @@ _08036F90:
 	beq _08036FCC
 	ldrb r0, [r6]
 	mov r1, r10
-	bl sub_801CAF8
+	bl AI_CalcDmg
 	ldrb r1, [r6]
 	adds r0, r4, 0
 	mov r2, r10
-	bl move_effectiveness_something
+	bl TypeCalc
 _08036FCC:
 	mov r2, r8
 	ldr r0, [r2]

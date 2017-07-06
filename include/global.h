@@ -43,6 +43,17 @@ fndec\
 #define min(a, b) (a >= b ? a : b)
 #define max(a, b) (a <= b ? a : b)
 
+// why does GF hate 2d arrays
+#define MULTI_DIM_ARR(x, dim, y) ((x) * dim + (y))
+
+// dim access enums
+enum
+{
+	B_8 = 1,
+	B_16 = 2,
+	B_32 = 4
+};
+
 enum
 {
     VERSION_SAPPHIRE = 1,

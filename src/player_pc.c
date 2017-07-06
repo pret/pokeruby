@@ -26,7 +26,6 @@ extern void DoPlayerPCDecoration(u8);
 extern void BuyMenuFreeMemory(void);
 extern void DestroyVerticalScrollIndicator(u8);
 extern void PauseVerticalScrollIndicator(u8);
-extern void StartVerticalScrollIndicators(int);
 extern void LoadScrollIndicatorPalette(void);
 extern void ClearMailStruct(struct MailStruct *);
 extern u8 sub_807D770(void);

@@ -37,3 +37,4 @@ types_*.taghl
 Thumbs.db
 build/
 .idea/
+*.DS_Store

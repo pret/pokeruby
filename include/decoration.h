@@ -274,7 +274,7 @@ extern const u8 *const gUnknown_083EC5E4[];
 extern const u8 *const gUnknown_083EC624[];
 extern u8 gUnknown_020388F7[];
 extern const struct MenuAction2 gUnknown_083EC604[];
-extern const struct MenuAction3 gUnknown_083EC634[];
+extern const struct YesNoFuncTable gUnknown_083EC634[];
 extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
