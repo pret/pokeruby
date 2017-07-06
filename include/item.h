@@ -22,6 +22,14 @@ struct Item
     u8 secondaryId;
 };
 
+struct BagPocket
+{
+    struct ItemSlot *itemSlots;
+    u8 capacity;
+};
+
+extern struct BagPocket gBagPockets[5];
+
 void CopyItemName(u16 itemId, u8 *string);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);

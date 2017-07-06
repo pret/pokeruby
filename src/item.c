@@ -8,14 +8,6 @@
 extern u8 gUnknown_02038560;
 extern struct Item gItems[];
 
-struct BagPocket
-{
-    struct ItemSlot *itemSlots;
-    u8 capacity;
-};
-
-extern struct BagPocket gBagPockets[5];
-
 enum
 {
     ITEMS_POCKET,
