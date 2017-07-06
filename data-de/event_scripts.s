@@ -3284,6 +3284,535 @@ PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
 Route101_EventScript_1A14DC:: @ 81A14DC
 	return
 
+.ifdef DEBUG
+
+DebugScript_081C1CFE:: @ 81C1CFE
+	setflag 0x804
+	call 0x81C032D
+	end
+
+DebugScript_081C1D07:: @ 81C1D07
+	checkitem ITEM_COIN_CASE, 1
+	compare 0x800d, 1
+	jumpif 0x0001, DebugScript_081C1D1D
+	additem ITEM_COIN_CASE, 1
+	end
+
+DebugScript_081C1D1D:: @ 81C1D1D
+	end
+
+DebugScript_081C1D1E:: @ 81C1D1E
+	jump 0x8167646
+
+DebugScript_081C1D23:: @ 81C1D23
+	end
+
+DebugScript_081C1D24:: @ 81C1D24
+	setvar 0x40ba, 1
+	end
+
+DebugScript_081C1D2A:: @ 81C1D2A
+	additem ITEM_SS_TICKET, 1
+	jump DebugScript_081C1CFE
+
+DebugScript_081C1D34:: @ 81C1D34
+	end
+
+DebugScript_081C1D35:: @ 81C1D35
+	countpokemon
+	compare 0x800d, 6
+	jumpif 0x0001, DebugScript_081C1D45
+	giveegg SPECIES_KYOGRE
+	end
+
+DebugScript_081C1D45:: @ 81C1D45
+	end
+
+DebugScript_081C1D46:: @ 81C1D46
+	additem ITEM_POTION, 99
+	additem ITEM_ANTIDOTE, 99
+	additem ITEM_BURN_HEAL, 99
+	additem ITEM_ICE_HEAL, 99
+	additem ITEM_AWAKENING, 99
+	additem ITEM_PARALYZE_HEAL, 99
+	additem ITEM_FULL_RESTORE, 99
+	additem ITEM_MAX_POTION, 99
+	additem ITEM_HYPER_POTION, 99
+	additem ITEM_SUPER_POTION, 99
+	additem ITEM_FULL_HEAL, 99
+	additem ITEM_REVIVE, 99
+	additem ITEM_MAX_REVIVE, 99
+	additem ITEM_FRESH_WATER, 99
+	additem ITEM_SODA_POP, 99
+	additem ITEM_LEMONADE, 99
+	additem ITEM_MOOMOO_MILK, 99
+	additem ITEM_ENERGY_POWDER, 99
+	additem ITEM_ENERGY_ROOT, 99
+	additem ITEM_HEAL_POWDER, 99
+	additem ITEM_ORANGE_MAIL, 92
+	additem ITEM_RETRO_MAIL, 94
+	additem ITEM_POTION, 89
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_ULTRA_BALL, 99
+	additem ITEM_GREAT_BALL, 99
+	additem ITEM_POKE_BALL, 99
+	additem ITEM_NET_BALL, 99
+	additem ITEM_DIVE_BALL, 99
+	additem ITEM_NEST_BALL, 99
+	additem ITEM_REPEAT_BALL, 99
+	additem ITEM_TIMER_BALL, 99
+	additem ITEM_LUXURY_BALL, 99
+	additem ITEM_PREMIER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_MASTER_BALL, 99
+	additem ITEM_GREAT_BALL, 79
+	additem ITEM_ULTRA_BALL, 84
+	additem ITEM_POKE_BALL, 89
+	additem ITEM_MASTER_BALL, 74
+	additem ITEM_TM01, 99
+	additem ITEM_TM02, 99
+	additem ITEM_TM03, 99
+	additem ITEM_TM04, 99
+	additem ITEM_TM05, 99
+	additem ITEM_TM06, 99
+	additem ITEM_TM07, 99
+	additem ITEM_TM08, 99
+	additem ITEM_TM09, 99
+	additem ITEM_TM10, 99
+	additem ITEM_TM11, 99
+	additem ITEM_TM12, 99
+	additem ITEM_TM13, 99
+	additem ITEM_TM14, 99
+	additem ITEM_TM15, 99
+	additem ITEM_TM16, 99
+	additem ITEM_TM17, 99
+	additem ITEM_TM18, 99
+	additem ITEM_TM19, 99
+	additem ITEM_TM20, 99
+	additem ITEM_TM21, 99
+	additem ITEM_TM22, 99
+	additem ITEM_TM23, 99
+	additem ITEM_TM24, 99
+	additem ITEM_TM25, 99
+	additem ITEM_TM26, 99
+	additem ITEM_TM27, 99
+	additem ITEM_TM28, 99
+	additem ITEM_TM29, 99
+	additem ITEM_TM30, 99
+	additem ITEM_TM31, 99
+	additem ITEM_TM32, 99
+	additem ITEM_TM33, 99
+	additem ITEM_TM34, 99
+	additem ITEM_TM35, 99
+	additem ITEM_TM36, 99
+	additem ITEM_TM37, 99
+	additem ITEM_TM38, 99
+	additem ITEM_TM39, 99
+	additem ITEM_TM40, 99
+	additem ITEM_TM41, 99
+	additem ITEM_TM42, 99
+	additem ITEM_TM43, 99
+	additem ITEM_TM44, 99
+	additem ITEM_TM45, 99
+	additem ITEM_TM46, 99
+	additem ITEM_TM47, 99
+	additem ITEM_TM48, 99
+	additem ITEM_TM49, 99
+	additem ITEM_TM50, 99
+	additem ITEM_CHERI_BERRY, 200
+	additem ITEM_CHERI_BERRY, 200
+	additem ITEM_CHERI_BERRY, 200
+	additem ITEM_CHERI_BERRY, 200
+	additem ITEM_CHERI_BERRY, 199
+	additem ITEM_CHESTO_BERRY, 200
+	additem ITEM_CHESTO_BERRY, 200
+	additem ITEM_CHESTO_BERRY, 200
+	additem ITEM_CHESTO_BERRY, 200
+	additem ITEM_CHESTO_BERRY, 199
+	additem ITEM_PECHA_BERRY, 200
+	additem ITEM_PECHA_BERRY, 200
+	additem ITEM_PECHA_BERRY, 200
+	additem ITEM_PECHA_BERRY, 200
+	additem ITEM_PECHA_BERRY, 199
+	additem ITEM_RAWST_BERRY, 200
+	additem ITEM_RAWST_BERRY, 200
+	additem ITEM_RAWST_BERRY, 200
+	additem ITEM_RAWST_BERRY, 200
+	additem ITEM_RAWST_BERRY, 199
+	additem ITEM_ASPEAR_BERRY, 200
+	additem ITEM_ASPEAR_BERRY, 200
+	additem ITEM_ASPEAR_BERRY, 200
+	additem ITEM_ASPEAR_BERRY, 200
+	additem ITEM_ASPEAR_BERRY, 199
+	additem ITEM_LEPPA_BERRY, 200
+	additem ITEM_LEPPA_BERRY, 200
+	additem ITEM_LEPPA_BERRY, 200
+	additem ITEM_LEPPA_BERRY, 200
+	additem ITEM_LEPPA_BERRY, 199
+	additem ITEM_ORAN_BERRY, 200
+	additem ITEM_ORAN_BERRY, 200
+	additem ITEM_ORAN_BERRY, 200
+	additem ITEM_ORAN_BERRY, 200
+	additem ITEM_ORAN_BERRY, 199
+	additem ITEM_PERSIM_BERRY, 200
+	additem ITEM_PERSIM_BERRY, 200
+	additem ITEM_PERSIM_BERRY, 200
+	additem ITEM_PERSIM_BERRY, 200
+	additem ITEM_PERSIM_BERRY, 199
+	additem ITEM_LUM_BERRY, 200
+	additem ITEM_LUM_BERRY, 200
+	additem ITEM_LUM_BERRY, 200
+	additem ITEM_LUM_BERRY, 200
+	additem ITEM_LUM_BERRY, 199
+	additem ITEM_SITRUS_BERRY, 200
+	additem ITEM_SITRUS_BERRY, 200
+	additem ITEM_SITRUS_BERRY, 200
+	additem ITEM_SITRUS_BERRY, 200
+	additem ITEM_SITRUS_BERRY, 199
+	additem ITEM_FIGY_BERRY, 200
+	additem ITEM_FIGY_BERRY, 200
+	additem ITEM_FIGY_BERRY, 200
+	additem ITEM_FIGY_BERRY, 200
+	additem ITEM_FIGY_BERRY, 199
+	additem ITEM_WIKI_BERRY, 200
+	additem ITEM_WIKI_BERRY, 200
+	additem ITEM_WIKI_BERRY, 200
+	additem ITEM_WIKI_BERRY, 200
+	additem ITEM_WIKI_BERRY, 199
+	additem ITEM_MAGO_BERRY, 200
+	additem ITEM_MAGO_BERRY, 200
+	additem ITEM_MAGO_BERRY, 200
+	additem ITEM_MAGO_BERRY, 200
+	additem ITEM_MAGO_BERRY, 199
+	additem ITEM_AGUAV_BERRY, 200
+	additem ITEM_AGUAV_BERRY, 200
+	additem ITEM_AGUAV_BERRY, 200
+	additem ITEM_AGUAV_BERRY, 200
+	additem ITEM_AGUAV_BERRY, 199
+	additem ITEM_IAPAPA_BERRY, 200
+	additem ITEM_IAPAPA_BERRY, 200
+	additem ITEM_IAPAPA_BERRY, 200
+	additem ITEM_IAPAPA_BERRY, 200
+	additem ITEM_IAPAPA_BERRY, 199
+	additem ITEM_RAZZ_BERRY, 200
+	additem ITEM_RAZZ_BERRY, 200
+	additem ITEM_RAZZ_BERRY, 200
+	additem ITEM_RAZZ_BERRY, 200
+	additem ITEM_RAZZ_BERRY, 199
+	additem ITEM_BLUK_BERRY, 200
+	additem ITEM_BLUK_BERRY, 200
+	additem ITEM_BLUK_BERRY, 200
+	additem ITEM_BLUK_BERRY, 200
+	additem ITEM_BLUK_BERRY, 199
+	additem ITEM_NANAB_BERRY, 200
+	additem ITEM_NANAB_BERRY, 200
+	additem ITEM_NANAB_BERRY, 200
+	additem ITEM_NANAB_BERRY, 200
+	additem ITEM_NANAB_BERRY, 199
+	additem ITEM_WEPEAR_BERRY, 200
+	additem ITEM_WEPEAR_BERRY, 200
+	additem ITEM_WEPEAR_BERRY, 200
+	additem ITEM_WEPEAR_BERRY, 200
+	additem ITEM_WEPEAR_BERRY, 199
+	additem ITEM_PINAP_BERRY, 200
+	additem ITEM_PINAP_BERRY, 200
+	additem ITEM_PINAP_BERRY, 200
+	additem ITEM_PINAP_BERRY, 200
+	additem ITEM_PINAP_BERRY, 199
+	additem ITEM_POMEG_BERRY, 200
+	additem ITEM_POMEG_BERRY, 200
+	additem ITEM_POMEG_BERRY, 200
+	additem ITEM_POMEG_BERRY, 200
+	additem ITEM_POMEG_BERRY, 199
+	additem ITEM_KELPSY_BERRY, 200
+	additem ITEM_KELPSY_BERRY, 200
+	additem ITEM_KELPSY_BERRY, 200
+	additem ITEM_KELPSY_BERRY, 200
+	additem ITEM_KELPSY_BERRY, 199
+	additem ITEM_QUALOT_BERRY, 200
+	additem ITEM_QUALOT_BERRY, 200
+	additem ITEM_QUALOT_BERRY, 200
+	additem ITEM_QUALOT_BERRY, 200
+	additem ITEM_QUALOT_BERRY, 199
+	additem ITEM_HONDEW_BERRY, 200
+	additem ITEM_HONDEW_BERRY, 200
+	additem ITEM_HONDEW_BERRY, 200
+	additem ITEM_HONDEW_BERRY, 200
+	additem ITEM_HONDEW_BERRY, 199
+	additem ITEM_GREPA_BERRY, 200
+	additem ITEM_GREPA_BERRY, 200
+	additem ITEM_GREPA_BERRY, 200
+	additem ITEM_GREPA_BERRY, 200
+	additem ITEM_GREPA_BERRY, 199
+	additem ITEM_TAMATO_BERRY, 200
+	additem ITEM_TAMATO_BERRY, 200
+	additem ITEM_TAMATO_BERRY, 200
+	additem ITEM_TAMATO_BERRY, 200
+	additem ITEM_TAMATO_BERRY, 199
+	additem ITEM_CORNN_BERRY, 200
+	additem ITEM_CORNN_BERRY, 200
+	additem ITEM_CORNN_BERRY, 200
+	additem ITEM_CORNN_BERRY, 200
+	additem ITEM_CORNN_BERRY, 199
+	additem ITEM_MAGOST_BERRY, 999
+	additem ITEM_RABUTA_BERRY, 999
+	additem ITEM_NOMEL_BERRY, 999
+	additem ITEM_SPELON_BERRY, 999
+	additem ITEM_PAMTRE_BERRY, 999
+	additem ITEM_WATMEL_BERRY, 999
+	additem ITEM_DURIN_BERRY, 999
+	additem ITEM_BELUE_BERRY, 999
+	additem ITEM_LIECHI_BERRY, 999
+	additem ITEM_GANLON_BERRY, 999
+	additem ITEM_SALAC_BERRY, 999
+	additem ITEM_PETAYA_BERRY, 999
+	additem ITEM_APICOT_BERRY, 999
+	additem ITEM_LANSAT_BERRY, 999
+	additem ITEM_STARF_BERRY, 999
+	additem ITEM_ENIGMA_BERRY, 999
+	end
+
+DebugScript_081C221F:: @ 81C221F
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_DESK
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_SMALL_CHAIR
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_PLANT
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_RED_BRICK
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_JUMP_MAT
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_BALL_POSTER
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_DUSKULL_DOLL
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	adddecor DECOR_KISS_CUSHION
+	end
+
+DebugScript_081C23E2:: @ 81C23E2
+	givecoins 9999
+	end
+
+DebugScript_081C23E6:: @ 81C23E6
+	setflag 0x081
+	setflag 0x071
+	warp SootopolisCity, 0xFF, 31, 33
+	waitstate
+	end
+
+DebugScript_081C23F6:: @ 81C23F6
+	paymoney 999999, 0x00
+	end
+
+DebugScript_081C23FD:: @ 81C23FD
+	countpokemon
+	compare 0x800d, 1
+	jumpif 0x0001, DebugScript_081C2436
+	compare 0x800d, 2
+	jumpif 0x0001, 0x81C2445
+	compare 0x800d, 3
+	jumpif 0x0001, 0x81C2454
+	compare 0x800d, 4
+	jumpif 0x0001, 0x81C2463
+	compare 0x800d, 5
+	jumpif 0x0001, 0x81C2472
+	end
+
+DebugScript_081C2436:: @ 81C2436
+	givepokemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+	end
+
+DebugScript_081C2482:: @ 81C2482
+	countpokemon
+	compare 0x800d, 1
+	jumpif 0x0001, 0x81C24BB
+	compare 0x800d, 2
+	jumpif 0x0001, 0x81C24CA
+	compare 0x800d, 3
+	jumpif 0x0001, 0x81C24D9
+	compare 0x800d, 4
+	jumpif 0x0001, 0x81C24E8
+	compare 0x800d, 5
+	jumpif 0x0001, 0x81C24F7
+	end
+
+DebugScript_081C24BB:: @ 81C24BB
+	givepokemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+	givepokemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+	end
+
+DebugScript_081C2507:: @ 81C2507
+	countpokemon
+	compare 0x800d, 6
+	jumpif 0x0001, DebugScript_081C2517
+	giveegg SPECIES_BARBOACH
+	end
+
+DebugScript_081C2517:: @ 81C2517
+	end
+
+DebugScript_081C2518:: @ 81C2518
+	countpokemon
+	compare 0x800d, 6
+	jumpif 0x0001, DebugScript_081C2528
+	giveegg SPECIES_SHROOMISH
+	end
+
+DebugScript_081C2528:: @ 81C2528
+	end
+
+.endif
+
 	.include "data/scripts/berry_tree.inc"
 	.include "data/text/berry_tree.inc"
 
