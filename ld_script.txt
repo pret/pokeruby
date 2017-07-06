@@ -153,6 +153,7 @@ SECTIONS {
         asm/pokemon_summary_screen.o(.text_80A0958);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
+        src/kagaya_debug_menu.o(.text);
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         asm/item_menu.o(.text);
@@ -397,6 +398,7 @@ SECTIONS {
         data/pokemon_icon.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/fldeff_cut.o(.rodata);
+        src/kagaya_debug_menu.o(.rodata);
         data/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         data/item.o(.rodata);
