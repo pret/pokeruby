@@ -382,4 +382,6 @@ gUnknown_0842F788:: @ 842F788
 	.align 2
 gUnknown_0842F790:: @ 842F790
 	.4byte 0xFFFF0000, 70
+
+gUnknown_0842F798:: @ 842F798
 	.4byte 0xFFFF0000, 134

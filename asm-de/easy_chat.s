@@ -4212,7 +4212,7 @@ _080E812C:
 	mov r2, r8
 	strb r2, [r0]
 	adds r0, 0x1
-	ldr r1, _080E81A4 @ =0x083e7686
+	ldr r1, _080E81A4 @ =gBerryMasterWifePhrases+0x2
 	adds r4, r1
 	ldrh r1, [r4]
 	movs r2, 0
@@ -4246,7 +4246,7 @@ _080E818A:
 _080E8198: .4byte 0x0200b19a
 _080E819C: .4byte 0xffff5e66
 _080E81A0: .4byte gBerryMasterWifePhrases
-_080E81A4: .4byte 0x083e7686
+_080E81A4: .4byte gBerryMasterWifePhrases+0x2
 _080E81A8:
 	lsls r0, r4, 16
 	lsrs r5, r0, 16
