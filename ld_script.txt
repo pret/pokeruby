@@ -270,6 +270,7 @@ SECTIONS {
         src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
+        src/nakamura_debug_menu.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
         src/bard_music.o(.text);
@@ -474,6 +475,7 @@ SECTIONS {
         data/berry_tag_screen.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
+        src/nakamura_debug_menu.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);

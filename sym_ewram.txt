@@ -1024,6 +1024,8 @@ gSaveFailedClockInfo: @ 203933E
 gUnknown_02039350: @ 2039350
 	.space 0x8
 
+	.include "src/nakamura_debug_menu.o"
+
 gUnknown_02039358: @ 2039358
 	.space 0x2
 

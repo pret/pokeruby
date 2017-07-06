@@ -124,7 +124,9 @@ enum DecoId {
     /*117*/ DECOR_WAILMER_DOLL,
     /*118*/ DECOR_REGIROCK_DOLL,
     /*119*/ DECOR_REGICE_DOLL,
-    /*120*/ DECOR_REGISTEEL_DOLL
+    /*120*/ DECOR_REGISTEEL_DOLL,
+
+    DECOR_COUNT
 };
 
 enum DecorPerm {

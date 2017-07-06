@@ -163,6 +163,8 @@ gUnknown_030007B0: @ 30007B0
 gPcItemMenuOptionsNum: @ 30007B4
 	.space 0x4
 
+	.include "src/nakamura_debug_menu.o"
+
 gUnknown_030007B8: @ 30007B8
 	.space 0x770
 

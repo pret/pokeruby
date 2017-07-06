@@ -27,6 +27,8 @@ struct WildPokemonHeader
 extern struct WildPokemonHeader gWildMonHeaders[];
 
 void DisableWildEncounters(bool8 disabled);
+u16 FeebasRandom(void);
+void FeebasSeedRng(u16 seed);
 bool8 StandardWildEncounter(u16 a, u16 b);
 void RockSmashWildEncounter(void);
 bool8 SweetScentWildEncounter(void);
