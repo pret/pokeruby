@@ -773,13 +773,13 @@ gUnknown_020387E8: @ 20387E8
 gUnknown_020387EC: @ 20387EC
 	.space 0x4
 
-gUnknown_020387F0: @ 20387F0
+gRotatingGate_GateSpriteIds: @ 20387F0
 	.space 0x10
 
-gUnknown_02038800: @ 2038800
+gRotatingGate_PuzzleConfig: @ 2038800
 	.space 0x4
 
-gUnknown_02038804: @ 2038804
+gRotatingGate_PuzzleCount: @ 2038804
 	.space 0x4
 
 	.include "src/safari_zone.o"

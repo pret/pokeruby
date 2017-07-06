@@ -179,7 +179,7 @@ SECTIONS {
         src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
         src/field_special_scene.o(.text);
-        asm/rotating_gate.o(.text);
+        src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
         src/contest_link_80C857C.o(.text);
@@ -417,7 +417,7 @@ SECTIONS {
         data/fldeff_80C5CD4.o(.rodata);
         src/field_special_scene.o(.rodata);
         data/field_special_scene.o(.rodata);
-        data/rotating_gate.o(.rodata);
+        src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
         src/bike.o(.rodata);
