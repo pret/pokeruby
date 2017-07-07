@@ -374,7 +374,7 @@ SECTIONS {
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
-        data/task.o(.rodata);
+        src/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
