@@ -43,10 +43,14 @@ struct Struct201B000
     u8 unk259;
     u8 filler25A[6];
     u8 unk260;
-    u8 filler261[1];
+    u8 unk261;
     u8 unk262;
     s16 unk264;
     s16 unk266;
+    u8 filler268[10];
+    u16 unk272;
+    u8 filler274[14];
+    u16 unk282;
 };
 
 extern u8 ewram[];

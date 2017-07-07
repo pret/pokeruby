@@ -59,8 +59,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
 {
     char *inputFileExtension = GetFileExtension(inputPath);
     int bitDepth = inputFileExtension[0] - '0';
-    char *paletteFilePath;
-    bool hasPalette = false;
+    char *paletteFilePath = NULL;
     bool hasTransparency = false;
     int width = 1;
 
@@ -76,8 +75,6 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
             i++;
 
             paletteFilePath = argv[i];
-
-            hasPalette = true;
         }
         else if (strcmp(option, "-object") == 0)
         {
@@ -102,7 +99,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
         }
     }
 
-    ConvertGbaToPng(inputPath, outputPath, width, bitDepth, hasPalette ? paletteFilePath : NULL, hasTransparency);
+    ConvertGbaToPng(inputPath, outputPath, width, bitDepth, paletteFilePath, hasTransparency);
 }
 
 void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **argv)
