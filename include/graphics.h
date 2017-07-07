@@ -2435,4 +2435,10 @@ extern const u8 gMonFrontPic_UnownQuestionMark[];
 extern const u8 gMonBackPic_UnownQuestionMark[];
 extern const u8 gMonIcon_UnownQuestionMark[];
 
+// data/graphics.s
+extern const u8 gBagScreen_Gfx[];
+extern const u8 gBagScreenMale_Pal[];
+extern const u8 gBagScreenFemale_Pal[];
+extern const u16 gUnknown_08E77004[];
+
 #endif  // GUARD_GRAPHICS_H

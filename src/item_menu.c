@@ -1,4 +1,6 @@
 #include "global.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "item.h"
 #include "main.h"
 #include "menu.h"
@@ -16,12 +18,15 @@ struct UnknownStruct1
 {
     u8 unk0;
     u8 unk1;
+    u8 unk2;
+    u8 unk3;
 };
 
 extern s8 gUnknown_02038559;
 extern u8 gUnknown_0203855A;
 extern u8 gUnknown_0203855B;
 extern u8 gUnknown_0203855C;
+extern u8 gUnknown_03000700;
 extern u8 gUnknown_03000701;
 extern struct UnknownStruct1 gUnknown_03005D10[];
 extern struct ItemSlot *gUnknown_03005D24;
@@ -30,8 +35,12 @@ extern void gpu_pal_allocator_reset__manage_upper_four(void);
 extern void sub_80F9020(void);
 extern void sub_80F9988();
 
+extern const struct CompressedSpriteSheet gUnknown_083C1CC8;
+extern const struct CompressedSpriteSheet gUnknown_083C1CD0;
+extern const struct CompressedSpritePalette gUnknown_083C1CD8;
+
 void sub_80A34E8(void);
-u8 sub_80A3520(void);
+bool8 sub_80A3520(void);
 void sub_80A362C(void);
 void sub_80A3740(void);
 void sub_80A39B8(u16 *, u8);
@@ -116,7 +125,7 @@ bool8 sub_80A317C(void)
         gMain.state++;
         break;
     case 6:
-        if (sub_80A3520() == 0)
+        if (sub_80A3520() == FALSE)
             break;
         gMain.state++;
         break;
@@ -205,4 +214,126 @@ bool8 sub_80A317C(void)
         return TRUE;
     }
     return FALSE;
+}
+
+bool8 sub_80A34B4(void)
+{
+    do
+    {
+        if (sub_80A317C() == TRUE)
+        {
+            gUnknown_03000700 = 0;
+            ResetTasks();
+            return TRUE;
+        }
+    } while (sub_80F9344() != 1);
+    return FALSE;
+}
+
+void sub_80A34E8(void)
+{
+    sub_80F9368();
+    REG_BG2CNT = 0x0C06;
+    REG_BG1CNT = 0x0405;
+    REG_DISPCNT = 0x1740;
+    REG_BLDCNT = 0;
+}
+
+bool8 sub_80A3520(void)
+{
+    switch (ewram[0x1FFFF])
+    {
+    case 0:
+        LZDecompressVram(gBagScreen_Gfx, (void *)(VRAM + 0x4000));
+        ewram[0x1FFFF]++;
+        break;
+    case 1:
+        CpuCopy16(gUnknown_08E77004, gBGTilemapBuffers[2], 0x800);
+        ewram[0x1FFFF]++;
+        break;
+    case 2:
+        if (gSaveBlock2.playerGender == MALE || gUnknown_03000701 == 7)
+            LoadCompressedPalette(gBagScreenMale_Pal, 0, 64);
+        else
+            LoadCompressedPalette(gBagScreenFemale_Pal, 0, 64);
+        ewram[0x1FFFF]++;
+        break;
+    case 3:
+        if (gSaveBlock2.playerGender == MALE || gUnknown_03000701 == 7)
+            LoadCompressedObjectPic(&gUnknown_083C1CC8);
+        else
+            LoadCompressedObjectPic(&gUnknown_083C1CD0);
+        ewram[0x1FFFF]++;
+        break;
+    case 4:
+        LoadCompressedObjectPalette(&gUnknown_083C1CD8);
+        ewram[0x1FFFF] = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80A362C(void)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        u8 r3;
+
+        if (gUnknown_03000701 == 5)
+            r3 = gUnknown_03005D10[i].unk2 - 1;
+        else
+            r3 = gUnknown_03005D10[i].unk2;
+
+        if (gUnknown_03005D10[i].unk1 != 0)
+        {
+            if (gUnknown_03005D10[i].unk1 + gUnknown_03005D10[i].unk3 > r3)
+                gUnknown_03005D10[i].unk1 = r3 - gUnknown_03005D10[i].unk3;
+        }
+        else
+        {
+            if (gUnknown_03005D10[i].unk0 > r3)
+                gUnknown_03005D10[i].unk0 = r3;
+        }
+    }
+}
+
+void sub_80A3684(void)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        gUnknown_03005D10[i].unk0 = 0;
+        gUnknown_03005D10[i].unk1 = 0;
+        gUnknown_03005D10[i].unk2 = 0;
+        gUnknown_03005D10[i].unk3 = 0;
+    }
+    gUnknown_02038559 = 0;
+}
+
+void sub_80A36B8(u16 *a, u8 b, u8 c, u8 d, u8 e)
+{
+    u16 i;
+    u16 j;
+
+    for (i = c; i <= c + e; i++)
+    {
+        for (j = b; j <= b + d; j++)
+        {
+            u32 index = j + i * 32;
+
+            a[index] = 0;
+        }
+    }
+}
+
+void ClearBag(void)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+        ClearItemSlots(gBagPockets[i].itemSlots, gBagPockets[i].capacity);
+    sub_80A3684();
 }
