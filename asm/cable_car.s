@@ -6,6 +6,156 @@
 
 	.text
 
+.ifdef DEBUG
+	thumb_func_start debug_sub_8138C14
+debug_sub_8138C14:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._1
+	mov	r1, #0x1
+	strb	r1, [r0]
+	ldr	r0, ._1 + 4
+	bl	ScriptContext1_SetupScript
+	bl	CloseMenu
+	mov	r0, #0x1
+	pop	{r1}
+	bx	r1
+._2:
+	.align	2, 0
+._1:
+	.word	unk_203955C
+	.word	MauvilleCity_GameCorner_EventScript_1C407E
+.syntax unified
+	thumb_func_end debug_sub_8138C14
+
+	thumb_func_start debug_sub_8138C34
+debug_sub_8138C34:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._3
+	mov	r1, #0x1
+	strb	r1, [r0]
+	ldr	r0, ._3 + 4
+	bl	ScriptContext1_SetupScript
+	bl	CloseMenu
+	mov	r0, #0x1
+	pop	{r1}
+	bx	r1
+._4:
+	.align	2, 0
+._3:
+	.word	unk_203955C
+	.word	MauvilleCity_GameCorner_EventScript_1C40AC
+.syntax unified
+	thumb_func_end debug_sub_8138C34
+
+	thumb_func_start debug_sub_8138C54
+debug_sub_8138C54:
+.syntax divided
+	push	{r4, lr}
+	ldr	r4, ._10
+	ldrh	r0, [r4, #0x2e]
+	cmp	r0, #0x40
+	bne	._5	@cond_branch
+	mov	r0, #0x1
+	neg	r0, r0
+	bl	MoveMenuCursor
+._5:
+	ldrh	r0, [r4, #0x2e]
+	cmp	r0, #0x80
+	bne	._6	@cond_branch
+	mov	r0, #0x1
+	bl	MoveMenuCursor
+._6:
+	ldrh	r1, [r4, #0x2e]
+	cmp	r1, #0x1
+	beq	._7	@cond_branch
+	ldr	r0, ._10 + 4
+	cmp	r1, r0
+	bne	._8	@cond_branch
+	ldr	r1, ._10 + 8
+	mov	r0, #0x1
+	strh	r0, [r1]
+._7:
+	ldr	r4, ._10 + 12
+	bl	GetMenuCursorPos
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x15
+	add	r4, r4, #0x4
+	add	r0, r0, r4
+	ldr	r0, [r0]
+	bl	_call_via_r0
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	b	._13
+._11:
+	.align	2, 0
+._10:
+	.word	gMain
+	.word	0x101
+	.word	gSpecialVar_0x8004
+	.word	gUnkDebug4Menu
+._8:
+	cmp	r1, #0x2
+	beq	._12	@cond_branch
+	mov	r0, #0x0
+	b	._13
+._12:
+	bl	CloseMenu
+	mov	r0, #0x1
+._13:
+	pop	{r4}
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end debug_sub_8138C54
+
+	thumb_func_start debug_sub_8138CC4
+debug_sub_8138CC4:
+.syntax divided
+	push	{lr}
+	add	sp, sp, #0xfffffff8
+	ldr	r1, ._14
+	mov	r0, #0x0
+	strh	r0, [r1]
+	bl	MenuZeroFillScreen
+	mov	r0, #0x13
+	mov	r1, #0x0
+	mov	r2, #0x1d
+	mov	r3, #0xc
+	bl	MenuDrawTextWindow
+	ldr	r3, ._14 + 4
+	mov	r0, #0x14
+	mov	r1, #0x1
+	mov	r2, #0x5
+	bl	PrintMenuItems
+	mov	r0, #0x0
+	str	r0, [sp]
+	mov	r0, #0x8
+	str	r0, [sp, #0x4]
+	mov	r0, #0x0
+	mov	r1, #0x14
+	mov	r2, #0x1
+	mov	r3, #0x5
+	bl	InitMenu
+	ldr	r1, ._14 + 8
+	ldr	r0, ._14 + 12
+	str	r0, [r1]
+	mov	r0, #0x0
+	add	sp, sp, #0x8
+	pop	{r1}
+	bx	r1
+._15:
+	.align	2, 0
+._14:
+	.word	gSpecialVar_0x8004
+	.word	gUnkDebug4Menu
+	.word	gCallback_03004AE8
+	.word	debug_sub_8138C54+1
+.syntax unified
+	thumb_func_end debug_sub_8138CC4
+.endif
+
 	thumb_func_start sub_81231EC
 sub_81231EC: @ 81231EC
 	push {r4,lr}
@@ -51,6 +201,44 @@ sub_8123218: @ 8123218
 	.align 2, 0
 _08123240: .4byte sub_81231EC
 	thumb_func_end sub_8123218
+
+.ifdef DEBUG
+	thumb_func_start debug_sub_8138D74
+debug_sub_8138D74:
+.syntax divided
+	push	{lr}
+	ldr	r1, ._21
+	mov	r0, #0x0
+	strh	r0, [r1]
+	bl	CloseMenu
+	bl	sub_8123218
+	pop	{r0}
+	bx	r0
+._22:
+	.align	2, 0
+._21:
+	.word	gSpecialVar_0x8004
+.syntax unified
+	thumb_func_end debug_sub_8138D74
+
+	thumb_func_start debug_sub_8138D8C
+debug_sub_8138D8C:
+.syntax divided
+	push	{lr}
+	ldr	r1, ._23
+	mov	r0, #0x1
+	strh	r0, [r1]
+	bl	CloseMenu
+	bl	sub_8123218
+	pop	{r0}
+	bx	r0
+._24:
+	.align	2, 0
+._23:
+	.word	gSpecialVar_0x8004
+.syntax unified
+	thumb_func_end debug_sub_8138D8C
+.endif
 
 	thumb_func_start sub_8123244
 sub_8123244: @ 8123244

@@ -138,6 +138,9 @@ gUnknown_03000744: @ 3000744
 gUnknown_03000748: @ 3000748
 	.space 0x4
 
+	.include "src/mail.o"
+
+    .align 2
 gUnknown_0300074C: @ 300074C
 	.space 0x4
 
