@@ -1,10 +1,6 @@
 #ifndef GUARD_PLAYER_PC_H
 #define GUARD_PLAYER_PC_H
 
-// general task defines
-#define TASK gTasks[taskId]
-#define FUNC func
-
 // local task defines
 #define PAGE_INDEX data[0]
 #define ITEMS_ABOVE_TOP data[1]

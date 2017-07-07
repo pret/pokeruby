@@ -23,28 +23,6 @@
 #include "text.h"
 #include "util.h"
 
-#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
-#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
-#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
-#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
-#define EVO_TRADE            0x0005 // Pokémon is traded
-#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
-#define EVO_ITEM             0x0007 // specified item is used on Pokémon
-#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
-#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
-#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
-#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
-#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
-#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
-#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
-#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
-
-struct SpindaSpot
-{
-    u8 x, y;
-    u16 image[16];
-};
-
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 extern struct BattlePokemon gBattleMons[4];
@@ -70,7 +48,7 @@ extern u32 gTMHMLearnsets[][2];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
 extern const u16 gHMMoves[];
-extern s8 gUnknown_083F7E28[];
+extern s8 gPokeblockFlavorCompatibilityTable[];
 extern u8 gLastUsedAbility;
 extern const u8 BattleText_PreventedSwitch[];
 extern u16 gBattlePartyID[];
@@ -103,8 +81,8 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 bat
 
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 {
-    u8 *temp;
-    u8 *itemEffect;
+    const u8 *temp;
+    const u8 *itemEffect;
     u8 offset;
     int i;
     u8 j;
@@ -112,7 +90,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = 6;
 
-    temp = (u8 *) gItemEffectTable[itemId - 13];
+    temp = gItemEffectTable[itemId - 13];
 
     if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;
@@ -1238,13 +1216,13 @@ bool8 sub_8040A3C(u16 species)
 s8 sub_8040A54(struct Pokemon *mon, u8 a2)
 {
     u8 nature = GetNature(mon);
-    return gUnknown_083F7E28[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
 s8 sub_8040A7C(u32 personality, u8 a2)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gUnknown_083F7E28[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)
@@ -1296,15 +1274,15 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 
 void sub_8040B8C(void)
 {
-    gLastUsedAbility = BATTLE_STRUCT->filler1_2[0x37];
+    gLastUsedAbility = BATTLE_STRUCT->unk160C0;;
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 4;
-    gBattleTextBuff1[2] = BATTLE_STRUCT->filler1[0x34];
+    gBattleTextBuff1[2] = BATTLE_STRUCT->unk16054;
     gBattleTextBuff1[4] = EOS;
-    if (!GetBankSide(BATTLE_STRUCT->filler1[0x34]))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[BATTLE_STRUCT->filler1[0x34]]);
+    if (!GetBankSide(BATTLE_STRUCT->unk16054))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[BATTLE_STRUCT->unk16054]);
     else
-        gBattleTextBuff1[3] = gBattlePartyID[BATTLE_STRUCT->filler1[0x34]];
+        gBattleTextBuff1[3] = gBattlePartyID[BATTLE_STRUCT->unk16054];
     gBattleTextBuff2[0] = 0xFD;
     gBattleTextBuff2[1] = 4;
     gBattleTextBuff2[2] = gBankInMenu;

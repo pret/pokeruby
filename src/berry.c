@@ -5,6 +5,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
+#include "item_use.h"
 #include "items.h"
 #include "main.h"
 #include "rng.h"
@@ -974,7 +975,6 @@ const struct Berry gBerries[] =
 const struct BerryTree gBlankBerryTree = {0};
 
 extern u8 BerryTreeScript;
-extern u16 gScriptItemId;
 extern u16 gScriptLastTalked;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
