@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_USE_H
 #define GUARD_ITEM_USE_H
 
+extern u16 gScriptItemId;
+
 void ItemUseOnFieldCB_Bike(u8);
 void ItemUseOnFieldCB_Rod(u8);
 void ItemUseOnFieldCB_Itemfinder(u8);

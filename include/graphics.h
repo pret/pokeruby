@@ -2441,4 +2441,11 @@ extern const u8 gBagScreenMale_Pal[];
 extern const u8 gBagScreenFemale_Pal[];
 extern const u16 gUnknown_08E77004[];
 
+extern const u8 gMenuPokeblock_Gfx[];
+extern const u8 gMenuPokeblock_Tilemap[];
+extern const u8 gMenuPokeblock_Pal[];
+
+extern const u8 gMenuPokeblockDevice_Gfx[];
+extern const u8 gMenuPokeblockDevice_Pal[];
+
 #endif  // GUARD_GRAPHICS_H

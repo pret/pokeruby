@@ -1,7 +1,16 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+#define VAR_0x4001                 0x4001
+#define VAR_0x4002                 0x4002
 #define VAR_0x4003                 0x4003
+#define VAR_0x4004                 0x4004
+#define VAR_0x4005                 0x4005
+#define VAR_0x4006                 0x4006
+#define VAR_0x4007                 0x4007
+#define VAR_0x4008                 0x4008
+#define VAR_0x4009                 0x4009
+#define VAR_0x400A                 0x400A
 #define VAR_0x401F                 0x401F
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021

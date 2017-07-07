@@ -12,6 +12,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "item_use.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
@@ -33,7 +34,6 @@ extern u8 gBattleBufferA[][0x200];
 extern u8 gObjectBankIDs[];
 extern MainCallback gPreBattleCallback1;
 extern bool8 gDoingBattleAnim;
-extern u16 gScriptItemId;
 extern u16 gBattlePartyID[];
 extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;

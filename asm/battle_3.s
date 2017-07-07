@@ -8590,7 +8590,7 @@ _08019F7C:
 	beq _08019F92
 	adds r1, r0, 0
 	mov r0, r10
-	bl sub_81074C4
+	bl RecordAbilityBattle
 _08019F92:
 	mov r0, r9
 	add sp, 0x28
@@ -9185,7 +9185,7 @@ _0801A4A8:
 	str r3, [sp, 0xC]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_81074F8
+	bl RecordItemBattle
 	bl _0801AD5A
 	.align 2, 0
 _0801A4C4: .4byte gBattleMoveDamage
@@ -11475,7 +11475,7 @@ _0801B7C2:
 	adds r0, 0x20
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_81074C4
+	bl RecordAbilityBattle
 	ldr r1, _0801B804 @ =gSpecialStatuses
 	lsls r0, r5, 2
 	adds r0, r5

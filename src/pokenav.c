@@ -1,4 +1,5 @@
 #include "global.h"
+#include "main.h"
 #include "pokenav.h"
 #include "battle.h"
 #include "data2.h"

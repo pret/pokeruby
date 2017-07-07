@@ -122,6 +122,25 @@
 #define UNOWN_FORM_COUNT 28
 
 enum {
+    EGG_GROUP_NONE,
+    EGG_GROUP_MONSTER,
+    EGG_GROUP_WATER_1,
+    EGG_GROUP_BUG,
+    EGG_GROUP_FLYING,
+    EGG_GROUP_FIELD,
+    EGG_GROUP_FAIRY,
+    EGG_GROUP_GRASS,
+    EGG_GROUP_HUMAN_LIKE,
+    EGG_GROUP_WATER_3,
+    EGG_GROUP_MINERAL,
+    EGG_GROUP_AMORPHOUS,
+    EGG_GROUP_WATER_2,
+    EGG_GROUP_DITTO,
+    EGG_GROUP_DRAGON,
+    EGG_GROUP_UNDISCOVERED
+};
+
+enum {
     NATURE_HARDY,
     NATURE_LONELY,
     NATURE_BRAVE,
@@ -384,6 +403,55 @@ struct PokemonStorage
              u8 unkArray[14];
 };
 
+struct SpindaSpot
+{
+    u8 x, y;
+    u16 image[16];
+};
+
+struct __attribute__((packed)) LevelUpMove {
+    u16 move:9;
+    u16 level:7;
+};
+
+enum {
+    GROWTH_MEDIUM_FAST,
+    GROWTH_ERRATIC,
+    GROWTH_FLUCTUATING,
+    GROWTH_MEDIUM_SLOW,
+    GROWTH_FAST,
+    GROWTH_SLOW
+};
+
+enum {
+    BODY_COLOR_RED,
+    BODY_COLOR_BLUE,
+    BODY_COLOR_YELLOW,
+    BODY_COLOR_GREEN,
+    BODY_COLOR_BLACK,
+    BODY_COLOR_BROWN,
+    BODY_COLOR_PURPLE,
+    BODY_COLOR_GRAY,
+    BODY_COLOR_WHITE,
+    BODY_COLOR_PINK
+};
+
+#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
+#define EVO_TRADE            0x0005 // Pokémon is traded
+#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             0x0007 // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+
 struct Evolution
 {
     u16 method;
@@ -396,19 +464,13 @@ struct EvolutionData
     struct Evolution evolutions[5];
 };
 
-extern const u8 *const gItemEffectTable[];
-extern u8 gTrainerClassToPicIndex[];
-extern u8 gTrainerClassToNameIndex[];
-extern const u32 gExperienceTables[8][101];
-extern const struct BaseStats gBaseStats[];
-extern struct EvolutionData gEvolutionTable[];
-extern const u16 *gLevelUpLearnsets[];
-extern u8 gUnknown_08208238[];
-extern u8 gUnknown_0820823C[];
-extern u8 gStatStageRatios[][2];
-
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
+extern const u8 *const gItemEffectTable[];
+extern const struct BaseStats gBaseStats[];
+extern const u32 gExperienceTables[][101];
+extern const u16 *const gLevelUpLearnsets[];
+extern const struct EvolutionData gEvolutionTable[];
 extern struct PokemonStorage gPokemonStorage;
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
@@ -512,6 +574,7 @@ void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
+s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H
