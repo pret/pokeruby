@@ -108,29 +108,33 @@ static const u16 gCrc16Table[] =
     0xE70E, 0xF687, 0xC41C, 0xD595, 0xA12A, 0xB0A3, 0x8238, 0x93B1,
     0x6B46, 0x7ACF, 0x4854, 0x59DD, 0x2D62, 0x3CEB, 0x0E70, 0x1FF9,
     0xF78F, 0xE606, 0xD49D, 0xC514, 0xB1AB, 0xA022, 0x92B9, 0x8330,
-    0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,  
+    0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
 const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
 
 
-u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *)) {
+u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
+{
     u8 sprite = CreateSprite(&gInvisibleSpriteTemplate, 248, 168, 14);
     gSprites[sprite].invisible = TRUE;
     gSprites[sprite].callback = callback;
     return sprite;
 }
 
-void StoreWordInTwoHalfwords(u16 *h, u32 w) {
+void StoreWordInTwoHalfwords(u16 *h, u32 w)
+{
     h[0] = (u16)(w);
     h[1] = (u16)(w >> 16);
 }
 
-void LoadWordFromTwoHalfwords(u16 *h, u32 *w) {
+void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
+{
     *w = h[0] | (s16)h[1] << 16;
 }
 
-void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha) {
+void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
+{
     src->texX = texX;
     src->texY = texY;
     src->scrX = scrX;
@@ -140,15 +144,11 @@ void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX
     src->alpha = alpha;
 }
 
-void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha) {
+void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
+{
     struct BgAffineSrcData src;
-    SetBgAffineStruct(
-        &src,
-        texX, texY,
-        scrX, scrY,
-        sx, sy,
-        alpha
-    );
+
+    SetBgAffineStruct(&src, texX, texY, scrX, scrY, sx, sy, alpha);
     BgAffineSet(&src, dest, 1);
 }
 
@@ -156,24 +156,34 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
 
 // Functionally equivalent.
 // Only the two yflip loops don't match.
-void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output) {
+void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
+{
     u8 x, y;
     s8 i, j;
     u8 xflip[32];
     u8 h = gSpriteDimensions[shape][size][1];
     u8 w = gSpriteDimensions[shape][size][0];
-    for (y = 0; y < h; y++) {
+
+    for (y = 0; y < h; y++)
+    {
         int filler = 32 - w;
-        for (x = 0; x < w; x++) {
+
+        for (x = 0; x < w; x++)
+        {
             int tile = (*tilemap & 0x3ff) * 32;
             int attr = *tilemap & 0xc00;
-            if (attr == 0) {
+
+            if (attr == 0)
+            {
                 void *src = tiles + tile;
                 void *dest = output;
                 int length = 32;
                 DmaCopy32(3, src, dest, length);
-            } else if (attr == 0x800) { // yflip
-                for (i = 0; i < 8; i++) {
+            }
+            else if (attr == 0x800)  // yflip
+            {
+                for (i = 0; i < 8; i++)
+                {
                     void *src = tiles;
                     void *dest = output;
                     int length = 4;
@@ -182,22 +192,30 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output) {
                     dest += i * 4;
                     DmaCopy32(3, src, dest, length);
                 }
-            } else { // xflip
-                for (i = 0; i < 8; i++) {
-                    for (j = 0; j < 4; j++) {
+            }
+            else  // xflip
+            {
+                for (i = 0; i < 8; i++)
+                {
+                    for (j = 0; j < 4; j++)
+                    {
                         u8 i2 = i * 4;
                         xflip[i2 + (3-j)] = (tiles[tile + i2 + j] & 0xf) << 4;
                         xflip[i2 + (3-j)] |= tiles[tile + i2 + j] >> 4;
                     }
                 }
-                if (*tilemap & 0x800) { // yflip
-                    for (i = 0; i < 8; i++) {
+                if (*tilemap & 0x800)  // yflip
+                {
+                    for (i = 0; i < 8; i++)
+                    {
                         void *src = xflip + (7-i) * 4;
                         void *dest = output + i*4;
                         int length = 4;
                         DmaCopy32(3, src, dest, length);
                     }
-                } else {
+                }
+                else
+                {
                     void *src = xflip;
                     void *dest = output;
                     int length = 32;
@@ -213,7 +231,8 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output) {
 
 #else
 
-__attribute__((naked)) void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output) {
+__attribute__((naked)) void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
+{
     asm("\n"
     "    .syntax unified\n"
     "    push {r4-r7,lr}\n"
@@ -457,39 +476,47 @@ __attribute__((naked)) void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *t
 
 #endif
 
-int CountTrailingZeroBits(u32 value) {
+int CountTrailingZeroBits(u32 value)
+{
     u8 i;
-    for (i = 0; i < 32; i++) {
-        if ((value & 1) == 0) {
+
+    for (i = 0; i < 32; i++)
+    {
+        if ((value & 1) == 0)
             value >>= 1;
-        } else {
+        else
             return i;
-        }
     }
     return 0;
 }
 
-u16 CalcCRC16(u8 *data, int length) {
+u16 CalcCRC16(u8 *data, int length)
+{
     u16 i, j;
     u16 crc = 0x1121;
-    for (i = 0; i < length; i++) {
+
+    for (i = 0; i < length; i++)
+    {
         crc ^= data[i];
-        for (j = 0; j < 8; j++) {
-            if (crc & 1) {
+        for (j = 0; j < 8; j++)
+        {
+            if (crc & 1)
                 crc = (crc >> 1) ^ 0x8408;
-            } else {
+            else
                 crc >>= 1;
-            }
         }
     }
     return ~crc;
 }
 
-u16 CalcCRC16WithTable(u8 *data, int length) {
+u16 CalcCRC16WithTable(u8 *data, int length)
+{
     u16 i;
     u16 crc = 0x1121;
     u8 byte;
-    for (i = 0; i < length; i++) {
+
+    for (i = 0; i < length; i++)
+    {
         byte = crc >> 8;
         crc ^= data[i];
         crc = byte ^ gCrc16Table[(u8)crc];
