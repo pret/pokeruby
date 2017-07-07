@@ -338,7 +338,7 @@ SECTIONS {
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
-        data/util.o(.rodata);
+        src/util.o(.rodata);
         data/daycare.o(.rodata);
         data/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
