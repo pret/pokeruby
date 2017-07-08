@@ -66,7 +66,11 @@ RomHeaderChecksum:
 	.byte 0x41 - REVISION
 	.endif
 	.else
+	.ifdef SAPPHIRE
+	.byte 0x56
+	.else
 	.byte 0x42
+	.endif
 	.endif
 
 RomHeaderReserved2:
