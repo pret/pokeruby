@@ -935,36 +935,36 @@ weirdCase:
 
 static void ItemStorage_PrintItemPcResponse(u16 itemId)
 {
-    u8 *string;
+    const u8 *string;
 
     switch(itemId)
     {
         case ITEMPC_GO_BACK_TO_PREV:
-            string = (u8 *)gMenuText_GoBackToPrev;
+            string = gMenuText_GoBackToPrev;
             break;
         case ITEMPC_HOW_MANY_TO_WITHDRAW:
-            string = (u8 *)gOtherText_HowManyToWithdraw;
+            string = gOtherText_HowManyToWithdraw;
             break;
         case ITEMPC_WITHDREW_THING:
-            string = (u8 *)gOtherText_WithdrewThing;
+            string = gOtherText_WithdrewThing;
             break;
         case ITEMPC_HOW_MANY_TO_TOSS:
-            string = (u8 *)gOtherText_HowManyToToss;
+            string = gOtherText_HowManyToToss;
             break;
         case ITEMPC_THREW_AWAY_ITEM:
-            string = (u8 *)gOtherText_ThrewAwayItem;
+            string = gOtherText_ThrewAwayItem;
             break;
         case ITEMPC_NO_MORE_ROOM:
-            string = (u8 *)gOtherText_NoMoreRoom;
+            string = gOtherText_NoMoreRoom;
             break;
         case ITEMPC_TOO_IMPORTANT:
-            string = (u8 *)gOtherText_TooImportant;
+            string = gOtherText_TooImportant;
             break;
         case ITEMPC_OKAY_TO_THROW_AWAY:
-            string = (u8 *)gOtherText_OkayToThrowAwayPrompt;
+            string = gOtherText_OkayToThrowAwayPrompt;
             break;
         case ITEMPC_SWITCH_WHICH_ITEM:
-            string = (u8 *)gOtherText_SwitchWhichItem;
+            string = gOtherText_SwitchWhichItem;
             break;
         default:
             string = ItemId_GetDescription(itemId);
