@@ -3,28 +3,6 @@
 
 	.section .rodata
 
-@ pointer to items, capacity
-	.align 2
-gBagPockets:: @ 83C1618
-	.4byte gSaveBlock1 + 0x560, 20 @ Items
-	.4byte gSaveBlock1 + 0x600, 16 @ Poké Balls
-	.4byte gSaveBlock1 + 0x640, 64 @ TMs & HMs
-	.4byte gSaveBlock1 + 0x740, 46 @ Berries
-	.4byte gSaveBlock1 + 0x5B0, 20 @ Key Items
-
-	.align 2
-gUnknown_083C1640:: @ 83C1640
-	.4byte OtherText_Use, sub_80A5B78
-	.4byte OtherText_Toss, sub_80A5F14
-	.4byte gOtherText_CancelNoTerminator, sub_80A5F80
-	.4byte OtherText_Register, sub_80A5FAC
-	.4byte OtherText_Use, ItemMenu_UseInBattle
-	.4byte gOtherText_CancelNoTerminator, sub_80A7124
-	.4byte OtherText_Give2, ItemMenu_Give
-	.4byte OtherText_CheckTag, sub_80A6178
-	.4byte gOtherText_CancelWithTerminator, 0x0
-	.4byte OtherText_Confirm, sub_80A69E0
-
 @ 6-byte entries; format of entry is unknown
 gUnknown_083C1690:: @ 83C1690
 	.byte 0, 1, 6, 2, 0, 0

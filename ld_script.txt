@@ -397,6 +397,8 @@ SECTIONS {
         data/pokemon_icon.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/fldeff_cut.o(.rodata);
+        src/item_menu.o(.data);  /* HACK: gBagPockets must not be declared const for item.c to match. */
+        src/item_menu.o(.rodata);
         data/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         data/item.o(.rodata);

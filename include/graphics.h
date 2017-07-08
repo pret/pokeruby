@@ -2440,12 +2440,16 @@ extern const u8 gBagScreen_Gfx[];
 extern const u8 gBagScreenMale_Pal[];
 extern const u8 gBagScreenFemale_Pal[];
 extern const u16 gUnknown_08E77004[];
-
+extern const u8 gBuyMenuFrame_Gfx[];
+extern const u8 gMenuMoneyPal[];
+extern const u8 gBuyMenuFrame_Tilemap[];
+extern const u8 gMenuMoneyGfx[];
 extern const u8 gMenuPokeblock_Gfx[];
-extern const u8 gMenuPokeblock_Tilemap[];
 extern const u8 gMenuPokeblock_Pal[];
-
 extern const u8 gMenuPokeblockDevice_Gfx[];
 extern const u8 gMenuPokeblockDevice_Pal[];
+extern const u8 gMenuPokeblock_Tilemap[];
+
+extern const u8 gUnknown_08E96EC8[];
 
 #endif  // GUARD_GRAPHICS_H
