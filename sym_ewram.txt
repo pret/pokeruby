@@ -506,6 +506,7 @@ gUnknown_0202FF58: @ 202FF58
 	.space 0x4
 
 	.include "src/battle_setup.o"
+	.include "src/taya_debug_window.o"
 	.include "src/wild_encounter.o"
 
 gUnknown_0202FF84: @ 202FF84

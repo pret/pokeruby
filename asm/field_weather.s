@@ -2095,6 +2095,148 @@ _0807DE70: .4byte gUnknown_030006DC
 _0807DE74: .4byte gUnknown_083970C8
 	thumb_func_end sub_807DE68
 
+.ifdef DEBUG
+
+	thumb_func_start debug_sub_8085564
+debug_sub_8085564:
+.syntax divided
+	push	{lr}
+	mov	r2, #0x0
+	ldr	r0, ._375
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._370	@cond_branch
+	ldr	r1, ._375 + 4
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0xf
+	bne	._371	@cond_branch
+	strb	r2, [r1]
+._371:
+	mov	r2, #0x1
+._370:
+	ldr	r0, ._375
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._372	@cond_branch
+	ldr	r1, ._375 + 4
+	ldrb	r0, [r1]
+	cmp	r0, #0
+	beq	._373	@cond_branch
+	sub	r0, r0, #0x1
+	b	._374
+._376:
+	.align	2, 0
+._375:
+	.word	gMain
+	.word	gUnknown_0202FF58+0x2
+._373:
+	mov	r0, #0xe
+._374:
+	strb	r0, [r1]
+	mov	r2, #0x1
+._372:
+	cmp	r2, #0
+	beq	._377	@cond_branch
+	mov	r0, #0x16
+	mov	r1, #0x1
+	mov	r2, #0x1c
+	mov	r3, #0x2
+	bl	MenuFillWindowRectWithBlankTile
+	ldr	r1, ._380
+	ldr	r0, ._380 + 4
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	r1, #0x17
+	mov	r2, #0x1
+	bl	MenuPrint
+._377:
+	ldr	r0, ._380 + 8
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._378	@cond_branch
+	mov	r0, #0x0
+	b	._379
+._381:
+	.align	2, 0
+._380:
+	.word	gDebugText_Weather
+	.word	gUnknown_0202FF58+0x2
+	.word	gMain
+._378:
+	ldr	r0, ._382
+	ldrb	r0, [r0]
+	bl	DoWeatherEffect
+	bl	CloseMenu
+	mov	r0, #0x1
+._379:
+	pop	{r1}
+	bx	r1
+._383:
+	.align	2, 0
+._382:
+	.word	gUnknown_0202FF58+0x2
+.syntax unified
+	thumb_func_end debug_sub_8085564
+
+	thumb_func_start debug_sub_808560C
+debug_sub_808560C:
+.syntax divided
+	push	{r4, lr}
+	ldr	r4, ._384
+	ldr	r0, ._384 + 4
+	mov	r1, #0xda
+	lsl	r1, r1, #0x3
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	strb	r0, [r4]
+	bl	MenuZeroFillScreen
+	mov	r0, #0x16
+	mov	r1, #0x1
+	mov	r2, #0x1c
+	mov	r3, #0x2
+	bl	MenuFillWindowRectWithBlankTile
+	ldr	r1, ._384 + 8
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	r1, #0x17
+	mov	r2, #0x1
+	bl	MenuPrint
+	ldr	r1, ._384 + 12
+	ldr	r0, ._384 + 16
+	str	r0, [r1]
+	mov	r0, #0x0
+	pop	{r4}
+	pop	{r1}
+	bx	r1
+._385:
+	.align	2, 0
+._384:
+	.word	gUnknown_0202FF58+0x2
+	.word	gUnknown_0202F7E8
+	.word	gDebugText_Weather
+	.word	gCallback_03004AE8
+	.word	debug_sub_8085564+1
+.syntax unified
+	thumb_func_end debug_sub_808560C
+
+.endif
+
 	thumb_func_start sub_807DE78
 sub_807DE78: @ 807DE78
 	push {lr}
