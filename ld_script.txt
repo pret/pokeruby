@@ -471,7 +471,7 @@ SECTIONS {
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
-        data/berry_tag_screen.o(.rodata);
+        src/berry_tag_screen.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
