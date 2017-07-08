@@ -133,6 +133,7 @@ SECTIONS {
         asm/cable_club.o(.text);
         src/cable_club.o(.text);
         asm/cable_club.o(.text_80830E4);
+        src/tomomichi_debug_menu.o(.text);
         src/mori_debug_menu.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
@@ -383,6 +384,7 @@ SECTIONS {
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
+        data/debug_menu_tomomichi.o(.rodata);
         data/mori_debug_menu.o(.rodata);
         data/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
