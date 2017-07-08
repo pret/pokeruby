@@ -243,6 +243,8 @@ gUnknown_03005D24: @ 3005D24
 gUnknown_03005D28: @ 3005D28
 	.space 0x4
 
+	.include "watanabe_debug_menu.o"
+
 gUnknown_03005D2C: @ 3005D2C
 	.space 0x4
 

@@ -10,6 +10,12 @@ gUnknown_083B600C:: @ 83B600C
 	.4byte PCText_MovePoke, PCText_OrganizeBoxesParty
 	.4byte PCText_SeeYa, PCText_ReturnToPrevMenu
 
+.ifdef DEBUG
+gUnknown_Debug_083E05F0:: @ 0x83E05F0
+	.2byte 0
+	.2byte 0
+.endif
+
 	.align 2
 gSpriteAnim_83B602C:: @ 83B602C
 	obj_image_anim_frame 0, 5
@@ -750,6 +756,11 @@ gSpriteTemplate_83BBC70:: @ 83BBC70
 gSpriteTemplate_83BBC88:: @ 83BBC88
 	spr_template 1, 56006, gOamData_83BBC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_809CB74
 
+.ifdef DEBUG
+gUnknown_Debug_0x83E6268:: @ 0x83E6268
+	.string "セットする$"
+.endif
+
 	.align 2
 gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_Cancel2
@@ -784,3 +795,6 @@ gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_PokeCenter
 	.4byte PCText_Machine
 	.4byte PCText_Plain
+.ifdef DEBUG
+	.4byte gUnknown_Debug_0x83E6268
+.endif

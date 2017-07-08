@@ -167,6 +167,7 @@ SECTIONS {
         src/shop.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
+        src/watanabe_debug_menu.o(.text);
         src/script_menu.o(.text);
         src/naming_screen.o(.text);
         src/money.o(.text);
@@ -412,6 +413,7 @@ SECTIONS {
         data/contest.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
+        data/debug_menu_watanabe.o(.rodata);
         src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);

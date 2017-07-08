@@ -732,6 +732,8 @@ gUnknown_02038730: @ 2038730
 gUnknown_02038731: @ 2038731
 	.space 0x3
 
+	.include "src/watanabe_debug_menu.o"
+
 gUnknown_02038734: @ 2038734
 	.space 0x4
 
