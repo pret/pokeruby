@@ -976,7 +976,7 @@ const u8 gBirchText_Girl[] = _("MÄDEL");
 const u8 gBirchText_NewName[] = _("NEUER NAME");
 
 #ifdef SAPPHIRE
-const u8 gDefaultBoyName1[] = _("SEAN");
+const u8 gDefaultBoyName1[] = _("SEBOLD");
 #else
 const u8 gDefaultBoyName1[] = _("ROLAND");
 #endif
@@ -985,7 +985,7 @@ const u8 gDefaultBoyName3[] = _("HELGE");
 const u8 gDefaultBoyName4[] = _("JAN");
 
 #ifdef SAPPHIRE
-const u8 gDefaultGirlName1[] = _("MARINA");
+const u8 gDefaultGirlName1[] = _("MARTINA");
 #else
 const u8 gDefaultGirlName1[] = _("PETRA");
 #endif
