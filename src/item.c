@@ -1,20 +1,22 @@
 #include "global.h"
+#include "hold_effects.h"
 #include "item.h"
 #include "items.h"
+#include "item_use.h"
 #include "berry.h"
 #include "string_util.h"
 #include "strings.h"
 
 extern u8 gUnknown_02038560;
-extern struct Item gItems[];
 
-struct BagPocket
+enum
 {
-    struct ItemSlot *itemSlots;
-    u8 capacity;
+    POCKET_ITEMS = 1,
+    POCKET_POKE_BALLS,
+    POCKET_TM_HM,
+    POCKET_BERRIES,
+    POCKET_KEY_ITEMS,
 };
-
-extern struct BagPocket gBagPockets[5];
 
 enum
 {
@@ -24,6 +26,22 @@ enum
     BERRIES_POCKET,
     KEYITEMS_POCKET
 };
+
+#if ENGLISH
+#include "data/item_descriptions_en.h"
+#include "data/items_en.h"
+#elif GERMAN
+#include "data/item_descriptions_de.h"
+#include "data/items_de.h"
+#endif
+
+struct BagPocket
+{
+    struct ItemSlot *itemSlots;
+    u8 capacity;
+};
+
+extern struct BagPocket gBagPockets[5];
 
 static void CompactPCItems(void);
 
@@ -410,7 +428,7 @@ static u16 SanitizeItemId(u16 itemId)
         return itemId;
 }
 
-struct Item *ItemId_GetItem(u16 itemId)
+const struct Item *ItemId_GetItem(u16 itemId)
 {
     return &gItems[SanitizeItemId(itemId)];
 }
@@ -435,7 +453,7 @@ u8 ItemId_GetHoldEffectParam(u16 itemId)
     return gItems[SanitizeItemId(itemId)].holdEffectParam;
 }
 
-u8 *ItemId_GetDescription(u16 itemId)
+const u8 *ItemId_GetDescription(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].description;
 }
@@ -443,7 +461,7 @@ u8 *ItemId_GetDescription(u16 itemId)
 bool8 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
 {
     u32 r5 = c + 1;
-    u8 *description = gItems[SanitizeItemId(itemId)].description;
+    const u8 *description = gItems[SanitizeItemId(itemId)].description;
     u8 *str = a;
 
     for (;;)
