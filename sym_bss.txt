@@ -93,6 +93,7 @@ gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
 	.include "src/tomomichi_debug_menu.o"
+	.include "src/nohara_debug_menu.o"
 	.include "src/field_effect.o"
 	.include "src/trainer_card.o"
 
