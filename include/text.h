@@ -9,8 +9,9 @@
 #define CHAR_ELLIPSIS       0xB0
 #define CHAR_MALE           0xB5
 #define CHAR_FEMALE         0xB6
-#define CHAR_COMMA          0xB8
 #define CHAR_CURRENCY       0xB7
+#define CHAR_COMMA          0xB8
+#define CHAR_MULT_SIGN      0xB9
 #define CHAR_SLASH          0xBA
 #define CHAR_A              0xBB
 #define CHAR_B              0xBC

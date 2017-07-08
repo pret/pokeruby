@@ -1,4 +1,5 @@
 #include "global.h"
+#include "data2.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "item.h"
@@ -6,10 +7,14 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "rom4.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "strings.h"
 #include "strings2.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
@@ -24,8 +29,9 @@ struct UnknownStruct1
     u8 unk3;
 };
 
+extern u8 gUnknown_02038540[];
 extern u8 gUnknown_02038558;
-extern s8 gUnknown_02038559;
+extern s8 gUnknown_02038559;  // selected pocket
 extern u8 gUnknown_0203855A;
 extern u8 gUnknown_0203855B;
 extern u8 gUnknown_0203855C;
@@ -35,7 +41,7 @@ extern u8 gUnknown_03000700;
 extern u8 gUnknown_03000701;
 extern const u8 *gUnknown_03000704;
 extern struct UnknownStruct1 gUnknown_03005D10[];
-extern struct ItemSlot *gUnknown_03005D24;
+extern struct ItemSlot *gUnknown_03005D24;  // selected pocket item slots
 extern bool8 gLinkOpen;
 
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
@@ -101,10 +107,11 @@ void sub_80A396C(u16 *, u8, u8, u8);
 void sub_80A39B8(u16 *, u8);
 void sub_80A39E4(u16 *, u8, u8, s8);
 void sub_80A3AC0(u16 *, u8);
-void sub_80A3C34(struct ItemSlot *, u32);
+void SortItemSlots(struct BagPocket);
 void sub_80A3D08(void);
 void sub_80A3D24(u8);
 void sub_80A3D40(void);
+void sub_80A40D0(void);
 void sub_80A48E8();
 void ItemListMenu_InitDescription();
 void ItemListMenu_ChangeDescription();
@@ -113,8 +120,10 @@ void sub_80A50C8(u8);
 void ItemListMenu_InitMenu(void);
 void sub_80A740C(void);
 void sub_80A751C(void);
+void sub_80A7528();
 void sub_80A7590(void);
 void sub_80A7630(void);
+void sub_80A763C(void);
 void sub_80A76A0(void);
 void sub_80A770C(void);
 void sub_80A7828(void);
@@ -227,9 +236,8 @@ bool8 sub_80A317C(void)
         sub_80A39B8(gBGTilemapBuffers[2], gUnknown_02038559 + 1);
         sub_80A3AC0(gBGTilemapBuffers[2], gUnknown_02038559);
         sub_80A3D08();
-        // What is this?
-        sub_80A3C34(gBagPockets[2].itemSlots, *(u32 *)&gBagPockets[2].capacity);
-        sub_80A3C34(gBagPockets[3].itemSlots, *(u32 *)&gBagPockets[3].capacity);
+        SortItemSlots(gBagPockets[2]);
+        SortItemSlots(gBagPockets[3]);
         sub_80A3D40();
         gUnknown_03005D24 = gBagPockets[gUnknown_02038559].itemSlots;
         sub_80A362C();
@@ -405,7 +413,7 @@ extern const u16 gUnknown_083C1704[];
 void sub_80A3740(void)
 {
     u16 arr[2];
-    
+
     // TODO: This is a local array
     memcpy(arr, gUnknown_083C1704, 4);
     LoadPalette(&arr[1], 0xD1, sizeof(arr[1]));
@@ -436,7 +444,7 @@ void sub_80A37C0(u8 taskId)
 void sub_80A37F8(u8 taskId)
 {
     u8 r5 = gUnknown_0203855A;
-    
+
     if (r5 < 16)
     {
         gUnknown_0203855A++;
@@ -447,11 +455,11 @@ void sub_80A37F8(u8 taskId)
         gUnknown_02038558 = 0;
         return;
     }
-    
+
     if (gLinkOpen == TRUE)
     {
         u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
-        
+
         ItemListMenu_ChangeDescription((s16)gUnknown_03005D24[val].itemId, gUnknown_02038562);
         gUnknown_02038562++;
     }
@@ -460,7 +468,7 @@ void sub_80A37F8(u8 taskId)
         while (gUnknown_02038562 < 3)
         {
             u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
-        
+
             ItemListMenu_ChangeDescription((s16)gUnknown_03005D24[val].itemId, gUnknown_02038562);
             gUnknown_02038562++;
         }
@@ -486,7 +494,7 @@ void sub_80A396C(u16 *a, u8 b, u8 c, u8 d)
 {
     u16 *dst = a + 14 + (b + 2) * 32;
     u16 i;
-    
+
     while (c > b++)
     {
         for (i = 0; i < 15; i++)
@@ -498,7 +506,7 @@ void sub_80A396C(u16 *a, u8 b, u8 c, u8 d)
 void sub_80A39B8(u16 *a, u8 b)
 {
     u8 var = b * 2;
-    
+
     sub_809D104(a, 4, 10, gUnknown_08E96EC8, 0, var, 8, 2);
 }
 
@@ -506,13 +514,13 @@ void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
 {
     u16 r2 = b * 2;
     u16 r7;
-    
+
     if (d == -1)
     {
         r7 = (b + 1) * 2;
         if (b == 5)
             r7 = 2;
-        
+
         sub_809D104(a, 4, 10, gUnknown_08E96EC8, 8 - c, r2, c, 2);
         sub_809D104(a, c + 4, 10, gUnknown_08E96EC8, 0, r7, 8 - c, 2);
     }
@@ -521,7 +529,7 @@ void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
         r7 = (b - 1) * 2;
         if (b == 1)
             r7 = 10;
-        
+
         sub_809D104(a, 4, 10, gUnknown_08E96EC8, c, r7, 8 - c, 2);
         sub_809D104(a, 12 - c, 10, gUnknown_08E96EC8, 0, r2, c, 2);
     }
@@ -530,7 +538,7 @@ void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
 void sub_80A3AC0(u16 *a, u8 b)
 {
     u8 i;
-    
+
     for (i = 0; i < 5; i++)
     {
         if (i == b)
@@ -543,7 +551,7 @@ void sub_80A3AC0(u16 *a, u8 b)
 void sub_80A3B04(u16 *a, s8 b)
 {
     u8 taskId;
-    
+
     gUnknown_02038559 += b;
     if (gUnknown_02038559 >= NUM_BAG_POCKETS)
         gUnknown_02038559 = 0;
@@ -565,10 +573,443 @@ void sub_80A3B04(u16 *a, s8 b)
     gTasks[taskId].data[5] = b;
 }
 
-void swap32(struct ItemSlot *a, struct ItemSlot *b)
+static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 {
     struct ItemSlot temp = *a;
-    
+
     *a = *b;
     *b = temp;
 }
+
+void RemoveEmptyItemSlots(struct BagPocket pocket)
+{
+    u16 i;
+    u16 j;
+
+    for (i = 0; i < pocket.capacity - 1; i++)
+    {
+        for (j = i + 1; j < pocket.capacity; j++)
+        {
+            if (pocket.itemSlots[i].quantity == 0)
+                SwapItemSlots(&pocket.itemSlots[i], &pocket.itemSlots[j]);
+        }
+    }
+}
+
+void SortItemSlots(struct BagPocket pocket)
+{
+    u16 i;
+    u16 j;
+
+    for (i = 0; i < pocket.capacity; i++)
+    {
+        for (j = i + 1; j < pocket.capacity; j++)
+        {
+            if (pocket.itemSlots[i].quantity != 0 && pocket.itemSlots[j].quantity != 0
+             && pocket.itemSlots[i].itemId > pocket.itemSlots[j].itemId)
+                SwapItemSlots(&pocket.itemSlots[i], &pocket.itemSlots[j]);
+        }
+    }
+}
+
+void sub_80A3CA8(u8 pocketNum)
+{
+    u16 i;
+
+    gUnknown_03005D10[pocketNum].unk2 = 0;
+    for (i = 0; i < gBagPockets[pocketNum].capacity; i++)
+    {
+        if (gBagPockets[pocketNum].itemSlots[i].quantity != 0)
+            gUnknown_03005D10[pocketNum].unk2++;
+    }
+    RemoveEmptyItemSlots(gBagPockets[pocketNum]);
+}
+
+void sub_80A3D08(void)
+{
+    u8 i;
+
+    for (i = 0; i < NUM_BAG_POCKETS; i++)
+        sub_80A3CA8(i);
+}
+
+void sub_80A3D24(u8 pocketNum)
+{
+    if (gUnknown_03005D10[pocketNum].unk2 >= 7)
+        gUnknown_03005D10[pocketNum].unk3 = 7;
+    else
+        gUnknown_03005D10[pocketNum].unk3 = gUnknown_03005D10[pocketNum].unk2;
+}
+
+void sub_80A3D40(void)
+{
+    u8 i;
+
+    for (i = 0; i < NUM_BAG_POCKETS; i++)
+        sub_80A3D24(i);
+}
+
+void sub_80A3D5C(u8 taskId)
+{
+    u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
+
+    gUnknown_03005D24[val].quantity -= gTasks[taskId].data[1];
+    if (gUnknown_03005D24[val].quantity == 0)
+    {
+        if (gSaveBlock1.registeredItem == gUnknown_03005D24[val].itemId)
+        {
+            sub_80A40D0();
+            gSaveBlock1.registeredItem = 0;
+        }
+        gUnknown_03005D24[val].itemId = 0;
+        if (gUnknown_03005D10[gUnknown_02038559].unk1 + 7 == gUnknown_03005D10[gUnknown_02038559].unk2
+         && gUnknown_03005D10[gUnknown_02038559].unk1 != 0)
+            gUnknown_03005D10[gUnknown_02038559].unk1--;
+        sub_80A3CA8(gUnknown_02038559);
+    }
+    sub_80A3D24(gUnknown_02038559);
+}
+
+void sub_80A3E0C(void)
+{
+    u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
+
+    if (gUnknown_03005D24[val].quantity == 0)
+    {
+        gUnknown_03005D24[val].itemId = 0;
+        if (gUnknown_03005D10[gUnknown_02038559].unk1 + 7 == gUnknown_03005D10[gUnknown_02038559].unk2
+         && gUnknown_03005D10[gUnknown_02038559].unk1 != 0)
+            gUnknown_03005D10[gUnknown_02038559].unk1--;
+        sub_80A3CA8(gUnknown_02038559);
+    }
+    sub_80A3D24(gUnknown_02038559);
+}
+
+void nullsub_16(void)
+{
+}
+
+void sub_80A3E70(u8 a, u8 b)
+{
+    struct ItemSlot temp = gUnknown_03005D24[a];
+
+    gUnknown_03005D24[a] = gUnknown_03005D24[b];
+    gUnknown_03005D24[b] = temp;
+}
+
+void sub_80A3E90(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    nullsub_16();
+    sub_80A3E70(
+      gTasks[taskId].data[10] - 1,
+      gUnknown_03005D10[gUnknown_02038559].unk0 + gUnknown_03005D10[gUnknown_02038559].unk1);
+    gTasks[taskId].data[10] = 0;
+    sub_80A763C();
+    sub_80A7528(0);
+    ItemListMenu_InitMenu();
+}
+
+void sub_80A3EF4(u8 taskId)
+{
+    u8 r2;
+
+    PlaySE(SE_SELECT);
+    nullsub_16();
+    r2 = gTasks[taskId].data[10] - gUnknown_03005D10[gUnknown_02038559].unk1 - 1;
+    gTasks[taskId].data[10] = 0;
+    if (r2 < 8)
+        sub_80A48E8(taskId, r2);
+    sub_80A7528(0);
+}
+
+void sub_80A3F50(u8 taskId)
+{
+    gTasks[taskId].data[10] = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 + 1;
+    sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+    sub_80A7528(1);
+}
+
+void sub_80A3FA0(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f)
+{
+    s16 i;
+    s16 j;
+
+    for (i = c; i < c + e; i++)
+    {
+        for (j = b; j < b + d; j++)
+        {
+            u32 index = j + i * 32;
+
+            a[index] = f;
+        }
+    }
+}
+
+void sub_80A4008(u16 *a, u8 b, u8 c, u8 d, u8 e)
+{
+    sub_80A3FA0(a, b, c, d, e, 1);
+}
+
+void sub_80A4030(u32 a)
+{
+    u16 *ptr1 = gBGTilemapBuffers[2] + 0x5A;
+
+    ptr1 += a * 64;
+    ptr1[0] = 0x5A;
+    ptr1[1] = 0x5B;
+    ptr1[2] = 0x5C;
+    ptr1[32] = 0x6A;
+    ptr1[33] = 0x6B;
+    ptr1[34] = 0x6C;
+}
+
+void sub_80A405C(u8 a)
+{
+    u16 i;
+    u16 *ptr;
+
+    ptr = gBGTilemapBuffers[2] + 0x5A;
+    for (i = 0; i < 16; i++)
+    {
+        ptr[0] = 0x4F;
+        ptr[1] = 0x4F;
+        ptr[2] = 0x4F;
+        ptr += 32;
+    }
+
+    ptr = gBGTilemapBuffers[2] + 0x5A + a * 64;
+    ptr[0] = 0x5A;
+    ptr[1] = 0x5B;
+    ptr[2] = 0x5C;
+    ptr[32] = 0x6A;
+    ptr[33] = 0x6B;
+    ptr[34] = 0x6C;
+}
+
+void sub_80A40AC(u8 a)
+{
+    u16 *ptr = gBGTilemapBuffers[2] + 0x5A;
+
+    ptr += a * 64;
+    ptr[0] = 0x4F;
+    ptr[1] = 0x4F;
+    ptr[2] = 0x4F;
+    ptr[32] = 0x4F;
+    ptr[33] = 0x4F;
+    ptr[34] = 0x4F;
+}
+
+void sub_80A40D0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (gUnknown_03005D10[gUnknown_02038559].unk1 + i == gUnknown_03005D10[gUnknown_02038559].unk2)
+            break;
+        if (gUnknown_03005D24[gUnknown_03005D10[gUnknown_02038559].unk1 + i].itemId == gSaveBlock1.registeredItem)
+        {
+            sub_80A40AC(i);
+            break;
+        }
+    }
+}
+
+void sub_80A413C(void)
+{
+    sub_80A40D0();
+    sub_80A405C(gUnknown_03005D10[gUnknown_02038559].unk0);
+}
+
+void sub_80A4164(u8 *a, u16 b, int c, u8 d)
+{
+    *a++ = CHAR_MULT_SIGN;
+    a[0] = EXT_CTRL_CODE_BEGIN;
+    a[1] = 0x14;
+    a[2] = 6;
+    a += 3;
+    ConvertIntToDecimalStringN(a, b, c, d);
+}
+
+void sub_80A418C(u16 a, int b, u8 c, u8 d, u8 e)
+{
+    sub_80A4164(gStringVar1, a, b, e);
+    MenuPrint(gStringVar1, c, d);
+}
+
+void sub_80A41D4(void)
+{
+    sub_80A763C();
+}
+
+void sub_80A41E0(u8 *a, u16 b, const u8 *c, u16 d, u8 e)
+{
+    a[0] = EXT_CTRL_CODE_BEGIN;
+    a[1] = 0x13;
+    a[2] = 8;
+    a += 3;
+    a = ConvertIntToDecimalStringN(a, b, STR_CONV_MODE_LEADING_ZEROS, 2);
+    a[0] = EXT_CTRL_CODE_BEGIN;
+    a[1] = 0x13;
+    a[2] = 0x18;
+    a += 3;
+    a = sub_8072C74(a, c, 0x78 - (e + 1) * 6, 0);
+    *a++ = CHAR_MULT_SIGN;
+    sub_8072C14(a, d, 0x78, 1);
+}
+
+u8 *sub_80A425C(u8 taskId, u8 *text, u8 c)
+{
+    if (gTasks[taskId].data[10] - gUnknown_03005D10[gUnknown_02038559].unk1 - 1 == c)
+    {
+        text[0] = EXT_CTRL_CODE_BEGIN;
+        text[1] = 1;
+        text[2] = 2;
+        text += 3;
+    }
+    return text;
+}
+
+bool8 sub_80A42B0(u8 a, int b)
+{
+    u8 r5;
+    u16 *ptr;
+    u8 *r8 = gUnknown_02038540;
+
+    if (gUnknown_03005D10[gUnknown_02038559].unk1 + a > gUnknown_03005D10[gUnknown_02038559].unk2)
+        return TRUE;
+    if (gUnknown_03005D10[gUnknown_02038559].unk1 + a == gUnknown_03005D10[gUnknown_02038559].unk2)
+    {
+        if (gUnknown_03000701 == 5)
+            return TRUE;
+        r5 = a * 2 + 2;
+        sub_8072C74(gStringVar1, gOtherText_CloseBag, 0x78, 0);
+        MenuPrint(gStringVar1, 14, r5);
+        ptr = gBGTilemapBuffers[2] + 14 + r5 * 32;
+        ptr[0] = 0x4F;
+        ptr[1] = 0x4F;
+        ptr[32] = 0x4F;
+        ptr[33] = 0x4F;
+        if (a == 7)
+            return TRUE;
+        if ((b == 1 && r8[2] != 0) || b == 2)
+            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 13);
+        else
+            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 17);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80A4380(u16 a, u8 b, int c, int d)
+{
+    while (b <= c)
+    {
+        u8 r4;
+        u8 r5;
+        u8 *text;
+
+        if (sub_80A42B0(b, d) == TRUE)
+            break;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
+        r5 = b * 2 + 2;
+        text = gStringVar1;
+        text = sub_80A425C(a, text, b);
+        text = sub_8072C74(text, ItemId_GetItem(gUnknown_03005D24[r4].itemId)->name, 0x66, 0);
+        *text++ = CHAR_MULT_SIGN;
+        sub_8072C14(text, gUnknown_03005D24[r4].quantity, 0x78, 1);
+        MenuPrint(gStringVar1, 14, r5);
+        b++;
+    }
+}
+
+void sub_80A444C(u16 a, u8 b, int c, int d)
+{
+    while (b <= c)
+    {
+        u8 r4;
+        u8 r5;
+        u8 *text;
+
+        if (sub_80A42B0(b, d) == TRUE)
+            break;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
+        r5 = b * 2 + 2;
+        text = gStringVar1;
+        text = sub_80A425C(a, text, b);
+#if ENGLISH
+        sub_8072C74(text, ItemId_GetItem(gUnknown_03005D24[r4].itemId)->name, 0x60, 0);
+#else
+        sub_8072C74(text, ItemId_GetItem(gUnknown_03005D24[r4].itemId)->name, 0x63, 0);
+#endif
+        MenuPrint(gStringVar1, 14, r5);
+        if (gUnknown_02038558 != 0)
+        {
+            if (gUnknown_03005D24[r4].itemId == gSaveBlock1.registeredItem)
+                sub_80A4030(b);
+        }
+        else
+        {
+            if (gUnknown_03005D24[r4].itemId == gSaveBlock1.registeredItem)
+                sub_80A405C(b);
+            else
+                sub_80A40AC(b);
+        }
+        b++;
+    }
+}
+
+/*
+void sub_80A4548(u16 a, u8 b, int c, int d)
+{
+    while (b <= c)
+    {
+        u8 r4;
+        u8 sp10;
+        u32 r5;
+        u8 *text;
+
+        if (sub_80A42B0(b, d) == TRUE)
+            break;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
+        sp10 = b * 2 + 2;
+        r5 = sp10 * 32 + 14;
+        text = gStringVar1;
+        text = sub_80A425C(a, text, b);
+        if (gUnknown_03005D24[r4].itemId < 0x153)
+        {
+            const u8 *r2;
+
+            gBGTilemapBuffers[2][r5 + 0] = 0x59;
+            gBGTilemapBuffers[2][r5 + 1] = 0x4F;
+            gBGTilemapBuffers[2][r5 + 32] = 0x69;
+            gBGTilemapBuffers[2][r5 + 33] = 0x4F;
+            r2 = gMoveNames[ItemIdToBattleMoveId(gUnknown_03005D24[r4].itemId)];
+            sub_80A41E0(text, gUnknown_03005D24[r4].itemId - 288, r2, gUnknown_03005D24[r4].quantity, 2);
+        }
+        else
+        {
+            const u8 *moveName;
+
+            gBGTilemapBuffers[2][r5 + 0] = 0x105D;
+            gBGTilemapBuffers[2][r5 + 1] = 0x105E;
+            gBGTilemapBuffers[2][r5 + 32] = 0x106D;
+            gBGTilemapBuffers[2][r5 + 33] = 0x106E;
+            text[0] = EXT_CTRL_CODE_BEGIN;
+            text[1] = 0x13;
+            text[2] = 0x11;
+            text += 3;
+            text = ConvertIntToDecimalString(text, gUnknown_03005D24[r4].itemId);
+            text[0] = EXT_CTRL_CODE_BEGIN;
+            text[1] = 0x13;
+            text[2] = 0x18;
+            text += 3;
+            moveName = gMoveNames[ItemIdToBattleMoveId(gUnknown_03005D24[r4].itemId)];
+            sub_8072C74(text, moveName, 0x78, 0);
+        }
+        MenuPrint(gStringVar1, 14, sp10);
+        b++;
+    }
+}
+*/

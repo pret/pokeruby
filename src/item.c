@@ -129,6 +129,8 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     return TRUE;
 }
 
+// This function matches if gBagPockets is declared non-const,
+// but it should be fixed anyway.
 #ifdef NONMATCHING
 bool8 AddBagItem(u16 itemId, u16 count)
 {
