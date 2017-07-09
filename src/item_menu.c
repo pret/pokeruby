@@ -960,7 +960,8 @@ void sub_80A444C(u16 a, u8 b, int c, int d)
     }
 }
 
-/*
+// more gBGTilemapBuffers shenanigans
+#ifdef NONMATCHING
 void sub_80A4548(u16 a, u8 b, int c, int d)
 {
     while (b <= c)
@@ -1012,4 +1013,216 @@ void sub_80A4548(u16 a, u8 b, int c, int d)
         b++;
     }
 }
-*/
+#else
+__attribute__((naked))
+void sub_80A4548(u16 a, u8 b, int c, int d)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x14\n\
+    str r2, [sp, 0x8]\n\
+    str r3, [sp, 0xC]\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0x4]\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r8, r1\n\
+    ldr r0, _080A456C @ =gBGTilemapBuffers + 0x1000\n\
+    mov r9, r0\n\
+    b _080A46C2\n\
+    .align 2, 0\n\
+_080A456C: .4byte gBGTilemapBuffers + 0x1000\n\
+_080A4570:\n\
+    ldr r1, _080A461C @ =gUnknown_03005D10\n\
+    ldr r0, _080A4620 @ =gUnknown_02038559\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldrb r4, [r0, 0x1]\n\
+    add r4, r8\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    mov r1, r8\n\
+    lsls r0, r1, 25\n\
+    movs r3, 0x80\n\
+    lsls r3, 18\n\
+    adds r0, r3\n\
+    lsrs r0, 24\n\
+    str r0, [sp, 0x10]\n\
+    lsls r0, 5\n\
+    adds r0, 0xE\n\
+    adds r5, r0, 0\n\
+    ldr r6, _080A4624 @ =gStringVar1\n\
+    ldr r1, [sp, 0x4]\n\
+    lsls r0, r1, 24\n\
+    lsrs r0, 24\n\
+    adds r1, r6, 0\n\
+    mov r2, r8\n\
+    bl sub_80A425C\n\
+    adds r6, r0, 0\n\
+    ldr r3, _080A4628 @ =gUnknown_03005D24\n\
+    mov r10, r3\n\
+    ldr r0, [r3]\n\
+    lsls r7, r4, 2\n\
+    adds r3, r7, r0\n\
+    ldrh r1, [r3]\n\
+    movs r0, 0xA9\n\
+    lsls r0, 1\n\
+    cmp r1, r0\n\
+    bhi _080A4634\n\
+    lsls r0, r5, 1\n\
+    add r0, r9\n\
+    movs r1, 0x59\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    movs r2, 0x4F\n\
+    strh r2, [r0]\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x20\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    movs r1, 0x69\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x21\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    strh r2, [r0]\n\
+    ldrh r0, [r3]\n\
+    bl ItemIdToBattleMoveId\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0xD\n\
+    adds r2, r0, 0\n\
+    muls r2, r1\n\
+    ldr r0, _080A462C @ =gMoveNames\n\
+    adds r2, r0\n\
+    mov r1, r10\n\
+    ldr r0, [r1]\n\
+    adds r0, r7, r0\n\
+    ldr r3, _080A4630 @ =0xfffffee0\n\
+    adds r1, r3, 0\n\
+    ldrh r3, [r0]\n\
+    adds r1, r3\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    ldrh r3, [r0, 0x2]\n\
+    movs r0, 0x2\n\
+    str r0, [sp]\n\
+    adds r0, r6, 0\n\
+    bl sub_80A41E0\n\
+    b _080A46AE\n\
+    .align 2, 0\n\
+_080A461C: .4byte gUnknown_03005D10\n\
+_080A4620: .4byte gUnknown_02038559\n\
+_080A4624: .4byte gStringVar1\n\
+_080A4628: .4byte gUnknown_03005D24\n\
+_080A462C: .4byte gMoveNames\n\
+_080A4630: .4byte 0xfffffee0\n\
+_080A4634:\n\
+    lsls r0, r5, 1\n\
+    add r0, r9\n\
+    ldr r1, _080A46EC @ =0x0000105d\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    adds r1, 0x1\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x20\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    adds r1, 0xF\n\
+    strh r1, [r0]\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x21\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    adds r1, 0x1\n\
+    strh r1, [r0]\n\
+    movs r0, 0xFC\n\
+    strb r0, [r6]\n\
+    movs r4, 0x13\n\
+    strb r4, [r6, 0x1]\n\
+    movs r0, 0x11\n\
+    strb r0, [r6, 0x2]\n\
+    adds r6, 0x3\n\
+    mov r1, r10\n\
+    ldr r0, [r1]\n\
+    adds r0, r7, r0\n\
+    ldrh r1, [r0]\n\
+    ldr r3, _080A46F0 @ =0xfffffeae\n\
+    adds r1, r3\n\
+    adds r0, r6, 0\n\
+    bl ConvertIntToDecimalString\n\
+    adds r6, r0, 0\n\
+    movs r0, 0xFC\n\
+    strb r0, [r6]\n\
+    strb r4, [r6, 0x1]\n\
+    movs r0, 0x18\n\
+    strb r0, [r6, 0x2]\n\
+    adds r6, 0x3\n\
+    mov r1, r10\n\
+    ldr r0, [r1]\n\
+    adds r0, r7, r0\n\
+    ldrh r0, [r0]\n\
+    bl ItemIdToBattleMoveId\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0xD\n\
+    muls r1, r0\n\
+    ldr r0, _080A46F4 @ =gMoveNames\n\
+    adds r1, r0\n\
+    adds r0, r6, 0\n\
+    movs r2, 0x78\n\
+    movs r3, 0\n\
+    bl sub_8072C74\n\
+_080A46AE:\n\
+    ldr r0, _080A46F8 @ =gStringVar1\n\
+    movs r1, 0xE\n\
+    ldr r2, [sp, 0x10]\n\
+    bl MenuPrint\n\
+    mov r0, r8\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+_080A46C2:\n\
+    ldr r3, [sp, 0x8]\n\
+    cmp r8, r3\n\
+    bgt _080A46DA\n\
+    mov r0, r8\n\
+    ldr r1, [sp, 0xC]\n\
+    bl sub_80A42B0\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    beq _080A46DA\n\
+    b _080A4570\n\
+_080A46DA:\n\
+    add sp, 0x14\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080A46EC: .4byte 0x0000105d\n\
+_080A46F0: .4byte 0xfffffeae\n\
+_080A46F4: .4byte gMoveNames\n\
+_080A46F8: .4byte gStringVar1\n\
+    .syntax divided\n");
+}
+#endif
