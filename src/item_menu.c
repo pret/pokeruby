@@ -1305,7 +1305,7 @@ void ItemListMenu_InitDescription(s16 itemId)
     if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk2)
     {
         r5 = sub_8072A18(gOtherText_ReturnTo, 4, 0x68, 0x68, 1);
-        r5 += sub_8072A18(gUnknown_0840E740[gUnknown_03000701].text, 4, 0x78, 0x68, 1);
+        r5 += sub_8072A18(gUnknown_0840E740[gUnknown_03000701], 4, 0x78, 0x68, 1);
     }
     else
     {
