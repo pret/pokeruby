@@ -112,8 +112,8 @@ void sub_80A3D08(void);
 void sub_80A3D24(u8);
 void sub_80A3D40(void);
 void sub_80A40D0(void);
-void sub_80A48E8();
-void ItemListMenu_InitDescription();
+void sub_80A48E8(u16, int, int);
+void ItemListMenu_InitDescription(s16);
 void ItemListMenu_ChangeDescription();
 void sub_80A4F68(u8);
 void sub_80A50C8(u8);
@@ -246,7 +246,7 @@ bool8 sub_80A317C(void)
     case 12:
         sub_80A48E8(0xFFFF, 0, 7);
         val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
-        ItemListMenu_InitDescription((s16)gUnknown_03005D24[val].itemId);
+        ItemListMenu_InitDescription(gUnknown_03005D24[val].itemId);
         ItemListMenu_InitMenu();
         gUnknown_0203855B = gUnknown_02038559 + 1;
         gUnknown_0203855C = 0;
@@ -719,7 +719,7 @@ void sub_80A3EF4(u8 taskId)
     r2 = gTasks[taskId].data[10] - gUnknown_03005D10[gUnknown_02038559].unk1 - 1;
     gTasks[taskId].data[10] = 0;
     if (r2 < 8)
-        sub_80A48E8(taskId, r2);
+        sub_80A48E8(taskId, r2, r2);
     sub_80A7528(0);
 }
 
@@ -902,42 +902,45 @@ bool8 sub_80A42B0(u8 a, int b)
     return FALSE;
 }
 
-void sub_80A4380(u16 a, u8 b, int c, int d)
+void sub_80A4380(u16 a, int b, int c, int d)
 {
-    while (b <= c)
+    u8 i;
+
+    for (i = b; i <= c; i++)
     {
         u8 r4;
         u8 r5;
         u8 *text;
 
-        if (sub_80A42B0(b, d) == TRUE)
+        if (sub_80A42B0(i, d) == TRUE)
             break;
-        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
-        r5 = b * 2 + 2;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + i;
+        r5 = i * 2 + 2;
         text = gStringVar1;
-        text = sub_80A425C(a, text, b);
+        text = sub_80A425C(a, text, i);
         text = sub_8072C74(text, ItemId_GetItem(gUnknown_03005D24[r4].itemId)->name, 0x66, 0);
         *text++ = CHAR_MULT_SIGN;
         sub_8072C14(text, gUnknown_03005D24[r4].quantity, 0x78, 1);
         MenuPrint(gStringVar1, 14, r5);
-        b++;
     }
 }
 
-void sub_80A444C(u16 a, u8 b, int c, int d)
+void sub_80A444C(u16 a, int b, int c, int d)
 {
-    while (b <= c)
+    u8 i;
+
+    for (i = b; i <= c; i++)
     {
         u8 r4;
         u8 r5;
         u8 *text;
 
-        if (sub_80A42B0(b, d) == TRUE)
+        if (sub_80A42B0(i, d) == TRUE)
             break;
-        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
-        r5 = b * 2 + 2;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + i;
+        r5 = i * 2 + 2;
         text = gStringVar1;
-        text = sub_80A425C(a, text, b);
+        text = sub_80A425C(a, text, i);
 #if ENGLISH
         sub_8072C74(text, ItemId_GetItem(gUnknown_03005D24[r4].itemId)->name, 0x60, 0);
 #else
@@ -947,37 +950,38 @@ void sub_80A444C(u16 a, u8 b, int c, int d)
         if (gUnknown_02038558 != 0)
         {
             if (gUnknown_03005D24[r4].itemId == gSaveBlock1.registeredItem)
-                sub_80A4030(b);
+                sub_80A4030(i);
         }
         else
         {
             if (gUnknown_03005D24[r4].itemId == gSaveBlock1.registeredItem)
-                sub_80A405C(b);
+                sub_80A405C(i);
             else
-                sub_80A40AC(b);
+                sub_80A40AC(i);
         }
-        b++;
     }
 }
 
 // more gBGTilemapBuffers shenanigans
 #ifdef NONMATCHING
-void sub_80A4548(u16 a, u8 b, int c, int d)
+void sub_80A4548(u16 a, int b, int c, int d)
 {
-    while (b <= c)
+    u8 i;
+
+    for (i = b; i <= c; i++)
     {
         u8 r4;
         u8 sp10;
         u32 r5;
         u8 *text;
 
-        if (sub_80A42B0(b, d) == TRUE)
+        if (sub_80A42B0(i, d) == TRUE)
             break;
-        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + b;
-        sp10 = b * 2 + 2;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + i;
+        sp10 = i * 2 + 2;
         r5 = sp10 * 32 + 14;
         text = gStringVar1;
-        text = sub_80A425C(a, text, b);
+        text = sub_80A425C(a, text, i);
         if (gUnknown_03005D24[r4].itemId < 0x153)
         {
             const u8 *r2;
@@ -1010,12 +1014,11 @@ void sub_80A4548(u16 a, u8 b, int c, int d)
             sub_8072C74(text, moveName, 0x78, 0);
         }
         MenuPrint(gStringVar1, 14, sp10);
-        b++;
     }
 }
 #else
 __attribute__((naked))
-void sub_80A4548(u16 a, u8 b, int c, int d)
+void sub_80A4548(u16 a, int b, int c, int d)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1226,3 +1229,89 @@ _080A46F8: .4byte gStringVar1\n\
     .syntax divided\n");
 }
 #endif
+
+void sub_80A46FC(u16 a, int b, int c, int d)
+{
+    u8 i;
+
+    for (i = b; i <= c; i++)
+    {
+        u8 r4;
+        u8 r5;
+        u8 *text;
+        register int var asm("r0");
+
+        if (sub_80A42B0(i, d) == TRUE)
+            break;
+        r4 = gUnknown_03005D10[gUnknown_02038559].unk1 + i;
+        r5 = i * 2 + 2;
+
+        var = 14 + r5 * 32;
+        gBGTilemapBuffers[2][var] = 0x59;
+        var += 32;
+        gBGTilemapBuffers[2][var] = 0x69;
+
+        text = gStringVar1;
+        text = sub_80A425C(a, text, i);
+        CopyItemName(gUnknown_03005D24[r4].itemId, gStringVar2);
+        sub_80A41E0(text, gUnknown_03005D24[r4].itemId - 0x84, gStringVar2, gUnknown_03005D24[r4].quantity, 3);
+        MenuPrint(gStringVar1, 14, r5);
+    }
+}
+
+void sub_80A47E8(u16 a, int b, int c, int d)
+{
+    switch (gUnknown_02038559)
+    {
+    case 0:
+    case 1:
+        sub_80A4380(a, b, c, d);
+        break;
+    case 4:
+        sub_80A444C(a, b, c, d);
+        break;
+    case 2:
+        sub_80A4548(a, b, c, d);
+        break;
+    case 3:
+        sub_80A46FC(a, b, c, d);
+        break;
+    }
+    if (gUnknown_03005D10[gUnknown_02038559].unk1 != 0)
+        sub_80F979C(0, 0);
+    else
+        sub_80F979C(0, 1);
+    if ((gUnknown_03000701 != 5 && gUnknown_03005D10[gUnknown_02038559].unk1 + 8 < gUnknown_03005D10[gUnknown_02038559].unk2 + 1)
+     || (gUnknown_03000701 == 5 && gUnknown_03005D10[gUnknown_02038559].unk1 + 8 < gUnknown_03005D10[gUnknown_02038559].unk2))
+        sub_80F979C(1, 0);
+    else
+        sub_80F979C(1, 1);
+}
+
+void sub_80A48E8(u16 a, int b, int c)
+{
+    sub_80A47E8(a, b, c, 0);
+}
+
+void sub_80A48F8(u16 a)
+{
+    sub_80A47E8(a, 0, 5, 2);
+}
+
+void ItemListMenu_InitDescription(s16 itemId)
+{
+    u8 r5;
+
+    if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk2)
+    {
+        r5 = sub_8072A18(gOtherText_ReturnTo, 4, 0x68, 0x68, 1);
+        r5 += sub_8072A18(gUnknown_0840E740[gUnknown_03000701].text, 4, 0x78, 0x68, 1);
+    }
+    else
+    {
+        r5 = sub_8072A18(ItemId_GetDescription(itemId), 4, 0x68, 0x68, 1);
+    }
+
+    if (r5 < 3)
+        MenuZeroFillWindowRect(0, 13 + r5 * 2, 13, 20);
+}
