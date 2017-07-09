@@ -1330,7 +1330,7 @@ void ItemListMenu_InitDescription(s16 itemId)
 void ItemListMenu_ChangeDescription(s16 itemId, int b)
 {
     u8 description[100];
-    
+
     if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk2)
     {
         if (b == 0)
@@ -1357,7 +1357,7 @@ bool32 sub_80A4A54(u8 *a, const u8 *b, u32 c)
     u32 r4 = c + 1;
     const u8 *src = b;
     u8 *dst = a;
-    
+
     while (1)
     {
         if (*src == CHAR_NEWLINE || *src == EOS)
@@ -1382,7 +1382,7 @@ bool32 sub_80A4A54(u8 *a, const u8 *b, u32 c)
 void sub_80A4A98(u8 *a, u32 b)
 {
     u8 text[100];
-    
+
     if (b == 0)
         MenuZeroFillWindowRect(0, 13, 13, 20);
     if (sub_80A4A54(text, a, b))
@@ -1428,7 +1428,7 @@ const u8 *sub_80A4B90(u16 itemId)
 void sub_80A4BF0(u16 *a)
 {
     u8 i;
-    
+
     if (gUnknown_02038564 == 4)
     {
         MenuDrawTextWindow(0, 7, 13, 12);
@@ -1529,7 +1529,7 @@ void sub_80A4F68(u8 taskId)
 bool8 sub_80A4F74(u8 a)
 {
     bool8 retVal = FALSE;
-    
+
     if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
         if (gUnknown_03005D10[gUnknown_02038559].unk0 != 0)
