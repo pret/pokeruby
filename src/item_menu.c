@@ -1,8 +1,12 @@
 #include "global.h"
 #include "data2.h"
 #include "decompress.h"
+#include "field_player_avatar.h"
 #include "graphics.h"
 #include "item.h"
+#include "items.h"
+#include "item_use.h"
+#include "mail_data.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -48,6 +52,8 @@ extern void gpu_pal_allocator_reset__manage_upper_four(void);
 extern void sub_80F9020(void);
 extern void sub_80F9988();
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
+extern void PauseVerticalScrollIndicator();
+extern u8 sub_80F9284(void);
 
 extern const struct CompressedSpriteSheet gUnknown_083C1CC8;
 extern const struct CompressedSpriteSheet gUnknown_083C1CD0;
@@ -114,10 +120,13 @@ void sub_80A3D40(void);
 void sub_80A40D0(void);
 void sub_80A48E8(u16, int, int);
 void ItemListMenu_InitDescription(s16);
-void ItemListMenu_ChangeDescription();
+void ItemListMenu_ChangeDescription(s16, int);
 void sub_80A4F68(u8);
 void sub_80A50C8(u8);
 void ItemListMenu_InitMenu(void);
+void sub_80A73C0(void);
+void sub_80A73F0(void);
+void sub_80A73FC(void);
 void sub_80A740C(void);
 void sub_80A751C(void);
 void sub_80A7528();
@@ -127,9 +136,11 @@ void sub_80A763C(void);
 void sub_80A76A0(void);
 void sub_80A770C(void);
 void sub_80A7828(void);
+void sub_80A7834();
 void sub_80A78B8(void);
 void CreateBagSprite(void);
 void CreateBagPokeballSprite();
+void sub_80A7C64(void);
 
 void sub_80A3118(void)
 {
@@ -460,7 +471,7 @@ void sub_80A37F8(u8 taskId)
     {
         u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
 
-        ItemListMenu_ChangeDescription((s16)gUnknown_03005D24[val].itemId, gUnknown_02038562);
+        ItemListMenu_ChangeDescription(gUnknown_03005D24[val].itemId, gUnknown_02038562);
         gUnknown_02038562++;
     }
     else
@@ -469,7 +480,7 @@ void sub_80A37F8(u8 taskId)
         {
             u32 val = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
 
-            ItemListMenu_ChangeDescription((s16)gUnknown_03005D24[val].itemId, gUnknown_02038562);
+            ItemListMenu_ChangeDescription(gUnknown_03005D24[val].itemId, gUnknown_02038562);
             gUnknown_02038562++;
         }
     }
@@ -1314,4 +1325,261 @@ void ItemListMenu_InitDescription(s16 itemId)
 
     if (r5 < 3)
         MenuZeroFillWindowRect(0, 13 + r5 * 2, 13, 20);
+}
+
+void ItemListMenu_ChangeDescription(s16 itemId, int b)
+{
+    u8 description[100];
+    
+    if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk2)
+    {
+        if (b == 0)
+        {
+            MenuZeroFillWindowRect(0, 13, 13, 20);
+            MenuPrint_PixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
+        }
+        else if (b == 1)
+        {
+            MenuPrint_PixelCoords(gUnknown_0840E740[gUnknown_03000701], 4, 0x78, 0);
+        }
+    }
+    else
+    {
+        if (b == 0)
+            MenuZeroFillWindowRect(0, 13, 13, 20);
+        if (ItemId_CopyDescription(description, itemId, b))
+            MenuPrint_PixelCoords(description, 4, 104 + b * 16, 0);
+    }
+}
+
+bool32 sub_80A4A54(u8 *a, const u8 *b, u32 c)
+{
+    u32 r4 = c + 1;
+    const u8 *src = b;
+    u8 *dst = a;
+    
+    while (1)
+    {
+        if (*src == CHAR_NEWLINE || *src == EOS)
+        {
+            if (--r4 == 0)
+            {
+                *dst = EOS;
+                return TRUE;
+            }
+            if (*src == EOS)
+                return FALSE;
+            dst = a;
+            src++;
+        }
+        else
+        {
+            *dst++ = *src++;
+        }
+    }
+}
+
+void sub_80A4A98(u8 *a, u32 b)
+{
+    u8 text[100];
+    
+    if (b == 0)
+        MenuZeroFillWindowRect(0, 13, 13, 20);
+    if (sub_80A4A54(text, a, b))
+        MenuPrint_PixelCoords(text, 4, 104 + b * 16, 0);
+}
+
+void sub_80A4ADC(u8 taskId)
+{
+    if (gTasks[taskId].data[10] == 0)
+        sub_80A7528(0);
+    PlaySE(SE_SELECT);
+    gUnknown_0203855C = 1;
+}
+
+void sub_80A4B14(s8 a, u8 b)
+{
+    gUnknown_03005D10[gUnknown_02038559].unk1 += a;
+    MoveMenuCursor(0);
+    sub_80A73C0();
+    sub_80A763C();
+    sub_80A4ADC(b);
+}
+
+void sub_80A4B58(s8 a, u8 b)
+{
+    gUnknown_03005D10[gUnknown_02038559].unk0 = MoveMenuCursor(a);
+    sub_80A73C0();
+    sub_80A4ADC(b);
+}
+
+const u8 *sub_80A4B90(u16 itemId)
+{
+    if (TestPlayerAvatarFlags(6))
+    {
+        if (itemId == ITEM_MACH_BIKE || itemId == ITEM_ACRO_BIKE)
+            return gOtherText_Walk;
+    }
+    if (ItemIsMail(itemId) == TRUE)
+        return gOtherText_Check;
+    return gUnknown_083C1640[gUnknown_03000704[0]].text;
+}
+
+void sub_80A4BF0(u16 *a)
+{
+    u8 i;
+    
+    if (gUnknown_02038564 == 4)
+    {
+        MenuDrawTextWindow(0, 7, 13, 12);
+        sub_80A4008(a, 1, 8, 12, 4);
+        if (sub_80F9344() == 1 && gUnknown_03000701 == 5)
+        {
+            sub_80A7834(1, 0);
+        }
+        else
+        {
+            for (i = 0; i < gUnknown_02038564; i++)
+            {
+                const u8 *text;
+
+                if (i == 0)
+                    text = sub_80A4B90(gScriptItemId);
+                else
+                    text = gUnknown_083C1640[gUnknown_03000704[i]].text;
+                MenuPrint(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
+            }
+        }
+        if (gUnknown_03000701 == 5)
+            InitMenu(0, 1, 8, gUnknown_02038564, gUnknown_03000700, 1);
+        else
+            InitMenu(0, 1, 8, gUnknown_02038564, 0, 1);
+        sub_8072DCC(0x2F);
+    }
+    else
+    {
+        MenuDrawTextWindow(0, 5, 13, 12);
+        sub_80A4008(a, 1, 6, 12, 6);
+        for (i = 0; i < gUnknown_02038564; i++)
+            MenuPrint(gUnknown_083C1640[gUnknown_03000704[i]].text, 1 + (i / 3) * 6, 6 + (i % 3) * 2);
+        InitMenu(0, 1, 6, gUnknown_02038564, 0, 1);
+        sub_8072DCC(0x2F);
+    }
+    sub_80A7528(2);
+}
+
+void sub_80A4DA4(u16 *a)
+{
+    sub_80A73FC();
+    sub_80A36B8(a, 0, 6, 13, 6);
+    MenuZeroFillWindowRect(0, 5, 13, 12);
+    sub_80A7590();
+}
+
+void sub_80A4DD8(u8 taskId, u8 b, u8 c, u8 d, u8 e, u8 f)
+{
+    gTasks[taskId].data[1] = 1;
+    gTasks[taskId].data[2] = b + 2;
+    gTasks[taskId].data[3] = c + 1;
+    MenuDrawTextWindow(b, c, b + d, c + e);
+    sub_80A4008(gBGTilemapBuffers[1], b + 1, c + 1, d - 1, e - 1);
+    sub_80A418C(1, 1, b + 2, c + 1, f);
+}
+
+void sub_80A4E8C(s8 a, u8 b)
+{
+    PlaySE(SE_SELECT);
+    sub_80F979C(0, 1);
+    sub_80F979C(1, 1);
+    sub_80F979C(2, 1);
+    sub_80F979C(3, 1);
+    PauseVerticalScrollIndicator(0);
+    PauseVerticalScrollIndicator(1);
+    PauseVerticalScrollIndicator(2);
+    PauseVerticalScrollIndicator(3);
+    sub_80A3B04(gBGTilemapBuffers[2], a);
+    sub_80A3AC0(gBGTilemapBuffers[2], gUnknown_02038559);
+    sub_80A3770();
+    sub_80A7C64();
+    CreateBagPokeballSprite(b);
+}
+
+static bool8 sub_80A4F0C(void)
+{
+    if (gUnknown_03000701 == 5 || gUnknown_03000701 == 4)
+        return FALSE;
+    if (gMain.newKeys == DPAD_RIGHT || sub_80F9284() == 2)
+    {
+        sub_80A4E8C(1, 2);
+        return TRUE;
+    }
+    if (gMain.newKeys == DPAD_LEFT || sub_80F9284() == 1)
+    {
+        sub_80A4E8C(-1, 1);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80A4F68(u8 taskId)
+{
+    sub_80A4F0C();
+}
+
+bool8 sub_80A4F74(u8 a)
+{
+    bool8 retVal = FALSE;
+    
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    {
+        if (gUnknown_03005D10[gUnknown_02038559].unk0 != 0)
+            sub_80A4B58(-1, a);
+        else if (gUnknown_03005D10[gUnknown_02038559].unk1 != 0)
+            sub_80A4B14(-1, a);
+        if (gLinkOpen == TRUE && gMain.keyRepeatCounter == 5)
+            gMain.keyRepeatCounter = 11;
+        retVal = TRUE;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    {
+        if (gUnknown_03000701 != 5)
+        {
+            if (gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk3)
+            {
+                if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 != gUnknown_03005D10[gUnknown_02038559].unk2)
+                    sub_80A4B14(1, a);
+            }
+            else
+            {
+                sub_80A4B58(1, a);
+            }
+        }
+        else
+        {
+            if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 != gUnknown_03005D10[gUnknown_02038559].unk2 - 1)
+            {
+                if (gUnknown_03005D10[gUnknown_02038559].unk0 != gUnknown_03005D10[gUnknown_02038559].unk3)
+                    sub_80A4B58(1, a);
+                else
+                    sub_80A4B14(1, a);
+            }
+        }
+        retVal = TRUE;
+        if (gLinkOpen == TRUE && gMain.keyRepeatCounter == 5)
+            gMain.keyRepeatCounter = 11;
+    }
+    else
+    {
+        if (gTasks[a].data[10] == 0 && sub_80A4F0C() == TRUE)
+        {
+            sub_80A73F0();
+            gTasks[a].func = sub_80A4F68;
+            retVal = TRUE;
+        }
+        else
+        {
+            sub_80A73C0();
+        }
+    }
+    return retVal;
 }

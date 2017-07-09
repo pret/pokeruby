@@ -587,7 +587,7 @@ u8 *ItemId_GetDescription(u16 itemId)
     return gItems[SanitizeItemId(itemId)].description;
 }
 
-bool8 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
+bool32 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
 {
     u32 r5 = c + 1;
     u8 *description = gItems[SanitizeItemId(itemId)].description;
