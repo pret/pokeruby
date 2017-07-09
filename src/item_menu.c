@@ -39,6 +39,7 @@ extern s8 gUnknown_02038559;  // selected pocket
 extern u8 gUnknown_0203855A;
 extern u8 gUnknown_0203855B;
 extern u8 gUnknown_0203855C;
+extern u8 gUnknown_02038560;
 extern u8 gUnknown_02038562;
 extern u8 gUnknown_02038564;
 extern u8 gUnknown_03000700;
@@ -54,6 +55,7 @@ extern void sub_80F9988();
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void PauseVerticalScrollIndicator();
 extern u8 sub_80F9284(void);
+extern void sub_808B5B4();
 
 extern const struct CompressedSpriteSheet gUnknown_083C1CC8;
 extern const struct CompressedSpriteSheet gUnknown_083C1CD0;
@@ -104,6 +106,7 @@ const u8 gUnknown_083C1690[][6] =
     {0, 8, 3, 2, 0, 0},
 };
 */
+extern const TaskFunc gUnknown_083C16BC[][2];
 
 void sub_80A34E8(void);
 bool8 sub_80A3520(void);
@@ -138,6 +141,7 @@ void sub_80A770C(void);
 void sub_80A7828(void);
 void sub_80A7834();
 void sub_80A78B8(void);
+void sub_80A797C(void);
 void CreateBagSprite(void);
 void CreateBagPokeballSprite();
 void sub_80A7C64(void);
@@ -1582,4 +1586,103 @@ bool8 sub_80A4F74(u8 a)
         }
     }
     return retVal;
+}
+
+void sub_80A50C8(u8 taskId)
+{
+    s16 *r5 = gTasks[taskId].data;
+
+    if (!gPaletteFade.active)
+    {
+        if (sub_80A4F74(taskId) == TRUE)
+        {
+            sub_808B5B4(taskId);
+            return;
+        }
+
+        if ((gMain.newKeys & SELECT_BUTTON)
+         && !(gUnknown_02038559 == 3 || gUnknown_02038559 == 2)
+         && gUnknown_03000701 < 2)
+        {
+            if (r5[10] == 0)
+            {
+                if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 != gUnknown_03005D10[gUnknown_02038559].unk2)
+                {
+                    PlaySE(SE_SELECT);
+                    sub_80A3F50(taskId);
+                }
+                sub_808B5B4(taskId);
+            }
+            else
+            {
+                if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 != gUnknown_03005D10[gUnknown_02038559].unk2)
+                {
+                    PlaySE(SE_SELECT);
+                    sub_80A3E90(taskId);
+                }
+                else
+                {
+                    sub_80A3EF4(taskId);
+                }
+                sub_808B5B4(taskId);
+            }
+            return;
+        }
+
+        if (gMain.newKeys & A_BUTTON)
+        {
+            if (gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 == gUnknown_03005D10[gUnknown_02038559].unk2)
+            {
+                if (r5[10] == 0)
+                {
+                    gScriptItemId = 0;
+                    gUnknown_083C16BC[gUnknown_03000701][1](taskId);
+                }
+                else
+                {
+                    sub_80A3EF4(taskId);
+                }
+                sub_808B5B4(taskId);
+            }
+            else
+            {
+                if (r5[10] == 0)
+                {
+                    PlaySE(SE_SELECT);
+                    gUnknown_02038560 = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
+                    gScriptItemId = gUnknown_03005D24[gUnknown_02038560].itemId;
+                    gUnknown_083C16BC[gUnknown_03000701][0](taskId);
+                    sub_80F98A4(0);
+                    sub_80F98A4(1);
+                    sub_80F98A4(2);
+                    sub_80F98A4(3);
+                    sub_80A797C();
+                }
+                else
+                {
+                    sub_80A3E90(taskId);
+                }
+                sub_808B5B4(taskId);
+            }
+            return;
+        }
+
+        if (gMain.newKeys & B_BUTTON)
+        {
+            if (r5[10] == 0)
+            {
+                if (gUnknown_03000701 != 5)
+                {
+                    gScriptItemId = 0;
+                    gUnknown_083C16BC[gUnknown_03000701][1](taskId);
+                }
+            }
+            else
+            {
+                sub_80A3EF4(taskId);
+            }
+            sub_808B5B4(taskId);
+            return;
+        }
+    }
 }
