@@ -71,13 +71,13 @@ static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bp
 static void VBlankCB(void);
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
-static void CB2_GameplayCannotBeContinued(void);
+void CB2_GameplayCannotBeContinued(void);
 static void CB2_FadeAndReturnToTitleScreen(void);
 static void CB2_ReturnToTitleScreen(void);
 static void VBlankCB_UpdateClockGraphics(void);
 static bool8 VerifySectorWipe(u16 sector);
 static bool8 WipeSector(u16 sector);
-static bool8 WipeSectors(u32 sectorBits);
+bool8 WipeSectors(u32 sectorBits);
 
 void DoSaveFailedScreen(u8 saveType)
 {
@@ -155,7 +155,152 @@ static void CB2_SaveFailedScreen(void)
     }
 }
 
-static void CB2_WipeSave(void)
+#ifdef DEBUG
+__attribute__((naked))
+void CB2_WipeSave()
+{
+    asm(
+        "	push	{r4, r5, lr}\n"
+        "	mov	r4, #0x0\n"
+        "	ldr	r0, ._20\n"
+        "	mov	r2, #0x1\n"
+        "	strh	r2, [r0]\n"
+        "	ldr	r0, ._20 + 4\n"
+        "	ldr	r0, [r0]\n"
+        "	ldr	r1, ._20 + 8\n"
+        "	cmp	r0, #0\n"
+        "	beq	._12	@cond_branch\n"
+        "	str	r2, [r1]\n"
+        "._12:\n"
+        "	ldr	r0, [r1]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._16	@cond_branch\n"
+        "	add	r5, r1, #0\n"
+        "._17:\n"
+        "	ldr	r0, [r5]\n"
+        "	bl	WipeSectors\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	cmp	r0, #0\n"
+        "	bne	._14	@cond_branch\n"
+        "	mov	r0, #0x1\n"
+        "	mov	r1, #0xa\n"
+        "	mov	r2, #0x1c\n"
+        "	mov	r3, #0x13\n"
+        "	bl	MenuDrawTextWindow\n"
+        "	ldr	r0, ._20 + 12\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "	ldr	r0, ._20 + 16\n"
+        "	ldrb	r0, [r0]\n"
+        "	bl	HandleSavingData\n"
+        "	ldr	r0, [r5]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._15	@cond_branch\n"
+        "	mov	r0, #0x1\n"
+        "	mov	r1, #0xa\n"
+        "	mov	r2, #0x1c\n"
+        "	mov	r3, #0x13\n"
+        "	bl	MenuDrawTextWindow\n"
+        "	ldr	r0, ._20 + 20\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "._15:\n"
+        "	add	r0, r4, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r4, r0, #0x18\n"
+        "	ldr	r0, [r5]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._16	@cond_branch\n"
+        "	cmp	r4, #0x2\n"
+        "	bls	._17	@cond_branch\n"
+        "._16:\n"
+        "	cmp	r4, #0x3\n"
+        "	bne	._18	@cond_branch\n"
+        "	mov	r0, #0x1\n"
+        "	mov	r1, #0xa\n"
+        "	mov	r2, #0x1c\n"
+        "	mov	r3, #0x13\n"
+        "	bl	MenuDrawTextWindow\n"
+        "	ldr	r0, ._20 + 24\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "	ldr	r0, ._20 + 28\n"
+        "	bl	SetMainCallback2\n"
+        "	b	._23\n"
+        "._21:\n"
+        "	.align	2, 0\n"
+        "._20:\n"
+        "	.word	gSaveFailedClockInfo\n"
+        "	.word	gUnknown_Debug_03004BD0\n"
+        "	.word	gDamagedSaveSectors\n"
+        "	.word	gSystemText_CheckCompleteSaveAttempt\n"
+        "	.word	gSaveFailedType\n"
+        "	.word	gSystemText_SaveFailedBackupCheck\n"
+        "	.word	gSystemText_BackupDamagedGameContinue\n"
+        "	.word	CB2_FadeAndReturnToTitleScreen+1\n"
+        "._18:\n"
+        "	mov	r0, #0x1\n"
+        "	mov	r1, #0xa\n"
+        "	mov	r2, #0x1c\n"
+        "	mov	r3, #0x13\n"
+        "	bl	MenuDrawTextWindow\n"
+        "	ldr	r0, ._24\n"
+        "	ldr	r0, [r0]\n"
+        "	cmp	r0, #0\n"
+        "	bne	._22	@cond_branch\n"
+        "	ldr	r0, ._24 + 4\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "	b	._23\n"
+        "._25:\n"
+        "	.align	2, 0\n"
+        "._24:\n"
+        "	.word	gGameContinueCallback\n"
+        "	.word	gSystemText_SaveCompletedGameEnd\n"
+        "._14:\n"
+        "	mov	r0, #0x1\n"
+        "	mov	r1, #0xa\n"
+        "	mov	r2, #0x1c\n"
+        "	mov	r3, #0x13\n"
+        "	bl	MenuDrawTextWindow\n"
+        "	ldr	r0, ._27\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "	ldr	r0, ._27 + 4\n"
+        "	bl	SetMainCallback2\n"
+        "	b	._26\n"
+        "._28:\n"
+        "	.align	2, 0\n"
+        "._27:\n"
+        "	.word	gSystemText_BackupDamagedGameContinue\n"
+        "	.word	CB2_GameplayCannotBeContinued+1\n"
+        "._22:\n"
+        "	ldr	r0, ._29\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xb\n"
+        "	bl	MenuPrint\n"
+        "._23:\n"
+        "	ldr	r0, ._29 + 4\n"
+        "	bl	SetMainCallback2\n"
+        "._26:\n"
+        "	pop	{r4, r5}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._30:\n"
+        "	.align	2, 0\n"
+        "._29:\n"
+        "	.word	gSystemText_SaveCompletedPressA\n"
+        "	.word	CB2_FadeAndReturnToTitleScreen+1\n"
+        "\n"
+    );
+}
+#else
+void CB2_WipeSave(void)
 {
     u8 wipeTries = 0;
 
@@ -205,8 +350,9 @@ static void CB2_WipeSave(void)
 
     SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
 }
+#endif
 
-static void CB2_GameplayCannotBeContinued(void)
+void CB2_GameplayCannotBeContinued(void)
 {
     gSaveFailedClockInfo.clockRunning = FALSE;
 
@@ -271,18 +417,38 @@ static void VBlankCB_UpdateClockGraphics(void)
         gSaveFailedClockInfo.timer--;
 }
 
-static bool8 VerifySectorWipe(u16 sector)
+__attribute__((naked))
+bool8 VerifySectorWipe(u16 sector)
 {
-    u32 *ptr = (u32 *)unk_2000000;
-    u16 i;
-
-    ReadFlash(sector, 0, (u8 *)ptr, 4096);
-
-    for (i = 0; i < 0x400; i++, ptr++)
-        if (*ptr)
-            return TRUE;
-
-    return FALSE;
+    asm(
+        "	push	{lr}\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	lsr	r0, r0, #0x10\n"
+        "	ldr	r2, ._50\n"
+        "	mov	r3, #0x80\n"
+        "	lsl	r3, r3, #0x5\n"
+        "	mov	r1, #0x0\n"
+        "	bl	gScriptFuncs_End+0x2d64\n"
+        "	mov	r0, #0x0\n"
+        "	ldr	r1, ._50 + 4\n"
+        "._49:\n"
+        "	add	r0, r0, #0x1\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	lsr	r0, r0, #0x10\n"
+        "	cmp	r0, r1\n"
+        "	bls	._49	@cond_branch\n"
+        "	ldr	r0, ._50 + 8\n"
+        "	ldrb	r0, [r0]\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._51:\n"
+        "	.align	2, 0\n"
+        "._50:\n"
+        "	.word	+0x2000000\n"
+        "	.word	0x3ff\n"
+        "	.word	gUnknown_Debug_03004BD0\n"
+        "\n"
+    );
 }
 
 static bool8 WipeSector(u16 sector)
@@ -301,7 +467,7 @@ static bool8 WipeSector(u16 sector)
     return failed;
 }
 
-static bool8 WipeSectors(u32 sectorBits)
+bool8 WipeSectors(u32 sectorBits)
 {
     u16 i;
 

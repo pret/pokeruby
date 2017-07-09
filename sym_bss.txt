@@ -107,6 +107,9 @@ gUnknown_03000701: @ 3000701
 gUnknown_03000704: @ 3000704
 	.space 0x4
 
+unk_debug_bss_3:
+	.space 0x4
+
 gUnknown_03000708: @ 3000708
 	.space 0x10
 

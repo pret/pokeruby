@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "berry.h"
 #include "berry_blender.h"
+#include "cable_club.h"
 #include "hall_of_fame.h"
 #include "item_use.h"
 #include "main.h"
@@ -14,6 +15,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "strings2.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 
@@ -66,7 +68,7 @@ u32 sub_8007E40(void);
 static void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
-static void PrintHex(u32, u8, u8, u8);
+void PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8);
 bool8 sub_8008224(void);
@@ -191,7 +193,7 @@ static const u8 sTestString[] = _("テストな");
 
 ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) static const u8 sEmptyString[] = _("");
+static const u8 sEmptyString[] = _(" ");
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -543,6 +545,9 @@ static void ProcessRecvCmds(u8 unusedParam)
                 else
                 {
                     SetBlockReceivedFlag(i);
+#ifdef DEBUG
+                    debug_sub_808B838(i);
+#endif
                 }
             }
             break;
@@ -957,7 +962,7 @@ static void PrintHexDigit(u8 tileNum, u8 x, u8 y)
     tilemap[(32 * y) + x] = (gLinkTestBGInfo.paletteNum << 12) | (tileNum + 1);
 }
 
-static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
+void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
 {
     u8 buffer[16];
     s32 i;
@@ -974,6 +979,143 @@ static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
         x++;
     }
 }
+
+#ifdef DEBUG
+
+EWRAM_DATA u16 *debugCharacterBase = NULL;
+EWRAM_DATA void *unk_20238C8 = NULL;
+EWRAM_DATA u16 (*debugTileMap)[] = NULL;
+EWRAM_DATA u32 unk_20238D0 = 0;
+
+void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3) {
+    CpuSet(sLinkTestDigitTiles, buffer, 272);
+    debugCharacterBase = buffer;
+    unk_20238C8 = arg1;
+    debugTileMap = arg2;
+    unk_20238D0 = arg3;
+}
+
+#if 0
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0) {
+    u32 buffer[8];
+    u32 *ptr;
+
+    u16 *dest;
+
+    int i;
+
+    if (unk_20238D0 != sp0)
+    {
+        return;
+    }
+
+    r3 = max(r3, 8);
+
+    ptr = &buffer[0];
+    dest = &(*debugTileMap)[left + top * 32];
+
+    for (i = r3; i != 0; i--)
+    {
+        *(ptr++) = value & 0xF;
+        value = value >> 4;
+    }
+
+    ptr = &buffer[8 - r3];
+    for (i = r3; i != 0; i--)
+    {
+        int charOffset = (((uintptr_t) debugCharacterBase) - ((uintptr_t) unk_20238C8)) / 32;
+        *dest = *ptr + charOffset + 1;
+        ptr--;
+        dest++;
+    }
+}
+#else
+__attribute__((naked))
+void debug_sub_8008264()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r8\n"
+        "	push	{r7}\n"
+        "	add	sp, sp, #0xffffffe0\n"
+        "	add	r5, r0, #0\n"
+        "	add	r6, r1, #0\n"
+        "	add	r4, r3, #0\n"
+        "	ldr	r0, [sp, #0x38]\n"
+        "	ldr	r1, ._347\n"
+        "	ldr	r1, [r1]\n"
+        "	cmp	r1, r0\n"
+        "	bne	._345	@cond_branch\n"
+        "	cmp	r4, #0x8\n"
+        "	ble	._342	@cond_branch\n"
+        "	mov	r4, #0x8\n"
+        "._342:\n"
+        "	mov	r3, sp\n"
+        "	ldr	r0, ._347 + 4\n"
+        "	mov	r8, r0\n"
+        "	lsl	r2, r2, #0x6\n"
+        "	mov	ip, r2\n"
+        "	lsl	r6, r6, #0x1\n"
+        "	lsl	r7, r4, #0x2\n"
+        "	cmp	r4, #0\n"
+        "	ble	._343	@cond_branch\n"
+        "	mov	r1, #0xf\n"
+        "	add	r2, r4, #0\n"
+        "._344:\n"
+        "	add	r0, r5, #0\n"
+        "	and	r0, r0, r1\n"
+        "	stmia	r3!, {r0}\n"
+        "	lsr	r5, r5, #0x4\n"
+        "	sub	r2, r2, #0x1\n"
+        "	cmp	r2, #0\n"
+        "	bne	._344	@cond_branch\n"
+        "._343:\n"
+        "	mov	r1, r8\n"
+        "	ldr	r0, [r1]\n"
+        "	add r0, r0, ip\n"
+        "	add	r5, r0, r6\n"
+        "	mov	r1, sp\n"
+        "	add	r0, r1, r7\n"
+        "	sub	r3, r0, #4\n"
+        "	cmp	r4, #0\n"
+        "	ble	._345	@cond_branch\n"
+        "	ldr	r7, ._347 + 8\n"
+        "	ldr	r6, ._347 + 12\n"
+        "	add	r2, r4, #0\n"
+        "._346:\n"
+        "	ldr	r1, [r7]\n"
+        "	ldr	r0, [r6]\n"
+        "	sub	r1, r1, r0\n"
+        "	lsr	r1, r1, #0x5\n"
+        "	ldr	r0, [r3]\n"
+        "	add	r0, r0, r1\n"
+        "	add	r0, r0, #0x1\n"
+        "	strh	r0, [r5]\n"
+        "	sub	r3, r3, #0x4\n"
+        "	add	r5, r5, #0x2\n"
+        "	sub	r2, r2, #0x1\n"
+        "	cmp	r2, #0\n"
+        "	bne	._346	@cond_branch\n"
+        "._345:\n"
+        "	add	sp, sp, #0x20\n"
+        "	pop	{r3}\n"
+        "	mov	r8, r3\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._348:\n"
+        "	.align	2, 0\n"
+        "._347:\n"
+        "	.word	unk_20238D0\n"
+        "	.word	debugTileMap\n"
+        "	.word	debugCharacterBase\n"
+        "	.word	unk_20238C8\n"
+        "\n"
+    );
+}
+#endif
+
+#endif
 
 static void LinkCB_RequestPlayerDataExchange(void)
 {
@@ -1255,12 +1397,31 @@ void CB2_LinkError(void)
 
 static void CB2_PrintErrorMessage(void)
 {
-    u8 array[64] __attribute__((unused)); // unused
+    u8 buffer[0x20] __attribute__((unused)); // unused
+    u8 buffer2[0x20] __attribute__((unused)); // unused
 
     switch (gMain.state)
     {
     case 0:
         MenuPrint_PixelCoords(gMultiText_LinkError, 20, 56, 1);
+#ifdef DEBUG
+            StringCopy(buffer, sColorCodes);
+
+            ConvertIntToHexStringN(buffer2, sErrorLinkStatus, STR_CONV_MODE_LEADING_ZEROS, 8);
+            StringAppend(buffer, buffer2);
+
+            StringAppend(buffer, sEmptyString);
+
+            ConvertIntToHexStringN(buffer2, sErrorLastSendQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+            StringAppend(buffer, buffer2);
+
+            StringAppend(buffer, sEmptyString);
+
+            ConvertIntToHexStringN(buffer2, sErrorLastRecvQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+            StringAppend(buffer, buffer2);
+
+            MenuPrint(buffer, 2, 15);
+#endif
         break;
     case 30:
     case 60:

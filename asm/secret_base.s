@@ -2367,162 +2367,174 @@ _080BD670: .4byte gSaveBlock1 + 0x1A08
 	thumb_func_end sub_80BD610
 
 	thumb_func_start sub_80BD674
-sub_80BD674: @ 80BD674
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	adds r5, r1, 0
-	lsls r2, 24
-	lsrs r7, r2, 24
-	movs r0, 0x60
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _080BD68C
-	b _080BD790
-_080BD68C:
-	bl GetLinkPlayerCount
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	beq _080BD69E
-	cmp r0, 0x3
-	beq _080BD6BA
-	b _080BD6C8
-_080BD69E:
-	lsls r4, r5, 1
-	adds r0, r6, r4
-	movs r1, 0
-	adds r2, r5, 0
-	bl memset
-	adds r4, r5
-	adds r4, r6, r4
-	adds r0, r4, 0
-	movs r1, 0
-	adds r2, r5, 0
-	bl memset
-	b _080BD6C8
-_080BD6BA:
-	lsls r0, r5, 1
-	adds r0, r5
-	adds r0, r6, r0
-	movs r1, 0
-	adds r2, r5, 0
-	bl memset
-_080BD6C8:
-	cmp r7, 0x1
-	beq _080BD6F0
-	cmp r7, 0x1
-	bgt _080BD6D6
-	cmp r7, 0
-	beq _080BD6E0
-	b _080BD71C
-_080BD6D6:
-	cmp r7, 0x2
-	beq _080BD700
-	cmp r7, 0x3
-	beq _080BD710
-	b _080BD71C
-_080BD6E0:
-	adds r0, r6, r5
-	lsls r2, r5, 1
-	adds r1, r6, r2
-	adds r2, r5
-	adds r2, r6, r2
-	bl sub_80BD610
-	b _080BD71C
-_080BD6F0:
-	lsls r1, r5, 1
-	adds r0, r6, r1
-	adds r1, r5
-	adds r1, r6, r1
-	adds r2, r6, 0
-	bl sub_80BD610
-	b _080BD71C
-_080BD700:
-	lsls r0, r5, 1
-	adds r0, r5
-	adds r0, r6, r0
-	adds r2, r6, r5
-	adds r1, r6, 0
-	bl sub_80BD610
-	b _080BD71C
-_080BD710:
-	adds r1, r6, r5
-	lsls r2, r5, 1
-	adds r2, r6, r2
-	adds r0, r6, 0
-	bl sub_80BD610
-_080BD71C:
-	movs r3, 0x1
-	ldr r6, _080BD798 @ =gSaveBlock1
-	movs r5, 0x10
-	negs r5, r5
-	ldr r4, _080BD79C @ =0x00001a09
-_080BD726:
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 5
-	adds r0, r6
-	adds r2, r0, r4
-	ldrb r1, [r2]
-	lsls r0, r1, 28
-	lsrs r0, 28
-	cmp r0, 0x1
-	bne _080BD746
-	movs r0, 0x3F
-	ands r0, r1
-	movs r1, 0x40
-	orrs r0, r1
-	ands r0, r5
-	strb r0, [r2]
-_080BD746:
-	adds r0, r3, 0x1
-	lsls r0, 16
-	lsrs r3, r0, 16
-	cmp r3, 0x13
-	bls _080BD726
-	bl sub_80BD280
-	movs r3, 0x1
-	ldr r4, _080BD798 @ =gSaveBlock1
-	ldr r6, _080BD79C @ =0x00001a09
-	adds r7, r4, 0
-	movs r5, 0x3F
-_080BD75E:
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 5
-	adds r0, r4
-	adds r2, r0, r6
-	ldrb r1, [r2]
-	lsrs r0, r1, 6
-	cmp r0, 0x2
-	bne _080BD776
-	adds r0, r5, 0
-	ands r0, r1
-	strb r0, [r2]
-_080BD776:
-	adds r0, r3, 0x1
-	lsls r0, 16
-	lsrs r3, r0, 16
-	cmp r3, 0x13
-	bls _080BD75E
-	ldr r0, _080BD7A0 @ =0x00001a16
-	adds r2, r7, r0
-	ldrh r1, [r2]
-	ldr r0, _080BD7A4 @ =0x0000ffff
-	cmp r1, r0
-	beq _080BD790
-	adds r0, r1, 0x1
-	strh r0, [r2]
-_080BD790:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BD798: .4byte gSaveBlock1
-_080BD79C: .4byte 0x00001a09
-_080BD7A0: .4byte 0x00001a16
-_080BD7A4: .4byte 0x0000ffff
+sub_80BD674:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	add	r6, r0, #0
+	add	r5, r1, #0
+	lsl	r2, r2, #0x18
+	lsr	r7, r2, #0x18
+	ldr	r0, ._503
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._498	@cond_branch
+	mov	r0, #0x60
+	bl	FlagGet
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._498	@cond_branch
+	b	._520
+._498:
+	bl	GetLinkPlayerCount
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x2
+	beq	._500	@cond_branch
+	cmp	r0, #0x3
+	beq	._501	@cond_branch
+	b	._505
+._504:
+	.align	2, 0
+._503:
+	.word	gUnknown_020297ED
+._500:
+	lsl	r4, r5, #0x1
+	add	r0, r6, r4
+	mov	r1, #0x0
+	add	r2, r5, #0
+	bl	gScriptFuncs_End+0x5c24
+	add	r4, r4, r5
+	add	r4, r6, r4
+	add	r0, r4, #0
+	mov	r1, #0x0
+	add	r2, r5, #0
+	bl	gScriptFuncs_End+0x5c24
+	b	._505
+._501:
+	lsl	r0, r5, #0x1
+	add	r0, r0, r5
+	add	r0, r6, r0
+	mov	r1, #0x0
+	add	r2, r5, #0
+	bl	gScriptFuncs_End+0x5c24
+._505:
+	cmp	r7, #0x1
+	beq	._506	@cond_branch
+	cmp	r7, #0x1
+	bgt	._507	@cond_branch
+	cmp	r7, #0
+	beq	._508	@cond_branch
+	b	._515
+._507:
+	cmp	r7, #0x2
+	beq	._510	@cond_branch
+	cmp	r7, #0x3
+	beq	._511	@cond_branch
+	b	._515
+._508:
+	add	r0, r6, r5
+	lsl	r2, r5, #0x1
+	add	r1, r6, r2
+	add	r2, r2, r5
+	add	r2, r6, r2
+	bl	sub_80BD610
+	b	._515
+._506:
+	lsl	r1, r5, #0x1
+	add	r0, r6, r1
+	add	r1, r1, r5
+	add	r1, r6, r1
+	add	r2, r6, #0
+	bl	sub_80BD610
+	b	._515
+._510:
+	lsl	r0, r5, #0x1
+	add	r0, r0, r5
+	add	r0, r6, r0
+	add	r2, r6, r5
+	add	r1, r6, #0
+	bl	sub_80BD610
+	b	._515
+._511:
+	add	r1, r6, r5
+	lsl	r2, r5, #0x1
+	add	r2, r6, r2
+	add	r0, r6, #0
+	bl	sub_80BD610
+._515:
+	mov	r3, #0x1
+	ldr	r6, ._521
+	mov	r5, #0x10
+	neg	r5, r5
+	ldr	r4, ._521 + 4
+._517:
+	lsl	r0, r3, #0x2
+	add	r0, r0, r3
+	lsl	r0, r0, #0x5
+	add	r0, r0, r6
+	add	r2, r0, r4
+	ldrb	r1, [r2]
+	lsl	r0, r1, #0x1c
+	lsr	r0, r0, #0x1c
+	cmp	r0, #0x1
+	bne	._516	@cond_branch
+	mov	r0, #0x3f
+	and	r0, r0, r1
+	mov	r1, #0x40
+	orr	r0, r0, r1
+	and	r0, r0, r5
+	strb	r0, [r2]
+._516:
+	add	r0, r3, #1
+	lsl	r0, r0, #0x10
+	lsr	r3, r0, #0x10
+	cmp	r3, #0x13
+	bls	._517	@cond_branch
+	bl	sub_80BD280
+	mov	r3, #0x1
+	ldr	r4, ._521
+	ldr	r6, ._521 + 4
+	add	r7, r4, #0
+	mov	r5, #0x3f
+._519:
+	lsl	r0, r3, #0x2
+	add	r0, r0, r3
+	lsl	r0, r0, #0x5
+	add	r0, r0, r4
+	add	r2, r0, r6
+	ldrb	r1, [r2]
+	lsr	r0, r1, #0x6
+	cmp	r0, #0x2
+	bne	._518	@cond_branch
+	add	r0, r5, #0
+	and	r0, r0, r1
+	strb	r0, [r2]
+._518:
+	add	r0, r3, #1
+	lsl	r0, r0, #0x10
+	lsr	r3, r0, #0x10
+	cmp	r3, #0x13
+	bls	._519	@cond_branch
+	ldr	r0, ._521 + 8
+	add	r2, r7, r0
+	ldrh	r1, [r2]
+	ldr	r0, ._521 + 12
+	cmp	r1, r0
+	beq	._520	@cond_branch
+	add	r0, r1, #1
+	strh	r0, [r2]
+._520:
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._522:
+	.align	2, 0
+._521:
+	.word	gSaveBlock1
+	.word	0x1a09
+	.word	0x1a16
+	.word	0xffff
+.syntax unified
 	thumb_func_end sub_80BD674
 
 	.align 2, 0 @ Don't pad with nop.

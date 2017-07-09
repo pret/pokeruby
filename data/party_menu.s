@@ -742,3 +742,11 @@ gUnknown_08376D1C:: @ 8376D1C
 	.byte 0x3E @ Sp. Attack
 	.byte 0x3F @ Sp. Defense
 	.byte 0x3D @ Speed
+
+gUnknown_Debug_839B6CE:: @ 0x839B6CE
+	@ .string "ぞ　　　で　$"
+	.byte 0x40,   0,   0,   0,0x44,   0,0xFF,   0,   0,   0
+
+gUnknown_Debug_839B6D8:: @ 0x839B6D8
+	.string "{STR_VAR_1}かい　じっこう\n"
+	.string "{STR_VAR_2}たんいじかん　しょうひ$"

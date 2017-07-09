@@ -114,6 +114,7 @@ SECTIONS {
         src/party_menu.o(.text);
         asm/party_menu.o(.text_8070968);
         src/start_menu.o(.text);
+        src/start_menu_debug.o(.text);
         src/menu.o(.text);
         src/tileset_anim.o(.text);
         src/palette.o(.text);
@@ -247,6 +248,7 @@ SECTIONS {
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/mystery_event_script.o(.text);
+        src/unk_debug_menu_3.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
@@ -371,6 +373,7 @@ SECTIONS {
         data/reset_rtc_screen.o(.rodata);
         data/party_menu.o(.rodata);
         src/start_menu.o(.rodata);
+        data/debug_start_menu.o(.rodata);
         src/menu.o(.rodata);
         data/tileset_anim.o(.rodata);
         src/palette.o(.rodata);
@@ -452,6 +455,7 @@ SECTIONS {
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
+        src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         data/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
@@ -483,6 +487,7 @@ SECTIONS {
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
+        data/debug_mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         src/nakamura_debug_menu.o(.rodata);
@@ -493,6 +498,7 @@ SECTIONS {
         data/strings2.o(.rodata);
         data/menu_cursor.o(.rodata);
         data/mystery_event_msg.o(.rodata);
+        data/debug_menu_3.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

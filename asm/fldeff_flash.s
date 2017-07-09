@@ -6,6 +6,34 @@
 
 	.text
 
+	thumb_func_start debug_sub_8122080
+debug_sub_8122080:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._4
+	ldrb	r0, [r0, #0x15]
+	cmp	r0, #0x1
+	bne	._2	@cond_branch
+	ldr	r0, ._4 + 4
+	bl	FlagGet
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._2	@cond_branch
+	bl	sub_810CBFC
+	b	._3
+._5:
+	.align	2, 0
+._4:
+	.word	gMapHeader
+	.word	0x828
+._2:
+	bl	ScriptContext2_Disable
+._3:
+	pop	{r0}
+	bx	r0
+.syntax unified
+	thumb_func_end debug_sub_8122080
+
 	thumb_func_start SetUpFieldMove_Flash
 SetUpFieldMove_Flash: @ 810CBB4
 	push {lr}

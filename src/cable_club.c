@@ -21,9 +21,9 @@ extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_081A4932[];
 extern const u8 gUnknown_081A4975[];
 
-static void sub_80830E4(u8 taskId);
+void sub_80830E4(u8 taskId);
 static void sub_8083288(u8 taskId);
-static void sub_8083314(u8 taskId);
+void sub_8083314(u8 taskId);
 
 void sub_808303C(u8 taskId) {
     s32 linkPlayerCount;
@@ -72,7 +72,7 @@ void sub_808303C(u8 taskId) {
 }
 
 #ifdef NONMATCHING
-static void sub_80830E4(u8 taskId) {
+void sub_80830E4(u8 taskId) {
     if (sub_8082E28(taskId) == 1 ||
         sub_8082EB8(taskId) == 1 ||
         sub_8082DF4(taskId) == 1 ||
@@ -98,7 +98,7 @@ static void sub_80830E4(u8 taskId) {
 }
 #else
 __attribute__((naked))
-static void sub_80830E4(u8 taskId) {
+void sub_80830E4(u8 taskId) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
     lsls r0, 24\n\
@@ -216,6 +216,10 @@ void sub_80831F8(u8 taskId) {
         return;
     }
 
+#ifdef DEBUG
+    sub_8082D60(taskId, GetLinkPlayerCount_2());
+#endif
+
     result = &gScriptResult;
     *result = sub_8082D9C(local1, local2);
     if (*result == 0)
@@ -263,7 +267,7 @@ static void sub_8083288(u8 taskId) {
     }
 }
 
-static void sub_8083314(u8 taskId) {
+void sub_8083314(u8 taskId) {
     u8 index;
 
     struct TrainerCard *trainerCards;

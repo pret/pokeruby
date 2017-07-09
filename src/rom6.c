@@ -5,6 +5,7 @@
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "item_use.h"
+#include "map_object_constants.h"
 #include "pokemon_menu.h"
 #include "rom4.h"
 #include "script.h"
@@ -115,6 +116,21 @@ static void sub_810B4CC(u8 taskId)
     gPlayerAvatar.unk6 = 0;
     DestroyTask(taskId);
 }
+
+#ifdef DEBUG
+void debug_sub_8120968()
+{
+    if (npc_before_player_of_type(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    {
+        gLastFieldPokeMenuOpened = 0;
+        sub_810B53C();
+    }
+    else
+    {
+        ScriptContext2_Disable();
+    }
+}
+#endif
 
 bool8 SetUpFieldMove_RockSmash(void)
 {

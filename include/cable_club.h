@@ -19,4 +19,8 @@ s32 sub_8083BF4(u8 id);
 void sub_8083C50(u8);
 void sub_8083188(u8 taskId);
 
+#ifdef DEBUG
+void debug_sub_808B838(u8);
+#endif
+
 #endif // GUARD_CABLE_CLUB_H

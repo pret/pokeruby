@@ -311,350 +311,412 @@ _0811536C:
 	thumb_func_end sub_8115238
 
 	thumb_func_start sub_8115384
-sub_8115384: @ 8115384
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _081153A4 @ =gMain
-	ldr r2, _081153A8 @ =0x0000043c
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0x7
-	bls _08115398
-	b _081155FE
-_08115398:
-	lsls r0, 2
-	ldr r1, _081153AC @ =_081153B0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_081153A4: .4byte gMain
-_081153A8: .4byte 0x0000043c
-_081153AC: .4byte _081153B0
-	.align 2, 0
-_081153B0:
-	.4byte _081153D0
-	.4byte _08115444
-	.4byte _08115460
-	.4byte _08115494
-	.4byte _081154CC
-	.4byte _081154FC
-	.4byte _0811556C
-	.4byte _0811558C
-_081153D0:
-	movs r0, 0
-	bl SetVBlankCallback
-	bl remove_some_task
-	bl sub_80F9438
-	bl sub_80F9368
-	ldr r1, _08115420 @ =REG_BG2CNT
-	ldr r3, _08115424 @ =0x00004686
-	adds r0, r3, 0
-	strh r0, [r1]
-	subs r1, 0x2
-	ldr r2, _08115428 @ =0x00004401
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x46
-	movs r3, 0x90
-	lsls r3, 6
-	adds r0, r3, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	ldr r2, _0811542C @ =0x0000060a
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, _08115430 @ =gUnknown_08E8096C
-	movs r1, 0xC0
-	lsls r1, 19
-	bl LZ77UnCompVram
-	ldr r0, _08115434 @ =gRouletteWheelTiles
-	ldr r1, _08115438 @ =0x06004000
-	bl LZ77UnCompVram
-	ldr r1, _0811543C @ =gMain
-	ldr r3, _08115440 @ =0x0000043c
-	adds r1, r3
-	b _0811557A
-	.align 2, 0
-_08115420: .4byte REG_BG2CNT
-_08115424: .4byte 0x00004686
-_08115428: .4byte 0x00004401
-_0811542C: .4byte 0x0000060a
-_08115430: .4byte gUnknown_08E8096C
-_08115434: .4byte gRouletteWheelTiles
-_08115438: .4byte 0x06004000
-_0811543C: .4byte gMain
-_08115440: .4byte 0x0000043c
-_08115444:
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl ResetTasks
-	ldr r1, _08115458 @ =gMain
-	ldr r0, _0811545C @ =0x0000043c
-	adds r1, r0
-	b _0811557A
-	.align 2, 0
-_08115458: .4byte gMain
-_0811545C: .4byte 0x0000043c
-_08115460:
-	ldr r0, _08115480 @ =gWindowConfig_81E6C3C
-	bl SetUpWindowConfig
-	ldr r0, _08115484 @ =gWindowConfig_81E6CE4
-	bl InitMenuWindow
-	ldr r0, _08115488 @ =gUnknown_083F86BC
-	movs r2, 0xE0
-	lsls r2, 1
-	movs r1, 0
-	bl LoadPalette
-	ldr r1, _0811548C @ =gMain
-	ldr r2, _08115490 @ =0x0000043c
-	adds r1, r2
-	b _0811557A
-	.align 2, 0
-_08115480: .4byte gWindowConfig_81E6C3C
-_08115484: .4byte gWindowConfig_81E6CE4
-_08115488: .4byte gUnknown_083F86BC
-_0811548C: .4byte gMain
-_08115490: .4byte 0x0000043c
-_08115494:
-	bl sub_8115238
-	bl sub_80F9020
-	ldr r0, _081154B4 @ =gUnknown_083F88BC
-	ldr r1, _081154B8 @ =0x02018800
-	bl LZ77UnCompWram
-	ldr r0, _081154BC @ =gUnknown_083F8A60
-	ldr r1, _081154C0 @ =0x06003000
-	bl LZ77UnCompVram
-	ldr r1, _081154C4 @ =gMain
-	ldr r3, _081154C8 @ =0x0000043c
-	adds r1, r3
-	b _0811557A
-	.align 2, 0
-_081154B4: .4byte gUnknown_083F88BC
-_081154B8: .4byte 0x02018800
-_081154BC: .4byte gUnknown_083F8A60
-_081154C0: .4byte 0x06003000
-_081154C4: .4byte gMain
-_081154C8: .4byte 0x0000043c
-_081154CC:
-	movs r0, 0
-	bl sub_8117838
-	bl sub_811857C
-	bl sub_81184D8
-	bl sub_8117F2C
-	bl sub_8117900
-	bl sub_8117BBC
-	bl sub_8117DF4
-	ldr r1, _081154F4 @ =gMain
-	ldr r0, _081154F8 @ =0x0000043c
-	adds r1, r0
-	b _0811557A
-	.align 2, 0
-_081154F4: .4byte gMain
-_081154F8: .4byte 0x0000043c
-_081154FC:
-	bl AnimateSprites
-	bl BuildOamBuffer
-	ldr r0, _08115550 @ =gSaveBlock1
-	ldr r1, _08115554 @ =0x00000494
-	adds r0, r1
-	ldrh r0, [r0]
-	bl sub_81180F4
-	movs r0, 0x6
-	bl sub_81182F8
-	movs r0, 0
-	bl sub_811829C
-	movs r0, 0
-	bl sub_8117158
-	movs r0, 0
-	movs r1, 0xE
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r0, _08115558 @ =gUnknown_081C4157
-	movs r1, 0x1
-	movs r2, 0xF
-	bl MenuPrint
-	ldr r1, _0811555C @ =gSpriteCoordOffsetX
-	movs r2, 0x3C
-	negs r2, r2
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r1, _08115560 @ =gSpriteCoordOffsetY
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, _08115564 @ =gMain
-	ldr r3, _08115568 @ =0x0000043c
-	adds r1, r3
-	b _0811557A
-	.align 2, 0
-_08115550: .4byte gSaveBlock1
-_08115554: .4byte 0x00000494
-_08115558: .4byte gUnknown_081C4157
-_0811555C: .4byte gSpriteCoordOffsetX
-_08115560: .4byte gSpriteCoordOffsetY
-_08115564: .4byte gMain
-_08115568: .4byte 0x0000043c
-_0811556C:
-	movs r1, 0x80
-	lsls r1, 19
-	ldr r3, _08115584 @ =0x00001741
-	adds r0, r3, 0
-	strh r0, [r1]
-	ldr r0, _08115588 @ =0x0000043c
-	adds r1, r2, r0
-_0811557A:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _081155FE
-	.align 2, 0
-_08115584: .4byte 0x00001741
-_08115588: .4byte 0x0000043c
-_0811558C:
-	ldr r3, _08115608 @ =0x04000208
-	ldrh r2, [r3]
-	movs r0, 0
-	strh r0, [r3]
-	ldr r4, _0811560C @ =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r2, _08115610 @ =REG_DISPSTAT
-	ldrh r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, _08115614 @ =sub_8115124
-	bl SetVBlankCallback
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0xFF
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginHardwarePaletteFade
-	ldr r0, _08115618 @ =sub_81156BC
-	movs r1, 0
-	bl CreateTask
-	ldr r4, _0811561C @ =0x02019000
-	adds r1, r4, 0
-	adds r1, 0xA4
-	strb r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08115620 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r0, 0x6
-	strh r0, [r1, 0x14]
-	ldr r0, _08115624 @ =gSaveBlock1
-	ldr r2, _08115628 @ =0x00000494
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1, 0x22]
-	ldr r0, _0811562C @ =sub_8115634
-	movs r1, 0x1
-	bl CreateTask
-	adds r4, 0xA5
-	strb r0, [r4]
-	ldr r0, _08115630 @ =sub_81150FC
-	bl SetMainCallback2
-_081155FE:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08115608: .4byte 0x04000208
-_0811560C: .4byte 0x04000200
-_08115610: .4byte REG_DISPSTAT
-_08115614: .4byte sub_8115124
-_08115618: .4byte sub_81156BC
-_0811561C: .4byte 0x02019000
-_08115620: .4byte gTasks
-_08115624: .4byte gSaveBlock1
-_08115628: .4byte 0x00000494
-_0811562C: .4byte sub_8115634
-_08115630: .4byte sub_81150FC
+sub_8115384:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._35
+	ldr	r0, ._35 + 4
+	str	r0, [r1]
+	ldr	r1, ._35 + 8
+	ldr	r2, ._35 + 12
+	add	r0, r1, r2
+	ldrb	r0, [r0]
+	add	r2, r1, #0
+	cmp	r0, #0x7
+	bls	._33	@cond_branch
+	b	._64
+._33:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._35 + 16
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._36:
+	.align	2, 0
+._35:
+	.word	gUnknown_Debug_03005FB8
+	.word	+0x2019000
+	.word	gMain
+	.word	0x43c
+	.word	._37
+._37:
+	.word	._38
+	.word	._39
+	.word	._40
+	.word	._41
+	.word	._42
+	.word	._43
+	.word	._44
+	.word	._45
+._38:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	remove_some_task
+	bl	sub_80F9438
+	bl	sub_80F9368
+	ldr	r1, ._47
+	ldr	r3, ._47 + 4
+	add	r0, r3, #0
+	strh	r0, [r1]
+	sub	r1, r1, #0x2
+	ldr	r2, ._47 + 8
+	add	r0, r2, #0
+	strh	r0, [r1]
+	add	r1, r1, #0x46
+	mov	r3, #0x90
+	lsl	r3, r3, #0x6
+	add	r0, r3, #0
+	strh	r0, [r1]
+	add	r1, r1, #0x2
+	ldr	r2, ._47 + 12
+	add	r0, r2, #0
+	strh	r0, [r1]
+	ldr	r0, ._47 + 16
+	mov	r1, #0xc0
+	lsl	r1, r1, #0x13
+	bl	gScriptFuncs_End+0x3cb8
+	ldr	r0, ._47 + 20
+	ldr	r1, ._47 + 24
+	bl	gScriptFuncs_End+0x3cb8
+	ldr	r1, ._47 + 28
+	ldr	r3, ._47 + 32
+	add	r1, r1, r3
+	b	._61
+._48:
+	.align	2, 0
+._47:
+	.word	0x400000c
+	.word	0x4686
+	.word	0x4401
+	.word	0x60a
+	.word	gUnknown_08E8096C
+	.word	gRouletteWheelTiles
+	.word	0x6004000
+	.word	gMain
+	.word	0x43c
+._39:
+	bl	ResetPaletteFade
+	bl	ResetSpriteData
+	bl	ResetTasks
+	ldr	r1, ._50
+	ldr	r0, ._50 + 4
+	add	r1, r1, r0
+	b	._61
+._51:
+	.align	2, 0
+._50:
+	.word	gMain
+	.word	0x43c
+._40:
+	ldr	r0, ._53
+	bl	SetUpWindowConfig
+	ldr	r0, ._53 + 4
+	bl	InitMenuWindow
+	ldr	r0, ._53 + 8
+	mov	r2, #0xe0
+	lsl	r2, r2, #0x1
+	mov	r1, #0x0
+	bl	LoadPalette
+	ldr	r1, ._53 + 12
+	ldr	r2, ._53 + 16
+	add	r1, r1, r2
+	b	._61
+._54:
+	.align	2, 0
+._53:
+	.word	gWindowConfig_81E6C3C
+	.word	gWindowConfig_81E6CE4
+	.word	gUnknown_083F86BC
+	.word	gMain
+	.word	0x43c
+._41:
+	bl	sub_8115238
+	bl	sub_80F9020
+	ldr	r0, ._56
+	ldr	r1, ._56 + 4
+	bl	gScriptFuncs_End+0x3cbc
+	ldr	r0, ._56 + 8
+	ldr	r1, ._56 + 12
+	bl	gScriptFuncs_End+0x3cb8
+	ldr	r1, ._56 + 16
+	ldr	r3, ._56 + 20
+	add	r1, r1, r3
+	b	._61
+._57:
+	.align	2, 0
+._56:
+	.word	gUnknown_083F88BC
+	.word	+0x2018800
+	.word	gUnknown_083F8A60
+	.word	0x6003000
+	.word	gMain
+	.word	0x43c
+._42:
+	mov	r0, #0x0
+	bl	sub_8117838
+	bl	sub_811857C
+	bl	sub_81184D8
+	bl	sub_8117F2C
+	bl	sub_8117900
+	bl	sub_8117BBC
+	bl	sub_8117DF4
+	ldr	r1, ._59
+	ldr	r0, ._59 + 4
+	add	r1, r1, r0
+	b	._61
+._60:
+	.align	2, 0
+._59:
+	.word	gMain
+	.word	0x43c
+._43:
+	bl	AnimateSprites
+	bl	BuildOamBuffer
+	ldr	r0, ._62
+	ldr	r1, ._62 + 4
+	add	r0, r0, r1
+	ldrh	r0, [r0]
+	bl	sub_81180F4
+	mov	r0, #0x6
+	bl	sub_81182F8
+	mov	r0, #0x0
+	bl	sub_811829C
+	mov	r0, #0x0
+	bl	sub_8117158
+	mov	r0, #0x0
+	mov	r1, #0xe
+	mov	r2, #0x1d
+	mov	r3, #0x13
+	bl	MenuDrawTextWindow
+	ldr	r0, ._62 + 8
+	mov	r1, #0x1
+	mov	r2, #0xf
+	bl	MenuPrint
+	ldr	r1, ._62 + 12
+	mov	r2, #0x3c
+	neg	r2, r2
+	add	r0, r2, #0
+	strh	r0, [r1]
+	ldr	r1, ._62 + 16
+	mov	r0, #0x0
+	strh	r0, [r1]
+	ldr	r1, ._62 + 20
+	ldr	r3, ._62 + 24
+	add	r1, r1, r3
+	b	._61
+._63:
+	.align	2, 0
+._62:
+	.word	gSaveBlock1
+	.word	0x494
+	.word	gUnknown_081C4157
+	.word	gSpriteCoordOffsetX
+	.word	gSpriteCoordOffsetY
+	.word	gMain
+	.word	0x43c
+._44:
+	mov	r1, #0x80
+	lsl	r1, r1, #0x13
+	ldr	r3, ._65
+	add	r0, r3, #0
+	strh	r0, [r1]
+	ldr	r0, ._65 + 4
+	add	r1, r2, r0
+._61:
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	b	._64
+._66:
+	.align	2, 0
+._65:
+	.word	0x1741
+	.word	0x43c
+._45:
+	ldr	r3, ._67
+	ldrh	r2, [r3]
+	mov	r0, #0x0
+	strh	r0, [r3]
+	ldr	r4, ._67 + 4
+	ldrh	r0, [r4]
+	mov	r1, #0x1
+	orr	r0, r0, r1
+	strh	r0, [r4]
+	strh	r2, [r3]
+	ldr	r2, ._67 + 8
+	ldrh	r0, [r2]
+	mov	r1, #0x8
+	orr	r0, r0, r1
+	strh	r0, [r2]
+	ldr	r0, ._67 + 12
+	bl	SetVBlankCallback
+	mov	r0, #0x1
+	str	r0, [sp]
+	mov	r0, #0xff
+	mov	r1, #0x0
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginHardwarePaletteFade
+	ldr	r0, ._67 + 16
+	mov	r1, #0x0
+	bl	CreateTask
+	ldr	r4, ._67 + 20
+	add	r1, r4, #0
+	add	r1, r1, #0xa4
+	strb	r0, [r1]
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	ldr	r2, ._67 + 24
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	add	r1, r1, r2
+	mov	r0, #0x6
+	strh	r0, [r1, #0x14]
+	ldr	r0, ._67 + 28
+	ldr	r2, ._67 + 32
+	add	r0, r0, r2
+	ldrh	r0, [r0]
+	strh	r0, [r1, #0x22]
+	ldr	r0, ._67 + 36
+	mov	r1, #0x1
+	bl	CreateTask
+	add	r4, r4, #0xa5
+	strb	r0, [r4]
+	ldr	r0, ._67 + 40
+	bl	SetMainCallback2
+._64:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._68:
+	.align	2, 0
+._67:
+	.word	0x4000208
+	.word	0x4000200
+	.word	0x4000004
+	.word	sub_8115124+1
+	.word	sub_81156BC+1
+	.word	+0x2019000
+	.word	gTasks
+	.word	gSaveBlock1
+	.word	0x494
+	.word	sub_8115634+1
+	.word	sub_81150FC+1
+.syntax unified
 	thumb_func_end sub_8115384
 
 	thumb_func_start sub_8115634
-sub_8115634: @ 8115634
-	push {r4-r6,lr}
-	ldr r0, _081156B8 @ =0x02019000
-	adds r3, r0, 0
-	adds r3, 0x21
-	ldrb r1, [r3]
-	adds r2, r1, 0x1
-	strb r2, [r3]
-	adds r2, r0, 0
-	adds r2, 0x23
-	lsls r1, 24
-	lsrs r1, 24
-	adds r6, r0, 0
-	ldrb r2, [r2]
-	cmp r1, r2
-	bne _08115674
-	movs r0, 0
-	strb r0, [r3]
-	adds r2, r6, 0
-	adds r2, 0x22
-	ldrb r1, [r2]
-	ldrh r0, [r6, 0x24]
-	subs r0, r1
-	strh r0, [r6, 0x24]
-	lsls r0, 16
-	cmp r0, 0
-	bge _08115674
-	ldrb r1, [r2]
-	movs r2, 0xB4
-	lsls r2, 1
-	adds r0, r2, 0
-	subs r0, r1
-	strh r0, [r6, 0x24]
-_08115674:
-	adds r4, r6, 0
-	ldrh r0, [r4, 0x24]
-	bl Sin2
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldrh r0, [r4, 0x24]
-	bl Cos2
-	lsls r0, 16
-	lsrs r1, r0, 16
-	lsls r0, r5, 16
-	asrs r0, 16
-	cmp r0, 0
-	bge _08115694
-	adds r0, 0xF
-_08115694:
-	lsls r0, 12
-	lsrs r5, r0, 16
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0
-	bge _081156A2
-	adds r0, 0xF
-_081156A2:
-	asrs r0, 4
-	strh r0, [r6, 0x32]
-	strh r0, [r6, 0x2C]
-	strh r5, [r6, 0x2E]
-	lsls r0, r5, 16
-	asrs r0, 16
-	negs r0, r0
-	strh r0, [r6, 0x30]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081156B8: .4byte 0x02019000
+sub_8115634:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	ldr	r0, ._75
+	add	r3, r0, #0
+	add	r3, r3, #0x21
+	ldrb	r1, [r3]
+	add	r2, r1, #1
+	strb	r2, [r3]
+	add	r2, r0, #0
+	add	r2, r2, #0x23
+	lsl	r1, r1, #0x18
+	lsr	r1, r1, #0x18
+	add	r6, r0, #0
+	ldrb	r2, [r2]
+	cmp	r1, r2
+	bne	._70	@cond_branch
+	mov	r0, #0x0
+	strb	r0, [r3]
+	add	r2, r6, #0
+	add	r2, r2, #0x22
+	ldrb	r1, [r2]
+	ldrh	r0, [r6, #0x24]
+	sub	r0, r0, r1
+	strh	r0, [r6, #0x24]
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	bge	._70	@cond_branch
+	ldrb	r1, [r2]
+	mov	r2, #0xb4
+	lsl	r2, r2, #0x1
+	add	r0, r2, #0
+	sub	r0, r0, r1
+	strh	r0, [r6, #0x24]
+._70:
+	add	r4, r6, #0
+	ldrh	r0, [r4, #0x24]
+	bl	Sin2
+	lsl	r0, r0, #0x10
+	lsr	r5, r0, #0x10
+	ldrh	r0, [r4, #0x24]
+	bl	Cos2
+	lsl	r0, r0, #0x10
+	lsr	r1, r0, #0x10
+	lsl	r0, r5, #0x10
+	asr	r0, r0, #0x10
+	cmp	r0, #0
+	bge	._71	@cond_branch
+	add	r0, r0, #0xf
+._71:
+	lsl	r0, r0, #0xc
+	lsr	r5, r0, #0x10
+	lsl	r0, r1, #0x10
+	asr	r0, r0, #0x10
+	cmp	r0, #0
+	bge	._72	@cond_branch
+	add	r0, r0, #0xf
+._72:
+	asr	r0, r0, #0x4
+	strh	r0, [r6, #0x32]
+	strh	r0, [r6, #0x2c]
+	strh	r5, [r6, #0x2e]
+	lsl	r0, r5, #0x10
+	asr	r0, r0, #0x10
+	neg	r0, r0
+	strh	r0, [r6, #0x30]
+	ldr	r0, ._75 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._74	@cond_branch
+	ldr	r0, ._75 + 8
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._74	@cond_branch
+	ldr	r2, ._75 + 12
+	add	r0, r6, #0
+	add	r0, r0, #0xa4
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x2
+	add	r0, r0, r1
+	lsl	r0, r0, #0x3
+	add	r0, r0, r2
+	ldr	r1, ._75 + 16
+	str	r1, [r0]
+	ldr	r0, ._75 + 20
+	bl	gScriptFuncs_End+0x1c08
+	ldr	r0, ._75 + 24
+	bl	gScriptFuncs_End+0x1c08
+	ldr	r0, ._75 + 28
+	bl	gScriptFuncs_End+0x1c08
+._74:
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+._76:
+	.align	2, 0
+._75:
+	.word	+0x2019000
+	.word	unk_203955C
+	.word	gMain
+	.word	gTasks
+	.word	sub_81157AC+1
+	.word	gMPlay_SE1
+	.word	gMPlay_SE2
+	.word	gMPlay_SE3
+.syntax unified
 	thumb_func_end sub_8115634
 
 	thumb_func_start sub_81156BC
@@ -3214,56 +3276,64 @@ _08116B3C: .4byte sub_8116B40
 	thumb_func_end sub_8116AB0
 
 	thumb_func_start sub_8116B40
-sub_8116B40: @ 8116B40
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl UpdatePaletteFade
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _08116B9E
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, _08116BA4 @ =0x02019000
-	movs r2, 0xBE
-	lsls r2, 1
-	movs r1, 0
-	bl memset
-	ldr r1, _08116BA8 @ =gSpriteCoordOffsetX
-	ldr r0, _08116BAC @ =gSpriteCoordOffsetY
-	strh r4, [r0]
-	strh r4, [r1]
-	bl sub_80F9368
-	bl FreeAllSpritePalettes
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl sub_80F9020
-	ldr r0, _08116BB0 @ =REG_BLDCNT
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	ldr r1, _08116BB4 @ =gFieldCallback
-	ldr r0, _08116BB8 @ =sub_8080990
-	str r0, [r1]
-	ldr r0, _08116BBC @ =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-	adds r0, r5, 0
-	bl DestroyTask
-_08116B9E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08116BA4: .4byte 0x02019000
-_08116BA8: .4byte gSpriteCoordOffsetX
-_08116BAC: .4byte gSpriteCoordOffsetY
-_08116BB0: .4byte REG_BLDCNT
-_08116BB4: .4byte gFieldCallback
-_08116BB8: .4byte sub_8080990
-_08116BBC: .4byte c2_exit_to_overworld_2_switch
+sub_8116B40:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	lsl	r0, r0, #0x18
+	lsr	r6, r0, #0x18
+	bl	UpdatePaletteFade
+	lsl	r0, r0, #0x18
+	lsr	r5, r0, #0x18
+	cmp	r5, #0
+	bne	._380	@cond_branch
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	ldr	r0, ._381
+	mov	r2, #0xbe
+	lsl	r2, r2, #0x1
+	mov	r1, #0x0
+	bl	gScriptFuncs_End+0x5c24
+	ldr	r1, ._381 + 4
+	ldr	r0, ._381 + 8
+	mov	r4, #0x0
+	strh	r5, [r0]
+	strh	r5, [r1]
+	bl	sub_80F9368
+	bl	FreeAllSpritePalettes
+	bl	ResetPaletteFade
+	bl	ResetSpriteData
+	bl	sub_80F9020
+	ldr	r0, ._381 + 12
+	strh	r5, [r0]
+	add	r0, r0, #0x2
+	strh	r5, [r0]
+	add	r0, r0, #0x2
+	strh	r5, [r0]
+	ldr	r1, ._381 + 16
+	ldr	r0, ._381 + 20
+	str	r0, [r1]
+	ldr	r0, ._381 + 24
+	bl	SetMainCallback2
+	add	r0, r6, #0
+	bl	DestroyTask
+	ldr	r0, ._381 + 28
+	strb	r4, [r0]
+._380:
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+._382:
+	.align	2, 0
+._381:
+	.word	+0x2019000
+	.word	gSpriteCoordOffsetX
+	.word	gSpriteCoordOffsetY
+	.word	0x4000050
+	.word	gFieldCallback
+	.word	sub_8080990+1
+	.word	c2_exit_to_overworld_2_switch+1
+	.word	unk_203955C
+.syntax unified
 	thumb_func_end sub_8116B40
 
 	thumb_func_start sub_8116BC0
@@ -4567,18 +4637,27 @@ _081175BC: .4byte sub_8117528
 	thumb_func_end sub_811755C
 
 	thumb_func_start sub_81175C0
-sub_81175C0: @ 81175C0
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl MenuZeroFillScreen
-	bl ScriptContext2_Disable
-	adds r0, r4, 0
-	bl DestroyTask
-	pop {r4}
-	pop {r0}
-	bx r0
+sub_81175C0:
+.syntax divided
+	push	{r4, lr}
+	add	r4, r0, #0
+	lsl	r4, r4, #0x18
+	lsr	r4, r4, #0x18
+	ldr	r1, ._553
+	mov	r0, #0x0
+	strb	r0, [r1]
+	bl	MenuZeroFillScreen
+	bl	ScriptContext2_Disable
+	add	r0, r4, #0
+	bl	DestroyTask
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._554:
+	.align	2, 0
+._553:
+	.word	unk_203955C
+.syntax unified
 	thumb_func_end sub_81175C0
 
 	thumb_func_start sub_81175DC
@@ -4825,32 +4904,382 @@ _081177F4: .4byte gUnknown_081C411C
 _081177F8: .4byte sub_81175DC
 	thumb_func_end Task_Roulette_0
 
+
+	thumb_func_start debug_sub_812CDE4
+debug_sub_812CDE4:
+.syntax divided
+	push	{r4, r5, lr}
+	lsl	r0, r0, #0x18
+	lsr	r3, r0, #0x18
+	add	r4, r3, #0
+	ldr	r0, ._575
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._572	@cond_branch
+	ldr	r1, ._575 + 4
+	lsl	r0, r3, #0x2
+	add	r0, r0, r3
+	lsl	r0, r0, #0x3
+	add	r2, r0, r1
+	ldrh	r0, [r2, #0x22]
+	add	r0, r0, #0x1
+	strh	r0, [r2, #0x22]
+	lsl	r0, r0, #0x10
+	ldr	r1, ._575 + 8
+	cmp	r0, r1
+	bne	._573	@cond_branch
+	mov	r0, #0x0
+	strh	r0, [r2, #0x22]
+._573:
+	ldr	r0, ._575 + 12
+	mov	r3, #0x22
+	ldsh	r1, [r2, r3]
+	b	._584
+._576:
+	.align	2, 0
+._575:
+	.word	gMain
+	.word	gTasks
+	.word	0x27100000
+	.word	gStringVar1
+._572:
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._577	@cond_branch
+	ldr	r1, ._580
+	lsl	r0, r3, #0x2
+	add	r0, r0, r3
+	lsl	r0, r0, #0x3
+	add	r2, r0, r1
+	ldrh	r0, [r2, #0x22]
+	sub	r0, r0, #0x1
+	strh	r0, [r2, #0x22]
+	lsl	r0, r0, #0x10
+	asr	r0, r0, #0x10
+	mov	r1, #0x1
+	neg	r1, r1
+	cmp	r0, r1
+	bne	._578	@cond_branch
+	ldr	r0, ._580 + 4
+	strh	r0, [r2, #0x22]
+._578:
+	ldr	r0, ._580 + 8
+	mov	r3, #0x22
+	ldsh	r1, [r2, r3]
+	b	._584
+._581:
+	.align	2, 0
+._580:
+	.word	gTasks
+	.word	0x270f
+	.word	gStringVar1
+._577:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._582	@cond_branch
+	ldr	r1, ._585
+	lsl	r0, r3, #0x2
+	add	r0, r0, r3
+	lsl	r0, r0, #0x3
+	add	r2, r0, r1
+	ldrh	r3, [r2, #0x22]
+	add	r0, r3, #0
+	add	r0, r0, #0xa
+	strh	r0, [r2, #0x22]
+	lsl	r0, r0, #0x10
+	ldr	r1, ._585 + 4
+	cmp	r0, r1
+	ble	._583	@cond_branch
+	ldr	r1, ._585 + 8
+	add	r0, r3, r1
+	strh	r0, [r2, #0x22]
+._583:
+	ldr	r0, ._585 + 12
+	mov	r3, #0x22
+	ldsh	r1, [r2, r3]
+	b	._584
+._586:
+	.align	2, 0
+._585:
+	.word	gTasks
+	.word	0x270f0000
+	.word	0xffffd8fb
+	.word	gStringVar1
+._582:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._587	@cond_branch
+	ldr	r0, ._590
+	lsl	r1, r3, #0x2
+	add	r1, r1, r3
+	lsl	r1, r1, #0x3
+	add	r1, r1, r0
+	ldrh	r2, [r1, #0x22]
+	add	r0, r2, #0
+	sub	r0, r0, #0xa
+	strh	r0, [r1, #0x22]
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	bge	._588	@cond_branch
+	ldr	r3, ._590 + 4
+	add	r0, r2, r3
+	strh	r0, [r1, #0x22]
+._588:
+	ldr	r0, ._590 + 8
+	mov	r2, #0x22
+	ldsh	r1, [r1, r2]
+._584:
+	mov	r2, #0x1
+	mov	r3, #0x4
+	bl	ConvertIntToDecimalStringN
+	ldr	r4, ._590 + 12
+	ldr	r1, ._590 + 16
+	add	r0, r4, #0
+	bl	StringExpandPlaceholders
+	add	r0, r4, #0
+	mov	r1, #0x9
+	mov	r2, #0x1
+	bl	MenuPrint_RightAligned
+	b	._596
+._591:
+	.align	2, 0
+._590:
+	.word	gTasks
+	.word	0x2705
+	.word	gStringVar1
+	.word	gStringVar4
+	.word	gOtherText_Coins
+._587:
+	mov	r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._592	@cond_branch
+	ldr	r0, ._594
+	ldr	r2, ._594 + 4
+	lsl	r1, r3, #0x2
+	add	r1, r1, r3
+	lsl	r1, r1, #0x3
+	add	r1, r1, r2
+	ldrh	r2, [r1, #0x22]
+	ldr	r3, ._594 + 8
+	add	r0, r0, r3
+	mov	r5, #0x0
+	strh	r2, [r0]
+	ldr	r0, ._594 + 12
+	str	r0, [r1]
+	ldr	r0, ._594 + 16
+	mov	r2, #0x22
+	ldsh	r1, [r1, r2]
+	mov	r2, #0x1
+	mov	r3, #0x4
+	bl	ConvertIntToDecimalStringN
+	ldr	r4, ._594 + 20
+	ldr	r1, ._594 + 24
+	add	r0, r4, #0
+	bl	StringExpandPlaceholders
+	add	r0, r4, #0
+	mov	r1, #0x9
+	mov	r2, #0x1
+	bl	MenuPrint_RightAligned
+	ldr	r0, ._594 + 28
+	strb	r5, [r0]
+	b	._596
+._595:
+	.align	2, 0
+._594:
+	.word	gSaveBlock1
+	.word	gTasks
+	.word	0x494
+	.word	Task_Roulette_0+1
+	.word	gStringVar1
+	.word	gStringVar4
+	.word	gOtherText_Coins
+	.word	unk_2039560
+._592:
+	mov	r0, #0x4
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._596	@cond_branch
+	ldr	r0, ._597
+	ldr	r2, ._597 + 4
+	lsl	r1, r4, #0x2
+	add	r1, r1, r4
+	lsl	r1, r1, #0x3
+	add	r1, r1, r2
+	ldrh	r2, [r1, #0x22]
+	ldr	r3, ._597 + 8
+	add	r0, r0, r3
+	strh	r2, [r0]
+	ldr	r0, ._597 + 12
+	str	r0, [r1]
+	ldr	r0, ._597 + 16
+	mov	r2, #0x22
+	ldsh	r1, [r1, r2]
+	mov	r2, #0x1
+	mov	r3, #0x4
+	bl	ConvertIntToDecimalStringN
+	ldr	r4, ._597 + 20
+	ldr	r1, ._597 + 24
+	add	r0, r4, #0
+	bl	StringExpandPlaceholders
+	add	r0, r4, #0
+	mov	r1, #0x9
+	mov	r2, #0x1
+	bl	MenuPrint_RightAligned
+	ldr	r1, ._597 + 28
+	mov	r0, #0x1
+	strb	r0, [r1]
+._596:
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._598:
+	.align	2, 0
+._597:
+	.word	gSaveBlock1
+	.word	gTasks
+	.word	0x494
+	.word	Task_Roulette_0+1
+	.word	gStringVar1
+	.word	gStringVar4
+	.word	gOtherText_Coins
+	.word	unk_2039560
+.syntax unified
+	thumb_func_end debug_sub_812CDE4
+
+	thumb_func_start debug_sub_812CFE8
+debug_sub_812CFE8:
+.syntax divided
+	push	{r4, r5, lr}
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	ldr	r2, ._600
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	add	r5, r1, r2
+	ldr	r0, ._600 + 4
+	ldr	r1, ._600 + 8
+	add	r0, r0, r1
+	ldrh	r0, [r0]
+	strh	r0, [r5, #0x22]
+	bl	Random
+	mov	r1, #0x1
+	and	r1, r1, r0
+	cmp	r1, #0
+	beq	._599	@cond_branch
+	ldr	r0, ._600 + 12
+	ldrh	r1, [r0]
+	mov	r2, #0x80
+	orr	r1, r1, r2
+	strh	r1, [r0]
+._599:
+	ldr	r0, ._600 + 16
+	mov	r2, #0x22
+	ldsh	r1, [r5, r2]
+	mov	r2, #0x1
+	mov	r3, #0x4
+	bl	ConvertIntToDecimalStringN
+	ldr	r4, ._600 + 20
+	ldr	r1, ._600 + 24
+	add	r0, r4, #0
+	bl	StringExpandPlaceholders
+	mov	r0, #0x0
+	mov	r1, #0x0
+	mov	r2, #0x9
+	mov	r3, #0x3
+	bl	MenuDrawTextWindow
+	add	r0, r4, #0
+	mov	r1, #0x9
+	mov	r2, #0x1
+	bl	MenuPrint_RightAligned
+	mov	r0, #0x0
+	mov	r1, #0xe
+	mov	r2, #0x1d
+	mov	r3, #0x13
+	bl	MenuDrawTextWindow
+	ldr	r0, ._600 + 28
+	mov	r1, #0x1
+	mov	r2, #0xf
+	bl	MenuPrint
+	ldr	r0, ._600 + 32
+	str	r0, [r5]
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._601:
+	.align	2, 0
+._600:
+	.word	gTasks
+	.word	gSaveBlock1
+	.word	0x494
+	.word	gSpecialVar_0x8004
+	.word	gStringVar1
+	.word	gStringVar4
+	.word	gOtherText_Coins
+	.word	gUnknown_Debug_0842510D
+	.word	debug_sub_812CDE4+1
+.syntax unified
+	thumb_func_end debug_sub_812CFE8
+
+
+
 	thumb_func_start PlayRoulette
-PlayRoulette: @ 81177FC
-	push {lr}
-	bl ScriptContext2_Enable
-	ldr r0, _08117828 @ =Task_Roulette_0
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0811782C @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldr r0, _08117830 @ =gSaveBlock1
-	ldr r2, _08117834 @ =0x00000494
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1, 0x22]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08117828: .4byte Task_Roulette_0
-_0811782C: .4byte gTasks
-_08117830: .4byte gSaveBlock1
-_08117834: .4byte 0x00000494
+PlayRoulette:
+.syntax divided
+	push	{lr}
+	bl	ScriptContext2_Enable
+	ldr	r1, ._604
+	mov	r0, #0x0
+	strb	r0, [r1]
+	ldr	r0, ._604 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._602	@cond_branch
+	ldr	r0, ._604 + 8
+	mov	r1, #0x0
+	bl	CreateTask
+	b	._603
+._605:
+	.align	2, 0
+._604:
+	.word	unk_2039560
+	.word	unk_203955C
+	.word	debug_sub_812CFE8+1
+._602:
+	ldr	r0, ._606
+	mov	r1, #0x0
+	bl	CreateTask
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	ldr	r2, ._606 + 4
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	add	r1, r1, r2
+	ldr	r0, ._606 + 8
+	ldr	r2, ._606 + 12
+	add	r0, r0, r2
+	ldrh	r0, [r0]
+	strh	r0, [r1, #0x22]
+._603:
+	pop	{r0}
+	bx	r0
+._607:
+	.align	2, 0
+._606:
+	.word	Task_Roulette_0+1
+	.word	gTasks
+	.word	gSaveBlock1
+	.word	0x494
+.syntax unified
 	thumb_func_end PlayRoulette
 
 	thumb_func_start sub_8117838
@@ -7610,6 +8039,98 @@ _08118DDC:
 	bx r0
 	thumb_func_end sub_8118D2C
 
+
+	thumb_func_start debug_sub_812E698
+debug_sub_812E698:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	add	r7, r0, #0
+	bl	sub_8118724
+	mov	r0, #0x0
+	strh	r0, [r7, #0x32]
+	add	r0, r7, #0
+	bl	sub_81186B8
+	mov	r0, #0x38
+	bl	gScriptFuncs_End+0x13c0
+	bl	Random
+	mov	r1, #0x1
+	and	r1, r1, r0
+	cmp	r1, #0
+	beq	._837	@cond_branch
+	ldr	r4, ._839
+	add	r1, r4, #0
+	add	r1, r1, #0x8c
+	ldr	r0, ._839 + 4
+	str	r0, [r1]
+	add	r0, r4, #0
+	add	r0, r0, #0x7e
+	ldrb	r0, [r0]
+	add	r0, r0, #0x1
+	mov	r1, #0xc
+	bl	gScriptFuncs_End+0x3e40
+	add	r1, r4, #0
+	add	r1, r1, #0x7f
+	strb	r0, [r1]
+	add	r1, r4, #0
+	ldr	r4, ._839 + 8
+	b	._838
+._840:
+	.align	2, 0
+._839:
+	.word	+0x2019000
+	.word	0x0
+	.word	gUnknown_083F8DF4
+._837:
+	ldr	r6, ._841
+	add	r5, r6, #0
+	add	r5, r5, #0x8c
+	ldr	r4, ._841 + 4
+	ldrb	r0, [r6, #0x4]
+	lsl	r0, r0, #0x1e
+	lsr	r0, r0, #0x19
+	add	r1, r4, #0
+	add	r1, r1, #0x1c
+	add	r0, r0, r1
+	ldr	r1, [r0]
+	add	r0, r1, #0
+	bl	gScriptFuncs_End+0x54dc
+	str	r0, [r5]
+	add	r0, r6, #0
+	add	r0, r0, #0x7e
+	ldrb	r0, [r0]
+	add	r1, r6, #0
+	add	r1, r1, #0x7f
+	strb	r0, [r1]
+	add	r1, r6, #0
+._838:
+	mov	r0, #0x1
+	strh	r0, [r7, #0x2e]
+	ldrb	r0, [r1, #0x4]
+	lsl	r0, r0, #0x1e
+	lsr	r0, r0, #0x19
+	add	r0, r0, r4
+	ldrb	r0, [r0, #0x2]
+	strh	r0, [r7, #0x32]
+	add	r1, r1, #0x98
+	ldr	r0, ._841 + 8
+	str	r0, [r1]
+	ldr	r0, ._841 + 12
+	str	r0, [r7, #0x1c]
+	mov	r0, #0x5
+	strh	r0, [r7, #0x30]
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._842:
+	.align	2, 0
+._841:
+	.word	+0x2019000
+	.word	gUnknown_083F8DF4
+	.word	0x3dae147b
+	.word	sub_8118D2C+1
+.syntax unified
+	thumb_func_end debug_sub_812E698
+
 	thumb_func_start sub_8118DE4
 sub_8118DE4: @ 8118DE4
 	push {r4-r7,lr}
@@ -7814,114 +8335,133 @@ _08118F88: .4byte sub_8118D2C
 	thumb_func_end sub_8118DE4
 
 	thumb_func_start sub_8118F8C
-sub_8118F8C: @ 8118F8C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	adds r6, r0, 0
-	bl sub_8118724
-	ldr r5, _08119018 @ =0x02019000
-	movs r0, 0x8C
-	adds r0, r5
-	mov r8, r0
-	ldr r0, [r0]
-	ldr r1, _0811901C @ =0x3f000000
-	bl __gtsf2
-	cmp r0, 0
-	bgt _0811906E
-	adds r0, r6, 0
-	bl sub_81186B8
-	adds r0, r6, 0
-	bl sub_81186E8
-	lsls r0, 16
-	cmp r0, 0
-	bne _08119030
-	adds r1, r5, 0
-	adds r1, 0x90
-	ldr r0, _08119020 @ =0x00000000
-	str r0, [r1]
-	ldr r1, _08119024 @ =gUnknown_083F8DF4
-	mov r9, r1
-	ldrb r0, [r5, 0x4]
-	lsls r7, r0, 30
-	lsrs r0, r7, 25
-	add r0, r9
-	movs r4, 0x3
-	ldrsb r4, [r0, r4]
-	adds r0, r4, 0
-	bl __floatsisf
-	adds r5, r0, 0
-	cmp r4, 0
-	bge _08118FEC
-	ldr r1, _08119028 @ =0x43800000
-	bl __addsf3
-	adds r5, r0, 0
-_08118FEC:
-	lsrs r0, r7, 25
-	add r0, r9
-	ldrb r0, [r0, 0x4]
-	adds r0, 0x1
-	bl __floatsisf
-	adds r1, r0, 0
-	adds r0, r5, 0
-	bl __divsf3
-	adds r1, r0, 0
-	mov r2, r8
-	ldr r0, [r2]
-	bl __subsf3
-	mov r1, r8
-	str r0, [r1]
-	movs r0, 0x4
-	strh r0, [r6, 0x30]
-	ldr r0, _0811902C @ =sub_8118DE4
-	str r0, [r6, 0x1C]
-	b _0811906E
-	.align 2, 0
-_08119018: .4byte 0x02019000
-_0811901C: .4byte 0x3f000000
-_08119020: .4byte 0x00000000
-_08119024: .4byte gUnknown_083F8DF4
-_08119028: .4byte 0x43800000
-_0811902C: .4byte sub_8118DE4
-_08119030:
-	adds r6, r5, 0
-	adds r6, 0x90
-	ldr r0, [r6]
-	ldr r4, _0811907C @ =0x00000000
-	adds r1, r4, 0
-	bl __nesf2
-	cmp r0, 0
-	beq _0811906E
-	mov r2, r8
-	ldr r0, [r2]
-	adds r1, r4, 0
-	bl __ltsf2
-	cmp r0, 0
-	bge _0811906E
-	str r4, [r6]
-	mov r0, r8
-	str r4, [r0]
-	adds r4, r5, 0
-	adds r4, 0x98
-	ldr r0, [r4]
-	bl __extendsfdf2
-	ldr r2, _08119080 @ =0x3ff33333
-	ldr r3, _08119084 @ =0x33333333
-	bl __divdf3
-	bl __truncdfsf2
-	str r0, [r4]
-_0811906E:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811907C: .4byte 0x00000000
-_08119080: .4byte 0x3ff33333
-_08119084: .4byte 0x33333333
+sub_8118F8C:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, r9
+	mov	r6, r8
+	push	{r6, r7}
+	add	r6, r0, #0
+	bl	sub_8118724
+	ldr	r5, ._868
+	mov	r0, #0x8c
+	add	r0, r0, r5
+	mov	r8, r0
+	ldr	r0, [r0]
+	ldr	r1, ._868 + 4
+	bl	gScriptFuncs_End+0x5928
+	cmp	r0, #0
+	bgt	._874	@cond_branch
+	add	r0, r6, #0
+	bl	sub_81186B8
+	add	r0, r6, #0
+	bl	sub_81186E8
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	bne	._864	@cond_branch
+	add	r1, r5, #0
+	add	r1, r1, #0x90
+	ldr	r0, ._868 + 8
+	str	r0, [r1]
+	ldr	r1, ._868 + 12
+	mov	r9, r1
+	ldrb	r0, [r5, #0x4]
+	lsl	r7, r0, #0x1e
+	lsr	r0, r7, #0x19
+	add r0, r0, r9
+	mov	r4, #0x3
+	ldsb	r4, [r0, r4]
+	add	r0, r4, #0
+	bl	gScriptFuncs_End+0x5a48
+	add	r5, r0, #0
+	cmp	r4, #0
+	bge	._865	@cond_branch
+	ldr	r1, ._868 + 16
+	bl	gScriptFuncs_End+0x54dc
+	add	r5, r0, #0
+._865:
+	lsr	r0, r7, #0x19
+	add r0, r0, r9
+	ldrb	r0, [r0, #0x4]
+	add	r0, r0, #0x1
+	bl	gScriptFuncs_End+0x5a48
+	add	r1, r0, #0
+	add	r0, r5, #0
+	bl	gScriptFuncs_End+0x56a0
+	add	r1, r0, #0
+	mov	r2, r8
+	ldr	r0, [r2]
+	bl	gScriptFuncs_End+0x5508
+	mov	r1, r8
+	str	r0, [r1]
+	mov	r0, #0x4
+	strh	r0, [r6, #0x30]
+	ldr	r0, ._868 + 20
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._866	@cond_branch
+	ldr	r0, ._868 + 24
+	str	r0, [r6, #0x1c]
+	b	._874
+._869:
+	.align	2, 0
+._868:
+	.word	+0x2019000
+	.word	0x3f000000
+	.word	0x0
+	.word	gUnknown_083F8DF4
+	.word	0x43800000
+	.word	unk_2039560
+	.word	debug_sub_812E698+1
+._866:
+	ldr	r0, ._871
+	str	r0, [r6, #0x1c]
+	b	._874
+._872:
+	.align	2, 0
+._871:
+	.word	sub_8118DE4+1
+._864:
+	add	r6, r5, #0
+	add	r6, r6, #0x90
+	ldr	r0, [r6]
+	ldr	r4, ._875
+	add	r1, r4, #0
+	bl	gScriptFuncs_End+0x58e0
+	cmp	r0, #0
+	beq	._874	@cond_branch
+	mov	r2, r8
+	ldr	r0, [r2]
+	add	r1, r4, #0
+	bl	gScriptFuncs_End+0x59b8
+	cmp	r0, #0
+	bge	._874	@cond_branch
+	str	r4, [r6]
+	mov	r0, r8
+	str	r4, [r0]
+	add	r4, r5, #0
+	add	r4, r4, #0x98
+	ldr	r0, [r4]
+	bl	gScriptFuncs_End+0x5b4c
+	ldr	r2, ._875 + 4
+	ldr	r3, ._875 + 8
+	bl	gScriptFuncs_End+0x4c2c
+	bl	gScriptFuncs_End+0x51e8
+	str	r0, [r4]
+._874:
+	pop	{r3, r4}
+	mov	r8, r3
+	mov	r9, r4
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._876:
+	.align	2, 0
+._875:
+	.word	0x0
+	.word	0x3ff33333
+	.word	0x33333333
+.syntax unified
 	thumb_func_end sub_8118F8C
 
 	thumb_func_start sub_8119088

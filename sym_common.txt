@@ -68,6 +68,21 @@ gUnknown_030042C0: @ 30042C0
 gUnknown_030042C4: @ 30042C4
 	.space 0xC
 
+gUnknown_Debug_03004360:
+	.space 0x10
+
+gUnknown_Debug_03004370:
+	.space 0x30
+
+gUnknown_Debug_030043A0:
+	.space 4
+
+gUnknown_Debug_030043A4:
+	.space 4
+
+gUnknown_Debug_030043A8:
+	.space 8
+
 gPreBattleCallback1: @ 30042D0
 	.space 0x4
 
@@ -169,6 +184,9 @@ gUnknown_0300489C: @ 300489C
 gMapObjects: @ 30048A0
 	.space 0x240
 
+gUnknown_Debug_03004BC0:
+	.space 0x4
+
 gSelectedMapObject: @ 3004AE0
 	.space 0x4
 
@@ -178,8 +196,14 @@ gUnknown_03004AE4: @ 3004AE4
 gCallback_03004AE8: @ 3004AE8
 	.space 0x4
 
+gUnknown_Debug_03004BD0:
+	.space 0x4
+
 gDisableMusic: @ 3004AEC
 	.space 0x4
+
+unk_debug_common_2:
+	.space 0x8
 
 gSoundAnimFramesToWait: @ 3004AF0
 	.space 0x10
@@ -191,6 +215,15 @@ gAnimSpriteIndexArray: @ 3004B10
 	.space 0x10
 
 	.include "task.o"
+
+unk_debug_common_1:
+	.space 0x4
+
+unk_3004E94:
+    .space 0x4
+
+unk_3004E98:
+	.space 0x8
 
 gUnknown_03004DA0: @ 3004DA0
 	.space 0x20
@@ -243,6 +276,9 @@ gUnknown_03005D24: @ 3005D24
 gUnknown_03005D28: @ 3005D28
 	.space 0x4
 
+
+unk_debug_common_0:
+    .space 0x4
 	.include "watanabe_debug_menu.o"
 
 gUnknown_03005D2C: @ 3005D2C
@@ -258,7 +294,7 @@ gUnknown_03005D38: @ 3005D38
 	.space 0x68
 
 gUnknown_03005DA0: @ 3005DA0
-	.space 0x48
+	.space 0x44
 
 gUnknown_03005DE8: @ 3005DE8
 	.space 0x4
@@ -308,6 +344,9 @@ gUnknown_03005E90: @ 3005E90
 gUnknown_03005E94: @ 3005E94
 	.space 0x4
 
+gUnknown_Debug_03005FB8:
+	.space 0x4
+
 gUnknown_03005E98: @ 3005E98
 	.space 0x4
 
@@ -336,7 +375,7 @@ gSaveFileStatus: @ 3005EB8
 	.space 0x4
 
 gGameContinueCallback: @ 3005EBC
-	.space 0x14
+	.space 0x10
 
 gIntroFrameCounter: @ 3005ED0
 	.space 0x10

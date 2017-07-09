@@ -6,39 +6,377 @@
 
 	.text
 
+	thumb_func_start debug_sub_808A4D0
+debug_sub_808A4D0:
+.syntax divided
+	push	{lr}
+	add	r1, r0, #0
+	ldr	r0, ._3
+	cmp	r1, r0
+	bne	._1	@cond_branch
+	mov	r0, #0x1
+	b	._30
+._4:
+	.align	2, 0
+._3:
+	.word	sub_8082F68+1
+._1:
+	ldr	r0, ._7
+	cmp	r1, r0
+	bne	._5	@cond_branch
+	mov	r0, #0x11
+	b	._30
+._8:
+	.align	2, 0
+._7:
+	.word	sub_8082FEC+1
+._5:
+	ldr	r0, ._11
+	cmp	r1, r0
+	bne	._9	@cond_branch
+	mov	r0, #0x12
+	b	._30
+._12:
+	.align	2, 0
+._11:
+	.word	sub_808303C+1
+._9:
+	ldr	r0, ._15
+	cmp	r1, r0
+	bne	._13	@cond_branch
+	mov	r0, #0x13
+	b	._30
+._16:
+	.align	2, 0
+._15:
+	.word	sub_8083188+1
+._13:
+	ldr	r0, ._19
+	cmp	r1, r0
+	bne	._17	@cond_branch
+	mov	r0, #0x14
+	b	._30
+._20:
+	.align	2, 0
+._19:
+	.word	sub_80830E4+1
+._17:
+	ldr	r0, ._23
+	cmp	r1, r0
+	bne	._21	@cond_branch
+	mov	r0, #0x21
+	b	._30
+._24:
+	.align	2, 0
+._23:
+	.word	sub_80831F8+1
+._21:
+	ldr	r0, ._27
+	cmp	r1, r0
+	bne	._25	@cond_branch
+	mov	r0, #0x2
+	b	._30
+._28:
+	.align	2, 0
+._27:
+	.word	sub_8083314+1
+._25:
+	ldr	r0, ._31
+	cmp	r1, r0
+	beq	._29	@cond_branch
+	mov	r0, #0x0
+	b	._30
+._32:
+	.align	2, 0
+._31:
+	.word	sub_80833C4+1
+._29:
+	mov	r0, #0x3
+._30:
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end debug_sub_808A4D0
+
+	thumb_func_start debug_sub_808A55C
+debug_sub_808A55C:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, r8
+	push	{r7}
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	ldr	r2, ._37
+	lsl	r0, r7, #0x2
+	add	r0, r0, r7
+	lsl	r0, r0, #0x3
+	add	r4, r0, r2
+	mov	r0, #0x8
+	ldsh	r1, [r4, r0]
+	lsl	r0, r1, #0x2
+	add	r0, r0, r1
+	lsl	r0, r0, #0x3
+	add	r0, r0, r2
+	ldrb	r0, [r0, #0x4]
+	cmp	r0, #0
+	bne	._33	@cond_branch
+	mov	r1, #0xa
+	ldsh	r0, [r4, r1]
+	cmp	r0, #0x5
+	bne	._34	@cond_branch
+	add	r0, r7, #0
+	bl	DestroyTask
+._34:
+	ldrh	r0, [r4, #0xa]
+	add	r0, r0, #0x1
+	strh	r0, [r4, #0xa]
+._33:
+	ldr	r0, ._37 + 4
+	ldrb	r0, [r0]
+	mov	r1, #0x2
+	mov	r2, #0x0
+	mov	r3, #0x2
+	bl	PrintHex
+	ldr	r0, ._37 + 8
+	ldrb	r0, [r0]
+	mov	r1, #0x16
+	mov	r2, #0x5
+	mov	r3, #0x4
+	bl	PrintHex
+	mov	r4, #0x0
+	lsl	r3, r7, #0x2
+	mov	r8, r3
+	mov	r6, #0xc0
+	lsl	r6, r6, #0x13
+	mov	r5, #0xa0
+	lsl	r5, r5, #0x13
+._35:
+	ldr	r0, ._37 + 12
+	add	r0, r4, r0
+	ldrb	r0, [r0]
+	lsr	r1, r5, #0x18
+	mov	r2, #0x0
+	mov	r3, #0x1
+	bl	PrintHex
+	ldr	r1, ._37 + 16
+	lsl	r0, r4, #0x8
+	add	r0, r0, r1
+	ldrh	r0, [r0]
+	lsr	r2, r6, #0x18
+	mov	r1, #0x16
+	mov	r3, #0x4
+	bl	PrintHex
+	mov	r0, #0x80
+	lsl	r0, r0, #0x11
+	add	r6, r6, r0
+	mov	r1, #0x80
+	lsl	r1, r1, #0x12
+	add	r5, r5, r1
+	add	r4, r4, #0x1
+	cmp	r4, #0x3
+	ble	._35	@cond_branch
+	ldr	r4, ._37 + 20
+	ldr	r0, [r4]
+	mov	r1, #0xf
+	mov	r2, #0x0
+	mov	r3, #0x8
+	bl	PrintHex
+	ldr	r0, ._37 + 24
+	ldrb	r0, [r0, #0x1]
+	mov	r1, #0x2
+	mov	r2, #0xa
+	mov	r3, #0x2
+	bl	PrintHex
+	bl	GetMultiplayerId
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0x7
+	mov	r2, #0xc
+	mov	r3, #0x2
+	bl	PrintHex
+	bl	GetBlockReceivedStatus
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0x7
+	mov	r2, #0xa
+	mov	r3, #0x2
+	bl	PrintHex
+	ldr	r0, ._37 + 28
+	ldrb	r0, [r0]
+	mov	r1, #0x2
+	mov	r2, #0xc
+	mov	r3, #0x1
+	bl	PrintHex
+	ldr	r0, ._37 + 32
+	ldrh	r0, [r0]
+	mov	r1, #0xb
+	mov	r2, #0x8
+	mov	r3, #0x2
+	bl	PrintHex
+	ldr	r0, [r4]
+	mov	r1, #0x1c
+	and	r0, r0, r1
+	lsr	r0, r0, #0x2
+	mov	r1, #0xb
+	mov	r2, #0xa
+	mov	r3, #0x2
+	bl	PrintHex
+	bl	IsLinkConnectionEstablished
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0xb
+	mov	r2, #0xc
+	mov	r3, #0x1
+	bl	PrintHex
+	bl	sub_8007ECC
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0xf
+	mov	r2, #0xa
+	mov	r3, #0x1
+	bl	PrintHex
+	ldr	r2, ._37
+	mov	r3, r8
+	add	r0, r3, r7
+	lsl	r0, r0, #0x3
+	add	r0, r0, r2
+	mov	r3, #0x8
+	ldsh	r1, [r0, r3]
+	lsl	r0, r1, #0x2
+	add	r0, r0, r1
+	lsl	r0, r0, #0x3
+	add	r0, r0, r2
+	ldr	r0, [r0]
+	bl	debug_sub_808A4D0
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0xf
+	mov	r2, #0xc
+	mov	r3, #0x2
+	bl	PrintHex
+	ldr	r0, ._37 + 36
+	ldr	r0, [r0]
+	mov	r1, #0x2
+	mov	r2, #0xd
+	mov	r3, #0x8
+	bl	PrintHex
+	bl	HasLinkErrorOccurred
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0x2
+	mov	r2, #0x2
+	mov	r3, #0x1
+	bl	PrintHex
+	ldr	r0, ._37 + 40
+	mov	r6, #0x80
+	lsl	r6, r6, #0x12
+	add	r5, r0, #0
+	add	r5, r5, #0x14
+	mov	r4, #0x3
+._36:
+	ldr	r0, [r5]
+	lsr	r1, r6, #0x18
+	mov	r2, #0x3
+	mov	r3, #0x4
+	bl	PrintHex
+	mov	r0, #0xc0
+	lsl	r0, r0, #0x13
+	add	r6, r6, r0
+	add	r5, r5, #0x1c
+	sub	r4, r4, #0x1
+	cmp	r4, #0
+	bge	._36	@cond_branch
+	ldr	r0, ._37 + 44
+	ldrh	r0, [r0]
+	mov	r1, #0x2
+	mov	r2, #0x6
+	mov	r3, #0x4
+	bl	PrintHex
+	bl	debug_sub_808B850
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	mov	r1, #0x19
+	mov	r2, #0x3
+	mov	r3, #0x1
+	bl	PrintHex
+	pop	{r3}
+	mov	r8, r3
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._38:
+	.align	2, 0
+._37:
+	.word	gTasks
+	.word	gShouldAdvanceLinkState
+	.word	gBlockSendBuffer
+	.word	gLinkPlayerPending
+	.word	gBlockRecvBuffer
+	.word	gLinkStatus
+	.word	gLink
+	.word	gReceivedRemoteLinkPlayers
+	.word	gScriptResult
+	.word	gLinkCallback
+	.word	gLinkPlayers
+	.word	0x4000128
+.syntax unified
+	thumb_func_end debug_sub_808A55C
+
+
 	thumb_func_start sub_8082CD4
-sub_8082CD4: @ 8082CD4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r1, 24
-	lsrs r5, r1, 24
-	ldr r4, _08082D10 @ =sub_8082F20
-	adds r0, r4, 0
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _08082D08
-	adds r0, r4, 0
-	movs r1, 0x50
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08082D14 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	strh r6, [r1, 0xA]
-	strh r5, [r1, 0xC]
-_08082D08:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08082D10: .4byte sub_8082F20
-_08082D14: .4byte gTasks
+sub_8082CD4:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	lsl	r1, r1, #0x18
+	lsr	r6, r1, #0x18
+	mov	r0, #0xc
+	mov	r1, #0x0
+	mov	r2, #0x1f
+	mov	r3, #0x2
+	bl	InitLinkTestBG_Unused
+	ldr	r4, ._40
+	add	r0, r4, #0
+	bl	FindTaskIdByFunc
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0xff
+	bne	._39	@cond_branch
+	add	r0, r4, #0
+	mov	r1, #0x50
+	bl	CreateTask
+	add	r4, r0, #0
+	lsl	r4, r4, #0x18
+	lsr	r4, r4, #0x18
+	ldr	r5, ._40 + 4
+	lsl	r0, r4, #0x2
+	add	r0, r0, r4
+	lsl	r0, r0, #0x3
+	add	r0, r0, r5
+	strh	r7, [r0, #0xa]
+	strh	r6, [r0, #0xc]
+	ldr	r0, ._40 + 8
+	mov	r1, #0x50
+	bl	CreateTask
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	add	r1, r1, r5
+	strh	r4, [r1, #0x8]
+._39:
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._41:
+	.align	2, 0
+._40:
+	.word	sub_8082F20+1
+	.word	gTasks
+	.word	debug_sub_808A55C+1
+.syntax unified
 	thumb_func_end sub_8082CD4
 
 	thumb_func_start sub_8082D18
@@ -465,14 +803,6 @@ _08083038: .4byte sub_808303C
 	thumb_func_end sub_8082FEC
 
 .section .text_80830E4
-
-
-
-
-
-
-
-
 
 	thumb_func_start sub_80833C4
 sub_80833C4: @ 80833C4
@@ -1626,6 +1956,74 @@ _08083C9C: .4byte CB2_LinkError
 _08083CA0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8083C50
 
+
+	thumb_func_start debug_sub_808B778
+debug_sub_808B778:
+.syntax divided
+	push	{r4, lr}
+	ldr	r4, ._390
+	add	r0, r4, #0
+	bl	FuncIsActiveTask
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._389	@cond_branch
+	add	r0, r4, #0
+	mov	r1, #0x50
+	bl	CreateTask
+._389:
+	ldr	r1, ._390 + 4
+	ldr	r0, [r1]
+	add	r0, r0, #0x1
+	str	r0, [r1]
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._391:
+	.align	2, 0
+._390:
+	.word	debug_sub_808B7A8+1
+	.word	unk_3004E98
+.syntax unified
+	thumb_func_end debug_sub_808B778
+
+	thumb_func_start debug_sub_808B7A8
+debug_sub_808B7A8:
+.syntax divided
+	push	{lr}
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	ldr	r2, ._393
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	add	r1, r1, r2
+	ldrh	r0, [r1, #0x8]
+	add	r0, r0, #0x1
+	strh	r0, [r1, #0x8]
+	lsl	r0, r0, #0x10
+	asr	r0, r0, #0x10
+	cmp	r0, #0x1e
+	bne	._392	@cond_branch
+	mov	r0, #0x0
+	strh	r0, [r1, #0x8]
+	ldr	r2, ._393 + 4
+	ldrh	r0, [r2]
+	mov	r1, #0x1
+	orr	r0, r0, r1
+	strh	r0, [r2]
+._392:
+	pop	{r0}
+	bx	r0
+._394:
+	.align	2, 0
+._393:
+	.word	gTasks
+	.word	unk_3004E94
+.syntax unified
+	thumb_func_end debug_sub_808B7A8
+
+
+
 	thumb_func_start sub_8083CA4
 sub_8083CA4: @ 8083CA4
 	push {r4,lr}
@@ -1667,5 +2065,51 @@ unref_sub_8083CC8: @ 8083CC8
 _08083CE8: .4byte gTasks
 _08083CEC: .4byte sub_8083CA4
 	thumb_func_end unref_sub_8083CC8
+
+	thumb_func_start debug_sub_808B82C
+debug_sub_808B82C:
+.syntax divided
+	ldr	r1, ._400
+	mov	r0, #0x0
+	strb	r0, [r1]
+	bx	lr
+._401:
+	.align	2, 0
+._400:
+	.word	unk_2030220
+.syntax unified
+	thumb_func_end debug_sub_808B82C
+
+	thumb_func_start debug_sub_808B838
+debug_sub_808B838:
+.syntax divided
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	ldr	r2, ._402
+	mov	r1, #0x1
+	LSL	r1, r0
+	ldrb	r0, [r2]
+	orr	r1, r1, r0
+	strb	r1, [r2]
+	bx	lr
+._403:
+	.align	2, 0
+._402:
+	.word	unk_2030220
+.syntax unified
+	thumb_func_end debug_sub_808B838
+
+	thumb_func_start debug_sub_808B850
+debug_sub_808B850:
+.syntax divided
+	ldr	r0, ._404
+	ldrb	r0, [r0]
+	bx	lr
+._405:
+	.align	2, 0
+._404:
+	.word	unk_2030220
+.syntax unified
+	thumb_func_end debug_sub_808B850
 
 	.align 2, 0 @ Don't pad with nop.

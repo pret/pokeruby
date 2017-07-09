@@ -2903,8 +2903,8 @@ extern u16 gScriptResult;
 extern struct WildPokemon gWildFeebasRoute119Data;
 extern u8 Event_RepelWoreOff[];
 
-EWRAM_DATA static u8 sWildEncountersDisabled = 0;
-EWRAM_DATA static u32 sFeebasRngValue = 0;
+EWRAM_DATA u8 sWildEncountersDisabled = 0;
+EWRAM_DATA u32 sFeebasRngValue = 0;
 
 #define NUM_FEEBAS_SPOTS 6
 

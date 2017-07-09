@@ -416,511 +416,587 @@ _080EBDD4: .4byte 0x02000000
 	thumb_func_end sub_80EBDBC
 
 	thumb_func_start sub_80EBDD8
-sub_80EBDD8: @ 80EBDD8
-	push {lr}
-	sub sp, 0x4
-	ldr r1, _080EBDF8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0x11
-	bls _080EBDEE
-	b _080EC000
-_080EBDEE:
-	lsls r0, 2
-	ldr r1, _080EBDFC @ =_080EBE00
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EBDF8: .4byte 0x02000000
-_080EBDFC: .4byte _080EBE00
-	.align 2, 0
-_080EBE00:
-	.4byte _080EBE48
-	.4byte _080EBE80
-	.4byte _080EBE92
-	.4byte _080EBEAC
-	.4byte _080EBEC0
-	.4byte _080EBED2
-	.4byte _080EBEF0
-	.4byte _080EBF04
-	.4byte _080EBF18
-	.4byte _080EBF2C
-	.4byte _080EBF48
-	.4byte _080EBF54
-	.4byte _080EBF74
-	.4byte _080EBF88
-	.4byte _080EBFA0
-	.4byte _080EBFB4
-	.4byte _080EBFD0
-	.4byte _080EBFE8
-_080EBE48:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r1, 0x80
-	lsls r1, 19
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, _080EBE74 @ =0x02000000
-	ldr r3, _080EBE78 @ =0x00006ddc
-	adds r0, r1, r3
-	ldrb r2, [r0]
-	subs r3, 0x2F
-	adds r0, r1, r3
-	strb r2, [r0]
-	ldr r0, _080EBE7C @ =0x00006dae
-	adds r2, r1, r0
-	movs r0, 0x5
-	strb r0, [r2]
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EBFDC
-	.align 2, 0
-_080EBE74: .4byte 0x02000000
-_080EBE78: .4byte 0x00006ddc
-_080EBE7C: .4byte 0x00006dae
-_080EBE80:
-	bl sub_80F3FF0
-	ldr r1, _080EBEA8 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EBE92:
-	bl sub_80F4024
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EBE9E
-	b _080EC000
-_080EBE9E:
-	ldr r1, _080EBEA8 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EBFDC
-	.align 2, 0
-_080EBEA8: .4byte 0x02000000
-_080EBEAC:
-	bl sub_80F2598
-	ldr r1, _080EBEBC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EBFDC
-	.align 2, 0
-_080EBEBC: .4byte 0x02000000
-_080EBEC0:
-	bl sub_80EEE20
-	ldr r1, _080EBEEC @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EBED2:
-	bl sub_80EEE54
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EBEDE
-	b _080EC000
-_080EBEDE:
-	bl sub_80EEE08
-	ldr r1, _080EBEEC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EBFDC
-	.align 2, 0
-_080EBEEC: .4byte 0x02000000
-_080EBEF0:
-	movs r0, 0
-	bl sub_80EF248
-	ldr r1, _080EBF14 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EBF04:
-	movs r0, 0
-	bl sub_80EF284
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EBF12
-	b _080EC000
-_080EBF12:
-	b _080EBFD4
-	.align 2, 0
-_080EBF14: .4byte 0x02000000
-_080EBF18:
-	movs r0, 0
-	bl sub_80F1B8C
-	ldr r1, _080EBF44 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EBF2C:
-	movs r0, 0
-	bl sub_80F1BC8
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC000
-	ldr r1, _080EBF44 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EBFDC
-	.align 2, 0
-_080EBF44: .4byte 0x02000000
-_080EBF48:
-	ldr r0, _080EBF50 @ =sub_80EBD18
-	bl SetVBlankCallback
-	b _080EBFD4
-	.align 2, 0
-_080EBF50: .4byte sub_80EBD18
-_080EBF54:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r1, _080EBF70 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EBFDC
-	.align 2, 0
-_080EBF70: .4byte 0x02000000
-_080EBF74:
-	movs r0, 0
-	bl sub_80EED2C
-	ldr r1, _080EBF84 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EBFDC
-	.align 2, 0
-_080EBF84: .4byte 0x02000000
-_080EBF88:
-	ldr r0, _080EBF9C @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r2, r3
-	b _080EBFDC
-	.align 2, 0
-_080EBF9C: .4byte gPaletteFade
-_080EBFA0:
-	movs r0, 0
-	bl sub_80F2C80
-	ldr r1, _080EBFCC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EBFB4:
-	movs r0, 0
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC000
-	ldr r1, _080EBFCC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EBFDC
-	.align 2, 0
-_080EBFCC: .4byte 0x02000000
-_080EBFD0:
-	bl sub_80F1DF0
-_080EBFD4:
-	ldr r1, _080EBFE4 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-_080EBFDC:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EC000
-	.align 2, 0
-_080EBFE4: .4byte 0x02000000
-_080EBFE8:
-	bl sub_80F1E50
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC000
-	movs r0, 0
-	movs r1, 0
-	bl sub_80EF428
-	ldr r0, _080EC008 @ =sub_80EC268
-	bl sub_80EBDBC
-_080EC000:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EC008: .4byte sub_80EC268
+sub_80EBDD8:
+.syntax divided
+	push	{lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._64
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r2, r1, #0
+	cmp	r0, #0x11
+	bls	._62	@cond_branch
+	b	._131
+._62:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._64 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._65:
+	.align	2, 0
+._64:
+	.word	+0x2000000
+	.word	._66
+._66:
+	.word	._67
+	.word	._68
+	.word	._69
+	.word	._70
+	.word	._71
+	.word	._72
+	.word	._73
+	.word	._74
+	.word	._75
+	.word	._76
+	.word	._77
+	.word	._78
+	.word	._79
+	.word	._80
+	.word	._81
+	.word	._82
+	.word	._83
+	.word	._84
+._67:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	mov	r1, #0x80
+	lsl	r1, r1, #0x13
+	mov	r0, #0x0
+	strh	r0, [r1]
+	ldr	r1, ._86
+	ldr	r3, ._86 + 4
+	add	r0, r1, r3
+	ldrb	r2, [r0]
+	sub	r3, r3, #0x2f
+	add	r0, r1, r3
+	strb	r2, [r0]
+	ldr	r0, ._86 + 8
+	add	r2, r1, r0
+	mov	r0, #0x5
+	strb	r0, [r2]
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._124
+._87:
+	.align	2, 0
+._86:
+	.word	+0x2000000
+	.word	0x6ddc
+	.word	0x6dae
+._68:
+	bl	sub_80F3FF0
+	ldr	r1, ._91
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._69:
+	bl	sub_80F4024
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._88	@cond_branch
+	b	._131
+._88:
+	ldr	r1, ._91
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._124
+._92:
+	.align	2, 0
+._91:
+	.word	+0x2000000
+._70:
+	bl	sub_80F2598
+	ldr	r1, ._94
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._124
+._95:
+	.align	2, 0
+._94:
+	.word	+0x2000000
+._71:
+	bl	sub_80EEE20
+	ldr	r1, ._99
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._72:
+	bl	sub_80EEE54
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._96	@cond_branch
+	b	._131
+._96:
+	bl	sub_80EEE08
+	ldr	r1, ._99
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._124
+._100:
+	.align	2, 0
+._99:
+	.word	+0x2000000
+._73:
+	mov	r0, #0x0
+	bl	sub_80EF248
+	ldr	r1, ._104
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._74:
+	mov	r0, #0x0
+	bl	sub_80EF284
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._101	@cond_branch
+	b	._131
+._101:
+	b	._110
+._105:
+	.align	2, 0
+._104:
+	.word	+0x2000000
+._75:
+	mov	r0, #0x0
+	bl	sub_80F1B8C
+	ldr	r1, ._108
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._76:
+	mov	r0, #0x0
+	bl	sub_80F1BC8
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._131	@cond_branch
+	ldr	r1, ._108
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._124
+._109:
+	.align	2, 0
+._108:
+	.word	+0x2000000
+._77:
+	ldr	r0, ._111
+	bl	SetVBlankCallback
+	b	._110
+._112:
+	.align	2, 0
+._111:
+	.word	sub_80EBD18+1
+._78:
+	mov	r0, #0x1
+	neg	r0, r0
+	mov	r1, #0x0
+	str	r1, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r1, ._114
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._124
+._115:
+	.align	2, 0
+._114:
+	.word	+0x2000000
+._79:
+	mov	r0, #0x0
+	bl	sub_80EED2C
+	ldr	r1, ._117
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._124
+._118:
+	.align	2, 0
+._117:
+	.word	+0x2000000
+._80:
+	ldr	r0, ._121
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._131	@cond_branch
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r2, r3
+	b	._124
+._122:
+	.align	2, 0
+._121:
+	.word	gPaletteFade
+._81:
+	mov	r0, #0x0
+	bl	sub_80F2C80
+	ldr	r1, ._125
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._82:
+	mov	r0, #0x0
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._131	@cond_branch
+	ldr	r1, ._125
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._124
+._126:
+	.align	2, 0
+._125:
+	.word	+0x2000000
+._83:
+	bl	sub_80F1DF0
+._110:
+	ldr	r1, ._128
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+._124:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._131
+._129:
+	.align	2, 0
+._128:
+	.word	+0x2000000
+._84:
+	bl	sub_80F1E50
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._131	@cond_branch
+	mov	r0, #0x0
+	mov	r1, #0x0
+	bl	sub_80EF428
+	ldr	r0, ._132
+	bl	sub_80EBDBC
+	ldr	r0, ._132 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._131	@cond_branch
+	ldr	r0, ._132 + 8
+	ldr	r2, ._132 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._131:
+	add	sp, sp, #0x4
+	pop	{r0}
+	bx	r0
+._133:
+	.align	2, 0
+._132:
+	.word	sub_80EC268+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+.syntax unified
 	thumb_func_end sub_80EBDD8
 
 	thumb_func_start sub_80EC00C
-sub_80EC00C: @ 80EC00C
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080EC02C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0xD
-	bls _080EC022
-	b _080EC1FA
-_080EC022:
-	lsls r0, 2
-	ldr r1, _080EC030 @ =_080EC034
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EC02C: .4byte 0x02000000
-_080EC030: .4byte _080EC034
-	.align 2, 0
-_080EC034:
-	.4byte _080EC06C
-	.4byte _080EC0C0
-	.4byte _080EC0D4
-	.4byte _080EC0F0
-	.4byte _080EC104
-	.4byte _080EC120
-	.4byte _080EC12A
-	.4byte _080EC154
-	.4byte _080EC168
-	.4byte _080EC180
-	.4byte _080EC194
-	.4byte _080EC1A8
-	.4byte _080EC1C4
-	.4byte _080EC1DC
-_080EC06C:
-	bl sub_80EEF78
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EC078
-	b _080EC1FA
-_080EC078:
-	ldr r0, _080EC0AC @ =sub_80EBD80
-	bl SetVBlankCallback
-	bl sub_80EED1C
-	ldr r4, _080EC0B0 @ =0x02000000
-	ldr r1, _080EC0B4 @ =0x00006ddc
-	adds r0, r4, r1
-	ldrb r1, [r0]
-	ldr r2, _080EC0B8 @ =0x00006dad
-	adds r0, r4, r2
-	strb r1, [r0]
-	ldr r0, _080EC0BC @ =0x00006dae
-	adds r1, r4, r0
-	movs r0, 0x5
-	strb r0, [r1]
-	bl sub_80EEE08
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r4, r1
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _080EC1FA
-	.align 2, 0
-_080EC0AC: .4byte sub_80EBD80
-_080EC0B0: .4byte 0x02000000
-_080EC0B4: .4byte 0x00006ddc
-_080EC0B8: .4byte 0x00006dad
-_080EC0BC: .4byte 0x00006dae
-_080EC0C0:
-	movs r0, 0
-	bl sub_80EF248
-	ldr r1, _080EC0EC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EC0D4:
-	movs r0, 0
-	bl sub_80EF284
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EC0E2
-	b _080EC1FA
-_080EC0E2:
-	ldr r1, _080EC0EC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EC1D0
-	.align 2, 0
-_080EC0EC: .4byte 0x02000000
-_080EC0F0:
-	movs r0, 0
-	bl sub_80F1B8C
-	ldr r1, _080EC11C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EC104:
-	movs r0, 0
-	bl sub_80F1BC8
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EC112
-	b _080EC1FA
-_080EC112:
-	ldr r1, _080EC11C @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EC1D0
-	.align 2, 0
-_080EC11C: .4byte 0x02000000
-_080EC120:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EC1FA
-	b _080EC1C8
-_080EC12A:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080EC150 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EC1D0
-	.align 2, 0
-_080EC150: .4byte sub_80EBD18
-_080EC154:
-	movs r0, 0
-	bl sub_80EED2C
-	ldr r1, _080EC164 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EC1D0
-	.align 2, 0
-_080EC164: .4byte 0x02000000
-_080EC168:
-	ldr r0, _080EC17C @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC1FA
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EC1D0
-	.align 2, 0
-_080EC17C: .4byte gPaletteFade
-_080EC180:
-	bl sub_80F2598
-	ldr r1, _080EC190 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EC1D0
-	.align 2, 0
-_080EC190: .4byte 0x02000000
-_080EC194:
-	movs r0, 0
-	bl sub_80F2C80
-	ldr r1, _080EC1C0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EC1A8:
-	movs r0, 0
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC1FA
-	ldr r1, _080EC1C0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EC1D0
-	.align 2, 0
-_080EC1C0: .4byte 0x02000000
-_080EC1C4:
-	bl sub_80F1DF0
-_080EC1C8:
-	ldr r1, _080EC1D8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-_080EC1D0:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EC1FA
-	.align 2, 0
-_080EC1D8: .4byte 0x02000000
-_080EC1DC:
-	bl sub_80F1E50
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC1FA
-	ldr r0, _080EC204 @ =0x02000000
-	ldr r1, _080EC208 @ =0x00006dad
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0
-	bl sub_80EF428
-	ldr r0, _080EC20C @ =sub_80EC268
-	bl sub_80EBDBC
-_080EC1FA:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EC204: .4byte 0x02000000
-_080EC208: .4byte 0x00006dad
-_080EC20C: .4byte sub_80EC268
+sub_80EC00C:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._136
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0xd
+	bls	._134	@cond_branch
+	b	._191
+._134:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._136 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._137:
+	.align	2, 0
+._136:
+	.word	+0x2000000
+	.word	._138
+._138:
+	.word	._139
+	.word	._140
+	.word	._141
+	.word	._142
+	.word	._143
+	.word	._144
+	.word	._145
+	.word	._146
+	.word	._147
+	.word	._148
+	.word	._149
+	.word	._150
+	.word	._151
+	.word	._152
+._139:
+	bl	sub_80EEF78
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._153	@cond_branch
+	b	._191
+._153:
+	ldr	r0, ._156
+	bl	SetVBlankCallback
+	bl	sub_80EED1C
+	ldr	r4, ._156 + 4
+	ldr	r1, ._156 + 8
+	add	r0, r4, r1
+	ldrb	r1, [r0]
+	ldr	r2, ._156 + 12
+	add	r0, r4, r2
+	strb	r1, [r0]
+	ldr	r0, ._156 + 16
+	add	r1, r4, r0
+	mov	r0, #0x5
+	strb	r0, [r1]
+	bl	sub_80EEE08
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r4, r4, r1
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._191
+._157:
+	.align	2, 0
+._156:
+	.word	sub_80EBD80+1
+	.word	+0x2000000
+	.word	0x6ddc
+	.word	0x6dad
+	.word	0x6dae
+._140:
+	mov	r0, #0x0
+	bl	sub_80EF248
+	ldr	r1, ._161
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._141:
+	mov	r0, #0x0
+	bl	sub_80EF284
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._158	@cond_branch
+	b	._191
+._158:
+	ldr	r1, ._161
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._184
+._162:
+	.align	2, 0
+._161:
+	.word	+0x2000000
+._142:
+	mov	r0, #0x0
+	bl	sub_80F1B8C
+	ldr	r1, ._166
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._143:
+	mov	r0, #0x0
+	bl	sub_80F1BC8
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._163	@cond_branch
+	b	._191
+._163:
+	ldr	r1, ._166
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._184
+._167:
+	.align	2, 0
+._166:
+	.word	+0x2000000
+._144:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._191	@cond_branch
+	b	._169
+._145:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._171
+	bl	SetVBlankCallback
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._184
+._172:
+	.align	2, 0
+._171:
+	.word	sub_80EBD18+1
+._146:
+	mov	r0, #0x0
+	bl	sub_80EED2C
+	ldr	r1, ._174
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._184
+._175:
+	.align	2, 0
+._174:
+	.word	+0x2000000
+._147:
+	ldr	r0, ._178
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._191	@cond_branch
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._184
+._179:
+	.align	2, 0
+._178:
+	.word	gPaletteFade
+._148:
+	bl	sub_80F2598
+	ldr	r1, ._181
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._184
+._182:
+	.align	2, 0
+._181:
+	.word	+0x2000000
+._149:
+	mov	r0, #0x0
+	bl	sub_80F2C80
+	ldr	r1, ._185
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._150:
+	mov	r0, #0x0
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._191	@cond_branch
+	ldr	r1, ._185
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._184
+._186:
+	.align	2, 0
+._185:
+	.word	+0x2000000
+._151:
+	bl	sub_80F1DF0
+._169:
+	ldr	r1, ._188
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+._184:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._191
+._189:
+	.align	2, 0
+._188:
+	.word	+0x2000000
+._152:
+	bl	sub_80F1E50
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._191	@cond_branch
+	ldr	r0, ._192
+	ldr	r1, ._192 + 4
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	mov	r0, #0x0
+	bl	sub_80EF428
+	ldr	r0, ._192 + 8
+	bl	sub_80EBDBC
+	ldr	r0, ._192 + 12
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._191	@cond_branch
+	ldr	r0, ._192 + 16
+	ldr	r2, ._192 + 20
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._191:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._193:
+	.align	2, 0
+._192:
+	.word	+0x2000000
+	.word	0x6dad
+	.word	sub_80EC268+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+.syntax unified
 	thumb_func_end sub_80EC00C
 
 	thumb_func_start sub_80EC210
@@ -1245,427 +1321,492 @@ _080EC49C: .4byte 0x00006dad
 	thumb_func_end sub_80EC268
 
 	thumb_func_start sub_80EC4A0
-sub_80EC4A0: @ 80EC4A0
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080EC4C0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0xE
-	bls _080EC4B6
-	b _080EC66A
-_080EC4B6:
-	lsls r0, 2
-	ldr r1, _080EC4C4 @ =_080EC4C8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EC4C0: .4byte 0x02000000
-_080EC4C4: .4byte _080EC4C8
-	.align 2, 0
-_080EC4C8:
-	.4byte _080EC504
-	.4byte _080EC510
-	.4byte _080EC544
-	.4byte _080EC578
-	.4byte _080EC594
-	.4byte _080EC5A8
-	.4byte _080EC5AE
-	.4byte _080EC5C0
-	.4byte _080EC5D0
-	.4byte _080EC5E4
-	.4byte _080EC5F8
-	.4byte _080EC614
-	.4byte _080EC61E
-	.4byte _080EC63E
-	.4byte _080EC658
-_080EC504:
-	bl sub_80F1E84
-	movs r0, 0
-	bl sub_80F2D04
-	b _080EC644
-_080EC510:
-	bl sub_80F1F10
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EC51C
-	b _080EC66A
-_080EC51C:
-	ldr r0, _080EC53C @ =gSaveBlock2
-	ldrb r1, [r0, 0x15]
-	movs r0, 0x8
-	ands r0, r1
-	movs r1, 0x8
-	cmp r0, 0
-	beq _080EC52C
-	movs r1, 0x7
-_080EC52C:
-	adds r0, r1, 0
-	bl sub_80EEFBC
-	ldr r1, _080EC540 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EC64C
-	.align 2, 0
-_080EC53C: .4byte gSaveBlock2
-_080EC540: .4byte 0x02000000
-_080EC544:
-	bl sub_80EEF34
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _080EC552
-	b _080EC66A
-_080EC552:
-	ldr r4, _080EC574 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EC64C
-	.align 2, 0
-_080EC574: .4byte 0x02000000
-_080EC578:
-	ldr r0, _080EC590 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC66A
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	b _080EC644
-	.align 2, 0
-_080EC590: .4byte gPaletteFade
-_080EC594:
-	bl sub_80F2620
-	ldr r1, _080EC5A4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EC64C
-	.align 2, 0
-_080EC5A4: .4byte 0x02000000
-_080EC5A8:
-	bl sub_80EF814
-	b _080EC644
-_080EC5AE:
-	bl sub_80EF840
-	ldr r1, _080EC5CC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EC5C0:
-	bl sub_80EF874
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC66A
-	b _080EC644
-	.align 2, 0
-_080EC5CC: .4byte 0x02000000
-_080EC5D0:
-	movs r0, 0x4
-	bl sub_80F2C80
-	ldr r1, _080EC5F4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EC5E4:
-	movs r0, 0x4
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC66A
-	b _080EC644
-	.align 2, 0
-_080EC5F4: .4byte 0x02000000
-_080EC5F8:
-	bl sub_80F2DD8
-	ldr r0, _080EC60C @ =sub_80EBD30
-	bl SetVBlankCallback
-	ldr r1, _080EC610 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EC64C
-	.align 2, 0
-_080EC60C: .4byte sub_80EBD30
-_080EC610: .4byte 0x02000000
-_080EC614:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EC66A
-	b _080EC644
-_080EC61E:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EC64C
-_080EC63E:
-	movs r0, 0x1
-	bl sub_80EED2C
-_080EC644:
-	ldr r1, _080EC654 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080EC64C:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EC66A
-	.align 2, 0
-_080EC654: .4byte 0x02000000
-_080EC658:
-	ldr r0, _080EC674 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC66A
-	ldr r0, _080EC678 @ =sub_80EC67C
-	bl sub_80EBDBC
-_080EC66A:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EC674: .4byte gPaletteFade
-_080EC678: .4byte sub_80EC67C
+sub_80EC4A0:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._285
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0xe
+	bls	._283	@cond_branch
+	b	._340
+._283:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._285 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._286:
+	.align	2, 0
+._285:
+	.word	+0x2000000
+	.word	._287
+._287:
+	.word	._288
+	.word	._289
+	.word	._290
+	.word	._291
+	.word	._292
+	.word	._293
+	.word	._294
+	.word	._295
+	.word	._296
+	.word	._297
+	.word	._298
+	.word	._299
+	.word	._300
+	.word	._301
+	.word	._302
+._288:
+	bl	sub_80F1E84
+	mov	r0, #0x0
+	bl	sub_80F2D04
+	b	._336
+._289:
+	bl	sub_80F1F10
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._304	@cond_branch
+	b	._340
+._304:
+	ldr	r0, ._308
+	ldrb	r1, [r0, #0x15]
+	mov	r0, #0x8
+	and	r0, r0, r1
+	mov	r1, #0x8
+	cmp	r0, #0
+	beq	._306	@cond_branch
+	mov	r1, #0x7
+._306:
+	add	r0, r1, #0
+	bl	sub_80EEFBC
+	ldr	r1, ._308 + 4
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._335
+._309:
+	.align	2, 0
+._308:
+	.word	gSaveBlock2
+	.word	+0x2000000
+._290:
+	bl	sub_80EEF34
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	beq	._310	@cond_branch
+	b	._340
+._310:
+	ldr	r4, ._313
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r2, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._335
+._314:
+	.align	2, 0
+._313:
+	.word	+0x2000000
+._291:
+	ldr	r0, ._318
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._315	@cond_branch
+	b	._340
+._315:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	b	._336
+._319:
+	.align	2, 0
+._318:
+	.word	gPaletteFade
+._292:
+	bl	sub_80F2620
+	ldr	r1, ._321
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._335
+._322:
+	.align	2, 0
+._321:
+	.word	+0x2000000
+._293:
+	bl	sub_80EF814
+	b	._336
+._294:
+	bl	sub_80EF840
+	ldr	r1, ._326
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._295:
+	bl	sub_80EF874
+._328:
+	lsl	r0, r0, #0x18
+._334:
+	cmp	r0, #0
+	bne	._340	@cond_branch
+	b	._336
+._327:
+	.align	2, 0
+._326:
+	.word	+0x2000000
+._296:
+	mov	r0, #0x4
+	bl	sub_80F2C80
+	ldr	r1, ._329
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._297:
+	mov	r0, #0x4
+	bl	sub_80F2CBC
+	b	._328
+._330:
+	.align	2, 0
+._329:
+	.word	+0x2000000
+._298:
+	bl	sub_80F2DD8
+	ldr	r0, ._332
+	bl	SetVBlankCallback
+	ldr	r1, ._332 + 4
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._335
+._333:
+	.align	2, 0
+._332:
+	.word	sub_80EBD30+1
+	.word	+0x2000000
+._299:
+	bl	sub_8055870
+	b	._334
+._300:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._335
+._301:
+	mov	r0, #0x1
+	bl	sub_80EED2C
+	ldr	r0, ._338
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._336	@cond_branch
+	ldr	r0, ._338 + 4
+	ldr	r2, ._338 + 8
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._336:
+	ldr	r1, ._338 + 12
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+._335:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._340
+._339:
+	.align	2, 0
+._338:
+	.word	gLinkOpen
+	.word	0x60075e0
+	.word	0x600f800
+	.word	+0x2000000
+._302:
+	ldr	r0, ._341
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._340	@cond_branch
+	ldr	r0, ._341 + 4
+	bl	sub_80EBDBC
+._340:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._342:
+	.align	2, 0
+._341:
+	.word	gPaletteFade
+	.word	sub_80EC67C+1
+.syntax unified
 	thumb_func_end sub_80EC4A0
 
 	thumb_func_start sub_80EC67C
-sub_80EC67C: @ 80EC67C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r1, _080EC69C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x5
-	bls _080EC692
-	b _080EC800
-_080EC692:
-	lsls r0, 2
-	ldr r1, _080EC6A0 @ =_080EC6A4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EC69C: .4byte 0x02000000
-_080EC6A0: .4byte _080EC6A4
-	.align 2, 0
-_080EC6A4:
-	.4byte _080EC6BC
-	.4byte _080EC718
-	.4byte _080EC746
-	.4byte _080EC77C
-	.4byte _080EC7A0
-	.4byte _080EC7C4
-_080EC6BC:
-	bl sub_80FAB60
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	beq _080EC6E2
-	cmp r0, 0x3
-	bgt _080EC6D2
-	cmp r0, 0x1
-	beq _080EC6DC
-	b _080EC800
-_080EC6D2:
-	cmp r0, 0x4
-	beq _080EC6E8
-	cmp r0, 0x5
-	beq _080EC700
-	b _080EC800
-_080EC6DC:
-	bl sub_80EED9C
-	b _080EC800
-_080EC6E2:
-	bl sub_80EF9F8
-	b _080EC800
-_080EC6E8:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EC6FC @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	movs r1, 0x1
-	strh r1, [r0]
-	b _080EC800
-	.align 2, 0
-_080EC6FC: .4byte 0x02000000
-_080EC700:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EC714 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r2
-	movs r1, 0x4
-	strh r1, [r0]
-	b _080EC800
-	.align 2, 0
-_080EC714: .4byte 0x02000000
-_080EC718:
-	ldr r1, _080EC730 @ =0x00006e90
-	adds r0, r4, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080EC734
-	bl sub_80FAEC4
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EC7BC
-	.align 2, 0
-_080EC730: .4byte 0x00006e90
-_080EC734:
-	movs r0, 0x1
-	bl sub_80EFBDC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC800
-	bl sub_80FAEC4
-	b _080EC7B6
-_080EC746:
-	bl sub_80FAFC0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EC800
-	ldr r5, _080EC76C @ =0x02000000
-	ldr r1, _080EC770 @ =0x00006e90
-	adds r0, r5, r1
-	ldrb r4, [r0]
-	cmp r4, 0
-	bne _080EC774
-	bl sub_80EFBB0
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r5, r2
-	strh r4, [r0]
-	b _080EC800
-	.align 2, 0
-_080EC76C: .4byte 0x02000000
-_080EC770: .4byte 0x00006e90
-_080EC774:
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r5, r0
-	b _080EC7BC
-_080EC77C:
-	movs r0, 0
-	bl sub_80EFBDC
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _080EC800
-	bl sub_80EFBB0
-	ldr r0, _080EC79C @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	strh r4, [r0]
-	b _080EC800
-	.align 2, 0
-_080EC79C: .4byte 0x02000000
-_080EC7A0:
-	movs r2, 0xC2
-	lsls r2, 2
-	adds r0, r4, r2
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-_080EC7B6:
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-_080EC7BC:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EC800
-_080EC7C4:
-	ldr r0, _080EC808 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC800
-	bl sub_80F2DF4
-	movs r0, 0x4
-	bl sub_80F2D04
-	ldr r3, _080EC80C @ =gSaveBlock2
-	movs r2, 0
-	ldr r0, _080EC810 @ =0x02000000
-	ldr r1, _080EC814 @ =0x00006e90
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080EC7EC
-	movs r2, 0x1
-_080EC7EC:
-	lsls r2, 3
-	ldrb r1, [r3, 0x15]
-	movs r0, 0x9
-	negs r0, r0
-	ands r0, r1
-	orrs r0, r2
-	strb r0, [r3, 0x15]
-	ldr r0, _080EC818 @ =sub_80EC00C
-	bl sub_80EBDBC
-_080EC800:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EC808: .4byte gPaletteFade
-_080EC80C: .4byte gSaveBlock2
-_080EC810: .4byte 0x02000000
-_080EC814: .4byte 0x00006e90
-_080EC818: .4byte sub_80EC00C
+sub_80EC67C:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._345
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x5
+	bls	._343	@cond_branch
+	b	._386
+._343:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._345 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._346:
+	.align	2, 0
+._345:
+	.word	+0x2000000
+	.word	._347
+._347:
+	.word	._348
+	.word	._349
+	.word	._350
+	.word	._351
+	.word	._352
+	.word	._353
+._348:
+	bl	sub_80FAB60
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x3
+	beq	._354	@cond_branch
+	cmp	r0, #0x3
+	bgt	._355	@cond_branch
+	cmp	r0, #0x1
+	beq	._356	@cond_branch
+	b	._386
+._355:
+	cmp	r0, #0x4
+	beq	._358	@cond_branch
+	cmp	r0, #0x5
+	beq	._359	@cond_branch
+	b	._386
+._356:
+	bl	sub_80EED9C
+	b	._386
+._354:
+	bl	sub_80EF9F8
+	b	._386
+._358:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._364
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	mov	r1, #0x1
+	strh	r1, [r0]
+	b	._386
+._365:
+	.align	2, 0
+._364:
+	.word	+0x2000000
+._359:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._367
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r0, r2
+	mov	r1, #0x4
+	strh	r1, [r0]
+	b	._386
+._368:
+	.align	2, 0
+._367:
+	.word	+0x2000000
+._349:
+	ldr	r1, ._371
+	add	r0, r4, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._369	@cond_branch
+	bl	sub_80FAEC4
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._380
+._372:
+	.align	2, 0
+._371:
+	.word	0x6e90
+._369:
+	mov	r0, #0x1
+	bl	sub_80EFBDC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._386	@cond_branch
+	bl	sub_80FAEC4
+	b	._374
+._350:
+	bl	sub_80FAFC0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._386	@cond_branch
+	ldr	r5, ._378
+	ldr	r1, ._378 + 4
+	add	r0, r5, r1
+	ldrb	r4, [r0]
+	cmp	r4, #0
+	bne	._376	@cond_branch
+	bl	sub_80EFBB0
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r5, r2
+	strh	r4, [r0]
+	b	._386
+._379:
+	.align	2, 0
+._378:
+	.word	+0x2000000
+	.word	0x6e90
+._376:
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r5, r0
+	b	._380
+._351:
+	mov	r0, #0x0
+	bl	sub_80EFBDC
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0
+	bne	._386	@cond_branch
+	bl	sub_80EFBB0
+	ldr	r0, ._383
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	strh	r4, [r0]
+	b	._386
+._384:
+	.align	2, 0
+._383:
+	.word	+0x2000000
+._352:
+	mov	r2, #0xc2
+	lsl	r2, r2, #0x2
+	add	r0, r4, r2
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+._374:
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+._380:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._386
+._353:
+	ldr	r0, ._389
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._386	@cond_branch
+	bl	sub_80F2DF4
+	mov	r0, #0x4
+	bl	sub_80F2D04
+	ldr	r3, ._389 + 4
+	mov	r2, #0x0
+	ldr	r0, ._389 + 8
+	ldr	r1, ._389 + 12
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._387	@cond_branch
+	mov	r2, #0x1
+._387:
+	lsl	r2, r2, #0x3
+	ldrb	r1, [r3, #0x15]
+	mov	r0, #0x9
+	neg	r0, r0
+	and	r0, r0, r1
+	orr	r0, r0, r2
+	strb	r0, [r3, #0x15]
+	ldr	r0, ._389 + 16
+	bl	sub_80EBDBC
+._386:
+	ldr	r0, ._389 + 20
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._388	@cond_branch
+	ldr	r0, ._389 + 24
+	ldr	r2, ._389 + 28
+	add	r0, r0, r2
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x1
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._388:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._390:
+	.align	2, 0
+._389:
+	.word	gPaletteFade
+	.word	gSaveBlock2
+	.word	+0x2000000
+	.word	0x6e90
+	.word	sub_80EC00C+1
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EC67C
 
 	thumb_func_start sub_80EC81C
@@ -1917,236 +2058,271 @@ _080ECA0C: .4byte 0x00006dad
 	thumb_func_end sub_80EC9A8
 
 	thumb_func_start sub_80ECA10
-sub_80ECA10: @ 80ECA10
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080ECA30 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0xD
-	bls _080ECA26
-	b _080ECBF2
-_080ECA26:
-	lsls r0, 2
-	ldr r1, _080ECA34 @ =_080ECA38
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ECA30: .4byte 0x02000000
-_080ECA34: .4byte _080ECA38
-	.align 2, 0
-_080ECA38:
-	.4byte _080ECA70
-	.4byte _080ECAC4
-	.4byte _080ECAD8
-	.4byte _080ECAF4
-	.4byte _080ECB08
-	.4byte _080ECB24
-	.4byte _080ECB2E
-	.4byte _080ECB58
-	.4byte _080ECB6C
-	.4byte _080ECB72
-	.4byte _080ECB8C
-	.4byte _080ECBA0
-	.4byte _080ECBBC
-	.4byte _080ECBD4
-_080ECA70:
-	bl sub_80EEF78
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ECA7C
-	b _080ECBF2
-_080ECA7C:
-	ldr r0, _080ECAB0 @ =sub_80EBD80
-	bl SetVBlankCallback
-	bl sub_80EED1C
-	ldr r4, _080ECAB4 @ =0x02000000
-	ldr r1, _080ECAB8 @ =0x00006df0
-	adds r0, r4, r1
-	ldrb r1, [r0]
-	ldr r2, _080ECABC @ =0x00006dad
-	adds r0, r4, r2
-	strb r1, [r0]
-	ldr r0, _080ECAC0 @ =0x00006dae
-	adds r1, r4, r0
-	movs r0, 0x3
-	strb r0, [r1]
-	bl sub_80EEE08
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r4, r1
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _080ECBF2
-	.align 2, 0
-_080ECAB0: .4byte sub_80EBD80
-_080ECAB4: .4byte 0x02000000
-_080ECAB8: .4byte 0x00006df0
-_080ECABC: .4byte 0x00006dad
-_080ECAC0: .4byte 0x00006dae
-_080ECAC4:
-	movs r0, 0x1
-	bl sub_80EF248
-	ldr r1, _080ECAF0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECAD8:
-	movs r0, 0x1
-	bl sub_80EF284
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ECAE6
-	b _080ECBF2
-_080ECAE6:
-	ldr r1, _080ECAF0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECBC8
-	.align 2, 0
-_080ECAF0: .4byte 0x02000000
-_080ECAF4:
-	movs r0, 0x1
-	bl sub_80F1B8C
-	ldr r1, _080ECB20 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECB08:
-	movs r0, 0x1
-	bl sub_80F1BC8
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ECBF2
-	ldr r1, _080ECB20 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECBC8
-	.align 2, 0
-_080ECB20: .4byte 0x02000000
-_080ECB24:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080ECBF2
-	b _080ECBC0
-_080ECB2E:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ECB54 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ECBC8
-	.align 2, 0
-_080ECB54: .4byte sub_80EBD18
-_080ECB58:
-	movs r0, 0
-	bl sub_80EED2C
-	ldr r1, _080ECB68 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECBC8
-	.align 2, 0
-_080ECB68: .4byte 0x02000000
-_080ECB6C:
-	bl sub_80F2598
-	b _080ECBC0
-_080ECB72:
-	ldr r0, _080ECB88 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ECBF2
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080ECBC8
-	.align 2, 0
-_080ECB88: .4byte gPaletteFade
-_080ECB8C:
-	movs r0, 0x1
-	bl sub_80F2C80
-	ldr r1, _080ECBB8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECBA0:
-	movs r0, 0x1
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ECBF2
-	ldr r1, _080ECBB8 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECBC8
-	.align 2, 0
-_080ECBB8: .4byte 0x02000000
-_080ECBBC:
-	bl sub_80F1DF0
-_080ECBC0:
-	ldr r1, _080ECBD0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-_080ECBC8:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ECBF2
-	.align 2, 0
-_080ECBD0: .4byte 0x02000000
-_080ECBD4:
-	bl sub_80F1E50
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ECBF2
-	ldr r0, _080ECBFC @ =0x02000000
-	ldr r1, _080ECC00 @ =0x00006dad
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x1
-	bl sub_80EF428
-	ldr r0, _080ECC04 @ =sub_80EC86C
-	bl sub_80EBDBC
-_080ECBF2:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ECBFC: .4byte 0x02000000
-_080ECC00: .4byte 0x00006dad
-_080ECC04: .4byte sub_80EC86C
+sub_80ECA10:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._456
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0xd
+	bls	._454	@cond_branch
+	b	._509
+._454:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._456 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._457:
+	.align	2, 0
+._456:
+	.word	+0x2000000
+	.word	._458
+._458:
+	.word	._459
+	.word	._460
+	.word	._461
+	.word	._462
+	.word	._463
+	.word	._464
+	.word	._465
+	.word	._466
+	.word	._467
+	.word	._468
+	.word	._469
+	.word	._470
+	.word	._471
+	.word	._472
+._459:
+	bl	sub_80EEF78
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._473	@cond_branch
+	b	._509
+._473:
+	ldr	r0, ._476
+	bl	SetVBlankCallback
+	bl	sub_80EED1C
+	ldr	r4, ._476 + 4
+	ldr	r1, ._476 + 8
+	add	r0, r4, r1
+	ldrb	r1, [r0]
+	ldr	r2, ._476 + 12
+	add	r0, r4, r2
+	strb	r1, [r0]
+	ldr	r0, ._476 + 16
+	add	r1, r4, r0
+	mov	r0, #0x3
+	strb	r0, [r1]
+	bl	sub_80EEE08
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r4, r4, r1
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._509
+._477:
+	.align	2, 0
+._476:
+	.word	sub_80EBD80+1
+	.word	+0x2000000
+	.word	0x6df0
+	.word	0x6dad
+	.word	0x6dae
+._460:
+	mov	r0, #0x1
+	bl	sub_80EF248
+	ldr	r1, ._481
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._461:
+	mov	r0, #0x1
+	bl	sub_80EF284
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._478	@cond_branch
+	b	._509
+._478:
+	ldr	r1, ._481
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._502
+._482:
+	.align	2, 0
+._481:
+	.word	+0x2000000
+._462:
+	mov	r0, #0x1
+	bl	sub_80F1B8C
+	ldr	r1, ._486
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._463:
+	mov	r0, #0x1
+	bl	sub_80F1BC8
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._483	@cond_branch
+	b	._509
+._483:
+	ldr	r1, ._486
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._502
+._487:
+	.align	2, 0
+._486:
+	.word	+0x2000000
+._464:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._509	@cond_branch
+	b	._496
+._465:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._491
+	bl	SetVBlankCallback
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._502
+._492:
+	.align	2, 0
+._491:
+	.word	sub_80EBD18+1
+._466:
+	mov	r0, #0x0
+	bl	sub_80EED2C
+	ldr	r1, ._494
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._502
+._495:
+	.align	2, 0
+._494:
+	.word	+0x2000000
+._467:
+	bl	sub_80F2598
+	b	._496
+._468:
+	ldr	r0, ._499
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._509	@cond_branch
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+	b	._502
+._500:
+	.align	2, 0
+._499:
+	.word	gPaletteFade
+._469:
+	mov	r0, #0x1
+	bl	sub_80F2C80
+	ldr	r1, ._503
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._470:
+	mov	r0, #0x1
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._509	@cond_branch
+	ldr	r1, ._503
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._502
+._504:
+	.align	2, 0
+._503:
+	.word	+0x2000000
+._471:
+	bl	sub_80F1DF0
+._496:
+	ldr	r1, ._506
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+._502:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._509
+._507:
+	.align	2, 0
+._506:
+	.word	+0x2000000
+._472:
+	bl	sub_80F1E50
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._509	@cond_branch
+	ldr	r0, ._510
+	ldr	r1, ._510 + 4
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	mov	r0, #0x1
+	bl	sub_80EF428
+	ldr	r0, ._510 + 8
+	bl	sub_80EBDBC
+	ldr	r0, ._510 + 12
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._509	@cond_branch
+	ldr	r0, ._510 + 16
+	ldr	r2, ._510 + 20
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._509:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._511:
+	.align	2, 0
+._510:
+	.word	+0x2000000
+	.word	0x6dad
+	.word	sub_80EC86C+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+.syntax unified
 	thumb_func_end sub_80ECA10
 
 	thumb_func_start sub_80ECC08
@@ -2327,2026 +2503,2467 @@ _080ECD7C: .4byte sub_80EC9A8
 	thumb_func_end sub_80ECC08
 
 	thumb_func_start sub_80ECD80
-sub_80ECD80: @ 80ECD80
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080ECDA0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x14
-	bls _080ECD96
-	b _080ED006
-_080ECD96:
-	lsls r0, 2
-	ldr r1, _080ECDA4 @ =_080ECDA8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ECDA0: .4byte 0x02000000
-_080ECDA4: .4byte _080ECDA8
-	.align 2, 0
-_080ECDA8:
-	.4byte _080ECDFC
-	.4byte _080ECE1A
-	.4byte _080ECE34
-	.4byte _080ECE4C
-	.4byte _080ECE64
-	.4byte _080ECE78
-	.4byte _080ECE80
-	.4byte _080ECEAC
-	.4byte _080ECEC0
-	.4byte _080ECED4
-	.4byte _080ECEE8
-	.4byte _080ECF04
-	.4byte _080ECF10
-	.4byte _080ECF3C
-	.4byte _080ECF44
-	.4byte _080ECF58
-	.4byte _080ECF70
-	.4byte _080ECF84
-	.4byte _080ECFB0
-	.4byte _080ECFC4
-	.4byte _080ECFE8
-_080ECDFC:
-	movs r3, 0xC2
-	lsls r3, 2
-	adds r0, r4, r3
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080ECFDC
-_080ECE1A:
-	ldr r0, _080ECE30 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080ECE28
-	b _080ED006
-_080ECE28:
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ECFDC
-	.align 2, 0
-_080ECE30: .4byte gPaletteFade
-_080ECE34:
-	bl sub_80EEF78
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ECE40
-	b _080ED006
-_080ECE40:
-	ldr r0, _080ECE48 @ =sub_80EBD80
-	bl SetVBlankCallback
-	b _080ECFD4
-	.align 2, 0
-_080ECE48: .4byte sub_80EBD80
-_080ECE4C:
-	bl sub_80EED1C
-	bl sub_80F3130
-	ldr r1, _080ECE60 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECFDC
-	.align 2, 0
-_080ECE60: .4byte 0x02000000
-_080ECE64:
-	movs r0, 0x1
-	bl sub_80F2D6C
-	ldr r1, _080ECE74 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080ECFDC
-	.align 2, 0
-_080ECE74: .4byte 0x02000000
-_080ECE78:
-	movs r0, 0x5
-	bl sub_80F2D6C
-	b _080ECFD4
-_080ECE80:
-	ldr r1, _080ECEA0 @ =0x00006dfc
-	adds r0, r4, r1
-	ldrb r1, [r0]
-	ldr r2, _080ECEA4 @ =0x00006dad
-	adds r0, r4, r2
-	strb r1, [r0]
-	ldr r3, _080ECEA8 @ =0x00006dae
-	adds r1, r4, r3
-	movs r0, 0x6
-	strb r0, [r1]
-	bl sub_80EEE08
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080ECFDC
-	.align 2, 0
-_080ECEA0: .4byte 0x00006dfc
-_080ECEA4: .4byte 0x00006dad
-_080ECEA8: .4byte 0x00006dae
-_080ECEAC:
-	movs r0, 0x2
-	bl sub_80EF248
-	ldr r1, _080ECED0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECEC0:
-	movs r0, 0x2
-	bl sub_80EF284
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ECECE
-	b _080ED006
-_080ECECE:
-	b _080ECFD4
-	.align 2, 0
-_080ECED0: .4byte 0x02000000
-_080ECED4:
-	movs r0, 0x2
-	bl sub_80F1B8C
-	ldr r1, _080ECF00 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECEE8:
-	movs r0, 0x2
-	bl sub_80F1BC8
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ECEF6
-	b _080ED006
-_080ECEF6:
-	ldr r1, _080ECF00 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080ECFDC
-	.align 2, 0
-_080ECF00: .4byte 0x02000000
-_080ECF04:
-	bl sub_8055870
-	cmp r0, 0
-	beq _080ECF0E
-	b _080ED006
-_080ECF0E:
-	b _080ECFD4
-_080ECF10:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ECF38 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ECFDC
-	.align 2, 0
-_080ECF38: .4byte sub_80EBD18
-_080ECF3C:
-	movs r0, 0
-	bl sub_80EED2C
-	b _080ECFD4
-_080ECF44:
-	bl sub_80F2598
-	ldr r1, _080ECF54 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ECFDC
-	.align 2, 0
-_080ECF54: .4byte 0x02000000
-_080ECF58:
-	ldr r0, _080ECF6C @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ED006
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ECFDC
-	.align 2, 0
-_080ECF6C: .4byte gPaletteFade
-_080ECF70:
-	movs r0, 0x1
-	bl sub_80F2C80
-	ldr r1, _080ECFA8 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECF84:
-	movs r0, 0x1
-	bl sub_80F2CBC
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	bne _080ED006
-	ldr r0, _080ECFA8 @ =0x02000000
-	ldr r3, _080ECFAC @ =0x00000306
-	adds r1, r0, r3
-	strh r2, [r1]
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	adds r1, 0x1
-	strh r1, [r0]
-	b _080ED006
-	.align 2, 0
-_080ECFA8: .4byte 0x02000000
-_080ECFAC: .4byte 0x00000306
-_080ECFB0:
-	movs r0, 0x5
-	bl sub_80F2C80
-	ldr r1, _080ECFE4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ECFC4:
-	movs r0, 0x5
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED006
-	bl sub_80F1DF0
-_080ECFD4:
-	ldr r1, _080ECFE4 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-_080ECFDC:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ED006
-	.align 2, 0
-_080ECFE4: .4byte 0x02000000
-_080ECFE8:
-	bl sub_80F1E50
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED006
-	ldr r0, _080ED010 @ =0x02000000
-	ldr r1, _080ED014 @ =0x00006dad
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	bl sub_80EF428
-	ldr r0, _080ED018 @ =sub_80ECC08
-	bl sub_80EBDBC
-_080ED006:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ED010: .4byte 0x02000000
-_080ED014: .4byte 0x00006dad
-_080ED018: .4byte sub_80ECC08
+sub_80ECD80:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._564
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x14
+	bls	._562	@cond_branch
+	b	._642
+._562:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._564 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._565:
+	.align	2, 0
+._564:
+	.word	+0x2000000
+	.word	._566
+._566:
+	.word	._567
+	.word	._568
+	.word	._569
+	.word	._570
+	.word	._571
+	.word	._572
+	.word	._573
+	.word	._574
+	.word	._575
+	.word	._576
+	.word	._577
+	.word	._578
+	.word	._579
+	.word	._580
+	.word	._581
+	.word	._582
+	.word	._583
+	.word	._584
+	.word	._585
+	.word	._586
+	.word	._587
+._567:
+	mov	r3, #0xc2
+	lsl	r3, r3, #0x2
+	add	r0, r4, r3
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+	b	._630
+._568:
+	ldr	r0, ._592
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._589	@cond_branch
+	b	._642
+._589:
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._630
+._593:
+	.align	2, 0
+._592:
+	.word	gPaletteFade
+._569:
+	bl	sub_80EEF78
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._594	@cond_branch
+	b	._642
+._594:
+	ldr	r0, ._597
+	bl	SetVBlankCallback
+	b	._625
+._598:
+	.align	2, 0
+._597:
+	.word	sub_80EBD80+1
+._570:
+	bl	sub_80EED1C
+	bl	sub_80F3130
+	ldr	r1, ._600
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._630
+._601:
+	.align	2, 0
+._600:
+	.word	+0x2000000
+._571:
+	mov	r0, #0x1
+	bl	sub_80F2D6C
+	ldr	r1, ._603
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._630
+._604:
+	.align	2, 0
+._603:
+	.word	+0x2000000
+._572:
+	mov	r0, #0x5
+	bl	sub_80F2D6C
+	b	._625
+._573:
+	ldr	r1, ._607
+	add	r0, r4, r1
+	ldrb	r1, [r0]
+	ldr	r2, ._607 + 4
+	add	r0, r4, r2
+	strb	r1, [r0]
+	ldr	r3, ._607 + 8
+	add	r1, r4, r3
+	mov	r0, #0x6
+	strb	r0, [r1]
+	bl	sub_80EEE08
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+	b	._630
+._608:
+	.align	2, 0
+._607:
+	.word	0x6dfc
+	.word	0x6dad
+	.word	0x6dae
+._574:
+	mov	r0, #0x2
+	bl	sub_80EF248
+	ldr	r1, ._612
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._575:
+	mov	r0, #0x2
+	bl	sub_80EF284
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._609	@cond_branch
+	b	._642
+._609:
+	b	._625
+._613:
+	.align	2, 0
+._612:
+	.word	+0x2000000
+._576:
+	mov	r0, #0x2
+	bl	sub_80F1B8C
+	ldr	r1, ._617
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._577:
+	mov	r0, #0x2
+	bl	sub_80F1BC8
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._614	@cond_branch
+	b	._642
+._614:
+	ldr	r1, ._617
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._630
+._618:
+	.align	2, 0
+._617:
+	.word	+0x2000000
+._578:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._619	@cond_branch
+	b	._642
+._619:
+	b	._625
+._579:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._623
+	bl	SetVBlankCallback
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._630
+._624:
+	.align	2, 0
+._623:
+	.word	sub_80EBD18+1
+._580:
+	mov	r0, #0x0
+	bl	sub_80EED2C
+	b	._625
+._581:
+	bl	sub_80F2598
+	ldr	r1, ._627
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._630
+._628:
+	.align	2, 0
+._627:
+	.word	+0x2000000
+._582:
+	ldr	r0, ._631
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._642	@cond_branch
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._630
+._632:
+	.align	2, 0
+._631:
+	.word	gPaletteFade
+._583:
+	mov	r0, #0x1
+	bl	sub_80F2C80
+	ldr	r1, ._635
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._584:
+	mov	r0, #0x1
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	bne	._642	@cond_branch
+	ldr	r0, ._635
+	ldr	r3, ._635 + 4
+	add	r1, r0, r3
+	strh	r2, [r1]
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	add	r1, r1, #0x1
+	strh	r1, [r0]
+	b	._642
+._636:
+	.align	2, 0
+._635:
+	.word	+0x2000000
+	.word	0x306
+._585:
+	mov	r0, #0x5
+	bl	sub_80F2C80
+	ldr	r1, ._639
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._586:
+	mov	r0, #0x5
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._642	@cond_branch
+	bl	sub_80F1DF0
+._625:
+	ldr	r1, ._639
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+._630:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._642
+._640:
+	.align	2, 0
+._639:
+	.word	+0x2000000
+._587:
+	bl	sub_80F1E50
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._642	@cond_branch
+	ldr	r0, ._643
+	ldr	r1, ._643 + 4
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	mov	r0, #0x2
+	bl	sub_80EF428
+	ldr	r0, ._643 + 8
+	bl	sub_80EBDBC
+	ldr	r0, ._643 + 12
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._642	@cond_branch
+	ldr	r0, ._643 + 16
+	ldr	r2, ._643 + 20
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._642:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._644:
+	.align	2, 0
+._643:
+	.word	+0x2000000
+	.word	0x6dad
+	.word	sub_80ECC08+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+.syntax unified
 	thumb_func_end sub_80ECD80
 
 	thumb_func_start sub_80ED01C
-sub_80ED01C: @ 80ED01C
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080ED03C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x13
-	bls _080ED032
-	b _080ED308
-_080ED032:
-	lsls r0, 2
-	ldr r1, _080ED040 @ =_080ED044
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ED03C: .4byte 0x02000000
-_080ED040: .4byte _080ED044
-	.align 2, 0
-_080ED044:
-	.4byte _080ED094
-	.4byte _080ED0B4
-	.4byte _080ED0D4
-	.4byte _080ED108
-	.4byte _080ED138
-	.4byte _080ED14C
-	.4byte _080ED15E
-	.4byte _080ED18C
-	.4byte _080ED1AC
-	.4byte _080ED1C4
-	.4byte _080ED1D8
-	.4byte _080ED1F4
-	.4byte _080ED208
-	.4byte _080ED220
-	.4byte _080ED24C
-	.4byte _080ED260
-	.4byte _080ED28C
-	.4byte _080ED2A0
-	.4byte _080ED2CC
-	.4byte _080ED2EA
-_080ED094:
-	bl sub_80F1E84
-	movs r0, 0x1
-	bl sub_80F2D04
-	movs r0, 0x5
-	bl sub_80F2D04
-	ldr r1, _080ED0B0 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	b _080ED27C
-	.align 2, 0
-_080ED0B0: .4byte 0x02000000
-_080ED0B4:
-	bl sub_80F1F10
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED0C0
-	b _080ED308
-_080ED0C0:
-	movs r0, 0
-	bl sub_80EEFBC
-	ldr r1, _080ED0D0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED27C
-	.align 2, 0
-_080ED0D0: .4byte 0x02000000
-_080ED0D4:
-	bl sub_80EEF34
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _080ED0E2
-	b _080ED308
-_080ED0E2:
-	ldr r4, _080ED104 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED27C
-	.align 2, 0
-_080ED104: .4byte 0x02000000
-_080ED108:
-	ldr r0, _080ED130 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080ED116
-	b _080ED308
-_080ED116:
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80EF814
-	ldr r1, _080ED134 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	b _080ED27C
-	.align 2, 0
-_080ED130: .4byte gPaletteFade
-_080ED134: .4byte 0x02000000
-_080ED138:
-	bl sub_80F2620
-	ldr r1, _080ED148 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED27C
-	.align 2, 0
-_080ED148: .4byte 0x02000000
-_080ED14C:
-	bl sub_80F4D44
-	ldr r1, _080ED178 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED15E:
-	bl sub_80F4D88
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED17C
-	ldr r1, _080ED178 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	ldrh r0, [r1]
-	adds r0, 0x2
-	strh r0, [r1]
-	b _080ED308
-	.align 2, 0
-_080ED178: .4byte 0x02000000
-_080ED17C:
-	ldr r1, _080ED188 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED27C
-	.align 2, 0
-_080ED188: .4byte 0x02000000
-_080ED18C:
-	bl sub_8055870
-	cmp r0, 0
-	beq _080ED196
-	b _080ED308
-_080ED196:
-	ldr r1, _080ED1A8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	subs r0, 0x1
-	strh r0, [r1]
-	b _080ED308
-	.align 2, 0
-_080ED1A8: .4byte 0x02000000
-_080ED1AC:
-	bl sub_8055870
-	cmp r0, 0
-	beq _080ED1B6
-	b _080ED308
-_080ED1B6:
-	ldr r1, _080ED1C0 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	b _080ED27C
-	.align 2, 0
-_080ED1C0: .4byte 0x02000000
-_080ED1C4:
-	movs r0, 0
-	bl sub_80F0264
-	ldr r1, _080ED1F0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED1D8:
-	bl sub_80F02A0
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED1E4
-	b _080ED308
-_080ED1E4:
-	ldr r1, _080ED1F0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080ED27C
-	.align 2, 0
-_080ED1F0: .4byte 0x02000000
-_080ED1F4:
-	movs r0, 0
-	bl sub_80F3008
-	ldr r1, _080ED204 @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	b _080ED27C
-	.align 2, 0
-_080ED204: .4byte 0x02000000
-_080ED208:
-	bl sub_8055870
-	cmp r0, 0
-	beq _080ED212
-	b _080ED308
-_080ED212:
-	ldr r1, _080ED21C @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED27C
-	.align 2, 0
-_080ED21C: .4byte 0x02000000
-_080ED220:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ED248 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED27C
-	.align 2, 0
-_080ED248: .4byte sub_80EBD18
-_080ED24C:
-	movs r0, 0x4
-	bl sub_80EED2C
-	ldr r1, _080ED25C @ =0x02000000
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r3
-	b _080ED27C
-	.align 2, 0
-_080ED25C: .4byte 0x02000000
-_080ED260:
-	ldr r0, _080ED284 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	bne _080ED308
-	ldr r2, _080ED288 @ =0x00000306
-	adds r0, r4, r2
-	strh r1, [r0]
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r1, r4, r3
-_080ED27C:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ED308
-	.align 2, 0
-_080ED284: .4byte gPaletteFade
-_080ED288: .4byte 0x00000306
-_080ED28C:
-	movs r0, 0x1
-	bl sub_80F2C80
-	ldr r1, _080ED2C4 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED2A0:
-	movs r0, 0x1
-	bl sub_80F2CBC
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	bne _080ED308
-	ldr r0, _080ED2C4 @ =0x02000000
-	ldr r3, _080ED2C8 @ =0x00000306
-	adds r1, r0, r3
-	strh r2, [r1]
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	adds r1, 0x1
-	strh r1, [r0]
-	b _080ED308
-	.align 2, 0
-_080ED2C4: .4byte 0x02000000
-_080ED2C8: .4byte 0x00000306
-_080ED2CC:
-	ldr r4, _080ED310 @ =0x02000000
-	ldr r2, _080ED314 @ =0x00006dfc
-	adds r0, r4, r2
-	ldrb r0, [r0]
-	adds r0, 0x7
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80F2C80
-	movs r3, 0xC1
-	lsls r3, 2
-	adds r4, r3
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-_080ED2EA:
-	ldr r0, _080ED310 @ =0x02000000
-	ldr r1, _080ED314 @ =0x00006dfc
-	adds r0, r1
-	ldrb r0, [r0]
-	adds r0, 0x7
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED308
-	ldr r0, _080ED318 @ =sub_80ED31C
-	bl sub_80EBDBC
-_080ED308:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ED310: .4byte 0x02000000
-_080ED314: .4byte 0x00006dfc
-_080ED318: .4byte sub_80ED31C
+sub_80ED01C:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._647
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x13
+	bls	._645	@cond_branch
+	b	._736
+._645:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._647 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._648:
+	.align	2, 0
+._647:
+	.word	+0x2000000
+	.word	._649
+._649:
+	.word	._650
+	.word	._651
+	.word	._652
+	.word	._653
+	.word	._654
+	.word	._655
+	.word	._656
+	.word	._657
+	.word	._658
+	.word	._659
+	.word	._660
+	.word	._661
+	.word	._662
+	.word	._663
+	.word	._664
+	.word	._665
+	.word	._666
+	.word	._667
+	.word	._668
+	.word	._669
+._650:
+	bl	sub_80F1E84
+	mov	r0, #0x1
+	bl	sub_80F2D04
+	mov	r0, #0x5
+	bl	sub_80F2D04
+	ldr	r1, ._671
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	b	._724
+._672:
+	.align	2, 0
+._671:
+	.word	+0x2000000
+._651:
+	bl	sub_80F1F10
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._673	@cond_branch
+	b	._736
+._673:
+	mov	r0, #0x0
+	bl	sub_80EEFBC
+	ldr	r1, ._676
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._724
+._677:
+	.align	2, 0
+._676:
+	.word	+0x2000000
+._652:
+	bl	sub_80EEF34
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	beq	._678	@cond_branch
+	b	._736
+._678:
+	ldr	r4, ._681
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r2, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._724
+._682:
+	.align	2, 0
+._681:
+	.word	+0x2000000
+._653:
+	ldr	r0, ._686
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._683	@cond_branch
+	b	._736
+._683:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80EF814
+	ldr	r1, ._686 + 4
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	b	._724
+._687:
+	.align	2, 0
+._686:
+	.word	gPaletteFade
+	.word	+0x2000000
+._654:
+	bl	sub_80F2620
+	ldr	r1, ._689
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._724
+._690:
+	.align	2, 0
+._689:
+	.word	+0x2000000
+._655:
+	bl	sub_80F4D44
+	ldr	r1, ._693
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._656:
+	bl	sub_80F4D88
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._691	@cond_branch
+	ldr	r1, ._693
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	ldrh	r0, [r1]
+	add	r0, r0, #0x2
+	strh	r0, [r1]
+	b	._736
+._694:
+	.align	2, 0
+._693:
+	.word	+0x2000000
+._691:
+	ldr	r1, ._696
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._724
+._697:
+	.align	2, 0
+._696:
+	.word	+0x2000000
+._657:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._698	@cond_branch
+	b	._736
+._698:
+	ldr	r1, ._701
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	sub	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._736
+._702:
+	.align	2, 0
+._701:
+	.word	+0x2000000
+._658:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._703	@cond_branch
+	b	._736
+._703:
+	ldr	r1, ._706
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	b	._724
+._707:
+	.align	2, 0
+._706:
+	.word	+0x2000000
+._659:
+	mov	r0, #0x0
+	bl	sub_80F0264
+	ldr	r1, ._711
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._660:
+	bl	sub_80F02A0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._708	@cond_branch
+	b	._736
+._708:
+	ldr	r1, ._711
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._724
+._712:
+	.align	2, 0
+._711:
+	.word	+0x2000000
+._661:
+	mov	r0, #0x0
+	bl	sub_80F3008
+	ldr	r1, ._714
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	b	._724
+._715:
+	.align	2, 0
+._714:
+	.word	+0x2000000
+._662:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._716	@cond_branch
+	b	._736
+._716:
+	ldr	r1, ._719
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._724
+._720:
+	.align	2, 0
+._719:
+	.word	+0x2000000
+._663:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._722
+	bl	SetVBlankCallback
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._724
+._723:
+	.align	2, 0
+._722:
+	.word	sub_80EBD18+1
+._664:
+	mov	r0, #0x4
+	bl	sub_80EED2C
+	ldr	r1, ._725
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r1, r3
+	b	._724
+._726:
+	.align	2, 0
+._725:
+	.word	+0x2000000
+._665:
+	ldr	r0, ._729
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	lsl	r0, r0, #0x18
+	lsr	r1, r0, #0x18
+	cmp	r1, #0
+	bne	._736	@cond_branch
+	ldr	r2, ._729 + 4
+	add	r0, r4, r2
+	strh	r1, [r0]
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r1, r4, r3
+._724:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._736
+._730:
+	.align	2, 0
+._729:
+	.word	gPaletteFade
+	.word	0x306
+._666:
+	mov	r0, #0x1
+	bl	sub_80F2C80
+	ldr	r1, ._733
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._667:
+	mov	r0, #0x1
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	bne	._736	@cond_branch
+	ldr	r0, ._733
+	ldr	r3, ._733 + 4
+	add	r1, r0, r3
+	strh	r2, [r1]
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	add	r1, r1, #0x1
+	strh	r1, [r0]
+	b	._736
+._734:
+	.align	2, 0
+._733:
+	.word	+0x2000000
+	.word	0x306
+._668:
+	ldr	r4, ._737
+	ldr	r2, ._737 + 4
+	add	r0, r4, r2
+	ldrb	r0, [r0]
+	add	r0, r0, #0x7
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	bl	sub_80F2C80
+	mov	r3, #0xc1
+	lsl	r3, r3, #0x2
+	add	r4, r4, r3
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+._669:
+	ldr	r0, ._737
+	ldr	r1, ._737 + 4
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	add	r0, r0, #0x7
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._736	@cond_branch
+	ldr	r0, ._737 + 8
+	bl	sub_80EBDBC
+	ldr	r0, ._737 + 12
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._736	@cond_branch
+	ldr	r0, ._737 + 16
+	ldr	r2, ._737 + 20
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._736:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._738:
+	.align	2, 0
+._737:
+	.word	+0x2000000
+	.word	0x6dfc
+	.word	sub_80ED31C+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+.syntax unified
 	thumb_func_end sub_80ED01C
 
 	thumb_func_start sub_80ED31C
-sub_80ED31C: @ 80ED31C
-	push {r4,lr}
-	ldr r0, _080ED338 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r4, r0, r1
-	ldrh r0, [r4]
-	cmp r0, 0x1
-	beq _080ED3A8
-	cmp r0, 0x1
-	bgt _080ED33C
-	cmp r0, 0
-	beq _080ED342
-	b _080ED3CA
-	.align 2, 0
-_080ED338: .4byte 0x02000000
-_080ED33C:
-	cmp r0, 0x2
-	beq _080ED3C0
-	b _080ED3CA
-_080ED342:
-	bl sub_80F5DD4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080ED374
-	cmp r0, 0x2
-	beq _080ED380
-	ldr r0, _080ED36C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080ED38C
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080ED370 @ =sub_80ED4D8
-	bl sub_80EBDBC
-	b _080ED3CA
-	.align 2, 0
-_080ED36C: .4byte gMain
-_080ED370: .4byte sub_80ED4D8
-_080ED374:
-	movs r0, 0x5
-	bl PlaySE
-	bl ShowMapNamePopUpWindow
-	b _080ED3CA
-_080ED380:
-	movs r0, 0x5
-	bl PlaySE
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080ED3C8
-_080ED38C:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080ED3CA
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080ED3A4 @ =sub_80ECD80
-	bl sub_80EBDBC
-	b _080ED3CA
-	.align 2, 0
-_080ED3A4: .4byte sub_80ECD80
-_080ED3A8:
-	bl sub_80F0718
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED3CA
-	bl ShowMapNamePopUpWindow
-	bl sub_80F3264
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080ED3C8
-_080ED3C0:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080ED3CA
-_080ED3C8:
-	strh r0, [r4]
-_080ED3CA:
-	pop {r4}
-	pop {r0}
-	bx r0
+sub_80ED31C:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._743
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r4, r0, r1
+	ldrh	r0, [r4]
+	cmp	r0, #0x1
+	beq	._739	@cond_branch
+	cmp	r0, #0x1
+	bgt	._740	@cond_branch
+	cmp	r0, #0
+	beq	._741	@cond_branch
+	b	._761
+._744:
+	.align	2, 0
+._743:
+	.word	+0x2000000
+._740:
+	cmp	r0, #0x2
+	beq	._745	@cond_branch
+	b	._761
+._741:
+	bl	sub_80F5DD4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	beq	._747	@cond_branch
+	cmp	r0, #0x2
+	beq	._748	@cond_branch
+	ldr	r0, ._751
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._749	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._751 + 4
+	bl	sub_80EBDBC
+	b	._762
+._752:
+	.align	2, 0
+._751:
+	.word	gMain
+	.word	sub_80ED4D8+1
+._747:
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	ShowMapNamePopUpWindow
+	b	._762
+._748:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._762
+._749:
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._761	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._757
+	bl	sub_80EBDBC
+	b	._762
+._758:
+	.align	2, 0
+._757:
+	.word	sub_80ECD80+1
+._739:
+	bl	sub_80F0718
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._761	@cond_branch
+	bl	ShowMapNamePopUpWindow
+	bl	sub_80F3264
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	b	._760
+._745:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._761	@cond_branch
+._760:
+	strh	r0, [r4]
+._761:
+	ldr	r0, ._763
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._762	@cond_branch
+	ldr	r0, ._763 + 4
+	ldr	r1, ._763 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x8
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._762:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._764:
+	.align	2, 0
+._763:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80ED31C
 
 	thumb_func_start sub_80ED3D0
-sub_80ED3D0: @ 80ED3D0
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, _080ED3EC @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, 0x8
-	bhi _080ED4C6
-	lsls r0, 2
-	ldr r1, _080ED3F0 @ =_080ED3F4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ED3EC: .4byte 0x02000000
-_080ED3F0: .4byte _080ED3F4
-	.align 2, 0
-_080ED3F4:
-	.4byte _080ED418
-	.4byte _080ED420
-	.4byte _080ED42A
-	.4byte _080ED432
-	.4byte _080ED446
-	.4byte _080ED458
-	.4byte _080ED462
-	.4byte _080ED498
-	.4byte _080ED4B4
-_080ED418:
-	movs r0, 0
-	bl SetVBlankCallback
-	b _080ED49E
-_080ED420:
-	bl sub_80EED0C
-	bl sub_80F6134
-	b _080ED49E
-_080ED42A:
-	movs r0, 0
-	bl sub_80EEFBC
-	b _080ED49E
-_080ED432:
-	movs r0, 0
-	bl sub_80F0264
-	ldr r1, _080ED454 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED446:
-	bl sub_80F02A0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED4C6
-	b _080ED49E
-	.align 2, 0
-_080ED454: .4byte 0x02000000
-_080ED458:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080ED4C6
-	b _080ED49E
-_080ED462:
-	movs r0, 0
-	bl sub_80F3008
-	ldr r4, _080ED490 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ED494 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080ED4A6
-	.align 2, 0
-_080ED490: .4byte 0x02000000
-_080ED494: .4byte sub_80EBD18
-_080ED498:
-	movs r0, 0x4
-	bl sub_80EED2C
-_080ED49E:
-	ldr r1, _080ED4B0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080ED4A6:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ED4C6
-	.align 2, 0
-_080ED4B0: .4byte 0x02000000
-_080ED4B4:
-	ldr r0, _080ED4D0 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ED4C6
-	ldr r0, _080ED4D4 @ =sub_80ED31C
-	bl sub_80EBDBC
-_080ED4C6:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ED4D0: .4byte gPaletteFade
-_080ED4D4: .4byte sub_80ED31C
+sub_80ED3D0:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._767
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	ldrh	r0, [r0]
+	cmp	r0, #0x8
+	bls	._765	@cond_branch
+	b	._803
+._765:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._767 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._768:
+	.align	2, 0
+._767:
+	.word	+0x2000000
+	.word	._769
+._769:
+	.word	._770
+	.word	._771
+	.word	._772
+	.word	._773
+	.word	._774
+	.word	._775
+	.word	._776
+	.word	._777
+	.word	._778
+._770:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	ldr	r1, ._780
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._793
+._781:
+	.align	2, 0
+._780:
+	.word	+0x2000000
+._771:
+	bl	sub_80EED0C
+	bl	sub_80F6134
+	ldr	r1, ._783
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._793
+._784:
+	.align	2, 0
+._783:
+	.word	+0x2000000
+._772:
+	mov	r0, #0x0
+	bl	sub_80EEFBC
+	ldr	r1, ._786
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._793
+._787:
+	.align	2, 0
+._786:
+	.word	+0x2000000
+._773:
+	mov	r0, #0x0
+	bl	sub_80F0264
+	ldr	r1, ._790
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._774:
+	bl	sub_80F02A0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._803	@cond_branch
+	ldr	r1, ._790
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._793
+._791:
+	.align	2, 0
+._790:
+	.word	+0x2000000
+._775:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._803	@cond_branch
+	ldr	r1, ._794
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._793
+._795:
+	.align	2, 0
+._794:
+	.word	+0x2000000
+._776:
+	mov	r0, #0x0
+	bl	sub_80F3008
+	ldr	r4, ._797
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._797 + 4
+	bl	SetVBlankCallback
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+._793:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._803
+._798:
+	.align	2, 0
+._797:
+	.word	+0x2000000
+	.word	sub_80EBD18+1
+._777:
+	mov	r0, #0x4
+	bl	sub_80EED2C
+	ldr	r1, ._801
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._801 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._803	@cond_branch
+	ldr	r0, ._801 + 8
+	ldr	r2, ._801 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._803
+._802:
+	.align	2, 0
+._801:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+._778:
+	ldr	r0, ._804
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._803	@cond_branch
+	ldr	r0, ._804 + 4
+	bl	sub_80EBDBC
+._803:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._805:
+	.align	2, 0
+._804:
+	.word	gPaletteFade
+	.word	sub_80ED31C+1
+.syntax unified
 	thumb_func_end sub_80ED3D0
 
 	thumb_func_start sub_80ED4D8
-sub_80ED4D8: @ 80ED4D8
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080ED4F8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x8
-	bls _080ED4EE
-	b _080ED60E
-_080ED4EE:
-	lsls r0, 2
-	ldr r1, _080ED4FC @ =_080ED500
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ED4F8: .4byte 0x02000000
-_080ED4FC: .4byte _080ED500
-	.align 2, 0
-_080ED500:
-	.4byte _080ED524
-	.4byte _080ED542
-	.4byte _080ED564
-	.4byte _080ED57C
-	.4byte _080ED582
-	.4byte _080ED594
-	.4byte _080ED5A4
-	.4byte _080ED5E0
-	.4byte _080ED5FC
-_080ED524:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED5EE
-_080ED542:
-	ldr r0, _080ED560 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ED60E
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80F3130
-	b _080ED5E6
-	.align 2, 0
-_080ED560: .4byte gPaletteFade
-_080ED564:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080ED60E
-	ldr r1, _080ED578 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080ED5EE
-	.align 2, 0
-_080ED578: .4byte 0x02000000
-_080ED57C:
-	bl sub_80F4CF0
-	b _080ED5E6
-_080ED582:
-	bl sub_80EFF34
-	ldr r1, _080ED5A0 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED594:
-	bl sub_80EFF68
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED60E
-	b _080ED5E6
-	.align 2, 0
-_080ED5A0: .4byte 0x02000000
-_080ED5A4:
-	bl sub_80F35B4
-	movs r0, 0x2
-	bl sub_80EEFBC
-	ldr r4, _080ED5D8 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ED5DC @ =sub_80EBD4C
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED5EE
-	.align 2, 0
-_080ED5D8: .4byte 0x02000000
-_080ED5DC: .4byte sub_80EBD4C
-_080ED5E0:
-	movs r0, 0x2
-	bl sub_80EED2C
-_080ED5E6:
-	ldr r1, _080ED5F8 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080ED5EE:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ED60E
-	.align 2, 0
-_080ED5F8: .4byte 0x02000000
-_080ED5FC:
-	ldr r0, _080ED618 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ED60E
-	ldr r0, _080ED61C @ =sub_80ED858
-	bl sub_80EBDBC
-_080ED60E:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ED618: .4byte gPaletteFade
-_080ED61C: .4byte sub_80ED858
+sub_80ED4D8:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._808
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x8
+	bls	._806	@cond_branch
+	b	._844
+._806:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._808 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._809:
+	.align	2, 0
+._808:
+	.word	+0x2000000
+	.word	._810
+._810:
+	.word	._811
+	.word	._812
+	.word	._813
+	.word	._814
+	.word	._815
+	.word	._816
+	.word	._817
+	.word	._818
+	.word	._819
+._811:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	b	._820
+._812:
+	ldr	r0, ._824
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._821	@cond_branch
+	b	._844
+._821:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80F3130
+	ldr	r1, ._824 + 4
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._834
+._825:
+	.align	2, 0
+._824:
+	.word	gPaletteFade
+	.word	+0x2000000
+._813:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._844	@cond_branch
+	ldr	r1, ._828
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._834
+._829:
+	.align	2, 0
+._828:
+	.word	+0x2000000
+._814:
+	bl	sub_80F4CF0
+	ldr	r1, ._831
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._834
+._832:
+	.align	2, 0
+._831:
+	.word	+0x2000000
+._815:
+	bl	sub_80EFF34
+	ldr	r1, ._835
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._816:
+	bl	sub_80EFF68
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._844	@cond_branch
+	ldr	r1, ._835
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._834
+._836:
+	.align	2, 0
+._835:
+	.word	+0x2000000
+._817:
+	bl	sub_80F35B4
+	mov	r0, #0x2
+	bl	sub_80EEFBC
+	ldr	r4, ._838
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._838 + 4
+	bl	SetVBlankCallback
+._820:
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+._834:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._844
+._839:
+	.align	2, 0
+._838:
+	.word	+0x2000000
+	.word	sub_80EBD4C+1
+._818:
+	mov	r0, #0x2
+	bl	sub_80EED2C
+	ldr	r1, ._842
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._842 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._844	@cond_branch
+	ldr	r0, ._842 + 8
+	ldr	r2, ._842 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._844
+._843:
+	.align	2, 0
+._842:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f000
+._819:
+	ldr	r0, ._845
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._844	@cond_branch
+	ldr	r0, ._845 + 4
+	bl	sub_80EBDBC
+._844:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._846:
+	.align	2, 0
+._845:
+	.word	gPaletteFade
+	.word	sub_80ED858+1
+.syntax unified
 	thumb_func_end sub_80ED4D8
 
 	thumb_func_start sub_80ED620
-sub_80ED620: @ 80ED620
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080ED640 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x10
-	bls _080ED636
-	b _080ED846
-_080ED636:
-	lsls r0, 2
-	ldr r1, _080ED644 @ =_080ED648
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ED640: .4byte 0x02000000
-_080ED644: .4byte _080ED648
-	.align 2, 0
-_080ED648:
-	.4byte _080ED68C
-	.4byte _080ED6A4
-	.4byte _080ED6B8
-	.4byte _080ED6EC
-	.4byte _080ED730
-	.4byte _080ED736
-	.4byte _080ED750
-	.4byte _080ED762
-	.4byte _080ED76C
-	.4byte _080ED784
-	.4byte _080ED78A
-	.4byte _080ED7C0
-	.4byte _080ED7D4
-	.4byte _080ED7EC
-	.4byte _080ED800
-	.4byte _080ED820
-	.4byte _080ED834
-_080ED68C:
-	bl sub_80F1E84
-	movs r0, 0x1
-	bl sub_80F2D04
-	ldr r1, _080ED6A0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED814
-	.align 2, 0
-_080ED6A0: .4byte 0x02000000
-_080ED6A4:
-	bl sub_80F1F10
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED6B0
-	b _080ED846
-_080ED6B0:
-	movs r0, 0x1
-	bl sub_80EEFBC
-	b _080ED80C
-_080ED6B8:
-	bl sub_80EEF34
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _080ED6C6
-	b _080ED846
-_080ED6C6:
-	ldr r4, _080ED6E8 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED814
-	.align 2, 0
-_080ED6E8: .4byte 0x02000000
-_080ED6EC:
-	ldr r0, _080ED724 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	beq _080ED6FE
-	b _080ED846
-_080ED6FE:
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80EF814
-	ldr r0, _080ED728 @ =0x02000000
-	ldr r2, _080ED72C @ =0x000076aa
-	adds r1, r0, r2
-	strb r4, [r1]
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	adds r1, 0x1
-	strh r1, [r0]
-	b _080ED846
-	.align 2, 0
-_080ED724: .4byte gPaletteFade
-_080ED728: .4byte 0x02000000
-_080ED72C: .4byte 0x000076aa
-_080ED730:
-	bl sub_80F2620
-	b _080ED80C
-_080ED736:
-	ldr r0, _080ED74C @ =0x0000d162
-	adds r1, r4, r0
-	movs r0, 0x2
-	strb r0, [r1]
-	bl sub_80F4BD0
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED814
-	.align 2, 0
-_080ED74C: .4byte 0x0000d162
-_080ED750:
-	bl sub_80EFF34
-	ldr r1, _080ED768 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED762:
-	bl sub_80EFF68
-	b _080ED806
-	.align 2, 0
-_080ED768: .4byte 0x02000000
-_080ED76C:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080ED846
-	ldr r1, _080ED780 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED814
-	.align 2, 0
-_080ED780: .4byte 0x02000000
-_080ED784:
-	bl sub_8055870
-	b _080ED808
-_080ED78A:
-	bl sub_80F33A8
-	ldr r4, _080ED7B8 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080ED7BC @ =sub_80EBD4C
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED814
-	.align 2, 0
-_080ED7B8: .4byte 0x02000000
-_080ED7BC: .4byte sub_80EBD4C
-_080ED7C0:
-	movs r0, 0x2
-	bl sub_80EED2C
-	ldr r1, _080ED7D0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080ED814
-	.align 2, 0
-_080ED7D0: .4byte 0x02000000
-_080ED7D4:
-	ldr r0, _080ED7E8 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080ED846
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080ED814
-	.align 2, 0
-_080ED7E8: .4byte gPaletteFade
-_080ED7EC:
-	movs r0, 0x1
-	bl sub_80F2C80
-	ldr r1, _080ED81C @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED800:
-	movs r0, 0x1
-	bl sub_80F2CBC
-_080ED806:
-	lsls r0, 24
-_080ED808:
-	cmp r0, 0
-	bne _080ED846
-_080ED80C:
-	ldr r1, _080ED81C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-_080ED814:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080ED846
-	.align 2, 0
-_080ED81C: .4byte 0x02000000
-_080ED820:
-	movs r0, 0x6
-	bl sub_80F2C80
-	ldr r1, _080ED850 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080ED834:
-	movs r0, 0x6
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ED846
-	ldr r0, _080ED854 @ =sub_80ED858
-	bl sub_80EBDBC
-_080ED846:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ED850: .4byte 0x02000000
-_080ED854: .4byte sub_80ED858
+sub_80ED620:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._849
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x10
+	bls	._847	@cond_branch
+	b	._912
+._847:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._849 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._850:
+	.align	2, 0
+._849:
+	.word	+0x2000000
+	.word	._851
+._851:
+	.word	._852
+	.word	._853
+	.word	._854
+	.word	._855
+	.word	._856
+	.word	._857
+	.word	._858
+	.word	._859
+	.word	._860
+	.word	._861
+	.word	._862
+	.word	._863
+	.word	._864
+	.word	._865
+	.word	._866
+	.word	._867
+	.word	._868
+._852:
+	bl	sub_80F1E84
+	mov	r0, #0x1
+	bl	sub_80F2D04
+	ldr	r1, ._870
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._904
+._871:
+	.align	2, 0
+._870:
+	.word	+0x2000000
+._853:
+	bl	sub_80F1F10
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._872	@cond_branch
+	b	._912
+._872:
+	mov	r0, #0x1
+	bl	sub_80EEFBC
+	b	._885
+._854:
+	bl	sub_80EEF34
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	beq	._875	@cond_branch
+	b	._912
+._875:
+	ldr	r4, ._878
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r2, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._904
+._879:
+	.align	2, 0
+._878:
+	.word	+0x2000000
+._855:
+	ldr	r0, ._883
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0
+	beq	._880	@cond_branch
+	b	._912
+._880:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80EF814
+	ldr	r0, ._883 + 4
+	ldr	r2, ._883 + 8
+	add	r1, r0, r2
+	strb	r4, [r1]
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	add	r1, r1, #0x1
+	strh	r1, [r0]
+	b	._912
+._884:
+	.align	2, 0
+._883:
+	.word	gPaletteFade
+	.word	+0x2000000
+	.word	0x76aa
+._856:
+	bl	sub_80F2620
+	b	._885
+._857:
+	ldr	r0, ._887
+	add	r1, r4, r0
+	mov	r0, #0x2
+	strb	r0, [r1]
+	bl	sub_80F4BD0
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._904
+._888:
+	.align	2, 0
+._887:
+	.word	0xd162
+._858:
+	bl	sub_80EFF34
+	ldr	r1, ._890
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._859:
+	bl	sub_80EFF68
+	b	._889
+._891:
+	.align	2, 0
+._890:
+	.word	+0x2000000
+._860:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._912	@cond_branch
+	ldr	r1, ._894
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._904
+._895:
+	.align	2, 0
+._894:
+	.word	+0x2000000
+._861:
+	bl	sub_8055870
+	b	._896
+._862:
+	bl	sub_80F33A8
+	ldr	r4, ._898
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._898 + 4
+	bl	SetVBlankCallback
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._904
+._899:
+	.align	2, 0
+._898:
+	.word	+0x2000000
+	.word	sub_80EBD4C+1
+._863:
+	mov	r0, #0x2
+	bl	sub_80EED2C
+	ldr	r1, ._901
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._904
+._902:
+	.align	2, 0
+._901:
+	.word	+0x2000000
+._864:
+	ldr	r0, ._905
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._912	@cond_branch
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+	b	._904
+._906:
+	.align	2, 0
+._905:
+	.word	gPaletteFade
+._865:
+	mov	r0, #0x1
+	bl	sub_80F2C80
+	ldr	r1, ._909
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._866:
+	mov	r0, #0x1
+	bl	sub_80F2CBC
+._889:
+	lsl	r0, r0, #0x18
+._896:
+	cmp	r0, #0
+	bne	._912	@cond_branch
+._885:
+	ldr	r1, ._909
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+._904:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._912
+._910:
+	.align	2, 0
+._909:
+	.word	+0x2000000
+._867:
+	mov	r0, #0x6
+	bl	sub_80F2C80
+	ldr	r1, ._913
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._868:
+	mov	r0, #0x6
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._912	@cond_branch
+	ldr	r0, ._913 + 4
+	bl	sub_80EBDBC
+	ldr	r0, ._913 + 8
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._912	@cond_branch
+	ldr	r0, ._913 + 12
+	ldr	r2, ._913 + 16
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+._912:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._914:
+	.align	2, 0
+._913:
+	.word	+0x2000000
+	.word	sub_80ED858+1
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f000
+.syntax unified
 	thumb_func_end sub_80ED620
 
 	thumb_func_start sub_80ED858
-sub_80ED858: @ 80ED858
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r1, _080ED878 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r5, r1, 0
-	cmp r0, 0xB
-	bls _080ED86E
-	b _080EDB7A
-_080ED86E:
-	lsls r0, 2
-	ldr r1, _080ED87C @ =_080ED880
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080ED878: .4byte 0x02000000
-_080ED87C: .4byte _080ED880
-	.align 2, 0
-_080ED880:
-	.4byte _080ED8B0
-	.4byte _080ED8CC
-	.4byte _080ED8EC
-	.4byte _080ED904
-	.4byte _080ED91A
-	.4byte _080EDA68
-	.4byte _080EDA8C
-	.4byte _080EDAA4
-	.4byte _080EDAC0
-	.4byte _080EDAE8
-	.4byte _080EDB7A
-	.4byte _080EDB28
-_080ED8B0:
-	bl sub_80F4F78
-	bl sub_80F5B38
-	ldr r0, _080ED8C8 @ =0x02000000
-	movs r4, 0xC1
-	lsls r4, 2
-	adds r0, r4
-	movs r1, 0x1
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080ED8C8: .4byte 0x02000000
-_080ED8CC:
-	bl sub_80F5B50
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED8D8
-	b _080EDB7A
-_080ED8D8:
-	ldr r0, _080ED8E8 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	movs r1, 0x2
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080ED8E8: .4byte 0x02000000
-_080ED8EC:
-	movs r0, 0x1
-	bl sub_80F0174
-	ldr r0, _080ED900 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r2
-	movs r1, 0x3
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080ED900: .4byte 0x02000000
-_080ED904:
-	bl sub_80F4FB4
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED910
-	b _080EDB7A
-_080ED910:
-	bl sub_80F3C94
-	bl sub_80F3D00
-	b _080EDAD4
-_080ED91A:
-	ldr r2, _080ED960 @ =gMain
-	ldrh r1, [r2, 0x2C]
-	movs r0, 0x40
-	ands r0, r1
-	adds r3, r2, 0
-	cmp r0, 0
-	beq _080ED970
-	ldr r1, _080ED964 @ =0x000087cb
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080ED970
-	ldr r2, _080ED968 @ =0x000076aa
-	adds r0, r5, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080ED948
-	ldr r4, _080ED96C @ =0x000087dc
-	adds r0, r5, r4
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	beq _080ED970
-_080ED948:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	bl sub_80F5060
-	bl move_anim_execute
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r5, r2
-	b _080ED9B8
-	.align 2, 0
-_080ED960: .4byte gMain
-_080ED964: .4byte 0x000087cb
-_080ED968: .4byte 0x000076aa
-_080ED96C: .4byte 0x000087dc
-_080ED970:
-	ldrh r1, [r3, 0x2C]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080ED9CC
-	ldr r4, _080ED9C0 @ =0x000087cb
-	adds r0, r5, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080ED9CC
-	ldr r1, _080ED9C4 @ =0x000076aa
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080ED9A2
-	ldr r2, _080ED9C8 @ =0x000087dc
-	adds r0, r5, r2
-	subs r4, 0x57
-	adds r1, r5, r4
-	movs r4, 0
-	ldrsh r2, [r0, r4]
-	movs r4, 0
-	ldrsh r0, [r1, r4]
-	cmp r2, r0
-	bge _080ED9CC
-_080ED9A2:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0
-	bl sub_80F5060
-	bl move_anim_execute
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r5, r0
-_080ED9B8:
-	movs r0, 0x5
-	strh r0, [r1]
-	b _080EDB7A
-	.align 2, 0
-_080ED9C0: .4byte 0x000087cb
-_080ED9C4: .4byte 0x000076aa
-_080ED9C8: .4byte 0x000087dc
-_080ED9CC:
-	ldrh r2, [r3, 0x2E]
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	beq _080ED9F8
-	movs r0, 0x5
-	bl PlaySE
-	bl sub_80F4FDC
-	bl move_anim_execute
-	ldr r0, _080ED9F4 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	movs r1, 0x9
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080ED9F4: .4byte 0x02000000
-_080ED9F8:
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	bne _080EDA02
-	b _080EDB7A
-_080EDA02:
-	adds r4, r5, 0
-	ldr r2, _080EDA38 @ =0x000076aa
-	adds r0, r4, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080EDA44
-	ldr r1, _080EDA3C @ =0x000087dc
-	adds r0, r4, r1
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	ldr r2, _080EDA40 @ =0x000087da
-	adds r0, r4, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	subs r0, 0x1
-	cmp r1, r0
-	beq _080EDA26
-	b _080EDB7A
-_080EDA26:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	movs r0, 0x9
-	strh r0, [r1]
-	b _080EDB7A
-	.align 2, 0
-_080EDA38: .4byte 0x000076aa
-_080EDA3C: .4byte 0x000087dc
-_080EDA40: .4byte 0x000087da
-_080EDA44:
-	ldr r1, _080EDA64 @ =0x00006dac
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080EDA50
-	b _080EDB7A
-_080EDA50:
-	movs r0, 0x5
-	bl PlaySE
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r5, r2
-	movs r0, 0x7
-	strh r0, [r1]
-	b _080EDB7A
-	.align 2, 0
-_080EDA64: .4byte 0x00006dac
-_080EDA68:
-	bl gpu_sync_bg_show
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EDA74
-	b _080EDB7A
-_080EDA74:
-	bl sub_80F3D00
-	ldr r0, _080EDA88 @ =0x02000000
-	movs r4, 0xC1
-	lsls r4, 2
-	adds r0, r4
-	movs r1, 0x6
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080EDA88: .4byte 0x02000000
-_080EDA8C:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EDB7A
-	ldr r0, _080EDAA0 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	b _080EDADC
-	.align 2, 0
-_080EDAA0: .4byte 0x02000000
-_080EDAA4:
-	movs r0, 0x3
-	bl sub_80EEFBC
-	bl sub_80F3668
-	ldr r0, _080EDABC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r2
-	movs r1, 0x8
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080EDABC: .4byte 0x02000000
-_080EDAC0:
-	bl sub_80F7500
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EDB7A
-	movs r0, 0x2
-	bl sub_80EEFBC
-	bl sub_80F3698
-_080EDAD4:
-	ldr r0, _080EDAE4 @ =0x02000000
-	movs r4, 0xC1
-	lsls r4, 2
-	adds r0, r4
-_080EDADC:
-	movs r1, 0x4
-	strh r1, [r0]
-	b _080EDB7A
-	.align 2, 0
-_080EDAE4: .4byte 0x02000000
-_080EDAE8:
-	bl sub_80F5038
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _080EDB7A
-	movs r0, 0
-	bl sub_80F0174
-	bl sub_80F2F48
-	ldr r5, _080EDB24 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r5, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r4, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r5, r2
-	movs r0, 0xB
-	strh r0, [r1]
-	b _080EDB7A
-	.align 2, 0
-_080EDB24: .4byte 0x02000000
-_080EDB28:
-	ldr r0, _080EDB60 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EDB7A
-	bl sub_80F3CE8
-	bl sub_80F5BDC
-	ldr r0, _080EDB64 @ =0x02000000
-	ldr r4, _080EDB68 @ =0x000076aa
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080EDB70
-	bl sub_80F357C
-	movs r0, 0x1
-	bl sub_80F2D6C
-	movs r0, 0x6
-	bl sub_80F2D6C
-	ldr r0, _080EDB6C @ =sub_80ECA10
-	bl sub_80EBDBC
-	b _080EDB7A
-	.align 2, 0
-_080EDB60: .4byte gPaletteFade
-_080EDB64: .4byte 0x02000000
-_080EDB68: .4byte 0x000076aa
-_080EDB6C: .4byte sub_80ECA10
-_080EDB70:
-	bl sub_80F3614
-	ldr r0, _080EDB84 @ =sub_80ED3D0
-	bl sub_80EBDBC
-_080EDB7A:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EDB84: .4byte sub_80ED3D0
+sub_80ED858:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._917
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r5, r1, #0
+	cmp	r0, #0xb
+	bls	._915	@cond_branch
+	b	._999
+._915:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._917 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._918:
+	.align	2, 0
+._917:
+	.word	+0x2000000
+	.word	._919
+._919:
+	.word	._920
+	.word	._921
+	.word	._922
+	.word	._923
+	.word	._924
+	.word	._925
+	.word	._926
+	.word	._927
+	.word	._928
+	.word	._929
+	.word	._999
+	.word	._931
+._920:
+	bl	sub_80F4F78
+	bl	sub_80F5B38
+	ldr	r0, ._933
+	mov	r4, #0xc1
+	lsl	r4, r4, #0x2
+	add	r0, r0, r4
+	mov	r1, #0x1
+	strh	r1, [r0]
+	b	._999
+._934:
+	.align	2, 0
+._933:
+	.word	+0x2000000
+._921:
+	bl	sub_80F5B50
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._935	@cond_branch
+	b	._999
+._935:
+	ldr	r0, ._938
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	mov	r1, #0x2
+	strh	r1, [r0]
+	b	._999
+._939:
+	.align	2, 0
+._938:
+	.word	+0x2000000
+._922:
+	mov	r0, #0x1
+	bl	sub_80F0174
+	ldr	r0, ._941
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r0, r2
+	mov	r1, #0x3
+	strh	r1, [r0]
+	b	._999
+._942:
+	.align	2, 0
+._941:
+	.word	+0x2000000
+._923:
+	bl	sub_80F4FB4
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._943	@cond_branch
+	b	._999
+._943:
+	bl	sub_80F3C94
+	bl	sub_80F3D00
+	b	._945
+._924:
+	ldr	r2, ._951
+	ldrh	r1, [r2, #0x2c]
+	mov	r0, #0x40
+	and	r0, r0, r1
+	add	r3, r2, #0
+	cmp	r0, #0
+	beq	._949	@cond_branch
+	ldr	r1, ._951 + 4
+	add	r0, r5, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._949	@cond_branch
+	ldr	r2, ._951 + 8
+	add	r0, r5, r2
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._948	@cond_branch
+	ldr	r4, ._951 + 12
+	add	r0, r5, r4
+	mov	r1, #0x0
+	ldsh	r0, [r0, r1]
+	cmp	r0, #0
+	beq	._949	@cond_branch
+._948:
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0x1
+	bl	sub_80F5060
+	bl	move_anim_execute
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r5, r2
+	b	._950
+._952:
+	.align	2, 0
+._951:
+	.word	gMain
+	.word	0x87cb
+	.word	0x76aa
+	.word	0x87dc
+._949:
+	ldrh	r1, [r3, #0x2c]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._956	@cond_branch
+	ldr	r4, ._958
+	add	r0, r5, r4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._956	@cond_branch
+	ldr	r1, ._958 + 4
+	add	r0, r5, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._955	@cond_branch
+	ldr	r2, ._958 + 8
+	add	r0, r5, r2
+	sub	r4, r4, #0x57
+	add	r1, r5, r4
+	mov	r4, #0x0
+	ldsh	r2, [r0, r4]
+	mov	r4, #0x0
+	ldsh	r0, [r1, r4]
+	cmp	r2, r0
+	bge	._956	@cond_branch
+._955:
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0x0
+	bl	sub_80F5060
+	bl	move_anim_execute
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r5, r0
+._950:
+	mov	r0, #0x5
+	strh	r0, [r1]
+	b	._999
+._959:
+	.align	2, 0
+._958:
+	.word	0x87cb
+	.word	0x76aa
+	.word	0x87dc
+._956:
+	ldrh	r2, [r3, #0x2e]
+	mov	r0, #0x2
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._960	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_80F4FDC
+	bl	move_anim_execute
+	ldr	r0, ._962
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	mov	r1, #0x9
+	strh	r1, [r0]
+	b	._999
+._963:
+	.align	2, 0
+._962:
+	.word	+0x2000000
+._960:
+	mov	r0, #0x1
+	and	r0, r0, r2
+	cmp	r0, #0
+	bne	._964	@cond_branch
+	b	._999
+._964:
+	add	r4, r5, #0
+	ldr	r2, ._970
+	add	r0, r4, r2
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._966	@cond_branch
+	ldr	r1, ._970 + 4
+	add	r0, r4, r1
+	mov	r2, #0x0
+	ldsh	r1, [r0, r2]
+	ldr	r2, ._970 + 8
+	add	r0, r4, r2
+	mov	r2, #0x0
+	ldsh	r0, [r0, r2]
+	sub	r0, r0, #0x1
+	cmp	r1, r0
+	beq	._967	@cond_branch
+	b	._999
+._967:
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+	mov	r0, #0x9
+	strh	r0, [r1]
+	b	._999
+._971:
+	.align	2, 0
+._970:
+	.word	0x76aa
+	.word	0x87dc
+	.word	0x87da
+._966:
+	ldr	r1, ._975
+	add	r0, r5, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._972	@cond_branch
+	b	._999
+._972:
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r5, r2
+	mov	r0, #0x7
+	strh	r0, [r1]
+	b	._999
+._976:
+	.align	2, 0
+._975:
+	.word	0x6dac
+._925:
+	bl	gpu_sync_bg_show
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._977	@cond_branch
+	b	._999
+._977:
+	bl	sub_80F3D00
+	ldr	r0, ._980
+	mov	r4, #0xc1
+	lsl	r4, r4, #0x2
+	add	r0, r0, r4
+	mov	r1, #0x6
+	strh	r1, [r0]
+	b	._999
+._981:
+	.align	2, 0
+._980:
+	.word	+0x2000000
+._926:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._999	@cond_branch
+	ldr	r0, ._984
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	b	._983
+._985:
+	.align	2, 0
+._984:
+	.word	+0x2000000
+._927:
+	mov	r0, #0x3
+	bl	sub_80EEFBC
+	bl	sub_80F3668
+	ldr	r0, ._987
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r0, r2
+	mov	r1, #0x8
+	strh	r1, [r0]
+	b	._999
+._988:
+	.align	2, 0
+._987:
+	.word	+0x2000000
+._928:
+	bl	sub_80F7500
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._999	@cond_branch
+	mov	r0, #0x2
+	bl	sub_80EEFBC
+	bl	sub_80F3698
+._945:
+	ldr	r0, ._991
+	mov	r4, #0xc1
+	lsl	r4, r4, #0x2
+	add	r0, r0, r4
+._983:
+	mov	r1, #0x4
+	strh	r1, [r0]
+	b	._999
+._992:
+	.align	2, 0
+._991:
+	.word	+0x2000000
+._929:
+	bl	sub_80F5038
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0
+	bne	._999	@cond_branch
+	mov	r0, #0x0
+	bl	sub_80F0174
+	bl	sub_80F2F48
+	ldr	r5, ._995
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r5, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r4, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r5, r2
+	mov	r0, #0xb
+	strh	r0, [r1]
+	b	._999
+._996:
+	.align	2, 0
+._995:
+	.word	+0x2000000
+._931:
+	ldr	r0, ._1000
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._999	@cond_branch
+	bl	sub_80F3CE8
+	bl	sub_80F5BDC
+	ldr	r0, ._1000 + 4
+	ldr	r4, ._1000 + 8
+	add	r0, r0, r4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._998	@cond_branch
+	bl	sub_80F357C
+	mov	r0, #0x1
+	bl	sub_80F2D6C
+	mov	r0, #0x6
+	bl	sub_80F2D6C
+	ldr	r0, ._1000 + 12
+	bl	sub_80EBDBC
+	b	._999
+._1001:
+	.align	2, 0
+._1000:
+	.word	gPaletteFade
+	.word	+0x2000000
+	.word	0x76aa
+	.word	sub_80ECA10+1
+._998:
+	bl	sub_80F3614
+	ldr	r0, ._1003
+	bl	sub_80EBDBC
+._999:
+	ldr	r0, ._1003 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1002	@cond_branch
+	ldr	r0, ._1003 + 8
+	ldr	r1, ._1003 + 12
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x9
+	mov	r2, #0x6
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1002:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._1004:
+	.align	2, 0
+._1003:
+	.word	sub_80ED3D0+1
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80ED858
 
 	thumb_func_start sub_80EDB88
-sub_80EDB88: @ 80EDB88
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080EDBA8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x11
-	bls _080EDB9E
-	b _080EDDAA
-_080EDB9E:
-	lsls r0, 2
-	ldr r1, _080EDBAC @ =_080EDBB0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EDBA8: .4byte 0x02000000
-_080EDBAC: .4byte _080EDBB0
-	.align 2, 0
-_080EDBB0:
-	.4byte _080EDBF8
-	.4byte _080EDC04
-	.4byte _080EDC24
-	.4byte _080EDC58
-	.4byte _080EDC7C
-	.4byte _080EDC90
-	.4byte _080EDCA2
-	.4byte _080EDCC0
-	.4byte _080EDCDC
-	.4byte _080EDCE6
-	.4byte _080EDCFA
-	.4byte _080EDD0C
-	.4byte _080EDD20
-	.4byte _080EDD34
-	.4byte _080EDD48
-	.4byte _080EDD52
-	.4byte _080EDD7C
-	.4byte _080EDD98
-_080EDBF8:
-	bl sub_80F1E84
-	movs r0, 0
-	bl sub_80F2D04
-	b _080EDD82
-_080EDC04:
-	bl sub_80F1F10
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EDC10
-	b _080EDDAA
-_080EDC10:
-	movs r0, 0x4
-	bl sub_80EEFBC
-	ldr r1, _080EDC20 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EDD8A
-	.align 2, 0
-_080EDC20: .4byte 0x02000000
-_080EDC24:
-	bl sub_80EEF34
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _080EDC32
-	b _080EDDAA
-_080EDC32:
-	ldr r4, _080EDC54 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EDD8A
-	.align 2, 0
-_080EDC54: .4byte 0x02000000
-_080EDC58:
-	ldr r0, _080EDC78 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080EDC66
-	b _080EDDAA
-_080EDC66:
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80EF814
-	b _080EDD82
-	.align 2, 0
-_080EDC78: .4byte gPaletteFade
-_080EDC7C:
-	bl sub_80F2620
-	ldr r1, _080EDC8C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EDD8A
-	.align 2, 0
-_080EDC8C: .4byte 0x02000000
-_080EDC90:
-	bl sub_80F638C
-	ldr r1, _080EDCBC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EDCA2:
-	bl sub_80F63D0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EDD82
-	ldr r1, _080EDCBC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x2
-	strh r0, [r1]
-	b _080EDDAA
-	.align 2, 0
-_080EDCBC: .4byte 0x02000000
-_080EDCC0:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EDDAA
-	ldr r1, _080EDCD8 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	subs r0, 0x1
-	strh r0, [r1]
-	b _080EDDAA
-	.align 2, 0
-_080EDCD8: .4byte 0x02000000
-_080EDCDC:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EDDAA
-	b _080EDD82
-_080EDCE6:
-	movs r0, 0x1
-	bl sub_80F0264
-	ldr r1, _080EDD08 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EDCFA:
-	bl sub_80F02A0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EDDAA
-	b _080EDD82
-	.align 2, 0
-_080EDD08: .4byte 0x02000000
-_080EDD0C:
-	movs r0, 0x2
-	bl sub_80F2C80
-	ldr r1, _080EDD30 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EDD20:
-	movs r0, 0x2
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EDDAA
-	b _080EDD82
-	.align 2, 0
-_080EDD30: .4byte 0x02000000
-_080EDD34:
-	movs r0, 0x1
-	bl sub_80F3008
-	ldr r1, _080EDD44 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EDD8A
-	.align 2, 0
-_080EDD44: .4byte 0x02000000
-_080EDD48:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EDDAA
-	b _080EDD82
-_080EDD52:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080EDD78 @ =sub_80EBD18
-	bl SetVBlankCallback
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EDD8A
-	.align 2, 0
-_080EDD78: .4byte sub_80EBD18
-_080EDD7C:
-	movs r0, 0x4
-	bl sub_80EED2C
-_080EDD82:
-	ldr r1, _080EDD94 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080EDD8A:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EDDAA
-	.align 2, 0
-_080EDD94: .4byte 0x02000000
-_080EDD98:
-	ldr r0, _080EDDB4 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EDDAA
-	ldr r0, _080EDDB8 @ =sub_80EDDBC
-	bl sub_80EBDBC
-_080EDDAA:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EDDB4: .4byte gPaletteFade
-_080EDDB8: .4byte sub_80EDDBC
+sub_80EDB88:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._1007
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x11
+	bls	._1005	@cond_branch
+	b	._1088
+._1005:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1007 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1008:
+	.align	2, 0
+._1007:
+	.word	+0x2000000
+	.word	._1009
+._1009:
+	.word	._1010
+	.word	._1011
+	.word	._1012
+	.word	._1013
+	.word	._1014
+	.word	._1015
+	.word	._1016
+	.word	._1017
+	.word	._1018
+	.word	._1019
+	.word	._1020
+	.word	._1021
+	.word	._1022
+	.word	._1023
+	.word	._1024
+	.word	._1025
+	.word	._1026
+	.word	._1027
+._1010:
+	bl	sub_80F1E84
+	mov	r0, #0x0
+	bl	sub_80F2D04
+	ldr	r1, ._1029
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1030:
+	.align	2, 0
+._1029:
+	.word	+0x2000000
+._1011:
+	bl	sub_80F1F10
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1031	@cond_branch
+	b	._1088
+._1031:
+	mov	r0, #0x4
+	bl	sub_80EEFBC
+	ldr	r1, ._1034
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1078
+._1035:
+	.align	2, 0
+._1034:
+	.word	+0x2000000
+._1012:
+	bl	sub_80EEF34
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	beq	._1036	@cond_branch
+	b	._1088
+._1036:
+	ldr	r4, ._1039
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r2, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	b	._1038
+._1040:
+	.align	2, 0
+._1039:
+	.word	+0x2000000
+._1013:
+	ldr	r0, ._1044
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1041	@cond_branch
+	b	._1088
+._1041:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80EF814
+	ldr	r1, ._1044 + 4
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1045:
+	.align	2, 0
+._1044:
+	.word	gPaletteFade
+	.word	+0x2000000
+._1014:
+	bl	sub_80F2620
+	ldr	r1, ._1047
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1078
+._1048:
+	.align	2, 0
+._1047:
+	.word	+0x2000000
+._1015:
+	bl	sub_80F638C
+	ldr	r1, ._1051
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1016:
+	bl	sub_80F63D0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1049	@cond_branch
+	ldr	r1, ._1051
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x2
+	strh	r0, [r1]
+	b	._1088
+._1052:
+	.align	2, 0
+._1051:
+	.word	+0x2000000
+._1049:
+	ldr	r1, ._1054
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1055:
+	.align	2, 0
+._1054:
+	.word	+0x2000000
+._1017:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._1056	@cond_branch
+	b	._1088
+._1056:
+	ldr	r1, ._1059
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	sub	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1088
+._1060:
+	.align	2, 0
+._1059:
+	.word	+0x2000000
+._1018:
+	bl	sub_8055870
+	cmp	r0, #0
+	beq	._1061	@cond_branch
+	b	._1088
+._1061:
+	ldr	r1, ._1064
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1065:
+	.align	2, 0
+._1064:
+	.word	+0x2000000
+._1019:
+	mov	r0, #0x1
+	bl	sub_80F0264
+	ldr	r1, ._1068
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1020:
+	bl	sub_80F02A0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1088	@cond_branch
+	ldr	r1, ._1068
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1069:
+	.align	2, 0
+._1068:
+	.word	+0x2000000
+._1021:
+	mov	r0, #0x2
+	bl	sub_80F2C80
+	ldr	r1, ._1072
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1022:
+	mov	r0, #0x2
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1088	@cond_branch
+	ldr	r1, ._1072
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1073:
+	.align	2, 0
+._1072:
+	.word	+0x2000000
+._1023:
+	mov	r0, #0x1
+	bl	sub_80F3008
+	ldr	r1, ._1075
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1078
+._1076:
+	.align	2, 0
+._1075:
+	.word	+0x2000000
+._1024:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1088	@cond_branch
+	ldr	r1, ._1079
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1078
+._1080:
+	.align	2, 0
+._1079:
+	.word	+0x2000000
+._1025:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._1082
+	bl	SetVBlankCallback
+._1038:
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+._1078:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1088
+._1083:
+	.align	2, 0
+._1082:
+	.word	sub_80EBD18+1
+._1026:
+	mov	r0, #0x4
+	bl	sub_80EED2C
+	ldr	r1, ._1086
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._1086 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1088	@cond_branch
+	ldr	r0, ._1086 + 8
+	ldr	r2, ._1086 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._1088
+._1087:
+	.align	2, 0
+._1086:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+._1027:
+	ldr	r0, ._1089
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1088	@cond_branch
+	ldr	r0, ._1089 + 4
+	bl	sub_80EBDBC
+._1088:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1090:
+	.align	2, 0
+._1089:
+	.word	gPaletteFade
+	.word	sub_80EDDBC+1
+.syntax unified
 	thumb_func_end sub_80EDB88
 
 	thumb_func_start sub_80EDDBC
-sub_80EDDBC: @ 80EDDBC
-	push {r4,lr}
-	ldr r0, _080EDDD8 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r4, r0, r1
-	ldrh r0, [r4]
-	cmp r0, 0x1
-	beq _080EDE48
-	cmp r0, 0x1
-	bgt _080EDDDC
-	cmp r0, 0
-	beq _080EDDE2
-	b _080EDE6A
-	.align 2, 0
-_080EDDD8: .4byte 0x02000000
-_080EDDDC:
-	cmp r0, 0x2
-	beq _080EDE60
-	b _080EDE6A
-_080EDDE2:
-	bl sub_80F5DD4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080EDE14
-	cmp r0, 0x2
-	beq _080EDE20
-	ldr r0, _080EDE0C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080EDE2C
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EDE10 @ =sub_80EDEE4
-	bl sub_80EBDBC
-	b _080EDE6A
-	.align 2, 0
-_080EDE0C: .4byte gMain
-_080EDE10: .4byte sub_80EDEE4
-_080EDE14:
-	movs r0, 0x5
-	bl PlaySE
-	bl ShowMapNamePopUpWindow
-	b _080EDE6A
-_080EDE20:
-	movs r0, 0x5
-	bl PlaySE
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080EDE68
-_080EDE2C:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080EDE6A
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EDE44 @ =sub_80EDE70
-	bl sub_80EBDBC
-	b _080EDE6A
-	.align 2, 0
-_080EDE44: .4byte sub_80EDE70
-_080EDE48:
-	bl sub_80F0718
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EDE6A
-	bl ShowMapNamePopUpWindow
-	bl sub_80F3264
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080EDE68
-_080EDE60:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EDE6A
-_080EDE68:
-	strh r0, [r4]
-_080EDE6A:
-	pop {r4}
-	pop {r0}
-	bx r0
+sub_80EDDBC:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._1095
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r4, r0, r1
+	ldrh	r0, [r4]
+	cmp	r0, #0x1
+	beq	._1091	@cond_branch
+	cmp	r0, #0x1
+	bgt	._1092	@cond_branch
+	cmp	r0, #0
+	beq	._1093	@cond_branch
+	b	._1113
+._1096:
+	.align	2, 0
+._1095:
+	.word	+0x2000000
+._1092:
+	cmp	r0, #0x2
+	beq	._1097	@cond_branch
+	b	._1113
+._1093:
+	bl	sub_80F5DD4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	beq	._1099	@cond_branch
+	cmp	r0, #0x2
+	beq	._1100	@cond_branch
+	ldr	r0, ._1103
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1101	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._1103 + 4
+	bl	sub_80EBDBC
+	b	._1114
+._1104:
+	.align	2, 0
+._1103:
+	.word	gMain
+	.word	sub_80EDEE4+1
+._1099:
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	ShowMapNamePopUpWindow
+	b	._1114
+._1100:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._1114
+._1101:
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1113	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._1109
+	bl	sub_80EBDBC
+	b	._1114
+._1110:
+	.align	2, 0
+._1109:
+	.word	sub_80EDE70+1
+._1091:
+	bl	sub_80F0718
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1113	@cond_branch
+	bl	ShowMapNamePopUpWindow
+	bl	sub_80F3264
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	b	._1112
+._1097:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1113	@cond_branch
+._1112:
+	strh	r0, [r4]
+._1113:
+	ldr	r0, ._1115
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1114	@cond_branch
+	ldr	r0, ._1115 + 4
+	ldr	r1, ._1115 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x8
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1114:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1116:
+	.align	2, 0
+._1115:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EDDBC
 
 	thumb_func_start sub_80EDE70
@@ -4413,894 +5030,1144 @@ _080EDEE0: .4byte sub_80EC00C
 	thumb_func_end sub_80EDE70
 
 	thumb_func_start sub_80EDEE4
-sub_80EDEE4: @ 80EDEE4
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080EDF04 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0xA
-	bls _080EDEFA
-	b _080EE060
-_080EDEFA:
-	lsls r0, 2
-	ldr r1, _080EDF08 @ =_080EDF0C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EDF04: .4byte 0x02000000
-_080EDF08: .4byte _080EDF0C
-	.align 2, 0
-_080EDF0C:
-	.4byte _080EDF38
-	.4byte _080EDF50
-	.4byte _080EDF80
-	.4byte _080EDF98
-	.4byte _080EDFB0
-	.4byte _080EDFC8
-	.4byte _080EDFE0
-	.4byte _080EDFF8
-	.4byte _080EE01C
-	.4byte _080EE030
-	.4byte _080EE050
-_080EDF38:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _080EE03C
-_080EDF50:
-	ldr r0, _080EDF78 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080EDF5E
-	b _080EE060
-_080EDF5E:
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80F3130
-	ldr r1, _080EDF7C @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EE042
-	.align 2, 0
-_080EDF78: .4byte gPaletteFade
-_080EDF7C: .4byte 0x02000000
-_080EDF80:
-	bl sub_80F66E0
-	bl sub_80EEE08
-	ldr r1, _080EDF94 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EE042
-	.align 2, 0
-_080EDF94: .4byte 0x02000000
-_080EDF98:
-	bl sub_80F1080
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE060
-	ldr r1, _080EDFAC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EE042
-	.align 2, 0
-_080EDFAC: .4byte 0x02000000
-_080EDFB0:
-	movs r0, 0x5
-	bl sub_80EEFBC
-	bl sub_80F38B8
-	ldr r1, _080EDFDC @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EDFC8:
-	bl sub_80F38EC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE060
-	ldr r1, _080EDFDC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EE042
-	.align 2, 0
-_080EDFDC: .4byte 0x02000000
-_080EDFE0:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EE060
-	ldr r1, _080EDFF4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EE042
-	.align 2, 0
-_080EDFF4: .4byte 0x02000000
-_080EDFF8:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080EE018 @ =sub_80EBD18
-	bl SetVBlankCallback
-	b _080EE03C
-	.align 2, 0
-_080EE018: .4byte sub_80EBD18
-_080EE01C:
-	movs r0, 0x3
-	bl sub_80EED2C
-	ldr r1, _080EE02C @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	b _080EE042
-	.align 2, 0
-_080EE02C: .4byte 0x02000000
-_080EE030:
-	ldr r0, _080EE04C @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE060
-_080EE03C:
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-_080EE042:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EE060
-	.align 2, 0
-_080EE04C: .4byte gPaletteFade
-_080EE050:
-	bl sub_80F170C
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE060
-	ldr r0, _080EE068 @ =sub_80EE06C
-	bl sub_80EBDBC
-_080EE060:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE068: .4byte sub_80EE06C
+sub_80EDEE4:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._1134
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0xa
+	bls	._1132	@cond_branch
+	b	._1180
+._1132:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1134 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1135:
+	.align	2, 0
+._1134:
+	.word	+0x2000000
+	.word	._1136
+._1136:
+	.word	._1137
+	.word	._1138
+	.word	._1139
+	.word	._1140
+	.word	._1141
+	.word	._1142
+	.word	._1143
+	.word	._1144
+	.word	._1145
+	.word	._1146
+	.word	._1147
+._1137:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	b	._1169
+._1138:
+	ldr	r0, ._1152
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1149	@cond_branch
+	b	._1180
+._1149:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80F3130
+	ldr	r1, ._1152 + 4
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1166
+._1153:
+	.align	2, 0
+._1152:
+	.word	gPaletteFade
+	.word	+0x2000000
+._1139:
+	bl	sub_80F66E0
+	bl	sub_80EEE08
+	ldr	r1, ._1155
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1166
+._1156:
+	.align	2, 0
+._1155:
+	.word	+0x2000000
+._1140:
+	bl	sub_80F1080
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1180	@cond_branch
+	ldr	r1, ._1159
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1166
+._1160:
+	.align	2, 0
+._1159:
+	.word	+0x2000000
+._1141:
+	mov	r0, #0x5
+	bl	sub_80EEFBC
+	bl	sub_80F38B8
+	ldr	r1, ._1163
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1142:
+	bl	sub_80F38EC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1180	@cond_branch
+	ldr	r1, ._1163
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1166
+._1164:
+	.align	2, 0
+._1163:
+	.word	+0x2000000
+._1143:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1180	@cond_branch
+	ldr	r1, ._1167
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1166
+._1168:
+	.align	2, 0
+._1167:
+	.word	+0x2000000
+._1144:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._1170
+	bl	SetVBlankCallback
+	b	._1169
+._1171:
+	.align	2, 0
+._1170:
+	.word	sub_80EBD18+1
+._1145:
+	mov	r0, #0x3
+	bl	sub_80EED2C
+	ldr	r1, ._1174
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._1174 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1180	@cond_branch
+	ldr	r0, ._1174 + 8
+	ldr	r2, ._1174 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._1180
+._1175:
+	.align	2, 0
+._1174:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f000
+._1146:
+	ldr	r0, ._1178
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1180	@cond_branch
+._1169:
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+._1166:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1180
+._1179:
+	.align	2, 0
+._1178:
+	.word	gPaletteFade
+._1147:
+	bl	sub_80F170C
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1180	@cond_branch
+	ldr	r0, ._1181
+	bl	sub_80EBDBC
+._1180:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1182:
+	.align	2, 0
+._1181:
+	.word	sub_80EE06C+1
+.syntax unified
 	thumb_func_end sub_80EDEE4
 
 	thumb_func_start sub_80EE06C
-sub_80EE06C: @ 80EE06C
-	push {r4,r5,lr}
-	ldr r1, _080EE08C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x8
-	bls _080EE080
-	b _080EE288
-_080EE080:
-	lsls r0, 2
-	ldr r1, _080EE090 @ =_080EE094
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EE08C: .4byte 0x02000000
-_080EE090: .4byte _080EE094
-	.align 2, 0
-_080EE094:
-	.4byte _080EE0B8
-	.4byte _080EE0CC
-	.4byte _080EE180
-	.4byte _080EE19C
-	.4byte _080EE1B8
-	.4byte _080EE1D0
-	.4byte _080EE1F8
-	.4byte _080EE250
-	.4byte _080EE26C
-_080EE0B8:
-	bl sub_80F15A8
-	ldr r1, _080EE0C8 @ =0x02000000
-	movs r5, 0xC1
-	lsls r5, 2
-	adds r1, r5
-	b _080EE1C4
-	.align 2, 0
-_080EE0C8: .4byte 0x02000000
-_080EE0CC:
-	ldr r2, _080EE0FC @ =gMain
-	ldrh r1, [r2, 0x30]
-	movs r0, 0x40
-	ands r0, r1
-	adds r3, r2, 0
-	cmp r0, 0
-	beq _080EE104
-	ldr r1, _080EE100 @ =0x000087dc
-	adds r0, r4, r1
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	cmp r0, 0
-	beq _080EE104
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	negs r0, r0
-	bl sub_80F6A4C
-	movs r5, 0xC1
-	lsls r5, 2
-	adds r1, r4, r5
-	b _080EE1C4
-	.align 2, 0
-_080EE0FC: .4byte gMain
-_080EE100: .4byte 0x000087dc
-_080EE104:
-	ldrh r1, [r3, 0x30]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080EE140
-	ldr r1, _080EE138 @ =0x000087dc
-	adds r0, r4, r1
-	ldr r2, _080EE13C @ =0x00008774
-	adds r1, r4, r2
-	movs r5, 0
-	ldrsh r2, [r0, r5]
-	movs r5, 0
-	ldrsh r0, [r1, r5]
-	cmp r2, r0
-	bge _080EE140
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	bl sub_80F6A4C
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080EE1C4
-	.align 2, 0
-_080EE138: .4byte 0x000087dc
-_080EE13C: .4byte 0x00008774
-_080EE140:
-	ldrh r2, [r3, 0x2E]
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	beq _080EE164
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0xB
-	bl sub_80EEFBC
-	ldr r0, _080EE160 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	b _080EE262
-	.align 2, 0
-_080EE160: .4byte 0x02000000
-_080EE164:
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	bne _080EE16E
-	b _080EE288
-_080EE16E:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EE17C @ =sub_80EE294
-	bl sub_80EBDBC
-	b _080EE288
-	.align 2, 0
-_080EE17C: .4byte sub_80EE294
-_080EE180:
-	bl sub_80F6AF0
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EE18C
-	b _080EE288
-_080EE18C:
-	ldr r1, _080EE198 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EE1C4
-	.align 2, 0
-_080EE198: .4byte 0x02000000
-_080EE19C:
-	bl sub_8055870
-	adds r1, r0, 0
-	cmp r1, 0
-	bne _080EE288
-	ldr r0, _080EE1B4 @ =0x02000000
-	movs r5, 0xC1
-	lsls r5, 2
-	adds r0, r5
-	strh r1, [r0]
-	b _080EE288
-	.align 2, 0
-_080EE1B4: .4byte 0x02000000
-_080EE1B8:
-	bl sub_80F3B00
-	ldr r1, _080EE1CC @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080EE1C4:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EE288
-	.align 2, 0
-_080EE1CC: .4byte 0x02000000
-_080EE1D0:
-	bl sub_80F3B58
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE288
-	bl sub_80F1494
-	ldr r1, _080EE1F4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	bl sub_80EED9C
-	b _080EE288
-	.align 2, 0
-_080EE1F4: .4byte 0x02000000
-_080EE1F8:
-	bl sub_80F68E8
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _080EE224
-	cmp r0, 0x1
-	bne _080EE224
-	movs r0, 0x5
-	bl PlaySE
-	bl sub_80F3B94
-	ldr r0, _080EE220 @ =0x02000000
-	movs r5, 0xC1
-	lsls r5, 2
-	adds r0, r5
-	movs r1, 0x7
-	strh r1, [r0]
-	b _080EE288
-	.align 2, 0
-_080EE220: .4byte 0x02000000
-_080EE224:
-	ldr r0, _080EE248 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080EE288
-	movs r0, 0x5
-	bl PlaySE
-	bl sub_80F3B94
-	ldr r0, _080EE24C @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	movs r1, 0x8
-	strh r1, [r0]
-	b _080EE288
-	.align 2, 0
-_080EE248: .4byte gMain
-_080EE24C: .4byte 0x02000000
-_080EE250:
-	bl sub_80F3BD4
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE288
-	ldr r0, _080EE268 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r2
-_080EE262:
-	movs r1, 0x4
-	strh r1, [r0]
-	b _080EE288
-	.align 2, 0
-_080EE268: .4byte 0x02000000
-_080EE26C:
-	bl sub_80F3BD4
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _080EE288
-	movs r0, 0x5
-	bl sub_80EEFBC
-	ldr r0, _080EE290 @ =0x02000000
-	movs r5, 0xC1
-	lsls r5, 2
-	adds r0, r5
-	strh r4, [r0]
-_080EE288:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE290: .4byte 0x02000000
+sub_80EE06C:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._1185
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x8
+	bls	._1183	@cond_branch
+	b	._1248
+._1183:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1185 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1186:
+	.align	2, 0
+._1185:
+	.word	+0x2000000
+	.word	._1187
+._1187:
+	.word	._1188
+	.word	._1189
+	.word	._1190
+	.word	._1191
+	.word	._1192
+	.word	._1193
+	.word	._1194
+	.word	._1195
+	.word	._1196
+._1188:
+	bl	sub_80F15A8
+	ldr	r1, ._1198
+	mov	r5, #0xc1
+	lsl	r5, r5, #0x2
+	add	r1, r1, r5
+	b	._1221
+._1199:
+	.align	2, 0
+._1198:
+	.word	+0x2000000
+._1189:
+	ldr	r2, ._1203
+	ldrh	r1, [r2, #0x30]
+	mov	r0, #0x40
+	and	r0, r0, r1
+	add	r3, r2, #0
+	cmp	r0, #0
+	beq	._1201	@cond_branch
+	ldr	r1, ._1203 + 4
+	add	r0, r4, r1
+	mov	r2, #0x0
+	ldsh	r0, [r0, r2]
+	cmp	r0, #0
+	beq	._1201	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0x1
+	neg	r0, r0
+	bl	sub_80F6A4C
+	mov	r5, #0xc1
+	lsl	r5, r5, #0x2
+	add	r1, r4, r5
+	b	._1221
+._1204:
+	.align	2, 0
+._1203:
+	.word	gMain
+	.word	0x87dc
+._1201:
+	ldrh	r1, [r3, #0x30]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1206	@cond_branch
+	ldr	r1, ._1208
+	add	r0, r4, r1
+	ldr	r2, ._1208 + 4
+	add	r1, r4, r2
+	mov	r5, #0x0
+	ldsh	r2, [r0, r5]
+	mov	r5, #0x0
+	ldsh	r0, [r1, r5]
+	cmp	r2, r0
+	bge	._1206	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0x1
+	bl	sub_80F6A4C
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+	b	._1221
+._1209:
+	.align	2, 0
+._1208:
+	.word	0x87dc
+	.word	0x8774
+._1206:
+	ldrh	r2, [r3, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._1210	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	mov	r0, #0xb
+	bl	sub_80EEFBC
+	ldr	r0, ._1212
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	b	._1211
+._1213:
+	.align	2, 0
+._1212:
+	.word	+0x2000000
+._1210:
+	mov	r0, #0x2
+	and	r0, r0, r2
+	cmp	r0, #0
+	bne	._1214	@cond_branch
+	b	._1248
+._1214:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._1217
+	bl	sub_80EBDBC
+	b	._1248
+._1218:
+	.align	2, 0
+._1217:
+	.word	sub_80EE294+1
+._1190:
+	bl	sub_80F6AF0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1219	@cond_branch
+	b	._1248
+._1219:
+	ldr	r1, ._1222
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1221
+._1223:
+	.align	2, 0
+._1222:
+	.word	+0x2000000
+._1191:
+	bl	sub_8055870
+	add	r1, r0, #0
+	cmp	r1, #0
+	bne	._1248	@cond_branch
+	ldr	r0, ._1226
+	mov	r5, #0xc1
+	lsl	r5, r5, #0x2
+	add	r0, r0, r5
+	strh	r1, [r0]
+	b	._1248
+._1227:
+	.align	2, 0
+._1226:
+	.word	+0x2000000
+._1192:
+	bl	sub_80F3B00
+	ldr	r1, ._1229
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+._1221:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1248
+._1230:
+	.align	2, 0
+._1229:
+	.word	+0x2000000
+._1193:
+	bl	sub_80F3B58
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1248	@cond_branch
+	bl	sub_80F1494
+	ldr	r1, ._1233
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	bl	sub_80EED9C
+	b	._1248
+._1234:
+	.align	2, 0
+._1233:
+	.word	+0x2000000
+._1194:
+	bl	sub_80F68E8
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1236	@cond_branch
+	cmp	r0, #0x1
+	bne	._1236	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_80F3B94
+	ldr	r0, ._1238
+	mov	r5, #0xc1
+	lsl	r5, r5, #0x2
+	add	r0, r0, r5
+	mov	r1, #0x7
+	strh	r1, [r0]
+	b	._1249
+._1239:
+	.align	2, 0
+._1238:
+	.word	+0x2000000
+._1236:
+	ldr	r0, ._1242
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1248	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_80F3B94
+	ldr	r0, ._1242 + 4
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	mov	r1, #0x8
+	strh	r1, [r0]
+	b	._1248
+._1243:
+	.align	2, 0
+._1242:
+	.word	gMain
+	.word	+0x2000000
+._1195:
+	bl	sub_80F3BD4
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1248	@cond_branch
+	ldr	r0, ._1246
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r0, r2
+._1211:
+	mov	r1, #0x4
+	strh	r1, [r0]
+	b	._1248
+._1247:
+	.align	2, 0
+._1246:
+	.word	+0x2000000
+._1196:
+	bl	sub_80F3BD4
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0
+	bne	._1248	@cond_branch
+	mov	r0, #0x5
+	bl	sub_80EEFBC
+	ldr	r0, ._1250
+	mov	r5, #0xc1
+	lsl	r5, r5, #0x2
+	add	r0, r0, r5
+	strh	r4, [r0]
+._1248:
+	ldr	r0, ._1250 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1249	@cond_branch
+	ldr	r0, ._1250 + 8
+	ldr	r1, ._1250 + 12
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x4
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1249:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._1251:
+	.align	2, 0
+._1250:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EE06C
 
 	thumb_func_start sub_80EE294
-sub_80EE294: @ 80EE294
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, _080EE2B4 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x8
-	bls _080EE2AA
-	b _080EE3C6
-_080EE2AA:
-	lsls r0, 2
-	ldr r1, _080EE2B8 @ =_080EE2BC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EE2B4: .4byte 0x02000000
-_080EE2B8: .4byte _080EE2BC
-	.align 2, 0
-_080EE2BC:
-	.4byte _080EE2E0
-	.4byte _080EE2FE
-	.4byte _080EE324
-	.4byte _080EE33C
-	.4byte _080EE34C
-	.4byte _080EE370
-	.4byte _080EE37A
-	.4byte _080EE39A
-	.4byte _080EE3B4
-_080EE2E0:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EE3A8
-_080EE2FE:
-	ldr r0, _080EE320 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE3C6
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80F3C2C
-	bl sub_80EEE08
-	b _080EE3A0
-	.align 2, 0
-_080EE320: .4byte gPaletteFade
-_080EE324:
-	bl sub_80F6134
-	movs r0, 0x1
-	bl sub_80F0264
-	ldr r1, _080EE348 @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EE33C:
-	bl sub_80F02A0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE3C6
-	b _080EE3A0
-	.align 2, 0
-_080EE348: .4byte 0x02000000
-_080EE34C:
-	movs r0, 0x4
-	bl sub_80EEFBC
-	movs r0, 0x1
-	bl sub_80F3008
-	ldr r0, _080EE368 @ =sub_80EBD18
-	bl SetVBlankCallback
-	ldr r1, _080EE36C @ =0x02000000
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r2
-	b _080EE3A8
-	.align 2, 0
-_080EE368: .4byte sub_80EBD18
-_080EE36C: .4byte 0x02000000
-_080EE370:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EE3C6
-	b _080EE3A0
-_080EE37A:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	movs r2, 0xC1
-	lsls r2, 2
-	adds r1, r4, r2
-	b _080EE3A8
-_080EE39A:
-	movs r0, 0x4
-	bl sub_80EED2C
-_080EE3A0:
-	ldr r1, _080EE3B0 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080EE3A8:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EE3C6
-	.align 2, 0
-_080EE3B0: .4byte 0x02000000
-_080EE3B4:
-	ldr r0, _080EE3D0 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE3C6
-	ldr r0, _080EE3D4 @ =sub_80EDDBC
-	bl sub_80EBDBC
-_080EE3C6:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE3D0: .4byte gPaletteFade
-_080EE3D4: .4byte sub_80EDDBC
+sub_80EE294:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r1, ._1254
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r0, r1, r2
+	ldrh	r0, [r0]
+	add	r4, r1, #0
+	cmp	r0, #0x8
+	bls	._1252	@cond_branch
+	b	._1288
+._1252:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1254 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1255:
+	.align	2, 0
+._1254:
+	.word	+0x2000000
+	.word	._1256
+._1256:
+	.word	._1257
+	.word	._1258
+	.word	._1259
+	.word	._1260
+	.word	._1261
+	.word	._1262
+	.word	._1263
+	.word	._1264
+	.word	._1265
+._1257:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r3, #0x10
+	b	._1266
+._1258:
+	ldr	r0, ._1270
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1267	@cond_branch
+	b	._1288
+._1267:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80F3C2C
+	bl	sub_80EEE08
+	ldr	r1, ._1270 + 4
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1280
+._1271:
+	.align	2, 0
+._1270:
+	.word	gPaletteFade
+	.word	+0x2000000
+._1259:
+	bl	sub_80F6134
+	mov	r0, #0x1
+	bl	sub_80F0264
+	ldr	r1, ._1274
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1260:
+	bl	sub_80F02A0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1288	@cond_branch
+	ldr	r1, ._1274
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1280
+._1275:
+	.align	2, 0
+._1274:
+	.word	+0x2000000
+._1261:
+	mov	r0, #0x4
+	bl	sub_80EEFBC
+	mov	r0, #0x1
+	bl	sub_80F3008
+	ldr	r0, ._1277
+	bl	SetVBlankCallback
+	ldr	r1, ._1277 + 4
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r1, r2
+	b	._1280
+._1278:
+	.align	2, 0
+._1277:
+	.word	sub_80EBD18+1
+	.word	+0x2000000
+._1262:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1288	@cond_branch
+	ldr	r1, ._1281
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1280
+._1282:
+	.align	2, 0
+._1281:
+	.word	+0x2000000
+._1263:
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+._1266:
+	bl	BeginNormalPaletteFade
+	mov	r2, #0xc1
+	lsl	r2, r2, #0x2
+	add	r1, r4, r2
+._1280:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1288
+._1264:
+	mov	r0, #0x4
+	bl	sub_80EED2C
+	ldr	r1, ._1286
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._1286 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1288	@cond_branch
+	ldr	r0, ._1286 + 8
+	ldr	r2, ._1286 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._1288
+._1287:
+	.align	2, 0
+._1286:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+._1265:
+	ldr	r0, ._1289
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1288	@cond_branch
+	ldr	r0, ._1289 + 4
+	bl	sub_80EBDBC
+._1288:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1290:
+	.align	2, 0
+._1289:
+	.word	gPaletteFade
+	.word	sub_80EDDBC+1
+.syntax unified
 	thumb_func_end sub_80EE294
 
 	thumb_func_start sub_80EE3D8
-sub_80EE3D8: @ 80EE3D8
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, _080EE3F8 @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, 0xD
-	bls _080EE3EC
-	b _080EE57A
-_080EE3EC:
-	lsls r0, 2
-	ldr r1, _080EE3FC @ =_080EE400
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EE3F8: .4byte 0x02000000
-_080EE3FC: .4byte _080EE400
-	.align 2, 0
-_080EE400:
-	.4byte _080EE438
-	.4byte _080EE444
-	.4byte _080EE458
-	.4byte _080EE48C
-	.4byte _080EE4B0
-	.4byte _080EE4B6
-	.4byte _080EE4CA
-	.4byte _080EE4DC
-	.4byte _080EE4F0
-	.4byte _080EE504
-	.4byte _080EE50C
-	.4byte _080EE516
-	.4byte _080EE54C
-	.4byte _080EE568
-_080EE438:
-	bl sub_80F1E84
-	movs r0, 0
-	bl sub_80F2D04
-	b _080EE552
-_080EE444:
-	bl sub_80F1F10
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EE450
-	b _080EE57A
-_080EE450:
-	movs r0, 0x9
-	bl sub_80EEFBC
-	b _080EE552
-_080EE458:
-	bl sub_80EEF34
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _080EE466
-	b _080EE57A
-_080EE466:
-	ldr r4, _080EE488 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080EE55A
-	.align 2, 0
-_080EE488: .4byte 0x02000000
-_080EE48C:
-	ldr r0, _080EE4AC @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE57A
-	movs r0, 0
-	bl SetVBlankCallback
-	bl sub_80EED0C
-	bl sub_80EF814
-	bl sub_80EEE08
-	b _080EE552
-	.align 2, 0
-_080EE4AC: .4byte gPaletteFade
-_080EE4B0:
-	bl sub_80F2620
-	b _080EE552
-_080EE4B6:
-	movs r0, 0x2
-	bl sub_80F0264
-	ldr r1, _080EE4D8 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EE4CA:
-	bl sub_80F02A0
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE57A
-	b _080EE552
-	.align 2, 0
-_080EE4D8: .4byte 0x02000000
-_080EE4DC:
-	movs r0, 0x3
-	bl sub_80F2C80
-	ldr r1, _080EE500 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_080EE4F0:
-	movs r0, 0x3
-	bl sub_80F2CBC
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE57A
-	b _080EE552
-	.align 2, 0
-_080EE500: .4byte 0x02000000
-_080EE504:
-	movs r0, 0x2
-	bl sub_80F3008
-	b _080EE552
-_080EE50C:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EE57A
-	b _080EE552
-_080EE516:
-	bl sub_80F6F10
-	ldr r4, _080EE544 @ =0x02000000
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r4, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _080EE548 @ =sub_80EBD68
-	bl SetVBlankCallback
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r4, r0
-	b _080EE55A
-	.align 2, 0
-_080EE544: .4byte 0x02000000
-_080EE548: .4byte sub_80EBD68
-_080EE54C:
-	movs r0, 0x5
-	bl sub_80EED2C
-_080EE552:
-	ldr r1, _080EE564 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r1, r0
-_080EE55A:
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	b _080EE57A
-	.align 2, 0
-_080EE564: .4byte 0x02000000
-_080EE568:
-	ldr r0, _080EE584 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE57A
-	ldr r0, _080EE588 @ =sub_80EE58C
-	bl sub_80EBDBC
-_080EE57A:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE584: .4byte gPaletteFade
-_080EE588: .4byte sub_80EE58C
+sub_80EE3D8:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._1293
+	mov	r1, #0xc1
+	lsl	r1, r1, #0x2
+	add	r0, r0, r1
+	ldrh	r0, [r0]
+	cmp	r0, #0xd
+	bls	._1291	@cond_branch
+	b	._1354
+._1291:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1293 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1294:
+	.align	2, 0
+._1293:
+	.word	+0x2000000
+	.word	._1295
+._1295:
+	.word	._1296
+	.word	._1297
+	.word	._1298
+	.word	._1299
+	.word	._1300
+	.word	._1301
+	.word	._1302
+	.word	._1303
+	.word	._1304
+	.word	._1305
+	.word	._1306
+	.word	._1307
+	.word	._1308
+	.word	._1309
+._1296:
+	bl	sub_80F1E84
+	mov	r0, #0x0
+	bl	sub_80F2D04
+	ldr	r1, ._1311
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1312:
+	.align	2, 0
+._1311:
+	.word	+0x2000000
+._1297:
+	bl	sub_80F1F10
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1313	@cond_branch
+	b	._1354
+._1313:
+	mov	r0, #0x9
+	bl	sub_80EEFBC
+	ldr	r1, ._1316
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1317:
+	.align	2, 0
+._1316:
+	.word	+0x2000000
+._1298:
+	bl	sub_80EEF34
+	lsl	r0, r0, #0x18
+	lsr	r2, r0, #0x18
+	cmp	r2, #0
+	beq	._1318	@cond_branch
+	b	._1354
+._1318:
+	ldr	r4, ._1321
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	str	r2, [sp]
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	b	._1320
+._1322:
+	.align	2, 0
+._1321:
+	.word	+0x2000000
+._1299:
+	ldr	r0, ._1326
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1323	@cond_branch
+	b	._1354
+._1323:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	bl	sub_80EED0C
+	bl	sub_80EF814
+	bl	sub_80EEE08
+	ldr	r1, ._1326 + 4
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1327:
+	.align	2, 0
+._1326:
+	.word	gPaletteFade
+	.word	+0x2000000
+._1300:
+	bl	sub_80F2620
+	ldr	r1, ._1329
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1330:
+	.align	2, 0
+._1329:
+	.word	+0x2000000
+._1301:
+	mov	r0, #0x2
+	bl	sub_80F0264
+	ldr	r1, ._1334
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1302:
+	bl	sub_80F02A0
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1331	@cond_branch
+	b	._1354
+._1331:
+	ldr	r1, ._1334
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1335:
+	.align	2, 0
+._1334:
+	.word	+0x2000000
+._1303:
+	mov	r0, #0x3
+	bl	sub_80F2C80
+	ldr	r1, ._1338
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+._1304:
+	mov	r0, #0x3
+	bl	sub_80F2CBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1354	@cond_branch
+	ldr	r1, ._1338
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1339:
+	.align	2, 0
+._1338:
+	.word	+0x2000000
+._1305:
+	mov	r0, #0x2
+	bl	sub_80F3008
+	ldr	r1, ._1341
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1342:
+	.align	2, 0
+._1341:
+	.word	+0x2000000
+._1306:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1354	@cond_branch
+	ldr	r1, ._1345
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	b	._1344
+._1346:
+	.align	2, 0
+._1345:
+	.word	+0x2000000
+._1307:
+	bl	sub_80F6F10
+	ldr	r4, ._1348
+	mov	r1, #0xc2
+	lsl	r1, r1, #0x2
+	add	r0, r4, r1
+	ldr	r0, [r0]
+	mov	r1, #0x1
+	neg	r1, r1
+	mov	r2, #0x0
+	str	r2, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r0, ._1348 + 4
+	bl	SetVBlankCallback
+._1320:
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r4, r0
+._1344:
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	b	._1354
+._1349:
+	.align	2, 0
+._1348:
+	.word	+0x2000000
+	.word	sub_80EBD68+1
+._1308:
+	mov	r0, #0x5
+	bl	sub_80EED2C
+	ldr	r1, ._1352
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r1, r1, r0
+	ldrh	r0, [r1]
+	add	r0, r0, #0x1
+	strh	r0, [r1]
+	ldr	r0, ._1352 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1354	@cond_branch
+	ldr	r0, ._1352 + 8
+	ldr	r2, ._1352 + 12
+	mov	r1, #0x0
+	mov	r3, #0x4
+	bl	debug_sub_8008218
+	b	._1354
+._1353:
+	.align	2, 0
+._1352:
+	.word	+0x2000000
+	.word	gLinkOpen
+	.word	0x6007de0
+	.word	0x600f800
+._1309:
+	ldr	r0, ._1355
+	ldrb	r1, [r0, #0x7]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1354	@cond_branch
+	ldr	r0, ._1355 + 4
+	bl	sub_80EBDBC
+._1354:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1356:
+	.align	2, 0
+._1355:
+	.word	gPaletteFade
+	.word	sub_80EE58C+1
+.syntax unified
 	thumb_func_end sub_80EE3D8
 
 	thumb_func_start sub_80EE58C
-sub_80EE58C: @ 80EE58C
-	push {r4,r5,lr}
-	ldr r5, _080EE5A8 @ =0x02000000
-	movs r0, 0xC1
-	lsls r0, 2
-	adds r4, r5, r0
-	ldrh r0, [r4]
-	cmp r0, 0x1
-	beq _080EE624
-	cmp r0, 0x1
-	bgt _080EE5AC
-	cmp r0, 0
-	beq _080EE5B2
-	b _080EE652
-	.align 2, 0
-_080EE5A8: .4byte 0x02000000
-_080EE5AC:
-	cmp r0, 0x2
-	beq _080EE648
-	b _080EE652
-_080EE5B2:
-	bl sub_80F5DD4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080EE5E4
-	cmp r0, 0x2
-	beq _080EE5FC
-	ldr r0, _080EE5DC @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080EE608
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EE5E0 @ =sub_80EE658
-	bl sub_80EBDBC
-	b _080EE652
-	.align 2, 0
-_080EE5DC: .4byte gMain
-_080EE5E0: .4byte sub_80EE658
-_080EE5E4:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, _080EE5F8 @ =0x0000876e
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	bl sub_80F0FFC
-	b _080EE652
-	.align 2, 0
-_080EE5F8: .4byte 0x0000876e
-_080EE5FC:
-	movs r0, 0x5
-	bl PlaySE
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080EE650
-_080EE608:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080EE652
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _080EE620 @ =sub_80EE8F4
-	bl sub_80EBDBC
-	b _080EE652
-	.align 2, 0
-_080EE620: .4byte sub_80EE8F4
-_080EE624:
-	bl sub_80F0718
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EE652
-	ldr r1, _080EE644 @ =0x0000876e
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	bl sub_80F0FFC
-	bl sub_80F3264
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _080EE650
-	.align 2, 0
-_080EE644: .4byte 0x0000876e
-_080EE648:
-	bl sub_8055870
-	cmp r0, 0
-	bne _080EE652
-_080EE650:
-	strh r0, [r4]
-_080EE652:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
+sub_80EE58C:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r5, ._1361
+	mov	r0, #0xc1
+	lsl	r0, r0, #0x2
+	add	r4, r5, r0
+	ldrh	r0, [r4]
+	cmp	r0, #0x1
+	beq	._1357	@cond_branch
+	cmp	r0, #0x1
+	bgt	._1358	@cond_branch
+	cmp	r0, #0
+	beq	._1359	@cond_branch
+	b	._1383
+._1362:
+	.align	2, 0
+._1361:
+	.word	+0x2000000
+._1358:
+	cmp	r0, #0x2
+	beq	._1363	@cond_branch
+	b	._1383
+._1359:
+	bl	sub_80F5DD4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	beq	._1365	@cond_branch
+	cmp	r0, #0x2
+	beq	._1366	@cond_branch
+	ldr	r0, ._1369
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1367	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._1369 + 4
+	bl	sub_80EBDBC
+	b	._1384
+._1370:
+	.align	2, 0
+._1369:
+	.word	gMain
+	.word	sub_80EE658+1
+._1365:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r1, ._1372
+	add	r0, r5, r1
+	ldrb	r0, [r0]
+	bl	sub_80F0FFC
+	b	._1384
+._1373:
+	.align	2, 0
+._1372:
+	.word	0x876e
+._1366:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._1384
+._1367:
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1383	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._1377
+	bl	sub_80EBDBC
+	b	._1384
+._1378:
+	.align	2, 0
+._1377:
+	.word	sub_80EE8F4+1
+._1357:
+	bl	sub_80F0718
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._1383	@cond_branch
+	ldr	r1, ._1381
+	add	r0, r5, r1
+	ldrb	r0, [r0]
+	bl	sub_80F0FFC
+	bl	sub_80F3264
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	b	._1380
+._1382:
+	.align	2, 0
+._1381:
+	.word	0x876e
+._1363:
+	bl	sub_8055870
+	cmp	r0, #0
+	bne	._1383	@cond_branch
+._1380:
+	strh	r0, [r4]
+._1383:
+	ldr	r0, ._1385
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1384	@cond_branch
+	ldr	r0, ._1385 + 4
+	ldr	r1, ._1385 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x3
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1384:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._1386:
+	.align	2, 0
+._1385:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EE58C
 
 	thumb_func_start sub_80EE658
@@ -5995,141 +6862,199 @@ _080EEC0A:
 	thumb_func_end sub_80EEA0C
 
 	thumb_func_start sub_80EEC10
-sub_80EEC10: @ 80EEC10
-	push {r4,lr}
-	ldr r0, _080EEC48 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _080EEC50
-	ldr r1, _080EEC4C @ =0x02006dad
-	adds r3, r1, 0x1
-	adds r2, r1, 0x5
-_080EEC24:
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	cmp r0, 0
-	bge _080EEC36
-	ldrb r0, [r3]
-	subs r0, 0x1
-	strb r0, [r1]
-_080EEC36:
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080EEC24
-	movs r0, 0x1
-	b _080EEC8A
-	.align 2, 0
-_080EEC48: .4byte gMain
-_080EEC4C: .4byte 0x02006dad
-_080EEC50:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080EEC88
-	ldr r1, _080EEC84 @ =0x02006dad
-	movs r4, 0
-	movs r2, 0x1
-	ldrsb r2, [r1, r2]
-	adds r3, r1, 0x5
-_080EEC62:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, r2
-	blt _080EEC72
-	strb r4, [r1]
-_080EEC72:
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	adds r0, r3
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080EEC62
-	movs r0, 0x1
-	b _080EEC8A
-	.align 2, 0
-_080EEC84: .4byte 0x02006dad
-_080EEC88:
-	movs r0, 0
-_080EEC8A:
-	pop {r4}
-	pop {r1}
-	bx r1
+sub_80EEC10:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._1563
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x40
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1559	@cond_branch
+	ldr	r1, ._1563 + 4
+	add	r3, r1, #1
+	add	r2, r1, #5
+._1561:
+	ldrb	r0, [r1]
+	sub	r0, r0, #0x1
+	strb	r0, [r1]
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bge	._1560	@cond_branch
+	ldrb	r0, [r3]
+	sub	r0, r0, #0x1
+	strb	r0, [r1]
+._1560:
+	mov	r0, #0x0
+	ldsb	r0, [r1, r0]
+	add	r0, r0, r2
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._1561	@cond_branch
+	mov	r0, #0x1
+	b	._1568
+._1564:
+	.align	2, 0
+._1563:
+	.word	gMain
+	.word	+0x2006dad
+._1559:
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1565	@cond_branch
+	ldr	r1, ._1569
+	mov	r4, #0x0
+	mov	r2, #0x1
+	ldsb	r2, [r1, r2]
+	add	r3, r1, #5
+._1567:
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	lsl	r0, r0, #0x18
+	asr	r0, r0, #0x18
+	cmp	r0, r2
+	blt	._1566	@cond_branch
+	strb	r4, [r1]
+._1566:
+	mov	r0, #0x0
+	ldsb	r0, [r1, r0]
+	add	r0, r0, r3
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._1567	@cond_branch
+	mov	r0, #0x1
+	b	._1568
+._1570:
+	.align	2, 0
+._1569:
+	.word	+0x2006dad
+._1565:
+	ldr	r0, ._1572
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1571	@cond_branch
+	ldr	r0, ._1572 + 4
+	ldr	r1, ._1572 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x6
+	mov	r2, #0xa
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1571:
+	mov	r0, #0x0
+._1568:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r1}
+	bx	r1
+._1573:
+	.align	2, 0
+._1572:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EEC10
 
 	thumb_func_start sub_80EEC90
-sub_80EEC90: @ 80EEC90
-	push {r4,lr}
-	ldr r0, _080EECC0 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x40
-	ands r0, r1
-	lsls r0, 16
-	lsrs r3, r0, 16
-	cmp r3, 0
-	beq _080EECD0
-	ldr r2, _080EECC4 @ =0x02000000
-	ldr r0, _080EECC8 @ =0x00006dad
-	adds r1, r2, r0
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	cmp r0, 0
-	bge _080EECF8
-	ldr r3, _080EECCC @ =0x00006dae
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	subs r0, 0x1
-	strb r0, [r1]
-	b _080EECF8
-	.align 2, 0
-_080EECC0: .4byte gMain
-_080EECC4: .4byte 0x02000000
-_080EECC8: .4byte 0x00006dad
-_080EECCC: .4byte 0x00006dae
-_080EECD0:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080EED04
-	ldr r0, _080EECFC @ =0x02000000
-	ldr r4, _080EED00 @ =0x00006dad
-	adds r2, r0, r4
-	ldrb r1, [r2]
-	adds r1, 0x1
-	strb r1, [r2]
-	adds r4, 0x1
-	adds r0, r4
-	lsls r1, 24
-	asrs r1, 24
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r1, r0
-	blt _080EECF8
-	strb r3, [r2]
-_080EECF8:
-	movs r0, 0x1
-	b _080EED06
-	.align 2, 0
-_080EECFC: .4byte 0x02000000
-_080EED00: .4byte 0x00006dad
-_080EED04:
-	movs r0, 0
-_080EED06:
-	pop {r4}
-	pop {r1}
-	bx r1
+sub_80EEC90:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._1577
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x40
+	and	r0, r0, r1
+	lsl	r0, r0, #0x10
+	lsr	r3, r0, #0x10
+	cmp	r3, #0
+	beq	._1574	@cond_branch
+	ldr	r2, ._1577 + 4
+	ldr	r0, ._1577 + 8
+	add	r1, r2, r0
+	ldrb	r0, [r1]
+	sub	r0, r0, #0x1
+	strb	r0, [r1]
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bge	._1580	@cond_branch
+	ldr	r3, ._1577 + 12
+	add	r0, r2, r3
+	ldrb	r0, [r0]
+	sub	r0, r0, #0x1
+	strb	r0, [r1]
+	b	._1580
+._1578:
+	.align	2, 0
+._1577:
+	.word	gMain
+	.word	+0x2000000
+	.word	0x6dad
+	.word	0x6dae
+._1574:
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1579	@cond_branch
+	ldr	r0, ._1582
+	ldr	r4, ._1582 + 4
+	add	r2, r0, r4
+	ldrb	r1, [r2]
+	add	r1, r1, #0x1
+	strb	r1, [r2]
+	add	r4, r4, #0x1
+	add	r0, r0, r4
+	lsl	r1, r1, #0x18
+	asr	r1, r1, #0x18
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x18
+	asr	r0, r0, #0x18
+	cmp	r1, r0
+	blt	._1580	@cond_branch
+	strb	r3, [r2]
+._1580:
+	mov	r0, #0x1
+	b	._1581
+._1583:
+	.align	2, 0
+._1582:
+	.word	+0x2000000
+	.word	0x6dad
+._1579:
+	ldr	r0, ._1585
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._1584	@cond_branch
+	ldr	r0, ._1585 + 4
+	ldr	r1, ._1585 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x4
+	str	r1, [sp]
+	mov	r1, #0x6
+	mov	r2, #0xa
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._1584:
+	mov	r0, #0x0
+._1581:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r1}
+	bx	r1
+._1586:
+	.align	2, 0
+._1585:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80EEC90
 
 	thumb_func_start sub_80EED0C

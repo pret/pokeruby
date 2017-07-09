@@ -1297,4 +1297,320 @@ _0806AED4: .4byte 0x0000ffff
 _0806AED8: .4byte gPaletteFade
 	thumb_func_end Task_ResetRtcScreen
 
+
+	thumb_func_start debug_sub_806F8F8
+debug_sub_806F8F8:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._131
+	bl	SetMainCallback2
+	pop	{r0}
+	bx	r0
+._132:
+	.align	2, 0
+._131:
+	.word	CB2_InitResetRtcScreen+1
+.syntax unified
+	thumb_func_end debug_sub_806F8F8
+
+	thumb_func_start debug_sub_806F908
+debug_sub_806F908:
+.syntax divided
+	push	{r4, r5, lr}
+	lsl	r0, r0, #0x18
+	lsr	r5, r0, #0x18
+	lsl	r0, r5, #0x2
+	add	r0, r0, r5
+	lsl	r0, r0, #0x3
+	ldr	r2, ._136
+	add	r4, r0, r2
+	mov	r1, #0x0
+	ldsh	r0, [r4, r1]
+	cmp	r0, #0
+	beq	._133	@cond_branch
+	cmp	r0, #0x1
+	beq	._134	@cond_branch
+	b	._141
+._137:
+	.align	2, 0
+._136:
+	.word	gTasks+0x8
+._133:
+	ldr	r0, ._139
+	mov	r1, #0x50
+	bl	CreateTask
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	strh	r0, [r4, #0x2]
+	ldrh	r0, [r4]
+	add	r0, r0, #0x1
+	strh	r0, [r4]
+	b	._141
+._140:
+	.align	2, 0
+._139:
+	.word	Task_ResetRtc_0+1
+._134:
+	sub	r2, r2, #0x8
+	mov	r0, #0x2
+	ldsh	r1, [r4, r0]
+	lsl	r0, r1, #0x2
+	add	r0, r0, r1
+	lsl	r0, r0, #0x3
+	add	r2, r0, r2
+	mov	r1, #0x8
+	ldsh	r0, [r2, r1]
+	cmp	r0, #0
+	beq	._141	@cond_branch
+	mov	r1, #0xa
+	ldsh	r0, [r2, r1]
+	cmp	r0, #0x1
+	bne	._142	@cond_branch
+	ldr	r3, ._143
+	mov	r1, #0x0
+	ldsh	r0, [r3, r1]
+	mov	r1, #0x2
+	ldsb	r1, [r3, r1]
+	mov	r2, #0x3
+	ldsb	r2, [r3, r2]
+	ldrb	r3, [r3, #0x4]
+	lsl	r3, r3, #0x18
+	asr	r3, r3, #0x18
+	bl	RtcCalcLocalTimeOffset
+._142:
+	ldrb	r0, [r4, #0x2]
+	bl	DestroyTask
+	bl	MenuZeroFillScreen
+	bl	ScriptContext2_Disable
+	add	r0, r5, #0
+	bl	DestroyTask
+._141:
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._144:
+	.align	2, 0
+._143:
+	.word	gLocalTime
+.syntax unified
+	thumb_func_end debug_sub_806F908
+
+	thumb_func_start debug_sub_806F99C
+debug_sub_806F99C:
+.syntax divided
+	push	{lr}
+	bl	RtcCalcLocalTime
+	ldr	r0, ._145
+	mov	r1, #0x50
+	bl	CreateTask
+	bl	ScriptContext2_Enable
+	pop	{r0}
+	bx	r0
+._146:
+	.align	2, 0
+._145:
+	.word	debug_sub_806F908+1
+.syntax unified
+	thumb_func_end debug_sub_806F99C
+
+	thumb_func_start debug_sub_806F9B8
+debug_sub_806F9B8:
+.syntax divided
+	push	{lr}
+	ldr	r2, ._147
+	ldr	r0, ._147 + 4
+	add	r0, r0, #0xa0
+	ldr	r1, [r0, #0x4]
+	ldr	r0, [r0]
+	str	r0, [r2]
+	str	r1, [r2, #0x4]
+	ldr	r0, ._147 + 8
+	mov	r1, #0x50
+	bl	CreateTask
+	bl	ScriptContext2_Enable
+	pop	{r0}
+	bx	r0
+._148:
+	.align	2, 0
+._147:
+	.word	gLocalTime
+	.word	gSaveBlock2
+	.word	debug_sub_806F908+1
+.syntax unified
+	thumb_func_end debug_sub_806F9B8
+
+	thumb_func_start debug_sub_806F9E4
+debug_sub_806F9E4:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, sl
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6, r7}
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	lsl	r0, r7, #0x2
+	add	r0, r0, r7
+	lsl	r0, r0, #0x3
+	ldr	r1, ._153
+	add	r5, r0, r1
+	ldr	r6, ._153 + 4
+	mov	r1, #0x0
+	ldsh	r0, [r5, r1]
+	cmp	r0, #0x1
+	beq	._149	@cond_branch
+	cmp	r0, #0x1
+	bgt	._150	@cond_branch
+	cmp	r0, #0
+	beq	._151	@cond_branch
+	b	._165
+._154:
+	.align	2, 0
+._153:
+	.word	gTasks+0x8
+	.word	gStringVar4
+._150:
+	cmp	r0, #0x2
+	beq	._155	@cond_branch
+	b	._165
+._149:
+	mov	r0, #0x0
+	mov	r1, #0x9
+	mov	r2, #0x1d
+	mov	r3, #0x13
+	bl	MenuDrawTextWindow
+	add	r4, r6, #0
+	add	r4, r4, #0x50
+	bl	RtcGetErrorStatus
+	add	r1, r0, #0
+	lsl	r1, r1, #0x10
+	lsr	r1, r1, #0x10
+	add	r0, r4, #0
+	mov	r2, #0x2
+	mov	r3, #0x4
+	bl	ConvertIntToHexStringN
+	add	r0, r4, #0
+	mov	r1, #0x2
+	mov	r2, #0xa
+	bl	MenuPrint
+	ldr	r0, ._158
+	mov	r1, #0xc
+	mov	r2, #0xc
+	bl	MenuPrint
+	ldr	r0, ._158 + 4
+	mov	r1, #0x14
+	mov	r2, #0xc
+	bl	MenuPrint
+	ldr	r0, ._158 + 8
+	mov	r1, #0x1
+	mov	r2, #0xe
+	bl	MenuPrint
+	ldr	r0, ._158 + 12
+	mov	r1, #0x1
+	mov	r2, #0x10
+	bl	MenuPrint
+._151:
+	ldrh	r0, [r5]
+	add	r0, r0, #0x1
+	strh	r0, [r5]
+	b	._165
+._159:
+	.align	2, 0
+._158:
+	.word	gUnknown_08376500+0x4
+	.word	gUnknown_08376500+0x9
+	.word	gUnknown_08376500+0x17
+	.word	gUnknown_08376500+0xd
+._155:
+	bl	RtcCalcLocalTime
+	add	r0, r6, #0
+	bl	FormatHexRtcTime
+	mov	r2, #0x14
+	add	r2, r2, r6
+	mov	r9, r2
+	mov	r0, r9
+	bl	debug_sub_8009894
+	mov	r0, #0x28
+	add	r0, r0, r6
+	mov	sl, r0
+	ldr	r4, ._163
+	mov	r1, #0x2
+	ldsb	r1, [r4, r1]
+	mov	r2, #0x3
+	ldsb	r2, [r4, r2]
+	mov	r3, #0x4
+	ldsb	r3, [r4, r3]
+	bl	FormatDecimalTime
+	mov	r1, #0x3c
+	add	r1, r1, r6
+	mov	r8, r1
+	mov	r2, #0x0
+	ldsh	r1, [r4, r2]
+	mov	r0, r8
+	mov	r2, #0x1
+	mov	r3, #0x4
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, ._163 + 4
+	ldrb	r0, [r0, #0x12]
+	cmp	r0, #0
+	bne	._160	@cond_branch
+	add	r0, r6, #0
+	mov	r1, #0x14
+	mov	r2, #0xe
+	bl	MenuPrint
+	mov	r0, r9
+	mov	r1, #0xc
+	mov	r2, #0xe
+	bl	MenuPrint
+	mov	r0, sl
+	mov	r1, #0x14
+	mov	r2, #0x10
+	bl	MenuPrint
+	mov	r0, r8
+	mov	r1, #0xc
+	mov	r2, #0x10
+	bl	MenuPrint
+._160:
+	ldrh	r1, [r5, #0x2]
+	mov	r2, #0x2
+	ldsh	r0, [r5, r2]
+	cmp	r0, #0x13
+	ble	._161	@cond_branch
+	add	r0, r1, #1
+	strh	r0, [r5, #0x2]
+	b	._165
+._164:
+	.align	2, 0
+._163:
+	.word	gLocalTime
+	.word	gSaveBlock2
+._161:
+	ldr	r0, ._166
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._165	@cond_branch
+	bl	MenuZeroFillScreen
+	add	r0, r7, #0
+	bl	DestroyTask
+	bl	ScriptContext2_Disable
+._165:
+	pop	{r3, r4, r5}
+	mov	r8, r3
+	mov	r9, r4
+	mov	sl, r5
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._167:
+	.align	2, 0
+._166:
+	.word	gMain
+.syntax unified
+	thumb_func_end debug_sub_806F9E4
+
+
+
+
 	.align 2, 0 @ Don't pad with nop.

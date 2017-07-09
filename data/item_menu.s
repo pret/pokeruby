@@ -70,6 +70,23 @@ gUnknown_083C16FC:: @ 83C16FC
 	.4byte sub_80A65AC
 	.4byte sub_80A6618
 
+gUnknown_Debug_083EBC68:: @ 0x83EBC68
+	.2byte ITEM_POKE_BALL,      10
+	.2byte ITEM_ULTRA_BALL,     15
+	.2byte ITEM_GREAT_BALL,     20
+	.2byte ITEM_MASTER_BALL,    25
+	.2byte ITEM_ACRO_BIKE,      1
+	.2byte ITEM_OLD_ROD,        1
+	.2byte ITEM_GOOD_ROD,       1
+	.2byte ITEM_SUPER_ROD,      1
+	.2byte ITEM_POKEBLOCK_CASE, 1
+	.2byte ITEM_WAILMER_PAIL,   1
+	.2byte ITEM_ITEMFINDER,     1
+	.2byte ITEM_NONE,           1
+.rept 48
+	.2byte 0,                   0
+.endr
+
 	.align 1
 gUnknown_083C1704:: @ 83C1704
 	.2byte 0x41EE, 0x7FFF
