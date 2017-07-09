@@ -7149,120 +7149,152 @@ _0801F610: .4byte gUnknown_081D94B0
 	thumb_func_end sub_801E3EC
 
 	thumb_func_start atk15_seteffectwithchancetarget
-atk15_seteffectwithchancetarget: @ 801F614
-	push {r4,lr}
-	ldr r2, _0801F640 @ =gBattleMons
-	ldr r0, _0801F644 @ =gBankAttacker
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x20
-	bne _0801F650
-	ldr r2, _0801F648 @ =gBattleMoves
-	ldr r0, _0801F64C @ =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x5]
-	lsls r4, r0, 1
-	b _0801F660
-	.align 2, 0
-_0801F640: .4byte gBattleMons
-_0801F644: .4byte gBankAttacker
-_0801F648: .4byte gBattleMoves
-_0801F64C: .4byte gCurrentMove
-_0801F650:
-	ldr r2, _0801F680 @ =gBattleMoves
-	ldr r0, _0801F684 @ =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r4, [r0, 0x5]
-_0801F660:
-	ldr r3, _0801F688 @ =gBattleCommunication
-	ldrb r2, [r3, 0x3]
-	movs r0, 0x80
-	ands r0, r2
-	cmp r0, 0
-	beq _0801F690
-	ldr r0, _0801F68C @ =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _0801F690
-	movs r0, 0x7F
-	ands r0, r2
-	strb r0, [r3, 0x3]
-	b _0801F6BE
-	.align 2, 0
-_0801F680: .4byte gBattleMoves
-_0801F684: .4byte gCurrentMove
-_0801F688: .4byte gBattleCommunication
-_0801F68C: .4byte gBattleMoveFlags
-_0801F690:
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r4
-	bhi _0801F6DA
-	ldr r0, _0801F6C8 @ =gBattleCommunication
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0
-	beq _0801F6DA
-	ldr r0, _0801F6CC @ =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _0801F6DA
-	cmp r4, 0x63
-	bls _0801F6D0
-_0801F6BE:
-	movs r0, 0
-	movs r1, 0x80
-	bl sub_801E3EC
-	b _0801F6E2
-	.align 2, 0
-_0801F6C8: .4byte gBattleCommunication
-_0801F6CC: .4byte gBattleMoveFlags
-_0801F6D0:
-	movs r0, 0
-	movs r1, 0
-	bl sub_801E3EC
-	b _0801F6E2
-_0801F6DA:
-	ldr r1, _0801F6F8 @ =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-_0801F6E2:
-	ldr r0, _0801F6FC @ =gBattleCommunication
-	movs r1, 0
-	strb r1, [r0, 0x3]
-	ldr r0, _0801F700 @ =0x02000000
-	ldr r2, _0801F704 @ =0x00016112
-	adds r0, r2
-	strb r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801F6F8: .4byte gBattlescriptCurrInstr
-_0801F6FC: .4byte gBattleCommunication
-_0801F700: .4byte 0x02000000
-_0801F704: .4byte 0x00016112
+atk15_seteffectwithchancetarget:
+.syntax divided
+	push	{r4, lr}
+	ldr	r2, ._1037
+	ldr	r0, ._1037 + 4
+	ldrb	r1, [r0]
+	mov	r0, #0x58
+	mul	r0, r0, r1
+	add	r0, r0, r2
+	add	r0, r0, #0x20
+	ldrb	r0, [r0]
+	cmp	r0, #0x20
+	bne	._1035	@cond_branch
+	ldr	r2, ._1037 + 8
+	ldr	r0, ._1037 + 12
+	ldrh	r1, [r0]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldrb	r0, [r0, #0x5]
+	lsl	r4, r0, #0x1
+	b	._1036
+._1038:
+	.align	2, 0
+._1037:
+	.word	gBattleMons
+	.word	gBankAttacker
+	.word	gBattleMoves
+	.word	gCurrentMove
+._1035:
+	ldr	r2, ._1045
+	ldr	r0, ._1045 + 4
+	ldrh	r1, [r0]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldrb	r4, [r0, #0x5]
+._1036:
+	ldr	r0, ._1045 + 8
+	ldrb	r1, [r0]
+	mov	r0, #0x4
+	and	r0, r0, r1
+	ldr	r2, ._1045 + 12
+	cmp	r0, #0
+	beq	._1039	@cond_branch
+	ldrb	r1, [r2, #0x3]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1040	@cond_branch
+	ldr	r0, ._1045 + 16
+	ldrb	r1, [r0]
+	mov	r0, #0x29
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1050	@cond_branch
+._1039:
+	ldrb	r1, [r2, #0x3]
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1043	@cond_branch
+._1040:
+	ldr	r0, ._1045 + 16
+	ldrb	r1, [r0]
+	mov	r0, #0x29
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1043	@cond_branch
+	ldr	r2, ._1045 + 12
+	ldrb	r1, [r2, #0x3]
+	mov	r0, #0x7f
+	and	r0, r0, r1
+	strb	r0, [r2, #0x3]
+	b	._1044
+._1046:
+	.align	2, 0
+._1045:
+	.word	gBattleMoves
+	.word	gCurrentMove
+	.word	gUnknown_02023A14+0x50
+	.word	gBattleCommunication
+	.word	gBattleMoveFlags
+._1043:
+	bl	Random
+	lsl	r0, r0, #0x10
+	lsr	r0, r0, #0x10
+	mov	r1, #0x64
+	bl	gScriptFuncs_End+0x43d0
+	lsl	r0, r0, #0x10
+	lsr	r0, r0, #0x10
+	cmp	r0, r4
+	bhi	._1049	@cond_branch
+	ldr	r0, ._1052
+	ldrb	r0, [r0, #0x3]
+	cmp	r0, #0
+	beq	._1049	@cond_branch
+	ldr	r0, ._1052 + 4
+	ldrb	r1, [r0]
+	mov	r0, #0x29
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._1049	@cond_branch
+	cmp	r4, #0x63
+	bls	._1050	@cond_branch
+._1044:
+	mov	r0, #0x0
+	mov	r1, #0x80
+	bl	sub_801E3EC
+	b	._1054
+._1053:
+	.align	2, 0
+._1052:
+	.word	gBattleCommunication
+	.word	gBattleMoveFlags
+._1050:
+	mov	r0, #0x0
+	mov	r1, #0x0
+	bl	sub_801E3EC
+	b	._1054
+._1049:
+	ldr	r1, ._1055
+	ldr	r0, [r1]
+	add	r0, r0, #0x1
+	str	r0, [r1]
+._1054:
+	ldr	r0, ._1055 + 4
+	mov	r1, #0x0
+	strb	r1, [r0, #0x3]
+	ldr	r0, ._1055 + 8
+	ldr	r2, ._1055 + 12
+	add	r0, r0, r2
+	strb	r1, [r0]
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._1056:
+	.align	2, 0
+._1055:
+	.word	gBattlescriptCurrInstr
+	.word	gBattleCommunication
+	.word	+0x2000000
+	.word	0x16112
+.syntax unified
 	thumb_func_end atk15_seteffectwithchancetarget
 
 	thumb_func_start atk16_seteffectprimary
@@ -23418,84 +23450,189 @@ _080278A8:
 	thumb_func_end atk9D_copyattack
 
 	thumb_func_start sub_80278B8
-sub_80278B8: @ 80278B8
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r7, _08027938 @ =gCurrentMove
-	movs r6, 0xB1
-	lsls r6, 1
-	ldr r5, _0802793C @ =gUnknown_081FACFE
-	ldr r0, _08027940 @ =gBattlescriptCurrInstr
-	mov r8, r0
-_080278CA:
-	bl Random
-	ldr r2, _08027944 @ =0x000001ff
-	adds r1, r2, 0
-	ands r0, r1
-	adds r0, 0x1
-	strh r0, [r7]
-	cmp r0, r6
-	bhi _080278CA
-	movs r0, 0x3
-_080278DE:
-	subs r0, 0x1
-	cmp r0, 0
-	bge _080278DE
-	ldr r4, _08027938 @ =gCurrentMove
-	ldrh r2, [r4]
-	ldr r3, _08027948 @ =0x0000ffff
-	subs r0, r5, 0x2
-_080278EC:
-	adds r0, 0x2
-	ldrh r1, [r0]
-	cmp r1, r2
-	beq _080278F8
-	cmp r1, r3
-	bne _080278EC
-_080278F8:
-	ldr r0, _08027948 @ =0x0000ffff
-	cmp r1, r0
-	bne _080278CA
-	ldr r2, _0802794C @ =gHitMarker
-	ldr r0, [r2]
-	ldr r1, _08027950 @ =0xfffffbff
-	ands r0, r1
-	str r0, [r2]
-	ldr r3, _08027954 @ =gUnknown_081D6BBC
-	ldr r2, _08027958 @ =gBattleMoves
-	ldrh r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r3
-	ldr r0, [r0]
-	mov r1, r8
-	str r0, [r1]
-	ldrh r0, [r4]
-	movs r1, 0
-	bl sub_801B5C0
-	ldr r1, _0802795C @ =gBankTarget
-	strb r0, [r1]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08027938: .4byte gCurrentMove
-_0802793C: .4byte gUnknown_081FACFE
-_08027940: .4byte gBattlescriptCurrInstr
-_08027944: .4byte 0x000001ff
-_08027948: .4byte 0x0000ffff
-_0802794C: .4byte gHitMarker
-_08027950: .4byte 0xfffffbff
-_08027954: .4byte gUnknown_081D6BBC
-_08027958: .4byte gBattleMoves
-_0802795C: .4byte gBankTarget
+sub_80278B8:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, r8
+	push	{r7}
+	ldr	r6, ._3076
+	ldrb	r2, [r6]
+	lsl	r1, r2, #0x1
+	ldr	r0, ._3076 + 4
+	add	r3, r1, r0
+	ldr	r5, ._3076 + 8
+	mov	r4, #0x58
+	add	r0, r2, #0
+	mul	r0, r0, r4
+	add	r1, r0, r5
+	ldrh	r0, [r1, #0xe]
+	cmp	r0, #0
+	bne	._3071	@cond_branch
+	ldrh	r2, [r1, #0x10]
+	cmp	r2, #0
+	beq	._3071	@cond_branch
+	ldrh	r0, [r1, #0x12]
+	cmp	r0, #0
+	beq	._3071	@cond_branch
+	ldrh	r0, [r3]
+	cmp	r0, #0
+	bne	._3072	@cond_branch
+	strh	r2, [r3]
+._3072:
+	ldr	r1, ._3076 + 12
+	ldrh	r0, [r3]
+	strh	r0, [r1]
+	ldrb	r0, [r6]
+	mul	r0, r0, r4
+	add	r0, r0, r5
+	ldrh	r5, [r0, #0x10]
+	ldrh	r2, [r0, #0x12]
+	add	r7, r1, #0
+	cmp	r5, r2
+	bcs	._3073	@cond_branch
+	ldrh	r0, [r3]
+	cmp	r0, r2
+	beq	._3074	@cond_branch
+	add	r0, r0, #0x1
+	b	._3079
+._3077:
+	.align	2, 0
+._3076:
+	.word	gBankAttacker
+	.word	+0x20160b4
+	.word	gBattleMons
+	.word	gCurrentMove
+._3073:
+	ldrh	r4, [r3]
+	add	r1, r4, #0
+	mov	r0, #0xb1
+	lsl	r0, r0, #0x1
+	cmp	r1, r0
+	bne	._3078	@cond_branch
+	mov	r0, #0x1
+	b	._3079
+._3078:
+	cmp	r1, r2
+	bne	._3080	@cond_branch
+._3074:
+	strh	r5, [r3]
+	b	._3081
+._3080:
+	add	r0, r4, #1
+._3079:
+	strh	r0, [r3]
+._3081:
+	ldr	r4, ._3083
+	ldr	r2, [r4]
+	ldr	r0, ._3083 + 4
+	and	r2, r2, r0
+	str	r2, [r4]
+	ldr	r6, ._3083 + 8
+	ldr	r5, ._3083 + 12
+	ldr	r3, ._3083 + 16
+	ldrh	r1, [r7]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r3
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r5
+	ldr	r0, [r0]
+	str	r0, [r6]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x4
+	orr	r2, r2, r0
+	str	r2, [r4]
+	ldrh	r0, [r7]
+	b	._3082
+._3084:
+	.align	2, 0
+._3083:
+	.word	gHitMarker
+	.word	0xfffffbff
+	.word	gBattlescriptCurrInstr
+	.word	gUnknown_081D6BBC
+	.word	gBattleMoves
+._3071:
+	ldr	r7, ._3090
+	mov	r6, #0xb1
+	lsl	r6, r6, #0x1
+	ldr	r5, ._3090 + 4
+	ldr	r0, ._3090 + 8
+	mov	r8, r0
+._3089:
+	bl	Random
+	ldr	r2, ._3090 + 12
+	add	r1, r2, #0
+	and	r0, r0, r1
+	add	r0, r0, #0x1
+	strh	r0, [r7]
+	cmp	r0, r6
+	bhi	._3089	@cond_branch
+	mov	r0, #0x3
+._3086:
+	sub	r0, r0, #0x1
+	cmp	r0, #0
+	bge	._3086	@cond_branch
+	ldr	r4, ._3090
+	ldrh	r2, [r4]
+	ldr	r3, ._3090 + 16
+	sub	r0, r5, #2
+._3088:
+	add	r0, r0, #0x2
+	ldrh	r1, [r0]
+	cmp	r1, r2
+	beq	._3087	@cond_branch
+	cmp	r1, r3
+	bne	._3088	@cond_branch
+._3087:
+	ldr	r0, ._3090 + 16
+	cmp	r1, r0
+	bne	._3089	@cond_branch
+	ldr	r2, ._3090 + 20
+	ldr	r0, [r2]
+	ldr	r1, ._3090 + 24
+	and	r0, r0, r1
+	str	r0, [r2]
+	ldr	r3, ._3090 + 28
+	ldr	r2, ._3090 + 32
+	ldrh	r1, [r4]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r3
+	ldr	r0, [r0]
+	mov	r1, r8
+	str	r0, [r1]
+	ldrh	r0, [r4]
+._3082:
+	mov	r1, #0x0
+	bl	sub_801B5C0
+	ldr	r1, ._3090 + 36
+	strb	r0, [r1]
+	pop	{r3}
+	mov	r8, r3
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._3091:
+	.align	2, 0
+._3090:
+	.word	gCurrentMove
+	.word	gUnknown_081FACFE
+	.word	gBattlescriptCurrInstr
+	.word	0x1ff
+	.word	0xffff
+	.word	gHitMarker
+	.word	0xfffffbff
+	.word	gUnknown_081D6BBC
+	.word	gBattleMoves
+	.word	gBankTarget
+.syntax unified
 	thumb_func_end sub_80278B8
 
 	thumb_func_start sub_8027960

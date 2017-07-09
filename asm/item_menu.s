@@ -51,345 +51,386 @@ _080A3178: .4byte 0x06006000
 	thumb_func_end sub_80A3134
 
 	thumb_func_start sub_80A317C
-sub_80A317C: @ 80A317C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r0, _080A3198 @ =gMain
-	ldr r1, _080A319C @ =0x0000043c
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x10
-	bls _080A318E
-	b _080A34A8
-_080A318E:
-	lsls r0, 2
-	ldr r1, _080A31A0 @ =_080A31A4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080A3198: .4byte gMain
-_080A319C: .4byte 0x0000043c
-_080A31A0: .4byte _080A31A4
-	.align 2, 0
-_080A31A4:
-	.4byte _080A31E8
-	.4byte _080A31F2
-	.4byte _080A3208
-	.4byte _080A320E
-	.4byte _080A3228
-	.4byte _080A324C
-	.4byte _080A3252
-	.4byte _080A3270
-	.4byte _080A327C
-	.4byte _080A3298
-	.4byte _080A32A4
-	.4byte _080A3328
-	.4byte _080A338C
-	.4byte _080A33F4
-	.4byte _080A3404
-	.4byte _080A345C
-	.4byte _080A347C
-_080A31E8:
-	bl sub_80F9438
-	bl sub_80A34E8
-	b _080A3464
-_080A31F2:
-	bl remove_some_task
-	ldr r1, _080A3200 @ =gMain
-	ldr r0, _080A3204 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A3200: .4byte gMain
-_080A3204: .4byte 0x0000043c
-_080A3208:
-	bl gpu_pal_allocator_reset__manage_upper_four
-	b _080A3464
-_080A320E:
-	bl sub_80F9020
-	ldr r0, _080A3220 @ =0x02000000
-	ldr r1, _080A3224 @ =0x0001ffff
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	b _080A3464
-	.align 2, 0
-_080A3220: .4byte 0x02000000
-_080A3224: .4byte 0x0001ffff
-_080A3228:
-	bl ResetPaletteFade
-	ldr r2, _080A3240 @ =gPaletteFade
-	ldrb r0, [r2, 0x8]
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2, 0x8]
-	ldr r1, _080A3244 @ =gMain
-	ldr r0, _080A3248 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A3240: .4byte gPaletteFade
-_080A3244: .4byte gMain
-_080A3248: .4byte 0x0000043c
-_080A324C:
-	bl ResetSpriteData
-	b _080A3464
-_080A3252:
-	bl sub_80A3520
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A325E
-	b _080A34A8
-_080A325E:
-	ldr r1, _080A3268 @ =gMain
-	ldr r0, _080A326C @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A3268: .4byte gMain
-_080A326C: .4byte 0x0000043c
-_080A3270:
-	ldr r0, _080A3278 @ =gWindowConfig_81E6DFC
-	bl SetUpWindowConfig
-	b _080A3464
-	.align 2, 0
-_080A3278: .4byte gWindowConfig_81E6DFC
-_080A327C:
-	ldr r0, _080A328C @ =gWindowConfig_81E6DFC
-	bl MultistepInitMenuWindowBegin
-	ldr r1, _080A3290 @ =gMain
-	ldr r0, _080A3294 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A328C: .4byte gWindowConfig_81E6DFC
-_080A3290: .4byte gMain
-_080A3294: .4byte 0x0000043c
-_080A3298:
-	bl MultistepInitMenuWindowContinue
-	cmp r0, 0
-	bne _080A32A2
-	b _080A34A8
-_080A32A2:
-	b _080A3464
-_080A32A4:
-	bl sub_80F944C
-	bl LoadScrollIndicatorPalette
-	movs r0, 0
-	movs r1, 0xAC
-	movs r2, 0xC
-	bl CreateVerticalScrollIndicators
-	movs r0, 0x1
-	movs r1, 0xAC
-	movs r2, 0x94
-	bl CreateVerticalScrollIndicators
-	movs r0, 0x2
-	movs r1, 0x1C
-	movs r2, 0x58
-	bl CreateVerticalScrollIndicators
-	movs r0, 0x3
-	movs r1, 0x64
-	movs r2, 0x58
-	bl CreateVerticalScrollIndicators
-	movs r0, 0
-	movs r1, 0x2
-	bl sub_80F9988
-	movs r0, 0x1
-	movs r1, 0x2
-	bl sub_80F9988
-	movs r0, 0x2
-	movs r1, 0x2
-	bl sub_80F9988
-	movs r0, 0x3
-	movs r1, 0x2
-	bl sub_80F9988
-	ldr r0, _080A331C @ =gUnknown_03000701
-	ldrb r0, [r0]
-	subs r0, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _080A3312
-	movs r0, 0x2
-	movs r1, 0x1
-	bl sub_80F979C
-	movs r0, 0x3
-	movs r1, 0x1
-	bl sub_80F979C
-_080A3312:
-	ldr r1, _080A3320 @ =gMain
-	ldr r0, _080A3324 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A331C: .4byte gUnknown_03000701
-_080A3320: .4byte gMain
-_080A3324: .4byte 0x0000043c
-_080A3328:
-	ldr r1, _080A3378 @ =gUnknown_0203855A
-	movs r0, 0x10
-	strb r0, [r1]
-	ldr r4, _080A337C @ =gBGTilemapBuffers + 0x1000
-	ldr r5, _080A3380 @ =gUnknown_02038559
-	ldrb r1, [r5]
-	adds r1, 0x1
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_80A39B8
-	ldrb r1, [r5]
-	adds r0, r4, 0
-	bl sub_80A3AC0
-	bl sub_80A3D08
-	ldr r4, _080A3384 @ =gBagPockets
-	ldr r0, [r4, 0x10]
-	ldr r1, [r4, 0x14]
-	bl sub_80A3C34
-	ldr r0, [r4, 0x18]
-	ldr r1, [r4, 0x1C]
-	bl sub_80A3C34
-	bl sub_80A3D40
-	ldr r1, _080A3388 @ =gUnknown_03005D24
-	movs r0, 0
-	ldrsb r0, [r5, r0]
-	lsls r0, 3
-	adds r0, r4
-	ldr r0, [r0]
-	str r0, [r1]
-	bl sub_80A362C
-	b _080A3464
-	.align 2, 0
-_080A3378: .4byte gUnknown_0203855A
-_080A337C: .4byte gBGTilemapBuffers + 0x1000
-_080A3380: .4byte gUnknown_02038559
-_080A3384: .4byte gBagPockets
-_080A3388: .4byte gUnknown_03005D24
-_080A338C:
-	ldr r0, _080A33D4 @ =0x0000ffff
-	movs r1, 0
-	movs r2, 0x7
-	bl sub_80A48E8
-	ldr r1, _080A33D8 @ =gUnknown_03005D10
-	ldr r4, _080A33DC @ =gUnknown_02038559
-	movs r0, 0
-	ldrsb r0, [r4, r0]
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x1]
-	ldrb r0, [r0]
-	adds r1, r0
-	ldr r0, _080A33E0 @ =gUnknown_03005D24
-	ldr r0, [r0]
-	lsls r1, 2
-	adds r1, r0
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	bl ItemListMenu_InitDescription
-	bl ItemListMenu_InitMenu
-	ldr r1, _080A33E4 @ =gUnknown_0203855B
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, _080A33E8 @ =gUnknown_0203855C
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, _080A33EC @ =gMain
-	ldr r0, _080A33F0 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A33D4: .4byte 0x0000ffff
-_080A33D8: .4byte gUnknown_03005D10
-_080A33DC: .4byte gUnknown_02038559
-_080A33E0: .4byte gUnknown_03005D24
-_080A33E4: .4byte gUnknown_0203855B
-_080A33E8: .4byte gUnknown_0203855C
-_080A33EC: .4byte gMain
-_080A33F0: .4byte 0x0000043c
-_080A33F4:
-	bl CreateBagSprite
-	movs r0, 0
-	bl CreateBagPokeballSprite
-	bl sub_80A3740
-	b _080A3464
-_080A3404:
-	ldr r3, _080A3444 @ =0x04000208
-	ldrh r2, [r3]
-	movs r0, 0
-	strh r0, [r3]
-	ldr r4, _080A3448 @ =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r2, _080A344C @ =REG_DISPSTAT
-	ldrh r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	strh r0, [r2]
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r2, _080A3450 @ =gPaletteFade
-	ldrb r1, [r2, 0x8]
-	movs r0, 0x7F
-	ands r0, r1
-	strb r0, [r2, 0x8]
-	ldr r1, _080A3454 @ =gMain
-	ldr r0, _080A3458 @ =0x0000043c
-	adds r1, r0
-	b _080A346A
-	.align 2, 0
-_080A3444: .4byte 0x04000208
-_080A3448: .4byte 0x04000200
-_080A344C: .4byte REG_DISPSTAT
-_080A3450: .4byte gPaletteFade
-_080A3454: .4byte gMain
-_080A3458: .4byte 0x0000043c
-_080A345C:
-	bl sub_8055870
-	cmp r0, 0x1
-	beq _080A34A8
-_080A3464:
-	ldr r1, _080A3474 @ =gMain
-	ldr r2, _080A3478 @ =0x0000043c
-	adds r1, r2
-_080A346A:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _080A34A8
-	.align 2, 0
-_080A3474: .4byte gMain
-_080A3478: .4byte 0x0000043c
-_080A347C:
-	ldr r0, _080A34A0 @ =sub_80A3134
-	bl SetVBlankCallback
-	ldr r0, _080A34A4 @ =sub_80A3118
-	bl SetMainCallback2
-	bl sub_80A751C
-	bl sub_80A7630
-	bl sub_80A770C
-	bl sub_80A7828
-	bl sub_80A78B8
-	movs r0, 0x1
-	b _080A34AA
-	.align 2, 0
-_080A34A0: .4byte sub_80A3134
-_080A34A4: .4byte sub_80A3118
-_080A34A8:
-	movs r0, 0
-_080A34AA:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
+sub_80A317C:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._5
+	ldr	r1, ._5 + 4
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0x10
+	bls	._3	@cond_branch
+	b	._66
+._3:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._5 + 8
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._6:
+	.align	2, 0
+._5:
+	.word	gMain
+	.word	0x43c
+	.word	._7
+._7:
+	.word	._8
+	.word	._9
+	.word	._10
+	.word	._11
+	.word	._12
+	.word	._13
+	.word	._14
+	.word	._15
+	.word	._16
+	.word	._17
+	.word	._18
+	.word	._19
+	.word	._20
+	.word	._21
+	.word	._22
+	.word	._23
+	.word	._24
+._8:
+	bl	sub_80F9438
+	bl	sub_80A34E8
+	b	._61
+._9:
+	bl	remove_some_task
+	ldr	r1, ._27
+	ldr	r0, ._27 + 4
+	add	r1, r1, r0
+	b	._62
+._28:
+	.align	2, 0
+._27:
+	.word	gMain
+	.word	0x43c
+._10:
+	bl	gpu_pal_allocator_reset__manage_upper_four
+	b	._61
+._11:
+	bl	sub_80F9020
+	ldr	r0, ._31
+	ldr	r1, ._31 + 4
+	add	r0, r0, r1
+	mov	r1, #0x0
+	strb	r1, [r0]
+	b	._61
+._32:
+	.align	2, 0
+._31:
+	.word	+0x2000000
+	.word	0x1ffff
+._12:
+	bl	ResetPaletteFade
+	ldr	r2, ._34
+	ldrb	r0, [r2, #0x8]
+	mov	r1, #0x80
+	orr	r0, r0, r1
+	strb	r0, [r2, #0x8]
+	ldr	r1, ._34 + 4
+	ldr	r0, ._34 + 8
+	add	r1, r1, r0
+	b	._62
+._35:
+	.align	2, 0
+._34:
+	.word	gPaletteFade
+	.word	gMain
+	.word	0x43c
+._13:
+	bl	ResetSpriteData
+	b	._61
+._14:
+	bl	sub_80A3520
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._37	@cond_branch
+	b	._66
+._37:
+	ldr	r1, ._40
+	ldr	r0, ._40 + 4
+	add	r1, r1, r0
+	b	._62
+._41:
+	.align	2, 0
+._40:
+	.word	gMain
+	.word	0x43c
+._15:
+	ldr	r0, ._43
+	bl	SetUpWindowConfig
+	b	._61
+._44:
+	.align	2, 0
+._43:
+	.word	gWindowConfig_81E6DFC
+._16:
+	ldr	r0, ._46
+	bl	MultistepInitMenuWindowBegin
+	ldr	r1, ._46 + 4
+	ldr	r0, ._46 + 8
+	add	r1, r1, r0
+	b	._62
+._47:
+	.align	2, 0
+._46:
+	.word	gWindowConfig_81E6DFC
+	.word	gMain
+	.word	0x43c
+._17:
+	bl	MultistepInitMenuWindowContinue
+	cmp	r0, #0
+	bne	._48	@cond_branch
+	b	._66
+._48:
+	b	._61
+._18:
+	bl	sub_80F944C
+	bl	LoadScrollIndicatorPalette
+	mov	r0, #0x0
+	mov	r1, #0xac
+	mov	r2, #0xc
+	bl	CreateVerticalScrollIndicators
+	mov	r0, #0x1
+	mov	r1, #0xac
+	mov	r2, #0x94
+	bl	CreateVerticalScrollIndicators
+	mov	r0, #0x2
+	mov	r1, #0x1c
+	mov	r2, #0x58
+	bl	CreateVerticalScrollIndicators
+	mov	r0, #0x3
+	mov	r1, #0x64
+	mov	r2, #0x58
+	bl	CreateVerticalScrollIndicators
+	mov	r0, #0x0
+	mov	r1, #0x2
+	bl	sub_80F9988
+	mov	r0, #0x1
+	mov	r1, #0x2
+	bl	sub_80F9988
+	mov	r0, #0x2
+	mov	r1, #0x2
+	bl	sub_80F9988
+	mov	r0, #0x3
+	mov	r1, #0x2
+	bl	sub_80F9988
+	ldr	r0, ._53
+	ldrb	r0, [r0]
+	sub	r0, r0, #0x4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	bhi	._51	@cond_branch
+	mov	r0, #0x2
+	mov	r1, #0x1
+	bl	sub_80F979C
+	mov	r0, #0x3
+	mov	r1, #0x1
+	bl	sub_80F979C
+._51:
+	ldr	r1, ._53 + 4
+	ldr	r0, ._53 + 8
+	add	r1, r1, r0
+	b	._62
+._54:
+	.align	2, 0
+._53:
+	.word	gUnknown_03000701
+	.word	gMain
+	.word	0x43c
+._19:
+	ldr	r1, ._56
+	mov	r0, #0x10
+	strb	r0, [r1]
+	ldr	r4, ._56 + 4
+	ldr	r5, ._56 + 8
+	ldrb	r1, [r5]
+	add	r1, r1, #0x1
+	lsl	r1, r1, #0x18
+	lsr	r1, r1, #0x18
+	add	r0, r4, #0
+	bl	sub_80A39B8
+	ldrb	r1, [r5]
+	add	r0, r4, #0
+	bl	sub_80A3AC0
+	bl	sub_80A3D08
+	ldr	r4, ._56 + 12
+	ldr	r0, [r4, #0x10]
+	ldr	r1, [r4, #0x14]
+	bl	sub_80A3C34
+	ldr	r0, [r4, #0x18]
+	ldr	r1, [r4, #0x1c]
+	bl	sub_80A3C34
+	bl	sub_80A3D40
+	ldr	r1, ._56 + 16
+	mov	r0, #0x0
+	ldsb	r0, [r5, r0]
+	lsl	r0, r0, #0x3
+	add	r0, r0, r4
+	ldr	r0, [r0]
+	str	r0, [r1]
+	bl	sub_80A362C
+	b	._61
+._57:
+	.align	2, 0
+._56:
+	.word	gUnknown_0203855A
+	.word	gBGTilemapBuffers+0x1000
+	.word	gUnknown_02038559
+	.word	gBagPockets
+	.word	gUnknown_03005D24
+._20:
+	ldr	r0, ._59
+	mov	r1, #0x0
+	mov	r2, #0x7
+	bl	sub_80A48E8
+	ldr	r1, ._59 + 4
+	ldr	r4, ._59 + 8
+	mov	r0, #0x0
+	ldsb	r0, [r4, r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrb	r1, [r0, #0x1]
+	ldrb	r0, [r0]
+	add	r1, r1, r0
+	ldr	r0, ._59 + 12
+	ldr	r0, [r0]
+	lsl	r1, r1, #0x2
+	add	r1, r1, r0
+	mov	r2, #0x0
+	ldsh	r0, [r1, r2]
+	bl	ItemListMenu_InitDescription
+	bl	ItemListMenu_InitMenu
+	ldr	r1, ._59 + 16
+	ldrb	r0, [r4]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	ldr	r1, ._59 + 20
+	mov	r0, #0x0
+	strb	r0, [r1]
+	ldr	r1, ._59 + 24
+	ldr	r0, ._59 + 28
+	add	r1, r1, r0
+	b	._62
+._60:
+	.align	2, 0
+._59:
+	.word	0xffff
+	.word	gUnknown_03005D10
+	.word	gUnknown_02038559
+	.word	gUnknown_03005D24
+	.word	gUnknown_0203855B
+	.word	gUnknown_0203855C
+	.word	gMain
+	.word	0x43c
+._21:
+	bl	CreateBagSprite
+	mov	r0, #0x0
+	bl	CreateBagPokeballSprite
+	bl	sub_80A3740
+	b	._61
+._22:
+	ldr	r3, ._63
+	ldrh	r2, [r3]
+	mov	r0, #0x0
+	strh	r0, [r3]
+	ldr	r4, ._63 + 4
+	ldrh	r0, [r4]
+	mov	r1, #0x1
+	orr	r0, r0, r1
+	strh	r0, [r4]
+	strh	r2, [r3]
+	ldr	r2, ._63 + 8
+	ldrh	r0, [r2]
+	mov	r1, #0x8
+	orr	r0, r0, r1
+	strh	r0, [r2]
+	mov	r0, #0x1
+	neg	r0, r0
+	mov	r1, #0x0
+	str	r1, [sp]
+	mov	r2, #0x10
+	mov	r3, #0x0
+	bl	BeginNormalPaletteFade
+	ldr	r2, ._63 + 12
+	ldrb	r1, [r2, #0x8]
+	mov	r0, #0x7f
+	and	r0, r0, r1
+	strb	r0, [r2, #0x8]
+	ldr	r1, ._63 + 16
+	ldr	r0, ._63 + 20
+	add	r1, r1, r0
+	b	._62
+._64:
+	.align	2, 0
+._63:
+	.word	0x4000208
+	.word	0x4000200
+	.word	0x4000004
+	.word	gPaletteFade
+	.word	gMain
+	.word	0x43c
+._23:
+	bl	sub_8055870
+	cmp	r0, #0x1
+	beq	._66	@cond_branch
+._61:
+	ldr	r1, ._67
+	ldr	r2, ._67 + 4
+	add	r1, r1, r2
+._62:
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	b	._66
+._68:
+	.align	2, 0
+._67:
+	.word	gMain
+	.word	0x43c
+._24:
+	ldr	r0, ._71
+	bl	SetVBlankCallback
+	ldr	r0, ._71 + 4
+	bl	SetMainCallback2
+	bl	sub_80A751C
+	bl	sub_80A7630
+	bl	sub_80A770C
+	bl	sub_80A7828
+	bl	sub_80A78B8
+	ldr	r0, ._71 + 8
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._69	@cond_branch
+	ldr	r0, ._71 + 12
+	mov	r1, #0x80
+	lsl	r1, r1, #0x8
+	ldr	r2, ._71 + 16
+	mov	r3, #0x0
+	bl	debug_sub_8008218
+._69:
+	mov	r0, #0x1
+	b	._70
+._72:
+	.align	2, 0
+._71:
+	.word	sub_80A3134+1
+	.word	sub_80A3118+1
+	.word	gLinkOpen
+	.word	0x600f5e0
+	.word	0x600f800
+._66:
+	mov	r0, #0x0
+._70:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r1}
+	bx	r1
+.syntax unified
 	thumb_func_end sub_80A317C
 
 	thumb_func_start sub_80A34B4
@@ -732,6 +773,77 @@ _080A371A:
 	.align 2, 0
 _080A373C: .4byte gBagPockets
 	thumb_func_end ClearBag
+
+	thumb_func_start debug_sub_80A3714
+debug_sub_80A3714:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	add	sp, sp, #0xfffffff4
+	mov	r5, #0x0
+	ldr	r2, ._138
+	mov	r1, #0x0
+._134:
+	lsl	r0, r5, #0x1
+	add r0, r0, sp
+	strh	r1, [r0]
+	add	r0, r5, #1
+	lsl	r0, r0, #0x10
+	lsr	r5, r0, #0x10
+	cmp	r5, #0x4
+	bls	._134	@cond_branch
+	mov	r5, #0x0
+	ldrh	r0, [r2]
+	cmp	r0, #0
+	beq	._136	@cond_branch
+	add	r6, r2, #0
+._137:
+	lsl	r4, r5, #0x2
+	add	r4, r4, r6
+	ldrh	r0, [r4]
+	bl	ItemId_GetPocket
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x8
+	ldr	r1, ._138 + 4
+	add	r0, r0, r1
+	lsr	r0, r0, #0x10
+	ldr	r1, ._138 + 8
+	lsl	r2, r0, #0x3
+	add	r2, r2, r1
+	lsl	r0, r0, #0x1
+	mov	r1, sp
+	add	r3, r1, r0
+	ldrh	r1, [r3]
+	ldr	r0, [r2]
+	lsl	r1, r1, #0x2
+	add	r1, r1, r0
+	ldr	r0, [r4]
+	str	r0, [r1]
+	ldrh	r0, [r3]
+	add	r0, r0, #0x1
+	strh	r0, [r3]
+	add	r0, r5, #1
+	lsl	r0, r0, #0x10
+	lsr	r5, r0, #0x10
+	cmp	r5, #0x3b
+	bhi	._136	@cond_branch
+	lsl	r0, r5, #0x2
+	add	r0, r0, r6
+	ldrh	r0, [r0]
+	cmp	r0, #0
+	bne	._137	@cond_branch
+._136:
+	add	sp, sp, #0xc
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+._139:
+	.align	2, 0
+._138:
+	.word	gUnknown_Debug_083EBC68
+	.word	0xffff0000
+	.word	gBagPockets
+.syntax unified
+	thumb_func_end debug_sub_80A3714
 
 	thumb_func_start sub_80A3740
 sub_80A3740: @ 80A3740
@@ -8380,13 +8492,38 @@ sub_80A73FC: @ 80A73FC
 	thumb_func_end sub_80A73FC
 
 	thumb_func_start sub_80A740C
-sub_80A740C: @ 80A740C
-	push {lr}
-	bl sub_80A75E4
-	bl sub_80A7768
-	bl sub_80A7420
-	pop {r0}
-	bx r0
+sub_80A740C:
+.syntax divided
+	push	{lr}
+	add	sp, sp, #0xfffffffc
+	bl	sub_80A75E4
+	bl	sub_80A7768
+	bl	sub_80A7420
+	ldr	r0, ._931
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bne	._930	@cond_branch
+	ldr	r0, ._931 + 4
+	ldr	r1, ._931 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r1, #0x0
+	str	r1, [sp]
+	mov	r1, #0x1
+	mov	r2, #0x1
+	mov	r3, #0x2
+	bl	debug_sub_8008264
+._930:
+	add	sp, sp, #0x4
+	pop	{r0}
+	bx	r0
+._932:
+	.align	2, 0
+._931:
+	.word	gLinkOpen
+	.word	gLink
+	.word	0xfbd
+.syntax unified
 	thumb_func_end sub_80A740C
 
 	thumb_func_start sub_80A7420

@@ -18,8 +18,13 @@ extern u8 gUnknown_0202E854;
 extern u8 gUnknown_0202E86C[];
 extern u8 gUnknown_0202E874[];
 
+#ifdef DEBUG
+extern u8 gUnknown_020297ED;
+u8 debug_sub_805F2B0(u8);
+#endif
+
 static void MovePlayerOnMachBike(u8, u16, u16);
-static u8 GetMachBikeTransition(u8 *);
+u8 GetMachBikeTransition(u8 *);
 static void MachBikeTransition_FaceDirection(u8);
 static void MachBikeTransition_80E517C(u8);
 static void MachBikeTransition_80E51C4(u8);
@@ -123,10 +128,18 @@ void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 
 static void MovePlayerOnMachBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
+#ifdef DEBUG
+    if (gUnknown_020297ED && debug_sub_805F2B0(direction))
+    {
+        sub_80E6024();
+        return;
+    }
+#endif
+
     sMachBikeTransitions[GetMachBikeTransition(&direction)](direction);
 }
 
-static u8 GetMachBikeTransition(u8 *ptr)
+u8 GetMachBikeTransition(u8 *ptr)
 {
     u8 direction = player_get_direction_upper_nybble();
 
@@ -249,6 +262,14 @@ static void MachBikeTransition_80E5270(u8 var)
 
 static void MovePlayerOnAcroBike(u8 newDirection, u16 newKeys, u16 heldKeys)
 {
+#ifdef DEBUG
+    if (gUnknown_020297ED && debug_sub_805F2B0(newDirection))
+    {
+        sub_80E6024();
+        return;
+    }
+#endif
+
     sAcroBikeTransitions[CheckMovementInputAcroBike(&newDirection, newKeys, heldKeys)](newDirection);
 }
 

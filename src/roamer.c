@@ -1,6 +1,7 @@
 #include "global.h"
 #include "roamer.h"
 #include "pokemon.h"
+#include "region_map.h"
 #include "rng.h"
 #include "species.h"
 
@@ -224,3 +225,20 @@ void GetRoamerLocation(u8 *mapGroup, u8 *mapNum)
     *mapGroup = sRoamerLocation[MAP_GRP];
     *mapNum = sRoamerLocation[MAP_NUM];
 }
+
+#ifdef DEBUG
+void debug_sub_814A714(void)
+{
+    if (gSaveBlock1.location.mapGroup == 0)
+    {
+        CreateInitialRoamerMon();
+        sRoamerLocation[0] = 0;
+        sRoamerLocation[1] = gSaveBlock1.location.mapNum;
+    }
+}
+
+void debug_sub_814A73C(u8* str)
+{
+    sub_80FBFB4(str, sRoamerLocation[1], 0);
+}
+#endif

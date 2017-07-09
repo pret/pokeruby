@@ -702,1156 +702,1273 @@ _08120FF2:
 	thumb_func_end sub_8120F98
 
 	thumb_func_start StrCpyDecodeBattle
-StrCpyDecodeBattle: @ 8120FFC
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0xC
-	mov r9, r0
-	mov r8, r1
-	movs r6, 0
-	movs r4, 0
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r7, r0, 24
-	mov r0, r9
-	ldrb r1, [r0]
-	bl _08121A40
-_0812101E:
-	cmp r1, 0xFD
-	beq _08121026
-	bl _08121A30
-_08121026:
-	movs r1, 0x1
-	add r9, r1
-	mov r2, r9
-	ldrb r0, [r2]
-	cmp r0, 0x2A
-	bls _08121036
-	bl _081219E6
-_08121036:
-	lsls r0, 2
-	ldr r1, _08121040 @ =_08121044
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08121040: .4byte _08121044
-	.align 2, 0
-_08121044:
-	.4byte _081210F0
-	.4byte _0812111E
-	.4byte _0812115A
-	.4byte _08121180
-	.4byte _081211A4
-	.4byte _081211C8
-	.4byte _081211EC
-	.4byte _08121218
-	.4byte _08121248
-	.4byte _08121278
-	.4byte _081212A8
-	.4byte _0812133C
-	.4byte _081213A8
-	.4byte _0812141C
-	.4byte _08121490
-	.4byte _08121504
-	.4byte _08121578
-	.4byte _081215F8
-	.4byte _08121620
-	.4byte _08121660
-	.4byte _081216EC
-	.4byte _081216F4
-	.4byte _08121704
-	.4byte _08121714
-	.4byte _0812172C
-	.4byte _0812174C
-	.4byte _081217C0
-	.4byte _08121830
-	.4byte _08121840
-	.4byte _08121854
-	.4byte _08121868
-	.4byte _0812188C
-	.4byte _081218B0
-	.4byte _081218B8
-	.4byte _081218C0
-	.4byte _0812195C
-	.4byte _081219A4
-	.4byte _081219AC
-	.4byte _0812197C
-	.4byte _08121984
-	.4byte _081219CC
-	.4byte _081219D4
-	.4byte _08121134
-_081210F0:
-	ldr r5, _08121100 @ =gBattleTextBuff1
-	ldrb r0, [r5]
-	cmp r0, 0xFD
-	bne _08121108
-	ldr r4, _08121104 @ =gStringVar1
-	adds r0, r5, 0
-	b _08121140
-	.align 2, 0
-_08121100: .4byte gBattleTextBuff1
-_08121104: .4byte gStringVar1
-_08121108:
-	adds r0, r5, 0
-	bl sub_8120F98
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _08121118
-	bl _081219E6
-_08121118:
-	adds r4, r5, 0
-	bl _081219E6
-_0812111E:
-	ldr r1, _0812112C @ =gBattleTextBuff2
-	ldrb r0, [r1]
-	cmp r0, 0xFD
-	bne _08121154
-	ldr r4, _08121130 @ =gStringVar2
-	b _0812113E
-	.align 2, 0
-_0812112C: .4byte gBattleTextBuff2
-_08121130: .4byte gStringVar2
-_08121134:
-	ldr r1, _0812114C @ =gBattleTextBuff3
-	ldrb r0, [r1]
-	cmp r0, 0xFD
-	bne _08121154
-	ldr r4, _08121150 @ =gStringVar3
-_0812113E:
-	adds r0, r1, 0
-_08121140:
-	adds r1, r4, 0
-	bl sub_8121A68
-	bl _081219E6
-	.align 2, 0
-_0812114C: .4byte gBattleTextBuff3
-_08121150: .4byte gStringVar3
-_08121154:
-	adds r4, r1, 0
-	bl _081219E6
-_0812115A:
-	movs r0, 0
-	bl GetBankByPlayerAI
-	ldr r1, _08de12116C @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de12116C: .4byte gBattlePartyID
-_08121180:
-	movs r0, 0x1
-	bl GetBankByPlayerAI
-	ldr r1, _0812119C @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _081211A0 @ =gEnemyParty
-	b _08121940
-	.align 2, 0
-_0812119C: .4byte gBattlePartyID
-_081211A0: .4byte gEnemyParty
-_081211A4:
-	movs r0, 0x2
-	bl GetBankByPlayerAI
-	ldr r1, _081211C0 @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_081211C0: .4byte gBattlePartyID
-_081211C8:
-	movs r0, 0x3
-	bl GetBankByPlayerAI
-	ldr r1, _081211E4 @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _081211E8 @ =gEnemyParty
-	b _08121940
-	.align 2, 0
-_081211E4: .4byte gBattlePartyID
-_081211E8: .4byte gEnemyParty
-_081211EC:
-	ldr r2, _0812120C @ =gBattlePartyID
-	ldr r1, _08121210 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r1
-	ldrh r0, [r0, 0x18]
-	lsls r0, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_0812120C: .4byte gBattlePartyID
-_08121210: .4byte gLinkPlayers
-_08121218:
-	ldr r2, _0812123C @ =gBattlePartyID
-	ldr r1, _08121240 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r1
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x1
-	eors r0, r1
-	lsls r0, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08121244 @ =gEnemyParty
-	b _08121940
-	.align 2, 0
-_0812123C: .4byte gBattlePartyID
-_08121240: .4byte gLinkPlayers
-_08121244: .4byte gEnemyParty
-_08121248:
-	ldr r2, _0812126C @ =gBattlePartyID
-	ldr r1, _08121270 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r1
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x2
-	eors r0, r1
-	lsls r0, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_0812126C: .4byte gBattlePartyID
-_08121270: .4byte gLinkPlayers
-_08121278:
-	ldr r2, _0812129C @ =gBattlePartyID
-	ldr r1, _081212A0 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r1
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x3
-	eors r0, r1
-	lsls r0, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _081212A4 @ =gEnemyParty
-	b _08121940
-	.align 2, 0
-_0812129C: .4byte gBattlePartyID
-_081212A0: .4byte gLinkPlayers
-_081212A4: .4byte gEnemyParty
-_081212A8:
-	ldr r4, _081212CC @ =gBankAttacker
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _081212E6
-	ldrb r0, [r4]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r0, 0x1
-	ands r0, r1
-	bl GetBankByPlayerAI
-	ldr r1, _08121314 @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08121318 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de1212BE
-	.align 2, 0
-_081212CC: .4byte gBankAttacker
-_08121314: .4byte gBattlePartyID
-_08121318: .4byte gEnemyParty
-_08de1212B4:
-	mov r3, r8
-	adds r0, r3, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de1212BE:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de1212B4
-	b _08de12184E
-_081212E6:
-	ldrb r0, [r4]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r0, 0x1
-	ands r0, r1
-	bl GetBankByPlayerAI
-	ldr r1, _08121338 @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08121338: .4byte gBattlePartyID
-_0812133C:
-	ldr r4, _08de121314 @ =gBankAttacker
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08de12131C
-	ldrb r0, [r4]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r0, 0x1
-	ands r0, r1
-	bl GetBankByPlayerAI
-	ldr r1, _08de121318 @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, 0x4
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de121314: .4byte gBankAttacker
-_08de121318: .4byte gBattlePartyID
-_08de12131C:
-	ldrb r0, [r4]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r0, 0x1
-	ands r0, r1
-	bl GetBankByPlayerAI
-	ldr r1, _08de12134C @ =gBattlePartyID
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, 0x4
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de121350 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	b _0812194A
-	.align 2, 0
-_08de12134C: .4byte gBattlePartyID
-_08de121350: .4byte gEnemyParty
-_081213A8:
-	ldr r4, _08de121388 @ =gBankAttacker
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08de1213A8
-	ldr r1, _08de12138C @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de121390 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de12139E
-	.align 2, 0
-_08de121388: .4byte gBankAttacker
-_08de12138C: .4byte gBattlePartyID
-_08de121390: .4byte gEnemyParty
-_08de121394:
-	mov r5, r8
-	adds r0, r5, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de12139E:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de121394
-	b _08de12184E
-_08de1213A8:
-	ldr r1, _08de1213B4 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de1213B4: .4byte gBattlePartyID
-_0812141C:
-	ldr r4, _08de1213EC @ =gBankTarget
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08de12140C
-	ldr r1, _08de1213F0 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de1213F4 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de121402
-	.align 2, 0
-_08de1213EC: .4byte gBankTarget
-_08de1213F0: .4byte gBattlePartyID
-_08de1213F4: .4byte gEnemyParty
-_08de1213F8:
-	mov r2, r8
-	adds r0, r2, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de121402:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de1213F8
-	b _08de12184E
-_08de12140C:
-	ldr r1, _08de121418 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de121418: .4byte gBattlePartyID
-_08121490:
-	ldr r4, _08de121450 @ =gEffectBank
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08de121470
-	ldr r1, _08de121454 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de121458 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de121466
-	.align 2, 0
-_08de121450: .4byte gEffectBank
-_08de121454: .4byte gBattlePartyID
-_08de121458: .4byte gEnemyParty
-_08de12145C:
-	mov r3, r8
-	adds r0, r3, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de121466:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de12145C
-	b _08de12184E
-_08de121470:
-	ldr r1, _08de12147C @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de12147C: .4byte gBattlePartyID
-_08121504:
-	ldr r4, _08de1214B4 @ =gActiveBank
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08de1214D4
-	ldr r1, _08de1214B8 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de1214BC @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de1214CA
-	.align 2, 0
-_08de1214B4: .4byte gActiveBank
-_08de1214B8: .4byte gBattlePartyID
-_08de1214BC: .4byte gEnemyParty
-_08de1214C0:
-	mov r5, r8
-	adds r0, r5, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de1214CA:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de1214C0
-	b _08de12184E
-_08de1214D4:
-	ldr r1, _08de1214E0 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_08de1214E0: .4byte gBattlePartyID
-_08121578:
-	ldr r0, _08de12151C @ =0x02000000
-	ldr r1, _08de121520 @ =0x00016003
-	adds r4, r0, r1
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _081215E8
-	ldr r1, _08de121524 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de121528 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de121536
-	.align 2, 0
-_08de12151C: .4byte 0x02000000
-_08de121520: .4byte 0x00016003
-_08de121524: .4byte gBattlePartyID
-_08de121528: .4byte gEnemyParty
-_08de12152C:
-	mov r2, r8
-	adds r0, r2, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de121536:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de12152C
-	b _08de12184E
-_081215E8:
-	ldr r1, _081215F4 @ =gBattlePartyID
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _0812193A
-	.align 2, 0
-_081215F4: .4byte gBattlePartyID
-_081215F8:
-	ldr r0, _08de121568 @ =gSelectedOrderFromParty
-	ldr r2, [r0]
-	ldrh r1, [r2]
-	movs r0, 0xB1
-	lsls r0, 1
-	cmp r1, r0
-	bls _08de121574
-	ldr r0, _08de12156C @ =0x02000000
-	ldr r3, _08de121570 @ =0x000160a0
-	adds r0, r3
-	b _08de12158C
-	.align 2, 0
-_08de121568: .4byte gSelectedOrderFromParty
-_08de12156C: .4byte 0x02000000
-_08de121570: .4byte 0x000160a0
-_08de121574:
-	ldrh r1, [r2]
-	b _08de1215AA
-_08121620:
-	ldr r0, _08de121598 @ =gSelectedOrderFromParty
-	ldr r2, [r0]
-	ldrh r1, [r2, 0x2]
-	movs r0, 0xB1
-	lsls r0, 1
-	cmp r1, r0
-	bls _08de1215A8
-	ldr r0, _08de12159C @ =0x02000000
-	ldr r5, _08de1215A0 @ =0x000160a0
-	adds r0, r5
-_08de12158C:
-	ldrb r0, [r0]
-	lsls r0, 2
-	ldr r1, _08de1215A4 @ =gUnknown_08401674
-	adds r4, r0, r1
-	b _081219E6
-	.align 2, 0
-_08de121598: .4byte gSelectedOrderFromParty
-_08de12159C: .4byte 0x02000000
-_08de1215A0: .4byte 0x000160a0
-_08de1215A4: .4byte gUnknown_08401674
-_08de1215A8:
-	ldrh r1, [r2, 0x2]
-_08de1215AA:
-	movs r0, 0xD
-	muls r1, r0
-	ldr r0, _08de1215B4 @ =gMoveNames
-	adds r4, r1, r0
-	b _081219E6
-	.align 2, 0
-_08de1215B4: .4byte gMoveNames
-_08121660:
-	ldr r0, _08de121604 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08de121630
-	ldr r1, _08de121608 @ =gLastUsedItem
-	ldrh r0, [r1]
-	cmp r0, 0xAF
-	bne _08de12162C
-	ldr r2, _08de12160C @ =gLinkPlayers
-	ldr r0, _08de121610 @ =0x02000000
-	ldr r1, _08de121614 @ =0x000160cb
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, _08de121618 @ =gStringBank
-	ldrb r2, [r1]
-	ldrh r0, [r0, 0x18]
-	cmp r0, r2
-	bne _08de121624
-	lsls r1, r2, 3
-	subs r1, r2
-	lsls r1, 2
-	ldr r0, _08de12161C @ =gEnigmaBerries
-	adds r1, r0
-	mov r0, sp
-	bl StringCopy
-	ldr r1, _08de121620 @ =gUnknown_08400A85
-	mov r0, sp
-	bl de_sub_8073174
-	mov r4, sp
-	b _081219E6
-	.align 2, 0
-_08de121604: .4byte gBattleTypeFlags
-_08de121608: .4byte gLastUsedItem
-_08de12160C: .4byte gLinkPlayers
-_08de121610: .4byte 0x02000000
-_08de121614: .4byte 0x000160cb
-_08de121618: .4byte gStringBank
-_08de12161C: .4byte gEnigmaBerries
-_08de121620: .4byte gUnknown_08400A85
-_08de121624:
-	ldr r4, _08de121628 @ =gUnknown_08400A78
-	b _081219E6
-	.align 2, 0
-_08de121628: .4byte gUnknown_08400A78
-_08de12162C:
-	ldrh r0, [r1]
-	b _08de121634
-_08de121630:
-	ldr r0, _08de121640 @ =gLastUsedItem
-	ldrh r0, [r0]
-_08de121634:
-	mov r1, sp
-	bl CopyItemName
-	mov r4, sp
-	b _081219E6
-	.align 2, 0
-_08de121640: .4byte gLastUsedItem
-_081216EC:
-	ldr r0, _08de121648 @ =gLastUsedAbility
-	b _08de12168C
-	.align 2, 0
-_08de121648: .4byte gLastUsedAbility
-_081216F4:
-	ldr r1, _08de121654 @ =gAbilitiesPerBank
-	ldr r0, _08de121658 @ =gBankAttacker
-	b _08de121688
-	.align 2, 0
-_08de121654: .4byte gAbilitiesPerBank
-_08de121658: .4byte gBankAttacker
-_08121704:
-	ldr r1, _08de121664 @ =gAbilitiesPerBank
-	ldr r0, _08de121668 @ =gBankTarget
-	b _08de121688
-	.align 2, 0
-_08de121664: .4byte gAbilitiesPerBank
-_08de121668: .4byte gBankTarget
-_08121714:
-	ldr r1, _08de121678 @ =gAbilitiesPerBank
-	ldr r0, _08de12167C @ =0x02000000
-	ldr r2, _08de121680 @ =0x00016003
-	adds r0, r2
-	b _08de121688
-	.align 2, 0
-_08de121678: .4byte gAbilitiesPerBank
-_08de12167C: .4byte 0x02000000
-_08de121680: .4byte 0x00016003
-_0812172C:
-	ldr r1, _08de121698 @ =gAbilitiesPerBank
-	ldr r0, _08de12169C @ =gEffectBank
-_08de121688:
-	ldrb r0, [r0]
-	adds r0, r1
-_08de12168C:
-	ldrb r1, [r0]
-	movs r0, 0xD
-	muls r1, r0
-	ldr r0, _08de1216A0 @ =gAbilityNames
-	adds r4, r1, r0
-	b _081219E6
-	.align 2, 0
-_08de121698: .4byte gAbilitiesPerBank
-_08de12169C: .4byte gEffectBank
-_08de1216A0: .4byte gAbilityNames
-_0812174C:
-	ldr r3, _08de1216B8 @ =gTrainerBattleOpponent
-	ldrh r1, [r3]
-	movs r0, 0x80
-	lsls r0, 3
-	cmp r1, r0
-	bne _08de1216BC
-	adds r0, r1, 0
-	movs r1, 0
-	b _08de1216EE
-	.align 2, 0
-_08de1216B8: .4byte gTrainerBattleOpponent
-_08de1216BC:
-	ldr r0, _08de1216D4 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08de1216D8
-	adds r0, r2, 0
-	movs r1, 0
-	b _08de1216EE
-	.align 2, 0
-_08de1216D4: .4byte gBattleTypeFlags
-_08de1216D8:
-	movs r2, 0x80
-	lsls r2, 4
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08de1216EA
-	adds r0, r2, 0
-	movs r1, 0
-	b _08de1216EE
-_08de1216EA:
-	ldrh r1, [r3]
-	movs r0, 0
-_08de1216EE:
-	bl de_sub_8041024
-	adds r4, r0, 0
-	b _081219E6
-_081217C0:
-	ldr r2, _08de12171C @ =gTrainerBattleOpponent
-	ldrh r1, [r2]
-	movs r0, 0x80
-	lsls r0, 3
-	cmp r1, r0
-	bne _08de121724
-	mov r0, sp
-	movs r1, 0xFF
-	movs r2, 0x8
-	bl memset
-	ldr r1, _08de121720 @ =0x02017002
-	mov r0, sp
-	movs r2, 0x7
-	bl memcpy
-	mov r4, sp
-	b _081219E6
-	.align 2, 0
-_08de12171C: .4byte gTrainerBattleOpponent
-_08de121720: .4byte 0x02017002
-_08de121724:
-	ldr r0, _08de12173C @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x80
-	lsls r0, 1
-	ands r0, r1
-	cmp r0, 0
-	beq _08de121740
-	mov r0, sp
-	bl get_trainer_name
-	mov r4, sp
-	b _081219E6
-	.align 2, 0
-_08de12173C: .4byte gBattleTypeFlags
-_08de121740:
-	movs r0, 0x80
-	lsls r0, 4
-	ands r0, r1
-	cmp r0, 0
-	beq _08de121754
-	mov r0, sp
-	bl sub_8135FF4
-	mov r4, sp
-	b _081219E6
-_08de121754:
-	ldrh r0, [r2]
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _08de121764 @ =0x081fd47c
-	adds r4, r1, r0
-	b _081219E6
-	.align 2, 0
-_08de121764: .4byte 0x081fd47c
-_08121830:
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	ldr r1, _08de121774 @ =0x03002988
-	adds r4, r0, r1
-	b _081219E6
-	.align 2, 0
-_08de121774: .4byte 0x03002988
-_08121840:
-	ldr r4, _08de121788 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r4
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x2
-	b _08de1217AE
-	.align 2, 0
-_08de121788: .4byte gLinkPlayers
-_08121854:
-	ldr r4, _08de12179C @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r4
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x1
-	b _08de1217AE
-	.align 2, 0
-_08de12179C: .4byte gLinkPlayers
-_08121868:
-	ldr r4, _08de1217C0 @ =gLinkPlayers
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r0, 2
-	adds r0, r4
-	ldrh r1, [r0, 0x18]
-	movs r0, 0x3
-_08de1217AE:
-	eors r0, r1
-	bl sub_803FC34
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r4, 0x8
-	adds r4, r1, r4
-	b _081219E6
-	.align 2, 0
-_08de1217C0: .4byte gLinkPlayers
-_0812188C:
-	ldr r0, _08de1217DC @ =0x02000000
-	ldr r3, _08de1217E0 @ =0x00016003
-	adds r0, r3
-	ldrb r0, [r0]
-	bl sub_803FC34
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	ldr r0, _08de1217E4 @ =0x03002988
-	adds r4, r1, r0
-	b _081219E6
-	.align 2, 0
-_08de1217DC: .4byte 0x02000000
-_08de1217E0: .4byte 0x00016003
-_08de1217E4: .4byte 0x03002988
-_081218B0:
-	ldr r4, _08de1217EC @ =gSaveBlock2
-	b _081219E6
-	.align 2, 0
-_08de1217EC: .4byte gSaveBlock2
-_081218B8:
-	bl sub_8082830
-	adds r4, r0, 0
-	b _081219E6
-_081218C0:
-	ldr r4, _08de12182C @ =0x02000000
-	ldr r5, _08de121830 @ =0x00016003
-	adds r0, r4, r5
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08121934
-	ldr r1, _08de121834 @ =0x0001605e
-	adds r0, r4, r1
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08de121838 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _08de121846
-	.align 2, 0
-_08de12182C: .4byte 0x02000000
-_08de121830: .4byte 0x00016003
-_08de121834: .4byte 0x0001605e
-_08de121838: .4byte gEnemyParty
-_08de12183C:
-	mov r2, r8
-	adds r0, r2, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-_08de121846:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _08de12183C
-_08de12184E:
-	ldr r0, _08121920 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	ldr r4, _08121924 @ =gUnknown_08400791
-	cmp r0, 0
-	beq _081219E6
-	ldr r4, _08121928 @ =gUnknown_08400797
-	b _081219E6
-	.align 2, 0
-_08121920: .4byte gBattleTypeFlags
-_08121924: .4byte gUnknown_08400791
-_08121928: .4byte gUnknown_08400797
-_08121934:
-	ldr r3, _08121954 @ =0x0001605e
-	adds r0, r4, r3
-	ldrb r1, [r0]
-_0812193A:
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08121958 @ =gPlayerParty
-_08121940:
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-_0812194A:
-	mov r0, sp
-	bl StringGetEnd10
-	mov r4, sp
-	b _081219E6
-	.align 2, 0
-_08121954: .4byte 0x0001605e
-_08121958: .4byte gPlayerParty
-_0812195C:
-	ldr r0, _08121970 @ =0x0000084b
-	bl FlagGet
-	lsls r0, 24
-	ldr r4, _08121974 @ =gUnknown_084009ED
-	cmp r0, 0
-	beq _081219E6
-	ldr r4, _08121978 @ =gUnknown_084009F7
-	b _081219E6
-	.align 2, 0
-_08121970: .4byte 0x0000084b
-_08121974: .4byte gUnknown_084009ED
-_08121978: .4byte gUnknown_084009F7
-_0812197C:
-	ldr r0, _08de1218B8 @ =gBankAttacker
-	b _08121986
-	.align 2, 0
-_08de1218B8: .4byte gBankAttacker
-_08121984:
-	ldr r0, _08121998 @ =gBankTarget
-_08121986:
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	ldr r4, _0812199C @ =gUnknown_084007A7
-	cmp r0, 0
-	bne _081219E6
-	ldr r4, _081219A0 @ =gUnknown_084007AC
-	b _081219E6
-	.align 2, 0
-_08121998: .4byte gBankTarget
-_0812199C: .4byte gUnknown_084007A7
-_081219A0: .4byte gUnknown_084007AC
-_081219A4:
-	ldr r0, _081219A8 @ =gBankAttacker
-	b _081219AE
-	.align 2, 0
-_081219A8: .4byte gBankAttacker
-_081219AC:
-	ldr r0, _081219C0 @ =gBankTarget
-_081219AE:
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	ldr r4, _081219C4 @ =gUnknown_0840079C
-	cmp r0, 0
-	bne _081219E6
-	ldr r4, _081219C8 @ =gUnknown_084007A1
-	b _081219E6
-	.align 2, 0
-_081219C0: .4byte gBankTarget
-_081219C4: .4byte gUnknown_0840079C
-_081219C8: .4byte gUnknown_084007A1
-_081219CC:
-	ldr r0, _081219D0 @ =gBankAttacker
-	b _081219D6
-	.align 2, 0
-_081219D0: .4byte gBankAttacker
-_081219D4:
-	ldr r0, _08121A24 @ =gBankTarget
-_081219D6:
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	ldr r4, _08121A28 @ =gUnknown_084007B2
-	cmp r0, 0
-	bne _081219E6
-	ldr r4, _08121A2C @ =gUnknown_084007B7
-_081219E6:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	mov r5, r9
-	ldrb r2, [r5]
-	mov r3, r9
-	adds r3, 0x1
-	cmp r0, 0xFF
-	beq _08121A06
-_081219F4:
-	mov r5, r8
-	adds r0, r5, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	adds r4, 0x1
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _081219F4
-_08121A06:
-	lsls r0, r2, 24
-	lsrs r0, 24
-	cmp r0, 0x21
-	bne _08121A3C
-	mov r0, r8
-	adds r1, r0, r6
-	movs r0, 0xFC
-	strb r0, [r1]
-	adds r6, 0x1
-	mov r2, r8
-	adds r1, r2, r6
-	movs r0, 0x9
-	strb r0, [r1]
-	adds r6, 0x1
-	b _08121A3C
-	.align 2, 0
-_08121A24: .4byte gBankTarget
-_08121A28: .4byte gUnknown_084007B2
-_08121A2C: .4byte gUnknown_084007B7
-_08121A30:
-	mov r3, r8
-	adds r0, r3, r6
-	strb r1, [r0]
-	adds r6, 0x1
-	mov r3, r9
-	adds r3, 0x1
-_08121A3C:
-	mov r9, r3
-	ldrb r1, [r3]
-_08121A40:
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	beq _08121A4A
-	bl _0812101E
-_08121A4A:
-	mov r5, r8
-	adds r1, r5, r6
-	mov r2, r9
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r6, 0x1
-	adds r0, r6, 0
-	add sp, 0xC
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
+StrCpyDecodeBattle:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, r9
+	mov	r6, r8
+	push	{r6, r7}
+	add	sp, sp, #0xfffffff4
+	mov	r9, r0
+	mov	r8, r1
+	mov	r6, #0x0
+	mov	r4, #0x0
+	bl	GetMultiplayerId
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	mov	r0, r9
+	ldrb	r1, [r0]
+	bl	._184
+._460:
+	cmp	r1, #0xfd
+	beq	._185	@cond_branch
+	bl	._186
+._185:
+	mov	r1, #0x1
+	add r9, r9, r1
+	mov	r2, r9
+	ldrb	r0, [r2]
+	cmp	r0, #0x2a
+	bls	._187	@cond_branch
+	bl	._452
+._187:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._190
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._191:
+	.align	2, 0
+._190:
+	.word	._189
+._189:
+	.word	._192
+	.word	._193
+	.word	._194
+	.word	._195
+	.word	._196
+	.word	._197
+	.word	._198
+	.word	._199
+	.word	._200
+	.word	._201
+	.word	._202
+	.word	._203
+	.word	._204
+	.word	._205
+	.word	._206
+	.word	._207
+	.word	._208
+	.word	._209
+	.word	._210
+	.word	._211
+	.word	._212
+	.word	._213
+	.word	._214
+	.word	._215
+	.word	._216
+	.word	._217
+	.word	._218
+	.word	._219
+	.word	._220
+	.word	._221
+	.word	._222
+	.word	._223
+	.word	._224
+	.word	._225
+	.word	._226
+	.word	._227
+	.word	._228
+	.word	._229
+	.word	._230
+	.word	._231
+	.word	._232
+	.word	._233
+	.word	._234
+._192:
+	ldr	r5, ._237
+	ldrb	r0, [r5]
+	cmp	r0, #0xfd
+	bne	._235	@cond_branch
+	ldr	r4, ._237 + 4
+	add	r0, r5, #0
+	b	._236
+._238:
+	.align	2, 0
+._237:
+	.word	gBattleTextBuff1
+	.word	gStringVar1
+._235:
+	add	r0, r5, #0
+	bl	sub_8120F98
+	add	r4, r0, #0
+	cmp	r4, #0
+	beq	._239	@cond_branch
+	bl	._452
+._239:
+	add	r4, r5, #0
+	bl	._452
+._193:
+	ldr	r1, ._244
+	ldrb	r0, [r1]
+	cmp	r0, #0xfd
+	bne	._246	@cond_branch
+	ldr	r4, ._244 + 4
+	b	._243
+._245:
+	.align	2, 0
+._244:
+	.word	gBattleTextBuff2
+	.word	gStringVar2
+._234:
+	ldr	r1, ._248
+	ldrb	r0, [r1]
+	cmp	r0, #0xfd
+	bne	._246	@cond_branch
+	ldr	r4, ._248 + 4
+._243:
+	add	r0, r1, #0
+._236:
+	add	r1, r4, #0
+	bl	sub_8121A68
+	bl	._452
+._249:
+	.align	2, 0
+._248:
+	.word	gBattleTextBuff3
+	.word	gStringVar3
+._246:
+	add	r4, r1, #0
+	bl	._452
+._194:
+	mov	r0, #0x0
+	bl	GetBankByPlayerAI
+	ldr	r1, ._252
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._253:
+	.align	2, 0
+._252:
+	.word	gBattlePartyID
+._195:
+	mov	r0, #0x1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._255
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._255 + 4
+	b	._272
+._256:
+	.align	2, 0
+._255:
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._196:
+	mov	r0, #0x2
+	bl	GetBankByPlayerAI
+	ldr	r1, ._258
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._259:
+	.align	2, 0
+._258:
+	.word	gBattlePartyID
+._197:
+	mov	r0, #0x3
+	bl	GetBankByPlayerAI
+	ldr	r1, ._261
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._261 + 4
+	b	._272
+._262:
+	.align	2, 0
+._261:
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._198:
+	ldr	r2, ._264
+	ldr	r1, ._264 + 4
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrh	r0, [r0, #0x18]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r2
+	ldrh	r1, [r0]
+	b	._333
+._265:
+	.align	2, 0
+._264:
+	.word	gBattlePartyID
+	.word	gLinkPlayers
+._199:
+	ldr	r2, ._267
+	ldr	r1, ._267 + 4
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x1
+	eor	r0, r0, r1
+	lsl	r0, r0, #0x1
+	add	r0, r0, r2
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._267 + 8
+	b	._272
+._268:
+	.align	2, 0
+._267:
+	.word	gBattlePartyID
+	.word	gLinkPlayers
+	.word	gEnemyParty
+._200:
+	ldr	r2, ._270
+	ldr	r1, ._270 + 4
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x2
+	eor	r0, r0, r1
+	lsl	r0, r0, #0x1
+	add	r0, r0, r2
+	ldrh	r1, [r0]
+	b	._333
+._271:
+	.align	2, 0
+._270:
+	.word	gBattlePartyID
+	.word	gLinkPlayers
+._201:
+	ldr	r2, ._273
+	ldr	r1, ._273 + 4
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x3
+	eor	r0, r0, r1
+	lsl	r0, r0, #0x1
+	add	r0, r0, r2
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._273 + 8
+	b	._272
+._274:
+	.align	2, 0
+._273:
+	.word	gBattlePartyID
+	.word	gLinkPlayers
+	.word	gEnemyParty
+._202:
+	ldr	r4, ._277
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._275	@cond_branch
+	ldrb	r0, [r4]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	mov	r0, #0x1
+	and	r0, r0, r1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._277 + 4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._277 + 8
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._276
+._278:
+	.align	2, 0
+._277:
+	.word	gBankAttacker
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._279:
+	mov	r3, r8
+	add	r0, r3, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._276:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._279	@cond_branch
+	b	._332
+._275:
+	ldrb	r0, [r4]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	mov	r0, #0x1
+	and	r0, r0, r1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._282
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._283:
+	.align	2, 0
+._282:
+	.word	gBattlePartyID
+._203:
+	ldr	r4, ._286
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._284	@cond_branch
+	ldrb	r0, [r4]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	mov	r0, #0x1
+	and	r0, r0, r1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._286 + 4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, #0x4
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._287:
+	.align	2, 0
+._286:
+	.word	gBankAttacker
+	.word	gBattlePartyID
+._284:
+	ldrb	r0, [r4]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	mov	r0, #0x1
+	and	r0, r0, r1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._289
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x17
+	add	r0, r0, #0x4
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._289 + 4
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	b	._288
+._290:
+	.align	2, 0
+._289:
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._204:
+	ldr	r4, ._293
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._291	@cond_branch
+	ldr	r1, ._293 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._293 + 8
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._292
+._294:
+	.align	2, 0
+._293:
+	.word	gBankAttacker
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._295:
+	mov	r5, r8
+	add	r0, r5, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._292:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._295	@cond_branch
+	b	._332
+._291:
+	ldr	r1, ._298
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._299:
+	.align	2, 0
+._298:
+	.word	gBattlePartyID
+._205:
+	ldr	r4, ._302
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._300	@cond_branch
+	ldr	r1, ._302 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._302 + 8
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._301
+._303:
+	.align	2, 0
+._302:
+	.word	gBankTarget
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._304:
+	mov	r2, r8
+	add	r0, r2, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._301:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._304	@cond_branch
+	b	._332
+._300:
+	ldr	r1, ._307
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._308:
+	.align	2, 0
+._307:
+	.word	gBattlePartyID
+._206:
+	ldr	r4, ._311
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._309	@cond_branch
+	ldr	r1, ._311 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._311 + 8
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._310
+._312:
+	.align	2, 0
+._311:
+	.word	gEffectBank
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._313:
+	mov	r3, r8
+	add	r0, r3, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._310:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._313	@cond_branch
+	b	._332
+._309:
+	ldr	r1, ._316
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._317:
+	.align	2, 0
+._316:
+	.word	gBattlePartyID
+._207:
+	ldr	r4, ._320
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._318	@cond_branch
+	ldr	r1, ._320 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._320 + 8
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._319
+._321:
+	.align	2, 0
+._320:
+	.word	gActiveBank
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._322:
+	mov	r5, r8
+	add	r0, r5, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._319:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._322	@cond_branch
+	b	._332
+._318:
+	ldr	r1, ._325
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._326:
+	.align	2, 0
+._325:
+	.word	gBattlePartyID
+._208:
+	ldr	r0, ._329
+	ldr	r1, ._329 + 4
+	add	r4, r0, r1
+	ldrb	r0, [r4]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._327	@cond_branch
+	ldr	r1, ._329 + 8
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._329 + 12
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._328
+._330:
+	.align	2, 0
+._329:
+	.word	+0x2000000
+	.word	0x16003
+	.word	gBattlePartyID
+	.word	gEnemyParty
+._331:
+	mov	r2, r8
+	add	r0, r2, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._328:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._331	@cond_branch
+	b	._332
+._327:
+	ldr	r1, ._334
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	b	._333
+._335:
+	.align	2, 0
+._334:
+	.word	gBattlePartyID
+._209:
+	ldr	r0, ._338
+	ldr	r2, [r0]
+	ldrh	r1, [r2]
+	mov	r0, #0xb1
+	lsl	r0, r0, #0x1
+	cmp	r1, r0
+	bls	._336	@cond_branch
+	ldr	r0, ._338 + 4
+	ldr	r3, ._338 + 8
+	add	r0, r0, r3
+	b	._337
+._339:
+	.align	2, 0
+._338:
+	.word	gSelectedOrderFromParty
+	.word	+0x2000000
+	.word	0x160a0
+._336:
+	ldrh	r1, [r2]
+	b	._340
+._210:
+	ldr	r0, ._343
+	ldr	r2, [r0]
+	ldrh	r1, [r2, #0x2]
+	mov	r0, #0xb1
+	lsl	r0, r0, #0x1
+	cmp	r1, r0
+	bls	._341	@cond_branch
+	ldr	r0, ._343 + 4
+	ldr	r5, ._343 + 8
+	add	r0, r0, r5
+._337:
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	ldr	r1, ._343 + 12
+	add	r4, r0, r1
+	b	._452
+._344:
+	.align	2, 0
+._343:
+	.word	gSelectedOrderFromParty
+	.word	+0x2000000
+	.word	0x160a0
+	.word	gUnknown_08401674
+._341:
+	ldrh	r1, [r2, #0x2]
+._340:
+	mov	r0, #0xd
+	mul	r1, r1, r0
+	ldr	r0, ._346
+	add	r4, r1, r0
+	b	._452
+._347:
+	.align	2, 0
+._346:
+	.word	gMoveNames
+._211:
+	ldr	r0, ._352
+	ldrh	r1, [r0]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._348	@cond_branch
+	ldr	r1, ._352 + 4
+	ldrh	r0, [r1]
+	cmp	r0, #0xaf
+	bne	._349	@cond_branch
+	ldr	r2, ._352 + 8
+	ldr	r0, ._352 + 12
+	ldr	r1, ._352 + 16
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x3
+	sub	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldr	r1, ._352 + 20
+	ldrb	r2, [r1]
+	ldrh	r0, [r0, #0x18]
+	cmp	r0, r2
+	bne	._350	@cond_branch
+	lsl	r1, r2, #0x3
+	sub	r1, r1, r2
+	lsl	r1, r1, #0x2
+	ldr	r0, ._352 + 24
+	add	r1, r1, r0
+	mov	r0, sp
+	bl	StringCopy
+	ldr	r1, ._352 + 28
+	mov	r0, sp
+	bl	de_sub_8073174
+	mov	r4, sp
+	b	._452
+._353:
+	.align	2, 0
+._352:
+	.word	gBattleTypeFlags
+	.word	gLastUsedItem
+	.word	gLinkPlayers
+	.word	+0x2000000
+	.word	0x160cb
+	.word	gStringBank
+	.word	gEnigmaBerries
+	.word	gUnknown_08400A85
+._350:
+	ldr	r4, ._355
+	b	._452
+._356:
+	.align	2, 0
+._355:
+	.word	gUnknown_08400A78
+._349:
+	ldrh	r0, [r1]
+	b	._357
+._348:
+	ldr	r0, ._359
+	ldrh	r0, [r0]
+._357:
+	mov	r1, sp
+	bl	CopyItemName
+	mov	r4, sp
+	b	._452
+._360:
+	.align	2, 0
+._359:
+	.word	gLastUsedItem
+._212:
+	ldr	r0, ._362
+	b	._361
+._363:
+	.align	2, 0
+._362:
+	.word	gLastUsedAbility
+._213:
+	ldr	r1, ._365
+	ldr	r0, ._365 + 4
+	b	._370
+._366:
+	.align	2, 0
+._365:
+	.word	gAbilitiesPerBank
+	.word	gBankAttacker
+._214:
+	ldr	r1, ._368
+	ldr	r0, ._368 + 4
+	b	._370
+._369:
+	.align	2, 0
+._368:
+	.word	gAbilitiesPerBank
+	.word	gBankTarget
+._215:
+	ldr	r1, ._371
+	ldr	r0, ._371 + 4
+	ldr	r2, ._371 + 8
+	add	r0, r0, r2
+	b	._370
+._372:
+	.align	2, 0
+._371:
+	.word	gAbilitiesPerBank
+	.word	+0x2000000
+	.word	0x16003
+._216:
+	ldr	r1, ._374
+	ldr	r0, ._374 + 4
+._370:
+	ldrb	r0, [r0]
+	add	r0, r0, r1
+._361:
+	ldrb	r1, [r0]
+	mov	r0, #0xd
+	mul	r1, r1, r0
+	ldr	r0, ._374 + 8
+	add	r4, r1, r0
+	b	._452
+._375:
+	.align	2, 0
+._374:
+	.word	gAbilitiesPerBank
+	.word	gEffectBank
+	.word	gAbilityNames
+._217:
+	ldr	r3, ._378
+	ldrh	r1, [r3]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x3
+	cmp	r1, r0
+	bne	._376	@cond_branch
+	add	r0, r1, #0
+	mov	r1, #0x0
+	b	._385
+._379:
+	.align	2, 0
+._378:
+	.word	gTrainerBattleOpponent
+._376:
+	ldr	r0, ._382
+	ldrh	r1, [r0]
+	mov	r2, #0x80
+	lsl	r2, r2, #0x1
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._380	@cond_branch
+	add	r0, r2, #0
+	mov	r1, #0x0
+	b	._385
+._383:
+	.align	2, 0
+._382:
+	.word	gBattleTypeFlags
+._380:
+	mov	r2, #0x80
+	lsl	r2, r2, #0x4
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._384	@cond_branch
+	add	r0, r2, #0
+	mov	r1, #0x0
+	b	._385
+._384:
+	ldrh	r1, [r3]
+	mov	r0, #0x0
+._385:
+	bl	de_sub_8041024
+	add	r4, r0, #0
+	b	._452
+._218:
+	ldr	r2, ._389
+	ldrh	r1, [r2]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x3
+	cmp	r1, r0
+	bne	._387	@cond_branch
+	mov	r0, sp
+	mov	r1, #0xff
+	mov	r2, #0x8
+	bl	gScriptFuncs_End+0x5c24
+	ldr	r1, ._389 + 4
+	mov	r0, sp
+	mov	r2, #0x7
+	bl	gScriptFuncs_End+0x5bc4
+	mov	r4, sp
+	b	._452
+._390:
+	.align	2, 0
+._389:
+	.word	gTrainerBattleOpponent
+	.word	+0x2017002
+._387:
+	ldr	r0, ._393
+	ldrh	r1, [r0]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._391	@cond_branch
+	mov	r0, sp
+	bl	get_trainer_name
+	mov	r4, sp
+	b	._452
+._394:
+	.align	2, 0
+._393:
+	.word	gBattleTypeFlags
+._391:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x4
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._395	@cond_branch
+	mov	r0, sp
+	bl	sub_8135FF4
+	mov	r4, sp
+	b	._452
+._395:
+	ldrh	r0, [r2]
+	lsl	r1, r0, #0x2
+	add	r1, r1, r0
+	lsl	r1, r1, #0x3
+	ldr	r0, ._398
+	add	r4, r1, r0
+	b	._452
+._399:
+	.align	2, 0
+._398:
+	.word	gTrainers+0x4
+._219:
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	ldr	r1, ._401
+	add	r4, r0, r1
+	b	._452
+._402:
+	.align	2, 0
+._401:
+	.word	gLinkPlayers+0x8
+._220:
+	ldr	r4, ._404
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x2
+	b	._406
+._405:
+	.align	2, 0
+._404:
+	.word	gLinkPlayers
+._221:
+	ldr	r4, ._407
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x1
+	b	._406
+._408:
+	.align	2, 0
+._407:
+	.word	gLinkPlayers
+._222:
+	ldr	r4, ._410
+	lsl	r0, r7, #0x3
+	sub	r0, r0, r7
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	ldrh	r1, [r0, #0x18]
+	mov	r0, #0x3
+._406:
+	eor	r0, r0, r1
+	bl	sub_803FC34
+	lsl	r1, r0, #0x3
+	sub	r1, r1, r0
+	lsl	r1, r1, #0x2
+	add	r4, r4, #0x8
+	add	r4, r1, r4
+	b	._452
+._411:
+	.align	2, 0
+._410:
+	.word	gLinkPlayers
+._223:
+	ldr	r0, ._413
+	ldr	r3, ._413 + 4
+	add	r0, r0, r3
+	ldrb	r0, [r0]
+	bl	sub_803FC34
+	lsl	r1, r0, #0x3
+	sub	r1, r1, r0
+	lsl	r1, r1, #0x2
+	ldr	r0, ._413 + 8
+	add	r4, r1, r0
+	b	._452
+._414:
+	.align	2, 0
+._413:
+	.word	+0x2000000
+	.word	0x16003
+	.word	gLinkPlayers+0x8
+._224:
+	ldr	r4, ._416
+	b	._452
+._417:
+	.align	2, 0
+._416:
+	.word	gSaveBlock2
+._225:
+	bl	sub_8082830
+	add	r4, r0, #0
+	b	._452
+._226:
+	ldr	r4, ._421
+	ldr	r5, ._421 + 4
+	add	r0, r4, r5
+	ldrb	r0, [r0]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._419	@cond_branch
+	ldr	r1, ._421 + 8
+	add	r0, r4, r1
+	ldrb	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._421 + 12
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._420
+._422:
+	.align	2, 0
+._421:
+	.word	+0x2000000
+	.word	0x16003
+	.word	0x1605e
+	.word	gEnemyParty
+._423:
+	mov	r2, r8
+	add	r0, r2, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+._420:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._423	@cond_branch
+._332:
+	ldr	r0, ._426
+	ldrh	r1, [r0]
+	mov	r0, #0x8
+	and	r0, r0, r1
+	ldr	r4, ._426 + 4
+	cmp	r0, #0
+	beq	._452	@cond_branch
+	ldr	r4, ._426 + 8
+	b	._452
+._427:
+	.align	2, 0
+._426:
+	.word	gBattleTypeFlags
+	.word	gUnknown_08400791
+	.word	gUnknown_08400797
+._419:
+	ldr	r3, ._429
+	add	r0, r4, r3
+	ldrb	r1, [r0]
+._333:
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._429 + 4
+._272:
+	add	r0, r0, r1
+	mov	r1, #0x2
+	mov	r2, sp
+	bl	GetMonData
+._288:
+	mov	r0, sp
+	bl	StringGetEnd10
+	mov	r4, sp
+	b	._452
+._430:
+	.align	2, 0
+._429:
+	.word	0x1605e
+	.word	gPlayerParty
+._227:
+	ldr	r0, ._433
+	bl	FlagGet
+	lsl	r0, r0, #0x18
+	ldr	r4, ._433 + 4
+	cmp	r0, #0
+	beq	._452	@cond_branch
+	ldr	r4, ._433 + 8
+	b	._452
+._434:
+	.align	2, 0
+._433:
+	.word	0x84b
+	.word	gUnknown_084009ED
+	.word	gUnknown_084009F7
+._230:
+	ldr	r0, ._436
+	b	._435
+._437:
+	.align	2, 0
+._436:
+	.word	gBankAttacker
+._231:
+	ldr	r0, ._440
+._435:
+	ldrb	r0, [r0]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	ldr	r4, ._440 + 4
+	cmp	r0, #0
+	bne	._452	@cond_branch
+	ldr	r4, ._440 + 8
+	b	._452
+._441:
+	.align	2, 0
+._440:
+	.word	gBankTarget
+	.word	gUnknown_084007A7
+	.word	gUnknown_084007AC
+._228:
+	ldr	r0, ._443
+	b	._442
+._444:
+	.align	2, 0
+._443:
+	.word	gBankAttacker
+._229:
+	ldr	r0, ._447
+._442:
+	ldrb	r0, [r0]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	ldr	r4, ._447 + 4
+	cmp	r0, #0
+	bne	._452	@cond_branch
+	ldr	r4, ._447 + 8
+	b	._452
+._448:
+	.align	2, 0
+._447:
+	.word	gBankTarget
+	.word	gUnknown_0840079C
+	.word	gUnknown_084007A1
+._232:
+	ldr	r0, ._450
+	b	._449
+._451:
+	.align	2, 0
+._450:
+	.word	gBankAttacker
+._233:
+	ldr	r0, ._457
+._449:
+	ldrb	r0, [r0]
+	bl	GetBankSide
+	lsl	r0, r0, #0x18
+	ldr	r4, ._457 + 4
+	cmp	r0, #0
+	bne	._452	@cond_branch
+	ldr	r4, ._457 + 8
+._452:
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	mov	r5, r9
+	ldrb	r2, [r5]
+	mov	r3, r9
+	add	r3, r3, #0x1
+	cmp	r0, #0xff
+	beq	._453	@cond_branch
+._454:
+	mov	r5, r8
+	add	r0, r5, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	add	r4, r4, #0x1
+	ldrb	r1, [r4]
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	bne	._454	@cond_branch
+._453:
+	lsl	r0, r2, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x21
+	bne	._456	@cond_branch
+	mov	r0, r8
+	add	r1, r0, r6
+	mov	r0, #0xfc
+	strb	r0, [r1]
+	add	r6, r6, #0x1
+	mov	r2, r8
+	add	r1, r2, r6
+	mov	r0, #0x9
+	strb	r0, [r1]
+	add	r6, r6, #0x1
+	b	._456
+._458:
+	.align	2, 0
+._457:
+	.word	gBankTarget
+	.word	gUnknown_084007B2
+	.word	gUnknown_084007B7
+._186:
+	mov	r3, r8
+	add	r0, r3, r6
+	strb	r1, [r0]
+	add	r6, r6, #0x1
+	mov	r3, r9
+	add	r3, r3, #0x1
+._456:
+	mov	r9, r3
+	ldrb	r1, [r3]
+._184:
+	add	r0, r1, #0
+	cmp	r0, #0xff
+	beq	._459	@cond_branch
+	bl	._460
+._459:
+	mov	r5, r8
+	add	r1, r5, r6
+	mov	r2, r9
+	ldrb	r0, [r2]
+	strb	r0, [r1]
+	add	r6, r6, #0x1
+	add	r0, r6, #0
+	add	sp, sp, #0xc
+	pop	{r3, r4}
+	mov	r8, r3
+	mov	r9, r4
+	pop	{r4, r5, r6, r7}
+	pop	{r1}
+	bx	r1
+.syntax unified
 	thumb_func_end StrCpyDecodeBattle
 
 	thumb_func_start sub_8121A68

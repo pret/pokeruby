@@ -4,14 +4,6 @@
 	.section .rodata
 
 	.align 2
-gBadgesTiles:: @ 83B5AB8
-	.incbin "graphics/trainer_card/badges.4bpp"
-
-@ XXX: what is this?
-	.align 2
-	.4byte 0x2000000
-
-	.align 2
 gUnknown_083B5EBC:: @ 83B5EBC
 	.4byte sub_8093864
 	.4byte sub_80938A8

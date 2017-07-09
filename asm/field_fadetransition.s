@@ -911,6 +911,16 @@ sub_80810DC: @ 80810DC
 _080810EC: .4byte sub_8081050
 	thumb_func_end sub_80810DC
 
+	thumb_func_start debug_sub_80888D8
+debug_sub_80888D8:
+    PUSH    {LR}
+    BL      debug_sub_8052E04
+    BL      sub_8080E88
+    BL      ScriptContext2_Enable
+    POP     {R0}
+    BX      R0
+	thumb_func_end debug_sub_80888D8
+
 	thumb_func_start task0A_fade_n_map_maybe
 task0A_fade_n_map_maybe: @ 80810F0
 	push {r4,r5,lr}

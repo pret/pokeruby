@@ -3,6 +3,31 @@
 
 	.section .rodata
 
+.ifdef DEBUG
+Str_842DBD0:
+	.string "CABLE CAR U$"
+
+Str_842DBDC:
+	.string "CABLE CAR D$"
+
+Str_842DBE8:
+	.string "ROULETTE1$"
+
+Str_842DBF2:
+	.string "ROULETTE3$"
+
+Str_842DBFC:
+	.string "View a MAIL$"
+
+    .align 2
+gUnkDebug4Menu::
+	.4byte Str_842DBD0, debug_sub_8138D74+1
+	.4byte Str_842DBDC, debug_sub_8138D8C+1
+	.4byte Str_842DBE8, debug_sub_8138C14+1
+	.4byte Str_842DBF2, debug_sub_8138C34+1
+	.4byte Str_842DBFC, debug_sub_810CD9C+1
+.endif
+
 	.align 2
 gCableCarMtChimneyTilemap:: @ 8401820
 	.incbin "graphics/misc/cable_car_mt_chimney_map.bin.lz"

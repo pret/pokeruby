@@ -1272,11 +1272,11 @@ static u8 sub_8091260(u16 num, u8, u8, u8);
 static void sub_8091304(const u8 *name, u8, u8);
 static void sub_8091458(u16 height, u8 i, u8 i1);
 static void sub_8091564(u16 weight, u8 i, u8 i1);
-static void sub_8091738(u16, u16, u16);
+void sub_8091738(u16, u16, u16);
 static void sub_80917CC(u16 i, u16 i1);
 static u16 sub_8091818(u8, u16, u16, u16);
-static u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
-static u8 sub_8091A4C(u16 gender, s16, s16, u16);
+u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+u8 sub_8091A4C(u16 gender, s16, s16, u16);
 static void sub_8091E54(u8);
 static void sub_809204C(u8);
 static void sub_809207C(u8);
@@ -4456,7 +4456,7 @@ static void sub_8091564(u16 arg0, u8 left, u8 top)
 }
 #endif
 
-static void sub_8091738(u16 num, u16 b, u16 c)
+void sub_8091738(u16 num, u16 b, u16 c)
 {
     u8 arr[0x80];
     u16 i;
@@ -4591,7 +4591,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
     return spriteId;
 }
 
-static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
 {
     u8 spriteId;
 

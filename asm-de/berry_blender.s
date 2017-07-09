@@ -7230,442 +7230,468 @@ _08051C54: .4byte 0x0000096c
 	thumb_func_end sub_8051C24
 
 	thumb_func_start sub_8051C58
-sub_8051C58: @ 8051C58
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x34
-	ldr r1, _08051C7C @ =gUnknown_03004854
-	ldr r0, [r1]
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0x6
-	bls _08051C72
-	b _08052006
-_08051C72:
-	lsls r0, 2
-	ldr r1, _08051C80 @ =_08051C84
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08051C7C: .4byte gUnknown_03004854
-_08051C80: .4byte _08051C84
-	.align 2, 0
-_08051C84:
-	.4byte _08051CA0
-	.4byte _08051CB6
-	.4byte _08051CD0
-	.4byte _08051D20
-	.4byte _08051F40
-	.4byte _08051F54
-	.4byte _08051FF4
-_08051CA0:
-	ldr r1, [r2]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r2]
-	movs r1, 0x98
-	lsls r1, 1
-	adds r0, r1
-	movs r1, 0x11
-	str r1, [r0]
-	b _08052006
-_08051CB6:
-	ldr r1, [r2]
-	movs r0, 0x98
-	lsls r0, 1
-	adds r2, r1, r0
-	ldr r0, [r2]
-	subs r0, 0xA
-	str r0, [r2]
-	cmp r0, 0
-	blt _08051CCA
-	b _08052006
-_08051CCA:
-	movs r0, 0
-	str r0, [r2]
-	b _08051FDE
-_08051CD0:
-	ldr r1, [r2]
-	movs r2, 0x98
-	lsls r2, 1
-	adds r1, r2
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	cmp r0, 0x14
-	bgt _08051CE4
-	b _08052006
-_08051CE4:
-	movs r6, 0
-_08051CE6:
-	ldr r4, _08051D18 @ =gUnknown_03004854
-	ldr r0, [r4]
-	adds r0, 0x50
-	adds r0, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08051D1C @ =gSprites
-	adds r0, r1
-	bl DestroySprite
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-	cmp r6, 0x2
-	bls _08051CE6
-	ldr r1, [r4]
-	movs r0, 0x98
-	lsls r0, 1
-	adds r2, r1, r0
-	movs r0, 0
-	str r0, [r2]
-	b _08051FDE
-	.align 2, 0
-_08051D18: .4byte gUnknown_03004854
-_08051D1C: .4byte gSprites
-_08051D20:
-	movs r0, 0x4
-	movs r1, 0x2
-	movs r2, 0x19
-	movs r3, 0x11
-	bl MenuDrawTextWindow
-	ldr r0, _08051F10 @ =gOtherText_ResultsOfBlending
-	movs r1, 0x5
-	movs r2, 0x3
-	movs r3, 0xA0
-	bl sub_8072BD8
-	movs r6, 0
-	ldr r1, _08051F14 @ =gUnknown_03004854
-	ldr r0, [r1]
-	adds r0, 0x88
-	add r2, sp, 0xC
-	mov r9, r2
-	mov r2, sp
-	adds r2, 0x16
-	str r2, [sp, 0x30]
-	ldrb r0, [r0]
-	cmp r6, r0
-	bcs _08051E04
-	mov r8, r1
-	ldr r0, _08051F18 @ =gLinkPlayers
-	mov r10, r0
-_08051D56:
-	mov r1, r8
-	ldr r2, [r1]
-	movs r1, 0xB2
-	lsls r1, 1
-	adds r0, r2, r1
-	adds r0, r6
-	ldrb r5, [r0]
-	mov r7, r9
-	lsls r1, r5, 4
-	adds r1, r2
-	movs r2, 0xBF
-	lsls r2, 1
-	adds r1, r2
-	adds r0, r7, 0
-	bl StringCopy
-	lsls r4, r5, 3
-	subs r4, r5
-	lsls r4, 2
-	mov r1, r10
-	adds r0, r4, r1
-	ldrb r1, [r0, 0x1A]
-	adds r0, r7, 0
-	bl ConvertInternationalString
-	adds r0, r7, 0
-	ldr r1, _08051F1C @ =gOtherText_Berry
-	bl de_sub_8073174
-	mov r2, r8
-	ldr r0, [r2]
-	adds r7, r0, 0
-	adds r7, 0xAB
-	adds r5, r6, 0x1
-	adds r0, r7, 0
-	adds r1, r5, 0
-	bl ConvertIntToDecimalString
-	adds r7, r0, 0
-	movs r1, 0
-	strb r1, [r7]
-	movs r0, 0xAD
-	strb r0, [r7, 0x1]
-	strb r1, [r7, 0x2]
-	adds r7, 0x3
-	ldr r0, _08051F20 @ =gLinkPlayers + 0x8
-	adds r4, r0
-	adds r0, r7, 0
-	adds r1, r4, 0
-	movs r2, 0x58
-	movs r3, 0
-	bl sub_8072C74
-	adds r7, r0, 0
-	add r1, sp, 0xC
-	movs r2, 0x9D
-	movs r3, 0
-	bl sub_8072C74
-	mov r2, r8
-	ldr r1, [r2]
-	adds r0, r1, 0
-	adds r0, 0xAB
-	ldr r3, _08051F24 @ =gUnknown_082165E9
-	adds r1, 0x88
-	ldrb r2, [r1]
-	adds r3, r2, r3
-	ldr r1, _08051F28 @ =gUnknown_082165EE
-	adds r2, r1
-	ldrb r1, [r2]
-	adds r2, r6, 0
-	muls r2, r1
-	ldrb r3, [r3]
-	adds r2, r3
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0x5
-	bl MenuPrint
-	lsls r5, 16
-	lsrs r6, r5, 16
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x88
-	ldrb r0, [r0]
-	cmp r6, r0
-	bcc _08051D56
-_08051E04:
-	ldr r6, _08051F14 @ =gUnknown_03004854
-	ldr r0, [r6]
-	adds r0, 0x5A
-	ldrh r0, [r0]
-	movs r1, 0x64
-	bl __umodsi3
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, r9
-	movs r2, 0x2
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	ldr r0, [r6]
-	adds r7, r0, 0
-	adds r7, 0xAB
-	ldr r1, _08051F2C @ =gOtherText_MaxSpeed
-	adds r0, r7, 0
-	bl StringCopy
-	adds r7, r0, 0
-	ldr r0, [r6]
-	adds r0, 0x5A
-	ldrh r0, [r0]
-	movs r1, 0x64
-	bl __udivsi3
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r7, 0
-	movs r2, 0x79
-	movs r3, 0x1
-	bl sub_8072C14
-	adds r7, r0, 0
-	movs r0, 0xB8
-	strb r0, [r7]
-	adds r7, 0x1
-	adds r0, r7, 0
-	mov r1, r9
-	movs r2, 0x88
-	movs r3, 0x1
-	bl sub_8072C74
-	adds r7, r0, 0
-	ldr r1, _08051F30 @ =gOtherText_RPM
-	bl StringCopy
-	ldr r0, [r6]
-	adds r0, 0xAB
-	movs r1, 0x5
-	movs r2, 0xD
-	bl MenuPrint
-	ldr r0, [r6]
-	movs r2, 0x96
-	lsls r2, 1
-	adds r0, r2
-	ldr r0, [r0]
-	movs r1, 0x3C
-	bl __udivsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x3C
-	bl __umodsi3
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r4, 0
-	movs r1, 0x3C
-	bl __udivsi3
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, r9
-	movs r2, 0x2
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	ldr r0, [sp, 0x30]
-	adds r1, r5, 0
-	movs r2, 0x2
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	ldr r0, [r6]
-	adds r7, r0, 0
-	adds r7, 0xAB
-	ldr r1, _08051F34 @ =gOtherText_RequiredTime
-	adds r0, r7, 0
-	bl StringCopy
-	adds r7, r0, 0
-	mov r1, r9
-	movs r2, 0x63
-	movs r3, 0x1
-	bl sub_8072C74
-	adds r7, r0, 0
-	ldr r1, _08051F38 @ =gOtherText_Min
-	bl StringAppend
-	adds r7, r0, 0
-	ldr r1, [sp, 0x30]
-	movs r2, 0x88
-	movs r3, 0x1
-	bl sub_8072C74
-	adds r7, r0, 0
-	ldr r1, _08051F3C @ =gOtherText_Sec
-	bl StringCopy
-	ldr r0, [r6]
-	adds r0, 0xAB
-	movs r1, 0x5
-	movs r2, 0xF
-	bl MenuPrint
-	ldr r1, [r6]
-	movs r0, 0x98
-	lsls r0, 1
-	adds r2, r1, r0
-	movs r0, 0
-	str r0, [r2]
-	b _08051FDE
-	.align 2, 0
-_08051F10: .4byte gOtherText_ResultsOfBlending
-_08051F14: .4byte gUnknown_03004854
-_08051F18: .4byte gLinkPlayers
-_08051F1C: .4byte gOtherText_Berry
-_08051F20: .4byte gLinkPlayers + 0x8
-_08051F24: .4byte gUnknown_082165E9
-_08051F28: .4byte gUnknown_082165EE
-_08051F2C: .4byte gOtherText_MaxSpeed
-_08051F30: .4byte gOtherText_RPM
-_08051F34: .4byte gOtherText_RequiredTime
-_08051F38: .4byte gOtherText_Min
-_08051F3C: .4byte gOtherText_Sec
-_08051F40:
-	ldr r0, _08051F50 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08052006
-	ldr r1, [r2]
-	b _08051FDE
-	.align 2, 0
-_08051F50: .4byte gMain
-_08051F54:
-	bl MenuZeroFillScreen
-	movs r0, 0
-	movs r1, 0xE
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	movs r6, 0
-	add r5, sp, 0x28
-	ldr r0, _08051FE8 @ =gUnknown_03004854
-	ldr r0, [r0]
-	adds r3, r0, 0
-	adds r3, 0x80
-	add r2, sp, 0x20
-_08051F72:
-	lsls r1, r6, 1
-	adds r0, r3, r1
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _08051F82
-	adds r1, r2, r1
-	subs r0, 0x85
-	strh r0, [r1]
-_08051F82:
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-	cmp r6, 0x3
-	bls _08051F72
-	bl sub_8050760
-	ldr r4, _08051FE8 @ =gUnknown_03004854
-	ldr r3, [r4]
-	movs r1, 0xBE
-	lsls r1, 1
-	adds r0, r3, r1
-	adds r1, r3, 0
-	adds r1, 0x88
-	ldrb r2, [r1]
-	subs r1, 0x2E
-	ldrh r1, [r1]
-	str r1, [sp]
-	adds r1, r5, 0
-	add r3, sp, 0x4
-	bl sub_8050520
-	ldr r1, [r4]
-	adds r1, 0xAB
-	adds r0, r5, 0
-	bl sub_805201C
-	ldr r0, _08051FEC @ =sub_8052BD0
-	movs r1, 0x6
-	bl CreateTask
-	ldr r0, [r4]
-	adds r0, 0xAB
-	movs r1, 0x1
-	movs r2, 0xF
-	bl MenuPrintMessage
-	ldr r0, _08051FF0 @ =gScriptItemId
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl RemoveBagItem
-	adds r0, r5, 0
-	bl sub_810CA34
-	ldr r1, [r4]
-_08051FDE:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08052006
-	.align 2, 0
-_08051FE8: .4byte gUnknown_03004854
-_08051FEC: .4byte sub_8052BD0
-_08051FF0: .4byte gScriptItemId
-_08051FF4:
-	bl MenuUpdateWindowText
-	lsls r0, 24
-	cmp r0, 0
-	beq _08052006
-	bl sub_8051C24
-	movs r0, 0x1
-	b _08052008
-_08052006:
-	movs r0, 0
-_08052008:
-	add sp, 0x34
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
+sub_8051C58:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, sl
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6, r7}
+	add	sp, sp, #0xffffffcc
+	ldr	r1, ._1199
+	ldr	r0, [r1]
+	ldrb	r0, [r0]
+	add	r2, r1, #0
+	cmp	r0, #0x6
+	bls	._1197	@cond_branch
+	b	._1233
+._1197:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1199 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._1200:
+	.align	2, 0
+._1199:
+	.word	gUnknown_03004854
+	.word	._1201
+._1201:
+	.word	._1202
+	.word	._1203
+	.word	._1204
+	.word	._1205
+	.word	._1206
+	.word	._1207
+	.word	._1208
+._1202:
+	ldr	r1, [r2]
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	ldr	r0, [r2]
+	mov	r1, #0x98
+	lsl	r1, r1, #0x1
+	add	r0, r0, r1
+	mov	r1, #0x11
+	str	r1, [r0]
+	b	._1233
+._1203:
+	ldr	r1, [r2]
+	mov	r0, #0x98
+	lsl	r0, r0, #0x1
+	add	r2, r1, r0
+	ldr	r0, [r2]
+	sub	r0, r0, #0xa
+	str	r0, [r2]
+	cmp	r0, #0
+	blt	._1210	@cond_branch
+	b	._1233
+._1210:
+	mov	r0, #0x0
+	str	r0, [r2]
+	b	._1225
+._1204:
+	ldr	r1, [r2]
+	mov	r2, #0x98
+	lsl	r2, r2, #0x1
+	add	r1, r1, r2
+	ldr	r0, [r1]
+	add	r0, r0, #0x1
+	str	r0, [r1]
+	cmp	r0, #0x14
+	bgt	._1213	@cond_branch
+	b	._1233
+._1213:
+	mov	r6, #0x0
+._1215:
+	ldr	r4, ._1217
+	ldr	r0, [r4]
+	add	r0, r0, #0x50
+	add	r0, r0, r6
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	ldr	r1, ._1217 + 4
+	add	r0, r0, r1
+	bl	DestroySprite
+	add	r0, r6, #1
+	lsl	r0, r0, #0x10
+	lsr	r6, r0, #0x10
+	cmp	r6, #0x2
+	bls	._1215	@cond_branch
+	ldr	r1, [r4]
+	mov	r0, #0x98
+	lsl	r0, r0, #0x1
+	add	r2, r1, r0
+	mov	r0, #0x0
+	str	r0, [r2]
+	b	._1225
+._1218:
+	.align	2, 0
+._1217:
+	.word	gUnknown_03004854
+	.word	gSprites
+._1205:
+	mov	r0, #0x4
+	mov	r1, #0x2
+	mov	r2, #0x19
+	mov	r3, #0x11
+	bl	MenuDrawTextWindow
+	ldr	r0, ._1222
+	mov	r1, #0x5
+	mov	r2, #0x3
+	mov	r3, #0xa0
+	bl	sub_8072BD8
+	mov	r6, #0x0
+	ldr	r1, ._1222 + 4
+	ldr	r0, [r1]
+	add	r0, r0, #0x88
+	add	r2, sp, #0xc
+	mov	r8, r2
+	mov	r2, sp
+	add	r2, r2, #0x16
+	str	r2, [sp, #0x30]
+	ldrb	r0, [r0]
+	cmp	r6, r0
+	bcs	._1219	@cond_branch
+	mov	r9, r1
+	ldr	r0, ._1222 + 8
+	mov	sl, r0
+._1220:
+	mov	r1, r9
+	ldr	r2, [r1]
+	mov	r1, #0xb2
+	lsl	r1, r1, #0x1
+	add	r0, r2, r1
+	add	r0, r0, r6
+	ldrb	r4, [r0]
+	lsl	r1, r4, #0x4
+	add	r1, r1, r2
+	mov	r2, #0xbf
+	lsl	r2, r2, #0x1
+	add	r1, r1, r2
+	mov	r0, r8
+	bl	StringCopy
+	lsl	r5, r4, #0x3
+	sub	r5, r5, r4
+	lsl	r5, r5, #0x2
+	mov	r1, sl
+	add	r0, r5, r1
+	ldrb	r1, [r0, #0x1a]
+	mov	r0, r8
+	bl	ConvertInternationalString
+	mov	r0, r8
+	ldr	r1, ._1222 + 12
+	bl	de_sub_8073174
+	mov	r2, r9
+	ldr	r0, [r2]
+	add	r7, r0, #0
+	add	r7, r7, #0xab
+	add	r4, r6, #1
+	add	r0, r7, #0
+	add	r1, r4, #0
+	bl	ConvertIntToDecimalString
+	add	r7, r0, #0
+	mov	r1, #0x0
+	strb	r1, [r7]
+	mov	r0, #0xad
+	strb	r0, [r7, #0x1]
+	strb	r1, [r7, #0x2]
+	add	r7, r7, #0x3
+	ldr	r0, ._1222 + 16
+	add	r5, r5, r0
+	add	r0, r7, #0
+	add	r1, r5, #0
+	mov	r2, #0x58
+	mov	r3, #0x0
+	bl	sub_8072C74
+	add	r7, r0, #0
+	add	r1, sp, #0xc
+	mov	r2, #0x9d
+	mov	r3, #0x0
+	bl	sub_8072C74
+	mov	r2, r9
+	ldr	r1, [r2]
+	add	r0, r1, #0
+	add	r0, r0, #0xab
+	ldr	r3, ._1222 + 20
+	add	r1, r1, #0x88
+	ldrb	r2, [r1]
+	add	r3, r2, r3
+	ldr	r1, ._1222 + 24
+	add	r2, r2, r1
+	ldrb	r1, [r2]
+	add	r2, r6, #0
+	mul	r2, r2, r1
+	ldrb	r3, [r3]
+	add	r2, r2, r3
+	lsl	r2, r2, #0x18
+	lsr	r2, r2, #0x18
+	mov	r1, #0x5
+	bl	MenuPrint
+	lsl	r4, r4, #0x10
+	lsr	r6, r4, #0x10
+	mov	r1, r9
+	ldr	r0, [r1]
+	add	r0, r0, #0x88
+	ldrb	r0, [r0]
+	cmp	r6, r0
+	bcc	._1220	@cond_branch
+._1219:
+	ldr	r6, ._1222 + 4
+	ldr	r0, [r6]
+	add	r0, r0, #0x5a
+	ldrh	r0, [r0]
+	mov	r1, #0x64
+	bl	gScriptFuncs_End+0x43d0
+	add	r1, r0, #0
+	lsl	r1, r1, #0x10
+	lsr	r1, r1, #0x10
+	mov	r0, r8
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, [r6]
+	add	r7, r0, #0
+	add	r7, r7, #0xab
+	ldr	r1, ._1222 + 28
+	add	r0, r7, #0
+	bl	StringCopy
+	add	r7, r0, #0
+	ldr	r0, [r6]
+	add	r0, r0, #0x5a
+	ldrh	r0, [r0]
+	mov	r1, #0x64
+	bl	gScriptFuncs_End+0x4358
+	add	r1, r0, #0
+	lsl	r1, r1, #0x10
+	lsr	r1, r1, #0x10
+	add	r0, r7, #0
+	mov	r2, #0x79
+	mov	r3, #0x1
+	bl	sub_8072C14
+	add	r7, r0, #0
+	mov	r0, #0xb8
+	strb	r0, [r7]
+	add	r7, r7, #0x1
+	add	r0, r7, #0
+	mov	r1, r8
+	mov	r2, #0x88
+	mov	r3, #0x1
+	bl	sub_8072C74
+	add	r7, r0, #0
+	ldr	r1, ._1222 + 32
+	bl	StringCopy
+	ldr	r0, [r6]
+	add	r0, r0, #0xab
+	mov	r1, #0x5
+	mov	r2, #0xd
+	bl	MenuPrint
+	ldr	r0, [r6]
+	mov	r2, #0x96
+	lsl	r2, r2, #0x1
+	add	r0, r0, r2
+	ldr	r0, [r0]
+	mov	r1, #0x3c
+	bl	gScriptFuncs_End+0x4358
+	add	r4, r0, #0
+	lsl	r4, r4, #0x10
+	lsr	r4, r4, #0x10
+	add	r0, r4, #0
+	mov	r1, #0x3c
+	bl	gScriptFuncs_End+0x43d0
+	add	r5, r0, #0
+	lsl	r5, r5, #0x10
+	lsr	r5, r5, #0x10
+	add	r0, r4, #0
+	mov	r1, #0x3c
+	bl	gScriptFuncs_End+0x4358
+	add	r1, r0, #0
+	lsl	r1, r1, #0x10
+	lsr	r1, r1, #0x10
+	mov	r0, r8
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, [sp, #0x30]
+	add	r1, r5, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, [r6]
+	add	r7, r0, #0
+	add	r7, r7, #0xab
+	ldr	r1, ._1222 + 36
+	add	r0, r7, #0
+	bl	StringCopy
+	add	r7, r0, #0
+	mov	r1, r8
+	mov	r2, #0x63
+	mov	r3, #0x1
+	bl	sub_8072C74
+	add	r7, r0, #0
+	ldr	r1, ._1222 + 40
+	bl	StringAppend
+	add	r7, r0, #0
+	ldr	r1, [sp, #0x30]
+	mov	r2, #0x88
+	mov	r3, #0x1
+	bl	sub_8072C74
+	add	r7, r0, #0
+	ldr	r1, ._1222 + 44
+	bl	StringCopy
+	ldr	r0, [r6]
+	add	r0, r0, #0xab
+	mov	r1, #0x5
+	mov	r2, #0xf
+	bl	MenuPrint
+	ldr	r1, [r6]
+	mov	r0, #0x98
+	lsl	r0, r0, #0x1
+	add	r2, r1, r0
+	mov	r0, #0x0
+	str	r0, [r2]
+	b	._1225
+._1223:
+	.align	2, 0
+._1222:
+	.word	gOtherText_ResultsOfBlending
+	.word	gUnknown_03004854
+	.word	gLinkPlayers
+	.word	gOtherText_Berry
+	.word	gLinkPlayers+0x8
+	.word	gUnknown_082165E9
+	.word	gUnknown_082165EE
+	.word	gOtherText_MaxSpeed
+	.word	gOtherText_RPM
+	.word	gOtherText_RequiredTime
+	.word	gOtherText_Min
+	.word	gOtherText_Sec
+._1206:
+	ldr	r0, ._1226
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._1233	@cond_branch
+	ldr	r1, [r2]
+	b	._1225
+._1227:
+	.align	2, 0
+._1226:
+	.word	gMain
+._1207:
+	bl	MenuZeroFillScreen
+	mov	r0, #0x0
+	mov	r1, #0xe
+	mov	r2, #0x1d
+	mov	r3, #0x13
+	bl	MenuDrawTextWindow
+	mov	r6, #0x0
+	add	r1, sp, #0xc
+	mov	r8, r1
+	add	r5, sp, #0x28
+	ldr	r0, ._1231
+	ldr	r0, [r0]
+	add	r3, r0, #0
+	add	r3, r3, #0x80
+	add	r2, sp, #0x20
+._1229:
+	lsl	r1, r6, #0x1
+	add	r0, r3, r1
+	ldrh	r0, [r0]
+	cmp	r0, #0
+	beq	._1228	@cond_branch
+	add	r1, r2, r1
+	sub	r0, r0, #0x85
+	strh	r0, [r1]
+._1228:
+	add	r0, r6, #1
+	lsl	r0, r0, #0x10
+	lsr	r6, r0, #0x10
+	cmp	r6, #0x3
+	bls	._1229	@cond_branch
+	bl	sub_8050760
+	ldr	r4, ._1231
+	ldr	r3, [r4]
+	mov	r2, #0xbe
+	lsl	r2, r2, #0x1
+	add	r0, r3, r2
+	add	r1, r3, #0
+	add	r1, r1, #0x88
+	ldrb	r2, [r1]
+	sub	r1, r1, #0x2e
+	ldrh	r1, [r1]
+	str	r1, [sp]
+	add	r1, r5, #0
+	add	r3, sp, #0x4
+	bl	sub_8050520
+	ldr	r1, [r4]
+	add	r1, r1, #0xab
+	add	r0, r5, #0
+	bl	sub_805201C
+	ldr	r0, ._1231 + 4
+	mov	r1, #0x6
+	bl	CreateTask
+	bl	sub_8007E40
+	add	r1, r0, #0
+	mov	r0, r8
+	mov	r2, #0x0
+	mov	r3, #0x4
+	bl	ConvertIntToHexStringN
+	ldr	r1, ._1231 + 8
+	mov	r0, r8
+	bl	StringAppend
+	ldr	r0, [r4]
+	add	r0, r0, #0xab
+	mov	r1, r8
+	bl	StringAppend
+	ldr	r0, [r4]
+	add	r0, r0, #0xab
+	mov	r1, #0x1
+	mov	r2, #0xf
+	bl	MenuPrintMessage
+	ldr	r0, ._1231 + 12
+	ldrh	r0, [r0]
+	mov	r1, #0x1
+	bl	RemoveBagItem
+	add	r0, r5, #0
+	bl	sub_810CA34
+	ldr	r1, [r4]
+._1225:
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	b	._1233
+._1232:
+	.align	2, 0
+._1231:
+	.word	gUnknown_03004854
+	.word	sub_8052BD0+1
+	.word	gUnknown_08216249
+	.word	gScriptItemId
+._1208:
+	bl	MenuUpdateWindowText
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._1233	@cond_branch
+	bl	sub_8051C24
+	mov	r0, #0x1
+	b	._1234
+._1233:
+	mov	r0, #0x0
+._1234:
+	add	sp, sp, #0x34
+	pop	{r3, r4, r5}
+	mov	r8, r3
+	mov	r9, r4
+	mov	sl, r5
+	pop	{r4, r5, r6, r7}
+	pop	{r1}
+	bx	r1
+.syntax unified
 	thumb_func_end sub_8051C58
 
 	thumb_func_start sub_805201C

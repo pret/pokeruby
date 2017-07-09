@@ -2719,214 +2719,239 @@ _08034BF8: .4byte sub_8033160
 	thumb_func_end sub_8034B74
 
 	thumb_func_start OpponentHandleTrainerThrow
-OpponentHandleTrainerThrow: @ 8034BFC
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	ldr r3, _08034C18 @ =gTrainerBattleOpponent
-	ldrh r1, [r3]
-	movs r0, 0x80
-	lsls r0, 3
-	cmp r1, r0
-	bne _08034C1C
-	bl GetSecretBaseTrainerPicIndex
-	b _08034C42
-	.align 2, 0
-_08034C18: .4byte gTrainerBattleOpponent
-_08034C1C:
-	ldr r0, _08034C30 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x80
-	lsls r0, 1
-	ands r0, r1
-	cmp r0, 0
-	beq _08034C34
-	bl get_trainer_class_pic_index
-	b _08034C42
-	.align 2, 0
-_08034C30: .4byte gBattleTypeFlags
-_08034C34:
-	movs r0, 0x80
-	lsls r0, 4
-	ands r0, r1
-	cmp r0, 0
-	beq _08034C48
-	bl sub_8135FBC
-_08034C42:
-	lsls r0, 24
-	lsrs r0, 24
-	b _08034C56
-_08034C48:
-	ldr r2, _08034D88 @ =gTrainers
-	ldrh r1, [r3]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r0, [r0, 0x3]
-_08034C56:
-	mov r9, r0
-	ldr r0, _08034D8C @ =gActiveBank
-	mov r8, r0
-	ldrb r1, [r0]
-	mov r0, r9
-	bl sub_8031A6C
-	mov r1, r8
-	ldrb r0, [r1]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r0, r9
-	bl GetMonSpriteTemplate_803C5A0
-	ldr r5, _08034D90 @ =gUnknown_02024E8C
-	ldr r1, _08034D94 @ =gTrainerFrontPicCoords
-	mov r2, r9
-	lsls r0, r2, 2
-	adds r0, r1
-	ldrb r0, [r0]
-	movs r4, 0x8
-	subs r4, r0
-	lsls r4, 18
-	movs r0, 0xA0
-	lsls r0, 14
-	adds r4, r0
-	asrs r4, 16
-	mov r1, r8
-	ldrb r0, [r1]
-	bl sub_8079E90
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	adds r0, r5, 0
-	movs r1, 0xB0
-	adds r2, r4, 0
-	bl CreateSprite
-	ldr r5, _08034D98 @ =gObjectBankIDs
-	mov r2, r8
-	ldrb r1, [r2]
-	adds r1, r5
-	strb r0, [r1]
-	ldr r4, _08034D9C @ =gSprites
-	ldrb r0, [r2]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldr r1, _08034DA0 @ =0x0000ff10
-	strh r1, [r0, 0x24]
-	ldrb r0, [r2]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x2
-	strh r1, [r0, 0x2E]
-	ldr r0, _08034DA4 @ =gTrainerFrontPicPaletteTable
-	mov r1, r9
-	lsls r6, r1, 3
-	adds r0, r6, r0
-	ldrh r0, [r0, 0x4]
-	bl IndexOfSpritePaletteTag
-	mov r2, r8
-	ldrb r1, [r2]
-	adds r1, r5
-	ldrb r1, [r1]
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r4
-	lsls r0, 4
-	ldrb r3, [r2, 0x5]
-	movs r1, 0xF
-	ands r1, r3
-	orrs r1, r0
-	strb r1, [r2, 0x5]
-	mov r1, r8
-	ldrb r0, [r1]
-	adds r0, r5
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrh r0, [r1, 0x4]
-	lsls r0, 22
-	lsrs r0, 22
-	strh r0, [r1, 0x38]
-	ldr r0, _08034DA8 @ =gTrainerFrontPicTable
-	adds r6, r0
-	ldrh r0, [r6, 0x6]
-	bl GetSpriteTileStartByTag
-	mov r2, r8
-	ldrb r1, [r2]
-	adds r1, r5
-	ldrb r2, [r1]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r4
-	ldr r2, _08034DAC @ =0x000003ff
-	ands r2, r0
-	ldrh r3, [r1, 0x4]
-	ldr r0, _08034DB0 @ =0xfffffc00
-	ands r0, r3
-	orrs r0, r2
-	strh r0, [r1, 0x4]
-	mov r1, r8
-	ldrb r0, [r1]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	mov r2, r9
-	strh r2, [r0, 0x6]
-	mov r1, r8
-	ldrb r0, [r1]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r4, 0x1C
-	adds r0, r4
-	ldr r1, _08034DB4 @ =sub_80313A0
-	str r1, [r0]
-	ldr r1, _08034DB8 @ =gBattleBankFunc
-	mov r2, r8
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, _08034DBC @ =sub_8032B4C
-	str r1, [r0]
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08034D88: .4byte gTrainers
-_08034D8C: .4byte gActiveBank
-_08034D90: .4byte gUnknown_02024E8C
-_08034D94: .4byte gTrainerFrontPicCoords
-_08034D98: .4byte gObjectBankIDs
-_08034D9C: .4byte gSprites
-_08034DA0: .4byte 0x0000ff10
-_08034DA4: .4byte gTrainerFrontPicPaletteTable
-_08034DA8: .4byte gTrainerFrontPicTable
-_08034DAC: .4byte 0x000003ff
-_08034DB0: .4byte 0xfffffc00
-_08034DB4: .4byte sub_80313A0
-_08034DB8: .4byte gBattleBankFunc
-_08034DBC: .4byte sub_8032B4C
+OpponentHandleTrainerThrow:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6}
+	ldr	r0, ._480
+	ldrb	r1, [r0]
+	mov	r0, #0x10
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._478	@cond_branch
+	ldr	r0, ._480 + 4
+	ldr	r1, ._480 + 8
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	b	._491
+._481:
+	.align	2, 0
+._480:
+	.word	gUnknown_02023A14+0x50
+	.word	+0x2000000
+	.word	0x160a3
+._478:
+	ldr	r3, ._484
+	ldrh	r1, [r3]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x3
+	cmp	r1, r0
+	bne	._482	@cond_branch
+	bl	GetSecretBaseTrainerPicIndex
+	b	._487
+._485:
+	.align	2, 0
+._484:
+	.word	gTrainerBattleOpponent
+._482:
+	ldr	r0, ._488
+	ldrh	r1, [r0]
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._486	@cond_branch
+	bl	get_trainer_class_pic_index
+	b	._487
+._489:
+	.align	2, 0
+._488:
+	.word	gBattleTypeFlags
+._486:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x4
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._490	@cond_branch
+	bl	sub_8135FBC
+._487:
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	b	._491
+._490:
+	ldr	r2, ._492
+	ldrh	r1, [r3]
+	lsl	r0, r1, #0x2
+	add	r0, r0, r1
+	lsl	r0, r0, #0x3
+	add	r0, r0, r2
+	ldrb	r0, [r0, #0x3]
+._491:
+	mov	r9, r0
+	ldr	r2, ._492 + 4
+	mov	r8, r2
+	ldrb	r1, [r2]
+	bl	sub_8031A6C
+	mov	r1, r8
+	ldrb	r0, [r1]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	lsl	r1, r1, #0x18
+	lsr	r1, r1, #0x18
+	mov	r0, r9
+	bl	GetMonSpriteTemplate_803C5A0
+	ldr	r5, ._492 + 8
+	ldr	r1, ._492 + 12
+	mov	r2, r9
+	lsl	r0, r2, #0x2
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	mov	r4, #0x8
+	sub	r4, r4, r0
+	lsl	r4, r4, #0x12
+	mov	r0, #0xa0
+	lsl	r0, r0, #0xe
+	add	r4, r4, r0
+	asr	r4, r4, #0x10
+	mov	r1, r8
+	ldrb	r0, [r1]
+	bl	sub_8079E90
+	add	r3, r0, #0
+	lsl	r3, r3, #0x18
+	lsr	r3, r3, #0x18
+	add	r0, r5, #0
+	mov	r1, #0xb0
+	add	r2, r4, #0
+	bl	CreateSprite
+	ldr	r5, ._492 + 16
+	mov	r2, r8
+	ldrb	r1, [r2]
+	add	r1, r1, r5
+	strb	r0, [r1]
+	ldr	r4, ._492 + 20
+	ldrb	r0, [r2]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	ldr	r1, ._492 + 24
+	strh	r1, [r0, #0x24]
+	ldrb	r0, [r2]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	mov	r1, #0x2
+	strh	r1, [r0, #0x2e]
+	ldr	r0, ._492 + 28
+	mov	r1, r9
+	lsl	r6, r1, #0x3
+	add	r0, r6, r0
+	ldrh	r0, [r0, #0x4]
+	bl	IndexOfSpritePaletteTag
+	mov	r2, r8
+	ldrb	r1, [r2]
+	add	r1, r1, r5
+	ldrb	r1, [r1]
+	lsl	r2, r1, #0x4
+	add	r2, r2, r1
+	lsl	r2, r2, #0x2
+	add	r2, r2, r4
+	lsl	r0, r0, #0x4
+	ldrb	r3, [r2, #0x5]
+	mov	r1, #0xf
+	and	r1, r1, r3
+	orr	r1, r1, r0
+	strb	r1, [r2, #0x5]
+	mov	r1, r8
+	ldrb	r0, [r1]
+	add	r0, r0, r5
+	ldrb	r0, [r0]
+	lsl	r1, r0, #0x4
+	add	r1, r1, r0
+	lsl	r1, r1, #0x2
+	add	r1, r1, r4
+	ldrh	r0, [r1, #0x4]
+	lsl	r0, r0, #0x16
+	lsr	r0, r0, #0x16
+	strh	r0, [r1, #0x38]
+	ldr	r0, ._492 + 32
+	add	r6, r6, r0
+	ldrh	r0, [r6, #0x6]
+	bl	GetSpriteTileStartByTag
+	mov	r2, r8
+	ldrb	r1, [r2]
+	add	r1, r1, r5
+	ldrb	r2, [r1]
+	lsl	r1, r2, #0x4
+	add	r1, r1, r2
+	lsl	r1, r1, #0x2
+	add	r1, r1, r4
+	ldr	r2, ._492 + 36
+	and	r2, r2, r0
+	ldrh	r3, [r1, #0x4]
+	ldr	r0, ._492 + 40
+	and	r0, r0, r3
+	orr	r0, r0, r2
+	strh	r0, [r1, #0x4]
+	mov	r1, r8
+	ldrb	r0, [r1]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r4
+	mov	r2, r9
+	strh	r2, [r0, #0x6]
+	mov	r1, r8
+	ldrb	r0, [r1]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r4, r4, #0x1c
+	add	r0, r0, r4
+	ldr	r1, ._492 + 44
+	str	r1, [r0]
+	ldr	r1, ._492 + 48
+	mov	r2, r8
+	ldrb	r0, [r2]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._492 + 52
+	str	r1, [r0]
+	pop	{r3, r4}
+	mov	r8, r3
+	mov	r9, r4
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+._493:
+	.align	2, 0
+._492:
+	.word	gTrainers
+	.word	gActiveBank
+	.word	gUnknown_02024E8C
+	.word	gTrainerFrontPicCoords
+	.word	gObjectBankIDs
+	.word	gSprites
+	.word	0xff10
+	.word	gTrainerFrontPicPaletteTable
+	.word	gTrainerFrontPicTable
+	.word	0x3ff
+	.word	0xfffffc00
+	.word	sub_80313A0+1
+	.word	gBattleBankFunc
+	.word	sub_8032B4C+1
+.syntax unified
 	thumb_func_end OpponentHandleTrainerThrow
 
 	thumb_func_start OpponentHandleTrainerSlide
@@ -3728,177 +3753,311 @@ sub_803541C: @ 803541C
 	thumb_func_end sub_803541C
 
 	thumb_func_start sub_8035428
-sub_8035428: @ 8035428
-	push {r4-r6,lr}
-	ldr r6, _0803545C @ =gActiveBank
-	ldrb r0, [r6]
-	lsls r0, 9
-	ldr r1, _08035460 @ =gUnknown_02023A64
-	adds r5, r0, r1
-	ldr r0, _08035464 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x93
-	lsls r0, 3
-	ands r0, r1
-	cmp r0, 0
-	beq _080354F8
-	bl BattleAI_SetupAIData
-	bl BattleAI_GetAIActionToUse
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x4
-	beq _08035468
-	cmp r4, 0x5
-	bne _08035474
-	movs r0, 0x1
-	movs r1, 0x4
-	b _0803546C
-	.align 2, 0
-_0803545C: .4byte gActiveBank
-_08035460: .4byte gUnknown_02023A64
-_08035464: .4byte gBattleTypeFlags
-_08035468:
-	movs r0, 0x1
-	movs r1, 0x3
-_0803546C:
-	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _080354E0
-_08035474:
-	ldr r3, _080354E8 @ =gBattleMoves
-	lsls r0, r4, 1
-	adds r2, r5, r0
-	ldrh r1, [r2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x12
-	ands r0, r1
-	cmp r0, 0
-	beq _08035494
-	ldr r1, _080354EC @ =gBankTarget
-	ldrb r0, [r6]
-	strb r0, [r1]
-_08035494:
-	ldrh r1, [r2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _080354CE
-	movs r0, 0
-	bl GetBankByPlayerAI
-	ldr r5, _080354EC @ =gBankTarget
-	strb r0, [r5]
-	ldr r0, _080354F0 @ =gAbsentBankFlags
-	ldrb r1, [r0]
-	ldr r2, _080354F4 @ =gBitTable
-	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _080354CE
-	movs r0, 0x2
-	bl GetBankByPlayerAI
-	strb r0, [r5]
-_080354CE:
-	ldr r0, _080354EC @ =gBankTarget
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r4, r0
-	movs r0, 0x1
-	movs r1, 0xA
-	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-_080354E0:
-	bl OpponentBufferExecCompleted
-	b _0803558A
-	.align 2, 0
-_080354E8: .4byte gBattleMoves
-_080354EC: .4byte gBankTarget
-_080354F0: .4byte gAbsentBankFlags
-_080354F4: .4byte gBitTable
-_080354F8:
-	movs r6, 0x3
-_080354FA:
-	bl Random
-	adds r4, r0, 0
-	ands r4, r6
-	lsls r0, r4, 1
-	adds r0, r5, r0
-	ldrh r2, [r0]
-	cmp r2, 0
-	beq _080354FA
-	ldr r1, _08035534 @ =gBattleMoves
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x12
-	ands r0, r1
-	cmp r0, 0
-	beq _0803553C
-	ldr r0, _08035538 @ =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r4, r0
-	movs r0, 0x1
-	movs r1, 0xA
-	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _08035586
-	.align 2, 0
-_08035534: .4byte gBattleMoves
-_08035538: .4byte gActiveBank
-_0803553C:
-	ldr r0, _0803556C @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08035570
-	bl Random
-	movs r1, 0x2
-	ands r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r1, 0
-	bl GetBankByPlayerAI
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 16
-	orrs r2, r4
-	movs r0, 0x1
-	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _08035586
-	.align 2, 0
-_0803556C: .4byte gBattleTypeFlags
-_08035570:
-	movs r0, 0
-	bl GetBankByPlayerAI
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 16
-	orrs r2, r4
-	movs r0, 0x1
-	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
-_08035586:
-	bl OpponentBufferExecCompleted
-_0803558A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
+sub_8035428:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, sl
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6, r7}
+	ldr	r6, ._549
+	ldrb	r0, [r6]
+	lsl	r0, r0, #0x9
+	ldr	r1, ._549 + 4
+	add	r5, r0, r1
+	ldr	r2, ._549 + 8
+	ldrb	r1, [r2]
+	mov	r0, #0x4
+	and	r0, r0, r1
+	mov	sl, r6
+	cmp	r0, #0
+	beq	._546	@cond_branch
+	ldr	r0, ._549 + 12
+	mov	r9, r0
+	ldr	r1, ._549 + 16
+	mov	ip, r1
+	add	r7, r6, #0
+	mov	r0, #0x2
+	mov	r8, r0
+	ldr	r6, ._549 + 20
+._552:
+	ldrb	r1, [r7]
+	mov	r0, r8
+	and	r0, r0, r1
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x19
+	add	r0, r0, r6
+	mov	r1, ip
+	add	r3, r0, r1
+	ldrb	r1, [r3]
+	lsl	r0, r1, #0x1
+	add	r0, r5, r0
+	ldrh	r2, [r0]
+	add	r4, r1, #0
+	cmp	r2, #0
+	beq	._547	@cond_branch
+	add	r0, r4, #1
+	strb	r0, [r3]
+	b	._548
+._550:
+	.align	2, 0
+._549:
+	.word	gActiveBank
+	.word	gUnknown_02023A64
+	.word	gUnknown_02023A14+0x50
+	.word	gBattleMoves
+	.word	+0x2000000
+	.word	0x1609e
+._547:
+	strb	r2, [r3]
+._548:
+	ldrb	r0, [r7]
+	mov	r1, r8
+	and	r1, r1, r0
+	lsl	r1, r1, #0x18
+	lsr	r1, r1, #0x19
+	add	r1, r1, r6
+	add r1, r1, ip
+	ldrb	r0, [r1]
+	cmp	r0, #0x3
+	bls	._551	@cond_branch
+	mov	r0, #0x0
+	strb	r0, [r1]
+._551:
+	cmp	r2, #0
+	beq	._552	@cond_branch
+	lsl	r0, r2, #0x1
+	add	r0, r0, r2
+	lsl	r0, r0, #0x2
+	add r0, r0, r9
+	ldrb	r3, [r0, #0x6]
+	mov	r0, #0x12
+	and	r0, r0, r3
+	cmp	r0, #0
+	beq	._553	@cond_branch
+	mov	r1, sl
+	ldrb	r0, [r1]
+	b	._561
+._553:
+	ldr	r0, ._559
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._557	@cond_branch
+	ldr	r0, ._559 + 4
+	ldrb	r1, [r0]
+	mov	r5, #0x2
+	add	r0, r5, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._556	@cond_branch
+	cmp	r3, #0
+	bne	._557	@cond_branch
+	mov	r1, sl
+	ldrb	r0, [r1]
+	bl	GetBankIdentity
+	mov	r1, #0x2
+	eor	r0, r0, r1
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	b	._558
+._560:
+	.align	2, 0
+._559:
+	.word	gBattleTypeFlags
+	.word	gUnknown_02023A14+0x50
+._556:
+	bl	Random
+	add	r1, r5, #0
+	and	r1, r1, r0
+	lsl	r1, r1, #0x10
+	lsr	r0, r1, #0x10
+	b	._561
+._557:
+	mov	r0, #0x0
+._558:
+	bl	GetBankByPlayerAI
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+._561:
+	lsl	r2, r0, #0x8
+	orr	r2, r2, r4
+	mov	r0, #0x1
+	mov	r1, #0xa
+._569:
+	bl	dp01_build_cmdbuf_x21_a_bb
+._573:
+	bl	OpponentBufferExecCompleted
+	b	._562
+._546:
+	ldr	r0, ._567
+	ldrh	r1, [r0]
+	mov	r0, #0x93
+	lsl	r0, r0, #0x3
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._563	@cond_branch
+	bl	BattleAI_SetupAIData
+	bl	BattleAI_GetAIActionToUse
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0x4
+	beq	._564	@cond_branch
+	cmp	r4, #0x5
+	bne	._565	@cond_branch
+	mov	r0, #0x1
+	mov	r1, #0x4
+	b	._566
+._568:
+	.align	2, 0
+._567:
+	.word	gBattleTypeFlags
+._564:
+	mov	r0, #0x1
+	mov	r1, #0x3
+._566:
+	mov	r2, #0x0
+	b	._569
+._565:
+	ldr	r3, ._574
+	lsl	r0, r4, #0x1
+	add	r2, r5, r0
+	ldrh	r1, [r2]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r3
+	ldrb	r1, [r0, #0x6]
+	mov	r0, #0x12
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._570	@cond_branch
+	ldr	r1, ._574 + 4
+	ldrb	r0, [r6]
+	strb	r0, [r1]
+._570:
+	ldrh	r1, [r2]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r3
+	ldrb	r1, [r0, #0x6]
+	mov	r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._572	@cond_branch
+	mov	r0, #0x0
+	bl	GetBankByPlayerAI
+	ldr	r5, ._574 + 4
+	strb	r0, [r5]
+	ldr	r0, ._574 + 8
+	ldrb	r1, [r0]
+	ldr	r2, ._574 + 12
+	ldrb	r0, [r5]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldr	r0, [r0]
+	and	r1, r1, r0
+	cmp	r1, #0
+	beq	._572	@cond_branch
+	mov	r0, #0x2
+	bl	GetBankByPlayerAI
+	strb	r0, [r5]
+._572:
+	ldr	r0, ._574 + 4
+	ldrb	r2, [r0]
+	lsl	r2, r2, #0x8
+	orr	r2, r2, r4
+	mov	r0, #0x1
+	mov	r1, #0xa
+	bl	dp01_build_cmdbuf_x21_a_bb
+	b	._573
+._575:
+	.align	2, 0
+._574:
+	.word	gBattleMoves
+	.word	gBankTarget
+	.word	gAbsentBankFlags
+	.word	gBitTable
+._563:
+	mov	r6, #0x3
+._576:
+	bl	Random
+	add	r4, r0, #0
+	and	r4, r4, r6
+	lsl	r0, r4, #0x1
+	add	r0, r5, r0
+	ldrh	r2, [r0]
+	cmp	r2, #0
+	beq	._576	@cond_branch
+	ldr	r1, ._579
+	lsl	r0, r2, #0x1
+	add	r0, r0, r2
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldrb	r1, [r0, #0x6]
+	mov	r0, #0x12
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._577	@cond_branch
+	ldr	r0, ._579 + 4
+	ldrb	r2, [r0]
+	lsl	r2, r2, #0x8
+	b	._578
+._580:
+	.align	2, 0
+._579:
+	.word	gBattleMoves
+	.word	gActiveBank
+._577:
+	ldr	r0, ._583
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._581	@cond_branch
+	bl	Random
+	mov	r1, #0x2
+	and	r1, r1, r0
+	lsl	r1, r1, #0x18
+	lsr	r1, r1, #0x18
+	add	r0, r1, #0
+	bl	GetBankByPlayerAI
+	add	r2, r0, #0
+	lsl	r2, r2, #0x18
+	lsr	r2, r2, #0x10
+._578:
+	orr	r2, r2, r4
+	mov	r0, #0x1
+	mov	r1, #0xa
+	bl	dp01_build_cmdbuf_x21_a_bb
+	b	._582
+._584:
+	.align	2, 0
+._583:
+	.word	gBattleTypeFlags
+._581:
+	mov	r0, #0x0
+	bl	GetBankByPlayerAI
+	add	r2, r0, #0
+	lsl	r2, r2, #0x18
+	lsr	r2, r2, #0x10
+	orr	r2, r2, r4
+	mov	r0, #0x1
+	mov	r1, #0xa
+	bl	dp01_build_cmdbuf_x21_a_bb
+._582:
+	bl	OpponentBufferExecCompleted
+._562:
+	pop	{r3, r4, r5}
+	mov	r8, r3
+	mov	r9, r4
+	mov	sl, r5
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+.syntax unified
 	thumb_func_end sub_8035428
 
 	thumb_func_start sub_8035590

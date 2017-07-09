@@ -895,6 +895,9 @@ gUnknown_081F96C8:: @ 81F96C8
 gSpriteTemplate_81F96D0:: @ 81F96D0
 	spr_template 0, 0, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_800F828
 
+UnkDebug0::
+    .include "data/debug_unk_0.inc"
+
 	.align 2
 gOamData_81F96E8:: @ 81F96E8
 	.2byte 0x0100

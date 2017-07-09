@@ -167,3 +167,15 @@ u8 sub_81341D4(void)
     }
     return count;
 }
+
+#ifdef DEBUG
+void debug_sub_814A3A8(void)
+{
+    u8 decor;
+
+    for (decor = 0; decor < DECOR_COUNT; decor++)
+    {
+        IsThereStorageSpaceForDecoration(decor);
+    }
+}
+#endif

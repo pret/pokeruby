@@ -268,6 +268,25 @@ void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
     *dest = EOS;
 }
 
+#ifdef DEBUG
+
+void debug_sub_800987C(u8 *dest) {
+    FormatHexDate(dest, sRtc.year, sRtc.month, sRtc.day);
+}
+
+void debug_sub_8009894(u8 *dest) {
+    u16 dayCount;
+
+    dayCount = RtcGetDayCount(&sRtc);
+    ConvertIntToDecimalStringN(dest, dayCount, STR_CONV_MODE_RIGHT_ALIGN, 4);
+}
+
+void debug_sub_80098B8(u8 *dest) {
+    ConvertIntToHexStringN(dest, sRtc.status, STR_CONV_MODE_LEADING_ZEROS, 2);
+}
+
+#endif
+
 void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t)
 {
     u16 days = RtcGetDayCount(rtc);
@@ -347,3 +366,10 @@ u32 RtcGetMinuteCount()
     RtcGetInfo(&sRtc);
     return (24 * 60) * RtcGetDayCount(&sRtc) + 60 * sRtc.hour + sRtc.minute;
 }
+
+#ifdef DEBUG
+void debug_sub_8009A60() {
+    RtcGetRawInfo(&sRtc);
+}
+
+#endif

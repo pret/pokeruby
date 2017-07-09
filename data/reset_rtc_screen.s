@@ -65,3 +65,15 @@ gSpriteTemplate_83764E8:: @ 83764E8
 
 gUnknown_08376500:: @ 8376500
 	.string " : $"
+
+@ 0x839AE94
+	.string "にっすう$"
+
+@ 0x839AE99
+	.string "じかん$"
+
+@ 0x839AE9D
+	.string "ゲームない　じかん$"
+
+@ 0x839AEA7
+	.string "RTC　じかん$"

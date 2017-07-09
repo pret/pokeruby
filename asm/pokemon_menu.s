@@ -2493,77 +2493,134 @@ _0808AE82:
 	bx r1
 	thumb_func_end SetUpFieldMove_Waterfall
 
+	thumb_func_start debug_sub_80986AC
+debug_sub_80986AC:
+.syntax divided
+	push	{r4, lr}
+	add	sp, sp, #0xfffffffc
+	mov	r4, sp
+	add	r4, r4, #0x2
+	mov	r0, sp
+	add	r1, r4, #0
+	bl	GetXYCoordsOneStepInFrontOfPlayer
+	mov	r0, sp
+	mov	r1, #0x0
+	ldsh	r0, [r0, r1]
+	mov	r2, #0x0
+	ldsh	r1, [r4, r2]
+	bl	MapGridGetMetatileBehaviorAt
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	bl	MetatileBehavior_IsWaterfall
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	bne	._274	@cond_branch
+	bl	IsPlayerSurfingNorth
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	bne	._274	@cond_branch
+	bl	sub_808AE08
+	b	._275
+._274:
+	bl	ScriptContext2_Disable
+._275:
+	add	sp, sp, #0x4
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+.syntax unified
+	thumb_func_end debug_sub_80986AC
+
 	thumb_func_start sub_808AE8C
-sub_808AE8C: @ 808AE8C
-	push {r4-r6,lr}
-	ldr r0, _0808AED8 @ =gScriptItemId
-	ldrb r0, [r0]
-	subs r0, 0x21
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r5, 0
-_0808AE9A:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, _0808AEDC @ =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _0808AF10
-	adds r0, r5, 0
-	bl sub_806D668
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _0808AECE
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl CanMonLearnTMHM
-	cmp r0, 0
-	bne _0808AEE0
-_0808AECE:
-	adds r0, r5, 0
-	movs r1, 0x9A
-	bl sub_806BC3C
-	b _0808AF10
-	.align 2, 0
-_0808AED8: .4byte gScriptItemId
-_0808AEDC: .4byte gPlayerParty
-_0808AEE0:
-	ldr r0, _0808AF04 @ =gScriptItemId
-	ldrh r0, [r0]
-	bl ItemIdToBattleMoveId
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	bl pokemon_has_move
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808AF08
-	adds r0, r5, 0
-	movs r1, 0xA8
-	bl sub_806BC3C
-	b _0808AF10
-	.align 2, 0
-_0808AF04: .4byte gScriptItemId
-_0808AF08:
-	adds r0, r5, 0
-	movs r1, 0x8C
-	bl sub_806BC3C
-_0808AF10:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x5
-	bls _0808AE9A
-	pop {r4-r6}
-	pop {r0}
-	bx r0
+sub_808AE8C:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	ldr	r0, ._281
+	ldrb	r0, [r0]
+	sub	r0, r0, #0x21
+	lsl	r0, r0, #0x18
+	lsr	r6, r0, #0x18
+	mov	r5, #0x0
+._287:
+	mov	r0, #0x64
+	add	r1, r5, #0
+	mul	r1, r1, r0
+	ldr	r0, ._281 + 4
+	add	r4, r1, r0
+	add	r0, r4, #0
+	mov	r1, #0xb
+	bl	GetMonData
+	cmp	r0, #0
+	beq	._284	@cond_branch
+	add	r0, r5, #0
+	bl	sub_806D668
+	ldr	r0, ._281 + 8
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._279	@cond_branch
+	add	r0, r4, #0
+	mov	r1, #0x2d
+	bl	GetMonData
+	cmp	r0, #0
+	bne	._278	@cond_branch
+	add	r0, r4, #0
+	add	r1, r6, #0
+	bl	CanMonLearnTMHM
+	cmp	r0, #0
+	bne	._279	@cond_branch
+._278:
+	add	r0, r5, #0
+	mov	r1, #0x9a
+	bl	sub_806BC3C
+	b	._284
+._282:
+	.align	2, 0
+._281:
+	.word	gScriptItemId
+	.word	gPlayerParty
+	.word	gUnknown_020297ED
+._279:
+	mov	r0, #0x64
+	add	r4, r5, #0
+	mul	r4, r4, r0
+	ldr	r0, ._285
+	add	r4, r4, r0
+	ldr	r0, ._285 + 4
+	ldrh	r0, [r0]
+	bl	ItemIdToBattleMoveId
+	add	r1, r0, #0
+	lsl	r1, r1, #0x10
+	lsr	r1, r1, #0x10
+	add	r0, r4, #0
+	bl	pokemon_has_move
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._283	@cond_branch
+	add	r0, r5, #0
+	mov	r1, #0xa8
+	bl	sub_806BC3C
+	b	._284
+._286:
+	.align	2, 0
+._285:
+	.word	gPlayerParty
+	.word	gScriptItemId
+._283:
+	add	r0, r5, #0
+	mov	r1, #0x8c
+	bl	sub_806BC3C
+._284:
+	add	r0, r5, #1
+	lsl	r0, r0, #0x18
+	lsr	r5, r0, #0x18
+	cmp	r5, #0x5
+	bls	._287	@cond_branch
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+.syntax unified
 	thumb_func_end sub_808AE8C
 
 	thumb_func_start sub_808AF20

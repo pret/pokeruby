@@ -574,6 +574,83 @@ u16 CalculateChecksum(void *data, u16 size)
     return ((checksum >> 16) + checksum);
 }
 
+#ifdef DEBUG
+__attribute__((naked))
+void sub_813B79C()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	ldr	r4, ._163\n"
+        "	ldr	r6, ._163 + 4\n"
+        "	mov	r5, #0x0\n"
+        "._161:\n"
+        "	lsl	r0, r5, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	add	r1, r4, #0\n"
+        "	bl	DoReadFlashWholeSection\n"
+        "	ldr	r1, ._163 + 8\n"
+        "	add	r0, r4, r1\n"
+        "	ldrh	r0, [r0]\n"
+        "	lsl	r0, r0, #0x3\n"
+        "	add	r0, r0, r6\n"
+        "	ldrh	r1, [r0, #0x4]\n"
+        "	add	r0, r4, #0\n"
+        "	bl	CalculateChecksum\n"
+        "	ldr	r2, ._163 + 12\n"
+        "	add	r1, r4, r2\n"
+        "	strh	r0, [r1]\n"
+        "	add	r0, r5, #0\n"
+        "	add	r1, r4, #0\n"
+        "	bl	gScriptFuncs_End+0x2f60\n"
+        "	add	r0, r5, #1\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	lsr	r5, r0, #0x10\n"
+        "	cmp	r5, #0x1b\n"
+        "	bls	._161	@cond_branch\n"
+        "	ldr	r6, ._163\n"
+        "	ldr	r7, ._163 + 16\n"
+        "	mov	r5, #0x0\n"
+        "._162:\n"
+        "	add	r4, r5, #0\n"
+        "	add	r4, r4, #0x1c\n"
+        "	lsl	r0, r4, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	add	r1, r6, #0\n"
+        "	bl	DoReadFlashWholeSection\n"
+        "	lsl	r0, r5, #0x3\n"
+        "	add	r0, r0, r7\n"
+        "	ldrh	r1, [r0, #0x4]\n"
+        "	add	r0, r6, #0\n"
+        "	bl	CalculateChecksum\n"
+        "	ldr	r2, ._163 + 8\n"
+        "	add	r1, r6, r2\n"
+        "	strh	r0, [r1]\n"
+        "	lsl	r4, r4, #0x10\n"
+        "	lsr	r4, r4, #0x10\n"
+        "	add	r0, r4, #0\n"
+        "	add	r1, r6, #0\n"
+        "	bl	gScriptFuncs_End+0x2f60\n"
+        "	add	r0, r5, #1\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	lsr	r5, r0, #0x10\n"
+        "	cmp	r5, #0x1\n"
+        "	bls	._162	@cond_branch\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._164:\n"
+        "	.align	2, 0\n"
+        "._163:\n"
+        "	.word	+0x2000000\n"
+        "	.word	gSaveSectionLocations\n"
+        "	.word	0xff4\n"
+        "	.word	0xff6\n"
+        "	.word	gHallOfFameSaveSectionLocations\n"
+        "\n"
+    );
+}
+#endif
+
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
@@ -614,13 +691,24 @@ u8 HandleSavingData(u8 saveType)
     return 0;
 }
 
+#ifdef DEBUG
+extern u32 gUnknown_Debug_03004BD0;
+#endif
+
 u8 TrySavingData(u8 saveType) // TrySave
 {
     if (gFlashMemoryPresent != TRUE)
         return 0xFF;
     HandleSavingData(saveType);
-    if (!gDamagedSaveSectors)
+    if (!gDamagedSaveSectors
+#ifdef DEBUG
+        && gUnknown_Debug_03004BD0 == 0
+#endif
+        )
+    {
         return 1;
+    }
+
     DoSaveFailedScreen(saveType);
     return 0xFF;
 }

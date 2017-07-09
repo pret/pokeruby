@@ -880,468 +880,721 @@ _0802C688: .4byte sub_8010520
 	thumb_func_end sub_802C2EC
 
 	thumb_func_start sub_802C68C
-sub_802C68C: @ 802C68C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	movs r0, 0
-	mov r8, r0
-	ldr r7, _0802C6E4 @ =gActiveBank
-	ldrb r2, [r7]
-	lsls r0, r2, 9
-	ldr r1, _0802C6E8 @ =gUnknown_02023A64
-	adds r6, r0, r1
-	ldr r0, _0802C6EC @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r5, 0x1
-	adds r4, r5, 0
-	ands r4, r1
-	cmp r4, 0
-	bne _0802C6B2
-	b _0802C864
-_0802C6B2:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, _0802C6F0 @ =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r1, r6, r0
-	ldrh r0, [r1]
-	cmp r0, 0xAE
-	bne _0802C6F4
-	ldrb r0, [r6, 0x12]
-	movs r4, 0
-	cmp r0, 0x7
-	beq _0802C702
-	ldrb r1, [r6, 0x13]
-	movs r0, 0x7
-	eors r1, r0
-	negs r0, r1
-	orrs r0, r1
-	asrs r4, r0, 31
-	movs r0, 0x10
-	ands r4, r0
-	b _0802C702
-	.align 2, 0
-_0802C6E4: .4byte gActiveBank
-_0802C6E8: .4byte gUnknown_02023A64
-_0802C6EC: .4byte gMain
-_0802C6F0: .4byte gMoveSelectionCursor
-_0802C6F4:
-	ldr r2, _0802C714 @ =gBattleMoves
-	ldrh r1, [r1]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r4, [r0, 0x6]
-_0802C702:
-	movs r0, 0x10
-	ands r0, r4
-	cmp r0, 0
-	beq _0802C720
-	ldr r0, _0802C718 @ =gUnknown_03004344
-	ldr r1, _0802C71C @ =gActiveBank
-	ldrb r1, [r1]
-	strb r1, [r0]
-	b _0802C73A
-	.align 2, 0
-_0802C714: .4byte gBattleMoves
-_0802C718: .4byte gUnknown_03004344
-_0802C71C: .4byte gActiveBank
-_0802C720:
-	ldr r0, _0802C764 @ =gActiveBank
-	ldrb r0, [r0]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r2, 0x1
-	movs r0, 0x1
-	ands r0, r1
-	eors r0, r2
-	bl GetBankByPlayerAI
-	ldr r1, _0802C768 @ =gUnknown_03004344
-	strb r0, [r1]
-_0802C73A:
-	ldr r3, _0802C76C @ =gBattleBufferA
-	ldr r5, _0802C764 @ =gActiveBank
-	ldrb r2, [r5]
-	lsls r1, r2, 9
-	adds r0, r3, 0x1
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0802C770
-	movs r0, 0x2
-	ands r0, r4
-	cmp r0, 0
-	beq _0802C7B2
-	adds r0, r3, 0x2
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0802C7B2
-	movs r2, 0x1
-	add r8, r2
-	b _0802C7B2
-	.align 2, 0
-_0802C764: .4byte gActiveBank
-_0802C768: .4byte gUnknown_03004344
-_0802C76C: .4byte gBattleBufferA
-_0802C770:
-	movs r0, 0x7D
-	ands r0, r4
-	cmp r0, 0
-	bne _0802C77C
-	movs r0, 0x1
-	add r8, r0
-_0802C77C:
-	ldr r0, _0802C7D0 @ =gMoveSelectionCursor
-	adds r0, r2, r0
-	adds r1, r6, 0
-	adds r1, 0x8
-	ldrb r0, [r0]
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0802C7B8
-	movs r0, 0x12
-	ands r0, r4
-	cmp r0, 0
-	bne _0802C7B2
-	movs r0, 0
-	bl CountAliveMons
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _0802C7B2
-	ldrb r0, [r5]
-	bl sub_803C434
-	ldr r1, _0802C7D4 @ =gUnknown_03004344
-	strb r0, [r1]
-	movs r2, 0
-	mov r8, r2
-_0802C7B2:
-	mov r0, r8
-	cmp r0, 0
-	bne _0802C7DC
-_0802C7B8:
-	bl DestroyMenuCursor
-	ldr r1, _0802C7D0 @ =gMoveSelectionCursor
-	ldr r0, _0802C7D8 @ =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r2, [r0]
-	ldr r0, _0802C7D4 @ =gUnknown_03004344
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r2, r0
-	b _0802C888
-	.align 2, 0
-_0802C7D0: .4byte gMoveSelectionCursor
-_0802C7D4: .4byte gUnknown_03004344
-_0802C7D8: .4byte gActiveBank
-_0802C7DC:
-	ldr r1, _0802C7F8 @ =gBattleBankFunc
-	ldr r2, _0802C7FC @ =gActiveBank
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, _0802C800 @ =sub_802C2EC
-	str r1, [r0]
-	movs r0, 0x12
-	ands r4, r0
-	cmp r4, 0
-	beq _0802C808
-	ldr r1, _0802C804 @ =gUnknown_03004344
-	ldrb r0, [r2]
-	b _0802C838
-	.align 2, 0
-_0802C7F8: .4byte gBattleBankFunc
-_0802C7FC: .4byte gActiveBank
-_0802C800: .4byte sub_802C2EC
-_0802C804: .4byte gUnknown_03004344
-_0802C808:
-	movs r0, 0x1
-	bl GetBankByPlayerAI
-	ldr r1, _0802C828 @ =gAbsentBankFlags
-	ldrb r1, [r1]
-	ldr r2, _0802C82C @ =gBitTable
-	lsls r0, 24
-	lsrs r0, 22
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _0802C830
-	movs r0, 0x3
-	b _0802C832
-	.align 2, 0
-_0802C828: .4byte gAbsentBankFlags
-_0802C82C: .4byte gBitTable
-_0802C830:
-	movs r0, 0x1
-_0802C832:
-	bl GetBankByPlayerAI
-	ldr r1, _0802C854 @ =gUnknown_03004344
-_0802C838:
-	strb r0, [r1]
-	ldr r2, _0802C858 @ =gSprites
-	ldr r1, _0802C85C @ =gObjectBankIDs
-	ldr r0, _0802C854 @ =gUnknown_03004344
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, _0802C860 @ =sub_8010520
-	b _0802CA36
-	.align 2, 0
-_0802C854: .4byte gUnknown_03004344
-_0802C858: .4byte gSprites
-_0802C85C: .4byte gObjectBankIDs
-_0802C860: .4byte sub_8010520
-_0802C864:
-	movs r6, 0x2
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0802C8A4
-	bl DestroyMenuCursor
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _0802C898 @ =gUnknown_030042A4
-	strh r4, [r0]
-	ldr r1, _0802C89C @ =gUnknown_030042A0
-	movs r2, 0xA0
-	lsls r2, 1
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r2, _0802C8A0 @ =0x0000ffff
-_0802C888:
-	movs r0, 0x1
-	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
-	bl PlayerBufferExecCompleted
-	b _0802CA38
-	.align 2, 0
-_0802C898: .4byte gUnknown_030042A4
-_0802C89C: .4byte gUnknown_030042A0
-_0802C8A0: .4byte 0x0000ffff
-_0802C8A4:
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0802C8D4
-	ldr r4, _0802C8D0 @ =gMoveSelectionCursor
-	adds r2, r4
-	ldrb r1, [r2]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _0802C8BC
-	b _0802CA38
-_0802C8BC:
-	ldrb r0, [r2]
-	bl nullsub_7
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	movs r2, 0x1
-	eors r0, r2
-	b _0802C976
-	.align 2, 0
-_0802C8D0: .4byte gMoveSelectionCursor
-_0802C8D4:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0802C914
-	ldr r4, _0802C90C @ =gMoveSelectionCursor
-	adds r3, r2, r4
-	ldrb r2, [r3]
-	movs r6, 0x1
-	adds r0, r5, 0
-	ands r0, r2
-	cmp r0, 0
-	beq _0802C8EE
-	b _0802CA38
-_0802C8EE:
-	ldr r1, _0802C910 @ =gUnknown_03004348
-	adds r0, r6, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _0802C8FC
-	b _0802CA38
-_0802C8FC:
-	ldrb r0, [r3]
-	bl nullsub_7
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	eors r0, r6
-	b _0802C976
-	.align 2, 0
-_0802C90C: .4byte gMoveSelectionCursor
-_0802C910: .4byte gUnknown_03004348
-_0802C914:
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0802C944
-	ldr r4, _0802C940 @ =gMoveSelectionCursor
-	adds r2, r4
-	ldrb r1, [r2]
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _0802C92C
-	b _0802CA38
-_0802C92C:
-	ldrb r0, [r2]
-	bl nullsub_7
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	movs r2, 0x2
-	eors r0, r2
-	b _0802C976
-	.align 2, 0
-_0802C940: .4byte gMoveSelectionCursor
-_0802C944:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0802C99C
-	ldr r4, _0802C994 @ =gMoveSelectionCursor
-	adds r3, r2, r4
-	ldrb r2, [r3]
-	movs r5, 0x2
-	adds r0, r6, 0
-	ands r0, r2
-	cmp r0, 0
-	bne _0802CA38
-	ldr r1, _0802C998 @ =gUnknown_03004348
-	adds r0, r5, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _0802CA38
-	ldrb r0, [r3]
-	bl nullsub_7
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	eors r0, r5
-_0802C976:
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	movs r1, 0
-	bl sub_802E3B4
-	bl sub_802E220
-	bl sub_802E2D4
-	b _0802CA38
-	.align 2, 0
-_0802C994: .4byte gMoveSelectionCursor
-_0802C998: .4byte gUnknown_03004348
-_0802C99C:
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _0802CA38
-	ldr r0, _0802C9D8 @ =gUnknown_03004348
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bls _0802CA38
-	ldr r0, _0802C9DC @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	adds r0, r6, 0
-	ands r0, r1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0
-	bne _0802CA38
-	ldr r4, _0802C9E0 @ =gMoveSelectionCursor
-	adds r0, r2, r4
-	ldrb r0, [r0]
-	ldr r1, _0802C9E4 @ =gUnknown_081FAE80
-	bl sub_802E12C
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0802C9EC
-	ldr r0, _0802C9E8 @ =gUnknown_03004344
-	strb r5, [r0]
-	b _0802C9F4
-	.align 2, 0
-_0802C9D8: .4byte gUnknown_03004348
-_0802C9DC: .4byte gBattleTypeFlags
-_0802C9E0: .4byte gMoveSelectionCursor
-_0802C9E4: .4byte gUnknown_081FAE80
-_0802C9E8: .4byte gUnknown_03004344
-_0802C9EC:
-	ldr r1, _0802CA44 @ =gUnknown_03004344
-	adds r0, 0x1
-	strb r0, [r1]
-	adds r0, r1, 0
-_0802C9F4:
-	ldrb r0, [r0]
-	movs r1, 0x1B
-	bl sub_802E3B4
-	ldr r4, _0802CA48 @ =gUnknown_03004210
-	ldr r1, _0802CA4C @ =0x00001016
-	movs r0, 0x1C
-	str r0, [sp]
-	movs r0, 0x3A
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r2, 0x17
-	movs r3, 0x37
-	bl FillWindowRect
-	ldr r1, _0802CA50 @ =gUnknown_08400D89
-	movs r2, 0xA4
-	lsls r2, 2
-	movs r0, 0x37
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r3, 0x17
-	bl InitWindow
-	adds r0, r4, 0
-	bl sub_8002F44
-	ldr r1, _0802CA54 @ =gBattleBankFunc
-	ldr r0, _0802CA58 @ =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, _0802CA5C @ =sub_802CA60
-_0802CA36:
-	str r1, [r0]
-_0802CA38:
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0802CA44: .4byte gUnknown_03004344
-_0802CA48: .4byte gUnknown_03004210
-_0802CA4C: .4byte 0x00001016
-_0802CA50: .4byte gUnknown_08400D89
-_0802CA54: .4byte gBattleBankFunc
-_0802CA58: .4byte gActiveBank
-_0802CA5C: .4byte sub_802CA60
+sub_802C68C:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, sl
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6, r7}
+	add	sp, sp, #0xfffffff8
+	mov	r0, #0x0
+	mov	r8, r0
+	mov	r7, #0x0
+	ldr	r1, ._131
+	ldrb	r2, [r1]
+	lsl	r1, r2, #0x9
+	ldr	r0, ._131 + 4
+	add	r6, r1, r0
+	ldr	r0, ._131 + 8
+	ldrh	r1, [r0, #0x2e]
+	mov	r5, #0x1
+	add	r0, r5, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._126	@cond_branch
+	b	._127
+._126:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r1, ._131 + 12
+	ldr	r2, ._131
+	ldrb	r0, [r2]
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x1
+	add	r1, r6, r0
+	ldrh	r0, [r1]
+	cmp	r0, #0xae
+	bne	._128	@cond_branch
+	ldrb	r0, [r6, #0x12]
+	mov	r4, #0x0
+	cmp	r0, #0x7
+	beq	._130	@cond_branch
+	ldrb	r1, [r6, #0x13]
+	mov	r0, #0x7
+	eor	r1, r1, r0
+	neg	r0, r1
+	orr	r0, r0, r1
+	asr	r4, r0, #0x1f
+	mov	r0, #0x10
+	and	r4, r4, r0
+	b	._130
+._132:
+	.align	2, 0
+._131:
+	.word	gActiveBank
+	.word	gUnknown_02023A64
+	.word	gMain
+	.word	gMoveSelectionCursor
+._128:
+	ldr	r2, ._135
+	ldrh	r1, [r1]
+	lsl	r0, r1, #0x1
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r0, r0, r2
+	ldrb	r4, [r0, #0x6]
+._130:
+	mov	r0, #0x10
+	and	r0, r0, r4
+	cmp	r0, #0
+	beq	._133	@cond_branch
+	ldr	r0, ._135 + 4
+	ldr	r1, ._135 + 8
+	ldrb	r1, [r1]
+	strb	r1, [r0]
+	b	._134
+._136:
+	.align	2, 0
+._135:
+	.word	gBattleMoves
+	.word	gUnknown_03004344
+	.word	gActiveBank
+._133:
+	ldr	r0, ._141
+	ldrb	r0, [r0]
+	bl	GetBankIdentity
+	add	r1, r0, #0
+	mov	r2, #0x1
+	mov	r0, #0x1
+	and	r0, r0, r1
+	eor	r0, r0, r2
+	bl	GetBankByPlayerAI
+	ldr	r1, ._141 + 4
+	strb	r0, [r1]
+._134:
+	ldr	r3, ._141 + 8
+	ldr	r5, ._141
+	ldrb	r2, [r5]
+	lsl	r1, r2, #0x9
+	add	r0, r3, #1
+	add	r0, r1, r0
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._137	@cond_branch
+	mov	r0, #0x2
+	and	r0, r0, r4
+	cmp	r0, #0
+	beq	._146	@cond_branch
+	add	r0, r3, #2
+	add	r0, r1, r0
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._146	@cond_branch
+	mov	r0, #0x1
+	add r8, r8, r0
+	b	._146
+._142:
+	.align	2, 0
+._141:
+	.word	gActiveBank
+	.word	gUnknown_03004344
+	.word	gBattleBufferA
+._137:
+	mov	r0, #0x7d
+	and	r0, r0, r4
+	cmp	r0, #0
+	bne	._143	@cond_branch
+	mov	r1, #0x1
+	add r8, r8, r1
+._143:
+	ldr	r0, ._149
+	add	r0, r2, r0
+	add	r1, r6, #0
+	add	r1, r1, #0x8
+	ldrb	r0, [r0]
+	add	r1, r1, r0
+	ldrb	r0, [r1]
+	cmp	r0, #0
+	beq	._144	@cond_branch
+	mov	r0, #0x12
+	and	r0, r0, r4
+	cmp	r0, #0
+	bne	._146	@cond_branch
+	mov	r0, #0x0
+	bl	CountAliveMons
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0x1
+	bhi	._146	@cond_branch
+	ldrb	r0, [r5]
+	bl	sub_803C434
+	ldr	r1, ._149 + 4
+	strb	r0, [r1]
+	mov	r2, #0x0
+	mov	r8, r2
+._146:
+	mov	r0, r8
+	cmp	r0, #0
+	bne	._147	@cond_branch
+._144:
+	bl	DestroyMenuCursor
+	ldr	r1, ._149
+	ldr	r0, ._149 + 8
+	ldrb	r0, [r0]
+	add	r0, r0, r1
+	ldrb	r2, [r0]
+	ldr	r0, ._149 + 4
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x8
+	orr	r2, r2, r0
+	b	._148
+._150:
+	.align	2, 0
+._149:
+	.word	gMoveSelectionCursor
+	.word	gUnknown_03004344
+	.word	gActiveBank
+._147:
+	ldr	r1, ._153
+	ldr	r2, ._153 + 4
+	ldrb	r0, [r2]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._153 + 8
+	str	r1, [r0]
+	mov	r0, #0x12
+	and	r4, r4, r0
+	cmp	r4, #0
+	beq	._151	@cond_branch
+	ldr	r1, ._153 + 12
+	ldrb	r0, [r2]
+	b	._152
+._154:
+	.align	2, 0
+._153:
+	.word	gBattleBankFunc
+	.word	gActiveBank
+	.word	sub_802C2EC+1
+	.word	gUnknown_03004344
+._151:
+	mov	r0, #0x1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._157
+	ldrb	r1, [r1]
+	ldr	r2, ._157 + 4
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x16
+	add	r0, r0, r2
+	ldr	r0, [r0]
+	and	r1, r1, r0
+	cmp	r1, #0
+	beq	._155	@cond_branch
+	mov	r0, #0x3
+	b	._156
+._158:
+	.align	2, 0
+._157:
+	.word	gAbsentBankFlags
+	.word	gBitTable
+._155:
+	mov	r0, #0x1
+._156:
+	bl	GetBankByPlayerAI
+	ldr	r1, ._160
+._152:
+	strb	r0, [r1]
+	ldr	r2, ._160 + 4
+	ldr	r1, ._160 + 8
+	ldr	r0, ._160
+	ldrb	r0, [r0]
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	lsl	r0, r1, #0x4
+	add	r0, r0, r1
+	lsl	r0, r0, #0x2
+	add	r2, r2, #0x1c
+	add	r0, r0, r2
+	ldr	r1, ._160 + 12
+	b	._203
+._161:
+	.align	2, 0
+._160:
+	.word	gUnknown_03004344
+	.word	gSprites
+	.word	gObjectBankIDs
+	.word	sub_8010520+1
+._127:
+	mov	r6, #0x2
+	add	r0, r6, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._162	@cond_branch
+	bl	DestroyMenuCursor
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._164
+	strh	r7, [r0]
+	ldr	r1, ._164 + 4
+	mov	r2, #0xa0
+	lsl	r2, r2, #0x1
+	add	r0, r2, #0
+	strh	r0, [r1]
+	ldr	r2, ._164 + 8
+._148:
+	mov	r0, #0x1
+	mov	r1, #0xa
+	bl	dp01_build_cmdbuf_x21_a_bb
+	bl	PlayerBufferExecCompleted
+	b	._209
+._165:
+	.align	2, 0
+._164:
+	.word	gUnknown_030042A4
+	.word	gUnknown_030042A0
+	.word	0xffff
+._162:
+	mov	r0, #0x20
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._166	@cond_branch
+	ldr	r4, ._170
+	add	r2, r2, r4
+	ldrb	r1, [r2]
+	add	r0, r5, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._167	@cond_branch
+	b	._209
+._167:
+	ldrb	r0, [r2]
+	bl	nullsub_7
+	ldr	r0, ._170 + 4
+	ldrb	r1, [r0]
+	add	r1, r1, r4
+	ldrb	r0, [r1]
+	mov	r2, #0x1
+	eor	r0, r0, r2
+	b	._183
+._171:
+	.align	2, 0
+._170:
+	.word	gMoveSelectionCursor
+	.word	gActiveBank
+._166:
+	mov	r3, #0x10
+	add	r0, r3, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._172	@cond_branch
+	ldr	r4, ._178
+	add	r3, r2, r4
+	ldrb	r2, [r3]
+	mov	r6, #0x1
+	add	r0, r5, #0
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._173	@cond_branch
+	b	._209
+._173:
+	ldr	r1, ._178 + 4
+	add	r0, r6, #0
+	eor	r0, r0, r2
+	ldrb	r1, [r1]
+	cmp	r0, r1
+	bcc	._175	@cond_branch
+	b	._209
+._175:
+	ldrb	r0, [r3]
+	bl	nullsub_7
+	ldr	r2, ._178 + 8
+	ldrb	r1, [r2]
+	add	r1, r1, r4
+	ldrb	r0, [r1]
+	eor	r0, r0, r6
+	b	._183
+._179:
+	.align	2, 0
+._178:
+	.word	gMoveSelectionCursor
+	.word	gUnknown_03004348
+	.word	gActiveBank
+._172:
+	mov	r0, #0x40
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._180	@cond_branch
+	ldr	r4, ._184
+	add	r2, r2, r4
+	ldrb	r1, [r2]
+	add	r0, r6, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._181	@cond_branch
+	b	._209
+._181:
+	ldrb	r0, [r2]
+	bl	nullsub_7
+	ldr	r2, ._184 + 4
+	ldrb	r1, [r2]
+	add	r1, r1, r4
+	ldrb	r0, [r1]
+	mov	r2, #0x2
+	eor	r0, r0, r2
+	b	._183
+._185:
+	.align	2, 0
+._184:
+	.word	gMoveSelectionCursor
+	.word	gActiveBank
+._180:
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._186	@cond_branch
+	ldr	r4, ._192
+	add	r3, r2, r4
+	ldrb	r2, [r3]
+	mov	r5, #0x2
+	add	r0, r6, #0
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._187	@cond_branch
+	b	._209
+._187:
+	ldr	r1, ._192 + 4
+	add	r0, r5, #0
+	eor	r0, r0, r2
+	ldrb	r1, [r1]
+	cmp	r0, r1
+	bcc	._189	@cond_branch
+	b	._209
+._189:
+	ldrb	r0, [r3]
+	bl	nullsub_7
+	ldr	r2, ._192 + 8
+	ldrb	r1, [r2]
+	add	r1, r1, r4
+	ldrb	r0, [r1]
+	eor	r0, r0, r5
+._183:
+	strb	r0, [r1]
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r1, ._192 + 8
+	ldrb	r0, [r1]
+	add	r0, r0, r4
+	ldrb	r0, [r0]
+	mov	r1, #0x0
+	bl	sub_802E3B4
+	bl	sub_802E220
+	bl	sub_802E2D4
+	b	._209
+._193:
+	.align	2, 0
+._192:
+	.word	gMoveSelectionCursor
+	.word	gUnknown_03004348
+	.word	gActiveBank
+._186:
+	mov	r0, #0x4
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._194	@cond_branch
+	ldr	r0, ._201
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	bhi	._195	@cond_branch
+	b	._209
+._195:
+	ldr	r0, ._201 + 4
+	ldrh	r1, [r0]
+	add	r0, r6, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._197	@cond_branch
+	b	._209
+._197:
+	ldr	r4, ._201 + 8
+	add	r0, r2, r4
+	ldrb	r0, [r0]
+	ldr	r1, ._201 + 12
+	bl	sub_802E12C
+	ldr	r2, ._201 + 16
+	ldrb	r0, [r2]
+	add	r0, r0, r4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._199	@cond_branch
+	ldr	r0, ._201 + 20
+	strb	r7, [r0]
+	b	._200
+._202:
+	.align	2, 0
+._201:
+	.word	gUnknown_03004348
+	.word	gBattleTypeFlags
+	.word	gMoveSelectionCursor
+	.word	gUnknown_081FAE80
+	.word	gActiveBank
+	.word	gUnknown_03004344
+._199:
+	ldr	r1, ._204
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+	add	r0, r1, #0
+._200:
+	ldrb	r0, [r0]
+	mov	r1, #0x1b
+	bl	sub_802E3B4
+	ldr	r4, ._204 + 4
+	ldr	r1, ._204 + 8
+	mov	r0, #0x1c
+	str	r0, [sp]
+	mov	r0, #0x3a
+	str	r0, [sp, #0x4]
+	add	r0, r4, #0
+	mov	r2, #0x17
+	mov	r3, #0x37
+	bl	FillWindowRect
+	ldr	r1, ._204 + 12
+	mov	r2, #0xa4
+	lsl	r2, r2, #0x2
+	mov	r0, #0x37
+	str	r0, [sp]
+	add	r0, r4, #0
+	mov	r3, #0x17
+	bl	InitWindow
+	add	r0, r4, #0
+	bl	sub_8002F44
+	ldr	r1, ._204 + 16
+	ldr	r0, ._204 + 20
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._204 + 24
+	b	._203
+._205:
+	.align	2, 0
+._204:
+	.word	gUnknown_03004344
+	.word	gUnknown_03004210
+	.word	0x1016
+	.word	gUnknown_08400D89
+	.word	gBattleBankFunc
+	.word	gActiveBank
+	.word	sub_802CA60+1
+._194:
+	ldr	r0, ._214
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	beq	._206	@cond_branch
+	b	._209
+._206:
+	mov	r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._208	@cond_branch
+	b	._209
+._208:
+	ldr	r6, ._214 + 4
+	ldr	r1, ._214 + 8
+	str	r3, [sp]
+	mov	r0, #0x3a
+	str	r0, [sp, #0x4]
+	add	r0, r6, #0
+	mov	r2, #0x1
+	mov	r3, #0x37
+	bl	FillWindowRect
+	ldr	r0, ._214 + 12
+	mov	sl, r0
+	ldr	r1, ._214 + 16
+	ldrb	r0, [r1]
+	lsl	r0, r0, #0x1
+	add r0, r0, sl
+	ldrh	r0, [r0]
+	mov	r2, #0x64
+	mov	r9, r2
+	mov	r1, r9
+	mul	r1, r1, r0
+	add	r0, r1, #0
+	ldr	r5, ._214 + 20
+	add	r0, r0, r5
+	mov	r1, #0xd
+	bl	GetMonData
+	mov	r1, #0xd
+	mul	r1, r1, r0
+	ldr	r0, ._214 + 24
+	add	r1, r1, r0
+	mov	r2, #0x80
+	lsl	r2, r2, #0x1
+	mov	r0, #0x37
+	mov	r8, r0
+	str	r0, [sp]
+	add	r0, r6, #0
+	mov	r3, #0x2
+	bl	sub_8003460
+	ldr	r4, ._214 + 28
+	ldr	r1, ._214 + 16
+	ldrb	r0, [r1]
+	lsl	r0, r0, #0x1
+	add r0, r0, sl
+	ldrh	r0, [r0]
+	mov	r2, r9
+	mul	r2, r2, r0
+	add	r0, r2, #0
+	add	r0, r0, r5
+	mov	r1, #0xd
+	bl	GetMonData
+	add	r1, r0, #0
+	add	r0, r4, #0
+	mov	r2, #0x2
+	mov	r3, #0x3
+	bl	ConvertIntToDecimalStringN
+	mov	r2, #0x88
+	lsl	r2, r2, #0x1
+	mov	r0, r8
+	str	r0, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0xa
+	bl	sub_8003460
+	ldr	r1, ._214 + 32
+	mov	r2, #0x8b
+	lsl	r2, r2, #0x1
+	mov	r5, #0x39
+	str	r5, [sp]
+	add	r0, r6, #0
+	mov	r3, #0x1
+	bl	sub_8003460
+	ldr	r0, ._214 + 36
+	ldrb	r1, [r0]
+	add	r0, r4, #0
+	mov	r2, #0x2
+	mov	r3, #0x3
+	bl	ConvertIntToDecimalStringN
+	mov	r2, #0x8e
+	lsl	r2, r2, #0x1
+	str	r5, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0x4
+	bl	sub_8003460
+	ldr	r0, ._214 + 40
+	add	r2, r0, #0
+	add	r2, r2, #0x3e
+	mov	r1, #0x3f
+._211:
+	ldrb	r0, [r2]
+	lsl	r0, r0, #0x1f
+	cmp	r0, #0
+	beq	._210	@cond_branch
+	add	r0, r7, #1
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+._210:
+	add	r2, r2, #0x44
+	sub	r1, r1, #0x1
+	cmp	r1, #0
+	bge	._211	@cond_branch
+	ldr	r4, ._214 + 28
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r6, ._214 + 4
+	mov	r2, #0x91
+	lsl	r2, r2, #0x1
+	mov	r5, #0x39
+	str	r5, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0x8
+	bl	sub_8003460
+	bl	GetTaskCount
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	mov	r2, #0x93
+	lsl	r2, r2, #0x1
+	str	r5, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0xb
+	bl	sub_8003460
+	mov	r1, #0x0
+	mov	r7, #0x0
+	ldr	r0, ._214 + 44
+	mov	r3, #0x1
+	ldr	r2, [r0]
+._213:
+	add	r0, r3, #0
+	LSL	r0, r1
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._212	@cond_branch
+	add	r0, r7, #1
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+._212:
+	add	r1, r1, #0x1
+	cmp	r1, #0x1f
+	ble	._213	@cond_branch
+	ldr	r4, ._214 + 28
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, ._214 + 4
+	mov	r2, #0x95
+	lsl	r2, r2, #0x1
+	mov	r1, #0x39
+	str	r1, [sp]
+	add	r1, r4, #0
+	mov	r3, #0xe
+	bl	sub_8003460
+	ldr	r1, ._214 + 48
+	ldr	r0, ._214 + 16
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._214 + 52
+._203:
+	str	r1, [r0]
+._209:
+	add	sp, sp, #0x8
+	pop	{r3, r4, r5}
+	mov	r8, r3
+	mov	r9, r4
+	mov	sl, r5
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._215:
+	.align	2, 0
+._214:
+	.word	gUnknown_020297ED
+	.word	gUnknown_03004210
+	.word	0x1016
+	.word	gBattlePartyID
+	.word	gActiveBank
+	.word	gPlayerParty
+	.word	gMoveNames
+	.word	gDisplayedStringBattle
+	.word	gBallCatchBonuses+0x4
+	.word	gUnknown_0202F7C4
+	.word	gSprites
+	.word	gOamMatrixAllocBitmap
+	.word	gBattleBankFunc
+	.word	debug_sub_8030C24+1
+.syntax unified
 	thumb_func_end sub_802C68C
 
 	thumb_func_start sub_802CA60
@@ -2268,6 +2521,686 @@ _0802D1F8: .4byte gMain
 _0802D1FC: .4byte 0x0000043d
 _0802D200: .4byte gPreBattleCallback1
 	thumb_func_end sub_802D18C
+
+	thumb_func_start debug_sub_8030C24
+debug_sub_8030C24:
+.syntax divided
+	push	{r4, r5, r6, lr}
+	add	sp, sp, #0xfffffff4
+	ldr	r1, ._293
+	ldr	r4, ._293 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._293 + 8
+	add	r0, r0, r1
+	mov	r1, #0xd
+	bl	GetMonData
+	add	r1, sp, #0x8
+	strh	r0, [r1]
+	ldr	r5, ._293 + 12
+	ldrh	r1, [r5, #0x30]
+	cmp	r1, #0x20
+	bne	._286	@cond_branch
+	b	._287
+._286:
+	cmp	r1, #0x20
+	bgt	._288	@cond_branch
+	cmp	r1, #0x8
+	beq	._289	@cond_branch
+	cmp	r1, #0x8
+	bgt	._290	@cond_branch
+	cmp	r1, #0x4
+	beq	._291	@cond_branch
+	b	._348
+._294:
+	.align	2, 0
+._293:
+	.word	gBattlePartyID
+	.word	gActiveBank
+	.word	gPlayerParty
+	.word	gMain
+._290:
+	cmp	r1, #0x10
+	bne	._295	@cond_branch
+	b	._296
+._295:
+	b	._348
+._288:
+	cmp	r1, #0x80
+	bne	._298	@cond_branch
+	b	._302
+._298:
+	cmp	r1, #0x80
+	bgt	._300	@cond_branch
+	cmp	r1, #0x40
+	bne	._301	@cond_branch
+	b	._302
+._301:
+	b	._348
+._300:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	cmp	r1, r0
+	bne	._304	@cond_branch
+	b	._305
+._304:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x2
+	cmp	r1, r0
+	bne	._306	@cond_branch
+	b	._307
+._306:
+	b	._348
+._289:
+	ldrb	r0, [r4]
+	mov	r1, #0x1
+	bl	dp11b_obj_free
+	ldrb	r0, [r4]
+	mov	r1, #0x0
+	bl	dp11b_obj_free
+	ldr	r0, ._312
+	ldrb	r2, [r4]
+	strb	r2, [r0]
+	ldrh	r1, [r5, #0x28]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._310	@cond_branch
+	ldr	r0, ._312 + 4
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._310	@cond_branch
+	ldr	r0, ._312 + 8
+	mov	r1, #0x2
+	eor	r1, r1, r2
+	strb	r1, [r0]
+	b	._311
+._313:
+	.align	2, 0
+._312:
+	.word	gBankAttacker
+	.word	gBattleTypeFlags
+	.word	gBankTarget
+._310:
+	ldr	r0, ._317
+	ldrh	r1, [r0, #0x28]
+	mov	r2, #0x1
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._315	@cond_branch
+	ldr	r0, ._317 + 4
+	ldrh	r1, [r0]
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._315	@cond_branch
+	mov	r0, #0x3
+	b	._316
+._318:
+	.align	2, 0
+._317:
+	.word	gMain
+	.word	gBattleTypeFlags
+._315:
+	mov	r0, #0x1
+._316:
+	bl	GetBankByPlayerAI
+	ldr	r1, ._320
+	strb	r0, [r1]
+._311:
+	mov	r0, #0x0
+	bl	sub_80326EC
+	add	r0, sp, #0x8
+	ldrh	r0, [r0]
+	bl	ExecuteMoveAnim
+	ldr	r1, ._320 + 4
+	ldr	r0, ._320 + 8
+	ldrb	r0, [r0]
+	b	._332
+._321:
+	.align	2, 0
+._320:
+	.word	gBankTarget
+	.word	gBattleBankFunc
+	.word	gActiveBank
+._291:
+	ldrb	r0, [r4]
+	mov	r1, #0x1
+	bl	dp11b_obj_free
+	ldrb	r0, [r4]
+	mov	r1, #0x0
+	bl	dp11b_obj_free
+	ldr	r0, ._325
+	ldrb	r2, [r4]
+	strb	r2, [r0]
+	ldrh	r1, [r5, #0x28]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._323	@cond_branch
+	ldr	r0, ._325 + 4
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._323	@cond_branch
+	ldr	r0, ._325 + 8
+	mov	r1, #0x2
+	eor	r1, r1, r2
+	strb	r1, [r0]
+	b	._324
+._326:
+	.align	2, 0
+._325:
+	.word	gBankTarget
+	.word	gBattleTypeFlags
+	.word	gBankAttacker
+._323:
+	ldr	r0, ._330
+	ldrh	r1, [r0, #0x28]
+	mov	r2, #0x1
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._328	@cond_branch
+	ldr	r0, ._330 + 4
+	ldrh	r1, [r0]
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._328	@cond_branch
+	mov	r0, #0x3
+	b	._329
+._331:
+	.align	2, 0
+._330:
+	.word	gMain
+	.word	gBattleTypeFlags
+._328:
+	mov	r0, #0x1
+._329:
+	bl	GetBankByPlayerAI
+	ldr	r1, ._333
+	strb	r0, [r1]
+._324:
+	mov	r0, #0x0
+	bl	sub_80326EC
+	add	r0, sp, #0x8
+	ldrh	r0, [r0]
+	bl	ExecuteMoveAnim
+	ldr	r1, ._333 + 4
+	ldr	r0, ._333 + 8
+	ldrb	r0, [r0]
+	b	._332
+._334:
+	.align	2, 0
+._333:
+	.word	gBankAttacker
+	.word	gBattleBankFunc
+	.word	gActiveBank
+._305:
+	ldrh	r1, [r5, #0x28]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._336	@cond_branch
+	ldr	r0, ._338
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._336	@cond_branch
+	ldrb	r0, [r4]
+	mov	r1, #0x1
+	bl	dp11b_obj_free
+	ldrb	r0, [r4]
+	mov	r1, #0x0
+	bl	dp11b_obj_free
+	mov	r0, #0x3
+	bl	GetBankByPlayerAI
+	ldr	r1, ._338 + 4
+	strb	r0, [r1]
+	mov	r0, #0x1
+	b	._337
+._339:
+	.align	2, 0
+._338:
+	.word	gBattleTypeFlags
+	.word	gBankAttacker
+._336:
+	add	r0, sp, #0x8
+	mov	r1, #0x0
+	ldsh	r0, [r0, r1]
+	add	r0, r0, #0x9
+	add	r1, sp, #0x8
+	strh	r0, [r1]
+._296:
+	add	r0, sp, #0x8
+	mov	r2, #0x0
+	ldsh	r0, [r0, r2]
+	add	r0, r0, #0x1
+	lsl	r2, r0, #0x10
+	add	r1, sp, #0x8
+	strh	r0, [r1]
+	mov	r0, #0xb1
+	lsl	r0, r0, #0x11
+	cmp	r2, r0
+	ble	._347	@cond_branch
+	mov	r1, #0x1
+	add	r0, sp, #0x8
+	strh	r1, [r0]
+	b	._347
+._307:
+	ldrh	r1, [r5, #0x28]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._343	@cond_branch
+	ldr	r0, ._345
+	ldrh	r1, [r0]
+	mov	r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._343	@cond_branch
+	ldrb	r0, [r4]
+	mov	r1, #0x1
+	bl	dp11b_obj_free
+	ldrb	r0, [r4]
+	mov	r1, #0x0
+	bl	dp11b_obj_free
+	mov	r0, #0x1
+	bl	GetBankByPlayerAI
+	ldr	r1, ._345 + 4
+	strb	r0, [r1]
+	mov	r0, #0x3
+._337:
+	bl	GetBankByPlayerAI
+	ldr	r1, ._345 + 8
+	strb	r0, [r1]
+	mov	r0, #0x0
+	bl	sub_80326EC
+	add	r0, sp, #0x8
+	ldrh	r0, [r0]
+	bl	ExecuteMoveAnim
+	ldr	r1, ._345 + 12
+	ldrb	r0, [r4]
+._332:
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._345 + 16
+	str	r1, [r0]
+	b	._348
+._346:
+	.align	2, 0
+._345:
+	.word	gBattleTypeFlags
+	.word	gBankAttacker
+	.word	gBankTarget
+	.word	gBattleBankFunc
+	.word	debug_sub_803107C+1
+._343:
+	add	r1, sp, #0x8
+	add	r0, r1, #0
+	ldrh	r0, [r0]
+	sub	r0, r0, #0x9
+	strh	r0, [r1]
+._287:
+	add	r1, sp, #0x8
+	add	r0, r1, #0
+	ldrh	r0, [r0]
+	sub	r0, r0, #0x1
+	strh	r0, [r1]
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	bgt	._347	@cond_branch
+	mov	r2, #0xb1
+	lsl	r2, r2, #0x1
+	add	r0, r2, #0
+	strh	r0, [r1]
+._347:
+	ldr	r1, ._349
+	ldr	r4, ._349 + 4
+	ldrb	r0, [r4]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._349 + 8
+	add	r0, r0, r1
+	mov	r1, #0xd
+	add	r2, sp, #0x8
+	bl	SetMonData
+	ldr	r2, ._349 + 12
+	ldrb	r1, [r4]
+	mov	r0, #0x58
+	mul	r0, r0, r1
+	add	r0, r0, r2
+	add	r1, sp, #0x8
+	ldrh	r1, [r1]
+	strh	r1, [r0, #0xc]
+	ldr	r5, ._349 + 16
+	ldr	r1, ._349 + 20
+	mov	r0, #0x10
+	str	r0, [sp]
+	mov	r0, #0x38
+	str	r0, [sp, #0x4]
+	add	r0, r5, #0
+	mov	r2, #0x1
+	mov	r3, #0x37
+	bl	FillWindowRect
+	add	r0, sp, #0x8
+	mov	r2, #0x0
+	ldsh	r1, [r0, r2]
+	mov	r0, #0xd
+	mul	r1, r1, r0
+	ldr	r0, ._349 + 24
+	add	r1, r1, r0
+	mov	r2, #0x80
+	lsl	r2, r2, #0x1
+	mov	r6, #0x37
+	str	r6, [sp]
+	add	r0, r5, #0
+	mov	r3, #0x2
+	bl	sub_8003460
+	ldr	r4, ._349 + 28
+	add	r0, sp, #0x8
+	mov	r2, #0x0
+	ldsh	r1, [r0, r2]
+	add	r0, r4, #0
+	mov	r2, #0x2
+	mov	r3, #0x3
+	bl	ConvertIntToDecimalStringN
+	mov	r2, #0x88
+	lsl	r2, r2, #0x1
+	str	r6, [sp]
+	add	r0, r5, #0
+	add	r1, r4, #0
+	mov	r3, #0xa
+	bl	sub_8003460
+	b	._348
+._350:
+	.align	2, 0
+._349:
+	.word	gBattlePartyID
+	.word	gActiveBank
+	.word	gPlayerParty
+	.word	gBattleMons
+	.word	gUnknown_03004210
+	.word	0x1016
+	.word	gMoveNames
+	.word	gDisplayedStringBattle
+._302:
+	ldr	r0, ._353
+	ldrh	r0, [r0, #0x30]
+	cmp	r0, #0x40
+	bne	._351	@cond_branch
+	ldr	r1, ._353 + 4
+	ldrb	r0, [r1]
+	sub	r0, r0, #0x1
+	b	._352
+._354:
+	.align	2, 0
+._353:
+	.word	gMain
+	.word	gUnknown_0202F7C4
+._351:
+	ldr	r1, ._359
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+._352:
+	strb	r0, [r1]
+	ldr	r4, ._359 + 4
+	ldrb	r1, [r1]
+	add	r0, r4, #0
+	mov	r2, #0x2
+	mov	r3, #0x3
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, ._359 + 8
+	mov	r2, #0x8e
+	lsl	r2, r2, #0x1
+	mov	r1, #0x39
+	str	r1, [sp]
+	add	r1, r4, #0
+	mov	r3, #0x4
+	bl	sub_8003460
+._348:
+	ldr	r0, ._359 + 12
+	ldrh	r2, [r0, #0x28]
+	mov	r1, #0xc0
+	lsl	r1, r1, #0x2
+	add	r0, r1, #0
+	and	r0, r0, r2
+	cmp	r0, r1
+	bne	._355	@cond_branch
+	mov	r4, #0x0
+	ldr	r5, ._359 + 4
+	ldr	r6, ._359 + 8
+._361:
+	add	r0, r5, #0
+	ldr	r1, ._359 + 16
+	bl	StringCopy
+	ldr	r1, ._359 + 20
+	ldr	r0, ._359 + 24
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x1
+	add	r0, r0, r1
+	ldrh	r1, [r0]
+	mov	r0, #0x64
+	mul	r0, r0, r1
+	ldr	r1, ._359 + 28
+	add	r0, r0, r1
+	add	r1, r4, #0
+	add	r1, r1, #0xd
+	bl	GetMonData
+	mov	r1, #0xd
+	mul	r1, r1, r0
+	ldr	r0, ._359 + 32
+	add	r1, r1, r0
+	add	r0, r5, #0
+	bl	StringAppend
+	lsl	r0, r4, #0x14
+	mov	r1, #0x80
+	lsl	r1, r1, #0x11
+	add	r0, r0, r1
+	lsr	r2, r0, #0x10
+	mov	r0, #0x1
+	and	r0, r0, r4
+	mov	r3, #0x2
+	cmp	r0, #0
+	beq	._356	@cond_branch
+	mov	r3, #0xa
+._356:
+	cmp	r4, #0x1
+	bhi	._357	@cond_branch
+	mov	r0, #0x37
+	b	._358
+._360:
+	.align	2, 0
+._359:
+	.word	gUnknown_0202F7C4
+	.word	gDisplayedStringBattle
+	.word	gUnknown_03004210
+	.word	gMain
+	.word	gUnknown_08400D49
+	.word	gBattlePartyID
+	.word	gActiveBank
+	.word	gPlayerParty
+	.word	gMoveNames
+._357:
+	mov	r0, #0x39
+._358:
+	str	r0, [sp]
+	add	r0, r6, #0
+	add	r1, r5, #0
+	bl	InitWindow
+	ldr	r0, ._362
+	bl	sub_8002F44
+	add	r0, r4, #1
+	lsl	r0, r0, #0x18
+	lsr	r4, r0, #0x18
+	cmp	r4, #0x3
+	bls	._361	@cond_branch
+	ldr	r1, ._362 + 4
+	ldr	r0, ._362 + 8
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._362 + 12
+	str	r1, [r0]
+._355:
+	add	sp, sp, #0xc
+	pop	{r4, r5, r6}
+	pop	{r0}
+	bx	r0
+._363:
+	.align	2, 0
+._362:
+	.word	gUnknown_03004210
+	.word	gBattleBankFunc
+	.word	gActiveBank
+	.word	sub_802C68C+1
+.syntax unified
+	thumb_func_end debug_sub_8030C24
+
+	thumb_func_start debug_sub_803107C
+debug_sub_803107C:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	add	sp, sp, #0xfffffffc
+	mov	r7, #0x0
+	ldr	r0, ._369
+	ldr	r0, [r0]
+	bl	gScriptFuncs_End+0x3cf4
+	ldr	r0, ._369 + 4
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._364	@cond_branch
+	mov	r0, #0x1
+	bl	sub_80326EC
+	ldr	r4, ._369 + 8
+	ldrb	r0, [r4]
+	mov	r1, #0x1
+	mov	r2, #0x7
+	mov	r3, #0x1
+	bl	dp11b_obj_instanciate
+	ldrb	r0, [r4]
+	mov	r1, #0x0
+	mov	r2, #0x7
+	mov	r3, #0x1
+	bl	dp11b_obj_instanciate
+	ldr	r0, ._369 + 12
+	add	r2, r0, #0
+	add	r2, r2, #0x3e
+	mov	r1, #0x3f
+._366:
+	ldrb	r0, [r2]
+	lsl	r0, r0, #0x1f
+	cmp	r0, #0
+	beq	._365	@cond_branch
+	add	r0, r7, #1
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+._365:
+	add	r2, r2, #0x44
+	sub	r1, r1, #0x1
+	cmp	r1, #0
+	bge	._366	@cond_branch
+	ldr	r4, ._369 + 16
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r6, ._369 + 20
+	mov	r2, #0x91
+	lsl	r2, r2, #0x1
+	mov	r5, #0x39
+	str	r5, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0x8
+	bl	sub_8003460
+	bl	GetTaskCount
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	mov	r2, #0x93
+	lsl	r2, r2, #0x1
+	str	r5, [sp]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0xb
+	bl	sub_8003460
+	mov	r1, #0x0
+	mov	r7, #0x0
+	ldr	r0, ._369 + 24
+	mov	r3, #0x1
+	ldr	r2, [r0]
+._368:
+	add	r0, r3, #0
+	LSL	r0, r1
+	and	r0, r0, r2
+	cmp	r0, #0
+	beq	._367	@cond_branch
+	add	r0, r7, #1
+	lsl	r0, r0, #0x18
+	lsr	r7, r0, #0x18
+._367:
+	add	r1, r1, #0x1
+	cmp	r1, #0x1f
+	ble	._368	@cond_branch
+	ldr	r4, ._369 + 16
+	add	r0, r4, #0
+	add	r1, r7, #0
+	mov	r2, #0x2
+	mov	r3, #0x2
+	bl	ConvertIntToDecimalStringN
+	ldr	r0, ._369 + 20
+	mov	r2, #0x95
+	lsl	r2, r2, #0x1
+	mov	r1, #0x39
+	str	r1, [sp]
+	add	r1, r4, #0
+	mov	r3, #0xe
+	bl	sub_8003460
+	ldr	r1, ._369 + 28
+	ldr	r0, ._369 + 8
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x2
+	add	r0, r0, r1
+	ldr	r1, ._369 + 32
+	str	r1, [r0]
+._364:
+	add	sp, sp, #0x4
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._370:
+	.align	2, 0
+._369:
+	.word	gAnimScriptCallback
+	.word	gAnimScriptActive
+	.word	gActiveBank
+	.word	gSprites
+	.word	gDisplayedStringBattle
+	.word	gUnknown_03004210
+	.word	gOamMatrixAllocBitmap
+	.word	gBattleBankFunc
+	.word	debug_sub_8030C24+1
+.syntax unified
+	thumb_func_end debug_sub_803107C
 
 	thumb_func_start sub_802D204
 sub_802D204: @ 802D204

@@ -24,6 +24,7 @@
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
+#include "m4a.h"
 #include "main.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -1006,6 +1007,67 @@ u8 sav1_map_get_battletype(void)
     return get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->battleType;
 }
 
+#ifdef DEBUG
+
+void debug_sub_8076B68(void);
+
+void debug_sub_80589D8(void);
+
+void debug_sub_8058A50(void);
+
+void CB2_InitTestMenu(void)
+{
+    m4aSoundVSyncOff();
+    SetVBlankCallback(NULL);
+    DmaFill32(3, 0, (void *) VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *) PLTT, PLTT_SIZE);
+    ResetPaletteFade();
+    ResetSpriteData();
+    ResetTasks();
+    remove_some_task();
+    SetUpWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    debug_sub_8076B68();
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    REG_IE |= 1;
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP;
+    m4aSoundVSyncOn();
+    SetVBlankCallback(debug_sub_8058A50);
+    m4aSongNumStart(0x19D);
+    SetMainCallback2(debug_sub_80589D8);
+}
+
+void debug_sub_80589D8(void) {
+    if (UpdatePaletteFade()) {
+        return;
+    }
+
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
+void debug_sub_80589F4(void) {
+    if (UpdatePaletteFade()) {
+        return;
+    }
+
+    SetVBlankCallback(NULL);
+
+    DmaFill32(3, 0, (void *) VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *) PLTT, PLTT_SIZE);
+
+    SetMainCallback2(gMain.savedCallback);
+}
+
+void debug_sub_8058A50(void) {
+    ProcessSpriteCopyRequests();
+    LoadOam();
+    TransferPlttBuffer();
+}
+
+#endif
+
 void ResetSafariZoneFlag_(void)
 {
     ResetSafariZoneFlag();
@@ -1108,6 +1170,34 @@ void CB2_NewGame(void)
     set_callback1(c1_overworld);
     SetMainCallback2(c2_overworld);
 }
+
+#ifdef DEBUG
+
+extern void (*gFieldCallback)(void);
+
+void debug_sub_8058C00(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    player_avatar_init_params_reset();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+
+    if (gMain.heldKeys & R_BUTTON) {
+        gFieldCallback = ExecuteTruckSequence;
+    } else {
+        gFieldCallback = sub_8080B60;
+    }
+
+    do_load_map_stuff_loop(&gMain.state);
+    SetFieldVBlankCallback();
+    set_callback1(c1_overworld);
+    SetMainCallback2(c2_overworld);
+}
+
+#endif
 
 void CB2_WhiteOut(void)
 {
@@ -1260,10 +1350,17 @@ void sub_805470C(void)
     sub_8080B60();
 }
 
+extern u8 gUnknown_020297ED;
+
 void CB2_ContinueSavedGame(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
+#ifdef DEBUG
+    if (gMain.heldKeys & R_BUTTON) {
+        gUnknown_020297ED = TRUE;
+    }
+#endif
     ResetSafariZoneFlag_();
     sub_805338C();
     sub_8053198();

@@ -791,193 +791,232 @@ _0812B4D0:
 	thumb_func_end SafariBufferRunCommand
 
 	thumb_func_start bx_battle_menu_t6_2
-bx_battle_menu_t6_2: @ 812B4D4
-	push {r4,r5,lr}
-	ldr r0, _0812B508 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r2, 0x1
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B546
-	movs r0, 0x5
-	bl PlaySE
-	bl DestroyMenuCursor
-	ldr r1, _0812B50C @ =gActionSelectionCursor
-	ldr r0, _0812B510 @ =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0812B524
-	cmp r0, 0x1
-	bgt _0812B514
-	cmp r0, 0
-	beq _0812B51E
-	b _0812B540
-	.align 2, 0
-_0812B508: .4byte gMain
-_0812B50C: .4byte gActionSelectionCursor
-_0812B510: .4byte gActiveBank
-_0812B514:
-	cmp r0, 0x2
-	beq _0812B52A
-	cmp r0, 0x3
-	beq _0812B536
-	b _0812B540
-_0812B51E:
-	movs r0, 0x1
-	movs r1, 0x5
-	b _0812B52E
-_0812B524:
-	movs r0, 0x1
-	movs r1, 0x6
-	b _0812B52E
-_0812B52A:
-	movs r0, 0x1
-	movs r1, 0x7
-_0812B52E:
-	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _0812B540
-_0812B536:
-	movs r0, 0x1
-	movs r1, 0x8
-	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-_0812B540:
-	bl SafariBufferExecCompleted
-	b _0812B64E
-_0812B546:
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B584
-	ldr r5, _0812B57C @ =gActionSelectionCursor
-	ldr r4, _0812B580 @ =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B64E
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl nullsub_8
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x1
-	b _0812B5F2
-	.align 2, 0
-_0812B57C: .4byte gActionSelectionCursor
-_0812B580: .4byte gActiveBank
-_0812B584:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B5C0
-	ldr r5, _0812B5B8 @ =gActionSelectionCursor
-	ldr r4, _0812B5BC @ =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _0812B64E
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl nullsub_8
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x1
-	b _0812B5F2
-	.align 2, 0
-_0812B5B8: .4byte gActionSelectionCursor
-_0812B5BC: .4byte gActiveBank
-_0812B5C0:
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B60C
-	ldr r5, _0812B604 @ =gActionSelectionCursor
-	ldr r4, _0812B608 @ =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B64E
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl nullsub_8
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x2
-_0812B5F2:
-	eors r0, r2
-	strb r0, [r1]
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl sub_802E3E4
-	b _0812B64E
-	.align 2, 0
-_0812B604: .4byte gActionSelectionCursor
-_0812B608: .4byte gActiveBank
-_0812B60C:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0812B64E
-	ldr r5, _0812B654 @ =gActionSelectionCursor
-	ldr r4, _0812B658 @ =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _0812B64E
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl nullsub_8
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x2
-	eors r0, r2
-	strb r0, [r1]
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl sub_802E3E4
-_0812B64E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0812B654: .4byte gActionSelectionCursor
-_0812B658: .4byte gActiveBank
+bx_battle_menu_t6_2:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._94
+	ldrh	r1, [r0, #0x2e]
+	mov	r2, #0x1
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._89	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	DestroyMenuCursor
+	ldr	r1, ._94 + 4
+	ldr	r0, ._94 + 8
+	ldrb	r0, [r0]
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0x1
+	beq	._90	@cond_branch
+	cmp	r0, #0x1
+	bgt	._91	@cond_branch
+	cmp	r0, #0
+	beq	._92	@cond_branch
+	b	._101
+._95:
+	.align	2, 0
+._94:
+	.word	gMain
+	.word	gActionSelectionCursor
+	.word	gActiveBank
+._91:
+	cmp	r0, #0x2
+	beq	._96	@cond_branch
+	cmp	r0, #0x3
+	beq	._97	@cond_branch
+	b	._101
+._92:
+	mov	r0, #0x1
+	mov	r1, #0x5
+	b	._100
+._90:
+	mov	r0, #0x1
+	mov	r1, #0x6
+	b	._100
+._96:
+	mov	r0, #0x1
+	mov	r1, #0x7
+._100:
+	mov	r2, #0x0
+	bl	dp01_build_cmdbuf_x21_a_bb
+	b	._101
+._97:
+	mov	r0, #0x1
+	mov	r1, #0x8
+	mov	r2, #0x0
+	bl	dp01_build_cmdbuf_x21_a_bb
+._101:
+	bl	SafariBufferExecCompleted
+	b	._129
+._89:
+	mov	r3, #0x20
+	add	r0, r3, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._103	@cond_branch
+	ldr	r5, ._107
+	ldr	r4, ._107 + 4
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._104	@cond_branch
+	b	._129
+._104:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r0, [r0]
+	bl	nullsub_8
+	ldrb	r1, [r4]
+	add	r1, r1, r5
+	ldrb	r0, [r1]
+	mov	r2, #0x1
+	b	._111
+._108:
+	.align	2, 0
+._107:
+	.word	gActionSelectionCursor
+	.word	gActiveBank
+._103:
+	mov	r0, #0x10
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._109	@cond_branch
+	ldr	r5, ._112
+	ldr	r4, ._112 + 4
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	add	r0, r2, #0
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._129	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r0, [r0]
+	bl	nullsub_8
+	ldrb	r1, [r4]
+	add	r1, r1, r5
+	ldrb	r0, [r1]
+	mov	r2, #0x1
+	b	._111
+._113:
+	.align	2, 0
+._112:
+	.word	gActionSelectionCursor
+	.word	gActiveBank
+._109:
+	mov	r0, #0x40
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._114	@cond_branch
+	ldr	r5, ._117
+	ldr	r4, ._117 + 4
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._129	@cond_branch
+	b	._116
+._118:
+	.align	2, 0
+._117:
+	.word	gActionSelectionCursor
+	.word	gActiveBank
+._114:
+	mov	r0, #0x80
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._119	@cond_branch
+	ldr	r5, ._122
+	ldr	r4, ._122 + 4
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r1, [r0]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	bne	._129	@cond_branch
+._116:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r0, [r0]
+	bl	nullsub_8
+	ldrb	r1, [r4]
+	add	r1, r1, r5
+	ldrb	r0, [r1]
+	mov	r2, #0x2
+._111:
+	eor	r0, r0, r2
+	strb	r0, [r1]
+	ldrb	r0, [r4]
+	add	r0, r0, r5
+	ldrb	r0, [r0]
+	mov	r1, #0x0
+	bl	sub_802E3E4
+	b	._129
+._123:
+	.align	2, 0
+._122:
+	.word	gActionSelectionCursor
+	.word	gActiveBank
+._119:
+	mov	r0, #0x80
+	lsl	r0, r0, #0x1
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._124	@cond_branch
+	ldr	r0, ._127
+	ldrb	r2, [r0]
+	lsl	r0, r2, #0x1
+	add	r0, r0, r2
+	lsl	r0, r0, #0x2
+	ldr	r1, ._127 + 4
+	add	r0, r0, r1
+	ldrb	r1, [r0]
+	add	r0, r3, #0
+	and	r0, r0, r1
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._129	@cond_branch
+	str	r0, [sp]
+	add	r0, r2, #0
+	add	r1, r2, #0
+	mov	r3, #0x4
+	bl	move_anim_start_t3
+	b	._129
+._128:
+	.align	2, 0
+._127:
+	.word	gActiveBank
+	.word	+0x2017810
+._124:
+	mov	r0, #0x8
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._129	@cond_branch
+	bl	sub_804454C
+._129:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+.syntax unified
 	thumb_func_end bx_battle_menu_t6_2
 
 	thumb_func_start sub_812B65C

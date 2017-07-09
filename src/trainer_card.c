@@ -38,7 +38,7 @@ struct Struct2000000
     /*0x0B*/ bool8 var_b;
     /*0x0C*/ bool8 var_c;
     /*0x0D*/ bool8 var_d;
-    /*0x0E*/ u8 var_e[8];
+    /*0x0E*/ bool8 var_e[8];
     /*0x16*/ u8 filler_16[10];
     /*0x20*/ u8 var_20[4][0x10];
     /*0x60*/ Callback *var_60;
@@ -150,8 +150,44 @@ static void TrainerCard_Back_PrintPokemonTrades_Label(void);
 static void TrainerCard_Back_PrintPokemonTrades(void);
 void unref_sub_8094588(u16 left, u16 top);
 
+#ifdef DEBUG
+static u8 gDebug_03000748;
+#endif
+
+const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
+const u32 unkData = 0x2000000;
+#ifdef DEBUG
+const struct TrainerCard gUnknown_Debug_083E0448 = {
+    .gender = FEMALE,
+    .stars = 4,
+    .hasPokedex = TRUE,
+    .var_3 = TRUE,
+    .var_4 = TRUE,
+    .firstHallOfFameA = 999,
+    .firstHallOfFameB = 99,
+    .firstHallOfFameC = 99,
+    .pokedexSeen = 411,
+    .trainerId = 12345,
+    .playTimeHours = 99,
+    .playTimeMinutes = 99,
+    .linkBattleWins = 9999,
+    .linkBattleLosses = 9999,
+    .battleTowerWins = 9999,
+    .battleTowerLosses = 9999,
+    .contestsWithFriends = 999,
+    .pokeblocksWithFriends = 0xFFFF,
+    .pokemonTrades = 0xFFFF,
+    .money = 99999,
+    .var_28 = {1, 2, 3, 4},
+    .playerName = _("てすと"),
+};
+#endif
+
 void sub_8093110(Callback arg1)
 {
+#ifdef DEBUG
+    gDebug_03000748 = 0;
+#endif
     sub_80932AC(arg1);
     SetMainCallback2(sub_8093174);
     ewram0.language = GAME_LANGUAGE;
@@ -159,10 +195,42 @@ void sub_8093110(Callback arg1)
 
 void sub_8093130(u8 playerIndex, Callback arg2)
 {
+#ifdef DEBUG
+    gDebug_03000748 = 0;
+#endif
     sub_80932E4(playerIndex, arg2);
     SetMainCallback2(sub_8093174);
     ewram0.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
 }
+
+#ifdef DEBUG
+void debug_sub_80A0710(Callback callback)
+{
+    gDebug_03000748 = TRUE;
+    sub_80932AC(callback);
+    SetMainCallback2(sub_8093174);
+    ewram0.language = GAME_LANGUAGE;
+}
+
+void debug_sub_80A073C(Callback callback)
+{
+    memcpy(&gTrainerCards[0], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+    gDebug_03000748=TRUE;
+    sub_80932E4(0, callback);
+    SetMainCallback2(sub_8093174);
+    ewram0.language = GAME_LANGUAGE;
+}
+
+void debug_sub_80A0780()
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        memcpy(&gTrainerCards[i], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+    }
+}
+#endif
 
 static void sub_8093174(void)
 {
@@ -558,6 +626,19 @@ void sub_80936D4(void)
             }
         }
     }
+
+#ifdef DEBUG
+    if (gDebug_03000748 != 0)
+    {
+        ewram0.var_8 = TRUE;
+        ewram0.var_9 = TRUE;
+        ewram0.var_a = TRUE;
+        ewram0.var_b = TRUE;
+        ewram0.var_c = TRUE;
+        ewram0.var_d = TRUE;
+        memset(ewram0.var_e, TRUE, sizeof(ewram0.var_e));
+    }
+#endif
 }
 
 void sub_80937A4()
@@ -648,6 +729,17 @@ bool8 sub_80938CC(struct Task *task)
             return TRUE;
         }
     }
+#ifdef DEBUG
+    else if (gDebug_03000748 && gMain.newKeys & R_BUTTON)
+    {
+        ewram0.var_2++;
+        ewram0.var_2 %= 5;
+        sub_8093EA0();
+        if (ewram0.var_3 == 0) {
+            sub_8093FD0();
+        }
+    }
+#endif
 
     return FALSE;
 }
@@ -1606,7 +1698,11 @@ static void TrainerCard_Front_PrintPokedexCount(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_7 == FALSE)
+    if (
+#ifdef DEBUG
+        gDebug_03000748 == 0 &&
+#endif
+        ewram0.var_7 == FALSE)
     {
         sub_8094110();
         return;

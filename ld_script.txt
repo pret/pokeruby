@@ -114,6 +114,7 @@ SECTIONS {
         src/party_menu.o(.text);
         asm/party_menu.o(.text_8070968);
         src/start_menu.o(.text);
+        src/start_menu_debug.o(.text);
         src/menu.o(.text);
         src/tileset_anim.o(.text);
         src/palette.o(.text);
@@ -133,7 +134,10 @@ SECTIONS {
         asm/cable_club.o(.text);
         src/cable_club.o(.text);
         asm/cable_club.o(.text_80830E4);
+        src/tomomichi_debug_menu.o(.text);
+        src/nohara_debug_menu.o(.text);
         src/mori_debug_menu.o(.text);
+        src/taya_debug_window.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
@@ -153,6 +157,7 @@ SECTIONS {
         asm/pokemon_summary_screen.o(.text_80A0958);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
+        src/kagaya_debug_menu.o(.text);
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         asm/item_menu.o(.text);
@@ -163,6 +168,7 @@ SECTIONS {
         src/shop.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
+        src/watanabe_debug_menu.o(.text);
         src/script_menu.o(.text);
         src/naming_screen.o(.text);
         src/money.o(.text);
@@ -242,6 +248,7 @@ SECTIONS {
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/mystery_event_script.o(.text);
+        src/unk_debug_menu_3.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
@@ -270,6 +277,7 @@ SECTIONS {
         src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
+        src/nakamura_debug_menu.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
         src/bard_music.o(.text);
@@ -365,6 +373,7 @@ SECTIONS {
         data/reset_rtc_screen.o(.rodata);
         data/party_menu.o(.rodata);
         src/start_menu.o(.rodata);
+        data/debug_start_menu.o(.rodata);
         src/menu.o(.rodata);
         data/tileset_anim.o(.rodata);
         src/palette.o(.rodata);
@@ -374,14 +383,17 @@ SECTIONS {
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
-        data/task.o(.rodata);
+        src/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/rom_8080874.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
+        data/debug_menu_tomomichi.o(.rodata);
+        data/debug_menu_nohara.o(.rodata);
         data/mori_debug_menu.o(.rodata);
+        data/debug_menu_taya.o(.rodata);
         data/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);
@@ -396,6 +408,7 @@ SECTIONS {
         data/pokemon_icon.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/fldeff_cut.o(.rodata);
+        src/kagaya_debug_menu.o(.rodata);
         data/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         data/item.o(.rodata);
@@ -403,6 +416,7 @@ SECTIONS {
         data/contest.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
+        data/debug_menu_watanabe.o(.rodata);
         src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
@@ -441,6 +455,7 @@ SECTIONS {
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
+        src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         data/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
@@ -472,8 +487,10 @@ SECTIONS {
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
+        data/debug_mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
+        src/nakamura_debug_menu.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
@@ -481,6 +498,7 @@ SECTIONS {
         data/strings2.o(.rodata);
         data/menu_cursor.o(.rodata);
         data/mystery_event_msg.o(.rodata);
+        data/debug_menu_3.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

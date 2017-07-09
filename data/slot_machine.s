@@ -34,6 +34,9 @@ gUnknown_083ECAAC:: @ 83ECAAC
 	.4byte sub_81023FC
 	.4byte sub_8102424
 	.4byte sub_8102460
+.ifdef DEBUG
+	.4byte debug_sub_8116E74
+.endif
 
 	.align 2
 gUnknown_083ECB20:: @ 83ECB20
@@ -1528,3 +1531,100 @@ gUnknown_083EDE8C:: @ 83EDE8C
 	.align 2
 gReelTimeWindowTilemap:: @ 83EEFE0
 	.incbin "graphics/slot_machine/reel_time_window_map.bin"
+
+.ifdef DEBUG
+Str_841B1C4::
+	.string "SETTEI$"
+
+Str_841B1CB::
+	.string "MAWASITA$"
+
+Str_841B1D4::
+	.string "MODOSI$"
+
+Str_841B1DB::
+	.string "NOMARE$"
+
+Str_841B1E2::
+	.string "MAE　7$"
+
+Str_841B1E8::
+	.string "LR　　HENKOU$"
+
+Str_841B1F3::
+	.string "START　　JIDOUSU$"
+
+Str_841B202::
+	.string "SELECT　　SETTEI$"
+
+Str_841B211::
+	.string "TYUHSEN$"
+
+Str_841B219::
+	.string "CHERRY$"
+
+Str_841B220::
+	.string "REPLAY$"
+
+Str_841B227::
+	.string "HASUBO$"
+
+Str_841B22E::
+	.string "RURIRI$"
+
+Str_841B235::
+	.string "INAZU$"
+
+Str_841B23B::
+	.string "REG$"
+
+Str_841B23F::
+	.string "BIG$"
+
+Str_841B243::
+	.string "BD$"
+
+Str_841B246::
+	.string "R7$"
+
+Str_841B249::
+	.string "B7$"
+
+Str_841B24C::
+	.string "A　　COIN$"
+
+Str_841B254::
+	.string "TYUHSEN$"
+
+Str_841B25C::
+	.string "UD　　100$"
+
+Str_841B264::
+	.string "LR　　1000$"
+
+Str_841B26D::
+    .string "×$"
+
+	.align 2
+_841B270::
+	.4byte Str_841B219, debug_sub_811B1C4+1
+	.4byte Str_841B220, debug_sub_811B1EC+1
+	.4byte Str_841B227, debug_sub_811B210+1
+	.4byte Str_841B22E, debug_sub_811B238+1
+	.4byte Str_841B235, debug_sub_811B260+1
+	.4byte Str_841B23B, debug_sub_811B288+1
+	.4byte Str_841B23F, debug_sub_811B2B0+1
+	.4byte Str_841B243, debug_sub_811B2D8+1
+
+Str_841B2B0::
+	.string "·カウントエラーがおきました$"
+
+Str_841B2BF::
+	.string "·リールそうさで　エラーが　おきました$"
+
+Str_841B2D3::
+	.string "·フラグオフエラーが　おきました$"
+
+Str_841B2E4::
+	.string "·ボーナスこやくの　エラーが　おきました$"
+.endif

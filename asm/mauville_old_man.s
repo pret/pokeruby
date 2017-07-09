@@ -518,7 +518,7 @@ sub_80F8184: @ 80F8184
 	lsls r0, 3
 	ldr r1, _080F81B4 @ =gTasks
 	adds r5, r0, r1
-	ldr r1, _080F81B8 @ =gUnknown_03005DA0
+	ldr r1, _080F81B8 @ =gUnknown_03005D38+0x64
 	adds r0, r5, 0
 	bl sub_80F7FB0
 	movs r1, 0x8
@@ -534,7 +534,7 @@ _080F81A8:
 	mov pc, r0
 	.align 2, 0
 _080F81B4: .4byte gTasks
-_080F81B8: .4byte gUnknown_03005DA0
+_080F81B8: .4byte gUnknown_03005D38+0x64
 _080F81BC: .4byte _080F81C0
 	.align 2, 0
 _080F81C0:
@@ -587,14 +587,14 @@ _080F8228:
 	adds r1, r0
 	movs r3, 0
 	ldrb r0, [r1]
-	ldr r7, _080F8248 @ =gUnknown_03005DA0
+	ldr r7, _080F8248 @ =gUnknown_03005D38+0x64
 	ldrh r2, [r5, 0x12]
 	ldr r6, _080F824C @ =gUnknown_020388BC
 	b _080F825A
 	.align 2, 0
 _080F8240: .4byte gSaveBlock1 + 0x2D94
 _080F8244: .4byte gStringVar4
-_080F8248: .4byte gUnknown_03005DA0
+_080F8248: .4byte gUnknown_03005D38+0x64
 _080F824C: .4byte gUnknown_020388BC
 _080F8250:
 	adds r1, 0x1
@@ -778,13 +778,13 @@ _080F83A0:
 	movs r1, 0
 	strh r0, [r5, 0xE]
 	strh r1, [r5, 0xA]
-	ldr r0, _080F83B4 @ =gUnknown_03005DA0
+	ldr r0, _080F83B4 @ =gUnknown_03005D38+0x64
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0xC]
 	movs r0, 0x4
 	b _080F83C6
 	.align 2, 0
-_080F83B4: .4byte gUnknown_03005DA0
+_080F83B4: .4byte gUnknown_03005D38+0x64
 _080F83B8:
 	ldrh r0, [r5, 0xC]
 	subs r0, 0x1

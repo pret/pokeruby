@@ -173,6 +173,130 @@ gUnknown_083E57A4:: @ 83E57A4
 	.byte 5, 15, 15, 52
 	.4byte Unknown_3E5790
 
+.ifdef DEBUG
+Str_8411540::
+	.string "レイアウトを　にほんごで　ひょうじ？$" @ Display using Japanese layout?
+
+Str_8411553:
+	.string "にほんご　$" @ Japanese
+
+Str_8411559:
+	.string "かいがい　$" @ Overseas
+
+	.align 2
+_8411560::
+	.4byte Str_8411553
+	.4byte Str_8411559
+
+Str_8411568::
+	.string "イメージ　タイプを　えらんでね$" @ Choose an image type
+
+@ 0x8411578
+	.string "{STR_VAR_1}$"
+
+Str_841157B:
+	.string "オレンジ　$" @ Orange
+
+Str_8411581:
+	.string "ハーバー　$" @ Harbor
+
+Str_8411587:
+	.string "キラキラ　$" @ Glitter
+
+Str_841158D:
+	.string "メカニカル$" @ Mech
+
+Str_8411593:
+	.string "ウッディー$" @ Wood
+
+Str_8411599:
+	.string "クロス　　$" @ Wave
+
+Str_841159F:
+	.string "トレジャー$" @ Bead
+
+Str_84115A5:
+	.string "シャドウ　$" @ Shadow
+
+Str_84115AB:
+	.string "トロピカル$" @ Tropic
+
+Str_84115B1:
+	.string "ドリーム　$" @ Dream
+
+Str_84115B7:
+	.string "ミラクル　$" @ Fab
+
+Str_84115BD:
+	.string "レトロ　　$" @ Retro
+
+	.align 2
+_84115C4::
+	.4byte Str_841157B
+	.4byte Str_8411581
+	.4byte Str_8411587
+	.4byte Str_841158D
+	.4byte Str_8411593
+	.4byte Str_8411599
+	.4byte Str_841159F
+	.4byte Str_84115A5
+	.4byte Str_84115AB
+	.4byte Str_84115B1
+	.4byte Str_84115B7
+	.4byte Str_84115BD
+
+Str_84115F4:
+	.string "メールをみる$" @ View Mail
+
+Str_84115FB:
+	.string "メールとうろく$" @ Register Mail
+
+Str_8411603:
+	.string "もたせる$" @ Give to Pokémon
+
+Str_8411608::
+	.string "メールをけす$" @ Delete Mail
+.endif
+
 @ XXX: what is this?
 	.align 2
 	.4byte 0x2000000
+
+.ifdef DEBUG
+Str_841160F::
+	.string "{STR_VAR_1}　{STR_VAR_2}$"
+
+Str_841161A::
+	.string "メール{STR_VAR_1}　{STR_VAR_2}$"
+
+Str_8411623::
+	.string "メール{STR_VAR_1}を　だれに　もたせる？$"
+
+Str_8411634::
+	.string "000　{STR_VAR_1}$"
+
+Str_841163B::
+	.string "せいきの　データが　とうろくずみ　です\n"
+	.string "しんき　とうろく　できません$"
+
+Str_841165E::
+	.string "せいきに　とうろくされたメールデータは\n"
+	.string "へんこう　できません$"
+
+Str_841167D::
+	.string "メール{STR_VAR_1}　とうろく　かいじょ$"
+
+Str_841168D::
+	.string "デバッグメニューから　とうろくした\n"
+	.string "メール　いがいは　けせません$"
+
+Str_84116AE::
+	.string "メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}$"
+
+	.align 2
+_84116BC::
+	.4byte Str_84115F4, 0x0
+	.4byte Str_84115FB, 0x0
+	.4byte Str_8411603, 0x0
+	.4byte Str_8411608, 0x0
+.endif

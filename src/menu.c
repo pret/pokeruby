@@ -32,6 +32,8 @@ static u8 sub_80724F4(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072620(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072D18(u8, u8);
 
+static u8 menu_filler[24] __attribute__((unused));
+
 static struct Menu gMenu;
 
 EWRAM_DATA struct Window gMenuWindow = {0};

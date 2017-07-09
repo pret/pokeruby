@@ -100,6 +100,71 @@ gUnknown_083970C8:: @ 83970C8
 	.byte 1
 	.byte 1
 
+.ifdef DEBUG
+gDebugText_Weather_0:: @ 0x83BCA78
+	.string "なし　　　$"
+
+gDebugText_Weather_1:: @ 0x83BCA7E
+	.string "はれ　　　$"
+
+gDebugText_Weather_2:: @ 0x83BCA84
+	.string "はれ2　　$"
+
+gDebugText_Weather_3:: @ 0x83BCA8A
+	.string "あめ　　　$"
+
+gDebugText_Weather_4:: @ 0x83BCA90
+	.string "ゆき　　　$"
+
+gDebugText_Weather_5:: @ 0x83BCA96
+	.string "かみなり　$"
+
+gDebugText_Weather_6:: @ 0x83BCA9C
+	.string "きり　　　$"
+
+gDebugText_Weather_7:: @ 0x83BCAA2
+	.string "かざんばい$"
+
+gDebugText_Weather_8:: @ 0x83BCAA8
+	.string "すなあらし$"
+
+gDebugText_Weather_9:: @ 0x83BCAAE
+	.string "きり2　　$"
+
+gDebugText_Weather_10:: @ 0x83BCAB4
+	.string "かいてい　$"
+
+gDebugText_Weather_11:: @ 0x83BCABA
+	.string "くもり　　$"
+
+gDebugText_Weather_12:: @ 0x83BCAC0
+	.string "はれ3　　$"
+
+gDebugText_Weather_13:: @ 0x83BCAC6
+	.string "おおあめ$"
+
+gDebugText_Weather_14:: @ 0x83BCACB
+	.string "かいてい2$"
+
+	.align 2
+gDebugText_Weather:: @ 0x83BCAD4
+	.4byte gDebugText_Weather_0
+	.4byte gDebugText_Weather_1
+	.4byte gDebugText_Weather_2
+	.4byte gDebugText_Weather_3
+	.4byte gDebugText_Weather_4
+	.4byte gDebugText_Weather_5
+	.4byte gDebugText_Weather_6
+	.4byte gDebugText_Weather_7
+	.4byte gDebugText_Weather_8
+	.4byte gDebugText_Weather_9
+	.4byte gDebugText_Weather_10
+	.4byte gDebugText_Weather_11
+	.4byte gDebugText_Weather_12
+	.4byte gDebugText_Weather_13
+	.4byte gDebugText_Weather_14
+.endif
+
 	.align 2
 gUnknown_083970E8:: @ 83970E8
 	.incbin "graphics/weather/0.gbapal"

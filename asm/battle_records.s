@@ -483,6 +483,66 @@ _081102E0: .4byte gLinkPlayers
 _081102E4: .4byte gLinkPlayerMapObjects
 	thumb_func_end sub_8110290
 
+
+	thumb_func_start debug_sub_81257E0
+debug_sub_81257E0:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, r8
+	push	{r7}
+	add	sp, sp, #0xfffffffc
+	bl	InitLinkBattleRecords
+	mov	r5, #0x0
+	ldr	r6, ._62
+	sub	r0, r6, #2
+	mov	r8, r0
+	ldr	r7, ._62 + 4
+._61:
+	ldr	r0, ._62 + 8
+	lsl	r3, r5, #0x2
+	add	r3, r3, r0
+	ldrb	r4, [r3]
+	sub	r4, r4, #0x1
+	lsl	r0, r4, #0x1
+	add	r0, r0, r4
+	lsl	r0, r0, #0x2
+	add	r1, r0, r6
+	add r0, r0, r8
+	ldrh	r2, [r0]
+	ldrb	r3, [r3, #0x1]
+	ldr	r0, ._62 + 12
+	lsl	r4, r4, #0x2
+	add	r4, r4, r0
+	ldrb	r4, [r4, #0x1]
+	lsl	r0, r4, #0x3
+	sub	r0, r0, r4
+	lsl	r0, r0, #0x2
+	add	r0, r0, r7
+	ldrb	r0, [r0, #0x1a]
+	str	r0, [sp]
+	ldr	r0, ._62 + 16
+	bl	sub_8110158
+	add	r5, r5, #0x1
+	cmp	r5, #0x2
+	bls	._61	@cond_branch
+	add	sp, sp, #0x4
+	pop	{r3}
+	mov	r8, r3
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._63:
+	.align	2, 0
+._62:
+	.word	gUnknown_083F8410+0xa
+	.word	gLinkPlayers
+	.word	gUnknown_083F8410+0x5c
+	.word	gLinkPlayerMapObjects
+	.word	gSaveBlock1+0x30b8
+.syntax unified
+	thumb_func_end debug_sub_81257E0
+
+
 	thumb_func_start PrintLinkBattleWinsLossesDraws
 PrintLinkBattleWinsLossesDraws: @ 81102E8
 	push {r4,lr}

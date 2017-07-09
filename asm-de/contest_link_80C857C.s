@@ -369,7 +369,7 @@ _080C881C:
 _080C884C: .4byte gContestMons
 _080C8850: .4byte gLinkPlayers
 _080C8854: .4byte gBlockRecvBuffer
-_080C8858: .4byte 0x02038572
+_080C8858: .4byte gContestMons+0x2
 _080C885C:
 	ldrb r0, [r4, 0xA]
 	cmp r0, 0xFC
