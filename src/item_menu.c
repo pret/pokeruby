@@ -1,10 +1,12 @@
 #include "global.h"
 #include "data2.h"
 #include "decompress.h"
+#include "field_effect.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "item.h"
 #include "items.h"
+#include "item_menu.h"
 #include "item_use.h"
 #include "mail_data.h"
 #include "main.h"
@@ -41,6 +43,7 @@ extern u8 gUnknown_0203855B;
 extern u8 gUnknown_0203855C;
 extern u8 gUnknown_02038560;
 extern u8 gUnknown_02038562;
+extern u8 gUnknown_02038563;
 extern u8 gUnknown_02038564;
 extern u8 gUnknown_03000700;
 extern u8 gUnknown_03000701;
@@ -56,6 +59,8 @@ extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void PauseVerticalScrollIndicator();
 extern u8 sub_80F9284(void);
 extern void sub_808B5B4();
+extern u8 sub_80F92F4();
+extern void sub_80C9C7C(u8);
 
 extern const struct CompressedSpriteSheet gUnknown_083C1CC8;
 extern const struct CompressedSpriteSheet gUnknown_083C1CD0;
@@ -95,8 +100,6 @@ const struct MenuAction2 gUnknown_083C1640[] =
     {OtherText_Confirm, sub_80A69E0},
 };
 
-extern const u8 gUnknown_083C1690[][6];
-/*
 const u8 gUnknown_083C1690[][6] =
 {
     {0, 1, 6, 2, 0, 0},
@@ -105,7 +108,18 @@ const u8 gUnknown_083C1690[][6] =
     {7, 0, 1, 8, 6, 2},
     {0, 8, 3, 2, 0, 0},
 };
-*/
+
+const u8 gUnknown_083C16AE[][2] =
+{
+    {6, 2},
+    {6, 2},
+    {6, 2},
+    {6, 2},
+    {2, 0},
+};
+
+//const u8 gUnknown_083C16B8[] = {7, 9, 8, 2};
+
 extern const TaskFunc gUnknown_083C16BC[][2];
 
 void sub_80A34E8(void);
@@ -126,6 +140,9 @@ void ItemListMenu_InitDescription(s16);
 void ItemListMenu_ChangeDescription(s16, int);
 void sub_80A4F68(u8);
 void sub_80A50C8(u8);
+void sub_80A5AE4(u8);
+void sub_80A5BF8(u8);
+void HandleItemMenuPaletteFade(u8);
 void ItemListMenu_InitMenu(void);
 void sub_80A73C0(void);
 void sub_80A73F0(void);
@@ -140,6 +157,7 @@ void sub_80A76A0(void);
 void sub_80A770C(void);
 void sub_80A7828(void);
 void sub_80A7834();
+int sub_80A78A0();
 void sub_80A78B8(void);
 void sub_80A797C(void);
 void CreateBagSprite(void);
@@ -303,7 +321,7 @@ bool8 sub_80A317C(void)
 
 bool8 sub_80A34B4(void)
 {
-    do
+    while (1)
     {
         if (sub_80A317C() == TRUE)
         {
@@ -311,9 +329,12 @@ bool8 sub_80A34B4(void)
             ResetTasks();
             return TRUE;
         }
-    } while (sub_80F9344() != 1);
+        if (sub_80F9344() == TRUE)
+            break;
+    }
     return FALSE;
 }
+
 
 void sub_80A34E8(void)
 {
@@ -837,7 +858,7 @@ void sub_80A413C(void)
     sub_80A405C(gUnknown_03005D10[gUnknown_02038559].unk0);
 }
 
-void sub_80A4164(u8 *a, u16 b, int c, u8 d)
+void sub_80A4164(u8 *a, u16 b, enum StringConvertMode c, u8 d)
 {
     *a++ = CHAR_MULT_SIGN;
     a[0] = EXT_CTRL_CODE_BEGIN;
@@ -847,7 +868,7 @@ void sub_80A4164(u8 *a, u16 b, int c, u8 d)
     ConvertIntToDecimalStringN(a, b, c, d);
 }
 
-void sub_80A418C(u16 a, int b, u8 c, u8 d, u8 e)
+void sub_80A418C(u16 a, enum StringConvertMode b, u8 c, u8 d, u8 e)
 {
     sub_80A4164(gStringVar1, a, b, e);
     MenuPrint(gStringVar1, c, d);
@@ -1437,7 +1458,7 @@ void sub_80A4BF0(u16 *a)
     {
         MenuDrawTextWindow(0, 7, 13, 12);
         sub_80A4008(a, 1, 8, 12, 4);
-        if (sub_80F9344() == 1 && gUnknown_03000701 == 5)
+        if (sub_80F9344() == TRUE && gUnknown_03000701 == 5)
         {
             sub_80A7834(1, 0);
         }
@@ -1686,3 +1707,782 @@ void sub_80A50C8(u8 taskId)
         }
     }
 }
+
+bool8 sub_80A52C4(u8 taskId, u16 b)
+{
+    s16 *taskData = gTasks[taskId].data;
+    
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x40)
+    {
+        if (taskData[1] != b)
+            taskData[1]++;
+        else
+            taskData[1] = 1;
+        return TRUE;
+    }
+    
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x80)
+    {
+        if (taskData[1] != 1)
+            taskData[1]--;
+        else
+            taskData[1] = b;
+        return TRUE;
+    }
+    
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x10)
+    {
+        if (taskData[1] + 10 < b)
+            taskData[1] += 10;
+        else
+            taskData[1] = b;
+        return TRUE;
+    }
+    
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x20)
+    {
+        if (taskData[1] > 10)
+            taskData[1] -= 10;
+        else
+            taskData[1] = 1;
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
+bool8 sub_80A5350(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+    
+    if (sub_80A52C4(taskId, gUnknown_03005D24[gUnknown_02038560].quantity) == TRUE)
+    {
+        if (gUnknown_02038559 + 1 == 4)  // if (gUnknown_02038559 == 3)
+            sub_80A418C(taskData[1], 1, taskData[2], taskData[3], 3);
+        else
+            sub_80A418C(taskData[1], 1, taskData[2], taskData[3], 2);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80A53CC(void)
+{
+    if (sub_80A34B4() == TRUE)
+    {
+        sub_80A3770();
+        gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
+    }
+}
+
+void sub_80A53F8(void)
+{
+    gUnknown_03000701 = 0;
+    SetMainCallback2(sub_80A53CC);
+}
+
+#ifdef NONMATCHING
+void sub_80A5414(u8 taskId)
+{
+    TaskFunc r5 = NULL;
+    
+    if (sub_80A78A0() != 0)
+    {
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x40)
+        {
+            if ((gUnknown_03000700 & 1) && gUnknown_03000704[gUnknown_03000700 - 1] == 8)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor3(-1);
+            }
+        }
+        //_080A546C
+        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x80)
+        {
+            if (!(gUnknown_03000700 & 1) && gUnknown_03000704[gUnknown_03000700 + 1] != 8)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor3(1);
+            }
+        }
+        //_080A549C
+        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x20)
+        {
+            if (gUnknown_03000700 > 1 && gUnknown_03000704[gUnknown_03000700 - 2] != 8)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor3(-2);
+            }
+        }
+        //_080A54CC
+        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x10)
+        {
+            if (gUnknown_03000700 <= 1 && gUnknown_03000704[gUnknown_03000700 + 2] != 8)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor3(2);
+            }
+        }
+        //_080A5500
+        else if (!(gMain.newKeys & A_BUTTON))
+        {
+            if (gMain.newKeys & B_BUTTON)
+            {
+                gTasks[taskId].data[10] = 0;
+                sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+                sub_80A4DA4(gBGTilemapBuffers[1]);
+                r5 = gUnknown_083C1640[gUnknown_03000704[3]].func;
+                r5(taskId);
+            }
+        }
+        else
+        {
+            //_080A5590
+            gTasks[taskId].data[10] = 0;
+            sub_80A4DA4(gBGTilemapBuffers[1]);
+            r5 = gUnknown_083C1640[gUnknown_03000704[gUnknown_03000700]].func;
+            r5(taskId);
+        }
+    }
+    //_080A5552
+    if (r5 == NULL)
+    {
+        if (gUnknown_03000701 == 5)
+        {
+            if (gUnknown_03000700 == 0)
+            {
+                sub_8072DDC(12);
+                return;
+            }
+            //_080A55D4
+            //else
+            //{
+                if (gUnknown_03000700 == 0 || gUnknown_03000700 == 1)
+                    sub_8072DCC(0x2F);
+                else
+                    sub_8072DCC(0x30);
+            //}
+        }
+        //_080A55E0
+        else
+        {
+            if (gUnknown_03000700 == 0 || gUnknown_03000700 == 1)
+                sub_8072DCC(0x2F);
+            else
+                sub_8072DCC(0x30);
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_80A5414(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    movs r5, 0\n\
+    bl sub_80A78A0\n\
+    cmp r0, 0\n\
+    bne _080A5426\n\
+    b _080A5552\n\
+_080A5426:\n\
+    ldr r2, _080A5460 @ =gMain\n\
+    ldrh r0, [r2, 0x30]\n\
+    movs r1, 0xF0\n\
+    ands r1, r0\n\
+    cmp r1, 0x40\n\
+    bne _080A546C\n\
+    ldr r4, _080A5464 @ =gUnknown_03000700\n\
+    ldrb r1, [r4]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080A5440\n\
+    b _080A5552\n\
+_080A5440:\n\
+    ldrb r1, [r4]\n\
+    ldr r0, _080A5468 @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    subs r1, 0x1\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x8\n\
+    bne _080A5452\n\
+    b _080A5552\n\
+_080A5452:\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    b _080A54EE\n\
+    .align 2, 0\n\
+_080A5460: .4byte gMain\n\
+_080A5464: .4byte gUnknown_03000700\n\
+_080A5468: .4byte gUnknown_03000704\n\
+_080A546C:\n\
+    cmp r1, 0x80\n\
+    bne _080A549C\n\
+    ldr r4, _080A5494 @ =gUnknown_03000700\n\
+    ldrb r1, [r4]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080A5552\n\
+    ldrb r1, [r4]\n\
+    ldr r0, _080A5498 @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    ldrb r0, [r1, 0x1]\n\
+    cmp r0, 0x8\n\
+    beq _080A5552\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x1\n\
+    b _080A54EE\n\
+    .align 2, 0\n\
+_080A5494: .4byte gUnknown_03000700\n\
+_080A5498: .4byte gUnknown_03000704\n\
+_080A549C:\n\
+    cmp r1, 0x20\n\
+    bne _080A54CC\n\
+    ldr r4, _080A54C4 @ =gUnknown_03000700\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0x1\n\
+    bls _080A5552\n\
+    adds r1, r0, 0\n\
+    ldr r0, _080A54C8 @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    subs r1, 0x2\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x8\n\
+    beq _080A5552\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x2\n\
+    negs r0, r0\n\
+    b _080A54EE\n\
+    .align 2, 0\n\
+_080A54C4: .4byte gUnknown_03000700\n\
+_080A54C8: .4byte gUnknown_03000704\n\
+_080A54CC:\n\
+    cmp r1, 0x10\n\
+    bne _080A5500\n\
+    ldr r4, _080A54F8 @ =gUnknown_03000700\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0x1\n\
+    bhi _080A5552\n\
+    adds r1, r0, 0\n\
+    ldr r0, _080A54FC @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    ldrb r0, [r1, 0x2]\n\
+    cmp r0, 0x8\n\
+    beq _080A5552\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x2\n\
+_080A54EE:\n\
+    bl MoveMenuCursor3\n\
+    strb r0, [r4]\n\
+    b _080A5552\n\
+    .align 2, 0\n\
+_080A54F8: .4byte gUnknown_03000700\n\
+_080A54FC: .4byte gUnknown_03000704\n\
+_080A5500:\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080A5590\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080A5552\n\
+    ldr r1, _080A5570 @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    strh r5, [r0, 0x1C]\n\
+    ldr r1, _080A5574 @ =gUnknown_03005D10\n\
+    ldr r0, _080A5578 @ =gUnknown_02038559\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldrb r2, [r0]\n\
+    adds r0, r4, 0\n\
+    adds r1, r2, 0\n\
+    bl sub_80A48E8\n\
+    ldr r0, _080A557C @ =gBGTilemapBuffers + 0x800\n\
+    bl sub_80A4DA4\n\
+    ldr r1, _080A5580 @ =gUnknown_083C1640\n\
+    ldr r0, _080A5584 @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    ldrb r0, [r0, 0x3]\n\
+    lsls r0, 3\n\
+    adds r1, 0x4\n\
+    adds r0, r1\n\
+    ldr r5, [r0]\n\
+    adds r0, r4, 0\n\
+    bl _call_via_r5\n\
+_080A5552:\n\
+    cmp r5, 0\n\
+    bne _080A55FA\n\
+    ldr r0, _080A5588 @ =gUnknown_03000701\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x5\n\
+    bne _080A55E0\n\
+    ldr r0, _080A558C @ =gUnknown_03000700\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080A55D4\n\
+    movs r0, 0xC\n\
+    bl sub_8072DDC\n\
+    b _080A55FA\n\
+    .align 2, 0\n\
+_080A5570: .4byte gTasks\n\
+_080A5574: .4byte gUnknown_03005D10\n\
+_080A5578: .4byte gUnknown_02038559\n\
+_080A557C: .4byte gBGTilemapBuffers + 0x800\n\
+_080A5580: .4byte gUnknown_083C1640\n\
+_080A5584: .4byte gUnknown_03000704\n\
+_080A5588: .4byte gUnknown_03000701\n\
+_080A558C: .4byte gUnknown_03000700\n\
+_080A5590:\n\
+    ldr r1, _080A55C0 @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    strh r5, [r0, 0x1C]\n\
+    ldr r0, _080A55C4 @ =gBGTilemapBuffers + 0x800\n\
+    bl sub_80A4DA4\n\
+    ldr r1, _080A55C8 @ =gUnknown_083C1640\n\
+    ldr r0, _080A55CC @ =gUnknown_03000700\n\
+    ldrb r2, [r0]\n\
+    ldr r0, _080A55D0 @ =gUnknown_03000704\n\
+    ldr r0, [r0]\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 3\n\
+    adds r1, 0x4\n\
+    adds r0, r1\n\
+    ldr r5, [r0]\n\
+    adds r0, r4, 0\n\
+    bl _call_via_r5\n\
+    b _080A5552\n\
+    .align 2, 0\n\
+_080A55C0: .4byte gTasks\n\
+_080A55C4: .4byte gBGTilemapBuffers + 0x800\n\
+_080A55C8: .4byte gUnknown_083C1640\n\
+_080A55CC: .4byte gUnknown_03000700\n\
+_080A55D0: .4byte gUnknown_03000704\n\
+_080A55D4:\n\
+    cmp r0, 0x1\n\
+    bls _080A55E8\n\
+    movs r0, 0x30\n\
+    bl sub_8072DCC\n\
+    b _080A55FA\n\
+_080A55E0:\n\
+    ldr r0, _080A55F0 @ =gUnknown_03000700\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bhi _080A55F4\n\
+_080A55E8:\n\
+    movs r0, 0x2F\n\
+    bl sub_8072DCC\n\
+    b _080A55FA\n\
+    .align 2, 0\n\
+_080A55F0: .4byte gUnknown_03000700\n\
+_080A55F4:\n\
+    movs r0, 0x30\n\
+    bl sub_8072DCC\n\
+_080A55FA:\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided\n");
+}
+#endif
+
+__attribute__((naked))
+void sub_80A5600(u8 taskId)
+{
+    asm(".syntax unified\n\
+	push {r4,r5,lr}\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	movs r5, 0\n\
+	ldr r2, _080A563C @ =gMain\n\
+	ldrh r0, [r2, 0x30]\n\
+	movs r1, 0xF0\n\
+	ands r1, r0\n\
+	cmp r1, 0x40\n\
+	bne _080A5648\n\
+	ldr r4, _080A5640 @ =gUnknown_03000700\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0\n\
+	bne _080A561E\n\
+	b _080A5736\n\
+_080A561E:\n\
+	adds r1, r0, 0\n\
+	ldr r0, _080A5644 @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	adds r1, r0\n\
+	subs r1, 0x1\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0x8\n\
+	bne _080A5630\n\
+	b _080A5736\n\
+_080A5630:\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	b _080A56D2\n\
+	.align 2, 0\n\
+_080A563C: .4byte gMain\n\
+_080A5640: .4byte gUnknown_03000700\n\
+_080A5644: .4byte gUnknown_03000704\n\
+_080A5648:\n\
+	cmp r1, 0x80\n\
+	bne _080A5680\n\
+	ldr r4, _080A5674 @ =gUnknown_03000700\n\
+	ldrb r1, [r4]\n\
+	ldr r0, _080A5678 @ =gUnknown_02038564\n\
+	ldrb r0, [r0]\n\
+	subs r0, 0x1\n\
+	cmp r1, r0\n\
+	beq _080A5736\n\
+	cmp r1, 0x2\n\
+	beq _080A5736\n\
+	ldr r0, _080A567C @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	adds r0, r1, r0\n\
+	ldrb r0, [r0, 0x1]\n\
+	cmp r0, 0x8\n\
+	beq _080A5736\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0x1\n\
+	b _080A56D2\n\
+	.align 2, 0\n\
+_080A5674: .4byte gUnknown_03000700\n\
+_080A5678: .4byte gUnknown_02038564\n\
+_080A567C: .4byte gUnknown_03000704\n\
+_080A5680:\n\
+	cmp r1, 0x20\n\
+	bne _080A56B0\n\
+	ldr r4, _080A56A8 @ =gUnknown_03000700\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0x2\n\
+	bls _080A5736\n\
+	adds r1, r0, 0\n\
+	ldr r0, _080A56AC @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	adds r1, r0\n\
+	subs r1, 0x3\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0x8\n\
+	beq _080A5736\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0x3\n\
+	negs r0, r0\n\
+	b _080A56D2\n\
+	.align 2, 0\n\
+_080A56A8: .4byte gUnknown_03000700\n\
+_080A56AC: .4byte gUnknown_03000704\n\
+_080A56B0:\n\
+	cmp r1, 0x10\n\
+	bne _080A56E4\n\
+	ldr r4, _080A56DC @ =gUnknown_03000700\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0x2\n\
+	bhi _080A5736\n\
+	adds r1, r0, 0\n\
+	ldr r0, _080A56E0 @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	adds r1, r0\n\
+	ldrb r0, [r1, 0x3]\n\
+	cmp r0, 0x8\n\
+	beq _080A5736\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0x3\n\
+_080A56D2:\n\
+	bl MoveMenuCursor3\n\
+	strb r0, [r4]\n\
+	b _080A5736\n\
+	.align 2, 0\n\
+_080A56DC: .4byte gUnknown_03000700\n\
+_080A56E0: .4byte gUnknown_03000704\n\
+_080A56E4:\n\
+	ldrh r1, [r2, 0x2E]\n\
+	movs r0, 0x1\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _080A5768\n\
+	movs r0, 0x2\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080A5736\n\
+	ldr r1, _080A574C @ =gTasks\n\
+	lsls r0, r4, 2\n\
+	adds r0, r4\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	strh r5, [r0, 0x1C]\n\
+	ldr r1, _080A5750 @ =gUnknown_03005D10\n\
+	ldr r0, _080A5754 @ =gUnknown_02038559\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	lsls r0, 2\n\
+	adds r0, r1\n\
+	ldrb r2, [r0]\n\
+	adds r0, r4, 0\n\
+	adds r1, r2, 0\n\
+	bl sub_80A48E8\n\
+	ldr r0, _080A5758 @ =gBGTilemapBuffers + 0x800\n\
+	bl sub_80A4DA4\n\
+	ldr r1, _080A575C @ =gUnknown_083C1640\n\
+	ldr r0, _080A5760 @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x5]\n\
+	lsls r0, 3\n\
+	adds r1, 0x4\n\
+	adds r0, r1\n\
+	ldr r5, [r0]\n\
+	adds r0, r4, 0\n\
+	bl _call_via_r5\n\
+_080A5736:\n\
+	cmp r5, 0\n\
+	bne _080A57BE\n\
+	ldr r0, _080A5764 @ =gUnknown_03000700\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	bne _080A57AC\n\
+	movs r0, 0xC\n\
+	bl sub_8072DDC\n\
+	b _080A57BE\n\
+	.align 2, 0\n\
+_080A574C: .4byte gTasks\n\
+_080A5750: .4byte gUnknown_03005D10\n\
+_080A5754: .4byte gUnknown_02038559\n\
+_080A5758: .4byte gBGTilemapBuffers + 0x800\n\
+_080A575C: .4byte gUnknown_083C1640\n\
+_080A5760: .4byte gUnknown_03000704\n\
+_080A5764: .4byte gUnknown_03000700\n\
+_080A5768:\n\
+	ldr r1, _080A5798 @ =gTasks\n\
+	lsls r0, r4, 2\n\
+	adds r0, r4\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	strh r5, [r0, 0x1C]\n\
+	ldr r0, _080A579C @ =gBGTilemapBuffers + 0x800\n\
+	bl sub_80A4DA4\n\
+	ldr r1, _080A57A0 @ =gUnknown_083C1640\n\
+	ldr r0, _080A57A4 @ =gUnknown_03000700\n\
+	ldrb r2, [r0]\n\
+	ldr r0, _080A57A8 @ =gUnknown_03000704\n\
+	ldr r0, [r0]\n\
+	adds r0, r2\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 3\n\
+	adds r1, 0x4\n\
+	adds r0, r1\n\
+	ldr r5, [r0]\n\
+	adds r0, r4, 0\n\
+	bl _call_via_r5\n\
+	b _080A5736\n\
+	.align 2, 0\n\
+_080A5798: .4byte gTasks\n\
+_080A579C: .4byte gBGTilemapBuffers + 0x800\n\
+_080A57A0: .4byte gUnknown_083C1640\n\
+_080A57A4: .4byte gUnknown_03000700\n\
+_080A57A8: .4byte gUnknown_03000704\n\
+_080A57AC:\n\
+	cmp r0, 0x2\n\
+	bhi _080A57B8\n\
+	movs r0, 0x2F\n\
+	bl sub_8072DCC\n\
+	b _080A57BE\n\
+_080A57B8:\n\
+	movs r0, 0x30\n\
+	bl sub_8072DCC\n\
+_080A57BE:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+
+void sub_80A57C4(void)
+{
+    u8 r5;
+    
+    gUnknown_03000704 = gUnknown_083C16AE[gUnknown_02038559];
+    if (gUnknown_02038559 == 4)
+    {
+        gUnknown_02038564 = 1;
+        r5 = 9;
+    }
+    else if (sub_80F92F4(gScriptItemId) == 0)
+    {
+        gUnknown_03000704 = gUnknown_083C16AE[4];
+        gUnknown_02038564 = 1;
+        r5 = 9;
+    }
+    else
+    {
+        gUnknown_02038564 = 2;
+        r5 = 7;
+    }
+    sub_80A4008(gBGTilemapBuffers[1], 7, r5 + 1, 6, gUnknown_02038564 * 2);
+    MenuDrawTextWindow(6, r5, 13, gUnknown_02038564 * 2 + 1 + r5);
+    sub_80A7834(0, r5);
+    InitMenu(0, 7, r5 + 1, gUnknown_02038564, 0, 6);
+}
+
+void sub_80A5888(u8 taskId)
+{
+    if (sub_80A78A0() != 0)
+    {
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            if (gUnknown_03000700 != 0)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor(-1);
+            }
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            if (gUnknown_03000700 != gUnknown_02038564 - 1)
+            {
+                PlaySE(SE_SELECT);
+                gUnknown_03000700 = MoveMenuCursor(1);
+            }
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+            sub_80A4DA4(gBGTilemapBuffers[1]);
+            gUnknown_083C1640[gUnknown_03000704[gUnknown_03000700]].func(taskId);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80A4DA4(gBGTilemapBuffers[1]);
+            gUnknown_083C1640[2].func(taskId);
+        }
+    }
+}
+
+void sub_80A599C(u8 taskId)
+{
+    gTasks[taskId].data[8] = (u32)sub_805469C >> 16;
+    gTasks[taskId].data[9] = (u32)sub_805469C;
+    gLastFieldPokeMenuOpened = 0;
+    sub_80A5AE4(taskId);
+}
+
+void sub_80A59D0(u8 taskId)
+{
+    gUnknown_03000700 = 0;
+    if (gUnknown_03000701 == 5)
+        gUnknown_03000700 = 1;
+    gTasks[taskId].data[10] = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 + 1;
+    sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+    sub_80A73FC();
+    if (sub_80F9344() == TRUE && gUnknown_03000701 != 5)
+    {
+        sub_80A57C4();
+        gTasks[taskId].func = sub_80A5888;
+    }
+    else
+    {
+        sub_80A4BF0(gBGTilemapBuffers[1]);
+        if (gUnknown_02038559 != 3 || gUnknown_03000701 == 5)
+            gTasks[taskId].func = sub_80A5414;
+        else
+            gTasks[taskId].func = sub_80A5600;
+    }
+}
+
+void sub_80A5AAC(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = HandleItemMenuPaletteFade;
+}
+
+void sub_80A5AE4(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_80A5AAC(taskId);
+}
+
+void HandleItemMenuPaletteFade(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+    
+    if (!gPaletteFade.active)
+    {
+        MainCallback cb = (MainCallback)((u16)taskData[8] << 16 | (u16)taskData[9]);
+        
+        SetMainCallback2(cb);
+        gpu_pal_allocator_reset__manage_upper_four();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80A5B40(void)
+{
+    while (1)
+    {
+        if (sub_80A317C() == TRUE)
+        {
+            ResetTasks();
+            gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
+            break;
+        }
+        if (sub_80F9344() == TRUE)
+            break;
+    }
+}
+
+void sub_80A5B78(u8 taskId)
+{
+    if (ItemId_GetFieldFunc(gScriptItemId) != NULL)
+    {
+        PlaySE(SE_SELECT);
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gScriptItemId) == 1)
+        {
+            sub_80A5BF8(taskId);
+        }
+        else
+        {
+            gTasks[taskId].data[2] = 0;
+            if (gUnknown_02038559 != 3)
+                ItemId_GetFieldFunc(gScriptItemId)(taskId);
+            else
+                sub_80C9C7C(taskId);
+        }
+    }
+}
+
+/*
+void sub_80A5BF8(u8 taskId)
+{
+    sub_80A73FC();
+    sub_80A7590();
+    DisplayCannotUseItemMessage(taskId, gOtherText_NoPokemon, CleanUpItemMenuMessage, 1);
+}
+*/

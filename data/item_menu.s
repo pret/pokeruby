@@ -3,21 +3,6 @@
 
 	.section .rodata
 
-@ 6-byte entries; format of entry is unknown
-gUnknown_083C1690:: @ 83C1690
-	.byte 0, 1, 6, 2, 0, 0
-	.byte 6, 1, 8, 2, 0, 0
-	.byte 0, 8, 6, 2, 0, 0
-	.byte 7, 0, 1, 8, 6, 2
-	.byte 0, 8, 3, 2, 0, 0
-
-gUnknown_083C16AE:: @ 83C16AE
-	.byte 6, 2
-	.byte 6, 2
-	.byte 6, 2
-	.byte 6, 2
-	.byte 2, 0
-
 gUnknown_083C16B8:: @ 83C16B8
 	.byte 7, 9, 8, 2
 

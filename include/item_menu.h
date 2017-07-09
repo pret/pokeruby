@@ -6,9 +6,11 @@
 void sub_80A3684(void);
 void ClearBag(void);
 void sub_80A3E0C(void);
-void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
+//void sub_80A3FA0(u16 *, u32, u32, u32, u32, u32);
+void sub_80A3FA0(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f);
 void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
-void sub_80A418C(u16, enum StringConvertMode, int, int, int);
+//void sub_80A418C(u16, enum StringConvertMode, int, int, int);
+void sub_80A418C(u16 a, enum StringConvertMode b, u8 c, u8 d, u8 e);
 void sub_80A53F8(void);
 void HandleItemMenuPaletteFade(u8);
 void sub_80A5B40(void);

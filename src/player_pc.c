@@ -30,9 +30,6 @@ extern void LoadScrollIndicatorPalette(void);
 extern void ClearMailStruct(struct MailStruct *);
 extern u8 sub_807D770(void);
 extern void sub_808B020(void);
-extern void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
-extern void sub_80A418C(u16, enum StringConvertMode, int, int, int);
-extern void sub_80A6A30(void);
 extern void sub_80F944C(void);
 
 extern u8 *gPcItemMenuOptionOrder;
