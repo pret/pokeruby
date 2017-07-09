@@ -100,7 +100,7 @@ static void Mailbox_MoveToBag(u8);
 static void Mailbox_Give(u8);
 static void Mailbox_Cancel(u8);
 
-static const struct TextStruct gPCText_OptionDescList[] =
+static const u8 *const gPCText_OptionDescList[] =
 {
     PCText_TakeOutItems,
     PCText_StoreItems,
@@ -319,7 +319,7 @@ static void InitItemStorageMenu(u8 var)
     MenuDrawTextWindow(0, 0, 11, 9);
     PrintMenuItems(1, 1, 4, (struct MenuAction *)gPCText_ItemPCOptionsText);
     InitMenu(0, 1, 1, 4, var, 10);
-    ItemStorageMenuPrint(gPCText_OptionDescList[var].text);
+    ItemStorageMenuPrint(gPCText_OptionDescList[var]);
 }
 
 static void ItemStorageMenuPrint(const u8 *textPtr)
@@ -334,13 +334,13 @@ static void ItemStorageMenuProcessInput(u8 var)
     {
         PlaySE(SE_SELECT);
         MoveMenuCursor(-1);
-        ItemStorageMenuPrint(gPCText_OptionDescList[GetMenuCursorPos()].text);
+        ItemStorageMenuPrint(gPCText_OptionDescList[GetMenuCursorPos()]);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         MoveMenuCursor(1);
-        ItemStorageMenuPrint(gPCText_OptionDescList[GetMenuCursorPos()].text);
+        ItemStorageMenuPrint(gPCText_OptionDescList[GetMenuCursorPos()]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
