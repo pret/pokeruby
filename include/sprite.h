@@ -19,7 +19,7 @@ struct CompressedSpriteSheet
 
 struct SpriteFrameImage
 {
-    u8 *data;
+    const u8 *data;
     u16 size;
 };
 

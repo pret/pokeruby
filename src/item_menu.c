@@ -1,4 +1,5 @@
 #include "global.h"
+#include "berry.h"
 #include "berry_tag_screen.h"
 #include "data2.h"
 #include "decompress.h"
@@ -90,10 +91,12 @@ extern u8 gUnknown_02038561;
 extern u8 gUnknown_02038562;
 extern u8 gUnknown_02038563;
 extern u8 gUnknown_02038564;
+extern u8 gUnknown_02038568;
 extern void (*gUnknown_03005D00)(u8);
 extern u8 gUnknown_03000700;
 extern u8 gUnknown_03000701;
 extern const u8 *gUnknown_03000704;
+extern u16 gUnknown_030041B4;
 extern struct UnknownStruct1 gUnknown_03005D10[];
 extern struct ItemSlot *gUnknown_03005D24;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
@@ -125,7 +128,6 @@ extern const struct CompressedSpritePalette gUnknown_083C1CD8;
 
 const struct BagPocket gBagPockets[NUM_BAG_POCKETS] =
 {
-    // pointer to items, capacity
     {gSaveBlock1.bagPocket_Items, 20},
     {gSaveBlock1.bagPocket_PokeBalls, 16},
     {gSaveBlock1.bagPocket_TMHM, 64},
@@ -276,8 +278,10 @@ int sub_80A7988(void);
 void sub_80A79B4(struct Sprite *);
 void sub_80A79EC(struct Sprite *);
 void sub_80A7A94(struct Sprite *);
+void sub_80A7AE4(struct Sprite *);
 void CreateBagSprite(void);
-void CreateBagPokeballSprite();
+void sub_80A7B6C(struct Sprite *);
+void CreateBagPokeballSprite(u8);
 void sub_80A7C64(void);
 
 void sub_80A3118(void)
@@ -3900,6 +3904,97 @@ int sub_80A7988(void)
     return val;
 }
 
+const u16 gPalette_83C170C[] = INCBIN_U16("graphics/unknown/83C170C.gbapal");
+const u8 gSpriteImage_83C172C[] = INCBIN_U8("graphics/unknown_sprites/83C172C.4bpp");
+
+const u8 gSpriteImage_UnusedCherry[] = INCBIN_U8("graphics/unused/cherry.4bpp");
+const u16 gSpritePalette_UnusedCherry[] = INCBIN_U16("graphics/unused/cherry.gbapal");
+
+//------------------------------------------------------------------------------
+// Bag Sprite
+//------------------------------------------------------------------------------
+
+const struct OamData gOamData_83C1C4C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 7,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83C1C54[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83C1C5C[] =
+{
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83C1C64[] =
+{
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83C1C6C[] =
+{
+    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83C1C74[] =
+{
+    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83C1C7C[] =
+{
+    ANIMCMD_FRAME(320, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83C1C84[] =
+{
+    gSpriteAnim_83C1C54,
+    gSpriteAnim_83C1C5C,
+    gSpriteAnim_83C1C6C,
+    gSpriteAnim_83C1C74,
+    gSpriteAnim_83C1C7C,
+    gSpriteAnim_83C1C64,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83C1C9C[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -2, 2),
+    AFFINEANIMCMD_FRAME(0, 0, 2, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -2, 4),
+    AFFINEANIMCMD_FRAME(0, 0, 2, 2),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83C1CC4[] =
+{
+    gSpriteAffineAnim_83C1C9C,
+};
+
+const struct CompressedSpriteSheet gUnknown_083C1CC8 = {gBagMaleTiles, 0x3000, 30000};
+const struct CompressedSpriteSheet gUnknown_083C1CD0 = {gBagFemaleTiles, 0x3000, 30000};
+const struct CompressedSpritePalette gUnknown_083C1CD8 = {gBagPalette, 30000};
+
 void sub_80A7998(struct Sprite *sprite)
 {
     sprite->animNum = 0;
@@ -3917,4 +4012,479 @@ void sub_80A79B4(struct Sprite *sprite)
         sub_80A79EC(sprite);
     if (gUnknown_0203855C != 0)
         sub_80A7A94(sprite);
+}
+
+void sub_80A79EC(struct Sprite *sprite)
+{
+    switch (sprite->data3)
+    {
+    case 0:
+        if (gUnknown_0203855B != 6)
+        {
+            sprite->animBeginning = TRUE;
+            sprite->animNum = gUnknown_0203855B;
+            gUnknown_0203855B = -1;
+        }
+        else
+        {
+            sprite->animBeginning = TRUE;
+            sprite->animNum = 0;
+            sprite->pos1.y -= 4;
+            sprite->data0 = 4;
+            sprite->data3 = 1;
+            sub_80A7AE4(sprite);
+        }
+        break;
+    case 1:
+        if (sprite->data0 != 0)
+        {
+            if (sprite->data1 != 0)
+            {
+                sprite->pos1.y++;
+                sprite->data0--;
+            }
+            sprite->data1 = (sprite->data1 + 1) & 1;
+        }
+        else
+        {
+            gUnknown_0203855B = -1;
+            sprite->data1 = 0;
+            sprite->data3 = 0;
+        }
+        break;
+    }
+}
+
+void sub_80A7A94(struct Sprite *sprite)
+{
+    switch (sprite->data4)
+    {
+    case 0:
+        sprite->oam.affineMode = 1;
+        sprite->affineAnims = gSpriteAffineAnimTable_83C1CC4;
+        InitSpriteAffineAnim(sprite);
+        sprite->data4 = 1;
+        break;
+    case 1:
+        sprite->data2++;
+        if (sprite->data2 == 12)
+            sub_80A7AE4(sprite);
+        break;
+    }
+}
+
+void sub_80A7AE4(struct Sprite *sprite)
+{
+    gUnknown_0203855C = 0;
+    sprite->oam.affineMode = 0;
+    sprite->data2 = 0;
+    sprite->data4 = 0;
+    FreeOamMatrix(sprite->oam.matrixNum);
+}
+
+static const struct SpriteTemplate sBagSpriteTemplate =
+{
+    .tileTag = 30000,
+    .paletteTag = 30000,
+    .oam = &gOamData_83C1C4C,
+    .anims = gSpriteAnimTable_83C1C84,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83C1CC4,
+    .callback = sub_80A7998,
+};
+
+void CreateBagSprite(void)
+{
+    CreateSprite(&sBagSpriteTemplate, 58, 40, 0);
+}
+
+//------------------------------------------------------------------------------
+// Pokeball Sprite
+//------------------------------------------------------------------------------
+
+const struct OamData gOamData_83C1CF8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 4,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 8,
+    .affineParam = 0,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83C1D00[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 8, 32),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83C1D10[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -8, 32),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83C1D20[] =
+{
+    gSpriteAffineAnim_83C1D00,
+    gSpriteAffineAnim_83C1D10,
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83C1D28[] =
+{
+    {gSpriteImage_83C172C, sizeof(gSpriteImage_83C172C)},
+};
+
+const struct SpritePalette gUnknown_083C1D30 = {gPalette_83C170C, 8};
+
+void sub_80A7B28(struct Sprite *sprite)
+{
+    sprite->data3 = 0;
+    sprite->data0 = 0;
+    sub_80A7B6C(sprite);
+    sprite->callback = sub_80A7B6C;
+}
+
+void sub_80A7B48(struct Sprite *sprite)
+{
+    sprite->centerToCornerVecX = sprite->data5 - ((sprite->data0 + 1) & 1);
+    sprite->centerToCornerVecY = sprite->data6 - ((sprite->data0 + 1) & 1);
+}
+
+void sub_80A7B6C(struct Sprite *sprite)
+{
+    if (sprite->data7 != 0)
+    {
+        switch (sprite->data3)
+        {
+        case 0:
+            sprite->oam.affineMode = 1;
+            if (sprite->data7 == 1)
+                sprite->affineAnims = gSpriteAffineAnimTable_83C1D20;
+            else
+                sprite->affineAnims = gSpriteAffineAnimTable_83C1D20 + 1;
+            InitSpriteAffineAnim(sprite);
+            sprite->data3 = 1;
+            sprite->data5 = sprite->centerToCornerVecX;
+            sprite->data6 = sprite->centerToCornerVecY;
+            sub_80A7B48(sprite);
+            break;
+        case 1:
+            sprite->data0++;
+            sub_80A7B48(sprite);
+            if (sprite->data0 == 32)
+            {
+                sprite->data0 = 0;
+                sprite->data3 = 0;
+                sprite->centerToCornerVecX = sprite->data5;
+                sprite->centerToCornerVecY = sprite->data6;
+                FreeOamMatrix(sprite->oam.matrixNum);
+                sprite->oam.affineMode = 0;
+                sprite->callback = SpriteCallbackDummy;
+            }
+            break;
+        }
+    }
+}
+
+static const struct SpriteTemplate sPokeballSpriteTemplate =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 8,
+    .oam = &gOamData_83C1CF8,
+    .anims = gSpriteAnimTable_83C1C84,
+    .images = gSpriteImageTable_83C1D28,
+    .affineAnims = gSpriteAffineAnimTable_83C1D20,
+    .callback = sub_80A7B28,
+};
+
+void CreateBagPokeballSprite(u8 a)
+{
+    LoadSpritePalette(&gUnknown_083C1D30);
+    gUnknown_02038568 = CreateSprite(&sPokeballSpriteTemplate, 16, 88, 0);
+    gSprites[gUnknown_02038568].data7 = a;
+}
+
+void sub_80A7C64(void)
+{
+    FreeSpritePaletteByTag(8);
+    FreeOamMatrix(gSprites[gUnknown_02038568].oam.matrixNum);
+    DestroySprite(&gSprites[gUnknown_02038568]);
+}
+
+#define ewramBerryPic ewram
+#define ewramBerryPicTemp (ewram + 0x1000)
+
+const struct OamData gOamData_83C1D50 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 7,
+    .affineParam = 0,
+};
+
+const struct OamData gOamData_83C1D58 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 7,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83C1D60[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83C1D68[] =
+{
+    gSpriteAnim_83C1D60,
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83C1D6C[] =
+{
+    {ewramBerryPic, 0x800},
+};
+
+void sub_80A7DC4(struct Sprite *);
+const struct SpriteTemplate sBerrySpriteTemplate =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 30020,
+    .oam = &gOamData_83C1D50,
+    .anims = gSpriteAnimTable_83C1D68,
+    .images = gSpriteImageTable_83C1D6C,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A7DC4,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83C1D8C[] =
+{
+    AFFINEANIMCMD_FRAME(-1, -1, -3, 96),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(-2, -2, -1, 64),
+    AFFINEANIMCMD_FRAME(-8, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(0, -8, 0, 16),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83C1DC4[] =
+{
+    AFFINEANIMCMD_FRAME(-1, -1, 3, 96),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(-2, -2, 1, 64),
+    AFFINEANIMCMD_FRAME(-8, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(0, -8, 0, 16),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83C1DFC[] =
+{
+    gSpriteAffineAnim_83C1D8C,
+    gSpriteAffineAnim_83C1DC4,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83C1E04 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 30020,
+    .oam = &gOamData_83C1D58,
+    .anims = gSpriteAnimTable_83C1D68,
+    .images = gSpriteImageTable_83C1D6C,
+    .affineAnims = gSpriteAffineAnimTable_83C1DFC,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct {const u8 *lzPic; const u8 *lzPalette;} sBerryGraphicsTable[] =
+{
+    {gBerryPic_Cheri,  gBerryPalette_Cheri},
+    {gBerryPic_Chesto, gBerryPalette_Chesto},
+    {gBerryPic_Pecha,  gBerryPalette_Pecha},
+    {gBerryPic_Rawst,  gBerryPalette_Rawst},
+    {gBerryPic_Aspear, gBerryPalette_Aspear},
+    {gBerryPic_Leppa,  gBerryPalette_Leppa},
+    {gBerryPic_Oran,   gBerryPalette_Oran},
+    {gBerryPic_Persim, gBerryPalette_Persim},
+    {gBerryPic_Lum,    gBerryPalette_Lum},
+    {gBerryPic_Sitrus, gBerryPalette_Sitrus},
+    {gBerryPic_Figy,   gBerryPalette_Figy},
+    {gBerryPic_Wiki,   gBerryPalette_Wiki},
+    {gBerryPic_Mago,   gBerryPalette_Mago},
+    {gBerryPic_Aguav,  gBerryPalette_Aguav},
+    {gBerryPic_Iapapa, gBerryPalette_Iapapa},
+    {gBerryPic_Razz,   gBerryPalette_Razz},
+    {gBerryPic_Bluk,   gBerryPalette_Bluk},
+    {gBerryPic_Nanab,  gBerryPalette_Nanab},
+    {gBerryPic_Wepear, gBerryPalette_Wepear},
+    {gBerryPic_Pinap,  gBerryPalette_Pinap},
+    {gBerryPic_Pomeg,  gBerryPalette_Pomeg},
+    {gBerryPic_Kelpsy, gBerryPalette_Kelpsy},
+    {gBerryPic_Qualot, gBerryPalette_Qualot},
+    {gBerryPic_Hondew, gBerryPalette_Hondew},
+    {gBerryPic_Grepa,  gBerryPalette_Grepa},
+    {gBerryPic_Tamato, gBerryPalette_Tamato},
+    {gBerryPic_Cornn,  gBerryPalette_Cornn},
+    {gBerryPic_Magost, gBerryPalette_Magost},
+    {gBerryPic_Rabuta, gBerryPalette_Rabuta},
+    {gBerryPic_Nomel,  gBerryPalette_Nomel},
+    {gBerryPic_Spelon, gBerryPalette_Spelon},
+    {gBerryPic_Pamtre, gBerryPalette_Pamtre},
+    {gBerryPic_Watmel, gBerryPalette_Watmel},
+    {gBerryPic_Durin,  gBerryPalette_Durin},
+    {gBerryPic_Belue,  gBerryPalette_Belue},
+    {gBerryPic_Liechi, gBerryPalette_Liechi},
+    {gBerryPic_Ganlon, gBerryPalette_Ganlon},
+    {gBerryPic_Salac,  gBerryPalette_Salac},
+    {gBerryPic_Petaya, gBerryPalette_Petaya},
+    {gBerryPic_Apicot, gBerryPalette_Apicot},
+    {gBerryPic_Lansat, gBerryPalette_Lansat},
+    {gBerryPic_Starf,  gBerryPalette_Starf},
+    {gBerryPic_Enigma, gBerryPalette_Enigma},
+};
+
+static void DrawBerryPic(const u8 *src, u8 *dst)
+{
+    u8 i;
+    u8 j;
+
+    memset(dst, 0, 0x800);
+    dst += 0x100;
+    for (i = 0; i < 6; i++)
+    {
+        dst += 32;
+        for (j = 0; j < 6; j++)
+        {
+            memcpy(dst, src, 32);
+            dst += 32;
+            src += 32;
+        }
+        if (i != 5)
+            dst += 32;
+    }
+}
+
+void LoadBerryPic(u8 berryId)
+{
+    struct SpritePalette spritePal;
+
+    if (berryId == 0x2A && IsEnigmaBerryValid() == TRUE)
+    {
+        DrawBerryPic(gSaveBlock1.enigmaBerry.pic, ewramBerryPic);
+        spritePal.data = gSaveBlock1.enigmaBerry.palette;
+        spritePal.tag = 0x7544;
+        LoadSpritePalette(&spritePal);
+    }
+    else
+    {
+        spritePal.data = (u16 *)sBerryGraphicsTable[berryId].lzPalette;
+        spritePal.tag = 0x7544;
+        LoadCompressedObjectPalette((struct CompressedSpritePalette *)&spritePal);
+        sub_800D238(sBerryGraphicsTable[berryId].lzPic, ewramBerryPicTemp);
+        DrawBerryPic(ewramBerryPicTemp, ewramBerryPic);
+    }
+}
+
+u8 CreateBerrySprite(u8 berryId, s16 x, s16 y)
+{
+    LoadBerryPic(berryId);
+    return CreateSprite(&sBerrySpriteTemplate, x, y, 0);
+}
+
+void sub_80A7DC4(struct Sprite *sprite)
+{
+    sprite->pos2.y = -gUnknown_030041B4;
+}
+
+void sub_80A7DD4(void)
+{
+    FreeSpritePaletteByTag(0x7544);
+    FreeSpritePaletteByTag(8);
+}
+
+u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate)
+{
+    u8 spriteId;
+
+    FreeSpritePaletteByTag(0x7544);
+    LoadBerryPic(berryId);
+    spriteId = CreateSprite(&gSpriteTemplate_83C1E04, x, y, 0);
+    if (animate == TRUE)
+        StartSpriteAffineAnim(&gSprites[spriteId], 1);
+    return spriteId;
+}
+
+const struct CompressedSpriteSheet gUnknown_083C1F74 = {gBerryCheckCircle_Gfx, 2048, 0x2710};
+
+const struct CompressedSpritePalette gUnknown_083C1F7C = {gBerryCheck_Pal, 0x2710};
+
+const struct OamData gOamData_83C1F84 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83C1F8C[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83C1F94[] =
+{
+    gSpriteAnim_83C1F8C,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83C1F98 =
+{
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_83C1F84,
+    .anims = gSpriteAnimTable_83C1F94,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A7DC4,
+};
+
+u8 sub_80A7E5C(s16 x)
+{
+    return CreateSprite(&gSpriteTemplate_83C1F98, x, 99, 0);
 }

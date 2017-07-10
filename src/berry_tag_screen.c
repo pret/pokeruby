@@ -131,7 +131,7 @@ static bool8 sub_8146058(void)
         break;
     case 8:
         berry = gScriptItemId + OFFSET_7B;
-        gUnknown_0203932C = sub_80A7D8C(berry, 56, 64);
+        gUnknown_0203932C = CreateBerrySprite(berry, 56, 64);
         gMain.state += 1;
         break;
     case 9:
@@ -571,7 +571,7 @@ static void sub_81468BC(void)
     sub_81464E4();
 
     // center of berry sprite
-    gUnknown_0203932C = sub_80A7D8C(gScriptItemId + OFFSET_7B, 56, 64);
+    gUnknown_0203932C = CreateBerrySprite(gScriptItemId + OFFSET_7B, 56, 64);
 
     sub_8146600(gScriptItemId + OFFSET_7B);
 }

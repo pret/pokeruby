@@ -22,8 +22,8 @@ void sub_80A6A30(void);
 bool32 sub_80A6D1C(void);
 void sub_80A6DCC(void);
 void sub_80A7094(u8);
-u8 sub_80A7D8C(u8 berry, int i, int i1);
+u8 CreateBerrySprite(u8, s16, s16);
 void sub_80A7DD4(void);
-u8 sub_80A7E5C(u8);
+u8 sub_80A7E5C(s16);
 
 #endif // GUARD_ITEM_MENU_H
