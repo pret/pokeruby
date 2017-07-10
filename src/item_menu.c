@@ -10,10 +10,12 @@
 #include "items.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "link.h"
 #include "mail_data.h"
 #include "main.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "menu_cursor.h"
 #include "menu_helpers.h"
 #include "money.h"
 #include "palette.h"
@@ -42,12 +44,47 @@ struct UnknownStruct1
     u8 unk3;
 };
 
-extern u8 gUnknown_02038540[];
+struct UnknownStruct2
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+};
+
+struct UnknownStruct3
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+};
+
+struct UnknownStruct4
+{
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    const u8 *unk4;
+    TaskFunc unk8;
+};
+
+struct UnknownStruct5
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
+extern struct UnknownStruct2 gUnknown_0203853C;
+extern struct UnknownStruct3 gUnknown_02038540;
+extern struct UnknownStruct4 gUnknown_02038544;
+extern struct UnknownStruct5 gUnknown_02038550;
+extern u8 gUnknown_02038554;
 extern u8 gUnknown_02038558;
 extern s8 gUnknown_02038559;  // selected pocket
 extern u8 gUnknown_0203855A;
-extern u8 gUnknown_0203855B;
-extern u8 gUnknown_0203855C;
+extern s8 gUnknown_0203855B;
+extern s8 gUnknown_0203855C;
 extern u8 gUnknown_02038560;
 extern u8 gUnknown_02038561;
 extern u8 gUnknown_02038562;
@@ -59,7 +96,6 @@ extern u8 gUnknown_03000701;
 extern const u8 *gUnknown_03000704;
 extern struct UnknownStruct1 gUnknown_03005D10[];
 extern struct ItemSlot *gUnknown_03005D24;  // selected pocket item slots
-extern bool8 gLinkOpen;
 extern const u8 Event_NoRegisteredItem[];
 
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
@@ -78,6 +114,10 @@ extern void sub_808A3F8(u8);
 extern void sub_80B3050(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
+extern void sub_802E424(u8);
+
+#define ewram1E000 ((struct ItemSlot *)(ewram + 0x1E000))  // saved items pocket (for Wally battle)
+#define ewram1F000 ((struct ItemSlot *)(ewram + 0x1F000))  // saved Pokeballs pocket (for Wally battle)
 
 extern const struct CompressedSpriteSheet gUnknown_083C1CC8;
 extern const struct CompressedSpriteSheet gUnknown_083C1CD0;
@@ -203,24 +243,39 @@ void BuyMenuDisplayMessage(u16, u16);
 void sub_80A683C(void);
 void sub_80A6870(u16, u8);
 void sub_80A699C(void);
+void sub_80A7230(u8);
 void ItemListMenu_InitMenu(void);
 void sub_80A73C0(void);
 void sub_80A73F0(void);
 void sub_80A73FC(void);
 void sub_80A740C(void);
+void sub_80A7420(void);
 void sub_80A751C(void);
-void sub_80A7528();
+void sub_80A7528(u8);
 void sub_80A7590(void);
+void sub_80A75E4(void);
 void sub_80A7630(void);
 void sub_80A763C(void);
 void sub_80A76A0(void);
 void sub_80A770C(void);
-void DisplayCannotUseItemMessage();
+void DisplayCannotUseItemMessage(int, const u8 *, TaskFunc, int);
+void sub_80A7768(void);
 void sub_80A7828(void);
-void sub_80A7834();
-int sub_80A78A0();
+void sub_80A7834(int, int);
+bool32 sub_80A78A0(void);
 void sub_80A78B8(void);
+bool32 sub_80A78C4(void);
+void sub_80A78E8(void);
+int sub_80A78F4(void);
+void sub_80A7918(void);
+int sub_80A7924(void);
+int sub_80A7958(void);
+void sub_80A7970(void);
 void sub_80A797C(void);
+int sub_80A7988(void);
+void sub_80A79B4(struct Sprite *);
+void sub_80A79EC(struct Sprite *);
+void sub_80A7A94(struct Sprite *);
 void CreateBagSprite(void);
 void CreateBagPokeballSprite();
 void sub_80A7C64(void);
@@ -968,7 +1023,7 @@ bool8 sub_80A42B0(u8 a, int b)
 {
     u8 r5;
     u16 *ptr;
-    u8 *r8 = gUnknown_02038540;
+    struct UnknownStruct3 *r8 = &gUnknown_02038540;
 
     if (gUnknown_03005D10[gUnknown_02038559].unk1 + a > gUnknown_03005D10[gUnknown_02038559].unk2)
         return TRUE;
@@ -986,7 +1041,7 @@ bool8 sub_80A42B0(u8 a, int b)
         ptr[33] = 0x4F;
         if (a == 7)
             return TRUE;
-        if ((b == 1 && r8[2] != 0) || b == 2)
+        if ((b == 1 && r8->unk2 != 0) || b == 2)
             MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 13);
         else
             MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 17);
@@ -1461,7 +1516,7 @@ bool32 sub_80A4A54(u8 *a, const u8 *b, u32 c)
     }
 }
 
-void sub_80A4A98(u8 *a, u32 b)
+void sub_80A4A98(const u8 *a, u32 b)
 {
     u8 text[100];
 
@@ -3193,4 +3248,673 @@ bool32 sub_80A6D1C(void)
     }
     ScriptContext1_SetupScript(Event_NoRegisteredItem);
     return TRUE;
+}
+
+void sub_80A6D98(void)
+{
+    while (1)
+    {
+        if (sub_80A317C() == TRUE)
+        {
+            gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
+            break;
+        }
+        if (sub_80F9344() == TRUE)
+            break;
+    }
+}
+
+void sub_80A6DCC(void)
+{
+    gUnknown_03000700 = 0;
+    gUnknown_03000701 = 1;
+    SetMainCallback2(sub_80A6D98);
+}
+
+void sub_80A6DF0(u16 *a)
+{
+    u8 r6 = (gUnknown_02038564 - 1) * 2;
+
+    MenuDrawTextWindow(7, 9 - r6, 13, 12);
+    sub_80A4008(a, 8, 10 - r6, 5, r6 + 2);
+    if (gUnknown_02038564 == 1)
+    {
+        MenuPrint(gUnknown_083C1640[gUnknown_03000704[0]].text, 8, 10);
+    }
+    else
+    {
+        MenuPrint(gUnknown_083C1640[gUnknown_03000704[0]].text, 8, 8);
+        MenuPrint(gUnknown_083C1640[gUnknown_03000704[1]].text, 8, 10);
+    }
+    InitMenu(0, 8, 10 - r6, gUnknown_02038564, 0, 5);
+    sub_80A7528(2);
+}
+
+void sub_80A6EB8(u8 taskId)
+{
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x40)
+    {
+        if (gUnknown_03000700 == 1)
+        {
+            PlaySE(SE_SELECT);
+            gUnknown_03000700 = MoveMenuCursor(-1);
+        }
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x80)
+    {
+        if (gUnknown_03000700 + 1 < gUnknown_02038564)
+        {
+            PlaySE(SE_SELECT);
+            gUnknown_03000700 = MoveMenuCursor(1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].data[10] = 0;
+        sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+        sub_80A4DA4(gBGTilemapBuffers[1]);
+        gUnknown_083C1640[gUnknown_03000704[gUnknown_03000700]].func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].data[10] = 0;
+        sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+        sub_80A4DA4(gBGTilemapBuffers[1]);
+        gUnknown_083C1640[5].func(taskId);
+    }
+}
+
+const u8 gUnknown_083C1708[] = {4, 5};
+const u8 gUnknown_083C170A[] = {5, 0};
+
+void sub_80A6FDC(void)
+{
+    if (ItemId_GetBattleUsage(gScriptItemId) != 0)
+    {
+        gUnknown_03000704 = gUnknown_083C1708;
+        gUnknown_02038564 = 2;
+    }
+    else
+    {
+        gUnknown_03000704 = gUnknown_083C170A;
+        gUnknown_02038564 = 1;
+    }
+}
+
+void sub_80A7024(u8 taskId)
+{
+    gUnknown_03000700 = 0;
+    sub_80A6FDC();
+    gTasks[taskId].data[10] = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 + 1;
+    sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+    sub_80A73FC();
+    sub_80A6DF0(gBGTilemapBuffers[1]);
+    gTasks[taskId].func = sub_80A6EB8;
+}
+
+void sub_80A7094(u8 taskId)
+{
+    gTasks[taskId].data[8] = (u32)sub_802E424 >> 16;
+    gTasks[taskId].data[9] = (u32)sub_802E424;
+    gTasks[taskId].func = HandleItemMenuPaletteFade;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+}
+
+void sub_80A70D8(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_80A7094(taskId);
+}
+
+void ItemMenu_UseInBattle(u8 taskId)
+{
+    if (ItemId_GetBattleFunc(gScriptItemId) != NULL)
+    {
+        PlaySE(SE_SELECT);
+        ItemId_GetBattleFunc(gScriptItemId)(taskId);
+    }
+}
+
+void sub_80A7124(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_80A7528(0);
+    sub_80A41D4(taskId);
+    ItemListMenu_InitMenu();
+    sub_80A37C0(taskId);
+}
+
+void sub_80A7150(void)
+{
+    while (1)
+    {
+        if (sub_80A317C() == TRUE)
+        {
+            gUnknown_02038563 = CreateTask(sub_80A7230, 0);
+            gTasks[gUnknown_02038563].data[15] = 0;
+            break;
+        }
+        if (sub_80F9344() == TRUE)
+            break;
+    }
+}
+
+void PrepareBagForWallyTutorial(void)
+{
+    u8 i;
+
+    gUnknown_03000700 = 0;
+    gUnknown_02038559 = 0;
+    for (i = 0; i < 5; i++)
+    {
+        gUnknown_03005D10[i].unk0 = 0;
+        gUnknown_03005D10[i].unk1 = 0;
+    }
+
+    // Save player's items
+    memcpy(ewram1E000, gSaveBlock1.bagPocket_Items, sizeof(gSaveBlock1.bagPocket_Items));
+    memcpy(ewram1F000, gSaveBlock1.bagPocket_PokeBalls, sizeof(gSaveBlock1.bagPocket_PokeBalls));
+
+    // Add Wally's items to the bag
+    ClearItemSlots(gSaveBlock1.bagPocket_Items, ARRAY_COUNT(gSaveBlock1.bagPocket_Items));
+    ClearItemSlots(gSaveBlock1.bagPocket_PokeBalls, ARRAY_COUNT(gSaveBlock1.bagPocket_PokeBalls));
+    AddBagItem(ITEM_POTION, 1);
+    AddBagItem(ITEM_POKE_BALL, 1);
+
+    gUnknown_03000701 = 7;
+    SetMainCallback2(sub_80A7150);
+}
+
+void sub_80A7230(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (taskData[15])
+    {
+    case 102:
+        PlaySE(SE_SELECT);
+        sub_80A4E8C(1, 2);
+        break;
+    case 204:
+        PlaySE(SE_SELECT);
+        sub_80F98A4(2);
+        sub_80F98A4(3);
+        gScriptItemId = ITEM_POKE_BALL;
+        gUnknown_03000704 = gUnknown_083C1708;
+        gUnknown_02038564 = 2;
+        gTasks[taskId].data[10] = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0 + 1;
+        sub_80A48E8(taskId, gUnknown_03005D10[gUnknown_02038559].unk0, gUnknown_03005D10[gUnknown_02038559].unk0);
+        sub_80A73FC();
+        sub_80A6DF0(gBGTilemapBuffers[1]);
+        break;
+    case 306:
+        PlaySE(SE_SELECT);
+        sub_80A4DA4(gBGTilemapBuffers[1]);
+
+        // Restore player's items
+        memcpy(gSaveBlock1.bagPocket_Items, ewram1E000, sizeof(gSaveBlock1.bagPocket_Items));
+        memcpy(gSaveBlock1.bagPocket_PokeBalls, ewram1F000, sizeof(gSaveBlock1.bagPocket_PokeBalls));
+
+        taskData[8] = (u32)sub_802E424 >> 16;
+        taskData[9] = (u32)sub_802E424;
+        gTasks[taskId].func = HandleItemMenuPaletteFade;
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        return;
+    }
+    taskData[15]++;
+}
+
+void ItemListMenu_InitMenu(void)
+{
+    InitMenu(0, 14, 2, gUnknown_03005D10[gUnknown_02038559].unk3 + 1, gUnknown_03005D10[gUnknown_02038559].unk0, 0);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 15);
+    sub_80A73C0();
+}
+
+void sub_80A73C0(void)
+{
+    sub_814AD7C(0x70, gUnknown_03005D10[gUnknown_02038559].unk0 * 16 + 16);
+}
+
+void sub_80A73F0(void)
+{
+    sub_814ADC8();
+}
+
+void sub_80A73FC(void)
+{
+    HandleDestroyMenuCursors();
+    sub_814AD44();
+}
+
+void sub_80A740C(void)
+{
+    sub_80A75E4();
+    sub_80A7768();
+    sub_80A7420();
+}
+
+void sub_80A7420(void)
+{
+    struct UnknownStruct2 *unkStruct = &gUnknown_0203853C;
+    int var;
+
+    switch (unkStruct->unk0)
+    {
+    case 3:
+        unkStruct->unk0 = 2;
+        break;
+    case 2:
+        switch (unkStruct->unk2)
+        {
+        case 0:
+            var = gUnknown_03005D10[gUnknown_02038559].unk1 + gUnknown_03005D10[gUnknown_02038559].unk0;
+            ItemListMenu_ChangeDescription(gUnknown_03005D24[var].itemId, unkStruct->unk1);
+            break;
+        case 1:
+            sub_80A4A98(gOtherText_SwitchWhichItem, unkStruct->unk1);
+            break;
+        case 2:
+            sub_80A4A98(gOtherText_WhatWillYouDo2, unkStruct->unk1);
+            break;
+        case 3:
+            sub_80A4A98(gOtherText_HowManyToToss, unkStruct->unk1);
+            break;
+        case 4:
+            sub_80A4A98(gOtherText_ThrewAwayItem, unkStruct->unk1);
+            break;
+        case 5:
+            sub_80A4A98(gOtherText_OkayToThrowAwayPrompt, unkStruct->unk1);
+            break;
+        case 6:
+            sub_80A4A98(gOtherText_HowManyToDeposit, unkStruct->unk1);
+            break;
+        case 7:
+            sub_80A4A98(gOtherText_DepositedItems, unkStruct->unk1);
+            break;
+        case 8:
+            sub_80A4A98(gOtherText_NoRoomForItems, unkStruct->unk1);
+            break;
+        case 9:
+            sub_80A4A98(gOtherText_CantStoreSomeoneItem, unkStruct->unk1);
+            break;
+        }
+        unkStruct->unk1++;
+        if (unkStruct->unk1 == 3)
+        {
+            unkStruct->unk0 = 0;
+            sub_80A7918();
+        }
+        break;
+    }
+}
+
+void sub_80A751C(void)
+{
+    gUnknown_0203853C.unk0 = 0;
+}
+
+void sub_80A7528(u8 a)
+{
+    gUnknown_0203853C.unk1 = 0;
+    gUnknown_0203853C.unk2 = a;
+    switch (sub_80A78F4())
+    {
+    case 0:
+        gUnknown_0203853C.unk0 = 2;
+        while (gUnknown_0203853C.unk0 != 0)
+            sub_80A7420();
+        break;
+    case 1:
+        gUnknown_0203853C.unk0 = 3;
+        break;
+    case 2:
+        gUnknown_0203853C.unk0 = 1;
+        break;
+    }
+}
+
+void sub_80A756C(void)
+{
+    if (gUnknown_0203853C.unk0 == 2 || gUnknown_0203853C.unk0 == 3)
+        sub_80A7918();
+    gUnknown_0203853C.unk0 = 0;
+}
+
+void sub_80A7590(void)
+{
+    MenuZeroFillWindowRect(0, 13, 13, 20);
+    sub_80A756C();
+}
+
+void sub_80A75A8(void)
+{
+    if (gUnknown_0203853C.unk0 == 2 || gUnknown_0203853C.unk0 == 3)
+        gUnknown_0203853C.unk0 = 1;
+}
+
+void sub_80A75C4(void)
+{
+    switch (gUnknown_0203853C.unk0)
+    {
+    case 1:
+        gUnknown_0203853C.unk0 = 3;
+        break;
+    case 0:
+        sub_80A7918();
+        break;
+    }
+}
+
+void sub_80A75E4(void)
+{
+    if (gUnknown_02038540.unk0 == 1 && sub_80A7988() == 0)
+    {
+        int r1;
+
+        sub_80A47E8(gUnknown_02038563, gUnknown_02038540.unk1, gUnknown_02038540.unk1, 1);
+        gUnknown_02038540.unk1++;
+        if (gUnknown_02038540.unk2 != 0)
+            r1 = 5;
+        else
+            r1 = 7;
+        if (r1 < gUnknown_02038540.unk1)
+        {
+            gUnknown_02038540.unk0 = 0;
+            sub_80A78E8();
+        }
+    }
+}
+
+void sub_80A7630(void)
+{
+    gUnknown_02038540.unk0 = 0;
+}
+
+void sub_80A763C(void)
+{
+    struct UnknownStruct3 *r4 = &gUnknown_02038540;
+
+    switch (sub_80A78C4())
+    {
+    case FALSE:
+        sub_80A48E8(gUnknown_02038563, 0, 7);
+        break;
+    case TRUE:
+        r4->unk0 = 1;
+        r4->unk1 = 0;
+        r4->unk2 = 0;
+        break;
+    }
+}
+
+void sub_80A7678(void)
+{
+    if (gUnknown_02038540.unk0 == 1)
+        sub_80A78E8();
+    gUnknown_02038540.unk0 = 0;
+}
+
+void sub_80A7694(void)
+{
+    gUnknown_02038540.unk2 = 1;
+}
+
+void sub_80A76A0(void)
+{
+    MenuZeroFillWindowRect(14, 2, 29, 18);
+    sub_80A7678();
+}
+
+bool32 sub_80A76B8(void)
+{
+    struct UnknownStruct3 *s = &gUnknown_02038540;
+
+    return (s->unk0 == 0);
+}
+
+bool32 sub_80A76D0(void)
+{
+    struct UnknownStruct3 *s = &gUnknown_02038540;
+
+    return (s->unk1 > 5);
+}
+
+void sub_80A76E8(void)
+{
+    if (gUnknown_02038544.unk0 == 1)
+    {
+        DisplayItemMessageOnField(
+          gUnknown_02038544.unk1,
+          gUnknown_02038544.unk4,
+          gUnknown_02038544.unk8,
+          gUnknown_02038544.unk2);
+        gUnknown_02038544.unk0 = 0;
+    }
+}
+
+void sub_80A770C(void)
+{
+    gUnknown_02038544.unk0 = 0;
+}
+
+void DisplayCannotUseItemMessage(int a, const u8 *b, TaskFunc func, int d)
+{
+    struct UnknownStruct4 *r4 = &gUnknown_02038544;
+
+    switch (sub_80A7924())
+    {
+    case 0:
+        DisplayItemMessageOnField(a, b, func, d);
+        break;
+    case 2:
+        r4->unk0 = 1;
+        r4->unk1 = a;
+        r4->unk4 = b;
+        r4->unk8 = func;
+        r4->unk2 = d;
+        break;
+    }
+}
+
+void sub_80A7768(void)
+{
+    struct UnknownStruct5 *r4 = &gUnknown_02038550;
+
+    if (r4->unk0 == 2)
+    {
+        if (r4->unk1 != 0)
+        {
+            if (r4->unk2 != 1)
+            {
+                const u8 *text = gUnknown_083C1640[gUnknown_03000704[r4->unk1 - 1]].text;
+                int var = r4->unk1 - 1;
+
+                MenuPrint(text, 7, var * 2 + 1 + r4->unk3);
+            }
+            else
+            {
+                const u8 *text;
+                int var;
+
+                if (r4->unk1 == 1)
+                    text = sub_80A4B90(gScriptItemId);
+                else
+                    text = gUnknown_083C1640[gUnknown_03000704[r4->unk1 - 1]].text;
+                var = r4->unk1 - 1;
+                MenuPrint(text, (var >> 1) * 6 + 1, (var & 1) * 2 + 8);
+            }
+            if (r4->unk1 == gUnknown_02038564)
+            {
+                r4->unk0 = 0;
+                sub_80A7970();
+            }
+        }
+        r4->unk1++;
+    }
+}
+
+void sub_80A7828(void)
+{
+    gUnknown_02038550.unk0 = 0;
+}
+
+void sub_80A7834(int a, int b)
+{
+    struct UnknownStruct5 *r4 = &gUnknown_02038550;
+
+    switch (sub_80A7958())
+    {
+    case 1:
+        r4->unk0 = 2;
+        r4->unk1 = 0;
+        r4->unk2 = a;
+        r4->unk3 = b;
+        break;
+    case 2:
+        r4->unk0 = 1;
+        r4->unk1 = 0;
+        r4->unk2 = a;
+        r4->unk3 = b;
+        break;
+    }
+}
+
+void sub_80A7868(void)
+{
+    if (gUnknown_02038550.unk0 == 2)
+        gUnknown_02038550.unk0 = 1;
+}
+
+void sub_80A7880(void)
+{
+    switch (gUnknown_02038550.unk0)
+    {
+    case 1:
+        gUnknown_02038550.unk0 = 2;
+        break;
+    case 0:
+        sub_80A7970();
+        break;
+    }
+}
+
+bool32 sub_80A78A0(void)
+{
+    struct UnknownStruct5 *r0 = &gUnknown_02038550;
+
+    return (r0->unk0 == 0);
+}
+
+void sub_80A78B8(void)
+{
+    gUnknown_02038554 = 0;
+}
+
+bool32 sub_80A78C4(void)
+{
+    bool32 retVal;
+
+    if (gLinkOpen == TRUE)
+    {
+        sub_80A7868();
+        sub_80A75A8();
+        retVal = TRUE;
+    }
+    else
+    {
+        retVal = FALSE;
+    }
+    return retVal;
+}
+
+void sub_80A78E8(void)
+{
+    sub_80A7880();
+}
+
+int sub_80A78F4(void)
+{
+    int retVal;
+
+    if (gLinkOpen == TRUE)
+    {
+        if (sub_80A76B8() != 0)
+            retVal = 1;
+        else
+            retVal = 2;
+    }
+    else
+    {
+        retVal = 0;
+    }
+    return retVal;
+}
+
+void sub_80A7918(void)
+{
+    sub_80A76E8();
+}
+
+int sub_80A7924(void)
+{
+    if (gLinkOpen == TRUE && sub_80A76B8() == 0)
+    {
+        if (sub_80A76D0() != 0)
+        {
+            sub_80A7678();
+            return 0;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+    sub_80A7694();
+    return 2;
+}
+
+int sub_80A7958(void)
+{
+    if (sub_80A76B8() == 0)
+        return 2;
+    sub_80A75A8();
+    return 1;
+}
+
+void sub_80A7970(void)
+{
+    sub_80A75C4();
+}
+
+void sub_80A797C(void)
+{
+    gUnknown_02038554 = 1;
+}
+
+int sub_80A7988(void)
+{
+    int val = gUnknown_02038554;
+
+    gUnknown_02038554 = 0;
+    return val;
+}
+
+void sub_80A7998(struct Sprite *sprite)
+{
+    sprite->animNum = 0;
+    sprite->data0 = 0;
+    sprite->data1 = 0;
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+    sprite->data4 = 0;
+    sprite->callback = sub_80A79B4;
+}
+
+void sub_80A79B4(struct Sprite *sprite)
+{
+    if (gUnknown_0203855B != -1)
+        sub_80A79EC(sprite);
+    if (gUnknown_0203855C != 0)
+        sub_80A7A94(sprite);
 }

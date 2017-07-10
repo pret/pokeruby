@@ -3,12 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083C1708:: @ 83C1708
-	.byte 4, 5
-
-gUnknown_083C170A:: @ 83C170A
-	.byte 5, 0
-
 	.align 2
 gPalette_83C170C:: @ 83C170C
 	.incbin "graphics/unknown/83C170C.gbapal"
