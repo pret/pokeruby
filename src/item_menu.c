@@ -35,7 +35,26 @@
 #include "text.h"
 #include "unknown_task.h"
 
+// External stuff
 extern u8 ewram[];
+extern void gpu_pal_allocator_reset__manage_upper_four(void);
+extern void sub_80F9020(void);
+extern void sub_80F9988();
+extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
+extern void PauseVerticalScrollIndicator();
+extern u8 sub_80F9284(void);
+extern void sub_808B5B4();
+extern u8 sub_80F92F4();
+extern void sub_80C9C7C(u8);
+extern void pal_fill_black(void);
+extern bool8 sub_807D770(void);
+extern u8 sub_80F931C();
+extern void sub_808A3F8(u8);
+extern void sub_80B3050(void);
+extern void sub_80546B8(u8);
+extern void sub_804E990(u8);
+extern void sub_802E424(u8);
+extern void sub_8064E2C(void);
 
 struct PocketScrollState
 {
@@ -90,26 +109,6 @@ enum
     BAG_POCKET_KEY_ITEMS,   // 4
 };
 
-EWRAM_DATA static struct UnknownStruct2 gUnknown_0203853C = {0};
-EWRAM_DATA static struct UnknownStruct3 gUnknown_02038540 = {0};
-EWRAM_DATA static struct UnknownStruct4 gUnknown_02038544 = {0};
-EWRAM_DATA static struct UnknownStruct5 gUnknown_02038550 = {0};
-EWRAM_DATA static struct UnknownStruct6 gUnknown_02038554 = {0};  // There are 3 bytes of padding after this, so I assume it's a struct
-EWRAM_DATA static u8 gUnknown_02038558 = 0;
-EWRAM_DATA static s8 sCurrentBagPocket = 0;
-EWRAM_DATA static u8 gUnknown_0203855A = 0;
-EWRAM_DATA static s8 gUnknown_0203855B = 0;
-EWRAM_DATA static s8 gUnknown_0203855C = 0;
-EWRAM_DATA u16 gScriptItemId = 0;
-extern u8 gUnknown_02038560;
-extern u8 gUnknown_02038561;
-extern u8 gUnknown_02038562;
-extern u8 gUnknown_02038563;
-extern u8 gUnknown_02038564;
-extern u8 sPokeballSpriteId;
-extern void (*gUnknown_03005D00)(u8);
-extern u8 sPopupMenuSelection;
-
 enum
 {
     RETURN_TO_FIELD_0,
@@ -122,32 +121,50 @@ enum
     RETURN_TO_WALLY_BATTLE,
 };
 
-extern u8 sReturnLocation;
+enum
+{
+    ITEM_ACTION_USE_0,      // 0
+    ITEM_ACTION_TOSS,       // 1
+    ITEM_ACTION_CANCEL_2,   // 2
+    ITEM_ACTION_REGISTER,   // 3
+    ITEM_ACTION_USE_4,      // 4
+    ITEM_ACTION_CANCEL_5,   // 5
+    ITEM_ACTION_GIVE,       // 6
+    ITEM_ACTION_CHECK_TAG,  // 7
+    ITEM_ACTION_NONE,       // 8
+    ITEM_ACTION_CONFIRM,    // 9
+};
 
-extern const u8 *sPopupMenuActionList;
+// ewram
+EWRAM_DATA static struct UnknownStruct2 gUnknown_0203853C = {0};
+EWRAM_DATA static struct UnknownStruct3 gUnknown_02038540 = {0};
+EWRAM_DATA static struct UnknownStruct4 gUnknown_02038544 = {0};
+EWRAM_DATA static struct UnknownStruct5 gUnknown_02038550 = {0};
+EWRAM_DATA static struct UnknownStruct6 gUnknown_02038554 = {0};  // There are 3 bytes of padding after this, so I assume it's a struct
+EWRAM_DATA static u8 gUnknown_02038558 = 0;
+EWRAM_DATA static s8 sCurrentBagPocket = 0;
+EWRAM_DATA static u8 gUnknown_0203855A = 0;
+EWRAM_DATA static s8 gUnknown_0203855B = 0;
+EWRAM_DATA static s8 gUnknown_0203855C = 0;
+EWRAM_DATA u16 gScriptItemId = 0;
+EWRAM_DATA u8 gUnknown_02038560 = 0;
+EWRAM_DATA u8 gUnknown_02038561 = 0;
+EWRAM_DATA static u8 gUnknown_02038562 = 0;
+EWRAM_DATA static u8 gUnknown_02038563 = 0;
+EWRAM_DATA static u8 gUnknown_02038564 = 0;
+EWRAM_DATA static u8 sPokeballSpriteId ALIGNED(4) = 0;  // HACK: why is there a space before this variable?
+
+// bss
+static u8 sPopupMenuSelection;
+static u8 sReturnLocation;
+static const u8 *sPopupMenuActionList;
+
+// common
+void (*gUnknown_03005D00)(u8) = NULL;
 extern u16 gUnknown_030041B4;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
-
-extern void gpu_pal_allocator_reset__manage_upper_four(void);
-extern void sub_80F9020(void);
-extern void sub_80F9988();
-extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
-extern void PauseVerticalScrollIndicator();
-extern u8 sub_80F9284(void);
-extern void sub_808B5B4();
-extern u8 sub_80F92F4();
-extern void sub_80C9C7C(u8);
-extern void pal_fill_black(void);
-extern bool8 sub_807D770(void);
-extern u8 sub_80F931C();
-extern void sub_808A3F8(u8);
-extern void sub_80B3050(void);
-extern void sub_80546B8(u8);
-extern void sub_804E990(u8);
-extern void sub_802E424(u8);
-extern void sub_8064E2C(void);
 
 #define ewramBerryPic             (ewram + 0)
 #define ewramBerryPicTemp         (ewram + 0x1000)
@@ -177,20 +194,6 @@ static void sub_80A7124(u8);
 static void HandlePopupMenuAction_Give(u8);
 static void HandlePopupMenuAction_CheckTag(u8);
 static void HandlePopupMenuAction_Confirm(u8);
-
-enum
-{
-    ITEM_ACTION_USE_0,      // 0
-    ITEM_ACTION_TOSS,       // 1
-    ITEM_ACTION_CANCEL_2,   // 2
-    ITEM_ACTION_REGISTER,   // 3
-    ITEM_ACTION_USE_4,      // 4
-    ITEM_ACTION_CANCEL_5,   // 5
-    ITEM_ACTION_GIVE,       // 6
-    ITEM_ACTION_CHECK_TAG,  // 7
-    ITEM_ACTION_NONE,       // 8
-    ITEM_ACTION_CONFIRM,    // 9
-};
 
 static const struct MenuAction2 sItemPopupMenuActions[] =
 {

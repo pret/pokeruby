@@ -605,28 +605,9 @@ gUnknown_020384F8: @ 20384F8
 	.space 0x40
 
 	.include "src/map_name_popup.o"
-
 	.include "src/item_menu.o"
 
-	.align 2
-gUnknown_02038560: @ 2038560
-	.space 0x1
-
-gUnknown_02038561: @ 2038561
-	.space 0x1
-
-gUnknown_02038562: @ 2038562
-	.space 0x1
-
-gUnknown_02038563: @ 2038563
-	.space 0x1
-
-gUnknown_02038564: @ 2038564
-	.space 0x4
-
-sPokeballSpriteId: @ 2038568
-	.space 0x4
-
+    .align 2
 gUnknown_0203856C: @ 203856C
 	.space 0x4
 
