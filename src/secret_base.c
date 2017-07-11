@@ -396,7 +396,6 @@ bool8 CurrentMapIsSecretBase(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_80BBCCC(u8 flagIn)
 {
     u16 curBaseId;
@@ -404,8 +403,8 @@ void sub_80BBCCC(u8 flagIn)
     if (CurrentMapIsSecretBase()) {
         curBaseId = VarGet(VAR_0x4054);
         for (x=0; x<16; x++) {
-            if ((u8)(gSaveBlock1.secretBases[curBaseId].decorations[x] - 1) <= 0x77 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].decor_field_11 != 4) {
-                sub_80FF394((gSaveBlock1.secretBases[0].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[0].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
+            if (gSaveBlock1.secretBases[curBaseId].decorations[x] > 0 && gSaveBlock1.secretBases[curBaseId].decorations[x] <= 0x78 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].permission != DECORPERM_SOLID_MAT) {
+                sub_80FF394((gSaveBlock1.secretBases[curBaseId].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[curBaseId].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
             }
         }
         if (curBaseId != 0) {
@@ -418,6 +417,7 @@ void sub_80BBCCC(u8 flagIn)
     }
 }
 
+#ifdef NONMATCHING
 void sub_80BBDD0(void)
 {
     u8 *roomdecor;
@@ -439,7 +439,7 @@ void sub_80BBDD0(void)
     for (decidx=0; decidx<ndecor; decidx++) {
         if (roomdecor[decidx] == 0)
             continue;
-        if (gDecorations[roomdecor[decidx]].decor_field_11 != 4)
+        if (gDecorations[roomdecor[decidx]].permission != DECORPERM_SOLID_MAT)
             continue;
         for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
             if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
@@ -464,132 +464,6 @@ void sub_80BBDD0(void)
 }
 
 #else
-__attribute__((naked))
-void sub_80BBCCC(u8 flagIn)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    bl CurrentMapIsSecretBase\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080BBDBC\n\
-    ldr r0, _080BBD70 @ =0x00004054\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    movs r1, 0\n\
-    mov r0, sp\n\
-    strh r1, [r0]\n\
-    ldr r6, _080BBD74 @ =gSaveBlock1\n\
-    mov r4, sp\n\
-    ldr r0, _080BBD78 @ =0x00001a2a\n\
-    adds r7, r6, r0\n\
-_080BBCFC:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 5\n\
-    ldrh r1, [r4]\n\
-    adds r2, r0, r1\n\
-    ldr r1, _080BBD7C @ =0x00001a1a\n\
-    adds r0, r6, r1\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x77\n\
-    bhi _080BBD3A\n\
-    ldr r0, _080BBD80 @ =gDecorations\n\
-    ldrb r3, [r1]\n\
-    lsls r1, r3, 5\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x11]\n\
-    cmp r0, 0x4\n\
-    beq _080BBD3A\n\
-    adds r0, r2, r7\n\
-    ldrb r2, [r0]\n\
-    lsrs r0, r2, 4\n\
-    adds r0, 0x7\n\
-    movs r1, 0xF\n\
-    ands r1, r2\n\
-    adds r1, 0x7\n\
-    adds r2, r3, 0\n\
-    bl sub_80FF394\n\
-_080BBD3A:\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    strh r0, [r4]\n\
-    cmp r0, 0xF\n\
-    bls _080BBCFC\n\
-    cmp r5, 0\n\
-    beq _080BBD88\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBD84 @ =0x00000e21\n\
-    bl MapGridSetMetatileIdAt\n\
-    b _080BBDBC\n\
-    .align 2, 0\n\
-_080BBD70: .4byte 0x00004054\n\
-_080BBD74: .4byte gSaveBlock1\n\
-_080BBD78: .4byte 0x00001a2a\n\
-_080BBD7C: .4byte 0x00001a1a\n\
-_080BBD80: .4byte gDecorations\n\
-_080BBD84: .4byte 0x00000e21\n\
-_080BBD88:\n\
-    mov r0, r8\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    ldr r0, _080BBDC8 @ =0x00004089\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBDCC @ =0x00000e0a\n\
-    bl MapGridSetMetatileIdAt\n\
-_080BBDBC:\n\
-    add sp, 0x4\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BBDC8: .4byte 0x00004089\n\
-_080BBDCC: .4byte 0x00000e0a\n\
-.syntax divided\n");
-}
-
 __attribute__((naked))
 void sub_80BBDD0(void)
 {
