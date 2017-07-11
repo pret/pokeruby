@@ -1,6 +1,9 @@
 #include "global.h"
 #include "secret_base.h"
 #include "decoration.h"
+#include "species.h"
+#include "items.h"
+#include "moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_fadetransition.h"
@@ -821,32 +824,31 @@ u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
 }
 
 #ifdef NONMATCHING
+// So much is wrong with this function.
+// The compiler likes to store pointers in temp variables.  That's not what it's supposed to do.
 void sub_80BC300(void)
 {
+    u16 partyidx;
     u16 moveidx;
     u16 sbpartyidx = 0;
-    int resetVal = 0;
-    u16 partyidx = 0;
-    while (partyidx < 6) {
-        partyidx ++;
-        for (moveidx=0; moveidx<4; moveidx++) {
-            gSaveBlock1.secretBases[0].partyMoves[(partyidx - 1) * 6 + moveidx] = resetVal;
-        }
-        gSaveBlock1.secretBases[0].partySpecies[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyHeldItems[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyLevels[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyPersonality[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyEVs[partyidx - 1] = resetVal;
-        if (GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES) != 0 && !GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_IS_EGG)) {
+    for (partyidx=0; partyidx<PARTY_SIZE; partyidx++)
+    {
+        for (moveidx=0; moveidx<4; moveidx++)
+            gSaveBlock1.secretBases[0].partyMoves[partyidx * 4 + moveidx] = MOVE_NONE;
+        gSaveBlock1.secretBases[0].partySpecies[partyidx] = SPECIES_NONE;
+        gSaveBlock1.secretBases[0].partyHeldItems[partyidx] = ITEM_NONE;
+        gSaveBlock1.secretBases[0].partyLevels[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyPersonality[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyEVs[partyidx] = 0;
+        if (GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&(gPlayerParty[partyidx]), MON_DATA_IS_EGG)) {
+            for (moveidx=0; moveidx<4; moveidx++)
+                gSaveBlock1.secretBases[0].partyMoves[sbpartyidx * 4 + moveidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_MOVE1 + moveidx);
+            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES);
+            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_HELD_ITEM);
+            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_LEVEL);
+            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_PERSONALITY);
+            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx] = sub_80BC298(&(gPlayerParty[partyidx]));
             sbpartyidx ++;
-            for (moveidx=0; moveidx<4; moveidx++) {
-                gSaveBlock1.secretBases[0].partyMoves[(sbpartyidx - 1) * 6 + moveidx] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_MOVE1 + moveidx);
-            }
-            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES);
-            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_HELD_ITEM);
-            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_LEVEL);
-            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_PERSONALITY);
-            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx - 1] = sub_80BC298(&(gPlayerParty[partyidx - 1]));
         }
     }
 }
