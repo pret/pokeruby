@@ -1057,3 +1057,15 @@ void sub_80BC50C(void)
     ResetSecretBase(0);
     gSaveBlock1.secretBases[0].sbr_field_e = backup_sbr_field_e;
 }
+
+u8 sub_80BC538(void)
+{
+    s16 i;
+    u8 count = 0;
+    for (i=1; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+            count++;
+    }
+    return count;
+}

@@ -6,37 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC538
-sub_80BC538: @ 80BC538
-	push {r4,r5,lr}
-	movs r5, 0
-	movs r4, 0x1
-_080BC53E:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl sub_80BC268
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080BC554
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-_080BC554:
-	lsls r0, r4, 16
-	movs r1, 0x80
-	lsls r1, 9
-	adds r0, r1
-	lsrs r4, r0, 16
-	asrs r0, 16
-	cmp r0, 0x13
-	ble _080BC53E
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BC538
-
 	thumb_func_start sub_80BC56C
 sub_80BC56C: @ 80BC56C
 	push {lr}
