@@ -1047,3 +1047,13 @@ void sub_80BC474(void)
         }
     }
 }
+
+void sub_80BC50C(void)
+{
+    u16 backup_sbr_field_e;
+    sub_80BC474();
+    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    backup_sbr_field_e = gSaveBlock1.secretBases[0].sbr_field_e;
+    ResetSecretBase(0);
+    gSaveBlock1.secretBases[0].sbr_field_e = backup_sbr_field_e;
+}
