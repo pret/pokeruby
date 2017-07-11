@@ -1079,3 +1079,9 @@ void sub_80BC56C(void)
     else
         gScriptResult = 0;
 }
+
+void sub_80BC5BC(void)
+{
+    gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
+    FlagSet(0x10c);
+}

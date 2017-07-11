@@ -6,41 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC5BC
-sub_80BC5BC: @ 80BC5BC
-	push {lr}
-	ldr r0, _080BC5F8 @ =gUnknown_020387DC
-	ldrb r0, [r0]
-	bl sub_80BC14C
-	ldr r2, _080BC5FC @ =gSaveBlock1
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 5
-	adds r1, r2
-	ldr r0, _080BC600 @ =0x00001a09
-	adds r1, r0
-	ldrb r3, [r1]
-	lsrs r2, r3, 6
-	movs r0, 0x1
-	eors r2, r0
-	lsls r2, 6
-	movs r0, 0x3F
-	ands r0, r3
-	orrs r0, r2
-	strb r0, [r1]
-	movs r0, 0x86
-	lsls r0, 1
-	bl FlagSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC5F8: .4byte gUnknown_020387DC
-_080BC5FC: .4byte gSaveBlock1
-_080BC600: .4byte 0x00001a09
-	thumb_func_end sub_80BC5BC
-
 	thumb_func_start SecretBasePC_Decoration
 SecretBasePC_Decoration: @ 80BC604
 	push {lr}
