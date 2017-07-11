@@ -22,20 +22,93 @@
 #include "text.h"
 #include "vars.h"
 
-extern u8 gUnknown_020387DC;
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u16 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern const struct
+u8 sub_80BCA84();
+u8 sub_80BCBF8();
+void sub_80BCB90(u8);
+void sub_80BCBC0(u8);
+
+const struct
 {
     u16 unk_083D1358_0;
     u16 unk_083D1358_1;
-} gUnknown_083D1358[7];
-extern const u8 gUnknown_083D1374[4 * 16];
+} gUnknown_083D1358[] = {
+    {0x26,  0x36},
+    {0x27,  0x37},
+    {0x1a0, 0x1a1},
+    {0x1a8, 0x1a9},
+    {0x1b0, 0x1b1},
+    {0x208, 0x210},
+    {0x271, 0x278}
+};
+
+extern u8 gUnknown_020387DC;
+
+const u8 gUnknown_083D1374[] = {
+    MAP_ID_SECRET_BASE_RED_CAVE1,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE2,     0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_RED_CAVE3,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE4,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,  13,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  2,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   4,
+    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 15,
+    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 14,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  3,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    7,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  6,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_TREE1,         0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_TREE2,         0,
+    MAP_ID_SECRET_BASE_SHRUB1,        6,
+    MAP_ID_SECRET_BASE_TREE3,         0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  3,
+    MAP_ID_SECRET_BASE_TREE4,         0,
+    MAP_ID_SECRET_BASE_TREE1,        10,
+    MAP_ID_SECRET_BASE_SHRUB1,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  3,
+    MAP_ID_SECRET_BASE_SHRUB2,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_SHRUB3,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   8,
+    MAP_ID_SECRET_BASE_SHRUB4,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  6
+};
+
+const struct MenuAction gUnknown_083D13D4[] = {
+    {SecretBaseText_DelRegist, sub_80BCA84},
+    {gUnknownText_Exit, sub_80BCBF8}
+};
+
+void (*const gUnknown_083D13E4[])(u8) = {
+    sub_80BCB90,
+    sub_80BCBC0
+};
+
+const u8 gUnknown_083D13EC[] = {
+    0x23,0x24,0xF,0x1F,0x21,0x2F,0xE,0x14,0x20,0x22,0x0,0x0
+};
+
 extern void *gUnknown_0300485C;
-extern const u8 gUnknown_083D13EC[12];
 extern u8 gUnknown_081A2E14[];
 
 

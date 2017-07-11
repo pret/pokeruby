@@ -5,7 +5,7 @@ void ResetSecretBases(void);
 void sub_80BB970(struct MapEvents *);
 u8 sub_80BBB24(void);
 void sub_80BBCCC(u8);
-void sub_80BC038();
+void sub_80BC038(s16 *, struct MapEvents *);
 u8 sub_80BC050();
 void sub_80BC300();
 const u8 sub_80BCCA4(u8);
