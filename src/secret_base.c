@@ -1023,3 +1023,27 @@ void SecretBasePC_PackUp(void)
     IncrementGameStat(20);
     sub_80BC440();
 }
+
+void sub_80BC474(void)
+{
+    u16 i, j;
+    s16 metatileId;
+    struct MapEvents *mapEvents = gMapHeader.events;
+    for (i=0; i<mapEvents->bgEventCount; i++)
+    {
+        if (mapEvents->bgEvents[i].kind == 8 && gSaveBlock1.secretBases[0].sbr_field_0 == mapEvents->bgEvents[i].bgUnion.secretBaseId)
+        {
+            metatileId = MapGridGetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7);
+            for (j=0; j<7; j++)
+            {
+                if (gUnknown_083D1358[j].unk_083D1358_1 == metatileId)
+                {
+                    MapGridSetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7, gUnknown_083D1358[j].unk_083D1358_0 | 0xc00);
+                    break;
+                }
+            }
+            DrawWholeMapView();
+            break;
+        }
+    }
+}
