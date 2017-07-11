@@ -606,40 +606,9 @@ gUnknown_020384F8: @ 20384F8
 
 	.include "src/map_name_popup.o"
 
+	.include "src/item_menu.o"
+
 	.align 2
-gUnknown_0203853C: @ 203853C
-	.space 0x4
-
-gUnknown_02038540: @ 2038540
-	.space 0x4
-
-gUnknown_02038544: @ 2038544
-	.space 0xC
-
-gUnknown_02038550: @ 2038550
-	.space 0x4
-
-gUnknown_02038554: @ 2038554
-	.space 0x4
-
-gUnknown_02038558: @ 2038558
-	.space 0x1
-
-gUnknown_02038559: @ 2038559
-	.space 0x1
-
-gUnknown_0203855A: @ 203855A
-	.space 0x1
-
-gUnknown_0203855B: @ 203855B
-	.space 0x1
-
-gUnknown_0203855C: @ 203855C
-	.space 0x2
-
-gScriptItemId: @ 203855E
-	.space 0x2
-
 gUnknown_02038560: @ 2038560
 	.space 0x1
 
@@ -655,7 +624,7 @@ gUnknown_02038563: @ 2038563
 gUnknown_02038564: @ 2038564
 	.space 0x4
 
-gUnknown_02038568: @ 2038568
+sPokeballSpriteId: @ 2038568
 	.space 0x4
 
 gUnknown_0203856C: @ 203856C

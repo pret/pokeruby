@@ -94,13 +94,13 @@ gUnknown_030006DC: @ 30006DC
 
 	.include "src/field_effect.o"
 
-gUnknown_03000700: @ 3000700
+sPopupMenuSelection: @ 3000700
 	.space 0x1
 
-gUnknown_03000701: @ 3000701
+sReturnLocation: @ 3000701
 	.space 0x3
 
-gUnknown_03000704: @ 3000704
+sPopupMenuActionList: @ 3000704
 	.space 0x4
 
 gUnknown_03000708: @ 3000708

@@ -374,7 +374,7 @@ static void sub_81466E8(u8 taskId, s8 direction)
     lsls r0, 3\n\
     ldr r1, _08146748 @ =gTasks + 0x8\n\
     adds r6, r0, r1\n\
-    ldr r4, _0814674C @ =gUnknown_03005D10\n\
+    ldr r4, _0814674C @ =gBagPocketScrollStates\n\
     movs r0, 0xC\n\
     adds r0, r4\n\
     mov r8, r0\n\
@@ -412,7 +412,7 @@ _08146728:\n\
     b _08146766\n\
     .align 2, 0\n\
 _08146748: .4byte gTasks + 0x8\n\
-_0814674C: .4byte gUnknown_03005D10\n\
+_0814674C: .4byte gBagPocketScrollStates\n\
 _08146750:\n\
     mov r4, r8\n\
     ldrb r0, [r4, 0x2]\n\
@@ -487,7 +487,7 @@ static void sub_8146810(s8 berry)
     asrs r1, r0, 24\n\
     cmp r1, 0\n\
     ble _08146848\n\
-    ldr r0, _08146840 @ =gUnknown_03005D10\n\
+    ldr r0, _08146840 @ =gBagPocketScrollStates\n\
     adds r4, r0, 0\n\
     adds r4, 0xC\n\
     ldrb r2, [r0, 0xC]\n\
@@ -504,12 +504,12 @@ static void sub_8146810(s8 berry)
     movs r0, 0x7\n\
     b _0814686E\n\
     .align 2, 0\n\
-_08146840: .4byte gUnknown_03005D10\n\
+_08146840: .4byte gBagPocketScrollStates\n\
 _08146844:\n\
     adds r0, r2, r3\n\
     b _0814686E\n\
 _08146848:\n\
-    ldr r0, _08146868 @ =gUnknown_03005D10\n\
+    ldr r0, _08146868 @ =gBagPocketScrollStates\n\
     adds r5, r0, 0\n\
     adds r5, 0xC\n\
     ldrb r2, [r0, 0xC]\n\
@@ -525,7 +525,7 @@ _08146848:\n\
     strb r1, [r6, 0xC]\n\
     b _08146870\n\
     .align 2, 0\n\
-_08146868: .4byte gUnknown_03005D10\n\
+_08146868: .4byte gBagPocketScrollStates\n\
 _0814686C:\n\
     adds r0, r2, r4\n\
 _0814686E:\n\
@@ -538,7 +538,7 @@ _08146870:\n\
     ldrb r1, [r0, 0x1]\n\
     ldrb r0, [r0]\n\
     adds r1, r0\n\
-    ldr r0, _081468B0 @ =gUnknown_03005D24\n\
+    ldr r0, _081468B0 @ =gCurrentBagPocketItemSlots\n\
     ldr r0, [r0]\n\
     lsls r1, 2\n\
     adds r1, r0\n\
@@ -559,7 +559,7 @@ _08146870:\n\
     bx r0\n\
     .align 2, 0\n\
 _081468AC: .4byte gScriptItemId\n\
-_081468B0: .4byte gUnknown_03005D24\n\
+_081468B0: .4byte gCurrentBagPocketItemSlots\n\
 _081468B4: .4byte gUnknown_0203932C\n\
 _081468B8: .4byte gSprites\n\
     .syntax divided\n");

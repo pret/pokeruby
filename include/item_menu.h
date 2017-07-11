@@ -3,7 +3,7 @@
 
 #include "string_util.h"
 
-void sub_80A3684(void);
+void ResetBagScrollPositions(void);
 void ClearBag(void);
 void sub_80A3E0C(void);
 void sub_80A3FA0(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f);
