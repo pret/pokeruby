@@ -418,6 +418,8 @@ void sub_80BBCCC(u8 flagIn)
 }
 
 #ifdef NONMATCHING
+// The only nonmatching property of this function is that the implicit variables &gSaveBlock1 and &roomdecor[decidx]
+// are stored in the wrong registers.
 void sub_80BBDD0(void)
 {
     u8 *roomdecor;
@@ -437,20 +439,19 @@ void sub_80BBDD0(void)
         ndecor = 16;
     }
     for (decidx=0; decidx<ndecor; decidx++) {
-        if (roomdecor[decidx] == 0)
-            continue;
-        if (gDecorations[roomdecor[decidx]].permission != DECORPERM_SOLID_MAT)
-            continue;
-        for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
-            if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
-                break;
-        }
-        if (objid != gMapHeader.events->mapObjectCount) {
+        if (roomdecor[decidx] != 0 && gDecorations[roomdecor[decidx]].permission == DECORPERM_SOLID_MAT)
+        {
+            for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
+                if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    break;
+            }
+            if (objid == gMapHeader.events->mapObjectCount)
+                continue;
             gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
             gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
             metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-            if (sub_80572D8(metatile) == 1 || sub_80572EC(metatile) == 1) {
-                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + 0x3f20;
+            if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
+                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
                 VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
                 gScriptResult = gMapHeader.events->mapObjects[objid].localId;
                 FlagReset(gSpecialVar_0x8004 + 0xAE);
