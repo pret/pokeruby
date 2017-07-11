@@ -1069,3 +1069,13 @@ u8 sub_80BC538(void)
     }
     return count;
 }
+
+void sub_80BC56C(void)
+{
+    if (sub_80BC268(sub_80BC14C(gUnknown_020387DC)) == TRUE)
+        gScriptResult = 1;
+    else if (sub_80BC538() > 9)
+        gScriptResult = 2;
+    else
+        gScriptResult = 0;
+}

@@ -6,48 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC56C
-sub_80BC56C: @ 80BC56C
-	push {lr}
-	ldr r0, _080BC58C @ =gUnknown_020387DC
-	ldrb r0, [r0]
-	bl sub_80BC14C
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80BC268
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x1
-	bne _080BC594
-	ldr r0, _080BC590 @ =gScriptResult
-	strh r1, [r0]
-	b _080BC5B2
-	.align 2, 0
-_080BC58C: .4byte gUnknown_020387DC
-_080BC590: .4byte gScriptResult
-_080BC594:
-	bl sub_80BC538
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x9
-	bls _080BC5AC
-	ldr r1, _080BC5A8 @ =gScriptResult
-	movs r0, 0x2
-	b _080BC5B0
-	.align 2, 0
-_080BC5A8: .4byte gScriptResult
-_080BC5AC:
-	ldr r1, _080BC5B8 @ =gScriptResult
-	movs r0, 0
-_080BC5B0:
-	strh r0, [r1]
-_080BC5B2:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC5B8: .4byte gScriptResult
-	thumb_func_end sub_80BC56C
-
 	thumb_func_start sub_80BC5BC
 sub_80BC5BC: @ 80BC5BC
 	push {lr}
