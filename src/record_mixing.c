@@ -10,6 +10,7 @@
 #include "mauville_old_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
+#include "rng.h"
 #include "rom4.h"
 #include "script.h"
 #include "secret_base.h"
@@ -86,7 +87,6 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80BFD44((u8 *)unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
     sub_80C0514(unk_2008000.filler1004, sizeof(struct PlayerRecords), a);
     sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
-    //UB: Too many arguments for function "sub_80FA4E4"
     sub_80FA4E4(unk_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
     sub_80B9C6C(&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
     sub_80B9B70(unk_2008000.filler1124, sizeof(struct PlayerRecords), a);
@@ -430,93 +430,26 @@ u8 sub_80B9BBC(u16 *a)
     return a[16];
 }
 
-#undef NONMATCHING
-#ifdef NONMATCHING
-
-void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
+// TODO: clean this up
+void sub_80B9BC4(u8 *a, size_t b, u8 *c, u8 d, u8 e)
 {
-    struct RecordMixing_UnknownStructSub *offA;
-    struct RecordMixing_UnknownStructSub *offB;
-    struct RecordMixing_UnknownStructSub v0;
-    v0 = (offA = ((struct RecordMixing_UnknownStruct *)(b * c[d][0] + (u32)&a))->data)[c[d][1]];
-    offA[c[d][1]] = (offB = ((struct RecordMixing_UnknownStruct *)(b * c[e][0] + (u32)&a))->data)[c[e][1]];
-    offB[c[e][1]] = v0;
-    //ToDo: Figure out what this strange stack usage is
+    struct RecordMixing_UnknownStructSub sp0;
+    struct RecordMixing_UnknownStructSub *r8;
+    struct RecordMixing_UnknownStructSub *r6 = (struct RecordMixing_UnknownStructSub *)(a + b * c[d * 2]);
+    
+    {
+        struct RecordMixing_UnknownStructSub *src = r6 + c[2 * d + 1];
+        
+        memcpy(&sp0, src, 0x38);
+    }
+    
+    r8 = (struct RecordMixing_UnknownStructSub *)(a + c[e * 2] * b);
+    r6 += c[d * 2 + 1];
+    memcpy(r6, r8 + c[e * 2 + 1], 0x38);
+    
+    r8 += c[e * 2 + 1];
+    memcpy(r8, &sp0, 0x38);
 }
-
-#else
-__attribute__((naked))
-void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    mov r6, r10\n\
-    mov r5, r9\n\
-    mov r4, r8\n\
-    push {r4-r6}\n\
-    sub sp, 0x38\n\
-    mov r8, r0\n\
-    mov r10, r1\n\
-    mov r9, r2\n\
-    adds r4, r3, 0\n\
-    ldr r5, [sp, 0x54]\n\
-    lsls r4, 24\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    lsrs r4, 23\n\
-    add r4, r9\n\
-    ldrb r0, [r4]\n\
-    mov r6, r10\n\
-    muls r6, r0\n\
-    add r6, r8\n\
-    ldrb r0, [r4, 0x1]\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 3\n\
-    adds r1, r6, r1\n\
-    mov r0, sp\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    lsls r5, 1\n\
-    add r5, r9\n\
-    ldrb r0, [r5]\n\
-    mov r1, r10\n\
-    muls r1, r0\n\
-    adds r0, r1, 0\n\
-    add r8, r0\n\
-    ldrb r1, [r4, 0x1]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 3\n\
-    adds r6, r0\n\
-    ldrb r0, [r5, 0x1]\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 3\n\
-    add r1, r8\n\
-    adds r0, r6, 0\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    ldrb r1, [r5, 0x1]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 3\n\
-    add r8, r0\n\
-    mov r0, r8\n\
-    mov r1, sp\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    add sp, 0x38\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 u8 sub_80B9C4C(u8 *a)
 {
@@ -528,3 +461,54 @@ u8 sub_80B9C4C(u8 *a)
     return r2;
 }
 
+void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
+{
+    u8 sp0[0x58];
+    u8 sp3C;
+    u16 sp40 = Random();
+    u8 r8;
+    u16 i;  // r3
+    u16 r7;
+    struct RecordMixing_UnknownStruct *r6;
+    
+    SeedRng(gLinkPlayers[0].trainerId);
+    r8 = GetLinkPlayerCount();
+    for (i = 0; i < 4; i++)
+    {
+        sp0[4 + i] = 0xFF;
+        sp0[8 + i] = 0;
+        sp0[0x1C + i * 2 + 0] = 0;
+        sp0[0x1C + i * 2 + 1] = 0;
+    }
+    sp3C = 0;
+    for (i = 0; i < r8; i++)
+    {
+        r6 = (struct RecordMixing_UnknownStruct *)(a + b * i);
+        if (r6->unk70 != 0)
+        {
+            for (r7 = 0; r7 < r6->unk70; r7++)
+            {
+                if (r6->unk74[r7] == 0)
+                    sp0[0x1C + i * 2 + r7] = 1;
+            }
+        }
+        //_080B9D3C
+    }
+    //_080B9D46
+    r7 = 0;
+    for (i = 0; i < r8; i++)
+    {
+        r6 = (struct RecordMixing_UnknownStruct *)(a + b * i);
+        if (sp0[0x1C + i * 2 + 0] == 1 || sp0[0x1C + i * 2 + 1] == 1)
+            sp3C++;
+        while (1)
+        {
+            if (sp0[0x1C + i * 2 + 0] == 1 || sp0[0x1C + i * 2 + 1] == 0)
+            {
+                sp0[0x24] = i;
+                sp0[0x25] = 0;
+            }
+        }
+    }
+    //_080B9E3E
+}

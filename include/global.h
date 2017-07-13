@@ -531,7 +531,9 @@ struct GabbyAndTyData
 
 struct RecordMixing_UnknownStructSub
 {
-    u8 data[0x38];
+    u32 unk0;
+    u8 data[0x34];
+    //u8 data[0x38];
 };
 
 struct RecordMixing_UnknownStruct
