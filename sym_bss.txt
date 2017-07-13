@@ -136,9 +136,9 @@ gUnknown_03000744: @ 3000744
 gUnknown_03000748: @ 3000748
 	.space 0x4
 
-gUnknown_0300074C: @ 300074C
-	.space 0x4
+	.include "src/menu_helpers.o"
 
+	.align 2
 gUnknown_03000750: @ 3000750
 	.space 0x2
 

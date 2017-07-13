@@ -14,10 +14,10 @@
 #include "task.h"
 #include "text.h"
 
-extern u8 gUnknown_020388C0[4];
-extern struct YesNoFuncTable gUnknown_020388C4;
+static EWRAM_DATA u8 gUnknown_020388C0[4] = {0};
+static EWRAM_DATA struct YesNoFuncTable gUnknown_020388C4 = {0};
 
-extern TaskFunc gUnknown_0300074C;
+static TaskFunc gUnknown_0300074C;
 
 extern struct SpritePalette gUnknown_083E5968;
 
