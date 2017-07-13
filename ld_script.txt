@@ -172,7 +172,7 @@ SECTIONS {
         src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
-		src/tv.o(.text);
+        src/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
@@ -195,7 +195,7 @@ SECTIONS {
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
-        asm/menu_helpers.o(.text);
+        src/menu_helpers.o(.text);
         src/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);

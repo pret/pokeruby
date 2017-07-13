@@ -289,16 +289,6 @@ extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
 extern bool8 sub_807D770(void);
-extern void sub_80F944C(void); // src/menu_helpers
-extern void sub_80F9480(u8 *, u8); // src/menu_helpers
-extern void sub_80F94A4(u8, u8 *, u8, s16); // src/menu_helpers
-extern void sub_80F94F8(u8 *); // src/menu_helpers
-extern void sub_80F9520(u8 *, u8); // src/menu_helpers
-extern void DestroyVerticalScrollIndicator(u8); // src/menu_helpers
-extern void CreateVerticalScrollIndicators(u8, u8, u8); // src/menu_helpers
-extern void LoadScrollIndicatorPalette(void); // src/menu_helpers
-extern void DisplayItemMessageOnField(u8, const u8 *, TaskFunc, u16); // src/menu_helpers
-extern void BuyMenuFreeMemory(void); // src/menu_helpers
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
 
