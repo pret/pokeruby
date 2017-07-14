@@ -3,46 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gPokenavCursor_Pal::
-	.incbin "graphics/pokenav/cursor.gbapal"
-
-	.align 2
-gUnknown_083E5AF0:: @ 83E5AF0
-	.incbin "graphics/pokenav/cursor_small.4bpp.lz"
-
-	.align 2
-gUnknown_083E5B34:: @ 83E5B34
-	.incbin "graphics/pokenav/cursor_large.4bpp.lz"
-
-	.align 2
-gRegionMapBrendanIconPalette:: @ 83E5C20
-	.incbin "graphics/pokenav/brendan_icon.gbapal"
-
-	.align 2
-gRegionMapBrendanIconTiles:: @ 83E5C40
-	.incbin "graphics/pokenav/brendan_icon.4bpp"
-
-	.align 2
-gRegionMapMayIconPalette:: @ 83E5CC0
-	.incbin "graphics/pokenav/may_icon.gbapal"
-
-	.align 2
-gRegionMapMayIconTiles:: @ 83E5CE0
-	.incbin "graphics/pokenav/may_icon.4bpp"
-
-	.align 2
-gUnknown_083E5D60:: @ 83E5D60
-	.incbin "graphics/pokenav/region_map.gbapal", 0xE0, 0x40
-
-	.align 2
-gUnknown_083E5DA0:: @ 83E5DA0
-	.incbin "graphics/pokenav/region_map.8bpp.lz"
-
-	.align 2
-gUnknown_083E6B04:: @ 83E6B04
-	.incbin "graphics/pokenav/region_map_map.bin.lz"
-
 @ 83E6E50
 	.include "data/region_map_sections.inc"
 
