@@ -171,38 +171,38 @@ static void sub_8093174(void)
     case 0:
         sub_8093534();
         sub_8093688();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 1:
         sub_8093598();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 2:
         sub_80935EC();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 3:
         sub_8093610();
         sub_80937A4();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 4:
         sub_80937BC();
-        gMain.state += 1;
+        gMain.state++;
     case 5:
         if (MultistepInitMenuWindowContinue() == FALSE)
         {
             return;
         }
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 6:
         sub_80937F0();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 7:
         sub_80937D8();
-        gMain.state += 1;
+        gMain.state++;
         break;
     case 8:
         nullsub_15();
@@ -376,22 +376,22 @@ static u8 sub_80934F4(struct TrainerCard *trainerCard)
 
     if (trainerCard->firstHallOfFameA != 0 || trainerCard->firstHallOfFameB != 0 || trainerCard->firstHallOfFameC != 0)
     {
-        value += 1;
+        value++;
     }
 
     if (trainerCard->var_3)
     {
-        value += 1;
+        value++;
     }
 
     if (trainerCard->battleTowerLosses > 49)
     {
-        value += 1;
+        value++;
     }
 
     if (trainerCard->var_4)
     {
-        value += 1;
+        value++;
     }
 
     return value;
@@ -470,21 +470,14 @@ static void sub_8093688(void)
     u8 i;
 
     sub_8093324();
-
-    ewram0.var_0 = FALSE;
-    ewram0.var_3 = FALSE;
+    ewram0.var_0 = 0;
+    ewram0.var_3 = 0;
     ewram0.var_4 = FALSE;
-
     ewram0.var_2 = ewram0.var_64.stars;
-
-    ewram0.var_5 = FALSE;
-    ewram0.var_6 = FALSE;
-
+    ewram0.var_5 = 0;
+    ewram0.var_6 = 0;
     for (i = 0; i < 4; i++)
-    {
         sub_80EB3FC(ewram0.var_20[i], ewram0.var_64.var_28[i]);
-    }
-
     sub_80936D4();
 }
 
@@ -497,61 +490,43 @@ void sub_80936D4(void)
     ewram0.var_b = 0;
     ewram0.var_c = 0;
     ewram0.var_d = 0;
-
     memset(ewram0.var_e, 0, sizeof(ewram0.var_e));
 
     if (ewram0.var_64.hasPokedex)
-    {
-        ewram0.var_7 += 1;
-    }
+        ewram0.var_7++;
 
-    if (ewram0.var_64.firstHallOfFameA != 0 || ewram0.var_64.firstHallOfFameB != 0 ||
-        ewram0.var_64.firstHallOfFameC != 0)
-    {
-        ewram0.var_8 += 1;
-    }
+    if (ewram0.var_64.firstHallOfFameA != 0
+     || ewram0.var_64.firstHallOfFameB != 0
+     || ewram0.var_64.firstHallOfFameC != 0)
+        ewram0.var_8++;
 
     if (ewram0.var_64.linkBattleWins != 0 || ewram0.var_64.linkBattleLosses != 0)
-    {
-        ewram0.var_9 += 1;
-    }
+        ewram0.var_9++;
 
     if (ewram0.var_64.battleTowerWins != 0 || ewram0.var_64.battleTowerLosses != 0)
-    {
-        ewram0.var_a += 1;
-    }
+        ewram0.var_a++;
 
     if (ewram0.var_64.contestsWithFriends != 0)
-    {
-        ewram0.var_b += 1;
-    }
+        ewram0.var_b++;
 
     if (ewram0.var_64.pokeblocksWithFriends != 0)
-    {
-        ewram0.var_c += 1;
-    }
+        ewram0.var_c++;
 
     if (ewram0.var_64.pokemonTrades != 0)
-    {
-        ewram0.var_d += 1;
-    }
+        ewram0.var_d++;
 
     if (!ewram0.var_1)
     {
         u32 badgeFlag;
-        int i;
+        int i = 0;
 
-        i = 0;
         badgeFlag = BADGE01_GET;
         while (1)
         {
             if (FlagGet(badgeFlag))
-            {
-                ewram0.var_e[i] += 1;
-            }
-
-            badgeFlag += 1;
-            i += 1;
+                ewram0.var_e[i]++;
+            badgeFlag++;
+            i++;
             if (badgeFlag > BADGE08_GET)
             {
                 break;
@@ -616,14 +591,14 @@ bool8 sub_8093864(struct Task *task)
     ewram0.var_6 = gSaveBlock2.playTimeVBlanks;
     sub_80939A4();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-    ewram0.var_0 += 1;
+    ewram0.var_0++;
     return FALSE;
 }
 
 bool8 sub_80938A8(struct Task *task)
 {
     if (!gPaletteFade.active)
-        ewram0.var_0 += 1;
+        ewram0.var_0++;
     return FALSE;
 }
 
@@ -639,16 +614,14 @@ bool8 sub_80938CC(struct Task *task)
         if (ewram0.var_3 != 0)
         {
             ewram0.var_0 = 5;
-            return TRUE;
         }
         else
         {
             ewram0.var_3 ^= 1;
             ewram0.var_0 = 3;
-            return TRUE;
         }
+        return TRUE;
     }
-
     return FALSE;
 }
 
@@ -656,19 +629,14 @@ bool8 sub_8093918(struct Task *task)
 {
     sub_8093A28();
     PlaySE(SE_CARD);
-
-    ewram0.var_0 += 1;
-
+    ewram0.var_0++;
     return FALSE;
 }
 
 bool8 sub_8093938(struct Task *task)
 {
     if (sub_8093A48())
-    {
         ewram0.var_0 = 2;
-    }
-
     return FALSE;
 }
 
@@ -676,17 +644,14 @@ bool8 sub_8093954(struct Task *task)
 {
     sub_80939C0();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-    ewram0.var_0 += 1;
+    ewram0.var_0++;
     return FALSE;
 }
 
 bool8 sub_8093980(struct Task *task)
 {
     if (!gPaletteFade.active)
-    {
         SetMainCallback2((MainCallback)ewram0.var_60);
-    }
-
     return FALSE;
 }
 
@@ -698,28 +663,22 @@ static void sub_80939A4(void)
 
 static void sub_80939C0(void)
 {
-    u8 taskId;
-
-    taskId = FindTaskIdByFunc(sub_80939DC);
+    u8 taskId = FindTaskIdByFunc(sub_80939DC);
 
     if (taskId != 0xFF)
-    {
         DestroyTask(taskId);
-    }
 }
 
 static void sub_80939DC(u8 taskId)
 {
     u8 buffer[32];
-    struct Task *task;
-    task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     if (ewram0.var_5 != task->data[TD_1])
     {
         task->data[TD_1] = ewram0.var_5;
         task->data[TD_0] ^= TRUE;
     }
-
     TrainerCard_Front_PrintPlayTime(buffer, task->data[TD_0]);
     MenuPrint(buffer, 10, 12);
 }
@@ -750,12 +709,12 @@ bool8 sub_8093AA0(struct Task *task)
 {
     s32 i;
 
-    ewram0.var_4 = 0;
+    ewram0.var_4 = FALSE;
     dp12_8087EA4();
     for (i = 0; i < ARRAY_COUNT(gUnknown_03004DE0.unk780); i++)
         gUnknown_03004DE0.unk780[i] = -4;
     SetHBlankCallback(sub_8093D7C);
-    ewram0.var_4 = 1;
+    ewram0.var_4 = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -916,14 +875,9 @@ bool8 sub_8093C0C(struct TrainerCard *trainerCard)
 {
     sub_80939C0();
     sub_8093DAC();
-
     if (!ewram0.var_3)
-    {
         sub_80939A4();
-    }
-
-    trainerCard->firstHallOfFameB += 1;
-
+    trainerCard->firstHallOfFameB++;
     return TRUE;
 }
 
@@ -1084,10 +1038,8 @@ bool8 sub_8093D50(void)
     ewram0.var_4 = FALSE;
     SetHBlankCallback(NULL);
     sub_8093E04();
-
     taskId = FindTaskIdByFunc(sub_8093A68);
     DestroyTask(taskId);
-
     return FALSE;
 }
 
@@ -1123,13 +1075,9 @@ _08093DA8: .4byte 0x4000012 @ REG_BG0VOFS\n\
 static void sub_8093DAC(void)
 {
     if (ewram0.var_3)
-    {
         sub_8093DEC();
-    }
     else
-    {
         sub_8093DC8();
-    }
 }
 
 static void sub_8093DC8(void)
@@ -1239,11 +1187,8 @@ void sub_8093EA0(void)
     LoadPalette(gUnknown_083B5EF8[ewram0.var_2], 0, 48 * 2);
     LoadPalette(gBadgesPalette, 48, 16 * 2);
     LoadPalette(gUnknown_083B5F4C, 64, 16 * 2);
-
     if (ewram0.var_64.gender != MALE)
-    {
         LoadPalette(gUnknown_083B5F0C, 16, 16 * 2);
-    }
 }
 
 static void sub_8093EF8(void)
@@ -1609,11 +1554,12 @@ static void TrainerCard_Front_PrintPokedexCount(void)
     if (ewram0.var_7 == FALSE)
     {
         sub_8094110();
-        return;
     }
-
-    ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokedexSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
-    MenuPrint_RightAligned(buffer, 16, 10);
+    else
+    {
+        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokedexSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
+        MenuPrint_RightAligned(buffer, 16, 10);
+    }
 }
 
 static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon)
@@ -1624,13 +1570,11 @@ static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon)
 
     playTimeHours = gSaveBlock2.playTimeHours;
     playTimeMinutes = gSaveBlock2.playTimeMinutes;
-
     if (ewram0.var_1 != 0)
     {
         playTimeHours = ewram0.var_64.playTimeHours;
         playTimeMinutes = ewram0.var_64.playTimeMinutes;
     }
-
     FormatPlayTime(buffer, playTimeHours, playTimeMinutes, colon);
     sub_8072C74(arg1, buffer, 48, 1);
 }
@@ -1639,24 +1583,22 @@ static void sub_809429C(void)
 {
     u8 *str;
 
-    if (ewram0.var_1 == FALSE)
+    if (ewram0.var_1 != 0)
     {
-        return;
+        str = gStringVar1;
+        str = StringCopy(str, ewram0.var_20[0]);
+        str[0] = 00;
+        str++;
+        str = StringCopy(str, ewram0.var_20[1]);
+        MenuPrint(gStringVar1, 2, 14);
+
+        str = gStringVar1;
+        str = StringCopy(str, ewram0.var_20[2]);
+        str[0] = 00;
+        str++;
+        str = StringCopy(str, ewram0.var_20[3]);
+        MenuPrint(gStringVar1, 2, 16);
     }
-
-    str = gStringVar1;
-    str = StringCopy(str, ewram0.var_20[0]);
-    str[0] = 00;
-    str++;
-    str = StringCopy(str, ewram0.var_20[1]);
-    MenuPrint(gStringVar1, 2, 14);
-
-    str = gStringVar1;
-    str = StringCopy(str, ewram0.var_20[2]);
-    str[0] = 00;
-    str++;
-    str = StringCopy(str, ewram0.var_20[3]);
-    MenuPrint(gStringVar1, 2, 16);
 }
 
 static void TrainerCard_Back_PrintName(void)
@@ -1678,152 +1620,115 @@ static void TrainerCard_Back_PrintName(void)
 
 static void TrainerCard_Back_PrintHallOfFameTime_Label(void)
 {
-    if (ewram0.var_8 == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_FirstHOF, 3, 5);
+    if (ewram0.var_8 != 0)
+        MenuPrint(gOtherText_FirstHOF, 3, 5);
 }
 
 static void TrainerCard_Back_PrintHallOfFameTime(void)
 {
     u8 *str;
 
-    if (ewram0.var_8 == FALSE)
+    if (ewram0.var_8 != 0)
     {
-        return;
+        str = gStringVar1;
+        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        str = StringCopy(str, gUnknown_083B5EF4);
+        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS, 2);
+        str = StringCopy(str, gUnknown_083B5EF4);
+        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS, 2);
+        MenuPrint_RightAligned(gStringVar1, 28, 5);
     }
-
-    str = gStringVar1;
-    str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    str = StringCopy(str, gUnknown_083B5EF4);
-    str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS, 2);
-    str = StringCopy(str, gUnknown_083B5EF4);
-    str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS, 2);
-
-    MenuPrint_RightAligned(gStringVar1, 28, 5);
 }
 
 static void TrainerCard_Back_PrintLinkBattlesLabel(void)
 {
-    if (ewram0.var_9 == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_LinkCableBattles, 3, 7);
+    if (ewram0.var_9 != 0)
+        MenuPrint(gOtherText_LinkCableBattles, 3, 7);
 }
 
 static void TrainerCard_Back_PrintLinkBattles(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_9 == FALSE)
+    if (ewram0.var_9 != 0)
     {
-        return;
+        ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleWins);
+        MenuPrint_RightAligned(buffer, 22, 7);
+
+        ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleLosses);
+        MenuPrint_RightAligned(buffer, 28, 7);
     }
-
-    ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleWins);
-    MenuPrint_RightAligned(buffer, 22, 7);
-
-    ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleLosses);
-    MenuPrint_RightAligned(buffer, 28, 7);
 }
 
 static void TrainerCard_Back_PrintBattleTower_Label(void)
 {
-    if (ewram0.var_a == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_BattleTowerWinRecord, 3, 15);
+    if (ewram0.var_a != 0)
+        MenuPrint(gOtherText_BattleTowerWinRecord, 3, 15);
 }
 
 static void TrainerCard_Back_PrintBattleTower(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_a == FALSE)
+    if (ewram0.var_a != 0)
     {
-        return;
+        sub_8072C44(buffer, ewram0.var_64.battleTowerWins, 24, 1);
+        MenuPrint_PixelCoords(buffer, 112, 120, 0);
+
+        sub_8072C44(buffer, ewram0.var_64.battleTowerLosses, 24, 1);
+        MenuPrint_PixelCoords(buffer, 149, 120, 0);
     }
-
-    sub_8072C44(buffer, ewram0.var_64.battleTowerWins, 24, 1);
-    MenuPrint_PixelCoords(buffer, 112, 120, 0);
-
-    sub_8072C44(buffer, ewram0.var_64.battleTowerLosses, 24, 1);
-    MenuPrint_PixelCoords(buffer, 149, 120, 0);
 }
 
 static void TrainerCard_Back_PrintLinkContests_Label(void)
 {
-    if (ewram0.var_b == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_ContestRecord, 3, 13);
+    if (ewram0.var_b != 0)
+        MenuPrint(gOtherText_ContestRecord, 3, 13);
 }
 
 static void TrainerCard_Back_PrintLinkContests(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_b == FALSE)
+    if (ewram0.var_b != 0)
     {
-        return;
+        ConvertIntToDecimalStringN(buffer, ewram0.var_64.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        MenuPrint_RightAligned(buffer, 28, 13);
     }
-
-    ConvertIntToDecimalStringN(buffer, ewram0.var_64.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    MenuPrint_RightAligned(buffer, 28, 13);
 }
 
 static void TrainerCard_Back_PrintLinkPokeblocks_Label(void)
 {
-    if (ewram0.var_c == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_MixingRecord, 3, 11);
+    if (ewram0.var_c != 0)
+        MenuPrint(gOtherText_MixingRecord, 3, 11);
 }
 
 static void TrainerCard_Back_PrintLinkPokeblocks(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_c == FALSE)
+    if (ewram0.var_c != 0)
     {
-        return;
+        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
+        MenuPrint_RightAligned(buffer, 28, 11);
     }
-
-    ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
-    MenuPrint_RightAligned(buffer, 28, 11);
 }
 
 static void TrainerCard_Back_PrintPokemonTrades_Label(void)
 {
-    if (ewram0.var_d == FALSE)
-    {
-        return;
-    }
-
-    MenuPrint(gOtherText_TradeRecord, 3, 9);
+    if (ewram0.var_d != 0)
+        MenuPrint(gOtherText_TradeRecord, 3, 9);
 }
 
 static void TrainerCard_Back_PrintPokemonTrades(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_d == FALSE)
+    if (ewram0.var_d != 0)
     {
-        return;
+        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
+        MenuPrint_RightAligned(buffer, 28, 9);
     }
-
-    ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
-    MenuPrint_RightAligned(buffer, 28, 9);
 }
 
 void unref_sub_8094588(u16 left, u16 top)
@@ -1831,9 +1736,6 @@ void unref_sub_8094588(u16 left, u16 top)
     const u8 *text = gOtherText_Boy;
 
     if (gSaveBlock2.playerGender == FEMALE)
-    {
         text = gOtherText_Girl;
-    }
-
-    MenuPrint(text, (u8)left, (u8)top);
+    MenuPrint(text, left, top);
 }
