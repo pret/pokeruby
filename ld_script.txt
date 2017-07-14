@@ -128,7 +128,7 @@ SECTIONS {
         asm/field_weather.o(.text);
         src/field_fadetransition.o(.text);
         asm/field_fadetransition.o(.text);
-        asm/field_screen_effect.o(.text);
+        src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         src/cable_club.o(.text);
@@ -137,7 +137,7 @@ SECTIONS {
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
-        asm/unknown_task.o(.text);
+        src/unknown_task.o(.text);
         asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
@@ -378,7 +378,7 @@ SECTIONS {
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
-        data/rom_8080874.o(.rodata);
+        src/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/mori_debug_menu.o(.rodata);
