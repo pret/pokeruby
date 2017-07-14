@@ -33,36 +33,3 @@ gUnknown_083D0280:: @ 83D0280
 	.align 2
 gUnknown_083D0284:: @ 83D0284
 	.4byte gSaveBlock2+0xA8
-
-gUnknown_083D0288:: @ 83D0288
-	.byte 1, 0
-
-gUnknown_083D028A:: @ 83D028A
-	.byte 1, 2, 0
-	.byte 2, 0, 1
-
-gUnknown_083D0290:: @ 83D0290
-	.byte 1, 0, 3, 2
-	.byte 3, 0, 1, 2
-	.byte 2, 0, 3, 1
-	.byte 1, 3, 0, 2
-	.byte 2, 3, 0, 1
-	.byte 3, 2, 0, 1
-	.byte 1, 2, 3, 0
-	.byte 2, 3, 1, 0
-	.byte 3, 2, 1, 0
-
-gUnknown_083D02B4:: @ 83D02B4
-	.byte 0, 1
-	.byte 1, 2
-	.byte 2, 0
-
-gUnknown_083D02BA:: @ 83D02BA
-	.byte 0, 1
-	.byte 2, 3
-
-	.byte 0, 2
-	.byte 1, 3
-
-	.byte 0, 3
-	.byte 2, 1

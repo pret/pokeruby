@@ -408,6 +408,7 @@ SECTIONS {
         data/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
+        src/record_mixing.o(.rodata);
         src/sound_check_menu.o(.rodata);
         data/secret_base.o(.rodata);
         data/tv.o(.rodata);

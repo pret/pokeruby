@@ -25,24 +25,36 @@
 #include "task.h"
 #include "tv.h"
 
+extern u8 ewram[];
+#define unk_2018000 (*(struct PlayerRecords *)(ewram + 0x18000))
+#define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
 
-extern void *recordMixingSecretBases;
-extern void *recordMixingTvShows;
-extern void *gUnknown_083D0274;
-extern void *gUnknown_083D0278;
-extern void *recordMixingEasyChatPairs;
-extern void *gUnknown_083D0284;
-extern u8 gUnknown_083D0288[2];
-extern u8 gUnknown_083D028A[2][3];
-extern u8 gUnknown_083D0290[9][4];
+extern struct RecordMixing_UnknownStruct gUnknown_02038738;
 
-extern struct RecordMixing_UnknownStruct gUnknown_02038738;  //Don't know what type this points to
-extern struct RecordMixing_UnknownStruct *gUnknown_083D0280;
+extern void *const recordMixingSecretBases;
+extern void *const recordMixingTvShows;
+extern void *const gUnknown_083D0274;
+extern void *const gUnknown_083D0278;
+extern void *const recordMixingEasyChatPairs;
+extern struct RecordMixing_UnknownStruct *const gUnknown_083D0280;
+extern void *const gUnknown_083D0284;
+
 extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
 extern u8 gUnknown_0300071C[];
 extern bool8 gReceivedRemoteLinkPlayers;
+
+// I can't define these here or else RecordMixing_PrepareExchangePacket gets optimized.
+/*
+void *const recordMixingSecretBases = &gSaveBlock1.secretBases;
+void *const recordMixingTvShows = &gSaveBlock1.tvShows;
+void *const gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
+void *const gUnknown_083D0278 = &gSaveBlock1.oldMan;
+void *const recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
+struct RecordMixing_UnknownStruct *const gUnknown_083D0280 = &gUnknown_02038738;
+void *const gUnknown_083D0284 = &gSaveBlock2.filler_A8;
+*/
 
 #define BUFFER_CHUNK_SIZE 200
 
@@ -51,7 +63,8 @@ void sub_80B929C(void)
     sub_8083A84(Task_RecordMixing_Main);
 }
 
-struct PlayerRecords {
+struct PlayerRecords
+{
     struct SecretBaseRecord secretBases[20];
     TVShow tvShows[25];
     u8 filler1004[0x40];
@@ -62,9 +75,6 @@ struct PlayerRecords {
     u16 filler11C8[0x34];
 };
 
-extern struct PlayerRecords unk_2008000;
-extern struct PlayerRecords unk_2018000;
-
 void RecordMixing_PrepareExchangePacket(void)
 {
     sub_80BC300();
@@ -72,14 +82,14 @@ void RecordMixing_PrepareExchangePacket(void)
 
     memcpy(unk_2018000.secretBases, recordMixingSecretBases, sizeof(unk_2018000.secretBases));
     memcpy(unk_2018000.tvShows, recordMixingTvShows, sizeof(unk_2018000.tvShows));
-    memcpy(unk_2018000.filler1004, gUnknown_083D0274, 0x40);
-    memcpy(unk_2018000.filler1044, gUnknown_083D0278, 0x40);
-    memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, 0x28);
+    memcpy(unk_2018000.filler1004, gUnknown_083D0274, sizeof(unk_2008000.filler1004));
+    memcpy(unk_2018000.filler1044, gUnknown_083D0278, sizeof(unk_2008000.filler1044));
+    memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(unk_2018000.easyChatPairs));
     gUnknown_02038738.data[0] = gSaveBlock1.filler_303C.data[0];
     gUnknown_02038738.data[1] = gSaveBlock1.filler_303C.data[1];
     sub_8041324(gSaveBlock1.daycareData, &gUnknown_02038738);
     memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixing_UnknownStruct));
-    memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
+    memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
 
     if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = sub_8126338();
@@ -97,64 +107,71 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80B9F3C(unk_2008000.filler11C8, a);
 }
 
+#define tCounter data[0]
+
 void Task_RecordMixing_SoundEffect(u8 taskId)
 {
-    gTasks[taskId].data[0]++;
-    if (gTasks[taskId].data[0] == 50)
+    gTasks[taskId].tCounter++;
+    if (gTasks[taskId].tCounter == 50)
     {
         PlaySE(SE_W213);
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].tCounter = 0;
     }
 }
 
-#define TD_STATE 0
+#undef tCounter
+
+
+#define tState        data[0]
+#define tSndEffTaskId data[15]
+
 void Task_RecordMixing_Main(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
-    switch (taskData[TD_STATE])
+    switch (tState)
     {
     case 0:        // init
         sub_8007270(gSpecialVar_0x8005);
-        VarSet(0x4000, 1);
+        VarSet(VAR_0x4000, 1);
         gUnknown_03000718 = 0;
         RecordMixing_PrepareExchangePacket();
         CreateRecordMixingSprite();
-        taskData[TD_STATE] = 1;
-        taskData[10] = CreateTask(sub_80B95F0, 0x50);
-        taskData[15] = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
+        tState = 1;
+        data[10] = CreateTask(sub_80B95F0, 0x50);
+        tSndEffTaskId = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
         break;
     case 1:        // wait for sub_80B95F0
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
-            taskData[TD_STATE] = 2;
+            tState = 2;
             FlagSet(SYS_MIX_RECORD);
             DestroyRecordMixingSprite();
-            DestroyTask(taskData[15]);
+            DestroyTask(tSndEffTaskId);
         }
         break;
     case 2:
-        taskData[10] = CreateTask(sub_80BA00C, 10);
-        taskData[TD_STATE] = 3;
+        data[10] = CreateTask(sub_80BA00C, 10);
+        tState = 3;
         PlaySE(SE_W226);
         break;
     case 3:        // wait for sub_80BA00C
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
-            taskData[TD_STATE] = 4;
-            taskData[10] = sub_8083664();
+            tState = 4;
+            data[10] = sub_8083664();
             sub_80720B0();
             MenuPrint(gOtherText_MixingComplete, 2, 15);
-            taskData[8] = 0;
+            data[8] = 0;
         }
         break;
     case 4:        // wait 60 frames
-        taskData[8]++;
-        if (taskData[8] > 60)
-            taskData[TD_STATE] = 5;
+        data[8]++;
+        if (data[8] > 60)
+            tState = 5;
         break;
     case 5:
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
             sub_8055588();
             MenuZeroFillScreen();
@@ -169,14 +186,14 @@ void sub_80B95F0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[TD_STATE])
+    switch (task->tState)
     {
     case 0:
         sub_80B9A78();
         MenuDisplayMessageBox();
         MenuPrint(gOtherText_MixingRecordsWithFriend, 2, 15);
         task->data[8] = 0x708;
-        task->data[TD_STATE] = 400;
+        task->tState = 400;
         ClearLinkCallback_2();
         break;
     case 100:        // wait 20 frames
@@ -184,48 +201,48 @@ void sub_80B95F0(u8 taskId)
         if (task->data[12] > 20)
         {
             task->data[12] = 0;
-            task->data[TD_STATE] = 101;
+            task->tState = 101;
         }
         break;
     case 101:
-    {
-        u8 players = GetLinkPlayerCount_2();
-
-        if (IsLinkMaster() == 1)
         {
-            if (players == sub_800820C())
+            u8 players = GetLinkPlayerCount_2();
+
+            if (IsLinkMaster() == 1)
             {
-                PlaySE(0x15);
-                task->data[TD_STATE] = 201;
-                task->data[12] = 0;
+                if (players == sub_800820C())
+                {
+                    PlaySE(SE_PIN);
+                    task->tState = 201;
+                    task->data[12] = 0;
+                }
+            }
+            else
+            {
+                PlaySE(SE_BOO);
+                task->tState = 301;
             }
         }
-        else
-        {
-            PlaySE(0x16);
-            task->data[TD_STATE] = 301;
-        }
         break;
-    }
     case 201:
         if (sub_800820C() == GetLinkPlayerCount_2())
         {
             if (++task->data[12] > GetLinkPlayerCount_2() * 30)
             {
                 sub_8007F4C();
-                task->data[TD_STATE] = 1;
+                task->tState = 1;
             }
         }
         break;
     case 301:
         if (sub_800820C() == GetLinkPlayerCount_2())
-            task->data[TD_STATE] = 1;
+            task->tState = 1;
         break;
     case 400:        // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
-            task->data[TD_STATE] = 1;
+            task->tState = 1;
             task->data[12] = 0;
         }
         break;
@@ -233,31 +250,30 @@ void sub_80B95F0(u8 taskId)
         if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), 2, 2);
-            task->data[TD_STATE] = 5;
+            task->tState = 5;
         }
         break;
     case 2:
-    {
-        u8 subTaskId;
+        {
+            u8 subTaskId;
 
-        task->data[6] = GetLinkPlayerCount_2();
-        task->data[TD_STATE] = 0;
-        task->data[5] = GetMultiplayerId_();
-        task->func = Task_RecordMixing_SendPacket;
-        StorePtrInTaskData(&unk_2018000, &task->data[2]);
-        subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
-        task->data[10] = subTaskId;
-        gTasks[subTaskId].data[0] = taskId;
-        //StorePtrInTaskData((void*)0x2008000, &gTasks[subTaskId].data[5]);
-        StorePtrInTaskData((u8 *)&unk_2018000 - 0x10000, &gTasks[subTaskId].data[5]);
+            task->data[6] = GetLinkPlayerCount_2();
+            task->tState = 0;
+            task->data[5] = GetMultiplayerId_();
+            task->func = Task_RecordMixing_SendPacket;
+            StorePtrInTaskData(&unk_2018000, &task->data[2]);
+            subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
+            task->data[10] = subTaskId;
+            gTasks[subTaskId].data[0] = taskId;
+            StorePtrInTaskData((u8 *)&unk_2008000, &gTasks[subTaskId].data[5]);
+        }
         break;
-    }
     case 5:        // wait 60 frames
         task->data[10]++;
         if (task->data[10] > 60)
         {
             task->data[10] = 0;
-            task->data[TD_STATE] = 2;
+            task->tState = 2;
         }
         break;
     }
@@ -268,29 +284,29 @@ void Task_RecordMixing_SendPacket(u8 taskId)
     struct Task *task = &gTasks[taskId];
     // does this send the data 24 times?
 
-    switch (task->data[TD_STATE])
+    switch (task->tState)
     {
     case 0: //Copy record data to send buffer
-    {
-        void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
+        {
+            void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
 
-        memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
-        task->data[TD_STATE]++;
+            memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
+            task->tState++;
+        }
         break;
-    }
     case 1:
         if (GetMultiplayerId() == 0)
             sub_8007E9C(1);
-        task->data[TD_STATE]++;
+        task->tState++;
         break;
     case 2:
         break;
     case 3:
         task->data[4]++;
         if ((u16)task->data[4] == 24)
-            task->data[TD_STATE]++;
+            task->tState++;
         else
-            task->data[TD_STATE] = 0;
+            task->tState = 0;
         break;
     case 4:
         if (!gTasks[task->data[10]].isActive)
@@ -329,7 +345,6 @@ void Task_RecordMixing_CopyReceiveBuffer(u8 taskId)
         }
         gTasks[task->data[0]].data[0]++;
     }
-    //_080B998A
     if (handledPlayers == GetLinkPlayerCount())
         DestroyTask(taskId);
 }
@@ -357,15 +372,15 @@ void Task_RecordMixing_SendPacket_SwitchToReceive(u8 taskId)
     gUnknown_03000718 = 1;
 }
 
-void *LoadPtrFromTaskData(u16 *ptr)
+void *LoadPtrFromTaskData(u16 *taskData)
 {
-    return (void *)(*ptr | *(ptr + 1) << 16);
+    return (void *)(taskData[0] | (taskData[1] << 16));
 }
 
-void StorePtrInTaskData(void *ptr, u16 *data)
+void StorePtrInTaskData(void *ptr, u16 *taskData)
 {
-    *data = (u32)ptr;
-    *(data + 1) = (u32)ptr >> 16;
+    taskData[0] = (u32)ptr;
+    taskData[1] = (u32)ptr >> 16;
 }
 
 u8 GetMultiplayerId_(void)
@@ -382,6 +397,27 @@ void sub_80B9A78(void)
 {
     gUnknown_03005D2C = sizeof(struct PlayerRecords);
 }
+
+const u8 gUnknown_083D0288[2] = {1, 0};
+
+const u8 gUnknown_083D028A[2][3] =
+{
+    {1, 2, 0},
+    {2, 0, 1},
+};
+
+const u8 gUnknown_083D0290[9][4] =
+{
+    {1, 0, 3, 2},
+    {3, 0, 1, 2},
+    {2, 0, 3, 1},
+    {1, 3, 0, 2},
+    {2, 3, 0, 1},
+    {3, 2, 0, 1},
+    {1, 2, 3, 0},
+    {2, 3, 1, 0},
+    {3, 2, 1, 0},
+};
 
 void sub_80B9A88(u8 *a)
 {
@@ -434,25 +470,18 @@ u8 sub_80B9BBC(u16 *a)
     return a[16];
 }
 
-// TODO: clean this up
-void sub_80B9BC4(u8 *a, size_t b, u8 *c, u8 d, u8 e)
+void sub_80B9BC4(u8 *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
-    struct RecordMixing_UnknownStructSub sp0;
-    struct RecordMixing_UnknownStructSub *r8;
-    struct RecordMixing_UnknownStructSub *r6 = (struct RecordMixing_UnknownStructSub *)(a + b * c[d * 2]);
+    struct RecordMixing_UnknownStructSub *r6 = (struct RecordMixing_UnknownStructSub *)(a + b * c[d][0]);
+    struct RecordMixing_UnknownStructSub *src = r6 + c[d][1];
+    struct RecordMixing_UnknownStructSub sp0 = *src;
+    struct RecordMixing_UnknownStructSub *r8 = (struct RecordMixing_UnknownStructSub *)(a + b * c[e][0]);
 
-    {
-        struct RecordMixing_UnknownStructSub *src = r6 + c[2 * d + 1];
+    r6 += c[d][1];
+    *r6 = *(r8 + c[e][1]);
 
-        memcpy(&sp0, src, 0x38);
-    }
-
-    r8 = (struct RecordMixing_UnknownStructSub *)(a + c[e * 2] * b);
-    r6 += c[d * 2 + 1];
-    memcpy(r6, r8 + c[e * 2 + 1], 0x38);
-
-    r8 += c[e * 2 + 1];
-    memcpy(r8, &sp0, 0x38);
+    r8 += c[e][1];
+    *r8 = sp0;
 }
 
 u8 sub_80B9C4C(u8 *a)
@@ -465,7 +494,19 @@ u8 sub_80B9C4C(u8 *a)
     return r2;
 }
 
-extern const u8 gUnknown_083D02B4[][2];
+const u8 gUnknown_083D02B4[][2] =
+{
+    {0, 1},
+    {1, 2},
+    {2, 0},
+};
+
+const u8 gUnknown_083D02BA[3][4] =
+{
+    {0, 1, 2, 3},
+    {0, 2, 1, 3},
+    {0, 3, 2, 1},
+};
 
 #ifdef NONMATCHING
 void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
@@ -585,45 +626,18 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     case 4:
         {
             u8 *r6 = (u8 *)sp24;
-            u8 var1 = gUnknown_083D02B4[r1][0];
-            u8 var2 = gUnknown_083D02B4[r1][1];
+            u8 var1 = gUnknown_083D02BA[r1][0];
+            u8 var2 = gUnknown_083D02BA[r1][1];
             sub_80B9BC4(a, b, r6, var1, var2);
         }
         {
             u8 *r6 = (u8 *)sp24;
-            u8 var1 = gUnknown_083D02B4[r1][2];
-            u8 var2 = gUnknown_083D02B4[r1][3];
+            u8 var1 = gUnknown_083D02BA[r1][2];
+            u8 var2 = gUnknown_083D02BA[r1][3];
             sub_80B9BC4(a, b, r6, var1, var2);
         }
         break;
     }
-    /*
-    switch (sp3C)
-    {
-        u8 var1;
-        u8 var2;
-
-    case 2:
-        sub_80B9BC4(a, b, (u8 *)sp24, 0, 1);
-        break;
-    case 3:
-        var1 = gUnknown_083D02B4[r1 * 2 + 0];
-        var2 = gUnknown_083D02B4[r1 * 2 + 1];
-        sub_80B9BC4(a, b, (u8 *)sp24, var1, var2);
-        break;
-    case 4:
-        {
-            var1 = gUnknown_083D02B4[r1 * 2 + 0];
-            var2 = gUnknown_083D02B4[r1 * 2 + 1];
-            sub_80B9BC4(a, b, (u8 *)sp24, var1, var2);
-
-            var1 = gUnknown_083D02B4[r1 * 2 + 2 + 0];
-            var2 = gUnknown_083D02B4[r1 * 2 + 2 + 1];
-            sub_80B9BC4(a, b, (u8 *)sp24, var1, var2);
-        }
-        break;
-    }
-    */
     //_080B9EF0
     //memcpy(&gSaveBlock1.filler_303C.data[0], a + b * c, 0x38);
     //memcpy(&gSaveBlock1.filler_303C.data[1], a + b * c + 0x38, 0x38);
