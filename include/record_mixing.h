@@ -28,7 +28,7 @@ u8 sub_80B9C4C(u8 *a);
 
 // ASM
 void sub_80B9C6C(u8 *, u32, u8, void *);
-void sub_80B9F3C(void *, u8);
+void sub_80B9F3C(u16 *, u8);
 void sub_80BA00C(u8);
 
 #endif // GUARD_RECORD_MIXING_H

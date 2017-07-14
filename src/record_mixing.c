@@ -6,12 +6,16 @@
 #include "dewford_trend.h"
 #include "event_data.h"
 #include "fldeff_80C5CD4.h"
+#include "item.h"
+#include "items.h"
+#include "load_save.h"
 #include "link.h"
 #include "mauville_old_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
 #include "rng.h"
 #include "rom4.h"
+#include "save.h"
 #include "script.h"
 #include "secret_base.h"
 #include "songs.h"
@@ -461,7 +465,6 @@ u8 sub_80B9C4C(u8 *a)
     return r2;
 }
 
-//extern const u8 gUnknown_083D02B4[];
 extern const u8 gUnknown_083D02B4[][2];
 
 #ifdef NONMATCHING
@@ -1004,3 +1007,76 @@ _080B9F38: .4byte 0x00003074\n\
     .syntax divided\n");
 }
 #endif
+
+void sub_80B9F3C(u16 *a, u8 b)
+{
+    if (b != 0 && *a != 0)
+    {
+        if (GetPocketByItemId(*a) == 5)
+        {
+            if (!CheckBagHasItem(*a, 1) && !CheckPCHasItem(*a, 1) && AddBagItem(*a, 1))
+            {
+                VarSet(VAR_0x4001, *a);
+                StringCopy(gStringVar1, gLinkPlayers[0].name);
+                if (*a == ITEM_EON_TICKET)
+                    FlagSet(SYS_HAS_EON_TICKET);
+            }
+            else
+            {
+                VarSet(VAR_0x4001, ITEM_NONE);
+            }
+        }
+        else
+        {
+            if (AddBagItem(*a, 1) == TRUE)
+            {
+                VarSet(VAR_0x4001, *a);
+                StringCopy(gStringVar1, gLinkPlayers[0].name);
+            }
+            else
+            {
+                VarSet(VAR_0x4001, ITEM_NONE);
+            }
+        }
+    }
+}
+
+void sub_80BA00C(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->data[0])
+    {
+    case 0:
+        task->data[0]++;
+        break;
+    case 1:
+        task->data[0]++;
+        break;
+    case 2:
+        SetSecretBase2Field_9_AndHideBG();
+        sub_8125E2C();
+        task->data[0]++;
+        break;
+    case 3:
+        if (sub_8125E6C() != 0)
+        {
+            ClearSecretBase2Field_9_2();
+            task->data[0]++;
+            task->data[1] = 0;
+        }
+        break;
+    case 4:
+        task->data[1]++;
+        if (task->data[1] > 10)
+        {
+            sub_800832C();
+            task->data[0]++;
+        }
+        break;
+    case 5:
+        if (!gReceivedRemoteLinkPlayers)
+            DestroyTask(taskId);
+        break;
+    }
+}

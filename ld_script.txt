@@ -168,7 +168,6 @@ SECTIONS {
         src/money.o(.text);
         asm/contest_effect.o(.text);
         src/record_mixing.o(.text);
-        asm/record_mixing.o(.text);
         src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
