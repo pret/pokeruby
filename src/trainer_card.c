@@ -3,6 +3,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "field_effect.h"
+#include "graphics.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -54,22 +55,55 @@ extern struct TrainerCard gTrainerCards[4];
 
 struct UnknownStruct1
 {
-    u8 filler0[0x780];
+    u16 filler0[0x3C0];
     u16 unk780[160];
 };
 extern struct UnknownStruct1 gUnknown_03004DE0;
 
-extern u8 gUnknown_083B5EF4[];
-extern u16 *gUnknown_083B5EF8[5];
-extern u16 gUnknown_083B5F0C[];
-extern u16 gBadgesPalette[];
-extern u16 gUnknown_083B5F4C[];
+extern const u8 gBadgesTiles[];
+extern const u16 gUnknown_083B5F0C[];
+extern const u16 gBadgesPalette[];
+extern const u16 gUnknown_083B5F4C[];
+extern const u16 gUnknown_083B5F6C[];
+extern const u16 gUnknown_083B5F8C[][4];
 
-extern u16 gUnknown_08E8CFC0[];
-extern u16 gUnknown_08E8D9C0[];
+const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
+// XXX: what is this?
+u8 *const ewram_ = ewram;
 
-extern bool8 (*const gUnknown_083B5EBC[])(struct Task *);
-extern bool8 (*const gUnknown_083B5ED8[])(struct Task *);
+bool8 sub_8093864(struct Task *);
+bool8 sub_80938A8(struct Task *);
+bool8 sub_80938CC(struct Task *);
+bool8 sub_8093918(struct Task *);
+bool8 sub_8093938(struct Task *);
+bool8 sub_8093954(struct Task *);
+bool8 sub_8093980(struct Task *);
+
+bool8 (*const gUnknown_083B5EBC[])(struct Task *) =
+{
+    sub_8093864,
+    sub_80938A8,
+    sub_80938CC,
+    sub_8093918,
+    sub_8093938,
+    sub_8093954,
+    sub_8093980,
+};
+
+bool8 sub_8093AA0(struct Task *);
+bool8 sub_8093AF0(struct Task *);
+bool8 sub_8093C0C(struct Task *);
+bool8 sub_8093C38(struct Task *);
+bool8 sub_8093D50(struct Task *);
+
+bool8 (*const gUnknown_083B5ED8[])(struct Task *) =
+{
+    sub_8093AA0,
+    sub_8093AF0,
+    sub_8093C0C,
+    sub_8093C38,
+    sub_8093D50,
+};
 
 // FIXME: Other signature than on save_menu_util.h
 void FormatPlayTime(u8 *playtime, u16 hours, u16 minutes, s16 colon);
@@ -190,11 +224,8 @@ static void sub_8093174(void)
         sub_80937BC();
         gMain.state++;
     case 5:
-        if (MultistepInitMenuWindowContinue() == FALSE)
-        {
-            return;
-        }
-        gMain.state++;
+        if (MultistepInitMenuWindowContinue())
+            gMain.state++;
         break;
     case 6:
         sub_80937F0();
@@ -719,8 +750,56 @@ bool8 sub_8093AA0(struct Task *task)
     return FALSE;
 }
 
+/*
+bool8 sub_8093AF0(struct Task *task)
+{
+    u32 r7;
+    u16 r9;
+    u32 r6;
+    u32 r5;
+    u32 r4;
+    u32 r10;
+    u32 sp0;
+    s16 i;
+
+    ewram0.var_4 = 0;
+    task->data[1] += 3;
+    if (task->data[1] > 79)
+        task->data[1] = 79;
+
+    r7 = task->data[1];
+    r9 = 160 - r7;
+    r4 = r9 - r7;
+    r6 = -r7 << 16;
+    r5 = (160 << 16) / r4;
+    r5 -= 1 << 16;
+    r10 = r5 * r4 + r6;
+    sp0 = r5 / r4;
+    r5 *= 2;
+
+    for (i = 0; i < r7; i++)
+    {
+        gUnknown_03004DE0.filler0[i] = -4 - (u32)i;
+    }
+    //_08093B74
+    for (; i < r9; i++)
+    {
+        u16 var = r6 >> 16;
+        r6 += r5;
+        r5 -= sp0;
+        gUnknown_03004DE0.filler0[i] = -4 + var;
+    }
+    for (; i < 160; i++)
+        gUnknown_03004DE0.filler0[i] = -4 + (u16)(r10 >> 16);
+    ewram0.var_4 = 1;
+    if (task->data[1] > 0x4A)
+        task->data[0]++;
+    return FALSE;
+}
+*/
+
 __attribute__((naked))
-bool8 sub_8093AF0()
+bool8 sub_8093AF0(struct Task *task)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -871,18 +950,18 @@ _08093C08: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093C0C(struct TrainerCard *trainerCard)
+bool8 sub_8093C0C(struct Task *task)
 {
     sub_80939C0();
     sub_8093DAC();
     if (!ewram0.var_3)
         sub_80939A4();
-    trainerCard->firstHallOfFameB++;
+    task->data[0]++;
     return TRUE;
 }
 
 __attribute__((naked))
-bool8 sub_8093C38()
+bool8 sub_8093C38(struct Task *task)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1031,7 +1110,7 @@ _08093D4C: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
 
-bool8 sub_8093D50(void)
+bool8 sub_8093D50(struct Task *task)
 {
     u8 taskId;
 
@@ -1043,33 +1122,13 @@ bool8 sub_8093D50(void)
     return FALSE;
 }
 
-__attribute__((naked))
 void sub_8093D7C(void)
 {
-    asm(".syntax unified\n\
-    ldr r1, _08093DA0 @ =gUnknown_03004DE0\n\
-    ldr r0, _08093DA4 @ =REG_VCOUNT\n\
-    ldrh r2, [r0]\n\
-    movs r0, 0xFF\n\
-    ands r0, r2\n\
-    lsls r0, 1\n\
-    movs r2, 0xF0\n\
-    lsls r2, 3\n\
-    adds r1, r2\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    ldr r0, _08093DA8 @ =REG_BG0VOFS\n\
-    strh r1, [r0]\n\
-    adds r0, 0x4\n\
-    strh r1, [r0]\n\
-    adds r0, 0x4\n\
-    strh r1, [r0]\n\
-    bx lr\n\
-    .align 2, 0\n\
-_08093DA0: .4byte gUnknown_03004DE0\n\
-_08093DA4: .4byte 0x4000006 @ REG_VCOUNT\n\
-_08093DA8: .4byte 0x4000012 @ REG_BG0VOFS\n\
-    .syntax divided\n");
+    u16 bgVOffset = gUnknown_03004DE0.unk780[REG_VCOUNT & 0xFF];
+
+    REG_BG0VOFS = bgVOffset;
+    REG_BG1VOFS = bgVOffset;
+    REG_BG2VOFS = bgVOffset;
 }
 
 static void sub_8093DAC(void)
@@ -1099,88 +1158,47 @@ static void sub_8093DEC(void)
     sub_8094188();
 }
 
-__attribute__((naked))
-static void sub_8093E04()
+static void sub_8093E04(void)
 {
-    asm(".syntax unified\n\
-    ldr r0, _08093E20 @ =REG_BG0VOFS\n\
-    ldr r2, _08093E24 @ =0x0000fffc\n\
-    adds r1, r2, 0\n\
-    strh r1, [r0]\n\
-    adds r0, 0x2\n\
-    movs r2, 0\n\
-    strh r2, [r0]\n\
-    adds r0, 0x2\n\
-    strh r1, [r0]\n\
-    adds r0, 0x2\n\
-    strh r2, [r0]\n\
-    adds r0, 0x2\n\
-    strh r1, [r0]\n\
-    bx lr\n\
-    .align 2, 0\n\
-_08093E20: .4byte 0x4000012 @ REG_BG0VOFS\n\
-_08093E24: .4byte 0x0000fffc\n\
-    .syntax divided\n");
+    REG_BG0VOFS = -4;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = -4;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = -4;
 }
 
-__attribute__((naked))
 static void sub_8093E28(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    bl sub_8093EA0\n\
-    ldr r0, _08093E84 @ =gUnknown_083B5F6C\n\
-    movs r1, 0xE0\n\
-    movs r2, 0x20\n\
-    bl LoadPalette\n\
-    ldr r3, _08093E88 @ =gMenuTrainerCard_Gfx\n\
-    movs r4, 0xC0\n\
-    lsls r4, 19\n\
-    movs r5, 0xA4\n\
-    lsls r5, 5\n\
-    ldr r1, _08093E8C @ =0x040000d4\n\
-    ldr r6, _08093E90 @ =0x80000800\n\
-    movs r2, 0x80\n\
-    lsls r2, 5\n\
-    movs r7, 0x80\n\
-    lsls r7, 24\n\
-_08093E4E:\n\
-    str r3, [r1]\n\
-    str r4, [r1, 0x4]\n\
-    str r6, [r1, 0x8]\n\
-    ldr r0, [r1, 0x8]\n\
-    adds r3, r2\n\
-    adds r4, r2\n\
-    subs r5, r2\n\
-    cmp r5, r2\n\
-    bhi _08093E4E\n\
-    str r3, [r1]\n\
-    str r4, [r1, 0x4]\n\
-    lsrs r0, r5, 1\n\
-    orrs r0, r7\n\
-    str r0, [r1, 0x8]\n\
-    ldr r0, [r1, 0x8]\n\
-    ldr r1, _08093E94 @ =gBadgesTiles\n\
-    ldr r2, _08093E98 @ =0x06001480\n\
-    ldr r0, _08093E8C @ =0x040000d4\n\
-    str r1, [r0]\n\
-    str r2, [r0, 0x4]\n\
-    ldr r1, _08093E9C @ =0x80000200\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08093E84: .4byte gUnknown_083B5F6C\n\
-_08093E88: .4byte gMenuTrainerCard_Gfx\n\
-_08093E8C: .4byte 0x040000d4\n\
-_08093E90: .4byte 0x80000800\n\
-_08093E94: .4byte gBadgesTiles\n\
-_08093E98: .4byte 0x06001480\n\
-_08093E9C: .4byte 0x80000200\n\
-    .syntax divided\n");
+    const u8 *src;
+    u8 *dst;
+    u32 size;
+
+    sub_8093EA0();
+    LoadPalette(gUnknown_083B5F6C, 0xE0, 32);
+    src = gMenuTrainerCard_Gfx;
+    dst = (void *)VRAM;
+    size = 0x1480;
+    while (1)
+    {
+        DmaCopy16(3, src, dst, 0x1000);
+        src += 0x1000;
+        dst += 0x1000;
+        size -= 0x1000;
+        if (size <= 0x1000)
+        {
+            DmaCopy16(3, src, dst, size);
+            break;
+        }
+    }
+    {
+        const void *src = gBadgesTiles;
+        void *dst = (void *)(VRAM + 0x1480);
+
+        DmaCopy16(3, src, dst, 0x400);
+    }
 }
+
+extern const u16 *const gUnknown_083B5EF8[];
 
 void sub_8093EA0(void)
 {
@@ -1196,35 +1214,31 @@ static void sub_8093EF8(void)
     LoadTrainerGfx_TrainerCard(ewram0.var_64.gender, 80, (void *)(VRAM + 0x1880));
 }
 
-__attribute__((naked))
 static void sub_8093F14(void)
 {
-    asm(".syntax unified\n\
-    push {lr}\n\
-    sub sp, 0x8\n\
-    ldr r0, _08093F3C @ =gUnknown_083B5EEC\n\
-    ldr r1, [r0, 0x4]\n\
-    ldr r0, [r0]\n\
-    str r0, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    ldr r0, _08093F40 @ =0x02000000\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08093F44 @ =0x06004800\n\
-    movs r2, 0xA0\n\
-    lsls r2, 1\n\
-    bl CpuFastSet\n\
-    add sp, 0x8\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08093F3C: .4byte gUnknown_083B5EEC\n\
-_08093F40: .4byte 0x02000000\n\
-_08093F44: .4byte 0x06004800\n\
-    .syntax divided\n");
+    const void *arr[] = {gUnknown_08E8CAC0, gUnknown_08E8D4C0};
+
+    CpuFastSet(arr[ewram0.var_1], (void *)(VRAM + 0x4800), 0x140);
 }
+
+// I don't really know where to put the data. It's in such a weird order.
+
+const u8 gUnknown_083B5EF4[] = _(" : ");
+
+const u16 *const gUnknown_083B5EF8[] =
+{
+    gMenuTrainerCard0Star_Pal,
+    gMenuTrainerCard1Star_Pal,
+    gMenuTrainerCard2Star_Pal,
+    gMenuTrainerCard3Star_Pal,
+    gMenuTrainerCard4Star_Pal,
+};
+
+const u16 gUnknown_083B5F0C[] = INCBIN_U16("graphics/trainer_card/83B5F0C.gbapal");
+const u16 gBadgesPalette[] = INCBIN_U16("graphics/trainer_card/badges.gbapal");
+const u16 gUnknown_083B5F4C[] = INCBIN_U16("graphics/trainer_card/83B5F4C.gbapal");
+const u16 gUnknown_083B5F6C[] = INCBIN_U16("graphics/trainer_card/83B5F6C.gbapal");
+const u16 gUnknown_083B5F8C[][4] = INCBIN_U16("graphics/trainer_card/83B5F8C_map.bin");
 
 static void sub_8093F48(void)
 {
@@ -1236,266 +1250,79 @@ static void sub_8093F64(void)
     CpuFastSet(gUnknown_08E8D9C0, (void *)(VRAM + 0x5000), 320);
 }
 
-__attribute__((naked))
 static void sub_8093F80(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    movs r5, 0xC4\n\
-    ldr r7, _08093FCC @ =0x06004000\n\
-    movs r1, 0x5\n\
-    movs r0, 0xA0\n\
-    lsls r0, 7\n\
-    adds r6, r0, 0\n\
-_08093F8E:\n\
-    movs r0, 0x13\n\
-    lsls r3, r1, 16\n\
-    asrs r4, r3, 11\n\
-_08093F94:\n\
-    lsls r2, r0, 16\n\
-    asrs r2, 16\n\
-    adds r1, r4, r2\n\
-    lsls r1, 1\n\
-    adds r1, r7\n\
-    adds r0, r5, 0\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    adds r2, 0x1\n\
-    lsls r2, 16\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsrs r0, r2, 16\n\
-    asrs r2, 16\n\
-    cmp r2, 0x1A\n\
-    ble _08093F94\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    adds r0, r3, r1\n\
-    lsrs r1, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0xC\n\
-    ble _08093F8E\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08093FCC: .4byte 0x06004000\n\
-    .syntax divided\n");
+    u16 r5 = 0xC4;
+    u16 *ptr = (u16 *)(VRAM + 0x4000);
+    s16 i;
+    s16 j;
+
+    for (i = 5; i < 13; i++)
+    {
+        for (j = 19; j < 27; j++, r5++)
+            ptr[i * 32 + j] = r5 | 0x5000;
+    }
 }
 
-__attribute__((naked))
 static void sub_8093FD0(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r4, _0809402C @ =0x06004000\n\
-    movs r2, 0xF\n\
-    ldr r0, _08094030 @ =0x02000000\n\
-    ldrb r0, [r0, 0x2]\n\
-    adds r0, 0xF\n\
-    cmp r2, r0\n\
-    bge _08094002\n\
-    movs r6, 0xC0\n\
-    lsls r6, 1\n\
-    ldr r1, _08094034 @ =0x0000408f\n\
-    adds r5, r1, 0\n\
-    adds r3, r0, 0\n\
-_08093FEA:\n\
-    lsls r1, r2, 16\n\
-    asrs r1, 16\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    adds r0, r6\n\
-    strh r5, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 16\n\
-    lsrs r2, r1, 16\n\
-    asrs r1, 16\n\
-    cmp r1, r3\n\
-    blt _08093FEA\n\
-_08094002:\n\
-    lsls r1, r2, 16\n\
-    asrs r0, r1, 16\n\
-    cmp r0, 0x12\n\
-    bgt _08094024\n\
-    movs r3, 0xC0\n\
-    lsls r3, 1\n\
-    movs r2, 0\n\
-_08094010:\n\
-    asrs r0, r1, 16\n\
-    lsls r1, r0, 1\n\
-    adds r1, r4\n\
-    adds r1, r3\n\
-    strh r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r1, r0, 16\n\
-    asrs r0, r1, 16\n\
-    cmp r0, 0x12\n\
-    ble _08094010\n\
-_08094024:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809402C: .4byte 0x06004000\n\
-_08094030: .4byte 0x02000000\n\
-_08094034: .4byte 0x0000408f\n\
-    .syntax divided\n");
+    u16 *ptr = (u16 *)(VRAM + 0x4000);
+    s16 i = 15;
+    s16 var = 15 + ewram0.var_2;
+
+    while (i < var)
+    {
+        ptr[6 * 32 + i] = 0x408F;
+        i++;
+    }
+    while (i < 0x13)
+    {
+        ptr[6 * 32 + i] = 0;
+        i++;
+    }
 }
 
-__attribute__((naked))
 static void sub_8094038(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r1, _080940D0 @ =0x02000000\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0\n\
-    bne _080940C2\n\
-    ldr r0, _080940D4 @ =0x06004000\n\
-    mov r9, r0\n\
-    movs r0, 0\n\
-    movs r2, 0x4\n\
-    adds r1, 0xE\n\
-    mov r8, r1\n\
-    ldr r7, _080940D8 @ =gUnknown_083B5F8C\n\
-    movs r1, 0xC0\n\
-    lsls r1, 6\n\
-    adds r6, r1, 0\n\
-    adds r1, r7, 0x6\n\
-    mov r12, r1\n\
-_08094060:\n\
-    lsls r0, 16\n\
-    asrs r4, r0, 16\n\
-    mov r1, r8\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r5, r2, 16\n\
-    cmp r0, 0\n\
-    beq _080940AE\n\
-    asrs r1, r5, 15\n\
-    add r1, r9\n\
-    movs r2, 0xF0\n\
-    lsls r2, 2\n\
-    adds r3, r1, r2\n\
-    lsls r2, r4, 3\n\
-    adds r0, r2, r7\n\
-    ldrh r0, [r0]\n\
-    orrs r0, r6\n\
-    strh r0, [r3]\n\
-    ldr r0, _080940DC @ =0x000003c2\n\
-    adds r3, r1, r0\n\
-    adds r0, r7, 0x2\n\
-    adds r0, r2, r0\n\
-    ldrh r0, [r0]\n\
-    orrs r0, r6\n\
-    strh r0, [r3]\n\
-    movs r0, 0x80\n\
-    lsls r0, 3\n\
-    adds r3, r1, r0\n\
-    adds r0, r7, 0x4\n\
-    adds r0, r2, r0\n\
-    ldrh r0, [r0]\n\
-    orrs r0, r6\n\
-    strh r0, [r3]\n\
-    ldr r0, _080940E0 @ =0x00000402\n\
-    adds r1, r0\n\
-    add r2, r12\n\
-    ldrh r0, [r2]\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-_080940AE:\n\
-    adds r1, r4, 0x1\n\
-    lsls r1, 16\n\
-    movs r2, 0xC0\n\
-    lsls r2, 10\n\
-    adds r0, r5, r2\n\
-    lsrs r2, r0, 16\n\
-    lsrs r0, r1, 16\n\
-    asrs r1, 16\n\
-    cmp r1, 0x7\n\
-    ble _08094060\n\
-_080940C2:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080940D0: .4byte 0x02000000\n\
-_080940D4: .4byte 0x06004000\n\
-_080940D8: .4byte gUnknown_083B5F8C\n\
-_080940DC: .4byte 0x000003c2\n\
-_080940E0: .4byte 0x00000402\n\
-    .syntax divided\n");
+    if (ewram0.var_1 == 0)
+    {
+        u16 *ptr = (u16 *)(VRAM + 0x4000);
+        s16 i;
+        s16 r2;
+
+        for (i = 0, r2 = 4; i < 8; i++, r2 += 3)
+        {
+            if (ewram0.var_e[i] != 0)
+            {
+                ptr[15 * 32 + r2 + 0] = gUnknown_083B5F8C[i][0] | 0x3000;
+                ptr[15 * 32 + r2 + 1] = gUnknown_083B5F8C[i][1] | 0x3000;
+                ptr[16 * 32 + r2 + 0] = gUnknown_083B5F8C[i][2] | 0x3000;
+                ptr[16 * 32 + r2 + 1] = gUnknown_083B5F8C[i][3] | 0x3000;
+            }
+        }
+    }
 }
 
-__attribute__((naked))
-static void sub_80940E4()
+static void sub_80940E4(void)
 {
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    movs r2, 0\n\
-    ldr r1, _08094108 @ =0x06004000\n\
-    movs r4, 0\n\
-    ldr r3, _0809410C @ =0x000003ff\n\
-_080940EE:\n\
-    strh r4, [r1]\n\
-    lsls r0, r2, 16\n\
-    movs r2, 0x80\n\
-    lsls r2, 9\n\
-    adds r0, r2\n\
-    adds r1, 0x2\n\
-    lsrs r2, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, r3\n\
-    ble _080940EE\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08094108: .4byte 0x06004000\n\
-_0809410C: .4byte 0x000003ff\n\
-    .syntax divided\n");
+    s16 i;
+    u16 *ptr;
+
+    for (i = 0, ptr = (u16 *)(VRAM + 0x4000); i < 0x400; i++, ptr++)
+        *ptr = 0;
 }
 
-__attribute__((naked))
-static void sub_8094110()
+static void sub_8094110(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r6, _0809413C @ =0x06004800\n\
-    movs r2, 0x3\n\
-    movs r5, 0xA0\n\
-    lsls r5, 2\n\
-    movs r3, 0x1\n\
-    movs r4, 0xB0\n\
-    lsls r4, 2\n\
-_08094120:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r6\n\
-    adds r1, r0, r5\n\
-    strh r3, [r1]\n\
-    adds r0, r4\n\
-    strh r3, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x10\n\
-    bls _08094120\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809413C: .4byte 0x06004800\n\
-    .syntax divided\n");
-}
+    u16 *ptr = (u16 *)(VRAM + 0x4800);
+    u16 i;
 
+    for (i = 3; i < 17; i++)
+    {
+        ptr[10 * 32 + i] = 1;
+        ptr[11 * 32 + i] = 1;
+    }
+}
 
 static void sub_8094140(void)
 {

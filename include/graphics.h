@@ -2443,4 +2443,15 @@ extern const u8 gMenuPokeblock_Pal[];
 extern const u8 gMenuPokeblockDevice_Gfx[];
 extern const u8 gMenuPokeblockDevice_Pal[];
 
+extern const u8 gMenuTrainerCard_Gfx[];
+extern const u16 gMenuTrainerCard0Star_Pal[];
+extern const u16 gMenuTrainerCard1Star_Pal[];
+extern const u16 gMenuTrainerCard2Star_Pal[];
+extern const u16 gMenuTrainerCard3Star_Pal[];
+extern const u16 gMenuTrainerCard4Star_Pal[];
+extern const u8 gUnknown_08E8CAC0[];
+extern const u8 gUnknown_08E8CFC0[];
+extern const u8 gUnknown_08E8D4C0[];
+extern const u8 gUnknown_08E8D9C0[];
+
 #endif  // GUARD_GRAPHICS_H
