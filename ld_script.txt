@@ -426,7 +426,7 @@ SECTIONS {
         data/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
         data/mail.o(.rodata);
-        data/menu_helpers.o(.rodata);
+        src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);

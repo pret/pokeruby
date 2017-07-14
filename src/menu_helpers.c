@@ -14,19 +14,116 @@
 #include "task.h"
 #include "text.h"
 
+#define SCROLL_INDICATOR_PAL_TAG 6
+
+static void sub_80F9834(struct Sprite *sprite);
+
 static EWRAM_DATA u8 gUnknown_020388C0[4] = {0};
 static EWRAM_DATA struct YesNoFuncTable gUnknown_020388C4 = {0};
 
 static TaskFunc gUnknown_0300074C;
 
-extern struct SpritePalette gUnknown_083E5968;
+static const u8 gSpriteImage_83E5808[] = INCBIN_U8("graphics/unknown_sprites/83E59A0/0.4bpp");
 
-extern struct SpriteTemplate gSpriteTemplate_83E59D0;
-extern struct SpriteTemplate gSpriteTemplate_83E59E8;
-extern struct SpriteTemplate gSpriteTemplate_83E5A00;
+static const u8 gSpriteImage_83E5848[] = INCBIN_U8("graphics/unknown_sprites/83E59A0/1.4bpp");
 
-extern const u8 gUnknown_083E5A18[];
-extern const u8 gUnknown_083E5A1C[];
+static const u8 gSpriteImage_83E5888[] = INCBIN_U8("graphics/unknown_sprites/83E59B0/0.4bpp");
+
+static const u8 gSpriteImage_83E58C8[] = INCBIN_U8("graphics/unknown_sprites/83E59B0/1.4bpp");
+
+static const u8 gSpriteImage_83E5908[] = INCBIN_U8("graphics/unknown_sprites/83E59C0/0.4bpp");
+
+static const u8 gSpriteImage_83E5928[] = INCBIN_U8("graphics/unknown_sprites/83E59C0/1.4bpp");
+
+static const u16 Palette_3E5948[] = INCBIN_U16("graphics/interface/83E5948.gbapal");
+
+static const struct SpritePalette gUnknown_083E5968 = { Palette_3E5948, SCROLL_INDICATOR_PAL_TAG };
+
+static const struct OamData gOamData_83E5970 =
+{
+    .tileNum = 1
+};
+
+static const struct OamData gOamData_83E5978 =
+{
+    .shape = ST_OAM_H_RECTANGLE,
+    .tileNum = 1
+};
+
+static const struct OamData gOamData_83E5980 =
+{
+    .shape = ST_OAM_V_RECTANGLE,
+    .tileNum = 1
+};
+
+static const union AnimCmd gSpriteAnim_83E5988[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_83E5990[] =
+{
+    ANIMCMD_FRAME(1, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_83E5998[] =
+{
+    gSpriteAnim_83E5988,
+    gSpriteAnim_83E5990,
+};
+
+static const struct SpriteFrameImage gSpriteImageTable_83E59A0[] =
+{
+    { gSpriteImage_83E5808, 0x40 },
+    { gSpriteImage_83E5848, 0x40 },
+};
+
+static const struct SpriteFrameImage gSpriteImageTable_83E59B0[] =
+{
+    { gSpriteImage_83E5888, 0x40 },
+    { gSpriteImage_83E58C8, 0x40 },
+};
+
+static const struct SpriteFrameImage gSpriteImageTable_83E59C0[] =
+{
+    { gSpriteImage_83E5908, 0x20 },
+    { gSpriteImage_83E5928, 0x20 },
+};
+
+static const struct SpriteTemplate gSpriteTemplate_83E59D0 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = SCROLL_INDICATOR_PAL_TAG,
+    .oam = &gOamData_83E5978,
+    .anims = gSpriteAnimTable_83E5998,
+    .images = gSpriteImageTable_83E59A0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F9834,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_83E59E8 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = SCROLL_INDICATOR_PAL_TAG,
+    .oam = &gOamData_83E5980,
+    .anims = gSpriteAnimTable_83E5998,
+    .images = gSpriteImageTable_83E59B0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F9834,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_83E5A00 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = SCROLL_INDICATOR_PAL_TAG,
+    .oam = &gOamData_83E5970,
+    .anims = gSpriteAnimTable_83E5998,
+    .images = gSpriteImageTable_83E59C0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 void sub_80F9020(void)
 {
@@ -84,9 +181,7 @@ void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *funcTable)
 
 static void PrintStringWithPalette(const u8 *str, u8 paletteNum, u8 left, u8 top)
 {
-    u8 paletteStr[4];
-
-    memcpy(paletteStr, gUnknown_083E5A18, 4);
+    u8 paletteStr[] = _("{PALETTE 0}");
 
     if (paletteNum != 0xFF)
     {
@@ -121,9 +216,8 @@ void PrintNumberWithPalette(s32 value, u8 paletteNum, u8 n, u8 mode, u8 left, u8
 // unused
 void PrintTriangleCursorWithPalette(u8 left, u8 top, u8 paletteNum)
 {
-    u8 buffer[2];
-    memcpy(buffer, gUnknown_083E5A1C, 2);
-    PrintStringWithPalette(buffer, paletteNum, left, top);
+    u8 cursorStr[] = _("▶");
+    PrintStringWithPalette(cursorStr, paletteNum, left, top);
 }
 
 u8 sub_80F9284(void)
@@ -252,7 +346,7 @@ void sub_80F944C(void)
         gUnknown_020388C0[i] = 0xFF;
     }
 
-    FreeSpritePaletteByTag(6);
+    FreeSpritePaletteByTag(SCROLL_INDICATOR_PAL_TAG);
     LoadSpritePalette(&gUnknown_083E5968);
 }
 
@@ -403,10 +497,10 @@ void LoadScrollIndicatorPalette(void)
 
 void BuyMenuFreeMemory(void)
 {
-    FreeSpritePaletteByTag(6);
+    FreeSpritePaletteByTag(SCROLL_INDICATOR_PAL_TAG);
 }
 
-void sub_80F9834(struct Sprite *sprite)
+static void sub_80F9834(struct Sprite *sprite)
 {
     if (sprite->data1 == 0)
     {
