@@ -3,57 +3,6 @@
 
 	.section .rodata
 
-@ 83E6FF4
-@	.include "data/region_map_locations.inc"
-
-gUnknown_083E7684:: @ 83E7684
-	.2byte 50, 39
-	.2byte 51, 41
-	.2byte 52, 42
-	.2byte 53, 43
-	.2byte 54, 14
-	.2byte 69, 43
-	.2byte 66, 12
-	.2byte 79, 49
-	.2byte 59, 19
-	.2byte 76, 27
-	.2byte 65, 37
-	.2byte 85, 46
-	.2byte 88, 88
-
-	.align 2
-gOamData_83E76B8:: @ 83E76B8
-	.2byte 0x0000
-	.2byte 0x4000
-	.2byte 0x0400
-
-	.align 2
-gSpriteAnim_83E76C0:: @ 83E76C0
-	obj_image_anim_frame 0, 20
-	obj_image_anim_frame 4, 20
-	obj_image_anim_jump 0
-
-	.align 2
-gSpriteAnim_83E76CC:: @ 83E76CC
-	obj_image_anim_frame 0, 10
-	obj_image_anim_frame 16, 10
-	obj_image_anim_frame 32, 10
-	obj_image_anim_frame 16, 10
-	obj_image_anim_jump 0
-
-	.align 2
-gSpriteAnimTable_83E76E0:: @ 83E76E0
-	.4byte gSpriteAnim_83E76C0
-	.4byte gSpriteAnim_83E76CC
-
-	.align 2
-gUnknown_083E76E8:: @ 83E76E8
-	obj_pal gPokenavCursor_Pal, 0x0000
-
-	.align 2
-gSpriteTemplate_83E76F0:: @ 83E76F0
-	spr_template 0, 0, gOamData_83E76B8, gSpriteAnimTable_83E76E0, NULL, gDummySpriteAffineAnimTable, sub_80FBAF0
-
 	.align 2
 gOamData_083E7708:: @ 83E7708
 	.2byte 0x0000

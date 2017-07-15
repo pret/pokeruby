@@ -1,4 +1,6 @@
 #include "global.h"
+#include "event_data.h"
+#include "field_specials.h"
 #include "main.h"
 #include "palette.h"
 #include "rom4.h"
@@ -10,7 +12,7 @@ struct UnknownStruct1
     u8 filler0[0x14];
     u16 unk14;
     u8 unk16;
-    u8 filler17[1];
+    u8 unk17;
     u8 (*unk18)(void);
     struct Sprite *unk1C;
     struct Sprite *unk20;
@@ -54,7 +56,7 @@ struct UnknownStruct1
     u8 unk7F;
     u8 filler80[0x100];
     u8 unk180[0x100];
-    u8 unk280[0x100];
+    u8 unk280[0x100];  // possibly 0x600
 };
 
 extern struct UnknownStruct1 *gUnknown_020388CC;
@@ -194,6 +196,23 @@ const struct RegionMapLocation gRegionMapLocations[] =
     { 0,  0, 1, 1, gMapName_None},
 };
 
+const u16 gUnknown_083E7684[][2] =
+{
+    {50, 39},
+    {51, 41},
+    {52, 42},
+    {53, 43},
+    {54, 14},
+    {69, 43},
+    {66, 12},
+    {79, 49},
+    {59, 19},
+    {76, 27},
+    {65, 37},
+    {85, 46},
+    {88, 88},
+};
+
 void sub_80FA904(struct UnknownStruct1 *, u8);
 bool8 sub_80FA940(void);
 u8 sub_80FAB78(void);
@@ -206,10 +225,11 @@ void sub_80FB260(void);
 u16 GetRegionMapSectionAt(u16, u16);
 void sub_80FB32C(void);
 void sub_80FB600(void);
-u16 sub_80FB758();
+u16 sub_80FB758(u16);
 u16 sub_80FB9C0(u16);
-void sub_80FBA18();
-void sub_80FBB3C();
+void sub_80FBA18(void);
+u8 sub_80FBAA0(u16);
+void sub_80FBB3C(u16, u16);
 void sub_80FBCA0(void);
 void sub_80FBDF8(void);
 void sub_80FBE24(void);
@@ -549,20 +569,20 @@ void sub_80FB170(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 g)
     s32 var2;
     s32 var3;
     s32 var4;
-    
+
     gUnknown_020388CC->unk2C = e * gSineTable[g + 64] >> 8;
     gUnknown_020388CC->unk30 = e * -gSineTable[g] >> 8;
     gUnknown_020388CC->unk34 = f * gSineTable[g] >> 8;
     gUnknown_020388CC->unk38 = f * gSineTable[g + 64] >> 8;
-    
+
     var1 = (a << 8) + (c << 8);
     var2 = d * gUnknown_020388CC->unk34 + gUnknown_020388CC->unk2C * c;
     gUnknown_020388CC->unk24 = var1 - var2;
-    
+
     var3 = (b << 8) + (d << 8);
     var4 = gUnknown_020388CC->unk38 * d + gUnknown_020388CC->unk30 * c;
     gUnknown_020388CC->unk28 = var3 - var4;
-    
+
     gUnknown_020388CC->unk7D = 1;
 }
 
@@ -600,7 +620,7 @@ void sub_80FB2A4(s16 a, s16 b)
 
 u16 GetRegionMapSectionAt(u16 x, u16 y)
 {
-    
+
     if (y < 2 || y > 16 || x < 1 || x > 0x1C)
         return 0x58;
     y -= 2;
@@ -617,13 +637,13 @@ void sub_80FB32C(void)
     u16 y;
     u16 r1;
     u16 r9;
-    
+
     if (gSaveBlock1.location.mapGroup == 0x19 && (gSaveBlock1.location.mapNum == 0x29 || gSaveBlock1.location.mapNum == 0x2A || gSaveBlock1.location.mapNum == 0x2B))
     {
         sub_80FB600();
         return;
     }
-    
+
     switch (get_map_light_level_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum) - 1)
     {
     default:
@@ -663,7 +683,7 @@ void sub_80FB32C(void)
     case 7:
         {
             struct WarpData *r4;
-            
+
             gUnknown_020388CC->unk14 = gMapHeader.name;
             if (gUnknown_020388CC->unk14 != 0x57)
             {
@@ -684,19 +704,23 @@ void sub_80FB32C(void)
         }
         break;
     }
+
     r9 = x;
+
     r1 = mapWidth / gRegionMapLocations[gUnknown_020388CC->unk14].width;
     if (r1 == 0)
         r1 = 1;
     x /= r1;
     if (x >= gRegionMapLocations[gUnknown_020388CC->unk14].width)
         x = gRegionMapLocations[gUnknown_020388CC->unk14].width - 1;
+
     r1 = mapHeight / gRegionMapLocations[gUnknown_020388CC->unk14].height;
     if (r1 == 0)
         r1 = 1;
     y /= r1;
     if (y >= gRegionMapLocations[gUnknown_020388CC->unk14].height)
         y = gRegionMapLocations[gUnknown_020388CC->unk14].height - 1;
+
     switch (gUnknown_020388CC->unk14)
     {
     case 0x1D:
@@ -728,4 +752,310 @@ void sub_80FB32C(void)
     }
     gUnknown_020388CC->unk54 = gRegionMapLocations[gUnknown_020388CC->unk14].x + x + 1;
     gUnknown_020388CC->unk56 = gRegionMapLocations[gUnknown_020388CC->unk14].y + y + 2;
+}
+
+void sub_80FB600(void)
+{
+    u16 y = 0;
+    u16 x = 0;
+    u8 mapGroup;
+    u8 mapNum;
+    s16 sp2;
+    s16 sp4;
+
+    switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
+    {
+    case 1:
+        gUnknown_020388CC->unk14 = 8;
+        break;
+    case 2:
+        gUnknown_020388CC->unk14 = 12;
+        break;
+    case 3:
+        gUnknown_020388CC->unk14 = 0x27;
+        break;
+    case 4:
+        gUnknown_020388CC->unk14 = 0x2E;
+        break;
+    default:
+    case 0:
+        {
+            struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+            u16 r1;
+
+            gUnknown_020388CC->unk14 = mapHeader->name;
+            r1 = mapHeader->mapData->width / gRegionMapLocations[gUnknown_020388CC->unk14].width;
+            if (r1 == 0)
+                r1 = 1;
+            x = sp2 / r1;
+            if (x >= gRegionMapLocations[gUnknown_020388CC->unk14].width)
+                x = gRegionMapLocations[gUnknown_020388CC->unk14].width - 1;
+
+            r1 = mapHeader->mapData->height / gRegionMapLocations[gUnknown_020388CC->unk14].height;
+            if (r1 == 0)
+                r1 = 1;
+            y = sp4 / r1;
+            if (y >= gRegionMapLocations[gUnknown_020388CC->unk14].height)
+                y = gRegionMapLocations[gUnknown_020388CC->unk14].height - 1;
+        }
+        break;
+    }
+    gUnknown_020388CC->unk7F = 0;
+    gUnknown_020388CC->unk54 = gRegionMapLocations[gUnknown_020388CC->unk14].x + x + 1;
+    gUnknown_020388CC->unk56 = gRegionMapLocations[gUnknown_020388CC->unk14].y + y + 2;
+}
+
+u16 sub_80FB758(u16 a)
+{
+    switch (a)
+    {
+    case 88:
+        return 0;
+    case 0:
+        return FlagGet(0x80F) ? 2 : 3;
+    case 1:
+        return FlagGet(0x810) ? 2 : 3;
+    case 2:
+        return FlagGet(0x811) ? 2 : 3;
+    case 3:
+        return FlagGet(0x812) ? 2 : 3;
+    case 4:
+        return FlagGet(0x813) ? 2 : 3;
+    case 5:
+        return FlagGet(0x814) ? 2 : 3;
+    case 6:
+        return FlagGet(0x815) ? 2 : 3;
+    case 7:
+        return FlagGet(0x816) ? 2 : 3;
+    case 8:
+        return FlagGet(0x817) ? 2 : 3;
+    case 9:
+        return FlagGet(0x818) ? 2 : 3;
+    case 10:
+        return FlagGet(0x819) ? 2 : 3;
+    case 11:
+        return FlagGet(0x81A) ? 2 : 3;
+    case 12:
+        return FlagGet(0x81B) ? 2 : 3;
+    case 13:
+        return FlagGet(0x81C) ? 2 : 3;
+    case 14:
+        return FlagGet(0x81D) ? 2 : 3;
+    case 15:
+        return FlagGet(0x81E) ? 2 : 3;
+    case 58:
+        return FlagGet(0x848) ? 4 : 0;
+    case 73:
+        return FlagGet(0x849) ? 1 : 0;
+    default:
+        return 1;
+    }
+}
+
+u16 GetRegionMapSectionAt_(u16 x, u16 y)
+{
+    return GetRegionMapSectionAt(x, y);
+}
+
+u16 sub_80FB9C0(u16 a)
+{
+    u16 i = 0;
+
+    while (gUnknown_083E7684[i][0] != 88)
+    {
+        if (gUnknown_083E7684[i][0] == a)
+            return gUnknown_083E7684[i][1];
+        i++;
+    }
+    return a;
+}
+
+u16 sub_80FBA04(u16 a)
+{
+    return sub_80FB9C0(a);
+}
+
+void sub_80FBA18(void)
+{
+    u16 x;
+    u16 y;
+    u16 i;
+
+    if (gUnknown_020388CC->unk14 == 88)
+    {
+        gUnknown_020388CC->unk17 = 0;
+        return;
+    }
+
+    if (gUnknown_020388CC->unk78 == 0)
+    {
+        x = gUnknown_020388CC->unk54;
+        y = gUnknown_020388CC->unk56;
+    }
+    else
+    {
+        x = gUnknown_020388CC->unk64;
+        y = gUnknown_020388CC->unk66;
+    }
+
+    i = 0;
+    while (1)
+    {
+        if (x <= 1)
+        {
+            if (sub_80FBAA0(y) != 0)
+            {
+                y--;
+                x = 0x1D;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            x--;
+            if (GetRegionMapSectionAt(x, y) == gUnknown_020388CC->unk14)
+                i++;
+        }
+    }
+
+    gUnknown_020388CC->unk17 = i;
+}
+
+u8 sub_80FBAA0(u16 a)
+{
+    u16 x;
+    u16 y;
+
+    y = a - 1;
+    if (y == 0xFFFF)
+        return 0;
+
+    x = 1;
+    while (x < 0x1D)
+    {
+        if (GetRegionMapSectionAt(x, y) == gUnknown_020388CC->unk14)
+            return 1;
+        x++;
+    }
+    return 0;
+}
+
+
+
+const struct OamData gOamData_83E76B8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83E76C0[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(4, 20),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gSpriteAnim_83E76CC[] =
+{
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(16, 10),
+    ANIMCMD_FRAME(32, 10),
+    ANIMCMD_FRAME(16, 10),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E76E0[] =
+{
+    gSpriteAnim_83E76C0,
+    gSpriteAnim_83E76CC,
+};
+
+void sub_80FBAF0(struct Sprite *sprite)
+{
+    if (gUnknown_020388CC->unk7A != 0)
+    {
+        sprite->pos1.x += gUnknown_020388CC->unk7B * 2;
+        sprite->pos1.y += gUnknown_020388CC->unk7C * 2;
+        gUnknown_020388CC->unk7A--;
+    }
+}
+
+void nullsub_66(struct Sprite *sprite)
+{
+}
+
+void sub_80FBB3C(u16 tileTag, u16 paletteTag)
+{
+    u8 spriteId;
+    struct SpriteSheet spriteSheet;
+    struct SpritePalette spritePalette =
+    {
+        .data = gPokenavCursor_Pal,
+    };
+    struct SpriteTemplate spriteTemplate =
+    {
+        .oam = &gOamData_83E76B8,
+        .anims = gSpriteAnimTable_83E76E0,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_80FBAF0,
+    };
+
+    spriteSheet.tag = tileTag;
+    spriteTemplate.tileTag = tileTag;
+    gUnknown_020388CC->unk58 = tileTag;
+    
+    spritePalette.tag = paletteTag;
+    spriteTemplate.paletteTag = paletteTag;
+    gUnknown_020388CC->unk5A = paletteTag;
+    
+    if (gUnknown_020388CC->unk78 == 0)
+    {
+        spriteSheet.data = gUnknown_020388CC->unk180;
+        spriteSheet.size = 0x100;
+        spriteTemplate.callback = sub_80FBAF0;
+    }
+    else
+    {
+        spriteSheet.data = gUnknown_020388CC->unk280;
+        spriteSheet.size = 0x600;
+        spriteTemplate.callback = nullsub_66;
+    }
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&spriteTemplate, 0x38, 0x48, 0);
+    if (spriteId != 64)
+    {
+        gUnknown_020388CC->unk1C = &gSprites[spriteId];
+        if (gUnknown_020388CC->unk78 == 1)
+        {
+            gUnknown_020388CC->unk1C->oam.size = 2;
+            gUnknown_020388CC->unk1C->pos1.x -= 8;
+            gUnknown_020388CC->unk1C->pos1.y -= 8;
+            StartSpriteAnim(gUnknown_020388CC->unk1C, 1);
+        }
+        else
+        {
+            gUnknown_020388CC->unk1C->oam.size = 1;
+            gUnknown_020388CC->unk1C->pos1.x = gUnknown_020388CC->unk54 * 8 + 4;
+            gUnknown_020388CC->unk1C->pos1.y = gUnknown_020388CC->unk56 * 8 + 4;
+        }
+        gUnknown_020388CC->unk1C->data1 = 2;
+        gUnknown_020388CC->unk1C->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
+        gUnknown_020388CC->unk1C->data3 = 1;
+    }
 }
