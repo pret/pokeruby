@@ -3,11 +3,8 @@
 
 	.section .rodata
 
-@ 83E6E50
-	.include "data/region_map_sections.inc"
-
 @ 83E6FF4
-	.include "data/region_map_locations.inc"
+@	.include "data/region_map_locations.inc"
 
 gUnknown_083E7684:: @ 83E7684
 	.2byte 50, 39

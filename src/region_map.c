@@ -1,7 +1,9 @@
 #include "global.h"
 #include "main.h"
 #include "palette.h"
+#include "rom4.h"
 #include "sprite.h"
+#include "trig.h"
 
 struct UnknownStruct1
 {
@@ -12,7 +14,12 @@ struct UnknownStruct1
     u8 (*unk18)(void);
     struct Sprite *unk1C;
     struct Sprite *unk20;
-    u8 filler24[0x18];
+    s32 unk24;
+    s32 unk28;
+    u32 unk2C;
+    u32 unk30;
+    u32 unk34;
+    u32 unk38;
     s32 unk3C;
     s32 unk40;
     s32 unk44;
@@ -44,7 +51,8 @@ struct UnknownStruct1
     s8 unk7C;  // movement delta vertical
     u8 unk7D;
     u8 unk7E;
-    u8 filler7F[0x101];
+    u8 unk7F;
+    u8 filler80[0x100];
     u8 unk180[0x100];
     u8 unk280[0x100];
 };
@@ -62,17 +70,142 @@ const u16 gUnknown_083E5D60[] = INCBIN_U16("graphics/pokenav/region_map.gbapal")
 const u8 gUnknown_083E5DA0[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
 const u8 gUnknown_083E6B04[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
+const u8 gRegionMapSections[] =
+{
+    0x58, 0x1D, 0x1D, 0x04, 0x1C, 0x1C, 0x1C, 0x1C, 0x1A, 0x58, 0x58, 0x22, 0x0B, 0x23, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x58, 0x1D, 0x58, 0x58, 0x58, 0x58, 0x38, 0x38, 0x1A, 0x58, 0x58, 0x22, 0x58, 0x23, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x1E, 0x1D, 0x58, 0x58, 0x58, 0x58, 0x38, 0x38, 0x1A, 0x58, 0x58, 0x22, 0x58, 0x23, 0x58, 0x58, 0x39, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x1E, 0x58, 0x58, 0x58, 0x58, 0x03, 0x1B, 0x1B, 0x1A, 0x58, 0x58, 0x22, 0x58, 0x23, 0x24, 0x24, 0x24, 0x24, 0x0C, 0x0C, 0x27, 0x27, 0x27, 0x27, 0x28, 0x28, 0x58, 0x58,
+    0x1E, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x1A, 0x58, 0x58, 0x22, 0x58, 0x58, 0x58, 0x58, 0x25, 0x58, 0x58, 0x58, 0x27, 0x27, 0x27, 0x27, 0x28, 0x28, 0x58, 0x58,
+    0x0A, 0x1F, 0x1F, 0x1F, 0x1F, 0x58, 0x58, 0x58, 0x1A, 0x58, 0x58, 0x22, 0x58, 0x58, 0x58, 0x58, 0x25, 0x58, 0x58, 0x58, 0x27, 0x27, 0x27, 0x27, 0x0D, 0x0D, 0x58, 0x58,
+    0x0A, 0x58, 0x58, 0x58, 0x05, 0x20, 0x20, 0x20, 0x09, 0x09, 0x21, 0x21, 0x26, 0x26, 0x26, 0x26, 0x26, 0x58, 0x58, 0x58, 0x29, 0x29, 0x29, 0x2A, 0x2A, 0x2A, 0x58, 0x58,
+    0x13, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x19, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x29, 0x0E, 0x29, 0x2A, 0x2A, 0x2A, 0x58, 0x58,
+    0x13, 0x58, 0x58, 0x58, 0x12, 0x12, 0x12, 0x12, 0x19, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x29, 0x29, 0x29, 0x2A, 0x2A, 0x2A, 0x58, 0x0F,
+    0x13, 0x07, 0x11, 0x11, 0x01, 0x58, 0x58, 0x58, 0x19, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x2B, 0x2B, 0x2B, 0x2B, 0x0F,
+    0x14, 0x58, 0x58, 0x58, 0x10, 0x58, 0x58, 0x58, 0x08, 0x31, 0x31, 0x31, 0x30, 0x30, 0x30, 0x2F, 0x2F, 0x06, 0x2E, 0x2E, 0x2E, 0x2D, 0x2D, 0x2D, 0x2C, 0x2C, 0x58, 0x58,
+    0x14, 0x58, 0x58, 0x58, 0x00, 0x58, 0x58, 0x58, 0x08, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x14, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x18, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x3A, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x15, 0x15, 0x15, 0x58, 0x58, 0x58, 0x58, 0x58, 0x18, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+    0x58, 0x58, 0x02, 0x16, 0x16, 0x16, 0x17, 0x17, 0x18, 0x58, 0x58, 0x58, 0x49, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58,
+};
+
+#if ENGLISH
+#include "data/region_map_names_en.h"
+#elif GERMAN
+#include "data/region_map_names_de.h"
+#endif
+
+struct RegionMapLocation
+{
+    u8 x, y;
+    u8 width, height;
+    const u8 *name;
+};
+
+const struct RegionMapLocation gRegionMapLocations[] =
+{
+    { 4, 11, 1, 1, gMapName_LittlerootTown},
+    { 4,  9, 1, 1, gMapName_OldaleTown},
+    { 2, 14, 1, 1, gMapName_DewfordTown},
+    { 5,  3, 1, 1, gMapName_LavaridgeTown},
+    { 3,  0, 1, 1, gMapName_FallarborTown},
+    { 4,  6, 1, 1, gMapName_VerdanturfTown},
+    {17, 10, 1, 1, gMapName_PacifidlogTown},
+    { 1,  9, 1, 1, gMapName_PetalburgCity},
+    { 8, 10, 1, 2, gMapName_SlateportCity},
+    { 8,  6, 2, 1, gMapName_MauvilleCity},
+    { 0,  5, 1, 2, gMapName_RustboroCity},
+    {12,  0, 1, 1, gMapName_FortreeCity},
+    {18,  3, 2, 1, gMapName_LilycoveCity},
+    {24,  5, 2, 1, gMapName_MossdeepCity},
+    {21,  7, 1, 1, gMapName_SootopolisCity},
+    {27,  8, 1, 2, gMapName_EverGrandeCity},
+    { 4, 10, 1, 1, gMapName_Route101},
+    { 2,  9, 2, 1, gMapName_Route102},
+    { 4,  8, 4, 1, gMapName_Route103},
+    { 0,  7, 1, 3, gMapName_Route104},
+    { 0, 10, 1, 3, gMapName_Route105},
+    { 0, 13, 2, 1, gMapName_Route106},
+    { 3, 14, 3, 1, gMapName_Route107},
+    { 6, 14, 2, 1, gMapName_Route108},
+    { 8, 12, 1, 3, gMapName_Route109},
+    { 8,  7, 1, 3, gMapName_Route110},
+    { 8,  0, 1, 6, gMapName_Route111},
+    { 6,  3, 2, 1, gMapName_Route112},
+    { 4,  0, 4, 1, gMapName_Route113},
+    { 1,  0, 2, 3, gMapName_Route114},
+    { 0,  2, 1, 3, gMapName_Route115},
+    { 1,  5, 4, 1, gMapName_Route116},
+    { 5,  6, 3, 1, gMapName_Route117},
+    {10,  6, 2, 1, gMapName_Route118},
+    {11,  0, 1, 6, gMapName_Route119},
+    {13,  0, 1, 4, gMapName_Route120},
+    {14,  3, 4, 1, gMapName_Route121},
+    {16,  4, 1, 2, gMapName_Route122},
+    {12,  6, 5, 1, gMapName_Route123},
+    {20,  3, 4, 3, gMapName_Route124},
+    {24,  3, 2, 2, gMapName_Route125},
+    {20,  6, 3, 3, gMapName_Route126},
+    {23,  6, 3, 3, gMapName_Route127},
+    {23,  9, 4, 1, gMapName_Route128},
+    {24, 10, 2, 1, gMapName_Route129},
+    {21, 10, 3, 1, gMapName_Route130},
+    {18, 10, 3, 1, gMapName_Route131},
+    {15, 10, 2, 1, gMapName_Route132},
+    {12, 10, 3, 1, gMapName_Route133},
+    { 9, 10, 3, 1, gMapName_Route134},
+    {20,  3, 4, 3, gMapName_Underwater},
+    {20,  6, 3, 3, gMapName_Underwater},
+    {23,  6, 3, 3, gMapName_Underwater},
+    {23,  9, 4, 1, gMapName_Underwater},
+    {21,  7, 1, 1, gMapName_Underwater},
+    { 1, 13, 1, 1, gMapName_GraniteCave},
+    { 6,  2, 1, 1, gMapName_MtChimney},
+    {16,  2, 1, 1, gMapName_SafariZone},
+    {22, 12, 1, 1, gMapName_BattleTower},
+    { 0,  8, 1, 1, gMapName_PetalburgWoods},
+    { 2,  5, 1, 1, gMapName_RusturfTunnel},
+    { 6, 14, 1, 1, gMapName_AbandonedShip},
+    { 8,  7, 1, 1, gMapName_NewMauville},
+    { 0,  3, 1, 1, gMapName_MeteorFalls},
+    { 1,  2, 1, 1, gMapName_MeteorFalls},
+    {16,  4, 1, 1, gMapName_MtPyre},
+    {19,  3, 1, 1, gMapName_EvilTeamHideout},
+    {24,  4, 1, 1, gMapName_ShoalCave},
+    {24,  9, 1, 1, gMapName_SeafloorCavern},
+    {24,  9, 1, 1, gMapName_Underwater},
+    {27,  9, 1, 1, gMapName_VictoryRoad},
+    {17, 10, 1, 1, gMapName_MirageIsland},
+    {21,  7, 1, 1, gMapName_CaveOfOrigin},
+    {12, 14, 1, 1, gMapName_SouthernIsland},
+    { 6,  3, 1, 1, gMapName_FieryPath},
+    { 7,  3, 1, 1, gMapName_FieryPath},
+    { 6,  3, 1, 1, gMapName_JaggedPass},
+    { 7,  2, 1, 1, gMapName_JaggedPass},
+    {11, 10, 1, 1, gMapName_SealedChamber},
+    {11, 10, 1, 1, gMapName_Underwater},
+    {13,  0, 1, 1, gMapName_ScorchedSlab},
+    {0,  10, 1, 1, gMapName_IslandCave},
+    { 8,  3, 1, 1, gMapName_DesertRuins},
+    {13,  2, 1, 1, gMapName_AncientTomb},
+    { 0,  0, 1, 1, gMapName_InsideOfTruck},
+    {19, 10, 1, 1, gMapName_SkyPillar},
+    { 0,  0, 1, 1, gMapName_SecretBase},
+    { 0,  0, 1, 1, gMapName_None},
+};
+
 void sub_80FA904(struct UnknownStruct1 *, u8);
 bool8 sub_80FA940(void);
 u8 sub_80FAB78(void);
 u8 _swiopen(void);
 u8 sub_80FAD04(void);
 u8 sub_80FADE4(void);
-void sub_80FB170(int, int, int, int, u16, u16, int);
-void sub_80FB238();
+void sub_80FB170(s16, s16, s16, s16, u16, u16, u8);
+void sub_80FB238(s16, s16);
 void sub_80FB260(void);
-u16 GetRegionMapSectionAt();
+u16 GetRegionMapSectionAt(u16, u16);
 void sub_80FB32C(void);
+void sub_80FB600(void);
 u16 sub_80FB758();
 u16 sub_80FB9C0(u16);
 void sub_80FBA18();
@@ -408,4 +541,191 @@ u8 sub_80FAFC0(void)
     }
     sub_80FB170(gUnknown_020388CC->unk5C, gUnknown_020388CC->unk5E, 0x38, 0x48, gUnknown_020388CC->unk4C >> 8, gUnknown_020388CC->unk4C >> 8, 0);
     return r4;
+}
+
+void sub_80FB170(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 g)
+{
+    s32 var1;
+    s32 var2;
+    s32 var3;
+    s32 var4;
+    
+    gUnknown_020388CC->unk2C = e * gSineTable[g + 64] >> 8;
+    gUnknown_020388CC->unk30 = e * -gSineTable[g] >> 8;
+    gUnknown_020388CC->unk34 = f * gSineTable[g] >> 8;
+    gUnknown_020388CC->unk38 = f * gSineTable[g + 64] >> 8;
+    
+    var1 = (a << 8) + (c << 8);
+    var2 = d * gUnknown_020388CC->unk34 + gUnknown_020388CC->unk2C * c;
+    gUnknown_020388CC->unk24 = var1 - var2;
+    
+    var3 = (b << 8) + (d << 8);
+    var4 = gUnknown_020388CC->unk38 * d + gUnknown_020388CC->unk30 * c;
+    gUnknown_020388CC->unk28 = var3 - var4;
+    
+    gUnknown_020388CC->unk7D = 1;
+}
+
+void sub_80FB238(s16 a, s16 b)
+{
+    gUnknown_020388CC->unk24 = 0x1C00 + (a << 8);
+    gUnknown_020388CC->unk28 = 0x2400 + (b << 8);
+    gUnknown_020388CC->unk7D = 1;
+}
+
+void sub_80FB260(void)
+{
+    if (gUnknown_020388CC->unk7D != 0)
+    {
+        REG_BG2PA = gUnknown_020388CC->unk2C;
+        REG_BG2PB = gUnknown_020388CC->unk34;
+        REG_BG2PC = gUnknown_020388CC->unk30;
+        REG_BG2PD = gUnknown_020388CC->unk38;
+        REG_BG2X = gUnknown_020388CC->unk24;
+        REG_BG2Y = gUnknown_020388CC->unk28;
+        gUnknown_020388CC->unk7D = 0;
+    }
+}
+
+void sub_80FB2A4(s16 a, s16 b)
+{
+    sub_80FB170(a, b, 0x38, 0x48, 0x100, 0x100, 0);
+    sub_80FB260();
+    if (gUnknown_020388CC->unk20 != NULL)
+    {
+        gUnknown_020388CC->unk20->pos2.x = -a;
+        gUnknown_020388CC->unk20->pos2.y = -b;
+    }
+}
+
+u16 GetRegionMapSectionAt(u16 x, u16 y)
+{
+    
+    if (y < 2 || y > 16 || x < 1 || x > 0x1C)
+        return 0x58;
+    y -= 2;
+    x -= 1;
+    return gRegionMapSections[x + y * 28];
+}
+
+void sub_80FB32C(void)
+{
+    struct MapHeader *mapHeader;
+    u16 mapWidth;
+    u16 mapHeight;
+    u16 x;
+    u16 y;
+    u16 r1;
+    u16 r9;
+    
+    if (gSaveBlock1.location.mapGroup == 0x19 && (gSaveBlock1.location.mapNum == 0x29 || gSaveBlock1.location.mapNum == 0x2A || gSaveBlock1.location.mapNum == 0x2B))
+    {
+        sub_80FB600();
+        return;
+    }
+    
+    switch (get_map_light_level_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum) - 1)
+    {
+    default:
+    case 0:
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+        gUnknown_020388CC->unk14 = gMapHeader.name;
+        gUnknown_020388CC->unk7F = 0;
+        mapWidth = gMapHeader.mapData->width;
+        mapHeight = gMapHeader.mapData->height;
+        x = gSaveBlock1.pos.x;
+        y = gSaveBlock1.pos.y;
+        if (gUnknown_020388CC->unk14 == 0x45)
+            gUnknown_020388CC->unk7F = 1;
+        break;
+    case 3:
+    case 6:
+        mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp4.mapGroup, gSaveBlock1.warp4.mapNum);
+        gUnknown_020388CC->unk14 = mapHeader->name;
+        gUnknown_020388CC->unk7F = 1;
+        mapWidth = mapHeader->mapData->width;
+        mapHeight = mapHeader->mapData->height;
+        x = gSaveBlock1.warp4.x;
+        y = gSaveBlock1.warp4.y;
+        break;
+    case 8:
+        mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
+        gUnknown_020388CC->unk14 = mapHeader->name;
+        gUnknown_020388CC->unk7F = 1;
+        mapWidth = mapHeader->mapData->width;
+        mapHeight = mapHeader->mapData->height;
+        x = gSaveBlock1.warp2.x;
+        y = gSaveBlock1.warp2.y;
+        break;
+    case 7:
+        {
+            struct WarpData *r4;
+            
+            gUnknown_020388CC->unk14 = gMapHeader.name;
+            if (gUnknown_020388CC->unk14 != 0x57)
+            {
+                r4 = &gSaveBlock1.warp4;
+                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+            }
+            else
+            {
+                r4 = &gSaveBlock1.warp2;
+                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                gUnknown_020388CC->unk14 = mapHeader->name;
+            }
+            gUnknown_020388CC->unk7F = 0;
+            mapWidth = mapHeader->mapData->width;
+            mapHeight = mapHeader->mapData->height;
+            x = r4->x;
+            y = r4->y;
+        }
+        break;
+    }
+    r9 = x;
+    r1 = mapWidth / gRegionMapLocations[gUnknown_020388CC->unk14].width;
+    if (r1 == 0)
+        r1 = 1;
+    x /= r1;
+    if (x >= gRegionMapLocations[gUnknown_020388CC->unk14].width)
+        x = gRegionMapLocations[gUnknown_020388CC->unk14].width - 1;
+    r1 = mapHeight / gRegionMapLocations[gUnknown_020388CC->unk14].height;
+    if (r1 == 0)
+        r1 = 1;
+    y /= r1;
+    if (y >= gRegionMapLocations[gUnknown_020388CC->unk14].height)
+        y = gRegionMapLocations[gUnknown_020388CC->unk14].height - 1;
+    switch (gUnknown_020388CC->unk14)
+    {
+    case 0x1D:
+        if (y != 0)
+            x = 0;
+        break;
+    case 0x29:
+    case 0x33:
+        x = 0;
+        if (gSaveBlock1.pos.x > 32)
+            x = 1;
+        if (gSaveBlock1.pos.x > 0x33)
+            x++;
+        y = 0;
+        if (gSaveBlock1.pos.y > 0x25)
+            y = 1;
+        if (gSaveBlock1.pos.y > 0x38)
+            y++;
+        break;
+    case 0x24:
+        x = 0;
+        if (r9 > 14)
+            x = 1;
+        if (r9 > 0x1C)
+            x++;
+        if (r9 > 0x36)
+            x++;
+        break;
+    }
+    gUnknown_020388CC->unk54 = gRegionMapLocations[gUnknown_020388CC->unk14].x + x + 1;
+    gUnknown_020388CC->unk56 = gRegionMapLocations[gUnknown_020388CC->unk14].y + y + 2;
 }
