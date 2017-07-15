@@ -49,4 +49,6 @@ bool8 sub_8093C0C(struct TrainerCard *trainerCard);
 bool8 sub_8093C38();
 bool8 sub_8093D50(void);
 
+extern struct TrainerCard gTrainerCards[4];
+
 #endif // GUARD_TRAINER_CARD_H
