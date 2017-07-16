@@ -188,7 +188,7 @@ extern const u8 OtherText_TheField[];
 extern const u8 OtherText_TheField2[];
 extern const u8 OtherText_ThePC[];
 
-extern const struct TextStruct gUnknown_0840E740[];
+extern const u8 *const gUnknown_0840E740[7];
 
 extern const u8 gOtherText_ReturnTo[];
 extern const u8 gOtherText_WhatWillYouDo2[];

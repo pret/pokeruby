@@ -547,7 +547,7 @@ const struct MultichoiceListStruct gMultichoiceLists[] =
     {(struct MenuAction *)MultichoiceList_72, 5}
 };
 
-const struct TextStruct gUnknown_083CE048[] =
+const u8 *const gUnknown_083CE048[] =
 {
     OtherText_Cool2,
     OtherText_Beauty3,
