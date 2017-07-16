@@ -444,23 +444,21 @@ void CalculateMonStats(struct Pokemon *mon)
     if (species == SPECIES_SHEDINJA)
     {
         if (currentHP != 0 || oldMaxHP == 0)
-        {
             currentHP = 1;
-            goto set_hp;
-        }
+        else
+            return;
     }
     else
     {
-        if (currentHP != 0 || oldMaxHP == 0)
-        {
-            if (currentHP != 0)
-                currentHP += newMaxHP - oldMaxHP;
-            else if (oldMaxHP == 0)
-                currentHP = newMaxHP;
-        set_hp:
-            SetMonData(mon, MON_DATA_HP, (u8 *)&currentHP);
-        }
+        if (currentHP == 0 && oldMaxHP == 0)
+            currentHP = newMaxHP;
+        else if (currentHP != 0)
+            currentHP += newMaxHP - oldMaxHP;
+        else
+            return;
     }
+
+    SetMonData(mon, MON_DATA_HP, (u8 *)&currentHP);
 }
 
 void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest)
