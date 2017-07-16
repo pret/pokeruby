@@ -249,29 +249,30 @@ void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread)
 {
     s32 i;
-    register u32 temp asm("r4");
     s32 statCount = 0;
     u16 evAmount;
-    register u32 mask1 asm("r1");
-    u8 mask2;
+    u8 temp;
 
     CreateMon(mon, species, level, fixedIV, 0, 0, 0, 0);
+
     temp = evSpread;
-    mask1 = 1;
-    for (i = 5; i >= 0; i--)
+
+    for (i = 0; i < 6; i++)
     {
-        if (temp & mask1)
+        if (temp & 1)
             statCount++;
         temp >>= 1;
     }
 
     evAmount = 510 / statCount;
-    mask2 = 1;
+
+    temp = 1;
+
     for (i = 0; i < 6; i++)
     {
-        if (evSpread & mask2)
+        if (evSpread & temp)
             SetMonData(mon, MON_DATA_HP_EV + i, (u8 *)&evAmount);
-        mask2 <<= 1;
+        temp <<= 1;
     }
 
     CalculateMonStats(mon);
