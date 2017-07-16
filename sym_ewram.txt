@@ -808,7 +808,7 @@ gUnknown_020388C0: @ 20388C0
 gUnknown_020388C4: @ 20388C4
 	.space 0x8
 
-gUnknown_020388CC: @ 20388CC
+gRegionMap: @ 20388CC
 	.space 0x4
 
 gUnknown_020388D0: @ 20388D0

@@ -2093,7 +2093,7 @@ _0808AB6C: .4byte gPaletteFade
 _0808AB70: .4byte gTasks
 _0808AB74: .4byte c2_exit_to_overworld_2_switch
 _0808AB78:
-	ldr r0, _0808AB8C @ =sub_80FC074
+	ldr r0, _0808AB8C @ =CB2_InitFlyRegionMap
 	bl SetMainCallback2
 _0808AB7E:
 	adds r0, r4, 0
@@ -2103,7 +2103,7 @@ _0808AB84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808AB8C: .4byte sub_80FC074
+_0808AB8C: .4byte CB2_InitFlyRegionMap
 	thumb_func_end sub_808AB34
 
 	thumb_func_start sub_808AB90

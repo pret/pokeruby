@@ -479,7 +479,7 @@ void sub_80BDC14(void)
     gSaveBlock1.gabbyAndTyData.valB_2 = gSaveBlock1.gabbyAndTyData.valA_2;
     gSaveBlock1.gabbyAndTyData.valB_3 = gSaveBlock1.gabbyAndTyData.valA_3;
     gSaveBlock1.gabbyAndTyData.valA_4 = 1;
-    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.name;
+    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
 }
 
@@ -664,7 +664,7 @@ void sub_80BE028(void) {
     buffer->worldOfMasters.var02++;
     buffer->worldOfMasters.var04 = gBattleResults.CaughtPoke;
     buffer->worldOfMasters.var08 = gBattleResults.Poke1Species;
-    buffer->worldOfMasters.var0a = gMapHeader.name;
+    buffer->worldOfMasters.var0a = gMapHeader.regionMapSectionId;
 }
 
 #ifdef NONMATCHING
@@ -692,7 +692,7 @@ void sub_80BE074(void) {
                 show->pokemonTodayFailed.species2 = gBattleResults.unk20;
                 show->pokemonTodayFailed.var10 = total;
                 show->pokemonTodayFailed.var11 = gBattleOutcome;
-                show->pokemonTodayFailed.var12 = gMapHeader.name;
+                show->pokemonTodayFailed.var12 = gMapHeader.regionMapSectionId;
                 StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2.playerName);
                 sub_80BE138(show);
                 show->pokemonTodayFailed.language = GAME_LANGUAGE;
@@ -905,7 +905,7 @@ void sub_80BE3BC(void) {
                 tvShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0];
                 tvShow->smartshopperShow.var00 = TVSHOW_SMART_SHOPPER;
                 tvShow->smartshopperShow.var01 = rval;
-                tvShow->smartshopperShow.shopLocation = gMapHeader.name;
+                tvShow->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++) {
                     tvShow->smartshopperShow.itemIds[i] = gUnknown_02038724[i].item_id;
                     tvShow->smartshopperShow.itemAmounts[i] = gUnknown_02038724[i].item_amount;
@@ -3216,7 +3216,7 @@ void DoTVShowTodaysSmartShopper(void)
     {
         case 0:
             TVShowConvertInternationalString(gStringVar1, tvShow->smartshopperShow.playerName, tvShow->smartshopperShow.language);
-            sub_80FBFB4(gStringVar2, tvShow->smartshopperShow.shopLocation, 0);
+            GetMapSectionName(gStringVar2, tvShow->smartshopperShow.shopLocation, 0);
             if (tvShow->smartshopperShow.itemAmounts[0] >= 0xff)
             {
                 gUnknown_020387E8 = 11;
@@ -3498,7 +3498,7 @@ void DoTVShowPokemonTodayFailedCapture(void) {
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, tvShow->pokemonTodayFailed.playerName, tvShow->pokemonTodayFailed.language);
-        sub_80FBFB4(gStringVar2, tvShow->pokemonTodayFailed.var12, 0);
+        GetMapSectionName(gStringVar2, tvShow->pokemonTodayFailed.var12, 0);
         StringCopy(gStringVar3, gSpeciesNames[tvShow->pokemonTodayFailed.species2]);
         if (tvShow->pokemonTodayFailed.var11 == 1) {
             gUnknown_020387E8 = 3;
@@ -3653,7 +3653,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
 
     tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
 
-    sub_80FBFB4(gStringVar1, tvShow->massOutbreak.locationMapNum, 0);
+    GetMapSectionName(gStringVar1, tvShow->massOutbreak.locationMapNum, 0);
 
     StringCopy(gStringVar2, gSpeciesNames[tvShow->massOutbreak.species]);
 
@@ -3669,7 +3669,7 @@ void DoTVShowInSearchOfTrainers(void) {
     switchval = gUnknown_020387E8;
     switch (switchval) {
     case 0:
-        sub_80FBFB4(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
+        GetMapSectionName(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
         if (gSaveBlock1.gabbyAndTyData.battleNum > 1) {
             gUnknown_020387E8 = 1;
         } else {
@@ -3765,7 +3765,7 @@ void DoTVShowTheWorldOfMasters(void) {
     case 2:
         TVShowConvertInternationalString(gStringVar1, tvShow->worldOfMasters.playerName,
                                          tvShow->worldOfMasters.language);
-        sub_80FBFB4(gStringVar2, tvShow->worldOfMasters.var0a, 0);
+        GetMapSectionName(gStringVar2, tvShow->worldOfMasters.var0a, 0);
         StringCopy(gStringVar3, gSpeciesNames[tvShow->worldOfMasters.var04]);
         TVShowDone();
         break;

@@ -19,11 +19,13 @@ struct UnkStruct
 {
     MainCallback callback;
     u8 filler[4];
+    // This should be RegionMap, but I can't do that because it overlaps unk888.
     struct RegionMapStruct unk8;
     u16 unk888;
 };
 
-extern struct UnkStruct unk_2000000;
+extern u8 ewram[];
+#define unk_2000000 (*(struct UnkStruct *)(ewram))
 
 void FieldInitRegionMap(MainCallback callback)
 {
@@ -46,9 +48,10 @@ void CB2_FieldInitRegionMap(void)
     REG_BG3VOFS = 0;
     ResetSpriteData();
     FreeAllSpritePalettes();
-    sub_80FA8EC((u32)&unk_2000000.unk8, 0);
-    sub_80FBCF0(0, 0);
-    sub_80FBB3C(1, 1);
+    // TODO: remove this cast
+    InitRegionMap((void *)&unk_2000000.unk8, 0);
+    CreateRegionMapPlayerIcon(0, 0);
+    CreateRegionMapCursorIcon(1, 1);
     SetUpWindowConfig(&gWindowConfig_81E709C);
     InitMenuWindow(&gWindowConfig_81E709C);
     MenuZeroFillScreen();
@@ -107,7 +110,7 @@ void sub_813EFDC(void)
     case 4:
         if (!gPaletteFade.active)
         {
-            sub_80FAB10();
+            FreeRegionMapIconResources();
             SetMainCallback2(unk_2000000.callback);
         }
         break;

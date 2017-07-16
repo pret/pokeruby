@@ -4,9 +4,11 @@
 #include "field_specials.h"
 #include "m4a.h"
 #include "main.h"
+#include "map_constants.h"
 #include "menu.h"
 #include "palette.h"
 #include "pokemon_menu.h"
+#include "region_map.h"
 #include "rom4.h"
 #include "secret_base.h"
 #include "songs.h"
@@ -16,59 +18,116 @@
 #include "text.h"
 #include "trig.h"
 
-struct UnknownStruct1
+#define MAPSEC_LITTLEROOT_TOWN 0
+#define MAPSEC_OLDALE_TOWN 1
+#define MAPSEC_DEWFORD_TOWN 2
+#define MAPSEC_LAVARIDGE_TOWN 3
+#define MAPSEC_FALLARBOR_TOWN 4
+#define MAPSEC_VERDANTURF_TOWN 5
+#define MAPSEC_PACIFIDLOG_TOWN 6
+#define MAPSEC_PETALBURG_CITY 7
+#define MAPSEC_SLATEPORT_CITY 8
+#define MAPSEC_MAUVILLE_CITY 9
+#define MAPSEC_RUSTBORO_CITY 10
+#define MAPSEC_FORTREE_CITY 11
+#define MAPSEC_LILYCOVE_CITY 12
+#define MAPSEC_MOSSDEEP_CITY 13
+#define MAPSEC_SOOTOPOLIS_CITY 14
+#define MAPSEC_EVER_GRANDE_CITY 15
+#define MAPSEC_ROUTE_101 0x10
+#define MAPSEC_ROUTE_102 0x11
+#define MAPSEC_ROUTE_103 0x12
+#define MAPSEC_ROUTE_104 0x13
+#define MAPSEC_ROUTE_105 0x14
+#define MAPSEC_ROUTE_106 0x15
+#define MAPSEC_ROUTE_107 0x16
+#define MAPSEC_ROUTE_108 0x17
+#define MAPSEC_ROUTE_109 0x18
+#define MAPSEC_ROUTE_110 0x19
+#define MAPSEC_ROUTE_111 0x1A
+#define MAPSEC_ROUTE_112 0x1B
+#define MAPSEC_ROUTE_113 0x1C
+#define MAPSEC_ROUTE_114 0x1D
+#define MAPSEC_ROUTE_115 0x1E
+#define MAPSEC_ROUTE_116 0x1F
+#define MAPSEC_ROUTE_117 0x20
+#define MAPSEC_ROUTE_118 0x21
+#define MAPSEC_ROUTE_119 0x22
+#define MAPSEC_ROUTE_120 0x23
+#define MAPSEC_ROUTE_121 0x24
+#define MAPSEC_ROUTE_122 0x25
+#define MAPSEC_ROUTE_123 0x26
+#define MAPSEC_ROUTE_124 0x27
+#define MAPSEC_ROUTE_125 0x28
+#define MAPSEC_ROUTE_126 0x29
+#define MAPSEC_ROUTE_127 0x2A
+#define MAPSEC_ROUTE_128 0x2B
+#define MAPSEC_ROUTE_129 0x2C
+#define MAPSEC_ROUTE_130 0x2D
+#define MAPSEC_ROUTE_131 0x2E
+#define MAPSEC_ROUTE_132 0x2F
+#define MAPSEC_ROUTE_133 0x30
+#define MAPSEC_ROUTE_134 0x31
+#define MAPSEC_UNDERWATER1 0x32
+#define MAPSEC_UNDERWATER2 0x33
+#define MAPSEC_UNDERWATER3 0x34
+#define MAPSEC_UNDERWATER4 0x35
+#define MAPSEC_UNDERWATER5 0x36
+#define MAPSEC_GRANITE_CAVE 0x37
+#define MAPSEC_MT_CHIMNEY 0x38
+#define MAPSEC_SAFARI_ZONE 0x39
+#define MAPSEC_BATTLE_TOWER 0x3A
+#define MAPSEC_PETALBURG_WOODS 0x3B
+#define MAPSEC_RUSTURF_TUNNEL 0x3C
+#define MAPSEC_ABANDONED_SHIP 0x3D
+#define MAPSEC_NEW_MAUVILLE 0x3E
+#define MAPSEC_METEOR_FALLS_1 0x3F
+#define MAPSEC_METEOR_FALLS_2 0x40
+#define MAPSEC_MT_PYRE 0x41
+#define MAPSEC_EVIL_TEAM_HIDEOUT 0x42
+#define MAPSEC_SHOAL_CAVE 0x43
+#define MAPSEC_SEAFLOOR_CAVERN 0x44
+#define MAPSEC_UNDERWATER6 0x45
+#define MAPSEC_VICTORY_ROAD 0x46
+#define MAPSEC_MIRAGE_ISLAND 0x47
+#define MAPSEC_CAVE_OF_ORIGIN 0x48
+#define MAPSEC_SOUTHERN_ISLAND 0x49
+#define MAPSEC_FIERY_PATH_1 0x4A
+#define MAPSEC_FIERY_PATH_2 0x4B
+#define MAPSEC_JAGGED_PASS_1 0x4C
+#define MAPSEC_JAGGED_PASS_2 0x4D
+#define MAPSEC_SEALED_CHAMBER 0x4E
+#define MAPSEC_UNDERWATER7 0x4F
+#define MAPSEC_SCORCHED_SLAB 0x50
+#define MAPSEC_ISLAND_CAVE 0x51
+#define MAPSEC_DESERT_RUINS 0x52
+#define MAPSEC_ANCIENT_TOMB 0x53
+#define MAPSEC_INSIDE_OF_TRUCK 0x54
+#define MAPSEC_SKY_PILLAR 0x55
+#define MAPSEC_SECRET_BASE 0x56
+#define MAPSEC_UNK_0x57 0x57
+#define MAPSEC_NONE 0x58
+
+#define MAP_WIDTH 28
+#define MAP_HEIGHT 15
+
+#define MAPCURSOR_X_MIN 1
+#define MAPCURSOR_Y_MIN 2
+#define MAPCURSOR_X_MAX 28
+#define MAPCURSOR_Y_MAX 16
+
+// Input events
+enum
 {
-    u8 filler0[0x14];
-    u16 unk14;
-    u8 unk16;
-    u8 unk17;
-    u8 (*unk18)(void);
-    struct Sprite *unk1C;
-    struct Sprite *unk20;
-    s32 unk24;
-    s32 unk28;
-    u32 unk2C;
-    u32 unk30;
-    u32 unk34;
-    u32 unk38;
-    s32 unk3C;
-    s32 unk40;
-    s32 unk44;
-    s32 unk48;
-    s32 unk4C;
-    u32 unk50;
-    u16 unk54;  // cursor x
-    u16 unk56;  // cursor y
-    u16 unk58;
-    u16 unk5A;
-    s16 unk5C;
-    s16 unk5E;
-    s16 unk60;
-    s16 unk62;
-    u16 unk64;
-    u16 unk66;
-    u16 unk68;
-    u16 unk6A;
-    u16 unk6C;
-    u16 unk6E;
-    u16 unk70;
-    u16 unk72;
-    u16 unk74;
-    u16 unk76;
-    u8 unk78;
-    u8 unk79;
-    s8 unk7A;
-    s8 unk7B;  // movement delta horizontal
-    s8 unk7C;  // movement delta vertical
-    u8 unk7D;
-    u8 unk7E;
-    u8 unk7F;
-    u8 filler80[0x100];
-    u8 unk180[0x100];
-    u8 unk280[0x100];  // possibly 0x600
+    INPUT_EVENT_NONE,
+    INPUT_EVENT_DPAD,
+    INPUT_EVENT_2,
+    INPUT_EVENT_3,
+    INPUT_EVENT_A_BUTTON,
+    INPUT_EVENT_B_BUTTON,
 };
 
-extern struct UnknownStruct1 *gUnknown_020388CC;
+extern struct RegionMap *gRegionMap;
 
 const u16 gPokenavCursor_Pal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
 const u8 gUnknown_083E5AF0[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");
@@ -110,7 +169,7 @@ struct RegionMapLocation
 {
     u8 x, y;
     u8 width, height;
-    const u8 *name;
+    const u8 *regionMapSectionId;
 };
 
 const struct RegionMapLocation gRegionMapLocations[] =
@@ -207,75 +266,75 @@ const struct RegionMapLocation gRegionMapLocations[] =
 
 const u16 gUnknown_083E7684[][2] =
 {
-    {50, 39},
-    {51, 41},
-    {52, 42},
-    {53, 43},
-    {54, 14},
-    {69, 43},
-    {66, 12},
-    {79, 49},
-    {59, 19},
-    {76, 27},
-    {65, 37},
-    {85, 46},
-    {88, 88},
+    {MAPSEC_UNDERWATER1,       MAPSEC_ROUTE_124},
+    {MAPSEC_UNDERWATER2,       MAPSEC_ROUTE_126},
+    {MAPSEC_UNDERWATER3,       MAPSEC_ROUTE_127},
+    {MAPSEC_UNDERWATER4,       MAPSEC_ROUTE_128},
+    {MAPSEC_UNDERWATER5,       MAPSEC_SOOTOPOLIS_CITY},
+    {MAPSEC_UNDERWATER6,       MAPSEC_ROUTE_128},
+    {MAPSEC_EVIL_TEAM_HIDEOUT, MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_UNDERWATER7,       MAPSEC_ROUTE_134},
+    {MAPSEC_PETALBURG_WOODS,   MAPSEC_ROUTE_104},
+    {MAPSEC_JAGGED_PASS_1,     MAPSEC_ROUTE_112},
+    {MAPSEC_MT_PYRE,           MAPSEC_ROUTE_122},
+    {MAPSEC_SKY_PILLAR,        MAPSEC_ROUTE_131},
+    {MAPSEC_NONE,              MAPSEC_NONE},
 };
 
-void sub_80FA904(struct UnknownStruct1 *, u8);
+void sub_80FA904(struct RegionMap *, u8);
 bool8 sub_80FA940(void);
 u8 sub_80FAB78(void);
 u8 _swiopen(void);
 u8 sub_80FAD04(void);
 u8 sub_80FADE4(void);
-void sub_80FB170(s16, s16, s16, s16, u16, u16, u8);
+void CalcZoomScrollParams(s16, s16, s16, s16, u16, u16, u8);
 void sub_80FB238(s16, s16);
-void sub_80FB260(void);
+void UpdateRegionMapVideoRegs(void);
 u16 GetRegionMapSectionAt(u16, u16);
-void sub_80FB32C(void);
+void InitializeCursorPosition(void);
 void sub_80FB600(void);
 u16 sub_80FB758(u16);
 u16 sub_80FB9C0(u16);
 void sub_80FBA18(void);
-u8 sub_80FBAA0(u16);
-void sub_80FBB3C(u16, u16);
+bool8 sub_80FBAA0(u16);
+void CreateRegionMapCursorIcon(u16, u16);
 void sub_80FBCA0(void);
 void sub_80FBDF8(void);
 void sub_80FBE24(void);
-void sub_80FBF34(struct Sprite *);
-void sub_80FBF40(struct Sprite *);
-void sub_80FBEA4(struct Sprite *);
-const u8 *sub_80FBFB4(u8 *, u16, u16);
+void SpriteCB_PlayerIconZoomedOut(struct Sprite *);
+void UpdateIconBlink(struct Sprite *);
+void SpriteCB_PlayerIconZoomedIn(struct Sprite *);
+const u8 *GetMapSectionName(u8 *, u16, u16);
 void sub_80FC214(void);
 void sub_80FC228(void);
 void sub_80FC244(void (*func)(void));
-void sub_80FC254(void);
-void sub_80FC31C(void);
-void sub_80FC374(void);
-void sub_80FC484(void);
-void sub_80FC55C(struct Sprite *);
+void PrintFlyTargetName(void);
+void CreateFlyTargetGraphics(void);
+void CreateCityTownFlyTargetIcons(void);
+void CreateSpecialAreaFlyTargetIcons(void);
+void SpriteCB_FlyTargetIcons(struct Sprite *);
 void sub_80FC5B4(void);
 void sub_80FC600(void);
 void sub_80FC69C(void);
 
-void sub_80FA8EC(struct UnknownStruct1 *a, u8 b)
+void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
-    sub_80FA904(a, b);
+    sub_80FA904(regionMap, zoomed);
     while (sub_80FA940())
         ;
 }
 
-void sub_80FA904(struct UnknownStruct1 *a, u8 b)
+void sub_80FA904(struct RegionMap *regionMap, bool8 zoomed)
 {
-    gUnknown_020388CC = a;
-    gUnknown_020388CC->unk79 = 0;
-    gUnknown_020388CC->unk78 = b;
-    gUnknown_020388CC->unk18 = (b == 0) ? sub_80FAB78 : sub_80FAD04;
+    gRegionMap = regionMap;
+    gRegionMap->initStep = 0;
+    gRegionMap->zoomed = zoomed;
+    gRegionMap->inputCallback = (zoomed == 0) ? sub_80FAB78 : sub_80FAD04;
 }
 
 bool8 sub_80FA940(void)
 {
-    switch (gUnknown_020388CC->unk79)
+    switch (gRegionMap->initStep)
     {
     case 0:
         LZ77UnCompVram(gUnknown_083E5DA0, (void *)(VRAM + 0x8000));
@@ -287,240 +346,245 @@ bool8 sub_80FA940(void)
         LoadPalette(gUnknown_083E5D60, 0x70, 0x60);  // Why isn't this the right size?
         break;
     case 3:
-        LZ77UnCompWram(gUnknown_083E5AF0, gUnknown_020388CC->unk180);
+        LZ77UnCompWram(gUnknown_083E5AF0, gRegionMap->unk180);
         break;
     case 4:
-        LZ77UnCompWram(gUnknown_083E5B34, gUnknown_020388CC->unk280);
+        LZ77UnCompWram(gUnknown_083E5B34, gRegionMap->unk280);
         break;
     case 5:
-        sub_80FB32C();
-        gUnknown_020388CC->unk74 = gUnknown_020388CC->unk54;
-        gUnknown_020388CC->unk76 = gUnknown_020388CC->unk56;
-        gUnknown_020388CC->unk16 = sub_80FB758(gUnknown_020388CC->unk14);
-        gUnknown_020388CC->unk14 = sub_80FB9C0(gUnknown_020388CC->unk14);
-        sub_80FBFB4(gUnknown_020388CC->filler0, gUnknown_020388CC->unk14, 16);
+        InitializeCursorPosition();
+        gRegionMap->unk74 = gRegionMap->cursorPosX;
+        gRegionMap->unk76 = gRegionMap->cursorPosY;
+        gRegionMap->unk16 = sub_80FB758(gRegionMap->mapSecId);
+        gRegionMap->mapSecId = sub_80FB9C0(gRegionMap->mapSecId);
+        GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
         break;
     case 6:
-        if (gUnknown_020388CC->unk78 == 0)
+        if (gRegionMap->zoomed == FALSE)
         {
-            sub_80FB170(0, 0, 0, 0, 0x100, 0x100, 0);
+            CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
         }
         else
         {
-            gUnknown_020388CC->unk5C = gUnknown_020388CC->unk54 * 8 - 0x34;
-            gUnknown_020388CC->unk5E = gUnknown_020388CC->unk56 * 8 - 0x44;
-            gUnknown_020388CC->unk64 = gUnknown_020388CC->unk54;
-            gUnknown_020388CC->unk66 = gUnknown_020388CC->unk56;
-            sub_80FB170(gUnknown_020388CC->unk5C, gUnknown_020388CC->unk5E, 0x38, 0x48, 0x80, 0x80, 0);
+            gRegionMap->scrollX = gRegionMap->cursorPosX * 8 - 52;
+            gRegionMap->scrollY = gRegionMap->cursorPosY * 8 - 68;
+            gRegionMap->unk64 = gRegionMap->cursorPosX;
+            gRegionMap->unk66 = gRegionMap->cursorPosY;
+            CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
         }
         break;
     case 7:
         sub_80FBA18();
-        sub_80FB260();
-        gUnknown_020388CC->unk1C = NULL;
-        gUnknown_020388CC->unk20 = NULL;
-        gUnknown_020388CC->unk7A = 0;
-        gUnknown_020388CC->unk7E = 0;
+        UpdateRegionMapVideoRegs();
+        gRegionMap->cursorIconSprite = NULL;
+        gRegionMap->playerIconSprite = NULL;
+        gRegionMap->unk7A = 0;
+        gRegionMap->blinkPlayerIcon = FALSE;
         REG_BG2CNT = 0xBC8A;
-        gUnknown_020388CC->unk79++;
+        gRegionMap->initStep++;
     default:
         return FALSE;
     }
-    gUnknown_020388CC->unk79++;
+    gRegionMap->initStep++;
     return TRUE;
 }
 
-void sub_80FAB10(void)
+void FreeRegionMapIconResources(void)
 {
-    if (gUnknown_020388CC->unk1C != NULL)
+    if (gRegionMap->cursorIconSprite != NULL)
     {
-        DestroySprite(gUnknown_020388CC->unk1C);
-        FreeSpriteTilesByTag(gUnknown_020388CC->unk58);
-        FreeSpritePaletteByTag(gUnknown_020388CC->unk5A);
+        DestroySprite(gRegionMap->cursorIconSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorIconTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorIconPaletteTag);
     }
-    if (gUnknown_020388CC->unk20 != NULL)
+    if (gRegionMap->playerIconSprite != NULL)
     {
-        DestroySprite(gUnknown_020388CC->unk20);
-        FreeSpriteTilesByTag(gUnknown_020388CC->unk70);
-        FreeSpritePaletteByTag(gUnknown_020388CC->unk72);
+        DestroySprite(gRegionMap->playerIconSprite);
+        FreeSpriteTilesByTag(gRegionMap->playerIconTileTag);
+        FreeSpritePaletteByTag(gRegionMap->playerIconPaletteTag);
     }
 }
 
 u8 sub_80FAB60(void)
 {
-    return gUnknown_020388CC->unk18();
+    return gRegionMap->inputCallback();
 }
 
 u8 sub_80FAB78(void)
 {
-    u8 r4 = 0;
+    u8 event = INPUT_EVENT_NONE;
 
-    gUnknown_020388CC->unk7B = 0;
-    gUnknown_020388CC->unk7C = 0;
-    if ((gMain.heldKeys & DPAD_UP) && gUnknown_020388CC->unk56 > 2)
+    gRegionMap->cursorDeltaX = 0;
+    gRegionMap->cursorDeltaY = 0;
+    if ((gMain.heldKeys & DPAD_UP) && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
     {
-        gUnknown_020388CC->unk7C = -1;
-        r4 = 1;
+        gRegionMap->cursorDeltaY = -1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_DOWN) && gUnknown_020388CC->unk56 < 16)
+    if ((gMain.heldKeys & DPAD_DOWN) && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
     {
-        gUnknown_020388CC->unk7C = 1;
-        r4 = 1;
+        gRegionMap->cursorDeltaY = 1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_LEFT) && gUnknown_020388CC->unk54 > 1)
+    if ((gMain.heldKeys & DPAD_LEFT) && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
     {
-        gUnknown_020388CC->unk7B = -1;
-        r4 = 1;
+        gRegionMap->cursorDeltaX = -1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_RIGHT) && gUnknown_020388CC->unk54 < 0x1C)
+    if ((gMain.heldKeys & DPAD_RIGHT) && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
     {
-        gUnknown_020388CC->unk7B = 1;
-        r4 = 1;
+        gRegionMap->cursorDeltaX = 1;
+        event = INPUT_EVENT_DPAD;
     }
+
     if (gMain.newKeys & A_BUTTON)
-        r4 = 4;
+        event = INPUT_EVENT_A_BUTTON;
     else if (gMain.newKeys & B_BUTTON)
-        r4 = 5;
-    if (r4 == 1)
+        event = INPUT_EVENT_B_BUTTON;
+
+    if (event == INPUT_EVENT_DPAD)
     {
-        gUnknown_020388CC->unk7A = 4;
-        gUnknown_020388CC->unk18 = _swiopen;
+        gRegionMap->unk7A = 4;
+        gRegionMap->inputCallback = _swiopen;
     }
-    return r4;
+    return event;
 }
 
 u8 _swiopen(void)
 {
-    u16 r4;
+    u16 mapSecId;
 
-    if (gUnknown_020388CC->unk7A != 0)
-        return 2;
+    if (gRegionMap->unk7A != 0)
+        return INPUT_EVENT_2;
 
-    if (gUnknown_020388CC->unk7B > 0)
-        gUnknown_020388CC->unk54++;
+    if (gRegionMap->cursorDeltaX > 0)
+        gRegionMap->cursorPosX++;
 
-    if (gUnknown_020388CC->unk7B < 0)
-        gUnknown_020388CC->unk54--;
+    if (gRegionMap->cursorDeltaX < 0)
+        gRegionMap->cursorPosX--;
 
-    if (gUnknown_020388CC->unk7C > 0)
-        gUnknown_020388CC->unk56++;
+    if (gRegionMap->cursorDeltaY > 0)
+        gRegionMap->cursorPosY++;
 
-    if (gUnknown_020388CC->unk7C < 0)
-        gUnknown_020388CC->unk56--;
+    if (gRegionMap->cursorDeltaY < 0)
+        gRegionMap->cursorPosY--;
 
-    r4 = GetRegionMapSectionAt(gUnknown_020388CC->unk54, gUnknown_020388CC->unk56);
-    gUnknown_020388CC->unk16 = sub_80FB758(r4);
-    if (r4 != gUnknown_020388CC->unk14)
+    mapSecId = GetRegionMapSectionAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
+    gRegionMap->unk16 = sub_80FB758(mapSecId);
+    if (mapSecId != gRegionMap->mapSecId)
     {
-        gUnknown_020388CC->unk14 = r4;
-        sub_80FBFB4(gUnknown_020388CC->filler0, gUnknown_020388CC->unk14, 16);
+        gRegionMap->mapSecId = mapSecId;
+        GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
     }
     sub_80FBA18();
-    gUnknown_020388CC->unk18 = sub_80FAB78;
-    return 3;
+    gRegionMap->inputCallback = sub_80FAB78;
+    return INPUT_EVENT_3;
 }
 
 u8 sub_80FAD04(void)
 {
-    u8 r4 = 0;
-    gUnknown_020388CC->unk6A = 0;
-    gUnknown_020388CC->unk68 = 0;
-    if ((gMain.heldKeys & 0x40) && gUnknown_020388CC->unk5E > -0x34)
+    u8 event = INPUT_EVENT_NONE;
+
+    gRegionMap->unk6A = 0;
+    gRegionMap->unk68 = 0;
+    if ((gMain.heldKeys & DPAD_UP) && gRegionMap->scrollY > -52)
     {
-        gUnknown_020388CC->unk68 = -1;
-        r4 = 1;
+        gRegionMap->unk68 = -1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & 0x80) && gUnknown_020388CC->unk5E < 0x3C)
+    if ((gMain.heldKeys & DPAD_DOWN) && gRegionMap->scrollY < 60)
     {
-        gUnknown_020388CC->unk68 = 1;
-        r4 = 1;
+        gRegionMap->unk68 = 1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & 0x20) && gUnknown_020388CC->unk5C > -0x2C)
+    if ((gMain.heldKeys & DPAD_LEFT) && gRegionMap->scrollX > -44)
     {
-        gUnknown_020388CC->unk6A = -1;
-        r4 = 1;
+        gRegionMap->unk6A = -1;
+        event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & 0x10) && gUnknown_020388CC->unk5C < 0xAC)
+    if ((gMain.heldKeys & DPAD_RIGHT) && gRegionMap->scrollX < 172)
     {
-        gUnknown_020388CC->unk6A = 1;
-        r4 = 1;
+        gRegionMap->unk6A = 1;
+        event = INPUT_EVENT_DPAD;
     }
+
     if (gMain.newKeys & A_BUTTON)
-        r4 = 4;
+        event = INPUT_EVENT_A_BUTTON;
     if (gMain.newKeys & B_BUTTON)
-        r4 = 5;
-    if (r4 == 1)
+        event = INPUT_EVENT_B_BUTTON;
+
+    if (event == INPUT_EVENT_DPAD)
     {
-        gUnknown_020388CC->unk18 = sub_80FADE4;
-        gUnknown_020388CC->unk6C = 0;
+        gRegionMap->inputCallback = sub_80FADE4;
+        gRegionMap->unk6C = 0;
     }
-    return r4;
+    return event;
 }
 
 u8 sub_80FADE4(void)
 {
-    gUnknown_020388CC->unk5E += gUnknown_020388CC->unk68;
-    gUnknown_020388CC->unk5C += gUnknown_020388CC->unk6A;
-    sub_80FB238(gUnknown_020388CC->unk5C, gUnknown_020388CC->unk5E);
-    gUnknown_020388CC->unk6C++;
-    if (gUnknown_020388CC->unk6C == 8)
+    gRegionMap->scrollY += gRegionMap->unk68;
+    gRegionMap->scrollX += gRegionMap->unk6A;
+    sub_80FB238(gRegionMap->scrollX, gRegionMap->scrollY);
+    gRegionMap->unk6C++;
+    if (gRegionMap->unk6C == 8)
     {
-        u16 r3 = (gUnknown_020388CC->unk5C + 0x2C) / 8 + 1;
-        u16 r1 = (gUnknown_020388CC->unk5E + 0x34) / 8 + 2;
+        u16 r3 = (gRegionMap->scrollX + 44) / 8 + 1;
+        u16 r1 = (gRegionMap->scrollY + 52) / 8 + 2;
 
-        if (r3 != gUnknown_020388CC->unk64 || r1 != gUnknown_020388CC->unk66)
+        if (r3 != gRegionMap->unk64 || r1 != gRegionMap->unk66)
         {
-            u16 r4;
+            u16 mapSecId;
 
-            gUnknown_020388CC->unk64 = r3;
-            gUnknown_020388CC->unk66 = r1;
-            r4 = GetRegionMapSectionAt(r3, r1);
-            gUnknown_020388CC->unk16 = sub_80FB758(r4);
-            if (r4 != gUnknown_020388CC->unk14)
+            gRegionMap->unk64 = r3;
+            gRegionMap->unk66 = r1;
+            mapSecId = GetRegionMapSectionAt(r3, r1);
+            gRegionMap->unk16 = sub_80FB758(mapSecId);
+            if (mapSecId != gRegionMap->mapSecId)
             {
-                gUnknown_020388CC->unk14 = r4;
-                sub_80FBFB4(gUnknown_020388CC->filler0, gUnknown_020388CC->unk14, 16);
+                gRegionMap->mapSecId = mapSecId;
+                GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             }
             sub_80FBA18();
         }
-        gUnknown_020388CC->unk6C = 0;
-        gUnknown_020388CC->unk18 = sub_80FAD04;
-        return 3;
+        gRegionMap->unk6C = 0;
+        gRegionMap->inputCallback = sub_80FAD04;
+        return INPUT_EVENT_3;
     }
-    return 2;
+    return INPUT_EVENT_2;
 }
 
 void sub_80FAEC4(void)
 {
-    if (gUnknown_020388CC->unk78 == 0)
+    if (gRegionMap->zoomed == FALSE)
     {
-        gUnknown_020388CC->unk5E = 0;
-        gUnknown_020388CC->unk5C = 0;
-        gUnknown_020388CC->unk40 = 0;
-        gUnknown_020388CC->unk3C = 0;
-        gUnknown_020388CC->unk60 = gUnknown_020388CC->unk54 * 8 - 0x34;
-        gUnknown_020388CC->unk62 = gUnknown_020388CC->unk56 * 8 - 0x44;
-        gUnknown_020388CC->unk44 = (gUnknown_020388CC->unk60 << 8) / 16;
-        gUnknown_020388CC->unk48 = (gUnknown_020388CC->unk62 << 8) / 16;
-        gUnknown_020388CC->unk64 = gUnknown_020388CC->unk54;
-        gUnknown_020388CC->unk66 = gUnknown_020388CC->unk56;
-        gUnknown_020388CC->unk4C = 0x10000;
-        gUnknown_020388CC->unk50 = -0x800;
+        gRegionMap->scrollY = 0;
+        gRegionMap->scrollX = 0;
+        gRegionMap->unk40 = 0;
+        gRegionMap->unk3C = 0;
+        gRegionMap->unk60 = gRegionMap->cursorPosX * 8 - 52;
+        gRegionMap->unk62 = gRegionMap->cursorPosY * 8 - 68;
+        gRegionMap->unk44 = (gRegionMap->unk60 << 8) / 16;
+        gRegionMap->unk48 = (gRegionMap->unk62 << 8) / 16;
+        gRegionMap->unk64 = gRegionMap->cursorPosX;
+        gRegionMap->unk66 = gRegionMap->cursorPosY;
+        gRegionMap->unk4C = (256 << 8);
+        gRegionMap->unk50 = -0x800;
     }
     else
     {
-        gUnknown_020388CC->unk3C = gUnknown_020388CC->unk5C * 256;
-        gUnknown_020388CC->unk40 = gUnknown_020388CC->unk5E * 256;
-        gUnknown_020388CC->unk60 = 0;
-        gUnknown_020388CC->unk62 = 0;
-        gUnknown_020388CC->unk44 = -(gUnknown_020388CC->unk3C / 16);
-        gUnknown_020388CC->unk48 = -(gUnknown_020388CC->unk40 / 16);
-        gUnknown_020388CC->unk54 = gUnknown_020388CC->unk64;
-        gUnknown_020388CC->unk56 = gUnknown_020388CC->unk66;
-        gUnknown_020388CC->unk4C = 0x8000;
-        gUnknown_020388CC->unk50 = 0x800;
+        gRegionMap->unk3C = gRegionMap->scrollX * 256;
+        gRegionMap->unk40 = gRegionMap->scrollY * 256;
+        gRegionMap->unk60 = 0;
+        gRegionMap->unk62 = 0;
+        gRegionMap->unk44 = -(gRegionMap->unk3C / 16);
+        gRegionMap->unk48 = -(gRegionMap->unk40 / 16);
+        gRegionMap->cursorPosX = gRegionMap->unk64;
+        gRegionMap->cursorPosY = gRegionMap->unk66;
+        gRegionMap->unk4C = (128 << 8);
+        gRegionMap->unk50 = 0x800;
     }
-    gUnknown_020388CC->unk6E = 0;
+    gRegionMap->unk6E = 0;
     sub_80FBCA0();
     sub_80FBDF8();
 }
@@ -529,129 +593,128 @@ u8 sub_80FAFC0(void)
 {
     u8 r4;
 
-    if (gUnknown_020388CC->unk6E > 15)
+    if (gRegionMap->unk6E >= 16)
         return 0;
-    gUnknown_020388CC->unk6E++;
-    if (gUnknown_020388CC->unk6E == 16)
+    gRegionMap->unk6E++;
+    if (gRegionMap->unk6E == 16)
     {
-        gUnknown_020388CC->unk44 = 0;
-        gUnknown_020388CC->unk48 = 0;
-        gUnknown_020388CC->unk5C = gUnknown_020388CC->unk60;
-        gUnknown_020388CC->unk5E = gUnknown_020388CC->unk62;
-        gUnknown_020388CC->unk4C = (gUnknown_020388CC->unk78 == 0) ? 0x8000 : 0x10000;
-        gUnknown_020388CC->unk78 = (gUnknown_020388CC->unk78 == 0) ? 1 : 0;
-        gUnknown_020388CC->unk18 = (gUnknown_020388CC->unk78 == 0) ? sub_80FAB78 : sub_80FAD04;
-        sub_80FBB3C(gUnknown_020388CC->unk58, gUnknown_020388CC->unk5A);
+        gRegionMap->unk44 = 0;
+        gRegionMap->unk48 = 0;
+        gRegionMap->scrollX = gRegionMap->unk60;
+        gRegionMap->scrollY = gRegionMap->unk62;
+        gRegionMap->unk4C = (gRegionMap->zoomed == FALSE) ? (128 << 8) : (256 << 8);
+        gRegionMap->zoomed = !gRegionMap->zoomed;
+        gRegionMap->inputCallback = (gRegionMap->zoomed == FALSE) ? sub_80FAB78 : sub_80FAD04;
+        CreateRegionMapCursorIcon(gRegionMap->cursorIconTileTag, gRegionMap->cursorIconPaletteTag);
         sub_80FBE24();
         r4 = 0;
     }
     else
     {
-        gUnknown_020388CC->unk3C += gUnknown_020388CC->unk44;
-        gUnknown_020388CC->unk40 += gUnknown_020388CC->unk48;
-        gUnknown_020388CC->unk5C = gUnknown_020388CC->unk3C >> 8;
-        gUnknown_020388CC->unk5E = gUnknown_020388CC->unk40 >> 8;
-        gUnknown_020388CC->unk4C += gUnknown_020388CC->unk50;
-        if ((gUnknown_020388CC->unk44 < 0 && gUnknown_020388CC->unk5C < gUnknown_020388CC->unk60)
-         || (gUnknown_020388CC->unk44 > 0 && gUnknown_020388CC->unk5C > gUnknown_020388CC->unk60))
+        gRegionMap->unk3C += gRegionMap->unk44;
+        gRegionMap->unk40 += gRegionMap->unk48;
+        gRegionMap->scrollX = gRegionMap->unk3C >> 8;
+        gRegionMap->scrollY = gRegionMap->unk40 >> 8;
+        gRegionMap->unk4C += gRegionMap->unk50;
+        if ((gRegionMap->unk44 < 0 && gRegionMap->scrollX < gRegionMap->unk60)
+         || (gRegionMap->unk44 > 0 && gRegionMap->scrollX > gRegionMap->unk60))
         {
-            gUnknown_020388CC->unk5C = gUnknown_020388CC->unk60;
-            gUnknown_020388CC->unk44 = 0;
+            gRegionMap->scrollX = gRegionMap->unk60;
+            gRegionMap->unk44 = 0;
         }
-        if ((gUnknown_020388CC->unk48 < 0 && gUnknown_020388CC->unk5E < gUnknown_020388CC->unk62)
-         || (gUnknown_020388CC->unk48 > 0 && gUnknown_020388CC->unk5E > gUnknown_020388CC->unk62))
+        if ((gRegionMap->unk48 < 0 && gRegionMap->scrollY < gRegionMap->unk62)
+         || (gRegionMap->unk48 > 0 && gRegionMap->scrollY > gRegionMap->unk62))
         {
-            gUnknown_020388CC->unk5E = gUnknown_020388CC->unk62;
-            gUnknown_020388CC->unk48 = 0;
+            gRegionMap->scrollY = gRegionMap->unk62;
+            gRegionMap->unk48 = 0;
         }
-        if (gUnknown_020388CC->unk78 == 0)
+        if (gRegionMap->zoomed == FALSE)
         {
-            if (gUnknown_020388CC->unk4C < 0x8000)
+            if (gRegionMap->unk4C < (128 << 8))
             {
-                gUnknown_020388CC->unk4C = 0x8000;
-                gUnknown_020388CC->unk50 = 0;
+                gRegionMap->unk4C = (128 << 8);
+                gRegionMap->unk50 = 0;
             }
         }
         else
         {
-            if (gUnknown_020388CC->unk4C > 0x10000)
+            if (gRegionMap->unk4C > (256 << 8))
             {
-                gUnknown_020388CC->unk4C = 0x10000;
-                gUnknown_020388CC->unk50 = 0;
+                gRegionMap->unk4C = (256 << 8);
+                gRegionMap->unk50 = 0;
             }
         }
         r4 = 1;
     }
-    sub_80FB170(gUnknown_020388CC->unk5C, gUnknown_020388CC->unk5E, 0x38, 0x48, gUnknown_020388CC->unk4C >> 8, gUnknown_020388CC->unk4C >> 8, 0);
+    CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, gRegionMap->unk4C >> 8, gRegionMap->unk4C >> 8, 0);
     return r4;
 }
 
-void sub_80FB170(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 g)
+void CalcZoomScrollParams(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 rotation)
 {
     s32 var1;
     s32 var2;
     s32 var3;
     s32 var4;
 
-    gUnknown_020388CC->unk2C = e * gSineTable[g + 64] >> 8;
-    gUnknown_020388CC->unk30 = e * -gSineTable[g] >> 8;
-    gUnknown_020388CC->unk34 = f * gSineTable[g] >> 8;
-    gUnknown_020388CC->unk38 = f * gSineTable[g + 64] >> 8;
+    gRegionMap->unk2C = e * gSineTable[rotation + 64] >> 8;
+    gRegionMap->unk30 = e * -gSineTable[rotation] >> 8;
+    gRegionMap->unk34 = f * gSineTable[rotation] >> 8;
+    gRegionMap->unk38 = f * gSineTable[rotation + 64] >> 8;
 
     var1 = (a << 8) + (c << 8);
-    var2 = d * gUnknown_020388CC->unk34 + gUnknown_020388CC->unk2C * c;
-    gUnknown_020388CC->unk24 = var1 - var2;
+    var2 = d * gRegionMap->unk34 + gRegionMap->unk2C * c;
+    gRegionMap->bg2x = var1 - var2;
 
     var3 = (b << 8) + (d << 8);
-    var4 = gUnknown_020388CC->unk38 * d + gUnknown_020388CC->unk30 * c;
-    gUnknown_020388CC->unk28 = var3 - var4;
+    var4 = gRegionMap->unk38 * d + gRegionMap->unk30 * c;
+    gRegionMap->bg2y = var3 - var4;
 
-    gUnknown_020388CC->unk7D = 1;
+    gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-void sub_80FB238(s16 a, s16 b)
+void sub_80FB238(s16 x, s16 y)
 {
-    gUnknown_020388CC->unk24 = 0x1C00 + (a << 8);
-    gUnknown_020388CC->unk28 = 0x2400 + (b << 8);
-    gUnknown_020388CC->unk7D = 1;
+    gRegionMap->bg2x = (0x1C << 8) + (x << 8);
+    gRegionMap->bg2y = (0x24 << 8) + (y << 8);
+    gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-void sub_80FB260(void)
+void UpdateRegionMapVideoRegs(void)
 {
-    if (gUnknown_020388CC->unk7D != 0)
+    if (gRegionMap->needUpdateVideoRegs)
     {
-        REG_BG2PA = gUnknown_020388CC->unk2C;
-        REG_BG2PB = gUnknown_020388CC->unk34;
-        REG_BG2PC = gUnknown_020388CC->unk30;
-        REG_BG2PD = gUnknown_020388CC->unk38;
-        REG_BG2X = gUnknown_020388CC->unk24;
-        REG_BG2Y = gUnknown_020388CC->unk28;
-        gUnknown_020388CC->unk7D = 0;
+        REG_BG2PA = gRegionMap->unk2C;
+        REG_BG2PB = gRegionMap->unk34;
+        REG_BG2PC = gRegionMap->unk30;
+        REG_BG2PD = gRegionMap->unk38;
+        REG_BG2X = gRegionMap->bg2x;
+        REG_BG2Y = gRegionMap->bg2y;
+        gRegionMap->needUpdateVideoRegs = FALSE;
     }
 }
 
 void sub_80FB2A4(s16 a, s16 b)
 {
-    sub_80FB170(a, b, 0x38, 0x48, 0x100, 0x100, 0);
-    sub_80FB260();
-    if (gUnknown_020388CC->unk20 != NULL)
+    CalcZoomScrollParams(a, b, 0x38, 0x48, 0x100, 0x100, 0);
+    UpdateRegionMapVideoRegs();
+    if (gRegionMap->playerIconSprite != NULL)
     {
-        gUnknown_020388CC->unk20->pos2.x = -a;
-        gUnknown_020388CC->unk20->pos2.y = -b;
+        gRegionMap->playerIconSprite->pos2.x = -a;
+        gRegionMap->playerIconSprite->pos2.y = -b;
     }
 }
 
 u16 GetRegionMapSectionAt(u16 x, u16 y)
 {
-
-    if (y < 2 || y > 16 || x < 1 || x > 0x1C)
-        return 0x58;
-    y -= 2;
-    x -= 1;
+    if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
+        return MAPSEC_NONE;
+    y -= MAPCURSOR_Y_MIN;
+    x -= MAPCURSOR_X_MIN;
     return gRegionMapSections[x + y * 28];
 }
 
-void sub_80FB32C(void)
+void InitializeCursorPosition(void)
 {
     struct MapHeader *mapHeader;
     u16 mapWidth;
@@ -661,7 +724,10 @@ void sub_80FB32C(void)
     u16 r1;
     u16 r9;
 
-    if (gSaveBlock1.location.mapGroup == 0x19 && (gSaveBlock1.location.mapNum == 0x29 || gSaveBlock1.location.mapNum == 0x2A || gSaveBlock1.location.mapNum == 0x2B))
+    if (gSaveBlock1.location.mapGroup == 25
+     && (gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_CORRIDOR
+      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_LOWER_DECK
+      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_ROOMS))
     {
         sub_80FB600();
         return;
@@ -675,20 +741,20 @@ void sub_80FB32C(void)
     case 2:
     case 4:
     case 5:
-        gUnknown_020388CC->unk14 = gMapHeader.name;
-        gUnknown_020388CC->unk7F = 0;
+        gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+        gRegionMap->playerIsInCave = FALSE;
         mapWidth = gMapHeader.mapData->width;
         mapHeight = gMapHeader.mapData->height;
         x = gSaveBlock1.pos.x;
         y = gSaveBlock1.pos.y;
-        if (gUnknown_020388CC->unk14 == 0x45)
-            gUnknown_020388CC->unk7F = 1;
+        if (gRegionMap->mapSecId == MAPSEC_UNDERWATER6)
+            gRegionMap->playerIsInCave = TRUE;
         break;
     case 3:
     case 6:
         mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp4.mapGroup, gSaveBlock1.warp4.mapNum);
-        gUnknown_020388CC->unk14 = mapHeader->name;
-        gUnknown_020388CC->unk7F = 1;
+        gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+        gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
         mapHeight = mapHeader->mapData->height;
         x = gSaveBlock1.warp4.x;
@@ -696,8 +762,8 @@ void sub_80FB32C(void)
         break;
     case 8:
         mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
-        gUnknown_020388CC->unk14 = mapHeader->name;
-        gUnknown_020388CC->unk7F = 1;
+        gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+        gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
         mapHeight = mapHeader->mapData->height;
         x = gSaveBlock1.warp2.x;
@@ -707,8 +773,8 @@ void sub_80FB32C(void)
         {
             struct WarpData *r4;
 
-            gUnknown_020388CC->unk14 = gMapHeader.name;
-            if (gUnknown_020388CC->unk14 != 0x57)
+            gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+            if (gRegionMap->mapSecId != MAPSEC_UNK_0x57)
             {
                 r4 = &gSaveBlock1.warp4;
                 mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
@@ -717,9 +783,9 @@ void sub_80FB32C(void)
             {
                 r4 = &gSaveBlock1.warp2;
                 mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
-                gUnknown_020388CC->unk14 = mapHeader->name;
+                gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
-            gUnknown_020388CC->unk7F = 0;
+            gRegionMap->playerIsInCave = FALSE;
             mapWidth = mapHeader->mapData->width;
             mapHeight = mapHeader->mapData->height;
             x = r4->x;
@@ -730,28 +796,28 @@ void sub_80FB32C(void)
 
     r9 = x;
 
-    r1 = mapWidth / gRegionMapLocations[gUnknown_020388CC->unk14].width;
+    r1 = mapWidth / gRegionMapLocations[gRegionMap->mapSecId].width;
     if (r1 == 0)
         r1 = 1;
     x /= r1;
-    if (x >= gRegionMapLocations[gUnknown_020388CC->unk14].width)
-        x = gRegionMapLocations[gUnknown_020388CC->unk14].width - 1;
+    if (x >= gRegionMapLocations[gRegionMap->mapSecId].width)
+        x = gRegionMapLocations[gRegionMap->mapSecId].width - 1;
 
-    r1 = mapHeight / gRegionMapLocations[gUnknown_020388CC->unk14].height;
+    r1 = mapHeight / gRegionMapLocations[gRegionMap->mapSecId].height;
     if (r1 == 0)
         r1 = 1;
     y /= r1;
-    if (y >= gRegionMapLocations[gUnknown_020388CC->unk14].height)
-        y = gRegionMapLocations[gUnknown_020388CC->unk14].height - 1;
+    if (y >= gRegionMapLocations[gRegionMap->mapSecId].height)
+        y = gRegionMapLocations[gRegionMap->mapSecId].height - 1;
 
-    switch (gUnknown_020388CC->unk14)
+    switch (gRegionMap->mapSecId)
     {
-    case 0x1D:
+    case MAPSEC_ROUTE_114:
         if (y != 0)
             x = 0;
         break;
-    case 0x29:
-    case 0x33:
+    case MAPSEC_ROUTE_126:
+    case MAPSEC_UNDERWATER2:
         x = 0;
         if (gSaveBlock1.pos.x > 32)
             x = 1;
@@ -763,7 +829,7 @@ void sub_80FB32C(void)
         if (gSaveBlock1.pos.y > 0x38)
             y++;
         break;
-    case 0x24:
+    case MAPSEC_ROUTE_121:
         x = 0;
         if (r9 > 14)
             x = 1;
@@ -773,8 +839,8 @@ void sub_80FB32C(void)
             x++;
         break;
     }
-    gUnknown_020388CC->unk54 = gRegionMapLocations[gUnknown_020388CC->unk14].x + x + 1;
-    gUnknown_020388CC->unk56 = gRegionMapLocations[gUnknown_020388CC->unk14].y + y + 2;
+    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
 void sub_80FB600(void)
@@ -789,16 +855,16 @@ void sub_80FB600(void)
     switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
     {
     case 1:
-        gUnknown_020388CC->unk14 = 8;
+        gRegionMap->mapSecId = MAPSEC_SLATEPORT_CITY;
         break;
     case 2:
-        gUnknown_020388CC->unk14 = 12;
+        gRegionMap->mapSecId = MAPSEC_LILYCOVE_CITY;
         break;
     case 3:
-        gUnknown_020388CC->unk14 = 0x27;
+        gRegionMap->mapSecId = MAPSEC_ROUTE_124;
         break;
     case 4:
-        gUnknown_020388CC->unk14 = 0x2E;
+        gRegionMap->mapSecId = MAPSEC_ROUTE_131;
         break;
     default:
     case 0:
@@ -806,70 +872,71 @@ void sub_80FB600(void)
             struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
             u16 r1;
 
-            gUnknown_020388CC->unk14 = mapHeader->name;
-            r1 = mapHeader->mapData->width / gRegionMapLocations[gUnknown_020388CC->unk14].width;
+            gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+            r1 = mapHeader->mapData->width / gRegionMapLocations[gRegionMap->mapSecId].width;
             if (r1 == 0)
                 r1 = 1;
             x = sp2 / r1;
-            if (x >= gRegionMapLocations[gUnknown_020388CC->unk14].width)
-                x = gRegionMapLocations[gUnknown_020388CC->unk14].width - 1;
+            if (x >= gRegionMapLocations[gRegionMap->mapSecId].width)
+                x = gRegionMapLocations[gRegionMap->mapSecId].width - 1;
 
-            r1 = mapHeader->mapData->height / gRegionMapLocations[gUnknown_020388CC->unk14].height;
+            r1 = mapHeader->mapData->height / gRegionMapLocations[gRegionMap->mapSecId].height;
             if (r1 == 0)
                 r1 = 1;
             y = sp4 / r1;
-            if (y >= gRegionMapLocations[gUnknown_020388CC->unk14].height)
-                y = gRegionMapLocations[gUnknown_020388CC->unk14].height - 1;
+            if (y >= gRegionMapLocations[gRegionMap->mapSecId].height)
+                y = gRegionMapLocations[gRegionMap->mapSecId].height - 1;
         }
         break;
     }
-    gUnknown_020388CC->unk7F = 0;
-    gUnknown_020388CC->unk54 = gRegionMapLocations[gUnknown_020388CC->unk14].x + x + 1;
-    gUnknown_020388CC->unk56 = gRegionMapLocations[gUnknown_020388CC->unk14].y + y + 2;
+    gRegionMap->playerIsInCave = FALSE;
+    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
-u16 sub_80FB758(u16 a)
+u16 sub_80FB758(u16 mapSecId)
 {
-    switch (a)
+    switch (mapSecId)
     {
-    case 88:
+    case MAPSEC_NONE:
         return 0;
-    case 0:
-        return FlagGet(0x80F) ? 2 : 3;
-    case 1:
-        return FlagGet(0x810) ? 2 : 3;
-    case 2:
-        return FlagGet(0x811) ? 2 : 3;
-    case 3:
-        return FlagGet(0x812) ? 2 : 3;
-    case 4:
-        return FlagGet(0x813) ? 2 : 3;
-    case 5:
-        return FlagGet(0x814) ? 2 : 3;
-    case 6:
-        return FlagGet(0x815) ? 2 : 3;
-    case 7:
-        return FlagGet(0x816) ? 2 : 3;
-    case 8:
-        return FlagGet(0x817) ? 2 : 3;
-    case 9:
-        return FlagGet(0x818) ? 2 : 3;
-    case 10:
-        return FlagGet(0x819) ? 2 : 3;
-    case 11:
-        return FlagGet(0x81A) ? 2 : 3;
-    case 12:
-        return FlagGet(0x81B) ? 2 : 3;
-    case 13:
-        return FlagGet(0x81C) ? 2 : 3;
-    case 14:
-        return FlagGet(0x81D) ? 2 : 3;
-    case 15:
-        return FlagGet(0x81E) ? 2 : 3;
-    case 58:
-        return FlagGet(0x848) ? 4 : 0;
-    case 73:
-        return FlagGet(0x849) ? 1 : 0;
+    case MAPSEC_LITTLEROOT_TOWN:
+        return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? 2 : 3;
+    case MAPSEC_OLDALE_TOWN:
+        return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? 2 : 3;
+    case MAPSEC_DEWFORD_TOWN:
+        return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? 2 : 3;
+    case MAPSEC_LAVARIDGE_TOWN:
+        return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? 2 : 3;
+    case MAPSEC_FALLARBOR_TOWN:
+        return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? 2 : 3;
+    case MAPSEC_VERDANTURF_TOWN:
+        return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? 2 : 3;
+    case MAPSEC_PACIFIDLOG_TOWN:
+        return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? 2 : 3;
+    case MAPSEC_PETALBURG_CITY:
+        return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? 2 : 3;
+    case MAPSEC_SLATEPORT_CITY:
+        return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? 2 : 3;
+    case MAPSEC_MAUVILLE_CITY:
+        return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? 2 : 3;
+    case MAPSEC_RUSTBORO_CITY:
+        return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? 2 : 3;
+    case MAPSEC_FORTREE_CITY:
+        return FlagGet(FLAG_VISITED_FORTREE_CITY) ? 2 : 3;
+    case MAPSEC_LILYCOVE_CITY:
+        return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? 2 : 3;
+    case MAPSEC_MOSSDEEP_CITY:
+        return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? 2 : 3;
+    case MAPSEC_SOOTOPOLIS_CITY:
+        return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? 2 : 3;
+    case MAPSEC_EVER_GRANDE_CITY:
+        return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
+
+    case MAPSEC_BATTLE_TOWER:
+        return FlagGet(FLAG_UNLOCK_BATTLE_TOWER) ? 4 : 0;
+    case MAPSEC_SOUTHERN_ISLAND:
+        return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
     default:
         return 1;
     }
@@ -880,22 +947,21 @@ u16 GetRegionMapSectionAt_(u16 x, u16 y)
     return GetRegionMapSectionAt(x, y);
 }
 
-u16 sub_80FB9C0(u16 a)
+u16 sub_80FB9C0(u16 mapSecId)
 {
-    u16 i = 0;
+    u16 i;
 
-    while (gUnknown_083E7684[i][0] != 88)
+    for (i = 0; gUnknown_083E7684[i][0] != MAPSEC_NONE; i++)
     {
-        if (gUnknown_083E7684[i][0] == a)
+        if (gUnknown_083E7684[i][0] == mapSecId)
             return gUnknown_083E7684[i][1];
-        i++;
     }
-    return a;
+    return mapSecId;
 }
 
-u16 sub_80FBA04(u16 a)
+u16 sub_80FBA04(u16 mapSecId)
 {
-    return sub_80FB9C0(a);
+    return sub_80FB9C0(mapSecId);
 }
 
 void sub_80FBA18(void)
@@ -904,21 +970,21 @@ void sub_80FBA18(void)
     u16 y;
     u16 i;
 
-    if (gUnknown_020388CC->unk14 == 88)
+    if (gRegionMap->mapSecId == MAPSEC_NONE)
     {
-        gUnknown_020388CC->unk17 = 0;
+        gRegionMap->everGrandeCityArea = 0;
         return;
     }
 
-    if (gUnknown_020388CC->unk78 == 0)
+    if (gRegionMap->zoomed == FALSE)
     {
-        x = gUnknown_020388CC->unk54;
-        y = gUnknown_020388CC->unk56;
+        x = gRegionMap->cursorPosX;
+        y = gRegionMap->cursorPosY;
     }
     else
     {
-        x = gUnknown_020388CC->unk64;
-        y = gUnknown_020388CC->unk66;
+        x = gRegionMap->unk64;
+        y = gRegionMap->unk66;
     }
 
     i = 0;
@@ -926,7 +992,7 @@ void sub_80FBA18(void)
     {
         if (x <= 1)
         {
-            if (sub_80FBAA0(y) != 0)
+            if (sub_80FBAA0(y))
             {
                 y--;
                 x = 0x1D;
@@ -939,36 +1005,34 @@ void sub_80FBA18(void)
         else
         {
             x--;
-            if (GetRegionMapSectionAt(x, y) == gUnknown_020388CC->unk14)
+            if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSecId)
                 i++;
         }
     }
 
-    gUnknown_020388CC->unk17 = i;
+    gRegionMap->everGrandeCityArea = i;
 }
 
-u8 sub_80FBAA0(u16 a)
+bool8 sub_80FBAA0(u16 a)
 {
     u16 x;
     u16 y;
 
     y = a - 1;
     if (y == 0xFFFF)
-        return 0;
+        return FALSE;
 
-    x = 1;
-    while (x < 0x1D)
+    for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x++)
     {
-        if (GetRegionMapSectionAt(x, y) == gUnknown_020388CC->unk14)
-            return 1;
-        x++;
+        if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSecId)
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 
 
-const struct OamData gOamData_83E76B8 =
+const struct OamData gCursorIconOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -1001,19 +1065,19 @@ const union AnimCmd gSpriteAnim_83E76CC[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gSpriteAnimTable_83E76E0[] =
+const union AnimCmd *const gCursorIconAnimTable[] =
 {
     gSpriteAnim_83E76C0,
     gSpriteAnim_83E76CC,
 };
 
-void sub_80FBAF0(struct Sprite *sprite)
+void SpriteCB_CursorIcon(struct Sprite *sprite)
 {
-    if (gUnknown_020388CC->unk7A != 0)
+    if (gRegionMap->unk7A != 0)
     {
-        sprite->pos1.x += gUnknown_020388CC->unk7B * 2;
-        sprite->pos1.y += gUnknown_020388CC->unk7C * 2;
-        gUnknown_020388CC->unk7A--;
+        sprite->pos1.x += gRegionMap->cursorDeltaX * 2;
+        sprite->pos1.y += gRegionMap->cursorDeltaY * 2;
+        gRegionMap->unk7A--;
     }
 }
 
@@ -1021,7 +1085,7 @@ void nullsub_66(struct Sprite *sprite)
 {
 }
 
-void sub_80FBB3C(u16 tileTag, u16 paletteTag)
+void CreateRegionMapCursorIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet;
@@ -1031,30 +1095,30 @@ void sub_80FBB3C(u16 tileTag, u16 paletteTag)
     };
     struct SpriteTemplate spriteTemplate =
     {
-        .oam = &gOamData_83E76B8,
-        .anims = gSpriteAnimTable_83E76E0,
+        .oam = &gCursorIconOamData,
+        .anims = gCursorIconAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = sub_80FBAF0,
+        .callback = SpriteCB_CursorIcon,
     };
 
     spriteSheet.tag = tileTag;
     spriteTemplate.tileTag = tileTag;
-    gUnknown_020388CC->unk58 = tileTag;
+    gRegionMap->cursorIconTileTag = tileTag;
 
     spritePalette.tag = paletteTag;
     spriteTemplate.paletteTag = paletteTag;
-    gUnknown_020388CC->unk5A = paletteTag;
+    gRegionMap->cursorIconPaletteTag = paletteTag;
 
-    if (gUnknown_020388CC->unk78 == 0)
+    if (gRegionMap->zoomed == FALSE)
     {
-        spriteSheet.data = gUnknown_020388CC->unk180;
+        spriteSheet.data = gRegionMap->unk180;
         spriteSheet.size = 0x100;
-        spriteTemplate.callback = sub_80FBAF0;
+        spriteTemplate.callback = SpriteCB_CursorIcon;
     }
     else
     {
-        spriteSheet.data = gUnknown_020388CC->unk280;
+        spriteSheet.data = gRegionMap->unk280;
         spriteSheet.size = 0x600;
         spriteTemplate.callback = nullsub_66;
     }
@@ -1063,44 +1127,44 @@ void sub_80FBB3C(u16 tileTag, u16 paletteTag)
     spriteId = CreateSprite(&spriteTemplate, 0x38, 0x48, 0);
     if (spriteId != 64)
     {
-        gUnknown_020388CC->unk1C = &gSprites[spriteId];
-        if (gUnknown_020388CC->unk78 == 1)
+        gRegionMap->cursorIconSprite = &gSprites[spriteId];
+        if (gRegionMap->zoomed == TRUE)
         {
-            gUnknown_020388CC->unk1C->oam.size = 2;
-            gUnknown_020388CC->unk1C->pos1.x -= 8;
-            gUnknown_020388CC->unk1C->pos1.y -= 8;
-            StartSpriteAnim(gUnknown_020388CC->unk1C, 1);
+            gRegionMap->cursorIconSprite->oam.size = 2;
+            gRegionMap->cursorIconSprite->pos1.x -= 8;
+            gRegionMap->cursorIconSprite->pos1.y -= 8;
+            StartSpriteAnim(gRegionMap->cursorIconSprite, 1);
         }
         else
         {
-            gUnknown_020388CC->unk1C->oam.size = 1;
-            gUnknown_020388CC->unk1C->pos1.x = gUnknown_020388CC->unk54 * 8 + 4;
-            gUnknown_020388CC->unk1C->pos1.y = gUnknown_020388CC->unk56 * 8 + 4;
+            gRegionMap->cursorIconSprite->oam.size = 1;
+            gRegionMap->cursorIconSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
+            gRegionMap->cursorIconSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
         }
-        gUnknown_020388CC->unk1C->data1 = 2;
-        gUnknown_020388CC->unk1C->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
-        gUnknown_020388CC->unk1C->data3 = 1;
+        gRegionMap->cursorIconSprite->data1 = 2;
+        gRegionMap->cursorIconSprite->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
+        gRegionMap->cursorIconSprite->data3 = 1;
     }
 }
 
 void sub_80FBCA0(void)
 {
-    if (gUnknown_020388CC->unk1C != NULL)
+    if (gRegionMap->cursorIconSprite != NULL)
     {
-        DestroySprite(gUnknown_020388CC->unk1C);
-        FreeSpriteTilesByTag(gUnknown_020388CC->unk58);
-        FreeSpritePaletteByTag(gUnknown_020388CC->unk5A);
+        DestroySprite(gRegionMap->cursorIconSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorIconTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorIconPaletteTag);
     }
 }
 
 void unref_sub_80FBCD0(void)
 {
-    gUnknown_020388CC->unk1C->data3 = 1;
+    gRegionMap->cursorIconSprite->data3 = 1;
 }
 
 void unref_sub_80FBCE0(void)
 {
-    gUnknown_020388CC->unk1C->data3 = 0;
+    gRegionMap->cursorIconSprite->data3 = 0;
 }
 
 const struct OamData gOamData_083E7708 =
@@ -1131,7 +1195,7 @@ const union AnimCmd *const gSpriteAnimTable_083E7718[] =
     gSpriteAnim_83E7710,
 };
 
-void sub_80FBCF0(u16 tileTag, u16 paletteTag)
+void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet =
@@ -1164,80 +1228,82 @@ void sub_80FBCF0(u16 tileTag, u16 paletteTag)
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 1);
-    gUnknown_020388CC->unk20 = &gSprites[spriteId];
-    if (gUnknown_020388CC->unk78 == 0)
+    gRegionMap->playerIconSprite = &gSprites[spriteId];
+    if (gRegionMap->zoomed == FALSE)
     {
-        gUnknown_020388CC->unk20->pos1.x = gUnknown_020388CC->unk74 * 8 + 4;
-        gUnknown_020388CC->unk20->pos1.y = gUnknown_020388CC->unk76 * 8 + 4;
-        gUnknown_020388CC->unk20->callback = sub_80FBF34;
+        gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 8 + 4;
+        gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 8 + 4;
+        gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedOut;
     }
     else
     {
-        gUnknown_020388CC->unk20->pos1.x = gUnknown_020388CC->unk74 * 16 - 48;
-        gUnknown_020388CC->unk20->pos1.y = gUnknown_020388CC->unk76 * 16 - 66;
-        gUnknown_020388CC->unk20->callback = sub_80FBEA4;
+        gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 16 - 48;
+        gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 16 - 66;
+        gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedIn;
     }
 }
 
 void sub_80FBDF8(void)
 {
-    if (gUnknown_020388CC->unk20 != NULL)
+    if (gRegionMap->playerIconSprite != NULL)
     {
-        gUnknown_020388CC->unk20->invisible = TRUE;
-        gUnknown_020388CC->unk20->callback = SpriteCallbackDummy;
+        gRegionMap->playerIconSprite->invisible = TRUE;
+        gRegionMap->playerIconSprite->callback = SpriteCallbackDummy;
     }
 }
 
 void sub_80FBE24(void)
 {
-    if (gUnknown_020388CC->unk20 != NULL)
+    if (gRegionMap->playerIconSprite != NULL)
     {
-        if (gUnknown_020388CC->unk78 == 1)
+        if (gRegionMap->zoomed == TRUE)
         {
-            gUnknown_020388CC->unk20->pos1.x = gUnknown_020388CC->unk74 * 16 - 48;
-            gUnknown_020388CC->unk20->pos1.y = gUnknown_020388CC->unk76 * 16 - 66;
-            gUnknown_020388CC->unk20->callback = sub_80FBEA4;
-            gUnknown_020388CC->unk20->invisible = FALSE;
+            gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 16 - 48;
+            gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 16 - 66;
+            gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedIn;
+            gRegionMap->playerIconSprite->invisible = FALSE;
         }
         else
         {
-            gUnknown_020388CC->unk20->pos1.x = gUnknown_020388CC->unk74 * 8 + 4;
-            gUnknown_020388CC->unk20->pos1.y = gUnknown_020388CC->unk76 * 8 + 4;
-            gUnknown_020388CC->unk20->pos2.x = 0;
-            gUnknown_020388CC->unk20->pos2.y = 0;
-            gUnknown_020388CC->unk20->callback = sub_80FBF34;
-            gUnknown_020388CC->unk20->invisible = FALSE;
+            gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 8 + 4;
+            gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 8 + 4;
+            gRegionMap->playerIconSprite->pos2.x = 0;
+            gRegionMap->playerIconSprite->pos2.y = 0;
+            gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedOut;
+            gRegionMap->playerIconSprite->invisible = FALSE;
         }
     }
 }
 
-void sub_80FBEA4(struct Sprite *sprite)
+void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
 {
-    sprite->pos2.x = -(gUnknown_020388CC->unk5C * 2);
-    sprite->pos2.y = -(gUnknown_020388CC->unk5E * 2);
+    sprite->pos2.x = -(gRegionMap->scrollX * 2);
+    sprite->pos2.y = -(gRegionMap->scrollY * 2);
     sprite->data0 = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
     sprite->data1 = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
 
+    // Determine if sprite is on screen
     if (sprite->data0 < -8 || sprite->data0 > 0xA8 || sprite->data1 < -8 || sprite->data1 > 0xF8)
-        sprite->data2 = 0;
+        sprite->data2 = FALSE;
     else
-        sprite->data2 = 1;
+        sprite->data2 = TRUE;
 
-    if (sprite->data2 == 1)
-        sub_80FBF40(sprite);
+    if (sprite->data2 == TRUE)
+        UpdateIconBlink(sprite);
     else
         sprite->invisible = TRUE;
 }
 
-void sub_80FBF34(struct Sprite *sprite)
+void SpriteCB_PlayerIconZoomedOut(struct Sprite *sprite)
 {
-    sub_80FBF40(sprite);
+    UpdateIconBlink(sprite);
 }
 
-void sub_80FBF40(struct Sprite *sprite)
+void UpdateIconBlink(struct Sprite *sprite)
 {
-    if (gUnknown_020388CC->unk7E != 0)
+    if (gRegionMap->blinkPlayerIcon)
     {
+        // Toggle visibility every 16 frames
         sprite->data7++;
         if (sprite->data7 > 16)
         {
@@ -1253,48 +1319,48 @@ void sub_80FBF40(struct Sprite *sprite)
 
 void sub_80FBF94(void)
 {
-    if (gUnknown_020388CC->unk7F != 0)
-        gUnknown_020388CC->unk7E = 1;
+    if (gRegionMap->playerIsInCave)
+        gRegionMap->blinkPlayerIcon = TRUE;
 }
 
-const u8 *sub_80FBFB4(u8 *dest, u16 b, u16 length)
+const u8 *GetMapSectionName(u8 *dest, u16 mapSecId, u16 length)
 {
-    if (b == 86)
+    if (mapSecId == MAPSEC_SECRET_BASE)
         return GetSecretBaseMapName(dest);
-    if (b < 88)
-        return StringCopy(dest, gRegionMapLocations[b].name);
+    if (mapSecId < MAPSEC_NONE)
+        return StringCopy(dest, gRegionMapLocations[mapSecId].regionMapSectionId);
     if (length == 0)
         length = 18;
     return StringFill(dest, CHAR_SPACE, length);
 }
 
-const u8 *CopyMapName(u8 *dest, u16 b)
+const u8 *CopyMapName(u8 *dest, u16 mapSecId)
 {
-    switch (b)
+    switch (mapSecId)
     {
-    case 87:
+    case MAPSEC_UNK_0x57:
         return StringCopy(dest, gOtherText_Ferry);
-    case 86:
+    case MAPSEC_SECRET_BASE:
         return StringCopy(dest, gOtherText_SecretBase);
     default:
-        return sub_80FBFB4(dest, b, 0);
+        return GetMapSectionName(dest, mapSecId, 0);
     }
 }
 
-const u8 *CopyLocationName(u8 *dest, u16 b)
+const u8 *CopyLocationName(u8 *dest, u16 mapSecId)
 {
-    if (b == 66)
+    if (mapSecId == MAPSEC_EVIL_TEAM_HIDEOUT)
         return StringCopy(dest, gOtherText_Hideout);
     else
-        return CopyMapName(dest, b);
+        return CopyMapName(dest, mapSecId);
 }
 
-void sub_80FC04C(u16 a, u16 *x, u16 *y, u16 *width, u16 *height)
+void GetRegionMapLocationPosition(u16 mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapLocations[a].x;
-    *y = gRegionMapLocations[a].y;
-    *width = gRegionMapLocations[a].width;
-    *height = gRegionMapLocations[a].height;
+    *x = gRegionMapLocations[mapSecId].x;
+    *y = gRegionMapLocations[mapSecId].y;
+    *width = gRegionMapLocations[mapSecId].width;
+    *height = gRegionMapLocations[mapSecId].height;
 }
 
 struct UnknownStruct3
@@ -1302,14 +1368,14 @@ struct UnknownStruct3
     void (*unk0)(void);
     u16 unk4;
     u16 unk6;
-    struct UnknownStruct1 unk8;
+    struct RegionMap regionMap;
 };
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownStruct3 *)(ewram + 0))
 #define ewram888 (ewram + 0x888)
 #define ewramA6E (ewram[0xA6E])
-#define ewramA48 (ewram + 0xA48)
+#define ewramBlankMapName (ewram + 0xA48)
 
 const u16 gUnknown_083E771C[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
 const u8 gUnknown_083E773C[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
@@ -1374,15 +1440,15 @@ const u8 gUnknown_083E7920[][3] =
 struct UnknownStruct4
 {
     const u8 *const *unk0;
-    u16 unk4;
-    u16 unk6;
+    u16 mapSecId;
+    u16 flag;
 };
 
-const u8 *const Unknown_3E79B8[] = {OtherText_PokeLeague, OtherText_PokeCenter};
+const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
 
 const struct UnknownStruct4 gUnknown_083E79C0[1] =
 {
-    {Unknown_3E79B8, 15, 0x854},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, 0x854},
 };
 
 // XXX: what is this?
@@ -1390,13 +1456,15 @@ static u8 *const ewram_ = ewram;
 
 const struct SpritePalette gUnknown_083E79CC = {gPokenavMapMisc_Pal, 2};
 
-const u16 gUnknown_083E79D4[][2] =
+// Fly targets that are not cities or towns
+const u16 gSpecialFlyAreas[][2] =
 {
-    {0x848, 58},
-    {0xFFFF, 88},
+    // flag, mapSecId
+    {0x848, MAPSEC_BATTLE_TOWER},
+    {0xFFFF, MAPSEC_NONE},
 };
 
-const struct OamData gOamData_83E79DC =
+const struct OamData gFlyTargetOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -1413,71 +1481,71 @@ const struct OamData gOamData_83E79DC =
     .affineParam = 0,
 };
 
-const union AnimCmd gSpriteAnim_83E79E4[] =
+const union AnimCmd gFlyTargetAnimSeq0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E79EC[] =
+const union AnimCmd gFlyTargetAnimSeq1[] =
 {
     ANIMCMD_FRAME(1, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E79F4[] =
+const union AnimCmd gFlyTargetAnimSeq2[] =
 {
     ANIMCMD_FRAME(3, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E79FC[] =
+const union AnimCmd gFlyTargetAnimSeq3[] =
 {
     ANIMCMD_FRAME(5, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E7A04[] =
+const union AnimCmd gFlyTargetAnimSeq4[] =
 {
     ANIMCMD_FRAME(6, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E7A0C[] =
+const union AnimCmd gFlyTargetAnimSeq5[] =
 {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gSpriteAnim_83E7A14[] =
+const union AnimCmd gFlyTargetAnimSeq6[] =
 {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_83E7A1C[] =
+const union AnimCmd *const gFlyTargetAnimTable[] =
 {
-    gSpriteAnim_83E79E4,
-    gSpriteAnim_83E79EC,
-    gSpriteAnim_83E79F4,
-    gSpriteAnim_83E79FC,
-    gSpriteAnim_83E7A04,
-    gSpriteAnim_83E7A0C,
-    gSpriteAnim_83E7A14,
+    gFlyTargetAnimSeq0,
+    gFlyTargetAnimSeq1,
+    gFlyTargetAnimSeq2,
+    gFlyTargetAnimSeq3,
+    gFlyTargetAnimSeq4,
+    gFlyTargetAnimSeq5,
+    gFlyTargetAnimSeq6,
 };
 
-const struct SpriteTemplate gSpriteTemplate_83E7A38 =
+const struct SpriteTemplate gFlyTargetSpriteTemplate =
 {
     .tileTag = 2,
     .paletteTag = 2,
-    .oam = &gOamData_83E79DC,
-    .anims = gSpriteAnimTable_83E7A1C,
+    .oam = &gFlyTargetOamData,
+    .anims = gFlyTargetAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-void sub_80FC074(void)
+void CB2_InitFlyRegionMap(void)
 {
     switch (gMain.state)
     {
@@ -1505,12 +1573,12 @@ void sub_80FC074(void)
         MenuZeroFillScreen();
         break;
     case 3:
-        sub_80FA8EC(&ewram0.unk8, 0);
-        sub_80FBB3C(0, 0);
-        sub_80FBCF0(1, 1);
-        ewram0.unk6 = ewram0.unk8.unk14;
-        StringFill(ewramA48, CHAR_SPACE, 12);
-        sub_80FC254();
+        InitRegionMap(&ewram0.regionMap, 0);
+        CreateRegionMapCursorIcon(0, 0);
+        CreateRegionMapPlayerIcon(1, 1);
+        ewram0.unk6 = ewram0.regionMap.mapSecId;
+        StringFill(ewramBlankMapName, CHAR_SPACE, 12);
+        PrintFlyTargetName();
         break;
     case 4:
         LZ77UnCompVram(gUnknown_083E773C, (void *)(VRAM + 0xC000));
@@ -1523,7 +1591,7 @@ void sub_80FC074(void)
         MenuPrint_PixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
         break;
     case 7:
-        sub_80FC31C();
+        CreateFlyTargetGraphics();
         break;
     case 8:
         BlendPalettes(0xFFFFFFFF, 16, 0);
@@ -1562,24 +1630,24 @@ void sub_80FC244(void (*func)(void))
     ewram0.unk4 = 0;
 }
 
-void sub_80FC254(void)
+void PrintFlyTargetName(void)
 {
-    if (ewram0.unk8.unk16 == 2 || ewram0.unk8.unk16 == 4)
+    if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
     {
         u16 i = 0;
         int zero;
 
-        for (i = 0; i < 1; i++)
+        for (i = 0; i < ARRAY_COUNT(gUnknown_083E79C0); i++)
         {
             const struct UnknownStruct4 *r4 = &gUnknown_083E79C0[i];
 
-            if (ewram0.unk8.unk14 == r4->unk4)
+            if (ewram0.regionMap.mapSecId == r4->mapSecId)
             {
-                if (FlagGet(r4->unk6))
+                if (FlagGet(r4->flag))
                 {
                     MenuDrawTextWindow(16, 14, 29, 19);
-                    MenuPrint(ewram0.unk8.filler0, 17, 15);
-                    MenuPrint_RightAligned(r4->unk0[ewram0.unk8.unk17], 29, 17);
+                    MenuPrint(ewram0.regionMap.mapSecName, 17, 15);
+                    MenuPrint_RightAligned(r4->unk0[ewram0.regionMap.everGrandeCityArea], 29, 17);
                     return;
                 }
                 break;
@@ -1590,19 +1658,19 @@ void sub_80FC254(void)
         if (zero == 0)
         {
             MenuDrawTextWindow(16, 16, 29, 19);
-            MenuPrint(ewram0.unk8.filler0, 17, 17);
+            MenuPrint(ewram0.regionMap.mapSecName, 17, 17);
             MenuZeroFillWindowRect(16, 14, 29, 15);
         }
     }
     else
     {
         MenuDrawTextWindow(16, 16, 29, 19);
-        MenuPrint(ewramA48, 17, 17);
+        MenuPrint(ewramBlankMapName, 17, 17);
         MenuZeroFillWindowRect(16, 14, 29, 15);
     }
 }
 
-void sub_80FC31C(void)
+void CreateFlyTargetGraphics(void)
 {
     struct SpriteSheet spriteSheet;
 
@@ -1612,13 +1680,14 @@ void sub_80FC31C(void)
     spriteSheet.tag = 2;
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&gUnknown_083E79CC);
-    sub_80FC374();
-    sub_80FC484();
+    CreateCityTownFlyTargetIcons();
+    CreateSpecialAreaFlyTargetIcons();
 }
 
-void sub_80FC374(void)
+// Draws a light overlay on cities and towns that the player can fly to
+void CreateCityTownFlyTargetIcons(void)
 {
-    u16 flag = 0x80F;
+    u16 canFlyFlag = 0x80F;
     u16 i;
 
     for (i = 0; i < 16; i++)
@@ -1630,7 +1699,7 @@ void sub_80FC374(void)
         u16 r7;
         u8 spriteId;
 
-        sub_80FC04C(i, &x, &y, &width, &height);
+        GetRegionMapLocationPosition(i, &x, &y, &width, &height);
         x = (x + 1) * 8 + 4;
         y = (y + 2) * 8 + 4;
         if (width == 2)
@@ -1639,56 +1708,60 @@ void sub_80FC374(void)
             r7 = 2;
         else
             r7 = 0;
-        spriteId = CreateSprite(&gSpriteTemplate_83E7A38, x, y, 10);
+        spriteId = CreateSprite(&gFlyTargetSpriteTemplate, x, y, 10);
         if (spriteId != 64)
         {
             gSprites[spriteId].oam.shape = r7;
-            if (FlagGet(flag))
-                gSprites[spriteId].callback = sub_80FC55C;
+            if (FlagGet(canFlyFlag))
+                gSprites[spriteId].callback = SpriteCB_FlyTargetIcons;
             else
                 r7 += 3;
             StartSpriteAnim(&gSprites[spriteId], r7);
             gSprites[spriteId].data0 = i;
         }
-        flag++;
+        canFlyFlag++;
     }
 }
 
-void sub_80FC484(void)
+// Draws a red box on other fly targets
+// The Battle Tower is the only one of these
+void CreateSpecialAreaFlyTargetIcons(void)
 {
     u16 i;
 
-    for (i = 0; gUnknown_083E79D4[i][1] != 88; i++)
+    for (i = 0; gSpecialFlyAreas[i][1] != MAPSEC_NONE; i++)
     {
         u16 x;
         u16 y;
         u16 width;
         u16 height;
 
-        if (FlagGet(gUnknown_083E79D4[i][0]))
+        if (FlagGet(gSpecialFlyAreas[i][0]))
         {
-            u16 r6 = gUnknown_083E79D4[i][1];
+            u16 mapSecId = gSpecialFlyAreas[i][1];
             u8 spriteId;
 
-            sub_80FC04C(r6, &x, &y, &width, &height);
+            GetRegionMapLocationPosition(mapSecId, &x, &y, &width, &height);
             x = (x + 1) * 8;
             y = (y + 2) * 8;
-            spriteId = CreateSprite(&gSpriteTemplate_83E7A38, x, y, 10);
+            spriteId = CreateSprite(&gFlyTargetSpriteTemplate, x, y, 10);
             if (spriteId != 64)
             {
                 gSprites[spriteId].oam.size = 1;
-                gSprites[spriteId].callback = sub_80FC55C;
+                gSprites[spriteId].callback = SpriteCB_FlyTargetIcons;
                 StartSpriteAnim(&gSprites[spriteId], 6);
-                gSprites[spriteId].data0 = r6;
+                gSprites[spriteId].data0 = mapSecId;
             }
         }
     }
 }
 
-void sub_80FC55C(struct Sprite *sprite)
+void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
-    if (ewram0.unk8.unk14 == sprite->data0)
+    // Blink if our mapSecId is the one selected on the map
+    if (ewram0.regionMap.mapSecId == sprite->data0)
     {
+        // Toggle visibility every 16 frames
         sprite->data1++;
         if (sprite->data1 > 16)
         {
@@ -1725,22 +1798,22 @@ void sub_80FC600(void)
     {
         switch (sub_80FAB60())
         {
-        case 0:
-        case 1:
-        case 2:
+        case INPUT_EVENT_NONE:
+        case INPUT_EVENT_DPAD:
+        case INPUT_EVENT_2:
             break;
-        case 3:
-            sub_80FC254();
+        case INPUT_EVENT_3:
+            PrintFlyTargetName();
             break;
-        case 4:
-            if (ewram0.unk8.unk16 == 2 || ewram0.unk8.unk16 == 4)
+        case INPUT_EVENT_A_BUTTON:
+            if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
             {
                 m4aSongNumStart(SE_SELECT);
                 ewramA6E = 1;
                 sub_80FC244(sub_80FC69C);
             }
             break;
-        case 5:
+        case INPUT_EVENT_B_BUTTON:
             m4aSongNumStart(SE_SELECT);
             ewramA6E = 0;
             sub_80FC244(sub_80FC69C);
@@ -1760,28 +1833,28 @@ void sub_80FC69C(void)
     case 1:
         if (UpdatePaletteFade() != 0)
             break;
-        sub_80FAB10();
+        FreeRegionMapIconResources();
         if (ewramA6E != 0)
         {
-            switch (ewram0.unk8.unk14)
+            switch (ewram0.regionMap.mapSecId)
             {
-            case 0x49:
+            case MAPSEC_SOUTHERN_ISLAND:
                 sub_8053538(22);
                 break;
-            case 0x3A:
+            case MAPSEC_BATTLE_TOWER:
                 sub_8053538(21);
                 break;
-            case 0:
+            case MAPSEC_LITTLEROOT_TOWN:
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
-            case 15:
-                sub_8053538((FlagGet(0x854) && ewram0.unk8.unk17 == 0) ? 20 : 11);
+            case MAPSEC_EVER_GRANDE_CITY:
+                sub_8053538((FlagGet(0x854) && ewram0.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
-                if (gUnknown_083E7920[ewram0.unk8.unk14][2] != 0)
-                    sub_8053538(gUnknown_083E7920[ewram0.unk8.unk14][2]);
+                if (gUnknown_083E7920[ewram0.regionMap.mapSecId][2] != 0)
+                    sub_8053538(gUnknown_083E7920[ewram0.regionMap.mapSecId][2]);
                 else
-                    warp1_set_2(gUnknown_083E7920[ewram0.unk8.unk14][0], gUnknown_083E7920[ewram0.unk8.unk14][1], -1);
+                    warp1_set_2(gUnknown_083E7920[ewram0.regionMap.mapSecId][0], gUnknown_083E7920[ewram0.regionMap.mapSecId][1], -1);
                 break;
             }
             sub_80865BC();

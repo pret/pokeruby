@@ -340,7 +340,7 @@ sub_80EBD30: @ 80EBD30
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80FB260
+	bl UpdateRegionMapVideoRegs
 	bl sub_80EFE7C
 	pop {r0}
 	bx r0
@@ -10523,7 +10523,7 @@ sub_80F0FFC: @ 80F0FFC
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_80FBFB4
+	bl GetMapSectionName
 	ldr r0, _080F1054 @ =gWindowConfig_81E710C
 	bl BasicInitMenuWindow
 	adds r0, r5, 0
@@ -14321,10 +14321,10 @@ sub_80F2DD8: @ 80F2DD8
 	push {lr}
 	movs r0, 0x7
 	movs r1, 0x7
-	bl sub_80FBB3C
+	bl CreateRegionMapCursorIcon
 	movs r0, 0x8
 	movs r1, 0x8
-	bl sub_80FBCF0
+	bl CreateRegionMapPlayerIcon
 	bl sub_80FBF94
 	pop {r0}
 	bx r0
@@ -14333,7 +14333,7 @@ sub_80F2DD8: @ 80F2DD8
 	thumb_func_start sub_80F2DF4
 sub_80F2DF4: @ 80F2DF4
 	push {lr}
-	bl sub_80FAB10
+	bl FreeRegionMapIconResources
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F2DF4
