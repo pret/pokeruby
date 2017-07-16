@@ -710,7 +710,7 @@ _08072B3E:\n\
 }
 #endif
 
-void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
+void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
 {
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
