@@ -119,7 +119,7 @@ gCurrentMove: @ 2024BE6
 gUnknown_02024BE8: @ 2024BE8
 	.space 0x2
 
-gUnknown_02024BEA: @ 2024BEA
+gRandomMove: @ 2024BEA
 	.space 0x2
 
 gBattleMoveDamage: @ 2024BEC
@@ -539,7 +539,10 @@ gTrainerCards: @ 202FFC0
 	.space 0xE0
 
 gPokemonStorage: @ 20300A0
-	.space 0x83D0
+	.space 0x360
+
+gUnknown_02030400: @ 02030400
+	.space 0x8070
 
 gUnknown_02038470: @ 2038470
 	.space 0x3
@@ -773,13 +776,13 @@ gUnknown_020387E8: @ 20387E8
 gUnknown_020387EC: @ 20387EC
 	.space 0x4
 
-gUnknown_020387F0: @ 20387F0
+gRotatingGate_GateSpriteIds: @ 20387F0
 	.space 0x10
 
-gUnknown_02038800: @ 2038800
+gRotatingGate_PuzzleConfig: @ 2038800
 	.space 0x4
 
-gUnknown_02038804: @ 2038804
+gRotatingGate_PuzzleCount: @ 2038804
 	.space 0x4
 
 	.include "src/safari_zone.o"

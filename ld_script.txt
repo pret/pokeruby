@@ -54,7 +54,7 @@ SECTIONS {
         src/battle_2.o(.text);
         asm/battle_2.o(.text);
         asm/battle_3.o(.text);
-        asm/battle_4.o(.text);
+        src/battle_4.o(.text);
         asm/battle_5.o(.text);
         src/battle_6.o(.text);
         src/battle_7.o(.text);
@@ -107,7 +107,7 @@ SECTIONS {
         src/field_control_avatar.o(.text);
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
-        asm/field_tasks.o(.text);
+        src/field_tasks.o(.text);
         src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
@@ -169,7 +169,7 @@ SECTIONS {
         asm/contest_effect.o(.text);
         src/record_mixing.o(.text);
         asm/record_mixing.o(.text);
-        asm/sound_check_menu.o(.text);
+        src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
 		src/tv.o(.text);
@@ -179,7 +179,7 @@ SECTIONS {
         src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
         src/field_special_scene.o(.text);
-        asm/rotating_gate.o(.text);
+        src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
         src/contest_link_80C857C.o(.text);
@@ -212,7 +212,7 @@ SECTIONS {
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         src/rom6.o(.text);
-        asm/pokeblock.o(.text);
+        src/pokeblock.o(.text);
         asm/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
@@ -254,7 +254,7 @@ SECTIONS {
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
-        asm/use_pokeblock.o(.text);
+        src/use_pokeblock.o(.text);
         src/battle_anim_8137220.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
@@ -334,7 +334,9 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
-        data/data2.o(.rodata);
+        data/data2a.o(.rodata);
+        src/battle_4.o(.rodata);
+        data/data2b.o(.rodata);
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
@@ -361,7 +363,7 @@ SECTIONS {
         src/script.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
-        data/field_tasks.o(.rodata);
+        src/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         data/party_menu.o(.rodata);
         src/start_menu.o(.rodata);
@@ -409,7 +411,7 @@ SECTIONS {
         data/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
-        data/sound_check_menu.o(.rodata);
+        src/sound_check_menu.o(.rodata);
         data/secret_base.o(.rodata);
         data/tv.o(.rodata);
         data/contest_link_80C2020.o(.rodata);
@@ -417,7 +419,7 @@ SECTIONS {
         data/fldeff_80C5CD4.o(.rodata);
         src/field_special_scene.o(.rodata);
         data/field_special_scene.o(.rodata);
-        data/rotating_gate.o(.rodata);
+        src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
         src/bike.o(.rodata);
@@ -437,7 +439,7 @@ SECTIONS {
         data/trader.o(.rodata);
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
-        data/pokeblock.o(.rodata);
+        src/pokeblock.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
@@ -460,7 +462,7 @@ SECTIONS {
         src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
-        data/use_pokeblock.o(.rodata);
+        src/use_pokeblock.o(.rodata);
         data/battle_anim_8137220.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);

@@ -10,22 +10,7 @@
 #include "strings.h"
 #include "task.h"
 
-struct UnknownStruct1 {
-    u8 filler0[0x259];
-    u8 unk259;
-    u8 filler25A[6];
-    u8 unk260;
-    u8 unk261;
-    u8 unk262;
-    s16 unk264;
-    s16 unk266;
-    u8 filler268[10];
-    u16 unk272;
-    u8 filler274[14];
-    u16 unk282;
-};
-
-struct UnknownStruct2 {
+struct Struct2001000 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
@@ -33,7 +18,7 @@ struct UnknownStruct2 {
     void *unkC;
 };
 
-struct UnknownStruct3 {
+struct Struct201C000 {
     struct Pokemon *unk0;
     u8 filler4[1];
     u8 unk5;
@@ -53,9 +38,9 @@ struct UnknownStruct3 {
 #define WINDOW_RIGHT 29
 #endif
 
-#define EWRAM_1000 (*(struct UnknownStruct2 *)(unk_2000000 + 0x1000))
-#define EWRAM_1B000 (*(struct UnknownStruct1 *)(unk_2000000 + 0x1B000))
-#define EWRAM_1C000 (*(struct UnknownStruct3 *)(unk_2000000 + 0x1C000))
+#define EWRAM_1000 (*(struct Struct2001000 *)(unk_2000000 + 0x1000))
+#define EWRAM_1B000_2 (*(struct Struct201B000 *)(unk_2000000 + 0x1B000))
+#define EWRAM_1C000 (*(struct Struct201C000 *)(unk_2000000 + 0x1C000))
 
 // extern
 extern u8 gUnknown_0202E8F6;
@@ -89,7 +74,7 @@ bool8 SetUpFieldMove_SoftBoiled(void) {
 
 void sub_8133D28(u8 taskid) {
     EWRAM_1000.unkC = sub_8133D50;
-    EWRAM_1B000.unk272 = 3;
+    EWRAM_1B000_2.unk272 = 3;
     sub_808A004(taskid);
 }
 
@@ -137,7 +122,7 @@ static void sub_8133D50(u8 taskId) {
 
     sub_806D5A4();
     gTasks[taskId].func = sub_806FA18;
-    EWRAM_1B000.unk282 = gTasks[taskId].data[11];
+    EWRAM_1B000_2.unk282 = gTasks[taskId].data[11];
 }
 
 static void sub_8133E74(u8 taskId) {
@@ -160,7 +145,7 @@ static void sub_8133EB8(u8 taskId) {
 
 static void sub_8133EF8(void) {
     sub_806CCE4();
-    EWRAM_1B000.unk261 = 2;
+    EWRAM_1B000_2.unk261 = 2;
     DestroySprite(&gSprites[EWRAM_1000.unk1]);
     MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
     sub_806D538(0, 0);

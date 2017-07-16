@@ -1,6 +1,10 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
+// general task defines
+#define TASK gTasks[taskId]
+#define FUNC func
+
 typedef void (*TaskFunc)(u8 taskId);
 
 struct Task

@@ -429,15 +429,15 @@ void TakeTVShowInSearchOfTrainersOffTheAir(void);
 void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
-    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.Poke1Species;
-    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.OpponentSpecies;
-    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.LastUsedMove;
+    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.poke1Species;
+    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.opponentSpecies;
+    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
     {
         gSaveBlock1.gabbyAndTyData.battleNum ++;
     }
     gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
-    if (gBattleResults.PlayerFaintCounter)
+    if (gBattleResults.playerFaintCounter)
     {
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
     } else
@@ -611,11 +611,11 @@ void sub_80BDEC8(void) {
     total = 0;
     sub_80BEB20();
     sub_80BE778();
-    if (gBattleResults.CaughtPoke == 0) {
+    if (gBattleResults.caughtPoke == 0) {
         sub_80BE074();
     } else {
         sub_80BE028();
-        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.CaughtPoke], gBattleResults.CaughtNick) != 0) {
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick) != 0) {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1) {
                 for (i=0; i<11; i++) {
@@ -641,8 +641,8 @@ void sub_80BDEC8(void) {
                     show->pokemonToday.var12 = total;
                     show->pokemonToday.ball = item;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2.playerName);
-                    StringCopy(show->pokemonToday.nickname, gBattleResults.CaughtNick);
-                    show->pokemonToday.species = gBattleResults.CaughtPoke;
+                    StringCopy(show->pokemonToday.nickname, gBattleResults.caughtNick);
+                    show->pokemonToday.species = gBattleResults.caughtPoke;
                     sub_80BE138(show);
                     show->pokemonToday.language = GAME_LANGUAGE;
                     show->pokemonToday.language2 = sub_80BDEAC(show->pokemonToday.nickname);
@@ -662,8 +662,8 @@ void sub_80BE028(void) {
         buffer->worldOfMasters.var00 = TVSHOW_WORLD_OF_MASTERS;
     }
     buffer->worldOfMasters.var02++;
-    buffer->worldOfMasters.var04 = gBattleResults.CaughtPoke;
-    buffer->worldOfMasters.var08 = gBattleResults.Poke1Species;
+    buffer->worldOfMasters.var04 = gBattleResults.caughtPoke;
+    buffer->worldOfMasters.var08 = gBattleResults.poke1Species;
     buffer->worldOfMasters.var0a = gMapHeader.name;
 }
 

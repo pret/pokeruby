@@ -573,7 +573,7 @@ _080127E0:
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x6
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012808: .4byte gActiveBank
@@ -624,7 +624,7 @@ _08012854:
 	movs r1, 0
 _0801286C:
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012874: .4byte gActionForBanks
@@ -643,7 +643,7 @@ _08012884:
 	movs r1, 0
 	movs r2, 0x6
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 _0801289E:
 	ldr r0, _080128A8 @ =gActiveBank
 	ldrb r0, [r0]
@@ -2789,7 +2789,7 @@ _08013A04:
 	beq _08013A0E
 	b _08013B42
 _08013A0E:
-	bl sub_80325B8
+	bl BattleMusicStop
 	ldr r1, _08013A3C @ =gBattlescriptCurrInstr
 	ldr r0, _08013A40 @ =gUnknown_081D8DBE
 	str r0, [r1]
@@ -3936,14 +3936,14 @@ _080143B6:
 	cmp r0, 0x1F
 	bne _08014404
 	adds r0, r2, 0
-	bl sub_801E3B4
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
 	cmp r0, r1
 	bcs _08014404
 	ldrb r0, [r4]
-	bl sub_801E3B4
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -4261,7 +4261,7 @@ _0801469A:
 	strb r0, [r5]
 _080146AC:
 	ldr r4, _080146E0 @ =gBattlescriptCurrInstr
-	ldr r3, _080146E4 @ =gUnknown_081D6BBC
+	ldr r3, _080146E4 @ =gBattleScriptsEffectsTable
 	ldr r2, _080146E8 @ =gBattleMoves
 	ldr r0, _080146EC @ =gCurrentMove
 	ldrh r1, [r0]
@@ -4288,7 +4288,7 @@ _080146CC:
 	bx r0
 	.align 2, 0
 _080146E0: .4byte gBattlescriptCurrInstr
-_080146E4: .4byte gUnknown_081D6BBC
+_080146E4: .4byte gBattleScriptsEffectsTable
 _080146E8: .4byte gBattleMoves
 _080146EC: .4byte gCurrentMove
 _080146F0: .4byte gFightStateTracker
@@ -5528,8 +5528,8 @@ _08015148: .4byte 0x00016112
 _0801514C: .4byte 0x00017130
 	thumb_func_end bsC_8016D70
 
-	thumb_func_start sub_8015150
-sub_8015150: @ 8015150
+	thumb_func_start GetBattleBank
+GetBattleBank: @ 8015150
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5592,10 +5592,10 @@ _080151C8:
 	bx r1
 	.align 2, 0
 _080151D0: .4byte gBank1
-	thumb_func_end sub_8015150
+	thumb_func_end GetBattleBank
 
-	thumb_func_start sub_80151D4
-sub_80151D4: @ 80151D4
+	thumb_func_start PressurePPLose
+PressurePPLose: @ 80151D4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -5695,7 +5695,7 @@ _08015286:
 _08015290: .4byte gDisableStructs
 _08015294: .4byte gBitTable
 _08015298: .4byte gActiveBank
-	thumb_func_end sub_80151D4
+	thumb_func_end PressurePPLose
 
 	thumb_func_start sub_801529C
 sub_801529C: @ 801529C

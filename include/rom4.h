@@ -23,6 +23,7 @@ struct UCoords32
 };
 
 extern struct UCoords32 gUnknown_0821664C[];
+extern void (*gFieldCallback)(void);
 
 // sub_8052F5C
 void flag_var_implications_of_teleport_(void);
@@ -102,7 +103,7 @@ void sub_8053FB0(u16);
 // sub_8054034
 // sub_8054044
 // sub_8054050
-// sub_80540D0
+void sub_80540D0(s16 *, u16 *);
 void sub_8054164(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 // get_map_light_level_from_warp

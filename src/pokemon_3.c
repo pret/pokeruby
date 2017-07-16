@@ -48,7 +48,7 @@ extern u32 gTMHMLearnsets[][2];
 extern u8 gBattleMonForms[];
 extern const u8 BattleText_Wally[];
 extern const u16 gHMMoves[];
-extern s8 gUnknown_083F7E28[];
+extern s8 gPokeblockFlavorCompatibilityTable[];
 extern u8 gLastUsedAbility;
 extern const u8 BattleText_PreventedSwitch[];
 extern u16 gBattlePartyID[];
@@ -1216,13 +1216,13 @@ bool8 sub_8040A3C(u16 species)
 s8 sub_8040A54(struct Pokemon *mon, u8 a2)
 {
     u8 nature = GetNature(mon);
-    return gUnknown_083F7E28[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
 s8 sub_8040A7C(u32 personality, u8 a2)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gUnknown_083F7E28[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)

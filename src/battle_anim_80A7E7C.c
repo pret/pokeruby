@@ -5,7 +5,6 @@
 #include "task.h"
 #include "trig.h"
 
-#define TASK gTasks[task]
 #define SPRITE gSprites[TASK.data[0]]
 
 extern s16 gBattleAnimArgs[8];
@@ -16,29 +15,29 @@ extern u16 gMovePowerMoveAnim;
 extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
 
-static void sub_80A7EF0(u8 task);
-static void sub_80A808C(u8 task);
-static void sub_80A81D8(u8 task);
-static void sub_80A8374(u8 task);
-static void sub_80A8488(u8 task);
+static void sub_80A7EF0(u8 taskId);
+static void sub_80A808C(u8 taskId);
+static void sub_80A81D8(u8 taskId);
+static void sub_80A8374(u8 taskId);
+static void sub_80A8488(u8 taskId);
 static void sub_80A85A4(struct Sprite *sprite);
 void sub_80A8614(struct Sprite* sprite);
 static void sub_80A86F4(struct Sprite *sprite);
 static void sub_80A88F0(struct Sprite *sprite);
-static void sub_80A89B4(u8 task);
-static void sub_80A8A18(u8 task);
-static void sub_80A8C0C(u8 task);
-static void sub_80A8D8C(u8 task);
-void sub_80A8FD8(u8 task);
+static void sub_80A89B4(u8 taskId);
+static void sub_80A8A18(u8 taskId);
+static void sub_80A8C0C(u8 taskId);
+static void sub_80A8D8C(u8 taskId);
+void sub_80A8FD8(u8 taskId);
 static void sub_80A913C(u8 taskId);
 
-void sub_80A7E7C(u8 task)
+void sub_80A7E7C(u8 taskId)
 {
     u8 sprite;
     sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -50,10 +49,10 @@ void sub_80A7E7C(u8 task)
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
     TASK.func = sub_80A7EF0;
-    sub_80A7EF0(task);
+    sub_80A7EF0(taskId);
 }
 
-static void sub_80A7EF0(u8 task)
+static void sub_80A7EF0(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -78,7 +77,7 @@ static void sub_80A7EF0(u8 task)
         {
             SPRITE.pos2.x = 0;
             SPRITE.pos2.y = 0;
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
@@ -89,7 +88,7 @@ static void sub_80A7EF0(u8 task)
 }
 
 
-void sub_80A7FA0(u8 task)
+void sub_80A7FA0(u8 taskId)
 {
     u8 sprite;
     bool8 r6;
@@ -100,7 +99,7 @@ void sub_80A7FA0(u8 task)
         sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
         if (sprite == 0xff)
         {
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
@@ -134,7 +133,7 @@ void sub_80A7FA0(u8 task)
     }
     if (r6)
     {
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -146,10 +145,10 @@ void sub_80A7FA0(u8 task)
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
     TASK.func = sub_80A808C;
-    sub_80A808C(task);
+    sub_80A808C(taskId);
 }
 
-static void sub_80A808C(u8 task)
+static void sub_80A808C(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -174,7 +173,7 @@ static void sub_80A808C(u8 task)
         {
             SPRITE.pos2.x = 0;
             SPRITE.pos2.y = 0;
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
@@ -184,13 +183,13 @@ static void sub_80A808C(u8 task)
     }
 }
 
-void sub_80A8154(u8 task)
+void sub_80A8154(u8 taskId)
 {
     u8 sprite;
     sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
     gSprites[sprite].pos2.x += gBattleAnimArgs[1];
@@ -203,10 +202,10 @@ void sub_80A8154(u8 task)
     TASK.data[5] = gBattleAnimArgs[1] * 2;
     TASK.data[6] = gBattleAnimArgs[2] * 2;
     TASK.func = sub_80A81D8;
-    sub_80A81D8(task);
+    sub_80A81D8(taskId);
 }
 
-static void sub_80A81D8(u8 task)
+static void sub_80A81D8(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -233,7 +232,7 @@ static void sub_80A81D8(u8 task)
                 SPRITE.pos2.x -= TASK.data[5] / 2;
                 SPRITE.pos2.y -= TASK.data[6] / 2;
             }
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
@@ -243,7 +242,7 @@ static void sub_80A81D8(u8 task)
     }
 }
 
-void sub_80A8314(u8 task)
+void sub_80A8314(u8 taskId)
 {
     u8 sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -253,10 +252,10 @@ void sub_80A8314(u8 task)
     TASK.data[3] = gBattleAnimArgs[3];
     TASK.data[4] = gBattleAnimArgs[4];
     TASK.func = sub_80A8374;
-    sub_80A8374(task);
+    sub_80A8374(taskId);
 }
 
-static void sub_80A8374(u8 task)
+static void sub_80A8374(u8 taskId)
 {
     s16 x;
     u8 sprite;
@@ -276,12 +275,12 @@ static void sub_80A8374(u8 task)
     gSprites[sprite].pos2.y = TASK.data[9] >> 8;
     if (--TASK.data[4] == 0)
     {
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
 }
 
-void sub_80A8408(u8 task)
+void sub_80A8408(u8 taskId)
 {
     u8 i;
     u8 sprite;
@@ -302,10 +301,10 @@ void sub_80A8408(u8 task)
     TASK.data[3] = gBattleAnimArgs[3];
     TASK.data[4] = v1;
     TASK.func = sub_80A8488;
-    sub_80A8488(task);
+    sub_80A8488(taskId);
 }
 
-static void sub_80A8488(u8 task)
+static void sub_80A8488(u8 taskId)
 {
     u8 sprite;
     sprite = TASK.data[0];
@@ -322,18 +321,18 @@ static void sub_80A8488(u8 task)
     {
         gSprites[sprite].pos2.x = 0;
         gSprites[sprite].pos2.y = 0;
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
 }
 
-void sub_80A8500(u8 task)
+void sub_80A8500(u8 taskId)
 {
     if (GetBankSide(gBattleAnimPlayerMonIndex))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
-    sub_80A8408(task);
+    sub_80A8408(taskId);
 }
 
 void sub_80A8530(struct Sprite *sprite)
@@ -538,7 +537,7 @@ static void sub_80A88F0(struct Sprite *sprite)
     move_anim_8072740(sprite);
 }
 
-void sub_80A8920(u8 task)
+void sub_80A8920(u8 taskId)
 {
     s16 r7;
     r7 = 0x8000 / gBattleAnimArgs[3];
@@ -558,7 +557,7 @@ void sub_80A8920(u8 task)
     TASK.func = sub_80A89B4;
 }
 
-static void sub_80A89B4(u8 task)
+static void sub_80A89B4(u8 taskId)
 {
     u8 spriteId;
     spriteId = TASK.data[0];
@@ -572,7 +571,7 @@ static void sub_80A89B4(u8 task)
     }
 }
 
-static void sub_80A8A18(u8 task)
+static void sub_80A8A18(u8 taskId)
 {
     u8 spriteId;
     if (TASK.data[4] > 0)
@@ -586,15 +585,15 @@ static void sub_80A8A18(u8 task)
         gSprites[spriteId].pos2.x = (TASK.data[12] >> 8) + (TASK.data[11] >> 8);
         if (--TASK.data[6] == 0)
         {
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
 }
 
-static void sub_80A8B3C(u8 task);
+static void sub_80A8B3C(u8 taskId);
 
-void sub_80A8A80(u8 task)
+void sub_80A8A80(u8 taskId)
 {
     u8 spriteId;
     switch (gBattleAnimArgs[0])
@@ -606,7 +605,7 @@ void sub_80A8A80(u8 task)
     case 2:
         if (!b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2))
         {
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
         spriteId = gObjectBankIDs[gBattleAnimPlayerMonIndex ^ 2];
@@ -614,13 +613,13 @@ void sub_80A8A80(u8 task)
     case 3:
         if (!b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2))
         {
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
         spriteId = gObjectBankIDs[gBattleAnimEnemyMonIndex ^ 2];
         break;
     default:
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
     TASK.data[0] = spriteId;
@@ -635,18 +634,18 @@ void sub_80A8A80(u8 task)
     TASK.func = sub_80A8B3C;
 }
 
-static void sub_80A8B3C(u8 task)
+static void sub_80A8B3C(u8 taskId)
 {
     u8 spriteId = TASK.data[0];
     gSprites[spriteId].pos2.x += TASK.data[1];
     if (gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x + 0x20 > 0x130u)
     {
-        DestroyAnimVisualTask(task);
+        DestroyAnimVisualTask(taskId);
         return;
     }
 }
 
-void sub_80A8B88(u8 task)
+void sub_80A8B88(u8 taskId)
 {
     u8 spriteId;
     if (GetBankSide(gBattleAnimPlayerMonIndex))
@@ -671,7 +670,7 @@ void sub_80A8B88(u8 task)
     TASK.func = sub_80A8C0C;
 }
 
-static void sub_80A8C0C(u8 task)
+static void sub_80A8C0C(u8 taskId)
 {
     s16 y;
     u8 spriteId;
@@ -706,13 +705,13 @@ static void sub_80A8C0C(u8 task)
         {
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = 0;
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
 }
 
-void sub_80A8D34(u8 task)
+void sub_80A8D34(u8 taskId)
 {
     u8 spriteId;
     spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[3]);
@@ -727,7 +726,7 @@ void sub_80A8D34(u8 task)
     TASK.func = sub_80A8D8C;
 }
 
-static void sub_80A8D8C(u8 task)
+static void sub_80A8D8C(u8 taskId)
 {
     u8 spriteId;
     TASK.data[10] += TASK.data[0];
@@ -746,13 +745,13 @@ static void sub_80A8D8C(u8 task)
         else
         {
             sub_8078F40(spriteId);
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         }
     }
 }
 
-void sub_80A8E04(u8 task)
+void sub_80A8E04(u8 taskId)
 {
     u8 spriteId;
     spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
@@ -796,7 +795,7 @@ void sub_80A8E04(u8 task)
     TASK.func = sub_80A8FD8;
 }
 
-void sub_80A8EFC(u8 task)
+void sub_80A8EFC(u8 taskId)
 {
     u8 spriteId;
     spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
@@ -834,7 +833,7 @@ void sub_80A8EFC(u8 task)
     TASK.func = sub_80A8FD8;
 }
 
-void sub_80A8FD8(u8 task)
+void sub_80A8FD8(u8 taskId)
 {
     TASK.data[3] += TASK.data[4];
     obj_id_set_rotscale(TASK.data[5], 0x100, 0x100, TASK.data[3]);
@@ -850,7 +849,7 @@ void sub_80A8FD8(u8 task)
             sub_8078F40(TASK.data[5]);
         case 0:
         default:
-            DestroyAnimVisualTask(task);
+            DestroyAnimVisualTask(taskId);
             return;
         case 2:
             TASK.data[1] = 0;
@@ -861,7 +860,7 @@ void sub_80A8FD8(u8 task)
     }
 }
 
-void sub_80A9058(u8 task)
+void sub_80A9058(u8 taskId)
 {
     if (!gBattleAnimArgs[0])
     {

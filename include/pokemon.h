@@ -392,8 +392,13 @@ struct BattleMove
     u8 secondaryEffectChance;
     u8 target;
     u8 priority;
-    u32 flags;
+    u8 flags;
+    u8 pad[3];
 };
+
+#define FLAG_PROTECT_AFFECTED    0x2
+#define FLAG_MAGICCOAT_AFFECTED  0x4
+#define FLAG_SNATCH_AFFECTED     0x8
 
 struct PokemonStorage
 {
@@ -574,6 +579,7 @@ void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
+s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H

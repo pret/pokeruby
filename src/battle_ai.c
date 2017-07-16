@@ -896,7 +896,7 @@ static void BattleAICmd_if_user_cant_damage(void)
 
 static void BattleAICmd_get_turn_count(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleResults.BattleTurnCounter;
+    AI_THINKING_STRUCT->funcResult = gBattleResults.battleTurnCounter;
     gAIScriptPtr += 1;
 }
 
@@ -1412,8 +1412,8 @@ static void BattleAICmd_get_highest_possible_damage(void)
     s32 i;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1452,8 +1452,8 @@ static void BattleAICmd_if_damage_bonus(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
@@ -1659,8 +1659,8 @@ static void BattleAICmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1688,8 +1688,8 @@ static void BattleAICmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1843,7 +1843,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[index].DisabledMove == 0)
+        if (gDisableStructs[index].disabledMove == 0)
         {
             gAIScriptPtr += 7;
             return;
@@ -1856,7 +1856,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[index].EncoredMove != 0)
+    else if (gDisableStructs[index].encoredMove != 0)
     {
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         return;
@@ -1869,7 +1869,7 @@ static void BattleAICmd_if_encored(void)
     switch (gAIScriptPtr[1])
     {
     case 0: // _08109348
-        if (gDisableStructs[gActiveBank].DisabledMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].disabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1877,7 +1877,7 @@ static void BattleAICmd_if_encored(void)
         gAIScriptPtr += 6;
         return;
     case 1: // _08109370
-        if (gDisableStructs[gActiveBank].EncoredMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].encoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1954,7 +1954,7 @@ static void BattleAICmd_is_first_turn(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].IsFirstTurn;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].isFirstTurn;
 
     gAIScriptPtr += 2;
 }
@@ -1968,7 +1968,7 @@ static void BattleAICmd_get_stockpile_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].StockpileCounter;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].stockpileCounter;
 
     gAIScriptPtr += 2;
 }
@@ -1990,7 +1990,7 @@ static void BattleAICmd_get_used_item(void)
         index = gBankTarget;
 
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = ewram[0x160CC + (index * 2)];
+    AI_THINKING_STRUCT->funcResult = ewram[MULTI_DIM_ARR(index, B_16, 0x160CC)];
 
     gAIScriptPtr += 2;
 }
@@ -2025,7 +2025,7 @@ static void BattleAICmd_get_protect_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].ProtectUses;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].protectUses;
 
     gAIScriptPtr += 2;
 }
@@ -2104,7 +2104,7 @@ static void BattleAICmd_if_level_compare(void)
 
 static void BattleAICmd_if_taunted(void)
 {
-    if (gDisableStructs[gBankTarget].taunt != 0)
+    if (gDisableStructs[gBankTarget].tauntTimer1 != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -2112,7 +2112,7 @@ static void BattleAICmd_if_taunted(void)
 
 static void BattleAICmd_if_not_taunted(void)
 {
-    if (gDisableStructs[gBankTarget].taunt == 0)
+    if (gDisableStructs[gBankTarget].tauntTimer1 == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;

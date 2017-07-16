@@ -2,7 +2,7 @@
 #define GUARD_ROTATING_GATE_H
 
 void RotatingGatePuzzleCameraUpdate(s16, s16);
-void sub_80C8080();
+void RotatingGate_InitPuzzleAndGraphics();
 u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
 
 #endif // GUARD_ROTATING_GATE_H
