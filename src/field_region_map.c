@@ -51,7 +51,7 @@ void CB2_FieldInitRegionMap(void)
     // TODO: remove this cast
     InitRegionMap((void *)&unk_2000000.unk8, 0);
     CreateRegionMapPlayerIcon(0, 0);
-    CreateRegionMapCursorIcon(1, 1);
+    CreateRegionMapCursor(1, 1);
     SetUpWindowConfig(&gWindowConfig_81E709C);
     InitMenuWindow(&gWindowConfig_81E709C);
     MenuZeroFillScreen();

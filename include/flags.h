@@ -72,6 +72,8 @@
 #define SYS_BRAILLE_WAIT     0x851
 #define SYS_BRAILLE_FLY      0x852
 
+#define SYS_POKEMON_LEAGUE_FLY 0x854
+
 #define SYS_TV_LATI          0x85D
 
 #define SYS_SHOAL_ITEM       0x85F

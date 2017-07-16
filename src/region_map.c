@@ -18,6 +18,7 @@
 #include "text.h"
 #include "trig.h"
 
+// Map Section IDs
 #define MAPSEC_LITTLEROOT_TOWN 0
 #define MAPSEC_OLDALE_TOWN 1
 #define MAPSEC_DEWFORD_TOWN 2
@@ -110,11 +111,10 @@
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
-
 #define MAPCURSOR_X_MIN 1
 #define MAPCURSOR_Y_MIN 2
-#define MAPCURSOR_X_MAX 28
-#define MAPCURSOR_Y_MAX 16
+#define MAPCURSOR_X_MAX (MAPCURSOR_X_MIN + MAP_WIDTH - 1)
+#define MAPCURSOR_Y_MAX (MAPCURSOR_Y_MIN + MAP_HEIGHT - 1)
 
 // Input events
 enum
@@ -129,16 +129,16 @@ enum
 
 extern struct RegionMap *gRegionMap;
 
-const u16 gPokenavCursor_Pal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
-const u8 gUnknown_083E5AF0[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");
-const u8 gUnknown_083E5B34[] = INCBIN_U8("graphics/pokenav/cursor_large.4bpp.lz");
-const u16 gRegionMapBrendanIconPalette[] = INCBIN_U16("graphics/pokenav/brendan_icon.gbapal");
-const u8 gRegionMapBrendanIconTiles[] = INCBIN_U8("graphics/pokenav/brendan_icon.4bpp");
-const u16 gRegionMapMayIconPalette[] = INCBIN_U16("graphics/pokenav/may_icon.gbapal");
-const u8 gRegionMapMayIconTiles[] = INCBIN_U8("graphics/pokenav/may_icon.4bpp");
-const u16 gUnknown_083E5D60[] = INCBIN_U16("graphics/pokenav/region_map.gbapal");
-const u8 gUnknown_083E5DA0[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
-const u8 gUnknown_083E6B04[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
+static const u16 sRegionMapCursor_Pal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
+static const u8 sRegionMapCursorSmall_ImageLZ[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");
+static const u8 sRegionMapCursorLarge_ImageLZ[] = INCBIN_U8("graphics/pokenav/cursor_large.4bpp.lz");
+static const u16 sRegionMapBrendanIcon_Pal[] = INCBIN_U16("graphics/pokenav/brendan_icon.gbapal");
+static const u8 sRegionMapBrendanIcon_Image[] = INCBIN_U8("graphics/pokenav/brendan_icon.4bpp");
+static const u16 sRegionMapMayIcon_Pal[] = INCBIN_U16("graphics/pokenav/may_icon.gbapal");
+static const u8 sRegionMapMayIcon_Image[] = INCBIN_U8("graphics/pokenav/may_icon.4bpp");
+static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map.gbapal");
+static const u8 sRegionMapBkgnd_ImageLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
+static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
 #include "data/region_map_layout.h"
 
@@ -247,7 +247,7 @@ const struct RegionMapLocation gRegionMapLocations[] =
     { 0,  0, 1, 1, gMapName_None},
 };
 
-const u16 gUnknown_083E7684[][2] =
+static const u16 gUnknown_083E7684[][2] =
 {
     {MAPSEC_UNDERWATER1,       MAPSEC_ROUTE_124},
     {MAPSEC_UNDERWATER2,       MAPSEC_ROUTE_126},
@@ -264,41 +264,39 @@ const u16 gUnknown_083E7684[][2] =
     {MAPSEC_NONE,              MAPSEC_NONE},
 };
 
-void sub_80FA904(struct RegionMap *, u8);
-bool8 sub_80FA940(void);
-u8 sub_80FAB78(void);
-u8 _swiopen(void);
-u8 sub_80FAD04(void);
-u8 sub_80FADE4(void);
-void CalcZoomScrollParams(s16, s16, s16, s16, u16, u16, u8);
-void sub_80FB238(s16, s16);
+static u8 sub_80FAB78(void);
+static u8 _swiopen(void);
+static u8 sub_80FAD04(void);
+static u8 sub_80FADE4(void);
+static void CalcZoomScrollParams(s16, s16, s16, s16, u16, u16, u8);
+static void sub_80FB238(s16, s16);
 void UpdateRegionMapVideoRegs(void);
-u16 GetRegionMapSectionAt(u16, u16);
-void InitializeCursorPosition(void);
-void sub_80FB600(void);
-u16 sub_80FB758(u16);
-u16 sub_80FB9C0(u16);
-void sub_80FBA18(void);
-bool8 sub_80FBAA0(u16);
-void CreateRegionMapCursorIcon(u16, u16);
-void sub_80FBCA0(void);
-void sub_80FBDF8(void);
-void sub_80FBE24(void);
-void SpriteCB_PlayerIconZoomedOut(struct Sprite *);
-void UpdateIconBlink(struct Sprite *);
-void SpriteCB_PlayerIconZoomedIn(struct Sprite *);
+static u16 GetRegionMapSectionAt(u16, u16);
+static void InitializeCursorPosition(void);
+static void sub_80FB600(void);
+static u16 sub_80FB758(u16);
+static u16 sub_80FB9C0(u16);
+static void sub_80FBA18(void);
+static bool8 sub_80FBAA0(u16);
+void CreateRegionMapCursor(u16, u16);
+static void sub_80FBCA0(void);
+static void sub_80FBDF8(void);
+static void sub_80FBE24(void);
+static void SpriteCB_PlayerIconZoomedOut(struct Sprite *);
+static void UpdateIconBlink(struct Sprite *);
+static void SpriteCB_PlayerIconZoomedIn(struct Sprite *);
 const u8 *GetMapSectionName(u8 *, u16, u16);
-void sub_80FC214(void);
-void sub_80FC228(void);
-void sub_80FC244(void (*func)(void));
-void PrintFlyTargetName(void);
-void CreateFlyTargetGraphics(void);
-void CreateCityTownFlyTargetIcons(void);
-void CreateSpecialAreaFlyTargetIcons(void);
-void SpriteCB_FlyTargetIcons(struct Sprite *);
-void sub_80FC5B4(void);
-void sub_80FC600(void);
-void sub_80FC69C(void);
+static void VBlankCB_FlyRegionMap(void);
+static void CB2_FlyRegionMap(void);
+static void sub_80FC244(void (*func)(void));
+static void PrintFlyTargetName(void);
+static void CreateFlyTargetGraphics(void);
+static void CreateCityTownFlyTargetIcons(void);
+static void CreateSpecialAreaFlyTargetIcons(void);
+static void SpriteCB_FlyTargetIcons(struct Sprite *);
+static void sub_80FC5B4(void);
+static void sub_80FC600(void);
+static void sub_80FC69C(void);
 
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
@@ -320,19 +318,19 @@ bool8 sub_80FA940(void)
     switch (gRegionMap->initStep)
     {
     case 0:
-        LZ77UnCompVram(gUnknown_083E5DA0, (void *)(VRAM + 0x8000));
+        LZ77UnCompVram(sRegionMapBkgnd_ImageLZ, (void *)(VRAM + 0x8000));
         break;
     case 1:
-        LZ77UnCompVram(gUnknown_083E6B04, (void *)(VRAM + 0xE000));
+        LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, (void *)(VRAM + 0xE000));
         break;
     case 2:
-        LoadPalette(gUnknown_083E5D60, 0x70, 0x60);  // Why isn't this the right size?
+        LoadPalette(sRegionMapBkgnd_Pal, 0x70, 0x60);  // Why isn't this the right size?
         break;
     case 3:
-        LZ77UnCompWram(gUnknown_083E5AF0, gRegionMap->unk180);
+        LZ77UnCompWram(sRegionMapCursorSmall_ImageLZ, gRegionMap->cursorSmallImage);
         break;
     case 4:
-        LZ77UnCompWram(gUnknown_083E5B34, gRegionMap->unk280);
+        LZ77UnCompWram(sRegionMapCursorLarge_ImageLZ, gRegionMap->cursorLargeImage);
         break;
     case 5:
         InitializeCursorPosition();
@@ -359,7 +357,7 @@ bool8 sub_80FA940(void)
     case 7:
         sub_80FBA18();
         UpdateRegionMapVideoRegs();
-        gRegionMap->cursorIconSprite = NULL;
+        gRegionMap->cursorSprite = NULL;
         gRegionMap->playerIconSprite = NULL;
         gRegionMap->unk7A = 0;
         gRegionMap->blinkPlayerIcon = FALSE;
@@ -374,11 +372,11 @@ bool8 sub_80FA940(void)
 
 void FreeRegionMapIconResources(void)
 {
-    if (gRegionMap->cursorIconSprite != NULL)
+    if (gRegionMap->cursorSprite != NULL)
     {
-        DestroySprite(gRegionMap->cursorIconSprite);
-        FreeSpriteTilesByTag(gRegionMap->cursorIconTileTag);
-        FreeSpritePaletteByTag(gRegionMap->cursorIconPaletteTag);
+        DestroySprite(gRegionMap->cursorSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorPaletteTag);
     }
     if (gRegionMap->playerIconSprite != NULL)
     {
@@ -393,7 +391,7 @@ u8 sub_80FAB60(void)
     return gRegionMap->inputCallback();
 }
 
-u8 sub_80FAB78(void)
+static u8 sub_80FAB78(void)
 {
     u8 event = INPUT_EVENT_NONE;
 
@@ -433,7 +431,7 @@ u8 sub_80FAB78(void)
     return event;
 }
 
-u8 _swiopen(void)
+static u8 _swiopen(void)
 {
     u16 mapSecId;
 
@@ -464,7 +462,7 @@ u8 _swiopen(void)
     return INPUT_EVENT_3;
 }
 
-u8 sub_80FAD04(void)
+static u8 sub_80FAD04(void)
 {
     u8 event = INPUT_EVENT_NONE;
 
@@ -504,7 +502,7 @@ u8 sub_80FAD04(void)
     return event;
 }
 
-u8 sub_80FADE4(void)
+static u8 sub_80FADE4(void)
 {
     gRegionMap->scrollY += gRegionMap->unk68;
     gRegionMap->scrollX += gRegionMap->unk6A;
@@ -588,7 +586,7 @@ u8 sub_80FAFC0(void)
         gRegionMap->unk4C = (gRegionMap->zoomed == FALSE) ? (128 << 8) : (256 << 8);
         gRegionMap->zoomed = !gRegionMap->zoomed;
         gRegionMap->inputCallback = (gRegionMap->zoomed == FALSE) ? sub_80FAB78 : sub_80FAD04;
-        CreateRegionMapCursorIcon(gRegionMap->cursorIconTileTag, gRegionMap->cursorIconPaletteTag);
+        CreateRegionMapCursor(gRegionMap->cursorTileTag, gRegionMap->cursorPaletteTag);
         sub_80FBE24();
         r4 = 0;
     }
@@ -633,7 +631,7 @@ u8 sub_80FAFC0(void)
     return r4;
 }
 
-void CalcZoomScrollParams(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 rotation)
+static void CalcZoomScrollParams(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 rotation)
 {
     s32 var1;
     s32 var2;
@@ -656,7 +654,7 @@ void CalcZoomScrollParams(s16 a, s16 b, s16 c, s16 d, u16 e, u16 f, u8 rotation)
     gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-void sub_80FB238(s16 x, s16 y)
+static void sub_80FB238(s16 x, s16 y)
 {
     gRegionMap->bg2x = (0x1C << 8) + (x << 8);
     gRegionMap->bg2y = (0x24 << 8) + (y << 8);
@@ -688,16 +686,16 @@ void sub_80FB2A4(s16 a, s16 b)
     }
 }
 
-u16 GetRegionMapSectionAt(u16 x, u16 y)
+static u16 GetRegionMapSectionAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
         return MAPSEC_NONE;
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
-    return gRegionMapLayout[x + y * 28];
+    return sRegionMapLayout[x + y * 28];
 }
 
-void InitializeCursorPosition(void)
+static void InitializeCursorPosition(void)
 {
     struct MapHeader *mapHeader;
     u16 mapWidth;
@@ -826,7 +824,7 @@ void InitializeCursorPosition(void)
     gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
-void sub_80FB600(void)
+static void sub_80FB600(void)
 {
     u16 y = 0;
     u16 x = 0;
@@ -877,7 +875,7 @@ void sub_80FB600(void)
     gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
-u16 sub_80FB758(u16 mapSecId)
+static u16 sub_80FB758(u16 mapSecId)
 {
     switch (mapSecId)
     {
@@ -930,7 +928,7 @@ u16 GetRegionMapSectionAt_(u16 x, u16 y)
     return GetRegionMapSectionAt(x, y);
 }
 
-u16 sub_80FB9C0(u16 mapSecId)
+static u16 sub_80FB9C0(u16 mapSecId)
 {
     u16 i;
 
@@ -947,7 +945,7 @@ u16 sub_80FBA04(u16 mapSecId)
     return sub_80FB9C0(mapSecId);
 }
 
-void sub_80FBA18(void)
+static void sub_80FBA18(void)
 {
     u16 x;
     u16 y;
@@ -996,7 +994,7 @@ void sub_80FBA18(void)
     gRegionMap->everGrandeCityArea = i;
 }
 
-bool8 sub_80FBAA0(u16 a)
+static bool8 sub_80FBAA0(u16 a)
 {
     u16 x;
     u16 y;
@@ -1013,9 +1011,7 @@ bool8 sub_80FBAA0(u16 a)
     return FALSE;
 }
 
-
-
-const struct OamData gCursorIconOamData =
+static const struct OamData sCursorOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -1032,14 +1028,14 @@ const struct OamData gCursorIconOamData =
     .affineParam = 0,
 };
 
-const union AnimCmd gSpriteAnim_83E76C0[] =
+static const union AnimCmd sCursorAnimSeq0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gSpriteAnim_83E76CC[] =
+static const union AnimCmd sCursorAnimSeq1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(16, 10),
@@ -1048,13 +1044,13 @@ const union AnimCmd gSpriteAnim_83E76CC[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gCursorIconAnimTable[] =
+static const union AnimCmd *const sCursorAnimTable[] =
 {
-    gSpriteAnim_83E76C0,
-    gSpriteAnim_83E76CC,
+    sCursorAnimSeq0,
+    sCursorAnimSeq1,
 };
 
-void SpriteCB_CursorIcon(struct Sprite *sprite)
+static void SpriteCB_Cursor(struct Sprite *sprite)
 {
     if (gRegionMap->unk7A != 0)
     {
@@ -1064,44 +1060,44 @@ void SpriteCB_CursorIcon(struct Sprite *sprite)
     }
 }
 
-void nullsub_66(struct Sprite *sprite)
+static void nullsub_66(struct Sprite *sprite)
 {
 }
 
-void CreateRegionMapCursorIcon(u16 tileTag, u16 paletteTag)
+void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet;
     struct SpritePalette spritePalette =
     {
-        .data = gPokenavCursor_Pal,
+        .data = sRegionMapCursor_Pal,
     };
     struct SpriteTemplate spriteTemplate =
     {
-        .oam = &gCursorIconOamData,
-        .anims = gCursorIconAnimTable,
+        .oam = &sCursorOamData,
+        .anims = sCursorAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCB_CursorIcon,
+        .callback = SpriteCB_Cursor,
     };
 
     spriteSheet.tag = tileTag;
     spriteTemplate.tileTag = tileTag;
-    gRegionMap->cursorIconTileTag = tileTag;
+    gRegionMap->cursorTileTag = tileTag;
 
     spritePalette.tag = paletteTag;
     spriteTemplate.paletteTag = paletteTag;
-    gRegionMap->cursorIconPaletteTag = paletteTag;
+    gRegionMap->cursorPaletteTag = paletteTag;
 
     if (gRegionMap->zoomed == FALSE)
     {
-        spriteSheet.data = gRegionMap->unk180;
+        spriteSheet.data = gRegionMap->cursorSmallImage;
         spriteSheet.size = 0x100;
-        spriteTemplate.callback = SpriteCB_CursorIcon;
+        spriteTemplate.callback = SpriteCB_Cursor;
     }
     else
     {
-        spriteSheet.data = gRegionMap->unk280;
+        spriteSheet.data = gRegionMap->cursorLargeImage;
         spriteSheet.size = 0x600;
         spriteTemplate.callback = nullsub_66;
     }
@@ -1110,47 +1106,47 @@ void CreateRegionMapCursorIcon(u16 tileTag, u16 paletteTag)
     spriteId = CreateSprite(&spriteTemplate, 0x38, 0x48, 0);
     if (spriteId != 64)
     {
-        gRegionMap->cursorIconSprite = &gSprites[spriteId];
+        gRegionMap->cursorSprite = &gSprites[spriteId];
         if (gRegionMap->zoomed == TRUE)
         {
-            gRegionMap->cursorIconSprite->oam.size = 2;
-            gRegionMap->cursorIconSprite->pos1.x -= 8;
-            gRegionMap->cursorIconSprite->pos1.y -= 8;
-            StartSpriteAnim(gRegionMap->cursorIconSprite, 1);
+            gRegionMap->cursorSprite->oam.size = 2;
+            gRegionMap->cursorSprite->pos1.x -= 8;
+            gRegionMap->cursorSprite->pos1.y -= 8;
+            StartSpriteAnim(gRegionMap->cursorSprite, 1);
         }
         else
         {
-            gRegionMap->cursorIconSprite->oam.size = 1;
-            gRegionMap->cursorIconSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
-            gRegionMap->cursorIconSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
+            gRegionMap->cursorSprite->oam.size = 1;
+            gRegionMap->cursorSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
+            gRegionMap->cursorSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
         }
-        gRegionMap->cursorIconSprite->data1 = 2;
-        gRegionMap->cursorIconSprite->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
-        gRegionMap->cursorIconSprite->data3 = 1;
+        gRegionMap->cursorSprite->data1 = 2;
+        gRegionMap->cursorSprite->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
+        gRegionMap->cursorSprite->data3 = 1;
     }
 }
 
-void sub_80FBCA0(void)
+static void sub_80FBCA0(void)
 {
-    if (gRegionMap->cursorIconSprite != NULL)
+    if (gRegionMap->cursorSprite != NULL)
     {
-        DestroySprite(gRegionMap->cursorIconSprite);
-        FreeSpriteTilesByTag(gRegionMap->cursorIconTileTag);
-        FreeSpritePaletteByTag(gRegionMap->cursorIconPaletteTag);
+        DestroySprite(gRegionMap->cursorSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorPaletteTag);
     }
 }
 
 void unref_sub_80FBCD0(void)
 {
-    gRegionMap->cursorIconSprite->data3 = 1;
+    gRegionMap->cursorSprite->data3 = 1;
 }
 
 void unref_sub_80FBCE0(void)
 {
-    gRegionMap->cursorIconSprite->data3 = 0;
+    gRegionMap->cursorSprite->data3 = 0;
 }
 
-const struct OamData gOamData_083E7708 =
+static const struct OamData sPlayerIconOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -1167,37 +1163,37 @@ const struct OamData gOamData_083E7708 =
     .affineParam = 0,
 };
 
-const union AnimCmd gSpriteAnim_83E7710[] =
+static const union AnimCmd sPlayerIconAnimSeq0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_083E7718[] =
+static const union AnimCmd *const sPlayerIconAnimTable[] =
 {
-    gSpriteAnim_83E7710,
+    sPlayerIconAnimSeq0,
 };
 
 void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
-    struct SpriteSheet spriteSheet =
+    struct SpriteSheet playerIconSpriteSheet =
     {
-        .data = gRegionMapBrendanIconTiles,
+        .data = sRegionMapBrendanIcon_Image,
         .size = 128,
         .tag = tileTag,
     };
-    struct SpritePalette spritePalette =
+    struct SpritePalette playerIconSpritePalette =
     {
-        .data = gRegionMapBrendanIconPalette,
+        .data = sRegionMapBrendanIcon_Pal,
         .tag = paletteTag,
     };
-    struct SpriteTemplate spriteTemplate =
+    struct SpriteTemplate playerIconSpriteTemplate =
     {
         .tileTag = tileTag,
         .paletteTag = paletteTag,
-        .oam = &gOamData_083E7708,
-        .anims = gSpriteAnimTable_083E7718,
+        .oam = &sPlayerIconOamData,
+        .anims = sPlayerIconAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
@@ -1205,12 +1201,12 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 
     if (gSaveBlock2.playerGender == FEMALE)
     {
-        spriteSheet.data = gRegionMapMayIconTiles;
-        spritePalette.data = gRegionMapMayIconPalette;
+        playerIconSpriteSheet.data = sRegionMapMayIcon_Image;
+        playerIconSpritePalette.data = sRegionMapMayIcon_Pal;
     }
-    LoadSpriteSheet(&spriteSheet);
-    LoadSpritePalette(&spritePalette);
-    spriteId = CreateSprite(&spriteTemplate, 0, 0, 1);
+    LoadSpriteSheet(&playerIconSpriteSheet);
+    LoadSpritePalette(&playerIconSpritePalette);
+    spriteId = CreateSprite(&playerIconSpriteTemplate, 0, 0, 1);
     gRegionMap->playerIconSprite = &gSprites[spriteId];
     if (gRegionMap->zoomed == FALSE)
     {
@@ -1226,7 +1222,7 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     }
 }
 
-void sub_80FBDF8(void)
+static void sub_80FBDF8(void)
 {
     if (gRegionMap->playerIconSprite != NULL)
     {
@@ -1235,7 +1231,7 @@ void sub_80FBDF8(void)
     }
 }
 
-void sub_80FBE24(void)
+static void sub_80FBE24(void)
 {
     if (gRegionMap->playerIconSprite != NULL)
     {
@@ -1258,7 +1254,7 @@ void sub_80FBE24(void)
     }
 }
 
-void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
+static void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
 {
     sprite->pos2.x = -(gRegionMap->scrollX * 2);
     sprite->pos2.y = -(gRegionMap->scrollY * 2);
@@ -1277,12 +1273,12 @@ void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
         sprite->invisible = TRUE;
 }
 
-void SpriteCB_PlayerIconZoomedOut(struct Sprite *sprite)
+static void SpriteCB_PlayerIconZoomedOut(struct Sprite *sprite)
 {
     UpdateIconBlink(sprite);
 }
 
-void UpdateIconBlink(struct Sprite *sprite)
+static void UpdateIconBlink(struct Sprite *sprite)
 {
     if (gRegionMap->blinkPlayerIcon)
     {
@@ -1338,7 +1334,7 @@ const u8 *CopyLocationName(u8 *dest, u16 mapSecId)
         return CopyMapName(dest, mapSecId);
 }
 
-void GetRegionMapLocationPosition(u16 mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
+static void GetRegionMapLocationPosition(u16 mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
     *x = gRegionMapLocations[mapSecId].x;
     *y = gRegionMapLocations[mapSecId].y;
@@ -1360,13 +1356,13 @@ extern u8 ewram[];
 #define ewramA6E (ewram[0xA6E])
 #define ewramBlankMapName (ewram + 0xA48)
 
-const u16 gUnknown_083E771C[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
-const u8 gUnknown_083E773C[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
-const u8 gUnknown_083E7774[] = INCBIN_U8("graphics/pokenav/map_frame.bin.lz");
-const u16 gPokenavMapMisc_Pal[] = INCBIN_U16("graphics/pokenav/map_misc.gbapal");
-const u8 gUnknown_083E784C[] = INCBIN_U8("graphics/pokenav/map_misc.4bpp.lz");
+static const u16 sFlyRegionMapFrame_Pal[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
+static const u8 sFlyRegionMapFrame_ImageLZ[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
+static const u8 sFlyRegionMapFrame_TilemapLZ[] = INCBIN_U8("graphics/pokenav/map_frame.bin.lz");
+static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
+static const u8 sFlyTargetIcons_ImageLZ[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-const u8 gUnknown_083E7920[][3] =
+static const u8 sUnknown_083E7920[][3] =
 {
     {0,  9,  1},
     {0, 10, 14},
@@ -1427,27 +1423,27 @@ struct UnknownStruct4
     u16 flag;
 };
 
-const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
+static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
 
-const struct UnknownStruct4 gUnknown_083E79C0[1] =
+static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, 0x854},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, SYS_POKEMON_LEAGUE_FLY},
 };
 
 // XXX: what is this?
 static u8 *const ewram_ = ewram;
 
-const struct SpritePalette gUnknown_083E79CC = {gPokenavMapMisc_Pal, 2};
+static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
 
 // Fly targets that are not cities or towns
-const u16 gSpecialFlyAreas[][2] =
+static const u16 sSpecialFlyAreas[][2] =
 {
     // flag, mapSecId
     {0x848, MAPSEC_BATTLE_TOWER},
     {0xFFFF, MAPSEC_NONE},
 };
 
-const struct OamData gFlyTargetOamData =
+static const struct OamData sFlyTargetOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -1464,65 +1460,65 @@ const struct OamData gFlyTargetOamData =
     .affineParam = 0,
 };
 
-const union AnimCmd gFlyTargetAnimSeq0[] =
+static const union AnimCmd sFlyTargetAnimSeq0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq1[] =
+static const union AnimCmd sFlyTargetAnimSeq1[] =
 {
     ANIMCMD_FRAME(1, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq2[] =
+static const union AnimCmd sFlyTargetAnimSeq2[] =
 {
     ANIMCMD_FRAME(3, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq3[] =
+static const union AnimCmd sFlyTargetAnimSeq3[] =
 {
     ANIMCMD_FRAME(5, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq4[] =
+static const union AnimCmd sFlyTargetAnimSeq4[] =
 {
     ANIMCMD_FRAME(6, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq5[] =
+static const union AnimCmd sFlyTargetAnimSeq5[] =
 {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFlyTargetAnimSeq6[] =
+static const union AnimCmd sFlyTargetAnimSeq6[] =
 {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gFlyTargetAnimTable[] =
+static const union AnimCmd *const sFlyTargetAnimTable[] =
 {
-    gFlyTargetAnimSeq0,
-    gFlyTargetAnimSeq1,
-    gFlyTargetAnimSeq2,
-    gFlyTargetAnimSeq3,
-    gFlyTargetAnimSeq4,
-    gFlyTargetAnimSeq5,
-    gFlyTargetAnimSeq6,
+    sFlyTargetAnimSeq0,
+    sFlyTargetAnimSeq1,
+    sFlyTargetAnimSeq2,
+    sFlyTargetAnimSeq3,
+    sFlyTargetAnimSeq4,
+    sFlyTargetAnimSeq5,
+    sFlyTargetAnimSeq6,
 };
 
-const struct SpriteTemplate gFlyTargetSpriteTemplate =
+static const struct SpriteTemplate gFlyTargetSpriteTemplate =
 {
     .tileTag = 2,
     .paletteTag = 2,
-    .oam = &gFlyTargetOamData,
-    .anims = gFlyTargetAnimTable,
+    .oam = &sFlyTargetOamData,
+    .anims = sFlyTargetAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -1557,20 +1553,20 @@ void CB2_InitFlyRegionMap(void)
         break;
     case 3:
         InitRegionMap(&ewram0.regionMap, 0);
-        CreateRegionMapCursorIcon(0, 0);
+        CreateRegionMapCursor(0, 0);
         CreateRegionMapPlayerIcon(1, 1);
         ewram0.unk6 = ewram0.regionMap.mapSecId;
         StringFill(ewramBlankMapName, CHAR_SPACE, 12);
         PrintFlyTargetName();
         break;
     case 4:
-        LZ77UnCompVram(gUnknown_083E773C, (void *)(VRAM + 0xC000));
+        LZ77UnCompVram(sFlyRegionMapFrame_ImageLZ, (void *)(VRAM + 0xC000));
         break;
     case 5:
-        LZ77UnCompVram(gUnknown_083E7774, (void *)(VRAM + 0xF000));
+        LZ77UnCompVram(sFlyRegionMapFrame_TilemapLZ, (void *)(VRAM + 0xF000));
         break;
     case 6:
-        LoadPalette(gUnknown_083E771C, 16, 32);
+        LoadPalette(sFlyRegionMapFrame_Pal, 16, 32);
         MenuPrint_PixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
         break;
     case 7:
@@ -1578,14 +1574,14 @@ void CB2_InitFlyRegionMap(void)
         break;
     case 8:
         BlendPalettes(0xFFFFFFFF, 16, 0);
-        SetVBlankCallback(sub_80FC214);
+        SetVBlankCallback(VBlankCB_FlyRegionMap);
         break;
     case 9:
         REG_BLDCNT = 0;
         REG_BG1CNT = 0x1E0D;
         REG_DISPCNT = 0x1741;
         sub_80FC244(sub_80FC5B4);
-        SetMainCallback2(sub_80FC228);
+        SetMainCallback2(CB2_FlyRegionMap);
         break;
     default:
         return;
@@ -1593,36 +1589,36 @@ void CB2_InitFlyRegionMap(void)
     gMain.state++;
 }
 
-void sub_80FC214(void)
+static void VBlankCB_FlyRegionMap(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80FC228(void)
+static void CB2_FlyRegionMap(void)
 {
     ewram0.unk0();
     AnimateSprites();
     BuildOamBuffer();
 }
 
-void sub_80FC244(void (*func)(void))
+static void sub_80FC244(void (*func)(void))
 {
     ewram0.unk0 = func;
     ewram0.unk4 = 0;
 }
 
-void PrintFlyTargetName(void)
+static void PrintFlyTargetName(void)
 {
     if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
     {
         u16 i = 0;
         int zero;
 
-        for (i = 0; i < ARRAY_COUNT(gUnknown_083E79C0); i++)
+        for (i = 0; i < ARRAY_COUNT(sUnknown_083E79C0); i++)
         {
-            const struct UnknownStruct4 *r4 = &gUnknown_083E79C0[i];
+            const struct UnknownStruct4 *r4 = &sUnknown_083E79C0[i];
 
             if (ewram0.regionMap.mapSecId == r4->mapSecId)
             {
@@ -1653,22 +1649,22 @@ void PrintFlyTargetName(void)
     }
 }
 
-void CreateFlyTargetGraphics(void)
+static void CreateFlyTargetGraphics(void)
 {
     struct SpriteSheet spriteSheet;
 
-    LZ77UnCompWram(gUnknown_083E784C, ewram888);
+    LZ77UnCompWram(sFlyTargetIcons_ImageLZ, ewram888);
     spriteSheet.data = ewram888;
     spriteSheet.size = 0x1C0;
     spriteSheet.tag = 2;
     LoadSpriteSheet(&spriteSheet);
-    LoadSpritePalette(&gUnknown_083E79CC);
+    LoadSpritePalette(&sFlyTargetIconSpritePalette);
     CreateCityTownFlyTargetIcons();
     CreateSpecialAreaFlyTargetIcons();
 }
 
 // Draws a light overlay on cities and towns that the player can fly to
-void CreateCityTownFlyTargetIcons(void)
+static void CreateCityTownFlyTargetIcons(void)
 {
     u16 canFlyFlag = 0x80F;
     u16 i;
@@ -1708,20 +1704,20 @@ void CreateCityTownFlyTargetIcons(void)
 
 // Draws a red box on other fly targets
 // The Battle Tower is the only one of these
-void CreateSpecialAreaFlyTargetIcons(void)
+static void CreateSpecialAreaFlyTargetIcons(void)
 {
     u16 i;
 
-    for (i = 0; gSpecialFlyAreas[i][1] != MAPSEC_NONE; i++)
+    for (i = 0; sSpecialFlyAreas[i][1] != MAPSEC_NONE; i++)
     {
         u16 x;
         u16 y;
         u16 width;
         u16 height;
 
-        if (FlagGet(gSpecialFlyAreas[i][0]))
+        if (FlagGet(sSpecialFlyAreas[i][0]))
         {
-            u16 mapSecId = gSpecialFlyAreas[i][1];
+            u16 mapSecId = sSpecialFlyAreas[i][1];
             u8 spriteId;
 
             GetRegionMapLocationPosition(mapSecId, &x, &y, &width, &height);
@@ -1739,7 +1735,7 @@ void CreateSpecialAreaFlyTargetIcons(void)
     }
 }
 
-void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
+static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
     // Blink if our mapSecId is the one selected on the map
     if (ewram0.regionMap.mapSecId == sprite->data0)
@@ -1759,7 +1755,7 @@ void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
     }
 }
 
-void sub_80FC5B4(void)
+static void sub_80FC5B4(void)
 {
     switch (ewram0.unk4)
     {
@@ -1775,7 +1771,7 @@ void sub_80FC5B4(void)
     }
 }
 
-void sub_80FC600(void)
+static void sub_80FC600(void)
 {
     if (ewram0.unk4 == 0)
     {
@@ -1805,7 +1801,7 @@ void sub_80FC600(void)
     }
 }
 
-void sub_80FC69C(void)
+static void sub_80FC69C(void)
 {
     switch (ewram0.unk4)
     {
@@ -1834,10 +1830,10 @@ void sub_80FC69C(void)
                 sub_8053538((FlagGet(0x854) && ewram0.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
-                if (gUnknown_083E7920[ewram0.regionMap.mapSecId][2] != 0)
-                    sub_8053538(gUnknown_083E7920[ewram0.regionMap.mapSecId][2]);
+                if (sUnknown_083E7920[ewram0.regionMap.mapSecId][2] != 0)
+                    sub_8053538(sUnknown_083E7920[ewram0.regionMap.mapSecId][2]);
                 else
-                    warp1_set_2(gUnknown_083E7920[ewram0.regionMap.mapSecId][0], gUnknown_083E7920[ewram0.regionMap.mapSecId][1], -1);
+                    warp1_set_2(sUnknown_083E7920[ewram0.regionMap.mapSecId][0], sUnknown_083E7920[ewram0.regionMap.mapSecId][1], -1);
                 break;
             }
             sub_80865BC();

@@ -8,7 +8,7 @@ struct RegionMap
     u8 unk16;
     u8 everGrandeCityArea;
     u8 (*inputCallback)(void);
-    struct Sprite *cursorIconSprite;
+    struct Sprite *cursorSprite;
     struct Sprite *playerIconSprite;
     s32 bg2x;
     s32 bg2y;
@@ -24,8 +24,8 @@ struct RegionMap
     s32 unk50;
     u16 cursorPosX;
     u16 cursorPosY;
-    u16 cursorIconTileTag;
-    u16 cursorIconPaletteTag;
+    u16 cursorTileTag;
+    u16 cursorPaletteTag;
     s16 scrollX;
     s16 scrollY;
     s16 unk60;
@@ -48,15 +48,22 @@ struct RegionMap
     bool8 needUpdateVideoRegs;
     bool8 blinkPlayerIcon;
     bool8 playerIsInCave;
-    u8 filler80[0x100];
-    u8 unk180[0x100];
-    u8 unk280[0x600];
+    /*0x080*/ u8 filler80[0x100];
+    /*0x180*/ u8 cursorSmallImage[0x100];
+    /*0x280*/ u8 cursorLargeImage[0x600];
 };
 
-void InitRegionMap(struct RegionMap *regionMap, bool8 b);
+void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed);
+void sub_80FA904(struct RegionMap *regionMap, bool8 zoomed);
+bool8 sub_80FA940(void);
 void FreeRegionMapIconResources(void);
 u8 sub_80FAB60(void);
-void CreateRegionMapCursorIcon(u16, u16);
+void sub_80FAEC4(void);
+u8 sub_80FAFC0(void);
+void UpdateRegionMapVideoRegs(void);
+void sub_80FB2A4(s16, s16);
+u16 sub_80FBA04(u16 mapSecId);
+void CreateRegionMapCursor(u16, u16);
 void CreateRegionMapPlayerIcon(u16, u16);
 const u8 *GetMapSectionName(u8 *dest, u16 mapSecId, u16 length);
 const u8 *CopyMapName(u8 *dest, u16 b);

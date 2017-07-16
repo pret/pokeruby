@@ -14321,7 +14321,7 @@ sub_80F2DD8: @ 80F2DD8
 	push {lr}
 	movs r0, 0x7
 	movs r1, 0x7
-	bl CreateRegionMapCursorIcon
+	bl CreateRegionMapCursor
 	movs r0, 0x8
 	movs r1, 0x8
 	bl CreateRegionMapPlayerIcon
