@@ -57,18 +57,19 @@ extern struct ToneData voicegroup_8453190[];
 extern struct ToneData voicegroup_84549C0[];
 extern struct ToneData voicegroup_8453790[];
 
-extern int gUnknown_020387B4[9];
+static EWRAM_DATA u8 gUnknown_020387B0 = 0;
+static EWRAM_DATA u8 gUnknown_020387B1 = 0;
+static EWRAM_DATA u8 gUnknown_020387B2 = 0;
+static EWRAM_DATA s8 gUnknown_020387B3 = 0;
+static EWRAM_DATA int gUnknown_020387B4[9] = {0};
+static EWRAM_DATA u8 gUnknown_020387D8 = 0;
+static EWRAM_DATA u8 gUnknown_020387D9 = 0;
 
-extern s8 gUnknown_020387B3;
-extern u8 gUnknown_020387B1;
-extern u8 gUnknown_020387B2;
-extern u8 gUnknown_020387D8;
-extern u8 gUnknown_020387D9;
-extern u8 gUnknown_020387B0;
 extern u16 gUnknown_03005D34;
 extern u8 gUnknown_03005E98;
 
-extern struct MusicPlayerInfo *gUnknown_03005D30;
+struct MusicPlayerInfo *gUnknown_03005D30;
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 
 void sub_80BA258(u8);

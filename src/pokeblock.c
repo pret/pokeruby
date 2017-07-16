@@ -26,7 +26,14 @@
 #include "songs.h"
 #include "safari_zone.h"
 #include "use_pokeblock.h"
+#include "event_data.h"
 #include "pokeblock.h"
+
+extern u8 ewram[];
+
+static EWRAM_DATA u8 gUnknown_02039244 = 0;
+static EWRAM_DATA ALIGNED(4) u8 gUnknown_02039248[4] = {0}; // why aligned to 4 bytes?
+static EWRAM_DATA u8 gUnknown_0203924C = 0;
 
 // function declarations
 
@@ -75,6 +82,8 @@ static void sub_810C5EC(u8);
 
 // sub_810C610
 static void sub_810C704(u8);
+
+static const u8 *gUnknown_03000758;
 
 // rodata
 

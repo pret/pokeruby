@@ -48,20 +48,20 @@ typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
 extern u32 gUnknown_0202E8AC;
-extern u32 gUnknown_0202E8B0;
-extern u16 gUnknown_0202E8B4;
-extern u16 gUnknown_0202E8B6;
-extern u16 gUnknown_0202E8B8;
-extern u16 gUnknown_0202E8BA;
-extern u16 gUnknown_0202E8BC;
+
+static EWRAM_DATA u32 gUnknown_0202E8B0 = 0;
+static EWRAM_DATA u16 gUnknown_0202E8B4 = 0;
+static EWRAM_DATA u16 gUnknown_0202E8B6 = 0;
+static EWRAM_DATA u16 gUnknown_0202E8B8 = 0;
+static EWRAM_DATA u16 gUnknown_0202E8BA = 0;
+static EWRAM_DATA u16 gUnknown_0202E8BC = 0;
+
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
 extern u16 gSpecialVar_0x8002;
 extern u16 gSpecialVar_0x8004;
 
 extern u16 gScriptResult;
-
-extern u32 gUnknown_0202FF84[];
 
 extern u16 gScriptContestCategory;
 

@@ -51,7 +51,8 @@ extern u8 ewram[];
 #define ewram0 (*(struct Struct2000000 *)(ewram))
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
-extern struct TrainerCard gTrainerCards[4];
+
+EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 
 struct UnknownStruct1
 {

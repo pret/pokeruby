@@ -51,8 +51,10 @@ static bool8 savingComplete;
 extern bool8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
 extern u16 gScriptResult;
-extern u8 (*gCallback_03004AE8)(void);
+
 extern u8 gUnknown_03004860;
+
+u8 (*gCallback_03004AE8)(void);
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;

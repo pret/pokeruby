@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "menu.h"
 #include "palette.h"

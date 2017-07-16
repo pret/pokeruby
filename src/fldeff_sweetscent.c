@@ -15,8 +15,6 @@ static void sub_812C01C(void);
 static void sub_812C084(u8);
 static void sub_812C118(u8);
 
-extern u32 gUnknown_0202FF84[];
-
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);

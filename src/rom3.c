@@ -24,9 +24,10 @@ extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern struct BattlePokemon gBattleMons[];
 
-extern u8 gUnknown_020238C4;
-extern u8 gUnknown_020238C5;
-extern u8 gUnknown_020238C6;
+static EWRAM_DATA u8 gUnknown_020238C4 = 0;
+static EWRAM_DATA u8 gUnknown_020238C5 = 0;
+static EWRAM_DATA u8 gUnknown_020238C6 = 0;
+
 extern u32 gUnknown_020239FC;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gBattleBufferB[][0x200];
@@ -49,12 +50,13 @@ extern u8 gUnknown_02024C78;
 extern u8 gBattleOutcome;
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
-extern u8 gBattleBuffersTransferData[];
 extern u8 gBattleTextBuff1[];
 extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
 extern void (*gBattleMainFunc)(void);
 extern void (*gBattleBankFunc[])(void);
+
+u8 gBattleBuffersTransferData[0x170];
 
 void sub_800B858(void)
 {

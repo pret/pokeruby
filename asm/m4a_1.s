@@ -4,6 +4,8 @@
 
 	.syntax unified
 
+	.lcomm gUnknown_030007B8, 0x770
+
 	.text
 
 	thumb_func_start umul3232H32

@@ -27,7 +27,6 @@ extern struct SpriteTemplate gSpriteTemplate_CutGrass;
 extern struct MapPosition gUnknown_0203923C;
 
 extern u8 gLastFieldPokeMenuOpened;
-extern u32 gUnknown_0202FF84[];
 
 extern u8 UseCutScript;
 

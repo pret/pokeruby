@@ -7,8 +7,6 @@
 #include "rom6.h"
 #include "task.h"
 
-extern u32 gUnknown_0202FF84[];
-
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
