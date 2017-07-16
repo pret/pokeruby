@@ -114,7 +114,7 @@ void sub_8052E4C(void)
     sub_808C0A0();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-    sub_80A3684();
+    ResetBagScrollPositions();
 }
 
 void NewGameInitData(void)

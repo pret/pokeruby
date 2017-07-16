@@ -197,7 +197,7 @@ const u8 OtherText_TheField[] = _("the field.");
 const u8 OtherText_TheField2[] = _("the field.");
 const u8 OtherText_ThePC[] = _("the PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
+const u8 *const gUnknown_0840E740[7] =
 {
     OtherText_TheField3,
     OtherText_TheBattle,
@@ -976,7 +976,7 @@ const u8 gBirchText_Girl[] = _("MÄDEL");
 const u8 gBirchText_NewName[] = _("NEUER NAME");
 
 #ifdef SAPPHIRE
-const u8 gDefaultBoyName1[] = _("SEAN");
+const u8 gDefaultBoyName1[] = _("SEBOLD");
 #else
 const u8 gDefaultBoyName1[] = _("ROLAND");
 #endif
@@ -985,7 +985,7 @@ const u8 gDefaultBoyName3[] = _("HELGE");
 const u8 gDefaultBoyName4[] = _("JAN");
 
 #ifdef SAPPHIRE
-const u8 gDefaultGirlName1[] = _("MARINA");
+const u8 gDefaultGirlName1[] = _("MARTINA");
 #else
 const u8 gDefaultGirlName1[] = _("PETRA");
 #endif
@@ -1120,7 +1120,7 @@ const u8 OtherText_TheField[] = _("zum Hauptmenü.");
 const u8 OtherText_TheField2[] = _("zum Hauptmenü.");
 const u8 OtherText_ThePC[] = _("zum PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
+const u8 *const gUnknown_0840E740[7] =
 {
     OtherText_TheField3,
     OtherText_TheBattle,

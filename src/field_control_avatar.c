@@ -206,7 +206,7 @@ int sub_8068024(struct FieldInput *input)
         sub_8071310();
         return TRUE;
     }
-    if (input->pressedSelectButton && sub_80A6D1C() == 1)
+    if (input->pressedSelectButton && sub_80A6D1C() == TRUE)
         return TRUE;
     return FALSE;
 }

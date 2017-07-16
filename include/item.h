@@ -22,6 +22,16 @@ struct Item
     u8 secondaryId;
 };
 
+struct BagPocket
+{
+    struct ItemSlot *itemSlots;
+    u8 capacity;
+};
+
+#define NUM_BAG_POCKETS 5
+
+extern const struct BagPocket gBagPockets[NUM_BAG_POCKETS];
+
 void CopyItemName(u16 itemId, u8 *string);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);
@@ -41,7 +51,7 @@ u16 ItemId_GetPrice(u16 itemId);
 u8 ItemId_GetHoldEffect(u16 itemId);
 u8 ItemId_GetHoldEffectParam(u16 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
-bool8 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c);
+bool32 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c);
 u8 ItemId_GetImportance(u16 itemId);
 u8 ItemId_GetUnknownValue(u16 itemId);
 u8 ItemId_GetPocket(u16 itemId);

@@ -115,11 +115,6 @@ enum
     BAG_KEYITEMS
 };
 
-struct TextStruct
-{
-    const u8 *text;
-};
-
 struct Coords16
 {
     s16 x;

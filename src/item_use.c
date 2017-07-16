@@ -55,7 +55,7 @@ extern u16 gBattleTypeFlags;
 static const u8 gSSTidalBetaString[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 static const u8 gSSTidalBetaString2[] = _("この　チケットで　ふねに　のりほうだい\nはやく　のってみたいな");
 
-static const struct TextStruct gUnknown_083D61DC[2] =
+static const u8 *const gUnknown_083D61DC[2] =
 {
     gSSTidalBetaString,
     gSSTidalBetaString2,
@@ -768,11 +768,11 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
     if(gTasks[taskId].data[2] == 0)
     {
         MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BB8, 1);
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BB8, 1);
     }
     else
     {
-        DisplayItemMessageOnField(taskId, (u8 *)gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)].text, sub_80C9BD8, 0);
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BD8, 0);
     }
 }
 
