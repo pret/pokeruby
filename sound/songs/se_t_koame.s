@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_t_koame_grp, voicegroup_8451F90
+	.equ	se_t_koame_grp, voicegroup111
 	.equ	se_t_koame_pri, 2
 	.equ	se_t_koame_rev, reverb_set+50
 	.equ	se_t_koame_mvl, 127

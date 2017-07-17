@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_kazanbai_grp, voicegroup_8440DE8
+	.equ	bgm_kazanbai_grp, voicegroup061
 	.equ	bgm_kazanbai_pri, 0
 	.equ	bgm_kazanbai_rev, reverb_set+50
 	.equ	bgm_kazanbai_mvl, 127

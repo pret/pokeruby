@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_nigeru_grp, voicegroup_8451990
+	.equ	se_nigeru_grp, voicegroup110
 	.equ	se_nigeru_pri, 5
 	.equ	se_nigeru_rev, reverb_set+50
 	.equ	se_nigeru_mvl, 127

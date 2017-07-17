@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_ajito_grp, voicegroup_84455E8
+	.equ	bgm_ajito_grp, voicegroup073
 	.equ	bgm_ajito_pri, 0
 	.equ	bgm_ajito_rev, reverb_set+50
 	.equ	bgm_ajito_mvl, 127

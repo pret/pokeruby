@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_tamago_grp, voicegroup_8451F90
+	.equ	se_tamago_grp, voicegroup111
 	.equ	se_tamago_pri, 5
 	.equ	se_tamago_rev, reverb_set+50
 	.equ	se_tamago_mvl, 127

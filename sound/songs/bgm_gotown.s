@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_gotown_grp, voicegroup_843A224
+	.equ	bgm_gotown_grp, voicegroup042
 	.equ	bgm_gotown_pri, 0
 	.equ	bgm_gotown_rev, reverb_set+50
 	.equ	bgm_gotown_mvl, 127

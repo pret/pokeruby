@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_sitennou_grp, voicegroup_844C5F0
+	.equ	bgm_sitennou_grp, voicegroup093
 	.equ	bgm_sitennou_pri, 0
 	.equ	bgm_sitennou_rev, reverb_set+50
 	.equ	bgm_sitennou_mvl, 127

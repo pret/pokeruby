@@ -32,15 +32,15 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
 
-extern struct ToneData voicegroup_8452590[];
-extern struct ToneData voicegroup_8452B90[];
-extern struct ToneData voicegroup_8453190[];
-extern struct ToneData voicegroup_8453790[];
+extern struct ToneData voicegroup112[];
+extern struct ToneData voicegroup113[];
+extern struct ToneData voicegroup114[];
+extern struct ToneData voicegroup115[];
 
-extern struct ToneData voicegroup_84537C0[];
-extern struct ToneData voicegroup_8453DC0[];
-extern struct ToneData voicegroup_84543C0[];
-extern struct ToneData voicegroup_84549C0[];
+extern struct ToneData voicegroup116[];
+extern struct ToneData voicegroup117[];
+extern struct ToneData voicegroup118[];
+extern struct ToneData voicegroup119[];
 
 static const struct Fanfare sFanfares[] =
 {
@@ -441,10 +441,10 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
 
     switch (table)
     {
-    case 0: GET_CRY_PTR(voicegroup_84537C0, voicegroup_8452590);
-    case 1: GET_CRY_PTR(voicegroup_8453DC0, voicegroup_8452B90);
-    case 2: GET_CRY_PTR(voicegroup_84543C0, voicegroup_8453190);
-    case 3: GET_CRY_PTR(voicegroup_84549C0, voicegroup_8453790);
+    case 0: GET_CRY_PTR(voicegroup116, voicegroup112);
+    case 1: GET_CRY_PTR(voicegroup117, voicegroup113);
+    case 2: GET_CRY_PTR(voicegroup118, voicegroup114);
+    case 3: GET_CRY_PTR(voicegroup119, voicegroup115);
     }
 }
 

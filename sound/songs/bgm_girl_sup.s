@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_girl_sup_grp, voicegroup_843FBE8
+	.equ	bgm_girl_sup_grp, voicegroup058
 	.equ	bgm_girl_sup_pri, 0
 	.equ	bgm_girl_sup_rev, reverb_set+50
 	.equ	bgm_girl_sup_mvl, 127

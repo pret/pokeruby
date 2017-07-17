@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_syoujoeye_grp, voicegroup_8434F14
+	.equ	bgm_syoujoeye_grp, voicegroup024
 	.equ	bgm_syoujoeye_pri, 0
 	.equ	bgm_syoujoeye_rev, reverb_set+50
 	.equ	bgm_syoujoeye_mvl, 127

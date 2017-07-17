@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_bowa2_grp, voicegroup_8451990
+	.equ	se_bowa2_grp, voicegroup110
 	.equ	se_bowa2_pri, 5
 	.equ	se_bowa2_rev, reverb_set+50
 	.equ	se_bowa2_mvl, 127
