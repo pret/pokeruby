@@ -234,10 +234,10 @@ gUnknown_03005CF0: @ 3005CF0
 gUnknown_03005D00: @ 3005D00
 	.space 0x10
 
-gUnknown_03005D10: @ 3005D10
+gBagPocketScrollStates: @ 3005D10
 	.space 0x14
 
-gUnknown_03005D24: @ 3005D24
+gCurrentBagPocketItemSlots: @ 3005D24
 	.space 0x4
 
 gUnknown_03005D28: @ 3005D28

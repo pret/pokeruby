@@ -87,7 +87,7 @@ bool32 battle_exit_is_player_defeat(u32 a1);
 //void sub_80822BC(void);
 //void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, u8 *data);
 //void battle_80801F0(void);
-u8 *TrainerBattleConfigure(u8 *data);
+u8 *TrainerBattleConfigure(const u8 *data);
 void TrainerWantsBattle(u8, u8 *);
 bool32 GetTrainerFlagFromScriptPointer(u8 *data);
 //void sub_8082524(void);

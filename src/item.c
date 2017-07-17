@@ -8,14 +8,6 @@
 extern u8 gUnknown_02038560;
 extern struct Item gItems[];
 
-struct BagPocket
-{
-    struct ItemSlot *itemSlots;
-    u8 capacity;
-};
-
-extern struct BagPocket gBagPockets[5];
-
 enum
 {
     ITEMS_POCKET,
@@ -137,6 +129,9 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     return TRUE;
 }
 
+// This function matches if gBagPockets is declared non-const,
+// but it should be fixed anyway.
+#ifdef NONMATCHING
 bool8 AddBagItem(u16 itemId, u16 count)
 {
     u8 i;
@@ -201,6 +196,158 @@ bool8 AddBagItem(u16 itemId, u16 count)
     memcpy(gBagPockets[pocket].itemSlots, newItems, gBagPockets[pocket].capacity * sizeof(struct ItemSlot));
     return TRUE;
 }
+#else
+__attribute__((naked))
+bool8 AddBagItem(u16 itemId, u16 count)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r9\n\
+    mov r6, r8\n\
+    push {r6,r7}\n\
+    sub sp, 0x100\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    mov r8, r0\n\
+    lsls r1, 16\n\
+    lsrs r4, r1, 16\n\
+    bl ItemId_GetPocket\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080A9510\n\
+    mov r0, r8\n\
+    bl ItemId_GetPocket\n\
+    subs r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    ldr r1, _080A94F8 @ =gBagPockets\n\
+    lsls r0, r6, 3\n\
+    adds r5, r0, r1\n\
+    ldr r1, [r5]\n\
+    ldrb r2, [r5, 0x4]\n\
+    lsls r2, 2\n\
+    mov r0, sp\n\
+    bl memcpy\n\
+    ldr r7, _080A94FC @ =0x000003e7\n\
+    cmp r6, 0x3\n\
+    beq _080A9468\n\
+    movs r7, 0x63\n\
+_080A9468:\n\
+    movs r1, 0\n\
+    ldrb r0, [r5, 0x4]\n\
+    cmp r1, r0\n\
+    bcs _080A94B2\n\
+    subs r0, r6, 0x2\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r12, r0\n\
+_080A9478:\n\
+    lsls r0, r1, 2\n\
+    mov r2, sp\n\
+    adds r3, r2, r0\n\
+    ldrh r0, [r3]\n\
+    cmp r0, r8\n\
+    bne _080A94A6\n\
+    ldrh r2, [r3, 0x2]\n\
+    adds r0, r2, r4\n\
+    cmp r0, r7\n\
+    ble _080A9500\n\
+    mov r0, r12\n\
+    cmp r0, 0x1\n\
+    bls _080A9510\n\
+    subs r0, r7, r2\n\
+    subs r0, r4, r0\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    strh r7, [r3, 0x2]\n\
+    ldr r2, _080A94F8 @ =gBagPockets\n\
+    mov r9, r2\n\
+    lsls r3, r6, 3\n\
+    cmp r4, 0\n\
+    beq _080A9516\n\
+_080A94A6:\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    ldrb r0, [r5, 0x4]\n\
+    cmp r1, r0\n\
+    bcc _080A9478\n\
+_080A94B2:\n\
+    ldr r2, _080A94F8 @ =gBagPockets\n\
+    mov r9, r2\n\
+    lsls r3, r6, 3\n\
+    cmp r4, 0\n\
+    beq _080A9516\n\
+    movs r1, 0\n\
+    adds r0, r3, r2\n\
+    ldrb r0, [r0, 0x4]\n\
+    cmp r1, r0\n\
+    bcs _080A94F2\n\
+    mov r6, r9\n\
+    adds r5, r3, r6\n\
+_080A94CA:\n\
+    lsls r0, r1, 2\n\
+    mov r6, sp\n\
+    adds r2, r6, r0\n\
+    ldrh r0, [r2]\n\
+    cmp r0, 0\n\
+    bne _080A94E6\n\
+    mov r0, r8\n\
+    strh r0, [r2]\n\
+    cmp r4, r7\n\
+    bls _080A9514\n\
+    subs r0, r4, r7\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    strh r7, [r2, 0x2]\n\
+_080A94E6:\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    ldrb r2, [r5, 0x4]\n\
+    cmp r1, r2\n\
+    bcc _080A94CA\n\
+_080A94F2:\n\
+    cmp r4, 0\n\
+    beq _080A9516\n\
+    b _080A9510\n\
+    .align 2, 0\n\
+_080A94F8: .4byte gBagPockets\n\
+_080A94FC: .4byte 0x000003e7\n\
+_080A9500:\n\
+    strh r0, [r3, 0x2]\n\
+    ldr r0, _080A950C @ =gBagPockets\n\
+    lsls r1, r6, 3\n\
+    adds r1, r0\n\
+    b _080A951A\n\
+    .align 2, 0\n\
+_080A950C: .4byte gBagPockets\n\
+_080A9510:\n\
+    movs r0, 0\n\
+    b _080A9528\n\
+_080A9514:\n\
+    strh r4, [r2, 0x2]\n\
+_080A9516:\n\
+    mov r6, r9\n\
+    adds r1, r3, r6\n\
+_080A951A:\n\
+    ldr r0, [r1]\n\
+    ldrb r2, [r1, 0x4]\n\
+    lsls r2, 2\n\
+    mov r1, sp\n\
+    bl memcpy\n\
+    movs r0, 0x1\n\
+_080A9528:\n\
+    add sp, 0x100\n\
+    pop {r3,r4}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 bool8 RemoveBagItem(u16 itemId, u16 count)
 {
@@ -440,7 +587,7 @@ u8 *ItemId_GetDescription(u16 itemId)
     return gItems[SanitizeItemId(itemId)].description;
 }
 
-bool8 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
+bool32 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c)
 {
     u32 r5 = c + 1;
     u8 *description = gItems[SanitizeItemId(itemId)].description;

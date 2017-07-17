@@ -604,6 +604,8 @@ void dp01_build_cmdbuf_x37_a(u8 a, u8 b); //0x37
 
 void MarkBufferBankForExecution(u8 bank);
 
+extern u8 gBattleTextBuff1[];
+
 // asm/battle_1.o
 void sub_800D6D4();
 void sub_800D74C();

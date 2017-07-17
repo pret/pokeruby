@@ -1,7 +1,8 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
-enum {
+enum
+{
     ITEM_NONE,           // 0x000
     ITEM_MASTER_BALL,    // 0x001
     ITEM_ULTRA_BALL,     // 0x002

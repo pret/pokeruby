@@ -34,7 +34,7 @@ bool8 FreezeMapObject(struct MapObject *mapObject)
     }
 }
 
-void FreezeMapObjects()
+void FreezeMapObjects(void)
 {
     u8 i;
     for (i = 0; i < 16; i++)
