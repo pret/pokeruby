@@ -62,7 +62,7 @@
 #define STATUS3_ON_AIR                  0x40
 #define STATUS3_UNDERGROUND             0x80
 #define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED					0x400
+#define STATUS3_ROOTED                    0x400
 #define STATUS3_CHARGED_UP              0x200
 #define STATUS3_YAWN                    0x1800  //two bits
 #define STATUS3_IMPRISIONED             0x2000
@@ -87,7 +87,7 @@
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_x80000				0x00080000
+#define HITMARKER_x80000                0x00080000
 #define HITMARKER_x100000               0x00100000
 #define HITMARKER_x400000               0x00400000
 #define HITMARKER_x800000               0x00800000
