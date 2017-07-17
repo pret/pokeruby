@@ -41,12 +41,19 @@ extern u16 gUnknown_030041B4;
 extern const struct CompressedSpriteSheet gUnknown_083C1F74;
 extern const struct CompressedSpritePalette gUnknown_083C1F7C;
 
-extern u8 *gUnknown_0841192C[];
-
 extern u8 gBerryCheck_Gfx[];
 extern u8 gBerryCheck_Pal[];
 extern u8 gUnknown_08E788E4[];
 extern u8 gUnknown_08E78A84[];
+
+static const u8 *const gUnknown_0841192C[] =
+{
+    ContestStatsText_VerySoft,
+    ContestStatsText_Soft,
+    ContestStatsText_Hard,
+    ContestStatsText_VeryHard,
+    ContestStatsText_SuperHard,
+};
 
 static void sub_8146014(void);
 static void sub_814602C(void);
