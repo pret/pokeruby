@@ -46,7 +46,8 @@ C_SRCS := $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
-SONG_SRCS := $(wildcard sound/songs/*.s)
+MID_FILES := $(wildcard sound/songs/*.mid)
+SONG_SRCS := $(wildcard sound/songs/*.s) $(MID_FILES:%.mid=%.o)
 SONG_OBJS := $(SONG_SRCS:%.s=%.o)
 
 all: ruby
@@ -68,6 +69,7 @@ tidy:
 	rm -f $(VERSIONS:%=poke%{.gba,.elf,.map})
 	rm -r build/*
 
+include songs.mk
 include castform.mk
 include tilesets.mk
 include fonts.mk
@@ -104,7 +106,6 @@ sound/songs/%.s: sound/songs/%.mid
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
-
 
 define VERSION_RULES
 
