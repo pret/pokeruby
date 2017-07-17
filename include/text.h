@@ -66,6 +66,8 @@
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
 #define CHAR_COLON          0xF0
+#define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
+#define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
 #define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
 #define CHAR_NEWLINE        0xFE
