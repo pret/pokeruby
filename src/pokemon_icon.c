@@ -904,7 +904,7 @@ const u8 gMonIconPaletteIndices[] =
     0, // Unown Question Mark
 };
 
-static const struct SpritePalette sMonIconPaletteTable[] =
+const struct SpritePalette gMonIconPaletteTable[] =
 {
     { &gMonIconPalettes[0][0], POKE_ICON_BASE_PAL_TAG + 0 },
     { &gMonIconPalettes[1][0], POKE_ICON_BASE_PAL_TAG + 1 },
@@ -1146,7 +1146,7 @@ void sub_809D51C(void)
 {
     u8 i;
     for (i = 0; i < 6; i++)
-        LoadSpritePalette(&sMonIconPaletteTable[i]);
+        LoadSpritePalette(&gMonIconPaletteTable[i]);
 }
 
 // unused
@@ -1156,15 +1156,15 @@ void SafeLoadMonIconPalette(u16 species)
     if (species > SPECIES_EGG)
         species = 260;
     palIndex = gMonIconPaletteIndices[species];
-    if (IndexOfSpritePaletteTag(sMonIconPaletteTable[palIndex].tag) == 0xFF)
-        LoadSpritePalette(&sMonIconPaletteTable[palIndex]);
+    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
+        LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
 void sub_809D580(u16 species)
 {
     u8 palIndex = gMonIconPaletteIndices[species];
-    if (IndexOfSpritePaletteTag(sMonIconPaletteTable[palIndex].tag) == 0xFF)
-        LoadSpritePalette(&sMonIconPaletteTable[palIndex]);
+    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
+        LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
 // unused
@@ -1172,7 +1172,7 @@ void FreeMonIconPalettes(void)
 {
     u8 i;
     for (i = 0; i < 6; i++)
-        FreeSpritePaletteByTag(sMonIconPaletteTable[i].tag);
+        FreeSpritePaletteByTag(gMonIconPaletteTable[i].tag);
 }
 
 // unused
@@ -1182,14 +1182,14 @@ void SafeFreeMonIconPalette(u16 species)
     if (species > SPECIES_EGG)
         species = 260;
     palIndex = gMonIconPaletteIndices[species];
-    FreeSpritePaletteByTag(sMonIconPaletteTable[palIndex].tag);
+    FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
 void sub_809D608(u16 species)
 {
     u8 palIndex;
     palIndex = gMonIconPaletteIndices[species];
-    FreeSpritePaletteByTag(sMonIconPaletteTable[palIndex].tag);
+    FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
 void sub_809D62C(struct Sprite *sprite)
