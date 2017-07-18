@@ -36,7 +36,10 @@ $(TILESETDIR)/secondary/sootopolis/tiles.4bpp: $(TILESETDIR)/secondary/sootopoli
 $(TILESETDIR)/primary/building/tiles.4bpp: $(TILESETDIR)/primary/building/tiles.png
 	$(GFX) $< $@ -num_tiles 502
 
-$(TILESETDIR)/secondary/shop/tiles.4bpp: $(TILESETDIR)/secondary/shop/tiles.png
+$(TILESETDIR)/secondary/shop/tiles_en.4bpp: $(TILESETDIR)/secondary/shop/tiles_en.png
+	$(GFX) $< $@ -num_tiles 502
+
+$(TILESETDIR)/secondary/shop/tiles_de.4bpp: $(TILESETDIR)/secondary/shop/tiles_de.png
 	$(GFX) $< $@ -num_tiles 502
 
 $(TILESETDIR)/secondary/pokemon_center/tiles.4bpp: $(TILESETDIR)/secondary/pokemon_center/tiles.png
