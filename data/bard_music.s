@@ -237,4 +237,8 @@ gUnknown_084170F4:: @ 84170F4
 	.4byte 15
 
 @ 84171C4
-	.include "data/bard_music.inc"
+.ifdef ENGLISH
+	.include "data/bard_music_en.inc"
+.else
+	.include "data/bard_music_de.inc"
+.endif

@@ -3,11 +3,16 @@
 
 	.section .rodata
 
+.ifdef ENGLISH
 @ 83BC680
-	.include "data/text/move_descriptions.inc"
+	.include "data/text_en/move_descriptions.inc"
 
 @ 83C0F60
-	.include "data/text/nature_names.inc"
+	.include "data/text_en/nature_names.inc"
+.else
+	.include "data/text_de/move_descriptions.inc"
+	.include "data/text_de/nature_names.inc"
+.endif
 
 	.align 2
 gUnknown_083C1068:: @ 83C1068

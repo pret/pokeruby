@@ -661,7 +661,11 @@ gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
 	.4byte gSpriteAffineAnim_8215AB0
 
 @ 8215AC4
-	.include "data/ingame_trades.inc"
+.ifdef ENGLISH
+	.include "data/ingame_trades_en.inc"
+.else
+	.include "data/ingame_trades_de.inc"
+.endif
 
 gTradeBallVerticalVelocityTable:: @ 8215BA0
 	.byte  0

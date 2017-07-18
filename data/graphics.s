@@ -3933,7 +3933,11 @@ gBerryBlenderArrowPalette:: @ 8E920F8
 
 	.align 2
 gTilesetTiles_General:: @ 8E92118
-	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
+.ifdef ENGLISH
+	.incbin "data/tilesets/primary/general/tiles_en.4bpp.lz"
+.else
+	.incbin "data/tilesets/primary/general/tiles_de.4bpp.lz"
+.endif
 
 	.align 2
 gTilesetPalettes_General:: @ 8E94310
@@ -4696,7 +4700,11 @@ gTilesetPalettes_Shop::
 
 	.align 2
 gTilesetTiles_Shop::
-	.incbin "data/tilesets/secondary/shop/tiles.4bpp.lz"
+.ifdef ENGLISH
+	.incbin "data/tilesets/secondary/shop/tiles_en.4bpp.lz"
+.else
+	.incbin "data/tilesets/secondary/shop/tiles_de.4bpp.lz"
+.endif
 
 	.align 2
 gUnknown_083FAF1C::

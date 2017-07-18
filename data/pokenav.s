@@ -203,14 +203,20 @@ gPokenavCityMap_Mossdeep_0:: @ 83E0F10
 gPokenavCityMap_Petalburg_0:: @ 83E0F6C
 	.incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
 
+.ifdef ENGLISH
 @ 83E0FC8
-	.include "data/text/ribbon_descriptions.inc"
+	.include "data/text_en/ribbon_descriptions.inc"
 
 @ 83E1204
-	.include "data/text/gift_ribbon_descriptions.inc"
+	.include "data/text_en/gift_ribbon_descriptions.inc"
 
 @ 83E178C
-	.include "data/text/trainer_eye_descriptions.inc"
+	.include "data/text_en/trainer_eye_descriptions.inc"
+.else
+	.include "data/text_de/ribbon_descriptions.inc"
+	.include "data/text_de/gift_ribbon_descriptions.inc"
+	.include "data/text_de/trainer_eye_descriptions.inc"
+.endif
 
 	.align 2
 gUnknown_083E31B0:: @ 83E31B0

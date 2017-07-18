@@ -272,8 +272,13 @@
 	.include "data/maps/CaveOfOrigin_B3F/header.inc"
 	.include "data/maps/CaveOfOrigin_B4F/header.inc"
 	.include "data/maps/VictoryRoad_1F/header.inc"
-	.include "data/maps/VictoryRoad_B1F/header.inc"
-	.include "data/maps/VictoryRoad_B2F/header.inc"
+.ifdef ENGLISH
+	.include "data/maps/VictoryRoad_B1F_en/header.inc"
+	.include "data/maps/VictoryRoad_B2F_en/header.inc"
+.else
+	.include "data/maps/VictoryRoad_B1F_de/header.inc"
+	.include "data/maps/VictoryRoad_B2F_de/header.inc"
+.endif
 	.include "data/maps/ShoalCave_LowTideEntranceRoom/header.inc"
 	.include "data/maps/ShoalCave_LowTideInnerRoom/header.inc"
 	.include "data/maps/ShoalCave_LowTideStairsRoom/header.inc"

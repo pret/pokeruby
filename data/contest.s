@@ -4,7 +4,11 @@
 	.section .rodata
 
 @ 83C9408
-	.include "data/contest_opponents.inc"
+.ifdef ENGLISH
+	.include "data/contest_opponents_en.inc"
+.else
+	.include "data/contest_opponents_de.inc"
+.endif
 
 gUnknown_083CA308:: @ 83CA308
 	.byte 19,  0
@@ -173,7 +177,11 @@ gUnknown_083CA4CC:: @ 83CA4CC
 gUnknown_083CA4D4:: @ 83CA4D4
 	spr_template 0xABE0, 0xABE0, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-	.include "data/text/contest_strings.inc"
+.ifdef ENGLISH
+	.include "data/text_en/contest_strings.inc"
+.else
+	.include "data/text_de/contest_strings.inc"
+.endif
 
 gUnknownText_MissedTurn:: @ 83CC355
 .ifdef ENGLISH

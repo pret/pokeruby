@@ -4,7 +4,11 @@
 	.section .rodata
 
 @ 8402F00
-	.include "data/battle_tower/trainers.inc"
+.ifdef ENGLISH
+	.include "data/battle_tower/trainers_en.inc"
+.else
+	.include "data/battle_tower/trainers_de.inc"
+.endif
 
 @ 8403860
 	.include "data/battle_tower/held_items.inc"

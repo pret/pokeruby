@@ -47,7 +47,11 @@ gUnknown_083E6B04:: @ 83E6B04
 	.include "data/region_map_sections.inc"
 
 @ 83E6FF4
-	.include "data/region_map_locations.inc"
+.ifdef ENGLISH
+	.include "data/region_map_locations_en.inc"
+.else
+	.include "data/region_map_locations_de.inc"
+.endif
 
 gUnknown_083E7684:: @ 83E7684
 	.2byte 50, 39
