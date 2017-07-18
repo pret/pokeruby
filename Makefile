@@ -46,9 +46,10 @@ C_SRCS := $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
-MID_FILES := $(wildcard sound/songs/*.mid)
-SONG_SRCS := $(wildcard sound/songs/*.s) $(MID_FILES:%.mid=%.o)
-SONG_OBJS := $(SONG_SRCS:%.s=%.o)
+MID_FILES := $(wildcard sound/songs/midi/*.mid)
+MID_OBJS := $(MID_FILES:%.mid=%.o)
+SONG_SRCS := $(wildcard sound/songs/*.s)
+SONG_OBJS := $(SONG_SRCS:%.s=%.o) $(MID_OBJS)
 
 all: ruby
 	@:

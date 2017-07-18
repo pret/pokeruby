@@ -837,11 +837,11 @@ SECTIONS {
         sound/songs/bgm_test.o(.rodata);
         sound/songs/bgm_gomachi0.o(.rodata);
         sound/songs/bgm_gotown.o(.rodata);
-        sound/songs/bgm_pokecen.o(.rodata);
+        sound/songs/midi/bgm_pokecen.o(.rodata);
         sound/songs/bgm_nextroad.o(.rodata);
         sound/songs/bgm_granroad.o(.rodata);
-        sound/songs/bgm_cycling.o(.rodata);
-        sound/songs/bgm_friendly.o(.rodata);
+        sound/songs/midi/bgm_cycling.o(.rodata);
+        sound/songs/midi/bgm_friendly.o(.rodata);
         sound/songs/bgm_mishiro.o(.rodata);
         sound/songs/bgm_tozan.o(.rodata);
         sound/songs/bgm_girleye.o(.rodata);

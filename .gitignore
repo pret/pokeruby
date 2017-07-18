@@ -15,6 +15,8 @@
 *.fwjpnfont
 *.bat
 sound/**/*.bin
+sound/songs/midi/*.o
+sound/songs/midi/*.s
 src/*.s
 tools/agbcc
 ld_script_ruby.txt
