@@ -1561,11 +1561,11 @@ _08de121754:
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08de121764 @ =0x081fd47c
+	ldr r0, _08de121764 @ =gTrainers+4
 	adds r4, r1, r0
 	b _081219E6
 	.align 2, 0
-_08de121764: .4byte 0x081fd47c
+_08de121764: .4byte gTrainers+4
 _08121830:
 	lsls r0, r7, 3
 	subs r0, r7
