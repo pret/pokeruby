@@ -191,7 +191,7 @@ SECTIONS {
         asm/pokenav.o(.text);
         src/pokenav.o(.text);
         asm/pokenav.o(.text_80F708C);
-        asm/mon_markings.o(.text);
+        src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
