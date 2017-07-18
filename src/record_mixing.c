@@ -30,31 +30,19 @@ extern u8 ewram[];
 #define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
 
 extern struct RecordMixing_UnknownStruct gUnknown_02038738;
-
-extern void *const recordMixingSecretBases;
-extern void *const recordMixingTvShows;
-extern void *const gUnknown_083D0274;
-extern void *const gUnknown_083D0278;
-extern void *const recordMixingEasyChatPairs;
-extern struct RecordMixing_UnknownStruct *const gUnknown_083D0280;
-extern void *const gUnknown_083D0284;
-
 extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
 extern u8 gUnknown_0300071C[];
 extern bool8 gReceivedRemoteLinkPlayers;
 
-// I can't define these here or else RecordMixing_PrepareExchangePacket gets optimized.
-/*
-void *const recordMixingSecretBases = &gSaveBlock1.secretBases;
-void *const recordMixingTvShows = &gSaveBlock1.tvShows;
-void *const gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
-void *const gUnknown_083D0278 = &gSaveBlock1.oldMan;
-void *const recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
-struct RecordMixing_UnknownStruct *const gUnknown_083D0280 = &gUnknown_02038738;
-void *const gUnknown_083D0284 = &gSaveBlock2.filler_A8;
-*/
+void *recordMixingSecretBases = &gSaveBlock1.secretBases;
+void *recordMixingTvShows = &gSaveBlock1.tvShows;
+void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
+void *gUnknown_083D0278 = &gSaveBlock1.oldMan;
+void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
+struct RecordMixing_UnknownStruct *gUnknown_083D0280 = &gUnknown_02038738;
+void *gUnknown_083D0284 = &gSaveBlock2.filler_A8;
 
 #define BUFFER_CHUNK_SIZE 200
 

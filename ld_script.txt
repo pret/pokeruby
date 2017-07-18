@@ -407,7 +407,7 @@ SECTIONS {
         data/naming_screen.o(.rodata);
         data/money.o(.rodata);
         data/contest_effect.o(.rodata);
-        data/record_mixing.o(.rodata);
+        src/record_mixing.o(.data);
         src/record_mixing.o(.rodata);
         src/sound_check_menu.o(.rodata);
         data/secret_base.o(.rodata);
