@@ -752,12 +752,9 @@ gUnknown_020388B8: @ 20388B8
 gUnknown_020388BC: @ 20388BC
 	.space 0x4
 
-gUnknown_020388C0: @ 20388C0
-	.space 0x4
+	.include "src/menu_helpers.o"
 
-gUnknown_020388C4: @ 20388C4
-	.space 0x8
-
+	.align 2
 gUnknown_020388CC: @ 20388CC
 	.space 0x4
 
