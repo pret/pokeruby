@@ -93,15 +93,7 @@ gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
 	.include "src/field_effect.o"
-
-gUnknown_03000700: @ 3000700
-	.space 0x1
-
-gUnknown_03000701: @ 3000701
-	.space 0x3
-
-gUnknown_03000704: @ 3000704
-	.space 0x4
+    .include "src/item_menu.o"
 
 gUnknown_03000708: @ 3000708
 	.space 0x10
@@ -136,9 +128,9 @@ gUnknown_03000744: @ 3000744
 gUnknown_03000748: @ 3000748
 	.space 0x4
 
-gUnknown_0300074C: @ 300074C
-	.space 0x4
+	.include "src/menu_helpers.o"
 
+	.align 2
 gUnknown_03000750: @ 3000750
 	.space 0x2
 

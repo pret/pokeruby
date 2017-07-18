@@ -55,5 +55,6 @@ matrix:
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby_de
+        - make -j2 compare_sapphire_de
   allow_failures:
     - env: _="Formatting"

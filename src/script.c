@@ -34,7 +34,7 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
         ctx->stack[i] = 0;
 }
 
-u8 SetupBytecodeScript(struct ScriptContext *ctx, void *ptr)
+u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
 {
     ctx->scriptPtr = ptr;
     ctx->mode = 1;
@@ -106,7 +106,7 @@ u8 RunScript(struct ScriptContext *ctx)
     return 1;
 }
 
-u8 ScriptPush(struct ScriptContext *ctx, u8 *ptr)
+u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
 {
     if (ctx->stackDepth + 1 >= 20)
     {
@@ -120,7 +120,7 @@ u8 ScriptPush(struct ScriptContext *ctx, u8 *ptr)
     }
 }
 
-u8 *ScriptPop(struct ScriptContext *ctx)
+const u8 *ScriptPop(struct ScriptContext *ctx)
 {
     if (ctx->stackDepth == 0)
         return NULL;
@@ -202,7 +202,7 @@ bool8 ScriptContext2_RunScript(void)
     return 1;
 }
 
-void ScriptContext1_SetupScript(u8 *ptr)
+void ScriptContext1_SetupScript(const u8 *ptr)
 {
     InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext1, ptr);
@@ -221,7 +221,7 @@ void EnableBothScriptContexts()
     ScriptContext2_Enable();
 }
 
-void ScriptContext2_RunNewScript(u8 *ptr)
+void ScriptContext2_RunNewScript(const u8 *ptr)
 {
     InitScriptContext(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext2, ptr);

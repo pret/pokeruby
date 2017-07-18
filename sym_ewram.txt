@@ -605,59 +605,9 @@ gUnknown_020384F8: @ 20384F8
 	.space 0x40
 
 	.include "src/map_name_popup.o"
+	.include "src/item_menu.o"
 
-	.align 2
-gUnknown_0203853C: @ 203853C
-	.space 0x4
-
-gUnknown_02038540: @ 2038540
-	.space 0x4
-
-gUnknown_02038544: @ 2038544
-	.space 0xC
-
-gUnknown_02038550: @ 2038550
-	.space 0x4
-
-gUnknown_02038554: @ 2038554
-	.space 0x4
-
-gUnknown_02038558: @ 2038558
-	.space 0x1
-
-gUnknown_02038559: @ 2038559
-	.space 0x1
-
-gUnknown_0203855A: @ 203855A
-	.space 0x1
-
-gUnknown_0203855B: @ 203855B
-	.space 0x1
-
-gUnknown_0203855C: @ 203855C
-	.space 0x2
-
-gScriptItemId: @ 203855E
-	.space 0x2
-
-gUnknown_02038560: @ 2038560
-	.space 0x1
-
-gUnknown_02038561: @ 2038561
-	.space 0x1
-
-gUnknown_02038562: @ 2038562
-	.space 0x1
-
-gUnknown_02038563: @ 2038563
-	.space 0x1
-
-gUnknown_02038564: @ 2038564
-	.space 0x4
-
-gUnknown_02038568: @ 2038568
-	.space 0x4
-
+    .align 2
 gUnknown_0203856C: @ 203856C
 	.space 0x4
 
@@ -802,12 +752,9 @@ gUnknown_020388B8: @ 20388B8
 gUnknown_020388BC: @ 20388BC
 	.space 0x4
 
-gUnknown_020388C0: @ 20388C0
-	.space 0x4
+	.include "src/menu_helpers.o"
 
-gUnknown_020388C4: @ 20388C4
-	.space 0x8
-
+	.align 2
 gRegionMap: @ 20388CC
 	.space 0x4
 

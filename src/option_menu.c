@@ -32,8 +32,9 @@ enum {
     MENUITEM_CANCEL,
 };
 
-extern u8 gUnknown_0839F63C[];
-extern u8 gUnknown_0839F5FC[];  //palette
+const u16 gUnknown_0839F5FC[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
+// note: this is only used in the Japanese release
+const u8 gUnknown_0839F63C[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);

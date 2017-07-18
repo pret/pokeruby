@@ -12,8 +12,8 @@ struct ScriptContext
     u8 mode;
     u8 comparisonResult;
     u8 (*nativePtr)(void);
-    u8 *scriptPtr;
-    u8 *stack[20];
+    const u8 *scriptPtr;
+    const u8 *stack[20];
     ScrCmdFunc *cmdTable;
     ScrCmdFunc *cmdTableEnd;
     u32 data[4];
@@ -22,12 +22,12 @@ struct ScriptContext
 #define ScriptReadByte(ctx) (*(ctx->scriptPtr++))
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
-u8 SetupBytecodeScript(struct ScriptContext *ctx, void *ptr);
+u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr);
 void SetupNativeScript(struct ScriptContext *ctx, void *ptr);
 void StopScript(struct ScriptContext *ctx);
 u8 RunScript(struct ScriptContext *ctx);
-u8 ScriptPush(struct ScriptContext *ctx, u8 *ptr);
-u8 *ScriptPop(struct ScriptContext *ctx);
+u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr);
+const u8 *ScriptPop(struct ScriptContext *ctx);
 void ScriptJump(struct ScriptContext *ctx, u8 *ptr);
 void ScriptCall(struct ScriptContext *ctx, u8 *ptr);
 void ScriptReturn(struct ScriptContext *ctx);
@@ -38,10 +38,10 @@ void ScriptContext2_Disable(void);
 bool8 ScriptContext2_IsEnabled(void);
 void ScriptContext1_Init(void);
 bool8 ScriptContext2_RunScript(void);
-void ScriptContext1_SetupScript(u8 *ptr);
+void ScriptContext1_SetupScript(const u8 *ptr);
 void ScriptContext1_Stop(void);
 void EnableBothScriptContexts(void);
-void ScriptContext2_RunNewScript(u8 *ptr);
+void ScriptContext2_RunNewScript(const u8 *ptr);
 u8 *mapheader_get_tagged_pointer(u8 tag);
 void mapheader_run_script_by_tag(u8 tag);
 u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag);

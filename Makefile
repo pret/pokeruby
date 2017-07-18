@@ -26,7 +26,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
 
-VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_de
+VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_de sapphire_de
 
 # Clear the default suffixes.
 .SUFFIXES:
@@ -178,3 +178,4 @@ $(eval $(call VERSION_RULES,sapphire,SAPPHIRE,0,ENGLISH))
 $(eval $(call VERSION_RULES,sapphire_rev1,SAPPHIRE,1,ENGLISH))
 $(eval $(call VERSION_RULES,sapphire_rev2,SAPPHIRE,2,ENGLISH))
 $(eval $(call VERSION_RULES,ruby_de,RUBY,0,GERMAN))
+$(eval $(call VERSION_RULES,sapphire_de,SAPPHIRE,0,GERMAN))

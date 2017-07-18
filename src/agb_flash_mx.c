@@ -26,7 +26,11 @@ const struct FlashSetupInfo MX29L010 =
                0  // appears to be unused
         },
         { 3, 1 }, // wait state setup data
+#if defined(GERMAN) && defined(SAPPHIRE)
+        { { 0xBF, 0xD4 } } // ID
+#else
         { { 0xC2, 0x09 } } // ID
+#endif
     }
 };
 

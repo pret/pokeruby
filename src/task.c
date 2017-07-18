@@ -11,6 +11,9 @@ struct Task gTasks[ACTIVE_SENTINEL];
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();
 
+// Unused string
+const u8 sTaskOverString[] = _("TASK OVER\nタスクがオーバーしました");
+
 void ResetTasks()
 {
     u8 taskId;

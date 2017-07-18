@@ -7,7 +7,7 @@ struct MultichoiceListStruct
     u8 count;
 };
 
-extern const struct TextStruct gUnknown_083CE048[];
+extern const u8 *const gUnknown_083CE048[];
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4);
 bool8 sub_80B50B0(u8 left, u8 top, u8 var3, u8 var4, u8 var5);

@@ -155,7 +155,7 @@ SECTIONS {
         src/fldeff_cut.o(.text);
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
-        asm/item_menu.o(.text);
+        src/item_menu.o(.text);
         src/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);
         src/matsuda_debug_menu.o(.text);
@@ -172,7 +172,7 @@ SECTIONS {
         src/sound_check_menu.o(.text);
         src/secret_base.o(.text);
         asm/secret_base.o(.text_80BC1D0);
-		src/tv.o(.text);
+        src/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
@@ -195,7 +195,7 @@ SECTIONS {
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
-        asm/menu_helpers.o(.text);
+        src/menu_helpers.o(.text);
         src/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
@@ -208,7 +208,7 @@ SECTIONS {
         src/slot_machine.o(.text_b);
         src/contest_painting.o(.text);
         src/battle_ai.o(.text);
-        asm/trader.o(.text);
+        src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         src/rom6.o(.text);
@@ -338,7 +338,7 @@ SECTIONS {
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
-        data/util.o(.rodata);
+        src/util.o(.rodata);
         data/daycare.o(.rodata);
         data/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
@@ -374,7 +374,7 @@ SECTIONS {
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
-        data/task.o(.rodata);
+        src/task.o(.rodata);
         data/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
@@ -387,7 +387,7 @@ SECTIONS {
         data/wild_encounter.o(.rodata);
         src/field_effect.o(.rodata);
         data/pokemon_menu.o(.rodata);
-        data/option_menu.o(.rodata);
+        src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
         src/trainer_card.o(.rodata);
         data/trainer_card.o(.rodata);
@@ -396,9 +396,9 @@ SECTIONS {
         data/pokemon_icon.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/fldeff_cut.o(.rodata);
-        data/item_menu.o(.rodata);
+        src/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
-        data/item.o(.rodata);
+        src/item.o(.rodata);
         data/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
         data/shop.o(.rodata);
@@ -426,7 +426,7 @@ SECTIONS {
         data/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
         data/mail.o(.rodata);
-        data/menu_helpers.o(.rodata);
+        src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
@@ -434,7 +434,7 @@ SECTIONS {
         data/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
         src/battle_ai.o(.rodata);
-        data/trader.o(.rodata);
+        src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
@@ -471,7 +471,7 @@ SECTIONS {
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
-        data/berry_tag_screen.o(.rodata);
+        src/berry_tag_screen.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
