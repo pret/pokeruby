@@ -6,6 +6,12 @@
 #include "sound.h"
 #include "sprite.h"
 
+#ifdef GERMAN
+#define MENU_TEXT_SPRITE_X_OFFSET 24
+#else
+#define MENU_TEXT_SPRITE_X_OFFSET 32
+#endif
+
 struct PokemonMarkMenu
 {
     /*0x0000*/ u16 baseTileTag;
@@ -297,7 +303,7 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         sMenu->menuTextSprite->oam.shape = ST_OAM_H_RECTANGLE;
         sMenu->menuTextSprite->oam.size = 3;
         StartSpriteAnim(sMenu->menuTextSprite, 9);
-        sMenu->menuTextSprite->pos1.x = x + 32;
+        sMenu->menuTextSprite->pos1.x = x + MENU_TEXT_SPRITE_X_OFFSET;
         sMenu->menuTextSprite->pos1.y = y + 80;
         CalcCenterToCornerVec(sMenu->menuTextSprite, 1, 2, 0);
     }
