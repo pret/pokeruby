@@ -469,10 +469,20 @@ struct UnkMauvilleOldManStruct2
     u8 fillerF[0x2];
 }; /*size = 0x2C*/
 
+struct MauvilleOldManTrader
+{
+    u8 unk0;
+    u8 unk1[4];
+    u8 unk5[4][11];
+    u8 unk31;
+};
+
 typedef union OldMan
 {
     struct UnkMauvilleOldManStruct oldMan1;
     struct UnkMauvilleOldManStruct2 oldMan2;
+    struct MauvilleOldManTrader trader;
+    u8 filler[0x40];
 } OldMan;
 
 struct Unk_SB_Access_Struct1
@@ -606,7 +616,6 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ OldMan oldMan;
-    /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
