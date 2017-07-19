@@ -85,6 +85,22 @@ static std::string GetExtension(std::string s)
     return "";
 }
 
+static std::string BaseName(std::string s)
+{
+    std::size_t posAfterSlash = s.find_last_of("/\\");
+
+    if (posAfterSlash == std::string::npos)
+        posAfterSlash = 0;
+    else
+        posAfterSlash++;
+
+    std::size_t dotPos = s.find_first_of('.', posAfterSlash);
+    if (dotPos > posAfterSlash && dotPos != std::string::npos)
+        s = s.substr(posAfterSlash, dotPos - posAfterSlash);
+
+    return s;
+}
+
 static const char *GetArgument(int argc, char **argv, int& index)
 {
     assert(index >= 0 && index < argc);
@@ -187,7 +203,7 @@ int main(int argc, char** argv)
         RaiseError("output filename extension is not \"s\"");
 
     if (g_asmLabel.empty())
-        g_asmLabel = StripExtension(outputFilename);
+        g_asmLabel = BaseName(outputFilename);
 
     g_inputFile = std::fopen(inputFilename.c_str(), "rb");
 
