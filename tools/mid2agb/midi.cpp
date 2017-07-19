@@ -177,10 +177,18 @@ void SkipEventData()
     Skip(ReadVLQ());
 }
 
+int typeChanPrev;
+
 void DetermineEventCategory(MidiEventCategory& category, int& typeChan, int& size)
 {
     typeChan = ReadInt8();
 
+    if (typeChan < 0x80)
+    {
+        // Databyte was found. Re-use the last event type.
+        ungetc(typeChan, g_inputFile);
+        typeChan = typeChanPrev;
+    }
     if (typeChan == 0xFF)
     {
         category = MidiEventCategory::Meta;
@@ -210,6 +218,7 @@ void DetermineEventCategory(MidiEventCategory& category, int& typeChan, int& siz
     {
         category = MidiEventCategory::Invalid;
     }
+    typeChanPrev = typeChan;
 }
 
 void MakeBlockEvent(Event& event, EventType type)
