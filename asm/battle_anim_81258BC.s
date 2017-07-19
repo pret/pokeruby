@@ -9,7 +9,7 @@
 	thumb_func_start unref_sub_812AECC
 unref_sub_812AECC: @ 812AECC
 	push {lr}
-	bl sub_812613C
+	bl RunMysteryEventScript
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
