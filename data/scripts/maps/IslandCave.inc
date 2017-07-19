@@ -38,7 +38,7 @@ gIslandCave_EventScript_OpenRegiiceChamber:: @ 815EF19
 	setmaptile 7, 20, 562, 1
 	setmaptile 8, 20, 563, 0
 	setmaptile 9, 20, 564, 1
-	special 142
+	special DrawWholeMapView
 	playsfx SE_BAN
 	setflag 2129
 	end
@@ -48,7 +48,7 @@ IslandCave_EventScript_15EF59:: @ 815EF59
 	checkflag 2129
 	jumpeq IslandCave_EventScript_15EF72
 	braillemsg IslandCave_Braille_1C54FC
-	special 280
+	special DoBrailleWait
 	waitstate
 	jump IslandCave_EventScript_15EF95
 	end
@@ -63,7 +63,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	braillemsg IslandCave_Braille_1C54FC
 	checkflag 2129
 	jumpeq IslandCave_EventScript_15EF95
-	special 280
+	special DoBrailleWait
 	waitstate
 	jump IslandCave_EventScript_15EF95
 	end
@@ -84,7 +84,7 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag 936
 	setflag 2145
-	special 313
+	special StartBattle_Regi
 	waitstate
 	clearflag 2145
 	release

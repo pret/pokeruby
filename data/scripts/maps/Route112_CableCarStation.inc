@@ -48,8 +48,8 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	setvar 0x8004, 0
 	setvar 0x40a3, 1
 	inccounter GAME_STAT_RODE_CABLE_CAR
-	special 151
-	special 152
+	special CableCarWarp
+	special sub_8123218
 	waitstate
 	release
 	end

@@ -10,7 +10,7 @@ Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	lockall
 	move 255, Route121_SafariZoneEntrance_Movement_15C348
 	waitmove 0
-	special 206
+	special ExitSafariMode
 	setvar 0x40a4, 0
 	releaseall
 	end
@@ -80,7 +80,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	hidemoney 0, 0
 	move 255, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmove 0
-	special 205
+	special EnterSafariMode
 	setvar 0x40a4, 2
 	warp SafariZone_Southeast, 255, 32, 33
 	waitstate
@@ -90,7 +90,7 @@ Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	countpokemon
 	compare RESULT, 6
 	jumpif 5, Route121_SafariZoneEntrance_EventScript_15C44F
-	specialval RESULT, 304
+	specialval RESULT, CheckFreePokemonStorageSpace
 	compare RESULT, 1
 	jumpeq Route121_SafariZoneEntrance_EventScript_15C44F
 	msgbox Route121_SafariZoneEntrance_Text_1C39A3, 4

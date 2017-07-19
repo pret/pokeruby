@@ -47,24 +47,24 @@ MauvilleCity_Gym_EventScript_15649B:: @ 815649B
 
 MauvilleCity_Gym_EventScript_15657D:: @ 815657D
 	setvar 0x8004, 0
-	special 140
+	special MauvilleGymSpecial1
 	jump MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_15658B:: @ 815658B
 	setvar 0x8004, 1
-	special 140
+	special MauvilleGymSpecial1
 	jump MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_156599:: @ 8156599
 	setvar 0x8004, 2
-	special 140
+	special MauvilleGymSpecial1
 	jump MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
-	special 144
+	special MauvilleGymSpecial3
 	end
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
@@ -89,8 +89,8 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	callif 1, MauvilleCity_Gym_EventScript_1A00FB
 	setvar 0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
-	special 144
-	special 142
+	special MauvilleGymSpecial3
+	special DrawWholeMapView
 	playsfx 44
 	jump MauvilleCity_Gym_EventScript_15661D
 	end
@@ -143,9 +143,9 @@ MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	end
 
 MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
-	special 139
-	special 140
-	special 142
+	special MauvilleGymSpecial2
+	special MauvilleGymSpecial1
+	special DrawWholeMapView
 	playsfx 44
 	checkflag 99
 	jumpeq MauvilleCity_Gym_EventScript_1566E1

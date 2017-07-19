@@ -502,7 +502,7 @@ Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
 
 Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
 	setmaptile 5, 1, 537, 0
-	special 142
+	special DrawWholeMapView
 	pause 20
 	move 255, Route110_TrickHouseEntrance_Movement_1A0856
 	waitmove 0
@@ -608,7 +608,7 @@ Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
 	playsfx SE_PIN
 	setvar 0x40AB, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -619,7 +619,7 @@ Route110_TrickHouseEntrance_EventScript_161769:: @ 8161769
 	playsfx SE_PIN
 	setvar 0x40AC, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -630,7 +630,7 @@ Route110_TrickHouseEntrance_EventScript_161792:: @ 8161792
 	playsfx SE_PIN
 	setvar 0x40AD, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -641,7 +641,7 @@ Route110_TrickHouseEntrance_EventScript_1617BB:: @ 81617BB
 	playsfx SE_PIN
 	setvar 0x40AE, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -652,7 +652,7 @@ Route110_TrickHouseEntrance_EventScript_1617E4:: @ 81617E4
 	playsfx SE_PIN
 	setvar 0x40AF, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -663,7 +663,7 @@ Route110_TrickHouseEntrance_EventScript_16180D:: @ 816180D
 	playsfx SE_PIN
 	setvar 0x40B0, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -674,7 +674,7 @@ Route110_TrickHouseEntrance_EventScript_161836:: @ 8161836
 	playsfx SE_PIN
 	setvar 0x40B1, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -685,7 +685,7 @@ Route110_TrickHouseEntrance_EventScript_16185F:: @ 816185F
 	playsfx SE_PIN
 	setvar 0x40B2, 2
 	setmaptile 13, 1, 523, 0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 

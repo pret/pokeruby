@@ -14,23 +14,23 @@ LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 
 LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B68C, 4
-	special 159
+	special sub_80F9A0C
 	waitstate
 	compare 0x8004, 255
 	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
-	special 328
+	special sub_80FA148
 	compare RESULT, 1
 	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B71
-	special 223
+	special sub_80F9F3C
 	compare RESULT, 1
 	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, 4
 	fadescreen 1
-	special 220
+	special sub_80F9EEC
 	fadescreen 0
 	compare 0x8005, 4
 	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
-	special 222
+	special sub_80F9F84
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5
 	switch RESULT
 	case 1, LilycoveCity_MoveDeletersHouse_EventScript_159B53
@@ -39,7 +39,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_159B53:: @ 8159B53
-	special 221
+	special sub_80FA0DC
 	fanfare 378
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B71E, 4
@@ -47,7 +47,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159B53:: @ 8159B53
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_159B64:: @ 8159B64
-	special 222
+	special sub_80F9F84
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6D0, 4
 	releaseall
 	end

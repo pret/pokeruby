@@ -13,10 +13,10 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	checkflag 300
 	callif 0, PacifidlogTown_House2_EventScript_1541D7
 	setflag 300
-	specialval RESULT, 230
+	specialval RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 4
 	jumpif 4, PacifidlogTown_House2_EventScript_1541EC
-	specialval RESULT, 230
+	specialval RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 2
 	jumpif 4, PacifidlogTown_House2_EventScript_15421B
 	jump PacifidlogTown_House2_EventScript_154225
@@ -25,7 +25,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag 299
 	jumpif 0, PacifidlogTown_House2_EventScript_1A14DC
-	specialval RESULT, 334
+	specialval RESULT, sub_810F908
 	compare RESULT, 0
 	callif 1, PacifidlogTown_House2_EventScript_1541E8
 	return
@@ -49,7 +49,7 @@ PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	compare RESULT, 0
 	jumpeq PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
-	special 333
+	special sub_810F950
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
@@ -65,13 +65,13 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	compare RESULT, 0
 	jumpeq PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
-	special 333
+	special sub_810F950
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
 
 PacifidlogTown_House2_EventScript_154254:: @ 8154254
-	specialval RESULT, 334
+	specialval RESULT, sub_810F908
 	buffernum 0, RESULT
 	msgbox PacifidlogTown_House2_Text_1792F2, 4
 	release

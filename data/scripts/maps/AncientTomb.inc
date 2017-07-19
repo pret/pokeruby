@@ -64,7 +64,7 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag 937
 	setflag 2145
-	special 313
+	special StartBattle_Regi
 	waitstate
 	clearflag 2145
 	release

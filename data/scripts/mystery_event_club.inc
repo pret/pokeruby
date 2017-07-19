@@ -44,7 +44,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1:: @ 81B1BB1
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB:: @ 81B1BBB
 	setvar 0x8004, 0
-	special 96
+	special sub_80EB7C4
 	waittext
 	pause 80
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B2137, 4

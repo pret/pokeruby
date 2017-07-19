@@ -409,7 +409,7 @@ Route104_EventScript_14F189:: @ 814F189
 
 Route104_EventScript_14F1A0:: @ 814F1A0
 	trainerbattle 0, OPPONENT_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F1C7
 	msgbox Route104_Text_1B87C3, 6
@@ -422,7 +422,7 @@ Route104_EventScript_14F1C7:: @ 814F1C7
 
 Route104_EventScript_14F1DE:: @ 814F1DE
 	trainerbattle 0, OPPONENT_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F205
 	msgbox Route104_Text_1B8925, 6
@@ -435,7 +435,7 @@ Route104_EventScript_14F205:: @ 814F205
 
 Route104_EventScript_14F21C:: @ 814F21C
 	trainerbattle 0, OPPONENT_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F243
 	msgbox Route104_Text_1B8A69, 6
@@ -448,14 +448,14 @@ Route104_EventScript_14F243:: @ 814F243
 
 Route104_EventScript_14F25A:: @ 814F25A
 	trainerbattle 4, OPPONENT_GINA_AND_MIA_1, 0, Route104_Text_1B83E9, Route104_Text_1B8414, Route104_Text_1B845C
-	special 148
+	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_1B842C, 4
 	release
 	end
 
 Route104_EventScript_14F279:: @ 814F279
 	trainerbattle 4, OPPONENT_GINA_AND_MIA_1, 0, Route104_Text_1B84DB, Route104_Text_1B850D, Route104_Text_1B8577
-	special 148
+	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_1B853B, 4
 	release
 	end

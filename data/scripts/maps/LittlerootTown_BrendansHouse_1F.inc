@@ -98,7 +98,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	move 255, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	move 4, LittlerootTown_BrendansHouse_1F_Movement_152782
 	waitmove 0
-	special 149
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
 	setflag 87
 	setvar 0x4082, 2

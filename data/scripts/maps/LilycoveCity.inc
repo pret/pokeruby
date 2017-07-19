@@ -172,7 +172,7 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialval 0x8004, 137
+	specialval 0x8004, sub_80C4D50
 	switch 0x8004
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4

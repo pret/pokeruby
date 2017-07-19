@@ -41,9 +41,9 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
 	closebutton
-	special 135
+	special sub_80C4CEC
 	setvar 0x4099, 0
-	specialval RESULT, 91
+	specialval RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
 	callif 1, LilycoveCity_ContestLobby_EventScript_158948
 	move 4, LilycoveCity_ContestLobby_Movement_158A43
@@ -69,7 +69,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 
 LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	inccounter GAME_STAT_RECEIVED_RIBBONS
-	special 80
+	special sub_80C4858
 	move 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmove 0
 	playsfx 21
@@ -87,7 +87,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
-	specialval 0x8004, 137
+	specialval 0x8004, sub_80C4D50
 	switch 0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_1589D6
 	case 2, LilycoveCity_ContestLobby_EventScript_1589DA
@@ -214,9 +214,9 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
 	closebutton
-	special 135
+	special sub_80C4CEC
 	setvar 0x4099, 0
-	specialval RESULT, 91
+	specialval RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
 	callif 1, LilycoveCity_ContestLobby_EventScript_158B18
 	move 11, LilycoveCity_ContestLobby_Movement_158B6D
@@ -242,7 +242,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 
 LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	inccounter GAME_STAT_RECEIVED_RIBBONS
-	special 80
+	special sub_80C4858
 	move 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmove 0
 	playsfx 21
@@ -363,7 +363,7 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	choosecontestpkmn
 	compare 0x8004, 255
 	jumpeq LilycoveCity_ContestLobby_EventScript_158CEA
-	special 84
+	special sub_80C43F4
 	compare RESULT, 0
 	jumpeq LilycoveCity_ContestLobby_EventScript_158C96
 	compare RESULT, 1
@@ -418,7 +418,7 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	message LilycoveCity_ContestLobby_Text_1887C7
 	waittext
 	copyvar 0x8004, RESULT
-	special 92
+	special sub_808363C
 	waitstate
 	compare RESULT, 3
 	jumpeq LilycoveCity_ContestLobby_EventScript_158D90
@@ -441,7 +441,7 @@ LilycoveCity_ContestLobby_EventScript_158D82:: @ 8158D82
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
-	special 31
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_18878D, 4
 	closebutton
 	releaseall
@@ -449,7 +449,7 @@ LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
-	special 31
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_1887F4, 4
 	closebutton
 	releaseall
@@ -457,7 +457,7 @@ LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
-	special 31
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_18881F, 4
 	closebutton
 	releaseall
@@ -470,7 +470,7 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
-	special 77
+	special sub_80C496C
 	addvar 0x8004, 1
 	buffernum 1, 32772
 	message2 LilycoveCity_ContestLobby_Text_188845
@@ -482,7 +482,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 	call LilycoveCity_ContestLobby_EventScript_158E0B
 	setvar 0x4086, 1
-	special 86
+	special sub_80C4F70
 	setvar 0x4088, 5
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_158F08
@@ -499,13 +499,13 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	playsfx 71
 	setmaptile 9, 2, 545, 1
 	setmaptile 9, 3, 609, 1
-	special 142
+	special DrawWholeMapView
 	move 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmove 0
 	playsfx 71
 	setmaptile 9, 2, 721, 1
 	setmaptile 9, 3, 729, 1
-	special 142
+	special DrawWholeMapView
 	pause 20
 	move 2, LilycoveCity_ContestLobby_Movement_158EAE
 	waitmove 0
@@ -568,14 +568,14 @@ LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
-	specialval RESULT, 90
+	specialval RESULT, sub_80C5044
 	compare RESULT, 1
 	jumpeq LilycoveCity_ContestLobby_EventScript_158EE8
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call LilycoveCity_ContestLobby_EventScript_158F86
-	special 83
+	special sub_80C4BF0
 	call LilycoveCity_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 4
 	call LilycoveCity_ContestLobby_EventScript_158F08
@@ -603,31 +603,31 @@ LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08
 
 LilycoveCity_ContestLobby_EventScript_158F45:: @ 8158F45
 	warp3 LinkContestRoom4, 255, 7, 5
-	special 300
+	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F52:: @ 8158F52
 	warp3 LinkContestRoom2, 255, 7, 5
-	special 300
+	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F5F:: @ 8158F5F
 	warp3 LinkContestRoom6, 255, 7, 5
-	special 300
+	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F6C:: @ 8158F6C
 	warp3 LinkContestRoom5, 255, 7, 5
-	special 300
+	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F79:: @ 8158F79
 	warp3 LinkContestRoom3, 255, 7, 5
-	special 300
+	special sub_8081334
 	waitstate
 	return
 
@@ -638,13 +638,13 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	playsfx 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
-	special 142
+	special DrawWholeMapView
 	move 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmove 0
 	playsfx 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
-	special 142
+	special DrawWholeMapView
 	pause 20
 	move 1, LilycoveCity_ContestLobby_Movement_15901C
 	waitmove 0
@@ -764,7 +764,7 @@ LilycoveCity_ContestLobby_EventScript_159084:: @ 8159084
 LilycoveCity_ContestLobby_EventScript_15908D:: @ 815908D
 SlateportCity_ContestLobby_EventScript_15908D:: @ 815908D
 	lockall
-	special 259
+	special ShowBerryBlenderRecordWindow
 	waitbutton
 	hidebox 0, 0, 29, 19
 	releaseall

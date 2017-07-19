@@ -525,7 +525,7 @@ MauvilleCity_GameCorner_EventScript_157135:: @ 8157135
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 0
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -536,7 +536,7 @@ MauvilleCity_GameCorner_EventScript_157155:: @ 8157155
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 1
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -547,7 +547,7 @@ MauvilleCity_GameCorner_EventScript_157175:: @ 8157175
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 2
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -558,7 +558,7 @@ MauvilleCity_GameCorner_EventScript_157195:: @ 8157195
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 3
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -569,7 +569,7 @@ MauvilleCity_GameCorner_EventScript_1571B5:: @ 81571B5
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 4
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -580,7 +580,7 @@ MauvilleCity_GameCorner_EventScript_1571D5:: @ 81571D5
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 5
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -591,7 +591,7 @@ MauvilleCity_GameCorner_EventScript_1571F5:: @ 81571F5
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 6
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -602,7 +602,7 @@ MauvilleCity_GameCorner_EventScript_157215:: @ 8157215
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 7
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -613,7 +613,7 @@ MauvilleCity_GameCorner_EventScript_157235:: @ 8157235
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 8
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -624,7 +624,7 @@ MauvilleCity_GameCorner_EventScript_157255:: @ 8157255
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 9
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -635,7 +635,7 @@ MauvilleCity_GameCorner_EventScript_157275:: @ 8157275
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 10
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -646,7 +646,7 @@ MauvilleCity_GameCorner_EventScript_157295:: @ 8157295
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 11
-	specialval RESULT, 286
+	specialval RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end

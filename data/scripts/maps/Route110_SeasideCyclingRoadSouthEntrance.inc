@@ -10,7 +10,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16347F:: @ 816347F
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 	lockall
-	specialval RESULT, 227
+	specialval RESULT, GetPlayerAvatarBike
 	compare RESULT, 0
 	jumpeq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
 	setflag 2091

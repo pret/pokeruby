@@ -86,7 +86,7 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 	.2byte 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
-	special 31
+	special CloseLink
 	setvar 0x4087, 0
 	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmove 0
@@ -99,7 +99,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DD9:: @ 81A3DD9
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
-	special 31
+	special CloseLink
 	setvar 0x4087, 0
 	compare 0x8007, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
@@ -120,13 +120,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E17:: @ 81A3E17
 	lockall
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3E30
 	setmaptile 8, 3, 605, 1
-	special 142
+	special DrawWholeMapView
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
-	special 31
+	special CloseLink
 	setvar 0x4087, 0
 	compare 0x8007, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
@@ -148,14 +148,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 OldaleTown_PokemonCenter_2F_EventScript_1A3E7B:: @ 81A3E7B
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3DB2
 	setmaptile 11, 3, 605, 1
-	special 142
+	special DrawWholeMapView
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E8D:: @ 81A3E8D
 	lockall
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3DDA
 	setmaptile 5, 3, 605, 1
-	special 142
+	special DrawWholeMapView
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
@@ -199,7 +199,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
-	special 28
+	special sub_808347C
 	waitstate
 	compare RESULT, 1
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3F5E
@@ -215,14 +215,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
-	special 0
-	special 39
-	special 331
+	special HealPlayerParty
+	special SavePlayerParty
+	special LoadPlayerBag
 	copyvar 0x4087, 0x8004
 	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waittext
 	setmaptile 5, 3, 514, 0
-	special 142
+	special DrawWholeMapView
 	pause 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
@@ -239,16 +239,16 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	release
 	compare 0x8004, 5
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3FCD
-	special 1
+	special SetCableClubWarp
 	warp SingleBattleColosseum, 255, 6, 8
-	special 2
+	special DoCableClubWarp
 	waitstate
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3FCD:: @ 81A3FCD
-	special 1
+	special SetCableClubWarp
 	warp DoubleBattleColosseum, 255, 5, 8
-	special 2
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -280,7 +280,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
-	special 61
+	special CheckForAlivePartyMons
 	compare RESULT, 0
 	jumpif 5, OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar 0x8004, 2
@@ -304,28 +304,28 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4068:: @ 81A4068
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A432D
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4093:: @ 81A4093
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4C03
 	waittext
 	waitbutton
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40A2:: @ 81A40A2
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4BCC
 	waittext
 	waitbutton
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40B1:: @ 81A40B1
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4B95
 	waittext
 	waitbutton
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40C0:: @ 81A40C0
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4C38
 	waittext
 	waitbutton
@@ -366,7 +366,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
-	special 29
+	special sub_80834E4
 	waitstate
 	compare RESULT, 1
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4166
@@ -387,7 +387,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waittext
 	setmaptile 8, 3, 514, 0
-	special 142
+	special DrawWholeMapView
 	pause 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
@@ -405,10 +405,10 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
-	specialval RESULT, 131
+	specialval RESULT, CalculatePlayerPartyCount
 	compare RESULT, 2
 	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
-	specialval RESULT, 339
+	specialval RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare RESULT, 1
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A41EE
 	setvar RESULT, 1
@@ -460,9 +460,9 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
-	special 30
+	special sub_808350C
 	waitstate
-	special 341
+	special sub_80835D8
 	waitstate
 	compare RESULT, 1
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4294
@@ -485,7 +485,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waittext
 	setmaptile 11, 3, 514, 0
-	special 142
+	special DrawWholeMapView
 	pause 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
@@ -503,7 +503,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	jump OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
 OldaleTown_PokemonCenter_2F_EventScript_1A42E9:: @ 81A42E9
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4AC8
 	waittext
 	waitbutton
@@ -511,7 +511,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A42E9:: @ 81A42E9
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A42F5:: @ 81A42F5
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4A85
 	waittext
 	waitbutton
@@ -519,7 +519,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A42F5:: @ 81A42F5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4301:: @ 81A4301
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4A30
 	waittext
 	waitbutton
@@ -527,7 +527,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4301:: @ 81A4301
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A430D:: @ 81A430D
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4B1D
 	waittext
 	waitbutton
@@ -535,7 +535,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A430D:: @ 81A430D
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4319:: @ 81A4319
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4B59
 	waittext
 	waitbutton
@@ -543,13 +543,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4319:: @ 81A4319
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4325:: @ 81A4325
-	special 1
-	special 2
+	special SetCableClubWarp
+	special DoCableClubWarp
 	waitstate
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A432D:: @ 81A432D
-	special 31
+	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4B6C
 	waittext
 	waitbutton
@@ -597,7 +597,7 @@ OldaleTown_PokemonCenter_2F_Movement_1A4361:: @ 81A4361
 
 gUnknown_081A4363:: @ 81A4363
 	lockall
-	special 196
+	special ShowLinkBattleRecords
 	waitbutton
 	hidebox 0, 0, 29, 19
 	releaseall
@@ -605,57 +605,57 @@ gUnknown_081A4363:: @ 81A4363
 
 SingleBattleColosseum_EventScript_1A436F:: @ 81A436F
 	setvar 0x8005, 0
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
 SingleBattleColosseum_EventScript_1A4379:: @ 81A4379
 	setvar 0x8005, 1
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
 DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	fadescreen 1
-	special 41
+	special sub_80C5568
 	waitstate
 	compare RESULT, 0
 	jumpeq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 0
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
 DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	fadescreen 1
-	special 41
+	special sub_80C5568
 	waitstate
 	compare RESULT, 0
 	jumpeq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 1
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
 DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	fadescreen 1
-	special 41
+	special sub_80C5568
 	waitstate
 	compare RESULT, 0
 	jumpeq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 2
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
 DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
 	fadescreen 1
-	special 41
+	special sub_80C5568
 	waitstate
 	compare RESULT, 0
 	jumpeq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 3
-	special 32
+	special sub_8083B90
 	waitstate
 	end
 
@@ -664,31 +664,31 @@ DoubleBattleColosseum_EventScript_1A43EF:: @ 81A43EF
 
 TradeCenter_EventScript_1A43F0:: @ 81A43F0
 	setvar 0x8005, 0
-	special 33
+	special sub_8083B5C
 	waitstate
 	end
 
 TradeCenter_EventScript_1A43FA:: @ 81A43FA
 	setvar 0x8005, 1
-	special 33
+	special sub_8083B5C
 	waitstate
 	end
 
 @ 81A4404
 	setvar 0x8005, 2
-	special 33
+	special sub_8083B5C
 	waitstate
 	end
 
 @ 81A440E
 	setvar 0x8005, 3
-	special 33
+	special sub_8083B5C
 	waitstate
 	end
 
 RecordCorner_EventScript_1A4418:: @ 81A4418
 	setvar 0x8005, 0
-	special 27
+	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
 	jumpif 5, RecordCorner_EventScript_1A446C
@@ -696,7 +696,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 
 RecordCorner_EventScript_1A442D:: @ 81A442D
 	setvar 0x8005, 1
-	special 27
+	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
 	jumpif 5, RecordCorner_EventScript_1A446C
@@ -704,7 +704,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 
 RecordCorner_EventScript_1A4442:: @ 81A4442
 	setvar 0x8005, 2
-	special 27
+	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
 	jumpif 5, RecordCorner_EventScript_1A446C
@@ -712,7 +712,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 
 RecordCorner_EventScript_1A4457:: @ 81A4457
 	setvar 0x8005, 3
-	special 27
+	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
 	jumpif 5, RecordCorner_EventScript_1A446C
@@ -731,7 +731,7 @@ TradeRoom_ReadTrainerCard1:: @ 81A4479
 	waittext
 	waitbutton
 	fadescreen 1
-	special 42
+	special sub_8083BDC
 	waitstate
 	end
 
@@ -740,7 +740,7 @@ TradeRoom_ReadTrainerCard2:: @ 81A4487
 	waittext
 	waitbutton
 	fadescreen 1
-	special 42
+	special sub_8083BDC
 	waitstate
 	end
 
@@ -752,40 +752,40 @@ TradeRoom_TooBusyToNotice:: @ 81A4495
 	end
 
 SingleBattleColosseum_EventScript_1A449E:: @ 81A449E
-	special 295
+	special sub_8064EAC
 	message SingleBattleColosseum_Text_1A4D7E
 	waittext
 	waitbutton
-	special 296
+	special sub_8064ED4
 	closebutton
 	end
 
 TradeCenter_EventScript_1A44AD:: @ 81A44AD
-	special 295
+	special sub_8064EAC
 	message TradeCenter_Text_1A4DAB
 	waittext
 	waitbutton
-	special 296
+	special sub_8064ED4
 	closebutton
 	end
 
 RecordCorner_EventScript_1A44BC:: @ 81A44BC
 	compare 0x4000, 0
 	jumpif 5, RecordCorner_EventScript_1A44D6
-	special 295
+	special sub_8064EAC
 	message RecordCorner_Text_1A4DD7
 	waittext
 	waitbutton
-	special 296
+	special sub_8064ED4
 	closebutton
 	end
 
 RecordCorner_EventScript_1A44D6:: @ 81A44D6
-	special 295
+	special sub_8064EAC
 	message RecordCorner_Text_1A4DF7
 	waittext
 	waitbutton
-	special 296
+	special sub_8064ED4
 	closebutton
 	end
 
@@ -799,11 +799,11 @@ TradeRoom_PromptToCancelLink:: @ 81A44E5
 TradeRoom_TerminateLink:: @ 81A44FE
 	message2 TradeRoom_TerminatingLink
 	waittext
-	special 5
+	special sub_80839D0
 	end
 
 gUnknown_081A4508:: @ 81A4508
-	special 4
-	special 3
+	special sub_80839A4
+	special sub_80810DC
 	waitstate
 	end

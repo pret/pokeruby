@@ -8,23 +8,23 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	hidebox 0, 0, 29, 19
 	checkflag 228
 	jumpeq SealedChamber_InnerRoom_EventScript_15F247
-	specialval RESULT, 279
+	specialval RESULT, CheckRelicanthWailord
 	compare RESULT, 0
 	jumpeq SealedChamber_InnerRoom_EventScript_15F247
 	fadeout 0
 	playsfx 49
-	special 305
+	special DoSealedChamberShakingEffect1
 	waitstate
 	pause 40
-	special 315
-	waitstate
-	playsfx 8
-	pause 40
-	special 315
+	special DoSealedChamberShakingEffect2
 	waitstate
 	playsfx 8
 	pause 40
-	special 315
+	special DoSealedChamberShakingEffect2
+	waitstate
+	playsfx 8
+	pause 40
+	special DoSealedChamberShakingEffect2
 	waitstate
 	playsfx 8
 	pause 40

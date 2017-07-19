@@ -11,7 +11,7 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	setvar CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
-	special 83
+	special sub_80C4BF0
 	call VerdanturfTown_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 1
 	warp LinkContestRoom1, 255, 7, 5
@@ -25,13 +25,13 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	playsfx 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
-	special 142
+	special DrawWholeMapView
 	move 1, VerdanturfTown_ContestLobby_Movement_153E28
 	waitmove 0
 	playsfx 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
-	special 142
+	special DrawWholeMapView
 	pause 20
 	move 1, VerdanturfTown_ContestLobby_Movement_153E35
 	waitmove 0
@@ -122,7 +122,7 @@ VerdanturfTown_ContestLobby_EventScript_153E80:: @ 8153E80
 
 VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89
 	lockall
-	special 259
+	special ShowBerryBlenderRecordWindow
 	waitbutton
 	hidebox 0, 0, 29, 19
 	releaseall

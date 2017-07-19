@@ -128,7 +128,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	compare RESULT, 0
 	jumpeq Route111_EventScript_1A029B
 	setflag 2252
-	special 148
+	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_1C5781, 4
 	release
 	end
@@ -392,7 +392,7 @@ Route111_EventScript_1503EC:: @ 81503EC
 
 Route111_EventScript_150403:: @ 8150403
 	trainerbattle 0, OPPONENT_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route111_EventScript_15042A
 	msgbox Route111_Text_1BAF5B, 6
@@ -420,7 +420,7 @@ Route111_EventScript_15046F:: @ 815046F
 
 Route111_EventScript_150486:: @ 8150486
 	trainerbattle 0, OPPONENT_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route111_EventScript_1504AD
 	msgbox Route111_Text_1BB33E, 6
@@ -433,7 +433,7 @@ Route111_EventScript_1504AD:: @ 81504AD
 
 Route111_EventScript_1504C4:: @ 81504C4
 	trainerbattle 0, OPPONENT_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route111_EventScript_1504EB
 	msgbox Route111_Text_1BB4CE, 6

@@ -815,8 +815,8 @@ _08081022:
 _08081028: .4byte sub_8054588
 	thumb_func_end sub_8080FC4
 
-	thumb_func_start sub_808102C
-sub_808102C: @ 808102C
+	thumb_func_start DoCableClubWarp
+DoCableClubWarp: @ 808102C
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
@@ -830,7 +830,7 @@ sub_808102C: @ 808102C
 	bx r0
 	.align 2, 0
 _0808104C: .4byte sub_8080FC4
-	thumb_func_end sub_808102C
+	thumb_func_end DoCableClubWarp
 
 	thumb_func_start sub_8081050
 sub_8081050: @ 8081050
