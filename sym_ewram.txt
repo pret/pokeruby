@@ -905,9 +905,7 @@ gUnknown_0203927D: @ 203927D
 gLastSaveSectorStatus: @ 2039284
 	.space 0x4
 
-gUnknown_02039288: @ 2039288
-	.space 0x74
-
+	.include "src/mystery_event_script.o"
 	.include "src/roamer.o"
 
 	.align 2

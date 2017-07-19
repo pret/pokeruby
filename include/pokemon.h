@@ -464,7 +464,9 @@ struct EvolutionData
     struct Evolution evolutions[5];
 };
 
+extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const u8 *const gItemEffectTable[];
 extern const struct BaseStats gBaseStats[];
