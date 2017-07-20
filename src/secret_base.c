@@ -114,7 +114,7 @@ const struct MenuAction2 gUnknown_083D13D4[] = {
     {gUnknownText_Exit, sub_80BCBF8}
 };
 
-void (*const gUnknown_083D13E4[])(u8) = {
+const struct YesNoFuncTable gUnknown_083D13E4 = {
     sub_80BCB90,
     sub_80BCBC0
 };
@@ -1108,6 +1108,7 @@ void SecretBasePC_Registry(void)
     CreateTask(Task_SecretBasePC_Registry, 0);
 }
 
+// This function tries to keep gTasks + 8 in a register.  It should not.
 #ifdef NONMATCHING
 void Task_SecretBasePC_Registry(u8 taskId)
 {
@@ -1371,4 +1372,24 @@ void sub_80BCA84(u8 taskId)
     sub_80BC190(gStringVar1, data[4]);
     StringExpandPlaceholders(gStringVar4, gOtherText_OkayToDeleteFromRegistry);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_80BCAEC, 0);
+}
+
+void sub_80BCAEC(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083D13E4);
+}
+
+void sub_80BCB10(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    gSaveBlock1.secretBases[data[4]].sbr_field_1_6 = 0;
+    data[0]--;
+    if (data[2] > 0)
+        data[2]--;
+    if (data[0] < 8)
+        data[3]--;
+    sub_80BC7D8(taskId);
+    gTasks[taskId].func = sub_80BC824;
 }
