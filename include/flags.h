@@ -50,6 +50,7 @@
 #define SYS_BRAILLE_STRENGTH 0x850
 #define SYS_BRAILLE_WAIT     0x851
 #define SYS_BRAILLE_FLY      0x852
+#define SYS_HAS_EON_TICKET   0x853
 
 #define SYS_TV_LATI          0x85D
 

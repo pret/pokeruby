@@ -672,9 +672,9 @@ u8 sub_8125E2C(void)
     return 0;
 }
 
-u8 sub_8125E6C(void)
+bool8 sub_8125E6C(void)
 {
-    u8 retVal = 0;
+    u8 retVal = FALSE;
     u16 val = ++gUnknown_03005EB4;
     if (val <= 4)
     {
@@ -684,7 +684,7 @@ u8 sub_8125E6C(void)
     else
     {
         sub_81257F0(val, gSaveSectionLocations);
-        retVal = 1;
+        retVal = TRUE;
     }
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(1);
