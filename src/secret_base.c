@@ -44,6 +44,7 @@ u8 sub_80BC948(u8);
 void sub_80BC980(u8);
 void sub_80BC9E4(u8);
 void sub_80BCAEC(u8);
+u8 sub_80BCCA4(u8);
 
 const struct
 {
@@ -1435,4 +1436,9 @@ void sub_80BCC54(u8 taskId)
         ScriptContext1_SetupScript(gUnknown_0815F49A);
     }
     DestroyTask(taskId);
+}
+
+u8 sub_80BCCA4(u8 sbid)
+{
+    return (gSaveBlock1.secretBases[sbid].trainerId[0] % 5) + gSaveBlock1.secretBases[sbid].gender * 5;
 }

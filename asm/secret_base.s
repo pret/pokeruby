@@ -6,40 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BCCA4
-sub_80BCCA4: @ 80BCCA4
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _080BCCDC @ =gSaveBlock1
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 5
-	adds r4, r1
-	ldr r1, _080BCCE0 @ =0x00001a11
-	adds r0, r4, r1
-	ldrb r0, [r0]
-	movs r1, 0x5
-	bl __umodsi3
-	ldr r1, _080BCCE4 @ =0x00001a09
-	adds r4, r1
-	ldrb r2, [r4]
-	lsls r2, 27
-	lsrs r2, 31
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080BCCDC: .4byte gSaveBlock1
-_080BCCE0: .4byte 0x00001a11
-_080BCCE4: .4byte 0x00001a09
-	thumb_func_end sub_80BCCA4
-
 	thumb_func_start sub_80BCCE8
 sub_80BCCE8: @ 80BCCE8
 	push {lr}
