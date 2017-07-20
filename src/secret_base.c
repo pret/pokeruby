@@ -28,8 +28,8 @@
 #include "text.h"
 #include "vars.h"
 
-u8 sub_80BCA84();
-u8 sub_80BCBF8();
+void sub_80BCA84(u8);
+void sub_80BCBF8(u8);
 void sub_80BCB90(u8);
 void sub_80BCBC0(u8);
 
@@ -108,7 +108,7 @@ const u8 gUnknown_083D1374[] = {
     MAP_ID_SECRET_BASE_YELLOW_CAVE2,  6
 };
 
-const struct MenuAction gUnknown_083D13D4[] = {
+const struct MenuAction2 gUnknown_083D13D4[] = {
     {SecretBaseText_DelRegist, sub_80BCA84},
     {gUnknownText_Exit, sub_80BCBF8}
 };
@@ -1325,7 +1325,37 @@ void sub_80BC980(u8 taskId)
     PauseVerticalScrollIndicator(0);
     PauseVerticalScrollIndicator(1);
     MenuDrawTextWindow(1, 0, 12, 5);
-    PrintMenuItems(2, 1, 2, gUnknown_083D13D4);
+    PrintMenuItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
     InitMenu(0, 2, 1, 2, 0, 10);
     gTasks[taskId].func = sub_80BC9E4;
+}
+
+void sub_80BC9E4(u8 taskId)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (GetMenuCursorPos() != 0)
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(-1);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (GetMenuCursorPos() != 1)
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(+1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_083D13D4[GetMenuCursorPos()].func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_80BCBF8(taskId);
+    }
 }
