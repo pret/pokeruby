@@ -1230,3 +1230,11 @@ void sub_80BC6B0(u8 taskId)
     else
         CreateVerticalScrollIndicators(0, 0xbc, 0x08);
 }
+
+void sub_80BC7D8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    MenuDrawTextWindow(17, 0, 29, 19);
+    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    sub_80BC6B0(taskId);
+}

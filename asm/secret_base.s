@@ -6,45 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC7D8
-sub_80BC7D8: @ 80BC7D8
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	ldr r0, _080BC820 @ =gTasks + 0x8
-	adds r4, r0
-	movs r0, 0x11
-	movs r1, 0
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldrb r3, [r4, 0x6]
-	adds r3, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	ldrb r0, [r4, 0x2]
-	str r0, [sp]
-	movs r0, 0xB
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x12
-	movs r2, 0x2
-	bl InitMenu
-	adds r0, r5, 0
-	bl sub_80BC6B0
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC820: .4byte gTasks + 0x8
-	thumb_func_end sub_80BC7D8
-
 	thumb_func_start sub_80BC824
 sub_80BC824: @ 80BC824
 	push {r4-r6,lr}
