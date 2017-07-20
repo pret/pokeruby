@@ -6,42 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BCC54
-sub_80BCC54: @ 80BCC54
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, _080BCC84 @ =0x00004054
-	bl VarGet
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	bl BuyMenuFreeMemory
-	movs r0, 0
-	bl DestroyVerticalScrollIndicator
-	movs r0, 0x1
-	bl DestroyVerticalScrollIndicator
-	cmp r4, 0
-	bne _080BCC8C
-	ldr r0, _080BCC88 @ =gUnknown_0815F399
-	bl ScriptContext1_SetupScript
-	b _080BCC92
-	.align 2, 0
-_080BCC84: .4byte 0x00004054
-_080BCC88: .4byte gUnknown_0815F399
-_080BCC8C:
-	ldr r0, _080BCCA0 @ =gUnknown_0815F49A
-	bl ScriptContext1_SetupScript
-_080BCC92:
-	adds r0, r5, 0
-	bl DestroyTask
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BCCA0: .4byte gUnknown_0815F49A
-	thumb_func_end sub_80BCC54
-
 	thumb_func_start sub_80BCCA4
 sub_80BCCA4: @ 80BCCA4
 	push {r4,lr}

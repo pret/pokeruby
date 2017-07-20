@@ -28,6 +28,9 @@
 #include "text.h"
 #include "vars.h"
 
+extern u8 gUnknown_0815F399[];
+extern u8 gUnknown_0815F49A[];
+
 void sub_80BCA84(u8);
 void sub_80BCBF8(u8);
 void sub_80BCB90(u8);
@@ -1415,4 +1418,21 @@ void sub_80BCBF8(u8 taskId)
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
     gTasks[taskId].func = sub_80BC824;
+}
+
+void sub_80BCC54(u8 taskId)
+{
+    u16 var54 = VarGet(VAR_0x4054);
+    BuyMenuFreeMemory();
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    if (var54 == 0)
+    {
+        ScriptContext1_SetupScript(gUnknown_0815F399);
+    }
+    else
+    {
+        ScriptContext1_SetupScript(gUnknown_0815F49A);
+    }
+    DestroyTask(taskId);
 }
