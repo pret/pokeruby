@@ -1393,3 +1393,16 @@ void sub_80BCB10(u8 taskId)
     sub_80BC7D8(taskId);
     gTasks[taskId].func = sub_80BC824;
 }
+
+void sub_80BCB90(u8 taskId)
+{
+    MenuZeroFillWindowRect(20, 8, 26, 13);
+    DisplayItemMessageOnField(taskId, gOtherText_RegisteredDataDeleted, sub_80BCB10, 0);
+}
+
+void sub_80BCBC0(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_80BC7D8(taskId);
+    gTasks[taskId].func = sub_80BC824;
+}

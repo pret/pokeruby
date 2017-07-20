@@ -6,58 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BCB90
-sub_80BCB90: @ 80BCB90
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x14
-	movs r1, 0x8
-	movs r2, 0x1A
-	movs r3, 0xD
-	bl MenuZeroFillWindowRect
-	ldr r1, _080BCBB8 @ =gOtherText_RegisteredDataDeleted
-	ldr r2, _080BCBBC @ =sub_80BCB10
-	adds r0, r4, 0
-	movs r3, 0
-	bl DisplayItemMessageOnField
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BCBB8: .4byte gOtherText_RegisteredDataDeleted
-_080BCBBC: .4byte sub_80BCB10
-	thumb_func_end sub_80BCB90
-
-	thumb_func_start sub_80BCBC0
-sub_80BCBC0: @ 80BCBC0
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuZeroFillWindowRect
-	adds r0, r4, 0
-	bl sub_80BC7D8
-	ldr r1, _080BCBF0 @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _080BCBF4 @ =sub_80BC824
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BCBF0: .4byte gTasks
-_080BCBF4: .4byte sub_80BC824
-	thumb_func_end sub_80BCBC0
-
 	thumb_func_start sub_80BCBF8
 sub_80BCBF8: @ 80BCBF8
 	push {r4,r5,lr}
