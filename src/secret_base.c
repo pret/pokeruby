@@ -30,6 +30,11 @@ u8 sub_80BCBF8();
 void sub_80BCB90(u8);
 void sub_80BCBC0(u8);
 
+void Task_SecretBasePC_Registry(u8);
+void sub_80BC7D8(u8);
+void sub_80BC824(u8);
+void sub_80BCC54(u8);
+
 const struct
 {
     u16 unk_083D1358_0;
@@ -1085,3 +1090,100 @@ void sub_80BC5BC(void)
     gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
     FlagSet(0x10c);
 }
+
+void SecretBasePC_Decoration(void)
+{
+    CreateTask(Task_SecretBasePC_Decoration, 0);
+}
+
+void SecretBasePC_Registry(void)
+{
+    CreateTask(Task_SecretBasePC_Registry, 0);
+}
+
+#ifdef NONMATCHING
+void Task_SecretBasePC_Registry(u8 taskId)
+{
+    s16 *data;
+    ScriptContext2_Enable();
+    sub_80F944C();
+    LoadScrollIndicatorPalette();
+    data = gTasks[taskId].data;
+    if ((data[0] = sub_80BC538()) != 0)
+    {
+        data[3] = max(data[0], 7);
+        data[1] = 0;
+        data[2] = 0;
+        MenuZeroFillWindowRect(0, 0, 29, 19);
+        sub_80BC7D8(taskId);
+        gTasks[taskId].func = sub_80BC824;
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_NoRegistry, sub_80BCC54, 0);
+    }
+}
+#else
+__attribute__((naked))
+void Task_SecretBasePC_Registry(u8 taskId)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tbl ScriptContext2_Enable\n"
+                    "\tbl sub_80F944C\n"
+                    "\tbl LoadScrollIndicatorPalette\n"
+                    "\tlsls r0, r5, 2\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tldr r1, _080BC688 @ =gTasks + 0x8\n"
+                    "\tadds r4, r0, r1\n"
+                    "\tbl sub_80BC538\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tstrh r0, [r4]\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0\n"
+                    "\tbeq _080BC694\n"
+                    "\tcmp r1, 0x7\n"
+                    "\tble _080BC65E\n"
+                    "\tmovs r0, 0x7\n"
+                    "_080BC65E:\n"
+                    "\tstrh r0, [r4, 0x6]\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrh r0, [r4, 0x2]\n"
+                    "\tstrh r0, [r4, 0x4]\n"
+                    "\tmovs r0, 0\n"
+                    "\tmovs r1, 0\n"
+                    "\tmovs r2, 0x1D\n"
+                    "\tmovs r3, 0x13\n"
+                    "\tbl MenuZeroFillWindowRect\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tbl sub_80BC7D8\n"
+                    "\tldr r1, _080BC68C @ =gTasks\n"
+                    "\tlsls r0, r5, 2\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r1\n"
+                    "\tldr r1, _080BC690 @ =sub_80BC824\n"
+                    "\tstr r1, [r0]\n"
+                    "\tb _080BC6A0\n"
+                    "\t.align 2, 0\n"
+                    "_080BC688: .4byte gTasks + 0x8\n"
+                    "_080BC68C: .4byte gTasks\n"
+                    "_080BC690: .4byte sub_80BC824\n"
+                    "_080BC694:\n"
+                    "\tldr r1, _080BC6A8 @ =gSecretBaseText_NoRegistry\n"
+                    "\tldr r2, _080BC6AC @ =sub_80BCC54\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tmovs r3, 0\n"
+                    "\tbl DisplayItemMessageOnField\n"
+                    "_080BC6A0:\n"
+                    "\tpop {r4,r5}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_080BC6A8: .4byte gSecretBaseText_NoRegistry\n"
+                    "_080BC6AC: .4byte sub_80BCC54");
+}
+#endif
