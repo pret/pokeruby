@@ -1301,3 +1301,19 @@ void sub_80BC824(u8 taskId)
         sub_80BCC54(taskId);
     }
 }
+
+u8 sub_80BC948(u8 a0)
+{
+    u8 n = 0;
+    u8 i;
+    for (i=1; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+        {
+            if (a0 == n)
+                return i;
+            n++;
+        }
+    }
+    return 0;
+}
