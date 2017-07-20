@@ -11,6 +11,8 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "main.h"
+#include "sound.h"
+#include "songs.h"
 #include "map_constants.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -34,6 +36,8 @@ void Task_SecretBasePC_Registry(u8);
 void sub_80BC7D8(u8);
 void sub_80BC824(u8);
 void sub_80BCC54(u8);
+u8 sub_80BC948(u8);
+void sub_80BC980(u8);
 
 const struct
 {
@@ -1237,4 +1241,63 @@ void sub_80BC7D8(u8 taskId)
     MenuDrawTextWindow(17, 0, 29, 19);
     InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
     sub_80BC6B0(taskId);
+}
+
+void sub_80BC824(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (data[1] != 0)
+        {
+            PlaySE(SE_SELECT);
+            data[1] = MoveMenuCursor(-1);
+        }
+        else if (data[2] != 0)
+        {
+            PlaySE(SE_SELECT);
+            data[2]--;
+            sub_80BC6B0(taskId);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (data[1] == data[3])
+        {
+            if (data[2] + data[1] != data[0])
+            {
+                PlaySE(SE_SELECT);
+                data[2]++;
+                sub_80BC6B0(taskId);
+            }
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            data[1] = MoveMenuCursor(+1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (data[1] + data[2] == data[0])
+        {
+            HandleDestroyMenuCursors();
+            MenuZeroFillWindowRect(0, 0, 29, 19);
+            sub_80BCC54(taskId);
+        }
+        else
+        {
+            HandleDestroyMenuCursors();
+            data[4] = sub_80BC948(data[1] + data[2]);
+            sub_80BC980(taskId);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        HandleDestroyMenuCursors();
+        MenuZeroFillWindowRect(0, 0, 29, 19);
+        sub_80BCC54(taskId);
+    }
 }
