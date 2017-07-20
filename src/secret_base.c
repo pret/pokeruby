@@ -16,6 +16,7 @@
 #include "map_constants.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "pokemon.h"
@@ -38,6 +39,7 @@ void sub_80BC824(u8);
 void sub_80BCC54(u8);
 u8 sub_80BC948(u8);
 void sub_80BC980(u8);
+void sub_80BC9E4(u8);
 
 const struct
 {
@@ -1316,4 +1318,14 @@ u8 sub_80BC948(u8 a0)
         }
     }
     return 0;
+}
+
+void sub_80BC980(u8 taskId)
+{
+    PauseVerticalScrollIndicator(0);
+    PauseVerticalScrollIndicator(1);
+    MenuDrawTextWindow(1, 0, 12, 5);
+    PrintMenuItems(2, 1, 2, gUnknown_083D13D4);
+    InitMenu(0, 2, 1, 2, 0, 10);
+    gTasks[taskId].func = sub_80BC9E4;
 }

@@ -6,53 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BC980
-sub_80BC980: @ 80BC980
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	bl PauseVerticalScrollIndicator
-	movs r0, 0x1
-	bl PauseVerticalScrollIndicator
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0xC
-	movs r3, 0x5
-	bl MenuDrawTextWindow
-	ldr r3, _080BC9D8 @ =gUnknown_083D13D4
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x2
-	bl PrintMenuItems
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0xA
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x2
-	movs r2, 0x1
-	movs r3, 0x2
-	bl InitMenu
-	ldr r1, _080BC9DC @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _080BC9E0 @ =sub_80BC9E4
-	str r1, [r0]
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BC9D8: .4byte gUnknown_083D13D4
-_080BC9DC: .4byte gTasks
-_080BC9E0: .4byte sub_80BC9E4
-	thumb_func_end sub_80BC980
-
 	thumb_func_start sub_80BC9E4
 sub_80BC9E4: @ 80BC9E4
 	push {r4,r5,lr}
