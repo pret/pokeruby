@@ -1187,3 +1187,46 @@ void Task_SecretBasePC_Registry(u8 taskId)
                     "_080BC6AC: .4byte sub_80BCC54");
 }
 #endif
+
+void sub_80BC6B0(u8 taskId)
+{
+    u8 i;
+    s16 *data = gTasks[taskId].data;
+    u8 m = 0;
+    u8 n = 0;
+    for (i=1; i<20; i++)
+    {
+        if (m == data[2])
+        {
+            m = i;
+            break;
+        }
+        if (sub_80BC268(i) == TRUE)
+            m ++;
+    }
+    for (i=m; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+        {
+            sub_80BC190(gStringVar1, i);
+            MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+            MenuPrint(gStringVar1, 18, 2 * n + 2);
+            if (++n == 8)
+                break;
+        }
+    }
+    if (n < 8)
+    {
+        MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+        MenuPrint(gUnknownText_Exit, 18, 2 * n + 2);
+        DestroyVerticalScrollIndicator(1);
+        if (n != 7)
+            MenuFillWindowRectWithBlankTile(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // needed to match
+    }
+    else
+        CreateVerticalScrollIndicators(1, 0xbc, 0x98);
+    if (data[2] == 0)
+        DestroyVerticalScrollIndicator(0);
+    else
+        CreateVerticalScrollIndicators(0, 0xbc, 0x08);
+}
