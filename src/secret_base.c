@@ -40,6 +40,7 @@ void sub_80BCC54(u8);
 u8 sub_80BC948(u8);
 void sub_80BC980(u8);
 void sub_80BC9E4(u8);
+void sub_80BCAEC(u8);
 
 const struct
 {
@@ -1358,4 +1359,16 @@ void sub_80BC9E4(u8 taskId)
         PlaySE(SE_SELECT);
         sub_80BCBF8(taskId);
     }
+}
+
+void sub_80BCA84(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_80BC190(gStringVar1, data[4]);
+    StringExpandPlaceholders(gStringVar4, gOtherText_OkayToDeleteFromRegistry);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_80BCAEC, 0);
 }

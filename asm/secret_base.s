@@ -6,50 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BCA84
-sub_80BCA84: @ 80BCA84
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	ldr r0, _080BCAD8 @ =gTasks + 0x8
-	adds r4, r0
-	movs r0, 0
-	bl DestroyVerticalScrollIndicator
-	movs r0, 0x1
-	bl DestroyVerticalScrollIndicator
-	bl HandleDestroyMenuCursors
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuZeroFillWindowRect
-	ldr r0, _080BCADC @ =gStringVar1
-	ldrb r1, [r4, 0x8]
-	bl sub_80BC190
-	ldr r4, _080BCAE0 @ =gStringVar4
-	ldr r1, _080BCAE4 @ =gOtherText_OkayToDeleteFromRegistry
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, _080BCAE8 @ =sub_80BCAEC
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r3, 0
-	bl DisplayItemMessageOnField
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BCAD8: .4byte gTasks + 0x8
-_080BCADC: .4byte gStringVar1
-_080BCAE0: .4byte gStringVar4
-_080BCAE4: .4byte gOtherText_OkayToDeleteFromRegistry
-_080BCAE8: .4byte sub_80BCAEC
-	thumb_func_end sub_80BCA84
-
 	thumb_func_start sub_80BCAEC
 sub_80BCAEC: @ 80BCAEC
 	push {r4,lr}
