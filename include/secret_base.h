@@ -8,7 +8,7 @@ void sub_80BBCCC(u8);
 void sub_80BC038(s16 *, struct MapEvents *);
 u8 sub_80BC050();
 void sub_80BC300();
-u8 *sub_80BCCE8(void);
+const u8 *sub_80BCCE8(void);
 void sub_80BCF1C(u8);
 void sub_80BD674(void *, u32, u8);
 

@@ -31,6 +31,17 @@
 extern u8 gUnknown_0815F399[];
 extern u8 gUnknown_0815F49A[];
 
+extern const u8 UnknownString_81A1BB2[];
+extern const u8 UnknownString_81A1F67[];
+extern const u8 UnknownString_81A2254[];
+extern const u8 UnknownString_81A25C3[];
+extern const u8 UnknownString_81A2925[];
+extern const u8 UnknownString_81A1D74[];
+extern const u8 UnknownString_81A20C9[];
+extern const u8 UnknownString_81A2439[];
+extern const u8 UnknownString_81A2754[];
+extern const u8 UnknownString_81A2B2A[];
+
 void sub_80BCA84(u8);
 void sub_80BCBF8(u8);
 void sub_80BCB90(u8);
@@ -1441,4 +1452,19 @@ void sub_80BCC54(u8 taskId)
 u8 sub_80BCCA4(u8 sbid)
 {
     return (gSaveBlock1.secretBases[sbid].trainerId[0] % 5) + gSaveBlock1.secretBases[sbid].gender * 5;
+}
+
+const u8 *sub_80BCCE8(void)
+{
+    u8 param = sub_80BCCA4(VarGet(VAR_0x4054));
+    if (param == 0) return UnknownString_81A1BB2;
+    if (param == 1) return UnknownString_81A1F67;
+    if (param == 2) return UnknownString_81A2254;
+    if (param == 3) return UnknownString_81A25C3;
+    if (param == 4) return UnknownString_81A2925;
+    if (param == 5) return UnknownString_81A1D74;
+    if (param == 6) return UnknownString_81A20C9;
+    if (param == 7) return UnknownString_81A2439;
+    if (param == 8) return UnknownString_81A2754;
+    return UnknownString_81A2B2A;
 }
