@@ -6,51 +6,6 @@
 
 .section .text_80BC1D0
 
-	thumb_func_start sub_80BCBF8
-sub_80BCBF8: @ 80BCBF8
-	push {r4,r5,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	ldr r5, _080BCC4C @ =gTasks + 0x8
-	adds r0, r4, r5
-	ldrb r3, [r0, 0x6]
-	adds r3, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	ldrb r0, [r0, 0x2]
-	str r0, [sp]
-	movs r0, 0xB
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x12
-	movs r2, 0x2
-	bl InitMenu
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0xC
-	movs r3, 0x5
-	bl MenuZeroFillWindowRect
-	movs r0, 0
-	bl StartVerticalScrollIndicators
-	movs r0, 0x1
-	bl StartVerticalScrollIndicators
-	subs r5, 0x8
-	adds r4, r5
-	ldr r0, _080BCC50 @ =sub_80BC824
-	str r0, [r4]
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BCC4C: .4byte gTasks + 0x8
-_080BCC50: .4byte sub_80BC824
-	thumb_func_end sub_80BCBF8
-
 	thumb_func_start sub_80BCC54
 sub_80BCC54: @ 80BCC54
 	push {r4,r5,lr}

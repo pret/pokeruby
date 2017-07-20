@@ -1406,3 +1406,13 @@ void sub_80BCBC0(u8 taskId)
     sub_80BC7D8(taskId);
     gTasks[taskId].func = sub_80BC824;
 }
+
+void sub_80BCBF8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    MenuZeroFillWindowRect(1, 0, 12, 5);
+    StartVerticalScrollIndicators(0);
+    StartVerticalScrollIndicators(1);
+    gTasks[taskId].func = sub_80BC824;
+}
