@@ -755,7 +755,7 @@ gUnknown_020388BC: @ 20388BC
 	.include "src/menu_helpers.o"
 
 	.align 2
-gUnknown_020388CC: @ 20388CC
+gRegionMap: @ 20388CC
 	.space 0x4
 
 gUnknown_020388D0: @ 20388D0

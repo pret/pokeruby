@@ -92,7 +92,7 @@ _08110720:
 	ldr r4, _0811073C @ =0x020006e8
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80FA8EC
+	bl InitRegionMap
 	movs r0, 0x88
 	lsls r0, 4
 	adds r4, r0
@@ -115,7 +115,7 @@ _08110746:
 _08110752:
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_80FBCF0
+	bl CreateRegionMapPlayerIcon
 	movs r1, 0x8
 	negs r1, r1
 	movs r0, 0
@@ -1700,7 +1700,7 @@ _08111344:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08111358
-	bl sub_80FAB10
+	bl FreeRegionMapIconResources
 	ldr r0, [r4, 0x4]
 	bl SetMainCallback2
 _08111358:
@@ -1740,7 +1740,7 @@ _08111390:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081113A4
-	bl sub_80FAB10
+	bl FreeRegionMapIconResources
 	ldr r0, [r4, 0x8]
 	bl SetMainCallback2
 _081113A4:
@@ -1859,7 +1859,7 @@ _08111496:
 	ldr r4, _081114B4 @ =0x020006e8
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80FA8EC
+	bl InitRegionMap
 	movs r0, 0x88
 	lsls r0, 4
 	adds r4, r0
@@ -1882,7 +1882,7 @@ _081114BE:
 _081114CA:
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_80FBCF0
+	bl CreateRegionMapPlayerIcon
 	movs r1, 0x8
 	negs r1, r1
 	movs r0, 0

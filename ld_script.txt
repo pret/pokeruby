@@ -198,7 +198,7 @@ SECTIONS {
         src/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
-        asm/region_map.o(.text);
+        src/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
         asm/slot_machine.o(.text);
@@ -427,7 +427,7 @@ SECTIONS {
         data/mail.o(.rodata);
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
-        data/region_map.o(.rodata);
+        src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
         data/slot_machine.o(.rodata);

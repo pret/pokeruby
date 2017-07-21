@@ -205,7 +205,7 @@ void sub_80BB8CC(void)
     memset(gSaveBlock1.secretBases[0].sbr_field_2, 0xFF, 7);
     StringCopyN(gSaveBlock1.secretBases[0].sbr_field_2, gSaveBlock2.playerName, nameLength);
     gSaveBlock1.secretBases[0].gender = gSaveBlock2.playerGender;
-    VarSet(VAR_SECRET_BASE_MAP, gMapHeader.name);
+    VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
 
 void sub_80BB970(struct MapEvents *events)
