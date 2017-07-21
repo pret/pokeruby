@@ -109,6 +109,8 @@ void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
 void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
+void sub_80865BC(void);
+
 void PokecenterHealEffect_0(struct Task *);
 void PokecenterHealEffect_1(struct Task *);
 void PokecenterHealEffect_2(struct Task *);
@@ -242,5 +244,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
+
+extern u32 gUnknown_0202FF84[8];
 
 #endif // GUARD_FIELD_EFFECT_H

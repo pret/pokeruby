@@ -41,8 +41,8 @@ static u8 sub_814A464(void)
 
 u8 sub_814A4B8(void)
 {
-    gSaveBlock2.filler_A8.var_4AE = 3;
-    gSaveBlock2.filler_A8.var_4AF = 3;
+    gSaveBlock2.filler_A8.var_4AE[0] = 3;
+    gSaveBlock2.filler_A8.var_4AE[1] = 3;
     gSaveBlock2.filler_A8.var_4B4 = gBattleCommunication[0] + 1;
     gSaveBlock2.filler_A8.var_4B6 = gBattleCommunication[0] + 1;
     gSaveBlock2.filler_A8.var_4B0 = 1;
