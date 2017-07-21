@@ -33,4 +33,6 @@ void sub_8093130(u8, void (*)(void));
 void sub_8093390(struct TrainerCard *);
 u8 sub_80934C4(u8 id);
 
+extern struct TrainerCard gTrainerCards[4];
+
 #endif // GUARD_TRAINER_CARD_H

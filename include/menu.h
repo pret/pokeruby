@@ -38,7 +38,7 @@ void MenuFillWindowRectWithBlankTile(u8, u8, u8, u8);
 void MenuZeroFillScreen(void);
 void MenuDrawTextWindow(u8, u8, u8, u8);
 void sub_8071F40(const u8 *);
-void sub_8071F60(u8, u8, u8, u8);
+void sub_8071F60(u8, u8, u8);
 u16 unref_sub_8071F98(u8, u8);
 void unref_sub_8071FBC(u16, u8, u8, u8, u8);
 void MenuDisplayMessageBox(void);

@@ -548,6 +548,15 @@ struct RecordMixing_UnknownStruct
     u16 unk74[0x2];
 };
 
+struct LinkBattleRecord
+{
+    u8 name[8];
+    u16 trainerId;
+    u16 wins;
+    u16 losses;
+    u16 draws;
+};
+
 struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
@@ -626,7 +635,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x30AC*/ u8 filler_30B4[0x2];
     /*0x30B6*/ u8 filler_30B6;
     /*0x30B7*/ u8 filler_30B7[1];
-    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
@@ -668,16 +677,16 @@ struct SaveBlock2_Sub
     /*0x03DC, 0x0484*/ u8 filler_3DC[0xD0];
     /*0x04AC, 0x0554*/ u8 var_4AC;
     /*0x04AD, 0x0555*/ u8 var_4AD;
-    /*0x04AE, 0x0556*/ u8 var_4AE;
-    /*0x04AF, 0x0557*/ u8 var_4AF;
+    /*0x04AE, 0x0556*/ u8 var_4AE[2];
     /*0x04B0, 0x0558*/ u16 var_4B0;
     /*0x04B2, 0x055A*/ u16 var_4B2;
     /*0x04B4, 0x055C*/ u16 var_4B4;
     /*0x04B6, 0x055E*/ u16 var_4B6;
-    /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
+    /*0x04B8, 0x0560*/ u16 recordWinStreak[2];
+    /*0x04BC, 0x0564*/ u8 filler_4BC[0xC];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04CC, 0x0574*/ u16 winStreak[2];
     /*0x04D0, 0x0578*/ u8 var_4D0;
     /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
