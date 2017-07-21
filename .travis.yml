@@ -47,11 +47,6 @@ matrix:
         .travis/check-git-clang-format-output.sh
     - os: linux
       env: _="Build German"
-      before_script:
-        - cp override-de.mk override.mk
-        - rsync -avhI asm-de/ asm/
-        - rsync -avhI data-de/ data/
-        - rsync -avhI graphics-de/ graphics/
       script:
         - ./build_tools.sh
         - make -j2 compare_ruby_de
