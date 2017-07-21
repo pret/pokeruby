@@ -977,7 +977,7 @@ static const union AffineAnimCmd sAffineAnim_0[] =
 
 static const union AffineAnimCmd sAffineAnim_1[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, 0, 122),
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 122),
     AFFINEANIMCMD_END,
 };
 
