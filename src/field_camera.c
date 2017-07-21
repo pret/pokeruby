@@ -7,8 +7,7 @@
 #include "sprite.h"
 #include "text.h"
 
-extern u8 gUnknown_0202E854;
-
+EWRAM_DATA u8 gUnknown_0202E854 = 0;
 
 struct UnknownStruct
 {
@@ -19,15 +18,15 @@ struct UnknownStruct
     bool8 unk4;
 };
 
-extern struct UnknownStruct gUnknown_03000590;
-extern u16 gUnknown_03000598;
-extern s16 gUnknown_0300059A;
-extern u8 gUnknown_0300059C;
-extern void (*gUnknown_030005A0)(void);
+static struct UnknownStruct gUnknown_03000590;
+static u16 gUnknown_03000598;
+static s16 gUnknown_0300059A;
+static u8 gUnknown_0300059C;
+static void (*gUnknown_030005A0)(void);
 
-extern struct CameraSomething gUnknown_03004880;
-extern u16 gUnknown_03004898;
-extern u16 gUnknown_0300489C;
+struct CameraSomething gUnknown_03004880;
+u16 gUnknown_03004898;
+u16 gUnknown_0300489C;
 
 static void RedrawMapSliceNorth(struct UnknownStruct *a, struct MapData *mapData);
 static void RedrawMapSliceSouth(struct UnknownStruct *a, struct MapData *mapData);

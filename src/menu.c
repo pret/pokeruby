@@ -180,7 +180,7 @@ void sub_8071F40(const u8 *str)
     MenuPrint(str, 3, 15);
 }
 
-void sub_8071F60(u8 a1, u8 a2, u8 a3, u8 a4)
+void sub_8071F60(u8 a1, u8 a2, u8 a3)
 {
     sub_8003490(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3);
 }
@@ -710,7 +710,7 @@ _08072B3E:\n\
 }
 #endif
 
-void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
+void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
 {
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }

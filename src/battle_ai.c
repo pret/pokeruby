@@ -38,7 +38,7 @@ the number of bytes that the current command had reserved for arguments
 in order to read the next command correctly. refer to battle_ai_scripts.s for the
 AI scripts.
 */
-extern u8 *gAIScriptPtr;
+EWRAM_DATA u8 *gAIScriptPtr = NULL;
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);

@@ -6,7 +6,23 @@
 #define TEMP_UPPER_FLAGS_SIZE 0x8
 #define TEMP_VARS_SIZE 0x20
 
-extern u8 gUnknown_0202E8E2[16];
+EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8001 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8002 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8003 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8004 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8005 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8006 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8007 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8008 = 0;
+EWRAM_DATA u16 gSpecialVar_0x8009 = 0;
+EWRAM_DATA u16 gSpecialVar_0x800A = 0;
+EWRAM_DATA u16 gSpecialVar_0x800B = 0;
+EWRAM_DATA u16 gScriptResult = 0;
+EWRAM_DATA u16 gScriptLastTalked = 0;
+EWRAM_DATA u16 gScriptFacing = 0;
+EWRAM_DATA u8 gUnknown_0202E8E2[16] = {0};
+
 extern u16 *gSpecialVars[];
 
 void InitEventData(void)

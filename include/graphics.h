@@ -2435,6 +2435,10 @@ extern const u8 gMonFrontPic_UnownQuestionMark[];
 extern const u8 gMonBackPic_UnownQuestionMark[];
 extern const u8 gMonIcon_UnownQuestionMark[];
 
+extern const u8 gMonIcon_QuestionMark[];
+extern const u8 gMonIcon_Egg[];
+extern const u16 gMonIconPalettes[][16];
+
 // data/graphics.s
 extern const u8 gBagMaleTiles[];
 extern const u8 gBagFemaleTiles[];
@@ -2548,5 +2552,16 @@ extern const u8 gBerryPalette_Starf[];
 extern const u8 gBerryPalette_Enigma[];
 
 extern const u8 gUnknown_08E96EC8[];
+
+extern const u8 gMenuTrainerCard_Gfx[];
+extern const u16 gMenuTrainerCard0Star_Pal[];
+extern const u16 gMenuTrainerCard1Star_Pal[];
+extern const u16 gMenuTrainerCard2Star_Pal[];
+extern const u16 gMenuTrainerCard3Star_Pal[];
+extern const u16 gMenuTrainerCard4Star_Pal[];
+extern const u8 gUnknown_08E8CAC0[];
+extern const u8 gUnknown_08E8CFC0[];
+extern const u8 gUnknown_08E8D4C0[];
+extern const u8 gUnknown_08E8D9C0[];
 
 #endif  // GUARD_GRAPHICS_H

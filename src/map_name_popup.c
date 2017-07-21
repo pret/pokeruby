@@ -101,7 +101,7 @@ void DrawMapNamePopup(void)
     u8 name[20];
 
     MenuLoadTextWindowGraphics_OverrideFrameType(0);
-    sub_80FBFB4(name, gMapHeader.name, 0);
+    GetMapSectionName(name, gMapHeader.regionMapSectionId, 0);
     MenuDrawTextWindow(0, 0, 13, 3);
     sub_8072BD8(name, 1, 1, 0x60);
 }

@@ -5,6 +5,8 @@
 	.include "src/link.o"
 	.include "src/rtc.o"
 
+@ daycare
+
 	.align 2
 gUnknown_03000470: @ 3000470
 	.space 0x68
@@ -21,8 +23,12 @@ gUnknown_030004E8: @ 30004E8
 gUnknown_03000500: @ 3000500
 	.space 0x8
 
+@ trade
+
 gUnknown_03000508: @ 3000508
 	.space 0x8
+
+@ berry_blender
 
 gUnknown_03000510: @ 3000510
 	.space 0x10
@@ -49,38 +55,14 @@ gUnknown_03000560: @ 3000560
 	.space 0x1C
 
 	.include "src/play_time.o"
+	.include "src/rom4.o"
 
+	@ unused variable?
 	.align 2
-gUnknown_03000580: @ 3000580
 	.space 0x4
 
-gUnknown_03000584: @ 3000584
-	.space 0x4
-
-gUnknown_03000588: @ 3000588
-	.space 0x8
-
-gUnknown_03000590: @ 3000590
-	.space 0x8
-
-gUnknown_03000598: @ 3000598
-	.space 0x2
-
-gUnknown_0300059A: @ 300059A
-	.space 0x2
-
-gUnknown_0300059C: @ 300059C
-	.space 0x4
-
-gUnknown_030005A0: @ 30005A0
-	.space 0x4
-
-gUnknown_030005A4: @ 30005A4
-	.space 0x2
-
-gUnknown_030005A6: @ 30005A6
-	.space 0x2
-
+	.include "src/field_camera.o"
+	.include "src/field_map_obj.o"
 	.include "src/field_message_box.o"
 	.include "src/text_window.o"
 	.include "src/script.o"
@@ -89,29 +71,27 @@ gUnknown_030005A6: @ 30005A6
 	.include "src/tileset_anim.o"
 	.include "src/sound.o"
 
+@ field_weather
+
 gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
 	.include "src/field_effect.o"
-    .include "src/item_menu.o"
+	.include "src/item_menu.o"
+
+@ shop
 
 gUnknown_03000708: @ 3000708
 	.space 0x10
 
-gUnknown_03000718: @ 3000718
+	.include "src/record_mixing.o"
+	.include "src/tv.o"
+
+	@ unused variable?
+	.align 2
 	.space 0x4
 
-gUnknown_0300071C: @ 300071C
-	.space 0x4
-
-gUnknown_03000720: @ 3000720
-	.space 0x1
-
-gUnknown_03000721: @ 3000721
-	.space 0x1
-
-gUnknown_03000722: @ 3000722
-	.space 0x6
+@ battle_anim_80CA710
 
 gUnknown_03000728: @ 3000728
 	.space 0x8
@@ -119,45 +99,39 @@ gUnknown_03000728: @ 3000728
 gUnknown_03000730: @ 3000730
 	.space 0x10
 
+@ easy_chat
+
 gUnknown_03000740: @ 3000740
 	.space 0x4
 
+@ pokenav
+
 gUnknown_03000744: @ 3000744
 	.space 0x4
+
+@ mauville_old_man
 
 gUnknown_03000748: @ 3000748
 	.space 0x4
 
 	.include "src/menu_helpers.o"
+	.include "src/contest_painting.o"
+	.include "src/pokeblock.o"
+
+	@ unused variable?
+	.align 2
+	.space 0x4
+
+	.include "src/field_specials.o"
+
+@ learn_move
 
 	.align 2
-gUnknown_03000750: @ 3000750
-	.space 0x2
-
-gUnknown_03000752: @ 3000752
-	.space 0x2
-
-gUnknown_03000754: @ 3000754
-	.space 0x2
-
-gUnknown_03000756: @ 3000756
-	.space 0x2
-
-gUnknown_03000758: @ 3000758
-	.space 0x8
-
-gUnknown_03000760: @ 3000760
-	.space 0x50
-
 gUnknown_030007B0: @ 30007B0
 	.space 0x4
 
-gPcItemMenuOptionsNum: @ 30007B4
-	.space 0x4
-
-gUnknown_030007B8: @ 30007B8
-	.space 0x770
-
+	.include "src/player_pc.o"
+	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"

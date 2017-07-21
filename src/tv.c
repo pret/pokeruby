@@ -63,14 +63,7 @@ extern u8 gUnknown_02038694;
 
 extern struct TVSaleItem gUnknown_02038724[3];
 
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u8 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern u8 gUnknown_020387E8;
-
-extern struct UnkTvStruct gUnknown_03005D38;
+struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 *gTVBravoTrainerTextGroup[];
 extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
@@ -87,15 +80,13 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern u16 gUnknown_020387E0;
-extern u16 gUnknown_020387E2;
+
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
 extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
-
 
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
@@ -106,10 +97,15 @@ extern u16 gLastUsedItem;
 
 extern u8 ewram[];
 #define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
 
-extern u8 gUnknown_03000720;
-extern s8 gUnknown_03000722;
+static EWRAM_DATA u16 gUnknown_020387E0 = 0;
+static EWRAM_DATA u16 gUnknown_020387E2 = 0;
+static EWRAM_DATA u8 gUnknown_020387E4 = 0;
+static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to a 4-byte boundary?
+
+static u8 gUnknown_03000720;
+static u8 gUnknown_03000721;
+static s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -365,7 +361,7 @@ void sub_80BDC14(void)
     gSaveBlock1.gabbyAndTyData.valB_2 = gSaveBlock1.gabbyAndTyData.valA_2;
     gSaveBlock1.gabbyAndTyData.valB_3 = gSaveBlock1.gabbyAndTyData.valA_3;
     gSaveBlock1.gabbyAndTyData.valA_4 = 1;
-    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.name;
+    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
 }
 
@@ -556,7 +552,7 @@ void sub_80BE028(void)
     worldOfMasters->var02++;
     worldOfMasters->var04 = gBattleResults.CaughtPoke;
     worldOfMasters->var08 = gBattleResults.Poke1Species;
-    worldOfMasters->var0a = gMapHeader.name;
+    worldOfMasters->var0a = gMapHeader.regionMapSectionId;
 }
 
 void sub_80BE074(void)
@@ -585,7 +581,7 @@ void sub_80BE074(void)
                 pokemonTodayFailed->species2 = gBattleResults.LastOpponentSpecies;
                 pokemonTodayFailed->var10 = total;
                 pokemonTodayFailed->var11 = gBattleOutcome;
-                pokemonTodayFailed->var12 = gMapHeader.name;
+                pokemonTodayFailed->var12 = gMapHeader.regionMapSectionId;
                 StringCopy(pokemonTodayFailed->playerName, gSaveBlock2.playerName);
                 sub_80BE138((TVShow *)pokemonTodayFailed);
                 pokemonTodayFailed->language = GAME_LANGUAGE;
@@ -710,7 +706,7 @@ void sub_80BE3BC(void)
 
                 smartShopper->var00 = TVSHOW_SMART_SHOPPER;
                 smartShopper->var01 = rval;
-                smartShopper->shopLocation = gMapHeader.name;
+                smartShopper->shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++)
                 {
                     smartShopper->itemIds[i] = gUnknown_02038724[i].item_id;
@@ -1921,9 +1917,6 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
     sub_80C0408();
 }
 
-extern u8 gUnknown_03000720;
-extern u8 gUnknown_03000721;
-extern s8 gUnknown_03000722;
 s8 sub_80C019C(TVShow tvShows[]);
 bool8 sub_80BFF68(TVShow * tv1[25], TVShow * tv2[25], u8 idx);
 u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx);
@@ -2720,7 +2713,7 @@ void DoTVShowTodaysSmartShopper(void)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
-        sub_80FBFB4(gStringVar2, smartShopper->shopLocation, 0);
+        GetMapSectionName(gStringVar2, smartShopper->shopLocation, 0);
         if (smartShopper->itemAmounts[0] >= 0xff)
             gUnknown_020387E8 = 11;
         else
@@ -2978,7 +2971,7 @@ void DoTVShowPokemonTodayFailedCapture(void)
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
-        sub_80FBFB4(gStringVar2, pokemonTodayFailed->var12, 0);
+        GetMapSectionName(gStringVar2, pokemonTodayFailed->var12, 0);
         StringCopy(gStringVar3, gSpeciesNames[pokemonTodayFailed->species2]);
         if (pokemonTodayFailed->var11 == 1)
             gUnknown_020387E8 = 3;
@@ -3133,7 +3126,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
 {
     struct TVShowMassOutbreak *massOutbreak = &gSaveBlock1.tvShows[gSpecialVar_0x8004].massOutbreak;
 
-    sub_80FBFB4(gStringVar1, massOutbreak->locationMapNum, 0);
+    GetMapSectionName(gStringVar1, massOutbreak->locationMapNum, 0);
     StringCopy(gStringVar2, gSpeciesNames[massOutbreak->species]);
     TVShowDone();
     StartMassOutbreak();
@@ -3149,7 +3142,7 @@ void DoTVShowInSearchOfTrainers(void)
     switch (state)
     {
     case 0:
-        sub_80FBFB4(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
+        GetMapSectionName(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
         if (gSaveBlock1.gabbyAndTyData.battleNum > 1)
             gUnknown_020387E8 = 1;
         else
@@ -3246,7 +3239,7 @@ void DoTVShowTheWorldOfMasters(void)
     case 2:
         TVShowConvertInternationalString(gStringVar1, worldOfMasters->playerName,
                                          worldOfMasters->language);
-        sub_80FBFB4(gStringVar2, worldOfMasters->var0a, 0);
+        GetMapSectionName(gStringVar2, worldOfMasters->var0a, 0);
         StringCopy(gStringVar3, gSpeciesNames[worldOfMasters->var04]);
         TVShowDone();
         break;

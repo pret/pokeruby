@@ -19,8 +19,6 @@
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 
-extern u32 gUnknown_0202FF84[];
-
 extern u8 gIslandCave_EventScript_OpenRegiiceChamber[]; // regiice event script
 
 bool8 ShouldDoBrailleDigEffect(void)

@@ -41,7 +41,6 @@
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 gUnknown_0202F7E4;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030042C0;
 extern const u8 gUnknown_08E9D8CC[];
@@ -50,6 +49,8 @@ extern const u8 gUnknown_08E9F7E4[];
 extern const u8 gVersionTiles[];
 extern const u8 gTitleScreenPressStart_Gfx[];
 extern const u16 gTitleScreenLogoShinePalette[];
+
+static EWRAM_DATA u8 gUnknown_0202F7E4 = 0;
 
 #ifdef SAPPHIRE
 static const u16 sLegendaryMonPalettes[][16] =
