@@ -41,7 +41,25 @@
 #elif GERMAN
 #define CHAR_DECIMAL_SEPARATOR CHAR_COMMA
 #endif
+
+extern struct WarpData gUnknown_020297F0;
+extern u8 gBattleOutcome;
+extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8005;
+extern u16 gScriptResult;
+
+EWRAM_DATA u8 gUnknown_02039250 = 0;
+EWRAM_DATA u8 gUnknown_02039251 = 0;
+EWRAM_DATA u32 gUnknown_02039254 = 0;
+EWRAM_DATA u8 gUnknown_02039258 = 0;
+EWRAM_DATA u8 gUnknown_02039259 = 0;
+EWRAM_DATA u8 gUnknown_0203925A = 0;
+EWRAM_DATA u8 gUnknown_0203925B = 0;
+EWRAM_DATA u8 gUnknown_0203925C = 0;
+
 static void RecordCyclingRoadResults(u32, u8);
+
+static struct ElevatorMenu gUnknown_03000760[20];
 
 void sub_810D6A4(void) {
     SetMainCallback2(sub_8145D88);
@@ -1761,7 +1779,7 @@ u8 GetPokeblockNameByMonNature(void)
 
 void GetSecretBaseNearbyMapName(void)
 {
-    sub_80FBFB4(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
+    GetMapSectionName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
 u16 sub_810F404(void)

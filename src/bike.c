@@ -15,8 +15,6 @@ extern u8 sub_80608A4(u8);
 extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u8 gUnknown_0202E854;
-extern u8 gUnknown_0202E86C[];
-extern u8 gUnknown_0202E874[];
 
 static void MovePlayerOnMachBike(u8, u16, u16);
 static u8 GetMachBikeTransition(u8 *);
@@ -758,12 +756,12 @@ static bool8 sub_80E5BC8(const u8 *a, const u8 *b)
 
     for (i = 0; a[i] != 0; i++)
     {
-        if (gUnknown_0202E86C[i] > a[i])
+        if (gPlayerAvatar.unk14[i] > a[i])
             return FALSE;
     }
     for (i = 0; b[i] != 0; i++)
     {
-        if (gUnknown_0202E874[i] > b[i])
+        if (gPlayerAvatar.unk1C[i] > b[i])
             return FALSE;
     }
     return TRUE;

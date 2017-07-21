@@ -6,11 +6,16 @@
 #include "dewford_trend.h"
 #include "event_data.h"
 #include "fldeff_80C5CD4.h"
+#include "item.h"
+#include "items.h"
+#include "load_save.h"
 #include "link.h"
 #include "mauville_old_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
+#include "rng.h"
 #include "rom4.h"
+#include "save.h"
 #include "script.h"
 #include "secret_base.h"
 #include "songs.h"
@@ -20,24 +25,25 @@
 #include "task.h"
 #include "tv.h"
 
+extern u8 ewram[];
+#define unk_2018000 (*(struct PlayerRecords *)(ewram + 0x18000))
+#define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
 
-extern void *recordMixingSecretBases;
-extern void *recordMixingTvShows;
-extern void *gUnknown_083D0274;
-extern void *gUnknown_083D0278;
-extern void *recordMixingEasyChatPairs;
-extern void *gUnknown_083D0284;
-extern u8 gUnknown_083D0288[2];
-extern u8 gUnknown_083D028A[2][3];
-extern u8 gUnknown_083D0290[9][4];
-
-extern struct RecordMixing_UnknownStruct gUnknown_02038738;  //Don't know what type this points to
-extern struct RecordMixing_UnknownStruct *gUnknown_083D0280;
+extern struct RecordMixing_UnknownStruct gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;
-extern u32 gUnknown_03005D2C;
-extern u8 gUnknown_03000718;
-extern u8 gUnknown_0300071C[];
-extern bool8 gReceivedRemoteLinkPlayers;
+
+u32 gUnknown_03005D2C;
+
+static u8 gUnknown_03000718;
+static u8 gUnknown_0300071C[4];
+
+void *recordMixingSecretBases = &gSaveBlock1.secretBases;
+void *recordMixingTvShows = &gSaveBlock1.tvShows;
+void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
+void *gUnknown_083D0278 = &gSaveBlock1.oldMan;
+void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
+struct RecordMixing_UnknownStruct *gUnknown_083D0280 = &gUnknown_02038738;
+void *gUnknown_083D0284 = &gSaveBlock2.filler_A8;
 
 #define BUFFER_CHUNK_SIZE 200
 
@@ -46,7 +52,8 @@ void sub_80B929C(void)
     sub_8083A84(Task_RecordMixing_Main);
 }
 
-struct PlayerRecords {
+struct PlayerRecords
+{
     struct SecretBaseRecord secretBases[20];
     TVShow tvShows[25];
     u8 filler1004[0x40];
@@ -57,9 +64,6 @@ struct PlayerRecords {
     u16 filler11C8[0x34];
 };
 
-extern struct PlayerRecords unk_2008000;
-extern struct PlayerRecords unk_2018000;
-
 void RecordMixing_PrepareExchangePacket(void)
 {
     sub_80BC300();
@@ -67,14 +71,14 @@ void RecordMixing_PrepareExchangePacket(void)
 
     memcpy(unk_2018000.secretBases, recordMixingSecretBases, sizeof(unk_2018000.secretBases));
     memcpy(unk_2018000.tvShows, recordMixingTvShows, sizeof(unk_2018000.tvShows));
-    memcpy(unk_2018000.filler1004, gUnknown_083D0274, 0x40);
-    memcpy(unk_2018000.filler1044, gUnknown_083D0278, 0x40);
-    memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, 0x28);
+    memcpy(unk_2018000.filler1004, gUnknown_083D0274, sizeof(unk_2008000.filler1004));
+    memcpy(unk_2018000.filler1044, gUnknown_083D0278, sizeof(unk_2008000.filler1044));
+    memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(unk_2018000.easyChatPairs));
     gUnknown_02038738.data[0] = gSaveBlock1.filler_303C.data[0];
     gUnknown_02038738.data[1] = gSaveBlock1.filler_303C.data[1];
     sub_8041324(gSaveBlock1.daycareData, &gUnknown_02038738);
     memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixing_UnknownStruct));
-    memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
+    memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
 
     if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = sub_8126338();
@@ -86,71 +90,77 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80BFD44((u8 *)unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
     sub_80C0514(unk_2008000.filler1004, sizeof(struct PlayerRecords), a);
     sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
-    //UB: Too many arguments for function "sub_80FA4E4"
     sub_80FA4E4(unk_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
-    sub_80B9C6C(&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
+    sub_80B9C6C((u8 *)&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
     sub_80B9B70(unk_2008000.filler1124, sizeof(struct PlayerRecords), a);
     sub_80B9F3C(unk_2008000.filler11C8, a);
 }
 
+#define tCounter data[0]
+
 void Task_RecordMixing_SoundEffect(u8 taskId)
 {
-    gTasks[taskId].data[0]++;
-    if (gTasks[taskId].data[0] == 50)
+    gTasks[taskId].tCounter++;
+    if (gTasks[taskId].tCounter == 50)
     {
         PlaySE(SE_W213);
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].tCounter = 0;
     }
 }
 
-#define TD_STATE 0
+#undef tCounter
+
+
+#define tState        data[0]
+#define tSndEffTaskId data[15]
+
 void Task_RecordMixing_Main(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
-    switch (taskData[TD_STATE])
+    switch (tState)
     {
     case 0:        // init
         sub_8007270(gSpecialVar_0x8005);
-        VarSet(0x4000, 1);
+        VarSet(VAR_0x4000, 1);
         gUnknown_03000718 = 0;
         RecordMixing_PrepareExchangePacket();
         CreateRecordMixingSprite();
-        taskData[TD_STATE] = 1;
-        taskData[10] = CreateTask(sub_80B95F0, 0x50);
-        taskData[15] = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
+        tState = 1;
+        data[10] = CreateTask(sub_80B95F0, 0x50);
+        tSndEffTaskId = CreateTask(Task_RecordMixing_SoundEffect, 0x51);
         break;
     case 1:        // wait for sub_80B95F0
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
-            taskData[TD_STATE] = 2;
+            tState = 2;
             FlagSet(SYS_MIX_RECORD);
             DestroyRecordMixingSprite();
-            DestroyTask(taskData[15]);
+            DestroyTask(tSndEffTaskId);
         }
         break;
     case 2:
-        taskData[10] = CreateTask(sub_80BA00C, 10);
-        taskData[TD_STATE] = 3;
+        data[10] = CreateTask(sub_80BA00C, 10);
+        tState = 3;
         PlaySE(SE_W226);
         break;
     case 3:        // wait for sub_80BA00C
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
-            taskData[TD_STATE] = 4;
-            taskData[10] = sub_8083664();
+            tState = 4;
+            data[10] = sub_8083664();
             sub_80720B0();
             MenuPrint(gOtherText_MixingComplete, 2, 15);
-            taskData[8] = 0;
+            data[8] = 0;
         }
         break;
     case 4:        // wait 60 frames
-        taskData[8]++;
-        if (taskData[8] > 60)
-            taskData[TD_STATE] = 5;
+        data[8]++;
+        if (data[8] > 60)
+            tState = 5;
         break;
     case 5:
-        if (!gTasks[taskData[10]].isActive)
+        if (!gTasks[data[10]].isActive)
         {
             sub_8055588();
             MenuZeroFillScreen();
@@ -165,14 +175,14 @@ void sub_80B95F0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[TD_STATE])
+    switch (task->tState)
     {
     case 0:
         sub_80B9A78();
         MenuDisplayMessageBox();
         MenuPrint(gOtherText_MixingRecordsWithFriend, 2, 15);
         task->data[8] = 0x708;
-        task->data[TD_STATE] = 400;
+        task->tState = 400;
         ClearLinkCallback_2();
         break;
     case 100:        // wait 20 frames
@@ -180,48 +190,48 @@ void sub_80B95F0(u8 taskId)
         if (task->data[12] > 20)
         {
             task->data[12] = 0;
-            task->data[TD_STATE] = 101;
+            task->tState = 101;
         }
         break;
     case 101:
-    {
-        u8 players = GetLinkPlayerCount_2();
-
-        if (IsLinkMaster() == 1)
         {
-            if (players == sub_800820C())
+            u8 players = GetLinkPlayerCount_2();
+
+            if (IsLinkMaster() == 1)
             {
-                PlaySE(0x15);
-                task->data[TD_STATE] = 201;
-                task->data[12] = 0;
+                if (players == sub_800820C())
+                {
+                    PlaySE(SE_PIN);
+                    task->tState = 201;
+                    task->data[12] = 0;
+                }
+            }
+            else
+            {
+                PlaySE(SE_BOO);
+                task->tState = 301;
             }
         }
-        else
-        {
-            PlaySE(0x16);
-            task->data[TD_STATE] = 301;
-        }
         break;
-    }
     case 201:
         if (sub_800820C() == GetLinkPlayerCount_2())
         {
             if (++task->data[12] > GetLinkPlayerCount_2() * 30)
             {
                 sub_8007F4C();
-                task->data[TD_STATE] = 1;
+                task->tState = 1;
             }
         }
         break;
     case 301:
         if (sub_800820C() == GetLinkPlayerCount_2())
-            task->data[TD_STATE] = 1;
+            task->tState = 1;
         break;
     case 400:        // wait 20 frames
         task->data[12]++;
         if (task->data[12] > 20)
         {
-            task->data[TD_STATE] = 1;
+            task->tState = 1;
             task->data[12] = 0;
         }
         break;
@@ -229,31 +239,30 @@ void sub_80B95F0(u8 taskId)
         if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), 2, 2);
-            task->data[TD_STATE] = 5;
+            task->tState = 5;
         }
         break;
     case 2:
-    {
-        u8 subTaskId;
+        {
+            u8 subTaskId;
 
-        task->data[6] = GetLinkPlayerCount_2();
-        task->data[TD_STATE] = 0;
-        task->data[5] = GetMultiplayerId_();
-        task->func = Task_RecordMixing_SendPacket;
-        StorePtrInTaskData(&unk_2018000, &task->data[2]);
-        subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
-        task->data[10] = subTaskId;
-        gTasks[subTaskId].data[0] = taskId;
-        //StorePtrInTaskData((void*)0x2008000, &gTasks[subTaskId].data[5]);
-        StorePtrInTaskData((u8 *)&unk_2018000 - 0x10000, &gTasks[subTaskId].data[5]);
+            task->data[6] = GetLinkPlayerCount_2();
+            task->tState = 0;
+            task->data[5] = GetMultiplayerId_();
+            task->func = Task_RecordMixing_SendPacket;
+            StorePtrInTaskData(&unk_2018000, &task->data[2]);
+            subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
+            task->data[10] = subTaskId;
+            gTasks[subTaskId].data[0] = taskId;
+            StorePtrInTaskData((u8 *)&unk_2008000, &gTasks[subTaskId].data[5]);
+        }
         break;
-    }
     case 5:        // wait 60 frames
         task->data[10]++;
         if (task->data[10] > 60)
         {
             task->data[10] = 0;
-            task->data[TD_STATE] = 2;
+            task->tState = 2;
         }
         break;
     }
@@ -264,29 +273,29 @@ void Task_RecordMixing_SendPacket(u8 taskId)
     struct Task *task = &gTasks[taskId];
     // does this send the data 24 times?
 
-    switch (task->data[TD_STATE])
+    switch (task->tState)
     {
     case 0: //Copy record data to send buffer
-    {
-        void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
+        {
+            void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
 
-        memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
-        task->data[TD_STATE]++;
+            memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
+            task->tState++;
+        }
         break;
-    }
     case 1:
         if (GetMultiplayerId() == 0)
             sub_8007E9C(1);
-        task->data[TD_STATE]++;
+        task->tState++;
         break;
     case 2:
         break;
     case 3:
         task->data[4]++;
         if ((u16)task->data[4] == 24)
-            task->data[TD_STATE]++;
+            task->tState++;
         else
-            task->data[TD_STATE] = 0;
+            task->tState = 0;
         break;
     case 4:
         if (!gTasks[task->data[10]].isActive)
@@ -325,7 +334,6 @@ void Task_RecordMixing_CopyReceiveBuffer(u8 taskId)
         }
         gTasks[task->data[0]].data[0]++;
     }
-    //_080B998A
     if (handledPlayers == GetLinkPlayerCount())
         DestroyTask(taskId);
 }
@@ -353,15 +361,15 @@ void Task_RecordMixing_SendPacket_SwitchToReceive(u8 taskId)
     gUnknown_03000718 = 1;
 }
 
-void *LoadPtrFromTaskData(u16 *ptr)
+void *LoadPtrFromTaskData(u16 *taskData)
 {
-    return (void *)(*ptr | *(ptr + 1) << 16);
+    return (void *)(taskData[0] | (taskData[1] << 16));
 }
 
-void StorePtrInTaskData(void *ptr, u16 *data)
+void StorePtrInTaskData(void *ptr, u16 *taskData)
 {
-    *data = (u32)ptr;
-    *(data + 1) = (u32)ptr >> 16;
+    taskData[0] = (u32)ptr;
+    taskData[1] = (u32)ptr >> 16;
 }
 
 u8 GetMultiplayerId_(void)
@@ -378,6 +386,27 @@ void sub_80B9A78(void)
 {
     gUnknown_03005D2C = sizeof(struct PlayerRecords);
 }
+
+const u8 gUnknown_083D0288[2] = {1, 0};
+
+const u8 gUnknown_083D028A[2][3] =
+{
+    {1, 2, 0},
+    {2, 0, 1},
+};
+
+const u8 gUnknown_083D0290[9][4] =
+{
+    {1, 0, 3, 2},
+    {3, 0, 1, 2},
+    {2, 0, 3, 1},
+    {1, 3, 0, 2},
+    {2, 3, 0, 1},
+    {3, 2, 0, 1},
+    {1, 2, 3, 0},
+    {2, 3, 1, 0},
+    {3, 2, 1, 0},
+};
 
 void sub_80B9A88(u8 *a)
 {
@@ -430,93 +459,19 @@ u8 sub_80B9BBC(u16 *a)
     return a[16];
 }
 
-#undef NONMATCHING
-#ifdef NONMATCHING
-
-void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
+void sub_80B9BC4(u8 *a, size_t b, u8 c[][2], u8 d, u8 e)
 {
-    struct RecordMixing_UnknownStructSub *offA;
-    struct RecordMixing_UnknownStructSub *offB;
-    struct RecordMixing_UnknownStructSub v0;
-    v0 = (offA = ((struct RecordMixing_UnknownStruct *)(b * c[d][0] + (u32)&a))->data)[c[d][1]];
-    offA[c[d][1]] = (offB = ((struct RecordMixing_UnknownStruct *)(b * c[e][0] + (u32)&a))->data)[c[e][1]];
-    offB[c[e][1]] = v0;
-    //ToDo: Figure out what this strange stack usage is
-}
+    struct RecordMixing_UnknownStructSub *r6 = (struct RecordMixing_UnknownStructSub *)(a + b * c[d][0]);
+    struct RecordMixing_UnknownStructSub *src = r6 + c[d][1];
+    struct RecordMixing_UnknownStructSub sp0 = *src;
+    struct RecordMixing_UnknownStructSub *r8 = (struct RecordMixing_UnknownStructSub *)(a + b * c[e][0]);
 
-#else
-__attribute__((naked))
-void sub_80B9BC4(struct RecordMixing_UnknownStruct *a, size_t b, u8 c[][2], u8 d, u8 e)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    mov r6, r10\n\
-    mov r5, r9\n\
-    mov r4, r8\n\
-    push {r4-r6}\n\
-    sub sp, 0x38\n\
-    mov r8, r0\n\
-    mov r10, r1\n\
-    mov r9, r2\n\
-    adds r4, r3, 0\n\
-    ldr r5, [sp, 0x54]\n\
-    lsls r4, 24\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    lsrs r4, 23\n\
-    add r4, r9\n\
-    ldrb r0, [r4]\n\
-    mov r6, r10\n\
-    muls r6, r0\n\
-    add r6, r8\n\
-    ldrb r0, [r4, 0x1]\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 3\n\
-    adds r1, r6, r1\n\
-    mov r0, sp\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    lsls r5, 1\n\
-    add r5, r9\n\
-    ldrb r0, [r5]\n\
-    mov r1, r10\n\
-    muls r1, r0\n\
-    adds r0, r1, 0\n\
-    add r8, r0\n\
-    ldrb r1, [r4, 0x1]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 3\n\
-    adds r6, r0\n\
-    ldrb r0, [r5, 0x1]\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 3\n\
-    add r1, r8\n\
-    adds r0, r6, 0\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    ldrb r1, [r5, 0x1]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 3\n\
-    add r8, r0\n\
-    mov r0, r8\n\
-    mov r1, sp\n\
-    movs r2, 0x38\n\
-    bl memcpy\n\
-    add sp, 0x38\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    r6 += c[d][1];
+    *r6 = *(r8 + c[e][1]);
+
+    r8 += c[e][1];
+    *r8 = sp0;
 }
-#endif
 
 u8 sub_80B9C4C(u8 *a)
 {
@@ -528,3 +483,603 @@ u8 sub_80B9C4C(u8 *a)
     return r2;
 }
 
+const u8 gUnknown_083D02B4[][2] =
+{
+    {0, 1},
+    {1, 2},
+    {2, 0},
+};
+
+const u8 gUnknown_083D02BA[3][4] =
+{
+    {0, 1, 2, 3},
+    {0, 2, 1, 3},
+    {0, 3, 2, 1},
+};
+
+#ifdef NONMATCHING
+void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
+{
+    u8 r8;
+    u8 sp4[4];
+    u8 sp8[4];
+    void *spC[4];
+    u8 sp1C[4][2];
+    u8 sp24[4][2];
+    u8 sp3C;
+    u16 sp40 = Random();
+    u16 i;  // r3
+    u16 r7;
+    u8 r1;
+    struct RecordMixing_UnknownStruct *r6;
+
+    //asm("":::"r8");
+    SeedRng(gLinkPlayers[0].trainerId);
+    r8 = GetLinkPlayerCount();
+    for (i = 0; i < 4; i++)
+    {
+        sp4[i] = 0xFF;
+        sp8[i] = 0;
+        sp1C[i][0] = 0;
+        sp1C[i][1] = 0;
+    }
+    sp3C = 0;
+    for (i = 0; i < r8; i++)
+    {
+        r6 = (struct RecordMixing_UnknownStruct *)(a + b * i);
+        if (r6->unk70 != 0)
+        {
+            for (r7 = 0; r7 < r6->unk70; r7++)
+            {
+                if (r6->unk74[r7] == 0)
+                    sp1C[i][r7] = 1;
+            }
+        }
+        //_080B9D3C
+    }
+    //_080B9D46
+    for (r7 = 0, i = 0; i < r8; i++)
+    {
+        r6 = (struct RecordMixing_UnknownStruct *)(a + b * i);
+        if (sp1C[i][0] == 1 || sp1C[i][1] == 1)
+            sp3C++;
+        if (sp1C[i][0] == 1 && sp1C[i][1] == 0)
+        {
+            sp24[r7][0] = i;
+            sp24[r7][1] = 0;
+            r7++;
+        }
+        else if (sp1C[i][0] == 0 && sp1C[i][1] == 1)
+        {
+            sp24[r7][0] = i;
+            sp24[r7][1] = 0;
+            r7++;
+        }
+        //else if (sp1C[i][0] == 1 + 1 && sp1C[i][1] + 1 == 1 + 1)
+        else if (sp1C[i][0] == 1 && sp1C[i][1] == 1)
+        {
+            u8 r4, r1;
+
+            sp24[r7][0] = i;
+            r4 = sub_80B9BBC((u16 *)&r6->data[0]);
+            r1 = sub_80B9BBC((u16 *)&r6->data[1]);
+
+            asm("");
+            if (r4 == 0 && r1 != 0)
+                sp24[r7][1] = 1;
+            else if ((r4 == 0 && r1 == 0) || (r4 != 0 && r1 != 0))
+                sp24[r7][1] = Random() % 2;
+            else
+                sp24[r7][1] = 0;
+            /*
+            if (r4 == 0 && r1 != 0)
+                sp24[r7][1] = 1;
+            else if ((r4 == 0 && r1 == 0) || (r4 != 0 && r1 != 0))
+                sp24[r7][1] = Random() % 2;
+            else
+                sp24[r7][1] = 0;
+            */
+
+            /*
+            if (r4 == 0 && r1 != 0)
+                sp24[r7][1] = 1;
+            else if ((r4 == 0 && r1 == 0) || (r4 != 0 && r1 != 0))
+                //sp24[r7][1] = ((Random() << 16) >> 16) % 2;
+                sp24[r7][1] = Random() % 2;
+            else
+                sp24[r7][1] = 0;
+            */
+          //_080B9E2C:
+            r7++;
+        }
+    }
+    //_080B9E3E
+    for (i = 0; i < 4; i++)
+    {
+        r6 = (struct RecordMixing_UnknownStruct *)a + b * c;
+        spC[i] = r6;
+    }
+    r1 = sub_80B9C4C(d) % 3;
+    switch (sp3C)
+    {
+    case 2:
+        sub_80B9BC4(a, b, (u8 *)sp24, 0, 1);
+        break;
+    case 3:
+        {
+            u8 var1 = gUnknown_083D02B4[r1][0];
+            u8 var2 = gUnknown_083D02B4[r1][1];
+            sub_80B9BC4(a, b, (u8 *)sp24, var1, var2);
+        }
+        break;
+    case 4:
+        {
+            u8 *r6 = (u8 *)sp24;
+            u8 var1 = gUnknown_083D02BA[r1][0];
+            u8 var2 = gUnknown_083D02BA[r1][1];
+            sub_80B9BC4(a, b, r6, var1, var2);
+        }
+        {
+            u8 *r6 = (u8 *)sp24;
+            u8 var1 = gUnknown_083D02BA[r1][2];
+            u8 var2 = gUnknown_083D02BA[r1][3];
+            sub_80B9BC4(a, b, r6, var1, var2);
+        }
+        break;
+    }
+    //_080B9EF0
+    //memcpy(&gSaveBlock1.filler_303C.data[0], a + b * c, 0x38);
+    //memcpy(&gSaveBlock1.filler_303C.data[1], a + b * c + 0x38, 0x38);
+    r6 = (struct RecordMixing_UnknownStruct *)(a + b * c);
+    gSaveBlock1.filler_303C.data[0] = r6->data[0];
+    gSaveBlock1.filler_303C.data[1] = r6->data[1];
+    //memcpy(&gSaveBlock1.filler_303C.data[0], &r6->data[0], 0x38);
+    //memcpy(&gSaveBlock1.filler_303C.data[1], &r6->data[1], 0x38);
+    SeedRng(sp40);
+}
+#else
+__attribute__((naked))
+void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x58\n\
+    str r0, [sp, 0x2C]\n\
+    str r1, [sp, 0x30]\n\
+    str r3, [sp, 0x38]\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    str r2, [sp, 0x34]\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0x40]\n\
+    ldr r0, _080B9DA8 @ =gLinkPlayers\n\
+    ldrh r0, [r0, 0x4]\n\
+    bl SeedRng\n\
+    bl GetLinkPlayerCount\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    movs r3, 0\n\
+    add r0, sp, 0x1C\n\
+    mov r9, r0\n\
+    movs r1, 0x1D\n\
+    add r1, sp\n\
+    mov r10, r1\n\
+    mov r2, sp\n\
+    adds r2, 0xC\n\
+    str r2, [sp, 0x4C]\n\
+    movs r7, 0xFF\n\
+    add r4, sp, 0x8\n\
+    movs r2, 0\n\
+    mov r6, r9\n\
+    mov r5, r10\n\
+_080B9CBC:\n\
+    mov r1, sp\n\
+    adds r1, r3\n\
+    adds r1, 0x4\n\
+    ldrb r0, [r1]\n\
+    orrs r0, r7\n\
+    strb r0, [r1]\n\
+    adds r0, r4, r3\n\
+    strb r2, [r0]\n\
+    lsls r1, r3, 1\n\
+    adds r0, r6, r1\n\
+    strb r2, [r0]\n\
+    adds r1, r5, r1\n\
+    strb r2, [r1]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, 0x3\n\
+    bls _080B9CBC\n\
+    movs r4, 0\n\
+    str r4, [sp, 0x3C]\n\
+    movs r3, 0\n\
+    mov r1, r8\n\
+    lsls r0, r1, 16\n\
+    lsrs r1, r0, 16\n\
+    str r0, [sp, 0x50]\n\
+    ldr r4, [sp, 0x30]\n\
+    ldr r0, [sp, 0x34]\n\
+    adds r2, r4, 0\n\
+    muls r2, r0\n\
+    str r2, [sp, 0x48]\n\
+    ldr r2, [sp, 0x3C]\n\
+    cmp r2, r1\n\
+    bcs _080B9D46\n\
+    mov r8, r1\n\
+_080B9D00:\n\
+    ldr r4, [sp, 0x30]\n\
+    adds r0, r4, 0\n\
+    muls r0, r3\n\
+    ldr r1, [sp, 0x2C]\n\
+    adds r6, r1, r0\n\
+    ldr r0, [r6, 0x70]\n\
+    cmp r0, 0\n\
+    beq _080B9D3C\n\
+    movs r7, 0\n\
+    cmp r7, r0\n\
+    bcs _080B9D3C\n\
+    adds r4, r6, 0\n\
+    adds r4, 0x74\n\
+    mov r2, r9\n\
+    lsls r1, r3, 1\n\
+    movs r5, 0x1\n\
+_080B9D20:\n\
+    lsls r0, r7, 1\n\
+    adds r0, r4, r0\n\
+    ldrh r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080B9D30\n\
+    adds r0, r7, r1\n\
+    adds r0, r2, r0\n\
+    strb r5, [r0]\n\
+_080B9D30:\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    ldr r0, [r6, 0x70]\n\
+    cmp r7, r0\n\
+    bcc _080B9D20\n\
+_080B9D3C:\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, r8\n\
+    bcc _080B9D00\n\
+_080B9D46:\n\
+    movs r7, 0\n\
+    movs r3, 0\n\
+    ldr r2, [sp, 0x50]\n\
+    cmp r2, 0\n\
+    beq _080B9E3E\n\
+    mov r4, sp\n\
+    adds r4, 0x24\n\
+    str r4, [sp, 0x44]\n\
+    movs r0, 0x25\n\
+    add r0, sp\n\
+    mov r8, r0\n\
+_080B9D5C:\n\
+    ldr r1, [sp, 0x30]\n\
+    adds r0, r1, 0\n\
+    muls r0, r3\n\
+    ldr r2, [sp, 0x2C]\n\
+    adds r6, r2, r0\n\
+    lsls r1, r3, 1\n\
+    mov r4, r9\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    beq _080B9D7C\n\
+    mov r2, r10\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080B9D86\n\
+_080B9D7C:\n\
+    ldr r0, [sp, 0x3C]\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    str r0, [sp, 0x3C]\n\
+_080B9D86:\n\
+    mov r4, r9\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080B9DAC\n\
+    mov r2, r10\n\
+    adds r0, r2, r1\n\
+    ldrb r2, [r0]\n\
+    cmp r2, 0\n\
+    bne _080B9DAC\n\
+_080B9D9A:\n\
+    lsls r1, r7, 1\n\
+    ldr r4, [sp, 0x44]\n\
+    adds r0, r4, r1\n\
+    strb r3, [r0]\n\
+    add r1, r8\n\
+    strb r2, [r1]\n\
+    b _080B9E2C\n\
+    .align 2, 0\n\
+_080B9DA8: .4byte gLinkPlayers\n\
+_080B9DAC:\n\
+    mov r2, r9\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080B9DC0\n\
+    mov r4, r10\n\
+    adds r0, r4, r1\n\
+    ldrb r2, [r0]\n\
+    cmp r2, 0x1\n\
+    beq _080B9D9A\n\
+_080B9DC0:\n\
+    mov r2, r9\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080B9E32\n\
+    mov r4, r10\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080B9E32\n\
+    lsls r5, r7, 1\n\
+    ldr r1, [sp, 0x44]\n\
+    adds r0, r1, r5\n\
+    strb r3, [r0]\n\
+    adds r0, r6, 0\n\
+    str r3, [sp, 0x54]\n\
+    bl sub_80B9BBC\n\
+    adds r4, r0, 0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x38\n\
+    bl sub_80B9BBC\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    ldr r3, [sp, 0x54]\n\
+    cmp r4, 0\n\
+    bne _080B9E0A\n\
+    cmp r1, 0\n\
+    beq _080B9E0E\n\
+    mov r2, r8\n\
+    adds r1, r2, r5\n\
+    movs r0, 0x1\n\
+    strb r0, [r1]\n\
+    b _080B9E2C\n\
+_080B9E0A:\n\
+    cmp r1, 0\n\
+    beq _080B9E26\n\
+_080B9E0E:\n\
+    str r3, [sp, 0x54]\n\
+    bl Random\n\
+    mov r4, r8\n\
+    adds r2, r4, r5\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x1\n\
+    ands r0, r1\n\
+    strb r0, [r2]\n\
+    ldr r3, [sp, 0x54]\n\
+    b _080B9E2C\n\
+_080B9E26:\n\
+    mov r2, r8\n\
+    adds r0, r2, r5\n\
+    strb r1, [r0]\n\
+_080B9E2C:\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+_080B9E32:\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    ldr r4, [sp, 0x50]\n\
+    cmp r0, r4\n\
+    bcc _080B9D5C\n\
+_080B9E3E:\n\
+    movs r3, 0\n\
+    ldr r1, [sp, 0x48]\n\
+    lsls r0, r1, 4\n\
+    subs r0, r1\n\
+    lsls r0, 3\n\
+    ldr r2, [sp, 0x2C]\n\
+    adds r6, r2, r0\n\
+    ldr r1, [sp, 0x4C]\n\
+_080B9E4E:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r1, r0\n\
+    str r6, [r0]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, 0x3\n\
+    bls _080B9E4E\n\
+    ldr r0, [sp, 0x38]\n\
+    bl sub_80B9C4C\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    movs r1, 0x3\n\
+    bl __umodsi3\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    ldr r4, [sp, 0x3C]\n\
+    cmp r4, 0x3\n\
+    beq _080B9E9C\n\
+    cmp r4, 0x3\n\
+    bgt _080B9E82\n\
+    cmp r4, 0x2\n\
+    beq _080B9E8A\n\
+    b _080B9EF0\n\
+_080B9E82:\n\
+    ldr r0, [sp, 0x3C]\n\
+    cmp r0, 0x4\n\
+    beq _080B9EBC\n\
+    b _080B9EF0\n\
+_080B9E8A:\n\
+    add r2, sp, 0x24\n\
+    movs r0, 0x1\n\
+    str r0, [sp]\n\
+    ldr r0, [sp, 0x2C]\n\
+    ldr r1, [sp, 0x30]\n\
+    movs r3, 0\n\
+    bl sub_80B9BC4\n\
+    b _080B9EF0\n\
+_080B9E9C:\n\
+    ldr r0, _080B9EB8 @ =gUnknown_083D02B4\n\
+    lsls r1, 1\n\
+    adds r2, r1, r0\n\
+    ldrb r3, [r2]\n\
+    adds r0, 0x1\n\
+    adds r1, r0\n\
+    ldrb r0, [r1]\n\
+    add r2, sp, 0x24\n\
+    str r0, [sp]\n\
+    ldr r0, [sp, 0x2C]\n\
+    ldr r1, [sp, 0x30]\n\
+    bl sub_80B9BC4\n\
+    b _080B9EF0\n\
+    .align 2, 0\n\
+_080B9EB8: .4byte gUnknown_083D02B4\n\
+_080B9EBC:\n\
+    add r6, sp, 0x24\n\
+    ldr r4, _080B9F2C @ =gUnknown_083D02BA\n\
+    lsls r5, r1, 2\n\
+    adds r0, r5, r4\n\
+    ldrb r3, [r0]\n\
+    adds r0, r4, 0x1\n\
+    adds r0, r5, r0\n\
+    ldrb r0, [r0]\n\
+    str r0, [sp]\n\
+    ldr r0, [sp, 0x2C]\n\
+    ldr r1, [sp, 0x30]\n\
+    adds r2, r6, 0\n\
+    bl sub_80B9BC4\n\
+    adds r0, r4, 0x2\n\
+    adds r0, r5, r0\n\
+    ldrb r3, [r0]\n\
+    adds r4, 0x3\n\
+    adds r5, r4\n\
+    ldrb r0, [r5]\n\
+    str r0, [sp]\n\
+    ldr r0, [sp, 0x2C]\n\
+    ldr r1, [sp, 0x30]\n\
+    adds r2, r6, 0\n\
+    bl sub_80B9BC4\n\
+_080B9EF0:\n\
+    ldr r1, [sp, 0x2C]\n\
+    ldr r2, [sp, 0x48]\n\
+    adds r6, r1, r2\n\
+    ldr r4, _080B9F30 @ =gSaveBlock1\n\
+    ldr r1, _080B9F34 @ =0x0000303c\n\
+    adds r0, r4, r1\n\
+    adds r1, r6, 0\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    ldr r2, _080B9F38 @ =0x00003074\n\
+    adds r4, r2\n\
+    adds r1, r6, 0\n\
+    adds r1, 0x38\n\
+    adds r0, r4, 0\n\
+    movs r2, 0x38\n\
+    bl memcpy\n\
+    ldr r0, [sp, 0x40]\n\
+    bl SeedRng\n\
+    add sp, 0x58\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080B9F2C: .4byte gUnknown_083D02BA\n\
+_080B9F30: .4byte gSaveBlock1\n\
+_080B9F34: .4byte 0x0000303c\n\
+_080B9F38: .4byte 0x00003074\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_80B9F3C(u16 *a, u8 b)
+{
+    if (b != 0 && *a != 0)
+    {
+        if (GetPocketByItemId(*a) == 5)
+        {
+            if (!CheckBagHasItem(*a, 1) && !CheckPCHasItem(*a, 1) && AddBagItem(*a, 1))
+            {
+                VarSet(VAR_0x4001, *a);
+                StringCopy(gStringVar1, gLinkPlayers[0].name);
+                if (*a == ITEM_EON_TICKET)
+                    FlagSet(SYS_HAS_EON_TICKET);
+            }
+            else
+            {
+                VarSet(VAR_0x4001, ITEM_NONE);
+            }
+        }
+        else
+        {
+            if (AddBagItem(*a, 1) == TRUE)
+            {
+                VarSet(VAR_0x4001, *a);
+                StringCopy(gStringVar1, gLinkPlayers[0].name);
+            }
+            else
+            {
+                VarSet(VAR_0x4001, ITEM_NONE);
+            }
+        }
+    }
+}
+
+void sub_80BA00C(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->data[0])
+    {
+    case 0:
+        task->data[0]++;
+        break;
+    case 1:
+        task->data[0]++;
+        break;
+    case 2:
+        SetSecretBase2Field_9_AndHideBG();
+        sub_8125E2C();
+        task->data[0]++;
+        break;
+    case 3:
+        if (sub_8125E6C() != 0)
+        {
+            ClearSecretBase2Field_9_2();
+            task->data[0]++;
+            task->data[1] = 0;
+        }
+        break;
+    case 4:
+        task->data[1]++;
+        if (task->data[1] > 10)
+        {
+            sub_800832C();
+            task->data[0]++;
+        }
+        break;
+    case 5:
+        if (!gReceivedRemoteLinkPlayers)
+            DestroyTask(taskId);
+        break;
+    }
+}

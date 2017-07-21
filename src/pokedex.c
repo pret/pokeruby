@@ -143,13 +143,7 @@ struct UnknownStruct4
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
-extern struct PokedexView *gPokedexView;
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u16 gUnknown_0202FFB8;
-extern u8 gUnknown_0202FFBA;
-extern struct PokedexListItem *gUnknown_0202FFBC;
-extern u8 gUnknown_03005CE8;
-extern IntrCallback gUnknown_03005CEC;
 extern u8 gUnknown_03005E98;
 extern const u8 gPokedexMenu_Gfx[];
 extern const u8 gUnknown_08E96738[];
@@ -170,6 +164,14 @@ extern const u8 gUnknown_08E96D2C[];
 extern const u16 gPokedexMenuSearch_Pal[];
 extern const u8 gTypeNames[][7];
 extern const u8 gPokedexMenu2_Gfx[];
+
+static EWRAM_DATA struct PokedexView *gPokedexView = NULL;
+static EWRAM_DATA u16 gUnknown_0202FFB8 = 0;
+static EWRAM_DATA u8 gUnknown_0202FFBA = 0;
+static EWRAM_DATA struct PokedexListItem *gUnknown_0202FFBC = NULL;
+
+u8 gUnknown_03005CE8;
+IntrCallback gUnknown_03005CEC;
 
 static u8 sub_8091E3C(void);
 

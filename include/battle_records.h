@@ -2,7 +2,8 @@
 #define GUARD_BATTLE_RECORDS_H
 
 void InitLinkBattleRecords(void);
-void PrintLinkBattleWinsLossesDraws(void *);
-void PrintLinkBattleRecord(void *, u8);
+void UpdateLinkBattleRecords(int id);
+void ShowLinkBattleRecords(void);
+void ShowBattleTowerRecords(void);
 
 #endif // GUARD_BATTLE_RECORDS_H

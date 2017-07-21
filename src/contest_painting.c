@@ -14,18 +14,20 @@
 #include "unknown_task.h"
 
 extern u8 unk_2000000[];
-extern u8 gUnknown_03000750;
-extern u16 gUnknown_03000752;
-extern u16 gUnknown_03000754;
-extern u16 (*gUnknown_03005E10)[][32];
-extern u8 gUnknown_03005E40[];
-extern u16 (*gUnknown_03005E90)[];
+
+static u8 gUnknown_03000750;
+static u16 gUnknown_03000752;
+static u16 gUnknown_03000754;
+static u8 gUnknown_03000756;
+
+u16 (*gUnknown_03005E10)[][32];
+struct Unk03005E20 gUnknown_03005E20;
+u8 gUnknown_03005E40[0x4C];
+struct ContestEntry *gUnknown_03005E8C;
+u16 (*gUnknown_03005E90)[];
 
 extern struct ContestEntry unk_2015de0;
 extern struct Unk2015E00 unk_2015e00;
-extern struct Unk3000756 gUnknown_03000756;
-extern struct Unk03005E20 gUnknown_03005E20;
-extern struct ContestEntry *gUnknown_03005E8C;
 
 static const u16 gPictureFramePalettes[][16] =
 {
@@ -220,7 +222,7 @@ static void HoldContestPainting(void)
     case 0:
         if (!gPaletteFade.active)
             gUnknown_03000750 = 1;
-        if (gUnknown_03000756.var_0 != 0 && gUnknown_03000754 != 0)
+        if (gUnknown_03000756 != 0 && gUnknown_03000754 != 0)
             gUnknown_03000754--;
         break;
     case 1:
@@ -231,13 +233,13 @@ static void HoldContestPainting(void)
             gUnknown_03000750 = two;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         }
-        if (gUnknown_03000756.var_0 != 0)
+        if (gUnknown_03000756 != 0)
             gUnknown_03000754 = 0;
         break;
     case 2:
         if (!gPaletteFade.active)
             SetMainCallback2(CB2_QuitContestPainting);
-        if (gUnknown_03000756.var_0 != 0 && gUnknown_03000754 <= 0x1D)
+        if (gUnknown_03000756 != 0 && gUnknown_03000754 <= 0x1D)
             gUnknown_03000754++;
         break;
     }
@@ -311,13 +313,13 @@ static void ContestPaintingInitVars(bool8 arg0)
 {
     if (arg0 == FALSE)
     {
-        gUnknown_03000756.var_0 = FALSE;
+        gUnknown_03000756 = FALSE;
         gUnknown_03000752 = 0;
         gUnknown_03000754 = 0;
     }
     else
     {
-        gUnknown_03000756.var_0 = TRUE;
+        gUnknown_03000756 = TRUE;
         gUnknown_03000752 = 15;
         gUnknown_03000754 = 30;
     }
@@ -325,7 +327,7 @@ static void ContestPaintingInitVars(bool8 arg0)
 
 static void ContestPaintingMosaic(void)
 {
-    if (gUnknown_03000756.var_0 == FALSE)
+    if (gUnknown_03000756 == FALSE)
     {
         REG_MOSAIC = 0;
         return;

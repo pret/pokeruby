@@ -49,9 +49,11 @@ extern u16 gUnknown_03004280;
 extern u16 gUnknown_03004288;
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
-extern u16 gSoundAnimFramesToWait;
-extern u16 gAnimSpriteIndexArray[8];
-extern s16 gBattleAnimArgs[8];
+
+u16 gSoundAnimFramesToWait;
+s16 gBattleAnimArgs[8];
+u16 gAnimSpriteIndexArray[8];
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;

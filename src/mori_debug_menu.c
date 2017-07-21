@@ -12,8 +12,9 @@
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
-extern u8 gUnknown_03004DA0[];
 extern u8 (*gCallback_03004AE8)(void);
+
+u8 gUnknown_03004DA0[0x20];
 
 extern u8 gUnknown_0839B22C[][3];
 extern u8 gUnknown_0839B24A[];

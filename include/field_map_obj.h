@@ -70,8 +70,6 @@ extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
 
-extern u32 gUnknown_0202FF84[];
-
 extern const struct Coords16 gDirectionToVector[];
 
 void FieldObjectCB_BerryTree(struct Sprite *);

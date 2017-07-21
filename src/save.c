@@ -11,20 +11,22 @@
 #define GETBLOCKOFFSET(n) (0xF80 * (n - 1))
 #define TOTALNUMSECTORS ((ARRAY_COUNT(gSaveSectionLocations) * 2) + (ARRAY_COUNT(gHallOfFameSaveSectionLocations) * 2)) // there are 2 slots, so double each array count and get the sum.
 
-extern u32 gLastSaveSectorStatus; // used but in an unferenced function, so unused
-extern u16 gLastWrittenSector;
-extern u32 gLastSaveCounter;
-extern u16 gLastKnownGoodSector;
-extern u32 gDamagedSaveSectors;
-extern u32 gSaveCounter;
 extern struct SaveSection unk_2000000; // slow save RAM
-extern struct SaveSection *gFastSaveSection; // the pointer is in fast IWRAM but may sometimes point to the slower EWRAM.
-extern u16 gUnknown_03005EB4;
-extern u16 gSaveFileStatus;
-extern u32 gGameContinueCallback;
+
+u16 gLastWrittenSector;
+u32 gLastSaveCounter;
+u16 gLastKnownGoodSector;
+u32 gDamagedSaveSectors;
+u32 gSaveCounter;
+struct SaveSection *gFastSaveSection; // the pointer is in fast IWRAM but may sometimes point to the slower EWRAM.
+u16 gUnknown_03005EB4;
+u16 gSaveFileStatus;
+u32 gGameContinueCallback;
 
 extern struct PokemonStorage gPokemonStorage;
 extern struct HallOfFame gHallOfFame;
+
+static EWRAM_DATA u32 gLastSaveSectorStatus = 0; // used but in an unferenced function, so unused
 
 const struct SaveSectionLocation gSaveSectionLocations[] =
 {
@@ -672,9 +674,9 @@ u8 sub_8125E2C(void)
     return 0;
 }
 
-u8 sub_8125E6C(void)
+bool8 sub_8125E6C(void)
 {
-    u8 retVal = 0;
+    u8 retVal = FALSE;
     u16 val = ++gUnknown_03005EB4;
     if (val <= 4)
     {
@@ -684,7 +686,7 @@ u8 sub_8125E6C(void)
     else
     {
         sub_81257F0(val, gSaveSectionLocations);
-        retVal = 1;
+        retVal = TRUE;
     }
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(1);

@@ -4,8 +4,7 @@
 
 #define RAM_SCRIPT_MAGIC 51
 
-extern u8 *gUnknown_0202E8AC;
-extern u32 gUnknown_0202E8B0;
+EWRAM_DATA u8 *gUnknown_0202E8AC = NULL;
 
 static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;

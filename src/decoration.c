@@ -19,6 +19,27 @@
 #include "field_weather.h"
 #include "decoration.h"
 
+EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
+EWRAM_DATA u8 gUnknown_020388D4 = 0;
+EWRAM_DATA u8 gUnknown_020388D5 = 0;
+EWRAM_DATA u8 gUnknown_020388D6[16] = {0};
+EWRAM_DATA u8 gUnknown_020388E6[12] = {0};
+EWRAM_DATA u8 gUnknown_020388F2 = 0;
+EWRAM_DATA u8 gUnknown_020388F3 = 0;
+EWRAM_DATA u8 gUnknown_020388F4 = 0;
+EWRAM_DATA u8 gUnknown_020388F5 = 0;
+EWRAM_DATA u8 gUnknown_020388F6 = 0;
+EWRAM_DATA u8 gUnknown_020388F7[8] = {0};
+EWRAM_DATA struct UnkStruct_02038900 gUnknown_02038900 = {0};
+EWRAM_DATA u16 gUnknown_020391A4 = 0;
+EWRAM_DATA u16 gUnknown_020391A6 = 0;
+EWRAM_DATA u8 gUnknown_020391A8 = 0;
+EWRAM_DATA u8 gUnknown_020391A9 = 0;
+EWRAM_DATA u8 gUnknown_020391AA = 0;
+EWRAM_DATA struct OamData gUnknown_020391AC = {0};
+EWRAM_DATA struct UnkStruct_020391B4 gUnknown_020391B4[16] = {0};
+EWRAM_DATA u8 gUnknown_02039234 = 0;
+
 #if ENGLISH
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"

@@ -22,17 +22,11 @@
 
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-struct SaveFailedClockStruct
-{
-    bool16 clockRunning;
-    u16 timer; // appears to be unused, the only case its "used" cannot be reached normally
-    u8 unused[0xE]; // appears to be unused space. alternatively, there could have been multiple clock structs. however, neither of these cases are fulfilled, so the purpose of this space is unknown. one theory is that there is room for 3 more clock structs (2 16-bit values), so its possible GF intended there to be support for link-based save failed screens in case the synchronization failed, or it in fact was present in an earlier build but taken out for reasons.
-};
-
 extern u8 unk_2000000[];
 
-extern u16 gSaveFailedType;
-extern struct SaveFailedClockStruct gSaveFailedClockInfo;
+static EWRAM_DATA u16 gSaveFailedType = 0;
+static EWRAM_DATA u16 gSaveFailedClockInfo[9] = {0};
+
 extern u32 gDamagedSaveSectors;
 extern u32 gGameContinueCallback;
 
@@ -83,7 +77,7 @@ void DoSaveFailedScreen(u8 saveType)
 {
     SetMainCallback2(CB2_SaveFailedScreen);
     gSaveFailedType = saveType;
-    gSaveFailedClockInfo.clockRunning = FALSE;
+    gSaveFailedClockInfo[0] = FALSE;
 }
 
 static void VBlankCB(void)
@@ -159,7 +153,7 @@ static void CB2_WipeSave(void)
 {
     u8 wipeTries = 0;
 
-    gSaveFailedClockInfo.clockRunning = TRUE;
+    gSaveFailedClockInfo[0] = TRUE;
 
     while (gDamagedSaveSectors != 0 && wipeTries < 3) // while there are still attempts left, keep trying to fix the save sectors.
     {
@@ -208,7 +202,7 @@ static void CB2_WipeSave(void)
 
 static void CB2_GameplayCannotBeContinued(void)
 {
-    gSaveFailedClockInfo.clockRunning = FALSE;
+    gSaveFailedClockInfo[0] = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -221,7 +215,7 @@ static void CB2_GameplayCannotBeContinued(void)
 
 static void CB2_FadeAndReturnToTitleScreen(void)
 {
-    gSaveFailedClockInfo.clockRunning = FALSE;
+    gSaveFailedClockInfo[0] = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -255,7 +249,7 @@ static void VBlankCB_UpdateClockGraphics(void)
     gMain.oamBuffer[0].x = 112;
     gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
-    if (gSaveFailedClockInfo.clockRunning != FALSE)
+    if (gSaveFailedClockInfo[0] != FALSE)
     {
         gMain.oamBuffer[0].tileNum = sClockFrames[n][0];
         gMain.oamBuffer[0].matrixNum = (sClockFrames[n][2] << 4) | (sClockFrames[n][1] << 3);
@@ -267,8 +261,8 @@ static void VBlankCB_UpdateClockGraphics(void)
 
     CpuFastCopy(gMain.oamBuffer, (void *)OAM, 4);
 
-    if (gSaveFailedClockInfo.timer) // maybe was used for debugging?
-        gSaveFailedClockInfo.timer--;
+    if (gSaveFailedClockInfo[1]) // maybe was used for debugging?
+        gSaveFailedClockInfo[1]--;
 }
 
 static bool8 VerifySectorWipe(u16 sector)

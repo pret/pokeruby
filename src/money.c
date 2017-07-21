@@ -8,7 +8,8 @@
 #define SPRITE_TAG_MONEY (0x2722)
 
 extern u16 gSpecialVar_0x8005;
-extern u8 gUnknown_02038734;
+
+static EWRAM_DATA u8 gUnknown_02038734 = 0;
 
 extern const struct CompressedSpriteSheet gUnknown_083CF584;
 extern const struct CompressedSpritePalette gUnknown_083CF58C;

@@ -26,7 +26,8 @@
 #include "secret_base.h"
 #include "tv.h"
 
-extern u8 gDifferentSaveFile;
+EWRAM_DATA u8 gDifferentSaveFile = 0;
+EWRAM_DATA u8 gUnknown_020297ED = 0;
 
 extern u8 gPlayerPartyCount;
 extern u8 gUnknown_03005CE8;

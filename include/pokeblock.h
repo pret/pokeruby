@@ -1,11 +1,6 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
-struct YesNoCBTable {
-    void (*yesFunc)(void);
-    void (*noFunc)(void);
-};
-
 enum {
     PBLOCK_CLR_BLACK,
     PBLOCK_CLR_RED,
@@ -14,12 +9,6 @@ enum {
     PBLOCK_CLR_GREEN,
     PBLOCK_CLR_YELLOW
 };
-
-extern u8 ewram[];
-extern u8 gUnknown_02039244;
-extern u8 gUnknown_02039248[4];
-extern u8 gUnknown_0203924C;
-extern const u8 *gUnknown_03000758;
 
 void sub_810B96C(void);
 u8 sub_810BA50(s16, s16, u8);

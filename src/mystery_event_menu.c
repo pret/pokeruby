@@ -15,7 +15,8 @@
 #include "text.h"
 
 extern u8 unk_2000000[];
-extern u8 gUnknown_02039338;
+
+static EWRAM_DATA u8 gUnknown_02039338 = 0;
 
 static void VBlankCB(void);
 static bool8 CheckLanguageMatch(void);
