@@ -100,8 +100,8 @@ void sub_8053F84(void);
 void sub_8053FB0(u16);
 // is_warp1_light_level_8_or_9
 // sub_8053FF8
-// sub_8054034
-// sub_8054044
+bool8 sub_8054034(void);
+void sub_8054044(void);
 // sub_8054050
 void sub_80540D0(s16 *, u16 *);
 void sub_8054164(void);
