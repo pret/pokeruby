@@ -2435,6 +2435,10 @@ extern const u8 gMonFrontPic_UnownQuestionMark[];
 extern const u8 gMonBackPic_UnownQuestionMark[];
 extern const u8 gMonIcon_UnownQuestionMark[];
 
+extern const u8 gMonIcon_QuestionMark[];
+extern const u8 gMonIcon_Egg[];
+extern const u16 gMonIconPalettes[][16];
+
 // data/graphics.s
 extern const u8 gBagMaleTiles[];
 extern const u8 gBagFemaleTiles[];
