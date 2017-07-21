@@ -16,12 +16,12 @@
 #define UNK_MASK_2 0x80
 #endif
 
-extern struct ScriptContext gUnknown_02039288;
-
 extern ScrCmdFunc gScriptFuncs[];
 extern ScrCmdFunc gScriptFuncs_End[];
 
 extern u8 gOtherText_DataCannotUseVersion[];
+
+static EWRAM_DATA struct ScriptContext gUnknown_02039288 = {0};
 
 bool32 sub_8126098(u16 a1, u32 a2, u16 a3, u32 a4)
 {

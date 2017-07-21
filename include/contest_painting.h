@@ -49,11 +49,6 @@ struct ContestEntry
     /*0x16*/ u8 trainer_name[OT_NAME_LENGTH];
 };
 
-struct Unk3000756
-{
-    /*0x00*/ u8 var_0;
-};
-
 struct LabelPair
 {
     const u8 *prefix;

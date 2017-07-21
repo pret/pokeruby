@@ -18,7 +18,13 @@
 
 extern u8 unk_2000000[];
 extern u16 word_2024E82;
-extern u8 byte_2024E88;
+
+static EWRAM_DATA u8 byte_2024E88 = 0;
+
+u8 gPlayerPartyCount;
+struct Pokemon gPlayerParty[6];
+u8 gEnemyPartyCount;
+struct Pokemon gEnemyParty[6];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {

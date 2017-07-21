@@ -63,14 +63,7 @@ extern u8 gUnknown_02038694;
 
 extern struct TVSaleItem gUnknown_02038724[3];
 
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u8 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern u8 gUnknown_020387E8;
-
-extern struct UnkTvStruct gUnknown_03005D38;
+struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 *gTVBravoTrainerTextGroup[];
 extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
@@ -87,15 +80,13 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern u16 gUnknown_020387E0;
-extern u16 gUnknown_020387E2;
+
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
 extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
-
 
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
@@ -106,10 +97,15 @@ extern u16 gLastUsedItem;
 
 extern u8 ewram[];
 #define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
 
-extern u8 gUnknown_03000720;
-extern s8 gUnknown_03000722;
+static EWRAM_DATA u16 gUnknown_020387E0 = 0;
+static EWRAM_DATA u16 gUnknown_020387E2 = 0;
+static EWRAM_DATA u8 gUnknown_020387E4 = 0;
+static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to a 4-byte boundary?
+
+static u8 gUnknown_03000720;
+static u8 gUnknown_03000721;
+static s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -1921,9 +1917,6 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
     sub_80C0408();
 }
 
-extern u8 gUnknown_03000720;
-extern u8 gUnknown_03000721;
-extern s8 gUnknown_03000722;
 s8 sub_80C019C(TVShow tvShows[]);
 bool8 sub_80BFF68(TVShow * tv1[25], TVShow * tv2[25], u8 idx);
 u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx);

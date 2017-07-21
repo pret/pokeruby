@@ -7,8 +7,6 @@
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
-extern u32 gUnknown_0202FF84[];
-
 extern s16 gUnknown_08376194[];
 extern SpriteStepFunc *gUnknown_08376180[];
 extern s8 *gUnknown_083761D0[];

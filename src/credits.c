@@ -177,13 +177,14 @@ extern u16 unk_201f800[];
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-extern s16 gUnknown_02039320;
-extern u16 gUnknown_02039322; // TASK A
-extern u8 gUnknown_02039324;
-extern u8 gUnknown_02039325;
 extern u16 gUnknown_02039358;
 extern s16 gUnknown_0203935A;
 extern s16 gUnknown_0203935C;
+
+static EWRAM_DATA s16 gUnknown_02039320 = 0;
+static EWRAM_DATA u16 gUnknown_02039322 = 0; // TASK A
+EWRAM_DATA u8 gUnknown_02039324 = 0;
+static EWRAM_DATA u8 gUnknown_02039325 = 0;
 
 extern u8 gReservedSpritePaletteCount;
 

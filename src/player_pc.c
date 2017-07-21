@@ -32,8 +32,9 @@ extern u8 sub_807D770(void);
 extern void sub_808B020(void);
 extern void sub_80F944C(void);
 
-extern u8 *gPcItemMenuOptionOrder;
-extern u8 gPcItemMenuOptionsNum;
+static EWRAM_DATA u8 *gPcItemMenuOptionOrder = NULL;
+
+static u8 gPcItemMenuOptionsNum;
 
 extern u8 gUnknown_02038561;
 

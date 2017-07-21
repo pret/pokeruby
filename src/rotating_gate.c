@@ -565,9 +565,9 @@ static const u8 sRotatingGate_ArmLayout[][GATE_ARM_WEST + 1][GATE_ARM_MAX_LENGTH
     },
 };
 
-extern u8 gRotatingGate_GateSpriteIds[ROTATING_GATE_PUZZLE_MAX];
-extern const struct RotatingGatePuzzle *gRotatingGate_PuzzleConfig;
-extern u8 gRotatingGate_PuzzleCount;
+static EWRAM_DATA u8 gRotatingGate_GateSpriteIds[ROTATING_GATE_PUZZLE_MAX] = {0};
+static EWRAM_DATA const struct RotatingGatePuzzle *gRotatingGate_PuzzleConfig = NULL;
+static EWRAM_DATA u8 gRotatingGate_PuzzleCount = 0;
 
 static int GetCurrentMapRotatingGatePuzzleType(void)
 {

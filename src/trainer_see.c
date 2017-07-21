@@ -13,8 +13,6 @@ extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);
 extern bool8 (*gTrainerSeeFuncList2[])(u8, struct Task *, struct MapObject *);
 
-extern u32 gUnknown_0202FF84[];
-
 extern struct SpriteTemplate gSpriteTemplate_839B510;
 extern struct SpriteTemplate gSpriteTemplate_839B528;
 

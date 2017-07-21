@@ -31,10 +31,11 @@ extern u8 ewram[];
 
 extern struct RecordMixing_UnknownStruct gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;
-extern u32 gUnknown_03005D2C;
-extern u8 gUnknown_03000718;
-extern u8 gUnknown_0300071C[];
-extern bool8 gReceivedRemoteLinkPlayers;
+
+u32 gUnknown_03005D2C;
+
+static u8 gUnknown_03000718;
+static u8 gUnknown_0300071C[4];
 
 void *recordMixingSecretBases = &gSaveBlock1.secretBases;
 void *recordMixingTvShows = &gSaveBlock1.tvShows;

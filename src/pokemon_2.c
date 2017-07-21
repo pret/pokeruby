@@ -31,9 +31,10 @@ extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
-extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
+
+EWRAM_DATA struct SpriteTemplate gUnknown_02024E8C = {0};
 
 extern u8 gBadEggNickname[];
 extern const struct SpriteTemplate gSpriteTemplate_8208288[];
