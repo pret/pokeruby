@@ -72,7 +72,6 @@ include castform.mk
 include tilesets.mk
 include fonts.mk
 include misc.mk
-include override.mk
 
 %.s: ;
 %.png: ;

@@ -18,8 +18,13 @@ gUnknown_08D00524:: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
+.ifdef ENGLISH
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
 	.incbin "graphics/unused/old_charmap.bin.lz"
+.else
+	.incbin "graphics/unused/old_charmap_de.4bpp.lz" @ japanese table and bunch of stuff
+	.incbin "graphics/unused/old_charmap_de.bin.lz"
+.endif
 	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2
@@ -1005,6 +1010,7 @@ gUnknown_08D1214C::
 	.incbin "graphics/battle_interface/hpbar.gbapal"
 
 	.align 2
+.ifdef ENGLISH
 gUnknown_08D1216C:: @ 8D1216C
 	.incbin "graphics/battle_interface/hpbar.4bpp"
 	.incbin "graphics/battle_interface/expbar.4bpp"
@@ -1016,6 +1022,19 @@ gUnknown_08D1216C:: @ 8D1216C
 	.incbin "graphics/battle_interface/misc.4bpp"
 	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
 	.incbin "graphics/battle_interface/misc_frameend.4bpp"
+.else
+gUnknown_08D1216C:: @ 8D1216C
+	.incbin "graphics/battle_interface/hpbar_de.4bpp"
+	.incbin "graphics/battle_interface/expbar.4bpp"
+	.incbin "graphics/battle_interface/status_psn_de.4bpp"
+	.incbin "graphics/battle_interface/status_par_de.4bpp"
+	.incbin "graphics/battle_interface/status_slp_de.4bpp"
+	.incbin "graphics/battle_interface/status_frz_de.4bpp"
+	.incbin "graphics/battle_interface/status_brn_de.4bpp"
+	.incbin "graphics/battle_interface/misc.4bpp"
+	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
+	.incbin "graphics/battle_interface/misc_frameend.4bpp"
+.endif
 
 	.align 2
 Tiles_D129AC:: @ 8D129AC
@@ -1023,9 +1042,15 @@ Tiles_D129AC:: @ 8D129AC
 
 	@ extra stuff
 	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
+.ifdef ENGLISH
 	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
 	.incbin "graphics/battle_interface/status3.4bpp"
 	.incbin "graphics/battle_interface/status4.4bpp"
+.else
+	.incbin "graphics/battle_interface/status2_de.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
+	.incbin "graphics/battle_interface/status3_de.4bpp"
+	.incbin "graphics/battle_interface/status4_de.4bpp"
+.endif
 	.incbin "graphics/unknown/unknown_D12FEC.4bpp"
 	.incbin "graphics/unknown/unknown_D1300C.4bpp"
 
@@ -1224,7 +1249,11 @@ gUnknown_08D17C3C:: @ 8D17C3C
 
 	.align 2
 gContestMiscGfx:: @ 8D17D6C
+.ifdef ENGLISH
 	.incbin "graphics/contest/misc.4bpp.lz"
+.else
+	.incbin "graphics/contest/misc_de.4bpp.lz"
+.endif
 
 	.align 2
 gContestAudienceGfx:: @ 8D18818
@@ -1247,7 +1276,11 @@ gTiles_8D1975C:: @ 8D1975C
 
 	.align 2
 gUnknown_08D1977C:: @ 8D1977C
+.ifdef ENGLISH
 	.incbin "graphics/contest/misc_2.4bpp.lz"
+.else
+	.incbin "graphics/contest/misc_2_de.4bpp.lz"
+.endif
 
 	.align 2
 gUnknown_08D1A250:: @ 8D1A250
@@ -1255,7 +1288,11 @@ gUnknown_08D1A250:: @ 8D1A250
 
 	.align 2
 gUnknown_08D1A364:: @ 8D1A364
+.ifdef ENGLISH
 	.incbin "graphics/contest/misc_2_tilemap_2.bin.lz"
+.else
+	.incbin "graphics/contest/misc_2_tilemap_2_de.bin.lz"
+.endif
 
 	.align 2
 gUnknown_08D1A490:: @ 8D1A490
@@ -1690,8 +1727,13 @@ gBattleAnimSpritePalette_186:: @ 8D1F508
 	.incbin "graphics/battle_anims/sprites/186.gbapal.lz"
 
 	.align 2
+.ifdef ENGLISH
 gBattleWindowLargeGfx::
 	.incbin "graphics/battle_interface/window.4bpp.lz"
+.else
+gBattleWindowLargeGfx::
+	.incbin "graphics/battle_interface/window_de.4bpp.lz"
+.endif
 
 	.align 2
 gBattleWindowSmallGfx::
@@ -2827,15 +2869,27 @@ gBattleAnimSpritePalette_262:: @ 8E693DC
 
 	.align 2
 gContestNextTurnGfx::
+.ifdef ENGLISH
 	.incbin "graphics/contest/nextturn.4bpp.lz"
+.else
+	.incbin "graphics/contest/nextturn_de.4bpp.lz"
+.endif
 
 	.align 2
 gContestNextTurnNumbersGfx:: @ 8E69478
+.ifdef ENGLISH
 	.incbin "graphics/contest/nextturn_numbers.4bpp"
+.else
+	.incbin "graphics/contest/nextturn_numbers_de.4bpp"
+.endif
 
 	.align 2
 gContestNextTurnRandomGfx:: @ 8E69578
+.ifdef ENGLISH
 	.incbin "graphics/contest/nextturn_random.4bpp"
+.else
+	.incbin "graphics/contest/nextturn_random_de.4bpp"
+.endif
 
 	.align 2
 gBattleAnimSpriteSheet_264:: @ 8E695B8
@@ -2859,7 +2913,11 @@ gBattleAnimSpritePalette_068:: @ 8E69628
 
 	.align 2
 gContestApplauseGfx::
+.ifdef ENGLISH
 	.incbin "graphics/contest/applause.4bpp.lz"
+.else
+	.incbin "graphics/contest/applause_de.4bpp.lz"
+.endif
 
 	.align 2
 gContestApplauseMeterGfx:: @ 8E6978C
@@ -2970,7 +3028,11 @@ gUnknown_08E6C100:: @ 8E6C100
 
 	.align 2
 gUnknown_08E6C920:: @ 8E6C920
+.ifdef ENGLISH
 	.incbin "graphics/berry_blender/outer.4bpp.lz"
+.else
+	.incbin "graphics/berry_blender/outer_de.4bpp.lz"
+.endif
 
 	.align 2
 gUnknown_08E6D354:: @ 8E6D354
@@ -3130,7 +3192,11 @@ gBattleAnimSpritePalette_188:: @ 8E7133C
 
 	.align 2
 gPartyMenuMisc_Gfx:: @ 8E71354
+.ifdef ENGLISH
 	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
+.else
+	.incbin "graphics/interface/party_menu_misc_de.4bpp.lz"
+.endif
 
 	.align 2
 gPartyMenuMisc_Pal:: @ 8E716A0
@@ -3142,15 +3208,27 @@ gPartyMenuMisc_Tilemap:: @ 8E71788
 
 	.align 2
 gPartyMenuHpBar_Gfx:: @ 8E71894
+.ifdef ENGLISH
 	.incbin "graphics/interface/party_menu_hpbar.4bpp.lz"
+.else
+	.incbin "graphics/interface/party_menu_hpbar_de.4bpp.lz"
+.endif
 
 	.align 2
 gPartyMenuOrderText_Gfx:: @ 8E71934
+.ifdef ENGLISH
 	.incbin "graphics/interface/party_menu_ordertext.4bpp.lz"
+.else
+	.incbin "graphics/interface/party_menu_ordertext_de.4bpp.lz"
+.endif
 
 	.align 2
 gMoveTypes_Gfx:: @ 8E71D10
+.ifdef ENGLISH
 	.incbin "graphics/types/move_types.4bpp.lz"
+.else
+	.incbin "graphics/types/move_types_de.4bpp.lz"
+.endif
 
 	.align 2
 gMoveTypes_Pal:: @ 8E726E4
@@ -3166,7 +3244,11 @@ gMenuSummaryPal:: @ 8E72848
 
 	.align 2
 gStatusGfx_Icons:: @ 8E72860
+.ifdef ENGLISH
 	.incbin "graphics/interface/status_icons.4bpp.lz"
+.else
+	.incbin "graphics/interface/status_icons_de.4bpp.lz"
+.endif
 
 	.align 2
 gStatusPal_Icons:: @ 8E72A50
@@ -3174,7 +3256,11 @@ gStatusPal_Icons:: @ 8E72A50
 
 	.align 2
 gStatusScreen_Gfx:: @ 8E72A78
+.ifdef ENGLISH
 	.incbin "graphics/interface/status_screen.4bpp.lz"
+.else
+	.incbin "graphics/interface/status_screen_de.4bpp.lz"
+.endif
 
 	.align 2
 gStatusScreen_Pal:: @ 8E73468
@@ -3182,8 +3268,13 @@ gStatusScreen_Pal:: @ 8E73468
 
 	.align 2
 gUnknown_08E73508:: @ 8E73508
+.ifdef ENGLISH
 	.incbin "graphics/interface/status_screen.bin"
+.else
+	.incbin "graphics/interface/status_screen_de.bin"
+.endif
 
+.ifdef ENGLISH
 	.align 2
 gStatusScreen_Tilemap:: @ 8E73D08
 	.incbin "graphics/interface/status_screen_pokemon_skills.bin.lz"
@@ -3193,10 +3284,25 @@ gUnknown_08E73E88:: @ 8E73E88
 
 gUnknown_08E74688:: @ 8E74688
 	.incbin "graphics/interface/status_screen_contest_moves.bin"
+.else
+	.align 2
+gStatusScreen_Tilemap:: @ 8E73D08
+	.incbin "graphics/interface/status_screen_pokemon_skills_de.bin.lz"
+
+gUnknown_08E73E88:: @ 8E73E88
+	.incbin "graphics/interface/status_screen_battle_moves_de.bin"
+
+gUnknown_08E74688:: @ 8E74688
+	.incbin "graphics/interface/status_screen_contest_moves_de.bin"
+.endif
 
 	.align 2
 gUnknown_08E74E88:: @ 8E74E88
+.ifdef ENGLISH
 	.incbin "graphics/interface/pokemon_info.bin.lz"
+.else
+	.incbin "graphics/interface/pokemon_info_de.bin.lz"
+.endif
 
 	.align 2
 gBagMaleTiles:: @ 8E75024
@@ -3212,7 +3318,11 @@ gBagPalette:: @ 8E76700
 
 	.align 2
 gBagScreen_Gfx:: @ 8E76728
+.ifdef ENGLISH
 	.incbin "graphics/interface/bag_screen.4bpp.lz"
+.else
+	.incbin "graphics/interface/bag_screen_de.4bpp.lz"
+.endif
 
 	.align 2
 gBagScreenMale_Pal:: @ 8E76F94
@@ -3239,11 +3349,19 @@ gBuyMenuFrame_Tilemap:: @ 8E77928
 
 	.align 2
 gMenuMoneyGfx:: @ 8E77A5C
+.ifdef ENGLISH
 	.incbin "graphics/interface/money.4bpp.lz"
+.else
+	.incbin "graphics/interface/money_de.4bpp.lz"
+.endif
 
 	.align 2
 gMenuPokeblock_Gfx:: @ 8E77AE4
+.ifdef ENGLISH
 	.incbin "graphics/interface/pokeblock_case_frame.4bpp.lz"
+.else
+	.incbin "graphics/interface/pokeblock_case_frame_de.4bpp.lz"
+.endif
 
 	.align 2
 gMenuPokeblock_Pal:: @ 8E77D20
@@ -3327,7 +3445,11 @@ gUnknown_08E782FC:: @ 8E782FC
 
 	.align 2
 gBerryCheck_Gfx:: @ 8E783FC
+.ifdef ENGLISH
 	.incbin "graphics/interface/check_berry.4bpp.lz"
+.else
+	.incbin "graphics/interface/check_berry_de.4bpp.lz"
+.endif
 
 	.align 2
 gBerryCheck_Pal:: @ 8E7883C
@@ -3335,7 +3457,11 @@ gBerryCheck_Pal:: @ 8E7883C
 
 	.align 2
 gUnknown_08E788E4:: @ 8E788E4
+.ifdef ENGLISH
 	.incbin "graphics/interface/berry_tag.bin.lz"
+.else
+	.incbin "graphics/interface/berry_tag_de.bin.lz"
+.endif
 
 	.align 2
 gUnknown_08E78A84:: @ 8E78A84
@@ -3414,7 +3540,11 @@ gRouletteHeadersTiles:: @ 8E824BC
 
 	.align 2
 gRouletteCreditTiles:: @ 8E82AE0
+.ifdef ENGLISH
 	.incbin "graphics/roulette/credit.4bpp.lz"
+.else
+	.incbin "graphics/roulette/credit_de.4bpp.lz"
+.endif
 
 	.align 2
 gRouletteNumbersTiles:: @ 8E82C30
@@ -3570,7 +3700,11 @@ gMailTilemap_Retro:: @ 8E84C84
 
 	.align 2
 gNamingScreenBackButtonTiles:: @ 8E84D98
+.ifdef ENGLISH
 	.incbin "graphics/naming_screen/back_button.4bpp"
+.else
+	.incbin "graphics/naming_screen/back_button_de.4bpp"
+.endif
 
 	.align 2
 gNamingScreenRightPointingTriangleTiles:: @ 8E84F78
@@ -3578,7 +3712,11 @@ gNamingScreenRightPointingTriangleTiles:: @ 8E84F78
 
 	.align 2
 gNamingScreenOKButtonTiles:: @ 8E84F98
+.ifdef ENGLISH
 	.incbin "graphics/naming_screen/ok_button.4bpp"
+.else
+	.incbin "graphics/naming_screen/ok_button_de.4bpp"
+.endif
 
 	.align 2
 gNamingScreenUnderscoreTiles:: @ 8E85178
@@ -3596,7 +3734,11 @@ gNamingScreenChangeKeyboardButtonTiles:: @ 8E85418
 
 	.align 2
 gNamingScreenOthersTextTiles:: @ 8E85598
+.ifdef ENGLISH
 	.incbin "graphics/naming_screen/others_text.4bpp"
+.else
+	.incbin "graphics/naming_screen/others_text_de.4bpp"
+.endif
 
 	.align 2
 gNamingScreenCursorTiles:: @ 8E855F8
@@ -3610,6 +3752,7 @@ gNamingScreenActiveCursorSmallTiles:: @ 8E85678
 gNamingScreenActiveCursorBigTiles:: @ 8E856F8
 	.incbin "graphics/naming_screen/active_cursor_big.4bpp"
 
+.ifdef ENGLISH
 	.align 2
 gNamingScreenLowerTextTiles:: @ 8E85778
 	.incbin "graphics/naming_screen/lower_text.4bpp"
@@ -3617,12 +3760,25 @@ gNamingScreenLowerTextTiles:: @ 8E85778
 	.align 2
 gNamingScreenUpperTextTiles:: @ 8E857D8
 	.incbin "graphics/naming_screen/upper_text.4bpp"
+.else
+	.align 2
+gNamingScreenLowerTextTiles:: @ 8E85778
+	.incbin "graphics/naming_screen/lower_text_de.4bpp"
+
+	.align 2
+gNamingScreenUpperTextTiles:: @ 8E857D8
+	.incbin "graphics/naming_screen/upper_text_de.4bpp"
+.endif
 
 	.space 352
 
 	.align 2
 gNamingScreenMenu_Gfx:: @ 8E85998
+.ifdef ENGLISH
 	.incbin "graphics/naming_screen/menu.4bpp"
+.else
+	.incbin "graphics/naming_screen/menu_de.4bpp"
+.endif
 
 	.align 2
 gNamingScreenPalettes:: @ 8E86198
@@ -3636,6 +3792,7 @@ gNamingScreenPalettes:: @ 8E86198
 gUnknown_08E86258:: @ 8E86258
 	.incbin "graphics/unknown/unknown_E86258.bin"
 
+.ifdef ENGLISH
 	.align 2
 gPokedexMenu_Gfx:: @ 8E86758
 	.incbin "graphics/pokedex/menu.4bpp.lz"
@@ -3643,6 +3800,15 @@ gPokedexMenu_Gfx:: @ 8E86758
 	.align 2
 gPokedexMenu2_Gfx:: @ 8E874C8
 	.incbin "graphics/pokedex/menu2.4bpp.lz"
+.else
+	.align 2
+gPokedexMenu_Gfx:: @ 8E86758
+	.incbin "graphics/pokedex/menu_de.4bpp.lz"
+
+	.align 2
+gPokedexMenu2_Gfx:: @ 8E874C8
+	.incbin "graphics/pokedex/menu2_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokedexMenu_Pal:: @ 8E87AF4
@@ -3654,7 +3820,11 @@ gPokedexMenu2_Pal:: @ 8E87B54
 
 	.align 2
 gAreaUnknownTiles:: @ 8E87BB4
+.ifdef ENGLISH
 	.incbin "graphics/pokedex/area_unknown.4bpp.lz"
+.else
+	.incbin "graphics/pokedex/area_unknown_de.4bpp.lz"
+.endif
 
 	.align 2
 gAreaUnknownPalette:: @ 8E87D90
@@ -3662,19 +3832,37 @@ gAreaUnknownPalette:: @ 8E87D90
 
 	.align 2
 gPokedexMenuSearch_Gfx:: @ 8E87DB0
+.ifdef ENGLISH
 	.incbin "graphics/pokedex/menu_search.4bpp.lz"
+.else
+	.incbin "graphics/pokedex/menu_search_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokedexMenuSearch_Pal:: @ 8E882D8
+.ifdef ENGLISH
 	.incbin "graphics/pokedex/menu3.gbapal"
+.else
+	.incbin "graphics/pokedex/menu3_de.gbapal"
+.endif
 
+.ifdef ENGLISH
 	.align 2
 gPokenavMainMenu_Gfx:: @ 8E88358
 	.incbin "graphics/pokenav/mainmenu.4bpp.lz"
-
+	
 	.align 2
 gPokenavMenuOptions_Gfx:: @ 8E884CC
 	.incbin "graphics/pokenav/menu_options.4bpp.lz"
+.else
+	.align 2
+gPokenavMainMenu_Gfx:: @ 8E88358
+	.incbin "graphics/pokenav/mainmenu_de.4bpp.lz"
+
+	.align 2
+gPokenavMenuOptions_Gfx:: @ 8E884CC
+	.incbin "graphics/pokenav/menu_options_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokenavMenuOptions1_Pal:: @ 8E88A28
@@ -3688,6 +3876,7 @@ gPokenavMenuOptions2_Pal:: @ 8E88A48
 gPokenavMenuOptions3_Pal:: @ 8E88A68
 	.incbin "graphics/pokenav/pokenav3.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gPokenavHoennMapHeader_Gfx:: @ 8E88A88
 	.incbin "graphics/pokenav/map_header.4bpp.lz"
@@ -3699,6 +3888,19 @@ gPokenavHoennMapMisc_Gfx:: @ 8E88D4C
 	.align 2
 gPokenavHoennMapSquares_Gfx:: @ 8E892C4
 	.incbin "graphics/pokenav/map_squares.4bpp.lz"
+.else
+	.align 2
+gPokenavHoennMapHeader_Gfx:: @ 8E88A88
+	.incbin "graphics/pokenav/map_header_de.4bpp.lz"
+
+	.align 2
+gPokenavHoennMapMisc_Gfx:: @ 8E88D4C
+	.incbin "graphics/pokenav/map_misc2_de.4bpp.lz"
+
+	.align 2
+gPokenavHoennMapSquares_Gfx:: @ 8E892C4
+	.incbin "graphics/pokenav/map_squares_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokenavHoennMap1_Pal:: @ 8E89628
@@ -3710,12 +3912,17 @@ gPokenavHoennMapSquares_Pal:: @ 8E89648
 
 	.align 2
 gPokenavConditionMenu_Gfx:: @ 8E89668
+.ifdef ENGLISH
 	.incbin "graphics/pokenav/condition_menu.4bpp.lz"
+.else
+	.incbin "graphics/pokenav/condition_menu_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokenavConditionMenu_Pal:: @ 8E89958
 	.incbin "graphics/pokenav/condition1.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gPokenavConditionMenuHeader_Gfx:: @ 8E89978
 	.incbin "graphics/pokenav/condition_menu_header.4bpp.lz"
@@ -3723,11 +3930,21 @@ gPokenavConditionMenuHeader_Gfx:: @ 8E89978
 	.align 2
 gPokenavConditionView_Gfx:: @ 8E89AD8
 	.incbin "graphics/pokenav/condition_view.4bpp.lz"
+.else
+	.align 2
+gPokenavConditionMenuHeader_Gfx:: @ 8E89978
+	.incbin "graphics/pokenav/condition_menu_header_de.4bpp.lz"
+
+	.align 2
+gPokenavConditionView_Gfx:: @ 8E89AD8
+	.incbin "graphics/pokenav/condition_view_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokenavConditionMenu2_Pal:: @ 8E8A1C0
 	.incbin "graphics/pokenav/condition2.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gPokenavConditionMenuOptions_Gfx:: @ 8E8A1E0
 	.incbin "graphics/pokenav/condition_menu_options.4bpp.lz"
@@ -3735,6 +3952,15 @@ gPokenavConditionMenuOptions_Gfx:: @ 8E8A1E0
 	.align 2
 gPokenavConditionMenuCancel_Gfx:: @ 8E8A498
 	.incbin "graphics/pokenav/condition_cancel.4bpp"
+.else
+	.align 2
+gPokenavConditionMenuOptions_Gfx:: @ 8E8A1E0
+	.incbin "graphics/pokenav/condition_menu_options_de.4bpp.lz"
+
+	.align 2
+gPokenavConditionMenuCancel_Gfx:: @ 8E8A498
+	.incbin "graphics/pokenav/condition_cancel_de.4bpp"
+.endif
 
 	.align 2
 gPokenavConditionPokeball_Pal:: @ 8E8A598
@@ -3744,6 +3970,7 @@ gPokenavConditionPokeball_Pal:: @ 8E8A598
 gPokenavCondition4_Pal:: @ 8E8A5B8
 	.incbin "graphics/pokenav/condition4.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gPokenavConditionMenuOptions2_Gfx:: @ 8E8A5D8
 	.incbin "graphics/pokenav/condition_menu_options2.4bpp.lz"
@@ -3751,6 +3978,15 @@ gPokenavConditionMenuOptions2_Gfx:: @ 8E8A5D8
 	.align 2
 gPokenavConditionMenuMisc_Gfx:: @ 8E8A7C4
 	.incbin "graphics/pokenav/condition_menu_misc.4bpp"
+.else
+	.align 2
+gPokenavConditionMenuOptions2_Gfx:: @ 8E8A5D8
+	.incbin "graphics/pokenav/condition_menu_options2_de.4bpp.lz"
+
+	.align 2
+gPokenavConditionMenuMisc_Gfx:: @ 8E8A7C4
+	.incbin "graphics/pokenav/condition_menu_misc_de.4bpp"
+.endif
 
 	.align 2
 gPokenavCondition5_Pal:: @ 8E8ACE4
@@ -3758,7 +3994,11 @@ gPokenavCondition5_Pal:: @ 8E8ACE4
 
 	.align 2
 gPokenavConditionSearch_Gfx:: @ 8E8AD04
+.ifdef ENGLISH
 	.incbin "graphics/pokenav/condition_search.4bpp.lz"
+.else
+	.incbin "graphics/pokenav/condition_search_de.4bpp.lz"
+.endif
 
 	.align 2
 gPokenavCondition6_Pal:: @ 8E8B1C4
@@ -3768,6 +4008,7 @@ gPokenavCondition6_Pal:: @ 8E8B1C4
 gPokenavCondition7_Pal:: @ 8E8B1E4
 	.incbin "graphics/pokenav/condition7.bin" @ another palette thats impossible to leave as native pal file due to 0xFFFF instead of 0x7FFF.
 
+.ifdef ENGLISH
 	.align 2
 gPokenavTrainersEyesHeader_Gfx:: @ 8E8B204
 	.incbin "graphics/pokenav/trainereyes.4bpp.lz"
@@ -3775,10 +4016,23 @@ gPokenavTrainersEyesHeader_Gfx:: @ 8E8B204
 	.align 2
 gPokenavRibbonsHeader_Gfx:: @ 8E8B3A0
 	.incbin "graphics/pokenav/ribbons.4bpp.lz"
+.else
+	.align 2
+gPokenavTrainersEyesHeader_Gfx:: @ 8E8B204
+	.incbin "graphics/pokenav/trainereyes_de.4bpp.lz"
+
+	.align 2
+gPokenavRibbonsHeader_Gfx:: @ 8E8B3A0
+	.incbin "graphics/pokenav/ribbons_de.4bpp.lz"
+.endif
 
 	.align 2
 gMenuTrainerCard_Gfx:: @ 8E8B4E0
+.ifdef ENGLISH
 	.incbin "graphics/misc/trainer_card.4bpp"
+.else
+	.incbin "graphics/misc/trainer_card_de.4bpp"
+.endif
 
 	.align 2
 gMenuTrainerCard0Star_Pal::
@@ -3814,7 +4068,11 @@ gUnknown_08E8D9C0:: @ 8E8D9C0
 
 	.align 2
 gPSSMenuHeader_Gfx:: @ 8E8DEC0
+.ifdef ENGLISH
 	.incbin "graphics/pokemon_storage/header.4bpp.lz"
+.else
+	.incbin "graphics/pokemon_storage/header_de.4bpp.lz"
+.endif
 
 	.align 2
 gPSSMenu1_Pal:: @ 8E8E0E8
@@ -3830,7 +4088,11 @@ gPSSMenuHeader_Tilemap:: @ 8E8E128
 
 	.align 2
 gPSSMenuMisc_Gfx:: @ 8E8E244
+.ifdef ENGLISH
 	.incbin "graphics/pokemon_storage/misc1.4bpp.lz"
+.else
+	.incbin "graphics/pokemon_storage/misc1_de.4bpp.lz"
+.endif
 
 	.align 2
 gPSSMenu3_Pal:: @ 8E8E6A8
@@ -3846,12 +4108,17 @@ gPSSMenuMisc_Tilemap:: @ 8E8E6E8
 
 	.align 2
 gHallOfFame_Gfx:: @ 8E8E8B0
+.ifdef ENGLISH
 	.incbin "graphics/misc/hof.4bpp.lz"
+.else
+	.incbin "graphics/misc/hof_de.4bpp.lz"
+.endif
 
 	.align 2
 gHallOfFame_Pal:: @ 8E8EA78
 	.incbin "graphics/misc/hof.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gMenuWordGroupIndicator_Gfx:: @ 8E8EA98
 	.incbin "graphics/interface/wordgroup_indicator.4bpp.lz"
@@ -3859,6 +4126,15 @@ gMenuWordGroupIndicator_Gfx:: @ 8E8EA98
 	.align 2
 gMenuWordGroupFrame_Gfx:: @ 8E8EE18
 	.incbin "graphics/interface/wordgroup_frame.4bpp.lz"
+.else
+	.align 2
+gMenuWordGroupIndicator_Gfx:: @ 8E8EA98
+	.incbin "graphics/interface/wordgroup_indicator_de.4bpp.lz"
+
+	.align 2
+gMenuWordGroupFrame_Gfx:: @ 8E8EE18
+	.incbin "graphics/interface/wordgroup_frame_de.4bpp.lz"
+.endif
 
 	.align 2
 gMenuWordGroupIndicator_Pal:: @ 8E8F158
@@ -3874,7 +4150,11 @@ gMenuWordGroupFrame2_Pal:: @ 8E8F198
 
 	.align 2
 gMiscClock_Gfx:: @ 8E8F1B8
+.ifdef ENGLISH
 	.incbin "graphics/misc/clock.4bpp.lz"
+.else
+	.incbin "graphics/misc/clock_de.4bpp.lz"
+.endif
 
 	.align 2
 gMiscClockMale_Pal:: @ 8E8F804
@@ -3886,7 +4166,11 @@ gMiscClockFemale_Pal:: @ 8E8F824
 
 	.align 2
 gSlotMachine_Gfx:: @ 8E8F844
+.ifdef ENGLISH
 	.incbin "graphics/slot_machine/slots.4bpp.lz"
+.else
+	.incbin "graphics/slot_machine/slots_de.4bpp.lz"
+.endif
 
 	.align 2
 gBattleInterfaceStatusIcons_DynPal:: @ 8E903F8
@@ -3965,15 +4249,24 @@ gUnknown_08E94550:: @ 8E94550
 	.incbin "graphics/unknown/unknown_E94550.bin"
 
 gUnknown_08E945D0:: @ 8E945D0
+.ifdef ENGLISH
 	.incbin "graphics/interface/wordgroup_layout.bin"
+.else
+	.incbin "graphics/interface/wordgroup_layout_de.bin"
+.endif
 
 gUnknown_08E94AD0:: @ 8E94AD0
 	.incbin "graphics/unknown/unknown_E94AD0.bin"
 
 	.align 2
 gUnknown_08E953D0:: @ 8E953D0
+.ifdef ENGLISH
 	.incbin "graphics/unknown/unknown_E953D0.bin.lz"
+.else
+	.incbin "graphics/unknown/unknown_E953D0_de.bin.lz"
+.endif
 
+.ifdef ENGLISH
 	.align 2
 gUnknown_08E954B0:: @ 8E954B0
 	.incbin "graphics/misc/wallclock_edit.bin.lz"
@@ -3981,6 +4274,15 @@ gUnknown_08E954B0:: @ 8E954B0
 	.align 2
 gUnknown_08E95774:: @ 8E95774
 	.incbin "graphics/misc/wallclock_view.bin.lz"
+.else
+	.align 2
+gUnknown_08E954B0:: @ 8E954B0
+	.incbin "graphics/misc/wallclock_edit_de.bin.lz"
+
+	.align 2
+gUnknown_08E95774:: @ 8E95774
+	.incbin "graphics/misc/wallclock_view_de.bin.lz"
+.endif
 
 	.align 2
 gUnknown_08E95A18:: @ 8E95A18
@@ -3994,10 +4296,18 @@ gUnknown_08E95AB8:: @ 8E95AB8
 	.incbin "graphics/unknown/unknown_E95AB8.bin"
 
 gUnknown_08E95FB8:: @ 8E95FB8
+.ifdef ENGLISH
 	.incbin "graphics/slot_machine/slots_layout.bin"
+.else
+	.incbin "graphics/slot_machine/slots_layout_de.bin"
+.endif
 
 gUnknown_08E964B8:: @ 8E964B8
+.ifdef ENGLISH
 	.incbin "graphics/contest/contest_words.bin"
+.else
+	.incbin "graphics/contest/contest_words_de.bin"
+.endif
 
 gUnknown_08E966B8:: @ 8E966B8
 	.incbin "graphics/unknown/unknown_E966B8.gbapal"
@@ -4012,6 +4322,7 @@ gMonIconPalettes:: @ 8E966D8
 gUnknown_08E96738:: @ 8E96738
 	.incbin "graphics/unknown/unknown_E96738.bin.lz"
 
+.ifdef ENGLISH
 	.align 2
 gUnknown_08E96888:: @ 8E96888
 	.incbin "graphics/pokedex/pokedex_list_menu.bin.lz"
@@ -4031,6 +4342,27 @@ gUnknown_08E96B58:: @ 8E96B58
 	.align 2
 gUnknown_08E96BD4:: @ 8E96BD4
 	.incbin "graphics/pokedex/pokedex_detail_layout.bin.lz"
+.else
+	.align 2
+gUnknown_08E96888:: @ 8E96888
+	.incbin "graphics/pokedex/pokedex_list_menu_de.bin.lz"
+
+	.align 2
+gUnknown_08E96994:: @ 8E96994
+	.incbin "graphics/pokedex/pokedex_listing_menu_de.bin.lz"
+
+	.align 2
+gUnknown_08E96ACC:: @ 8E96ACC
+	.incbin "graphics/pokedex/pokedex_navbar_de.bin.lz"
+
+	.align 2
+gUnknown_08E96B58:: @ 8E96B58
+	.incbin "graphics/pokedex/pokedex_navbar_3_de.bin.lz"
+
+	.align 2
+gUnknown_08E96BD4:: @ 8E96BD4
+	.incbin "graphics/pokedex/pokedex_detail_layout_de.bin.lz"
+.endif
 
 	.align 2
 gUnknown_08E96D2C:: @ 8E96D2C
@@ -4222,7 +4554,11 @@ gUnknown_08E99FB0:: @ 8E99FB0
 
 	.align 2
 gUnknown_08E9A100:: @ 8E9A100
+.ifdef ENGLISH
 	.incbin "graphics/pokenav/bottom_toolbar.bin"
+.else
+	.incbin "graphics/pokenav/bottom_toolbar_de.bin"
+.endif
 
 gUnknown_08E9A300:: @ 8E9A300
 	.incbin "graphics/unknown/unknown_E9A300.bin"
@@ -4239,14 +4575,22 @@ gUnknown_08E9AB60:: @ 8E9AB60
 
 	.align 2
 gUnknown_08E9ABB4:: @ 8E9ABB4
+.ifdef ENGLISH
 	.incbin "graphics/unknown/unknown_E9ABB4.bin"
+.else
+	.incbin "graphics/unknown/unknown_E9ABB4_de.bin"
+.endif
 
 gUnknown_08E9AC2C:: @ 8E9AC2C
 	.incbin "graphics/unknown/unknown_E9AC2C.bin"
 
 	.align 2
 gUnknown_08E9AC4C:: @ 8E9AC4C
+.ifdef ENGLISH
 	.incbin "graphics/pokenav/condition_screen.bin.lz"
+.else
+	.incbin "graphics/pokenav/condition_screen_de.bin.lz"
+.endif
 
 @ text window frames
 
@@ -4416,7 +4760,11 @@ gUnknown_08E9C6DC:: @ 8E9C6DC
 
 	.align 2
 gIntroCopyright_Gfx:: @ 8E9C798
+.ifdef ENGLISH
 	.incbin "graphics/intro/copyright.4bpp.lz"
+.else
+	.incbin "graphics/intro/copyright_de.4bpp.lz"
+.endif
 
 	.align 2
 gIntroCopyright_Pal:: @ 8E9CA24
@@ -4424,20 +4772,33 @@ gIntroCopyright_Pal:: @ 8E9CA24
 
 	.align 2
 gIntroCopyright_Tilemap:: @ 8E9CA44
+.ifdef ENGLISH
 	.incbin "graphics/intro/copyright.bin"
+.else
+	.incbin "graphics/intro/copyright_de.bin"
+.endif
 
 	.align 2
 gInterviewOutlineCursorTiles:: @ 8E9CF44
+.ifdef ENGLISH
 	.incbin "graphics/misc/interview_outline_cursor.4bpp"
+.else
+	.incbin "graphics/misc/interview_outline_cursor_de.4bpp"
+.endif
 
 	.align 2
 gTitleScreenPressStart_Gfx:: @ 8E9D644
+.ifdef ENGLISH
 	.incbin "graphics/title_screen/press_start.4bpp.lz"
+.else
+	.incbin "graphics/title_screen/press_start_de.4bpp.lz"
+.endif
 
 	.align 2
 gTitleScreenLogoShinePalette:: @ E9D8E4
 	.incbin "graphics/title_screen/logo_shine.gbapal"
 
+.ifdef ENGLISH
 	.align 2
 gUnknown_08E9D8CC:: @ 8E9D8CC
 	.ifdef SAPPHIRE
@@ -4461,6 +4822,31 @@ gUnknown_08E9F624:: @ 8E9F624
 	.else
 	.incbin "graphics/title_screen/logo_ruby.gbapal"
 	.endif
+.else
+	.align 2
+gUnknown_08E9D8CC:: @ 8E9D8CC
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/pokemon_sapphire_de.8bpp.lz"
+	.else
+	.incbin "graphics/title_screen/pokemon_ruby_de.8bpp.lz"
+	.endif
+
+	.align 2
+gVersionTiles::
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/sapphireversion_de.8bpp.lz"
+	.else
+	.incbin "graphics/title_screen/rubyversion_de.8bpp.lz"
+	.endif
+
+	.align 2
+gUnknown_08E9F624:: @ 8E9F624
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/logo_sapphire_de.gbapal" @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
+	.else
+	.incbin "graphics/title_screen/logo_ruby_de.gbapal"
+	.endif
+.endif
 
 	.align 2
 gUnknown_08E9F7E4:: @ 8E9F7E4
@@ -4538,7 +4924,11 @@ gUnknown_08EA0328:: @ 8EA0328
 
 	.align 2
 gUnknown_08EA0348:: @ 8EA0348
+.ifdef ENGLISH
 	.incbin "graphics/trade/menu.4bpp"
+.else
+	.incbin "graphics/trade/menu_de.4bpp"
+.endif
 
 	.align 2
 gUnknown_08EA15C8:: @ 8EA15C8
@@ -4556,7 +4946,11 @@ gUnknown_08EA1DEC:: @ 8EA1DEC
 
 	.align 2
 gCreditsCopyrightEnd_Gfx:: @ 8EA260C
+.ifdef ENGLISH
 	.incbin "graphics/misc/end_copyright.4bpp.lz"
+.else
+	.incbin "graphics/misc/end_copyright_de.4bpp.lz"
+.endif
 
 	.align 2
 gDecoration10000_Gfx:: @ 8EA2A44
@@ -4571,7 +4965,7 @@ gFont3LatinGlyphs:: @ 8EA2C44
 	.incbin "graphics/fonts/font3_lat.4bpp"
 	.endif
 .else
-	.incbin "graphics/fonts/font3_lat.4bpp"
+	.incbin "graphics/fonts/font3_lat_de.4bpp"
 .endif
 
 	.align 2
@@ -4583,7 +4977,7 @@ gFont4LatinGlyphs:: @ 8EA6BC4
 	.incbin "graphics/fonts/font4_lat.4bpp"
 	.endif
 .else
-	.incbin "graphics/fonts/font4_lat.4bpp.bin"
+	.incbin "graphics/fonts/font4_lat_de.4bpp.bin"
 .endif
 
 	.align 2
@@ -4597,11 +4991,11 @@ gFont4JapaneseGlyphs:: @ 8EAC6C4
 .ifdef GERMAN
 	.align 2
 gSummaryScreenTextTiles::
-	.incbin "graphics/summary_screen/text.4bpp"
+	.incbin "graphics/summary_screen/text_de.4bpp"
 
 	.align 2
 gUnknown_0839FA7C::
-	.incbin "graphics/pokedex/noball.4bpp.lz"
+	.incbin "graphics/pokedex/noball_de.4bpp.lz"
 
 	.align 2
 gIntroTiles::
@@ -4609,7 +5003,7 @@ gIntroTiles::
 
 	.align 2
 ConditionUpDownTiles::
-	.incbin "graphics/misc/condition_up_down.4bpp"
+	.incbin "graphics/misc/condition_up_down_de.4bpp"
 
 	.align 2
 ConditionUpDownPalette::
@@ -4712,9 +5106,9 @@ gUnknown_083FAF1C::
 
 	.align 2
 gUnknown_083FAF3C::
-	.incbin "graphics/pokedex/cry_meter.4bpp.lz"
+	.incbin "graphics/pokedex/cry_meter_de.4bpp.lz"
 
 	.align 2
 gUnknown_083FAE7C::
-	.incbin "graphics/pokedex/cry_meter_map.bin"
+	.incbin "graphics/pokedex/cry_meter_map_de.bin"
 .endif

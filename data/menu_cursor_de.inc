@@ -5,67 +5,67 @@
 
 	.align 2
 OutlineCursorTiles_00:
-	.incbin "graphics/interface/outline_cursor_00.4bpp"
+	.incbin "graphics/interface/outline_cursor_00_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_01:
-	.incbin "graphics/interface/outline_cursor_01.4bpp"
+	.incbin "graphics/interface/outline_cursor_01_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_02:
-	.incbin "graphics/interface/outline_cursor_02.4bpp"
+	.incbin "graphics/interface/outline_cursor_02_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_03:
-	.incbin "graphics/interface/outline_cursor_03.4bpp"
+	.incbin "graphics/interface/outline_cursor_03_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_04:
-	.incbin "graphics/interface/outline_cursor_04.4bpp"
+	.incbin "graphics/interface/outline_cursor_04_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_05:
-	.incbin "graphics/interface/outline_cursor_05.4bpp"
+	.incbin "graphics/interface/outline_cursor_05_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_06:
-	.incbin "graphics/interface/outline_cursor_06.4bpp"
+	.incbin "graphics/interface/outline_cursor_06_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_07:
-	.incbin "graphics/interface/outline_cursor_07.4bpp"
+	.incbin "graphics/interface/outline_cursor_07_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_08:
-	.incbin "graphics/interface/outline_cursor_08.4bpp"
+	.incbin "graphics/interface/outline_cursor_08_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_09:
-	.incbin "graphics/interface/outline_cursor_09.4bpp"
+	.incbin "graphics/interface/outline_cursor_09_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_10:
-	.incbin "graphics/interface/outline_cursor_10.4bpp"
+	.incbin "graphics/interface/outline_cursor_10_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_11:
-	.incbin "graphics/interface/outline_cursor_11.4bpp"
+	.incbin "graphics/interface/outline_cursor_11_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_12:
-	.incbin "graphics/interface/outline_cursor_12.4bpp"
+	.incbin "graphics/interface/outline_cursor_12_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_13:
-	.incbin "graphics/interface/outline_cursor_13.4bpp"
+	.incbin "graphics/interface/outline_cursor_13_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_14:
-	.incbin "graphics/interface/outline_cursor_14.4bpp"
+	.incbin "graphics/interface/outline_cursor_14_de.4bpp"
 
 	.align 2
 OutlineCursorTiles_15:
-	.incbin "graphics/interface/outline_cursor_15.4bpp"
+	.incbin "graphics/interface/outline_cursor_15_de.4bpp"
 
 	.align 2
 gOamData_842F11C:: @ 842F11C
