@@ -109,6 +109,8 @@ void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
 void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
+void sub_80865BC(void);
+
 void PokecenterHealEffect_0(struct Task *);
 void PokecenterHealEffect_1(struct Task *);
 void PokecenterHealEffect_2(struct Task *);

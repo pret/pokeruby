@@ -7,6 +7,7 @@ u8 sub_80BBB24(void);
 void sub_80BBCCC(u8);
 void sub_80BC038();
 u8 sub_80BC050();
+u8 *GetSecretBaseMapName(u8 *);
 void sub_80BC300();
 const u8 sub_80BCCA4(u8);
 u8 *sub_80BCCE8(void);

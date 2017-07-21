@@ -993,12 +993,12 @@ bool8 is_light_level_8_or_9(u8 a1)
 
 u8 unref_sub_8054260(void)
 {
-    return get_mapheader_by_bank_and_number(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum)->name;
+    return get_mapheader_by_bank_and_number(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum)->regionMapSectionId;
 }
 
 u8 sav1_map_get_name(void)
 {
-    return get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->name;
+    return get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->regionMapSectionId;
 }
 
 u8 sav1_map_get_battletype(void)

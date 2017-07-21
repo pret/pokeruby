@@ -365,7 +365,7 @@ void sub_80BDC14(void)
     gSaveBlock1.gabbyAndTyData.valB_2 = gSaveBlock1.gabbyAndTyData.valA_2;
     gSaveBlock1.gabbyAndTyData.valB_3 = gSaveBlock1.gabbyAndTyData.valA_3;
     gSaveBlock1.gabbyAndTyData.valA_4 = 1;
-    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.name;
+    gSaveBlock1.gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
 }
 
@@ -556,7 +556,7 @@ void sub_80BE028(void)
     worldOfMasters->var02++;
     worldOfMasters->var04 = gBattleResults.caughtPoke;
     worldOfMasters->var08 = gBattleResults.poke1Species;
-    worldOfMasters->var0a = gMapHeader.name;
+    worldOfMasters->var0a = gMapHeader.regionMapSectionId;
 }
 
 void sub_80BE074(void)
@@ -585,7 +585,7 @@ void sub_80BE074(void)
                 pokemonTodayFailed->species2 = gBattleResults.lastOpponentSpecies;
                 pokemonTodayFailed->var10 = total;
                 pokemonTodayFailed->var11 = gBattleOutcome;
-                pokemonTodayFailed->var12 = gMapHeader.name;
+                pokemonTodayFailed->var12 = gMapHeader.regionMapSectionId;
                 StringCopy(pokemonTodayFailed->playerName, gSaveBlock2.playerName);
                 sub_80BE138((TVShow *)pokemonTodayFailed);
                 pokemonTodayFailed->language = GAME_LANGUAGE;
@@ -710,7 +710,7 @@ void sub_80BE3BC(void)
 
                 smartShopper->var00 = TVSHOW_SMART_SHOPPER;
                 smartShopper->var01 = rval;
-                smartShopper->shopLocation = gMapHeader.name;
+                smartShopper->shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++)
                 {
                     smartShopper->itemIds[i] = gUnknown_02038724[i].item_id;
@@ -2720,7 +2720,7 @@ void DoTVShowTodaysSmartShopper(void)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
-        sub_80FBFB4(gStringVar2, smartShopper->shopLocation, 0);
+        GetMapSectionName(gStringVar2, smartShopper->shopLocation, 0);
         if (smartShopper->itemAmounts[0] >= 0xff)
             gUnknown_020387E8 = 11;
         else
@@ -2978,7 +2978,7 @@ void DoTVShowPokemonTodayFailedCapture(void)
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
-        sub_80FBFB4(gStringVar2, pokemonTodayFailed->var12, 0);
+        GetMapSectionName(gStringVar2, pokemonTodayFailed->var12, 0);
         StringCopy(gStringVar3, gSpeciesNames[pokemonTodayFailed->species2]);
         if (pokemonTodayFailed->var11 == 1)
             gUnknown_020387E8 = 3;
@@ -3133,7 +3133,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
 {
     struct TVShowMassOutbreak *massOutbreak = &gSaveBlock1.tvShows[gSpecialVar_0x8004].massOutbreak;
 
-    sub_80FBFB4(gStringVar1, massOutbreak->locationMapNum, 0);
+    GetMapSectionName(gStringVar1, massOutbreak->locationMapNum, 0);
     StringCopy(gStringVar2, gSpeciesNames[massOutbreak->species]);
     TVShowDone();
     StartMassOutbreak();
@@ -3149,7 +3149,7 @@ void DoTVShowInSearchOfTrainers(void)
     switch (state)
     {
     case 0:
-        sub_80FBFB4(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
+        GetMapSectionName(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
         if (gSaveBlock1.gabbyAndTyData.battleNum > 1)
             gUnknown_020387E8 = 1;
         else
@@ -3246,7 +3246,7 @@ void DoTVShowTheWorldOfMasters(void)
     case 2:
         TVShowConvertInternationalString(gStringVar1, worldOfMasters->playerName,
                                          worldOfMasters->language);
-        sub_80FBFB4(gStringVar2, worldOfMasters->var0a, 0);
+        GetMapSectionName(gStringVar2, worldOfMasters->var0a, 0);
         StringCopy(gStringVar3, gSpeciesNames[worldOfMasters->var04]);
         TVShowDone();
         break;
