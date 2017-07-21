@@ -29,10 +29,19 @@
 #include "event_data.h"
 #include "pokeblock.h"
 
+struct UnkPokeblockStruct
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
 extern u8 ewram[];
 
+
 static EWRAM_DATA u8 gUnknown_02039244 = 0;
-static EWRAM_DATA ALIGNED(4) u8 gUnknown_02039248[4] = {0}; // why aligned to 4 bytes?
+static EWRAM_DATA struct UnkPokeblockStruct gUnknown_02039248 = {0};
 static EWRAM_DATA u8 gUnknown_0203924C = 0;
 
 // function declarations
@@ -322,7 +331,7 @@ static bool8 sub_810B6C0(void)
         case 15:
             sub_810BB0C();
             sub_810BB30();
-            sub_810BC84(gUnknown_02039248[1]);
+            sub_810BC84(gUnknown_02039248.unk1);
             gMain.state++;
             break;
         case 16:
@@ -462,7 +471,7 @@ static void sub_810BB88(u8 a0)
     for (i=a0; i<=a0+8; i++)
     {
         y = (i - a0) << 1;
-        if (i == gUnknown_02039248[2])
+        if (i == gUnknown_02039248.unk2)
         {
             buf = sub_8072C74(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
             MenuPrint(gStringVar1, 15, y + 1);
@@ -509,23 +518,23 @@ static void sub_810BC98(void)
 static void sub_810BD08(void)
 {
     u8 i;
-    gUnknown_02039248[2] = 0;
+    gUnknown_02039248.unk2 = 0;
     for (i=0; i<40; i++)
     {
         if (gSaveBlock1.pokeblocks[i].color != 0)
-            gUnknown_02039248[2]++;
+            gUnknown_02039248.unk2++;
     }
-    if (gUnknown_02039248[2] < 8)
+    if (gUnknown_02039248.unk2 < 8)
     {
-        gUnknown_02039248[3] = gUnknown_02039248[2];
+        gUnknown_02039248.unk3 = gUnknown_02039248.unk2;
     }
     else
     {
-        gUnknown_02039248[3] = 8;
+        gUnknown_02039248.unk3 = 8;
     }
-    if (gUnknown_02039248[1] + 8 > gUnknown_02039248[2] && gUnknown_02039248[1] != 0)
+    if (gUnknown_02039248.unk1 + 8 > gUnknown_02039248.unk2 && gUnknown_02039248.unk1 != 0)
     {
-        gUnknown_02039248[1]--;
+        gUnknown_02039248.unk1--;
     }
 }
 
@@ -535,8 +544,8 @@ static void sub_810BD64(u16 a0, u16 a1)
     int y;
     for (i=0; i<14; i++)
     {
-        gBGTilemapBuffers[2][(2 * gUnknown_02039248[0] + 1) * 32 + (y = i + 15)] = a0;
-        gBGTilemapBuffers[2][(2 * gUnknown_02039248[0] + 2) * 32 + y] = a0;
+        gBGTilemapBuffers[2][(2 * gUnknown_02039248.unk0 + 1) * 32 + (y = i + 15)] = a0;
+        gBGTilemapBuffers[2][(2 * gUnknown_02039248.unk0 + 2) * 32 + y] = a0;
     }
 }
 
@@ -552,7 +561,7 @@ static void sub_810BDAC(bool8 flag)
     {
         sub_810BD64(0x2005, 0x2014);
     }
-    if (gUnknown_02039248[1])
+    if (gUnknown_02039248.unk1)
     {
         sub_80F979C(0, 0);
     }
@@ -560,7 +569,7 @@ static void sub_810BDAC(bool8 flag)
     {
         sub_80F979C(0, 1);
     }
-    if (gUnknown_02039248[2] > gUnknown_02039248[3] && gUnknown_02039248[1] + gUnknown_02039248[3] != gUnknown_02039248[2])
+    if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
         sub_80F979C(1, 0);
     }
@@ -571,9 +580,9 @@ static void sub_810BDAC(bool8 flag)
     for (i=0; i<5; i++)
     {
         v0 = ((i % 3) << 6) + 0x1a1 + (i / 3) * 6;
-        if (gUnknown_02039248[0] + gUnknown_02039248[1] != gUnknown_02039248[2])
+        if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
         {
-            if (sub_810CA9C(&gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]], i + 1) > 0)
+            if (sub_810CA9C(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1], i + 1) > 0)
             {
                 gBGTilemapBuffers[2][v0] = (i << 12) + 23;
                 gBGTilemapBuffers[2][v0 + 32] = (i << 12) + 24;
@@ -591,9 +600,9 @@ static void sub_810BDAC(bool8 flag)
         }
     }
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
-    if (gUnknown_02039248[0] + gUnknown_02039248[1] != gUnknown_02039248[2])
+    if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
     {
-        sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]]), 16, 1);
+        sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
         MenuPrint(gStringVar1, 11, 17);
     }
     else
@@ -615,48 +624,48 @@ static void sub_810BF7C(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
-            if (gUnknown_02039248[0] != 0)
+            if (gUnknown_02039248.unk0 != 0)
             {
                 sub_810BD64(5, 20);
-                gUnknown_02039248[0]--;
+                gUnknown_02039248.unk0--;
                 sub_810BF38(FALSE);
             }
-            else if (gUnknown_02039248[1] != 0)
+            else if (gUnknown_02039248.unk1 != 0)
             {
-                gUnknown_02039248[1]--;
-                sub_810BB88(gUnknown_02039248[1]);
+                gUnknown_02039248.unk1--;
+                sub_810BB88(gUnknown_02039248.unk1);
                 sub_810BF38(FALSE);
             }
         }
         else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if (gUnknown_02039248[0] != gUnknown_02039248[3])
+            if (gUnknown_02039248.unk0 != gUnknown_02039248.unk3)
             {
                 sub_810BD64(5, 20);
-                gUnknown_02039248[0]++;
+                gUnknown_02039248.unk0++;
                 sub_810BF38(FALSE);
             }
-            else if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+            else if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 != gUnknown_02039248.unk2)
             {
-                gUnknown_02039248[1]++;
-                sub_810BB88(gUnknown_02039248[1]);
+                gUnknown_02039248.unk1++;
+                sub_810BB88(gUnknown_02039248.unk1);
                 sub_810BF38(FALSE);
             }
         }
         else if (gMain.newKeys & SELECT_BUTTON)
         {
-            if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+            if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 != gUnknown_02039248.unk2)
             {
                 PlaySE(SE_SELECT);
                 sub_810BDAC(TRUE);
-                gTasks[taskId].data[0] = gUnknown_02039248[1] + gUnknown_02039248[0];
+                gTasks[taskId].data[0] = gUnknown_02039248.unk1 + gUnknown_02039248.unk0;
                 gTasks[taskId].func = sub_810C0C8;
             }
         }
         else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            if (gUnknown_02039248[1] + gUnknown_02039248[0] == gUnknown_02039248[2])
+            if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 == gUnknown_02039248.unk2)
             {
                 gScriptResult = 0xffff;
                 sub_810C31C(taskId);
@@ -679,36 +688,36 @@ static void sub_810C0C8(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (gUnknown_02039248[0] != 0)
+        if (gUnknown_02039248.unk0 != 0)
         {
             sub_810BD64(5, 20);
-            gUnknown_02039248[0]--;
+            gUnknown_02039248.unk0--;
             sub_810BF38(TRUE);
             sub_810C1C8(taskId, 1);
         }
-        else if (gUnknown_02039248[1] != 0)
+        else if (gUnknown_02039248.unk1 != 0)
         {
             sub_810C1C8(taskId, 0);
-            gUnknown_02039248[1]--;
-            sub_810BB88(gUnknown_02039248[1]);
+            gUnknown_02039248.unk1--;
+            sub_810BB88(gUnknown_02039248.unk1);
             sub_810BF38(TRUE);
             sub_810C1C8(taskId, 1);
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (gUnknown_02039248[0] != gUnknown_02039248[3])
+        if (gUnknown_02039248.unk0 != gUnknown_02039248.unk3)
         {
             sub_810BD64(5, 20);
-            gUnknown_02039248[0]++;
+            gUnknown_02039248.unk0++;
             sub_810BF38(TRUE);
             sub_810C1C8(taskId, 1);
         }
-        else if (gUnknown_02039248[1] + gUnknown_02039248[0] != gUnknown_02039248[2])
+        else if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 != gUnknown_02039248.unk2)
         {
             sub_810C1C8(taskId, 0);
-            gUnknown_02039248[1]++;
-            sub_810BB88(gUnknown_02039248[1]);
+            gUnknown_02039248.unk1++;
+            sub_810BB88(gUnknown_02039248.unk1);
             sub_810BF38(TRUE);
             sub_810C1C8(taskId, 1);
         }
@@ -739,8 +748,8 @@ static void sub_810C1C8(u8 taskId, u8 flag)
     {
         v0 = 0x0005;
     }
-    y = gTasks[taskId].data[0] - gUnknown_02039248[1];
-    if ((u16)y <= 8 && y != gUnknown_02039248[0])
+    y = gTasks[taskId].data[0] - gUnknown_02039248.unk1;
+    if ((u16)y <= 8 && y != gUnknown_02039248.unk0)
     {
         for (i=0; i<14; i++)
         {
@@ -753,8 +762,8 @@ static void sub_810C1C8(u8 taskId, u8 flag)
 static void sub_810C23C(u8 taskId)
 {
     struct Pokeblock buf;
-    u8 selidx = gUnknown_02039248[1] + gUnknown_02039248[0];
-    if (selidx == gUnknown_02039248[2])
+    u8 selidx = gUnknown_02039248.unk1 + gUnknown_02039248.unk0;
+    if (selidx == gUnknown_02039248.unk2)
     {
         sub_810BDAC(FALSE);
     }
@@ -763,7 +772,7 @@ static void sub_810C23C(u8 taskId)
         buf = gSaveBlock1.pokeblocks[selidx];
         gSaveBlock1.pokeblocks[selidx] = gSaveBlock1.pokeblocks[gTasks[taskId].data[0]];
         gSaveBlock1.pokeblocks[gTasks[taskId].data[0]] = buf;
-        sub_810BB88(gUnknown_02039248[1]);
+        sub_810BB88(gUnknown_02039248.unk1);
         sub_810BDAC(FALSE);
     }
 }
@@ -810,7 +819,7 @@ static void sub_810C368(u8 taskId)
     MenuDrawTextWindow(7, v0 + 4, 13, 11);
     PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, (const struct MenuAction *)gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
-    gScriptItemId = gUnknown_02039248[0] + gUnknown_02039248[1];
+    gScriptItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
 }
 
@@ -865,7 +874,7 @@ static void sub_810C540(u8 taskId)
     BasicInitMenuWindow(&gWindowConfig_81E6E50);
     HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(7, 4, 13, 11);
-    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248[0] + gUnknown_02039248[1]].color]);
+    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1].color]);
     StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
 }
@@ -885,7 +894,7 @@ static void sub_810C5EC(u8 taskId)
 static void sub_810C610(u8 taskId)
 {
     MenuZeroFillWindowRect(7, 6, 13, 11);
-    sub_810CA6C((gUnknown_02039248[0] + gUnknown_02039248[1]));
+    sub_810CA6C((gUnknown_02039248.unk0 + gUnknown_02039248.unk1));
     StringExpandPlaceholders(gStringVar4, gContestStatsText_WasThrownAway);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C704, 0);
     sub_810BC98();
@@ -896,7 +905,7 @@ static void sub_810C668(u8 taskId)
 {
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
-    if (gUnknown_02039248[2] > gUnknown_02039248[3] && gUnknown_02039248[1] + gUnknown_02039248[3] != gUnknown_02039248[2])
+    if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
         sub_80F979C(1, 0);
     }
@@ -917,7 +926,7 @@ static void sub_810C6DC(u8 taskId)
 static void sub_810C704(u8 taskId)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6E34);
-    sub_810BC84(gUnknown_02039248[1]);
+    sub_810BC84(gUnknown_02039248.unk1);
     sub_80F979C(1, 1);
     gTasks[taskId].func = sub_810C6DC;
 }
