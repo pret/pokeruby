@@ -144,6 +144,7 @@ extern u8 deUnkValue2;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
+extern bool8 gLinkOpen;
 
 void Task_DestroySelf(u8);
 void sub_8007270(u8);

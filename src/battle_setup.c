@@ -845,17 +845,17 @@ void HandleFirstBattleEnd(void)
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-u32 TrainerBattleLoadArg32(u8 *ptr)
+u32 TrainerBattleLoadArg32(const u8 *ptr)
 {
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
-u16 TrainerBattleLoadArg16(u8 *ptr)
+u16 TrainerBattleLoadArg16(const u8 *ptr)
 {
     return ptr[0] | (ptr[1] << 8);
 }
 
-u8 TrainerBattleLoadArg8(u8 *ptr)
+u8 TrainerBattleLoadArg8(const u8 *ptr)
 {
     return ptr[0];
 }
@@ -867,16 +867,16 @@ u16 trainerflag_opponent(void)
 
 bool32 battle_exit_is_player_defeat(u32 a1)
 {
-    switch (a1 - 1)
+    switch (a1)
     {
-    case 1:
     case 2:
-        return TRUE;
-    case 0:
     case 3:
+        return TRUE;
+    case 1:
     case 4:
     case 5:
     case 6:
+    case 7:
         return FALSE;
     }
     return FALSE;
@@ -895,7 +895,7 @@ void sub_80822BC(void)
     gTrainerBattleEndScript = 0;
 }
 
-void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, u8 *data)
+void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, const u8 *data)
 {
     while (1)
     {
@@ -923,7 +923,7 @@ void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, u8 *data)
             *(u32 *)specs->ptr = 0;
             break;
         case 6:
-            *(u8 **)specs->ptr = data;
+            *(const u8 **)specs->ptr = data;
             return;
         }
         specs++;
@@ -939,7 +939,7 @@ void battle_80801F0(void)
     }
 }
 
-u8 *TrainerBattleConfigure(u8 *data)
+u8 *TrainerBattleConfigure(const u8 *data)
 {
     sub_80822BC();
     gTrainerBattleMode = TrainerBattleLoadArg8(data);

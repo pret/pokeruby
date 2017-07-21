@@ -634,7 +634,11 @@ CreditsEBU::
 	credits_entry 0,  Text_EBU
 
 CreditsVersion::
+	.ifdef SAPPHIRE
+	credits_entry 0,  Text_Version_Sapphire
+	.else
 	credits_entry 0,  Text_Version_Ruby
+	.endif
 
 CreditsNOEProductTesting::
 	credits_entry 0,  Category_NOEProductTesting

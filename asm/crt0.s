@@ -1,4 +1,6 @@
 	.include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
+	.include "constants/version.inc"
 
 	.syntax unified
 
@@ -47,10 +49,15 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
-	.4byte          2
-	.4byte          5
+	.4byte GAME_VERSION
+	.4byte GAME_LANGUAGE
+	.ifdef SAPPHIRE
+	.ascii "pokemon sapphire version"
+	.space 8
+	.else
 	.ascii "pokemon ruby version"
 	.space 12
+	.endif
 	.4byte gMonFrontPicTable
 	.4byte gMonBackPicTable
 	.4byte gMonPaletteTable
