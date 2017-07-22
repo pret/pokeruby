@@ -349,6 +349,18 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
+enum
+{
+    STAT_STAGE_HP,       // 0
+    STAT_STAGE_ATK,      // 1
+    STAT_STAGE_DEF,      // 2
+    STAT_STAGE_SPEED,    // 3
+    STAT_STAGE_SPATK,    // 4
+    STAT_STAGE_SPDEF,    // 5
+    STAT_STAGE_ACC,      // 6
+    STAT_STAGE_EVASION,  // 7
+};
+
 struct BaseStats
 {
     /*0x00*/ u8 baseHP;

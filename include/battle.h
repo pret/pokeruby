@@ -21,8 +21,8 @@
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
-#define AI_ACTION_WATCH          0x0004
-#define AI_ACTION_DO_NOT_ATTACK          0x0008
+#define AI_ACTION_WATCH         0x0004
+#define AI_ACTION_DO_NOT_ATTACK 0x0008
 #define AI_ACTION_UNK5          0x0010
 #define AI_ACTION_UNK6          0x0020
 #define AI_ACTION_UNK7          0x0040
@@ -62,7 +62,7 @@
 #define STATUS3_ON_AIR                  0x40
 #define STATUS3_UNDERGROUND             0x80
 #define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                    0x400
+#define STATUS3_ROOTED                  0x400
 #define STATUS3_CHARGED_UP              0x200
 #define STATUS3_YAWN                    0x1800  //two bits
 #define STATUS3_IMPRISIONED             0x2000
@@ -97,43 +97,32 @@
 #define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
 #define HITMARKER_UNK(bank)             ((0x10000000 << bank))
 
-#define SIDE_REFLECT               0x1
-#define SIDE_LIGHTSCREEN           0x2
-#define SIDE_SPIKES                0x10
-#define SIDE_SAFEGUARD             0x20
-#define SIDE_FUTUREATTACK          0x40
-#define SIDE_MIST                  0x100
-#define SIDE_SPIKES_DMG_DONE       0x200
+#define SIDE_STATUS_REFLECT          (1 << 0)
+#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
+#define SIDE_STATUS_SPIKES           (1 << 4)
+#define SIDE_STATUS_SAFEGUARD        (1 << 5)
+#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
+#define SIDE_STATUS_MIST             (1 << 8)
+#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 #define MAX_BANKS_BATTLE 4
 
-#define weather_rain 1
-#define weather_downpour 2
-#define weather_permament_rain 4
-#define WEATHER_RAINY ((weather_rain | weather_downpour | weather_permament_rain))
-
-#define weather_sandstorm 8
-#define weather_permament_sandstorm 0x10
-#define WEATHER_SANDSTORMY ((weather_sandstorm | weather_permament_sandstorm))
-
-#define weather_sun 0x20
-#define weather_permament_sun 0x40
-#define WEATHER_SUNNY ((weather_sun | weather_permament_sun))
-
-#define weather_hail 0x80
+#define WEATHER_RAIN_TEMPORARY      (1 << 0)
+#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
+#define WEATHER_RAIN_PERMANENT      (1 << 2)
+#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
+#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
+#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
+#define WEATHER_SUN_TEMPORARY       (1 << 5)
+#define WEATHER_SUN_PERMANENT       (1 << 6)
+#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
+#define WEATHER_HAIL                (1 << 7)
 
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
-
-enum
-{
-    WEATHER_SUN,
-    WEATHER_RAIN,
-    WEATHER_SANDSTORM,
-    WEATHER_HAIL,
-};
 
 struct Trainer
 {
@@ -398,7 +387,7 @@ struct BattleResults
     u16 caughtPoke;           // 0x28
     u8 caughtNick[10];        // 0x2A
     u8 filler34[2];
-    u8 unk36[10];
+    u8 unk36[10];  // usedBalls?
 };
 
 struct Struct2017800
@@ -548,10 +537,10 @@ extern u8 ewram[];
 #define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
 #define AI_STACK           ((struct AI_Stack *)         (ewram + 0x16C00))
 #define AI_ARRAY_160CC     ((struct SmallItemStruct *)  (ewram + 0x160CC))
+#define B_FUNCTION_STACK   ((struct funcStack *)        (ewram + 0x17140))
 #define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
 #define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
 #define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
-#define B_FUNCTION_STACK   ((struct funcStack *)(0x02017140))
 
 struct funcStack
 {

@@ -31,6 +31,14 @@ extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u8 *BattleAIs[];
 
+enum
+{
+    WEATHER_TYPE_SUN,
+    WEATHER_TYPE_RAIN,
+    WEATHER_TYPE_SANDSTORM,
+    WEATHER_TYPE_HAIL,
+};
+
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
 when a command finishes processing, gAIScriptPtr is incremented by
@@ -1562,14 +1570,14 @@ static void BattleAICmd_if_status_not_in_party(void)
 
 static void BattleAICmd_get_weather(void)
 {
-    if (gBattleWeather & WEATHER_RAINY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_RAIN;
-    if (gBattleWeather & WEATHER_SANDSTORMY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUNNY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_SUN;
-    if (gBattleWeather & weather_hail)
-        AI_THINKING_STRUCT->funcResult = WEATHER_HAIL;
+    if (gBattleWeather & WEATHER_RAIN_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_RAIN;
+    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SANDSTORM;
+    if (gBattleWeather & WEATHER_SUN_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUN;
+    if (gBattleWeather & WEATHER_HAIL)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
 
     gAIScriptPtr += 1;
 }
