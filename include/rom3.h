@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM3_H
 #define GUARD_ROM3_H
 
+struct DisableStruct;
+
 void sub_800B858(void);
 void setup_poochyena_battle();
 void sub_800B950(void);
