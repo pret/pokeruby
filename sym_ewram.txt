@@ -588,13 +588,11 @@ gUnknown_020388B0: @ 20388B0
 gUnknown_020388B4: @ 20388B4
 	.space 0x4
 
-@ mon_markings
-
-gUnknown_020388B8: @ 20388B8
-	.space 0x4
+	.include "src/mon_markings.o"
 
 @ mauville_old_man
 
+	.align 2
 gUnknown_020388BC: @ 20388BC
 	.space 0x4
 
