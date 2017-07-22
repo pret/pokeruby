@@ -351,7 +351,7 @@ Route110_TrickHousePuzzle3_EventScript_1626AD:: @ 81626AD
 	callif 1, Route110_TrickHousePuzzle3_EventScript_161FE5
 	compare 0x4009, 0
 	callif 1, Route110_TrickHousePuzzle3_EventScript_1622C8
-	special 142
+	special DrawWholeMapView
 	compare 0x4009, 1
 	jumpeq Route110_TrickHousePuzzle3_EventScript_1626DD
 	compare 0x4009, 0

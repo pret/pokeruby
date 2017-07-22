@@ -56,7 +56,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
 
 EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
 	setvar 0x8004, 0
-	special 170
+	special sub_810FF60
 	setflag 1248
 	call EverGrandeCity_DrakesRoom_EventScript_1A0693
 	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4

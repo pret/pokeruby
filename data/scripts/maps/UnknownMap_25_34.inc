@@ -12,7 +12,7 @@ LinkContestRoom1_MapScript1_15F595:: @ 815F595
 	end
 
 LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
-	special 326
+	special ScriptGetMultiplayerId
 	compare RESULT, 0
 	callif 1, LinkContestRoom1_EventScript_15F5E0
 	compare RESULT, 1
@@ -127,7 +127,7 @@ LinkContestRoom1_EventScript_15F6DB:: @ 815F6DB
 
 LinkContestRoom1_EventScript_15F6E6:: @ 815F6E6
 	setvar RESULT, 32
-	special 340
+	special ScriptRandom
 	addvar RESULT, 1
 	switch RESULT
 	case 1, LinkContestRoom1_EventScript_15F859

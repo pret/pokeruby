@@ -23,7 +23,7 @@ Route124_EventScript_151E0F:: @ 8151E0F
 
 Route124_EventScript_151E26:: @ 8151E26
 	trainerbattle 0, OPPONENT_JENNY_1, 0, Route124_Text_1C07B4, Route124_Text_1C07F9
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route124_EventScript_151E4D
 	msgbox Route124_Text_1C080E, 6
@@ -46,7 +46,7 @@ Route124_EventScript_151E7B:: @ 8151E7B
 
 Route124_EventScript_151E92:: @ 8151E92
 	trainerbattle 4, OPPONENT_RITA_AND_SAM_1, 0, Route124_Text_1C0ABD, Route124_Text_1C0B36, Route124_Text_1C0BC8
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route124_EventScript_151EBD
 	msgbox Route124_Text_1C0B72, 6
@@ -59,7 +59,7 @@ Route124_EventScript_151EBD:: @ 8151EBD
 
 Route124_EventScript_151ED8:: @ 8151ED8
 	trainerbattle 4, OPPONENT_RITA_AND_SAM_1, 0, Route124_Text_1C0C0E, Route124_Text_1C0C4F, Route124_Text_1C0CE0
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route124_EventScript_151F03
 	msgbox Route124_Text_1C0C7F, 6

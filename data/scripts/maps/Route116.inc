@@ -150,7 +150,7 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150BCA
-	specialval RESULT, 316
+	specialval RESULT, sub_810F828
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
@@ -166,7 +166,7 @@ Route116_EventScript_150BBB:: @ 8150BBB
 Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
-	specialval RESULT, 316
+	specialval RESULT, sub_810F828
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
@@ -240,7 +240,7 @@ Route116_EventScript_150C79:: @ 8150C79
 
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
@@ -263,7 +263,7 @@ Route116_EventScript_150CE5:: @ 8150CE5
 
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6

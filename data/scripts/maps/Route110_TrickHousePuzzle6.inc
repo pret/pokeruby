@@ -4,7 +4,7 @@ Route110_TrickHousePuzzle6_MapScripts:: @ 81630CD
 	.byte 0
 
 Route110_TrickHousePuzzle6_MapScript1_1630D8:: @ 81630D8
-	special 201
+	special RotatingGate_InitPuzzle
 	end
 
 Route110_TrickHousePuzzle6_MapScript2_1630DC:: @ 81630DC
@@ -12,7 +12,7 @@ Route110_TrickHousePuzzle6_MapScript2_1630DC:: @ 81630DC
 	.2byte 0
 
 Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
-	special 202
+	special RotatingGate_InitPuzzleAndGraphics
 	end
 
 Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA

@@ -29,7 +29,7 @@ Route125_EventScript_151F73:: @ 8151F73
 
 Route125_EventScript_151F8A:: @ 8151F8A
 	trainerbattle 0, OPPONENT_ERNEST_1, 0, Route125_Text_1C11AF, Route125_Text_1C11ED
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route125_EventScript_151FB1
 	msgbox Route125_Text_1C1208, 6

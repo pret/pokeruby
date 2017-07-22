@@ -207,7 +207,7 @@ LittlerootTown_EventScript_14D708:: @ 814D708
 	end
 
 LittlerootTown_EventScript_14D722:: @ 814D722
-	special 148
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_16ADF2, 4
 	release
 	end

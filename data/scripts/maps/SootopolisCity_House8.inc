@@ -2,16 +2,16 @@ SootopolisCity_House8_MapScripts:: @ 815B400
 	.byte 0
 
 SootopolisCity_House8_EventScript_15B401:: @ 815B401
-	special 119
+	special GetShroomishSizeRecordInfo
 	lock
 	faceplayer
 	msgbox SootopolisCity_House8_Text_1900F7, 4
-	special 159
+	special sub_80F9A0C
 	waitstate
 	copyvar RESULT, 0x8004
 	compare RESULT, 255
 	jumpeq SootopolisCity_House8_EventScript_15B448
-	special 120
+	special CompareShroomishSize
 	compare RESULT, 1
 	jumpeq SootopolisCity_House8_EventScript_15B452
 	compare RESULT, 2
@@ -51,16 +51,16 @@ SootopolisCity_House8_EventScript_15B488:: @ 815B488
 	end
 
 SootopolisCity_House8_EventScript_15B492:: @ 815B492
-	special 121
+	special GetBarboachSizeRecordInfo
 	lock
 	faceplayer
 	msgbox SootopolisCity_House8_Text_190431, 4
-	special 159
+	special sub_80F9A0C
 	waitstate
 	copyvar RESULT, 0x8004
 	compare RESULT, 255
 	jumpeq SootopolisCity_House8_EventScript_15B4D9
-	special 122
+	special CompareBarboachSize
 	compare RESULT, 1
 	jumpeq SootopolisCity_House8_EventScript_15B4E3
 	compare RESULT, 2
@@ -100,14 +100,14 @@ SootopolisCity_House8_EventScript_15B519:: @ 815B519
 	end
 
 SootopolisCity_House8_EventScript_15B523:: @ 815B523
-	special 119
+	special GetShroomishSizeRecordInfo
 	lockall
 	msgbox SootopolisCity_House8_Text_1903C9, 4
 	releaseall
 	end
 
 SootopolisCity_House8_EventScript_15B531:: @ 815B531
-	special 121
+	special GetBarboachSizeRecordInfo
 	lockall
 	msgbox SootopolisCity_House8_Text_1906BE, 4
 	releaseall

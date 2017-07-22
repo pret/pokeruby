@@ -35,7 +35,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	closebutton
 	setweather 0
 	doweather
-	special 284
+	special WaitWeather
 	waitstate
 	playsfx 209
 	setanimation 0, 9
@@ -49,9 +49,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	setvar RESULT, 2
 	.endif
 	playsfx 107
-	special 281
+	special sub_80818A4
 	waitstate
-	special 282
+	special sub_80818FC
 	waitstate
 	move 1, CaveOfOrigin_B4F_Movement_15DE7D
 	waitmove 0
@@ -62,10 +62,10 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	pause 40
 	waitpokecry
 	setflag 2145
-	special 311
+	special StartBattle_GroudonKyogre
 	waitstate
 	clearflag 2145
-	specialval RESULT, 180
+	specialval RESULT, sub_810E300
 	compare RESULT, 1
 	callif 1, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag 816

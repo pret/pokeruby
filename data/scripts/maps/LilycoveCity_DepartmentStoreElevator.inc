@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	checkflag 2
 	callif 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
 	copyvar 0x8005, 0x4043
-	special 306
+	special sub_810E944
 	message LilycoveCity_DepartmentStoreElevator_Text_1A0EF6
 	waittext
 	multichoice 0, 0, 57, 0
@@ -74,11 +74,11 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8:: @ 815A4B8
 	hidebox 0, 0, 29, 19
 	move LAST_TALKED, LilycoveCity_DepartmentStoreElevator_Movement_1A0845
 	waitmove 0
-	special 273
+	special sub_810EBEC
 	waitstate
 	setflag 2
 	return
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF:: @ 815A4CF
-	special 216
+	special SetDepartmentStoreFloorVar
 	return

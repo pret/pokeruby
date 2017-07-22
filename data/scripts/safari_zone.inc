@@ -1,12 +1,12 @@
 gUnknown_081C340A:: @ 81C340A
 	setvar 0x40a4, 1
-	special 206
+	special ExitSafariMode
 	warp3 Route121_SafariZoneEntrance, 255, 2, 5
 	end
 
 EventScript_1C341B: @ 81C341B
 	setvar 0x40a4, 1
-	special 206
+	special ExitSafariMode
 	warp Route121_SafariZoneEntrance, 255, 2, 5
 	waitstate
 	end
@@ -42,7 +42,7 @@ gUnknown_081C3459:: @ 81C3459
 
 gUnknown_081C346A:: @ 81C346A
 	lockall
-	special 207
+	special SafariZoneGetPokeblockNameInFeeder
 	compare RESULT, -1
 	jumpif 5, EventScript_1C34A9
 	msgbox UnknownString_81C354E, 5
@@ -53,7 +53,7 @@ gUnknown_081C346A:: @ 81C346A
 
 EventScript_1C348E:
 	fadescreen 1
-	special 208
+	special sub_810BAF4
 	waitstate
 	compare RESULT, -1
 	jumpif 5, EventScript_1C34A0

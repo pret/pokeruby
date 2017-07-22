@@ -91,7 +91,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	lock
 	faceplayer
 	checkdailyflags
-	special 148
+	special GetPlayerBigGuyGirlString
 	checkflag 2258
 	jumpeq SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4

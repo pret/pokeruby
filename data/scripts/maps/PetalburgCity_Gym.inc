@@ -211,7 +211,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	clearflag 726
 	clearflag 866
 	setflag 889
-	special 211
+	special InitBirchState
 	warp PetalburgCity, 255, 15, 8
 	waitstate
 	release
@@ -363,7 +363,7 @@ PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 	end
 
 PetalburgCity_Gym_EventScript_154969:: @ 8154969
-	specialval RESULT, 50
+	specialval RESULT, IsEnigmaBerryValid
 	compare RESULT, 0
 	jumpeq PetalburgCity_Gym_EventScript_1549B2
 	checkitem ITEM_ENIGMA_BERRY, 1
@@ -407,7 +407,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	call PetalburgCity_Gym_EventScript_1A01C0
 	clearflag 940
 	call PetalburgCity_Gym_EventScript_1544ED
-	special 142
+	special DrawWholeMapView
 	jump PetalburgCity_Gym_EventScript_154A2C
 	end
 
@@ -773,7 +773,7 @@ PetalburgCity_Gym_EventScript_154DF6:: @ 8154DF6
 PetalburgCity_Gym_EventScript_154E1A:: @ 8154E1A
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_154FBB
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -791,7 +791,7 @@ PetalburgCity_Gym_EventScript_154E32:: @ 8154E32
 PetalburgCity_Gym_EventScript_154E56:: @ 8154E56
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_154FFD
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -809,7 +809,7 @@ PetalburgCity_Gym_EventScript_154E6E:: @ 8154E6E
 PetalburgCity_Gym_EventScript_154E92:: @ 8154E92
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_15503F
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -827,7 +827,7 @@ PetalburgCity_Gym_EventScript_154EAA:: @ 8154EAA
 PetalburgCity_Gym_EventScript_154ECE:: @ 8154ECE
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_155081
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -845,7 +845,7 @@ PetalburgCity_Gym_EventScript_154EE6:: @ 8154EE6
 PetalburgCity_Gym_EventScript_154F0A:: @ 8154F0A
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_154FDC
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -863,7 +863,7 @@ PetalburgCity_Gym_EventScript_154F22:: @ 8154F22
 PetalburgCity_Gym_EventScript_154F46:: @ 8154F46
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_15501E
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -881,7 +881,7 @@ PetalburgCity_Gym_EventScript_154F5E:: @ 8154F5E
 PetalburgCity_Gym_EventScript_154F82:: @ 8154F82
 	setvar 0x8005, 0
 	call PetalburgCity_Gym_EventScript_155060
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -1010,12 +1010,12 @@ PetalburgCity_Gym_EventScript_15516F:: @ 815516F
 	return
 
 PetalburgCity_Gym_EventScript_155182:: @ 8155182
-	special 145
+	special PetalburgGymSpecial1
 	waitstate
 	return
 
 PetalburgCity_Gym_EventScript_155187:: @ 8155187
-	special 146
+	special PetalburgGymSpecial2
 	return
 
 PetalburgCity_Gym_EventScript_15518B:: @ 815518B

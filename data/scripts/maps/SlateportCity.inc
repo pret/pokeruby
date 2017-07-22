@@ -66,10 +66,10 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	faceplayer
 	bufferfirstpoke 0
 	msgbox SlateportCity_Text_164682, 4
-	specialval RESULT, 292
+	specialval RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1
 	callif 1, SlateportCity_EventScript_14BB35
-	specialval RESULT, 294
+	specialval RESULT, GetLeadMonEVCount
 	compare RESULT, 0
 	callif 1, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
@@ -78,7 +78,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	waitfanfare
 	waittext
 	msgbox SlateportCity_Text_1646FC, 4
-	special 293
+	special GivLeadMonEffortRibbon
 	release
 	end
 

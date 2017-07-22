@@ -70,7 +70,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	removeitem ITEM_ROOM_1_KEY, 1
 	setflag 240
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -86,7 +86,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	removeitem ITEM_ROOM_2_KEY, 1
 	setflag 241
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -102,7 +102,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	removeitem ITEM_ROOM_4_KEY, 1
 	setflag 242
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -118,7 +118,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	removeitem ITEM_ROOM_6_KEY, 1
 	setflag 243
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 

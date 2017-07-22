@@ -13,7 +13,7 @@ Route110_TrickHouseEnd_MapScript1_16194B:: @ 816194B
 Route110_TrickHouseEnd_MapScript1_161957:: @ 8161957
 	setvar 0x4001, 0
 	setvar 0x4002, 0
-	special 261
+	special SetTrickHouseEndRoomFlag
 	end
 
 Route110_TrickHouseEnd_MapScript2_161965:: @ 8161965
@@ -33,7 +33,7 @@ Route110_TrickHouseEnd_MapScript2_16197C:: @ 816197C
 Route110_TrickHouseEnd_EventScript_161986:: @ 8161986
 	setvar 0x4001, 1
 	call Route110_TrickHouseEnd_EventScript_161994
-	special 142
+	special DrawWholeMapView
 	end
 
 Route110_TrickHouseEnd_EventScript_161994:: @ 8161994
@@ -175,7 +175,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	callif 1, Route110_TrickHouseEnd_EventScript_161C61
 	msgbox Route110_TrickHouseEnd_Text_19C85C, 4
 	call Route110_TrickHouseEnd_EventScript_161C2E
-	special 260
+	special ResetTrickHouseEndRoomFlag
 	release
 	end
 

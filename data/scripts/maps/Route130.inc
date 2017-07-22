@@ -3,7 +3,7 @@ Route130_MapScripts:: @ 81523C2
 	.byte 0
 
 Route130_MapScript1_1523C8:: @ 81523C8
-	specialval RESULT, 209
+	specialval RESULT, IsMirageIslandPresent
 	compare RESULT, 1
 	jumpeq Route130_EventScript_15240C
 	setflag 17

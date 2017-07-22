@@ -9,7 +9,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B09EB:: @ 81B09EB
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C:: @ 81B0A0C
-	special 106
+	special sub_80F7CC8
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E
 	compare RESULT, 0
@@ -17,7 +17,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C:: @ 81B0A0C
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A26:: @ 81B0A26
-	special 106
+	special sub_80F7CC8
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A40
 	compare RESULT, 0
@@ -30,8 +30,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0A40:: @ 81B0A40
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E:: @ 81B0A4E
-	special 105
-	special 141
+	special sub_80F7CF4
+	special ShowFieldMessageStringVar4
 	waittext
 	yesnobox 20, 8
 	compare RESULT, 1

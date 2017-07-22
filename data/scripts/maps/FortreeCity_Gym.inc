@@ -4,7 +4,7 @@ FortreeCity_Gym_MapScripts:: @ 8157ED3
 	.byte 0
 
 FortreeCity_Gym_MapScript1_157EDE:: @ 8157EDE
-	special 201
+	special RotatingGate_InitPuzzle
 	end
 
 FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
@@ -12,7 +12,7 @@ FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
 	.2byte 0
 
 FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
-	special 202
+	special RotatingGate_InitPuzzleAndGraphics
 	end
 
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0

@@ -866,7 +866,7 @@ u8 *GetFieldObjectScriptPointerForComparison(void)
     return sub_8068364(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), r4);
 }
 
-int sub_8068FEC(void)
+int SetCableClubWarp(void)
 {
     struct MapPosition position;
 

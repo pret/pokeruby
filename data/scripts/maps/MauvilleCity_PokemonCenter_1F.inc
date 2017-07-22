@@ -9,7 +9,7 @@ MauvilleCity_PokemonCenter_1F_MapScript1_157357:: @ 8157357
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157365:: @ 8157365
-	special 104
+	special sub_80F83D0
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157369:: @ 8157369

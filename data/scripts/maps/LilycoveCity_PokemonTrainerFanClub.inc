@@ -68,37 +68,37 @@ LilycoveCity_PokemonTrainerFanClub_MapScript1_159412:: @ 8159412
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
-	special 167
+	special sub_810FCE8
 	setvar 0x8004, 8
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
 	setvar 0x8004, 9
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
 	setvar 0x8004, 10
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
 	setvar 0x8004, 11
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
 	setvar 0x8004, 12
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
 	setvar 0x8004, 13
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
 	setvar 0x8004, 14
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
 	setvar 0x8004, 15
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 0
 	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
 	end
@@ -147,13 +147,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15952F:: @ 815952F
 	lock
 	faceplayer
 	setvar 0x8004, 13
-	special 165
+	special sub_810FDAC
 	compare 0x4095, 0
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15959C
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15956E
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159592
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A400, 4
@@ -161,7 +161,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15952F:: @ 815952F
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15956E:: @ 815956E
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159588
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A36A, 4
@@ -187,13 +187,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6:: @ 81595A6
 	lock
 	faceplayer
 	setvar 0x8004, 8
-	special 165
+	special sub_810FDAC
 	compare 0x4095, 0
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159613
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1595E5
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159609
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A629, 4
@@ -201,7 +201,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6:: @ 81595A6
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1595E5:: @ 81595E5
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1595FF
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A584, 4
@@ -227,13 +227,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15961D:: @ 815961D
 	lock
 	faceplayer
 	setvar 0x8004, 9
-	special 165
+	special sub_810FDAC
 	compare 0x4095, 0
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15968A
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15965C
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159680
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A814, 4
@@ -241,7 +241,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15961D:: @ 815961D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15965C:: @ 815965C
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159676
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A71E, 4
@@ -267,13 +267,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159694:: @ 8159694
 	lock
 	faceplayer
 	setvar 0x8004, 10
-	special 165
+	special sub_810FDAC
 	compare 0x4095, 0
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159701
-	specialval RESULT, 163
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596D3
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596F7
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AB0A, 4
@@ -281,7 +281,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159694:: @ 8159694
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1596D3:: @ 81596D3
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596ED
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AA39, 4
@@ -307,11 +307,11 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15970B:: @ 815970B
 	lock
 	faceplayer
 	setvar 0x8004, 11
-	special 165
-	specialval RESULT, 163
+	special sub_810FDAC
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15973F
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159763
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18ACC7, 4
@@ -319,7 +319,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15970B:: @ 815970B
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15973F:: @ 815973F
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159759
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AC15, 4
@@ -340,11 +340,11 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15976D:: @ 815976D
 	lock
 	faceplayer
 	setvar 0x8004, 12
-	special 165
-	specialval RESULT, 163
+	special sub_810FDAC
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597A1
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597C5
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AE63, 4
@@ -352,7 +352,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15976D:: @ 815976D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1597A1:: @ 81597A1
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597BB
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AD6D, 4
@@ -373,11 +373,11 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1597CF:: @ 81597CF
 	lock
 	faceplayer
 	setvar 0x8004, 14
-	special 165
-	specialval RESULT, 163
+	special sub_810FDAC
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159803
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159827
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B030, 4
@@ -385,7 +385,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1597CF:: @ 81597CF
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159803:: @ 8159803
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15981D
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AF62, 4
@@ -406,11 +406,11 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159831:: @ 8159831
 	lock
 	faceplayer
 	setvar 0x8004, 15
-	special 165
-	specialval RESULT, 163
+	special sub_810FDAC
+	specialval RESULT, sub_810FD60
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159865
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159889
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B1FD, 4
@@ -418,7 +418,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159831:: @ 8159831
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159865:: @ 8159865
-	specialval RESULT, 164
+	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15987F
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B16E, 4

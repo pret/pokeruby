@@ -64,14 +64,14 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.endif
 	setweather 0
 	doweather
-	special 332
+	special sub_8081924
 	waitstate
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B43C4, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4A5A, 4
 	.endif
-	special 284
+	special WaitWeather
 	waitstate
 	.ifdef SAPPHIRE
 	setvar RESULT, 1
@@ -91,7 +91,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.endif
 	fanfare 388
 	playsfx 107
-	special 281
+	special sub_80818A4
 	move 0x8004, SeafloorCavern_Room9_Movement_1A0841
 	move 255, SeafloorCavern_Room9_Movement_1A0841
 	waitmove 0
@@ -102,11 +102,11 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	pause 60
 	move 1, SeafloorCavern_Room9_Movement_15DD4C
 	waitmove 0
-	special 282
+	special sub_80818FC
 	waitstate
 	setvar 0x8004, 1
 	setvar 0x8005, 1
-	special 310
+	special sub_810F758
 	waitstate
 	move 1, SeafloorCavern_Room9_Movement_15DD57
 	waitmove 0
@@ -114,7 +114,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	pause 4
 	setvar 0x8004, 2
 	setvar 0x8005, 2
-	special 310
+	special sub_810F758
 	waitstate
 	pause 30
 	setvar 0x8004, 2

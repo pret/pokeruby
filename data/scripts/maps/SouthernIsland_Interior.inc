@@ -49,7 +49,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	checkflag 2131
 	jumpif 0, SouthernIsland_Interior_EventScript_160C08
 	setflag 206
-	special 275
+	special SpawnCameraDummy
 	move 127, SouthernIsland_Interior_Movement_160C12
 	waitmove 0
 	pause 50
@@ -63,11 +63,11 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	move 2, SouthernIsland_Interior_Movement_160C22
 	waitmove 0
 	pause 50
-	special 276
+	special RemoveCameraDummy
 	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
 	setflag 911
 	setflag 2145
-	special 323
+	special StartBattle_SouthernIsland
 	waitstate
 	clearflag 2145
 	releaseall

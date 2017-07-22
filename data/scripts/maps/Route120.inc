@@ -120,7 +120,7 @@ Route120_EventScript_151739:: @ 8151739
 	callif 1, Route120_EventScript_151841
 	compare RESULT, 0
 	callif 1, Route120_EventScript_15184A
-	specialval RESULT, 147
+	specialval RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
 	case 0, Route120_EventScript_1517DC
 	case 5, Route120_EventScript_1517DC
@@ -254,7 +254,7 @@ Route120_EventScript_151908:: @ 8151908
 	setmaptile 12, 16, 671, 0
 	setmaptile 12, 17, 161, 0
 	setmaptile 13, 17, 161, 0
-	special 142
+	special DrawWholeMapView
 	release
 	end
 
@@ -292,7 +292,7 @@ Route120_EventScript_1519B3:: @ 81519B3
 
 Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
@@ -315,7 +315,7 @@ Route120_EventScript_151A1F:: @ 8151A1F
 
 Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6

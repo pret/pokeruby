@@ -271,7 +271,7 @@ PetalburgWoods_EventScript_15CF27:: @ 815CF27
 
 PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
 	trainerbattle 0, OPPONENT_JAMES_1, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq PetalburgWoods_EventScript_15CF65
 	msgbox PetalburgWoods_Text_1952CC, 6

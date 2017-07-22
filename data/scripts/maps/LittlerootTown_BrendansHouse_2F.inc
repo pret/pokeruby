@@ -59,10 +59,10 @@ LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	setvar 0x8004, 1
-	special 214
+	special DoPCTurnOnEffect
 	playsfx SE_PC_ON
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
-	special 249
+	special BedroomPC
 	waitstate
 	releaseall
 	end
@@ -70,7 +70,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 gBrendanHouse_TurnPCOff:: @ 8152850
 	setvar 0x8004, 1
 	playsfx SE_PC_OFF
-	special 215
+	special DoPCTurnOffEffect
 	releaseall
 	end
 

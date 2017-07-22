@@ -64,7 +64,7 @@ DesertRuins_EventScript_15CB85:: @ 815CB85
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
 	setflag 935
 	setflag 2145
-	special 313
+	special StartBattle_Regi
 	waitstate
 	clearflag 2145
 	release

@@ -73,7 +73,7 @@ Route121_EventScript_151B72:: @ 8151B72
 
 Route121_EventScript_151B89:: @ 8151B89
 	trainerbattle 0, OPPONENT_WALTER_1, 0, Route121_Text_1BFA1B, Route121_Text_1BFA8C
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route121_EventScript_151BB0
 	msgbox Route121_Text_1BFA9D, 6
@@ -101,7 +101,7 @@ Route121_EventScript_151BF9:: @ 8151BF9
 
 Route121_EventScript_151C14:: @ 8151C14
 	trainerbattle 0, OPPONENT_JESSICA_1, 0, Route121_Text_1BFE51, Route121_Text_1BFE80
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route121_EventScript_151C3B
 	msgbox Route121_Text_1BFEAE, 6

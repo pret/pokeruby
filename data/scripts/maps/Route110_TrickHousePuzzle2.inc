@@ -38,7 +38,7 @@ Route110_TrickHousePuzzle2_EventScript_161DE0:: @ 8161DE0
 	setvar 0x4001, 1
 	playsfx 21
 	call Route110_TrickHousePuzzle2_EventScript_161E2C
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -47,7 +47,7 @@ Route110_TrickHousePuzzle2_EventScript_161DF3:: @ 8161DF3
 	setvar 0x4002, 1
 	playsfx 21
 	call Route110_TrickHousePuzzle2_EventScript_161E3F
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -56,7 +56,7 @@ Route110_TrickHousePuzzle2_EventScript_161E06:: @ 8161E06
 	setvar 0x4003, 1
 	playsfx 21
 	call Route110_TrickHousePuzzle2_EventScript_161E52
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -65,7 +65,7 @@ Route110_TrickHousePuzzle2_EventScript_161E19:: @ 8161E19
 	setvar 0x4004, 1
 	playsfx 21
 	call Route110_TrickHousePuzzle2_EventScript_161E65
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 

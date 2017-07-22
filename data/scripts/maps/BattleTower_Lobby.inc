@@ -6,30 +6,30 @@ BattleTower_Lobby_MapScripts:: @ 816027E
 	.byte 0
 
 BattleTower_Lobby_MapScript1_160293:: @ 8160293
-	special 338
+	special sub_813610C
 	call BattleTower_Lobby_EventScript_16029C
 	end
 
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
-	special 237
+	special sub_8135668
 	checkflag 238
 	jumpeq BattleTower_Lobby_EventScript_1602E4
 	checkflag 237
 	jumpeq BattleTower_Lobby_EventScript_1602CD
-	specialval 0x8007, 247
+	specialval 0x8007, sub_810F404
 	compare 0x8007, 50
 	jumpif 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
-	special 329
+	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
-	specialval 0x8007, 247
+	specialval 0x8007, sub_810F404
 	compare 0x8007, 100
 	jumpif 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
-	special 329
+	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4
@@ -58,7 +58,7 @@ BattleTower_Lobby_MapScript2_160302:: @ 8160302
 	.2byte 0
 
 BattleTower_Lobby_EventScript_16032C:: @ 816032C
-	special 231
+	special sub_8134548
 	end
 
 BattleTower_Lobby_EventScript_160330:: @ 8160330
@@ -76,10 +76,10 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	message BattleTower_Lobby_Text_19A487
 	waittext
 	setvar 0x8004, 0
-	special 238
+	special sub_81358A4
 	compare RESULT, 6
 	jumpeq BattleTower_Lobby_EventScript_16037D
-	special 244
+	special sub_8135E50
 	compare RESULT, 0
 	jumpeq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
@@ -90,26 +90,26 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 
 BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	setvar 0x8004, 8
-	special 238
+	special sub_81358A4
 	compare RESULT, 1
 	jumpeq BattleTower_Lobby_EventScript_1603AD
 	message BattleTower_Lobby_Text_19A589
 	waittext
 	setvar 0x8004, 13
-	special 237
-	special 242
+	special sub_8135668
+	special sub_8135D84
 	setvar 0x8004, 3
-	special 240
+	special sub_8135BA0
 	playsfx 55
 	checksound
 
 BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar 0x8004, 0
 	setvar 0x8005, 3
-	special 237
+	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
 	waittext
-	special 243
+	special sub_8135DEC
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
@@ -117,7 +117,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	fanfare 370
 	waitfanfare
 	setvar 0x8004, 9
-	special 238
+	special sub_81358A4
 	compare RESULT, 49
 	jumpif 5, BattleTower_Lobby_EventScript_1603F8
 	msgbox BattleTower_Lobby_Text_19A617, 4
@@ -145,9 +145,9 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	message BattleTower_Lobby_Text_19A589
 	waittext
 	setvar 0x8004, 13
-	special 237
+	special sub_8135668
 	setvar 0x8004, 0
-	special 240
+	special sub_8135BA0
 	playsfx 55
 	checksound
 	msgbox BattleTower_Lobby_Text_199FA9, 4
@@ -165,15 +165,15 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	message BattleTower_Lobby_Text_19A5CE
 	waittext
 	setvar 0x8004, 1
-	special 240
+	special sub_8135BA0
 	playsfx 55
 	checksound
 	setvar 0x8004, 8
 	setvar 0x8005, 0
-	special 237
+	special sub_8135668
 	setvar 0x4000, 5
-	special 39
-	special 239
+	special SavePlayerParty
+	special sub_8135A14
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closebutton
 	call BattleTower_Lobby_EventScript_160664
@@ -185,10 +185,10 @@ BattleTower_Lobby_EventScript_16049E:: @ 816049E
 	lock
 	faceplayer
 	setvar 0x8004, 0
-	special 238
+	special sub_81358A4
 	compare RESULT, 6
 	jumpeq BattleTower_Lobby_EventScript_160342
-	special 39
+	special SavePlayerParty
 	msgbox BattleTower_Lobby_Text_199F2C, 4
 
 BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
@@ -208,16 +208,16 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	switch RESULT
 	case 2, BattleTower_Lobby_EventScript_160652
 	case 127, BattleTower_Lobby_EventScript_160652
-	special 233
+	special CheckPartyBattleTowerBanlist
 	compare 0x8004, 1
 	jumpeq BattleTower_Lobby_EventScript_16060D
 	setvar 0x8004, 1
 	copyvar 0x8005, RESULT
 	copyvar 0x8006, RESULT
-	special 237
+	special sub_8135668
 	msgbox BattleTower_Lobby_Text_19A07B, 4
 	fadescreen 1
-	special 245
+	special ChooseBattleTowerPlayerParty
 	waitstate
 	compare RESULT, 0
 	jumpeq BattleTower_Lobby_EventScript_16064F
@@ -229,17 +229,17 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 
 BattleTower_Lobby_EventScript_160587:: @ 8160587
 	setvar 0x8004, 5
-	special 237
+	special sub_8135668
 	setvar 0x4000, 0
 	setvar 0x8004, 11
-	special 237
+	special sub_8135668
 	setvar 0x8004, 0
 	setvar 0x8005, 1
-	special 237
+	special sub_8135668
 	setvar 0x8004, 8
 	setvar 0x8005, 0
-	special 237
-	special 40
+	special sub_8135668
+	special LoadPlayerParty
 	closebutton
 	pause 2
 	call BattleTower_Lobby_EventScript_19F806
@@ -248,8 +248,8 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	compare RESULT, 0
 	jumpeq BattleTower_Lobby_EventScript_160642
 	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
-	special 39
-	special 239
+	special SavePlayerParty
+	special sub_8135A14
 	setvar 0x40bc, 1
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closebutton
@@ -277,16 +277,16 @@ BattleTower_Lobby_EventScript_160635:: @ 8160635
 
 BattleTower_Lobby_EventScript_160642:: @ 8160642
 	setvar 0x8004, 12
-	special 237
+	special sub_8135668
 	jump BattleTower_Lobby_EventScript_160652
 
 BattleTower_Lobby_EventScript_16064F:: @ 816064F
-	special 40
+	special LoadPlayerParty
 
 BattleTower_Lobby_EventScript_160652:: @ 8160652
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	setvar 0x8004, 11
-	special 237
+	special sub_8135668
 
 BattleTower_Lobby_EventScript_160662:: @ 8160662
 	release
@@ -378,7 +378,7 @@ BattleTower_Lobby_EventScript_16071E:: @ 816071E
 
 BattleTower_Lobby_EventScript_160727:: @ 8160727
 	lockall
-	special 283
+	special ShowBattleTowerRecords
 	waitbutton
 	hidebox 0, 0, 29, 19
 	releaseall
@@ -402,7 +402,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	end
 
 BattleTower_Lobby_EventScript_160773:: @ 8160773
-	specialval RESULT, 247
+	specialval RESULT, sub_810F404
 	compare RESULT, 100
 	jumpif 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4

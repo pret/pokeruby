@@ -90,10 +90,10 @@ DoRockSmashMovement: @ 81B0F0C
 	move LAST_TALKED, RockSmashMovement
 	waitmove 0
 	disappear LAST_TALKED
-	specialval RESULT, 298
+	specialval RESULT, sub_810F5BC
 	compare RESULT, 1
 	jumpeq DoRockSmashMovement_Done
-	special 171
+	special RockSmashWildEncounter
 	compare RESULT, 0
 	jumpeq DoRockSmashMovement_Done
 	waitstate
