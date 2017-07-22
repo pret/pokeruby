@@ -208,7 +208,7 @@ bool8 sub_80F7500(void)
             return FALSE;
         }
 
-        sMenu->markingsArray[sMenu->cursorPos] = sMenu->markingsArray[sMenu->cursorPos] ? FALSE : TRUE;
+        sMenu->markingsArray[sMenu->cursorPos] = !sMenu->markingsArray[sMenu->cursorPos];
         return TRUE;
     }
 
@@ -240,16 +240,16 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         { NULL, 0 }
     };
 
-    struct SpriteTemplate sprTemplate;
-    struct SpriteTemplate *sprTemplatePtr = &sprTemplate;
-
-    sprTemplatePtr->tileTag = baseTileTag;
-    sprTemplatePtr->paletteTag = basePaletteTag;
-    sprTemplatePtr->oam = &gOamData_83E5214;
-    sprTemplatePtr->anims = gSpriteAnimTable_83E52AC;
-    sprTemplatePtr->images = NULL;
-    sprTemplatePtr->affineAnims = gDummySpriteAffineAnimTable;
-    sprTemplatePtr->callback = nullsub_65;
+    struct SpriteTemplate sprTemplate =
+    {
+        baseTileTag,
+        basePaletteTag,
+        &gOamData_83E5214,
+        gSpriteAnimTable_83E52AC,
+        NULL,
+        gDummySpriteAffineAnimTable,
+        nullsub_65,
+    };
 
     sMenu->spriteSheetLoadRequired = TRUE;
     AllocTilesForSpriteSheets(sheets);
@@ -257,7 +257,7 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
 
     for (i = 0; i < 2; i++)
     {
-        spriteId = CreateSprite(sprTemplatePtr, x + 32, y + 32, 2);
+        spriteId = CreateSprite(&sprTemplate, x + 32, y + 32, 2);
         if (spriteId != 64)
         {
             sMenu->menuWindowSprites[i] = &gSprites[spriteId];
@@ -272,15 +272,15 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
 
     sMenu->menuWindowSprites[1]->pos1.y = y + 96;
 
-    sprTemplatePtr->tileTag++;
-    sprTemplatePtr->paletteTag++;
-    sprTemplatePtr->anims = gSpriteAnimTable_83E5274;
-    sprTemplatePtr->callback = sub_80F78CC;
-    sprTemplatePtr->oam = &gOamData_83E521C;
+    sprTemplate.tileTag++;
+    sprTemplate.paletteTag++;
+    sprTemplate.anims = gSpriteAnimTable_83E5274;
+    sprTemplate.callback = sub_80F78CC;
+    sprTemplate.oam = &gOamData_83E521C;
 
     for (i = 0; i < 4; i++)
     {
-        spriteId = CreateSprite(sprTemplatePtr, x + 32, y + 16 + 16 * i, 1);
+        spriteId = CreateSprite(&sprTemplate, x + 32, y + 16 + 16 * i, 1);
         if (spriteId != 64)
         {
             sMenu->menuMarkingSprites[i] = &gSprites[spriteId];
@@ -293,9 +293,9 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         }
     }
 
-    sprTemplatePtr->callback = SpriteCallbackDummy;
+    sprTemplate.callback = SpriteCallbackDummy;
 
-    spriteId = CreateSprite(sprTemplatePtr, 0, 0, 1);
+    spriteId = CreateSprite(&sprTemplate, 0, 0, 1);
 
     if (spriteId != 64)
     {
