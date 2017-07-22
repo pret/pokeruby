@@ -145,6 +145,7 @@ void CFile::FindIncbins()
         }
         else
         {
+            CheckInclude();
             CheckIncbin();
 
             if (m_pos >= m_size)
@@ -211,6 +212,29 @@ bool CFile::CheckIdentifier(const std::string& ident)
     return (i == ident.length());
 }
 
+void CFile::CheckInclude()
+{
+    if (m_buffer[m_pos] != '#')
+        return;
+
+    std::string ident = "#include";
+
+    if (!CheckIdentifier(ident))
+    {
+        return;
+    }
+
+    m_pos += ident.length();
+
+    ConsumeHorizontalWhitespace();
+
+    std::string path = ReadPath();
+
+    if (!path.empty()) {
+        m_includes.emplace(path);
+    }
+}
+
 void CFile::CheckIncbin()
 {
     std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
@@ -246,8 +270,28 @@ void CFile::CheckIncbin()
 
     SkipWhitespace();
 
+    std::string path = ReadPath();
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != ')')
+        FATAL_INPUT_ERROR("expected ')'");
+
+    m_pos++;
+
+    m_incbins.emplace(path);
+}
+
+std::string CFile::ReadPath()
+{
     if (m_buffer[m_pos] != '"')
-        FATAL_INPUT_ERROR("expected double quote");
+    {
+        if (m_buffer[m_pos] == '<')
+        {
+            return std::string();
+        }
+        FATAL_INPUT_ERROR("expected '\"' or '<'");
+    }
 
     m_pos++;
 
@@ -272,16 +316,7 @@ void CFile::CheckIncbin()
         m_pos++;
     }
 
-    std::string path(&m_buffer[startPos], m_pos - startPos);
-
     m_pos++;
 
-    SkipWhitespace();
-
-    if (m_buffer[m_pos] != ')')
-        FATAL_INPUT_ERROR("expected ')'");
-
-    m_pos++;
-
-    m_incbins.emplace(path);
+    return std::string(m_buffer, startPos, m_pos - 1 - startPos);
 }

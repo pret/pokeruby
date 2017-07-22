@@ -55,16 +55,45 @@ int main(int argc, char **argv)
 
     std::string extension = initialPath.substr(pos + 1);
 
-    if (extension == "c")
-    {
-        CFile file(initialPath);
+    std::string srcDir("src/");
+    std::string includeDir("include/");
 
-        file.FindIncbins();
-        dependencies = file.GetIncbins();
-    }
-    else if (extension == "s")
+    if (extension == "c" || extension == "h")
     {
-        filesToProcess.push(std::string(argv[1]));
+        filesToProcess.push(initialPath);
+
+        while (!filesToProcess.empty())
+        {
+            CFile file(filesToProcess.top());
+            filesToProcess.pop();
+
+            file.FindIncbins();
+            for (auto incbin : file.GetIncbins())
+            {
+                dependencies.insert(incbin);
+            }
+            for (auto include : file.GetIncludes())
+            {
+                std::string path(srcDir + include);
+                if (!CanOpenFile(path))
+                {
+                    path = includeDir + include;
+                }
+
+                if (CanOpenFile(path))
+                {
+                    bool inserted = dependencies.insert(path).second;
+                    if (inserted)
+                    {
+                        filesToProcess.push(path);
+                    }
+                }
+            }
+        }
+    }
+    else if (extension == "s" || extension == "inc")
+    {
+        filesToProcess.push(initialPath);
 
         while (!filesToProcess.empty())
         {
