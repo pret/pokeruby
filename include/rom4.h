@@ -99,7 +99,7 @@ void sub_8053F0C(void);
 void sub_8053F84(void);
 void sub_8053FB0(u16);
 // is_warp1_light_level_8_or_9
-// sub_8053FF8
+void sub_8053FF8(void);
 bool8 sub_8054034(void);
 void sub_8054044(void);
 // sub_8054050
@@ -129,8 +129,8 @@ void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
-// sub_8054534
-// sub_8054588
+void sub_8054534(void);
+void sub_8054588(void);
 void c2_80567AC(void);
 void c2_exit_to_overworld_2_switch(void);
 void c2_exit_to_overworld_2_local(void);
