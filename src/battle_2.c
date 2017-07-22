@@ -1584,7 +1584,7 @@ void sub_8010874(void)
         for (j = 0; j < (u32)0x1C; j++)
             r4[j] = 0;
 
-        gDisableStructs[i].IsFirstTurn = 2;
+        gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
         gMoveHitWith[i] = 0;
@@ -1655,25 +1655,25 @@ void sub_8010874(void)
     ewram16113 = 0;
     for (i = 0; i < 11; i++)
         gBattleResults.unk36[i] = 0;
-    gBattleResults.BattleTurnCounter = 0;
-    gBattleResults.PlayerFaintCounter = 0;
-    gBattleResults.OpponentFaintCounter = 0;
+    gBattleResults.battleTurnCounter = 0;
+    gBattleResults.playerFaintCounter = 0;
+    gBattleResults.opponentFaintCounter = 0;
     gBattleResults.unk2 = 0;
     gBattleResults.unk3 = 0;
     gBattleResults.unk4 = 0;
     gBattleResults.unk5_0 = 0;
     gBattleResults.unk5_1 = 0;
-    gBattleResults.LastOpponentSpecies = 0;
-    gBattleResults.LastUsedMove = 0;
-    gBattleResults.OpponentMove = 0;
-    gBattleResults.Poke1Species = 0;
-    gBattleResults.OpponentSpecies = 0;
-    gBattleResults.CaughtPoke = 0;
+    gBattleResults.lastOpponentSpecies = 0;
+    gBattleResults.lastUsedMove = 0;
+    gBattleResults.opponentMove = 0;
+    gBattleResults.poke1Species = 0;
+    gBattleResults.opponentSpecies = 0;
+    gBattleResults.caughtPoke = 0;
     for (i = 0; i < 10; i++)
     {
-        gBattleResults.PokeString1[i] = 0;
-        gBattleResults.PokeString2[i] = 0;
-        gBattleResults.CaughtNick[i] = 0;
+        gBattleResults.pokeString1[i] = 0;
+        gBattleResults.pokeString2[i] = 0;
+        gBattleResults.caughtNick[i] = 0;
     }
 }
 
@@ -1692,25 +1692,25 @@ void SwitchInClearStructs(void)
         {
             struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
 
-            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].BankPreventingEscape == gActiveBank)
+            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].bankPreventingEscape == gActiveBank)
                 sp20->unk0 &= ~0x04000000;
-            if ((gStatuses3[i] & STATUS3_ALWAYS_HITS) && gDisableStructs[i].BankWithSureHit == gActiveBank)
+            if ((gStatuses3[i] & STATUS3_ALWAYS_HITS) && gDisableStructs[i].bankWithSureHit == gActiveBank)
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
-                gDisableStructs[i].BankWithSureHit = 0;
+                gDisableStructs[i].bankWithSureHit = 0;
             }
         }
     }
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
         gBattleMons[gActiveBank].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
-        gStatuses3[gActiveBank] &= (STATUS3_LEECHSEED_RECEIVER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
+        gStatuses3[gActiveBank] &= (STATUS3_LEECHSEED_BANK | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
 
         for (i = 0; i < gNoOfAllBanks; i++)
         {
             if (GetBankSide(gActiveBank) != GetBankSide(i)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
-             && (gDisableStructs[i].BankWithSureHit == gActiveBank))
+             && (gDisableStructs[i].bankWithSureHit == gActiveBank))
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
                 gStatuses3[i] |= 0x10;
@@ -1740,13 +1740,13 @@ void SwitchInClearStructs(void)
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
-        gDisableStructs[gActiveBank].SubstituteHP = sp0.SubstituteHP;
-        gDisableStructs[gActiveBank].BankWithSureHit = sp0.BankWithSureHit;
-        gDisableStructs[gActiveBank].unkF_0 = sp0.unkF_0;
-        gDisableStructs[gActiveBank].unkF_4 = sp0.unkF_4;
+        gDisableStructs[gActiveBank].substituteHP = sp0.substituteHP;
+        gDisableStructs[gActiveBank].bankWithSureHit = sp0.bankWithSureHit;
+        gDisableStructs[gActiveBank].perishSong1 = sp0.perishSong1;
+        gDisableStructs[gActiveBank].perishSong2 = sp0.perishSong2;
     }
 
-    gDisableStructs[gActiveBank].IsFirstTurn = 2;
+    gDisableStructs[gActiveBank].isFirstTurn= 2;
     gLastUsedMove[gActiveBank] = 0;
     gMoveHitWith[gActiveBank] = 0;
     gUnknown_02024C44[gActiveBank] = 0;
@@ -1781,7 +1781,7 @@ void UndoEffectsAfterFainting(void)
     gStatuses3[gActiveBank] = 0;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].BankPreventingEscape == gActiveBank)
+        if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBank)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
         if (gBattleMons[i].status2 & (gBitTable[gActiveBank] << 16))
             gBattleMons[i].status2 &= ~(gBitTable[gActiveBank] << 16);
@@ -1794,27 +1794,27 @@ void UndoEffectsAfterFainting(void)
     ptr = (u8 *)&gDisableStructs[gActiveBank];
     for (i = 0; i < (u32)0x1C; i++)
         ptr[i] = 0;
-    gProtectStructs[gActiveBank].Protected = 0;
-    gProtectStructs[gActiveBank].Endured = 0;
-    gProtectStructs[gActiveBank].OnlyStruggle = 0;
-    gProtectStructs[gActiveBank].HelpingHand = 0;
-    gProtectStructs[gActiveBank].BounceMove = 0;
-    gProtectStructs[gActiveBank].StealMove = 0;
-    gProtectStructs[gActiveBank].Flag0Unknown = 0;
-    gProtectStructs[gActiveBank].PrlzImmobility = 0;
-    gProtectStructs[gActiveBank].ConfusionSelfDmg = 0;
-    gProtectStructs[gActiveBank].NotEffective = 0;
-    gProtectStructs[gActiveBank].ChargingTurn = 0;
-    gProtectStructs[gActiveBank].FleeFlag = 0;
-    gProtectStructs[gActiveBank].UsedImprisionedMove = 0;
-    gProtectStructs[gActiveBank].LoveImmobility = 0;
-    gProtectStructs[gActiveBank].UsedDisabledMove = 0;
-    gProtectStructs[gActiveBank].UsedTauntedMove = 0;
-    gProtectStructs[gActiveBank].Flag2Unknown = 0;
-    gProtectStructs[gActiveBank].FlinchImmobility = 0;
-    gProtectStructs[gActiveBank].NotFirstStrike = 0;
+    gProtectStructs[gActiveBank].protected = 0;
+    gProtectStructs[gActiveBank].endured = 0;
+    gProtectStructs[gActiveBank].onlyStruggle = 0;
+    gProtectStructs[gActiveBank].helpingHand = 0;
+    gProtectStructs[gActiveBank].bounceMove = 0;
+    gProtectStructs[gActiveBank].stealMove = 0;
+    gProtectStructs[gActiveBank].flag0Unknown = 0;
+    gProtectStructs[gActiveBank].prlzImmobility = 0;
+    gProtectStructs[gActiveBank].confusionSelfDmg = 0;
+    gProtectStructs[gActiveBank].notEffective = 0;
+    gProtectStructs[gActiveBank].chargingTurn = 0;
+    gProtectStructs[gActiveBank].fleeFlag = 0;
+    gProtectStructs[gActiveBank].usedImprisionedMove = 0;
+    gProtectStructs[gActiveBank].loveImmobility = 0;
+    gProtectStructs[gActiveBank].usedDisabledMove = 0;
+    gProtectStructs[gActiveBank].usedTauntedMove = 0;
+    gProtectStructs[gActiveBank].flag2Unknown = 0;
+    gProtectStructs[gActiveBank].flinchImmobility = 0;
+    gProtectStructs[gActiveBank].notFirstStrike = 0;
 
-    gDisableStructs[gActiveBank].IsFirstTurn = 2;
+    gDisableStructs[gActiveBank].isFirstTurn= 2;
     gLastUsedMove[gActiveBank] = 0;
     gMoveHitWith[gActiveBank] = 0;
     gUnknown_02024C44[gActiveBank] = 0;
@@ -2140,7 +2140,7 @@ void unref_sub_8011A68(void)
         {
             if (GetBankSide(gActiveBank) == 0)
             {
-                sub_800C704(0, gBattlePartyID[gActiveBank], 0);
+                EmitSwitchInAnim(0, gBattlePartyID[gActiveBank], 0);
                 MarkBufferBankForExecution(gActiveBank);
             }
         }
@@ -2191,7 +2191,7 @@ void BattleBeginFirstTurn(void)
             return;
         while (ewram160F9 < gNoOfAllBanks)
         {
-            if (sub_801A02C(0, gTurnOrder[ewram160F9], 0) != 0)
+            if (ItemBattleEffects(0, gTurnOrder[ewram160F9], 0) != 0)
                 r9++;
             ewram160F9++;
             if (r9 != 0)
@@ -2286,8 +2286,8 @@ void BattleTurnPassed(void)
         gBattleMainFunc = sub_80138F0;
         return;
     }
-    if (gBattleResults.BattleTurnCounter < 0xFF)
-        gBattleResults.BattleTurnCounter++;
+    if (gBattleResults.battleTurnCounter < 0xFF)
+        gBattleResults.battleTurnCounter++;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
         gActionForBanks[i] = 0xFF;

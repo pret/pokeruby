@@ -316,14 +316,14 @@ void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
 
-    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.Poke1Species;
-    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.OpponentSpecies;
-    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.LastUsedMove;
+    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.poke1Species;
+    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.opponentSpecies;
+    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
         gSaveBlock1.gabbyAndTyData.battleNum ++;
     gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
 
-    if (gBattleResults.PlayerFaintCounter)
+    if (gBattleResults.playerFaintCounter)
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
     else
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
@@ -489,14 +489,14 @@ void sub_80BDEC8(void)
     sub_80BEB20();
     sub_80BE778();
 
-    if (gBattleResults.CaughtPoke == 0)
+    if (gBattleResults.caughtPoke == 0)
     {
         sub_80BE074();
     }
     else
     {
         sub_80BE028();
-        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.CaughtPoke], gBattleResults.CaughtNick) != 0)
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick) != 0)
         {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1)
@@ -527,8 +527,8 @@ void sub_80BDEC8(void)
                     pokemonToday->var12 = total;
                     pokemonToday->ball = item;
                     StringCopy(pokemonToday->playerName, gSaveBlock2.playerName);
-                    StringCopy(pokemonToday->nickname, gBattleResults.CaughtNick);
-                    pokemonToday->species = gBattleResults.CaughtPoke;
+                    StringCopy(pokemonToday->nickname, gBattleResults.caughtNick);
+                    pokemonToday->species = gBattleResults.caughtPoke;
                     sub_80BE138((TVShow *)pokemonToday);
                     pokemonToday->language = GAME_LANGUAGE;
                     pokemonToday->language2 = sub_80BDEAC(pokemonToday->nickname);
@@ -550,8 +550,8 @@ void sub_80BE028(void)
         worldOfMasters->var00 = TVSHOW_WORLD_OF_MASTERS;
     }
     worldOfMasters->var02++;
-    worldOfMasters->var04 = gBattleResults.CaughtPoke;
-    worldOfMasters->var08 = gBattleResults.Poke1Species;
+    worldOfMasters->var04 = gBattleResults.caughtPoke;
+    worldOfMasters->var08 = gBattleResults.poke1Species;
     worldOfMasters->var0a = gMapHeader.regionMapSectionId;
 }
 
@@ -577,8 +577,8 @@ void sub_80BE074(void)
                 zero = 0;
                 pokemonTodayFailed->var00 = TVSHOW_POKEMON_TODAY_FAILED;
                 pokemonTodayFailed->var01 = zero;
-                pokemonTodayFailed->species = gBattleResults.Poke1Species;
-                pokemonTodayFailed->species2 = gBattleResults.LastOpponentSpecies;
+                pokemonTodayFailed->species = gBattleResults.poke1Species;
+                pokemonTodayFailed->species2 = gBattleResults.lastOpponentSpecies;
                 pokemonTodayFailed->var10 = total;
                 pokemonTodayFailed->var11 = gBattleOutcome;
                 pokemonTodayFailed->var12 = gMapHeader.regionMapSectionId;

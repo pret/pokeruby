@@ -582,7 +582,7 @@ void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
 {
     int i;
 
@@ -590,7 +590,7 @@ void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, u8 *e)
     gBattleBuffersTransferData[1] = b;
     gBattleBuffersTransferData[2] = c;
     for (i = 0; i < d; i++)
-        gBattleBuffersTransferData[3 + i] = *(e++);
+        gBattleBuffersTransferData[3 + i] = *(u8*)(e++);
     dp01_prepare_buffer(a, gBattleBuffersTransferData, d + 3);
 }
 
@@ -615,7 +615,7 @@ void dp01_build_cmdbuf_x04_4_4_4(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void sub_800C704(u8 a, u8 b, u8 c)
+void EmitSwitchInAnim(u8 a, u8 b, u8 c)
 {
     gBattleBuffersTransferData[0] = 5;
     gBattleBuffersTransferData[1] = b;
@@ -624,7 +624,7 @@ void sub_800C704(u8 a, u8 b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x06_a(u8 a, u8 b)
+void EmitReturnPokeToBall(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 6;
     gBattleBuffersTransferData[1] = b;
@@ -640,7 +640,7 @@ void dp01_build_cmdbuf_x07_7_7_7(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x08_8_8_8(u8 a)
+void EmitTrainerSlide(u8 a)
 {
     gBattleBuffersTransferData[0] = 8;
     gBattleBuffersTransferData[1] = 8;
@@ -685,7 +685,7 @@ void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x0D_a(u8 a, u8 b)
+void EmitBallThrowAnim(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 13;
     gBattleBuffersTransferData[1] = b;
@@ -1060,7 +1060,7 @@ void sub_800CBE0(u8 a, u8 *b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
@@ -1284,7 +1284,7 @@ void EmitEffectivenessSound(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void sub_800D074(u8 a, u16 b)
+void EmitPlaySound(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 44;
     gBattleBuffersTransferData[1] = b;

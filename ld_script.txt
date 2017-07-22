@@ -54,7 +54,7 @@ SECTIONS {
         src/battle_2.o(.text);
         asm/battle_2.o(.text);
         asm/battle_3.o(.text);
-        asm/battle_4.o(.text);
+        src/battle_4.o(.text);
         asm/battle_5.o(.text);
         src/battle_6.o(.text);
         src/battle_7.o(.text);
@@ -331,7 +331,9 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
-        data/data2.o(.rodata);
+        data/data2a.o(.rodata);
+        src/battle_4.o(.rodata);
+        data/data2b.o(.rodata);
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);

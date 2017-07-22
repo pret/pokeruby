@@ -113,7 +113,7 @@ gCurrentMove: @ 2024BE6
 gUnknown_02024BE8: @ 2024BE8
 	.space 0x2
 
-gUnknown_02024BEA: @ 2024BEA
+gRandomMove: @ 2024BEA
 	.space 0x2
 
 gBattleMoveDamage: @ 2024BEC
