@@ -280,7 +280,7 @@ bool8 ScrCmd_die(struct ScriptContext *ctx)
 bool8 ScrCmd_setbyte(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
-    sub_8126160(value);
+    SetMysteryEventScriptStatus(value);
     return FALSE;
 }
 

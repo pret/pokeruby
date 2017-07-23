@@ -9,5 +9,6 @@ extern const u32 gBitTable[];
 u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
 void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32 *);
+u16 CalcCRC16(u8 *data, int length);
 
 #endif // GUARD_UTIL_H

@@ -81,7 +81,7 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
 
     if (GetMultiplayerId() == 0)
-        unk_2018000.filler11C8[0] = sub_8126338();
+        unk_2018000.filler11C8[0] = GetRecordMixingGift();
 }
 
 void RecordMixing_ReceiveExchangePacket(u32 a)
