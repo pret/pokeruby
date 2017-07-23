@@ -3401,7 +3401,7 @@ gUnknown_081D9139:: @ 81D9139
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D9144:: @ 81D9144
+BattleScript_MoveSelectionDisabledMove:: @ 81D9144
 	printstring2 BATTLE_TEXT_MoveIsDisabled
 	atk44
 
@@ -3593,11 +3593,11 @@ BattleScript_1D934B: @ 81D934B
 	setbyte 0x2024c68, 0
 	end2
 
-gUnknown_081D9365:: @ 81D9365
+BattleScript_NoMovesLeft:: @ 81D9365
 	printstring2 BATTLE_TEXT_NoMovesLeft
 	atk44
 
-gUnknown_081D9369:: @ 81D9369
+BattleScript_MoveSelectionNoPP:: @ 81D9369
 	printstring2 BATTLE_TEXT_NoPP1
 	atk44
 
@@ -3608,14 +3608,14 @@ BattleScript_NoPPForMove:: @ 81D936D
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D937C:: @ 81D937C
+BattleScript_MoveSelectionTormented:: @ 81D937C
 	printstring2 BATTLE_TEXT_TormentNoUse
 	atk44
 	printstring BATTLE_TEXT_TormentNoUse
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D938B:: @ 81D938B
+BattleScript_MoveSelectionTaunted:: @ 81D938B
 	printstring2 BATTLE_TEXT_TauntNoUse
 	atk44
 
@@ -3624,7 +3624,7 @@ gUnknown_081D938F:: @ 81D938F
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D939A:: @ 81D939A
+BattleScript_WishComesTrue:: @ 81D939A
 	atkd4 1, BattleScript_1D93C1
 	playanimation TARGET, 22, 0x0
 	printstring BATTLE_TEXT_WishTrue
@@ -3691,7 +3691,7 @@ gUnknown_081D9459:: @ 81D9459
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D9464:: @ 81D9464
+BattleScript_MoveSelectionImprisoned:: @ 81D9464
 	printstring2 BATTLE_TEXT_SealedNoUse
 	atk44
 
@@ -4425,7 +4425,7 @@ gUnknown_081D9AA7:: @ 81D9AA7
 	datahpupdate USER
 	return
 
-gUnknown_081D9AC2:: @ 81D9AC2
+BattleScript_MoveSelectionChoiceBanded:: @ 81D9AC2
 	printstring2 BATTLE_TEXT_ChoiceBand
 	atk44
 

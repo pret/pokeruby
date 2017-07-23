@@ -262,7 +262,7 @@ _08012538:
 	.4byte _08012968
 	.4byte _0801292C
 _0801256C:
-	bl sub_8015C90
+	bl AreAllMovesUnusable
 	lsls r0, 24
 	cmp r0, 0
 	beq _080125D0

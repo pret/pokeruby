@@ -159,7 +159,7 @@ u8 CalculatePlayerPartyCount(void);
 u16 Sqrt(u32 num);
 u8 sub_809070C(u16 nationalNum, u32 TiD, u32 PiD); //task prepare poke dex display
 void sub_814A880(u8 a1, u8 a2);
-u8 sub_8015A98(u8 bank, u8 unusable_moves, u8 flags); //choose move limitations
+u8 CheckMoveLimitations(u8 bank, u8 unusable_moves, u8 flags); //choose move limitations
 void sub_801529C(u8 bank);
 bool8 IsLinkDoubleBattle(void);
 void sub_8094B6C(u8 bank, u8 partyID, u8 r2);
@@ -5217,7 +5217,7 @@ static void atk15_seteffectwithchancetarget(void)
     else
         gBattlescriptCurrInstr++;
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
-    BATTLE_STRUCT->filler2[0x3E] = 0; //TODO: to fix this later
+    BATTLE_STRUCT->unk16112 = 0;
 }
 
 static void atk16_seteffectprimary(void)
@@ -5240,7 +5240,7 @@ static void atk18_status_effect_clear(void)
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattlescriptCurrInstr += 2;
-    BATTLE_STRUCT->filler2[0x3E] = 0; //TODO: to fix this later
+    BATTLE_STRUCT->unk16112 = 0;
 }
 
 //Fuck this, Maybe later
@@ -15582,7 +15582,7 @@ static void atkA9_sleeptalk_choose_move(void)
             || gBattleMons[gBankAttacker].moves[i] == MOVE_UPROAR || IsTwoTurnsMove(gBattleMons[gBankAttacker].moves[i]))
                 unusable_moves |= gBitTable[i];
     }
-    unusable_moves = sub_8015A98(gBankAttacker, unusable_moves, 0xFD);
+    unusable_moves = CheckMoveLimitations(gBankAttacker, unusable_moves, 0xFD);
     if (unusable_moves == 0xF) //all 4 moves cannot be chosen
         gBattlescriptCurrInstr += 5;
     else //at least one move can be chosen

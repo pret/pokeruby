@@ -179,7 +179,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x16008*/ u8 wrappedMove2[4];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
-    /*0x1600E*/ u8 unk1600E;
+    /*0x1600E*/ u8 turncountersTracker;
     /*0x1600F*/ u8 cmd23StateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
@@ -327,7 +327,84 @@ struct BattleStruct /* 0x2000000 */
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 linkPlayerIndex;
     /*0x160CC*/ u16 usedHeldItems[4];
-    u8 filler2[0x72E];
+    /*0x160D4*/ u8 unk160D4;
+    /*0x160D5*/ u8 unk160D5;
+    /*0x160D6*/ u8 unk160D6;
+    /*0x160D7*/ u8 unk160D7;
+    /*0x160D8*/ u8 unk160D8;
+    /*0x160D9*/ u8 unk160D9;
+    /*0x160DA*/ u8 unk160DA;
+    /*0x160DB*/ u8 unk160DB;
+    /*0x160DC*/ u8 unk160DC;
+    /*0x160DD*/ u8 unk160DD;
+    /*0x160DE*/ u8 unk160DE;
+    /*0x160DF*/ u8 unk160DF;
+    /*0x160E0*/ u8 unk160E0;
+    /*0x160E1*/ u8 unk160E1;
+    /*0x160E2*/ u8 unk160E2;
+    /*0x160E3*/ u8 unk160E3;
+    /*0x160E4*/ u8 unk160E4;
+    /*0x160E5*/ u8 unk160E5;
+    /*0x160E6*/ u8 unk160E6;
+    /*0x160E7*/ u8 unk160E7;
+    /*0x160E8*/ u8 unk160E8;
+    /*0x160E9*/ u8 unk160E9;
+    /*0x160EA*/ u8 unk160EA;
+    /*0x160EB*/ u8 unk160EB;
+    /*0x160EC*/ u8 unk160EC;
+    /*0x160ED*/ u8 unk160ED;
+    /*0x160EE*/ u8 unk160EE;
+    /*0x160EF*/ u8 unk160EF;
+    /*0x160F0*/ u8 unk160F0;
+    /*0x160F1*/ u8 unk160F1;
+    /*0x160F2*/ u8 unk160F2;
+    /*0x160F3*/ u8 unk160F3;
+    /*0x160F4*/ u8 unk160F4;
+    /*0x160F5*/ u8 unk160F5;
+    /*0x160F6*/ u8 unk160F6;
+    /*0x160F7*/ u8 unk160F7;
+    /*0x160F8*/ u8 unk160F8;
+    /*0x160F9*/ u8 unk160F9;
+    /*0x160FA*/ u8 unk160FA;
+    /*0x160FB*/ u8 unk160FB;
+    /*0x160FC*/ u8 turnSideTracker;
+    /*0x160FD*/ u8 unk160FD;
+    /*0x160FE*/ u8 unk160FE;
+    /*0x160FF*/ u8 unk160FF;
+	/*0x16100*/ u8 unk16100;
+    /*0x16101*/ u8 unk16101;
+    /*0x16102*/ u8 unk16102;
+    /*0x16103*/ u8 unk16103;
+    /*0x16104*/ u8 unk16104;
+    /*0x16105*/ u8 unk16105;
+    /*0x16106*/ u8 unk16106;
+    /*0x16107*/ u8 unk16107;
+    /*0x16108*/ u8 unk16108;
+    /*0x16109*/ u8 unk16109;
+    /*0x1610A*/ u8 unk1610A;
+    /*0x1610B*/ u8 unk1610B;
+    /*0x1610C*/ u8 unk1610C;
+    /*0x1610D*/ u8 unk1610D;
+    /*0x1610E*/ u8 unk1610E;
+    /*0x1610F*/ u8 unk1610F;
+    /*0x16110*/ u8 unk16110;
+    /*0x16111*/ u8 unk16111;
+    /*0x16112*/ u8 unk16112;
+    /*0x16113*/ u8 unk16113;
+    /*0x16114*/ u8 unk16114;
+    /*0x16115*/ u8 unk16115;
+    /*0x16116*/ u8 unk16116;
+    /*0x16117*/ u8 unk16117;
+    /*0x16118*/ u8 unk16118;
+    /*0x16119*/ u8 unk16119;
+    /*0x1611A*/ u8 unk1611A;
+    /*0x1611B*/ u8 unk1611B;
+    /*0x1611C*/ u8 unk1611C;
+    /*0x1611D*/ u8 unk1611D;
+    /*0x1611E*/ u8 unk1611E;
+    /*0x1611F*/ u8 unk1611F;
+	
+    //u8 filler2[0x72E];
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
@@ -532,19 +609,26 @@ extern struct Struct20238C8 gUnknown_020238C8;
 // TODO: move ewram to global.h
 extern u8 ewram[];
 
-#define BATTLE_STRUCT      ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK           ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC     ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_FUNCTION_STACK   ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
+#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
+#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
+#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
+#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
+#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
+#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
+#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
+#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
+#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
+#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
 
 struct funcStack
 {
     void* ptr[8];
+    u8 size;
+};
+
+struct scriptsStack
+{
+    u8* ptr[8];
     u8 size;
 };
 
@@ -650,14 +734,14 @@ void TurnValuesCleanUp(u8);
 void SpecialStatusesClear(void);
 void sub_80138F0(void);
 void sub_80155A4();
-void CancelMultiTurnMoves(u8);
+void CancelMultiTurnMoves(u8 bank);
 void PrepareStringBattle();
 void sub_80156DC();
 void sub_80157C4(u8 index);
 
 // asm/battle_3.o
-u8 sub_8015A98(u8, u8, u8);
-u8 UpdateTurnCounters();
+u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
+u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects();
 u8 sub_80170DC();
 u8 sub_80173A4();
