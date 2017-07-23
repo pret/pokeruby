@@ -52,7 +52,7 @@ void StopScript(struct ScriptContext *ctx)
     ctx->scriptPtr = 0;
 }
 
-u8 RunScript(struct ScriptContext *ctx)
+u8 RunScriptCommand(struct ScriptContext *ctx)
 {
     if (ctx->mode == 0)
         return 0;
@@ -191,7 +191,7 @@ bool8 ScriptContext2_RunScript(void)
 
     ScriptContext2_Enable();
 
-    if (!RunScript(&sScriptContext1))
+    if (!RunScriptCommand(&sScriptContext1))
     {
         sScriptContext1Status = 2;
         ScriptContext2_Disable();
@@ -224,7 +224,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
 {
     InitScriptContext(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext2, ptr);
-    while (RunScript(&sScriptContext2) == 1)
+    while (RunScriptCommand(&sScriptContext2) == 1)
         ;
 }
 

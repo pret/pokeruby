@@ -238,7 +238,6 @@ SECTIONS {
         src/unused_8124F94.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
-        asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
@@ -287,7 +286,7 @@ SECTIONS {
         data/battle_scripts_2.o(script_data);
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/script_funcs.o(script_data);
+        data/mystery_event_script_cmd_table.o(script_data);
     } =0
 
     lib_text :

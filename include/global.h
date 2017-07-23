@@ -548,6 +548,20 @@ struct RecordMixing_UnknownStruct
     u16 unk74[0x2];
 };
 
+struct RecordMixingGiftData
+{
+    u8 unk0;
+    u8 quantity;
+    u16 itemId;
+    u8 filler4[8];
+};
+
+struct RecordMixingGift
+{
+    int checksum;
+    struct RecordMixingGiftData data;
+};
+
 struct LinkBattleRecord
 {
     u8 name[8];
@@ -642,7 +656,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
-    /*0x3A7C*/ u8 filler_3A7C[0x10];
+    /*0x3A7C*/ struct RecordMixingGift recordMixingGift;
     /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
 };
 
@@ -674,7 +688,8 @@ struct SaveBlock2_Sub
     /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
     /*0x03D8, 0x0480*/ u16 var_480;
     /*0x03DA, 0x0482*/ u16 var_482;
-    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD0];
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
+    /*0x03F0, 0x0498*/ u8 ereaderTrainer[0xBC];
     /*0x04AC, 0x0554*/ u8 var_4AC;
     /*0x04AD, 0x0555*/ u8 var_4AD;
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
