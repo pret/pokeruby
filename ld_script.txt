@@ -127,7 +127,6 @@ SECTIONS {
         src/field_weather.o(.text);
         asm/field_weather.o(.text);
         src/field_fadetransition.o(.text);
-        asm/field_fadetransition.o(.text);
         src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
