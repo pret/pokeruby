@@ -1,5 +1,5 @@
 BerryTreeScript:: @ 81A14DD
-	special 43
+	special FieldObjectInteractionGetBerryTreeData
 	switch 0x8004
 	case 255, Route102_EventScript_1A1533
 	case 0, Route102_EventScript_1A153D
@@ -21,7 +21,7 @@ Route102_EventScript_1A1533:: @ 81A1533
 Route102_EventScript_1A153D:: @ 81A153D
 	lock
 	faceplayer
-	specialval RESULT, 49
+	specialval RESULT, PlayerHasBerries
 	compare RESULT, 1
 	jumpeq Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
@@ -41,7 +41,7 @@ Route102_EventScript_1A1558:: @ 81A1558
 Route102_EventScript_1A1577:: @ 81A1577
 	fadescreen 1
 	closebutton
-	special 44
+	special sub_80B4EE4
 	waitstate
 	compare ITEM_ID, 0
 	jumpeq Route102_EventScript_1A1593
@@ -108,10 +108,10 @@ Route102_EventScript_1A15F9:: @ 81A15F9
 	jumpeq Route102_EventScript_1A164B
 
 Route102_EventScript_1A161D:: @ 81A161D
-	special 46
+	special FieldObjectInteractionPickBerryTree
 	compare 0x8004, 0
 	jumpeq Route102_EventScript_1A1642
-	special 47
+	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
 	fanfare 387
 	waittext
@@ -139,7 +139,7 @@ Route102_EventScript_1A164B:: @ 81A164B
 
 gUnknown_081A1654:: @ 81A1654
 	lockall
-	special 43
+	special FieldObjectInteractionGetBerryTreeData
 	call Route102_EventScript_1A16A9
 	releaseall
 	end
@@ -159,14 +159,14 @@ Route102_EventScript_1A168D:: @ 81A168D
 	end
 
 gUnknown_081A168F:: @ 81A168F
-	special 43
+	special FieldObjectInteractionGetBerryTreeData
 	lockall
 
 Route102_EventScript_1A1693:: @ 81A1693
 	message Route102_Text_1A1912
 	waittext
-	special 48
-	special 94
+	special FieldObjectInteractionWaterBerryTree
+	special DoWateringBerryTreeAnim
 	waitstate
 	message Route102_Text_1A1925
 	waittext
@@ -175,7 +175,7 @@ Route102_EventScript_1A1693:: @ 81A1693
 	end
 
 Route102_EventScript_1A16A9:: @ 81A16A9
-	special 45
+	special FieldObjectInteractionPlantBerryTree
 	inccounter GAME_STAT_PLANTED_BERRIES
 	message Route102_Text_1A16FB
 	waittext

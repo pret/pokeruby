@@ -23,7 +23,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB:: @ 81634EB
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 @ Coord event directly in front of the gatesman heading left to right
 	lockall
-	specialval RESULT, 227 @ player state?
+	specialval RESULT, GetPlayerAvatarBike @ player state?
 	compare RESULT, 2
 	callif 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
 	compare RESULT, 0

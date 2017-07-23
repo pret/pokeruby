@@ -22,13 +22,12 @@ extern const struct Subsprite gUnknown_0842F790;
 
 extern u16 gUnknown_0203A360[];
 
-extern struct Subsprite gMenuCursorSubsprites[];
-
-extern u8 gUnknown_0203A3D0;
-extern u8 gUnknown_0203A3D1;
-extern u8 gUnknown_0203A3D2;
-extern u8 gUnknown_0203A3D3;
-extern u8 gUnknown_0203A3D4;
+EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
+EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
 
 void sub_814A590(void)
 {

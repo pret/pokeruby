@@ -25,7 +25,7 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr);
 void SetupNativeScript(struct ScriptContext *ctx, void *ptr);
 void StopScript(struct ScriptContext *ctx);
-u8 RunScript(struct ScriptContext *ctx);
+u8 RunScriptCommand(struct ScriptContext *ctx);
 u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr);
 const u8 *ScriptPop(struct ScriptContext *ctx);
 void ScriptJump(struct ScriptContext *ctx, u8 *ptr);
@@ -55,7 +55,5 @@ u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 u8 *GetRamScript(u8 objectId, u8 *script);
-u16 gScriptResult;
-extern u16 gScriptLastTalked;
 
 #endif // GUARD_SCRIPT_H

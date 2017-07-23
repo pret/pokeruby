@@ -43,7 +43,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	setanimation 1, 10
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, 290
+	specialval RESULT, sub_810F4D4
 	compare RESULT, 0
 	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	checkanimation 54
@@ -54,7 +54,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
-	specialval RESULT, 288
+	specialval RESULT, sub_810F488
 	compare RESULT, 1
 	jumpeq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	pause 20
@@ -77,7 +77,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	setanimation 1, 3
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, 291
+	specialval RESULT, sub_810F4FC
 	compare RESULT, 0
 	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	checkanimation 54
@@ -98,7 +98,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	setanimation 1, 6
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, 289
+	specialval RESULT, sub_810F4B0
 	compare RESULT, 0
 	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	checkanimation 54

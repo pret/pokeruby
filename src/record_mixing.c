@@ -31,10 +31,11 @@ extern u8 ewram[];
 
 extern struct RecordMixing_UnknownStruct gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;
-extern u32 gUnknown_03005D2C;
-extern u8 gUnknown_03000718;
-extern u8 gUnknown_0300071C[];
-extern bool8 gReceivedRemoteLinkPlayers;
+
+u32 gUnknown_03005D2C;
+
+static u8 gUnknown_03000718;
+static u8 gUnknown_0300071C[4];
 
 void *recordMixingSecretBases = &gSaveBlock1.secretBases;
 void *recordMixingTvShows = &gSaveBlock1.tvShows;
@@ -80,7 +81,7 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
 
     if (GetMultiplayerId() == 0)
-        unk_2018000.filler11C8[0] = sub_8126338();
+        unk_2018000.filler11C8[0] = GetRecordMixingGift();
 }
 
 void RecordMixing_ReceiveExchangePacket(u32 a)

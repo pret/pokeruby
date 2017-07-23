@@ -1,8 +1,8 @@
 Event_TV:: @ 81A6E72
 	lockall
 	inccounter GAME_STAT_WATCHED_TV
-	special 75
-	specialval RESULT, 73
+	special sub_80C2014
+	specialval RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2
 	jumpeq EventScript_1A6F01
 	compare RESULT, 1
@@ -11,29 +11,29 @@ Event_TV:: @ 81A6E72
 	jumpif 0, EventScript_1A6EF1
 	checkflag 2097
 	jumpeq EventScript_1A6EF1
-	specialval RESULT, 176
+	specialval RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
 	jumpeq EventScript_1A6F66
 	jump EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
-	specialval 0x8004, 65
+	specialval 0x8004, special_0x44
 	compare 0x8004, 255
 	jumpeq EventScript_1A6F3F
-	specialval RESULT, 71
+	specialval RESULT, special_0x4a
 	compare RESULT, 255
 	jumpeq EventScript_1A6F3F
 	copyvar 0x8004, RESULT
-	specialval RESULT, 66
+	specialval RESULT, sub_80BDA0C
 	compare RESULT, 0
 	jumpif 5, EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
-	special 74
+	special GetMomOrDadStringForTVMessage
 	msgbox UnknownString_81A0E68, 4
-	special 62
+	special TurnOffTVScreen
 	releaseall
 	end
 
@@ -48,15 +48,15 @@ EventScript_1A6F0B:
 	.else
 	msgbox UnknownString_8172C50, 4
 	.endif
-	special 297
+	special InitRoamer
 	clearflag 2141
 	setflag 255
-	special 62
+	special TurnOffTVScreen
 	releaseall
 	end
 
 EventScript_1A6F21:
-	special 63
+	special DoTVShow
 	waittext
 	waitbutton
 	compare RESULT, 1
@@ -65,19 +65,19 @@ EventScript_1A6F21:
 	end
 
 EventScript_1A6F37:
-	special 62
+	special TurnOffTVScreen
 	setflag 2097
 	releaseall
 	end
 
 EventScript_1A6F3F:
-	special 74
+	special GetMomOrDadStringForTVMessage
 	msgbox UnknownString_81A0E68, 4
 	jump EventScript_1A6F37
 	end
 
 EventScript_1A6F50:
-	special 64
+	special sub_80BECE8
 	compare RESULT, 0
 	jumpeq EventScript_1A6EBB
 	waittext
@@ -86,7 +86,7 @@ EventScript_1A6F50:
 	end
 
 EventScript_1A6F66:
-	special 175
+	special DoTVShowInSearchOfTrainers
 	waittext
 	waitbutton
 	compare RESULT, 0

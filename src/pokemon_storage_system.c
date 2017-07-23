@@ -12,6 +12,8 @@ extern const struct StorageAction gUnknown_083B6DF4[];
 
 extern const u8 unk_2000000[];
 
+EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+
 #define gUnk2002694 (u8 *)(&unk_2000000[0x2694])
 #define gUnk20026A6 (u8 *)(&unk_2000000[0x26a6])
 #define gUnk20011fa (u8 *)(&unk_2000000[0x11fa])

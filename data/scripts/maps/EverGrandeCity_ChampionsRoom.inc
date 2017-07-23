@@ -48,7 +48,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	playsfx 8
 	setmaptile 6, 1, 838, 0
 	setmaptile 6, 2, 839, 0
-	special 142
+	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
 	closebutton
 	playsfx 8

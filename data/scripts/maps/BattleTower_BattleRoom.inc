@@ -12,35 +12,35 @@ BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 	waitmove 0
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
-	special 232
+	special sub_81347F8
 	reappear 1
 	move 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmove 0
-	special 234
+	special sub_8135474
 	msgbox 0x20234cc, 4
 	waittext
 	closebutton
-	special 0
+	special HealPlayerParty
 	setvar 0x8004, 0
 	setvar 0x8005, 0
-	special 236
+	special sub_813556C
 	waitstate
 	switch RESULT
 	case 1, BattleTower_BattleRoom_EventScript_160961
-	special 40
+	special LoadPlayerParty
 	setvar 0x8004, 0
 	setvar 0x8005, 5
-	special 237
+	special sub_8135668
 	setvar 0x8004, 14
-	special 237
+	special sub_8135668
 	setvar 0x8004, 3
-	special 170
+	special sub_810FF60
 	warp BattleTower_Lobby, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	setvar 0x8004, 6
-	special 237
+	special sub_8135668
 	switch RESULT
 	case 8, BattleTower_BattleRoom_EventScript_160A56
 	move 1, BattleTower_BattleRoom_Movement_160AC6
@@ -51,12 +51,12 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	move 255, BattleTower_BattleRoom_Movement_160ABC
 	waitmove 0
 	msgbox BattleTower_BattleRoom_Text_19ACDC, 4
-	special 40
-	special 39
-	special 239
+	special LoadPlayerParty
+	special SavePlayerParty
+	special sub_8135A14
 	fanfare 368
 	waitfanfare
-	special 0
+	special HealPlayerParty
 
 BattleTower_BattleRoom_EventScript_1609B2:: @ 81609B2
 	msgbox BattleTower_BattleRoom_Text_19AD09, 5
@@ -88,25 +88,25 @@ BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 	jump BattleTower_BattleRoom_EventScript_1608FA
 
 BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
-	special 40
+	special LoadPlayerParty
 	setvar 0x8004, 0
 	setvar 0x8005, 4
-	special 237
+	special sub_8135668
 	setvar 0x8004, 2
 	setvar 0x8005, 1
-	special 237
+	special sub_8135668
 	setvar 0x8004, 7
-	special 237
+	special sub_8135668
 	setvar 0x8004, 14
-	special 237
+	special sub_8135668
 	setvar 0x8004, 3
-	special 170
+	special sub_810FF60
 	warp BattleTower_Lobby, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	setvar 0x8004, 2
-	special 240
+	special sub_8135BA0
 	message BattleTower_BattleRoom_Text_1C6CE1
 	pause 60
 	waittext
@@ -116,7 +116,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
 	fadescreen 1
-	special 241
+	special sub_8135C38
 	end
 
 BattleTower_BattleRoom_Movement_160AB7:: @ 8160AB7

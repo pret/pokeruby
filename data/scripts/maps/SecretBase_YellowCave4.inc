@@ -11,7 +11,7 @@ SecretBase_RedCave1_MapScript1_15F34C:: @ 815F34C
 
 SecretBase_RedCave1_MapScript1_15F34F:: @ 815F34F
 	call SecretBase_RedCave1_EventScript_1A2F3D
-	special 22
+	special sub_80BBFA4
 	end
 
 SecretBase_RedCave1_MapScript2_15F358:: @ 815F358

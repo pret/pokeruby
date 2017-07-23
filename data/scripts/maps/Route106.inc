@@ -17,7 +17,7 @@ Route106_EventScript_14F34F:: @ 814F34F
 
 Route106_EventScript_14F366:: @ 814F366
 	trainerbattle 0, OPPONENT_ELLIOT_1, 0, Route106_Text_1B8EF0, Route106_Text_1B8F25
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route106_EventScript_14F38D
 	msgbox Route106_Text_1B8F55, 6

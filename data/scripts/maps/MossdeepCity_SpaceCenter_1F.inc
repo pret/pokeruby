@@ -5,7 +5,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	lock
 	faceplayer
 	checkdailyflags
-	specialval RESULT, 256
+	specialval RESULT, GetWeekCount
 	buffernum 0, RESULT
 	compare RESULT, 0
 	callif 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA

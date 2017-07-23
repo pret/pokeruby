@@ -127,7 +127,7 @@ enum
     INPUT_EVENT_B_BUTTON,
 };
 
-extern struct RegionMap *gRegionMap;
+static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
 
 static const u16 sRegionMapCursor_Pal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
 static const u8 sRegionMapCursorSmall_ImageLZ[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");

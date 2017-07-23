@@ -5,7 +5,7 @@
 #include "task.h"
 #include "util.h"
 
-extern u8 *gUnknown_020384F8[];
+static EWRAM_DATA u8 *gUnknown_020384F8[16] = {0};
 
 static void sub_80A2198(u8);
 static u8 sub_80A21E0(void);

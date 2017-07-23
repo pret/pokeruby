@@ -22,12 +22,8 @@
 #include "unknown_task.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u16 gUnknown_02039318;
-extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
-extern u32 gIntroFrameCounter;
-extern struct GcmbStruct gMultibootProgramStruct;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
 extern const u8 gInterfaceGfx_PokeBall[];
@@ -36,6 +32,12 @@ extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
 extern void *const gUnknown_0840B5A0[];
+
+static EWRAM_DATA u16 gUnknown_02039318 = 0;
+static EWRAM_DATA u16 gUnknown_0203931A = 0;
+
+u32 gIntroFrameCounter;
+struct GcmbStruct gMultibootProgramStruct;
 
 //--------------------------------------------------
 // Graphics Data

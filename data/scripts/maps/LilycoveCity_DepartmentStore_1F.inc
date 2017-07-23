@@ -19,17 +19,17 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	setflag 2250
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
 	waittext
-	special 257
+	special RetrieveLotteryNumber
 	copyvar 0x8008, RESULT
-	special 337
+	special sub_810F9AC
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, 4
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
 	waitmove 0
 	playsfx 4
-	special 217
-	special 258
+	special DoLotteryCornerComputerEffect
+	special PickLotteryCornerTicket
 	pause 220
-	special 218
+	special EndLotteryCornerComputerEffect
 	pause 10
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmove 0

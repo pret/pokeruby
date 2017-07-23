@@ -15,7 +15,8 @@
 #include "text.h"
 
 extern u8 unk_2000000[];
-extern u8 gUnknown_02039338;
+
+static EWRAM_DATA u8 gUnknown_02039338 = 0;
 
 static void VBlankCB(void);
 static bool8 CheckLanguageMatch(void);
@@ -286,7 +287,7 @@ static void CB2_MysteryEventMenu(void)
     case 11:
         if (gReceivedRemoteLinkPlayers)
             break;
-        unkVal = sub_812613C(unk_2000000);
+        unkVal = RunMysteryEventScript(unk_2000000);
         CpuFill32(0, unk_2000000, 0x7D4);
         if (!GetEventLoadMessage(gStringVar4, unkVal))
             TrySavingData(NORMAL_SAVE);

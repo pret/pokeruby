@@ -58,7 +58,7 @@ MauvilleCity_BikeShop_EventScript_156847:: @ 8156847
 
 MauvilleCity_BikeShop_EventScript_156861:: @ 8156861
 	msgbox MauvilleCity_BikeShop_Text_181362, 4
-	special 130
+	special SwapRegisteredBike
 	release
 	end
 

@@ -76,7 +76,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E257:: @ 815E257
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 41, 20, 859, 0
-	special 142
+	special DrawWholeMapView
 	setflag 956
 	releaseall
 	end
@@ -94,7 +94,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E293:: @ 815E293
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 41, 10, 859, 0
-	special 142
+	special DrawWholeMapView
 	setflag 957
 	releaseall
 	end
@@ -107,7 +107,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2C5:: @ 815E2C5
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 6, 9, 859, 0
-	special 142
+	special DrawWholeMapView
 	setflag 958
 	releaseall
 	end
@@ -120,7 +120,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2F7:: @ 815E2F7
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 16, 13, 859, 0
-	special 142
+	special DrawWholeMapView
 	setflag 959
 	releaseall
 	end
@@ -133,7 +133,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E329:: @ 815E329
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 31, 8, 858, 0
-	special 142
+	special DrawWholeMapView
 	setflag 952
 	releaseall
 	end
@@ -151,7 +151,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E365:: @ 815E365
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_1A029B
 	setmaptile 14, 26, 858, 0
-	special 142
+	special DrawWholeMapView
 	setflag 953
 	releaseall
 	end

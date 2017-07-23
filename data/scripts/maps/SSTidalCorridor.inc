@@ -10,7 +10,7 @@ SSTidalCorridor_MapScript2_15FC9A:: @ 815FC9A
 	.2byte 0
 
 SSTidalCorridor_EventScript_15FCBC:: @ 815FCBC
-	special 203
+	special SetSSTidalFlag
 	setvar 0x40b4, 2
 	lockall
 	playsfx 73
@@ -27,14 +27,14 @@ SSTidalCorridor_EventScript_15FCD2:: @ 815FCD2
 	end
 
 SSTidalRooms_EventScript_15FCE5:: @ 815FCE5
-	special 203
+	special SetSSTidalFlag
 	setvar 0x40b4, 7
 	playsfx 73
 	msgbox SSTidalRooms_Text_199007, 4
 	return
 
 SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
-	special 204
+	special ResetSSTidalFlag
 	setvar 0x40b4, 4
 	playsfx 73
 	msgbox SSTidalRooms_Text_1990F8, 4
@@ -48,7 +48,7 @@ gUnknown_0815FD0D:: @ 815FD0D
 	end
 
 SSTidalCorridor_EventScript_15FD24:: @ 815FD24
-	special 204
+	special ResetSSTidalFlag
 	setvar 0x40b4, 3
 	lockall
 	playsfx 73
@@ -57,7 +57,7 @@ SSTidalCorridor_EventScript_15FD24:: @ 815FD24
 	end
 
 SSTidalCorridor_EventScript_15FD3A:: @ 815FD3A
-	special 204
+	special ResetSSTidalFlag
 	setvar 0x40b4, 8
 	lockall
 	playsfx 73
@@ -66,7 +66,7 @@ SSTidalCorridor_EventScript_15FD3A:: @ 815FD3A
 	end
 
 SSTidalRooms_EventScript_15FD50:: @ 815FD50
-	special 204
+	special ResetSSTidalFlag
 	setvar 0x40b4, 8
 	playsfx 73
 	msgbox SSTidalRooms_Text_1990B4, 4
@@ -156,7 +156,7 @@ SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A
 	end
 
 SSTidalCorridor_EventScript_15FE5B:: @ 815FE5B
-	special 270
+	special sub_80C7958
 	waitstate
 	end
 

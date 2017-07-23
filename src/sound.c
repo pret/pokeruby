@@ -17,8 +17,9 @@ struct Fanfare
 u32 SpeciesToCryId(u32);
 
 extern u16 gBattleTypeFlags;
-extern struct MusicPlayerInfo *gMPlay_PokemonCry;
-extern u8 gPokemonCryBGMDuckingCounter;
+
+static EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
+static EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
@@ -26,7 +27,8 @@ static u8 sMapMusicState;
 static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
-extern bool8 gDisableMusic;
+bool8 gDisableMusic;
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;

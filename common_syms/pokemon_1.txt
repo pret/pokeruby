@@ -1,0 +1,4 @@
+gPlayerPartyCount
+gPlayerParty
+gEnemyPartyCount
+gEnemyParty

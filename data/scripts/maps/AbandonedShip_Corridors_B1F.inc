@@ -38,7 +38,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	removeitem ITEM_STORAGE_KEY, 1
 	setflag 239
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 

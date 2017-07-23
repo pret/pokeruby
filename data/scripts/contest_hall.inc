@@ -122,7 +122,7 @@ FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
 	choosecontestpkmn
 	compare 0x8004, 255
 	jumpeq FallarborTown_ContestLobby_EventScript_1A5097
-	special 84
+	special sub_80C43F4
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1A50C8
 	compare RESULT, 1
@@ -337,7 +337,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 	return
 
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
-	special 81
+	special sub_80C4C64
 	addvar 0x8006, 1
 	buffernum 1, 0x8006
 	lockall
@@ -352,7 +352,7 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	releaseall
 	addvar 0x8006, -1
 	playsfx 15
-	special 320
+	special ShowContestEntryMonPic
 	call LinkContestRoom1_EventScript_1A535E
 	return
 
@@ -430,7 +430,7 @@ LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 	return
 
 LinkContestRoom1_EventScript_1A5455:: @ 81A5455
-	special 87
+	special sub_80C47A0
 	compare 0x4088, 1
 	callif 1, LinkContestRoom1_EventScript_1A555A
 	compare 0x4088, 2
@@ -463,7 +463,7 @@ LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 
 LinkContestRoom1_EventScript_1A54EB:: @ 81A54EB
 	setvar RESULT, 8
-	special 340
+	special ScriptRandom
 	compare RESULT, 0
 	callif 1, LinkContestRoom1_EventScript_1A5760
 	compare RESULT, 1
@@ -725,7 +725,7 @@ LinkContestRoom1_EventScript_1A5880:: @ 81A5880
 	closebutton
 	release
 	disappear 13
-	special 321
+	special sub_80C5164
 	switch 0x8006
 	case 0, LinkContestRoom1_EventScript_1A58BA
 	case 1, LinkContestRoom1_EventScript_1A58C7
@@ -857,7 +857,7 @@ LinkContestRoom1_EventScript_1A59F2:: @ 81A59F2
 	return
 
 LinkContestRoom1_EventScript_1A59FC:: @ 81A59FC
-	special 76
+	special sub_80C47C0
 	switch 0x8005
 	case 0, LinkContestRoom1_EventScript_1A5A31
 	case 1, LinkContestRoom1_EventScript_1A5A37
@@ -882,8 +882,8 @@ LinkContestRoom1_EventScript_1A5A43:: @ 81A5A43
 	return
 
 LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
-	special 79
-	special 80
+	special sub_80C47F0
+	special sub_80C4858
 	addvar 0x8005, 1
 	buffernum 1, 0x8005
 	addvar 0x8005, -1
@@ -1006,7 +1006,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	setvar 0x4001, 0
 	call LinkContestRoom1_EventScript_1A5A90
 	pause 30
-	special 134
+	special sub_80C4CF8
 	compare 0x8004, 1
 	jumpeq LinkContestRoom1_EventScript_1A5C46
 	return
@@ -1015,19 +1015,19 @@ LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
 	inccounter GAME_STAT_WON_CONTEST
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
 	pause 90
-	special 134
+	special sub_80C4CF8
 	compare 0x8004, 1
 	jumpeq LinkContestRoom1_EventScript_1A5C46
 	return
 
 LinkContestRoom1_EventScript_1A5C12:: @ 81A5C12
-	specialval RESULT, 88
+	specialval RESULT, sub_80C4440
 	compare RESULT, 1
 	jumpeq LinkContestRoom1_EventScript_1A5C23
 	return
 
 LinkContestRoom1_EventScript_1A5C23:: @ 81A5C23
-	special 76
+	special sub_80C47C0
 	compare 0x8005, 3
 	jumpeq LinkContestRoom1_EventScript_1A5C32
 	return
@@ -1052,7 +1052,7 @@ LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46
 LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
 	pause 60
 	call LinkContestRoom1_EventScript_1A5C6A
-	special 134
+	special sub_80C4CF8
 	compare 0x8004, 1
 	jumpeq LinkContestRoom1_EventScript_1A5C64
 	closebutton
@@ -1063,8 +1063,8 @@ LinkContestRoom1_EventScript_1A5C64:: @ 81A5C64
 	return
 
 LinkContestRoom1_EventScript_1A5C6A:: @ 81A5C6A
-	special 77
-	special 76
+	special sub_80C496C
+	special sub_80C47C0
 	comparevars 0x8004, 0x8005
 	jumpeq LinkContestRoom1_EventScript_1A5C7C
 	return
@@ -1110,7 +1110,7 @@ LinkContestRoom1_EventScript_1A5CD8:: @ 81A5CD8
 	return
 
 LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
-	special 76
+	special sub_80C47C0
 	compare 0x8005, 3
 	jumpeq LinkContestRoom1_EventScript_1A5CFC
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
@@ -1120,7 +1120,7 @@ LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare 0x4088, 2
 	callif 1, LinkContestRoom1_EventScript_1A5C42
 	inccounter GAME_STAT_WON_CONTEST
-	specialval RESULT, 88
+	specialval RESULT, sub_80C4440
 	compare RESULT, 0
 	jumpeq LinkContestRoom1_EventScript_1A5D5B
 	compare CONTEST_RANK, 3
@@ -1141,7 +1141,7 @@ LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
 	return
 
 LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
-	special 89
+	special sub_80C44C0
 	inccounter GAME_STAT_RECEIVED_RIBBONS
 	setflag 2107
 	lockall
@@ -1149,7 +1149,7 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	fanfare 370
 	msgbox LinkContestRoom1_Text_1A6D96, 4
 	waitfanfare
-	special 80
+	special sub_80C4858
 	msgbox LinkContestRoom1_Text_1A6DAC, 4
 	releaseall
 	return

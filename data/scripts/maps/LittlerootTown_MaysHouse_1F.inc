@@ -98,7 +98,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	move 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
 	move 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
 	waitmove 0
-	special 149
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
 	setflag 87
 	setvar 0x408c, 2
@@ -141,7 +141,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
 	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
-	special 149
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4
 	release
 	end

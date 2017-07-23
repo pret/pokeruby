@@ -26,13 +26,13 @@ PetalburgCity_MapScript2_14B73D:: @ 814B73D
 PetalburgCity_EventScript_14B747:: @ 814B747
 	lockall
 	setflag 0x4000
-	special 39
-	special 301
+	special SavePlayerParty
+	special PutZigzagoonInPlayerParty
 	move 2, PetalburgCity_Movement_14B7ED
 	move 255, PetalburgCity_Movement_14B7CC
 	waitmove 0
 	msgbox PetalburgCity_Text_16D361, 4
-	special 157
+	special StartBattle_WallyTutorial
 	waitstate
 	msgbox PetalburgCity_Text_16D3DE, 4
 	movecoords 2, PetalburgCity_Movement_1A083F, 0, 0
@@ -43,7 +43,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	setvar 0x4057, 3
 	fadedefault
 	clearflag 0x4001
-	special 40
+	special LoadPlayerParty
 	setvar 0x4085, 1
 	warp PetalburgCity_Gym, 255, 4, 108
 	waitstate

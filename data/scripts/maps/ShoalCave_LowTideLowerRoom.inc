@@ -23,7 +23,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E413:: @ 815E413
 	compare RESULT, 0
 	jumpeq ShoalCave_LowTideLowerRoom_EventScript_1A029B
 	setmaptile 18, 2, 858, 0
-	special 142
+	special DrawWholeMapView
 	setflag 955
 	releaseall
 	end

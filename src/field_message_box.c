@@ -6,7 +6,7 @@
 #include "text.h"
 #include "text_window.h"
 
-extern struct Window gFieldMessageBoxWindow;
+static EWRAM_DATA struct Window gFieldMessageBoxWindow = {0};
 
 static u8 sMessageBoxMode;
 

@@ -24,11 +24,11 @@ FallarborTown_House2_EventScript_153CB6:: @ 8153CB6
 
 FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
 	msgbox FallarborTown_House2_Text_177C3F, 4
-	special 219
+	special sub_80F9A4C
 	waitstate
 	compare 0x8004, 255
 	jumpeq FallarborTown_House2_EventScript_153D60
-	special 328
+	special sub_80FA148
 	compare RESULT, 1
 	jumpeq FallarborTown_House2_EventScript_153D52
 	compare 0x8005, 0
@@ -38,7 +38,7 @@ FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
 
 FallarborTown_House2_EventScript_153D1A:: @ 8153D1A
 	msgbox FallarborTown_House2_Text_177C5D, 4
-	special 224
+	special sub_8132670
 	waitstate
 	compare 0x8004, 0
 	jumpeq FallarborTown_House2_EventScript_153CE4

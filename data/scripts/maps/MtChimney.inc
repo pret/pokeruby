@@ -440,7 +440,7 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6

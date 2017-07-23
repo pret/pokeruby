@@ -3,7 +3,7 @@ Route123_MapScripts:: @ 8151C53
 	.byte 0
 
 Route123_MapScript1_151C59:: @ 8151C59
-	special 325
+	special SetRoute123Weather
 	end
 
 Route123_EventScript_151C5D:: @ 8151C5D
@@ -12,7 +12,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	checkflag 232
 	jumpeq Route123_EventScript_151CAC
 	msgbox Route123_Text_171D83, 4
-	special 299
+	special IsGrassTypeInParty
 	compare RESULT, 0
 	jumpeq Route123_EventScript_151CAA
 	msgbox Route123_Text_171DC2, 4
@@ -62,7 +62,7 @@ Route123_EventScript_151CFF:: @ 8151CFF
 
 Route123_EventScript_151D16:: @ 8151D16
 	trainerbattle 0, OPPONENT_CAMERON_1, 0, Route123_Text_1C013F, Route123_Text_1C01A3
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route123_EventScript_151D3D
 	msgbox Route123_Text_1C01B1, 6
@@ -75,7 +75,7 @@ Route123_EventScript_151D3D:: @ 8151D3D
 
 Route123_EventScript_151D54:: @ 8151D54
 	trainerbattle 0, OPPONENT_JACKI_1, 0, Route123_Text_1C028C, Route123_Text_1C0303
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route123_EventScript_151D7B
 	msgbox Route123_Text_1C030F, 6

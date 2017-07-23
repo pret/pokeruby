@@ -51,7 +51,7 @@ BattleScript_1D9EBC: @ 81D9EBC
 	atk98 1
 	pokemoncatchfunction
 
-gUnknown_081D9EC2:: @ 81D9EC2
+BattleScript_SuccessBallThrow:: @ 81D9EC2
 	jumpifhalfword 0, gLastUsedItem, 5, BattleScript_1D9ED0
 	atk60 11
 
@@ -76,12 +76,12 @@ BattleScript_1D9EF8: @ 81D9EF8
 	setbyte gBattleOutcome, 7
 	activesidesomething
 
-gUnknown_081D9F00:: @ 81D9F00
+BattleScript_WallyBallThrow:: @ 81D9F00
 	printstring BATTLE_TEXT_BallCaught2
 	setbyte gBattleOutcome, 7
 	activesidesomething
 
-gUnknown_081D9F0A:: @ 81D9F0A
+BattleScript_ShakeBallThrow:: @ 81D9F0A
 	printfromtable BattleTextList_4015E6
 	waitmessage 64
 	jumpifbyte 5, gBattleTypeFlags, 128, BattleScript_1D9F34
@@ -93,7 +93,7 @@ gUnknown_081D9F0A:: @ 81D9F0A
 BattleScript_1D9F34: @ 81D9F34
 	atkf6
 
-gUnknown_081D9F35:: @ 81D9F35
+BattleScript_TrainerBallBlock:: @ 81D9F35
 	waitmessage 64
 	printstring BATTLE_TEXT_BlockBall
 	waitmessage 64

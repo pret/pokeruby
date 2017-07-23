@@ -24,7 +24,7 @@
 #include "tv.h"
 #include "wild_encounter.h"
 
-extern u32 gUnknown_0202FF84[];
+EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {0};
 
 //Functions
 static bool8 sub_8058854(struct MapObject *, u8);

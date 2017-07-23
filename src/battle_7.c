@@ -808,7 +808,7 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
     }
 }
 
-void sub_80325B8(void)
+void BattleMusicStop(void)
 {
     u8 r4 = GetBankByPlayerAI(0);
 

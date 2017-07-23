@@ -2,7 +2,7 @@ Route111_EventScript_1AE313:: @ 81AE313
 Route118_EventScript_1AE313:: @ 81AE313
 Route120_EventScript_1AE313:: @ 81AE313
 	settrainerflag OPPONENT_GABBY_AND_TY_6
-	specialval RESULT, 172
+	specialval RESULT, GabbyAndTyGetBattleNum
 	switch RESULT
 	case 0, Route111_EventScript_1AE384
 	case 1, Route111_EventScript_1AE38A
@@ -200,8 +200,8 @@ Route120_EventScript_1AE582:: @ 81AE582
 	end
 
 Route111_EventScript_1AE5A2:: @ 81AE5A2
-	special 174
-	special 179
+	special GabbyAndTyBeforeInterview
+	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
 	callif 1, Route111_EventScript_1AE5E0
 	compare FACING, 1
@@ -234,8 +234,8 @@ Route111_EventScript_1AE5FD:: @ 81AE5FD
 Route111_EventScript_1AE60F:: @ 81AE60F
 Route118_EventScript_1AE60F:: @ 81AE60F
 Route120_EventScript_1AE60F:: @ 81AE60F
-	special 174
-	special 179
+	special GabbyAndTyBeforeInterview
+	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
 	callif 1, Route111_EventScript_1AE5E0
 	compare FACING, 1
@@ -244,11 +244,11 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	callif 1, Route111_EventScript_1AE5FD
 	checkflag 1
 	jumpeq Route111_EventScript_1AE73A
-	specialval RESULT, 177
+	specialval RESULT, GabbyAndTyGetLastQuote
 	compare RESULT, 0
 	jumpeq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
-	specialval RESULT, 178
+	specialval RESULT, sub_80BDD18
 	switch RESULT
 	case 0, Route111_EventScript_1AE6AD
 	case 1, Route111_EventScript_1AE6BB
@@ -310,7 +310,7 @@ Route111_EventScript_1AE6F3:: @ 81AE6F3
 	compare RESULT, 0
 	jumpeq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
-	special 173
+	special sub_80BDC14
 	setflag 1
 	release
 	end

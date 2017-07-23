@@ -60,23 +60,23 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
-extern struct WarpData gUnknown_020297F0;
-extern struct WarpData gUnknown_020297F8;
-extern struct WarpData gUnknown_02029800;
-extern struct WarpData gUnknown_02029808;
-extern struct UnkPlayerStruct gUnknown_02029810;
-extern u16 gUnknown_02029814;
-extern bool8 gUnknown_02029816;
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+EWRAM_DATA struct WarpData gUnknown_020297F0 = {0};
+EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
+EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
+EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
+EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
+EWRAM_DATA u16 gUnknown_02029814 = 0;
+EWRAM_DATA bool8 gUnknown_02029816 = FALSE;
+EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
 
-extern u8 gUnknown_03000580[];
-extern u16 (*gUnknown_03000584)(u32);
-extern u8 gUnknown_03000588;
+static u8 gUnknown_03000580[4];
+static u16 (*gUnknown_03000584)(u32);
+static u8 gUnknown_03000588;
 
-extern u16 word_3004858;
-extern void (*gFieldCallback)(void);
-extern u8 gUnknown_03004860;
-extern u8 gFieldLinkPlayerCount;
+u16 word_3004858;
+void (*gFieldCallback)(void);
+u8 gUnknown_03004860;
+u8 gFieldLinkPlayerCount;
 
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;

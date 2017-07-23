@@ -1,0 +1,3 @@
+gSoundAnimFramesToWait
+gBattleAnimArgs
+gAnimSpriteIndexArray

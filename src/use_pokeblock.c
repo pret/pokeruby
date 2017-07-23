@@ -102,10 +102,11 @@ const struct SpriteTemplate gSpriteTemplate_840618C = {
 asm(".text\n"
     ".include \"constants/gba_constants.inc\"");
 
-extern struct UnkPokenavStruct_Sub1 *gUnknown_02039304;
-extern MainCallback gUnknown_02039308;
-extern struct Pokeblock *gUnknown_0203930C;
-extern u8 gUnknown_02039310;
+static EWRAM_DATA struct UnkPokenavStruct_Sub1 *gUnknown_02039304 = NULL;
+static EWRAM_DATA MainCallback gUnknown_02039308 = NULL;
+static EWRAM_DATA struct Pokeblock *gUnknown_0203930C = NULL;
+EWRAM_DATA u8 gUnknown_02039310 = 0;
+EWRAM_DATA s16 gUnknown_02039312 = 0;
 
 extern u16 gKeyRepeatStartDelay;
 extern u16 gScriptItemId; // FIXME: remove after merge of #349 Pokeblock

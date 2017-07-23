@@ -28,15 +28,11 @@ struct Struct2000000
     /*0x1FFFF*/ u8 var_1FFFF;
 };
 
-struct BerryTagStatus
-{
-    s16 circles[5];
-};
-
 extern struct Struct2000000 unk_2000000;
-extern u8 gUnknown_0203932C;
-extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gUnknown_030041B4;
+
+static EWRAM_DATA u8 gUnknown_0203932C = 0;
+static EWRAM_DATA s16 gUnknown_0203932E[5] = {0};
 
 extern const struct CompressedSpriteSheet gUnknown_083C1F74;
 extern const struct CompressedSpritePalette gUnknown_083C1F7C;
@@ -336,19 +332,19 @@ static void sub_8146600(u8 berry)
 
     berryInfo = GetBerryInfo(berry + 1);
     for (i = 0; i < 5; i++)
-        gUnknown_0203932E.circles[i] = (u16)gUnknown_0203932E.circles[i] | 0xFFFF;
+        gUnknown_0203932E[i] = (u16)gUnknown_0203932E[i] | 0xFFFF;
 
     // argument is the center of the circle
     if (berryInfo->spicy)
-        gUnknown_0203932E.circles[0] = sub_80A7E5C(48);
+        gUnknown_0203932E[0] = sub_80A7E5C(48);
     if (berryInfo->dry)
-        gUnknown_0203932E.circles[1] = sub_80A7E5C(88);
+        gUnknown_0203932E[1] = sub_80A7E5C(88);
     if (berryInfo->sweet)
-        gUnknown_0203932E.circles[2] = sub_80A7E5C(128);
+        gUnknown_0203932E[2] = sub_80A7E5C(128);
     if (berryInfo->bitter)
-        gUnknown_0203932E.circles[3] = sub_80A7E5C(168);
+        gUnknown_0203932E[3] = sub_80A7E5C(168);
     if (berryInfo->sour)
-        gUnknown_0203932E.circles[4] = sub_80A7E5C(208);
+        gUnknown_0203932E[4] = sub_80A7E5C(208);
 }
 
 void sub_81466A0(void)
@@ -357,10 +353,10 @@ void sub_81466A0(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (gUnknown_0203932E.circles[i] != -1)
+        if (gUnknown_0203932E[i] != -1)
         {
-            DestroySprite(&gSprites[gUnknown_0203932E.circles[i]]);
-            gUnknown_0203932E.circles[i] = -1;
+            DestroySprite(&gSprites[gUnknown_0203932E[i]]);
+            gUnknown_0203932E[i] = -1;
         }
     }
 }

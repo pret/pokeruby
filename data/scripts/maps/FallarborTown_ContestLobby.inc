@@ -11,7 +11,7 @@ FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
 	setvar CONTEST_RANK, 1
 	call FallarborTown_ContestLobby_EventScript_1A4E92
 	call FallarborTown_ContestLobby_EventScript_1539F8
-	special 83
+	special sub_80C4BF0
 	call FallarborTown_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 2
 	warp LinkContestRoom1, 255, 7, 5
@@ -25,13 +25,13 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	playsfx 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
-	special 142
+	special DrawWholeMapView
 	move 1, FallarborTown_ContestLobby_Movement_153A7F
 	waitmove 0
 	playsfx 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
-	special 142
+	special DrawWholeMapView
 	pause 20
 	move 1, FallarborTown_ContestLobby_Movement_153A8C
 	waitmove 0
@@ -114,7 +114,7 @@ FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
 
 FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
 	lockall
-	special 259
+	special ShowBerryBlenderRecordWindow
 	waitbutton
 	hidebox 0, 0, 29, 19
 	releaseall

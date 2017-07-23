@@ -54,11 +54,11 @@ SECTIONS {
         src/battle_2.o(.text);
         asm/battle_2.o(.text);
         asm/battle_3.o(.text);
-        asm/battle_4.o(.text);
+        src/battle_4.o(.text);
         asm/battle_5.o(.text);
         src/battle_6.o(.text);
         src/battle_7.o(.text);
-        asm/battle_8.o(.text);
+        src/battle_8.o(.text);
         asm/battle_9.o(.text);
         src/battle_10.o(.text);
         src/pokemon_1.o(.text);
@@ -109,7 +109,7 @@ SECTIONS {
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);
         src/clock.o(.text);
-        asm/reset_rtc_screen.o(.text);
+        src/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         src/party_menu.o(.text);
         asm/party_menu.o(.text_8070968);
@@ -127,7 +127,6 @@ SECTIONS {
         src/field_weather.o(.text);
         asm/field_weather.o(.text);
         src/field_fadetransition.o(.text);
-        asm/field_fadetransition.o(.text);
         src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
@@ -190,7 +189,7 @@ SECTIONS {
         asm/pokenav.o(.text);
         src/pokenav.o(.text);
         asm/pokenav.o(.text_80F708C);
-        asm/mon_markings.o(.text);
+        src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
@@ -238,7 +237,6 @@ SECTIONS {
         src/unused_8124F94.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
-        asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
@@ -287,7 +285,7 @@ SECTIONS {
         data/battle_scripts_2.o(script_data);
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/script_funcs.o(script_data);
+        data/mystery_event_script_cmd_table.o(script_data);
     } =0
 
     lib_text :
@@ -331,7 +329,9 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
-        data/data2.o(.rodata);
+        data/data2a.o(.rodata);
+        src/battle_4.o(.rodata);
+        data/data2b.o(.rodata);
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);

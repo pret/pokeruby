@@ -52,7 +52,7 @@ Route113_GlassWorkshop_EventScript_1635E4:: @ 81635E4
 
 Route113_GlassWorkshop_EventScript_1635EE:: @ 81635EE
 	setvar 0x8009, 0
-	special 274
+	special ShowGlassWorkshopMenu
 	waitstate
 	switch RESULT
 	case 0, Route113_GlassWorkshop_EventScript_163660

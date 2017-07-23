@@ -14,12 +14,12 @@
 #include "task.h"
 
 extern u16 gScriptLastTalked;
-extern u32 gUnknown_0202FF84[];
-extern struct MapPosition gUnknown_0203923C;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 extern u8 UseRockSmashScript[];
+
+EWRAM_DATA struct MapPosition gUnknown_0203923C = {0};
 
 static void task08_080C9820(u8);
 static void sub_810B3DC(u8);

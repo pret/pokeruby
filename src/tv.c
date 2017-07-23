@@ -63,14 +63,7 @@ extern u8 gUnknown_02038694;
 
 extern struct TVSaleItem gUnknown_02038724[3];
 
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u8 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern u8 gUnknown_020387E8;
-
-extern struct UnkTvStruct gUnknown_03005D38;
+struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 *gTVBravoTrainerTextGroup[];
 extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
@@ -87,15 +80,13 @@ extern u8 *gTVFishingGuruAdviceTextGroup[];
 extern u8 *gTVWorldOfMastersTextGroup[];
 extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
-extern u16 gUnknown_020387E0;
-extern u16 gUnknown_020387E2;
+
 
 extern const u8 *gTVNewsTextGroup1[];
 extern const u8 *gTVNewsTextGroup2[];
 extern const u8 *gTVNewsTextGroup3[];
 
 extern u16 gScriptLastTalked;
-
 
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
@@ -106,10 +97,15 @@ extern u16 gLastUsedItem;
 
 extern u8 ewram[];
 #define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
-extern u8 gUnknown_020387E4;
 
-extern u8 gUnknown_03000720;
-extern s8 gUnknown_03000722;
+static EWRAM_DATA u16 gUnknown_020387E0 = 0;
+static EWRAM_DATA u16 gUnknown_020387E2 = 0;
+static EWRAM_DATA u8 gUnknown_020387E4 = 0;
+static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to a 4-byte boundary?
+
+static u8 gUnknown_03000720;
+static u8 gUnknown_03000721;
+static s8 gUnknown_03000722;
 
 void ClearTVShowData(void)
 {
@@ -320,14 +316,14 @@ void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
 
-    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.Poke1Species;
-    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.OpponentSpecies;
-    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.LastUsedMove;
+    gSaveBlock1.gabbyAndTyData.mon1 = gBattleResults.poke1Species;
+    gSaveBlock1.gabbyAndTyData.mon2 = gBattleResults.opponentSpecies;
+    gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
         gSaveBlock1.gabbyAndTyData.battleNum ++;
     gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
 
-    if (gBattleResults.PlayerFaintCounter)
+    if (gBattleResults.playerFaintCounter)
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
     else
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
@@ -493,14 +489,14 @@ void sub_80BDEC8(void)
     sub_80BEB20();
     sub_80BE778();
 
-    if (gBattleResults.CaughtPoke == 0)
+    if (gBattleResults.caughtPoke == 0)
     {
         sub_80BE074();
     }
     else
     {
         sub_80BE028();
-        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.CaughtPoke], gBattleResults.CaughtNick) != 0)
+        if (sub_80BF77C(0xffff) == 0 && StringCompareWithoutExtCtrlCodes(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick) != 0)
         {
             gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1)
@@ -531,8 +527,8 @@ void sub_80BDEC8(void)
                     pokemonToday->var12 = total;
                     pokemonToday->ball = item;
                     StringCopy(pokemonToday->playerName, gSaveBlock2.playerName);
-                    StringCopy(pokemonToday->nickname, gBattleResults.CaughtNick);
-                    pokemonToday->species = gBattleResults.CaughtPoke;
+                    StringCopy(pokemonToday->nickname, gBattleResults.caughtNick);
+                    pokemonToday->species = gBattleResults.caughtPoke;
                     sub_80BE138((TVShow *)pokemonToday);
                     pokemonToday->language = GAME_LANGUAGE;
                     pokemonToday->language2 = sub_80BDEAC(pokemonToday->nickname);
@@ -554,8 +550,8 @@ void sub_80BE028(void)
         worldOfMasters->var00 = TVSHOW_WORLD_OF_MASTERS;
     }
     worldOfMasters->var02++;
-    worldOfMasters->var04 = gBattleResults.CaughtPoke;
-    worldOfMasters->var08 = gBattleResults.Poke1Species;
+    worldOfMasters->var04 = gBattleResults.caughtPoke;
+    worldOfMasters->var08 = gBattleResults.poke1Species;
     worldOfMasters->var0a = gMapHeader.regionMapSectionId;
 }
 
@@ -581,8 +577,8 @@ void sub_80BE074(void)
                 zero = 0;
                 pokemonTodayFailed->var00 = TVSHOW_POKEMON_TODAY_FAILED;
                 pokemonTodayFailed->var01 = zero;
-                pokemonTodayFailed->species = gBattleResults.Poke1Species;
-                pokemonTodayFailed->species2 = gBattleResults.LastOpponentSpecies;
+                pokemonTodayFailed->species = gBattleResults.poke1Species;
+                pokemonTodayFailed->species2 = gBattleResults.lastOpponentSpecies;
                 pokemonTodayFailed->var10 = total;
                 pokemonTodayFailed->var11 = gBattleOutcome;
                 pokemonTodayFailed->var12 = gMapHeader.regionMapSectionId;
@@ -1921,9 +1917,6 @@ void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
     sub_80C0408();
 }
 
-extern u8 gUnknown_03000720;
-extern u8 gUnknown_03000721;
-extern s8 gUnknown_03000722;
 s8 sub_80C019C(TVShow tvShows[]);
 bool8 sub_80BFF68(TVShow * tv1[25], TVShow * tv2[25], u8 idx);
 u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx);
