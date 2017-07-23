@@ -1,5 +1,4 @@
 #include "global.h"
-#include "rom3.h"
 #include "battle.h"
 #include "battle_811DA74.h"
 #include "battle_ai.h"
@@ -10,6 +9,7 @@
 #include "items.h"
 #include "link.h"
 #include "pokemon.h"
+#include "rom3.h"
 #include "rom_8094928.h"
 #include "species.h"
 #include "task.h"
@@ -703,7 +703,7 @@ void unref_sub_800C828(u8 a, u8 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, b * 3 + 2);
 }
 
-void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
+void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, struct DisableStruct *g)
 {
     gBattleBuffersTransferData[0] = 15;
     gBattleBuffersTransferData[1] = b;
@@ -729,7 +729,7 @@ void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
     }
     gBattleBuffersTransferData[14] = 0;
     gBattleBuffersTransferData[15] = 0;
-    memcpy(&gBattleBuffersTransferData[16], g, 0x1C);
+    memcpy(&gBattleBuffersTransferData[16], g, sizeof(*g));
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 0x2C);
 }
 
@@ -906,7 +906,7 @@ _0800CA64: .4byte gBattleTextBuff1\n\
 #endif
 
 __attribute__((naked))
-void EmitPrintStringPlayerOnly()
+void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1082,21 +1082,25 @@ void dp01_build_cmdbuf_x17_17_17_17(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitHealthBarUpdate(u8 a, s16 b)
+// FIXME: I think this function is supposed to take s16 as its second argument,
+// but battle_4.c expects u16
+void EmitHealthBarUpdate(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 24;
     gBattleBuffersTransferData[1] = 0;
-    gBattleBuffersTransferData[2] = b;
-    gBattleBuffersTransferData[3] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[2] = (s16)b;
+    gBattleBuffersTransferData[3] = ((s16)b & 0xFF00) >> 8;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitExpBarUpdate(u8 a, u8 b, s16 c)
+// FIXME: I think this function is supposed to take s16 as its third argument,
+// but battle_4.c expects u16
+void EmitExpBarUpdate(u8 a, u8 b, u16 c)
 {
     gBattleBuffersTransferData[0] = 25;
     gBattleBuffersTransferData[1] = b;
-    gBattleBuffersTransferData[2] = c;
-    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    gBattleBuffersTransferData[2] = (s16)c;
+    gBattleBuffersTransferData[3] = ((s16)c & 0xFF00) >> 8;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
