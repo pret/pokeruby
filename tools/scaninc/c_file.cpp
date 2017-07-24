@@ -78,6 +78,7 @@ void CFile::FindIncbins()
         }
         else
         {
+            SkipWhitespace();
             CheckInclude();
             CheckIncbin();
 
