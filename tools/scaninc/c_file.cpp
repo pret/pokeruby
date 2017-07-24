@@ -111,16 +111,16 @@ bool CFile::ConsumeHorizontalWhitespace()
 
 bool CFile::ConsumeNewline()
 {
-    if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
+    if (m_buffer[m_pos] == '\n')
     {
-        m_pos += 2;
+        m_pos++;
         m_lineNum++;
         return true;
     }
 
-    if (m_buffer[m_pos] == '\n')
+    if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
     {
-        m_pos++;
+        m_pos += 2;
         m_lineNum++;
         return true;
     }
