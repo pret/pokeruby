@@ -159,7 +159,7 @@ u8 CalculatePlayerPartyCount(void);
 u16 Sqrt(u32 num);
 u8 sub_809070C(u16 nationalNum, u32 TiD, u32 PiD); //task prepare poke dex display
 void sub_814A880(u8 a1, u8 a2);
-u8 CheckMoveLimitations(u8 bank, u8 unusable_moves, u8 flags); //choose move limitations
+u8 CheckMoveLimitations(u8 bank, u8 unusable_moves, u8 flags);
 void sub_801529C(u8 bank);
 bool8 IsLinkDoubleBattle(void);
 void sub_8094B6C(u8 bank, u8 partyID, u8 r2);
@@ -236,17 +236,6 @@ extern u8 gUnknown_081D95DB[]; //bs payday money give
 #define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
 
 #define TargetProtectAffected ((gProtectStructs[gBankTarget].protected && gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
-
-#define ABILITYEFFECT_CONTACT             0x4
-#define ABILITYEFFECT_IMMUNITY            0x5
-#define ABILITYEFFECT_SYNCHRONIZE         0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
-#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
-#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
-#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
-#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
-#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
-#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
 
 //array entries for battle communication
 #define MOVE_EFFECT_BYTE    0x3
@@ -10144,7 +10133,7 @@ static void atk4D_switch_data_update(void)
     gBattleTextBuff1[1] = 7;
     gBattleTextBuff1[2] = gActiveBank;
     gBattleTextBuff1[3] = gBattlePartyID[gActiveBank];
-    gBattleTextBuff1[4] = 0xFF;
+    gBattleTextBuff1[4] = EOS;
 
     gBattlescriptCurrInstr += 2;
 }

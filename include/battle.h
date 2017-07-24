@@ -105,6 +105,18 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
+#define ABILITYEFFECT_ENDTURN             0x1
+#define ABILITYEFFECT_CONTACT             0x4
+#define ABILITYEFFECT_IMMUNITY            0x5
+#define ABILITYEFFECT_SYNCHRONIZE         0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
+#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
+#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
+#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
+#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 #define MAX_BANKS_BATTLE 4
@@ -172,7 +184,9 @@ struct BattleStruct /* 0x2000000 */
     u8 filler0[0x15DDE];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
-    /*0x15DE0*/ u8 filler15DE0[0x222];
+    /*0x15DE0*/ u8 filler15DE0[0x220];
+    /*0x16000*/ u8 turnEffectsTracker;
+    /*0x16001*/ u8 turnEffectsBank;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
     /*0x16004*/ u8 wrappedMove1[4];
@@ -403,7 +417,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1611D*/ u8 unk1611D;
     /*0x1611E*/ u8 unk1611E;
     /*0x1611F*/ u8 unk1611F;
-	
+
     //u8 filler2[0x72E];
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
@@ -593,7 +607,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BANKS_BATTLE];
     u8 wishUserID[MAX_BANKS_BATTLE];
     u8 weatherDuration;
-    u8 knockedOffPokes[2];
+    u16 knockedOffPokes;
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;
@@ -745,8 +759,8 @@ u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects();
 u8 sub_80170DC();
 u8 sub_80173A4();
-u8 AbilityBattleEffects(u8, u8, u8, u8, u16);
-u8 ItemBattleEffects();
+u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
+u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
