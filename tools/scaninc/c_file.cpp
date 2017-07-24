@@ -237,6 +237,18 @@ void CFile::CheckInclude()
 
 void CFile::CheckIncbin()
 {
+    // Optimization: assume most lines are not incbins
+    if (!(m_buffer[m_pos+0] == 'I'
+       && m_buffer[m_pos+1] == 'N'
+       && m_buffer[m_pos+2] == 'C'
+       && m_buffer[m_pos+3] == 'B'
+       && m_buffer[m_pos+4] == 'I'
+       && m_buffer[m_pos+5] == 'N'
+       && m_buffer[m_pos+6] == '_'))
+    {
+            return;
+    }
+
     std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
     int incbinType = -1;
 
