@@ -44,9 +44,9 @@ private:
     std::set<std::string> m_incbins;
     std::set<std::string> m_includes;
 
-    void RemoveComments();
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
+    bool ConsumeComment();
     void SkipWhitespace();
     bool CheckIdentifier(const std::string& ident);
     void CheckInclude();

@@ -45,78 +45,11 @@ CFile::CFile(std::string path)
 
     m_pos = 0;
     m_lineNum = 1;
-
-    RemoveComments();
 }
 
 CFile::~CFile()
 {
     delete[] m_buffer;
-}
-
-// Removes comments to simplify further processing.
-// It stops upon encountering a null character,
-// which may or may not be the end of file marker.
-// If it's not, the error will be caught later.
-void CFile::RemoveComments()
-{
-    long pos = 0;
-    char stringChar = 0;
-
-    for (;;)
-    {
-        if (m_buffer[pos] == 0)
-            return;
-
-        if (stringChar != 0)
-        {
-            if (m_buffer[pos] == '\\' && m_buffer[pos + 1] == stringChar)
-            {
-                pos += 2;
-            }
-            else
-            {
-                if (m_buffer[pos] == stringChar)
-                    stringChar = 0;
-                pos++;
-            }
-        }
-        else if (m_buffer[pos] == '/' && m_buffer[pos + 1] == '/')
-        {
-            while (m_buffer[pos] != '\n' && m_buffer[pos] != 0)
-                m_buffer[pos++] = ' ';
-        }
-        else if (m_buffer[pos] == '/' && m_buffer[pos + 1] == '*')
-        {
-            m_buffer[pos++] = ' ';
-            m_buffer[pos++] = ' ';
-
-            for (;;)
-            {
-                if (m_buffer[pos] == 0)
-                    return;
-
-                if (m_buffer[pos] == '*' && m_buffer[pos + 1] == '/')
-                {
-                    m_buffer[pos++] = ' ';
-                    m_buffer[pos++] = ' ';
-                    break;
-                }
-                else
-                {
-                    if (m_buffer[pos] != '\n')
-                        m_buffer[pos] = ' ';
-                    pos++;
-                }
-            }
-        }
-        else
-        {
-            if (m_buffer[pos] == '"' || m_buffer[pos] == '\'')
-                stringChar = m_buffer[pos];
-            pos++;
-        }
-    }
 }
 
 void CFile::FindIncbins()
@@ -195,9 +128,37 @@ bool CFile::ConsumeNewline()
     return false;
 }
 
+bool CFile::ConsumeComment()
+{
+    if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '*')
+    {
+        m_pos += 2;
+        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
+        {
+            if (!ConsumeNewline())
+            {
+                m_pos++;
+            }
+        }
+        m_pos += 2;
+        return true;
+    }
+    else if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '/')
+    {
+        m_pos += 2;
+        while (!ConsumeNewline())
+        {
+            m_pos++;
+        }
+        return true;
+    }
+
+    return false;
+}
+
 void CFile::SkipWhitespace()
 {
-    while (ConsumeHorizontalWhitespace() || ConsumeNewline())
+    while (ConsumeHorizontalWhitespace() || ConsumeNewline() || ConsumeComment())
         ;
 }
 
