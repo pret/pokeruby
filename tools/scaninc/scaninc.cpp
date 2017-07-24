@@ -20,7 +20,8 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <stack>
+#include <list>
+#include <queue>
 #include <set>
 #include <string>
 #include "scaninc.h"
@@ -42,10 +43,10 @@ const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
 
 int main(int argc, char **argv)
 {
-    std::stack<std::string> filesToProcess;
+    std::queue<std::string> filesToProcess;
     std::set<std::string> dependencies;
 
-    std::string includeDir("");
+    std::list<std::string> includeDirs;
 
     argc--;
     argv++;
@@ -55,22 +56,23 @@ int main(int argc, char **argv)
         std::string arg(argv[0]);
         if (arg.substr(0, 2) == "-I")
         {
-            includeDir = arg.substr(2);
+            std::string includeDir = arg.substr(2);
             if (includeDir.empty())
-	    {
+            {
                 argc--;
                 argv++;
-	        includeDir = std::string(argv[0]);
+                includeDir = std::string(argv[0]);
             }
             if (includeDir.back() != '/')
             {
                 includeDir += '/';
             }
-	}
+            includeDirs.push_back(includeDir);
+        }
         else
         {
             FATAL_ERROR(USAGE);
-	}
+        }
         argc--;
         argv++;
     }
@@ -94,6 +96,7 @@ int main(int argc, char **argv)
     {
         srcDir = initialPath.substr(0, slash + 1);
     }
+    includeDirs.push_back(srcDir);
 
     if (extension == "c" || extension == "h")
     {
@@ -101,7 +104,7 @@ int main(int argc, char **argv)
 
         while (!filesToProcess.empty())
         {
-            CFile file(filesToProcess.top());
+            CFile file(filesToProcess.front());
             filesToProcess.pop();
 
             file.FindIncbins();
@@ -111,18 +114,17 @@ int main(int argc, char **argv)
             }
             for (auto include : file.GetIncludes())
             {
-                std::string path(srcDir + include);
-                if (!CanOpenFile(path))
+                for (auto includeDir : includeDirs)
                 {
-                    path = includeDir + include;
-                }
-
-                if (CanOpenFile(path))
-                {
-                    bool inserted = dependencies.insert(path).second;
-                    if (inserted)
+                    std::string path(includeDir + include);
+                    if (CanOpenFile(path))
                     {
-                        filesToProcess.push(path);
+                        bool inserted = dependencies.insert(path).second;
+                        if (inserted)
+                        {
+                            filesToProcess.push(path);
+                        }
+                        break;
                     }
                 }
             }
@@ -134,7 +136,7 @@ int main(int argc, char **argv)
 
         while (!filesToProcess.empty())
         {
-            AsmFile file(filesToProcess.top());
+            AsmFile file(filesToProcess.front());
 
             filesToProcess.pop();
 
