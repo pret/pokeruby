@@ -38,15 +38,48 @@ bool CanOpenFile(std::string path)
     return true;
 }
 
+const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
+
 int main(int argc, char **argv)
 {
-    if (argc < 2)
-        FATAL_ERROR("Usage: scaninc FILE_PATH\n");
-
     std::stack<std::string> filesToProcess;
     std::set<std::string> dependencies;
 
-    std::string initialPath(argv[1]);
+    std::string includeDir("");
+
+    argc--;
+    argv++;
+
+    while (argc > 1)
+    {
+        std::string arg(argv[0]);
+        if (arg.substr(0, 2) == "-I")
+        {
+            includeDir = arg.substr(2);
+            if (includeDir.empty())
+	    {
+                argc--;
+                argv++;
+	        includeDir = std::string(argv[0]);
+            }
+            if (includeDir.back() != '/')
+            {
+                includeDir += '/';
+            }
+	}
+        else
+        {
+            FATAL_ERROR(USAGE);
+	}
+        argc--;
+        argv++;
+    }
+
+    if (argc != 1) {
+        FATAL_ERROR(USAGE);
+    }
+
+    std::string initialPath(argv[0]);
 
     std::size_t pos = initialPath.find_last_of('.');
 
@@ -55,8 +88,12 @@ int main(int argc, char **argv)
 
     std::string extension = initialPath.substr(pos + 1);
 
-    std::string srcDir("src/");
-    std::string includeDir("include/");
+    std::string srcDir("");
+    std::size_t slash = initialPath.rfind('/');
+    if (slash != std::string::npos)
+    {
+        srcDir = initialPath.substr(0, slash + 1);
+    }
 
     if (extension == "c" || extension == "h")
     {
