@@ -1199,13 +1199,13 @@ void sub_809D62C(struct Sprite *sprite)
 
 // TODO: try to find a way to avoid using asm statement
 u8 UpdateMonIconFrame(struct Sprite *sprite)
-{    
+{
     u8 result = 0;
-    
+
     if (sprite->animDelayCounter == 0)
     {
         s16 frame = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
-        
+
         switch (frame)
         {
         case -1:
