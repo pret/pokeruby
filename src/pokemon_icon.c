@@ -1024,17 +1024,17 @@ void sub_809D7E8(struct Sprite *);
 u8 unref_sub_809D26C(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     u8 spriteId;
-    struct MonIconSpriteTemplate iconTemplate;
-    struct MonIconSpriteTemplate *iconTemplatePtr = &iconTemplate; // needed to match
+    struct MonIconSpriteTemplate iconTemplate =
+    {
+        .oam = &sMonIconOamData,
+        .image = gMonIconTable[species],
+        .anims = sMonIconAnims,
+        .affineAnims = sMonIconAffineAnims,
+        .callback = callback,
+        .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
+    };
 
-    iconTemplatePtr->oam = &sMonIconOamData;
-    iconTemplatePtr->image = gMonIconTable[species];
-    iconTemplatePtr->anims = sMonIconAnims;
-    iconTemplatePtr->affineAnims = sMonIconAffineAnims;
-    iconTemplatePtr->callback = callback;
-    iconTemplatePtr->paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species];
-
-    spriteId = CreateMonIconSprite(iconTemplatePtr, x, y, subpriority);
+    spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
     UpdateMonIconFrame(&gSprites[spriteId]);
 
@@ -1067,17 +1067,17 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 u8 sub_809D3A4(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     u8 spriteId;
-    struct MonIconSpriteTemplate iconTemplate;
-    struct MonIconSpriteTemplate *iconTemplatePtr = &iconTemplate; // needed to match
+    struct MonIconSpriteTemplate iconTemplate =
+    {
+        .oam = &sMonIconOamData,
+        .image = gMonIconTable[species],
+        .anims = sMonIconAnims,
+        .affineAnims = sMonIconAffineAnims,
+        .callback = callback,
+        .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
+    };
 
-    iconTemplatePtr->oam = &sMonIconOamData;
-    iconTemplatePtr->image = gMonIconTable[species];
-    iconTemplatePtr->anims = sMonIconAnims;
-    iconTemplatePtr->affineAnims = sMonIconAffineAnims;
-    iconTemplatePtr->callback = callback;
-    iconTemplatePtr->paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species];
-
-    spriteId = CreateMonIconSprite(iconTemplatePtr, x, y, subpriority);
+    spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
     UpdateMonIconFrame(&gSprites[spriteId]);
 
@@ -1197,43 +1197,40 @@ void sub_809D62C(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-// TODO: try to find a way to avoid using goto and asm statement
+// TODO: try to find a way to avoid using asm statement
 u8 UpdateMonIconFrame(struct Sprite *sprite)
-{
+{    
     u8 result = 0;
-
+    
     if (sprite->animDelayCounter == 0)
     {
         s16 frame = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
-
-        if (frame != -2)
+        
+        switch (frame)
         {
-            if (frame != -1)
-                goto copy;
-            goto end;
+        case -1:
+            break;
+        case -2:
+            sprite->animCmdIndex = 0;
+            break;
+        default:
+            RequestSpriteCopy(
+                (u8 *)sprite->images + sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame,
+                (u8 *)OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
+                sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
+            {
+                register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;
+                sprite->animDelayCounter = duration;
+            }
+            sprite->animCmdIndex++;
+            result = sprite->animCmdIndex;
+            break;
         }
-
-        sprite->animCmdIndex = 0;
-        goto end;
-
-    copy:
-        RequestSpriteCopy(
-            (u8 *)sprite->images + sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame,
-            (u8 *)OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
-            sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
-        {
-            register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;
-            sprite->animDelayCounter = duration;
-        }
-        sprite->animCmdIndex++;
-        result = sprite->animCmdIndex;
     }
     else
     {
         sprite->animDelayCounter--;
     }
-
-end:
     return result;
 }
 
