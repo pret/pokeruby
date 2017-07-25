@@ -3311,7 +3311,7 @@ gUnknown_081D9041:: @ 81D9041
 	waitmessage 64
 	end2
 
-gUnknown_081D904B:: @ 81D904B
+BattleScript_LeechSeedTurnDrain:: @ 81D904B
 	playanimation USER, 14, 0x20160a4
 	orword 0x2024c6c, 0x100100
 	graphicalhpupdate USER
@@ -3405,12 +3405,12 @@ BattleScript_MoveSelectionDisabledMove:: @ 81D9144
 	printstring2 BATTLE_TEXT_MoveIsDisabled
 	atk44
 
-gUnknown_081D9148:: @ 81D9148
+BattleScript_DisabledNoMore:: @ 81D9148
 	printstring BATTLE_TEXT_DisabledNoMore
 	waitmessage 64
 	end2
 
-gUnknown_081D914F:: @ 81D914F
+BattleScript_EncoredNoMore:: @ 81D914F
 	printstring BATTLE_TEXT_EncoreEnded
 	waitmessage 64
 	end2
@@ -3644,7 +3644,7 @@ BattleScript_1D93C1: @ 81D93C1
 	waitmessage 64
 	end2
 
-gUnknown_081D93D1:: @ 81D93D1
+BattleScript_IngrainTurnHeal:: @ 81D93D1
 	playanimation USER, 21, 0x0
 	printstring BATTLE_TEXT_AbsorbNutrients
 	waitmessage 64
@@ -3770,7 +3770,7 @@ gUnknown_081D950F:: @ 81D950F
 	atk98 1
 	end2
 
-gUnknown_081D9518:: @ 81D9518
+BattleScript_PoisonTurnDmg:: @ 81D9518
 	printstring BATTLE_TEXT_PoisonHurt
 	waitmessage 64
 
@@ -3787,7 +3787,7 @@ BattleScript_1D9520: @ 81D9520
 BattleScript_1D9539: @ 81D9539
 	end2
 
-gUnknown_081D953A:: @ 81D953A
+BattleScript_BurnTurnDmg:: @ 81D953A
 	printstring BATTLE_TEXT_BurnHurt
 	waitmessage 64
 	jump BattleScript_1D951E
@@ -3865,13 +3865,13 @@ gUnknown_081D95DB:: @ 81D95DB
 	waitmessage 64
 	return
 
-gUnknown_081D95E2:: @ 81D95E2
+BattleScript_WrapTurnDmg:: @ 81D95E2
 	playanimation USER, 6, 0x20160a4
 	printstring BATTLE_TEXT_HurtBy
 	waitmessage 64
 	jump BattleScript_1D9520
 
-gUnknown_081D95F4:: @ 81D95F4
+BattleScript_WrapEnds:: @ 81D95F4
 	printstring BATTLE_TEXT_FreedFrom
 	waitmessage 64
 	end2
@@ -3887,13 +3887,13 @@ gUnknown_081D9608:: @ 81D9608
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D9613:: @ 81D9613
+BattleScript_NightmareTurnDmg:: @ 81D9613
 	printstring BATTLE_TEXT_NightmareLock
 	waitmessage 64
 	atk65 1, Start
 	jump BattleScript_1D9520
 
-gUnknown_081D9624:: @ 81D9624
+BattleScript_CurseTurnDmg:: @ 81D9624
 	printstring BATTLE_TEXT_CurseAfflict
 	waitmessage 64
 	atk65 1, 0x10000000

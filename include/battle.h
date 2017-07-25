@@ -35,7 +35,10 @@
 #define STATUS_PARALYSIS        0x40
 #define STATUS_TOXIC_POISON     0x80
 
+#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
+
 #define STATUS2_CONFUSION           0x00000007
+#define STATUS2_FLINCHED            0x00000008
 #define STATUS2_UPROAR              0x00000070
 #define STATUS2_BIDE                0x00000300  //two bits 0x100 0x200
 #define STATUS2_LOCK_CONFUSE        0x00000C00
@@ -87,7 +90,7 @@
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_x80000                0x00080000
+#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
 #define HITMARKER_x100000               0x00100000
 #define HITMARKER_x400000               0x00400000
 #define HITMARKER_x800000               0x00800000
@@ -116,6 +119,17 @@
 #define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD      0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+
+#define MOVESTATUS_MISSED             (1 << 0)
+#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
+#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
+#define MOVESTATUS_NOTAFFECTED        (1 << 3)
+#define MOVESTATUS_ONEHITKO           (1 << 4)
+#define MOVESTATUS_FAILED             (1 << 5)
+#define MOVESTATUS_ENDURED            (1 << 6)
+#define MOVESTATUS_HUNGON             (1 << 7)
+
+#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
@@ -262,7 +276,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x16056*/ u8 moneyMultiplier;
     /*0x16057*/ u8 unk16057;
     /*0x16058*/ u8 unk16058;
-    /*0x16059*/ u8 unk16059;
+    /*0x16059*/ u8 sub80173A4_Tracker;
     /*0x1605A*/ u8 unk1605A;
     /*0x1605B*/ u8 unk1605B;
     /*0x1605C*/ u16 exp;
@@ -283,10 +297,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1608A*/ u8 unk1608A;
     /*0x1608B*/ u8 unk1608B;
     /*0x1608C*/ u8 ChosenMoveID[4];
-    /*0x16090*/ u8 unk16090;
-    /*0x16091*/ u8 unk16091;
-    /*0x16092*/ u8 unk16092;
-    /*0x16093*/ u8 unk16093;
+    /*0x16090*/ s32 bideDmg;
     /*0x16094*/ u8 unk16094;
     /*0x16095*/ u8 unk16095;
     /*0x16096*/ u8 unk16096;
@@ -360,7 +371,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160E4*/ u8 unk160E4;
     /*0x160E5*/ u8 unk160E5;
     /*0x160E6*/ u8 unk160E6;
-    /*0x160E7*/ u8 unk160E7;
+    /*0x160E7*/ u8 atkCancellerTracker;
     /*0x160E8*/ u8 unk160E8;
     /*0x160E9*/ u8 unk160E9;
     /*0x160EA*/ u8 unk160EA;
@@ -401,8 +412,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x1610D*/ u8 unk1610D;
     /*0x1610E*/ u8 unk1610E;
     /*0x1610F*/ u8 unk1610F;
-    /*0x16110*/ u8 unk16110;
-    /*0x16111*/ u8 unk16111;
+    /*0x16110*/ u8 sub80170DC_Tracker;
+    /*0x16111*/ u8 sub80170DC_Bank;
     /*0x16112*/ u8 unk16112;
     /*0x16113*/ u8 unk16113;
     /*0x16114*/ u8 unk16114;

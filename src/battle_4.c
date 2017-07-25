@@ -95,7 +95,7 @@ extern u16 gUnknown_02024C4C[4]; //last used moves by banks, another one
 extern u8 gCurrentMoveTurn;
 
 //extern functions
-bool8 CantUseMove(void);
+u8 AtkCanceller_UnableToUseMove(void);
 void PressurePPLose(u8 bank_atk, u8 bank_def, u16 move);
 void CancelMultiTurnMoves(u8 bank);
 void b_movescr_stack_push(u8* BS_ptr);
@@ -222,18 +222,6 @@ extern u8 gUnknown_081D95DB[]; //bs payday money give
 #define BS2ScriptRead32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define BS2ScriptRead16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
 #define BS2ScriptReadPtr(ptr) ((void *)BS2ScriptRead32(ptr))
-
-
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
-
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
 
 #define TargetProtectAffected ((gProtectStructs[gBankTarget].protected && gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -1050,11 +1038,11 @@ static void atk00_attackcanceler(void)
     }
     if (gBattleMons[gBankAttacker].hp == 0 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
     {
-        gHitMarker |= HITMARKER_x80000;
+        gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
         gBattlescriptCurrInstr = BattleScript_EndTurn;
         return;
     }
-    if (CantUseMove())
+    if (AtkCanceller_UnableToUseMove())
         return;
     if (AbilityBattleEffects(2, gBankTarget, 0, 0, 0))
         return;
