@@ -74,6 +74,8 @@
 #define STATUS3_MUDSPORT                0x10000
 #define STATUS3_WATERSPORT              0x20000
 #define STATUS3_UNDERWATER              0x40000
+#define STATUS3_INTIMIDATE_POKES        0x80000
+#define STATUS3_TRACE                   0x100000
 
 #define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
 
@@ -108,17 +110,28 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
+#define ABILITYEFFECT_ON_SWITCHIN         0x0
 #define ABILITYEFFECT_ENDTURN             0x1
+#define ABILITYEFFECT_MOVES_BLOCK         0x2
+#define ABILITYEFFECT_ABSORBING           0x3
 #define ABILITYEFFECT_CONTACT             0x4
 #define ABILITYEFFECT_IMMUNITY            0x5
+#define ABILITYEFFECT_FORECAST            0x6
 #define ABILITYEFFECT_SYNCHRONIZE         0x7
 #define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
+#define ABILITYEFFECT_INTIMIDATE1         0x9
+#define ABILITYEFFECT_INTIMIDATE2         0xA
+#define ABILITYEFFECT_TRACE               0xB
 #define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
 #define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
+#define ABILITYEFFECT_FIELD_SPORT         0xE
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
 #define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
 #define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD      0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+
+#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 
 #define MOVESTATUS_MISSED             (1 << 0)
 #define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
@@ -361,7 +374,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160DA*/ u8 unk160DA;
     /*0x160DB*/ u8 unk160DB;
     /*0x160DC*/ u8 unk160DC;
-    /*0x160DD*/ u8 unk160DD;
+    /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
     /*0x160DF*/ u8 unk160DF;
     /*0x160E0*/ u8 unk160E0;
@@ -644,6 +657,7 @@ extern u8 ewram[];
 #define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
 #define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
 #define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
+#define ewram17000              ((u32 *)                     (ewram + 0x17100))
 
 struct funcStack
 {
@@ -767,7 +781,7 @@ void sub_80157C4(u8 index);
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
-u8 TurnBasedEffects();
+u8 TurnBasedEffects(void);
 u8 sub_80170DC();
 u8 sub_80173A4();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);

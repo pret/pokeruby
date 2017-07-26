@@ -152,7 +152,7 @@ void sub_803E1B0(struct Pokemon*, u16 item, u8 partyID, u8 r3, u8 sp);
 u8 CanRunFromBattle(void);
 u8 sub_801B5C0(u16 move, u8 targetbyte); //get target of move
 void sub_80153D0(u8 atk); //pressure perish song pp decrement
-u8 castform_switch(u8 bank);
+u8 CastformDataTypeChange(u8 bank);
 void b_push_move_exec(u8* bs_ptr);
 u8 sav1_map_get_light_level(void);
 u8 CalculatePlayerPartyCount(void);
@@ -276,7 +276,6 @@ extern u8 gUnknown_081D95DB[]; //bs payday money give
 #define RecordAbilitySetField6(ability, fieldValue) \
 (gLastUsedAbility = ability, gBattleCommunication[6] = fieldValue, RecordAbilityBattle(gBankTarget, ability))
 
-#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 #define TARGET_TURN_DAMAGED (((gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_physical.moveturnLostHP_special)))
 
 #define HP_ON_SWITCHOUT (((u16*)(0x020160bc)))
@@ -17655,7 +17654,7 @@ static void atkE7_castform_data_change(void)
 {
     u8 form;
     gBattlescriptCurrInstr++;
-    form = castform_switch(BATTLE_STRUCT->scriptingActive);
+    form = CastformDataTypeChange(BATTLE_STRUCT->scriptingActive);
     if (form)
     {
         b_push_move_exec(gUnknown_081D977D);
