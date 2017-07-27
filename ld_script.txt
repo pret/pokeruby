@@ -122,7 +122,7 @@ SECTIONS {
         src/rom_8077ABC.o(.text);
         src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
-        asm/battle_anim_807B69C.o(.text);
+        src/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
         src/field_weather.o(.text);
         asm/field_weather.o(.text);
@@ -372,7 +372,7 @@ SECTIONS {
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
         src/task.o(.rodata);
-        data/battle_anim_807B69C.o(.rodata);
+        src/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         src/field_screen_effect.o(.rodata);
