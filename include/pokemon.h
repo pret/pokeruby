@@ -412,6 +412,7 @@ struct BattleMove
 #define FLAG_PROTECT_AFFECTED    0x2
 #define FLAG_MAGICCOAT_AFFECTED  0x4
 #define FLAG_SNATCH_AFFECTED     0x8
+#define FLAG_KINGSROCK_AFFECTED  0x20
 
 struct PokemonStorage
 {

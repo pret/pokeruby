@@ -34,7 +34,9 @@
 #define STATUS_FREEZE           0x20
 #define STATUS_PARALYSIS        0x40
 #define STATUS_TOXIC_POISON     0x80
+#define STATUS_TOXIC_COUNTER    0xF00
 
+#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
 #define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
 
 #define STATUS2_CONFUSION           0x00000007
@@ -597,9 +599,9 @@ struct SpecialStatus
     u8 flag40 : 1;
     u8 focusBanded : 1;
     u8 field1[3];
-    u32 moveturnLostHP;
-    u32 moveturnLostHP_physical;
-    u32 moveturnLostHP_special;
+    s32 moveturnLostHP;
+    s32 moveturnLostHP_physical;
+    s32 moveturnLostHP_special;
     u8 moveturnPhysicalBank;
     u8 moveturnSpecialBank;
     u8 field12;

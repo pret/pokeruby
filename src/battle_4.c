@@ -101,7 +101,7 @@ void CancelMultiTurnMoves(u8 bank);
 void b_movescr_stack_push(u8* BS_ptr);
 void b_movescr_stack_push_cursor(void);
 void RecordAbilityBattle(u8 bank, u8 ability);
-void RecordItemBattle(u8 bank, u8 item);
+void RecordItemBattle(u8 bank, u8 holdEffect);
 int IsPokeDisobedient(void);
 static bool8 IsTwoTurnsMove(u16 move);
 static void DestinyBondFlagUpdate(void);
