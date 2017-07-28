@@ -529,8 +529,6 @@ static void atkF5_removeattackerstatus1(void);
 static void atkF6_802BF48(void);
 static void atkF7_802BF54(void);
 
-typedef void (*BattleCmdFunc)(void);
-
 const BattleCmdFunc gBattleScriptingCommandsTable[] =
 {
     atk00_attackcanceler,

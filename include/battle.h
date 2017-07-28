@@ -96,6 +96,7 @@
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
 #define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
 #define HITMARKER_x100000               0x00100000
+#define HITMARKER_x200000               0x00200000
 #define HITMARKER_x400000               0x00400000
 #define HITMARKER_x800000               0x00800000
 #define HITMARKER_GRUDGE                0x01000000
@@ -660,6 +661,8 @@ extern u8 ewram[];
 #define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
 #define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
 #define ewram17000              ((u32 *)                     (ewram + 0x17100))
+
+typedef void (*BattleCmdFunc)(void);
 
 struct funcStack
 {

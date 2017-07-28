@@ -12,6 +12,7 @@
 #include "text.h"
 #include "battle_move_effects.h"
 #include "string_util.h"
+#include "flags.h"
 
 extern u8* gBattlescriptCurrInstr;
 extern u8 gActiveBank;
@@ -61,7 +62,7 @@ bool8 sub_8018018(u8 bank, u8, u8);
 void sub_8015740(u8 bank);
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 bank_atk, u8 bank_def);
 u8 CountTrailingZeroBits(u32 a);
-u8 sub_801B5C0(u16 move, u8 targetbyte); //get target of move
+u8 sub_801B5C0(u16 move, u8 useMoveTarget); //get target of move
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
 u8 weather_get_current(void);
@@ -6354,9 +6355,19 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
     return effect;
 }
 
-extern const u16 gUnknown_081FC1D0[];
+struct CombinedMove
+{
+    u16 move1;
+    u16 move2;
+    u16 newMove;
+};
 
-/*
+const struct CombinedMove sCombinedMoves[2] =
+{
+    {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
+    {0xFFFF, 0xFFFF, 0xFFFF}
+};
+
 void unref_sub_801B40C(void)
 {
     int i = 0;
@@ -6372,23 +6383,220 @@ void unref_sub_801B40C(void)
                     bank++;
                 else
                 {
-                    if (gUnknown_081FC1D0[i * 4 + 0] == gChosenMovesByBanks[bank] && gUnknown_081FC1D0[i * 4 + 1] == gChosenMovesByBanks[bank + 2])
+                    if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank + 2])
                     {
                         gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
-                        gSideTimer[GetBankIdentity(bank) & 1].field4 = gUnknown_081FC1D0[i * 4 + 2];
+                        gSideTimer[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
                         gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
                     }
-                    if (gUnknown_081FC1D0[i * 4 + 0] == gChosenMovesByBanks[bank + 2] && gUnknown_081FC1D0[i * 4 + 1] == gChosenMovesByBanks[bank])
+                    if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank + 2] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank])
                     {
                         gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
-                        gSideTimer[GetBankIdentity(bank) & 1].field4 = gUnknown_081FC1D0[i * 4 + 2];
+                        gSideTimer[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
                         gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     bank++;
                 }
             } while (bank < 2);
             i++;
-        } while (gUnknown_081FC1D0[i * 4] != 0xFFFF);
+        } while (sCombinedMoves[i].move1 != 0xFFFF);
+    }
+}
+
+extern const BattleCmdFunc gBattleScriptingCommandsTable[];
+extern u32 gBattleExecBuffer;
+
+void sub_801B594(void)
+{
+    if (gBattleExecBuffer == 0)
+        gBattleScriptingCommandsTable[*gBattlescriptCurrInstr]();
+}
+
+u8 sub_801B5C0(u16 move, u8 useMoveTarget) //get move target
+{
+    u8 targetBank = 0;
+    u8 moveTarget;
+    u8 side;
+
+    if (useMoveTarget)
+        moveTarget = useMoveTarget - 1;
+    else
+        moveTarget = gBattleMoves[move].target;
+
+    switch (moveTarget)
+    {
+    case 0:
+        side = GetBankSide(gBankAttacker) ^ 1;
+        if (gSideTimer[side].followmeTimer && gBattleMons[gSideTimer[side].followmeTarget].hp)
+            targetBank = gSideTimer[side].followmeTarget;
+        else
+        {
+            side = GetBankSide(gBankAttacker);
+            do
+            {
+                targetBank = Random() % gNoOfAllBanks;
+            } while (targetBank == gBankAttacker || side == GetBankSide(targetBank) || gAbsentBankFlags & gBitTable[targetBank]);
+            if (gBattleMoves[move].type == TYPE_ELECTRIC
+                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
+                && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
+            {
+                targetBank ^= 2;
+                RecordAbilityBattle(targetBank, gBattleMons[targetBank].ability);
+                gSpecialStatuses[targetBank].lightningRodRedirected = 1;
+            }
+        }
+        break;
+    case 1:
+    case 8:
+    case 32:
+    case 64:
+        targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+        if (gAbsentBankFlags & gBitTable[targetBank])
+            targetBank ^= 2;
+        break;
+    case 4:
+        side = GetBankSide(gBankAttacker) ^ 1;
+        if (gSideTimer[side].followmeTimer && gBattleMons[gSideTimer[side].followmeTarget].hp)
+            targetBank = gSideTimer[side].followmeTarget;
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & 4)
+        {
+            if (GetBankSide(gBankAttacker) == 0)
+            {
+                if (Random() & 1)
+                    targetBank = GetBankByPlayerAI(1);
+                else
+                    targetBank = GetBankByPlayerAI(3);
+            }
+            else
+            {
+                if (Random() & 1)
+                    targetBank = GetBankByPlayerAI(0);
+                else
+                    targetBank = GetBankByPlayerAI(2);
+            }
+            if (gAbsentBankFlags & gBitTable[targetBank])
+                targetBank ^= 2;
+        }
+        else
+            targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+        break;
+    case 2:
+    case 16:
+        targetBank = gBankAttacker;
+        break;
+    }
+    ewram[gBankAttacker + 0x16010] = targetBank;
+    return targetBank;
+}
+
+extern u8 gUnknown_081D995F[]; //disobedient while asleep
+extern u8 gUnknown_081D9977[]; //disobedient no possible moves to use
+extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
+extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
+extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
+
+extern u8 gUnknown_02024BE5;
+extern u8 gCurrMovePos;
+extern u16 gRandomMove;
+extern s32 gBattleMoveDamage;
+extern u16 gDynamicBasePower;
+
+/*
+u8 IsPokeDisobedient(void)
+{
+    u8 obedienceLevel;
+    register s32 calc asm("r4");
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK
+        || GetBankSide(gBankAttacker) == 1
+        || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName)
+        || FlagGet(BADGE08_GET))
+        return 0;
+
+    obedienceLevel = 10;
+    if (FlagGet(BADGE02_GET))
+        obedienceLevel = 30;
+    if (FlagGet(BADGE04_GET))
+        obedienceLevel = 50;
+    if (FlagGet(BADGE06_GET))
+        obedienceLevel = 70;
+
+    if (gBattleMons[gBankAttacker].level <= obedienceLevel)
+        return 0;
+    calc = (Random() & 255);
+    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * calc / 256;
+    if (calc < obedienceLevel)
+        return 0;
+
+    // is not obedient
+    if (gCurrentMove == MOVE_RAGE)
+        gBattleMons[gBankAttacker].status2 &= ~(STATUS2_RAGE);
+    if (gBattleMons[gBankAttacker].status1 & STATUS_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
+    {
+        gBattlescriptCurrInstr = gUnknown_081D995F;
+        return 1;
+    }
+    calc = (Random() & 255);
+    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * calc / 256;
+    if (calc < obedienceLevel)
+    {
+        u8 moveLimitations = CheckMoveLimitations(gBankAttacker, gBitTable[gCurrMovePos], 0xFF);
+        if (moveLimitations == 0xF) // all moves cannot be used
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
+            gBattlescriptCurrInstr = gUnknown_081D9977;
+            return 1;
+        }
+        else // use a random move
+        {
+            do
+            {
+                gCurrMovePos = gUnknown_02024BE5 = Random() & 3;
+            } while (gBitTable[gCurrMovePos] & moveLimitations);
+            gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+            gBattleCommunication[3] = 0;
+            gDynamicBasePower = 0;
+            BATTLE_STRUCT->dynamicMoveType = 0;
+            gBattlescriptCurrInstr = gUnknown_081D996F;
+            gBankTarget = sub_801B5C0(gRandomMove, 0);
+            gHitMarker |= HITMARKER_x200000;
+            return 2;
+        }
+    }
+    else
+    {
+        obedienceLevel = gBattleMons[gBankAttacker].level - obedienceLevel;
+        calc = (Random() & 255);
+        if (calc < obedienceLevel && !(gBattleMons[gBankAttacker].status1 & STATUS_ANY) && gBattleMons[gBankAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBankAttacker].ability != ABILITY_INSOMNIA)
+        {
+            // try putting asleep
+            int i;
+            for (i = 0; i < gNoOfAllBanks; i++)
+            {
+                if (gBattleMons[i].status2 & STATUS2_UPROAR)
+                    break;
+            }
+            if (i == gNoOfAllBanks)
+            {
+                gBattlescriptCurrInstr = gUnknown_081D9989;
+                return 1;
+            }
+        }
+        calc -= obedienceLevel;
+        if (calc < obedienceLevel)
+        {
+            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBankAttacker], &gBattleMons[gBankAttacker], MOVE_POUND, 0, 40, 0, gBankAttacker, gBankAttacker);
+            gBankTarget = gBankAttacker;
+            gBattlescriptCurrInstr = gUnknown_081D99A0;
+            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+            return 2;
+        }
+        else
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
+            gBattlescriptCurrInstr = gUnknown_081D9977;
+            return 1;
+        }
     }
 }
 */

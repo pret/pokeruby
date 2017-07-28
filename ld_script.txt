@@ -333,6 +333,7 @@ SECTIONS {
         data/data2a.o(.rodata);
         src/battle_4.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_3.o(.rodata);
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
