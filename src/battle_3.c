@@ -6353,3 +6353,42 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
 
     return effect;
 }
+
+extern const u16 gUnknown_081FC1D0[];
+
+/*
+void unref_sub_801B40C(void)
+{
+    int i = 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        do
+        {
+            u8 bank = 0;
+            do
+            {
+                u8 absent = gAbsentBankFlags;
+                if (gBitTable[bank] & absent || absent & gBitTable[bank + 2])
+                    bank++;
+                else
+                {
+                    if (gUnknown_081FC1D0[i * 4 + 0] == gChosenMovesByBanks[bank] && gUnknown_081FC1D0[i * 4 + 1] == gChosenMovesByBanks[bank + 2])
+                    {
+                        gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
+                        gSideTimer[GetBankIdentity(bank) & 1].field4 = gUnknown_081FC1D0[i * 4 + 2];
+                        gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
+                    }
+                    if (gUnknown_081FC1D0[i * 4 + 0] == gChosenMovesByBanks[bank + 2] && gUnknown_081FC1D0[i * 4 + 1] == gChosenMovesByBanks[bank])
+                    {
+                        gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
+                        gSideTimer[GetBankIdentity(bank) & 1].field4 = gUnknown_081FC1D0[i * 4 + 2];
+                        gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
+                    }
+                    bank++;
+                }
+            } while (bank < 2);
+            i++;
+        } while (gUnknown_081FC1D0[i * 4] != 0xFFFF);
+    }
+}
+*/

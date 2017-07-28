@@ -106,6 +106,7 @@
 
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
+#define SIDE_STATUS_X4               (1 << 2)
 #define SIDE_STATUS_SPIKES           (1 << 4)
 #define SIDE_STATUS_SAFEGUARD        (1 << 5)
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
@@ -614,8 +615,7 @@ struct sideTimer
     u8 lightscreenTimer;    //0x1
     u8 mistTimer;           //0x2
     u8 field3;              //0x3
-    u8 field4;              //0x4
-    u8 field5;              //0x5
+    u16 field4;              //0x4
     u8 spikesAmount;        //0x6
     u8 safeguardTimer;      //0x7
     u8 followmeTimer;       //0x8
