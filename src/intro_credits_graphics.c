@@ -24,6 +24,17 @@
 // define register constants for the inline asm
 asm(".include \"constants/gba_constants.inc\"\n");
 
+struct UnknownStruct1
+{
+    u8 var0_0:4;
+    u8 var0_4:2;
+    u8 var0_6:2;
+    u8 var1;
+    u8 var2;
+    u8 var3;
+    u16 var4;
+};
+
 extern u8 gUnknown_0841225C;
 extern u8 gUnknown_084126DC;
 extern u8 gUnknown_084121FC;
@@ -36,6 +47,7 @@ extern u8 gUnknown_084139C8;
 extern u8 gUnknown_08413300;
 extern u8 gUnknown_08413CCC;
 
+extern const struct SpriteTemplate gSpriteTemplate_8416B3C;
 const extern struct CompressedSpriteSheet gUnknown_08416B54;
 const extern struct CompressedSpriteSheet gUnknown_08416BDC;
 
@@ -105,6 +117,18 @@ extern u8 gUnknown_08414084;
 extern u8 gUnknown_08413E38;
 const extern struct CompressedSpriteSheet gUnknown_08416C70;
 extern u8 gUnknown_08414064;
+extern struct UnknownStruct1 gUnknown_08416B94;
+extern struct UnknownStruct1 gUnknown_08416C10;
+extern struct UnknownStruct1 gUnknown_08416C8C;
+const extern union AnimCmd *const gSpriteAnimTable_8416B84;
+const extern union AnimCmd *const gSpriteAnimTable_8416C04;
+const extern union AnimCmd *const gSpriteAnimTable_8416C88;
+const extern struct SpriteTemplate gSpriteTemplate_8416CDC;
+const extern struct SpriteTemplate gSpriteTemplate_Brendan;
+const extern struct SpriteTemplate gSpriteTemplate_8416CF4;
+const extern struct SpriteTemplate gSpriteTemplate_May;
+const extern struct SpriteTemplate gSpriteTemplate_8416D7C;
+const extern struct SpriteTemplate gSpriteTemplate_8416D94;
 
 void sub_8149280();
 
@@ -170,7 +194,7 @@ void sub_8148E90(u8 a)
 u8 sub_8148EC0(u8 a, u16 b, u16 c, u16 d)
 {
     u8 taskId = CreateTask(&sub_8148F3C, 0);
-    
+
     gTasks[taskId].data[0] = a;
     gTasks[taskId].data[1] = b;
     gTasks[taskId].data[2] = 0;
@@ -190,7 +214,7 @@ void sub_8148F3C(u8 taskId)
 {
     register u32 r4 asm("r4");
     s32 r2;
-    
+
     r4 = (u16)gTasks[taskId].data[1] << 16;
     if (r4 != 0)
     {
@@ -200,7 +224,7 @@ void sub_8148F3C(u8 taskId)
         REG_BG1HOFS = gTasks[taskId].data[2];
         REG_BG1VOFS = gUnknown_0203935A + gUnknown_02039358;
     }
-    
+
     r4 = (u16)gTasks[taskId].data[4] << 16;
     if (r4 != 0)
     {
@@ -213,7 +237,7 @@ void sub_8148F3C(u8 taskId)
         else
             REG_BG2VOFS = gUnknown_02039358;
     }
-    
+
     r4 = (u16)gTasks[taskId].data[7] << 16;
     if (r4 != 0)
     {
@@ -408,23 +432,159 @@ void sub_814910C(struct Sprite *sprite)
 	}
 }
 
-struct UnknownStruct1
+void sub_8149174(u8 a, struct UnknownStruct1 *b, const union AnimCmd *const *c, u8 d)
 {
-    s8 var0;
-    s8 var1;
-    u8 var2;
-    u8 var3;
-    u16 var4;
-};
+    u8 i;
 
-// void sub_8149174(u8 a, struct UnknownStruct1 *b, union AnimCmd **c, u8 d)
-// {
-    // int i;
-	// for(i = 0, i < d, i++)
-	// {
-		    // u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].var1, b[i].var2, b[i].var3)
-			// CalcCenterToCornerVec(&gSprites[sprite], b[i].var0 / 16, b[i].var0 << 20, 0)
-			// gSprites[sprite].oam.priority = 3;
-			
-    // }
-// } 
+	for(i = 0; i < d; i++)
+	{
+		u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].var1, b[i].var2, b[i].var3);
+		CalcCenterToCornerVec(&gSprites[sprite], b[i].var0_4, b[i].var0_6, 0);
+		gSprites[sprite].oam.priority = 3;
+        gSprites[sprite].oam.shape = b[i].var0_4;
+        gSprites[sprite].oam.size = b[i].var0_6;
+        gSprites[sprite].oam.paletteNum = 0;
+        gSprites[sprite].anims = c;
+        StartSpriteAnim(&gSprites[sprite], b[i].var0_0);
+        gSprites[sprite].data0 = a;
+        gSprites[sprite].data1 = b[i].var4;
+        gSprites[sprite].data2 = 0;
+    }
+}
+
+void sub_8149248()
+{
+    sub_8149174(0, &gUnknown_08416B94, &gSpriteAnimTable_8416B84, 9);
+}
+
+void sub_8149264()
+{
+    sub_8149174(1, &gUnknown_08416C10, &gSpriteAnimTable_8416C04, 12);
+}
+
+void sub_8149280()
+{
+    sub_8149174(1, &gUnknown_08416C8C, &gSpriteAnimTable_8416C88, 6);
+}
+
+void nullsub_82()
+{
+}
+
+void sub_81492A0(struct Sprite* sprite)
+{
+    sprite->invisible = gSprites[sprite->data0].invisible;
+	sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+	sprite->pos1.y = gSprites[sprite->data0].pos1.y + 8;
+	sprite->pos2.x = gSprites[sprite->data0].pos2.x;
+	sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+}
+
+
+
+u8 intro_create_brendan_sprite(s16 a, s16 b)
+{
+	u8 sprite = CreateSprite(&gSpriteTemplate_8416CDC, a, b, 0);
+	u8 brendan = CreateSprite(&gSpriteTemplate_Brendan, a, b + 8, 1);
+	gSprites[brendan].data0 = sprite;
+	return sprite;
+}
+
+u8 intro_create_may_sprite(s16 a, s16 b)
+{
+	u8 sprite = CreateSprite(&gSpriteTemplate_8416CF4, a, b, 0);
+	u8 may = CreateSprite(&gSpriteTemplate_May, a, b + 8, 1);
+	gSprites[may].data0 = sprite;
+	return sprite;
+}
+
+void nullsub_83()
+{
+}
+
+void sub_81493C4(struct Sprite* sprite)
+{
+    sprite->invisible = gSprites[sprite->data0].invisible;
+	sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+	sprite->pos2.x = gSprites[sprite->data0].pos2.x;
+	sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+}
+
+u8 intro_create_latios_sprite(s16 a, s16 b)
+{
+    u8 sprite = CreateSprite(&gSpriteTemplate_8416D7C, a - 32, b, 2);
+	u8 latios = CreateSprite(&gSpriteTemplate_8416D7C, a + 32, b, 2);
+	gSprites[latios].data0 = sprite;
+	StartSpriteAnim(&gSprites[latios], 1);
+	gSprites[latios].callback = &sub_81493C4;
+	return sprite;
+}
+
+u8 intro_create_latias_sprite(s16 a, s16 b)
+{
+    u8 sprite = CreateSprite(&gSpriteTemplate_8416D94, a - 32, b, 2);
+	u8 latios = CreateSprite(&gSpriteTemplate_8416D94, a + 32, b, 2);
+	gSprites[latios].data0 = sprite;
+	StartSpriteAnim(&gSprites[latios], 1);
+	gSprites[latios].callback = &sub_81493C4;
+	return sprite;
+}
+
+/* 	thumb_func_start intro_create_latios_sprite
+intro_create_latios_sprite: @ 8149424
+	push {r4-r6,lr}
+	mov r6, r8
+	push {r6}
+	adds r2, r0, 0
+	adds r5, r1, 0
+	ldr r0, _08149490 @ =gSpriteTemplate_8416D7C
+	mov r8, r0
+	lsls r2, 16
+	asrs r4, r2, 16
+	ldr r0, _08149494 @ =0xffe00000
+	adds r2, r0
+	asrs r2, 16
+	lsls r5, 16
+	asrs r5, 16
+	mov r0, r8
+	adds r1, r2, 0
+	adds r2, r5, 0
+	movs r3, 0x2
+	bl CreateSprite
+	adds r6, r0, 0
+	lsls r6, 24
+	lsrs r6, 24
+	adds r4, 0x20
+	lsls r4, 16
+	asrs r4, 16
+	mov r0, r8
+	adds r1, r4, 0
+	adds r2, r5, 0
+	movs r3, 0x2
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r5, _08149498 @ =gSprites
+	lsls r4, r0, 4
+	adds r4, r0
+	lsls r4, 2
+	adds r0, r4, r5
+	strh r6, [r0, 0x2E]
+	movs r1, 0x1
+	bl StartSpriteAnim
+	adds r5, 0x1C
+	adds r4, r5
+	ldr r0, _0814949C @ =sub_81493C4
+	str r0, [r4]
+	adds r0, r6, 0
+	pop {r3}
+	mov r8, r3
+	pop {r4-r6}
+	pop {r1}
+	bx r1
+	.align 2, 0
+_08149490: .4byte gSpriteTemplate_8416D7C
+_08149494: .4byte 0xffe00000
+_08149498: .4byte gSprites
+_0814949C: .4byte sub_81493C4
+	thumb_func_end intro_create_latios_sprite */
