@@ -292,5 +292,5 @@ std::string CFile::ReadPath()
 
     m_pos++;
 
-    return std::string(m_buffer, startPos, m_pos - 1 - startPos);
+    return std::string(m_buffer + startPos, m_pos - 1 - startPos);
 }
