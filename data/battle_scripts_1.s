@@ -1168,7 +1168,7 @@ MoveEffect_Recharge: @ 81D7943
 	setbyte 0x2024d21, 221
 	jump BattleScript_1D6F42
 
-gUnknown_081D7956:: @ 81D7956
+BattleScript_MoveUsedMustRecharge:: @ 81D7956
 	printstring BATTLE_TEXT_MustRecharge
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3335,12 +3335,12 @@ BattleScript_1D9083: @ 81D9083
 	faintpokemon TARGET, 0, 0x0
 	end2
 
-gUnknown_081D90A7:: @ 81D90A7
+BattleScript_BideStoringEnergy:: @ 81D90A7
 	printstring BATTLE_TEXT_StoringEnergy
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D90B2:: @ 81D90B2
+BattleScript_BideAttack:: @ 81D90B2
 	printstring BATTLE_TEXT_UnleashedEnergy
 	waitmessage 64
 	accuracycheck BattleScript_1D6F77, 0
@@ -3361,7 +3361,7 @@ gUnknown_081D90B2:: @ 81D90B2
 	faintpokemon TARGET, 0, 0x0
 	jump BattleScript_EndTurn
 
-gUnknown_081D90F1:: @ 81D90F1
+BattleScript_BideNoEnergyToAttack:: @ 81D90F1
 	printstring BATTLE_TEXT_UnleashedEnergy
 	waitmessage 64
 	jump BattleScript_ButItFailed
@@ -3396,7 +3396,7 @@ gUnknown_081D9132:: @ 81D9132
 	waitmessage 64
 	return
 
-gUnknown_081D9139:: @ 81D9139
+BattleScript_MoveUsedIsDisabled:: @ 81D9139
 	printstring BATTLE_TEXT_MoveIsDisabled
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3471,7 +3471,7 @@ BattleScript_1D91FB: @ 81D91FB
 	waitmessage 64
 	return
 
-gUnknown_081D9202:: @ 81D9202
+BattleScript_PerishSongHits:: @ 81D9202
 	printstring BATTLE_TEXT_PerishSongFell
 	waitmessage 64
 	orword 0x2024c6c, 0x100100
@@ -3480,7 +3480,7 @@ gUnknown_081D9202:: @ 81D9202
 	faintpokemon USER, 0, 0x0
 	end2
 
-gUnknown_081D921D:: @ 81D921D
+BattleScript_PerishSongTimerGoesDown:: @ 81D921D
 	printstring BATTLE_TEXT_PerishSongFell
 	waitmessage 64
 	end2
@@ -3546,7 +3546,7 @@ BattleScript_SpikesFree:: @ 81D92D0
 	waitmessage 64
 	return
 
-gUnknown_081D92D7:: @ 81D92D7
+BattleScript_FutureSightHits:: @ 81D92D7
 	printstring BATTLE_TEXT_TookAttack
 	waitmessage 64
 	jumpifbyte 1, 0x2024d23, 0, BattleScript_1D92F4
@@ -3619,7 +3619,7 @@ BattleScript_MoveSelectionTaunted:: @ 81D938B
 	printstring2 BATTLE_TEXT_TauntNoUse
 	atk44
 
-gUnknown_081D938F:: @ 81D938F
+BattleScript_MoveUsedIsTaunted:: @ 81D938F
 	printstring BATTLE_TEXT_TauntNoUse
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3686,7 +3686,7 @@ BattleScript_KnockedOff:: @ 81D944B
 	waitmessage 64
 	return
 
-gUnknown_081D9459:: @ 81D9459
+BattleScript_MoveUsedIsImprisoned:: @ 81D9459
 	printstring BATTLE_TEXT_SealedNoUse
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3751,13 +3751,13 @@ gUnknown_081D94DA:: @ 81D94DA
 	waitmessage 64
 	end2
 
-gUnknown_081D94EE:: @ 81D94EE
+BattleScript_MoveUsedIsAsleep:: @ 81D94EE
 	printstring BATTLE_TEXT_FastAsleep
 	waitmessage 64
 	statusanimation USER
 	jump BattleScript_EndTurn
 
-gUnknown_081D94FB:: @ 81D94FB
+BattleScript_MoveUsedWokeUp:: @ 81D94FB
 	bicword 0x2024c6c, 0x10
 	printfromtable BattleTextList_401562
 	waitmessage 64
@@ -3792,13 +3792,13 @@ BattleScript_BurnTurnDmg:: @ 81D953A
 	waitmessage 64
 	jump BattleScript_1D951E
 
-gUnknown_081D9545:: @ 81D9545
+BattleScript_MoveUsedIsFrozen:: @ 81D9545
 	printstring BATTLE_TEXT_FrozenSolid
 	waitmessage 64
 	statusanimation USER
 	jump BattleScript_EndTurn
 
-gUnknown_081D9552:: @ 81D9552
+BattleScript_MoveUsedUnfroze:: @ 81D9552
 	printfromtable BattleTextList_4015C4
 	waitmessage 64
 	atk98 1
@@ -3810,13 +3810,13 @@ gUnknown_081D955D:: @ 81D955D
 	atk98 0
 	return
 
-gUnknown_081D9566:: @ 81D9566
+BattleScript_MoveUsedIsParalyzed:: @ 81D9566
 	printstring BATTLE_TEXT_Paralyzed3
 	waitmessage 64
 	statusanimation USER
 	jump BattleScript_EndTurn
 
-gUnknown_081D9573:: @ 81D9573
+BattleScript_MoveUsedFlinched:: @ 81D9573
 	printstring BATTLE_TEXT_Flinched
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3826,13 +3826,13 @@ gUnknown_081D957E:: @ 81D957E
 	waitmessage 64
 	end2
 
-gUnknown_081D9587:: @ 81D9587
+BattleScript_ThrashConfuses:: @ 81D9587
 	atk66 1, 1, S_CONFUSED
 	printstring BATTLE_TEXT_FatigueConfuse
 	waitmessage 64
 	end2
 
-gUnknown_081D9595:: @ 81D9595
+BattleScript_MoveUsedIsConfused:: @ 81D9595
 	printstring BATTLE_TEXT_Confused
 	waitmessage 64
 	atk65 1, 0x7
@@ -3855,7 +3855,7 @@ BattleScript_1D95AC: @ 81D95AC
 BattleScript_1D95D3: @ 81D95D3
 	return
 
-gUnknown_081D95D4:: @ 81D95D4
+BattleScript_MoveUsedIsConfusedNoMore:: @ 81D95D4
 	printstring BATTLE_TEXT_ConfusionSnapOut
 	waitmessage 64
 	return
@@ -3876,13 +3876,13 @@ BattleScript_WrapEnds:: @ 81D95F4
 	waitmessage 64
 	end2
 
-gUnknown_081D95FB:: @ 81D95FB
+BattleScript_MoveUsedIsInLove:: @ 81D95FB
 	printstring BATTLE_TEXT_InLoveWith
 	waitmessage 64
 	atk65 1, 0xf0000
 	return
 
-gUnknown_081D9608:: @ 81D9608
+BattleScript_MoveUsedIsParalyzedCantAttack:: @ 81D9608
 	printstring BATTLE_TEXT_ImmobilizedBy
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -3915,7 +3915,7 @@ BattleScript_1D9648: @ 81D9648
 	waitstateatk
 	return
 
-gUnknown_081D964C:: @ 81D964C
+BattleScript_YawnMakesAsleep:: @ 81D964C
 	statusanimation 2
 	printstring BATTLE_TEXT_FellAsleep
 	waitmessage 64
@@ -3996,7 +3996,7 @@ BattleScript_ItemSteal:: @ 81D96F6
 	waitmessage 64
 	return
 
-gUnknown_081D9704:: @ 81D9704
+BattleScript_DrizzleActivates:: @ 81D9704
 	pause 32
 	printstring BATTLE_TEXT_RainMade
 	waitstateatk
@@ -4004,19 +4004,19 @@ gUnknown_081D9704:: @ 81D9704
 	callatk BattleScript_1D9761
 	end3
 
-gUnknown_081D9718:: @ 81D9718
+BattleScript_SpeedBoostActivates:: @ 81D9718
 	playanimation USER, 1, 0x20160a4
 	printstring BATTLE_TEXT_SpeedRisen
 	waitmessage 64
 	end3
 
-gUnknown_081D9726:: @ 81D9726
+BattleScript_TraceActivates:: @ 81D9726
 	pause 32
 	printstring BATTLE_TEXT_Traced
 	waitmessage 64
 	end3
 
-gUnknown_081D9730:: @ 81D9730
+BattleScript_RainDishActivates:: @ 81D9730
 	printstring BATTLE_TEXT_RestoredHPByItem
 	waitmessage 64
 	orword 0x2024c6c, 0x100
@@ -4024,7 +4024,7 @@ gUnknown_081D9730:: @ 81D9730
 	datahpupdate USER
 	end3
 
-gUnknown_081D9744:: @ 81D9744
+BattleScript_SandstreamActivates:: @ 81D9744
 	pause 32
 	printstring BATTLE_TEXT_WhipSandstorm
 	waitstateatk
@@ -4032,7 +4032,7 @@ gUnknown_081D9744:: @ 81D9744
 	callatk BattleScript_1D9761
 	end3
 
-gUnknown_081D9758:: @ 81D9758
+BattleScript_ShedSkinActivates:: @ 81D9758
 	printstring BATTLE_TEXT_CuredProblem
 	waitmessage 64
 	atk98 1
@@ -4047,7 +4047,7 @@ BattleScript_1D9767: @ 81D9767
 	jumpifarraynotequal 0x2016003, 0x2024a68, 1, BattleScript_1D9767
 	return
 
-gUnknown_081D977D:: @ 81D977D
+BattleScript_CastformChange:: @ 81D977D
 	callatk BattleScript_1D9783
 	end3
 
@@ -4095,7 +4095,7 @@ BattleScript_1D97F0: @ 81D97F0
 	waitmessage 64
 	jump BattleScript_1D97E4
 
-gUnknown_081D97FE:: @ 81D97FE
+BattleScript_DroughtActivates:: @ 81D97FE
 	pause 32
 	printstring BATTLE_TEXT_SunIntensified
 	waitstateatk
@@ -4123,10 +4123,10 @@ gUnknown_081D9834:: @ 81D9834
 	pause 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D9842:: @ 81D9842
+BattleScript_MoveHPDrain_PPLoss:: @ 81D9842
 	ppreduce
 
-gUnknown_081D9843:: @ 81D9843
+BattleScript_MoveHPDrain:: @ 81D9843
 	attackstring
 	pause 32
 	orword 0x2024c6c, 0x100
@@ -4137,10 +4137,10 @@ gUnknown_081D9843:: @ 81D9843
 	orbyte 0x2024c68, 8
 	jump BattleScript_EndTurn
 
-gUnknown_081D9865:: @ 81D9865
+BattleScript_MoveHPDrain_FullHP_PPLoss:: @ 81D9865
 	ppreduce
 
-gUnknown_081D9866:: @ 81D9866
+BattleScript_MoveHPDrain_FullHP:: @ 81D9866
 	attackstring
 	pause 32
 	printstring BATTLE_TEXT_MadeUseless
@@ -4148,10 +4148,10 @@ gUnknown_081D9866:: @ 81D9866
 	orbyte 0x2024c68, 8
 	jump BattleScript_EndTurn
 
-gUnknown_081D987B:: @ 81D987B
+BattleScript_FlashFireBoost_PPLoss:: @ 81D987B
 	ppreduce
 
-gUnknown_081D987C:: @ 81D987C
+BattleScript_FlashFireBoost:: @ 81D987C
 	attackstring
 	pause 32
 	printfromtable BattleTextList_401648
@@ -4206,7 +4206,7 @@ BattleScript_1D98E5: @ 81D98E5
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D98F3:: @ 81D98F3
+BattleScript_SoundproofProtected:: @ 81D98F3
 	attackstring
 	ppreduce
 	pause 32
@@ -4227,12 +4227,12 @@ BattleScript_NoItemSteal:: @ 81D9913
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D9921:: @ 81D9921
+BattleScript_ColorChangeActivates:: @ 81D9921
 	printstring BATTLE_TEXT_MadeType
 	waitmessage 64
 	return
 
-gUnknown_081D9928:: @ 81D9928
+BattleScript_RoughSkinActivates:: @ 81D9928
 	orword 0x2024c6c, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
@@ -4241,18 +4241,18 @@ gUnknown_081D9928:: @ 81D9928
 	faintpokemon USER, 0, 0x0
 	return
 
-gUnknown_081D9943:: @ 81D9943
+BattleScript_CuteCharmActivates:: @ 81D9943
 	atk65 1, 0xf0000
 	printstring BATTLE_TEXT_InfatuatedPoke
 	waitmessage 64
 	return
 
-gUnknown_081D9950:: @ 81D9950
+BattleScript_ApplySecondaryEffect:: @ 81D9950
 	waitstateatk
 	seteffectuser
 	return
 
-gUnknown_081D9953:: @ 81D9953
+BattleScript_SynchronizeActivates:: @ 81D9953
 	waitstateatk
 	seteffecttarget
 	return
@@ -4275,7 +4275,7 @@ gUnknown_081D996F:: @ 81D996F
 	waitmessage 64
 	jumptoattack TARGET
 
-gUnknown_081D9977:: @ 81D9977
+BattleScript_MoveUsedLoafingAround:: @ 81D9977
 	printfromtable BattleTextList_40160E
 	waitmessage 64
 	setbyte 0x201600c, 0
@@ -4301,11 +4301,11 @@ BattleScript_SubstituteFade:: @ 81D99AB
 	printstring BATTLE_TEXT_SubFaded
 	return
 
-gUnknown_081D99B6:: @ 81D99B6
-	callatk gUnknown_081D99BC
+BattleScript_BerryCurePrlzEnd2:: @ 81D99B6
+	callatk BattleScript_BerryCureParRet
 	end2
 
-gUnknown_081D99BC:: @ 81D99BC
+BattleScript_BerryCureParRet:: @ 81D99BC
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredParalysis
 	waitmessage 64
@@ -4313,11 +4313,11 @@ gUnknown_081D99BC:: @ 81D99BC
 	removeitem 10
 	return
 
-gUnknown_081D99CE:: @ 81D99CE
-	callatk gUnknown_081D99D4
+BattleScript_BerryCurePsnEnd2:: @ 81D99CE
+	callatk BattleScript_BerryCurePsnRet
 	end2
 
-gUnknown_081D99D4:: @ 81D99D4
+BattleScript_BerryCurePsnRet:: @ 81D99D4
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredPoison
 	waitmessage 64
@@ -4325,11 +4325,11 @@ gUnknown_081D99D4:: @ 81D99D4
 	removeitem 10
 	return
 
-gUnknown_081D99E6:: @ 81D99E6
-	callatk gUnknown_081D99EC
+BattleScript_BerryCureBrnEnd2:: @ 81D99E6
+	callatk BattleScript_BerryCureBrnRet
 	end2
 
-gUnknown_081D99EC:: @ 81D99EC
+BattleScript_BerryCureBrnRet:: @ 81D99EC
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredBurn
 	waitmessage 64
@@ -4337,11 +4337,11 @@ gUnknown_081D99EC:: @ 81D99EC
 	removeitem 10
 	return
 
-gUnknown_081D99FE:: @ 81D99FE
-	callatk gUnknown_081D9A04
+BattleScript_BerryCureFrzEnd2:: @ 81D99FE
+	callatk BattleScript_BerryCureFrzRet
 	end2
 
-gUnknown_081D9A04:: @ 81D9A04
+BattleScript_BerryCureFrzRet:: @ 81D9A04
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredFreeze
 	waitmessage 64
@@ -4349,11 +4349,11 @@ gUnknown_081D9A04:: @ 81D9A04
 	removeitem 10
 	return
 
-gUnknown_081D9A16:: @ 81D9A16
-	callatk gUnknown_081D9A1C
+BattleScript_BerryCureSlpEnd2:: @ 81D9A16
+	callatk BattleScript_BerryCureSlpRet
 	end2
 
-gUnknown_081D9A1C:: @ 81D9A1C
+BattleScript_BerryCureSlpRet:: @ 81D9A1C
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredSleep
 	waitmessage 64
@@ -4361,11 +4361,11 @@ gUnknown_081D9A1C:: @ 81D9A1C
 	removeitem 10
 	return
 
-gUnknown_081D9A2E:: @ 81D9A2E
-	callatk gUnknown_081D9A34
+BattleScript_BerryCureConfusionEnd2:: @ 81D9A2E
+	callatk BattleScript_BerryCureConfusionRet
 	end2
 
-gUnknown_081D9A34:: @ 81D9A34
+BattleScript_BerryCureConfusionRet:: @ 81D9A34
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_CuredConfusion
 	waitmessage 64
@@ -4384,18 +4384,18 @@ gUnknown_081D9A4A:: @ 81D9A4A
 	removeitem 10
 	return
 
-gUnknown_081D9A5E:: @ 81D9A5E
-	callatk gUnknown_081D9A64
+BattleScript_WhiteHerbEnd2:: @ 81D9A5E
+	callatk BattleScript_WhiteHerbRet
 	end2
 
-gUnknown_081D9A64:: @ 81D9A64
+BattleScript_WhiteHerbRet:: @ 81D9A64
 	playanimation 10, 7, 0x0
 	printstring BATTLE_TEXT_RestoredStatus
 	waitmessage 64
 	removeitem 10
 	return
 
-gUnknown_081D9A74:: @ 81D9A74
+BattleScript_ItemHealHP_RemoveItem:: @ 81D9A74
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
@@ -4405,18 +4405,18 @@ gUnknown_081D9A74:: @ 81D9A74
 	removeitem USER
 	end2
 
-gUnknown_081D9A91:: @ 81D9A91
+BattleScript_BerryPPHealEnd2:: @ 81D9A91
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredPP
 	waitmessage 64
 	removeitem USER
 	end2
 
-gUnknown_081D9AA1:: @ 81D9AA1
-	callatk gUnknown_081D9AA7
+BattleScript_ItemHealHP_End2:: @ 81D9AA1
+	callatk BattleScript_ItemHealHP_Ret
 	end2
 
-gUnknown_081D9AA7:: @ 81D9AA7
+BattleScript_ItemHealHP_Ret:: @ 81D9AA7
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHPLittle
 	waitmessage 64
@@ -4435,7 +4435,7 @@ BattleScript_HangedOnMsg:: @ 81D9AC6
 	waitmessage 64
 	return
 
-gUnknown_081D9AD4:: @ 81D9AD4
+BattleScript_BerryConfuseHealEnd2:: @ 81D9AD4
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
@@ -4449,7 +4449,7 @@ gUnknown_081D9AD4:: @ 81D9AD4
 	removeitem USER
 	end2
 
-gUnknown_081D9AFE:: @ 81D9AFE
+BattleScript_BerryStatRaiseEnd2:: @ 81D9AFE
 	playanimation USER, 7, 0x0
 	statbuffchange 65, BattleScript_1D9B0B
 
@@ -4459,7 +4459,7 @@ BattleScript_1D9B0B: @ 81D9B0B
 	removeitem USER
 	end2
 
-gUnknown_081D9B19:: @ 81D9B19
+BattleScript_BerryFocusEnergyEnd2:: @ 81D9B19
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_HustleUse
 	waitmessage 64

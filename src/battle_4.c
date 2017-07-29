@@ -150,7 +150,7 @@ bool8 sub_8014AB8(u8 bank); //can run from battle
 u8 CountAliveMons(u8 caseID);
 void sub_803E1B0(struct Pokemon*, u16 item, u8 partyID, u8 r3, u8 sp);
 u8 CanRunFromBattle(void);
-u8 sub_801B5C0(u16 move, u8 targetbyte); //get target of move
+u8 GetMoveTarget(u16 move, u8 targetbyte); //get target of move
 void sub_80153D0(u8 atk); //pressure perish song pp decrement
 u8 CastformDataTypeChange(u8 bank);
 void b_push_move_exec(u8* bs_ptr);
@@ -207,7 +207,7 @@ extern u8 BattleScript_1D6F44[]; //present dmg
 extern u8 BattleScript_1D83B5[]; //present full hp
 extern u8 BattleScript_1D839B[]; //present hp heal
 extern u8 BattleScript_1D6F74[];
-extern u8 gUnknown_081D977D[]; //castform change bs
+extern u8 BattleScript_CastformChange[];
 extern u8 gUnknown_081D9834[];
 extern u8 gUnknown_081D90FC[]; //bs random switchout
 extern u8 gUnknown_081D95DB[]; //bs payday money give
@@ -12762,7 +12762,7 @@ static void atk76_various(void)
         gBattleCommunication[0] = CanRunFromBattle();
         break;
     case 3:
-        gBankTarget = sub_801B5C0(gCurrentMove, 0);
+        gBankTarget = GetMoveTarget(gCurrentMove, 0);
         break;
     case 4:
         if (gHitMarker & HITMARKER_FAINTED(gActiveBank))
@@ -12938,7 +12938,7 @@ static void atk7C_8025508(void)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = r7;
-        gBankTarget = sub_801B5C0(gCurrentMove, 0);
+        gBankTarget = GetMoveTarget(gCurrentMove, 0);
         gBattlescriptCurrInstr = gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect];
     }
     else if (r6 != 0 && r5 != 0 && r6 != 0xFFFF && r5 != 0xFFFF)
@@ -12948,21 +12948,21 @@ static void atk7C_8025508(void)
             gCurrentMove = r6;
         else
             gCurrentMove = r5;
-        gBankTarget = sub_801B5C0(gCurrentMove, 0);
+        gBankTarget = GetMoveTarget(gCurrentMove, 0);
         gBattlescriptCurrInstr = gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect];
     }
     else if (r6 != 0 && r6 != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = r6;
-        gBankTarget = sub_801B5C0(gCurrentMove, 0);
+        gBankTarget = GetMoveTarget(gCurrentMove, 0);
         gBattlescriptCurrInstr = gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect];
     }
     else if (r5 != 0 && r5 != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = r5;
-        gBankTarget = sub_801B5C0(gCurrentMove, 0);
+        gBankTarget = GetMoveTarget(gCurrentMove, 0);
         gBattlescriptCurrInstr = gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect];
     }
     else
@@ -13087,7 +13087,7 @@ static void atk83_nop(void)
     gBattlescriptCurrInstr++;
 }
 
-bool8 sub_8025A44(u8 bank) //uproar wakeup check
+bool8 UproarWakeUpCheck(u8 bank)
 {
     int i;
     for (i = 0; i < gNoOfAllBanks; i++)
@@ -13112,7 +13112,7 @@ bool8 sub_8025A44(u8 bank) //uproar wakeup check
 static void atk84_jump_if_cant_sleep(void)
 {
     u8* jump_loc = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
-    if (sub_8025A44(gBankTarget))
+    if (UproarWakeUpCheck(gBankTarget))
         gBattlescriptCurrInstr = jump_loc;
     else if (gBattleMons[gBankTarget].ability == ABILITY_INSOMNIA || gBattleMons[gBankTarget].ability == ABILITY_VITAL_SPIRIT)
     {
@@ -14936,7 +14936,7 @@ static void atk9E_metronome(void)
 
     gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
     gBattlescriptCurrInstr = gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect];
-    gBankTarget = sub_801B5C0(gCurrentMove, 0);
+    gBankTarget = GetMoveTarget(gCurrentMove, 0);
 }
 
 #else
@@ -15002,7 +15002,7 @@ _080278F8:\n\
     str r0, [r1]\n\
     ldrh r0, [r4]\n\
     movs r1, 0\n\
-    bl sub_801B5C0\n\
+    bl GetMoveTarget\n\
     ldr r1, _0802795C @ =gBankTarget\n\
     strb r0, [r1]\n\
     pop {r3}\n\
@@ -15570,7 +15570,7 @@ static void atkA9_sleeptalk_choose_move(void)
         gRandomMove = gBattleMons[gBankAttacker].moves[random_pos];
         gCurrMovePos = random_pos;
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gBankTarget = sub_801B5C0(gRandomMove, 0);
+        gBankTarget = GetMoveTarget(gRandomMove, 0);
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
 }
@@ -16684,7 +16684,7 @@ static void atkCC_callterrainattack(void) //nature power
 {
     gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
     gCurrentMove = sNaturePowerMoves[gBattleTerrain];
-    gBankTarget = sub_801B5C0(gCurrentMove, 0);
+    gBankTarget = GetMoveTarget(gCurrentMove, 0);
     b_movescr_stack_push(gBattleScriptsEffectsTable[gBattleMoves[gCurrentMove].effect]);
     gBattlescriptCurrInstr++;
 }
@@ -17307,7 +17307,7 @@ static void atkDE_asistattackselect(void)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gRandomMove = BATTLE_STRUCT->assistMove[Random() % chooseable_moves_no];
-        gBankTarget = sub_801B5C0(gRandomMove, 0);
+        gBankTarget = GetMoveTarget(gRandomMove, 0);
         gBattlescriptCurrInstr += 5;
     }
     else
@@ -17451,7 +17451,7 @@ _0802AB54:\n\
     strh r0, [r4]\n\
     ldrh r0, [r4]\n\
     movs r1, 0\n\
-    bl sub_801B5C0\n\
+    bl GetMoveTarget\n\
     ldr r1, _0802ABC4 @ =gBankTarget\n\
     strb r0, [r1]\n\
     ldr r1, _0802ABC8 @ =gBattlescriptCurrInstr\n\
@@ -17655,7 +17655,7 @@ static void atkE7_castform_data_change(void)
     form = CastformDataTypeChange(BATTLE_STRUCT->scriptingActive);
     if (form)
     {
-        b_push_move_exec(gUnknown_081D977D);
+        b_push_move_exec(BattleScript_CastformChange);
         BATTLE_STRUCT->castformToChangeInto = form - 1;
     }
 }

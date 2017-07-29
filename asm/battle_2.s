@@ -3558,7 +3558,7 @@ _08014044:
 	str r0, [r2]
 	movs r0, 0xA5
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r2, _080140EC @ =0x00016010
 	adds r1, r2
@@ -3646,7 +3646,7 @@ _08014138:
 	strb r0, [r3]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r4, _0801419C @ =0x00016010
 	adds r1, r4
@@ -3702,7 +3702,7 @@ _080141A0:
 	strb r0, [r1, 0xE]
 	ldrh r0, [r3]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r3, _08014214 @ =0x00016010
 	adds r1, r3
@@ -3740,7 +3740,7 @@ _08014218:
 	strh r3, [r1]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldr r2, _08014270 @ =0x02000000
 	ldrb r1, [r4]
 	ldr r3, _08014274 @ =0x00016010

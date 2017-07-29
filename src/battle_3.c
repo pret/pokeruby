@@ -49,6 +49,21 @@ extern u8 gLastUsedAbility;
 extern u8 gBattleTextBuff2[];
 extern u8 gFightStateTracker;
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
+extern u8 gUnknown_02024BE5;
+extern u8 gCurrMovePos;
+extern u16 gRandomMove;
+extern s32 gBattleMoveDamage;
+extern u16 gDynamicBasePower;
+extern u32 gBattleExecBuffer;
+extern const u16 gSoundMovesTable[];
+extern const u8 gStatusConditionString_PoisonJpn[];
+extern const u8 gStatusConditionString_SleepJpn[];
+extern const u8 gStatusConditionString_ParalysisJpn[];
+extern const u8 gStatusConditionString_BurnJpn[];
+extern const u8 gStatusConditionString_IceJpn[];
+extern const u8 gStatusConditionString_ConfusionJpn[];
+extern const u8 gStatusConditionString_LoveJpn[];
+extern const BattleCmdFunc gBattleScriptingCommandsTable[];
 
 u8 IsImprisoned(u8 bank, u16 move);
 u8 GetBankByPlayerAI(u8 ID);
@@ -57,12 +72,12 @@ u8 GetBankSide(u8 bank);
 void b_call_bc_move_exec(u8* BS_ptr);
 bool8 sub_8015660(u8 bank); //check if a move failed
 void SetMoveEffect(bool8 primary, u8 certainArg);
-bool8 sub_8025A44(u8 bank); //uproar wakeup check
+bool8 UproarWakeUpCheck(u8 bank);
 bool8 sub_8018018(u8 bank, u8, u8);
 void sub_8015740(u8 bank);
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 bank_atk, u8 bank_def);
 u8 CountTrailingZeroBits(u32 a);
-u8 sub_801B5C0(u16 move, u8 useMoveTarget); //get target of move
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
 u8 weather_get_current(void);
@@ -71,6 +86,7 @@ void RecordAbilityBattle(u8 bank, u8 ability);
 void RecordItemBattle(u8 bank, u8 holdEffect);
 void sub_8013F54(void);
 void sub_8013FBC(void);
+s8 GetPokeFlavourRelation(u32 pid, u8 flavor);
 
 extern u8 BattleScript_MoveSelectionDisabledMove[];
 extern u8 BattleScript_MoveSelectionTormented[];
@@ -100,34 +116,87 @@ extern u8 gUnknown_081D9008[];
 extern u8 gUnknown_081D9041[];
 extern u8 gUnknown_081D950F[]; //uproar wakeup BS
 extern u8 gUnknown_081D957E[]; //uproar BS
-extern u8 gUnknown_081D9587[]; //thrash confusion BS
-extern u8 gUnknown_081D964C[]; //yawn sleep BS
-extern u8 gUnknown_081D92D7[]; //future sight hit
-extern u8 gUnknown_081D9202[]; //perish song hit
-extern u8 gUnknown_081D921D[]; //perish song timer goes down
+extern u8 BattleScript_ThrashConfuses[];
+extern u8 BattleScript_YawnMakesAsleep[];
+extern u8 BattleScript_FutureSightHits[];
+extern u8 BattleScript_PerishSongHits[];
+extern u8 BattleScript_PerishSongTimerGoesDown[];
 extern u8 gUnknown_081D8C72[];
 extern u8 gUnknown_081D8C7B[];
-extern u8 gUnknown_081D94FB[]; //uproar wakes you up when trying to use a move
-extern u8 gUnknown_081D94EE[]; //poke is asleep
-extern u8 gUnknown_081D94FB[]; //poke woke up
-extern u8 gUnknown_081D9545[]; //poke is frozen
-extern u8 gUnknown_081D9552[]; //poke is no longer frozen
-extern u8 gUnknown_081D9977[]; //poke is loafing around
-extern u8 gUnknown_081D7956[]; //poke must recharge
-extern u8 gUnknown_081D9573[]; //poke flinched
-extern u8 gUnknown_081D9139[]; //poke tries to use a disabled move
-extern u8 gUnknown_081D938F[]; //taunt prevents from using the chosen move
-extern u8 gUnknown_081D9459[]; //using imprisoned move
-extern u8 gUnknown_081D9595[]; //poke is confused
-extern u8 gUnknown_081D95D4[]; //poke is confused no more
-extern u8 gUnknown_081D9566[]; //poke is paralyzed
-extern u8 gUnknown_081D9608[]; //poke is infatuated, won't attack
-extern u8 gUnknown_081D95FB[]; //poke is infatuated
-extern u8 gUnknown_081D90A7[]; //bide storing energy
-extern u8 gUnknown_081D90B2[]; //bide attack
-extern u8 gUnknown_081D90F1[]; //bide no energy to attack
 
+extern u8 BattleScript_MoveUsedIsAsleep[];
+extern u8 BattleScript_MoveUsedWokeUp[];
+extern u8 BattleScript_MoveUsedIsFrozen[];
+extern u8 BattleScript_MoveUsedUnfroze[];
+extern u8 BattleScript_MoveUsedLoafingAround[];
+extern u8 BattleScript_MoveUsedMustRecharge[];
+extern u8 BattleScript_MoveUsedFlinched[];
+extern u8 BattleScript_MoveUsedIsDisabled[];
+extern u8 BattleScript_MoveUsedIsTaunted[];
+extern u8 BattleScript_MoveUsedIsImprisoned[];
+extern u8 BattleScript_MoveUsedIsConfused[];
+extern u8 BattleScript_MoveUsedIsConfusedNoMore[];
+extern u8 BattleScript_MoveUsedIsParalyzed[];
+extern u8 BattleScript_MoveUsedIsParalyzedCantAttack[];
+extern u8 BattleScript_MoveUsedIsInLove[];
+extern u8 BattleScript_BideStoringEnergy[];
+extern u8 BattleScript_BideAttack[];
+extern u8 BattleScript_BideNoEnergyToAttack[];
 
+extern u8 gUnknown_081D901D[]; //load weather from overworld
+extern u8 BattleScript_DrizzleActivates[];
+extern u8 BattleScript_SandstreamActivates[];
+extern u8 BattleScript_DroughtActivates[];
+extern u8 BattleScript_CastformChange[];
+extern u8 BattleScript_RainDishActivates[];
+extern u8 BattleScript_ShedSkinActivates[];
+extern u8 BattleScript_SpeedBoostActivates[];
+extern u8 BattleScript_SoundproofProtected[];
+extern u8 BattleScript_MoveHPDrain[];
+extern u8 BattleScript_MoveHPDrain_PPLoss[];
+extern u8 BattleScript_FlashFireBoost[];
+extern u8 BattleScript_FlashFireBoost_PPLoss[];
+extern u8 BattleScript_MoveHPDrain_FullHP[];
+extern u8 BattleScript_MoveHPDrain_FullHP_PPLoss[];
+extern u8 BattleScript_ColorChangeActivates[];
+extern u8 BattleScript_RoughSkinActivates[];
+extern u8 BattleScript_ApplySecondaryEffect[];
+extern u8 BattleScript_CuteCharmActivates[];
+extern u8 gUnknown_081D9956[]; //ability status clear
+extern u8 BattleScript_SynchronizeActivates[];
+extern u8 gUnknown_081D978C[]; //intimidate1
+extern u8 gUnknown_081D9795[]; //intimidate2
+extern u8 BattleScript_TraceActivates[];
+
+extern u8 BattleScript_WhiteHerbEnd2[];
+extern u8 BattleScript_WhiteHerbRet[];
+extern u8 BattleScript_ItemHealHP_RemoveItem[];
+extern u8 BattleScript_BerryPPHealEnd2[];
+extern u8 BattleScript_ItemHealHP_End2[];
+extern u8 BattleScript_BerryConfuseHealEnd2[];
+extern u8 BattleScript_BerryStatRaiseEnd2[];
+extern u8 BattleScript_BerryFocusEnergyEnd2[];
+extern u8 BattleScript_BerryCurePrlzEnd2[];
+extern u8 BattleScript_BerryCurePsnEnd2[];
+extern u8 BattleScript_BerryCureBrnEnd2[];
+extern u8 BattleScript_BerryCureFrzEnd2[];
+extern u8 BattleScript_BerryCureSlpEnd2[];
+extern u8 BattleScript_BerryCureConfusionEnd2[];
+extern u8 gUnknown_081D9A44[]; //berry cure any status end2
+extern u8 BattleScript_BerryCureParRet[];
+extern u8 BattleScript_BerryCurePsnRet[];
+extern u8 BattleScript_BerryCureBrnRet[];
+extern u8 BattleScript_BerryCureFrzRet[];
+extern u8 BattleScript_BerryCureSlpRet[];
+extern u8 BattleScript_BerryCureConfusionRet[];
+extern u8 gUnknown_081D9A4A[]; //berry cure any status return
+
+extern u8 BattleScript_ItemHealHP_Ret[];
+
+extern u8 gUnknown_081D995F[]; //disobedient while asleep
+extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
+extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
+extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
 
 #define CHOICED_MOVE(bank)(((u16*)(&ewram[bank * 2 + 0x160e8])))
 
@@ -743,7 +812,7 @@ u8 TurnBasedEffects(void)
                             gBattleCommunication[MOVE_EFFECT_BYTE] = 0x47;
                             SetMoveEffect(1, 0);
                             if (gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION)
-                                b_call_bc_move_exec(gUnknown_081D9587);
+                                b_call_bc_move_exec(BattleScript_ThrashConfuses);
                             effect++;
                         }
                     }
@@ -813,14 +882,14 @@ u8 TurnBasedEffects(void)
                     gStatuses3[gActiveBank] -= 0x800;
                     if (!(gStatuses3[gActiveBank] & STATUS3_YAWN) && !(gBattleMons[gActiveBank].status1 & STATUS_ANY)
                      && gBattleMons[gActiveBank].ability != ABILITY_VITAL_SPIRIT
-                     && gBattleMons[gActiveBank].ability != ABILITY_INSOMNIA && !sub_8025A44(gActiveBank))
+                     && gBattleMons[gActiveBank].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBank))
                     {
                         CancelMultiTurnMoves(gActiveBank);
                         gBattleMons[gActiveBank].status1 |= (Random() & 3) + 2;
                         EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         gEffectBank = gActiveBank;
-                        b_call_bc_move_exec(gUnknown_081D964C);
+                        b_call_bc_move_exec(BattleScript_YawnMakesAsleep);
                         effect++;
                     }
                 }
@@ -868,7 +937,7 @@ bool8 sub_80170DC(void) // handle future sight and perish song
                     gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
                     gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
                     gSpecialStatuses[gBankTarget].moveturnLostHP = 0xFFFF;
-                    b_call_bc_move_exec(gUnknown_081D92D7);
+                    b_call_bc_move_exec(BattleScript_FutureSightHits);
                     return 1;
                 }
             }
@@ -896,12 +965,12 @@ bool8 sub_80170DC(void) // handle future sight and perish song
                     {
                         gStatuses3[gActiveBank] &= ~(STATUS3_PERISH_SONG);
                         gBattleMoveDamage = gBattleMons[gActiveBank].hp;
-                        gBattlescriptCurrInstr = gUnknown_081D9202;
+                        gBattlescriptCurrInstr = BattleScript_PerishSongHits;
                     }
                     else
                     {
                         gDisableStructs[gActiveBank].perishSong1--;
-                        gBattlescriptCurrInstr = gUnknown_081D921D;
+                        gBattlescriptCurrInstr = BattleScript_PerishSongTimerGoesDown;
                     }
                     b_call_bc_move_exec(gBattlescriptCurrInstr);
                     return 1;
@@ -1015,13 +1084,13 @@ u8 AtkCanceller_UnableToUseMove(void)
         case 1: // check being asleep
             if (gBattleMons[gBankAttacker].status1 & STATUS_SLEEP)
             {
-                if (sub_8025A44(gBankAttacker))
+                if (UproarWakeUpCheck(gBankAttacker))
                 {
                     gBattleMons[gBankAttacker].status1 &= ~(STATUS_SLEEP);
                     gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                     b_movescr_stack_push_cursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                    gBattlescriptCurrInstr = gUnknown_081D94FB;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                     effect = 2;
                 }
                 else
@@ -1039,7 +1108,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     {
                         if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK)
                         {
-                            gBattlescriptCurrInstr = gUnknown_081D94EE;
+                            gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                             effect = 2;
                         }
@@ -1049,7 +1118,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                         b_movescr_stack_push_cursor();
                         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                        gBattlescriptCurrInstr = gUnknown_081D94FB;
+                        gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
                         effect = 2;
                     }
                 }
@@ -1063,7 +1132,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 {
                     if (gBattleMoves[gCurrentMove].effect != EFFECT_THAW_HIT) // unfreezing via a move effect happens in case 13
                     {
-                        gBattlescriptCurrInstr = gUnknown_081D9545;
+                        gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
                         gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                     }
                     else
@@ -1076,7 +1145,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 {
                     gBattleMons[gBankAttacker].status1 &= ~(STATUS_FREEZE);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9552;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 }
                 effect = 2;
@@ -1089,7 +1158,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 CancelMultiTurnMoves(gBankAttacker);
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                gBattlescriptCurrInstr = gUnknown_081D9977;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
                 gBattleMoveFlags |= MOVESTATUS_MISSED;
                 effect = 1;
             }
@@ -1101,7 +1170,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMons[gBankAttacker].status2 &= ~(STATUS2_RECHARGE);
                 gDisableStructs[gBankAttacker].rechargeCounter = 0;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D7956;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedMustRecharge;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1113,7 +1182,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMons[gBankAttacker].status2 &= ~(STATUS2_FLINCHED);
                 gProtectStructs[gBankAttacker].flinchImmobility = 1;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D9573;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedFlinched;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1125,7 +1194,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gProtectStructs[gBankAttacker].usedDisabledMove = 1;
                 BATTLE_STRUCT->scriptingActive = gBankAttacker;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D9139;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsDisabled;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1136,7 +1205,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             {
                 gProtectStructs[gBankAttacker].usedTauntedMove = 1;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D938F;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsTaunted;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1147,7 +1216,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             {
                 gProtectStructs[gBankAttacker].usedImprisionedMove = 1;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D9459;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsImprisoned;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1172,12 +1241,12 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gProtectStructs[gBankAttacker].confusionSelfDmg = 1;
                         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     }
-                    gBattlescriptCurrInstr = gUnknown_081D9595;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfused;
                 }
                 else // snapped out of confusion
                 {
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D95D4;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfusedNoMore;
                 }
                 effect = 1;
             }
@@ -1188,7 +1257,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             {
                 gProtectStructs[gBankAttacker].prlzImmobility = 1;
                 CancelMultiTurnMoves(gBankAttacker);
-                gBattlescriptCurrInstr = gUnknown_081D9566;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsParalyzed;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
@@ -1202,12 +1271,12 @@ u8 AtkCanceller_UnableToUseMove(void)
                     b_movescr_stack_push_cursor();
                 else
                 {
-                    b_movescr_stack_push(gUnknown_081D9608);
+                    b_movescr_stack_push(BattleScript_MoveUsedIsParalyzedCantAttack);
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     gProtectStructs[gBankAttacker].loveImmobility = 1;
                     CancelMultiTurnMoves(gBankAttacker);
                 }
-                gBattlescriptCurrInstr = gUnknown_081D95FB;
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsInLove;
                 effect = 1;
             }
             BATTLE_STRUCT->atkCancellerTracker++;
@@ -1217,7 +1286,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             {
                 gBattleMons[gBankAttacker].status2 -= 0x100;
                 if (gBattleMons[gBankAttacker].status2 & STATUS2_BIDE)
-                    gBattlescriptCurrInstr = gUnknown_081D90A7;
+                    gBattlescriptCurrInstr = BattleScript_BideStoringEnergy;
                 else
                 {
                     gBattleMons[gBankAttacker].status2 &= ~(STATUS2_MULTIPLETURNS);
@@ -1227,11 +1296,11 @@ u8 AtkCanceller_UnableToUseMove(void)
                         *bideDmg = gTakenDmg[gBankAttacker] * 2;
                         gBankTarget = gTakenDmgBanks[gBankAttacker];
                         if (gAbsentBankFlags & gBitTable[gBankTarget])
-                            gBankTarget = sub_801B5C0(MOVE_BIDE, 1);
-                        gBattlescriptCurrInstr = gUnknown_081D90B2;
+                            gBankTarget = GetMoveTarget(MOVE_BIDE, 1);
+                        gBattlescriptCurrInstr = BattleScript_BideAttack;
                     }
                     else
-                        gBattlescriptCurrInstr = gUnknown_081D90F1;
+                        gBattlescriptCurrInstr = BattleScript_BideNoEnergyToAttack;
                 }
                 effect = 1;
             }
@@ -1244,7 +1313,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 {
                     gBattleMons[gBankAttacker].status1 &= ~(STATUS_FREEZE);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9552;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 }
                 effect = 2;
@@ -1365,66 +1434,6 @@ u8 CastformDataTypeChange(u8 bank)
     return formChange;
 }
 
-extern const u8 gStatusConditionString_PoisonJpn[];
-extern const u8 gStatusConditionString_SleepJpn[];
-extern const u8 gStatusConditionString_ParalysisJpn[];
-extern const u8 gStatusConditionString_BurnJpn[];
-extern const u8 gStatusConditionString_IceJpn[];
-extern const u8 gStatusConditionString_ConfusionJpn[];
-extern const u8 gStatusConditionString_LoveJpn[];
-
-extern const u16 gUnknown_081FA724[]; //sound moves table
-
-extern u8 gUnknown_081D901D[]; //load weather from overworld
-extern u8 gUnknown_081D9704[]; //Drizzle activates
-extern u8 gUnknown_081D9744[]; //Sandstream activates
-extern u8 gUnknown_081D97FE[]; //Drought activates
-extern u8 gUnknown_081D977D[]; //castform change
-extern u8 gUnknown_081D9730[]; //rain dish hp heal
-extern u8 gUnknown_081D9758[]; //shed skin status heal
-extern u8 gUnknown_081D9718[]; //speed boost bs
-extern u8 gUnknown_081D98F3[]; //soundproof protection
-extern u8 gUnknown_081D9843[]; //volt/water absorb no pp loss
-extern u8 gUnknown_081D9842[]; //volt/water absorb pp loss
-extern u8 gUnknown_081D987C[]; //flash fire boost no pp loss
-extern u8 gUnknown_081D987B[]; //flash fire boost pp loss
-extern u8 gUnknown_081D9866[]; //volt/water absorb no pp loss full hp
-extern u8 gUnknown_081D9865[]; //volt/water absorb pp loss full hp
-extern u8 gUnknown_081D9921[]; //color change type change
-extern u8 gUnknown_081D9928[]; //rough skin damage
-extern u8 gUnknown_081D9950[]; //secondary effect applier
-extern u8 gUnknown_081D9943[]; //cute charm activates
-extern u8 gUnknown_081D9956[]; //ability status clear
-extern u8 gUnknown_081D9953[]; //synchronize effect
-extern u8 gUnknown_081D978C[]; //intimidate1
-extern u8 gUnknown_081D9795[]; //intimidate2
-extern u8 gUnknown_081D9726[]; //trace effect
-
-extern u8 gUnknown_081D9A5E[]; //white herb end2
-extern u8 gUnknown_081D9A64[]; //white herb return
-extern u8 gUnknown_081D9A74[]; //item hp heal end2
-extern u8 gUnknown_081D9A91[]; //berry pp heal end2
-extern u8 gUnknown_081D9AA1[]; //leftovers heal end2
-extern u8 gUnknown_081D9AD4[]; //berry heal/confuse end2
-extern u8 gUnknown_081D9AFE[]; //berry stat raise end2
-extern u8 gUnknown_081D9B19[]; //berry focus energy end2
-extern u8 gUnknown_081D99B6[]; //berry cure par end2
-extern u8 gUnknown_081D99CE[]; //berry cure psn end2
-extern u8 gUnknown_081D99E6[]; //berry cure brn end2
-extern u8 gUnknown_081D99FE[]; //berry cure frz end2
-extern u8 gUnknown_081D9A16[]; //berry cure slp end2
-extern u8 gUnknown_081D9A2E[]; //berry cure confusion end2
-extern u8 gUnknown_081D9A44[]; //berry cure any status end2
-extern u8 gUnknown_081D99BC[]; //berry cure par return
-extern u8 gUnknown_081D99D4[]; //berry cure psn return
-extern u8 gUnknown_081D99EC[]; //berry cure brn return
-extern u8 gUnknown_081D9A04[]; //berry cure frz return
-extern u8 gUnknown_081D9A1C[]; //berry cure slp return
-extern u8 gUnknown_081D9A34[]; //berry cure confusion return
-extern u8 gUnknown_081D9A4A[]; //berry cure any status return
-
-extern u8 gUnknown_081D9AA7[]; //shell bell hp heal
-
 #ifdef NONMATCHING
 
 struct Struct2017100
@@ -1543,7 +1552,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			    if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_RAIN_PERMANENT | WEATHER_RAIN_TEMPORARY);
-                    b_push_move_exec(gUnknown_081D9704);
+                    b_push_move_exec(BattleScript_DrizzleActivates);
                     BATTLE_STRUCT->scriptingActive = bank;
                     effect++;
                 }
@@ -1553,7 +1562,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			    if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                    b_push_move_exec(gUnknown_081D9744);
+                    b_push_move_exec(BattleScript_SandstreamActivates);
                     BATTLE_STRUCT->scriptingActive = bank;
                     effect++;
                 }
@@ -1563,7 +1572,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
-                    b_push_move_exec(gUnknown_081D97FE);
+                    b_push_move_exec(BattleScript_DroughtActivates);
                     BATTLE_STRUCT->scriptingActive = bank;
                     effect++;
                 }
@@ -1581,7 +1590,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 effect = CastformDataTypeChange(bank);
                 if (effect != 0)
                 {
-                    b_push_move_exec(gUnknown_081D977D);
+                    b_push_move_exec(BattleScript_CastformChange);
                     BATTLE_STRUCT->scriptingActive = bank;
                     BATTLE_STRUCT->castformToChangeInto = effect - 1;
                 }
@@ -1607,7 +1616,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         effect = CastformDataTypeChange(i);
                         if (effect != 0)
                         {
-                            b_push_move_exec(gUnknown_081D977D);
+                            b_push_move_exec(BattleScript_CastformChange);
                             BATTLE_STRUCT->scriptingActive = i;
                             BATTLE_STRUCT->castformToChangeInto = effect - 1;
                             break;
@@ -1629,7 +1638,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                      && gBattleMons[bank].maxHP > gBattleMons[bank].hp)
                     {
                         gLastUsedAbility = ABILITY_RAIN_DISH; //why
-                        b_push_move_exec(gUnknown_081D9730);
+                        b_push_move_exec(BattleScript_RainDishActivates);
                         gBattleMoveDamage = gBattleMons[bank].maxHP / 16;
                         if (gBattleMoveDamage == 0)
                             gBattleMoveDamage = 1;
@@ -1653,7 +1662,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleMons[bank].status1 = 0;
                         //gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE); fixed in Emerald
                         BATTLE_STRUCT->scriptingActive = gActiveBank = bank;
-                        b_push_move_exec(gUnknown_081D9758);
+                        b_push_move_exec(BattleScript_ShedSkinActivates);
                         EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         effect++;
@@ -1665,7 +1674,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleMons[bank].statStages[STAT_STAGE_SPEED]++;
                         BATTLE_STRUCT->animArg1 = 0x11;
                         BATTLE_STRUCT->animArg2 = 0;
-                        b_push_move_exec(gUnknown_081D9718);
+                        b_push_move_exec(BattleScript_SpeedBoostActivates);
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1680,16 +1689,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         //_08018A40
             if (gLastUsedAbility == ABILITY_SOUNDPROOF)
             {
-                for (i = 0; gUnknown_081FA724[i] != 0xFFFF; i++)
+                for (i = 0; gSoundMovesTable[i] != 0xFFFF; i++)
                 {
-                    if (gUnknown_081FA724[i] == move)
+                    if (gSoundMovesTable[i] == move)
                         break;
                 }
-                if (gUnknown_081FA724[i] != 0xFFFF)
+                if (gSoundMovesTable[i] != 0xFFFF)
                 {
                     if (gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS)
                         gHitMarker |= HITMARKER_NO_PPDEDUCT;
-                    gBattlescriptCurrInstr = gUnknown_081D98F3;
+                    gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
                     effect = 1;
                 }
             }
@@ -1704,9 +1713,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (moveType == TYPE_ELECTRIC && gBattleMoves[move].power != 0)
                     {
                         if (gProtectStructs[gBankAttacker].notFirstStrike)
-                            gBattlescriptCurrInstr = gUnknown_081D9843;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
-                            gBattlescriptCurrInstr = gUnknown_081D9842;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
                         effect = 1;
                     }
                     break;
@@ -1714,9 +1723,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (moveType == TYPE_WATER && gBattleMoves[move].power != 0)
                     {
                         if (gProtectStructs[gBankAttacker].notFirstStrike)
-                            gBattlescriptCurrInstr = gUnknown_081D9843;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
-                            gBattlescriptCurrInstr = gUnknown_081D9842;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
                         effect = 1;
                     }
                     break;
@@ -1727,9 +1736,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBankAttacker].notFirstStrike)
-                                gBattlescriptCurrInstr = gUnknown_081D987C;
+                                gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
-                                gBattlescriptCurrInstr = gUnknown_081D987B;
+                                gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
                             ewram17100.arr[bank] |= 1;
                             effect = 2;
                         }
@@ -1737,9 +1746,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             if (gProtectStructs[gBankAttacker].notFirstStrike)
-                                gBattlescriptCurrInstr = gUnknown_081D987C;
+                                gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
-                                gBattlescriptCurrInstr = gUnknown_081D987B;
+                                gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
                             effect = 2;
                         }
                     }
@@ -1750,9 +1759,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMons[bank].maxHP == gBattleMons[bank].hp)
                     {
                         if ((gProtectStructs[gBankAttacker].notFirstStrike))
-                            gBattlescriptCurrInstr = gUnknown_081D9843;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
-                            gBattlescriptCurrInstr = gUnknown_081D9842;
+                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
                     }
                     else
                     {
@@ -1785,7 +1794,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gBattleTextBuff1[2] = moveType;
                     gBattleTextBuff1[3] = 0xFF;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9921;
+                    gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
                     effect++;
                 }
                 break;
@@ -1801,7 +1810,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9928;
+                    gBattlescriptCurrInstr = BattleScript_RoughSkinActivates;
                     effect++;
                 }
                 break;
@@ -1822,7 +1831,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleCommunication[MOVE_EFFECT_BYTE] += 2;
                     gBattleCommunication[MOVE_EFFECT_BYTE] += 0x40;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9950;
+                    gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                     effect++;
                 }
@@ -1838,7 +1847,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9950;
+                    gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                     effect++;
                 }
@@ -1854,7 +1863,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9950;
+                    gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                     effect++;
                 }
@@ -1870,7 +1879,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = 0x43;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9950;
+                    gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                     effect++;
                 }
@@ -1892,7 +1901,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleMons[gBankAttacker].status2 |= (gBitTable[gBankTarget] << 0x10);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9943;
+                    gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
                     effect++;
                 }
                 break;
@@ -1995,7 +2004,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         effect = CastformDataTypeChange(i);
                         if (effect)
                         {
-                            b_push_move_exec(gUnknown_081D977D);
+                            b_push_move_exec(BattleScript_CastformChange);
                             BATTLE_STRUCT->scriptingActive = i;
                             BATTLE_STRUCT->castformToChangeInto = effect - 1;
                             return effect;
@@ -2016,7 +2025,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 gBattleCommunication[MOVE_EFFECT_BYTE] = BATTLE_STRUCT->synchroniseEffect + 0x40;
                 BATTLE_STRUCT->scriptingActive = gBankTarget;
                 b_movescr_stack_push_cursor();
-                gBattlescriptCurrInstr = gUnknown_081D9953;
+                gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -2032,7 +2041,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 gBattleCommunication[MOVE_EFFECT_BYTE] = BATTLE_STRUCT->synchroniseEffect;
                 BATTLE_STRUCT->scriptingActive = gBankAttacker;
                 b_movescr_stack_push_cursor();
-                gBattlescriptCurrInstr = gUnknown_081D9953;
+                gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -2102,7 +2111,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     }
                     if (effect)
                     {
-                        b_push_move_exec(gUnknown_081D9726);
+                        b_push_move_exec(BattleScript_TraceActivates);
                         gStatuses3[i] &= ~(STATUS3_TRACE);
                         BATTLE_STRUCT->scriptingActive = i;
 
@@ -2664,7 +2673,7 @@ _08018680:\n\
 _08018690:\n\
 	movs r0, 0x5\n\
 	strh r0, [r2]\n\
-	ldr r0, _080186AC @ =gUnknown_081D9704\n\
+	ldr r0, _080186AC @ =BattleScript_DrizzleActivates\n\
 	bl b_push_move_exec\n\
 	ldr r0, _080186B0 @ =0x02000000\n\
 	ldr r3, _080186B4 @ =0x00016003\n\
@@ -2674,7 +2683,7 @@ _08018690:\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
 _080186A8: .4byte gBattleWeather\n\
-_080186AC: .4byte gUnknown_081D9704\n\
+_080186AC: .4byte BattleScript_DrizzleActivates\n\
 _080186B0: .4byte 0x02000000\n\
 _080186B4: .4byte 0x00016003\n\
 _080186B8:\n\
@@ -2688,7 +2697,7 @@ _080186B8:\n\
 _080186C8:\n\
 	movs r0, 0x18\n\
 	strh r0, [r2]\n\
-	ldr r0, _080186E4 @ =gUnknown_081D9744\n\
+	ldr r0, _080186E4 @ =BattleScript_SandstreamActivates\n\
 	bl b_push_move_exec\n\
 	ldr r0, _080186E8 @ =0x02000000\n\
 	ldr r1, _080186EC @ =0x00016003\n\
@@ -2698,7 +2707,7 @@ _080186C8:\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
 _080186E0: .4byte gBattleWeather\n\
-_080186E4: .4byte gUnknown_081D9744\n\
+_080186E4: .4byte BattleScript_SandstreamActivates\n\
 _080186E8: .4byte 0x02000000\n\
 _080186EC: .4byte 0x00016003\n\
 _080186F0:\n\
@@ -2712,7 +2721,7 @@ _080186F0:\n\
 _08018700:\n\
 	movs r0, 0x60\n\
 	strh r0, [r2]\n\
-	ldr r0, _0801871C @ =gUnknown_081D97FE\n\
+	ldr r0, _0801871C @ =BattleScript_DroughtActivates\n\
 	bl b_push_move_exec\n\
 	ldr r0, _08018720 @ =0x02000000\n\
 	ldr r3, _08018724 @ =0x00016003\n\
@@ -2722,7 +2731,7 @@ _08018700:\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
 _08018718: .4byte gBattleWeather\n\
-_0801871C: .4byte gUnknown_081D97FE\n\
+_0801871C: .4byte BattleScript_DroughtActivates\n\
 _08018720: .4byte 0x02000000\n\
 _08018724: .4byte 0x00016003\n\
 _08018728:\n\
@@ -2761,7 +2770,7 @@ _0801875C:\n\
 	bne _08018770\n\
 	bl _08019F92\n\
 _08018770:\n\
-	ldr r0, _08018790 @ =gUnknown_081D977D\n\
+	ldr r0, _08018790 @ =BattleScript_CastformChange\n\
 	bl b_push_move_exec\n\
 	ldr r0, _08018794 @ =0x02000000\n\
 	ldr r2, _08018798 @ =0x00016003\n\
@@ -2775,7 +2784,7 @@ _08018770:\n\
 	strb r1, [r0]\n\
 	bl _08019F76\n\
 	.align 2, 0\n\
-_08018790: .4byte gUnknown_081D977D\n\
+_08018790: .4byte BattleScript_CastformChange\n\
 _08018794: .4byte 0x02000000\n\
 _08018798: .4byte 0x00016003\n\
 _0801879C: .4byte 0x0001609b\n\
@@ -2911,7 +2920,7 @@ _0801889E:\n\
 _080188AA:\n\
 	mov r2, r8\n\
 	strb r5, [r2]\n\
-	ldr r0, _080188D4 @ =gUnknown_081D9730\n\
+	ldr r0, _080188D4 @ =BattleScript_RainDishActivates\n\
 	bl b_push_move_exec\n\
 	ldr r1, _080188D8 @ =gBattleMoveDamage\n\
 	ldrh r0, [r4, 0x2C]\n\
@@ -2928,7 +2937,7 @@ _080188C4:\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
 _080188D0: .4byte gBattleWeather\n\
-_080188D4: .4byte gUnknown_081D9730\n\
+_080188D4: .4byte BattleScript_RainDishActivates\n\
 _080188D8: .4byte gBattleMoveDamage\n\
 _080188DC:\n\
 	adds r0, r2, 0\n\
@@ -3003,7 +3012,7 @@ _08018960:\n\
 	ldr r1, _080189B0 @ =0x00016003\n\
 	adds r0, r1\n\
 	strb r3, [r0]\n\
-	ldr r0, _080189B4 @ =gUnknown_081D9758\n\
+	ldr r0, _080189B4 @ =BattleScript_ShedSkinActivates\n\
 	bl b_push_move_exec\n\
 	str r5, [sp]\n\
 	movs r0, 0\n\
@@ -3024,7 +3033,7 @@ _080189A4: .4byte gStatusConditionString_IceJpn\n\
 _080189A8: .4byte 0x02000000\n\
 _080189AC: .4byte gActiveBank\n\
 _080189B0: .4byte 0x00016003\n\
-_080189B4: .4byte gUnknown_081D9758\n\
+_080189B4: .4byte BattleScript_ShedSkinActivates\n\
 _080189B8:\n\
 	ldrb r2, [r4, 0x1B]\n\
 	movs r0, 0x1B\n\
@@ -3054,7 +3063,7 @@ _080189DC:\n\
 	ldr r1, _08018A0C @ =0x000160a5\n\
 	adds r0, r7, r1\n\
 	strb r2, [r0]\n\
-	ldr r0, _08018A10 @ =gUnknown_081D9718\n\
+	ldr r0, _08018A10 @ =BattleScript_SpeedBoostActivates\n\
 	bl b_push_move_exec\n\
 	ldr r2, _08018A14 @ =0x00016003\n\
 	adds r0, r7, r2\n\
@@ -3065,7 +3074,7 @@ _080189DC:\n\
 _08018A04: .4byte gDisableStructs\n\
 _08018A08: .4byte 0x000160a4\n\
 _08018A0C: .4byte 0x000160a5\n\
-_08018A10: .4byte gUnknown_081D9718\n\
+_08018A10: .4byte BattleScript_SpeedBoostActivates\n\
 _08018A14: .4byte 0x00016003\n\
 _08018A18:\n\
 	ldr r2, _08018A3C @ =gDisableStructs\n\
@@ -3095,7 +3104,7 @@ _08018A40:\n\
 	bl _08019F76\n\
 _08018A4C:\n\
 	movs r4, 0\n\
-	ldr r0, _08018ABC @ =gUnknown_081FA724\n\
+	ldr r0, _08018ABC @ =gSoundMovesTable\n\
 	ldrh r2, [r0]\n\
 	ldr r5, _08018AC0 @ =0x0000ffff\n\
 	adds r1, r0, 0\n\
@@ -3146,19 +3155,19 @@ _08018A86:\n\
 	str r1, [r0]\n\
 _08018AAC:\n\
 	ldr r1, _08018AD0 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018AD4 @ =gUnknown_081D98F3\n\
+	ldr r0, _08018AD4 @ =BattleScript_SoundproofProtected\n\
 	str r0, [r1]\n\
 	movs r0, 0x1\n\
 	mov r9, r0\n\
 	bl _08019F7C\n\
 	.align 2, 0\n\
-_08018ABC: .4byte gUnknown_081FA724\n\
+_08018ABC: .4byte gSoundMovesTable\n\
 _08018AC0: .4byte 0x0000ffff\n\
 _08018AC4: .4byte gBattleMons\n\
 _08018AC8: .4byte gBankAttacker\n\
 _08018ACC: .4byte gHitMarker\n\
 _08018AD0: .4byte gBattlescriptCurrInstr\n\
-_08018AD4: .4byte gUnknown_081D98F3\n\
+_08018AD4: .4byte BattleScript_SoundproofProtected\n\
 _08018AD8:\n\
 	cmp r3, 0\n\
 	bne _08018AE0\n\
@@ -3202,24 +3211,24 @@ _08018B10:\n\
 	cmp r0, 0\n\
 	bge _08018B3C\n\
 	ldr r1, _08018B34 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018B38 @ =gUnknown_081D9843\n\
+	ldr r0, _08018B38 @ =BattleScript_MoveHPDrain\n\
 	b _08018B40\n\
 	.align 2, 0\n\
 _08018B28: .4byte gBattleMoves\n\
 _08018B2C: .4byte gProtectStructs\n\
 _08018B30: .4byte gBankAttacker\n\
 _08018B34: .4byte gBattlescriptCurrInstr\n\
-_08018B38: .4byte gUnknown_081D9843\n\
+_08018B38: .4byte BattleScript_MoveHPDrain\n\
 _08018B3C:\n\
 	ldr r1, _08018B48 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018B4C @ =gUnknown_081D9842\n\
+	ldr r0, _08018B4C @ =BattleScript_MoveHPDrain_PPLoss\n\
 _08018B40:\n\
 	str r0, [r1]\n\
 	movs r2, 0x1\n\
 	b _08018C68\n\
 	.align 2, 0\n\
 _08018B48: .4byte gBattlescriptCurrInstr\n\
-_08018B4C: .4byte gUnknown_081D9842\n\
+_08018B4C: .4byte BattleScript_MoveHPDrain_PPLoss\n\
 _08018B50:\n\
 	cmp r4, 0xB\n\
 	beq _08018B56\n\
@@ -3245,17 +3254,17 @@ _08018B68:\n\
 	cmp r0, 0\n\
 	bge _08018B94\n\
 	ldr r1, _08018B8C @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018B90 @ =gUnknown_081D9843\n\
+	ldr r0, _08018B90 @ =BattleScript_MoveHPDrain\n\
 	b _08018B98\n\
 	.align 2, 0\n\
 _08018B80: .4byte gBattleMoves\n\
 _08018B84: .4byte gProtectStructs\n\
 _08018B88: .4byte gBankAttacker\n\
 _08018B8C: .4byte gBattlescriptCurrInstr\n\
-_08018B90: .4byte gUnknown_081D9843\n\
+_08018B90: .4byte BattleScript_MoveHPDrain\n\
 _08018B94:\n\
 	ldr r1, _08018BA0 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018BA4 @ =gUnknown_081D9842\n\
+	ldr r0, _08018BA4 @ =BattleScript_MoveHPDrain_PPLoss\n\
 _08018B98:\n\
 	str r0, [r1]\n\
 	movs r3, 0x1\n\
@@ -3263,7 +3272,7 @@ _08018B98:\n\
 	b _08018C6A\n\
 	.align 2, 0\n\
 _08018BA0: .4byte gBattlescriptCurrInstr\n\
-_08018BA4: .4byte gUnknown_081D9842\n\
+_08018BA4: .4byte BattleScript_MoveHPDrain_PPLoss\n\
 _08018BA8:\n\
 	cmp r4, 0xA\n\
 	bne _08018C6A\n\
@@ -3301,7 +3310,7 @@ _08018BA8:\n\
 	cmp r0, 0\n\
 	bge _08018C10\n\
 	ldr r1, _08018C08 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018C0C @ =gUnknown_081D987C\n\
+	ldr r0, _08018C0C @ =BattleScript_FlashFireBoost\n\
 	b _08018C14\n\
 	.align 2, 0\n\
 _08018BF4: .4byte gBattleMons\n\
@@ -3310,10 +3319,10 @@ _08018BFC: .4byte gBattleCommunication\n\
 _08018C00: .4byte gProtectStructs\n\
 _08018C04: .4byte gBankAttacker\n\
 _08018C08: .4byte gBattlescriptCurrInstr\n\
-_08018C0C: .4byte gUnknown_081D987C\n\
+_08018C0C: .4byte BattleScript_FlashFireBoost\n\
 _08018C10:\n\
 	ldr r1, _08018C28 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018C2C @ =gUnknown_081D987B\n\
+	ldr r0, _08018C2C @ =BattleScript_FlashFireBoost_PPLoss\n\
 _08018C14:\n\
 	str r0, [r1]\n\
 	adds r0, r5, r2\n\
@@ -3326,7 +3335,7 @@ _08018C14:\n\
 	b _08018C6A\n\
 	.align 2, 0\n\
 _08018C28: .4byte gBattlescriptCurrInstr\n\
-_08018C2C: .4byte gUnknown_081D987B\n\
+_08018C2C: .4byte BattleScript_FlashFireBoost_PPLoss\n\
 _08018C30:\n\
 	ldr r0, _08018C4C @ =gBattleCommunication\n\
 	strb r4, [r0, 0x5]\n\
@@ -3340,17 +3349,17 @@ _08018C30:\n\
 	cmp r0, 0\n\
 	bge _08018C60\n\
 	ldr r1, _08018C58 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018C5C @ =gUnknown_081D987C\n\
+	ldr r0, _08018C5C @ =BattleScript_FlashFireBoost\n\
 	b _08018C64\n\
 	.align 2, 0\n\
 _08018C4C: .4byte gBattleCommunication\n\
 _08018C50: .4byte gProtectStructs\n\
 _08018C54: .4byte gBankAttacker\n\
 _08018C58: .4byte gBattlescriptCurrInstr\n\
-_08018C5C: .4byte gUnknown_081D987C\n\
+_08018C5C: .4byte BattleScript_FlashFireBoost\n\
 _08018C60:\n\
 	ldr r1, _08018CA4 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018CA8 @ =gUnknown_081D987B\n\
+	ldr r0, _08018CA8 @ =BattleScript_FlashFireBoost_PPLoss\n\
 _08018C64:\n\
 	str r0, [r1]\n\
 	movs r2, 0x2\n\
@@ -3382,24 +3391,24 @@ _08018C74:\n\
 	cmp r0, 0\n\
 	bge _08018CBC\n\
 	ldr r1, _08018CA4 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018CB8 @ =gUnknown_081D9866\n\
+	ldr r0, _08018CB8 @ =BattleScript_MoveHPDrain_FullHP\n\
 	str r0, [r1]\n\
 	bl _08019F76\n\
 	.align 2, 0\n\
 _08018CA4: .4byte gBattlescriptCurrInstr\n\
-_08018CA8: .4byte gUnknown_081D987B\n\
+_08018CA8: .4byte BattleScript_FlashFireBoost_PPLoss\n\
 _08018CAC: .4byte gBattleMons\n\
 _08018CB0: .4byte gProtectStructs\n\
 _08018CB4: .4byte gBankAttacker\n\
-_08018CB8: .4byte gUnknown_081D9866\n\
+_08018CB8: .4byte BattleScript_MoveHPDrain_FullHP\n\
 _08018CBC:\n\
 	ldr r1, _08018CC8 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018CCC @ =gUnknown_081D9865\n\
+	ldr r0, _08018CCC @ =BattleScript_MoveHPDrain_FullHP_PPLoss\n\
 	str r0, [r1]\n\
 	bl _08019F76\n\
 	.align 2, 0\n\
 _08018CC8: .4byte gBattlescriptCurrInstr\n\
-_08018CCC: .4byte gUnknown_081D9865\n\
+_08018CCC: .4byte BattleScript_MoveHPDrain_FullHP_PPLoss\n\
 _08018CD0:\n\
 	ldr r2, _08018CEC @ =gBattleMoveDamage\n\
 	ldrh r0, [r1, 0x2C]\n\
@@ -3561,7 +3570,7 @@ _08018E52:\n\
 	strb r0, [r1, 0x3]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _08018E8C @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018E90 @ =gUnknown_081D9921\n\
+	ldr r0, _08018E90 @ =BattleScript_ColorChangeActivates\n\
 	str r0, [r1]\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
@@ -3572,7 +3581,7 @@ _08018E80: .4byte gBankTarget\n\
 _08018E84: .4byte gBattleMons\n\
 _08018E88: .4byte gBattleTextBuff1\n\
 _08018E8C: .4byte gBattlescriptCurrInstr\n\
-_08018E90: .4byte gUnknown_081D9921\n\
+_08018E90: .4byte BattleScript_ColorChangeActivates\n\
 _08018E94:\n\
 	ldr r0, _08018F2C @ =gBattleMoveFlags\n\
 	ldrb r1, [r0]\n\
@@ -3645,7 +3654,7 @@ _08018F0E:\n\
 _08018F1C:\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _08018F4C @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08018F50 @ =gUnknown_081D9928\n\
+	ldr r0, _08018F50 @ =BattleScript_RoughSkinActivates\n\
 	str r0, [r1]\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
@@ -3658,7 +3667,7 @@ _08018F40: .4byte gBankTarget\n\
 _08018F44: .4byte gBattleMoves\n\
 _08018F48: .4byte gBattleMoveDamage\n\
 _08018F4C: .4byte gBattlescriptCurrInstr\n\
-_08018F50: .4byte gUnknown_081D9928\n\
+_08018F50: .4byte BattleScript_RoughSkinActivates\n\
 _08018F54:\n\
 	ldr r0, _08019020 @ =gBattleMoveFlags\n\
 	ldrb r1, [r0]\n\
@@ -3750,7 +3759,7 @@ _08019000:\n\
 	strb r0, [r1, 0x3]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _08019040 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08019044 @ =gUnknown_081D9950\n\
+	ldr r0, _08019044 @ =BattleScript_ApplySecondaryEffect\n\
 	str r0, [r1]\n\
 	ldr r2, _08019048 @ =gHitMarker\n\
 	ldr r0, [r2]\n\
@@ -3769,7 +3778,7 @@ _08019034: .4byte gBankTarget\n\
 _08019038: .4byte gBattleMoves\n\
 _0801903C: .4byte gBattleCommunication\n\
 _08019040: .4byte gBattlescriptCurrInstr\n\
-_08019044: .4byte gUnknown_081D9950\n\
+_08019044: .4byte BattleScript_ApplySecondaryEffect\n\
 _08019048: .4byte gHitMarker\n\
 _0801904C:\n\
 	ldr r0, _080190FC @ =gBattleMoveFlags\n\
@@ -3847,7 +3856,7 @@ _080190DC:\n\
 	strb r0, [r1, 0x3]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _0801911C @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08019120 @ =gUnknown_081D9950\n\
+	ldr r0, _08019120 @ =BattleScript_ApplySecondaryEffect\n\
 	str r0, [r1]\n\
 	ldr r2, _08019124 @ =gHitMarker\n\
 	ldr r0, [r2]\n\
@@ -3866,7 +3875,7 @@ _08019110: .4byte gBankTarget\n\
 _08019114: .4byte gBattleMoves\n\
 _08019118: .4byte gBattleCommunication\n\
 _0801911C: .4byte gBattlescriptCurrInstr\n\
-_08019120: .4byte gUnknown_081D9950\n\
+_08019120: .4byte BattleScript_ApplySecondaryEffect\n\
 _08019124: .4byte gHitMarker\n\
 _08019128:\n\
 	ldr r0, _080191D8 @ =gBattleMoveFlags\n\
@@ -3944,7 +3953,7 @@ _080191B8:\n\
 	strb r0, [r1, 0x3]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _080191F8 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _080191FC @ =gUnknown_081D9950\n\
+	ldr r0, _080191FC @ =BattleScript_ApplySecondaryEffect\n\
 	str r0, [r1]\n\
 	ldr r2, _08019200 @ =gHitMarker\n\
 	ldr r0, [r2]\n\
@@ -3963,7 +3972,7 @@ _080191EC: .4byte gBankTarget\n\
 _080191F0: .4byte gBattleMoves\n\
 _080191F4: .4byte gBattleCommunication\n\
 _080191F8: .4byte gBattlescriptCurrInstr\n\
-_080191FC: .4byte gUnknown_081D9950\n\
+_080191FC: .4byte BattleScript_ApplySecondaryEffect\n\
 _08019200: .4byte gHitMarker\n\
 _08019204:\n\
 	ldr r0, _080192B4 @ =gBattleMoveFlags\n\
@@ -4041,7 +4050,7 @@ _08019294:\n\
 	strb r0, [r1, 0x3]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _080192D4 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _080192D8 @ =gUnknown_081D9950\n\
+	ldr r0, _080192D8 @ =BattleScript_ApplySecondaryEffect\n\
 	str r0, [r1]\n\
 	ldr r2, _080192DC @ =gHitMarker\n\
 	ldr r0, [r2]\n\
@@ -4060,7 +4069,7 @@ _080192C8: .4byte gSpecialStatuses\n\
 _080192CC: .4byte gBankTarget\n\
 _080192D0: .4byte gBattleCommunication\n\
 _080192D4: .4byte gBattlescriptCurrInstr\n\
-_080192D8: .4byte gUnknown_081D9950\n\
+_080192D8: .4byte BattleScript_ApplySecondaryEffect\n\
 _080192DC: .4byte gHitMarker\n\
 _080192E0:\n\
 	ldr r0, _08019420 @ =gBattleMoveFlags\n\
@@ -4212,7 +4221,7 @@ _080193F6:\n\
 	str r0, [r2]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _08019440 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _08019444 @ =gUnknown_081D9943\n\
+	ldr r0, _08019444 @ =BattleScript_CuteCharmActivates\n\
 	str r0, [r1]\n\
 	bl _08019F22\n\
 	.align 2, 0\n\
@@ -4225,7 +4234,7 @@ _08019434: .4byte gSpecialStatuses\n\
 _08019438: .4byte gBankTarget\n\
 _0801943C: .4byte gBitTable\n\
 _08019440: .4byte gBattlescriptCurrInstr\n\
-_08019444: .4byte gUnknown_081D9943\n\
+_08019444: .4byte BattleScript_CuteCharmActivates\n\
 _08019448:\n\
 	movs r5, 0\n\
 	mov r10, r5\n\
@@ -4674,7 +4683,7 @@ _08019838:\n\
 	strb r1, [r0]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _08019878 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _0801987C @ =gUnknown_081D9953\n\
+	ldr r0, _0801987C @ =BattleScript_SynchronizeActivates\n\
 	str r0, [r1]\n\
 	ldr r0, [r4]\n\
 	movs r1, 0x80\n\
@@ -4690,7 +4699,7 @@ _0801986C: .4byte gBattleCommunication\n\
 _08019870: .4byte gBankTarget\n\
 _08019874: .4byte 0x00016003\n\
 _08019878: .4byte gBattlescriptCurrInstr\n\
-_0801987C: .4byte gUnknown_081D9953\n\
+_0801987C: .4byte BattleScript_SynchronizeActivates\n\
 _08019880:\n\
 	mov r1, r8\n\
 	ldrb r0, [r1]\n\
@@ -4731,7 +4740,7 @@ _080198B4:\n\
 	strb r1, [r0]\n\
 	bl b_movescr_stack_push_cursor\n\
 	ldr r1, _080198F4 @ =gBattlescriptCurrInstr\n\
-	ldr r0, _080198F8 @ =gUnknown_081D9953\n\
+	ldr r0, _080198F8 @ =BattleScript_SynchronizeActivates\n\
 	str r0, [r1]\n\
 	ldr r0, [r4]\n\
 	movs r1, 0x80\n\
@@ -4747,7 +4756,7 @@ _080198E8: .4byte gBattleCommunication\n\
 _080198EC: .4byte gBankAttacker\n\
 _080198F0: .4byte 0x00016003\n\
 _080198F4: .4byte gBattlescriptCurrInstr\n\
-_080198F8: .4byte gUnknown_081D9953\n\
+_080198F8: .4byte BattleScript_SynchronizeActivates\n\
 _080198FC:\n\
 	movs r4, 0\n\
 	ldr r0, _08019934 @ =gNoOfAllBanks\n\
@@ -5414,7 +5423,7 @@ _08019E08: .4byte gNoOfAllBanks\n\
 _08019E0C: .4byte gBattleMons\n\
 _08019E10: .4byte gLastUsedAbility\n\
 _08019E14:\n\
-	ldr r0, _08019E30 @ =gUnknown_081D977D\n\
+	ldr r0, _08019E30 @ =BattleScript_CastformChange\n\
 	bl b_push_move_exec\n\
 	ldr r0, _08019E34 @ =0x02000000\n\
 	ldr r2, _08019E38 @ =0x00016003\n\
@@ -5427,12 +5436,12 @@ _08019E14:\n\
 	strb r1, [r0]\n\
 	b _08019F76\n\
 	.align 2, 0\n\
-_08019E30: .4byte gUnknown_081D977D\n\
+_08019E30: .4byte BattleScript_CastformChange\n\
 _08019E34: .4byte 0x02000000\n\
 _08019E38: .4byte 0x00016003\n\
 _08019E3C: .4byte 0x0001609b\n\
 _08019E40:\n\
-	ldr r0, _08019E5C @ =gUnknown_081D977D\n\
+	ldr r0, _08019E5C @ =BattleScript_CastformChange\n\
 	bl b_push_move_exec\n\
 	ldr r0, _08019E60 @ =0x02000000\n\
 	ldr r5, _08019E64 @ =0x00016003\n\
@@ -5446,7 +5455,7 @@ _08019E40:\n\
 	strb r1, [r0]\n\
 	b _08019F92\n\
 	.align 2, 0\n\
-_08019E5C: .4byte gUnknown_081D977D\n\
+_08019E5C: .4byte BattleScript_CastformChange\n\
 _08019E60: .4byte 0x02000000\n\
 _08019E64: .4byte 0x00016003\n\
 _08019E68: .4byte 0x0001609b\n\
@@ -5464,7 +5473,7 @@ _08019E6C:\n\
 _08019E80: .4byte 0xfff7ffff\n\
 _08019E84: .4byte gUnknown_081D978C\n\
 _08019E88:\n\
-	ldr r0, _08019EDC @ =gUnknown_081D9726\n\
+	ldr r0, _08019EDC @ =BattleScript_TraceActivates\n\
 	bl b_push_move_exec\n\
 	ldr r1, _08019EE0 @ =gStatuses3\n\
 	ldr r2, [sp, 0x18]\n\
@@ -5505,7 +5514,7 @@ _08019E88:\n\
 	strb r0, [r1, 0x3]\n\
 	b _08019F76\n\
 	.align 2, 0\n\
-_08019EDC: .4byte gUnknown_081D9726\n\
+_08019EDC: .4byte BattleScript_TraceActivates\n\
 _08019EE0: .4byte gStatuses3\n\
 _08019EE4: .4byte 0xffefffff\n\
 _08019EE8: .4byte 0x02000000\n\
@@ -5641,8 +5650,6 @@ enum
     FLAVOR_SOUR, // 4
 };
 
-s8 sub_8040A7C(u32 pid, u8 flavor); // get poke flavor relation
-
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
 {
     int i = 0;
@@ -5711,7 +5718,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 BATTLE_STRUCT->scriptingActive = bank;
                 gStringBank = bank;
                 gActiveBank = gBankAttacker = bank;
-                b_call_bc_move_exec(gUnknown_081D9A5E);
+                b_call_bc_move_exec(BattleScript_WhiteHerbEnd2);
             }
             break;
         }
@@ -5728,7 +5735,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + bankQuality > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    b_call_bc_move_exec(gUnknown_081D9A74);
+                    b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = 4;
                 }
                 break;
@@ -5763,7 +5770,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         gBattleTextBuff1[2] = move;
                         gBattleTextBuff1[3] = move >> 8;
                         gBattleTextBuff1[4] = 0xFF;
-                        b_call_bc_move_exec(gUnknown_081D9A91);
+                        b_call_bc_move_exec(BattleScript_BerryPPHealEnd2);
                         EmitSetAttributes(0, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
                         MarkBufferBankForExecution(gActiveBank);
                         effect = ITEM_PP_CHANGE;
@@ -5784,7 +5791,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->scriptingActive = bank;
                     gStringBank = bank;
                     gActiveBank = gBankAttacker = bank;
-                    b_call_bc_move_exec(gUnknown_081D9A5E);
+                    b_call_bc_move_exec(BattleScript_WhiteHerbEnd2);
                 }
                 break;
             case HOLD_EFFECT_LEFTOVERS:
@@ -5796,7 +5803,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    b_call_bc_move_exec(gUnknown_081D9AA1);
+                    b_call_bc_move_exec(BattleScript_ItemHealHP_End2);
                     effect = ITEM_HP_CHANGE;
                     RecordItemBattle(bank, bankHoldEffect);
                 }
@@ -5815,10 +5822,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (sub_8040A7C(gBattleMons[bank].personality, FLAVOR_SPICY) < 0)
-                        b_call_bc_move_exec(gUnknown_081D9AD4);
+                    if (GetPokeFlavourRelation(gBattleMons[bank].personality, FLAVOR_SPICY) < 0)
+                        b_call_bc_move_exec(BattleScript_BerryConfuseHealEnd2);
                     else
-                        b_call_bc_move_exec(gUnknown_081D9A74);
+                        b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
@@ -5835,10 +5842,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (sub_8040A7C(gBattleMons[bank].personality, FLAVOR_DRY) < 0)
-                        b_call_bc_move_exec(gUnknown_081D9AD4);
+                    if (GetPokeFlavourRelation(gBattleMons[bank].personality, FLAVOR_DRY) < 0)
+                        b_call_bc_move_exec(BattleScript_BerryConfuseHealEnd2);
                     else
-                        b_call_bc_move_exec(gUnknown_081D9A74);
+                        b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
@@ -5855,10 +5862,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (sub_8040A7C(gBattleMons[bank].personality, FLAVOR_SWEET) < 0)
-                        b_call_bc_move_exec(gUnknown_081D9AD4);
+                    if (GetPokeFlavourRelation(gBattleMons[bank].personality, FLAVOR_SWEET) < 0)
+                        b_call_bc_move_exec(BattleScript_BerryConfuseHealEnd2);
                     else
-                        b_call_bc_move_exec(gUnknown_081D9A74);
+                        b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
@@ -5875,10 +5882,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (sub_8040A7C(gBattleMons[bank].personality, FLAVOR_BITTER) < 0)
-                        b_call_bc_move_exec(gUnknown_081D9AD4);
+                    if (GetPokeFlavourRelation(gBattleMons[bank].personality, FLAVOR_BITTER) < 0)
+                        b_call_bc_move_exec(BattleScript_BerryConfuseHealEnd2);
                     else
-                        b_call_bc_move_exec(gUnknown_081D9A74);
+                        b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
@@ -5895,10 +5902,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (sub_8040A7C(gBattleMons[bank].personality, FLAVOR_SOUR) < 0)
-                        b_call_bc_move_exec(gUnknown_081D9AD4);
+                    if (GetPokeFlavourRelation(gBattleMons[bank].personality, FLAVOR_SOUR) < 0)
+                        b_call_bc_move_exec(BattleScript_BerryConfuseHealEnd2);
                     else
-                        b_call_bc_move_exec(gUnknown_081D9A74);
+                        b_call_bc_move_exec(BattleScript_ItemHealHP_RemoveItem);
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
@@ -5921,7 +5928,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_ATK;
                     BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_ATK;
                     BATTLE_STRUCT->animArg2 = 0;
-                    b_call_bc_move_exec(gUnknown_081D9AFE);
+                    b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
                 break;
@@ -5937,7 +5944,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_DEF;
                     BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_DEF;
                     BATTLE_STRUCT->animArg2 = 0;
-                    b_call_bc_move_exec(gUnknown_081D9AFE);
+                    b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
                 break;
@@ -5953,7 +5960,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPEED;
                     BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPEED;
                     BATTLE_STRUCT->animArg2 = 0;
-                    b_call_bc_move_exec(gUnknown_081D9AFE);
+                    b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
                 break;
@@ -5969,7 +5976,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPATK;
                     BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPATK;
                     BATTLE_STRUCT->animArg2 = 0;
-                    b_call_bc_move_exec(gUnknown_081D9AFE);
+                    b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
                 break;
@@ -5985,7 +5992,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPDEF;
                     BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPDEF;
                     BATTLE_STRUCT->animArg2 = 0;
-                    b_call_bc_move_exec(gUnknown_081D9AFE);
+                    b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
                 break;
@@ -5993,7 +6000,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / bankQuality && !moveTurn && !(gBattleMons[bank].status2 & STATUS2_FOCUS_ENERGY))
                 {
                     gBattleMons[bank].status2 |= STATUS2_FOCUS_ENERGY;
-                    b_call_bc_move_exec(gUnknown_081D9B19);
+                    b_call_bc_move_exec(BattleScript_BerryFocusEnergyEnd2);
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
@@ -6030,7 +6037,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         BATTLE_STRUCT->statChanger = 0x21 + i;
                         BATTLE_STRUCT->animArg1 = 0x21 + i + 6;
                         BATTLE_STRUCT->animArg2 = 0;
-                        b_call_bc_move_exec(gUnknown_081D9AFE);
+                        b_call_bc_move_exec(BattleScript_BerryStatRaiseEnd2);
                         effect = ITEM_STATS_CHANGE;
                     }
                 }
@@ -6039,7 +6046,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].status1 & STATUS_PARALYSIS)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_PARALYSIS);
-                    b_call_bc_move_exec(gUnknown_081D99B6);
+                    b_call_bc_move_exec(BattleScript_BerryCurePrlzEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6047,7 +6054,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].status1 & STATUS_PSN_ANY)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_PSN_ANY | STATUS_TOXIC_COUNTER);
-                    b_call_bc_move_exec(gUnknown_081D99CE);
+                    b_call_bc_move_exec(BattleScript_BerryCurePsnEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6055,7 +6062,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].status1 & STATUS_BURN)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_BURN);
-                    b_call_bc_move_exec(gUnknown_081D99E6);
+                    b_call_bc_move_exec(BattleScript_BerryCureBrnEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6063,7 +6070,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].status1 & STATUS_FREEZE)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_FREEZE);
-                    b_call_bc_move_exec(gUnknown_081D99FE);
+                    b_call_bc_move_exec(BattleScript_BerryCureFrzEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6072,7 +6079,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_SLEEP);
                     gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
-                    b_call_bc_move_exec(gUnknown_081D9A16);
+                    b_call_bc_move_exec(BattleScript_BerryCureSlpEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6080,7 +6087,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (gBattleMons[bank].status2 & STATUS2_CONFUSION)
                 {
                     gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
-                    b_call_bc_move_exec(gUnknown_081D9A2E);
+                    b_call_bc_move_exec(BattleScript_BerryCureConfusionEnd2);
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
@@ -6182,7 +6189,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_PARALYSIS);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D99BC;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureParRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6191,7 +6198,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_PSN_ANY | STATUS_TOXIC_COUNTER);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D99D4;
+                    gBattlescriptCurrInstr = BattleScript_BerryCurePsnRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6200,7 +6207,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_BURN);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D99EC;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureBrnRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6209,7 +6216,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status1 &= ~(STATUS_FREEZE);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9A04;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureFrzRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6219,7 +6226,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleMons[bank].status1 &= ~(STATUS_SLEEP);
                     gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9A1C;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureSlpRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -6228,7 +6235,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9A34;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureConfusionRet;
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
@@ -6293,7 +6300,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     BATTLE_STRUCT->scriptingActive = bank;
                     gStringBank = bank;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9A64;
+                    gBattlescriptCurrInstr = BattleScript_WhiteHerbRet;
                     return effect; // unnecessary return
                 }
                 break;
@@ -6343,7 +6350,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         gBattleMoveDamage = -1;
                     gSpecialStatuses[gBankTarget].moveturnLostHP = 0;
                     b_movescr_stack_push_cursor();
-                    gBattlescriptCurrInstr = gUnknown_081D9AA7;
+                    gBattlescriptCurrInstr = BattleScript_ItemHealHP_Ret;
                     effect++;
                 }
                 break;
@@ -6362,7 +6369,7 @@ struct CombinedMove
     u16 newMove;
 };
 
-const struct CombinedMove sCombinedMoves[2] =
+static const struct CombinedMove sCombinedMoves[2] =
 {
     {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
     {0xFFFF, 0xFFFF, 0xFFFF}
@@ -6403,16 +6410,13 @@ void unref_sub_801B40C(void)
     }
 }
 
-extern const BattleCmdFunc gBattleScriptingCommandsTable[];
-extern u32 gBattleExecBuffer;
-
 void sub_801B594(void)
 {
     if (gBattleExecBuffer == 0)
         gBattleScriptingCommandsTable[*gBattlescriptCurrInstr]();
 }
 
-u8 sub_801B5C0(u16 move, u8 useMoveTarget) //get move target
+u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
 {
     u8 targetBank = 0;
     u8 moveTarget;
@@ -6489,28 +6493,16 @@ u8 sub_801B5C0(u16 move, u8 useMoveTarget) //get move target
     return targetBank;
 }
 
-extern u8 gUnknown_081D995F[]; //disobedient while asleep
-extern u8 gUnknown_081D9977[]; //disobedient no possible moves to use
-extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
-extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
-extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
-
-extern u8 gUnknown_02024BE5;
-extern u8 gCurrMovePos;
-extern u16 gRandomMove;
-extern s32 gBattleMoveDamage;
-extern u16 gDynamicBasePower;
-
-/*
 u8 IsPokeDisobedient(void)
 {
     u8 obedienceLevel;
-    register s32 calc asm("r4");
+    s32 rnd;
+    s32 calc;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK
-        || GetBankSide(gBankAttacker) == 1
-        || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName)
-        || FlagGet(BADGE08_GET))
+     || GetBankSide(gBankAttacker) == 1
+     || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName)
+     || FlagGet(BADGE08_GET))
         return 0;
 
     obedienceLevel = 10;
@@ -6523,8 +6515,8 @@ u8 IsPokeDisobedient(void)
 
     if (gBattleMons[gBankAttacker].level <= obedienceLevel)
         return 0;
-    calc = (Random() & 255);
-    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * calc / 256;
+    rnd = (Random() & 255);
+    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * rnd >> 8;
     if (calc < obedienceLevel)
         return 0;
 
@@ -6536,15 +6528,16 @@ u8 IsPokeDisobedient(void)
         gBattlescriptCurrInstr = gUnknown_081D995F;
         return 1;
     }
-    calc = (Random() & 255);
-    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * calc / 256;
+
+    rnd = (Random() & 255);
+    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * rnd >> 8;
     if (calc < obedienceLevel)
     {
-        u8 moveLimitations = CheckMoveLimitations(gBankAttacker, gBitTable[gCurrMovePos], 0xFF);
-        if (moveLimitations == 0xF) // all moves cannot be used
+        calc = CheckMoveLimitations(gBankAttacker, gBitTable[gCurrMovePos], 0xFF);
+        if (calc == 0xF) // all moves cannot be used
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
-            gBattlescriptCurrInstr = gUnknown_081D9977;
+            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
         }
         else // use a random move
@@ -6552,13 +6545,13 @@ u8 IsPokeDisobedient(void)
             do
             {
                 gCurrMovePos = gUnknown_02024BE5 = Random() & 3;
-            } while (gBitTable[gCurrMovePos] & moveLimitations);
+            } while (gBitTable[gCurrMovePos] & calc);
             gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
             gBattleCommunication[3] = 0;
             gDynamicBasePower = 0;
             BATTLE_STRUCT->dynamicMoveType = 0;
             gBattlescriptCurrInstr = gUnknown_081D996F;
-            gBankTarget = sub_801B5C0(gRandomMove, 0);
+            gBankTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
         }
@@ -6566,6 +6559,7 @@ u8 IsPokeDisobedient(void)
     else
     {
         obedienceLevel = gBattleMons[gBankAttacker].level - obedienceLevel;
+
         calc = (Random() & 255);
         if (calc < obedienceLevel && !(gBattleMons[gBankAttacker].status1 & STATUS_ANY) && gBattleMons[gBankAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBankAttacker].ability != ABILITY_INSOMNIA)
         {
@@ -6594,9 +6588,8 @@ u8 IsPokeDisobedient(void)
         else
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
-            gBattlescriptCurrInstr = gUnknown_081D9977;
+            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
         }
     }
 }
-*/
