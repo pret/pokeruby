@@ -107,14 +107,14 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A91:: @ 81B6A91
 	inccounter GAME_STAT_CHECKED_CLOCK
 	fadescreen 1
-	special 155
+	special sub_810D6B8
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B:: @ 81B6A9B
 	fadescreen 1
-	special 154
+	special StartWallClock
 	waitstate
 	return
 
@@ -221,7 +221,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 	waitmove 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
 	fadedefault
-	special 62
+	special TurnOffTVScreen
 	setflag 2096
 	pause 35
 	return

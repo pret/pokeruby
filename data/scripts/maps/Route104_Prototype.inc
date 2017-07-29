@@ -60,7 +60,7 @@ Route104_Prototype_EventScript_160CFB:: @ 8160CFB
 	pause 60
 	fadescreen 1
 	pause 60
-	special 271
+	special DoSoftReset
 	waitstate
 	release
 	end

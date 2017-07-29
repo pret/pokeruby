@@ -83,7 +83,7 @@ extern void sub_802E220();
 extern void sub_802E2D4();
 extern void sub_802E004(void);
 extern void sub_802DF30(void);
-extern void sub_80325B8(void);
+extern void BattleMusicStop(void);
 extern void PlayerBufferExecCompleted(void);
 extern void bx_t1_healthbar_update(void);
 extern void nullsub_91(void);
@@ -1101,7 +1101,7 @@ void sub_8030594(void)
 
 void sub_8030674(void)
 {
-    sub_80325B8();
+    BattleMusicStop();
     BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
     PlayerBufferExecCompleted();
 }

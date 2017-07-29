@@ -4,7 +4,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEBAB:: @ 81AEBAB
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE88F, 5
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBDA
-	special 114
+	special sub_8109C44
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3
 	message MauvilleCity_PokemonCenter_1F_Text_1AE910
@@ -21,7 +21,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3:: @ 81AEBE3
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC:: @ 81AEBEC
-	special 113
+	special sub_8109E34
 	waitstate
 	compare 0x8004, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC2D
@@ -30,7 +30,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC:: @ 81AEBEC
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE97C, 5
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC42
-	special 115
+	special sub_8109C58
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
@@ -58,19 +58,19 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E:: @ 81AEC4E
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AEC57:: @ 81AEC57
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE9F8, 4
-	special 117
+	special sub_8109CF0
 	waitstate
 	compare 0x8006, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECA6
 	compare 0x8006, 65535
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECAF
-	special 116
+	special sub_8109C90
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECBD
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEA9B, 5
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
-	special 118
+	special sub_8109DE0
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEAFB, 2
 	end
 

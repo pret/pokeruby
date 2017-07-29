@@ -469,10 +469,20 @@ struct UnkMauvilleOldManStruct2
     u8 fillerF[0x2];
 }; /*size = 0x2C*/
 
+struct MauvilleOldManTrader
+{
+    u8 unk0;
+    u8 unk1[4];
+    u8 unk5[4][11];
+    u8 unk31;
+};
+
 typedef union OldMan
 {
     struct UnkMauvilleOldManStruct oldMan1;
     struct UnkMauvilleOldManStruct2 oldMan2;
+    struct MauvilleOldManTrader trader;
+    u8 filler[0x40];
 } OldMan;
 
 struct Unk_SB_Access_Struct1
@@ -526,7 +536,9 @@ struct GabbyAndTyData
 
 struct RecordMixing_UnknownStructSub
 {
-    u8 data[0x38];
+    u32 unk0;
+    u8 data[0x34];
+    //u8 data[0x38];
 };
 
 struct RecordMixing_UnknownStruct
@@ -534,6 +546,29 @@ struct RecordMixing_UnknownStruct
     struct RecordMixing_UnknownStructSub data[2];
     u32 unk70;
     u16 unk74[0x2];
+};
+
+struct LinkBattleRecord
+{
+    u8 name[8];
+    u16 trainerId;
+    u16 wins;
+    u16 losses;
+    u16 draws;
+};
+
+struct RecordMixingGiftData
+{
+    u8 unk0;
+    u8 quantity;
+    u16 itemId;
+    u8 filler4[8];
+};
+
+struct RecordMixingGift
+{
+    int checksum;
+    struct RecordMixingGiftData data;
 };
 
 struct SaveBlock1 /* 0x02025734 */
@@ -606,7 +641,6 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ OldMan oldMan;
-    /*0x2DC0*/ u8 unk_2DC0[0x14];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
@@ -615,14 +649,14 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x30AC*/ u8 filler_30B4[0x2];
     /*0x30B6*/ u8 filler_30B6;
     /*0x30B7*/ u8 filler_30B7[1];
-    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
     /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
-    /*0x3A7C*/ u8 filler_3A7C[0x10];
+    /*0x3A7C*/ struct RecordMixingGift recordMixingGift;
     /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
 };
 
@@ -654,19 +688,20 @@ struct SaveBlock2_Sub
     /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
     /*0x03D8, 0x0480*/ u16 var_480;
     /*0x03DA, 0x0482*/ u16 var_482;
-    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD0];
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
+    /*0x03F0, 0x0498*/ u8 ereaderTrainer[0xBC];
     /*0x04AC, 0x0554*/ u8 var_4AC;
     /*0x04AD, 0x0555*/ u8 var_4AD;
-    /*0x04AE, 0x0556*/ u8 var_4AE;
-    /*0x04AF, 0x0557*/ u8 var_4AF;
+    /*0x04AE, 0x0556*/ u8 var_4AE[2];
     /*0x04B0, 0x0558*/ u16 var_4B0;
     /*0x04B2, 0x055A*/ u16 var_4B2;
     /*0x04B4, 0x055C*/ u16 var_4B4;
     /*0x04B6, 0x055E*/ u16 var_4B6;
-    /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
+    /*0x04B8, 0x0560*/ u16 recordWinStreak[2];
+    /*0x04BC, 0x0564*/ u8 filler_4BC[0xC];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04CC, 0x0574*/ u16 winStreak[2];
     /*0x04D0, 0x0578*/ u8 var_4D0;
     /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };

@@ -8,7 +8,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	callif 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
 	checkflag 2
 	callif 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
-	specialval RESULT, 335
+	specialval RESULT, sub_8090FC0
 	compare RESULT, 1
 	jumpeq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
@@ -29,7 +29,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD
 	message LilycoveCity_CoveLilyMotel_2F_Text_18708F
 	waittext
 	call LilycoveCity_CoveLilyMotel_2F_EventScript_1A02C5
-	special 264
+	special sub_810D6A4
 	waitstate
 	release
 	end

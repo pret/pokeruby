@@ -72,7 +72,7 @@ extern void sub_80375B4(void);
 extern void sub_8010384(struct Sprite *);
 extern void sub_8037B78(void);
 extern u8 sub_8031720();
-extern u8 mplay_80342A4();
+extern bool8 mplay_80342A4(u8);
 extern void ExecuteMoveAnim();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
@@ -887,6 +887,7 @@ void sub_8039A30(void)
         gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
         gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
 
+        // Dead code. sub_8031720 always returns 0.
         if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
         {
             dp01_tbl4_exec_completed();

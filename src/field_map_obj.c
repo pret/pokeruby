@@ -1902,8 +1902,11 @@ extern void CameraObjectReset1(void);
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u8 gReservedSpritePaletteCount;
 extern struct Camera gUnknown_0202E844;
-extern u8 gUnknown_030005A4;
-extern u16 gUnknown_030005A6;
+
+static u8 gUnknown_030005A4;
+static u16 gUnknown_030005A6;
+
+struct MapObject gMapObjects[16];
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {
@@ -3880,8 +3883,6 @@ u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return gUnknown_083752D0[sprite->data1](mapObject, sprite);
 }
-
-extern u32 gUnknown_0202FF84[];
 
 u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sprite)
 {

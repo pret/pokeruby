@@ -25,6 +25,8 @@ EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gUnknown_0202E844 = {0};
 EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
 
+struct BackupMapData gUnknown_03004870;
+
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection)

@@ -13,7 +13,6 @@
 
 extern u16 gScriptResult;
 extern struct TrainerCard gTrainerCards[4];
-extern struct LinkPlayer gLinkPlayers[];
 
 extern u8 gUnknown_03004860;
 extern u8 gFieldLinkPlayerCount;

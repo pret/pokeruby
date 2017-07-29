@@ -49,11 +49,11 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7780
-	specialval RESULT, 49
+	specialval RESULT, PlayerHasBerries
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
-	specialval RESULT, 160
+	specialval RESULT, sub_810CA00
 	compare RESULT, 65535
 	jumpif 5, FallarborTown_ContestLobby_EventScript_1B76EF
 	compare RESULT, 65535
@@ -94,7 +94,7 @@ FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
 FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
 	copyvar 0x8004, 0x8009
 	fadescreen 1
-	special 161
+	special sub_804E538
 	waitstate
 	releaseall
 	end
@@ -148,7 +148,7 @@ VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	lock
 	faceplayer
 	msgbox FallarborTown_ContestLobby_Text_1B742F, 4
-	specialval RESULT, 49
+	specialval RESULT, PlayerHasBerries
 	compare RESULT, 1
 	jumpeq FallarborTown_ContestLobby_EventScript_1B77DC
 	compare RESULT, 0
@@ -208,13 +208,13 @@ LilycoveCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 SlateportCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	lockall
-	specialval RESULT, 49
+	specialval RESULT, PlayerHasBerries
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7897
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7942
-	specialval RESULT, 160
+	specialval RESULT, sub_810CA00
 	compare RESULT, 65535
 	jumpif 5, FallarborTown_ContestLobby_EventScript_1B7878
 	compare RESULT, 65535
@@ -240,7 +240,7 @@ FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304
 	waittext
-	special 36
+	special sub_8083614
 	waitstate
 	compare RESULT, 1
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7980
@@ -276,7 +276,7 @@ FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
 	disappear 239
 	disappear 238
 	disappear 237
-	special 161
+	special sub_804E538
 	waitstate
 	releaseall
 	end
@@ -296,35 +296,35 @@ FallarborTown_ContestLobby_EventScript_1B7942:: @ 81B7942
 	end
 
 FallarborTown_ContestLobby_EventScript_1B794C:: @ 81B794C
-	special 31
+	special CloseLink
 	msgbox FallarborTown_ContestLobby_Text_1A4A30, 4
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7959:: @ 81B7959
-	special 31
+	special CloseLink
 	msgbox FallarborTown_ContestLobby_Text_1A4B1D, 4
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7966:: @ 81B7966
-	special 31
+	special CloseLink
 	msgbox FallarborTown_ContestLobby_Text_1A10EB, 4
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7973:: @ 81B7973
-	special 31
+	special CloseLink
 	msgbox FallarborTown_ContestLobby_Text_1A4A85, 4
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
 	fadescreen 1
-	specialval RESULT, 37
+	specialval RESULT, GetLinkPartnerNames
 	copyvar 0x8008, RESULT
 	copyvar 0x8004, 0x8008
-	special 38
+	special SpawnBerryBlenderLinkPlayerSprites
 	jump FallarborTown_ContestLobby_EventScript_1B799A
 	end
 

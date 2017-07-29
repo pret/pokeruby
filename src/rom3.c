@@ -1,5 +1,4 @@
 #include "global.h"
-#include "rom3.h"
 #include "battle.h"
 #include "battle_811DA74.h"
 #include "battle_ai.h"
@@ -10,6 +9,7 @@
 #include "items.h"
 #include "link.h"
 #include "pokemon.h"
+#include "rom3.h"
 #include "rom_8094928.h"
 #include "species.h"
 #include "task.h"
@@ -24,9 +24,10 @@ extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern struct BattlePokemon gBattleMons[];
 
-extern u8 gUnknown_020238C4;
-extern u8 gUnknown_020238C5;
-extern u8 gUnknown_020238C6;
+static EWRAM_DATA u8 gUnknown_020238C4 = 0;
+static EWRAM_DATA u8 gUnknown_020238C5 = 0;
+static EWRAM_DATA u8 gUnknown_020238C6 = 0;
+
 extern u32 gUnknown_020239FC;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gBattleBufferB[][0x200];
@@ -49,12 +50,13 @@ extern u8 gUnknown_02024C78;
 extern u8 gBattleOutcome;
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
-extern u8 gBattleBuffersTransferData[];
 extern u8 gBattleTextBuff1[];
 extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
 extern void (*gBattleMainFunc)(void);
 extern void (*gBattleBankFunc[])(void);
+
+u8 gBattleBuffersTransferData[0x170];
 
 void sub_800B858(void)
 {
@@ -580,7 +582,7 @@ void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
 {
     int i;
 
@@ -588,7 +590,7 @@ void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, u8 *e)
     gBattleBuffersTransferData[1] = b;
     gBattleBuffersTransferData[2] = c;
     for (i = 0; i < d; i++)
-        gBattleBuffersTransferData[3 + i] = *(e++);
+        gBattleBuffersTransferData[3 + i] = *(u8*)(e++);
     dp01_prepare_buffer(a, gBattleBuffersTransferData, d + 3);
 }
 
@@ -613,7 +615,7 @@ void dp01_build_cmdbuf_x04_4_4_4(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void sub_800C704(u8 a, u8 b, u8 c)
+void EmitSwitchInAnim(u8 a, u8 b, u8 c)
 {
     gBattleBuffersTransferData[0] = 5;
     gBattleBuffersTransferData[1] = b;
@@ -622,7 +624,7 @@ void sub_800C704(u8 a, u8 b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x06_a(u8 a, u8 b)
+void EmitReturnPokeToBall(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 6;
     gBattleBuffersTransferData[1] = b;
@@ -638,7 +640,7 @@ void dp01_build_cmdbuf_x07_7_7_7(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x08_8_8_8(u8 a)
+void EmitTrainerSlide(u8 a)
 {
     gBattleBuffersTransferData[0] = 8;
     gBattleBuffersTransferData[1] = 8;
@@ -683,7 +685,7 @@ void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x0D_a(u8 a, u8 b)
+void EmitBallThrowAnim(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 13;
     gBattleBuffersTransferData[1] = b;
@@ -701,7 +703,7 @@ void unref_sub_800C828(u8 a, u8 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, b * 3 + 2);
 }
 
-void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
+void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, struct DisableStruct *g)
 {
     gBattleBuffersTransferData[0] = 15;
     gBattleBuffersTransferData[1] = b;
@@ -727,7 +729,7 @@ void EmitMoveAnimation(u8 a, u16 b, u8 c, u16 d, s32 e, u8 f, u8 *g)
     }
     gBattleBuffersTransferData[14] = 0;
     gBattleBuffersTransferData[15] = 0;
-    memcpy(&gBattleBuffersTransferData[16], g, 0x1C);
+    memcpy(&gBattleBuffersTransferData[16], g, sizeof(*g));
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 0x2C);
 }
 
@@ -904,7 +906,7 @@ _0800CA64: .4byte gBattleTextBuff1\n\
 #endif
 
 __attribute__((naked))
-void EmitPrintStringPlayerOnly()
+void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1058,7 +1060,7 @@ void sub_800CBE0(u8 a, u8 *b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 
@@ -1080,21 +1082,25 @@ void dp01_build_cmdbuf_x17_17_17_17(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitHealthBarUpdate(u8 a, s16 b)
+// FIXME: I think this function is supposed to take s16 as its second argument,
+// but battle_4.c expects u16
+void EmitHealthBarUpdate(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 24;
     gBattleBuffersTransferData[1] = 0;
-    gBattleBuffersTransferData[2] = b;
-    gBattleBuffersTransferData[3] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[2] = (s16)b;
+    gBattleBuffersTransferData[3] = ((s16)b & 0xFF00) >> 8;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitExpBarUpdate(u8 a, u8 b, s16 c)
+// FIXME: I think this function is supposed to take s16 as its third argument,
+// but battle_4.c expects u16
+void EmitExpBarUpdate(u8 a, u8 b, u16 c)
 {
     gBattleBuffersTransferData[0] = 25;
     gBattleBuffersTransferData[1] = b;
-    gBattleBuffersTransferData[2] = c;
-    gBattleBuffersTransferData[3] = (c & 0xFF00) >> 8;
+    gBattleBuffersTransferData[2] = (s16)c;
+    gBattleBuffersTransferData[3] = ((s16)c & 0xFF00) >> 8;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
@@ -1282,7 +1288,7 @@ void EmitEffectivenessSound(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void sub_800D074(u8 a, u16 b)
+void EmitPlaySound(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 44;
     gBattleBuffersTransferData[1] = b;

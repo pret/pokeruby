@@ -1819,7 +1819,7 @@ _080166D8:
 	ldrb r1, [r6]
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_801A02C
+	bl ItemBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080166F2
@@ -1840,7 +1840,7 @@ _08016704:
 	ldrb r1, [r6]
 	movs r0, 0x1
 	movs r2, 0x1
-	bl sub_801A02C
+	bl ItemBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801671E
@@ -2576,7 +2576,7 @@ _08016CE0:
 	strb r0, [r1, 0x3]
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_801E3EC
+	bl SetMoveEffect
 	ldrb r0, [r6]
 	muls r0, r7
 	adds r0, r5
@@ -3731,7 +3731,7 @@ _08017668:
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_801A02C
+	bl ItemBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -3823,8 +3823,8 @@ _08017710: .4byte gUnknown_02024AD0
 _08017714: .4byte 0xff7fffff
 	thumb_func_end b_clear_atk_up_if_hit_flag_unless_enraged
 
-	thumb_func_start sub_8017718
-sub_8017718: @ 8017718
+	thumb_func_start CantUseMove
+CantUseMove: @ 8017718
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4866,7 +4866,7 @@ _08018008: .4byte 0x02000000
 _0801800C: .4byte 0x000160e7
 _08018010: .4byte gActiveBank
 _08018014: .4byte gUnknown_02024ACC
-	thumb_func_end sub_8017718
+	thumb_func_end CantUseMove
 
 	thumb_func_start sub_8018018
 sub_8018018: @ 8018018
@@ -8668,8 +8668,8 @@ _0801A024: .4byte gBattleMainFunc
 _0801A028: .4byte sub_8013FBC
 	thumb_func_end b_push_move_exec
 
-	thumb_func_start sub_801A02C
-sub_801A02C: @ 801A02C
+	thumb_func_start ItemBattleEffects
+ItemBattleEffects: @ 801A02C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -10938,7 +10938,7 @@ _0801B2BC:
 	bl b_movescr_stack_push_cursor
 	movs r0, 0
 	movs r1, 0
-	bl sub_801E3EC
+	bl SetMoveEffect
 	bl b_movescr_stack_pop_cursor
 	b _0801B3CA
 	.align 2, 0
@@ -11049,7 +11049,7 @@ _0801B3FC: .4byte 0x02000000
 _0801B400: .4byte 0x00016003
 _0801B404: .4byte gBattlescriptCurrInstr
 _0801B408: .4byte gUnknown_081D9AA7
-	thumb_func_end sub_801A02C
+	thumb_func_end ItemBattleEffects
 
 	thumb_func_start unref_sub_801B40C
 unref_sub_801B40C: @ 801B40C
@@ -11636,8 +11636,8 @@ _0801B920: .4byte 0x02000000
 _0801B924: .4byte 0x00016010
 	thumb_func_end sub_801B5C0
 
-	thumb_func_start sub_801B928
-sub_801B928: @ 801B928
+	thumb_func_start IsPokeDisobedient
+IsPokeDisobedient: @ 801B928
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -11828,7 +11828,7 @@ _0801BA9E:
 	ands r5, r4
 	cmp r5, 0
 	bne _0801BA9E
-	ldr r4, _0801BB18 @ =gUnknown_02024BEA
+	ldr r4, _0801BB18 @ =gRandomMove
 	ldr r3, _0801BB04 @ =gBattleMons
 	ldr r0, _0801BB10 @ =gCurrMovePos
 	ldrb r0, [r0]
@@ -11870,7 +11870,7 @@ _0801BB08: .4byte gBankAttacker
 _0801BB0C: .4byte gBitTable
 _0801BB10: .4byte gCurrMovePos
 _0801BB14: .4byte gUnknown_02024BE5
-_0801BB18: .4byte gUnknown_02024BEA
+_0801BB18: .4byte gRandomMove
 _0801BB1C: .4byte gBattleCommunication
 _0801BB20: .4byte gDynamicBasePower
 _0801BB24: .4byte 0x02000000
@@ -12012,6 +12012,6 @@ _0801BC40: .4byte gBankTarget
 _0801BC44: .4byte gBattlescriptCurrInstr
 _0801BC48: .4byte gUnknown_081D99A0
 _0801BC4C: .4byte gHitMarker
-	thumb_func_end sub_801B928
+	thumb_func_end IsPokeDisobedient
 
 	.align 2, 0 @ Don't pad with nop.

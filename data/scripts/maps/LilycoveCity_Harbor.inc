@@ -135,7 +135,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	callif 1, LilycoveCity_Harbor_EventScript_1599CE
 	pause 30
 	spriteinvisible 255, 0, 0
-	special 0
+	special HealPlayerParty
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	warp SouthernIsland_Exterior, 255, 13, 22

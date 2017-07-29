@@ -33,7 +33,7 @@ NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 	setvar 0x4002, 0
 	playsfx 21
 	call NewMauville_Inside_EventScript_15E5DA
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -43,7 +43,7 @@ NewMauville_Inside_EventScript_15E5C2:: @ 815E5C2
 	setvar 0x4002, 1
 	playsfx 21
 	call NewMauville_Inside_EventScript_15E728
-	special 142
+	special DrawWholeMapView
 	releaseall
 	end
 
@@ -145,7 +145,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 	setmaptile 33, 3, 757, 1
 	setmaptile 34, 3, 758, 1
 	setmaptile 35, 3, 759, 1
-	special 142
+	special DrawWholeMapView
 	return
 
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0

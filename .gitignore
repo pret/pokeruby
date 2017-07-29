@@ -38,3 +38,4 @@ Thumbs.db
 build/
 .idea/
 *.DS_Store
+*.pl

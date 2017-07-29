@@ -144,7 +144,7 @@ SlateportCity_PokemonFanClub_EventScript_155998:: @ 8155998
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
-	specialval RESULT, 265
+	specialval RESULT, CheckLeadMonCool
 	compare RESULT, 1
 	callif 1, SlateportCity_PokemonFanClub_EventScript_1559B3
 	return
@@ -154,7 +154,7 @@ SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
-	specialval RESULT, 266
+	specialval RESULT, CheckLeadMonBeauty
 	compare RESULT, 1
 	callif 1, SlateportCity_PokemonFanClub_EventScript_1559CA
 	return
@@ -164,7 +164,7 @@ SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
-	specialval RESULT, 267
+	specialval RESULT, CheckLeadMonCute
 	compare RESULT, 1
 	callif 1, SlateportCity_PokemonFanClub_EventScript_1559E1
 	return
@@ -174,7 +174,7 @@ SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
-	specialval RESULT, 268
+	specialval RESULT, CheckLeadMonSmart
 	compare RESULT, 1
 	callif 1, SlateportCity_PokemonFanClub_EventScript_1559F8
 	return
@@ -184,7 +184,7 @@ SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
-	specialval RESULT, 269
+	specialval RESULT, CheckLeadMonTough
 	compare RESULT, 1
 	callif 1, SlateportCity_PokemonFanClub_EventScript_155A0F
 	return
@@ -199,7 +199,7 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	checkflag 278
 	jumpeq SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
-	specialval RESULT, 230
+	specialval RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 4
 	jumpif 4, SlateportCity_PokemonFanClub_EventScript_155A3A
 	release

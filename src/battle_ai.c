@@ -31,6 +31,14 @@ extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u8 *BattleAIs[];
 
+enum
+{
+    WEATHER_TYPE_SUN,
+    WEATHER_TYPE_RAIN,
+    WEATHER_TYPE_SANDSTORM,
+    WEATHER_TYPE_HAIL,
+};
+
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
 when a command finishes processing, gAIScriptPtr is incremented by
@@ -38,7 +46,7 @@ the number of bytes that the current command had reserved for arguments
 in order to read the next command correctly. refer to battle_ai_scripts.s for the
 AI scripts.
 */
-extern u8 *gAIScriptPtr;
+EWRAM_DATA u8 *gAIScriptPtr = NULL;
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);
@@ -896,7 +904,7 @@ static void BattleAICmd_if_user_cant_damage(void)
 
 static void BattleAICmd_get_turn_count(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleResults.BattleTurnCounter;
+    AI_THINKING_STRUCT->funcResult = gBattleResults.battleTurnCounter;
     gAIScriptPtr += 1;
 }
 
@@ -1412,8 +1420,8 @@ static void BattleAICmd_get_highest_possible_damage(void)
     s32 i;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1452,8 +1460,8 @@ static void BattleAICmd_if_damage_bonus(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
@@ -1562,14 +1570,14 @@ static void BattleAICmd_if_status_not_in_party(void)
 
 static void BattleAICmd_get_weather(void)
 {
-    if (gBattleWeather & WEATHER_RAINY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_RAIN;
-    if (gBattleWeather & WEATHER_SANDSTORMY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUNNY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_SUN;
-    if (gBattleWeather & weather_hail)
-        AI_THINKING_STRUCT->funcResult = WEATHER_HAIL;
+    if (gBattleWeather & WEATHER_RAIN_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_RAIN;
+    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SANDSTORM;
+    if (gBattleWeather & WEATHER_SUN_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUN;
+    if (gBattleWeather & WEATHER_HAIL)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
 
     gAIScriptPtr += 1;
 }
@@ -1659,8 +1667,8 @@ static void BattleAICmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1688,8 +1696,8 @@ static void BattleAICmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->DynamicMoveType = 0;
-    BATTLE_STRUCT->DmgMultiplier = 1;
+    BATTLE_STRUCT->dynamicMoveType = 0;
+    BATTLE_STRUCT->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1843,7 +1851,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[index].DisabledMove == 0)
+        if (gDisableStructs[index].disabledMove == 0)
         {
             gAIScriptPtr += 7;
             return;
@@ -1856,7 +1864,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[index].EncoredMove != 0)
+    else if (gDisableStructs[index].encoredMove != 0)
     {
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         return;
@@ -1869,7 +1877,7 @@ static void BattleAICmd_if_encored(void)
     switch (gAIScriptPtr[1])
     {
     case 0: // _08109348
-        if (gDisableStructs[gActiveBank].DisabledMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].disabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1877,7 +1885,7 @@ static void BattleAICmd_if_encored(void)
         gAIScriptPtr += 6;
         return;
     case 1: // _08109370
-        if (gDisableStructs[gActiveBank].EncoredMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBank].encoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -1954,7 +1962,7 @@ static void BattleAICmd_is_first_turn(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].IsFirstTurn;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].isFirstTurn;
 
     gAIScriptPtr += 2;
 }
@@ -1968,7 +1976,7 @@ static void BattleAICmd_get_stockpile_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].StockpileCounter;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].stockpileCounter;
 
     gAIScriptPtr += 2;
 }
@@ -2025,7 +2033,7 @@ static void BattleAICmd_get_protect_count(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].ProtectUses;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].protectUses;
 
     gAIScriptPtr += 2;
 }
@@ -2104,7 +2112,7 @@ static void BattleAICmd_if_level_compare(void)
 
 static void BattleAICmd_if_taunted(void)
 {
-    if (gDisableStructs[gBankTarget].taunt != 0)
+    if (gDisableStructs[gBankTarget].tauntTimer1 != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -2112,7 +2120,7 @@ static void BattleAICmd_if_taunted(void)
 
 static void BattleAICmd_if_not_taunted(void)
 {
-    if (gDisableStructs[gBankTarget].taunt == 0)
+    if (gDisableStructs[gBankTarget].tauntTimer1 == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;

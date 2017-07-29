@@ -29,7 +29,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A0196
 	compare 0x40b3, 1
 	callif 1, Route119_EventScript_1511B9
-	special 324
+	special SetRoute119Weather
 	end
 
 Route119_EventScript_1511B9:: @ 81511B9
@@ -296,7 +296,7 @@ Route119_EventScript_1514A8:: @ 81514A8
 
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
@@ -309,7 +309,7 @@ Route119_EventScript_1514E6:: @ 81514E6
 
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6

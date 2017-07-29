@@ -18,10 +18,10 @@ MossdeepCity_House4_EventScript_15AB46:: @ 815AB46
 MossdeepCity_House4_EventScript_15AB50:: @ 815AB50
 	lock
 	faceplayer
-	special 7
+	special sub_80BB63C
 	compare RESULT, 0
 	jumpeq MossdeepCity_House4_EventScript_15AB6D
-	special 278
+	special GetSecretBaseNearbyMapName
 	msgbox MossdeepCity_House4_Text_18E17E, 4
 	release
 	end

@@ -16,7 +16,7 @@ void sub_8080B60(void);
 void atk17_seteffectuser(void);
 void sub_8080E28(void);
 void sub_8080E44(void);
-int sub_8080E70(void);
+bool32 sub_8080E70(void);
 void sub_8080E88(void);
 void sub_8080E88();
 void sp13E_warp_to_last_warp(void);

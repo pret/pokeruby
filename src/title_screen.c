@@ -30,14 +30,17 @@
 #define VERSION_BANNER_BYTES 0x2000
 #define VERSION_BANNER_LEFT_X 108
 #define VERSION_BANNER_RIGHT_X 172
-#define VERSION_BANNER_Y 44
+#ifdef SAPPHIRE
+#define VERSION_BANNER_Y_GOAL 83
+#else
 #define VERSION_BANNER_Y_GOAL 84
+#endif
+#define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 40)
 #define START_BANNER_X DISPLAY_WIDTH / 2 - 2
 #endif
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 gUnknown_0202F7E4;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030042C0;
 extern const u8 gUnknown_08E9D8CC[];
@@ -46,6 +49,8 @@ extern const u8 gUnknown_08E9F7E4[];
 extern const u8 gVersionTiles[];
 extern const u8 gTitleScreenPressStart_Gfx[];
 extern const u16 gTitleScreenLogoShinePalette[];
+
+static EWRAM_DATA u8 gUnknown_0202F7E4 = 0;
 
 #ifdef SAPPHIRE
 static const u16 sLegendaryMonPalettes[][16] =
@@ -331,7 +336,9 @@ static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 #define LEGENDARY_MARKING_COLOR(c) RGB(0, 0, (c))
 #endif
 
-#ifdef SAPPHIRE
+#if defined(GERMAN) && defined(SAPPHIRE)
+#define PLTT_BUFFER_INDEX 9
+#elif defined(SAPPHIRE)
 #define PLTT_BUFFER_INDEX 26
 #else
 #define PLTT_BUFFER_INDEX 21

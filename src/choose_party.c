@@ -31,7 +31,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-extern u8 gSelectedOrderFromParty[];
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
@@ -39,6 +38,8 @@ extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
 extern const u16 gBattleTowerBanlist[];
+
+EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 
 extern void OpenPartyMenu();
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);

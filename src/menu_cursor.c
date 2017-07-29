@@ -22,13 +22,12 @@ extern const struct Subsprite gUnknown_0842F790;
 
 extern u16 gUnknown_0203A360[];
 
-extern struct Subsprite gMenuCursorSubsprites[];
-
-extern u8 gUnknown_0203A3D0;
-extern u8 gUnknown_0203A3D1;
-extern u8 gUnknown_0203A3D2;
-extern u8 gUnknown_0203A3D3;
-extern u8 gUnknown_0203A3D4;
+EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
+EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
 
 void sub_814A590(void)
 {
@@ -555,7 +554,7 @@ _0814AA24:\n\
     cmp r1, 0x7\n\
     bgt _0814A99E\n\
 _0814AA3E:\n\
-    ldr r5, _0814AAAC @ =0x0843d6d8\n\
+    ldr r5, _0814AAAC @ =gUnknown_0842F798\n\
     ldr r0, [r5]\n\
     ldr r1, [r5, 0x4]\n\
     str r0, [r4]\n\
@@ -611,7 +610,7 @@ _0814AA9C:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0814AAAC: .4byte 0x0843d6d8\n\
+_0814AAAC: .4byte gUnknown_0842F798\n\
 _0814AAB0: .4byte gUnknown_0203A3D0\n\
 _0814AAB4: .4byte gSprites\n\
 _0814AAB8: .4byte gSubspriteTables_842F5C0\n\

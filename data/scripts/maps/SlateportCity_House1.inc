@@ -13,7 +13,7 @@ SlateportCity_House1_EventScript_15567B:: @ 815567B
 
 SlateportCity_House1_EventScript_15569C:: @ 815569C
 	msgbox SlateportCity_House1_Text_17D4DB, 4
-	special 159
+	special sub_80F9A0C
 	waitstate
 	compare 0x8004, 255
 	jumpif 5, SlateportCity_House1_EventScript_1556C9
@@ -27,15 +27,15 @@ SlateportCity_House1_EventScript_1556BF:: @ 81556BF
 	end
 
 SlateportCity_House1_EventScript_1556C9:: @ 81556C9
-	specialval RESULT, 327
+	specialval RESULT, ScriptGetPartyMonSpecies
 	compare RESULT, SPECIES_EGG
 	jumpeq SlateportCity_House1_EventScript_15571C
-	special 124
-	special 125
+	special sub_80BFAE0
+	special sub_80BFB10
 	compare RESULT, 1
 	jumpeq SlateportCity_House1_EventScript_155726
-	specialval RESULT, 336
-	special 124
+	specialval RESULT, sub_810F96C
+	special sub_80BFAE0
 	compare RESULT, 1
 	jumpeq SlateportCity_House1_EventScript_155726
 	msgbox SlateportCity_House1_Text_17D505, 5
@@ -58,8 +58,8 @@ SlateportCity_House1_EventScript_155726:: @ 8155726
 SlateportCity_House1_EventScript_155730:: @ 8155730
 	msgbox SlateportCity_House1_Text_17D580, 4
 	call SlateportCity_House1_EventScript_1A0678
-	specialval RESULT, 123
-	special 124
+	specialval RESULT, sub_80BF9B4
+	special sub_80BFAE0
 	compare RESULT, 1
 	jumpeq SlateportCity_House1_EventScript_15575A
 	msgbox SlateportCity_House1_Text_17D63A, 4

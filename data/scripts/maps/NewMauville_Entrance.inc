@@ -39,7 +39,7 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	setmaptile 3, 1, 715, 1
 	setmaptile 4, 1, 716, 0
 	setmaptile 5, 1, 717, 1
-	special 142
+	special DrawWholeMapView
 	playsfx 20
 	setvar 0x40ba, 1
 	releaseall

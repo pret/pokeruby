@@ -4,7 +4,7 @@ MossdeepCity_GameCorner_B1F_MapScripts:: @ 815AE55
 	.byte 0
 
 MossdeepCity_GameCorner_B1F_MapScript1_15AE60:: @ 815AE60
-	special 322
+	special sub_8134AB4
 	end
 
 MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
@@ -15,12 +15,12 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	lockall
 	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEF9
 	waitmove 0
-	special 235
+	special sub_81360C0
 	msgbox 0x20234cc, 4
 	closebutton
 	setvar 0x8004, 2
 	setvar 0x8005, 0
-	special 236
+	special sub_813556C
 	waitstate
 	compare RESULT, 3
 	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AED5
@@ -29,10 +29,10 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	compare RESULT, 2
 	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closebutton
-	special 0
+	special HealPlayerParty
 	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmove 0
-	special 40
+	special LoadPlayerParty
 	setvar 0x4001, 1
 	warp MossdeepCity_GameCorner_1F, 255, 3, 1
 	waitstate
@@ -46,14 +46,14 @@ MossdeepCity_GameCorner_B1F_EventScript_15AED5:: @ 815AED5
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEE3:: @ 815AEE3
 	setvar 0x40c0, 1
-	special 141
+	special ShowFieldMessageStringVar4
 	waittext
 	waitbutton
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
 	setvar 0x40c0, 2
-	special 141
+	special ShowFieldMessageStringVar4
 	waittext
 	waitbutton
 	return

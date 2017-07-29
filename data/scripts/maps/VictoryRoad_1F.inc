@@ -93,7 +93,7 @@ VictoryRoad_1F_EventScript_15DF28:: @ 815DF28
 
 VictoryRoad_1F_EventScript_15DF31:: @ 815DF31
 	trainerbattle 0, OPPONENT_WALLY_3, 0, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
-	specialval RESULT, 57
+	specialval RESULT, sub_8082C68
 	compare RESULT, 1
 	jumpeq VictoryRoad_1F_EventScript_15DF58
 	msgbox VictoryRoad_1F_Text_197A47, 6

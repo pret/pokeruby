@@ -16,7 +16,7 @@ Route119_WeatherInstitute_1F_EventScript_163C41:: @ 8163C41
 Route119_WeatherInstitute_1F_EventScript_163C4D:: @ 8163C4D
 	lock
 	faceplayer
-	special 148
+	special GetPlayerBigGuyGirlString
 	compare 0x40b3, 0
 	jumpeq Route119_WeatherInstitute_1F_EventScript_163C67
 	msgbox Route119_WeatherInstitute_1F_Text_19ED22, 4

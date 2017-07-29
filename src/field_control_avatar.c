@@ -35,8 +35,11 @@ extern u16 gScriptFacing;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
-extern u8 gUnknown_0202E8C0;
-extern u16 gUnknown_0202E8C2;
+
+static EWRAM_DATA u8 gUnknown_0202E8C0 = 0;
+static EWRAM_DATA u16 gUnknown_0202E8C2 = 0;
+
+u8 gSelectedMapObject;
 
 //scripts
 extern u8 gUnknown_081A2C51[];
@@ -863,7 +866,7 @@ u8 *GetFieldObjectScriptPointerForComparison(void)
     return sub_8068364(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), r4);
 }
 
-int sub_8068FEC(void)
+int SetCableClubWarp(void)
 {
     struct MapPosition position;
 

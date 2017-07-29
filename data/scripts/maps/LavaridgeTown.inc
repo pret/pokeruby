@@ -236,7 +236,7 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 	step_end
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
-	specialval RESULT, 287
+	specialval RESULT, player_get_direction_lower_nybble
 	compare RESULT, 1
 	jumpeq LavaridgeTown_EventScript_14E721
 	end

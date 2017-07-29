@@ -136,7 +136,7 @@ _080360D8:
 	ldrh r1, [r4]
 	mov r3, r8
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -211,7 +211,7 @@ _0803617C:
 	beq _080361BC
 	ldrh r1, [r5]
 	ldrb r2, [r7]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -693,7 +693,7 @@ _08036550:
 	ldrh r1, [r5]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -770,7 +770,7 @@ _080365F2:
 	ldrh r1, [r5]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -1061,7 +1061,7 @@ _08036850:
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r1, r4, 0
-	bl ai_rate_move
+	bl AI_TypeCalc
 	ldr r1, [sp]
 	ands r1, r0
 	cmp r1, 0
@@ -1096,7 +1096,7 @@ _0803688E:
 	beq _080368CA
 	ldrh r1, [r5]
 	ldrb r2, [r7]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2

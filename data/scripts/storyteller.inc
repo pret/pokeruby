@@ -8,22 +8,22 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0816:: @ 81B0816
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AECC6, 5
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
-	specialval RESULT, 107
+	specialval RESULT, sub_80F889C
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B08D3
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B084F:: @ 81B084F
 	message MauvilleCity_PokemonCenter_1F_Text_1AED35
 	waittext
-	special 109
+	special sub_80F8874
 	waitstate
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0883
 	setvar 0x8008, 1
-	special 108
+	special sub_80F8888
 	waittext
 	waitbutton
-	specialval RESULT, 110
+	specialval RESULT, sub_80F88AC
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0893
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1B0909
@@ -40,10 +40,10 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0893:: @ 81B0893
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B084F
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B08AE:: @ 81B08AE
-	specialval RESULT, 112
+	specialval RESULT, sub_80F88E0
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B091F
-	specialval RESULT, 107
+	specialval RESULT, sub_80F889C
 	compare RESULT, 4
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B091F
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1B08DB
@@ -55,7 +55,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B08DB:: @ 81B08DB
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEEB4, 5
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
-	specialval RESULT, 111
+	specialval RESULT, sub_80F88FC
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0909
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEF49, 4

@@ -125,7 +125,7 @@ Route110_TrickHousePuzzle7_EventScript_1632B9:: @ 81632B9
 	callif 0, Route110_TrickHousePuzzle7_EventScript_163195
 	checkflag 194
 	callif 1, Route110_TrickHousePuzzle7_EventScript_1631F4
-	special 142
+	special DrawWholeMapView
 	playsfx 36
 	checkflag 194
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633A4
@@ -140,7 +140,7 @@ Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
 	callif 0, Route110_TrickHousePuzzle7_EventScript_1631A8
 	checkflag 195
 	callif 1, Route110_TrickHousePuzzle7_EventScript_163207
-	special 142
+	special DrawWholeMapView
 	playsfx 36
 	checkflag 195
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633AE
@@ -155,7 +155,7 @@ Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
 	callif 0, Route110_TrickHousePuzzle7_EventScript_1631BB
 	checkflag 196
 	callif 1, Route110_TrickHousePuzzle7_EventScript_16321A
-	special 142
+	special DrawWholeMapView
 	playsfx 36
 	checkflag 196
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633B8
@@ -170,7 +170,7 @@ Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
 	callif 0, Route110_TrickHousePuzzle7_EventScript_1631CE
 	checkflag 197
 	callif 1, Route110_TrickHousePuzzle7_EventScript_16322D
-	special 142
+	special DrawWholeMapView
 	playsfx 36
 	checkflag 197
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633C2
@@ -185,7 +185,7 @@ Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
 	callif 0, Route110_TrickHousePuzzle7_EventScript_1631E1
 	checkflag 198
 	callif 1, Route110_TrickHousePuzzle7_EventScript_163240
-	special 142
+	special DrawWholeMapView
 	playsfx 36
 	checkflag 198
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633CC

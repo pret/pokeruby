@@ -55,7 +55,7 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
-// sub_8053538
+void sub_8053538(u8);
 void sub_8053570(void);
 void sub_8053588(u8);
 void sub_80535C4(s16 a1, s16 a2);
@@ -99,9 +99,9 @@ void sub_8053F0C(void);
 void sub_8053F84(void);
 void sub_8053FB0(u16);
 // is_warp1_light_level_8_or_9
-// sub_8053FF8
-// sub_8054034
-// sub_8054044
+void sub_8053FF8(void);
+bool8 sub_8054034(void);
+void sub_8054044(void);
 // sub_8054050
 void sub_80540D0(s16 *, u16 *);
 void sub_8054164(void);
@@ -129,8 +129,8 @@ void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
-// sub_8054534
-// sub_8054588
+void sub_8054534(void);
+void sub_8054588(void);
 void c2_80567AC(void);
 void c2_exit_to_overworld_2_switch(void);
 void c2_exit_to_overworld_2_local(void);

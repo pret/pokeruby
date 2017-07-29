@@ -53,7 +53,7 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41
 	sethealplace 1
 	fadescreendelay 1, 24
-	special 272
+	special GameClear
 	waitstate
 	releaseall
 	end
@@ -61,7 +61,7 @@ EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41
 EverGrandeCity_HallOfFame_EventScript_15BC4D:: @ 815BC4D
 	sethealplace 2
 	fadescreendelay 1, 24
-	special 272
+	special GameClear
 	waitstate
 	releaseall
 	end

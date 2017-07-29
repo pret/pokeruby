@@ -207,10 +207,10 @@ LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
 
 LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	setvar 0x8004, 2
-	special 214
+	special DoPCTurnOnEffect
 	playsfx SE_PC_ON
 	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
-	special 249
+	special BedroomPC
 	waitstate
 	releaseall
 	end
@@ -218,6 +218,6 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 gMayHouse_TurnPCOff:: @ 8152C75
 	setvar 0x8004, 2
 	playsfx SE_PC_OFF
-	special 215
+	special DoPCTurnOffEffect
 	releaseall
 	end

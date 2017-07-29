@@ -1215,7 +1215,7 @@ sub_8083958: @ 8083958
 	ldrb r1, [r0]
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8110290
+	bl UpdateLinkBattleRecords
 _0808397E:
 	ldr r0, _08083998 @ =gMain
 	ldr r1, _0808399C @ =sub_805465C

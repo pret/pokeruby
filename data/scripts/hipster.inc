@@ -3,7 +3,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE845:: @ 81AE845
 	faceplayer
 	setflag 2054
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0C5B, 4
-	special 100
+	special sub_80F7C70
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE86A
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0CA7, 4
@@ -11,7 +11,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE845:: @ 81AE845
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE86A:: @ 81AE86A
-	special 102
+	special sub_80F7C90
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE882
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0D11, 4
@@ -20,6 +20,6 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE86A:: @ 81AE86A
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE882:: @ 81AE882
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0D75, 4
-	special 101
+	special sub_80F7C84
 	release
 	end

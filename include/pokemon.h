@@ -349,6 +349,18 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
+enum
+{
+    STAT_STAGE_HP,       // 0
+    STAT_STAGE_ATK,      // 1
+    STAT_STAGE_DEF,      // 2
+    STAT_STAGE_SPEED,    // 3
+    STAT_STAGE_SPATK,    // 4
+    STAT_STAGE_SPDEF,    // 5
+    STAT_STAGE_ACC,      // 6
+    STAT_STAGE_EVASION,  // 7
+};
+
 struct BaseStats
 {
     /*0x00*/ u8 baseHP;
@@ -392,8 +404,13 @@ struct BattleMove
     u8 secondaryEffectChance;
     u8 target;
     u8 priority;
-    u32 flags;
+    u8 flags;
+    u8 pad[3];
 };
+
+#define FLAG_PROTECT_AFFECTED    0x2
+#define FLAG_MAGICCOAT_AFFECTED  0x4
+#define FLAG_SNATCH_AFFECTED     0x8
 
 struct PokemonStorage
 {
@@ -464,7 +481,9 @@ struct EvolutionData
     struct Evolution evolutions[5];
 };
 
+extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const u8 *const gItemEffectTable[];
 extern const struct BaseStats gBaseStats[];

@@ -5,7 +5,7 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
-	special 246
+	special sub_813601C
 	compare RESULT, 1
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
@@ -16,7 +16,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 	return
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
-	special 246
+	special sub_813601C
 	compare RESULT, 0
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare 0x40c0, 0
@@ -55,7 +55,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AD2B
 	compare 0x40c0, 3
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AD34
-	special 40
+	special LoadPlayerParty
 	setvar 0x40c0, 0
 	releaseall
 	end
@@ -91,8 +91,8 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
-	special 39
-	special 285
+	special SavePlayerParty
+	special sub_810F414
 	msgbox MossdeepCity_GameCorner_1F_Text_18E650, 5
 	compare RESULT, 0
 	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
@@ -102,13 +102,13 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	msgbox MossdeepCity_GameCorner_1F_Text_18E741, 5
 	compare RESULT, 0
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
-	special 40
+	special LoadPlayerParty
 	call MossdeepCity_GameCorner_1F_EventScript_19F806
 	compare RESULT, 0
 	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	hidebox 0, 0, 15, 10
-	special 39
-	special 248
+	special SavePlayerParty
+	special ReducePlayerPartyToThree
 	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
 	closebutton
 	compare FACING, 2
@@ -123,7 +123,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15ADE8:: @ 815ADE8
-	special 40
+	special LoadPlayerParty
 	msgbox MossdeepCity_GameCorner_1F_Text_18E698, 4
 	release
 	end
@@ -131,7 +131,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ADE8:: @ 815ADE8
 MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
 	msgbox MossdeepCity_GameCorner_1F_Text_18E6DA, 4
 	fadescreen 1
-	special 41
+	special sub_80C5568
 	waitstate
 	return
 
