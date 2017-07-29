@@ -286,11 +286,3 @@ gLinkOpponentBufferCommands:: @ 81FB048
 
 @ 81FB12C
 	.include "data/battle_moves.inc"
-
-	.align 2
-gUnknown_081FC1D0:: @ 81FC1D0
-	.2byte 0x34, 0x10, 0x101
-	.space 2
-
-	.2byte -1, -1, -1
-	.space 2
