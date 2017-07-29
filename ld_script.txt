@@ -53,7 +53,7 @@ SECTIONS {
         asm/battle_1.o(.text_800DC24);
         src/battle_2.o(.text);
         asm/battle_2.o(.text);
-        asm/battle_3.o(.text);
+        src/battle_3.o(.text);
         src/battle_4.o(.text);
         asm/battle_5.o(.text);
         src/battle_6.o(.text);
@@ -332,6 +332,7 @@ SECTIONS {
         data/data2a.o(.rodata);
         src/battle_4.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_3.o(.rodata);
         src/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/trig.o(.rodata);
