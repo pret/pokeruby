@@ -367,42 +367,42 @@ _0814901C: .4byte REG_BG3VOFS\n\
 
 void sub_8149020(u8 mode)
 {
-	u16 var1;
-	u16 var2;
+    u16 var1;
+    u16 var2;
     switch (mode)
     {
-		case 0:
+        case 0:
         default:
             /* stuff */
-			if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
-			if(gMain.vblankCounter1 & 4)
-			{
-			    var1 = gPlttBufferUnfaded[9];
-				var2 = gPlttBufferUnfaded[10];
-			}
-			else
-			{
-				var1 = gPlttBufferUnfaded[10];
-				var2 = gPlttBufferUnfaded[9];
-			}
-			LoadPalette(&var1, 9, 2);
-			LoadPalette(&var2, 10, 2);
+            if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
+            if(gMain.vblankCounter1 & 4)
+            {
+                var1 = gPlttBufferUnfaded[9];
+                var2 = gPlttBufferUnfaded[10];
+            }
+            else
+            {
+                var1 = gPlttBufferUnfaded[10];
+                var2 = gPlttBufferUnfaded[9];
+            }
+            LoadPalette(&var1, 9, 2);
+            LoadPalette(&var2, 10, 2);
             break;
         case 2:
             /* stuff */
-			if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
-			if(gMain.vblankCounter1 & 4)
-			{
-			    var1 = 0x3D27;
-				var2 = 0x295;
-			}
-			else
-			{
-			    var1 = 0x31C;
-				var2 = 0x3D27;
-			}
-			LoadPalette(&var1, 12, 2);
-			LoadPalette(&var2, 13, 2);
+            if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
+            if(gMain.vblankCounter1 & 4)
+            {
+                var1 = 0x3D27;
+                var2 = 0x295;
+            }
+            else
+            {
+                var1 = 0x31C;
+                var2 = 0x3D27;
+            }
+            LoadPalette(&var1, 12, 2);
+            LoadPalette(&var2, 13, 2);
             break;
         case 1:
             break;
@@ -412,35 +412,35 @@ void sub_8149020(u8 mode)
 void sub_814910C(struct Sprite *sprite)
 {
     if(gUnknown_0203935C)
-	{
-	    DestroySprite(sprite);
-	}
-	else
-	{
-	    s32 var = ((sprite->pos1.x << 16) | (u16)sprite->data2) + (u16)sprite->data1;
+    {
+        DestroySprite(sprite);
+    }
+    else
+    {
+        s32 var = ((sprite->pos1.x << 16) | (u16)sprite->data2) + (u16)sprite->data1;
         sprite->pos1.x = var >> 16;
         sprite->data2 = var;
-		if (sprite->pos1.x > 255) sprite->pos1.x = 0xFFE0;
-		if (sprite->data0)
-		{
-			sprite->pos2.y = -(gUnknown_02039358 + gUnknown_0203935A);
-		}
-		else
-		{
-			sprite->pos2.y = -gUnknown_02039358;
-		}
-	}
+        if (sprite->pos1.x > 255) sprite->pos1.x = 0xFFE0;
+        if (sprite->data0)
+        {
+            sprite->pos2.y = -(gUnknown_02039358 + gUnknown_0203935A);
+        }
+        else
+        {
+            sprite->pos2.y = -gUnknown_02039358;
+        }
+    }
 }
 
 void sub_8149174(u8 a, struct UnknownStruct1 *b, const union AnimCmd *const *c, u8 d)
 {
     u8 i;
 
-	for(i = 0; i < d; i++)
-	{
-		u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].var1, b[i].var2, b[i].var3);
-		CalcCenterToCornerVec(&gSprites[sprite], b[i].var0_4, b[i].var0_6, 0);
-		gSprites[sprite].oam.priority = 3;
+    for(i = 0; i < d; i++)
+    {
+        u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].var1, b[i].var2, b[i].var3);
+        CalcCenterToCornerVec(&gSprites[sprite], b[i].var0_4, b[i].var0_6, 0);
+        gSprites[sprite].oam.priority = 3;
         gSprites[sprite].oam.shape = b[i].var0_4;
         gSprites[sprite].oam.size = b[i].var0_6;
         gSprites[sprite].oam.paletteNum = 0;
@@ -474,28 +474,28 @@ void nullsub_82()
 void sub_81492A0(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->data0].invisible;
-	sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-	sprite->pos1.y = gSprites[sprite->data0].pos1.y + 8;
-	sprite->pos2.x = gSprites[sprite->data0].pos2.x;
-	sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y + 8;
+    sprite->pos2.x = gSprites[sprite->data0].pos2.x;
+    sprite->pos2.y = gSprites[sprite->data0].pos2.y;
 }
 
 
 
 u8 intro_create_brendan_sprite(s16 a, s16 b)
 {
-	u8 sprite = CreateSprite(&gSpriteTemplate_8416CDC, a, b, 0);
-	u8 brendan = CreateSprite(&gSpriteTemplate_Brendan, a, b + 8, 1);
-	gSprites[brendan].data0 = sprite;
-	return sprite;
+    u8 sprite = CreateSprite(&gSpriteTemplate_8416CDC, a, b, 0);
+    u8 brendan = CreateSprite(&gSpriteTemplate_Brendan, a, b + 8, 1);
+    gSprites[brendan].data0 = sprite;
+    return sprite;
 }
 
 u8 intro_create_may_sprite(s16 a, s16 b)
 {
-	u8 sprite = CreateSprite(&gSpriteTemplate_8416CF4, a, b, 0);
-	u8 may = CreateSprite(&gSpriteTemplate_May, a, b + 8, 1);
-	gSprites[may].data0 = sprite;
-	return sprite;
+    u8 sprite = CreateSprite(&gSpriteTemplate_8416CF4, a, b, 0);
+    u8 may = CreateSprite(&gSpriteTemplate_May, a, b + 8, 1);
+    gSprites[may].data0 = sprite;
+    return sprite;
 }
 
 void nullsub_83()
@@ -505,86 +505,27 @@ void nullsub_83()
 void sub_81493C4(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->data0].invisible;
-	sprite->pos1.y = gSprites[sprite->data0].pos1.y;
-	sprite->pos2.x = gSprites[sprite->data0].pos2.x;
-	sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->pos2.x = gSprites[sprite->data0].pos2.x;
+    sprite->pos2.y = gSprites[sprite->data0].pos2.y;
 }
 
 u8 intro_create_latios_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416D7C, a - 32, b, 2);
-	u8 latios = CreateSprite(&gSpriteTemplate_8416D7C, a + 32, b, 2);
-	gSprites[latios].data0 = sprite;
-	StartSpriteAnim(&gSprites[latios], 1);
-	gSprites[latios].callback = &sub_81493C4;
-	return sprite;
+    u8 latios = CreateSprite(&gSpriteTemplate_8416D7C, a + 32, b, 2);
+    gSprites[latios].data0 = sprite;
+    StartSpriteAnim(&gSprites[latios], 1);
+    gSprites[latios].callback = &sub_81493C4;
+    return sprite;
 }
 
 u8 intro_create_latias_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416D94, a - 32, b, 2);
-	u8 latios = CreateSprite(&gSpriteTemplate_8416D94, a + 32, b, 2);
-	gSprites[latios].data0 = sprite;
-	StartSpriteAnim(&gSprites[latios], 1);
-	gSprites[latios].callback = &sub_81493C4;
-	return sprite;
+    u8 latios = CreateSprite(&gSpriteTemplate_8416D94, a + 32, b, 2);
+    gSprites[latios].data0 = sprite;
+    StartSpriteAnim(&gSprites[latios], 1);
+    gSprites[latios].callback = &sub_81493C4;
+    return sprite;
 }
-
-/* 	thumb_func_start intro_create_latios_sprite
-intro_create_latios_sprite: @ 8149424
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r2, r0, 0
-	adds r5, r1, 0
-	ldr r0, _08149490 @ =gSpriteTemplate_8416D7C
-	mov r8, r0
-	lsls r2, 16
-	asrs r4, r2, 16
-	ldr r0, _08149494 @ =0xffe00000
-	adds r2, r0
-	asrs r2, 16
-	lsls r5, 16
-	asrs r5, 16
-	mov r0, r8
-	adds r1, r2, 0
-	adds r2, r5, 0
-	movs r3, 0x2
-	bl CreateSprite
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	adds r4, 0x20
-	lsls r4, 16
-	asrs r4, 16
-	mov r0, r8
-	adds r1, r4, 0
-	adds r2, r5, 0
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _08149498 @ =gSprites
-	lsls r4, r0, 4
-	adds r4, r0
-	lsls r4, 2
-	adds r0, r4, r5
-	strh r6, [r0, 0x2E]
-	movs r1, 0x1
-	bl StartSpriteAnim
-	adds r5, 0x1C
-	adds r4, r5
-	ldr r0, _0814949C @ =sub_81493C4
-	str r0, [r4]
-	adds r0, r6, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08149490: .4byte gSpriteTemplate_8416D7C
-_08149494: .4byte 0xffe00000
-_08149498: .4byte gSprites
-_0814949C: .4byte sub_81493C4
-	thumb_func_end intro_create_latios_sprite */
