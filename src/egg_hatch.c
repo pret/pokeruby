@@ -43,12 +43,9 @@ extern const u32 gUnknown_0820CA98[];
 extern const u32 gUnknown_0820F798[];
 extern const u16 gUnknown_08D004E0[]; //palette
 extern const u16 gUnknown_0820C9F8[]; //palette
-extern const struct SpriteSheet gUnknown_0820A3B0;
-extern const struct SpriteSheet gUnknown_0820A3B8;
-extern const struct SpritePalette gUnknown_0820A3C0;
-extern const struct SpriteTemplate gSpriteTemplate_820A3C8;
-extern const struct SpriteTemplate gSpriteTemplate_820A418;
-extern const s16 gEggShardVelocities[][2];
+extern const struct SpriteSheet sUnknown_0820A3B0;
+extern const struct SpriteSheet sUnknown_0820A3B8;
+extern const struct SpritePalette sUnknown_0820A3C0;
 
 bool8 GetNationalPokedexFlag(u16 nationalNum, u8 caseID);
 u8* GetMonNick(struct Pokemon* mon, u8* dst);
@@ -65,11 +62,161 @@ static void SpriteCB_Egg_2(struct Sprite* sprite);
 static void SpriteCB_Egg_3(struct Sprite* sprite);
 static void SpriteCB_Egg_4(struct Sprite* sprite);
 static void SpriteCB_Egg_5(struct Sprite* sprite);
+static void SpriteCB_EggShard(struct Sprite* sprite);
 static void EggHatchPrintMessage2(u8* src);
 static void EggHatchPrintMessage1(u8* src);
 static bool8 EggHatchUpdateWindowText(void);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
+
+// graphics
+
+static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/egg/palette.gbapal");
+static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/misc/egg_hatch.4bpp");
+static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
+
+static const struct OamData sOamData_820A378 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_820A380[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A388[] =
+{
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A390[] =
+{
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A398[] =
+{
+    ANIMCMD_FRAME(48, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_820A3A0[] =
+{
+    sSpriteAnim_820A380,
+    sSpriteAnim_820A388,
+    sSpriteAnim_820A390,
+    sSpriteAnim_820A398,
+};
+
+static const struct SpriteSheet sUnknown_0820A3B0 =
+{
+    .data = sEggHatchTiles,
+    .size = 2048,
+    .tag = 12345,
+};
+
+static const struct SpriteSheet sUnknown_0820A3B8 =
+{
+    .data = sEggShardTiles,
+    .size = 128,
+    .tag = 23456,
+};
+
+static const struct SpritePalette sUnknown_0820A3C0 =
+{
+    .data = sEggPalette,
+    .tag = 54321
+};
+
+static const struct SpriteTemplate sSpriteTemplate_820A3C8 =
+{
+    .tileTag = 12345,
+    .paletteTag = 54321,
+    .oam = &sOamData_820A378,
+    .anims = sSpriteAnimTable_820A3A0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+
+static const struct OamData sOamData_820A3E0 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_820A3E8[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A3F0[] =
+{
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A3F8[] =
+{
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_820A400[] =
+{
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_820A408[] =
+{
+    sSpriteAnim_820A3E8,
+    sSpriteAnim_820A3F0,
+    sSpriteAnim_820A3F8,
+    sSpriteAnim_820A400,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_820A418 =
+{
+    .tileTag = 23456,
+    .paletteTag = 54321,
+    .oam = &sOamData_820A3E0,
+    .anims = sSpriteAnimTable_820A408,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_EggShard
+};
+
+// actual code
 
 static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 {
@@ -308,7 +455,7 @@ static void Task_EggHatch(u8 taskID)
     }
 }
 
-void CB2_EggHatch_0(void)
+static void CB2_EggHatch_0(void)
 {
     switch (gMain.state)
     {
@@ -339,13 +486,13 @@ void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 3:
-        LoadSpriteSheet(&gUnknown_0820A3B0);
-        LoadSpriteSheet(&gUnknown_0820A3B8);
-        LoadSpritePalette(&gUnknown_0820A3C0);
+        LoadSpriteSheet(&sUnknown_0820A3B0);
+        LoadSpriteSheet(&sUnknown_0820A3B8);
+        LoadSpritePalette(&sUnknown_0820A3C0);
         gMain.state++;
         break;
     case 4:
-        sEggHatchData->eggSpriteID = CreateSprite(&gSpriteTemplate_820A3C8, 0x78, 0x4B, 5);
+        sEggHatchData->eggSpriteID = CreateSprite(&sSpriteTemplate_820A3C8, 0x78, 0x4B, 5);
         AddHatchedMonToParty(sEggHatchData->eggPartyID);
         gMain.state++;
         break;
@@ -406,13 +553,13 @@ void CB2_EggHatch_0(void)
     }
 }
 
-void EggHatchSetMonNickname(void)
+static void EggHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
 
-void Task_EggHatchPlayBGM(u8 taskID)
+static void Task_EggHatchPlayBGM(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
         StopMapMusic();
@@ -427,7 +574,7 @@ void Task_EggHatchPlayBGM(u8 taskID)
     gTasks[taskID].data[0]++;
 }
 
-void CB2_EggHatch_1(void)
+static void CB2_EggHatch_1(void)
 {
     switch (sEggHatchData->CB2_state)
     {
@@ -640,7 +787,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
     sprite->data0++;
 }
 
-void SpriteCB_EggShard(struct Sprite* sprite)
+static void SpriteCB_EggShard(struct Sprite* sprite)
 {
     sprite->data4 += sprite->data1;
     sprite->data5 += sprite->data2;
@@ -654,12 +801,38 @@ void SpriteCB_EggShard(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n) ((s16)((n) * 256))
+
+static const s16 sEggShardVelocities[][2] =
+{
+    {Q_8_8(-1.5),       Q_8_8(-3.75)},
+    {Q_8_8(-5),         Q_8_8(-3)},
+    {Q_8_8(3.5),        Q_8_8(-3)},
+    {Q_8_8(-4),         Q_8_8(-3.75)},
+    {Q_8_8(2),          Q_8_8(-1.5)},
+    {Q_8_8(-0.5),       Q_8_8(-6.75)},
+    {Q_8_8(5),          Q_8_8(-2.25)},
+    {Q_8_8(-1.5),       Q_8_8(-3.75)},
+    {Q_8_8(4.5),        Q_8_8(-1.5)},
+    {Q_8_8(-1),         Q_8_8(-6.75)},
+    {Q_8_8(4),          Q_8_8(-2.25)},
+    {Q_8_8(-3.5),       Q_8_8(-3.75)},
+    {Q_8_8(1),          Q_8_8(-1.5)},
+    {Q_8_8(-3.515625),  Q_8_8(-6.75)},
+    {Q_8_8(4.5),        Q_8_8(-2.25)},
+    {Q_8_8(-0.5),       Q_8_8(-7.5)},
+    {Q_8_8(1),          Q_8_8(-4.5)},
+    {Q_8_8(-2.5),       Q_8_8(-2.25)},
+    {Q_8_8(2.5),        Q_8_8(-7.5)},
+};
+
 static void CreateRandomEggShardSprite(void)
 {
     u16 spriteAnimIndex;
 
-    s16 velocity1 = gEggShardVelocities[sEggHatchData->eggShardVelocityID][0];
-    s16 velocity2 = gEggShardVelocities[sEggHatchData->eggShardVelocityID][1];
+    s16 velocity1 = sEggShardVelocities[sEggHatchData->eggShardVelocityID][0];
+    s16 velocity2 = sEggShardVelocities[sEggHatchData->eggShardVelocityID][1];
     sEggHatchData->eggShardVelocityID++;
     spriteAnimIndex = Random() % 4;
     CreateEggShardSprite(120, 60, velocity1, velocity2, 100, spriteAnimIndex);
@@ -667,7 +840,7 @@ static void CreateRandomEggShardSprite(void)
 
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_820A418, x, y, 4);
+    u8 spriteID = CreateSprite(&sSpriteTemplate_820A418, x, y, 4);
     gSprites[spriteID].data1 = data1;
     gSprites[spriteID].data2 = data2;
     gSprites[spriteID].data3 = data3;
