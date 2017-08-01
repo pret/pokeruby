@@ -110,7 +110,7 @@ gUnknown_0300434C: @ 300434C
 @ egg_hatch
 
 	.align 2
-gUnknown_0300481C: @ 300481C
+sEggHatchData: @ 300481C
 	.space 0x4
 
 	.include "load_save.o"
