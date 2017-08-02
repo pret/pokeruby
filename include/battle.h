@@ -220,12 +220,11 @@ struct BattleStruct /* 0x2000000 */
     /*0x16001*/ u8 turnEffectsBank;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
-    /*0x16004*/ u8 wrappedMove1[4];
-    /*0x16008*/ u8 wrappedMove2[4];
+    /*0x16004*/ u8 wrappedMove[8];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
     /*0x1600E*/ u8 turncountersTracker;
-    /*0x1600F*/ u8 cmd23StateTracker;
+    /*0x1600F*/ u8 atk23StateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
     /*0x16015*/ u8 unk16015;
