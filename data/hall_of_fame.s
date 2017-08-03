@@ -112,7 +112,7 @@ gUnknown_0840B69C:: @ 840B69C
 	.4byte gSpriteImageTable_840B67C
 
 gUnknown_0840B6B8:: @ 840B6B8
-	spr_template -1, -1, gOamData_840B598, NULL, gSpriteImageTable_840B5BC, gDummySpriteAffineAnimTable, nullsub_81
+	spr_template -1, -1, gOamData_840B598, NULL, gSpriteImageTable_840B5BC, gDummySpriteAffineAnimTable, SpriteCB_HallOfFame_Dummy
 
 	.align 2
 gOamData_840B6D0:: @ 840B6D0

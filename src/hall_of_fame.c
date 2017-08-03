@@ -13,11 +13,14 @@
 #include "rom4.h"
 #include "m4a.h"
 #include "data2.h"
+#include "decompress.h"
 
 extern u32 gUnknown_0203931C;
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
 extern struct MusicPlayerInfo gMPlay_BGM;
+extern u8 gReservedSpritePaletteCount;
+extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern const s16 gUnknown_0840B534[][4];
 extern const s16 gUnknown_0840B564[][4];
@@ -65,19 +68,20 @@ static void sub_8142F78(u8 taskID);
 static void sub_8142FCC(u8 taskID);
 static void sub_814302C(u8 taskID);
 
+static void sub_81435DC(struct Sprite* sprite);
+void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite);
+
 static void sub_8143068(u8 a0, u8 a1);
 static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2);
 static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1);
-
-u32 sub_81436BC(u16 species, s16 posX, s16 posY, u16 pokeID, u32 tid, u32 pid); //return value either u16 or u32
-void sub_81435DC(struct Sprite* sprite);
-void sub_81438C4(void);
-u32 sub_81437A4(u16 gender, u16 a1, u16 a2, u16 a3);
+static void sub_81433E0(void);
+static void sub_8143570(void);
+static void sub_81435B8(void);
+static u32 sub_81436BC(u16 species, s16 posX, s16 posY, u16 pokeID, u32 tid, u32 pid);
 
 // functions from different files
-void sub_81433E0(void);
-void sub_8143570(void);
-void sub_81435B8(void);
+void sub_81438C4(void);
+u32 sub_81437A4(u16 gender, u16 a1, u16 a2, u16 a3);
 void sub_81439D0(void);
 void sub_80C5CD4(void*); // ?
 void sub_80C5E38(void*); // ?
@@ -85,6 +89,7 @@ bool8 sub_80C5DCC(void);
 bool8 sub_80C5F98(void);
 void ReturnFromHallOfFamePC(void);
 u16 SpeciesToPokedexNum(u16 species);
+void remove_some_task(void);
 
 #define tDisplayedPoke      data[1]
 #define tPokesNumber        data[2]
@@ -887,4 +892,174 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
     stringPtr[0] = EOS;
 
     MenuPrint_RightAligned(gStringVar1, a0 + 14, a1 + 5);
+}
+
+extern const u8 gHallOfFame_Gfx[];
+extern const u16 gHallOfFame_Pal[];
+
+static void sub_81433E0(void)
+{
+    u32 offsetWrite, offsetWrite2, offsetWrite3, offsetWrite4;
+    u32 size, size2, size3, size4;
+    u16 i;
+
+    REG_DISPCNT = 0;
+
+    REG_BG0CNT = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+
+    REG_BG1CNT = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+
+    REG_BG2CNT = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+
+    REG_BG3CNT = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+
+    offsetWrite = (VRAM);
+    size = 0x18000;
+    while (TRUE)
+    {
+        DmaFill16(3, 0, offsetWrite, 0x1000);
+        offsetWrite += 0x1000;
+        size -= 0x1000;
+        if (size <= 0x1000)
+        {
+            DmaFill16(3, 0, offsetWrite, size);
+            break;
+        }
+    }
+
+    offsetWrite2 = OAM;
+    size2 = OAM_SIZE;
+    DmaFill32(3, 0, offsetWrite2, size2);
+
+    offsetWrite3 = PLTT;
+    size3 = PLTT_SIZE;
+    DmaFill16(3, 0, offsetWrite3, size3);
+
+    LZ77UnCompVram(gHallOfFame_Gfx, (void*)(VRAM));
+
+    for (i = 0; i < 64; i++)
+    {
+        *((u16*)(VRAM + 0x3800) + i) = 1;
+    }
+    for (i = 0; i < 192; i++)
+    {
+        *((u16*)(VRAM + 0x3B80) + i) = 1;
+    }
+    for (i = 0; i < 1024; i++)
+    {
+        *((u16*)(VRAM + 0x3000) + i) = 2;
+    }
+
+    offsetWrite4 = (u32)(&ewram[0]);
+    size4 = 0x4000;
+    while (TRUE)
+    {
+        DmaFill16(3, 0, offsetWrite4, 0x1000);
+        offsetWrite4 += 0x1000;
+        size4 -= 0x1000;
+        if (size4 <= 0x1000)
+        {
+            DmaFill16(3, 0, offsetWrite4, size4);
+            break;
+        }
+    }
+
+    ResetPaletteFade();
+    LoadPalette(gHallOfFame_Pal, 0, 0x20);
+}
+
+extern const struct CompressedSpriteSheet gUnknown_0840B514;
+extern const struct CompressedSpritePalette gUnknown_0840B524;
+
+static void sub_8143570(void)
+{
+    remove_some_task();
+    ResetTasks();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    gReservedSpritePaletteCount = 8;
+    LoadCompressedObjectPic(&gUnknown_0840B514);
+    LoadCompressedObjectPalette(&gUnknown_0840B524);
+    SetUpWindowConfig(&gWindowConfig_81E71B4);
+    InitMenuWindow(&gWindowConfig_81E71B4);
+}
+
+static void sub_81435B8(void)
+{
+    REG_BG1CNT = 0x700;
+    REG_BG3CNT = 0x603;
+    REG_DISPCNT = 0x1B40;
+}
+
+static void sub_81435DC(struct Sprite* sprite)
+{
+    u32 spritePos = *(u32*)(&sprite->pos1);
+    u32 dataPos = *(u32*)(&sprite->data1);
+    if (spritePos != dataPos)
+    {
+        if (sprite->pos1.x < sprite->data1)
+            sprite->pos1.x += 15;
+        if (sprite->pos1.x > sprite->data1)
+            sprite->pos1.x -= 15;
+
+        if (sprite->pos1.y < sprite->data2)
+            sprite->pos1.y += 10;
+        if (sprite->pos1.y > sprite->data2)
+            sprite->pos1.y -= 10;
+    }
+    else
+    {
+        sprite->data0 = 1;
+        sprite->callback = SpriteCB_HallOfFame_Dummy;
+    }
+}
+
+void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite)
+{
+
+}
+
+extern const struct SpriteTemplate gUnknown_0840B6B8;
+extern const struct SpriteFrameImage* gUnknown_0840B69C[];
+
+void sub_8143648(u16 paletteTag, u8 animID)
+{
+    gUnknown_02024E8C = gUnknown_0840B6B8;
+    gUnknown_02024E8C.paletteTag = paletteTag;
+    gUnknown_02024E8C.images = gUnknown_0840B69C[animID];
+    gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
+}
+
+void sub_8143680(u16 paletteTag, u8 animID)
+{
+    gUnknown_02024E8C = gUnknown_0840B6B8;
+    gUnknown_02024E8C.paletteTag = paletteTag;
+    gUnknown_02024E8C.images = gUnknown_0840B69C[animID];
+    gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
+}
+
+extern void* gUnknown_0840B5A0[];
+
+static u32 sub_81436BC(u16 species, s16 posX, s16 posY, u16 pokeID, u32 tid, u32 pid)
+{
+    u8 spriteID;
+    const u8* pokePal;
+
+    LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[pokeID], species, pid, 1);
+
+    pokePal = species_and_otid_get_pal(species, tid, pid);
+    LoadCompressedPalette(pokePal, 16 * pokeID + 256, 0x20);
+
+    sub_8143648(pokeID, pokeID);
+    spriteID = CreateSprite(&gUnknown_02024E8C, posX, posY, 10 - pokeID);
+    gSprites[spriteID].oam.paletteNum = pokeID;
+    return spriteID;
 }
