@@ -186,8 +186,9 @@ SECTIONS {
         src/bike.o(.text);
         asm/easy_chat.o(.text);
         src/easy_chat.o(.text);
+        src/pokenav_before.o(.text);
         asm/pokenav.o(.text);
-        src/pokenav.o(.text);
+        src/pokenav_after.o(.text);
         asm/pokenav.o(.text_80F708C);
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
