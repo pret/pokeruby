@@ -17,6 +17,7 @@
 #include "rng.h"
 #include "trig.h"
 
+extern u8 ewram[];
 extern u32 gUnknown_0203931C;
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
@@ -24,17 +25,10 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-extern const s16 gUnknown_0840B534[][4];
-extern const s16 gUnknown_0840B564[][4];
-extern const struct SpriteTemplate gSpriteTemplate_840B7A4;
-extern const struct HallofFameMon sDummyFameMon;
+extern const u8 gContestConfetti_Gfx[];
+extern const u8 gContestConfetti_Pal[];
 extern const u8 gHallOfFame_Gfx[];
 extern const u16 gHallOfFame_Pal[];
-extern const struct CompressedSpriteSheet gUnknown_0840B514;
-extern const struct CompressedSpritePalette gUnknown_0840B524;
-extern const struct SpriteTemplate gUnknown_0840B6B8;
-extern const struct SpriteFrameImage* gUnknown_0840B69C[];
-extern void* gUnknown_0840B5A0[];
 
 struct HallofFameMon
 {
@@ -51,8 +45,6 @@ struct HallofFameMons
 };
 
 #define HALL_OF_FAME_MAX_TEAMS 50
-
-extern u8 ewram[];
 
 static void sub_8141FF8(u8 taskID);
 static void sub_81422E8(u8 taskID);
@@ -80,7 +72,8 @@ static void sub_8142FCC(u8 taskID);
 static void sub_814302C(u8 taskID);
 
 static void sub_81435DC(struct Sprite* sprite);
-void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite);
+static void sub_814386C(struct Sprite* sprite);
+static void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite);
 
 static void sub_8143068(u8 a0, u8 a1);
 static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2);
@@ -101,6 +94,305 @@ bool8 sub_80C5F98(void);
 void ReturnFromHallOfFamePC(void);
 u16 SpeciesToPokedexNum(u16 species);
 void remove_some_task(void);
+
+// data and gfx
+
+static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
+{
+      gContestConfetti_Gfx, 0x220, 1001
+};
+
+static const u8 sUnused0[8] = {};
+
+static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette =
+{
+      gContestConfetti_Pal, 1001
+};
+
+static const u8 sUnused1[8] = {};
+
+static const s16 sHallOfFame_MonsFullTeamPositions[6][4] =
+{
+    {120,   210,    120,    40},
+    {326,   220,    56,     40},
+    {-86,   220,    184,    40},
+    {120,   -62,    120,    88},
+    {-25,   -62,    200,    88},
+    {265,   -62,    40,     88}
+};
+
+static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
+{
+    {120,   214,    120,    64},
+    {281,   214,    56,     64},
+    {-41,   214,    184,    64}
+};
+
+static const struct HallofFameMon sDummyFameMon =
+{
+    0x3EA03EA, 0, 0, 0, {0}
+};
+
+static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
+
+static const struct OamData sOamData_840B598 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+void* const gUnknown_0840B5A0[] =
+{
+    &ewram[0x08000],
+    &ewram[0x0A000],
+    &ewram[0x0C000],
+    &ewram[0x0E000],
+    &ewram[0x10000],
+    &ewram[0x14000],
+    &ewram[0x18000]
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B5BC[] =
+{
+    {&ewram[0x8000], 0x800},
+    {&ewram[0x8800], 0x800},
+    {&ewram[0x9000], 0x800},
+    {&ewram[0x9800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B5DC[] =
+{
+    {&ewram[0xA000], 0x800},
+    {&ewram[0xA800], 0x800},
+    {&ewram[0xB000], 0x800},
+    {&ewram[0xB800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B5FC[] =
+{
+    {&ewram[0xC000], 0x800},
+    {&ewram[0xC800], 0x800},
+    {&ewram[0xD000], 0x800},
+    {&ewram[0xD800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B61C[] =
+{
+    {&ewram[0xE000], 0x800},
+    {&ewram[0xE800], 0x800},
+    {&ewram[0xF000], 0x800},
+    {&ewram[0xF800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B63C[] =
+{
+    {&ewram[0x10000], 0x800},
+    {&ewram[0x10800], 0x800},
+    {&ewram[0x11000], 0x800},
+    {&ewram[0x11800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B65C[] =
+{
+    {&ewram[0x14000], 0x800},
+    {&ewram[0x14800], 0x800},
+    {&ewram[0x15000], 0x800},
+    {&ewram[0x15800], 0x800}
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_840B67C[] =
+{
+    {&ewram[0x18000], 0x800},
+    {&ewram[0x18800], 0x800},
+    {&ewram[0x19000], 0x800},
+    {&ewram[0x19800], 0x800}
+};
+
+static const struct SpriteFrameImage* const sUnknown_0840B69C[7] =
+{
+    sSpriteImageTable_840B5BC,
+	sSpriteImageTable_840B5DC,
+	sSpriteImageTable_840B5FC,
+	sSpriteImageTable_840B61C,
+	sSpriteImageTable_840B63C,
+	sSpriteImageTable_840B65C,
+	sSpriteImageTable_840B67C
+};
+
+static const struct SpriteTemplate sUnknown_0840B6B8 =
+{
+    .tileTag = -1,
+    .paletteTag = -1,
+    .oam = &sOamData_840B598,
+    .anims = NULL,
+    .images = sSpriteImageTable_840B5BC,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HallOfFame_Dummy
+};
+
+static const struct OamData sOamData_840B6D0 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_840B6D8[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B6E0[] =
+{
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B6E8[] =
+{
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B6F0[] =
+{
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B6F8[] =
+{
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B700[] =
+{
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B708[] =
+{
+    ANIMCMD_FRAME(6, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B710[] =
+{
+    ANIMCMD_FRAME(7, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B718[] =
+{
+    ANIMCMD_FRAME(8, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B720[] =
+{
+    ANIMCMD_FRAME(9, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B728[] =
+{
+    ANIMCMD_FRAME(10, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B730[] =
+{
+    ANIMCMD_FRAME(11, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B738[] =
+{
+    ANIMCMD_FRAME(12, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B740[] =
+{
+    ANIMCMD_FRAME(13, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B748[] =
+{
+    ANIMCMD_FRAME(14, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B750[] =
+{
+    ANIMCMD_FRAME(15, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_840B758[] =
+{
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd* const sSpriteAnimTable_840B760[] =
+{
+    sSpriteAnim_840B6D8,
+	sSpriteAnim_840B6E0,
+	sSpriteAnim_840B6E8,
+	sSpriteAnim_840B6F0,
+	sSpriteAnim_840B6F8,
+	sSpriteAnim_840B700,
+	sSpriteAnim_840B708,
+	sSpriteAnim_840B710,
+	sSpriteAnim_840B718,
+	sSpriteAnim_840B720,
+	sSpriteAnim_840B728,
+	sSpriteAnim_840B730,
+	sSpriteAnim_840B738,
+	sSpriteAnim_840B740,
+	sSpriteAnim_840B748,
+	sSpriteAnim_840B750,
+	sSpriteAnim_840B758
+};
+
+static const struct SpriteTemplate sSpriteTemplate_840B7A4 =
+{
+    .tileTag = 1001,
+    .paletteTag = 1001,
+    .oam = &sOamData_840B6D0,
+    .anims = sSpriteAnimTable_840B760,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_814386C
+};
+
+// code
 
 #define tDisplayedPoke      data[1]
 #define tPokesNumber        data[2]
@@ -304,17 +596,17 @@ static void sub_8142320(u8 taskID)
 
     if (gTasks[taskID].tPokesNumber > 3)
     {
-        xPos = gUnknown_0840B534[currPokeID][0];
-        yPos = gUnknown_0840B534[currPokeID][1];
-        field4 = gUnknown_0840B534[currPokeID][2];
-        field6 = gUnknown_0840B534[currPokeID][3];
+        xPos = sHallOfFame_MonsFullTeamPositions[currPokeID][0];
+        yPos = sHallOfFame_MonsFullTeamPositions[currPokeID][1];
+        field4 = sHallOfFame_MonsFullTeamPositions[currPokeID][2];
+        field6 = sHallOfFame_MonsFullTeamPositions[currPokeID][3];
     }
     else
     {
-        xPos = gUnknown_0840B564[currPokeID][0];
-        yPos = gUnknown_0840B564[currPokeID][1];
-        field4 = gUnknown_0840B564[currPokeID][2];
-        field6 = gUnknown_0840B564[currPokeID][3];
+        xPos = sHallOfFame_MonsHalfTeamPositions[currPokeID][0];
+        yPos = sHallOfFame_MonsHalfTeamPositions[currPokeID][1];
+        field4 = sHallOfFame_MonsHalfTeamPositions[currPokeID][2];
+        field6 = sHallOfFame_MonsHalfTeamPositions[currPokeID][3];
     }
 
     spriteID = HallOfFame_LoadPokemonPic(currMon->species, xPos, yPos, currPokeID, currMon->tid, currMon->personality);
@@ -538,10 +830,10 @@ void sub_81428CC(void)
     }
 }
 
-#define tCurrTeamNo     data[0]     //0x8
-#define tCurrPageNo     data[1]     //0xA
-#define tCurrPokeID     data[2]     //0xC
-#define tPokesNo        data[4]     //0x10
+#define tCurrTeamNo     data[0]
+#define tCurrPageNo     data[1]
+#define tCurrPokeID     data[2]
+#define tPokesNo        data[4]
 #define tMonSpriteID(i) data[i + 5]
 
 static void sub_8142A28(u8 taskID)
@@ -607,13 +899,13 @@ static void sub_8142B04(u8 taskID)
             s16 posX, posY;
             if (gTasks[taskID].tPokesNo > 3)
             {
-                posX = gUnknown_0840B534[i][2];
-                posY = gUnknown_0840B534[i][3];
+                posX = sHallOfFame_MonsFullTeamPositions[i][2];
+                posY = sHallOfFame_MonsFullTeamPositions[i][3];
             }
             else
             {
-                posX = gUnknown_0840B564[i][2];
-                posY = gUnknown_0840B564[i][3];
+                posX = sHallOfFame_MonsHalfTeamPositions[i][2];
+                posY = sHallOfFame_MonsHalfTeamPositions[i][3];
             }
             spriteID = HallOfFame_LoadPokemonPic(currMon->species, posX, posY, i, currMon->tid, currMon->personality);
             gSprites[spriteID].oam.priority = 1;
@@ -989,8 +1281,8 @@ static void sub_8143570(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(&gUnknown_0840B514);
-    LoadCompressedObjectPalette(&gUnknown_0840B524);
+    LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
+    LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
     SetUpWindowConfig(&gWindowConfig_81E71B4);
     InitMenuWindow(&gWindowConfig_81E71B4);
 }
@@ -1025,24 +1317,24 @@ static void sub_81435DC(struct Sprite* sprite)
     }
 }
 
-void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite)
+static void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite)
 {
 
 }
 
 void sub_8143648(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = gUnknown_0840B6B8;
+    gUnknown_02024E8C = sUnknown_0840B6B8;
     gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = gUnknown_0840B69C[animID];
+    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
     gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
 }
 
 void sub_8143680(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = gUnknown_0840B6B8;
+    gUnknown_02024E8C = sUnknown_0840B6B8;
     gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = gUnknown_0840B69C[animID];
+    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
     gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
 }
 
@@ -1077,7 +1369,7 @@ static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a
     return spriteID;
 }
 
-void sub_814386C(struct Sprite* sprite)
+static void sub_814386C(struct Sprite* sprite)
 {
     if (sprite->pos2.y > 120)
         DestroySprite(sprite);
@@ -1097,7 +1389,7 @@ void sub_814386C(struct Sprite* sprite)
     }
 }
 
-bool8 sub_81438C4(void)
+static bool8 sub_81438C4(void)
 {
     u8 spriteID;
     struct Sprite* sprite;
@@ -1105,7 +1397,7 @@ bool8 sub_81438C4(void)
     s16 posX = Random() % 240;
     s16 posY = -(Random() % 8);
 
-    spriteID = CreateSprite(&gSpriteTemplate_840B7A4, posX, posY, 0);
+    spriteID = CreateSprite(&sSpriteTemplate_840B7A4, posX, posY, 0);
     sprite = &gSprites[spriteID];
 
     StartSpriteAnim(sprite, Random() % 17);
