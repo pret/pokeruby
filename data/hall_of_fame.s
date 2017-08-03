@@ -28,7 +28,7 @@ gUnknown_0840B564:: @ 840B564
 	.2byte -41,214,184, 64
 
 	.align 2
-gUnknown_0840B57C:: @ 840B57C
+sDummyFameMon:: @ 840B57C
 	.2byte 1002
 	.2byte 1002
 	.space 0x10
