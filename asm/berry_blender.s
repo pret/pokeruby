@@ -6,899 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_804E290
-sub_804E290: @ 804E290
-	push {lr}
-	ldr r0, _0804E2B0 @ =gMPlay_SE2
-	ldr r1, _0804E2B4 @ =0x0000ffff
-	ldr r2, _0804E2B8 @ =gUnknown_03004854
-	ldr r2, [r2]
-	adds r2, 0x56
-	movs r3, 0
-	ldrsh r2, [r2, r3]
-	subs r2, 0x80
-	lsls r2, 17
-	asrs r2, 16
-	bl m4aMPlayPitchControl
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E2B0: .4byte gMPlay_SE2
-_0804E2B4: .4byte 0x0000ffff
-_0804E2B8: .4byte gUnknown_03004854
-	thumb_func_end sub_804E290
 
-	thumb_func_start sub_804E2BC
-sub_804E2BC: @ 804E2BC
-	push {lr}
-	bl sub_80514A4
-	bl sub_80514F0
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804E2BC
 
-	thumb_func_start sub_804E2D8
-sub_804E2D8: @ 804E2D8
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804E2D8
-
-	thumb_func_start sub_804E2EC
-sub_804E2EC: @ 804E2EC
-	push {r4-r7,lr}
-	ldr r1, _0804E308 @ =gUnknown_03004854
-	ldr r0, [r1]
-	ldrb r0, [r0, 0x1]
-	mov r12, r1
-	cmp r0, 0x9
-	bls _0804E2FC
-	b _0804E4F4
-_0804E2FC:
-	lsls r0, 2
-	ldr r1, _0804E30C @ =_0804E310
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0804E308: .4byte gUnknown_03004854
-_0804E30C: .4byte _0804E310
-	.align 2, 0
-_0804E310:
-	.4byte _0804E338
-	.4byte _0804E34C
-	.4byte _0804E380
-	.4byte _0804E3C4
-	.4byte _0804E3D8
-	.4byte _0804E3EC
-	.4byte _0804E410
-	.4byte _0804E434
-	.4byte _0804E48C
-	.4byte _0804E4BC
-_0804E338:
-	ldr r0, _0804E344 @ =gUnknown_08E6C100
-	ldr r1, _0804E348 @ =0x02010000
-	bl sub_800D238
-	b _0804E49E
-	.align 2, 0
-_0804E344: .4byte gUnknown_08E6C100
-_0804E348: .4byte 0x02010000
-_0804E34C:
-	ldr r1, _0804E36C @ =gUnknown_08215C2C
-	ldr r2, _0804E370 @ =0x06004000
-	ldr r0, _0804E374 @ =0x040000d4
-	str r1, [r0]
-	str r2, [r0, 0x4]
-	ldr r1, _0804E378 @ =0x80000200
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	ldr r0, _0804E37C @ =gUnknown_08215C0C
-	movs r2, 0x80
-	lsls r2, 1
-	movs r1, 0
-	bl LoadPalette
-	b _0804E49E
-	.align 2, 0
-_0804E36C: .4byte gUnknown_08215C2C
-_0804E370: .4byte 0x06004000
-_0804E374: .4byte 0x040000d4
-_0804E378: .4byte 0x80000200
-_0804E37C: .4byte gUnknown_08215C0C
-_0804E380:
-	ldr r3, _0804E3B8 @ =0x02010000
-	movs r4, 0xC0
-	lsls r4, 19
-	movs r5, 0x80
-	lsls r5, 6
-	ldr r1, _0804E3BC @ =0x040000d4
-	ldr r6, _0804E3C0 @ =0x80000800
-	movs r2, 0x80
-	lsls r2, 5
-	movs r7, 0x80
-	lsls r7, 24
-_0804E396:
-	str r3, [r1]
-	str r4, [r1, 0x4]
-	str r6, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	adds r3, r2
-	adds r4, r2
-	subs r5, r2
-	cmp r5, r2
-	bhi _0804E396
-	str r3, [r1]
-	str r4, [r1, 0x4]
-	lsrs r0, r5, 1
-	orrs r0, r7
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	mov r0, r12
-	b _0804E4A0
-	.align 2, 0
-_0804E3B8: .4byte 0x02010000
-_0804E3BC: .4byte 0x040000d4
-_0804E3C0: .4byte 0x80000800
-_0804E3C4:
-	ldr r0, _0804E3D0 @ =gUnknown_08E6C920
-	ldr r1, _0804E3D4 @ =0x02010000
-	bl sub_800D238
-	b _0804E49E
-	.align 2, 0
-_0804E3D0: .4byte gUnknown_08E6C920
-_0804E3D4: .4byte 0x02010000
-_0804E3D8:
-	ldr r0, _0804E3E4 @ =gUnknown_08E6D354
-	ldr r1, _0804E3E8 @ =0x02013000
-	bl sub_800D238
-	b _0804E49E
-	.align 2, 0
-_0804E3E4: .4byte gUnknown_08E6D354
-_0804E3E8: .4byte 0x02013000
-_0804E3EC:
-	ldr r1, _0804E400 @ =0x02010000
-	ldr r2, _0804E404 @ =0x0600e000
-	ldr r0, _0804E408 @ =0x040000d4
-	str r1, [r0]
-	str r2, [r0, 0x4]
-	ldr r1, _0804E40C @ =0x80000800
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	mov r0, r12
-	b _0804E4A0
-	.align 2, 0
-_0804E400: .4byte 0x02010000
-_0804E404: .4byte 0x0600e000
-_0804E408: .4byte 0x040000d4
-_0804E40C: .4byte 0x80000800
-_0804E410:
-	ldr r1, _0804E424 @ =0x02011000
-	ldr r2, _0804E428 @ =0x0600f000
-	ldr r0, _0804E42C @ =0x040000d4
-	str r1, [r0]
-	str r2, [r0, 0x4]
-	ldr r1, _0804E430 @ =0x80000800
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	mov r0, r12
-	b _0804E4A0
-	.align 2, 0
-_0804E424: .4byte 0x02011000
-_0804E428: .4byte 0x0600f000
-_0804E42C: .4byte 0x040000d4
-_0804E430: .4byte 0x80000800
-_0804E434:
-	ldr r3, _0804E474 @ =0x02013000
-	movs r2, 0
-	adds r6, r3, 0
-	ldr r7, _0804E478 @ =gUnknown_0821602C
-	movs r0, 0x80
-	lsls r0, 1
-	adds r5, r0, 0
-	ldr r4, _0804E47C @ =0x0000027f
-_0804E444:
-	lsls r0, r2, 1
-	adds r0, r3
-	ldrh r1, [r0]
-	orrs r1, r5
-	strh r1, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, r4
-	bls _0804E444
-	ldr r1, _0804E480 @ =0x06006000
-	ldr r0, _0804E484 @ =0x040000d4
-	str r6, [r0]
-	str r1, [r0, 0x4]
-	ldr r1, _0804E488 @ =0x80000280
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	adds r0, r7, 0
-	movs r1, 0x80
-	movs r2, 0x20
-	bl LoadPalette
-	b _0804E49E
-	.align 2, 0
-_0804E474: .4byte 0x02013000
-_0804E478: .4byte gUnknown_0821602C
-_0804E47C: .4byte 0x0000027f
-_0804E480: .4byte 0x06006000
-_0804E484: .4byte 0x040000d4
-_0804E488: .4byte 0x80000280
-_0804E48C:
-	ldr r0, _0804E4AC @ =gUnknown_082163DC
-	bl LoadSpriteSheet
-	ldr r0, _0804E4B0 @ =gUnknown_082164F4
-	bl LoadSpriteSheet
-	ldr r0, _0804E4B4 @ =gUnknown_08216454
-	bl LoadSpriteSheet
-_0804E49E:
-	ldr r0, _0804E4B8 @ =gUnknown_03004854
-_0804E4A0:
-	ldr r1, [r0]
-	ldrb r0, [r1, 0x1]
-	adds r0, 0x1
-	strb r0, [r1, 0x1]
-	b _0804E4F4
-	.align 2, 0
-_0804E4AC: .4byte gUnknown_082163DC
-_0804E4B0: .4byte gUnknown_082164F4
-_0804E4B4: .4byte gUnknown_08216454
-_0804E4B8: .4byte gUnknown_03004854
-_0804E4BC:
-	ldr r0, _0804E4E0 @ =gUnknown_08216540
-	bl LoadSpriteSheet
-	ldr r0, _0804E4E4 @ =gUnknown_08216574
-	bl LoadSpriteSheet
-	ldr r0, _0804E4E8 @ =gUnknown_082163EC
-	bl LoadSpritePalette
-	ldr r0, _0804E4EC @ =gUnknown_082163E4
-	bl LoadSpritePalette
-	ldr r0, _0804E4F0 @ =gUnknown_03004854
-	ldr r1, [r0]
-	movs r0, 0
-	strb r0, [r1, 0x1]
-	movs r0, 0x1
-	b _0804E4F6
-	.align 2, 0
-_0804E4E0: .4byte gUnknown_08216540
-_0804E4E4: .4byte gUnknown_08216574
-_0804E4E8: .4byte gUnknown_082163EC
-_0804E4EC: .4byte gUnknown_082163E4
-_0804E4F0: .4byte gUnknown_03004854
-_0804E4F4:
-	movs r0, 0
-_0804E4F6:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_804E2EC
-
-	thumb_func_start sub_804E4FC
-sub_804E4FC: @ 804E4FC
-	movs r1, 0x80
-	lsls r1, 19
-	ldr r2, _0804E52C @ =0x00001341
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0xC
-	movs r2, 0x91
-	lsls r2, 7
-	adds r0, r2, 0
-	strh r0, [r1]
-	subs r1, 0x2
-	ldr r2, _0804E530 @ =0x00000c0d
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, _0804E534 @ =REG_BG0HOFS
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_0804E52C: .4byte 0x00001341
-_0804E530: .4byte 0x00000c0d
-_0804E534: .4byte REG_BG0HOFS
-	thumb_func_end sub_804E4FC
-
-	thumb_func_start sub_804E538
-sub_804E538: @ 804E538
-	push {lr}
-	ldr r1, _0804E55C @ =gUnknown_03004854
-	ldr r0, _0804E560 @ =0x02018000
-	str r0, [r1]
-	adds r2, r0, 0
-	adds r2, 0x6F
-	movs r1, 0
-	strb r1, [r0]
-	strb r1, [r2]
-	ldr r0, _0804E564 @ =gSpecialVar_0x8004
-	ldrb r0, [r0]
-	bl sub_804E884
-	ldr r0, _0804E568 @ =sub_804E56C
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E55C: .4byte gUnknown_03004854
-_0804E560: .4byte 0x02018000
-_0804E564: .4byte gSpecialVar_0x8004
-_0804E568: .4byte sub_804E56C
-	thumb_func_end sub_804E538
-
-	thumb_func_start sub_804E56C
-sub_804E56C: @ 804E56C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	ldr r0, _0804E588 @ =gUnknown_03004854
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x6
-	bls _0804E57C
-	b _0804E71A
-_0804E57C:
-	lsls r0, 2
-	ldr r1, _0804E58C @ =_0804E590
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0804E588: .4byte gUnknown_03004854
-_0804E58C: .4byte _0804E590
-	.align 2, 0
-_0804E590:
-	.4byte _0804E5AC
-	.4byte _0804E614
-	.4byte _0804E67C
-	.4byte _0804E692
-	.4byte _0804E6A8
-	.4byte _0804E6D4
-	.4byte _0804E700
-_0804E5AC:
-	movs r0, 0x80
-	lsls r0, 19
-	movs r5, 0
-	strh r5, [r0]
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r4, _0804E60C @ =gWindowConfig_81E6F68
-	adds r0, r4, 0
-	bl SetUpWindowConfig
-	adds r0, r4, 0
-	bl InitMenuWindow
-	ldr r3, _0804E610 @ =gUnknown_03004854
-	ldr r2, [r3]
-	ldrb r0, [r2]
-	adds r0, 0x1
-	movs r1, 0
-	strb r0, [r2]
-	ldr r2, [r3]
-	movs r3, 0xA0
-	lsls r3, 1
-	adds r0, r2, r3
-	strh r1, [r0]
-	subs r3, 0x2
-	adds r0, r2, r3
-	strh r1, [r0]
-	movs r0, 0xA1
-	lsls r0, 1
-	adds r3, r2, r0
-	movs r0, 0x50
-	strh r0, [r3]
-	movs r3, 0xA2
-	lsls r3, 1
-	adds r0, r2, r3
-	strh r1, [r0]
-	adds r3, 0x2
-	adds r0, r2, r3
-	strh r1, [r0]
-	strb r5, [r2, 0x1]
-	bl sub_8051474
-	b _0804E71A
-	.align 2, 0
-_0804E60C: .4byte gWindowConfig_81E6F68
-_0804E610: .4byte gUnknown_03004854
-_0804E614:
-	bl sub_804E2EC
-	lsls r0, 24
-	cmp r0, 0
-	bne _0804E620
-	b _0804E71A
-_0804E620:
-	movs r4, 0
-	ldr r5, _0804E668 @ =gUnknown_082162E4
-	ldr r6, _0804E66C @ =gUnknown_03004854
-_0804E626:
-	ldrb r1, [r5]
-	ldrb r2, [r5, 0x1]
-	ldr r0, _0804E670 @ =gSpriteTemplate_82163F4
-	movs r3, 0x1
-	bl CreateSprite
-	ldr r1, [r6]
-	adds r1, 0x5C
-	adds r1, r4
-	strb r0, [r1]
-	ldr r0, [r6]
-	adds r0, 0x5C
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0804E674 @ =gSprites
-	adds r0, r1
-	adds r1, r4, 0
-	adds r1, 0x8
-	lsls r1, 24
-	lsrs r1, 24
-	bl StartSpriteAnim
-	adds r5, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _0804E626
-	ldr r0, _0804E678 @ =sub_804E2BC
-	bl SetVBlankCallback
-	b _0804E6BE
-	.align 2, 0
-_0804E668: .4byte gUnknown_082162E4
-_0804E66C: .4byte gUnknown_03004854
-_0804E670: .4byte gSpriteTemplate_82163F4
-_0804E674: .4byte gSprites
-_0804E678: .4byte sub_804E2BC
-_0804E67C:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	bl sub_8051474
-	b _0804E6BE
-_0804E692:
-	bl sub_804E4FC
-	ldr r0, _0804E6A4 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0804E71A
-	b _0804E6BE
-	.align 2, 0
-_0804E6A4: .4byte gPaletteFade
-_0804E6A8:
-	movs r0, 0
-	movs r1, 0xE
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r0, _0804E6CC @ =gOtherText_BlenderChooseBerry
-	movs r1, 0x1
-	movs r2, 0xF
-	bl MenuPrintMessage
-_0804E6BE:
-	ldr r0, _0804E6D0 @ =gUnknown_03004854
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0804E71A
-	.align 2, 0
-_0804E6CC: .4byte gOtherText_BlenderChooseBerry
-_0804E6D0: .4byte gUnknown_03004854
-_0804E6D4:
-	bl MenuUpdateWindowText
-	lsls r0, 24
-	cmp r0, 0
-	beq _0804E71A
-	ldr r0, _0804E6FC @ =gUnknown_03004854
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	movs r2, 0
-	strb r0, [r1]
-	movs r0, 0x1
-	negs r0, r0
-	str r2, [sp]
-	movs r1, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _0804E71A
-	.align 2, 0
-_0804E6FC: .4byte gUnknown_03004854
-_0804E700:
-	ldr r0, _0804E730 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _0804E71A
-	bl sub_80A6978
-	ldr r0, _0804E734 @ =gUnknown_03004854
-	ldr r0, [r0]
-	strb r4, [r0]
-_0804E71A:
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E730: .4byte gPaletteFade
-_0804E734: .4byte gUnknown_03004854
-	thumb_func_end sub_804E56C
-
-	thumb_func_start sub_804E738
-sub_804E738: @ 804E738
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x3A]
-	ldrh r1, [r4, 0x30]
-	adds r0, r1
-	strh r0, [r4, 0x30]
-	ldrh r1, [r4, 0x32]
-	ldrh r2, [r4, 0x36]
-	subs r1, r2
-	ldrh r0, [r4, 0x3C]
-	adds r1, r0
-	strh r1, [r4, 0x32]
-	ldrh r3, [r4, 0x2E]
-	adds r0, r3
-	strh r0, [r4, 0x2E]
-	subs r2, 0x1
-	strh r2, [r4, 0x36]
-	lsls r0, 16
-	lsls r1, 16
-	cmp r0, r1
-	bge _0804E786
-	ldrh r0, [r4, 0x34]
-	subs r0, 0x1
-	strh r0, [r4, 0x36]
-	strh r0, [r4, 0x34]
-	ldrh r0, [r4, 0x38]
-	adds r0, 0x1
-	strh r0, [r4, 0x38]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3
-	ble _0804E780
-	adds r0, r4, 0
-	bl DestroySprite
-	b _0804E786
-_0804E780:
-	movs r0, 0x74
-	bl PlaySE
-_0804E786:
-	ldrh r0, [r4, 0x30]
-	strh r0, [r4, 0x20]
-	ldrh r0, [r4, 0x32]
-	strh r0, [r4, 0x22]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804E738
-
-	thumb_func_start sub_804E794
-sub_804E794: @ 804E794
-	push {r4-r6,lr}
-	ldr r5, [sp, 0x10]
-	ldr r6, [sp, 0x14]
-	lsls r2, 16
-	lsrs r2, 16
-	movs r4, 0
-	strh r2, [r0, 0x2E]
-	strh r1, [r0, 0x30]
-	strh r2, [r0, 0x32]
-	strh r3, [r0, 0x34]
-	movs r1, 0xA
-	strh r1, [r0, 0x36]
-	strh r4, [r0, 0x38]
-	strh r5, [r0, 0x3A]
-	strh r6, [r0, 0x3C]
-	ldr r1, _0804E7BC @ =sub_804E738
-	str r1, [r0, 0x1C]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E7BC: .4byte sub_804E738
-	thumb_func_end sub_804E794
-
-	thumb_func_start sub_804E7C0
-sub_804E7C0: @ 804E7C0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	sub sp, 0x8
-	adds r6, r1, 0
-	lsls r6, 24
-	lsrs r6, 24
-	lsls r0, 24
-	movs r1, 0xF6
-	lsls r1, 23
-	adds r0, r1
-	lsrs r0, 24
-	movs r3, 0x1
-	ands r3, r6
-	movs r1, 0
-	movs r2, 0x50
-	bl sub_80A7DEC
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	mov r8, r2
-	add r8, r0
-	mov r3, r8
-	lsls r3, 2
-	mov r8, r3
-	ldr r0, _0804E83C @ =gSprites
-	add r8, r0
-	ldr r5, _0804E840 @ =gUnknown_08216594
-	lsls r4, r6, 2
-	adds r4, r6
-	lsls r4, 1
-	adds r0, r4, r5
-	movs r6, 0
-	ldrsh r1, [r0, r6]
-	adds r0, r5, 0x2
-	adds r0, r4, r0
-	movs r3, 0
-	ldrsh r2, [r0, r3]
-	adds r0, r5, 0x4
-	adds r0, r4, r0
-	movs r6, 0
-	ldrsh r3, [r0, r6]
-	adds r0, r5, 0x6
-	adds r0, r4, r0
-	movs r6, 0
-	ldrsh r0, [r0, r6]
-	str r0, [sp]
-	adds r5, 0x8
-	adds r4, r5
-	movs r5, 0
-	ldrsh r0, [r4, r5]
-	str r0, [sp, 0x4]
-	mov r0, r8
-	bl sub_804E794
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E83C: .4byte gSprites
-_0804E840: .4byte gUnknown_08216594
-	thumb_func_end sub_804E7C0
-
-	thumb_func_start sub_804E844
-sub_804E844: @ 804E844
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	lsls r5, r1, 16
-	lsrs r5, 16
-	adds r0, r5, 0
-	adds r0, 0x7C
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBerryInfo
-	adds r4, r0, 0
-	strh r5, [r6]
-	adds r0, r6, 0x2
-	adds r1, r4, 0
-	bl StringCopy
-	ldrb r0, [r4, 0x15]
-	strb r0, [r6, 0x9]
-	ldrb r0, [r4, 0x16]
-	strb r0, [r6, 0xA]
-	ldrb r0, [r4, 0x17]
-	strb r0, [r6, 0xB]
-	ldrb r0, [r4, 0x18]
-	strb r0, [r6, 0xC]
-	ldrb r0, [r4, 0x19]
-	strb r0, [r6, 0xD]
-	ldrb r0, [r4, 0x1A]
-	strb r0, [r6, 0xE]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804E844
-
-	thumb_func_start sub_804E884
-sub_804E884: @ 804E884
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	beq _0804E89E
-	ldr r2, _0804E8AC @ =gLinkPlayers
-	movs r3, 0x2
-	adds r0, r2, 0
-	adds r0, 0x54
-_0804E896:
-	strh r3, [r0, 0x1A]
-	subs r0, 0x1C
-	cmp r0, r2
-	bge _0804E896
-_0804E89E:
-	cmp r1, 0x1
-	beq _0804E8C4
-	cmp r1, 0x1
-	bgt _0804E8B0
-	cmp r1, 0
-	beq _0804E8BA
-	b _0804E974
-	.align 2, 0
-_0804E8AC: .4byte gLinkPlayers
-_0804E8B0:
-	cmp r1, 0x2
-	beq _0804E8F8
-	cmp r1, 0x3
-	beq _0804E93C
-	b _0804E974
-_0804E8BA:
-	ldr r0, _0804E8C0 @ =gUnknown_03004834
-	strb r1, [r0]
-	b _0804E974
-	.align 2, 0
-_0804E8C0: .4byte gUnknown_03004834
-_0804E8C4:
-	ldr r0, _0804E8E4 @ =gUnknown_03004834
-	strb r1, [r0]
-	ldr r0, _0804E8E8 @ =gUnknown_03004854
-	ldr r0, [r0]
-	adds r0, 0x88
-	movs r1, 0x2
-	strb r1, [r0]
-	ldr r4, _0804E8EC @ =gLinkPlayers + 0x8
-	ldr r1, _0804E8F0 @ =gSaveBlock2
-	adds r0, r4, 0
-	bl StringCopy
-	adds r4, 0x1C
-	ldr r0, _0804E8F4 @ =gUnknown_082162B8
-	ldr r1, [r0]
-	b _0804E920
-	.align 2, 0
-_0804E8E4: .4byte gUnknown_03004834
-_0804E8E8: .4byte gUnknown_03004854
-_0804E8EC: .4byte gLinkPlayers + 0x8
-_0804E8F0: .4byte gSaveBlock2
-_0804E8F4: .4byte gUnknown_082162B8
-_0804E8F8:
-	ldr r0, _0804E928 @ =gUnknown_03004834
-	strb r1, [r0]
-	ldr r0, _0804E92C @ =gUnknown_03004854
-	ldr r0, [r0]
-	adds r0, 0x88
-	movs r1, 0x3
-	strb r1, [r0]
-	ldr r4, _0804E930 @ =gLinkPlayers + 0x8
-	ldr r1, _0804E934 @ =gSaveBlock2
-	adds r0, r4, 0
-	bl StringCopy
-	adds r0, r4, 0
-	adds r0, 0x1C
-	ldr r5, _0804E938 @ =gUnknown_082162B8
-	ldr r1, [r5]
-	bl StringCopy
-	adds r4, 0x38
-	ldr r1, [r5, 0x4]
-_0804E920:
-	adds r0, r4, 0
-	bl StringCopy
-	b _0804E974
-	.align 2, 0
-_0804E928: .4byte gUnknown_03004834
-_0804E92C: .4byte gUnknown_03004854
-_0804E930: .4byte gLinkPlayers + 0x8
-_0804E934: .4byte gSaveBlock2
-_0804E938: .4byte gUnknown_082162B8
-_0804E93C:
-	ldr r0, _0804E97C @ =gUnknown_03004834
-	strb r1, [r0]
-	ldr r0, _0804E980 @ =gUnknown_03004854
-	ldr r0, [r0]
-	adds r0, 0x88
-	movs r1, 0x4
-	strb r1, [r0]
-	ldr r4, _0804E984 @ =gLinkPlayers + 0x8
-	ldr r1, _0804E988 @ =gSaveBlock2
-	adds r0, r4, 0
-	bl StringCopy
-	adds r0, r4, 0
-	adds r0, 0x1C
-	ldr r5, _0804E98C @ =gUnknown_082162B8
-	ldr r1, [r5]
-	bl StringCopy
-	adds r0, r4, 0
-	adds r0, 0x38
-	ldr r1, [r5, 0x4]
-	bl StringCopy
-	adds r4, 0x54
-	ldr r1, [r5, 0x8]
-	adds r0, r4, 0
-	bl StringCopy
-_0804E974:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E97C: .4byte gUnknown_03004834
-_0804E980: .4byte gUnknown_03004854
-_0804E984: .4byte gLinkPlayers + 0x8
-_0804E988: .4byte gSaveBlock2
-_0804E98C: .4byte gUnknown_082162B8
-	thumb_func_end sub_804E884
-
-	thumb_func_start sub_804E990
-sub_804E990: @ 804E990
-	push {r4,r5,lr}
-	movs r0, 0x80
-	lsls r0, 19
-	movs r2, 0
-	strh r2, [r0]
-	ldr r3, _0804E9D8 @ =gUnknown_03004854
-	ldr r0, _0804E9DC @ =0x02018000
-	str r0, [r3]
-	movs r1, 0
-	strb r2, [r0]
-	movs r2, 0x9A
-	lsls r2, 1
-	adds r0, r2
-	str r1, [r0]
-	movs r2, 0
-	ldr r5, _0804E9E0 @ =gSpecialVar_0x8004
-	adds r4, r3, 0
-	movs r3, 0
-_0804E9B4:
-	ldr r0, [r4]
-	lsls r1, r2, 1
-	adds r0, 0x80
-	adds r0, r1
-	strh r3, [r0]
-	adds r2, 0x1
-	cmp r2, 0x3
-	ble _0804E9B4
-	ldrb r0, [r5]
-	bl sub_804E884
-	ldrh r0, [r5]
-	cmp r0, 0
-	bne _0804E9E8
-	ldr r0, _0804E9E4 @ =sub_804E9F8
-	bl SetMainCallback2
-	b _0804E9EE
-	.align 2, 0
-_0804E9D8: .4byte gUnknown_03004854
-_0804E9DC: .4byte 0x02018000
-_0804E9E0: .4byte gSpecialVar_0x8004
-_0804E9E4: .4byte sub_804E9F8
-_0804E9E8:
-	ldr r0, _0804E9F4 @ =sub_804F378
-	bl SetMainCallback2
-_0804E9EE:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E9F4: .4byte sub_804F378
-	thumb_func_end sub_804E990
 
 	thumb_func_start sub_804E9F8
 sub_804E9F8: @ 804E9F8
@@ -906,7 +15,7 @@ sub_804E9F8: @ 804E9F8
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r1, _0804EA18 @ =gUnknown_03004854
+	ldr r1, _0804EA18 @ =sBerryBlenderData
 	ldr r0, [r1]
 	ldrb r0, [r0]
 	mov r8, r1
@@ -920,7 +29,7 @@ _0804EA0E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804EA18: .4byte gUnknown_03004854
+_0804EA18: .4byte sBerryBlenderData
 _0804EA1C: .4byte _0804EA20
 	.align 2, 0
 _0804EA20:
@@ -1031,7 +140,7 @@ _0804EBBC:
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	ldr r0, _0804EC60 @ =sub_804E2BC
+	ldr r0, _0804EC60 @ =VBlankCB0_BerryBlender
 	bl SetVBlankCallback
 	ldr r4, _0804EC64 @ =gWindowConfig_81E6F68
 	adds r0, r4, 0
@@ -1042,7 +151,7 @@ _0804EBBC:
 	ldr r2, _0804EC6C @ =0x00004422
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r3, _0804EC70 @ =gUnknown_03004854
+	ldr r3, _0804EC70 @ =sBerryBlenderData
 	ldr r1, [r3]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1106,11 +215,11 @@ _0804EC2A:
 	strb r2, [r3, 0x1]
 	b _0804F0CE
 	.align 2, 0
-_0804EC60: .4byte sub_804E2BC
+_0804EC60: .4byte VBlankCB0_BerryBlender
 _0804EC64: .4byte gWindowConfig_81E6F68
 _0804EC68: .4byte gLinkType
 _0804EC6C: .4byte 0x00004422
-_0804EC70: .4byte gUnknown_03004854
+_0804EC70: .4byte sBerryBlenderData
 _0804EC74:
 	bl sub_804E2EC
 	lsls r0, 24
@@ -1118,7 +227,7 @@ _0804EC74:
 	bne _0804EC80
 	b _0804F0CE
 _0804EC80:
-	ldr r0, _0804EC90 @ =gUnknown_03004854
+	ldr r0, _0804EC90 @ =sBerryBlenderData
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1126,15 +235,15 @@ _0804EC80:
 	bl sub_8051474
 	b _0804F0CE
 	.align 2, 0
-_0804EC90: .4byte gUnknown_03004854
+_0804EC90: .4byte sBerryBlenderData
 _0804EC94:
 	movs r5, 0
-	ldr r4, _0804ECD8 @ =gUnknown_082162E4
-	ldr r6, _0804ECDC @ =gUnknown_03004854
+	ldr r4, _0804ECD8 @ =sBlenderSyncArrowsPos
+	ldr r6, _0804ECDC @ =sBerryBlenderData
 _0804EC9A:
 	ldrb r1, [r4]
 	ldrb r2, [r4, 0x1]
-	ldr r0, _0804ECE0 @ =gSpriteTemplate_82163F4
+	ldr r0, _0804ECE0 @ =sBlenderSyncArrow_SpriteTemplate
 	movs r3, 0x1
 	bl CreateSprite
 	ldr r1, [r6]
@@ -1161,9 +270,9 @@ _0804EC9A:
 	ble _0804EC9A
 	b _0804F0AA
 	.align 2, 0
-_0804ECD8: .4byte gUnknown_082162E4
-_0804ECDC: .4byte gUnknown_03004854
-_0804ECE0: .4byte gSpriteTemplate_82163F4
+_0804ECD8: .4byte sBlenderSyncArrowsPos
+_0804ECDC: .4byte sBerryBlenderData
+_0804ECE0: .4byte sBlenderSyncArrow_SpriteTemplate
 _0804ECE4: .4byte gSprites
 _0804ECE8:
 	movs r0, 0x1
@@ -1197,7 +306,7 @@ _0804ED14:
 	movs r1, 0x1
 	movs r2, 0xE
 	bl MenuPrint
-	ldr r2, _0804ED44 @ =gUnknown_03004854
+	ldr r2, _0804ED44 @ =sBerryBlenderData
 	ldr r1, [r2]
 	movs r3, 0
 	movs r0, 0x8
@@ -1210,7 +319,7 @@ _0804ED14:
 	b _0804F0CE
 	.align 2, 0
 _0804ED40: .4byte gOtherText_LinkStandby3
-_0804ED44: .4byte gUnknown_03004854
+_0804ED44: .4byte sBerryBlenderData
 _0804ED48:
 	mov r2, r8
 	ldr r1, [r2]
@@ -1229,7 +338,7 @@ _0804ED48:
 	adds r0, r4
 	ldr r1, _0804ED8C @ =gScriptItemId
 	ldrh r1, [r1]
-	bl sub_804E844
+	bl Blender_CopyBerryData
 	ldr r0, _0804ED90 @ =gBlockSendBuffer
 	mov r2, r8
 	ldr r1, [r2]
@@ -1334,7 +443,7 @@ _0804EE30:
 	b _0804EE7A
 _0804EE46:
 	bl GetLinkPlayerCount
-	ldr r2, _0804EE98 @ =gUnknown_03004854
+	ldr r2, _0804EE98 @ =sBerryBlenderData
 	ldr r1, [r2]
 	adds r1, 0x88
 	strb r0, [r1]
@@ -1360,7 +469,7 @@ _0804EE6C:
 	cmp r5, 0x3
 	ble _0804EE6C
 _0804EE7A:
-	ldr r3, _0804EE98 @ =gUnknown_03004854
+	ldr r3, _0804EE98 @ =sBerryBlenderData
 	ldr r1, [r3]
 	movs r4, 0x98
 	lsls r4, 1
@@ -1376,7 +485,7 @@ _0804EE7A:
 	adds r1, r0
 	b _0804F0AE
 	.align 2, 0
-_0804EE98: .4byte gUnknown_03004854
+_0804EE98: .4byte sBerryBlenderData
 _0804EE9C: .4byte gUnknown_082162EC
 _0804EEA0:
 	mov r1, r8
@@ -1446,7 +555,7 @@ _0804EF16:
 	bne _0804EF22
 	b _0804F0CE
 _0804EF22:
-	ldr r2, _0804EF30 @ =gUnknown_03004854
+	ldr r2, _0804EF30 @ =sBerryBlenderData
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1454,7 +563,7 @@ _0804EF22:
 	ldr r0, [r2]
 	b _0804EFBC
 	.align 2, 0
-_0804EF30: .4byte gUnknown_03004854
+_0804EF30: .4byte sBerryBlenderData
 _0804EF34:
 	movs r2, 0x80
 	lsls r2, 19
@@ -1539,7 +648,7 @@ _0804EFD8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804EFF6
-	ldr r0, _0804F008 @ =gUnknown_03004854
+	ldr r0, _0804F008 @ =sBerryBlenderData
 	ldr r1, [r0]
 	movs r3, 0x98
 	lsls r3, 1
@@ -1550,7 +659,7 @@ _0804EFD8:
 	adds r0, 0x1
 	strb r0, [r1]
 _0804EFF6:
-	ldr r0, _0804F008 @ =gUnknown_03004854
+	ldr r0, _0804F008 @ =sBerryBlenderData
 	ldr r0, [r0]
 	movs r4, 0xB4
 	lsls r4, 1
@@ -1558,7 +667,7 @@ _0804EFF6:
 	bl sub_8051414
 	b _0804F0CE
 	.align 2, 0
-_0804F008: .4byte gUnknown_03004854
+_0804F008: .4byte sBerryBlenderData
 _0804F00C:
 	ldr r0, _0804F01C @ =gSpriteTemplate_8216548
 	movs r2, 0x10
@@ -1635,7 +744,7 @@ _0804F0A0:
 	cmp r0, 0
 	beq _0804F0CE
 _0804F0AA:
-	ldr r0, _0804F0B8 @ =gUnknown_03004854
+	ldr r0, _0804F0B8 @ =sBerryBlenderData
 _0804F0AC:
 	ldr r1, [r0]
 _0804F0AE:
@@ -1644,7 +753,7 @@ _0804F0AE:
 	strb r0, [r1]
 	b _0804F0CE
 	.align 2, 0
-_0804F0B8: .4byte gUnknown_03004854
+_0804F0B8: .4byte sBerryBlenderData
 _0804F0BC:
 	ldr r0, _0804F0EC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -1680,7 +789,7 @@ sub_804F0F4: @ 804F0F4
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	ldr r0, _0804F158 @ =sub_804E2BC
+	ldr r0, _0804F158 @ =VBlankCB0_BerryBlender
 	bl SetVBlankCallback
 	ldr r4, _0804F15C @ =gWindowConfig_81E6F68
 	adds r0, r4, 0
@@ -1691,7 +800,7 @@ sub_804F0F4: @ 804F0F4
 	ldr r2, _0804F164 @ =0x00004422
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _0804F168 @ =gUnknown_03004854
+	ldr r0, _0804F168 @ =sBerryBlenderData
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x4E
@@ -1717,11 +826,11 @@ sub_804F0F4: @ 804F0F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F158: .4byte sub_804E2BC
+_0804F158: .4byte VBlankCB0_BerryBlender
 _0804F15C: .4byte gWindowConfig_81E6F68
 _0804F160: .4byte gLinkType
 _0804F164: .4byte 0x00004422
-_0804F168: .4byte gUnknown_03004854
+_0804F168: .4byte sBerryBlenderData
 	thumb_func_end sub_804F0F4
 
 	thumb_func_start task_tutorial_oak_boy_girl
@@ -1732,7 +841,7 @@ task_tutorial_oak_boy_girl: @ 804F16C
 	lsrs r0, 24
 	adds r2, r0, 0
 	adds r2, 0x18
-	ldr r0, _0804F1A8 @ =gUnknown_03004854
+	ldr r0, _0804F1A8 @ =sBerryBlenderData
 	ldr r0, [r0]
 	lsrs r1, 23
 	adds r0, 0xA2
@@ -1756,7 +865,7 @@ task_tutorial_oak_boy_girl: @ 804F16C
 	movs r0, 0x2
 	b _0804F1B6
 	.align 2, 0
-_0804F1A8: .4byte gUnknown_03004854
+_0804F1A8: .4byte sBerryBlenderData
 _0804F1AC: .4byte gUnknown_08216303
 _0804F1B0:
 	movs r0, 0x1
@@ -1843,7 +952,7 @@ _0804F234: .4byte gUnknown_082165BC
 sub_804F238: @ 804F238
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r7, _0804F2A0 @ =gUnknown_03004854
+	ldr r7, _0804F2A0 @ =sBerryBlenderData
 	movs r6, 0xFF
 	ldr r5, _0804F2A4 @ =gUnknown_082162EC
 _0804F242:
@@ -1869,7 +978,7 @@ _0804F242:
 	cmp r4, 0x3
 	ble _0804F242
 	movs r3, 0
-	ldr r7, _0804F2A0 @ =gUnknown_03004854
+	ldr r7, _0804F2A0 @ =sBerryBlenderData
 _0804F270:
 	movs r4, 0
 	adds r6, r3, 0x1
@@ -1898,7 +1007,7 @@ _0804F28E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F2A0: .4byte gUnknown_03004854
+_0804F2A0: .4byte sBerryBlenderData
 _0804F2A4: .4byte gUnknown_082162EC
 	thumb_func_end sub_804F238
 
@@ -1908,7 +1017,7 @@ BuyMenuDrawFieldObjects: @ 804F2A8
 	mov r7, r8
 	push {r7}
 	movs r6, 0
-	ldr r7, _0804F360 @ =gUnknown_03004854
+	ldr r7, _0804F360 @ =sBerryBlenderData
 	ldr r0, _0804F364 @ =gUnknown_082162D4
 	mov r8, r0
 _0804F2B6:
@@ -1994,7 +1103,7 @@ _0804F34A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F360: .4byte gUnknown_03004854
+_0804F360: .4byte sBerryBlenderData
 _0804F364: .4byte gUnknown_082162D4
 _0804F368: .4byte gStringVar1
 _0804F36C: .4byte gSprites
@@ -2008,7 +1117,7 @@ sub_804F378: @ 804F378
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r1, _0804F398 @ =gUnknown_03004854
+	ldr r1, _0804F398 @ =sBerryBlenderData
 	ldr r0, [r1]
 	ldrb r0, [r0]
 	mov r8, r1
@@ -2022,7 +1131,7 @@ _0804F38E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804F398: .4byte gUnknown_03004854
+_0804F398: .4byte sBerryBlenderData
 _0804F39C: .4byte _0804F3A0
 	.align 2, 0
 _0804F3A0:
@@ -2054,13 +1163,13 @@ _0804F3F8:
 	ldrh r1, [r4]
 	movs r0, 0
 	bl sub_80516C4
-	ldr r5, _0804F470 @ =gUnknown_03004854
+	ldr r5, _0804F470 @ =sBerryBlenderData
 	ldr r0, [r5]
 	movs r6, 0xBE
 	lsls r6, 1
 	adds r0, r6
 	ldrh r1, [r4]
-	bl sub_804E844
+	bl Blender_CopyBerryData
 	ldrh r0, [r4]
 	ldr r2, [r5]
 	adds r1, r2, 0
@@ -2106,7 +1215,7 @@ _0804F442:
 	b _0804F7E6
 	.align 2, 0
 _0804F46C: .4byte gScriptItemId
-_0804F470: .4byte gUnknown_03004854
+_0804F470: .4byte sBerryBlenderData
 _0804F474:
 	bl sub_804E2EC
 	lsls r0, 24
@@ -2114,7 +1223,7 @@ _0804F474:
 	bne _0804F480
 	b _0804F7E6
 _0804F480:
-	ldr r0, _0804F490 @ =gUnknown_03004854
+	ldr r0, _0804F490 @ =sBerryBlenderData
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -2122,15 +1231,15 @@ _0804F480:
 	bl sub_8051474
 	b _0804F7E6
 	.align 2, 0
-_0804F490: .4byte gUnknown_03004854
+_0804F490: .4byte sBerryBlenderData
 _0804F494:
 	movs r4, 0
-	ldr r5, _0804F4DC @ =gUnknown_082162E4
-	ldr r6, _0804F4E0 @ =gUnknown_03004854
+	ldr r5, _0804F4DC @ =sBlenderSyncArrowsPos
+	ldr r6, _0804F4E0 @ =sBerryBlenderData
 _0804F49A:
 	ldrb r1, [r5]
 	ldrb r2, [r5, 0x1]
-	ldr r0, _0804F4E4 @ =gSpriteTemplate_82163F4
+	ldr r0, _0804F4E4 @ =sBlenderSyncArrow_SpriteTemplate
 	movs r3, 0x1
 	bl CreateSprite
 	ldr r1, [r6]
@@ -2155,13 +1264,13 @@ _0804F49A:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0804F49A
-	ldr r0, _0804F4E0 @ =gUnknown_03004854
+	ldr r0, _0804F4E0 @ =sBerryBlenderData
 	ldr r1, [r0]
 	b _0804F74C
 	.align 2, 0
-_0804F4DC: .4byte gUnknown_082162E4
-_0804F4E0: .4byte gUnknown_03004854
-_0804F4E4: .4byte gSpriteTemplate_82163F4
+_0804F4DC: .4byte sBlenderSyncArrowsPos
+_0804F4E0: .4byte sBerryBlenderData
+_0804F4E4: .4byte sBlenderSyncArrow_SpriteTemplate
 _0804F4E8: .4byte gSprites
 _0804F4EC:
 	movs r0, 0x1
@@ -2172,7 +1281,7 @@ _0804F4EC:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, _0804F514 @ =gUnknown_03004854
+	ldr r2, _0804F514 @ =sBerryBlenderData
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -2184,7 +1293,7 @@ _0804F4EC:
 	str r4, [r0]
 	b _0804F7E6
 	.align 2, 0
-_0804F514: .4byte gUnknown_03004854
+_0804F514: .4byte sBerryBlenderData
 _0804F518:
 	mov r2, r8
 	ldr r1, [r2]
@@ -2239,7 +1348,7 @@ _0804F564:
 _0804F578:
 	movs r4, 0
 	ldr r2, _0804F5C0 @ =gUnknown_082162EC
-	ldr r0, _0804F5C4 @ =gUnknown_03004854
+	ldr r0, _0804F5C4 @ =sBerryBlenderData
 	ldr r3, [r0]
 	adds r0, r3, 0
 	adds r0, 0x88
@@ -2260,7 +1369,7 @@ _0804F594:
 	cmp r4, 0x3
 	ble _0804F594
 _0804F5A2:
-	ldr r3, _0804F5C4 @ =gUnknown_03004854
+	ldr r3, _0804F5C4 @ =sBerryBlenderData
 	ldr r1, [r3]
 	movs r5, 0x98
 	lsls r5, 1
@@ -2277,7 +1386,7 @@ _0804F5A2:
 	b _0804F74C
 	.align 2, 0
 _0804F5C0: .4byte gUnknown_082162EC
-_0804F5C4: .4byte gUnknown_03004854
+_0804F5C4: .4byte sBerryBlenderData
 _0804F5C8:
 	mov r1, r8
 	ldr r3, [r1]
@@ -2431,13 +1540,13 @@ _0804F6F8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804F70C
-	ldr r0, _0804F71C @ =gUnknown_03004854
+	ldr r0, _0804F71C @ =sBerryBlenderData
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
 _0804F70C:
-	ldr r0, _0804F71C @ =gUnknown_03004854
+	ldr r0, _0804F71C @ =sBerryBlenderData
 	ldr r0, [r0]
 _0804F710:
 	movs r3, 0xB4
@@ -2446,7 +1555,7 @@ _0804F710:
 	bl sub_8051414
 	b _0804F7E6
 	.align 2, 0
-_0804F71C: .4byte gUnknown_03004854
+_0804F71C: .4byte sBerryBlenderData
 _0804F720:
 	ldr r0, _0804F734 @ =gSpriteTemplate_8216548
 	movs r2, 0x10
@@ -2454,12 +1563,12 @@ _0804F720:
 	movs r1, 0x78
 	movs r3, 0x3
 	bl CreateSprite
-	ldr r0, _0804F738 @ =gUnknown_03004854
+	ldr r0, _0804F738 @ =sBerryBlenderData
 	ldr r1, [r0]
 	b _0804F74C
 	.align 2, 0
 _0804F734: .4byte gSpriteTemplate_8216548
-_0804F738: .4byte gUnknown_03004854
+_0804F738: .4byte sBerryBlenderData
 _0804F73C:
 	mov r5, r8
 	ldr r1, [r5]
@@ -2478,7 +1587,7 @@ _0804F74C:
 	b _0804F7E6
 _0804F754:
 	bl sub_804F81C
-	ldr r3, _0804F804 @ =gUnknown_03004854
+	ldr r3, _0804F804 @ =sBerryBlenderData
 	ldr r4, [r3]
 	adds r5, r4, 0
 	adds r5, 0x56
@@ -2510,7 +1619,7 @@ _0804F792:
 	ldm r6!, {r0}
 	lsrs r1, r5, 24
 	bl CreateTask
-	ldr r1, _0804F804 @ =gUnknown_03004854
+	ldr r1, _0804F804 @ =sBerryBlenderData
 	ldr r1, [r1]
 	movs r2, 0xA4
 	lsls r2, 1
@@ -2533,7 +1642,7 @@ _0804F7B8:
 	cmp r0, r4
 	beq _0804F7D6
 	bl GetCurrentMapMusic
-	ldr r1, _0804F804 @ =gUnknown_03004854
+	ldr r1, _0804F804 @ =sBerryBlenderData
 	ldr r1, [r1]
 	movs r5, 0xBC
 	lsls r5, 1
@@ -2544,7 +1653,7 @@ _0804F7D6:
 	bl PlayBGM
 	movs r0, 0x35
 	bl PlaySE
-	bl sub_804E290
+	bl Blender_ControlHitPitch
 _0804F7E6:
 	bl RunTasks
 	bl AnimateSprites
@@ -2557,7 +1666,7 @@ _0804F7E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F804: .4byte gUnknown_03004854
+_0804F804: .4byte sBerryBlenderData
 _0804F808: .4byte 0x0000014b
 _0804F80C: .4byte sub_80501FC
 _0804F810: .4byte gSpecialVar_0x8004
@@ -2661,7 +1770,7 @@ sub_804F8C8: @ 804F8C8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _0804F934 @ =gUnknown_03004854
+	ldr r4, _0804F934 @ =sBerryBlenderData
 	ldr r0, [r4]
 	adds r0, 0x54
 	ldrh r0, [r0]
@@ -2712,7 +1821,7 @@ _0804F8FC:
 	ldr r0, _0804F94C @ =0x00004523
 	b _0804F954
 	.align 2, 0
-_0804F934: .4byte gUnknown_03004854
+_0804F934: .4byte sBerryBlenderData
 _0804F938: .4byte gTasks
 _0804F93C: .4byte 0x0000014b
 _0804F940: .4byte 0x0000028f
@@ -2813,7 +1922,7 @@ sub_804F9F4: @ 804F9F4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, _0804FA78 @ =gUnknown_03004854
+	ldr r6, _0804FA78 @ =sBerryBlenderData
 	ldr r3, [r6]
 	adds r0, r3, 0
 	adds r0, 0x54
@@ -2874,7 +1983,7 @@ sub_804F9F4: @ 804F9F4
 	strh r0, [r1, 0x14]
 	b _0804FAD4
 	.align 2, 0
-_0804FA78: .4byte gUnknown_03004854
+_0804FA78: .4byte sBerryBlenderData
 _0804FA7C: .4byte 0x0000ffff
 _0804FA80: .4byte gUnknown_08216303
 _0804FA84: .4byte gTasks
@@ -2957,7 +2066,7 @@ sub_804FB1C: @ 804FB1C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, _0804FB9C @ =gUnknown_03004854
+	ldr r5, _0804FB9C @ =sBerryBlenderData
 	ldr r3, [r5]
 	adds r0, r3, 0
 	adds r0, 0x54
@@ -3017,7 +2126,7 @@ sub_804FB1C: @ 804FB1C
 	strh r0, [r1, 0x16]
 	b _0804FC02
 	.align 2, 0
-_0804FB9C: .4byte gUnknown_03004854
+_0804FB9C: .4byte sBerryBlenderData
 _0804FBA0: .4byte 0x0000ffff
 _0804FBA4: .4byte gUnknown_08216303
 _0804FBA8: .4byte gTasks
@@ -3108,7 +2217,7 @@ sub_804FC48: @ 804FC48
 	mov r8, r7
 	lsls r1, 24
 	ldr r0, _0804FCBC @ =gSpriteTemplate_821645C
-	ldr r4, _0804FCC0 @ =gUnknown_082162E4
+	ldr r4, _0804FCC0 @ =sBlenderSyncArrowsPos
 	lsrs r1, 23
 	adds r2, r1, r4
 	ldrb r6, [r2]
@@ -3156,7 +2265,7 @@ sub_804FC48: @ 804FC48
 	b _0804FD18
 	.align 2, 0
 _0804FCBC: .4byte gSpriteTemplate_821645C
-_0804FCC0: .4byte gUnknown_082162E4
+_0804FCC0: .4byte sBlenderSyncArrowsPos
 _0804FCC4: .4byte gUnknown_082162CC
 _0804FCC8: .4byte 0x00004523
 _0804FCCC: .4byte gSprites
@@ -3209,7 +2318,7 @@ sub_804FD30: @ 804FD30
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl sub_804E290
+	bl Blender_ControlHitPitch
 	ldr r0, _0804FD50 @ =0x00004523
 	cmp r4, r0
 	beq _0804FD64
@@ -3230,7 +2339,7 @@ _0804FD58:
 	.align 2, 0
 _0804FD60: .4byte 0x00005432
 _0804FD64:
-	ldr r7, _0804FD94 @ =gUnknown_03004854
+	ldr r7, _0804FD94 @ =sBerryBlenderData
 	ldr r4, [r7]
 	adds r5, r4, 0
 	adds r5, 0x56
@@ -3253,7 +2362,7 @@ _0804FD64:
 	strh r0, [r5]
 	b _0804FE60
 	.align 2, 0
-_0804FD94: .4byte gUnknown_03004854
+_0804FD94: .4byte sBerryBlenderData
 _0804FD98: .4byte 0x000005db
 _0804FD9C: .4byte gUnknown_082165DA
 _0804FDA0:
@@ -3299,7 +2408,7 @@ _0804FDA0:
 	.align 2, 0
 _0804FDF8: .4byte gUnknown_082165DA
 _0804FDFC:
-	ldr r0, _0804FE28 @ =gUnknown_03004854
+	ldr r0, _0804FE28 @ =sBerryBlenderData
 	ldr r2, [r0]
 	adds r4, r2, 0
 	adds r4, 0x56
@@ -3321,11 +2430,11 @@ _0804FDFC:
 	adds r0, r5, r0
 	b _0804FE5E
 	.align 2, 0
-_0804FE28: .4byte gUnknown_03004854
+_0804FE28: .4byte sBerryBlenderData
 _0804FE2C: .4byte 0x000005db
 _0804FE30: .4byte gUnknown_082165DA
 _0804FE34:
-	ldr r0, _0804FE68 @ =gUnknown_03004854
+	ldr r0, _0804FE68 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r4, r0, 0
 	adds r4, 0x56
@@ -3352,7 +2461,7 @@ _0804FE60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804FE68: .4byte gUnknown_03004854
+_0804FE68: .4byte sBerryBlenderData
 _0804FE6C: .4byte gUnknown_082165DA
 	thumb_func_end sub_804FD30
 
@@ -3398,7 +2507,7 @@ _0804FEAC:
 	bge _0804FEA4
 _0804FEB6:
 	movs r6, 0
-	ldr r7, _0804FF50 @ =gUnknown_03004854
+	ldr r7, _0804FF50 @ =sBerryBlenderData
 	adds r1, r7, 0
 	ldr r0, [r1]
 	adds r0, 0x88
@@ -3472,7 +2581,7 @@ _0804FF40: .4byte gSpecialVar_0x8004
 _0804FF44: .4byte gSendCmd
 _0804FF48: .4byte gRecvCmds
 _0804FF4C: .4byte 0x00004444
-_0804FF50: .4byte gUnknown_03004854
+_0804FF50: .4byte sBerryBlenderData
 _0804FF54: .4byte 0x00005432
 _0804FF58: .4byte 0x00004523
 _0804FF5C: .4byte 0x03e70000
@@ -3543,7 +2652,7 @@ _0804FFD6:
 	cmp r0, r10
 	bne _0805003E
 _0804FFE4:
-	ldr r0, _08050024 @ =gUnknown_03004854
+	ldr r0, _08050024 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r2, r0, 0
 	adds r2, 0x56
@@ -3570,7 +2679,7 @@ _0804FFE4:
 _08050018: .4byte 0x00002345
 _0805001C: .4byte 0x000003e6
 _08050020: .4byte 0x00004523
-_08050024: .4byte gUnknown_03004854
+_08050024: .4byte sBerryBlenderData
 _08050028: .4byte 0x000005dc
 _0805002C: .4byte 0xfffffd12
 _08050030: .4byte gMPlay_BGM
@@ -3588,7 +2697,7 @@ _0805003E:
 	movs r0, 0x2
 	add r8, r0
 	adds r6, 0x1
-	ldr r7, _0805009C @ =gUnknown_03004854
+	ldr r7, _0805009C @ =sBerryBlenderData
 	ldr r0, [r7]
 	adds r0, 0x88
 	ldrb r0, [r0]
@@ -3601,7 +2710,7 @@ _0805005C:
 	cmp r0, 0
 	beq _08050088
 	movs r6, 0
-	ldr r3, _0805009C @ =gUnknown_03004854
+	ldr r3, _0805009C @ =sBerryBlenderData
 	ldr r0, [r3]
 	adds r0, 0x88
 	ldrb r0, [r0]
@@ -3630,7 +2739,7 @@ _08050088:
 	bx r0
 	.align 2, 0
 _08050098: .4byte gMPlay_BGM
-_0805009C: .4byte gUnknown_03004854
+_0805009C: .4byte sBerryBlenderData
 _080500A0: .4byte gSpecialVar_0x8004
 _080500A4: .4byte gRecvCmds
 	thumb_func_end sub_804FE70
@@ -3639,7 +2748,7 @@ _080500A4: .4byte gRecvCmds
 sub_80500A8: @ 80500A8
 	push {r4-r6,lr}
 	movs r6, 0
-	ldr r5, _080500EC @ =gUnknown_03004854
+	ldr r5, _080500EC @ =sBerryBlenderData
 	ldr r4, [r5]
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -3670,7 +2779,7 @@ sub_80500A8: @ 80500A8
 	lsrs r6, r0, 31
 	b _0805010A
 	.align 2, 0
-_080500EC: .4byte gUnknown_03004854
+_080500EC: .4byte sBerryBlenderData
 _080500F0: .4byte gSaveBlock2
 _080500F4: .4byte gMain
 _080500F8: .4byte 0x00000201
@@ -3685,7 +2794,7 @@ _080500FC:
 _0805010A:
 	cmp r6, 0
 	beq _0805018A
-	ldr r4, _08050160 @ =gUnknown_03004854
+	ldr r4, _08050160 @ =sBerryBlenderData
 	ldr r1, [r4]
 	lsls r2, r3, 1
 	adds r0, r1, 0
@@ -3722,7 +2831,7 @@ _0805010A:
 	b _08050188
 	.align 2, 0
 _0805015C: .4byte gMain
-_08050160: .4byte gUnknown_03004854
+_08050160: .4byte sBerryBlenderData
 _08050164: .4byte gSprites
 _08050168: .4byte gSendCmd
 _0805016C: .4byte 0x00004523
@@ -3741,7 +2850,7 @@ _08050184:
 _08050188:
 	strh r0, [r1, 0x4]
 _0805018A:
-	ldr r2, _080501EC @ =gUnknown_03004854
+	ldr r2, _080501EC @ =sBerryBlenderData
 	ldr r1, [r2]
 	adds r1, 0x7E
 	ldrb r0, [r1]
@@ -3792,7 +2901,7 @@ _080501DE:
 	.align 2, 0
 _080501E4: .4byte gSendCmd
 _080501E8: .4byte 0x00002345
-_080501EC: .4byte gUnknown_03004854
+_080501EC: .4byte sBerryBlenderData
 _080501F0: .4byte gUnknown_020297ED
 _080501F4: .4byte gMain
 _080501F8: .4byte 0x0000014b
@@ -3802,7 +2911,7 @@ _080501F8: .4byte 0x0000014b
 sub_80501FC: @ 80501FC
 	push {r4-r6,lr}
 	bl sub_8051474
-	ldr r4, _08050294 @ =gUnknown_03004854
+	ldr r4, _08050294 @ =sBerryBlenderData
 	ldr r0, [r4]
 	movs r1, 0x96
 	lsls r1, 1
@@ -3866,7 +2975,7 @@ _0805027E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050294: .4byte gUnknown_03004854
+_08050294: .4byte sBerryBlenderData
 _08050298: .4byte 0x00057e03
 _0805029C: .4byte 0x000003e7
 _080502A0: .4byte sub_8050954
@@ -4552,7 +3661,7 @@ sub_8050744: @ 8050744
 	thumb_func_start sub_8050760
 sub_8050760: @ 8050760
 	push {r4-r6,lr}
-	ldr r0, _08050780 @ =gUnknown_03004854
+	ldr r0, _08050780 @ =sBerryBlenderData
 	ldr r0, [r0]
 	movs r2, 0x96
 	lsls r2, 1
@@ -4567,7 +3676,7 @@ sub_8050760: @ 8050760
 	movs r2, 0x5
 	b _080507DA
 	.align 2, 0
-_08050780: .4byte gUnknown_03004854
+_08050780: .4byte sBerryBlenderData
 _08050784: .4byte 0x00000383
 _08050788:
 	ldr r3, _0805079C @ =0xfffffc7c
@@ -4743,7 +3852,7 @@ _080508D0: .4byte 0x0000fff6
 	thumb_func_start sub_80508D4
 sub_80508D4: @ 80508D4
 	push {lr}
-	ldr r2, _080508F8 @ =gUnknown_03004854
+	ldr r2, _080508F8 @ =sBerryBlenderData
 	ldr r1, [r2]
 	adds r1, 0xAA
 	strb r0, [r1]
@@ -4760,14 +3869,14 @@ sub_80508D4: @ 80508D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080508F8: .4byte gUnknown_03004854
+_080508F8: .4byte sBerryBlenderData
 	thumb_func_end sub_80508D4
 
 	thumb_func_start sub_80508FC
 sub_80508FC: @ 80508FC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, _08050944 @ =gUnknown_03004854
+	ldr r4, _08050944 @ =sBerryBlenderData
 	ldr r0, [r4]
 	adds r0, 0xAA
 	movs r1, 0
@@ -4797,7 +3906,7 @@ sub_80508FC: @ 80508FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050944: .4byte gUnknown_03004854
+_08050944: .4byte sBerryBlenderData
 _08050948: .4byte 0x0000ffff
 _0805094C: .4byte 0x00002d9f
 _08050950: .4byte gOtherText_YesNoTerminating
@@ -4808,7 +3917,7 @@ sub_8050954: @ 8050954
 	push {r4-r7,lr}
 	bl sub_8051474
 	bl GetMultiplayerId
-	ldr r0, _08050978 @ =gUnknown_03004854
+	ldr r0, _08050978 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0x6F
 	ldrb r0, [r0]
@@ -4823,7 +3932,7 @@ _0805096E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08050978: .4byte gUnknown_03004854
+_08050978: .4byte sBerryBlenderData
 _0805097C: .4byte _08050980
 	.align 2, 0
 _08050980:
@@ -4851,7 +3960,7 @@ _080509B4:
 	.align 2, 0
 _080509C8: .4byte gMPlay_BGM
 _080509CC:
-	ldr r0, _080509F0 @ =gUnknown_03004854
+	ldr r0, _080509F0 @ =sBerryBlenderData
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 1
@@ -4869,10 +3978,10 @@ _080509E4:
 	bcc _080509CC
 	b _08050C82
 	.align 2, 0
-_080509F0: .4byte gUnknown_03004854
+_080509F0: .4byte sBerryBlenderData
 _080509F4: .4byte gSpecialVar_0x8004
 _080509F8:
-	ldr r1, _08050A24 @ =gUnknown_03004854
+	ldr r1, _08050A24 @ =sBerryBlenderData
 	ldr r3, [r1]
 	adds r2, r3, 0
 	adds r2, 0x56
@@ -4895,7 +4004,7 @@ _080509F8:
 	adds r0, 0x1
 	b _08050A32
 	.align 2, 0
-_08050A24: .4byte gUnknown_03004854
+_08050A24: .4byte sBerryBlenderData
 _08050A28: .4byte gReceivedRemoteLinkPlayers
 _08050A2C:
 	adds r1, r3, 0
@@ -4909,7 +4018,7 @@ _08050A32:
 	ldr r0, _08050A48 @ =gMPlay_SE2
 	bl m4aMPlayStop
 _08050A40:
-	bl sub_804E290
+	bl Blender_ControlHitPitch
 	b _08050CB6
 	.align 2, 0
 _08050A48: .4byte gMPlay_SE2
@@ -4926,7 +4035,7 @@ _08050A58:
 	bne _08050A64
 	b _08050CB6
 _08050A64:
-	ldr r4, _08050A90 @ =gUnknown_03004854
+	ldr r4, _08050A90 @ =sBerryBlenderData
 	ldr r3, [r4]
 	movs r2, 0xDE
 	lsls r2, 1
@@ -4948,7 +4057,7 @@ _08050A64:
 	ldr r1, [r4]
 	b _08050C86
 	.align 2, 0
-_08050A90: .4byte gUnknown_03004854
+_08050A90: .4byte sBerryBlenderData
 _08050A94:
 	bl GetBlockReceivedStatus
 	lsls r0, 24
@@ -4957,7 +4066,7 @@ _08050A94:
 	b _08050CB6
 _08050AA0:
 	ldr r2, _08050AC8 @ =gBlockRecvBuffer
-	ldr r0, _08050ACC @ =gUnknown_03004854
+	ldr r0, _08050ACC @ =sBerryBlenderData
 	ldr r3, [r0]
 	ldrh r0, [r2, 0x4]
 	adds r1, r3, 0
@@ -4977,7 +4086,7 @@ _08050AA0:
 	b _08050CB6
 	.align 2, 0
 _08050AC8: .4byte gBlockRecvBuffer
-_08050ACC: .4byte gUnknown_03004854
+_08050ACC: .4byte sBerryBlenderData
 _08050AD0:
 	bl sub_8052228
 	lsls r0, 24
@@ -5007,7 +4116,7 @@ _08050B00:
 	bl IncrementGameStat
 	b _08050C82
 _08050B08:
-	ldr r0, _08050B2C @ =gUnknown_03004854
+	ldr r0, _08050B2C @ =sBerryBlenderData
 	ldr r1, [r0]
 	adds r1, 0x6F
 	ldrb r0, [r1]
@@ -5024,7 +4133,7 @@ _08050B08:
 	bl MenuPrintMessage
 	b _08050CB6
 	.align 2, 0
-_08050B2C: .4byte gUnknown_03004854
+_08050B2C: .4byte sBerryBlenderData
 _08050B30: .4byte gOtherText_BlendAnotherBerryPrompt
 _08050B34:
 	bl MenuUpdateWindowText
@@ -5035,7 +4144,7 @@ _08050B34:
 _08050B40:
 	b _08050C82
 _08050B42:
-	ldr r4, _08050B54 @ =gUnknown_03004854
+	ldr r4, _08050B54 @ =sBerryBlenderData
 	ldr r0, [r4]
 	adds r0, 0xAA
 	movs r1, 0
@@ -5044,7 +4153,7 @@ _08050B42:
 	ldr r1, [r4]
 	b _08050C86
 	.align 2, 0
-_08050B54: .4byte gUnknown_03004854
+_08050B54: .4byte sBerryBlenderData
 _08050B58:
 	ldr r0, _08050B80 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -5052,7 +4161,7 @@ _08050B58:
 	ands r0, r1
 	cmp r0, 0
 	beq _08050B88
-	ldr r0, _08050B84 @ =gUnknown_03004854
+	ldr r0, _08050B84 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0xAA
 	ldrb r0, [r0]
@@ -5066,13 +4175,13 @@ _08050B76:
 	b _08050CB6
 	.align 2, 0
 _08050B80: .4byte gMain
-_08050B84: .4byte gUnknown_03004854
+_08050B84: .4byte sBerryBlenderData
 _08050B88:
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _08050BA8
-	ldr r0, _08050BA4 @ =gUnknown_03004854
+	ldr r0, _08050BA4 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0xAA
 	ldrb r0, [r0]
@@ -5082,7 +4191,7 @@ _08050B88:
 	bl PlaySE
 	b _08050BD4
 	.align 2, 0
-_08050BA4: .4byte gUnknown_03004854
+_08050BA4: .4byte sBerryBlenderData
 _08050BA8:
 	movs r0, 0x1
 	ands r0, r1
@@ -5100,7 +4209,7 @@ _08050BB8:
 _08050BC2:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _08050BDC @ =gUnknown_03004854
+	ldr r0, _08050BDC @ =sBerryBlenderData
 	ldr r1, [r0]
 	adds r1, 0x6F
 	ldrb r0, [r1]
@@ -5111,13 +4220,13 @@ _08050BD4:
 	bl sub_80508D4
 	b _08050CB6
 	.align 2, 0
-_08050BDC: .4byte gUnknown_03004854
+_08050BDC: .4byte sBerryBlenderData
 _08050BE0:
 	ldr r6, _08050C10 @ =gSendCmd
 	movs r7, 0
 	ldr r0, _08050C14 @ =0x00002fff
 	strh r0, [r6]
-	ldr r4, _08050C18 @ =gUnknown_03004854
+	ldr r4, _08050C18 @ =sBerryBlenderData
 	ldr r2, [r4]
 	adds r0, r2, 0
 	adds r0, 0xAA
@@ -5138,7 +4247,7 @@ _08050BE0:
 	.align 2, 0
 _08050C10: .4byte gSendCmd
 _08050C14: .4byte 0x00002fff
-_08050C18: .4byte gUnknown_03004854
+_08050C18: .4byte sBerryBlenderData
 _08050C1C: .4byte 0x00009999
 _08050C20:
 	bl sub_810CA00
@@ -5193,7 +4302,7 @@ _08050C78:
 	movs r2, 0xF
 	bl MenuPrintMessage
 _08050C82:
-	ldr r0, _08050C94 @ =gUnknown_03004854
+	ldr r0, _08050C94 @ =sBerryBlenderData
 	ldr r1, [r0]
 _08050C86:
 	adds r1, 0x6F
@@ -5204,7 +4313,7 @@ _08050C88:
 	b _08050CB6
 	.align 2, 0
 _08050C90: .4byte gOtherText_LinkStandby3
-_08050C94: .4byte gUnknown_03004854
+_08050C94: .4byte sBerryBlenderData
 _08050C98:
 	bl MenuUpdateWindowText
 	lsls r0, 24
@@ -5213,7 +4322,7 @@ _08050C98:
 	ldr r0, _08050CE0 @ =sub_8050E30
 _08050CA4:
 	bl SetMainCallback2
-	ldr r2, _08050CE4 @ =gUnknown_03004854
+	ldr r2, _08050CE4 @ =sBerryBlenderData
 	ldr r0, [r2]
 	adds r0, 0x6F
 	movs r1, 0
@@ -5222,7 +4331,7 @@ _08050CA4:
 	strb r1, [r0]
 _08050CB6:
 	bl sub_8051B18
-	ldr r0, _08050CE4 @ =gUnknown_03004854
+	ldr r0, _08050CE4 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0x56
 	ldrh r0, [r0]
@@ -5237,13 +4346,13 @@ _08050CB6:
 	bx r0
 	.align 2, 0
 _08050CE0: .4byte sub_8050E30
-_08050CE4: .4byte gUnknown_03004854
+_08050CE4: .4byte sBerryBlenderData
 	thumb_func_end sub_8050954
 
 	thumb_func_start sub_8050CE8
 sub_8050CE8: @ 8050CE8
 	push {r4,lr}
-	ldr r1, _08050D08 @ =gUnknown_03004854
+	ldr r1, _08050D08 @ =sBerryBlenderData
 	ldr r0, [r1]
 	movs r2, 0xE2
 	lsls r2, 1
@@ -5260,7 +4369,7 @@ _08050CFE:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08050D08: .4byte gUnknown_03004854
+_08050D08: .4byte sBerryBlenderData
 _08050D0C: .4byte _08050D10
 	.align 2, 0
 _08050D10:
@@ -5273,7 +4382,7 @@ _08050D10:
 	.4byte _08050E06
 _08050D2C:
 	bl sub_80084A4
-	ldr r0, _08050D40 @ =gUnknown_03004854
+	ldr r0, _08050D40 @ =sBerryBlenderData
 	ldr r2, [r0]
 	movs r3, 0xE2
 	lsls r3, 1
@@ -5281,13 +4390,13 @@ _08050D2C:
 	movs r0, 0x1
 	b _08050DF8
 	.align 2, 0
-_08050D40: .4byte gUnknown_03004854
+_08050D40: .4byte sBerryBlenderData
 _08050D44:
 	bl sub_8007ECC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08050E28
-	ldr r0, _08050D68 @ =gUnknown_03004854
+	ldr r0, _08050D68 @ =sBerryBlenderData
 	ldr r1, [r0]
 	movs r2, 0xE2
 	lsls r2, 1
@@ -5300,15 +4409,15 @@ _08050D44:
 	strb r0, [r1]
 	b _08050E28
 	.align 2, 0
-_08050D68: .4byte gUnknown_03004854
+_08050D68: .4byte sBerryBlenderData
 _08050D6C: .4byte gSoftResetDisabled
 _08050D70:
 	bl sub_8125E2C
-	ldr r0, _08050D7C @ =gUnknown_03004854
+	ldr r0, _08050D7C @ =sBerryBlenderData
 	ldr r2, [r0]
 	b _08050DEE
 	.align 2, 0
-_08050D7C: .4byte gUnknown_03004854
+_08050D7C: .4byte sBerryBlenderData
 _08050D80:
 	ldr r1, [r4]
 	movs r2, 0x98
@@ -5338,7 +4447,7 @@ _08050DA6:
 	lsrs r2, r0, 24
 	cmp r2, 0
 	beq _08050DD0
-	ldr r0, _08050DCC @ =gUnknown_03004854
+	ldr r0, _08050DCC @ =sBerryBlenderData
 	ldr r0, [r0]
 	movs r1, 0xE2
 	lsls r1, 1
@@ -5347,9 +4456,9 @@ _08050DA6:
 	str r1, [r0]
 	b _08050E28
 	.align 2, 0
-_08050DCC: .4byte gUnknown_03004854
+_08050DCC: .4byte sBerryBlenderData
 _08050DD0:
-	ldr r0, _08050DE8 @ =gUnknown_03004854
+	ldr r0, _08050DE8 @ =sBerryBlenderData
 	ldr r1, [r0]
 	movs r3, 0x98
 	lsls r3, 1
@@ -5362,7 +4471,7 @@ _08050DD0:
 	str r0, [r1]
 	b _08050E28
 	.align 2, 0
-_08050DE8: .4byte gUnknown_03004854
+_08050DE8: .4byte sBerryBlenderData
 _08050DEC:
 	ldr r2, [r4]
 _08050DEE:
@@ -5408,7 +4517,7 @@ _08050E2A:
 sub_8050E30: @ 8050E30
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r1, _08050E50 @ =gUnknown_03004854
+	ldr r1, _08050E50 @ =sBerryBlenderData
 	ldr r0, [r1]
 	adds r0, 0x6F
 	ldrb r0, [r0]
@@ -5423,7 +4532,7 @@ _08050E44:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08050E50: .4byte gUnknown_03004854
+_08050E50: .4byte sBerryBlenderData
 _08050E54: .4byte _08050E58
 	.align 2, 0
 _08050E58:
@@ -5550,7 +4659,7 @@ _08050F6C:
 	bne _08050F78
 	b _080510C4
 _08050F78:
-	ldr r0, _08050F88 @ =gUnknown_03004854
+	ldr r0, _08050F88 @ =sBerryBlenderData
 	ldr r1, [r0]
 	movs r0, 0x98
 	lsls r0, 1
@@ -5559,7 +4668,7 @@ _08050F78:
 	str r0, [r2]
 	b _080510AC
 	.align 2, 0
-_08050F88: .4byte gUnknown_03004854
+_08050F88: .4byte sBerryBlenderData
 _08050F8C:
 	ldr r2, [r5]
 	movs r0, 0x98
@@ -5589,18 +4698,18 @@ _08050FAA:
 	movs r2, 0xF
 	bl MenuPrint
 	bl sub_80084A4
-	ldr r0, _08050FD0 @ =gUnknown_03004854
+	ldr r0, _08050FD0 @ =sBerryBlenderData
 	ldr r1, [r0]
 	b _080510AC
 	.align 2, 0
 _08050FCC: .4byte gMultiText_Saving
-_08050FD0: .4byte gUnknown_03004854
+_08050FD0: .4byte sBerryBlenderData
 _08050FD4:
 	bl sub_8007ECC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080510C4
-	ldr r3, _08051000 @ =gUnknown_03004854
+	ldr r3, _08051000 @ =sBerryBlenderData
 	ldr r1, [r3]
 	movs r2, 0x98
 	lsls r2, 1
@@ -5618,7 +4727,7 @@ _08050FD4:
 	str r2, [r0]
 	b _080510C4
 	.align 2, 0
-_08051000: .4byte gUnknown_03004854
+_08051000: .4byte sBerryBlenderData
 _08051004:
 	bl sub_8050CE8
 	lsls r0, 24
@@ -5626,11 +4735,11 @@ _08051004:
 	beq _080510C4
 	movs r0, 0x37
 	bl PlaySE
-	ldr r0, _0805101C @ =gUnknown_03004854
+	ldr r0, _0805101C @ =sBerryBlenderData
 	ldr r1, [r0]
 	b _080510AC
 	.align 2, 0
-_0805101C: .4byte gUnknown_03004854
+_0805101C: .4byte sBerryBlenderData
 _08051020:
 	ldr r1, [r5]
 	adds r1, 0x6F
@@ -5651,11 +4760,11 @@ _08051030:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08051050 @ =gUnknown_03004854
+	ldr r0, _08051050 @ =sBerryBlenderData
 	ldr r1, [r0]
 	b _080510AC
 	.align 2, 0
-_08051050: .4byte gUnknown_03004854
+_08051050: .4byte sBerryBlenderData
 _08051054:
 	ldr r0, _0805107C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -5729,7 +4838,7 @@ _080510E4: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start sub_80510E8
 sub_80510E8: @ 80510E8
 	push {lr}
-	ldr r1, _08051104 @ =gUnknown_03004854
+	ldr r1, _08051104 @ =sBerryBlenderData
 	ldr r0, [r1]
 	adds r0, 0x6F
 	ldrb r0, [r0]
@@ -5744,7 +4853,7 @@ _080510FA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08051104: .4byte gUnknown_03004854
+_08051104: .4byte sBerryBlenderData
 _08051108: .4byte _0805110C
 	.align 2, 0
 _0805110C:
@@ -5829,18 +4938,18 @@ _080511BC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805121E
-	ldr r0, _080511D4 @ =gUnknown_03004854
+	ldr r0, _080511D4 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0x6F
 	movs r1, 0x9
 	strb r1, [r0]
 	b _0805121E
 	.align 2, 0
-_080511D4: .4byte gUnknown_03004854
+_080511D4: .4byte sBerryBlenderData
 _080511D8:
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	ldr r0, _080511EC @ =gUnknown_03004854
+	ldr r0, _080511EC @ =sBerryBlenderData
 	ldr r1, [r0]
 	adds r1, 0x6F
 	ldrb r0, [r1]
@@ -5848,7 +4957,7 @@ _080511D8:
 	strb r0, [r1]
 	b _0805121E
 	.align 2, 0
-_080511EC: .4byte gUnknown_03004854
+_080511EC: .4byte sBerryBlenderData
 _080511F0:
 	ldr r0, _08051210 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -5920,13 +5029,13 @@ _08051284:
 _08051286:
 	cmp r3, r0
 	beq _08051298
-	ldr r2, _08051294 @ =gUnknown_03004854
+	ldr r2, _08051294 @ =sBerryBlenderData
 	b _080512A8
 	.align 2, 0
 _08051290: .4byte 0x0000aaaa
-_08051294: .4byte gUnknown_03004854
+_08051294: .4byte sBerryBlenderData
 _08051298:
-	ldr r2, _080512B0 @ =gUnknown_03004854
+	ldr r2, _080512B0 @ =sBerryBlenderData
 	ldr r0, [r2]
 	adds r1, r0, 0
 	adds r1, 0x78
@@ -5940,13 +5049,13 @@ _080512A8:
 	ldr r1, _080512B4 @ =0x00001111
 	b _080512C4
 	.align 2, 0
-_080512B0: .4byte gUnknown_03004854
+_080512B0: .4byte sBerryBlenderData
 _080512B4: .4byte 0x00001111
 _080512B8:
 	ldr r0, _080512F4 @ =0x00002222
 	cmp r1, r0
 	bne _080512C6
-	ldr r0, _080512F8 @ =gUnknown_03004854
+	ldr r0, _080512F8 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0x70
 _080512C4:
@@ -5958,7 +5067,7 @@ _080512C6:
 	beq _080512D2
 	b _08051404
 _080512D2:
-	ldr r2, _080512F8 @ =gUnknown_03004854
+	ldr r2, _080512F8 @ =sBerryBlenderData
 	ldr r0, [r2]
 	adds r0, 0x70
 	ldrh r1, [r0]
@@ -5978,7 +5087,7 @@ _080512EA:
 	b _0805134E
 	.align 2, 0
 _080512F4: .4byte 0x00002222
-_080512F8: .4byte gUnknown_03004854
+_080512F8: .4byte sBerryBlenderData
 _080512FC: .4byte 0x00001111
 _08051300: .4byte 0x00002fff
 _08051304:
@@ -6041,7 +5150,7 @@ _0805136E:
 	lsrs r0, 24
 	cmp r4, r0
 	bcs _0805138A
-	ldr r0, _0805139C @ =gUnknown_03004854
+	ldr r0, _0805139C @ =sBerryBlenderData
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x70
@@ -6059,7 +5168,7 @@ _0805138A:
 	ldr r5, _080513A0 @ =0x00007779
 	b _080513AA
 	.align 2, 0
-_0805139C: .4byte gUnknown_03004854
+_0805139C: .4byte sBerryBlenderData
 _080513A0: .4byte 0x00007779
 _080513A4:
 	adds r0, r4, 0x1
@@ -6071,7 +5180,7 @@ _080513AA:
 	lsrs r0, 24
 	cmp r4, r0
 	bcs _080513C6
-	ldr r0, _080513E0 @ =gUnknown_03004854
+	ldr r0, _080513E0 @ =sBerryBlenderData
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x70
@@ -6093,14 +5202,14 @@ _080513C6:
 	strh r0, [r5, 0x2]
 	b _08051404
 	.align 2, 0
-_080513E0: .4byte gUnknown_03004854
+_080513E0: .4byte sBerryBlenderData
 _080513E4: .4byte gSendCmd
 _080513E8: .4byte 0x00002fff
 _080513EC: .4byte 0x00002222
 _080513F0:
 	ldr r0, _0805140C @ =0x00001111
 	strh r0, [r5, 0x2]
-	ldr r0, _08051410 @ =gUnknown_03004854
+	ldr r0, _08051410 @ =sBerryBlenderData
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x70
@@ -6114,7 +5223,7 @@ _08051404:
 	bx r0
 	.align 2, 0
 _0805140C: .4byte 0x00001111
-_08051410: .4byte gUnknown_03004854
+_08051410: .4byte sBerryBlenderData
 	thumb_func_end sub_805123C
 
 	thumb_func_start sub_8051414
@@ -6129,7 +5238,7 @@ sub_8051414: @ 8051414
 	lsls r0, 7
 	str r0, [sp, 0x4]
 	mov r3, sp
-	ldr r0, _08051470 @ =gUnknown_03004854
+	ldr r0, _08051470 @ =sBerryBlenderData
 	ldr r0, [r0]
 	mov r12, r0
 	movs r0, 0xA2
@@ -6165,13 +5274,13 @@ sub_8051414: @ 8051414
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051470: .4byte gUnknown_03004854
+_08051470: .4byte sBerryBlenderData
 	thumb_func_end sub_8051414
 
 	thumb_func_start sub_8051474
 sub_8051474: @ 8051474
 	push {lr}
-	ldr r0, _080514A0 @ =gUnknown_03004854
+	ldr r0, _080514A0 @ =sBerryBlenderData
 	ldr r3, [r0]
 	adds r1, r3, 0
 	adds r1, 0x54
@@ -6191,13 +5300,13 @@ sub_8051474: @ 8051474
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080514A0: .4byte gUnknown_03004854
+_080514A0: .4byte sBerryBlenderData
 	thumb_func_end sub_8051474
 
 	thumb_func_start sub_80514A4
 sub_80514A4: @ 80514A4
 	ldr r1, _080514E8 @ =REG_BG2PA
-	ldr r0, _080514EC @ =gUnknown_03004854
+	ldr r0, _080514EC @ =sBerryBlenderData
 	ldr r2, [r0]
 	movs r3, 0xB4
 	lsls r3, 1
@@ -6232,13 +5341,13 @@ sub_80514A4: @ 80514A4
 	bx lr
 	.align 2, 0
 _080514E8: .4byte REG_BG2PA
-_080514EC: .4byte gUnknown_03004854
+_080514EC: .4byte sBerryBlenderData
 	thumb_func_end sub_80514A4
 
 	thumb_func_start sub_80514F0
 sub_80514F0: @ 80514F0
 	ldr r1, _0805151C @ =REG_BG1HOFS
-	ldr r0, _08051520 @ =gUnknown_03004854
+	ldr r0, _08051520 @ =sBerryBlenderData
 	ldr r3, [r0]
 	movs r0, 0xA2
 	lsls r0, 1
@@ -6260,7 +5369,7 @@ sub_80514F0: @ 80514F0
 	bx lr
 	.align 2, 0
 _0805151C: .4byte REG_BG1HOFS
-_08051520: .4byte gUnknown_03004854
+_08051520: .4byte sBerryBlenderData
 	thumb_func_end sub_80514F0
 
 	thumb_func_start sub_8051524
@@ -6330,7 +5439,7 @@ sub_805156C: @ 805156C
 	movs r7, 0x10
 _08051598:
 	bl Random
-	ldr r1, _08051640 @ =gUnknown_03004854
+	ldr r1, _08051640 @ =sBerryBlenderData
 	ldr r4, [r1]
 	adds r4, 0x54
 	lsls r0, 16
@@ -6409,7 +5518,7 @@ _08051628:
 	.align 2, 0
 _08051638: .4byte gSineTable
 _0805163C: .4byte gSprites
-_08051640: .4byte gUnknown_03004854
+_08051640: .4byte sBerryBlenderData
 _08051644: .4byte gSpriteTemplate_82164FC
 _08051648: .4byte gSprites + 0x1C
 _0805164C: .4byte sub_8051524
@@ -6487,7 +5596,7 @@ sub_80516C4: @ 80516C4
 	lsrs r0, 24
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, _080516F4 @ =gUnknown_03004854
+	ldr r2, _080516F4 @ =sBerryBlenderData
 	ldr r3, [r2]
 	lsls r4, r0, 1
 	adds r2, r3, 0
@@ -6500,12 +5609,12 @@ sub_80516C4: @ 80516C4
 	adds r0, r2
 	adds r3, r0
 	adds r0, r3, 0
-	bl sub_804E844
+	bl Blender_CopyBerryData
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080516F4: .4byte gUnknown_03004854
+_080516F4: .4byte sBerryBlenderData
 	thumb_func_end sub_80516C4
 
 	thumb_func_start unref_sub_80516F8
@@ -6542,7 +5651,7 @@ _08051730:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x64
 	bne _080517A0
-	ldr r0, _080517C0 @ =gUnknown_03004854
+	ldr r0, _080517C0 @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r0, 0x4
 	movs r1, 0x14
@@ -6605,7 +5714,7 @@ _080517A0:
 	.align 2, 0
 _080517B8: .4byte gTasks
 _080517BC: .4byte gReceivedRemoteLinkPlayers
-_080517C0: .4byte gUnknown_03004854
+_080517C0: .4byte sBerryBlenderData
 _080517C4: .4byte gLinkPlayers + 0x4
 _080517C8: .4byte gUnknown_08216284
 _080517CC: .4byte gOtherText_PressAToStart
@@ -6795,7 +5904,7 @@ _0805191E:
 	asrs r0, 16
 	cmp r0, 0xB0
 	ble _0805193C
-	ldr r0, _08051948 @ =gUnknown_03004854
+	ldr r0, _08051948 @ =sBerryBlenderData
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -6809,7 +5918,7 @@ _0805193C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051948: .4byte gUnknown_03004854
+_08051948: .4byte sBerryBlenderData
 	thumb_func_end sub_80518CC
 
 	thumb_func_start sub_805194C
@@ -6819,7 +5928,7 @@ sub_805194C: @ 805194C
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r3, r1, 16
-	ldr r1, _08051978 @ =gUnknown_03004854
+	ldr r1, _08051978 @ =sBerryBlenderData
 	ldr r1, [r1]
 	movs r2, 0xA0
 	lsls r2, 1
@@ -6836,7 +5945,7 @@ _08051972:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051978: .4byte gUnknown_03004854
+_08051978: .4byte sBerryBlenderData
 	thumb_func_end sub_805194C
 
 	thumb_func_start sub_805197C
@@ -6954,7 +6063,7 @@ sub_8051A3C: @ 8051A3C
 	lsrs r0, 16
 	bl sub_8051A1C
 	adds r5, r0, 0
-	ldr r0, _08051ABC @ =gUnknown_03004854
+	ldr r0, _08051ABC @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x5A
@@ -7012,7 +6121,7 @@ _08051A5C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051ABC: .4byte gUnknown_03004854
+_08051ABC: .4byte sBerryBlenderData
 _08051AC0: .4byte 0x06006458
 _08051AC4: .4byte 0x00008172
 	thumb_func_end sub_8051A3C
@@ -7068,7 +6177,7 @@ _08051B14:
 	thumb_func_start sub_8051B18
 sub_8051B18: @ 8051B18
 	push {r4,lr}
-	ldr r4, _08051B3C @ =gUnknown_03004854
+	ldr r4, _08051B3C @ =sBerryBlenderData
 	ldr r0, [r4]
 	movs r1, 0xA2
 	lsls r1, 1
@@ -7083,7 +6192,7 @@ sub_8051B18: @ 8051B18
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051B3C: .4byte gUnknown_03004854
+_08051B3C: .4byte sBerryBlenderData
 	thumb_func_end sub_8051B18
 
 	thumb_func_start sub_8051B40
@@ -7133,7 +6242,7 @@ _08051B84:
 	thumb_func_start sub_8051B8C
 sub_8051B8C: @ 8051B8C
 	push {r4,r5,lr}
-	ldr r5, _08051BE4 @ =gUnknown_03004854
+	ldr r5, _08051BE4 @ =sBerryBlenderData
 	ldr r2, [r5]
 	movs r4, 0x98
 	lsls r4, 1
@@ -7175,7 +6284,7 @@ _08051BAC:
 	movs r0, 0
 	b _08051BFC
 	.align 2, 0
-_08051BE4: .4byte gUnknown_03004854
+_08051BE4: .4byte sBerryBlenderData
 _08051BE8:
 	movs r1, 0xA2
 	lsls r1, 1
@@ -7195,7 +6304,7 @@ _08051BFC:
 
 	thumb_func_start sub_8051C04
 sub_8051C04: @ 8051C04
-	ldr r1, _08051C20 @ =gUnknown_03004854
+	ldr r1, _08051C20 @ =sBerryBlenderData
 	ldr r2, [r1]
 	movs r3, 0xA2
 	lsls r3, 1
@@ -7210,14 +6319,14 @@ sub_8051C04: @ 8051C04
 	strh r1, [r0, 0x26]
 	bx lr
 	.align 2, 0
-_08051C20: .4byte gUnknown_03004854
+_08051C20: .4byte sBerryBlenderData
 	thumb_func_end sub_8051C04
 
 	thumb_func_start sub_8051C24
 sub_8051C24: @ 8051C24
 	push {lr}
 	ldr r2, _08051C4C @ =gSaveBlock1
-	ldr r0, _08051C50 @ =gUnknown_03004854
+	ldr r0, _08051C50 @ =sBerryBlenderData
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x88
@@ -7238,7 +6347,7 @@ _08051C48:
 	bx r0
 	.align 2, 0
 _08051C4C: .4byte gSaveBlock1
-_08051C50: .4byte gUnknown_03004854
+_08051C50: .4byte sBerryBlenderData
 _08051C54: .4byte 0x0000096c
 	thumb_func_end sub_8051C24
 
@@ -7250,7 +6359,7 @@ sub_8051C58: @ 8051C58
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x34
-	ldr r1, _08051C7C @ =gUnknown_03004854
+	ldr r1, _08051C7C @ =sBerryBlenderData
 	ldr r0, [r1]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -7264,7 +6373,7 @@ _08051C72:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08051C7C: .4byte gUnknown_03004854
+_08051C7C: .4byte sBerryBlenderData
 _08051C80: .4byte _08051C84
 	.align 2, 0
 _08051C84:
@@ -7316,7 +6425,7 @@ _08051CD0:
 _08051CE4:
 	movs r6, 0
 _08051CE6:
-	ldr r4, _08051D18 @ =gUnknown_03004854
+	ldr r4, _08051D18 @ =sBerryBlenderData
 	ldr r0, [r4]
 	adds r0, 0x50
 	adds r0, r6
@@ -7340,7 +6449,7 @@ _08051CE6:
 	str r0, [r2]
 	b _08051FE2
 	.align 2, 0
-_08051D18: .4byte gUnknown_03004854
+_08051D18: .4byte sBerryBlenderData
 _08051D1C: .4byte gSprites
 _08051D20:
 	movs r0, 0x4
@@ -7354,7 +6463,7 @@ _08051D20:
 	movs r3, 0xA0
 	bl sub_8072BD8
 	movs r6, 0
-	ldr r1, _08051F18 @ =gUnknown_03004854
+	ldr r1, _08051F18 @ =sBerryBlenderData
 	ldr r0, [r1]
 	adds r0, 0x88
 	add r2, sp, 0xC
@@ -7450,7 +6559,7 @@ _08051D56:
 	cmp r6, r0
 	bcc _08051D56
 _08051E04:
-	ldr r6, _08051F18 @ =gUnknown_03004854
+	ldr r6, _08051F18 @ =sBerryBlenderData
 	ldr r0, [r6]
 	adds r0, 0x5A
 	ldrh r0, [r0]
@@ -7569,7 +6678,7 @@ _08051E04:
 	b _08051FE2
 	.align 2, 0
 _08051F14: .4byte gOtherText_ResultsOfBlending
-_08051F18: .4byte gUnknown_03004854
+_08051F18: .4byte sBerryBlenderData
 _08051F1C: .4byte gLinkPlayers
 _08051F20: .4byte gOtherText_Berry
 _08051F24: .4byte gLinkPlayers + 0x8
@@ -7600,7 +6709,7 @@ _08051F58:
 	bl MenuDrawTextWindow
 	movs r6, 0
 	add r5, sp, 0x28
-	ldr r0, _08051FEC @ =gUnknown_03004854
+	ldr r0, _08051FEC @ =sBerryBlenderData
 	ldr r0, [r0]
 	adds r3, r0, 0
 	adds r3, 0x80
@@ -7621,7 +6730,7 @@ _08051F86:
 	cmp r6, 0x3
 	bls _08051F76
 	bl sub_8050760
-	ldr r4, _08051FEC @ =gUnknown_03004854
+	ldr r4, _08051FEC @ =sBerryBlenderData
 	ldr r3, [r4]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -7660,7 +6769,7 @@ _08051FE2:
 	strb r0, [r1]
 	b _0805200A
 	.align 2, 0
-_08051FEC: .4byte gUnknown_03004854
+_08051FEC: .4byte sBerryBlenderData
 _08051FF0: .4byte sub_8052BD0
 _08051FF4: .4byte gScriptItemId
 _08051FF8:
@@ -7819,7 +6928,7 @@ sub_8052124: @ 8052124
 	push {r5-r7}
 	sub sp, 0x18
 	movs r5, 0
-	ldr r1, _08052144 @ =gUnknown_03004854
+	ldr r1, _08052144 @ =sBerryBlenderData
 	ldr r0, [r1]
 	adds r0, 0x88
 	mov r10, r1
@@ -7828,7 +6937,7 @@ sub_8052124: @ 8052124
 	str r2, [sp, 0x14]
 	b _08052158
 	.align 2, 0
-_08052144: .4byte gUnknown_03004854
+_08052144: .4byte sBerryBlenderData
 _08052148:
 	mov r4, sp
 	adds r0, r4, r5
@@ -7953,7 +7062,7 @@ sub_8052228: @ 8052228
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r1, _08052248 @ =gUnknown_03004854
+	ldr r1, _08052248 @ =sBerryBlenderData
 	ldr r0, [r1]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -7967,7 +7076,7 @@ _0805223C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08052248: .4byte gUnknown_03004854
+_08052248: .4byte sBerryBlenderData
 _0805224C: .4byte _08052250
 	.align 2, 0
 _08052250:
@@ -8037,7 +7146,7 @@ _080522B6:
 	movs r2, 0x34
 	movs r3, 0
 	bl CreateSprite
-	ldr r7, _08052374 @ =gUnknown_03004854
+	ldr r7, _08052374 @ =sBerryBlenderData
 	ldr r1, [r7]
 	adds r1, 0x50
 	strb r0, [r1]
@@ -8107,7 +7216,7 @@ _080522B6:
 	.align 2, 0
 _0805236C: .4byte gOtherText_Ranking
 _08052370: .4byte gSpriteTemplate_821645C
-_08052374: .4byte gUnknown_03004854
+_08052374: .4byte sBerryBlenderData
 _08052378: .4byte gSprites
 _0805237C: .4byte SpriteCallbackDummy
 _08052380:
@@ -8205,7 +7314,7 @@ _0805243C:
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _08052380
-	ldr r0, _08052460 @ =gUnknown_03004854
+	ldr r0, _08052460 @ =sBerryBlenderData
 	ldr r1, [r0]
 	movs r0, 0x98
 	lsls r0, 1
@@ -8216,7 +7325,7 @@ _0805243C:
 	.align 2, 0
 _08052458: .4byte gLinkPlayers + 0x8
 _0805245C: .4byte gUnknown_082165F3
-_08052460: .4byte gUnknown_03004854
+_08052460: .4byte sBerryBlenderData
 _08052464:
 	ldr r2, [r2]
 	movs r0, 0x98
@@ -8240,7 +7349,7 @@ _0805247E:
 	beq _080524AE
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _080524A0 @ =gUnknown_03004854
+	ldr r0, _080524A0 @ =sBerryBlenderData
 	ldr r1, [r0]
 _08052494:
 	ldrb r0, [r1]
@@ -8249,7 +7358,7 @@ _08052494:
 	b _080524AE
 	.align 2, 0
 _0805249C: .4byte gMain
-_080524A0: .4byte gUnknown_03004854
+_080524A0: .4byte sBerryBlenderData
 _080524A4:
 	ldr r1, [r2]
 	movs r0, 0
@@ -8272,7 +7381,7 @@ unref_sub_80524BC: @ 80524BC
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	ldr r0, _0805251C @ =sub_804E2D8
+	ldr r0, _0805251C @ =VBlankCB1_BerryBlender
 	bl SetVBlankCallback
 	ldr r4, _08052520 @ =gWindowConfig_81E6CE4
 	adds r0, r4, 0
@@ -8305,7 +7414,7 @@ unref_sub_80524BC: @ 80524BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805251C: .4byte sub_804E2D8
+_0805251C: .4byte VBlankCB1_BerryBlender
 _08052520: .4byte gWindowConfig_81E6CE4
 _08052524: .4byte gMain
 _08052528: .4byte gUnknown_03000560
@@ -8945,7 +8054,7 @@ _08052A26:
 	adds r1, 0x85
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_804E844
+	bl Blender_CopyBerryData
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -9144,7 +8253,7 @@ _08052BF6:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052C16
-	ldr r0, _08052C24 @ =gUnknown_03004854
+	ldr r0, _08052C24 @ =sBerryBlenderData
 	ldr r0, [r0]
 	movs r1, 0xBC
 	lsls r1, 1
@@ -9160,5 +8269,5 @@ _08052C16:
 	.align 2, 0
 _08052C1C: .4byte gTasks
 _08052C20: .4byte 0x0000016f
-_08052C24: .4byte gUnknown_03004854
+_08052C24: .4byte sBerryBlenderData
 	thumb_func_end sub_8052BD0

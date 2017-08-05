@@ -134,7 +134,7 @@ gUnknown_03004834: @ 3004834
 gUnknown_03004840: @ 3004840
 	.space 0x14
 
-gUnknown_03004854: @ 3004854
+sBerryBlenderData: @ 3004854
 	.space 0x4
 
 	.include "rom4.o"

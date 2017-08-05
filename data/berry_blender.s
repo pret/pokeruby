@@ -102,7 +102,7 @@ gUnknown_082162D4:: @ 82162D4
 	.byte  1, 12
 	.byte 22, 12
 
-gUnknown_082162E4:: @ 82162E4
+sBlenderSyncArrowsPos:: @ 82162E4
 	.byte  72,  32
 	.byte 168,  32
 	.byte  72, 128
@@ -241,7 +241,7 @@ gUnknown_082163EC:: @ 82163EC
 	obj_pal gBerryBlenderArrowPalette, 12312
 
 	.align 2
-gSpriteTemplate_82163F4:: @ 82163F4
+sBlenderSyncArrow_SpriteTemplate:: @ 82163F4
 	spr_template 46545, 12312, gOamData_8216314, gSpriteAnimTable_82163AC, NULL, gDummySpriteAffineAnimTable, sub_8051C04
 
 	.align 2
