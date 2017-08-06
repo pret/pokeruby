@@ -29,7 +29,11 @@ struct UnknownPokenav0 {
 	/* 0x6db2 */ u8 var6db2;
 	/* 0x6db3 */ u8 fill6db3[0x29];
 	/* 0x6ddc */ u8 var6ddc;
-	/* 0x6ddd */ u8 fill6ddd[0x198b];
+	/* 0x6ddd */ u8 fill6ddd[0x13];
+	/* 0x6df0 */ s8 var6df0;
+	/* 0x6df1 */ u8 fill6df1[0x9f];
+	/* 0x6e90 */ u8 var6e90;
+	/* 0x6e91 */ u8 fill6e91[0x18d7];
 	/* 0x8768 */ u32 var8768;
 	/* 0x876C */ u8 fill876B[0x00bc];
 	/* 0x8828 */ u8 var8828;
@@ -972,5 +976,157 @@ void sub_80EC4A0() {
 	case 0xE:
 		if (gPaletteFade.active) return;
 		sub_80EBDBC(&sub_80EC67C);
+	}
+}
+
+void sub_80EF9F8();
+void sub_80EED9C();
+bool8 sub_80EFBDC(u32);
+void sub_80EFBB0();
+void sub_80F2DF4();
+
+void sub_80EC67C() {
+	u32 var1;
+	u32 var2;
+	switch (ewram0.var304) {
+	case 0:
+		switch (sub_80FAB60()) {
+		case 1:
+			sub_80EED9C();
+			break;
+		case 3:
+			sub_80EF9F8();
+			break;
+		case 4:
+			PlaySE(0x5);
+			ewram0.var304 = 1;
+			break;
+		case 5:
+			PlaySE(0x5);
+			ewram0.var304 = 4;
+			break;
+		}
+		break;
+	case 1:
+		if (!ewram0.var6e90) {
+			sub_80FAEC4();
+			ewram0.var304++;
+			break;
+		}
+		if (sub_80EFBDC(1)) return;
+		sub_80FAEC4();
+		ewram0.var304++;
+		break;
+	case 2:
+		if ((var2 = sub_80FAFC0())) return;
+		if (!ewram0.var6e90) {
+			sub_80EFBB0();
+			ewram0.var304 = var2;
+			break;
+		}
+		ewram0.var304++;
+		break;
+	case 3:
+		if ((var1 = sub_80EFBDC(0))) return;
+		sub_80EFBB0();
+		ewram0.var304 = var1;
+		break;
+	case 4:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 5:
+		if (gPaletteFade.active) return;
+		sub_80F2DF4();
+		sub_80F2D04(0x4);
+		gSaveBlock2.regionMapZoom = (ewram0.var6e90 == 1) ? 1 : 0;
+		sub_80EBDBC(&sub_80EC00C);
+	}
+}
+
+void sub_80EC86C();
+
+void sub_80EC81C() {
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F2D04(0);
+		sub_80EE9C0(1, 0, 1);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80EEA0C()) return;
+		sub_80EBDBC(&sub_80EC86C);
+	}
+}
+
+bool8 sub_80EEC90();
+void sub_80ED620();
+void sub_80EC960();
+bool8 sub_80F1E6C();
+
+void sub_80EC86C() {
+	switch (ewram0.var304) {
+	case 0:
+		if (sub_80EEC90()) {
+			PlaySE(0x5);
+			sub_80EF428(1, ewram0.var6dad);
+			sub_80EED9C();
+			break;
+		}
+		if (gMain.newKeys & A_BUTTON) {
+			PlaySE(0x5);
+			ewram0.var6df0 = ewram0.var6dad;
+			switch (ewram0.var6df0) {
+			case 0:
+				sub_80EBDBC(&sub_80ED620);
+				break;
+			case 1:
+				sub_80EBDBC(&sub_80EC960);
+				break;
+			case 2:
+				sub_80EBDBC(&sub_80EC210);
+				break;
+			}
+			break;
+		}
+		else if (gMain.newKeys & B_BUTTON) {
+			PlaySE(0x5);
+			ewram0.var6df0 = 0x2;
+			ewram0.var6dad = 0x2;
+			ewram0.var304++;
+			break;
+		}
+		break;
+	case 1:
+		if (sub_80F1E6C()) return;
+		sub_80EBDBC(&sub_80EC210);
+	}
+}
+
+void sub_80ECC08();
+
+void sub_80EC960() {
+	switch (ewram0.var304) {
+	case 0:
+		sub_80EE9C0(2, 0, 5);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80EEA0C()) return;
+		sub_80EBDBC(&sub_80ECC08);
+	}
+}
+
+void sub_80EC9A8() {
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F2D04(5);
+		sub_80EE9C0(1, ewram0.var6df0, 0xC);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80EEA0C()) return;
+		sub_80EBDBC(&sub_80EC86C);
+		sub_80EF428(1, ewram0.var6dad);
 	}
 }
