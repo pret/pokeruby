@@ -11,6 +11,9 @@
 #include "string_util.h"
 #include "link.h"
 #include "task.h"
+#include "rom4.h"
+#include "items.h"
+#include "rng.h"
 
 //needed to match Blender_ControlHitPitch
 struct MusicPlayerInfo
@@ -45,15 +48,17 @@ u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 
 #define BLENDER_MAX_PLAYERS 4
 
+#define FLAVOUR_SPICY       0
+#define FLAVOUR_DRY         1
+#define FLAVOUR_SWEET       2
+#define FLAVOUR_BITTER      3
+#define FLAVOUR_SOUR        4
+
 struct BlenderBerry
 {
     u16 field_0;
     u8 name[7];
-    u8 spicy;
-    u8 dry;
-    u8 sweet;
-    u8 bitter;
-    u8 sour;
+    u8 flavours[5];
     u8 smoothness;
 };
 
@@ -142,16 +147,13 @@ struct BerryBlenderData
     u8 field_51;
     u8 field_52;
     u8 field_53;
-    u16 field_54;
+    u16 arrowPos;
     s16 hitPitch;       //56
     u8 field_58;
     u8 field_59;
     u16 field_5A;
     u8 SyncArrowSpriteID[BLENDER_MAX_PLAYERS];
-    u8 field_60;
-    u8 field_61;
-    u8 field_62;
-    u8 field_63;
+    u8 SyncArrowSprite2ID[BLENDER_MAX_PLAYERS];
     u8 field_64;
     u8 field_65;
     u8 field_66;
@@ -191,22 +193,8 @@ struct BerryBlenderData
     u8 field_97;
     u8 field_98;
     u8 field_99;
-    u8 field_9A;
-    u8 field_9B;
-    u8 field_9C;
-    u8 field_9D;
-    u8 field_9E;
-    u8 field_9F;
-    u8 field_A0;
-    u8 field_A1;
-    u8 field_A2;
-    u8 field_A3;
-    u8 field_A4;
-    u8 field_A5;
-    u8 field_A6;
-    u8 field_A7;
-    u8 field_A8;
-    u8 field_A9;
+    u16 field_9A[BLENDER_MAX_PLAYERS];
+    u16 field_A2[BLENDER_MAX_PLAYERS];
     u8 field_AA;
     u8 field_AB;
     u8 field_AC;
@@ -337,11 +325,8 @@ struct BerryBlenderData
     u8 field_129;
     u8 field_12A;
     u8 field_12B;
-    u8 field_12C;
-    u8 field_12D;
-    u8 field_12E;
-    u8 field_12F;
-    u32 field_130;
+    u32 field_12C;
+    s32 field_130;
     u32 field_134;
     u8 field_138;
     u8 field_139;
@@ -354,19 +339,9 @@ struct BerryBlenderData
     u16 field_142;
     u16 field_144;
     u16 field_146;
-    u8 field_148;
-    u8 field_149;
-    u8 field_14A;
+    u8 field_148[3];
     u8 field_14B;
-    u16 field_14C[BLENDER_MAX_PLAYERS][2];
-    u8 field_15C;
-    u8 field_15D;
-    u8 field_15E;
-    u8 field_15F;
-    u8 field_160;
-    u8 field_161;
-    u8 field_162;
-    u8 field_163;
+    u16 field_14C[BLENDER_MAX_PLAYERS][3];
     u8 field_164;
     u8 field_165;
     u8 field_166;
@@ -387,8 +362,7 @@ struct BerryBlenderData
     u8 field_175;
     u8 field_176;
     u8 field_177;
-    u8 field_178;
-    u8 field_179;
+    u16 field_178;
     u8 field_17A;
     u8 field_17B;
     struct BlenderBerry blendedBerries[BLENDER_MAX_PLAYERS];
@@ -408,6 +382,12 @@ void sub_8051474(void);
 void sub_804E9F8(void);
 void sub_804F378(void);
 void sub_8051414(void*);
+void sub_804F238(void);
+void sub_80501FC(void);
+bool8 sub_8051B8C(void);
+void sub_80516C4(u8 a0, u16 itemID);
+void sub_804F2A8(void);
+void sub_804F81C(void);
 
 void Blender_ControlHitPitch(void)
 {
@@ -688,11 +668,11 @@ void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
     const struct Berry *berryInfo = GetBerryInfo(itemID + 124);
     berry->field_0 = itemID;
     StringCopy(berry->name, berryInfo->name);
-    berry->spicy = berryInfo->spicy;
-    berry->dry = berryInfo->dry;
-    berry->sweet = berryInfo->sweet;
-    berry->bitter = berryInfo->bitter;
-    berry->sour = berryInfo->sour;
+    berry->flavours[FLAVOUR_SPICY] = berryInfo->spicy;
+    berry->flavours[FLAVOUR_DRY] = berryInfo->dry;
+    berry->flavours[FLAVOUR_SWEET] = berryInfo->sweet;
+    berry->flavours[FLAVOUR_BITTER] = berryInfo->bitter;
+    berry->flavours[FLAVOUR_SOUR] = berryInfo->sour;
     berry->smoothness = berryInfo->smoothness;
 }
 
@@ -760,6 +740,7 @@ extern u16 gScriptItemId;
 extern const u8 gUnknown_082162EC[3][4];
 extern const u16 gUnknown_082162F8[];
 extern const u8 gUnknown_08216300[];
+extern const struct SpriteTemplate gSpriteTemplate_8216548;
 
 void sub_804E9F8(void)
 {
@@ -782,19 +763,19 @@ void sub_804E9F8(void)
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
             sBerryBlenderData->field_70[i] = 0;
-            for (j = 0; j < 2; j++)
+            for (j = 0; j < 3; j++)
             {
                 sBerryBlenderData->field_14C[i][j] = 0;
             }
         }
         sBerryBlenderData->field_7C = 0;
         sBerryBlenderData->hitPitch = 0;
-        sBerryBlenderData->field_54 = 0;
+        sBerryBlenderData->arrowPos = 0;
         sBerryBlenderData->field_5A = 0;
         sBerryBlenderData->field_1 = 0;
         break;
     case 1:
-        if (!sub_804E2EC())
+        if (sub_804E2EC())
         {
             sBerryBlenderData->field_0++;
             sub_8051474();
@@ -803,8 +784,8 @@ void sub_804E9F8(void)
     case 2:
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            sBerryBlenderData->SyncArrowSpriteID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
-            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[i]], i + 8);
+            sBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
+            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
         }
         sBerryBlenderData->field_0++;
         break;
@@ -820,8 +801,8 @@ void sub_804E9F8(void)
         }
         break;
     case 5:
-        MenuDrawTextWindow(0, 14, 29, 19);
-        MenuPrint(gOtherText_BlenderChooseBerry, 1, 15);
+        MenuDrawTextWindow(0, 13, 29, 19);
+        MenuPrint(gOtherText_LinkStandby3, 1, 14);
         sBerryBlenderData->field_0 = 8;
         sBerryBlenderData->field_130 = 0;
         break;
@@ -850,7 +831,7 @@ void sub_804E9F8(void)
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
                 {
-                    memcpy(&sBerryBlenderData->blendedBerries[i], &gBlockRecvBuffer[i][256], sizeof(struct BlenderBerry));
+                    memcpy(&sBerryBlenderData->blendedBerries[i], &gBlockRecvBuffer[i][0], sizeof(struct BlenderBerry));
                     sBerryBlenderData->field_80[i] = sBerryBlenderData->blendedBerries[i].field_0;
                 }
                 ResetBlockReceivedFlags();
@@ -862,9 +843,9 @@ void sub_804E9F8(void)
         sBerryBlenderData->field_88 = GetLinkPlayerCount();
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            if (sBerryBlenderData->field_13C == gUnknown_082162EC[sBerryBlenderData->field_88][i])
+            if (sBerryBlenderData->field_13C == gUnknown_082162EC[sBerryBlenderData->field_88 - 2][i])
             {
-                sub_804E7C0(sBerryBlenderData->field_80[sBerryBlenderData->field_88], i);
+                sub_804E7C0(sBerryBlenderData->field_80[sBerryBlenderData->field_13C], i);
                 break;
             }
         }
@@ -878,7 +859,7 @@ void sub_804E9F8(void)
             if (sBerryBlenderData->field_13C >= sBerryBlenderData->field_88)
             {
                 sBerryBlenderData->field_0++;
-                sBerryBlenderData->field_54 = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->field_88 - 2]] - 22528;
+                sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->field_88 - 2]] - 22528;
             }
             else
                 sBerryBlenderData->field_0--;
@@ -893,11 +874,502 @@ void sub_804E9F8(void)
         }
         break;
     case 14:
-
+        REG_DISPCNT |= 0x400;
+        sBerryBlenderData->arrowPos += 0x200;
+        sBerryBlenderData->field_142 += 4;
+        if (sBerryBlenderData->field_142 > 255)
+        {
+            sBerryBlenderData->field_0++;
+            sBerryBlenderData->field_142 = 256;
+            sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->field_88 - 2]];
+            REG_BG2CNT = 0x4882;
+            sBerryBlenderData->field_130 = 0;
+            sub_804F238();
+            sub_804F2A8();
+        }
+        sub_8051414(&sBerryBlenderData->field_168);
+        break;
+    case 15:
+        if (sub_8051B8C())
+        {
+            sBerryBlenderData->field_130 = 0;
+            sBerryBlenderData->field_0++;
+        }
+        sub_8051414(&sBerryBlenderData->field_168);
+        break;
+    case 16:
+        CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
+        sBerryBlenderData->field_0++;
+        break;
+    case 18:
+        sBerryBlenderData->field_0++;
+        break;
+    case 19:
+        sub_80084A4();
+        sBerryBlenderData->field_0++;
+        break;
+    case 20:
+        if (sub_8007ECC())
+        {
+            sub_8007E24();
+            sBerryBlenderData->field_0++;
+        }
+        break;
+    case 21:
+        sBerryBlenderData->hitPitch = 128;
+        sBerryBlenderData->field_12C = 0;
+        SetMainCallback2(sub_80501FC);
+        if (GetCurrentMapMusic() != 403)
+        {
+            sBerryBlenderData->field_178 = GetCurrentMapMusic();
+        }
+        PlayBGM(403);
+        break;
+    case 100:
+        MenuDrawTextWindow(0, 13, 29, 19);
+        MenuPrintMessage(gOtherText_LinkNotFound, 1, 15);
+        sBerryBlenderData->field_0++;
+        break;
+    case 101:
+        if (MenuUpdateWindowText())
+            sBerryBlenderData->field_0++;
+        break;
+    case 102:
+        if (!gPaletteFade.active)
+            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
         break;
     }
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+}
+
+void sub_804F0F4(void)
+{
+    REG_DISPCNT = 0;
+
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetTasks();
+
+    SetVBlankCallback(VBlankCB0_BerryBlender);
+
+    SetUpWindowConfig(&gWindowConfig_81E6F68);
+    InitMenuWindow(&gWindowConfig_81E6F68);
+
+    gLinkType = 0x4422;
+
+    sBerryBlenderData->field_4E = 0;
+    sBerryBlenderData->hitPitch = 0;
+    sBerryBlenderData->arrowPos = 0;
+    sBerryBlenderData->field_5A = 0;
+    sBerryBlenderData->field_144 = 0;
+    sBerryBlenderData->field_146 = 0;
+    sBerryBlenderData->field_0++;
+}
+
+extern const u8 gUnknown_08216303[];
+
+u8 sub_804F16C(u16 arrowPos, u8 a1)
+{
+    u32 var1 = (arrowPos / 256) + 24;
+    u8 arrID = sBerryBlenderData->field_A2[a1];
+    u32 var2 = gUnknown_08216303[arrID];
+
+    if (var1 >= var2 && var1 < var2 + 48)
+    {
+        if (var1 >= var2 + 20 && var1 < var2 + 28)
+            return 2;
+        else
+            return 1;
+    }
+    else
+        return 0;
+}
+
+extern const u8 gUnknown_082165BC[][3];
+
+void sub_804F1BC(u16 itemID, u8 a1, struct BlenderBerry* berry)
+{
+    u16 r4 = 0;
+    u16 i;
+    if (itemID == ITEM_ENIGMA_BERRY)
+    {
+        for (i = 0; i < 5; i++)
+        {
+            if (berry->flavours[r4] > berry->flavours[i])
+                r4 = i;
+        }
+        r4 += 5;
+    }
+    else
+    {
+        r4 = itemID - 133;
+        if (r4 >= 5)
+            r4 = (r4 % 5) + 5;
+    }
+    for (i = 0; i < a1 - 1; i++)
+    {
+        sub_80516C4(i + 1, gUnknown_082165BC[r4][i] + 133);
+    }
+}
+
+void sub_804F238(void)
+{
+    s32 i, j;
+    for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+    {
+        sBerryBlenderData->field_A2[i] = 0xFF;
+        sBerryBlenderData->field_9A[i] = gUnknown_082162EC[sBerryBlenderData->field_88 - 2][i];
+    }
+    for (j = 0; j < BLENDER_MAX_PLAYERS; j++)
+    {
+        for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+        {
+            if (sBerryBlenderData->field_9A[i] == j)
+                sBerryBlenderData->field_A2[j] = i;
+        }
+    }
+}
+
+extern const u8 gUnknown_082162C4[];
+extern const u8 gUnknown_082162D4[][2];
+
+void sub_804F2A8(void)
+{
+    int i;
+    for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+    {
+        if (sBerryBlenderData->field_9A[i] != 0xFF)
+        {
+            u8* stringPtr = gStringVar1;
+
+            sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[i]] = sBerryBlenderData->SyncArrowSprite2ID[i];
+            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[i]]], i);
+            if (GetMultiplayerId() == sBerryBlenderData->field_9A[i])
+                stringPtr = StringCopy(stringPtr, gUnknown_082162C4);
+            StringCopy(stringPtr, gLinkPlayers[sBerryBlenderData->field_9A[i]].name);
+            MenuPrint_PixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
+        }
+    }
+}
+
+extern const TaskFunc gUnknown_08216308[];
+
+void sub_804F378(void)
+{
+    s32 i, j;
+    switch (sBerryBlenderData->field_0)
+    {
+    case 0:
+        sub_804F0F4();
+        sub_80516C4(0, gScriptItemId);
+        Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gScriptItemId);
+        sub_804F1BC(gScriptItemId, sBerryBlenderData->field_88, &sBerryBlenderData->blendedBerries[0]);
+        for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+        {
+            sBerryBlenderData->field_70[i] = 0;
+            for (j = 0; j < 3; j++)
+            {
+                sBerryBlenderData->field_14C[i][j] = 0;
+            }
+        }
+        sBerryBlenderData->field_7C = 0;
+        sBerryBlenderData->field_1 = 0;
+        break;
+    case 1:
+        if (sub_804E2EC())
+        {
+            sBerryBlenderData->field_0++;
+            sub_8051474();
+        }
+        break;
+    case 2:
+        for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+        {
+            sBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
+            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
+        }
+        sBerryBlenderData->field_0++;
+        break;
+    case 3:
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        sBerryBlenderData->field_0++;
+        sBerryBlenderData->field_130 = 0;
+        break;
+    case 4:
+        if (++sBerryBlenderData->field_130 == 2)
+            sub_804E4FC();
+        if (!gPaletteFade.active)
+            sBerryBlenderData->field_0 = 8;
+        break;
+    case 8:
+        sBerryBlenderData->field_0 = 11;
+        sBerryBlenderData->field_13C = 0;
+        break;
+    case 11:
+        for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
+        {
+            u32 var = gUnknown_082162EC[sBerryBlenderData->field_88 - 2][i];
+            if (sBerryBlenderData->field_13C == var)
+            {
+                sub_804E7C0(sBerryBlenderData->field_80[sBerryBlenderData->field_13C], i);
+                break;
+            }
+        }
+        sBerryBlenderData->field_130 = 0;
+        sBerryBlenderData->field_0++;
+        sBerryBlenderData->field_13C++;
+        break;
+    case 12:
+        if (++sBerryBlenderData->field_130 > 60)
+        {
+            if (sBerryBlenderData->field_13C >= sBerryBlenderData->field_88)
+            {
+                sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->field_88 - 2]] - 22528;
+                sBerryBlenderData->field_0++;
+            }
+            else
+                sBerryBlenderData->field_0--;
+            sBerryBlenderData->field_130 = 0;
+        }
+        break;
+    case 13:
+        sBerryBlenderData->field_0++;
+        sub_804F238();
+        PlaySE(43);
+        sub_8051414(&sBerryBlenderData->field_168);
+        break;
+    case 14:
+        REG_DISPCNT |= 0x400;
+        sBerryBlenderData->arrowPos += 0x200;
+        sBerryBlenderData->field_142 += 4;
+        if (sBerryBlenderData->field_142 > 255)
+        {
+            sBerryBlenderData->field_0++;
+            sBerryBlenderData->field_142 = 256;
+            sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->field_88 - 2]];
+            REG_BG2CNT = 0x4882;
+            sBerryBlenderData->field_130 = 0;
+            PlaySE(52);
+            sub_804F2A8();
+        }
+        sub_8051414(&sBerryBlenderData->field_168);
+        break;
+    case 15:
+        if (sub_8051B8C())
+        {
+            sBerryBlenderData->field_0++;
+        }
+        sub_8051414(&sBerryBlenderData->field_168);
+        break;
+    case 16:
+        CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
+        sBerryBlenderData->field_0++;
+        break;
+    case 18:
+        sBerryBlenderData->field_0++;
+        break;
+    case 19:
+        sBerryBlenderData->field_0++;
+        break;
+    case 20:
+        sBerryBlenderData->field_0++;
+        break;
+    case 21:
+        sub_804F81C();
+        sBerryBlenderData->hitPitch = 128;
+        sBerryBlenderData->field_12C = 0;
+        sBerryBlenderData->field_14B = 0;
+        sBerryBlenderData->field_7E = 0;
+        SetMainCallback2(sub_80501FC);
+
+        for (i = 0; i < gSpecialVar_0x8004; i++)
+        {
+            sBerryBlenderData->field_148[i] = CreateTask(gUnknown_08216308[i], 10 + i);
+        }
+
+        if (GetCurrentMapMusic() != 403)
+        {
+            sBerryBlenderData->field_178 = GetCurrentMapMusic();
+        }
+        PlayBGM(403);
+        PlaySE(53);
+        Blender_ControlHitPitch();
+        break;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_804F81C(void)
+{
+    s32 i;
+    for (i = 0; i < 4; i++)
+    {
+        gSendCmd[0] = 0;
+        gSendCmd[2] = 0;
+        gRecvCmds[0][i] = 0;
+        gRecvCmds[2][i] = 0;
+    }
+}
+
+void sub_804F844(u8 taskID)
+{
+   if(++gTasks[taskID].data[0] > gTasks[taskID].data[1])
+   {
+        gRecvCmds[2][gTasks[taskID].data[2]] = 0x2345;
+        DestroyTask(taskID);
+   }
+}
+
+void sub_804F890(u8 a0, u8 a1)
+{
+    u8 taskID = CreateTask(sub_804F844, 80);
+    gTasks[taskID].data[1] = a1;
+    gTasks[taskID].data[2] = a0;
+}
+
+void sub_804F8C8(u8 taskID)
+{
+    if (sub_804F16C(sBerryBlenderData->arrowPos, 1) == 2)
+    {
+        if (gTasks[taskID].data[0] == 0)
+        {
+            if (sBerryBlenderData->field_14B == 0)
+            {
+                u8 rand = Random() / 655;
+                if (sBerryBlenderData->hitPitch < 500)
+                {
+                    if (rand > 75)
+                        gRecvCmds[2][1] = 0x4523;
+                    else
+                        gRecvCmds[2][1] = 0x5432;
+                    gRecvCmds[2][1] = 0x5432; // ???
+                }
+                else if (sBerryBlenderData->hitPitch < 1500)
+                {
+                    if (rand > 80)
+                        gRecvCmds[2][1] = 0x4523;
+                    else
+                    {
+                        u8 value = rand - 21;
+                        if (value < 60)
+                            gRecvCmds[2][1] = 0x5432;
+                        else if (rand < 10)
+                            sub_804F890(1, 5);
+                    }
+                }
+                else if (rand <= 90)
+                {
+                    u8 value = rand - 71;
+                    if (value < 20)
+                        gRecvCmds[2][1] = 0x5432;
+                    else if (rand < 30)
+                        sub_804F890(1, 5);
+                }
+                else
+                   gRecvCmds[2][1] = 0x4523;
+            }
+            else
+                gRecvCmds[2][1] = 0x4523;
+
+            gTasks[taskID].data[0] = 1;
+        }
+    }
+    else
+        gTasks[taskID].data[0] = 0;
+}
+
+void sub_804F9F4(u8 taskID)
+{
+    u32 var1 = (sBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
+    u32 var2 = sBerryBlenderData->field_A2[2] & 0xFF;
+    if ((var1 >> 8) > gUnknown_08216303[var2] + 20 && (var1 >> 8) < gUnknown_08216303[var2] + 40)
+    {
+        if (gTasks[taskID].data[0] == 0)
+        {
+            if (sBerryBlenderData->field_14B == 0)
+            {
+                u8 rand = Random() / 655;
+                if (sBerryBlenderData->hitPitch < 500)
+                {
+                    if (rand > 66)
+                        gRecvCmds[2][2] = 0x4523;
+                    else
+                        gRecvCmds[2][2] = 0x5432;
+                }
+                else
+                {
+                    u8 value;
+                    if (rand > 65)
+                        gRecvCmds[2][2] = 0x4523;
+                    value = rand - 41;
+                    if (value < 25)
+                        gRecvCmds[2][2] = 0x5432;
+                    if (rand < 10)
+                        sub_804F890(2, 5);
+                }
+
+                gTasks[taskID].data[0] = 1;
+            }
+            else
+            {
+                gRecvCmds[2][2] = 0x4523;
+                gTasks[taskID].data[0] = 1;
+            }
+        }
+    }
+    else
+        gTasks[taskID].data[0] = 0;
+}
+
+void sub_804FB1C(u8 taskID)
+{
+    u32 var1, var2;
+
+    #ifndef FAKEMATCHING
+    asm("":::"r6");
+    #endif // FAKEMATCHING
+
+    var1 = (sBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
+    var2 = sBerryBlenderData->field_A2[3] & 0xFF;
+    if ((var1 >> 8) > gUnknown_08216303[var2] + 20 && (var1 >> 8) < gUnknown_08216303[var2] + 40)
+    {
+        if (gTasks[taskID].data[0] == 0)
+        {
+            if (sBerryBlenderData->field_14B == 0)
+            {
+                u8 rand = (Random() / 655);
+                if (sBerryBlenderData->hitPitch < 500)
+                {
+                    if (rand > 88)
+                        gRecvCmds[2][3] = 0x4523;
+                    else
+                        gRecvCmds[2][3] = 0x5432;
+                }
+                else
+                {
+                    u8 value;
+                    if (rand > 60)
+                        gRecvCmds[2][3] = 0x4523;
+                    else if ((value = rand - 56) < 5)
+                        gRecvCmds[2][3] = 0x5432;
+                    if (rand < 5)
+                        sub_804F890(3, 5);
+                }
+                gTasks[taskID].data[0] = 1;
+            }
+            else
+            {
+                gRecvCmds[2][3] = 0x4523;
+                gTasks[taskID].data[0] = 1;
+            }
+        }
+    }
+    else
+        gTasks[taskID].data[0] = 0;
 }

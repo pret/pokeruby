@@ -1519,7 +1519,7 @@ _0804EF34:
 	movs r0, 0
 	str r0, [r1]
 	bl sub_804F238
-	bl BuyMenuDrawFieldObjects
+	bl sub_804F2A8
 _0804EFB8:
 	mov r1, r8
 	ldr r0, [r1]
@@ -1724,8 +1724,8 @@ _0804F164: .4byte 0x00004422
 _0804F168: .4byte gUnknown_03004854
 	thumb_func_end sub_804F0F4
 
-	thumb_func_start task_tutorial_oak_boy_girl
-task_tutorial_oak_boy_girl: @ 804F16C
+	thumb_func_start sub_804F16C
+sub_804F16C: @ 804F16C
 	push {lr}
 	lsls r0, 16
 	lsls r1, 24
@@ -1766,7 +1766,7 @@ _0804F1B4:
 _0804F1B6:
 	pop {r1}
 	bx r1
-	thumb_func_end task_tutorial_oak_boy_girl
+	thumb_func_end sub_804F16C
 
 	thumb_func_start sub_804F1BC
 sub_804F1BC: @ 804F1BC
@@ -1902,8 +1902,8 @@ _0804F2A0: .4byte gUnknown_03004854
 _0804F2A4: .4byte gUnknown_082162EC
 	thumb_func_end sub_804F238
 
-	thumb_func_start BuyMenuDrawFieldObjects
-BuyMenuDrawFieldObjects: @ 804F2A8
+	thumb_func_start sub_804F2A8
+sub_804F2A8: @ 804F2A8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2000,7 +2000,7 @@ _0804F368: .4byte gStringVar1
 _0804F36C: .4byte gSprites
 _0804F370: .4byte gUnknown_082162C4
 _0804F374: .4byte gLinkPlayers + 0x8
-	thumb_func_end BuyMenuDrawFieldObjects
+	thumb_func_end sub_804F2A8
 
 	thumb_func_start sub_804F378
 sub_804F378: @ 804F378
@@ -2412,7 +2412,7 @@ _0804F650:
 	str r0, [r1]
 	movs r0, 0x34
 	bl PlaySE
-	bl BuyMenuDrawFieldObjects
+	bl sub_804F2A8
 _0804F6D6:
 	mov r1, r8
 	ldr r0, [r1]
@@ -2666,7 +2666,7 @@ sub_804F8C8: @ 804F8C8
 	adds r0, 0x54
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl task_tutorial_oak_boy_girl
+	bl sub_804F16C
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -3712,7 +3712,7 @@ _0805010A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl task_tutorial_oak_boy_girl
+	bl sub_804F16C
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
