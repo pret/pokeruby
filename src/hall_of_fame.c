@@ -3,6 +3,7 @@
 #include "task.h"
 #include "palette.h"
 #include "sound.h"
+#include "songs.h"
 #include "pokemon.h"
 #include "text.h"
 #include "strings.h"
@@ -17,8 +18,9 @@
 #include "rng.h"
 #include "trig.h"
 
+static EWRAM_DATA u32 sUnknown_0203931C = 0;
+
 extern u8 ewram[];
-extern u32 gUnknown_0203931C;
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -455,7 +457,7 @@ static bool8 sub_8141E64(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(436);
+            PlayBGM(BGM_DENDOU);
             return 0;
         }
         break;
@@ -512,7 +514,7 @@ static void sub_8141FF8(u8 taskID)
             fameMons->mons[i].nick[0] = EOS;
         }
     }
-    gUnknown_0203931C = 0;
+    sUnknown_0203931C = 0;
     gTasks[taskID].tDisplayedPoke = 0;
     gTasks[taskID].data[4] = 0xFF;
     for (i = 0; i < 6; i++)
@@ -565,7 +567,7 @@ static void sub_8142274(u8 taskID)
 {
     gGameContinueCallback = sub_8141FC4;
     TrySavingData(3);
-    PlaySE(55);
+    PlaySE(SE_SAVE);
     gTasks[taskID].func = sub_81422B8;
     gTasks[taskID].tFrameCount = 32;
 }
@@ -645,11 +647,11 @@ static void sub_8142484(u8 taskID)
         gTasks[taskID].tFrameCount--;
     else
     {
-        gUnknown_0203931C |= (0x10000 << gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.paletteNum);
+        sUnknown_0203931C |= (0x10000 << gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.paletteNum);
         if (gTasks[taskID].tDisplayedPoke <= 4 && currMon[1].species != 0) // there is another pokemon to display
         {
             gTasks[taskID].tDisplayedPoke++;
-            BeginNormalPaletteFade(gUnknown_0203931C, 0, 12, 12, 0x735F);
+            BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
             gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.priority = 1;
             gTasks[taskID].func = sub_8142320;
         }
@@ -670,7 +672,7 @@ static void sub_8142570(u8 taskID)
     }
     MenuZeroFillWindowRect(0, 14, 29, 19);
     sub_8143068(0, 15);
-    PlaySE(105);
+    PlaySE(SE_DENDOU);
     gTasks[taskID].tFrameCount = 400;
     gTasks[taskID].func = sub_8142618;
 }
@@ -691,7 +693,7 @@ static void sub_8142618(u8 taskID)
             if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
                 gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 1;
         }
-        BeginNormalPaletteFade(gUnknown_0203931C, 0, 12, 12, 0x735F);
+        BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
         MenuZeroFillWindowRect(0, 14, 29, 19);
         gTasks[taskID].tFrameCount = 7;
         gTasks[taskID].func = sub_81426F8;
@@ -879,7 +881,7 @@ static void sub_8142B04(u8 taskID)
         savedTeams++;
 
     currMon = &savedTeams->mons[0];
-    gUnknown_0203931C = 0;
+    sUnknown_0203931C = 0;
     gTasks[taskID].tCurrPokeID = 0;
     gTasks[taskID].tPokesNo = 0;
 
@@ -952,8 +954,8 @@ static void sub_8142CC8(u8 taskID)
 
     currMonID = gTasks[taskID].tMonSpriteID(gTasks[taskID].tCurrPokeID);
     gSprites[currMonID].oam.priority = 0;
-    gUnknown_0203931C = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
-    BlendPalettesUnfaded(gUnknown_0203931C, 0xC, 0x735F);
+    sUnknown_0203931C = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
+    BlendPalettesUnfaded(sUnknown_0203931C, 0xC, 0x735F);
 
     currMon = &savedTeams->mons[gTasks[taskID].tCurrPokeID];
     if (currMon->species != SPECIES_EGG)
