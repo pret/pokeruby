@@ -148,7 +148,7 @@ struct BerryBlenderData
     u8 field_52;
     u8 field_53;
     u16 arrowPos;
-    s16 hitPitch;       //56
+    s16 field_56;
     u8 field_58;
     u8 field_59;
     u16 field_5A;
@@ -337,8 +337,8 @@ struct BerryBlenderData
     u16 field_13E;
     u16 field_140;
     u16 field_142;
-    u16 field_144;
-    u16 field_146;
+    s16 field_144;
+    s16 field_146;
     u8 field_148[3];
     u8 field_14B;
     u16 field_14C[BLENDER_MAX_PLAYERS][3];
@@ -388,10 +388,13 @@ bool8 sub_8051B8C(void);
 void sub_80516C4(u8 a0, u16 itemID);
 void sub_804F2A8(void);
 void sub_804F81C(void);
+void sub_805156C(void);
+void sub_8051684(struct Sprite* sprite);
+void sub_8051AC8(s16* a0, u16 a1);
 
 void Blender_ControlHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, (sBerryBlenderData->hitPitch - 128) * 2);
+    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, (sBerryBlenderData->field_56 - 128) * 2);
 }
 
 void VBlankCB0_BerryBlender(void)
@@ -769,7 +772,7 @@ void sub_804E9F8(void)
             }
         }
         sBerryBlenderData->field_7C = 0;
-        sBerryBlenderData->hitPitch = 0;
+        sBerryBlenderData->field_56 = 0;
         sBerryBlenderData->arrowPos = 0;
         sBerryBlenderData->field_5A = 0;
         sBerryBlenderData->field_1 = 0;
@@ -916,7 +919,7 @@ void sub_804E9F8(void)
         }
         break;
     case 21:
-        sBerryBlenderData->hitPitch = 128;
+        sBerryBlenderData->field_56 = 128;
         sBerryBlenderData->field_12C = 0;
         SetMainCallback2(sub_80501FC);
         if (GetCurrentMapMusic() != 403)
@@ -961,7 +964,7 @@ void sub_804F0F4(void)
     gLinkType = 0x4422;
 
     sBerryBlenderData->field_4E = 0;
-    sBerryBlenderData->hitPitch = 0;
+    sBerryBlenderData->field_56 = 0;
     sBerryBlenderData->arrowPos = 0;
     sBerryBlenderData->field_5A = 0;
     sBerryBlenderData->field_144 = 0;
@@ -1179,7 +1182,7 @@ void sub_804F378(void)
         break;
     case 21:
         sub_804F81C();
-        sBerryBlenderData->hitPitch = 128;
+        sBerryBlenderData->field_56 = 128;
         sBerryBlenderData->field_12C = 0;
         sBerryBlenderData->field_14B = 0;
         sBerryBlenderData->field_7E = 0;
@@ -1242,7 +1245,7 @@ void sub_804F8C8(u8 taskID)
             if (sBerryBlenderData->field_14B == 0)
             {
                 u8 rand = Random() / 655;
-                if (sBerryBlenderData->hitPitch < 500)
+                if (sBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 75)
                         gRecvCmds[2][1] = 0x4523;
@@ -1250,7 +1253,7 @@ void sub_804F8C8(u8 taskID)
                         gRecvCmds[2][1] = 0x5432;
                     gRecvCmds[2][1] = 0x5432; // ???
                 }
-                else if (sBerryBlenderData->hitPitch < 1500)
+                else if (sBerryBlenderData->field_56 < 1500)
                 {
                     if (rand > 80)
                         gRecvCmds[2][1] = 0x4523;
@@ -1295,7 +1298,7 @@ void sub_804F9F4(u8 taskID)
             if (sBerryBlenderData->field_14B == 0)
             {
                 u8 rand = Random() / 655;
-                if (sBerryBlenderData->hitPitch < 500)
+                if (sBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 66)
                         gRecvCmds[2][2] = 0x4523;
@@ -1331,10 +1334,6 @@ void sub_804FB1C(u8 taskID)
 {
     u32 var1, var2;
 
-    #ifndef FAKEMATCHING
-    asm("":::"r6");
-    #endif // FAKEMATCHING
-
     var1 = (sBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
     var2 = sBerryBlenderData->field_A2[3] & 0xFF;
     if ((var1 >> 8) > gUnknown_08216303[var2] + 20 && (var1 >> 8) < gUnknown_08216303[var2] + 40)
@@ -1344,7 +1343,7 @@ void sub_804FB1C(u8 taskID)
             if (sBerryBlenderData->field_14B == 0)
             {
                 u8 rand = (Random() / 655);
-                if (sBerryBlenderData->hitPitch < 500)
+                if (sBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 88)
                         gRecvCmds[2][3] = 0x4523;
@@ -1353,11 +1352,15 @@ void sub_804FB1C(u8 taskID)
                 }
                 else
                 {
-                    u8 value;
                     if (rand > 60)
                         gRecvCmds[2][3] = 0x4523;
-                    else if ((value = rand - 56) < 5)
-                        gRecvCmds[2][3] = 0x5432;
+                    else
+                    {
+                        s8 value = rand - 56; // makes me wonder what the original code was
+                        u8 value2 = value;
+                        if (value2 < 5)
+                            gRecvCmds[2][3] = 0x5432;
+                    }
                     if (rand < 5)
                         sub_804F890(3, 5);
                 }
@@ -1372,4 +1375,87 @@ void sub_804FB1C(u8 taskID)
     }
     else
         gTasks[taskID].data[0] = 0;
+}
+
+extern const s8 gUnknown_082162CC[][2];
+extern const struct SpriteTemplate gSpriteTemplate_821645C;
+
+void sub_804FC48(u16 a0, u8 a1)
+{
+    u8 spriteID;
+
+    spriteID = CreateSprite(&gSpriteTemplate_821645C,
+                            sBlenderSyncArrowsPos[a1][0] - (10 * gUnknown_082162CC[a1][0]),
+                            sBlenderSyncArrowsPos[a1][1] - (10 * gUnknown_082162CC[a1][1]),
+                            1);
+    if (a0 == 0x4523)
+    {
+        StartSpriteAnim(&gSprites[spriteID], 2);
+        gSprites[spriteID].callback = sub_8051684;
+        PlaySE(40);
+    }
+    else if (a0 == 0x5432)
+    {
+        StartSpriteAnim(&gSprites[spriteID], 0);
+        PlaySE(31);
+    }
+    else if (a0 == 0x2345)
+    {
+        StartSpriteAnim(&gSprites[spriteID], 1);
+        PlaySE(32);
+    }
+    sub_805156C();
+}
+
+extern const u8 gUnknown_082165DA[];
+
+void sub_804FD30(u16 a0)
+{
+    Blender_ControlHitPitch();
+    switch (a0)
+    {
+    case 0x4523:
+        if (sBerryBlenderData->field_56 < 1500)
+            sBerryBlenderData->field_56 += (384 / gUnknown_082165DA[sBerryBlenderData->field_88]);
+        else
+        {
+            sBerryBlenderData->field_56 += (128 / gUnknown_082165DA[sBerryBlenderData->field_88]);
+            sub_8051AC8(&sBerryBlenderData->field_144, (sBerryBlenderData->field_56 / 100) - 10);
+            sub_8051AC8(&sBerryBlenderData->field_146, (sBerryBlenderData->field_56 / 100) - 10);
+        }
+        break;
+    case 0x5432:
+        if (sBerryBlenderData->field_56 < 1500)
+            sBerryBlenderData->field_56 += (256 / gUnknown_082165DA[sBerryBlenderData->field_88]);
+        break;
+    case 0x2345:
+        sBerryBlenderData->field_56 -= (256 / gUnknown_082165DA[sBerryBlenderData->field_88]);
+        if (sBerryBlenderData->field_56 < 128)
+            sBerryBlenderData->field_56 = 128;
+        break;
+    }
+}
+
+void sub_804FE70(void)
+{
+    s32 i;
+
+    if (gSpecialVar_0x8004 != 0)
+    {
+        if (gSendCmd[2] != 0)
+        {
+            gRecvCmds[2][0] = 0;
+            gRecvCmds[0][0] = 0x4444;
+            gSendCmd[2] = 0;
+        }
+        for (i = 0; i < 3; i++)
+        {
+            if (gRecvCmds[2][i] != 0)
+                gRecvCmds[0][i] = 0x4444;
+        }
+    }
+    for (i = 0; i < gUnknown_082165DA[sBerryBlenderData->field_88]; i++)
+    {
+        if (gRecvCmds[0])
+    }
 }
