@@ -27,35 +27,37 @@ struct UnknownPokenav0 {
 	/* 0x6dae */ u8 var6dae;
 	/* 0x6daf */ u8 fill6daf[0x3];
 	/* 0x6db2 */ u8 var6db2;
-	/* 0x6db3 */ u8 fill6db3[0x29];
+	/* 0x6db3 */ u8 var6db3;
+	/* 0x6db4 */ u8 var6db4;
+	/* 0x6db5 */ u8 var6db5;
+	/* 0x6db6 */ u8 var6db6;
+	/* 0x6db7 */ u8 fill6db7[0x25];
 	/* 0x6ddc */ u8 var6ddc;
 	/* 0x6ddd */ u8 fill6ddd[0x13];
 	/* 0x6df0 */ s8 var6df0;
 	/* 0x6df1 */ u8 fill6df1[0x9f];
 	/* 0x6e90 */ u8 var6e90;
-	/* 0x6e91 */ u8 fill6e91[0x18d7];
+	/* 0x6e91 */ u8 fill6e91[0x4];
+	/* 0x6e95 */ u8 var6e95;
+	/* 0x6e96 */ u8 var6e96[0x18d2];
 	/* 0x8768 */ u32 var8768;
 	/* 0x876C */ u8 fill876B[0x00bc];
 	/* 0x8828 */ u8 var8828;
-	/* 0x8829 */ u8 fill8829[0x07c0];
+	/* 0x8829 */ u8 fill8829[0x07bf];
 	/* 0x8FE8 */ u8 var8fe8;
-	/* 0x8FE9 */ u8 fill8FE9[0x035B];
+	/* 0x8FE9 */ u8 fill8FE9[0x16];
+	/* 0x8FFF */ u8 var8fff[5];
+	/* 0x9004 */ u8 fill9004[0x340];
 	/* 0x9344 */ u8 var9344;
 	/* 0x9345 */ u8 fill9345[0x3b8b];
 	/* 0xced0 */ u32 varCED0;
-};
-
-struct UnknownPokenav8fff {
-	/* 0x8fff */ u8 var8fff[5];
-	/* 0x9004 */ u8 fill9004[0x6e90];
-	/* 0x6e95 */ u8 var6e95;
+	/* 0xced4 */ u8 fillCED4[0x284];
+	/* 0xD158 */ u16 varD158;
 };
 
 
 extern u8 ewram[];
 #define ewram0 (*(struct UnknownPokenav0*)(ewram + 0))
-#define ewram8fff (*(struct UnknownPokenav8fff*)(ewram + 0x8fff))
-extern u8 unk_2000000[];
 
 extern void sub_80F1A90();
 extern bool8 sub_80F1AC4();
@@ -153,131 +155,39 @@ void sub_80EBBE8() {
 	}
 }
 
-// Falla el acceso a 0x8fff
-#if 0
-
 u16 gKeyRepeatStartDelay;
 void sub_80EBCA8();
 
-//void sub_80EBC10() {
-//	u16 i;
-//	u16 *unk2;
-//	gKeyRepeatStartDelay = 0x14;
-//	unk_2000000[0x8828] = CalculatePlayerPartyCount();
-//	unk_2000000[0x6ddc] = unk_2000000[0x9344] = 0;
-//	*(u32 *)&unk_2000000[0x8768] = 0;
-//	*(u32 *)&unk_2000000[0xced0] = 0;
-//	for (i = 0; i <= 4; ++i) {
-//		unk_2000000[0x8fff + i] = 0;
-//		unk2 = (u16 *)unk_2000000;
-//		unk2[i*2 + 0x4820] = 0x9B;
-//		unk2[i*2 + 0x4821] = 0x5B;
-//	}
-//	unk_2000000[0x8fff + 0x6e95] = 0;
-//	sub_80EBCA8();
-//}
 void sub_80EBC10() {
 	u16 i;
-	u16 *unk2;
+	u16 *var1;
 	gKeyRepeatStartDelay = 0x14;
 	ewram0.var8828 = CalculatePlayerPartyCount();
-	ewram0.var6ddc = 0; 
+	ewram0.var6ddc = 0;
 	ewram0.var9344 = 0;
 	ewram0.var8768 = 0;
 	ewram0.varCED0 = 0;
 	for (i = 0; i <= 4; ++i) {
-		ewram8fff.var8fff[i] = 0;
-		unk2 = (u16 *)ewram;
-		unk2[i*2 + 0x4820] = 0x9B;
-		unk2[i*2 + 0x4821] = 0x5B;
+		ewram0.var8fff[i] = 0;
+		var1 = (u16 *)ewram;
+		var1[i*2 + 0x4820] = 0x9B;
+		var1[i*2 + 0x4821] = 0x5B;
 	}
-	ewram8fff.var6e95 = 0;
+	ewram0.var6e95 = 0;
 	sub_80EBCA8();
 }
 
-#else
-
-__attribute__((naked))
-void sub_80EBC10() {
-	asm_unified("push {r4-r7,lr}\n\
-	ldr r1, _080EBC7C @ =gKeyRepeatStartDelay\n\
-	movs r0, 0x14\n\
-	strh r0, [r1]\n\
-	bl CalculatePlayerPartyCount\n\
-	ldr r2, _080EBC80 @ =0x02000000\n\
-	ldr r1, _080EBC84 @ =0x00008828\n\
-	adds r3, r2, r1\n\
-	movs r1, 0\n\
-	strb r0, [r3]\n\
-	ldr r3, _080EBC88 @ =0x00006ddc\n\
-	adds r0, r2, r3\n\
-	strb r1, [r0]\n\
-	ldr r3, _080EBC8C @ =0x00009344\n\
-	adds r0, r2, r3\n\
-	strb r1, [r0]\n\
-	ldr r3, _080EBC90 @ =0x00008768\n\
-	adds r0, r2, r3\n\
-	str r1, [r0]\n\
-	ldr r3, _080EBC94 @ =0x0000ced0\n\
-	adds r0, r2, r3\n\
-	str r1, [r0]\n\
-	movs r3, 0\n\
-	ldr r0, _080EBC98 @ =0x00008fff\n\
-	adds r7, r2, r0\n\
-	mov r12, r2\n\
-	movs r6, 0\n\
-	ldr r5, _080EBC9C @ =0x00009040\n\
-	movs r4, 0x9B\n\
-_080EBC4C:\n\
-	adds r0, r3, r7\n\
-	strb r6, [r0]\n\
-	lsls r1, r3, 2\n\
-	adds r1, r2\n\
-	adds r0, r1, r5\n\
-	strh r4, [r0]\n\
-	ldr r0, _080EBCA0 @ =0x00009042\n\
-	adds r1, r0\n\
-	movs r0, 0x5B\n\
-	strh r0, [r1]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, 0x4\n\
-	bls _080EBC4C\n\
-	ldr r1, _080EBCA4 @ =0x00006e95\n\
-	add r1, r12\n\
-	movs r0, 0\n\
-	strb r0, [r1]\n\
-	bl sub_80EBCA8\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080EBC7C: .4byte gKeyRepeatStartDelay\n\
-_080EBC80: .4byte 0x02000000\n\
-_080EBC84: .4byte 0x00008828\n\
-_080EBC88: .4byte 0x00006ddc\n\
-_080EBC8C: .4byte 0x00009344\n\
-_080EBC90: .4byte 0x00008768\n\
-_080EBC94: .4byte 0x0000ced0\n\
-_080EBC98: .4byte 0x00008fff\n\
-_080EBC9C: .4byte 0x00009040\n\
-_080EBCA0: .4byte 0x00009042\n\
-_080EBCA4: .4byte 0x00006e95\n");
-}
-#endif
-
 void sub_80EBCA8() {
-	unk_2000000[0x6db2] = 1;
-	unk_2000000[0x6db3] = 2;
-	unk_2000000[0x6db4] = 3;
+	ewram0.var6db2 = 1;
+	ewram0.var6db3 = 2;
+	ewram0.var6db4 = 3;
 	if (FlagGet(SYS_RIBBON_GET)) {
-		unk_2000000[0x6db5] = 4;
+		ewram0.var6db5 = 4;
 	}
 	else {
-		unk_2000000[0x6db5] = 0;
+		ewram0.var6db5 = 0;
 	}
-		unk_2000000[0x6db6] = 5;
+	ewram0.var6db6 = 5;
 }
 
 void sub_80EBD18() {
@@ -520,97 +430,173 @@ void sub_80EC4A0();
 void sub_80EC81C();
 void sub_80F208C();
 void sub_80EE96C();
+void sub_80F6C20();
+void sub_80EE3D8();
 
 void sub_80EC268() {
-	if (ewram0.var304 != 3) {
-		// bls -> bgt
-		if (ewram0.var304 > 3) {
-			if (ewram0.var304 != 6) {
-				if (ewram0.var304 > 6) {
-					if (ewram0.var304 != 0xFF) return;
-					if (sub_80EEC10() == 0) {
-						if (gMain.newKeys == (A_BUTTON | B_BUTTON)) return;
-				                sub_80EF428(0, ewram0.var6dad);
-				                return;
-					}
-					PlaySE(0x5);
-			                sub_80EF428(0, ewram0.var6dad);
-					sub_80EED9C();
-					return;
-
-				} 
-				if (ewram0.var304 != 4) return;
-				if (sub_8055870() != 0) return;
-				if (ewram0.var8fe8 == 0) {
-					PlaySE(0x20);
-					sub_80EF428(0, 5);
-					ewram0.var304 = 0xFF;
-					return;
+	u8 var1;
+	switch (ewram0.var304) {
+	case 3:
+		if (sub_80F6250()) return;
+		ewram0.var304++;
+		break;
+	case 6:
+		sub_80F6C20();
+		if (ewram0.varD158 != 0) {
+			PlaySE(0x5);
+			sub_80EBDBC(&sub_80EE3D8);
+			break;
+		}
+		else {
+			PlaySE(0x20);
+			sub_80EF428(0, 6);
+			ewram0.var304 = 0xFF;
+			break;
+		}
+	case 0:
+		if (sub_80EEC10() != 0) {
+			PlaySE(0x5);
+			sub_80EF428(0, ewram0.var6dad);
+			sub_80EED9C();
+			break;
+		}
+		else {
+			if (gMain.newKeys & A_BUTTON) {
+				if (!(gMain.newKeys & B_BUTTON)) {
+					ewram0.var304 = 1;
 				}
-				PlaySE(0x5);
-				sub_80EBDBC(&sub_80EDB88);
-				return;
+				break;
 			}
-			if (ewram0.var304 != 4) return;
-			if (sub_8055870()) return;
-			if (!ewram0.var8fe8) {
-				PlaySE(0x20);
-				sub_80EF428(0, 5);
-				ewram0.var304 = 0xFF;
-				return;
-			}
-			PlaySE(5);
+			ewram0.var6ddc = ewram0.var6dad;
+			// TODO switch
+			break;
+		}
+	case 0xFF:
+		if ((var1 = sub_80EEC10()) != 0) {
+			PlaySE(0x5);
+			sub_80EF428(0, ewram0.var6dad);
+			ewram0.var304 = 0;
+			break;
+		}
+		else {
+			if (gMain.newKeys & (A_BUTTON | B_BUTTON)) return;
+			sub_80EF428(0, ewram0.var6dad);
+			ewram0.var304 = var1;
+			break;
+		}
+	case 4:
+		if (sub_8055870()) return;
+		if (ewram0.var8fe8 != 0) {
+			PlaySE(0x5);
 			sub_80EBDBC(&sub_80EDB88);
-			return;
+			break;
 		}
-		if (ewram0.var304 != 1) {
-			if (ewram0.var304 < 1) {
-				if (ewram0.var304 == 0) {
-					if (sub_80EEC10() == 0) {
-						if (gMain.newKeys != A_BUTTON) {
-
-						}
-						ewram0.var6ddc = ewram0.var6dad;
-						// TODO arreglar esto
-						switch (ewram0.var6db2) {
-						case 1:
-							PlaySE(5);
-							sub_80EBDBC(&sub_80EC4A0);
-							return;
-						case 2:
-							PlaySE(5);
-							sub_80EBDBC(&sub_80EC81C);
-							return;
-						case 3:
-							ewram0.var304 = 6;
-							return;
-						case 4:
-							ewram0.var304 = 2;
-							return;
-						case 5:
-							ewram0.var304 = 1;
-							return;
-						}
-					}
-					PlaySE(0x5);
-			                sub_80EF428(0, ewram0.var6dad);
-					sub_80EED9C();
-					return;
-				}
-			}
-			sub_80F6208();
-			ewram0.var304++;
-			if (sub_80F6250() != 0) return;
-			ewram0.var304++;
-			return;
+		else {
+			PlaySE(0x20);
+			sub_80EF428(0, 5);
+			ewram0.var304 = 0xFF;
+			break;
 		}
+	case 2:
+		sub_80F6208();
+		ewram0.var304++;
+		if (sub_80F6250()) return;
+		ewram0.var304++;
+		break;
+	case 1:
 		sub_80F208C();
 		sub_80EBDBC(&sub_80EE96C);
-		return;
+		break;
 	}
-	if (sub_80F6250() != 0) return;
-	ewram0.var304++;
-	return;
+//	if (ewram0.var304 != 3) {
+//		// bls -> bgt
+//		if (ewram0.var304 > 3) {
+//			if (ewram0.var304 != 6) {
+//				if (ewram0.var304 > 6) {
+//					if (ewram0.var304 != 0xFF) return;
+//					if (sub_80EEC10() == 0) {
+//						if (gMain.newKeys == (A_BUTTON | B_BUTTON)) return;
+//				                sub_80EF428(0, ewram0.var6dad);
+//				                return;
+//					}
+//					PlaySE(0x5);
+//			                sub_80EF428(0, ewram0.var6dad);
+//					sub_80EED9C();
+//					return;
+//
+//				} 
+//				if (ewram0.var304 != 4) return;
+//				if (sub_8055870() != 0) return;
+//				if (ewram0.var8fe8 == 0) {
+//					PlaySE(0x20);
+//					sub_80EF428(0, 5);
+//					ewram0.var304 = 0xFF;
+//					return;
+//				}
+//				PlaySE(0x5);
+//				sub_80EBDBC(&sub_80EDB88);
+//				return;
+//			}
+//			if (ewram0.var304 != 4) return;
+//			if (sub_8055870()) return;
+//			if (!ewram0.var8fe8) {
+//				PlaySE(0x20);
+//				sub_80EF428(0, 5);
+//				ewram0.var304 = 0xFF;
+//				return;
+//			}
+//			PlaySE(5);
+//			sub_80EBDBC(&sub_80EDB88);
+//			return;
+//		}
+//		if (ewram0.var304 != 1) {
+//			if (ewram0.var304 < 1) {
+//				if (ewram0.var304 == 0) {
+//					if (sub_80EEC10() == 0) {
+//						if (gMain.newKeys != A_BUTTON) {
+//
+//						}
+//						ewram0.var6ddc = ewram0.var6dad;
+//						// TODO arreglar esto
+//						switch (ewram0.var6db2) {
+//						case 1:
+//							PlaySE(5);
+//							sub_80EBDBC(&sub_80EC4A0);
+//							return;
+//						case 2:
+//							PlaySE(5);
+//							sub_80EBDBC(&sub_80EC81C);
+//							return;
+//						case 3:
+//							ewram0.var304 = 6;
+//							return;
+//						case 4:
+//							ewram0.var304 = 2;
+//							return;
+//						case 5:
+//							ewram0.var304 = 1;
+//							return;
+//						}
+//					}
+//					PlaySE(0x5);
+//			                sub_80EF428(0, ewram0.var6dad);
+//					sub_80EED9C();
+//					return;
+//				}
+//			}
+//			sub_80F6208();
+//			ewram0.var304++;
+//			if (sub_80F6250() != 0) return;
+//			ewram0.var304++;
+//			return;
+//		}
+//		sub_80F208C();
+//		sub_80EBDBC(&sub_80EE96C);
+//		return;
+//	}
+//	if (sub_80F6250() != 0) return;
+//	ewram0.var304++;
+//	return;
 }
 #else
 __attribute__((naked))
