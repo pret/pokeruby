@@ -43,6 +43,7 @@ struct MusicPlayerInfo
 
 // other files functions
 void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
+void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void sub_80A6978(void);
 u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 
@@ -56,7 +57,7 @@ u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 
 struct BlenderBerry
 {
-    u16 field_0;
+    u16 itemID;
     u8 name[7];
     u8 flavours[5];
     u8 smoothness;
@@ -371,7 +372,9 @@ struct BerryBlenderData
 extern struct BerryBlenderData* sBerryBlenderData;
 
 extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 ewram[];
+extern s16 gUnknown_03000520[];
 
 // this file's functions:
 void sub_80514A4(void);
@@ -391,6 +394,11 @@ void sub_804F81C(void);
 void sub_805156C(void);
 void sub_8051684(struct Sprite* sprite);
 void sub_8051AC8(s16* a0, u16 a1);
+void sub_805194C(u16 a0, u16 a1);
+void sub_8051A3C(u16 a0);
+void sub_8051B18(void);
+void sub_805123C(void);
+void sub_8050954(void);
 
 void Blender_ControlHitPitch(void)
 {
@@ -669,7 +677,7 @@ void sub_804E7C0(u16 a0, u8 a1)
 void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
 {
     const struct Berry *berryInfo = GetBerryInfo(itemID + 124);
-    berry->field_0 = itemID;
+    berry->itemID = itemID;
     StringCopy(berry->name, berryInfo->name);
     berry->flavours[FLAVOUR_SPICY] = berryInfo->spicy;
     berry->flavours[FLAVOUR_DRY] = berryInfo->dry;
@@ -835,7 +843,7 @@ void sub_804E9F8(void)
                 for (i = 0; i < GetLinkPlayerCount(); i++)
                 {
                     memcpy(&sBerryBlenderData->blendedBerries[i], &gBlockRecvBuffer[i][0], sizeof(struct BlenderBerry));
-                    sBerryBlenderData->field_80[i] = sBerryBlenderData->blendedBerries[i].field_0;
+                    sBerryBlenderData->field_80[i] = sBerryBlenderData->blendedBerries[i].itemID;
                 }
                 ResetBlockReceivedFlags();
                 sBerryBlenderData->field_0++;
@@ -1444,18 +1452,347 @@ void sub_804FE70(void)
     {
         if (gSendCmd[2] != 0)
         {
-            gRecvCmds[2][0] = 0;
+            gRecvCmds[2][0] = gSendCmd[2];
             gRecvCmds[0][0] = 0x4444;
             gSendCmd[2] = 0;
         }
-        for (i = 0; i < 3; i++)
+        for (i = 1; i < 4; i++)
         {
             if (gRecvCmds[2][i] != 0)
                 gRecvCmds[0][i] = 0x4444;
         }
     }
-    for (i = 0; i < gUnknown_082165DA[sBerryBlenderData->field_88]; i++)
+    for (i = 0; i < sBerryBlenderData->field_88; i++)
     {
-        if (gRecvCmds[0])
+        if (gRecvCmds[0][i] == 0x4444)
+        {
+            u32 var = sBerryBlenderData->field_A2[i];
+            if (gRecvCmds[2][i] == 0x4523)
+            {
+                sub_804FD30(0x4523);
+                sBerryBlenderData->field_13E += (sBerryBlenderData->field_56 / 55);
+                if (sBerryBlenderData->field_13E >= 1000)
+                    sBerryBlenderData->field_13E = 1000;
+                sub_804FC48(0x4523, var);
+                sBerryBlenderData->field_14C[i][0]++;
+            }
+            else if (gRecvCmds[2][i] == 0x5432)
+            {
+                sub_804FD30(0x5432);
+                sBerryBlenderData->field_13E += (sBerryBlenderData->field_56 / 70);
+                sub_804FC48(0x5432, var);
+                sBerryBlenderData->field_14C[i][1]++;
+            }
+            else if (gRecvCmds[2][i] == 0x2345)
+            {
+                sub_804FC48(0x2345, var);
+                sub_804FD30(0x2345);
+                if (sBerryBlenderData->field_15 > 1000)
+                    sBerryBlenderData->field_13E = 1000;
+                if (sBerryBlenderData->field_14C[i][2] < 999)
+                    sBerryBlenderData->field_14C[i][2]++;
+            }
+            if (gRecvCmds[2][i] == 0x2345 || gRecvCmds[2][i] == 0x4523 || gRecvCmds[2][i] == 0x5432)
+            {
+                if (sBerryBlenderData->field_56 > 1500)
+                    m4aMPlayTempoControl(&gMPlay_BGM, ((sBerryBlenderData->field_56 - 750) / 20) + 256);
+                else
+                    m4aMPlayTempoControl(&gMPlay_BGM, 256);
+            }
+        }
+    }
+    if (gSpecialVar_0x8004 != 0)
+    {
+        for (i = 0; i < sBerryBlenderData->field_88; i++)
+        {
+            gRecvCmds[0][i] = 0;
+            gRecvCmds[2][i] = 0;
+        }
+    }
+}
+
+extern u8 gUnknown_020297ED;
+
+void sub_80500A8(void)
+{
+    bool8 A_pressed = 0;
+    u8 var2 = sBerryBlenderData->field_A2[GetMultiplayerId()];
+    if (sBerryBlenderData->field_6F == 0)
+    {
+        if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && gMain.newKeys & A_BUTTON)
+            A_pressed = ((gMain.heldKeysRaw & (A_BUTTON | L_BUTTON)) != (A_BUTTON | L_BUTTON));
+        else if (gMain.newKeys & A_BUTTON)
+            A_pressed = 1;
+        if (A_pressed)
+        {
+            u8 var3;
+            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[var2]]], var2 + 4);
+            var3 = sub_804F16C(sBerryBlenderData->arrowPos, GetMultiplayerId());
+            if (var3 == 2)
+                gSendCmd[2] = 0x4523;
+            else if (var3 == 1)
+                gSendCmd[2] = 0x5432;
+            else
+                gSendCmd[2] = 0x2345;
+        }
+    }
+    if (++sBerryBlenderData->field_7E > 5)
+    {
+        if (sBerryBlenderData->field_56 > 128)
+            sBerryBlenderData->field_56--;
+        sBerryBlenderData->field_7E = 0;
+    }
+    if (gUnknown_020297ED && gMain.newKeys & L_BUTTON)
+        sBerryBlenderData->field_14B ^= 1;
+}
+
+void sub_80501FC(void)
+{
+    sub_8051474();
+    if (sBerryBlenderData->field_12C < 359940)
+        sBerryBlenderData->field_12C++;
+    sub_80500A8();
+    SetLinkDebugValues((u16)(sBerryBlenderData->field_56), sBerryBlenderData->field_13E);
+    sub_804FE70();
+    sub_805194C(sBerryBlenderData->field_13E, 1000);
+    sub_8051A3C(sBerryBlenderData->field_56);
+    sub_8051B18();
+    sub_805123C();
+    if (sBerryBlenderData->field_6F == 0 && sBerryBlenderData->field_140 >= 1000)
+    {
+        sBerryBlenderData->field_13E = 1000;
+        sBerryBlenderData->field_6F = 1;
+        SetMainCallback2(sub_8050954);
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+#define ARE_FLAVOURS_SAME(flavours1, flavours2)(((*(u32*)(&flavours1[-1]) & 0xFFFFFF00) == (*(u32*)(&flavours2[-1]) & 0xFFFFFF00)&& (*(u32*)(&flavours1[3]) & 0xFFFFFF) == (*(u32*)(&flavours2[3]) & 0xFFFFFF)))
+
+bool8 sub_80502A4(struct BlenderBerry* berries, u8 index1, u8 index2)
+{
+    if (berries[index1].itemID != berries[index2].itemID
+        || (StringCompare(berries[index1].name, berries[index2].name) == 0
+            && ARE_FLAVOURS_SAME(berries[index1].flavours, berries[index2].flavours)))
+        return 1;
+    else
+        return 0;
+}
+
+#undef ARE_FLAVOURS_SAME
+
+u32 sub_80502F8(struct BlenderBerry* berries, s16* a1, u8 a2, u8 a3)
+{
+    s16 vars[5];
+    s32 i;
+    s32 r6;
+    u8 r2;
+
+    for (i = 0; i <= 5; i++) // bug, writing one index too far
+        vars[i] = a1[i];
+    r6 = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (vars[i] == 0)
+            r6++;
+    }
+    if (r6 == 5 || a3 > 3)
+        return 12;
+    for (i = 0; i < a2; i++)
+    {
+        for (r6 = 0; r6 < a2; r6++)
+        {
+            if (berries[i].itemID == berries[r6].itemID && i != r6
+                && (berries[i].itemID != ITEM_ENIGMA_BERRY || sub_80502A4(berries, i, r6)))
+                    return 12;
+        }
+    }
+    r2 = 0;
+    for (r2 = 0, i = 0; i < 5; i++)
+    {
+        if (vars[i] > 0)
+            r2++;
+    }
+    if (r2 > 3)
+        return 13;
+    if (r2 == 3)
+        return 11;
+    for (i = 0; i < 5; i++)
+    {
+        if (vars[i] > 50)
+            return 14;
+    }
+    if (r2 == 1 && vars[0] > 0)
+        return 1;
+    if (r2 == 1 && vars[1] > 0)
+        return 2;
+    if (r2 == 1 && vars[2] > 0)
+        return 3;
+    if (r2 == 1 && vars[3] > 0)
+        return 4;
+    if (r2 == 1 && vars[4] > 0)
+        return 5;
+    if (r2 == 2)
+    {
+        s32 var = 0;
+        for (i = 0; i < 5; i++)
+        {
+            if (vars[i] > 0)
+                gUnknown_03000520[var++] = i;
+        }
+        if (vars[gUnknown_03000520[0]] >= vars[gUnknown_03000520[1]])
+        {
+            if (gUnknown_03000520[0] == 0)
+                return (gUnknown_03000520[1] << 16) | 6;
+            if (gUnknown_03000520[0] == 1)
+                return (gUnknown_03000520[1] << 16) | 7;
+            if (gUnknown_03000520[0] == 2)
+                return (gUnknown_03000520[1] << 16) | 8;
+            if (gUnknown_03000520[0] == 3)
+                return (gUnknown_03000520[1] << 16) | 9;
+            if (gUnknown_03000520[0] == 4)
+                return (gUnknown_03000520[1] << 16) | 10;
+        }
+        else
+        {
+            if (gUnknown_03000520[1] == 0)
+                return (gUnknown_03000520[0] << 16) | 6;
+            if (gUnknown_03000520[1] == 1)
+                return (gUnknown_03000520[0] << 16) | 7;
+            if (gUnknown_03000520[1] == 2)
+                return (gUnknown_03000520[0] << 16) | 8;
+            if (gUnknown_03000520[1] == 3)
+                return (gUnknown_03000520[0] << 16) | 9;
+            if (gUnknown_03000520[1] == 4)
+                return (gUnknown_03000520[0] << 16) | 10;
+        }
+    }
+    return 0;
+}
+
+extern s16 gUnknown_0300052C;
+extern s16 gUnknown_0300052E;
+
+void sub_80504F0(s16 value)
+{
+    gUnknown_0300052C = value;
+}
+
+s16 unref_sub_80504FC(void)
+{
+    return gUnknown_0300052C;
+}
+
+void sub_8050508(s16 value)
+{
+    gUnknown_0300052E = value;
+}
+
+s16 unref_sub_8050514(void)
+{
+    return gUnknown_0300052E;
+}
+
+extern s16 gUnknown_03000510[6];
+extern s32 gUnknown_03000530[];
+extern s32 gUnknown_03000548[];
+extern u32 gUnknown_0300055C;
+
+extern const u8 gUnknown_082165DF[];
+
+void sub_8050520(struct BlenderBerry* berries, u8* a1, u8 a2, u8* a3, u16 a4)
+{
+    s32 i, j;
+
+    s32 var5, var6;
+
+    for (i = 0; i < 6; i++)
+        gUnknown_03000510[i] = 0;
+    for (i = 0; i < a2; i++)
+    {
+        for (j = 0; j < 5; j++)
+            gUnknown_03000510[j] += berries[i].flavours[j];
+    }
+
+    var5 = gUnknown_03000510[0];
+    gUnknown_03000510[0] -= gUnknown_03000510[1];
+    gUnknown_03000510[1] -= gUnknown_03000510[2];
+    gUnknown_03000510[2] -= gUnknown_03000510[3];
+    gUnknown_03000510[3] -= gUnknown_03000510[4];
+    gUnknown_03000510[4] -= var5;
+
+    var6 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        if (gUnknown_03000510[i] < 0)
+        {
+            gUnknown_03000510[i] = 0;
+            var6++;
+        }
+    }
+    for (i = 0; i < 6; i++)
+    {
+        if (gUnknown_03000510[i] > 0)
+        {
+            if (gUnknown_03000510[i] < var6)
+                gUnknown_03000510[i] = 0;
+            else
+                gUnknown_03000510[i] -= var6;
+        }
+    }
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_03000530[i] = gUnknown_03000510[i];
+    }
+
+    gUnknown_0300055C = ((a4 / 333) + 100);
+
+    for (i = 0; i < 5; i++)
+    {
+        s32 var4;
+        s32 var3 = gUnknown_03000510[i];
+        var3 = (((a4 / 333) + 100) * var3) / 10;
+        var4 = var3 % 10;
+        var3 /= 10;
+        if (var4 > 4)
+            var3++;
+        gUnknown_03000510[i] = var3;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        gUnknown_03000548[i] = gUnknown_03000510[i];
+    }
+    *a1 = sub_80502F8(berries, &gUnknown_03000510[0], a2, var6);
+    gUnknown_03000510[5] = (gUnknown_03000510[5] / a2) - a2;
+    if (gUnknown_03000510[5] > 0)
+        gUnknown_03000510[5] = 0;
+    if (*a1 == 12)
+    {
+        u16 rand = Random() % 10;
+        for (i = 0; i < 6; i++)
+        {
+            if ((gUnknown_082165DF[rand] >> i) & 1)
+                gUnknown_03000510[i] = 2;
+            else
+                gUnknown_03000510[i] = 0;
+        }
+    }
+    for (i = 0; i < 6; i++)
+    {
+        if (gUnknown_03000510[i] > 255)
+            gUnknown_03000510[i] = 255;
+    }
+    a1[1] = gUnknown_03000510[0];
+    a1[2] = gUnknown_03000510[1];
+    a1[3] = gUnknown_03000510[2];
+    a1[4] = gUnknown_03000510[3];
+    a1[5] = gUnknown_03000510[4];
+    a1[6] = gUnknown_03000510[5];
+    for (i = 0; i < 6; i++)
+    {
+        a3[i] = gUnknown_03000510[i];
     }
 }

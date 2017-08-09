@@ -3872,8 +3872,8 @@ _0805029C: .4byte 0x000003e7
 _080502A0: .4byte sub_8050954
 	thumb_func_end sub_80501FC
 
-	thumb_func_start help_system_is_not_first_time
-help_system_is_not_first_time: @ 80502A4
+	thumb_func_start sub_80502A4
+sub_80502A4: @ 80502A4
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsls r2, 24
@@ -3916,7 +3916,7 @@ _080502F2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end help_system_is_not_first_time
+	thumb_func_end sub_80502A4
 
 	thumb_func_start sub_80502F8
 sub_80502F8: @ 80502F8
@@ -3990,7 +3990,7 @@ _0805035C:
 	mov r7, r8
 	lsrs r1, r7, 24
 	str r3, [sp, 0xC]
-	bl help_system_is_not_first_time
+	bl sub_80502A4
 	lsls r0, 24
 	ldr r3, [sp, 0xC]
 	cmp r0, 0
