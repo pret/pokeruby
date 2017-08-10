@@ -11,11 +11,17 @@
 #include "task.h"
 #include "trig.h"
 
+struct __attribute__((packed)) Some3ByteStruct {
+    u8 unkArr[3];
+};
+
 extern s16 gBattleAnimArgs[8];
 extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
 extern struct SpriteTemplate gSpriteTemplate_83D631C;
+extern struct SpriteTemplate gSpriteTemplate_83D6884;
 extern s16 gUnknown_03000728[];
+extern s8 gUnknown_083D680C[11][3];
 
 void sub_80CA768(struct Sprite* sprite);
 void sub_80CA8B4(struct Sprite* sprite);
@@ -36,6 +42,10 @@ void sub_80CB710(struct Sprite* sprite);
 void sub_80CBB60(struct Sprite* sprite);
 void sub_80CBC8C(struct Sprite* sprite);
 void sub_80CBCF8(struct Sprite* sprite);
+void sub_80CBDB0(struct Sprite* sprite);
+void sub_80CC408(struct Sprite* sprite);
+
+s16 sub_80CC338(struct Sprite* sprite);
 
 void sub_80787B0(struct Sprite *sprite, u8 a2);
 void sub_8078764(struct Sprite *sprite, u8 a2);
@@ -47,6 +57,7 @@ void sub_8078CC0(struct Sprite *sprite);
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);
 s8 sub_8076F98(s8 a);
+int sub_807A100(u8 slot, u8 a2);
 
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
@@ -54,6 +65,8 @@ bool8 sub_8078CE8(struct Sprite *sprite);
 
 void sub_80CB3A8(u8 taskId);
 void sub_80CB438(u8 taskId);
+void sub_80CBF5C(u8 taskId);
+void sub_80CC358(struct Task* task, u8 taskId);
 
 void sub_80CA710(struct Sprite* sprite)
 {
@@ -1562,3 +1575,531 @@ void sub_80CBC8C(struct Sprite* sprite)
         }
     }
 }
+
+
+
+void sub_80CBCF8(struct Sprite* sprite)
+{
+    if(sprite->data2 == gUnknown_083D680C[sprite->data0][1])
+	{
+	    if(gUnknown_083D680C[sprite->data0][2] == 0x7F)
+		{
+		    sprite->data0 = 0;
+			sprite->callback = sub_80CBDB0;
+		}
+		sprite->data2 = 0;
+		sprite->data0++;
+	}
+	else
+	{
+	    sprite->data2++;
+		sprite->data1 = (gUnknown_083D680C[sprite->data0][0] * gUnknown_083D680C[sprite->data0][2] + sprite->data1) & 0xFF;
+		if (!IsContest())
+		{
+		    if((u16)(sprite->data1 - 1) <= 0xBE)
+            {
+			    sprite->subpriority = 31;
+			}
+			else
+			{
+			    sprite->subpriority = 29;
+		    }
+		}
+		sprite->pos2.x = Cos(sprite->data1, 0x3C);
+		sprite->pos2.y = Sin(sprite->data1, 20);
+	}
+}
+
+void sub_80CBDB0(struct Sprite* sprite)
+{
+    if(sprite->data0 > 20) move_anim_8072740(sprite);
+	sprite->invisible = sprite->data0 % 2;
+	sprite->data0++;
+}
+
+#ifdef NONMATCHING
+void sub_80CBDF4(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+	task->data[4] = sub_8079E90(gBattleAnimEnemyMonIndex) - 1;
+	task->data[6] = sub_8077ABC(gBattleAnimEnemyMonIndex, 2);
+	task->data[7] = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
+	task->data[10] = sub_807A100(gBattleAnimEnemyMonIndex, 1);
+	task->data[11] = sub_807A100(gBattleAnimEnemyMonIndex, 0);
+	if(GetBankSide(gBattleAnimEnemyMonIndex) == 1)
+	{
+	    task->data[5] = 1;
+	}
+	else
+	{
+	    task->data[5] = -1;
+	}
+	task->data[9] = 0x38 - (task->data[5] * 64);
+	task->data[8] = task->data[7] - task->data[9] + task->data[6];
+	task->data[2] = CreateSprite(&gSpriteTemplate_83D6884, task->data[8], task->data[9], task->data[4]);
+	if(task->data[2] == 0x40) DestroyAnimVisualTask(taskId);
+	gSprites[task->data[2]].data0 = 10;
+	gSprites[task->data[2]].data1 = task->data[8];
+	gSprites[task->data[2]].data2 = task->data[6] - (((task->data[10] / 2) + 10) * task->data[5]);
+	gSprites[task->data[2]].data3 = task->data[9];
+	gSprites[task->data[2]].data4 = ((task->data[11] / 2) + 10) * task->data[5] + task->data[7];
+	gSprites[task->data[2]].data5 = sub_80CC338(&gSprites[task->data[2]]);
+	sub_80786EC(&gSprites[task->data[2]]);
+	task->func = sub_80CBF5C;
+}
+#else
+__attribute__((naked))
+void sub_80CBDF4(u8 taskId)
+{
+    asm(".syntax unified\n\
+ 	push {r4-r6,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	adds r6, r0, 0\n\
+	lsls r0, r6, 2\n\
+	adds r0, r6\n\
+	lsls r0, 3\n\
+	ldr r1, _080CBF48 @ =gTasks\n\
+	adds r5, r0, r1\n\
+	ldr r4, _080CBF4C @ =gBattleAnimEnemyMonIndex\n\
+	ldrb r0, [r4]\n\
+	bl sub_8079E90\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	subs r0, 0x1\n\
+	strh r0, [r5, 0x10]\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0x2\n\
+	bl sub_8077ABC\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	strh r0, [r5, 0x14]\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0x3\n\
+	bl sub_8077ABC\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	strh r0, [r5, 0x16]\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0x1\n\
+	bl sub_807A100\n\
+	strh r0, [r5, 0x1C]\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0\n\
+	bl sub_807A100\n\
+	strh r0, [r5, 0x1E]\n\
+	ldrb r0, [r4]\n\
+	bl GetBankSide\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	movs r2, 0x1\n\
+	negs r2, r2\n\
+	adds r1, r2, 0\n\
+	cmp r0, 0x1\n\
+	bne _080CBE5C\n\
+	movs r1, 0x1\n\
+_080CBE5C:\n\
+	strh r1, [r5, 0x12]\n\
+	movs r3, 0x12\n\
+	ldrsh r0, [r5, r3]\n\
+	lsls r0, 6\n\
+	movs r1, 0x38\n\
+	subs r1, r0\n\
+	strh r1, [r5, 0x1A]\n\
+	ldrh r0, [r5, 0x16]\n\
+	subs r0, r1\n\
+	ldrh r1, [r5, 0x14]\n\
+	adds r0, r1\n\
+	strh r0, [r5, 0x18]\n\
+	ldr r0, _080CBF50 @ =gSpriteTemplate_83D6884\n\
+	movs r2, 0x18\n\
+	ldrsh r1, [r5, r2]\n\
+	movs r3, 0x1A\n\
+	ldrsh r2, [r5, r3]\n\
+	ldrb r3, [r5, 0x10]\n\
+	bl CreateSprite\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	strh r0, [r5, 0xC]\n\
+	cmp r0, 0x40\n\
+	bne _080CBE94\n\
+	adds r0, r6, 0\n\
+	bl DestroyAnimVisualTask\n\
+_080CBE94:\n\
+	ldr r4, _080CBF54 @ =gSprites\n\
+	movs r0, 0xC\n\
+	ldrsh r1, [r5, r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4\n\
+	movs r1, 0xA\n\
+	strh r1, [r0, 0x2E]\n\
+	movs r2, 0xC\n\
+	ldrsh r1, [r5, r2]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4\n\
+	ldrh r1, [r5, 0x18]\n\
+	strh r1, [r0, 0x30]\n\
+	movs r3, 0xC\n\
+	ldrsh r0, [r5, r3]\n\
+	lsls r2, r0, 4\n\
+	adds r2, r0\n\
+	lsls r2, 2\n\
+	adds r2, r4\n\
+	movs r1, 0x1C\n\
+	ldrsh r0, [r5, r1]\n\
+	lsrs r1, r0, 31\n\
+	adds r0, r1\n\
+	asrs r0, 1\n\
+	adds r0, 0xA\n\
+	movs r3, 0x12\n\
+	ldrsh r1, [r5, r3]\n\
+	muls r1, r0\n\
+	ldrh r0, [r5, 0x14]\n\
+	subs r0, r1\n\
+	strh r0, [r2, 0x32]\n\
+	movs r0, 0xC\n\
+	ldrsh r1, [r5, r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4\n\
+	ldrh r1, [r5, 0x1A]\n\
+	strh r1, [r0, 0x34]\n\
+	movs r1, 0xC\n\
+	ldrsh r0, [r5, r1]\n\
+	lsls r1, r0, 4\n\
+	adds r1, r0\n\
+	lsls r1, 2\n\
+	adds r1, r4\n\
+	movs r2, 0x1E\n\
+	ldrsh r0, [r5, r2]\n\
+	lsrs r2, r0, 31\n\
+	adds r0, r2\n\
+	asrs r0, 1\n\
+	adds r0, 0xA\n\
+	movs r3, 0x12\n\
+	ldrsh r2, [r5, r3]\n\
+	muls r0, r2\n\
+	ldrh r2, [r5, 0x16]\n\
+	adds r0, r2\n\
+	strh r0, [r1, 0x36]\n\
+	movs r3, 0xC\n\
+	ldrsh r1, [r5, r3]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4\n\
+	bl sub_80CC338\n\
+	movs r1, 0xC\n\
+	ldrsh r2, [r5, r1]\n\
+	lsls r1, r2, 4\n\
+	adds r1, r2\n\
+	lsls r1, 2\n\
+	adds r1, r4\n\
+	strh r0, [r1, 0x38]\n\
+	movs r2, 0xC\n\
+	ldrsh r1, [r5, r2]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r4\n\
+	bl sub_80786EC\n\
+	ldr r0, _080CBF58 @ =sub_80CBF5C\n\
+	str r0, [r5]\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080CBF48: .4byte gTasks\n\
+_080CBF4C: .4byte gBattleAnimEnemyMonIndex\n\
+_080CBF50: .4byte gSpriteTemplate_83D6884\n\
+_080CBF54: .4byte gSprites\n\
+_080CBF58: .4byte sub_80CBF5C\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_80CBF5C(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    struct Sprite* sprite = &gSprites[task->data[2]];
+    int a = task->data[0];
+    switch(a)
+    {
+        case 4:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            else
+            {
+                task->data[15] = 5;
+                task->data[0] = 0xFF;
+                break;
+            }
+        }
+        case 8:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            else
+            {
+            task->data[15] = 9;
+            task->data[0] = 0xFF;
+            break;
+            }
+        }
+        case 0:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            task->data[15] = 1;
+            task->data[0] = 0xFF;
+            break;
+        }
+        case 1:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[6];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[7];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[4] += 2;
+            task->data[3] = a;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 2:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            task->data[15] = 3;
+            task->data[0] = 0xFF;
+            break;
+        }
+        case 3:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[6] - ((task->data[10] / 2) + 10) * task->data[5];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[7] - ((task->data[11] / 2) + 10) * task->data[5];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[3] = 2;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 5:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[6] + ((task->data[10] / 2) + 10) * task->data[5];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[7] + ((task->data[11] / 2) + 10) * task->data[5];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[4] -= 2;
+            task->data[3] = 3;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 6:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            task->data[15] = 7;
+            task->data[0] = 0xFF;
+            break;
+        }
+        case 7:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[6];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[7];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[4] += 2;
+            task->data[3] = 4;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 9:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[6] - ((task->data[10] / 2) + 10) * task->data[5];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[7] + ((task->data[11] / 2) + 10) * task->data[5];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[3] = 5;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 10:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) == 0)
+            {
+                break;
+            }
+            else
+            {
+                task->data[15] = 11;
+                task->data[0] = 0xFF;
+                break;
+            }
+        }
+        case 11:
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sprite->data0 = 10;
+            sprite->data1 = sprite->pos1.x;
+            sprite->data2 = task->data[8];
+            sprite->data3 = sprite->pos1.y;
+            sprite->data4 = task->data[9];
+            sprite->data5 = sub_80CC338(sprite);
+            task->data[4] -= 2;
+            task->data[3] = 6;
+            sprite->subpriority = task->data[4];
+            StartSpriteAnim(sprite, task->data[3]);
+            sub_80786EC(sprite);
+            task->data[0]++;
+            break;
+        }
+        case 12:
+        {
+            sub_80CC358(task, taskId);
+            if(sub_8078718(sprite) != 0)
+            {
+                DestroySprite(sprite);
+                task->data[0]++;
+            }
+            break;
+        }
+        case 13:
+        {
+            if(task->data[12] == 0)
+            {
+                DestroyAnimVisualTask(taskId);
+                break;
+            }
+            break;
+        }
+        case 255:
+        {
+            task->data[1]++;
+            if(task->data[1] > 5)
+            {
+                task->data[1] = 0;
+                task->data[0] = task->data[15];
+            }
+        }
+    }
+}
+
+s16 sub_80CC338(struct Sprite* sprite)
+{
+    s16 var = 8;
+    if(sprite->data4 < sprite->pos1.y) var = -var;
+    return var;
+}
+
+void sub_80CC358(struct Task* task, u8 taskId)
+{
+    task->data[14]++;
+    if(task->data[14] > 0)
+    {
+        u8 spriteId;
+        s16 spriteX;
+        s16 spriteY;
+        task->data[14] = 0;
+        spriteX = gSprites[task->data[2]].pos1.x + gSprites[task->data[2]].pos2.x;
+        spriteY = gSprites[task->data[2]].pos1.y + gSprites[task->data[2]].pos2.y;
+        spriteId = CreateSprite(&gSpriteTemplate_83D6884, spriteX, spriteY, task->data[4]);
+        if (spriteId != 0x40)
+        {
+            gSprites[spriteId].data6 = taskId;
+            gSprites[spriteId].data7 = 12;
+            gTasks[taskId].data[12]++;
+            gSprites[spriteId].data0 = task->data[13] & 1;
+            gTasks[taskId].data[13]++;
+            StartSpriteAnim(&gSprites[spriteId], task->data[3]);
+            gSprites[spriteId].subpriority = task->data[4];
+            gSprites[spriteId].callback = sub_80CC408;
+        }
+    }
+}
+
+void sub_80CC408(struct Sprite* sprite)
+{
+    sprite->data0++;
+    if (sprite->data0 > 1)
+    {
+        sprite->data0 = 0;
+        sprite->invisible ^= 1;
+        sprite->data1++;
+        if(sprite->data1 > 8)
+        {
+            gTasks[sprite->data6].data[sprite->data7]--;
+            DestroySprite(sprite);
+        }
+    }
+}
+
