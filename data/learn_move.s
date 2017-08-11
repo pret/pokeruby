@@ -3,37 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gDexArrows_Pal::
-	.incbin "graphics/pokedex/arrows.gbapal"
-
-	.align 2
-gDexArrows_Gfx::
-	.incbin "graphics/pokedex/arrows.4bpp"
-
-gUnknown_08402CF8:: @ 8402CF8
-	.byte 0,  0,  9,  13
-	.byte 10, 0,  29, 7
-	.byte 2,  14, 27, 19
-	.byte 10, 8,  29, 13
-
-gUnknown_08402D08:: @ 8402D08
-	.4byte OtherText_Battle
-	.byte 1, 1, 0, 0
-	.4byte OtherText_Power
-	.byte 1, 4, 1, 0
-	.4byte OtherText_Accuracy
-	.byte 1, 9, 2, 0
-	.space 8
-
-	.4byte OtherText_Contest
-	.byte 1, 1, 0, 0
-	.4byte OtherText_Appeal
-	.byte 1, 4, 1, 0
-	.4byte OtherText_Jam
-	.byte 1, 9, 2, 0
-	.space 8
-
 	.4byte 0xFF00FFEF
 	.4byte gTileBuffer
 
