@@ -1826,7 +1826,7 @@ _0804F214:
 	adds r1, r7
 	ldrb r1, [r1]
 	adds r1, 0x85
-	bl sub_80516C4
+	bl Blender_SetBankBerryData
 	lsls r4, 16
 	lsrs r3, r4, 16
 	cmp r3, r5
@@ -2053,7 +2053,7 @@ _0804F3F8:
 	ldr r4, _0804F46C @ =gScriptItemId
 	ldrh r1, [r4]
 	movs r0, 0
-	bl sub_80516C4
+	bl Blender_SetBankBerryData
 	ldr r5, _0804F470 @ =gUnknown_03004854
 	ldr r0, [r5]
 	movs r6, 0xBE
@@ -4979,7 +4979,7 @@ _08050AA0:
 _08050AC8: .4byte gBlockRecvBuffer
 _08050ACC: .4byte gUnknown_03004854
 _08050AD0:
-	bl sub_8052228
+	bl Blender_PrintBlendingRanking
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050ADC
@@ -4987,7 +4987,7 @@ _08050AD0:
 _08050ADC:
 	b _08050C82
 _08050ADE:
-	bl sub_8051C58
+	bl Blender_PrintBlendingResults
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050AEA
@@ -6467,8 +6467,8 @@ _080516BC:
 _080516C0: .4byte 0x0000fff4
 	thumb_func_end sub_8051684
 
-	thumb_func_start sub_80516C4
-sub_80516C4: @ 80516C4
+	thumb_func_start Blender_SetBankBerryData
+Blender_SetBankBerryData: @ 80516C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6493,7 +6493,7 @@ sub_80516C4: @ 80516C4
 	bx r0
 	.align 2, 0
 _080516F4: .4byte gUnknown_03004854
-	thumb_func_end sub_80516C4
+	thumb_func_end Blender_SetBankBerryData
 
 	thumb_func_start unref_sub_80516F8
 unref_sub_80516F8: @ 80516F8
@@ -7200,8 +7200,8 @@ sub_8051C04: @ 8051C04
 _08051C20: .4byte gUnknown_03004854
 	thumb_func_end sub_8051C04
 
-	thumb_func_start sub_8051C24
-sub_8051C24: @ 8051C24
+	thumb_func_start Blender_TrySettingRecord
+Blender_TrySettingRecord: @ 8051C24
 	push {lr}
 	ldr r2, _08051C4C @ =gSaveBlock1
 	ldr r0, _08051C50 @ =gUnknown_03004854
@@ -7227,10 +7227,10 @@ _08051C48:
 _08051C4C: .4byte gSaveBlock1
 _08051C50: .4byte gUnknown_03004854
 _08051C54: .4byte 0x0000096c
-	thumb_func_end sub_8051C24
+	thumb_func_end Blender_TrySettingRecord
 
-	thumb_func_start sub_8051C58
-sub_8051C58: @ 8051C58
+	thumb_func_start Blender_PrintBlendingResults
+Blender_PrintBlendingResults: @ 8051C58
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7652,7 +7652,7 @@ _08051FF4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08052006
-	bl sub_8051C24
+	bl Blender_TrySettingRecord
 	movs r0, 0x1
 	b _08052008
 _08052006:
@@ -7666,7 +7666,7 @@ _08052008:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8051C58
+	thumb_func_end Blender_PrintBlendingResults
 
 	thumb_func_start sub_805201C
 sub_805201C: @ 805201C
@@ -7741,8 +7741,8 @@ _080520C4: .4byte gOtherText_Period
 _080520C8: .4byte gUnknown_08216249
 	thumb_func_end sub_805201C
 
-	thumb_func_start sub_80520CC
-sub_80520CC: @ 80520CC
+	thumb_func_start Blender_SortBasedOnPoints
+Blender_SortBasedOnPoints: @ 80520CC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7792,10 +7792,10 @@ _08052118:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80520CC
+	thumb_func_end Blender_SortBasedOnPoints
 
-	thumb_func_start sub_8052124
-sub_8052124: @ 8052124
+	thumb_func_start Blender_SortScores
+Blender_SortScores: @ 8052124
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7894,7 +7894,7 @@ _080521D6:
 	ldrb r1, [r0]
 	mov r0, sp
 	ldr r2, [sp, 0x14]
-	bl sub_80520CC
+	bl Blender_SortBasedOnPoints
 	movs r5, 0
 	mov r4, r10
 	ldr r0, [r4]
@@ -7930,10 +7930,10 @@ _08052218:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8052124
+	thumb_func_end Blender_SortScores
 
-	thumb_func_start sub_8052228
-sub_8052228: @ 8052228
+	thumb_func_start Blender_PrintBlendingRanking
+Blender_PrintBlendingRanking: @ 8052228
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8084,7 +8084,7 @@ _080522B6:
 	add r0, r8
 	movs r1, 0x1
 	bl StartSpriteAnim
-	bl sub_8052124
+	bl Blender_SortScores
 	movs r2, 0
 	mov r8, r2
 	b _0805243C
@@ -8248,7 +8248,7 @@ _080524B0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8052228
+	thumb_func_end Blender_PrintBlendingRanking
 
 	thumb_func_start unref_sub_80524BC
 unref_sub_80524BC: @ 80524BC
