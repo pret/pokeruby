@@ -17,57 +17,63 @@
 #include "task.h"
 #include "trig.h"
 
-struct UnknownStruct1
-{
-    const u8 *unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-};
-
 extern u8 ewram[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
 
+struct ContestMove
+{
+    u8 effect;
+    u8 contestCategory:3;
+    u8 comboStarterId;
+    u8 comboMoves[4];
+};
+
+struct ContestEffect
+{
+    u8 effectType;
+    u8 appeal;
+    u8 jam;
+};
+
+extern const struct ContestMove gContestMoves[];
+extern const struct ContestEffect gContestEffects[];
 extern const struct WindowConfig gWindowConfig_81E6CE4;
 extern const struct WindowConfig gWindowConfig_81E7240;
-extern const struct SpriteSheet gUnknown_08402D80;
-extern const struct SpritePalette gUnknown_08402D88;
+extern const u8 *const gUnknown_083CADD4[];
+extern const u8 *const gMoveDescriptions[];
+extern const u8 gTypeNames[][7];
+extern const u8 *const gUnknown_083CAF70[];
 
 extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 
-struct Struct2017000
+struct LearnMoveStruct
 {
-    u8 unk0;
+    u8 state;
     u8 filler1;
     u8 unk2;
-    u8 unk3[2];
-    //u8 unk4;
-    u8 unk5[16];
-    u8 filler15[3];
+    u8 spriteIDs[20];
+    u8 filler17[1];
     u8 unk18;
     u8 unk19;
-    u8 unk1A;
-    u8 unk1B;
+    u8 numMenuChoices;
+    u8 menuSelection;
     u8 unk1C;
-    u8 unk1D;
+    bool8 unk1D;
     u8 unk1E;
     u8 filler1F;
-    //u16 unk20[4];
-    //u8 filler28[0x2C3-0x28];
-    u16 unk20[20];
+    /*0x020*/ u16 movesToLearn[20];
     u8 filler48[0x52-0x48];
-    //u8 unk52[0x2C3-0x52];
-    u8 unk52[6][0x19];
+    u8 moveNames[6][0x19];
     u8 fillerE8[0x2C3-0xE8];
-    u8 unk2C3;
-    u8 unk2C4;
-    u8 unk2C5;
+    bool8 unk2C3;
+    bool8 showContestInfo;
+    /*0x2C5*/ u8 partyMon;
     u8 unk2C6;
 };
 
-extern struct Struct2017000 *gUnknown_030007B0;
+static struct LearnMoveStruct *sLearnMoveStruct;
 
 const u16 gDexArrows_Pal[] = INCBIN_U16("graphics/pokedex/arrows.gbapal");
 
@@ -79,6 +85,14 @@ const u8 gUnknown_08402CF8[][4] =
     {10,  0, 29,  7},
     { 2, 14, 27, 19},
     {10,  8, 29, 13},
+};
+
+struct UnknownStruct1
+{
+    const u8 *unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
 };
 
 const struct UnknownStruct1 gUnknown_08402D08[][4] =
@@ -212,38 +226,24 @@ const struct SpriteTemplate gSpriteTemplate_8402E08 =
 
 const u8 gString_AkitoMori[] = _("あきと");  // programmer Akito Mori?
 
-const u8 gUnknown_08402E24[7][3] =
-{
-    {11,  1,  1},
-    { 3,  6,  2},
-    {24,  1,  3},
-    { 3, 11,  4},
-    { 5,  4,  5},
-    { 3,  6,  6},
-    { 3, 11,  7},
-};
-
-const u8 gUnknown_08402E39[] = {0, 1, 2, 3};
-const u8 gUnknown_08402E3D[] = {4, 5, 6};
-
 void sub_813269C(u8);
-void sub_81326D8(void);
-void sub_8132870(void);
-void sub_8132908(void);
-void sub_8132FEC(void);
-void sub_8133030(u8);
+void CB2_InitLearnMove(void);
+void CB2_LearnMove(void);
+void LearnMoveMain(void);
+void DrawLearnMoveMenuWindow(void);
+void sub_8133030(bool8);
 u8 sub_81330E8(void);
 void sub_8133140(u8);
 u8 sub_8133248(void);
-void sub_81332A0(void);
+void ClearLearnMoveVars(void);
 void sub_8133358(void);
 void sub_8133558(void);
 void sub_813362C(void);
 void sub_8133800(void);
-void sub_8133AEC(u8, int);
+void sub_8133AEC(bool8, int);
 void sub_8133CA4(void);
 
-void sub_813265C(void)
+void VBlankCB_LearnMove(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -261,23 +261,23 @@ void sub_813269C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sub_81326D8);
+        SetMainCallback2(CB2_InitLearnMove);
         gFieldCallback = sub_8080990;
         DestroyTask(taskId);
     }
 }
 
-void sub_81326D8(void)
+void CB2_InitLearnMove(void)
 {
     REG_DISPCNT = 0;
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    gUnknown_030007B0 = (struct Struct2017000 *)(ewram + 0x17000);
-    sub_81332A0();
-    gUnknown_030007B0->unk2C5 = gSpecialVar_0x8004;
+    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
+    ClearLearnMoveVars();
+    sLearnMoveStruct->partyMon = gSpecialVar_0x8004;
     sub_8133558();
-    SetVBlankCallback(sub_813265C);
+    SetVBlankCallback(VBlankCB_LearnMove);
 
     SetUpWindowConfig(&gWindowConfig_81E7240);
     InitMenuWindow(&gWindowConfig_81E7240);
@@ -300,7 +300,7 @@ void sub_81326D8(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    SetMainCallback2(sub_8132870);
+    SetMainCallback2(CB2_LearnMove);
 }
 
 void sub_81327A4(void)
@@ -308,10 +308,10 @@ void sub_81327A4(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    gUnknown_030007B0 = (struct Struct2017000 *)(ewram + 0x17000);
+    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
     sub_8133558();
-    gUnknown_030007B0->unk2C6 = gSpecialVar_0x8005;
-    SetVBlankCallback(sub_813265C);
+    sLearnMoveStruct->unk2C6 = gSpecialVar_0x8005;
+    SetVBlankCallback(VBlankCB_LearnMove);
 
     SetUpWindowConfig(&gWindowConfig_81E7240);
     InitMenuWindow(&gWindowConfig_81E7240);
@@ -335,26 +335,26 @@ void sub_81327A4(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    SetMainCallback2(sub_8132870);
+    SetMainCallback2(CB2_LearnMove);
 }
 
-void sub_8132870(void)
+void CB2_LearnMove(void)
 {
-    sub_8132908();
-    if (gUnknown_030007B0->unk1D != 0)
+    LearnMoveMain();
+    if (sLearnMoveStruct->unk1D)
     {
-        gUnknown_030007B0->unk1D = 0;
-        sub_814AD7C(0x58, (gUnknown_030007B0->unk18 * 2 + 1) * 8);
+        sLearnMoveStruct->unk1D = FALSE;
+        sub_814AD7C(0x58, (sLearnMoveStruct->unk18 * 2 + 1) * 8);
     }
-    if (gUnknown_030007B0->unk1E != 0)
+    if (sLearnMoveStruct->unk1E != 0)
     {
-        gUnknown_030007B0->unk1E = 0;
+        sLearnMoveStruct->unk1E = 0;
         sub_8133800();
     }
-    if (gUnknown_030007B0->unk2C3 != 0)
+    if (sLearnMoveStruct->unk2C3)
     {
-        sub_8133AEC(gUnknown_030007B0->unk2C4, 1);
-        gUnknown_030007B0->unk2C3 = 0;
+        sub_8133AEC(sLearnMoveStruct->showContestInfo, 1);
+        sLearnMoveStruct->unk2C3 = FALSE;
     }
     RunTasks();
     AnimateSprites();
@@ -368,32 +368,32 @@ void sub_81328E8(const u8 *a)
     MenuPrintMessage(gStringVar4, 3, 15);
 }
 
-void sub_8132908(void)
+void LearnMoveMain(void)
 {
-    switch (gUnknown_030007B0->unk0)
+    switch (sLearnMoveStruct->state)
     {
     case 0:
-        gUnknown_030007B0->unk0++;
-        sub_8132FEC();
-        sub_8133030(0);
+        sLearnMoveStruct->state++;
+        DrawLearnMoveMenuWindow();
+        sub_8133030(FALSE);
         sub_8133800();
         gSprites[1].pos1.x = 0x48;
-        gUnknown_030007B0->unk2C3 = 1;
+        sLearnMoveStruct->unk2C3 = TRUE;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         REG_DISPCNT = 0x1340;
         break;
     case 1:
         if (!gPaletteFade.active)
-            gUnknown_030007B0->unk0 = 4;
+            sLearnMoveStruct->state = 4;
         break;
     case 2:
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->state++;
         break;
     case 3:
-        sub_8133030(0);
+        sub_8133030(FALSE);
         sub_8133800();
-        gUnknown_030007B0->unk2C3 = 1;
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->unk2C3 = TRUE;
+        sLearnMoveStruct->state++;
         gSprites[1].pos1.x = 0x48;
         break;
     case 4:
@@ -403,9 +403,9 @@ void sub_8132908(void)
     case 5:
         sub_8133140(0);
         sub_8133800();
-        gUnknown_030007B0->unk2C3 = 1;
+        sLearnMoveStruct->unk2C3 = TRUE;
         gSprites[1].pos1.x = 0x48;
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->state++;
         break;
     case 6:
         if (sub_8133248() == 0)
@@ -415,34 +415,34 @@ void sub_8132908(void)
         if (MenuUpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
-            gUnknown_030007B0->unk0++;
+            sLearnMoveStruct->state++;
         }
         break;
     case 9:
         {
-            s8 var = ProcessMenuInputNoWrap_();
+            s8 selection = ProcessMenuInputNoWrap_();
 
-            if (var == 0)
+            if (selection == 0)
             {
                 sub_8133CA4();
-                if (GiveMoveToMon(&gPlayerParty[gUnknown_030007B0->unk2C5], gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B]) != 0xFFFF)
+                if (GiveMoveToMon(&gPlayerParty[sLearnMoveStruct->partyMon], sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]) != 0xFFFF)
                 {
                     sub_81328E8(gOtherText_PokeLearnedMove);
                     gSpecialVar_0x8004 = 1;
-                    gUnknown_030007B0->unk0 = 31;
+                    sLearnMoveStruct->state = 31;
                 }
                 else
                 {
-                    gUnknown_030007B0->unk0 = 16;
+                    sLearnMoveStruct->state = 16;
                 }
             }
-            else if (var == -1 || var == 1)
+            else if (selection == -1 || selection == 1)
             {
                 sub_8133CA4();
-                if (gUnknown_030007B0->unk2C4 == 0)
-                    gUnknown_030007B0->unk0 = 3;
-                if (gUnknown_030007B0->unk2C4 == 1)
-                    gUnknown_030007B0->unk0 = 5;
+                if (sLearnMoveStruct->showContestInfo == FALSE)
+                    sLearnMoveStruct->state = 3;
+                if (sLearnMoveStruct->showContestInfo == TRUE)
+                    sLearnMoveStruct->state = 5;
             }
         }
         break;
@@ -450,38 +450,38 @@ void sub_8132908(void)
         if (MenuUpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
-            gUnknown_030007B0->unk0++;
+            sLearnMoveStruct->state++;
         }
         break;
     case 13:
         {
-            s8 r4 = ProcessMenuInputNoWrap_();
+            s8 selection = ProcessMenuInputNoWrap_();
 
-            if (r4 == 0)
+            if (selection == 0)
             {
                 sub_8133CA4();
-                gSpecialVar_0x8004 = r4;
-                gUnknown_030007B0->unk0 = 14;
+                gSpecialVar_0x8004 = selection;
+                sLearnMoveStruct->state = 14;
             }
-            else if (r4 == -1 || r4 == 1)
+            else if (selection == -1 || selection == 1)
             {
                 sub_8133CA4();
-                if (gUnknown_030007B0->unk2C4 == 0)
-                    gUnknown_030007B0->unk0 = 3;
-                if (gUnknown_030007B0->unk2C4 == 1)
-                    gUnknown_030007B0->unk0 = 5;
+                if (sLearnMoveStruct->showContestInfo == FALSE)
+                    sLearnMoveStruct->state = 3;
+                if (sLearnMoveStruct->showContestInfo == TRUE)
+                    sLearnMoveStruct->state = 5;
             }
         }
         break;
     case 16:
         sub_81328E8(gOtherText_DeleteOlderMove);
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->state++;
         break;
     case 17:
         if (MenuUpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
-            gUnknown_030007B0->unk0 = 18;
+            sLearnMoveStruct->state = 18;
         }
         break;
     case 18:
@@ -492,23 +492,23 @@ void sub_8132908(void)
             {
                 sub_8133CA4();
                 sub_81328E8(gOtherText_WhichMoveToForget);
-                gUnknown_030007B0->unk0 = 19;
+                sLearnMoveStruct->state = 19;
             }
             else if (var == -1 || var == 1)
             {
                 sub_8133CA4();
-                gUnknown_030007B0->unk0 = 24;
+                sLearnMoveStruct->state = 24;
             }
         }
         break;
     case 24:
         sub_81328E8(gOtherText_StopLearningMove);
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->state++;
         break;
     case 25:
         if (MenuUpdateWindowText())
         {
-            gUnknown_030007B0->unk0 = 26;
+            sLearnMoveStruct->state = 26;
             DisplayYesNoMenu(21, 7, 1);
         }
         break;
@@ -519,54 +519,54 @@ void sub_8132908(void)
             if (var == 0)
             {
                 sub_8133CA4();
-                gUnknown_030007B0->unk0 = 27;
+                sLearnMoveStruct->state = 27;
             }
             else if (var == -1 || var == 1)
             {
                 sub_8133CA4();
 
                 // What's the point? It gets set to 16, anyway.
-                if (gUnknown_030007B0->unk2C4 == 0)
-                    gUnknown_030007B0->unk0 = 3;
-                if (gUnknown_030007B0->unk2C4 == 1)
-                    gUnknown_030007B0->unk0 = 5;
-                gUnknown_030007B0->unk0 = 16;
+                if (sLearnMoveStruct->showContestInfo == FALSE)
+                    sLearnMoveStruct->state = 3;
+                if (sLearnMoveStruct->showContestInfo == TRUE)
+                    sLearnMoveStruct->state = 5;
+                sLearnMoveStruct->state = 16;
             }
         }
         break;
     case 27:
         if (MenuUpdateWindowText())
         {
-            if (gUnknown_030007B0->unk2C4 == 0)
-                gUnknown_030007B0->unk0 = 3;
-            if (gUnknown_030007B0->unk2C4 == 1)
-                gUnknown_030007B0->unk0 = 5;
+            if (sLearnMoveStruct->showContestInfo == FALSE)
+                sLearnMoveStruct->state = 3;
+            if (sLearnMoveStruct->showContestInfo == TRUE)
+                sLearnMoveStruct->state = 5;
         }
         break;
     case 19:
         if (MenuUpdateWindowText())
         {
-            gUnknown_030007B0->unk0 = 20;
+            sLearnMoveStruct->state = 20;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         }
         break;
     case 20:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, gUnknown_030007B0->unk2C5, gPlayerPartyCount - 1, sub_81327A4, gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B]);
-            gUnknown_030007B0->unk0 = 28;
+            sub_809D9F0(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
+            sLearnMoveStruct->state = 28;
         }
         break;
     case 21:
         if (MenuUpdateWindowText())
-            gUnknown_030007B0->unk0 = 14;
+            sLearnMoveStruct->state = 14;
         break;
     case 22:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         break;
     case 14:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        gUnknown_030007B0->unk0++;
+        sLearnMoveStruct->state++;
         break;
     case 15:
         if (!gPaletteFade.active)
@@ -574,35 +574,35 @@ void sub_8132908(void)
         break;
     case 28:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-        gUnknown_030007B0->unk0++;
-        sub_8132FEC();
+        sLearnMoveStruct->state++;
+        DrawLearnMoveMenuWindow();
         sub_8133800();
-        if (gUnknown_030007B0->unk2C4 == 0)
-            sub_8133030(1);
-        if (gUnknown_030007B0->unk2C4 == 1)
+        if (sLearnMoveStruct->showContestInfo == FALSE)
+            sub_8133030(TRUE);
+        if (sLearnMoveStruct->showContestInfo == TRUE)
         {
             gSprites[1].pos1.x = 0x48;
             sub_8133140(1);
         }
-        sub_8133AEC(gUnknown_030007B0->unk2C4, 1);
+        sub_8133AEC(sLearnMoveStruct->showContestInfo, 1);
         break;
     case 29:
         if (!gPaletteFade.active)
         {
-            if (gUnknown_030007B0->unk2C6 == 4)
+            if (sLearnMoveStruct->unk2C6 == 4)
             {
-                gUnknown_030007B0->unk0 = 24;
+                sLearnMoveStruct->state = 24;
             }
             else
             {
-                u16 moveId = GetMonData(&gPlayerParty[gUnknown_030007B0->unk2C5], MON_DATA_MOVE1 + gUnknown_030007B0->unk2C6);
+                u16 moveId = GetMonData(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_MOVE1 + sLearnMoveStruct->unk2C6);
 
                 StringCopy(gStringVar3, gMoveNames[moveId]);
-                RemoveMonPPBonus(&gPlayerParty[gUnknown_030007B0->unk2C5], gUnknown_030007B0->unk2C6);
-                SetMonMoveSlot(&gPlayerParty[gUnknown_030007B0->unk2C5], gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B], gUnknown_030007B0->unk2C6);
-                StringCopy(gStringVar2, gMoveNames[gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B]]);
+                RemoveMonPPBonus(&gPlayerParty[sLearnMoveStruct->partyMon], sLearnMoveStruct->unk2C6);
+                SetMonMoveSlot(&gPlayerParty[sLearnMoveStruct->partyMon], sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection], sLearnMoveStruct->unk2C6);
+                StringCopy(gStringVar2, gMoveNames[sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]]);
                 sub_81328E8(gOtherText_ForgotMove123);
-                gUnknown_030007B0->unk0 = 30;
+                sLearnMoveStruct->state = 30;
                 gSpecialVar_0x8004 = 1;
             }
         }
@@ -615,7 +615,7 @@ void sub_8132908(void)
 #else
             sub_81328E8(deuOtherText_ForgotAndLearned);
 #endif
-            gUnknown_030007B0->unk0 = 31;
+            sLearnMoveStruct->state = 31;
             PlayFanfare(BGM_FANFA1);
         }
         break;
@@ -623,24 +623,24 @@ void sub_8132908(void)
         if (MenuUpdateWindowText())
         {
             PlayFanfare(BGM_FANFA1);
-            gUnknown_030007B0->unk0 = 32;
+            sLearnMoveStruct->state = 32;
         }
         break;
     case 32:
         if (IsFanfareTaskInactive())
-            gUnknown_030007B0->unk0 = 33;
+            sLearnMoveStruct->state = 33;
         break;
     case 33:
         if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            gUnknown_030007B0->unk0 = 14;
+            sLearnMoveStruct->state = 14;
         }
         break;
     }
 }
 
-void sub_8132FEC(void)
+void DrawLearnMoveMenuWindow(void)
 {
     u32 i;
 
@@ -660,53 +660,50 @@ void sub_8133030(bool8 a)
 {
     s32 i;
 
-    gSprites[gUnknown_030007B0->unk3[0]].invisible = FALSE;
-    gSprites[gUnknown_030007B0->unk3[1]].invisible = FALSE;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].invisible = FALSE;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].invisible = FALSE;
+
     for (i = 0; i < 16; i++)
-    {
-        // Hmm...
-        gSprites[*((u8 *)gUnknown_030007B0 + i + 7)].invisible = TRUE;
-    }
+        gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = TRUE;
+
     for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
     {
         sub_8072C74(gTileBuffer, gUnknown_08402D08[0][i].unk0, 64, 2);
         MenuPrint(gTileBuffer, gUnknown_08402D08[0][i].unk4, gUnknown_08402D08[0][i].unk5);
     }
+
     if (!a)
-    {
         sub_8072AB0(gOtherText_TeachWhichMove, 24, 120, 192, 32, 1);
-    }
 }
 
 u8 sub_81330E8(void)
 {
-    u32 r4 = ((gMain.newKeys & 0x30) != 0);
+    u32 result = (gMain.newKeys & DPAD_LEFT) || (gMain.newKeys & DPAD_RIGHT);
 
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR
-     && (gMain.newKeys & 0x300))
-        r4++;
+     && ((gMain.newKeys & L_BUTTON) || (gMain.newKeys & R_BUTTON)))
+        result++;
 
-    if (r4 != 0)
+    if (result != 0)
     {
         PlaySE(SE_SELECT);
-        gUnknown_030007B0->unk0 = 5;
-        gUnknown_030007B0->unk2C4 = 1;
+        sLearnMoveStruct->state = 5;
+        sLearnMoveStruct->showContestInfo = TRUE;
     }
 
-    return r4;
+    return result;
 }
 
 void sub_8133140(bool8 a)
 {
     s32 i;
 
-    gSprites[gUnknown_030007B0->unk3[0]].invisible = FALSE;
-    gSprites[gUnknown_030007B0->unk3[1]].invisible = FALSE;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].invisible = FALSE;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].invisible = FALSE;
+
     for (i = 0; i < 16; i++)
-    {
-        // Hmm...
-        gSprites[*((u8 *)gUnknown_030007B0 + i + 7)].invisible = FALSE;
-    }
+        gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = FALSE;
+
     for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
     {
         sub_8072C74(gTileBuffer, gUnknown_08402D08[1][i].unk0, 64, 2);
@@ -720,45 +717,46 @@ void sub_8133140(bool8 a)
               gUnknown_08402D08[1][i].unk5 + 3);
         }
     }
+
     if (!a)
         sub_8072AB0(gOtherText_TeachWhichMove, 24, 120, 192, 32, 1);
 }
 
 u8 sub_8133248(void)
 {
-    u32 r4 = ((gMain.newKeys & 0x30) != 0);
+    u32 result = (gMain.newKeys & DPAD_LEFT) || (gMain.newKeys & DPAD_RIGHT);
 
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR
-     && (gMain.newKeys & 0x300))
-        r4++;
+     && ((gMain.newKeys & L_BUTTON) || (gMain.newKeys & R_BUTTON)))
+        result++;
 
-    if (r4 != 0)
+    if (result != 0)
     {
         PlaySE(SE_SELECT);
-        gUnknown_030007B0->unk0 = 3;
-        gUnknown_030007B0->unk2C4 = 0;
+        sLearnMoveStruct->state = 3;
+        sLearnMoveStruct->showContestInfo = FALSE;
     }
 
-    return r4;
+    return result;
 }
 
-void sub_81332A0(void)
+void ClearLearnMoveVars(void)
 {
     s32 i;
 
-    gUnknown_030007B0->unk0 = 0;
-    gUnknown_030007B0->unk2 = 0;
-    gUnknown_030007B0->unk19 = 0;
-    gUnknown_030007B0->unk18 = 0;
-    gUnknown_030007B0->unk1C = 0;
-    gUnknown_030007B0->unk1A = 0;
-    gUnknown_030007B0->unk1B = 0;
-    gUnknown_030007B0->unk1D = 0;
-    gUnknown_030007B0->unk1E = 0;
-    gUnknown_030007B0->unk2C3 = 0;
-    gUnknown_030007B0->unk2C4 = 0;
+    sLearnMoveStruct->state = 0;
+    sLearnMoveStruct->unk2 = 0;
+    sLearnMoveStruct->unk19 = 0;
+    sLearnMoveStruct->unk18 = 0;
+    sLearnMoveStruct->unk1C = 0;
+    sLearnMoveStruct->numMenuChoices = 0;
+    sLearnMoveStruct->menuSelection = 0;
+    sLearnMoveStruct->unk1D = FALSE;
+    sLearnMoveStruct->unk1E = 0;
+    sLearnMoveStruct->unk2C3 = FALSE;
+    sLearnMoveStruct->showContestInfo = FALSE;
     for (i = 0; i < 20; i++)
-        gUnknown_030007B0->unk20[i] = 0;
+        sLearnMoveStruct->movesToLearn[i] = 0;
 }
 
 void sub_8133300(struct Sprite *sprite)
@@ -779,46 +777,42 @@ void sub_8133300(struct Sprite *sprite)
     sprite->data1++;
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_8402D90;
-extern const struct SpriteTemplate gSpriteTemplate_8402DC0;
-extern const struct SpriteTemplate gSpriteTemplate_8402E08;
-
 void sub_8133358(void)
 {
     s32 i;
 
-    gUnknown_030007B0->unk3[0] = CreateSprite(&gSpriteTemplate_8402D90, 8, 16, 0);
-    gSprites[gUnknown_030007B0->unk3[0]].data0 = 1;
-    gSprites[gUnknown_030007B0->unk3[0]].data2 = -1;
+    sLearnMoveStruct->spriteIDs[0] = CreateSprite(&gSpriteTemplate_8402D90, 8, 16, 0);
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data0 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data2 = -1;
 
-    gUnknown_030007B0->unk3[1] = CreateSprite(&gSpriteTemplate_8402D90, 72, 16, 0);
-    StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[1]], 1);
-    gSprites[gUnknown_030007B0->unk3[1]].data0 = 1;
-    gSprites[gUnknown_030007B0->unk3[1]].data2 = 1;
+    sLearnMoveStruct->spriteIDs[1] = CreateSprite(&gSpriteTemplate_8402D90, 72, 16, 0);
+    StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[1]], 1);
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data0 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data2 = 1;
 
-    gUnknown_030007B0->unk3[2] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 4, 0);
-    StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[2]], 1);
-    gSprites[gUnknown_030007B0->unk3[2]].data0 = 2;
-    gSprites[gUnknown_030007B0->unk3[2]].data2 = -1;
+    sLearnMoveStruct->spriteIDs[2] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 4, 0);
+    StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[2]], 1);
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data0 = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data2 = -1;
 
-    gUnknown_030007B0->unk3[3] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 60, 0);
-    gSprites[gUnknown_030007B0->unk3[3]].data0 = 2;
-    gSprites[gUnknown_030007B0->unk3[3]].data2 = 1;
+    sLearnMoveStruct->spriteIDs[3] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 60, 0);
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data0 = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data2 = 1;
 
     for (i = 0; i < 8; i++)
     {
-        gUnknown_030007B0->unk3[i + 4] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x34, 0);
-        StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 2);
+        sLearnMoveStruct->spriteIDs[i + 4] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x34, 0);
+        StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 4]], 2);
     }
 
     for (i = 0; i < 8; i++)
     {
-        gUnknown_030007B0->unk3[i + 12] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x5C, 0);
-        StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 2);
+        sLearnMoveStruct->spriteIDs[i + 12] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x5C, 0);
+        StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 12]], 2);
     }
 
     for (i = 0; i < 20; i++)
-        gSprites[gUnknown_030007B0->unk3[i]].invisible = TRUE;
+        gSprites[sLearnMoveStruct->spriteIDs[i]].invisible = TRUE;
 
     CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 18);
 }
@@ -828,67 +822,67 @@ void sub_8133558(void)
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
-    gUnknown_030007B0->unk1A = GetMoveRelearnerMoves(&gPlayerParty[gUnknown_030007B0->unk2C5], gUnknown_030007B0->unk20);
-    for (i = 0; i < gUnknown_030007B0->unk1A; i++)
-        StringCopy(gUnknown_030007B0->unk52[i], gMoveNames[gUnknown_030007B0->unk20[i]]);
-    GetMonData(&gPlayerParty[gUnknown_030007B0->unk2C5], MON_DATA_NICKNAME, nickname);
+    sLearnMoveStruct->numMenuChoices = GetMoveRelearnerMoves(&gPlayerParty[sLearnMoveStruct->partyMon], sLearnMoveStruct->movesToLearn);
+    for (i = 0; i < sLearnMoveStruct->numMenuChoices; i++)
+        StringCopy(sLearnMoveStruct->moveNames[i], gMoveNames[sLearnMoveStruct->movesToLearn[i]]);
+    GetMonData(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_NICKNAME, nickname);
     StringCopy10(gStringVar1, nickname);
-    StringCopy(gUnknown_030007B0->unk52[gUnknown_030007B0->unk1A], gUnknownText_Exit);
-    gUnknown_030007B0->unk1A++;
+    StringCopy(sLearnMoveStruct->moveNames[sLearnMoveStruct->numMenuChoices], gUnknownText_Exit);
+    sLearnMoveStruct->numMenuChoices++;
 }
 
-void sub_813360C(s8 a)
+void sub_813360C(s8 delta)
 {
-    gUnknown_030007B0->unk1C = gUnknown_030007B0->unk18;
-    gUnknown_030007B0->unk18 += a;
-    gUnknown_030007B0->unk1D = 1;
+    sLearnMoveStruct->unk1C = sLearnMoveStruct->unk18;
+    sLearnMoveStruct->unk18 += delta;
+    sLearnMoveStruct->unk1D = TRUE;
 }
 
 void sub_813362C(void)
 {
-    if (gMain.newAndRepeatedKeys & 0x40)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (gUnknown_030007B0->unk1B != 0)
+        if (sLearnMoveStruct->menuSelection != 0)
         {
             PlaySE(SE_SELECT);
-            gUnknown_030007B0->unk1B--;
-            gUnknown_030007B0->unk2C3 = 1;
-            if (gUnknown_030007B0->unk18 != 0)
+            sLearnMoveStruct->menuSelection--;
+            sLearnMoveStruct->unk2C3 = TRUE;
+            if (sLearnMoveStruct->unk18 != 0)
             {
                 sub_813360C(-1);
             }
-            else if (gUnknown_030007B0->unk19 != 0)
+            else if (sLearnMoveStruct->unk19 != 0)
             {
-                gUnknown_030007B0->unk19--;
-                gUnknown_030007B0->unk1E++;
+                sLearnMoveStruct->unk19--;
+                sLearnMoveStruct->unk1E++;
             }
         }
     }
-    else if (gMain.newAndRepeatedKeys & 0x80)
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (gUnknown_030007B0->unk1B < gUnknown_030007B0->unk1A - 1)
+        if (sLearnMoveStruct->menuSelection < sLearnMoveStruct->numMenuChoices - 1)
         {
             PlaySE(SE_SELECT);
-            gUnknown_030007B0->unk1B++;
-            gUnknown_030007B0->unk2C3 = 1;
-            if (gUnknown_030007B0->unk18 != 2)
+            sLearnMoveStruct->menuSelection++;
+            sLearnMoveStruct->unk2C3 = TRUE;
+            if (sLearnMoveStruct->unk18 != 2)
             {
                 sub_813360C(1);
             }
-            else if (gUnknown_030007B0->unk19 != gUnknown_030007B0->unk1A - 3)
+            else if (sLearnMoveStruct->unk19 != sLearnMoveStruct->numMenuChoices - 3)
             {
-                gUnknown_030007B0->unk19++;
-                gUnknown_030007B0->unk1E++;
+                sLearnMoveStruct->unk19++;
+                sLearnMoveStruct->unk1E++;
             }
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (gUnknown_030007B0->unk1B != gUnknown_030007B0->unk1A - 1)
+        if (sLearnMoveStruct->menuSelection != sLearnMoveStruct->numMenuChoices - 1)
         {
-            gUnknown_030007B0->unk0 = 8;
-            StringCopy(gStringVar2, gUnknown_030007B0->unk52[gUnknown_030007B0->unk1B]);
+            sLearnMoveStruct->state = 8;
+            StringCopy(gStringVar2, sLearnMoveStruct->moveNames[sLearnMoveStruct->menuSelection]);
             StringExpandPlaceholders(gStringVar4, gOtherText_TeachSpecificMove);
             MenuPrintMessage(gStringVar4, 3, 15);
         }
@@ -896,92 +890,84 @@ void sub_813362C(void)
         {
             StringExpandPlaceholders(gStringVar4, gOtherText_GiveUpTeachingMove);
             MenuPrintMessage(gStringVar4, 3, 15);
-            gUnknown_030007B0->unk0 = 12;
+            sLearnMoveStruct->state = 12;
         }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gUnknown_030007B0->unk0 = 12;
+        sLearnMoveStruct->state = 12;
         StringExpandPlaceholders(gStringVar4, gOtherText_GiveUpTeachingMove);
         MenuPrintMessage(gStringVar4, 3, 15);
     }
-    if (gUnknown_030007B0->unk1A > 3)
+    if (sLearnMoveStruct->numMenuChoices > 3)
     {
         gSprites[2].invisible = FALSE;
         gSprites[3].invisible = FALSE;
-        if (gUnknown_030007B0->unk19 == 0)
+        if (sLearnMoveStruct->unk19 == 0)
             gSprites[2].invisible = TRUE;
-        else if (gUnknown_030007B0->unk19 == gUnknown_030007B0->unk1A - 3)
+        else if (sLearnMoveStruct->unk19 == sLearnMoveStruct->numMenuChoices - 3)
             gSprites[3].invisible = TRUE;
     }
 }
 
-extern const u8 *const gUnknown_083CAF70[];
-
-struct ContestMove
-{
-    u8 effect;
-    u8 contestCategory:3;
-    u8 comboStarterId;
-    u8 comboMoves[4];
-};
-
-extern const struct ContestMove gContestMoves[];
-extern const u8 gTypeNames[][7];
-
 void sub_8133800(void)
 {
-    u8 r6 = gUnknown_030007B0->unk19;
+    u8 r6 = sLearnMoveStruct->unk19;
     u8 *str = gTileBuffer;
     s32 i;
 
     for (i = 0; i < 3; i++)
     {
-        if (r6 >= gUnknown_030007B0->unk1A)
+        if (r6 >= sLearnMoveStruct->numMenuChoices)
         {
             str = sub_8072C74(str, gEmptyString_81E72B0, 0x90, 0);
         }
-        else if (r6 == gUnknown_030007B0->unk1A - 1)
+        else if (r6 == sLearnMoveStruct->numMenuChoices - 1)
         {
             str = sub_8072C74(str, gUnknownText_Exit, 0x90, 0);
         }
         else
         {
-            u16 moveId = gUnknown_030007B0->unk20[r6];
+            u16 moveId = sLearnMoveStruct->movesToLearn[r6];
 
-            if (gUnknown_030007B0->unk2C4 != 0)
+            if (sLearnMoveStruct->showContestInfo)
                 str = sub_8072C74(str, gUnknown_083CAF70[gContestMoves[moveId].contestCategory], 0x27, 0);
             else
                 str = sub_8072C74(str, gTypeNames[gBattleMoves[moveId].type], 0x27, 0);
 
-            str = sub_8072C74(str, gUnknown_030007B0->unk52[r6], 0x72, 0);
+            str = sub_8072C74(str, sLearnMoveStruct->moveNames[r6], 0x72, 0);
 
-            str[0] = 0xCA;
-            str[1] = 0xCA;
-            str[2] = 0xBA;
+            str[0] = CHAR_P;
+            str[1] = CHAR_P;
+            str[2] = CHAR_SLASH;
             str += 3;
 
             str = sub_8072C14(str, gBattleMoves[moveId].pp, 0x90, 0);
         }
-        *str++ = 0xFE;
+        *str++ = CHAR_NEWLINE;
         r6++;
     }
-    *str = 0xFF;
+    *str = EOS;
     MenuPrint(gTileBuffer, 11, 1);
     sub_813360C(0);
 }
 
-struct ContestEffect
+const u8 gUnknown_08402E24[7][3] =
 {
-    u8 effectType;
-    u8 appeal;
-    u8 jam;
+    {11,  1,  1},
+    { 3,  6,  2},
+    {24,  1,  3},
+    { 3, 11,  4},
+    { 5,  4,  5},
+    { 3,  6,  6},
+    { 3, 11,  7},
 };
 
-extern const struct ContestEffect gContestEffects[];
+const u8 gUnknown_08402E39[] = {0, 1, 2, 3};
+const u8 gUnknown_08402E3D[] = {4, 5, 6};
 
-void sub_8133940(u16 a, const u8 *b)
+void PrintMoveInfo(u16 moveId, const u8 *b)
 {
     u8 str[0x34];
     u8 numHearts;
@@ -993,75 +979,71 @@ void sub_8133940(u16 a, const u8 *b)
     case 1:
         break;
     case 2:
-        if (gBattleMoves[a].power < 2)
+        if (gBattleMoves[moveId].power < 2)
             sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
         else
-            sub_8072C14(str, gBattleMoves[a].power, 32, 2);
+            sub_8072C14(str, gBattleMoves[moveId].power, 32, 2);
         MenuPrint(str, b[0], b[1]);
         break;
     case 4:
-        if (gBattleMoves[a].accuracy == 0)
+        if (gBattleMoves[moveId].accuracy == 0)
             sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
         else
-            sub_8072C14(str, gBattleMoves[a].accuracy, 32, 2);
+            sub_8072C14(str, gBattleMoves[moveId].accuracy, 32, 2);
         MenuPrint(str, b[0], b[1]);
         break;
     case 6:
         MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
-        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
+        numHearts = gContestEffects[gContestMoves[moveId].effect].appeal / 10;
         if (numHearts == 255)
             numHearts = 0;
         for (i = 0; i < 8; i++)
         {
             if (i < numHearts)
-                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 1);
+                StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 4]], 1);
             else
-                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 0);
+                StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 4]], 0);
         }
         break;
     case 7:
         MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
-        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
+        numHearts = gContestEffects[gContestMoves[moveId].effect].jam / 10;
         if (numHearts == 255)
             numHearts = 0;
         for (i = 0; i < 8; i++)
         {
             if (i < numHearts)
-                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 3);
+                StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 12]], 3);
             else
-                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 2);
+                StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[i + 12]], 2);
         }
         break;
     }
 }
 
-extern const u8 *const gUnknown_083CADD4[];
-extern const u8 *const gMoveDescriptions[];
-
-void sub_8133AEC(u8 a, int unused)
+void sub_8133AEC(bool8 contestInfo, int unused)
 {
     u16 i;
 
-    if (gUnknown_030007B0->unk1B != gUnknown_030007B0->unk1A - 1)
+    if (sLearnMoveStruct->menuSelection != sLearnMoveStruct->numMenuChoices - 1)
     {
-        u16 r5 = gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B];
+        u16 moveId = sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection];
 
-        if (a != 0)
+        if (contestInfo)
         {
             for (i = 0; i < 16; i++)
-                gSprites[gUnknown_030007B0->unk3[i + 4]].invisible = FALSE;
+                gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = FALSE;
             for (i = 0; i < 3; i++)
-                sub_8133940(r5, gUnknown_08402E24[gUnknown_08402E3D[i]]);
-            sub_8072AB0(gUnknown_083CADD4[gContestMoves[r5].effect], 0x58, 0x48, 0x90, 32, 1);
+                PrintMoveInfo(moveId, gUnknown_08402E24[gUnknown_08402E3D[i]]);
+            sub_8072AB0(gUnknown_083CADD4[gContestMoves[moveId].effect], 0x58, 0x48, 0x90, 32, 1);
         }
-        //_08133BA0
         else
         {
             u8 var;
 
             for (i = 0; i < 4; i++)
-                sub_8133940(r5, gUnknown_08402E24[gUnknown_08402E39[i]]);
-            var = sub_8072A18(gMoveDescriptions[r5 - 1], 0x58, 0x48, 0x90, 1);
+                PrintMoveInfo(moveId, gUnknown_08402E24[gUnknown_08402E39[i]]);
+            var = sub_8072A18(gMoveDescriptions[moveId - 1], 0x58, 0x48, 0x90, 1);
             if (var < 2)
             {
                 u8 r1 = var * 2 + 9;
@@ -1072,12 +1054,12 @@ void sub_8133AEC(u8 a, int unused)
     }
     else
     {
-        if (a != 0)
+        if (contestInfo)
         {
             MenuZeroFillWindowRect(gUnknown_08402E24[5][0], gUnknown_08402E24[5][1], gUnknown_08402E24[5][0], gUnknown_08402E24[5][1] + 1);
             MenuZeroFillWindowRect(gUnknown_08402E24[6][0], gUnknown_08402E24[6][1], gUnknown_08402E24[6][0], gUnknown_08402E24[6][1] + 1);
             for (i = 0; i < 16; i++)
-                gSprites[gUnknown_030007B0->unk3[i + 4]].invisible = TRUE;
+                gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = TRUE;
         }
         else
         {
@@ -1091,5 +1073,5 @@ void sub_8133AEC(u8 a, int unused)
 void sub_8133CA4(void)
 {
     MenuZeroFillWindowRect(21, 7, 27, 12);
-    sub_8133AEC(gUnknown_030007B0->unk2C4, 0);
+    sub_8133AEC(sLearnMoveStruct->showContestInfo, 0);
 }

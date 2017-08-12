@@ -126,10 +126,10 @@ gUnknown_03000748: @ 3000748
 
 @ learn_move
 
-	.align 2
-gUnknown_030007B0: @ 30007B0
-	.space 0x4
-
+@	.align 2
+@sLearnMoveStruct: @ 30007B0
+@	.space 0x4
+    .include "src/learn_move.o"
 	.include "src/player_pc.o"
 	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
