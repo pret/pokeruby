@@ -97,6 +97,135 @@ const struct UnknownStruct1 gUnknown_08402D08[][4] =
     },
 };
 
+// XXX: What are these for?
+const u32 unkDataFF00FFEF = 0xFF00FFEF;
+const u8 *const gTileBuffer_ = gTileBuffer;
+
+const struct OamData gOamData_8402D50 = {.shape = 0};
+const struct OamData gOamData_8402D58 = {.shape = 2};
+const struct OamData gOamData_8402D60 = {.shape = 1};
+
+const union AnimCmd gSpriteAnim_8402D68[] =
+{
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_8402D70[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_8402D78[] =
+{
+    gSpriteAnim_8402D68,
+    gSpriteAnim_8402D70,
+};
+
+const struct SpriteSheet gUnknown_08402D80 = {gDexArrows_Gfx, sizeof(gDexArrows_Gfx), 5525};
+const struct SpritePalette gUnknown_08402D88 = {gDexArrows_Pal, 5526};
+
+void sub_8133300(struct Sprite *);
+const struct SpriteTemplate gSpriteTemplate_8402D90 =
+{
+    .tileTag = 5525,
+    .paletteTag = 5526,
+    .oam = &gOamData_8402D58,
+    .anims = gSpriteAnimTable_8402D78,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8133300,
+};
+
+const union AnimCmd gSpriteAnim_8402DA8[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_8402DB0[] =
+{
+    ANIMCMD_FRAME(6, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_8402DB8[] =
+{
+    gSpriteAnim_8402DA8,
+    gSpriteAnim_8402DB0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_8402DC0 =
+{
+    .tileTag = 5525,
+    .paletteTag = 5526,
+    .oam = &gOamData_8402D60,
+    .anims = gSpriteAnimTable_8402DB8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8133300,
+};
+
+const union AnimCmd gSpriteAnim_8402DD8[] =
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_8402DE0[] =
+{
+    ANIMCMD_FRAME(9, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_8402DE8[] =
+{
+    ANIMCMD_FRAME(10, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_8402DF0[] =
+{
+    ANIMCMD_FRAME(11, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_8402DF8[] =
+{
+    gSpriteAnim_8402DD8,
+    gSpriteAnim_8402DE0,
+    gSpriteAnim_8402DE8,
+    gSpriteAnim_8402DF0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_8402E08 =
+{
+    .tileTag = 5525,
+    .paletteTag = 5526,
+    .oam = &gOamData_8402D50,
+    .anims = gSpriteAnimTable_8402DF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8133300,
+};
+
+const u8 gString_AkitoMori[] = _("あきと");  // programmer Akito Mori?
+
+const u8 gUnknown_08402E24[7][3] =
+{
+    {11,  1,  1},
+    { 3,  6,  2},
+    {24,  1,  3},
+    { 3, 11,  4},
+    { 5,  4,  5},
+    { 3,  6,  6},
+    { 3, 11,  7},
+};
+
+const u8 gUnknown_08402E39[] = {0, 1, 2, 3};
+const u8 gUnknown_08402E3D[] = {4, 5, 6};
+
 void sub_813269C(u8);
 void sub_81326D8(void);
 void sub_8132870(void);
@@ -905,10 +1034,6 @@ void sub_8133940(u16 a, const u8 *b)
         break;
     }
 }
-
-extern const u8 gUnknown_08402E24[][3];
-extern const u8 gUnknown_08402E3D[];
-extern const u8 gUnknown_08402E39[];
 
 extern const u8 *const gUnknown_083CADD4[];
 extern const u8 *const gMoveDescriptions[];

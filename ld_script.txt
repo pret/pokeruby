@@ -454,7 +454,6 @@ SECTIONS {
         data/battle_anim_81258BC.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
         src/learn_move.o(.rodata);
-        data/learn_move.o(.rodata);
         src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
