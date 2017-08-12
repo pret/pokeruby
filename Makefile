@@ -40,9 +40,9 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/misc,/scene,/pokemon,/engine}}))
 
-C_SRCS := $(wildcard src/*.c)
+C_SRCS := $(wildcard src/*/*.c) $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
@@ -90,17 +90,17 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libc.o: CFLAGS := -O2
+%src/engine/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/engine/libc.o: CFLAGS := -O2
 
-%src/siirtc.o: CFLAGS := -mthumb-interwork
+%src/engine/siirtc.o: CFLAGS := -mthumb-interwork
 
-%src/agb_flash.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+%src/engine/agb_flash.o: CFLAGS := -O -mthumb-interwork
+%src/engine/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+%src/engine/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-%src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/engine/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/engine/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
@@ -113,7 +113,7 @@ $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
-build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
+build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/**/$$(*F).c)
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
@@ -126,9 +126,9 @@ $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
 build/$1/%.o : %.c $$$$(c_dep)
-	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
-	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
-	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
+	$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
+	$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
+	printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
 	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
 
 $$($1_ASM_OBJS): VERSION := $2

@@ -1,9 +1,9 @@
-	.include "src/main.o"
-	.include "src/sprite.o"
-	.include "src/text.o"
-	.include "src/string_util.o"
-	.include "src/link.o"
-	.include "src/rtc.o"
+	.include "src/engine/main.o"
+	.include "src/engine/sprite.o"
+	.include "src/engine/text.o"
+	.include "src/engine/string_util.o"
+	.include "src/engine/link.o"
+	.include "src/engine/rtc.o"
 
 @ daycare
 
@@ -54,38 +54,38 @@ gUnknown_0300055C: @ 300055C
 gUnknown_03000560: @ 3000560
 	.space 0x1C
 
-	.include "src/play_time.o"
-	.include "src/rom4.o"
+	.include "src/engine/play_time.o"
+	.include "src/misc/rom4.o"
 
 	@ unused variable?
 	.align 2
 	.space 0x4
 
-	.include "src/field_camera.o"
-	.include "src/field_map_obj.o"
-	.include "src/field_message_box.o"
-	.include "src/text_window.o"
-	.include "src/script.o"
-	.include "src/start_menu.o"
-	.include "src/menu.o"
-	.include "src/tileset_anim.o"
-	.include "src/sound.o"
+	.include "src/field/field_camera.o"
+	.include "src/field/field_map_obj.o"
+	.include "src/field/field_message_box.o"
+	.include "src/engine/text_window.o"
+	.include "src/engine/script.o"
+	.include "src/field/start_menu.o"
+	.include "src/engine/menu.o"
+	.include "src/engine/tileset_anim.o"
+	.include "src/engine/sound.o"
 
 @ field_weather
 
 gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
-	.include "src/field_effect.o"
-	.include "src/item_menu.o"
+	.include "src/field/field_effect.o"
+	.include "src/field/item_menu.o"
 
 @ shop
 
 gUnknown_03000708: @ 3000708
 	.space 0x10
 
-	.include "src/record_mixing.o"
-	.include "src/tv.o"
+	.include "src/engine/record_mixing.o"
+	.include "src/field/tv.o"
 
 	@ unused variable?
 	.align 2
@@ -114,15 +114,15 @@ gUnknown_03000744: @ 3000744
 gUnknown_03000748: @ 3000748
 	.space 0x4
 
-	.include "src/menu_helpers.o"
-	.include "src/contest_painting.o"
-	.include "src/pokeblock.o"
+	.include "src/field/menu_helpers.o"
+	.include "src/scene/contest_painting.o"
+	.include "src/field/pokeblock.o"
 
 	@ unused variable?
 	.align 2
 	.space 0x4
 
-	.include "src/field_specials.o"
+	.include "src/field/field_specials.o"
 
 @ learn_move
 
@@ -130,9 +130,9 @@ gUnknown_03000748: @ 3000748
 gUnknown_030007B0: @ 30007B0
 	.space 0x4
 
-	.include "src/player_pc.o"
+	.include "src/field/player_pc.o"
 	.include "asm/m4a_1.o"
-	.include "src/agb_flash.o"
-	.include "src/siirtc.o"
+	.include "src/engine/agb_flash.o"
+	.include "src/engine/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
