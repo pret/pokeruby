@@ -34,8 +34,13 @@
 #define STATUS_FREEZE           0x20
 #define STATUS_PARALYSIS        0x40
 #define STATUS_TOXIC_POISON     0x80
+#define STATUS_TOXIC_COUNTER    0xF00
+
+#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
+#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
 
 #define STATUS2_CONFUSION           0x00000007
+#define STATUS2_FLINCHED            0x00000008
 #define STATUS2_UPROAR              0x00000070
 #define STATUS2_BIDE                0x00000300  //two bits 0x100 0x200
 #define STATUS2_LOCK_CONFUSE        0x00000C00
@@ -71,6 +76,8 @@
 #define STATUS3_MUDSPORT                0x10000
 #define STATUS3_WATERSPORT              0x20000
 #define STATUS3_UNDERWATER              0x40000
+#define STATUS3_INTIMIDATE_POKES        0x80000
+#define STATUS3_TRACE                   0x100000
 
 #define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
 
@@ -87,8 +94,9 @@
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_x80000                0x00080000
+#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
 #define HITMARKER_x100000               0x00100000
+#define HITMARKER_x200000               0x00200000
 #define HITMARKER_x400000               0x00400000
 #define HITMARKER_x800000               0x00800000
 #define HITMARKER_GRUDGE                0x01000000
@@ -99,11 +107,46 @@
 
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
+#define SIDE_STATUS_X4               (1 << 2)
 #define SIDE_STATUS_SPIKES           (1 << 4)
 #define SIDE_STATUS_SAFEGUARD        (1 << 5)
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+
+#define ABILITYEFFECT_ON_SWITCHIN         0x0
+#define ABILITYEFFECT_ENDTURN             0x1
+#define ABILITYEFFECT_MOVES_BLOCK         0x2
+#define ABILITYEFFECT_ABSORBING           0x3
+#define ABILITYEFFECT_CONTACT             0x4
+#define ABILITYEFFECT_IMMUNITY            0x5
+#define ABILITYEFFECT_FORECAST            0x6
+#define ABILITYEFFECT_SYNCHRONIZE         0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
+#define ABILITYEFFECT_INTIMIDATE1         0x9
+#define ABILITYEFFECT_INTIMIDATE2         0xA
+#define ABILITYEFFECT_TRACE               0xB
+#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
+#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
+#define ABILITYEFFECT_FIELD_SPORT         0xE
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
+#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
+#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+
+#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
+
+#define MOVESTATUS_MISSED             (1 << 0)
+#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
+#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
+#define MOVESTATUS_NOTAFFECTED        (1 << 3)
+#define MOVESTATUS_ONEHITKO           (1 << 4)
+#define MOVESTATUS_FAILED             (1 << 5)
+#define MOVESTATUS_ENDURED            (1 << 6)
+#define MOVESTATUS_HUNGON             (1 << 7)
+
+#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
@@ -172,14 +215,16 @@ struct BattleStruct /* 0x2000000 */
     u8 filler0[0x15DDE];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
-    /*0x15DE0*/ u8 filler15DE0[0x222];
+    /*0x15DE0*/ u8 filler15DE0[0x220];
+    /*0x16000*/ u8 turnEffectsTracker;
+    /*0x16001*/ u8 turnEffectsBank;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
     /*0x16004*/ u8 wrappedMove1[4];
     /*0x16008*/ u8 wrappedMove2[4];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
-    /*0x1600E*/ u8 unk1600E;
+    /*0x1600E*/ u8 turncountersTracker;
     /*0x1600F*/ u8 cmd23StateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
@@ -248,7 +293,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x16056*/ u8 moneyMultiplier;
     /*0x16057*/ u8 unk16057;
     /*0x16058*/ u8 unk16058;
-    /*0x16059*/ u8 unk16059;
+    /*0x16059*/ u8 sub80173A4_Tracker;
     /*0x1605A*/ u8 unk1605A;
     /*0x1605B*/ u8 unk1605B;
     /*0x1605C*/ u16 exp;
@@ -269,10 +314,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1608A*/ u8 unk1608A;
     /*0x1608B*/ u8 unk1608B;
     /*0x1608C*/ u8 ChosenMoveID[4];
-    /*0x16090*/ u8 unk16090;
-    /*0x16091*/ u8 unk16091;
-    /*0x16092*/ u8 unk16092;
-    /*0x16093*/ u8 unk16093;
+    /*0x16090*/ s32 bideDmg;
     /*0x16094*/ u8 unk16094;
     /*0x16095*/ u8 unk16095;
     /*0x16096*/ u8 unk16096;
@@ -327,7 +369,84 @@ struct BattleStruct /* 0x2000000 */
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 linkPlayerIndex;
     /*0x160CC*/ u16 usedHeldItems[4];
-    u8 filler2[0x72E];
+    /*0x160D4*/ u8 unk160D4;
+    /*0x160D5*/ u8 unk160D5;
+    /*0x160D6*/ u8 unk160D6;
+    /*0x160D7*/ u8 unk160D7;
+    /*0x160D8*/ u8 unk160D8;
+    /*0x160D9*/ u8 unk160D9;
+    /*0x160DA*/ u8 unk160DA;
+    /*0x160DB*/ u8 unk160DB;
+    /*0x160DC*/ u8 unk160DC;
+    /*0x160DD*/ u8 intimidateBank;
+    /*0x160DE*/ u8 unk160DE;
+    /*0x160DF*/ u8 unk160DF;
+    /*0x160E0*/ u8 unk160E0;
+    /*0x160E1*/ u8 unk160E1;
+    /*0x160E2*/ u8 unk160E2;
+    /*0x160E3*/ u8 unk160E3;
+    /*0x160E4*/ u8 unk160E4;
+    /*0x160E5*/ u8 unk160E5;
+    /*0x160E6*/ u8 unk160E6;
+    /*0x160E7*/ u8 atkCancellerTracker;
+    /*0x160E8*/ u8 unk160E8;
+    /*0x160E9*/ u8 unk160E9;
+    /*0x160EA*/ u8 unk160EA;
+    /*0x160EB*/ u8 unk160EB;
+    /*0x160EC*/ u8 unk160EC;
+    /*0x160ED*/ u8 unk160ED;
+    /*0x160EE*/ u8 unk160EE;
+    /*0x160EF*/ u8 unk160EF;
+    /*0x160F0*/ u8 unk160F0;
+    /*0x160F1*/ u8 unk160F1;
+    /*0x160F2*/ u8 unk160F2;
+    /*0x160F3*/ u8 unk160F3;
+    /*0x160F4*/ u8 unk160F4;
+    /*0x160F5*/ u8 unk160F5;
+    /*0x160F6*/ u8 unk160F6;
+    /*0x160F7*/ u8 unk160F7;
+    /*0x160F8*/ u8 unk160F8;
+    /*0x160F9*/ u8 unk160F9;
+    /*0x160FA*/ u8 unk160FA;
+    /*0x160FB*/ u8 unk160FB;
+    /*0x160FC*/ u8 turnSideTracker;
+    /*0x160FD*/ u8 unk160FD;
+    /*0x160FE*/ u8 unk160FE;
+    /*0x160FF*/ u8 unk160FF;
+	/*0x16100*/ u8 unk16100;
+    /*0x16101*/ u8 unk16101;
+    /*0x16102*/ u8 unk16102;
+    /*0x16103*/ u8 unk16103;
+    /*0x16104*/ u8 unk16104;
+    /*0x16105*/ u8 unk16105;
+    /*0x16106*/ u8 unk16106;
+    /*0x16107*/ u8 unk16107;
+    /*0x16108*/ u8 unk16108;
+    /*0x16109*/ u8 unk16109;
+    /*0x1610A*/ u8 unk1610A;
+    /*0x1610B*/ u8 unk1610B;
+    /*0x1610C*/ u8 unk1610C;
+    /*0x1610D*/ u8 unk1610D;
+    /*0x1610E*/ u8 unk1610E;
+    /*0x1610F*/ u8 unk1610F;
+    /*0x16110*/ u8 sub80170DC_Tracker;
+    /*0x16111*/ u8 sub80170DC_Bank;
+    /*0x16112*/ u8 unk16112;
+    /*0x16113*/ u8 unk16113;
+    /*0x16114*/ u8 unk16114;
+    /*0x16115*/ u8 unk16115;
+    /*0x16116*/ u8 unk16116;
+    /*0x16117*/ u8 unk16117;
+    /*0x16118*/ u8 unk16118;
+    /*0x16119*/ u8 unk16119;
+    /*0x1611A*/ u8 unk1611A;
+    /*0x1611B*/ u8 unk1611B;
+    /*0x1611C*/ u8 unk1611C;
+    /*0x1611D*/ u8 unk1611D;
+    /*0x1611E*/ u8 unk1611E;
+    /*0x1611F*/ u8 unk1611F;
+
+    //u8 filler2[0x72E];
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
@@ -482,9 +601,9 @@ struct SpecialStatus
     u8 flag40 : 1;
     u8 focusBanded : 1;
     u8 field1[3];
-    u32 moveturnLostHP;
-    u32 moveturnLostHP_physical;
-    u32 moveturnLostHP_special;
+    s32 moveturnLostHP;
+    s32 moveturnLostHP_physical;
+    s32 moveturnLostHP_special;
     u8 moveturnPhysicalBank;
     u8 moveturnSpecialBank;
     u8 field12;
@@ -497,8 +616,7 @@ struct sideTimer
     u8 lightscreenTimer;    //0x1
     u8 mistTimer;           //0x2
     u8 field3;              //0x3
-    u8 field4;              //0x4
-    u8 field5;              //0x5
+    u16 field4;              //0x4
     u8 spikesAmount;        //0x6
     u8 safeguardTimer;      //0x7
     u8 followmeTimer;       //0x8
@@ -516,7 +634,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BANKS_BATTLE];
     u8 wishUserID[MAX_BANKS_BATTLE];
     u8 weatherDuration;
-    u8 knockedOffPokes[2];
+    u16 knockedOffPokes;
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;
@@ -532,19 +650,29 @@ extern struct Struct20238C8 gUnknown_020238C8;
 // TODO: move ewram to global.h
 extern u8 ewram[];
 
-#define BATTLE_STRUCT      ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK           ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC     ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_FUNCTION_STACK   ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800         ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810         ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840         (*(struct Struct2017840 *)   (ewram + 0x17840))
+#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
+#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
+#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
+#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
+#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
+#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
+#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
+#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
+#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
+#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
+#define ewram17000              ((u32 *)                     (ewram + 0x17100))
+
+typedef void (*BattleCmdFunc)(void);
 
 struct funcStack
 {
     void* ptr[8];
+    u8 size;
+};
+
+struct scriptsStack
+{
+    u8* ptr[8];
     u8 size;
 };
 
@@ -650,19 +778,19 @@ void TurnValuesCleanUp(u8);
 void SpecialStatusesClear(void);
 void sub_80138F0(void);
 void sub_80155A4();
-void CancelMultiTurnMoves(u8);
+void CancelMultiTurnMoves(u8 bank);
 void PrepareStringBattle();
 void sub_80156DC();
 void sub_80157C4(u8 index);
 
 // asm/battle_3.o
-u8 sub_8015A98(u8, u8, u8);
-u8 UpdateTurnCounters();
-u8 TurnBasedEffects();
+u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
+u8 UpdateTurnCounters(void);
+u8 TurnBasedEffects(void);
 u8 sub_80170DC();
 u8 sub_80173A4();
-u8 AbilityBattleEffects(u8, u8, u8, u8, u16);
-u8 ItemBattleEffects();
+u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
+u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);

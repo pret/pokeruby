@@ -137,7 +137,7 @@ std::string AsmFile::ReadPath()
             FATAL_INPUT_ERROR("path is too long");
     }
 
-    return std::string(m_buffer, startPos, length);
+    return std::string(m_buffer + startPos, length);
 }
 
 void AsmFile::SkipEndOfLineComment()

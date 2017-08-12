@@ -53,7 +53,7 @@ SECTIONS {
         asm/battle_1.o(.text_800DC24);
         src/battle/battle_2.o(.text);
         asm/battle_2.o(.text);
-        asm/battle_3.o(.text);
+        src/battle/battle_3.o(.text);
         src/battle/battle_4.o(.text);
         asm/battle_5.o(.text);
         src/battle/battle_6.o(.text);
@@ -122,7 +122,7 @@ SECTIONS {
         src/misc/rom_8077ABC.o(.text);
         src/engine/task.o(.text);
         asm/reshow_battle_screen.o(.text);
-        asm/battle_anim_807B69C.o(.text);
+        src/battle/battle_anim_807B69C.o(.text);
         src/scene/title_screen.o(.text);
         src/field/field_weather.o(.text);
         asm/field_weather.o(.text);
@@ -332,6 +332,7 @@ SECTIONS {
         data/data2a.o(.rodata);
         src/battle/battle_4.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle/battle_3.o(.rodata);
         src/pokemon/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/engine/trig.o(.rodata);
@@ -372,7 +373,7 @@ SECTIONS {
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
         src/engine/task.o(.rodata);
-        data/battle_anim_807B69C.o(.rodata);
+        src/battle/battle_anim_807B69C.o(.rodata);
         src/scene/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         src/field/field_screen_effect.o(.rodata);

@@ -301,7 +301,7 @@ void BattleAI_SetupAIData(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
         AI_THINKING_STRUCT->score[i] = 100;
 
-    r7 = sub_8015A98(gActiveBank, 0, 0xFF);
+    r7 = CheckMoveLimitations(gActiveBank, 0, 0xFF);
 
     // probably sets up the moves to consider and ignores non-valid moves such as NO_MOVE or glitch moves.
     for (i = 0; i < MAX_MON_MOVES; i++)
