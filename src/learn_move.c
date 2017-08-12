@@ -12,8 +12,10 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "strings2.h"
 #include "task.h"
+#include "trig.h"
 
 struct UnknownStruct1
 {
@@ -30,7 +32,6 @@ extern u8 gTileBuffer[];
 
 extern const struct WindowConfig gWindowConfig_81E6CE4;
 extern const struct WindowConfig gWindowConfig_81E7240;
-extern const struct UnknownStruct1 gUnknown_08402D08[];
 extern const struct SpriteSheet gUnknown_08402D80;
 extern const struct SpritePalette gUnknown_08402D88;
 
@@ -39,20 +40,27 @@ extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 struct Struct2017000
 {
     u8 unk0;
-    u8 filler1[2];
-    u8 unk3;
-    u8 unk4;
+    u8 filler1;
+    u8 unk2;
+    u8 unk3[2];
+    //u8 unk4;
     u8 unk5[16];
     u8 filler15[3];
     u8 unk18;
-    u8 filler19[0x1B-0x19];
+    u8 unk19;
+    u8 unk1A;
     u8 unk1B;
-    u8 filler1C;
+    u8 unk1C;
     u8 unk1D;
     u8 unk1E;
     u8 filler1F;
-    u16 unk20[4];
-    u8 filler28[0x2C3-0x28];
+    //u16 unk20[4];
+    //u8 filler28[0x2C3-0x28];
+    u16 unk20[20];
+    u8 filler48[0x52-0x48];
+    //u8 unk52[0x2C3-0x52];
+    u8 unk52[6][0x19];
+    u8 fillerE8[0x2C3-0xE8];
     u8 unk2C3;
     u8 unk2C4;
     u8 unk2C5;
@@ -73,16 +81,20 @@ const u8 gUnknown_08402CF8[][4] =
     {10,  8, 29, 13},
 };
 
-const struct UnknownStruct1 gUnknown_08402D08[] =
+const struct UnknownStruct1 gUnknown_08402D08[][4] =
 {
-    {OtherText_Battle,   1, 1, 0},
-    {OtherText_Power,    1, 4, 1},
-    {OtherText_Accuracy, 1, 9, 2},
-    {NULL,               0, 0, 0},
-    {OtherText_Contest,  1, 1, 0},
-    {OtherText_Appeal,   1, 4, 1},
-    {OtherText_Jam,      1, 9, 2},
-    {NULL,               0, 0, 0},
+    {
+        {OtherText_Battle,   1, 1, 0},
+        {OtherText_Power,    1, 4, 1},
+        {OtherText_Accuracy, 1, 9, 2},
+        {NULL,               0, 0, 0},
+    },
+    {
+        {OtherText_Contest,  1, 1, 0},
+        {OtherText_Appeal,   1, 4, 1},
+        {OtherText_Jam,      1, 9, 2},
+        {NULL,               0, 0, 0},
+    },
 };
 
 void sub_813269C(u8);
@@ -99,7 +111,7 @@ void sub_8133358(void);
 void sub_8133558(void);
 void sub_813362C(void);
 void sub_8133800(void);
-void sub_8133AEC();
+void sub_8133AEC(u8, int);
 void sub_8133CA4(void);
 
 void sub_813265C(void)
@@ -519,17 +531,17 @@ void sub_8133030(bool8 a)
 {
     s32 i;
 
-    gSprites[gUnknown_030007B0->unk3].invisible = FALSE;
-    gSprites[gUnknown_030007B0->unk4].invisible = FALSE;
+    gSprites[gUnknown_030007B0->unk3[0]].invisible = FALSE;
+    gSprites[gUnknown_030007B0->unk3[1]].invisible = FALSE;
     for (i = 0; i < 16; i++)
     {
         // Hmm...
         gSprites[*((u8 *)gUnknown_030007B0 + i + 7)].invisible = TRUE;
     }
-    for (i = 0; gUnknown_08402D08[i].unk0 != NULL; i++)
+    for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
     {
-        sub_8072C74(gTileBuffer, gUnknown_08402D08[i].unk0, 64, 2);
-        MenuPrint(gTileBuffer, gUnknown_08402D08[i].unk4, gUnknown_08402D08[i].unk5);
+        sub_8072C74(gTileBuffer, gUnknown_08402D08[0][i].unk0, 64, 2);
+        MenuPrint(gTileBuffer, gUnknown_08402D08[0][i].unk4, gUnknown_08402D08[0][i].unk5);
     }
     if (!a)
     {
@@ -553,4 +565,406 @@ u8 sub_81330E8(void)
     }
 
     return r4;
+}
+
+void sub_8133140(bool8 a)
+{
+    s32 i;
+
+    gSprites[gUnknown_030007B0->unk3[0]].invisible = FALSE;
+    gSprites[gUnknown_030007B0->unk3[1]].invisible = FALSE;
+    for (i = 0; i < 16; i++)
+    {
+        // Hmm...
+        gSprites[*((u8 *)gUnknown_030007B0 + i + 7)].invisible = FALSE;
+    }
+    for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
+    {
+        sub_8072C74(gTileBuffer, gUnknown_08402D08[1][i].unk0, 64, 2);
+        MenuPrint(gTileBuffer, gUnknown_08402D08[1][i].unk4, gUnknown_08402D08[1][i].unk5);
+        if (i != 0)
+        {
+            MenuZeroFillWindowRect(
+              gUnknown_08402D08[1][i].unk4,
+              gUnknown_08402D08[1][i].unk5 + 2,
+              gUnknown_08402D08[1][i].unk4 + 7,
+              gUnknown_08402D08[1][i].unk5 + 3);
+        }
+    }
+    if (!a)
+        sub_8072AB0(gOtherText_TeachWhichMove, 24, 120, 192, 32, 1);
+}
+
+u8 sub_8133248(void)
+{
+    u32 r4 = ((gMain.newKeys & 0x30) != 0);
+
+    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR
+     && (gMain.newKeys & 0x300))
+        r4++;
+
+    if (r4 != 0)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_030007B0->unk0 = 3;
+        gUnknown_030007B0->unk2C4 = 0;
+    }
+
+    return r4;
+}
+
+void sub_81332A0(void)
+{
+    s32 i;
+
+    gUnknown_030007B0->unk0 = 0;
+    gUnknown_030007B0->unk2 = 0;
+    gUnknown_030007B0->unk19 = 0;
+    gUnknown_030007B0->unk18 = 0;
+    gUnknown_030007B0->unk1C = 0;
+    gUnknown_030007B0->unk1A = 0;
+    gUnknown_030007B0->unk1B = 0;
+    gUnknown_030007B0->unk1D = 0;
+    gUnknown_030007B0->unk1E = 0;
+    gUnknown_030007B0->unk2C3 = 0;
+    gUnknown_030007B0->unk2C4 = 0;
+    for (i = 0; i < 20; i++)
+        gUnknown_030007B0->unk20[i] = 0;
+}
+
+void sub_8133300(struct Sprite *sprite)
+{
+    s16 var = (sprite->data1 * 10) & 0xFF;
+
+    switch (sprite->data0)
+    {
+    case 0:
+        break;
+    case 1:
+        sprite->pos2.x = Sin(var, 3) * sprite->data2;
+        break;
+    case 2:
+        sprite->pos2.y = Sin(var, 1) * sprite->data2;
+        break;
+    }
+    sprite->data1++;
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_8402D90;
+extern const struct SpriteTemplate gSpriteTemplate_8402DC0;
+extern const struct SpriteTemplate gSpriteTemplate_8402E08;
+
+void sub_8133358(void)
+{
+    s32 i;
+
+    gUnknown_030007B0->unk3[0] = CreateSprite(&gSpriteTemplate_8402D90, 8, 16, 0);
+    gSprites[gUnknown_030007B0->unk3[0]].data0 = 1;
+    gSprites[gUnknown_030007B0->unk3[0]].data2 = -1;
+
+    gUnknown_030007B0->unk3[1] = CreateSprite(&gSpriteTemplate_8402D90, 72, 16, 0);
+    StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[1]], 1);
+    gSprites[gUnknown_030007B0->unk3[1]].data0 = 1;
+    gSprites[gUnknown_030007B0->unk3[1]].data2 = 1;
+
+    gUnknown_030007B0->unk3[2] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 4, 0);
+    StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[2]], 1);
+    gSprites[gUnknown_030007B0->unk3[2]].data0 = 2;
+    gSprites[gUnknown_030007B0->unk3[2]].data2 = -1;
+
+    gUnknown_030007B0->unk3[3] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 60, 0);
+    gSprites[gUnknown_030007B0->unk3[3]].data0 = 2;
+    gSprites[gUnknown_030007B0->unk3[3]].data2 = 1;
+
+    for (i = 0; i < 8; i++)
+    {
+        gUnknown_030007B0->unk3[i + 4] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x34, 0);
+        StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 2);
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        gUnknown_030007B0->unk3[i + 12] = CreateSprite(&gSpriteTemplate_8402E08, (i - (i / 4) * 4) * 8 + 0x1C, (i / 4) * 8 + 0x5C, 0);
+        StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 2);
+    }
+
+    for (i = 0; i < 20; i++)
+        gSprites[gUnknown_030007B0->unk3[i]].invisible = TRUE;
+
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 18);
+}
+
+void sub_8133558(void)
+{
+    s32 i;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+
+    gUnknown_030007B0->unk1A = GetMoveRelearnerMoves(&gPlayerParty[gUnknown_030007B0->unk2C5], gUnknown_030007B0->unk20);
+    for (i = 0; i < gUnknown_030007B0->unk1A; i++)
+        StringCopy(gUnknown_030007B0->unk52[i], gMoveNames[gUnknown_030007B0->unk20[i]]);
+    GetMonData(&gPlayerParty[gUnknown_030007B0->unk2C5], MON_DATA_NICKNAME, nickname);
+    StringCopy10(gStringVar1, nickname);
+    StringCopy(gUnknown_030007B0->unk52[gUnknown_030007B0->unk1A], gUnknownText_Exit);
+    gUnknown_030007B0->unk1A++;
+}
+
+void sub_813360C(s8 a)
+{
+    gUnknown_030007B0->unk1C = gUnknown_030007B0->unk18;
+    gUnknown_030007B0->unk18 += a;
+    gUnknown_030007B0->unk1D = 1;
+}
+
+void sub_813362C(void)
+{
+    if (gMain.newAndRepeatedKeys & 0x40)
+    {
+        if (gUnknown_030007B0->unk1B != 0)
+        {
+            PlaySE(SE_SELECT);
+            gUnknown_030007B0->unk1B--;
+            gUnknown_030007B0->unk2C3 = 1;
+            if (gUnknown_030007B0->unk18 != 0)
+            {
+                sub_813360C(-1);
+            }
+            else if (gUnknown_030007B0->unk19 != 0)
+            {
+                gUnknown_030007B0->unk19--;
+                gUnknown_030007B0->unk1E++;
+            }
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & 0x80)
+    {
+        if (gUnknown_030007B0->unk1B < gUnknown_030007B0->unk1A - 1)
+        {
+            PlaySE(SE_SELECT);
+            gUnknown_030007B0->unk1B++;
+            gUnknown_030007B0->unk2C3 = 1;
+            if (gUnknown_030007B0->unk18 != 2)
+            {
+                sub_813360C(1);
+            }
+            else if (gUnknown_030007B0->unk19 != gUnknown_030007B0->unk1A - 3)
+            {
+                gUnknown_030007B0->unk19++;
+                gUnknown_030007B0->unk1E++;
+            }
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (gUnknown_030007B0->unk1B != gUnknown_030007B0->unk1A - 1)
+        {
+            gUnknown_030007B0->unk0 = 8;
+            StringCopy(gStringVar2, gUnknown_030007B0->unk52[gUnknown_030007B0->unk1B]);
+            StringExpandPlaceholders(gStringVar4, gOtherText_TeachSpecificMove);
+            MenuPrintMessage(gStringVar4, 3, 15);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gOtherText_GiveUpTeachingMove);
+            MenuPrintMessage(gStringVar4, 3, 15);
+            gUnknown_030007B0->unk0 = 12;
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_030007B0->unk0 = 12;
+        StringExpandPlaceholders(gStringVar4, gOtherText_GiveUpTeachingMove);
+        MenuPrintMessage(gStringVar4, 3, 15);
+    }
+    if (gUnknown_030007B0->unk1A > 3)
+    {
+        gSprites[2].invisible = FALSE;
+        gSprites[3].invisible = FALSE;
+        if (gUnknown_030007B0->unk19 == 0)
+            gSprites[2].invisible = TRUE;
+        else if (gUnknown_030007B0->unk19 == gUnknown_030007B0->unk1A - 3)
+            gSprites[3].invisible = TRUE;
+    }
+}
+
+extern const u8 *const gUnknown_083CAF70[];
+
+struct ContestMove
+{
+    u8 effect;
+    u8 contestCategory:3;
+    u8 comboStarterId;
+    u8 comboMoves[4];
+};
+
+extern const struct ContestMove gContestMoves[];
+extern const u8 gTypeNames[][7];
+
+void sub_8133800(void)
+{
+    u8 r6 = gUnknown_030007B0->unk19;
+    u8 *str = gTileBuffer;
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (r6 >= gUnknown_030007B0->unk1A)
+        {
+            str = sub_8072C74(str, gEmptyString_81E72B0, 0x90, 0);
+        }
+        else if (r6 == gUnknown_030007B0->unk1A - 1)
+        {
+            str = sub_8072C74(str, gUnknownText_Exit, 0x90, 0);
+        }
+        else
+        {
+            u16 moveId = gUnknown_030007B0->unk20[r6];
+
+            if (gUnknown_030007B0->unk2C4 != 0)
+                str = sub_8072C74(str, gUnknown_083CAF70[gContestMoves[moveId].contestCategory], 0x27, 0);
+            else
+                str = sub_8072C74(str, gTypeNames[gBattleMoves[moveId].type], 0x27, 0);
+
+            str = sub_8072C74(str, gUnknown_030007B0->unk52[r6], 0x72, 0);
+
+            str[0] = 0xCA;
+            str[1] = 0xCA;
+            str[2] = 0xBA;
+            str += 3;
+
+            str = sub_8072C14(str, gBattleMoves[moveId].pp, 0x90, 0);
+        }
+        *str++ = 0xFE;
+        r6++;
+    }
+    *str = 0xFF;
+    MenuPrint(gTileBuffer, 11, 1);
+    sub_813360C(0);
+}
+
+struct ContestEffect
+{
+    u8 effectType;
+    u8 appeal;
+    u8 jam;
+};
+
+extern const struct ContestEffect gContestEffects[];
+
+void sub_8133940(u16 a, const u8 *b)
+{
+    u8 str[0x34];
+    u8 numHearts;
+    u8 i;
+
+    StringCopy(str, gExpandedPlaceholder_Empty);
+    switch (b[2])
+    {
+    case 1:
+        break;
+    case 2:
+        if (gBattleMoves[a].power < 2)
+            sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
+        else
+            sub_8072C14(str, gBattleMoves[a].power, 32, 2);
+        MenuPrint(str, b[0], b[1]);
+        break;
+    case 4:
+        if (gBattleMoves[a].accuracy == 0)
+            sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
+        else
+            sub_8072C14(str, gBattleMoves[a].accuracy, 32, 2);
+        MenuPrint(str, b[0], b[1]);
+        break;
+    case 6:
+        MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
+        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
+        if (numHearts == 255)
+            numHearts = 0;
+        for (i = 0; i < 8; i++)
+        {
+            if (i < numHearts)
+                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 1);
+            else
+                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 4]], 0);
+        }
+        break;
+    case 7:
+        MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
+        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
+        if (numHearts == 255)
+            numHearts = 0;
+        for (i = 0; i < 8; i++)
+        {
+            if (i < numHearts)
+                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 3);
+            else
+                StartSpriteAnim(&gSprites[gUnknown_030007B0->unk3[i + 12]], 2);
+        }
+        break;
+    }
+}
+
+extern const u8 gUnknown_08402E24[][3];
+extern const u8 gUnknown_08402E3D[];
+extern const u8 gUnknown_08402E39[];
+
+extern const u8 *const gUnknown_083CADD4[];
+extern const u8 *const gMoveDescriptions[];
+
+void sub_8133AEC(u8 a, int unused)
+{
+    u16 i;
+
+    if (gUnknown_030007B0->unk1B != gUnknown_030007B0->unk1A - 1)
+    {
+        u16 r5 = gUnknown_030007B0->unk20[gUnknown_030007B0->unk1B];
+
+        if (a != 0)
+        {
+            for (i = 0; i < 16; i++)
+                gSprites[gUnknown_030007B0->unk3[i + 4]].invisible = FALSE;
+            for (i = 0; i < 3; i++)
+                sub_8133940(r5, gUnknown_08402E24[gUnknown_08402E3D[i]]);
+            sub_8072AB0(gUnknown_083CADD4[gContestMoves[r5].effect], 0x58, 0x48, 0x90, 32, 1);
+        }
+        //_08133BA0
+        else
+        {
+            u8 var;
+
+            for (i = 0; i < 4; i++)
+                sub_8133940(r5, gUnknown_08402E24[gUnknown_08402E39[i]]);
+            var = sub_8072A18(gMoveDescriptions[r5 - 1], 0x58, 0x48, 0x90, 1);
+            if (var < 2)
+            {
+                u8 r1 = var * 2 + 9;
+
+                MenuFillWindowRectWithBlankTile(11, r1, 28, 12);
+            }
+        }
+    }
+    else
+    {
+        if (a != 0)
+        {
+            MenuZeroFillWindowRect(gUnknown_08402E24[5][0], gUnknown_08402E24[5][1], gUnknown_08402E24[5][0], gUnknown_08402E24[5][1] + 1);
+            MenuZeroFillWindowRect(gUnknown_08402E24[6][0], gUnknown_08402E24[6][1], gUnknown_08402E24[6][0], gUnknown_08402E24[6][1] + 1);
+            for (i = 0; i < 16; i++)
+                gSprites[gUnknown_030007B0->unk3[i + 4]].invisible = TRUE;
+        }
+        else
+        {
+            MenuZeroFillWindowRect(gUnknown_08402E24[1][0], gUnknown_08402E24[1][1], gUnknown_08402E24[1][0] + 3, gUnknown_08402E24[1][1] + 1);
+            MenuZeroFillWindowRect(gUnknown_08402E24[3][0], gUnknown_08402E24[3][1], gUnknown_08402E24[3][0] + 3, gUnknown_08402E24[3][1] + 1);
+        }
+        MenuZeroFillWindowRect(11, 9, 28, 12);
+    }
+}
+
+void sub_8133CA4(void)
+{
+    MenuZeroFillWindowRect(21, 7, 27, 12);
+    sub_8133AEC(gUnknown_030007B0->unk2C4, 0);
 }
