@@ -376,7 +376,7 @@ void sub_8149020(u8 mode)
             /* stuff */
             if (gMain.vblankCounter1 & 3 || gPaletteFade.active) 
                 break;
-            if(gMain.vblankCounter1 & 4)
+            if (gMain.vblankCounter1 & 4)
             {
                 var1 = gPlttBufferUnfaded[9];
                 var2 = gPlttBufferUnfaded[10];
@@ -390,9 +390,9 @@ void sub_8149020(u8 mode)
             LoadPalette(&var2, 10, 2);
             break;
         case 2:
-            /* stuff */
-            if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
-            if(gMain.vblankCounter1 & 4)
+            if (gMain.vblankCounter1 & 3 || gPaletteFade.active) 
+                break;
+            if (gMain.vblankCounter1 & 4)
             {
                 var1 = 0x3D27;
                 var2 = 0x295;
@@ -412,7 +412,7 @@ void sub_8149020(u8 mode)
 
 void sub_814910C(struct Sprite *sprite)
 {
-    if(gUnknown_0203935C)
+    if (gUnknown_0203935C)
     {
         DestroySprite(sprite);
     }
