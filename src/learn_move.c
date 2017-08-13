@@ -46,6 +46,10 @@ extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
 extern const u8 *const gUnknown_083CAF70[];
 
+#ifdef GERMAN
+extern const u8 deuOtherText_ForgotAndLearned[];
+#endif
+
 extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 
 struct LearnMoveStruct
