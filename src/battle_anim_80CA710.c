@@ -22,6 +22,7 @@ extern struct SpriteTemplate gSpriteTemplate_83D631C;
 extern struct SpriteTemplate gSpriteTemplate_83D6884;
 extern s16 gUnknown_03000728[];
 extern s8 gUnknown_083D680C[11][3];
+extern u16 gUnknown_083D6984[];
 
 void sub_80CA768(struct Sprite* sprite);
 void sub_80CA8B4(struct Sprite* sprite);
@@ -44,6 +45,11 @@ void sub_80CBC8C(struct Sprite* sprite);
 void sub_80CBCF8(struct Sprite* sprite);
 void sub_80CBDB0(struct Sprite* sprite);
 void sub_80CC408(struct Sprite* sprite);
+void sub_80CC580(struct Sprite* sprite);
+void sub_80CC7D4(struct Sprite* sprite);
+void sub_80CCB00(struct Sprite* sprite);
+void sub_80CCCB4(struct Sprite* sprite);
+void sub_80CCE0C(struct Sprite* sprite);
 
 s16 sub_80CC338(struct Sprite* sprite);
 
@@ -54,10 +60,17 @@ void sub_8078D60(struct Sprite *sprite);
 void sub_80786EC(struct Sprite *sprite);
 void sub_80782D8(struct Sprite *sprite);
 void sub_8078CC0(struct Sprite *sprite);
+void sub_8078600(struct Sprite *sprite);
+void sub_8078504(struct Sprite *sprite);
+
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);
 s8 sub_8076F98(s8 a);
 int sub_807A100(u8 slot, u8 a2);
+u16 sub_80790F0(s16 a, s16 b);
+void sub_8078FDC(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 rotation);
+void sub_807867C(struct Sprite *sprite, s16 a2);
+u8 sub_8077EE4(u8 slot, u8 a2);
 
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
@@ -2101,5 +2114,534 @@ void sub_80CC408(struct Sprite* sprite)
             DestroySprite(sprite);
         }
     }
+}
+
+void sub_80CC474(struct Sprite* sprite)
+{
+    u8 bank;
+    if (!gBattleAnimArgs[6])
+        bank = gBattleAnimPlayerMonIndex;
+    else
+        bank = gBattleAnimEnemyMonIndex;
+    if (GetBankSide(bank) != 0)
+    {
+        sprite->data4 = 0;
+        sprite->data2 = gBattleAnimArgs[3];
+        sprite->pos1.x = 0xFFF0;
+    }
+    else
+    {
+        sprite->data4 = 1;
+        sprite->data2 = -gBattleAnimArgs[3];
+        sprite->pos1.x = 0x100;
+    }
+    sprite->data1 = gBattleAnimArgs[1];
+    sprite->data0 = gBattleAnimArgs[2];
+    sprite->data3 = gBattleAnimArgs[4];
+    switch(gBattleAnimArgs[5])
+    {
+        case 0:
+        {
+            sprite->pos1.y = gBattleAnimArgs[0];
+            sprite->oam.priority = sub_8079ED4(bank);
+            break;
+        }
+        case 1:
+        {
+            sprite->pos1.y = gBattleAnimArgs[0];
+            sprite->oam.priority = sub_8079ED4(bank) + 1;
+            break;
+        }
+        case 2:
+        {
+            sprite->pos1.y = sub_8077ABC(bank, 3) + gBattleAnimArgs[0];
+            sprite->oam.priority = sub_8079ED4(bank);
+            break;
+        }
+        case 3:
+        {
+            sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3) + gBattleAnimArgs[0];
+            obj_id_for_side_relative_to_move(1);
+            sprite->oam.priority = sub_8079ED4(bank) + 1;
+            break;
+        }
+    }
+    sprite->callback = sub_80CC580;
+}
+
+// why did you make me use gotos WHY
+void sub_80CC580(struct Sprite* sprite)
+{
+    int a = sprite->data7;
+    sprite->data7++;
+    sprite->pos2.y = (sprite->data1 * gSineTable[sprite->data0]) >> 8;
+    sprite->pos2.x = sprite->data2 * a;
+    sprite->data0 = (sprite->data3 * a) & 0xFF;
+    if (sprite->data4 == 0)
+    {
+        if (sprite->pos2.x + sprite->pos1.x <= 0xF7) return;
+        else goto END;
+    }
+    else if (sprite->data4 != 0 && sprite->pos2.x + sprite->pos1.x <= -16)
+    {
+        goto END;
+    }
+    else
+        return;
+    
+    END:
+        move_anim_8074EE0(sprite);
+}
+
+void sub_80CC5F8(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    switch(task->data[0])
+    {
+        case 0:
+        {
+            task->data[8] = IndexOfSpritePaletteTag(0x274f) * 16 + 256;
+            task->data[12] = IndexOfSpritePaletteTag(0x27b0) * 16 + 256;
+            task->data[0]++;
+            break;
+        }
+        case 1:
+        {
+            task->data[9]++;
+            if(task->data[9] >= 0)
+            {
+                task->data[9] = 0;
+                BlendPalette(task->data[8], 0x10, task->data[10], gUnknown_083D6984[task->data[11]]);
+                BlendPalette(task->data[12], 0x10, task->data[10], gUnknown_083D6984[task->data[11]]);
+                task->data[10]++;
+                if(task->data[10] == 17)
+                {
+                    task->data[10] = 0;
+                    task->data[11]++;
+                    if(task->data[11] == 7) task->data[11] = 0;
+                }
+            }
+            break;
+        }
+    }
+    if(gBattleAnimArgs[7] == -1) DestroyAnimVisualTask(taskId);
+}
+
+#ifdef NONMATCHING
+void sub_80CC6CC(struct Sprite* sprite)
+{
+    u8 a;
+    u8 b;
+    u8 bank;
+    int c;
+    u16 x;
+    u16 y;
+    if (gBattleAnimArgs[4] == 0)
+    {
+        move_anim_8072740(sprite);
+    }
+    else
+    {
+        
+        if (gBattleAnimArgs[0] == 0) bank = gBattleAnimPlayerMonIndex;
+        else
+            bank = gBattleAnimEnemyMonIndex;
+        a = sub_8077ABC(bank, 2);
+        b = sub_8077ABC(bank, 3);
+        sprite->data0 = gBattleAnimArgs[4];
+        if (gBattleAnimArgs[1] == 0)
+        {
+            sprite->pos1.x = gBattleAnimArgs[2] + a;
+            sprite->pos1.y = gBattleAnimArgs[3] + b;
+            sprite->data5 = a;
+            sprite->data6 = b;
+        }
+        else
+        {
+            sprite->pos1.x = a;
+            sprite->pos1.y = b;
+            sprite->data5 = gBattleAnimArgs[2] + a;
+            sprite->data6 = gBattleAnimArgs[3] + b;
+        }
+        x = sprite->pos1.x;
+        sprite->data1 = x * 16;
+        y = sprite->pos1.y;
+        sprite->data2 = y * 16;
+        sprite->data3 = ((sprite->data5 - sprite->pos1.x) * 16) / gBattleAnimArgs[4];
+        sprite->data4 = ((sprite->data6 - sprite->pos1.y) * 16) / gBattleAnimArgs[4];
+        c = sub_80790F0(sprite->data5 - x, sprite->data6 - y);
+        if(IsContest() != 0) c = c + -0x8000;
+        sub_8078FDC(sprite, 0, 0x100, 0x100, c);
+        sprite->callback = sub_80CC7D4;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80CC6CC(struct Sprite* sprite)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x4\n\
+	adds r6, r0, 0\n\
+	ldr r1, _080CC6E4 @ =gBattleAnimArgs\n\
+	movs r2, 0x8\n\
+	ldrsh r0, [r1, r2]\n\
+	cmp r0, 0\n\
+	bne _080CC6E8\n\
+	adds r0, r6, 0\n\
+	bl move_anim_8072740\n\
+	b _080CC7C2\n\
+	.align 2, 0\n\
+_080CC6E4: .4byte gBattleAnimArgs\n\
+_080CC6E8:\n\
+	movs r3, 0\n\
+	ldrsh r0, [r1, r3]\n\
+	cmp r0, 0\n\
+	bne _080CC6F8\n\
+	ldr r4, _080CC6F4 @ =gBattleAnimPlayerMonIndex\n\
+	b _080CC6FA\n\
+	.align 2, 0\n\
+_080CC6F4: .4byte gBattleAnimPlayerMonIndex\n\
+_080CC6F8:\n\
+	ldr r4, _080CC734 @ =gBattleAnimEnemyMonIndex\n\
+_080CC6FA:\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0x2\n\
+	bl sub_8077ABC\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0x3\n\
+	bl sub_8077ABC\n\
+	lsls r0, 24\n\
+	lsrs r2, r0, 24\n\
+	ldr r0, _080CC738 @ =gBattleAnimArgs\n\
+	ldrh r1, [r0, 0x8]\n\
+	strh r1, [r6, 0x2E]\n\
+	movs r3, 0x2\n\
+	ldrsh r1, [r0, r3]\n\
+	adds r7, r0, 0\n\
+	cmp r1, 0\n\
+	bne _080CC73C\n\
+	ldrh r0, [r7, 0x4]\n\
+	adds r0, r5\n\
+	strh r0, [r6, 0x20]\n\
+	ldrh r0, [r7, 0x6]\n\
+	adds r0, r2\n\
+	strh r0, [r6, 0x22]\n\
+	strh r5, [r6, 0x38]\n\
+	strh r2, [r6, 0x3A]\n\
+	b _080CC74C\n\
+	.align 2, 0\n\
+_080CC734: .4byte gBattleAnimEnemyMonIndex\n\
+_080CC738: .4byte gBattleAnimArgs\n\
+_080CC73C:\n\
+	strh r5, [r6, 0x20]\n\
+	strh r2, [r6, 0x22]\n\
+	ldrh r0, [r7, 0x4]\n\
+	adds r0, r5\n\
+	strh r0, [r6, 0x38]\n\
+	ldrh r0, [r7, 0x6]\n\
+	adds r0, r2\n\
+	strh r0, [r6, 0x3A]\n\
+_080CC74C:\n\
+	ldrh r4, [r6, 0x20]\n\
+	lsls r0, r4, 4\n\
+	strh r0, [r6, 0x30]\n\
+	ldrh r5, [r6, 0x22]\n\
+	lsls r0, r5, 4\n\
+	strh r0, [r6, 0x32]\n\
+	movs r1, 0x38\n\
+	ldrsh r0, [r6, r1]\n\
+	movs r2, 0x20\n\
+	ldrsh r1, [r6, r2]\n\
+	subs r0, r1\n\
+	lsls r0, 4\n\
+	movs r3, 0x8\n\
+	ldrsh r1, [r7, r3]\n\
+	bl __divsi3\n\
+	strh r0, [r6, 0x34]\n\
+	movs r1, 0x3A\n\
+	ldrsh r0, [r6, r1]\n\
+	movs r2, 0x22\n\
+	ldrsh r1, [r6, r2]\n\
+	subs r0, r1\n\
+	lsls r0, 4\n\
+	movs r3, 0x8\n\
+	ldrsh r1, [r7, r3]\n\
+	bl __divsi3\n\
+	strh r0, [r6, 0x36]\n\
+	ldrh r0, [r6, 0x38]\n\
+	subs r0, r4\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	ldrh r1, [r6, 0x3A]\n\
+	subs r1, r5\n\
+	lsls r1, 16\n\
+	asrs r1, 16\n\
+	bl sub_80790F0\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	bl IsContest\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080CC7AE\n\
+	ldr r1, _080CC7CC @ =0xffff8000\n\
+	adds r0, r4, r1\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+_080CC7AE:\n\
+	movs r3, 0x80\n\
+	lsls r3, 1\n\
+	str r4, [sp]\n\
+	adds r0, r6, 0\n\
+	movs r1, 0\n\
+	adds r2, r3, 0\n\
+	bl sub_8078FDC\n\
+	ldr r0, _080CC7D0 @ =sub_80CC7D4\n\
+	str r0, [r6, 0x1C]\n\
+_080CC7C2:\n\
+	add sp, 0x4\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080CC7CC: .4byte 0xffff8000\n\
+_080CC7D0: .4byte sub_80CC7D4\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_80CC7D4(struct Sprite* sprite)
+{
+    if(sprite->data0)
+    {
+        sprite->data1 += sprite->data3;
+        sprite->data2 += sprite->data4;
+        sprite->pos1.x = sprite->data1 >> 4 ;
+        sprite->pos1.y = sprite->data2 >> 4 ;
+        sprite->data0--;
+    }
+    else
+        move_anim_8074EE0(sprite);
+}
+
+void sub_80CC810(struct Sprite* sprite)
+{
+    if(sprite->animEnded)
+        move_anim_8072740(sprite);
+}
+
+void sub_80CC82C(struct Sprite* sprite)
+{
+    if(GetBankSide(gBattleAnimPlayerMonIndex) != 0)
+    {
+        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->pos1.y += gBattleAnimArgs[1];
+    }
+    else
+    {
+        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->pos1.y += gBattleAnimArgs[1];
+    }
+    sprite->callback = sub_8078600;
+    oamt_set_x3A_32(sprite, move_anim_8072740);
+}
+
+void sub_80CC884(struct Sprite* sprite)
+{
+    if(GetBankSide(gBattleAnimPlayerMonIndex) == 0)
+        StartSpriteAnim(sprite, 1);
+    sprite->callback = sub_80CC810;
+    sub_807867C(sprite, gBattleAnimArgs[0]);
+    sprite->pos1.y += gBattleAnimArgs[1];
+}
+
+void sub_80CC8C8(struct Sprite* sprite)
+{
+    sprite->pos1.x += gBattleAnimArgs[0];
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->data0 = gBattleAnimArgs[2];
+    sprite->data1 = gBattleAnimArgs[3];
+    sprite->data3 = gBattleAnimArgs[4];
+    sprite->data5 = gBattleAnimArgs[5];
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[6]);
+    oamt_set_x3A_32(sprite, move_anim_8074EE0);
+    sprite->callback = sub_8078504;
+}
+
+void sub_80CC914(struct Sprite* sprite)
+{
+    sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 0);
+    sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 1);
+    if(GetBankSide(gBattleAnimEnemyMonIndex) == 0)
+        sprite->pos1.y += 8;
+    sprite->callback = sub_80CCB00;
+    if(gBattleAnimArgs[2] == 0)
+        sprite->pos1.x += gBattleAnimArgs[0];
+    else
+    {
+        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->hFlip = 1;
+    }
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->data1 -= 0x400;
+    sprite->data2 += 0x400;
+    sprite->data5 = gBattleAnimArgs[2];
+    if(sprite->data5 == 1)
+        sprite->data1 = -sprite->data1;
+}
+
+void sub_80CC9BC(struct Sprite* sprite)
+{
+    u8 a;
+    u8 b;
+    switch(gBattleAnimArgs[3])
+    {
+        case 1:
+        {
+            a = sub_8077ABC(gBattleAnimEnemyMonIndex ^ 2, 0);
+            b = sub_8077ABC(gBattleAnimEnemyMonIndex ^ 2, 1);
+            break;
+        }
+        case 2:
+        {
+            a = sub_8077ABC(gBattleAnimEnemyMonIndex, 0);
+            b = sub_8077ABC(gBattleAnimEnemyMonIndex, 1);
+            if(b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2))
+            {
+                a = (sub_8077ABC(gBattleAnimEnemyMonIndex ^ 2, 0) + a) / 2;
+                b = (sub_8077ABC(gBattleAnimEnemyMonIndex ^ 2, 1) + b) / 2;
+            }
+            break;
+        }
+        case 0:
+        default:
+        {
+            a = sub_8077ABC(gBattleAnimEnemyMonIndex, 0);
+            b = sub_8077ABC(gBattleAnimEnemyMonIndex, 1);
+            break;
+        }
+    }
+    sprite->pos1.x = a;
+    sprite->pos1.y = b;
+    if(GetBankSide(gBattleAnimEnemyMonIndex) == 0)
+        sprite->pos1.y += 8;
+    sprite->callback = sub_80CCB00;
+    if(gBattleAnimArgs[2] == 0)
+        sprite->pos1.x += gBattleAnimArgs[0];
+    else
+    {
+        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->hFlip = 1;
+    }
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->data1 -= 0x400;
+    sprite->data2 += 0x400;
+    sprite->data5 = gBattleAnimArgs[2];
+    if(sprite->data5 == 1)
+        sprite->data1 = -sprite->data1;
+}
+
+void sub_80CCB00(struct Sprite* sprite)
+{
+    sprite->data3 += sprite->data1;
+    sprite->data4 += sprite->data2;
+    if(sprite->data5 == 0)
+        sprite->data1 += 0x18;
+    else
+        sprite->data1 -= 0x18;
+    sprite->data2 -= 0x18;
+    sprite->pos2.x = sprite->data3 >> 8;
+    sprite->pos2.y = sprite->data4 >> 8;
+    sprite->data0++;
+    if(sprite->data0 == 20)
+    {
+        oamt_set_x3A_32(sprite, move_anim_8072740);
+        sprite->data0 = 3;
+        sprite->callback = sub_80782D8;
+    }
+}
+
+void unref_sub_80CCB6C(struct Sprite* sprite)
+{
+    if(sprite->data2 > 1)
+    {
+        if(sprite->data3 & 1)
+        {
+            sprite->invisible = 0;
+            gSprites[sprite->data0].invisible = 0;
+            gSprites[sprite->data1].invisible = 0;
+        }
+        else
+        {
+            sprite->invisible = 1;
+            gSprites[sprite->data0].invisible = 1;
+            gSprites[sprite->data1].invisible = 1;
+        }
+        sprite->data2 = 0;
+        sprite->data3++;
+    }
+    else
+    {
+        sprite->data2++;
+    }
+    if(sprite->data3 == 10)
+    {
+        DestroySprite(&gSprites[sprite->data0]);
+        DestroySprite(&gSprites[sprite->data1]);
+        move_anim_8072740(sprite);
+    }
+}
+
+void sub_80CCC50(struct Sprite* sprite)
+{
+    sprite->data0 = gBattleAnimArgs[2];
+    if(GetBankSide(gBattleAnimPlayerMonIndex) != 0)
+        sprite->pos1.x -= gBattleAnimArgs[0];
+    else
+        sprite->pos1.x += gBattleAnimArgs[0];
+    StartSpriteAnim(sprite, gBattleAnimArgs[5]);
+    sprite->data1 = -gBattleAnimArgs[3];
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->data3 = gBattleAnimArgs[4];
+    sprite->callback = sub_80CCCB4;
+    sub_80CCCB4(sprite);
+}
+
+void sub_80CCCB4(struct Sprite* sprite)
+{
+    sprite->pos2.x = Cos(sprite->data0, 100);
+    sprite->pos2.y = Sin(sprite->data0, 20);
+    if(sprite->data0 <= 0x7F)
+        sprite->subpriority = 0;
+    else
+        sprite->subpriority = 14;
+    sprite->data0 = (sprite->data0 + sprite->data1) & 0xFF;
+    sprite->data5 += 0x82;
+    sprite->pos2.y += sprite->data5 >> 8;
+    sprite->data2++;
+    if(sprite->data2 == sprite->data3)
+        move_anim_8072740(sprite);
+}
+
+void sub_80CCD24(struct Sprite* sprite)
+{
+    if(IsContest() != 0)
+    {
+        gBattleAnimArgs[1] += 8;
+    }
+    sprite->pos1.x = sub_8077EE4(gBattleAnimPlayerMonIndex, 0) + gBattleAnimArgs[0];
+    sprite->pos1.y = sub_8077EE4(gBattleAnimPlayerMonIndex, 1) + gBattleAnimArgs[1];
+    if (GetBankSide(gBattleAnimPlayerMonIndex) == 0 || IsContest())
+        sprite->oam.priority = sub_8079ED4(gBattleAnimPlayerMonIndex) + 1;
+    else
+        sprite->oam.priority = sub_8079ED4(gBattleAnimPlayerMonIndex);
+    sprite->data0 = gBattleAnimArgs[2];
+    sprite->data2 = (IndexOfSpritePaletteTag(0x2828) << 4) + 0x100;
+    sprite->data7 = 16;
+    REG_BLDCNT = 0x3F40;
+    REG_BLDALPHA = (sprite->data7 << 8) | (16 - sprite->data7);
+    sprite->callback = sub_80CCE0C;
 }
 
