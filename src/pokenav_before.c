@@ -26,13 +26,9 @@ struct UnknownPokenav0 {
 	/* 0x6dad */ u8 var6dad;
 	/* 0x6dae */ u8 var6dae;
 	/* 0x6daf */ u8 fill6daf[0x3];
-	/* 0x6db2 */ u8 var6db2;
-	/* 0x6db3 */ u8 var6db3;
-	/* 0x6db4 */ u8 var6db4;
-	/* 0x6db5 */ u8 var6db5;
-	/* 0x6db6 */ u8 var6db6;
+	/* 0x6db2 */ u8 var6db2[5];
 	/* 0x6db7 */ u8 fill6db7[0x25];
-	/* 0x6ddc */ u8 var6ddc;
+	/* 0x6ddc */ s8 var6ddc;
 	/* 0x6ddd */ u8 fill6ddd[0x13];
 	/* 0x6df0 */ s8 var6df0;
 	/* 0x6df1 */ u8 fill6df1[0x9f];
@@ -44,7 +40,7 @@ struct UnknownPokenav0 {
 	/* 0x876C */ u8 fill876B[0x00bc];
 	/* 0x8828 */ u8 var8828;
 	/* 0x8829 */ u8 fill8829[0x07bf];
-	/* 0x8FE8 */ u8 var8fe8;
+	/* 0x8FE8 */ s8 var8fe8;
 	/* 0x8FE9 */ u8 fill8FE9[0x16];
 	/* 0x8FFF */ u8 var8fff[5];
 	/* 0x9004 */ u8 fill9004[0x340];
@@ -178,16 +174,16 @@ void sub_80EBC10() {
 }
 
 void sub_80EBCA8() {
-	ewram0.var6db2 = 1;
-	ewram0.var6db3 = 2;
-	ewram0.var6db4 = 3;
+	ewram0.var6db2[0] = 1;
+	ewram0.var6db2[1] = 2;
+	ewram0.var6db2[2] = 3;
 	if (FlagGet(SYS_RIBBON_GET)) {
-		ewram0.var6db5 = 4;
+		ewram0.var6db2[3] = 4;
 	}
 	else {
-		ewram0.var6db5 = 0;
+		ewram0.var6db2[3] = 0;
 	}
-	ewram0.var6db6 = 5;
+	ewram0.var6db2[4] = 5;
 }
 
 void sub_80EBD18() {
@@ -420,7 +416,6 @@ void sub_80EC210() {
 	}
 }
 
-#if 0
 bool8 sub_80EEC10();
 bool8 sub_80F6250();
 void sub_80EED9C();
@@ -436,23 +431,6 @@ void sub_80EE3D8();
 void sub_80EC268() {
 	u8 var1;
 	switch (ewram0.var304) {
-	case 3:
-		if (sub_80F6250()) return;
-		ewram0.var304++;
-		break;
-	case 6:
-		sub_80F6C20();
-		if (ewram0.varD158 != 0) {
-			PlaySE(0x5);
-			sub_80EBDBC(&sub_80EE3D8);
-			break;
-		}
-		else {
-			PlaySE(0x20);
-			sub_80EF428(0, 6);
-			ewram0.var304 = 0xFF;
-			break;
-		}
 	case 0:
 		if (sub_80EEC10() != 0) {
 			PlaySE(0x5);
@@ -462,28 +440,43 @@ void sub_80EC268() {
 		}
 		else {
 			if (gMain.newKeys & A_BUTTON) {
-				if (!(gMain.newKeys & B_BUTTON)) {
+				ewram0.var6ddc = ewram0.var6dad;
+				switch (ewram0.var6db2[ewram0.var6ddc] - 1) {
+				case 0:
+					PlaySE(5);
+					sub_80EBDBC(&sub_80EC4A0);
+					break;
+				case 1:
+					PlaySE(5);
+					sub_80EBDBC(&sub_80EC81C);
+					break;
+				case 4:
 					ewram0.var304 = 1;
+					break;
+				case 3:
+					ewram0.var304 = 2;
+					break;
+				case 2:
+					ewram0.var304 = 6;
+					break;
 				}
-				break;
 			}
-			ewram0.var6ddc = ewram0.var6dad;
-			// TODO switch
+			else if (gMain.newKeys & B_BUTTON) {
+				ewram0.var304 = 1;
+			}
 			break;
 		}
-	case 0xFF:
-		if ((var1 = sub_80EEC10()) != 0) {
-			PlaySE(0x5);
-			sub_80EF428(0, ewram0.var6dad);
-			ewram0.var304 = 0;
-			break;
-		}
-		else {
-			if (gMain.newKeys & (A_BUTTON | B_BUTTON)) return;
-			sub_80EF428(0, ewram0.var6dad);
-			ewram0.var304 = var1;
-			break;
-		}
+	case 1:
+		sub_80F208C();
+		sub_80EBDBC(&sub_80EE96C);
+		break;
+	case 2:
+		sub_80F6208();
+		ewram0.var304++;
+	case 3:
+		if (sub_80F6250()) return;
+		ewram0.var304++;
+		break;
 	case 4:
 		if (sub_8055870()) return;
 		if (ewram0.var8fe8 != 0) {
@@ -497,385 +490,34 @@ void sub_80EC268() {
 			ewram0.var304 = 0xFF;
 			break;
 		}
-	case 2:
-		sub_80F6208();
-		ewram0.var304++;
-		if (sub_80F6250()) return;
-		ewram0.var304++;
-		break;
-	case 1:
-		sub_80F208C();
-		sub_80EBDBC(&sub_80EE96C);
-		break;
+	case 6:
+		sub_80F6C20();
+		if (ewram0.varD158 != 0) {
+			PlaySE(0x5);
+			sub_80EBDBC(&sub_80EE3D8);
+			break;
+		}
+		else {
+			PlaySE(0x20);
+			sub_80EF428(0, 6);
+			ewram0.var304 = 0xFF;
+			break;
+		}
+	case 0xFF:
+		if ((var1 = sub_80EEC10()) != 0) {
+			PlaySE(0x5);
+			sub_80EF428(0, ewram0.var6dad);
+			ewram0.var304 = 0;
+			sub_80EED9C();
+		}
+		else {
+			if (!(gMain.newKeys & (A_BUTTON | B_BUTTON))) return;
+			sub_80EF428(0, ewram0.var6dad);
+			ewram0.var304 = var1;
+			break;
+		}
 	}
-//	if (ewram0.var304 != 3) {
-//		// bls -> bgt
-//		if (ewram0.var304 > 3) {
-//			if (ewram0.var304 != 6) {
-//				if (ewram0.var304 > 6) {
-//					if (ewram0.var304 != 0xFF) return;
-//					if (sub_80EEC10() == 0) {
-//						if (gMain.newKeys == (A_BUTTON | B_BUTTON)) return;
-//				                sub_80EF428(0, ewram0.var6dad);
-//				                return;
-//					}
-//					PlaySE(0x5);
-//			                sub_80EF428(0, ewram0.var6dad);
-//					sub_80EED9C();
-//					return;
-//
-//				} 
-//				if (ewram0.var304 != 4) return;
-//				if (sub_8055870() != 0) return;
-//				if (ewram0.var8fe8 == 0) {
-//					PlaySE(0x20);
-//					sub_80EF428(0, 5);
-//					ewram0.var304 = 0xFF;
-//					return;
-//				}
-//				PlaySE(0x5);
-//				sub_80EBDBC(&sub_80EDB88);
-//				return;
-//			}
-//			if (ewram0.var304 != 4) return;
-//			if (sub_8055870()) return;
-//			if (!ewram0.var8fe8) {
-//				PlaySE(0x20);
-//				sub_80EF428(0, 5);
-//				ewram0.var304 = 0xFF;
-//				return;
-//			}
-//			PlaySE(5);
-//			sub_80EBDBC(&sub_80EDB88);
-//			return;
-//		}
-//		if (ewram0.var304 != 1) {
-//			if (ewram0.var304 < 1) {
-//				if (ewram0.var304 == 0) {
-//					if (sub_80EEC10() == 0) {
-//						if (gMain.newKeys != A_BUTTON) {
-//
-//						}
-//						ewram0.var6ddc = ewram0.var6dad;
-//						// TODO arreglar esto
-//						switch (ewram0.var6db2) {
-//						case 1:
-//							PlaySE(5);
-//							sub_80EBDBC(&sub_80EC4A0);
-//							return;
-//						case 2:
-//							PlaySE(5);
-//							sub_80EBDBC(&sub_80EC81C);
-//							return;
-//						case 3:
-//							ewram0.var304 = 6;
-//							return;
-//						case 4:
-//							ewram0.var304 = 2;
-//							return;
-//						case 5:
-//							ewram0.var304 = 1;
-//							return;
-//						}
-//					}
-//					PlaySE(0x5);
-//			                sub_80EF428(0, ewram0.var6dad);
-//					sub_80EED9C();
-//					return;
-//				}
-//			}
-//			sub_80F6208();
-//			ewram0.var304++;
-//			if (sub_80F6250() != 0) return;
-//			ewram0.var304++;
-//			return;
-//		}
-//		sub_80F208C();
-//		sub_80EBDBC(&sub_80EE96C);
-//		return;
-//	}
-//	if (sub_80F6250() != 0) return;
-//	ewram0.var304++;
-//	return;
 }
-#else
-__attribute__((naked))
-void sub_80EC268() {
-	asm_unified("push {r4-r6,lr}\n\
-	ldr r4, _080EC290 @ =0x02000000\n\
-	movs r0, 0xC1\n\
-	lsls r0, 2\n\
-	adds r6, r4, r0\n\
-	ldrh r0, [r6]\n\
-	cmp r0, 0x3\n\
-	bne _080EC27A\n\
-	b _080EC3BE\n\
-_080EC27A:\n\
-	cmp r0, 0x3\n\
-	bgt _080EC294\n\
-	cmp r0, 0x1\n\
-	bne _080EC284\n\
-	b _080EC3A2\n\
-_080EC284:\n\
-	cmp r0, 0x1\n\
-	ble _080EC28A\n\
-	b _080EC3B4\n\
-_080EC28A:\n\
-	cmp r0, 0\n\
-	beq _080EC2AE\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC290: .4byte 0x02000000\n\
-_080EC294:\n\
-	cmp r0, 0x6\n\
-	bne _080EC29A\n\
-	b _080EC414\n\
-_080EC29A:\n\
-	cmp r0, 0x6\n\
-	bgt _080EC2A6\n\
-	cmp r0, 0x4\n\
-	bne _080EC2A4\n\
-	b _080EC3DC\n\
-_080EC2A4:\n\
-	b _080EC492\n\
-_080EC2A6:\n\
-	cmp r0, 0xFF\n\
-	bne _080EC2AC\n\
-	b _080EC44C\n\
-_080EC2AC:\n\
-	b _080EC492\n\
-_080EC2AE:\n\
-	bl sub_80EEC10\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EC2D4\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r1, _080EC2D0 @ =0x00006dad\n\
-	adds r0, r4, r1\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0\n\
-	bl sub_80EF428\n\
-	bl sub_80EED9C\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC2D0: .4byte 0x00006dad\n\
-_080EC2D4:\n\
-	ldr r0, _080EC310 @ =gMain\n\
-	ldrh r1, [r0, 0x2E]\n\
-	movs r2, 0x1\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080EC394\n\
-	ldr r2, _080EC314 @ =0x00006dad\n\
-	adds r0, r4, r2\n\
-	ldrb r1, [r0]\n\
-	adds r2, 0x2F\n\
-	adds r0, r4, r2\n\
-	strb r1, [r0]\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	subs r2, 0x2A\n\
-	adds r1, r4, r2\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r0, 0x4\n\
-	bls _080EC304\n\
-	b _080EC492\n\
-_080EC304:\n\
-	lsls r0, 2\n\
-	ldr r1, _080EC318 @ =_080EC31C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_080EC310: .4byte gMain\n\
-_080EC314: .4byte 0x00006dad\n\
-_080EC318: .4byte _080EC31C\n\
-	.align 2, 0\n\
-_080EC31C:\n\
-	.4byte _080EC330\n\
-	.4byte _080EC344\n\
-	.4byte _080EC380\n\
-	.4byte _080EC36C\n\
-	.4byte _080EC358\n\
-_080EC330:\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r0, _080EC340 @ =sub_80EC4A0\n\
-	bl sub_80EBDBC\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC340: .4byte sub_80EC4A0\n\
-_080EC344:\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r0, _080EC354 @ =sub_80EC81C\n\
-	bl sub_80EBDBC\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC354: .4byte sub_80EC81C\n\
-_080EC358:\n\
-	ldr r0, _080EC368 @ =0x02000000\n\
-	movs r1, 0xC1\n\
-	lsls r1, 2\n\
-	adds r0, r1\n\
-	movs r1, 0x1\n\
-	strh r1, [r0]\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC368: .4byte 0x02000000\n\
-_080EC36C:\n\
-	ldr r0, _080EC37C @ =0x02000000\n\
-	movs r2, 0xC1\n\
-	lsls r2, 2\n\
-	adds r0, r2\n\
-	movs r1, 0x2\n\
-	strh r1, [r0]\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC37C: .4byte 0x02000000\n\
-_080EC380:\n\
-	ldr r0, _080EC390 @ =0x02000000\n\
-	movs r1, 0xC1\n\
-	lsls r1, 2\n\
-	adds r0, r1\n\
-	movs r1, 0x6\n\
-	strh r1, [r0]\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC390: .4byte 0x02000000\n\
-_080EC394:\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080EC39E\n\
-	b _080EC492\n\
-_080EC39E:\n\
-	strh r2, [r6]\n\
-	b _080EC492\n\
-_080EC3A2:\n\
-	bl sub_80F208C\n\
-	ldr r0, _080EC3B0 @ =sub_80EE96C\n\
-	bl sub_80EBDBC\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC3B0: .4byte sub_80EE96C\n\
-_080EC3B4:\n\
-	bl sub_80F6208\n\
-	ldrh r0, [r6]\n\
-	adds r0, 0x1\n\
-	strh r0, [r6]\n\
-_080EC3BE:\n\
-	bl sub_80F6250\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _080EC492\n\
-	ldr r1, _080EC3D8 @ =0x02000000\n\
-	movs r2, 0xC1\n\
-	lsls r2, 2\n\
-	adds r1, r2\n\
-	ldrh r0, [r1]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1]\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC3D8: .4byte 0x02000000\n\
-_080EC3DC:\n\
-	bl sub_8055870\n\
-	cmp r0, 0\n\
-	bne _080EC492\n\
-	ldr r1, _080EC400 @ =0x00008fe8\n\
-	adds r0, r4, r1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EC408\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r0, _080EC404 @ =sub_80EDB88\n\
-	bl sub_80EBDBC\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC400: .4byte 0x00008fe8\n\
-_080EC404: .4byte sub_80EDB88\n\
-_080EC408:\n\
-	movs r0, 0x20\n\
-	bl PlaySE\n\
-	movs r0, 0\n\
-	movs r1, 0x5\n\
-	b _080EC442\n\
-_080EC414:\n\
-	bl sub_80F6C20\n\
-	ldr r2, _080EC430 @ =0x0000d158\n\
-	adds r0, r4, r2\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _080EC438\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r0, _080EC434 @ =sub_80EE3D8\n\
-	bl sub_80EBDBC\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC430: .4byte 0x0000d158\n\
-_080EC434: .4byte sub_80EE3D8\n\
-_080EC438:\n\
-	movs r0, 0x20\n\
-	bl PlaySE\n\
-	movs r0, 0\n\
-	movs r1, 0x6\n\
-_080EC442:\n\
-	bl sub_80EF428\n\
-	movs r0, 0xFF\n\
-	strh r0, [r6]\n\
-	b _080EC492\n\
-_080EC44C:\n\
-	bl sub_80EEC10\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0\n\
-	beq _080EC478\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r1, _080EC474 @ =0x00006dad\n\
-	adds r0, r4, r1\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0\n\
-	bl sub_80EF428\n\
-	movs r0, 0\n\
-	strh r0, [r6]\n\
-	bl sub_80EED9C\n\
-	b _080EC492\n\
-	.align 2, 0\n\
-_080EC474: .4byte 0x00006dad\n\
-_080EC478:\n\
-	ldr r0, _080EC498 @ =gMain\n\
-	ldrh r1, [r0, 0x2E]\n\
-	movs r0, 0x3\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080EC492\n\
-	ldr r2, _080EC49C @ =0x00006dad\n\
-	adds r0, r4, r2\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0\n\
-	bl sub_80EF428\n\
-	strh r5, [r6]\n\
-_080EC492:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080EC498: .4byte gMain\n\
-_080EC49C: .4byte 0x00006dad\n\
-	");
-}
-#endif
 
 void sub_80F1E84();
 bool8 sub_80F1F10();
