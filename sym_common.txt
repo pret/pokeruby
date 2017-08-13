@@ -123,20 +123,7 @@ gUnknown_03004824: @ 3004824
 gUnknown_03004828: @ 3004828
 	.space 0x8
 
-@ berry_blender
-
-gUnknown_03004830: @ 3004830
-	.space 0x4
-
-gUnknown_03004834: @ 3004834
-	.space 0xC
-
-gUnknown_03004840: @ 3004840
-	.space 0x14
-
-sBerryBlenderData: @ 3004854
-	.space 0x4
-
+	.include "berry_blender.o"
 	.include "rom4.o"
 	.include "fieldmap.o"
 	.include "field_camera.o"

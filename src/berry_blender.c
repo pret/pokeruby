@@ -47,17 +47,6 @@ struct MusicPlayerInfo
     u32 intp;
 };
 
-// other files functions
-void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
-void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
-void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
-void sub_80A6978(void);
-u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
-void sub_814A880(u8 a1, u8 a2);
-u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
-s8 sub_810CA00(void);
-bool8 sub_810CA34(struct Pokeblock *pokeblock);
-
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
 #define BLENDER_SCORE_MISS      2
@@ -83,8 +72,6 @@ struct BerryBlenderData
 {
     u8 field_0;
     u8 field_1;
-    u8 field_2;
-    u8 field_3;
     struct Window field_4;
     u8 field_35;
     u8 field_36;
@@ -158,75 +145,7 @@ struct BerryBlenderData
     u16 field_9A[BLENDER_MAX_PLAYERS];
     u16 field_A2[BLENDER_MAX_PLAYERS];
     u8 field_AA;
-    u8 stringVar[61];
-    u8 field_E8;
-    u8 field_E9;
-    u8 field_EA;
-    u8 field_EB;
-    u8 field_EC;
-    u8 field_ED;
-    u8 field_EE;
-    u8 field_EF;
-    u8 field_F0;
-    u8 field_F1;
-    u8 field_F2;
-    u8 field_F3;
-    u8 field_F4;
-    u8 field_F5;
-    u8 field_F6;
-    u8 field_F7;
-    u8 field_F8;
-    u8 field_F9;
-    u8 field_FA;
-    u8 field_FB;
-    u8 field_FC;
-    u8 field_FD;
-    u8 field_FE;
-    u8 field_FF;
-    u8 field_100;
-    u8 field_101;
-    u8 field_102;
-    u8 field_103;
-    u8 field_104;
-    u8 field_105;
-    u8 field_106;
-    u8 field_107;
-    u8 field_108;
-    u8 field_109;
-    u8 field_10A;
-    u8 field_10B;
-    u8 field_10C;
-    u8 field_10D;
-    u8 field_10E;
-    u8 field_10F;
-    u8 field_110;
-    u8 field_111;
-    u8 field_112;
-    u8 field_113;
-    u8 field_114;
-    u8 field_115;
-    u8 field_116;
-    u8 field_117;
-    u8 field_118;
-    u8 field_119;
-    u8 field_11A;
-    u8 field_11B;
-    u8 field_11C;
-    u8 field_11D;
-    u8 field_11E;
-    u8 field_11F;
-    u8 field_120;
-    u8 field_121;
-    u8 field_122;
-    u8 field_123;
-    u8 field_124;
-    u8 field_125;
-    u8 field_126;
-    u8 field_127;
-    u8 field_128;
-    u8 field_129;
-    u8 field_12A;
-    u8 field_12B;
+    u8 stringVar[129];
     u32 gameFrameTime;
     s32 framesToWait;
     u32 field_134;
@@ -247,8 +166,6 @@ struct BerryBlenderData
     u8 playerPlaces[BLENDER_MAX_PLAYERS];
     struct BgAffineDstData field_168;
     u16 field_178;
-    u8 field_17A;
-    u8 field_17B;
     struct BlenderBerry blendedBerries[BLENDER_MAX_PLAYERS];
     u32 field_1BC;
     u16 field_1C0;
@@ -256,65 +173,43 @@ struct BerryBlenderData
     u32 field_1C4;
 };
 
-extern struct BerryBlenderData* sBerryBlenderData;
+struct BlenderDebug
+{
+    s8 cursorPos;
+    s8 berries[4];
+    struct Pokeblock pokeblock;
+    u8 field_10;
+    u8 spicy;
+    u8 dry;
+    u8 sweet;
+    u8 bitter;
+    u8 sour;
+    u8 feel;
+    s8 field_17;
+    s8 field_18;
+    s8 field_19;
+    s16 BPM;
+};
+
+// other files functions
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
+void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
+void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
+void sub_80A6978(void);
+u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
+void sub_814A880(u8 a1, u8 a2);
+u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
+s8 sub_810CA00(void);
+bool8 sub_810CA34(struct Pokeblock *pokeblock);
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 ewram[];
-extern s16 gUnknown_03000520[];
+extern u16 gScriptItemId;
+extern u8 gUnknown_020297ED;
+extern u8 byte_3002A68;
 
-// this file's functions:
-void sub_80514A4(void);
-void sub_80514F0(void);
-void sub_804E56C(void);
-void sub_804E884(u8 a0);
-void sub_8051474(void);
-void sub_804E9F8(void);
-void sub_804F378(void);
-void sub_8051414(struct BgAffineDstData *dest);
-void sub_804F238(void);
-void sub_80501FC(void);
-bool8 sub_8051B8C(void);
-void Blender_SetBankBerryData(u8 bank, u16 itemID);
-void sub_804F2A8(void);
-void sub_804F81C(void);
-void sub_805156C(void);
-void sub_8051684(struct Sprite* sprite);
-void sub_8051AC8(s16* a0, u16 a1);
-void sub_805194C(u16 a0, u16 a1);
-void sub_8051A3C(u16 a0);
-void sub_8051B18(void);
-void sub_805123C(void);
-void sub_8050954(void);
-bool8 Blender_PrintBlendingRanking(void);
-bool8 Blender_PrintBlendingResults(void);
-void sub_80510E8(void);
-void sub_8050E30(void);
-void sub_805197C(u16 a0, u16 a1);
-void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
-void sub_8052BD0(u8 taskID);
-void sub_8052AF8(void);
-
-void Blender_ControlHitPitch(void)
-{
-    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, (sBerryBlenderData->field_56 - 128) * 2);
-}
-
-void VBlankCB0_BerryBlender(void)
-{
-    sub_80514A4();
-    sub_80514F0();
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-}
-
-void VBlankCB1_BerryBlender(void)
-{
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-}
+// rom data to do
 
 extern const u8 gUnknown_08E6C100[];
 extern const u8 gUnknown_08215C2C[];
@@ -329,14 +224,121 @@ extern const struct SpriteSheet gUnknown_08216540;
 extern const struct SpriteSheet gUnknown_08216574;
 extern const struct SpritePalette gUnknown_082163EC;
 extern const struct SpritePalette gUnknown_082163E4;
+extern const struct WindowConfig gWindowConfig_81E6F68;
+extern const u8 sBlenderSyncArrowsPos[][2];
+extern const struct SpriteTemplate sBlenderSyncArrow_SpriteTemplate;
+extern const s16 gUnknown_08216594[][5];
+extern const u8* const gUnknown_082162B8[];
+extern const u8 gUnknown_082162EC[3][4];
+extern const u16 gUnknown_082162F8[];
+extern const u8 gUnknown_08216300[];
+extern const struct SpriteTemplate gSpriteTemplate_8216548;
+extern const u8 gUnknown_08216303[];
+extern const u8 gUnknown_082165BC[][3];
+extern const u8 gUnknown_082162C4[];
+extern const u8 gUnknown_082162D4[][2];
+extern const TaskFunc gUnknown_08216308[];
+extern const s8 gUnknown_082162CC[][2];
+extern const struct SpriteTemplate gSpriteTemplate_821645C;
+extern const u8 gUnknown_082165DA[];
+extern const u8 gUnknown_082165DF[];
+extern const struct SpriteTemplate gSpriteTemplate_82164FC;
+extern const u8* const gUnknown_08216284[];
+extern const struct SpriteTemplate gSpriteTemplate_821657C;
+extern const u8 gUnknown_082165E9[];
+extern const u8 gUnknown_082165EE[];
+extern const u8 gUnknown_08216249[];
+extern const u8 gUnknown_082162C8[];
+extern const u8 *const gPokeblockNames[];
+extern const u8 gUnknown_082165F3[];
+extern const u8 gOtherText_BPMAndDash[];
+extern const u8 gUnknown_082165F8[];
+extern const u8 gUnknown_08216600[];
+extern const struct Berry gBerries[];
 
-bool8 sub_804E2EC(void)
+// ewram
+static EWRAM_DATA u8 gUnknown_020297DC = 0;
+static EWRAM_DATA u32 gUnknown_020297E0 = 0;
+static EWRAM_DATA u32 gUnknown_020297E4 = 0;
+static EWRAM_DATA u8 gUnknown_020297E8 = 0;
+
+// iwram common
+u16 gUnknown_03004830;
+u8 gUnknown_03004834;
+u16 gUnknown_03004840[10];
+struct BerryBlenderData* gBerryBlenderData;
+
+// iwram bss
+IWRAM_DATA s16 gUnknown_03000510[8];
+IWRAM_DATA s16 gUnknown_03000520[6];
+IWRAM_DATA s16 gUnknown_0300052C;
+IWRAM_DATA s16 gUnknown_0300052E;
+IWRAM_DATA s32 gUnknown_03000530[6];
+IWRAM_DATA s32 gUnknown_03000548[5];
+IWRAM_DATA u32 gUnknown_0300055C;
+IWRAM_DATA struct BlenderDebug sBlenderDebug;
+
+// this file's functions
+void Blender_SetBankBerryData(u8 bank, u16 itemID);
+
+static void sub_80514A4(void);
+static void sub_80514F0(void);
+static void sub_804E56C(void);
+static void sub_804E884(u8 a0);
+static void sub_8051474(void);
+static void sub_804E9F8(void);
+static void sub_804F378(void);
+static void sub_8051414(struct BgAffineDstData *dest);
+static void sub_804F238(void);
+static void sub_80501FC(void);
+static bool8 sub_8051B8C(void);
+static void sub_804F2A8(void);
+static void sub_804F81C(void);
+static void sub_805156C(void);
+void sub_8051684(struct Sprite* sprite);
+static void sub_8051AC8(s16* a0, u16 a1);
+static void sub_805194C(u16 a0, u16 a1);
+static void sub_8051A3C(u16 a0);
+static void sub_8051B18(void);
+static void sub_805123C(void);
+static void sub_8050954(void);
+static bool8 Blender_PrintBlendingRanking(void);
+static bool8 Blender_PrintBlendingResults(void);
+static void sub_80510E8(void);
+static void sub_8050E30(void);
+static void sub_805197C(u16 a0, u16 a1);
+static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
+static void sub_8052BD0(u8 taskID);
+static void sub_8052AF8(void);
+
+static void Blender_ControlHitPitch(void)
 {
-    switch (sBerryBlenderData->field_1)
+    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, (gBerryBlenderData->field_56 - 128) * 2);
+}
+
+static void VBlankCB0_BerryBlender(void)
+{
+    sub_80514A4();
+    sub_80514F0();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void VBlankCB1_BerryBlender(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static bool8 sub_804E2EC(void)
+{
+    switch (gBerryBlenderData->field_1)
     {
     case 0:
         sub_800D238(gUnknown_08E6C100, &ewram[0x10000]);
-        sBerryBlenderData->field_1++;
+        gBerryBlenderData->field_1++;
         break;
     case 1:
         {
@@ -345,7 +347,7 @@ bool8 sub_804E2EC(void)
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x400);
             LoadPalette(gUnknown_08215C0C, 0, 0x100);
-            sBerryBlenderData->field_1++;
+            gBerryBlenderData->field_1++;
         }
         break;
     case 2:
@@ -365,16 +367,16 @@ bool8 sub_804E2EC(void)
                     break;
                 }
             }
-            sBerryBlenderData->field_1++;
+            gBerryBlenderData->field_1++;
         }
         break;
     case 3:
         sub_800D238(gUnknown_08E6C920, &ewram[0x10000]);
-        sBerryBlenderData->field_1++;
+        gBerryBlenderData->field_1++;
         break;
     case 4:
         sub_800D238(gUnknown_08E6D354, &ewram[0x13000]);
-        sBerryBlenderData->field_1++;
+        gBerryBlenderData->field_1++;
         break;
     case 5:
         {
@@ -382,7 +384,7 @@ bool8 sub_804E2EC(void)
             void* offsetWrite = (void*)(VRAM + 0xE000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            sBerryBlenderData->field_1++;
+            gBerryBlenderData->field_1++;
         }
         break;
     case 6:
@@ -391,7 +393,7 @@ bool8 sub_804E2EC(void)
             void* offsetWrite = (void*)(VRAM + 0xF000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            sBerryBlenderData->field_1++;
+            gBerryBlenderData->field_1++;
         }
         break;
     case 7:
@@ -409,27 +411,27 @@ bool8 sub_804E2EC(void)
             offsetWrite = (void*)(VRAM + 0x6000);
             DmaCopy16(3, offsetRead, offsetWrite, 0x500);
             LoadPalette(gUnknown_0821602C, 0x80, 0x20);
-            sBerryBlenderData->field_1++;
+            gBerryBlenderData->field_1++;
         }
         break;
     case 8:
         LoadSpriteSheet(&gUnknown_082163DC);
         LoadSpriteSheet(&gUnknown_082164F4);
         LoadSpriteSheet(&gUnknown_08216454);
-        sBerryBlenderData->field_1++;
+        gBerryBlenderData->field_1++;
         break;
     case 9:
         LoadSpriteSheet(&gUnknown_08216540);
         LoadSpriteSheet(&gUnknown_08216574);
         LoadSpritePalette(&gUnknown_082163EC);
         LoadSpritePalette(&gUnknown_082163E4);
-        sBerryBlenderData->field_1 = 0;
+        gBerryBlenderData->field_1 = 0;
         return 1;
     }
     return 0;
 }
 
-void sub_804E4FC(void)
+static void sub_804E4FC(void)
 {
     REG_DISPCNT = 0x1341;
     REG_BG2CNT = 0x4880;
@@ -444,24 +446,20 @@ void sub_804E538(void)
 {
     u8* field6F; //this temp value is needed to match
 
-    sBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
 
-    field6F = &sBerryBlenderData->field_6F;
-    sBerryBlenderData->field_0 = 0;
+    field6F = &gBerryBlenderData->field_6F;
+    gBerryBlenderData->field_0 = 0;
     *field6F = 0;
 
     sub_804E884(gSpecialVar_0x8004);
     SetMainCallback2(sub_804E56C);
 }
 
-extern const struct WindowConfig gWindowConfig_81E6F68;
-extern const u8 sBlenderSyncArrowsPos[][2];
-extern const struct SpriteTemplate sBlenderSyncArrow_SpriteTemplate;
-
-void sub_804E56C(void)
+static void sub_804E56C(void)
 {
     s32 i;
-    switch (sBerryBlenderData->field_0)
+    switch (gBerryBlenderData->field_0)
     {
     case 0:
         REG_DISPCNT = 0;
@@ -470,13 +468,13 @@ void sub_804E56C(void)
         SetVBlankCallback(NULL);
         SetUpWindowConfig(&gWindowConfig_81E6F68);
         InitMenuWindow(&gWindowConfig_81E6F68);
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->field_140 = 0;
-        sBerryBlenderData->field_13E = 0;
-        sBerryBlenderData->field_142 = 0x50;
-        sBerryBlenderData->field_144 = 0;
-        sBerryBlenderData->field_146 = 0;
-        sBerryBlenderData->field_1 = 0;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->field_140 = 0;
+        gBerryBlenderData->field_13E = 0;
+        gBerryBlenderData->field_142 = 0x50;
+        gBerryBlenderData->field_144 = 0;
+        gBerryBlenderData->field_146 = 0;
+        gBerryBlenderData->field_1 = 0;
         sub_8051474();
         break;
     case 1:
@@ -484,34 +482,34 @@ void sub_804E56C(void)
         {
             for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
             {
-                sBerryBlenderData->SyncArrowSpriteID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
-                StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[i]], i + 8);
+                gBerryBlenderData->SyncArrowSpriteID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
+                StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSpriteID[i]], i + 8);
             }
             SetVBlankCallback(VBlankCB0_BerryBlender);
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 2:
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         sub_8051474();
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 3:
         sub_804E4FC();
         if (!gPaletteFade.active)
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 4:
         MenuDrawTextWindow(0, 14, 29, 19);
         MenuPrintMessage(gOtherText_BlenderChooseBerry, 1, 15);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 5:
         if (MenuUpdateWindowText())
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         }
         break;
@@ -519,7 +517,7 @@ void sub_804E56C(void)
         if (!gPaletteFade.active)
         {
             sub_80A6978();
-            sBerryBlenderData->field_0 = 0;
+            gBerryBlenderData->field_0 = 0;
         }
         break;
     }
@@ -561,15 +559,13 @@ void sub_804E794(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
     sprite->callback = sub_804E738;
 }
 
-extern const s16 gUnknown_08216594[][5];
-
-void sub_804E7C0(u16 a0, u8 a1)
+static void sub_804E7C0(u16 a0, u8 a1)
 {
     u8 spriteID = sub_80A7DEC(a0 + 123, 0, 80, a1 & 1);
     sub_804E794(&gSprites[spriteID], gUnknown_08216594[a1][0], gUnknown_08216594[a1][1], gUnknown_08216594[a1][2], gUnknown_08216594[a1][3], gUnknown_08216594[a1][4]);
 }
 
-void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
+static void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
 {
     const struct Berry *berryInfo = GetBerryInfo(itemID + 124);
     berry->itemID = itemID;
@@ -582,10 +578,7 @@ void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
     berry->smoothness = berryInfo->smoothness;
 }
 
-extern u8 gUnknown_03004834;
-extern const u8* const gUnknown_082162B8[];
-
-void sub_804E884(u8 a0)
+static void sub_804E884(u8 a0)
 {
     int i;
     if (a0)
@@ -600,20 +593,20 @@ void sub_804E884(u8 a0)
         break;
     case 1:
         gUnknown_03004834 = 1;
-        sBerryBlenderData->playersNo = 2;
+        gBerryBlenderData->playersNo = 2;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
         StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
         break;
     case 2:
         gUnknown_03004834 = 2;
-        sBerryBlenderData->playersNo = 3;
+        gBerryBlenderData->playersNo = 3;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
         StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
         StringCopy(gLinkPlayers[2].name, gUnknown_082162B8[1]);
         break;
     case 3:
         gUnknown_03004834 = 3;
-        sBerryBlenderData->playersNo = 4;
+        gBerryBlenderData->playersNo = 4;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
         StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
         StringCopy(gLinkPlayers[2].name, gUnknown_082162B8[1]);
@@ -627,12 +620,12 @@ void sub_804E990(void)
     s32 i;
 
     REG_DISPCNT = 0;
-    sBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
-    sBerryBlenderData->field_0 = 0;
-    sBerryBlenderData->field_134 = 0;
+    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData->field_0 = 0;
+    gBerryBlenderData->field_134 = 0;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
-        sBerryBlenderData->chosenItemID[i] = 0;
+        gBerryBlenderData->chosenItemID[i] = 0;
     }
     sub_804E884(gSpecialVar_0x8004);
     if (gSpecialVar_0x8004 == 0)
@@ -641,17 +634,10 @@ void sub_804E990(void)
         SetMainCallback2(sub_804F378);
 }
 
-extern u16 gScriptItemId;
-
-extern const u8 gUnknown_082162EC[3][4];
-extern const u16 gUnknown_082162F8[];
-extern const u8 gUnknown_08216300[];
-extern const struct SpriteTemplate gSpriteTemplate_8216548;
-
-void sub_804E9F8(void)
+static void sub_804E9F8(void)
 {
     int i, j;
-    switch (sBerryBlenderData->field_0)
+    switch (gBerryBlenderData->field_0)
     {
     case 0:
         ResetSpriteData();
@@ -661,64 +647,64 @@ void sub_804E9F8(void)
         SetUpWindowConfig(&gWindowConfig_81E6F68);
         InitMenuWindow(&gWindowConfig_81E6F68);
         gLinkType = 0x4422;
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->field_4E = 0;
-        sBerryBlenderData->field_7E = 0;
-        sBerryBlenderData->field_144 = 0;
-        sBerryBlenderData->field_146 = 0;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->field_4E = 0;
+        gBerryBlenderData->field_7E = 0;
+        gBerryBlenderData->field_144 = 0;
+        gBerryBlenderData->field_146 = 0;
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            sBerryBlenderData->field_70[i] = 0;
+            gBerryBlenderData->field_70[i] = 0;
             for (j = 0; j < 3; j++)
             {
-                sBerryBlenderData->scores[i][j] = 0;
+                gBerryBlenderData->scores[i][j] = 0;
             }
         }
-        sBerryBlenderData->field_7C = 0;
-        sBerryBlenderData->field_56 = 0;
-        sBerryBlenderData->arrowPos = 0;
-        sBerryBlenderData->max_RPM = 0;
-        sBerryBlenderData->field_1 = 0;
+        gBerryBlenderData->field_7C = 0;
+        gBerryBlenderData->field_56 = 0;
+        gBerryBlenderData->arrowPos = 0;
+        gBerryBlenderData->max_RPM = 0;
+        gBerryBlenderData->field_1 = 0;
         break;
     case 1:
         if (sub_804E2EC())
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
             sub_8051474();
         }
         break;
     case 2:
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            sBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
-            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
+            gBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
+            StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
         }
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 3:
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 4:
         sub_804E4FC();
         if (!gPaletteFade.active)
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 5:
         MenuDrawTextWindow(0, 13, 29, 19);
         MenuPrint(gOtherText_LinkStandby3, 1, 14);
-        sBerryBlenderData->field_0 = 8;
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_0 = 8;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 8:
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->field_13C = 0;
-        Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gScriptItemId);
-        memcpy(gBlockSendBuffer, &sBerryBlenderData->blendedBerries[0], sizeof(struct BlenderBerry));
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->field_13C = 0;
+        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gScriptItemId);
+        memcpy(gBlockSendBuffer, &gBerryBlenderData->blendedBerries[0], sizeof(struct BlenderBerry));
         sub_80084A4();
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 9:
         if (sub_8007ECC())
@@ -726,119 +712,119 @@ void sub_804E9F8(void)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
                 sub_8007E9C(4);
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 10:
-        if (++sBerryBlenderData->framesToWait > 20)
+        if (++gBerryBlenderData->framesToWait > 20)
         {
             MenuZeroFillScreen();
             if (GetBlockReceivedStatus() == sub_8008198())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
                 {
-                    memcpy(&sBerryBlenderData->blendedBerries[i], &gBlockRecvBuffer[i][0], sizeof(struct BlenderBerry));
-                    sBerryBlenderData->chosenItemID[i] = sBerryBlenderData->blendedBerries[i].itemID;
+                    memcpy(&gBerryBlenderData->blendedBerries[i], &gBlockRecvBuffer[i][0], sizeof(struct BlenderBerry));
+                    gBerryBlenderData->chosenItemID[i] = gBerryBlenderData->blendedBerries[i].itemID;
                 }
                 ResetBlockReceivedFlags();
-                sBerryBlenderData->field_0++;
+                gBerryBlenderData->field_0++;
             }
         }
         break;
     case 11:
-        sBerryBlenderData->playersNo = GetLinkPlayerCount();
+        gBerryBlenderData->playersNo = GetLinkPlayerCount();
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            if (sBerryBlenderData->field_13C == gUnknown_082162EC[sBerryBlenderData->playersNo - 2][i])
+            if (gBerryBlenderData->field_13C == gUnknown_082162EC[gBerryBlenderData->playersNo - 2][i])
             {
-                sub_804E7C0(sBerryBlenderData->chosenItemID[sBerryBlenderData->field_13C], i);
+                sub_804E7C0(gBerryBlenderData->chosenItemID[gBerryBlenderData->field_13C], i);
                 break;
             }
         }
-        sBerryBlenderData->framesToWait = 0;
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->field_13C++;
+        gBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->field_13C++;
         break;
     case 12:
-        if (++sBerryBlenderData->framesToWait > 60)
+        if (++gBerryBlenderData->framesToWait > 60)
         {
-            if (sBerryBlenderData->field_13C >= sBerryBlenderData->playersNo)
+            if (gBerryBlenderData->field_13C >= gBerryBlenderData->playersNo)
             {
-                sBerryBlenderData->field_0++;
-                sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->playersNo - 2]] - 22528;
+                gBerryBlenderData->field_0++;
+                gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]] - 22528;
             }
             else
-                sBerryBlenderData->field_0--;
-            sBerryBlenderData->framesToWait = 0;
+                gBerryBlenderData->field_0--;
+            gBerryBlenderData->framesToWait = 0;
         }
         break;
     case 13:
         if (sub_8007ECC())
         {
-            sBerryBlenderData->field_0++;
-            sub_8051414(&sBerryBlenderData->field_168);
+            gBerryBlenderData->field_0++;
+            sub_8051414(&gBerryBlenderData->field_168);
         }
         break;
     case 14:
         REG_DISPCNT |= 0x400;
-        sBerryBlenderData->arrowPos += 0x200;
-        sBerryBlenderData->field_142 += 4;
-        if (sBerryBlenderData->field_142 > 255)
+        gBerryBlenderData->arrowPos += 0x200;
+        gBerryBlenderData->field_142 += 4;
+        if (gBerryBlenderData->field_142 > 255)
         {
-            sBerryBlenderData->field_0++;
-            sBerryBlenderData->field_142 = 256;
-            sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->playersNo - 2]];
+            gBerryBlenderData->field_0++;
+            gBerryBlenderData->field_142 = 256;
+            gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]];
             REG_BG2CNT = 0x4882;
-            sBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->framesToWait = 0;
             sub_804F238();
             sub_804F2A8();
         }
-        sub_8051414(&sBerryBlenderData->field_168);
+        sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 15:
         if (sub_8051B8C())
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
-        sub_8051414(&sBerryBlenderData->field_168);
+        sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 16:
         CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 18:
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 19:
         sub_80084A4();
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 20:
         if (sub_8007ECC())
         {
             sub_8007E24();
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 21:
-        sBerryBlenderData->field_56 = 128;
-        sBerryBlenderData->gameFrameTime = 0;
+        gBerryBlenderData->field_56 = 128;
+        gBerryBlenderData->gameFrameTime = 0;
         SetMainCallback2(sub_80501FC);
         if (GetCurrentMapMusic() != 403)
         {
-            sBerryBlenderData->field_178 = GetCurrentMapMusic();
+            gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
         PlayBGM(403);
         break;
     case 100:
         MenuDrawTextWindow(0, 13, 29, 19);
         MenuPrintMessage(gOtherText_LinkNotFound, 1, 15);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 101:
         if (MenuUpdateWindowText())
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         break;
     case 102:
         if (!gPaletteFade.active)
@@ -851,7 +837,7 @@ void sub_804E9F8(void)
     UpdatePaletteFade();
 }
 
-void sub_804F0F4(void)
+static void sub_804F0F4(void)
 {
     REG_DISPCNT = 0;
 
@@ -866,21 +852,19 @@ void sub_804F0F4(void)
 
     gLinkType = 0x4422;
 
-    sBerryBlenderData->field_4E = 0;
-    sBerryBlenderData->field_56 = 0;
-    sBerryBlenderData->arrowPos = 0;
-    sBerryBlenderData->max_RPM = 0;
-    sBerryBlenderData->field_144 = 0;
-    sBerryBlenderData->field_146 = 0;
-    sBerryBlenderData->field_0++;
+    gBerryBlenderData->field_4E = 0;
+    gBerryBlenderData->field_56 = 0;
+    gBerryBlenderData->arrowPos = 0;
+    gBerryBlenderData->max_RPM = 0;
+    gBerryBlenderData->field_144 = 0;
+    gBerryBlenderData->field_146 = 0;
+    gBerryBlenderData->field_0++;
 }
 
-extern const u8 gUnknown_08216303[];
-
-u8 sub_804F16C(u16 arrowPos, u8 a1)
+static u8 sub_804F16C(u16 arrowPos, u8 a1)
 {
     u32 var1 = (arrowPos / 256) + 24;
-    u8 arrID = sBerryBlenderData->field_A2[a1];
+    u8 arrID = gBerryBlenderData->field_A2[a1];
     u32 var2 = gUnknown_08216303[arrID];
 
     if (var1 >= var2 && var1 < var2 + 48)
@@ -894,9 +878,7 @@ u8 sub_804F16C(u16 arrowPos, u8 a1)
         return 0;
 }
 
-extern const u8 gUnknown_082165BC[][3];
-
-void sub_804F1BC(u16 itemID, u8 a1, struct BlenderBerry* berry)
+static void sub_804F1BC(u16 itemID, u8 a1, struct BlenderBerry* berry)
 {
     u16 r4 = 0;
     u16 i;
@@ -921,184 +903,179 @@ void sub_804F1BC(u16 itemID, u8 a1, struct BlenderBerry* berry)
     }
 }
 
-void sub_804F238(void)
+static void sub_804F238(void)
 {
     s32 i, j;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
-        sBerryBlenderData->field_A2[i] = 0xFF;
-        sBerryBlenderData->field_9A[i] = gUnknown_082162EC[sBerryBlenderData->playersNo - 2][i];
+        gBerryBlenderData->field_A2[i] = 0xFF;
+        gBerryBlenderData->field_9A[i] = gUnknown_082162EC[gBerryBlenderData->playersNo - 2][i];
     }
     for (j = 0; j < BLENDER_MAX_PLAYERS; j++)
     {
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            if (sBerryBlenderData->field_9A[i] == j)
-                sBerryBlenderData->field_A2[j] = i;
+            if (gBerryBlenderData->field_9A[i] == j)
+                gBerryBlenderData->field_A2[j] = i;
         }
     }
 }
 
-extern const u8 gUnknown_082162C4[];
-extern const u8 gUnknown_082162D4[][2];
-
-void sub_804F2A8(void)
+static void sub_804F2A8(void)
 {
     int i;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
-        if (sBerryBlenderData->field_9A[i] != 0xFF)
+        if (gBerryBlenderData->field_9A[i] != 0xFF)
         {
             u8* stringPtr = gStringVar1;
 
-            sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[i]] = sBerryBlenderData->SyncArrowSprite2ID[i];
-            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[i]]], i);
-            if (GetMultiplayerId() == sBerryBlenderData->field_9A[i])
+            gBerryBlenderData->SyncArrowSpriteID[gBerryBlenderData->field_9A[i]] = gBerryBlenderData->SyncArrowSprite2ID[i];
+            StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSpriteID[gBerryBlenderData->field_9A[i]]], i);
+            if (GetMultiplayerId() == gBerryBlenderData->field_9A[i])
                 stringPtr = StringCopy(stringPtr, gUnknown_082162C4);
-            StringCopy(stringPtr, gLinkPlayers[sBerryBlenderData->field_9A[i]].name);
+            StringCopy(stringPtr, gLinkPlayers[gBerryBlenderData->field_9A[i]].name);
             MenuPrint_PixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
         }
     }
 }
 
-extern const TaskFunc gUnknown_08216308[];
-
-void sub_804F378(void)
+static void sub_804F378(void)
 {
     s32 i, j;
-    switch (sBerryBlenderData->field_0)
+    switch (gBerryBlenderData->field_0)
     {
     case 0:
         sub_804F0F4();
         Blender_SetBankBerryData(0, gScriptItemId);
-        Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gScriptItemId);
-        sub_804F1BC(gScriptItemId, sBerryBlenderData->playersNo, &sBerryBlenderData->blendedBerries[0]);
+        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gScriptItemId);
+        sub_804F1BC(gScriptItemId, gBerryBlenderData->playersNo, &gBerryBlenderData->blendedBerries[0]);
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            sBerryBlenderData->field_70[i] = 0;
+            gBerryBlenderData->field_70[i] = 0;
             for (j = 0; j < 3; j++)
             {
-                sBerryBlenderData->scores[i][j] = 0;
+                gBerryBlenderData->scores[i][j] = 0;
             }
         }
-        sBerryBlenderData->field_7C = 0;
-        sBerryBlenderData->field_1 = 0;
+        gBerryBlenderData->field_7C = 0;
+        gBerryBlenderData->field_1 = 0;
         break;
     case 1:
         if (sub_804E2EC())
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
             sub_8051474();
         }
         break;
     case 2:
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            sBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
-            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
+            gBerryBlenderData->SyncArrowSprite2ID[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
+            StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSprite2ID[i]], i + 8);
         }
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 3:
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 4:
-        if (++sBerryBlenderData->framesToWait == 2)
+        if (++gBerryBlenderData->framesToWait == 2)
             sub_804E4FC();
         if (!gPaletteFade.active)
-            sBerryBlenderData->field_0 = 8;
+            gBerryBlenderData->field_0 = 8;
         break;
     case 8:
-        sBerryBlenderData->field_0 = 11;
-        sBerryBlenderData->field_13C = 0;
+        gBerryBlenderData->field_0 = 11;
+        gBerryBlenderData->field_13C = 0;
         break;
     case 11:
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            u32 var = gUnknown_082162EC[sBerryBlenderData->playersNo - 2][i];
-            if (sBerryBlenderData->field_13C == var)
+            u32 var = gUnknown_082162EC[gBerryBlenderData->playersNo - 2][i];
+            if (gBerryBlenderData->field_13C == var)
             {
-                sub_804E7C0(sBerryBlenderData->chosenItemID[sBerryBlenderData->field_13C], i);
+                sub_804E7C0(gBerryBlenderData->chosenItemID[gBerryBlenderData->field_13C], i);
                 break;
             }
         }
-        sBerryBlenderData->framesToWait = 0;
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->field_13C++;
+        gBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->field_13C++;
         break;
     case 12:
-        if (++sBerryBlenderData->framesToWait > 60)
+        if (++gBerryBlenderData->framesToWait > 60)
         {
-            if (sBerryBlenderData->field_13C >= sBerryBlenderData->playersNo)
+            if (gBerryBlenderData->field_13C >= gBerryBlenderData->playersNo)
             {
-                sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->playersNo - 2]] - 22528;
-                sBerryBlenderData->field_0++;
+                gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]] - 22528;
+                gBerryBlenderData->field_0++;
             }
             else
-                sBerryBlenderData->field_0--;
-            sBerryBlenderData->framesToWait = 0;
+                gBerryBlenderData->field_0--;
+            gBerryBlenderData->framesToWait = 0;
         }
         break;
     case 13:
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         sub_804F238();
         PlaySE(43);
-        sub_8051414(&sBerryBlenderData->field_168);
+        sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 14:
         REG_DISPCNT |= 0x400;
-        sBerryBlenderData->arrowPos += 0x200;
-        sBerryBlenderData->field_142 += 4;
-        if (sBerryBlenderData->field_142 > 255)
+        gBerryBlenderData->arrowPos += 0x200;
+        gBerryBlenderData->field_142 += 4;
+        if (gBerryBlenderData->field_142 > 255)
         {
-            sBerryBlenderData->field_0++;
-            sBerryBlenderData->field_142 = 256;
-            sBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[sBerryBlenderData->playersNo - 2]];
+            gBerryBlenderData->field_0++;
+            gBerryBlenderData->field_142 = 256;
+            gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]];
             REG_BG2CNT = 0x4882;
-            sBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->framesToWait = 0;
             PlaySE(52);
             sub_804F2A8();
         }
-        sub_8051414(&sBerryBlenderData->field_168);
+        sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 15:
         if (sub_8051B8C())
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
-        sub_8051414(&sBerryBlenderData->field_168);
+        sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 16:
         CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 18:
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 19:
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 20:
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 21:
         sub_804F81C();
-        sBerryBlenderData->field_56 = 128;
-        sBerryBlenderData->gameFrameTime = 0;
-        sBerryBlenderData->field_14B = 0;
-        sBerryBlenderData->field_7E = 0;
+        gBerryBlenderData->field_56 = 128;
+        gBerryBlenderData->gameFrameTime = 0;
+        gBerryBlenderData->field_14B = 0;
+        gBerryBlenderData->field_7E = 0;
         SetMainCallback2(sub_80501FC);
 
         for (i = 0; i < gSpecialVar_0x8004; i++)
         {
-            sBerryBlenderData->field_148[i] = CreateTask(gUnknown_08216308[i], 10 + i);
+            gBerryBlenderData->field_148[i] = CreateTask(gUnknown_08216308[i], 10 + i);
         }
 
         if (GetCurrentMapMusic() != 403)
         {
-            sBerryBlenderData->field_178 = GetCurrentMapMusic();
+            gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
         PlayBGM(403);
         PlaySE(53);
@@ -1111,7 +1088,7 @@ void sub_804F378(void)
     UpdatePaletteFade();
 }
 
-void sub_804F81C(void)
+static void sub_804F81C(void)
 {
     s32 i;
     for (i = 0; i < 4; i++)
@@ -1123,7 +1100,7 @@ void sub_804F81C(void)
     }
 }
 
-void sub_804F844(u8 taskID)
+static void sub_804F844(u8 taskID)
 {
    if(++gTasks[taskID].data[0] > gTasks[taskID].data[1])
    {
@@ -1132,7 +1109,7 @@ void sub_804F844(u8 taskID)
    }
 }
 
-void sub_804F890(u8 a0, u8 a1)
+static void sub_804F890(u8 a0, u8 a1)
 {
     u8 taskID = CreateTask(sub_804F844, 80);
     gTasks[taskID].data[1] = a1;
@@ -1141,14 +1118,14 @@ void sub_804F890(u8 a0, u8 a1)
 
 void sub_804F8C8(u8 taskID)
 {
-    if (sub_804F16C(sBerryBlenderData->arrowPos, 1) == 2)
+    if (sub_804F16C(gBerryBlenderData->arrowPos, 1) == 2)
     {
         if (gTasks[taskID].data[0] == 0)
         {
-            if (sBerryBlenderData->field_14B == 0)
+            if (gBerryBlenderData->field_14B == 0)
             {
                 u8 rand = Random() / 655;
-                if (sBerryBlenderData->field_56 < 500)
+                if (gBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 75)
                         gRecvCmds[2][1] = 0x4523;
@@ -1156,7 +1133,7 @@ void sub_804F8C8(u8 taskID)
                         gRecvCmds[2][1] = 0x5432;
                     gRecvCmds[2][1] = 0x5432; // ???
                 }
-                else if (sBerryBlenderData->field_56 < 1500)
+                else if (gBerryBlenderData->field_56 < 1500)
                 {
                     if (rand > 80)
                         gRecvCmds[2][1] = 0x4523;
@@ -1192,16 +1169,16 @@ void sub_804F8C8(u8 taskID)
 
 void sub_804F9F4(u8 taskID)
 {
-    u32 var1 = (sBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
-    u32 var2 = sBerryBlenderData->field_A2[2] & 0xFF;
+    u32 var1 = (gBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
+    u32 var2 = gBerryBlenderData->field_A2[2] & 0xFF;
     if ((var1 >> 8) > gUnknown_08216303[var2] + 20 && (var1 >> 8) < gUnknown_08216303[var2] + 40)
     {
         if (gTasks[taskID].data[0] == 0)
         {
-            if (sBerryBlenderData->field_14B == 0)
+            if (gBerryBlenderData->field_14B == 0)
             {
                 u8 rand = Random() / 655;
-                if (sBerryBlenderData->field_56 < 500)
+                if (gBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 66)
                         gRecvCmds[2][2] = 0x4523;
@@ -1237,16 +1214,16 @@ void sub_804FB1C(u8 taskID)
 {
     u32 var1, var2;
 
-    var1 = (sBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
-    var2 = sBerryBlenderData->field_A2[3] & 0xFF;
+    var1 = (gBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
+    var2 = gBerryBlenderData->field_A2[3] & 0xFF;
     if ((var1 >> 8) > gUnknown_08216303[var2] + 20 && (var1 >> 8) < gUnknown_08216303[var2] + 40)
     {
         if (gTasks[taskID].data[0] == 0)
         {
-            if (sBerryBlenderData->field_14B == 0)
+            if (gBerryBlenderData->field_14B == 0)
             {
                 u8 rand = (Random() / 655);
-                if (sBerryBlenderData->field_56 < 500)
+                if (gBerryBlenderData->field_56 < 500)
                 {
                     if (rand > 88)
                         gRecvCmds[2][3] = 0x4523;
@@ -1280,10 +1257,7 @@ void sub_804FB1C(u8 taskID)
         gTasks[taskID].data[0] = 0;
 }
 
-extern const s8 gUnknown_082162CC[][2];
-extern const struct SpriteTemplate gSpriteTemplate_821645C;
-
-void sub_804FC48(u16 a0, u8 a1)
+static void sub_804FC48(u16 a0, u8 a1)
 {
     u8 spriteID;
 
@@ -1310,36 +1284,34 @@ void sub_804FC48(u16 a0, u8 a1)
     sub_805156C();
 }
 
-extern const u8 gUnknown_082165DA[];
-
-void sub_804FD30(u16 a0)
+static void sub_804FD30(u16 a0)
 {
     Blender_ControlHitPitch();
     switch (a0)
     {
     case 0x4523:
-        if (sBerryBlenderData->field_56 < 1500)
-            sBerryBlenderData->field_56 += (384 / gUnknown_082165DA[sBerryBlenderData->playersNo]);
+        if (gBerryBlenderData->field_56 < 1500)
+            gBerryBlenderData->field_56 += (384 / gUnknown_082165DA[gBerryBlenderData->playersNo]);
         else
         {
-            sBerryBlenderData->field_56 += (128 / gUnknown_082165DA[sBerryBlenderData->playersNo]);
-            sub_8051AC8(&sBerryBlenderData->field_144, (sBerryBlenderData->field_56 / 100) - 10);
-            sub_8051AC8(&sBerryBlenderData->field_146, (sBerryBlenderData->field_56 / 100) - 10);
+            gBerryBlenderData->field_56 += (128 / gUnknown_082165DA[gBerryBlenderData->playersNo]);
+            sub_8051AC8(&gBerryBlenderData->field_144, (gBerryBlenderData->field_56 / 100) - 10);
+            sub_8051AC8(&gBerryBlenderData->field_146, (gBerryBlenderData->field_56 / 100) - 10);
         }
         break;
     case 0x5432:
-        if (sBerryBlenderData->field_56 < 1500)
-            sBerryBlenderData->field_56 += (256 / gUnknown_082165DA[sBerryBlenderData->playersNo]);
+        if (gBerryBlenderData->field_56 < 1500)
+            gBerryBlenderData->field_56 += (256 / gUnknown_082165DA[gBerryBlenderData->playersNo]);
         break;
     case 0x2345:
-        sBerryBlenderData->field_56 -= (256 / gUnknown_082165DA[sBerryBlenderData->playersNo]);
-        if (sBerryBlenderData->field_56 < 128)
-            sBerryBlenderData->field_56 = 128;
+        gBerryBlenderData->field_56 -= (256 / gUnknown_082165DA[gBerryBlenderData->playersNo]);
+        if (gBerryBlenderData->field_56 < 128)
+            gBerryBlenderData->field_56 = 128;
         break;
     }
 }
 
-void sub_804FE70(void)
+static void sub_804FE70(void)
 {
     s32 i;
 
@@ -1357,40 +1329,40 @@ void sub_804FE70(void)
                 gRecvCmds[0][i] = 0x4444;
         }
     }
-    for (i = 0; i < sBerryBlenderData->playersNo; i++)
+    for (i = 0; i < gBerryBlenderData->playersNo; i++)
     {
         if (gRecvCmds[0][i] == 0x4444)
         {
-            u32 var = sBerryBlenderData->field_A2[i];
+            u32 var = gBerryBlenderData->field_A2[i];
             if (gRecvCmds[2][i] == 0x4523)
             {
                 sub_804FD30(0x4523);
-                sBerryBlenderData->field_13E += (sBerryBlenderData->field_56 / 55);
-                if (sBerryBlenderData->field_13E >= 1000)
-                    sBerryBlenderData->field_13E = 1000;
+                gBerryBlenderData->field_13E += (gBerryBlenderData->field_56 / 55);
+                if (gBerryBlenderData->field_13E >= 1000)
+                    gBerryBlenderData->field_13E = 1000;
                 sub_804FC48(0x4523, var);
-                sBerryBlenderData->scores[i][BLENDER_SCORE_BEST]++;
+                gBerryBlenderData->scores[i][BLENDER_SCORE_BEST]++;
             }
             else if (gRecvCmds[2][i] == 0x5432)
             {
                 sub_804FD30(0x5432);
-                sBerryBlenderData->field_13E += (sBerryBlenderData->field_56 / 70);
+                gBerryBlenderData->field_13E += (gBerryBlenderData->field_56 / 70);
                 sub_804FC48(0x5432, var);
-                sBerryBlenderData->scores[i][BLENDER_SCORE_GOOD]++;
+                gBerryBlenderData->scores[i][BLENDER_SCORE_GOOD]++;
             }
             else if (gRecvCmds[2][i] == 0x2345)
             {
                 sub_804FC48(0x2345, var);
                 sub_804FD30(0x2345);
-                if (sBerryBlenderData->field_4.win_field_F > 1000)
-                    sBerryBlenderData->field_13E = 1000;
-                if (sBerryBlenderData->scores[i][BLENDER_SCORE_MISS] < 999)
-                    sBerryBlenderData->scores[i][BLENDER_SCORE_MISS]++;
+                if (gBerryBlenderData->field_4.win_field_F > 1000)
+                    gBerryBlenderData->field_13E = 1000;
+                if (gBerryBlenderData->scores[i][BLENDER_SCORE_MISS] < 999)
+                    gBerryBlenderData->scores[i][BLENDER_SCORE_MISS]++;
             }
             if (gRecvCmds[2][i] == 0x2345 || gRecvCmds[2][i] == 0x4523 || gRecvCmds[2][i] == 0x5432)
             {
-                if (sBerryBlenderData->field_56 > 1500)
-                    m4aMPlayTempoControl(&gMPlay_BGM, ((sBerryBlenderData->field_56 - 750) / 20) + 256);
+                if (gBerryBlenderData->field_56 > 1500)
+                    m4aMPlayTempoControl(&gMPlay_BGM, ((gBerryBlenderData->field_56 - 750) / 20) + 256);
                 else
                     m4aMPlayTempoControl(&gMPlay_BGM, 256);
             }
@@ -1398,7 +1370,7 @@ void sub_804FE70(void)
     }
     if (gSpecialVar_0x8004 != 0)
     {
-        for (i = 0; i < sBerryBlenderData->playersNo; i++)
+        for (i = 0; i < gBerryBlenderData->playersNo; i++)
         {
             gRecvCmds[0][i] = 0;
             gRecvCmds[2][i] = 0;
@@ -1406,13 +1378,11 @@ void sub_804FE70(void)
     }
 }
 
-extern u8 gUnknown_020297ED;
-
-void sub_80500A8(void)
+static void sub_80500A8(void)
 {
     bool8 A_pressed = 0;
-    u8 var2 = sBerryBlenderData->field_A2[GetMultiplayerId()];
-    if (sBerryBlenderData->field_6F == 0)
+    u8 var2 = gBerryBlenderData->field_A2[GetMultiplayerId()];
+    if (gBerryBlenderData->field_6F == 0)
     {
         if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && gMain.newKeys & A_BUTTON)
             A_pressed = ((gMain.heldKeysRaw & (A_BUTTON | L_BUTTON)) != (A_BUTTON | L_BUTTON));
@@ -1421,8 +1391,8 @@ void sub_80500A8(void)
         if (A_pressed)
         {
             u8 var3;
-            StartSpriteAnim(&gSprites[sBerryBlenderData->SyncArrowSpriteID[sBerryBlenderData->field_9A[var2]]], var2 + 4);
-            var3 = sub_804F16C(sBerryBlenderData->arrowPos, GetMultiplayerId());
+            StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSpriteID[gBerryBlenderData->field_9A[var2]]], var2 + 4);
+            var3 = sub_804F16C(gBerryBlenderData->arrowPos, GetMultiplayerId());
             if (var3 == 2)
                 gSendCmd[2] = 0x4523;
             else if (var3 == 1)
@@ -1431,32 +1401,32 @@ void sub_80500A8(void)
                 gSendCmd[2] = 0x2345;
         }
     }
-    if (++sBerryBlenderData->field_7E > 5)
+    if (++gBerryBlenderData->field_7E > 5)
     {
-        if (sBerryBlenderData->field_56 > 128)
-            sBerryBlenderData->field_56--;
-        sBerryBlenderData->field_7E = 0;
+        if (gBerryBlenderData->field_56 > 128)
+            gBerryBlenderData->field_56--;
+        gBerryBlenderData->field_7E = 0;
     }
     if (gUnknown_020297ED && gMain.newKeys & L_BUTTON)
-        sBerryBlenderData->field_14B ^= 1;
+        gBerryBlenderData->field_14B ^= 1;
 }
 
-void sub_80501FC(void)
+static void sub_80501FC(void)
 {
     sub_8051474();
-    if (sBerryBlenderData->gameFrameTime < (99 * 60 * 60) + (59 * 60)) // game time can't be longer than 99 minutes and 59 seconds, can't print 3 digits
-        sBerryBlenderData->gameFrameTime++;
+    if (gBerryBlenderData->gameFrameTime < (99 * 60 * 60) + (59 * 60)) // game time can't be longer than 99 minutes and 59 seconds, can't print 3 digits
+        gBerryBlenderData->gameFrameTime++;
     sub_80500A8();
-    SetLinkDebugValues((u16)(sBerryBlenderData->field_56), sBerryBlenderData->field_13E);
+    SetLinkDebugValues((u16)(gBerryBlenderData->field_56), gBerryBlenderData->field_13E);
     sub_804FE70();
-    sub_805194C(sBerryBlenderData->field_13E, 1000);
-    sub_8051A3C(sBerryBlenderData->field_56);
+    sub_805194C(gBerryBlenderData->field_13E, 1000);
+    sub_8051A3C(gBerryBlenderData->field_56);
     sub_8051B18();
     sub_805123C();
-    if (sBerryBlenderData->field_6F == 0 && sBerryBlenderData->field_140 >= 1000)
+    if (gBerryBlenderData->field_6F == 0 && gBerryBlenderData->field_140 >= 1000)
     {
-        sBerryBlenderData->field_13E = 1000;
-        sBerryBlenderData->field_6F = 1;
+        gBerryBlenderData->field_13E = 1000;
+        gBerryBlenderData->field_6F = 1;
         SetMainCallback2(sub_8050954);
     }
     RunTasks();
@@ -1467,7 +1437,7 @@ void sub_80501FC(void)
 
 #define ARE_FLAVOURS_SAME(flavours1, flavours2)(((*(u32*)(&flavours1[-1]) & 0xFFFFFF00) == (*(u32*)(&flavours2[-1]) & 0xFFFFFF00)&& (*(u32*)(&flavours1[3]) & 0xFFFFFF) == (*(u32*)(&flavours2[3]) & 0xFFFFFF)))
 
-bool8 sub_80502A4(struct BlenderBerry* berries, u8 index1, u8 index2)
+static bool8 sub_80502A4(struct BlenderBerry* berries, u8 index1, u8 index2)
 {
     if (berries[index1].itemID != berries[index2].itemID
         || (StringCompare(berries[index1].name, berries[index2].name) == 0
@@ -1479,7 +1449,7 @@ bool8 sub_80502A4(struct BlenderBerry* berries, u8 index1, u8 index2)
 
 #undef ARE_FLAVOURS_SAME
 
-u32 sub_80502F8(struct BlenderBerry* berries, s16* a1, u8 a2, u8 a3)
+u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersNo, u8 a3)
 {
     s16 vars[5];
     s32 i;
@@ -1496,9 +1466,9 @@ u32 sub_80502F8(struct BlenderBerry* berries, s16* a1, u8 a2, u8 a3)
     }
     if (r6 == 5 || a3 > 3)
         return 12;
-    for (i = 0; i < a2; i++)
+    for (i = 0; i < playersNo; i++)
     {
-        for (r6 = 0; r6 < a2; r6++)
+        for (r6 = 0; r6 < playersNo; r6++)
         {
             if (berries[i].itemID == berries[r6].itemID && i != r6
                 && (berries[i].itemID != ITEM_ENIGMA_BERRY || sub_80502A4(berries, i, r6)))
@@ -1568,10 +1538,7 @@ u32 sub_80502F8(struct BlenderBerry* berries, s16* a1, u8 a2, u8 a3)
     return 0;
 }
 
-extern s16 gUnknown_0300052C;
-extern s16 gUnknown_0300052E;
-
-void sub_80504F0(s16 value)
+static void sub_80504F0(s16 value)
 {
     gUnknown_0300052C = value;
 }
@@ -1581,7 +1548,7 @@ s16 unref_sub_80504FC(void)
     return gUnknown_0300052C;
 }
 
-void sub_8050508(s16 value)
+static void sub_8050508(s16 value)
 {
     gUnknown_0300052E = value;
 }
@@ -1591,29 +1558,22 @@ s16 unref_sub_8050514(void)
     return gUnknown_0300052E;
 }
 
-extern s16 gUnknown_03000510[6];
-extern s32 gUnknown_03000530[];
-extern s32 gUnknown_03000548[];
-extern u32 gUnknown_0300055C;
-
-extern const u8 gUnknown_082165DF[];
-
 #ifdef NONMATCHING
 
-void sub_8050520(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a2, u8* a3, u16 a4)
+static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 playersNo, u8* flavours, u16 maxRPM)
 {
     s32 i;
     s32 j;
     s32 savedEntry;
     s32 var3;
     s32 var4;
-    s32 var6;
+    u32 var6;
     s32 var11;
     u16 rand;
 
     for (i = 0; i < 6; i++)
         gUnknown_03000510[i] = 0;
-    for (i = 0; i < a2; i++)
+    for (i = 0; i < playersNo; i++)
     {
         for (j = 0; j < 5; j++)
             gUnknown_03000510[j] += berries[i].flavours[j];
@@ -1650,7 +1610,7 @@ void sub_8050520(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a
         gUnknown_03000530[i] = gUnknown_03000510[i];
     }
 
-    var11 = a4 / 333 + 100;
+    var11 = maxRPM / 333 + 100;
     gUnknown_0300055C = ((var11));
 
     for (i = 0; i < 5; i++)
@@ -1667,11 +1627,11 @@ void sub_8050520(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a
     {
         gUnknown_03000548[i] = gUnknown_03000510[i];
     }
-    *a1 = sub_80502F8(berries, &gUnknown_03000510[0], a2, var6);
-    gUnknown_03000510[5] = (gUnknown_03000510[5] / a2) - a2;
+    pokeblock->color = Blender_GetPokeblockColor(berries, &gUnknown_03000510[0], playersNo, var6);
+    gUnknown_03000510[5] = (gUnknown_03000510[5] / playersNo) - playersNo;
     if (gUnknown_03000510[5] < 0)
         gUnknown_03000510[5] = 0;
-    if (*a1 == 12)
+    if (pokeblock->color == 12)
     {
         rand = Random() % 10;
         for (i = 0; i < 6; i++)
@@ -1687,21 +1647,21 @@ void sub_8050520(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a
         if (gUnknown_03000510[i] > 255)
             gUnknown_03000510[i] = 255;
     }
-    a1[1] = gUnknown_03000510[0];
-    a1[2] = gUnknown_03000510[1];
-    a1[3] = gUnknown_03000510[2];
-    a1[4] = gUnknown_03000510[3];
-    a1[5] = gUnknown_03000510[4];
-    a1[6] = gUnknown_03000510[5];
+    pokeblock->spicy = gUnknown_03000510[0];
+    pokeblock->dry = gUnknown_03000510[1];
+    pokeblock->sweet = gUnknown_03000510[2];
+    pokeblock->bitter = gUnknown_03000510[3];
+    pokeblock->sour = gUnknown_03000510[4];
+    pokeblock->feel = gUnknown_03000510[5];
     for (i = 0; i < 6; i++)
     {
-        a3[i] = gUnknown_03000510[i];
+        flavours[i] = gUnknown_03000510[i];
     }
 }
 
 #else
 __attribute__((naked))
-void sub_8050520(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a2, u8* a3, u16 a4)
+static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a2, u8* flavours, u16 a4)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -1878,7 +1838,7 @@ _08050652:\n\
 	adds r1, r4, 0\n\
 	mov r2, r9\n\
 	mov r3, r10\n\
-	bl sub_80502F8\n\
+	bl Blender_GetPokeblockColor\n\
 	mov r5, r8\n\
 	strb r0, [r5]\n\
 	movs r1, 0xA\n\
@@ -1989,15 +1949,15 @@ _08050740: .4byte gUnknown_03000510\n\
 
 #endif // NONMATCHING
 
-void sub_8050744(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a2, u8* a3, u16 a4)
+static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 playersNo, u8* flavours, u16 a4)
 {
-    sub_8050520(berries, pokeblock, a2, a3, a4); // what is the purpose of this function?
+    Blender_CalculatePokeblock(berries, pokeblock, playersNo, flavours, a4);
 }
 
-void sub_8050760(void)
+static void sub_8050760(void)
 {
-    u32 frames = (u16)(sBerryBlenderData->gameFrameTime);
-    u32 max_RPM = (u16)(sBerryBlenderData->max_RPM);
+    u32 frames = (u16)(gBerryBlenderData->gameFrameTime);
+    u32 max_RPM = (u16)(gBerryBlenderData->max_RPM);
     s16 var = 0;
 
     if (frames < 900)
@@ -2039,77 +1999,77 @@ void sub_8050760(void)
     sub_80504F0(var);
 }
 
-void sub_80508D4(u8 value)
+static void sub_80508D4(u8 value)
 {
-    sBerryBlenderData->field_AA = value;
-    sub_814A880(192, (sBerryBlenderData->field_AA * 16) + 72);
+    gBerryBlenderData->field_AA = value;
+    sub_814A880(192, (gBerryBlenderData->field_AA * 16) + 72);
 }
 
-void sub_80508FC(void)
+static void sub_80508FC(void)
 {
-    sBerryBlenderData->field_AA = 0;
+    gBerryBlenderData->field_AA = 0;
     MenuDrawTextWindow(23, 8, 28, 13);
     sub_814A5C0(0, -1, 12, 0x2D9F, 32);
     MenuPrint(gOtherText_YesNoTerminating, 24, 9);
-    sub_80508D4(sBerryBlenderData->field_AA);
+    sub_80508D4(gBerryBlenderData->field_AA);
 }
 
-void sub_8050954(void)
+static void sub_8050954(void)
 {
     u8 i;
     u8 multiplayerID; // unused
 
     sub_8051474();
     multiplayerID = GetMultiplayerId();
-    switch (sBerryBlenderData->field_6F)
+    switch (gBerryBlenderData->field_6F)
     {
     case 1:
         ClearLinkCallback();
         m4aMPlayTempoControl(&gMPlay_BGM, 256);
         for (i = 0; i < gSpecialVar_0x8004; i++)
         {
-            DestroyTask(sBerryBlenderData->field_148[i]);
+            DestroyTask(gBerryBlenderData->field_148[i]);
         }
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         break;
     case 2:
-        sBerryBlenderData->field_56 -= 32;
-        if (sBerryBlenderData->field_56 <= 0)
+        gBerryBlenderData->field_56 -= 32;
+        if (gBerryBlenderData->field_56 <= 0)
         {
-            sBerryBlenderData->field_56 = 0;
+            gBerryBlenderData->field_56 = 0;
             if (gReceivedRemoteLinkPlayers != 0)
-                sBerryBlenderData->field_6F++;
+                gBerryBlenderData->field_6F++;
             else
-                sBerryBlenderData->field_6F = 5;
-            sBerryBlenderData->field_0 = 0;
+                gBerryBlenderData->field_6F = 5;
+            gBerryBlenderData->field_0 = 0;
             m4aMPlayStop(&gMPlay_SE2);
         }
         Blender_ControlHitPitch();
         break;
     case 3:
         if (/*multiplayerID != 0*/ GetMultiplayerId() != 0)
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         else if (sub_8007ECC())
         {
-            sBerryBlenderData->field_1BC = sBerryBlenderData->gameFrameTime;
-            sBerryBlenderData->field_1C0 = sBerryBlenderData->max_RPM;
-            SendBlock(0, &sBerryBlenderData->field_1BC, 40);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_1BC = gBerryBlenderData->gameFrameTime;
+            gBerryBlenderData->field_1C0 = gBerryBlenderData->max_RPM;
+            SendBlock(0, &gBerryBlenderData->field_1BC, 40);
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 4:
         if (GetBlockReceivedStatus())
         {
             u32* ptr = ((u32*)(&gBlockRecvBuffer[0][0]));
-            sBerryBlenderData->max_RPM = gBlockRecvBuffer[0][2];
-            sBerryBlenderData->gameFrameTime = *ptr;
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->max_RPM = gBlockRecvBuffer[0][2];
+            gBerryBlenderData->gameFrameTime = *ptr;
+            gBerryBlenderData->field_6F++;
             ResetBlockReceivedFlags();
         }
         break;
     case 5:
         if (Blender_PrintBlendingRanking())
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         break;
     case 6:
         if (Blender_PrintBlendingResults())
@@ -2118,100 +2078,100 @@ void sub_8050954(void)
                 IncrementGameStat(34);
             else
                 IncrementGameStat(33);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 7:
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         MenuDrawTextWindow(0, 14, 29, 19);
         MenuPrintMessage(gOtherText_BlendAnotherBerryPrompt, 1, 15);
         break;
     case 8:
         if (MenuUpdateWindowText())
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         break;
     case 9:
-        sBerryBlenderData->field_AA = 0;
+        gBerryBlenderData->field_AA = 0;
         sub_80508FC();
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         break;
     case 10:
         if (gMain.newKeys & DPAD_UP)
         {
-            if (sBerryBlenderData->field_AA != 0)
+            if (gBerryBlenderData->field_AA != 0)
                 PlaySE(SE_SELECT);
             sub_80508D4(0);
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
-            if (sBerryBlenderData->field_AA != 1)
+            if (gBerryBlenderData->field_AA != 1)
                 PlaySE(SE_SELECT);
             sub_80508D4(1);
         }
         else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
             sub_80508D4(1);
         }
         break;
     case 11:
         gSendCmd[0] = 0x2FFF;
-        if (sBerryBlenderData->field_AA == 0)
+        if (gBerryBlenderData->field_AA == 0)
         {
             if (IsBagPocketNonEmpty(BAG_BERRIES) == FALSE) // is empty
             {
-                sBerryBlenderData->field_7C = 2;
+                gBerryBlenderData->field_7C = 2;
                 gSendCmd[1] = 0x9999;
             }
             else if (sub_810CA00() == -1)
             {
-                sBerryBlenderData->field_7C = 3;
+                gBerryBlenderData->field_7C = 3;
                 gSendCmd[1] = 0xAAAA;
             }
             else
             {
-                sBerryBlenderData->field_7C = 0;
+                gBerryBlenderData->field_7C = 0;
                 gSendCmd[1] = 0x7779;
             }
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         else
         {
-            sBerryBlenderData->field_7C = 1;
+            gBerryBlenderData->field_7C = 1;
             gSendCmd[1] = 0x8888;
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 12:
         if (gUnknown_03004834)
         {
             SetMainCallback2(sub_80510E8);
-            sBerryBlenderData->field_6F = 0;
-            sBerryBlenderData->field_0 = 0;
+            gBerryBlenderData->field_6F = 0;
+            gBerryBlenderData->field_0 = 0;
         }
         else
         {
             MenuPrintMessage(gOtherText_LinkStandby3, 1, 15);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 13:
         if (MenuUpdateWindowText())
         {
             SetMainCallback2(sub_8050E30);
-            sBerryBlenderData->field_6F = 0;
-            sBerryBlenderData->field_0 = 0;
+            gBerryBlenderData->field_6F = 0;
+            gBerryBlenderData->field_0 = 0;
         }
         break;
     }
     sub_8051B18();
-    sub_8051A3C(sBerryBlenderData->field_56);
+    sub_8051A3C(gBerryBlenderData->field_56);
     sub_805123C();
     RunTasks();
     AnimateSprites();
@@ -2219,52 +2179,52 @@ void sub_8050954(void)
     UpdatePaletteFade();
 }
 
-bool8 sub_8050CE8(void)
+static bool8 sub_8050CE8(void)
 {
-    switch (sBerryBlenderData->field_1C4)
+    switch (gBerryBlenderData->field_1C4)
     {
     case 0:
         sub_80084A4();
-        sBerryBlenderData->field_1C4 = 1;
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_1C4 = 1;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 1:
         if (sub_8007ECC())
         {
-            sBerryBlenderData->field_1C4++;
+            gBerryBlenderData->field_1C4++;
             gSoftResetDisabled = TRUE;
         }
         break;
     case 2:
         sub_8125E2C();
-        sBerryBlenderData->field_1C4++;
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_1C4++;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 3:
-        if (++sBerryBlenderData->framesToWait == 10)
+        if (++gBerryBlenderData->framesToWait == 10)
         {
             sub_80084A4();
-            sBerryBlenderData->field_1C4++;
+            gBerryBlenderData->field_1C4++;
         }
         break;
     case 4:
         if (sub_8007ECC())
         {
             if (sub_8125E6C())
-                sBerryBlenderData->field_1C4 = 5;
+                gBerryBlenderData->field_1C4 = 5;
             else
             {
-                sBerryBlenderData->framesToWait = 0;
-                sBerryBlenderData->field_1C4 = 3;
+                gBerryBlenderData->framesToWait = 0;
+                gBerryBlenderData->field_1C4 = 3;
             }
         }
         break;
     case 5:
-        sBerryBlenderData->field_1C4++;
-        sBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_1C4++;
+        gBerryBlenderData->framesToWait = 0;
         break;
     case 6:
-        if (++sBerryBlenderData->framesToWait > 5)
+        if (++gBerryBlenderData->framesToWait > 5)
         {
             gSoftResetDisabled = FALSE;
             return 1;
@@ -2274,99 +2234,99 @@ bool8 sub_8050CE8(void)
     return 0;
 }
 
-void sub_8050E30(void)
+static void sub_8050E30(void)
 {
-    switch (sBerryBlenderData->field_6F)
+    switch (gBerryBlenderData->field_6F)
     {
     case 0:
-        if (sBerryBlenderData->field_70[0] == 0x2222)
-            sBerryBlenderData->field_6F = 5;
-        else if (sBerryBlenderData->field_70[0] == 0x1111)
+        if (gBerryBlenderData->field_70[0] == 0x2222)
+            gBerryBlenderData->field_6F = 5;
+        else if (gBerryBlenderData->field_70[0] == 0x1111)
         {
-            if (sBerryBlenderData->field_78 == 0x9999)
-                sBerryBlenderData->field_6F = 2;
-            else if (sBerryBlenderData->field_78 == 0xAAAA)
-                sBerryBlenderData->field_6F = 1;
+            if (gBerryBlenderData->field_78 == 0x9999)
+                gBerryBlenderData->field_6F = 2;
+            else if (gBerryBlenderData->field_78 == 0xAAAA)
+                gBerryBlenderData->field_6F = 1;
             else
-                sBerryBlenderData->field_6F = 5;
+                gBerryBlenderData->field_6F = 5;
         }
         break;
     case 1:
-        sBerryBlenderData->field_6F = 3;
+        gBerryBlenderData->field_6F = 3;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
-        StringCopy(gStringVar4, gLinkPlayers[sBerryBlenderData->field_7A].name);
+        StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_OtherCaseIsFull);
         MenuPrintMessage(gStringVar4, 1, 15);
         break;
     case 2:
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
-        StringCopy(gStringVar4, gLinkPlayers[sBerryBlenderData->field_7A].name);
+        StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_NoBerriesForBlend);
         MenuPrintMessage(gStringVar4, 1, 15);
         break;
     case 3:
         if (MenuUpdateWindowText())
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 4:
-        if (++sBerryBlenderData->framesToWait > 60)
-            sBerryBlenderData->field_6F = 5;
+        if (++gBerryBlenderData->framesToWait > 60)
+            gBerryBlenderData->field_6F = 5;
         break;
     case 5:
         MenuDrawTextWindow(0, 14, 29, 19);
         MenuPrint(gMultiText_Saving, 2, 15);
         sub_80084A4();
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         break;
     case 6:
         if (sub_8007ECC())
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_6F++;
-            sBerryBlenderData->field_1C4 = 0;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_1C4 = 0;
         }
         break;
     case 7:
         if (sub_8050CE8())
         {
             PlaySE(SE_SAVE);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 8:
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         sub_80084A4();
         break;
     case 9:
         if (sub_8007ECC())
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 10:
         if (!gPaletteFade.active)
         {
-            if (sBerryBlenderData->field_70[0] == 0x2222)
+            if (gBerryBlenderData->field_70[0] == 0x2222)
                 SetMainCallback2(sub_804E538);
             else
             {
-                sBerryBlenderData->framesToWait = 0;
-                sBerryBlenderData->field_6F++;
+                gBerryBlenderData->framesToWait = 0;
+                gBerryBlenderData->field_6F++;
             }
         }
         break;
     case 11:
-        if (++sBerryBlenderData->framesToWait > 30)
+        if (++gBerryBlenderData->framesToWait > 30)
         {
             sub_800832C();
-            sBerryBlenderData->field_6F++;
+            gBerryBlenderData->field_6F++;
         }
         break;
     case 12:
@@ -2382,42 +2342,42 @@ void sub_8050E30(void)
     UpdatePaletteFade();
 }
 
-void sub_80510E8(void)
+static void sub_80510E8(void)
 {
-    switch (sBerryBlenderData->field_6F)
+    switch (gBerryBlenderData->field_6F)
     {
     case 0:
-        if (sBerryBlenderData->field_7C < 2)
-            sBerryBlenderData->field_6F = 9;
-        if (sBerryBlenderData->field_7C == 2)
-            sBerryBlenderData->field_6F = 2;
-        if (sBerryBlenderData->field_7C == 3)
-            sBerryBlenderData->field_6F =1;
+        if (gBerryBlenderData->field_7C < 2)
+            gBerryBlenderData->field_6F = 9;
+        if (gBerryBlenderData->field_7C == 2)
+            gBerryBlenderData->field_6F = 2;
+        if (gBerryBlenderData->field_7C == 3)
+            gBerryBlenderData->field_6F =1;
         break;
     case 1:
-        sBerryBlenderData->field_6F = 3;
+        gBerryBlenderData->field_6F = 3;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
         MenuPrintMessage(gOtherText_CaseIsFull, 1, 15);
         break;
     case 2:
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
         MenuPrintMessage(gOtherText_OutOfBerries, 1, 15);
         break;
     case 3:
         if (MenuUpdateWindowText())
-            sBerryBlenderData->field_6F = 9;
+            gBerryBlenderData->field_6F = 9;
         break;
     case 9:
         BeginFastPaletteFade(3);
-        sBerryBlenderData->field_6F++;
+        gBerryBlenderData->field_6F++;
         break;
     case 10:
         if (!gPaletteFade.active)
         {
-            if (sBerryBlenderData->field_7C == 0)
+            if (gBerryBlenderData->field_7C == 0)
                 SetMainCallback2(sub_804E538);
             else
                 SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -2432,7 +2392,7 @@ void sub_80510E8(void)
     UpdatePaletteFade();
 }
 
-void sub_805123C(void)
+static void sub_805123C(void)
 {
     if (gReceivedRemoteLinkPlayers)
     {
@@ -2443,24 +2403,24 @@ void sub_805123C(void)
                 switch (gRecvCmds[2][0])
                 {
                 case 0x8888:
-                    sBerryBlenderData->field_78 = 0x8888;
-                    sBerryBlenderData->field_7A = gRecvCmds[3][0];
+                    gBerryBlenderData->field_78 = 0x8888;
+                    gBerryBlenderData->field_7A = gRecvCmds[3][0];
                     break;
                 case 0x9999:
-                    sBerryBlenderData->field_78 = 0x9999;
-                    sBerryBlenderData->field_7A = gRecvCmds[3][0];
+                    gBerryBlenderData->field_78 = 0x9999;
+                    gBerryBlenderData->field_7A = gRecvCmds[3][0];
                     break;
                 case 0xAAAA:
-                    sBerryBlenderData->field_78 = 0xAAAA;
-                    sBerryBlenderData->field_7A = gRecvCmds[3][0];
+                    gBerryBlenderData->field_78 = 0xAAAA;
+                    gBerryBlenderData->field_7A = gRecvCmds[3][0];
                     break;
                 }
-                sBerryBlenderData->field_70[0] = 0x1111;
+                gBerryBlenderData->field_70[0] = 0x1111;
             }
             else if (gRecvCmds[1][0] == 0x2222)
-                sBerryBlenderData->field_70[0] = 0x2222;
+                gBerryBlenderData->field_70[0] = 0x2222;
         }
-        if (GetMultiplayerId() == 0 && sBerryBlenderData->field_70[0] != 0x1111 && sBerryBlenderData->field_70[0] != 0x2222)
+        if (GetMultiplayerId() == 0 && gBerryBlenderData->field_70[0] != 0x1111 && gBerryBlenderData->field_70[0] != 0x2222)
         {
             u8 i;
             for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -2470,30 +2430,30 @@ void sub_805123C(void)
                     switch (gRecvCmds[1][i])
                     {
                     case 0x8888:
-                        sBerryBlenderData->field_70[i] = 0x8888;
+                        gBerryBlenderData->field_70[i] = 0x8888;
                         break;
                     case 0x7779:
-                        sBerryBlenderData->field_70[i] = 0x7779;
+                        gBerryBlenderData->field_70[i] = 0x7779;
                         break;
                     case 0x9999:
-                        sBerryBlenderData->field_70[i] = 0x9999;
+                        gBerryBlenderData->field_70[i] = 0x9999;
                         break;
                     case 0xAAAA:
-                        sBerryBlenderData->field_70[i] = 0xAAAA;
+                        gBerryBlenderData->field_70[i] = 0xAAAA;
                         break;
                     }
                 }
             }
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
-                if (sBerryBlenderData->field_70[i] == 0)
+                if (gBerryBlenderData->field_70[i] == 0)
                     break;
             }
             if (i == GetLinkPlayerCount())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
                 {
-                    if (sBerryBlenderData->field_70[i] != 0x7779)
+                    if (gBerryBlenderData->field_70[i] != 0x7779)
                         break;
                 }
                 gSendCmd[0] = 0x2FFF;
@@ -2502,7 +2462,7 @@ void sub_805123C(void)
                 else
                 {
                     gSendCmd[1] = 0x1111;
-                    gSendCmd[2] = sBerryBlenderData->field_70[i];
+                    gSendCmd[2] = gBerryBlenderData->field_70[i];
                     gSendCmd[3] = i;
                 }
             }
@@ -2510,42 +2470,42 @@ void sub_805123C(void)
     }
 }
 
-void sub_8051414(struct BgAffineDstData *dest)
+static void sub_8051414(struct BgAffineDstData *dest)
 {
     struct BgAffineSrcData affineSrc;
     affineSrc.texX = 30720;
     affineSrc.texY = 20480;
-    affineSrc.scrX = 120 - sBerryBlenderData->field_144;
-    affineSrc.scrY = 80 - sBerryBlenderData->field_146;
-    affineSrc.sx = sBerryBlenderData->field_142;
-    affineSrc.sy = sBerryBlenderData->field_142;
-    affineSrc.alpha = sBerryBlenderData->arrowPos;
+    affineSrc.scrX = 120 - gBerryBlenderData->field_144;
+    affineSrc.scrY = 80 - gBerryBlenderData->field_146;
+    affineSrc.sx = gBerryBlenderData->field_142;
+    affineSrc.sy = gBerryBlenderData->field_142;
+    affineSrc.alpha = gBerryBlenderData->arrowPos;
     BgAffineSet(&affineSrc, dest, 1);
 }
 
-void sub_8051474(void)
+static void sub_8051474(void)
 {
-    sBerryBlenderData->field_58 = sBerryBlenderData->arrowPos;
-    sBerryBlenderData->arrowPos += sBerryBlenderData->field_56;
-    sub_8051414(&sBerryBlenderData->field_168);
+    gBerryBlenderData->field_58 = gBerryBlenderData->arrowPos;
+    gBerryBlenderData->arrowPos += gBerryBlenderData->field_56;
+    sub_8051414(&gBerryBlenderData->field_168);
 }
 
-void sub_80514A4(void)
+static void sub_80514A4(void)
 {
-    REG_BG2PA = sBerryBlenderData->field_168.pa;
-    REG_BG2PB = sBerryBlenderData->field_168.pb;
-    REG_BG2PC = sBerryBlenderData->field_168.pc;
-    REG_BG2PD = sBerryBlenderData->field_168.pd;
-    REG_BG2X = sBerryBlenderData->field_168.dx;
-    REG_BG2Y = sBerryBlenderData->field_168.dy;
+    REG_BG2PA = gBerryBlenderData->field_168.pa;
+    REG_BG2PB = gBerryBlenderData->field_168.pb;
+    REG_BG2PC = gBerryBlenderData->field_168.pc;
+    REG_BG2PD = gBerryBlenderData->field_168.pd;
+    REG_BG2X = gBerryBlenderData->field_168.dx;
+    REG_BG2Y = gBerryBlenderData->field_168.dy;
 }
 
-void sub_80514F0(void)
+static void sub_80514F0(void)
 {
-    REG_BG1HOFS = sBerryBlenderData->field_144;
-    REG_BG1VOFS = sBerryBlenderData->field_146;
-    REG_BG0HOFS = sBerryBlenderData->field_144;
-    REG_BG0VOFS = sBerryBlenderData->field_146;
+    REG_BG1HOFS = gBerryBlenderData->field_144;
+    REG_BG1VOFS = gBerryBlenderData->field_146;
+    REG_BG0HOFS = gBerryBlenderData->field_144;
+    REG_BG0VOFS = gBerryBlenderData->field_146;
 }
 
 void sub_8051524(struct Sprite* sprite)
@@ -2558,9 +2518,7 @@ void sub_8051524(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_82164FC;
-
-void sub_805156C(void)
+static void sub_805156C(void)
 {
     s32 limit = (Random() % 2) + 1;
     s32 i;
@@ -2571,7 +2529,7 @@ void sub_805156C(void)
         s32 x, y;
         u8 spriteID;
 
-        rand = sBerryBlenderData->arrowPos + (Random() % 20);
+        rand = gBerryBlenderData->arrowPos + (Random() % 20);
 
         x = gSineTable[(rand & 0xFF) + 64] / 4;
         y = gSineTable[(rand & 0xFF)] / 4;
@@ -2604,12 +2562,9 @@ void sub_8051684(struct Sprite* sprite)
 
 void Blender_SetBankBerryData(u8 bank, u16 itemID)
 {
-    sBerryBlenderData->chosenItemID[bank] = itemID;
-    Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[bank], itemID);
+    gBerryBlenderData->chosenItemID[bank] = itemID;
+    Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[bank], itemID);
 }
-
-extern const u8* const gUnknown_08216284[];
-extern u8 byte_3002A68;
 
 void unref_sub_80516F8(u8 taskID)
 {
@@ -2623,7 +2578,7 @@ void unref_sub_80516F8(u8 taskID)
                 task->data[0] = 0;
             if (task->data[0] == 100)
             {
-                ZeroFillWindowRect(&sBerryBlenderData->field_4, 0, 0, 16, 20);
+                ZeroFillWindowRect(&gBerryBlenderData->field_4, 0, 0, 16, 20);
                 MenuDrawTextWindow(4, 4, 10, 12);
                 for (i = 0; i < 3; i++)
                 {
@@ -2650,8 +2605,6 @@ void unref_sub_80516F8(u8 taskID)
         }
     }
 }
-
-extern const struct SpriteTemplate gSpriteTemplate_821657C;
 
 void sub_805181C(struct Sprite* sprite)
 {
@@ -2717,7 +2670,7 @@ void sub_80518CC(struct Sprite* sprite)
         sprite->data1 += 4;
         if (sprite->data1 > 176)
         {
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
             DestroySprite(sprite);
         }
         break;
@@ -2725,16 +2678,16 @@ void sub_80518CC(struct Sprite* sprite)
     sprite->pos2.y = sprite->data1;
 }
 
-void sub_805194C(u16 a0, u16 a1)
+static void sub_805194C(u16 a0, u16 a1)
 {
-    if (sBerryBlenderData->field_140 < a0)
+    if (gBerryBlenderData->field_140 < a0)
     {
-        sBerryBlenderData->field_140 += 2;
-        sub_805197C(sBerryBlenderData->field_140, a1);
+        gBerryBlenderData->field_140 += 2;
+        sub_805197C(gBerryBlenderData->field_140, a1);
     }
 }
 
-void sub_805197C(u16 a0, u16 a1)
+static void sub_805197C(u16 a0, u16 a1)
 {
     s32 var1, var2, var3, var4;
     u16* vram;
@@ -2761,19 +2714,19 @@ void sub_805197C(u16 a0, u16 a1)
     }
 }
 
-u32 sub_8051A1C(u16 a0)
+static u32 sub_8051A1C(u16 a0)
 {
     return 360000 * a0 / 0x10000;
 }
 
-void sub_8051A3C(u16 a0)
+static void sub_8051A3C(u16 a0)
 {
     u8 i;
     u8 palAdders[5];
 
     u32 var = sub_8051A1C(a0);
-    if (sBerryBlenderData->max_RPM < var)
-        sBerryBlenderData->max_RPM = var;
+    if (gBerryBlenderData->max_RPM < var)
+        gBerryBlenderData->max_RPM = var;
     for (i = 0; i < 5; i++)
     {
         palAdders[i] = var % 10;
@@ -2786,13 +2739,13 @@ void sub_8051A3C(u16 a0)
     *((u16*)(VRAM + 0x6462)) = palAdders[0] + 0x8172;
 }
 
-void sub_8051AC8(s16* a0, u16 a1)
+static void sub_8051AC8(s16* a0, u16 a1)
 {
     if (*a0 == 0)
         *a0 = (Random() % a1) - (a1 / 2);
 }
 
-void sub_8051AF4(s16* a0)
+static void sub_8051AF4(s16* a0)
 {
     if (*a0 < 0 )
         (*a0)++;
@@ -2800,13 +2753,13 @@ void sub_8051AF4(s16* a0)
         (*a0)--;
 }
 
-void sub_8051B18(void)
+static void sub_8051B18(void)
 {
-    sub_8051AF4(&sBerryBlenderData->field_144);
-    sub_8051AF4(&sBerryBlenderData->field_146);
+    sub_8051AF4(&gBerryBlenderData->field_144);
+    sub_8051AF4(&gBerryBlenderData->field_146);
 }
 
-void sub_8051B40(s16* a0, u16 a1)
+static void sub_8051B40(s16* a0, u16 a1)
 {
     s32 var;
     if (a1 < 10)
@@ -2824,20 +2777,20 @@ void sub_8051B40(s16* a0, u16 a1)
     }
 }
 
-bool8 sub_8051B8C(void)
+static bool8 sub_8051B8C(void)
 {
-    if (sBerryBlenderData->framesToWait == 0)
+    if (gBerryBlenderData->framesToWait == 0)
     {
-        sBerryBlenderData->field_144 = 0;
-        sBerryBlenderData->field_146 = 0;
+        gBerryBlenderData->field_144 = 0;
+        gBerryBlenderData->field_146 = 0;
     }
-    sBerryBlenderData->framesToWait++;
-    sub_8051B40(&sBerryBlenderData->field_144, sBerryBlenderData->framesToWait);
-    sub_8051B40(&sBerryBlenderData->field_146, sBerryBlenderData->framesToWait);
-    if (sBerryBlenderData->framesToWait == 20)
+    gBerryBlenderData->framesToWait++;
+    sub_8051B40(&gBerryBlenderData->field_144, gBerryBlenderData->framesToWait);
+    sub_8051B40(&gBerryBlenderData->field_146, gBerryBlenderData->framesToWait);
+    if (gBerryBlenderData->framesToWait == 20)
     {
-        sBerryBlenderData->field_144 = 0;
-        sBerryBlenderData->field_146 = 0;
+        gBerryBlenderData->field_144 = 0;
+        gBerryBlenderData->field_146 = 0;
         return 1;
     }
     else
@@ -2846,49 +2799,46 @@ bool8 sub_8051B8C(void)
 
 void sub_8051C04(struct Sprite* sprite)
 {
-   sprite->pos2.x = -(sBerryBlenderData->field_144);
-   sprite->pos2.y = -(sBerryBlenderData->field_146);
+   sprite->pos2.x = -(gBerryBlenderData->field_144);
+   sprite->pos2.y = -(gBerryBlenderData->field_146);
 }
 
-void Blender_TrySettingRecord(void)
+static void Blender_TrySettingRecord(void)
 {
-    if (gSaveBlock1.berryBlenderRecords[sBerryBlenderData->playersNo - 2] < sBerryBlenderData->max_RPM)
-        gSaveBlock1.berryBlenderRecords[sBerryBlenderData->playersNo - 2] = sBerryBlenderData->max_RPM;
+    if (gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] < gBerryBlenderData->max_RPM)
+        gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] = gBerryBlenderData->max_RPM;
 }
 
-extern const u8 gUnknown_082165E9[];
-extern const u8 gUnknown_082165EE[];
-
-bool8 Blender_PrintBlendingResults(void)
+static bool8 Blender_PrintBlendingResults(void)
 {
     u16 i;
 
     struct Pokeblock pokeblock;
-    u8 vars2[8];
+    u8 flavours[6];
     u8 text[2][10];
     u16 berryIDs[4]; // unused
 
-    switch (sBerryBlenderData->field_0)
+    switch (gBerryBlenderData->field_0)
     {
     case 0:
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->framesToWait = 17;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->framesToWait = 17;
         break;
     case 1:
-        sBerryBlenderData->framesToWait -= 10;
-        if (sBerryBlenderData->framesToWait < 0)
+        gBerryBlenderData->framesToWait -= 10;
+        if (gBerryBlenderData->framesToWait < 0)
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 2:
-        if (++sBerryBlenderData->framesToWait > 20)
+        if (++gBerryBlenderData->framesToWait > 20)
         {
             for (i = 0; i < 3; i++)
-                DestroySprite(&gSprites[sBerryBlenderData->scoreIconIDs[i]]);
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+                DestroySprite(&gSprites[gBerryBlenderData->scoreIconIDs[i]]);
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 3:
@@ -2898,15 +2848,15 @@ bool8 Blender_PrintBlendingResults(void)
 
             MenuDrawTextWindow(4, 2, 25, 17);
             sub_8072BD8(gOtherText_ResultsOfBlending, 5, 3, 160);
-            for (i = 0; i < sBerryBlenderData->playersNo; i++)
+            for (i = 0; i < gBerryBlenderData->playersNo; i++)
             {
-                u8 place = sBerryBlenderData->playerPlaces[i];
+                u8 place = gBerryBlenderData->playerPlaces[i];
                 textPtr = text[0];
 
-                StringCopy(textPtr, sBerryBlenderData->blendedBerries[place].name);
+                StringCopy(textPtr, gBerryBlenderData->blendedBerries[place].name);
                 ConvertInternationalString(textPtr, gLinkPlayers[place].language);
                 StringAppend(textPtr, gOtherText_Berry);
-                textPtr = sBerryBlenderData->stringVar;
+                textPtr = gBerryBlenderData->stringVar;
                 textPtr = ConvertIntToDecimalString(textPtr, i + 1);
                 textPtr[0] = CHAR_SPACE;
                 textPtr[1] = CHAR_PERIOD;
@@ -2914,12 +2864,12 @@ bool8 Blender_PrintBlendingResults(void)
                 textPtr += 3;
                 textPtr = sub_8072C74(textPtr, gLinkPlayers[place].name, 88, 0);
                 sub_8072C74(textPtr, text[0], 157, 0);
-                MenuPrint(sBerryBlenderData->stringVar, 5, gUnknown_082165E9[sBerryBlenderData->playersNo] + (i * gUnknown_082165EE[sBerryBlenderData->playersNo]));
+                MenuPrint(gBerryBlenderData->stringVar, 5, gUnknown_082165E9[gBerryBlenderData->playersNo] + (i * gUnknown_082165EE[gBerryBlenderData->playersNo]));
             }
-            ConvertIntToDecimalStringN(text[0], sBerryBlenderData->max_RPM % 100, 2, 2);
-            textPtr = sBerryBlenderData->stringVar;
+            ConvertIntToDecimalStringN(text[0], gBerryBlenderData->max_RPM % 100, 2, 2);
+            textPtr = gBerryBlenderData->stringVar;
             textPtr = StringCopy(textPtr, gOtherText_MaxSpeed);
-            textPtr = sub_8072C14(textPtr, sBerryBlenderData->max_RPM / 100, 121, 1);
+            textPtr = sub_8072C14(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
 
             textPtr[0] = CHAR_SPACE;
             textPtr[1] = CHAR_PERIOD;
@@ -2928,14 +2878,14 @@ bool8 Blender_PrintBlendingResults(void)
 
             textPtr = sub_8072C74(textPtr, text[0], 142, 1);
             StringCopy(textPtr, gOtherText_RPM);
-            MenuPrint(sBerryBlenderData->stringVar, 5, 13);
+            MenuPrint(gBerryBlenderData->stringVar, 5, 13);
 
-            secondsPassed = sBerryBlenderData->gameFrameTime / 60;
+            secondsPassed = gBerryBlenderData->gameFrameTime / 60;
             seconds = secondsPassed % 60;
             minutes = secondsPassed / 60;
             ConvertIntToDecimalStringN(text[0], minutes, 2, 2);
             ConvertIntToDecimalStringN(text[1], seconds, 2, 2);
-            textPtr = sBerryBlenderData->stringVar;
+            textPtr = gBerryBlenderData->stringVar;
             textPtr = StringCopy(textPtr, gOtherText_RequiredTime);
 
             textPtr = sub_8072C74(textPtr, text[0], 102, 1);
@@ -2944,32 +2894,32 @@ bool8 Blender_PrintBlendingResults(void)
             textPtr = sub_8072C74(textPtr, text[1], 136, 1);
             StringCopy(textPtr, gOtherText_Sec);
 
-            MenuPrint(sBerryBlenderData->stringVar, 5, 15);
+            MenuPrint(gBerryBlenderData->stringVar, 5, 15);
 
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 4:
         if (gMain.newKeys & A_BUTTON)
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         break;
     case 5:
         MenuZeroFillScreen();
         MenuDrawTextWindow(0, 14, 29, 19);
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            if (sBerryBlenderData->chosenItemID[i] != 0)
-                berryIDs[i] = sBerryBlenderData->chosenItemID[i] - 133;
+            if (gBerryBlenderData->chosenItemID[i] != 0)
+                berryIDs[i] = gBerryBlenderData->chosenItemID[i] - 133;
         }
         sub_8050760();
-        sub_8050520(sBerryBlenderData->blendedBerries, &pokeblock, sBerryBlenderData->playersNo, vars2, sBerryBlenderData->max_RPM);
-        Blender_PrintMadePokeblockString(&pokeblock, sBerryBlenderData->stringVar);
+        Blender_CalculatePokeblock(gBerryBlenderData->blendedBerries, &pokeblock, gBerryBlenderData->playersNo, flavours, gBerryBlenderData->max_RPM);
+        Blender_PrintMadePokeblockString(&pokeblock, gBerryBlenderData->stringVar);
         CreateTask(sub_8052BD0, 6);
-        MenuPrintMessage(sBerryBlenderData->stringVar, 1, 15);
+        MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
         RemoveBagItem(gScriptItemId, 1);
         sub_810CA34(&pokeblock);
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->field_0++;
         break;
     case 6:
         if (MenuUpdateWindowText())
@@ -2982,11 +2932,7 @@ bool8 Blender_PrintBlendingResults(void)
     return 0;
 }
 
-extern const u8 gUnknown_08216249[];
-extern const u8 gUnknown_082162C8[];
-extern const u8 *const gPokeblockNames[];
-
-void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
+static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
 {
     u8 text[12];
     u8 flavourLvl, feel;
@@ -3011,7 +2957,7 @@ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
     StringAppend(dst, gUnknown_08216249);
 }
 
-void Blender_SortBasedOnPoints(u8* places, u8 playersNum, u32* scores)
+static void Blender_SortBasedOnPoints(u8* places, u8 playersNum, u32* scores)
 {
     s32 i, j;
     for (i = 0; i < playersNum; i++)
@@ -3028,72 +2974,70 @@ void Blender_SortBasedOnPoints(u8* places, u8 playersNum, u32* scores)
     }
 }
 
-void Blender_SortScores(void)
+static void Blender_SortScores(void)
 {
     u8 i;
     u8 places[4];
     u32 points[4];
 
-    for (i = 0; i < sBerryBlenderData->playersNo; i++)
+    for (i = 0; i < gBerryBlenderData->playersNo; i++)
         places[i] = i;
-    for (i = 0; i < sBerryBlenderData->playersNo; i++)
+    for (i = 0; i < gBerryBlenderData->playersNo; i++)
     {
-        points[i] = 1000000 * sBerryBlenderData->scores[i][BLENDER_SCORE_BEST];
-        points[i] += 1000 * sBerryBlenderData->scores[i][BLENDER_SCORE_GOOD];
-        points[i] += 1000 - sBerryBlenderData->scores[i][BLENDER_SCORE_MISS];
+        points[i] = 1000000 * gBerryBlenderData->scores[i][BLENDER_SCORE_BEST];
+        points[i] += 1000 * gBerryBlenderData->scores[i][BLENDER_SCORE_GOOD];
+        points[i] += 1000 - gBerryBlenderData->scores[i][BLENDER_SCORE_MISS];
     }
-    Blender_SortBasedOnPoints(places, sBerryBlenderData->playersNo, points);
-    for (i = 0; i < sBerryBlenderData->playersNo; i++)
-        sBerryBlenderData->playerPlaces[i] = places[i];
+    Blender_SortBasedOnPoints(places, gBerryBlenderData->playersNo, points);
+    for (i = 0; i < gBerryBlenderData->playersNo; i++)
+        gBerryBlenderData->playerPlaces[i] = places[i];
 }
 
-extern const u8 gUnknown_082165F3[];
-
-bool8 Blender_PrintBlendingRanking(void)
+static bool8 Blender_PrintBlendingRanking(void)
 {
     u16 i;
-    switch (sBerryBlenderData->field_0)
+    switch (gBerryBlenderData->field_0)
     {
     case 0:
-        sBerryBlenderData->field_0++;
-        sBerryBlenderData->framesToWait = 255;
+        gBerryBlenderData->field_0++;
+        gBerryBlenderData->framesToWait = 255;
         break;
     case 1:
-        sBerryBlenderData->framesToWait -= 10;
-        if (sBerryBlenderData->framesToWait < 0)
+        gBerryBlenderData->framesToWait -= 10;
+        if (gBerryBlenderData->framesToWait < 0)
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 2:
-        if (++sBerryBlenderData->framesToWait > 20)
+        if (++gBerryBlenderData->framesToWait > 20)
         {
-            sBerryBlenderData->framesToWait = 0;
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->framesToWait = 0;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 3:
         MenuDrawTextWindow(4, 2, 25, 17);
         sub_8072BD8(gOtherText_Ranking, 5, 3, 160);
 
-        sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&gSpriteTemplate_821645C, 140, 52, 0);
-        gSprites[sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]].callback = SpriteCallbackDummy;
-        StartSpriteAnim(&gSprites[sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]], 3);
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&gSpriteTemplate_821645C, 140, 52, 0);
+        gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]].callback = SpriteCallbackDummy;
+        StartSpriteAnim(&gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]], 3);
 
-        sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD] = CreateSprite(&gSpriteTemplate_821645C, 164, 52, 0);
-        gSprites[sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD]].callback = SpriteCallbackDummy;
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD] = CreateSprite(&gSpriteTemplate_821645C, 164, 52, 0);
+        gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD]].callback = SpriteCallbackDummy;
 
-        sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS] = CreateSprite(&gSpriteTemplate_821645C, 188, 52, 0);
-        gSprites[sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]].callback = SpriteCallbackDummy;
-        StartSpriteAnim(&gSprites[sBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]], 1);
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS] = CreateSprite(&gSpriteTemplate_821645C, 188, 52, 0);
+        gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]].callback = SpriteCallbackDummy;
+        StartSpriteAnim(&gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]], 1);
 
         Blender_SortScores();
 
-        for (i = 0; i < sBerryBlenderData->playersNo; i++)
+        for (i = 0; i < gBerryBlenderData->playersNo; i++)
         {
-            u8 place = sBerryBlenderData->playerPlaces[i];
-            u8* txtPtr = sBerryBlenderData->stringVar;
+            u8 place = gBerryBlenderData->playerPlaces[i];
+            u8* txtPtr = gBerryBlenderData->stringVar;
 
             txtPtr[0] = EXT_CTRL_CODE_BEGIN;
             txtPtr[1] = 0x13;
@@ -3109,40 +3053,34 @@ bool8 Blender_PrintBlendingRanking(void)
 
             txtPtr = StringCopy(txtPtr, gLinkPlayers[place].name);
 
-            txtPtr = sub_8072C14(txtPtr, sBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
-            txtPtr = sub_8072C14(txtPtr, sBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
-            txtPtr = sub_8072C14(txtPtr, sBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
+            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
+            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
+            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
 
-            MenuPrint(sBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[sBerryBlenderData->playersNo] + 8);
+            MenuPrint(gBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[gBerryBlenderData->playersNo] + 8);
         }
-        sBerryBlenderData->framesToWait = 0;
-        sBerryBlenderData->field_0++;
+        gBerryBlenderData->framesToWait = 0;
+        gBerryBlenderData->field_0++;
         break;
     case 4:
-        if (++sBerryBlenderData->framesToWait > 20)
-            sBerryBlenderData->field_0++;
+        if (++gBerryBlenderData->framesToWait > 20)
+            gBerryBlenderData->field_0++;
         break;
     case 5:
         if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sBerryBlenderData->field_0++;
+            gBerryBlenderData->field_0++;
         }
         break;
     case 6:
-        sBerryBlenderData->field_0 = 0;
+        gBerryBlenderData->field_0 = 0;
         return 1;
     }
     return 0;
 }
 
-struct UnknownStruct
-{
-    s8 bytes[24];
-    s16 hword[2];
-};
-
-extern struct UnknownStruct gUnknown_03000560;
+// debug menu goes here
 
 void unref_sub_80524BC(void)
 {
@@ -3158,7 +3096,265 @@ void unref_sub_80524BC(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    gUnknown_03000560.hword[1] = 0x1F40;
-    gUnknown_03000560.bytes[16]++;
+    sBlenderDebug.BPM = 8000;
+    sBlenderDebug.field_10++;
     SetMainCallback2(sub_8052AF8);
+}
+
+static void BlenderDebug_PrintBerryData(void)
+{
+    u8 text[128];
+    u8 i;
+
+    StringCopy(text, gOtherText_BPMAndDash);
+    MenuPrint(text, 2, 0);
+
+    ConvertIntToDecimalStringN(text, sBlenderDebug.BPM / 100, 2, 3);
+    MenuPrint(text, 6, 0);
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 var;
+
+        if (sBlenderDebug.cursorPos == i)
+        {
+            text[0] = 0xEF;
+            CopyItemName(sBlenderDebug.berries[i] + 133, &text[1]);
+        }
+        else
+        {
+            CopyItemName(sBlenderDebug.berries[i] + 133, &text[0]);
+            text[6] = CHAR_SPACE;
+            text[7] = EOS;
+        }
+        var = (i * 3) + 3;
+        MenuPrint(text, 2, var);
+
+        ConvertIntToDecimalStringN(&text[0], gBerries[sBlenderDebug.berries[i]].spicy, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToDecimalStringN(&text[3], gBerries[sBlenderDebug.berries[i]].dry, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToDecimalStringN(&text[6], gBerries[sBlenderDebug.berries[i]].sweet, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToDecimalStringN(&text[9], gBerries[sBlenderDebug.berries[i]].bitter, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToDecimalStringN(&text[12], gBerries[sBlenderDebug.berries[i]].sour, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToDecimalStringN(&text[15], gBerries[sBlenderDebug.berries[i]].smoothness, 2, 2);
+
+        text[17] = EOS;
+        MenuPrint(text, 7, var);
+    }
+    if (sBlenderDebug.pokeblock.color != 0)
+    {
+        StringCopy(text, gPokeblockNames[sBlenderDebug.pokeblock.color]);
+        MenuPrint(text, 2, 15);
+
+        ConvertIntToHexStringN(&text[0], sBlenderDebug.spicy, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToHexStringN(&text[3], sBlenderDebug.dry, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToHexStringN(&text[6], sBlenderDebug.sweet, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToHexStringN(&text[9], sBlenderDebug.bitter, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToHexStringN(&text[12], sBlenderDebug.sour, 2, 2);
+        StringAppend(text, gUnknown_082165F8);
+
+        ConvertIntToHexStringN(&text[15], sBlenderDebug.feel, 2, 2);
+
+        text[17] = EOS;
+        MenuPrint(text, 7, 17);
+    }
+}
+
+static void sub_80527BC(void)
+{
+    u8 text[70];
+    u8 buffer[10];
+    u16 i;
+
+    if (gUnknown_020297DC == 1)
+    {
+        u16 j;
+        for (j = 0; j < 10; j++)
+            gUnknown_03004840[j] = 0;
+        gUnknown_03004830 = Random();
+        gUnknown_020297E0 = 0;
+        gUnknown_020297DC = 2;
+        for (i = 0; i < 200; i++)
+            ewram[i] = 0;
+        gUnknown_020297E8 = 0;
+    }
+    for (i = 0; i < 100; i++)
+    {
+        if (((Random() >> 15) & 1) == gUnknown_020297E8)
+            gUnknown_020297E0++;
+        else
+        {
+            u16* ewramPtr = ((u16*)(ewram));
+            ewramPtr[gUnknown_020297E4] = gUnknown_020297E0;
+            gUnknown_020297E4++;
+            gUnknown_020297E0 = 0;
+            gUnknown_020297E8 ^= 1;
+        }
+    }
+    text[0] = EOS;
+
+    ConvertIntToHexStringN(buffer, gUnknown_03004830, 2, 8);
+    StringAppend(text, buffer);
+    StringAppend(text, gUnknown_082165F8);
+
+    ConvertIntToHexStringN(buffer, gUnknown_020297E0, 2, 8);
+    StringAppend(text, buffer);
+    StringAppend(text, gUnknown_08216600);
+
+    if (gUnknown_020297DC == 3)
+    {
+        ConvertIntToHexStringN(buffer, gUnknown_020297E4, 2, 16);
+        StringAppend(text, buffer);
+        gUnknown_020297DC = 0;
+    }
+
+    MenuPrint(text, 2, 15);
+}
+
+static void sub_8052918(void)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        sBlenderDebug.BPM += 1000;
+        if (sBlenderDebug.BPM > 30000)
+            sBlenderDebug.BPM = 1000;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & L_BUTTON)
+    {
+        sBlenderDebug.BPM -= 1000;
+        if (sBlenderDebug.BPM < 0)
+            sBlenderDebug.BPM = 30000;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & DPAD_UP)
+    {
+        sBlenderDebug.cursorPos -= 1;
+        if (sBlenderDebug.cursorPos < 0)
+            sBlenderDebug.cursorPos = 3;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        sBlenderDebug.cursorPos += 1;
+        if (sBlenderDebug.cursorPos > 3)
+            sBlenderDebug.cursorPos = 0;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        if (--sBlenderDebug.berries[sBlenderDebug.cursorPos] < 0)
+            sBlenderDebug.berries[sBlenderDebug.cursorPos] = 42;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        if (++sBlenderDebug.berries[sBlenderDebug.cursorPos] > 42)
+            sBlenderDebug.berries[sBlenderDebug.cursorPos] = 0;
+        sBlenderDebug.field_10++;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        u16 berryIDs[4];
+        struct BlenderBerry berries[4];
+
+        u16 i, notEnigma = 0;
+        for (i = 0; i < 4; i++)
+        {
+            if (sBlenderDebug.berries[i] != 42)
+            {
+                notEnigma++;
+                berryIDs[i] = sBlenderDebug.berries[i];
+                Blender_CopyBerryData(&berries[i], sBlenderDebug.berries[i] + 133);
+            }
+            else
+                break;
+        }
+        if (notEnigma > 1)
+        {
+            BlenderDebug_CalculatePokeblock(berries, &sBlenderDebug.pokeblock, notEnigma, &sBlenderDebug.spicy, sBlenderDebug.BPM);
+            sBlenderDebug.field_10++;
+        }
+        else
+            sBlenderDebug.pokeblock.color = 0xFF;
+    }
+    if (sBlenderDebug.field_10)
+    {
+        BlenderDebug_PrintBerryData();
+        sBlenderDebug.field_10 = 0;
+    }
+    if (gMain.newKeys & SELECT_BUTTON && gUnknown_020297DC == 0)
+    {
+        gUnknown_020297DC++;
+        gUnknown_020297E0 = 0;
+        SeedRng(gMain.vblankCounter1);
+    }
+    if (gUnknown_020297DC != 0)
+        sub_80527BC();
+}
+
+static void sub_8052AF8(void)
+{
+    sub_8052918();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+// debug menu ends
+// blender record window begins
+
+void ShowBerryBlenderRecordWindow(void)
+{
+    u8 text[30];
+    s32 i;
+
+    MenuDrawTextWindow(6, 3, 23, 16);
+    MenuPrint(gMultiText_BerryBlenderMaxSpeedRecord, 8, 4);
+    MenuPrint(gMultiText_2P3P4P, 8, 9);
+
+    for (i = 0; i < 3; i++)
+    {
+        u32 record = gSaveBlock1.berryBlenderRecords[i];
+        u8* txtPtr = sub_8072C14(text, record / 100, 18, 1);
+        txtPtr[0] = CHAR_SPACE;
+        txtPtr[1] = CHAR_PERIOD;
+        txtPtr[2] = CHAR_SPACE;
+        txtPtr += 3;
+        txtPtr = ConvertIntToDecimalStringN(txtPtr, record % 100, 2, 2);
+        StringAppend(txtPtr, gOtherText_RPM);
+        MenuPrint(text, 15, i * 2 + 9);
+    }
+}
+
+static void sub_8052BD0(u8 taskID)
+{
+    if (gTasks[taskID].data[0] == 0)
+    {
+        PlayFanfare(BGM_FANFA1);
+        gTasks[taskID].data[0]++;
+    }
+    if (IsFanfareTaskInactive())
+    {
+        PlayBGM(gBerryBlenderData->field_178);
+        DestroyTask(taskID);
+    }
 }

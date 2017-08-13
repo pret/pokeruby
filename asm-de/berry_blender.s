@@ -8276,7 +8276,7 @@ unref_sub_80524BC: @ 80524BC
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
-	ldr r1, _08052528 @ =gUnknown_03000560
+	ldr r1, _08052528 @ =sBlenderDebug
 	movs r0, 0xFA
 	lsls r0, 5
 	strh r0, [r1, 0x1A]
@@ -8292,12 +8292,12 @@ unref_sub_80524BC: @ 80524BC
 _0805251C: .4byte sub_804E2D8
 _08052520: .4byte gWindowConfig_81E6CE4
 _08052524: .4byte gMain
-_08052528: .4byte gUnknown_03000560
+_08052528: .4byte sBlenderDebug
 _0805252C: .4byte sub_8052AF8
 	thumb_func_end unref_sub_80524BC
 
-	thumb_func_start sub_8052530
-sub_8052530: @ 8052530
+	thumb_func_start BlenderDebug_PrintBerryData
+BlenderDebug_PrintBerryData: @ 8052530
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -8311,7 +8311,7 @@ sub_8052530: @ 8052530
 	movs r1, 0x2
 	movs r2, 0
 	bl MenuPrint
-	ldr r4, _080525CC @ =gUnknown_03000560
+	ldr r4, _080525CC @ =sBlenderDebug
 	movs r1, 0x1A
 	ldrsh r0, [r4, r1]
 	movs r1, 0x64
@@ -8371,7 +8371,7 @@ _0805259E:
 	b _080525F8
 	.align 2, 0
 _080525C8: .4byte gOtherText_BPMAndDash
-_080525CC: .4byte gUnknown_03000560
+_080525CC: .4byte sBlenderDebug
 _080525D0: .4byte gBerries
 _080525D4: .4byte gUnknown_082165F8
 _080525D8:
@@ -8591,7 +8591,7 @@ _080527A4:
 	.align 2, 0
 _080527B4: .4byte gPokeblockNames
 _080527B8: .4byte gUnknown_082165F8
-	thumb_func_end sub_8052530
+	thumb_func_end BlenderDebug_PrintBerryData
 
 	thumb_func_start sub_80527BC
 sub_80527BC: @ 80527BC
@@ -8764,7 +8764,7 @@ sub_8052918: @ 8052918
 	movs r0, 0x80
 	lsls r0, 1
 	ands r0, r1
-	ldr r4, _08052A8C @ =gUnknown_03000560
+	ldr r4, _08052A8C @ =sBlenderDebug
 	cmp r0, 0
 	beq _0805294C
 	movs r1, 0xFA
@@ -8874,7 +8874,7 @@ _080529E4:
 	ands r0, r1
 	cmp r0, 0
 	beq _08052A16
-	ldr r3, _08052A8C @ =gUnknown_03000560
+	ldr r3, _08052A8C @ =sBlenderDebug
 	movs r1, 0
 	ldrsb r1, [r3, r1]
 	adds r4, r3, 0x1
@@ -8903,7 +8903,7 @@ _08052A16:
 	beq _08052AA0
 	movs r6, 0
 	movs r4, 0
-	ldr r5, _08052A8C @ =gUnknown_03000560
+	ldr r5, _08052A8C @ =sBlenderDebug
 _08052A26:
 	adds r0, r5, 0x1
 	adds r2, r4, r0
@@ -8954,7 +8954,7 @@ _08052A64:
 	b _08052AA0
 	.align 2, 0
 _08052A88: .4byte gMain
-_08052A8C: .4byte gUnknown_03000560
+_08052A8C: .4byte sBlenderDebug
 _08052A90: .4byte 0x75300000
 _08052A94: .4byte 0xfffffc18
 _08052A98: .4byte 0x00007530
@@ -8962,11 +8962,11 @@ _08052A9C:
 	movs r0, 0xFF
 	strb r0, [r5, 0x8]
 _08052AA0:
-	ldr r4, _08052AE8 @ =gUnknown_03000560
+	ldr r4, _08052AE8 @ =sBlenderDebug
 	ldrb r0, [r4, 0x10]
 	cmp r0, 0
 	beq _08052AB0
-	bl sub_8052530
+	bl BlenderDebug_PrintBerryData
 	movs r0, 0
 	strb r0, [r4, 0x10]
 _08052AB0:
@@ -9000,7 +9000,7 @@ _08052AE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052AE8: .4byte gUnknown_03000560
+_08052AE8: .4byte sBlenderDebug
 _08052AEC: .4byte gMain
 _08052AF0: .4byte gUnknown_020297DC
 _08052AF4: .4byte gUnknown_020297E0
