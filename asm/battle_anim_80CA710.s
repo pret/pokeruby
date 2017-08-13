@@ -6,6 +6,5074 @@
 
 	.text
 
+	thumb_func_start sub_80CA710
+sub_80CA710: @ 80CA710
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	ldr r5, _080CA744 @ =gBattleAnimArgs
+	ldrh r0, [r5]
+	ldrh r1, [r4, 0x20]
+	adds r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r5, 0x2]
+	ldrh r1, [r4, 0x22]
+	adds r0, r1
+	strh r0, [r4, 0x22]
+	ldrh r0, [r5, 0x4]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r5, 0x6]
+	strh r0, [r4, 0x30]
+	ldr r0, _080CA748 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CA74C
+	ldrh r0, [r5, 0x8]
+	negs r0, r0
+	b _080CA74E
+	.align 2, 0
+_080CA744: .4byte gBattleAnimArgs
+_080CA748: .4byte gBattleAnimPlayerMonIndex
+_080CA74C:
+	ldrh r0, [r5, 0x8]
+_080CA74E:
+	strh r0, [r4, 0x34]
+	ldr r0, _080CA760 @ =gBattleAnimArgs
+	ldrh r0, [r0, 0xA]
+	strh r0, [r4, 0x36]
+	ldr r0, _080CA764 @ =sub_80CA768
+	str r0, [r4, 0x1C]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA760: .4byte gBattleAnimArgs
+_080CA764: .4byte sub_80CA768
+	thumb_func_end sub_80CA710
+
+	thumb_func_start sub_80CA768
+sub_80CA768: @ 80CA768
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r1, [r4, 0x2E]
+	movs r2, 0x2E
+	ldrsh r0, [r4, r2]
+	cmp r0, 0
+	ble _080CA7A4
+	subs r0, r1, 0x1
+	strh r0, [r4, 0x2E]
+	ldrh r1, [r4, 0x32]
+	lsls r0, r1, 16
+	asrs r0, 24
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x30]
+	adds r1, r0
+	strh r1, [r4, 0x32]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r2, 0x34
+	ldrsh r1, [r4, r2]
+	bl Sin
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x36]
+	ldrh r1, [r4, 0x38]
+	adds r0, r1
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+	b _080CA7AA
+_080CA7A4:
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CA7AA:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CA768
+
+	thumb_func_start sub_80CA7B0
+sub_80CA7B0: @ 80CA7B0
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r0, _080CA7F0 @ =gBattleAnimArgs
+	ldrh r0, [r0, 0x4]
+	strh r0, [r4, 0x2E]
+	ldr r5, _080CA7F4 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x32]
+	ldrb r0, [r5]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x36]
+	ldr r0, _080CA7F8 @ =sub_8078B34
+	str r0, [r4, 0x1C]
+	ldr r1, _080CA7FC @ =move_anim_8074EE0
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA7F0: .4byte gBattleAnimArgs
+_080CA7F4: .4byte gBattleAnimPlayerMonIndex
+_080CA7F8: .4byte sub_8078B34
+_080CA7FC: .4byte move_anim_8074EE0
+	thumb_func_end sub_80CA7B0
+
+	thumb_func_start sub_80CA800
+sub_80CA800: @ 80CA800
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r5, _080CA848 @ =gBattleAnimArgs
+	ldrb r1, [r5, 0x6]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	ldrh r0, [r5, 0x4]
+	strh r0, [r4, 0x2E]
+	ldr r5, _080CA84C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x32]
+	ldrb r0, [r5]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x36]
+	ldr r0, _080CA850 @ =sub_8078B34
+	str r0, [r4, 0x1C]
+	ldr r1, _080CA854 @ =move_anim_8072740
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA848: .4byte gBattleAnimArgs
+_080CA84C: .4byte gBattleAnimEnemyMonIndex
+_080CA850: .4byte sub_8078B34
+_080CA854: .4byte move_anim_8072740
+	thumb_func_end sub_80CA800
+
+	thumb_func_start sub_80CA858
+sub_80CA858: @ 80CA858
+	push {r4-r6,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r6, _080CA8A8 @ =gBattleAnimArgs
+	ldrh r0, [r6, 0x4]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x20]
+	strh r0, [r4, 0x30]
+	ldr r5, _080CA8AC @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x32]
+	ldrh r0, [r4, 0x22]
+	strh r0, [r4, 0x34]
+	ldrb r0, [r5]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl obj_translate_based_on_private_1_2_3_4
+	ldrh r0, [r6, 0x6]
+	strh r0, [r4, 0x38]
+	ldr r1, _080CA8B0 @ =sub_80CA8B4
+	str r1, [r4, 0x1C]
+	adds r0, r4, 0
+	bl _call_via_r1
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA8A8: .4byte gBattleAnimArgs
+_080CA8AC: .4byte gBattleAnimEnemyMonIndex
+_080CA8B0: .4byte sub_80CA8B4
+	thumb_func_end sub_80CA858
+
+	thumb_func_start sub_80CA8B4
+sub_80CA8B4: @ 80CA8B4
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078B5C
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CA8CA
+	adds r0, r4, 0
+	bl DestroySprite
+	b _080CA91E
+_080CA8CA:
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x7F
+	ble _080CA8E4
+	ldr r0, _080CA8E0 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079E90
+	adds r0, 0x1
+	b _080CA8EE
+	.align 2, 0
+_080CA8E0: .4byte gBattleAnimEnemyMonIndex
+_080CA8E4:
+	ldr r0, _080CA924 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079E90
+	adds r0, 0x6
+_080CA8EE:
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0x5
+	bl Sin
+	ldrh r1, [r4, 0x24]
+	adds r0, r1
+	strh r0, [r4, 0x24]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0xE
+	bl Cos
+	ldrh r1, [r4, 0x26]
+	adds r0, r1
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x38]
+	adds r0, 0xF
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+_080CA91E:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA924: .4byte gBattleAnimEnemyMonIndex
+	thumb_func_end sub_80CA8B4
+
+	thumb_func_start sub_80CA928
+sub_80CA928: @ 80CA928
+	push {r4-r6,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	adds r6, r0, 0
+	ldr r1, _080CA998 @ =gTasks
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	adds r5, r0, r1
+	ldrh r0, [r5, 0x8]
+	subs r0, 0x1
+	movs r2, 0
+	strh r0, [r5, 0x8]
+	lsls r0, 16
+	asrs r0, 16
+	movs r1, 0x1
+	negs r1, r1
+	cmp r0, r1
+	bne _080CA982
+	ldrh r0, [r5, 0xA]
+	adds r0, 0x1
+	strh r0, [r5, 0xA]
+	movs r0, 0x6
+	strh r0, [r5, 0x8]
+	ldr r1, _080CA99C @ =gBattleAnimArgs
+	movs r0, 0xF
+	strh r0, [r1]
+	strh r2, [r1, 0x2]
+	movs r0, 0x50
+	strh r0, [r1, 0x4]
+	strh r2, [r1, 0x6]
+	ldr r4, _080CA9A0 @ =gSpriteTemplate_83D631C
+	ldr r0, _080CA9A4 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079E90
+	adds r3, r0, 0
+	adds r3, 0x1
+	lsls r3, 24
+	lsrs r3, 24
+	adds r0, r4, 0
+	movs r1, 0
+	movs r2, 0
+	bl CreateSpriteAndAnimate
+_080CA982:
+	movs r1, 0xA
+	ldrsh r0, [r5, r1]
+	cmp r0, 0xF
+	bne _080CA990
+	adds r0, r6, 0
+	bl DestroyAnimVisualTask
+_080CA990:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA998: .4byte gTasks
+_080CA99C: .4byte gBattleAnimArgs
+_080CA9A0: .4byte gSpriteTemplate_83D631C
+_080CA9A4: .4byte gBattleAnimEnemyMonIndex
+	thumb_func_end sub_80CA928
+
+	thumb_func_start sub_80CA9A8
+sub_80CA9A8: @ 80CA9A8
+	push {r4-r6,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_8078764
+	ldr r6, _080CA9EC @ =gBattleAnimArgs
+	ldrh r0, [r6, 0x6]
+	strh r0, [r4, 0x2E]
+	ldr r5, _080CA9F0 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x32]
+	ldrb r0, [r5]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x36]
+	ldrh r0, [r6, 0x4]
+	strh r0, [r4, 0x38]
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldr r0, _080CA9F4 @ =sub_80CA9F8
+	str r0, [r4, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CA9EC: .4byte gBattleAnimArgs
+_080CA9F0: .4byte gBattleAnimPlayerMonIndex
+_080CA9F4: .4byte sub_80CA9F8
+	thumb_func_end sub_80CA9A8
+
+	thumb_func_start sub_80CA9F8
+sub_80CA9F8: @ 80CA9F8
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAA0C
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CAA0C:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CA9F8
+
+	thumb_func_start sub_80CAA14
+sub_80CAA14: @ 80CAA14
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	bl Random
+	adds r1, r0, 0
+	lsls r1, 16
+	lsrs r1, 16
+	movs r0, 0x7
+	ands r1, r0
+	adds r0, r5, 0
+	bl StartSpriteAnim
+	ldr r4, _080CAA5C @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x20]
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x22]
+	ldrb r0, [r4]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAA60
+	ldrh r0, [r5, 0x20]
+	subs r0, 0x14
+	b _080CAA64
+	.align 2, 0
+_080CAA5C: .4byte gBattleAnimPlayerMonIndex
+_080CAA60:
+	ldrh r0, [r5, 0x20]
+	adds r0, 0x14
+_080CAA64:
+	strh r0, [r5, 0x20]
+	bl Random
+	lsls r0, 16
+	lsrs r0, 16
+	movs r1, 0x1F
+	ands r0, r1
+	adds r0, 0x40
+	strh r0, [r5, 0x2E]
+	ldrh r0, [r5, 0x20]
+	strh r0, [r5, 0x30]
+	ldr r4, _080CAAC4 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x32]
+	ldrh r0, [r5, 0x22]
+	strh r0, [r5, 0x34]
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x36]
+	adds r0, r5, 0
+	bl sub_8078D60
+	bl Random
+	movs r1, 0xFF
+	ands r1, r0
+	strh r1, [r5, 0x38]
+	adds r0, r5, 0
+	adds r0, 0x43
+	ldrb r0, [r0]
+	strh r0, [r5, 0x3A]
+	ldr r1, _080CAAC8 @ =sub_80CAACC
+	str r1, [r5, 0x1C]
+	adds r0, r5, 0
+	bl _call_via_r1
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAAC4: .4byte gBattleAnimEnemyMonIndex
+_080CAAC8: .4byte sub_80CAACC
+	thumb_func_end sub_80CAA14
+
+	thumb_func_start sub_80CAACC
+sub_80CAACC: @ 80CAACC
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078CE8
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAAE2
+	adds r0, r4, 0
+	bl move_anim_8072740
+	b _080CAB12
+_080CAAE2:
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0xC
+	bl Cos
+	ldrh r1, [r4, 0x26]
+	adds r0, r1
+	strh r0, [r4, 0x26]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x7E
+	bgt _080CAAFE
+	ldrh r0, [r4, 0x3A]
+	b _080CAB02
+_080CAAFE:
+	ldrh r0, [r4, 0x3A]
+	adds r0, 0x1
+_080CAB02:
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrh r0, [r4, 0x38]
+	adds r0, 0x18
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+_080CAB12:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CAACC
+
+	thumb_func_start sub_80CAB18
+sub_80CAB18: @ 80CAB18
+	push {r4-r6,lr}
+	adds r6, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r0, _080CAB78 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAB38
+	ldr r1, _080CAB7C @ =gBattleAnimArgs
+	ldrh r0, [r1, 0x4]
+	negs r0, r0
+	strh r0, [r1, 0x4]
+_080CAB38:
+	ldr r4, _080CAB7C @ =gBattleAnimArgs
+	ldrh r0, [r4, 0x8]
+	strh r0, [r6, 0x2E]
+	ldr r5, _080CAB80 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r5]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x4]
+	adds r0, r1
+	strh r0, [r6, 0x32]
+	ldrb r0, [r5]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x6]
+	adds r0, r1
+	strh r0, [r6, 0x36]
+	ldrh r0, [r4, 0xA]
+	strh r0, [r6, 0x38]
+	adds r0, r6, 0
+	bl sub_80786EC
+	ldr r0, _080CAB84 @ =sub_80CAB88
+	str r0, [r6, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAB78: .4byte gBattleAnimPlayerMonIndex
+_080CAB7C: .4byte gBattleAnimArgs
+_080CAB80: .4byte gBattleAnimEnemyMonIndex
+_080CAB84: .4byte sub_80CAB88
+	thumb_func_end sub_80CAB18
+
+	thumb_func_start sub_80CAB88
+sub_80CAB88: @ 80CAB88
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CABB2
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	ldr r0, _080CABB8 @ =sub_80782D8
+	str r0, [r4, 0x1C]
+	ldr r1, _080CABBC @ =sub_80CABC0
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+_080CABB2:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CABB8: .4byte sub_80782D8
+_080CABBC: .4byte sub_80CABC0
+	thumb_func_end sub_80CAB88
+
+	thumb_func_start sub_80CABC0
+sub_80CABC0: @ 80CABC0
+	push {r4,lr}
+	adds r4, r0, 0
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl StartSpriteAnim
+	movs r0, 0x3C
+	strh r0, [r4, 0x2E]
+	ldr r0, _080CABF0 @ =sub_80782D8
+	str r0, [r4, 0x1C]
+	ldr r1, _080CABF4 @ =move_anim_8072740
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CABF0: .4byte sub_80782D8
+_080CABF4: .4byte move_anim_8072740
+	thumb_func_end sub_80CABC0
+
+	thumb_func_start sub_80CABF8
+sub_80CABF8: @ 80CABF8
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_8078764
+	ldr r5, _080CAC3C @ =gBattleAnimArgs
+	ldrb r1, [r5, 0x8]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	movs r1, 0x8
+	ldrsh r0, [r5, r1]
+	cmp r0, 0x1
+	bne _080CAC22
+	ldrb r0, [r4, 0x1]
+	movs r1, 0xD
+	negs r1, r1
+	ands r1, r0
+	movs r0, 0x4
+	orrs r1, r0
+	strb r1, [r4, 0x1]
+_080CAC22:
+	ldrh r0, [r5, 0x6]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r5, 0x4]
+	strh r0, [r4, 0x30]
+	ldr r1, _080CAC40 @ =sub_80CAC44
+	str r1, [r4, 0x1C]
+	adds r0, r4, 0
+	bl _call_via_r1
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAC3C: .4byte gBattleAnimArgs
+_080CAC40: .4byte sub_80CAC44
+	thumb_func_end sub_80CABF8
+
+	thumb_func_start sub_80CAC44
+sub_80CAC44: @ 80CAC44
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	movs r1, 0x20
+	bl Sin
+	strh r0, [r4, 0x24]
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	movs r1, 0x3
+	negs r1, r1
+	bl Cos
+	ldrh r1, [r4, 0x32]
+	adds r1, 0x18
+	strh r1, [r4, 0x32]
+	lsls r1, 16
+	asrs r1, 24
+	adds r0, r1
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x30]
+	subs r0, 0x40
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0x7F
+	bhi _080CAC98
+	ldr r0, _080CAC94 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079ED4
+	movs r1, 0x3
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r4, 0x5]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	b _080CACBC
+	.align 2, 0
+_080CAC94: .4byte gBattleAnimEnemyMonIndex
+_080CAC98:
+	ldr r0, _080CACE8 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079ED4
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r2, r0, 24
+	cmp r2, 0x3
+	bls _080CACAC
+	movs r2, 0x3
+_080CACAC:
+	movs r0, 0x3
+	ands r2, r0
+	lsls r2, 2
+	ldrb r1, [r4, 0x5]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r1
+	orrs r0, r2
+_080CACBC:
+	strb r0, [r4, 0x5]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x2
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x30]
+	ldrh r0, [r4, 0x2E]
+	subs r0, 0x1
+	strh r0, [r4, 0x2E]
+	lsls r0, 16
+	asrs r0, 16
+	movs r1, 0x1
+	negs r1, r1
+	cmp r0, r1
+	bne _080CACE0
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CACE0:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CACE8: .4byte gBattleAnimEnemyMonIndex
+	thumb_func_end sub_80CAC44
+
+	thumb_func_start sub_80CACEC
+sub_80CACEC: @ 80CACEC
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CAD06
+	bl IsDoubleBattle
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CAD0E
+_080CAD06:
+	adds r0, r4, 0
+	bl DestroyAnimVisualTask
+	b _080CAD4A
+_080CAD0E:
+	ldr r0, _080CAD2C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl GetBankIdentity_permutated
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _080CAD34
+	ldr r0, _080CAD30 @ =REG_BG2CNT
+	ldrb r1, [r0]
+	movs r2, 0x3
+	orrs r1, r2
+	strb r1, [r0]
+	b _080CAD44
+	.align 2, 0
+_080CAD2C: .4byte gBattleAnimEnemyMonIndex
+_080CAD30: .4byte REG_BG2CNT
+_080CAD34:
+	ldr r2, _080CAD50 @ =REG_BG1CNT
+	ldrb r1, [r2]
+	movs r0, 0x4
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x1
+	orrs r0, r1
+	strb r0, [r2]
+_080CAD44:
+	adds r0, r4, 0
+	bl DestroyAnimVisualTask
+_080CAD4A:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAD50: .4byte REG_BG1CNT
+	thumb_func_end sub_80CACEC
+
+	thumb_func_start sub_80CAD54
+sub_80CAD54: @ 80CAD54
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0
+	bl sub_80787B0
+	ldr r5, _080CAD9C @ =gBattleAnimArgs
+	ldrh r0, [r5, 0x6]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x20]
+	strh r0, [r4, 0x30]
+	strh r0, [r4, 0x32]
+	ldrh r0, [r4, 0x22]
+	strh r0, [r4, 0x34]
+	ldr r0, _080CADA0 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r5, [r5, 0x4]
+	adds r0, r5
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl obj_translate_based_on_private_1_2_3_4
+	movs r0, 0x40
+	strh r0, [r4, 0x38]
+	ldr r1, _080CADA4 @ =sub_80CADA8
+	str r1, [r4, 0x1C]
+	adds r0, r4, 0
+	bl _call_via_r1
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAD9C: .4byte gBattleAnimArgs
+_080CADA0: .4byte gBattleAnimPlayerMonIndex
+_080CADA4: .4byte sub_80CADA8
+	thumb_func_end sub_80CAD54
+
+	thumb_func_start sub_80CADA8
+sub_80CADA8: @ 80CADA8
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078B5C
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CAE14
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0x20
+	bl Sin
+	ldrh r1, [r4, 0x24]
+	adds r0, r1
+	strh r0, [r4, 0x24]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0x5
+	negs r1, r1
+	bl Cos
+	ldrh r1, [r4, 0x26]
+	adds r0, r1
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x38]
+	subs r0, 0x40
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0x7F
+	bhi _080CADF4
+	ldr r0, _080CADF0 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl sub_8079E90
+	subs r0, 0x1
+	b _080CADFE
+	.align 2, 0
+_080CADF0: .4byte gBattleAnimPlayerMonIndex
+_080CADF4:
+	ldr r0, _080CAE10 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl sub_8079E90
+	adds r0, 0x1
+_080CADFE:
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrh r0, [r4, 0x38]
+	adds r0, 0x5
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+	b _080CAE1A
+	.align 2, 0
+_080CAE10: .4byte gBattleAnimPlayerMonIndex
+_080CAE14:
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CAE1A:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CADA8
+
+	thumb_func_start sub_80CAE20
+sub_80CAE20: @ 80CAE20
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r5, _080CAE68 @ =gBattleAnimArgs
+	ldrh r0, [r5, 0x6]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x20]
+	strh r0, [r4, 0x30]
+	strh r0, [r4, 0x32]
+	ldrh r0, [r4, 0x22]
+	strh r0, [r4, 0x34]
+	ldr r0, _080CAE6C @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r5, [r5, 0x4]
+	adds r0, r5
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl obj_translate_based_on_private_1_2_3_4
+	movs r0, 0x40
+	strh r0, [r4, 0x38]
+	ldr r1, _080CAE70 @ =sub_80CAE74
+	str r1, [r4, 0x1C]
+	adds r0, r4, 0
+	bl _call_via_r1
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAE68: .4byte gBattleAnimArgs
+_080CAE6C: .4byte gBattleAnimPlayerMonIndex
+_080CAE70: .4byte sub_80CAE74
+	thumb_func_end sub_80CAE20
+
+	thumb_func_start sub_80CAE74
+sub_80CAE74: @ 80CAE74
+	push {r4,lr}
+	adds r4, r0, 0
+	bl sub_8078B5C
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CAECC
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r1, 0x8
+	bl Sin
+	ldrh r1, [r4, 0x24]
+	adds r0, r1
+	strh r0, [r4, 0x24]
+	ldrh r1, [r4, 0x38]
+	adds r0, r1, 0
+	subs r0, 0x3B
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0x4
+	bls _080CAEAC
+	adds r0, r1, 0
+	subs r0, 0xBB
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0x4
+	bhi _080CAEC0
+_080CAEAC:
+	ldrb r2, [r4, 0x3]
+	lsls r1, r2, 26
+	lsrs r1, 27
+	movs r0, 0x8
+	eors r1, r0
+	lsls r1, 1
+	subs r0, 0x47
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+_080CAEC0:
+	ldrh r0, [r4, 0x38]
+	adds r0, 0x5
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+	b _080CAED2
+_080CAECC:
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CAED2:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CAE74
+
+	thumb_func_start sub_80CAED8
+sub_80CAED8: @ 80CAED8
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	ldr r5, _080CAF14 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x20]
+	ldrb r0, [r5]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r4, 0x22]
+	ldr r1, _080CAF18 @ =gBattleAnimArgs
+	ldrh r0, [r1]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r1, 0x2]
+	strh r0, [r4, 0x30]
+	ldrh r0, [r1, 0x4]
+	strh r0, [r4, 0x32]
+	ldr r0, _080CAF1C @ =sub_80CAF20
+	str r0, [r4, 0x1C]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CAF14: .4byte gBattleAnimPlayerMonIndex
+_080CAF18: .4byte gBattleAnimArgs
+_080CAF1C: .4byte sub_80CAF20
+	thumb_func_end sub_80CAED8
+
+	thumb_func_start sub_80CAF20
+sub_80CAF20: @ 80CAF20
+	push {lr}
+	adds r1, r0, 0
+	ldrh r0, [r1, 0x32]
+	movs r2, 0x32
+	ldrsh r3, [r1, r2]
+	cmp r3, 0
+	bne _080CAF54
+	ldrh r0, [r1, 0x30]
+	movs r2, 0x1
+	ands r2, r0
+	cmp r2, 0
+	beq _080CAF42
+	movs r0, 0x80
+	strh r0, [r1, 0x2E]
+	strh r3, [r1, 0x30]
+	strh r3, [r1, 0x32]
+	b _080CAF48
+_080CAF42:
+	strh r2, [r1, 0x2E]
+	strh r2, [r1, 0x30]
+	strh r2, [r1, 0x32]
+_080CAF48:
+	ldr r0, _080CAF50 @ =sub_80CAF6C
+	str r0, [r1, 0x1C]
+	b _080CAF68
+	.align 2, 0
+_080CAF50: .4byte sub_80CAF6C
+_080CAF54:
+	subs r0, 0x1
+	strh r0, [r1, 0x32]
+	ldrh r0, [r1, 0x2E]
+	ldrh r2, [r1, 0x20]
+	adds r0, r2
+	strh r0, [r1, 0x20]
+	ldrh r0, [r1, 0x30]
+	ldrh r2, [r1, 0x22]
+	adds r0, r2
+	strh r0, [r1, 0x22]
+_080CAF68:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CAF20
+
+	thumb_func_start sub_80CAF6C
+sub_80CAF6C: @ 80CAF6C
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r0, _080CAF8C @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAF90
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	movs r1, 0x19
+	bl Sin
+	negs r0, r0
+	b _080CAF9A
+	.align 2, 0
+_080CAF8C: .4byte gBattleAnimPlayerMonIndex
+_080CAF90:
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	movs r1, 0x19
+	bl Sin
+_080CAF9A:
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x2
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	movs r1, 0x1
+	ands r0, r1
+	cmp r0, 0
+	bne _080CAFBA
+	ldrh r0, [r4, 0x26]
+	adds r0, 0x1
+	strh r0, [r4, 0x26]
+_080CAFBA:
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x50
+	ble _080CAFC8
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CAFC8:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CAF6C
+
+	thumb_func_start sub_80CAFD0
+sub_80CAFD0: @ 80CAFD0
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	movs r1, 0x1
+	bl sub_80787B0
+	ldr r0, _080CB024 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CAFF0
+	ldr r1, _080CB028 @ =gBattleAnimArgs
+	ldrh r0, [r1, 0x4]
+	negs r0, r0
+	strh r0, [r1, 0x4]
+_080CAFF0:
+	ldr r6, _080CB028 @ =gBattleAnimArgs
+	ldrh r0, [r6, 0x8]
+	strh r0, [r5, 0x2E]
+	movs r1, 0xC
+	ldrsh r0, [r6, r1]
+	cmp r0, 0
+	bne _080CB030
+	ldr r4, _080CB02C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r6, 0x4]
+	adds r0, r1
+	strh r0, [r5, 0x32]
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r6, [r6, 0x6]
+	adds r0, r6
+	b _080CB050
+	.align 2, 0
+_080CB024: .4byte gBattleAnimPlayerMonIndex
+_080CB028: .4byte gBattleAnimArgs
+_080CB02C: .4byte gBattleAnimEnemyMonIndex
+_080CB030:
+	ldr r0, _080CB07C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	adds r2, r5, 0
+	adds r2, 0x32
+	adds r3, r5, 0
+	adds r3, 0x36
+	movs r1, 0x1
+	bl sub_807A3FC
+	ldrh r0, [r6, 0x4]
+	ldrh r1, [r5, 0x32]
+	adds r0, r1
+	strh r0, [r5, 0x32]
+	ldrh r0, [r6, 0x6]
+	ldrh r1, [r5, 0x36]
+	adds r0, r1
+_080CB050:
+	strh r0, [r5, 0x36]
+	ldr r0, _080CB080 @ =gBattleAnimArgs
+	ldrh r0, [r0, 0xA]
+	strh r0, [r5, 0x38]
+	adds r0, r5, 0
+	bl sub_80786EC
+	ldr r0, _080CB084 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	adds r4, r0, 0
+	ldr r0, _080CB07C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r4, 24
+	lsls r0, 24
+	cmp r4, r0
+	bne _080CB088
+	movs r0, 0x1
+	b _080CB08A
+	.align 2, 0
+_080CB07C: .4byte gBattleAnimEnemyMonIndex
+_080CB080: .4byte gBattleAnimArgs
+_080CB084: .4byte gBattleAnimPlayerMonIndex
+_080CB088:
+	movs r0, 0
+_080CB08A:
+	strh r0, [r5, 0x2E]
+	ldr r0, _080CB098 @ =sub_80CB09C
+	str r0, [r5, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB098: .4byte sub_80CB09C
+	thumb_func_end sub_80CAFD0
+
+	thumb_func_start sub_80CB09C
+sub_80CB09C: @ 80CB09C
+	push {r4-r7,lr}
+	adds r6, r0, 0
+	movs r7, 0
+	ldrh r5, [r6, 0x2E]
+	ldrh r4, [r6, 0x3C]
+	movs r0, 0x1
+	strh r0, [r6, 0x2E]
+	adds r0, r6, 0
+	bl sub_8078718
+	ldrh r0, [r6, 0x3C]
+	strh r5, [r6, 0x2E]
+	lsls r4, 16
+	asrs r4, 16
+	cmp r4, 0xC8
+	ble _080CB0CE
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x37
+	bgt _080CB0CE
+	ldrh r0, [r6, 0x6]
+	cmp r0, 0
+	bne _080CB0D4
+	adds r0, 0x1
+	strh r0, [r6, 0x6]
+_080CB0CE:
+	ldrh r0, [r6, 0x6]
+	cmp r0, 0
+	beq _080CB106
+_080CB0D4:
+	movs r1, 0x2E
+	ldrsh r0, [r6, r1]
+	cmp r0, 0
+	beq _080CB106
+	adds r3, r6, 0
+	adds r3, 0x3E
+	ldrb r2, [r3]
+	lsls r0, r2, 29
+	lsrs r0, 31
+	movs r1, 0x1
+	eors r1, r0
+	lsls r1, 2
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+	ldrh r0, [r6, 0x6]
+	adds r0, 0x1
+	strh r0, [r6, 0x6]
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0x1E
+	bne _080CB106
+	movs r7, 0x1
+_080CB106:
+	movs r2, 0x20
+	ldrsh r0, [r6, r2]
+	movs r2, 0x24
+	ldrsh r1, [r6, r2]
+	adds r0, r1
+	adds r0, 0x10
+	movs r1, 0x88
+	lsls r1, 1
+	cmp r0, r1
+	bhi _080CB130
+	movs r0, 0x22
+	ldrsh r1, [r6, r0]
+	movs r2, 0x26
+	ldrsh r0, [r6, r2]
+	adds r1, r0
+	cmp r1, 0xA0
+	bgt _080CB130
+	movs r0, 0x10
+	negs r0, r0
+	cmp r1, r0
+	bge _080CB132
+_080CB130:
+	movs r7, 0x1
+_080CB132:
+	cmp r7, 0
+	beq _080CB13C
+	adds r0, r6, 0
+	bl move_anim_8072740
+_080CB13C:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB09C
+
+	thumb_func_start sub_80CB144
+sub_80CB144: @ 80CB144
+	push {r4,lr}
+	adds r4, r0, 0
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CB170
+	bl IsDoubleBattle
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _080CB170
+	ldr r0, _080CB198 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	adds r2, r4, 0
+	adds r2, 0x20
+	adds r3, r4, 0
+	adds r3, 0x22
+	movs r1, 0x1
+	bl sub_807A3FC
+_080CB170:
+	ldrh r0, [r4, 0x22]
+	adds r0, 0x20
+	strh r0, [r4, 0x22]
+	ldr r1, _080CB19C @ =gBattleAnimArgs
+	ldrh r0, [r1]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r1, 0x2]
+	strh r0, [r4, 0x30]
+	ldrh r0, [r1, 0x4]
+	strh r0, [r4, 0x32]
+	ldrh r0, [r1, 0x6]
+	strh r0, [r4, 0x34]
+	ldrh r0, [r1, 0x8]
+	strh r0, [r4, 0x36]
+	ldr r0, _080CB1A0 @ =sub_80CB1A4
+	str r0, [r4, 0x1C]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB198: .4byte gBattleAnimEnemyMonIndex
+_080CB19C: .4byte gBattleAnimArgs
+_080CB1A0: .4byte sub_80CB1A4
+	thumb_func_end sub_80CB144
+
+	thumb_func_start sub_80CB1A4
+sub_80CB1A4: @ 80CB1A4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	ldrh r1, [r4, 0x30]
+	movs r2, 0x30
+	ldrsh r0, [r4, r2]
+	cmp r0, 0xFF
+	bne _080CB1BA
+	ldrh r0, [r4, 0x22]
+	subs r0, 0x2
+	strh r0, [r4, 0x22]
+	b _080CB1C8
+_080CB1BA:
+	cmp r0, 0
+	ble _080CB1C8
+	ldrh r0, [r4, 0x22]
+	subs r0, 0x2
+	strh r0, [r4, 0x22]
+	subs r0, r1, 0x2
+	strh r0, [r4, 0x30]
+_080CB1C8:
+	ldrh r3, [r4, 0x32]
+	ldrh r5, [r4, 0x38]
+	adds r2, r3, r5
+	strh r2, [r4, 0x38]
+	movs r0, 0x2E
+	ldrsh r1, [r4, r0]
+	movs r5, 0x36
+	ldrsh r0, [r4, r5]
+	cmp r1, r0
+	bge _080CB1E0
+	adds r0, r2, r3
+	strh r0, [r4, 0x38]
+_080CB1E0:
+	ldrh r1, [r4, 0x38]
+	movs r0, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x38]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	movs r2, 0x34
+	ldrsh r1, [r4, r2]
+	bl Cos
+	strh r0, [r4, 0x24]
+	movs r5, 0x38
+	ldrsh r0, [r4, r5]
+	movs r1, 0x5
+	bl Sin
+	strh r0, [r4, 0x26]
+	movs r1, 0x38
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x7F
+	bgt _080CB220
+	ldr r0, _080CB21C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079ED4
+	lsls r0, 24
+	lsrs r0, 24
+	subs r0, 0x1
+	b _080CB22E
+	.align 2, 0
+_080CB21C: .4byte gBattleAnimEnemyMonIndex
+_080CB220:
+	ldr r0, _080CB258 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl sub_8079ED4
+	lsls r0, 24
+	lsrs r0, 24
+	adds r0, 0x1
+_080CB22E:
+	movs r1, 0x3
+	ands r0, r1
+	lsls r0, 2
+	ldrb r2, [r4, 0x5]
+	movs r1, 0xD
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r4, 0x5]
+	ldrh r0, [r4, 0x2E]
+	subs r0, 0x1
+	strh r0, [r4, 0x2E]
+	lsls r0, 16
+	cmp r0, 0
+	bne _080CB252
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CB252:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB258: .4byte gBattleAnimEnemyMonIndex
+	thumb_func_end sub_80CB1A4
+
+	thumb_func_start sub_80CB25C
+sub_80CB25C: @ 80CB25C
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	movs r1, 0
+	bl sub_8078764
+	adds r2, r5, 0
+	adds r2, 0x2C
+	ldrb r0, [r2]
+	movs r1, 0x80
+	orrs r0, r1
+	strb r0, [r2]
+	ldr r4, _080CB290 @ =gBattleAnimArgs
+	ldrb r1, [r4, 0x4]
+	adds r0, r5, 0
+	bl StartSpriteAffineAnim
+	ldrh r0, [r4, 0x4]
+	strh r0, [r5, 0x3A]
+	ldrh r0, [r4, 0x6]
+	strh r0, [r5, 0x3C]
+	ldr r0, _080CB294 @ =sub_80CB298
+	str r0, [r5, 0x1C]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB290: .4byte gBattleAnimArgs
+_080CB294: .4byte sub_80CB298
+	thumb_func_end sub_80CB25C
+
+	thumb_func_start sub_80CB298
+sub_80CB298: @ 80CB298
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r0, _080CB2C8 @ =gBattleAnimArgs
+	ldrh r1, [r0, 0xE]
+	ldr r0, _080CB2CC @ =0x0000ffff
+	cmp r1, r0
+	bne _080CB2C2
+	adds r2, r4, 0
+	adds r2, 0x2C
+	ldrb r1, [r2]
+	movs r0, 0x7F
+	ands r0, r1
+	strb r0, [r2]
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+	movs r0, 0x80
+	lsls r0, 1
+	strh r0, [r4, 0x2E]
+	ldr r0, _080CB2D0 @ =sub_80CB2D4
+	str r0, [r4, 0x1C]
+_080CB2C2:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB2C8: .4byte gBattleAnimArgs
+_080CB2CC: .4byte 0x0000ffff
+_080CB2D0: .4byte sub_80CB2D4
+	thumb_func_end sub_80CB298
+
+	thumb_func_start sub_80CB2D4
+sub_80CB2D4: @ 80CB2D4
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+	movs r1, 0x32
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080CB2EC
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0xB
+	b _080CB2F0
+_080CB2EC:
+	ldrh r0, [r4, 0x2E]
+	subs r0, 0xB
+_080CB2F0:
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x6
+	bne _080CB30C
+	movs r0, 0
+	strh r0, [r4, 0x30]
+	ldrh r0, [r4, 0x32]
+	movs r1, 0x1
+	eors r0, r1
+	strh r0, [r4, 0x32]
+_080CB30C:
+	adds r0, r4, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _080CB33A
+	ldrh r0, [r4, 0x3C]
+	subs r0, 0x1
+	strh r0, [r4, 0x3C]
+	lsls r0, 16
+	cmp r0, 0
+	ble _080CB334
+	ldrh r1, [r4, 0x3A]
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r4, 0
+	bl StartSpriteAffineAnim
+	b _080CB33A
+_080CB334:
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CB33A:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB2D4
+
+	thumb_func_start sub_80CB340
+sub_80CB340: @ 80CB340
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+	lsls r0, 24
+	lsrs r2, r0, 24
+	ldr r1, _080CB36C @ =gSprites
+	lsls r0, r2, 4
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	adds r0, 0x3E
+	ldrb r0, [r0]
+	lsls r0, 29
+	cmp r0, 0
+	bge _080CB370
+	adds r0, r4, 0
+	bl DestroyAnimVisualTask
+	b _080CB396
+	.align 2, 0
+_080CB36C: .4byte gSprites
+_080CB370:
+	adds r0, r2, 0
+	movs r1, 0x1
+	bl sub_8078E70
+	ldr r1, _080CB39C @ =gTasks
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	adds r0, r1
+	ldr r2, _080CB3A0 @ =gBattleAnimArgs
+	ldrh r1, [r2]
+	strh r1, [r0, 0x8]
+	ldrh r1, [r2, 0x2]
+	strh r1, [r0, 0xA]
+	movs r1, 0x80
+	lsls r1, 1
+	strh r1, [r0, 0x1E]
+	ldr r1, _080CB3A4 @ =sub_80CB3A8
+	str r1, [r0]
+_080CB396:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB39C: .4byte gTasks
+_080CB3A0: .4byte gBattleAnimArgs
+_080CB3A4: .4byte sub_80CB3A8
+	thumb_func_end sub_80CB340
+
+	thumb_func_start sub_80CB3A8
+sub_80CB3A8: @ 80CB3A8
+	push {r4-r6,lr}
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+	lsls r0, 24
+	lsrs r0, 24
+	adds r6, r0, 0
+	ldr r1, _080CB428 @ =gTasks
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	adds r4, r0, r1
+	ldrh r1, [r4, 0x8]
+	ldrh r0, [r4, 0x1C]
+	adds r1, r0
+	strh r1, [r4, 0x1C]
+	ldr r2, _080CB42C @ =gSprites
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	adds r5, r0, r2
+	lsls r1, 16
+	asrs r1, 24
+	strh r1, [r5, 0x24]
+	ldr r0, _080CB430 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CB3F2
+	ldrh r0, [r5, 0x24]
+	negs r0, r0
+	strh r0, [r5, 0x24]
+_080CB3F2:
+	ldrh r0, [r4, 0x1E]
+	adds r0, 0x10
+	strh r0, [r4, 0x1E]
+	movs r0, 0x1E
+	ldrsh r2, [r4, r0]
+	adds r0, r6, 0
+	adds r1, r2, 0
+	movs r3, 0
+	bl obj_id_set_rotscale
+	adds r0, r6, 0
+	bl sub_8079A64
+	ldrh r0, [r4, 0xA]
+	subs r0, 0x1
+	strh r0, [r4, 0xA]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0
+	bne _080CB420
+	strh r0, [r4, 0x8]
+	ldr r0, _080CB434 @ =sub_80CB438
+	str r0, [r4]
+_080CB420:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB428: .4byte gTasks
+_080CB42C: .4byte gSprites
+_080CB430: .4byte gBattleAnimEnemyMonIndex
+_080CB434: .4byte sub_80CB438
+	thumb_func_end sub_80CB3A8
+
+	thumb_func_start sub_80CB438
+sub_80CB438: @ 80CB438
+	push {r4-r6,lr}
+	lsls r0, 24
+	lsrs r3, r0, 24
+	ldr r0, _080CB484 @ =gBattleAnimArgs
+	ldrh r1, [r0, 0xE]
+	ldr r0, _080CB488 @ =0x0000ffff
+	cmp r1, r0
+	bne _080CB494
+	ldr r0, _080CB48C @ =gTasks
+	lsls r2, r3, 2
+	adds r1, r2, r3
+	lsls r1, 3
+	adds r6, r1, r0
+	movs r1, 0x8
+	ldrsh r5, [r6, r1]
+	adds r4, r0, 0
+	cmp r5, 0
+	bne _080CB4A8
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	adds r0, r4, 0
+	bl sub_8078F40
+	ldr r1, _080CB490 @ =gSprites
+	lsls r0, r4, 4
+	adds r0, r4
+	lsls r0, 2
+	adds r0, r1
+	strh r5, [r0, 0x24]
+	strh r5, [r0, 0x26]
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	strh r0, [r6, 0x8]
+	b _080CB4C2
+	.align 2, 0
+_080CB484: .4byte gBattleAnimArgs
+_080CB488: .4byte 0x0000ffff
+_080CB48C: .4byte gTasks
+_080CB490: .4byte gSprites
+_080CB494:
+	ldr r1, _080CB4C8 @ =gTasks
+	lsls r2, r3, 2
+	adds r0, r2, r3
+	lsls r0, 3
+	adds r0, r1
+	movs r4, 0x8
+	ldrsh r0, [r0, r4]
+	adds r4, r1, 0
+	cmp r0, 0
+	beq _080CB4C2
+_080CB4A8:
+	adds r1, r2, r3
+	lsls r1, 3
+	adds r1, r4
+	ldrh r0, [r1, 0x8]
+	adds r0, 0x1
+	strh r0, [r1, 0x8]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x3
+	bne _080CB4C2
+	adds r0, r3, 0
+	bl DestroyAnimVisualTask
+_080CB4C2:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB4C8: .4byte gTasks
+	thumb_func_end sub_80CB438
+
+	thumb_func_start sub_80CB4CC
+sub_80CB4CC: @ 80CB4CC
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r5, r1]
+	cmp r0, 0
+	beq _080CB4DE
+	cmp r0, 0x1
+	beq _080CB538
+	b _080CB58A
+_080CB4DE:
+	ldr r6, _080CB530 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r6]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CB4F6
+	ldr r1, _080CB534 @ =gBattleAnimArgs
+	movs r2, 0
+	ldrsh r0, [r1, r2]
+	negs r0, r0
+	strh r0, [r1]
+_080CB4F6:
+	ldrb r0, [r6]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	ldr r4, _080CB534 @ =gBattleAnimArgs
+	lsrs r0, 24
+	ldrh r1, [r4]
+	adds r0, r1
+	strh r0, [r5, 0x20]
+	ldrb r0, [r6]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r4, [r4, 0x2]
+	adds r0, r4
+	strh r0, [r5, 0x22]
+	adds r2, r5, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2]
+	ldrh r0, [r5, 0x2E]
+	adds r0, 0x1
+	strh r0, [r5, 0x2E]
+	b _080CB58A
+	.align 2, 0
+_080CB530: .4byte gBattleAnimEnemyMonIndex
+_080CB534: .4byte gBattleAnimArgs
+_080CB538:
+	adds r2, r5, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	adds r0, r5, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _080CB58A
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl ChangeSpriteAffineAnim
+	movs r0, 0x19
+	strh r0, [r5, 0x2E]
+	ldr r4, _080CB590 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x32]
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x36]
+	ldr r0, _080CB594 @ =sub_8078CC0
+	str r0, [r5, 0x1C]
+	ldr r1, _080CB598 @ =move_anim_8072740
+	adds r0, r5, 0
+	bl oamt_set_x3A_32
+_080CB58A:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB590: .4byte gBattleAnimPlayerMonIndex
+_080CB594: .4byte sub_8078CC0
+_080CB598: .4byte move_anim_8072740
+	thumb_func_end sub_80CB4CC
+
+	thumb_func_start sub_80CB59C
+sub_80CB59C: @ 80CB59C
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r5, r1]
+	cmp r0, 0
+	bne _080CB608
+	ldr r4, _080CB614 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x20]
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x22]
+	ldr r4, _080CB618 @ =gBattleAnimArgs
+	ldrh r0, [r4]
+	strh r0, [r5, 0x24]
+	ldrh r0, [r4, 0x2]
+	strh r0, [r5, 0x26]
+	ldrb r0, [r4, 0x4]
+	adds r0, 0x1E
+	adds r1, r5, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrb r1, [r4, 0x6]
+	adds r0, r5, 0
+	bl StartSpriteAnim
+	ldrh r0, [r4, 0x8]
+	strh r0, [r5, 0x32]
+	ldrh r0, [r5, 0x2E]
+	adds r0, 0x1
+	strh r0, [r5, 0x2E]
+	movs r2, 0x22
+	ldrsh r0, [r5, r2]
+	movs r2, 0x26
+	ldrsh r1, [r5, r2]
+	adds r0, r1
+	cmp r0, 0x78
+	ble _080CB608
+	ldrh r0, [r5, 0x22]
+	adds r1, r0, 0
+	subs r1, 0x78
+	ldrh r2, [r5, 0x26]
+	adds r0, r2
+	adds r1, r0
+	strh r1, [r5, 0x22]
+_080CB608:
+	ldr r0, _080CB61C @ =sub_80CB710
+	str r0, [r5, 0x1C]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB614: .4byte gBattleAnimPlayerMonIndex
+_080CB618: .4byte gBattleAnimArgs
+_080CB61C: .4byte sub_80CB710
+	thumb_func_end sub_80CB59C
+
+	thumb_func_start sub_80CB620
+sub_80CB620: @ 80CB620
+	push {r4-r6,lr}
+	mov r6, r10
+	mov r5, r9
+	mov r4, r8
+	push {r4-r6}
+	sub sp, 0x4
+	mov r9, r0
+	ldr r4, _080CB6FC @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	adds r5, r0, 0
+	lsls r5, 24
+	lsrs r5, 24
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	mov r8, r0
+	mov r0, r8
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	ldr r6, _080CB700 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r6]
+	movs r1, 0x2
+	bl sub_8077ABC
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	ldrb r0, [r6]
+	movs r1, 0x3
+	bl sub_8077ABC
+	adds r2, r0, 0
+	lsls r2, 24
+	subs r4, r5
+	lsls r4, 16
+	lsrs r2, 24
+	mov r1, r8
+	subs r2, r1
+	lsls r2, 16
+	lsrs r2, 16
+	lsrs r3, r4, 16
+	mov r10, r3
+	asrs r4, 16
+	ldr r6, _080CB704 @ =gBattleAnimArgs
+	movs r1, 0
+	ldrsh r0, [r6, r1]
+	muls r0, r4
+	movs r1, 0x64
+	str r2, [sp]
+	bl __divsi3
+	adds r5, r0
+	mov r3, r9
+	strh r5, [r3, 0x20]
+	ldr r2, [sp]
+	lsls r0, r2, 16
+	asrs r0, 16
+	movs r3, 0
+	ldrsh r1, [r6, r3]
+	muls r0, r1
+	movs r1, 0x64
+	bl __divsi3
+	add r8, r0
+	mov r1, r8
+	mov r0, r9
+	strh r1, [r0, 0x22]
+	ldrh r0, [r6, 0x2]
+	mov r3, r9
+	strh r0, [r3, 0x24]
+	ldrh r0, [r6, 0x4]
+	strh r0, [r3, 0x26]
+	ldrb r0, [r6, 0x6]
+	adds r0, 0x1E
+	mov r1, r9
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrb r1, [r6, 0x8]
+	mov r0, r9
+	bl StartSpriteAnim
+	ldrh r0, [r6, 0xA]
+	mov r1, r9
+	strh r0, [r1, 0x32]
+	ldr r0, _080CB708 @ =sub_80CB710
+	str r0, [r1, 0x1C]
+	ldr r1, _080CB70C @ =gUnknown_03000728
+	mov r3, r9
+	ldrh r0, [r3, 0x20]
+	strh r0, [r1]
+	ldrh r0, [r3, 0x22]
+	strh r0, [r1, 0x2]
+	mov r0, r10
+	strh r0, [r1, 0x4]
+	ldr r2, [sp]
+	strh r2, [r1, 0x6]
+	add sp, 0x4
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB6FC: .4byte gBattleAnimPlayerMonIndex
+_080CB700: .4byte gBattleAnimEnemyMonIndex
+_080CB704: .4byte gBattleAnimArgs
+_080CB708: .4byte sub_80CB710
+_080CB70C: .4byte gUnknown_03000728
+	thumb_func_end sub_80CB620
+
+	thumb_func_start sub_80CB710
+sub_80CB710: @ 80CB710
+	push {lr}
+	adds r3, r0, 0
+	ldrh r1, [r3, 0x2E]
+	adds r1, 0x1
+	strh r1, [r3, 0x2E]
+	lsls r1, 16
+	asrs r1, 16
+	movs r2, 0x32
+	ldrsh r0, [r3, r2]
+	subs r0, 0xA
+	cmp r1, r0
+	ble _080CB750
+	movs r0, 0x2E
+	ldrsh r1, [r3, r0]
+	lsrs r0, r1, 31
+	adds r0, r1, r0
+	asrs r0, 1
+	lsls r0, 1
+	subs r1, r0
+	movs r2, 0x3E
+	adds r2, r3
+	mov r12, r2
+	movs r0, 0x1
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	mov r1, r12
+	strb r0, [r1]
+_080CB750:
+	movs r2, 0x2E
+	ldrsh r1, [r3, r2]
+	movs r2, 0x32
+	ldrsh r0, [r3, r2]
+	cmp r1, r0
+	ble _080CB762
+	adds r0, r3, 0
+	bl move_anim_8072740
+_080CB762:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB710
+
+	thumb_func_start sub_80CB768
+sub_80CB768: @ 80CB768
+	push {r4-r6,lr}
+	adds r6, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r6, r1]
+	cmp r0, 0
+	bne _080CB7A8
+	ldr r5, _080CB7E4 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r5]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	ldr r4, _080CB7E8 @ =gBattleAnimArgs
+	lsrs r0, 24
+	ldrh r2, [r4]
+	adds r0, r2
+	strh r0, [r6, 0x20]
+	ldrb r0, [r5]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x2]
+	adds r0, r1
+	strh r0, [r6, 0x22]
+	ldrh r0, [r4, 0x4]
+	strh r0, [r6, 0x30]
+	ldrh r0, [r4, 0x6]
+	strh r0, [r6, 0x32]
+	ldrh r0, [r4, 0x8]
+	strh r0, [r6, 0x34]
+_080CB7A8:
+	ldrh r0, [r6, 0x2E]
+	adds r0, 0x1
+	strh r0, [r6, 0x2E]
+	ldrh r1, [r6, 0x30]
+	muls r0, r1
+	strh r0, [r6, 0x24]
+	movs r2, 0x2E
+	ldrsh r1, [r6, r2]
+	lsls r0, r1, 2
+	adds r0, r1
+	lsls r0, 2
+	movs r1, 0xFF
+	ands r0, r1
+	movs r2, 0x32
+	ldrsh r1, [r6, r2]
+	bl Sin
+	strh r0, [r6, 0x26]
+	movs r0, 0x2E
+	ldrsh r1, [r6, r0]
+	movs r2, 0x34
+	ldrsh r0, [r6, r2]
+	cmp r1, r0
+	ble _080CB7DE
+	adds r0, r6, 0
+	bl move_anim_8072740
+_080CB7DE:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB7E4: .4byte gBattleAnimPlayerMonIndex
+_080CB7E8: .4byte gBattleAnimArgs
+	thumb_func_end sub_80CB768
+
+	thumb_func_start sub_80CB7EC
+sub_80CB7EC: @ 80CB7EC
+	push {r4,r5,lr}
+	movs r2, 0x20
+	ldrsh r4, [r0, r2]
+	lsls r4, 8
+	movs r3, 0x22
+	ldrsh r2, [r0, r3]
+	orrs r4, r2
+	movs r5, 0x3A
+	ldrsh r2, [r0, r5]
+	lsls r2, 8
+	movs r5, 0x3C
+	ldrsh r3, [r0, r5]
+	orrs r2, r3
+	lsls r1, 8
+	strh r4, [r0, 0x38]
+	strh r2, [r0, 0x3A]
+	strh r1, [r0, 0x3C]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB7EC
+
+	thumb_func_start sub_80CB814
+sub_80CB814: @ 80CB814
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	mov r8, r0
+	ldrh r0, [r0, 0x38]
+	lsrs r1, r0, 8
+	mov r10, r1
+	lsls r0, 24
+	lsrs r0, 24
+	mov r9, r0
+	mov r1, r8
+	ldrh r0, [r1, 0x3A]
+	lsrs r2, r0, 8
+	lsls r0, 24
+	lsrs r4, r0, 24
+	ldrh r1, [r1, 0x3C]
+	lsls r0, r1, 16
+	asrs r0, 24
+	lsls r0, 16
+	lsrs r6, r0, 16
+	movs r3, 0xFF
+	ands r3, r1
+	cmp r2, 0
+	bne _080CB84E
+	movs r2, 0x20
+	negs r2, r2
+	b _080CB856
+_080CB84E:
+	cmp r2, 0xFF
+	bne _080CB856
+	movs r2, 0x88
+	lsls r2, 1
+_080CB856:
+	mov r0, r9
+	subs r4, r0
+	lsls r4, 16
+	lsrs r4, 16
+	mov r1, r10
+	subs r0, r2, r1
+	lsls r5, r3, 16
+	asrs r5, 16
+	muls r0, r5
+	lsls r1, r6, 16
+	asrs r7, r1, 16
+	adds r1, r7, 0
+	bl __divsi3
+	adds r6, r0, 0
+	lsls r4, 16
+	asrs r4, 16
+	adds r0, r4, 0
+	muls r0, r5
+	adds r1, r7, 0
+	bl __divsi3
+	add r6, r10
+	mov r1, r8
+	strh r6, [r1, 0x20]
+	add r0, r9
+	strh r0, [r1, 0x22]
+	adds r5, 0x1
+	lsls r5, 16
+	lsrs r3, r5, 16
+	asrs r5, 16
+	cmp r5, r7
+	beq _080CB8A8
+	lsls r1, r7, 8
+	lsls r0, r3, 16
+	asrs r0, 16
+	orrs r0, r1
+	mov r1, r8
+	strh r0, [r1, 0x3C]
+	movs r0, 0
+	b _080CB8AA
+_080CB8A8:
+	movs r0, 0x1
+_080CB8AA:
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	thumb_func_end sub_80CB814
+
+	thumb_func_start sub_80CB8B8
+sub_80CB8B8: @ 80CB8B8
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0xA
+	bne _080CB8CC
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl StartSpriteAffineAnim
+_080CB8CC:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x32
+	ble _080CB8E0
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CB8E0:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB8B8
+
+	thumb_func_start sub_80CB8E8
+sub_80CB8E8: @ 80CB8E8
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x34
+	ldrsh r0, [r4, r1]
+	lsls r0, 7
+	movs r2, 0x36
+	ldrsh r1, [r4, r2]
+	bl __divsi3
+	ldrh r1, [r4, 0x2E]
+	adds r1, r0
+	movs r5, 0
+	strh r1, [r4, 0x2E]
+	lsls r1, 16
+	asrs r1, 16
+	cmp r1, 0x7F
+	ble _080CB912
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	strh r5, [r4, 0x2E]
+_080CB912:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x80
+	lsls r0, 16
+	asrs r0, 16
+	movs r1, 0x30
+	ldrsh r2, [r4, r1]
+	lsls r2, 3
+	movs r1, 0x1E
+	subs r1, r2
+	lsls r1, 16
+	asrs r1, 16
+	bl Sin
+	strh r0, [r4, 0x26]
+	adds r0, r4, 0
+	bl sub_80CB814
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CB942
+	strh r5, [r4, 0x26]
+	strh r5, [r4, 0x2E]
+	ldr r0, _080CB948 @ =sub_80CB8B8
+	str r0, [r4, 0x1C]
+_080CB942:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB948: .4byte sub_80CB8B8
+	thumb_func_end sub_80CB8E8
+
+	thumb_func_start sub_80CB94C
+sub_80CB94C: @ 80CB94C
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	movs r1, 0
+	bl sub_80787B0
+	ldr r4, _080CB994 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r6, r0, 24
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r2, r0, 24
+	ldr r0, _080CB998 @ =gBattleAnimPlayerMonIndex
+	ldrb r1, [r0]
+	movs r0, 0x2
+	eors r0, r1
+	ldrb r4, [r4]
+	cmp r0, r4
+	bne _080CB99C
+	strh r6, [r5, 0x3A]
+	adds r0, r2, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	adds r0, r5, 0
+	movs r1, 0x3C
+	bl sub_80CB7EC
+	movs r0, 0x1
+	b _080CB9AE
+	.align 2, 0
+_080CB994: .4byte gBattleAnimEnemyMonIndex
+_080CB998: .4byte gBattleAnimPlayerMonIndex
+_080CB99C:
+	strh r6, [r5, 0x3A]
+	adds r0, r2, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	adds r0, r5, 0
+	movs r1, 0x3C
+	bl sub_80CB7EC
+	movs r0, 0x3
+_080CB9AE:
+	strh r0, [r5, 0x34]
+	movs r0, 0x3C
+	strh r0, [r5, 0x36]
+	ldr r0, _080CB9C0 @ =sub_80CB8E8
+	str r0, [r5, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CB9C0: .4byte sub_80CB8E8
+	thumb_func_end sub_80CB94C
+
+	thumb_func_start sub_80CB9C4
+sub_80CB9C4: @ 80CB9C4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x34
+	ldrsh r0, [r4, r1]
+	lsls r0, 7
+	movs r2, 0x36
+	ldrsh r1, [r4, r2]
+	bl __divsi3
+	ldrh r1, [r4, 0x2E]
+	adds r1, r0
+	movs r5, 0
+	strh r1, [r4, 0x2E]
+	lsls r1, 16
+	asrs r1, 16
+	cmp r1, 0x7F
+	ble _080CB9EE
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	strh r5, [r4, 0x2E]
+_080CB9EE:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x80
+	lsls r0, 16
+	asrs r0, 16
+	movs r1, 0x30
+	ldrsh r2, [r4, r1]
+	lsls r2, 3
+	movs r1, 0x1E
+	subs r1, r2
+	lsls r1, 16
+	asrs r1, 16
+	bl Sin
+	strh r0, [r4, 0x26]
+	adds r0, r4, 0
+	bl sub_80CB814
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CBA20
+	strh r5, [r4, 0x26]
+	strh r5, [r4, 0x2E]
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CBA20:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CB9C4
+
+	thumb_func_start sub_80CBA28
+sub_80CBA28: @ 80CBA28
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	ldr r4, _080CBA64 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r6, r0, 24
+	ldrb r0, [r4]
+	bl GetBankSide
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080CBA6C
+	strh r0, [r5, 0x3A]
+	adds r0, r6, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	adds r0, r5, 0
+	movs r1, 0x28
+	bl sub_80CB7EC
+	movs r0, 0x3
+	strh r0, [r5, 0x34]
+	movs r0, 0x3C
+	strh r0, [r5, 0x36]
+	ldr r0, _080CBA68 @ =sub_80CB8E8
+	b _080CBA96
+	.align 2, 0
+_080CBA64: .4byte gBattleAnimEnemyMonIndex
+_080CBA68: .4byte sub_80CB8E8
+_080CBA6C:
+	movs r0, 0xFF
+	strh r0, [r5, 0x3A]
+	adds r0, r6, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CBA84
+	movs r0, 0
+	strh r0, [r5, 0x3A]
+_080CBA84:
+	adds r0, r5, 0
+	movs r1, 0x28
+	bl sub_80CB7EC
+	movs r0, 0x3
+	strh r0, [r5, 0x34]
+	movs r0, 0x3C
+	strh r0, [r5, 0x36]
+	ldr r0, _080CBAA0 @ =sub_80CB9C4
+_080CBA96:
+	str r0, [r5, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBAA0: .4byte sub_80CB9C4
+	thumb_func_end sub_80CBA28
+
+	thumb_func_start sub_80CBAA4
+sub_80CBAA4: @ 80CBAA4
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080CBABE
+	adds r0, r4, 0
+	movs r1, 0
+	bl sub_8078764
+	ldr r0, _080CBAE4 @ =gBattleAnimArgs
+	ldrh r0, [r0, 0x4]
+	strh r0, [r4, 0x30]
+_080CBABE:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	ldrh r1, [r4, 0x30]
+	muls r0, r1
+	strh r0, [r4, 0x26]
+	adds r0, r4, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x10
+	ands r0, r1
+	cmp r0, 0
+	beq _080CBADE
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CBADE:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBAE4: .4byte gBattleAnimArgs
+	thumb_func_end sub_80CBAA4
+
+	thumb_func_start sub_80CBAE8
+sub_80CBAE8: @ 80CBAE8
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	movs r1, 0
+	bl sub_8078764
+	ldr r4, _080CBB30 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r4]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r6, r0, 24
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r2, r0, 24
+	ldr r0, _080CBB34 @ =gBattleAnimEnemyMonIndex
+	ldrb r1, [r0]
+	movs r0, 0x2
+	eors r0, r1
+	ldrb r4, [r4]
+	cmp r0, r4
+	bne _080CBB38
+	strh r6, [r5, 0x3A]
+	adds r0, r2, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	adds r0, r5, 0
+	movs r1, 0x3C
+	bl sub_80CB7EC
+	movs r0, 0x1
+	b _080CBB4A
+	.align 2, 0
+_080CBB30: .4byte gBattleAnimPlayerMonIndex
+_080CBB34: .4byte gBattleAnimEnemyMonIndex
+_080CBB38:
+	strh r6, [r5, 0x3A]
+	adds r0, r2, 0
+	adds r0, 0xA
+	strh r0, [r5, 0x3C]
+	adds r0, r5, 0
+	movs r1, 0x3C
+	bl sub_80CB7EC
+	movs r0, 0x3
+_080CBB4A:
+	strh r0, [r5, 0x34]
+	movs r0, 0x3C
+	strh r0, [r5, 0x36]
+	ldr r0, _080CBB5C @ =sub_80CBB60
+	str r0, [r5, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBB5C: .4byte sub_80CBB60
+	thumb_func_end sub_80CBAE8
+
+	thumb_func_start sub_80CBB60
+sub_80CBB60: @ 80CBB60
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x34
+	ldrsh r0, [r4, r1]
+	lsls r0, 7
+	movs r2, 0x36
+	ldrsh r1, [r4, r2]
+	bl __divsi3
+	ldrh r1, [r4, 0x2E]
+	adds r1, r0
+	movs r5, 0
+	strh r1, [r4, 0x2E]
+	lsls r1, 16
+	asrs r1, 16
+	cmp r1, 0x7F
+	ble _080CBB8A
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	strh r5, [r4, 0x2E]
+_080CBB8A:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x80
+	lsls r0, 16
+	asrs r0, 16
+	movs r1, 0x30
+	ldrsh r2, [r4, r1]
+	lsls r2, 3
+	movs r1, 0x1E
+	subs r1, r2
+	lsls r1, 16
+	asrs r1, 16
+	bl Sin
+	strh r0, [r4, 0x26]
+	lsls r0, 16
+	cmp r0, 0
+	bne _080CBBBE
+	movs r0, 0x3F
+	bl sub_8076F98
+	adds r1, r0, 0
+	lsls r1, 24
+	asrs r1, 24
+	movs r0, 0x7D
+	bl PlaySE12WithPanning
+_080CBBBE:
+	adds r0, r4, 0
+	bl sub_80CB814
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CBBE6
+	strh r5, [r4, 0x26]
+	strh r5, [r4, 0x2E]
+	ldr r0, _080CBBEC @ =sub_80CB8B8
+	str r0, [r4, 0x1C]
+	movs r0, 0x40
+	negs r0, r0
+	bl sub_8076F98
+	adds r1, r0, 0
+	lsls r1, 24
+	asrs r1, 24
+	movs r0, 0x7D
+	bl PlaySE12WithPanning
+_080CBBE6:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBBEC: .4byte sub_80CB8B8
+	thumb_func_end sub_80CBB60
+
+	thumb_func_start sub_80CBBF0
+sub_80CBBF0: @ 80CBBF0
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080CBC84
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CBC18
+	ldr r0, _080CBC14 @ =gBattleAnimArgs
+	ldrh r1, [r0, 0x2]
+	strh r1, [r4, 0x30]
+	movs r1, 0x78
+	strh r1, [r4, 0x20]
+	adds r5, r0, 0
+	b _080CBC3A
+	.align 2, 0
+_080CBC14: .4byte gBattleAnimArgs
+_080CBC18:
+	ldr r0, _080CBC74 @ =gBattleAnimArgs
+	movs r1, 0x2
+	ldrsh r3, [r0, r1]
+	adds r1, r3, 0
+	subs r1, 0x20
+	adds r2, r1, 0
+	adds r5, r0, 0
+	cmp r1, 0
+	bge _080CBC2E
+	adds r2, r3, 0
+	adds r2, 0xDF
+_080CBC2E:
+	asrs r0, r2, 8
+	lsls r0, 8
+	subs r0, r1, r0
+	strh r0, [r4, 0x30]
+	movs r0, 0x46
+	strh r0, [r4, 0x20]
+_080CBC3A:
+	ldrh r0, [r5]
+	strh r0, [r4, 0x22]
+	strh r0, [r4, 0x32]
+	movs r0, 0x14
+	strh r0, [r4, 0x36]
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	movs r1, 0x3C
+	bl Cos
+	strh r0, [r4, 0x24]
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	movs r1, 0x14
+	bl Sin
+	strh r0, [r4, 0x26]
+	ldr r0, _080CBC78 @ =sub_80CBC8C
+	str r0, [r4, 0x1C]
+	ldrh r0, [r4, 0x30]
+	subs r0, 0x1
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0xBE
+	bhi _080CBC7C
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0x1F
+	b _080CBC82
+	.align 2, 0
+_080CBC74: .4byte gBattleAnimArgs
+_080CBC78: .4byte sub_80CBC8C
+_080CBC7C:
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0x1D
+_080CBC82:
+	strb r0, [r1]
+_080CBC84:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CBBF0
+
+	thumb_func_start sub_80CBC8C
+sub_80CBC8C: @ 80CBC8C
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x34
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	beq _080CBC9E
+	cmp r0, 0x1
+	beq _080CBCCE
+	b _080CBCEE
+_080CBC9E:
+	ldrh r5, [r4, 0x32]
+	movs r1, 0x32
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x4E
+	ble _080CBCB6
+	movs r0, 0x1
+	strh r0, [r4, 0x34]
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl StartSpriteAffineAnim
+	b _080CBCEE
+_080CBCB6:
+	movs r1, 0x36
+	ldrsh r0, [r4, r1]
+	movs r1, 0xA
+	bl __divsi3
+	adds r0, r5, r0
+	strh r0, [r4, 0x32]
+	ldrh r1, [r4, 0x36]
+	adds r1, 0x3
+	strh r1, [r4, 0x36]
+	strh r0, [r4, 0x22]
+	b _080CBCEE
+_080CBCCE:
+	movs r1, 0x34
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	beq _080CBCEE
+	adds r0, r4, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _080CBCEE
+	movs r0, 0
+	strh r0, [r4, 0x2E]
+	strh r0, [r4, 0x32]
+	ldr r0, _080CBCF4 @ =sub_80CBCF8
+	str r0, [r4, 0x1C]
+_080CBCEE:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBCF4: .4byte sub_80CBCF8
+	thumb_func_end sub_80CBC8C
+
+	thumb_func_start sub_80CBCF8
+sub_80CBCF8: @ 80CBCF8
+	push {r4-r6,lr}
+	adds r4, r0, 0
+	ldr r5, _080CBD3C @ =gUnknown_083D680C
+	movs r0, 0x2E
+	ldrsh r1, [r4, r0]
+	lsls r0, r1, 1
+	adds r3, r0, r1
+	adds r0, r5, 0x1
+	adds r0, r3, r0
+	ldrh r2, [r4, 0x32]
+	movs r6, 0x32
+	ldrsh r1, [r4, r6]
+	ldrb r0, [r0]
+	lsls r0, 24
+	asrs r0, 24
+	cmp r1, r0
+	bne _080CBD44
+	adds r0, r5, 0x2
+	adds r0, r3, r0
+	ldrb r0, [r0]
+	lsls r0, 24
+	asrs r0, 24
+	cmp r0, 0x7F
+	bne _080CBD30
+	movs r0, 0
+	strh r0, [r4, 0x2E]
+	ldr r0, _080CBD40 @ =sub_80CBDB0
+	str r0, [r4, 0x1C]
+_080CBD30:
+	movs r0, 0
+	strh r0, [r4, 0x32]
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	b _080CBDAA
+	.align 2, 0
+_080CBD3C: .4byte gUnknown_083D680C
+_080CBD40: .4byte sub_80CBDB0
+_080CBD44:
+	adds r0, r2, 0x1
+	strh r0, [r4, 0x32]
+	movs r0, 0x2E
+	ldrsh r1, [r4, r0]
+	lsls r0, r1, 1
+	adds r0, r1
+	adds r1, r0, r5
+	movs r2, 0
+	ldrsb r2, [r1, r2]
+	adds r1, r5, 0x2
+	adds r0, r1
+	ldrb r0, [r0]
+	lsls r0, 24
+	asrs r0, 24
+	muls r0, r2
+	ldrh r1, [r4, 0x30]
+	adds r0, r1
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x30]
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CBD92
+	ldrh r0, [r4, 0x30]
+	subs r0, 0x1
+	lsls r0, 16
+	lsrs r0, 16
+	cmp r0, 0xBE
+	bhi _080CBD8A
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0x1F
+	b _080CBD90
+_080CBD8A:
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0x1D
+_080CBD90:
+	strb r0, [r1]
+_080CBD92:
+	movs r6, 0x30
+	ldrsh r0, [r4, r6]
+	movs r1, 0x3C
+	bl Cos
+	strh r0, [r4, 0x24]
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	movs r1, 0x14
+	bl Sin
+	strh r0, [r4, 0x26]
+_080CBDAA:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CBCF8
+
+	thumb_func_start sub_80CBDB0
+sub_80CBDB0: @ 80CBDB0
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x14
+	ble _080CBDC2
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CBDC2:
+	movs r0, 0x2E
+	ldrsh r1, [r4, r0]
+	lsrs r0, r1, 31
+	adds r0, r1, r0
+	asrs r0, 1
+	lsls r0, 1
+	subs r1, r0
+	adds r3, r4, 0
+	adds r3, 0x3E
+	movs r0, 0x1
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r3]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CBDB0
+
+	thumb_func_start sub_80CBDF4
+sub_80CBDF4: @ 80CBDF4
+	push {r4-r6,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	adds r6, r0, 0
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	ldr r1, _080CBF48 @ =gTasks
+	adds r5, r0, r1
+	ldr r4, _080CBF4C @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	bl sub_8079E90
+	lsls r0, 24
+	lsrs r0, 24
+	subs r0, 0x1
+	strh r0, [r5, 0x10]
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x14]
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x16]
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_807A100
+	strh r0, [r5, 0x1C]
+	ldrb r0, [r4]
+	movs r1, 0
+	bl sub_807A100
+	strh r0, [r5, 0x1E]
+	ldrb r0, [r4]
+	bl GetBankSide
+	lsls r0, 24
+	lsrs r0, 24
+	movs r2, 0x1
+	negs r2, r2
+	adds r1, r2, 0
+	cmp r0, 0x1
+	bne _080CBE5C
+	movs r1, 0x1
+_080CBE5C:
+	strh r1, [r5, 0x12]
+	movs r3, 0x12
+	ldrsh r0, [r5, r3]
+	lsls r0, 6
+	movs r1, 0x38
+	subs r1, r0
+	strh r1, [r5, 0x1A]
+	ldrh r0, [r5, 0x16]
+	subs r0, r1
+	ldrh r1, [r5, 0x14]
+	adds r0, r1
+	strh r0, [r5, 0x18]
+	ldr r0, _080CBF50 @ =gSpriteTemplate_83D6884
+	movs r2, 0x18
+	ldrsh r1, [r5, r2]
+	movs r3, 0x1A
+	ldrsh r2, [r5, r3]
+	ldrb r3, [r5, 0x10]
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0xC]
+	cmp r0, 0x40
+	bne _080CBE94
+	adds r0, r6, 0
+	bl DestroyAnimVisualTask
+_080CBE94:
+	ldr r4, _080CBF54 @ =gSprites
+	movs r0, 0xC
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	movs r1, 0xA
+	strh r1, [r0, 0x2E]
+	movs r2, 0xC
+	ldrsh r1, [r5, r2]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	ldrh r1, [r5, 0x18]
+	strh r1, [r0, 0x30]
+	movs r3, 0xC
+	ldrsh r0, [r5, r3]
+	lsls r2, r0, 4
+	adds r2, r0
+	lsls r2, 2
+	adds r2, r4
+	movs r1, 0x1C
+	ldrsh r0, [r5, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r1, [r5, r3]
+	muls r1, r0
+	ldrh r0, [r5, 0x14]
+	subs r0, r1
+	strh r0, [r2, 0x32]
+	movs r0, 0xC
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	ldrh r1, [r5, 0x1A]
+	strh r1, [r0, 0x34]
+	movs r1, 0xC
+	ldrsh r0, [r5, r1]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r4
+	movs r2, 0x1E
+	ldrsh r0, [r5, r2]
+	lsrs r2, r0, 31
+	adds r0, r2
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r2, [r5, r3]
+	muls r0, r2
+	ldrh r2, [r5, 0x16]
+	adds r0, r2
+	strh r0, [r1, 0x36]
+	movs r3, 0xC
+	ldrsh r1, [r5, r3]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_80CC338
+	movs r1, 0xC
+	ldrsh r2, [r5, r1]
+	lsls r1, r2, 4
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r4
+	strh r0, [r1, 0x38]
+	movs r2, 0xC
+	ldrsh r1, [r5, r2]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_80786EC
+	ldr r0, _080CBF58 @ =sub_80CBF5C
+	str r0, [r5]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CBF48: .4byte gTasks
+_080CBF4C: .4byte gBattleAnimEnemyMonIndex
+_080CBF50: .4byte gSpriteTemplate_83D6884
+_080CBF54: .4byte gSprites
+_080CBF58: .4byte sub_80CBF5C
+	thumb_func_end sub_80CBDF4
+
+	thumb_func_start sub_80CBF5C
+sub_80CBF5C: @ 80CBF5C
+	push {r4-r6,lr}
+	lsls r0, 24
+	lsrs r2, r0, 24
+	lsls r0, r2, 2
+	adds r0, r2
+	lsls r0, 3
+	ldr r1, _080CBFA0 @ =gTasks
+	adds r6, r0, r1
+	movs r0, 0xC
+	ldrsh r1, [r6, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r1, _080CBFA4 @ =gSprites
+	adds r4, r0, r1
+	movs r1, 0x8
+	ldrsh r5, [r6, r1]
+	cmp r5, 0x7
+	bne _080CBF84
+	b _080CC1B4
+_080CBF84:
+	cmp r5, 0x7
+	bgt _080CBFD2
+	cmp r5, 0x3
+	bne _080CBF8E
+	b _080CC0A6
+_080CBF8E:
+	cmp r5, 0x3
+	bgt _080CBFA8
+	cmp r5, 0x1
+	beq _080CC038
+	cmp r5, 0x1
+	bgt _080CC088
+	cmp r5, 0
+	beq _080CC01A
+	b _080CC330
+	.align 2, 0
+_080CBFA0: .4byte gTasks
+_080CBFA4: .4byte gSprites
+_080CBFA8:
+	cmp r5, 0x5
+	bne _080CBFAE
+	b _080CC11C
+_080CBFAE:
+	cmp r5, 0x5
+	ble _080CBFB4
+	b _080CC196
+_080CBFB4:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CBFCA
+	b _080CC330
+_080CBFCA:
+	movs r0, 0x5
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CBFD2:
+	cmp r5, 0xB
+	bne _080CBFD8
+	b _080CC298
+_080CBFD8:
+	cmp r5, 0xB
+	bgt _080CC006
+	cmp r5, 0x9
+	bne _080CBFE2
+	b _080CC206
+_080CBFE2:
+	cmp r5, 0x9
+	ble _080CBFE8
+	b _080CC27C
+_080CBFE8:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CBFFE
+	b _080CC330
+_080CBFFE:
+	movs r0, 0x9
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CC006:
+	cmp r5, 0xD
+	bne _080CC00C
+	b _080CC30A
+_080CC00C:
+	cmp r5, 0xD
+	bge _080CC012
+	b _080CC2EA
+_080CC012:
+	cmp r5, 0xFF
+	bne _080CC018
+	b _080CC31A
+_080CC018:
+	b _080CC330
+_080CC01A:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CC030
+	b _080CC330
+_080CC030:
+	movs r0, 0x1
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CC038:
+	ldrh r2, [r4, 0x24]
+	ldrh r3, [r4, 0x20]
+	adds r2, r3
+	movs r0, 0
+	strh r2, [r4, 0x20]
+	ldrh r1, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r1, r3
+	strh r1, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r2, [r4, 0x30]
+	ldrh r0, [r6, 0x14]
+	strh r0, [r4, 0x32]
+	strh r1, [r4, 0x34]
+	ldrh r0, [r6, 0x16]
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	ldrh r0, [r6, 0x10]
+	adds r0, 0x2
+	strh r0, [r6, 0x10]
+	strh r5, [r6, 0xE]
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC088:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CC09E
+	b _080CC330
+_080CC09E:
+	movs r0, 0x3
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CC0A6:
+	ldrh r1, [r4, 0x24]
+	ldrh r0, [r4, 0x20]
+	adds r1, r0
+	movs r0, 0
+	strh r1, [r4, 0x20]
+	ldrh r2, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r2, r3
+	strh r2, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r1, [r4, 0x30]
+	movs r1, 0x1C
+	ldrsh r0, [r6, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r1, [r6, r3]
+	muls r1, r0
+	ldrh r0, [r6, 0x14]
+	subs r0, r1
+	strh r0, [r4, 0x32]
+	strh r2, [r4, 0x34]
+	movs r1, 0x1E
+	ldrsh r0, [r6, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r2, 0x12
+	ldrsh r1, [r6, r2]
+	muls r1, r0
+	ldrh r0, [r6, 0x16]
+	subs r0, r1
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	movs r0, 0x2
+	strh r0, [r6, 0xE]
+	ldrh r0, [r6, 0x10]
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC11C:
+	ldrh r1, [r4, 0x24]
+	ldrh r3, [r4, 0x20]
+	adds r1, r3
+	movs r0, 0
+	strh r1, [r4, 0x20]
+	ldrh r2, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r2, r3
+	strh r2, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r1, [r4, 0x30]
+	movs r1, 0x1C
+	ldrsh r0, [r6, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r1, [r6, r3]
+	muls r0, r1
+	ldrh r1, [r6, 0x14]
+	adds r0, r1
+	strh r0, [r4, 0x32]
+	strh r2, [r4, 0x34]
+	movs r2, 0x1E
+	ldrsh r0, [r6, r2]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r1, [r6, r3]
+	muls r0, r1
+	ldrh r1, [r6, 0x16]
+	adds r0, r1
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	ldrh r1, [r6, 0x10]
+	subs r1, 0x2
+	strh r1, [r6, 0x10]
+	movs r0, 0x3
+	strh r0, [r6, 0xE]
+	adds r0, r4, 0
+	adds r0, 0x43
+	strb r1, [r0]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC196:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CC1AC
+	b _080CC330
+_080CC1AC:
+	movs r0, 0x7
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CC1B4:
+	ldrh r2, [r4, 0x24]
+	ldrh r3, [r4, 0x20]
+	adds r2, r3
+	movs r0, 0
+	strh r2, [r4, 0x20]
+	ldrh r1, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r1, r3
+	strh r1, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r2, [r4, 0x30]
+	ldrh r0, [r6, 0x14]
+	strh r0, [r4, 0x32]
+	strh r1, [r4, 0x34]
+	ldrh r0, [r6, 0x16]
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	ldrh r1, [r6, 0x10]
+	adds r1, 0x2
+	strh r1, [r6, 0x10]
+	movs r0, 0x4
+	strh r0, [r6, 0xE]
+	adds r0, r4, 0
+	adds r0, 0x43
+	strb r1, [r0]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC206:
+	ldrh r1, [r4, 0x24]
+	ldrh r0, [r4, 0x20]
+	adds r1, r0
+	movs r0, 0
+	strh r1, [r4, 0x20]
+	ldrh r2, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r2, r3
+	strh r2, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r1, [r4, 0x30]
+	movs r1, 0x1C
+	ldrsh r0, [r6, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r3, 0x12
+	ldrsh r1, [r6, r3]
+	muls r1, r0
+	ldrh r0, [r6, 0x14]
+	subs r0, r1
+	strh r0, [r4, 0x32]
+	strh r2, [r4, 0x34]
+	movs r1, 0x1E
+	ldrsh r0, [r6, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	adds r0, 0xA
+	movs r2, 0x12
+	ldrsh r1, [r6, r2]
+	muls r0, r1
+	ldrh r3, [r6, 0x16]
+	adds r0, r3
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	movs r0, 0x5
+	strh r0, [r6, 0xE]
+	ldrh r0, [r6, 0x10]
+	adds r1, r4, 0
+	adds r1, 0x43
+	strb r0, [r1]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC27C:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CC330
+	movs r0, 0xB
+	strh r0, [r6, 0x26]
+	movs r0, 0xFF
+	b _080CC32E
+_080CC298:
+	ldrh r2, [r4, 0x24]
+	ldrh r0, [r4, 0x20]
+	adds r2, r0
+	movs r0, 0
+	strh r2, [r4, 0x20]
+	ldrh r1, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r1, r3
+	strh r1, [r4, 0x22]
+	strh r0, [r4, 0x24]
+	strh r0, [r4, 0x26]
+	movs r0, 0xA
+	strh r0, [r4, 0x2E]
+	strh r2, [r4, 0x30]
+	ldrh r0, [r6, 0x18]
+	strh r0, [r4, 0x32]
+	strh r1, [r4, 0x34]
+	ldrh r0, [r6, 0x1A]
+	strh r0, [r4, 0x36]
+	adds r0, r4, 0
+	bl sub_80CC338
+	strh r0, [r4, 0x38]
+	ldrh r1, [r6, 0x10]
+	subs r1, 0x2
+	strh r1, [r6, 0x10]
+	movs r0, 0x6
+	strh r0, [r6, 0xE]
+	adds r0, r4, 0
+	adds r0, 0x43
+	strb r1, [r0]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	adds r0, r4, 0
+	bl sub_80786EC
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC2EA:
+	adds r0, r6, 0
+	adds r1, r2, 0
+	bl sub_80CC358
+	adds r0, r4, 0
+	bl sub_8078718
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CC330
+	adds r0, r4, 0
+	bl DestroySprite
+	ldrh r0, [r6, 0x8]
+	adds r0, 0x1
+	b _080CC32E
+_080CC30A:
+	movs r1, 0x20
+	ldrsh r0, [r6, r1]
+	cmp r0, 0
+	bne _080CC330
+	adds r0, r2, 0
+	bl DestroyAnimVisualTask
+	b _080CC330
+_080CC31A:
+	ldrh r0, [r6, 0xA]
+	adds r0, 0x1
+	strh r0, [r6, 0xA]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x5
+	ble _080CC330
+	movs r0, 0
+	strh r0, [r6, 0xA]
+	ldrh r0, [r6, 0x26]
+_080CC32E:
+	strh r0, [r6, 0x8]
+_080CC330:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CBF5C
+
+	thumb_func_start sub_80CC338
+sub_80CC338: @ 80CC338
+	push {lr}
+	movs r2, 0x8
+	movs r3, 0x36
+	ldrsh r1, [r0, r3]
+	movs r3, 0x22
+	ldrsh r0, [r0, r3]
+	cmp r1, r0
+	bge _080CC34E
+	negs r0, r2
+	lsls r0, 16
+	lsrs r2, r0, 16
+_080CC34E:
+	lsls r0, r2, 16
+	asrs r0, 16
+	pop {r1}
+	bx r1
+	thumb_func_end sub_80CC338
+
+	thumb_func_start sub_80CC358
+sub_80CC358: @ 80CC358
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	adds r6, r0, 0
+	lsls r1, 24
+	lsrs r7, r1, 24
+	ldrh r0, [r6, 0x24]
+	adds r0, 0x1
+	strh r0, [r6, 0x24]
+	lsls r0, 16
+	cmp r0, 0
+	ble _080CC3EE
+	movs r0, 0
+	strh r0, [r6, 0x24]
+	ldr r0, _080CC3F8 @ =gSprites
+	mov r8, r0
+	movs r2, 0xC
+	ldrsh r1, [r6, r2]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	add r0, r8
+	ldrh r1, [r0, 0x24]
+	ldrh r2, [r0, 0x20]
+	adds r1, r2
+	ldrh r2, [r0, 0x26]
+	ldrh r0, [r0, 0x22]
+	adds r2, r0
+	ldr r0, _080CC3FC @ =gSpriteTemplate_83D6884
+	lsls r1, 16
+	asrs r1, 16
+	lsls r2, 16
+	asrs r2, 16
+	ldrb r3, [r6, 0x10]
+	bl CreateSprite
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x40
+	beq _080CC3EE
+	lsls r5, r0, 4
+	adds r5, r0
+	lsls r5, 2
+	mov r0, r8
+	adds r4, r5, r0
+	strh r7, [r4, 0x3A]
+	movs r0, 0xC
+	strh r0, [r4, 0x3C]
+	ldr r0, _080CC400 @ =gTasks
+	lsls r1, r7, 2
+	adds r1, r7
+	lsls r1, 3
+	adds r1, r0
+	ldrh r0, [r1, 0x20]
+	adds r0, 0x1
+	strh r0, [r1, 0x20]
+	ldrh r2, [r6, 0x22]
+	movs r0, 0x1
+	ands r0, r2
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r1, 0x22]
+	adds r0, 0x1
+	strh r0, [r1, 0x22]
+	ldrb r1, [r6, 0xE]
+	adds r0, r4, 0
+	bl StartSpriteAnim
+	ldrh r0, [r6, 0x10]
+	adds r4, 0x43
+	strb r0, [r4]
+	mov r0, r8
+	adds r0, 0x1C
+	adds r5, r0
+	ldr r0, _080CC404 @ =sub_80CC408
+	str r0, [r5]
+_080CC3EE:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC3F8: .4byte gSprites
+_080CC3FC: .4byte gSpriteTemplate_83D6884
+_080CC400: .4byte gTasks
+_080CC404: .4byte sub_80CC408
+	thumb_func_end sub_80CC358
+
+	thumb_func_start sub_80CC408
+sub_80CC408: @ 80CC408
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x1
+	ble _080CC46A
+	movs r0, 0
+	strh r0, [r4, 0x2E]
+	adds r3, r4, 0
+	adds r3, 0x3E
+	ldrb r2, [r3]
+	lsls r0, r2, 29
+	lsrs r0, 31
+	movs r1, 0x1
+	eors r1, r0
+	lsls r1, 2
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x8
+	ble _080CC46A
+	ldr r3, _080CC470 @ =gTasks
+	movs r0, 0x3C
+	ldrsh r1, [r4, r0]
+	lsls r1, 1
+	movs r0, 0x3A
+	ldrsh r2, [r4, r0]
+	lsls r0, r2, 2
+	adds r0, r2
+	lsls r0, 3
+	adds r1, r0
+	adds r3, 0x8
+	adds r1, r3
+	ldrh r0, [r1]
+	subs r0, 0x1
+	strh r0, [r1]
+	adds r0, r4, 0
+	bl DestroySprite
+_080CC46A:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC470: .4byte gTasks
+	thumb_func_end sub_80CC408
+
+	thumb_func_start sub_80CC474
+sub_80CC474: @ 80CC474
+	push {r4-r7,lr}
+	adds r4, r0, 0
+	ldr r0, _080CC488 @ =gBattleAnimArgs
+	movs r1, 0xC
+	ldrsh r0, [r0, r1]
+	cmp r0, 0
+	bne _080CC490
+	ldr r0, _080CC48C @ =gBattleAnimPlayerMonIndex
+	b _080CC492
+	.align 2, 0
+_080CC488: .4byte gBattleAnimArgs
+_080CC48C: .4byte gBattleAnimPlayerMonIndex
+_080CC490:
+	ldr r0, _080CC4B0 @ =gBattleAnimEnemyMonIndex
+_080CC492:
+	ldrb r6, [r0]
+	adds r0, r6, 0
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CC4BC
+	movs r0, 0
+	strh r0, [r4, 0x36]
+	ldr r1, _080CC4B4 @ =gBattleAnimArgs
+	ldrh r0, [r1, 0x6]
+	strh r0, [r4, 0x32]
+	ldr r0, _080CC4B8 @ =0x0000fff0
+	b _080CC4CC
+	.align 2, 0
+_080CC4B0: .4byte gBattleAnimEnemyMonIndex
+_080CC4B4: .4byte gBattleAnimArgs
+_080CC4B8: .4byte 0x0000fff0
+_080CC4BC:
+	movs r0, 0x1
+	strh r0, [r4, 0x36]
+	ldr r1, _080CC4F0 @ =gBattleAnimArgs
+	ldrh r0, [r1, 0x6]
+	negs r0, r0
+	strh r0, [r4, 0x32]
+	movs r0, 0x80
+	lsls r0, 1
+_080CC4CC:
+	strh r0, [r4, 0x20]
+	adds r7, r1, 0
+	adds r5, r7, 0
+	ldrh r0, [r5, 0x2]
+	strh r0, [r4, 0x30]
+	ldrh r0, [r5, 0x4]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r5, 0x8]
+	strh r0, [r4, 0x34]
+	movs r1, 0xA
+	ldrsh r0, [r5, r1]
+	cmp r0, 0x1
+	beq _080CC502
+	cmp r0, 0x1
+	bgt _080CC4F4
+	cmp r0, 0
+	beq _080CC4FE
+	b _080CC56C
+	.align 2, 0
+_080CC4F0: .4byte gBattleAnimArgs
+_080CC4F4:
+	cmp r0, 0x2
+	beq _080CC508
+	cmp r0, 0x3
+	beq _080CC534
+	b _080CC56C
+_080CC4FE:
+	ldrh r0, [r5]
+	b _080CC518
+_080CC502:
+	ldrh r0, [r5]
+	strh r0, [r4, 0x22]
+	b _080CC54E
+_080CC508:
+	adds r0, r6, 0
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r5, [r5]
+	adds r0, r5
+_080CC518:
+	strh r0, [r4, 0x22]
+	adds r0, r6, 0
+	bl sub_8079ED4
+	movs r1, 0x3
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r4, 0x5]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r4, 0x5]
+	b _080CC56C
+_080CC534:
+	ldr r0, _080CC578 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r7, [r7]
+	adds r0, r7
+	strh r0, [r4, 0x22]
+	movs r0, 0x1
+	bl obj_id_for_side_relative_to_move
+_080CC54E:
+	adds r0, r6, 0
+	bl sub_8079ED4
+	lsls r0, 24
+	lsrs r0, 24
+	adds r0, 0x1
+	movs r1, 0x3
+	ands r0, r1
+	lsls r0, 2
+	ldrb r2, [r4, 0x5]
+	movs r1, 0xD
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r4, 0x5]
+_080CC56C:
+	ldr r0, _080CC57C @ =sub_80CC580
+	str r0, [r4, 0x1C]
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC578: .4byte gBattleAnimEnemyMonIndex
+_080CC57C: .4byte sub_80CC580
+	thumb_func_end sub_80CC474
+
+	thumb_func_start sub_80CC580
+sub_80CC580: @ 80CC580
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r0, 0x3C
+	ldrsh r3, [r4, r0]
+	ldrh r0, [r4, 0x3C]
+	adds r0, 0x1
+	strh r0, [r4, 0x3C]
+	movs r1, 0x30
+	ldrsh r2, [r4, r1]
+	ldr r1, _080CC5D4 @ =gSineTable
+	movs r5, 0x2E
+	ldrsh r0, [r4, r5]
+	lsls r0, 1
+	adds r0, r1
+	movs r1, 0
+	ldrsh r0, [r0, r1]
+	muls r0, r2
+	asrs r0, 8
+	strh r0, [r4, 0x26]
+	movs r2, 0x32
+	ldrsh r0, [r4, r2]
+	muls r0, r3
+	strh r0, [r4, 0x24]
+	movs r5, 0x34
+	ldrsh r0, [r4, r5]
+	muls r0, r3
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x2E]
+	movs r1, 0x36
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080CC5D8
+	movs r2, 0x24
+	ldrsh r0, [r4, r2]
+	movs r5, 0x20
+	ldrsh r1, [r4, r5]
+	adds r0, r1
+	cmp r0, 0xF7
+	ble _080CC5F0
+	b _080CC5EA
+	.align 2, 0
+_080CC5D4: .4byte gSineTable
+_080CC5D8:
+	movs r1, 0x24
+	ldrsh r0, [r4, r1]
+	movs r2, 0x20
+	ldrsh r1, [r4, r2]
+	adds r0, r1
+	movs r1, 0x10
+	negs r1, r1
+	cmp r0, r1
+	bgt _080CC5F0
+_080CC5EA:
+	adds r0, r4, 0
+	bl move_anim_8074EE0
+_080CC5F0:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CC580
+
+	thumb_func_start sub_80CC5F8
+sub_80CC5F8: @ 80CC5F8
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r6, r0, 24
+	lsls r0, r6, 2
+	adds r0, r6
+	lsls r0, 3
+	ldr r1, _080CC618 @ =gTasks
+	adds r5, r0, r1
+	movs r1, 0x8
+	ldrsh r0, [r5, r1]
+	cmp r0, 0
+	beq _080CC61C
+	cmp r0, 0x1
+	beq _080CC650
+	b _080CC6AA
+	.align 2, 0
+_080CC618: .4byte gTasks
+_080CC61C:
+	ldr r0, _080CC648 @ =0x0000274f
+	bl IndexOfSpritePaletteTag
+	lsls r0, 24
+	lsrs r0, 20
+	movs r2, 0x80
+	lsls r2, 1
+	adds r4, r2, 0
+	adds r0, r4
+	strh r0, [r5, 0x18]
+	ldr r0, _080CC64C @ =0x000027b0
+	bl IndexOfSpritePaletteTag
+	lsls r0, 24
+	lsrs r0, 20
+	adds r0, r4
+	strh r0, [r5, 0x20]
+	ldrh r0, [r5, 0x8]
+	adds r0, 0x1
+	strh r0, [r5, 0x8]
+	b _080CC6AA
+	.align 2, 0
+_080CC648: .4byte 0x0000274f
+_080CC64C: .4byte 0x000027b0
+_080CC650:
+	ldrh r0, [r5, 0x1A]
+	adds r0, 0x1
+	movs r7, 0
+	strh r0, [r5, 0x1A]
+	lsls r0, 16
+	cmp r0, 0
+	blt _080CC6AA
+	strh r7, [r5, 0x1A]
+	ldrh r0, [r5, 0x18]
+	ldrb r2, [r5, 0x1C]
+	ldr r4, _080CC6C4 @ =gUnknown_083D6984
+	movs r3, 0x1E
+	ldrsh r1, [r5, r3]
+	lsls r1, 1
+	adds r1, r4
+	ldrh r3, [r1]
+	movs r1, 0x10
+	bl BlendPalette
+	ldrh r0, [r5, 0x20]
+	ldrb r2, [r5, 0x1C]
+	movs r3, 0x1E
+	ldrsh r1, [r5, r3]
+	lsls r1, 1
+	adds r1, r4
+	ldrh r3, [r1]
+	movs r1, 0x10
+	bl BlendPalette
+	ldrh r0, [r5, 0x1C]
+	adds r0, 0x1
+	strh r0, [r5, 0x1C]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x11
+	bne _080CC6AA
+	strh r7, [r5, 0x1C]
+	ldrh r0, [r5, 0x1E]
+	adds r0, 0x1
+	strh r0, [r5, 0x1E]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x7
+	bne _080CC6AA
+	strh r7, [r5, 0x1E]
+_080CC6AA:
+	ldr r0, _080CC6C8 @ =gBattleAnimArgs
+	movs r2, 0xE
+	ldrsh r1, [r0, r2]
+	movs r0, 0x1
+	negs r0, r0
+	cmp r1, r0
+	bne _080CC6BE
+	adds r0, r6, 0
+	bl DestroyAnimVisualTask
+_080CC6BE:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC6C4: .4byte gUnknown_083D6984
+_080CC6C8: .4byte gBattleAnimArgs
+	thumb_func_end sub_80CC5F8
+
+	thumb_func_start sub_80CC6CC
+sub_80CC6CC: @ 80CC6CC
+	push {r4-r7,lr}
+	sub sp, 0x4
+	adds r6, r0, 0
+	ldr r1, _080CC6E4 @ =gBattleAnimArgs
+	movs r2, 0x8
+	ldrsh r0, [r1, r2]
+	cmp r0, 0
+	bne _080CC6E8
+	adds r0, r6, 0
+	bl move_anim_8072740
+	b _080CC7C2
+	.align 2, 0
+_080CC6E4: .4byte gBattleAnimArgs
+_080CC6E8:
+	movs r3, 0
+	ldrsh r0, [r1, r3]
+	cmp r0, 0
+	bne _080CC6F8
+	ldr r4, _080CC6F4 @ =gBattleAnimPlayerMonIndex
+	b _080CC6FA
+	.align 2, 0
+_080CC6F4: .4byte gBattleAnimPlayerMonIndex
+_080CC6F8:
+	ldr r4, _080CC734 @ =gBattleAnimEnemyMonIndex
+_080CC6FA:
+	ldrb r0, [r4]
+	movs r1, 0x2
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r5, r0, 24
+	ldrb r0, [r4]
+	movs r1, 0x3
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r2, r0, 24
+	ldr r0, _080CC738 @ =gBattleAnimArgs
+	ldrh r1, [r0, 0x8]
+	strh r1, [r6, 0x2E]
+	movs r3, 0x2
+	ldrsh r1, [r0, r3]
+	adds r7, r0, 0
+	cmp r1, 0
+	bne _080CC73C
+	ldrh r0, [r7, 0x4]
+	adds r0, r5
+	strh r0, [r6, 0x20]
+	ldrh r0, [r7, 0x6]
+	adds r0, r2
+	strh r0, [r6, 0x22]
+	strh r5, [r6, 0x38]
+	strh r2, [r6, 0x3A]
+	b _080CC74C
+	.align 2, 0
+_080CC734: .4byte gBattleAnimEnemyMonIndex
+_080CC738: .4byte gBattleAnimArgs
+_080CC73C:
+	strh r5, [r6, 0x20]
+	strh r2, [r6, 0x22]
+	ldrh r0, [r7, 0x4]
+	adds r0, r5
+	strh r0, [r6, 0x38]
+	ldrh r0, [r7, 0x6]
+	adds r0, r2
+	strh r0, [r6, 0x3A]
+_080CC74C:
+	ldrh r4, [r6, 0x20]
+	lsls r0, r4, 4
+	strh r0, [r6, 0x30]
+	ldrh r5, [r6, 0x22]
+	lsls r0, r5, 4
+	strh r0, [r6, 0x32]
+	movs r1, 0x38
+	ldrsh r0, [r6, r1]
+	movs r2, 0x20
+	ldrsh r1, [r6, r2]
+	subs r0, r1
+	lsls r0, 4
+	movs r3, 0x8
+	ldrsh r1, [r7, r3]
+	bl __divsi3
+	strh r0, [r6, 0x34]
+	movs r1, 0x3A
+	ldrsh r0, [r6, r1]
+	movs r2, 0x22
+	ldrsh r1, [r6, r2]
+	subs r0, r1
+	lsls r0, 4
+	movs r3, 0x8
+	ldrsh r1, [r7, r3]
+	bl __divsi3
+	strh r0, [r6, 0x36]
+	ldrh r0, [r6, 0x38]
+	subs r0, r4
+	lsls r0, 16
+	asrs r0, 16
+	ldrh r1, [r6, 0x3A]
+	subs r1, r5
+	lsls r1, 16
+	asrs r1, 16
+	bl sub_80790F0
+	lsls r0, 16
+	lsrs r4, r0, 16
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CC7AE
+	ldr r1, _080CC7CC @ =0xffff8000
+	adds r0, r4, r1
+	lsls r0, 16
+	lsrs r4, r0, 16
+_080CC7AE:
+	movs r3, 0x80
+	lsls r3, 1
+	str r4, [sp]
+	adds r0, r6, 0
+	movs r1, 0
+	adds r2, r3, 0
+	bl sub_8078FDC
+	ldr r0, _080CC7D0 @ =sub_80CC7D4
+	str r0, [r6, 0x1C]
+_080CC7C2:
+	add sp, 0x4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC7CC: .4byte 0xffff8000
+_080CC7D0: .4byte sub_80CC7D4
+	thumb_func_end sub_80CC6CC
+
+	thumb_func_start sub_80CC7D4
+sub_80CC7D4: @ 80CC7D4
+	push {r4,lr}
+	adds r2, r0, 0
+	ldrh r3, [r2, 0x2E]
+	movs r1, 0x2E
+	ldrsh r0, [r2, r1]
+	cmp r0, 0
+	beq _080CC804
+	ldrh r0, [r2, 0x34]
+	ldrh r4, [r2, 0x30]
+	adds r0, r4
+	strh r0, [r2, 0x30]
+	ldrh r1, [r2, 0x36]
+	ldrh r4, [r2, 0x32]
+	adds r1, r4
+	strh r1, [r2, 0x32]
+	lsls r0, 16
+	asrs r0, 20
+	strh r0, [r2, 0x20]
+	lsls r1, 16
+	asrs r1, 20
+	strh r1, [r2, 0x22]
+	subs r0, r3, 0x1
+	strh r0, [r2, 0x2E]
+	b _080CC80A
+_080CC804:
+	adds r0, r2, 0
+	bl move_anim_8074EE0
+_080CC80A:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CC7D4
+
+	thumb_func_start sub_80CC810
+sub_80CC810: @ 80CC810
+	push {lr}
+	adds r2, r0, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x10
+	ands r0, r1
+	cmp r0, 0
+	beq _080CC826
+	adds r0, r2, 0
+	bl move_anim_8072740
+_080CC826:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CC810
+
+	thumb_func_start sub_80CC82C
+sub_80CC82C: @ 80CC82C
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r0, _080CC84C @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CC854
+	ldr r2, _080CC850 @ =gBattleAnimArgs
+	ldrh r0, [r4, 0x20]
+	ldrh r1, [r2]
+	subs r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r2, 0x2]
+	b _080CC860
+	.align 2, 0
+_080CC84C: .4byte gBattleAnimPlayerMonIndex
+_080CC850: .4byte gBattleAnimArgs
+_080CC854:
+	ldr r0, _080CC878 @ =gBattleAnimArgs
+	ldrh r1, [r0]
+	ldrh r2, [r4, 0x20]
+	adds r1, r2
+	strh r1, [r4, 0x20]
+	ldrh r0, [r0, 0x2]
+_080CC860:
+	ldrh r1, [r4, 0x22]
+	adds r0, r1
+	strh r0, [r4, 0x22]
+	ldr r0, _080CC87C @ =sub_8078600
+	str r0, [r4, 0x1C]
+	ldr r1, _080CC880 @ =move_anim_8072740
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC878: .4byte gBattleAnimArgs
+_080CC87C: .4byte sub_8078600
+_080CC880: .4byte move_anim_8072740
+	thumb_func_end sub_80CC82C
+
+	thumb_func_start sub_80CC884
+sub_80CC884: @ 80CC884
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	ldr r0, _080CC8BC @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CC89E
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl StartSpriteAnim
+_080CC89E:
+	ldr r0, _080CC8C0 @ =sub_80CC810
+	str r0, [r5, 0x1C]
+	ldr r4, _080CC8C4 @ =gBattleAnimArgs
+	movs r0, 0
+	ldrsh r1, [r4, r0]
+	adds r0, r5, 0
+	bl sub_807867C
+	ldrh r0, [r4, 0x2]
+	ldrh r1, [r5, 0x22]
+	adds r0, r1
+	strh r0, [r5, 0x22]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC8BC: .4byte gBattleAnimPlayerMonIndex
+_080CC8C0: .4byte sub_80CC810
+_080CC8C4: .4byte gBattleAnimArgs
+	thumb_func_end sub_80CC884
+
+	thumb_func_start sub_80CC8C8
+sub_80CC8C8: @ 80CC8C8
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r1, _080CC908 @ =gBattleAnimArgs
+	ldrh r0, [r1]
+	ldrh r2, [r4, 0x20]
+	adds r0, r2
+	strh r0, [r4, 0x20]
+	ldrh r0, [r1, 0x2]
+	ldrh r2, [r4, 0x22]
+	adds r0, r2
+	strh r0, [r4, 0x22]
+	ldrh r0, [r1, 0x4]
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r1, 0x6]
+	strh r0, [r4, 0x30]
+	ldrh r0, [r1, 0x8]
+	strh r0, [r4, 0x34]
+	ldrh r0, [r1, 0xA]
+	strh r0, [r4, 0x38]
+	ldrb r1, [r1, 0xC]
+	adds r0, r4, 0
+	bl StartSpriteAffineAnim
+	ldr r1, _080CC90C @ =move_anim_8074EE0
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	ldr r0, _080CC910 @ =sub_8078504
+	str r0, [r4, 0x1C]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC908: .4byte gBattleAnimArgs
+_080CC90C: .4byte move_anim_8074EE0
+_080CC910: .4byte sub_8078504
+	thumb_func_end sub_80CC8C8
+
+	thumb_func_start sub_80CC914
+sub_80CC914: @ 80CC914
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	ldr r4, _080CC964 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x20]
+	ldrb r0, [r4]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r5, 0x22]
+	ldrb r0, [r4]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CC948
+	ldrh r0, [r5, 0x22]
+	adds r0, 0x8
+	strh r0, [r5, 0x22]
+_080CC948:
+	ldr r0, _080CC968 @ =sub_80CCB00
+	str r0, [r5, 0x1C]
+	ldr r0, _080CC96C @ =gBattleAnimArgs
+	movs r2, 0x4
+	ldrsh r1, [r0, r2]
+	adds r3, r0, 0
+	cmp r1, 0
+	bne _080CC970
+	ldrh r0, [r3]
+	ldrh r1, [r5, 0x20]
+	adds r0, r1
+	strh r0, [r5, 0x20]
+	b _080CC984
+	.align 2, 0
+_080CC964: .4byte gBattleAnimEnemyMonIndex
+_080CC968: .4byte sub_80CCB00
+_080CC96C: .4byte gBattleAnimArgs
+_080CC970:
+	ldrh r0, [r5, 0x20]
+	ldrh r1, [r3]
+	subs r0, r1
+	strh r0, [r5, 0x20]
+	adds r2, r5, 0
+	adds r2, 0x3F
+	ldrb r0, [r2]
+	movs r1, 0x1
+	orrs r0, r1
+	strb r0, [r2]
+_080CC984:
+	ldrh r0, [r3, 0x2]
+	ldrh r2, [r5, 0x22]
+	adds r0, r2
+	strh r0, [r5, 0x22]
+	ldr r1, _080CC9B8 @ =0xfffffc00
+	adds r0, r1, 0
+	ldrh r2, [r5, 0x30]
+	adds r1, r0, r2
+	strh r1, [r5, 0x30]
+	movs r2, 0x80
+	lsls r2, 3
+	adds r0, r2, 0
+	ldrh r2, [r5, 0x32]
+	adds r0, r2
+	strh r0, [r5, 0x32]
+	ldrh r0, [r3, 0x4]
+	strh r0, [r5, 0x38]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x1
+	bne _080CC9B2
+	negs r0, r1
+	strh r0, [r5, 0x30]
+_080CC9B2:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CC9B8: .4byte 0xfffffc00
+	thumb_func_end sub_80CC914
+
+	thumb_func_start sub_80CC9BC
+sub_80CC9BC: @ 80CC9BC
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	adds r6, r0, 0
+	ldr r0, _080CC9D8 @ =gBattleAnimArgs
+	movs r1, 0x6
+	ldrsh r0, [r0, r1]
+	cmp r0, 0x1
+	beq _080CC9DC
+	cmp r0, 0x1
+	ble _080CCA58
+	cmp r0, 0x2
+	beq _080CC9FC
+	b _080CCA58
+	.align 2, 0
+_080CC9D8: .4byte gBattleAnimArgs
+_080CC9DC:
+	ldr r5, _080CC9F8 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r5]
+	movs r4, 0x2
+	eors r0, r4
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r7, r0, 24
+	ldrb r0, [r5]
+	eors r4, r0
+	adds r0, r4, 0
+	b _080CCA68
+	.align 2, 0
+_080CC9F8: .4byte gBattleAnimEnemyMonIndex
+_080CC9FC:
+	ldr r5, _080CCA54 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r5]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r7, r0, 24
+	ldrb r0, [r5]
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r4, r0, 24
+	ldrb r0, [r5]
+	movs r2, 0x2
+	mov r8, r2
+	mov r1, r8
+	eors r0, r1
+	bl b_side_obj__get_some_boolean
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CCA72
+	ldrb r0, [r5]
+	mov r2, r8
+	eors r0, r2
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	adds r0, r7
+	lsrs r7, r0, 1
+	ldrb r0, [r5]
+	mov r1, r8
+	eors r0, r1
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r0, 24
+	adds r0, r4
+	lsrs r4, r0, 1
+	b _080CCA72
+	.align 2, 0
+_080CCA54: .4byte gBattleAnimEnemyMonIndex
+_080CCA58:
+	ldr r4, _080CCAA4 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r4]
+	movs r1, 0
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r7, r0, 24
+	ldrb r0, [r4]
+_080CCA68:
+	movs r1, 0x1
+	bl sub_8077ABC
+	lsls r0, 24
+	lsrs r4, r0, 24
+_080CCA72:
+	strh r7, [r6, 0x20]
+	strh r4, [r6, 0x22]
+	ldr r0, _080CCAA4 @ =gBattleAnimEnemyMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	bne _080CCA8A
+	ldrh r0, [r6, 0x22]
+	adds r0, 0x8
+	strh r0, [r6, 0x22]
+_080CCA8A:
+	ldr r0, _080CCAA8 @ =sub_80CCB00
+	str r0, [r6, 0x1C]
+	ldr r0, _080CCAAC @ =gBattleAnimArgs
+	movs r2, 0x4
+	ldrsh r1, [r0, r2]
+	adds r3, r0, 0
+	cmp r1, 0
+	bne _080CCAB0
+	ldrh r0, [r3]
+	ldrh r1, [r6, 0x20]
+	adds r0, r1
+	strh r0, [r6, 0x20]
+	b _080CCAC4
+	.align 2, 0
+_080CCAA4: .4byte gBattleAnimEnemyMonIndex
+_080CCAA8: .4byte sub_80CCB00
+_080CCAAC: .4byte gBattleAnimArgs
+_080CCAB0:
+	ldrh r0, [r6, 0x20]
+	ldrh r1, [r3]
+	subs r0, r1
+	strh r0, [r6, 0x20]
+	adds r2, r6, 0
+	adds r2, 0x3F
+	ldrb r0, [r2]
+	movs r1, 0x1
+	orrs r0, r1
+	strb r0, [r2]
+_080CCAC4:
+	ldrh r0, [r3, 0x2]
+	ldrh r2, [r6, 0x22]
+	adds r0, r2
+	strh r0, [r6, 0x22]
+	ldr r1, _080CCAFC @ =0xfffffc00
+	adds r0, r1, 0
+	ldrh r2, [r6, 0x30]
+	adds r1, r0, r2
+	strh r1, [r6, 0x30]
+	movs r2, 0x80
+	lsls r2, 3
+	adds r0, r2, 0
+	ldrh r2, [r6, 0x32]
+	adds r0, r2
+	strh r0, [r6, 0x32]
+	ldrh r0, [r3, 0x4]
+	strh r0, [r6, 0x38]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x1
+	bne _080CCAF2
+	negs r0, r1
+	strh r0, [r6, 0x30]
+_080CCAF2:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CCAFC: .4byte 0xfffffc00
+	thumb_func_end sub_80CC9BC
+
+	thumb_func_start sub_80CCB00
+sub_80CCB00: @ 80CCB00
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r1, [r4, 0x30]
+	ldrh r2, [r4, 0x34]
+	adds r0, r1, r2
+	strh r0, [r4, 0x34]
+	ldrh r0, [r4, 0x32]
+	ldrh r2, [r4, 0x36]
+	adds r0, r2
+	strh r0, [r4, 0x36]
+	movs r2, 0x38
+	ldrsh r0, [r4, r2]
+	cmp r0, 0
+	bne _080CCB22
+	adds r0, r1, 0
+	adds r0, 0x18
+	b _080CCB26
+_080CCB22:
+	adds r0, r1, 0
+	subs r0, 0x18
+_080CCB26:
+	strh r0, [r4, 0x30]
+	ldrh r0, [r4, 0x32]
+	subs r0, 0x18
+	strh r0, [r4, 0x32]
+	ldrh r0, [r4, 0x34]
+	lsls r0, 16
+	asrs r0, 24
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x36]
+	lsls r0, 16
+	asrs r0, 24
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	lsls r0, 16
+	asrs r0, 16
+	cmp r0, 0x14
+	bne _080CCB5C
+	ldr r1, _080CCB64 @ =move_anim_8072740
+	adds r0, r4, 0
+	bl oamt_set_x3A_32
+	movs r0, 0x3
+	strh r0, [r4, 0x2E]
+	ldr r0, _080CCB68 @ =sub_80782D8
+	str r0, [r4, 0x1C]
+_080CCB5C:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CCB64: .4byte move_anim_8072740
+_080CCB68: .4byte sub_80782D8
+	thumb_func_end sub_80CCB00
+
+	thumb_func_start unref_sub_80CCB6C
+unref_sub_80CCB6C: @ 80CCB6C
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	ldrh r1, [r5, 0x32]
+	movs r2, 0x32
+	ldrsh r0, [r5, r2]
+	cmp r0, 0x1
+	ble _080CCC10
+	ldrh r1, [r5, 0x34]
+	movs r0, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _080CCBC8
+	adds r3, r5, 0
+	adds r3, 0x3E
+	ldrb r1, [r3]
+	movs r2, 0x5
+	negs r2, r2
+	adds r0, r2, 0
+	ands r0, r1
+	strb r0, [r3]
+	ldr r4, _080CCBC4 @ =gSprites
+	movs r0, 0x2E
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	adds r0, 0x3E
+	ldrb r3, [r0]
+	adds r1, r2, 0
+	ands r1, r3
+	strb r1, [r0]
+	movs r0, 0x30
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	ands r2, r1
+	strb r2, [r0]
+	b _080CCBFE
+	.align 2, 0
+_080CCBC4: .4byte gSprites
+_080CCBC8:
+	adds r1, r5, 0
+	adds r1, 0x3E
+	ldrb r0, [r1]
+	movs r2, 0x4
+	orrs r0, r2
+	strb r0, [r1]
+	ldr r3, _080CCC0C @ =gSprites
+	movs r0, 0x2E
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	orrs r1, r2
+	strb r1, [r0]
+	movs r0, 0x30
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	orrs r1, r2
+	strb r1, [r0]
+_080CCBFE:
+	movs r0, 0
+	strh r0, [r5, 0x32]
+	ldrh r0, [r5, 0x34]
+	adds r0, 0x1
+	strh r0, [r5, 0x34]
+	b _080CCC14
+	.align 2, 0
+_080CCC0C: .4byte gSprites
+_080CCC10:
+	adds r0, r1, 0x1
+	strh r0, [r5, 0x32]
+_080CCC14:
+	movs r1, 0x34
+	ldrsh r0, [r5, r1]
+	cmp r0, 0xA
+	bne _080CCC44
+	movs r2, 0x2E
+	ldrsh r1, [r5, r2]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r4, _080CCC4C @ =gSprites
+	adds r0, r4
+	bl DestroySprite
+	movs r0, 0x30
+	ldrsh r1, [r5, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl DestroySprite
+	adds r0, r5, 0
+	bl move_anim_8072740
+_080CCC44:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CCC4C: .4byte gSprites
+	thumb_func_end unref_sub_80CCB6C
+
+	thumb_func_start sub_80CCC50
+sub_80CCC50: @ 80CCC50
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	ldr r4, _080CCC70 @ =gBattleAnimArgs
+	ldrh r0, [r4, 0x4]
+	strh r0, [r5, 0x2E]
+	ldr r0, _080CCC74 @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r0]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CCC78
+	ldrh r0, [r5, 0x20]
+	ldrh r1, [r4]
+	subs r0, r1
+	b _080CCC7E
+	.align 2, 0
+_080CCC70: .4byte gBattleAnimArgs
+_080CCC74: .4byte gBattleAnimPlayerMonIndex
+_080CCC78:
+	ldrh r0, [r4]
+	ldrh r1, [r5, 0x20]
+	adds r0, r1
+_080CCC7E:
+	strh r0, [r5, 0x20]
+	ldr r4, _080CCCAC @ =gBattleAnimArgs
+	ldrb r1, [r4, 0xA]
+	adds r0, r5, 0
+	bl StartSpriteAnim
+	ldrh r0, [r4, 0x6]
+	negs r0, r0
+	strh r0, [r5, 0x30]
+	ldrh r0, [r4, 0x2]
+	ldrh r1, [r5, 0x22]
+	adds r0, r1
+	strh r0, [r5, 0x22]
+	ldrh r0, [r4, 0x8]
+	strh r0, [r5, 0x34]
+	ldr r1, _080CCCB0 @ =sub_80CCCB4
+	str r1, [r5, 0x1C]
+	adds r0, r5, 0
+	bl _call_via_r1
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CCCAC: .4byte gBattleAnimArgs
+_080CCCB0: .4byte sub_80CCCB4
+	thumb_func_end sub_80CCC50
+
+	thumb_func_start sub_80CCCB4
+sub_80CCCB4: @ 80CCCB4
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	movs r1, 0x64
+	bl Cos
+	strh r0, [r4, 0x24]
+	movs r2, 0x2E
+	ldrsh r0, [r4, r2]
+	movs r1, 0x14
+	bl Sin
+	strh r0, [r4, 0x26]
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x7F
+	bgt _080CCCE0
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0
+	b _080CCCE6
+_080CCCE0:
+	adds r1, r4, 0
+	adds r1, 0x43
+	movs r0, 0xE
+_080CCCE6:
+	strb r0, [r1]
+	ldrh r0, [r4, 0x30]
+	ldrh r2, [r4, 0x2E]
+	adds r0, r2
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x2E]
+	ldrh r0, [r4, 0x38]
+	adds r0, 0x82
+	strh r0, [r4, 0x38]
+	lsls r0, 16
+	asrs r0, 24
+	ldrh r1, [r4, 0x26]
+	adds r0, r1
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x32]
+	adds r0, 0x1
+	strh r0, [r4, 0x32]
+	lsls r0, 16
+	asrs r0, 16
+	movs r2, 0x34
+	ldrsh r1, [r4, r2]
+	cmp r0, r1
+	bne _080CCD1C
+	adds r0, r4, 0
+	bl move_anim_8072740
+_080CCD1C:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80CCCB4
+
+	thumb_func_start sub_80CCD24
+sub_80CCD24: @ 80CCD24
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CCD3A
+	ldr r1, _080CCD98 @ =gBattleAnimArgs
+	ldrh r0, [r1, 0x2]
+	adds r0, 0x8
+	strh r0, [r1, 0x2]
+_080CCD3A:
+	ldr r6, _080CCD9C @ =gBattleAnimPlayerMonIndex
+	ldrb r0, [r6]
+	movs r1, 0
+	bl sub_8077EE4
+	lsls r0, 24
+	ldr r4, _080CCD98 @ =gBattleAnimArgs
+	lsrs r0, 24
+	ldrh r1, [r4]
+	adds r0, r1
+	strh r0, [r5, 0x20]
+	ldrb r0, [r6]
+	movs r1, 0x1
+	bl sub_8077EE4
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r4, [r4, 0x2]
+	adds r0, r4
+	strh r0, [r5, 0x22]
+	ldrb r0, [r6]
+	bl GetBankSide
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CCD78
+	bl IsContest
+	lsls r0, 24
+	cmp r0, 0
+	beq _080CCDA0
+_080CCD78:
+	ldrb r0, [r6]
+	bl sub_8079ED4
+	lsls r0, 24
+	lsrs r0, 24
+	adds r0, 0x1
+	movs r1, 0x3
+	ands r0, r1
+	lsls r0, 2
+	ldrb r2, [r5, 0x5]
+	movs r1, 0xD
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r5, 0x5]
+	b _080CCDB8
+	.align 2, 0
+_080CCD98: .4byte gBattleAnimArgs
+_080CCD9C: .4byte gBattleAnimPlayerMonIndex
+_080CCDA0:
+	ldrb r0, [r6]
+	bl sub_8079ED4
+	movs r1, 0x3
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r5, 0x5]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r5, 0x5]
+_080CCDB8:
+	ldr r0, _080CCDF8 @ =gBattleAnimArgs
+	ldrh r0, [r0, 0x4]
+	strh r0, [r5, 0x2E]
+	ldr r0, _080CCDFC @ =0x00002828
+	bl IndexOfSpritePaletteTag
+	lsls r0, 24
+	lsrs r0, 20
+	movs r3, 0x80
+	lsls r3, 1
+	adds r0, r3
+	strh r0, [r5, 0x32]
+	movs r2, 0x10
+	movs r0, 0x10
+	strh r0, [r5, 0x3C]
+	ldr r1, _080CCE00 @ =REG_BLDCNT
+	movs r3, 0xFD
+	lsls r3, 6
+	adds r0, r3, 0
+	strh r0, [r1]
+	ldr r3, _080CCE04 @ =REG_BLDALPHA
+	ldrh r1, [r5, 0x3C]
+	lsls r0, r1, 8
+	subs r2, r1
+	orrs r0, r2
+	strh r0, [r3]
+	ldr r0, _080CCE08 @ =sub_80CCE0C
+	str r0, [r5, 0x1C]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080CCDF8: .4byte gBattleAnimArgs
+_080CCDFC: .4byte 0x00002828
+_080CCE00: .4byte REG_BLDCNT
+_080CCE04: .4byte REG_BLDALPHA
+_080CCE08: .4byte sub_80CCE0C
+	thumb_func_end sub_80CCD24
+
 	thumb_func_start sub_80CCE0C
 sub_80CCE0C: @ 80CCE0C
 	push {r4-r6,lr}
