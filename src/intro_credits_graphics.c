@@ -374,7 +374,8 @@ void sub_8149020(u8 mode)
         case 0:
         default:
             /* stuff */
-            if(gMain.vblankCounter1 & 3 || gPaletteFade.active) break;
+            if (gMain.vblankCounter1 & 3 || gPaletteFade.active) 
+                break;
             if(gMain.vblankCounter1 & 4)
             {
                 var1 = gPlttBufferUnfaded[9];
