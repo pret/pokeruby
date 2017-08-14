@@ -328,5 +328,5 @@ gUnknown_03005F94: @ 3005F94
 gUnknown_03005FA0: @ 3005FA0
 	.space 0x30
 
-	.include "engine/m4a_2.o"
-	.include "engine/agb_flash.o"
+	.include "libs/m4a_2.o"
+	.include "libs/agb_flash.o"

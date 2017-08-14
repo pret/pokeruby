@@ -40,7 +40,7 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/misc,/scene,/pokemon,/engine}}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/misc,/scene,/pokemon,/engine,/libs}}))
 
 C_SRCS := $(wildcard src/*/*.c) $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
@@ -90,17 +90,17 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/engine/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/engine/libc.o: CFLAGS := -O2
+%src/libs/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/libc.o: CFLAGS := -O2
 
-%src/engine/siirtc.o: CFLAGS := -mthumb-interwork
+%src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 
-%src/engine/agb_flash.o: CFLAGS := -O -mthumb-interwork
-%src/engine/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-%src/engine/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-%src/engine/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/engine/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
