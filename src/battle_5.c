@@ -9,6 +9,7 @@
 #include "rom3.h"
 #include "songs.h"
 #include "sound.h"
+#include "text.h"
 #include "util.h"
 
 extern u8 gActiveBank;
@@ -25,6 +26,11 @@ extern u8 gUnknown_03004344;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern const struct BattleMove gBattleMoves[];
+extern u16 gUnknown_030042A0;
+extern u16 gUnknown_030042A4;
+extern struct Window gUnknown_03004210;
+extern const u8 gUnknown_08400D89[];
+extern u8 gUnknown_03004348;
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
@@ -32,6 +38,11 @@ extern u8 GetBankByPlayerAI(u8);
 extern void dp11b_obj_free(u8, u8);
 extern void sub_8010520(struct Sprite *);
 extern void sub_8010574(struct Sprite *);
+extern void nullsub_7(u8);
+extern void sub_802E3B4();
+extern void sub_802E220();
+extern void sub_802E2D4();
+extern void sub_802E12C();
 
 void PlayerHandleGetAttributes(void);
 void sub_802ECF0(void);
@@ -154,9 +165,12 @@ void (*const gPlayerBufferCommands[])(void) =
     nullsub_43,
 };
 
+extern const u8 gUnknown_081FAE80[];
+
 void PlayerBufferRunCommand(void);
 void sub_802C2EC(void);
 void sub_802C68C(void);
+void sub_802CA60(void);
 
 void nullsub_91(void)
 {
@@ -429,5 +443,149 @@ void sub_802C2EC(void)
                 i = 0;
         } while (i == 0);
         gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
+    }
+}
+
+struct UnknownStruct1
+{
+    u16 unk0[4];
+    u8 unk8[4];
+    u8 fillerC[0x12-0xC];
+    u8 unk12;
+    u8 unk13;
+};
+
+void sub_802C68C(void)
+{
+    u32 r8 = 0;
+    struct UnknownStruct1 *r6 = (struct UnknownStruct1 *)(gBattleBufferA[gActiveBank] + 4);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        u32 r4;
+
+        PlaySE(SE_SELECT);
+
+        if (r6->unk0[gMoveSelectionCursor[gActiveBank]] == 0xAE)
+            r4 = (r6->unk12 != 7 && (r6->unk13 ^ 7)) ? 0x10 : 0;
+        else
+            r4 = gBattleMoves[r6->unk0[gMoveSelectionCursor[gActiveBank]]].target;
+
+        if (r4 & 0x10)
+            gUnknown_03004344 = gActiveBank;
+        else
+            gUnknown_03004344 = GetBankByPlayerAI((GetBankIdentity(gActiveBank) & 1) ^ 1);
+
+        if (gBattleBufferA[gActiveBank][1] == 0)
+        {
+            if ((r4 & 2) && gBattleBufferA[gActiveBank][2] == 0)
+                r8++;
+        }
+        else
+        {
+            if (!(r4 & 0x7D))
+                r8++;
+            if (r6->unk8[gMoveSelectionCursor[gActiveBank]] == 0)
+            {
+                r8 = 0;
+            }
+            else if (!(r4 & 0x12) && CountAliveMons(0) <= 1)
+            {
+                gUnknown_03004344 = sub_803C434(gActiveBank);
+                r8 = 0;
+            }
+        }
+        if (r8 == 0)
+        {
+            DestroyMenuCursor();
+            dp01_build_cmdbuf_x21_a_bb(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
+            PlayerBufferExecCompleted();
+        }
+        else
+        {
+            gBattleBankFunc[gActiveBank] = sub_802C2EC;
+            if (r4 & 0x12)
+                gUnknown_03004344 = gActiveBank;
+            else if (gAbsentBankFlags & gBitTable[GetBankByPlayerAI(1)])
+                gUnknown_03004344 = GetBankByPlayerAI(3);
+            else
+                gUnknown_03004344 = GetBankByPlayerAI(1);
+            gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        DestroyMenuCursor();
+        PlaySE(SE_SELECT);
+        gUnknown_030042A4 = 0;
+        gUnknown_030042A0 = 320;
+        dp01_build_cmdbuf_x21_a_bb(1, 10, 0xFFFF);
+        PlayerBufferExecCompleted();
+    }
+    else if (gMain.newKeys & DPAD_LEFT)
+    {
+        if (gMoveSelectionCursor[gActiveBank] & 1)
+        {
+            nullsub_7(gMoveSelectionCursor[gActiveBank]);
+            gMoveSelectionCursor[gActiveBank] ^= 1;
+            PlaySE(SE_SELECT);
+            sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+            sub_802E220();
+            sub_802E2D4();
+        }
+    }
+    else if (gMain.newKeys & DPAD_RIGHT)
+    {
+        if (!(gMoveSelectionCursor[gActiveBank] & 1)
+         && (gMoveSelectionCursor[gActiveBank] ^ 1) < gUnknown_03004348)
+        {
+            nullsub_7(gMoveSelectionCursor[gActiveBank]);
+            gMoveSelectionCursor[gActiveBank] ^= 1;
+            PlaySE(SE_SELECT);
+            sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+            sub_802E220();
+            sub_802E2D4();
+        }
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        if (gMoveSelectionCursor[gActiveBank] & 2)
+        {
+            nullsub_7(gMoveSelectionCursor[gActiveBank]);
+            gMoveSelectionCursor[gActiveBank] ^= 2;
+            PlaySE(SE_SELECT);
+            sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+            sub_802E220();
+            sub_802E2D4();
+        }
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        if (!(gMoveSelectionCursor[gActiveBank] & 2)
+         && (gMoveSelectionCursor[gActiveBank] ^ 2) < gUnknown_03004348)
+        {
+            nullsub_7(gMoveSelectionCursor[gActiveBank]);
+            gMoveSelectionCursor[gActiveBank] ^= 2;
+            PlaySE(SE_SELECT);
+            sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+            sub_802E220();
+            sub_802E2D4();
+        }
+    }
+    else if (gMain.newKeys & SELECT_BUTTON)
+    {
+        if (gUnknown_03004348 > 1 && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        {
+            sub_802E12C(gMoveSelectionCursor[gActiveBank], gUnknown_081FAE80);
+            if (gMoveSelectionCursor[gActiveBank] != 0)
+                gUnknown_03004344 = 0;
+            else
+                gUnknown_03004344 = gMoveSelectionCursor[gActiveBank] + 1;
+            sub_802E3B4(gUnknown_03004344, 27);
+            FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+            InitWindow(&gUnknown_03004210, gUnknown_08400D89, 0x290, 0x17, 0x37);
+            sub_8002F44(&gUnknown_03004210);
+            gBattleBankFunc[gActiveBank] = sub_802CA60;
+        }
     }
 }
