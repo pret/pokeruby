@@ -338,11 +338,11 @@ gSpriteAnimTable_8416D28:: @ 8416D28
 	.4byte gSpriteAnim_8416D14
 
 	.align 2
-gSpriteTemplate_8416D2C:: @ 8416D2C
+gSpriteTemplate_Brendan:: @ 8416D2C
 	spr_template 1001, 1002, gOamData_8416D0C, gSpriteAnimTable_8416D28, NULL, gDummySpriteAffineAnimTable, sub_81492A0
 
 	.align 2
-gSpriteTemplate_8416D44:: @ 8416D44
+gSpriteTemplate_May:: @ 8416D44
 	spr_template 1001, 1003, gOamData_8416D0C, gSpriteAnimTable_8416D28, NULL, gDummySpriteAffineAnimTable, sub_81492A0
 
 	.align 2
