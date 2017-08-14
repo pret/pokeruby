@@ -619,7 +619,7 @@ const u8 DecorDesc_REGISTEEL_DOLL[] = _(
     "Place it on a mat\n"
     "or a desk.");
 #elif GERMAN
-#include "data/decoration/descriptions_de.h"
+#include "../data/decoration/descriptions_de.h"
 #endif
 
 const u16 DecorGfx_SMALL_DESK[] = {
@@ -1389,7 +1389,7 @@ const struct Decoration gDecorations[] = {
     {DECOR_REGISTEEL_DOLL,  _("REGISTEEL DOLL"),   DECORPERM_SOLID_MAT,   DECORSHAPE_1x2, DECORCAT_DOLL,     10000, DecorDesc_REGISTEEL_DOLL, DecorGfx_REGISTEEL_DOLL}
 };
 #elif GERMAN
-#include "data/decoration/decorations.h"
+#include "../data/decoration/decorations.h"
 #endif
 
 const u8 *const gUnknown_083EC5E4[] = {
