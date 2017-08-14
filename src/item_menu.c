@@ -56,14 +56,6 @@ extern void sub_804E990(u8);
 extern void sub_802E424(u8);
 extern void sub_8064E2C(void);
 
-struct PocketScrollState
-{
-    u8 cursorPos;
-    u8 scrollTop;
-    u8 numSlots;
-    u8 cursorMax;
-};
-
 struct UnknownStruct2
 {
     u8 unk0;
