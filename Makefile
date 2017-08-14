@@ -126,9 +126,9 @@ $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
 build/$1/%.o : %.c $$$$(c_dep)
-	$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
-	$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
-	printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
+	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
+	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
+	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s
 	$$(AS) $$(ASFLAGS) -o $$@ build/$1/$$*.s
 
 $$($1_ASM_OBJS): VERSION := $2
