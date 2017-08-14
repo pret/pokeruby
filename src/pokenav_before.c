@@ -18,7 +18,7 @@ struct UnknownPokenav0 {
 	/* 0x0000 */ u8 fill0000[0x0300];
 	/* 0x0300 */ void (*var300)(void);
 	/* 0x0304 */ u16 var304;
-	/* 0x0306 */ u8 fill0306;
+	/* 0x0306 */ u16 var306;
 	/* 0x0308 */ u32 var308;
 	/* 0x030C */ u8 fill030C[0x6a9f];
 	/* 0x6dab */ u8 var6dab;
@@ -825,7 +825,7 @@ void sub_80ECA10() {
 		break;
 	case 0xD:
 		if (sub_80F1E50()) return;
-                sub_80EF428(1, ewram0.var6dad);
+		sub_80EF428(1, ewram0.var6dad);
 		sub_80EBDBC(&sub_80EC86C);
 	}
 }
@@ -877,5 +877,101 @@ void sub_80ECC08() {
 		if (sub_80F1E6C()) return;;
 		sub_80EBDBC(&sub_80EC9A8);
 		break;
+	}
+}
+
+void sub_80F3130();
+void sub_80F2D6C(u32);
+
+void sub_80ECD80() {
+	u16 var1;
+	switch (ewram0.var304) {
+	case 0:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gPaletteFade.active) return;
+		ewram0.var304++;
+		break;
+	case 2:
+		if (sub_80EEF78()) return;
+		SetVBlankCallback(&sub_80EBD80);
+		ewram0.var304++;
+		break;
+	case 3:
+		sub_80EED1C();
+		sub_80F3130();
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80F2D6C(0x1);
+		ewram0.var304++;
+		break;
+	case 5:
+		sub_80F2D6C(0x5);
+		ewram0.var304++;
+		break;
+	case 6:
+		ewram0.var6dad = ewram0.var6dfc;
+		ewram0.var6dae = 0x6;
+		sub_80EEE08();
+		ewram0.var304++;
+		break;
+	case 7:
+		sub_80EF248(0x2);
+		ewram0.var304++;
+	case 8:
+		if (sub_80EF284(0x2)) return;
+		ewram0.var304++;
+		break;
+	case 9:
+		sub_80F1B8C(0x2);
+		ewram0.var304++;
+	case 0xA:
+		if (sub_80F1BC8(0x2)) return;
+		ewram0.var304++;
+		break;
+	case 0xB:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 0xC:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 0xD:
+		sub_80EED2C(0);
+		ewram0.var304++;
+		break;
+	case 0xE:
+		sub_80F2598();
+		ewram0.var304++;
+		break;
+	case 0xF:
+		if (gPaletteFade.active) return;
+		ewram0.var304++;
+		break;
+	case 0x10:
+		sub_80F2C80(0x1);
+		ewram0.var304++;
+	case 0x11:
+		if ((var1 = sub_80F2CBC(0x1))) return;
+		ewram0.var306 = var1;
+		ewram0.var304++;
+		break;
+	case 0x12:
+		sub_80F2C80(0x5);
+		ewram0.var304++;
+	case 0x13:
+		if (sub_80F2CBC(0x5)) return;
+		sub_80F1DF0();
+		ewram0.var304++;
+		break;
+	case 0x14:
+		if (sub_80F1E50()) return;
+		sub_80EF428(2, ewram0.var6dad);
+		sub_80EBDBC(&sub_80ECC08);
 	}
 }
