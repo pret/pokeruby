@@ -265,7 +265,7 @@ SECTIONS {
         src/field/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/engine/clear_save_data_menu.o(.text);
-        asm/intro_credits_graphics.o(.text);
+        src/scene/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
         src/field/bard_music.o(.text);
         src/field/fldeff_teleport.o(.text);
