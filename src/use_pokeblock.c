@@ -105,8 +105,8 @@ asm(".text\n"
 static EWRAM_DATA struct UnkPokenavStruct_Sub1 *gUnknown_02039304 = NULL;
 static EWRAM_DATA MainCallback gUnknown_02039308 = NULL;
 static EWRAM_DATA struct Pokeblock *gUnknown_0203930C = NULL;
-EWRAM_DATA u8 gUnknown_02039310 = 0;
-EWRAM_DATA s16 gUnknown_02039312 = 0;
+EWRAM_DATA u8 gPokeblockMonID = 0;
+EWRAM_DATA s16 gPokeblockGain = 0;
 
 extern u16 gKeyRepeatStartDelay;
 extern u16 gScriptItemId; // FIXME: remove after merge of #349 Pokeblock
@@ -155,8 +155,8 @@ void sub_8136174(void)
 {
     gUnknown_02039304->pokeblock = gUnknown_0203930C;
     gUnknown_02039304->callback = gUnknown_02039308;
-    gUnknown_02039310 = sub_81370E4(gUnknown_02039310);
-    gUnknown_02039304->unk56 = gUnknown_02039310 < 4 ? 0 : 1;
+    gPokeblockMonID = sub_81370E4(gPokeblockMonID);
+    gUnknown_02039304->unk56 = gPokeblockMonID < 4 ? 0 : 1;
     gUnknown_083DFEC4->unkD162[0] = 2;
     launch_c3_walk_stairs_and_run_once(sub_8136294);
     SetMainCallback2(sub_81361E4);
@@ -469,7 +469,7 @@ void sub_8136808(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            gUnknown_02039310 = sub_81370A4(gUnknown_083DFEC4->unk87DC);
+            gPokeblockMonID = sub_81370A4(gUnknown_083DFEC4->unk87DC);
             gUnknown_02039308 = gUnknown_02039304->callback;
             gUnknown_0203930C = gUnknown_02039304->pokeblock;
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
@@ -490,7 +490,7 @@ void sub_81368A4(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            if (gUnknown_083DFEC4->unk87DC != gUnknown_02039310)
+            if (gUnknown_083DFEC4->unk87DC != gPokeblockMonID)
             {
                 sub_80F5060(gUnknown_02039304->unk56);
                 gUnknown_02039304->unk50++;
@@ -578,7 +578,7 @@ void sub_81369CC(void)
         case 5:
             if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8136D00())
             {
-                sub_810CA6C((u8)gScriptItemId);
+                PokeblockClearIfExists((u8)gScriptItemId);
                 launch_c3_walk_stairs_and_run_once(sub_8136B44);
             }
             break;
@@ -864,9 +864,9 @@ void sub_8136F74(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
     gUnknown_02039304->unk66[2] = pokeblock->bitter;
     gUnknown_02039304->unk66[3] = pokeblock->sweet;
     gUnknown_02039304->unk66[4] = pokeblock->dry;
-    if (gUnknown_02039312 > 0)
+    if (gPokeblockGain > 0)
         direction = 1;
-    else if (gUnknown_02039312 < 0)
+    else if (gPokeblockGain < 0)
         direction = -1;
     else
         return;

@@ -678,7 +678,7 @@ gUnknown_0203931C: @ 203931C
 @ pokeblock_feed
 
 	.align 2
-gUnknown_02039350: @ 2039350
+sPokeblockFeedSpritePal: @ 2039350
 	.space 0x8
 
 @ intro_credits_graphics

@@ -295,19 +295,19 @@ gUnknown_03005F14: @ 3005F14
 
 @ pokeblock_feed
 
-gUnknown_03005F20: @ 3005F20
+gPokeblockFeedPokeSprite: @ 3005F20
 	.space 0x4
 
-gUnknown_03005F24: @ 3005F24
+gPokeblockFeedMonSpecies: @ 3005F24
 	.space 0x4
 
-gUnknown_03005F28: @ 3005F28
+gPokeblockMonNotFlipped: @ 3005F28
 	.space 0x4
 
-gUnknown_03005F2C: @ 3005F2C
+gPokeblockFeedMonSpriteID: @ 3005F2C
 	.space 0x4
 
-gUnknown_03005F30: @ 3005F30
+gPokeblockFeedMonNature: @ 3005F30
 	.space 0x4
 
 gUnknown_03005F34: @ 3005F34
@@ -319,7 +319,7 @@ gUnknown_03005F3C: @ 3005F3C
 gUnknown_03005F40: @ 3005F40
 	.space 0x10
 
-gUnknown_03005F50: @ 3005F50
+gPokeblockFeedPokeSpriteCopy: @ 3005F50
 	.space 0x44
 
 gUnknown_03005F94: @ 3005F94
