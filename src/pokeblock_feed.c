@@ -39,10 +39,13 @@ extern const u8 gPokeblockGray_Pal[];
 extern const u8 gPokeblockBlack_Pal[];
 extern const u8 gPokeblockWhite_Pal[];
 extern const u8 gPokeblockGold_Pal[];
-
 extern const u8 gPokeblock_Gfx[];
+extern const u8 gBattleTerrainTiles_Building[];
+extern const u8 gUnknown_08E782FC[];
+extern const u8 gBattleTerrainPalette_BattleTower[];
+extern const struct CompressedSpriteSheet gUnknown_083F7F74;
+extern const struct CompressedSpritePalette gUnknown_083F7F7C;
 
-void sub_8147F4C(u8 taskID);
 bool8 sub_8040A3C(u16 species);
 
 // this file's functions
@@ -51,12 +54,13 @@ static void sub_81481DC(void);
 static void sub_814825C(void);
 static u8 sub_81480B4(void);
 static u8 sub_814817C(void);
-static u8 sub_8147F84(struct Pokemon* mon);
+static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon);
 static bool8 sub_8147B20(struct Pokemon* mon);
-static void sub_8147DDC(u8);
+static void LaunchPokeblockFeedTask(u8);
 static void sub_8148044(u8);
 static void sub_8148078(struct Sprite* sprite);
 static void Task_PrintAtePokeblockText(u8 taskID);
+static void Task_PaletteFadeToReturn(u8 taskID);
 static void SetPokeblockFeedSpritePal(u8);
 static void sub_8148108(u8, bool8);
 static bool8 sub_8148540(void);
@@ -222,13 +226,13 @@ static const s16 sMonPokeblockAnims[][10] =
 	{   0,  -4,  16,  12,  64,   0,   0,   0,   0,   1},
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411E90[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411E90[] =
 {
     AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411EA0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411EA0[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 12, 1),
     AFFINEANIMCMD_FRAME(0, 0, 0, 30),
@@ -236,7 +240,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411EA0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411EC0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411EC0[] =
 {
     AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 12, 1),
@@ -245,7 +249,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411EC0[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411EE8[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411EE8[] =
 {
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
@@ -253,7 +257,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411EE8[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411F08[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411F08[] =
 {
 	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
@@ -262,7 +266,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411F08[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411F30[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411F30[] =
 {
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
@@ -270,7 +274,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411F30[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411F50[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411F50[] =
 {
 	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
@@ -279,7 +283,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411F50[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411F78[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411F78[] =
 {
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
@@ -287,7 +291,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411F78[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411F98[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411F98[] =
 {
 	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
@@ -296,7 +300,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411F98[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411FC0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411FC0[] =
 {
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
@@ -304,7 +308,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411FC0[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8411FE0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8411FE0[] =
 {
 	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
@@ -313,7 +317,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8411FE0[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8412008[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8412008[] =
 {
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
@@ -321,7 +325,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8412008[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8412028[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8412028[] =
 {
 	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
@@ -330,29 +334,29 @@ static const union AffineAnimCmd gSpriteAffineAnim_8412028[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_8412050[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_8412050[] =
 {
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411EA0,
-	gSpriteAffineAnim_8411EE8,
-	gSpriteAffineAnim_8411F30,
-	gSpriteAffineAnim_8411F78,
-	gSpriteAffineAnim_8411FC0,
-	gSpriteAffineAnim_8412008,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411EC0,
-	gSpriteAffineAnim_8411F08,
-	gSpriteAffineAnim_8411F50,
-	gSpriteAffineAnim_8411F98,
-	gSpriteAffineAnim_8411FE0,
-	gSpriteAffineAnim_8412028,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
-	gSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411EA0,
+	sSpriteAffineAnim_8411EE8,
+	sSpriteAffineAnim_8411F30,
+	sSpriteAffineAnim_8411F78,
+	sSpriteAffineAnim_8411FC0,
+	sSpriteAffineAnim_8412008,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411EC0,
+	sSpriteAffineAnim_8411F08,
+	sSpriteAffineAnim_8411F50,
+	sSpriteAffineAnim_8411F98,
+	sSpriteAffineAnim_8411FE0,
+	sSpriteAffineAnim_8412028,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
+	sSpriteAffineAnim_8411E90,
 };
 
 static const u8* const sPokeblocksPals[] =
@@ -373,18 +377,18 @@ static const u8* const sPokeblocksPals[] =
 	gPokeblockGold_Pal
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_84120DC[] =
+static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
 {
     AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_84120EC[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_84120EC[] =
 {
-    gSpriteAffineAnim_84120DC
+    sSpriteAffineAnim_84120DC
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_84120F0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
 {
     AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
@@ -399,7 +403,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_84120F0[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8412148[] =
+static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
 {
     AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
@@ -414,22 +418,22 @@ static const union AffineAnimCmd gSpriteAffineAnim_8412148[] =
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_84121A0[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121A0[] =
 {
-    gSpriteAffineAnim_84120DC
+    sSpriteAffineAnim_84120DC
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_84121A4[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121A4[] =
 {
-    gSpriteAffineAnim_84120F0
+    sSpriteAffineAnim_84120F0
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_84121A8[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121A8[] =
 {
-    gSpriteAffineAnim_8412148
+    sSpriteAffineAnim_8412148
 };
 
-static const struct OamData gOamData_84121AC =
+static const struct OamData sOamData_84121AC =
 {
     .y = 0,
     .affineMode = 3,
@@ -446,54 +450,48 @@ static const struct OamData gOamData_84121AC =
     .affineParam = 0,
 };
 
-static const union AnimCmd gSpriteAnim_84121B4[] =
+static const union AnimCmd sSpriteAnim_84121B4[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_84121BC[] =
+static const union AnimCmd *const sSpriteAnimTable_84121BC[] =
 {
-    gSpriteAnim_84121B4,
+    sSpriteAnim_84121B4,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_84121C0[] =
+static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 1),
 	AFFINEANIMCMD_JUMP(1)
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_84121D8[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121D8[] =
 {
-    gSpriteAffineAnim_84121C0
+    sSpriteAffineAnim_84121C0
 };
 
-static const struct CompressedSpriteSheet gUnknown_084121DC =
+static const struct CompressedSpriteSheet sUnknown_084121DC =
 {
     gPokeblock_Gfx, 0x20, 14818
 };
 
-static const struct SpriteTemplate gSpriteTemplate_84121E4 =
+static const struct SpriteTemplate sSpriteTemplate_84121E4 =
 {
     .tileTag = 14818,
     .paletteTag = 14818,
-    .oam = &gOamData_84121AC,
-    .anims = gSpriteAnimTable_84121BC,
+    .oam = &sOamData_84121AC,
+    .anims = sSpriteAnimTable_84121BC,
     .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_84121D8,
+    .affineAnims = sSpriteAffineAnimTable_84121D8,
     .callback = sub_81481B0
 };
 
-extern const struct CompressedSpriteSheet gUnknown_083F7F74;
-extern const struct CompressedSpritePalette gUnknown_083F7F7C;
-extern const u8 gBattleTerrainTiles_Building[];
-extern const u8 gUnknown_08E782FC[];
-extern const u8 gBattleTerrainPalette_BattleTower[];
-
 // code
 
-static void sub_8147890(void)
+static void CB2_PokeblockFeed(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -501,14 +499,14 @@ static void sub_8147890(void)
     UpdatePaletteFade();
 }
 
-static void sub_81478A8(void)
+static void VBlankCB_PokeblockFeed(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static bool8 sub_81478BC(void)
+static bool8 TransitionToPokeblockFeedScene(void)
 {
     switch (gMain.state)
     {
@@ -557,7 +555,7 @@ static bool8 sub_81478BC(void)
         gMain.state++;
         break;
     case 9:
-        ewram[0x1FFFE] = sub_8147F84(&gPlayerParty[gPokeblockMonID]);
+        ewram[0x1FFFE] = PokeblockFeed_CreatePokeSprite(&gPlayerParty[gPokeblockMonID]);
         gMain.state++;
         break;
     case 10:
@@ -577,13 +575,13 @@ static bool8 sub_81478BC(void)
             REG_IE |= 1;
             REG_IME = savedIME;
             REG_DISPSTAT |= 8;
-            SetVBlankCallback(sub_81478A8);
+            SetVBlankCallback(VBlankCB_PokeblockFeed);
             gMain.state++;
         }
     case 13:
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
-        SetMainCallback2(sub_8147890);
+        SetMainCallback2(CB2_PokeblockFeed);
         return 1;
     }
     return 0;
@@ -593,9 +591,9 @@ void sub_8147ADC(void)
 {
     while (1)
     {
-        if (sub_81478BC() == 1)
+        if (TransitionToPokeblockFeedScene() == 1)
         {
-            sub_8147DDC(1);
+            LaunchPokeblockFeedTask(1);
             break;
         }
         if (sub_80F9344() == 1)
@@ -643,7 +641,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
         ewram[0x1FFFF]++;
         break;
     case 4:
-        LoadCompressedObjectPic(&gUnknown_084121DC);
+        LoadCompressedObjectPic(&sUnknown_084121DC);
         ewram[0x1FFFF]++;
         break;
     case 5:
@@ -708,17 +706,17 @@ static void sub_8147CC8(u8 taskID)
     }
 }
 
-static void sub_8147DDC(u8 a0)
+static void LaunchPokeblockFeedTask(u8 a0)
 {
     u8 taskID = CreateTask(sub_8147CC8, 0);
     gTasks[taskID].data[0] = 0;
     gTasks[taskID].data[1] = a0;
 }
 
-static void sub_8147E10(u8 taskID)
+static void Task_WaitForAtePokeblockText(u8 taskID)
 {
     if (MenuUpdateWindowText() == 1)
-        gTasks[taskID].func = sub_8147F4C;
+        gTasks[taskID].func = Task_PaletteFadeToReturn;
 }
 
 static void Task_PrintAtePokeblockText(u8 taskID)
@@ -738,10 +736,10 @@ static void Task_PrintAtePokeblockText(u8 taskID)
         StringExpandPlaceholders(gStringVar4, gContestStatsText_DisdainfullyAte);
 
     MenuPrintMessage(gStringVar4, 1, 15);
-    gTasks[taskID].func = sub_8147E10;
+    gTasks[taskID].func = Task_WaitForAtePokeblockText;
 }
 
-static void sub_8147F08(u8 taskID)
+static void Task_ReturnAfterPaletteFade(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
@@ -751,13 +749,13 @@ static void sub_8147F08(u8 taskID)
     }
 }
 
-void sub_8147F4C(u8 taskID)
+static void Task_PaletteFadeToReturn(u8 taskID)
 {
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gTasks[taskID].func = sub_8147F08;
+    gTasks[taskID].func = Task_ReturnAfterPaletteFade;
 }
 
-static u8 sub_8147F84(struct Pokemon* mon)
+static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
     u8 spriteID = CreateSprite(&gUnknown_02024E8C, 48, 80, 2);
@@ -770,7 +768,7 @@ static u8 sub_8147F84(struct Pokemon* mon)
     gPokeblockMonNotFlipped = 1;
     if (!sub_8040A3C(species))
     {
-        gSprites[spriteID].affineAnims = gSpriteAffineAnimTable_84120EC;
+        gSprites[spriteID].affineAnims = sSpriteAffineAnimTable_84120EC;
         gSprites[spriteID].oam.affineMode = 3;
         CalcCenterToCornerVec(&gSprites[spriteID], gSprites[spriteID].oam.shape, gSprites[spriteID].oam.size, gSprites[spriteID].oam.affineMode);
         gPokeblockMonNotFlipped = 0;
@@ -802,7 +800,7 @@ static u8 sub_81480B4(void)
 {
     u8 spriteID = sub_810BA50(188, 100, 2);
     gSprites[spriteID].oam.affineMode = 1;
-    gSprites[spriteID].affineAnims = gSpriteAffineAnimTable_84121A0;
+    gSprites[spriteID].affineAnims = sSpriteAffineAnimTable_84121A0;
     gSprites[spriteID].callback = SpriteCallbackDummy;
     InitSpriteAffineAnim(&gSprites[spriteID]);
     return spriteID;
@@ -813,15 +811,15 @@ static void sub_8148108(u8 spriteID, bool8 a1)
     FreeOamMatrix(gSprites[spriteID].oam.matrixNum);
     gSprites[spriteID].oam.affineMode = 3;
     if (!a1)
-        gSprites[spriteID].affineAnims = gSpriteAffineAnimTable_84121A4;
+        gSprites[spriteID].affineAnims = sSpriteAffineAnimTable_84121A4;
     else
-        gSprites[spriteID].affineAnims = gSpriteAffineAnimTable_84121A8;
+        gSprites[spriteID].affineAnims = sSpriteAffineAnimTable_84121A8;
     InitSpriteAffineAnim(&gSprites[spriteID]);
 }
 
 static u8 sub_814817C(void)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_84121E4, 174, 84, 1);
+    u8 spriteID = CreateSprite(&sSpriteTemplate_84121E4, 174, 84, 1);
     gSprites[spriteID].data0 = -12;
     gSprites[spriteID].data1 = 1;
     return spriteID;
@@ -868,7 +866,7 @@ static void sub_814825C(void)
         {
             gPokeblockFeedPokeSprite->oam.affineMode = 3;
             gPokeblockFeedPokeSprite->oam.matrixNum = 0;
-            gPokeblockFeedPokeSprite->affineAnims = gSpriteAffineAnimTable_8412050;
+            gPokeblockFeedPokeSprite->affineAnims = sSpriteAffineAnimTable_8412050;
             InitSpriteAffineAnim(gPokeblockFeedPokeSprite);
         }
         gUnknown_03005F3C = 50;
