@@ -55,6 +55,8 @@ struct UnknownPokenav0 {
 	/* 0xced0 */ u32 varCED0;
 	/* 0xced4 */ u8 fillCED4[0x284];
 	/* 0xD158 */ u16 varD158;
+	/* 0xD15A */ u8 fillD15A[0x8];
+	/* 0xD162 */ u8 varD162;
 };
 
 
@@ -1216,4 +1218,87 @@ void sub_80ED4D8() {
 		sub_80EBDBC(&sub_80ED858);
 		break;
 	}
+}
+
+void sub_80ED620() {
+	u8 var1;
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F1E84();
+		sub_80F2D04(0x1);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80F1F10()) return;
+		sub_80EEFBC(0x1);
+		ewram0.var304++;
+		break;
+	case 2:
+		if (!(var1 = sub_80EEF34())) {
+			BeginNormalPaletteFade(ewram0.var308, -1, 0x0, 0x10, var1);
+			ewram0.var304++;
+		}
+		break;
+	case 3:
+		if (gPaletteFade.active) return;
+		SetVBlankCallback(NULL);
+		sub_80EED0C();
+		sub_80EF814();
+		ewram0.var76aa = (u8)(gPaletteFade.active << 24);
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80F2620();
+		ewram0.var304++;
+		break;
+	case 5:
+		ewram0.varD162 = 0x2;
+		sub_80F4BD0();
+		ewram0.var304++;
+		break;
+	case 6:
+		sub_80EFF34();
+		ewram0.var304++;
+	case 7:
+		if (sub_80EFF68()) return;
+		ewram0.var304++;
+		break;
+	case 8:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 9:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 0xA:
+		sub_80F33A8();
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD4C);
+		ewram0.var304++;
+		break;
+	case 0xB:
+		sub_80EED2C(0x2);
+		ewram0.var304++;
+		break;
+	case 0xC:
+		if (gPaletteFade.active) return;
+		ewram0.var304++;
+		break;
+	case 0xD:
+		sub_80F2C80(0x1);
+		ewram0.var304++;
+	case 0xE:
+		if (sub_80F2CBC(0x1)) return;
+		ewram0.var304++;
+		break;
+	case 0xF:
+		sub_80F2C80(0x6);
+		ewram0.var304++;
+	case 0x10:
+		if (sub_80F2CBC(0x6)) return;
+		sub_80EBDBC(&sub_80ED858);
+		break;
+	}
+
 }
