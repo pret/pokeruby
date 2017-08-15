@@ -25,7 +25,6 @@
 #include "sound.h"
 #include "songs.h"
 #include "safari_zone.h"
-#include "use_pokeblock.h"
 #include "event_data.h"
 #include "pokeblock.h"
 

@@ -587,7 +587,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     return 0;
 }
 
-void sub_8147ADC(void)
+void CB2_PreparePokeblockFeedScene(void)
 {
     while (1)
     {
