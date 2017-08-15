@@ -841,7 +841,7 @@ void sub_80ECC08() {
 			sub_80EED9C();
 			break;
 		}
-		if ((gMain.newKeys & A_BUTTON)) {
+		if (gMain.newKeys & A_BUTTON) {
 			PlaySE(0x5);
 			switch ((s8)ewram0.var6dad) {
 			case 0:
@@ -1075,6 +1075,49 @@ void sub_80ED01C() {
 	case 0x13:
 		if (sub_80F2CBC(ewram0.var6dfc + 7)) return;
 		sub_80EBDBC(&sub_80ED31C);
+		break;
+	}
+}
+
+u8 sub_80F5DD4();
+void ShowMapNamePopUpWindow();
+void sub_80ED4D8();
+bool8 sub_80F0718();
+bool8 sub_80F3264();
+
+void sub_80ED31C() {
+	switch (ewram0.var304) {
+	case 0:
+		switch (sub_80F5DD4()) {
+		case 1:
+			PlaySE(0x5);
+			ShowMapNamePopUpWindow();
+			break;
+		case 2:
+			PlaySE(0x5);
+			ewram0.var304++;
+			break;
+		default:
+			if (gMain.newKeys & A_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80ED4D8);
+			}
+			else if (gMain.newKeys & B_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80ECD80);
+			}
+			break;
+		}
+		break;
+	case 1:
+		if (sub_80F0718()) return;
+		ShowMapNamePopUpWindow();
+		sub_80F3264();
+		ewram0.var304++;
+		break;
+	case 2:
+		if (sub_8055870()) return;
+		ewram0.var304 = 0;
 		break;
 	}
 }
