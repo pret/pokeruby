@@ -975,3 +975,106 @@ void sub_80ECD80() {
 		sub_80EBDBC(&sub_80ECC08);
 	}
 }
+
+void sub_80F4D44();
+bool8 sub_80F4D88();
+void sub_80F0264();
+bool8 sub_80F02A0();
+void sub_80F3008();
+void sub_80ED31C();
+
+void sub_80ED01C() {
+	u16 var1;
+	u16 var3;
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F1E84();
+		sub_80F2D04(0x1);
+		sub_80F2D04(0x5);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80F1F10()) return;
+		sub_80EEFBC(0);
+		ewram0.var304++;
+		break;
+	case 2:
+		if ((var1 = sub_80EEF34())) return;
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x0, 0x10, var1);
+		ewram0.var304++;
+		break;
+	case 3:
+		if (gPaletteFade.active) return;
+		SetVBlankCallback(NULL);
+		sub_80EED0C();
+		sub_80EF814();
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80F2620();
+		ewram0.var304++;
+		break;
+	case 5:
+		sub_80F4D44();
+		ewram0.var304++;
+	case 6:
+		if (!sub_80F4D88()) {
+			ewram0.var304 += 2;
+			break;
+		}
+		ewram0.var304++;
+		break;
+	case 7:
+		if (sub_8055870()) return;
+		ewram0.var304--;
+		break;
+	case 8:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 9:
+		sub_80F0264(0);
+		ewram0.var304++;
+	case 0xA:
+		if (sub_80F02A0()) return;
+		ewram0.var304++;
+		break;
+	case 0xB:
+		sub_80F3008(0);
+		ewram0.var304++;
+		break;
+	case 0xC:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 0xD:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 0xE:
+		sub_80EED2C(0x4);
+		ewram0.var304++;
+		break;
+	case 0xF:
+		if (gPaletteFade.active) return;
+		ewram0.var306 = (u8)(gPaletteFade.active << 24);
+		ewram0.var304++;
+		break;
+	case 0x10:
+		sub_80F2C80(0x1);
+		ewram0.var304++;
+	case 0x11:
+		if ((var3 = sub_80F2CBC(0x1))) return;
+		ewram0.var306 = var3;
+		ewram0.var304++;
+		break;
+	case 0x12:
+		sub_80F2C80(ewram0.var6dfc + 7);
+		ewram0.var304++;
+	case 0x13:
+		if (sub_80F2CBC(ewram0.var6dfc + 7)) return;
+		sub_80EBDBC(&sub_80ED31C);
+		break;
+	}
+}
