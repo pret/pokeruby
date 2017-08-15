@@ -28,7 +28,7 @@ const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down
 const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
 #endif
 
-static const u32 gUnknown_08406118[] = {
+static const u32 sContestStatsMonData[] = {
     MON_DATA_COOL,
     MON_DATA_TOUGH,
     MON_DATA_SMART,
@@ -741,12 +741,12 @@ static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 a1, s16 a2)
 }
 #endif
 
-static void sub_8136E10(struct Pokemon *pokemon, u8 *data)
+static void Pokeblock_GetMonContestStats(struct Pokemon *pokemon, u8 *data)
 {
     u16 i;
     for (i=0; i<5; i++)
     {
-        data[i] = GetMonData(pokemon, gUnknown_08406118[i]);
+        data[i] = GetMonData(pokemon, sContestStatsMonData[i]);
     }
 }
 
@@ -760,14 +760,14 @@ static void sub_8136E40(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
         sub_8136F74(pokeblock, pokemon);
         for (i=0; i<5; i++)
         {
-            data = GetMonData(pokemon, gUnknown_08406118[i]);
+            data = GetMonData(pokemon, sContestStatsMonData[i]);
             cstat = data + gUnknown_02039304->unk66[i];
             if (cstat < 0)
                 cstat = 0;
             if (cstat > 255)
                 cstat = 255;
             data = cstat;
-            SetMonData(pokemon, gUnknown_08406118[i], &data);
+            SetMonData(pokemon, sContestStatsMonData[i], &data);
         }
         cstat = (u8)GetMonData(pokemon, MON_DATA_SHEEN);
         cstat = cstat + pokeblock->feel;
@@ -783,9 +783,9 @@ static void sub_8136EF0(void)
     u16 i;
     struct Pokemon *pokemon = gPlayerParty;
     pokemon += gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx;
-    sub_8136E10(pokemon, gUnknown_02039304->unk57);
+    Pokeblock_GetMonContestStats(pokemon, gUnknown_02039304->unk57);
     sub_8136E40(gUnknown_02039304->pokeblock, pokemon);
-    sub_8136E10(pokemon, gUnknown_02039304->unk5c);
+    Pokeblock_GetMonContestStats(pokemon, gUnknown_02039304->unk5c);
     for (i=0; i<5; i++)
     {
         gUnknown_02039304->unk61[i] = gUnknown_02039304->unk5c[i] - gUnknown_02039304->unk57[i];

@@ -34,6 +34,9 @@ s16 PokeblockGetGain(u8, const struct Pokeblock *);
 u8 sub_810CB68(u8, u8*);
 void PokeblockCopyName(struct Pokeblock *pokeblock, u8 *dest);
 void CB2_PreparePokeblockFeedScene(void);
+
+#include "main.h"
+
 void sub_8136130(struct Pokeblock *, MainCallback);
 
 #endif // GUARD_POKEBLOCK_H
