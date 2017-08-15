@@ -53,7 +53,7 @@ static void sub_8147B04(void);
 static void sub_81481DC(void);
 static void sub_814825C(void);
 static u8 sub_81480B4(void);
-static u8 sub_814817C(void);
+static u8 CreatePokeblockSprite(void);
 static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon);
 static bool8 sub_8147B20(struct Pokemon* mon);
 static void LaunchPokeblockFeedTask(u8);
@@ -67,7 +67,7 @@ static bool8 sub_8148540(void);
 static bool8 sub_81485CC(void);
 static bool8 FreePokeSpriteMatrix(void);
 void sub_8148710(void);
-static void sub_81481B0(struct Sprite* sprite);
+static void SpriteCB_ThrownPokeblock(struct Sprite* sprite);
 static void sub_814862C(void);
 
 // EWRAM
@@ -433,7 +433,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121A8[] =
     sSpriteAffineAnim_8412148
 };
 
-static const struct OamData sOamData_84121AC =
+static const struct OamData sThrownPokeblockOamData =
 {
     .y = 0,
     .affineMode = 3,
@@ -450,15 +450,15 @@ static const struct OamData sOamData_84121AC =
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_84121B4[] =
+static const union AnimCmd sThrownPokeblockSpriteAnim[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_84121BC[] =
+static const union AnimCmd *const sThrownPokeblockAnimTable[] =
 {
-    sSpriteAnim_84121B4,
+    sThrownPokeblockSpriteAnim,
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
@@ -468,7 +468,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
 	AFFINEANIMCMD_JUMP(1)
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121D8[] =
+static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
 {
     sSpriteAffineAnim_84121C0
 };
@@ -478,15 +478,15 @@ static const struct CompressedSpriteSheet sUnknown_084121DC =
     gPokeblock_Gfx, 0x20, 14818
 };
 
-static const struct SpriteTemplate sSpriteTemplate_84121E4 =
+static const struct SpriteTemplate sThrownPokeblockSpriteTemplate =
 {
     .tileTag = 14818,
     .paletteTag = 14818,
-    .oam = &sOamData_84121AC,
-    .anims = sSpriteAnimTable_84121BC,
+    .oam = &sThrownPokeblockOamData,
+    .anims = sThrownPokeblockAnimTable,
     .images = NULL,
-    .affineAnims = sSpriteAffineAnimTable_84121D8,
-    .callback = sub_81481B0
+    .affineAnims = sThrownPokeblockAffineAnimTable,
+    .callback = SpriteCB_ThrownPokeblock
 };
 
 // code
@@ -687,7 +687,7 @@ static void sub_8147CC8(u8 taskID)
             sub_8148108(ewram[0x1FFFD], gTasks[taskID].data[1]);
             break;
         case 269:
-            ewram[0x1FFFC] = sub_814817C();
+            ewram[0x1FFFC] = CreatePokeblockSprite();
             break;
         case 281:
             sub_8148044(ewram[0x1FFFE]);
@@ -817,15 +817,15 @@ static void sub_8148108(u8 spriteID, bool8 a1)
     InitSpriteAffineAnim(&gSprites[spriteID]);
 }
 
-static u8 sub_814817C(void)
+static u8 CreatePokeblockSprite(void)
 {
-    u8 spriteID = CreateSprite(&sSpriteTemplate_84121E4, 174, 84, 1);
+    u8 spriteID = CreateSprite(&sThrownPokeblockSpriteTemplate, 174, 84, 1);
     gSprites[spriteID].data0 = -12;
     gSprites[spriteID].data1 = 1;
     return spriteID;
 }
 
-static void sub_81481B0(struct Sprite* sprite)
+static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
     sprite->pos1.x -= 4;
     sprite->pos1.y += sprite->data0;
@@ -932,8 +932,8 @@ static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = (u16)(*((u16*)(&ewram[0x1D000]) + var));
-    gPokeblockFeedPokeSprite->pos2.y = (u16)(*((u16*)(&ewram[0x1D400]) + var));
+    gPokeblockFeedPokeSprite->pos2.x = (*((u16*)(&ewram[0x1D000]) + var));
+    gPokeblockFeedPokeSprite->pos2.y = (*((u16*)(&ewram[0x1D400]) + var));
 
     if (--gUnknown_03005FA0[4] == 0)
         return 1;
@@ -971,17 +971,42 @@ static void sub_814862C(void)
     *((u16*)(&ewram[0x1D3FE]) + (r8 + r7)) = r9;
 }
 
-/*
 void sub_8148710(void)
 {
     bool8 var_24 = 0;
     s16 r8 = gUnknown_03005FA0[13] - gUnknown_03005FA0[10];
     s16 r7 = gUnknown_03005FA0[14] - gUnknown_03005FA0[11];
-    s16 r5;
-    if (gUnknown_03005FA0[10] < 0)
-        r5 = -(gUnknown_03005FA0[10]) - gUnknown_03005FA0[3];
-    else
-        r5 = (gUnknown_03005FA0[10]) - gUnknown_03005FA0[3];
-    if (gUnknown_03005FA0)
+    while (1)
+    {
+        u16 r5;
+        u16 r4;
+        u16 var;
+
+        var = abs(gUnknown_03005FA0[5]);
+        r5 = var + gUnknown_03005FA0[3];
+        gUnknown_03005FA0[3] = r5;
+
+        if (gUnknown_03005FA0[2] < 0)
+            var_24 = 1;
+
+        r4 = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
+
+        if (gUnknown_03005FA0[4] == 0)
+            break;
+
+        if (var_24 == 0)
+        {
+            *((u16*)(&ewram[0x1D000]) + r4) = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
+            *((u16*)(&ewram[0x1D400]) + r4) = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
+        }
+        else
+        {
+            *((u16*)(&ewram[0x1D000]) + r4) = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
+            *((u16*)(&ewram[0x1D400]) + r4) = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
+        }
+
+        gUnknown_03005FA0[0] += gUnknown_03005FA0[1];
+        gUnknown_03005FA0[0] &= 0xFF;
+        gUnknown_03005FA0[4]--;
+    }
 }
-*/
