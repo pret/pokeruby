@@ -31,6 +31,7 @@ extern u16 gUnknown_030042A4;
 extern struct Window gUnknown_03004210;
 extern const u8 gUnknown_08400D89[];
 extern u8 gUnknown_03004348;
+extern struct BattlePokemon gBattleMons[];
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
@@ -43,6 +44,7 @@ extern void sub_802E3B4();
 extern void sub_802E220();
 extern void sub_802E2D4();
 extern void sub_802E12C();
+extern void sub_802E1B0(void);
 
 void PlayerHandleGetAttributes(void);
 void sub_802ECF0(void);
@@ -448,11 +450,12 @@ void sub_802C2EC(void)
 
 struct UnknownStruct1
 {
-    u16 unk0[4];
-    u8 unk8[4];
-    u8 fillerC[0x12-0xC];
+    u16 moves[4];
+    u8 pp[4];
+    u8 unkC[0x12-0xC];
     u8 unk12;
     u8 unk13;
+	u8 filler14[0x20-0x14];
 };
 
 void sub_802C68C(void)
@@ -466,10 +469,10 @@ void sub_802C68C(void)
 
         PlaySE(SE_SELECT);
 
-        if (r6->unk0[gMoveSelectionCursor[gActiveBank]] == 0xAE)
+        if (r6->moves[gMoveSelectionCursor[gActiveBank]] == 0xAE)
             r4 = (r6->unk12 != 7 && (r6->unk13 ^ 7)) ? 0x10 : 0;
         else
-            r4 = gBattleMoves[r6->unk0[gMoveSelectionCursor[gActiveBank]]].target;
+            r4 = gBattleMoves[r6->moves[gMoveSelectionCursor[gActiveBank]]].target;
 
         if (r4 & 0x10)
             gUnknown_03004344 = gActiveBank;
@@ -485,7 +488,7 @@ void sub_802C68C(void)
         {
             if (!(r4 & 0x7D))
                 r8++;
-            if (r6->unk8[gMoveSelectionCursor[gActiveBank]] == 0)
+            if (r6->pp[gMoveSelectionCursor[gActiveBank]] == 0)
             {
                 r8 = 0;
             }
@@ -588,4 +591,179 @@ void sub_802C68C(void)
             gBattleBankFunc[gActiveBank] = sub_802CA60;
         }
     }
+}
+
+extern const u8 gUnknown_08400D49[];
+extern const u8 gUnknown_08400D38[];
+
+void sub_802CA60(void)
+{
+	u8 perMovePPBonuses[4];
+	struct
+	{
+		u16 moves[4];
+		u8 pp[4];
+		u8 filler18[8];  // what is this?
+	} sp0;
+	//struct UnknownStruct1 sp0;
+	u8 totalPPBonuses;
+
+	if (gMain.newKeys & (A_BUTTON | SELECT_BUTTON))
+	{
+		PlaySE(SE_SELECT);
+		if (gMoveSelectionCursor[gActiveBank] != gUnknown_03004344)
+		{
+			struct UnknownStruct1 *r9 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+			s32 i;
+
+			i = r9->moves[gMoveSelectionCursor[gActiveBank]];
+			r9->moves[gMoveSelectionCursor[gActiveBank]] = r9->moves[gUnknown_03004344];
+			r9->moves[gUnknown_03004344] = i;
+
+			i = r9->pp[gMoveSelectionCursor[gActiveBank]];
+			r9->pp[gMoveSelectionCursor[gActiveBank]] = r9->pp[gUnknown_03004344];
+			r9->pp[gUnknown_03004344] = i;
+
+			i = r9->unkC[gMoveSelectionCursor[gActiveBank]];
+			r9->unkC[gMoveSelectionCursor[gActiveBank]] = r9->unkC[gUnknown_03004344];
+			r9->unkC[gUnknown_03004344] = i;
+
+			if (gDisableStructs[gActiveBank].unk18_b & gBitTable[gMoveSelectionCursor[gActiveBank]])
+			{
+				gDisableStructs[gActiveBank].unk18_b &= ~gBitTable[gMoveSelectionCursor[gActiveBank]];
+				gDisableStructs[gActiveBank].unk18_b |= gBitTable[gUnknown_03004344];
+			}
+
+			sub_802E1B0();
+
+			for (i = 0; i < 4; i++)
+				perMovePPBonuses[i] = (gBattleMons[gActiveBank].ppBonuses & (3 << (i * 2))) >> (i * 2);
+			totalPPBonuses = perMovePPBonuses[gMoveSelectionCursor[gActiveBank]];
+			perMovePPBonuses[gMoveSelectionCursor[gActiveBank]] = perMovePPBonuses[gUnknown_03004344];
+			perMovePPBonuses[gUnknown_03004344] = totalPPBonuses;
+
+			totalPPBonuses = 0;
+			for (i = 0; i < 4; i++)
+				totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
+			gBattleMons[gActiveBank].ppBonuses = totalPPBonuses;
+
+			for (i = 0; i < 4; i++)
+			{
+				gBattleMons[gActiveBank].moves[i] = r9->moves[i];
+				gBattleMons[gActiveBank].pp[i] = r9->pp[i];
+			}
+			if (!(gBattleMons[gActiveBank].status2 & 0x200000))
+			{
+				for (i = 0; i < 4; i++)
+				{
+					sp0.moves[i] = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i);
+					sp0.pp[i] = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP1 + i);
+				}
+
+				totalPPBonuses = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP_BONUSES);
+				for (i = 0; i < 4; i++)
+					perMovePPBonuses[i] = (totalPPBonuses & (3 << (i * 2))) >> (i * 2);
+
+				i = sp0.moves[gMoveSelectionCursor[gActiveBank]];
+				sp0.moves[gMoveSelectionCursor[gActiveBank]] = sp0.moves[gUnknown_03004344];
+				sp0.moves[gUnknown_03004344] = i;
+
+				i = sp0.pp[gMoveSelectionCursor[gActiveBank]];
+				sp0.pp[gMoveSelectionCursor[gActiveBank]] = sp0.pp[gUnknown_03004344];
+				sp0.pp[gUnknown_03004344] = i;
+
+				totalPPBonuses = perMovePPBonuses[gMoveSelectionCursor[gActiveBank]];
+				perMovePPBonuses[gMoveSelectionCursor[gActiveBank]] = perMovePPBonuses[gUnknown_03004344];
+				perMovePPBonuses[gUnknown_03004344] = totalPPBonuses;
+
+				totalPPBonuses = 0;
+				for (i = 0; i < 4; i++)
+					totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
+
+				for (i = 0; i < 4; i++)
+				{
+					SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i, (u8 *)&sp0.moves[i]);
+					SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP1 + i, &sp0.pp[i]);
+				}
+				SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP_BONUSES, &totalPPBonuses);
+			}
+		}
+		else
+		{
+			sub_802E12C(gUnknown_03004344, gUnknown_08400D49);
+		}
+		gBattleBankFunc[gActiveBank] = sub_802C68C;
+		gMoveSelectionCursor[gActiveBank] = gUnknown_03004344;
+		sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+		FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+		InitWindow(&gUnknown_03004210, gUnknown_08400D38, 0x290, 0x17, 0x37);
+		sub_8002F44(&gUnknown_03004210);
+		sub_802E220();
+		sub_802E2D4();
+	}
+	if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
+	{
+		PlaySE(SE_SELECT);
+		nullsub_7(gUnknown_03004344);
+		sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
+		sub_802E12C(gMoveSelectionCursor[gActiveBank], gUnknown_08400D49);
+		gBattleBankFunc[gActiveBank] = sub_802C68C;
+		FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+		InitWindow(&gUnknown_03004210, gUnknown_08400D38, 0x290, 0x17, 0x37);
+		sub_8002F44(&gUnknown_03004210);
+		sub_802E220();
+		sub_802E2D4();
+	}
+	if ((gMain.newKeys & DPAD_LEFT) && (gUnknown_03004344 & 1))
+	{
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0x1D);
+		else
+			nullsub_7(gUnknown_03004344);
+		gUnknown_03004344 ^= 1;
+		PlaySE(SE_SELECT);
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gUnknown_03004344, 0);
+		else
+			sub_802E3B4(gUnknown_03004344, 0x1B);
+	}
+	if ((gMain.newKeys & DPAD_RIGHT) && !(gUnknown_03004344 & 1) && (gUnknown_03004344 ^ 1) < gUnknown_03004348)
+	{
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0x1D);
+		else
+			nullsub_7(gUnknown_03004344);
+		gUnknown_03004344 ^= 1;
+		PlaySE(SE_SELECT);
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gUnknown_03004344, 0);
+		else
+			sub_802E3B4(gUnknown_03004344, 0x1B);
+	}
+	if ((gMain.newKeys & DPAD_UP) && (gUnknown_03004344 & 2))
+	{
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0x1D);
+		else
+			nullsub_7(gUnknown_03004344);
+		gUnknown_03004344 ^= 2;
+		PlaySE(SE_SELECT);
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gUnknown_03004344, 0);
+		else
+			sub_802E3B4(gUnknown_03004344, 0x1B);
+	}
+	if ((gMain.newKeys & DPAD_DOWN) && !(gUnknown_03004344 & 2) && (gUnknown_03004344 ^ 2) < gUnknown_03004348)
+	{
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0x1D);
+		else
+			nullsub_7(gUnknown_03004344);
+		gUnknown_03004344 ^= 2;
+		PlaySE(SE_SELECT);
+		if (gUnknown_03004344 == gMoveSelectionCursor[gActiveBank])
+			sub_802E3B4(gUnknown_03004344, 0);
+		else
+			sub_802E3B4(gUnknown_03004344, 0x1B);
+	}
 }
