@@ -1121,3 +1121,47 @@ void sub_80ED31C() {
 		break;
 	}
 }
+
+void sub_80F6134();
+
+void sub_80ED3D0() {
+	switch (ewram0.var304) {
+	case 0:
+		SetVBlankCallback(NULL);
+		ewram0.var304++;
+		break;
+	case 1:
+		sub_80EED0C();
+		sub_80F6134();
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80EEFBC(0);
+		ewram0.var304++;
+		break;
+	case 3:
+		sub_80F0264(0);
+		ewram0.var304++;
+	case 4:
+		if (sub_80F02A0()) return;
+		ewram0.var304++;
+		break;
+	case 5:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 6:
+		sub_80F3008(0);
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 7:
+		sub_80EED2C(0x4);
+		ewram0.var304++;
+		break;
+	case 8:
+		if (gPaletteFade.active) return;
+		sub_80EBDBC(&sub_80ED31C);
+	}
+}
