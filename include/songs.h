@@ -36,7 +36,7 @@ enum
     /*0x1E*/ SE_N,
     /*0x1F*/ SE_SEIKAI,
     /*0x20*/ SE_HAZURE,
-    SE_EXP,
+    /*0x21*/ SE_EXP,
     SE_JITE_PYOKO,
     SE_MU_PACHI,
     SE_TK_KASYA,
