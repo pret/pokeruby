@@ -6,774 +6,11 @@
 
 	.text
 
-	thumb_func_start sub_811AABC
-sub_811AABC: @ 811AABC
+
+	thumb_func_start VBlankCB_Phase2_Transition2
+VBlankCB_Phase2_Transition2: @ 811B08C
 	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0811AAD0 @ =gMain
-	ldr r1, _0811AAD4 @ =sub_8054398
-	str r1, [r2, 0x4]
-	bl sub_811AB20
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811AAD0: .4byte gMain
-_0811AAD4: .4byte sub_8054398
-	thumb_func_end sub_811AABC
-
-	thumb_func_start sub_811AAD8
-sub_811AAD8: @ 811AAD8
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_811AB20
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811AAD8
-
-	thumb_func_start sub_811AAE8
-sub_811AAE8: @ 811AAE8
-	push {lr}
-	ldr r0, _0811AB0C @ =sub_811AB50
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, _0811AB10 @ =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0x26
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _0811AB14
-	movs r0, 0
-	b _0811AB1C
-	.align 2, 0
-_0811AB0C: .4byte sub_811AB50
-_0811AB10: .4byte gTasks
-_0811AB14:
-	adds r0, r2, 0
-	bl DestroyTask
-	movs r0, 0x1
-_0811AB1C:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811AAE8
-
-	thumb_func_start sub_811AB20
-sub_811AB20: @ 811AB20
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _0811AB48 @ =sub_811AB50
-	movs r1, 0x2
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0811AB4C @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	strh r4, [r1, 0xA]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811AB48: .4byte sub_811AB50
-_0811AB4C: .4byte gTasks
-	thumb_func_end sub_811AB20
-
-	thumb_func_start sub_811AB50
-sub_811AB50: @ 811AB50
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811AB80 @ =gUnknown_083FD794
-	ldr r2, _0811AB84 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811AB62:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811AB62
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811AB80: .4byte gUnknown_083FD794
-_0811AB84: .4byte gTasks
-	thumb_func_end sub_811AB50
-
-	thumb_func_start sub_811AB88
-sub_811AB88: @ 811AB88
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_807DE10
-	ldr r0, _0811ABB4 @ =gPlttBufferFaded
-	ldr r1, _0811ABB8 @ =gPlttBufferUnfaded
-	ldr r2, _0811ABBC @ =0x04000100
-	bl CpuSet
-	ldr r1, _0811ABC0 @ =gUnknown_083FD70C
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _0811ABC4
-	movs r0, 0x2
-	strh r0, [r4, 0x8]
-	movs r0, 0x1
-	b _0811ABD2
-	.align 2, 0
-_0811ABB4: .4byte gPlttBufferFaded
-_0811ABB8: .4byte gPlttBufferUnfaded
-_0811ABBC: .4byte 0x04000100
-_0811ABC0: .4byte gUnknown_083FD70C
-_0811ABC4:
-	movs r1, 0x4
-	bl CreateTask
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0
-_0811ABD2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811AB88
-
-	thumb_func_start sub_811ABD8
-sub_811ABD8: @ 811ABD8
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r1, _0811ABF8 @ =gUnknown_083FD70C
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	beq _0811ABFC
-	movs r0, 0
-	b _0811AC04
-	.align 2, 0
-_0811ABF8: .4byte gUnknown_083FD70C
-_0811ABFC:
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0x1
-_0811AC04:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811ABD8
-
-	thumb_func_start sub_811AC0C
-sub_811AC0C: @ 811AC0C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r1, _0811AC30 @ =gBattleTransitionFuncs
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0
-	bl CreateTask
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AC30: .4byte gBattleTransitionFuncs
-	thumb_func_end sub_811AC0C
-
-	thumb_func_start sub_811AC34
-sub_811AC34: @ 811AC34
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	strh r0, [r4, 0x26]
-	ldr r1, _0811AC60 @ =gBattleTransitionFuncs
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _0811AC58
-	movs r0, 0x1
-	strh r0, [r4, 0x26]
-_0811AC58:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AC60: .4byte gBattleTransitionFuncs
-	thumb_func_end sub_811AC34
-
-	thumb_func_start sub_811AC64
-sub_811AC64: @ 811AC64
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	adds r4, r0, 0
-	ldr r1, _0811AC98 @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r1, r0, r1
-	ldrh r2, [r1, 0x8]
-	movs r3, 0x8
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	bne _0811AC9C
-	adds r0, r2, 0x1
-	strh r0, [r1, 0x8]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x3
-	movs r3, 0x2
-	bl sub_811D4C8
-	b _0811ACAC
-	.align 2, 0
-_0811AC98: .4byte gTasks
-_0811AC9C:
-	bl sub_811D52C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0811ACAC
-	adds r0, r4, 0
-	bl DestroyTask
-_0811ACAC:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811AC64
-
-	thumb_func_start sub_811ACB4
-sub_811ACB4: @ 811ACB4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811ACE4 @ =gUnknown_083FD7A4
-	ldr r2, _0811ACE8 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811ACC6:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811ACC6
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811ACE4: .4byte gUnknown_083FD7A4
-_0811ACE8: .4byte gTasks
-	thumb_func_end sub_811ACB4
-
-	thumb_func_start sub_811ACEC
-sub_811ACEC: @ 811ACEC
-	ldr r2, _0811AD18 @ =REG_MOSAIC
-	movs r1, 0
-	strh r1, [r2]
-	subs r2, 0x42
-	ldrh r1, [r2]
-	movs r3, 0x40
-	orrs r1, r3
-	strh r1, [r2]
-	adds r2, 0x2
-	ldrh r1, [r2]
-	orrs r1, r3
-	strh r1, [r2]
-	adds r2, 0x2
-	ldrh r1, [r2]
-	orrs r1, r3
-	strh r1, [r2]
-	ldrh r1, [r0, 0x8]
-	adds r1, 0x1
-	strh r1, [r0, 0x8]
-	movs r0, 0x1
-	bx lr
-	.align 2, 0
-_0811AD18: .4byte REG_MOSAIC
-	thumb_func_end sub_811ACEC
-
-	thumb_func_start sub_811AD1C
-sub_811AD1C: @ 811AD1C
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	ldrh r0, [r4, 0xA]
-	movs r1, 0xA
-	ldrsh r2, [r4, r1]
-	cmp r2, 0
-	beq _0811AD32
-	subs r0, 0x1
-	strh r0, [r4, 0xA]
-	b _0811AD70
-_0811AD32:
-	movs r0, 0x4
-	strh r0, [r4, 0xA]
-	ldrh r0, [r4, 0xC]
-	adds r0, 0x1
-	strh r0, [r4, 0xC]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xA
-	bne _0811AD54
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	adds r0, r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-_0811AD54:
-	ldr r2, _0811AD7C @ =REG_MOSAIC
-	ldrh r0, [r4, 0xC]
-	movs r1, 0xF
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	strh r0, [r2]
-	movs r1, 0xC
-	ldrsh r0, [r4, r1]
-	cmp r0, 0xE
-	ble _0811AD70
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_0811AD70:
-	movs r0, 0
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AD7C: .4byte REG_MOSAIC
-	thumb_func_end sub_811AD1C
-
-	thumb_func_start sub_811AD80
-sub_811AD80: @ 811AD80
-	push {lr}
-	ldr r0, _0811ADA4 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0811AD9C
-	ldr r0, _0811ADA8 @ =sub_811ACB4
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_0811AD9C:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811ADA4: .4byte gPaletteFade
-_0811ADA8: .4byte sub_811ACB4
-	thumb_func_end sub_811AD80
-
-	thumb_func_start sub_811ADAC
-sub_811ADAC: @ 811ADAC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811ADDC @ =gUnknown_083FD7B0
-	ldr r2, _0811ADE0 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811ADBE:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811ADBE
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811ADDC: .4byte gUnknown_083FD7B0
-_0811ADE0: .4byte gTasks
-	thumb_func_end sub_811ADAC
-
-	thumb_func_start sub_811ADE4
-sub_811ADE4: @ 811ADE4
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	bl sub_811D658
-	bl dp12_8087EA4
-	movs r0, 0x1
-	negs r0, r0
-	movs r4, 0
-	str r4, [sp]
-	movs r1, 0x4
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r0, _0811AE54 @ =gUnknown_03005560
-	ldr r1, _0811AE58 @ =0x0200c000
-	movs r2, 0x14
-	ldrsh r1, [r1, r2]
-	str r4, [sp]
-	movs r2, 0xA0
-	str r2, [sp, 0x4]
-	movs r2, 0
-	movs r3, 0x2
-	bl sub_811D6E8
-	ldr r0, _0811AE5C @ =sub_811AEE0
-	bl SetVBlankCallback
-	ldr r0, _0811AE60 @ =sub_811AF18
-	bl SetHBlankCallback
-	ldr r3, _0811AE64 @ =0x04000208
-	ldrh r2, [r3]
-	strh r4, [r3]
-	ldr r4, _0811AE68 @ =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x3
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r2, _0811AE6C @ =REG_DISPSTAT
-	ldrh r0, [r2]
-	movs r1, 0x18
-	orrs r0, r1
-	strh r0, [r2]
-	ldrh r0, [r5, 0x8]
-	adds r0, 0x1
-	strh r0, [r5, 0x8]
-	movs r0, 0
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AE54: .4byte gUnknown_03005560
-_0811AE58: .4byte 0x0200c000
-_0811AE5C: .4byte sub_811AEE0
-_0811AE60: .4byte sub_811AF18
-_0811AE64: .4byte 0x04000208
-_0811AE68: .4byte 0x04000200
-_0811AE6C: .4byte REG_DISPSTAT
-	thumb_func_end sub_811ADE4
-
-	thumb_func_start sub_811AE70
-sub_811AE70: @ 811AE70
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r4, _0811AED0 @ =0x0200c000
-	ldrb r1, [r4]
-	movs r1, 0
-	strb r1, [r4]
-	ldrh r1, [r0, 0xA]
-	adds r1, 0x4
-	strh r1, [r0, 0xA]
-	ldrh r1, [r0, 0xC]
-	adds r1, 0x8
-	strh r1, [r0, 0xC]
-	ldr r3, _0811AED4 @ =gUnknown_03004DE0
-	movs r2, 0x14
-	ldrsh r1, [r4, r2]
-	movs r5, 0xA
-	ldrsh r2, [r0, r5]
-	movs r5, 0xC
-	ldrsh r0, [r0, r5]
-	str r0, [sp]
-	movs r0, 0xA0
-	str r0, [sp, 0x4]
-	adds r0, r3, 0
-	movs r3, 0x2
-	bl sub_811D6E8
-	ldr r0, _0811AED8 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0811AEBE
-	ldr r0, _0811AEDC @ =sub_811ADAC
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_0811AEBE:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	ldrb r1, [r4]
-	strb r0, [r4]
-	movs r0, 0
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AED0: .4byte 0x0200c000
-_0811AED4: .4byte gUnknown_03004DE0
-_0811AED8: .4byte gPaletteFade
-_0811AEDC: .4byte sub_811ADAC
-	thumb_func_end sub_811AE70
-
-	thumb_func_start sub_811AEE0
-sub_811AEE0: @ 811AEE0
-	push {lr}
-	bl sub_811D67C
-	ldr r0, _0811AF08 @ =0x0200c000
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0811AF02
-	ldr r1, _0811AF0C @ =0x040000d4
-	ldr r0, _0811AF10 @ =gUnknown_03004DE0
-	str r0, [r1]
-	movs r2, 0xF0
-	lsls r2, 3
-	adds r0, r2
-	str r0, [r1, 0x4]
-	ldr r0, _0811AF14 @ =0x800000a0
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-_0811AF02:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811AF08: .4byte 0x0200c000
-_0811AF0C: .4byte 0x040000d4
-_0811AF10: .4byte gUnknown_03004DE0
-_0811AF14: .4byte 0x800000a0
-	thumb_func_end sub_811AEE0
-
-	thumb_func_start sub_811AF18
-sub_811AF18: @ 811AF18
-	ldr r1, _0811AF38 @ =gUnknown_03004DE0
-	ldr r0, _0811AF3C @ =REG_VCOUNT
-	ldrh r0, [r0]
-	lsls r0, 1
-	movs r2, 0xF0
-	lsls r2, 3
-	adds r1, r2
-	adds r0, r1
-	ldrh r1, [r0]
-	ldr r0, _0811AF40 @ =REG_BG1HOFS
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_0811AF38: .4byte gUnknown_03004DE0
-_0811AF3C: .4byte REG_VCOUNT
-_0811AF40: .4byte REG_BG1HOFS
-	thumb_func_end sub_811AF18
-
-	thumb_func_start sub_811AF44
-sub_811AF44: @ 811AF44
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811AF74 @ =gUnknown_083FD7B8
-	ldr r2, _0811AF78 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811AF56:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811AF56
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811AF74: .4byte gUnknown_083FD7B8
-_0811AF78: .4byte gTasks
-	thumb_func_end sub_811AF44
-
-	thumb_func_start sub_811AF7C
-sub_811AF7C: @ 811AF7C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	bl sub_811D658
-	bl dp12_8087EA4
-	movs r0, 0x1
-	negs r0, r0
-	movs r4, 0
-	str r4, [sp]
-	movs r1, 0x4
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _0811AFE4 @ =0x0200c000
-	ldr r0, _0811AFE8 @ =gUnknown_03005560
-	movs r2, 0x16
-	ldrsh r1, [r1, r2]
-	movs r2, 0xA0
-	lsls r2, 1
-	bl memset
-	ldr r0, _0811AFEC @ =sub_811B08C
-	bl SetVBlankCallback
-	ldr r0, _0811AFF0 @ =sub_811B0C4
-	bl SetHBlankCallback
-	ldr r3, _0811AFF4 @ =0x04000208
-	ldrh r2, [r3]
-	strh r4, [r3]
-	ldr r4, _0811AFF8 @ =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x3
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r2, _0811AFFC @ =REG_DISPSTAT
-	ldrh r0, [r2]
-	movs r1, 0x18
-	orrs r0, r1
-	strh r0, [r2]
-	ldrh r0, [r5, 0x8]
-	adds r0, 0x1
-	strh r0, [r5, 0x8]
-	movs r0, 0
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811AFE4: .4byte 0x0200c000
-_0811AFE8: .4byte gUnknown_03005560
-_0811AFEC: .4byte sub_811B08C
-_0811AFF0: .4byte sub_811B0C4
-_0811AFF4: .4byte 0x04000208
-_0811AFF8: .4byte 0x04000200
-_0811AFFC: .4byte REG_DISPSTAT
-	thumb_func_end sub_811AF7C
-
-	thumb_func_start sub_811B000
-sub_811B000: @ 811B000
-	push {r4-r7,lr}
-	ldr r2, _0811B07C @ =0x0200c000
-	ldrb r1, [r2]
-	movs r1, 0
-	strb r1, [r2]
-	ldrh r4, [r0, 0xA]
-	ldrh r2, [r0, 0xC]
-	lsls r3, r2, 16
-	asrs r3, 24
-	movs r5, 0x84
-	lsls r5, 5
-	adds r1, r4, r5
-	strh r1, [r0, 0xA]
-	movs r1, 0xC0
-	lsls r1, 1
-	adds r2, r1
-	strh r2, [r0, 0xC]
-	movs r5, 0
-	lsls r7, r3, 16
-_0811B026:
-	lsrs r0, r4, 8
-	asrs r1, r7, 16
-	bl Sin
-	ldr r2, _0811B080 @ =gUnknown_03004DE0
-	lsls r1, r5, 1
-	adds r1, r2
-	ldr r6, _0811B07C @ =0x0200c000
-	ldrh r2, [r6, 0x16]
-	adds r0, r2
-	strh r0, [r1]
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r1, 0x84
-	lsls r1, 5
-	adds r0, r4, r1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r5, 0x9F
-	bls _0811B026
-	ldr r0, _0811B084 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0811B06A
-	ldr r0, _0811B088 @ =sub_811AF44
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_0811B06A:
-	ldrb r0, [r6]
-	adds r0, 0x1
-	ldrb r1, [r6]
-	strb r0, [r6]
-	movs r0, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811B07C: .4byte 0x0200c000
-_0811B080: .4byte gUnknown_03004DE0
-_0811B084: .4byte gPaletteFade
-_0811B088: .4byte sub_811AF44
-	thumb_func_end sub_811B000
-
-	thumb_func_start sub_811B08C
-sub_811B08C: @ 811B08C
-	push {lr}
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r0, _0811B0B4 @ =0x0200c000
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -796,10 +33,10 @@ _0811B0B4: .4byte 0x0200c000
 _0811B0B8: .4byte 0x040000d4
 _0811B0BC: .4byte gUnknown_03004DE0
 _0811B0C0: .4byte 0x800000a0
-	thumb_func_end sub_811B08C
+	thumb_func_end VBlankCB_Phase2_Transition2
 
-	thumb_func_start sub_811B0C4
-sub_811B0C4: @ 811B0C4
+	thumb_func_start HBlankCB_Phase2_Transition2
+HBlankCB_Phase2_Transition2: @ 811B0C4
 	ldr r1, _0811B0E4 @ =gUnknown_03004DE0
 	ldr r0, _0811B0E8 @ =REG_VCOUNT
 	ldrh r0, [r0]
@@ -820,10 +57,10 @@ sub_811B0C4: @ 811B0C4
 _0811B0E4: .4byte gUnknown_03004DE0
 _0811B0E8: .4byte REG_VCOUNT
 _0811B0EC: .4byte REG_BG1VOFS
-	thumb_func_end sub_811B0C4
+	thumb_func_end HBlankCB_Phase2_Transition2
 
-	thumb_func_start sub_811B0F0
-sub_811B0F0: @ 811B0F0
+	thumb_func_start Phase2Task_Transition3
+Phase2Task_Transition3: @ 811B0F0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -850,7 +87,7 @@ _0811B102:
 	.align 2, 0
 _0811B120: .4byte gUnknown_083FD7C0
 _0811B124: .4byte gTasks
-	thumb_func_end sub_811B0F0
+	thumb_func_end Phase2Task_Transition3
 
 	thumb_func_start sub_811B128
 sub_811B128: @ 811B128
@@ -1264,7 +501,7 @@ _0811B426:
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_811D6D4
-	ldr r0, _0811B4A0 @ =sub_811B0F0
+	ldr r0, _0811B4A0 @ =Phase2Task_Transition3
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -1296,7 +533,7 @@ _0811B490: .4byte gUnknown_03004DE0
 _0811B494: .4byte 0x040000b0
 _0811B498: .4byte 0x0000c5ff
 _0811B49C: .4byte 0x00007fff
-_0811B4A0: .4byte sub_811B0F0
+_0811B4A0: .4byte Phase2Task_Transition3
 _0811B4A4: .4byte sub_811B54C
 	thumb_func_end sub_811B3EC
 
@@ -1313,7 +550,7 @@ sub_811B4A8: @ 811B4A8
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811B50C @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -1399,8 +636,8 @@ _0811B570: .4byte REG_WIN0H
 _0811B574: .4byte 0xa2400001
 	thumb_func_end sub_811B54C
 
-	thumb_func_start sub_811B578
-sub_811B578: @ 811B578
+	thumb_func_start Phase2Task_Transition4
+Phase2Task_Transition4: @ 811B578
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1427,7 +664,7 @@ _0811B58A:
 	.align 2, 0
 _0811B5A8: .4byte gUnknown_083FD7D8
 _0811B5AC: .4byte gTasks
-	thumb_func_end sub_811B578
+	thumb_func_end Phase2Task_Transition4
 
 	thumb_func_start sub_811B5B0
 sub_811B5B0: @ 811B5B0
@@ -1543,7 +780,7 @@ sub_811B688: @ 811B688
 	cmp r0, 0
 	bne _0811B6A8
 	bl sub_811D6D4
-	ldr r0, _0811B6B0 @ =sub_811B578
+	ldr r0, _0811B6B0 @ =Phase2Task_Transition4
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -1553,7 +790,7 @@ _0811B6A8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811B6B0: .4byte sub_811B578
+_0811B6B0: .4byte Phase2Task_Transition4
 	thumb_func_end sub_811B688
 
 	thumb_func_start FldEff_Pokeball
@@ -1711,8 +948,8 @@ _0811B7E0: .4byte REG_BG0CNT
 _0811B7E4: .4byte 0x0000f001
 	thumb_func_end sub_811B720
 
-	thumb_func_start sub_811B7E8
-sub_811B7E8: @ 811B7E8
+	thumb_func_start Phase2Task_Transition5
+Phase2Task_Transition5: @ 811B7E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1739,7 +976,7 @@ _0811B7FA:
 	.align 2, 0
 _0811B818: .4byte gUnknown_083FD7F8
 _0811B81C: .4byte gTasks
-	thumb_func_end sub_811B7E8
+	thumb_func_end Phase2Task_Transition5
 
 	thumb_func_start sub_811B820
 sub_811B820: @ 811B820
@@ -2257,7 +1494,7 @@ sub_811BBEC: @ 811BBEC
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_811D6D4
-	ldr r0, _0811BC28 @ =sub_811B7E8
+	ldr r0, _0811BC28 @ =Phase2Task_Transition5
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2269,7 +1506,7 @@ sub_811BBEC: @ 811BBEC
 _0811BC1C: .4byte 0x040000b0
 _0811BC20: .4byte 0x0000c5ff
 _0811BC24: .4byte 0x00007fff
-_0811BC28: .4byte sub_811B7E8
+_0811BC28: .4byte Phase2Task_Transition5
 	thumb_func_end sub_811BBEC
 
 	thumb_func_start sub_811BC2C
@@ -2285,7 +1522,7 @@ sub_811BC2C: @ 811BC2C
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811BCA0 @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -2338,8 +1575,8 @@ _0811BCB4: .4byte REG_WIN0H
 _0811BCB8: .4byte 0xa2400001
 	thumb_func_end sub_811BC2C
 
-	thumb_func_start sub_811BCBC
-sub_811BCBC: @ 811BCBC
+	thumb_func_start Phase2Task_Transition6
+Phase2Task_Transition6: @ 811BCBC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2366,7 +1603,7 @@ _0811BCCE:
 	.align 2, 0
 _0811BCEC: .4byte gUnknown_083FD814
 _0811BCF0: .4byte gTasks
-	thumb_func_end sub_811BCBC
+	thumb_func_end Phase2Task_Transition6
 
 	thumb_func_start sub_811BCF4
 sub_811BCF4: @ 811BCF4
@@ -2500,7 +1737,7 @@ _0811BDEC:
 	ands r0, r1
 	cmp r0, 0
 	bne _0811BE0E
-	ldr r0, _0811BE38 @ =sub_811BCBC
+	ldr r0, _0811BE38 @ =Phase2Task_Transition6
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2523,13 +1760,13 @@ _0811BE28: .4byte 0x0200c000
 _0811BE2C: .4byte 0x1fff0000
 _0811BE30: .4byte gUnknown_03004DE0
 _0811BE34: .4byte gPaletteFade
-_0811BE38: .4byte sub_811BCBC
+_0811BE38: .4byte Phase2Task_Transition6
 	thumb_func_end sub_811BD60
 
 	thumb_func_start sub_811BE3C
 sub_811BE3C: @ 811BE3C
 	push {lr}
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r0, _0811BE64 @ =0x0200c000
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2578,8 +1815,8 @@ _0811BE98: .4byte REG_VCOUNT
 _0811BE9C: .4byte REG_BG1VOFS
 	thumb_func_end sub_811BE74
 
-	thumb_func_start sub_811BEA0
-sub_811BEA0: @ 811BEA0
+	thumb_func_start Phase2Task_Transition7
+Phase2Task_Transition7: @ 811BEA0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2606,7 +1843,7 @@ _0811BEB2:
 	.align 2, 0
 _0811BED0: .4byte gUnknown_083FD81C
 _0811BED4: .4byte gTasks
-	thumb_func_end sub_811BEA0
+	thumb_func_end Phase2Task_Transition7
 
 	thumb_func_start sub_811BED8
 sub_811BED8: @ 811BED8
@@ -2746,7 +1983,7 @@ sub_811BFC4: @ 811BFC4
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_811D6D4
-	ldr r0, _0811C000 @ =sub_811BEA0
+	ldr r0, _0811C000 @ =Phase2Task_Transition7
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2758,7 +1995,7 @@ sub_811BFC4: @ 811BFC4
 _0811BFF4: .4byte 0x040000b0
 _0811BFF8: .4byte 0x0000c5ff
 _0811BFFC: .4byte 0x00007fff
-_0811C000: .4byte sub_811BEA0
+_0811C000: .4byte Phase2Task_Transition7
 	thumb_func_end sub_811BFC4
 
 	thumb_func_start sub_811C004
@@ -2774,7 +2011,7 @@ sub_811C004: @ 811C004
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811C06C @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -2823,8 +2060,8 @@ _0811C084: .4byte REG_WIN0H
 _0811C088: .4byte 0xa2400001
 	thumb_func_end sub_811C004
 
-	thumb_func_start sub_811C08C
-sub_811C08C: @ 811C08C
+	thumb_func_start Phase2Task_Transition12
+Phase2Task_Transition12: @ 811C08C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2840,10 +2077,10 @@ sub_811C08C: @ 811C08C
 	bx r0
 	.align 2, 0
 _0811C0A8: .4byte gTasks
-	thumb_func_end sub_811C08C
+	thumb_func_end Phase2Task_Transition12
 
-	thumb_func_start sub_811C0AC
-sub_811C0AC: @ 811C0AC
+	thumb_func_start Phase2Task_Transition13
+Phase2Task_Transition13: @ 811C0AC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2859,10 +2096,10 @@ sub_811C0AC: @ 811C0AC
 	bx r0
 	.align 2, 0
 _0811C0C8: .4byte gTasks
-	thumb_func_end sub_811C0AC
+	thumb_func_end Phase2Task_Transition13
 
-	thumb_func_start sub_811C0CC
-sub_811C0CC: @ 811C0CC
+	thumb_func_start Phase2Task_Transition14
+Phase2Task_Transition14: @ 811C0CC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2878,10 +2115,10 @@ sub_811C0CC: @ 811C0CC
 	bx r0
 	.align 2, 0
 _0811C0E8: .4byte gTasks
-	thumb_func_end sub_811C0CC
+	thumb_func_end Phase2Task_Transition14
 
-	thumb_func_start sub_811C0EC
-sub_811C0EC: @ 811C0EC
+	thumb_func_start Phase2Task_Transition15
+Phase2Task_Transition15: @ 811C0EC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2897,10 +2134,10 @@ sub_811C0EC: @ 811C0EC
 	bx r0
 	.align 2, 0
 _0811C108: .4byte gTasks
-	thumb_func_end sub_811C0EC
+	thumb_func_end Phase2Task_Transition15
 
-	thumb_func_start sub_811C10C
-sub_811C10C: @ 811C10C
+	thumb_func_start Phase2Task_Transition16
+Phase2Task_Transition16: @ 811C10C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2916,7 +2153,7 @@ sub_811C10C: @ 811C10C
 	bx r0
 	.align 2, 0
 _0811C128: .4byte gTasks
-	thumb_func_end sub_811C10C
+	thumb_func_end Phase2Task_Transition16
 
 	thumb_func_start sub_811C12C
 sub_811C12C: @ 811C12C
@@ -3614,7 +2851,7 @@ sub_811C670: @ 811C670
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811C6E0 @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -3679,7 +2916,7 @@ sub_811C700: @ 811C700
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811C75C @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -4114,8 +3351,8 @@ sub_811CA44: @ 811CA44
 _0811CA58: .4byte gSprites
 	thumb_func_end sub_811CA44
 
-	thumb_func_start sub_811CA5C
-sub_811CA5C: @ 811CA5C
+	thumb_func_start Phase2Task_Transition8
+Phase2Task_Transition8: @ 811CA5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4142,7 +3379,7 @@ _0811CA6E:
 	.align 2, 0
 _0811CA8C: .4byte gUnknown_083FD8A4
 _0811CA90: .4byte gTasks
-	thumb_func_end sub_811CA5C
+	thumb_func_end Phase2Task_Transition8
 
 	thumb_func_start sub_811CA94
 sub_811CA94: @ 811CA94
@@ -4331,7 +3568,7 @@ sub_811CBE8: @ 811CBE8
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_811D6D4
-	ldr r0, _0811CC24 @ =sub_811CA5C
+	ldr r0, _0811CC24 @ =Phase2Task_Transition8
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4343,7 +3580,7 @@ sub_811CBE8: @ 811CBE8
 _0811CC18: .4byte 0x040000b0
 _0811CC1C: .4byte 0x0000c5ff
 _0811CC20: .4byte 0x00007fff
-_0811CC24: .4byte sub_811CA5C
+_0811CC24: .4byte Phase2Task_Transition8
 	thumb_func_end sub_811CBE8
 
 	thumb_func_start sub_811CC28
@@ -4359,7 +3596,7 @@ sub_811CC28: @ 811CC28
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811CC90 @ =REG_WININ
 	ldr r1, _0811CC94 @ =0x0200c000
 	ldrh r0, [r1, 0x2]
@@ -4432,8 +3669,8 @@ _0811CCD4: .4byte REG_VCOUNT
 _0811CCD8: .4byte REG_BG1HOFS
 	thumb_func_end sub_811CCB0
 
-	thumb_func_start sub_811CCDC
-sub_811CCDC: @ 811CCDC
+	thumb_func_start Phase2Task_Transition9
+Phase2Task_Transition9: @ 811CCDC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4460,7 +3697,7 @@ _0811CCEE:
 	.align 2, 0
 _0811CD0C: .4byte gUnknown_083FD8B0
 _0811CD10: .4byte gTasks
-	thumb_func_end sub_811CCDC
+	thumb_func_end Phase2Task_Transition9
 
 	thumb_func_start sub_811CD14
 sub_811CD14: @ 811CD14
@@ -4673,7 +3910,7 @@ sub_811CEB0: @ 811CEB0
 	cmp r0, 0x10
 	bls _0811CED4
 	bl sub_811D6D4
-	ldr r0, _0811CEE0 @ =sub_811CCDC
+	ldr r0, _0811CEE0 @ =Phase2Task_Transition9
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4684,7 +3921,7 @@ _0811CED4:
 	bx r1
 	.align 2, 0
 _0811CEDC: .4byte 0x0200c000
-_0811CEE0: .4byte sub_811CCDC
+_0811CEE0: .4byte Phase2Task_Transition9
 	thumb_func_end sub_811CEB0
 
 	thumb_func_start sub_811CEE4
@@ -4700,7 +3937,7 @@ sub_811CEE4: @ 811CEE4
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811CF54 @ =REG_BLDCNT
 	ldr r1, _0811CF58 @ =0x0200c000
 	ldrh r0, [r1, 0xE]
@@ -4755,7 +3992,7 @@ _0811CF70: .4byte 0xa2400001
 	thumb_func_start sub_811CF74
 sub_811CF74: @ 811CF74
 	push {lr}
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r1, _0811CFA4 @ =REG_BLDY
 	ldr r2, _0811CFA8 @ =0x0200c000
 	ldrh r0, [r2, 0x12]
@@ -4928,8 +4165,8 @@ _0811D0B0: .4byte gUnknown_03004DE0
 _0811D0B4: .4byte 0x0200c000
 	thumb_func_end sub_811CFD0
 
-	thumb_func_start sub_811D0B8
-sub_811D0B8: @ 811D0B8
+	thumb_func_start Phase2Task_Transition10
+Phase2Task_Transition10: @ 811D0B8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4956,7 +4193,7 @@ _0811D0CA:
 	.align 2, 0
 _0811D0E8: .4byte gUnknown_083FD8D4
 _0811D0EC: .4byte gTasks
-	thumb_func_end sub_811D0B8
+	thumb_func_end Phase2Task_Transition10
 
 	thumb_func_start sub_811D0F0
 sub_811D0F0: @ 811D0F0
@@ -5053,7 +4290,7 @@ sub_811D19C: @ 811D19C
 	cmp r1, 0
 	bne _0811D1BC
 	bl sub_811D6D4
-	ldr r0, _0811D1C4 @ =sub_811D0B8
+	ldr r0, _0811D1C4 @ =Phase2Task_Transition10
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5063,11 +4300,11 @@ _0811D1BC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811D1C4: .4byte sub_811D0B8
+_0811D1C4: .4byte Phase2Task_Transition10
 	thumb_func_end sub_811D19C
 
-	thumb_func_start sub_811D1C8
-sub_811D1C8: @ 811D1C8
+	thumb_func_start Phase2Task_Transition11
+Phase2Task_Transition11: @ 811D1C8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5094,7 +4331,7 @@ _0811D1DA:
 	.align 2, 0
 _0811D1F8: .4byte gUnknown_083FD8E0
 _0811D1FC: .4byte gTasks
-	thumb_func_end sub_811D1C8
+	thumb_func_end Phase2Task_Transition11
 
 	thumb_func_start sub_811D200
 sub_811D200: @ 811D200
@@ -5342,7 +4579,7 @@ sub_811D3B0: @ 811D3B0
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_811D6D4
-	ldr r0, _0811D3F8 @ =sub_811D1C8
+	ldr r0, _0811D3F8 @ =Phase2Task_Transition11
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5353,7 +4590,7 @@ sub_811D3B0: @ 811D3B0
 _0811D3EC: .4byte 0x040000b0
 _0811D3F0: .4byte 0x0000c5ff
 _0811D3F4: .4byte 0x00007fff
-_0811D3F8: .4byte sub_811D1C8
+_0811D3F8: .4byte Phase2Task_Transition11
 _0811D3FC:
 	ldrh r0, [r2, 0x8]
 	adds r0, 0x1
@@ -5407,7 +4644,7 @@ sub_811D438: @ 811D438
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_811D67C
+	bl VBlankCB_BattleTransition
 	ldr r2, _0811D4AC @ =0x0200c000
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -5695,15 +4932,15 @@ _0811D674: .4byte gUnknown_083FD708
 _0811D678: .4byte 0x0200c014
 	thumb_func_end sub_811D658
 
-	thumb_func_start sub_811D67C
-sub_811D67C: @ 811D67C
+	thumb_func_start VBlankCB_BattleTransition
+VBlankCB_BattleTransition: @ 811D67C
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_811D67C
+	thumb_func_end VBlankCB_BattleTransition
 
 	thumb_func_start sub_811D690
 sub_811D690: @ 811D690

@@ -2082,7 +2082,7 @@ sub_8135534: @ 8135534
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_811AAE8
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

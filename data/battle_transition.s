@@ -36,67 +36,67 @@ gUnknown_083FD708:: @ 83FD708
 	.4byte 0x0200c000
 
 	.align 2
-gUnknown_083FD70C:: @ 83FD70C
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
-	.4byte sub_811AC64
+sPhase1_Tasks:: @ 83FD70C
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
+	.4byte Phase1Task_TransitionAll
 
 	.align 2
-gBattleTransitionFuncs:: @ 83FD750
-	.4byte sub_811ACB4
-	.4byte sub_811ADAC
-	.4byte sub_811AF44
-	.4byte sub_811B0F0
-	.4byte sub_811B578
-	.4byte sub_811B7E8
-	.4byte sub_811BCBC
-	.4byte sub_811BEA0
-	.4byte sub_811CA5C
-	.4byte sub_811CCDC
-	.4byte sub_811D0B8
-	.4byte sub_811D1C8
-	.4byte sub_811C08C
-	.4byte sub_811C0AC
-	.4byte sub_811C0CC
-	.4byte sub_811C0EC
-	.4byte sub_811C10C
+sPhase2_Tasks:: @ 83FD750
+	.4byte Phase2Task_Transition0
+	.4byte Phase2Task_Transition1
+	.4byte Phase2Task_Transition2
+	.4byte Phase2Task_Transition3
+	.4byte Phase2Task_Transition4
+	.4byte Phase2Task_Transition5
+	.4byte Phase2Task_Transition6
+	.4byte Phase2Task_Transition7
+	.4byte Phase2Task_Transition8
+	.4byte Phase2Task_Transition9
+	.4byte Phase2Task_Transition10
+	.4byte Phase2Task_Transition11
+	.4byte Phase2Task_Transition12
+	.4byte Phase2Task_Transition13
+	.4byte Phase2Task_Transition14
+	.4byte Phase2Task_Transition15
+	.4byte Phase2Task_Transition16
 
 	.align 2
-gUnknown_083FD794:: @ 83FD794
-	.4byte sub_811AB88
-	.4byte sub_811ABD8
-	.4byte sub_811AC0C
-	.4byte sub_811AC34
+sMainTransitionPhases:: @ 83FD794
+	.4byte Transition_Phase1
+	.4byte Transition_WaitForPhase1
+	.4byte Transition_Phase2
+	.4byte Transition_WaitForPhase2
 
 	.align 2
-gUnknown_083FD7A4:: @ 83FD7A4
-	.4byte sub_811ACEC
-	.4byte sub_811AD1C
-	.4byte sub_811AD80
+sPhase2_Transition0_Funcs:: @ 83FD7A4
+	.4byte Phase2_Transition0_Func1
+	.4byte Phase2_Transition0_Func2
+	.4byte Phase2_Transition0_Func3
 
 	.align 2
-gUnknown_083FD7B0:: @ 83FD7B0
-	.4byte sub_811ADE4
-	.4byte sub_811AE70
+sPhase2_Transition1_Funcs:: @ 83FD7B0
+	.4byte Phase2_Transition1_Func1
+	.4byte Phase2_Transition1_Func2
 
 	.align 2
-gUnknown_083FD7B8:: @ 83FD7B8
-	.4byte sub_811AF7C
-	.4byte sub_811B000
+sPhase2_Transition2_Funcs:: @ 83FD7B8
+	.4byte Phase2_Transition2_Func1
+	.4byte Phase2_Transition2_Func2
 
 	.align 2
 gUnknown_083FD7C0:: @ 83FD7C0
