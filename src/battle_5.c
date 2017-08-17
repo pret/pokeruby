@@ -1,4 +1,5 @@
 #include "global.h"
+#include "data2.h"
 #include "battle.h"
 #include "battle_interface.h"
 #include "item.h"
@@ -11,6 +12,7 @@
 #include "rom3.h"
 #include "songs.h"
 #include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
@@ -28,7 +30,7 @@ extern u8 gAbsentBankFlags;
 extern u8 gUnknown_03004344;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
-extern const struct BattleMove gBattleMoves[];
+//extern const struct BattleMove gBattleMoves[];
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 extern struct Window gUnknown_03004210;
@@ -39,6 +41,11 @@ extern MainCallback gPreBattleCallback1;
 extern u8 gHealthboxIDs[];
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_0300434C[];
+extern u8 gUnknown_0202E8F4;
+extern u8 gUnknown_0202E8F5;
+extern u8 gUnknown_02038470[];
+extern u16 gScriptItemId;
+extern u8 gDisplayedStringBattle[];
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
@@ -50,11 +57,15 @@ extern void nullsub_7(u8);
 extern void sub_802E3B4();
 extern void sub_802E220();
 extern void sub_802E2D4();
-extern void sub_802E12C();
+extern void sub_802E12C(s32, const u8 *);
 extern void sub_802E1B0(void);
 extern bool8 IsDoubleBattle();
 extern void sub_804777C();
 extern void sub_8141828();
+extern void sub_8094E20(u8);
+extern void b_link_standby_message(void);
+extern void nullsub_14(void);
+extern void sub_80A6DCC(void);
 
 void PlayerHandleGetAttributes(void);
 void sub_802ECF0(void);
@@ -187,7 +198,10 @@ void sub_802D730(void);
 void sub_802DA9C(u8);
 void sub_802DB6C(u8);
 void sub_802DCB0(u8);
+void sub_802DD10(u8);
 void sub_802DDC4(u8);
+void sub_802DF88(void);
+void sub_802E03C(void);
 
 void nullsub_91(void)
 {
@@ -1052,7 +1066,7 @@ void sub_802DA9C(u8 taskId)
     gTasks[taskId].func = sub_802DB6C;
 }
 
-/*
+#ifdef NONMATCHING
 void sub_802DB6C(u8 taskId)
 {
     if (gTasks[taskId].data[10] < 13)
@@ -1110,4 +1124,331 @@ void sub_802DB6C(u8 taskId)
         }
     }
 }
-*/
+#else
+__attribute__((naked))
+void sub_802DB6C(u8 taskId)
+{
+    asm_unified("push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x8\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    ldr r1, _0802DB98 @ =gTasks\n\
+    lsls r0, 2\n\
+    add r0, r8\n\
+    lsls r0, 3\n\
+    adds r6, r0, r1\n\
+    ldrh r1, [r6, 0x1C]\n\
+    movs r2, 0x1C\n\
+    ldrsh r0, [r6, r2]\n\
+    cmp r0, 0xC\n\
+    bgt _0802DB9C\n\
+    adds r0, r1, 0x1\n\
+    strh r0, [r6, 0x1C]\n\
+    b _0802DC98\n\
+    .align 2, 0\n\
+_0802DB98: .4byte gTasks\n\
+_0802DB9C:\n\
+    ldrb r0, [r6, 0x8]\n\
+    mov r9, r0\n\
+    ldrh r2, [r6, 0xA]\n\
+    mov r10, r2\n\
+    ldrb r7, [r6, 0xC]\n\
+    ldr r5, _0802DC64 @ =gHealthboxIDs\n\
+    adds r5, r7, r5\n\
+    ldrb r1, [r5]\n\
+    adds r0, r7, 0\n\
+    movs r2, 0x1\n\
+    movs r3, 0\n\
+    bl sub_8045C78\n\
+    adds r4, r0, 0\n\
+    lsls r4, 16\n\
+    lsrs r4, 16\n\
+    ldrb r0, [r5]\n\
+    bl sub_8043DFC\n\
+    lsls r4, 16\n\
+    asrs r4, 16\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    cmp r4, r0\n\
+    bne _0802DC98\n\
+    movs r0, 0x21\n\
+    bl m4aSongNumStop\n\
+    movs r0, 0x64\n\
+    mov r1, r9\n\
+    muls r1, r0\n\
+    ldr r0, _0802DC68 @ =gPlayerParty\n\
+    adds r5, r1, r0\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x38\n\
+    bl GetMonData\n\
+    adds r4, r0, 0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x19\n\
+    bl GetMonData\n\
+    str r0, [sp, 0x4]\n\
+    adds r0, r5, 0\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    ldr r3, _0802DC6C @ =gExperienceTables\n\
+    adds r4, 0x1\n\
+    lsls r4, 2\n\
+    ldr r2, _0802DC70 @ =gBaseStats\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 2\n\
+    adds r1, r2\n\
+    ldrb r1, [r1, 0x13]\n\
+    movs r0, 0xCA\n\
+    lsls r0, 1\n\
+    muls r0, r1\n\
+    adds r4, r0\n\
+    adds r4, r3\n\
+    ldr r1, [r4]\n\
+    str r1, [sp]\n\
+    mov r2, r10\n\
+    lsls r0, r2, 16\n\
+    asrs r4, r0, 16\n\
+    ldr r0, [sp, 0x4]\n\
+    adds r0, r4\n\
+    cmp r0, r1\n\
+    blt _0802DC7C\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x19\n\
+    mov r2, sp\n\
+    bl SetMonData\n\
+    adds r0, r5, 0\n\
+    bl CalculateMonStats\n\
+    ldr r2, [sp]\n\
+    add r0, sp, 0x4\n\
+    ldrh r0, [r0]\n\
+    subs r2, r0\n\
+    subs r2, r4, r2\n\
+    ldr r4, _0802DC74 @ =gActiveBank\n\
+    ldrb r5, [r4]\n\
+    strb r7, [r4]\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    movs r0, 0x1\n\
+    movs r1, 0xB\n\
+    bl dp01_build_cmdbuf_x21_a_bb\n\
+    strb r5, [r4]\n\
+    ldr r0, _0802DC78 @ =sub_802DCB0\n\
+    str r0, [r6]\n\
+    b _0802DC98\n\
+    .align 2, 0\n\
+_0802DC64: .4byte gHealthboxIDs\n\
+_0802DC68: .4byte gPlayerParty\n\
+_0802DC6C: .4byte gExperienceTables\n\
+_0802DC70: .4byte gBaseStats\n\
+_0802DC74: .4byte gActiveBank\n\
+_0802DC78: .4byte sub_802DCB0\n\
+_0802DC7C:\n\
+    str r0, [sp, 0x4]\n\
+    add r2, sp, 0x4\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x19\n\
+    bl SetMonData\n\
+    ldr r1, _0802DCA8 @ =gBattleBankFunc\n\
+    lsls r0, r7, 2\n\
+    adds r0, r1\n\
+    ldr r1, _0802DCAC @ =sub_802D90C\n\
+    str r1, [r0]\n\
+    mov r0, r8\n\
+    bl DestroyTask\n\
+_0802DC98:\n\
+    add sp, 0x8\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0802DCA8: .4byte gBattleBankFunc\n\
+_0802DCAC: .4byte sub_802D90C\n");
+}
+#endif
+
+void sub_802DCB0(u8 taskId)
+{
+    u8 bank = gTasks[taskId].data[2];
+    u8 pkmnIndex = gTasks[taskId].data[0];
+    
+    if (IsDoubleBattle() == TRUE && pkmnIndex == gBattlePartyID[bank ^ 2])
+        bank ^= 2;
+    move_anim_start_t4(bank, bank, bank, 0);
+    gTasks[taskId].func = sub_802DD10;
+}
+
+void sub_802DD10(u8 taskId)
+{
+    u8 bank = gTasks[taskId].data[2];
+    
+    if (!ewram17810[bank].unk0_6)
+    {
+        u8 pkmnIndex = gTasks[taskId].data[0];
+        
+        GetMonData(&gPlayerParty[pkmnIndex], MON_DATA_LEVEL);  // Unused return value
+        if (IsDoubleBattle() == TRUE && pkmnIndex == gBattlePartyID[bank ^ 2])
+            sub_8045A5C(gHealthboxIDs[bank ^ 2], &gPlayerParty[pkmnIndex], 0);
+        else
+            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[pkmnIndex], 0);
+        gTasks[taskId].func = sub_802DDC4;
+    }
+}
+
+void sub_802DDC4(u8 taskId)
+{
+    u8 pkmnIndex;
+    u8 bank;
+
+    pkmnIndex = gTasks[taskId].data[0];    
+    GetMonData(&gPlayerParty[pkmnIndex], MON_DATA_LEVEL);  // Unused return value
+    bank = gTasks[taskId].data[2];
+    gBattleBankFunc[bank] = sub_802D90C;
+    DestroyTask(taskId);
+}
+
+void sub_802DE10(void)
+{
+    if (gSprites[gObjectBankIDs[gActiveBank]].pos1.y + gSprites[gObjectBankIDs[gActiveBank]].pos2.y > DISPLAY_HEIGHT)
+    {
+        u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
+        
+        nullsub_9(species);
+        FreeOamMatrix(gSprites[gObjectBankIDs[gActiveBank]].oam.matrixNum);
+        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        PlayerBufferExecCompleted();
+    }
+}
+
+void sub_802DEAC(void)
+{
+    if (!ewram17810[gActiveBank].unk0_6)
+    {
+        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
+        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        PlayerBufferExecCompleted();
+    }
+}
+
+// Duplicate of sub_802D90C
+void sub_802DF18(void)
+{
+    if (gUnknown_03004210.state == 0)
+        PlayerBufferExecCompleted();
+}
+
+void sub_802DF30(void)
+{
+    if (!gPaletteFade.active)
+    {
+        u8 r4;
+        
+        gBattleBankFunc[gActiveBank] = sub_802DF88;
+        r4 = gTasks[gUnknown_0300434C[gActiveBank]].data[0];
+        DestroyTask(gUnknown_0300434C[gActiveBank]);
+        sub_8094E20(r4);
+    }
+}
+
+void sub_802DF88(void)
+{
+    if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
+    {
+        if (gUnknown_0202E8F4 == 1)
+            dp01_build_cmdbuf_x22_a_three_bytes(1, gUnknown_0202E8F5, gUnknown_02038470);
+        else
+            dp01_build_cmdbuf_x22_a_three_bytes(1, 6, NULL);
+        if ((gBattleBufferA[gActiveBank][1] & 0xF) == 1)
+            b_link_standby_message();
+        PlayerBufferExecCompleted();
+    }
+}
+
+void sub_802E004(void)
+{
+    if (!gPaletteFade.active)
+    {
+        gBattleBankFunc[gActiveBank] = sub_802E03C;
+        nullsub_14();
+        sub_80A6DCC();
+    }
+}
+
+void sub_802E03C(void)
+{
+    if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
+    {
+        dp01_build_cmdbuf_x23_aa_0(1, gScriptItemId);
+        PlayerBufferExecCompleted();
+    }
+}
+
+void bx_wait_t1(void)
+{
+    if (!gDoingBattleAnim || !ewram17810[gActiveBank].unk0_6)
+        PlayerBufferExecCompleted();
+}
+
+void bx_blink_t1(void)
+{
+    u8 spriteId = gObjectBankIDs[gActiveBank];
+
+    if (gSprites[spriteId].data1 == 32)
+    {
+        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].invisible = FALSE;
+        gDoingBattleAnim = 0;
+        PlayerBufferExecCompleted();
+    }
+    else
+    {
+        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+            gSprites[spriteId].invisible ^= 1;
+        gSprites[spriteId].data1++;
+    }
+}
+
+void sub_802E12C(s32 a, const u8 *b)
+{
+    struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+    
+    StringCopy(gDisplayedStringBattle, b);
+    StringAppend(gDisplayedStringBattle, gMoveNames[r4->moves[a]]);
+    InitWindow(
+      &gUnknown_03004210,
+      gDisplayedStringBattle,
+      0x300 + a * 20,
+      (a & 1) ? 11 : 1,
+      (a < 2) ? 0x37 : 0x39);
+    sub_8002F44(&gUnknown_03004210);
+}
+
+void sub_802E1B0(void)
+{
+    struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+    s32 i;
+    
+    gUnknown_03004348 = 0;
+    FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
+    for (i = 0; i < 4; i++)
+    {
+        nullsub_7(i);
+        sub_802E12C(i, gUnknown_08400D49);
+        if (r4->moves[i] != 0)
+            gUnknown_03004348++;
+    }
+}
