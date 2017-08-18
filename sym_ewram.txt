@@ -649,13 +649,7 @@ gUnknown_0203927D: @ 203927D
 	.include "src/use_pokeblock.o"
 	.include "src/player_pc.o"
 	.include "src/intro.o"
-
-@ hall_of_fame
-
-	.align 2
-gUnknown_0203931C: @ 203931C
-	.space 0x4
-
+	.include "src/hall_of_fame.o"
 	.include "src/credits.o"
 	.include "src/lottery_corner.o"
 	.include "src/berry_tag_screen.o"
