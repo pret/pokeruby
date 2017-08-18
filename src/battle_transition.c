@@ -41,7 +41,7 @@ struct TransitionData
     s16 field_18;
 };
 
-#define TRANSITION_STRUCT   (*(struct TransitionData *)   (&ewram[0xC000]))
+#define TRANSITION_STRUCT   (*(struct TransitionData *)   (ewram + 0xC000))
 
 // this file's functions
 static void LaunchBattleTransitionTask(u8 transitionID);
@@ -291,7 +291,7 @@ bool8 Phase2_Transition2_Func2(struct Task* task)
     for (i = 0; i < 160; i++, r4 += 4224)
     {
         u16 var = r4 / 256;
-        gUnknown_03004DE0[0][i] = Sin(var, r3) + TRANSITION_STRUCT.field_16;
+        gUnknown_03004DE0[0][i] = TRANSITION_STRUCT.field_16 + Sin(var, r3);
     }
 
     if (!gPaletteFade.active)
