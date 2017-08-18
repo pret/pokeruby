@@ -3,10 +3,12 @@
 #include "battle.h"
 #include "battle_interface.h"
 #include "item.h"
+#include "items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu_cursor.h"
+#include "moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "rom3.h"
@@ -46,6 +48,7 @@ extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_02038470[];
 extern u16 gScriptItemId;
 extern u8 gDisplayedStringBattle[];
+extern const u8 gUnknown_08400CE0[];
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
@@ -53,19 +56,13 @@ extern u8 GetBankByPlayerAI(u8);
 extern void dp11b_obj_free(u8, u8);
 extern void sub_8010520(struct Sprite *);
 extern void sub_8010574(struct Sprite *);
-extern void nullsub_7(u8);
-extern void sub_802E3B4();
-extern void sub_802E220();
-extern void sub_802E2D4();
-extern void sub_802E12C(s32, const u8 *);
-extern void sub_802E1B0(void);
 extern bool8 IsDoubleBattle();
 extern void sub_804777C();
 extern void sub_8141828();
 extern void sub_8094E20(u8);
-extern void b_link_standby_message(void);
 extern void nullsub_14(void);
 extern void sub_80A6DCC(void);
+extern void ReshowBattleScreenAfterMenu(void);
 
 void PlayerHandleGetAttributes(void);
 void sub_802ECF0(void);
@@ -188,8 +185,6 @@ void (*const gPlayerBufferCommands[])(void) =
     nullsub_43,
 };
 
-extern const u8 gUnknown_081FAE80[];
-
 void PlayerBufferRunCommand(void);
 void sub_802C2EC(void);
 void sub_802C68C(void);
@@ -202,6 +197,13 @@ void sub_802DD10(u8);
 void sub_802DDC4(u8);
 void sub_802DF88(void);
 void sub_802E03C(void);
+void sub_802E12C(s32, const u8 *);
+void sub_802E1B0(void);
+void sub_802E220(void);
+void sub_802E2D4(void);
+void sub_802E3B4(u8, int);
+void nullsub_7(u8);
+void b_link_standby_message(void);
 
 void nullsub_91(void)
 {
@@ -248,7 +250,7 @@ void bx_0802E404(void)
 
 void sub_802C098(void)
 {
-    u16 r5 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+    u16 itemId = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
     dp11b_obj_instanciate(gActiveBank, 1, 7, 1);
     dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
@@ -275,7 +277,7 @@ void sub_802C098(void)
         }
         PlayerBufferExecCompleted();
     }
-    else if (gMain.newKeys & 0x20)
+    else if (gMain.newKeys & DPAD_LEFT)
     {
         if (gActionSelectionCursor[gActiveBank] & 1)
         {
@@ -285,7 +287,7 @@ void sub_802C098(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
         }
     }
-    else if (gMain.newKeys & 0x10)
+    else if (gMain.newKeys & DPAD_RIGHT)
     {
         if (!(gActionSelectionCursor[gActiveBank] & 1))
         {
@@ -295,7 +297,7 @@ void sub_802C098(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
         }
     }
-    else if (gMain.newKeys & 0x40)
+    else if (gMain.newKeys & DPAD_UP)
     {
         if (gActionSelectionCursor[gActiveBank] & 2)
         {
@@ -305,7 +307,7 @@ void sub_802C098(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
         }
     }
-    else if (gMain.newKeys & 0x80)
+    else if (gMain.newKeys & DPAD_DOWN)
     {
         if (!(gActionSelectionCursor[gActiveBank] & 2))
         {
@@ -324,9 +326,11 @@ void sub_802C098(void)
         {
             if (gBattleBufferA[gActiveBank][1] == 1)
             {
-                if (r5 > 12)
+                // Add item to bag if it is a ball
+                if (itemId <= ITEM_PREMIER_BALL)
+                    AddBagItem(itemId, 1);
+                else
                     return;
-                AddBagItem(r5, 1);
             }
             PlaySE(SE_SELECT);
             dp01_build_cmdbuf_x21_a_bb(1, 12, 0);
@@ -334,7 +338,7 @@ void sub_802C098(void)
             DestroyMenuCursor();
         }
     }
-    else if (gMain.newKeys & 8)
+    else if (gMain.newKeys & START_BUTTON)
     {
         sub_804454C();
     }
@@ -487,6 +491,8 @@ struct UnknownStruct1
     u8 filler14[0x20-0x14];
 };
 
+const u8 gUnknown_081FAE80[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}");
+
 void sub_802C68C(void)
 {
     u32 r8 = 0;
@@ -498,8 +504,8 @@ void sub_802C68C(void)
 
         PlaySE(SE_SELECT);
 
-        if (r6->moves[gMoveSelectionCursor[gActiveBank]] == 0xAE)
-            r4 = (r6->unk12 != 7 && (r6->unk13 ^ 7)) ? 0x10 : 0;
+        if (r6->moves[gMoveSelectionCursor[gActiveBank]] == MOVE_CURSE)
+            r4 = (r6->unk12 != TYPE_GHOST && (r6->unk13 ^ 7)) ? 0x10 : 0;
         else
             r4 = gBattleMoves[r6->moves[gMoveSelectionCursor[gActiveBank]]].target;
 
@@ -1079,7 +1085,7 @@ void sub_802DB6C(u8 taskId)
         s32 r10 = gTasks[taskId].data[1];  //s16?
         u8 r7 = gTasks[taskId].data[2];
         s16 r4;
-        
+
         r4 = sub_8045C78(r7, gHealthboxIDs[r7], 1, 0);
         sub_8043DFC(gHealthboxIDs[r7]);
         if (r4 == -1)
@@ -1089,7 +1095,7 @@ void sub_802DB6C(u8 taskId)
             u32 sp4;
             u16 r0;
             u32 sp0;
-            
+
             m4aSongNumStop(SE_EXP);
             pkmn = &gPlayerParty[r9];
             r4 = GetMonData(pkmn, MON_DATA_LEVEL);
@@ -1100,7 +1106,7 @@ void sub_802DB6C(u8 taskId)
             {
                 u8 r5;
                 u32 asdf;
-                
+
                 SetMonData(pkmn, MON_DATA_EXP, (u8 *)&sp0);
                 CalculateMonStats(pkmn);
                 //r10 -= sp0 - sp4;
@@ -1283,7 +1289,7 @@ void sub_802DCB0(u8 taskId)
 {
     u8 bank = gTasks[taskId].data[2];
     u8 pkmnIndex = gTasks[taskId].data[0];
-    
+
     if (IsDoubleBattle() == TRUE && pkmnIndex == gBattlePartyID[bank ^ 2])
         bank ^= 2;
     move_anim_start_t4(bank, bank, bank, 0);
@@ -1293,11 +1299,11 @@ void sub_802DCB0(u8 taskId)
 void sub_802DD10(u8 taskId)
 {
     u8 bank = gTasks[taskId].data[2];
-    
+
     if (!ewram17810[bank].unk0_6)
     {
         u8 pkmnIndex = gTasks[taskId].data[0];
-        
+
         GetMonData(&gPlayerParty[pkmnIndex], MON_DATA_LEVEL);  // Unused return value
         if (IsDoubleBattle() == TRUE && pkmnIndex == gBattlePartyID[bank ^ 2])
             sub_8045A5C(gHealthboxIDs[bank ^ 2], &gPlayerParty[pkmnIndex], 0);
@@ -1312,7 +1318,7 @@ void sub_802DDC4(u8 taskId)
     u8 pkmnIndex;
     u8 bank;
 
-    pkmnIndex = gTasks[taskId].data[0];    
+    pkmnIndex = gTasks[taskId].data[0];
     GetMonData(&gPlayerParty[pkmnIndex], MON_DATA_LEVEL);  // Unused return value
     bank = gTasks[taskId].data[2];
     gBattleBankFunc[bank] = sub_802D90C;
@@ -1324,7 +1330,7 @@ void sub_802DE10(void)
     if (gSprites[gObjectBankIDs[gActiveBank]].pos1.y + gSprites[gObjectBankIDs[gActiveBank]].pos2.y > DISPLAY_HEIGHT)
     {
         u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
-        
+
         nullsub_9(species);
         FreeOamMatrix(gSprites[gObjectBankIDs[gActiveBank]].oam.matrixNum);
         DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
@@ -1356,7 +1362,7 @@ void sub_802DF30(void)
     if (!gPaletteFade.active)
     {
         u8 r4;
-        
+
         gBattleBankFunc[gActiveBank] = sub_802DF88;
         r4 = gTasks[gUnknown_0300434C[gActiveBank]].data[0];
         DestroyTask(gUnknown_0300434C[gActiveBank]);
@@ -1425,7 +1431,7 @@ void bx_blink_t1(void)
 void sub_802E12C(s32 a, const u8 *b)
 {
     struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
-    
+
     StringCopy(gDisplayedStringBattle, b);
     StringAppend(gDisplayedStringBattle, gMoveNames[r4->moves[a]]);
     InitWindow(
@@ -1441,7 +1447,7 @@ void sub_802E1B0(void)
 {
     struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
     s32 i;
-    
+
     gUnknown_03004348 = 0;
     FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
     for (i = 0; i < 4; i++)
@@ -1450,5 +1456,124 @@ void sub_802E1B0(void)
         sub_802E12C(i, gUnknown_08400D49);
         if (r4->moves[i] != 0)
             gUnknown_03004348++;
+    }
+}
+
+void sub_802E220(void)
+{
+    if (gBattleBufferA[gActiveBank][2] != 1)
+    {
+        struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+        u8 *str = gDisplayedStringBattle;
+
+        str = StringCopy(str, gUnknown_08400D49);
+        str[0] = EXT_CTRL_CODE_BEGIN;
+        str[1] = 0x11;
+        str[2] = 2;
+        str += 3;
+        str[0] = EXT_CTRL_CODE_BEGIN;
+        str[1] = 0x14;
+        str[2] = 6;
+        str += 3;
+        str = ConvertIntToDecimalStringN(str, r4->pp[gMoveSelectionCursor[gActiveBank]], 1, 2);
+        *str++ = CHAR_SLASH;
+        ConvertIntToDecimalStringN(str, r4->unkC[gMoveSelectionCursor[gActiveBank]], 1, 2);
+        InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
+        sub_8002F44(&gUnknown_03004210);
+    }
+}
+
+extern const u8 gUnknown_08400D52[];
+extern const u8 gTypeNames[][7];
+
+void sub_802E2D4(void)
+{
+    if (gBattleBufferA[gActiveBank][2] == 1)
+    {
+        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        InitWindow(&gUnknown_03004210, gUnknown_08400D52, 0x290, 0x13, 0x37);
+    }
+    else
+    {
+        struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+        u8 *str = gDisplayedStringBattle;
+
+        str = StringCopy(str, gUnknown_08400D49);
+        StringCopy(str, gTypeNames[gBattleMoves[r4->moves[gMoveSelectionCursor[gActiveBank]]].type]);
+        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
+        InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
+    }
+    sub_8002F44(&gUnknown_03004210);
+}
+
+const u8 gUnknown_081FAE89[][2] =
+{
+    { 8, 120},
+    {88, 120},
+    { 8, 136},
+    {88, 136},
+};
+
+const u8 gUnknown_081FAE91[][2] =
+{
+    {144, 120},
+    {190, 120},
+    {144, 136},
+    {190, 136},
+    { 72,  72},
+    { 32,  90},
+    { 80,  80},
+    { 80,  88},
+};
+
+void sub_802E3B4(u8 a, int unused)
+{
+    sub_814A958(0x48);
+    sub_814A880(gUnknown_081FAE89[a][0], gUnknown_081FAE89[a][1]);
+}
+
+void nullsub_7(u8 a)
+{
+}
+
+void sub_802E3E4(u8 a, int unused)
+{
+    sub_814A958(0x2A);
+    sub_814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
+}
+
+void nullsub_8(u8 a)
+{
+}
+
+void sub_802E414(void)
+{
+    SetMainCallback2(ReshowBattleScreenAfterMenu);
+}
+
+void sub_802E424(void)
+{
+    SetMainCallback2(ReshowBattleScreenAfterMenu);
+}
+
+void sub_802E434(void)
+{
+    if (!ewram17810[gActiveBank].unk0_4)
+        PlayerBufferExecCompleted();
+}
+
+void sub_802E460(void)
+{
+    if (!ewram17810[gActiveBank].unk0_5)
+        PlayerBufferExecCompleted();
+}
+
+void b_link_standby_message(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        gUnknown_030042A4 = 0;
+        gUnknown_030042A0 = 0;
+        sub_8002EB0(&gUnknown_03004210, gUnknown_08400CE0, 0x90, 2, 15);
     }
 }

@@ -3,25 +3,6 @@
 
 	.section .rodata
 
-gUnknown_081FAE80:: @ 81FAE80
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}$"
-
-gUnknown_081FAE89:: @ 81FAE89
-	.byte  8, 120
-	.byte 88, 120
-	.byte  8, 136
-	.byte 88, 136
-
-gUnknown_081FAE91:: @ 81FAE91
-	.byte 144, 120
-	.byte 190, 120
-	.byte 144, 136
-	.byte 190, 136
-	.byte  72,  72
-	.byte  32,  90
-	.byte  80,  80
-	.byte  80,  88
-
 	.align 2
 gUnknown_081FAEA4:: @ 81FAEA4
 	obj_tiles gSmokescreenImpactTiles, 0x180, 55019
