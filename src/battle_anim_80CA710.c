@@ -69,7 +69,11 @@ void sub_80CD8F8(struct Sprite* sprite);
 void sub_80CD91C(struct Sprite* sprite);
 void sub_80CD9B8(struct Sprite* sprite);
 void sub_80CD9D4(struct Sprite* sprite);
+void sub_80CDE78(struct Sprite* sprite);
+void sub_80CDEB0(struct Sprite* sprite);
 void sub_80CDEC0(struct Sprite* sprite);
+void sub_80CDF70(struct Sprite* sprite);
+void sub_80CE000(struct Sprite* sprite);
 
 s16 sub_80CC338(struct Sprite* sprite);
 
@@ -1168,14 +1172,14 @@ void sub_80CBB60(struct Sprite* sprite)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80CBBF0(struct Sprite* sprite)
 {
     int a;
     int b;
-    if(sprite->data0 == 0)
+
+    if (sprite->data0 == 0)
     {
-        if(!IsContest())
+        if (!IsContest())
         {
             sprite->data1 = gBattleAnimArgs[1];
             sprite->pos1.x = 0x78;
@@ -1183,14 +1187,13 @@ void sub_80CBBF0(struct Sprite* sprite)
         else
         {
             a = gBattleAnimArgs[1] - 32;
-            b = a;
-            if(a < 0)
-            {
-                b += gBattleAnimArgs[1] + 0xDF;
-            }
-            sprite->data1 = b - a;
+            if (a < 0)
+                b = gBattleAnimArgs[1] + 0xDF;
+            else
+                b = a;
+            sprite->data1 = a - ((b >> 8) << 8);
             sprite->pos1.x = 0x46;
-            
+
         }
         sprite->pos1.y = gBattleAnimArgs[0];
         sprite->data2 = gBattleAnimArgs[0];
@@ -1198,103 +1201,12 @@ void sub_80CBBF0(struct Sprite* sprite)
         sprite->pos2.x = Cos(sprite->data1, 0x3C);
         sprite->pos2.y = Sin(sprite->data1, 20);
         sprite->callback = sub_80CBC8C;
-        if((sprite->data1 - 1) <= 0xBE)
-        {
-            sprite->subpriority = 30;
-        }
+        if (sprite->data1 > 0 && sprite->data1 < 0xC0)
+            sprite->subpriority = 31;
         else
-        {
-            sprite->subpriority = 28;
-        }
+            sprite->subpriority = 29;
     }
 }
-#else
-__attribute__((naked))
-void sub_80CBBF0(struct Sprite* sprite)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r4, r0, 0\n\
-    movs r1, 0x2E\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    bne _080CBC84\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080CBC18\n\
-    ldr r0, _080CBC14 @ =gBattleAnimArgs\n\
-    ldrh r1, [r0, 0x2]\n\
-    strh r1, [r4, 0x30]\n\
-    movs r1, 0x78\n\
-    strh r1, [r4, 0x20]\n\
-    adds r5, r0, 0\n\
-    b _080CBC3A\n\
-    .align 2, 0\n\
-_080CBC14: .4byte gBattleAnimArgs\n\
-_080CBC18:\n\
-    ldr r0, _080CBC74 @ =gBattleAnimArgs\n\
-    movs r1, 0x2\n\
-    ldrsh r3, [r0, r1]\n\
-    adds r1, r3, 0\n\
-    subs r1, 0x20\n\
-    adds r2, r1, 0\n\
-    adds r5, r0, 0\n\
-    cmp r1, 0\n\
-    bge _080CBC2E\n\
-    adds r2, r3, 0\n\
-    adds r2, 0xDF\n\
-_080CBC2E:\n\
-    asrs r0, r2, 8\n\
-    lsls r0, 8\n\
-    subs r0, r1, r0\n\
-    strh r0, [r4, 0x30]\n\
-    movs r0, 0x46\n\
-    strh r0, [r4, 0x20]\n\
-_080CBC3A:\n\
-    ldrh r0, [r5]\n\
-    strh r0, [r4, 0x22]\n\
-    strh r0, [r4, 0x32]\n\
-    movs r0, 0x14\n\
-    strh r0, [r4, 0x36]\n\
-    movs r1, 0x30\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r1, 0x3C\n\
-    bl Cos\n\
-    strh r0, [r4, 0x24]\n\
-    movs r1, 0x30\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r1, 0x14\n\
-    bl Sin\n\
-    strh r0, [r4, 0x26]\n\
-    ldr r0, _080CBC78 @ =sub_80CBC8C\n\
-    str r0, [r4, 0x1C]\n\
-    ldrh r0, [r4, 0x30]\n\
-    subs r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xBE\n\
-    bhi _080CBC7C\n\
-    adds r1, r4, 0\n\
-    adds r1, 0x43\n\
-    movs r0, 0x1F\n\
-    b _080CBC82\n\
-    .align 2, 0\n\
-_080CBC74: .4byte gBattleAnimArgs\n\
-_080CBC78: .4byte sub_80CBC8C\n\
-_080CBC7C:\n\
-    adds r1, r4, 0\n\
-    adds r1, 0x43\n\
-    movs r0, 0x1D\n\
-_080CBC82:\n\
-    strb r0, [r1]\n\
-_080CBC84:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80CBC8C(struct Sprite* sprite)
 {
@@ -1370,211 +1282,30 @@ void sub_80CBDB0(struct Sprite* sprite)
 	sprite->data0++;
 }
 
-#ifdef NONMATCHING
 void sub_80CBDF4(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
-	task->data[4] = sub_8079E90(gBattleAnimEnemyMonIndex) - 1;
-	task->data[6] = sub_8077ABC(gBattleAnimEnemyMonIndex, 2);
-	task->data[7] = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
-	task->data[10] = sub_807A100(gBattleAnimEnemyMonIndex, 1);
-	task->data[11] = sub_807A100(gBattleAnimEnemyMonIndex, 0);
-	if(GetBankSide(gBattleAnimEnemyMonIndex) == 1)
-	{
-	    task->data[5] = 1;
-	}
-	else
-	{
-	    task->data[5] = -1;
-	}
-	task->data[9] = 0x38 - (task->data[5] * 64);
-	task->data[8] = task->data[7] - task->data[9] + task->data[6];
-	task->data[2] = CreateSprite(&gSpriteTemplate_83D6884, task->data[8], task->data[9], task->data[4]);
-	if(task->data[2] == 0x40) DestroyAnimVisualTask(taskId);
-	gSprites[task->data[2]].data0 = 10;
-	gSprites[task->data[2]].data1 = task->data[8];
-	gSprites[task->data[2]].data2 = task->data[6] - (((task->data[10] / 2) + 10) * task->data[5]);
-	gSprites[task->data[2]].data3 = task->data[9];
-	gSprites[task->data[2]].data4 = ((task->data[11] / 2) + 10) * task->data[5] + task->data[7];
-	gSprites[task->data[2]].data5 = sub_80CC338(&gSprites[task->data[2]]);
-	sub_80786EC(&gSprites[task->data[2]]);
-	task->func = sub_80CBF5C;
+    struct Task *task = &gTasks[taskId];
+
+    task->data[4] = sub_8079E90(gBattleAnimEnemyMonIndex) - 1;
+    task->data[6] = sub_8077ABC(gBattleAnimEnemyMonIndex, 2);
+    task->data[7] = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
+    task->data[10] = sub_807A100(gBattleAnimEnemyMonIndex, 1);
+    task->data[11] = sub_807A100(gBattleAnimEnemyMonIndex, 0);
+    task->data[5] = (GetBankSide(gBattleAnimEnemyMonIndex) == 1) ? 1 : -1;
+    task->data[9] = 0x38 - (task->data[5] * 64);
+    task->data[8] = task->data[7] - task->data[9] + task->data[6];
+    task->data[2] = CreateSprite(&gSpriteTemplate_83D6884, task->data[8], task->data[9], task->data[4]);
+    if (task->data[2] == 0x40)
+        DestroyAnimVisualTask(taskId);
+    gSprites[task->data[2]].data0 = 10;
+    gSprites[task->data[2]].data1 = task->data[8];
+    gSprites[task->data[2]].data2 = task->data[6] - (task->data[10] / 2 + 10) * task->data[5];
+    gSprites[task->data[2]].data3 = task->data[9];
+    gSprites[task->data[2]].data4 = task->data[7] + (task->data[11] / 2 + 10) * task->data[5];
+    gSprites[task->data[2]].data5 = sub_80CC338(&gSprites[task->data[2]]);
+    sub_80786EC(&gSprites[task->data[2]]);
+    task->func = sub_80CBF5C;
 }
-#else
-__attribute__((naked))
-void sub_80CBDF4(u8 taskId)
-{
-    asm(".syntax unified\n\
- 	push {r4-r6,lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r6, r0, 0\n\
-	lsls r0, r6, 2\n\
-	adds r0, r6\n\
-	lsls r0, 3\n\
-	ldr r1, _080CBF48 @ =gTasks\n\
-	adds r5, r0, r1\n\
-	ldr r4, _080CBF4C @ =gBattleAnimEnemyMonIndex\n\
-	ldrb r0, [r4]\n\
-	bl sub_8079E90\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	subs r0, 0x1\n\
-	strh r0, [r5, 0x10]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x2\n\
-	bl sub_8077ABC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	strh r0, [r5, 0x14]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x3\n\
-	bl sub_8077ABC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	strh r0, [r5, 0x16]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x1\n\
-	bl sub_807A100\n\
-	strh r0, [r5, 0x1C]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0\n\
-	bl sub_807A100\n\
-	strh r0, [r5, 0x1E]\n\
-	ldrb r0, [r4]\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	movs r2, 0x1\n\
-	negs r2, r2\n\
-	adds r1, r2, 0\n\
-	cmp r0, 0x1\n\
-	bne _080CBE5C\n\
-	movs r1, 0x1\n\
-_080CBE5C:\n\
-	strh r1, [r5, 0x12]\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r5, r3]\n\
-	lsls r0, 6\n\
-	movs r1, 0x38\n\
-	subs r1, r0\n\
-	strh r1, [r5, 0x1A]\n\
-	ldrh r0, [r5, 0x16]\n\
-	subs r0, r1\n\
-	ldrh r1, [r5, 0x14]\n\
-	adds r0, r1\n\
-	strh r0, [r5, 0x18]\n\
-	ldr r0, _080CBF50 @ =gSpriteTemplate_83D6884\n\
-	movs r2, 0x18\n\
-	ldrsh r1, [r5, r2]\n\
-	movs r3, 0x1A\n\
-	ldrsh r2, [r5, r3]\n\
-	ldrb r3, [r5, 0x10]\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	strh r0, [r5, 0xC]\n\
-	cmp r0, 0x40\n\
-	bne _080CBE94\n\
-	adds r0, r6, 0\n\
-	bl DestroyAnimVisualTask\n\
-_080CBE94:\n\
-	ldr r4, _080CBF54 @ =gSprites\n\
-	movs r0, 0xC\n\
-	ldrsh r1, [r5, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	movs r1, 0xA\n\
-	strh r1, [r0, 0x2E]\n\
-	movs r2, 0xC\n\
-	ldrsh r1, [r5, r2]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	ldrh r1, [r5, 0x18]\n\
-	strh r1, [r0, 0x30]\n\
-	movs r3, 0xC\n\
-	ldrsh r0, [r5, r3]\n\
-	lsls r2, r0, 4\n\
-	adds r2, r0\n\
-	lsls r2, 2\n\
-	adds r2, r4\n\
-	movs r1, 0x1C\n\
-	ldrsh r0, [r5, r1]\n\
-	lsrs r1, r0, 31\n\
-	adds r0, r1\n\
-	asrs r0, 1\n\
-	adds r0, 0xA\n\
-	movs r3, 0x12\n\
-	ldrsh r1, [r5, r3]\n\
-	muls r1, r0\n\
-	ldrh r0, [r5, 0x14]\n\
-	subs r0, r1\n\
-	strh r0, [r2, 0x32]\n\
-	movs r0, 0xC\n\
-	ldrsh r1, [r5, r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	ldrh r1, [r5, 0x1A]\n\
-	strh r1, [r0, 0x34]\n\
-	movs r1, 0xC\n\
-	ldrsh r0, [r5, r1]\n\
-	lsls r1, r0, 4\n\
-	adds r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r4\n\
-	movs r2, 0x1E\n\
-	ldrsh r0, [r5, r2]\n\
-	lsrs r2, r0, 31\n\
-	adds r0, r2\n\
-	asrs r0, 1\n\
-	adds r0, 0xA\n\
-	movs r3, 0x12\n\
-	ldrsh r2, [r5, r3]\n\
-	muls r0, r2\n\
-	ldrh r2, [r5, 0x16]\n\
-	adds r0, r2\n\
-	strh r0, [r1, 0x36]\n\
-	movs r3, 0xC\n\
-	ldrsh r1, [r5, r3]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	bl sub_80CC338\n\
-	movs r1, 0xC\n\
-	ldrsh r2, [r5, r1]\n\
-	lsls r1, r2, 4\n\
-	adds r1, r2\n\
-	lsls r1, 2\n\
-	adds r1, r4\n\
-	strh r0, [r1, 0x38]\n\
-	movs r2, 0xC\n\
-	ldrsh r1, [r5, r2]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	bl sub_80786EC\n\
-	ldr r0, _080CBF58 @ =sub_80CBF5C\n\
-	str r0, [r5]\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080CBF48: .4byte gTasks\n\
-_080CBF4C: .4byte gBattleAnimEnemyMonIndex\n\
-_080CBF50: .4byte gSpriteTemplate_83D6884\n\
-_080CBF54: .4byte gSprites\n\
-_080CBF58: .4byte sub_80CBF5C\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80CBF5C(u8 taskId)
 {
@@ -3092,17 +2823,230 @@ void sub_80CDD20(u8 taskId)
     }
 }
 
-/*  void sub_80CDD74(struct Sprite* sprite)
+void sub_80CDD74(struct Sprite* sprite)
 {
-    u8 bank;
-    if (!gBattleAnimArgs[0])
-        bank = gBattleAnimPlayerMonIndex;
+    if (gBattleAnimArgs[0] == 0)
+    {
+        sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 2) + gBattleAnimArgs[1];
+        sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 3) + gBattleAnimArgs[2];
+    }
     else
-        bank = gBattleAnimEnemyMonIndex;
-    sprite->pos1.x = sub_8077ABC(bank, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = sub_8077ABC(bank, 3) + gBattleAnimArgs[2];
+    {
+        sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + gBattleAnimArgs[1];
+        sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3) + gBattleAnimArgs[2];
+    }
     sprite->data0 = 0;
     sprite->data1 = 0;
     oamt_set_x3A_32(sprite, sub_80CDEC0);
     sprite->callback = sub_8078600;
-} */
+}
+
+void sub_80CDDDC(struct Sprite* sprite)
+{
+    sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + 0xFFD0;
+    sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
+    oamt_set_x3A_32(sprite, sub_80CDE78);
+    sprite->callback = sub_8078600;
+}
+
+void sub_80CDE24(struct Sprite* sprite)
+{
+    sprite->pos1.x = sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + 0xFFD0 + gBattleAnimArgs[0];
+    sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3);
+    StartSpriteAnim(sprite, 1);
+    sprite->data0 = 0;
+    sprite->data1 = 0;
+    sprite->callback = sub_80CDEC0;
+}
+
+void sub_80CDE78(struct Sprite* sprite)
+{
+    if (++sprite->data0 > 8)
+    {
+        sprite->data0 = 12;
+        sprite->data1 = 8;
+        sprite->data2 = 0;
+        oamt_set_x3A_32(sprite, sub_80CDEB0);
+        sprite->callback = sub_8078364;
+    }
+}
+
+void sub_80CDEB0(struct Sprite* sprite)
+{
+    sprite->data0 = 0;
+    sprite->data1 = 0;
+    sprite->callback = sub_80CDEC0;
+}
+
+void sub_80CDEC0(struct Sprite* sprite)
+{
+    if(++sprite->data0 > 1)
+    {
+        sprite->data0 = 0;
+        sprite->invisible = !sprite->invisible;
+        if(++sprite->data1 > 8)
+            move_anim_8072740(sprite);
+    }
+}
+
+void sub_80CDF0C(struct Sprite* sprite)
+{
+    if (gBattleAnimArgs[0] == 0)
+    {
+        sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 1) + gBattleAnimArgs[2];
+    }
+    else
+    {
+        sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 1) + gBattleAnimArgs[2];
+    }
+    sprite->data0 = 0;
+    sprite->data1 = gBattleAnimArgs[3];
+    sprite->callback = sub_80CDF70;
+}
+
+void sub_80CDF70(struct Sprite* sprite)
+{
+    if (++sprite->data0 > sprite->data1)
+    {
+        sprite->data0 = 0;
+        sprite->pos1.y--;
+    }
+    sprite->pos1.y -= sprite->data0;
+    if (sprite->animEnded)
+        move_anim_8072740(sprite);
+}
+
+void sub_80CDFB0(struct Sprite* sprite)
+{
+    sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 2);
+    sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 3) - 12;
+    sprite->data0 = 0;
+    sprite->data1 = 2;
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+    sprite->data4 = 0;
+    sprite->data5 = sub_8076F98(-0x40);
+    sprite->callback = sub_80CE000;
+}
+
+#ifdef NONMATCHING
+void sub_80CE000(struct Sprite* sprite)
+{
+    if (++sprite->data0 >= sprite->data1)
+    {
+        sprite->invisible = !sprite->invisible;
+        if (!sprite->invisible && !(++sprite->data4 & 1))
+            PlaySE12WithPanning(0xC2, sprite->data5);
+        sprite->data0 = 0;
+        if (++sprite->data2 > 1)
+        {
+            sprite->data2 = 0;
+            sprite->data1++;
+        }
+    }
+    if (sprite->animEnded && sprite->data1 > 16 && sprite->invisible)
+        move_anim_8072740(sprite);
+}
+#else
+__attribute__((naked))
+void sub_80CE000(struct Sprite* sprite)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+	adds r4, r0, 0\n\
+	ldrh r0, [r4, 0x2E]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x2E]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	movs r2, 0x30\n\
+	ldrsh r1, [r4, r2]\n\
+	cmp r0, r1\n\
+	blt _080CE06C\n\
+	adds r3, r4, 0\n\
+	adds r3, 0x3E\n\
+	ldrb r2, [r3]\n\
+	lsrs r1, r2, 2\n\
+	movs r0, 0x1\n\
+	eors r1, r0\n\
+	ands r1, r0\n\
+	lsls r1, 2\n\
+	movs r0, 0x5\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3]\n\
+	movs r1, 0x4\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _080CE052\n\
+	ldrh r0, [r4, 0x36]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x36]\n\
+	movs r1, 0x1\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _080CE052\n\
+	ldrh r1, [r4, 0x38]\n\
+	lsls r1, 24\n\
+	asrs r1, 24\n\
+	movs r0, 0xC2\n\
+	bl PlaySE12WithPanning\n\
+_080CE052:\n\
+	movs r1, 0\n\
+	strh r1, [r4, 0x2E]\n\
+	ldrh r0, [r4, 0x32]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x32]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0x1\n\
+	ble _080CE06C\n\
+	strh r1, [r4, 0x32]\n\
+	ldrh r0, [r4, 0x30]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x30]\n\
+_080CE06C:\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x3F\n\
+	ldrb r1, [r0]\n\
+	movs r0, 0x10\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080CE096\n\
+	movs r1, 0x30\n\
+	ldrsh r0, [r4, r1]\n\
+	cmp r0, 0x10\n\
+	ble _080CE096\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x3E\n\
+	ldrb r1, [r0]\n\
+	movs r0, 0x4\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080CE096\n\
+	adds r0, r4, 0\n\
+	bl move_anim_8072740\n\
+_080CE096:\n\
+	pop {r4}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_80CE09C(struct Sprite* sprite)
+{
+    if (sprite->data0 == 0)
+    {
+        sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 0) + gBattleAnimArgs[0];
+        sprite->pos1.y = sub_8077ABC(gBattleAnimPlayerMonIndex, 1) + gBattleAnimArgs[1];
+        if (IsContest())
+            sprite->pos1.y += 10;
+        sprite->data0++;
+    }
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+        move_anim_8072740(sprite);
+}
