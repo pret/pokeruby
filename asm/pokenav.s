@@ -6,69 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EDE70
-sub_80EDE70: @ 80EDE70
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, _080EDE8C @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r4, r0, r1
-	ldrh r2, [r4]
-	cmp r2, 0x1
-	beq _080EDEAE
-	cmp r2, 0x1
-	bgt _080EDE90
-	cmp r2, 0
-	beq _080EDE96
-	b _080EDED6
-	.align 2, 0
-_080EDE8C: .4byte 0x02000000
-_080EDE90:
-	cmp r2, 0x2
-	beq _080EDED0
-	b _080EDED6
-_080EDE96:
-	movs r1, 0xC2
-	lsls r1, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x1
-	negs r1, r1
-	str r2, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _080EDEC4
-_080EDEAE:
-	ldr r0, _080EDECC @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EDED6
-	bl sub_80F3130
-	movs r0, 0x2
-	bl sub_80F2D6C
-_080EDEC4:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _080EDED6
-	.align 2, 0
-_080EDECC: .4byte gPaletteFade
-_080EDED0:
-	ldr r0, _080EDEE0 @ =sub_80EC00C
-	bl sub_80EBDBC
-_080EDED6:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EDEE0: .4byte sub_80EC00C
-	thumb_func_end sub_80EDE70
-
 	thumb_func_start sub_80EDEE4
 sub_80EDEE4: @ 80EDEE4
 	push {r4,lr}

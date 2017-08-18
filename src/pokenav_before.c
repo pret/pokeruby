@@ -1907,3 +1907,22 @@ void sub_80EDDBC() {
 
 	}
 }
+
+void sub_80EDE70() {
+	switch (ewram0.var304) {
+	case 0:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gPaletteFade.active) return;
+		sub_80F3130();
+		sub_80F2D6C(0x2);
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80EBDBC(&sub_80EC00C);
+		break;
+	}
+
+}
