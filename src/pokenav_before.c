@@ -1302,3 +1302,568 @@ void sub_80ED620() {
 	}
 
 }
+
+#if 0
+
+void sub_80F4F78();
+void sub_80F0174(u32);
+bool8 sub_80F4FB4();
+void sub_80F3668();
+bool8 sub_80F7500();
+void sub_80F3698();
+bool8 sub_80F5038();
+void sub_80F2F48();
+void sub_80F3CE8();
+void sub_80F3614();
+void sub_80F357C();
+
+void sub_80ED858() {
+	u8 var1;
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F4F78();
+		sub_80F5B38();
+		ewram0.var304 = 0x1;
+		break;
+	case 1:
+		if (sub_80F5B50()) return;
+		ewram0.var304 = 0x2;
+		break;
+	case 2:
+		sub_80F0174(0x1);
+		ewram0.var304 = 0x3;
+		break;
+	case 3:
+		if (sub_80F4FB4()) return;
+		sub_80F3C94();
+		sub_80F3D00();
+		ewram0.var304 = 0x4;
+		break;
+	case 4:
+		break;
+//		if (!(gMain.heldKeys & 0x40) && !(gMain.heldKeys & 0x80) && (gMain.newKeys & B_BUTTON))  {
+//			PlaySE(0x5);
+//			sub_80F4FDC();
+//			move_anim_execute();
+//			ewram0.var304 = 0x9;
+//		}
+//		else if (!ewram0.var87CB && !(gMain.heldKeys & 0x80) && (gMain.newKeys & B_BUTTON))  {
+//			PlaySE(0x5);
+//			sub_80F4FDC();
+//			move_anim_execute();
+//			ewram0.var304 = 0x9;
+//		}
+//		else if (ewram0.var87DC) {
+//			if (gMain.heldKeys & 0x80)
+//
+//		}
+	case 5:
+		if (gpu_sync_bg_show()) return;
+		sub_80F3D00();
+		ewram0.var304 = 0x6;
+		break;
+	case 6:
+		if (sub_8055870()) return;
+		ewram0.var304 = 0x4;
+		break;
+	case 7:
+		sub_80EEFBC(0x3);
+		sub_80F3668();
+		ewram0.var304 = 0x8;
+		break;
+	case 8:
+		if (sub_80F7500()) return;
+		sub_80EEFBC(0x2);
+		sub_80F3698();
+		ewram0.var304 = 0x4;
+		break;
+	case 9:
+		if (!(var1 = sub_80F5038())) {
+			sub_80F0174(0);
+			sub_80F2F48();
+			BeginNormalPaletteFade(ewram0.var308, -1, 0x0, 0x10, var1);
+			ewram0.var304 = 0xB;
+		}
+		break;
+	case 0xA:
+		if (gPaletteFade.active) return;
+		sub_80F3CE8();
+		sub_80F5BDC();
+		if (!ewram0.var76aa) {
+			sub_80F357C();
+			sub_80F2D6C(0x1);
+			sub_80F2D6C(0x6);
+			sub_80EBDBC(&sub_80ECA10);
+		}
+		else {
+			sub_80F3614();
+			sub_80EBDBC(&sub_80ED3D0);
+		}
+		break;
+	}
+
+}
+#else
+__attribute__((naked))
+void sub_80ED858() {
+	asm_unified("push {r4,r5,lr}\n\
+	sub sp, 0x4\n\
+	ldr r1, _080ED878 @ =0x02000000\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r0, r1, r2\n\
+	ldrh r0, [r0]\n\
+	adds r5, r1, 0\n\
+	cmp r0, 0xB\n\
+	bls _080ED86E\n\
+	b _080EDB7A\n\
+_080ED86E:\n\
+	lsls r0, 2\n\
+	ldr r1, _080ED87C @ =_080ED880\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_080ED878: .4byte 0x02000000\n\
+_080ED87C: .4byte _080ED880\n\
+	.align 2, 0\n\
+_080ED880:\n\
+	.4byte _080ED8B0\n\
+	.4byte _080ED8CC\n\
+	.4byte _080ED8EC\n\
+	.4byte _080ED904\n\
+	.4byte _080ED91A\n\
+	.4byte _080EDA68\n\
+	.4byte _080EDA8C\n\
+	.4byte _080EDAA4\n\
+	.4byte _080EDAC0\n\
+	.4byte _080EDAE8\n\
+	.4byte _080EDB7A\n\
+	.4byte _080EDB28\n\
+_080ED8B0:\n\
+	bl sub_80F4F78\n\
+	bl sub_80F5B38\n\
+	ldr r0, _080ED8C8 @ =0x02000000\n\
+	movs r4, 0xC1\n\
+	lsls r4, 2\n\
+	adds r0, r4\n\
+	movs r1, 0x1\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080ED8C8: .4byte 0x02000000\n\
+_080ED8CC:\n\
+	bl sub_80F5B50\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080ED8D8\n\
+	b _080EDB7A\n\
+_080ED8D8:\n\
+	ldr r0, _080ED8E8 @ =0x02000000\n\
+	movs r1, 0xC1\n\
+	lsls r1, 2\n\
+	adds r0, r1\n\
+	movs r1, 0x2\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080ED8E8: .4byte 0x02000000\n\
+_080ED8EC:\n\
+	movs r0, 0x1\n\
+	bl sub_80F0174\n\
+	ldr r0, _080ED900 @ =0x02000000\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r0, r2\n\
+	movs r1, 0x3\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080ED900: .4byte 0x02000000\n\
+_080ED904:\n\
+	bl sub_80F4FB4\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080ED910\n\
+	b _080EDB7A\n\
+_080ED910:\n\
+	bl sub_80F3C94\n\
+	bl sub_80F3D00\n\
+	b _080EDAD4\n\
+_080ED91A:\n\
+	ldr r2, _080ED960 @ =gMain\n\
+	ldrh r1, [r2, 0x2C]\n\
+	movs r0, 0x40\n\
+	ands r0, r1\n\
+	adds r3, r2, 0\n\
+	cmp r0, 0\n\
+	beq _080ED970\n\
+	ldr r1, _080ED964 @ =0x000087cb\n\
+	adds r0, r5, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _080ED970\n\
+	ldr r2, _080ED968 @ =0x000076aa\n\
+	adds r0, r5, r2\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _080ED948\n\
+	ldr r4, _080ED96C @ =0x000087dc\n\
+	adds r0, r5, r4\n\
+	movs r1, 0\n\
+	ldrsh r0, [r0, r1]\n\
+	cmp r0, 0\n\
+	beq _080ED970\n\
+_080ED948:\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0x1\n\
+	bl sub_80F5060\n\
+	bl move_anim_execute\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r1, r5, r2\n\
+	b _080ED9B8\n\
+	.align 2, 0\n\
+_080ED960: .4byte gMain\n\
+_080ED964: .4byte 0x000087cb\n\
+_080ED968: .4byte 0x000076aa\n\
+_080ED96C: .4byte 0x000087dc\n\
+_080ED970:\n\
+	ldrh r1, [r3, 0x2C]\n\
+	movs r0, 0x80\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080ED9CC\n\
+	ldr r4, _080ED9C0 @ =0x000087cb\n\
+	adds r0, r5, r4\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _080ED9CC\n\
+	ldr r1, _080ED9C4 @ =0x000076aa\n\
+	adds r0, r5, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _080ED9A2\n\
+	ldr r2, _080ED9C8 @ =0x000087dc\n\
+	adds r0, r5, r2\n\
+	subs r4, 0x57\n\
+	adds r1, r5, r4\n\
+	movs r4, 0\n\
+	ldrsh r2, [r0, r4]\n\
+	movs r4, 0\n\
+	ldrsh r0, [r1, r4]\n\
+	cmp r2, r0\n\
+	bge _080ED9CC\n\
+_080ED9A2:\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0\n\
+	bl sub_80F5060\n\
+	bl move_anim_execute\n\
+	movs r0, 0xC1\n\
+	lsls r0, 2\n\
+	adds r1, r5, r0\n\
+_080ED9B8:\n\
+	movs r0, 0x5\n\
+	strh r0, [r1]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080ED9C0: .4byte 0x000087cb\n\
+_080ED9C4: .4byte 0x000076aa\n\
+_080ED9C8: .4byte 0x000087dc\n\
+_080ED9CC:\n\
+	ldrh r2, [r3, 0x2E]\n\
+	movs r0, 0x2\n\
+	ands r0, r2\n\
+	cmp r0, 0\n\
+	beq _080ED9F8\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	bl sub_80F4FDC\n\
+	bl move_anim_execute\n\
+	ldr r0, _080ED9F4 @ =0x02000000\n\
+	movs r1, 0xC1\n\
+	lsls r1, 2\n\
+	adds r0, r1\n\
+	movs r1, 0x9\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080ED9F4: .4byte 0x02000000\n\
+_080ED9F8:\n\
+	movs r0, 0x1\n\
+	ands r0, r2\n\
+	cmp r0, 0\n\
+	bne _080EDA02\n\
+	b _080EDB7A\n\
+_080EDA02:\n\
+	adds r4, r5, 0\n\
+	ldr r2, _080EDA38 @ =0x000076aa\n\
+	adds r0, r4, r2\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	bne _080EDA44\n\
+	ldr r1, _080EDA3C @ =0x000087dc\n\
+	adds r0, r4, r1\n\
+	movs r2, 0\n\
+	ldrsh r1, [r0, r2]\n\
+	ldr r2, _080EDA40 @ =0x000087da\n\
+	adds r0, r4, r2\n\
+	movs r2, 0\n\
+	ldrsh r0, [r0, r2]\n\
+	subs r0, 0x1\n\
+	cmp r1, r0\n\
+	beq _080EDA26\n\
+	b _080EDB7A\n\
+_080EDA26:\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r0, 0xC1\n\
+	lsls r0, 2\n\
+	adds r1, r4, r0\n\
+	movs r0, 0x9\n\
+	strh r0, [r1]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDA38: .4byte 0x000076aa\n\
+_080EDA3C: .4byte 0x000087dc\n\
+_080EDA40: .4byte 0x000087da\n\
+_080EDA44:\n\
+	ldr r1, _080EDA64 @ =0x00006dac\n\
+	adds r0, r5, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _080EDA50\n\
+	b _080EDB7A\n\
+_080EDA50:\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r1, r5, r2\n\
+	movs r0, 0x7\n\
+	strh r0, [r1]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDA64: .4byte 0x00006dac\n\
+_080EDA68:\n\
+	bl gpu_sync_bg_show\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080EDA74\n\
+	b _080EDB7A\n\
+_080EDA74:\n\
+	bl sub_80F3D00\n\
+	ldr r0, _080EDA88 @ =0x02000000\n\
+	movs r4, 0xC1\n\
+	lsls r4, 2\n\
+	adds r0, r4\n\
+	movs r1, 0x6\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDA88: .4byte 0x02000000\n\
+_080EDA8C:\n\
+	bl sub_8055870\n\
+	cmp r0, 0\n\
+	bne _080EDB7A\n\
+	ldr r0, _080EDAA0 @ =0x02000000\n\
+	movs r1, 0xC1\n\
+	lsls r1, 2\n\
+	adds r0, r1\n\
+	b _080EDADC\n\
+	.align 2, 0\n\
+_080EDAA0: .4byte 0x02000000\n\
+_080EDAA4:\n\
+	movs r0, 0x3\n\
+	bl sub_80EEFBC\n\
+	bl sub_80F3668\n\
+	ldr r0, _080EDABC @ =0x02000000\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r0, r2\n\
+	movs r1, 0x8\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDABC: .4byte 0x02000000\n\
+_080EDAC0:\n\
+	bl sub_80F7500\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080EDB7A\n\
+	movs r0, 0x2\n\
+	bl sub_80EEFBC\n\
+	bl sub_80F3698\n\
+_080EDAD4:\n\
+	ldr r0, _080EDAE4 @ =0x02000000\n\
+	movs r4, 0xC1\n\
+	lsls r4, 2\n\
+	adds r0, r4\n\
+_080EDADC:\n\
+	movs r1, 0x4\n\
+	strh r1, [r0]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDAE4: .4byte 0x02000000\n\
+_080EDAE8:\n\
+	bl sub_80F5038\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	cmp r4, 0\n\
+	bne _080EDB7A\n\
+	movs r0, 0\n\
+	bl sub_80F0174\n\
+	bl sub_80F2F48\n\
+	ldr r5, _080EDB24 @ =0x02000000\n\
+	movs r1, 0xC2\n\
+	lsls r1, 2\n\
+	adds r0, r5, r1\n\
+	ldr r0, [r0]\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	str r4, [sp]\n\
+	movs r2, 0\n\
+	movs r3, 0x10\n\
+	bl BeginNormalPaletteFade\n\
+	movs r2, 0xC1\n\
+	lsls r2, 2\n\
+	adds r1, r5, r2\n\
+	movs r0, 0xB\n\
+	strh r0, [r1]\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDB24: .4byte 0x02000000\n\
+_080EDB28:\n\
+	ldr r0, _080EDB60 @ =gPaletteFade\n\
+	ldrb r1, [r0, 0x7]\n\
+	movs r0, 0x80\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _080EDB7A\n\
+	bl sub_80F3CE8\n\
+	bl sub_80F5BDC\n\
+	ldr r0, _080EDB64 @ =0x02000000\n\
+	ldr r4, _080EDB68 @ =0x000076aa\n\
+	adds r0, r4\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	bne _080EDB70\n\
+	bl sub_80F357C\n\
+	movs r0, 0x1\n\
+	bl sub_80F2D6C\n\
+	movs r0, 0x6\n\
+	bl sub_80F2D6C\n\
+	ldr r0, _080EDB6C @ =sub_80ECA10\n\
+	bl sub_80EBDBC\n\
+	b _080EDB7A\n\
+	.align 2, 0\n\
+_080EDB60: .4byte gPaletteFade\n\
+_080EDB64: .4byte 0x02000000\n\
+_080EDB68: .4byte 0x000076aa\n\
+_080EDB6C: .4byte sub_80ECA10\n\
+_080EDB70:\n\
+	bl sub_80F3614\n\
+	ldr r0, _080EDB84 @ =sub_80ED3D0\n\
+	bl sub_80EBDBC\n\
+_080EDB7A:\n\
+	add sp, 0x4\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080EDB84: .4byte sub_80ED3D0\n");
+}
+#endif
+
+void sub_80F638C();
+bool8 sub_80F63D0();
+void sub_80EDDBC();
+
+void sub_80EDB88() {
+	u8 var1;
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F1E84();
+		sub_80F2D04(0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80F1F10()) return;
+		sub_80EEFBC(0x4);
+		ewram0.var304++;
+		break;
+	case 2:
+		if (!(var1 = sub_80EEF34())) {
+			BeginNormalPaletteFade(ewram0.var308, -1, 0x0, 0x10, var1);
+			ewram0.var304++;
+		}
+		break;
+	case 3:
+		if (gPaletteFade.active) return;
+		SetVBlankCallback(0);
+		sub_80EED0C();
+		sub_80EF814();
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80F2620();
+		ewram0.var304++;
+		break;
+	case 5:
+		sub_80F638C();
+		ewram0.var304++;
+	case 6:
+		if (!sub_80F63D0()) {
+			ewram0.var304 += 0x2;
+			break;
+		}
+		ewram0.var304++;
+		break;
+	case 7:
+		if (sub_8055870()) return;
+		ewram0.var304--;
+		break;
+	case 8:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 9:
+		sub_80F0264(0x1);
+		ewram0.var304++;
+	case 0xA:
+		if (sub_80F02A0()) return;
+		ewram0.var304++;
+		break;
+	case 0xB:
+		sub_80F2C80(0x2);
+		ewram0.var304++;
+	case 0xC:
+		if (sub_80F2CBC(0x2)) return;
+		ewram0.var304++;
+		break;
+	case 0xD:
+		sub_80F3008(0x1);
+		ewram0.var304++;
+		break;
+	case 0xE:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 0xF:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 0x10:
+		sub_80EED2C(0x4);
+		ewram0.var304++;
+		break;
+	case 0x11:
+		if (gPaletteFade.active) return;
+		sub_80EBDBC(&sub_80EDDBC);
+		break;
+	}
+
+}
