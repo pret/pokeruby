@@ -14,6 +14,7 @@ extern const TransitionState sMainTransitionPhases[];
 extern const TransitionState sPhase2_Transition0_Funcs[];
 extern const TransitionState sPhase2_Transition1_Funcs[];
 extern const TransitionState sPhase2_Transition2_Funcs[];
+extern const TransitionState sPhase2_Transition3_Funcs[];
 
 extern const TaskFunc sPhase1_Tasks[];
 extern const TaskFunc sPhase2_Tasks[];
@@ -49,12 +50,16 @@ static void Task_BattleTransitionMain(u8 taskID);
 void sub_811D4C8(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
 bool8 sub_811D52C(void);
 void sub_811D658(void);
+
 static void VBlankCB_Phase2_Transition1(void);
 static void HBlankCB_Phase2_Transition1(void);
-void VBlankCB_Phase2_Transition2(void);
-void HBlankCB_Phase2_Transition2(void);
+static void VBlankCB_Phase2_Transition2(void);
+static void HBlankCB_Phase2_Transition2(void);
+void VBlankCB_Phase2_Transition3(void);
+
 void VBlankCB_BattleTransition(void);
 void sub_811D6E8(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5);
+void sub_811D6A8(u16** a0, u16** a1);
 
 void sub_811AABC(u8 transitionID)
 {
@@ -299,4 +304,85 @@ bool8 Phase2_Transition2_Func2(struct Task* task)
 
     TRANSITION_STRUCT.field_0++;
     return 0;
+}
+
+static void VBlankCB_Phase2_Transition2(void)
+{
+    VBlankCB_BattleTransition();
+    if (TRANSITION_STRUCT.field_0)
+        DmaCopy16(3, gUnknown_03004DE0[0], gUnknown_03004DE0[1], 320);
+}
+
+static void HBlankCB_Phase2_Transition2(void)
+{
+    u16 var = gUnknown_03004DE0[1][REG_VCOUNT];
+    REG_BG1VOFS = var;
+    REG_BG2VOFS = var;
+    REG_BG3VOFS = var;
+}
+
+void Phase2Task_Transition3(u8 taskID)
+{
+    while (sPhase2_Transition3_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
+}
+
+extern const u8 gUnknown_083FBB88[];
+extern const u16 gFieldEffectObjectPalette10[];
+
+bool8 Phase2_Transition3_Func1(struct Task* task)
+{
+    u16 i;
+    u16 *dst1, *dst2;
+
+    sub_811D658();
+    dp12_8087EA4();
+
+    task->data[1] = 16;
+    task->data[2] = 0;
+    task->data[4] = 0;
+    task->data[5] = 0x4000;
+    TRANSITION_STRUCT.field_2 = 63;
+    TRANSITION_STRUCT.field_4 = 0;
+    TRANSITION_STRUCT.field_6 = 240;
+    TRANSITION_STRUCT.field_8 = 160;
+    TRANSITION_STRUCT.field_E = 0x3F41;
+    TRANSITION_STRUCT.field_10 = task->data[1] * 256; // 16 * 256 = 0x1000
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_03005560[i] = 240;
+    }
+
+    SetVBlankCallback(VBlankCB_Phase2_Transition3);
+
+    sub_811D6A8(&dst1, & dst2);
+    CpuFill16(0, dst1, 0x800);
+    CpuSet(gUnknown_083FBB88, dst2, 0x2C0);
+    LoadPalette(gFieldEffectObjectPalette10, 240, 32);
+
+    task->tState++;
+    return 0;
+}
+
+extern const u16 gUnknown_083FDB44[];
+
+bool8 Phase2_Transition3_Func2(struct Task* task)
+{
+    s16 i, j;
+    u16 *dst1, *dst2;
+    const u16* var;
+
+    var = gUnknown_083FDB44;
+    sub_811D6A8(&dst1, &dst2);
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 30; j++, var++)
+        {
+            dst1[i * 32 + j] = *var | 0xF000;
+        }
+    }
+    sub_811D6E8(gUnknown_03004DE0[0], 0, task->data[4], 132, task->data[5], 160);
+
+    task->tState++;
+    return 1;
 }

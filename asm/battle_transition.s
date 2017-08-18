@@ -7,245 +7,9 @@
 	.text
 
 
-	thumb_func_start VBlankCB_Phase2_Transition2
-VBlankCB_Phase2_Transition2: @ 811B08C
-	push {lr}
-	bl VBlankCB_BattleTransition
-	ldr r0, _0811B0B4 @ =0x0200c000
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0811B0AE
-	ldr r1, _0811B0B8 @ =0x040000d4
-	ldr r0, _0811B0BC @ =gUnknown_03004DE0
-	str r0, [r1]
-	movs r2, 0xF0
-	lsls r2, 3
-	adds r0, r2
-	str r0, [r1, 0x4]
-	ldr r0, _0811B0C0 @ =0x800000a0
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-_0811B0AE:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811B0B4: .4byte 0x0200c000
-_0811B0B8: .4byte 0x040000d4
-_0811B0BC: .4byte gUnknown_03004DE0
-_0811B0C0: .4byte 0x800000a0
-	thumb_func_end VBlankCB_Phase2_Transition2
 
-	thumb_func_start HBlankCB_Phase2_Transition2
-HBlankCB_Phase2_Transition2: @ 811B0C4
-	ldr r1, _0811B0E4 @ =gUnknown_03004DE0
-	ldr r0, _0811B0E8 @ =REG_VCOUNT
-	ldrh r0, [r0]
-	lsls r0, 1
-	movs r2, 0xF0
-	lsls r2, 3
-	adds r1, r2
-	adds r0, r1
-	ldrh r1, [r0]
-	ldr r0, _0811B0EC @ =REG_BG1VOFS
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_0811B0E4: .4byte gUnknown_03004DE0
-_0811B0E8: .4byte REG_VCOUNT
-_0811B0EC: .4byte REG_BG1VOFS
-	thumb_func_end HBlankCB_Phase2_Transition2
-
-	thumb_func_start Phase2Task_Transition3
-Phase2Task_Transition3: @ 811B0F0
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811B120 @ =gUnknown_083FD7C0
-	ldr r2, _0811B124 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811B102:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811B102
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811B120: .4byte gUnknown_083FD7C0
-_0811B124: .4byte gTasks
-	thumb_func_end Phase2Task_Transition3
-
-	thumb_func_start sub_811B128
-sub_811B128: @ 811B128
-	push {r4-r6,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	bl sub_811D658
-	bl dp12_8087EA4
-	movs r2, 0
-	movs r3, 0x10
-	strh r3, [r4, 0xA]
-	strh r2, [r4, 0xC]
-	strh r2, [r4, 0x10]
-	movs r0, 0x80
-	lsls r0, 7
-	strh r0, [r4, 0x12]
-	ldr r1, _0811B1BC @ =0x0200c000
-	movs r0, 0x3F
-	strh r0, [r1, 0x2]
-	strh r2, [r1, 0x4]
-	movs r0, 0xF0
-	strh r0, [r1, 0x6]
-	movs r0, 0xA0
-	strh r0, [r1, 0x8]
-	ldr r0, _0811B1C0 @ =0x00003f41
-	strh r0, [r1, 0xE]
-	lsls r3, 8
-	strh r3, [r1, 0x10]
-	movs r1, 0
-	add r5, sp, 0x4
-	add r6, sp, 0x8
-	ldr r3, _0811B1C4 @ =gUnknown_03005560
-	movs r2, 0xF0
-_0811B168:
-	lsls r0, r1, 1
-	adds r0, r3
-	strh r2, [r0]
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0x9F
-	bls _0811B168
-	ldr r0, _0811B1C8 @ =sub_811B520
-	bl SetVBlankCallback
-	adds r0, r5, 0
-	adds r1, r6, 0
-	bl sub_811D6A8
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, [sp, 0x4]
-	ldr r2, _0811B1CC @ =0x01000400
-	mov r0, sp
-	bl CpuSet
-	ldr r0, _0811B1D0 @ =gUnknown_083FBB88
-	ldr r1, [sp, 0x8]
-	movs r2, 0xB0
-	lsls r2, 2
-	bl CpuSet
-	ldr r0, _0811B1D4 @ =gFieldEffectObjectPalette10
-	movs r1, 0xF0
-	movs r2, 0x20
-	bl LoadPalette
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811B1BC: .4byte 0x0200c000
-_0811B1C0: .4byte 0x00003f41
-_0811B1C4: .4byte gUnknown_03005560
-_0811B1C8: .4byte sub_811B520
-_0811B1CC: .4byte 0x01000400
-_0811B1D0: .4byte gUnknown_083FBB88
-_0811B1D4: .4byte gFieldEffectObjectPalette10
-	thumb_func_end sub_811B128
-
-	thumb_func_start sub_811B1D8
-sub_811B1D8: @ 811B1D8
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x10
-	adds r7, r0, 0
-	ldr r5, _0811B260 @ =gUnknown_083FDB44
-	add r1, sp, 0xC
-	add r0, sp, 0x8
-	bl sub_811D6A8
-	movs r1, 0
-	ldr r0, [sp, 0x8]
-	mov r9, r0
-	ldr r6, _0811B264 @ =gUnknown_03004DE0
-	mov r8, r6
-	movs r0, 0xF0
-	lsls r0, 8
-	mov r12, r0
-_0811B1FE:
-	movs r0, 0
-	lsls r3, r1, 16
-	asrs r4, r3, 11
-_0811B204:
-	lsls r2, r0, 16
-	asrs r2, 16
-	adds r1, r4, r2
-	lsls r1, 1
-	add r1, r9
-	ldrh r0, [r5]
-	mov r6, r12
-	orrs r0, r6
-	strh r0, [r1]
-	adds r2, 0x1
-	lsls r2, 16
-	adds r5, 0x2
-	lsrs r0, r2, 16
-	asrs r2, 16
-	cmp r2, 0x1D
-	ble _0811B204
-	movs r1, 0x80
-	lsls r1, 9
-	adds r0, r3, r1
-	lsrs r1, r0, 16
-	asrs r0, 16
-	cmp r0, 0x13
-	ble _0811B1FE
-	movs r6, 0x10
-	ldrsh r2, [r7, r6]
-	movs r1, 0x12
-	ldrsh r0, [r7, r1]
-	str r0, [sp]
-	movs r0, 0xA0
-	str r0, [sp, 0x4]
-	mov r0, r8
-	movs r1, 0
-	movs r3, 0x84
-	bl sub_811D6E8
-	ldrh r0, [r7, 0x8]
-	adds r0, 0x1
-	strh r0, [r7, 0x8]
-	movs r0, 0x1
-	add sp, 0x10
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0811B260: .4byte gUnknown_083FDB44
-_0811B264: .4byte gUnknown_03004DE0
-	thumb_func_end sub_811B1D8
-
-	thumb_func_start sub_811B268
-sub_811B268: @ 811B268
+	thumb_func_start Phase2_Transition3_Func3
+Phase2_Transition3_Func3: @ 811B268
 	push {r4,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
@@ -316,10 +80,10 @@ _0811B2AE:
 _0811B2E8: .4byte 0x0200c000
 _0811B2EC: .4byte 0xffffff00
 _0811B2F0: .4byte gUnknown_03004DE0
-	thumb_func_end sub_811B268
+	thumb_func_end Phase2_Transition3_Func3
 
-	thumb_func_start sub_811B2F4
-sub_811B2F4: @ 811B2F4
+	thumb_func_start Phase2_Transition3_Func4
+Phase2_Transition3_Func4: @ 811B2F4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r3, r0, 0
@@ -389,10 +153,10 @@ _0811B338:
 _0811B374: .4byte 0x0200c000
 _0811B378: .4byte 0xffffff00
 _0811B37C: .4byte gUnknown_03004DE0
-	thumb_func_end sub_811B2F4
+	thumb_func_end Phase2_Transition3_Func4
 
-	thumb_func_start sub_811B380
-sub_811B380: @ 811B380
+	thumb_func_start Phase2_Transition3_Func5
+Phase2_Transition3_Func5: @ 811B380
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -445,10 +209,10 @@ _0811B3CE:
 _0811B3E0: .4byte 0x0200c000
 _0811B3E4: .4byte 0xffffff00
 _0811B3E8: .4byte gUnknown_03004DE0
-	thumb_func_end sub_811B380
+	thumb_func_end Phase2_Transition3_Func5
 
-	thumb_func_start sub_811B3EC
-sub_811B3EC: @ 811B3EC
+	thumb_func_start Phase2_Transition3_Func6
+Phase2_Transition3_Func6: @ 811B3EC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _0811B488 @ =0x0200c000
@@ -535,7 +299,7 @@ _0811B498: .4byte 0x0000c5ff
 _0811B49C: .4byte 0x00007fff
 _0811B4A0: .4byte Phase2Task_Transition3
 _0811B4A4: .4byte sub_811B54C
-	thumb_func_end sub_811B3EC
+	thumb_func_end Phase2_Transition3_Func6
 
 	thumb_func_start sub_811B4A8
 sub_811B4A8: @ 811B4A8
@@ -594,8 +358,8 @@ _0811B518: .4byte 0x800000a0
 _0811B51C: .4byte REG_WININ
 	thumb_func_end sub_811B4A8
 
-	thumb_func_start sub_811B520
-sub_811B520: @ 811B520
+	thumb_func_start VBlankCB_Phase2_Transition3
+VBlankCB_Phase2_Transition3: @ 811B520
 	push {lr}
 	bl sub_811B4A8
 	ldr r1, _0811B53C @ =0x040000b0
@@ -613,7 +377,7 @@ _0811B53C: .4byte 0x040000b0
 _0811B540: .4byte gUnknown_03005560
 _0811B544: .4byte REG_BG0HOFS
 _0811B548: .4byte 0xa2400001
-	thumb_func_end sub_811B520
+	thumb_func_end VBlankCB_Phase2_Transition3
 
 	thumb_func_start sub_811B54C
 sub_811B54C: @ 811B54C
