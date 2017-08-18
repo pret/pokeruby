@@ -1865,5 +1865,45 @@ void sub_80EDB88() {
 		sub_80EBDBC(&sub_80EDDBC);
 		break;
 	}
+}
 
+void sub_80EDE70();
+void sub_80EDEE4();
+
+void sub_80EDDBC() {
+	switch (ewram0.var304) {
+	case 0:
+		switch (sub_80F5DD4()) {
+		case 1:
+			PlaySE(0x5);
+			ShowMapNamePopUpWindow();
+			break;
+		case 2:
+			PlaySE(0x5);
+			ewram0.var304++;
+			break;
+		default:
+			if (gMain.newKeys & A_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80EDEE4);
+			}
+			else if (gMain.newKeys & B_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80EDE70);
+			}
+			break;
+		}
+		break;
+	case 1:
+		if (sub_80F0718()) return;
+		ShowMapNamePopUpWindow();
+		sub_80F3264();
+		ewram0.var304++;
+		break;
+	case 2:
+		if (sub_8055870()) return;
+		ewram0.var304 = 0;
+		break;
+
+	}
 }
