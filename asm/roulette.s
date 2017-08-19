@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-
+/*
 	thumb_func_start sub_81150FC
 sub_81150FC: @ 81150FC
 	push {lr}
@@ -25,7 +25,7 @@ _0811511C:
 	.align 2, 0
 _08115120: .4byte gSharedMem + 0x19000
 	thumb_func_end sub_81150FC
-
+*/
 	thumb_func_start sub_8115124
 sub_8115124: @ 8115124
 	push {r4,lr}

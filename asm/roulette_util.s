@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-
+/*
 	thumb_func_start sub_8124918
 sub_8124918: @ 8124918
 	push {lr}
@@ -17,6 +17,7 @@ sub_8124918: @ 8124918
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124918
+
 
 	thumb_func_start sub_812492C
 sub_812492C: @ 812492C
@@ -777,3 +778,4 @@ _08124E76:
 	thumb_func_end sub_8124E2C
 
 	.align 2, 0 @ Don't pad with nop.
+*/
