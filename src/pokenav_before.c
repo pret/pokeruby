@@ -1926,3 +1926,65 @@ void sub_80EDE70() {
 	}
 
 }
+
+void sub_80F66E0();
+bool8 sub_80F1080();
+void sub_80EEFBC();
+void sub_80F38B8();
+bool8 sub_80F38EC();
+void sub_80EE06C();
+
+void sub_80EDEE4() {
+	switch (ewram0.var304) {
+	case 0:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gPaletteFade.active) return;
+		SetVBlankCallback(NULL);
+		sub_80EED0C();
+		sub_80F3130();
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80F66E0();
+		sub_80EEE08();
+		ewram0.var304++;
+		break;
+	case 3:
+		if (sub_80F1080()) return;
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80EEFBC(0x5);
+		sub_80F38B8();
+		ewram0.var304++;
+	case 5:
+		if (sub_80F38EC()) return;
+		ewram0.var304++;
+		break;
+	case 6:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 7:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 8:
+		sub_80EED2C(0x3);
+		ewram0.var304++;
+		break;
+	case 9:
+		if (gPaletteFade.active) return;
+		ewram0.var304++;
+		break;
+	case 0xA:
+		if (sub_80F170C()) return;
+		sub_80EBDBC(&sub_80EE06C);
+		break;
+	}
+
+}
