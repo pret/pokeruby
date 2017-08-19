@@ -215,6 +215,11 @@ extern u8 BattleScript_CastformChange[];
 extern u8 gUnknown_081D9834[];
 extern u8 gUnknown_081D90FC[]; //bs random switchout
 extern u8 gUnknown_081D95DB[]; //bs payday money give
+extern u8 gUnknown_081D8C58[];
+extern u8 gUnknown_081D8C65[];
+extern u8 gUnknown_081D9156[];
+extern u8 gUnknown_081D9468[];
+
 
 //useful macros
 //read via orr
@@ -4978,425 +4983,107 @@ static void atk18_status_effect_clear(void)
     BATTLE_STRUCT->unk16112 = 0;
 }
 
-//Fuck this, Maybe later
-__attribute__((naked))
 static void atk19_faint_pokemon(void)
 {
-    asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r0, _0801F81C @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r0]\n\
-    ldrb r1, [r2, 0x2]\n\
-    adds r6, r0, 0\n\
-    cmp r1, 0\n\
-    beq _0801F834\n\
-    ldrb r0, [r2, 0x1]\n\
-    bl GetBattleBank\n\
-    ldr r5, _0801F820 @ =gActiveBank\n\
-    strb r0, [r5]\n\
-    ldr r2, _0801F824 @ =gHitMarker\n\
-    ldr r1, _0801F828 @ =gBitTable\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    lsls r1, 28\n\
-    ldr r0, [r2]\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0801F7E6\n\
-    b _0801FB1C\n\
-_0801F7E6:\n\
-    ldr r1, [r6]\n\
-    ldrb r4, [r1, 0x3]\n\
-    ldrb r0, [r1, 0x4]\n\
-    lsls r0, 8\n\
-    orrs r4, r0\n\
-    ldrb r0, [r1, 0x5]\n\
-    lsls r0, 16\n\
-    orrs r4, r0\n\
-    ldrb r0, [r1, 0x6]\n\
-    lsls r0, 24\n\
-    orrs r4, r0\n\
-    bl b_movescr_stack_pop_cursor\n\
-    str r4, [r6]\n\
-    ldrb r0, [r5]\n\
-    bl GetBankSide\n\
-    ldr r1, _0801F82C @ =gSideAffecting\n\
-    lsls r0, 24\n\
-    lsrs r0, 23\n\
-    adds r0, r1\n\
-    ldrh r2, [r0]\n\
-    ldr r1, _0801F830 @ =0x0000fdff\n\
-    ands r1, r2\n\
-    strh r1, [r0]\n\
-    b _0801FB22\n\
-    .align 2, 0\n\
-_0801F81C: .4byte gBattlescriptCurrInstr\n\
-_0801F820: .4byte gActiveBank\n\
-_0801F824: .4byte gHitMarker\n\
-_0801F828: .4byte gBitTable\n\
-_0801F82C: .4byte gSideAffecting\n\
-_0801F830: .4byte 0x0000fdff\n\
-_0801F834:\n\
-    ldrb r0, [r2, 0x1]\n\
-    cmp r0, 0x1\n\
-    bne _0801F85C\n\
-    ldr r1, _0801F84C @ =gActiveBank\n\
-    ldr r0, _0801F850 @ =gBankAttacker\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldr r0, _0801F854 @ =gBankTarget\n\
-    ldrb r7, [r0]\n\
-    ldr r4, _0801F858 @ =gUnknown_081D8C58\n\
-    b _0801F86A\n\
-    .align 2, 0\n\
-_0801F84C: .4byte gActiveBank\n\
-_0801F850: .4byte gBankAttacker\n\
-_0801F854: .4byte gBankTarget\n\
-_0801F858: .4byte gUnknown_081D8C58\n\
-_0801F85C:\n\
-    ldr r1, _0801F954 @ =gActiveBank\n\
-    ldr r0, _0801F958 @ =gBankTarget\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldr r0, _0801F95C @ =gBankAttacker\n\
-    ldrb r7, [r0]\n\
-    ldr r4, _0801F960 @ =gUnknown_081D8C65\n\
-_0801F86A:\n\
-    ldr r0, _0801F964 @ =gAbsentBankFlags\n\
-    ldrb r1, [r0]\n\
-    ldr r0, _0801F968 @ =gBitTable\n\
-    mov r12, r0\n\
-    ldr r2, _0801F954 @ =gActiveBank\n\
-    mov r8, r2\n\
-    ldrb r2, [r2]\n\
-    lsls r0, r2, 2\n\
-    add r0, r12\n\
-    ldr r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _0801F886\n\
-    b _0801FB1C\n\
-_0801F886:\n\
-    ldr r3, _0801F96C @ =gBattleMons\n\
-    mov r10, r3\n\
-    movs r5, 0x58\n\
-    mov r9, r5\n\
-    mov r0, r9\n\
-    muls r0, r2\n\
-    add r0, r10\n\
-    ldrh r3, [r0, 0x28]\n\
-    cmp r3, 0\n\
-    beq _0801F89C\n\
-    b _0801FB1C\n\
-_0801F89C:\n\
-    ldr r2, _0801F970 @ =0x02000000\n\
-    lsls r1, r7, 1\n\
-    ldr r5, _0801F974 @ =0x000160ac\n\
-    adds r0, r1, r5\n\
-    adds r0, r2\n\
-    strb r3, [r0]\n\
-    ldr r0, _0801F978 @ =0x000160ad\n\
-    adds r1, r0\n\
-    adds r1, r2\n\
-    strb r3, [r1]\n\
-    lsls r1, r7, 2\n\
-    adds r5, 0x54\n\
-    adds r0, r1, r5\n\
-    adds r0, r2\n\
-    strb r3, [r0]\n\
-    adds r5, 0x1\n\
-    adds r0, r1, r5\n\
-    adds r0, r2\n\
-    strb r3, [r0]\n\
-    adds r5, 0x1\n\
-    adds r0, r1, r5\n\
-    adds r0, r2\n\
-    strb r3, [r0]\n\
-    ldr r0, _0801F97C @ =0x00016103\n\
-    adds r1, r0\n\
-    adds r1, r2\n\
-    strb r3, [r1]\n\
-    ldr r5, _0801F980 @ =gHitMarker\n\
-    mov r1, r8\n\
-    ldrb r0, [r1]\n\
-    lsls r0, 2\n\
-    add r0, r12\n\
-    ldr r1, [r0]\n\
-    lsls r1, 28\n\
-    ldr r0, [r5]\n\
-    orrs r0, r1\n\
-    str r0, [r5]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x7\n\
-    bl b_movescr_stack_push\n\
-    str r4, [r6]\n\
-    mov r2, r8\n\
-    ldrb r0, [r2]\n\
-    bl GetBankSide\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0801F9B0\n\
-    ldr r0, [r5]\n\
-    movs r1, 0x80\n\
-    lsls r1, 15\n\
-    orrs r0, r1\n\
-    str r0, [r5]\n\
-    ldr r1, _0801F984 @ =gBattleResults\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0xFE\n\
-    bhi _0801F914\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-_0801F914:\n\
-    mov r0, r9\n\
-    muls r0, r7\n\
-    add r0, r10\n\
-    adds r3, r0, 0\n\
-    adds r3, 0x2A\n\
-    mov r4, r8\n\
-    ldrb r2, [r4]\n\
-    mov r0, r9\n\
-    muls r0, r2\n\
-    add r0, r10\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x2A\n\
-    ldrb r0, [r3]\n\
-    ldrb r5, [r1]\n\
-    cmp r0, r5\n\
-    bls _0801F9CC\n\
-    ldrb r1, [r1]\n\
-    subs r0, r1\n\
-    cmp r0, 0x1D\n\
-    ble _0801F990\n\
-    ldr r1, _0801F988 @ =gBattlePartyID\n\
-    lsls r0, r2, 1\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x64\n\
-    muls r0, r1\n\
-    ldr r1, _0801F98C @ =gPlayerParty\n\
-    adds r0, r1\n\
-    movs r1, 0x8\n\
-    bl AdjustFriendship\n\
-    b _0801F9CC\n\
-    .align 2, 0\n\
-_0801F954: .4byte gActiveBank\n\
-_0801F958: .4byte gBankTarget\n\
-_0801F95C: .4byte gBankAttacker\n\
-_0801F960: .4byte gUnknown_081D8C65\n\
-_0801F964: .4byte gAbsentBankFlags\n\
-_0801F968: .4byte gBitTable\n\
-_0801F96C: .4byte gBattleMons\n\
-_0801F970: .4byte 0x02000000\n\
-_0801F974: .4byte 0x000160ac\n\
-_0801F978: .4byte 0x000160ad\n\
-_0801F97C: .4byte 0x00016103\n\
-_0801F980: .4byte gHitMarker\n\
-_0801F984: .4byte gBattleResults\n\
-_0801F988: .4byte gBattlePartyID\n\
-_0801F98C: .4byte gPlayerParty\n\
-_0801F990:\n\
-    ldr r1, _0801F9A8 @ =gBattlePartyID\n\
-    lsls r0, r2, 1\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x64\n\
-    muls r0, r1\n\
-    ldr r1, _0801F9AC @ =gPlayerParty\n\
-    adds r0, r1\n\
-    movs r1, 0x6\n\
-    bl AdjustFriendship\n\
-    b _0801F9CC\n\
-    .align 2, 0\n\
-_0801F9A8: .4byte gBattlePartyID\n\
-_0801F9AC: .4byte gPlayerParty\n\
-_0801F9B0:\n\
-    ldr r1, _0801FAE0 @ =gBattleResults\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0xFE\n\
-    bhi _0801F9BC\n\
-    adds r0, 0x1\n\
-    strb r0, [r1, 0x1]\n\
-_0801F9BC:\n\
-    ldr r2, _0801FAE4 @ =gActiveBank\n\
-    ldrb r0, [r2]\n\
-    mov r3, r9\n\
-    muls r3, r0\n\
-    adds r0, r3, 0\n\
-    add r0, r10\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1, 0x20]\n\
-_0801F9CC:\n\
-    ldr r0, _0801FAE8 @ =gHitMarker\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0801FA02\n\
-    ldr r6, _0801FAEC @ =gBattleMons\n\
-    ldr r0, _0801FAF0 @ =gBankAttacker\n\
-    ldrb r0, [r0]\n\
-    movs r5, 0x58\n\
-    muls r0, r5\n\
-    adds r0, r6\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    beq _0801FA02\n\
-    ldr r4, _0801FAF4 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r4]\n\
-    bl b_movescr_stack_push\n\
-    ldr r1, _0801FAF8 @ =gBattleMoveDamage\n\
-    adds r0, r7, 0\n\
-    muls r0, r5\n\
-    adds r0, r6\n\
-    ldrh r0, [r0, 0x28]\n\
-    str r0, [r1]\n\
-    ldr r0, _0801FAFC @ =gUnknown_081D9156\n\
-    str r0, [r4]\n\
-_0801FA02:\n\
-    ldr r1, _0801FB00 @ =gStatuses3\n\
-    ldr r6, _0801FB04 @ =gBankTarget\n\
-    ldrb r0, [r6]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    lsls r1, 7\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0801FA1A\n\
-    b _0801FB22\n\
-_0801FA1A:\n\
-    ldr r0, _0801FAE8 @ =gHitMarker\n\
-    ldr r5, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    ands r5, r0\n\
-    cmp r5, 0\n\
-    bne _0801FB22\n\
-    ldr r4, _0801FAF0 @ =gBankAttacker\n\
-    mov r8, r4\n\
-    ldrb r0, [r4]\n\
-    bl GetBankSide\n\
-    adds r4, r0, 0\n\
-    ldrb r0, [r6]\n\
-    bl GetBankSide\n\
-    lsls r4, 24\n\
-    lsls r0, 24\n\
-    cmp r4, r0\n\
-    beq _0801FB22\n\
-    ldr r0, _0801FAEC @ =gBattleMons\n\
-    mov r9, r0\n\
-    mov r1, r8\n\
-    ldrb r2, [r1]\n\
-    movs r7, 0x58\n\
-    adds r3, r2, 0\n\
-    muls r3, r7\n\
-    adds r0, r3, r0\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    beq _0801FB22\n\
-    ldr r0, _0801FB08 @ =gCurrentMove\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0xA5\n\
-    beq _0801FB22\n\
-    ldr r1, _0801FB0C @ =0x02000000\n\
-    ldr r4, _0801FB10 @ =0x0001608c\n\
-    adds r0, r2, r4\n\
-    adds r0, r1\n\
-    ldrb r4, [r0]\n\
-    adds r0, r4, r3\n\
-    mov r6, r9\n\
-    adds r6, 0x24\n\
-    adds r0, r6\n\
-    strb r5, [r0]\n\
-    ldr r5, _0801FAF4 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r5]\n\
-    bl b_movescr_stack_push\n\
-    ldr r0, _0801FB14 @ =gUnknown_081D9468\n\
-    str r0, [r5]\n\
-    ldr r5, _0801FAE4 @ =gActiveBank\n\
-    mov r1, r8\n\
-    ldrb r0, [r1]\n\
-    strb r0, [r5]\n\
-    adds r1, r4, 0\n\
-    adds r1, 0x9\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    ldrb r0, [r5]\n\
-    muls r0, r7\n\
-    adds r0, r6\n\
-    adds r0, r4\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x1\n\
-    bl EmitSetAttributes\n\
-    ldrb r0, [r5]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r1, _0801FB18 @ =gBattleTextBuff1\n\
-    movs r0, 0xFD\n\
-    strb r0, [r1]\n\
-    movs r0, 0x2\n\
-    strb r0, [r1, 0x1]\n\
-    lsls r4, 1\n\
-    mov r2, r8\n\
-    ldrb r0, [r2]\n\
-    muls r0, r7\n\
-    adds r0, r4, r0\n\
-    mov r2, r9\n\
-    adds r2, 0xC\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    strb r0, [r1, 0x2]\n\
-    mov r3, r8\n\
-    ldrb r0, [r3]\n\
-    muls r0, r7\n\
-    adds r4, r0\n\
-    adds r4, r2\n\
-    ldrh r0, [r4]\n\
-    lsrs r0, 8\n\
-    strb r0, [r1, 0x3]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1, 0x4]\n\
-    b _0801FB22\n\
-    .align 2, 0\n\
-_0801FAE0: .4byte gBattleResults\n\
-_0801FAE4: .4byte gActiveBank\n\
-_0801FAE8: .4byte gHitMarker\n\
-_0801FAEC: .4byte gBattleMons\n\
-_0801FAF0: .4byte gBankAttacker\n\
-_0801FAF4: .4byte gBattlescriptCurrInstr\n\
-_0801FAF8: .4byte gBattleMoveDamage\n\
-_0801FAFC: .4byte gUnknown_081D9156\n\
-_0801FB00: .4byte gStatuses3\n\
-_0801FB04: .4byte gBankTarget\n\
-_0801FB08: .4byte gCurrentMove\n\
-_0801FB0C: .4byte 0x02000000\n\
-_0801FB10: .4byte 0x0001608c\n\
-_0801FB14: .4byte gUnknown_081D9468\n\
-_0801FB18: .4byte gBattleTextBuff1\n\
-_0801FB1C:\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x7\n\
-    str r0, [r6]\n\
-_0801FB22:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    u8 *r4;
+
+    if (gBattlescriptCurrInstr[2] != 0)
+    {
+        gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
+        if (gHitMarker & HITMARKER_FAINTED(gActiveBank))
+        {
+            r4 = BSScriptReadPtr(gBattlescriptCurrInstr + 3);
+
+            b_movescr_stack_pop_cursor();
+            gBattlescriptCurrInstr = r4;
+            gSideAffecting[GetBankSide(gActiveBank)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
+        }
+        else
+        {
+            gBattlescriptCurrInstr += 7;
+        }
+    }
+    else
+    {
+        u8 bank;
+
+        if (gBattlescriptCurrInstr[1] == 1)
+        {
+            gActiveBank = gBankAttacker;
+            bank = gBankTarget;
+            r4 = gUnknown_081D8C58;
+        }
+        else
+        {
+            gActiveBank = gBankTarget;
+            bank = gBankAttacker;
+            r4 = gUnknown_081D8C65;
+        }
+        if (!(gAbsentBankFlags & gBitTable[gActiveBank])
+         && gBattleMons[gActiveBank].hp == 0)
+        {
+            ewram[0x160AC + bank * 2 + 0] = 0;
+            ewram[0x160AC + bank * 2 + 1] = 0;
+            ewram[0x16100 + bank * 4 + 0] = 0;
+            ewram[0x16100 + bank * 4 + 1] = 0;
+            ewram[0x16100 + bank * 4 + 2] = 0;
+            ewram[0x16100 + bank * 4 + 3] = 0;
+
+            gHitMarker |= HITMARKER_FAINTED(gActiveBank);
+            b_movescr_stack_push(gBattlescriptCurrInstr + 7);
+            gBattlescriptCurrInstr = r4;
+            if (GetBankSide(gActiveBank) == 0)
+            {
+                gHitMarker |= HITMARKER_x400000;
+                if (gBattleResults.playerFaintCounter < 0xFF)
+                    gBattleResults.playerFaintCounter++;
+                if (gBattleMons[bank].level > gBattleMons[gActiveBank].level)
+                {
+                    if (gBattleMons[bank].level - gBattleMons[gActiveBank].level > 0x1D)
+                        AdjustFriendship(&gPlayerParty[gBattlePartyID[gActiveBank]], 8);
+                    else
+                        AdjustFriendship(&gPlayerParty[gBattlePartyID[gActiveBank]], 6);
+                }
+            }
+            else
+            {
+                if (gBattleResults.opponentFaintCounter < 0xFF)
+                    gBattleResults.opponentFaintCounter++;
+                gBattleResults.lastOpponentSpecies = gBattleMons[gActiveBank].species;
+            }
+            if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBankAttacker].hp != 0)
+            {
+                b_movescr_stack_push(gBattlescriptCurrInstr);
+                gBattleMoveDamage = gBattleMons[bank].hp;
+                gBattlescriptCurrInstr = gUnknown_081D9156;
+            }
+            if ((gStatuses3[gBankTarget] & STATUS3_GRUDGE)
+             && !(gHitMarker & HITMARKER_GRUDGE)
+             && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget)
+             && gBattleMons[gBankAttacker].hp != 0
+             && gCurrentMove != MOVE_STRUGGLE)
+            {
+                u8 moveIndex = ewram[0x1608C + gBankAttacker];
+
+                gBattleMons[gBankAttacker].pp[moveIndex] = 0;
+                b_movescr_stack_push(gBattlescriptCurrInstr);
+                gBattlescriptCurrInstr = gUnknown_081D9468;
+                gActiveBank = gBankAttacker;
+                EmitSetAttributes(0, moveIndex + 9, 0, 1, &gBattleMons[gActiveBank].pp[moveIndex]);
+                MarkBufferBankForExecution(gActiveBank);
+
+                gBattleTextBuff1[0] = 0xFD;
+                gBattleTextBuff1[1] = 2;
+                gBattleTextBuff1[2] = gBattleMons[gBankAttacker].moves[moveIndex];
+                gBattleTextBuff1[3] = gBattleMons[gBankAttacker].moves[moveIndex] >> 8;
+                gBattleTextBuff1[4] = EOS;
+            }
+        }
+        else
+        {
+            gBattlescriptCurrInstr += 7;
+        }
+    }
 }
 
 static void atk1A_faint_animation(void)
