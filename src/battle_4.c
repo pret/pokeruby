@@ -5454,12 +5454,13 @@ static void atk23_getexp(void)
             gBattleBufferB[BATTLE_STRUCT->expGetterBank][0] = 0;
             if (GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_HP) && GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_LEVEL) != 100)
             {
-                ((u16*)ewram + 0xB8C0)[0] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_MAX_HP); //doesnt match
-                ((u16*)ewram + 0xB8C0)[1] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_ATK);
-                ((u16*)ewram + 0xB8C0)[2] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_DEF);
-                ((u16*)ewram + 0xB8C0)[3] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD);
-                ((u16*)ewram + 0xB8C0)[4] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPATK);
-                ((u16*)ewram + 0xB8C0)[5] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPDEF);
+                // Doesn't match.
+                BATTLE_STRUCT->beforeLvlUp[0] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_MAX_HP);
+                BATTLE_STRUCT->beforeLvlUp[1] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_ATK);
+                BATTLE_STRUCT->beforeLvlUp[2] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_DEF);
+                BATTLE_STRUCT->beforeLvlUp[3] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD);
+                BATTLE_STRUCT->beforeLvlUp[4] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPATK);
+                BATTLE_STRUCT->beforeLvlUp[5] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPDEF);
 
                 gActiveBank = BATTLE_STRUCT->expGetterBank;
                 EmitExpBarUpdate(0, BATTLE_STRUCT->expGetterID, gBattleMoveDamage);
