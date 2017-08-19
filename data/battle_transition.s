@@ -142,9 +142,9 @@ sPhase2_Transition5_Funcs:: @ 83FD7F8
 	.4byte Phase2_Transition5_Func7
 
 	.align 2
-gUnknown_083FD814:: @ 83FD814
-	.4byte sub_811BCF4
-	.4byte sub_811BD60
+sPhase2_Transition6_Funcs:: @ 83FD814
+	.4byte Phase2_Transition6_Func1
+	.4byte Phase2_Transition6_Func2
 
 	.align 2
 gUnknown_083FD81C:: @ 83FD81C

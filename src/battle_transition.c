@@ -20,6 +20,7 @@ extern const TransitionState sPhase2_Transition2_Funcs[];
 extern const TransitionState sPhase2_Transition3_Funcs[];
 extern const TransitionState sPhase2_Transition4_Funcs[];
 extern const TransitionState sPhase2_Transition5_Funcs[];
+extern const TransitionState sPhase2_Transition6_Funcs[];
 
 extern const TaskFunc sPhase1_Tasks[];
 extern const TaskFunc sPhase2_Tasks[];
@@ -69,11 +70,17 @@ void sub_811D658(void);
 
 static void VBlankCB_Phase2_Transition1(void);
 static void HBlankCB_Phase2_Transition1(void);
+
 static void VBlankCB_Phase2_Transition2(void);
 static void HBlankCB_Phase2_Transition2(void);
-void VBlankCB0_Phase2_Transition3(void);
-void VBlankCB1_Phase2_Transition3(void);
-void VBlankCB_Phase2_Transition5(void);
+
+static void VBlankCB0_Phase2_Transition3(void);
+static void VBlankCB1_Phase2_Transition3(void);
+
+static void VBlankCB_Phase2_Transition5(void);
+
+void VBlankCB_Phase2_Transition6(void);
+void HBlankCB_Phase2_Transition6(void);
 
 void VBlankCB_BattleTransition(void);
 void sub_811D6E8(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5);
@@ -510,7 +517,7 @@ static void Transition3_Vblank(void)
     REG_BLDALPHA = TRANSITION_STRUCT.field_10;
 }
 
-void VBlankCB0_Phase2_Transition3(void)
+static void VBlankCB0_Phase2_Transition3(void)
 {
     Transition3_Vblank();
     DmaSet(0, gUnknown_03005560, &REG_BG0HOFS, 0xA2400001);
@@ -817,6 +824,171 @@ bool8 Phase2_Transition5_Func3(struct Task* task)
             gUnknown_03004DE0[0][++TRANSITION_STRUCT.field_2A] = (r3) | (r1 << 8);
         }
     }
+
+    TRANSITION_STRUCT.field_0++;
+    return 0;
+}
+
+bool8 Phase2_Transition5_Func4(struct Task* task)
+{
+    TRANSITION_STRUCT.field_0 = 0;
+
+    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, TRANSITION_STRUCT.field_2C, 160, 1, 1);
+    do
+    {
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (TRANSITION_STRUCT.field_28 << 8) | 0xF0;
+    } while (!sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1));
+
+    TRANSITION_STRUCT.field_2C -= 16;
+    if (TRANSITION_STRUCT.field_2C <= 0)
+    {
+        TRANSITION_STRUCT.field_2E = 160;
+        task->tState++;
+    }
+
+    TRANSITION_STRUCT.field_0++;
+    return 0;
+}
+
+bool8 Phase2_Transition5_Func5(struct Task* task)
+{
+    s16 r1, r2, r3;
+    vu8 var = 0;
+
+    TRANSITION_STRUCT.field_0 = 0;
+
+    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, 0, TRANSITION_STRUCT.field_2E, 1, 1);
+
+    while (1)
+    {
+        r1 = gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] & 0xFF, r2 = TRANSITION_STRUCT.field_28;
+        if (TRANSITION_STRUCT.field_2E <= 80)
+            r2 = 120, r1 = TRANSITION_STRUCT.field_28;
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r1) | (r2 << 8);
+        r3 = 0;
+        if (var != 0)
+            break;
+        var = sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1);
+    }
+
+    TRANSITION_STRUCT.field_2E -= 8;
+    if (TRANSITION_STRUCT.field_2E <= 0)
+    {
+        TRANSITION_STRUCT.field_2C = r3;
+        task->tState++;
+    }
+    else
+    {
+        while (TRANSITION_STRUCT.field_2A > TRANSITION_STRUCT.field_2E)
+        {
+            gUnknown_03004DE0[0][--TRANSITION_STRUCT.field_2A] = (r1) | (r2 << 8);
+        }
+    }
+
+    TRANSITION_STRUCT.field_0++;
+    return 0;
+}
+
+bool8 Phase2_Transition5_Func6(struct Task* task)
+{
+    TRANSITION_STRUCT.field_0 = 0;
+
+    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, TRANSITION_STRUCT.field_2C, 0, 1, 1);
+    do
+    {
+        s16 r2, r3;
+
+        r2 = 120, r3 = TRANSITION_STRUCT.field_28;
+        if (TRANSITION_STRUCT.field_28 >= 120)
+            r2 = 0, r3 = 240;
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r3) | (r2 << 8);
+
+    } while (!sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1));
+
+    TRANSITION_STRUCT.field_2C += 16;
+    if (TRANSITION_STRUCT.field_28 > 120)
+        task->tState++;
+
+    TRANSITION_STRUCT.field_0++;
+    return 0;
+}
+
+bool8 Phase2_Transition5_Func7(struct Task* task)
+{
+    DmaStop(0);
+    sub_811D6D4();
+    DestroyTask(FindTaskIdByFunc(Phase2Task_Transition5));
+    return 0;
+}
+
+static void VBlankCB_Phase2_Transition5(void)
+{
+    DmaStop(0);
+    VBlankCB_BattleTransition();
+    if (TRANSITION_STRUCT.field_0 != 0)
+        DmaCopy16(3, gUnknown_03004DE0[0], gUnknown_03004DE0[1], 320);
+    REG_WININ = TRANSITION_STRUCT.field_2;
+    REG_WINOUT = TRANSITION_STRUCT.field_4;
+    REG_WIN0V = TRANSITION_STRUCT.field_8;
+    REG_WIN0H = gUnknown_03004DE0[1][0];
+    DmaSet(0, gUnknown_03004DE0[1], &REG_WIN0H, 0xA2400001);
+}
+
+void Phase2Task_Transition6(u8 taskID)
+{
+    while (sPhase2_Transition6_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
+}
+
+bool8 Phase2_Transition6_Func1(struct Task* task)
+{
+    u8 i;
+
+    sub_811D658();
+    dp12_8087EA4();
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_03005560[i] = TRANSITION_STRUCT.field_16;
+    }
+
+    SetVBlankCallback(VBlankCB_Phase2_Transition6);
+    SetHBlankCallback(HBlankCB_Phase2_Transition6);
+
+    REG_IE |= 2;
+    REG_DISPSTAT |= 0x10;
+
+    task->tState++;
+    return 1;
+}
+
+bool8 Phase2_Transition6_Func2(struct Task* task)
+{
+    u8 i;
+    u16 r3, r4, r8;
+
+    TRANSITION_STRUCT.field_0 = 0;
+
+    r3 = task->data[2] >> 8;
+    r4 = task->data[1];
+    r8 = 384;
+    task->data[1] += 0x400;
+    if (task->data[2] <= 0x1FFF)
+        task->data[2] += 0x180;
+
+    for (i = 0; i < 160; i++, r4 += r8)
+    {
+        s16 sinResult = Sin(r4 >> 8, r3);
+        gUnknown_03004DE0[0][i] = TRANSITION_STRUCT.field_16 + sinResult;
+    }
+
+    if (++task->data[3] == 81)
+    {
+        task->data[4]++;
+        BeginNormalPaletteFade(-1, -2, 0, 0x10, 0);
+    }
+
+    if (task->data[4] != 0 && !gPaletteFade.active)
+        DestroyTask(FindTaskIdByFunc(Phase2Task_Transition6));
 
     TRANSITION_STRUCT.field_0++;
     return 0;
