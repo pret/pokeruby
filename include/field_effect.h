@@ -244,7 +244,7 @@ void sub_808948C(struct Task *);
 void sub_80894C4(struct Task *);
 void fishE(struct Task *);
 
-u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer);
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest);
 u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority);
 u8 CreateMonSprite_PicBox(u16, s16, s16, u8);

@@ -444,6 +444,7 @@ SECTIONS {
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
         data/landmark.o(.rodata);
+        src/battle_transition.o(.rodata);
         data/battle_transition.o(.rodata);
         data/battle_811DA74.o(.rodata);
         data/battle_message.o(.rodata);

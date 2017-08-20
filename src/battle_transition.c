@@ -14,25 +14,8 @@
 void sub_807DE10(void);
 void dp12_8087EA4(void);
 
-typedef bool8 (*TransitionState)(struct Task* task);
-
-extern const TransitionState sMainTransitionPhases[];
-extern const TransitionState sPhase2_Transition0_Funcs[];
-extern const TransitionState sPhase2_Transition1_Funcs[];
-extern const TransitionState sPhase2_Transition2_Funcs[];
-extern const TransitionState sPhase2_Transition3_Funcs[];
-extern const TransitionState sPhase2_Transition4_Funcs[];
-extern const TransitionState sPhase2_Transition5_Funcs[];
-extern const TransitionState sPhase2_Transition6_Funcs[];
-extern const TransitionState sPhase2_Transition7_Funcs[];
-extern const TransitionState sPhase2_Mugshot_Transition_Funcs[];
-
-extern const TaskFunc sPhase1_Tasks[];
-extern const TaskFunc sPhase2_Tasks[];
-
 extern u8 ewram[];
 extern s16 gUnknown_03005560[];
-
 extern u16 gUnknown_03004DE0[][0x3C0];
 
 struct TransitionData
@@ -73,6 +56,25 @@ void sub_811D4C8(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
 bool8 sub_811D52C(void);
 void sub_811D658(void);
 
+static void Phase1Task_TransitionAll(u8 taskID);
+static void Phase2Task_Transition0(u8 taskID);
+static void Phase2Task_Transition1(u8 taskID);
+static void Phase2Task_Transition2(u8 taskID);
+static void Phase2Task_Transition3(u8 taskID);
+static void Phase2Task_Transition4(u8 taskID);
+static void Phase2Task_Transition5(u8 taskID);
+static void Phase2Task_Transition6(u8 taskID);
+static void Phase2Task_Transition7(u8 taskID);
+ void Phase2Task_Transition8(u8 taskID);
+ void Phase2Task_Transition9(u8 taskID);
+ void Phase2Task_Transition10(u8 taskID);
+ void Phase2Task_Transition11(u8 taskID);
+static void Phase2Task_Transition_Sydney(u8 taskID);
+static void Phase2Task_Transition_Phoebe(u8 taskID);
+static void Phase2Task_Transition_Glacia(u8 taskID);
+static void Phase2Task_Transition_Drake(u8 taskID);
+static void Phase2Task_Transition_Steven(u8 taskID);
+
 static void VBlankCB_Phase2_Transition1(void);
 static void HBlankCB_Phase2_Transition1(void);
 
@@ -101,11 +103,77 @@ void sub_811D6D4(void);
 void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
 bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2);
 static void Phase2Task_MugShotTransition(u8 taskID);
-void sub_811C7B0(struct Task* task);
+static void Mugshots_CreateOpponentPlayerSprites(struct Task* task);
+static void sub_811CA10(s16 spriteID, s16 value);
+static void sub_811CA28(s16 spriteID);
+static s16 sub_811CA44(s16 spriteID);
 
-void sub_811CA10(s16 spriteID, s16 value);
-void sub_811CA28(s16 spriteID);
-s16 sub_811CA44(s16 spriteID);
+// const data
+typedef bool8 (*TransitionState)(struct Task* task);
+typedef bool8 (*TransitionSpriteCallback)(struct Sprite* sprite);
+
+extern const TransitionState sMainTransitionPhases[];
+extern const TransitionState sPhase2_Transition0_Funcs[];
+extern const TransitionState sPhase2_Transition1_Funcs[];
+extern const TransitionState sPhase2_Transition2_Funcs[];
+extern const TransitionState sPhase2_Transition3_Funcs[];
+extern const TransitionState sPhase2_Transition4_Funcs[];
+extern const TransitionState sPhase2_Transition5_Funcs[];
+extern const TransitionState sPhase2_Transition6_Funcs[];
+extern const TransitionState sPhase2_Transition7_Funcs[];
+extern const TransitionState sPhase2_Mugshot_Transition_Funcs[];
+extern const u16 gFieldEffectObjectPalette10[];
+extern const u16 gUnknown_083FDB44[];
+extern const s16 gUnknown_083FD7E4[2];
+extern const s16 gUnknown_083FD7F2[2];
+extern const s16 gUnknown_083FD7E8[5];
+extern const struct SpriteTemplate gSpriteTemplate_83FD98C;
+extern const u16 gUnknown_083FDFF4[];
+extern const u8 * const sOpponentMugshotsPals[];
+extern const u8 * const sPlayerMugshotsPals[2];
+extern const u8 sMugshotsTrainerPicIDsTable[];
+extern const s16 sMugshotsOpponentCoords[][2];
+extern const s16 sMugshotsOpponentRotationScales[][2];
+extern const TransitionSpriteCallback gUnknown_083FD880[];
+extern const s16 gUnknown_083FD89C[2];
+extern const s16 gUnknown_083FD8A0[2];
+
+static const u32 gUnknown_083FBB88[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
+static const u32 gUnknown_083FC108[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
+const u32 gSpriteImage_83FC148[] = INCBIN_U32("graphics/battle_transitions/pokeball.4bpp");
+static const u32 gUnknown_083FC348[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
+const u32 gSpriteImage_83FC528[] = INCBIN_U32("graphics/battle_transitions/unused_brendan.4bpp");
+const u32 gSpriteImage_83FCD28[] = INCBIN_U32("graphics/battle_transitions/unused_lass.4bpp");
+const u32 gUnknown_083FD528[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
+struct TransitionData * const sTransitionStructPtr = &TRANSITION_STRUCT;
+
+static const TaskFunc sPhase1_Tasks[TRANSITIONS_NO] =
+{
+    [0 ... TRANSITIONS_NO - 1] = &Phase1Task_TransitionAll
+};
+
+static const TaskFunc sPhase2_Tasks[TRANSITIONS_NO] =
+{
+    &Phase2Task_Transition0,        // 0
+    &Phase2Task_Transition1,        // 1
+    &Phase2Task_Transition2,        // 2
+    &Phase2Task_Transition3,        // 3
+    &Phase2Task_Transition4,        // 4
+    &Phase2Task_Transition5,        // 5
+    &Phase2Task_Transition6,        // 6
+    &Phase2Task_Transition7,        // 7
+    &Phase2Task_Transition8,        // 8
+    &Phase2Task_Transition9,        // 9
+    &Phase2Task_Transition10,       // 10
+    &Phase2Task_Transition11,       // 11
+    &Phase2Task_Transition_Sydney,  // 12
+    &Phase2Task_Transition_Phoebe,  // 13
+    &Phase2Task_Transition_Glacia,  // 14
+    &Phase2Task_Transition_Drake,   // 15
+    &Phase2Task_Transition_Steven,  // 16
+};
+
+void sub_811C90C(struct Sprite* sprite);
 
 void sub_811AABC(u8 transitionID)
 {
@@ -188,7 +256,7 @@ bool8 Transition_WaitForPhase2(struct Task* task)
     return 0;
 }
 
-void Phase1Task_TransitionAll(u8 taskID)
+static void Phase1Task_TransitionAll(u8 taskID)
 {
     if (gTasks[taskID].tState == 0)
     {
@@ -199,7 +267,7 @@ void Phase1Task_TransitionAll(u8 taskID)
         DestroyTask(taskID);
 }
 
-void Phase2Task_Transition0(u8 taskID)
+static void Phase2Task_Transition0(u8 taskID)
 {
     while (sPhase2_Transition0_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
@@ -240,7 +308,7 @@ bool8 Phase2_Transition0_Func3(struct Task* task)
     return 0;
 }
 
-void Phase2Task_Transition1(u8 taskID)
+static void Phase2Task_Transition1(u8 taskID)
 {
     while (sPhase2_Transition1_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
@@ -300,7 +368,7 @@ static void HBlankCB_Phase2_Transition1(void)
     REG_BG3HOFS = var;
 }
 
-void Phase2Task_Transition2(u8 taskID)
+static void Phase2Task_Transition2(u8 taskID)
 {
     while (sPhase2_Transition2_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
@@ -367,13 +435,10 @@ static void HBlankCB_Phase2_Transition2(void)
     REG_BG3VOFS = var;
 }
 
-void Phase2Task_Transition3(u8 taskID)
+static void Phase2Task_Transition3(u8 taskID)
 {
     while (sPhase2_Transition3_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
-
-extern const u8 gUnknown_083FBB88[];
-extern const u16 gFieldEffectObjectPalette10[];
 
 bool8 Phase2_Transition3_Func1(struct Task* task)
 {
@@ -409,8 +474,6 @@ bool8 Phase2_Transition3_Func1(struct Task* task)
     task->tState++;
     return 0;
 }
-
-extern const u16 gUnknown_083FDB44[];
 
 bool8 Phase2_Transition3_Func2(struct Task* task)
 {
@@ -546,12 +609,10 @@ void VBlankCB1_Phase2_Transition3(void)
     DmaSet(0, gUnknown_03005560, &REG_WIN0H, 0xA2400001);
 }
 
-void Phase2Task_Transition4(u8 taskID)
+static void Phase2Task_Transition4(u8 taskID)
 {
     while (sPhase2_Transition4_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
-
-extern const u8 gUnknown_083FC108[];
 
 bool8 Phase2_Transition4_Func1(struct Task* task)
 {
@@ -565,10 +626,6 @@ bool8 Phase2_Transition4_Func1(struct Task* task)
     task->tState++;
     return 0;
 }
-
-extern const s16 gUnknown_083FD7E4[2];
-extern const s16 gUnknown_083FD7F2[2];
-extern const s16 gUnknown_083FD7E8[5];
 
 bool8 Phase2_Transition4_Func2(struct Task* task)
 {
@@ -602,8 +659,6 @@ bool8 Phase2_Transition4_Func3(struct Task* task)
     }
     return 0;
 }
-
-extern const struct SpriteTemplate gSpriteTemplate_83FD98C;
 
 bool8 FldEff_Pokeball(void)
 {
@@ -659,7 +714,7 @@ void sub_811B720(struct Sprite* sprite)
     }
 }
 
-void Phase2Task_Transition5(u8 taskID)
+static void Phase2Task_Transition5(u8 taskID)
 {
     while (sPhase2_Transition5_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
@@ -931,7 +986,7 @@ static void HBlankCB_Phase2_Transition6(void)
     REG_BG3VOFS = var;
 }
 
-void Phase2Task_Transition7(u8 taskID)
+static void Phase2Task_Transition7(u8 taskID)
 {
     while (sPhase2_Transition7_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
 }
@@ -1009,33 +1064,35 @@ static void VBlankCB_Phase2_Transition7(void)
     DmaSet(0, gUnknown_03004DE0[1], &REG_WIN0H, 0xA2400001);
 }
 
-#define tMugshotID  data[15]
+#define tMugshotOpponentID  data[13]
+#define tMugshotPlayerID    data[14]
+#define tMugshotID          data[15]
 
-void Phase2Task_Transition_Sydney(u8 taskID)
+static void Phase2Task_Transition_Sydney(u8 taskID)
 {
     gTasks[taskID].tMugshotID = MUGSHOT_SYDNEY;
     Phase2Task_MugShotTransition(taskID);
 }
 
-void Phase2Task_Transition_Phoebe(u8 taskID)
+static void Phase2Task_Transition_Phoebe(u8 taskID)
 {
     gTasks[taskID].tMugshotID = MUGSHOT_PHOEBE;
     Phase2Task_MugShotTransition(taskID);
 }
 
-void Phase2Task_Transition_Glacia(u8 taskID)
+static void Phase2Task_Transition_Glacia(u8 taskID)
 {
     gTasks[taskID].tMugshotID = MUGSHOT_GLACIA;
     Phase2Task_MugShotTransition(taskID);
 }
 
-void Phase2Task_Transition_Drake(u8 taskID)
+static void Phase2Task_Transition_Drake(u8 taskID)
 {
     gTasks[taskID].tMugshotID = MUGSHOT_DRAKE;
     Phase2Task_MugShotTransition(taskID);
 }
 
-void Phase2Task_Transition_Steven(u8 taskID)
+static void Phase2Task_Transition_Steven(u8 taskID)
 {
     gTasks[taskID].tMugshotID = MUGSHOT_STEVEN;
     Phase2Task_MugShotTransition(taskID);
@@ -1052,7 +1109,7 @@ bool8 Phase2_Mugshot_Func1(struct Task* task)
 
     sub_811D658();
     dp12_8087EA4();
-    sub_811C7B0(task);
+    Mugshots_CreateOpponentPlayerSprites(task);
 
     task->data[1] = 0;
     task->data[2] = 1;
@@ -1071,11 +1128,6 @@ bool8 Phase2_Mugshot_Func1(struct Task* task)
     task->tState++;
     return 0;
 }
-
-extern const u8 gUnknown_083FC348[];
-extern const u16 gUnknown_083FDFF4[];
-extern const u8 * const sOpponentMugshotsPals[];
-extern const u8 * const sPlayerMugshotsPals[2];
 
 bool8 Phase2_Mugshot_Func2(struct Task* task)
 {
@@ -1171,9 +1223,9 @@ bool8 Phase2_Mugshot_Func4(struct Task* task)
     TRANSITION_STRUCT.field_18 -= 8;
     TRANSITION_STRUCT.field_1A += 8;
 
-    sub_811CA10(task->data[13], 0);
-    sub_811CA10(task->data[14], 1);
-    sub_811CA28(task->data[13]);
+    sub_811CA10(task->tMugshotOpponentID, 0);
+    sub_811CA10(task->tMugshotPlayerID, 1);
+    sub_811CA28(task->tMugshotOpponentID);
 
     PlaySE(SE_BT_START);
 
@@ -1185,10 +1237,10 @@ bool8 Phase2_Mugshot_Func5(struct Task* task)
 {
     TRANSITION_STRUCT.field_18 -= 8;
     TRANSITION_STRUCT.field_1A += 8;
-    if (sub_811CA44(task->data[13]))
+    if (sub_811CA44(task->tMugshotOpponentID))
     {
         task->tState++;
-        sub_811CA28(task->data[14]);
+        sub_811CA28(task->tMugshotPlayerID);
     }
     return 0;
 }
@@ -1197,7 +1249,7 @@ bool8 Phase2_Mugshot_Func6(struct Task* task)
 {
     TRANSITION_STRUCT.field_18 -= 8;
     TRANSITION_STRUCT.field_1A += 8;
-    if (sub_811CA44(task->data[14]))
+    if (sub_811CA44(task->tMugshotPlayerID))
     {
         TRANSITION_STRUCT.field_0 = 0;
         SetVBlankCallback(NULL);
@@ -1318,3 +1370,114 @@ static void HBlankCB_Phase2_Mugshots(void)
     else
         REG_BG0HOFS = TRANSITION_STRUCT.field_1A;
 }
+
+static void Mugshots_CreateOpponentPlayerSprites(struct Task* task)
+{
+    struct Sprite *opponentSprite, *playerSprite;
+
+    s16 mugshotID = task->tMugshotID;
+    task->tMugshotOpponentID = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotID],
+                                                     sMugshotsOpponentCoords[mugshotID][0] - 32,
+                                                     sMugshotsOpponentCoords[mugshotID][1] + 42,
+                                                     0, &ewram[0xC03C]);
+    task->tMugshotPlayerID = CreateTrainerSprite(gSaveBlock2.playerGender, 272, 106, 0, &ewram[0xC03C]);
+
+    opponentSprite = &gSprites[task->tMugshotOpponentID];
+    playerSprite = &gSprites[task->tMugshotPlayerID];
+
+    opponentSprite->callback = sub_811C90C;
+    playerSprite->callback = sub_811C90C;
+
+    opponentSprite->oam.affineMode = 3;
+    playerSprite->oam.affineMode = 3;
+
+    opponentSprite->oam.matrixNum = AllocOamMatrix();
+    playerSprite->oam.matrixNum = AllocOamMatrix();
+
+    opponentSprite->oam.shape = 1;
+    playerSprite->oam.shape = 1;
+
+    opponentSprite->oam.size = 3;
+    playerSprite->oam.size = 3;
+
+    CalcCenterToCornerVec(opponentSprite, 1, 3, 3);
+    CalcCenterToCornerVec(playerSprite, 1, 3, 3);
+
+    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotID][0], sMugshotsOpponentRotationScales[mugshotID][1], 0);
+    SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 0x200, 0);
+}
+
+void sub_811C90C(struct Sprite* sprite)
+{
+    while (gUnknown_083FD880[sprite->data0](sprite));
+}
+
+bool8 sub_811C934(struct Sprite* sprite)
+{
+    return 0;
+}
+
+bool8 sub_811C938(struct Sprite* sprite)
+{
+    s16 arr0[2];
+    s16 arr1[2];
+
+    memcpy(arr0, gUnknown_083FD89C, sizeof(gUnknown_083FD89C));
+    memcpy(arr1, gUnknown_083FD8A0, sizeof(gUnknown_083FD8A0));
+
+    sprite->data0++;
+    sprite->data1 = arr0[sprite->data7];
+    sprite->data2 = arr1[sprite->data7];
+    return 1;
+}
+
+bool8 sub_811C984(struct Sprite* sprite)
+{
+    sprite->pos1.x += sprite->data1;
+    if (sprite->data7 && sprite->pos1.x < 133)
+        sprite->data0++;
+    else if (!sprite->data7 && sprite->pos1.x > 103)
+        sprite->data0++;
+    return 0;
+}
+
+bool8 sub_811C9B8(struct Sprite* sprite)
+{
+    sprite->data1 += sprite->data2;
+    sprite->pos1.x += sprite->data1;
+    if (sprite->data1 == 0)
+    {
+        sprite->data0++;
+        sprite->data2 = -sprite->data2;
+        sprite->data6 = 1;
+    }
+    return 0;
+}
+
+bool8 sub_811C9E4(struct Sprite* sprite)
+{
+    sprite->data1 += sprite->data2;
+    sprite->pos1.x += sprite->data1;
+    if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
+        sprite->data0++;
+    return 0;
+}
+
+static void sub_811CA10(s16 spriteID, s16 value)
+{
+    gSprites[spriteID].data7 = value;
+}
+
+static void sub_811CA28(s16 spriteID)
+{
+    gSprites[spriteID].data0++;
+}
+
+static s16 sub_811CA44(s16 spriteID)
+{
+    return gSprites[spriteID].data6;
+}
+
+#undef tMugshotOpponentID
+#undef tMugshotPlayerID
+#undef tMugshotID

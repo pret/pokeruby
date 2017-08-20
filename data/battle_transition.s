@@ -3,79 +3,7 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_083FBB88:: @ 83FBB88
-	.incbin "graphics/battle_transitions/big_pokeball.4bpp"
 
-	.align 2
-gUnknown_083FC108:: @ 83FC108
-	.incbin "graphics/battle_transitions/pokeball_trail.4bpp"
-
-	.align 2
-gSpriteImage_83FC148:: @ 83FC148
-	.incbin "graphics/battle_transitions/pokeball.4bpp"
-
-	.align 2
-gUnknown_083FC348:: @ 83FC348
-	.incbin "graphics/battle_transitions/elite_four_bg.4bpp"
-
-	.align 2
-gSpriteImage_83FC528:: @ 83FC528
-	.incbin "graphics/battle_transitions/unused_brendan.4bpp"
-
-	.align 2
-gSpriteImage_83FCD28:: @ 83FCD28
-	.incbin "graphics/battle_transitions/unused_lass.4bpp"
-
-	.align 2
-gUnknown_083FD528:: @ 83FD528
-	.incbin "graphics/battle_transitions/shrinking_box.4bpp"
-
-	.align 2
-gUnknown_083FD708:: @ 83FD708
-	.4byte 0x0200c000
-
-	.align 2
-sPhase1_Tasks:: @ 83FD70C
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-	.4byte Phase1Task_TransitionAll
-
-	.align 2
-sPhase2_Tasks:: @ 83FD750
-	.4byte Phase2Task_Transition0
-	.4byte Phase2Task_Transition1
-	.4byte Phase2Task_Transition2
-	.4byte Phase2Task_Transition3
-	.4byte Phase2Task_Transition4
-	.4byte Phase2Task_Transition5
-	.4byte Phase2Task_Transition6
-	.4byte Phase2Task_Transition7
-	.4byte Phase2Task_Transition8
-	.4byte Phase2Task_Transition9
-	.4byte Phase2Task_Transition10
-	.4byte Phase2Task_Transition11
-	.4byte Phase2Task_Transition_Sydney
-	.4byte Phase2Task_Transition_Phoebe
-	.4byte Phase2Task_Transition_Glacia
-	.4byte Phase2Task_Transition_Drake
-	.4byte Phase2Task_Transition_Steven
-
-	.align 2
 sMainTransitionPhases:: @ 83FD794
 	.4byte Transition_Phase1
 	.4byte Transition_WaitForPhase1
@@ -165,7 +93,7 @@ sPhase2_Mugshot_Transition_Funcs:: @ 83FD828
 	.4byte Phase2_Mugshot_Func9
 	.4byte Phase2_Mugshot_Func10
 
-gUnknown_083FD850:: @ 83FD850
+sMugshotsTrainerPicIDsTable:: @ 83FD850
 	.byte TRAINER_PIC_SIDNEY
 	.byte TRAINER_PIC_PHOEBE
 	.byte TRAINER_PIC_GLACIA
@@ -173,7 +101,7 @@ gUnknown_083FD850:: @ 83FD850
 	.byte TRAINER_PIC_STEVEN
 
 	.align 1
-gUnknown_083FD856:: @ 83FD856
+sMugshotsOpponentRotationScales:: @ 83FD856
 	.2byte 0x200, 0x200
 	.2byte 0x200, 0x200
 	.2byte 0x1B0, 0x1B0
@@ -181,7 +109,7 @@ gUnknown_083FD856:: @ 83FD856
 	.2byte 0x188, 0x188
 
 	.align 1
-gUnknown_083FD86A:: @ 83FD86A
+sMugshotsOpponentCoords:: @ 83FD86A
 	.2byte   0,  0
 	.2byte   0,  0
 	.2byte  -4,  4
