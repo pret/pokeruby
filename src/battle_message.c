@@ -937,17 +937,14 @@ void sub_8121D1C(u8* textBuff)
     }
 }
 
-#ifdef NONMATCHING
-
 void sub_8121D74(u8* dst)
 {
     s32 counter = 0;
-    s32 i;
+    s32 i = 0;
 
     while (*dst != EOS)
         dst++;
 
-    i = 0;
     while (counter != 4)
     {
         if (gUnknown_084016BC[i] == 0)
@@ -955,6 +952,7 @@ void sub_8121D74(u8* dst)
         if (gUnknown_084016BC[i++] == gStringInfo->currentMove)
             break;
     }
+
     switch (counter)
     {
     case 0:
@@ -974,93 +972,3 @@ void sub_8121D74(u8* dst)
         break;
     }
 }
-
-#else
-__attribute__((naked))
-void sub_8121D74(u8* dst)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r3, r0, 0\n\
-    movs r4, 0\n\
-    b _08121D7E\n\
-_08121D7C:\n\
-    adds r3, 0x1\n\
-_08121D7E:\n\
-    ldrb r0, [r3]\n\
-    cmp r0, 0xFF\n\
-    bne _08121D7C\n\
-    ldr r1, _08121DB4 @ =gUnknown_084016BC\n\
-    ldr r5, _08121DB8 @ =gSelectedOrderFromParty\n\
-    movs r0, 0\n\
-    lsls r0, 1\n\
-    adds r2, r0, r1\n\
-_08121D8E:\n\
-    cmp r4, 0x4\n\
-    beq _08121DA8\n\
-    ldrh r1, [r2]\n\
-    cmp r1, 0\n\
-    bne _08121D9A\n\
-    adds r4, 0x1\n\
-_08121D9A:\n\
-    ldr r0, [r5]\n\
-    adds r2, 0x2\n\
-    ldrh r0, [r0]\n\
-    cmp r1, r0\n\
-    bne _08121D8E\n\
-    cmp r4, 0x4\n\
-    bhi _08121E04\n\
-_08121DA8:\n\
-    lsls r0, r4, 2\n\
-    ldr r1, _08121DBC @ =_08121DC0\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08121DB4: .4byte gUnknown_084016BC\n\
-_08121DB8: .4byte gSelectedOrderFromParty\n\
-_08121DBC: .4byte _08121DC0\n\
-    .align 2, 0\n\
-_08121DC0:\n\
-    .4byte _08121DD4\n\
-    .4byte _08121DDC\n\
-    .4byte _08121DE4\n\
-    .4byte _08121DEC\n\
-    .4byte _08121DFC\n\
-_08121DD4:\n\
-    ldr r1, _08121DD8 @ =gUnknown_084007C8\n\
-    b _08121DEE\n\
-    .align 2, 0\n\
-_08121DD8: .4byte gUnknown_084007C8\n\
-_08121DDC:\n\
-    ldr r1, _08121DE0 @ =gUnknown_084007CA\n\
-    b _08121DEE\n\
-    .align 2, 0\n\
-_08121DE0: .4byte gUnknown_084007CA\n\
-_08121DE4:\n\
-    ldr r1, _08121DE8 @ =gUnknown_084007CC\n\
-    b _08121DEE\n\
-    .align 2, 0\n\
-_08121DE8: .4byte gUnknown_084007CC\n\
-_08121DEC:\n\
-    ldr r1, _08121DF8 @ =gUnknown_084007CE\n\
-_08121DEE:\n\
-    adds r0, r3, 0\n\
-    bl StringCopy\n\
-    b _08121E04\n\
-    .align 2, 0\n\
-_08121DF8: .4byte gUnknown_084007CE\n\
-_08121DFC:\n\
-    ldr r1, _08121E0C @ =gUnknown_084007D0\n\
-    adds r0, r3, 0\n\
-    bl StringCopy\n\
-_08121E04:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08121E0C: .4byte gUnknown_084007D0\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
