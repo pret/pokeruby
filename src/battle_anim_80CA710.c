@@ -25,6 +25,8 @@ extern s8 gUnknown_083D680C[11][3];
 extern u16 gUnknown_083D6984[];
 extern s8 gUnknown_083D6DDC[4][2];
 extern u8 gObjectBankIDs[];
+extern u8 gNoOfAllBanks;
+extern u8 gHealthboxIDs[];
 
 void sub_80CA768(struct Sprite* sprite);
 void sub_80CA8B4(struct Sprite* sprite);
@@ -74,6 +76,9 @@ void sub_80CDEB0(struct Sprite* sprite);
 void sub_80CDEC0(struct Sprite* sprite);
 void sub_80CDF70(struct Sprite* sprite);
 void sub_80CE000(struct Sprite* sprite);
+void sub_80CE1AC(struct Sprite* sprite);
+void sub_80CE354(struct Sprite* sprite);
+void sub_80CE3B0(struct Sprite* sprite);
 
 s16 sub_80CC338(struct Sprite* sprite);
 
@@ -90,6 +95,9 @@ void sub_807861C(struct Sprite *sprite);
 void sub_8078650(struct Sprite *sprite);
 void sub_8078394(struct Sprite *sprite);
 
+extern void sub_8043DB0();
+extern void sub_8043DFC();
+
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);
 s8 sub_8076F98(s8 a);
@@ -99,6 +107,7 @@ void sub_8078FDC(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 ro
 void sub_807867C(struct Sprite *sprite, s16 a2);
 u8 sub_8077EE4(u8 slot, u8 a2);
 u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7);
+u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4);
 
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
@@ -109,6 +118,7 @@ void sub_80CB438(u8 taskId);
 void sub_80CBF5C(u8 taskId);
 void sub_80CDB60(u8 taskId);
 void sub_80CDD20(u8 taskId);
+void sub_80CE4D4(u8 taskId);
 
 void sub_80CC358(struct Task* task, u8 taskId);
 
@@ -3049,4 +3059,162 @@ void sub_80CE09C(struct Sprite* sprite)
     }
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
         move_anim_8072740(sprite);
+}
+
+void sub_80CE108(u8 taskId)
+{
+    if (gTasks[taskId].data[2] == 1)
+    {
+        gBattleAnimArgs[7] = 0xFFFF;
+        gTasks[taskId].data[2]++;
+    }
+    else if (gTasks[taskId].data[2] == 2)
+    {
+        DestroyAnimVisualTask(taskId);
+    }
+    else
+    {
+        if (++gTasks[taskId].data[0] == 4)
+        {
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1]++;
+            REG_BLDALPHA = (gTasks[taskId].data[1] << 8) | (16 - gTasks[taskId].data[1]);
+            if (gTasks[taskId].data[1] == 16)
+                gTasks[taskId].data[2]++;
+        }
+    }
+}
+
+void sub_80CE17C(struct Sprite* sprite)
+{
+    sub_8078764(sprite, 0);
+    sprite->animPaused = 1;
+    sprite->data0 = gBattleAnimArgs[2];
+    sprite->callback = sub_80CE1AC;
+}
+
+void sub_80CE1AC(struct Sprite* sprite)
+{
+    if (sprite->data0)
+        sprite->data0--;
+    else
+    {
+        sprite->animPaused = 0;
+        sprite->data0 = 30;
+        sprite->data2 = sub_8077ABC(gBattleAnimPlayerMonIndex, 2);
+        sprite->data4 = sub_8077ABC(gBattleAnimPlayerMonIndex, 3);
+        sprite->callback = sub_8078B34;
+        oamt_set_x3A_32(sprite, move_anim_8072740);
+    }
+}
+
+void sub_80CE210(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] == 4)
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1]++;
+        REG_BLDALPHA = gTasks[taskId].data[1] | ((16 - gTasks[taskId].data[1]) << 8);
+        if (gTasks[taskId].data[1] == 16)
+            DestroyAnimVisualTask(taskId);
+    }
+}
+
+void unref_sub_80CE260(u8 taskId)
+{
+    u8 i;
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        if (gBattleAnimArgs[0] == 1 && GetBankSide(i) == 0)
+            sub_8043DB0(gHealthboxIDs[i]);
+        if (gBattleAnimArgs[1] == 1 && GetBankSide(i) == 1)
+            sub_8043DB0(gHealthboxIDs[i]);
+    }
+    DestroyAnimVisualTask(taskId);
+}
+
+void unref_sub_80CE2D4(u8 taskId)
+{
+    u8 i;
+    for (i = 0; i < gNoOfAllBanks; i++)
+        sub_8043DFC(gHealthboxIDs[i]);
+    DestroyAnimVisualTask(taskId);
+}
+
+void sub_80CE30C(struct Sprite* sprite)
+{
+    if (IsContest())
+    {
+        sprite->pos1.x = 0x30;
+        sprite->pos1.y = 0x28;
+    }
+    else
+    {
+        sprite->pos1.x = gBattleAnimArgs[0];
+        sprite->pos1.y = gBattleAnimArgs[1];
+    }
+    sprite->oam.shape = 0;
+    sprite->oam.size = 3;
+    sprite->data0 = 0;
+    sprite->callback = sub_80CE354;
+}
+
+void sub_80CE354(struct Sprite* sprite)
+{
+    if (sprite->data0)
+        move_anim_8072740(sprite);
+}
+
+void sub_80CE36C(struct Sprite* sprite)
+{
+    sprite->pos1.x = sub_8077ABC(gBattleAnimPlayerMonIndex, 2) + gBattleAnimArgs[0];
+    sprite->pos1.y = gBattleAnimArgs[1];
+    sprite->data0 = 0;
+    sprite->data1 = 0;
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+    sprite->data4 = 1;
+    sprite->callback = sub_80CE3B0;
+}
+
+void sub_80CE3B0(struct Sprite* sprite)
+{
+    if (++sprite->data1 > 1)
+    {
+        sprite->data1 = 0;
+        if (sprite->data2 <= 0x77)
+        {
+            sprite->pos1.y++;
+            sprite->data2++;
+        }
+    }
+    if (sprite->data0)
+        move_anim_8072740(sprite);
+}
+
+void sub_80CE3EC(u8 taskId)
+{
+    int a = sub_80791A8(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    int b;
+    int c;
+    int d;
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = a;
+    gTasks[taskId].data[4] = 0;
+    gTasks[taskId].data[5] = 0;
+    gTasks[taskId].data[6] = 0;
+    gTasks[taskId].data[7] = 13;
+    gTasks[taskId].data[8] = 14;
+    gTasks[taskId].data[9] = 15;
+    b = sub_80792C0(1, 1, 1, 1);
+    c = a | b;
+    sub_8079BF4(&gTasks[taskId].data[14], &gTasks[taskId].data[15], (void*)c);
+    b = b | (0x10000 << IndexOfSpritePaletteTag(0x27D2));
+    d = IndexOfSpritePaletteTag(0x27D3);
+    BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 0x10, 32699);
+    gTasks[taskId].func = sub_80CE4D4;
+    sub_80CE4D4(taskId);
+    
 }
