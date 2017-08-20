@@ -193,11 +193,19 @@ _080E6258: .4byte gSaveBlock1 + 0x2750
 _080E625C: .4byte sub_80546B8
 _080E6260:
 	ldr r1, _080E628C @ =0x02001000
+.ifdef ENGLISH
 	ldr r0, _080E6290 @ =0x00009c7c
+.else
+	ldr r0, _080E6290 @ =0x00009fa8
+.endif
 	adds r2, r1, r0
 	ldr r0, _080E6294 @ =0x0000ffff
 	strh r0, [r2]
+.ifdef ENGLISH
 	ldr r0, _080E6298 @ =0x00009c7e
+.else
+	ldr r0, _080E6298 @ =0x00009faa
+.endif
 	adds r1, r0
 	movs r0, 0x1
 	negs r0, r0
@@ -217,9 +225,17 @@ _080E6284:
 	bx r0
 	.align 2, 0
 _080E628C: .4byte 0x02001000
+.ifdef ENGLISH
 _080E6290: .4byte 0x00009c7c
+.else
+_080E6290: .4byte 0x00009fa8
+.endif
 _080E6294: .4byte 0x0000ffff
+.ifdef ENGLISH
 _080E6298: .4byte 0x00009c7e
+.else
+_080E6298: .4byte 0x00009faa
+.endif
 _080E629C: .4byte sub_80546B8
 	thumb_func_end sub_80E60D8
 
@@ -235,7 +251,11 @@ sub_80E62A0: @ 80E62A0
 	strb r3, [r4, 0xB]
 	cmp r0, 0x9
 	bne _080E62D0
+.ifdef ENGLISH
 	ldr r0, _080E62E0 @ =0x00009c7c
+.else
+	ldr r0, _080E62E0 @ =0x00009fa8
+.endif
 	adds r2, r4, r0
 	str r2, [r4, 0x4]
 	ldr r0, _080E62E4 @ =gSaveBlock1
@@ -246,7 +266,11 @@ sub_80E62A0: @ 80E62A0
 	ldr r1, _080E62EC @ =0x00002dda
 	adds r0, r1
 	ldrh r1, [r0]
+.ifdef ENGLISH
 	ldr r2, _080E62F0 @ =0x00009c7e
+.else
+	ldr r2, _080E62F0 @ =0x00009faa
+.endif
 	adds r0, r4, r2
 	strh r1, [r0]
 _080E62D0:
@@ -257,11 +281,19 @@ _080E62D0:
 	bx r0
 	.align 2, 0
 _080E62DC: .4byte 0x02001000
+.ifdef ENGLISH
 _080E62E0: .4byte 0x00009c7c
+.else
+_080E62E0: .4byte 0x00009fa8
+.endif
 _080E62E4: .4byte gSaveBlock1
 _080E62E8: .4byte 0x00002dd8
 _080E62EC: .4byte 0x00002dda
+.ifdef ENGLISH
 _080E62F0: .4byte 0x00009c7e
+.else
+_080E62F0: .4byte 0x00009faa
+.endif
 _080E62F4: .4byte sub_80E62F8
 	thumb_func_end sub_80E62A0
 
@@ -787,7 +819,11 @@ _080E670A:
 	bls _080E66A4
 	movs r5, 0
 	ldr r3, _080E6758 @ =0x02001000
+.ifdef ENGLISH
 	ldr r0, _080E675C @ =0x00009da4
+.else
+	ldr r0, _080E675C @ =0x0000a0d0
+.endif
 	adds r2, r3, r0
 	movs r1, 0
 _080E671E:
@@ -798,7 +834,11 @@ _080E671E:
 	lsrs r5, r0, 16
 	cmp r5, 0x23
 	bls _080E671E
+.ifdef ENGLISH
 	ldr r1, _080E675C @ =0x00009da4
+.else
+	ldr r1, _080E675C @ =0x0000a0d0
+.endif
 	adds r0, r3, r1
 	adds r0, r5, r0
 	movs r4, 0x1
@@ -806,7 +846,11 @@ _080E671E:
 	adds r2, r4, 0
 	movs r1, 0xFF
 	strb r1, [r0]
+.ifdef ENGLISH
 	ldr r0, _080E6760 @ =0x00009f6e
+.else
+	ldr r0, _080E6760 @ =0x0000a29a
+.endif
 	adds r3, r0
 	movs r0, 0xFC
 	strb r0, [r3]
@@ -821,8 +865,13 @@ _080E671E:
 	bx r0
 	.align 2, 0
 _080E6758: .4byte 0x02001000
+.ifdef ENGLISH
 _080E675C: .4byte 0x00009da4
 _080E6760: .4byte 0x00009f6e
+.else
+_080E675C: .4byte 0x0000a0d0
+_080E6760: .4byte 0x0000a29a
+.endif
 	thumb_func_end sub_80E6690
 
 	thumb_func_start InitEasyChatPhrases
@@ -1043,13 +1092,21 @@ sub_80E68E8: @ 80E68E8
 	adds r0, r3, r1
 	ldrb r6, [r0]
 	lsls r0, r6, 1
+.ifdef ENGLISH
 	ldr r2, _080E6950 @ =0x00004178
+.else
+	ldr r2, _080E6950 @ =0x000044a2
+.endif
 	adds r1, r3, r2
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r0, 0x1
 	asrs r0, 1
+.ifdef ENGLISH
 	ldr r1, _080E6954 @ =0x00009a28
+.else
+	ldr r1, _080E6954 @ =0x00009d54
+.endif
 	adds r2, r3, r1
 	strb r0, [r2]
 	movs r1, 0
@@ -1058,7 +1115,11 @@ sub_80E68E8: @ 80E68E8
 	adds r5, r3, 0
 	cmp r1, r0
 	bge _080E693A
+.ifdef ENGLISH
 	ldr r3, _080E6958 @ =0x000099a6
+.else
+	ldr r3, _080E6958 @ =0x00009cd2
+.endif
 	adds r4, r5, r3
 	movs r3, 0x2
 _080E6928:
@@ -1075,30 +1136,52 @@ _080E693A:
 	subs r0, r1, 0x1
 	lsls r0, 16
 	lsrs r1, r0, 16
+.ifdef ENGLISH
 	ldr r2, _080E6958 @ =0x000099a6
+.else
+	ldr r2, _080E6958 @ =0x00009cd2
+.endif
 	adds r0, r5, r2
 	adds r2, r1, r0
 	lsls r0, r6, 1
+.ifdef ENGLISH
 	ldr r3, _080E6950 @ =0x00004178
+.else
+	ldr r3, _080E6950 @ =0x000044a2
+.endif
 	b _080E69AC
 	.align 2, 0
 _080E694C: .4byte 0x02001000
+.ifdef ENGLISH
 _080E6950: .4byte 0x00004178
 _080E6954: .4byte 0x00009a28
 _080E6958: .4byte 0x000099a6
+.else
+_080E6950: .4byte 0x000044a2
+_080E6954: .4byte 0x00009d54
+_080E6958: .4byte 0x00009cd2
+.endif
 _080E695C:
 	movs r1, 0xDC
 	lsls r1, 1
 	adds r0, r3, r1
 	ldrb r6, [r0]
 	lsls r0, r6, 1
+.ifdef ENGLISH
 	ldr r2, _080E69E0 @ =0x00004142
+.else
+	ldr r2, _080E69E0 @ =0x0000446c
+.endif
 	adds r1, r3, r2
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r0, 0x1
 	asrs r0, 1
+.ifdef ENGLISH
 	ldr r1, _080E69E4 @ =0x00009a28
+.else
+	ldr r1, _080E69E4 @ =0x00009d54
+.endif
 	adds r2, r3, r1
 	strb r0, [r2]
 	movs r1, 0
@@ -1107,7 +1190,11 @@ _080E695C:
 	adds r5, r3, 0
 	cmp r1, r0
 	bge _080E699C
+.ifdef ENGLISH
 	ldr r3, _080E69E8 @ =0x000099a6
+.else
+	ldr r3, _080E69E8 @ =0x00009cd2
+.endif
 	adds r4, r5, r3
 	movs r3, 0x2
 _080E698A:
@@ -1124,11 +1211,19 @@ _080E699C:
 	subs r0, r1, 0x1
 	lsls r0, 16
 	lsrs r1, r0, 16
+.ifdef ENGLISH
 	ldr r2, _080E69E8 @ =0x000099a6
+.else
+	ldr r2, _080E69E8 @ =0x00009cd2
+.endif
 	adds r0, r5, r2
 	adds r2, r1, r0
 	lsls r0, r6, 1
+.ifdef ENGLISH
 	ldr r3, _080E69E0 @ =0x00004142
+.else
+	ldr r3, _080E69E0 @ =0x0000446c
+.endif
 _080E69AC:
 	adds r1, r5, r3
 	adds r0, r1
@@ -1141,14 +1236,26 @@ _080E69AC:
 	movs r0, 0x2
 	strb r0, [r2]
 _080E69C0:
+.ifdef ENGLISH
 	ldr r1, _080E69EC @ =0x000099a4
+.else
+	ldr r1, _080E69EC @ =0x00009cd0
+.endif
 	adds r0, r5, r1
 	movs r1, 0
 	strb r1, [r0]
+.ifdef ENGLISH
 	ldr r2, _080E69F0 @ =0x000099a5
+.else
+	ldr r2, _080E69F0 @ =0x00009cd1
+.endif
 	adds r0, r5, r2
 	strb r1, [r0]
+.ifdef ENGLISH
 	ldr r3, _080E69F4 @ =0x00009a29
+.else
+	ldr r3, _080E69F4 @ =0x00009d55
+.endif
 	adds r0, r5, r3
 	strb r1, [r0]
 	bl sub_80E9A4C
@@ -1156,12 +1263,21 @@ _080E69C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E69E0: .4byte 0x00004142
 _080E69E4: .4byte 0x00009a28
 _080E69E8: .4byte 0x000099a6
 _080E69EC: .4byte 0x000099a4
 _080E69F0: .4byte 0x000099a5
 _080E69F4: .4byte 0x00009a29
+.else
+_080E69E0: .4byte 0x0000446c
+_080E69E4: .4byte 0x00009d54
+_080E69E8: .4byte 0x00009cd2
+_080E69EC: .4byte 0x00009cd0
+_080E69F0: .4byte 0x00009cd1
+_080E69F4: .4byte 0x00009d55
+.endif
 	thumb_func_end sub_80E68E8
 
 	thumb_func_start sub_80E69F8
@@ -1745,7 +1861,11 @@ _080E6E82:
 	bne _080E6E9C
 	bl sub_80E81C0
 	ldr r4, _080E6ECC @ =gSpecialVar_0x8004
+.ifdef ENGLISH
 	ldr r1, _080E6ED0 @ =0x00009c7c
+.else
+	ldr r1, _080E6ED0 @ =0x00009fa8
+.endif
 	adds r0, r5, r1
 	bl sub_80FA364
 	lsls r0, 24
@@ -1777,7 +1897,11 @@ _080E6EBE:
 	.align 2, 0
 _080E6EC8: .4byte gScriptResult
 _080E6ECC: .4byte gSpecialVar_0x8004
+.ifdef ENGLISH
 _080E6ED0: .4byte 0x00009c7c
+.else
+_080E6ED0: .4byte 0x00009fa8
+.endif
 _080E6ED4: .4byte 0x0000ffff
 _080E6ED8: .4byte sub_80E752C
 _080E6EDC:
@@ -2009,7 +2133,11 @@ _080E7090:
 	adds r2, r0
 	ldrb r0, [r2]
 	lsls r0, 1
+.ifdef ENGLISH
 	ldr r2, _080E70E0 @ =0x00004142
+.else
+	ldr r2, _080E70E0 @ =0x0000446c
+.endif
 	adds r1, r4, r2
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2024,7 +2152,11 @@ _080E70CA:
 	b _080E710A
 	.align 2, 0
 _080E70DC: .4byte 0x000001a9
+.ifdef ENGLISH
 _080E70E0: .4byte 0x00004142
+.else
+_080E70E0: .4byte 0x0000446c
+.endif
 _080E70E4: .4byte sub_80E7218
 _080E70E8:
 	movs r0, 0x2
@@ -2518,7 +2650,11 @@ _080E74A4:
 _080E74DC: .4byte sub_80E6FC8
 _080E74E0: .4byte 0x000001b5
 _080E74E4:
+.ifdef ENGLISH
 	ldr r0, _080E7520 @ =0x00009a29
+.else
+	ldr r0, _080E7520 @ =0x00009d55
+.endif
 	adds r1, r4, r0
 	movs r2, 0xE0
 	lsls r2, 1
@@ -2548,7 +2684,11 @@ _080E7518:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E7520: .4byte 0x00009a29
+.else
+_080E7520: .4byte 0x00009d55
+.endif
 _080E7524: .4byte 0x000001b9
 _080E7528: .4byte 0x02001000
 	thumb_func_end sub_80E7458
@@ -3406,7 +3546,11 @@ sub_80E7B40: @ 80E7B40
 	adds r7, r1, 0
 	cmp r0, 0
 	beq _080E7B9C
+.ifdef ENGLISH
 	ldr r2, _080E7B94 @ =0x000099a4
+.else
+	ldr r2, _080E7B94 @ =0x00009cd0
+.endif
 	adds r1, r3, r2
 	ldrb r2, [r1]
 	movs r0, 0
@@ -3417,7 +3561,11 @@ sub_80E7B40: @ 80E7B40
 _080E7B6E:
 	subs r0, r2, 0x1
 	strb r0, [r1]
+.ifdef ENGLISH
 	ldr r4, _080E7B98 @ =0x00009a29
+.else
+	ldr r4, _080E7B98 @ =0x00009d55
+.endif
 	adds r1, r3, r4
 	lsls r0, 24
 	asrs r0, 24
@@ -3432,18 +3580,31 @@ _080E7B6E:
 	.align 2, 0
 _080E7B8C: .4byte 0x02001000
 _080E7B90: .4byte gMain
+.ifdef ENGLISH
 _080E7B94: .4byte 0x000099a4
 _080E7B98: .4byte 0x00009a29
+.else
+_080E7B94: .4byte 0x00009cd0
+_080E7B98: .4byte 0x00009d55
+.endif
 _080E7B9C:
 	movs r0, 0x80
 	ands r0, r4
 	cmp r0, 0
 	beq _080E7BEE
+.ifdef ENGLISH
 	ldr r0, _080E7BE0 @ =0x000099a4
+.else
+	ldr r0, _080E7BE0 @ =0x00009cd0
+.endif
 	adds r2, r3, r0
 	movs r1, 0
 	ldrsb r1, [r2, r1]
+.ifdef ENGLISH
 	ldr r4, _080E7BE4 @ =0x00009a28
+.else
+	ldr r4, _080E7BE4 @ =0x00009d54
+.endif
 	adds r0, r3, r4
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -3458,7 +3619,11 @@ _080E7BBE:
 	strb r0, [r2]
 	movs r1, 0
 	ldrsb r1, [r2, r1]
+.ifdef ENGLISH
 	ldr r2, _080E7BE8 @ =0x00009a29
+.else
+	ldr r2, _080E7BE8 @ =0x00009d55
+.endif
 	adds r0, r3, r2
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -3470,9 +3635,15 @@ _080E7BBE:
 	strb r0, [r6]
 	b _080E7D1A
 	.align 2, 0
+.ifdef ENGLISH
 _080E7BE0: .4byte 0x000099a4
 _080E7BE4: .4byte 0x00009a28
 _080E7BE8: .4byte 0x00009a29
+.else
+_080E7BE0: .4byte 0x00009cd0
+_080E7BE4: .4byte 0x00009d54
+_080E7BE8: .4byte 0x00009d55
+.endif
 _080E7BEC:
 	movs r5, 0x1
 _080E7BEE:
@@ -3491,7 +3662,11 @@ _080E7BFA:
 	lsrs r5, r0, 16
 	cmp r5, 0
 	beq _080E7C38
+.ifdef ENGLISH
 	ldr r4, _080E7C30 @ =0x000099a5
+.else
+	ldr r4, _080E7C30 @ =0x00009cd1
+.endif
 	adds r2, r3, r4
 	ldrb r0, [r2]
 	subs r0, 0x1
@@ -3499,7 +3674,11 @@ _080E7BFA:
 	lsls r0, 24
 	cmp r0, 0
 	bge _080E7BF6
+.ifdef ENGLISH
 	ldr r6, _080E7C34 @ =0x000099a4
+.else
+	ldr r6, _080E7C34 @ =0x00009cd0
+.endif
 	adds r0, r3, r6
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -3512,19 +3691,32 @@ _080E7BFA:
 	strb r0, [r2]
 	b _080E7BF6
 	.align 2, 0
+.ifdef ENGLISH
 _080E7C30: .4byte 0x000099a5
 _080E7C34: .4byte 0x000099a4
+.else
+_080E7C30: .4byte 0x00009cd1
+_080E7C34: .4byte 0x00009cd0
+.endif
 _080E7C38:
 	movs r0, 0x10
 	ands r0, r1
 	cmp r0, 0
 	beq _080E7C70
+.ifdef ENGLISH
 	ldr r6, _080E7C68 @ =0x000099a5
+.else
+	ldr r6, _080E7C68 @ =0x00009cd1
+.endif
 	adds r4, r3, r6
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
+.ifdef ENGLISH
 	ldr r2, _080E7C6C @ =0x000099a4
+.else
+	ldr r2, _080E7C6C @ =0x00009cd0
+.endif
 	adds r1, r3, r2
 	movs r2, 0
 	ldrsb r2, [r1, r2]
@@ -3540,15 +3732,24 @@ _080E7C38:
 	strb r5, [r4]
 	b _080E7BF6
 	.align 2, 0
+.ifdef ENGLISH
 _080E7C68: .4byte 0x000099a5
 _080E7C6C: .4byte 0x000099a4
+.else
+_080E7C68: .4byte 0x00009cd1
+_080E7C6C: .4byte 0x00009cd0
+.endif
 _080E7C70:
 	ldrh r1, [r7, 0x2E]
 	movs r0, 0x8
 	ands r0, r1
 	cmp r0, 0
 	beq _080E7CC4
+.ifdef ENGLISH
 	ldr r1, _080E7CBC @ =0x00009a29
+.else
+	ldr r1, _080E7CBC @ =0x00009d55
+.endif
 	adds r0, r3, r1
 	ldrb r1, [r0]
 	ldrb r0, [r0]
@@ -3569,7 +3770,11 @@ _080E7C70:
 	bge _080E7CA2
 	strb r1, [r2]
 _080E7CA2:
+.ifdef ENGLISH
 	ldr r6, _080E7CC0 @ =0x000099a4
+.else
+	ldr r6, _080E7CC0 @ =0x00009cd0
+.endif
 	adds r1, r3, r6
 	movs r2, 0xE0
 	lsls r2, 1
@@ -3583,18 +3788,31 @@ _080E7CA2:
 	adds r1, r3, r6
 	b _080E7D16
 	.align 2, 0
+.ifdef ENGLISH
 _080E7CBC: .4byte 0x00009a29
 _080E7CC0: .4byte 0x000099a4
+.else
+_080E7CBC: .4byte 0x00009d55
+_080E7CC0: .4byte 0x00009cd0
+.endif
 _080E7CC4:
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
 	beq _080E7D1A
+.ifdef ENGLISH
 	ldr r0, _080E7D24 @ =0x00009a29
+.else
+	ldr r0, _080E7D24 @ =0x00009d55
+.endif
 	adds r4, r3, r0
 	movs r1, 0
 	ldrsb r1, [r4, r1]
+.ifdef ENGLISH
 	ldr r6, _080E7D28 @ =0x00009a28
+.else
+	ldr r6, _080E7D28 @ =0x00009d54
+.endif
 	adds r2, r3, r6
 	movs r0, 0
 	ldrsb r0, [r2, r0]
@@ -3616,7 +3834,11 @@ _080E7CC4:
 	movs r0, 0x4
 	strb r0, [r1]
 _080E7CFE:
+.ifdef ENGLISH
 	ldr r4, _080E7D2C @ =0x000099a4
+.else
+	ldr r4, _080E7D2C @ =0x00009cd0
+.endif
 	adds r1, r3, r4
 	movs r6, 0xE0
 	lsls r6, 1
@@ -3638,18 +3860,32 @@ _080E7D1C:
 	pop {r1}
 	bx r1
 	.align 2, 0
+.ifdef ENGLISH
 _080E7D24: .4byte 0x00009a29
 _080E7D28: .4byte 0x00009a28
 _080E7D2C: .4byte 0x000099a4
+.else
+_080E7D24: .4byte 0x00009d55
+_080E7D28: .4byte 0x00009d54
+_080E7D2C: .4byte 0x00009cd0
+.endif
 	thumb_func_end sub_80E7B40
 
 	thumb_func_start sub_80E7D30
 sub_80E7D30: @ 80E7D30
 	push {r4,lr}
 	ldr r0, _080E7D60 @ =0x02001000
+.ifdef ENGLISH
 	ldr r1, _080E7D64 @ =0x000099a5
+.else
+	ldr r1, _080E7D64 @ =0x00009cd1
+.endif
 	adds r4, r0, r1
+.ifdef ENGLISH
 	ldr r2, _080E7D68 @ =0x000099a4
+.else
+	ldr r2, _080E7D68 @ =0x00009cd0
+.endif
 	adds r1, r0, r2
 	ldrb r1, [r1]
 	lsls r1, 24
@@ -3672,8 +3908,13 @@ _080E7D5A:
 	bx r0
 	.align 2, 0
 _080E7D60: .4byte 0x02001000
+.ifdef ENGLISH
 _080E7D64: .4byte 0x000099a5
 _080E7D68: .4byte 0x000099a4
+.else
+_080E7D64: .4byte 0x00009cd1
+_080E7D68: .4byte 0x00009cd0
+.endif
 	thumb_func_end sub_80E7D30
 
 	thumb_func_start sub_80E7D6C
@@ -3740,12 +3981,20 @@ _080E7DCC: .4byte 0x02001000
 sub_80E7DD0: @ 80E7DD0
 	push {r4,lr}
 	ldr r2, _080E7E28 @ =0x02001000
+.ifdef ENGLISH
 	ldr r1, _080E7E2C @ =0x000099a5
+.else
+	ldr r1, _080E7E2C @ =0x00009cd1
+.endif
 	adds r0, r2, r1
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r1, 1
+.ifdef ENGLISH
 	ldr r3, _080E7E30 @ =0x000099a4
+.else
+	ldr r3, _080E7E30 @ =0x00009cd0
+.endif
 	adds r0, r2, r3
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -3782,8 +4031,13 @@ sub_80E7DD0: @ 80E7DD0
 	b _080E7E46
 	.align 2, 0
 _080E7E28: .4byte 0x02001000
+.ifdef ENGLISH
 _080E7E2C: .4byte 0x000099a5
 _080E7E30: .4byte 0x000099a4
+.else
+_080E7E2C: .4byte 0x00009cd1
+_080E7E30: .4byte 0x00009cd0
+.endif
 _080E7E34:
 	ldr r0, _080E7E4C @ =0x02001000
 	adds r0, 0x27
@@ -3991,13 +4245,25 @@ sub_80E7FA8: @ 80E7FA8
 	ldrb r1, [r0, 0xA]
 	cmp r8, r1
 	bcs _080E802E
+.ifdef ENGLISH
 	ldr r3, _080E8044 @ =0x00009e14
+.else
+	ldr r3, _080E8044 @ =0x0000a140
+.endif
 	adds r6, r0, r3
+.ifdef ENGLISH
 	ldr r1, _080E8048 @ =0x00009e41
+.else
+	ldr r1, _080E8048 @ =0x0000a16d
+.endif
 	adds r1, r0
 	mov r9, r1
 _080E7FC8:
+.ifdef ENGLISH
 	ldr r3, _080E804C @ =0xffff61ec
+.else
+	ldr r3, _080E804C @ =0xffff5ec0
+.endif
 	adds r7, r6, r3
 	ldr r0, [r7, 0x4]
 	lsls r4, r5, 1
@@ -4006,7 +4272,11 @@ _080E7FC8:
 	adds r0, r6, 0
 	movs r2, 0
 	bl sub_80EB218
+.ifdef ENGLISH
 	ldr r1, _080E8050 @ =0xffff61f8
+.else
+	ldr r1, _080E8050 @ =0xffff5ecc
+.endif
 	adds r0, r6, r1
 	adds r0, r4
 	ldrh r1, [r0]
@@ -4062,10 +4332,17 @@ _080E802E:
 	bx r1
 	.align 2, 0
 _080E8040: .4byte 0x02001000
+.ifdef ENGLISH
 _080E8044: .4byte 0x00009e14
 _080E8048: .4byte 0x00009e41
 _080E804C: .4byte 0xffff61ec
 _080E8050: .4byte 0xffff61f8
+.else
+_080E8044: .4byte 0x0000a140
+_080E8048: .4byte 0x0000a16d
+_080E804C: .4byte 0xffff5ec0
+_080E8050: .4byte 0xffff5ecc
+.endif
 	thumb_func_end sub_80E7FA8
 
 	thumb_func_start sub_80E8054
@@ -4109,12 +4386,20 @@ _080E808C:
 sub_80E8094: @ 80E8094
 	push {r4-r7,lr}
 	movs r5, 0
+.ifdef ENGLISH
 	ldr r6, _080E80C4 @ =0x0200ae14
+.else
+	ldr r6, _080E80C4 @ =0x0200b140
+.endif
 	adds r7, r6, 0
 	adds r7, 0x2D
 _080E809E:
 	lsls r4, r5, 1
+.ifdef ENGLISH
 	ldr r1, _080E80C8 @ =0xffff61f8
+.else
+	ldr r1, _080E80C8 @ =0xffff5ecc
+.endif
 	adds r0, r6, r1
 	adds r0, r4
 	ldrh r1, [r0]
@@ -4131,8 +4416,13 @@ _080E809E:
 	adds r4, r7, 0
 	b _080E80D8
 	.align 2, 0
+.ifdef ENGLISH
 _080E80C4: .4byte 0x0200ae14
 _080E80C8: .4byte 0xffff61f8
+.else
+_080E80C4: .4byte 0x0200b140
+_080E80C8: .4byte 0xffff5ecc
+.endif
 _080E80CC: .4byte gMysteryEventPhrase
 _080E80D0:
 	adds r4, 0x1
@@ -4179,8 +4469,13 @@ sub_80E810C: @ 80E810C
 	mov r5, r8
 	push {r5-r7}
 	movs r5, 0
+.ifdef ENGLISH
 	ldr r6, _080E8198 @ =0x0200ae6e
 	ldr r0, _080E819C @ =0xffff6192
+.else
+	ldr r6, _080E8198 @ =0x0200b19a
+	ldr r0, _080E819C @ =0xffff5e66
+.endif
 	adds r0, r6
 	mov r9, r0
 	movs r1, 0
@@ -4243,8 +4538,13 @@ _080E818A:
 	lsrs r0, 24
 	b _080E81B2
 	.align 2, 0
+.ifdef ENGLISH
 _080E8198: .4byte 0x0200ae6e
 _080E819C: .4byte 0xffff6192
+.else
+_080E8198: .4byte 0x0200b19a
+_080E819C: .4byte 0xffff5e66
+.endif
 _080E81A0: .4byte gBerryMasterWifePhrases
 _080E81A4: .4byte gBerryMasterWifePhrases + 0x2
 _080E81A8:
@@ -4268,7 +4568,11 @@ sub_80E81C0: @ 80E81C0
 	push {r4,lr}
 	ldr r0, _080E81EC @ =gStringVar2
 	ldr r4, _080E81F0 @ =0x02001000
+.ifdef ENGLISH
 	ldr r2, _080E81F4 @ =0x00009c7c
+.else
+	ldr r2, _080E81F4 @ =0x00009fa8
+.endif
 	adds r1, r4, r2
 	ldrh r1, [r1]
 	movs r2, 0
@@ -4276,7 +4580,11 @@ sub_80E81C0: @ 80E81C0
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, 0x1
+.ifdef ENGLISH
 	ldr r1, _080E81F8 @ =0x00009c7e
+.else
+	ldr r1, _080E81F8 @ =0x00009faa
+.endif
 	adds r4, r1
 	ldrh r1, [r4]
 	movs r2, 0
@@ -4287,8 +4595,13 @@ sub_80E81C0: @ 80E81C0
 	.align 2, 0
 _080E81EC: .4byte gStringVar2
 _080E81F0: .4byte 0x02001000
+.ifdef ENGLISH
 _080E81F4: .4byte 0x00009c7c
 _080E81F8: .4byte 0x00009c7e
+.else
+_080E81F4: .4byte 0x00009fa8
+_080E81F8: .4byte 0x00009faa
+.endif
 	thumb_func_end sub_80E81C0
 
 	thumb_func_start sub_80E81FC
@@ -4911,7 +5224,11 @@ _080E869E:
 	.align 2, 0
 _080E86C0: .4byte 0x000001a9
 _080E86C4:
+.ifdef ENGLISH
 	movs r0, 0xD8
+.else
+	movs r0, 0xD6
+.endif
 	strh r0, [r5, 0x20]
 	movs r1, 0xD4
 	lsls r1, 1
@@ -4999,6 +5316,7 @@ _080E8756:
 _080E875C: .4byte gUnknown_083DB694
 	thumb_func_end sub_80E872C
 
+.ifdef ENGLISH
 	thumb_func_start sub_80E8760
 sub_80E8760: @ 80E8760
 	push {lr}
@@ -5039,6 +5357,60 @@ _080E879E:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E8760
+.else
+	thumb_func_start sub_80E8760
+sub_80E8760: @ 80E8760
+	push {lr}
+	adds r2, r0, 0
+	ldr r0, _080E8784 @ =gUnknown_083DB694
+	ldr r1, [r0]
+	adds r0, r1, 0
+	adds r0, 0x96
+	ldrb r0, [r0]
+	cmp r0, 0
+	beq _080E87B2
+	movs r3, 0x32
+	ldrsh r0, [r2, r3]
+	cmp r0, 0x1
+	beq _080E8798
+	cmp r0, 0x1
+	bgt _080E8788
+	cmp r0, 0
+	beq _080E878E
+	b _080E87B2
+	.align 2, 0
+_080E8784: .4byte gUnknown_083DB694
+_080E8788:
+	cmp r0, 0x2
+	beq _080E87A2
+	b _080E87B2
+_080E878E:
+	adds r1, 0x9C
+	ldr r0, [r1]
+	ldrh r0, [r0, 0x20]
+	adds r0, 0x40
+	b _080E87AA
+_080E8798:
+	adds r1, 0x9C
+	ldr r0, [r1]
+	ldrh r0, [r0, 0x20]
+	adds r0, 0x1C
+	b _080E87AA
+_080E87A2:
+	adds r1, 0x9C
+	ldr r0, [r1]
+	ldrh r0, [r0, 0x20]
+	adds r0, 0x15
+_080E87AA:
+	strh r0, [r2, 0x20]
+	ldr r0, [r1]
+	ldrh r0, [r0, 0x22]
+	strh r0, [r2, 0x22]
+_080E87B2:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80E8760
+.endif
 
 	thumb_func_start sub_80E87A4
 sub_80E87A4: @ 80E87A4
@@ -5157,7 +5529,11 @@ sub_80E8860: @ 80E8860
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _080E88C4
+.ifdef ENGLISH
 	ldr r5, _080E88B8 @ =0x000099a5
+.else
+	ldr r5, _080E88B8 @ =0x00009cd1
+.endif
 	adds r0, r3, r5
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -5165,7 +5541,11 @@ sub_80E8860: @ 80E8860
 	muls r0, r1
 	adds r0, 0x2C
 	strh r0, [r2, 0x20]
+.ifdef ENGLISH
 	ldr r1, _080E88BC @ =0x000099a4
+.else
+	ldr r1, _080E88BC @ =0x00009cd0
+.endif
 	adds r0, r3, r1
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -5186,8 +5566,13 @@ sub_80E8860: @ 80E8860
 	.align 2, 0
 _080E88B0: .4byte gUnknown_083DB694
 _080E88B4: .4byte 0x000001b9
+.ifdef ENGLISH
 _080E88B8: .4byte 0x000099a5
 _080E88BC: .4byte 0x000099a4
+.else
+_080E88B8: .4byte 0x00009cd1
+_080E88BC: .4byte 0x00009cd0
+.endif
 _080E88C0: .4byte 0x0000fffa
 _080E88C4:
 	ldrh r0, [r2, 0x2E]
@@ -5255,7 +5640,11 @@ _080E890C:
 	bls _080E890C
 	mov r1, r8
 	ldr r0, [r1]
+.ifdef ENGLISH
 	ldr r1, _080E8954 @ =0x00009c70
+.else
+	ldr r1, _080E8954 @ =0x00009f9c
+.endif
 	adds r0, r1
 	movs r1, 0
 	strb r1, [r0]
@@ -5266,7 +5655,11 @@ _080E890C:
 	bx r0
 	.align 2, 0
 _080E8950: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8954: .4byte 0x00009c70
+.else
+_080E8954: .4byte 0x00009f9c
+.endif
 	thumb_func_end sub_80E88F0
 
 	thumb_func_start sub_80E8958
@@ -5283,7 +5676,11 @@ sub_80E8958: @ 80E8958
 	mov r9, r0
 	ldr r0, _080E8998 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r3, _080E899C @ =0x00009c6c
+.else
+	ldr r3, _080E899C @ =0x00009f98
+.endif
 	adds r1, r2, r3
 	ldr r3, _080E89A0 @ =0x000001b5
 	adds r0, r2, r3
@@ -5298,37 +5695,73 @@ sub_80E8958: @ 80E8958
 	adds r0, r2, r1
 	ldrb r0, [r0]
 	subs r0, 0x4
+.ifdef ENGLISH
 	ldr r3, _080E89A4 @ =0x00009c71
+.else
+	ldr r3, _080E89A4 @ =0x00009f9d
+.endif
 	adds r1, r2, r3
 	strb r0, [r1]
 	b _080E8A00
 	.align 2, 0
 _080E8998: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E899C: .4byte 0x00009c6c
+.else
+_080E899C: .4byte 0x00009f98
+.endif
 _080E89A0: .4byte 0x000001b5
+.ifdef ENGLISH
 _080E89A4: .4byte 0x00009c71
+.else
+_080E89A4: .4byte 0x00009f9d
+.endif
 _080E89A8:
+.ifdef ENGLISH
 	ldr r1, _080E89B0 @ =0x00009c71
+.else
+	ldr r1, _080E89B0 @ =0x00009f9d
+.endif
 	adds r0, r2, r1
 	strb r7, [r0]
 	b _080E8A00
 	.align 2, 0
+.ifdef ENGLISH
 _080E89B0: .4byte 0x00009c71
+.else
+_080E89B0: .4byte 0x00009f9d
+.endif
 _080E89B4:
 	movs r3, 0x78
 	mov r9, r3
 	ldr r0, _080E8A64 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r0, _080E8A68 @ =0x00009c6c
+.else
+	ldr r0, _080E8A68 @ =0x00009f98
+.endif
 	adds r1, r2, r0
+.ifdef ENGLISH
 	ldr r3, _080E8A6C @ =0x00009a29
+.else
+	ldr r3, _080E8A6C @ =0x00009d55
+.endif
 	adds r0, r2, r3
 	str r0, [r1]
+.ifdef ENGLISH
 	ldr r1, _080E8A70 @ =0x00009a28
+.else
+	ldr r1, _080E8A70 @ =0x00009d54
+.endif
 	adds r0, r2, r1
 	ldrb r0, [r0]
 	subs r0, 0x4
+.ifdef ENGLISH
 	ldr r3, _080E8A74 @ =0x00009c71
+.else
+	ldr r3, _080E8A74 @ =0x00009f9d
+.endif
 	adds r1, r2, r3
 	strb r0, [r1]
 	movs r4, 0
@@ -5357,7 +5790,11 @@ _080E89E2:
 _080E8A00:
 	ldr r0, _080E8A64 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r3, _080E8A74 @ =0x00009c71
+.else
+	ldr r3, _080E8A74 @ =0x00009f9d
+.endif
 	adds r1, r2, r3
 	movs r0, 0
 	ldrsb r0, [r1, r0]
@@ -5397,7 +5834,11 @@ _080E8A20:
 	bls _080E8A20
 	ldr r0, _080E8A64 @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E8A78 @ =0x00009c70
+.else
+	ldr r1, _080E8A78 @ =0x00009f9c
+.endif
 	adds r0, r1
 	strb r5, [r0]
 	pop {r3,r4}
@@ -5408,11 +5849,19 @@ _080E8A20:
 	bx r0
 	.align 2, 0
 _080E8A64: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8A68: .4byte 0x00009c6c
 _080E8A6C: .4byte 0x00009a29
 _080E8A70: .4byte 0x00009a28
 _080E8A74: .4byte 0x00009c71
 _080E8A78: .4byte 0x00009c70
+.else
+_080E8A68: .4byte 0x00009f98
+_080E8A6C: .4byte 0x00009d55
+_080E8A70: .4byte 0x00009d54
+_080E8A74: .4byte 0x00009f9d
+_080E8A78: .4byte 0x00009f9c
+.endif
 	thumb_func_end sub_80E8958
 
 	thumb_func_start sub_80E8A7C
@@ -5544,7 +5993,11 @@ sub_80E8B78: @ 80E8B78
 	adds r3, r0, 0
 	ldr r0, _080E8BB0 @ =gUnknown_083DB694
 	ldr r1, [r0]
+.ifdef ENGLISH
 	ldr r2, _080E8BB4 @ =0x00009c70
+.else
+	ldr r2, _080E8BB4 @ =0x00009f9c
+.endif
 	adds r0, r1, r2
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -5558,7 +6011,11 @@ sub_80E8B78: @ 80E8B78
 	cmp r0, 0
 	bne _080E8BBC
 	movs r4, 0
+.ifdef ENGLISH
 	ldr r2, _080E8BB8 @ =0x00009c6c
+.else
+	ldr r2, _080E8BB8 @ =0x00009f98
+.endif
 	adds r0, r1, r2
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -5569,11 +6026,20 @@ sub_80E8B78: @ 80E8B78
 	b _080E8BD4
 	.align 2, 0
 _080E8BB0: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8BB4: .4byte 0x00009c70
 _080E8BB8: .4byte 0x00009c6c
+.else
+_080E8BB4: .4byte 0x00009f9c
+_080E8BB8: .4byte 0x00009f98
+.endif
 _080E8BBC:
 	movs r4, 0
+.ifdef ENGLISH
 	ldr r2, _080E8BF0 @ =0x00009c6c
+.else
+	ldr r2, _080E8BF0 @ =0x00009f98
+.endif
 	adds r0, r1, r2
 	ldr r0, [r0]
 	adds r2, 0x5
@@ -5601,7 +6067,11 @@ _080E8BE8:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E8BF0: .4byte 0x00009c6c
+.else
+_080E8BF0: .4byte 0x00009f98
+.endif
 	thumb_func_end sub_80E8B78
 
 	thumb_func_start sub_80E8BF4
@@ -5747,7 +6217,11 @@ sub_80E8CEC: @ 80E8CEC
 	beq _080E8D3C
 	ldr r0, _080E8D30 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r0, _080E8D34 @ =0x00009c74
+.else
+	ldr r0, _080E8D34 @ =0x00009fa0
+.endif
 	adds r2, r0
 	lsls r0, r1, 4
 	adds r0, r1
@@ -5761,12 +6235,20 @@ _080E8D24: .4byte gUnknown_083DBD60
 _080E8D28: .4byte gUnknown_083DBD68
 _080E8D2C: .4byte gSpriteTemplate_83DBDE4
 _080E8D30: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8D34: .4byte 0x00009c74
+.else
+_080E8D34: .4byte 0x00009fa0
+.endif
 _080E8D38: .4byte gSprites
 _080E8D3C:
 	ldr r0, _080E8D4C @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E8D50 @ =0x00009c74
+.else
+	ldr r1, _080E8D50 @ =0x00009fa0
+.endif
 	adds r0, r1
 	movs r1, 0
 	str r1, [r0]
@@ -5775,7 +6257,11 @@ _080E8D48:
 	bx r0
 	.align 2, 0
 _080E8D4C: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8D50: .4byte 0x00009c74
+.else
+_080E8D50: .4byte 0x00009fa0
+.endif
 	thumb_func_end sub_80E8CEC
 
 	thumb_func_start sub_80E8D54
@@ -5783,7 +6269,11 @@ sub_80E8D54: @ 80E8D54
 	push {lr}
 	ldr r0, _080E8D78 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E8D7C @ =0x00009c74
+.else
+	ldr r1, _080E8D7C @ =0x00009fa0
+.endif
 	adds r0, r2, r1
 	ldr r1, [r0]
 	cmp r1, 0
@@ -5799,7 +6289,11 @@ sub_80E8D54: @ 80E8D54
 	b _080E8D88
 	.align 2, 0
 _080E8D78: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8D7C: .4byte 0x00009c74
+.else
+_080E8D7C: .4byte 0x00009fa0
+.endif
 _080E8D80:
 	adds r0, r1, 0
 	movs r1, 0x2
@@ -5816,7 +6310,11 @@ sub_80E8D8C: @ 80E8D8C
 	lsrs r3, r0, 24
 	ldr r0, _080E8DB8 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E8DBC @ =0x00009c74
+.else
+	ldr r1, _080E8DBC @ =0x00009fa0
+.endif
 	adds r0, r2, r1
 	ldr r1, [r0]
 	cmp r1, 0
@@ -5834,7 +6332,11 @@ sub_80E8D8C: @ 80E8D8C
 	b _080E8DD2
 	.align 2, 0
 _080E8DB8: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E8DBC: .4byte 0x00009c74
+.else
+_080E8DBC: .4byte 0x00009fa0
+.endif
 _080E8DC0:
 	adds r0, r1, 0
 	movs r1, 0x4
@@ -6058,14 +6560,22 @@ sub_80E8FA4: @ 80E8FA4
 _080E8FBE:
 	mov r3, r9
 	lsls r1, r3, 1
+.ifdef ENGLISH
 	ldr r4, _080E90F4 @ =gMenuWordGroupFrame2_Pal + 0x2
+.else
+	ldr r4, _080E90F4 @ =0x08e8f136
+.endif
 	adds r0, r1, r4
 	ldrh r2, [r0]
 	movs r0, 0x1F
 	ands r0, r2
 	lsls r0, 8
 	str r0, [sp]
+.ifdef ENGLISH
 	ldr r5, _080E90F8 @ =gMenuWordGroupFrame2_Pal + 0x8
+.else
+	ldr r5, _080E90F8 @ =0x08e8f13c
+.endif
 	adds r1, r5
 	ldrh r1, [r1]
 	movs r0, 0x1F
@@ -6129,7 +6639,11 @@ _080E902C:
 	mov r8, r0
 	movs r5, 0x1F
 	ldr r6, [sp, 0x24]
+.ifdef ENGLISH
 	ldr r0, _080E9100 @ =0x00009c34
+.else
+	ldr r0, _080E9100 @ =0x00009f60
+.endif
 	adds r7, r1, r0
 _080E9050:
 	lsls r2, r4, 1
@@ -6175,7 +6689,11 @@ _080E9076:
 	add r0, r9
 	adds r0, r4
 	lsls r0, 1
+.ifdef ENGLISH
 	ldr r4, _080E9100 @ =0x00009c34
+.else
+	ldr r4, _080E9100 @ =0x00009f60
+.endif
 	adds r2, r3, r4
 	adds r2, r0
 	mov r5, r12
@@ -6203,7 +6721,11 @@ _080E9076:
 	bhi _080E90DA
 	b _080E8FBE
 _080E90DA:
+.ifdef ENGLISH
 	ldr r0, _080E9104 @ =0x00009c32
+.else
+	ldr r0, _080E9104 @ =0x00009f5e
+.endif
 	adds r1, r3, r0
 	movs r0, 0
 	strb r0, [r1]
@@ -6216,11 +6738,21 @@ _080E90DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E90F4: .4byte gMenuWordGroupFrame2_Pal + 0x2
 _080E90F8: .4byte gMenuWordGroupFrame2_Pal + 0x8
+.else
+_080E90F4: .4byte 0x08e8f136
+_080E90F8: .4byte 0x08e8f13c
+.endif
 _080E90FC: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9100: .4byte 0x00009c34
 _080E9104: .4byte 0x00009c32
+.else
+_080E9100: .4byte 0x00009f60
+_080E9104: .4byte 0x00009f5e
+.endif
 	thumb_func_end sub_80E8FA4
 
 	thumb_func_start sub_80E9108
@@ -6229,7 +6761,11 @@ sub_80E9108: @ 80E9108
 	lsls r0, 24
 	ldr r1, _080E9164 @ =gUnknown_083DB694
 	ldr r2, [r1]
+.ifdef ENGLISH
 	ldr r3, _080E9168 @ =0x00009c32
+.else
+	ldr r3, _080E9168 @ =0x00009f5e
+.endif
 	adds r1, r2, r3
 	lsrs r0, 24
 	ldrb r3, [r1]
@@ -6239,7 +6775,11 @@ sub_80E9108: @ 80E9108
 	ldr r0, _080E916C @ =gPlttBufferUnfaded
 	mov r12, r0
 	adds r6, r1, 0
+.ifdef ENGLISH
 	ldr r3, _080E9170 @ =0x00009c34
+.else
+	ldr r3, _080E9170 @ =0x00009f60
+.endif
 	adds r5, r2, r3
 	ldr r7, _080E9174 @ =gPlttBufferFaded
 _080E912A:
@@ -6274,9 +6814,17 @@ _080E912A:
 	bx r0
 	.align 2, 0
 _080E9164: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9168: .4byte 0x00009c32
+.else
+_080E9168: .4byte 0x00009f5e
+.endif
 _080E916C: .4byte gPlttBufferUnfaded
+.ifdef ENGLISH
 _080E9170: .4byte 0x00009c34
+.else
+_080E9170: .4byte 0x00009f60
+.endif
 _080E9174: .4byte gPlttBufferFaded
 	thumb_func_end sub_80E9108
 
@@ -6285,7 +6833,11 @@ sub_80E9178: @ 80E9178
 	push {lr}
 	ldr r0, _080E9190 @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E9194 @ =0x00009c32
+.else
+	ldr r1, _080E9194 @ =0x00009f5e
+.endif
 	adds r0, r1
 	movs r1, 0
 	strb r1, [r0]
@@ -6295,7 +6847,11 @@ sub_80E9178: @ 80E9178
 	bx r0
 	.align 2, 0
 _080E9190: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9194: .4byte 0x00009c32
+.else
+_080E9194: .4byte 0x00009f5e
+.endif
 	thumb_func_end sub_80E9178
 
 	thumb_func_start sub_80E9198
@@ -6396,37 +6952,63 @@ _080E9234:
 _080E925C:
 	ldr r0, _080E9278 @ =gUnknown_083DB694
 	ldr r4, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E927C @ =0x00009c80
+.else
+	ldr r1, _080E927C @ =0x00009fac
+.endif
 	adds r0, r4, r1
 	movs r1, 0x4
 	movs r2, 0xF
 	movs r3, 0x2
 	bl sub_80E91B0
+.ifdef ENGLISH
 	ldr r0, _080E9280 @ =0x00009cc9
+.else
+	ldr r0, _080E9280 @ =0x00009ff5
+.endif
 	adds r4, r0
 	adds r0, r4, 0
 	b _080E9326
 	.align 2, 0
 _080E9278: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E927C: .4byte 0x00009c80
 _080E9280: .4byte 0x00009cc9
+.else
+_080E927C: .4byte 0x00009fac
+_080E9280: .4byte 0x00009ff5
+.endif
 _080E9284:
 	ldr r0, _080E92A0 @ =gUnknown_083DB694
 	ldr r4, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E92A4 @ =0x00009d12
+.else
+	ldr r1, _080E92A4 @ =0x0000a03e
+.endif
 	adds r0, r4, r1
 	movs r1, 0x4
 	movs r2, 0xF
 	movs r3, 0x2
 	bl sub_80E91B0
+.ifdef ENGLISH
 	ldr r0, _080E92A8 @ =0x00009d5b
+.else
+	ldr r0, _080E92A8 @ =0x0000a087
+.endif
 	adds r4, r0
 	adds r0, r4, 0
 	b _080E9326
 	.align 2, 0
 _080E92A0: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E92A4: .4byte 0x00009d12
 _080E92A8: .4byte 0x00009d5b
+.else
+_080E92A4: .4byte 0x0000a03e
+_080E92A8: .4byte 0x0000a087
+.endif
 _080E92AC:
 	ldr r0, _080E92BC @ =gOtherText_TextDeletedConfirmPage1
 	movs r1, 0x4
@@ -6599,7 +7181,11 @@ _080E93FA:
 	bl BasicInitMenuWindow
 	ldr r0, _080E9440 @ =gUnknown_083DB694
 	ldr r2, [r0]
+.ifdef ENGLISH
 	ldr r0, _080E9444 @ =0x00009f8e
+.else
+	ldr r0, _080E9444 @ =0x0000a2ba
+.endif
 	adds r5, r2, r0
 	movs r3, 0xFC
 	strb r3, [r5]
@@ -6607,13 +7193,21 @@ _080E93FA:
 	adds r1, r2, r0
 	movs r0, 0x5
 	strb r0, [r1]
+.ifdef ENGLISH
 	ldr r0, _080E9448 @ =0x00009f90
+.else
+	ldr r0, _080E9448 @ =0x0000a2bc
+.endif
 	adds r1, r2, r0
 	movs r0, 0x1
 	strb r0, [r1]
 	cmp r4, 0
 	beq _080E9450
+.ifdef ENGLISH
 	ldr r1, _080E944C @ =0x00009f91
+.else
+	ldr r1, _080E944C @ =0x0000a2bd
+.endif
 	adds r0, r2, r1
 	adds r1, r4, 0
 	movs r2, 0xF0
@@ -6627,11 +7221,21 @@ _080E93FA:
 	.align 2, 0
 _080E943C: .4byte gWindowConfig_81E6D8C
 _080E9440: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9444: .4byte 0x00009f8e
 _080E9448: .4byte 0x00009f90
 _080E944C: .4byte 0x00009f91
+.else
+_080E9444: .4byte 0x0000a2ba
+_080E9448: .4byte 0x0000a2bc
+_080E944C: .4byte 0x0000a2bd
+.endif
 _080E9450:
+.ifdef ENGLISH
 	ldr r0, _080E9484 @ =0x00009f91
+.else
+	ldr r0, _080E9484 @ =0x0000a2bd
+.endif
 	adds r1, r2, r0
 	strb r3, [r1]
 	movs r0, 0x11
@@ -6655,7 +7259,11 @@ _080E9476:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E9484: .4byte 0x00009f91
+.else
+_080E9484: .4byte 0x0000a2bd
+.endif
 _080E9488: .4byte gWindowConfig_81E6DA8
 	thumb_func_end sub_80E9368
 
@@ -6920,7 +7528,11 @@ _080E9690: .4byte 0x0000ffff
 _080E9694: .4byte 0x06007000
 _080E9698: .4byte gUnknown_083DBE1C
 _080E969C:
+.ifdef ENGLISH
 	ldr r0, _080E9738 @ =0x00009e14
+.else
+	ldr r0, _080E9738 @ =0x0000a140
+.endif
 	adds r4, r5, r0
 	ldrh r1, [r1]
 	adds r0, r4, 0
@@ -6999,7 +7611,11 @@ _080E971A:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E9738: .4byte 0x00009e14
+.else
+_080E9738: .4byte 0x0000a140
+.endif
 _080E973C: .4byte gUnknown_083DB694
 _080E9740: .4byte gUnknown_083DBEA8
 	thumb_func_end sub_80E9620
@@ -7092,7 +7708,11 @@ sub_80E97C0: @ 80E97C0
 	bge _080E98A6
 _080E97EA:
 	ldr r1, [r1]
+.ifdef ENGLISH
 	ldr r0, _080E98BC @ =0x00009e6e
+.else
+	ldr r0, _080E98BC @ =0x0000a19a
+.endif
 	adds r2, r1, r0
 	movs r6, 0
 	adds r0, r1, 0
@@ -7167,7 +7787,11 @@ _080E985E:
 	strb r1, [r2, 0x2]
 	movs r0, 0xFF
 	strb r0, [r2, 0x3]
+.ifdef ENGLISH
 	ldr r2, _080E98BC @ =0x00009e6e
+.else
+	ldr r2, _080E98BC @ =0x0000a19a
+.endif
 	adds r0, r4, r2
 	mov r3, r8
 	lsrs r1, r3, 24
@@ -7197,7 +7821,11 @@ _080E98A6:
 	bx r0
 	.align 2, 0
 _080E98B8: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E98BC: .4byte 0x00009e6e
+.else
+_080E98BC: .4byte 0x0000a19a
+.endif
 _080E98C0: .4byte 0x0000ffff
 	thumb_func_end sub_80E97C0
 
@@ -7292,6 +7920,7 @@ sub_80E9940: @ 80E9940
 	bx r0
 	thumb_func_end sub_80E9940
 
+.ifdef ENGLISH
 	thumb_func_start sub_80E9974
 sub_80E9974: @ 80E9974
 	push {r4-r6,lr}
@@ -7366,6 +7995,79 @@ _080E9A08:
 	.align 2, 0
 _080E9A10: .4byte gUnknown_083DBEAC
 	thumb_func_end sub_80E9974
+.else
+	thumb_func_start sub_80E9974
+sub_80E9974: @ 80E9974
+	push {r4-r6,lr}
+	ldr r0, _080E99C4 @ =gWindowConfig_81E6D54
+	bl BasicInitMenuWindow
+	ldr r0, _080E99C8 @ =gUnknown_083DB694
+	ldr r2, [r0]
+	adds r0, r2, 0
+	adds r0, 0x26
+	ldrb r0, [r0]
+	cmp r0, 0
+	bne _080E99D4
+	ldr r1, _080E99CC @ =0x000001b5
+	adds r0, r2, r1
+	ldrb r0, [r0]
+	lsls r0, 24
+	asrs r0, 24
+	lsls r1, r0, 16
+	lsrs r4, r1, 16
+	adds r0, 0x4
+	cmp r4, r0
+	bge _080E9A02
+	adds r5, r2, 0
+	ldr r2, _080E99CC @ =0x000001b5
+	adds r6, r5, r2
+_080E99A4:
+	lsls r1, r4, 24
+	lsrs r1, 24
+	ldr r2, _080E99D0 @ =0x0000a0f5
+	adds r0, r5, r2
+	bl sub_80E9940
+	adds r0, r4, 0x1
+	lsls r0, 16
+	lsrs r4, r0, 16
+	movs r0, 0
+	ldrsb r0, [r6, r0]
+	adds r0, 0x4
+	cmp r4, r0
+	blt _080E99A4
+	b _080E9A02
+	.align 2, 0
+_080E99C4: .4byte gWindowConfig_81E6D54
+_080E99C8: .4byte gUnknown_083DB694
+_080E99CC: .4byte 0x000001b5
+_080E99D0: .4byte 0x0000a0f5
+_080E99D4:
+	bl sub_80E9AD4
+	ldr r4, _080E9A08 @ =gUnknown_083DBEAC
+	ldr r0, [r4]
+	movs r1, 0x2
+	movs r2, 0
+	bl sub_80E9A60
+	ldr r0, [r4, 0x4]
+	movs r1, 0x2
+	movs r2, 0x2
+	bl sub_80E9A60
+	ldr r0, [r4, 0x8]
+	movs r1, 0x2
+	movs r2, 0x4
+	bl sub_80E9A60
+	ldr r0, [r4, 0xC]
+	movs r1, 0x2
+	movs r2, 0x6
+	bl sub_80E9A60
+_080E9A02:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080E9A08: .4byte gUnknown_083DBEAC
+	thumb_func_end sub_80E9974
+.endif
 
 	thumb_func_start sub_80E9A14
 sub_80E9A14: @ 80E9A14
@@ -7512,7 +8214,11 @@ sub_80E9AF8: @ 80E9AF8
 	bl sub_80E9C74
 	ldr r4, _080E9B7C @ =gUnknown_083DB694
 	ldr r5, [r4]
+.ifdef ENGLISH
 	ldr r0, _080E9B80 @ =0x00009e14
+.else
+	ldr r0, _080E9B80 @ =0x0000a140
+.endif
 	adds r0, r5
 	mov r8, r0
 	movs r0, 0xFC
@@ -7522,7 +8228,11 @@ sub_80E9AF8: @ 80E9AF8
 	strb r0, [r1, 0x1]
 	movs r0, 0x10
 	strb r0, [r1, 0x2]
+.ifdef ENGLISH
 	ldr r2, _080E9B84 @ =0x00009e17
+.else
+	ldr r2, _080E9B84 @ =0x0000a143
+.endif
 	adds r2, r5
 	mov r8, r2
 	adds r0, r5, 0
@@ -7531,7 +8241,11 @@ sub_80E9AF8: @ 80E9AF8
 	cmp r0, 0
 	beq _080E9BF4
 	movs r6, 0
+.ifdef ENGLISH
 	ldr r3, _080E9B88 @ =0x000099a6
+.else
+	ldr r3, _080E9B88 @ =0x00009cd2
+.endif
 	adds r0, r5, r3
 	adds r0, r7
 	ldrb r0, [r0]
@@ -7543,7 +8257,11 @@ sub_80E9AF8: @ 80E9AF8
 _080E9B4A:
 	lsls r0, r7, 2
 	mov r9, r0
+.ifdef ENGLISH
 	ldr r1, _080E9B8C @ =0x00009a2a
+.else
+	ldr r1, _080E9B8C @ =0x00009d56
+.endif
 	adds r1, r5, r1
 	str r1, [sp]
 	lsls r2, r7, 17
@@ -7566,10 +8284,17 @@ _080E9B58:
 	b _080E9B9A
 	.align 2, 0
 _080E9B7C: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9B80: .4byte 0x00009e14
 _080E9B84: .4byte 0x00009e17
 _080E9B88: .4byte 0x000099a6
 _080E9B8C: .4byte 0x00009a2a
+.else
+_080E9B80: .4byte 0x0000a140
+_080E9B84: .4byte 0x0000a143
+_080E9B88: .4byte 0x00009cd2
+_080E9B8C: .4byte 0x00009d56
+.endif
 _080E9B90: .4byte gWindowConfig_81E6D70
 _080E9B94:
 	ldr r0, _080E9BE0 @ =gWindowConfig_81E6D54
@@ -7579,14 +8304,22 @@ _080E9B9A:
 	ldr r4, [r2]
 	mov r3, r9
 	adds r1, r5, r3
+.ifdef ENGLISH
 	ldr r2, _080E9BE8 @ =0x00009a2a
+.else
+	ldr r2, _080E9BE8 @ =0x00009d56
+.endif
 	adds r0, r4, r2
 	adds r0, r1
 	ldrh r1, [r0]
 	mov r0, r8
 	movs r2, 0x9
 	bl sub_80EB218
+.ifdef ENGLISH
 	ldr r3, _080E9BEC @ =0x00009e14
+.else
+	ldr r3, _080E9BEC @ =0x0000a140
+.endif
 	adds r0, r4, r3
 	movs r1, 0xB
 	muls r1, r6
@@ -7599,7 +8332,11 @@ _080E9B9A:
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
+.ifdef ENGLISH
 	ldr r0, _080E9BF0 @ =0x000099a6
+.else
+	ldr r0, _080E9BF0 @ =0x00009cd2
+.endif
 	adds r4, r0
 	adds r4, r7
 	movs r0, 0
@@ -7610,14 +8347,24 @@ _080E9B9A:
 	.align 2, 0
 _080E9BE0: .4byte gWindowConfig_81E6D54
 _080E9BE4: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9BE8: .4byte 0x00009a2a
 _080E9BEC: .4byte 0x00009e14
 _080E9BF0: .4byte 0x000099a6
+.else
+_080E9BE8: .4byte 0x00009d56
+_080E9BEC: .4byte 0x0000a140
+_080E9BF0: .4byte 0x00009cd2
+.endif
 _080E9BF4:
 	ldr r0, _080E9C64 @ =gWindowConfig_81E6D54
 	bl BasicInitMenuWindow
 	movs r6, 0
+.ifdef ENGLISH
 	ldr r1, _080E9C68 @ =0x000099a6
+.else
+	ldr r1, _080E9C68 @ =0x00009cd2
+.endif
 	adds r0, r5, r1
 	adds r0, r7
 	ldrb r0, [r0]
@@ -7634,7 +8381,11 @@ _080E9C16:
 	lsls r1, r6, 1
 	lsls r0, r7, 2
 	adds r1, r0
+.ifdef ENGLISH
 	ldr r2, _080E9C6C @ =0x00009a2a
+.else
+	ldr r2, _080E9C6C @ =0x00009d56
+.endif
 	adds r0, r4, r2
 	adds r0, r1
 	ldrh r1, [r0]
@@ -7647,7 +8398,11 @@ _080E9C16:
 	adds r1, 0x4
 	lsls r1, 16
 	lsrs r1, 16
+.ifdef ENGLISH
 	ldr r3, _080E9C70 @ =0x00009e14
+.else
+	ldr r3, _080E9C70 @ =0x0000a140
+.endif
 	adds r0, r4, r3
 	lsrs r2, r5, 16
 	bl sub_80E9A60
@@ -7670,9 +8425,15 @@ _080E9C52:
 	bx r0
 	.align 2, 0
 _080E9C64: .4byte gWindowConfig_81E6D54
+.ifdef ENGLISH
 _080E9C68: .4byte 0x000099a6
 _080E9C6C: .4byte 0x00009a2a
 _080E9C70: .4byte 0x00009e14
+.else
+_080E9C68: .4byte 0x00009cd2
+_080E9C6C: .4byte 0x00009d56
+_080E9C70: .4byte 0x0000a140
+.endif
 	thumb_func_end sub_80E9AF8
 
 	thumb_func_start sub_80E9C74
@@ -7698,7 +8459,11 @@ sub_80E9C94: @ 80E9C94
 	push {r4-r6,lr}
 	ldr r0, _080E9CAC @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r2, _080E9CB0 @ =0x00009a28
+.else
+	ldr r2, _080E9CB0 @ =0x00009d54
+.endif
 	adds r1, r0, r2
 	movs r0, 0
 	ldrsb r0, [r1, r0]
@@ -7709,7 +8474,11 @@ sub_80E9C94: @ 80E9C94
 	b _080E9CB6
 	.align 2, 0
 _080E9CAC: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9CB0: .4byte 0x00009a28
+.else
+_080E9CB0: .4byte 0x00009d54
+.endif
 _080E9CB4:
 	movs r0, 0x4
 _080E9CB6:
@@ -7719,7 +8488,11 @@ _080E9CB6:
 	bcs _080E9CF4
 	ldr r0, _080E9CE0 @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r1, _080E9CE4 @ =0x00009a29
+.else
+	ldr r1, _080E9CE4 @ =0x00009d55
+.endif
 	adds r6, r0, r1
 _080E9CC6:
 	movs r0, 0
@@ -7736,7 +8509,11 @@ _080E9CC6:
 	b _080E9CF4
 	.align 2, 0
 _080E9CE0: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9CE4: .4byte 0x00009a29
+.else
+_080E9CE4: .4byte 0x00009d55
+.endif
 _080E9CE8:
 	adds r0, r4, 0
 	adds r1, r0, 0x1
@@ -7765,7 +8542,11 @@ sub_80E9D00: @ 80E9D00
 	ble _080E9D30
 	lsls r0, 16
 	lsrs r4, r0, 16
+.ifdef ENGLISH
 	ldr r1, _080E9D2C @ =0x00009a29
+.else
+	ldr r1, _080E9D2C @ =0x00009d55
+.endif
 	adds r0, r2, r1
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -7774,14 +8555,22 @@ sub_80E9D00: @ 80E9D00
 	b _080E9D46
 	.align 2, 0
 _080E9D28: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9D2C: .4byte 0x00009a29
+.else
+_080E9D2C: .4byte 0x00009d55
+.endif
 _080E9D30:
 	movs r0, 0
 	ldrsb r0, [r1, r0]
 	negs r0, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
+.ifdef ENGLISH
 	ldr r1, _080E9D74 @ =0x00009a29
+.else
+	ldr r1, _080E9D74 @ =0x00009d55
+.endif
 	adds r0, r2, r1
 	ldrb r0, [r0]
 	lsls r0, 24
@@ -7813,7 +8602,11 @@ _080E9D6E:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080E9D74: .4byte 0x00009a29
+.else
+_080E9D74: .4byte 0x00009d55
+.endif
 _080E9D78: .4byte 0x0000ffff
 	thumb_func_end sub_80E9D00
 
@@ -7867,7 +8660,11 @@ _080E9DCC:
 _080E9DDA:
 	lsls r1, r4, 24
 	lsrs r1, 24
+.ifdef ENGLISH
 	ldr r2, _080E9E04 @ =0x00009dc9
+.else
+	ldr r2, _080E9E04 @ =0x0000a0f5
+.endif
 	adds r0, r7, r2
 	bl sub_80E9940
 	adds r0, r4, 0x1
@@ -7885,7 +8682,11 @@ _080E9DF6:
 	.align 2, 0
 _080E9DFC: .4byte 0x000001b5
 _080E9E00: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080E9E04: .4byte 0x00009dc9
+.else
+_080E9E04: .4byte 0x0000a0f5
+.endif
 	thumb_func_end sub_80E9D7C
 
 	thumb_func_start sub_80E9E08
@@ -10042,6 +10843,7 @@ _080EAEC2:
 _080EAEC8: .4byte gEasyChatGroupSizes
 	thumb_func_end sub_80EAE88
 
+.ifdef ENGLISH
 	thumb_func_start sub_80EAECC
 sub_80EAECC: @ 80EAECC
 	push {r4-r7,lr}
@@ -10224,6 +11026,192 @@ _080EB034: .4byte gUnknown_083DB694
 _080EB038: .4byte 0x00000b78
 _080EB03C: .4byte 0x00004142
 	thumb_func_end sub_80EAECC
+.else
+	thumb_func_start sub_80EAECC
+sub_80EAECC: @ 80EAECC
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x10
+	movs r7, 0
+	ldr r1, _080EAF08 @ =gUnknown_083DB694
+	ldr r0, [r1]
+	ldr r3, _080EAF0C @ =0x0000446c
+	adds r3, r0, r3
+	str r3, [sp, 0x4]
+_080EAEE4:
+	ldr r1, _080EAF10 @ =gEasyChatWordsByLetter
+	lsls r2, r7, 1
+	adds r0, r2, r1
+	ldrh r4, [r0]
+	adds r3, r7, 0x1
+	lsls r0, r3, 1
+	adds r0, r1
+	ldrh r0, [r0]
+	str r0, [sp]
+	ldr r0, [sp, 0x4]
+	adds r1, r0, r2
+	movs r0, 0
+	strh r0, [r1]
+	mov r9, r0
+	adds r6, r4, 0
+	mov r10, r2
+	str r3, [sp, 0x8]
+	b _080EB00C
+	.align 2, 0
+_080EAF08: .4byte gUnknown_083DB694
+_080EAF0C: .4byte 0x0000446c
+_080EAF10: .4byte gEasyChatWordsByLetter
+_080EAF14:
+	ldr r2, _080EAFAC @ =gEasyChatWordsAlphabetized
+	adds r0, r6, 0
+	adds r1, r0, 0x1
+	lsls r1, 16
+	lsrs r6, r1, 16
+	lsls r0, 1
+	adds r0, r2
+	ldrh r1, [r0]
+	adds r4, r1, 0
+	ldr r0, _080EAFB0 @ =0x0000feff
+	cmp r1, r0
+	bls _080EAFC8
+	movs r0, 0xFF
+	ands r1, r0
+	movs r3, 0
+	subs r0, r1, 0x1
+	lsls r0, 16
+	lsrs r5, r0, 16
+	ldr r0, _080EAFB4 @ =0x0000ffff
+	cmp r5, r0
+	beq _080EB00C
+	lsls r0, r7, 4
+	adds r0, r7
+	lsls r0, 3
+	subs r0, r7
+	lsls r0, 2
+	mov r8, r0
+_080EAF4A:
+	adds r1, r6, 0
+	adds r0, r1, 0x1
+	lsls r0, 16
+	lsrs r6, r0, 16
+	lsls r1, 1
+	ldr r0, _080EAFAC @ =gEasyChatWordsAlphabetized
+	adds r1, r0
+	ldrh r4, [r1]
+	lsrs r0, r4, 9
+	ldr r1, _080EAFB8 @ =0x000001ff
+	adds r2, r1, 0
+	adds r1, r4, 0
+	ands r1, r2
+	str r3, [sp, 0xC]
+	bl sub_80EADC0
+	lsls r0, 24
+	ldr r3, [sp, 0xC]
+	cmp r0, 0
+	beq _080EAF9E
+	cmp r3, 0
+	bne _080EAF9E
+	ldr r3, _080EAFBC @ =gUnknown_083DB694
+	ldr r2, [r3]
+	mov r1, r9
+	adds r0, r1, 0x1
+	lsls r0, 16
+	lsrs r0, 16
+	mov r9, r0
+	lsls r1, 1
+	add r1, r8
+	ldr r3, _080EAFC0 @ =0x00000b78
+	adds r0, r2, r3
+	adds r0, r1
+	strh r4, [r0]
+	ldr r0, _080EAFC4 @ =0x0000446c
+	adds r2, r0
+	add r2, r10
+	ldrh r0, [r2]
+	adds r0, 0x1
+	strh r0, [r2]
+	movs r3, 0x1
+_080EAF9E:
+	subs r0, r5, 0x1
+	lsls r0, 16
+	lsrs r5, r0, 16
+	ldr r1, _080EAFB4 @ =0x0000ffff
+	cmp r5, r1
+	bne _080EAF4A
+	b _080EB00C
+	.align 2, 0
+_080EAFAC: .4byte gEasyChatWordsAlphabetized
+_080EAFB0: .4byte 0x0000feff
+_080EAFB4: .4byte 0x0000ffff
+_080EAFB8: .4byte 0x000001ff
+_080EAFBC: .4byte gUnknown_083DB694
+_080EAFC0: .4byte 0x00000b78
+_080EAFC4: .4byte 0x0000446c
+_080EAFC8:
+	lsrs r0, r4, 9
+	ldr r3, _080EB030 @ =0x000001ff
+	adds r2, r3, 0
+	adds r1, r4, 0
+	ands r1, r2
+	bl sub_80EADC0
+	lsls r0, 24
+	cmp r0, 0
+	beq _080EB00C
+	ldr r0, _080EB034 @ =gUnknown_083DB694
+	ldr r2, [r0]
+	mov r1, r9
+	adds r0, r1, 0x1
+	lsls r0, 16
+	lsrs r0, 16
+	mov r9, r0
+	lsls r1, 1
+	lsls r0, r7, 4
+	adds r0, r7
+	lsls r0, 3
+	subs r0, r7
+	lsls r0, 2
+	adds r1, r0
+	ldr r3, _080EB038 @ =0x00000b78
+	adds r0, r2, r3
+	adds r0, r1
+	strh r4, [r0]
+	ldr r0, _080EB03C @ =0x0000446c
+	adds r2, r0
+	add r2, r10
+	ldrh r0, [r2]
+	adds r0, 0x1
+	strh r0, [r2]
+_080EB00C:
+	ldr r1, [sp]
+	cmp r6, r1
+	bcs _080EB014
+	b _080EAF14
+_080EB014:
+	ldr r3, [sp, 0x8]
+	lsls r0, r3, 16
+	lsrs r7, r0, 16
+	cmp r7, 0x1A
+	bhi _080EB020
+	b _080EAEE4
+_080EB020:
+	add sp, 0x10
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080EB030: .4byte 0x000001ff
+_080EB034: .4byte gUnknown_083DB694
+_080EB038: .4byte 0x00000b78
+_080EB03C: .4byte 0x0000446c
+	thumb_func_end sub_80EAECC
+.endif
 
 	thumb_func_start sub_80EB040
 sub_80EB040: @ 80EB040
@@ -10249,7 +11237,11 @@ _080EB044:
 	beq _080EB094
 	ldr r0, _080EB0A8 @ =gUnknown_083DB694
 	ldr r0, [r0]
+.ifdef ENGLISH
 	ldr r1, _080EB0AC @ =0x000041a4
+.else
+	ldr r1, _080EB0AC @ =0x000044d0
+.endif
 	adds r5, r0, r1
 _080EB06E:
 	lsls r0, r4, 2
@@ -10284,7 +11276,11 @@ _080EB094:
 	.align 2, 0
 _080EB0A4: .4byte gEasyChatGroupWords
 _080EB0A8: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080EB0AC: .4byte 0x000041a4
+.else
+_080EB0AC: .4byte 0x000044d0
+.endif
 	thumb_func_end sub_80EB040
 
 	thumb_func_start sub_80EB0B0
@@ -10307,7 +11303,11 @@ sub_80EB0B0: @ 80EB0B0
 	adds r2, r4, r0
 	ldrb r6, [r2]
 	lsls r1, r6, 1
+.ifdef ENGLISH
 	ldr r7, _080EB188 @ =0x00004178
+.else
+	ldr r7, _080EB188 @ =0x000044a2
+.endif
 	adds r0, r4, r7
 	adds r0, r1
 	strh r5, [r0]
@@ -10327,7 +11327,11 @@ sub_80EB0B0: @ 80EB0B0
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _080EB0FE
+.ifdef ENGLISH
 	b _080EB1FA
+.else
+	b _080EB1FE
+.endif
 _080EB0FE:
 	movs r2, 0xDC
 	lsls r2, 1
@@ -10353,7 +11357,11 @@ _080EB10A:
 	mov r2, r9
 	lsls r0, r2, 2
 	adds r1, r0
+.ifdef ENGLISH
 	ldr r0, _080EB194 @ =0x00009a2a
+.else
+	ldr r0, _080EB194 @ =0x00009d56
+.endif
 	adds r4, r3, r0
 	adds r4, r1
 	movs r0, 0x7F
@@ -10366,7 +11374,11 @@ _080EB10A:
 	orrs r0, r1
 	strh r0, [r4]
 	lsls r0, r6, 1
+.ifdef ENGLISH
 	ldr r1, _080EB188 @ =0x00004178
+.else
+	ldr r1, _080EB188 @ =0x000044a2
+.endif
 	adds r3, r1
 	adds r3, r0
 	ldrh r0, [r3]
@@ -10396,13 +11408,25 @@ _080EB16A:
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _080EB10A
+.ifdef ENGLISH
 	b _080EB1FA
+.else
+	b _080EB1FE
+.endif
 	.align 2, 0
 _080EB184: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080EB188: .4byte 0x00004178
+.else
+_080EB188: .4byte 0x000044a2
+.endif
 _080EB18C: .4byte gEasyChatGroupOrders
 _080EB190: .4byte gEasyChatGroupSizes
+.ifdef ENGLISH
 _080EB194: .4byte 0x00009a2a
+.else
+_080EB194: .4byte 0x00009d56
+.endif
 _080EB198: .4byte 0x000001ff
 _080EB19C:
 	movs r5, 0xDC
@@ -10413,22 +11437,47 @@ _080EB19C:
 	movs r6, 0
 	movs r5, 0
 	lsls r1, r2, 1
+.ifdef ENGLISH
 	ldr r7, _080EB20C @ =0x00004142
+.else
+	ldr r7, _080EB210 @ =0x0000446c
+.endif
 	adds r0, r4, r7
 	adds r1, r0, r1
 	ldrh r0, [r1]
 	cmp r5, r0
+.ifdef ENGLISH
 	bcs _080EB1FA
 	ldr r7, _080EB210 @ =0x00009a2a
+.else
+	bcs _080EB1FE
+	ldr r7, _080EB214 @ =0x00009d56
+.endif
 	adds r7, r4
 	mov r8, r7
+.ifdef ENGLISH
 	lsls r0, r2, 8
 	subs r0, r2
 	lsls r7, r0, 1
+.else
+	lsls r0, r2, 4
+	adds r0, r2
+	lsls r0, 3
+	subs r0, r2
+	lsls r7, r0, 2
+.endif
+.ifdef ENGLISH
 	ldr r0, _080EB214 @ =0x00000b78
+.else
+	ldr r0, _080EB218 @ =0x00000b78
+.endif
 	adds r2, r4, r0
 	adds r4, r1, 0
+.ifdef ENGLISH
 _080EB1CA:
+.else
+_080EB1CE:
+.endif
 	lsls r1, r3, 1
 	lsls r0, r6, 2
 	adds r1, r0
@@ -10442,19 +11491,32 @@ _080EB1CA:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, 0x1
+.ifdef ENGLISH
 	bls _080EB1EE
+.else
+	bls _080EB1F2
+.endif
 	movs r3, 0
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
+.ifdef ENGLISH
 _080EB1EE:
+.else
+_080EB1F2:
+.endif
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldrh r1, [r4]
 	cmp r5, r1
+.ifdef ENGLISH
 	bcc _080EB1CA
 _080EB1FA:
+.else
+	bcc _080EB1CE
+_080EB1FE:
+.endif
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -10464,9 +11526,15 @@ _080EB1FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
+.ifdef ENGLISH
 _080EB20C: .4byte 0x00004142
 _080EB210: .4byte 0x00009a2a
 _080EB214: .4byte 0x00000b78
+.else
+_080EB210: .4byte 0x0000446c
+_080EB214: .4byte 0x00009d56
+_080EB218: .4byte 0x00000b78
+.endif
 	thumb_func_end sub_80EB0B0
 
 	thumb_func_start sub_80EB218
@@ -10538,7 +11606,11 @@ _080EB290:
 	lsls r1, 2
 	lsls r2, 10
 	adds r1, r2
+.ifdef ENGLISH
 	ldr r2, _080EB2D0 @ =0x000041a4
+.else
+	ldr r2, _080EB2D0 @ =0x000044d0
+.endif
 	adds r0, r2
 	adds r0, r1
 	ldr r1, [r0]
@@ -10565,7 +11637,11 @@ _080EB2AA:
 	bx r1
 	.align 2, 0
 _080EB2CC: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080EB2D0: .4byte 0x000041a4
+.else
+_080EB2D0: .4byte 0x000044d0
+.endif
 	thumb_func_end sub_80EB218
 
 	thumb_func_start sub_80EB2D4
@@ -10632,7 +11708,11 @@ _080EB344:
 	lsls r1, 2
 	lsls r2, 10
 	adds r1, r2
+.ifdef ENGLISH
 	ldr r2, _080EB360 @ =0x000041a4
+.else
+	ldr r2, _080EB360 @ =0x000044d0
+.endif
 	adds r0, r2
 	adds r0, r1
 	ldr r1, [r0]
@@ -10641,7 +11721,11 @@ _080EB356:
 	b _080EB36C
 	.align 2, 0
 _080EB35C: .4byte gUnknown_083DB694
+.ifdef ENGLISH
 _080EB360: .4byte 0x000041a4
+.else
+_080EB360: .4byte 0x000044d0
+.endif
 _080EB364:
 	adds r1, 0x1
 	adds r0, r2, 0x1
@@ -10729,5 +11813,65 @@ _080EB3F6:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80EB37C
+
+.ifdef GERMAN
+	thumb_func_start de_sub_80EB748
+de_sub_80EB748: @ 80EB3FC
+	push {r4-r7,lr}
+	adds r3, r0, 0
+	adds r5, r1, 0
+	movs r7, 0
+	cmp r3, 0x13
+	bgt _080EB412
+	cmp r3, 0x12
+	bge _080EB416
+	cmp r3, 0
+	beq _080EB416
+	b _080EB458
+_080EB412:
+	cmp r3, 0x15
+	bne _080EB458
+_080EB416:
+	ldr r1, _080EB438 @ =gEasyChatGroupWords
+	lsls r0, r3, 2
+	adds r0, r1
+	ldr r4, [r0]
+	movs r2, 0
+	ldr r0, _080EB43C @ =gEasyChatGroupSizes
+	adds r1, r3, r0
+	adds r6, r0, 0
+	ldrb r1, [r1]
+	cmp r2, r1
+	bge _080EB45A
+	ldrh r0, [r4]
+	cmp r5, r0
+	bne _080EB440
+	movs r7, 0
+	b _080EB45A
+	.align 2, 0
+_080EB438: .4byte gEasyChatGroupWords
+_080EB43C: .4byte gEasyChatGroupSizes
+_080EB440:
+	adds r2, 0x1
+	adds r0, r3, r6
+	ldrb r0, [r0]
+	cmp r2, r0
+	bge _080EB45A
+	lsls r0, r2, 1
+	adds r0, r4
+	ldrh r0, [r0]
+	cmp r5, r0
+	bne _080EB440
+	adds r7, r2, 0
+	b _080EB45A
+_080EB458:
+	adds r7, r5, 0
+_080EB45A:
+	adds r0, r7, 0
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	thumb_func_end de_sub_80EB748
+.endif
 
 	.align 2, 0 @ Don't pad with nop.

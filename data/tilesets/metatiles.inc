@@ -120,7 +120,11 @@ gMetatileAttributes_Building:: @ 826C188
 
 	.align 1
 gMetatiles_Shop:: @ 826C198
-	.incbin "data/tilesets/secondary/shop/metatiles.bin"
+.ifdef ENGLISH
+	.incbin "data/tilesets/secondary/shop/metatiles_en.bin"
+.else
+	.incbin "data/tilesets/secondary/shop/metatiles_de.bin"
+.endif
 
 	.align 1
 gMetatileAttributes_Shop:: @ 826D318

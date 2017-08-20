@@ -4296,11 +4296,13 @@ SealedChamber_OuterRoom_MapAttributes:: @ 82F83B8
 	.4byte gTileset_General
 	.4byte gTileset_Cave
 
+.ifdef ENGLISH
+
 VictoryRoad_B1F_MapBorder:: @ 82F83D0
-	.incbin "data/maps/VictoryRoad_B1F/border.bin"
+	.incbin "data/maps/VictoryRoad_B1F_en/border.bin"
 
 VictoryRoad_B1F_MapBlockdata:: @ 82F83D8
-	.incbin "data/maps/VictoryRoad_B1F/map.bin"
+	.incbin "data/maps/VictoryRoad_B1F_en/map.bin"
 
 	.align 2
 VictoryRoad_B1F_MapAttributes:: @ 82F8EFC
@@ -4312,10 +4314,10 @@ VictoryRoad_B1F_MapAttributes:: @ 82F8EFC
 	.4byte gTileset_Cave
 
 VictoryRoad_B2F_MapBorder:: @ 82F8F14
-	.incbin "data/maps/VictoryRoad_B2F/border.bin"
+	.incbin "data/maps/VictoryRoad_B2F_en/border.bin"
 
 VictoryRoad_B2F_MapBlockdata:: @ 82F8F1C
-	.incbin "data/maps/VictoryRoad_B2F/map.bin"
+	.incbin "data/maps/VictoryRoad_B2F_en/map.bin"
 
 	.align 2
 VictoryRoad_B2F_MapAttributes:: @ 82F9A40
@@ -4325,6 +4327,40 @@ VictoryRoad_B2F_MapAttributes:: @ 82F9A40
 	.4byte VictoryRoad_B2F_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+
+.else
+
+VictoryRoad_B1F_MapBorder:: @ 82F83D0
+	.incbin "data/maps/VictoryRoad_B1F_de/border.bin"
+
+VictoryRoad_B1F_MapBlockdata:: @ 82F83D8
+	.incbin "data/maps/VictoryRoad_B1F_de/map.bin"
+
+	.align 2
+VictoryRoad_B1F_MapAttributes:: @ 82F8EFC
+	.4byte 0x2e
+	.4byte 0x1f
+	.4byte VictoryRoad_B1F_MapBorder
+	.4byte VictoryRoad_B1F_MapBlockdata
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+VictoryRoad_B2F_MapBorder:: @ 82F8F14
+	.incbin "data/maps/VictoryRoad_B2F_de/border.bin"
+
+VictoryRoad_B2F_MapBlockdata:: @ 82F8F1C
+	.incbin "data/maps/VictoryRoad_B2F_de/map.bin"
+
+	.align 2
+VictoryRoad_B2F_MapAttributes:: @ 82F9A40
+	.4byte 0x2e
+	.4byte 0x1f
+	.4byte VictoryRoad_B2F_MapBorder
+	.4byte VictoryRoad_B2F_MapBlockdata
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+.endif
 
 Route104_Prototype_MapBorder:: @ 82F9A58
 	.incbin "data/maps/Route104_Prototype/border.bin"

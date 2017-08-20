@@ -351,7 +351,7 @@ gTilesetPalettes_Building:: @ 8225FA4
 .ifndef GERMAN
 	.align 2
 gTilesetTiles_Shop:: @ 82261A4
-	.incbin "data/tilesets/secondary/shop/tiles.4bpp.lz"
+	.incbin "data/tilesets/secondary/shop/tiles_en.4bpp.lz"
 
 	.align 2
 gTilesetPalettes_Shop:: @ 8227788

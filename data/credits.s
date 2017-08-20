@@ -51,7 +51,11 @@ gUnknown_0840B878:: @ 840B878
 	.byte 0x80,   1,0x80
 .endif
 
-	.include "data/text/credits.inc"
+.ifdef ENGLISH
+	.include "data/text_en/credits.inc"
+.else
+	.include "data/text_de/credits.inc"
+.endif
 
 gUnknown_0840CA00:: @ 840CA00
 	.byte 104, 36

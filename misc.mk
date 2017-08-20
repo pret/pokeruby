@@ -154,6 +154,9 @@ $(TRADEGFXDIR)/gba_affine.8bpp: $(TRADEGFXDIR)/gba_affine.png
 $(TRADEGFXDIR)/menu.4bpp: $(TRADEGFXDIR)/menu.png
 	$(GFX) $< $@ -num_tiles 148
 
+$(TRADEGFXDIR)/menu_de.4bpp: $(TRADEGFXDIR)/menu_de.png
+	$(GFX) $< $@ -num_tiles 148
+
 $(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp
 	@cat $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp >$@
 
@@ -211,8 +214,14 @@ $(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
 $(MENUGFXDIR)/party_menu_misc.4bpp: $(MENUGFXDIR)/party_menu_misc.png
 	$(GFX) $< $@ -num_tiles 116
 
+$(MENUGFXDIR)/party_menu_misc_de.4bpp: $(MENUGFXDIR)/party_menu_misc_de.png
+	$(GFX) $< $@ -num_tiles 116
+
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
-	@cat $^ >$@
+	cat $^ >$@
+
+$(TYPESGFXDIR)/move_types_de.4bpp: $(types:%=$(TYPESGFXDIR)/%_de.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%_de.4bpp)
+	cat $^ >$@
 
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal >$@
@@ -220,32 +229,68 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXD
 $(MENUGFXDIR)/status_screen.4bpp: $(MENUGFXDIR)/status_screen.png
 	$(GFX) $< $@ -num_tiles 217
 
+$(MENUGFXDIR)/status_screen_de.4bpp: $(MENUGFXDIR)/status_screen_de.png
+	$(GFX) $< $@ -num_tiles 217
+
 $(PKNAVGFXDIR)/menu_options.4bpp: $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp
 	@cat $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp >$@
 
+$(PKNAVGFXDIR)/menu_options_de.4bpp: $(PKNAVGFXDIR)/menu_hoennmap_de.4bpp $(PKNAVGFXDIR)/menu_condition_de.4bpp $(PKNAVGFXDIR)/menu_eyes_de.4bpp $(PKNAVGFXDIR)/menu_ribbons_de.4bpp $(PKNAVGFXDIR)/menu_off_de.4bpp
+	@cat $(PKNAVGFXDIR)/menu_hoennmap_de.4bpp $(PKNAVGFXDIR)/menu_condition_de.4bpp $(PKNAVGFXDIR)/menu_eyes_de.4bpp $(PKNAVGFXDIR)/menu_ribbons_de.4bpp $(PKNAVGFXDIR)/menu_off_de.4bpp >$@
+
 $(PKNAVGFXDIR)/condition_menu_misc.4bpp: $(PKNAVGFXDIR)/condition_menu_misc.png
+	$(GFX) $< $@ -num_tiles 41
+
+$(PKNAVGFXDIR)/condition_menu_misc_de.4bpp: $(PKNAVGFXDIR)/condition_menu_misc_de.png
 	$(GFX) $< $@ -num_tiles 41
 
 $(PKNAVGFXDIR)/condition_search.4bpp: $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp
 	@cat $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp >$@
 
+$(PKNAVGFXDIR)/condition_search_de.4bpp: $(PKNAVGFXDIR)/condition_search_cool_de.4bpp $(PKNAVGFXDIR)/condition_search_beauty_de.4bpp $(PKNAVGFXDIR)/condition_search_cute_de.4bpp $(PKNAVGFXDIR)/condition_search_smart_de.4bpp $(PKNAVGFXDIR)/condition_search_tough_de.4bpp $(PKNAVGFXDIR)/condition_search_cancel_de.4bpp
+	@cat $(PKNAVGFXDIR)/condition_search_cool_de.4bpp $(PKNAVGFXDIR)/condition_search_beauty_de.4bpp $(PKNAVGFXDIR)/condition_search_cute_de.4bpp $(PKNAVGFXDIR)/condition_search_smart_de.4bpp $(PKNAVGFXDIR)/condition_search_tough_de.4bpp $(PKNAVGFXDIR)/condition_search_cancel_de.4bpp >$@
+
 $(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
+	$(GFX) $< $@ -num_tiles 47
+
+$(PSSGFXDIR)/header_de.4bpp: $(PSSGFXDIR)/header_de.png
 	$(GFX) $< $@ -num_tiles 47
 
 $(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
 	$(GFX) $< $@ -num_tiles 91
 
+$(PSSGFXDIR)/misc1_de.4bpp: $(PSSGFXDIR)/misc1_de.png
+	$(GFX) $< $@ -num_tiles 91
+
 $(MISCGFXDIR)/hof.4bpp: $(MISCGFXDIR)/hof.png
+	$(GFX) $< $@ -num_tiles 37
+
+$(MISCGFXDIR)/hof_de.4bpp: $(MISCGFXDIR)/hof_de.png
 	$(GFX) $< $@ -num_tiles 37
 
 $(MENUGFXDIR)/wordgroup_frame.4bpp: $(MENUGFXDIR)/wordgroup_frame.png
 	$(GFX) $< $@ -num_tiles 65
 
+$(MENUGFXDIR)/wordgroup_frame_de.4bpp: $(MENUGFXDIR)/wordgroup_frame_de.png
+	$(GFX) $< $@ -num_tiles 76
+
 $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 	$(GFX) $< $@ -num_tiles 43
+
+$(INTROGFXDIR)/copyright_de.4bpp: $(INTROGFXDIR)/copyright_de.png
+	$(GFX) $< $@ -num_tiles 47
 
 $(TITLEGFXDIR)/press_start.4bpp: $(TITLEGFXDIR)/press_start.png
 	$(GFX) $< $@ -num_tiles 41
 
+$(TITLEGFXDIR)/press_start_de.4bpp: $(TITLEGFXDIR)/press_start_de.png
+	$(GFX) $< $@ -num_tiles 41
+
 $(MISCGFXDIR)/end_copyright.4bpp: $(MISCGFXDIR)/end_copyright.png
 	$(GFX) $< $@ -num_tiles 90
+
+$(MISCGFXDIR)/end_copyright_de.4bpp: $(MISCGFXDIR)/end_copyright_de.png
+	$(GFX) $< $@ -num_tiles 92
+
+$(MENUGFXDIR)/check_berry_de.4bpp: $(MENUGFXDIR)/check_berry_de.png
+	$(GFX) $< $@ -num_tiles 97

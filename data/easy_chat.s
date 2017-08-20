@@ -480,17 +480,25 @@ gUnknown_083DBEAC:: @ 83DBEAC
 	.4byte unk_83E7EC5
 .endif
 
+.ifdef ENGLISH
 @ 83DBF2C
-	.include "data/text/easy_chat/group_words.inc"
+	.include "data/text_en/easy_chat/group_words.inc"
 
 @ 83DE138
-	.include "data/text/easy_chat/words_by_letter.inc"
+	.include "data/text_en/easy_chat/words_by_letter.inc"
 
 @ 83DEFFA
-	.include "data/text/easy_chat/group_sizes.inc"
+	.include "data/text_en/easy_chat/group_sizes.inc"
 
 @ 83DF010
-	.include "data/text/easy_chat/group_orders.inc"
+	.include "data/text_en/easy_chat/group_orders.inc"
 
 @ 83DFE6C
-	.include "data/text/easy_chat/group_name_table.inc"
+	.include "data/text_en/easy_chat/group_name_table.inc"
+.else
+	.include "data/text_de/easy_chat/group_words.inc"
+	.include "data/text_de/easy_chat/words_by_letter.inc"
+	.include "data/text_de/easy_chat/group_sizes.inc"
+	.include "data/text_de/easy_chat/group_orders.inc"
+	.include "data/text_de/easy_chat/group_name_table.inc"
+.endif

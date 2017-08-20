@@ -3,7 +3,11 @@
 
 	.section .rodata
 
-	.include "data/text/battle_strings.inc"
+.ifdef ENGLISH
+	.include "data/text_en/battle_strings.inc"
+.else
+	.include "data/text_de/battle_strings.inc"
+.endif
 
 	.align 1
 gUnknown_084016BC:: @ 84016BC

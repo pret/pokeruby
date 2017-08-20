@@ -715,17 +715,24 @@ gUnknown_081ECACC:: @ 81ECACC
 @ 81ECCB0
 	.include "data/trainer_parties.inc"
 
+.ifdef ENGLISH
 @ 81F0208
-	.include "data/text/trainer_class_names.inc"
+	.include "data/text_en/trainer_class_names.inc"
 
 @ 81F04FC
-	.include "data/trainers.inc"
+	.include "data/trainers_en.inc"
 
 @ 81F716C
-	.include "data/text/species_names.inc"
+	.include "data/text_en/species_names.inc"
 
 @ 81F8320
-	.include "data/text/move_names.inc"
+	.include "data/text_en/move_names.inc"
+.else
+	.include "data/text_de/trainer_class_names.inc"
+	.include "data/trainers_de.inc"
+	.include "data/text_de/species_names.inc"
+	.include "data/text_de/move_names.inc"
+.endif
 
 	.align 2
 @ 81F9528
@@ -930,16 +937,25 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 	.include "data/type_effectiveness.inc"
 
 @ 81F9870
-	.include "data/text/type_names.inc"
+.ifdef ENGLISH
+	.include "data/text_en/type_names.inc"
+.else
+	.include "data/text_de/type_names.inc"
+.endif
 
 @ 81F98F0
 	.include "data/trainer_money.inc"
 
+.ifdef ENGLISH
 @ 81F99CC
-	.include "data/text/ability_descriptions.inc"
+	.include "data/text_en/ability_descriptions.inc"
 
 @ 81FA248
-	.include "data/text/ability_names.inc"
+	.include "data/text_en/ability_names.inc"
+.else
+	.include "data/text_de/ability_descriptions.inc"
+	.include "data/text_de/ability_names.inc"
+.endif
 
 	.align 2
 gUnknown_081FA640:: @ 81FA640
