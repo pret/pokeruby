@@ -4,13 +4,6 @@
 	.section .rodata
 
 
-sMainTransitionPhases:: @ 83FD794
-	.4byte Transition_Phase1
-	.4byte Transition_WaitForPhase1
-	.4byte Transition_Phase2
-	.4byte Transition_WaitForPhase2
-
-	.align 2
 sPhase2_Transition0_Funcs:: @ 83FD7A4
 	.4byte Phase2_Transition0_Func1
 	.4byte Phase2_Transition0_Func2
@@ -135,10 +128,10 @@ gUnknown_083FD8A0:: @ 83FD8A0
 	.2byte -1, 1
 
 	.align 2
-gUnknown_083FD8A4:: @ 83FD8A4
-	.4byte sub_811CA94
-	.4byte sub_811CB20
-	.4byte sub_811CBE8
+sPhase2_Transition8_Funcs:: @ 83FD8A4
+	.4byte Phase2_Transition8_Func1
+	.4byte Phase2_Transition8_Func2
+	.4byte Phase2_Transition8_Func3
 
 	.align 2
 gUnknown_083FD8B0:: @ 83FD8B0

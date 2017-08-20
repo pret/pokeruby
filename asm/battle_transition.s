@@ -7,38 +7,8 @@
 	.text
 
 
-	thumb_func_start Phase2Task_Transition8
-Phase2Task_Transition8: @ 811CA5C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0811CA8C @ =gUnknown_083FD8A4
-	ldr r2, _0811CA90 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0811CA6E:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0811CA6E
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811CA8C: .4byte gUnknown_083FD8A4
-_0811CA90: .4byte gTasks
-	thumb_func_end Phase2Task_Transition8
-
-	thumb_func_start sub_811CA94
-sub_811CA94: @ 811CA94
+	thumb_func_start Phase2_Transition8_Func1
+Phase2_Transition8_Func1: @ 811CA94
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl sub_811D658
@@ -101,10 +71,10 @@ _0811CB10: .4byte 0x04000200
 _0811CB14: .4byte REG_DISPSTAT
 _0811CB18: .4byte sub_811CC28
 _0811CB1C: .4byte sub_811CCB0
-	thumb_func_end sub_811CA94
+	thumb_func_end Phase2_Transition8_Func1
 
-	thumb_func_start sub_811CB20
-sub_811CB20: @ 811CB20
+	thumb_func_start Phase2_Transition8_Func2
+Phase2_Transition8_Func2: @ 811CB20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -208,10 +178,10 @@ _0811CBCE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811CB20
+	thumb_func_end Phase2_Transition8_Func2
 
-	thumb_func_start sub_811CBE8
-sub_811CBE8: @ 811CBE8
+	thumb_func_start Phase2_Transition8_Func3
+Phase2_Transition8_Func3: @ 811CBE8
 	push {lr}
 	ldr r1, _0811CC18 @ =0x040000b0
 	ldrh r2, [r1, 0xA]
@@ -237,7 +207,7 @@ _0811CC18: .4byte 0x040000b0
 _0811CC1C: .4byte 0x0000c5ff
 _0811CC20: .4byte 0x00007fff
 _0811CC24: .4byte Phase2Task_Transition8
-	thumb_func_end sub_811CBE8
+	thumb_func_end Phase2_Transition8_Func3
 
 	thumb_func_start sub_811CC28
 sub_811CC28: @ 811CC28

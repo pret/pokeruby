@@ -74,6 +74,10 @@ static void Phase2Task_Transition_Phoebe(u8 taskID);
 static void Phase2Task_Transition_Glacia(u8 taskID);
 static void Phase2Task_Transition_Drake(u8 taskID);
 static void Phase2Task_Transition_Steven(u8 taskID);
+static bool8 Transition_Phase1(struct Task* task);
+static bool8 Transition_WaitForPhase1(struct Task* task);
+static bool8 Transition_Phase2(struct Task* task);
+static bool8 Transition_WaitForPhase2(struct Task* task);
 
 static void VBlankCB_Phase2_Transition1(void);
 static void HBlankCB_Phase2_Transition1(void);
@@ -112,7 +116,6 @@ static s16 sub_811CA44(s16 spriteID);
 typedef bool8 (*TransitionState)(struct Task* task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite* sprite);
 
-extern const TransitionState sMainTransitionPhases[];
 extern const TransitionState sPhase2_Transition0_Funcs[];
 extern const TransitionState sPhase2_Transition1_Funcs[];
 extern const TransitionState sPhase2_Transition2_Funcs[];
@@ -121,6 +124,7 @@ extern const TransitionState sPhase2_Transition4_Funcs[];
 extern const TransitionState sPhase2_Transition5_Funcs[];
 extern const TransitionState sPhase2_Transition6_Funcs[];
 extern const TransitionState sPhase2_Transition7_Funcs[];
+extern const TransitionState sPhase2_Transition8_Funcs[];
 extern const TransitionState sPhase2_Mugshot_Transition_Funcs[];
 extern const u16 gFieldEffectObjectPalette10[];
 extern const u16 gUnknown_083FDB44[];
@@ -173,6 +177,14 @@ static const TaskFunc sPhase2_Tasks[TRANSITIONS_NO] =
     &Phase2Task_Transition_Steven,  // 16
 };
 
+static const TransitionState sMainTransitionPhases[] =
+{
+    &Transition_Phase1,
+    &Transition_WaitForPhase1,
+    &Transition_Phase2,
+    &Transition_WaitForPhase2
+};
+
 void sub_811C90C(struct Sprite* sprite);
 
 void sub_811AABC(u8 transitionID)
@@ -213,7 +225,7 @@ static void Task_BattleTransitionMain(u8 taskID)
     while (sMainTransitionPhases[gTasks[taskID].tState](&gTasks[taskID]));
 }
 
-bool8 Transition_Phase1(struct Task* task)
+static bool8 Transition_Phase1(struct Task* task)
 {
     sub_807DE10();
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x4000100);
@@ -230,7 +242,7 @@ bool8 Transition_Phase1(struct Task* task)
     }
 }
 
-bool8 Transition_WaitForPhase1(struct Task* task)
+static bool8 Transition_WaitForPhase1(struct Task* task)
 {
     if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionID]) == 0xFF)
     {
@@ -241,14 +253,14 @@ bool8 Transition_WaitForPhase1(struct Task* task)
         return 0;
 }
 
-bool8 Transition_Phase2(struct Task* task)
+static bool8 Transition_Phase2(struct Task* task)
 {
     CreateTask(sPhase2_Tasks[task->tTransitionID], 0);
     task->tState++;
     return 0;
 }
 
-bool8 Transition_WaitForPhase2(struct Task* task)
+static bool8 Transition_WaitForPhase2(struct Task* task)
 {
     task->tTransitionDone = 0;
     if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionID]) == 0xFF)
@@ -1481,3 +1493,33 @@ static s16 sub_811CA44(s16 spriteID)
 #undef tMugshotOpponentID
 #undef tMugshotPlayerID
 #undef tMugshotID
+
+void Phase2Task_Transition8(u8 taskID)
+{
+    while (sPhase2_Transition8_Funcs[gTasks[taskID].tState](&gTasks[taskID]));
+}
+
+bool8 Phase2_Transition7_Func1(struct Task* task)
+{
+    u8 i;
+
+    sub_811D658();
+    dp12_8087EA4();
+
+    task->data[2] = 256;
+    task->data[3] = 256;
+    TRANSITION_STRUCT.WININ = 63;
+    TRANSITION_STRUCT.WINOUT = 0;
+    TRANSITION_STRUCT.WIN0V = 160;
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_03004DE0[1][i] = TRANSITION_STRUCT.field_14;
+        gUnknown_03004DE0[1][160 + i] = 0xF0;
+    }
+
+    SetVBlankCallback(VBlankCB_Phase2_Transition7);
+
+    task->tState++;
+    return 1;
+}
