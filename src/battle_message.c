@@ -42,57 +42,57 @@ extern u16 gBattlePartyID[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gBattleBufferA[4][0x200];
 
-extern const u8	gUnknown_084005DB[];
-extern const u8	gUnknown_084005C7[];
-extern const u8	gUnknown_084005AA[];
-extern const u8	gUnknown_08400568[];
-extern const u8	gUnknown_08400590[];
-extern const u8	gUnknown_0840057B[];
-extern const u8	gUnknown_08400555[];
-extern const u8	gUnknown_084006F1[];
-extern const u8	gUnknown_084006A4[];
-extern const u8	gUnknown_0840069C[];
-extern const u8	gUnknown_0840065C[];
-extern const u8	gUnknown_08400645[];
-extern const u8	gUnknown_08400608[];
-extern const u8	gUnknown_08400635[];
-extern const u8	gUnknown_084005F5[];
-extern const u8	gUnknown_08400709[];
-extern const u8	gUnknown_08400727[];
-extern const u8	gUnknown_08400736[];
-extern const u8	gUnknown_08400749[];
-extern const u8	gUnknown_08400781[];
-extern const u8	gUnknown_08400771[];
-extern const u8	gUnknown_0840075E[];
-extern const u8	gUnknown_084006B3[];
-extern const u8	gUnknown_084006BB[];
-extern const u8	gUnknown_084006C6[];
-extern const u8	gUnknown_084006D5[];
-extern const u8	gUnknown_0840068C[];
-extern const u8	gUnknown_0840067C[];
-extern const u8	gUnknown_08400622[];
-extern const u8	gUnknown_084007BD[];
-extern const u8	gUnknown_083FFEFC[];
-extern const u8	gUnknown_083FFFF7[];
-extern const u8	gUnknown_083FFFEA[];
-extern const u8	gUnknown_083FFF6A[];
-extern const u8	gUnknown_083FFF99[];
-extern const u8	gUnknown_083FFFCB[];
-extern const u8	gUnknown_083FFF56[];
-extern const u8	gUnknown_083FFF81[];
-extern const u8	gUnknown_083FFFB3[];
-extern const u8	gUnknown_08400A78[];
-extern const u8	gUnknown_08400A85[];
-extern const u8	gUnknown_08400797[];
-extern const u8	gUnknown_08400791[];
-extern const u8	gUnknown_084007B7[];
-extern const u8	gUnknown_084007B2[];
-extern const u8	gUnknown_0840079C[];
-extern const u8	gUnknown_084007A1[];
-extern const u8	gUnknown_084007A7[];
-extern const u8	gUnknown_084007AC[];
-extern const u8	gUnknown_084009ED[];
-extern const u8	gUnknown_084009F7[];
+extern const u8 gUnknown_084005DB[];
+extern const u8 gUnknown_084005C7[];
+extern const u8 gUnknown_084005AA[];
+extern const u8 gUnknown_08400568[];
+extern const u8 gUnknown_08400590[];
+extern const u8 gUnknown_0840057B[];
+extern const u8 gUnknown_08400555[];
+extern const u8 gUnknown_084006F1[];
+extern const u8 gUnknown_084006A4[];
+extern const u8 gUnknown_0840069C[];
+extern const u8 gUnknown_0840065C[];
+extern const u8 gUnknown_08400645[];
+extern const u8 gUnknown_08400608[];
+extern const u8 gUnknown_08400635[];
+extern const u8 gUnknown_084005F5[];
+extern const u8 gUnknown_08400709[];
+extern const u8 gUnknown_08400727[];
+extern const u8 gUnknown_08400736[];
+extern const u8 gUnknown_08400749[];
+extern const u8 gUnknown_08400781[];
+extern const u8 gUnknown_08400771[];
+extern const u8 gUnknown_0840075E[];
+extern const u8 gUnknown_084006B3[];
+extern const u8 gUnknown_084006BB[];
+extern const u8 gUnknown_084006C6[];
+extern const u8 gUnknown_084006D5[];
+extern const u8 gUnknown_0840068C[];
+extern const u8 gUnknown_0840067C[];
+extern const u8 gUnknown_08400622[];
+extern const u8 gUnknown_084007BD[];
+extern const u8 gUnknown_083FFEFC[];
+extern const u8 gUnknown_083FFFF7[];
+extern const u8 gUnknown_083FFFEA[];
+extern const u8 gUnknown_083FFF6A[];
+extern const u8 gUnknown_083FFF99[];
+extern const u8 gUnknown_083FFFCB[];
+extern const u8 gUnknown_083FFF56[];
+extern const u8 gUnknown_083FFF81[];
+extern const u8 gUnknown_083FFFB3[];
+extern const u8 gUnknown_08400A78[];
+extern const u8 gUnknown_08400A85[];
+extern const u8 gUnknown_08400797[];
+extern const u8 gUnknown_08400791[];
+extern const u8 gUnknown_084007B7[];
+extern const u8 gUnknown_084007B2[];
+extern const u8 gUnknown_0840079C[];
+extern const u8 gUnknown_084007A1[];
+extern const u8 gUnknown_084007A7[];
+extern const u8 gUnknown_084007AC[];
+extern const u8 gUnknown_084009ED[];
+extern const u8 gUnknown_084009F7[];
 extern const u8 gUnknown_084007C8[];
 extern const u8 gUnknown_084007CA[];
 extern const u8 gUnknown_084007CC[];
@@ -134,9 +134,9 @@ struct StringInfo
 extern struct StringInfo* gSelectedOrderFromParty;
 #define gStringInfo gSelectedOrderFromParty
 
-static void sub_8121D1C(u8* textBuff);
-static void sub_8121D74(u8* textBuff);
-static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst);
+void sub_8121D1C(u8* textBuff);
+void sub_8121D74(u8* textBuff);
+void StrCpyDecodeBattleTextBuff(u8* src, u8* dst);
 
 u8 GetBankSide(u8 bank);
 s32 sub_803FC34(u16);
@@ -147,6 +147,9 @@ u8 GetMultiplayerId(void);
 u8 GetBankByPlayerAI(u8 ID);
 u8 GetBankSide(u8 bank);
 u8 GetBankIdentity(u8 bank);
+#ifdef GERMAN
+extern u8 *de_sub_804110C();
+#endif
 
 void BufferStringBattle(u16 stringID)
 {
@@ -184,7 +187,12 @@ void BufferStringBattle(u16 stringID)
                     stringPtr = gUnknown_084005C7;
             }
             else
+            {
                 stringPtr = gUnknown_084005AA;
+#ifdef GERMAN
+                stringPtr = de_sub_804110C(0xFFFF, stringPtr);
+#endif
+            }
         }
         else
         {
@@ -220,12 +228,22 @@ void BufferStringBattle(u16 stringID)
                 else if (gBattleTypeFlags & BATTLE_TYPE_LINK)
                     stringPtr = gUnknown_08400645;
                 else
+                {
                     stringPtr = gUnknown_08400608;
+#ifdef GERMAN
+                    stringPtr = de_sub_804110C(0xFFFF, stringPtr);
+#endif
+                }
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_LINK)
                 stringPtr = gUnknown_08400635;
             else
+            {
                 stringPtr = gUnknown_084005F5;
+#ifdef GERMAN
+                stringPtr = de_sub_804110C(0xFFFF, stringPtr);
+#endif
+            }
         }
         break;
     case 2: // sending poke to ball msg
@@ -250,7 +268,12 @@ void BufferStringBattle(u16 stringID)
                     stringPtr = gUnknown_08400771;
             }
             else
+            {
                 stringPtr = gUnknown_0840075E;
+#ifdef GERMAN
+                stringPtr = de_sub_804110C(0xFFFF, stringPtr);
+#endif
+            }
         }
         break;
     case 3: // switch-in msg
@@ -275,7 +298,12 @@ void BufferStringBattle(u16 stringID)
                     stringPtr = gUnknown_0840067C;
             }
             else
+            {
                 stringPtr = gUnknown_08400622;
+#ifdef GERMAN
+                stringPtr = de_sub_804110C(0xFFFF, stringPtr);
+#endif
+            }
         }
         break;
     case 4: // pokemon used a move msg
@@ -346,7 +374,12 @@ void BufferStringBattle(u16 stringID)
             return;
         }
         else
+        {
             stringPtr = gBattleStringsTable[stringID - BATTLESTRING_TO_SUB];
+#ifdef GERMAN
+            stringPtr = de_sub_804110C(stringID, stringPtr);
+#endif
+        }
         break;
     }
     StrCpyDecodeToDisplayedStringBattle(stringPtr);
@@ -357,7 +390,7 @@ u32 StrCpyDecodeToDisplayedStringBattle(const u8* src)
     StrCpyDecodeBattle(src, gDisplayedStringBattle);
 }
 
-static const u8* AppendStatusString(u8* src)
+const u8* AppendStatusString(u8* src)
 {
     u32 i;
     u8 status[8];
@@ -384,6 +417,59 @@ static const u8* AppendStatusString(u8* src)
     }
     return NULL;
 }
+
+#ifdef GERMAN
+extern u8 *de_sub_8073174(u8 *, const u8 *);
+extern u8 *de_sub_8041024(s32, u32);
+#endif
+
+#ifdef ENGLISH
+#define HANDLE_NICKNAME_STRING_CASE(bank, monIndex)                     \
+    if (GetBankSide(bank) != 0)                                         \
+    {                                                                   \
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
+            toCpy = gUnknown_08400797;                                  \
+        else                                                            \
+            toCpy = gUnknown_08400791;                                  \
+        while (*toCpy != EOS)                                           \
+        {                                                               \
+            dst[dstID] = *toCpy;                                        \
+            dstID++;                                                    \
+            toCpy++;                                                    \
+        }                                                               \
+        GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
+    }                                                                   \
+    else                                                                \
+    {                                                                   \
+        GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
+    }                                                                   \
+    StringGetEnd10(text);                                               \
+    toCpy = text;
+#else
+#define HANDLE_NICKNAME_STRING_CASE(bank, monIndex)                     \
+    if (GetBankSide(bank) != 0)                                         \
+    {                                                                   \
+        GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
+        StringGetEnd10(text);                                           \
+        toCpy = text;                                                   \
+        while (*toCpy != EOS)                                           \
+        {                                                               \
+            dst[dstID] = *toCpy;                                        \
+            dstID++;                                                    \
+            toCpy++;                                                    \
+        }                                                               \
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
+            toCpy = gUnknown_08400797;                                  \
+        else                                                            \
+            toCpy = gUnknown_08400791;                                  \
+    }                                                                   \
+    else                                                                \
+    {                                                                   \
+        GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
+        StringGetEnd10(text);                                           \
+        toCpy = text;                                                   \
+    }
+#endif
 
 u32 StrCpyDecodeBattle(const u8* src, u8* dst)
 {
@@ -471,25 +557,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = text;
                 break;
             case 10: // attacker name with prefix, only bank 0/1
-                if (GetBankSide(gBankAttacker) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1)]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1)]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1)])
                 break;
             case 11: // attacker partner name, only bank 0/1
                 if (GetBankSide(gBankAttacker) == 0)
@@ -501,109 +569,19 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = text;
                 break;
             case 12: // attacker name with prefix
-                if (GetBankSide(gBankAttacker) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[gBankAttacker]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[gBankAttacker]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlePartyID[gBankAttacker])
                 break;
             case 13: // target name with prefix
-                if (GetBankSide(gBankTarget) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[gBankTarget]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[gBankTarget]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(gBankTarget, gBattlePartyID[gBankTarget])
                 break;
             case 14: // effect bank name with prefix
-                if (GetBankSide(gEffectBank) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[gEffectBank]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[gEffectBank]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlePartyID[gEffectBank])
                 break;
             case 15: // active bank name with prefix
-                if (GetBankSide(gActiveBank) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(gActiveBank, gBattlePartyID[gActiveBank])
                 break;
             case 16: // scripting active bank name with prefix
-                if (GetBankSide(BATTLE_STRUCT->scriptingActive) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[gBattlePartyID[BATTLE_STRUCT->scriptingActive]], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[gBattlePartyID[BATTLE_STRUCT->scriptingActive]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, gBattlePartyID[BATTLE_STRUCT->scriptingActive])
                 break;
             case 17: // current move name
                 if (gStringInfo->currentMove > 0x162)
@@ -625,7 +603,11 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                         if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(text, gEnigmaBerries[gStringBank].name);
+#ifdef ENGLISH
                             StringAppend(text, gUnknown_08400A85);
+#else
+                            de_sub_8073174(text, gUnknown_08400A85);
+#endif
                             toCpy = text;
                         }
                         else
@@ -659,6 +641,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBank]];
                 break;
             case 25: // trainer class name
+#ifdef ENGLISH
                 if (gTrainerBattleOpponent == 0x400)
                     toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
@@ -668,6 +651,17 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 else
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent].trainerClass];
                 break;
+#else
+                if (gTrainerBattleOpponent == 0x400)
+                    toCpy = de_sub_8041024(gTrainerBattleOpponent, 0);
+                else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                    toCpy = de_sub_8041024(BATTLE_TYPE_BATTLE_TOWER, 0);
+                else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
+                    toCpy = de_sub_8041024(BATTLE_TYPE_EREADER_TRAINER, 0);
+                else
+                    toCpy = de_sub_8041024(0, gTrainerBattleOpponent);
+                break;
+#endif
             case 26: // trainer name
                 if (gTrainerBattleOpponent == 0x400)
                 {
@@ -710,25 +704,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = sub_8082830();
                 break;
             case 34: // ?
-                if (GetBankSide(BATTLE_STRUCT->scriptingActive) != 0)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        toCpy = gUnknown_08400797;
-                    else
-                        toCpy = gUnknown_08400791;
-                    while (*toCpy != EOS)
-                    {
-                        dst[dstID] = *toCpy;
-                        dstID++;
-                        toCpy++;
-                    }
-                    GetMonData(&gEnemyParty[BATTLE_STRUCT->unk1605E], MON_DATA_NICKNAME, text);
-                }
-                else
-                    GetMonData(&gPlayerParty[BATTLE_STRUCT->unk1605E], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
-                toCpy = text;
+                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
                 break;
             case 35: // lanette pc
                 if (FlagGet(SYS_PC_LANETTE))
@@ -773,7 +749,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                     toCpy = gUnknown_084007B2;
                 break;
             }
-            //if (toCpy != NULL) really GF, why did you forgot about this
+            //if (toCpy != NULL) really GF, why did you forget about this?
             while (*toCpy != EOS)
             {
                 dst[dstID] = *toCpy;
@@ -803,23 +779,26 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
 #define ByteRead16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define ByteRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 
-static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
+void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
 {
     u32 srcID = 1;
     u32 value = 0;
     u8 text[12];
+    u16 hword;
 
     *dst = EOS;
     while (src[srcID] != EOS)
     {
         switch (src[srcID])
         {
-        case 0: // battlescript ptr
-            {
-                u16 BS_ID = ByteRead16(&src[srcID + 1]);
-                StringAppend(dst, gBattleStringsTable[BS_ID - BATTLESTRING_TO_SUB]);
+        case 0: // battle string
+            hword = ByteRead16(&src[srcID + 1]);
+#ifdef GERMAN
+            if (hword == 209 || hword == 211)
                 srcID += 3;
-            }
+#endif
+            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRING_TO_SUB]);
+            srcID += 3;
             break;
         case 1: // int to string
             switch (src[srcID + 1])
@@ -846,6 +825,7 @@ static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
             srcID += 2;
             break;
         case 4: // poke nick with prefix
+#ifdef ENGLISH
             if (GetBankSide(src[srcID + 1]) == 0)
             {
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
@@ -860,6 +840,24 @@ static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
             }
             StringGetEnd10(text);
             StringAppend(dst, text);
+#else
+            if (GetBankSide(src[srcID + 1]) == 0)
+            {
+                GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                StringGetEnd10(text);
+                StringAppend(dst, text);
+            }
+            else
+            {
+                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                StringGetEnd10(text);
+                StringAppend(dst, text);
+                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                    StringAppend(dst, gUnknown_08400797);
+                else
+                    StringAppend(dst, gUnknown_08400791);
+            }
+#endif
             srcID += 3;
             break;
         case 5: // stats
@@ -888,24 +886,28 @@ static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
             break;
         case 10: // item name
             {
-                u16 item = ByteRead16(&src[srcID + 1]);
+                hword = ByteRead16(&src[srcID + 1]);
                 if (gBattleTypeFlags & BATTLE_TYPE_LINK)
                 {
-                    if (item == ITEM_ENIGMA_BERRY)
+                    if (hword == ITEM_ENIGMA_BERRY)
                     {
                         if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(dst, gEnigmaBerries[gStringBank].name);
+#ifdef ENGLISH
                             StringAppend(dst, gUnknown_08400A85);
+#else
+                            de_sub_8073174(dst, gUnknown_08400A85);
+#endif
                         }
                         else
                             StringAppend(dst, gUnknown_08400A78);
                     }
                     else
-                        CopyItemName(item, dst);
+                        CopyItemName(hword, dst);
                 }
                 else
-                    CopyItemName(item, dst);
+                    CopyItemName(hword, dst);
                 srcID += 3;
             }
             break;
@@ -913,7 +915,7 @@ static void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
     }
 }
 
-static void sub_8121D1C(u8* textBuff)
+void sub_8121D1C(u8* textBuff)
 {
     s32 counter = 0;
     u32 i = 0;
@@ -937,7 +939,7 @@ static void sub_8121D1C(u8* textBuff)
 
 #ifdef NONMATCHING
 
-static void sub_8121D74(u8* dst)
+void sub_8121D74(u8* dst)
 {
     s32 counter = 0;
     s32 i;
@@ -975,88 +977,88 @@ static void sub_8121D74(u8* dst)
 
 #else
 __attribute__((naked))
-static void sub_8121D74(u8* dst)
+void sub_8121D74(u8* dst)
 {
     asm(".syntax unified\n\
-	push {r4,r5,lr}\n\
-	adds r3, r0, 0\n\
-	movs r4, 0\n\
-	b _08121D7E\n\
+    push {r4,r5,lr}\n\
+    adds r3, r0, 0\n\
+    movs r4, 0\n\
+    b _08121D7E\n\
 _08121D7C:\n\
-	adds r3, 0x1\n\
+    adds r3, 0x1\n\
 _08121D7E:\n\
-	ldrb r0, [r3]\n\
-	cmp r0, 0xFF\n\
-	bne _08121D7C\n\
-	ldr r1, _08121DB4 @ =gUnknown_084016BC\n\
-	ldr r5, _08121DB8 @ =gSelectedOrderFromParty\n\
-	movs r0, 0\n\
-	lsls r0, 1\n\
-	adds r2, r0, r1\n\
+    ldrb r0, [r3]\n\
+    cmp r0, 0xFF\n\
+    bne _08121D7C\n\
+    ldr r1, _08121DB4 @ =gUnknown_084016BC\n\
+    ldr r5, _08121DB8 @ =gSelectedOrderFromParty\n\
+    movs r0, 0\n\
+    lsls r0, 1\n\
+    adds r2, r0, r1\n\
 _08121D8E:\n\
-	cmp r4, 0x4\n\
-	beq _08121DA8\n\
-	ldrh r1, [r2]\n\
-	cmp r1, 0\n\
-	bne _08121D9A\n\
-	adds r4, 0x1\n\
+    cmp r4, 0x4\n\
+    beq _08121DA8\n\
+    ldrh r1, [r2]\n\
+    cmp r1, 0\n\
+    bne _08121D9A\n\
+    adds r4, 0x1\n\
 _08121D9A:\n\
-	ldr r0, [r5]\n\
-	adds r2, 0x2\n\
-	ldrh r0, [r0]\n\
-	cmp r1, r0\n\
-	bne _08121D8E\n\
-	cmp r4, 0x4\n\
-	bhi _08121E04\n\
+    ldr r0, [r5]\n\
+    adds r2, 0x2\n\
+    ldrh r0, [r0]\n\
+    cmp r1, r0\n\
+    bne _08121D8E\n\
+    cmp r4, 0x4\n\
+    bhi _08121E04\n\
 _08121DA8:\n\
-	lsls r0, r4, 2\n\
-	ldr r1, _08121DBC @ =_08121DC0\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
+    lsls r0, r4, 2\n\
+    ldr r1, _08121DBC @ =_08121DC0\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
 _08121DB4: .4byte gUnknown_084016BC\n\
 _08121DB8: .4byte gSelectedOrderFromParty\n\
 _08121DBC: .4byte _08121DC0\n\
-	.align 2, 0\n\
+    .align 2, 0\n\
 _08121DC0:\n\
-	.4byte _08121DD4\n\
-	.4byte _08121DDC\n\
-	.4byte _08121DE4\n\
-	.4byte _08121DEC\n\
-	.4byte _08121DFC\n\
+    .4byte _08121DD4\n\
+    .4byte _08121DDC\n\
+    .4byte _08121DE4\n\
+    .4byte _08121DEC\n\
+    .4byte _08121DFC\n\
 _08121DD4:\n\
-	ldr r1, _08121DD8 @ =gUnknown_084007C8\n\
-	b _08121DEE\n\
-	.align 2, 0\n\
+    ldr r1, _08121DD8 @ =gUnknown_084007C8\n\
+    b _08121DEE\n\
+    .align 2, 0\n\
 _08121DD8: .4byte gUnknown_084007C8\n\
 _08121DDC:\n\
-	ldr r1, _08121DE0 @ =gUnknown_084007CA\n\
-	b _08121DEE\n\
-	.align 2, 0\n\
+    ldr r1, _08121DE0 @ =gUnknown_084007CA\n\
+    b _08121DEE\n\
+    .align 2, 0\n\
 _08121DE0: .4byte gUnknown_084007CA\n\
 _08121DE4:\n\
-	ldr r1, _08121DE8 @ =gUnknown_084007CC\n\
-	b _08121DEE\n\
-	.align 2, 0\n\
+    ldr r1, _08121DE8 @ =gUnknown_084007CC\n\
+    b _08121DEE\n\
+    .align 2, 0\n\
 _08121DE8: .4byte gUnknown_084007CC\n\
 _08121DEC:\n\
-	ldr r1, _08121DF8 @ =gUnknown_084007CE\n\
+    ldr r1, _08121DF8 @ =gUnknown_084007CE\n\
 _08121DEE:\n\
-	adds r0, r3, 0\n\
-	bl StringCopy\n\
-	b _08121E04\n\
-	.align 2, 0\n\
+    adds r0, r3, 0\n\
+    bl StringCopy\n\
+    b _08121E04\n\
+    .align 2, 0\n\
 _08121DF8: .4byte gUnknown_084007CE\n\
 _08121DFC:\n\
-	ldr r1, _08121E0C @ =gUnknown_084007D0\n\
-	adds r0, r3, 0\n\
-	bl StringCopy\n\
+    ldr r1, _08121E0C @ =gUnknown_084007D0\n\
+    adds r0, r3, 0\n\
+    bl StringCopy\n\
 _08121E04:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
 _08121E0C: .4byte gUnknown_084007D0\n\
         .syntax divided");
 }
