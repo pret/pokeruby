@@ -5,6 +5,20 @@ void sub_811AABC(u8);
 void sub_811AAD8(u8);
 bool8 IsBattleTransitionDone(void);
 
-#define B_TRANSITION_WILD   8
+enum // TRANSITION_MUGSHOT
+{
+    MUGSHOT_SYDNEY,
+    MUGSHOT_PHOEBE,
+    MUGSHOT_GLACIA,
+    MUGSHOT_DRAKE,
+    MUGSHOT_STEVEN,
+};
+
+#define B_TRANSITION_WILD       8
+#define B_TRANSITION_SYDNEY     12
+#define B_TRANSITION_PHOEBE     13
+#define B_TRANSITION_GLACIA     13
+#define B_TRANSITION_DRAKE      14
+#define B_TRANSITION_STEVEN     15
 
 #endif // GUARD_BATTLE_TRANSITION_H

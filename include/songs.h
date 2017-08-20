@@ -107,7 +107,7 @@ enum
     SE_C_PIKON,
     SE_REAPOKE,
     SE_OP_BASYU,
-    SE_BT_START,
+    /*0x68*/ SE_BT_START,
     SE_DENDOU,
     SE_JIHANKI,
     SE_TAMA,

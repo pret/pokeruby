@@ -69,11 +69,11 @@ sPhase2_Tasks:: @ 83FD750
 	.4byte Phase2Task_Transition9
 	.4byte Phase2Task_Transition10
 	.4byte Phase2Task_Transition11
-	.4byte Phase2Task_Transition12
-	.4byte Phase2Task_Transition13
-	.4byte Phase2Task_Transition14
-	.4byte Phase2Task_Transition15
-	.4byte Phase2Task_Transition16
+	.4byte Phase2Task_Transition_Sydney
+	.4byte Phase2Task_Transition_Phoebe
+	.4byte Phase2Task_Transition_Glacia
+	.4byte Phase2Task_Transition_Drake
+	.4byte Phase2Task_Transition_Steven
 
 	.align 2
 sMainTransitionPhases:: @ 83FD794
@@ -147,23 +147,23 @@ sPhase2_Transition6_Funcs:: @ 83FD814
 	.4byte Phase2_Transition6_Func2
 
 	.align 2
-gUnknown_083FD81C:: @ 83FD81C
-	.4byte sub_811BED8
-	.4byte sub_811BF2C
-	.4byte sub_811BFC4
+sPhase2_Transition7_Funcs:: @ 83FD81C
+	.4byte Phase2_Transition7_Func1
+	.4byte Phase2_Transition7_Func2
+	.4byte Phase2_Transition7_Func3
 
 	.align 2
-gUnknown_083FD828:: @ 83FD828
-	.4byte sub_811C164
-	.4byte sub_811C1CC
-	.4byte sub_811C2A4
-	.4byte sub_811C38C
-	.4byte sub_811C400
-	.4byte sub_811C43C
-	.4byte sub_811C4F0
-	.4byte sub_811C5B4
-	.4byte sub_811C5E8
-	.4byte sub_811C630
+sPhase2_Mugshot_Transition_Funcs:: @ 83FD828
+	.4byte Phase2_Mugshot_Func1
+	.4byte Phase2_Mugshot_Func2
+	.4byte Phase2_Mugshot_Func3
+	.4byte Phase2_Mugshot_Func4
+	.4byte Phase2_Mugshot_Func5
+	.4byte Phase2_Mugshot_Func6
+	.4byte Phase2_Mugshot_Func7
+	.4byte Phase2_Mugshot_Func8
+	.4byte Phase2_Mugshot_Func9
+	.4byte Phase2_Mugshot_Func10
 
 gUnknown_083FD850:: @ 83FD850
 	.byte TRAINER_PIC_SIDNEY
@@ -342,45 +342,45 @@ gFieldEffectObjectPaletteInfo10:: @ 83FDA18
 	obj_pal gFieldEffectObjectPalette10, 0x1009
 
 	.align 2
-Unknown_83FDA20:
+sMugshotPal_Sydney:
 	.incbin "graphics/battle_transitions/sidney_bg.gbapal"
 
 	.align 2
-Unknown_83FDA40:
+sMugshotPal_Phoebe:
 	.incbin "graphics/battle_transitions/phoebe_bg.gbapal"
 
 	.align 2
-Unknown_83FDA60:
+sMugshotPal_Glacia:
 	.incbin "graphics/battle_transitions/glacia_bg.gbapal"
 
 	.align 2
-Unknown_83FDA80:
+sMugshotPal_Drake:
 	.incbin "graphics/battle_transitions/drake_bg.gbapal"
 
 	.align 2
-Unknown_83FDAA0:
+sMugshotPal_Steven:
 	.incbin "graphics/battle_transitions/steven_bg.gbapal"
 
 	.align 2
-Unknown_83FDAC0:
+sMugshotPal_Brendan:
 	.incbin "graphics/battle_transitions/brendan_bg.gbapal"
 
 	.align 2
-Unknown_83FDAE0:
+sMugshotPal_May:
 	.incbin "graphics/battle_transitions/may_bg.gbapal"
 
 	.align 2
-gUnknown_083FDB00:: @ 83FDB00
-	.4byte Unknown_83FDA20
-	.4byte Unknown_83FDA40
-	.4byte Unknown_83FDA60
-	.4byte Unknown_83FDA80
-	.4byte Unknown_83FDAA0
+sOpponentMugshotsPals:: @ 83FDB00
+	.4byte sMugshotPal_Sydney
+	.4byte sMugshotPal_Phoebe
+	.4byte sMugshotPal_Glacia
+	.4byte sMugshotPal_Drake
+	.4byte sMugshotPal_Steven
 
 	.align 2
-gUnknown_083FDB14:: @ 83FDB14
-	.4byte Unknown_83FDAC0
-	.4byte Unknown_83FDAE0
+sPlayerMugshotsPals:: @ 83FDB14
+	.4byte sMugshotPal_Brendan
+	.4byte sMugshotPal_May
 
 	.align 2
 UnusedTrainerPalette:
