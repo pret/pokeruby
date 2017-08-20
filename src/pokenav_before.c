@@ -2092,3 +2092,52 @@ label2:
 		break;
 	}
 }
+
+void sub_80F3C2C();
+
+void sub_80EE294() {
+	switch (ewram0.var304) {
+	case 0:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gPaletteFade.active) return;
+		SetVBlankCallback(NULL);
+		sub_80EED0C();
+		sub_80F3C2C();
+		sub_80EEE08();
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80F6134();
+		sub_80F0264(0x1);
+		ewram0.var304++;
+	case 3:
+		if (sub_80F02A0()) return;
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80EEFBC(0x4);
+		sub_80F3008(0x1);
+		SetVBlankCallback(&sub_80EBD18);
+		ewram0.var304++;
+		break;
+	case 5:
+		if (sub_8055870()) return;
+		ewram0.var304++;
+		break;
+	case 6:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
+		ewram0.var304++;
+		break;
+	case 7:
+		sub_80EED2C(0x4);
+		ewram0.var304++;
+		break;
+	case 8:
+		if (gPaletteFade.active) return;
+		sub_80EBDBC(&sub_80EDDBC);
+		break;
+	}
+}
