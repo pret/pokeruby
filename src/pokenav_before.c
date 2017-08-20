@@ -41,9 +41,13 @@ struct UnknownPokenav0 {
 	/* 0x76AA */ u8 var76aa;
 	/* 0x76AB */ u8 fill76AB[0x10BD];
 	/* 0x8768 */ u32 var8768;
-	/* 0x876C */ u8 fill876B[0x6C];
+	/* 0x876C */ u8 fill876C[0x8];
+	/* 0x8774 */ s16 var8774;
+	/* 0x8776 */ u8 fill8776[0x62];
 	/* 0x87D8 */ u8 var87D8;
-	/* 0x87D9 */ u8 fill87D9[0x4F];
+	/* 0x87D9 */ u8 fill87D9[0x3];
+	/* 0x87DC */ s16 var87DC;
+	/* 0x87DE */ u8 fill87DE[0x4a];
 	/* 0x8828 */ u8 var8828;
 	/* 0x8829 */ u8 fill8829[0x07bf];
 	/* 0x8FE8 */ s8 var8fe8;
@@ -1986,5 +1990,105 @@ void sub_80EDEE4() {
 		sub_80EBDBC(&sub_80EE06C);
 		break;
 	}
+}
 
+void sub_80F15A8();
+void sub_80F6A4C();
+bool8 sub_80F6AF0();
+void sub_80F3B00();
+bool8 sub_80F3B58();
+void sub_80F1494();
+u8 sub_80F68E8();
+void sub_80F3B94();
+bool8 sub_80F3BD4();
+void sub_80EE294();
+
+void sub_80EE06C() {
+	u32 var1;
+	u16 var2;
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F15A8();
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gMain.newAndRepeatedKeys & 0x40) {
+			if (ewram0.var87DC) {
+				PlaySE(0x5);
+				sub_80F6A4C(-1);
+				ewram0.var304++;
+			}
+			else goto label1;
+		}
+		else goto label1;
+		break;
+label1:
+		if (gMain.newAndRepeatedKeys & 0x80) {
+			if (ewram0.var87DC < ewram0.var8774) {
+				PlaySE(0x5);
+				sub_80F6A4C(1);
+				ewram0.var304++;
+			}
+			else goto label2;
+		}
+		else goto label2;
+		break;
+label2:
+		if (gMain.newKeys & A_BUTTON) {
+			PlaySE(0x5);
+			sub_80EEFBC(0xB);
+			ewram0.var304 = 0x4;
+		}
+		else if (gMain.newKeys & B_BUTTON) {
+			PlaySE(0x5);
+			sub_80EBDBC(&sub_80EE294);
+		}
+		break;
+	case 2:
+		if (sub_80F6AF0()) return;
+		ewram0.var304++;
+		break;
+	case 3:
+		var1 = sub_8055870();
+		if (var1) return;
+		ewram0.var304 = var1;
+		break;
+	case 4:
+		sub_80F3B00();
+		ewram0.var304++;
+		break;
+	case 5:
+		if (sub_80F3B58()) return;
+		sub_80F1494();
+		ewram0.var304++;
+		sub_80EED9C();
+		break;
+	case 6:
+		switch (sub_80F68E8()) {
+		case 1:
+			PlaySE(0x5);
+			sub_80F3B94();
+			ewram0.var304 = 0x7;
+			break;
+		default:
+		case 0:
+			if (gMain.newKeys & B_BUTTON) {
+				PlaySE(0x5);
+				sub_80F3B94();
+				ewram0.var304 = 0x8;
+			}
+			break;
+		}
+		break;
+	case 7:
+		if (sub_80F3BD4()) return;
+		ewram0.var304 = 0x4;
+		break;
+	case 8:
+		var2 = sub_80F3BD4();
+		if (var2) return;
+		sub_80EEFBC(0x5);
+		ewram0.var304 = var2;
+		break;
+	}
 }
