@@ -211,11 +211,10 @@ bool8 sub_8121E78(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
 {
-    u16 r3;
-    s32 i;
+    u16 species;
+    s32 i = 0;
 
     if (GetMonData(pkmn, MON_DATA_IS_EGG))
         return FALSE;
@@ -232,97 +231,16 @@ static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
      && GetMonData(pkmn, MON_DATA_LEVEL) > 50)
         return FALSE;
 
-    r3 = GetMonData(pkmn, MON_DATA_SPECIES);
-    // Can't stop the compiler from optimizing out the first index
-    for (i = 0; gBattleTowerBanlist[i] != 0xFFFF; i++)
+    // Check if the pkmn is in the ban list
+    species = GetMonData(pkmn, MON_DATA_SPECIES);
+    while (gBattleTowerBanlist[i] != 0xFFFF)
     {
-        if (gBattleTowerBanlist[i] == r3)
+        if (gBattleTowerBanlist[i] == species)
             return FALSE;
+        i++;
     }
     return TRUE;
 }
-#else
-__attribute__((naked))
-static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
-{
-    asm_unified(
-	"push {r4,lr}\n\
-	adds r4, r0, 0\n\
-	movs r1, 0x2D\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	bne _0812207C\n\
-	ldr r0, _08122058 @ =0x0201b000\n\
-	ldr r1, _0812205C @ =0x00000263\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08122060\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x39\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _0812207C\n\
-	b _081220B6\n\
-	.align 2, 0\n\
-_08122058: .4byte 0x0201b000\n\
-_0812205C: .4byte 0x00000263\n\
-_08122060:\n\
-	ldr r0, _08122080 @ =gSaveBlock2\n\
-	ldr r1, _08122084 @ =0x00000554\n\
-	adds r0, r1\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08122088\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x38\n\
-	bl GetMonData\n\
-	cmp r0, 0x32\n\
-	bls _08122088\n\
-_0812207C:\n\
-	movs r0, 0\n\
-	b _081220B8\n\
-	.align 2, 0\n\
-_08122080: .4byte gSaveBlock2\n\
-_08122084: .4byte 0x00000554\n\
-_08122088:\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	ldr r1, _081220C0 @ =gBattleTowerBanlist\n\
-	movs r0, 0\n\
-	lsls r0, 1\n\
-	adds r2, r0, r1\n\
-	ldrh r0, [r2]\n\
-	ldr r1, _081220C4 @ =0x0000ffff\n\
-	cmp r0, r1\n\
-	beq _081220B6\n\
-	adds r4, r1, 0\n\
-	adds r1, r2, 0\n\
-_081220A8:\n\
-	ldrh r0, [r1]\n\
-	cmp r0, r3\n\
-	beq _0812207C\n\
-	adds r1, 0x2\n\
-	ldrh r0, [r1]\n\
-	cmp r0, r4\n\
-	bne _081220A8\n\
-_081220B6:\n\
-	movs r0, 0x1\n\
-_081220B8:\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_081220C0: .4byte gBattleTowerBanlist\n\
-_081220C4: .4byte 0x0000ffff\n"
-    );
-}
-#endif
 
 static u8 sub_81220C8(void)
 {

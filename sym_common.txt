@@ -106,13 +106,7 @@ gUnknown_0300434C: @ 300434C
 
 	.include "pokemon/pokemon_1.o"
 	.include "engine/rng.o"
-
-@ egg_hatch
-
-	.align 2
-gUnknown_0300481C: @ 300481C
-	.space 0x4
-
+	.include "scene/egg_hatch.o"
 	.include "engine/load_save.o"
 
 @ trade

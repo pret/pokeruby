@@ -74,7 +74,6 @@ SECTIONS {
         src/field/daycare.o(.text);
         asm/daycare.o(.text);
         src/scene/egg_hatch.o(.text);
-        asm/egg_hatch.o(.text);
         src/battle/battle_interface.o(.text);
         src/battle/smokescreen.o(.text);
         src/battle/pokeball.o(.text);
@@ -229,7 +228,7 @@ SECTIONS {
         src/field/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         src/battle/battle_811DA74.o(.text);
-        asm/battle_message.o(.text);
+        src/battle/battle_message.o(.text);
         src/field/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
@@ -255,7 +254,7 @@ SECTIONS {
         src/scene/intro.o(.text);
         src/field/field_region_map.o(.text);
         asm/battle_anim_813F0F4.o(.text);
-        asm/hall_of_fame.o(.text);
+        src/scene/hall_of_fame.o(.text);
         src/scene/credits.o(.text);
         src/field/lottery_corner.o(.text);
         src/field/diploma.o(.text);
@@ -338,7 +337,7 @@ SECTIONS {
         src/engine/trig.o(.rodata);
         src/engine/util.o(.rodata);
         data/daycare.o(.rodata);
-        data/egg_hatch.o(.rodata);
+        src/scene/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
         src/battle/pokeball.o(.rodata);
         data/trade.o(.rodata);
@@ -463,7 +462,7 @@ SECTIONS {
         src/field/player_pc.o(.rodata);
         src/scene/intro.o(.rodata);
         data/battle_anim_813F0F4.o(.rodata);
-        data/hall_of_fame.o(.rodata);
+        src/scene/hall_of_fame.o(.rodata);
         src/scene/credits.o(.rodata);
         data/credits.o(.rodata);
         src/field/lottery_corner.o(.rodata);
