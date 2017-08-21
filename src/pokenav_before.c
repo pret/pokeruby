@@ -2257,3 +2257,138 @@ void sub_80EE58C() {
 		break;
 	}
 }
+
+void sub_80F3294();
+void sub_80F0B24();
+bool8 sub_80F0B44();
+void sub_80F0F64();
+bool8 sub_80F0FEC();
+void sub_80F6FB8();
+void sub_80F6DB8();
+void sub_80F0CD8();
+bool8 sub_80F6E9C();
+bool8 sub_80F0D5C();
+bool8 sub_80F6ED4();
+bool8 sub_80F0EF4();
+void sub_80F2FB0();
+void sub_80F0FA0();
+void sub_80F0C28();
+bool8 sub_80F0C48();
+bool8 sub_80F70FC();
+void sub_80F708C(u32);
+void sub_80F4394();
+void sub_80F0EC0();
+void sub_80F700C();
+void sub_80F42C4();
+
+void sub_80EE658() {
+	switch (ewram0.var304) {
+	case 0:
+		sub_80F3294(0x1);
+		sub_80EEFBC(0xA);
+		sub_80F0B24();
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80F0B44()) return;
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80F0F64();
+		ewram0.var304++;
+		break;
+	case 3:
+		if (sub_80F0FEC()) return;
+		sub_80F6FB8(0x1);
+		ewram0.var304++;
+		break;
+	case 4:
+		sub_80F6DB8();
+		ewram0.var304++;
+		break;
+	case 5:
+		sub_80F700C((u8 *)(ewram + 0x8788), *(u16 *)(ewram + 0x8788 - 0x1A));
+		sub_80F42C4((u8 *)(ewram + 0x8788));
+		ewram0.var304++;
+		break;
+	case 6:
+		sub_80F0CD8();
+		ewram0.var304++;
+	case 7:
+		if (sub_80F6E9C()) return;
+		if (sub_80F0D5C()) return;
+		ewram0.var304++;
+		break;
+	case 8:
+		if (gMain.heldKeys & 0x40) {
+			if (ewram0.var87DC) {
+				PlaySE(0x5);
+				sub_80F708C(-1);
+				ewram0.var304 = 0x10;
+			}
+			else goto label1;
+		}
+		else goto label1;
+		break;
+label1:
+		if (gMain.heldKeys & 0x80) {
+			if (ewram0.var87DC < ewram0.var8774) {
+				PlaySE(0x5);
+				sub_80F708C(1);
+				ewram0.var304 = 0x10;
+			}
+			else goto label2;
+		}
+		else goto label2;
+		break;
+label2:
+		if (gMain.newKeys & B_BUTTON) {
+			PlaySE(0x5);
+			sub_80F4394();
+			sub_80F0EC0();
+			ewram0.var304++;
+		}
+		break;
+	case 9:
+		if (sub_80F6ED4()) return;
+		if (sub_80F0EF4()) return;
+		sub_80F6FB8(0);
+		sub_80F2FB0();
+		ewram0.var304++;
+		break;
+	case 0xA:
+		sub_80F6134();
+		ewram0.var304++;
+		break;
+	case 0xB:
+		sub_80F0FA0();
+		ewram0.var304++;
+		break;
+	case 0xC:
+		if (sub_80F0FEC()) return;
+		ewram0.var304++;
+		break;
+	case 0xD:
+		sub_80F0C28();
+		ewram0.var304++;
+		break;
+	case 0xE:
+		if (sub_80F0C48()) return;
+		ewram0.var304++;
+		break;
+	case 0xF:
+		sub_80EEFBC(0x9);
+		sub_80F3294(0);
+		sub_80EBDBC(&sub_80EE58C);
+		sub_80EED9C();
+		break;
+	case 0x10:
+		if (sub_80F70FC()) return;
+		ewram0.var304++;
+		break;
+	case 0x11:
+		if (sub_8055870()) return;
+		ewram0.var304 = 0x8;
+		break;
+	}
+}
