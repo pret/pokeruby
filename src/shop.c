@@ -17,6 +17,8 @@
 #include "tv.h"
 #include "unknown_task.h"
 #include "field_map_obj.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
 
 struct UnknownShopStruct
 {
@@ -319,7 +321,7 @@ void BuyMenuDrawMapMetatileLayer(u16 *array, s16 offset1, s16 offset2, u16 *arra
     array[offset1 + offset2 + 33] = array2[3];
 }
 
-void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s8 var4)
+void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s32 var4)
 {
     u8 tempVar4 = var4;
     s16 offset1 = var1 * 2;
@@ -351,163 +353,44 @@ void sub_80B33D0(s16 var1, int var2, u16 *var3)
     BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
 }
 
-// no. for loop too hard.
-__attribute__((naked))
-void sub_80B3420() // dont know args
+void sub_80B3420(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	mov r4, sp\n\
-	adds r4, 0x2\n\
-	mov r0, sp\n\
-	adds r1, r4, 0\n\
-	bl GetXYCoordsOneStepInFrontOfPlayer\n\
-	mov r1, sp\n\
-	mov r0, sp\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x3\n\
-	strh r0, [r1]\n\
-	ldrh r0, [r4]\n\
-	subs r0, 0x3\n\
-	strh r0, [r4]\n\
-	movs r1, 0\n\
-	ldr r0, _080B34A8 @ =0x000001ff\n\
-	mov r10, r0\n\
-	ldr r2, _080B34AC @ =gMapHeader\n\
-	mov r9, r2\n\
-_080B3452:\n\
-	movs r4, 0\n\
-	lsls r1, 16\n\
-	mov r8, r1\n\
-	asrs r7, r1, 16\n\
-_080B345A:\n\
-	mov r0, sp\n\
-	movs r3, 0\n\
-	ldrsh r0, [r0, r3]\n\
-	lsls r4, 16\n\
-	asrs r6, r4, 16\n\
-	adds r0, r6\n\
-	mov r2, sp\n\
-	movs r3, 0x2\n\
-	ldrsh r1, [r2, r3]\n\
-	adds r1, r7\n\
-	bl MapGridGetMetatileIdAt\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r7, 0x5\n\
-	beq _080B34D0\n\
-	cmp r6, 0x6\n\
-	beq _080B34D0\n\
-	mov r0, sp\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	adds r0, r6\n\
-	mov r2, sp\n\
-	movs r3, 0x2\n\
-	ldrsh r1, [r2, r3]\n\
-	adds r1, r7\n\
-	bl MapGridGetMetatileLayerTypeAt\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	cmp r5, r10\n\
-	bhi _080B34B0\n\
-	mov r1, r9\n\
-	ldr r0, [r1]\n\
-	ldr r0, [r0, 0x10]\n\
-	lsls r1, r5, 4\n\
-	ldr r2, [r0, 0xC]\n\
-	adds r2, r1\n\
-	b _080B34C0\n\
-	.align 2, 0\n\
-_080B34A8: .4byte 0x000001ff\n\
-_080B34AC: .4byte gMapHeader\n\
-_080B34B0:\n\
-	mov r2, r9\n\
-	ldr r0, [r2]\n\
-	ldr r1, [r0, 0x14]\n\
-	ldr r2, _080B34CC @ =0xfffffe00\n\
-	adds r0, r5, r2\n\
-	lsls r0, 4\n\
-	ldr r2, [r1, 0xC]\n\
-	adds r2, r0\n\
-_080B34C0:\n\
-	adds r0, r6, 0\n\
-	adds r1, r7, 0\n\
-	bl BuyMenuDrawMapMetatile\n\
-	b _080B3506\n\
-	.align 2, 0\n\
-_080B34CC: .4byte 0xfffffe00\n\
-_080B34D0:\n\
-	cmp r5, r10\n\
-	bhi _080B34EC\n\
-	asrs r0, r4, 16\n\
-	mov r3, r9\n\
-	ldr r1, [r3]\n\
-	ldr r1, [r1, 0x10]\n\
-	lsls r3, r5, 4\n\
-	ldr r2, [r1, 0xC]\n\
-	adds r2, r3\n\
-	mov r3, r8\n\
-	asrs r1, r3, 16\n\
-	bl sub_80B33D0\n\
-	b _080B3506\n\
-_080B34EC:\n\
-	asrs r0, r4, 16\n\
-	mov r2, r9\n\
-	ldr r1, [r2]\n\
-	ldr r2, [r1, 0x14]\n\
-	ldr r3, _080B354C @ =0xfffffe00\n\
-	adds r1, r5, r3\n\
-	lsls r1, 4\n\
-	ldr r2, [r2, 0xC]\n\
-	adds r2, r1\n\
-	mov r3, r8\n\
-	asrs r1, r3, 16\n\
-	bl sub_80B33D0\n\
-_080B3506:\n\
-	cmp r7, 0\n\
-	bne _080B3520\n\
-	asrs r1, r4, 16\n\
-	cmp r1, 0\n\
-	beq _080B3520\n\
-	cmp r1, 0x6\n\
-	beq _080B3520\n\
-	lsls r1, 17\n\
-	asrs r1, 16\n\
-	ldr r0, _080B3550 @ =gBGTilemapBuffers + 0x800\n\
-	movs r2, 0x40\n\
-	bl sub_80B32EC\n\
-_080B3520:\n\
-	movs r1, 0x80\n\
-	lsls r1, 9\n\
-	adds r0, r4, r1\n\
-	lsrs r4, r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x6\n\
-	ble _080B345A\n\
-	adds r0, r1, 0\n\
-	add r0, r8\n\
-	lsrs r1, r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x5\n\
-	ble _080B3452\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080B354C: .4byte 0xfffffe00\n\
-_080B3550: .4byte gBGTilemapBuffers + 0x800\n\
-	.syntax divided");
+    s16 facingX;
+    s16 facingY;
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
+    facingX -= 3;
+    facingY -= 3;
+
+    for (y = 0; y < 6; y++)
+    {
+        for (x = 0; x < 7; x++)
+        {
+            u16 metatileId = MapGridGetMetatileIdAt(facingX + x, facingY + y);
+
+            if (y != 5 && x != 6)
+            {
+                s32 r3 = MapGridGetMetatileLayerTypeAt(facingX + x, facingY + y);
+
+                if (metatileId < 512)
+                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapData->primaryTileset->metatiles + metatileId * 8, r3);
+                else
+                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapData->secondaryTileset->metatiles + (metatileId - 512) * 8, r3);
+            }
+            else
+            {
+                if (metatileId < 512)
+                    sub_80B33D0(x, y, (u16 *)gMapHeader.mapData->primaryTileset->metatiles + metatileId * 8);
+                else
+                    sub_80B33D0(x, y, (u16 *)gMapHeader.mapData->secondaryTileset->metatiles + (metatileId - 512) * 8);
+            }
+
+            if (y == 0 && x != 0 && x != 6)
+                sub_80B32EC(gBGTilemapBuffers[1], x * 2, 64);
+        }
+    }
 }
 
 void BuyMenuDrawMapGraphics(void)
@@ -518,202 +401,61 @@ void BuyMenuDrawMapGraphics(void)
     sub_80B3420();
 }
 
-// yet another difficult multi for-loop. No.
-__attribute__((naked))
-void sub_80B356C(void) // PopulateShopViewWindowObjectInfo ?
+extern s16 gUnknown_020386A4[][4];
+
+void sub_80B356C(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x8\n\
-	movs r0, 0\n\
-	mov r8, r0\n\
-	mov r4, sp\n\
-	adds r4, 0x2\n\
-	mov r0, sp\n\
-	adds r1, r4, 0\n\
-	bl GetXYCoordsOneStepInFrontOfPlayer\n\
-	bl PlayerGetZCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x4]\n\
-	movs r5, 0\n\
-	ldr r2, _080B3674 @ =gUnknown_020386A4\n\
-	movs r1, 0x10\n\
-_080B3598:\n\
-	lsls r0, r5, 3\n\
-	adds r0, r2\n\
-	strh r1, [r0]\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0xF\n\
-	bls _080B3598\n\
-	movs r5, 0\n\
-	ldr r7, _080B3678 @ =gUnknown_020386AA\n\
-	subs r1, r7, 0x6\n\
-	mov r9, r1\n\
-_080B35B0:\n\
-	movs r4, 0\n\
-	adds r2, r5, 0x1\n\
-	mov r10, r2\n\
-_080B35B6:\n\
-	mov r1, sp\n\
-	ldr r3, _080B367C @ =0x0000fffd\n\
-	adds r0, r3, 0\n\
-	ldrh r1, [r1]\n\
-	adds r0, r1\n\
-	adds r0, r4\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	ldr r2, _080B3680 @ =0x0000fffe\n\
-	adds r1, r2, 0\n\
-	mov r3, sp\n\
-	ldrh r3, [r3, 0x2]\n\
-	adds r1, r3\n\
-	adds r1, r5\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	ldr r2, [sp, 0x4]\n\
-	bl GetFieldObjectIdByXYZ\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0x10\n\
-	beq _080B3650\n\
-	mov r0, r8\n\
-	lsls r3, r0, 3\n\
-	mov r1, r9\n\
-	adds r0, r3, r1\n\
-	movs r6, 0\n\
-	strh r2, [r0]\n\
-	mov r0, r9\n\
-	adds r0, 0x2\n\
-	adds r0, r3, r0\n\
-	strh r4, [r0]\n\
-	ldr r1, _080B3684 @ =gUnknown_020386A8\n\
-	adds r0, r3, r1\n\
-	strh r5, [r0]\n\
-	ldr r1, _080B3688 @ =gMapObjects\n\
-	lsls r0, r2, 3\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r2, r0, r1\n\
-	ldrb r0, [r2, 0x18]\n\
-	lsls r0, 28\n\
-	lsrs r0, 28\n\
-	cmp r0, 0x1\n\
-	bne _080B3616\n\
-	adds r0, r3, r7\n\
-	strh r6, [r0]\n\
-_080B3616:\n\
-	ldrb r0, [r2, 0x18]\n\
-	lsls r0, 28\n\
-	lsrs r0, 28\n\
-	cmp r0, 0x2\n\
-	bne _080B3626\n\
-	adds r1, r3, r7\n\
-	movs r0, 0x1\n\
-	strh r0, [r1]\n\
-_080B3626:\n\
-	ldrb r0, [r2, 0x18]\n\
-	lsls r0, 28\n\
-	lsrs r0, 28\n\
-	cmp r0, 0x3\n\
-	bne _080B3636\n\
-	adds r1, r3, r7\n\
-	movs r0, 0x2\n\
-	strh r0, [r1]\n\
-_080B3636:\n\
-	ldrb r0, [r2, 0x18]\n\
-	lsls r0, 28\n\
-	lsrs r0, 28\n\
-	cmp r0, 0x4\n\
-	bne _080B3646\n\
-	adds r1, r3, r7\n\
-	movs r0, 0x3\n\
-	strh r0, [r1]\n\
-_080B3646:\n\
-	mov r0, r8\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-_080B3650:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x6\n\
-	bls _080B35B6\n\
-	mov r2, r10\n\
-	lsls r0, r2, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0x4\n\
-	bls _080B35B0\n\
-	add sp, 0x8\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080B3674: .4byte gUnknown_020386A4\n\
-_080B3678: .4byte gUnknown_020386AA\n\
-_080B367C: .4byte 0x0000fffd\n\
-_080B3680: .4byte 0x0000fffe\n\
-_080B3684: .4byte gUnknown_020386A8\n\
-_080B3688: .4byte gMapObjects\n\
-	.syntax divided");
+    s16 facingX;
+    s16 facingY;
+    u8 playerHeight;
+    u8 y;
+    u8 x;
+    u8 r8 = 0;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
+    playerHeight = PlayerGetZCoord();
+    for (y = 0; y < 16; y++)
+        gUnknown_020386A4[y][0] = 16;
+    for (y = 0; y < 5; y++)
+    {
+        for (x = 0; x < 7; x++)
+        {
+            u8 mapObjId = GetFieldObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
+
+            if (mapObjId != 16)
+            {
+                gUnknown_020386A4[r8][0] = mapObjId;
+                gUnknown_020386A4[r8][1] = x;
+                gUnknown_020386A4[r8][2] = y;
+                if (gMapObjects[mapObjId].mapobj_unk_18 == 1)
+                    gUnknown_020386A4[r8][3] = 0;
+                if (gMapObjects[mapObjId].mapobj_unk_18 == 2)
+                    gUnknown_020386A4[r8][3] = 1;
+                if (gMapObjects[mapObjId].mapobj_unk_18 == 3)
+                    gUnknown_020386A4[r8][3] = 2;
+                if (gMapObjects[mapObjId].mapobj_unk_18 == 4)
+                    gUnknown_020386A4[r8][3] = 3;
+                r8++;
+            }
+        }
+    }
 }
-/*
-struct UnkStruct_20386A4
+
+void sub_80B368C(void)
 {
-	s16 mapObjId;
-	u16 unk2;
-	u16 unk4;
-	u8 unk6[2];
-};
-*/
+    u8 i;
 
-//extern s16 gUnknown_020386A4[][];
-//extern struct UnkStruct_20386A4 gUnknown_020386A4[];
+    for(i = 0; i < 16; i++) // max objects?
+    {
+        if(gUnknown_020386A4[i][0] == 16)
+            continue;
 
-// all 3 of these are incredibly hard, please help
-/*void sub_80B368C(void)
-{
-	// r0 = spriteId
-	// r1 = gUnknown_020386A4 + 6
-	// r2 = gSprites[spriteId]
-	// r3 = gUnknown_020386A4[i].unk4 + 32
-	// r4 = i * 8
-	// r5 = 0 (i)
-	// r6 = gUnknown_020386A4
-	// r7 = gMapObjects
-	// r8 = gUnknown_020386A4 + 6
-	// r9 = 
-	// r10 = 
-	// r11 = 
-	// r12 = 
-
-	u8 i = 0;
-	u8 *unkArray = (u8 *)&gUnknown_020386A4[6];
-
-	for(; i < 16; i++) // max objects?
-	{
-		s16 mapObjId = unkStruct[i].mapObjId;
-		if(mapObjId != 16)
-		{
-			u8 spriteId = AddPseudoFieldObject(
-			gMapObjects[mapObjId].graphicsId,
-			SpriteCallbackDummy,
-			unkStruct[i].unk2 * 16 + 8,
-			unkStruct[i].unk4 + 12,
-			2);
-			StartSpriteAnim(&gSprites[spriteId], unkArray[i]);
-		}
-	}
-}*/
+        StartSpriteAnim(&gSprites[AddPseudoFieldObject(
+            gMapObjects[gUnknown_020386A4[i][0]].graphicsId,
+            SpriteCallbackDummy,
+            (u16)gUnknown_020386A4[i][1] * 16 + 8,
+            (u16)gUnknown_020386A4[i][2] * 16 + 32,
+            2)],
+            gUnknown_020386A4[i][3]);
+    }
+}
