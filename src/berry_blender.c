@@ -201,6 +201,9 @@ void sub_814A880(u8 a1, u8 a2);
 u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 s8 sub_810CA00(void);
 bool8 sub_810CA34(struct Pokeblock *pokeblock);
+#ifdef GERMAN
+extern void de_sub_8073110();
+#endif
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -584,7 +587,7 @@ static void sub_804E884(u8 a0)
     if (a0)
     {
         for (i = 0; i < 4; i++)
-            gLinkPlayers[i].language = LANGUAGE_ENGLISH;
+            gLinkPlayers[i].language = GAME_LANGUAGE;
     }
     switch (a0)
     {
@@ -2179,7 +2182,7 @@ static void sub_8050954(void)
     UpdatePaletteFade();
 }
 
-static bool8 sub_8050CE8(void)
+bool8 sub_8050CE8(void)
 {
     switch (gBerryBlenderData->field_1C4)
     {
@@ -2255,16 +2258,26 @@ static void sub_8050E30(void)
         gBerryBlenderData->field_6F = 3;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
+#ifdef ENGLISH
         StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_OtherCaseIsFull);
+#else
+        StringCopy(gStringVar4, gOtherText_OtherCaseIsFull);
+        de_sub_8073110(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
+#endif
         MenuPrintMessage(gStringVar4, 1, 15);
         break;
     case 2:
         gBerryBlenderData->field_6F++;
         DestroyMenuCursor();
         MenuZeroFillWindowRect(23, 8, 28, 13);
+#ifdef ENGLISH
         StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_NoBerriesForBlend);
+#else
+        StringCopy(gStringVar4, gOtherText_NoBerriesForBlend);
+        de_sub_8073110(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
+#endif
         MenuPrintMessage(gStringVar4, 1, 15);
         break;
     case 3:
@@ -2855,7 +2868,11 @@ static bool8 Blender_PrintBlendingResults(void)
 
                 StringCopy(textPtr, gBerryBlenderData->blendedBerries[place].name);
                 ConvertInternationalString(textPtr, gLinkPlayers[place].language);
+#ifdef ENGLISH
                 StringAppend(textPtr, gOtherText_Berry);
+#else
+                de_sub_8073174(textPtr, gOtherText_Berry);
+#endif
                 textPtr = gBerryBlenderData->stringVar;
                 textPtr = ConvertIntToDecimalString(textPtr, i + 1);
                 textPtr[0] = CHAR_SPACE;
@@ -2871,12 +2888,16 @@ static bool8 Blender_PrintBlendingResults(void)
             textPtr = StringCopy(textPtr, gOtherText_MaxSpeed);
             textPtr = sub_8072C14(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
 
+#ifdef ENGLISH
             textPtr[0] = CHAR_SPACE;
             textPtr[1] = CHAR_PERIOD;
             textPtr[2] = CHAR_SPACE;
             textPtr += 3;
-
             textPtr = sub_8072C74(textPtr, text[0], 142, 1);
+#else
+            *textPtr++ = CHAR_COMMA;
+            textPtr = sub_8072C74(textPtr, text[0], 136, 1);
+#endif
             StringCopy(textPtr, gOtherText_RPM);
             MenuPrint(gBerryBlenderData->stringVar, 5, 13);
 
@@ -2888,7 +2909,11 @@ static bool8 Blender_PrintBlendingResults(void)
             textPtr = gBerryBlenderData->stringVar;
             textPtr = StringCopy(textPtr, gOtherText_RequiredTime);
 
+#ifdef ENGLISH
             textPtr = sub_8072C74(textPtr, text[0], 102, 1);
+#else
+            textPtr = sub_8072C74(textPtr, text[0], 99, 1);
+#endif
             textPtr = StringAppend(textPtr, gOtherText_Min);
 
             textPtr = sub_8072C74(textPtr, text[1], 136, 1);
@@ -2939,7 +2964,11 @@ static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* ds
 
     dst[0] = EOS;
     StringCopy(dst, gPokeblockNames[pokeblock->color]);
+#ifdef ENGLISH
     StringAppend(dst, gOtherText_PokeBlockMade);
+#else
+    de_sub_8073174(dst, gOtherText_PokeBlockMade);
+#endif
     StringAppend(dst, gUnknown_082162C8);
 
     flavourLvl = sub_810C9B0(pokeblock);
@@ -3335,10 +3364,16 @@ void ShowBerryBlenderRecordWindow(void)
     {
         u32 record = gSaveBlock1.berryBlenderRecords[i];
         u8* txtPtr = sub_8072C14(text, record / 100, 18, 1);
+
+#ifdef ENGLISH
         txtPtr[0] = CHAR_SPACE;
         txtPtr[1] = CHAR_PERIOD;
         txtPtr[2] = CHAR_SPACE;
         txtPtr += 3;
+#else
+        *txtPtr++ = CHAR_COMMA;
+#endif
+
         txtPtr = ConvertIntToDecimalStringN(txtPtr, record % 100, 2, 2);
         StringAppend(txtPtr, gOtherText_RPM);
         MenuPrint(text, 15, i * 2 + 9);
