@@ -4,31 +4,6 @@
 	.section .rodata
 
 
-gUnknown_083FD8F4:: @ 83FD8F4
-	.2byte   56,   0,   0, 160,   0
-	.2byte  104, 160, 240,  88,   1
-	.2byte  240,  72,  56,   0,   1
-	.2byte    0,  32, 144, 160,   0
-	.2byte  144, 160, 184,   0,   1
-	.2byte   56,   0, 168, 160,   0
-	.2byte  168, 160,  48,   0,   1
-
-	.align 1
-gUnknown_083FD93A:: @ 83FD93A
-	.2byte  8
-	.2byte  4
-	.2byte  2
-	.2byte  1
-	.2byte  1
-	.2byte  1
-	.2byte  0
-
-	.align 2
-gUnknown_083FD948:: @ 83FD948
-	.4byte sub_811D584
-	.4byte sub_811D5E0
-
-	.align 2
 gSpriteImageTable_83FD950:: @ 83FD950
 	obj_frame_tiles gSpriteImage_83FC148, 0x200
 

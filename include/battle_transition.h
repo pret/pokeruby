@@ -1,8 +1,8 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-void sub_811AABC(u8);
-void sub_811AAD8(u8);
+void sub_811AABC(u8 transitionID);
+void sub_811AAD8(u8 transitionID);
 bool8 IsBattleTransitionDone(void);
 
 #define TRANSITIONS_NO         17
@@ -18,7 +18,7 @@ enum // TRANSITION_MUGSHOT
 
 #define MUGSHOTS_NO             5
 
-// credits for the names goes to Dyskinesia
+// credits for the names go to Dyskinesia
 
 #define B_TRANSITION_BLUR               0
 #define B_TRANSITION_SMEAR              1

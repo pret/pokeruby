@@ -160,9 +160,9 @@ static bool8 sub_811C938(struct Sprite* sprite);
 static bool8 sub_811C984(struct Sprite* sprite);
 static bool8 sub_811C9B8(struct Sprite* sprite);
 static bool8 sub_811C9E4(struct Sprite* sprite);
+static void sub_811D4C8(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
+static bool8 sub_811D52C(void);
 
-void sub_811D4C8(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
-bool8 sub_811D52C(void);
 void sub_811D658(void);
 void VBlankCB_BattleTransition(void);
 void sub_811D6E8(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5);
@@ -173,6 +173,9 @@ void sub_811D6D4(void);
 void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
 bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2);
 void sub_811CFD0(struct Sprite* sprite);
+void sub_811D54C(u8 taskID);
+bool8 sub_811D584(struct Task* task);
+bool8 sub_811D5E0(struct Task* task);
 
 // const data
 
@@ -364,14 +367,31 @@ static const TransitionState sPhase2_Transition11_Funcs[] =
 	&Phase2_Transition11_Func5
 };
 
+static const s16 gUnknown_083FD8F4[][5] =
+{
+    {56,    0,      0,      160,    0},
+    {104,   160,    240,    88,     1},
+    {240,   72,     56,     0,      1},
+    {0,     32,     144,    160,    0},
+    {144,   160,    184,    0,      1},
+    {56,    0,      168,    160,    0},
+    {168,   160,    48,     0,      1},
+};
+
+static const s16 gUnknown_083FD93A[] = {8, 4, 2, 1, 1, 1, 0};
+
+static const TransitionState gUnknown_083FD948[] =
+{
+    &sub_811D584,
+    &sub_811D5E0
+};
+
 extern const u16 gFieldEffectObjectPalette10[];
 extern const u16 gUnknown_083FDB44[];
 extern const struct SpriteTemplate gSpriteTemplate_83FD98C;
 extern const u16 gUnknown_083FDFF4[];
 extern const u8 * const sOpponentMugshotsPals[];
 extern const u8 * const sPlayerMugshotsPals[2];
-extern const s16 gUnknown_083FD8F4[][5];
-extern const s16 gUnknown_083FD93A[];
 
 // actual code starts here
 
@@ -2115,4 +2135,28 @@ static void VBlankCB_Phase2_Transition11(void)
     REG_WIN0V = TRANSITION_STRUCT.WIN0V;
     REG_WIN0H = gUnknown_03004DE0[1][0];
     DmaSet(0, gUnknown_03004DE0[1], &REG_WIN0H, 0xA2400001);
+}
+
+static void sub_811D4C8(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
+{
+    u8 taskID = CreateTask(sub_811D54C, 3);
+    gTasks[taskID].data[1] = a0;
+    gTasks[taskID].data[2] = a1;
+    gTasks[taskID].data[3] = a2;
+    gTasks[taskID].data[4] = a3;
+    gTasks[taskID].data[5] = a4;
+    gTasks[taskID].data[6] = a0;
+}
+
+static bool8 sub_811D52C(void)
+{
+    if (FindTaskIdByFunc(sub_811D54C) == 0xFF)
+        return 1;
+    else
+        return 0;
+}
+
+void sub_811D54C(u8 taskID)
+{
+    while (gUnknown_083FD948[gTasks[taskID].tState](&gTasks[taskID]));
 }
