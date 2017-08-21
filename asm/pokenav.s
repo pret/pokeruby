@@ -6,50 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EE96C
-sub_80EE96C: @ 80EE96C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r0, _080EE99C @ =0x02000000
-	movs r1, 0xC1
-	lsls r1, 2
-	adds r5, r0, r1
-	ldrh r4, [r5]
-	cmp r4, 0
-	bne _080EE9A0
-	movs r0, 0x6F
-	bl PlaySE
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldrh r0, [r5]
-	adds r0, 0x1
-	strh r0, [r5]
-	b _080EE9B4
-	.align 2, 0
-_080EE99C: .4byte 0x02000000
-_080EE9A0:
-	ldr r0, _080EE9BC @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080EE9B4
-	bl sub_80F5BDC
-	bl sub_805469C
-_080EE9B4:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE9BC: .4byte gPaletteFade
-	thumb_func_end sub_80EE96C
-
 	thumb_func_start sub_80EE9C0
 sub_80EE9C0: @ 80EE9C0
 	push {r4-r6,lr}

@@ -2413,3 +2413,17 @@ void sub_80EE8F4() {
 		break;
 	}
 }
+
+void sub_80EE96C() {
+	u16 var1 = ewram0.var304;
+	if (!var1) {
+		PlaySE(0x6F);
+		BeginNormalPaletteFade(-1, 0, 0, 0x10, var1);
+		ewram0.var304++;
+	}
+	else {
+		if (gPaletteFade.active) return;
+		sub_80F5BDC();
+		sub_805469C();
+	}
+}
