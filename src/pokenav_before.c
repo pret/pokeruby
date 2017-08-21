@@ -41,7 +41,9 @@ struct UnknownPokenav0 {
 	/* 0x76AA */ u8 var76aa;
 	/* 0x76AB */ u8 fill76AB[0x10BD];
 	/* 0x8768 */ u32 var8768;
-	/* 0x876C */ u8 fill876C[0x8];
+	/* 0x876C */ u8 fill876C[0x2];
+	/* 0x876E */ u8 var876E;
+	/* 0x876F */ u8 fill876F[0x5];
 	/* 0x8774 */ s16 var8774;
 	/* 0x8776 */ u8 fill8776[0x62];
 	/* 0x87D8 */ u8 var87D8;
@@ -2211,6 +2213,47 @@ void sub_80EE3D8() {
 	case 0xD:
 		if (gPaletteFade.active) return;
 		sub_80EBDBC(&sub_80EE58C);
+		break;
+	}
+}
+
+void sub_80F0FFC();
+void sub_80EE658();
+void sub_80EE8F4();
+
+void sub_80EE58C() {
+	switch (ewram0.var304) {
+	case 0:
+		switch (sub_80F5DD4()) {
+		case 1:
+			PlaySE(0x5);
+			sub_80F0FFC(ewram0.var876E);
+			break;
+		case 2:
+			PlaySE(0x5);
+			ewram0.var304++;
+			break;
+		default:
+			if (gMain.newKeys & A_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80EE658);
+			}
+			else if (gMain.newKeys & B_BUTTON) {
+				PlaySE(0x5);
+				sub_80EBDBC(&sub_80EE8F4);
+			}
+			break;
+		}
+		break;
+	case 1:
+		if (sub_80F0718()) return;
+		sub_80F0FFC(ewram0.var876E);
+		sub_80F3264();
+		ewram0.var304++;
+		break;
+	case 2:
+		if (sub_8055870()) return;
+		ewram0.var304 = 0;
 		break;
 	}
 }
