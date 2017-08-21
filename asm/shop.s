@@ -18,8 +18,8 @@ sub_80B368C: @ 80B368C
 	mov r8, r0
 	ldr r7, _080B3714 @ =gMapObjects
 _080B369E:
-	lsls r4, r5, 3 (i * 8)
-	adds r1, r4, r6 (gUnknown_020386A4 + (i * 8))
+	lsls r4, r5, 3
+	adds r1, r4, r6
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	cmp r0, 0x10
@@ -32,7 +32,7 @@ _080B369E:
 	ldrb r0, [r0, 0x5]
 	adds r1, r6, 0x2 
 	adds r1, r4, r1
-	ldrh r2, [r1] (gUnknown_020386A4[i].)
+	ldrh r2, [r1]
 	lsls r2, 4
 	adds r2, 0x8
 	lsls r2, 16
@@ -56,8 +56,8 @@ _080B369E:
 	lsls r2, 2
 	ldr r0, _080B371C @ =gSprites
 	adds r2, r0
-	mov r1, r8 (r1 = gUnknown_020386A4 + 6)
-	adds r0, r4, r1 ( gUnknown_020386A4 + 6 + )
+	mov r1, r8
+	adds r0, r4, r1
 	ldrb r1, [r0]
 	adds r0, r2, 0
 	bl StartSpriteAnim
