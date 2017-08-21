@@ -134,12 +134,12 @@ sPhase2_Transition8_Funcs:: @ 83FD8A4
 	.4byte Phase2_Transition8_Func3
 
 	.align 2
-gUnknown_083FD8B0:: @ 83FD8B0
-	.4byte sub_811CD14
-	.4byte sub_811CDA0
-	.4byte sub_811CE14
-	.4byte sub_811CE4C
-	.4byte sub_811CEB0
+sPhase2_Transition9_Funcs:: @ 83FD8B0
+	.4byte Phase2_Transition9_Func1
+	.4byte Phase2_Transition9_Func2
+	.4byte Phase2_Transition9_Func3
+	.4byte Phase2_Transition9_Func4
+	.4byte Phase2_Transition9_Func5
 
 	.align 1
 gUnknown_083FD8C4:: @ 83FD8C4
@@ -153,18 +153,18 @@ gUnknown_083FD8C4:: @ 83FD8C4
 	.2byte   5
 
 	.align 2
-gUnknown_083FD8D4:: @ 83FD8D4
-	.4byte sub_811D0F0
-	.4byte sub_811D144
-	.4byte sub_811D19C
+sPhase2_Transition10_Funcs:: @ 83FD8D4
+	.4byte Phase2_Transition10_Func1
+	.4byte Phase2_Transition10_Func2
+	.4byte Phase2_Transition10_Func3
 
 	.align 2
-gUnknown_083FD8E0:: @ 83FD8E0
-	.4byte sub_811D200
-	.4byte sub_811D260
-	.4byte sub_811D2D8
-	.4byte sub_811D3B0
-	.4byte sub_811D41C
+sPhase2_Transition11_Funcs:: @ 83FD8E0
+	.4byte Phase2_Transition11_Func1
+	.4byte Phase2_Transition11_Func2
+	.4byte Phase2_Transition11_Func3
+	.4byte Phase2_Transition11_Func4
+	.4byte Phase2_Transition11_Func5
 
 	.align 1
 gUnknown_083FD8F4:: @ 83FD8F4
