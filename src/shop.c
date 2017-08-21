@@ -340,3 +340,12 @@ void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s8 var4)
         break;
     }
 }
+
+void sub_80B33D0(s16 var1, int var2, u16 *var3)
+{
+    s16 offset1 = var1 * 2;
+    s16 offset2 = (var2 * 0x40) + 0x40;
+
+    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
+    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
+}

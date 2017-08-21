@@ -6,46 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80B33D0
-sub_80B33D0: @ 80B33D0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r6, r0, 0
-	adds r4, r1, 0
-	mov r8, r2
-	lsls r4, 22
-	ldr r5, _080B3418 @ =gBGTilemapBuffers + 0x1800
-	lsls r6, 17
-	asrs r6, 16
-	movs r0, 0x80
-	lsls r0, 15
-	adds r4, r0
-	asrs r4, 16
-	adds r0, r5, 0
-	adds r1, r6, 0
-	adds r2, r4, 0
-	mov r3, r8
-	bl BuyMenuDrawMapMetatileLayer
-	ldr r0, _080B341C @ =0xfffff800
-	adds r5, r0
-	movs r0, 0x8
-	add r8, r0
-	adds r0, r5, 0
-	adds r1, r6, 0
-	adds r2, r4, 0
-	mov r3, r8
-	bl BuyMenuDrawMapMetatileLayer
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B3418: .4byte gBGTilemapBuffers + 0x1800
-_080B341C: .4byte 0xfffff800
-	thumb_func_end sub_80B33D0
-
 	thumb_func_start sub_80B3420
 sub_80B3420: @ 80B3420
 	push {r4-r7,lr}
