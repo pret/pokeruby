@@ -1219,7 +1219,7 @@ s8 sub_8040A54(struct Pokemon *mon, u8 a2)
     return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
-s8 sub_8040A7C(u32 personality, u8 a2)
+s8 GetPokeFlavourRelation(u32 personality, u8 a2)
 {
     u8 nature = GetNatureFromPersonality(personality);
     return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];

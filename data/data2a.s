@@ -1015,7 +1015,7 @@ gUnknown_081FA71F:: @ 81FA71F
 	.byte 4, 4, 4, 4
 
 	.align 1
-gUnknown_081FA724:: @ 81FA724
+gSoundMovesTable:: @ 81FA724
 	.2byte   0x2D
 	.2byte   0x2E
 	.2byte   0x2F
