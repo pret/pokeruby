@@ -33,7 +33,12 @@ struct UnknownPokenav0 {
 	/* 0x6df0 */ s8 var6df0;
 	/* 0x6df1 */ u8 fill6df1[0xB];
 	/* 0x6dfc */ u8 var6dfc;
-	/* 0x6dfd */ u8 fill6dfd[0x93];
+	/* 0x6dfd */ u8 fill6dfd[0x17];
+	/* 0x6e14 */ u8 var6e14;
+	/* 0x6e15 */ u8 var6e15;
+	/* 0x6e16 */ u8 var6e16;
+	/* 0x6e17 */ u8 var6e17;
+	/* 0x6e18 */ u8 fill6e18[0x78];
 	/* 0x6e90 */ u8 var6e90;
 	/* 0x6e91 */ u8 fill6e91[0x4];
 	/* 0x6e95 */ u8 var6e95;
@@ -414,7 +419,7 @@ void sub_80EC00C() {
 }
 
 void sub_80F2D04(u32);
-void sub_80EE9C0(u32, u8, u32);
+void sub_80EE9C0(u8, u8, u8);
 bool8 sub_80EEA0C();
 
 void sub_80EC210() {
@@ -2426,4 +2431,12 @@ void sub_80EE96C() {
 		sub_80F5BDC();
 		sub_805469C();
 	}
+}
+
+void sub_80EE9C0(u8 param1, u8 param2, u8 param3) {
+	sub_80F1E84();
+	ewram0.var6e14 = param1;
+	ewram0.var6e15 = param2;
+	ewram0.var6e16 = 0;
+	ewram0.var6e17 = param3;
 }

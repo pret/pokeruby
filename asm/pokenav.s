@@ -6,43 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EE9C0
-sub_80EE9C0: @ 80EE9C0
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r6, 24
-	lsrs r6, 24
-	bl sub_80F1E84
-	ldr r1, _080EE9FC @ =0x02000000
-	ldr r2, _080EEA00 @ =0x00006e14
-	adds r0, r1, r2
-	movs r2, 0
-	strb r4, [r0]
-	ldr r3, _080EEA04 @ =0x00006e15
-	adds r0, r1, r3
-	strb r5, [r0]
-	adds r3, 0x1
-	adds r0, r1, r3
-	strb r2, [r0]
-	ldr r0, _080EEA08 @ =0x00006e17
-	adds r1, r0
-	strb r6, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EE9FC: .4byte 0x02000000
-_080EEA00: .4byte 0x00006e14
-_080EEA04: .4byte 0x00006e15
-_080EEA08: .4byte 0x00006e17
-	thumb_func_end sub_80EE9C0
-
 	thumb_func_start sub_80EEA0C
 sub_80EEA0C: @ 80EEA0C
 	push {r4,lr}
