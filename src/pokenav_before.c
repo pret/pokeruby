@@ -2392,3 +2392,24 @@ label2:
 		break;
 	}
 }
+
+void sub_80F6FFC();
+
+void sub_80EE8F4() {
+	switch (ewram0.var304) {
+	case 0:
+		BeginNormalPaletteFade(ewram0.var308, -1, 0, 0x10, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (gPaletteFade.active) return;
+		sub_80F3130();
+		sub_80F2D6C(0x2);
+		sub_80F6FFC();
+		ewram0.var304++;
+		break;
+	case 2:
+		sub_80EBDBC(&sub_80EC00C);
+		break;
+	}
+}
