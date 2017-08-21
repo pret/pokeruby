@@ -212,52 +212,20 @@ extern u16 gScriptItemId;
 extern u8 gUnknown_020297ED;
 extern u8 byte_3002A68;
 
-// rom data to do
-
 extern const u8 gUnknown_08E6C100[];
-extern const u8 gUnknown_08215C2C[];
 extern const u8 gUnknown_08E6C920[];
 extern const u8 gUnknown_08E6D354[];
-extern const u16 gUnknown_08215C0C[];
-extern const u16 gUnknown_0821602C[];
-extern const struct SpriteSheet gUnknown_082163DC;
-extern const struct SpriteSheet gUnknown_082164F4;
-extern const struct SpriteSheet gUnknown_08216454;
-extern const struct SpriteSheet gUnknown_08216540;
-extern const struct SpriteSheet gUnknown_08216574;
-extern const struct SpritePalette gUnknown_082163EC;
-extern const struct SpritePalette gUnknown_082163E4;
 extern const struct WindowConfig gWindowConfig_81E6F68;
-extern const u8 sBlenderSyncArrowsPos[][2];
-extern const struct SpriteTemplate sBlenderSyncArrow_SpriteTemplate;
-extern const s16 gUnknown_08216594[][5];
-extern const u8* const gUnknown_082162B8[];
-extern const u8 gUnknown_082162EC[3][4];
-extern const u16 gUnknown_082162F8[];
-extern const u8 gUnknown_08216300[];
-extern const struct SpriteTemplate gSpriteTemplate_8216548;
-extern const u8 gUnknown_08216303[];
-extern const u8 gUnknown_082165BC[][3];
-extern const u8 gUnknown_082162C4[];
-extern const u8 gUnknown_082162D4[][2];
-extern const TaskFunc gUnknown_08216308[];
-extern const s8 gUnknown_082162CC[][2];
-extern const struct SpriteTemplate gSpriteTemplate_821645C;
-extern const u8 gUnknown_082165DA[];
-extern const u8 gUnknown_082165DF[];
-extern const struct SpriteTemplate gSpriteTemplate_82164FC;
-extern const u8* const gUnknown_08216284[];
-extern const struct SpriteTemplate gSpriteTemplate_821657C;
-extern const u8 gUnknown_082165E9[];
-extern const u8 gUnknown_082165EE[];
-extern const u8 gUnknown_08216249[];
-extern const u8 gUnknown_082162C8[];
 extern const u8 *const gPokeblockNames[];
-extern const u8 gUnknown_082165F3[];
-extern const u8 gOtherText_BPMAndDash[];
-extern const u8 gUnknown_082165F8[];
-extern const u8 gUnknown_08216600[];
 extern const struct Berry gBerries[];
+
+extern const u8 gBerryBlenderArrowTiles[];
+extern const u8 gBerryBlenderMarubatsuTiles[];
+extern const u8 gBerryBlenderParticlesTiles[];
+extern const u8 gBerryBlenderCountdownNumbersTiles[];
+extern const u8 gBerryBlenderStartTiles[];
+extern const u16 gBerryBlenderMiscPalette[];
+extern const u16 gBerryBlenderArrowPalette[];
 
 // ewram
 static EWRAM_DATA u8 gUnknown_020297DC = 0;
@@ -267,7 +235,7 @@ static EWRAM_DATA u8 gUnknown_020297E8 = 0;
 
 // iwram common
 u16 gUnknown_03004830;
-u8 gUnknown_03004834;
+u8 gInGameOpponentsNo;
 u16 gUnknown_03004840[10];
 struct BerryBlenderData* gBerryBlenderData;
 
@@ -287,7 +255,7 @@ void Blender_SetBankBerryData(u8 bank, u16 itemID);
 static void sub_80514A4(void);
 static void sub_80514F0(void);
 static void sub_804E56C(void);
-static void sub_804E884(u8 a0);
+static void Blender_SetPlayerNamesLocal(u8 NoOfOpponents);
 static void sub_8051474(void);
 static void sub_804E9F8(void);
 static void sub_804F378(void);
@@ -313,6 +281,526 @@ static void sub_805197C(u16 a0, u16 a1);
 static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
 static void sub_8052BD0(u8 taskID);
 static void sub_8052AF8(void);
+static void sub_804F8C8(u8 taskID);
+static void sub_804F9F4(u8 taskID);
+static void sub_804FB1C(u8 taskID);
+static void sub_8051C04(struct Sprite* sprite);
+static void sub_8051650(struct Sprite* sprite);
+static void sub_805181C(struct Sprite* sprite);
+static void sub_80518CC(struct Sprite* sprite);
+
+// const data
+static const u16 sBlenderCenterPal[] = INCBIN_U16("graphics/berry_blender/center.gbapal");
+static const u8 sBlenderCenterMap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
+static const u16 sBlenderOuterPal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
+
+// unreferenced pals?
+static const u16 sUnknownPal_0[] = INCBIN_U16("graphics/unused/unknown/821604C.gbapal");
+static const u16 sUnknownArray_1[224] = {0};
+
+// unreferenced Japanese strings
+static const u8 sUnknownJpnString0[] = _("▶");
+static const u8 sUnknownJpnString1[] = _(" ");
+static const u8 sUnknownJpnString2[] = _("カッコイ"); // "cool" (missing an イ at the end)
+static const u8 sUnknownJpnString3[] = _("カワイイ"); // "cute"
+static const u8 sUnknownJpnString4[] = _("ウツクシ"); // "beautiful" (missing an イ at the end)
+static const u8 sUnknownJpnString5[] = _("カシコイ"); // "smart"
+static const u8 sUnknownJpnString6[] = _("タクマシ"); // "tough" (missing an イ at the end)
+
+static const u8 gUnknown_08216249[] = _("\p");
+
+// unreferenced; These appear to be the first names of four people who worked on the game.
+static const u8 sUnknownJpnString7[10] = _("てつじ"); // Tetsuji (Ohta)
+static const u8 sUnknownJpnString8[10] = _("あきと"); // Akito (Mori)
+static const u8 sUnknownJpnString9[10] = _("シゲル"); // Shigeru (Ohmori)
+static const u8 sUnknownJpnString10[10] = _("ヨシノリ"); // Yoshinori (Matsuda)
+
+static const u8 sUnknownText_2Pok[] = _("2Pok");
+static const u8 sUnknownText_3Pok[] = _("3Pok");
+static const u8 sUnknownText_4Pok[] = _("4Pok");
+static const u8* const gUnknown_08216284[] =
+{
+      sUnknownText_2Pok, sUnknownText_3Pok, sUnknownText_4Pok
+};
+
+// unreferenced player strings
+static const u8 sUnknown1PString[4] = _("1P");
+static const u8 sUnknown2PString[4] = _("2P");
+static const u8 sUnknown3PString[4] = _("3P");
+static const u8 sUnknown4PString[4] = _("4P");
+
+#ifdef ENGLISH
+static const u8 sBlenderOpponentName1[] = _("MISTER");
+static const u8 sBlenderOpponentName2[] = _("LADDIE");
+static const u8 sBlenderOpponentName3[] = _("LASSIE");
+#else // GERMAN
+static const u8 sBlenderOpponentName1[] = _("OPI");
+static const u8 sBlenderOpponentName2[] = _("KUMPEL");
+static const u8 sBlenderOpponentName3[] = _("TUSSI");
+#endif // ENGLISH
+static const u8* const sBlenderOpponentsNames[] =
+{
+    sBlenderOpponentName1, sBlenderOpponentName2, sBlenderOpponentName3
+};
+
+static const u8 sRedColorString[] = _("{COLOR RED}");
+static const u8 sNewLineString_0[] = _("\n");
+static const u8 sSpaceString_0[] = _(" ");
+
+static const s8 gUnknown_082162CC[][2] =
+{
+    {-1, -1}, {1, -1}, {-1, 1}, {1, 1}
+};
+
+static const u8 gUnknown_082162D4[][2] =
+{
+    {2, 6}, {23, 6}, {2, 12}, {23, 12}, {1, 6}, {22, 6}, {1, 12}, {22, 12}
+};
+
+static const u8 sBlenderSyncArrowsPos[][2] =
+{
+    {72, 32}, {168, 32}, {72, 128}, {168, 128}
+};
+
+static const u8 gUnknown_082162EC[3][4] =
+{
+    {-1, 0, 1, -1}, {-1, 0, 1, 2}, {0, 1, 2, 3}
+};
+
+static const u16 gUnknown_082162F8[] = {0, 0xC000, 0x4000, 0x8000};
+static const u8 gUnknown_08216300[] = {1, 1, 0};
+static const u8 gUnknown_08216303[] = {32, 224, 96, 160, 0};
+
+static const TaskFunc gUnknown_08216308[] =
+{
+    &sub_804F8C8, &sub_804F9F4, &sub_804FB1C
+};
+
+static const struct OamData sOamData_8216314 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_821631C[] =
+{
+    ANIMCMD_FRAME(16, 5, 1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216324[] =
+{
+    ANIMCMD_FRAME(16, 5, 0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821632C[] =
+{
+    ANIMCMD_FRAME(16, 5, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216334[] =
+{
+    ANIMCMD_FRAME(16, 5, 0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821633C[] =
+{
+    ANIMCMD_FRAME(48, 2, 1, 1),
+    ANIMCMD_FRAME(32, 5, 1, 1),
+    ANIMCMD_FRAME(48, 3, 1, 1),
+    ANIMCMD_FRAME(16, 5, 1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216350[] =
+{
+    ANIMCMD_FRAME(48, 2, 0, 1),
+    ANIMCMD_FRAME(32, 5, 0, 1),
+    ANIMCMD_FRAME(48, 3, 0, 1),
+    ANIMCMD_FRAME(16, 5, 0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216364[] =
+{
+    ANIMCMD_FRAME(48, 2, 1, 0),
+    ANIMCMD_FRAME(32, 5, 1, 0),
+    ANIMCMD_FRAME(48, 3, 1, 0),
+    ANIMCMD_FRAME(16, 5, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216378[] =
+{
+    ANIMCMD_FRAME(48, 2, 0, 0),
+    ANIMCMD_FRAME(32, 5, 0, 0),
+    ANIMCMD_FRAME(48, 3, 0, 0),
+    ANIMCMD_FRAME(16, 5, 0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821638C[] =
+{
+    ANIMCMD_FRAME(0, 5, 1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216394[] =
+{
+    ANIMCMD_FRAME(0, 5, 0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821639C[] =
+{
+    ANIMCMD_FRAME(0, 5, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_82163A4[] =
+{
+    ANIMCMD_FRAME(0, 5, 0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_82163AC[] =
+{
+    sSpriteAnim_821631C,
+    sSpriteAnim_8216324,
+    sSpriteAnim_821632C,
+    sSpriteAnim_8216334,
+    sSpriteAnim_821633C,
+    sSpriteAnim_8216350,
+    sSpriteAnim_8216364,
+    sSpriteAnim_8216378,
+    sSpriteAnim_821638C,
+    sSpriteAnim_8216394,
+    sSpriteAnim_821639C,
+    sSpriteAnim_82163A4
+};
+
+static const struct SpriteSheet gUnknown_082163DC =
+{
+    gBerryBlenderArrowTiles, 0x800, 46545
+};
+
+static const struct SpritePalette gUnknown_082163E4 =
+{
+    gBerryBlenderMiscPalette, 46546
+};
+
+static const struct SpritePalette gUnknown_082163EC =
+{
+    gBerryBlenderArrowPalette, 12312
+};
+
+static const struct SpriteTemplate sBlenderSyncArrow_SpriteTemplate =
+{
+    .tileTag = 46545,
+    .paletteTag = 12312,
+    .oam = &sOamData_8216314,
+    .anims = sSpriteAnimTable_82163AC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8051C04
+};
+
+static const struct OamData sOamData_821640C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_8216414[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821641C[] =
+{
+    ANIMCMD_FRAME(4, 20, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216424[] =
+{
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_FRAME(12, 4),
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_FRAME(12, 4),
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821643C[] =
+{
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8216444[] =
+{
+    sSpriteAnim_8216414,
+    sSpriteAnim_821641C,
+    sSpriteAnim_8216424,
+    sSpriteAnim_821643C,
+};
+
+static const struct SpriteSheet gUnknown_08216454 =
+{
+    gBerryBlenderMarubatsuTiles, 0x200, 48888
+};
+
+static const struct SpriteTemplate sSpriteTemplate_821645C =
+{
+    .tileTag = 48888,
+    .paletteTag = 46546,
+    .oam = &sOamData_821640C,
+    .anims = sSpriteAnimTable_8216444,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8051650
+};
+
+static const struct OamData sOamData_8216474 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_821647C[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216494[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_82164AC[] =
+{
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(3, 3),
+    ANIMCMD_FRAME(2, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_82164D0[] =
+{
+    ANIMCMD_FRAME(5, 5, 1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_82164D8[] =
+{
+    ANIMCMD_FRAME(6, 5, 1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_82164E0[] =
+{
+    sSpriteAnim_821647C,
+    sSpriteAnim_8216494,
+    sSpriteAnim_82164AC,
+    sSpriteAnim_82164D0,
+    sSpriteAnim_82164D8,
+};
+
+static const struct SpriteSheet gUnknown_082164F4 =
+{
+    gBerryBlenderParticlesTiles, 0xE0, 23456
+};
+
+static const struct SpriteTemplate sSpriteTemplate_82164FC =
+{
+    .tileTag = 23456,
+    .paletteTag = 46546,
+    .oam = &sOamData_8216474,
+    .anims = sSpriteAnimTable_82164E0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct OamData sOamData_8216514 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_821651C[] =
+{
+    ANIMCMD_FRAME(32, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8216524[] =
+{
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_821652C[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8216534[] =
+{
+    sSpriteAnim_821651C,
+    sSpriteAnim_8216524,
+    sSpriteAnim_821652C,
+};
+
+static const struct SpriteSheet gUnknown_08216540 =
+{
+    gBerryBlenderCountdownNumbersTiles, 0x600, 12345
+};
+
+static const struct SpriteTemplate sSpriteTemplate_8216548 =
+{
+    .tileTag = 12345,
+    .paletteTag = 46546,
+    .oam = &sOamData_8216514,
+    .anims = sSpriteAnimTable_8216534,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_805181C
+};
+
+static const struct OamData sOamData_8216560 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_8216568[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8216570[] =
+{
+    sSpriteAnim_8216568,
+};
+
+static const struct SpriteSheet gUnknown_08216574 =
+{
+    gBerryBlenderStartTiles, 0x400, 12346
+};
+
+static const struct SpriteTemplate sSpriteTemplate_821657C =
+{
+    .tileTag = 12346,
+    .paletteTag = 46546,
+    .oam = &sOamData_8216560,
+    .anims = sSpriteAnimTable_8216570,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80518CC
+};
+
+static const s16 gUnknown_08216594[][5] =
+{
+    {-10,  20,  10,   2,   1},
+    {250,  20,  10,  -2,   1},
+    {-10, 140,  10,   2,  -1},
+    {250, 140,  10,  -2,  -1},
+};
+
+static const u8 gUnknown_082165BC[][3] =
+{
+    {4, 3, 2}, {0, 4, 3}, {1, 0, 4}, {2, 1, 0}, {3, 2, 1}, {0, 2, 3}, {1, 3, 4}, {2, 4, 0}, {3, 0, 1}, {4, 1, 2},
+};
+
+static const u8 gUnknown_082165DA[] = {1, 1, 2, 3, 4};
+static const u8 gUnknown_082165DF[] = {0x1C, 0x16, 0x13, 0x1A, 0x19, 0x0E, 0x0D, 0x0B, 0x07, 0x15};
+static const u8 gUnknown_082165E9[] = {6, 6, 6, 6, 5};
+static const u8 gUnknown_082165EE[] = {3, 3, 3, 2, 2};
+static const u8 gUnknown_082165F3[] = {3, 3, 3, 3, 2};
+
+static const u8 sText_Space[] = _(" ");
+static const u8 sText_BPM[] = _("BPM");
+static const u8 sText_Dash[] = _("-");
+static const u8 sNewLineString_1[] = _("\n");
+static const u8 sNewLineString_2[] = _("\n");
 
 static void Blender_ControlHitPitch(void)
 {
@@ -345,11 +833,11 @@ static bool8 sub_804E2EC(void)
         break;
     case 1:
         {
-            const void* offsetRead = gUnknown_08215C2C;
+            const void* offsetRead = sBlenderCenterMap;
             void* offsetWrite = (void*)(VRAM + 0x4000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x400);
-            LoadPalette(gUnknown_08215C0C, 0, 0x100);
+            LoadPalette(sBlenderCenterPal, 0, 0x100);
             gBerryBlenderData->field_1++;
         }
         break;
@@ -413,7 +901,7 @@ static bool8 sub_804E2EC(void)
             offsetRead = &ewram[0x13000];
             offsetWrite = (void*)(VRAM + 0x6000);
             DmaCopy16(3, offsetRead, offsetWrite, 0x500);
-            LoadPalette(gUnknown_0821602C, 0x80, 0x20);
+            LoadPalette(sBlenderOuterPal, 0x80, 0x20);
             gBerryBlenderData->field_1++;
         }
         break;
@@ -455,7 +943,7 @@ void sub_804E538(void)
     gBerryBlenderData->field_0 = 0;
     *field6F = 0;
 
-    sub_804E884(gSpecialVar_0x8004);
+    Blender_SetPlayerNamesLocal(gSpecialVar_0x8004);
     SetMainCallback2(sub_804E56C);
 }
 
@@ -581,39 +1069,39 @@ static void Blender_CopyBerryData(struct BlenderBerry* berry, u16 itemID)
     berry->smoothness = berryInfo->smoothness;
 }
 
-static void sub_804E884(u8 a0)
+static void Blender_SetPlayerNamesLocal(u8 NoOfOpponents)
 {
     int i;
-    if (a0)
+    if (NoOfOpponents)
     {
         for (i = 0; i < 4; i++)
             gLinkPlayers[i].language = GAME_LANGUAGE;
     }
-    switch (a0)
+    switch (NoOfOpponents)
     {
     case 0:
-        gUnknown_03004834 = 0;
+        gInGameOpponentsNo = 0;
         break;
     case 1:
-        gUnknown_03004834 = 1;
+        gInGameOpponentsNo = 1;
         gBerryBlenderData->playersNo = 2;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
-        StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
+        StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[0]);
         break;
     case 2:
-        gUnknown_03004834 = 2;
+        gInGameOpponentsNo = 2;
         gBerryBlenderData->playersNo = 3;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
-        StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
-        StringCopy(gLinkPlayers[2].name, gUnknown_082162B8[1]);
+        StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[0]);
+        StringCopy(gLinkPlayers[2].name, sBlenderOpponentsNames[1]);
         break;
     case 3:
-        gUnknown_03004834 = 3;
+        gInGameOpponentsNo = 3;
         gBerryBlenderData->playersNo = 4;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
-        StringCopy(gLinkPlayers[1].name, gUnknown_082162B8[0]);
-        StringCopy(gLinkPlayers[2].name, gUnknown_082162B8[1]);
-        StringCopy(gLinkPlayers[3].name, gUnknown_082162B8[2]);
+        StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[0]);
+        StringCopy(gLinkPlayers[2].name, sBlenderOpponentsNames[1]);
+        StringCopy(gLinkPlayers[3].name, sBlenderOpponentsNames[2]);
         break;
     }
 }
@@ -630,7 +1118,7 @@ void sub_804E990(void)
     {
         gBerryBlenderData->chosenItemID[i] = 0;
     }
-    sub_804E884(gSpecialVar_0x8004);
+    Blender_SetPlayerNamesLocal(gSpecialVar_0x8004);
     if (gSpecialVar_0x8004 == 0)
         SetMainCallback2(sub_804E9F8);
     else
@@ -793,7 +1281,7 @@ static void sub_804E9F8(void)
         sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 16:
-        CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
+        CreateSprite(&sSpriteTemplate_8216548, 120, -16, 3);
         gBerryBlenderData->field_0++;
         break;
     case 18:
@@ -936,7 +1424,7 @@ static void sub_804F2A8(void)
             gBerryBlenderData->SyncArrowSpriteID[gBerryBlenderData->field_9A[i]] = gBerryBlenderData->SyncArrowSprite2ID[i];
             StartSpriteAnim(&gSprites[gBerryBlenderData->SyncArrowSpriteID[gBerryBlenderData->field_9A[i]]], i);
             if (GetMultiplayerId() == gBerryBlenderData->field_9A[i])
-                stringPtr = StringCopy(stringPtr, gUnknown_082162C4);
+                stringPtr = StringCopy(stringPtr, sRedColorString);
             StringCopy(stringPtr, gLinkPlayers[gBerryBlenderData->field_9A[i]].name);
             MenuPrint_PixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
         }
@@ -1051,7 +1539,7 @@ static void sub_804F378(void)
         sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 16:
-        CreateSprite(&gSpriteTemplate_8216548, 120, -16, 3);
+        CreateSprite(&sSpriteTemplate_8216548, 120, -16, 3);
         gBerryBlenderData->field_0++;
         break;
     case 18:
@@ -1119,7 +1607,7 @@ static void sub_804F890(u8 a0, u8 a1)
     gTasks[taskID].data[2] = a0;
 }
 
-void sub_804F8C8(u8 taskID)
+static void sub_804F8C8(u8 taskID)
 {
     if (sub_804F16C(gBerryBlenderData->arrowPos, 1) == 2)
     {
@@ -1170,7 +1658,7 @@ void sub_804F8C8(u8 taskID)
         gTasks[taskID].data[0] = 0;
 }
 
-void sub_804F9F4(u8 taskID)
+static void sub_804F9F4(u8 taskID)
 {
     u32 var1 = (gBerryBlenderData->arrowPos + 0x1800) & 0xFFFF;
     u32 var2 = gBerryBlenderData->field_A2[2] & 0xFF;
@@ -1213,7 +1701,7 @@ void sub_804F9F4(u8 taskID)
         gTasks[taskID].data[0] = 0;
 }
 
-void sub_804FB1C(u8 taskID)
+static void sub_804FB1C(u8 taskID)
 {
     u32 var1, var2;
 
@@ -1264,7 +1752,7 @@ static void sub_804FC48(u16 a0, u8 a1)
 {
     u8 spriteID;
 
-    spriteID = CreateSprite(&gSpriteTemplate_821645C,
+    spriteID = CreateSprite(&sSpriteTemplate_821645C,
                             sBlenderSyncArrowsPos[a1][0] - (10 * gUnknown_082162CC[a1][0]),
                             sBlenderSyncArrowsPos[a1][1] - (10 * gUnknown_082162CC[a1][1]),
                             1);
@@ -2077,7 +2565,7 @@ static void sub_8050954(void)
     case 6:
         if (Blender_PrintBlendingResults())
         {
-            if (gUnknown_03004834 == 0)
+            if (gInGameOpponentsNo == 0)
                 IncrementGameStat(34);
             else
                 IncrementGameStat(33);
@@ -2152,7 +2640,7 @@ static void sub_8050954(void)
         }
         break;
     case 12:
-        if (gUnknown_03004834)
+        if (gInGameOpponentsNo)
         {
             SetMainCallback2(sub_80510E8);
             gBerryBlenderData->field_6F = 0;
@@ -2547,7 +3035,7 @@ static void sub_805156C(void)
         x = gSineTable[(rand & 0xFF) + 64] / 4;
         y = gSineTable[(rand & 0xFF)] / 4;
 
-        spriteID = CreateSprite(&gSpriteTemplate_82164FC, x + 120, y + 80, 1);
+        spriteID = CreateSprite(&sSpriteTemplate_82164FC, x + 120, y + 80, 1);
         gSprites[spriteID].data0 = 16 - (Random() % 32);
         gSprites[spriteID].data1 = 16 - (Random() % 32);
 
@@ -2555,7 +3043,7 @@ static void sub_805156C(void)
     }
 }
 
-void sub_8051650(struct Sprite* sprite)
+static void sub_8051650(struct Sprite* sprite)
 {
     sprite->data0++;
     sprite->pos2.y = -(sprite->data0 / 3);
@@ -2619,7 +3107,7 @@ void unref_sub_80516F8(u8 taskID)
     }
 }
 
-void sub_805181C(struct Sprite* sprite)
+static void sub_805181C(struct Sprite* sprite)
 {
     switch (sprite->data0)
     {
@@ -2647,7 +3135,7 @@ void sub_805181C(struct Sprite* sprite)
             if (++sprite->data3 == 3)
             {
                 DestroySprite(sprite);
-                CreateSprite(&gSpriteTemplate_821657C, 120, -20, 2);
+                CreateSprite(&sSpriteTemplate_821657C, 120, -20, 2);
             }
             else
             {
@@ -2661,7 +3149,7 @@ void sub_805181C(struct Sprite* sprite)
     sprite->pos2.y = sprite->data1;
 }
 
-void sub_80518CC(struct Sprite* sprite)
+static void sub_80518CC(struct Sprite* sprite)
 {
     switch (sprite->data0)
     {
@@ -2810,7 +3298,7 @@ static bool8 sub_8051B8C(void)
         return 0;
 }
 
-void sub_8051C04(struct Sprite* sprite)
+static void sub_8051C04(struct Sprite* sprite)
 {
    sprite->pos2.x = -(gBerryBlenderData->field_144);
    sprite->pos2.y = -(gBerryBlenderData->field_146);
@@ -2969,7 +3457,7 @@ static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* ds
 #else
     de_sub_8073174(dst, gOtherText_PokeBlockMade);
 #endif
-    StringAppend(dst, gUnknown_082162C8);
+    StringAppend(dst, sNewLineString_0);
 
     flavourLvl = sub_810C9B0(pokeblock);
     feel = sub_810C9E8(pokeblock);
@@ -3050,14 +3538,14 @@ static bool8 Blender_PrintBlendingRanking(void)
         MenuDrawTextWindow(4, 2, 25, 17);
         sub_8072BD8(gOtherText_Ranking, 5, 3, 160);
 
-        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&gSpriteTemplate_821645C, 140, 52, 0);
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&sSpriteTemplate_821645C, 140, 52, 0);
         gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]].callback = SpriteCallbackDummy;
         StartSpriteAnim(&gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]], 3);
 
-        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD] = CreateSprite(&gSpriteTemplate_821645C, 164, 52, 0);
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD] = CreateSprite(&sSpriteTemplate_821645C, 164, 52, 0);
         gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_GOOD]].callback = SpriteCallbackDummy;
 
-        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS] = CreateSprite(&gSpriteTemplate_821645C, 188, 52, 0);
+        gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS] = CreateSprite(&sSpriteTemplate_821645C, 188, 52, 0);
         gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]].callback = SpriteCallbackDummy;
         StartSpriteAnim(&gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_MISS]], 1);
 
@@ -3135,7 +3623,7 @@ static void BlenderDebug_PrintBerryData(void)
     u8 text[128];
     u8 i;
 
-    StringCopy(text, gOtherText_BPMAndDash);
+    StringCopy(text, sText_BPM);
     MenuPrint(text, 2, 0);
 
     ConvertIntToDecimalStringN(text, sBlenderDebug.BPM / 100, 2, 3);
@@ -3160,19 +3648,19 @@ static void BlenderDebug_PrintBerryData(void)
         MenuPrint(text, 2, var);
 
         ConvertIntToDecimalStringN(&text[0], gBerries[sBlenderDebug.berries[i]].spicy, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToDecimalStringN(&text[3], gBerries[sBlenderDebug.berries[i]].dry, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToDecimalStringN(&text[6], gBerries[sBlenderDebug.berries[i]].sweet, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToDecimalStringN(&text[9], gBerries[sBlenderDebug.berries[i]].bitter, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToDecimalStringN(&text[12], gBerries[sBlenderDebug.berries[i]].sour, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToDecimalStringN(&text[15], gBerries[sBlenderDebug.berries[i]].smoothness, 2, 2);
 
@@ -3185,19 +3673,19 @@ static void BlenderDebug_PrintBerryData(void)
         MenuPrint(text, 2, 15);
 
         ConvertIntToHexStringN(&text[0], sBlenderDebug.spicy, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToHexStringN(&text[3], sBlenderDebug.dry, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToHexStringN(&text[6], sBlenderDebug.sweet, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToHexStringN(&text[9], sBlenderDebug.bitter, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToHexStringN(&text[12], sBlenderDebug.sour, 2, 2);
-        StringAppend(text, gUnknown_082165F8);
+        StringAppend(text, sText_Space);
 
         ConvertIntToHexStringN(&text[15], sBlenderDebug.feel, 2, 2);
 
@@ -3241,11 +3729,11 @@ static void sub_80527BC(void)
 
     ConvertIntToHexStringN(buffer, gUnknown_03004830, 2, 8);
     StringAppend(text, buffer);
-    StringAppend(text, gUnknown_082165F8);
+    StringAppend(text, sText_Space);
 
     ConvertIntToHexStringN(buffer, gUnknown_020297E0, 2, 8);
     StringAppend(text, buffer);
-    StringAppend(text, gUnknown_08216600);
+    StringAppend(text, sNewLineString_1);
 
     if (gUnknown_020297DC == 3)
     {

@@ -1,4 +1,4 @@
 gUnknown_03004830
-gUnknown_03004834
+gInGameOpponentsNo
 gUnknown_03004840
 gBerryBlenderData
