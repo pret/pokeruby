@@ -74,7 +74,6 @@ SECTIONS {
         src/daycare.o(.text);
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
-        asm/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         src/smokescreen.o(.text);
         src/pokeball.o(.text);
@@ -229,7 +228,7 @@ SECTIONS {
         src/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         src/battle_811DA74.o(.text);
-        asm/battle_message.o(.text);
+        src/battle_message.o(.text);
         src/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
@@ -338,7 +337,7 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         data/daycare.o(.rodata);
-        data/egg_hatch.o(.rodata);
+        src/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
         data/trade.o(.rodata);

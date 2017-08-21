@@ -246,15 +246,6 @@ extern u8 gUnknown_081D95DB[]; //bs payday money give
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
-#define BATTLE_WON                  0x1
-#define BATTLE_LOST                 0x2
-#define BATTLE_DREW                 0x3
-#define BATTLE_RAN                  0x4
-#define BATTLE_PLAYER_TELEPORTED    0x5
-#define BATTLE_POKE_FLED            0x6
-#define BATTLE_CAUGHT               0x7
-#define BATTLE_OPPONENT_TELEPORTED  0xA
-
 #define uBYTE0_16(value)(( (u8) (((u16)(value) & (0x000000FF)) >> 0x00)))
 #define uBYTE1_16(value)(( (u8) (((u16)(value) & (0x0000FF00)) >> 0x08)))
 
