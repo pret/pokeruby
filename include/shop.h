@@ -14,5 +14,7 @@ void sub_80B40E8(u8);
 void CreatePokemartMenu(void *);
 void CreateDecorationShop1Menu(void *);
 void CreateDecorationShop2Menu(void *);
+void sub_80B356C(void);
+void sub_80B368C(void);
 
 #endif // GUARD_SHOP_H
