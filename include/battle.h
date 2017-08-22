@@ -19,6 +19,15 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 
+#define BATTLE_WON                  0x1
+#define BATTLE_LOST                 0x2
+#define BATTLE_DREW                 0x3
+#define BATTLE_RAN                  0x4
+#define BATTLE_PLAYER_TELEPORTED    0x5
+#define BATTLE_POKE_FLED            0x6
+#define BATTLE_CAUGHT               0x7
+#define BATTLE_OPPONENT_TELEPORTED  0xA
+
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
 #define AI_ACTION_WATCH         0x0004
@@ -327,7 +336,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1609D*/ u8 unk1609D;
     /*0x1609E*/ u8 unk1609E;
     /*0x1609F*/ u8 unk1609F;
-    /*0x160A0*/ u8 unk160a0;
+    /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
     /*0x160A2*/ u8 expGetterBank;
     /*0x160A3*/ u8 unk160A3;
