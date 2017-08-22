@@ -1464,73 +1464,71 @@ static void atk06_typecalc(void)
 {
     int i = 0;
     u8 move_type;
-    if (gCurrentMove == MOVE_STRUGGLE) {goto END;}
-
-    if (BATTLE_STRUCT->dynamicMoveType)
-        move_type = BATTLE_STRUCT->dynamicMoveType & 0x3F;
-    else
-        move_type = gBattleMoves[gCurrentMove].type;
-
-    //check stab
-    if (gBattleMons[gBankAttacker].type1 == move_type || gBattleMons[gBankAttacker].type2 == move_type)
+    if (gCurrentMove != MOVE_STRUGGLE)
     {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
-        gBattleMoveDamage = gBattleMoveDamage / 10;
-    }
+        if (BATTLE_STRUCT->dynamicMoveType)
+            move_type = BATTLE_STRUCT->dynamicMoveType & 0x3F;
+        else
+            move_type = gBattleMoves[gCurrentMove].type;
 
-    if (gBattleMons[gBankTarget].ability == ABILITY_LEVITATE && move_type == TYPE_GROUND)
-    {
-        gLastUsedAbility = gBattleMons[gBankTarget].ability;
-        gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
-        gMoveHitWith[gBankTarget] = 0;
-        gUnknown_02024C44[gBankTarget] = 0;
-        gBattleCommunication[6] = move_type;
-        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
-    }
-    else
-    {
-        while (gTypeEffectiveness[i]!= TYPE_ENDTABLE)
+        //check stab
+        if (gBattleMons[gBankAttacker].type1 == move_type || gBattleMons[gBankAttacker].type2 == move_type)
         {
-            if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
-                    break;
-                i += 3;
-                continue;
-            }
-
-            else if (gTypeEffectiveness[i] == move_type)
-            {
-                //check type1
-                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1)
-                    ModulateDmgByType(gTypeEffectiveness[i + 2]);
-                //check type2
-                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2 &&
-                    gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2)
-                    ModulateDmgByType(gTypeEffectiveness[i + 2]);
-            }
-            i += 3;
+            gBattleMoveDamage = gBattleMoveDamage * 15;
+            gBattleMoveDamage = gBattleMoveDamage / 10;
         }
-    }
 
-    if (gBattleMons[gBankTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBankAttacker, gCurrentMove) == 2
-     && (!(gBattleMoveFlags & MOVESTATUS_SUPEREFFECTIVE) || ((gBattleMoveFlags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
-     && gBattleMoves[gCurrentMove].power)
-    {
-        gLastUsedAbility = ABILITY_WONDER_GUARD;
-        gBattleMoveFlags |= MOVESTATUS_MISSED;
-        gMoveHitWith[gBankTarget] = 0;
-        gUnknown_02024C44[gBankTarget] = 0;
-        gBattleCommunication[6] = 3;
-        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
-    }
-    if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
-        gProtectStructs[gBankAttacker].notEffective = 1;
+        if (gBattleMons[gBankTarget].ability == ABILITY_LEVITATE && move_type == TYPE_GROUND)
+        {
+            gLastUsedAbility = gBattleMons[gBankTarget].ability;
+            gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
+            gMoveHitWith[gBankTarget] = 0;
+            gUnknown_02024C44[gBankTarget] = 0;
+            gBattleCommunication[6] = move_type;
+            RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+        }
+        else
+        {
+            while (gTypeEffectiveness[i]!= TYPE_ENDTABLE)
+            {
+                if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+                {
+                    if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
+                        break;
+                    i += 3;
+                    continue;
+                }
 
-    END:
-        gBattlescriptCurrInstr++;
+                else if (gTypeEffectiveness[i] == move_type)
+                {
+                    //check type1
+                    if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1)
+                        ModulateDmgByType(gTypeEffectiveness[i + 2]);
+                    //check type2
+                    if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2 &&
+                        gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2)
+                        ModulateDmgByType(gTypeEffectiveness[i + 2]);
+                }
+                i += 3;
+            }
+        }
+
+        if (gBattleMons[gBankTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBankAttacker, gCurrentMove) == 2
+         && (!(gBattleMoveFlags & MOVESTATUS_SUPEREFFECTIVE) || ((gBattleMoveFlags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
+         && gBattleMoves[gCurrentMove].power)
+        {
+            gLastUsedAbility = ABILITY_WONDER_GUARD;
+            gBattleMoveFlags |= MOVESTATUS_MISSED;
+            gMoveHitWith[gBankTarget] = 0;
+            gUnknown_02024C44[gBankTarget] = 0;
+            gBattleCommunication[6] = 3;
+            RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+        }
+        if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
+            gProtectStructs[gBankAttacker].notEffective = 1;
+    }
+    gBattlescriptCurrInstr++;
 }
-
 static void b_wonderguard_and_levitate(void)
 {
     u8 flags = 0;
