@@ -41,18 +41,7 @@ struct TransitionData
     s16 field_1E;
     s16 field_20;
     s16 field_22;
-    s16 field_24;
-    s16 field_26;
-    s16 field_28;
-    s16 field_2A;
-    s16 field_2C;
-    s16 field_2E;
-    s16 field_30;
-    s16 field_32;
-    s16 field_34;
-    s16 field_36;
-    s16 field_38;
-    s16 field_3A;
+    s16 data[11];
 };
 
 #define TRANSITION_STRUCT   (*(struct TransitionData *)   (ewram + 0xC000))
@@ -178,11 +167,10 @@ static void sub_811D6A8(u16** a0, u16** a1);
 static void sub_811D690(u16** a0);
 static void sub_811D6D4(void);
 static void sub_811D6E8(s16* array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize);
-
-void sub_811D764(u16* a0, s16 a1, s16 a2, s16 a3);
-void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
-bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2);
-void sub_811CFD0(struct Sprite* sprite);
+static void sub_811D764(u16* a0, s16 a1, s16 a2, s16 a3);
+static void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
+static bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2);
+static void sub_811CFD0(struct Sprite* sprite);
 
 // const data
 
@@ -964,7 +952,7 @@ static bool8 Phase2_Transition5_Func1(struct Task* task)
     }
 
     SetVBlankCallback(VBlankCB_Phase2_Transition5);
-    TRANSITION_STRUCT.field_2C = 120;
+    TRANSITION_STRUCT.data[4] = 120;
 
     task->tState++;
     return TRUE;
@@ -974,16 +962,16 @@ static bool8 Phase2_Transition5_Func2(struct Task* task)
 {
     TRANSITION_STRUCT.VBlank_DMA = 0;
 
-    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, TRANSITION_STRUCT.field_2C, -1, 1, 1);
+    sub_811D8FC(TRANSITION_STRUCT.data, 120, 80, TRANSITION_STRUCT.data[4], -1, 1, 1);
     do
     {
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (TRANSITION_STRUCT.field_28 + 1) | 0x7800;
-    } while (!sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1));
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (TRANSITION_STRUCT.data[2] + 1) | 0x7800;
+    } while (!sub_811D978(TRANSITION_STRUCT.data, 1, 1));
 
-    TRANSITION_STRUCT.field_2C += 16;
-    if (TRANSITION_STRUCT.field_2C >= 240)
+    TRANSITION_STRUCT.data[4] += 16;
+    if (TRANSITION_STRUCT.data[4] >= 240)
     {
-        TRANSITION_STRUCT.field_2E = 0;
+        TRANSITION_STRUCT.data[5] = 0;
         task->tState++;
     }
 
@@ -998,30 +986,30 @@ static bool8 Phase2_Transition5_Func3(struct Task* task)
 
     TRANSITION_STRUCT.VBlank_DMA = 0;
 
-    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, 240, TRANSITION_STRUCT.field_2E, 1, 1);
+    sub_811D8FC(TRANSITION_STRUCT.data, 120, 80, 240, TRANSITION_STRUCT.data[5], 1, 1);
 
     while (1)
     {
-        r1 = 120, r3 = TRANSITION_STRUCT.field_28 + 1;
-        if (TRANSITION_STRUCT.field_2E >= 80)
-            r1 = TRANSITION_STRUCT.field_28, r3 = 240;
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r3) | (r1 << 8);
+        r1 = 120, r3 = TRANSITION_STRUCT.data[2] + 1;
+        if (TRANSITION_STRUCT.data[5] >= 80)
+            r1 = TRANSITION_STRUCT.data[2], r3 = 240;
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (r3) | (r1 << 8);
         if (var != 0)
             break;
-        var = sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1);
+        var = sub_811D978(TRANSITION_STRUCT.data, 1, 1);
     }
 
-    TRANSITION_STRUCT.field_2E += 8;
-    if (TRANSITION_STRUCT.field_2E >= 160)
+    TRANSITION_STRUCT.data[5] += 8;
+    if (TRANSITION_STRUCT.data[5] >= 160)
     {
-        TRANSITION_STRUCT.field_2C = 240;
+        TRANSITION_STRUCT.data[4] = 240;
         task->tState++;
     }
     else
     {
-        while (TRANSITION_STRUCT.field_2A < TRANSITION_STRUCT.field_2E)
+        while (TRANSITION_STRUCT.data[3] < TRANSITION_STRUCT.data[5])
         {
-            gUnknown_03004DE0[0][++TRANSITION_STRUCT.field_2A] = (r3) | (r1 << 8);
+            gUnknown_03004DE0[0][++TRANSITION_STRUCT.data[3]] = (r3) | (r1 << 8);
         }
     }
 
@@ -1033,16 +1021,16 @@ static bool8 Phase2_Transition5_Func4(struct Task* task)
 {
     TRANSITION_STRUCT.VBlank_DMA = 0;
 
-    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, TRANSITION_STRUCT.field_2C, 160, 1, 1);
+    sub_811D8FC(TRANSITION_STRUCT.data, 120, 80, TRANSITION_STRUCT.data[4], 160, 1, 1);
     do
     {
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (TRANSITION_STRUCT.field_28 << 8) | 0xF0;
-    } while (!sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1));
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (TRANSITION_STRUCT.data[2] << 8) | 0xF0;
+    } while (!sub_811D978(TRANSITION_STRUCT.data, 1, 1));
 
-    TRANSITION_STRUCT.field_2C -= 16;
-    if (TRANSITION_STRUCT.field_2C <= 0)
+    TRANSITION_STRUCT.data[4] -= 16;
+    if (TRANSITION_STRUCT.data[4] <= 0)
     {
-        TRANSITION_STRUCT.field_2E = 160;
+        TRANSITION_STRUCT.data[5] = 160;
         task->tState++;
     }
 
@@ -1057,31 +1045,31 @@ static bool8 Phase2_Transition5_Func5(struct Task* task)
 
     TRANSITION_STRUCT.VBlank_DMA = 0;
 
-    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, 0, TRANSITION_STRUCT.field_2E, 1, 1);
+    sub_811D8FC(TRANSITION_STRUCT.data, 120, 80, 0, TRANSITION_STRUCT.data[5], 1, 1);
 
     while (1)
     {
-        r1 = gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] & 0xFF, r2 = TRANSITION_STRUCT.field_28;
-        if (TRANSITION_STRUCT.field_2E <= 80)
-            r2 = 120, r1 = TRANSITION_STRUCT.field_28;
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r1) | (r2 << 8);
+        r1 = gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] & 0xFF, r2 = TRANSITION_STRUCT.data[2];
+        if (TRANSITION_STRUCT.data[5] <= 80)
+            r2 = 120, r1 = TRANSITION_STRUCT.data[2];
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (r1) | (r2 << 8);
         r3 = 0;
         if (var != 0)
             break;
-        var = sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1);
+        var = sub_811D978(TRANSITION_STRUCT.data, 1, 1);
     }
 
-    TRANSITION_STRUCT.field_2E -= 8;
-    if (TRANSITION_STRUCT.field_2E <= 0)
+    TRANSITION_STRUCT.data[5] -= 8;
+    if (TRANSITION_STRUCT.data[5] <= 0)
     {
-        TRANSITION_STRUCT.field_2C = r3;
+        TRANSITION_STRUCT.data[4] = r3;
         task->tState++;
     }
     else
     {
-        while (TRANSITION_STRUCT.field_2A > TRANSITION_STRUCT.field_2E)
+        while (TRANSITION_STRUCT.data[3] > TRANSITION_STRUCT.data[5])
         {
-            gUnknown_03004DE0[0][--TRANSITION_STRUCT.field_2A] = (r1) | (r2 << 8);
+            gUnknown_03004DE0[0][--TRANSITION_STRUCT.data[3]] = (r1) | (r2 << 8);
         }
     }
 
@@ -1093,20 +1081,20 @@ static bool8 Phase2_Transition5_Func6(struct Task* task)
 {
     TRANSITION_STRUCT.VBlank_DMA = 0;
 
-    sub_811D8FC(&TRANSITION_STRUCT.field_24, 120, 80, TRANSITION_STRUCT.field_2C, 0, 1, 1);
+    sub_811D8FC(TRANSITION_STRUCT.data, 120, 80, TRANSITION_STRUCT.data[4], 0, 1, 1);
     do
     {
         s16 r2, r3;
 
-        r2 = 120, r3 = TRANSITION_STRUCT.field_28;
-        if (TRANSITION_STRUCT.field_28 >= 120)
+        r2 = 120, r3 = TRANSITION_STRUCT.data[2];
+        if (TRANSITION_STRUCT.data[2] >= 120)
             r2 = 0, r3 = 240;
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r3) | (r2 << 8);
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (r3) | (r2 << 8);
 
-    } while (!sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1));
+    } while (!sub_811D978(TRANSITION_STRUCT.data, 1, 1));
 
-    TRANSITION_STRUCT.field_2C += 16;
-    if (TRANSITION_STRUCT.field_28 > 120)
+    TRANSITION_STRUCT.data[4] += 16;
+    if (TRANSITION_STRUCT.data[2] > 120)
         task->tState++;
 
     TRANSITION_STRUCT.VBlank_DMA++;
@@ -1639,12 +1627,12 @@ void sub_811C90C(struct Sprite* sprite)
     while (gUnknown_083FD880[sprite->data0](sprite));
 }
 
-bool8 sub_811C934(struct Sprite* sprite)
+static bool8 sub_811C934(struct Sprite* sprite)
 {
     return FALSE;
 }
 
-bool8 sub_811C938(struct Sprite* sprite)
+static bool8 sub_811C938(struct Sprite* sprite)
 {
     s16 arr0[2];
     s16 arr1[2];
@@ -1658,7 +1646,7 @@ bool8 sub_811C938(struct Sprite* sprite)
     return TRUE;
 }
 
-bool8 sub_811C984(struct Sprite* sprite)
+static bool8 sub_811C984(struct Sprite* sprite)
 {
     sprite->pos1.x += sprite->data1;
     if (sprite->data7 && sprite->pos1.x < 133)
@@ -1668,7 +1656,7 @@ bool8 sub_811C984(struct Sprite* sprite)
     return FALSE;
 }
 
-bool8 sub_811C9B8(struct Sprite* sprite)
+static bool8 sub_811C9B8(struct Sprite* sprite)
 {
     sprite->data1 += sprite->data2;
     sprite->pos1.x += sprite->data1;
@@ -1681,7 +1669,7 @@ bool8 sub_811C9B8(struct Sprite* sprite)
     return FALSE;
 }
 
-bool8 sub_811C9E4(struct Sprite* sprite)
+static bool8 sub_811C9E4(struct Sprite* sprite)
 {
     sprite->data1 += sprite->data2;
     sprite->pos1.x += sprite->data1;
@@ -1931,7 +1919,7 @@ static void HBlankCB_Phase2_Transition9(void)
     REG_BLDY = gUnknown_03004DE0[1][REG_VCOUNT];
 }
 
-void sub_811CFD0(struct Sprite* sprite)
+static void sub_811CFD0(struct Sprite* sprite)
 {
     if (sprite->data5)
     {
@@ -2053,7 +2041,7 @@ static bool8 Phase2_Transition11_Func1(struct Task* task)
 
 static bool8 Phase2_Transition11_Func2(struct Task* task)
 {
-    sub_811D8FC(&TRANSITION_STRUCT.field_24,
+    sub_811D8FC(TRANSITION_STRUCT.data,
                 gUnknown_083FD8F4[task->data[1]][0],
                 gUnknown_083FD8F4[task->data[1]][1],
                 gUnknown_083FD8F4[task->data[1]][2],
@@ -2073,30 +2061,30 @@ static bool8 Phase2_Transition11_Func3(struct Task* task)
 
     for (i = 0, nextFunc = FALSE; i < 16; i++)
     {
-        s16 r3 = gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] >> 8;
-        s16 r4 = gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] & 0xFF;
+        s16 r3 = gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] >> 8;
+        s16 r4 = gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] & 0xFF;
         if (task->data[2] == 0)
         {
-            if (r3 < TRANSITION_STRUCT.field_28)
-                r3 = TRANSITION_STRUCT.field_28;
+            if (r3 < TRANSITION_STRUCT.data[2])
+                r3 = TRANSITION_STRUCT.data[2];
             if (r3 > r4)
                 r3 = r4;
         }
         else
         {
-            if (r4 > TRANSITION_STRUCT.field_28)
-                r4 = TRANSITION_STRUCT.field_28;
+            if (r4 > TRANSITION_STRUCT.data[2])
+                r4 = TRANSITION_STRUCT.data[2];
             if (r4 <= r3)
                 r4 = r3;
         }
-        gUnknown_03004DE0[0][TRANSITION_STRUCT.field_2A] = (r4) | (r3 << 8);
+        gUnknown_03004DE0[0][TRANSITION_STRUCT.data[3]] = (r4) | (r3 << 8);
         if (nextFunc)
         {
             task->tState++;
             break;
         }
         else
-            nextFunc = sub_811D978(&TRANSITION_STRUCT.field_24, 1, 1);
+            nextFunc = sub_811D978(TRANSITION_STRUCT.data, 1, 1);
     }
 
     TRANSITION_STRUCT.VBlank_DMA++;
@@ -2265,37 +2253,36 @@ static void sub_811D6E8(s16* array, s16 sinAdd, s16 index, s16 indexIncrementer,
     }
 }
 
-void sub_811D764(u16* array, s16 a1, s16 a2, s16 a3)
+static void sub_811D764(u16* array, s16 a1, s16 a2, s16 a3)
 {
     s16 i;
 
     memset(array, 0xA, 160 * sizeof(s16));
     for (i = 0; i < 64; i++)
     {
-        s16 sinResult, cosResult, r1, r6, r7, r8;
-        s16 r2, r3;
-        s16 j;
+        s16 sinResult, cosResult;
+        s16 toStoreOrr, r2, r3, toStore, r7, r8;
 
         sinResult = Sin(i, a3);
         cosResult = Cos(i, a3);
 
-        r1 = a1 - sinResult;
-        r6 = a1 + sinResult;
+        toStoreOrr = a1 - sinResult;
+        toStore = a1 + sinResult;
         r7 = a2 - cosResult;
         r8 = a2 + cosResult;
 
-        if (r1 < 0)
-            r1 = 0;
-        if (r6 > 0xF0)
-            r6 = 0xF0;
+        if (toStoreOrr < 0)
+            toStoreOrr = 0;
+        if (toStore > 0xF0)
+            toStore = 0xF0;
         if (r7 < 0)
             r7 = 0;
         if (r8 > 0x9F)
             r8 = 0x9F;
 
-        r6 |= (r1 << 8);
-        array[r7] = r6;
-        array[r8] = r6;
+        toStore |= (toStoreOrr << 8);
+        array[r7] = toStore;
+        array[r8] = toStore;
 
         cosResult = Cos(i + 1, a3);
         r3 = a2 - cosResult;
@@ -2306,26 +2293,81 @@ void sub_811D764(u16* array, s16 a1, s16 a2, s16 a3)
         if (r2 > 0x9F)
             r2 = 0x9F;
 
-        j = r7;
-        while (j > r3)
-        {
-            array[--j] = r6;
-        }
-        j = r7;
-        while (j < r3)
-        {
-            array[++j] = r6;
-        }
+        while (r7 > r3)
+            array[--r7] = toStore;
+        while (r7 < r3)
+            array[++r7] = toStore;
 
-        j = r8;
-        while (j > r2)
+        while (r8 > r2)
+            array[--r8] = toStore;
+        while (r8 < r2)
+            array[++r8] = toStore;
+    }
+}
+
+static void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
+{
+    a0[0] = a1;
+    a0[1] = a2;
+    a0[2] = a1;
+    a0[3] = a2;
+    a0[4] = a3;
+    a0[5] = a4;
+    a0[6] = a5;
+    a0[7] = a6;
+    a0[8] = a3 - a1;
+    if (a0[8] < 0)
+    {
+        a0[8] = -a0[8];
+        a0[6] = -a5;
+    }
+    a0[9] = a4 - a2;
+    if (a0[9] < 0)
+    {
+        a0[9] = -a0[9];
+        a0[7] = -a6;
+    }
+    a0[10] = 0;
+}
+
+static bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2)
+{
+    u8 var;
+    if (a0[8] > a0[9])
+    {
+        a0[2] += a0[6];
+        a0[10] += a0[9];
+        if (a0[10] > a0[8])
         {
-            array[--j] = r6;
-        }
-        j = r8;
-        while (j < r2)
-        {
-            array[++j] = r6;
+            a0[3] += a0[7];
+            a0[10] -= a0[8];
         }
     }
+    else
+    {
+        a0[3] += a0[7];
+        a0[10] += a0[8];
+        if (a0[10] > a0[9])
+        {
+            a0[2] += a0[6];
+            a0[10] -= a0[9];
+        }
+    }
+    var = 0;
+    if ((a0[6] > 0 && a0[2] >= a0[4]) || (a0[6] < 0 && a0[2] <= a0[4]))
+    {
+        var++;
+        if (a1)
+            a0[2] = a0[4];
+    }
+    if ((a0[7] > 0 && a0[3] >= a0[5]) || (a0[7] < 0 && a0[3] <= a0[5]))
+    {
+        var++;
+        if (a2)
+            a0[3] = a0[5];
+    }
+    if (var == 2)
+        return TRUE;
+    else
+        return FALSE;
 }
