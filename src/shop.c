@@ -19,13 +19,17 @@
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "item.h"
+
+extern void sub_80B39D0(int, int, int);
+extern void sub_80B3A70(void);
 
 struct UnknownShopStruct
 {
     /* 0x0 */ void (* callback) (void);
     /* 0x4 */ u16 *itemList;
     /* 0x8 */ u8 itemCount;
-    /* 0x9 */ u8 unk9;
+    /* 0x9 */ u8 cursor;
     /* 0xA */ u8 unkA;
     /* 0xB */ u8 unkB;
     /* 0xC */ bool8 unkC;
@@ -35,9 +39,25 @@ struct UnknownShopStruct
 extern struct UnknownShopStruct gUnknown_03000708;
 extern struct MenuAction gUnknown_083CC6D0[];
 
+extern u8 ewram[];
+
 extern u8 gUnknown_083CC6E8[];
 extern u8 gUnknown_083CC6EB[];
 extern u8 gBuyMenuFrame_Gfx[];
+
+#define ewram18000 ((u16 *)(ewram + 0x18000))
+#define ewram18300 ((u16 *)(ewram + 0x18300))
+
+// shop view window NPC info enum
+enum
+{
+    MAP_OBJ_ID,
+    X_COORD,
+    Y_COORD,
+    ANIM_NUM
+};
+
+extern s16 gUnknown_020386A4[][4]; // game freak barely uses 2d arrays wtf?
 
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
@@ -47,7 +67,7 @@ u8 CreateShopMenu(bool8 var)
 {
     ScriptContext2_Enable();
     gUnknown_03000708.unkC = var;
-    gUnknown_03000708.unk9 = 0;
+    gUnknown_03000708.cursor = 0;
 
     if(var == FALSE)
     {
@@ -89,35 +109,35 @@ void sub_80B2E38(u8 var)
 {
     const u8 local = var;
 
-    if(gMain.newAndRepeatedKeys & 0x40)
+    if(gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if(gUnknown_03000708.unk9)
+        if(gUnknown_03000708.cursor) // can move cursor up?
         {
             PlaySE(0x5);
-            gUnknown_03000708.unk9 = MoveMenuCursor(-1);
+            gUnknown_03000708.cursor = MoveMenuCursor(-1);
         }
     }
-    else if(gMain.newAndRepeatedKeys & 0x80)
+    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if(gUnknown_03000708.unk9 != gUnknown_03000708.unkA)
+        if(gUnknown_03000708.cursor != gUnknown_03000708.unkA) // can move cursor down?
         {
             PlaySE(0x5);
-            gUnknown_03000708.unk9 = MoveMenuCursor(1);
+            gUnknown_03000708.cursor = MoveMenuCursor(1);
         }
     }
-    else if (gMain.newKeys & 1)
+    else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(0x5);
         if(!gUnknown_03000708.unkC)
         {
-            gUnknown_083CC6D0[gUnknown_083CC6E8[gUnknown_03000708.unk9]].func(local);
+            gUnknown_083CC6D0[gUnknown_083CC6E8[gUnknown_03000708.cursor]].func(local);
         }
         else
         {
-            gUnknown_083CC6D0[gUnknown_083CC6EB[gUnknown_03000708.unk9]].func(local);
+            gUnknown_083CC6D0[gUnknown_083CC6EB[gUnknown_03000708.cursor]].func(local);
         }
     }
-    else if(gMain.newKeys & 2)
+    else if(gMain.newKeys & B_BUTTON)
     {
         PlaySE(0x5);
         HandleShopMenuQuit(local);
@@ -256,7 +276,7 @@ void BuyMenuDrawGraphics(void)
     SetUpWindowConfig(&gWindowConfig_81E6DFC);
     InitMenuWindow(&gWindowConfig_81E6DFC);
     BuyMenuDrawMapGraphics();
-    gUnknown_03000708.unk9 = zero;
+    gUnknown_03000708.cursor = zero;
     gUnknown_03000708.unkB = zero2;
     MenuZeroFillWindowRect(0, 0, 0x20, 0x20);
     sub_80B7C14(gSaveBlock1.money, 0, 0);
@@ -401,8 +421,6 @@ void BuyMenuDrawMapGraphics(void)
     sub_80B3420();
 }
 
-extern s16 gUnknown_020386A4[][4];
-
 void sub_80B356C(void)
 {
     s16 facingX;
@@ -415,7 +433,7 @@ void sub_80B356C(void)
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     playerHeight = PlayerGetZCoord();
     for (y = 0; y < 16; y++)
-        gUnknown_020386A4[y][0] = 16;
+        gUnknown_020386A4[y][MAP_OBJ_ID] = 16;
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
@@ -424,17 +442,17 @@ void sub_80B356C(void)
 
             if (mapObjId != 16)
             {
-                gUnknown_020386A4[r8][0] = mapObjId;
-                gUnknown_020386A4[r8][1] = x;
-                gUnknown_020386A4[r8][2] = y;
+                gUnknown_020386A4[r8][MAP_OBJ_ID] = mapObjId;
+                gUnknown_020386A4[r8][X_COORD] = x;
+                gUnknown_020386A4[r8][Y_COORD] = y;
                 if (gMapObjects[mapObjId].mapobj_unk_18 == 1)
-                    gUnknown_020386A4[r8][3] = 0;
+                    gUnknown_020386A4[r8][ANIM_NUM] = 0;
                 if (gMapObjects[mapObjId].mapobj_unk_18 == 2)
-                    gUnknown_020386A4[r8][3] = 1;
+                    gUnknown_020386A4[r8][ANIM_NUM] = 1;
                 if (gMapObjects[mapObjId].mapobj_unk_18 == 3)
-                    gUnknown_020386A4[r8][3] = 2;
+                    gUnknown_020386A4[r8][ANIM_NUM] = 2;
                 if (gMapObjects[mapObjId].mapobj_unk_18 == 4)
-                    gUnknown_020386A4[r8][3] = 3;
+                    gUnknown_020386A4[r8][ANIM_NUM] = 3;
                 r8++;
             }
         }
@@ -447,15 +465,62 @@ void sub_80B368C(void)
 
     for(i = 0; i < 16; i++) // max objects?
     {
-        if(gUnknown_020386A4[i][0] == 16)
+        if(gUnknown_020386A4[i][MAP_OBJ_ID] == 16)
             continue;
 
         StartSpriteAnim(&gSprites[AddPseudoFieldObject(
-            gMapObjects[gUnknown_020386A4[i][0]].graphicsId,
+            gMapObjects[gUnknown_020386A4[i][MAP_OBJ_ID]].graphicsId,
             SpriteCallbackDummy,
-            (u16)gUnknown_020386A4[i][1] * 16 + 8,
-            (u16)gUnknown_020386A4[i][2] * 16 + 32,
+            (u16)gUnknown_020386A4[i][X_COORD] * 16 + 8,
+            (u16)gUnknown_020386A4[i][Y_COORD] * 16 + 32,
             2)],
-            gUnknown_020386A4[i][3]);
+            gUnknown_020386A4[i][ANIM_NUM]);
     }
+}
+
+void sub_80B3720(void)
+{
+    s16 i;
+    
+    for (i = 0; i < 0x400; i++)
+    {
+        if (ewram18000[i] != 0)
+            gBGTilemapBuffers[1][i] = ewram18000[i] + 0xC3E0;
+    }
+}
+
+void sub_80B3764(int var1, int var2)
+{
+    sub_80B3720();
+    sub_80B39D0(var1, var2, 0);
+    InitMenu(0, 0xE, 0x2, 0x8, gUnknown_03000708.cursor, 0xF);
+}
+
+void sub_80B379C(void)
+{
+    u16 i, j;
+
+    for(i = 0; i < 8; i++)
+        for(j = 0; j < 14; j++)
+            gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18300[32 * i + j] + 0xC3E0;
+}
+
+void sub_80B37EC(void)
+{
+    sub_80B3A70();
+}
+
+void sub_80B37F8(u8 taskId)
+{
+    u16 itemListIndex = gUnknown_03000708.unkB + gUnknown_03000708.cursor;
+    u16 itemId = *(gUnknown_03000708.itemList + itemListIndex);
+    u32 price = (ItemId_GetPrice(itemId) >> GetPriceReduction(1));
+
+    sub_80B7A94(gTasks[taskId].data[1] * price, 6, 6, 11);
+    gStringVar1[0] = EXT_CTRL_CODE_BEGIN;
+    gStringVar1[1] = 0x14;
+    gStringVar1[2] = 0x6;
+    ConvertIntToDecimalStringN(&gStringVar1[3], gTasks[taskId].data[1], 1, 2);
+    MenuPrint(gOtherText_xString1, 1, 11);
+    sub_80A3FA0(gBGTilemapBuffers[1], 1, 11, 12, 2, 0xC3E1);
 }
