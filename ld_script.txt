@@ -421,6 +421,7 @@ SECTIONS {
         data/easy_chat.o(.rodata);
         data/pokenav.o(.rodata);
         data/mon_markings.o(.rodata);
+        src/mauville_old_man.o(.rodata);
         data/mauville_old_man.o(.rodata);
         data/mail.o(.rodata);
         src/menu_helpers.o(.rodata);

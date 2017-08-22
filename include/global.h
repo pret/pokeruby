@@ -447,11 +447,19 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct UnkMauvilleOldManStruct
+
+// Mauville Pokemon Center men
+
+struct MauvilleManCommon
 {
-               u8 unk_2D94;
+    u8 id;
+};
+
+struct MauvilleManBard
+{
+               u8 id;
                u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2D96*/ u16 songLyrics[6];
     /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
     /*0x2DAE*/ u8 playerName[8];
     /*0x2DB6*/ u8 filler_2DB6[0x3];
@@ -459,9 +467,28 @@ struct UnkMauvilleOldManStruct
                u8 unk_2DBD;
 }; /*size = 0x2C*/
 
-struct UnkMauvilleOldManStruct2
+struct MauvilleManHipster
 {
-    u8 filler0;
+    u8 id;
+    u8 unk1;
+};
+
+struct MauvilleManTrader
+{
+    u8 id;
+    u8 unk1[4];
+    u8 unk5[4][11];
+    u8 unk31;
+};
+
+struct MauvilleManStoryteller
+{
+    u8 id;
+};
+
+struct MauvilleManGiddy
+{
+    u8 id;
     u8 unk1;
     u8 unk2;
     u16 mauvilleOldMan_ecArray[10];
@@ -469,19 +496,14 @@ struct UnkMauvilleOldManStruct2
     u8 fillerF[0x2];
 }; /*size = 0x2C*/
 
-struct MauvilleOldManTrader
-{
-    u8 unk0;
-    u8 unk1[4];
-    u8 unk5[4][11];
-    u8 unk31;
-};
-
 typedef union OldMan
 {
-    struct UnkMauvilleOldManStruct oldMan1;
-    struct UnkMauvilleOldManStruct2 oldMan2;
-    struct MauvilleOldManTrader trader;
+    struct MauvilleManCommon common;
+    struct MauvilleManBard bard;
+    struct MauvilleManHipster hipster;
+    struct MauvilleManTrader trader;
+    struct MauvilleManStoryteller storyteller;
+    struct MauvilleManGiddy giddy;
     u8 filler[0x40];
 } OldMan;
 

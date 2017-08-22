@@ -30,7 +30,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0A40:: @ 81B0A40
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E:: @ 81B0A4E
-	special sub_80F7CF4
+	special ScrSpecial_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
 	waittext
 	yesnobox 20, 8

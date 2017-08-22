@@ -3,27 +3,8 @@
 
 	.section .rodata
 
-	.align 1
-gUnknown_083E537C:: @ 83E537C
-.ifdef ENGLISH
-	ec_word SISTER
-	ec_word EATS
-	ec_word SWEETS
-	ec_word VORACIOUS
-	ec_word AND
-	ec_word DROOLING
-.else
-	ec_word SISTER
-	ec_word MUST_BE
-	ec_word SWEETS
-	ec_word VORACIOUS
-	ec_word DROOLING
-	ec_word THICK
-.endif
-
-
 	.align 2
-gUnknown_083E5388:: @ 83E5388
+gGiddyAdjectives:: @ 83E5388
 	.4byte OtherText_SoPretty
 	.4byte OtherText_SoDarling
 	.4byte OtherText_SoRelaxed
@@ -34,7 +15,7 @@ gUnknown_083E5388:: @ 83E5388
 	.4byte OtherText_SoMagical
 
 	.align 2
-gUnknown_083E53A8:: @ 83E53A8
+gGiddyQuestions:: @ 83E53A8
 	.4byte OtherText_WantVacationNicePlace
 	.4byte OtherText_BoughtCrayonsIsNice
 	.4byte OtherText_IfWeCouldFloat

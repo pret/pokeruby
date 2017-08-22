@@ -112,7 +112,7 @@ gSpecials::
 	def_special sub_80F7C90
 	def_special sub_80F7C54
 	def_special sub_80F83D0
-	def_special sub_80F7CF4
+	def_special ScrSpecial_GenerateGiddyLine
 	def_special sub_80F7CC8
 	def_special sub_80F889C
 	def_special sub_80F8888

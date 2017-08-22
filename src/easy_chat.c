@@ -19,7 +19,6 @@ extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
 
-
 u8 *sub_80EB3FC(u8 *dst, u16 word)
 {
     u16 group;

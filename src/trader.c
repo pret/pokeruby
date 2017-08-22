@@ -3,6 +3,7 @@
 #include "decoration_inventory.h"
 #include "event_data.h"
 #include "main.h"
+#include "mauville_old_man.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "script.h"
@@ -36,7 +37,7 @@ void sub_810993C(void)
 {
     u8 i, j;
     u8 buffer[12];
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
 
     for (i = 0; i < 3; i++)
     {
@@ -55,12 +56,12 @@ void sub_810993C(void)
     }
 }
 
-void sub_81099CC(void)
+void TraderSetup(void)
 {
     u8 i;
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
 
-    trader->unk0 = 2;
+    trader->id = MAUVILLE_MAN_TRADER;
     trader->unk31 = 0;
 
     for (i = 0; i < 4; i++)
@@ -74,7 +75,7 @@ void sub_81099CC(void)
 
 void sub_8109A20(void)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
     trader->unk31 = 0;
 }
 
@@ -88,7 +89,7 @@ void sub_8109A48(u8 taskId)
     u8 i;
     u8 numChoices = 1;
     u8 numDecorations = 0;
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
 
     for (i = 0; i < 4; i++)
     {
@@ -141,7 +142,7 @@ void sub_8109B34(u8 taskId, u8 decorationId)
 
 void sub_8109B7C(u8 taskId)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
 
     if (gMain.newKeys & DPAD_UP)
     {
@@ -176,7 +177,7 @@ void sub_8109B7C(u8 taskId)
 
 void sub_8109C44(void)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
     gScriptResult = trader->unk31;
 }
 
@@ -244,7 +245,7 @@ void sub_8109DAC(u8 taskId)
 
 void sub_8109DE0(void)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlock1.oldMan.trader;
+    struct MauvilleManTrader *trader = &gSaveBlock1.oldMan.trader;
 
     sub_81340A8(gSpecialVar_0x8006);
     IsThereStorageSpaceForDecoration(gSpecialVar_0x8004);

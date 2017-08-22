@@ -824,8 +824,8 @@ sub_80F83D0: @ 80F83D0
 _080F83F4: .4byte 0x00004010
 	thumb_func_end sub_80F83D0
 
-	thumb_func_start sub_80F83F8
-sub_80F83F8: @ 80F83F8
+	thumb_func_start StorytellerSetup
+StorytellerSetup: @ 80F83F8
 	push {r4,lr}
 	ldr r0, _080F8424 @ =gSaveBlock1 + 0x2D94
 	movs r2, 0
@@ -850,7 +850,7 @@ _080F840C:
 	bx r0
 	.align 2, 0
 _080F8424: .4byte gSaveBlock1 + 0x2D94
-	thumb_func_end sub_80F83F8
+	thumb_func_end StorytellerSetup
 
 	thumb_func_start sub_80F8428
 sub_80F8428: @ 80F8428
