@@ -123,12 +123,6 @@ gUnknown_03000748: @ 3000748
 	.space 0x4
 
 	.include "src/field_specials.o"
-
-@ learn_move
-
-@	.align 2
-@sLearnMoveStruct: @ 30007B0
-@	.space 0x4
     .include "src/learn_move.o"
 	.include "src/player_pc.o"
 	.include "asm/m4a_1.o"
