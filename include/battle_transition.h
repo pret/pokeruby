@@ -18,14 +18,14 @@ enum // TRANSITION_MUGSHOT
 
 #define MUGSHOTS_NO             5
 
-// credits for the names go to Dyskinesia, Tetrable and Dizzy Egg
+// credits for the names go to Dyskinesia and Tetrable
 // names are naturally subject to change
 
 #define B_TRANSITION_BLUR                   0
-#define B_TRANSITION_SWEARL                 1
+#define B_TRANSITION_SWIRL                  1
 #define B_TRANSITION_SHUFFLE                2
 #define B_TRANSITION_BIG_POKEBALL           3
-#define B_TRANSITION_POKEBALLS_TRAIL         4
+#define B_TRANSITION_POKEBALLS_TRAIL        4
 #define B_TRANSITION_CLOCKWISE_BLACKFADE    5
 #define B_TRANSITION_RIPPLE                 6
 #define B_TRANSITION_WAVE                   7
