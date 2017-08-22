@@ -15,11 +15,12 @@
 
 void sub_807DE10(void);
 void dp12_8087EA4(void);
-void sub_811C90C(struct Sprite* sprite);
 
 extern u8 ewram[];
-extern s16 gUnknown_03005560[];
+extern u16 gUnknown_03005560[];
 extern u16 gUnknown_03004DE0[][0x3C0];
+
+extern const struct OamData gFieldOamData_32x32;
 
 struct TransitionData
 {
@@ -32,15 +33,15 @@ struct TransitionData
     u16 field_C;
     u16 BLDCNT;
     u16 BLDALPHA;
-    u16 field_12;
+    u16 BLDY;
     s16 field_14;
     s16 field_16;
     s16 field_18;
     s16 field_1A;
     s16 field_1C;
-    s16 field_1E;
+    s16 field_1E; // unused
     s16 field_20;
-    s16 field_22;
+    s16 field_22; // unused
     s16 data[11];
 };
 
@@ -171,16 +172,18 @@ static void sub_811D764(u16* a0, s16 a1, s16 a2, s16 a3);
 static void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
 static bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2);
 static void sub_811CFD0(struct Sprite* sprite);
+static void sub_811B720(struct Sprite* sprite);
+static void sub_811C90C(struct Sprite* sprite);
 
 // const data
 
-static const u32 gUnknown_083FBB88[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
-static const u32 gUnknown_083FC108[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
-const u32 gSpriteImage_83FC148[] = INCBIN_U32("graphics/battle_transitions/pokeball.4bpp");
-static const u32 gUnknown_083FC348[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-const u32 gSpriteImage_83FC528[] = INCBIN_U32("graphics/battle_transitions/unused_brendan.4bpp");
-const u32 gSpriteImage_83FCD28[] = INCBIN_U32("graphics/battle_transitions/unused_lass.4bpp");
-const u32 gUnknown_083FD528[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
+static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
+static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
+static const u8 sSpriteImage_83FC148[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
+static const u32 sUnknown_083FC348[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
+static const u8 sSpriteImage_83FC528[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
+static const u8 sSpriteImage_83FCD28[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
+static const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
 
 static struct TransitionData * const sTransitionStructPtr = &TRANSITION_STRUCT;
 
@@ -254,9 +257,9 @@ static const TransitionState sPhase2_Transition4_Funcs[] =
 	&Phase2_Transition4_Func3
 };
 
-static const s16 gUnknown_083FD7E4[2] = {-16, 256};
-static const s16 gUnknown_083FD7E8[5] = {0, 32, 64, 18, 48};
-static const s16 gUnknown_083FD7F2[2] = {8, -8};
+static const s16 sUnknown_083FD7E4[2] = {-16, 256};
+static const s16 sUnknown_083FD7E8[5] = {0, 32, 64, 18, 48};
+static const s16 sUnknown_083FD7F2[2] = {8, -8};
 
 static const TransitionState sPhase2_Transition5_Funcs[] =
 {
@@ -314,7 +317,7 @@ static const s16 sMugshotsOpponentCoords[MUGSHOTS_NO][2] =
     {0,     7},
 };
 
-static const TransitionSpriteCallback gUnknown_083FD880[] =
+static const TransitionSpriteCallback sUnknown_083FD880[] =
 {
     &sub_811C934,
 	&sub_811C938,
@@ -325,8 +328,8 @@ static const TransitionSpriteCallback gUnknown_083FD880[] =
 	&sub_811C934
 };
 
-static const s16 gUnknown_083FD89C[2] = {12, -12};
-static const s16 gUnknown_083FD8A0[2] = {-1, 1};
+static const s16 sUnknown_083FD89C[2] = {12, -12};
+static const s16 sUnknown_083FD8A0[2] = {-1, 1};
 
 static const TransitionState sPhase2_Transition8_Funcs[] =
 {
@@ -344,7 +347,7 @@ static const TransitionState sPhase2_Transition9_Funcs[] =
 	&Phase2_Transition9_Func5
 };
 
-static const s16 gUnknown_083FD8C4[8] = {0, 20, 15, 40, 10, 25, 35, 5};
+static const s16 sUnknown_083FD8C4[8] = {0, 20, 15, 40, 10, 25, 35, 5};
 
 static const TransitionState sPhase2_Transition10_Funcs[] =
 {
@@ -362,7 +365,7 @@ static const TransitionState sPhase2_Transition11_Funcs[] =
 	&Phase2_Transition11_Func5
 };
 
-static const s16 gUnknown_083FD8F4[][5] =
+static const s16 sUnknown_083FD8F4[][5] =
 {
     {56,    0,      0,      160,    0},
     {104,   160,    240,    88,     1},
@@ -373,7 +376,7 @@ static const s16 gUnknown_083FD8F4[][5] =
     {168,   160,    48,     0,      1},
 };
 
-static const s16 gUnknown_083FD93A[] = {8, 4, 2, 1, 1, 1, 0};
+static const s16 sUnknown_083FD93A[] = {8, 4, 2, 1, 1, 1, 0};
 
 static const TransitionState sPhase1_TransitionAll_Funcs[] =
 {
@@ -381,12 +384,149 @@ static const TransitionState sPhase1_TransitionAll_Funcs[] =
     &Phase1_TransitionAll_Func2
 };
 
-extern const u16 gFieldEffectObjectPalette10[];
-extern const u16 gUnknown_083FDB44[];
-extern const struct SpriteTemplate gSpriteTemplate_83FD98C;
-extern const u16 gUnknown_083FDFF4[];
-extern const u8 * const sOpponentMugshotsPals[];
-extern const u8 * const sPlayerMugshotsPals[2];
+static const struct SpriteFrameImage sSpriteImageTable_83FD950[] =
+{
+    sSpriteImage_83FC148, 0x200
+};
+
+static const union AnimCmd sSpriteAnim_83FD958[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_83FD960[] =
+{
+    sSpriteAnim_83FD958
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_83FD964[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -4, 1),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_83FD974[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 4, 1),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_83FD984[] =
+{
+    sSpriteAffineAnim_83FD964,
+    sSpriteAffineAnim_83FD974
+};
+
+static const struct SpriteTemplate sSpriteTemplate_83FD98C =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4105,
+    .oam = &gFieldOamData_32x32,
+    .anims = sSpriteAnimTable_83FD960,
+    .images = sSpriteImageTable_83FD950,
+    .affineAnims = sSpriteAffineAnimTable_83FD984,
+    .callback = sub_811B720
+};
+
+static const struct OamData gOamData_83FD9A4 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_83FD9AC[] =
+{
+    sSpriteImage_83FC528, 0x800
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_83FD9B4[] =
+{
+    sSpriteImage_83FCD28, 0x800
+};
+
+static const union AnimCmd sSpriteAnim_83FD9BC[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_83FD9C4[] =
+{
+    sSpriteAnim_83FD9BC
+};
+
+static const struct SpriteTemplate sSpriteTemplate_83FD9C8 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4106,
+    .oam = &gOamData_83FD9A4,
+    .anims = sSpriteAnimTable_83FD9C4,
+    .images = sSpriteImageTable_83FD9AC,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_811C90C
+};
+
+static const struct SpriteTemplate sSpriteTemplate_83FD9E0 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4106,
+    .oam = &gOamData_83FD9A4,
+    .anims = sSpriteAnimTable_83FD9C4,
+    .images = sSpriteImageTable_83FD9B4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_811C90C
+};
+
+static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/field_effect_objects/palettes/10.gbapal");
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
+{
+    gFieldEffectObjectPalette10, 0x1009
+};
+
+static const u16 sMugshotPal_Sydney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
+static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
+static const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
+static const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
+static const u16 sMugshotPal_Steven[] = INCBIN_U16("graphics/battle_transitions/steven_bg.gbapal");
+static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
+static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+
+static const u16 * const sOpponentMugshotsPals[MUGSHOTS_NO] =
+{
+    sMugshotPal_Sydney,
+	sMugshotPal_Phoebe,
+	sMugshotPal_Glacia,
+	sMugshotPal_Drake,
+	sMugshotPal_Steven
+};
+
+static const u16 * const sPlayerMugshotsPals[2] =
+{
+    sMugshotPal_Brendan,
+    sMugshotPal_May
+};
+
+static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
+static const struct SpritePalette sSpritePalette_UnusedTrainer =
+{
+    sUnusedTrainerPalette, 0x100A
+};
+
+static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
+static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");
 
 // actual code starts here
 
@@ -683,7 +823,7 @@ static bool8 Phase2_Transition3_Func1(struct Task* task)
 
     sub_811D6A8(&dst1, & dst2);
     CpuFill16(0, dst1, 0x800);
-    CpuSet(gUnknown_083FBB88, dst2, 0x2C0);
+    CpuSet(sBigPokeball_Tileset, dst2, 0x2C0);
     LoadPalette(gFieldEffectObjectPalette10, 240, 32);
 
     task->tState++;
@@ -694,15 +834,15 @@ static bool8 Phase2_Transition3_Func2(struct Task* task)
 {
     s16 i, j;
     u16 *dst1, *dst2;
-    const u16* var;
+    const u16* BigPokeballMap;
 
-    var = gUnknown_083FDB44;
+    BigPokeballMap = sBigPokeball_Tilemap;
     sub_811D6A8(&dst1, &dst2);
     for (i = 0; i < 20; i++)
     {
-        for (j = 0; j < 30; j++, var++)
+        for (j = 0; j < 30; j++, BigPokeballMap++)
         {
-            dst1[i * 32 + j] = *var | 0xF000;
+            dst1[i * 32 + j] = *BigPokeballMap | 0xF000;
         }
     }
     sub_811D6E8(gUnknown_03004DE0[0], 0, task->data[4], 132, task->data[5], 160);
@@ -834,7 +974,7 @@ static bool8 Phase2_Transition4_Func1(struct Task* task)
     u16 *dst1, *dst2;
 
     sub_811D6A8(&dst1, &dst2);
-    CpuSet(gUnknown_083FC108, dst2, 0x20);
+    CpuSet(sPokeballTrail_Tileset, dst2, 0x20);
     CpuFill32(0, dst1, 0x800);
     LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
 
@@ -849,8 +989,8 @@ static bool8 Phase2_Transition4_Func2(struct Task* task)
     s16 arr0[2];
     s16 arr1[5];
 
-    memcpy(arr0, gUnknown_083FD7E4, sizeof(gUnknown_083FD7E4));
-    memcpy(arr1, gUnknown_083FD7E8, sizeof(gUnknown_083FD7E8));
+    memcpy(arr0, sUnknown_083FD7E4, sizeof(sUnknown_083FD7E4));
+    memcpy(arr1, sUnknown_083FD7E8, sizeof(sUnknown_083FD7E8));
     rand = Random() & 1;
     for (i = 0; i <= 4; i++, rand ^= 1)
     {
@@ -877,7 +1017,7 @@ static bool8 Phase2_Transition4_Func3(struct Task* task)
 
 bool8 FldEff_Pokeball(void)
 {
-    u8 spriteID = CreateSpriteAtEnd(&gSpriteTemplate_83FD98C, gUnknown_0202FF84[0], gUnknown_0202FF84[1], 0);
+    u8 spriteID = CreateSpriteAtEnd(&sSpriteTemplate_83FD98C, gUnknown_0202FF84[0], gUnknown_0202FF84[1], 0);
     gSprites[spriteID].oam.priority = 0;
     gSprites[spriteID].oam.affineMode = 1;
     gSprites[spriteID].data0 = gUnknown_0202FF84[2];
@@ -894,11 +1034,11 @@ bool8 FldEff_Pokeball(void)
     ptr[index] = toStore;                                               \
 }
 
-void sub_811B720(struct Sprite* sprite)
+static void sub_811B720(struct Sprite* sprite)
 {
     s16 arr0[2];
 
-    memcpy(arr0, gUnknown_083FD7F2, sizeof(gUnknown_083FD7F2));
+    memcpy(arr0, sUnknown_083FD7F2, sizeof(sUnknown_083FD7F2));
     if (sprite->data1 != 0)
         sprite->data1--;
     else
@@ -1348,19 +1488,19 @@ static bool8 Phase2_Mugshot_Func2(struct Task* task)
 {
     s16 i, j;
     u16 *dst1, *dst2;
-    const u16* var;
+    const u16* MugshotsMap;
 
-    var = gUnknown_083FDFF4;
+    MugshotsMap = sMugshotsTilemap;
     sub_811D6A8(&dst1, &dst2);
-    CpuSet(gUnknown_083FC348, dst2, 0xF0);
+    CpuSet(sUnknown_083FC348, dst2, 0xF0);
     LoadPalette(sOpponentMugshotsPals[task->tMugshotID], 0xF0, 0x20);
     LoadPalette(sPlayerMugshotsPals[gSaveBlock2.playerGender], 0xFA, 0xC);
 
     for (i = 0; i < 20; i++)
     {
-        for (j = 0; j < 32; j++, var++)
+        for (j = 0; j < 32; j++, MugshotsMap++)
         {
-            dst1[i * 32 + j] = *var | 0xF000;
+            dst1[i * 32 + j] = *MugshotsMap | 0xF000;
         }
     }
 
@@ -1622,9 +1762,9 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task* task)
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 0x200, 0);
 }
 
-void sub_811C90C(struct Sprite* sprite)
+static void sub_811C90C(struct Sprite* sprite)
 {
-    while (gUnknown_083FD880[sprite->data0](sprite));
+    while (sUnknown_083FD880[sprite->data0](sprite));
 }
 
 static bool8 sub_811C934(struct Sprite* sprite)
@@ -1637,8 +1777,8 @@ static bool8 sub_811C938(struct Sprite* sprite)
     s16 arr0[2];
     s16 arr1[2];
 
-    memcpy(arr0, gUnknown_083FD89C, sizeof(gUnknown_083FD89C));
-    memcpy(arr1, gUnknown_083FD8A0, sizeof(gUnknown_083FD8A0));
+    memcpy(arr0, sUnknown_083FD89C, sizeof(sUnknown_083FD89C));
+    memcpy(arr1, sUnknown_083FD8A0, sizeof(sUnknown_083FD8A0));
 
     sprite->data0++;
     sprite->data1 = arr0[sprite->data7];
@@ -1809,7 +1949,7 @@ static bool8 Phase2_Transition9_Func1(struct Task* task)
     dp12_8087EA4();
 
     TRANSITION_STRUCT.BLDCNT = 0xBF;
-    TRANSITION_STRUCT.field_12 = 0;
+    TRANSITION_STRUCT.BLDY = 0;
     TRANSITION_STRUCT.WININ = 0x1E;
     TRANSITION_STRUCT.WINOUT = 0x3F;
     TRANSITION_STRUCT.WIN0V = 0xA0;
@@ -1836,7 +1976,7 @@ static bool8 Phase2_Transition9_Func2(struct Task* task)
     s16 arr1[8];
     struct Sprite* sprite;
 
-    memcpy(arr1, gUnknown_083FD8C4, sizeof(gUnknown_083FD8C4));
+    memcpy(arr1, sUnknown_083FD8C4, sizeof(sUnknown_083FD8C4));
     for (i = 0, posY = 0; i < 8; i++, posY += 0x14)
     {
         sprite = &gSprites[CreateInvisibleSprite(sub_811CFD0)];
@@ -1870,7 +2010,7 @@ static bool8 Phase2_Transition9_Func4(struct Task* task)
     SetHBlankCallback(0);
 
     TRANSITION_STRUCT.field_6 = 0xF0;
-    TRANSITION_STRUCT.field_12 = 0;
+    TRANSITION_STRUCT.BLDY = 0;
     TRANSITION_STRUCT.BLDCNT = 0xFF;
     TRANSITION_STRUCT.WININ = 0x3F;
 
@@ -1882,7 +2022,7 @@ static bool8 Phase2_Transition9_Func4(struct Task* task)
 
 static bool8 Phase2_Transition9_Func5(struct Task* task)
 {
-   if (++TRANSITION_STRUCT.field_12 > 16)
+   if (++TRANSITION_STRUCT.BLDY > 16)
    {
        sub_811D6D4();
        DestroyTask(FindTaskIdByFunc(Phase2Task_Transition9));
@@ -1906,7 +2046,7 @@ static void VBlankCB0_Phase2_Transition9(void)
 static void VBlankCB1_Phase2_Transition9(void)
 {
     VBlankCB_BattleTransition();
-    REG_BLDY = TRANSITION_STRUCT.field_12;
+    REG_BLDY = TRANSITION_STRUCT.BLDY;
     REG_BLDCNT = TRANSITION_STRUCT.BLDCNT;
     REG_WININ = TRANSITION_STRUCT.WININ;
     REG_WINOUT = TRANSITION_STRUCT.WINOUT;
@@ -1972,7 +2112,7 @@ static bool8 Phase2_Transition10_Func1(struct Task* task)
     u16 *dst1, *dst2;
 
     sub_811D6A8(&dst1, &dst2);
-    CpuSet(gUnknown_083FD528, dst2, 0x10);
+    CpuSet(sShrinkingBoxTileset, dst2, 0x10);
     CpuFill16(0xF000, dst1, 0x800);
     LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
 
@@ -1989,7 +2129,7 @@ static bool8 Phase2_Transition10_Func2(struct Task* task)
         sub_811D690(&dst1);
         task->data[1] = 3;
         task->data[2]++;
-        CpuSet(gUnknown_083FD528 + (task->data[2] * 8), dst1, 0x10);
+        CpuSet(sShrinkingBoxTileset + (task->data[2] * 8), dst1, 0x10);
         if (task->data[2] > 0xD)
         {
             task->tState++;
@@ -2042,12 +2182,12 @@ static bool8 Phase2_Transition11_Func1(struct Task* task)
 static bool8 Phase2_Transition11_Func2(struct Task* task)
 {
     sub_811D8FC(TRANSITION_STRUCT.data,
-                gUnknown_083FD8F4[task->data[1]][0],
-                gUnknown_083FD8F4[task->data[1]][1],
-                gUnknown_083FD8F4[task->data[1]][2],
-                gUnknown_083FD8F4[task->data[1]][3],
+                sUnknown_083FD8F4[task->data[1]][0],
+                sUnknown_083FD8F4[task->data[1]][1],
+                sUnknown_083FD8F4[task->data[1]][2],
+                sUnknown_083FD8F4[task->data[1]][3],
                 1, 1);
-    task->data[2] = gUnknown_083FD8F4[task->data[1]][4];
+    task->data[2] = sUnknown_083FD8F4[task->data[1]][4];
     task->tState++;
     return TRUE;
 }
@@ -2096,7 +2236,7 @@ static bool8 Phase2_Transition11_Func4(struct Task* task)
     if (++task->data[1] < 7)
     {
         task->tState++;
-        task->data[3] = gUnknown_083FD93A[task->data[1] - 1];
+        task->data[3] = sUnknown_083FD93A[task->data[1] - 1];
         return TRUE;
     }
     else
@@ -2305,66 +2445,66 @@ static void sub_811D764(u16* array, s16 a1, s16 a2, s16 a3)
     }
 }
 
-static void sub_811D8FC(s16* a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
+static void sub_811D8FC(s16* data, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
 {
-    a0[0] = a1;
-    a0[1] = a2;
-    a0[2] = a1;
-    a0[3] = a2;
-    a0[4] = a3;
-    a0[5] = a4;
-    a0[6] = a5;
-    a0[7] = a6;
-    a0[8] = a3 - a1;
-    if (a0[8] < 0)
+    data[0] = a1;
+    data[1] = a2;
+    data[2] = a1;
+    data[3] = a2;
+    data[4] = a3;
+    data[5] = a4;
+    data[6] = a5;
+    data[7] = a6;
+    data[8] = a3 - a1;
+    if (data[8] < 0)
     {
-        a0[8] = -a0[8];
-        a0[6] = -a5;
+        data[8] = -data[8];
+        data[6] = -a5;
     }
-    a0[9] = a4 - a2;
-    if (a0[9] < 0)
+    data[9] = a4 - a2;
+    if (data[9] < 0)
     {
-        a0[9] = -a0[9];
-        a0[7] = -a6;
+        data[9] = -data[9];
+        data[7] = -a6;
     }
-    a0[10] = 0;
+    data[10] = 0;
 }
 
-static bool8 sub_811D978(s16* a0, bool8 a1, bool8 a2)
+static bool8 sub_811D978(s16* data, bool8 a1, bool8 a2)
 {
     u8 var;
-    if (a0[8] > a0[9])
+    if (data[8] > data[9])
     {
-        a0[2] += a0[6];
-        a0[10] += a0[9];
-        if (a0[10] > a0[8])
+        data[2] += data[6];
+        data[10] += data[9];
+        if (data[10] > data[8])
         {
-            a0[3] += a0[7];
-            a0[10] -= a0[8];
+            data[3] += data[7];
+            data[10] -= data[8];
         }
     }
     else
     {
-        a0[3] += a0[7];
-        a0[10] += a0[8];
-        if (a0[10] > a0[9])
+        data[3] += data[7];
+        data[10] += data[8];
+        if (data[10] > data[9])
         {
-            a0[2] += a0[6];
-            a0[10] -= a0[9];
+            data[2] += data[6];
+            data[10] -= data[9];
         }
     }
     var = 0;
-    if ((a0[6] > 0 && a0[2] >= a0[4]) || (a0[6] < 0 && a0[2] <= a0[4]))
+    if ((data[6] > 0 && data[2] >= data[4]) || (data[6] < 0 && data[2] <= data[4]))
     {
         var++;
         if (a1)
-            a0[2] = a0[4];
+            data[2] = data[4];
     }
-    if ((a0[7] > 0 && a0[3] >= a0[5]) || (a0[7] < 0 && a0[3] <= a0[5]))
+    if ((data[7] > 0 && data[3] >= data[5]) || (data[7] < 0 && data[3] <= data[5]))
     {
         var++;
         if (a2)
-            a0[3] = a0[5];
+            data[3] = data[5];
     }
     if (var == 2)
         return TRUE;

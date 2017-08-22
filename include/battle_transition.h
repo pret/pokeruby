@@ -25,7 +25,7 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_SWEARL                 1
 #define B_TRANSITION_SHUFFLE                2
 #define B_TRANSITION_BIG_POKEBALL           3
-#define B_TRANSITION_POKEBALLS_WIPEOUT      4
+#define B_TRANSITION_POKEBALLS_TRAIL         4
 #define B_TRANSITION_CLOCKWISE_BLACKFADE    5
 #define B_TRANSITION_RIPPLE                 6
 #define B_TRANSITION_WAVE                   7
