@@ -373,7 +373,7 @@ static const u8 gUnknown_08216303[] = {32, 224, 96, 160, 0};
 
 static const TaskFunc gUnknown_08216308[] =
 {
-    &sub_804F8C8, &sub_804F9F4, &sub_804FB1C
+    sub_804F8C8, sub_804F9F4, sub_804FB1C
 };
 
 static const struct OamData sOamData_8216314 =
@@ -401,13 +401,13 @@ static const union AnimCmd sSpriteAnim_821631C[] =
 
 static const union AnimCmd sSpriteAnim_8216324[] =
 {
-    ANIMCMD_FRAME(16, 5, 0, 1),
+    ANIMCMD_FRAME(16, 5, .vFlip = TRUE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_821632C[] =
 {
-    ANIMCMD_FRAME(16, 5, 1, 0),
+    ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
     ANIMCMD_END
 };
 
@@ -428,19 +428,19 @@ static const union AnimCmd sSpriteAnim_821633C[] =
 
 static const union AnimCmd sSpriteAnim_8216350[] =
 {
-    ANIMCMD_FRAME(48, 2, 0, 1),
-    ANIMCMD_FRAME(32, 5, 0, 1),
-    ANIMCMD_FRAME(48, 3, 0, 1),
-    ANIMCMD_FRAME(16, 5, 0, 1),
+    ANIMCMD_FRAME(48, 2, .vFlip = TRUE),
+    ANIMCMD_FRAME(32, 5, .vFlip = TRUE),
+    ANIMCMD_FRAME(48, 3, .vFlip = TRUE),
+    ANIMCMD_FRAME(16, 5, .vFlip = TRUE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_8216364[] =
 {
-    ANIMCMD_FRAME(48, 2, 1, 0),
-    ANIMCMD_FRAME(32, 5, 1, 0),
-    ANIMCMD_FRAME(48, 3, 1, 0),
-    ANIMCMD_FRAME(16, 5, 1, 0),
+    ANIMCMD_FRAME(48, 2, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(48, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
     ANIMCMD_END
 };
 
@@ -461,13 +461,13 @@ static const union AnimCmd sSpriteAnim_821638C[] =
 
 static const union AnimCmd sSpriteAnim_8216394[] =
 {
-    ANIMCMD_FRAME(0, 5, 0, 1),
+    ANIMCMD_FRAME(0, 5, .vFlip = TRUE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_821639C[] =
 {
-    ANIMCMD_FRAME(0, 5, 1, 0),
+    ANIMCMD_FRAME(0, 5, .hFlip = TRUE),
     ANIMCMD_END
 };
 
@@ -917,9 +917,9 @@ static bool8 sub_804E2EC(void)
         LoadSpritePalette(&gUnknown_082163EC);
         LoadSpritePalette(&gUnknown_082163E4);
         gBerryBlenderData->field_1 = 0;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 static void sub_804E4FC(void)
@@ -1031,7 +1031,7 @@ void sub_804E738(struct Sprite* sprite)
         if (++sprite->data5 > 3)
             DestroySprite(sprite);
         else
-            PlaySE(116);
+            PlaySE(SE_TB_KARA);
     }
     sprite->pos1.x = sprite->data1;
     sprite->pos1.y = sprite->data2;
@@ -1306,7 +1306,7 @@ static void sub_804E9F8(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(403);
+        PlayBGM(BGM_CYCLING);
         break;
     case 100:
         MenuDrawTextWindow(0, 13, 29, 19);
@@ -1512,7 +1512,7 @@ static void sub_804F378(void)
     case 13:
         gBerryBlenderData->field_0++;
         sub_804F238();
-        PlaySE(43);
+        PlaySE(SE_RU_HYUU);
         sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 14:
@@ -1526,7 +1526,7 @@ static void sub_804F378(void)
             gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]];
             REG_BG2CNT = 0x4882;
             gBerryBlenderData->framesToWait = 0;
-            PlaySE(52);
+            PlaySE(SE_TRACK_DOOR);;
             sub_804F2A8();
         }
         sub_8051414(&gBerryBlenderData->field_168);
@@ -1568,8 +1568,8 @@ static void sub_804F378(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(403);
-        PlaySE(53);
+        PlayBGM(BGM_CYCLING);
+        PlaySE(SE_MOTER);
         Blender_ControlHitPitch();
         break;
     }
@@ -1760,17 +1760,17 @@ static void sub_804FC48(u16 a0, u8 a1)
     {
         StartSpriteAnim(&gSprites[spriteID], 2);
         gSprites[spriteID].callback = sub_8051684;
-        PlaySE(40);
+        PlaySE(SE_RU_GASHIN);
     }
     else if (a0 == 0x5432)
     {
         StartSpriteAnim(&gSprites[spriteID], 0);
-        PlaySE(31);
+        PlaySE(SE_SEIKAI);
     }
     else if (a0 == 0x2345)
     {
         StartSpriteAnim(&gSprites[spriteID], 1);
-        PlaySE(32);
+        PlaySE(SE_HAZURE);
     }
     sub_805156C();
 }
@@ -1926,19 +1926,20 @@ static void sub_80501FC(void)
     UpdatePaletteFade();
 }
 
-#define ARE_FLAVOURS_SAME(flavours1, flavours2)(((*(u32*)(&flavours1[-1]) & 0xFFFFFF00) == (*(u32*)(&flavours2[-1]) & 0xFFFFFF00)&& (*(u32*)(&flavours1[3]) & 0xFFFFFF) == (*(u32*)(&flavours2[3]) & 0xFFFFFF)))
-
 static bool8 sub_80502A4(struct BlenderBerry* berries, u8 index1, u8 index2)
 {
     if (berries[index1].itemID != berries[index2].itemID
-        || (StringCompare(berries[index1].name, berries[index2].name) == 0
-            && ARE_FLAVOURS_SAME(berries[index1].flavours, berries[index2].flavours)))
-        return 1;
+     || (StringCompare(berries[index1].name, berries[index2].name) == 0
+      && (berries[index1].flavours[0] == berries[index2].flavours[0]
+       && berries[index1].flavours[1] == berries[index2].flavours[1]
+       && berries[index1].flavours[2] == berries[index2].flavours[2]
+       && berries[index1].flavours[3] == berries[index2].flavours[3]
+       && berries[index1].flavours[4] == berries[index2].flavours[4]
+       && berries[index1].smoothness == berries[index2].smoothness)))
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
-
-#undef ARE_FLAVOURS_SAME
 
 u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersNo, u8 a3)
 {
@@ -2448,7 +2449,7 @@ static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct
 static void sub_8050760(void)
 {
     u32 frames = (u16)(gBerryBlenderData->gameFrameTime);
-    u32 max_RPM = (u16)(gBerryBlenderData->max_RPM);
+    u16 max_RPM = gBerryBlenderData->max_RPM;
     s16 var = 0;
 
     if (frames < 900)
@@ -2466,23 +2467,23 @@ static void sub_8050760(void)
     var = 0;
     if (max_RPM <= 64)
     {
-        if ((u16)(max_RPM - 50) < 50)
+        if (max_RPM >= 50 && max_RPM < 100)
             var = -1;
-        else if ((u16)(max_RPM - 100) < 50)
+        else if (max_RPM >= 100 && max_RPM < 150)
             var = -2;
-        else if ((u16)(max_RPM - 150) < 50)
+        else if (max_RPM >= 150 && max_RPM < 200)
             var = -3;
-        else if ((u16)(max_RPM - 200) < 50)
+        else if (max_RPM >= 200 && max_RPM < 250)
             var = -4;
-        else if ((u16)(max_RPM - 250) < 50)
+        else if (max_RPM >= 250 && max_RPM < 300)
             var = -5;
-        else if ((u16)(max_RPM - 350) < 50)
+        else if (max_RPM >= 350 && max_RPM < 400)
             var = -6;
-        else if ((u16)(max_RPM - 400) < 50)
+        else if (max_RPM >= 400 && max_RPM < 450)
             var = -7;
-        else if ((u16)(max_RPM - 500) < 50)
+        else if (max_RPM >= 500 && max_RPM < 550)
             var = -8;
-        else if ((u16)(max_RPM - 550) < 50)
+        else if (max_RPM >= 550 && max_RPM < 600)
             var = -9;
         else if (max_RPM >= 600)
             var = -10;
@@ -2718,11 +2719,11 @@ bool8 sub_8050CE8(void)
         if (++gBerryBlenderData->framesToWait > 5)
         {
             gSoftResetDisabled = FALSE;
-            return 1;
+            return TRUE;
         }
         break;
     }
-    return 0;
+    return FALSE;
 }
 
 static void sub_8050E30(void)
@@ -3292,10 +3293,10 @@ static bool8 sub_8051B8C(void)
     {
         gBerryBlenderData->field_144 = 0;
         gBerryBlenderData->field_146 = 0;
-        return 1;
+        return TRUE;
     }
     else
-        return 0;
+        return FALSE;
 }
 
 static void sub_8051C04(struct Sprite* sprite)
@@ -3438,11 +3439,11 @@ static bool8 Blender_PrintBlendingResults(void)
         if (MenuUpdateWindowText())
         {
             Blender_TrySettingRecord();
-            return 1;
+            return TRUE;
         }
         break;
     }
-    return 0;
+    return FALSE;
 }
 
 static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
@@ -3592,9 +3593,9 @@ static bool8 Blender_PrintBlendingRanking(void)
         break;
     case 6:
         gBerryBlenderData->field_0 = 0;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 // debug menu goes here
