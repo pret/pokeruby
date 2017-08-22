@@ -5373,7 +5373,7 @@ static void atk23_getexp(void)
 
                 if (GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_HP))
                 {
-					s16 stringID;
+                    s16 stringID;
                     if (BATTLE_STRUCT->sentInPokes & 1)
                         gBattleMoveDamage = *exp;
                     else
