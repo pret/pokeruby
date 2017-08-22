@@ -74,7 +74,6 @@ SECTIONS {
         src/daycare.o(.text);
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
-        asm/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         src/smokescreen.o(.text);
         src/pokeball.o(.text);
@@ -84,7 +83,7 @@ SECTIONS {
         asm/trade.o(.text.sub_804A9F4);
         src/trade.o(.text.sub_804DAD4);
         asm/trade.o(.text.sub_804DB2C);
-        asm/berry_blender.o(.text);
+        src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/rom4.o(.text);
@@ -230,7 +229,7 @@ SECTIONS {
         src/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         src/battle_811DA74.o(.text);
-        asm/battle_message.o(.text);
+        src/battle_message.o(.text);
         src/choose_party.o(.text);
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
@@ -245,7 +244,7 @@ SECTIONS {
         asm/battle_anim_81258BC.o(.text_812BBFC);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);
-        asm/learn_move.o(.text);
+        src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
@@ -339,11 +338,11 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         data/daycare.o(.rodata);
-        data/egg_hatch.o(.rodata);
+        src/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
         data/trade.o(.rodata);
-        data/berry_blender.o(.rodata);
+        src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
         data/tilesets.o(.rodata);
@@ -455,7 +454,7 @@ SECTIONS {
         data/contest_ai.o(.rodata);
         data/battle_anim_81258BC.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
-        data/learn_move.o(.rodata);
+        src/learn_move.o(.rodata);
         src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
