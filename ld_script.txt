@@ -121,7 +121,6 @@ SECTIONS {
         src/rom_8077ABC.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
-        asm/reshow_battle_screen.o(.text);
         src/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
         src/field_weather.o(.text);

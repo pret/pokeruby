@@ -607,12 +607,12 @@ void sub_8031F24(void)
     s32 i;
 
     for (i = 0; i < gNoOfAllBanks; i++)
-        ewram17800[i].unk0_0 = gSprites[gObjectBankIDs[i]].invisible;
+        ewram17800[i].invisible = gSprites[gObjectBankIDs[i]].invisible;
 }
 
 void sub_8031F88(u8 a)
 {
-    ewram17800[a].unk0_0 = gSprites[gObjectBankIDs[a]].invisible;
+    ewram17800[a].invisible = gSprites[gObjectBankIDs[a]].invisible;
 }
 
 void sub_8031FC4(u8 bank1, u8 bank2, bool8 c)

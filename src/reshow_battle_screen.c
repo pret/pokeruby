@@ -5,7 +5,9 @@
 #include "unknown_task.h"
 #include "text.h"
 #include "rom_8077ABC.h"
+#include "data2.h"
 
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
 extern u16 gUnknown_03004280;
 extern u16 gUnknown_03004288;
@@ -22,6 +24,8 @@ extern u16 gBattlePartyID[4];
 extern u8 gNoOfAllBanks;
 extern u16 gBattleTypeFlags;
 extern u8 gObjectBankIDs[4];
+extern u8 gBattleMonForms[4];
+extern u8 gHealthboxIDs[4];
 
 bool8 sub_800E414(u8 a0);
 bool8 sub_8031C30(u8 a0);
@@ -35,6 +39,13 @@ void BattleLoadSubstituteSprite(u8 bank, u8 b);
 void LoadPlayerTrainerBankSprite(u16 a0, u8 bank);
 u8 sub_8077F7C(u8 bank);
 u8 sub_8077F68(u8 bank);
+void nullsub_11(u8 healthboxID, u8 a1);
+void sub_8043DB0(u8 bank);
+u8 battle_make_oam_normal_battle(u8 bank);
+u8 battle_make_oam_safari_battle(void);
+void sub_8045A5C(u8 healthboxID, struct Pokemon*, u8);
+void sub_8043F44(u8 bank);
+void sub_8043DFC(u8 healthboxID);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
@@ -239,24 +250,93 @@ void sub_807B184(u8 bank)
 {
     if (bank < gNoOfAllBanks)
     {
-        u16 species;
-        s16 posX, posY;
-        u8 subpriority;
+        u8 posY;
 
         if (ewram17800[bank].substituteSprite)
-            posY = sub_8077F7C();
+            posY = sub_8077F7C(bank);
         else
-            posY = sub_8077F68();
+            posY = sub_8077F68(bank);
         if (GetBankSide(bank))
         {
-            if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP))
-            {
-                species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
-                GetMonSpriteTemplate_803C56C(species, GetBankIdentity(bank));
-                posX = sub_8077ABC(bank);
-                subpriority = sub_8079E90(bank);
-                gObjectBankIDs[] = todo;
-            }
+            if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+                return;
+            GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
+            gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
+            gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
+            gSprites[gObjectBankIDs[bank]].data0 = bank;
+            gSprites[gObjectBankIDs[bank]].data2 = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
+        }
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
+        {
+            GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(0));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+                                                (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
+                                                 sub_8079E90(0));
+            gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
+            gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
+            gSprites[gObjectBankIDs[bank]].data0 = bank;
+        }
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
+        {
+            GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(0));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+                                                (8 - gTrainerBackPicCoords[2].coords) * 4 + 80,
+                                                 sub_8079E90(0));
+            gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
+            gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
+            gSprites[gObjectBankIDs[bank]].data0 = bank;
+        }
+        else
+        {
+            if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+                return;
+            GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
+            gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
+            gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
+            gSprites[gObjectBankIDs[bank]].data0 = bank;
+            gSprites[gObjectBankIDs[bank]].data2 = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
+        }
+        gSprites[gObjectBankIDs[bank]].invisible = ewram17800[bank].invisible;
+    }
+}
+
+void sub_807B508(u8 bank)
+{
+    if (bank < gNoOfAllBanks)
+    {
+        u8 healthboxID;
+        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
+            healthboxID = battle_make_oam_safari_battle();
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
+            return;
+        else
+            healthboxID = battle_make_oam_normal_battle(bank);
+        gHealthboxIDs[bank] = healthboxID;
+        sub_8043F44(bank);
+        sub_8043DFC(healthboxID);
+        if (GetBankSide(bank))
+            sub_8045A5C(gHealthboxIDs[bank], &gEnemyParty[gBattlePartyID[bank]], 0);
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlePartyID[bank]], 10);
+        else
+            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlePartyID[bank]], 0);
+        if (GetBankIdentity(bank) == 3 || GetBankIdentity(bank) == 2)
+            nullsub_11(gHealthboxIDs[bank], 1);
+        else
+            nullsub_11(gHealthboxIDs[bank], 0);
+        if (GetBankSide(bank))
+        {
+            if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+                sub_8043DB0(healthboxID);
+        }
+        else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+        {
+            if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+                sub_8043DB0(healthboxID);
         }
     }
 }

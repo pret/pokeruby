@@ -520,7 +520,7 @@ struct BattleResults
 
 struct Struct2017800
 {
-    u8 unk0_0:1;
+    u8 invisible:1;
     u8 unk0_1:1;
     u8 substituteSprite:1;
     u8 unk0_3:1;

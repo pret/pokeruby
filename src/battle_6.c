@@ -800,7 +800,7 @@ void sub_802FB2C(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -875,7 +875,7 @@ void sub_802FE7C(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4++;
     }
@@ -963,7 +963,7 @@ void sub_8030190(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2 == 1 && ewram17800[gActiveBank].unk0_3 == 0)
+        if (ewram17800[gActiveBank].substituteSprite == 1 && ewram17800[gActiveBank].unk0_3 == 0)
         {
             ewram17800[gActiveBank].unk0_3 = 1;
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
@@ -983,7 +983,7 @@ void sub_8030190(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBank].unk0_2 == 1 && r7 < 2)
+            if (ewram17800[gActiveBank].substituteSprite == 1 && r7 < 2)
             {
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
                 ewram17800[gActiveBank].unk0_3 = 0;
