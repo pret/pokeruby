@@ -98,7 +98,9 @@ extern u8 sub_8078874();
 extern u8 move_anim_start_t3();
 extern void sub_8037FD8(void);
 extern void sub_8037F34(void);
-extern void dp01_tbl4_exec_completed(void);
+extern void LinkOpponentBufferExecCompleted(void);
+
+// this file's functions
 
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8, u8 *);
 void sub_8038900(u8);
@@ -107,6 +109,130 @@ void sub_8039648(void);
 void sub_8039B64(void);
 void sub_803A2C4(u8);
 void sub_803A4E0(void);
+
+void LinkOpponentHandleGetAttributes(void);
+void sub_803889C(void);
+void sub_80388A8(void);
+void sub_8039220(void);
+void sub_8039294(void);
+void sub_80393E4(void);
+void sub_80395B4(void);
+void sub_80396D0(void);
+void sub_80398A4(void);
+void sub_80398B0(void);
+void sub_803995C(void);
+void sub_8039A00(void);
+void sub_8039A0C(void);
+void sub_8039A18(void);
+void sub_8039A24(void);
+void sub_8039A30(void);
+void sub_8039CC8(void);
+void sub_8039D2C(void);
+void sub_8039D38(void);
+void sub_8039D44(void);
+void sub_8039D50(void);
+void sub_8039D5C(void);
+void sub_8039D68(void);
+void sub_8039D74(void);
+void sub_8039D80(void);
+void sub_8039E70(void);
+void sub_8039E7C(void);
+void sub_8039EF0(void);
+void sub_8039F58(void);
+void sub_8039F64(void);
+void sub_8039F70(void);
+void sub_8039F7C(void);
+void sub_8039F88(void);
+void sub_8039F94(void);
+void sub_8039FA0(void);
+void sub_8039FAC(void);
+void sub_8039FB8(void);
+void sub_8039FC4(void);
+void sub_8039FE0(void);
+void sub_803A018(void);
+void sub_803A030(void);
+void dp01t_29_4_blink(void);
+void sub_803A0C8(void);
+void sub_803A0D4(void);
+void sub_803A118(void);
+void sub_803A148(void);
+void dp01t_2E_4_battle_intro(void);
+void sub_803A1B8(void);
+void sub_803A3DC(void);
+void sub_803A520(void);
+void sub_803A56C(void);
+void sub_803A578(void);
+void bx_exec_buffer_A_ch0_tbl4(void);
+void sub_803A640(void);
+void sub_803A64C(void);
+void sub_803A658(void);
+void nullsub_48(void);
+
+// const data
+
+typedef void (*BattleBufferCmd) (void);
+const BattleBufferCmd gLinkOpponentBufferCommands[] =
+{
+    LinkOpponentHandleGetAttributes,
+	sub_803889C,
+	sub_80388A8,
+	sub_8039220,
+	sub_8039294,
+	sub_80393E4,
+	sub_80395B4,
+	sub_80396D0,
+	sub_80398A4,
+	sub_80398B0,
+	sub_803995C,
+	sub_8039A00,
+	sub_8039A0C,
+	sub_8039A18,
+	sub_8039A24,
+	sub_8039A30,
+	sub_8039CC8,
+	sub_8039D2C,
+	sub_8039D38,
+	sub_8039D44,
+	sub_8039D50,
+	sub_8039D5C,
+	sub_8039D68,
+	sub_8039D74,
+	sub_8039D80,
+	sub_8039E70,
+	sub_8039E7C,
+	sub_8039EF0,
+	sub_8039F58,
+	sub_8039F64,
+	sub_8039F70,
+	sub_8039F7C,
+	sub_8039F88,
+	sub_8039F94,
+	sub_8039FA0,
+	sub_8039FAC,
+	sub_8039FB8,
+	sub_8039FC4,
+	sub_8039FE0,
+	sub_803A018,
+	sub_803A030,
+	dp01t_29_4_blink,
+	sub_803A0C8,
+	sub_803A0D4,
+	sub_803A118,
+	sub_803A148,
+	dp01t_2E_4_battle_intro,
+	sub_803A1B8,
+	sub_803A3DC,
+	sub_803A520,
+	sub_803A56C,
+	sub_803A578,
+	bx_exec_buffer_A_ch0_tbl4,
+	sub_803A640,
+	sub_803A64C,
+	sub_803A658,
+	nullsub_48
+};
+
+// code
 
 void LinkOpponentHandleGetAttributes(void)
 {
@@ -130,7 +256,7 @@ void LinkOpponentHandleGetAttributes(void)
         }
     }
     dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, buffer);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
@@ -440,7 +566,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
 
 void sub_803889C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_80388A8(void)
@@ -462,7 +588,7 @@ void sub_80388A8(void)
             r4 >>= 1;
         }
     }
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8038900(u8 a)
@@ -689,7 +815,7 @@ void sub_8039220(void)
     dst = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
         dst[i] = gBattleBufferA[gActiveBank][3 + i];
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039294(void)
@@ -756,7 +882,7 @@ void sub_80395B4(void)
         DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
         sub_8032A08(gActiveBank);
         sub_8043DB0(gHealthboxIDs[gActiveBank]);
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
 }
 
@@ -816,7 +942,7 @@ void sub_80396D0(void)
 
 void sub_80398A4(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_80398B0(void)
@@ -849,22 +975,22 @@ void sub_803995C(void)
 
 void sub_8039A00(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039A0C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039A18(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039A24(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039A30(void)
@@ -890,7 +1016,7 @@ void sub_8039A30(void)
         // Dead code. sub_8031720 always returns 0.
         if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
         {
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         }
         else
         {
@@ -945,7 +1071,7 @@ void sub_8039B64(void)
               gActiveBank,
               gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
             ewram17810[gActiveBank].unk4 = 0;
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         }
         break;
     }
@@ -962,37 +1088,37 @@ void sub_8039CC8(void)
 
 void sub_8039D2C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D38(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D44(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D50(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D5C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D68(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D74(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039D80(void)
@@ -1019,7 +1145,7 @@ void sub_8039D80(void)
 
 void sub_8039E70(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039E7C(void)
@@ -1048,78 +1174,78 @@ void sub_8039EF0(void)
 
 void sub_8039F58(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039F64(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039F70(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039F7C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039F88(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039F94(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039FA0(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039FAC(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039FB8(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039FC4(void)
 {
     gUnknown_020238C8.unk0_0 = 0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8039FE0(void)
 {
     gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A018(void)
 {
     gUnknown_020238C8.unk0_7 = 0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A030(void)
 {
     gUnknown_020238C8.unk0_7 ^= 1;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void dp01t_29_4_blink(void)
 {
     if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
     {
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
     else
     {
@@ -1132,7 +1258,7 @@ void dp01t_29_4_blink(void)
 
 void sub_803A0C8(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A0D4(void)
@@ -1144,13 +1270,13 @@ void sub_803A0D4(void)
     else
         pan = 63;
     PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A118(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A148(void)
@@ -1158,14 +1284,14 @@ void sub_803A148(void)
     PlayCry3(
       GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
       25, 5);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void dp01t_2E_4_battle_intro(void)
 {
     sub_80E43C0(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A1B8(void)
@@ -1223,7 +1349,7 @@ void sub_803A3DC(void)
 {
     if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
     {
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
         return;
     }
 
@@ -1256,7 +1382,7 @@ void sub_803A4E0(void)
     if (ewram17810[gActiveBank].unk5++ >= 93)
     {
         ewram17810[gActiveBank].unk5 = 0;
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
 }
 
@@ -1264,12 +1390,12 @@ void sub_803A520(void)
 {
     if (ewram17810[gActiveBank].unk0_0)
         gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A56C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A578(void)
@@ -1279,7 +1405,7 @@ void sub_803A578(void)
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);
     }
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void bx_exec_buffer_A_ch0_tbl4(void)
@@ -1290,7 +1416,7 @@ void bx_exec_buffer_A_ch0_tbl4(void)
         u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
         if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         else
             gBattleBankFunc[gActiveBank] = sub_8037FD8;
     }
@@ -1298,12 +1424,12 @@ void bx_exec_buffer_A_ch0_tbl4(void)
 
 void sub_803A640(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A64C(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_803A658(void)
@@ -1314,7 +1440,7 @@ void sub_803A658(void)
         gBattleOutcome = gBattleBufferA[gActiveBank][1] ^ 3;
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
     gBattleBankFunc[gActiveBank] = sub_8037F34;
 }
 

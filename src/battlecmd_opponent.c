@@ -1,15 +1,19 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai.h"
 #include "battle_interface.h"
 #include "data2.h"
-#include "graphics.h"
+#include "battle_811DA74.h"
+#include "battle_anim_813F0F4.h"
+#include "link.h"
+#include "m4a.h"
 #include "main.h"
+#include "palette.h"
+#include "pokeball.h"
 #include "pokemon.h"
-#include "rng.h"
 #include "rom3.h"
-#include "songs.h"
+#include "rom_8077ABC.h"
 #include "sound.h"
+#include "songs.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
@@ -53,6 +57,11 @@ extern bool8 gDoingBattleAnim;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern MainCallback gPreBattleCallback1;
+extern void (*const gOpponentBufferCommands[])(void);
+extern struct MusicPlayerInfo gMPlay_SE1;
+extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlay_BGM;
+extern u32 gBattleExecBuffer;
 
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
@@ -107,8 +116,11 @@ extern void sub_8032E2C(void);
 extern u8 sub_8078874();
 extern u8 move_anim_start_t3();
 extern void sub_80334C0(void);
-extern void OpponentBufferExecCompleted(void);
 
+// this file's functions
+
+void OpponentBufferExecCompleted(void);
+void OpponentBufferRunCommand(void);
 u32 sub_8033598(u8, u8 *);
 void sub_8033E24(u8);
 void sub_803495C(u8, u8);
@@ -117,6 +129,407 @@ void sub_8035238(void);
 void sub_8035C10(struct Sprite *);
 void sub_8035C44(u8);
 void sub_8035E2C(void);
+void sub_80332D0(void);
+
+void OpponentHandleGetAttributes(void);
+void dp01t_01_2_read_pokmon_data_slice(void);
+void OpponentHandleSetAttributes(void);
+void sub_8034744(void);
+void OpponentHandleLoadPokeSprite(void);
+void OpponentHandleSendOutPoke(void);
+void OpponentHandleReturnPokeToBall(void);
+void OpponentHandleTrainerThrow(void);
+void OpponentHandleTrainerSlide(void);
+void OpponentHandleTrainerSlideBack(void);
+void sub_8035030(void);
+void sub_80350D4(void);
+void sub_80350E0(void);
+void OpponentHandleBallThrow(void);
+void OpponentHandlePause(void);
+void OpponentHandleMoveAnimation(void);
+void OpponentHandlePrintString(void);
+void OpponentHandlePrintStringPlayerOnly(void);
+void sub_803540C(void);
+void sub_803541C(void);
+void sub_8035428(void);
+void sub_8035590(void);
+void sub_80355C0(void);
+void sub_80356C0(void);
+void OpponentHandleHealthBarUpdate(void);
+void OpponentHandleExpBarUpdate(void);
+void OpponentHandleStatusIconUpdate(void);
+void OpponentHandleStatusAnimation(void);
+void OpponentHandleStatusXor(void);
+void sub_80358B0(void);
+void OpponentHandleDMATransfer(void);
+void sub_80358C8(void);
+void sub_80358D4(void);
+void sub_80358E0(void);
+void sub_80358EC(void);
+void sub_80358F8(void);
+void sub_8035904(void);
+void sub_8035910(void);
+void sub_803592C(void);
+void sub_8035964(void);
+void sub_803597C(void);
+void OpponentHandleHitAnimation(void);
+void sub_8035A14(void);
+void OpponentHandleEffectivenessSound(void);
+void sub_8035A64(void);
+void OpponentHandleFaintingCry(void);
+void dp01t_2E_7_battle_intro(void);
+void sub_8035B04(void);
+void dp01t_30_7_0803D67C(void);
+void sub_8035E6C(void);
+void sub_8035EB8(void);
+void OpponentHandleSpriteInvisibility(void);
+void OpponentHandleBattleAnimation(void);
+void OpponentHandleLinkStandbyMsg(void);
+void OpponentHandleResetActionMoveSelection(void);
+void sub_8035FA4(void);
+void nullsub_46(void);
+
+// const data
+typedef void (*BattleBufferCmd) (void);
+static const BattleBufferCmd gOpponentBufferCommands[] =
+{
+	OpponentHandleGetAttributes,
+	dp01t_01_2_read_pokmon_data_slice,
+	OpponentHandleSetAttributes,
+	sub_8034744,
+	OpponentHandleLoadPokeSprite,
+	OpponentHandleSendOutPoke,
+	OpponentHandleReturnPokeToBall,
+	OpponentHandleTrainerThrow,
+	OpponentHandleTrainerSlide,
+	OpponentHandleTrainerSlideBack,
+	sub_8035030,
+	sub_80350D4,
+	sub_80350E0,
+	OpponentHandleBallThrow,
+	OpponentHandlePause,
+	OpponentHandleMoveAnimation,
+	OpponentHandlePrintString,
+	OpponentHandlePrintStringPlayerOnly,
+	sub_803540C,
+	sub_803541C,
+	sub_8035428,
+	sub_8035590,
+	sub_80355C0,
+	sub_80356C0,
+	OpponentHandleHealthBarUpdate,
+	OpponentHandleExpBarUpdate,
+	OpponentHandleStatusIconUpdate,
+	OpponentHandleStatusAnimation,
+	OpponentHandleStatusXor,
+	sub_80358B0,
+	OpponentHandleDMATransfer,
+	sub_80358C8,
+	sub_80358D4,
+	sub_80358E0,
+	sub_80358EC,
+	sub_80358F8,
+	sub_8035904,
+	sub_8035910,
+	sub_803592C,
+	sub_8035964,
+	sub_803597C,
+	OpponentHandleHitAnimation,
+	sub_8035A14,
+	OpponentHandleEffectivenessSound,
+	sub_8035A64,
+	OpponentHandleFaintingCry,
+	dp01t_2E_7_battle_intro,
+	sub_8035B04,
+	dp01t_30_7_0803D67C,
+	sub_8035E6C,
+	sub_8035EB8,
+	OpponentHandleSpriteInvisibility,
+	OpponentHandleBattleAnimation,
+	OpponentHandleLinkStandbyMsg,
+	OpponentHandleResetActionMoveSelection,
+	sub_8035FA4,
+	nullsub_46,
+};
+
+static const u8 sUnknownBytes[] = {0xB0, 0xB0, 0xC8, 0x98, 0x28, 0x28, 0x28, 0x20};
+
+// code
+
+void nullsub_45(void)
+{
+}
+
+void SetBankFuncToOpponentBufferRunCommand(void)
+{
+    gBattleBankFunc[gActiveBank] = OpponentBufferRunCommand;
+}
+
+void OpponentBufferRunCommand(void)
+{
+    if (gBattleExecBuffer & gBitTable[gActiveBank])
+    {
+        if (gBattleBufferA[gActiveBank][0] <= 0x38)
+            gOpponentBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        else
+            OpponentBufferExecCompleted();
+    }
+}
+
+void sub_8032B4C(void)
+{
+    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+        OpponentBufferExecCompleted();
+}
+
+// Duplicate of sub_8032B4C
+void sub_8032B84(void)
+{
+    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+        OpponentBufferExecCompleted();
+}
+
+void sub_8032BBC(void)
+{
+    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    {
+        sub_8031B74(gSprites[gObjectBankIDs[gActiveBank]].oam.affineParam);
+        gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = gSprites[gObjectBankIDs[gActiveBank]].data5;
+        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
+        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        OpponentBufferExecCompleted();
+    }
+}
+
+void sub_8032C4C(void)
+{
+    if ((--ewram17810[gActiveBank].unk9) == 0xFF)
+    {
+        ewram17810[gActiveBank].unk9 = 0;
+        OpponentBufferExecCompleted();
+    }
+}
+
+void sub_8032C88(void)
+{
+    bool8 r6 = FALSE;
+
+    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
+    {
+        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
+            r6 = TRUE;
+    }
+    else
+    {
+        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy
+         && gSprites[gHealthboxIDs[gActiveBank ^ 2]].callback == SpriteCallbackDummy)
+            r6 = TRUE;
+    }
+    if (IsCryPlayingOrClearCrySongs())
+        r6 = FALSE;
+
+    if (r6 && ewram17810[gActiveBank].unk1_0 && ewram17810[gActiveBank ^ 2].unk1_0)
+    {
+        ewram17810[gActiveBank].unk0_7 = 0;
+        ewram17810[gActiveBank].unk1_0 = 0;
+        ewram17810[gActiveBank ^ 2].unk0_7 = 0;
+        ewram17810[gActiveBank ^ 2].unk1_0 = 0;
+        FreeSpriteTilesByTag(0x27F9);
+        FreeSpritePaletteByTag(0x27F9);
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            m4aMPlayContinue(&gMPlay_BGM);
+        else
+            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        ewram17810[gActiveBank].unk9 = 3;
+        gBattleBankFunc[gActiveBank] = sub_8032C4C;
+    }
+}
+
+void sub_8032E2C(void)
+{
+    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank].unk0_7)
+        sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
+    if (!ewram17810[gActiveBank ^ 2].unk0_3 && !ewram17810[gActiveBank ^ 2].unk0_7)
+        sub_8141828(gActiveBank ^ 2, &gEnemyParty[gBattlePartyID[gActiveBank ^ 2]]);
+    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank ^ 2].unk0_3)
+    {
+        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        {
+            DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank ^ 2]]);
+            sub_8045A5C(
+              gHealthboxIDs[gActiveBank ^ 2],
+              &gEnemyParty[gBattlePartyID[gActiveBank ^ 2]],
+              0);
+            sub_804777C(gActiveBank ^ 2);
+            sub_8043DFC(gHealthboxIDs[gActiveBank ^ 2]);
+            sub_8032984(
+              gActiveBank ^ 2,
+              GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank ^ 2]], MON_DATA_SPECIES));
+        }
+        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
+        sub_8045A5C(
+          gHealthboxIDs[gActiveBank],
+          &gEnemyParty[gBattlePartyID[gActiveBank]],
+          0);
+        sub_804777C(gActiveBank);
+        sub_8043DFC(gHealthboxIDs[gActiveBank]);
+        sub_8032984(
+          gActiveBank,
+          GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
+
+        ewram17840.unk9_0 = 0;
+        gBattleBankFunc[gActiveBank] = sub_8032C88;
+    }
+}
+
+void sub_8033018(void)
+{
+    if (gSprites[gObjectBankIDs[gActiveBank]].animEnded == TRUE
+     && gSprites[gObjectBankIDs[gActiveBank]].pos2.x == 0)
+    {
+        if (!ewram17810[gActiveBank].unk0_7)
+        {
+            sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
+            return;
+        }
+        if (ewram17810[gActiveBank].unk1_0)
+        {
+            ewram17810[gActiveBank].unk0_7 = 0;
+            ewram17810[gActiveBank].unk1_0 = 0;
+            FreeSpriteTilesByTag(0x27F9);
+            FreeSpritePaletteByTag(0x27F9);
+            OpponentBufferExecCompleted();
+            return;
+        }
+    }
+}
+
+void sub_80330C8(void)
+{
+    s16 r4 = sub_8045C78(gActiveBank, gHealthboxIDs[gActiveBank], 0, 0);
+
+    sub_8043DFC(gHealthboxIDs[gActiveBank]);
+    if (r4 != -1)
+        sub_80440EC(gHealthboxIDs[gActiveBank], r4, 0);
+    else
+        OpponentBufferExecCompleted();
+}
+
+void sub_803311C(void)
+{
+    if (!gSprites[gObjectBankIDs[gActiveBank]].inUse)
+    {
+        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        OpponentBufferExecCompleted();
+    }
+}
+
+void sub_8033160(void)
+{
+    if (!ewram17810[gActiveBank].unk0_6)
+    {
+        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
+        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        sub_8032A08(gActiveBank);
+        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        OpponentBufferExecCompleted();
+    }
+}
+
+void sub_80331D0(void)
+{
+    if (gUnknown_03004210.state == 0)
+        OpponentBufferExecCompleted();
+}
+
+void bx_blink_t7(void)
+{
+    u8 spriteId = gObjectBankIDs[gActiveBank];
+
+    if (gSprites[spriteId].data1 == 32)
+    {
+        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].invisible = FALSE;
+        gDoingBattleAnim = 0;
+        OpponentBufferExecCompleted();
+    }
+    else
+    {
+        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+            gSprites[spriteId].invisible ^= 1;
+        gSprites[spriteId].data1++;
+    }
+}
+
+void sub_8033264(void)
+{
+    if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    {
+        if (ewram17800[gActiveBank].unk0_2)
+            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
+        gBattleBankFunc[gActiveBank] = sub_80332D0;
+    }
+}
+
+void sub_80332D0(void)
+{
+    if (!ewram17810[gActiveBank].unk0_6)
+    {
+        CreateTask(c3_0802FDF4, 10);
+        OpponentBufferExecCompleted();
+    }
+}
+
+void sub_8033308(void)
+{
+    if (ewram17810[gActiveBank].unk1_0)
+    {
+        ewram17810[gActiveBank].unk0_7 = 0;
+        ewram17810[gActiveBank].unk1_0 = 0;
+        FreeSpriteTilesByTag(0x27F9);
+        FreeSpritePaletteByTag(0x27F9);
+        StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 0);
+        sub_8045A5C(
+          gHealthboxIDs[gActiveBank],
+          &gEnemyParty[gBattlePartyID[gActiveBank]],
+          0);
+        sub_804777C(gActiveBank);
+        sub_8043DFC(gHealthboxIDs[gActiveBank]);
+        sub_8031F88(gActiveBank);
+        gBattleBankFunc[gActiveBank] = sub_8033264;
+    }
+}
+
+void sub_80333D4(void)
+{
+    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank].unk0_7)
+        sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
+    if (gSprites[gUnknown_0300434C[gActiveBank]].callback == SpriteCallbackDummy
+     && !ewram17810[gActiveBank].unk0_3)
+    {
+        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
+        sub_8032984(gActiveBank, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
+        gBattleBankFunc[gActiveBank] = sub_8033308;
+    }
+}
+
+void sub_8033494(void)
+{
+    if (!ewram17810[gActiveBank].unk0_4)
+        OpponentBufferExecCompleted();
+}
+
+void sub_80334C0(void)
+{
+    if (!ewram17810[gActiveBank].unk0_5)
+        OpponentBufferExecCompleted();
+}
+
+void OpponentBufferExecCompleted(void)
+{
+    gBattleBankFunc[gActiveBank] = OpponentBufferRunCommand;
+    gBattleExecBuffer &= ~gBitTable[gActiveBank];
+}
 
 void OpponentHandleGetAttributes(void)
 {

@@ -64,7 +64,6 @@ extern u8 gUnknown_0300434C[];
 extern u8 gBattleMonForms[];
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
-extern void (*const gLinkPartnerBufferCommands[])(void);
 
 extern u8 move_anim_start_t3();
 extern u8 sub_8078874();
@@ -111,6 +110,8 @@ extern void sub_8031F88();
 extern void sub_8141828();
 extern void c2_8011A1C(void);
 
+// this file's functions
+
 void LinkPartnerBufferRunCommand(void);
 void sub_811E0A0(void);
 void LinkPartnerBufferExecCompleted(void);
@@ -122,6 +123,127 @@ void sub_811FF30(void);
 void sub_812071C(u8);
 void sub_81208E0(void);
 
+void LinkPartnerHandleGetAttributes(void);
+void sub_811EC04(void);
+void LinkPartnerHandleSetAttributes(void);
+void sub_811F664(void);
+void sub_811F6D8(void);
+void sub_811F7F4(void);
+void sub_811F9D0(void);
+void sub_811FAE4(void);
+void sub_811FC30(void);
+void sub_811FC3C(void);
+void sub_811FCE8(void);
+void sub_811FDCC(void);
+void sub_811FDD8(void);
+void sub_811FDE4(void);
+void sub_811FDF0(void);
+void sub_811FDFC(void);
+void sub_8120094(void);
+void sub_81200F8(void);
+void sub_8120104(void);
+void sub_8120110(void);
+void sub_812011C(void);
+void sub_8120128(void);
+void sub_8120134(void);
+void sub_8120140(void);
+void LinkPartnerHandleHealthBarUpdate(void);
+void LinkPartnerHandleExpBarUpdate(void);
+void LinkPartnerHandleStatusIconUpdate(void);
+void LinkPartnerHandleStatusAnimation(void);
+void sub_8120324(void);
+void sub_8120330(void);
+void sub_812033C(void);
+void sub_8120348(void);
+void sub_8120354(void);
+void sub_8120360(void);
+void sub_812036C(void);
+void sub_8120378(void);
+void sub_8120384(void);
+void sub_8120390(void);
+void sub_81203AC(void);
+void sub_81203E4(void);
+void sub_81203FC(void);
+void LinkPartnerHandleHitAnimation(void);
+void sub_8120494(void);
+void LinkPartnerHandleEffectivenessSound(void);
+void sub_81204E4(void);
+void LinkPartnerHandleFaintingCry(void);
+void dp01t_2E_3_battle_intro(void);
+void sub_8120588(void);
+void dp01t_30_3_80EB11C(void);
+void sub_8120920(void);
+void sub_812096C(void);
+void sub_8120978(void);
+void sub_81209D8(void);
+void sub_8120A40(void);
+void sub_8120A4C(void);
+void sub_8120A58(void);
+void nullsub_75(void);
+
+// const data
+typedef void (*BattleBufferCmd) (void);
+static const BattleBufferCmd gLinkPartnerBufferCommands[] =
+{
+	LinkPartnerHandleGetAttributes,
+	sub_811EC04,
+	LinkPartnerHandleSetAttributes,
+	sub_811F664,
+	sub_811F6D8,
+	sub_811F7F4,
+	sub_811F9D0,
+	sub_811FAE4,
+	sub_811FC30,
+	sub_811FC3C,
+	sub_811FCE8,
+	sub_811FDCC,
+	sub_811FDD8,
+	sub_811FDE4,
+	sub_811FDF0,
+	sub_811FDFC,
+	sub_8120094,
+	sub_81200F8,
+	sub_8120104,
+	sub_8120110,
+	sub_812011C,
+	sub_8120128,
+	sub_8120134,
+	sub_8120140,
+	LinkPartnerHandleHealthBarUpdate,
+	LinkPartnerHandleExpBarUpdate,
+	LinkPartnerHandleStatusIconUpdate,
+	LinkPartnerHandleStatusAnimation,
+	sub_8120324,
+	sub_8120330,
+	sub_812033C,
+	sub_8120348,
+	sub_8120354,
+	sub_8120360,
+	sub_812036C,
+	sub_8120378,
+	sub_8120384,
+	sub_8120390,
+	sub_81203AC,
+	sub_81203E4,
+	sub_81203FC,
+	LinkPartnerHandleHitAnimation,
+	sub_8120494,
+	LinkPartnerHandleEffectivenessSound,
+	sub_81204E4,
+	LinkPartnerHandleFaintingCry,
+	dp01t_2E_3_battle_intro,
+	sub_8120588,
+	dp01t_30_3_80EB11C,
+	sub_8120920,
+	sub_812096C,
+	sub_8120978,
+	sub_81209D8,
+	sub_8120A40,
+	sub_8120A4C,
+	sub_8120A58,
+	nullsub_75,
+};
+// code starts here
 
 void nullsub_74(void)
 {
