@@ -20,6 +20,8 @@ extern u8 gBattleAnimPlayerMonIndex;
 extern u8 gBattleAnimEnemyMonIndex;
 extern struct SpriteTemplate gSpriteTemplate_83D631C;
 extern struct SpriteTemplate gSpriteTemplate_83D6884;
+extern struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FC8;
+extern struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FF8;
 extern s16 gUnknown_03000728[];
 extern s8 gUnknown_083D680C[11][3];
 extern u16 gUnknown_083D6984[];
@@ -27,6 +29,7 @@ extern s8 gUnknown_083D6DDC[4][2];
 extern u8 gObjectBankIDs[];
 extern u8 gNoOfAllBanks;
 extern u8 gHealthboxIDs[];
+extern u16 gUnknown_083D712C[4][6];
 
 void sub_80CA768(struct Sprite* sprite);
 void sub_80CA8B4(struct Sprite* sprite);
@@ -79,6 +82,8 @@ void sub_80CE000(struct Sprite* sprite);
 void sub_80CE1AC(struct Sprite* sprite);
 void sub_80CE354(struct Sprite* sprite);
 void sub_80CE3B0(struct Sprite* sprite);
+void sub_80CE798(struct Sprite* sprite);
+void sub_80CE974(struct Sprite* sprite);
 
 s16 sub_80CC338(struct Sprite* sprite);
 
@@ -108,6 +113,8 @@ void sub_807867C(struct Sprite *sprite, s16 a2);
 u8 sub_8077EE4(u8 slot, u8 a2);
 u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7);
 u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4);
+s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 a1);
+void obj_delete_but_dont_free_vram(struct Sprite *sprite);
 
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
@@ -119,6 +126,7 @@ void sub_80CBF5C(u8 taskId);
 void sub_80CDB60(u8 taskId);
 void sub_80CDD20(u8 taskId);
 void sub_80CE4D4(u8 taskId);
+void sub_80CE910(u8 taskId);
 
 void sub_80CC358(struct Task* task, u8 taskId);
 
@@ -3216,5 +3224,350 @@ void sub_80CE3EC(u8 taskId)
     BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 0x10, 32699);
     gTasks[taskId].func = sub_80CE4D4;
     sub_80CE4D4(taskId);
-    
+}
+
+void sub_80CE4D4(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            if (++task->data[1] > 0)
+            {
+                u16 color;
+                u16 bitmask;
+                u16 r3;
+                u16 i;
+                u16 j;
+                task->data[1] = 0;
+                if (++task->data[2] <= 15)
+                {
+                    u16 red;
+                    u16 green;
+                    u16 blue;
+                    task->data[4] += task->data[7];
+                    task->data[5] += task->data[8];
+                    task->data[6] += task->data[9];
+                    red = task->data[4] >> 3;
+                    green = task->data[5] >> 3;
+                    blue = task->data[6] >> 3;
+                    color = RGB(red, green, blue);
+                }
+                else
+                {
+                    color = RGB(27, 29, 31);
+                    task->data[0]++;
+                }
+                bitmask = 1;
+                r3 = 0;
+                for (i = 0; i <= 15; i++)
+                {
+                    if (task->data[3] & bitmask)
+                    {
+                            for (j = 1; j <= 15; j++)
+                                gPlttBufferFaded[r3 + j] = color;
+                    }
+                    bitmask <<= 1;
+                    r3 += 16;
+                }
+            }
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                u8 spriteId;
+                for (spriteId = 0; spriteId < MAX_SPRITES; spriteId++)
+                {
+                    if (gSprites[spriteId].template == &gBattleAnimSpriteTemplate_83D6FC8 || gSprites[spriteId].template == &gBattleAnimSpriteTemplate_83D6FF8)
+                        gSprites[spriteId].data0 = 1;
+                }
+                task->data[1] = 0;
+                task->data[0]++;
+            }
+            break;
+        case 2:
+            if (++task->data[1] > 30)
+            {
+                BeginNormalPaletteFade((u32)sub_8079BFC(task->data[14], task->data[15]), 0, 16, 0, RGB(27, 29, 31));
+                task->data[0]++;
+            }
+            break;
+        case 3:
+            if (!gPaletteFade.active)
+                DestroyAnimVisualTask(taskId);
+            break;
+    }
+}
+
+void sub_80CE670(struct Sprite* sprite)
+{
+    if (gBattleAnimArgs[2] <= 1)
+        gBattleAnimArgs[2] = 2;
+    if (gBattleAnimArgs[2] > 0x7F)
+        gBattleAnimArgs[2] = 0x7F;
+    sprite->data0 = 0;
+    sprite->data1 = gBattleAnimArgs[2];
+    sprite->pos1.x = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) + gBattleAnimArgs[0];
+    sprite->pos1.y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3) + gBattleAnimArgs[1];
+    sprite->data6 = sprite->pos1.x;
+    sprite->data7 = sprite->pos1.y;
+    if (IsContest() != 0)
+    {
+        sprite->oam.matrixNum = 8;
+        sprite->pos1.x += 40;
+        sprite->pos1.y += 20;
+        sprite->data2 = sprite->pos1.x << 7;
+        sprite->data3 = -0x1400 / sprite->data1;
+        sprite->data4 = sprite->pos1.y << 7;
+        sprite->data5 = -0xA00 / sprite->data1;
+    }
+    else if (GetBankSide(gBattleAnimPlayerMonIndex) == 0)
+    {
+        sprite->pos1.x -= 40;
+        sprite->pos1.y += 20;
+        sprite->data2 = sprite->pos1.x << 7;
+        sprite->data3 = 0x1400 / sprite->data1;
+        sprite->data4 = sprite->pos1.y << 7;
+        sprite->data5 = -0xA00 / sprite->data1;
+    }
+    else
+    {
+        sprite->pos1.x += 40;
+        sprite->pos1.y -= 20;
+        sprite->data2 = sprite->pos1.x << 7;
+        sprite->data3 = -0x1400 / sprite->data1;
+        sprite->data4 = sprite->pos1.y << 7;
+        sprite->data5 = 0xA00 / sprite->data1;
+        sprite->oam.matrixNum = 24;
+    }
+    sprite->callback = sub_80CE798;
+}
+
+void sub_80CE798(struct Sprite* sprite)
+{
+    sprite->data2 += sprite->data3;
+    sprite->data4 += sprite->data5;
+    sprite->pos1.x = sprite->data2 >> 7;
+    sprite->pos1.y = sprite->data4 >> 7;
+    if (--sprite->data1 == 1)
+    {
+        sprite->pos1.x = sprite->data6;
+        sprite->pos1.y = sprite->data7;
+    }
+    if (sprite->data1 == 0)
+        move_anim_8072740(sprite);
+}
+
+// double team
+void sub_80CE7E0(u8 taskId)
+{
+    u16 i;
+    int obj;
+    u16 r3;
+    u16 r4;
+    struct Task* task = &gTasks[taskId];
+    task->data[0] = obj_id_for_side_relative_to_move(0);
+    task->data[1] = AllocSpritePalette(0x2771);
+    r3 = (task->data[1] * 16) + 0x100;
+    r4 = (gSprites[task->data[0]].oam.paletteNum + 16) << 4;
+    for (i = 1; i < 16; i++)
+    {
+        gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
+    }
+    BlendPalette(r3, 16, 11, 0);
+    task->data[3] = 0;
+    i = 0;
+    while (i <= 1 && (obj = duplicate_obj_of_side_rel2move_in_transparent_mode(0)) >= 0)
+    {
+        gSprites[obj].oam.paletteNum = task->data[1];
+        gSprites[obj].data0 = 0;
+        gSprites[obj].data1 = i << 7;
+        gSprites[obj].data2 = taskId;
+        gSprites[obj].callback = sub_80CE974;
+        task->data[3]++;
+        i++;
+    }
+    task->func = sub_80CE910;
+    if (GetBankIdentity_permutated(gBattleAnimPlayerMonIndex) == 1)
+    {
+        REG_DISPCNT &= 0xFDFF;
+    }
+    else
+        REG_DISPCNT &= 0xFBFF;
+}
+
+void sub_80CE910(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    if (!task->data[3])
+    {
+        if (GetBankIdentity_permutated(gBattleAnimPlayerMonIndex) == 1)
+            REG_DISPCNT |= 0x200;
+        else
+            REG_DISPCNT |= 0x400;
+        FreeSpritePaletteByTag(0x2771);
+        DestroyAnimVisualTask(taskId);
+    }
+}
+
+void sub_80CE974(struct Sprite* sprite)
+{
+    if (++sprite->data3 > 1)
+    {
+        sprite->data3 = 0;
+        sprite->data0++;
+    }
+    if (sprite->data0 > 0x40)
+    {
+        gTasks[sprite->data2].data[3]--;
+        obj_delete_but_dont_free_vram(sprite);
+    }
+    else
+    {
+        sprite->data4 = gSineTable[sprite->data0] / 6;
+        sprite->data5 = gSineTable[sprite->data0] / 13;
+        sprite->data1 = (sprite->data1 + sprite->data5) & 0xFF;
+        sprite->pos2.x = Sin(sprite->data1, sprite->data4);
+    }
+}
+
+void sub_80CEA04(struct Sprite* sprite)
+{
+    oamt_set_x3A_32(sprite, move_anim_8072740);
+    sprite->callback = sub_8078600;
+}
+
+// grasswhistle
+#ifdef NONMATCHING
+void sub_80CEA20(u8 taskId)
+{
+    u16 i;
+    u16 j;
+    u16 a;
+    u16 index;
+    if ((index = IndexOfSpritePaletteTag(gUnknown_083D712C[0][0])) != 0xFF)
+    {
+        index = (index << 4) + 0x100;
+        for (i = 1; i < 6; i++)
+            gPlttBufferFaded[index + i] = gUnknown_083D712C[0][i];
+    }
+    for (i = 1; i < 4; i++)
+    {
+        a = AllocSpritePalette(gUnknown_083D712C[i][0]);
+        if (a != 0xFF)
+        {
+            a = (a << 4) + 0x100;
+            for (j = 1; j < 6; j++)
+                gPlttBufferFaded[a + j] = gUnknown_083D712C[i][j];
+        }
+    }
+    DestroyAnimVisualTask(taskId);
+}
+#else
+__attribute__((naked))
+void sub_80CEA20(u8 taskId)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r9\n\
+	mov r6, r8\n\
+	push {r6,r7}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r9, r0\n\
+	ldr r4, _080CEAD0 @ =gUnknown_083D712C\n\
+	ldrh r0, [r4]\n\
+	bl IndexOfSpritePaletteTag\n\
+	lsls r0, 24\n\
+	lsrs r3, r0, 24\n\
+	cmp r3, 0xFF\n\
+	beq _080CEA64\n\
+	lsls r0, r3, 20\n\
+	movs r1, 0x80\n\
+	lsls r1, 17\n\
+	adds r0, r1\n\
+	lsrs r3, r0, 16\n\
+	movs r2, 0x1\n\
+	ldr r5, _080CEAD4 @ =gPlttBufferFaded\n\
+_080CEA4C:\n\
+	adds r1, r3, r2\n\
+	lsls r1, 1\n\
+	adds r1, r5\n\
+	lsls r0, r2, 1\n\
+	adds r0, r4\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r1]\n\
+	adds r0, r2, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 16\n\
+	cmp r2, 0x5\n\
+	bls _080CEA4C\n\
+_080CEA64:\n\
+	movs r4, 0x1\n\
+	ldr r0, _080CEAD0 @ =gUnknown_083D712C\n\
+	mov r8, r0\n\
+_080CEA6A:\n\
+	lsls r0, r4, 1\n\
+	adds r0, r4\n\
+	lsls r5, r0, 2\n\
+	mov r1, r8\n\
+	adds r0, r5, r1\n\
+	ldrh r0, [r0]\n\
+	bl AllocSpritePalette\n\
+	lsls r0, 24\n\
+	lsrs r3, r0, 24\n\
+	adds r4, 0x1\n\
+	mov r12, r4\n\
+	cmp r3, 0xFF\n\
+	beq _080CEAB2\n\
+	lsls r0, r3, 20\n\
+	movs r1, 0x80\n\
+	lsls r1, 17\n\
+	adds r0, r1\n\
+	lsrs r3, r0, 16\n\
+	movs r2, 0x1\n\
+	ldr r7, _080CEAD4 @ =gPlttBufferFaded\n\
+	ldr r6, _080CEAD0 @ =gUnknown_083D712C\n\
+	adds r4, r5, 0\n\
+_080CEA98:\n\
+	adds r1, r3, r2\n\
+	lsls r1, 1\n\
+	adds r1, r7\n\
+	lsls r0, r2, 1\n\
+	adds r0, r4\n\
+	adds r0, r6\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r1]\n\
+	adds r0, r2, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 16\n\
+	cmp r2, 0x5\n\
+	bls _080CEA98\n\
+_080CEAB2:\n\
+	mov r1, r12\n\
+	lsls r0, r1, 16\n\
+	lsrs r4, r0, 16\n\
+	cmp r4, 0x3\n\
+	bls _080CEA6A\n\
+	mov r0, r9\n\
+	bl DestroyAnimVisualTask\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080CEAD0: .4byte gUnknown_083D712C\n\
+_080CEAD4: .4byte gPlttBufferFaded\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80CEAD8(u8 taskId)
+{
+    u16 i;
+    for (i = 1; i < 4; i++)
+        FreeSpritePaletteByTag(gUnknown_083D712C[i][0]);
+    DestroyAnimVisualTask(taskId);
 }
