@@ -87,12 +87,12 @@ extern void oamt_set_x3A_32();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80105EC(struct Sprite *);
 extern s32 sub_803FC34(u16);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern void sub_80313A0(struct Sprite *);
 extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
-extern void sub_80318FC();
+extern void BattleLoadPlayerMonSprite();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
@@ -989,7 +989,7 @@ void sub_811F664(void)
 
 void sub_811F6D8(void)
 {
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     GetMonSpriteTemplate_803C56C(
       GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
       GetBankIdentity(gActiveBank));
@@ -1009,7 +1009,7 @@ void sub_811F7F4(void)
 {
     sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     sub_811F864(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattleBankFunc[gActiveBank] = sub_811E1BC;
 }
@@ -1092,7 +1092,7 @@ void sub_811FAE4(void)
         xOffset = 0;
         gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
     }
-    sub_8031AF4(gender, gActiveBank);
+    LoadPlayerTrainerBankSprite(gender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gender, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -1508,7 +1508,7 @@ void sub_812071C(u8 taskId)
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
         gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
     }

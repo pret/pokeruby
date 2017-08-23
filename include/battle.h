@@ -522,10 +522,10 @@ struct Struct2017800
 {
     u8 unk0_0:1;
     u8 unk0_1:1;
-    u8 unk0_2:1;
+    u8 substituteSprite:1;
     u8 unk0_3:1;
     u8 unk0_4:1;
-    u16 unk2;
+    u16 transformedSpecies;
 };
 
 struct Struct2017810

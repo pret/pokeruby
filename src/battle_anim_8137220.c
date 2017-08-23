@@ -73,7 +73,7 @@ extern void sub_8043DFC();
 extern bool8 IsDoubleBattle(void);
 extern void c3_0802FDF4(u8);
 extern void sub_802ECF0(void);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
 extern u8 GetBankByPlayerAI(u8);
@@ -981,7 +981,7 @@ void sub_8138CB4(void)
 
 void sub_8138D38(void)
 {
-    sub_8031AF4(2, gActiveBank);
+    LoadPlayerTrainerBankSprite(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -996,7 +996,7 @@ void sub_8138D38(void)
 
 void sub_8138E04(void)
 {
-    sub_8031AF4(2, gActiveBank);
+    LoadPlayerTrainerBankSprite(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,

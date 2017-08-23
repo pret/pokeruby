@@ -182,9 +182,9 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         gBattleMonForms[a] = e & 0x7F;
         return TRUE;
     }
-    if (ewram17800[a].unk0_2 && sub_803163C(d) == 0)
+    if (ewram17800[a].substituteSprite && sub_803163C(d) == 0)
         return TRUE;
-    if (ewram17800[a].unk0_2 && d == 2 && gSprites[gObjectBankIDs[a]].invisible)
+    if (ewram17800[a].substituteSprite && d == 2 && gSprites[gObjectBankIDs[a]].invisible)
     {
         refresh_graphics_maybe(a, 1, gObjectBankIDs[a]);
         sub_80324E0(a);
@@ -273,29 +273,29 @@ bool8 mplay_80342A4(u8 a)
     return TRUE;
 }
 
-void sub_8031794(struct Pokemon *pkmn, u8 b)
+void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 bank)
 {
     u32 personalityValue;
     u16 species;
-    u32 r7;
+    u32 transformPersonality;
     u32 otId;
     u8 var;
     u16 paletteOffset;
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[bank].transformedSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
-        r7 = personalityValue;
+        transformPersonality = personalityValue;
     }
     else
     {
-        species = ewram17800[b].unk2;
-        r7 = gPID_perBank[b];
+        species = ewram17800[bank].transformedSpecies;
+        transformPersonality = gPID_perBank[bank];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
-    var = GetBankIdentity(b);
+    var = GetBankIdentity(bank);
     HandleLoadSpecialPokePic(
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
@@ -303,29 +303,29 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
       0x02000000,
       gUnknown_081FAF4C[var],
       species,
-      r7);
-    paletteOffset = 0x100 + b * 16;
-    if (ewram17800[b].unk2 == 0)
+      transformPersonality);
+    paletteOffset = 0x100 + bank * 16;
+    if (ewram17800[bank].transformedSpecies == 0)
         lzPaletteData = pokemon_get_pal(pkmn);
     else
         lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
     sub_800D238(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
-    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    LoadPalette(ewram, 0x80 + bank * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
-        paletteOffset = 0x100 + b * 16;
+        paletteOffset = 0x100 + bank * 16;
         sub_800D238(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LoadPalette(ewram + 0x16400 + gBattleMonForms[bank] * 32, paletteOffset, 0x20);
     }
-    if (ewram17800[b].unk2 != 0)
+    if (ewram17800[bank].transformedSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
     }
 }
 
-void sub_80318FC(struct Pokemon *pkmn, u8 b)
+void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 bank)
 {
     u32 personalityValue;
     u16 species;
@@ -336,18 +336,18 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[bank].transformedSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
         r7 = personalityValue;
     }
     else
     {
-        species = ewram17800[b].unk2;
-        r7 = gPID_perBank[b];
+        species = ewram17800[bank].transformedSpecies;
+        r7 = gPID_perBank[bank];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
-    var = GetBankIdentity(b);
+    var = GetBankIdentity(bank);
     HandleLoadSpecialPokePic(
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
@@ -356,21 +356,21 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
       gUnknown_081FAF4C[var],
       species,
       r7);
-    paletteOffset = 0x100 + b * 16;
-    if (ewram17800[b].unk2 == 0)
+    paletteOffset = 0x100 + bank * 16;
+    if (ewram17800[bank].transformedSpecies == 0)
         lzPaletteData = pokemon_get_pal(pkmn);
     else
         lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
     sub_800D238(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
-    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    LoadPalette(ewram, 0x80 + bank * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
-        paletteOffset = 0x100 + b * 16;
+        paletteOffset = 0x100 + bank * 16;
         sub_800D238(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LoadPalette(ewram + 0x16400 + gBattleMonForms[bank] * 32, paletteOffset, 0x20);
     }
-    if (ewram17800[b].unk2 != 0)
+    if (ewram17800[bank].transformedSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -405,11 +405,11 @@ void sub_8031A6C(u16 a, u8 b)
     LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[a]);
 }
 
-void sub_8031AF4(u16 a, u8 b)
+void LoadPlayerTrainerBankSprite(u16 a, u8 bank)
 {
     u8 status;
 
-    status = GetBankIdentity(b);
+    status = GetBankIdentity(bank);
     DecompressPicFromTable_2(
       &gTrainerBackPicTable[a],
       gTrainerBackPicCoords[a].coords,
@@ -417,7 +417,7 @@ void sub_8031AF4(u16 a, u8 b)
       (void *)0x02000000,
       gUnknown_081FAF4C[status],
       0);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + bank * 16, 32);
 }
 
 void nullsub_10(int unused)
@@ -615,7 +615,7 @@ void sub_8031F88(u8 a)
     ewram17800[a].unk0_0 = gSprites[gObjectBankIDs[a]].invisible;
 }
 
-void sub_8031FC4(u8 a, u8 b, bool8 c)
+void sub_8031FC4(u8 bank1, u8 bank2, bool8 c)
 {
     u16 paletteOffset;
     u16 species;
@@ -626,16 +626,16 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
 
     if (c)
     {
-        StartSpriteAnim(&gSprites[gObjectBankIDs[a]], ewram17840.unk0);
-        paletteOffset = 0x100 + a * 16;
+        StartSpriteAnim(&gSprites[gObjectBankIDs[bank1]], ewram17840.unk0);
+        paletteOffset = 0x100 + bank1 * 16;
         LoadPalette(ewram + 0x16400 + ewram17840.unk0 * 32, paletteOffset, 32);
-        gBattleMonForms[a] = ewram17840.unk0;
-        if (ewram17800[a].unk2 != 0)
+        gBattleMonForms[bank1] = ewram17840.unk0;
+        if (ewram17800[bank1].transformedSpecies != 0)
         {
             BlendPalette(paletteOffset, 16, 6, 0x7FFF);
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
-        gSprites[gObjectBankIDs[a]].pos1.y = sub_8077F68(a);
+        gSprites[gObjectBankIDs[bank1]].pos1.y = sub_8077F68(bank1);
     }
     else
     {
@@ -659,15 +659,15 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         else
         {
-            r10 = GetBankIdentity(a);
-            if (GetBankSide(b) == 1)
-                species = GetMonData(&gEnemyParty[gBattlePartyID[b]], MON_DATA_SPECIES);
+            r10 = GetBankIdentity(bank1);
+            if (GetBankSide(bank2) == 1)
+                species = GetMonData(&gEnemyParty[gBattlePartyID[bank2]], MON_DATA_SPECIES);
             else
-                species = GetMonData(&gPlayerParty[gBattlePartyID[b]], MON_DATA_SPECIES);
-            if (GetBankSide(a) == 0)
+                species = GetMonData(&gPlayerParty[gBattlePartyID[bank2]], MON_DATA_SPECIES);
+            if (GetBankSide(bank1) == 0)
             {
-                personalityValue = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gPlayerParty[gBattlePartyID[bank1]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gBattlePartyID[bank1]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
@@ -675,12 +675,12 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   0x02000000,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gPID_perBank[a]);
+                  gPID_perBank[bank1]);
             }
             else
             {
-                personalityValue = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gEnemyParty[gBattlePartyID[bank1]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gBattlePartyID[bank1]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
@@ -688,13 +688,13 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   0x02000000,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gPID_perBank[a]);
+                  gPID_perBank[bank1]);
             }
         }
         src = gUnknown_081FAF4C[r10];
-        dst = (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32);
+        dst = (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[bank1]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
-        paletteOffset = 0x100 + a * 16;
+        paletteOffset = 0x100 + bank1 * 16;
         lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
         sub_800D238(lzPaletteData, ewram);
         LoadPalette(ewram, paletteOffset, 32);
@@ -703,21 +703,21 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             u16 *paletteSrc = (u16 *)(ewram + 0x16400);
 
             sub_800D238(lzPaletteData, paletteSrc);
-            LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
+            LoadPalette(paletteSrc + gBattleMonForms[bank2] * 16, paletteOffset, 32);
         }
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         if (!IsContest())
         {
-            ewram17800[a].unk2 = species;
-            gBattleMonForms[a] = gBattleMonForms[b];
+            ewram17800[bank1].transformedSpecies = species;
+            gBattleMonForms[bank1] = gBattleMonForms[bank2];
         }
-        gSprites[gObjectBankIDs[a]].pos1.y = sub_8077F68(a);
-        StartSpriteAnim(&gSprites[gObjectBankIDs[a]], gBattleMonForms[a]);
+        gSprites[gObjectBankIDs[bank1]].pos1.y = sub_8077F68(bank1);
+        StartSpriteAnim(&gSprites[gObjectBankIDs[bank1]], gBattleMonForms[bank1]);
     }
 }
 
-void sub_8032350(u8 a, u8 b)
+void BattleLoadSubstituteSprite(u8 a, u8 b)
 {
     u8 r4;
     u16 foo;
@@ -750,16 +750,16 @@ void sub_8032350(u8 a, u8 b)
         if (!IsContest())
         {
             if (GetBankSide(a) != 0)
-                sub_8031794(&gEnemyParty[gBattlePartyID[a]], a);
+                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
             else
-                sub_80318FC(&gPlayerParty[gBattlePartyID[a]], a);
+                BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[a]], a);
         }
     }
 }
 
 void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
 {
-    sub_8032350(a, b);
+    BattleLoadSubstituteSprite(a, b);
     StartSpriteAnim(&gSprites[spriteId], gBattleMonForms[a]);
     if (b == 0)
         gSprites[spriteId].pos1.y = sub_8077F7C(a);
@@ -770,12 +770,12 @@ void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
 void sub_80324BC(u8 a, u16 b)
 {
     if (b == 0xA4)
-        ewram17800[a].unk0_2 = 1;
+        ewram17800[a].substituteSprite = 1;
 }
 
 void sub_80324E0(u8 a)
 {
-    ewram17800[a].unk0_2 = 0;
+    ewram17800[a].substituteSprite = 0;
 }
 
 void sub_80324F8(struct Pokemon *pkmn, u8 b)
@@ -896,9 +896,9 @@ void sub_80328A4(struct Sprite *sprite)
     }
     if (gAnimScriptActive || r7->invisible)
         invisible = TRUE;
-    else if (ewram17800[r4].unk2 != 0 && gEnemyMonElevation[ewram17800[r4].unk2] == 0)
+    else if (ewram17800[r4].transformedSpecies != 0 && gEnemyMonElevation[ewram17800[r4].transformedSpecies] == 0)
         invisible = TRUE;
-    if (ewram17800[r4].unk0_2)
+    if (ewram17800[r4].substituteSprite)
         invisible = TRUE;
     sprite->pos1.x = r7->pos1.x;
     sprite->pos2.x = r7->pos2.x;
@@ -914,8 +914,8 @@ void sub_8032984(u8 a, u16 b)
 {
     if (GetBankSide(a) != 0)
     {
-        if (ewram17800[a].unk2 != 0)
-            b = ewram17800[a].unk2;
+        if (ewram17800[a].transformedSpecies != 0)
+            b = ewram17800[a].transformedSpecies;
         if (gEnemyMonElevation[b] != 0)
             gSprites[ewram17810[a].unk7].callback = sub_80328A4;
         else
@@ -953,7 +953,7 @@ void sub_8032A38(void)
 
 void sub_8032AA8(u8 a, u8 b)
 {
-    ewram17800[a].unk2 = 0;
+    ewram17800[a].transformedSpecies = 0;
     gBattleMonForms[a] = 0;
     if (b == 0)
         sub_80324E0(a);
@@ -1168,7 +1168,7 @@ void sub_8033264(void)
 {
     if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
         gBattleBankFunc[gActiveBank] = sub_80332D0;
     }

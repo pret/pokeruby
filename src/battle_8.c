@@ -58,7 +58,7 @@ extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void sub_8033018(void);
-extern void sub_8031794();
+extern void BattleLoadOpponentMonSprite();
 extern u8 GetBankIdentity(u8);
 extern void sub_8032984(u8, u16);
 extern void sub_80333D4(void);
@@ -714,7 +714,7 @@ void OpponentHandleLoadPokeSprite(void)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
-    sub_8031794(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -746,7 +746,7 @@ void sub_803495C(u8 a, u8 b)
     gBattlePartyID[a] = gBattleBufferA[a][1];
     species = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_SPECIES);
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    sub_8031794(&gEnemyParty[gBattlePartyID[a]], a);
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
     gObjectBankIDs[a] = CreateSprite(
       &gUnknown_02024E8C,

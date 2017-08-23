@@ -1310,7 +1310,7 @@ sub_812B8B8: @ 812B8B8
 	ldrb r0, [r4, 0x8]
 	ldr r5, _0812B970 @ =gActiveBank
 	ldrb r1, [r5]
-	bl sub_8031AF4
+	bl LoadPlayerTrainerBankSprite
 	ldrb r6, [r4, 0x8]
 	ldrb r0, [r5]
 	bl GetBankIdentity
