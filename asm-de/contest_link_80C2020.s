@@ -1361,7 +1361,7 @@ _080C2B14:
 	adds r0, r6, 0
 	ldr r1, [sp, 0xC]
 	adds r2, r4, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	adds r0, r6, 0
