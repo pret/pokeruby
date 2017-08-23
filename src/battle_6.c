@@ -97,12 +97,12 @@ extern u8 GetBankSide(u8);
 extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
-extern void oamt_set_x3A_32();
+extern void StoreSpriteCallbackInData6();
 extern void sub_80318FC();
 extern bool8 IsDoubleBattle(void);
 extern void sub_802D500(void);
 extern void dp11b_obj_free();
-extern bool8 sub_8078874(u8);
+extern bool8 AnimBankSpriteExists(u8);
 extern bool8 move_anim_start_t3();
 extern void sub_802E460(void);
 extern void b_link_standby_message(void);
@@ -866,7 +866,7 @@ void PlayerHandleTrainerSlideBack(void)
     gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     gBattleBankFunc[gActiveBank] = sub_802D274;
 }
@@ -1337,7 +1337,7 @@ void PlayerHandleTrainerBallThrow(void)
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
     gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2.playerGender].data, 0x100 + paletteNum * 16, 32);
@@ -1435,7 +1435,7 @@ void sub_80310F0(void)
 
 void PlayerHandleSpriteInvisibility(void)
 {
-    if (sub_8078874(gActiveBank))
+    if (AnimBankSpriteExists(gActiveBank))
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);

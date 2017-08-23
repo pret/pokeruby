@@ -3,7 +3,7 @@
 
 #include "sprite.h"
 
-void sub_800D238(const void *src, void *dest);
+void LZDecompressWram(const void *src, void *dest);
 void LZDecompressVram(const void *src, void *dest);
 void LoadCompressedObjectPic(const struct CompressedSpriteSheet *a);
 void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *a, void *buffer);

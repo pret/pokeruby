@@ -4492,7 +4492,7 @@ static void LoadBerryPic(u8 berryId)
         spritePal.data = (u16 *)sBerryGraphicsTable[berryId].lzPalette;
         spritePal.tag = 0x7544;
         LoadCompressedObjectPalette((struct CompressedSpritePalette *)&spritePal);
-        sub_800D238(sBerryGraphicsTable[berryId].lzPic, ewramBerryPicTemp);
+        LZDecompressWram(sBerryGraphicsTable[berryId].lzPic, ewramBerryPicTemp);
         DrawBerryPic(ewramBerryPicTemp, ewramBerryPic);
     }
 }

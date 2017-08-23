@@ -433,7 +433,7 @@ void ShowContestEntryMonPic(void)
           gUnknown_081FAF4C[1],
           species,
           var1);
-        palette = sub_80409C8(species, var2, var1);
+        palette = GetMonSpritePalStructFromOtIdPersonality(species, var2, var1);
         LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
         gUnknown_02024E8C.paletteTag = palette->tag;
@@ -561,8 +561,8 @@ u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
     {
         case 0:
         case 1:
-            GetNationalPokedexFlag(nationalSpecies, 2);
-            GetNationalPokedexFlag(nationalSpecies, 3);
+            GetSetPokedexFlag(nationalSpecies, 2);
+            GetSetPokedexFlag(nationalSpecies, 3);
             return sentToPc;
         default:
             return sentToPc;

@@ -74,7 +74,7 @@ static bool8 IsSoftwarePaletteFadeFinishing(void);
 
 void LoadCompressedPalette(const void *src, u16 offset, u16 size)
 {
-    sub_800D238(src, sPaletteDecompressionBuffer);
+    LZDecompressWram(src, sPaletteDecompressionBuffer);
     CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
     CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
 }

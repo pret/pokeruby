@@ -3859,7 +3859,7 @@ _0809F718:
 	adds r1, r0, 0
 	adds r0, r5, 0
 	adds r2, r6, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	ldrh r0, [r4, 0x4]
@@ -7620,7 +7620,7 @@ sub_80A1808: @ 80A1808
 	ldr r0, _080A1868 @ =sub_80A1888
 	str r0, [r4]
 	adds r0, r6, 0
-	bl sub_8040A3C
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A186C

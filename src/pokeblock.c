@@ -379,7 +379,7 @@ static bool8 sub_810B998(void)
             ewram[0x1ffff]++;
             break;
         case 1:
-            sub_800D238(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
+            LZDecompressWram(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
             ewram[0x1ffff]++;
             break;
         case 2:

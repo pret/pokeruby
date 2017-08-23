@@ -4302,7 +4302,7 @@ _08049F8E:
 	lsls r0, 2
 	adds r0, r7
 	ldr r1, _0804A0A0 @ =sub_809D62C
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r2, _0804A09C @ =gUnknown_03004824
 	ldr r1, [r2]
 	adds r1, 0x80
@@ -6748,7 +6748,7 @@ _0804B330:
 	str r4, [sp, 0x8]
 	bl HandleLoadSpecialPokePic
 	mov r0, r10
-	bl sub_8040990
+	bl GetMonSpritePalStruct
 	bl LoadCompressedObjectPalette
 	ldr r0, _0804B3A0 @ =gUnknown_03004828
 	ldr r0, [r0]
@@ -6766,7 +6766,7 @@ _0804B39C: .4byte gUnknown_081FAF4C
 _0804B3A0: .4byte gUnknown_03004828
 _0804B3A4:
 	mov r0, r10
-	bl sub_8040990
+	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl GetMonSpriteTemplate_803C56C
@@ -7501,10 +7501,10 @@ sub_804BA18: @ 804BA18
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 _0804BA5A:
 	pop {r4}
 	pop {r0}
@@ -9472,7 +9472,7 @@ _0804CC68:
 	lsls r1, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_8040A3C
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804CCE4

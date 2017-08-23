@@ -244,7 +244,7 @@ void BuyMenuDrawGraphics(void)
     register const u32 zero asm("r6") = 0;
     DmaFill32(3, zero, addr, OAM_SIZE);
     LZDecompressVram(gBuyMenuFrame_Gfx, (void*)(VRAM + 0x7C00));
-    sub_800D238(gBuyMenuFrame_Tilemap, (void *)0x02018000);
+    LZDecompressWram(gBuyMenuFrame_Tilemap, (void *)0x02018000);
     LoadCompressedPalette(gMenuMoneyPal, 0xC0, sizeof(gMenuMoneyPal));
     FreeAllSpritePalettes();
     ResetPaletteFade();

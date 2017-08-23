@@ -6,8 +6,8 @@
 
 	.text
 	
-	thumb_func_start ai_switch_perish_song
-ai_switch_perish_song: @ 8035FEC
+	thumb_func_start AI_SwitchIfPerishSong
+AI_SwitchIfPerishSong: @ 8035FEC
 	push {lr}
 	ldr r1, _08036038 @ =gStatuses3
 	ldr r0, _0803603C @ =gActiveBank
@@ -55,10 +55,10 @@ _0803604C:
 _0803604E:
 	pop {r1}
 	bx r1
-	thumb_func_end ai_switch_perish_song
+	thumb_func_end AI_SwitchIfPerishSong
 
-	thumb_func_start sub_8036054
-sub_8036054: @ 8036054
+	thumb_func_start AI_SwitchIfWonderguard
+AI_SwitchIfWonderguard: @ 8036054
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -250,7 +250,7 @@ _080361D8: .4byte gBattleMons
 _080361DC: .4byte gActiveBank
 _080361E0: .4byte gEnemyParty
 _080361E4: .4byte gBattlePartyID
-	thumb_func_end sub_8036054
+	thumb_func_end AI_SwitchIfWonderguard
 
 	thumb_func_start sub_80361E8
 sub_80361E8: @ 80361E8
@@ -521,8 +521,8 @@ _08036402:
 	bx r1
 	thumb_func_end sub_80361E8
 
-	thumb_func_start ai_switchout_natural_cure
-ai_switchout_natural_cure: @ 8036410
+	thumb_func_start AI_SwitchIfNaturalCure
+AI_SwitchIfNaturalCure: @ 8036410
 	push {r4,r5,lr}
 	ldr r3, _08036468 @ =gBattleMons
 	ldr r5, _0803646C @ =gActiveBank
@@ -645,7 +645,7 @@ _08036500:
 _08036508: .4byte gActiveBank
 _0803650C: .4byte 0x02000000
 _08036510: .4byte 0x000160c8
-	thumb_func_end ai_switchout_natural_cure
+	thumb_func_end AI_SwitchIfNaturalCure
 
 	thumb_func_start ai_has_super_effective_move_on_field
 ai_has_super_effective_move_on_field: @ 8036514
@@ -808,8 +808,8 @@ _08036654: .4byte gBattleMons
 _08036658: .4byte gActiveBank
 	thumb_func_end ai_has_super_effective_move_on_field
 
-	thumb_func_start ai_is_too_invested_in_stat_buffs
-ai_is_too_invested_in_stat_buffs: @ 803665C
+	thumb_func_start AI_AreStatsRaised
+AI_AreStatsRaised: @ 803665C
 	push {r4,lr}
 	movs r4, 0
 	ldr r1, _0803669C @ =gBattleMons
@@ -848,7 +848,7 @@ _08036696:
 	.align 2, 0
 _0803669C: .4byte gBattleMons
 _080366A0: .4byte gActiveBank
-	thumb_func_end ai_is_too_invested_in_stat_buffs
+	thumb_func_end AI_AreStatsRaised
 
 	thumb_func_start sub_80366A4
 sub_80366A4: @ 80366A4
@@ -1140,8 +1140,8 @@ _080368FC: .4byte gBattleMons
 _08036900: .4byte gEnemyParty
 	thumb_func_end sub_80366A4
 
-	thumb_func_start sub_8036904
-sub_8036904: @ 8036904
+	thumb_func_start AI_ShouldSwitch
+AI_ShouldSwitch: @ 8036904
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1331,11 +1331,11 @@ _08036A7E:
 	mov r2, r8
 	cmp r2, 0
 	beq _08036AFC
-	bl ai_switch_perish_song
+	bl AI_SwitchIfPerishSong
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AE4
-	bl sub_8036054
+	bl AI_SwitchIfWonderguard
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AE4
@@ -1343,7 +1343,7 @@ _08036A7E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AE4
-	bl ai_switchout_natural_cure
+	bl AI_SwitchIfNaturalCure
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AE4
@@ -1352,7 +1352,7 @@ _08036A7E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AFC
-	bl ai_is_too_invested_in_stat_buffs
+	bl AI_AreStatsRaised
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036AFC
@@ -1386,7 +1386,7 @@ _08036AFE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8036904
+	thumb_func_end AI_ShouldSwitch
 
 	thumb_func_start sub_8036B0C
 sub_8036B0C: @ 8036B0C
@@ -1399,7 +1399,7 @@ sub_8036B0C: @ 8036B0C
 	bne _08036B1C
 	b _08036C2E
 _08036B1C:
-	bl sub_8036904
+	bl AI_ShouldSwitch
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036B28
@@ -1521,7 +1521,7 @@ _08036C18: .4byte 0x00016068
 _08036C1C: .4byte gActiveBank
 _08036C20: .4byte 0x000160c8
 _08036C24:
-	bl sub_803708C
+	bl AI_ShouldUseItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036C40
@@ -2083,8 +2083,8 @@ _08037086:
 	bx r1
 	thumb_func_end ai_identify_item_effect
 
-	thumb_func_start sub_803708C
-sub_803708C: @ 803708C
+	thumb_func_start AI_ShouldUseItem
+AI_ShouldUseItem: @ 803708C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2665,7 +2665,7 @@ _080374FA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_803708C
+	thumb_func_end AI_ShouldUseItem
 
 	thumb_func_start nullsub_47
 nullsub_47: @ 803750C

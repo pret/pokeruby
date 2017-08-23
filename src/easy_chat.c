@@ -428,7 +428,7 @@ static u16 sub_80EB9D8(void)
     for (i = 0; i < gEasyChatGroupSizes[EC_GROUP_POKEMON]; i++)
     {
         const u16 dexNum = SpeciesToNationalPokedexNum(*speciesList);
-        const u8 local2 = GetNationalPokedexFlag(dexNum, 0);
+        const u8 local2 = GetSetPokedexFlag(dexNum, 0);
 
         if (local2)
         {

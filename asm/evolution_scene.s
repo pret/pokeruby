@@ -260,7 +260,7 @@ EvolutionScene: @ 8111984
 	adds r0, r6, 0
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x30]
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	ldr r0, [r0]
 	movs r1, 0x88
 	lsls r1, 1
@@ -326,7 +326,7 @@ EvolutionScene: @ 8111984
 	mov r0, r10
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x30]
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	ldr r0, [r0]
 	movs r1, 0x90
 	lsls r1, 1
@@ -568,7 +568,7 @@ CB2_EvolutionSceneLoadGraphics: @ 8111C90
 	adds r0, r6, 0
 	mov r1, r10
 	mov r2, r8
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	ldr r0, [r0]
 	movs r1, 0x90
 	lsls r1, 1
@@ -832,7 +832,7 @@ _08111FE2:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	ldr r0, [r0]
 	movs r1, 0x90
 	lsls r1, 1
@@ -994,7 +994,7 @@ TradeEvolutionScene: @ 81120E4
 	adds r0, r5, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	ldr r0, [r0]
 	movs r1, 0x90
 	lsls r1, 1
@@ -1233,13 +1233,13 @@ _08112354:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -1739,13 +1739,13 @@ _081127BE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08112FD0
@@ -3047,13 +3047,13 @@ _08113316:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0x10]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _08113B3A

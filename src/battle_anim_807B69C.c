@@ -8,12 +8,12 @@
 #include "task.h"
 #include "trig.h"
 
-extern u8 gBattleAnimPlayerMonIndex;
-extern u8 gBattleAnimEnemyMonIndex;
+extern u8 gBattleAnimBankAttacker;
+extern u8 gBattleAnimBankTarget;
 extern bool8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimEnemyMonIndex;
+extern u8 gBattleAnimBankTarget;
 extern u8 gObjectBankIDs[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
@@ -179,8 +179,8 @@ static void sub_807B8A4(struct Sprite *sprite)
 
 void sub_807B920(u8 taskId)
 {
-    s16 x = sub_8077ABC(gBattleAnimEnemyMonIndex, 2) - 32;
-    s16 y = sub_8077ABC(gBattleAnimEnemyMonIndex, 3) - 36;
+    s16 x = sub_8077ABC(gBattleAnimBankTarget, 2) - 32;
+    s16 y = sub_8077ABC(gBattleAnimBankTarget, 3) - 36;
     u8 spriteId;
 
     if (IsContest())
@@ -335,8 +335,8 @@ void move_anim_start_t2(u8 a, u8 b)
 {
     u8 taskId;
 
-    gBattleAnimPlayerMonIndex = a;
-    gBattleAnimEnemyMonIndex = a;
+    gBattleAnimBankAttacker = a;
+    gBattleAnimBankTarget = a;
     DoMoveAnim(gBattleAnims_StatusConditions, b, 0);
     taskId = CreateTask(sub_807BDAC, 10);
     gTasks[taskId].data[0] = a;

@@ -1923,14 +1923,14 @@ void sub_8011384(void)
                 }
                 if (GetBankSide(gActiveBank) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
+                    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
             }
             else
             {
                 if (GetBankSide(gActiveBank) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
-                    GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
+                    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
                     dp01_build_cmdbuf_x04_4_4_4(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
@@ -2085,7 +2085,7 @@ void bc_801362C(void)
         {
             if (GetBankSide(gActiveBank) == 1
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
-                GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
         }
         gBattleMainFunc = sub_8011970;
     }
@@ -2167,7 +2167,7 @@ void BattleBeginFirstTurn(void)
             {
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (b_first_side(gTurnOrder[i], gTurnOrder[j], 1) != 0)
+                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 1) != 0)
                         sub_8012FBC(i, j);
                 }
             }

@@ -1514,8 +1514,8 @@ _08012FE8: .4byte gUnknown_02024A76
 _08012FEC: .4byte gTurnOrder
 	thumb_func_end sub_8012FBC
 
-	thumb_func_start b_first_side
-b_first_side: @ 8012FF0
+	thumb_func_start GetWhoStrikesFirst
+GetWhoStrikesFirst: @ 8012FF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2003,7 +2003,7 @@ _080133B6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end b_first_side
+	thumb_func_end GetWhoStrikesFirst
 
 	thumb_func_start sub_80133C8
 sub_80133C8: @ 80133C8
@@ -2285,7 +2285,7 @@ _080135D0:
 	beq _0801360C
 	adds r0, r3, 0
 	movs r2, 0
-	bl b_first_side
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801360C

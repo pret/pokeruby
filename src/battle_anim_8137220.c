@@ -90,7 +90,7 @@ extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_8030E38(struct Sprite *);
-extern void oamt_set_x3A_32();
+extern void StoreSpriteCallbackInData6();
 extern u8 sub_8046400();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
@@ -1365,7 +1365,7 @@ void sub_8139750(void)
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
     gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[2].data, 0x100 + paletteNum * 16, 32);

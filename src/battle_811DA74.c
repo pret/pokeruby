@@ -67,7 +67,7 @@ extern void (*gAnimScriptCallback)(void);
 extern void (*const gLinkPartnerBufferCommands[])(void);
 
 extern u8 move_anim_start_t3();
-extern u8 sub_8078874();
+extern u8 AnimBankSpriteExists();
 extern void sub_8044CA0(u8);
 extern void sub_8030E38(struct Sprite *);
 extern void sub_80E43C0();
@@ -83,7 +83,7 @@ extern void sub_80324BC();
 extern u8 sub_8031720();
 extern u8 mplay_80342A4();
 extern void oamt_add_pos2_onto_pos1();
-extern void oamt_set_x3A_32();
+extern void StoreSpriteCallbackInData6();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80105EC(struct Sprite *);
 extern s32 sub_803FC34(u16);
@@ -1117,7 +1117,7 @@ void sub_811FC3C(void)
     gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     gBattleBankFunc[gActiveBank] = sub_811DB1C;
 }
 
@@ -1470,7 +1470,7 @@ void sub_8120588(void)
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
     gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     r4 = AllocSpritePalette(0xD6F9);
     LoadCompressedPalette(
@@ -1560,7 +1560,7 @@ void sub_812096C(void)
 
 void sub_8120978(void)
 {
-    if (sub_8078874(gActiveBank) != 0)
+    if (AnimBankSpriteExists(gActiveBank) != 0)
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);

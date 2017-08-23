@@ -66,7 +66,7 @@ extern void sub_8031A6C(u16, u8);
 extern void sub_80313A0(struct Sprite *);
 extern void sub_803757C(void);
 extern void oamt_add_pos2_onto_pos1();
-extern void oamt_set_x3A_32();
+extern void StoreSpriteCallbackInData6();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80375B4(void);
 extern void sub_8010384(struct Sprite *);
@@ -94,7 +94,7 @@ extern void nullsub_47(void);
 extern bool8 IsDoubleBattle(void);
 extern void sub_8037840(void);
 extern void sub_8031B74();
-extern u8 sub_8078874();
+extern u8 AnimBankSpriteExists();
 extern u8 move_anim_start_t3();
 extern void sub_8037FD8(void);
 extern void sub_8037F34(void);
@@ -826,7 +826,7 @@ void sub_80398B0(void)
     gSprites[gObjectBankIDs[gActiveBank]].data2 = 280;
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     gBattleBankFunc[gActiveBank] = sub_80375B4;
 }
 
@@ -1177,7 +1177,7 @@ void sub_803A1B8(void)
     gSprites[gObjectBankIDs[gActiveBank]].data2 = 280;
     gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    oamt_set_x3A_32(&gSprites[gObjectBankIDs[gActiveBank]], sub_803A3A8);
+    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_803A3A8);
     taskId = CreateTask(sub_803A2C4, 5);
     gTasks[taskId].data[0] = gActiveBank;
     if (ewram17810[gActiveBank].unk0_0)
@@ -1274,7 +1274,7 @@ void sub_803A56C(void)
 
 void sub_803A578(void)
 {
-    if (sub_8078874(gActiveBank) != 0)
+    if (AnimBankSpriteExists(gActiveBank) != 0)
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);
