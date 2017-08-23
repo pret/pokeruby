@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "palette.h"
 #include "main.h"
 #include "unknown_task.h"
@@ -50,23 +51,12 @@ void sub_8043DFC(u8 healthboxID);
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static bool8 LoadAppropiateBankSprite(u8 bank);
-void sub_807B184(u8 bank);
-void sub_807B508(u8 bank);
-void sub_807B06C(void);
+static void sub_807B184(u8 bank);
+static void sub_807B508(u8 bank);
+static void sub_807B06C(void);
 
 #define RESHOW_STATE 0x1FFFF
 #define HELPER_STATE 0x1FFFE
-
-struct BGCNT
-{
-    u16 priority : 2;
-    u16 charBaseBlock : 2;
-    u16 reserved : 2;
-    u16 mosaic : 1;
-    u16 colors : 1;
-    u16 screenBaseBlock : 5;
-    u16 screenSize : 2;
-};
 
 void nullsub_14(void)
 {
@@ -208,9 +198,9 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     ewram[RESHOW_STATE]++;
 }
 
-void sub_807B06C(void)
+static void sub_807B06C(void)
 {
-    struct BGCNT *regBgcnt1, *regBgcnt2;
+    struct BGCntrlBitfield *regBgcnt1, *regBgcnt2;
 
     sub_800D6D4();
 
@@ -246,7 +236,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
     return 1;
 }
 
-void sub_807B184(u8 bank)
+static void sub_807B184(u8 bank)
 {
     if (bank < gNoOfAllBanks)
     {
@@ -304,7 +294,7 @@ void sub_807B184(u8 bank)
     }
 }
 
-void sub_807B508(u8 bank)
+static void sub_807B508(u8 bank)
 {
     if (bank < gNoOfAllBanks)
     {
