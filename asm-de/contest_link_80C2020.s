@@ -1601,7 +1601,7 @@ _080C2D42:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0
