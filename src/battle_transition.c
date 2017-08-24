@@ -243,11 +243,11 @@ static const TransitionState sPhase2_Transition_Shuffle_Funcs[] =
 static const TransitionState sPhase2_Transition_BigPokeball_Funcs[] =
 {
     Phase2_Transition_BigPokeball_Func1,
-	Phase2_Transition_BigPokeball_Func2,
-	Phase2_Transition_BigPokeball_Func3,
-	Phase2_Transition_BigPokeball_Func4,
-	Phase2_Transition_BigPokeball_Func5,
-	Phase2_Transition_BigPokeball_Func6
+    Phase2_Transition_BigPokeball_Func2,
+    Phase2_Transition_BigPokeball_Func3,
+    Phase2_Transition_BigPokeball_Func4,
+    Phase2_Transition_BigPokeball_Func5,
+    Phase2_Transition_BigPokeball_Func6
 };
 
 static const TransitionState sPhase2_Transition_PokeballsTrail_Funcs[] =
@@ -571,7 +571,7 @@ static void Task_BattleTransitionMain(u8 taskID)
 static bool8 Transition_Phase1(struct Task* task)
 {
     sub_807DE10();
-    CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x4000100);
+    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
     if (sPhase1_Tasks[task->tTransitionID] != NULL)
     {
         CreateTask(sPhase1_Tasks[task->tTransitionID], 4);
@@ -630,9 +630,9 @@ static void Phase2Task_Transition_Blur(u8 taskID)
 static bool8 Phase2_Transition_Blur_Func1(struct Task* task)
 {
     REG_MOSAIC = 0;
-    REG_BG1CNT |= 0x40;
-    REG_BG2CNT |= 0x40;
-    REG_BG3CNT |= 0x40;
+    REG_BG1CNT |= BGCNT_MOSAIC;
+    REG_BG2CNT |= BGCNT_MOSAIC;
+    REG_BG3CNT |= BGCNT_MOSAIC;
     task->tState++;
     return TRUE;
 }
@@ -682,9 +682,9 @@ static bool8 Phase2_Transition_Swirl_Func1(struct Task* task)
 
     savedIME = REG_IME;
     REG_IME = 0;
-    REG_IE |= 3;
+    REG_IE |= (INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
     REG_IME = savedIME;
-    REG_DISPSTAT |= 0x18;
+    REG_DISPSTAT |= (DISPSTAT_VBLANK_INTR | DISPSTAT_HBLANK_INTR);
 
     task->tState++;
     return FALSE;
@@ -743,9 +743,9 @@ static bool8 Phase2_Transition_Shuffle_Func1(struct Task* task)
 
     savedIME = REG_IME;
     REG_IME = 0;
-    REG_IE |= 3;
+    REG_IE |= (INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
     REG_IME = savedIME;
-    REG_DISPSTAT |= 0x18;
+    REG_DISPSTAT |= (DISPSTAT_VBLANK_INTR | DISPSTAT_HBLANK_INTR);
 
     task->tState++;
     return FALSE;
@@ -1282,8 +1282,8 @@ static bool8 Phase2_Transition_Ripple_Func1(struct Task* task)
     SetVBlankCallback(VBlankCB_Phase2_Transition_Ripple);
     SetHBlankCallback(HBlankCB_Phase2_Transition_Ripple);
 
-    REG_IE |= 2;
-    REG_DISPSTAT |= 0x10;
+    REG_IE |= INTR_FLAG_HBLANK;
+    REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
 
     task->tState++;
     return TRUE;
@@ -1504,8 +1504,8 @@ static bool8 Phase2_Mugshot_Func2(struct Task* task)
         }
     }
 
-    REG_IE |= 2;
-    REG_DISPSTAT |= 0x10;
+    REG_IE |= INTR_FLAG_HBLANK;
+    REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
     SetHBlankCallback(HBlankCB_Phase2_Mugshots);
     task->tState++;
     return FALSE;
@@ -1861,8 +1861,8 @@ static bool8 Phase2_Transition_Slice_Func1(struct Task* task)
         gUnknown_03004DE0[1][160 + i] = 0xF0;
     }
 
-    REG_IE |= 2;
-    REG_DISPSTAT |= 0x10;
+    REG_IE |= INTR_FLAG_HBLANK;
+    REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
 
     SetVBlankCallback(VBlankCB_Phase2_Transition_Slice);
     SetHBlankCallback(HBlankCB_Phase2_Transition_Slice);
@@ -1960,8 +1960,8 @@ static bool8 Phase2_Transition_WhiteFade_Func1(struct Task* task)
         gUnknown_03004DE0[1][i + 160] = 0xF0;
     }
 
-    REG_IE |= 2;
-    REG_DISPSTAT |= 0x10;
+    REG_IE |= INTR_FLAG_HBLANK;
+    REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
 
     SetHBlankCallback(HBlankCB_Phase2_Transition_WhiteFade);
     SetVBlankCallback(VBlankCB0_Phase2_Transition_WhiteFade);
