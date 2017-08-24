@@ -45,7 +45,7 @@ void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16
     mplayInfo->ident = ID_NUMBER;
 }
 
-void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 pitch)
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch)
 {
     s32 i;
     u32 bit;

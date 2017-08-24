@@ -1,40 +1,6 @@
 #include "global.h"
+#include "bard_music.h"
 #include "easy_chat.h"
-
-struct BardSound
-{
-    u8 pad_00[48];
-};
-
-struct UnkBard
-{
-    /*0x00*/ u8 var00;
-    /*0x01*/ s8 var01;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u16 var04;
-    /*0x06*/ u16 var06;
-};
-
-struct UnkBard3
-{
-    /*0x00*/ u16 var00;
-    /*0x02*/ u16 var02;
-    /*0x04*/ s16 var04;
-    /*0x06*/ u16 var06;
-};
-
-struct UnkBard2
-{
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
-    /*0x02*/ u8 var02;
-    /*0x03*/ u8 var03;
-    /*0x04*/ u16 var04;
-             u8 pad06[4];
-    /*0x0A*/ u16 var0A;
-             u8 pad0C[12];
-    /*0x18*/ struct UnkBard3 var18[6];
-};
 
 extern struct BardSound *gBardMusicTable[];
 extern s16 *gUnknown_08417068[];

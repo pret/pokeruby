@@ -457,14 +457,14 @@ struct MauvilleManCommon
 
 struct MauvilleManBard
 {
-               u8 id;
-               u8 unk_2D95;
-    /*0x2D96*/ u16 songLyrics[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 unk_2D95;
+    /*0x02*/ u16 songLyrics[6];
+    /*0x0E*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x1A*/ u8 playerName[8];
+    /*0x22*/ u8 filler_2DB6[0x3];
+    /*0x25*/ u8 playerTrainerId[4];
+    /*0x29*/ u8 unk_2DBD;
 }; /*size = 0x2C*/
 
 struct MauvilleManHipster
@@ -484,17 +484,23 @@ struct MauvilleManTrader
 struct MauvilleManStoryteller
 {
     u8 id;
+    u8 unk1;
+    u8 filler2[2];
+    u8 unk4[4];
+    u8 unk8[4][7];
+    u8 unk24[2][4];  // unknown length
 };
 
 struct MauvilleManGiddy
 {
-    u8 id;
-    u8 unk1;
-    u8 unk2;
-    u16 mauvilleOldMan_ecArray[10];
-    u8 mauvilleOldMan_ecArray2[12];
-    u8 fillerF[0x2];
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 unk1;
+    /*0x02*/ u8 questionNum;
+    /*0x04*/ u16 mauvilleOldMan_ecArray[10];
+    /*0x18*/ u8 questionList[12];
+    /*0x24*/ u8 fillerF[0x2];
 }; /*size = 0x2C*/
+
 
 typedef union OldMan
 {

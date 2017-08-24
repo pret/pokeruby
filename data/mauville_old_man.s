@@ -4,37 +4,6 @@
 	.section .rodata
 
 	.align 2
-gGiddyAdjectives:: @ 83E5388
-	.4byte OtherText_SoPretty
-	.4byte OtherText_SoDarling
-	.4byte OtherText_SoRelaxed
-	.4byte OtherText_SoSunny
-	.4byte OtherText_SoDesirable
-	.4byte OtherText_SoExciting
-	.4byte OtherText_SoAmusing
-	.4byte OtherText_SoMagical
-
-	.align 2
-gGiddyQuestions:: @ 83E53A8
-	.4byte OtherText_WantVacationNicePlace
-	.4byte OtherText_BoughtCrayonsIsNice
-	.4byte OtherText_IfWeCouldFloat
-	.4byte OtherText_SandWashesAwayMakeSad
-	.4byte OtherText_WhatsBottomSeaLike
-	.4byte OtherText_SeeSettingSun
-	.4byte OtherText_LyingInGreenGrass
-	.4byte OtherText_SecretBasesWonderful
-
-	.align 1
-gUnknown_083E53C8:: @ 83E53C8
-	.2byte  0x0, 0
-	.2byte  0xC, 0
-	.2byte  0xD, 0
-	.2byte 0x12, 0
-	.2byte 0x13, 0
-	.2byte 0x15, 0
-
-	.align 2
 gUnknown_083E53E0:: @ 83E53E0
 	.4byte 0x132, UnknownString_81AEFFC, UnknownString_81AF013, UnknownString_81AF022
 	.4byte 0x102, UnknownString_81AF0A3, UnknownString_81AF0BB, UnknownString_81AF0CA
@@ -71,8 +40,6 @@ gUnknown_083E53E0:: @ 83E53E0
 	.4byte 0x12e, UnknownString_81B0523, UnknownString_81B053E, UnknownString_81B0554
 	.4byte 0x12f, UnknownString_81B05D8, UnknownString_81B05F3, UnknownString_81B0610
 	.4byte 0x130, UnknownString_81B06A9, UnknownString_81B06C6, UnknownString_81B06D9
-
-gUnknown_083E5610:: @ 83E5610
 	.4byte 0x131, UnknownString_81B0763, UnknownString_81B0781, UnknownString_81B0797
 
 	.align 2
