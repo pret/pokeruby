@@ -92,30 +92,30 @@ s16 gUnknown_03005FA0[24];
 static const u8 sNatureToMonPokeblockAnim[][2] =
 {
     {  0, 0 }, // HARDY
-	{  3, 0 }, // LONELY
-	{  4, 1 }, // BRAVE
-	{  5, 0 }, // ADAMANT
-	{ 10, 0 }, // NAUGHTY
-	{ 13, 0 }, // BOLD
-	{ 15, 0 }, // DOCILE
-	{ 16, 2 }, // RELAXED
-	{ 18, 0 }, // IMPISH
-	{ 19, 0 }, // LAX
-	{ 20, 0 }, // TIMID
-	{ 25, 0 }, // HASTY
-	{ 27, 3 }, // SERIOUS
-	{ 28, 0 }, // JOLLY
-	{ 29, 0 }, // NAIVE
-	{ 33, 4 }, // MODEST
-	{ 36, 0 }, // MILD
-	{ 37, 0 }, // QUIET
-	{ 39, 0 }, // BASHFUL
-	{ 42, 0 }, // RASH
-	{ 45, 0 }, // CALM
-	{ 46, 5 }, // GENTLE
-	{ 47, 6 }, // SASSY
-	{ 48, 0 }, // CAREFUL
-	{ 53, 0 }, // QUIRKY
+    {  3, 0 }, // LONELY
+    {  4, 1 }, // BRAVE
+    {  5, 0 }, // ADAMANT
+    { 10, 0 }, // NAUGHTY
+    { 13, 0 }, // BOLD
+    { 15, 0 }, // DOCILE
+    { 16, 2 }, // RELAXED
+    { 18, 0 }, // IMPISH
+    { 19, 0 }, // LAX
+    { 20, 0 }, // TIMID
+    { 25, 0 }, // HASTY
+    { 27, 3 }, // SERIOUS
+    { 28, 0 }, // JOLLY
+    { 29, 0 }, // NAIVE
+    { 33, 4 }, // MODEST
+    { 36, 0 }, // MILD
+    { 37, 0 }, // QUIET
+    { 39, 0 }, // BASHFUL
+    { 42, 0 }, // RASH
+    { 45, 0 }, // CALM
+    { 46, 5 }, // GENTLE
+    { 47, 6 }, // SASSY
+    { 48, 0 }, // CAREFUL
+    { 53, 0 }, // QUIRKY
 };
 
 static const s16 sMonPokeblockAnims[][10] =
@@ -228,7 +228,7 @@ static const s16 sMonPokeblockAnims[][10] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411E90[] =
 {
-    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
@@ -242,7 +242,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EA0[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411EC0[] =
 {
-    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 12, 1),
     AFFINEANIMCMD_FRAME(0, 0, 0, 28),
     AFFINEANIMCMD_FRAME(0, 0, -4, 3),
@@ -259,7 +259,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EE8[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F08[] =
 {
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
@@ -276,7 +276,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F30[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F50[] =
 {
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
@@ -293,7 +293,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411F78[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F98[] =
 {
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
@@ -310,7 +310,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411FC0[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411FE0[] =
 {
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 4),
@@ -327,7 +327,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8412008[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8412028[] =
 {
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 2),
@@ -379,7 +379,7 @@ static const u8* const sPokeblocksPals[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
 {
-    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
@@ -390,7 +390,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_84120EC[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
 {
-    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
@@ -399,13 +399,13 @@ static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
 {
-    AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
@@ -414,7 +414,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
 	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
-	AFFINEANIMCMD_FRAME(0xFF00, 0x100, 0, 0),
+	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_END
 };
 
@@ -464,7 +464,7 @@ static const union AnimCmd *const sThrownPokeblockAnimTable[] =
 static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 1),
+	AFFINEANIMCMD_FRAME(-8, -8, 0, 1),
 	AFFINEANIMCMD_JUMP(1)
 };
 
@@ -582,9 +582,9 @@ static bool8 TransitionToPokeblockFeedScene(void)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(CB2_PokeblockFeed);
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 void CB2_PreparePokeblockFeedScene(void)
@@ -660,9 +660,9 @@ static bool8 sub_8147B20(struct Pokemon* mon)
     case 8:
         LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
         ewram[0x1FFFF] = 0;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 static void SetPokeblockFeedSpritePal(u8 pkbID)
@@ -912,7 +912,7 @@ static bool8 sub_8148540(void)
     for (i = 0; i < 10; i++)
         gUnknown_03005FA0[i] = sMonPokeblockAnims[gUnknown_03005F40][i];
     if (gUnknown_03005FA0[4] == 0)
-        return 1;
+        return TRUE;
     else
     {
         gUnknown_03005FA0[10] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2]);
@@ -924,27 +924,30 @@ static bool8 sub_8148540(void)
         gUnknown_03005FA0[4] = gUnknown_03005FA0[12];
         sub_814862C();
         gUnknown_03005FA0[4] = gUnknown_03005FA0[12];
-        return 0;
+        return FALSE;
     }
 }
+
+#define ewram1D000 ((u16 *)(ewram + 0x1D000))
+#define ewram1D400 ((u16 *)(ewram + 0x1D400))
 
 static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = (*((u16*)(&ewram[0x1D000]) + var));
-    gPokeblockFeedPokeSprite->pos2.y = (*((u16*)(&ewram[0x1D400]) + var));
+    gPokeblockFeedPokeSprite->pos2.x = ewram1D000[var];
+    gPokeblockFeedPokeSprite->pos2.y = ewram1D400[var];
 
     if (--gUnknown_03005FA0[4] == 0)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 static bool8 FreePokeSpriteMatrix(void)
 {
     FreeSpriteOamMatrix(gPokeblockFeedPokeSprite);
-    return 0;
+    return FALSE;
 }
 
 static void sub_814862C(void)
@@ -957,23 +960,23 @@ static void sub_814862C(void)
 
     for (i = 0; i < r7 - 1; i++)
     {
-        s16* r3 = (((u16*)(&ewram[0x1D000]) + (r8 + i)));
+        s16* r3 = &ewram1D000[r8 + i];
         s16 r1 = *r3 - (var3);
 
-        s16* r5 = (((u16*)(&ewram[0x1D400]) + (r8 + i)));
+        s16* r5 = &ewram1D400[r8 + i];
         s16 r4 = *r5 - r9;
 
         *r3 -= r1 * (i + 1) / r7;
         *r5 -= r4 * (i + 1) / r7;
     }
 
-    *((u16*)(&ewram[0x1CFFE]) + (r8 + r7)) = var3;
-    *((u16*)(&ewram[0x1D3FE]) + (r8 + r7)) = r9;
+    ewram1D000[(r8 + r7) - 1] = var3;
+    ewram1D400[(r8 + r7) - 1] = r9;
 }
 
 void sub_8148710(void)
 {
-    bool8 var_24 = 0;
+    bool8 var_24 = FALSE;
     s16 r8 = gUnknown_03005FA0[13] - gUnknown_03005FA0[10];
     s16 r7 = gUnknown_03005FA0[14] - gUnknown_03005FA0[11];
     while (1)
@@ -987,22 +990,22 @@ void sub_8148710(void)
         gUnknown_03005FA0[3] = r5;
 
         if (gUnknown_03005FA0[2] < 0)
-            var_24 = 1;
+            var_24 = TRUE;
 
         r4 = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
         if (gUnknown_03005FA0[4] == 0)
             break;
 
-        if (var_24 == 0)
+        if (!var_24)
         {
-            *((u16*)(&ewram[0x1D000]) + r4) = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
-            *((u16*)(&ewram[0x1D400]) + r4) = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
+            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
+            ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
         }
         else
         {
-            *((u16*)(&ewram[0x1D000]) + r4) = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
-            *((u16*)(&ewram[0x1D400]) + r4) = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
+            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
+            ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
         }
 
         gUnknown_03005FA0[0] += gUnknown_03005FA0[1];
