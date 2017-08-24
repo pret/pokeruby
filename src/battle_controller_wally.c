@@ -71,7 +71,7 @@ extern void sub_804777C();
 extern void sub_8043DFC();
 extern bool8 IsDoubleBattle(void);
 extern void c3_0802FDF4(u8);
-extern void sub_802ECF0(void);
+extern void PlayerHandlecmd1(void);
 extern void sub_8031AF4();
 extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
@@ -109,62 +109,62 @@ void sub_81390D0(void);
 void sub_8139A2C(u8);
 
 void WallyHandleGetAttributes(void);
-void sub_8138230(void);
+void WallyHandlecmd1(void);
 void WallyHandleSetAttributes(void);
-void sub_8138C90(void);
-void sub_8138C9C(void);
-void sub_8138CA8(void);
-void sub_8138CB4(void);
-void sub_8138D38(void);
-void sub_8138E04(void);
-void sub_8138ED0(void);
-void sub_8138EDC(void);
-void sub_8138EE8(void);
-void sub_8138EF4(void);
-void sub_8138F44(void);
-void sub_8138FA0(void);
-void sub_8138FAC(void);
-void sub_8139208(void);
-void dp01t_11_5_message_for_player_only(void);
-void sub_8139298(void);
-void sub_8139378(void);
-void sub_8139384(void);
-void sub_81393EC(void);
-void sub_813942C(void);
-void sub_8139438(void);
-void sub_8139444(void);
-void sub_8139544(void);
-void sub_8139550(void);
-void sub_813955C(void);
-void sub_8139568(void);
-void sub_8139574(void);
-void sub_8139580(void);
-void sub_813958C(void);
-void sub_8139598(void);
-void sub_81395A4(void);
-void sub_81395B0(void);
-void sub_81395BC(void);
-void sub_81395C8(void);
-void sub_81395D4(void);
-void sub_81395E0(void);
-void sub_81395EC(void);
-void sub_81395F8(void);
-void sub_8139604(void);
-void sub_8139674(void);
-void sub_8139680(void);
-void sub_81396B0(void);
-void sub_81396E0(void);
-void dp01t_2E_5_battle_intro(void);
-void sub_8139750(void);
-void sub_8139AA0(void);
-void sub_8139B20(void);
-void sub_8139B2C(void);
-void sub_8139B38(void);
-void sub_8139B44(void);
-void sub_8139BA0(void);
-void sub_8139BAC(void);
-void sub_8139BB8(void);
-void nullsub_80(void);
+void WallyHandlecmd3(void);
+void WallyHandleLoadPokeSprite(void);
+void WallyHandleSendOutPoke(void);
+void WallyHandleReturnPokeToBall(void);
+void WallyHandleTrainerThrow(void);
+void WallyHandleTrainerSlide(void);
+void WallyHandleTrainerSlideBack(void);
+void WallyHandlecmd10(void);
+void WallyHandlecmd11(void);
+void WallyHandlecmd12(void);
+void WallyHandleBallThrow(void);
+void WallyHandlePuase(void);
+void WallyHandleMoveAnimation(void);
+void WallyHandlePrintString(void);
+void WallyHandlePrintStringPlayerOnly(void);
+void WallyHandlecmd18(void);
+void WallyHandlecmd19(void);
+void WallyHandlecmd20(void);
+void WallyHandleOpenBag(void);
+void WallyHandlecmd22(void);
+void WallyHandlecmd23(void);
+void WallyHandleHealthBarUpdate(void);
+void WallyHandleExpBarUpdate(void);
+void WallyHandleStatusIconUpdate(void);
+void WallyHandleStatusAnimation(void);
+void WallyHandleStatusXor(void);
+void WallyHandlecmd29(void);
+void WallyHandleDMATransfer(void);
+void WallyHandlecmd31(void);
+void WallyHandlecmd32(void);
+void WallyHandlecmd33(void);
+void WallyHandlecmd34(void);
+void WallyHandlecmd35(void);
+void WallyHandlecmd36(void);
+void WallyHandlecmd37(void);
+void WallyHandlecmd38(void);
+void WallyHandlecmd39(void);
+void WallyHandlecmd40(void);
+void WallyHandleHitAnimation(void);
+void WallyHandlecmd42(void);
+void WallyHandleEffectivenessSound(void);
+void WallyHandlecmd44(void);
+void WallyHandleFaintingCry(void);
+void WallyHandleIntroSlide(void);
+void WallyHandleTrainerBallThrow(void);
+void WallyHandlecmd48(void);
+void WallyHandlecmd49(void);
+void WallyHandlecmd50(void);
+void WallyHandleSpriteInvisibility(void);
+void WallyHandleBattleAnimation(void);
+void WallyHandleLinkStandbyMsg(void);
+void WallyHandleResetActionMoveSelection(void);
+void WallyHandlecmd55(void);
+void WallyHandlecmd56(void);
 
 // const data
 
@@ -172,62 +172,62 @@ typedef void (*BattleBufferCmd) (void);
 static const BattleBufferCmd gWallyBufferCommands[] =
 {
 	WallyHandleGetAttributes,
-	sub_8138230,
+	WallyHandlecmd1,
 	WallyHandleSetAttributes,
-	sub_8138C90,
-	sub_8138C9C,
-	sub_8138CA8,
-	sub_8138CB4,
-	sub_8138D38,
-	sub_8138E04,
-	sub_8138ED0,
-	sub_8138EDC,
-	sub_8138EE8,
-	sub_8138EF4,
-	sub_8138F44,
-	sub_8138FA0,
-	sub_8138FAC,
-	sub_8139208,
-	dp01t_11_5_message_for_player_only,
-	sub_8139298,
-	sub_8139378,
-	sub_8139384,
-	sub_81393EC,
-	sub_813942C,
-	sub_8139438,
-	sub_8139444,
-	sub_8139544,
-	sub_8139550,
-	sub_813955C,
-	sub_8139568,
-	sub_8139574,
-	sub_8139580,
-	sub_813958C,
-	sub_8139598,
-	sub_81395A4,
-	sub_81395B0,
-	sub_81395BC,
-	sub_81395C8,
-	sub_81395D4,
-	sub_81395E0,
-	sub_81395EC,
-	sub_81395F8,
-	sub_8139604,
-	sub_8139674,
-	sub_8139680,
-	sub_81396B0,
-	sub_81396E0,
-	dp01t_2E_5_battle_intro,
-	sub_8139750,
-	sub_8139AA0,
-	sub_8139B20,
-	sub_8139B2C,
-	sub_8139B38,
-	sub_8139B44,
-	sub_8139BA0,
-	sub_8139BAC,
-	sub_8139BB8,
-	nullsub_80,
+	WallyHandlecmd3,
+	WallyHandleLoadPokeSprite,
+	WallyHandleSendOutPoke,
+	WallyHandleReturnPokeToBall,
+	WallyHandleTrainerThrow,
+	WallyHandleTrainerSlide,
+	WallyHandleTrainerSlideBack,
+	WallyHandlecmd10,
+	WallyHandlecmd11,
+	WallyHandlecmd12,
+	WallyHandleBallThrow,
+	WallyHandlePuase,
+	WallyHandleMoveAnimation,
+	WallyHandlePrintString,
+	WallyHandlePrintStringPlayerOnly,
+	WallyHandlecmd18,
+	WallyHandlecmd19,
+	WallyHandlecmd20,
+	WallyHandleOpenBag,
+	WallyHandlecmd22,
+	WallyHandlecmd23,
+	WallyHandleHealthBarUpdate,
+	WallyHandleExpBarUpdate,
+	WallyHandleStatusIconUpdate,
+	WallyHandleStatusAnimation,
+	WallyHandleStatusXor,
+	WallyHandlecmd29,
+	WallyHandleDMATransfer,
+	WallyHandlecmd31,
+	WallyHandlecmd32,
+	WallyHandlecmd33,
+	WallyHandlecmd34,
+	WallyHandlecmd35,
+	WallyHandlecmd36,
+	WallyHandlecmd37,
+	WallyHandlecmd38,
+	WallyHandlecmd39,
+	WallyHandlecmd40,
+	WallyHandleHitAnimation,
+	WallyHandlecmd42,
+	WallyHandleEffectivenessSound,
+	WallyHandlecmd44,
+	WallyHandleFaintingCry,
+	WallyHandleIntroSlide,
+	WallyHandleTrainerBallThrow,
+	WallyHandlecmd48,
+	WallyHandlecmd49,
+	WallyHandlecmd50,
+	WallyHandleSpriteInvisibility,
+	WallyHandleBattleAnimation,
+	WallyHandleLinkStandbyMsg,
+	WallyHandleResetActionMoveSelection,
+	WallyHandlecmd55,
+	WallyHandlecmd56,
 };
 
 // code
@@ -829,9 +829,9 @@ u32 sub_8137A84(u8 a, u8 *buffer)
     return size;
 }
 
-void sub_8138230(void)
+void WallyHandlecmd1(void)
 {
-    sub_802ECF0();
+    PlayerHandlecmd1();
 }
 
 void WallyHandleSetAttributes(void)
@@ -1073,22 +1073,22 @@ void sub_8138294(u8 a)
     sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
-void sub_8138C90(void)
+void WallyHandlecmd3(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138C9C(void)
+void WallyHandleLoadPokeSprite(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138CA8(void)
+void WallyHandleSendOutPoke(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138CB4(void)
+void WallyHandleReturnPokeToBall(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 0)
     {
@@ -1104,7 +1104,7 @@ void sub_8138CB4(void)
     }
 }
 
-void sub_8138D38(void)
+void WallyHandleTrainerThrow(void)
 {
     sub_8031AF4(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
@@ -1119,7 +1119,7 @@ void sub_8138D38(void)
     gBattleBankFunc[gActiveBank] = sub_813741C;
 }
 
-void sub_8138E04(void)
+void WallyHandleTrainerSlide(void)
 {
     sub_8031AF4(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
@@ -1134,22 +1134,22 @@ void sub_8138E04(void)
     gBattleBankFunc[gActiveBank] = sub_8137908;
 }
 
-void sub_8138ED0(void)
+void WallyHandleTrainerSlideBack(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138EDC(void)
+void WallyHandlecmd10(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138EE8(void)
+void WallyHandlecmd11(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138EF4(void)
+void WallyHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = TRUE;
@@ -1157,7 +1157,7 @@ void sub_8138EF4(void)
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
-void sub_8138F44(void)
+void WallyHandleBallThrow(void)
 {
     u8 val = gBattleBufferA[gActiveBank][1];
 
@@ -1167,12 +1167,12 @@ void sub_8138F44(void)
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
-void sub_8138FA0(void)
+void WallyHandlePuase(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8138FAC(void)
+void WallyHandleMoveAnimation(void)
 {
     u16 r0 = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
 
@@ -1240,7 +1240,7 @@ void sub_81390D0(void)
     }
 }
 
-void sub_8139208(void)
+void WallyHandlePrintString(void)
 {
     u16 *ptr;
 
@@ -1254,15 +1254,15 @@ void sub_8139208(void)
     gBattleBankFunc[gActiveBank] = sub_8137454;
 }
 
-void dp01t_11_5_message_for_player_only(void)
+void WallyHandlePrintStringPlayerOnly(void)
 {
     if (GetBankSide(gActiveBank) == 0)
-        sub_8139208();
+        WallyHandlePrintString();
     else
         WallyBufferExecCompleted();
 }
 
-void sub_8139298(void)
+void WallyHandlecmd18(void)
 {
     s32 i;
 
@@ -1287,12 +1287,12 @@ void sub_8139298(void)
     sub_8002F44(&gUnknown_03004210);
 }
 
-void sub_8139378(void)
+void WallyHandlecmd19(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139384(void)
+void WallyHandlecmd20(void)
 {
     switch (ewram[0x160A9])
     {
@@ -1314,24 +1314,24 @@ void sub_8139384(void)
     }
 }
 
-void sub_81393EC(void)
+void WallyHandleOpenBag(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gBattleBankFunc[gActiveBank] = sub_81374C4;
     gBankInMenu = gActiveBank;
 }
 
-void sub_813942C(void)
+void WallyHandlecmd22(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139438(void)
+void WallyHandlecmd23(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139444(void)
+void WallyHandleHealthBarUpdate(void)
 {
     s16 r7;
 
@@ -1354,87 +1354,87 @@ void sub_8139444(void)
     gBattleBankFunc[gActiveBank] = sub_81377B0;
 }
 
-void sub_8139544(void)
+void WallyHandleExpBarUpdate(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139550(void)
+void WallyHandleStatusIconUpdate(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_813955C(void)
+void WallyHandleStatusAnimation(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139568(void)
+void WallyHandleStatusXor(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139574(void)
+void WallyHandlecmd29(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139580(void)
+void WallyHandleDMATransfer(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_813958C(void)
+void WallyHandlecmd31(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139598(void)
+void WallyHandlecmd32(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395A4(void)
+void WallyHandlecmd33(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395B0(void)
+void WallyHandlecmd34(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395BC(void)
+void WallyHandlecmd35(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395C8(void)
+void WallyHandlecmd36(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395D4(void)
+void WallyHandlecmd37(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395E0(void)
+void WallyHandlecmd38(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395EC(void)
+void WallyHandlecmd39(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_81395F8(void)
+void WallyHandlecmd40(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139604(void)
+void WallyHandleHitAnimation(void)
 {
     if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
     {
@@ -1449,37 +1449,37 @@ void sub_8139604(void)
     }
 }
 
-void sub_8139674(void)
+void WallyHandlecmd42(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139680(void)
+void WallyHandleEffectivenessSound(void)
 {
     PlaySE(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     WallyBufferExecCompleted();
 }
 
-void sub_81396B0(void)
+void WallyHandlecmd44(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     WallyBufferExecCompleted();
 }
 
-void sub_81396E0(void)
+void WallyHandleFaintingCry(void)
 {
     PlayCry1(GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES), 25);
     WallyBufferExecCompleted();
 }
 
-void dp01t_2E_5_battle_intro(void)
+void WallyHandleIntroSlide(void)
 {
     sub_80E43C0(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     WallyBufferExecCompleted();
 }
 
-void sub_8139750(void)
+void WallyHandleTrainerBallThrow(void)
 {
     u8 paletteNum;
     u8 taskId;
@@ -1546,7 +1546,7 @@ void sub_8139A2C(u8 taskId)
     }
 }
 
-void sub_8139AA0(void)
+void WallyHandlecmd48(void)
 {
     if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
     {
@@ -1560,22 +1560,22 @@ void sub_8139AA0(void)
     }
 }
 
-void sub_8139B20(void)
+void WallyHandlecmd49(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139B2C(void)
+void WallyHandlecmd50(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139B38(void)
+void WallyHandleSpriteInvisibility(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139B44(void)
+void WallyHandleBattleAnimation(void)
 {
     u8 val2 = gBattleBufferA[gActiveBank][1];
     u16 val = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
@@ -1586,17 +1586,17 @@ void sub_8139B44(void)
         gBattleBankFunc[gActiveBank] = sub_8137940;
 }
 
-void sub_8139BA0(void)
+void WallyHandleLinkStandbyMsg(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139BAC(void)
+void WallyHandleResetActionMoveSelection(void)
 {
     WallyBufferExecCompleted();
 }
 
-void sub_8139BB8(void)
+void WallyHandlecmd55(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBank][1];
     FadeOutMapMusic(5);
@@ -1606,6 +1606,6 @@ void sub_8139BB8(void)
         gBattleBankFunc[gActiveBank] = sub_813746C;
 }
 
-void nullsub_80(void)
+void WallyHandlecmd56(void)
 {
 }

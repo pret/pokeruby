@@ -532,56 +532,56 @@ SafariHandleGetAttributes: @ 812B864
 	bx r0
 	thumb_func_end SafariHandleGetAttributes
 
-	thumb_func_start sub_812B870
-sub_812B870: @ 812B870
+	thumb_func_start SafariHandlecmd1
+SafariHandlecmd1: @ 812B870
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B870
+	thumb_func_end SafariHandlecmd1
 
-	thumb_func_start sub_812B87C
-sub_812B87C: @ 812B87C
+	thumb_func_start SafariHandleSetAttributes
+SafariHandleSetAttributes: @ 812B87C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B87C
+	thumb_func_end SafariHandleSetAttributes
 
-	thumb_func_start sub_812B888
-sub_812B888: @ 812B888
+	thumb_func_start SafariHandlecmd3
+SafariHandlecmd3: @ 812B888
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B888
+	thumb_func_end SafariHandlecmd3
 
-	thumb_func_start sub_812B894
-sub_812B894: @ 812B894
+	thumb_func_start SafariHandleLoadPokeSprite
+SafariHandleLoadPokeSprite: @ 812B894
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B894
+	thumb_func_end SafariHandleLoadPokeSprite
 
-	thumb_func_start sub_812B8A0
-sub_812B8A0: @ 812B8A0
+	thumb_func_start SafariHandleSendOutPoke
+SafariHandleSendOutPoke: @ 812B8A0
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B8A0
+	thumb_func_end SafariHandleSendOutPoke
 
-	thumb_func_start sub_812B8AC
-sub_812B8AC: @ 812B8AC
+	thumb_func_start SafariHandleReturnPokeToBall
+SafariHandleReturnPokeToBall: @ 812B8AC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B8AC
+	thumb_func_end SafariHandleReturnPokeToBall
 
-	thumb_func_start sub_812B8B8
-sub_812B8B8: @ 812B8B8
+	thumb_func_start SafariHandleTrainerThrow
+SafariHandleTrainerThrow: @ 812B8B8
 	push {r4-r6,lr}
 	ldr r4, _0812B96C @ =gSaveBlock2
 	ldrb r0, [r4, 0x8]
@@ -678,42 +678,42 @@ _0812B984: .4byte 0x0000fffe
 _0812B988: .4byte sub_80313A0
 _0812B98C: .4byte gBattleBankFunc
 _0812B990: .4byte sub_812B65C
-	thumb_func_end sub_812B8B8
+	thumb_func_end SafariHandleTrainerThrow
 
-	thumb_func_start sub_812B994
-sub_812B994: @ 812B994
+	thumb_func_start SafariHandleTrainerSlide
+SafariHandleTrainerSlide: @ 812B994
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B994
+	thumb_func_end SafariHandleTrainerSlide
 
-	thumb_func_start sub_812B9A0
-sub_812B9A0: @ 812B9A0
+	thumb_func_start SafariHandleTrainerSlideBack
+SafariHandleTrainerSlideBack: @ 812B9A0
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B9A0
+	thumb_func_end SafariHandleTrainerSlideBack
 
-	thumb_func_start sub_812B9AC
-sub_812B9AC: @ 812B9AC
+	thumb_func_start SafariHandlecmd10
+SafariHandlecmd10: @ 812B9AC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B9AC
+	thumb_func_end SafariHandlecmd10
 
-	thumb_func_start sub_812B9B8
-sub_812B9B8: @ 812B9B8
+	thumb_func_start SafariHandlecmd11
+SafariHandlecmd11: @ 812B9B8
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812B9B8
+	thumb_func_end SafariHandlecmd11
 
-	thumb_func_start sub_812B9C4
-sub_812B9C4: @ 812B9C4
+	thumb_func_start SafariHandlecmd12
+SafariHandlecmd12: @ 812B9C4
 	push {r4,r5,lr}
 	ldr r1, _0812BA00 @ =0x02017840
 	movs r0, 0x4
@@ -747,10 +747,10 @@ _0812BA04: .4byte gDoingBattleAnim
 _0812BA08: .4byte gActiveBank
 _0812BA0C: .4byte gBattleBankFunc
 _0812BA10: .4byte bx_wait_t6
-	thumb_func_end sub_812B9C4
+	thumb_func_end SafariHandlecmd12
 
-	thumb_func_start sub_812BA14
-sub_812BA14: @ 812BA14
+	thumb_func_start SafariHandleBallThrow
+SafariHandleBallThrow: @ 812BA14
 	push {r4,r5,lr}
 	ldr r1, _0812BA58 @ =gBattleBufferA
 	ldr r5, _0812BA5C @ =gActiveBank
@@ -790,23 +790,23 @@ _0812BA60: .4byte 0x02017840
 _0812BA64: .4byte gDoingBattleAnim
 _0812BA68: .4byte gBattleBankFunc
 _0812BA6C: .4byte bx_wait_t6
-	thumb_func_end sub_812BA14
+	thumb_func_end SafariHandleBallThrow
 
-	thumb_func_start sub_812BA70
-sub_812BA70: @ 812BA70
+	thumb_func_start SafariHandlePuase
+SafariHandlePuase: @ 812BA70
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BA70
+	thumb_func_end SafariHandlePuase
 
-	thumb_func_start sub_812BA7C
-sub_812BA7C: @ 812BA7C
+	thumb_func_start SafariHandleMoveAnimation
+SafariHandleMoveAnimation: @ 812BA7C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BA7C
+	thumb_func_end SafariHandleMoveAnimation
 
 	thumb_func_start SafariHandlePrintString
 SafariHandlePrintString: @ 812BA88
@@ -874,24 +874,24 @@ _0812BB0C:
 
 .section .text_812BBFC
 
-	thumb_func_start sub_812BBFC
-sub_812BBFC: @ 812BBFC
+	thumb_func_start SafariHandlecmd19
+SafariHandlecmd19: @ 812BBFC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BBFC
+	thumb_func_end SafariHandlecmd19
 
-	thumb_func_start sub_812BC08
-sub_812BC08: @ 812BC08
+	thumb_func_start SafariHandlecmd20
+SafariHandlecmd20: @ 812BC08
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BC08
+	thumb_func_end SafariHandlecmd20
 
-	thumb_func_start sub_812BC14
-sub_812BC14: @ 812BC14
+	thumb_func_start SafariHandleOpenBag
+SafariHandleOpenBag: @ 812BC14
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -919,42 +919,42 @@ _0812BC44: .4byte gBattleBankFunc
 _0812BC48: .4byte gActiveBank
 _0812BC4C: .4byte sub_812B724
 _0812BC50: .4byte gBankInMenu
-	thumb_func_end sub_812BC14
+	thumb_func_end SafariHandleOpenBag
 
-	thumb_func_start sub_812BC54
-sub_812BC54: @ 812BC54
+	thumb_func_start SafariHandlecmd22
+SafariHandlecmd22: @ 812BC54
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BC54
+	thumb_func_end SafariHandlecmd22
 
-	thumb_func_start sub_812BC60
-sub_812BC60: @ 812BC60
+	thumb_func_start SafariHandlecmd23
+SafariHandlecmd23: @ 812BC60
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BC60
+	thumb_func_end SafariHandlecmd23
 
-	thumb_func_start sub_812BC6C
-sub_812BC6C: @ 812BC6C
+	thumb_func_start SafariHandleHealthBarUpdate
+SafariHandleHealthBarUpdate: @ 812BC6C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BC6C
+	thumb_func_end SafariHandleHealthBarUpdate
 
-	thumb_func_start sub_812BC78
-sub_812BC78: @ 812BC78
+	thumb_func_start SafariHandleExpBarUpdate
+SafariHandleExpBarUpdate: @ 812BC78
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BC78
+	thumb_func_end SafariHandleExpBarUpdate
 
-	thumb_func_start sub_812BC84
-sub_812BC84: @ 812BC84
+	thumb_func_start SafariHandleStatusIconUpdate
+SafariHandleStatusIconUpdate: @ 812BC84
 	push {lr}
 	ldr r0, _0812BCB0 @ =gHealthboxIDs
 	ldr r1, _0812BCB4 @ =gActiveBank
@@ -979,138 +979,138 @@ _0812BCB0: .4byte gHealthboxIDs
 _0812BCB4: .4byte gActiveBank
 _0812BCB8: .4byte gBattlePartyID
 _0812BCBC: .4byte gPlayerParty
-	thumb_func_end sub_812BC84
+	thumb_func_end SafariHandleStatusIconUpdate
 
-	thumb_func_start sub_812BCC0
-sub_812BCC0: @ 812BCC0
+	thumb_func_start SafariHandleStatusAnimation
+SafariHandleStatusAnimation: @ 812BCC0
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCC0
+	thumb_func_end SafariHandleStatusAnimation
 
-	thumb_func_start sub_812BCCC
-sub_812BCCC: @ 812BCCC
+	thumb_func_start SafariHandleStatusXor
+SafariHandleStatusXor: @ 812BCCC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCCC
+	thumb_func_end SafariHandleStatusXor
 
-	thumb_func_start sub_812BCD8
-sub_812BCD8: @ 812BCD8
+	thumb_func_start SafariHandlecmd29
+SafariHandlecmd29: @ 812BCD8
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCD8
+	thumb_func_end SafariHandlecmd29
 
-	thumb_func_start sub_812BCE4
-sub_812BCE4: @ 812BCE4
+	thumb_func_start SafariHandleDMATransfer
+SafariHandleDMATransfer: @ 812BCE4
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCE4
+	thumb_func_end SafariHandleDMATransfer
 
-	thumb_func_start sub_812BCF0
-sub_812BCF0: @ 812BCF0
+	thumb_func_start SafariHandlecmd31
+SafariHandlecmd31: @ 812BCF0
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCF0
+	thumb_func_end SafariHandlecmd31
 
-	thumb_func_start sub_812BCFC
-sub_812BCFC: @ 812BCFC
+	thumb_func_start SafariHandlecmd32
+SafariHandlecmd32: @ 812BCFC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BCFC
+	thumb_func_end SafariHandlecmd32
 
-	thumb_func_start sub_812BD08
-sub_812BD08: @ 812BD08
+	thumb_func_start SafariHandlecmd33
+SafariHandlecmd33: @ 812BD08
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD08
+	thumb_func_end SafariHandlecmd33
 
-	thumb_func_start sub_812BD14
-sub_812BD14: @ 812BD14
+	thumb_func_start SafariHandlecmd34
+SafariHandlecmd34: @ 812BD14
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD14
+	thumb_func_end SafariHandlecmd34
 
-	thumb_func_start sub_812BD20
-sub_812BD20: @ 812BD20
+	thumb_func_start SafariHandlecmd35
+SafariHandlecmd35: @ 812BD20
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD20
+	thumb_func_end SafariHandlecmd35
 
-	thumb_func_start sub_812BD2C
-sub_812BD2C: @ 812BD2C
+	thumb_func_start SafariHandlecmd36
+SafariHandlecmd36: @ 812BD2C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD2C
+	thumb_func_end SafariHandlecmd36
 
-	thumb_func_start sub_812BD38
-sub_812BD38: @ 812BD38
+	thumb_func_start SafariHandlecmd37
+SafariHandlecmd37: @ 812BD38
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD38
+	thumb_func_end SafariHandlecmd37
 
-	thumb_func_start sub_812BD44
-sub_812BD44: @ 812BD44
+	thumb_func_start SafariHandlecmd38
+SafariHandlecmd38: @ 812BD44
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD44
+	thumb_func_end SafariHandlecmd38
 
-	thumb_func_start sub_812BD50
-sub_812BD50: @ 812BD50
+	thumb_func_start SafariHandlecmd39
+SafariHandlecmd39: @ 812BD50
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD50
+	thumb_func_end SafariHandlecmd39
 
-	thumb_func_start sub_812BD5C
-sub_812BD5C: @ 812BD5C
+	thumb_func_start SafariHandlecmd40
+SafariHandlecmd40: @ 812BD5C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD5C
+	thumb_func_end SafariHandlecmd40
 
-	thumb_func_start sub_812BD68
-sub_812BD68: @ 812BD68
+	thumb_func_start SafariHandleHitAnimation
+SafariHandleHitAnimation: @ 812BD68
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD68
+	thumb_func_end SafariHandleHitAnimation
 
-	thumb_func_start sub_812BD74
-sub_812BD74: @ 812BD74
+	thumb_func_start SafariHandlecmd42
+SafariHandlecmd42: @ 812BD74
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BD74
+	thumb_func_end SafariHandlecmd42
 
-	thumb_func_start sub_812BD80
-sub_812BD80: @ 812BD80
+	thumb_func_start SafariHandleEffectivenessSound
+SafariHandleEffectivenessSound: @ 812BD80
 	push {r4,lr}
 	ldr r4, _0812BDBC @ =gActiveBank
 	ldrb r0, [r4]
@@ -1142,10 +1142,10 @@ _0812BD94:
 	.align 2, 0
 _0812BDBC: .4byte gActiveBank
 _0812BDC0: .4byte gBattleBufferA
-	thumb_func_end sub_812BD80
+	thumb_func_end SafariHandleEffectivenessSound
 
-	thumb_func_start sub_812BDC4
-sub_812BDC4: @ 812BDC4
+	thumb_func_start SafariHandlecmd44
+SafariHandlecmd44: @ 812BDC4
 	push {lr}
 	ldr r2, _0812BDEC @ =gBattleBufferA
 	ldr r0, _0812BDF0 @ =gActiveBank
@@ -1166,10 +1166,10 @@ sub_812BDC4: @ 812BDC4
 	.align 2, 0
 _0812BDEC: .4byte gBattleBufferA
 _0812BDF0: .4byte gActiveBank
-	thumb_func_end sub_812BDC4
+	thumb_func_end SafariHandlecmd44
 
-	thumb_func_start sub_812BDF4
-sub_812BDF4: @ 812BDF4
+	thumb_func_start SafariHandleFaintingCry
+SafariHandleFaintingCry: @ 812BDF4
 	push {lr}
 	ldr r1, _0812BE24 @ =gBattlePartyID
 	ldr r0, _0812BE28 @ =gActiveBank
@@ -1194,10 +1194,10 @@ sub_812BDF4: @ 812BDF4
 _0812BE24: .4byte gBattlePartyID
 _0812BE28: .4byte gActiveBank
 _0812BE2C: .4byte gPlayerParty
-	thumb_func_end sub_812BDF4
+	thumb_func_end SafariHandleFaintingCry
 
-	thumb_func_start dp01t_2E_6_battle_intro
-dp01t_2E_6_battle_intro: @ 812BE30
+	thumb_func_start SafariHandleIntroSlide
+SafariHandleIntroSlide: @ 812BE30
 	push {lr}
 	ldr r1, _0812BE58 @ =gBattleBufferA
 	ldr r0, _0812BE5C @ =gActiveBank
@@ -1219,10 +1219,10 @@ dp01t_2E_6_battle_intro: @ 812BE30
 _0812BE58: .4byte gBattleBufferA
 _0812BE5C: .4byte gActiveBank
 _0812BE60: .4byte gUnknown_02024DE8
-	thumb_func_end dp01t_2E_6_battle_intro
+	thumb_func_end SafariHandleIntroSlide
 
-	thumb_func_start sub_812BE64
-sub_812BE64: @ 812BE64
+	thumb_func_start SafariHandleTrainerBallThrow
+SafariHandleTrainerBallThrow: @ 812BE64
 	push {r4,r5,lr}
 	ldr r5, _0812BEA0 @ =gHealthboxIDs
 	ldr r4, _0812BEA4 @ =gActiveBank
@@ -1254,42 +1254,42 @@ _0812BEA0: .4byte gHealthboxIDs
 _0812BEA4: .4byte gActiveBank
 _0812BEA8: .4byte gBattlePartyID
 _0812BEAC: .4byte gPlayerParty
-	thumb_func_end sub_812BE64
+	thumb_func_end SafariHandleTrainerBallThrow
 
-	thumb_func_start sub_812BEB0
-sub_812BEB0: @ 812BEB0
+	thumb_func_start SafariHandlecmd48
+SafariHandlecmd48: @ 812BEB0
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BEB0
+	thumb_func_end SafariHandlecmd48
 
-	thumb_func_start sub_812BEBC
-sub_812BEBC: @ 812BEBC
+	thumb_func_start SafariHandlecmd49
+SafariHandlecmd49: @ 812BEBC
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BEBC
+	thumb_func_end SafariHandlecmd49
 
-	thumb_func_start sub_812BEC8
-sub_812BEC8: @ 812BEC8
+	thumb_func_start SafariHandlecmd50
+SafariHandlecmd50: @ 812BEC8
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BEC8
+	thumb_func_end SafariHandlecmd50
 
-	thumb_func_start sub_812BED4
-sub_812BED4: @ 812BED4
+	thumb_func_start SafariHandleSpriteInvisibility
+SafariHandleSpriteInvisibility: @ 812BED4
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BED4
+	thumb_func_end SafariHandleSpriteInvisibility
 
-	thumb_func_start sub_812BEE0
-sub_812BEE0: @ 812BEE0
+	thumb_func_start SafariHandleBattleAnimation
+SafariHandleBattleAnimation: @ 812BEE0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _0812BF18 @ =gBattleBufferA
@@ -1334,26 +1334,26 @@ _0812BF2C:
 	.align 2, 0
 _0812BF34: .4byte gBattleBankFunc
 _0812BF38: .4byte sub_812B794
-	thumb_func_end sub_812BEE0
+	thumb_func_end SafariHandleBattleAnimation
 
-	thumb_func_start sub_812BF3C
-sub_812BF3C: @ 812BF3C
+	thumb_func_start SafariHandleLinkStandbyMsg
+SafariHandleLinkStandbyMsg: @ 812BF3C
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BF3C
+	thumb_func_end SafariHandleLinkStandbyMsg
 
-	thumb_func_start sub_812BF48
-sub_812BF48: @ 812BF48
+	thumb_func_start SafariHandleResetActionMoveSelection
+SafariHandleResetActionMoveSelection: @ 812BF48
 	push {lr}
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812BF48
+	thumb_func_end SafariHandleResetActionMoveSelection
 
-	thumb_func_start sub_812BF54
-sub_812BF54: @ 812BF54
+	thumb_func_start SafariHandlecmd55
+SafariHandlecmd55: @ 812BF54
 	push {r4,lr}
 	ldr r2, _0812BF98 @ =gBattleOutcome
 	ldr r1, _0812BF9C @ =gBattleBufferA
@@ -1392,11 +1392,11 @@ _0812BFA0: .4byte gActiveBank
 _0812BFA4: .4byte gBattleTypeFlags
 _0812BFA8: .4byte gBattleBankFunc
 _0812BFAC: .4byte sub_812B6AC
-	thumb_func_end sub_812BF54
+	thumb_func_end SafariHandlecmd55
 
-	thumb_func_start nullsub_78
-nullsub_78: @ 812BFB0
+	thumb_func_start SafariHandlecmd56
+SafariHandlecmd56: @ 812BFB0
 	bx lr
-	thumb_func_end nullsub_78
+	thumb_func_end SafariHandlecmd56
 
 	.align 2, 0 @ Don't pad with nop.

@@ -180,124 +180,124 @@ extern void sub_80A6DCC(void);
 extern void ReshowBattleScreenAfterMenu(void);
 
 void PlayerHandleGetAttributes(void);
-void sub_802ECF0(void);
+void PlayerHandlecmd1(void);
 void PlayerHandleSetAttributes(void);
-void sub_802F7CC(void);
+void PlayerHandlecmd3(void);
 void PlayerHandleLoadPokeSprite(void);
 void PlayerHandleSendOutPoke(void);
 void PlayerHandleReturnPokeToBall(void);
 void PlayerHandleTrainerThrow(void);
 void PlayerHandleTrainerSlide(void);
 void PlayerHandleTrainerSlideBack(void);
-void sub_802FE7C(void);
-void sub_802FF60(void);
-void sub_802FF80(void);
+void PlayerHandlecmd10(void);
+void PlayerHandlecmd11(void);
+void PlayerHandlecmd12(void);
 void PlayerHandleBallThrow(void);
 void PlayerHandlePuase(void);
 void PlayerHandleMoveAnimation(void);
 void PlayerHandlePrintString(void);
 void PlayerHandlePrintStringPlayerOnly(void);
-void sub_803037C(void);
-void nullsub_42(void);
-void sub_8030468(void);
+void PlayerHandlecmd18(void);
+void PlayerHandlecmd19(void);
+void PlayerHandlecmd20(void);
 void PlayerHandleOpenBag(void);
-void sub_8030594(void);
-void sub_8030674(void);
+void PlayerHandlecmd22(void);
+void PlayerHandlecmd23(void);
 void PlayerHandleHealthBarUpdate(void);
 void PlayerHandleExpBarUpdate(void);
 void PlayerHandleStatusIconUpdate(void);
 void PlayerHandleStatusAnimation(void);
 void PlayerHandleStatusXor(void);
-void sub_803097C(void);
+void PlayerHandlecmd29(void);
 void PlayerHandleDMATransfer(void);
-void sub_8030A3C(void);
-void sub_8030A6C(void);
-void sub_8030A78(void);
-void sub_8030A8C(void);
-void sub_8030AA0(void);
-void sub_8030AB4(void);
-void sub_8030AC8(void);
-void sub_8030AE4(void);
-void sub_8030B1C(void);
-void sub_8030B34(void);
+void PlayerHandlecmd31(void);
+void PlayerHandlecmd32(void);
+void PlayerHandlecmd33(void);
+void PlayerHandlecmd34(void);
+void PlayerHandlecmd35(void);
+void PlayerHandlecmd36(void);
+void PlayerHandlecmd37(void);
+void PlayerHandlecmd38(void);
+void PlayerHandlecmd39(void);
+void PlayerHandlecmd40(void);
 void PlayerHandleHitAnimation(void);
-void sub_8030BCC(void);
+void PlayerHandlecmd42(void);
 void PlayerHandleEffectivenessSound(void);
-void sub_8030C1C(void);
+void PlayerHandlecmd44(void);
 void PlayerHandleFaintingCry(void);
 void PlayerHandleIntroSlide(void);
 void PlayerHandleTrainerBallThrow(void);
-void sub_8030FAC(void);
-void sub_80310A4(void);
-void sub_80310F0(void);
+void PlayerHandlecmd48(void);
+void PlayerHandlecmd49(void);
+void PlayerHandlecmd50(void);
 void PlayerHandleSpriteInvisibility(void);
 void PlayerHandleBattleAnimation(void);
 void PlayerHandleLinkStandbyMsg(void);
 void PlayerHandleResetActionMoveSelection(void);
-void sub_80312A0(void);
-void nullsub_43(void);
+void PlayerHandlecmd55(void);
+void PlayerHandlecmd56(void);
 
 const u8 gString_TurnJP[] = _("ターン");
 
 void (*const gPlayerBufferCommands[])(void) =
 {
     PlayerHandleGetAttributes,
-    sub_802ECF0,
+    PlayerHandlecmd1,
     PlayerHandleSetAttributes,
-    sub_802F7CC,
+    PlayerHandlecmd3,
     PlayerHandleLoadPokeSprite,
     PlayerHandleSendOutPoke,
     PlayerHandleReturnPokeToBall,
     PlayerHandleTrainerThrow,
     PlayerHandleTrainerSlide,
     PlayerHandleTrainerSlideBack,
-    sub_802FE7C,
-    sub_802FF60,
-    sub_802FF80,
+    PlayerHandlecmd10,
+    PlayerHandlecmd11,
+    PlayerHandlecmd12,
     PlayerHandleBallThrow,
     PlayerHandlePuase,
     PlayerHandleMoveAnimation,
     PlayerHandlePrintString,
     PlayerHandlePrintStringPlayerOnly,
-    sub_803037C,
-    nullsub_42,
-    sub_8030468,
+    PlayerHandlecmd18,
+    PlayerHandlecmd19,
+    PlayerHandlecmd20,
     PlayerHandleOpenBag,
-    sub_8030594,
-    sub_8030674,
+    PlayerHandlecmd22,
+    PlayerHandlecmd23,
     PlayerHandleHealthBarUpdate,
     PlayerHandleExpBarUpdate,
     PlayerHandleStatusIconUpdate,
     PlayerHandleStatusAnimation,
     PlayerHandleStatusXor,
-    sub_803097C,
+    PlayerHandlecmd29,
     PlayerHandleDMATransfer,
-    sub_8030A3C,
-    sub_8030A6C,
-    sub_8030A78,
-    sub_8030A8C,
-    sub_8030AA0,
-    sub_8030AB4,
-    sub_8030AC8,
-    sub_8030AE4,
-    sub_8030B1C,
-    sub_8030B34,
+    PlayerHandlecmd31,
+    PlayerHandlecmd32,
+    PlayerHandlecmd33,
+    PlayerHandlecmd34,
+    PlayerHandlecmd35,
+    PlayerHandlecmd36,
+    PlayerHandlecmd37,
+    PlayerHandlecmd38,
+    PlayerHandlecmd39,
+    PlayerHandlecmd40,
     PlayerHandleHitAnimation,
-    sub_8030BCC,
+    PlayerHandlecmd42,
     PlayerHandleEffectivenessSound,
-    sub_8030C1C,
+    PlayerHandlecmd44,
     PlayerHandleFaintingCry,
     PlayerHandleIntroSlide,
     PlayerHandleTrainerBallThrow,
-    sub_8030FAC,
-    sub_80310A4,
-    sub_80310F0,
+    PlayerHandlecmd48,
+    PlayerHandlecmd49,
+    PlayerHandlecmd50,
     PlayerHandleSpriteInvisibility,
     PlayerHandleBattleAnimation,
     PlayerHandleLinkStandbyMsg,
     PlayerHandleResetActionMoveSelection,
-    sub_80312A0,
-    nullsub_43,
+    PlayerHandlecmd55,
+    PlayerHandlecmd56,
 };
 
 void PlayerBufferRunCommand(void);
@@ -2033,7 +2033,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
     return size;
 }
 
-void sub_802ECF0(void)
+void PlayerHandlecmd1(void)
 {
     struct BattlePokemon battleMon;  // I think this is a BattlePokemon
     u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
@@ -2286,7 +2286,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
     sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
-void sub_802F7CC(void)
+void PlayerHandlecmd3(void)
 {
     u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     u8 i;
@@ -2430,7 +2430,7 @@ void PlayerHandleTrainerSlideBack(void)
     gBattleBankFunc[gActiveBank] = sub_802D274;
 }
 
-void sub_802FE7C(void)
+void PlayerHandlecmd10(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
@@ -2453,13 +2453,13 @@ void sub_802FE7C(void)
     }
 }
 
-void sub_802FF60(void)
+void PlayerHandlecmd11(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
     PlayerBufferExecCompleted();
 }
 
-void sub_802FF80(void)
+void PlayerHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
@@ -2579,7 +2579,7 @@ void PlayerHandlePrintStringPlayerOnly(void)
         PlayerBufferExecCompleted();
 }
 
-void sub_803037C(void)
+void PlayerHandlecmd18(void)
 {
     int r4;
 
@@ -2604,11 +2604,11 @@ void sub_803037C(void)
     sub_8002F44(&gUnknown_03004210);
 }
 
-void nullsub_42()
+void PlayerHandlecmd19()
 {
 }
 
-void sub_8030468(void)
+void PlayerHandlecmd20(void)
 {
     sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     sub_80304A8();
@@ -2642,7 +2642,7 @@ void PlayerHandleOpenBag(void)
         gUnknown_02038470[i] = gBattleBufferA[gActiveBank][1 + i];
 }
 
-void sub_8030594(void)
+void PlayerHandlecmd22(void)
 {
     s32 i;
 
@@ -2658,7 +2658,7 @@ void sub_8030594(void)
     gBankInMenu = gActiveBank;
 }
 
-void sub_8030674(void)
+void PlayerHandlecmd23(void)
 {
     BattleMusicStop();
     BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
@@ -2741,7 +2741,7 @@ void PlayerHandleStatusXor(void)
     PlayerBufferExecCompleted();
 }
 
-void sub_803097C(void)
+void PlayerHandlecmd29(void)
 {
     PlayerBufferExecCompleted();
 }
@@ -2773,60 +2773,60 @@ void PlayerHandleDMATransfer(void)
     PlayerBufferExecCompleted();
 }
 
-void sub_8030A3C(void)
+void PlayerHandlecmd31(void)
 {
     PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     PlayerBufferExecCompleted();
 }
 
-void sub_8030A6C(void)
+void PlayerHandlecmd32(void)
 {
     PlayerBufferExecCompleted();
 }
 
-void sub_8030A78(void)
+void PlayerHandlecmd33(void)
 {
     dp01_build_cmdbuf_x21_a_bb(1, 0, 0);
     PlayerBufferExecCompleted();
 }
 
-void sub_8030A8C(void)
+void PlayerHandlecmd34(void)
 {
     dp01_build_cmdbuf_x22_a_three_bytes(1, 0, 0);
     PlayerBufferExecCompleted();
 }
 
-void sub_8030AA0(void)
+void PlayerHandlecmd35(void)
 {
     dp01_build_cmdbuf_x23_aa_0(1, 0);
     PlayerBufferExecCompleted();
 }
 
-void sub_8030AB4(void)
+void PlayerHandlecmd36(void)
 {
     dp01_build_cmdbuf_x24_aa_0(1, 0);
     PlayerBufferExecCompleted();
 }
 
-void sub_8030AC8(void)
+void PlayerHandlecmd37(void)
 {
     gUnknown_020238C8.unk0_0 = 0;
     PlayerBufferExecCompleted();
 }
 
-void sub_8030AE4(void)
+void PlayerHandlecmd38(void)
 {
     gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
     PlayerBufferExecCompleted();
 }
 
-void sub_8030B1C(void)
+void PlayerHandlecmd39(void)
 {
     gUnknown_020238C8.unk0_7 = 0;
     PlayerBufferExecCompleted();
 }
 
-void sub_8030B34(void)
+void PlayerHandlecmd40(void)
 {
     gUnknown_020238C8.unk0_7 ^= 1;
     PlayerBufferExecCompleted();
@@ -2847,7 +2847,7 @@ void PlayerHandleHitAnimation(void)
     }
 }
 
-void sub_8030BCC(void)
+void PlayerHandlecmd42(void)
 {
     PlayerBufferExecCompleted();
 }
@@ -2864,7 +2864,7 @@ void PlayerHandleEffectivenessSound(void)
     PlayerBufferExecCompleted();
 }
 
-void sub_8030C1C(void)
+void PlayerHandlecmd44(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     PlayerBufferExecCompleted();
@@ -2952,7 +2952,7 @@ void task05_08033660(u8 taskId)
     }
 }
 
-void sub_8030FAC(void)
+void PlayerHandlecmd48(void)
 {
     if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
     {
@@ -2978,14 +2978,14 @@ void sub_8031064(void)
     }
 }
 
-void sub_80310A4(void)
+void PlayerHandlecmd49(void)
 {
     if (ewram17810[gActiveBank].unk0_0)
         gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
     PlayerBufferExecCompleted();
 }
 
-void sub_80310F0(void)
+void PlayerHandlecmd50(void)
 {
     dp11b_obj_free(gActiveBank, 1);
     dp11b_obj_free(gActiveBank, 0);
@@ -3052,7 +3052,7 @@ void PlayerHandleResetActionMoveSelection(void)
     PlayerBufferExecCompleted();
 }
 
-void sub_80312A0(void)
+void PlayerHandlecmd55(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBank][1];
     FadeOutMapMusic(5);
@@ -3061,6 +3061,6 @@ void sub_80312A0(void)
     gBattleBankFunc[gActiveBank] = sub_802D18C;
 }
 
-void nullsub_43(void)
+void PlayerHandlecmd56(void)
 {
 }
