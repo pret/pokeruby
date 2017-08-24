@@ -618,13 +618,13 @@ bool8 FieldEffectActiveListContains(u8 id)
     return FALSE;
 }
 
-u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer)
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer)
 {
     struct SpriteTemplate spriteTemplate;
-    LoadCompressedObjectPaletteOverrideBuffer(&gTrainerFrontPicPaletteTable[gender], buffer);
-    LoadCompressedObjectPicOverrideBuffer(&gTrainerFrontPicTable[gender], buffer);
-    spriteTemplate.tileTag = gTrainerFrontPicTable[gender].tag;
-    spriteTemplate.paletteTag = gTrainerFrontPicPaletteTable[gender].tag;
+    LoadCompressedObjectPaletteOverrideBuffer(&gTrainerFrontPicPaletteTable[trainerSpriteID], buffer);
+    LoadCompressedObjectPicOverrideBuffer(&gTrainerFrontPicTable[trainerSpriteID], buffer);
+    spriteTemplate.tileTag = gTrainerFrontPicTable[trainerSpriteID].tag;
+    spriteTemplate.paletteTag = gTrainerFrontPicPaletteTable[trainerSpriteID].tag;
     spriteTemplate.oam = &gOamData_839F0F4;
     spriteTemplate.anims = gDummySpriteAnimTable;
     spriteTemplate.images = NULL;

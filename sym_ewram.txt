@@ -308,20 +308,7 @@ gUnknown_02029700: @ 2029700
 gUnknown_020297D8: @ 20297D8
 	.space 0x4
 
-@ berry_blender
-
-gUnknown_020297DC: @ 20297DC
-	.space 0x4
-
-gUnknown_020297E0: @ 20297E0
-	.space 0x4
-
-gUnknown_020297E4: @ 20297E4
-	.space 0x4
-
-gUnknown_020297E8: @ 20297E8
-	.space 0x4
-
+	.include "src/berry_blender.o"
 	.include "src/new_game.o"
 	.include "src/rom4.o"
 	.include "src/fieldmap.o"
