@@ -943,7 +943,7 @@ void sub_802D680(void)
         ewram17810[gActiveBank].unk1_0 = 0;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
         gBattleBankFunc[gActiveBank] = sub_802D730;
     }
