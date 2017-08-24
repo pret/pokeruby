@@ -60,8 +60,8 @@ extern const u8 gUnknown_08400CCC[];
 extern const u8 gUnknown_08400CF3[];
 
 // TODO: include rom3.h when my other PR gets merged
-extern void dp01_build_cmdbuf_x21_a_bb(u8, u8, u16);
-extern void dp01_build_cmdbuf_x23_aa_0(u8, u16);
+extern void Emitcmd33(u8, u8, u16);
+extern void Emitcmd35(u8, u16);
 
 extern void nullsub_14(void);
 extern void PrepareBagForWallyTutorial(void);
@@ -271,7 +271,7 @@ void sub_81372BC(void)
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
-            dp01_build_cmdbuf_x21_a_bb(1, 0, 0);
+            Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
             ewram[0x160A8]++;
             ewram[0x160A9] = r4;
@@ -283,7 +283,7 @@ void sub_81372BC(void)
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
-            dp01_build_cmdbuf_x21_a_bb(1, 0, 0);
+            Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
             ewram[0x160A8]++;
             ewram[0x160A9] = r4;
@@ -294,7 +294,7 @@ void sub_81372BC(void)
         r4 = --ewram[0x160AA];
         if (r4 == 0)
         {
-            dp01_build_cmdbuf_x21_a_bb(1, 9, 0);
+            Emitcmd33(1, 9, 0);
             WallyBufferExecCompleted();
             ewram[0x160A8]++;
             ewram[0x160A9] = r4;
@@ -316,7 +316,7 @@ void sub_81372BC(void)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
-            dp01_build_cmdbuf_x21_a_bb(1, 1, 0);
+            Emitcmd33(1, 1, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -366,7 +366,7 @@ void sub_81374FC(void)
     if (gMain.callback2 == sub_800F808
      && !gPaletteFade.active)
     {
-        dp01_build_cmdbuf_x23_aa_0(1, gScriptItemId);
+        Emitcmd35(1, gScriptItemId);
         WallyBufferExecCompleted();
     }
 }
@@ -520,7 +520,7 @@ void WallyHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, arr);
+    Emitcmd29(1, r6, arr);
     WallyBufferExecCompleted();
 }
 
@@ -1307,7 +1307,7 @@ void WallyHandlecmd20(void)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);
-            dp01_build_cmdbuf_x21_a_bb(1, 10, 256);
+            Emitcmd33(1, 10, 256);
             WallyBufferExecCompleted();
         }
         break;

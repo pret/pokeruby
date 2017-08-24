@@ -552,7 +552,7 @@ void OpponentHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, buffer);
+    Emitcmd29(1, r6, buffer);
     OpponentBufferExecCompleted();
 }
 
@@ -870,7 +870,7 @@ void OpponentHandlecmd1(void)
 
     for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
         dst[i] = src[i];
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, gBattleBufferA[gActiveBank][2], dst);
+    Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     OpponentBufferExecCompleted();
 }
 
@@ -1445,10 +1445,10 @@ void OpponentHandlecmd20(void)
         switch (r4)
         {
         case 5:
-            dp01_build_cmdbuf_x21_a_bb(1, 4, 0);
+            Emitcmd33(1, 4, 0);
             break;
         case 4:
-            dp01_build_cmdbuf_x21_a_bb(1, 3, 0);
+            Emitcmd33(1, 3, 0);
             break;
         default:
             if (gBattleMoves[r5->moves[r4]].target & 0x12)
@@ -1460,7 +1460,7 @@ void OpponentHandlecmd20(void)
                     gBankTarget = GetBankByPlayerAI(2);
             }
             r4 |= gBankTarget << 8;
-            dp01_build_cmdbuf_x21_a_bb(1, 10, r4);
+            Emitcmd33(1, 10, r4);
             break;
         }
         OpponentBufferExecCompleted();
@@ -1479,19 +1479,19 @@ void OpponentHandlecmd20(void)
         if (gBattleMoves[r2].target & 0x12)
         {
             r4 |= gActiveBank << 8;
-            dp01_build_cmdbuf_x21_a_bb(1, 10, r4);
+            Emitcmd33(1, 10, r4);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
             u16 r2 = GetBankByPlayerAI(Random() & 2) << 8;
 
-            dp01_build_cmdbuf_x21_a_bb(1, 10, r4 | r2);
+            Emitcmd33(1, 10, r4 | r2);
         }
         else
         {
             u16 r2 = GetBankByPlayerAI(0) << 8;
 
-            dp01_build_cmdbuf_x21_a_bb(1, 10, r4 | r2);
+            Emitcmd33(1, 10, r4 | r2);
         }
         OpponentBufferExecCompleted();
     }
@@ -1534,7 +1534,7 @@ _08035468:\n\
     movs r1, 0x3\n\
 _0803546C:\n\
     movs r2, 0\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
     b _080354E0\n\
 _08035474:\n\
     ldr r3, _080354E8 @ =gBattleMoves\n\
@@ -1589,7 +1589,7 @@ _080354CE:\n\
     movs r0, 0x1\n\
     movs r1, 0xA\n\
     adds r2, r4, 0\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
 _080354E0:\n\
     bl OpponentBufferExecCompleted\n\
     b _0803558A\n\
@@ -1626,7 +1626,7 @@ _080354FA:\n\
     movs r0, 0x1\n\
     movs r1, 0xA\n\
     adds r2, r4, 0\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
     b _08035586\n\
     .align 2, 0\n\
 _08035534: .4byte gBattleMoves\n\
@@ -1651,7 +1651,7 @@ _0803553C:\n\
     orrs r2, r4\n\
     movs r0, 0x1\n\
     movs r1, 0xA\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
     b _08035586\n\
     .align 2, 0\n\
 _0803556C: .4byte gBattleTypeFlags\n\
@@ -1664,7 +1664,7 @@ _08035570:\n\
     orrs r2, r4\n\
     movs r0, 0x1\n\
     movs r1, 0xA\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
 _08035586:\n\
     bl OpponentBufferExecCompleted\n\
 _0803558A:\n\
@@ -1678,7 +1678,7 @@ _0803558A:\n\
 void OpponentHandleOpenBag(void)
 {
     // What is this?
-    dp01_build_cmdbuf_x23_aa_0(1, ewram[0x160D4 + gActiveBank / 2 * 2]);
+    Emitcmd35(1, ewram[0x160D4 + gActiveBank / 2 * 2]);
     OpponentBufferExecCompleted();
 }
 
@@ -1719,7 +1719,7 @@ void OpponentHandlecmd22(void)
         ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2] = 6;
     }
     ewram[0x16068 + gActiveBank] = r4;
-    dp01_build_cmdbuf_x22_a_three_bytes(1, r4, 0);
+    Emitcmd34(1, r4, 0);
     OpponentBufferExecCompleted();
 }
 

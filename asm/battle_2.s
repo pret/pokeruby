@@ -189,7 +189,7 @@ _080124A8:
 	lsls r0, 8
 	orrs r2, r0
 	movs r0, 0
-	bl dp01_build_cmdbuf_x12_a_bb
+	bl Emitcmd18
 	bl _08012E32
 	.align 2, 0
 _080124C0: .4byte gActionForBanks
@@ -408,7 +408,7 @@ _0801264E:
 	movs r0, 0
 	movs r2, 0
 	add r3, sp, 0x4
-	bl sub_800CBA4
+	bl Emitcmd20
 	b _0801289E
 	.align 2, 0
 _080126AC: .4byte gBattleMons
@@ -573,7 +573,7 @@ _080127E0:
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x6
-	bl EmitChoosePokemon
+	bl Emitcmd22
 	b _0801289E
 	.align 2, 0
 _08012808: .4byte gActiveBank
@@ -624,7 +624,7 @@ _08012854:
 	movs r1, 0
 _0801286C:
 	movs r3, 0
-	bl EmitChoosePokemon
+	bl Emitcmd22
 	b _0801289E
 	.align 2, 0
 _08012874: .4byte gActionForBanks
@@ -643,7 +643,7 @@ _08012884:
 	movs r1, 0
 	movs r2, 0x6
 	movs r3, 0
-	bl EmitChoosePokemon
+	bl Emitcmd22
 _0801289E:
 	ldr r0, _080128A8 @ =gActiveBank
 	ldrb r0, [r0]
@@ -698,7 +698,7 @@ _08012908:
 	ldr r0, _08012928 @ =0x0201606c
 	adds r1, r0
 	movs r0, 0
-	bl sub_800CBE0
+	bl EmitOpenBag
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	b _08012968
@@ -725,7 +725,7 @@ _0801292C:
 	adds r0, r4
 	strb r5, [r0]
 	movs r0, 0
-	bl dp01_build_cmdbuf_x32_32_32_32
+	bl Emitcmd50
 	mov r4, r8
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution

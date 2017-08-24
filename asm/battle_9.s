@@ -41,7 +41,7 @@ ai_switch_perish_song: @ 8035FEC
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	movs r0, 0x1
 	b _0803604E
 	.align 2, 0
@@ -86,7 +86,7 @@ _08036070:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	movs r0, 0x1
 	b _080361CA
 	.align 2, 0
@@ -410,7 +410,7 @@ _0803630C:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	movs r0, 0x1
 	b _08036402
 	.align 2, 0
@@ -634,7 +634,7 @@ _080364E0:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 _080364FE:
 	movs r0, 0x1
 _08036500:
@@ -958,7 +958,7 @@ _08036768:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	movs r0, 0x1
 	b _080368DA
 	.align 2, 0
@@ -1533,7 +1533,7 @@ _08036C2E:
 	lsls r2, 8
 	movs r0, 0x1
 	movs r1, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 _08036C40:
 	pop {r4-r6}
 	pop {r0}
@@ -2623,7 +2623,7 @@ _080374AE:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	ldr r1, _080374DC @ =0x02000000
 	ldr r0, _080374E0 @ =gActiveBank
 	ldrb r0, [r0]

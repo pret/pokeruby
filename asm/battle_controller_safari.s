@@ -115,13 +115,13 @@ _0812B52A:
 	movs r1, 0x7
 _0812B52E:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 	b _0812B540
 _0812B536:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl Emitcmd33
 _0812B540:
 	bl SafariBufferExecCompleted
 	b _0812B64E
@@ -407,7 +407,7 @@ sub_812B758: @ 812B758
 	ldr r0, _0812B790 @ =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl Emitcmd35
 	bl SafariBufferExecCompleted
 _0812B77E:
 	pop {r0}

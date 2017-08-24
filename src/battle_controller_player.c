@@ -387,16 +387,16 @@ void sub_802C098(void)
         switch (gActionSelectionCursor[gActiveBank])
         {
         case 0:
-            dp01_build_cmdbuf_x21_a_bb(1, 0, 0);
+            Emitcmd33(1, 0, 0);
             break;
         case 1:
-            dp01_build_cmdbuf_x21_a_bb(1, 1, 0);
+            Emitcmd33(1, 1, 0);
             break;
         case 2:
-            dp01_build_cmdbuf_x21_a_bb(1, 2, 0);
+            Emitcmd33(1, 2, 0);
             break;
         case 3:
-            dp01_build_cmdbuf_x21_a_bb(1, 3, 0);
+            Emitcmd33(1, 3, 0);
             break;
         }
         PlayerBufferExecCompleted();
@@ -457,7 +457,7 @@ void sub_802C098(void)
                     return;
             }
             PlaySE(SE_SELECT);
-            dp01_build_cmdbuf_x21_a_bb(1, 12, 0);
+            Emitcmd33(1, 12, 0);
             PlayerBufferExecCompleted();
             DestroyMenuCursor();
         }
@@ -497,7 +497,7 @@ void sub_802C2EC(void)
         DestroyMenuCursor();
         PlaySE(SE_SELECT);
         gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010574;
-        dp01_build_cmdbuf_x21_a_bb(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
+        Emitcmd33(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
         dp11b_obj_free(gUnknown_03004344, 1);
         PlayerBufferExecCompleted();
     }
@@ -660,7 +660,7 @@ void sub_802C68C(void)
         if (r8 == 0)
         {
             DestroyMenuCursor();
-            dp01_build_cmdbuf_x21_a_bb(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
+            Emitcmd33(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
             PlayerBufferExecCompleted();
         }
         else
@@ -681,7 +681,7 @@ void sub_802C68C(void)
         PlaySE(SE_SELECT);
         gUnknown_030042A4 = 0;
         gUnknown_030042A0 = 320;
-        dp01_build_cmdbuf_x21_a_bb(1, 10, 0xFFFF);
+        Emitcmd33(1, 10, 0xFFFF);
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & DPAD_LEFT)
@@ -1154,7 +1154,7 @@ void sub_802D924(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBank;
             gActiveBank = bank;
-            dp01_build_cmdbuf_x21_a_bb(1, 11, gainedExp);
+            Emitcmd33(1, 11, gainedExp);
             gActiveBank = savedActiveBank;
 
             if (IsDoubleBattle() == TRUE
@@ -1239,7 +1239,7 @@ void sub_802DB6C(u8 taskId)
                 r10 -= asdf;
                 r5 = gActiveBank;
                 gActiveBank = r7;
-                dp01_build_cmdbuf_x21_a_bb(1, 11, r10);
+                Emitcmd33(1, 11, r10);
                 gActiveBank = r5;
                 gTasks[taskId].func = sub_802DCB0;
             }
@@ -1369,7 +1369,7 @@ _0802DB9C:\n\
     lsrs r2, 16\n\
     movs r0, 0x1\n\
     movs r1, 0xB\n\
-    bl dp01_build_cmdbuf_x21_a_bb\n\
+    bl Emitcmd33\n\
     strb r5, [r4]\n\
     ldr r0, _0802DC78 @ =sub_802DCB0\n\
     str r0, [r6]\n\
@@ -1499,9 +1499,9 @@ void sub_802DF88(void)
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
         if (gUnknown_0202E8F4 == 1)
-            dp01_build_cmdbuf_x22_a_three_bytes(1, gUnknown_0202E8F5, gUnknown_02038470);
+            Emitcmd34(1, gUnknown_0202E8F5, gUnknown_02038470);
         else
-            dp01_build_cmdbuf_x22_a_three_bytes(1, 6, NULL);
+            Emitcmd34(1, 6, NULL);
         if ((gBattleBufferA[gActiveBank][1] & 0xF) == 1)
             b_link_standby_message();
         PlayerBufferExecCompleted();
@@ -1522,7 +1522,7 @@ void sub_802E03C(void)
 {
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
-        dp01_build_cmdbuf_x23_aa_0(1, gScriptItemId);
+        Emitcmd35(1, gScriptItemId);
         PlayerBufferExecCompleted();
     }
 }
@@ -1723,7 +1723,7 @@ void PlayerHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, offset, unkData);
+    Emitcmd29(1, offset, unkData);
     PlayerBufferExecCompleted();
 }
 
@@ -2042,7 +2042,7 @@ void PlayerHandlecmd1(void)
 
     for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
         dst[i] = src[i];
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, gBattleBufferA[gActiveBank][2], dst);
+    Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     PlayerBufferExecCompleted();
 }
 
@@ -2786,25 +2786,25 @@ void PlayerHandlecmd32(void)
 
 void PlayerHandlecmd33(void)
 {
-    dp01_build_cmdbuf_x21_a_bb(1, 0, 0);
+    Emitcmd33(1, 0, 0);
     PlayerBufferExecCompleted();
 }
 
 void PlayerHandlecmd34(void)
 {
-    dp01_build_cmdbuf_x22_a_three_bytes(1, 0, 0);
+    Emitcmd34(1, 0, 0);
     PlayerBufferExecCompleted();
 }
 
 void PlayerHandlecmd35(void)
 {
-    dp01_build_cmdbuf_x23_aa_0(1, 0);
+    Emitcmd35(1, 0);
     PlayerBufferExecCompleted();
 }
 
 void PlayerHandlecmd36(void)
 {
-    dp01_build_cmdbuf_x24_aa_0(1, 0);
+    Emitcmd36(1, 0);
     PlayerBufferExecCompleted();
 }
 

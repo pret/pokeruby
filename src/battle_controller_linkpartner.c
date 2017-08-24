@@ -543,7 +543,7 @@ void LinkPartnerHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, unk);
+    Emitcmd29(1, r6, unk);
     LinkPartnerBufferExecCompleted();
 }
 
