@@ -484,7 +484,7 @@ struct MauvilleManTrader
 struct MauvilleManStoryteller
 {
     u8 id;
-    u8 unk1;
+    bool8 unk1;
     u8 filler2[2];
     u8 unk4[4];
     u8 unk8[4][7];

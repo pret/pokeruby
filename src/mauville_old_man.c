@@ -4,6 +4,7 @@
 #include "easy_chat.h"
 #include "easy_chat_constants.h"
 #include "event_data.h"
+#include "field_message_box.h"
 #include "m4a.h"
 #include "menu.h"
 #include "rom4.h"
@@ -70,6 +71,7 @@ const u8 *const gGiddyQuestions[] =
 };
 
 void sub_80F8184(u8);
+void StorytellerSetup(void);
 void sub_80F8428(void);
 
 void SetupBard(void)
@@ -889,7 +891,7 @@ void StorytellerSetup(void)
     s32 i;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
-    storyteller->unk1 = 0;
+    storyteller->unk1 = FALSE;
     for (i = 0; i < 4; i++)
     {
         storyteller->unk4[i] = 0;
@@ -902,7 +904,7 @@ void sub_80F8428(void)
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
-    storyteller->unk1 = 0;
+    storyteller->unk1 = FALSE;
 }
 
 u32 sub_80F8438(u8 stat)
@@ -981,7 +983,7 @@ void sub_80F84EC(u32 a, u32 b)
     ptr[3] = b >> 24;
 }
 
-bool8 sub_80F8508(u32 a)
+bool32 sub_80F8508(u32 a)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
 
@@ -1017,4 +1019,164 @@ void sub_80F8598(u32 a, u32 b)
     sub_80F84EC(a, sub_80F8438(b));
     ConvertIntToDecimalStringN(gStringVar1, sub_80F8438(b), 0, 10);
     StringCopy(gStringVar2, sub_80F8490(b));
+}
+
+void sub_80F85FC(u8 *arr, s32 count)
+{
+    s32 i;
+
+    for (i = 0; i < count; i++)
+        arr[i] = i;
+    for (i = 0; i < count; i++)
+    {
+        u32 a = Random() % count;
+        u32 b = Random() % count;
+        u8 temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
+
+extern const struct {u32 unk0; struct MauvilleManStoryteller *unk4; u32 unk8;} gUnknown_083E5620;
+/*
+static const struct {u32 unk0; struct MauvilleManStoryteller *unk4; u32 unk8;} gUnknown_083E5620 =
+{
+    36,
+    &gSaveBlock1.oldMan.storyteller,
+    12,
+};
+*/
+
+bool8 sub_80F8650(void)
+{
+    u8 arr[gUnknown_083E5620.unk0];
+    s32 i;
+    s32 j;
+
+    sub_80F85FC(arr, 36);
+    for (i = 0; i < 36; i++)
+    {
+        u8 r4 = gUnknown_083E53E0[arr[i]].unk0;
+        u8 r6 = gUnknown_083E53E0[arr[i]].unk1;
+        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+
+        for (j = 0; j < 4; j++)
+        {
+            if (gSaveBlock1.oldMan.storyteller.unk4[j] == r4)
+                break;
+        }
+        if (j == 4 && sub_80F8438(r4) >= r6)
+        {
+            storyteller->unk1 = TRUE;
+            sub_80F8598(sub_80F849C(), r4);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_80F8700(u32 a)
+{
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    u8 r6 = storyteller->unk4[a];
+
+    ConvertIntToDecimalStringN(gStringVar1, sub_80F84C8(a), 0, 10);
+    StringCopy(gStringVar2, sub_80F8490(r6));
+    sub_80F8534(a, gStringVar3);
+    ShowFieldMessage(sub_80F8484(r6));
+}
+
+void sub_80F8758(void)
+{
+    s32 i;
+
+    MenuDrawTextWindow(0, 0, 25, 4 + sub_80F849C() * 2);
+    for (i = 0; i < 4; i++)
+    {
+        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+        u8 r0 = storyteller->unk4[i];
+
+        if (r0 == 0)
+            break;
+        MenuPrint(sub_80F8478(r0), 1, 2 + i * 2);
+    }
+    MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
+}
+
+extern u8 gUnknown_03000748;
+
+void sub_80F87C4(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    s32 selection;
+
+    switch (task->data[0])
+    {
+    case 0:
+        sub_80F8758();
+        InitMenu(0, 1, 2, sub_80F849C() + 1, 0, 24);
+        task->data[0]++;
+        break;
+    case 1:
+        selection = ProcessMenuInput();
+        if (selection == -2)
+            break;
+        if (selection == -1 || selection == sub_80F849C())
+        {
+            gScriptResult = 0;
+        }
+        else
+        {
+            gScriptResult = 1;
+            gUnknown_03000748 = selection;
+        }
+        HandleDestroyMenuCursors();
+        MenuZeroFillWindowRect(0, 0, 25, 12);
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+        break;
+    }
+}
+
+void sub_80F8874(void)
+{
+    CreateTask(sub_80F87C4, 0x50);
+}
+
+void sub_80F8888(void)
+{
+    sub_80F8700(gUnknown_03000748);
+}
+
+u8 sub_80F889C(void)
+{
+    return sub_80F849C();
+}
+
+bool8 sub_80F88AC(void)
+{
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    u8 r4 = storyteller->unk4[gUnknown_03000748];
+
+    if (sub_80F8508(gUnknown_03000748) == TRUE)
+    {
+        sub_80F8598(gUnknown_03000748, r4);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80F88E0(void)
+{
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+
+    if (storyteller->unk1 == FALSE)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool8 sub_80F88FC(void)
+{
+    return sub_80F8650();
 }
