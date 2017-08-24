@@ -23,11 +23,121 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
+
+extern const u8 UnknownString_81AEFFC[];
+extern const u8 UnknownString_81AF013[];
+extern const u8 UnknownString_81AF022[];
+extern const u8 UnknownString_81AF0A3[];
+extern const u8 UnknownString_81AF0BB[];
+extern const u8 UnknownString_81AF0CA[];
+extern const u8 UnknownString_81AF149[];
+extern const u8 UnknownString_81AF164[];
+extern const u8 UnknownString_81AF174[];
+extern const u8 UnknownString_81AF1E5[];
+extern const u8 UnknownString_81AF1FD[];
+extern const u8 UnknownString_81AF20A[];
+extern const u8 UnknownString_81AF281[];
+extern const u8 UnknownString_81AF299[];
+extern const u8 UnknownString_81AF2A9[];
+extern const u8 UnknownString_81AF32C[];
+extern const u8 UnknownString_81AF345[];
+extern const u8 UnknownString_81AF34D[];
+extern const u8 UnknownString_81AF3D0[];
+extern const u8 UnknownString_81AF3ED[];
+extern const u8 UnknownString_81AF3FC[];
+extern const u8 UnknownString_81AF46D[];
+extern const u8 UnknownString_81AF481[];
+extern const u8 UnknownString_81AF49B[];
+extern const u8 UnknownString_81AF511[];
+extern const u8 UnknownString_81AF529[];
+extern const u8 UnknownString_81AF536[];
+extern const u8 UnknownString_81AF5A9[];
+extern const u8 UnknownString_81AF5BD[];
+extern const u8 UnknownString_81AF5CD[];
+extern const u8 UnknownString_81AF63F[];
+extern const u8 UnknownString_81AF661[];
+extern const u8 UnknownString_81AF676[];
+extern const u8 UnknownString_81AF711[];
+extern const u8 UnknownString_81AF726[];
+extern const u8 UnknownString_81AF73D[];
+extern const u8 UnknownString_81AF7BF[];
+extern const u8 UnknownString_81AF7D9[];
+extern const u8 UnknownString_81AF7F1[];
+extern const u8 UnknownString_81AF88A[];
+extern const u8 UnknownString_81AF8A1[];
+extern const u8 UnknownString_81AF8AA[];
+extern const u8 UnknownString_81AF91B[];
+extern const u8 UnknownString_81AF935[];
+extern const u8 UnknownString_81AF943[];
+extern const u8 UnknownString_81AF9C8[];
+extern const u8 UnknownString_81AF9E0[];
+extern const u8 UnknownString_81AF9F6[];
+extern const u8 UnknownString_81AFA79[];
+extern const u8 UnknownString_81AFA92[];
+extern const u8 UnknownString_81AFA9E[];
+extern const u8 UnknownString_81AFB17[];
+extern const u8 UnknownString_81AFB2D[];
+extern const u8 UnknownString_81AFB48[];
+extern const u8 UnknownString_81AFBD8[];
+extern const u8 UnknownString_81AFBE7[];
+extern const u8 UnknownString_81AFC04[];
+extern const u8 UnknownString_81AFC8A[];
+extern const u8 UnknownString_81AFC9D[];
+extern const u8 UnknownString_81AFCBE[];
+extern const u8 UnknownString_81AFD44[];
+extern const u8 UnknownString_81AFD60[];
+extern const u8 UnknownString_81AFD80[];
+extern const u8 UnknownString_81AFE1D[];
+extern const u8 UnknownString_81AFE36[];
+extern const u8 UnknownString_81AFE42[];
+extern const u8 UnknownString_81AFEC2[];
+extern const u8 UnknownString_81AFEDD[];
+extern const u8 UnknownString_81AFEEE[];
+extern const u8 UnknownString_81AFF68[];
+extern const u8 UnknownString_81AFF7B[];
+extern const u8 UnknownString_81AFF88[];
+extern const u8 UnknownString_81AFFFB[];
+extern const u8 UnknownString_81B000D[];
+extern const u8 UnknownString_81B0015[];
+extern const u8 UnknownString_81B009D[];
+extern const u8 UnknownString_81B00B6[];
+extern const u8 UnknownString_81B00C9[];
+extern const u8 UnknownString_81B014D[];
+extern const u8 UnknownString_81B0165[];
+extern const u8 UnknownString_81B0173[];
+extern const u8 UnknownString_81B01E9[];
+extern const u8 UnknownString_81B0201[];
+extern const u8 UnknownString_81B0213[];
+extern const u8 UnknownString_81B0290[];
+extern const u8 UnknownString_81B02A5[];
+extern const u8 UnknownString_81B02B6[];
+extern const u8 UnknownString_81B0337[];
+extern const u8 UnknownString_81B0351[];
+extern const u8 UnknownString_81B0364[];
+extern const u8 UnknownString_81B03E9[];
+extern const u8 UnknownString_81B0401[];
+extern const u8 UnknownString_81B040C[];
+extern const u8 UnknownString_81B046E[];
+extern const u8 UnknownString_81B0489[];
+extern const u8 UnknownString_81B049A[];
+extern const u8 UnknownString_81B0523[];
+extern const u8 UnknownString_81B053E[];
+extern const u8 UnknownString_81B0554[];
+extern const u8 UnknownString_81B05D8[];
+extern const u8 UnknownString_81B05F3[];
+extern const u8 UnknownString_81B0610[];
+extern const u8 UnknownString_81B06A9[];
+extern const u8 UnknownString_81B06C6[];
+extern const u8 UnknownString_81B06D9[];
+extern const u8 UnknownString_81B0763[];
+extern const u8 UnknownString_81B0781[];
+extern const u8 UnknownString_81B0797[];
+
 extern struct UnkBard2 gUnknown_03005DA0;
 
 extern u16 gUnknown_020388BC;  // set but not used?
 
-const u16 gDefaultBardSongLyrics[] =
+static const u16 gDefaultBardSongLyrics[] =
 {
 #ifdef ENGLISH
     EC_WORD_SISTER,
@@ -46,7 +156,7 @@ const u16 gDefaultBardSongLyrics[] =
 #endif
 };
 
-const u8 *const gGiddyAdjectives[] =
+static const u8 *const gGiddyAdjectives[] =
 {
     OtherText_SoPretty,
     OtherText_SoDarling,
@@ -58,7 +168,7 @@ const u8 *const gGiddyAdjectives[] =
     OtherText_SoMagical,
 };
 
-const u8 *const gGiddyQuestions[] =
+static const u8 *const gGiddyQuestions[] =
 {
     OtherText_WantVacationNicePlace,
     OtherText_BoughtCrayonsIsNice,
@@ -70,24 +180,25 @@ const u8 *const gGiddyQuestions[] =
     OtherText_SecretBasesWonderful,
 };
 
-void sub_80F8184(u8);
+void Task_BardSong(u8);
+void StartBardSong(u8);
 void StorytellerSetup(void);
 void sub_80F8428(void);
 
 void SetupBard(void)
 {
     u16 i;
-    struct MauvilleManBard *bard = &gSaveBlock1.oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
     bard->id = MAUVILLE_MAN_BARD;
-    bard->unk_2DBD = 0;
+    bard->hasChangedSong = FALSE;
     for (i = 0; i < 6; i++)
         bard->songLyrics[i] = gDefaultBardSongLyrics[i];
 }
 
 void SetupHipster(void)
 {
-    struct MauvilleManHipster *hipster = &gSaveBlock1.oldMan.hipster;
+    struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
     hipster->unk1 = 0;
@@ -100,7 +211,7 @@ void SetupStoryteller(void)
 
 void SetupGiddy(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
     giddy->id = MAUVILLE_MAN_GIDDY;
     giddy->unk1 = 0;
@@ -137,12 +248,14 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-/*
+//#define TEST MAUVILLE_MAN_BARD
+
+#ifdef TEST
 // Safely changes man to test functionality
 u8 GetCurrentMauvilleOldMan(void)
 {
-    u8 newMan = MAUVILLE_MAN_GIDDY;
-    struct MauvilleManCommon *common = &gSaveBlock1.oldMan.common;
+    u8 newMan = TEST;
+    struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
 
     if (common->id != newMan)
     {
@@ -168,56 +281,56 @@ u8 GetCurrentMauvilleOldMan(void)
     }
     return common->id;
 }
-*/
-
+#else
 u8 GetCurrentMauvilleOldMan(void)
 {
-    struct MauvilleManCommon *common = &gSaveBlock1.oldMan.common;
+    struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
 
     return common->id;
 }
+#endif
 
-void sub_80F7B14(void)
+void ScrSpecial_GetCurrentMauvilleMan(void)
 {
     gScriptResult = GetCurrentMauvilleOldMan();
 }
 
-void sub_80F7B2C(void)
+void ScrSpecial_HasBardSongBeenChanged(void)
 {
-    u16 *scriptPtr = &gScriptResult; // why??
-    OldMan *oldMan = &gSaveBlock1.oldMan;
+    u16 *scriptResult = &gScriptResult; // why??
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
-    *scriptPtr = oldMan->bard.unk_2DBD;
+    *scriptResult = bard->hasChangedSong;
 }
 
-void sub_80F7B40(void)
+void ScrSpecial_SaveBardSongLyrics(void)
 {
     u16 i;
-    struct MauvilleManBard *bard = &gSaveBlock1.oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
     StringCopy(bard->playerName, gSaveBlock2.playerName);
 
-    for(i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
         bard->playerTrainerId[i] = gSaveBlock2.playerTrainerId[i];
 
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
         bard->songLyrics[i] = bard->mauvilleOldMan_ecArray2[i];
 
-    bard->unk_2DBD = 1;
+    bard->hasChangedSong = TRUE;
 }
 
 void sub_80F7BA0(void)
 {
-    struct MauvilleManBard *oldMan = &gSaveBlock1.oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
     u16 specialVar = gSpecialVar_0x8004;  // It's a bit odd to use this temp variable, but it seems needed to match.
     u16 *r5;
     u16 i;
     u8 *ptr;
     u8 *r4;
 
-    r5 = oldMan->mauvilleOldMan_ecArray2;
+    r5 = bard->mauvilleOldMan_ecArray2;
     if (specialVar == 0)
-        r5 = oldMan->songLyrics;
+        r5 = bard->songLyrics;
     ptr = gStringVar4;
     r4 = ptr;
     for (i = 0; i < 2; i++)
@@ -230,7 +343,7 @@ void sub_80F7BA0(void)
             r4++;
         }
         r4++;
-        *(ptr++) = 0;
+        *(ptr++) = CHAR_SPACE;
         ptr = sub_80EB3FC(ptr, *(r5++));
         while (ptr != r4)
         {
@@ -239,7 +352,7 @@ void sub_80F7BA0(void)
             r4++;
         }
         r4++;
-        *(ptr++) = 0xFE;
+        *(ptr++) = CHAR_NEWLINE;
         ptr = sub_80EB3FC(ptr, *(r5++));
         while (ptr != r4)
         {
@@ -247,7 +360,6 @@ void sub_80F7BA0(void)
                 *r4 = 0x37;
             r4++;
         }
-        //_080F7C2A
         if (i == 0)
         {
             *(ptr++) = EXT_CTRL_CODE_BEGIN;
@@ -256,33 +368,33 @@ void sub_80F7BA0(void)
     }
 }
 
-void sub_80F7C54(void)
+void ScrSpecial_PlayBardSong(void)
 {
-    sub_80F7F80(gSpecialVar_0x8004);
+    StartBardSong(gSpecialVar_0x8004);
     MenuDisplayMessageBox();
     ScriptContext1_Stop();
 }
 
 void sub_80F7C70(void)
 {
-    u16 *scriptPtr = &gScriptResult; // again??
-    OldMan *oldMan = &gSaveBlock1.oldMan;
+    u16 *scriptResult = &gScriptResult; // again??
+    struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
-    *scriptPtr = oldMan->bard.unk_2D95;
+    *scriptResult = hipster->unk1;
 }
 
-void sub_80F7C84(void)
+void ScrSpecial_SetHipsterSpokenFlag(void)
 {
-    OldMan *oldMan = &gSaveBlock1.oldMan;
+    struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
-    oldMan->bard.unk_2D95 = 1;
+    hipster->unk1 = 1;
 }
 
 void sub_80F7C90(void)
 {
     u16 var = sub_80EB8EC();
 
-    if(var == 0xFFFF)
+    if (var == 0xFFFF)
     {
         gScriptResult = FALSE;
     }
@@ -295,12 +407,12 @@ void sub_80F7C90(void)
 
 void sub_80F7CC8(void)
 {
-    OldMan *oldMan = &gSaveBlock1.oldMan;
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
-    if (oldMan->bard.unk_2D95 == 10)
+    if (bard->unk_2D95 == 10)
     {
         gScriptResult = FALSE;
-        oldMan->bard.unk_2D95 = 0;
+        bard->unk_2D95 = 0;
     }
     else
     {
@@ -310,7 +422,7 @@ void sub_80F7CC8(void)
 
 void ScrSpecial_GenerateGiddyLine(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
     if (giddy->unk1 == 0)
         sub_80F7DC0();
@@ -357,22 +469,22 @@ void sub_80F7DC0(void)
 
     for (i = 0; i < 8; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
-        //gSaveBlock1.oldMan.giddy.questionList[i] = i;
+        //gSaveBlock1.mauvilleMan.giddy.questionList[i] = i;
         giddy->questionList[i] = i;
     }
 
     // Scramble questions
     for (i = 0; i < 8; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
         /*
         u16 r1 = Random() % (i + 1);
-        u8 r7 = gSaveBlock1.oldMan.giddy.questionList[i];
-        gSaveBlock1.oldMan.giddy.questionList[i] = gSaveBlock1.oldMan.giddy.questionList[r1];
-        gSaveBlock1.oldMan.giddy.questionList[r1] = r7;
+        u8 r7 = gSaveBlock1.mauvilleMan.giddy.questionList[i];
+        gSaveBlock1.mauvilleMan.giddy.questionList[i] = gSaveBlock1.mauvilleMan.giddy.questionList[r1];
+        gSaveBlock1.mauvilleMan.giddy.questionList[r1] = r7;
         */
         u16 r1 = Random() % (i + 1);
         u8 r7 = giddy->questionList[i];
@@ -388,20 +500,20 @@ void sub_80F7DC0(void)
     }
 
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
         giddy->questionNum = 0;
     }
-    //gSaveBlock1.oldMan.giddy.questionNum = 0;
+    //gSaveBlock1.mauvilleMan.giddy.questionNum = 0;
 
     r7 = 0;
     for (i = 0; i < 10; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.oldMan.giddy;
+        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
         u16 var = Random() % 10;
         if (var < 3 && r7 < 8)
         {
-            //gSaveBlock1.oldMan.giddy.mauvilleOldMan_ecArray[i] = 0xFFFF;
+            //gSaveBlock1.mauvilleMan.giddy.mauvilleOldMan_ecArray[i] = 0xFFFF;
             giddy->mauvilleOldMan_ecArray[i] = 0xFFFF;
             r7++;
         }
@@ -422,7 +534,7 @@ void sub_80F7DC0(void)
 
             if (r1 == 6)
                 r1 = 0;
-            //gSaveBlock1.oldMan.giddy.mauvilleOldMan_ecArray[i] = sub_80EB784(arr[r1][0]);
+            //gSaveBlock1.mauvilleMan.giddy.mauvilleOldMan_ecArray[i] = sub_80EB784(arr[r1][0]);
             giddy->mauvilleOldMan_ecArray[i] = sub_80EB784(arr[r1][0]);
         }
     }
@@ -604,14 +716,14 @@ _080F7EE2:\n\
 
 void sub_80F7EFC(void)
 {
-    struct MauvilleManBard *bard = &gSaveBlock1.oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
-    bard->unk_2DBD = 0;
+    bard->hasChangedSong = FALSE;
 }
 
 void sub_80F7F0C(void)
 {
-    struct MauvilleManHipster *hipster = &gSaveBlock1.oldMan.hipster;
+    struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
     hipster->unk1 = 0;
 }
@@ -648,9 +760,9 @@ void sub_80F7F30(void)
     sub_80F83D0();
 }
 
-void sub_80F7F80(u8 a)
+void StartBardSong(u8 a)
 {
-    u8 taskId = CreateTask(sub_80F8184, 0x50);
+    u8 taskId = CreateTask(Task_BardSong, 0x50);
 
     gTasks[taskId].data[5] = a;
 }
@@ -661,7 +773,7 @@ void BardSingWord(struct Task *task, struct UnkBard2 *b)
     {
     case 0:
         {
-            struct MauvilleManBard *bard = &gSaveBlock1.oldMan.bard;
+            struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
             u16 *r2;
             s32 i;
 
@@ -756,7 +868,7 @@ void BardSingWord(struct Task *task, struct UnkBard2 *b)
     }
 }
 
-void sub_80F8184(u8 taskId)
+void Task_BardSong(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];  // r5
 
@@ -780,7 +892,7 @@ void sub_80F8184(u8 taskId)
         break;
     case 2:
         {
-            struct MauvilleManBard *bard = &gSaveBlock1.oldMan.bard;
+            struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
             u8 *string = gStringVar4 + task->data[3];
             u16 wordLen = 0;
             // Can't get it to match without hacking
@@ -885,9 +997,58 @@ void sub_80F83D0(void)
     VarSet(0x4010, 0x45 + GetCurrentMauvilleOldMan());
 }
 
+struct UnknownStruct1
+{
+    u8 unk0;
+    u8 unk1;
+    const u8 *unk4;
+    const u8 *unk8;
+    const u8 *unkC;
+};
+
+static const struct UnknownStruct1 gUnknown_083E53E0[] =
+{
+	{0x32, 1, UnknownString_81AEFFC, UnknownString_81AF013, UnknownString_81AF022},
+	{0x02, 1, UnknownString_81AF0A3, UnknownString_81AF0BB, UnknownString_81AF0CA},
+	{0x03, 1, UnknownString_81AF149, UnknownString_81AF164, UnknownString_81AF174},
+	{0x04, 1, UnknownString_81AF1E5, UnknownString_81AF1FD, UnknownString_81AF20A},
+	{0x06, 1, UnknownString_81AF281, UnknownString_81AF299, UnknownString_81AF2A9},
+	{0x09, 1, UnknownString_81AF32C, UnknownString_81AF345, UnknownString_81AF34D},
+	{0x0B, 1, UnknownString_81AF3D0, UnknownString_81AF3ED, UnknownString_81AF3FC},
+	{0x0C, 1, UnknownString_81AF46D, UnknownString_81AF481, UnknownString_81AF49B},
+	{0x0D, 1, UnknownString_81AF511, UnknownString_81AF529, UnknownString_81AF536},
+	{0x0E, 1, UnknownString_81AF5A9, UnknownString_81AF5BD, UnknownString_81AF5CD},
+	{0x0F, 1, UnknownString_81AF63F, UnknownString_81AF661, UnknownString_81AF676},
+	{0x10, 1, UnknownString_81AF711, UnknownString_81AF726, UnknownString_81AF73D},
+	{0x11, 1, UnknownString_81AF7BF, UnknownString_81AF7D9, UnknownString_81AF7F1},
+	{0x12, 1, UnknownString_81AF88A, UnknownString_81AF8A1, UnknownString_81AF8AA},
+	{0x13, 1, UnknownString_81AF91B, UnknownString_81AF935, UnknownString_81AF943},
+	{0x14, 1, UnknownString_81AF9C8, UnknownString_81AF9E0, UnknownString_81AF9F6},
+	{0x1A, 1, UnknownString_81AFA79, UnknownString_81AFA92, UnknownString_81AFA9E},
+	{0x1B, 1, UnknownString_81AFB17, UnknownString_81AFB2D, UnknownString_81AFB48},
+	{0x1C, 1, UnknownString_81AFBD8, UnknownString_81AFBE7, UnknownString_81AFC04},
+	{0x1D, 2, UnknownString_81AFC8A, UnknownString_81AFC9D, UnknownString_81AFCBE},
+	{0x1E, 1, UnknownString_81AFD44, UnknownString_81AFD60, UnknownString_81AFD80},
+	{0x21, 1, UnknownString_81AFE1D, UnknownString_81AFE36, UnknownString_81AFE42},
+	{0x24, 1, UnknownString_81AFEC2, UnknownString_81AFEDD, UnknownString_81AFEEE},
+	{0x25, 1, UnknownString_81AFF68, UnknownString_81AFF7B, UnknownString_81AFF88},
+	{0x26, 1, UnknownString_81AFFFB, UnknownString_81B000D, UnknownString_81B0015},
+	{0x27, 1, UnknownString_81B009D, UnknownString_81B00B6, UnknownString_81B00C9},
+	{0x28, 1, UnknownString_81B014D, UnknownString_81B0165, UnknownString_81B0173},
+	{0x29, 1, UnknownString_81B01E9, UnknownString_81B0201, UnknownString_81B0213},
+	{0x2A, 1, UnknownString_81B0290, UnknownString_81B02A5, UnknownString_81B02B6},
+	{0x2B, 1, UnknownString_81B0337, UnknownString_81B0351, UnknownString_81B0364},
+	{0x2C, 1, UnknownString_81B03E9, UnknownString_81B0401, UnknownString_81B040C},
+	{0x2D, 1, UnknownString_81B046E, UnknownString_81B0489, UnknownString_81B049A},
+	{0x2E, 1, UnknownString_81B0523, UnknownString_81B053E, UnknownString_81B0554},
+	{0x2F, 1, UnknownString_81B05D8, UnknownString_81B05F3, UnknownString_81B0610},
+	{0x30, 1, UnknownString_81B06A9, UnknownString_81B06C6, UnknownString_81B06D9},
+    {0x31, 1, UnknownString_81B0763, UnknownString_81B0781, UnknownString_81B0797},
+};
+
 void StorytellerSetup(void)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     s32 i;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
@@ -901,7 +1062,7 @@ void StorytellerSetup(void)
 
 void sub_80F8428(void)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
     storyteller->unk1 = FALSE;
@@ -913,17 +1074,6 @@ u32 sub_80F8438(u8 stat)
         stat = 0;
     GetGameStat(stat);
 }
-
-struct UnknownStruct1
-{
-    u8 unk0;
-    u8 unk1;
-    const u8 *unk4;
-    const u8 *unk8;
-    const u8 *unkC;
-};
-
-extern const struct UnknownStruct1 gUnknown_083E53E0[];
 
 const struct UnknownStruct1 *sub_80F844C(u32 a)
 {
@@ -958,7 +1108,7 @@ u8 sub_80F849C(void)
 
     for (i = 0; i < 4; i++)
     {
-        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
         if (storyteller->unk4[i] == 0)
             break;
@@ -968,14 +1118,14 @@ u8 sub_80F849C(void)
 
 u32 sub_80F84C8(u32 a)
 {
-    u8 *ptr = gSaveBlock1.oldMan.storyteller.unk24[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[a];
 
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
 void sub_80F84EC(u32 a, u32 b)
 {
-    u8 *ptr = gSaveBlock1.oldMan.storyteller.unk24[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[a];
 
     ptr[0] = b;
     ptr[1] = b >> 8;
@@ -985,7 +1135,7 @@ void sub_80F84EC(u32 a, u32 b)
 
 bool32 sub_80F8508(u32 a)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     if (sub_80F8438(storyteller->unk4[a]) > sub_80F84C8(a))
         return TRUE;
@@ -995,7 +1145,7 @@ bool32 sub_80F8508(u32 a)
 
 void sub_80F8534(u32 a, void *b)
 {
-    u8 *ptr = gSaveBlock1.oldMan.storyteller.unk8[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk8[a];
 
     memset(b, 0xFF, 8);
     memcpy(b, ptr, 7);
@@ -1003,7 +1153,7 @@ void sub_80F8534(u32 a, void *b)
 
 void sub_80F8560(u32 a, const u8 *b)
 {
-    u8 *ptr = gSaveBlock1.oldMan.storyteller.unk8[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk8[a];
     u8 len = StringLength(b);
 
     memset(ptr, 0xFF, 7);
@@ -1012,7 +1162,7 @@ void sub_80F8560(u32 a, const u8 *b)
 
 void sub_80F8598(u32 a, u32 b)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     storyteller->unk4[a] = b;
     sub_80F8560(a, gSaveBlock2.playerName);
@@ -1037,19 +1187,16 @@ void sub_80F85FC(u8 *arr, s32 count)
     }
 }
 
-extern const struct {u32 unk0; struct MauvilleManStoryteller *unk4; u32 unk8;} gUnknown_083E5620;
-/*
-static const struct {u32 unk0; struct MauvilleManStoryteller *unk4; u32 unk8;} gUnknown_083E5620 =
+static const struct {u32 length; struct MauvilleManStoryteller *unused1; u32 unused2;} gUnknown_083E5620 =
 {
     36,
-    &gSaveBlock1.oldMan.storyteller,
-    12,
+    &gSaveBlock1.mauvilleMan.storyteller,  // unused
+    12,                               // unused
 };
-*/
 
 bool8 sub_80F8650(void)
 {
-    u8 arr[gUnknown_083E5620.unk0];
+    u8 arr[gUnknown_083E5620.length];
     s32 i;
     s32 j;
 
@@ -1058,11 +1205,11 @@ bool8 sub_80F8650(void)
     {
         u8 r4 = gUnknown_083E53E0[arr[i]].unk0;
         u8 r6 = gUnknown_083E53E0[arr[i]].unk1;
-        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
         for (j = 0; j < 4; j++)
         {
-            if (gSaveBlock1.oldMan.storyteller.unk4[j] == r4)
+            if (gSaveBlock1.mauvilleMan.storyteller.unk4[j] == r4)
                 break;
         }
         if (j == 4 && sub_80F8438(r4) >= r6)
@@ -1077,7 +1224,7 @@ bool8 sub_80F8650(void)
 
 void sub_80F8700(u32 a)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     u8 r6 = storyteller->unk4[a];
 
     ConvertIntToDecimalStringN(gStringVar1, sub_80F84C8(a), 0, 10);
@@ -1093,7 +1240,7 @@ void sub_80F8758(void)
     MenuDrawTextWindow(0, 0, 25, 4 + sub_80F849C() * 2);
     for (i = 0; i < 4; i++)
     {
-        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+        struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
         u8 r0 = storyteller->unk4[i];
 
         if (r0 == 0)
@@ -1155,7 +1302,7 @@ u8 sub_80F889C(void)
 
 bool8 sub_80F88AC(void)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     u8 r4 = storyteller->unk4[gUnknown_03000748];
 
     if (sub_80F8508(gUnknown_03000748) == TRUE)
@@ -1168,7 +1315,7 @@ bool8 sub_80F88AC(void)
 
 bool8 sub_80F88E0(void)
 {
-    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.oldMan.storyteller;
+    struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     if (storyteller->unk1 == FALSE)
         return FALSE;

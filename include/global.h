@@ -464,7 +464,7 @@ struct MauvilleManBard
     /*0x1A*/ u8 playerName[8];
     /*0x22*/ u8 filler_2DB6[0x3];
     /*0x25*/ u8 playerTrainerId[4];
-    /*0x29*/ u8 unk_2DBD;
+    /*0x29*/ bool8 hasChangedSong;
 }; /*size = 0x2C*/
 
 struct MauvilleManHipster
@@ -502,7 +502,7 @@ struct MauvilleManGiddy
 }; /*size = 0x2C*/
 
 
-typedef union OldMan
+union MauvilleMan
 {
     struct MauvilleManCommon common;
     struct MauvilleManBard bard;
@@ -511,7 +511,7 @@ typedef union OldMan
     struct MauvilleManStoryteller storyteller;
     struct MauvilleManGiddy giddy;
     u8 filler[0x40];
-} OldMan;
+};
 
 struct Unk_SB_Access_Struct1
 {
@@ -668,7 +668,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
-    /*0x2D94*/ OldMan oldMan;
+    /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;

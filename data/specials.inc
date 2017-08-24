@@ -104,13 +104,13 @@ gSpecials::
 	def_special DoWateringBerryTreeAnim
 	def_special sub_80E60D8
 	def_special sub_80EB7C4
-	def_special sub_80F7B14
-	def_special sub_80F7B2C
-	def_special sub_80F7B40
+	def_special ScrSpecial_GetCurrentMauvilleMan
+	def_special ScrSpecial_HasBardSongBeenChanged
+	def_special ScrSpecial_SaveBardSongLyrics
 	def_special sub_80F7C70
-	def_special sub_80F7C84
+	def_special ScrSpecial_SetHipsterSpokenFlag
 	def_special sub_80F7C90
-	def_special sub_80F7C54
+	def_special ScrSpecial_PlayBardSong
 	def_special sub_80F83D0
 	def_special ScrSpecial_GenerateGiddyLine
 	def_special sub_80F7CC8
