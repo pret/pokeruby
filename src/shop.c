@@ -21,6 +21,13 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "decoration.h"
+#include "items.h"
+#include "songs.h"
+#include "rom4.h"
+#include "decoration_inventory.h"
+
+extern void sub_80B4378(u8);
+extern void sub_80B4470(u8);
 
 enum
 {
@@ -42,6 +49,8 @@ struct MartInfo
 
 extern struct MartInfo gMartInfo;
 extern struct MenuAction gUnknown_083CC6D0[];
+
+extern u32 gMartTotalCost; // the total cost of a purchase before checking out.
 
 extern u8 ewram[];
 
@@ -622,4 +631,72 @@ void sub_80B3A70(void)
     {
         sub_8072AB0(gOtherText_QuitShopping, 0x4, 0x68, 0x68, 0x30, MART_TYPE_0);
     }
+}
+
+void sub_80B3AEC(u8 taskId)
+{
+    if(gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0); // huh???
+        PlaySE(SE_SELECT);
+
+        if(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] == ITEM_POKE_BALL && gTasks[taskId].data[1] >= 10 && AddBagItem(ITEM_PREMIER_BALL, 1) == TRUE)
+            DisplayItemMessageOnField(taskId, gOtherText_FreePremierBall, sub_80B4378, 0xC3E1);
+        else
+            sub_80B4378(taskId);
+    }
+}
+
+void sub_80B3B80(u8 taskId)
+{
+    IncrementGameStat(0x26);
+    sub_80B79E0(&gSaveBlock1.money, gMartTotalCost);
+    PlaySE(0x5F);
+    sub_80B7BEC(gSaveBlock1.money, 0, 0);
+    gTasks[taskId].func = sub_80B3AEC;
+}
+
+void sub_80B3BD0(u8 taskId)
+{
+    sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0); // same thing as above?
+    sub_80B4378(taskId);
+}
+
+void sub_80B3BF4(u8 taskId)
+{
+    MenuZeroFillWindowRect(0x7, 0x8, 0xD, 0xD);
+    sub_80A3FA0(gBGTilemapBuffers[1], 8, 9, 4, 4, 0);
+    sub_80B379C();
+    sub_80B3420();
+
+    if(IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+    {
+        if(gMartInfo.martType == MART_TYPE_0)
+        {
+            if(AddBagItem(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gTasks[taskId].data[1]))
+            {
+                DisplayItemMessageOnField(taskId, gOtherText_HereYouGo, sub_80B3B80, 0xC3E1);
+                sub_80B4470(taskId);
+            }
+            else
+                DisplayItemMessageOnField(taskId, gOtherText_NoRoomFor, sub_80B3BD0, 0xC3E1);
+        }
+        else // a normal mart is only type 0, so types 1 and 2 are decoration marts.
+        {
+            if(IsThereStorageSpaceForDecoration(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]))
+            {
+                if(gMartInfo.martType == MART_TYPE_1)
+                    DisplayItemMessageOnField(taskId, gOtherText_HereYouGo2, sub_80B3B80, 0xC3E1);
+                else
+                    DisplayItemMessageOnField(taskId, gOtherText_HereYouGo3, sub_80B3B80, 0xC3E1);
+            }
+            else
+            {
+                StringExpandPlaceholders(gStringVar4, gOtherText_SpaceForIsFull);
+                DisplayItemMessageOnField(taskId, gStringVar4, sub_80B3BD0, 0xC3E1);
+            }
+        }
+    }
+    else
+        DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1);
 }

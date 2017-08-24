@@ -6,275 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80B3AEC
-sub_80B3AEC: @ 80B3AEC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, _080B3B5C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _080B3B06
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080B3B7A
-_080B3B06:
-	ldr r4, _080B3B60 @ =gMartInfo
-	ldrb r1, [r4, 0x9]
-	adds r0, r1, 0
-	movs r2, 0
-	bl sub_80B39D0
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4, 0xB]
-	ldrb r1, [r4, 0x9]
-	adds r0, r1
-	ldr r1, [r4, 0x4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, 0x4
-	bne _080B3B74
-	ldr r0, _080B3B64 @ =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	movs r2, 0xA
-	ldrsh r0, [r1, r2]
-	cmp r0, 0x9
-	ble _080B3B74
-	movs r0, 0xC
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080B3B74
-	ldr r1, _080B3B68 @ =gOtherText_FreePremierBall
-	ldr r2, _080B3B6C @ =sub_80B4378
-	ldr r3, _080B3B70 @ =0x0000c3e1
-	adds r0, r5, 0
-	bl DisplayItemMessageOnField
-	b _080B3B7A
-	.align 2, 0
-_080B3B5C: .4byte gMain
-_080B3B60: .4byte gMartInfo
-_080B3B64: .4byte gTasks
-_080B3B68: .4byte gOtherText_FreePremierBall
-_080B3B6C: .4byte sub_80B4378
-_080B3B70: .4byte 0x0000c3e1
-_080B3B74:
-	adds r0, r5, 0
-	bl sub_80B4378
-_080B3B7A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80B3AEC
-
-	thumb_func_start sub_80B3B80
-sub_80B3B80: @ 80B3B80
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x26
-	bl IncrementGameStat
-	ldr r5, _080B3BC0 @ =gSaveBlock1 + 0x490
-	ldr r0, _080B3BC4 @ =gUnknown_020386A0
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl sub_80B79E0
-	movs r0, 0x5F
-	bl PlaySE
-	ldr r0, [r5]
-	movs r1, 0
-	movs r2, 0
-	bl sub_80B7BEC
-	ldr r1, _080B3BC8 @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _080B3BCC @ =sub_80B3AEC
-	str r1, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B3BC0: .4byte gSaveBlock1 + 0x490
-_080B3BC4: .4byte gUnknown_020386A0
-_080B3BC8: .4byte gTasks
-_080B3BCC: .4byte sub_80B3AEC
-	thumb_func_end sub_80B3B80
-
-	thumb_func_start sub_80B3BD0
-sub_80B3BD0: @ 80B3BD0
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _080B3BF0 @ =gMartInfo
-	ldrb r1, [r0, 0x9]
-	adds r0, r1, 0
-	movs r2, 0
-	bl sub_80B39D0
-	adds r0, r4, 0
-	bl sub_80B4378
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B3BF0: .4byte gMartInfo
-	thumb_func_end sub_80B3BD0
-
-	thumb_func_start sub_80B3BF4
-sub_80B3BF4: @ 80B3BF4
-	push {r4,r5,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r0, 0x7
-	movs r1, 0x8
-	movs r2, 0xD
-	movs r3, 0xD
-	bl MenuZeroFillWindowRect
-	ldr r0, _080B3C7C @ =gBGTilemapBuffers + 0x800
-	movs r1, 0x4
-	str r1, [sp]
-	movs r1, 0
-	str r1, [sp, 0x4]
-	movs r1, 0x8
-	movs r2, 0x9
-	movs r3, 0x4
-	bl sub_80A3FA0
-	bl sub_80B379C
-	bl sub_80B3420
-	ldr r0, _080B3C80 @ =gSaveBlock1
-	movs r1, 0x92
-	lsls r1, 3
-	adds r0, r1
-	ldr r0, [r0]
-	ldr r1, _080B3C84 @ =gUnknown_020386A0
-	ldr r1, [r1]
-	bl IsEnoughMoney
-	lsls r0, 24
-	cmp r0, 0
-	beq _080B3D18
-	ldr r4, _080B3C88 @ =gMartInfo
-	ldrb r0, [r4, 0xC]
-	cmp r0, 0
-	bne _080B3CAC
-	ldrb r0, [r4, 0xB]
-	ldrb r1, [r4, 0x9]
-	adds r0, r1
-	ldr r1, [r4, 0x4]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	ldr r2, _080B3C8C @ =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r2
-	ldrh r1, [r1, 0xA]
-	bl AddBagItem
-	lsls r0, 24
-	cmp r0, 0
-	beq _080B3C9C
-	ldr r1, _080B3C90 @ =gOtherText_HereYouGo
-	ldr r2, _080B3C94 @ =sub_80B3B80
-	ldr r3, _080B3C98 @ =0x0000c3e1
-	adds r0, r5, 0
-	bl DisplayItemMessageOnField
-	adds r0, r5, 0
-	bl sub_80B4470
-	b _080B3D24
-	.align 2, 0
-_080B3C7C: .4byte gBGTilemapBuffers + 0x800
-_080B3C80: .4byte gSaveBlock1
-_080B3C84: .4byte gUnknown_020386A0
-_080B3C88: .4byte gMartInfo
-_080B3C8C: .4byte gTasks
-_080B3C90: .4byte gOtherText_HereYouGo
-_080B3C94: .4byte sub_80B3B80
-_080B3C98: .4byte 0x0000c3e1
-_080B3C9C:
-	ldr r1, _080B3CA4 @ =gOtherText_NoRoomFor
-	ldr r2, _080B3CA8 @ =sub_80B3BD0
-	b _080B3CD8
-	.align 2, 0
-_080B3CA4: .4byte gOtherText_NoRoomFor
-_080B3CA8: .4byte sub_80B3BD0
-_080B3CAC:
-	ldrb r0, [r4, 0xB]
-	ldrb r1, [r4, 0x9]
-	adds r0, r1
-	ldr r1, [r4, 0x4]
-	lsls r0, 1
-	adds r0, r1
-	ldrb r0, [r0]
-	bl IsThereStorageSpaceForDecoration
-	lsls r0, 24
-	cmp r0, 0
-	beq _080B3CF0
-	ldrb r0, [r4, 0xC]
-	cmp r0, 0x1
-	bne _080B3CD4
-	ldr r1, _080B3CD0 @ =gOtherText_HereYouGo2
-	b _080B3CD6
-	.align 2, 0
-_080B3CD0: .4byte gOtherText_HereYouGo2
-_080B3CD4:
-	ldr r1, _080B3CE4 @ =gOtherText_HereYouGo3
-_080B3CD6:
-	ldr r2, _080B3CE8 @ =sub_80B3B80
-_080B3CD8:
-	ldr r3, _080B3CEC @ =0x0000c3e1
-	adds r0, r5, 0
-	bl DisplayItemMessageOnField
-	b _080B3D24
-	.align 2, 0
-_080B3CE4: .4byte gOtherText_HereYouGo3
-_080B3CE8: .4byte sub_80B3B80
-_080B3CEC: .4byte 0x0000c3e1
-_080B3CF0:
-	ldr r4, _080B3D08 @ =gStringVar4
-	ldr r1, _080B3D0C @ =gOtherText_SpaceForIsFull
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, _080B3D10 @ =sub_80B3BD0
-	ldr r3, _080B3D14 @ =0x0000c3e1
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DisplayItemMessageOnField
-	b _080B3D24
-	.align 2, 0
-_080B3D08: .4byte gStringVar4
-_080B3D0C: .4byte gOtherText_SpaceForIsFull
-_080B3D10: .4byte sub_80B3BD0
-_080B3D14: .4byte 0x0000c3e1
-_080B3D18:
-	ldr r1, _080B3D2C @ =gOtherText_NotEnoughMoney
-	ldr r2, _080B3D30 @ =sub_80B3BD0
-	ldr r3, _080B3D34 @ =0x0000c3e1
-	adds r0, r5, 0
-	bl DisplayItemMessageOnField
-_080B3D24:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B3D2C: .4byte gOtherText_NotEnoughMoney
-_080B3D30: .4byte sub_80B3BD0
-_080B3D34: .4byte 0x0000c3e1
-	thumb_func_end sub_80B3BF4
-
 	thumb_func_start sub_80B3D38
 sub_80B3D38: @ 80B3D38
 	push {r4,lr}
@@ -371,7 +102,7 @@ _080B3DEE:
 	ands r0, r1
 	cmp r0, 0
 	beq _080B3ED8
-	ldr r0, _080B3EB0 @ =gUnknown_020386A0
+	ldr r0, _080B3EB0 @ =gMartTotalCost
 	mov r8, r0
 	ldrb r0, [r7, 0xB]
 	ldrb r1, [r7, 0x9]
@@ -449,7 +180,7 @@ _080B3DEE:
 	.align 2, 0
 _080B3EA8: .4byte gMartInfo
 _080B3EAC: .4byte gMain
-_080B3EB0: .4byte gUnknown_020386A0
+_080B3EB0: .4byte gMartTotalCost
 _080B3EB4: .4byte gTasks
 _080B3EB8: .4byte gBGTilemapBuffers + 0x800
 _080B3EBC: .4byte gStringVar1
@@ -861,7 +592,7 @@ _080B41CE:
 	ldrb r0, [r6, 0xC]
 	cmp r0, 0
 	bne _080B428C
-	ldr r5, _080B4270 @ =gUnknown_020386A0
+	ldr r5, _080B4270 @ =gMartTotalCost
 	ldrb r0, [r6, 0xB]
 	ldrb r1, [r6, 0x9]
 	adds r0, r1
@@ -910,7 +641,7 @@ _080B41CE:
 	b _080B436C
 	.align 2, 0
 _080B426C: .4byte gMartInfo
-_080B4270: .4byte gUnknown_020386A0
+_080B4270: .4byte gMartTotalCost
 _080B4274: .4byte gSaveBlock1
 _080B4278: .4byte gStringVar1
 _080B427C: .4byte gStringVar4
@@ -918,7 +649,7 @@ _080B4280: .4byte gOtherText_HowManyYouWant
 _080B4284: .4byte sub_80B3EFC
 _080B4288: .4byte 0x0000c3e1
 _080B428C:
-	ldr r5, _080B42C8 @ =gUnknown_020386A0
+	ldr r5, _080B42C8 @ =gMartTotalCost
 	ldr r4, _080B42CC @ =gDecorations
 	ldrb r0, [r6, 0xB]
 	ldrb r1, [r6, 0x9]
@@ -948,7 +679,7 @@ _080B42BA:
 	bl DisplayItemMessageOnField
 	b _080B436C
 	.align 2, 0
-_080B42C8: .4byte gUnknown_020386A0
+_080B42C8: .4byte gMartTotalCost
 _080B42CC: .4byte gDecorations
 _080B42D0: .4byte gSaveBlock1
 _080B42D4: .4byte gOtherText_NotEnoughMoney

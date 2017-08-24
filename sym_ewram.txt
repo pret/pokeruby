@@ -525,7 +525,7 @@ gScriptContestRank: @ 203869E
 
 @ shop
 
-gUnknown_020386A0: @ 20386A0
+gMartTotalCost: @ 20386A0
 	.space 0x4
 
 gUnknown_020386A4: @ 20386A4
