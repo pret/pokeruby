@@ -107,9 +107,9 @@ gSpecials::
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged
 	def_special ScrSpecial_SaveBardSongLyrics
-	def_special sub_80F7C70
+	def_special ScrSpecial_GetHipsterSpokenFlag
 	def_special ScrSpecial_SetHipsterSpokenFlag
-	def_special sub_80F7C90
+	def_special ScrSpecial_HipsterTeachWord
 	def_special ScrSpecial_PlayBardSong
 	def_special sub_80F83D0
 	def_special ScrSpecial_GenerateGiddyLine
@@ -120,12 +120,12 @@ gSpecials::
 	def_special sub_80F88AC
 	def_special sub_80F88FC
 	def_special sub_80F88E0
-	def_special sub_8109E34
-	def_special sub_8109C44
-	def_special sub_8109C58
-	def_special sub_8109C90
-	def_special sub_8109CF0
-	def_special sub_8109DE0
+	def_special ScrSpecial_TraderMenuGetDecoration
+	def_special ScrSpecial_GetTraderTradedFlag
+	def_special ScrSpecial_DoesPlayerHaveNoDecorations
+	def_special ScrSpecial_IsDecorationFull
+	def_special ScrSpecial_TraderMenuGiveDecoration
+	def_special ScrSpecial_TraderDoDecorationTrade
 	def_special GetShroomishSizeRecordInfo
 	def_special CompareShroomishSize
 	def_special GetBarboachSizeRecordInfo

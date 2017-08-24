@@ -32,11 +32,13 @@ speak_to_bard:
 	end
 yes_hear_song:
 	setvar 0x8004, 0
+	@ Give the player ear rape
 	special ScrSpecial_PlayBardSong
 	pause 60
 	special ScrSpecial_HasBardSongBeenChanged
 	compare RESULT, FALSE
-	jumpeq prompt_write_lyrics	@ Prompt new lyrics only if song hasn't been changed
+	@ Prompt new lyrics only if song hasn't been changed
+	jumpeq prompt_write_lyrics
 	msgbox gTextBard_OhWhatAMovingSong, 4
 	release
 	end
@@ -60,6 +62,7 @@ write_lyrics:
 	jumpeq dont_write_lyrics
 	msgbox gTextBard_ThankYouKindly, 4
 	setvar 0x8004, 1
+	@ Give the player ear rape again
 	special ScrSpecial_PlayBardSong
 	pause 60
 	msgbox gTextBard_WasThatHowYouWanted, MSGBOX_YESNO
@@ -78,28 +81,26 @@ dont_write_lyrics:
 @ Hipster
 @-------------------------------------------------------------------------------
 
-speak_to_hipster:: @ 81AE845
+speak_to_hipster:
 	lock
 	faceplayer
 	setflag 2054
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0C5B, 4
-	special sub_80F7C70
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE86A
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0CA7, 4
+	msgbox gTextHipster_TheyCallMeTheHipster, 4
+	special ScrSpecial_GetHipsterSpokenFlag
+	compare RESULT, FALSE
+	jumpeq hipster_first_time
+	msgbox gTextHipster_TaughtYouAlready, 4
 	release
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AE86A:: @ 81AE86A
-	special sub_80F7C90
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE882
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0D11, 4
+hipster_first_time:
+	special ScrSpecial_HipsterTeachWord
+	compare RESULT, TRUE		@ TRUE if player learned a new word
+	jumpeq teach_new_word
+	msgbox gTextHipster_YouAlreadyKnowALot, 4
 	release
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AE882:: @ 81AE882
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0D75, 4
+teach_new_word:
+	msgbox gTextHipster_HaveYouHeardAbout, 4
 	special ScrSpecial_SetHipsterSpokenFlag
 	release
 	end
@@ -110,93 +111,82 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE882:: @ 81AE882
 
 	.include "data/text/trader.inc"
 
-speak_to_trader:: @ 81AEBAB
+speak_to_trader:
 	lock
 	faceplayer
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE88F, 5
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBDA
-	special sub_8109C44
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3
-	message MauvilleCity_PokemonCenter_1F_Text_1AE910
+	msgbox gTextTrader_Introduction, MSGBOX_YESNO
+	compare RESULT, NO
+	jumpeq dont_want_to_trade
+	special ScrSpecial_GetTraderTradedFlag
+	compare RESULT, TRUE
+	jumpeq already_traded
+	message gTextTrader_MenuPrompt
 	waittext
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC
+	jump do_trader_menu_get
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEBDA:: @ 81AEBDA
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE8C6, 2
+dont_want_to_trade:
+	msgbox gTextTrader_FeelUnwanted1, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3:: @ 81AEBE3
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE8DF, 2
+already_traded:
+	msgbox gTextTrader_TradedAlready, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC:: @ 81AEBEC
-	special sub_8109E34
+do_trader_menu_get:
+	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
 	compare 0x8004, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC2D
+	jumpeq cancelled_get_menu
 	compare 0x8004, 65535
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC36
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE97C, 5
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC42
-	special sub_8109C58
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
+	jumpeq rare_item_cant_trade_away
+	msgbox gTextTrader_ItemOnceBelongedTo, MSGBOX_YESNO
+	compare RESULT, NO
+	jumpeq dont_want_item
+	special ScrSpecial_DoesPlayerHaveNoDecorations
+	compare RESULT, TRUE
+	jumpeq player_has_no_decorations
+	jump do_trader_menu_give
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEC2D:: @ 81AEC2D
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE950, 2
+cancelled_get_menu:: @ 81AEC2D
+	msgbox gTextTrader_DontWantAnything, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEC36:: @ 81AEC36
-	message MauvilleCity_PokemonCenter_1F_Text_1AEB31
+rare_item_cant_trade_away:: @ 81AEC36
+	message gTextTrader_ICantTradeThatOneAway
 	waittext
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC
+	jump do_trader_menu_get
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEC42:: @ 81AEC42
-	message MauvilleCity_PokemonCenter_1F_Text_1AE910
+dont_want_item:
+	message gTextTrader_MenuPrompt
 	waittext
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC
+	jump do_trader_menu_get
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E:: @ 81AEC4E
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE9B6, 2
+player_has_no_decorations:: @ 81AEC4E
+	msgbox gTextTrader_YouDontHaveDecorations, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AEC57:: @ 81AEC57
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE9F8, 4
-	special sub_8109CF0
+do_trader_menu_give:: @ 81AEC57
+	msgbox gTextTrader_PickDecorationYoullTrade, 4
+	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
 	compare 0x8006, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECA6
+	jumpeq cancelled_give_menu
 	compare 0x8006, 65535
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECAF
-	special sub_8109C90
+	jumpeq decoration_is_in_use
+	special ScrSpecial_IsDecorationFull
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECBD
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEA9B, 5
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
-	special sub_8109DE0
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEAFB, 2
+	jumpeq decorations_full
+	msgbox gTextTrader_SoWellTrade, MSGBOX_YESNO
+	compare RESULT, NO
+	jumpeq do_trader_menu_give
+	special ScrSpecial_TraderDoDecorationTrade
+	msgbox gTextTrader_ThenWellTrade, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AECA6:: @ 81AECA6
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEA2B, 2
+cancelled_give_menu:: @ 81AECA6
+	msgbox gTextTrader_FeelUnwanted2, 2
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AECAF:: @ 81AECAF
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEAC3, 4
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
+decoration_is_in_use:: @ 81AECAF
+	msgbox gTextTrader_InUseYouCantTradeIt, 4
+	jump do_trader_menu_give
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1AECBD:: @ 81AECBD
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEA57, 2
+decorations_full:: @ 81AECBD
+	msgbox gTextTrader_NoRoomForThis, 2
 	end
 
 @-------------------------------------------------------------------------------
@@ -212,8 +202,8 @@ speak_to_storyteller:: @ 81B0816
 	setvar 0x800b, 0
 	lock
 	faceplayer
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AECC6, 5
-	compare RESULT, 0
+	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
+	compare RESULT, NO
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
 	specialval RESULT, sub_80F889C
 	compare RESULT, 0
@@ -242,7 +232,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0883:: @ 81B0883
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0893:: @ 81B0893
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEE50, 4
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEF0A, 5
+	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEF0A, MSGBOX_YESNO
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B084F
 
@@ -259,7 +249,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B08D3:: @ 81B08D3
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AED70, 4
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B08DB:: @ 81B08DB
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEEB4, 5
+	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEEB4, MSGBOX_YESNO
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
 	specialval RESULT, sub_80F88FC
@@ -297,7 +287,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B091F:: @ 81B091F
 MauvilleCity_PokemonCenter_1F_EventScript_1B09EB:: @ 81B09EB
 	lock
 	faceplayer
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B092A, 5
+	msgbox MauvilleCity_PokemonCenter_1F_Text_1B092A, MSGBOX_YESNO
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C
 	compare RESULT, 0

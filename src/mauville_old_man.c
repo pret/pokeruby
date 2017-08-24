@@ -24,114 +24,114 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
 
-extern const u8 UnknownString_81AEFFC[];
-extern const u8 UnknownString_81AF013[];
-extern const u8 UnknownString_81AF022[];
-extern const u8 UnknownString_81AF0A3[];
-extern const u8 UnknownString_81AF0BB[];
-extern const u8 UnknownString_81AF0CA[];
-extern const u8 UnknownString_81AF149[];
-extern const u8 UnknownString_81AF164[];
-extern const u8 UnknownString_81AF174[];
-extern const u8 UnknownString_81AF1E5[];
-extern const u8 UnknownString_81AF1FD[];
-extern const u8 UnknownString_81AF20A[];
-extern const u8 UnknownString_81AF281[];
-extern const u8 UnknownString_81AF299[];
-extern const u8 UnknownString_81AF2A9[];
-extern const u8 UnknownString_81AF32C[];
-extern const u8 UnknownString_81AF345[];
-extern const u8 UnknownString_81AF34D[];
-extern const u8 UnknownString_81AF3D0[];
-extern const u8 UnknownString_81AF3ED[];
-extern const u8 UnknownString_81AF3FC[];
-extern const u8 UnknownString_81AF46D[];
-extern const u8 UnknownString_81AF481[];
-extern const u8 UnknownString_81AF49B[];
-extern const u8 UnknownString_81AF511[];
-extern const u8 UnknownString_81AF529[];
-extern const u8 UnknownString_81AF536[];
-extern const u8 UnknownString_81AF5A9[];
-extern const u8 UnknownString_81AF5BD[];
-extern const u8 UnknownString_81AF5CD[];
-extern const u8 UnknownString_81AF63F[];
-extern const u8 UnknownString_81AF661[];
-extern const u8 UnknownString_81AF676[];
-extern const u8 UnknownString_81AF711[];
-extern const u8 UnknownString_81AF726[];
-extern const u8 UnknownString_81AF73D[];
-extern const u8 UnknownString_81AF7BF[];
-extern const u8 UnknownString_81AF7D9[];
-extern const u8 UnknownString_81AF7F1[];
-extern const u8 UnknownString_81AF88A[];
-extern const u8 UnknownString_81AF8A1[];
-extern const u8 UnknownString_81AF8AA[];
-extern const u8 UnknownString_81AF91B[];
-extern const u8 UnknownString_81AF935[];
-extern const u8 UnknownString_81AF943[];
-extern const u8 UnknownString_81AF9C8[];
-extern const u8 UnknownString_81AF9E0[];
-extern const u8 UnknownString_81AF9F6[];
-extern const u8 UnknownString_81AFA79[];
-extern const u8 UnknownString_81AFA92[];
-extern const u8 UnknownString_81AFA9E[];
-extern const u8 UnknownString_81AFB17[];
-extern const u8 UnknownString_81AFB2D[];
-extern const u8 UnknownString_81AFB48[];
-extern const u8 UnknownString_81AFBD8[];
-extern const u8 UnknownString_81AFBE7[];
-extern const u8 UnknownString_81AFC04[];
-extern const u8 UnknownString_81AFC8A[];
-extern const u8 UnknownString_81AFC9D[];
-extern const u8 UnknownString_81AFCBE[];
-extern const u8 UnknownString_81AFD44[];
-extern const u8 UnknownString_81AFD60[];
-extern const u8 UnknownString_81AFD80[];
-extern const u8 UnknownString_81AFE1D[];
-extern const u8 UnknownString_81AFE36[];
-extern const u8 UnknownString_81AFE42[];
-extern const u8 UnknownString_81AFEC2[];
-extern const u8 UnknownString_81AFEDD[];
-extern const u8 UnknownString_81AFEEE[];
-extern const u8 UnknownString_81AFF68[];
-extern const u8 UnknownString_81AFF7B[];
-extern const u8 UnknownString_81AFF88[];
-extern const u8 UnknownString_81AFFFB[];
-extern const u8 UnknownString_81B000D[];
-extern const u8 UnknownString_81B0015[];
-extern const u8 UnknownString_81B009D[];
-extern const u8 UnknownString_81B00B6[];
-extern const u8 UnknownString_81B00C9[];
-extern const u8 UnknownString_81B014D[];
-extern const u8 UnknownString_81B0165[];
-extern const u8 UnknownString_81B0173[];
-extern const u8 UnknownString_81B01E9[];
-extern const u8 UnknownString_81B0201[];
-extern const u8 UnknownString_81B0213[];
-extern const u8 UnknownString_81B0290[];
-extern const u8 UnknownString_81B02A5[];
-extern const u8 UnknownString_81B02B6[];
-extern const u8 UnknownString_81B0337[];
-extern const u8 UnknownString_81B0351[];
-extern const u8 UnknownString_81B0364[];
-extern const u8 UnknownString_81B03E9[];
-extern const u8 UnknownString_81B0401[];
-extern const u8 UnknownString_81B040C[];
-extern const u8 UnknownString_81B046E[];
-extern const u8 UnknownString_81B0489[];
-extern const u8 UnknownString_81B049A[];
-extern const u8 UnknownString_81B0523[];
-extern const u8 UnknownString_81B053E[];
-extern const u8 UnknownString_81B0554[];
-extern const u8 UnknownString_81B05D8[];
-extern const u8 UnknownString_81B05F3[];
-extern const u8 UnknownString_81B0610[];
-extern const u8 UnknownString_81B06A9[];
-extern const u8 UnknownString_81B06C6[];
-extern const u8 UnknownString_81B06D9[];
-extern const u8 UnknownString_81B0763[];
-extern const u8 UnknownString_81B0781[];
-extern const u8 UnknownString_81B0797[];
+extern const u8 gTextStoryteller_Story1Title[];
+extern const u8 gTextStoryteller_Story1Action[];
+extern const u8 gTextStoryteller_Story1Text[];
+extern const u8 gTextStoryteller_Story2Title[];
+extern const u8 gTextStoryteller_Story2Action[];
+extern const u8 gTextStoryteller_Story2Text[];
+extern const u8 gTextStoryteller_Story3Title[];
+extern const u8 gTextStoryteller_Story3Action[];
+extern const u8 gTextStoryteller_Story3Text[];
+extern const u8 gTextStoryteller_Story4Title[];
+extern const u8 gTextStoryteller_Story4Action[];
+extern const u8 gTextStoryteller_Story4Text[];
+extern const u8 gTextStoryteller_Story5Title[];
+extern const u8 gTextStoryteller_Story5Action[];
+extern const u8 gTextStoryteller_Story5Text[];
+extern const u8 gTextStoryteller_Story6Title[];
+extern const u8 gTextStoryteller_Story6Action[];
+extern const u8 gTextStoryteller_Story6Text[];
+extern const u8 gTextStoryteller_Story7Title[];
+extern const u8 gTextStoryteller_Story7Action[];
+extern const u8 gTextStoryteller_Story7Text[];
+extern const u8 gTextStoryteller_Story8Title[];
+extern const u8 gTextStoryteller_Story8Action[];
+extern const u8 gTextStoryteller_Story8Text[];
+extern const u8 gTextStoryteller_Story9Title[];
+extern const u8 gTextStoryteller_Story9Action[];
+extern const u8 gTextStoryteller_Story9Text[];
+extern const u8 gTextStoryteller_Story10Title[];
+extern const u8 gTextStoryteller_Story10Action[];
+extern const u8 gTextStoryteller_Story10Text[];
+extern const u8 gTextStoryteller_Story11Title[];
+extern const u8 gTextStoryteller_Story11Action[];
+extern const u8 gTextStoryteller_Story11Text[];
+extern const u8 gTextStoryteller_Story12Title[];
+extern const u8 gTextStoryteller_Story12Action[];
+extern const u8 gTextStoryteller_Story12Text[];
+extern const u8 gTextStoryteller_Story13Title[];
+extern const u8 gTextStoryteller_Story13Action[];
+extern const u8 gTextStoryteller_Story13Text[];
+extern const u8 gTextStoryteller_Story14Title[];
+extern const u8 gTextStoryteller_Story14Action[];
+extern const u8 gTextStoryteller_Story14Text[];
+extern const u8 gTextStoryteller_Story15Title[];
+extern const u8 gTextStoryteller_Story15Action[];
+extern const u8 gTextStoryteller_Story15Text[];
+extern const u8 gTextStoryteller_Story16Title[];
+extern const u8 gTextStoryteller_Story16Action[];
+extern const u8 gTextStoryteller_Story16Text[];
+extern const u8 gTextStoryteller_Story17Title[];
+extern const u8 gTextStoryteller_Story17Action[];
+extern const u8 gTextStoryteller_Story17Text[];
+extern const u8 gTextStoryteller_Story18Title[];
+extern const u8 gTextStoryteller_Story18Action[];
+extern const u8 gTextStoryteller_Story18Text[];
+extern const u8 gTextStoryteller_Story19Title[];
+extern const u8 gTextStoryteller_Story19Action[];
+extern const u8 gTextStoryteller_Story19Text[];
+extern const u8 gTextStoryteller_Story20Title[];
+extern const u8 gTextStoryteller_Story20Action[];
+extern const u8 gTextStoryteller_Story20Text[];
+extern const u8 gTextStoryteller_Story21Title[];
+extern const u8 gTextStoryteller_Story21Action[];
+extern const u8 gTextStoryteller_Story21Text[];
+extern const u8 gTextStoryteller_Story22Title[];
+extern const u8 gTextStoryteller_Story22Action[];
+extern const u8 gTextStoryteller_Story22Text[];
+extern const u8 gTextStoryteller_Story23Title[];
+extern const u8 gTextStoryteller_Story23Action[];
+extern const u8 gTextStoryteller_Story23Text[];
+extern const u8 gTextStoryteller_Story24Title[];
+extern const u8 gTextStoryteller_Story24Action[];
+extern const u8 gTextStoryteller_Story24Text[];
+extern const u8 gTextStoryteller_Story25Title[];
+extern const u8 gTextStoryteller_Story25Action[];
+extern const u8 gTextStoryteller_Story25Text[];
+extern const u8 gTextStoryteller_Story26Title[];
+extern const u8 gTextStoryteller_Story26Action[];
+extern const u8 gTextStoryteller_Story26Text[];
+extern const u8 gTextStoryteller_Story27Title[];
+extern const u8 gTextStoryteller_Story27Action[];
+extern const u8 gTextStoryteller_Story27Text[];
+extern const u8 gTextStoryteller_Story28Title[];
+extern const u8 gTextStoryteller_Story28Action[];
+extern const u8 gTextStoryteller_Story28Text[];
+extern const u8 gTextStoryteller_Story29Title[];
+extern const u8 gTextStoryteller_Story29Action[];
+extern const u8 gTextStoryteller_Story29Text[];
+extern const u8 gTextStoryteller_Story30Title[];
+extern const u8 gTextStoryteller_Story30Action[];
+extern const u8 gTextStoryteller_Story30Text[];
+extern const u8 gTextStoryteller_Story31Title[];
+extern const u8 gTextStoryteller_Story31Action[];
+extern const u8 gTextStoryteller_Story31Text[];
+extern const u8 gTextStoryteller_Story32Title[];
+extern const u8 gTextStoryteller_Story32Action[];
+extern const u8 gTextStoryteller_Story32Text[];
+extern const u8 gTextStoryteller_Story33Title[];
+extern const u8 gTextStoryteller_Story33Action[];
+extern const u8 gTextStoryteller_Story33Text[];
+extern const u8 gTextStoryteller_Story34Title[];
+extern const u8 gTextStoryteller_Story34Action[];
+extern const u8 gTextStoryteller_Story34Text[];
+extern const u8 gTextStoryteller_Story35Title[];
+extern const u8 gTextStoryteller_Story35Action[];
+extern const u8 gTextStoryteller_Story35Text[];
+extern const u8 gTextStoryteller_Story36Title[];
+extern const u8 gTextStoryteller_Story36Action[];
+extern const u8 gTextStoryteller_Story36Text[];
 
 extern struct UnkBard2 gUnknown_03005DA0;
 
@@ -248,7 +248,7 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-//#define TEST MAUVILLE_MAN_BARD
+//#define TEST MAUVILLE_MAN_STORYTELLER
 
 #ifdef TEST
 // Safely changes man to test functionality
@@ -376,7 +376,7 @@ void ScrSpecial_PlayBardSong(void)
     ScriptContext1_Stop();
 }
 
-void sub_80F7C70(void)
+void ScrSpecial_GetHipsterSpokenFlag(void)
 {
     u16 *scriptResult = &gScriptResult; // again??
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
@@ -391,7 +391,7 @@ void ScrSpecial_SetHipsterSpokenFlag(void)
     hipster->unk1 = 1;
 }
 
-void sub_80F7C90(void)
+void ScrSpecial_HipsterTeachWord(void)
 {
     u16 var = sub_80EB8EC();
 
@@ -1001,53 +1001,53 @@ void sub_80F83D0(void)
     VarSet(0x4010, 0x45 + GetCurrentMauvilleOldMan());
 }
 
-struct UnknownStruct1
+struct Story
 {
     u8 unk0;
     u8 unk1;
-    const u8 *unk4;
-    const u8 *unk8;
-    const u8 *unkC;
+    const u8 *title;
+    const u8 *action;
+    const u8 *fullText;
 };
 
-static const struct UnknownStruct1 gUnknown_083E53E0[] =
+static const struct Story sStorytellerStories[] =
 {
-	{0x32, 1, UnknownString_81AEFFC, UnknownString_81AF013, UnknownString_81AF022},
-	{0x02, 1, UnknownString_81AF0A3, UnknownString_81AF0BB, UnknownString_81AF0CA},
-	{0x03, 1, UnknownString_81AF149, UnknownString_81AF164, UnknownString_81AF174},
-	{0x04, 1, UnknownString_81AF1E5, UnknownString_81AF1FD, UnknownString_81AF20A},
-	{0x06, 1, UnknownString_81AF281, UnknownString_81AF299, UnknownString_81AF2A9},
-	{0x09, 1, UnknownString_81AF32C, UnknownString_81AF345, UnknownString_81AF34D},
-	{0x0B, 1, UnknownString_81AF3D0, UnknownString_81AF3ED, UnknownString_81AF3FC},
-	{0x0C, 1, UnknownString_81AF46D, UnknownString_81AF481, UnknownString_81AF49B},
-	{0x0D, 1, UnknownString_81AF511, UnknownString_81AF529, UnknownString_81AF536},
-	{0x0E, 1, UnknownString_81AF5A9, UnknownString_81AF5BD, UnknownString_81AF5CD},
-	{0x0F, 1, UnknownString_81AF63F, UnknownString_81AF661, UnknownString_81AF676},
-	{0x10, 1, UnknownString_81AF711, UnknownString_81AF726, UnknownString_81AF73D},
-	{0x11, 1, UnknownString_81AF7BF, UnknownString_81AF7D9, UnknownString_81AF7F1},
-	{0x12, 1, UnknownString_81AF88A, UnknownString_81AF8A1, UnknownString_81AF8AA},
-	{0x13, 1, UnknownString_81AF91B, UnknownString_81AF935, UnknownString_81AF943},
-	{0x14, 1, UnknownString_81AF9C8, UnknownString_81AF9E0, UnknownString_81AF9F6},
-	{0x1A, 1, UnknownString_81AFA79, UnknownString_81AFA92, UnknownString_81AFA9E},
-	{0x1B, 1, UnknownString_81AFB17, UnknownString_81AFB2D, UnknownString_81AFB48},
-	{0x1C, 1, UnknownString_81AFBD8, UnknownString_81AFBE7, UnknownString_81AFC04},
-	{0x1D, 2, UnknownString_81AFC8A, UnknownString_81AFC9D, UnknownString_81AFCBE},
-	{0x1E, 1, UnknownString_81AFD44, UnknownString_81AFD60, UnknownString_81AFD80},
-	{0x21, 1, UnknownString_81AFE1D, UnknownString_81AFE36, UnknownString_81AFE42},
-	{0x24, 1, UnknownString_81AFEC2, UnknownString_81AFEDD, UnknownString_81AFEEE},
-	{0x25, 1, UnknownString_81AFF68, UnknownString_81AFF7B, UnknownString_81AFF88},
-	{0x26, 1, UnknownString_81AFFFB, UnknownString_81B000D, UnknownString_81B0015},
-	{0x27, 1, UnknownString_81B009D, UnknownString_81B00B6, UnknownString_81B00C9},
-	{0x28, 1, UnknownString_81B014D, UnknownString_81B0165, UnknownString_81B0173},
-	{0x29, 1, UnknownString_81B01E9, UnknownString_81B0201, UnknownString_81B0213},
-	{0x2A, 1, UnknownString_81B0290, UnknownString_81B02A5, UnknownString_81B02B6},
-	{0x2B, 1, UnknownString_81B0337, UnknownString_81B0351, UnknownString_81B0364},
-	{0x2C, 1, UnknownString_81B03E9, UnknownString_81B0401, UnknownString_81B040C},
-	{0x2D, 1, UnknownString_81B046E, UnknownString_81B0489, UnknownString_81B049A},
-	{0x2E, 1, UnknownString_81B0523, UnknownString_81B053E, UnknownString_81B0554},
-	{0x2F, 1, UnknownString_81B05D8, UnknownString_81B05F3, UnknownString_81B0610},
-	{0x30, 1, UnknownString_81B06A9, UnknownString_81B06C6, UnknownString_81B06D9},
-    {0x31, 1, UnknownString_81B0763, UnknownString_81B0781, UnknownString_81B0797},
+	{0x32, 1, gTextStoryteller_Story1Title,  gTextStoryteller_Story1Action,  gTextStoryteller_Story1Text},
+	{0x02, 1, gTextStoryteller_Story2Title,  gTextStoryteller_Story2Action,  gTextStoryteller_Story2Text},
+	{0x03, 1, gTextStoryteller_Story3Title,  gTextStoryteller_Story3Action,  gTextStoryteller_Story3Text},
+	{0x04, 1, gTextStoryteller_Story4Title,  gTextStoryteller_Story4Action,  gTextStoryteller_Story4Text},
+	{0x06, 1, gTextStoryteller_Story5Title,  gTextStoryteller_Story5Action,  gTextStoryteller_Story5Text},
+	{0x09, 1, gTextStoryteller_Story6Title,  gTextStoryteller_Story6Action,  gTextStoryteller_Story6Text},
+	{0x0B, 1, gTextStoryteller_Story7Title,  gTextStoryteller_Story7Action,  gTextStoryteller_Story7Text},
+	{0x0C, 1, gTextStoryteller_Story8Title,  gTextStoryteller_Story8Action,  gTextStoryteller_Story8Text},
+	{0x0D, 1, gTextStoryteller_Story9Title,  gTextStoryteller_Story9Action,  gTextStoryteller_Story9Text},
+	{0x0E, 1, gTextStoryteller_Story10Title, gTextStoryteller_Story10Action, gTextStoryteller_Story10Text},
+	{0x0F, 1, gTextStoryteller_Story11Title, gTextStoryteller_Story11Action, gTextStoryteller_Story11Text},
+	{0x10, 1, gTextStoryteller_Story12Title, gTextStoryteller_Story12Action, gTextStoryteller_Story12Text},
+	{0x11, 1, gTextStoryteller_Story13Title, gTextStoryteller_Story13Action, gTextStoryteller_Story13Text},
+	{0x12, 1, gTextStoryteller_Story14Title, gTextStoryteller_Story14Action, gTextStoryteller_Story14Text},
+	{0x13, 1, gTextStoryteller_Story15Title, gTextStoryteller_Story15Action, gTextStoryteller_Story15Text},
+	{0x14, 1, gTextStoryteller_Story16Title, gTextStoryteller_Story16Action, gTextStoryteller_Story16Text},
+	{0x1A, 1, gTextStoryteller_Story17Title, gTextStoryteller_Story17Action, gTextStoryteller_Story17Text},
+	{0x1B, 1, gTextStoryteller_Story18Title, gTextStoryteller_Story18Action, gTextStoryteller_Story18Text},
+	{0x1C, 1, gTextStoryteller_Story19Title, gTextStoryteller_Story19Action, gTextStoryteller_Story19Text},
+	{0x1D, 2, gTextStoryteller_Story20Title, gTextStoryteller_Story20Action, gTextStoryteller_Story20Text},
+	{0x1E, 1, gTextStoryteller_Story21Title, gTextStoryteller_Story21Action, gTextStoryteller_Story21Text},
+	{0x21, 1, gTextStoryteller_Story22Title, gTextStoryteller_Story22Action, gTextStoryteller_Story22Text},
+	{0x24, 1, gTextStoryteller_Story23Title, gTextStoryteller_Story23Action, gTextStoryteller_Story23Text},
+	{0x25, 1, gTextStoryteller_Story24Title, gTextStoryteller_Story24Action, gTextStoryteller_Story24Text},
+	{0x26, 1, gTextStoryteller_Story25Title, gTextStoryteller_Story25Action, gTextStoryteller_Story25Text},
+	{0x27, 1, gTextStoryteller_Story26Title, gTextStoryteller_Story26Action, gTextStoryteller_Story26Text},
+	{0x28, 1, gTextStoryteller_Story27Title, gTextStoryteller_Story27Action, gTextStoryteller_Story27Text},
+	{0x29, 1, gTextStoryteller_Story28Title, gTextStoryteller_Story28Action, gTextStoryteller_Story28Text},
+	{0x2A, 1, gTextStoryteller_Story29Title, gTextStoryteller_Story29Action, gTextStoryteller_Story29Text},
+	{0x2B, 1, gTextStoryteller_Story30Title, gTextStoryteller_Story30Action, gTextStoryteller_Story30Text},
+	{0x2C, 1, gTextStoryteller_Story31Title, gTextStoryteller_Story31Action, gTextStoryteller_Story31Text},
+	{0x2D, 1, gTextStoryteller_Story32Title, gTextStoryteller_Story32Action, gTextStoryteller_Story32Text},
+	{0x2E, 1, gTextStoryteller_Story33Title, gTextStoryteller_Story33Action, gTextStoryteller_Story33Text},
+	{0x2F, 1, gTextStoryteller_Story34Title, gTextStoryteller_Story34Action, gTextStoryteller_Story34Text},
+	{0x30, 1, gTextStoryteller_Story35Title, gTextStoryteller_Story35Action, gTextStoryteller_Story35Text},
+    {0x31, 1, gTextStoryteller_Story36Title, gTextStoryteller_Story36Action, gTextStoryteller_Story36Text},
 };
 
 void StorytellerSetup(void)
@@ -1060,7 +1060,7 @@ void StorytellerSetup(void)
     for (i = 0; i < 4; i++)
     {
         storyteller->unk4[i] = 0;
-        storyteller->unk8[0][i] = EOS;  // Maybe they meant storyteller->unk8[i][0] instead?
+        storyteller->playerNames[0][i] = EOS;  // Maybe they meant storyteller->playerNames[i][0] instead?
     }
 }
 
@@ -1076,34 +1076,34 @@ u32 sub_80F8438(u8 stat)
 {
     if (stat == 50)
         stat = 0;
-    GetGameStat(stat);
+    return GetGameStat(stat);
 }
 
-const struct UnknownStruct1 *sub_80F844C(u32 a)
+const struct Story *GetStory(u32 a)
 {
     s32 i;
 
     for (i = 0; i < 36; i++)
     {
-        if (gUnknown_083E53E0[i].unk0 == a)
-            return &gUnknown_083E53E0[i];
+        if (sStorytellerStories[i].unk0 == a)
+            return &sStorytellerStories[i];
     }
-    return &gUnknown_083E53E0[35];
+    return &sStorytellerStories[35];
 }
 
 const u8 *sub_80F8478(u32 a)
 {
-    return sub_80F844C(a)->unk4;
+    return GetStory(a)->title;
 }
 
 const u8 *sub_80F8484(u32 a)
 {
-    return sub_80F844C(a)->unkC;
+    return GetStory(a)->fullText;
 }
 
 const u8 *sub_80F8490(u32 a)
 {
-    return sub_80F844C(a)->unk8;
+    return GetStory(a)->action;
 }
 
 u8 sub_80F849C(void)
@@ -1147,30 +1147,30 @@ bool32 sub_80F8508(u32 a)
         return FALSE;
 }
 
-void sub_80F8534(u32 a, void *b)
+void GetStorytellerPlayerName(u32 player, void *dst)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk8[a];
+    u8 *name = gSaveBlock1.mauvilleMan.storyteller.playerNames[player];
 
-    memset(b, 0xFF, 8);
-    memcpy(b, ptr, 7);
+    memset(dst, EOS, 8);
+    memcpy(dst, name, 7);
 }
 
-void sub_80F8560(u32 a, const u8 *b)
+void SetStorytellerPlayerName(u32 player, const u8 *dst)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk8[a];
-    u8 len = StringLength(b);
+    u8 *name = gSaveBlock1.mauvilleMan.storyteller.playerNames[player];
+    u8 len = StringLength(dst);
 
-    memset(ptr, 0xFF, 7);
-    StringCopyN(ptr, b, len);
+    memset(name, EOS, 7);
+    StringCopyN(name, dst, len);
 }
 
-void sub_80F8598(u32 a, u32 b)
+void sub_80F8598(u32 player, u32 b)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
-    storyteller->unk4[a] = b;
-    sub_80F8560(a, gSaveBlock2.playerName);
-    sub_80F84EC(a, sub_80F8438(b));
+    storyteller->unk4[player] = b;
+    SetStorytellerPlayerName(player, gSaveBlock2.playerName);
+    sub_80F84EC(player, sub_80F8438(b));
     ConvertIntToDecimalStringN(gStringVar1, sub_80F8438(b), 0, 10);
     StringCopy(gStringVar2, sub_80F8490(b));
 }
@@ -1207,8 +1207,8 @@ bool8 sub_80F8650(void)
     sub_80F85FC(arr, 36);
     for (i = 0; i < 36; i++)
     {
-        u8 r4 = gUnknown_083E53E0[arr[i]].unk0;
-        u8 r6 = gUnknown_083E53E0[arr[i]].unk1;
+        u8 r4 = sStorytellerStories[arr[i]].unk0;
+        u8 r6 = sStorytellerStories[arr[i]].unk1;
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
         for (j = 0; j < 4; j++)
@@ -1226,14 +1226,14 @@ bool8 sub_80F8650(void)
     return FALSE;
 }
 
-void sub_80F8700(u32 a)
+void sub_80F8700(u32 player)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-    u8 r6 = storyteller->unk4[a];
+    u8 r6 = storyteller->unk4[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, sub_80F84C8(a), 0, 10);
+    ConvertIntToDecimalStringN(gStringVar1, sub_80F84C8(player), 0, 10);
     StringCopy(gStringVar2, sub_80F8490(r6));
-    sub_80F8534(a, gStringVar3);
+    GetStorytellerPlayerName(player, gStringVar3);
     ShowFieldMessage(sub_80F8484(r6));
 }
 

@@ -62,7 +62,7 @@ void TraderSetup(void)
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
     trader->id = MAUVILLE_MAN_TRADER;
-    trader->unk31 = 0;
+    trader->alreadyTraded = FALSE;
 
     for (i = 0; i < 4; i++)
     {
@@ -76,7 +76,7 @@ void TraderSetup(void)
 void sub_8109A20(void)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
-    trader->unk31 = 0;
+    trader->alreadyTraded = FALSE;
 }
 
 void sub_8109A30(u8 value)
@@ -84,7 +84,7 @@ void sub_8109A30(u8 value)
     VarSet(VAR_RECYCLE_GOODS, value);
 }
 
-void sub_8109A48(u8 taskId)
+void CreateAvailableDecorationsMenu(u8 taskId)
 {
     u8 i;
     u8 numChoices = 1;
@@ -140,7 +140,7 @@ void sub_8109B34(u8 taskId, u8 decorationId)
     EnableBothScriptContexts();
 }
 
-void sub_8109B7C(u8 taskId)
+void Task_HandleGetDecorationMenuInput(u8 taskId)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
@@ -175,13 +175,13 @@ void sub_8109B7C(u8 taskId)
     }
 }
 
-void sub_8109C44(void)
+void ScrSpecial_GetTraderTradedFlag(void)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
-    gScriptResult = trader->unk31;
+    gScriptResult = trader->alreadyTraded;
 }
 
-void sub_8109C58(void)
+void ScrSpecial_DoesPlayerHaveNoDecorations(void)
 {
     u8 i;
 
@@ -196,7 +196,7 @@ void sub_8109C58(void)
     gScriptResult = TRUE;
 }
 
-void sub_8109C90(void)
+void ScrSpecial_IsDecorationFull(void)
 {
     gScriptResult = FALSE;
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
@@ -207,7 +207,7 @@ void sub_8109C90(void)
     }
 }
 
-void sub_8109CF0(void)
+void ScrSpecial_TraderMenuGiveDecoration(void)
 {
     CreateTask(sub_80FE7A8, 0);
 }
@@ -243,7 +243,7 @@ void sub_8109DAC(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_8109DE0(void)
+void ScrSpecial_TraderDoDecorationTrade(void)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
@@ -252,11 +252,11 @@ void sub_8109DE0(void)
     StringCopy(trader->unk5[gSpecialVar_0x8005], gSaveBlock2.playerName);
     trader->unk1[gSpecialVar_0x8005] = gSpecialVar_0x8006;
     sub_810993C();
-    trader->unk31 = 1;
+    trader->alreadyTraded = TRUE;
 }
 
-void sub_8109E34(void)
+void ScrSpecial_TraderMenuGetDecoration(void)
 {
-    u8 taskId = CreateTask(sub_8109B7C, 0);
-    sub_8109A48(taskId);
+    u8 taskId = CreateTask(Task_HandleGetDecorationMenuInput, 0);
+    CreateAvailableDecorationsMenu(taskId);
 }

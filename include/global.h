@@ -478,7 +478,7 @@ struct MauvilleManTrader
     u8 id;
     u8 unk1[4];
     u8 unk5[4][11];
-    u8 unk31;
+    bool8 alreadyTraded;
 };
 
 struct MauvilleManStoryteller
@@ -487,7 +487,7 @@ struct MauvilleManStoryteller
     bool8 unk1;
     u8 filler2[2];
     u8 unk4[4];
-    u8 unk8[4][7];
+    u8 playerNames[4][7];
     u8 unk24[2][4];  // unknown length
 };
 
