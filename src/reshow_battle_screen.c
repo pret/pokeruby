@@ -55,8 +55,8 @@ static void sub_807B184(u8 bank);
 static void sub_807B508(u8 bank);
 static void sub_807B06C(void);
 
-#define RESHOW_STATE 0x1FFFF
-#define HELPER_STATE 0x1FFFE
+#define gReshowState ewram[0x1FFFF]
+#define gHelperState ewram[0x1FFFE]
 
 void nullsub_14(void)
 {
@@ -69,14 +69,14 @@ void ReshowBattleScreenAfterMenu(void)
     SetHBlankCallback(0);
     SetVBlankCallback(0);
     REG_MOSAIC = 0;
-    ewram[RESHOW_STATE] = 0;
-    ewram[HELPER_STATE] = 0;
+    gReshowState = 0;
+    gHelperState = 0;
     SetMainCallback2(CB2_ReshowBattleScreenAfterMenu);
 }
 
 static void CB2_ReshowBattleScreenAfterMenu(void)
 {
-    switch (ewram[RESHOW_STATE])
+    switch (gReshowState)
     {
     case 0:
         dp12_8087EA4();
@@ -99,13 +99,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         }
         break;
     case 2:
-        if (!sub_800E414(ewram[HELPER_STATE]))
+        if (!sub_800E414(gHelperState))
         {
-            ewram[HELPER_STATE]++;
-            ewram[RESHOW_STATE]--;
+            gHelperState++;
+            gReshowState--;
         }
         else
-            ewram[HELPER_STATE] = 0;
+            gHelperState = 0;
         break;
     case 3:
         ResetSpriteData();
@@ -118,29 +118,29 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         sub_8031EE8();
         break;
     case 6:
-        if (sub_8031C30(ewram[HELPER_STATE]))
-            ewram[HELPER_STATE] = 0;
+        if (sub_8031C30(gHelperState))
+            gHelperState = 0;
         else
         {
-            ewram[HELPER_STATE]++;
-            ewram[RESHOW_STATE]--;
+            gHelperState++;
+            gReshowState--;
         }
         break;
     case 7:
         if (!LoadAppropiateBankSprite(0))
-            ewram[RESHOW_STATE]--;
+            gReshowState--;
         break;
     case 8:
         if (!LoadAppropiateBankSprite(1))
-            ewram[RESHOW_STATE]--;
+            gReshowState--;
         break;
     case 9:
         if (!LoadAppropiateBankSprite(2))
-            ewram[RESHOW_STATE]--;
+            gReshowState--;
         break;
     case 10:
         if (!LoadAppropiateBankSprite(3))
-            ewram[RESHOW_STATE]--;
+            gReshowState--;
         break;
     case 11:
         sub_807B184(0);
@@ -195,7 +195,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         SetMainCallback2(sub_800F808);
         break;
     }
-    ewram[RESHOW_STATE]++;
+    gReshowState++;
 }
 
 static void sub_807B06C(void)
@@ -231,7 +231,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
         else
             BattleLoadSubstituteSprite(bank, 0);
 
-        ewram[HELPER_STATE] = 0;
+        gHelperState = 0;
     }
     return 1;
 }
