@@ -438,7 +438,7 @@ void task01_battle_start(u8 taskId)
         }
         break;
     case 1:
-        if (sub_811AAE8() == TRUE)
+        if (IsBattleTransitionDone() == TRUE)
         {
             SetMainCallback2(sub_800E7C4);
             prev_quest_postbuffer_cursor_backup_reset();
@@ -827,7 +827,7 @@ void CB2_StartFirstBattle(void)
     UpdatePaletteFade();
     RunTasks();
 
-    if (sub_811AAE8() == TRUE)
+    if (IsBattleTransitionDone() == TRUE)
     {
         gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
         gMain.savedCallback = HandleFirstBattleEnd;

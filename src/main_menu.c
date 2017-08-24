@@ -1421,14 +1421,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].data[TD_AZURILL_SPRITE_ID] = spriteId;
 
     //Create Brendan sprite
-    spriteId = CreateTrainerSprite_BirchSpeech(0, 120, 60, 0, unk_2000000);
+    spriteId = CreateTrainerSprite(0, 120, 60, 0, unk_2000000);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].data[TD_BRENDAN_SPRITE_ID] = spriteId;
 
     //Create May sprite
-    spriteId = CreateTrainerSprite_BirchSpeech(1, 120, 60, 0, unk_2000000 + 0x800);
+    spriteId = CreateTrainerSprite(1, 120, 60, 0, unk_2000000 + 0x800);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
