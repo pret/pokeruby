@@ -314,28 +314,29 @@ void ScrSpecial_SaveBardSongLyrics(void)
         bard->playerTrainerId[i] = gSaveBlock2.playerTrainerId[i];
 
     for (i = 0; i < 6; i++)
-        bard->songLyrics[i] = bard->mauvilleOldMan_ecArray2[i];
+        bard->songLyrics[i] = bard->temporaryLyrics[i];
 
     bard->hasChangedSong = TRUE;
 }
 
+// prepare song?
 void sub_80F7BA0(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
     u16 specialVar = gSpecialVar_0x8004;  // It's a bit odd to use this temp variable, but it seems needed to match.
-    u16 *r5;
+    u16 *lyrics;
     u16 i;
     u8 *ptr;
     u8 *r4;
 
-    r5 = bard->mauvilleOldMan_ecArray2;
+    lyrics = bard->temporaryLyrics;
     if (specialVar == 0)
-        r5 = bard->songLyrics;
+        lyrics = bard->songLyrics;
     ptr = gStringVar4;
     r4 = ptr;
     for (i = 0; i < 2; i++)
     {
-        ptr = sub_80EB3FC(ptr, *(r5++));
+        ptr = sub_80EB3FC(ptr, *(lyrics++));
         while (ptr != r4)
         {
             if (*r4 == 0)
@@ -344,7 +345,7 @@ void sub_80F7BA0(void)
         }
         r4++;
         *(ptr++) = CHAR_SPACE;
-        ptr = sub_80EB3FC(ptr, *(r5++));
+        ptr = sub_80EB3FC(ptr, *(lyrics++));
         while (ptr != r4)
         {
             if (*r4 == 0)
@@ -353,7 +354,7 @@ void sub_80F7BA0(void)
         }
         r4++;
         *(ptr++) = CHAR_NEWLINE;
-        ptr = sub_80EB3FC(ptr, *(r5++));
+        ptr = sub_80EB3FC(ptr, *(lyrics++));
         while (ptr != r4)
         {
             if (*r4 == 0)
@@ -780,7 +781,7 @@ void BardSingWord(struct Task *task, struct UnkBard2 *b)
             if (gSpecialVar_0x8004 == 0)
                 r2 = bard->songLyrics;
             else
-                r2 = bard->mauvilleOldMan_ecArray2;
+                r2 = bard->temporaryLyrics;
             for (i = 0; i < 6; i++)
                 b->var0C[i] = r2[i];
             for (i = 0; i < 6; i++)
@@ -868,12 +869,15 @@ void BardSingWord(struct Task *task, struct UnkBard2 *b)
     }
 }
 
+#define tState data[0]
+#define tCharIndex data[3]
+
 void Task_BardSong(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];  // r5
 
     BardSingWord(task, &gUnknown_03005DA0);
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
         sub_80F7BA0();
@@ -881,19 +885,19 @@ void Task_BardSong(u8 taskId)
         sub_8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;
-        task->data[3] = 0;
+        task->tCharIndex = 0;
         task->data[4] = 0;
         FadeOutBGMTemporarily(4);
-        task->data[0] = 1;
+        task->tState = 1;
         break;
     case 1:
         if (IsBGMPausedOrStopped())
-            task->data[0] = 2;
+            task->tState = 2;
         break;
     case 2:
         {
             struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
-            u8 *string = gStringVar4 + task->data[3];
+            u8 *string = gStringVar4 + task->tCharIndex;
             u16 wordLen = 0;
             // Can't get it to match without hacking
             u32 temp;
@@ -910,7 +914,7 @@ void Task_BardSong(u8 taskId)
             if (task->data[5] == 0)
                 gUnknown_020388BC = MACRO1(bard->songLyrics[task->data[4]]);
             else
-                gUnknown_020388BC = MACRO1(bard->mauvilleOldMan_ecArray2[task->data[4]]);
+                gUnknown_020388BC = MACRO1(bard->temporaryLyrics[task->data[4]]);
             temp = gUnknown_03005DA0.var04 / wordLen;
             zero = 0;
             gUnknown_03005DA0.var04 = temp;
@@ -918,50 +922,50 @@ void Task_BardSong(u8 taskId)
                 gUnknown_03005DA0.var04 = 1;
             task->data[4]++;
             if (task->data[2] == 0)
-                task->data[0] = 3;
+                task->tState = 3;
             else
-                task->data[0] = 5;
+                task->tState = 5;
             task->data[1] = zero;
         }
         break;
     case 5:
         if (task->data[2] == 0)
-            task->data[0] = 3;
+            task->tState = 3;
         else
             task->data[2]--;
         break;
     case 3:
-        if (gStringVar4[task->data[3]] == EOS)
+        if (gStringVar4[task->tCharIndex] == EOS)
         {
             FadeInNewBGM(BGM_POKECEN, 6);
             m4aMPlayFadeOutTemporarily(&gMPlay_SE2, 2);
             EnableBothScriptContexts();
             DestroyTask(taskId);
         }
-        else if (gStringVar4[task->data[3]] == CHAR_SPACE)
+        else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
         {
             sub_8003418(gMenuWindowPtr);
-            task->data[3]++;
-            task->data[0] = 2;
+            task->tCharIndex++;
+            task->tState = 2;
             task->data[2] = 0;
         }
-        else if (gStringVar4[task->data[3]] == CHAR_NEWLINE)
+        else if (gStringVar4[task->tCharIndex] == CHAR_NEWLINE)
         {
-            task->data[3]++;
-            task->data[0] = 2;
+            task->tCharIndex++;
+            task->tState = 2;
             task->data[2] = 0;
         }
-        else if (gStringVar4[task->data[3]] == EXT_CTRL_CODE_BEGIN)
+        else if (gStringVar4[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
         {
-            task->data[3] += 2;  // skip over control codes
-            task->data[0] = 2;
+            task->tCharIndex += 2;  // skip over control codes
+            task->tState = 2;
             task->data[2] = 8;
         }
-        else if (gStringVar4[task->data[3]] == 0x37)  // What is 0x37 supposed to be?
+        else if (gStringVar4[task->tCharIndex] == 0x37)  // What is 0x37 supposed to be?
         {
-            gStringVar4[task->data[3]] = 0;
+            gStringVar4[task->tCharIndex] = CHAR_SPACE;
             sub_8003418(gMenuWindowPtr);
-            task->data[3]++;
+            task->tCharIndex++;
             task->data[2] = 0;
         }
         else
@@ -976,10 +980,10 @@ void Task_BardSong(u8 taskId)
                 task->data[1]++;
                 break;
             case 2:
-                task->data[3]++;
+                task->tCharIndex++;
                 task->data[1] = 0;
                 task->data[2] = gUnknown_03005DA0.var04;
-                task->data[0] = 4;
+                task->tState = 4;
                 break;
             }
         }
@@ -987,7 +991,7 @@ void Task_BardSong(u8 taskId)
     case 4:
         task->data[2]--;
         if (task->data[2] == 0)
-            task->data[0] = 3;
+            task->tState = 3;
         break;
     }
 }

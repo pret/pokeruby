@@ -460,7 +460,7 @@ struct MauvilleManBard
     /*0x00*/ u8 id;
     /*0x01*/ u8 unk_2D95;
     /*0x02*/ u16 songLyrics[6];
-    /*0x0E*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x0E*/ u16 temporaryLyrics[6];
     /*0x1A*/ u8 playerName[8];
     /*0x22*/ u8 filler_2DB6[0x3];
     /*0x25*/ u8 playerTrainerId[4];
