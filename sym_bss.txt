@@ -81,7 +81,7 @@ gUnknown_030006DC: @ 30006DC
 
 @ shop
 
-gUnknown_03000708: @ 3000708
+gMartInfo: @ 3000708
 	.space 0x10
 
 	.include "src/record_mixing.o"
