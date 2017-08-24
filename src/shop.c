@@ -76,7 +76,7 @@ u8 CreateShopMenu(u8 martType)
     gMartInfo.martType = martType;
     gMartInfo.cursor = 0;
 
-    if(martType == MART_TYPE_0)
+    if (martType == MART_TYPE_0)
     {
         gMartInfo.numChoices = 2;
         MenuDrawTextWindow(0, 0, 10, 7);
@@ -116,17 +116,17 @@ void sub_80B2E38(u8 var)
 {
     const u8 local = var;
 
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if(gMartInfo.cursor) // can move cursor up?
+        if (gMartInfo.cursor) // can move cursor up?
         {
             PlaySE(0x5);
             gMartInfo.cursor = MoveMenuCursor(-1);
         }
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if(gMartInfo.cursor != gMartInfo.numChoices) // can move cursor down?
+        if (gMartInfo.cursor != gMartInfo.numChoices) // can move cursor down?
         {
             PlaySE(0x5);
             gMartInfo.cursor = MoveMenuCursor(1);
@@ -135,7 +135,7 @@ void sub_80B2E38(u8 var)
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(0x5);
-        if(gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0)
         {
             gUnknown_083CC6D0[gUnknown_083CC6E8[gMartInfo.cursor]].func(local);
         }
@@ -144,7 +144,7 @@ void sub_80B2E38(u8 var)
             gUnknown_083CC6D0[gUnknown_083CC6EB[gMartInfo.cursor]].func(local);
         }
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(0x5);
         HandleShopMenuQuit(local);
@@ -175,13 +175,13 @@ void HandleShopMenuQuit(u8 taskId)
     ScriptContext2_Disable();
     DestroyTask(taskId);
 
-    if(gMartInfo.callback)
+    if (gMartInfo.callback)
         gMartInfo.callback(); // run the callback if it exists.
 }
 
 void sub_80B2FA0(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         SetMainCallback2((void *)((u16)gTasks[taskId].data[8] << 16 | (u16)gTasks[taskId].data[9]));
         DestroyTask(taskId);
@@ -196,9 +196,9 @@ void ReturnToShopMenuAfterExitingSellMenu(u8 taskId)
 
 void Task_ExitSellMenu(u8 taskId)
 {
-    if(sub_807D770() == 1)
+    if (sub_807D770() == 1)
     {
-        if(gMartInfo.martType == MART_TYPE_2)
+        if (gMartInfo.martType == MART_TYPE_2)
             DisplayItemMessageOnField(taskId, gOtherText_CanIHelpYou, ReturnToShopMenuAfterExitingSellMenu, 0);
         else
             DisplayItemMessageOnField(taskId, gOtherText_AnythingElse, ReturnToShopMenuAfterExitingSellMenu, 0);
@@ -313,7 +313,7 @@ void sub_80B3270(void)
 {
     sub_80F944C();
 
-    if(gMartInfo.itemCount > 7)
+    if (gMartInfo.itemCount > 7)
     {
         CreateVerticalScrollIndicators(0, 172, 12);
         CreateVerticalScrollIndicators(1, 172, 148);
@@ -323,12 +323,12 @@ void sub_80B3270(void)
 
 void sub_80B32A4(void)
 {
-    if(gMartInfo.choicesAbove == 0)
+    if (gMartInfo.choicesAbove == 0)
         sub_80F979C(0, 1);
     else
         sub_80F979C(0, 0);
 
-    if(gMartInfo.choicesAbove + 7 >= gMartInfo.itemCount)
+    if (gMartInfo.choicesAbove + 7 >= gMartInfo.itemCount)
         sub_80F979C(1, 1);
     else
         sub_80F979C(1, 0);
@@ -354,7 +354,7 @@ void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s32 var4)
     s16 offset1 = var1 * 2;
     s16 offset2 = (var2 * 0x40) + 0x40;
 
-    switch(tempVar4)
+    switch (tempVar4)
     {
     case 0: // _080B335C
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3);
@@ -470,9 +470,9 @@ void sub_80B368C(void)
 {
     u8 i;
 
-    for(i = 0; i < 16; i++) // max objects?
+    for (i = 0; i < 16; i++) // max objects?
     {
-        if(gUnknown_020386A4[i][MAP_OBJ_ID] == 16)
+        if (gUnknown_020386A4[i][MAP_OBJ_ID] == 16)
             continue;
 
         StartSpriteAnim(&gSprites[AddPseudoFieldObject(
@@ -507,8 +507,8 @@ void sub_80B379C(void)
 {
     u16 i, j;
 
-    for(i = 0; i < 8; i++)
-        for(j = 0; j < 14; j++)
+    for (i = 0; i < 8; i++)
+        for (j = 0; j < 14; j++)
             gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18300[32 * i + j] + 0xC3E0;
 }
 
@@ -536,7 +536,7 @@ void sub_80B389C(u16 itemId, u8 var2, bool32 hasControlCode)
 {
     u8 *stringPtr = gStringVar1;
 
-    if(hasControlCode != FALSE)
+    if (hasControlCode != FALSE)
     {
         stringPtr[0] = EXT_CTRL_CODE_BEGIN;
         stringPtr[1] = 0x1;
@@ -549,7 +549,7 @@ void sub_80B389C(u16 itemId, u8 var2, bool32 hasControlCode)
     sub_8072A18(&gStringVar1[0], 0x70, var2 << 3, 0x58, 0x1);
     stringPtr = gStringVar1;
 
-    if(hasControlCode != FALSE)
+    if (hasControlCode != FALSE)
         stringPtr = &gStringVar1[3];
 
     sub_80B79F8(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
@@ -560,7 +560,7 @@ void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
 {
     u8 *stringPtr = gStringVar1;
 
-    if(hasControlCode != FALSE)
+    if (hasControlCode != FALSE)
     {
         stringPtr[0] = EXT_CTRL_CODE_BEGIN;
         stringPtr[1] = 0x1;
@@ -572,10 +572,10 @@ void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
     sub_8072A18(&gStringVar1[0], 0x70, var2 << 3, 0x58, 0x1);
     stringPtr = gStringVar1;
 
-    if(hasControlCode != FALSE)
+    if (hasControlCode != FALSE)
         stringPtr = &gStringVar1[3];
 
-    if(gDecorations[itemId].price == 10000)
+    if (gDecorations[itemId].price == 10000)
     {
         sub_80B7B34(0x19, var2, hasControlCode); // huh???
     }
@@ -590,15 +590,15 @@ void sub_80B39D0(int var1, int var2, bool32 hasControlCode)
 {
     u8 i;
 
-    for(i = var1; i <= var2 && gMartInfo.choicesAbove + i < gMartInfo.itemCount; i++)
+    for (i = var1; i <= var2 && gMartInfo.choicesAbove + i < gMartInfo.itemCount; i++)
     {
-        if(gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0)
             sub_80B389C(gMartInfo.itemList[gMartInfo.choicesAbove + i], (i << 1) + 2, hasControlCode);
         else
             sub_80B3930(gMartInfo.itemList[gMartInfo.choicesAbove + i], (i << 1) + 2, hasControlCode);
     }
 
-    if(i != 8 && gMartInfo.choicesAbove + i == gMartInfo.itemCount)
+    if (i != 8 && gMartInfo.choicesAbove + i == gMartInfo.itemCount)
     {
         MenuFillWindowRectWithBlankTile(0xE, (i << 1) + 2, 0x1C, (i << 1) + 3);
         MenuPrint(gOtherText_CancelNoTerminator, 0xE, (i << 1) + 2);
@@ -607,16 +607,16 @@ void sub_80B39D0(int var1, int var2, bool32 hasControlCode)
 
 void sub_80B3A70(void)
 {
-    if(gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount)
+    if (gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount)
     {
-        if(gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0)
         {
             sub_8072AB0(ItemId_GetDescription(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]),
                 0x4, 0x68, 0x68, 0x30, MART_TYPE_0);
         }
         else
-            sub_8072AB0(gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].description, // doesn't consider choicesAbove?
-                0x4, 0x68, 0x68, 0x30, MART_TYPE_0); // huh??
+            sub_8072AB0(gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].description,
+                0x4, 0x68, 0x68, 0x30, MART_TYPE_0); // huh?? if mart type isnt 0, why assume it?
     }
     else
     {
