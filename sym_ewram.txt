@@ -655,12 +655,7 @@ gUnknown_0203927D: @ 203927D
 	.include "src/berry_tag_screen.o"
 	.include "src/mystery_event_menu.o"
 	.include "src/save_failed_screen.o"
-
-@ pokeblock_feed
-
-	.align 2
-gUnknown_02039350: @ 2039350
-	.space 0x8
+	.include "src/pokeblock_feed.o"
 
 @ intro_credits_graphics
 
