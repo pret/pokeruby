@@ -2894,3 +2894,39 @@ void sub_80EEE20() {
 		while (sub_80EEE54());
 	}
 }
+
+extern const u8 gPokenavHoennMapMisc_Gfx[];
+extern const u8 gUnknown_08E99FB0[];
+extern const u16 gPokenavHoennMap1_Pal[];
+
+void sub_80EF58C(u32);
+
+bool8 sub_80EEE54() {
+	// Here i've used .h struct instead of .c struct
+	switch (gUnknown_083DFEC4->unkD160) {
+	case 0:
+		LZ77UnCompVram(gPokenavHoennMapMisc_Gfx, (void *)VRAM + 0xC000);
+		break;
+	case 1:
+		LZ77UnCompVram(gUnknown_08E99FB0, (void *)VRAM + 0xD800);
+		break;
+	case 2:
+		LoadPalette(gPokenavHoennMap1_Pal, 0x10, 0x20);
+		break;
+	case 3:
+		sub_80EF58C(0);
+		sub_80EF58C(1);
+		sub_80EF58C(2);
+		break;
+	case 4:
+		gUnknown_083DFEC4->unk030C = 0;
+		REG_BG1HOFS = 0;
+		REG_BG1VOFS = 0;
+		REG_BG1CNT = 0x1B0C;
+		gUnknown_083DFEC4->unkD160++;
+	default:
+		return 0;
+	}
+	gUnknown_083DFEC4->unkD160++;
+	return 1;
+}
