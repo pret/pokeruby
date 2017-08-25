@@ -6,27 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EEDC4
-sub_80EEDC4: @ 80EEDC4
-	push {lr}
-	bl sub_8055870
-	cmp r0, 0x1
-	beq _080EEDDC
-	ldr r0, _080EEDE0 @ =0x02000000
-	movs r1, 0xC0
-	lsls r1, 2
-	adds r0, r1
-	ldr r1, _080EEDE4 @ =gUnknown_03000744
-	ldr r1, [r1]
-	str r1, [r0]
-_080EEDDC:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EEDE0: .4byte 0x02000000
-_080EEDE4: .4byte gUnknown_03000744
-	thumb_func_end sub_80EEDC4
-
 	thumb_func_start sub_80EEDE8
 sub_80EEDE8: @ 80EEDE8
 	ldr r0, _080EEE04 @ =REG_BG0HOFS

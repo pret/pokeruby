@@ -2866,3 +2866,9 @@ void sub_80EED9C() {
 	ewram0.var300 = &sub_80EEDC4;
 	_call_via_r1();
 }
+
+void sub_80EEDC4() {
+	if (sub_8055870() != 0x1) {
+		ewram0.var300 = gUnknown_03000744;
+	}
+}
