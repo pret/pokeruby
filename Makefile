@@ -141,7 +141,7 @@ $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(CPP) -D __ASSEMBLY__ -I include | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt

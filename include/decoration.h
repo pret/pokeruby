@@ -1,9 +1,7 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
-#include "task.h"
-
-enum DecoId {
+ASM_ENUM(
     /*000*/ DECOR_NONE,
     /*001*/ DECOR_SMALL_DESK,
     /*002*/ DECOR_POKEMON_DESK,
@@ -125,9 +123,9 @@ enum DecoId {
     /*118*/ DECOR_REGIROCK_DOLL,
     /*119*/ DECOR_REGICE_DOLL,
     /*120*/ DECOR_REGISTEEL_DOLL
-};
+)
 
-enum DecorPerm {
+ASM_ENUM(
     /*
      * The nomenclature here describes collision and placement permissions, in that order.
      */
@@ -136,9 +134,9 @@ enum DecorPerm {
     DECORPERM_BEHIND_FLOOR,
     DECORPERM_NA_WALL,
     DECORPERM_SOLID_MAT
-};
+)
 
-enum DecorShape {
+ASM_ENUM(
     /*
      * Width-x-height
      */
@@ -152,9 +150,9 @@ enum DecorShape {
     DECORSHAPE_2x4,
     DECORSHAPE_3x3,
     DECORSHAPE_3x2
-};
+)
 
-enum DecoCat {
+ASM_ENUM(
     /*
      * In which category you can find the decoration in the PC.
      */
@@ -166,7 +164,11 @@ enum DecoCat {
     /*5*/ DECORCAT_POSTER,
     /*6*/ DECORCAT_DOLL,
     /*7*/ DECORCAT_CUSHION
-};
+)
+
+#ifndef __ASSEMBLY__
+
+#include "task.h"
 
 struct Decoration
 {
@@ -368,5 +370,7 @@ void sub_810153C(u8);
 void sub_8101590(u8);
 void sub_8101848(u8);
 void DoPlayerPCDecoration(u8);
+
+#endif  // __ASSEMBLY__
 
 #endif // GUARD_DECORATION_H

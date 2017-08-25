@@ -1,8 +1,7 @@
 #ifndef GUARD_MOVES_H
 #define GUARD_MOVES_H
 
-enum
-{
+ASM_ENUM(
     MOVE_NONE,
     MOVE_POUND,
     MOVE_KARATE_CHOP,
@@ -357,7 +356,7 @@ enum
     MOVE_SHOCK_WAVE,
     MOVE_WATER_PULSE,
     MOVE_DOOM_DESIRE,
-    MOVE_PSYCHO_BOOST,
-};
+    MOVE_PSYCHO_BOOST
+)
 
 #endif // GUARD_MOVES_H

@@ -1,8 +1,7 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
-enum
-{
+ASM_ENUM(
     ITEM_NONE,           // 0x000
     ITEM_MASTER_BALL,    // 0x001
     ITEM_ULTRA_BALL,     // 0x002
@@ -383,7 +382,7 @@ enum
 
     // Emerald
     ITEM_MAGMA_EMBLEM,   // 0x177
-    ITEM_OLD_SEA_MAP,    // 0x178
-};
+    ITEM_OLD_SEA_MAP     // 0x178
+)
 
 #endif // GUARD_ITEMS_H
