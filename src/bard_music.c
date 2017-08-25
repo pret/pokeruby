@@ -37,7 +37,7 @@ struct BardSound *GetWordSounds(u16 group, u16 word)
 }
 #endif
 
-s32 GetWordPhonemes(struct BardSong *song, struct BardSound *src, u16 arg2)
+s32 GetWordPhonemes(struct BardSong *song, const struct BardSound *src, u16 arg2)
 {
     s32 i;
     s32 j;

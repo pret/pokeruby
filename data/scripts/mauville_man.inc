@@ -204,13 +204,13 @@ speak_to_storyteller:: @ 81B0816
 	faceplayer
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
+	jumpeq dont_hear_tale
 	specialval RESULT, sub_80F889C
 	compare RESULT, 0
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B08D3
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B084F:: @ 81B084F
-	message MauvilleCity_PokemonCenter_1F_Text_1AED35
+	message gTextStoryteller_WhichTale
 	waittext
 	special sub_80F8874
 	waitstate
@@ -227,12 +227,12 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B084F:: @ 81B084F
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0883:: @ 81B0883
 	compare 0x8008, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
+	jumpeq dont_hear_tale
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1B08AE
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0893:: @ 81B0893
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEE50, 4
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEF0A, MSGBOX_YESNO
+	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
+	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B084F
 
@@ -246,34 +246,34 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B08AE:: @ 81B08AE
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1B08DB
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B08D3:: @ 81B08D3
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AED70, 4
+	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B08DB:: @ 81B08DB
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEEB4, MSGBOX_YESNO
+	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0914
+	jumpeq dont_hear_tale
 	specialval RESULT, sub_80F88FC
 	compare RESULT, 1
 	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0909
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEF49, 4
+	msgbox gTextStoryteller_ImNotSatisfied, 4
 	closebutton
 	release
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0909:: @ 81B0909
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEDE8, 4
+	msgbox gTextStoryteller_BirthOfANewLegend, 4
 	closebutton
 	release
 	end
 
-MauvilleCity_PokemonCenter_1F_EventScript_1B0914:: @ 81B0914
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AED1D, 4
+dont_hear_tale:: @ 81B0914
+	msgbox gTextStoryteller_OhIFeelStifled, 4
 	closebutton
 	release
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B091F:: @ 81B091F
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEFA5, 4
+	msgbox gTextStoryteller_WishMorePeopleWould, 4
 	closebutton
 	release
 	end

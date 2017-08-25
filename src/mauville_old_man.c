@@ -797,6 +797,7 @@ void BardSingWord(struct Task *task, struct BardSong *song)
             for (i = 0; i < 6; i++)
                 song->lyrics[i] = lyrics[i];
             
+            // Clear phonemes
             for (i = 0; i < 6; i++)
             {
                 song->phonemes[i].sound = 0xFFFF;
@@ -814,7 +815,6 @@ void BardSingWord(struct Task *task, struct BardSong *song)
     case 2:  // Initialize word
         {
             u16 word = song->lyrics[song->currWord];
-            // TODO: fix this return type
             const struct BardSound *sounds = GetWordSounds(EC_GROUP(word), EC_INDEX(word));
 
             song->var04 = 0;
@@ -973,7 +973,7 @@ void Task_BardSong(u8 taskId)
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
         {
-            gStringVar4[task->tCharIndex] = CHAR_SPACE;
+            gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
             sub_8003418(gMenuWindowPtr);
             task->tCharIndex++;
             task->data[2] = 0;

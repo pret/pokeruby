@@ -4,21 +4,21 @@ gTextStoryteller_Introduction:: @ 81AECC6
 	.string "TRAINERS.\p"
 	.string "Will you hear my tale?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AED1D:: @ 81AED1D
+gTextStoryteller_OhIFeelStifled:: @ 81AED1D
 	.string "Oh...\n"
 	.string "I feel stifled...$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AED35:: @ 81AED35
+gTextStoryteller_WhichTale:: @ 81AED35
 	.string "I know of these legends.\n"
 	.string "Which tale will you have me tell?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AED70:: @ 81AED70
+gTextStoryteller_ButIKnowOfNoLegendaryTrainers:: @ 81AED70
 	.string "But, I know of no legendary TRAINERS.\n"
 	.string "Hence, I know no tales.\p"
 	.string "Where does one find a TRAINER worthy\n"
 	.string "of a legendary tale?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEDE8:: @ 81AEDE8
+gTextStoryteller_BirthOfANewLegend:: @ 81AEDE8
 	.string "What’s that?!\n"
 	.string "You... You...\p"
 	.string "{STR_VAR_2}\n"
@@ -26,27 +26,27 @@ MauvilleCity_PokemonCenter_1F_Text_1AEDE8:: @ 81AEDE8
 	.string "That is indeed magnificent!\n"
 	.string "It’s the birth of a new legend!$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEE50:: @ 81AEE50
+gTextStoryteller_CouldThereBeOtherTrainers:: @ 81AEE50
 	.string "It gets me thinking, could there be\n"
 	.string "other TRAINERS with more impressive\l"
 	.string "legends awaiting discovery?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEEB4:: @ 81AEEB4
+gTextStoryteller_HaveYouAnyTales:: @ 81AEEB4
 	.string "Are you a TRAINER?\p"
 	.string "Then tell me, have you any tales that\n"
 	.string "are even remotely legendary?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEF0A:: @ 81AEF0A
+gTextStoryteller_HearAnotherLegendaryTale:: @ 81AEF0A
 	.string "Incidentally... Would you care to hear\n"
 	.string "another legendary tale?$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEF49:: @ 81AEF49
+gTextStoryteller_ImNotSatisfied:: @ 81AEF49
 	.string "Hmm...\n"
 	.string "I’m not satisfied...\p"
 	.string "I wish you would bring me news worthy\n"
 	.string "of being called a legend.$"
 
-MauvilleCity_PokemonCenter_1F_Text_1AEFA5:: @ 81AEFA5
+gTextStoryteller_WishMorePeopleWould:: @ 81AEFA5
 	.string "I wish more people would be interested\n"
 	.string "in hearing my epic tales of legendary\l"
 	.string "TRAINERS.$"
