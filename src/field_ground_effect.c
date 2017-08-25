@@ -99,8 +99,8 @@ static const u8 gBikeTireTracks_Transitions[4][4] = {
     6, 7, 3, 4,
 };
 
-static void (*const gUnknown_083760A0[])(
-    struct MapObject *mapObj, struct Sprite *sprite) = { GroundEffect_SpawnOnTallGrass,
+static void (*const gUnknown_083760A0[])(struct MapObject *mapObj, struct Sprite *sprite) = {
+    GroundEffect_SpawnOnTallGrass,
     sub_8063E94,
     sub_8063EE0,
     sub_8063F2C,
@@ -119,7 +119,8 @@ static void (*const gUnknown_083760A0[])(
     GroundEffect_JumpLandingDust,
     GroundEffect_ShortGrass,
     GroundEffect_HotSprings,
-    GroundEffect_Seaweed };
+    GroundEffect_Seaweed
+};
 
 static void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {
@@ -720,8 +721,8 @@ void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *spri
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8 |
-                           READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
+                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
 
     gUnknown_0202FF84[7] = 1;
     FieldEffectStart(4);
@@ -739,8 +740,8 @@ void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8 |
-                           READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
+                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
 
     gUnknown_0202FF84[7] = 0;
     FieldEffectStart(4);
@@ -758,8 +759,8 @@ void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8 |
-                           READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
+                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
 
     gUnknown_0202FF84[7] = 1;
     FieldEffectStart(17);
@@ -777,8 +778,8 @@ void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8 |
-                           READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
+                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
 
     gUnknown_0202FF84[7] = 0;
     FieldEffectStart(17);
