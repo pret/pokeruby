@@ -133,7 +133,7 @@ extern const u8 gTextStoryteller_Story36Title[];
 extern const u8 gTextStoryteller_Story36Action[];
 extern const u8 gTextStoryteller_Story36Text[];
 
-extern struct UnkBard2 gUnknown_03005DA0;
+extern struct BardSong gUnknown_03005DA0;
 
 extern u16 gUnknown_020388BC;  // set but not used?
 
@@ -248,7 +248,7 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-//#define TEST MAUVILLE_MAN_STORYTELLER
+//#define TEST MAUVILLE_MAN_BARD
 
 #ifdef TEST
 // Safely changes man to test functionality
@@ -319,52 +319,58 @@ void ScrSpecial_SaveBardSongLyrics(void)
     bard->hasChangedSong = TRUE;
 }
 
-// prepare song?
-void sub_80F7BA0(void)
+// Copies lyrics into gStringVar4
+void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
     u16 specialVar = gSpecialVar_0x8004;  // It's a bit odd to use this temp variable, but it seems needed to match.
     u16 *lyrics;
-    u16 i;
-    u8 *ptr;
-    u8 *r4;
+    u16 lineNum;
+    u8 *wordEnd;
+    u8 *str;
 
     lyrics = bard->temporaryLyrics;
     if (specialVar == 0)
         lyrics = bard->songLyrics;
-    ptr = gStringVar4;
-    r4 = ptr;
-    for (i = 0; i < 2; i++)
+    wordEnd = gStringVar4;
+    str = wordEnd;
+    // Put three words on each line
+    for (lineNum = 0; lineNum < 2; lineNum++)
     {
-        ptr = sub_80EB3FC(ptr, *(lyrics++));
-        while (ptr != r4)
+        wordEnd = EasyChat_GetWordText(wordEnd, *(lyrics++));
+        while (wordEnd != str)
         {
-            if (*r4 == 0)
-                *r4 = 0x37;
-            r4++;
+            if (*str == CHAR_SPACE)
+                *str = CHAR_SONG_WORD_SEPARATOR;
+            str++;
         }
-        r4++;
-        *(ptr++) = CHAR_SPACE;
-        ptr = sub_80EB3FC(ptr, *(lyrics++));
-        while (ptr != r4)
+        
+        str++;
+        *(wordEnd++) = CHAR_SPACE;
+        
+        wordEnd = EasyChat_GetWordText(wordEnd, *(lyrics++));
+        while (wordEnd != str)
         {
-            if (*r4 == 0)
-                *r4 = 0x37;
-            r4++;
+            if (*str == CHAR_SPACE)
+                *str = CHAR_SONG_WORD_SEPARATOR;
+            str++;
         }
-        r4++;
-        *(ptr++) = CHAR_NEWLINE;
-        ptr = sub_80EB3FC(ptr, *(lyrics++));
-        while (ptr != r4)
+        
+        str++;
+        *(wordEnd++) = CHAR_NEWLINE;
+        
+        wordEnd = EasyChat_GetWordText(wordEnd, *(lyrics++));
+        while (wordEnd != str)
         {
-            if (*r4 == 0)
-                *r4 = 0x37;
-            r4++;
+            if (*str == CHAR_SPACE)
+                *str = CHAR_SONG_WORD_SEPARATOR;
+            str++;
         }
-        if (i == 0)
+        
+        if (lineNum == 0)
         {
-            *(ptr++) = EXT_CTRL_CODE_BEGIN;
-            *(ptr++) = 0xF;
+            *(wordEnd++) = EXT_CTRL_CODE_BEGIN;
+            *(wordEnd++) = 15;
         }
     }
 }
@@ -401,7 +407,7 @@ void ScrSpecial_HipsterTeachWord(void)
     }
     else
     {
-        sub_80EB3FC(gStringVar1, var);
+        EasyChat_GetWordText(gStringVar1, var);
         gScriptResult = TRUE;
     }
 }
@@ -434,7 +440,7 @@ void ScrSpecial_GenerateGiddyLine(void)
         u32 adjective = Random();
 
         adjective %= 8;
-        stringPtr = sub_80EB3FC(gStringVar4, giddy->mauvilleOldMan_ecArray[giddy->unk1]);
+        stringPtr = EasyChat_GetWordText(gStringVar4, giddy->mauvilleOldMan_ecArray[giddy->unk1]);
         stringPtr = StringCopy(stringPtr, gOtherText_Is);
         stringPtr = StringCopy(stringPtr, gGiddyAdjectives[adjective]);
         StringCopy(stringPtr, gOtherText_DontYouAgree);
@@ -761,105 +767,112 @@ void sub_80F7F30(void)
     sub_80F83D0();
 }
 
-void StartBardSong(u8 a)
+#define tState data[0]
+#define tCharIndex data[3]
+#define tCurrWord data[4]
+#define tUseTemporaryLyrics data[5]
+
+void StartBardSong(bool8 useTemporaryLyrics)
 {
     u8 taskId = CreateTask(Task_BardSong, 0x50);
 
-    gTasks[taskId].data[5] = a;
+    gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-void BardSingWord(struct Task *task, struct UnkBard2 *b)
+void BardSingWord(struct Task *task, struct BardSong *song)
 {
-    switch (task->data[0])
+    switch (task->tState)
     {
-    case 0:
+    case 0:  // Initialize song
         {
             struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
-            u16 *r2;
+            u16 *lyrics;
             s32 i;
 
+            // Copy lyrics
             if (gSpecialVar_0x8004 == 0)
-                r2 = bard->songLyrics;
+                lyrics = bard->songLyrics;
             else
-                r2 = bard->temporaryLyrics;
+                lyrics = bard->temporaryLyrics;
             for (i = 0; i < 6; i++)
-                b->var0C[i] = r2[i];
+                song->lyrics[i] = lyrics[i];
+            
             for (i = 0; i < 6; i++)
             {
-                b->var18[i].var00 = 0xFFFF;
-                b->var18[i].var02 = 0;
-                b->var18[i].var04 = 0;
-                b->var18[i].var06 = 0;
+                song->phonemes[i].sound = 0xFFFF;
+                song->phonemes[i].length = 0;
+                song->phonemes[i].pitch = 0;
+                song->phonemes[i].volume = 0;
             }
-            b->var00 = 0;
-            b->var01 = 0;
-            b->var04 = 0;
+            song->currWord = 0;
+            song->currPhoneme = 0;
+            song->var04 = 0;
         }
         break;
-    case 1:
+    case 1:  // Wait for BGM to end
         break;
-    case 2:
+    case 2:  // Initialize word
         {
-            u16 r4 = b->var0C[b->var00];
+            u16 word = song->lyrics[song->currWord];
             // TODO: fix this return type
-            struct UnkBard *r1 = (struct UnkBard *)sub_814A2D0(r4 / 0x200, r4 % 0x200);
+            struct UnkBard *sounds = GetWordSoundInfo(EC_GROUP(word), EC_INDEX(word));
 
-            b->var04 = 0;
-            sub_814A2EC(b, r1, (r4 % 4) + ((r4 / 8) & 1));
+            song->var04 = 0;
+            GetWordPhonemes(song, r1, MACRO1(word));
         }
         break;
     case 3:
     case 4:
         {
-            struct UnkBard3 *r7 = &b->var18[b->var01];
+            struct BardPhoneme *phoneme = &song->phonemes[song->currPhoneme];
 
-            switch (b->var03)
+            switch (song->state)
             {
             case 0:
-                if (b->var02 == 0)
+                if (song->phonemeTimer == 0)  // Timer has expired. Move to next phoneme
                 {
-                    if (b->var01 == 6 || r7->var00 == 0xFF)
+                    if (song->currPhoneme == 6 || phoneme->sound == 0xFF)
                     {
-                        b->var03 = 0xFE;
+                        song->state = 0xFE;
                         break;
                     }
-                    b->var02 = r7->var02;
-                    if (r7->var00 <= 50)
+                    song->phonemeTimer = phoneme->length;
+                    if (phoneme->sound <= 50)
                     {
-                        u16 r1 = r7->var00 / 3;
+                        u16 num = phoneme->sound / 3;
 
-                        m4aSongNumStart(249 + r1 * 3);
+                        m4aSongNumStart(249 + num * 3);
                     }
-                    b->var03 = 1;
+                    song->state = 1;
                 }
                 else
                 {
-                    if (b->var0A > 10)
-                        b->volume -= 2;
-                    if (b->var0A & 1)
-                        b->pitch += 64;
+                    if (song->voiceInflection > 10)
+                        song->volume -= 2;
+                    if (song->voiceInflection & 1)
+                        song->pitch += 64;
                     else
-                        b->pitch -= 64;
-                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, b->volume);
-                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, b->pitch);
-                    b->var0A++;
+                        song->pitch -= 64;
+                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, song->volume);
+                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, song->pitch);
+                    song->voiceInflection++;
                 }
-                b->var02--;
+                song->phonemeTimer--;
                 break;
             case 1:
-                b->var01++;
-                b->var03 = 0;
-                if (r7->var00 <= 50)
+                song->currPhoneme++;
+                song->state = 0;
+                if (phoneme->sound <= 50)
                 {
-                    b->volume = 0x100 + r7->var06 * 16;
-                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, b->volume);
-                    b->pitch = 0x200 + r7->var04;
-                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, b->pitch);
+                    song->volume = 0x100 + phoneme->volume * 16;
+                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, song->volume);
+                    song->pitch = 0x200 + phoneme->pitch;
+                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, song->pitch);
                 }
                 break;
             case 0xFE:
                 m4aMPlayStop(&gMPlay_SE2);
-                b->var03 = 0xFF;
+                song->state = 0xFF;
                 break;
             }
         }
@@ -869,9 +882,6 @@ void BardSingWord(struct Task *task, struct UnkBard2 *b)
     }
 }
 
-#define tState data[0]
-#define tCharIndex data[3]
-
 void Task_BardSong(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];  // r5
@@ -879,48 +889,48 @@ void Task_BardSong(u8 taskId)
     BardSingWord(task, &gUnknown_03005DA0);
     switch (task->tState)
     {
-    case 0:
-        sub_80F7BA0();
+    case 0:  // Initialize song
+        PrepareSongText();
         InitWindowFromConfig(gMenuWindowPtr, &gWindowConfig_81E6CE4);
         sub_8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;
         task->tCharIndex = 0;
-        task->data[4] = 0;
+        task->tCurrWord = 0;
         FadeOutBGMTemporarily(4);
         task->tState = 1;
         break;
-    case 1:
+    case 1:  // Wait for BGM to end
         if (IsBGMPausedOrStopped())
             task->tState = 2;
         break;
-    case 2:
+    case 2:  // Initialize word
         {
             struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
-            u8 *string = gStringVar4 + task->tCharIndex;
+            u8 *str = gStringVar4 + task->tCharIndex;
             u16 wordLen = 0;
             // Can't get it to match without hacking
             u32 temp;
             register s16 zero asm("r1");
 
-            while (*string != CHAR_SPACE
-                && *string != CHAR_NEWLINE
-                && *string != EXT_CTRL_CODE_BEGIN
-                && *string != EOS)
+            while (*str != CHAR_SPACE
+                && *str != CHAR_NEWLINE
+                && *str != EXT_CTRL_CODE_BEGIN
+                && *str != EOS)
             {
-                string++;
+                str++;
                 wordLen++;
             }
-            if (task->data[5] == 0)
-                gUnknown_020388BC = MACRO1(bard->songLyrics[task->data[4]]);
+            if (!task->tUseTemporaryLyrics)
+                gUnknown_020388BC = MACRO1(bard->songLyrics[task->tCurrWord]);
             else
-                gUnknown_020388BC = MACRO1(bard->temporaryLyrics[task->data[4]]);
+                gUnknown_020388BC = MACRO1(bard->temporaryLyrics[task->tCurrWord]);
             temp = gUnknown_03005DA0.var04 / wordLen;
             zero = 0;
             gUnknown_03005DA0.var04 = temp;
             if (gUnknown_03005DA0.var04 <= 0)
                 gUnknown_03005DA0.var04 = 1;
-            task->data[4]++;
+            task->tCurrWord++;
             if (task->data[2] == 0)
                 task->tState = 3;
             else
@@ -961,7 +971,7 @@ void Task_BardSong(u8 taskId)
             task->tState = 2;
             task->data[2] = 8;
         }
-        else if (gStringVar4[task->tCharIndex] == 0x37)  // What is 0x37 supposed to be?
+        else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
         {
             gStringVar4[task->tCharIndex] = CHAR_SPACE;
             sub_8003418(gMenuWindowPtr);
