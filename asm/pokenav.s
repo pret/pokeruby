@@ -6,34 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EEE20
-sub_80EEE20: @ 80EEE20
-	push {lr}
-	ldr r0, _080EEE48 @ =gUnknown_083DFEC4
-	ldr r0, [r0]
-	ldr r1, _080EEE4C @ =0x0000d160
-	adds r2, r0, r1
-	movs r1, 0
-	strh r1, [r2]
-	ldr r1, _080EEE50 @ =0x00006dac
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080EEE42
-_080EEE38:
-	bl sub_80EEE54
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EEE38
-_080EEE42:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EEE48: .4byte gUnknown_083DFEC4
-_080EEE4C: .4byte 0x0000d160
-_080EEE50: .4byte 0x00006dac
-	thumb_func_end sub_80EEE20
-
 	thumb_func_start sub_80EEE54
 sub_80EEE54: @ 80EEE54
 	push {lr}

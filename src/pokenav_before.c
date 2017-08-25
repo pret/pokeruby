@@ -2881,6 +2881,16 @@ void sub_80EEDE8() {
 	REG_BG3HOFS = 0;
 	REG_BG3VOFS = 0;
 }
+
 void sub_80EEE08() {
+	// Here i've used .h struct instead of .c struct
 	gUnknown_083DFEC4->unkD160 = 0;
+}
+
+void sub_80EEE20() {
+	// Here i've used .h struct instead of .c struct
+	gUnknown_083DFEC4->unkD160 = 0;
+	if (!gUnknown_083DFEC4->unk6DAC) {
+		while (sub_80EEE54());
+	}
 }
