@@ -2856,3 +2856,13 @@ void sub_80EED2C(u8 param1) {
 		break;
 	}
 }
+
+void (*gUnknown_03000744)(void);
+void _call_via_r1();
+void sub_80EEDC4();
+
+void sub_80EED9C() {
+	gUnknown_03000744 = ewram0.var300;
+	ewram0.var300 = &sub_80EEDC4;
+	_call_via_r1();
+}

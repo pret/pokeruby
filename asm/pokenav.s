@@ -6,27 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EED9C
-sub_80EED9C: @ 80EED9C
-	push {lr}
-	ldr r2, _080EEDB8 @ =gUnknown_03000744
-	ldr r0, _080EEDBC @ =0x02000000
-	movs r1, 0xC0
-	lsls r1, 2
-	adds r0, r1
-	ldr r1, [r0]
-	str r1, [r2]
-	ldr r1, _080EEDC0 @ =sub_80EEDC4
-	str r1, [r0]
-	bl _call_via_r1
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080EEDB8: .4byte gUnknown_03000744
-_080EEDBC: .4byte 0x02000000
-_080EEDC0: .4byte sub_80EEDC4
-	thumb_func_end sub_80EED9C
-
 	thumb_func_start sub_80EEDC4
 sub_80EEDC4: @ 80EEDC4
 	push {lr}
