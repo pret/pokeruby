@@ -14,6 +14,8 @@
 #include "songs.h"
 #include "flags.h"
 
+extern u8 ewram[];
+
 struct UnknownPokenav0 {
 	/* 0x0000 */ u8 fill0000[0x0300];
 	/* 0x0300 */ void (*var300)(void);
@@ -50,9 +52,12 @@ struct UnknownPokenav0 {
 	/* 0x876E */ u8 var876E;
 	/* 0x876F */ u8 fill876F[0x5];
 	/* 0x8774 */ s16 var8774;
-	/* 0x8776 */ u8 fill8776[0x62];
+	/* 0x8776 */ u8 fill8776[0x55];
+	/* 0x87CB */ u8 var87CB;
+	/* 0x87CC */ u8 fill87CC[0xC];
 	/* 0x87D8 */ u8 var87D8;
-	/* 0x87D9 */ u8 fill87D9[0x3];
+	/* 0x87D9 */ u8 fill87D9[0x1];
+	/* 0x87DA */ s16 var87DA;
 	/* 0x87DC */ s16 var87DC;
 	/* 0x87DE */ u8 fill87DE[0x4a];
 	/* 0x8828 */ u8 var8828;
@@ -70,9 +75,15 @@ struct UnknownPokenav0 {
 	/* 0xD162 */ u8 varD162;
 };
 
-
-extern u8 ewram[];
 #define ewram0 (*(struct UnknownPokenav0*)(ewram + 0))
+
+struct UnknownPokenav0_1 {
+	u8 fill6dad[0x6dad];
+	s8 var6dad;
+	s8 var6dae;
+};
+
+#define ewram0_1 (*(struct UnknownPokenav0_1*)(ewram + 0))
 
 extern void sub_80F1A90();
 extern bool8 sub_80F1AC4();
@@ -1315,7 +1326,6 @@ void sub_80ED620() {
 }
 
 #if 0
-
 void sub_80F4F78();
 void sub_80F0174(u32);
 bool8 sub_80F4FB4();
@@ -1327,6 +1337,7 @@ void sub_80F2F48();
 void sub_80F3CE8();
 void sub_80F3614();
 void sub_80F357C();
+void sub_80F4FDC();
 
 void sub_80ED858() {
 	u8 var1;
@@ -1351,23 +1362,90 @@ void sub_80ED858() {
 		ewram0.var304 = 0x4;
 		break;
 	case 4:
+		if ( (gMain.heldKeys & 0x40) && (ewram0.var87CB) && (!(ewram0.var76aa) || (ewram0.var87DC)) ) {
+			PlaySE(0x5);
+			sub_80F5060(0x1);
+			move_anim_execute();
+			ewram0.var304 = 0x5;
+		}
+		else if ( (gMain.heldKeys & 0x80) && (ewram0.var87CB) && (!(ewram0.var76aa) || (ewram0.var76aa >= ewram0.var87DC)) ) {
+			PlaySE(0x5);
+			sub_80F5060(0);
+			move_anim_execute();
+			ewram0.var304 = 0x5;
+		}
+		if (gMain.newKeys & B_BUTTON) {
+			PlaySE(0x5);
+			sub_80F4FDC();
+			move_anim_execute();
+			ewram0.var304 = 0x9;
+		}
+		else if (gMain.newKeys & A_BUTTON) {
+			if (ewram0.var76aa) {
+				if (ewram0.var6dac) {
+					PlaySE(0x5);
+					ewram0.var304 = 0x7;
+				}
+			}
+			else if ((ewram0.var87DC == ewram0.var87DA - 1)) {
+				PlaySE(0x5);
+				ewram0.var304 = 0x9;
+			}
+		}
+
+/*
+		if (gMain.heldKeys & 0x40) {
+			if (ewram0.var87CB) {
+				if (ewram0.var76aa) {
+					if (!ewram0.var87DC) goto label1;
+				}
+				PlaySE(0x5);
+				sub_80F5060(0x1);
+				move_anim_execute();
+				ewram0.var304 = 0x5;
+
+			}
+			else goto label1;
+		}
+		else goto label1;
 		break;
-//		if (!(gMain.heldKeys & 0x40) && !(gMain.heldKeys & 0x80) && (gMain.newKeys & B_BUTTON))  {
-//			PlaySE(0x5);
-//			sub_80F4FDC();
-//			move_anim_execute();
-//			ewram0.var304 = 0x9;
-//		}
-//		else if (!ewram0.var87CB && !(gMain.heldKeys & 0x80) && (gMain.newKeys & B_BUTTON))  {
-//			PlaySE(0x5);
-//			sub_80F4FDC();
-//			move_anim_execute();
-//			ewram0.var304 = 0x9;
-//		}
-//		else if (ewram0.var87DC) {
-//			if (gMain.heldKeys & 0x80)
-//
-//		}
+label1:
+		if (gMain.heldKeys & 0x80) {
+			if (ewram0.var87CB) {
+				if (ewram0.var76aa) {
+					if (!(ewram0.var76aa < ewram0.var87DC)) goto label2;
+				}
+				PlaySE(0x5);
+				sub_80F5060(0x1);
+				move_anim_execute();
+				ewram0.var304 = 0x5;
+			}
+			else goto label2;
+		}
+		else goto label2;
+		break;
+label2:
+		if (gMain.newKeys & B_BUTTON) {
+			PlaySE(0x5);
+			sub_80F4FDC();
+			move_anim_execute();
+			ewram0.var304 = 0x9;
+		}
+		else if (gMain.newKeys & A_BUTTON) {
+			if (!ewram0.var76aa) {
+				if ((ewram0.var87DC == ewram0.var87DA - 1)) {
+					PlaySE(0x5);
+					ewram0.var304 = 0x9;
+				}
+			}
+			else {
+				PlaySE(0x5);
+				ewram0.var304 = 0x9;
+			}
+		}
+*/
+		break;
+
 	case 5:
 		if (gpu_sync_bg_show()) return;
 		sub_80F3D00();
@@ -2439,4 +2517,297 @@ void sub_80EE9C0(u8 param1, u8 param2, u8 param3) {
 	ewram0.var6e15 = param2;
 	ewram0.var6e16 = 0;
 	ewram0.var6e17 = param3;
+}
+
+#if 0
+bool8 sub_80EEA0C() {
+	switch (ewram0.var6e16) {
+	case 0:
+		if (sub_80F1F10()) return 1;
+		if (ewram0.var6e17 != 0xC) {
+			ewram0.var6e16 = 0x1;
+			return 1;
+		}
+		else {
+			ewram0.var6e16 = 0x3;
+			return 1;
+		}
+	case 1:
+		sub_80F2C80(ewram0.var6e17);
+		ewram0.var6e16++;
+	case 2:
+		if (sub_80F2CBC(ewram0.var6e17)) return 1;
+		ewram0.var6e16++;
+	case 3:
+
+	}
+}
+#else
+__attribute__((naked))
+bool8 sub_80EEA0C() {
+	asm_unified(
+	"push {r4,lr}\n\
+	ldr r1, _080EEA28 @ =0x02000000\n\
+	ldr r2, _080EEA2C @ =0x00006e16\n\
+	adds r0, r1, r2\n\
+	ldrb r0, [r0]\n\
+	adds r3, r1, 0\n\
+	cmp r0, 0x8\n\
+	bls _080EEA1E\n\
+	b _080EEBFA\n\
+_080EEA1E:\n\
+	lsls r0, 2\n\
+	ldr r1, _080EEA30 @ =_080EEA34\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_080EEA28: .4byte 0x02000000\n\
+_080EEA2C: .4byte 0x00006e16\n\
+_080EEA30: .4byte _080EEA34\n\
+	.align 2, 0\n\
+_080EEA34:\n\
+	.4byte _080EEA58\n\
+	.4byte _080EEA98\n\
+	.4byte _080EEAAE\n\
+	.4byte _080EEAD4\n\
+	.4byte _080EEB3E\n\
+	.4byte _080EEB68\n\
+	.4byte _080EEB88\n\
+	.4byte _080EEBAC\n\
+	.4byte _080EEBE4\n\
+_080EEA58:\n\
+	bl sub_80F1F10\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080EEA64\n\
+	b _080EEC08\n\
+_080EEA64:\n\
+	ldr r1, _080EEA7C @ =0x02000000\n\
+	ldr r4, _080EEA80 @ =0x00006e17\n\
+	adds r0, r1, r4\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0xC\n\
+	beq _080EEA88\n\
+	ldr r0, _080EEA84 @ =0x00006e16\n\
+	adds r1, r0\n\
+	movs r0, 0x1\n\
+	strb r0, [r1]\n\
+	b _080EEC08\n\
+	.align 2, 0\n\
+_080EEA7C: .4byte 0x02000000\n\
+_080EEA80: .4byte 0x00006e17\n\
+_080EEA84: .4byte 0x00006e16\n\
+_080EEA88:\n\
+	ldr r2, _080EEA94 @ =0x00006e16\n\
+	adds r1, r2\n\
+	movs r0, 0x3\n\
+	strb r0, [r1]\n\
+	b _080EEC08\n\
+	.align 2, 0\n\
+_080EEA94: .4byte 0x00006e16\n\
+_080EEA98:\n\
+	ldr r4, _080EEAC8 @ =0x02000000\n\
+	ldr r1, _080EEACC @ =0x00006e17\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_80F2C80\n\
+	ldr r2, _080EEAD0 @ =0x00006e16\n\
+	adds r4, r2\n\
+	ldrb r0, [r4]\n\
+	adds r0, 0x1\n\
+	strb r0, [r4]\n\
+_080EEAAE:\n\
+	ldr r4, _080EEAC8 @ =0x02000000\n\
+	ldr r1, _080EEACC @ =0x00006e17\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_80F2CBC\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080EEAC2\n\
+	b _080EEC08\n\
+_080EEAC2:\n\
+	ldr r2, _080EEAD0 @ =0x00006e16\n\
+	adds r1, r4, r2\n\
+	b _080EEB76\n\
+	.align 2, 0\n\
+_080EEAC8: .4byte 0x02000000\n\
+_080EEACC: .4byte 0x00006e17\n\
+_080EEAD0: .4byte 0x00006e16\n\
+_080EEAD4:\n\
+	adds r2, r3, 0\n\
+	ldr r4, _080EEAF8 @ =0x00006e15\n\
+	adds r0, r2, r4\n\
+	ldrb r1, [r0]\n\
+	subs r4, 0x68\n\
+	adds r0, r2, r4\n\
+	strb r1, [r0]\n\
+	ldr r1, _080EEAFC @ =0x00006e14\n\
+	adds r0, r2, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x1\n\
+	beq _080EEB14\n\
+	cmp r0, 0x1\n\
+	bgt _080EEB00\n\
+	cmp r0, 0\n\
+	beq _080EEB06\n\
+	b _080EEB28\n\
+	.align 2, 0\n\
+_080EEAF8: .4byte 0x00006e15\n\
+_080EEAFC: .4byte 0x00006e14\n\
+_080EEB00:\n\
+	cmp r0, 0x2\n\
+	beq _080EEB20\n\
+	b _080EEB28\n\
+_080EEB06:\n\
+	ldr r4, _080EEB10 @ =0x00006dae\n\
+	adds r1, r2, r4\n\
+	movs r0, 0x5\n\
+	b _080EEB26\n\
+	.align 2, 0\n\
+_080EEB10: .4byte 0x00006dae\n\
+_080EEB14:\n\
+	ldr r0, _080EEB1C @ =0x00006dae\n\
+	adds r1, r2, r0\n\
+	movs r0, 0x3\n\
+	b _080EEB26\n\
+	.align 2, 0\n\
+_080EEB1C: .4byte 0x00006dae\n\
+_080EEB20:\n\
+	ldr r2, _080EEB58 @ =0x00006dae\n\
+	adds r1, r3, r2\n\
+	movs r0, 0x6\n\
+_080EEB26:\n\
+	strb r0, [r1]\n\
+_080EEB28:\n\
+	ldr r4, _080EEB5C @ =0x02000000\n\
+	ldr r1, _080EEB60 @ =0x00006e14\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_80F1B8C\n\
+	ldr r2, _080EEB64 @ =0x00006e16\n\
+	adds r4, r2\n\
+	ldrb r0, [r4]\n\
+	adds r0, 0x1\n\
+	strb r0, [r4]\n\
+_080EEB3E:\n\
+	ldr r4, _080EEB5C @ =0x02000000\n\
+	ldr r1, _080EEB60 @ =0x00006e14\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_80F1BC8\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080EEC08\n\
+	ldr r2, _080EEB64 @ =0x00006e16\n\
+	adds r1, r4, r2\n\
+	b _080EEB76\n\
+	.align 2, 0\n\
+_080EEB58: .4byte 0x00006dae\n\
+_080EEB5C: .4byte 0x02000000\n\
+_080EEB60: .4byte 0x00006e14\n\
+_080EEB64: .4byte 0x00006e16\n\
+_080EEB68:\n\
+	bl sub_8055870\n\
+	cmp r0, 0\n\
+	bne _080EEC08\n\
+	ldr r1, _080EEB80 @ =0x02000000\n\
+	ldr r4, _080EEB84 @ =0x00006e16\n\
+	adds r1, r4\n\
+_080EEB76:\n\
+	ldrb r0, [r1]\n\
+	adds r0, 0x1\n\
+	strb r0, [r1]\n\
+	b _080EEC08\n\
+	.align 2, 0\n\
+_080EEB80: .4byte 0x02000000\n\
+_080EEB84: .4byte 0x00006e16\n\
+_080EEB88:\n\
+	bl sub_80F1DF0\n\
+	ldr r4, _080EEBA0 @ =0x02000000\n\
+	ldr r1, _080EEBA4 @ =0x00006e14\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_80EF490\n\
+	ldr r2, _080EEBA8 @ =0x00006e16\n\
+	adds r4, r2\n\
+	b _080EEBCC\n\
+	.align 2, 0\n\
+_080EEBA0: .4byte 0x02000000\n\
+_080EEBA4: .4byte 0x00006e14\n\
+_080EEBA8: .4byte 0x00006e16\n\
+_080EEBAC:\n\
+	bl sub_80F1E50\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080EEC08\n\
+	ldr r4, _080EEBD4 @ =0x02000000\n\
+	ldr r1, _080EEBD8 @ =0x00006e14\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	ldr r2, _080EEBDC @ =0x00006dad\n\
+	adds r1, r4, r2\n\
+	ldrb r1, [r1]\n\
+	bl sub_80EF428\n\
+	ldr r0, _080EEBE0 @ =0x00006e16\n\
+	adds r4, r0\n\
+_080EEBCC:\n\
+	ldrb r0, [r4]\n\
+	adds r0, 0x1\n\
+	strb r0, [r4]\n\
+	b _080EEC08\n\
+	.align 2, 0\n\
+_080EEBD4: .4byte 0x02000000\n\
+_080EEBD8: .4byte 0x00006e14\n\
+_080EEBDC: .4byte 0x00006dad\n\
+_080EEBE0: .4byte 0x00006e16\n\
+_080EEBE4:\n\
+	bl sub_80EF4F8\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080EEC08\n\
+	ldr r1, _080EEC00 @ =0x02000000\n\
+	ldr r2, _080EEC04 @ =0x00006e16\n\
+	adds r1, r2\n\
+	ldrb r0, [r1]\n\
+	adds r0, 0x1\n\
+	strb r0, [r1]\n\
+_080EEBFA:\n\
+	movs r0, 0\n\
+	b _080EEC0A\n\
+	.align 2, 0\n\
+_080EEC00: .4byte 0x02000000\n\
+_080EEC04: .4byte 0x00006e16\n\
+_080EEC08:\n\
+	movs r0, 0x1\n\
+_080EEC0A:\n\
+	pop {r4}\n\
+	pop {r1}\n\
+	bx r1\n"
+
+	);
+}
+#endif
+
+// var6dad and var6dae must be s8 in this func
+bool8 sub_80EEC10() {
+	if (gMain.newKeys& 0x40) {
+		do {
+			if (--ewram0_1.var6dad < 0) {
+				ewram0_1.var6dad = ewram0_1.var6dae - 1;
+			}
+
+		} while (!ewram0.var6db2[ewram0_1.var6dad]);
+		return 1;
+	}
+	if (gMain.newKeys & 0x80) {
+		do {
+			if (++ewram0_1.var6dad >= ewram0_1.var6dae) {
+				ewram0_1.var6dad = 0;
+			}
+		} while (!ewram0.var6db2[ewram0_1.var6dad]);
+		return 1;
+	}
+	return 0;
 }
