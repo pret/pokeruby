@@ -486,9 +486,9 @@ struct MauvilleManStoryteller
     u8 id;
     bool8 unk1;
     u8 filler2[2];
-    u8 unk4[4];
-    u8 playerNames[4][7];
-    u8 unk24[2][4];  // unknown length
+    u8 gameStatIDs[4];
+    u8 trainerNames[4][7];
+    u8 unk24[4][4];
 };
 
 struct MauvilleManGiddy

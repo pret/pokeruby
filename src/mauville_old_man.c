@@ -1013,8 +1013,8 @@ void sub_80F83D0(void)
 
 struct Story
 {
-    u8 unk0;
-    u8 unk1;
+    u8 stat;
+    u8 minVal;
     const u8 *title;
     const u8 *action;
     const u8 *fullText;
@@ -1069,8 +1069,8 @@ void StorytellerSetup(void)
     storyteller->unk1 = FALSE;
     for (i = 0; i < 4; i++)
     {
-        storyteller->unk4[i] = 0;
-        storyteller->playerNames[0][i] = EOS;  // Maybe they meant storyteller->playerNames[i][0] instead?
+        storyteller->gameStatIDs[i] = 0;
+        storyteller->trainerNames[0][i] = EOS;  // Maybe they meant storyteller->trainerNames[i][0] instead?
     }
 }
 
@@ -1082,36 +1082,36 @@ void sub_80F8428(void)
     storyteller->unk1 = FALSE;
 }
 
-u32 sub_80F8438(u8 stat)
+u32 StorytellerGetGameStat(u8 stat)
 {
-    if (stat == 50)
+    if (stat == NUM_GAME_STATS)
         stat = 0;
     return GetGameStat(stat);
 }
 
-const struct Story *GetStory(u32 a)
+const struct Story *GetStory(u32 stat)
 {
     s32 i;
 
     for (i = 0; i < 36; i++)
     {
-        if (sStorytellerStories[i].unk0 == a)
+        if (sStorytellerStories[i].stat == stat)
             return &sStorytellerStories[i];
     }
     return &sStorytellerStories[35];
 }
 
-const u8 *sub_80F8478(u32 a)
+const u8 *GetStoryTitle(u32 a)
 {
     return GetStory(a)->title;
 }
 
-const u8 *sub_80F8484(u32 a)
+const u8 *GetStoryText(u32 a)
 {
     return GetStory(a)->fullText;
 }
 
-const u8 *sub_80F8490(u32 a)
+const u8 *GetStoryAction(u32 a)
 {
     return GetStory(a)->action;
 }
@@ -1124,34 +1124,34 @@ u8 sub_80F849C(void)
     {
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
-        if (storyteller->unk4[i] == 0)
+        if (storyteller->gameStatIDs[i] == 0)
             break;
     }
     return i;
 }
 
-u32 sub_80F84C8(u32 a)
+u32 StorytellerGetRecordedTrainerStat(u32 trainer)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[trainer];
 
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
-void sub_80F84EC(u32 a, u32 b)
+void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[a];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[trainer];
 
-    ptr[0] = b;
-    ptr[1] = b >> 8;
-    ptr[2] = b >> 16;
-    ptr[3] = b >> 24;
+    ptr[0] = val;
+    ptr[1] = val >> 8;
+    ptr[2] = val >> 16;
+    ptr[3] = val >> 24;
 }
 
-bool32 sub_80F8508(u32 a)
+bool32 sub_80F8508(u32 trainer)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
-    if (sub_80F8438(storyteller->unk4[a]) > sub_80F84C8(a))
+    if (StorytellerGetGameStat(storyteller->gameStatIDs[trainer]) > StorytellerGetRecordedTrainerStat(trainer))
         return TRUE;
     else
         return FALSE;
@@ -1159,7 +1159,7 @@ bool32 sub_80F8508(u32 a)
 
 void GetStorytellerPlayerName(u32 player, void *dst)
 {
-    u8 *name = gSaveBlock1.mauvilleMan.storyteller.playerNames[player];
+    u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
 
     memset(dst, EOS, 8);
     memcpy(dst, name, 7);
@@ -1167,22 +1167,22 @@ void GetStorytellerPlayerName(u32 player, void *dst)
 
 void SetStorytellerPlayerName(u32 player, const u8 *dst)
 {
-    u8 *name = gSaveBlock1.mauvilleMan.storyteller.playerNames[player];
+    u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
     u8 len = StringLength(dst);
 
     memset(name, EOS, 7);
     StringCopyN(name, dst, len);
 }
 
-void sub_80F8598(u32 player, u32 b)
+void sub_80F8598(u32 player, u32 stat)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
-    storyteller->unk4[player] = b;
+    storyteller->gameStatIDs[player] = stat;
     SetStorytellerPlayerName(player, gSaveBlock2.playerName);
-    sub_80F84EC(player, sub_80F8438(b));
-    ConvertIntToDecimalStringN(gStringVar1, sub_80F8438(b), 0, 10);
-    StringCopy(gStringVar2, sub_80F8490(b));
+    StorytellerSetRecordedTrainerStat(player, StorytellerGetGameStat(stat));
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetGameStat(stat), 0, 10);
+    StringCopy(gStringVar2, GetStoryAction(stat));
 }
 
 void sub_80F85FC(u8 *arr, s32 count)
@@ -1217,19 +1217,19 @@ bool8 sub_80F8650(void)
     sub_80F85FC(arr, 36);
     for (i = 0; i < 36; i++)
     {
-        u8 r4 = sStorytellerStories[arr[i]].unk0;
-        u8 r6 = sStorytellerStories[arr[i]].unk1;
+        u8 stat = sStorytellerStories[arr[i]].stat;
+        u8 minVal = sStorytellerStories[arr[i]].minVal;
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
         for (j = 0; j < 4; j++)
         {
-            if (gSaveBlock1.mauvilleMan.storyteller.unk4[j] == r4)
+            if (gSaveBlock1.mauvilleMan.storyteller.gameStatIDs[j] == stat)
                 break;
         }
-        if (j == 4 && sub_80F8438(r4) >= r6)
+        if (j == 4 && StorytellerGetGameStat(stat) >= minVal)
         {
             storyteller->unk1 = TRUE;
-            sub_80F8598(sub_80F849C(), r4);
+            sub_80F8598(sub_80F849C(), stat);
             return TRUE;
         }
     }
@@ -1239,12 +1239,12 @@ bool8 sub_80F8650(void)
 void sub_80F8700(u32 player)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-    u8 r6 = storyteller->unk4[player];
+    u8 r6 = storyteller->gameStatIDs[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, sub_80F84C8(player), 0, 10);
-    StringCopy(gStringVar2, sub_80F8490(r6));
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), 0, 10);
+    StringCopy(gStringVar2, GetStoryAction(r6));
     GetStorytellerPlayerName(player, gStringVar3);
-    ShowFieldMessage(sub_80F8484(r6));
+    ShowFieldMessage(GetStoryText(r6));
 }
 
 void sub_80F8758(void)
@@ -1255,11 +1255,11 @@ void sub_80F8758(void)
     for (i = 0; i < 4; i++)
     {
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-        u8 r0 = storyteller->unk4[i];
+        u8 r0 = storyteller->gameStatIDs[i];
 
         if (r0 == 0)
             break;
-        MenuPrint(sub_80F8478(r0), 1, 2 + i * 2);
+        MenuPrint(GetStoryTitle(r0), 1, 2 + i * 2);
     }
     MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
 }
@@ -1317,7 +1317,7 @@ u8 sub_80F889C(void)
 bool8 sub_80F88AC(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-    u8 r4 = storyteller->unk4[gUnknown_03000748];
+    u8 r4 = storyteller->gameStatIDs[gUnknown_03000748];
 
     if (sub_80F8508(gUnknown_03000748) == TRUE)
     {

@@ -28,9 +28,9 @@ const struct BardSound *GetWordSounds(u16 group, u16 word)
     return (*sounds)[word];
 }
 #elif GERMAN
-struct BardSound *GetWordSounds(u16 group, u16 word)
+const struct BardSound *GetWordSounds(u16 group, u16 word)
 {
-    struct BardSound (*sounds)[][6] = gBardMusicTable[group];
+    const struct BardSound (*sounds)[][6] = gBardMusicTable[group];
     u32 index = de_sub_80EB748(group, word);
 
     return (*sounds)[index];
