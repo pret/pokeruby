@@ -2792,7 +2792,7 @@ _080EEC0A:\n\
 
 // var6dad and var6dae must be s8 in this func
 bool8 sub_80EEC10() {
-	if (gMain.newKeys& 0x40) {
+	if (gMain.newKeys & 0x40) {
 		do {
 			if (--ewram0_1.var6dad < 0) {
 				ewram0_1.var6dad = ewram0_1.var6dae - 1;
@@ -2807,6 +2807,22 @@ bool8 sub_80EEC10() {
 				ewram0_1.var6dad = 0;
 			}
 		} while (!ewram0.var6db2[ewram0_1.var6dad]);
+		return 1;
+	}
+	return 0;
+}
+
+bool8 sub_80EEC90() {
+	if (gMain.newKeys & 0x40) {
+		if (--ewram0_1.var6dad < 0) {
+			ewram0_1.var6dad = ewram0_1.var6dae - 1;
+		}
+		return 1;
+	}
+	if (gMain.newKeys & 0x80) {
+		if (++ewram0_1.var6dad >= ewram0_1.var6dae) {
+			ewram0_1.var6dad = 0;
+		}
 		return 1;
 	}
 	return 0;
