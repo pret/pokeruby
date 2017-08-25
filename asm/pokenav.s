@@ -6,20 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EEE08
-sub_80EEE08: @ 80EEE08
-	ldr r0, _080EEE18 @ =gUnknown_083DFEC4
-	ldr r0, [r0]
-	ldr r1, _080EEE1C @ =0x0000d160
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_080EEE18: .4byte gUnknown_083DFEC4
-_080EEE1C: .4byte 0x0000d160
-	thumb_func_end sub_80EEE08
-
 	thumb_func_start sub_80EEE20
 sub_80EEE20: @ 80EEE20
 	push {lr}

@@ -2881,3 +2881,6 @@ void sub_80EEDE8() {
 	REG_BG3HOFS = 0;
 	REG_BG3VOFS = 0;
 }
+void sub_80EEE08() {
+	gUnknown_083DFEC4->unkD160 = 0;
+}
