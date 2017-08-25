@@ -6,17 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EED0C
-sub_80EED0C: @ 80EED0C
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0x80
-	lsls r2, 2
-	adds r0, r2, 0
-	strh r0, [r1]
-	bx lr
-	thumb_func_end sub_80EED0C
-
 	thumb_func_start sub_80EED1C
 sub_80EED1C: @ 80EED1C
 	movs r1, 0x80

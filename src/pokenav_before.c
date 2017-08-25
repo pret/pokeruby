@@ -2827,3 +2827,7 @@ bool8 sub_80EEC90() {
 	}
 	return 0;
 }
+
+void sub_80EED0C() {
+	REG_DISPCNT = 512;
+}
