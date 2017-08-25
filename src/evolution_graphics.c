@@ -9,6 +9,7 @@
 #include "palette.h"
 
 // this file's functions
+static void EvoSparkle_DummySpriteCb(struct Sprite* sprite);
 static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID);
 static void EvoTask_CreatePreEvoSparkleSet1(u8 taskID);
 static void EvoTask_WaitForPre1SparklesToGoUp(u8 taskID);
@@ -18,29 +19,86 @@ static void EvoTask_DestroyPreSet2Task(u8 taskID);
 static void EvoTask_BeginPostSparklesSet1(u8 taskID);
 static void EvoTask_CreatePostEvoSparklesSet1(u8 taskID);
 static void EvoTask_DestroyPostSet1Task(u8 taskID);
-
 static void EvoTask_BeginPostSparklesSet2_AndFlash(u8 taskID);
 static void EvoTask_CreatePostEvoSparklesSet2_AndFlash(u8 taskID);
 static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID);
 static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID);
 static void EvoTask_DestroyPostSet2AndFlashTask(u8 taskID);
 
-extern const s16 gUnknown_08416ED0[];
-extern const struct SpriteTemplate gSpriteTemplate_8416EB8;
-extern const struct CompressedSpriteSheet gUnknown_08416E84;
-extern const struct SpritePalette gUnknown_08416E94[];
+// const data
+static const u16 sEvoSparklePalette[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
+static const u8 sEvoSparkleTiles[] = INCBIN_U8("graphics/misc/evo_sparkle.4bpp.lz");
 
-void nullsub_84(struct Sprite* sprite)
+static const struct CompressedSpriteSheet sEvoSparkleSpriteSheets[] =
+{
+    {sEvoSparkleTiles, 0x20, 1001},
+    {NULL, 0, 0}
+};
+static const struct SpritePalette sEvoSparkleSpritePals[] =
+{
+    {sEvoSparklePalette, 1001},
+    {NULL, 0}
+};
+
+static const struct OamData sOamData_EvoSparkle =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_EvoSparkle[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_EvoSparkle[] =
+{
+    sSpriteAnim_EvoSparkle,
+};
+
+static const struct SpriteTemplate sEvoSparkleSpriteTemplate =
+{
+    .tileTag = 1001,
+    .paletteTag = 1001,
+    .oam = &sOamData_EvoSparkle,
+    .anims = sSpriteAnimTable_EvoSparkle,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = EvoSparkle_DummySpriteCb
+};
+
+static const s16 sEvoSparkleMatricies[] =
+{
+    0x3C0, 0x380, 0x340, 0x300, 0x2C0, 0x280, 0x240, 0x200, 0x1C0,
+    0x180, 0x140, 0x100, -4, 0x10, -3, 0x30, -2, 0x50,
+    -1, 0x70, 0x1, 0x70, 0x2, 0x50, 0x3, 0x30, 0x4, 0x10
+};
+
+// code
+
+static void EvoSparkle_DummySpriteCb(struct Sprite* sprite)
 {
 
 }
 
-static void sub_8149520(void)
+static void SetEvoSparklesMatrices(void)
 {
     u16 i;
     for (i = 0; i < 12; i++)
     {
-        SetOamMatrix(20 + i, gUnknown_08416ED0[i], 0, 0, gUnknown_08416ED0[i]);
+        SetOamMatrix(20 + i, sEvoSparkleMatricies[i], 0, 0, sEvoSparkleMatricies[i]);
     }
 }
 
@@ -72,7 +130,7 @@ static void SpriteCB_PreEvoSparkleSet1(struct Sprite* sprite)
 
 static void CreatePreEvoSparkleSet1(u8 arg0)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_8416EB8, 120, 88, 0);
+    u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 88, 0);
     if (spriteID != MAX_SPRITES)
     {
         gSprites[spriteID].data5 = 48;
@@ -100,7 +158,7 @@ static void SpriteCB_PreEvoSparkleSet2(struct Sprite* sprite)
 
 static void CreatePreEvoSparkleSet2(u8 arg0)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_8416EB8, 120, 8, 0);
+    u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 8, 0);
     if (spriteID != MAX_SPRITES)
     {
         gSprites[spriteID].data5 = 8;
@@ -128,7 +186,7 @@ static void SpriteCB_PostEvoSparkleSet1(struct Sprite* sprite)
 
 static void CreatePostEvoSparkleSet1(u8 arg0, u8 arg1)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_8416EB8, 120, 56, 0);
+    u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 56, 0);
     if (spriteID != MAX_SPRITES)
     {
         gSprites[spriteID].data3 = arg1;
@@ -174,7 +232,7 @@ static void SpriteCB_PostEvoSparkleSet2(struct Sprite* sprite)
 
 void CreatePostEvoSparkleSet2(u8 arg0)
 {
-    u8 spriteID = CreateSprite(&gSpriteTemplate_8416EB8, 120, 56, 0);
+    u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 56, 0);
     if (spriteID != MAX_SPRITES)
     {
         gSprites[spriteID].data3 = 3 - (Random() % 7);
@@ -187,10 +245,10 @@ void CreatePostEvoSparkleSet2(u8 arg0)
     }
 }
 
-void sub_8149954(void)
+void LoadEvoSparkleSpriteAndPal(void)
 {
-    LoadCompressedObjectPic(&gUnknown_08416E84);
-    LoadSpritePalettes(gUnknown_08416E94);
+    LoadCompressedObjectPic(&sEvoSparkleSpriteSheets[0]);
+    LoadSpritePalettes(sEvoSparkleSpritePals);
 }
 
 u8 LaunchTask_PreEvoSparklesSet1(u16 arg0)
@@ -204,7 +262,7 @@ u8 LaunchTask_PreEvoSparklesSet1(u16 arg0)
 
 static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID)
 {
-    sub_8149520();
+    SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 0xA, 0, 0x10, 0x7FFF);
     gTasks[taskID].func = EvoTask_CreatePreEvoSparkleSet1;
@@ -245,7 +303,7 @@ u8 LaunchTask_PreEvoSparklesSet2(void)
 
 static void EvoTask_BeginPreSparklesSet2(u8 taskID)
 {
-    sub_8149520();
+    SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     gTasks[taskID].func = EvoTask_CreatePreEvoSparklesSet2;
     PlaySE(SE_W062B);
@@ -279,7 +337,7 @@ u8 LaunchTask_PostEvoSparklesSet1(void)
 
 static void EvoTask_BeginPostSparklesSet1(u8 taskID)
 {
-    sub_8149520();
+    SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet1;
     PlaySE(SE_REAPOKE);
@@ -321,7 +379,7 @@ u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 arg0)
 
 static void EvoTask_BeginPostSparklesSet2_AndFlash(u8 taskID)
 {
-    sub_8149520();
+    SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
     BeginNormalPaletteFade(0xFFF9001C, 0, 0, 0x10, 0x7FFF);
@@ -369,7 +427,7 @@ u8 LaunchTask_PostEvoSparklesSet2AndFlash_Trade(u16 arg0)
 
 static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID)
 {
-    sub_8149520();
+    SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
     BeginNormalPaletteFade(0xFFF90001, 0, 0, 0x10, 0x7FFF);

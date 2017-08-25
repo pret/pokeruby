@@ -475,7 +475,7 @@ SECTIONS {
         src/save_failed_screen.o(.rodata);
         src/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
-        data/evolution_graphics.o(.rodata);
+        src/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/unknown_debug_menu.o(.rodata);
         data/strings2.o(.rodata);

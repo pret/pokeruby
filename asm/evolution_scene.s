@@ -365,7 +365,7 @@ EvolutionScene: @ 8111984
 	movs r3, 0x4
 	orrs r0, r3
 	strb r0, [r1]
-	bl sub_8149954
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, _08111C74 @ =Task_EvolutionScene
 	movs r1, 0
 	bl CreateTask
@@ -1035,7 +1035,7 @@ TradeEvolutionScene: @ 81120E4
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	bl sub_8149954
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, _08112264 @ =Task_TradeEvolutionScene
 	movs r1, 0
 	bl CreateTask
