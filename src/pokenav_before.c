@@ -2930,3 +2930,67 @@ bool8 sub_80EEE54() {
 	gUnknown_083DFEC4->unkD160++;
 	return 1;
 }
+
+#if 0
+// not matches because of register differences
+bool8 sub_80EEF34() {
+	bool8 ret = 0x1;
+	if ((s8)gUnknown_083DFEC4->unk030C == 0x20) {
+		return 0;
+	}
+	else {
+		gUnknown_083DFEC4->unk030C += 2;
+		if (gUnknown_083DFEC4->unk030C > 0x1F) {
+			gUnknown_083DFEC4->unk030C = 0x20;
+			ret = 0;
+		}
+		REG_BG1VOFS = gUnknown_083DFEC4->unk030C;
+		return ret;
+	}
+}
+#else
+__attribute__((naked))
+bool8 sub_80EEF34() {
+	asm(".text\n"
+	    ".include \"constants/gba_constants.inc\"");
+
+	asm_unified(
+	"push {r4,lr}\n\
+	movs r3, 0x1\n\
+	ldr r0, _080EEF50 @ =gUnknown_083DFEC4\n\
+	ldr r0, [r0]\n\
+	movs r1, 0xC3\n\
+	lsls r1, 2\n\
+	adds r2, r0, r1\n\
+	ldrh r1, [r2]\n\
+	movs r4, 0\n\
+	ldrsh r0, [r2, r4]\n\
+	cmp r0, 0x20\n\
+	bne _080EEF54\n\
+	movs r0, 0\n\
+	b _080EEF6E\n\
+	.align 2, 0\n\
+_080EEF50: .4byte gUnknown_083DFEC4\n\
+_080EEF54:\n\
+	adds r0, r1, 0x2\n\
+	strh r0, [r2]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0x1F\n\
+	ble _080EEF66\n\
+	movs r0, 0x20\n\
+	strh r0, [r2]\n\
+	movs r3, 0\n\
+_080EEF66:\n\
+	ldr r1, _080EEF74 @ =REG_BG1VOFS\n\
+	ldrh r0, [r2]\n\
+	strh r0, [r1]\n\
+	adds r0, r3, 0\n\
+_080EEF6E:\n\
+	pop {r4}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_080EEF74: .4byte REG_BG1VOFS");
+}
+#endif
