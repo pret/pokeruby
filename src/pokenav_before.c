@@ -2872,3 +2872,12 @@ void sub_80EEDC4() {
 		ewram0.var300 = gUnknown_03000744;
 	}
 }
+
+void sub_80EEDE8() {
+	REG_BG0HOFS = 0;
+	REG_BG0VOFS = 0;
+	REG_BG2VOFS = 0;
+	REG_BG2HOFS = 0;
+	REG_BG3HOFS = 0;
+	REG_BG3VOFS = 0;
+}

@@ -6,26 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EEDE8
-sub_80EEDE8: @ 80EEDE8
-	ldr r0, _080EEE04 @ =REG_BG0HOFS
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x8
-	strh r1, [r0]
-	subs r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_080EEE04: .4byte REG_BG0HOFS
-	thumb_func_end sub_80EEDE8
-
 	thumb_func_start sub_80EEE08
 sub_80EEE08: @ 80EEE08
 	ldr r0, _080EEE18 @ =gUnknown_083DFEC4
