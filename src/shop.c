@@ -28,6 +28,7 @@
 
 extern void sub_80B4378(u8);
 extern void sub_80B4470(u8);
+extern bool8 sub_80A52C4(u8, u8);
 
 enum
 {
@@ -45,10 +46,12 @@ struct MartInfo
     /* 0xA */ u8 numChoices;
     /* 0xB */ u8 choicesAbove;
     /* 0xC */ u8 martType;
+    /* 0xD */ u8 unkD;
 };
 
 extern struct MartInfo gMartInfo;
 extern struct MenuAction gUnknown_083CC6D0[];
+extern struct YesNoFuncTable gUnknown_083CC708[];
 
 extern u32 gMartTotalCost; // the total cost of a purchase before checking out.
 
@@ -699,4 +702,61 @@ void sub_80B3BF4(u8 taskId)
     }
     else
         DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1);
+}
+
+void sub_80B3D38(u8 taskId)
+{
+    DisplayYesNoMenu(7, 8, 1);
+    sub_80A3FA0(gBGTilemapBuffers[1], 8, 9, 4, 4, 0xC3E1);
+    DoYesNoFuncWithChoice(taskId, gUnknown_083CC708);
+}
+
+void sub_80B3D7C(u8 taskId)
+{
+    sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0);
+    MenuZeroFillWindowRect(0x7, 0x8, 0xD, 0xD);
+    sub_80A3FA0(gBGTilemapBuffers[1], 0x8, 0x9, 0x4, 0x4, 0);
+    sub_80B4378(taskId);
+}
+
+void sub_80B3DC8(u8 taskId)
+{
+    if(sub_80A52C4(taskId, gMartInfo.unkD) == TRUE)
+        sub_80B37F8(taskId);
+
+    if(gMain.newKeys & A_BUTTON)
+    {
+        gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)) * gTasks[taskId].data[1]; // set total cost of your purchase.
+        MenuZeroFillWindowRect(0, 0xA, 0xD, 0xD);
+        sub_80A3FA0(gBGTilemapBuffers[1], 0x1, 0xB, 0xC, 0x2, 0);
+        sub_80B379C();
+        sub_80B3420();
+        CopyItemName(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, gTasks[taskId].data[1], 0, 0x2);
+        ConvertIntToDecimalStringN(gStringVar3, gMartTotalCost, 0, 0x8);
+        StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_80B3D38, 0xC3E1);
+    }
+    else if(gMain.newKeys & B_BUTTON)
+    {
+        sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0);
+        sub_80B4378(taskId);
+    }
+}
+
+void sub_80B3EFC(u8 taskId)
+{
+    u16 var;
+
+    gTasks[taskId].data[1] = 1;
+    MenuDrawTextWindow(0, 0xA, 0xD, 0xD);
+    sub_80B37F8(taskId);
+
+    var = gSaveBlock1.money / (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1));
+    if(var > 99)
+        gMartInfo.unkD = 99;
+    else
+        gMartInfo.unkD = var;
+
+    gTasks[taskId].func = sub_80B3DC8;
 }
