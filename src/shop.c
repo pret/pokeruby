@@ -27,6 +27,7 @@
 #include "decoration_inventory.h"
 
 extern void sub_80B4378(u8);
+extern void sub_80B43F0(u8);
 extern void sub_80B4470(u8);
 extern bool8 sub_80A52C4(u8, u8);
 
@@ -42,7 +43,7 @@ struct MartInfo
     /* 0x0 */ void (* callback) (void);
     /* 0x4 */ u16 *itemList;
     /* 0x8 */ u8 itemCount;
-    /* 0x9 */ u8 cursor;
+    /* 0x9 */ u8 cursor; // this shows the on-screen true index of the cursor and not the current item selected.
     /* 0xA */ u8 numChoices;
     /* 0xB */ u8 choicesAbove;
     /* 0xC */ u8 martType;
@@ -759,4 +760,301 @@ void sub_80B3EFC(u8 taskId)
         gMartInfo.unkD = var;
 
     gTasks[taskId].func = sub_80B3DC8;
+}
+
+// the next two functions are strange gMenuWindow functions that manually acccess gMenuWindow.tilemap and do weird pointer arithmetic. i'd rather not deal with these right now.
+__attribute__((naked))
+void sub_80B3F88(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    ldr r0, _080B4020 @ =gMenuWindow\n\
+    mov r8, r0\n\
+    ldr r1, [r0, 0x28]\n\
+    ldr r3, _080B4024 @ =0x000003de\n\
+    adds r1, r3\n\
+    adds r2, r1, 0\n\
+    adds r2, 0x80\n\
+    ldr r7, [r0, 0x24]\n\
+    mov r10, r7\n\
+    ldr r0, _080B4028 @ =0x000003ff\n\
+    mov r9, r0\n\
+    movs r6, 0xD\n\
+_080B3FAC:\n\
+    adds r3, r2, 0\n\
+    subs r3, 0x40\n\
+    str r3, [sp]\n\
+    movs r7, 0x40\n\
+    negs r7, r7\n\
+    adds r7, r1\n\
+    mov r12, r7\n\
+    adds r3, r2, 0\n\
+    adds r4, r1, 0\n\
+    movs r5, 0xE\n\
+_080B3FC0:\n\
+    ldrh r2, [r4]\n\
+    mov r1, r9\n\
+    ands r1, r2\n\
+    mov r7, r8\n\
+    ldrh r0, [r7, 0x1A]\n\
+    adds r0, 0x1\n\
+    cmp r1, r0\n\
+    ble _080B3FD4\n\
+    adds r0, r2, 0\n\
+    adds r0, 0x3C\n\
+_080B3FD4:\n\
+    strh r0, [r3]\n\
+    adds r3, 0x2\n\
+    adds r4, 0x2\n\
+    subs r5, 0x1\n\
+    cmp r5, 0\n\
+    bge _080B3FC0\n\
+    ldr r2, [sp]\n\
+    mov r1, r12\n\
+    subs r6, 0x1\n\
+    cmp r6, 0\n\
+    bge _080B3FAC\n\
+    ldr r1, _080B402C @ =0x00003a20\n\
+    add r1, r10\n\
+    movs r0, 0xF0\n\
+    lsls r0, 3\n\
+    adds r2, r1, r0\n\
+    ldr r3, _080B4030 @ =0x040000d4\n\
+    ldr r5, _080B4034 @ =0x800000f0\n\
+    ldr r4, _080B4038 @ =0xfffffc40\n\
+    movs r6, 0xD\n\
+_080B3FFC:\n\
+    str r1, [r3]\n\
+    str r2, [r3, 0x4]\n\
+    str r5, [r3, 0x8]\n\
+    ldr r0, [r3, 0x8]\n\
+    adds r2, r4\n\
+    adds r1, r4\n\
+    subs r6, 0x1\n\
+    cmp r6, 0\n\
+    bge _080B3FFC\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080B4020: .4byte gMenuWindow\n\
+_080B4024: .4byte 0x000003de\n\
+_080B4028: .4byte 0x000003ff\n\
+_080B402C: .4byte 0x00003a20\n\
+_080B4030: .4byte 0x040000d4\n\
+_080B4034: .4byte 0x800000f0\n\
+_080B4038: .4byte 0xfffffc40\n\
+    .syntax divided");
+}
+
+__attribute__((naked))
+void sub_80B403C(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    ldr r0, _080B40D8 @ =gMenuWindow\n\
+    mov r8, r0\n\
+    ldr r2, [r0, 0x28]\n\
+    adds r1, r2, 0\n\
+    adds r1, 0x9E\n\
+    adds r2, r1, 0\n\
+    adds r1, 0x80\n\
+    ldr r3, [r0, 0x24]\n\
+    mov r10, r3\n\
+    ldr r7, _080B40DC @ =0x000003ff\n\
+    mov r9, r7\n\
+    movs r6, 0xD\n\
+_080B4060:\n\
+    adds r0, r2, 0\n\
+    adds r0, 0x40\n\
+    str r0, [sp]\n\
+    movs r3, 0x40\n\
+    adds r3, r1\n\
+    mov r12, r3\n\
+    adds r3, r2, 0\n\
+    adds r4, r1, 0\n\
+    movs r5, 0xE\n\
+_080B4072:\n\
+    ldrh r2, [r4]\n\
+    mov r1, r9\n\
+    ands r1, r2\n\
+    mov r7, r8\n\
+    ldrh r0, [r7, 0x1A]\n\
+    adds r0, 0x1\n\
+    cmp r1, r0\n\
+    ble _080B4086\n\
+    adds r0, r2, 0\n\
+    subs r0, 0x3C\n\
+_080B4086:\n\
+    strh r0, [r3]\n\
+    adds r3, 0x2\n\
+    adds r4, 0x2\n\
+    subs r5, 0x1\n\
+    cmp r5, 0\n\
+    bge _080B4072\n\
+    ldr r2, [sp]\n\
+    mov r1, r12\n\
+    subs r6, 0x1\n\
+    cmp r6, 0\n\
+    bge _080B4060\n\
+    movs r1, 0x96\n\
+    lsls r1, 4\n\
+    add r1, r10\n\
+    adds r2, r1, 0\n\
+    movs r0, 0xF0\n\
+    lsls r0, 3\n\
+    adds r1, r0\n\
+    ldr r3, _080B40E0 @ =0x040000d4\n\
+    ldr r5, _080B40E4 @ =0x800000f0\n\
+    movs r4, 0xF0\n\
+    lsls r4, 2\n\
+    movs r6, 0xD\n\
+_080B40B4:\n\
+    str r1, [r3]\n\
+    str r2, [r3, 0x4]\n\
+    str r5, [r3, 0x8]\n\
+    ldr r0, [r3, 0x8]\n\
+    adds r2, r4\n\
+    adds r1, r4\n\
+    subs r6, 0x1\n\
+    cmp r6, 0\n\
+    bge _080B40B4\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080B40D8: .4byte gMenuWindow\n\
+_080B40DC: .4byte 0x000003ff\n\
+_080B40E0: .4byte 0x040000d4\n\
+_080B40E4: .4byte 0x800000f0\n\
+    .syntax divided");
+}
+
+void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
+{
+    if(!gPaletteFade.active)
+    {
+        if((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP) // only up can be pressed
+        {
+            if(gMartInfo.cursor == 0)
+            {
+                if(gMartInfo.choicesAbove == 0) // if there are no choices above, dont bother
+                    return;
+
+                PlaySE(SE_SELECT);
+                gMartInfo.choicesAbove--; // since cursor is at the top and there are choices above the top, scroll the menu up by updating choicesAbove.
+                sub_80B3F88();
+                sub_80B39D0(0, 0, 0);
+                sub_80B3A70();
+                sub_80B32A4();
+            }
+            else // if the cursor is not 0, choicesAbove cannot be updated yet since the cursor is at the top of the menu, so update cursor.
+            {
+                PlaySE(SE_SELECT);
+                gMartInfo.cursor = MoveMenuCursor(-1); // move cursor up
+                sub_80B3A70();
+            }
+        }
+        else if((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN) // only down can be pressed
+        {
+            if(gMartInfo.cursor == 7) // are you at the bottom of the menu?
+            {
+                if(gMartInfo.choicesAbove + gMartInfo.cursor == gMartInfo.itemCount) // are you at cancel?
+                    return;
+
+                PlaySE(SE_SELECT);
+                gMartInfo.choicesAbove++;
+                sub_80B403C();
+                sub_80B39D0(7, 7, 0);
+                sub_80B3A70();
+                sub_80B32A4();
+            }
+            else if(gMartInfo.cursor != gMartInfo.itemCount)
+            {
+                PlaySE(SE_SELECT);
+                gMartInfo.cursor = MoveMenuCursor(1);
+                sub_80B3A70();
+            }
+        }
+        else if(gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+
+            if(gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount) // did you not hit CANCEL?
+            {
+                PauseVerticalScrollIndicator(0);
+                PauseVerticalScrollIndicator(1);
+                sub_80F979C(1, 1);
+                sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 1);
+                HandleDestroyMenuCursors();
+                MenuZeroFillWindowRect(0, 0xC, 0xD, 0x13);
+
+                if(gMartInfo.martType == MART_TYPE_0)
+                {
+                    gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)); // set 1x price
+                    if(!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+                    {
+                        DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1); // tail merge
+                    }
+                    else // _080B42BA
+                    {
+                        CopyItemName(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gStringVar1);
+                        StringExpandPlaceholders(gStringVar4, gOtherText_HowManyYouWant);
+                        DisplayItemMessageOnField(taskId, gStringVar4, sub_80B3EFC, 0xC3E1);                    
+                    }
+                }
+                else // _080B428C
+                {
+                    gMartTotalCost = gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].price;
+
+                    if(!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+                    {
+                        DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1); // tail merge
+                    }
+                    else
+                    {    
+                        StringCopy(gStringVar1, gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].name);
+                        ConvertIntToDecimalStringN(gStringVar2, gMartTotalCost, 0, 0x8);
+
+                        if(gMartInfo.martType == MART_TYPE_1)
+                        {
+                            StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe2);
+                        }
+                        else
+                        {
+                            StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe3);
+                        }
+                        DisplayItemMessageOnField(taskId, gStringVar4, sub_80B3D38, 0xC3E1);
+                    }
+                }
+            }
+            else
+                sub_80B43F0(taskId);
+        }
+        else if(gMain.newKeys & B_BUTTON) // go back to buy/sell/exit menu
+        {
+            PlaySE(SE_SELECT);
+            sub_80B43F0(taskId);
+        }
+    }
 }
