@@ -214,7 +214,7 @@ void SetupGiddy(void)
     struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
     giddy->id = MAUVILLE_MAN_GIDDY;
-    giddy->unk1 = 0;
+    giddy->taleCounter = 0;
 }
 
 void SetupTrader(void)
@@ -248,7 +248,7 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-//#define TEST MAUVILLE_MAN_BARD
+//#define TEST MAUVILLE_MAN_STORYTELLER
 
 #ifdef TEST
 // Safely changes man to test functionality
@@ -344,10 +344,10 @@ void PrepareSongText(void)
                 *str = CHAR_SONG_WORD_SEPARATOR;
             str++;
         }
-        
+
         str++;
         *(wordEnd++) = CHAR_SPACE;
-        
+
         wordEnd = EasyChat_GetWordText(wordEnd, *(lyrics++));
         while (wordEnd != str)
         {
@@ -355,10 +355,10 @@ void PrepareSongText(void)
                 *str = CHAR_SONG_WORD_SEPARATOR;
             str++;
         }
-        
+
         str++;
         *(wordEnd++) = CHAR_NEWLINE;
-        
+
         wordEnd = EasyChat_GetWordText(wordEnd, *(lyrics++));
         while (wordEnd != str)
         {
@@ -366,7 +366,7 @@ void PrepareSongText(void)
                 *str = CHAR_SONG_WORD_SEPARATOR;
             str++;
         }
-        
+
         if (lineNum == 0)
         {
             *(wordEnd++) = EXT_CTRL_CODE_BEGIN;
@@ -412,14 +412,14 @@ void ScrSpecial_HipsterTeachWord(void)
     }
 }
 
-void sub_80F7CC8(void)
+void ScrSpecial_GiddyShouldTellAnotherTale(void)
 {
-    struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
+    struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
-    if (bard->unk_2D95 == 10)
+    if (giddy->taleCounter == 10)
     {
         gScriptResult = FALSE;
-        bard->unk_2D95 = 0;
+        giddy->taleCounter = 0;
     }
     else
     {
@@ -431,16 +431,16 @@ void ScrSpecial_GenerateGiddyLine(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
-    if (giddy->unk1 == 0)
+    if (giddy->taleCounter == 0)
         sub_80F7DC0();
 
-    if (giddy->mauvilleOldMan_ecArray[giddy->unk1] != 0xFFFF) // is not the last element of the array?
+    if (giddy->randomWords[giddy->taleCounter] != 0xFFFF) // is not the last element of the array?
     {
         u8 *stringPtr;
         u32 adjective = Random();
 
         adjective %= 8;
-        stringPtr = EasyChat_GetWordText(gStringVar4, giddy->mauvilleOldMan_ecArray[giddy->unk1]);
+        stringPtr = EasyChat_GetWordText(gStringVar4, giddy->randomWords[giddy->taleCounter]);
         stringPtr = StringCopy(stringPtr, gOtherText_Is);
         stringPtr = StringCopy(stringPtr, gGiddyAdjectives[adjective]);
         StringCopy(stringPtr, gOtherText_DontYouAgree);
@@ -451,9 +451,9 @@ void ScrSpecial_GenerateGiddyLine(void)
     }
 
     if (!(Random() % 10))
-        giddy->unk1 = 10;
+        giddy->taleCounter = 10;
     else
-        giddy->unk1++;
+        giddy->taleCounter++;
 
     gScriptResult = TRUE;
 }
@@ -520,8 +520,8 @@ void sub_80F7DC0(void)
         u16 var = Random() % 10;
         if (var < 3 && r7 < 8)
         {
-            //gSaveBlock1.mauvilleMan.giddy.mauvilleOldMan_ecArray[i] = 0xFFFF;
-            giddy->mauvilleOldMan_ecArray[i] = 0xFFFF;
+            //gSaveBlock1.mauvilleMan.giddy.randomWords[i] = 0xFFFF;
+            giddy->randomWords[i] = 0xFFFF;
             r7++;
         }
         //_080F7E90
@@ -541,8 +541,8 @@ void sub_80F7DC0(void)
 
             if (r1 == 6)
                 r1 = 0;
-            //gSaveBlock1.mauvilleMan.giddy.mauvilleOldMan_ecArray[i] = sub_80EB784(arr[r1][0]);
-            giddy->mauvilleOldMan_ecArray[i] = sub_80EB784(arr[r1][0]);
+            //gSaveBlock1.mauvilleMan.giddy.randomWords[i] = sub_80EB784(arr[r1][0]);
+            giddy->randomWords[i] = sub_80EB784(arr[r1][0]);
         }
     }
 }
@@ -796,7 +796,7 @@ void BardSingWord(struct Task *task, struct BardSong *song)
                 lyrics = bard->temporaryLyrics;
             for (i = 0; i < 6; i++)
                 song->lyrics[i] = lyrics[i];
-            
+
             // Clear phonemes
             for (i = 0; i < 6; i++)
             {
@@ -1089,7 +1089,7 @@ u32 StorytellerGetGameStat(u8 stat)
     return GetGameStat(stat);
 }
 
-const struct Story *GetStory(u32 stat)
+const struct Story *GetStoryByStat(u32 stat)
 {
     s32 i;
 
@@ -1101,22 +1101,22 @@ const struct Story *GetStory(u32 stat)
     return &sStorytellerStories[35];
 }
 
-const u8 *GetStoryTitle(u32 a)
+const u8 *GetStoryTitleByStat(u32 stat)
 {
-    return GetStory(a)->title;
+    return GetStoryByStat(stat)->title;
 }
 
-const u8 *GetStoryText(u32 a)
+const u8 *GetStoryTextByStat(u32 stat)
 {
-    return GetStory(a)->fullText;
+    return GetStoryByStat(stat)->fullText;
 }
 
-const u8 *GetStoryAction(u32 a)
+const u8 *GetStoryActionByStat(u32 stat)
 {
-    return GetStory(a)->action;
+    return GetStoryByStat(stat)->action;
 }
 
-u8 sub_80F849C(void)
+u8 GetFreeStorySlot(void)
 {
     u8 i;
 
@@ -1147,7 +1147,7 @@ void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
     ptr[3] = val >> 24;
 }
 
-bool32 sub_80F8508(u32 trainer)
+bool32 HasTrainerStatIncreased(u32 trainer)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
@@ -1157,7 +1157,7 @@ bool32 sub_80F8508(u32 trainer)
         return FALSE;
 }
 
-void GetStorytellerPlayerName(u32 player, void *dst)
+void GetStoryByStattellerPlayerName(u32 player, void *dst)
 {
     u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
 
@@ -1165,27 +1165,27 @@ void GetStorytellerPlayerName(u32 player, void *dst)
     memcpy(dst, name, 7);
 }
 
-void SetStorytellerPlayerName(u32 player, const u8 *dst)
+void StorytellerSetPlayerName(u32 player, const u8 *src)
 {
     u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
-    u8 len = StringLength(dst);
+    u8 len = StringLength(src);
 
     memset(name, EOS, 7);
-    StringCopyN(name, dst, len);
+    StringCopyN(name, src, len);
 }
 
-void sub_80F8598(u32 player, u32 stat)
+void StorytellerRecordNewStat(u32 player, u32 stat)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     storyteller->gameStatIDs[player] = stat;
-    SetStorytellerPlayerName(player, gSaveBlock2.playerName);
+    StorytellerSetPlayerName(player, gSaveBlock2.playerName);
     StorytellerSetRecordedTrainerStat(player, StorytellerGetGameStat(stat));
     ConvertIntToDecimalStringN(gStringVar1, StorytellerGetGameStat(stat), 0, 10);
-    StringCopy(gStringVar2, GetStoryAction(stat));
+    StringCopy(gStringVar2, GetStoryActionByStat(stat));
 }
 
-void sub_80F85FC(u8 *arr, s32 count)
+void ScrambleStatList(u8 *arr, s32 count)
 {
     s32 i;
 
@@ -1201,20 +1201,21 @@ void sub_80F85FC(u8 *arr, s32 count)
     }
 }
 
-static const struct {u32 length; struct MauvilleManStoryteller *unused1; u32 unused2;} gUnknown_083E5620 =
+// What purpose does this struct even serve? Only the length field is used.
+static const struct {u32 length; struct MauvilleManStoryteller *unused1; u32 unused2;} sStorytellerStuff =
 {
     36,
     &gSaveBlock1.mauvilleMan.storyteller,  // unused
-    12,                               // unused
+    12,                                    // unused
 };
 
-bool8 sub_80F8650(void)
+bool8 StorytellerInitializeRandomStat(void)
 {
-    u8 arr[gUnknown_083E5620.length];
+    u8 arr[sStorytellerStuff.length];
     s32 i;
     s32 j;
 
-    sub_80F85FC(arr, 36);
+    ScrambleStatList(arr, 36);
     for (i = 0; i < 36; i++)
     {
         u8 stat = sStorytellerStories[arr[i]].stat;
@@ -1229,44 +1230,44 @@ bool8 sub_80F8650(void)
         if (j == 4 && StorytellerGetGameStat(stat) >= minVal)
         {
             storyteller->unk1 = TRUE;
-            sub_80F8598(sub_80F849C(), stat);
+            StorytellerRecordNewStat(GetFreeStorySlot(), stat);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-void sub_80F8700(u32 player)
+void StorytellerDisplayStory(u32 player)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-    u8 r6 = storyteller->gameStatIDs[player];
+    u8 stat = storyteller->gameStatIDs[player];
 
     ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), 0, 10);
-    StringCopy(gStringVar2, GetStoryAction(r6));
-    GetStorytellerPlayerName(player, gStringVar3);
-    ShowFieldMessage(GetStoryText(r6));
+    StringCopy(gStringVar2, GetStoryActionByStat(stat));
+    GetStoryByStattellerPlayerName(player, gStringVar3);
+    ShowFieldMessage(GetStoryTextByStat(stat));
 }
 
-void sub_80F8758(void)
+void PrintStoryList(void)
 {
     s32 i;
 
-    MenuDrawTextWindow(0, 0, 25, 4 + sub_80F849C() * 2);
+    MenuDrawTextWindow(0, 0, 25, 4 + GetFreeStorySlot() * 2);
     for (i = 0; i < 4; i++)
     {
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
-        u8 r0 = storyteller->gameStatIDs[i];
+        u8 stat = storyteller->gameStatIDs[i];
 
-        if (r0 == 0)
+        if (stat == 0)
             break;
-        MenuPrint(GetStoryTitle(r0), 1, 2 + i * 2);
+        MenuPrint(GetStoryTitleByStat(stat), 1, 2 + i * 2);
     }
     MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
 }
 
 extern u8 gUnknown_03000748;
 
-void sub_80F87C4(u8 taskId)
+void Task_StoryListMenu(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 selection;
@@ -1274,15 +1275,15 @@ void sub_80F87C4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_80F8758();
-        InitMenu(0, 1, 2, sub_80F849C() + 1, 0, 24);
+        PrintStoryList();
+        InitMenu(0, 1, 2, GetFreeStorySlot() + 1, 0, 24);
         task->data[0]++;
         break;
     case 1:
         selection = ProcessMenuInput();
         if (selection == -2)
             break;
-        if (selection == -1 || selection == sub_80F849C())
+        if (selection == -1 || selection == GetFreeStorySlot())
         {
             gScriptResult = 0;
         }
@@ -1299,35 +1300,37 @@ void sub_80F87C4(u8 taskId)
     }
 }
 
-void sub_80F8874(void)
+// Sets gScriptResult to TRUE if player selected a story
+void ScrSpecial_StorytellerStoryListMenu(void)
 {
-    CreateTask(sub_80F87C4, 0x50);
+    CreateTask(Task_StoryListMenu, 0x50);
 }
 
-void sub_80F8888(void)
+void ScrSpecial_StorytellerDisplayStory(void)
 {
-    sub_80F8700(gUnknown_03000748);
+    StorytellerDisplayStory(gUnknown_03000748);
 }
 
-u8 sub_80F889C(void)
+u8 ScrSpecial_StorytellerGetFreeStorySlot(void)
 {
-    return sub_80F849C();
+    return GetFreeStorySlot();
 }
 
-bool8 sub_80F88AC(void)
+// Returns TRUE if stat has increased
+bool8 ScrSpecial_StorytellerUpdateStat(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     u8 r4 = storyteller->gameStatIDs[gUnknown_03000748];
 
-    if (sub_80F8508(gUnknown_03000748) == TRUE)
+    if (HasTrainerStatIncreased(gUnknown_03000748) == TRUE)
     {
-        sub_80F8598(gUnknown_03000748, r4);
+        StorytellerRecordNewStat(gUnknown_03000748, r4);
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_80F88E0(void)
+bool8 ScrSpecial_HasStorytellerAlreadyRecorded(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
@@ -1337,7 +1340,7 @@ bool8 sub_80F88E0(void)
         return TRUE;
 }
 
-bool8 sub_80F88FC(void)
+bool8 ScrSpecial_StorytellerInitializeRandomStat(void)
 {
-    return sub_80F8650();
+    return StorytellerInitializeRandomStat();
 }

@@ -494,11 +494,10 @@ struct MauvilleManStoryteller
 struct MauvilleManGiddy
 {
     /*0x00*/ u8 id;
-    /*0x01*/ u8 unk1;
+    /*0x01*/ u8 taleCounter;
     /*0x02*/ u8 questionNum;
-    /*0x04*/ u16 mauvilleOldMan_ecArray[10];
+    /*0x04*/ u16 randomWords[10];
     /*0x18*/ u8 questionList[12];
-    /*0x24*/ u8 fillerF[0x2];
 }; /*size = 0x2C*/
 
 

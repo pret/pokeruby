@@ -113,13 +113,13 @@ gSpecials::
 	def_special ScrSpecial_PlayBardSong
 	def_special sub_80F83D0
 	def_special ScrSpecial_GenerateGiddyLine
-	def_special sub_80F7CC8
-	def_special sub_80F889C
-	def_special sub_80F8888
-	def_special sub_80F8874
-	def_special sub_80F88AC
-	def_special sub_80F88FC
-	def_special sub_80F88E0
+	def_special ScrSpecial_GiddyShouldTellAnotherTale
+	def_special ScrSpecial_StorytellerGetFreeStorySlot
+	def_special ScrSpecial_StorytellerDisplayStory
+	def_special ScrSpecial_StorytellerStoryListMenu
+	def_special ScrSpecial_StorytellerUpdateStat
+	def_special ScrSpecial_StorytellerInitializeRandomStat
+	def_special ScrSpecial_HasStorytellerAlreadyRecorded
 	def_special ScrSpecial_TraderMenuGetDecoration
 	def_special ScrSpecial_GetTraderTradedFlag
 	def_special ScrSpecial_DoesPlayerHaveNoDecorations

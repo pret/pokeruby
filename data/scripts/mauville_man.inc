@@ -14,7 +14,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE744:: @ 81AE744
 	case MAUVILLE_MAN_HIPSTER,     speak_to_hipster
 	case MAUVILLE_MAN_TRADER,      speak_to_trader
 	case MAUVILLE_MAN_STORYTELLER, speak_to_storyteller
-	case MAUVILLE_MAN_GIDDY,       MauvilleCity_PokemonCenter_1F_EventScript_1B09EB
+	case MAUVILLE_MAN_GIDDY,       speak_to_giddy
 	end
 
 @-------------------------------------------------------------------------------
@@ -145,10 +145,10 @@ do_trader_menu_get:
 	jumpeq player_has_no_decorations
 	jump do_trader_menu_give
 	end
-cancelled_get_menu:: @ 81AEC2D
+cancelled_get_menu:
 	msgbox gTextTrader_DontWantAnything, 2
 	end
-rare_item_cant_trade_away:: @ 81AEC36
+rare_item_cant_trade_away:
 	message gTextTrader_ICantTradeThatOneAway
 	waittext
 	jump do_trader_menu_get
@@ -158,10 +158,10 @@ dont_want_item:
 	waittext
 	jump do_trader_menu_get
 	end
-player_has_no_decorations:: @ 81AEC4E
+player_has_no_decorations:
 	msgbox gTextTrader_YouDontHaveDecorations, 2
 	end
-do_trader_menu_give:: @ 81AEC57
+do_trader_menu_give:
 	msgbox gTextTrader_PickDecorationYoullTrade, 4
 	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
@@ -178,14 +178,14 @@ do_trader_menu_give:: @ 81AEC57
 	special ScrSpecial_TraderDoDecorationTrade
 	msgbox gTextTrader_ThenWellTrade, 2
 	end
-cancelled_give_menu:: @ 81AECA6
+cancelled_give_menu:
 	msgbox gTextTrader_FeelUnwanted2, 2
 	end
-decoration_is_in_use:: @ 81AECAF
+decoration_is_in_use:
 	msgbox gTextTrader_InUseYouCantTradeIt, 4
 	jump do_trader_menu_give
 	end
-decorations_full:: @ 81AECBD
+decorations_full:
 	msgbox gTextTrader_NoRoomForThis, 2
 	end
 
@@ -195,7 +195,7 @@ decorations_full:: @ 81AECBD
 
 	.include "data/text/storyteller.inc"
 
-speak_to_storyteller:: @ 81B0816
+speak_to_storyteller:
 	setvar 0x8008, 0
 	setvar 0x8009, 0
 	setvar 0x800a, 0
@@ -204,75 +204,66 @@ speak_to_storyteller:: @ 81B0816
 	faceplayer
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq dont_hear_tale
-	specialval RESULT, sub_80F889C
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B08D3
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B084F:: @ 81B084F
+	jumpeq dont_hear_story
+	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	compare RESULT, 0		@ If slot is 0, then the list is empty
+	jumpeq no_stories_recorded
+choose_story:
 	message gTextStoryteller_WhichTale
 	waittext
-	special sub_80F8874
+	special ScrSpecial_StorytellerStoryListMenu
 	waitstate
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0883
+	compare RESULT, FALSE
+	jumpeq cancel_story_menu
 	setvar 0x8008, 1
-	special sub_80F8888
+	special ScrSpecial_StorytellerDisplayStory
 	waittext
 	waitbutton
-	specialval RESULT, sub_80F88AC
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0893
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1B0909
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0883:: @ 81B0883
+	specialval RESULT, ScrSpecial_StorytellerUpdateStat
+	compare RESULT, FALSE
+	jumpeq no_stat_update
+	jump stat_update
+cancel_story_menu:
 	compare 0x8008, 0
-	jumpeq dont_hear_tale
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1B08AE
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0893:: @ 81B0893
+	jumpeq dont_hear_story
+	jump yes_hear_story
+no_stat_update:
 	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
 	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B084F
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B08AE:: @ 81B08AE
-	specialval RESULT, sub_80F88E0
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B091F
-	specialval RESULT, sub_80F889C
+	compare RESULT, YES
+	jumpeq choose_story
+yes_hear_story:
+	specialval RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
+	compare RESULT, TRUE
+	jumpeq cant_record_story		@ already recorded story
+	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare RESULT, 4
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B091F
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1B08DB
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B08D3:: @ 81B08D3
+	jumpeq cant_record_story		@ story list is full
+	jump prompt_record_story
+no_stories_recorded:
 	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B08DB:: @ 81B08DB
+prompt_record_story:
 	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
-	compare RESULT, 0
-	jumpeq dont_hear_tale
-	specialval RESULT, sub_80F88FC
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0909
+	compare RESULT, NO
+	jumpeq dont_hear_story
+	specialval RESULT, ScrSpecial_StorytellerInitializeRandomStat
+	compare RESULT, TRUE
+	jumpeq stat_update
 	msgbox gTextStoryteller_ImNotSatisfied, 4
 	closebutton
 	release
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0909:: @ 81B0909
+stat_update:
 	msgbox gTextStoryteller_BirthOfANewLegend, 4
 	closebutton
 	release
 	end
-
-dont_hear_tale:: @ 81B0914
+dont_hear_story:
 	msgbox gTextStoryteller_OhIFeelStifled, 4
 	closebutton
 	release
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B091F:: @ 81B091F
+cant_record_story:
 	msgbox gTextStoryteller_WishMorePeopleWould, 4
 	closebutton
 	release
@@ -284,55 +275,49 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B091F:: @ 81B091F
 
 	.include "data/text/giddy.inc"
 
-MauvilleCity_PokemonCenter_1F_EventScript_1B09EB:: @ 81B09EB
+speak_to_giddy:
 	lock
 	faceplayer
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B092A, MSGBOX_YESNO
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A6F
+	msgbox gTextGiddy_Introduction, MSGBOX_YESNO
+	compare RESULT, YES
+	jumpeq yes_hear_giddy
+	compare RESULT, NO
+	jumpeq dont_hear_giddy
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C:: @ 81B0A0C
-	special sub_80F7CC8
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
+yes_hear_giddy:
+	special ScrSpecial_GiddyShouldTellAnotherTale
+	compare RESULT, TRUE
+	jumpeq tell_giddy_tale
+	compare RESULT, FALSE
+	jumpeq bye_bye
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A26:: @ 81B0A26
-	special sub_80F7CC8
-	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A40
-	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
+tell_another_giddy_tale:
+	special ScrSpecial_GiddyShouldTellAnotherTale
+	compare RESULT, TRUE
+	jumpeq also_i_was_thinking
+	compare RESULT, FALSE
+	jumpeq bye_bye
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A40:: @ 81B0A40
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0998, 4
-	jump MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E
+also_i_was_thinking:
+	msgbox gTextGiddy_AlsoIWasThinking, 4
+	jump tell_giddy_tale
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E:: @ 81B0A4E
+tell_giddy_tale:
 	special ScrSpecial_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
 	waittext
 	yesnobox 20, 8
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
+	jumpeq tell_another_giddy_tale
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
+	jumpeq tell_another_giddy_tale
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A6F:: @ 81B0A6F
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B097C, 4
+dont_hear_giddy:
+	msgbox gTextGiddy_YouveDeflatedMe, 4
 	release
 	end
-
-MauvilleCity_PokemonCenter_1F_EventScript_1B0A79:: @ 81B0A79
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1B09B0, 4
+bye_bye:
+	msgbox gTextGiddy_ByeBye, 4
 	release
 	end
 
