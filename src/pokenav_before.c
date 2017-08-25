@@ -2831,3 +2831,7 @@ bool8 sub_80EEC90() {
 void sub_80EED0C() {
 	REG_DISPCNT = 512;
 }
+
+void sub_80EED1C() {
+	REG_DISPCNT = 0x92 << 5;
+}
