@@ -536,7 +536,7 @@ static void sub_8149FEC(u8 taskID)
 
 static void sub_814A03C(u8 taskID)
 {
-    if (gTasks[taskID].data[tEvoStopped])
+    if (gTasks[taskID].tEvoStopped)
         gTasks[taskID].func = PreEvoVisible_PostEvoInvisible_KillTask;
     else
     {
