@@ -2,7 +2,16 @@
 #include "bard_music.h"
 #include "easy_chat.h"
 
-extern struct UnkBard (*gBardMusicTable[])[][6];
+struct BardSound
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ s8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u16 volume;
+    /*0x06*/ u16 var06;
+};
+
+extern const struct BardSound (*const gBardMusicTable[])[][6];
 extern s16 *gUnknown_08417068[];
 extern u32 gUnknown_084170F4[];
 
@@ -12,23 +21,23 @@ static s16 CalcWordPitch(u32 arg0, u32 songPos)
 }
 
 #if ENGLISH
-struct UnkBard *GetWordSoundInfo(u16 group, u16 word)
+const struct BardSound *GetWordSounds(u16 group, u16 word)
 {
-    struct UnkBard (*sounds)[][6] = gBardMusicTable[group];
+    const struct BardSound (*sounds)[][6] = gBardMusicTable[group];
 
     return (*sounds)[word];
 }
 #elif GERMAN
-struct UnkBard *GetWordSoundInfo(u16 group, u16 word)
+struct BardSound *GetWordSounds(u16 group, u16 word)
 {
-    struct UnkBard (*sounds)[][6] = gBardMusicTable[group];
+    struct BardSound (*sounds)[][6] = gBardMusicTable[group];
     u32 index = de_sub_80EB748(group, word);
 
     return (*sounds)[index];
 }
 #endif
 
-s32 GetWordPhonemes(struct BardSong *song, struct UnkBard *src, u16 arg2)
+s32 GetWordPhonemes(struct BardSong *song, struct BardSound *src, u16 arg2)
 {
     s32 i;
     s32 j;
@@ -39,11 +48,11 @@ s32 GetWordPhonemes(struct BardSong *song, struct UnkBard *src, u16 arg2)
         song->phonemes[i].sound = src[i].var00;
         if (src[i].var00 != 0xFF)
         {
-            s32 r1 = src[i].var01 + gUnknown_084170F4[src[i].var00];
+            s32 length = src[i].var01 + gUnknown_084170F4[src[i].var00];
 
-            song->phonemes[i].length = r1;
+            song->phonemes[i].length = length;
             song->phonemes[i].volume = src[i].volume;
-            song->var04 += r1;
+            song->var04 += length;
         }
     }
 

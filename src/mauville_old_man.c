@@ -815,10 +815,10 @@ void BardSingWord(struct Task *task, struct BardSong *song)
         {
             u16 word = song->lyrics[song->currWord];
             // TODO: fix this return type
-            struct UnkBard *sounds = GetWordSoundInfo(EC_GROUP(word), EC_INDEX(word));
+            const struct BardSound *sounds = GetWordSounds(EC_GROUP(word), EC_INDEX(word));
 
             song->var04 = 0;
-            GetWordPhonemes(song, r1, MACRO1(word));
+            GetWordPhonemes(song, sounds, MACRO1(word));
         }
         break;
     case 3:

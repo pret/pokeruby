@@ -1,19 +1,7 @@
 #ifndef GUARD_BARD_MUSIC_H
 #define GUARD_BARD_MUSIC_H
 
-struct BardSound
-{
-    u8 pad_00[48];
-};
-
-struct UnkBard
-{
-    /*0x00*/ u8 var00;
-    /*0x01*/ s8 var01;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u16 volume;
-    /*0x06*/ u16 var06;
-};
+struct BardSound;
 
 struct BardPhoneme
 {
@@ -37,7 +25,7 @@ struct BardSong
     /*0x18*/ struct BardPhoneme phonemes[6];
 };
 
-struct UnkBard *GetWordSoundInfo(u16 arg0, u16 arg1);
-s32 GetWordPhonemes(struct BardSong *dest, struct UnkBard *src, u16 arg2);
+const struct BardSound *GetWordSounds(u16 arg0, u16 arg1);
+s32 GetWordPhonemes(struct BardSong *dest, const struct BardSound *src, u16 arg2);
 
 #endif  // GUARD_BARD_MUSIC_H
