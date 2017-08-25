@@ -6,67 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EED2C
-sub_80EED2C: @ 80EED2C
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x5
-	bhi _080EED98
-	lsls r0, 2
-	ldr r1, _080EED40 @ =_080EED44
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080EED40: .4byte _080EED44
-	.align 2, 0
-_080EED44:
-	.4byte _080EED5C
-	.4byte _080EED66
-	.4byte _080EED7E
-	.4byte _080EED74
-	.4byte _080EED74
-	.4byte _080EED8C
-_080EED5C:
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0xFA
-	lsls r2, 5
-	b _080EED94
-_080EED66:
-	movs r1, 0x80
-	lsls r1, 19
-	ldr r2, _080EED70 @ =0x00001741
-	b _080EED94
-	.align 2, 0
-_080EED70: .4byte 0x00001741
-_080EED74:
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0xFA
-	lsls r2, 5
-	b _080EED94
-_080EED7E:
-	movs r1, 0x80
-	lsls r1, 19
-	ldr r2, _080EED88 @ =0x00007b40
-	b _080EED94
-	.align 2, 0
-_080EED88: .4byte 0x00007b40
-_080EED8C:
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0xFD
-	lsls r2, 6
-_080EED94:
-	adds r0, r2, 0
-	strh r0, [r1]
-_080EED98:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80EED2C
-
 	thumb_func_start sub_80EED9C
 sub_80EED9C: @ 80EED9C
 	push {lr}

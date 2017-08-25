@@ -275,7 +275,7 @@ void sub_80EF248();
 bool8 sub_80EF284();
 void sub_80F1B8C();
 bool8 sub_80F1BC8(u32 unk);
-void sub_80EED2C();
+void sub_80EED2C(u8);
 void sub_80F1DF0();
 bool8 sub_80F1E50();
 void sub_80EF428();
@@ -2834,4 +2834,25 @@ void sub_80EED0C() {
 
 void sub_80EED1C() {
 	REG_DISPCNT = 0x92 << 5;
+}
+
+void sub_80EED2C(u8 param1) {
+	switch (param1) {
+	case 0:
+		REG_DISPCNT = 0xFA << 5;
+		break;
+	case 1:
+		REG_DISPCNT = 0x1741;
+		break;
+	case 3:
+	case 4:
+		REG_DISPCNT = 0xFA << 5;
+		break;
+	case 2:
+		REG_DISPCNT = 0x7b40;
+		break;
+	case 5:
+		REG_DISPCNT = 0xFD << 6;
+		break;
+	}
 }
