@@ -12,7 +12,6 @@ enum
 };
 
 void SetupMauvilleOldMan(void);
-void sub_80F7DC0(void);
 void sub_80F7F30(void);
 void sub_80F83D0(void);
 

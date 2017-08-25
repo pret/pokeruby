@@ -135,9 +135,9 @@ extern const u8 gTextStoryteller_Story36Text[];
 
 extern struct BardSong gUnknown_03005DA0;
 
-extern u16 gUnknown_020388BC;  // set but not used?
+EWRAM_DATA static u16 gUnknown_020388BC = 0;  // set but not used?
 
-static const u16 gDefaultBardSongLyrics[] =
+static const u16 sDefaultBardSongLyrics[] =
 {
 #ifdef ENGLISH
     EC_WORD_SISTER,
@@ -156,7 +156,7 @@ static const u16 gDefaultBardSongLyrics[] =
 #endif
 };
 
-static const u8 *const gGiddyAdjectives[] =
+static const u8 *const sGiddyAdjectives[] =
 {
     OtherText_SoPretty,
     OtherText_SoDarling,
@@ -168,7 +168,7 @@ static const u8 *const gGiddyAdjectives[] =
     OtherText_SoMagical,
 };
 
-static const u8 *const gGiddyQuestions[] =
+static const u8 *const sGiddyQuestions[] =
 {
     OtherText_WantVacationNicePlace,
     OtherText_BoughtCrayonsIsNice,
@@ -180,12 +180,13 @@ static const u8 *const gGiddyQuestions[] =
     OtherText_SecretBasesWonderful,
 };
 
-void Task_BardSong(u8);
-void StartBardSong(u8);
-void StorytellerSetup(void);
-void sub_80F8428(void);
+static void sub_80F7DC0(void);
+static void Task_BardSong(u8);
+static void StartBardSong(u8);
+static void StorytellerSetup(void);
+static void sub_80F8428(void);
 
-void SetupBard(void)
+static void SetupBard(void)
 {
     u16 i;
     struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
@@ -193,23 +194,23 @@ void SetupBard(void)
     bard->id = MAUVILLE_MAN_BARD;
     bard->hasChangedSong = FALSE;
     for (i = 0; i < 6; i++)
-        bard->songLyrics[i] = gDefaultBardSongLyrics[i];
+        bard->songLyrics[i] = sDefaultBardSongLyrics[i];
 }
 
-void SetupHipster(void)
+static void SetupHipster(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
-    hipster->unk1 = 0;
+    hipster->alreadySpoken = FALSE;
 }
 
-void SetupStoryteller(void)
+static void SetupStoryteller(void)
 {
     StorytellerSetup();
 }
 
-void SetupGiddy(void)
+static void SetupGiddy(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
 
@@ -217,7 +218,7 @@ void SetupGiddy(void)
     giddy->taleCounter = 0;
 }
 
-void SetupTrader(void)
+static void SetupTrader(void)
 {
     TraderSetup();
 }
@@ -248,47 +249,12 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-//#define TEST MAUVILLE_MAN_STORYTELLER
-
-#ifdef TEST
-// Safely changes man to test functionality
-u8 GetCurrentMauvilleOldMan(void)
-{
-    u8 newMan = TEST;
-    struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
-
-    if (common->id != newMan)
-    {
-        switch (newMan)
-        {
-        case MAUVILLE_MAN_BARD:
-            SetupBard();
-            break;
-        case MAUVILLE_MAN_HIPSTER:
-            SetupHipster();
-            break;
-        case MAUVILLE_MAN_TRADER:
-            SetupTrader();
-            break;
-        case MAUVILLE_MAN_STORYTELLER:
-            SetupStoryteller();
-            break;
-        case MAUVILLE_MAN_GIDDY:
-            SetupGiddy();
-            break;
-        }
-        sub_80F83D0();
-    }
-    return common->id;
-}
-#else
-u8 GetCurrentMauvilleOldMan(void)
+static u8 GetCurrentMauvilleOldMan(void)
 {
     struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
 
     return common->id;
 }
-#endif
 
 void ScrSpecial_GetCurrentMauvilleMan(void)
 {
@@ -387,14 +353,14 @@ void ScrSpecial_GetHipsterSpokenFlag(void)
     u16 *scriptResult = &gScriptResult; // again??
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
-    *scriptResult = hipster->unk1;
+    *scriptResult = hipster->alreadySpoken;
 }
 
 void ScrSpecial_SetHipsterSpokenFlag(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
-    hipster->unk1 = 1;
+    hipster->alreadySpoken = TRUE;
 }
 
 void ScrSpecial_HipsterTeachWord(void)
@@ -442,12 +408,12 @@ void ScrSpecial_GenerateGiddyLine(void)
         adjective %= 8;
         stringPtr = EasyChat_GetWordText(gStringVar4, giddy->randomWords[giddy->taleCounter]);
         stringPtr = StringCopy(stringPtr, gOtherText_Is);
-        stringPtr = StringCopy(stringPtr, gGiddyAdjectives[adjective]);
+        stringPtr = StringCopy(stringPtr, sGiddyAdjectives[adjective]);
         StringCopy(stringPtr, gOtherText_DontYouAgree);
     }
     else
     {
-        StringCopy(gStringVar4, gGiddyQuestions[giddy->questionList[giddy->questionNum++]]);
+        StringCopy(gStringVar4, sGiddyQuestions[giddy->questionList[giddy->questionNum++]]);
     }
 
     if (!(Random() % 10))
@@ -459,7 +425,7 @@ void ScrSpecial_GenerateGiddyLine(void)
 }
 
 #ifdef NONMATCHING
-void sub_80F7DC0(void)
+static void sub_80F7DC0(void)
 {
     u16 arr[][2] =
     {
@@ -548,7 +514,7 @@ void sub_80F7DC0(void)
 }
 #else
 
-const u16 gUnknown_083E53C8[][2] =
+static const u16 gUnknown_083E53C8[][2] =
 {
     { 0x0, 0},
     { 0xC, 0},
@@ -559,7 +525,7 @@ const u16 gUnknown_083E53C8[][2] =
 };
 
 __attribute__((naked))
-void sub_80F7DC0(void)
+static void sub_80F7DC0(void)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -721,26 +687,26 @@ _080F7EE2:\n\
 }
 #endif
 
-void sub_80F7EFC(void)
+static void sub_80F7EFC(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
     bard->hasChangedSong = FALSE;
 }
 
-void sub_80F7F0C(void)
+static void sub_80F7F0C(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
-    hipster->unk1 = 0;
+    hipster->alreadySpoken = FALSE;
 }
 
-void sub_80F7F18(void)
+static void sub_80F7F18(void)
 {
     sub_8109A20();
 }
 
-void sub_80F7F24(void)
+static void sub_80F7F24(void)
 {
     sub_80F8428();
 }
@@ -772,14 +738,14 @@ void sub_80F7F30(void)
 #define tCurrWord data[4]
 #define tUseTemporaryLyrics data[5]
 
-void StartBardSong(bool8 useTemporaryLyrics)
+static void StartBardSong(bool8 useTemporaryLyrics)
 {
     u8 taskId = CreateTask(Task_BardSong, 0x50);
 
     gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-void BardSingWord(struct Task *task, struct BardSong *song)
+static void BardSing(struct Task *task, struct BardSong *song)
 {
     switch (task->tState)
     {
@@ -882,11 +848,11 @@ void BardSingWord(struct Task *task, struct BardSong *song)
     }
 }
 
-void Task_BardSong(u8 taskId)
+static void Task_BardSong(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];  // r5
 
-    BardSingWord(task, &gUnknown_03005DA0);
+    BardSing(task, &gUnknown_03005DA0);
     switch (task->tState)
     {
     case 0:  // Initialize song
@@ -1060,13 +1026,13 @@ static const struct Story sStorytellerStories[] =
     {0x31, 1, gTextStoryteller_Story36Title, gTextStoryteller_Story36Action, gTextStoryteller_Story36Text},
 };
 
-void StorytellerSetup(void)
+static void StorytellerSetup(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     s32 i;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
-    storyteller->unk1 = FALSE;
+    storyteller->alreadyRecorded = FALSE;
     for (i = 0; i < 4; i++)
     {
         storyteller->gameStatIDs[i] = 0;
@@ -1074,22 +1040,22 @@ void StorytellerSetup(void)
     }
 }
 
-void sub_80F8428(void)
+static void sub_80F8428(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
     storyteller->id = MAUVILLE_MAN_STORYTELLER;
-    storyteller->unk1 = FALSE;
+    storyteller->alreadyRecorded = FALSE;
 }
 
-u32 StorytellerGetGameStat(u8 stat)
+static u32 StorytellerGetGameStat(u8 stat)
 {
     if (stat == NUM_GAME_STATS)
         stat = 0;
     return GetGameStat(stat);
 }
 
-const struct Story *GetStoryByStat(u32 stat)
+static const struct Story *GetStoryByStat(u32 stat)
 {
     s32 i;
 
@@ -1101,22 +1067,22 @@ const struct Story *GetStoryByStat(u32 stat)
     return &sStorytellerStories[35];
 }
 
-const u8 *GetStoryTitleByStat(u32 stat)
+static const u8 *GetStoryTitleByStat(u32 stat)
 {
     return GetStoryByStat(stat)->title;
 }
 
-const u8 *GetStoryTextByStat(u32 stat)
+static const u8 *GetStoryTextByStat(u32 stat)
 {
     return GetStoryByStat(stat)->fullText;
 }
 
-const u8 *GetStoryActionByStat(u32 stat)
+static const u8 *GetStoryActionByStat(u32 stat)
 {
     return GetStoryByStat(stat)->action;
 }
 
-u8 GetFreeStorySlot(void)
+static u8 GetFreeStorySlot(void)
 {
     u8 i;
 
@@ -1130,16 +1096,16 @@ u8 GetFreeStorySlot(void)
     return i;
 }
 
-u32 StorytellerGetRecordedTrainerStat(u32 trainer)
+static u32 StorytellerGetRecordedTrainerStat(u32 trainer)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[trainer];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.statValues[trainer];
 
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
-void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
+static void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
 {
-    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.unk24[trainer];
+    u8 *ptr = gSaveBlock1.mauvilleMan.storyteller.statValues[trainer];
 
     ptr[0] = val;
     ptr[1] = val >> 8;
@@ -1147,7 +1113,7 @@ void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
     ptr[3] = val >> 24;
 }
 
-bool32 HasTrainerStatIncreased(u32 trainer)
+static bool32 HasTrainerStatIncreased(u32 trainer)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
@@ -1157,7 +1123,7 @@ bool32 HasTrainerStatIncreased(u32 trainer)
         return FALSE;
 }
 
-void GetStoryByStattellerPlayerName(u32 player, void *dst)
+static void GetStoryByStattellerPlayerName(u32 player, void *dst)
 {
     u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
 
@@ -1165,7 +1131,7 @@ void GetStoryByStattellerPlayerName(u32 player, void *dst)
     memcpy(dst, name, 7);
 }
 
-void StorytellerSetPlayerName(u32 player, const u8 *src)
+static void StorytellerSetPlayerName(u32 player, const u8 *src)
 {
     u8 *name = gSaveBlock1.mauvilleMan.storyteller.trainerNames[player];
     u8 len = StringLength(src);
@@ -1174,7 +1140,7 @@ void StorytellerSetPlayerName(u32 player, const u8 *src)
     StringCopyN(name, src, len);
 }
 
-void StorytellerRecordNewStat(u32 player, u32 stat)
+static void StorytellerRecordNewStat(u32 player, u32 stat)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
@@ -1185,7 +1151,7 @@ void StorytellerRecordNewStat(u32 player, u32 stat)
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
 }
 
-void ScrambleStatList(u8 *arr, s32 count)
+static void ScrambleStatList(u8 *arr, s32 count)
 {
     s32 i;
 
@@ -1209,7 +1175,7 @@ static const struct {u32 length; struct MauvilleManStoryteller *unused1; u32 unu
     12,                                    // unused
 };
 
-bool8 StorytellerInitializeRandomStat(void)
+static bool8 StorytellerInitializeRandomStat(void)
 {
     u8 arr[sStorytellerStuff.length];
     s32 i;
@@ -1229,7 +1195,7 @@ bool8 StorytellerInitializeRandomStat(void)
         }
         if (j == 4 && StorytellerGetGameStat(stat) >= minVal)
         {
-            storyteller->unk1 = TRUE;
+            storyteller->alreadyRecorded = TRUE;
             StorytellerRecordNewStat(GetFreeStorySlot(), stat);
             return TRUE;
         }
@@ -1237,7 +1203,7 @@ bool8 StorytellerInitializeRandomStat(void)
     return FALSE;
 }
 
-void StorytellerDisplayStory(u32 player)
+static void StorytellerDisplayStory(u32 player)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
     u8 stat = storyteller->gameStatIDs[player];
@@ -1248,7 +1214,7 @@ void StorytellerDisplayStory(u32 player)
     ShowFieldMessage(GetStoryTextByStat(stat));
 }
 
-void PrintStoryList(void)
+static void PrintStoryList(void)
 {
     s32 i;
 
@@ -1267,7 +1233,7 @@ void PrintStoryList(void)
 
 extern u8 gUnknown_03000748;
 
-void Task_StoryListMenu(u8 taskId)
+static void Task_StoryListMenu(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 selection;
@@ -1334,7 +1300,7 @@ bool8 ScrSpecial_HasStorytellerAlreadyRecorded(void)
 {
     struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
 
-    if (storyteller->unk1 == FALSE)
+    if (storyteller->alreadyRecorded == FALSE)
         return FALSE;
     else
         return TRUE;

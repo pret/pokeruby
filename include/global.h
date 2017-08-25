@@ -458,7 +458,6 @@ struct MauvilleManCommon
 struct MauvilleManBard
 {
     /*0x00*/ u8 id;
-    /*0x01*/ u8 unk_2D95;
     /*0x02*/ u16 songLyrics[6];
     /*0x0E*/ u16 temporaryLyrics[6];
     /*0x1A*/ u8 playerName[8];
@@ -470,7 +469,7 @@ struct MauvilleManBard
 struct MauvilleManHipster
 {
     u8 id;
-    u8 unk1;
+    bool8 alreadySpoken;
 };
 
 struct MauvilleManTrader
@@ -484,11 +483,11 @@ struct MauvilleManTrader
 struct MauvilleManStoryteller
 {
     u8 id;
-    bool8 unk1;
+    bool8 alreadyRecorded;
     u8 filler2[2];
     u8 gameStatIDs[4];
     u8 trainerNames[4][7];
-    u8 unk24[4][4];
+    u8 statValues[4][4];
 };
 
 struct MauvilleManGiddy
@@ -509,7 +508,7 @@ union MauvilleMan
     struct MauvilleManTrader trader;
     struct MauvilleManStoryteller storyteller;
     struct MauvilleManGiddy giddy;
-    u8 filler[0x40];
+    u8 filler[0x40];  // needed to pad out the struct
 };
 
 struct Unk_SB_Access_Struct1
