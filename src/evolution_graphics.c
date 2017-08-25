@@ -25,6 +25,12 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID);
 static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID);
 static void EvoTask_DestroyPostSet2AndFlashTask(u8 taskID);
 
+static void sub_8149FC8(u8 taskID);
+static void sub_8149FEC(u8 taskID);
+static void PreEvoVisible_PostEvoInvisible_KillTask(u8 taskID);
+static void PreEvoInVisible_PostEvoVisible_KillTask(u8 taskID);
+static void sub_814A03C(u8 taskID);
+
 // const data
 static const u16 sEvoSparklePalette[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
 static const u8 sEvoSparkleTiles[] = INCBIN_U8("graphics/misc/evo_sparkle.4bpp.lz");
@@ -230,7 +236,7 @@ static void SpriteCB_PostEvoSparkleSet2(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-void CreatePostEvoSparkleSet2(u8 arg0)
+static void CreatePostEvoSparkleSet2(u8 arg0)
 {
     u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 56, 0);
     if (spriteID != MAX_SPRITES)
@@ -251,14 +257,14 @@ void LoadEvoSparkleSpriteAndPal(void)
     LoadSpritePalettes(sEvoSparkleSpritePals);
 }
 
+#define tFrameCounter   data[15]
+
 u8 LaunchTask_PreEvoSparklesSet1(u16 arg0)
 {
     u8 taskID = CreateTask(EvoTask_BeginPreSet1_FadeAndPlaySE, 0);
     gTasks[taskID].data[1] = arg0;
     return taskID;
 }
-
-#define tFrameCounter   data[15]
 
 static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID)
 {
@@ -460,3 +466,148 @@ static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID)
         gTasks[taskID].func = EvoTask_DestroyPostSet2AndFlashTask;
 }
 
+#undef tFrameCounter
+
+static void PokeEvoSprite_DummySpriteCB(struct Sprite* sprite)
+{
+
+}
+
+#define tPreEvoSpriteID     data[1]
+#define tPostEvoSpriteID    data[2]
+#define tEvoStopped         data[8]
+
+u8 sub_8149E7C(u8 preEvoSpriteID, u8 postEvoSpriteID)
+{
+    u16 i;
+    u16 stack[16];
+    u8 taskID;
+    s32 toDiv;
+
+    for (i = 0; i < 16; i++)
+        stack[i] = 0x7FFF;
+
+    taskID = CreateTask(sub_8149FC8, 0);
+    gTasks[taskID].tPreEvoSpriteID = preEvoSpriteID;
+    gTasks[taskID].tPostEvoSpriteID = postEvoSpriteID;
+    gTasks[taskID].data[3] = 256;
+    gTasks[taskID].data[4] = 16;
+
+    toDiv = 65536;
+    SetOamMatrix(30, 256, 0, 0, 256);
+    SetOamMatrix(31, toDiv / gTasks[taskID].data[4], 0, 0, toDiv / gTasks[taskID].data[4]);
+
+    gSprites[preEvoSpriteID].callback = PokeEvoSprite_DummySpriteCB;
+    gSprites[preEvoSpriteID].oam.affineMode = 1;
+    gSprites[preEvoSpriteID].oam.matrixNum = 30;
+    gSprites[preEvoSpriteID].invisible = 0;
+    CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[preEvoSpriteID].oam.paletteNum * 16)], 16);
+
+    gSprites[postEvoSpriteID].callback = PokeEvoSprite_DummySpriteCB;
+    gSprites[postEvoSpriteID].oam.affineMode = 1;
+    gSprites[postEvoSpriteID].oam.matrixNum = 31;
+    gSprites[postEvoSpriteID].invisible = 0;
+    CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[postEvoSpriteID].oam.paletteNum * 16)], 16);
+
+    gTasks[taskID].tEvoStopped = FALSE;
+    return taskID;
+}
+
+static void sub_8149FC8(u8 taskID)
+{
+    gTasks[taskID].data[5] = 0;
+    gTasks[taskID].data[6] = 8;
+    gTasks[taskID].func = sub_8149FEC;
+}
+
+static void sub_8149FEC(u8 taskID)
+{
+    if (gTasks[taskID].tEvoStopped)
+        PreEvoVisible_PostEvoInvisible_KillTask(taskID);
+    else if (gTasks[taskID].data[6] == 128)
+        PreEvoInVisible_PostEvoVisible_KillTask(taskID);
+    else
+    {
+        gTasks[taskID].data[6] += 2;
+        gTasks[taskID].data[5] ^= 1;
+        gTasks[taskID].func = sub_814A03C;
+    }
+}
+
+static void sub_814A03C(u8 taskID)
+{
+    if (gTasks[taskID].data[tEvoStopped])
+        gTasks[taskID].func = PreEvoVisible_PostEvoInvisible_KillTask;
+    else
+    {
+        u16 oamMatrixArg;
+        u8 r6 = 0;
+        if (gTasks[taskID].data[5] == 0)
+        {
+            if (gTasks[taskID].data[3] < 256 - gTasks[taskID].data[6])
+                gTasks[taskID].data[3] += gTasks[taskID].data[6];
+            else
+            {
+                gTasks[taskID].data[3] = 256;
+                r6++;
+            }
+            if (gTasks[taskID].data[4] > 16 + gTasks[taskID].data[6])
+                gTasks[taskID].data[4]  -= gTasks[taskID].data[6];
+            else
+            {
+                gTasks[taskID].data[4] = 16;
+                r6++;
+            }
+        }
+        else
+        {
+            if (gTasks[taskID].data[4] < 256 - gTasks[taskID].data[6])
+                gTasks[taskID].data[4] += gTasks[taskID].data[6];
+            else
+            {
+                gTasks[taskID].data[4] = 256;
+                r6++;
+            }
+            if (gTasks[taskID].data[3] > 16 + gTasks[taskID].data[6])
+                gTasks[taskID].data[3]  -= gTasks[taskID].data[6];
+            else
+            {
+                gTasks[taskID].data[3] = 16;
+                r6++;
+            }
+        }
+        oamMatrixArg = 65536 / gTasks[taskID].data[3];
+        SetOamMatrix(30, oamMatrixArg, 0, 0, oamMatrixArg);
+
+        oamMatrixArg = 65536 / gTasks[taskID].data[4];
+        SetOamMatrix(31, oamMatrixArg, 0, 0, oamMatrixArg);
+        if (r6 == 2)
+            gTasks[taskID].func = sub_8149FEC;
+    }
+}
+
+static void PreEvoInVisible_PostEvoVisible_KillTask(u8 taskID)
+{
+    gSprites[gTasks[taskID].tPreEvoSpriteID].oam.affineMode = 0;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].oam.matrixNum = 0;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = 1;
+
+    gSprites[gTasks[taskID].tPostEvoSpriteID].oam.affineMode = 0;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].oam.matrixNum = 0;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = 0;
+
+    DestroyTask(taskID);
+}
+
+static void PreEvoVisible_PostEvoInvisible_KillTask(u8 taskID)
+{
+    gSprites[gTasks[taskID].tPreEvoSpriteID].oam.affineMode = 0;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].oam.matrixNum = 0;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = 0;
+
+    gSprites[gTasks[taskID].tPostEvoSpriteID].oam.affineMode = 0;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].oam.matrixNum = 0;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = 1;
+
+    DestroyTask(taskID);
+}

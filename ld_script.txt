@@ -267,7 +267,6 @@ SECTIONS {
         src/clear_save_data_menu.o(.text);
         src/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
-        asm/evolution_graphics.o(.text);
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
         src/unknown_debug_menu.o(.text);
