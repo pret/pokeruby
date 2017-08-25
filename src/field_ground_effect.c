@@ -93,7 +93,10 @@ static const u8 gSandFootprints_FieldEffectData[] = { 0xD, 0x0, 0x18, 0x0 };
 //  each byte in that row is for the next direction of the bike in the order
 //  of down, up, left, right.
 static const u8 gBikeTireTracks_Transitions[4][4] = {
-    1, 2, 7, 8, 1, 2, 6, 5, 5, 8, 3, 4, 6, 7, 3, 4,
+    1, 2, 7, 8,
+    1, 2, 6, 5,
+    5, 8, 3, 4,
+    6, 7, 3, 4,
 };
 
 static void (*const gUnknown_083760A0[])(
@@ -117,8 +120,6 @@ static void (*const gUnknown_083760A0[])(
     GroundEffect_ShortGrass,
     GroundEffect_HotSprings,
     GroundEffect_Seaweed };
-
-#define NUM_GROUND_EFFECTS (sizeof(gUnknown_083760A0) / sizeof(gUnknown_083760A0[0]))
 
 static void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {
@@ -226,8 +227,8 @@ void GetGroundEffectFlags_Tracks(struct MapObject *mapObj, u32 *flags)
     {
         *flags |= 0x100;
     }
-    else if (MetatileBehavior_IsSandOrDeepSand(mapObj->mapobj_unk_1F) ||
-             MetatileBehavior_IsUnusedFootprintMetatile(mapObj->mapobj_unk_1F))
+    else if (MetatileBehavior_IsSandOrDeepSand(mapObj->mapobj_unk_1F)
+             || MetatileBehavior_IsUnusedFootprintMetatile(mapObj->mapobj_unk_1F))
     {
         *flags |= 0x80;
     }
@@ -235,8 +236,8 @@ void GetGroundEffectFlags_Tracks(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_SandPile(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1E) &&
-        MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1E)
+        && MetatileBehavior_IsDeepSand(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_20)
         {
@@ -253,10 +254,10 @@ void GetGroundEffectFlags_SandPile(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *mapObj, u32 *flags)
 {
-    if ((MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1E) &&
-            MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1F)) ||
-        (MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1E) &&
-            MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1F)))
+    if ((MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1E)
+         && MetatileBehavior_IsShallowFlowingWater(mapObj->mapobj_unk_1F))
+        || (MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1E)
+            && MetatileBehavior_IsPacifidlogLog(mapObj->mapobj_unk_1F)))
     {
         if (!mapObj->mapobj_bit_19)
         {
@@ -273,8 +274,8 @@ void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *mapObj, u32 *fla
 
 void GetGroundEffectFlags_Puddle(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1E) &&
-        MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1E)
+        && MetatileBehavior_IsPuddle(mapObj->mapobj_unk_1F))
     {
         *flags |= 0x400;
     }
@@ -288,8 +289,8 @@ void GetGroundEffectFlags_Ripple(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_ShortGrass(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1E) &&
-        MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1E)
+        && MetatileBehavior_IsShortGrass(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_18)
         {
@@ -306,8 +307,8 @@ void GetGroundEffectFlags_ShortGrass(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_HotSprings(struct MapObject *mapObj, u32 *flags)
 {
-    if (MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1E) &&
-        MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1F))
+    if (MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1E)
+        && MetatileBehavior_IsHotSprings(mapObj->mapobj_unk_1F))
     {
         if (!mapObj->mapobj_bit_21)
         {
@@ -627,17 +628,17 @@ bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
     u8 mapZ;
 
     if (z == 0)
-        return 0;
+        return FALSE;
 
     mapZ = MapGridGetZCoordAt(x, y);
 
     if (mapZ == 0 || mapZ == 0xF)
-        return 0;
+        return FALSE;
 
     if (mapZ != z)
-        return 1;
+        return TRUE;
 
-    return 0;
+    return FALSE;
 }
 
 void FieldObjectUpdateZCoordAndPriority(struct MapObject *mapObj, struct Sprite *sprite)
@@ -929,7 +930,7 @@ void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite)
 void sub_8064218(struct MapObject *mapObj, struct Sprite *sprite, u32 flags)
 {
     u8 i;
-    for (i = 0; i < NUM_GROUND_EFFECTS; i++, flags >>= 1)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_083760A0); i++, flags >>= 1)
         if (flags & 1)
             gUnknown_083760A0[i](mapObj, sprite);
 }
