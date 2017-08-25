@@ -26,9 +26,6 @@
 #include "rom4.h"
 #include "decoration_inventory.h"
 
-extern void sub_80B4378(u8);
-extern void sub_80B43F0(u8);
-extern void sub_80B4470(u8);
 extern bool8 sub_80A52C4(u8, u8);
 
 enum
@@ -53,6 +50,7 @@ struct MartInfo
 extern struct MartInfo gMartInfo;
 extern struct MenuAction gUnknown_083CC6D0[];
 extern struct YesNoFuncTable gUnknown_083CC708[];
+extern struct ItemSlot gUnknown_02038724[3];
 
 extern u32 gMartTotalCost; // the total cost of a purchase before checking out.
 
@@ -74,6 +72,8 @@ enum
     ANIM_NUM
 };
 
+extern u8 gUnknown_02038730;
+
 extern s16 gUnknown_020386A4[][4]; // game freak barely uses 2d arrays wtf?
 
 extern u16 gBuyMenuFrame_Tilemap[];
@@ -82,6 +82,10 @@ extern u16 gUnknown_083CC710[2];
 
 void sub_80B39D0(int var1, int var2, bool32 hasControlCode);
 void sub_80B3A70(void);
+void sub_80B4378(u8);
+void sub_80B43F0(u8);
+void Task_ExitBuyMenu(u8);
+void sub_80B4470(u8);
 
 u8 CreateShopMenu(u8 martType)
 {
@@ -1058,3 +1062,167 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
         }
     }
 }
+
+void sub_80B4378(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0xE, 0x1D, 0x13);
+    MenuZeroFillWindowRect(0, 0xA, 0xD, 0xD);
+    sub_80A3FA0(gBGTilemapBuffers[1], 0x1, 0xB, 0xC, 0x2, 0);
+    sub_80B3420();
+    sub_80B3764(6, 7);
+    sub_80B37EC();
+    StartVerticalScrollIndicators(0);
+    StartVerticalScrollIndicators(1);
+    sub_80B32A4();
+    gTasks[taskId].func = sub_80B40E8;
+}
+
+void sub_80B43F0(u8 taskId)
+{
+    gFieldCallback = sub_80B3050;
+    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    gTasks[taskId].func = Task_ExitBuyMenu;
+}
+
+void Task_ExitBuyMenu(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        RemoveMoneyLabelObject(0, 0);
+        BuyMenuFreeMemory();
+        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        DestroyTask(taskId);
+    }
+}
+
+// in the for loop, the loop prologue is not correct and loads choicesabove + cursor immediately instead of setting up the gUnknown_02038724 struct.
+#ifdef NONMATCHING
+void sub_80B4470(u8 taskId)
+{
+    u16 i;
+
+    for(i = 0; i < 3; i++)
+    {
+        if(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] != gUnknown_02038724[i].itemId || gUnknown_02038724[i].quantity == 0)
+            continue;
+
+        if(gTasks[taskId].data[1] + gUnknown_02038724[i].quantity > 255)
+            gUnknown_02038724[i].quantity = 255;
+        else
+            gUnknown_02038724[i].quantity += gTasks[taskId].data[1];
+        return;
+    }
+
+    if(gUnknown_02038730 < 3)
+    {
+        gUnknown_02038724[gUnknown_02038730].itemId = gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor];
+        gUnknown_02038724[gUnknown_02038730].quantity = gTasks[taskId].data[1];
+        gUnknown_02038730++;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80B4470(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r9\n\
+    mov r6, r8\n\
+    push {r6,r7}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    movs r2, 0\n\
+    ldr r0, _080B44C8 @ =gUnknown_02038724\n\
+    mov r12, r0\n\
+    ldr r6, _080B44CC @ =gMartInfo\n\
+    mov r8, r12\n\
+    adds r4, r6, 0\n\
+    ldr r1, _080B44D0 @ =gTasks\n\
+    mov r9, r1\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r7, r0, 3\n\
+_080B4492:\n\
+    lsls r0, r2, 2\n\
+    mov r1, r8\n\
+    adds r3, r0, r1\n\
+    ldrb r0, [r4, 0xB]\n\
+    ldrb r1, [r4, 0x9]\n\
+    adds r0, r1\n\
+    ldr r1, [r4, 0x4]\n\
+    lsls r0, 1\n\
+    adds r0, r1\n\
+    ldrh r1, [r3]\n\
+    ldrh r0, [r0]\n\
+    cmp r1, r0\n\
+    bne _080B44DC\n\
+    ldrh r0, [r3, 0x2]\n\
+    cmp r0, 0\n\
+    beq _080B44DC\n\
+    adds r2, r0, 0\n\
+    mov r4, r9\n\
+    adds r1, r7, r4\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r1, r4]\n\
+    adds r0, r2, r0\n\
+    cmp r0, 0xFF\n\
+    ble _080B44D4\n\
+    movs r0, 0xFF\n\
+    strh r0, [r3, 0x2]\n\
+    b _080B451E\n\
+    .align 2, 0\n\
+_080B44C8: .4byte gUnknown_02038724\n\
+_080B44CC: .4byte gMartInfo\n\
+_080B44D0: .4byte gTasks\n\
+_080B44D4:\n\
+    ldrh r0, [r1, 0xA]\n\
+    adds r0, r2, r0\n\
+    strh r0, [r3, 0x2]\n\
+    b _080B451E\n\
+_080B44DC:\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x2\n\
+    bls _080B4492\n\
+    ldr r3, _080B452C @ =gUnknown_02038730\n\
+    ldrb r0, [r3]\n\
+    cmp r0, 0x2\n\
+    bhi _080B451E\n\
+    adds r2, r0, 0\n\
+    lsls r2, 2\n\
+    add r2, r12\n\
+    ldrb r0, [r6, 0xB]\n\
+    ldrb r1, [r6, 0x9]\n\
+    adds r0, r1\n\
+    ldr r1, [r6, 0x4]\n\
+    lsls r0, 1\n\
+    adds r0, r1\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r2]\n\
+    ldrb r1, [r3]\n\
+    lsls r1, 2\n\
+    add r1, r12\n\
+    ldr r2, _080B4530 @ =gTasks\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r2\n\
+    ldrh r0, [r0, 0xA]\n\
+    strh r0, [r1, 0x2]\n\
+    ldrb r0, [r3]\n\
+    adds r0, 0x1\n\
+    strb r0, [r3]\n\
+_080B451E:\n\
+    pop {r3,r4}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080B452C: .4byte gUnknown_02038730\n\
+_080B4530: .4byte gTasks\n\
+    .syntax divided");
+}
+#endif
