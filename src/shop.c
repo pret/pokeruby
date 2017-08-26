@@ -27,51 +27,19 @@
 #include "decoration_inventory.h"
 #include "field_camera.h"
 
+#define ewram18000 ((u16 *)(ewram + 0x18000))
+#define ewram18300 ((u16 *)(ewram + 0x18300))
+
 extern bool8 sub_80A52C4(u8, u8);
 
-enum
-{
-    MART_TYPE_0, // normal mart
-    MART_TYPE_1,
-    MART_TYPE_2,
-};
-
-struct MartInfo
-{
-    /* 0x0 */ void (* callback) (void);
-    /* 0x4 */ u16 *itemList;
-    /* 0x8 */ u8 itemCount;
-    /* 0x9 */ u8 cursor; // this shows the on-screen true index of the cursor and not the current item selected.
-    /* 0xA */ u8 numChoices;
-    /* 0xB */ u8 choicesAbove;
-    /* 0xC */ u8 martType;
-    /* 0xD */ u8 unkD;
-};
-
 extern struct MartInfo gMartInfo;
-extern struct MenuAction gUnknown_083CC6D0[];
-extern struct YesNoFuncTable gUnknown_083CC708[];
 extern struct ItemSlot gUnknown_02038724[3];
 
 extern u32 gMartTotalCost; // the total cost of a purchase before checking out.
 
 extern u8 ewram[];
 
-extern u8 gUnknown_083CC6E8[];
-extern u8 gUnknown_083CC6EB[];
 extern u8 gBuyMenuFrame_Gfx[];
-
-#define ewram18000 ((u16 *)(ewram + 0x18000))
-#define ewram18300 ((u16 *)(ewram + 0x18300))
-
-// shop view window NPC info enum
-enum
-{
-    MAP_OBJ_ID,
-    X_COORD,
-    Y_COORD,
-    ANIM_NUM
-};
 
 extern u8 gUnknown_02038730;
 extern u8 gUnknown_02038731;
@@ -80,7 +48,6 @@ extern s16 gUnknown_020386A4[][4]; // game freak barely uses 2d arrays wtf?
 
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
-extern u16 gUnknown_083CC710[2];
 
 void sub_80B39D0(int var1, int var2, bool32 hasControlCode);
 void sub_80B3A70(void);
@@ -88,6 +55,38 @@ void sub_80B4378(u8);
 void sub_80B43F0(u8);
 void Task_ExitBuyMenu(u8);
 void sub_80B4470(u8);
+void sub_80B2EFC(u8 taskId);
+void sub_80B2F30(u8 taskId);
+void HandleShopMenuQuit(u8 taskId);
+void sub_80B3BF4(u8 taskId);
+void sub_80B3D7C(u8 taskId);
+
+static const struct MenuAction2 gUnknown_083CC6D0[] =
+{
+    { MartText_Buy, sub_80B2EFC },
+    { MartText_Sell, sub_80B2F30 },
+    { MartText_Quit2, HandleShopMenuQuit },
+};
+
+static const u8 gUnknown_083CC6E8[] = {0, 1, 2}; // BUY SELL EXIT
+static const u8 gUnknown_083CC6EB[] = {0, 2}; // BUY EXIT
+
+static const u16 gUnusedMartArray[] = {0x2, 0x3, 0x4, 0xD, 0x121, 0xE, 0xE, 0xE, 0xE, 0xE, 0xE, 0x0, 0x0};
+
+static const struct YesNoFuncTable gUnknown_083CC708[] =
+{
+    sub_80B3BF4,
+    sub_80B3D7C
+};
+
+static const u16 gUnknown_083CC710[] = {0x41EE, 0x7FFF};
+static const u16 gUnknown_083CC714[] = {0x284, 0x282, 0x280};
+static const u16 gUnknown_083CC71A[] = {0x285, 0x283, 0x281};
+static const u16 gUnknown_083CC720[] = {0x28C, 0x28A, 0x288};
+static const u16 gUnknown_083CC726[] = {0x28D, 0x28B, 0x289};
+static const u16 gUnknown_083CC72C[] = {0x2A0, 0x2A2, 0x2A4};
+static const u16 gUnknown_083CC732[] = {0x2A1, 0x2A3, 0x2A5};
+static const u16 gUnknown_083CC738[] = {0x2A8, 0x2AA, 0x2AC};
 
 u8 CreateShopMenu(u8 martType)
 {
@@ -99,13 +98,13 @@ u8 CreateShopMenu(u8 martType)
     {
         gMartInfo.numChoices = 2;
         MenuDrawTextWindow(0, 0, 10, 7);
-        PrintMenuItemsReordered(1, 1, 3, gUnknown_083CC6D0, (u8 *)gUnknown_083CC6E8);
+        PrintMenuItemsReordered(1, 1, 3, (struct MenuAction *)gUnknown_083CC6D0, (u8 *)gUnknown_083CC6E8);
     }
     else
     {
         gMartInfo.numChoices = 1;
         MenuDrawTextWindow(0, 0, 10, 5);
-        PrintMenuItemsReordered(1, 1, 2, gUnknown_083CC6D0, (u8 *)gUnknown_083CC6EB);
+        PrintMenuItemsReordered(1, 1, 2, (struct MenuAction *)gUnknown_083CC6D0, (u8 *)gUnknown_083CC6EB);
     }
     InitMenu(0, 1, 1, gMartInfo.numChoices + 1, 0, 9); // add 1 for cancel
 
@@ -1259,7 +1258,7 @@ void CreateDecorationShop2Menu(u16 *itemList)
 
 // no.
 __attribute__((naked))
-void sub_80B45B4(u8 taskId, u16 *list, int var3)
+void sub_80B45B4(u8 taskId, const u16 *list, int var3)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1442,14 +1441,6 @@ _080B4700:\n\
     bx r0\n\
     .syntax divided");
 }
-
-extern u16 gUnknown_083CC714[];
-extern u16 gUnknown_083CC71A[];
-extern u16 gUnknown_083CC720[];
-extern u16 gUnknown_083CC726[];
-extern u16 gUnknown_083CC72C[];
-extern u16 gUnknown_083CC732[];
-extern u16 gUnknown_083CC738[];
 
 void sub_80B4710(u8 taskId)
 {

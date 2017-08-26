@@ -1,6 +1,34 @@
 #ifndef GUARD_SHOP_H
 #define GUARD_SHOP_H
 
+enum
+{
+    MART_TYPE_0, // normal mart
+    MART_TYPE_1,
+    MART_TYPE_2,
+};
+
+// shop view window NPC info enum
+enum
+{
+    MAP_OBJ_ID,
+    X_COORD,
+    Y_COORD,
+    ANIM_NUM
+};
+
+struct MartInfo
+{
+    /* 0x0 */ void (* callback) (void);
+    /* 0x4 */ u16 *itemList;
+    /* 0x8 */ u8 itemCount;
+    /* 0x9 */ u8 cursor; // this shows the on-screen true index of the cursor and not the current item selected.
+    /* 0xA */ u8 numChoices;
+    /* 0xB */ u8 choicesAbove;
+    /* 0xC */ u8 martType;
+    /* 0xD */ u8 unkD;
+};
+
 void sub_80B2E38(u8);
 void HandleShopMenuQuit(u8);
 void sub_80B2FA0(u8);

@@ -396,7 +396,7 @@ SECTIONS {
         src/item.o(.rodata);
         data/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
-        data/shop.o(.rodata);
+        src/shop.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
