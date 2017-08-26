@@ -25,7 +25,7 @@ _0811511C:
 	.align 2, 0
 _08115120: .4byte gSharedMem + 0x19000
 	thumb_func_end sub_81150FC
-*/
+
 	thumb_func_start sub_8115124
 sub_8115124: @ 8115124
 	push {r4,lr}
@@ -399,7 +399,7 @@ _0811545C: .4byte 0x0000043c
 _08115460:
 	ldr r0, _08115480 @ =gWindowConfig_81E6C3C
 	bl SetUpWindowConfig
-	ldr r0, _08115484 @ =gWindowConfig_81E6CE4
+	ldr r0, _08115484 @ =InitMenuWindow
 	bl InitMenuWindow
 	ldr r0, _08115488 @ =gUnknown_083F86BC
 	movs r2, 0xE0
@@ -1472,7 +1472,7 @@ _08115D4C: .4byte 0x000003ff
 _08115D50: .4byte gUnknown_083F8C00
 _08115D54: .4byte gSharedMem + 0x19000
 	thumb_func_end sub_8115B58
-
+*/
 	thumb_func_start sub_8115D58
 sub_8115D58: @ 8115D58
 	push {lr}

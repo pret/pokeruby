@@ -102,7 +102,7 @@ u8 sub_81249E4(struct UnkStruct3 *r0)
 	for (i = 0; i < r0->val6; i++)
 	{
 		u32 offset = r0->val5 + i;
-		struct PlttData *faded = (struct PlttData *)&gPlttBufferFaded[offset];
+		struct PlttData *faded =   (struct PlttData *)&gPlttBufferFaded[offset];
 		struct PlttData *unfaded = (struct PlttData *)&gPlttBufferUnfaded[offset];
 		switch(r0->field0)
 		{
