@@ -527,7 +527,7 @@ void sub_80B37EC(void)
 void sub_80B37F8(u8 taskId)
 {
     u16 itemListIndex = gMartInfo.choicesAbove + gMartInfo.cursor;
-    u16 itemId = *(gMartInfo.itemList + itemListIndex);
+    u16 itemId = gMartInfo.itemList[itemListIndex];
     u32 price = (ItemId_GetPrice(itemId) >> GetPriceReduction(1));
 
     sub_80B7A94(gTasks[taskId].data[1] * price, 6, 6, 11);
