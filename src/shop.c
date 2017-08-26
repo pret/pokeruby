@@ -128,7 +128,7 @@ void sub_80B2E38(u8 var)
     {
         if (gMartInfo.cursor) // can move cursor up?
         {
-            PlaySE(0x5);
+            PlaySE(SE_SELECT);
             gMartInfo.cursor = MoveMenuCursor(-1);
         }
     }
@@ -136,13 +136,13 @@ void sub_80B2E38(u8 var)
     {
         if (gMartInfo.cursor != gMartInfo.numChoices) // can move cursor down?
         {
-            PlaySE(0x5);
+            PlaySE(SE_SELECT);
             gMartInfo.cursor = MoveMenuCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(0x5);
+        PlaySE(SE_SELECT);
         if (gMartInfo.martType == MART_TYPE_0)
         {
             gUnknown_083CC6D0[gUnknown_083CC6E8[gMartInfo.cursor]].func(local);
@@ -154,7 +154,7 @@ void sub_80B2E38(u8 var)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(0x5);
+        PlaySE(SE_SELECT);
         HandleShopMenuQuit(local);
     }
 }
@@ -649,7 +649,7 @@ void sub_80B3B80(u8 taskId)
 {
     IncrementGameStat(0x26);
     sub_80B79E0(&gSaveBlock1.money, gMartTotalCost);
-    PlaySE(0x5F);
+    PlaySE(SE_REGI);
     sub_80B7BEC(gSaveBlock1.money, 0, 0);
     gTasks[taskId].func = sub_80B3AEC;
 }
