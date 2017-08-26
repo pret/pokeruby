@@ -78,12 +78,7 @@ gUnknown_030006DC: @ 30006DC
 
 	.include "src/field_effect.o"
 	.include "src/item_menu.o"
-
-@ shop
-
-gMartInfo: @ 3000708
-	.space 0x10
-
+	.include "src/shop.o"
 	.include "src/record_mixing.o"
 	.include "src/tv.o"
 

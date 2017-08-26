@@ -32,20 +32,8 @@
 
 extern bool8 sub_80A52C4(u8, u8);
 
-extern struct MartInfo gMartInfo;
-extern struct ItemSlot gUnknown_02038724[3];
-
-extern u32 gMartTotalCost; // the total cost of a purchase before checking out.
-
 extern u8 ewram[];
-
 extern u8 gBuyMenuFrame_Gfx[];
-
-extern u8 gUnknown_02038730;
-extern u8 gUnknown_02038731;
-
-extern s16 gUnknown_020386A4[][4]; // game freak barely uses 2d arrays wtf?
-
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
 
@@ -61,6 +49,17 @@ void HandleShopMenuQuit(u8 taskId);
 void sub_80B3BF4(u8 taskId);
 void sub_80B3D7C(u8 taskId);
 
+// iwram
+static struct MartInfo gMartInfo;
+
+// ewram
+EWRAM_DATA u32 gMartTotalCost = 0;
+EWRAM_DATA s16 gUnknown_020386A4[16][4] = {0}; // game freak barely uses 2d arrays wtf?
+EWRAM_DATA struct ItemSlot gUnknown_02038724[3] = {0}; // tv.c uses this, so it cant be static
+EWRAM_DATA u8 gUnknown_02038730 = 0;
+EWRAM_DATA u8 gUnknown_02038731 = 0;
+
+// rodata
 static const struct MenuAction2 gUnknown_083CC6D0[] =
 {
     { MartText_Buy, sub_80B2EFC },
