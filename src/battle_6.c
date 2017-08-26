@@ -98,7 +98,7 @@ extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
 extern void oamt_set_x3A_32();
-extern void sub_80318FC();
+extern void BattleLoadPlayerMonSprite();
 extern bool8 IsDoubleBattle(void);
 extern void sub_802D500(void);
 extern void dp11b_obj_free();
@@ -121,7 +121,7 @@ extern void sub_80105EC(struct Sprite *);
 extern void sub_802D274(void);
 extern void sub_802D23C(void);
 extern u8 GetBankIdentity(u8);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern void sub_80313A0(struct Sprite *);
 extern void sub_802D204(void);
 extern u8 sub_8079E90();
@@ -739,7 +739,7 @@ void sub_802F7CC(void)
 
 void PlayerHandleLoadPokeSprite(void)
 {
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gBattleBankFunc[gActiveBank] = bx_0802E404;
 }
@@ -748,7 +748,7 @@ void PlayerHandleSendOutPoke(void)
 {
     sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
     sub_802F934(gActiveBank, gBattleBufferA[gActiveBank][2]);
@@ -800,7 +800,7 @@ void sub_802FB2C(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -829,7 +829,7 @@ void PlayerHandleTrainerThrow(void)
     {
         r7 = 0;
     }
-    sub_8031AF4(gSaveBlock2.playerGender, gActiveBank);
+    LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -845,7 +845,7 @@ void PlayerHandleTrainerThrow(void)
 
 void PlayerHandleTrainerSlide(void)
 {
-    sub_8031AF4(gSaveBlock2.playerGender, gActiveBank);
+    LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -875,7 +875,7 @@ void sub_802FE7C(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4++;
     }
@@ -963,7 +963,7 @@ void sub_8030190(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2 == 1 && ewram17800[gActiveBank].unk0_3 == 0)
+        if (ewram17800[gActiveBank].substituteSprite == 1 && ewram17800[gActiveBank].unk0_3 == 0)
         {
             ewram17800[gActiveBank].unk0_3 = 1;
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
@@ -983,7 +983,7 @@ void sub_8030190(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBank].unk0_2 == 1 && r7 < 2)
+            if (ewram17800[gActiveBank].substituteSprite == 1 && r7 < 2)
             {
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
                 ewram17800[gActiveBank].unk0_3 = 0;
@@ -1357,7 +1357,7 @@ void sub_8030E38(struct Sprite *sprite)
     FreeSpriteOamMatrix(sprite);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
     DestroySprite(sprite);
-    sub_80318FC(&gPlayerParty[gBattlePartyID[r4]], r4);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[r4]], r4);
     StartSpriteAnim(&gSprites[gObjectBankIDs[r4]], 0);
 }
 
@@ -1383,7 +1383,7 @@ void task05_08033660(u8 taskId)
             sub_802F934(gActiveBank, 0);
             gActiveBank ^= 2;
             gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-            sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+            BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             sub_802F934(gActiveBank, 0);
             gActiveBank ^= 2;
         }

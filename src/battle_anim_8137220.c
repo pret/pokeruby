@@ -73,7 +73,7 @@ extern void sub_8043DFC();
 extern bool8 IsDoubleBattle(void);
 extern void c3_0802FDF4(u8);
 extern void sub_802ECF0(void);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
 extern u8 GetBankByPlayerAI(u8);
@@ -981,7 +981,7 @@ void sub_8138CB4(void)
 
 void sub_8138D38(void)
 {
-    sub_8031AF4(2, gActiveBank);
+    LoadPlayerTrainerBankSprite(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -996,7 +996,7 @@ void sub_8138D38(void)
 
 void sub_8138E04(void)
 {
-    sub_8031AF4(2, gActiveBank);
+    LoadPlayerTrainerBankSprite(2, gActiveBank);
     GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -1081,7 +1081,7 @@ void sub_81390D0(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2 == 1)
+        if (ewram17800[gActiveBank].substituteSprite == 1)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -1098,7 +1098,7 @@ void sub_81390D0(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBank].unk0_2 == 1)
+            if (ewram17800[gActiveBank].substituteSprite == 1)
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
             ewram17810[gActiveBank].unk4 = 3;
         }
@@ -1382,7 +1382,7 @@ void sub_81398BC(u8 bank)
 {
     u16 species;
 
-    ewram17800[bank].unk2 = 0;
+    ewram17800[bank].transformedSpecies = 0;
     gBattlePartyID[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);

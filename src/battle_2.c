@@ -1347,8 +1347,8 @@ void sub_8010384(struct Sprite *sprite)
     u16 species;
     u8 yOffset;
 
-    if (ewram17800[r6].unk2 != 0)
-        species = ewram17800[r6].unk2;
+    if (ewram17800[r6].transformedSpecies != 0)
+        species = ewram17800[r6].transformedSpecies;
     else
         species = sprite->data2;
 
