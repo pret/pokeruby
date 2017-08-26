@@ -78,15 +78,6 @@ static const struct YesNoFuncTable gUnknown_083CC708[] =
     sub_80B3D7C
 };
 
-static const u16 gUnknown_083CC710[] = {0x41EE, 0x7FFF};
-static const u16 gUnknown_083CC714[] = {0x284, 0x282, 0x280};
-static const u16 gUnknown_083CC71A[] = {0x285, 0x283, 0x281};
-static const u16 gUnknown_083CC720[] = {0x28C, 0x28A, 0x288};
-static const u16 gUnknown_083CC726[] = {0x28D, 0x28B, 0x289};
-static const u16 gUnknown_083CC72C[] = {0x2A0, 0x2A2, 0x2A4};
-static const u16 gUnknown_083CC732[] = {0x2A1, 0x2A3, 0x2A5};
-static const u16 gUnknown_083CC738[] = {0x2A8, 0x2AA, 0x2AC};
-
 u8 CreateShopMenu(u8 martType)
 {
     ScriptContext2_Enable();
@@ -319,9 +310,8 @@ void BuyMenuDrawGraphics(void)
 
 void sub_80B3240(void)
 {
-    u16 tempArr[2];
+    u16 tempArr[2] = {0x41EE, 0x7FFF};
 
-    memcpy(tempArr, gUnknown_083CC710, sizeof(tempArr));
     LoadPalette(&tempArr[1], 0xD1, 2);
     LoadPalette(&tempArr[0], 0xD8, 2);
 }
@@ -629,15 +619,15 @@ void sub_80B3A70(void)
         if (gMartInfo.martType == MART_TYPE_0)
         {
             sub_8072AB0(ItemId_GetDescription(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]),
-                0x4, 0x68, 0x68, 0x30, MART_TYPE_0);
+                0x4, 0x68, 0x68, 0x30, 0);
         }
         else
             sub_8072AB0(gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].description,
-                0x4, 0x68, 0x68, 0x30, MART_TYPE_0); // huh?? if mart type isnt 0, why assume it?
+                0x4, 0x68, 0x68, 0x30, 0);
     }
     else
     {
-        sub_8072AB0(gOtherText_QuitShopping, 0x4, 0x68, 0x68, 0x30, MART_TYPE_0);
+        sub_8072AB0(gOtherText_QuitShopping, 0x4, 0x68, 0x68, 0x30, 0);
     }
 }
 
@@ -1280,6 +1270,14 @@ void sub_80B45B4(u8 taskId, const s16 *list, u16 c)
         }
     }
 }
+
+static const u16 gUnknown_083CC714[] = {0x284, 0x282, 0x280};
+static const u16 gUnknown_083CC71A[] = {0x285, 0x283, 0x281};
+static const u16 gUnknown_083CC720[] = {0x28C, 0x28A, 0x288};
+static const u16 gUnknown_083CC726[] = {0x28D, 0x28B, 0x289};
+static const u16 gUnknown_083CC72C[] = {0x2A0, 0x2A2, 0x2A4};
+static const u16 gUnknown_083CC732[] = {0x2A1, 0x2A3, 0x2A5};
+static const u16 gUnknown_083CC738[] = {0x2A8, 0x2AA, 0x2AC};
 
 void sub_80B4710(u8 taskId)
 {
