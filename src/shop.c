@@ -726,7 +726,7 @@ void sub_80B3D7C(u8 taskId)
 
 void sub_80B3DC8(u8 taskId)
 {
-    if (sub_80A52C4(taskId, gMartInfo.unkD) == TRUE)
+    if (sub_80A52C4(taskId, gMartInfo.curItemCount) == TRUE)
         sub_80B37F8(taskId);
 
     if (gMain.newKeys & A_BUTTON)
@@ -759,14 +759,55 @@ void sub_80B3EFC(u8 taskId)
 
     var = gSaveBlock1.money / (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1));
     if (var > 99)
-        gMartInfo.unkD = 99;
+        gMartInfo.curItemCount = 99;
     else
-        gMartInfo.unkD = var;
+        gMartInfo.curItemCount = var;
 
     gTasks[taskId].func = sub_80B3DC8;
 }
 
-// the next two functions are strange gMenuWindow functions that manually acccess gMenuWindow.tilemap and do weird pointer arithmetic. i'd rather not deal with these right now.
+#ifdef NONMATCHING
+void sub_80B3F88(void)
+{
+    u16 *r1;
+    u16 *r2;
+    register u8 *r10 asm("r10");
+    s32 i;
+    s32 j;
+    struct Window *r8 = &gMenuWindow;
+    
+    r1 = r8->tilemap;
+    r1 += 0x1EF;
+    r2 = r1;
+    r2 += 64;
+    r10 = r8->tileData;
+    
+    for (i = 0; i < 14; i++)
+    {
+        for (j = 0; j < 15; j++)
+        {
+            if ((r1[j] & 0x3FF) <= r8->tileDataStartOffset + 1)
+                r2[j] = r8->tileDataStartOffset + 1;
+            else
+                r2[j] = r1[j] + 0x3C;
+        }
+        
+        r1 -= 32;
+        r2 -= 32;
+    }
+    
+    {
+        u8 *r1 = r10 + 0x3A20;
+        u8 *r2 = r1 + 0x780;
+        for (i = 0; i < 14; i++)
+        {
+            DmaCopy16(3, r1, r2, 0x1E0);
+            r2 -= 0x3C0;
+            r1 -= 0x3C0;
+        }
+    }
+}
+#else
 __attribute__((naked))
 void sub_80B3F88(void)
 {
@@ -860,7 +901,52 @@ _080B4034: .4byte 0x800000f0\n\
 _080B4038: .4byte 0xfffffc40\n\
     .syntax divided");
 }
+#endif
 
+#ifdef NONMATCHING
+void sub_80B403C(void)
+{
+    u16 *r1;
+    u16 *r2;
+    u8 *r10;
+    s32 i;
+    s32 j;
+    struct Window *r8 = &gMenuWindow;
+    
+    r1 = r8->tilemap;
+    r1 += 0x4F;
+    r2 = r1;
+    r2 += 64;
+    r10 = r8->tileData;
+    
+    for (i = 0; i < 14; i++)
+    {
+        for (j = 0; j < 15; j++)
+        {
+            if ((r1[j] & 0x3FF) <= r8->tileDataStartOffset + 1)
+                r2[j] = r8->tileDataStartOffset + 1;
+            else
+                r2[j] = r1[j] + 0x3C;
+        }
+        
+        r1 += 32;
+        r2 += 32;
+    }
+
+    {
+        register u8 *r1 asm("r1") = r10 + 0x960;
+        register u8 *r2 asm("r2") = r1;
+       
+        r1 += 0x780;
+        for (i = 0; i < 14; i++)
+        {
+            DmaCopy16(3, r1, r2, 0x1E0);
+            r1 += 0x3C0;
+            r2 += 0x3C0;
+        }
+    }
+}
+#else
 __attribute__((naked))
 void sub_80B403C(void)
 {
@@ -953,6 +1039,7 @@ _080B40E0: .4byte 0x040000d4\n\
 _080B40E4: .4byte 0x800000f0\n\
     .syntax divided");
 }
+#endif
 
 void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
 {
@@ -1095,22 +1182,21 @@ void Task_ExitBuyMenu(u8 taskId)
     }
 }
 
-// in the for loop, the loop prologue is not correct and loads choicesabove + cursor immediately instead of setting up the gUnknown_02038724 struct.
-#ifdef NONMATCHING
 void sub_80B4470(u8 taskId)
 {
     u16 i;
 
     for (i = 0; i < 3; i++)
     {
-        if (gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] != gUnknown_02038724[i].itemId || gUnknown_02038724[i].quantity == 0)
-            continue;
-
-        if (gTasks[taskId].data[1] + gUnknown_02038724[i].quantity > 255)
-            gUnknown_02038724[i].quantity = 255;
-        else
-            gUnknown_02038724[i].quantity += gTasks[taskId].data[1];
-        return;
+        if (gUnknown_02038724[i].itemId == gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]
+         && gUnknown_02038724[i].quantity != 0)
+        {
+            if (gUnknown_02038724[i].quantity + gTasks[taskId].data[1] > 255)
+                gUnknown_02038724[i].quantity = 255;
+            else
+                gUnknown_02038724[i].quantity += gTasks[taskId].data[1];
+            return;
+        }
     }
 
     if (gUnknown_02038730 < 3)
@@ -1120,112 +1206,6 @@ void sub_80B4470(u8 taskId)
         gUnknown_02038730++;
     }
 }
-#else
-__attribute__((naked))
-void sub_80B4470(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    movs r2, 0\n\
-    ldr r0, _080B44C8 @ =gUnknown_02038724\n\
-    mov r12, r0\n\
-    ldr r6, _080B44CC @ =gMartInfo\n\
-    mov r8, r12\n\
-    adds r4, r6, 0\n\
-    ldr r1, _080B44D0 @ =gTasks\n\
-    mov r9, r1\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r7, r0, 3\n\
-_080B4492:\n\
-    lsls r0, r2, 2\n\
-    mov r1, r8\n\
-    adds r3, r0, r1\n\
-    ldrb r0, [r4, 0xB]\n\
-    ldrb r1, [r4, 0x9]\n\
-    adds r0, r1\n\
-    ldr r1, [r4, 0x4]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    ldrh r1, [r3]\n\
-    ldrh r0, [r0]\n\
-    cmp r1, r0\n\
-    bne _080B44DC\n\
-    ldrh r0, [r3, 0x2]\n\
-    cmp r0, 0\n\
-    beq _080B44DC\n\
-    adds r2, r0, 0\n\
-    mov r4, r9\n\
-    adds r1, r7, r4\n\
-    movs r4, 0xA\n\
-    ldrsh r0, [r1, r4]\n\
-    adds r0, r2, r0\n\
-    cmp r0, 0xFF\n\
-    ble _080B44D4\n\
-    movs r0, 0xFF\n\
-    strh r0, [r3, 0x2]\n\
-    b _080B451E\n\
-    .align 2, 0\n\
-_080B44C8: .4byte gUnknown_02038724\n\
-_080B44CC: .4byte gMartInfo\n\
-_080B44D0: .4byte gTasks\n\
-_080B44D4:\n\
-    ldrh r0, [r1, 0xA]\n\
-    adds r0, r2, r0\n\
-    strh r0, [r3, 0x2]\n\
-    b _080B451E\n\
-_080B44DC:\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x2\n\
-    bls _080B4492\n\
-    ldr r3, _080B452C @ =gUnknown_02038730\n\
-    ldrb r0, [r3]\n\
-    cmp r0, 0x2\n\
-    bhi _080B451E\n\
-    adds r2, r0, 0\n\
-    lsls r2, 2\n\
-    add r2, r12\n\
-    ldrb r0, [r6, 0xB]\n\
-    ldrb r1, [r6, 0x9]\n\
-    adds r0, r1\n\
-    ldr r1, [r6, 0x4]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r2]\n\
-    ldrb r1, [r3]\n\
-    lsls r1, 2\n\
-    add r1, r12\n\
-    ldr r2, _080B4530 @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r2\n\
-    ldrh r0, [r0, 0xA]\n\
-    strh r0, [r1, 0x2]\n\
-    ldrb r0, [r3]\n\
-    adds r0, 0x1\n\
-    strb r0, [r3]\n\
-_080B451E:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080B452C: .4byte gUnknown_02038730\n\
-_080B4530: .4byte gTasks\n\
-    .syntax divided");
-}
-#endif
 
 void ClearItemPurchases(void)
 {
@@ -1255,190 +1235,50 @@ void CreateDecorationShop2Menu(u16 *itemList)
     SetShopMenuCallback(EnableBothScriptContexts);
 }
 
-// no.
-__attribute__((naked))
-void sub_80B45B4(u8 taskId, const u16 *list, int var3)
+void sub_80B45B4(u8 taskId, const s16 *list, u16 c)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    mov r9, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    mov r10, r2\n\
-    ldr r2, _080B4648 @ =gTasks\n\
-    lsls r1, r0, 2\n\
-    adds r1, r0\n\
-    lsls r1, 3\n\
-    adds r1, r2\n\
-    ldrh r0, [r1, 0x10]\n\
-    subs r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldrh r0, [r1, 0x12]\n\
-    subs r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    ldrh r4, [r1, 0xA]\n\
-    movs r2, 0xC\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r0, 0\n\
-    bne _080B4678\n\
-    movs r2, 0\n\
-    lsls r5, 16\n\
-    str r5, [sp, 0xC]\n\
-    lsls r0, r3, 16\n\
-    lsls r1, r4, 16\n\
-    asrs r0, 16\n\
-    str r0, [sp]\n\
-    asrs r1, 16\n\
-    str r1, [sp, 0x4]\n\
-    lsls r0, r1, 1\n\
-    mov r1, r9\n\
-    adds r7, r0, r1\n\
-_080B4608:\n\
-    movs r4, 0\n\
-    lsls r2, 16\n\
-    mov r8, r2\n\
-    asrs r0, r2, 16\n\
-    ldr r2, [sp]\n\
-    adds r6, r2, r0\n\
-_080B4614:\n\
-    ldr r0, [sp, 0xC]\n\
-    asrs r1, r0, 16\n\
-    lsls r4, 16\n\
-    asrs r0, r4, 16\n\
-    adds r5, r1, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridGetMetatileIdAt\n\
-    movs r2, 0\n\
-    ldrsh r1, [r7, r2]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r1, r0\n\
-    bne _080B465C\n\
-    ldr r0, [sp, 0x4]\n\
-    cmp r0, 0x2\n\
-    beq _080B464C\n\
-    ldrh r0, [r7, 0x2]\n\
-    mov r2, r10\n\
-    orrs r2, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridSetMetatileIdAt\n\
-    b _080B465C\n\
-    .align 2, 0\n\
-_080B4648: .4byte gTasks\n\
-_080B464C:\n\
-    mov r1, r9\n\
-    ldrh r0, [r1]\n\
-    mov r2, r10\n\
-    orrs r2, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridSetMetatileIdAt\n\
-_080B465C:\n\
-    movs r2, 0x80\n\
-    lsls r2, 9\n\
-    adds r0, r4, r2\n\
-    lsrs r4, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    ble _080B4614\n\
-    adds r0, r2, 0\n\
-    add r0, r8\n\
-    lsrs r2, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    ble _080B4608\n\
-    b _080B4700\n\
-_080B4678:\n\
-    movs r2, 0\n\
-    lsls r5, 16\n\
-    str r5, [sp, 0xC]\n\
-    lsls r0, r3, 16\n\
-    lsls r1, r4, 16\n\
-    asrs r0, 16\n\
-    str r0, [sp, 0x8]\n\
-    asrs r7, r1, 16\n\
-_080B4688:\n\
-    movs r4, 0\n\
-    lsls r2, 16\n\
-    mov r8, r2\n\
-    asrs r0, r2, 16\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r6, r1, r0\n\
-_080B4694:\n\
-    ldr r2, [sp, 0xC]\n\
-    asrs r1, r2, 16\n\
-    lsls r4, 16\n\
-    asrs r0, r4, 16\n\
-    adds r5, r1, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridGetMetatileIdAt\n\
-    movs r1, 0x2\n\
-    subs r1, r7\n\
-    lsls r1, 1\n\
-    add r1, r9\n\
-    movs r2, 0\n\
-    ldrsh r1, [r1, r2]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r1, r0\n\
-    bne _080B46E6\n\
-    cmp r7, 0x2\n\
-    beq _080B46D6\n\
-    movs r0, 0x1\n\
-    subs r0, r7\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    ldrh r0, [r0]\n\
-    mov r2, r10\n\
-    orrs r2, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridSetMetatileIdAt\n\
-    b _080B46E6\n\
-_080B46D6:\n\
-    mov r1, r9\n\
-    ldrh r0, [r1, 0x4]\n\
-    mov r2, r10\n\
-    orrs r2, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r6, 0\n\
-    bl MapGridSetMetatileIdAt\n\
-_080B46E6:\n\
-    movs r2, 0x80\n\
-    lsls r2, 9\n\
-    adds r0, r4, r2\n\
-    lsrs r4, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    ble _080B4694\n\
-    adds r0, r2, 0\n\
-    add r0, r8\n\
-    lsrs r2, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    ble _080B4688\n\
-_080B4700:\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
+    s16 r5 = gTasks[taskId].data[4] - 1;
+    s16 r3 = gTasks[taskId].data[5] - 1;
+    s16 r4 = gTasks[taskId].data[1];
+    s16 y;
+    s16 x;
+    
+    if (gTasks[taskId].data[2] == 0)
+    {
+        for (y = 0; y < 3; y++)
+        {
+            for (x = 0; x < 3; x++)
+            {
+                s16 metatileId = MapGridGetMetatileIdAt(r5 + x, r3 + y);
+                
+                if (list[r4] == metatileId)
+                {
+                    if (r4 != 2)
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[r4 + 1]);
+                    else
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[0]);
+                }
+            }
+        }
+    }
+    else
+    {
+        for (y = 0; y < 3; y++)
+        {
+            for (x = 0; x < 3; x++)
+            {
+                s16 metatileId = MapGridGetMetatileIdAt(r5 + x, r3 + y);
+                
+                if (list[2 - r4] == metatileId)
+                {
+                    if (r4 != 2)
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[1 - r4]);
+                    else
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[2]);
+                }
+            }
+        }
+    }
 }
 
 void sub_80B4710(u8 taskId)
