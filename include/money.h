@@ -7,7 +7,7 @@ void sub_80B79E0(u32 *, u32);
 void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2);
 void sub_80B7A94(u32 arg0, u8 arg1, u8 x, u8 y);
 void sub_80B7AEC(u32, u8 left, u8 top);
-void sub_80B7B34(void);
+void sub_80B7B34(u8, u8, int);
 void sub_80B7BEC(u32, u8, u8);
 void sub_80B7C14(u32, u8, u8);
 void RemoveMoneyLabelObject(u8, u8);
