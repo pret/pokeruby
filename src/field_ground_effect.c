@@ -30,6 +30,7 @@ void GroundEffect_JumpLandingDust(struct MapObject *mapObj, struct Sprite *sprit
 void GroundEffect_ShortGrass(struct MapObject *mapObj, struct Sprite *sprite);
 void GroundEffect_HotSprings(struct MapObject *mapObj, struct Sprite *sprite);
 void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite);
+u8 GetReflectionTypeByMetatileBehavior(u32 behavior);
 
 static const u32 sReflectionFlags[] = { 0x00000020, 0x00000010 };
 
@@ -348,7 +349,6 @@ void GetGroundEffectFlags_JumpLanding(struct MapObject *mapObj, u32 *flags)
     }
 }
 
-#ifdef NONMATCHING
 u8 FieldObjectCheckForReflectiveSurface(struct MapObject *mapObj)
 {
     const struct MapObjectGraphicsInfo *info = GetFieldObjectGraphicsInfo(mapObj->graphicsId);
@@ -360,223 +360,30 @@ u8 FieldObjectCheckForReflectiveSurface(struct MapObject *mapObj)
     s16 j;
     u8 result;
     u8 b;
-    register u32 a asm("r10");
-    register s32 aa asm("r7");
+    s16 one;
 
-    for (i = 0; i < height; i++)
+#define RETURN_REFLECTION_TYPE_AT(x, y)              \
+    b = MapGridGetMetatileBehaviorAt(x, y);          \
+    result = GetReflectionTypeByMetatileBehavior(b); \
+    if (result != 0)                                 \
+        return result;
+
+    for (i = 0, one = 1; i < height; i++)
     {
-        a = 1;
-        b = MapGridGetMetatileBehaviorAt(mapObj->coords2.x, mapObj->coords2.y + a + i);
-        result = GetReflectionTypeByMetatileBehavior(b);
-
-        if (result)
-            return result;
-
-        b = MapGridGetMetatileBehaviorAt(mapObj->coords3.x, mapObj->coords3.y + a + i);
-        result = GetReflectionTypeByMetatileBehavior(b);
-
-        if (result)
-            return result;
-
+        RETURN_REFLECTION_TYPE_AT(mapObj->coords2.x, mapObj->coords2.y + one + i)
+        RETURN_REFLECTION_TYPE_AT(mapObj->coords3.x, mapObj->coords3.y + one + i)
         for (j = 1; j < width; j++)
         {
-            aa = 1;
-
-            b = MapGridGetMetatileBehaviorAt(mapObj->coords2.x + j, mapObj->coords2.y + aa + i);
-            result = GetReflectionTypeByMetatileBehavior(b);
-
-            if (result)
-                return result;
-
-            b = MapGridGetMetatileBehaviorAt(mapObj->coords2.x - j, mapObj->coords2.y + aa + i);
-            result = GetReflectionTypeByMetatileBehavior(b);
-
-            if (result)
-                return result;
-
-            b = MapGridGetMetatileBehaviorAt(mapObj->coords3.x + j, mapObj->coords3.y + aa + i);
-            result = GetReflectionTypeByMetatileBehavior(b);
-
-            if (result)
-                return result;
-
-            b = MapGridGetMetatileBehaviorAt(mapObj->coords3.x - j, mapObj->coords3.y + aa + i);
-            result = GetReflectionTypeByMetatileBehavior(b);
-
-            if (result)
-                return result;
+            RETURN_REFLECTION_TYPE_AT(mapObj->coords2.x + j, mapObj->coords2.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(mapObj->coords2.x - j, mapObj->coords2.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(mapObj->coords3.x + j, mapObj->coords3.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(mapObj->coords3.x - j, mapObj->coords3.y + one + i)
         }
     }
-
     return 0;
+
+#undef RETURN_REFLECTION_TYPE_AT
 }
-#else
-__attribute__((naked)) u8 FieldObjectCheckForReflectiveSurface(struct MapObject *mapObj)
-{
-    asm(".syntax unified\n\
-  push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x8\n\
-	adds r5, r0, 0\n\
-	ldrb r0, [r5, 0x5]\n\
-	bl GetFieldObjectGraphicsInfo\n\
-	movs r2, 0x8\n\
-	ldrsh r1, [r0, r2]\n\
-	adds r1, 0x8\n\
-	lsls r1, 12\n\
-	lsrs r1, 16\n\
-	str r1, [sp]\n\
-	movs r1, 0xA\n\
-	ldrsh r0, [r0, r1]\n\
-	adds r0, 0x8\n\
-	lsls r0, 12\n\
-	movs r4, 0\n\
-	lsrs r2, r0, 16\n\
-	str r2, [sp, 0x4]\n\
-	asrs r0, 16\n\
-	cmp r4, r0\n\
-	blt _08063A7A\n\
-	b _08063B80\n\
-_08063A7A:\n\
-	movs r0, 0x1\n\
-	mov r10, r0\n\
-_08063A7E:\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r5, r1]\n\
-	movs r2, 0x12\n\
-	ldrsh r1, [r5, r2]\n\
-	add r1, r10\n\
-	lsls r4, 16\n\
-	asrs r6, r4, 16\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r4\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	movs r1, 0x14\n\
-	ldrsh r0, [r5, r1]\n\
-	movs r2, 0x16\n\
-	ldrsh r1, [r5, r2]\n\
-	add r1, r10\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	movs r2, 0x1\n\
-	ldr r1, [sp]\n\
-	lsls r0, r1, 16\n\
-	asrs r1, r0, 16\n\
-	mov r8, r0\n\
-	cmp r2, r1\n\
-	bge _08063B6E\n\
-	movs r0, 0x80\n\
-	lsls r0, 9\n\
-	asrs r7, r0, 16\n\
-_08063AD8:\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r5, r1]\n\
-	lsls r1, r2, 16\n\
-	asrs r4, r1, 16\n\
-	adds r0, r4\n\
-	movs r2, 0x12\n\
-	ldrsh r1, [r5, r2]\n\
-	adds r1, r7\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r5, r1]\n\
-	subs r0, r4\n\
-	movs r2, 0x12\n\
-	ldrsh r1, [r5, r2]\n\
-	adds r1, r7\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	movs r1, 0x14\n\
-	ldrsh r0, [r5, r1]\n\
-	adds r0, r4\n\
-	movs r2, 0x16\n\
-	ldrsh r1, [r5, r2]\n\
-	adds r1, r7\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	movs r1, 0x14\n\
-	ldrsh r0, [r5, r1]\n\
-	subs r0, r4\n\
-	movs r2, 0x16\n\
-	ldrsh r1, [r5, r2]\n\
-	adds r1, r7\n\
-	adds r1, r6\n\
-	bl MapGridGetMetatileBehaviorAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl GetReflectionTypeByMetatileBehavior\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _08063B82\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r0, r8\n\
-	blt _08063AD8\n\
-_08063B6E:\n\
-	movs r1, 0x80\n\
-	lsls r1, 9\n\
-	add r1, r9\n\
-	lsrs r4, r1, 16\n\
-	ldr r2, [sp, 0x4]\n\
-	lsls r0, r2, 16\n\
-	cmp r1, r0\n\
-	bge _08063B80\n\
-	b _08063A7E\n\
-_08063B80:\n\
-	movs r0, 0\n\
-_08063B82:\n\
-	add sp, 0x8\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-.syntax divided\n");
-}
-#endif
 
 u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
@@ -707,8 +514,6 @@ bool8 AreZCoordsCompatible(u8 a, u8 b)
     return TRUE;
 }
 
-#define READ8(ptr, s, member) ((ptr)[offsetof(s, member)])
-
 void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u8 *ptr;
@@ -721,8 +526,8 @@ void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *spri
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
-                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+                         | (u8)gSaveBlock1.location.mapGroup;
 
     gUnknown_0202FF84[7] = 1;
     FieldEffectStart(4);
@@ -740,8 +545,8 @@ void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
-                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+                         | (u8)gSaveBlock1.location.mapGroup;
 
     gUnknown_0202FF84[7] = 0;
     FieldEffectStart(4);
@@ -759,8 +564,8 @@ void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
-                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+                         | (u8)gSaveBlock1.location.mapGroup;
 
     gUnknown_0202FF84[7] = 1;
     FieldEffectStart(17);
@@ -778,8 +583,8 @@ void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gUnknown_0202FF84[6] = READ8(ptr, struct SaveBlock1, location.mapNum) << 8
-                         | READ8(ptr, struct SaveBlock1, location.mapGroup);
+    gUnknown_0202FF84[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+                         | (u8)gSaveBlock1.location.mapGroup;
 
     gUnknown_0202FF84[7] = 0;
     FieldEffectStart(17);
