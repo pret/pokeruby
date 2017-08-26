@@ -11,9 +11,9 @@ void BuyMenuDrawMapGraphics(void);
 void sub_80B3764(int, int);
 void sub_80B37EC(void);
 void sub_80B40E8(u8);
-void CreatePokemartMenu(void *);
-void CreateDecorationShop1Menu(void *);
-void CreateDecorationShop2Menu(void *);
+void CreatePokemartMenu(u16 *);
+void CreateDecorationShop1Menu(u16 *);
+void CreateDecorationShop2Menu(u16 *);
 void sub_80B356C(void);
 void sub_80B368C(void);
 

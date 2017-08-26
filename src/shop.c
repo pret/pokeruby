@@ -25,6 +25,7 @@
 #include "songs.h"
 #include "rom4.h"
 #include "decoration_inventory.h"
+#include "field_camera.h"
 
 extern bool8 sub_80A52C4(u8, u8);
 
@@ -73,6 +74,7 @@ enum
 };
 
 extern u8 gUnknown_02038730;
+extern u8 gUnknown_02038731;
 
 extern s16 gUnknown_020386A4[][4]; // game freak barely uses 2d arrays wtf?
 
@@ -1226,3 +1228,296 @@ _080B4530: .4byte gTasks\n\
     .syntax divided");
 }
 #endif
+
+void ClearItemPurchases(void)
+{
+    gUnknown_02038730 = 0;
+    ClearItemSlots(gUnknown_02038724, 3);
+}
+
+void CreatePokemartMenu(u16 *itemList)
+{
+    CreateShopMenu(MART_TYPE_0);
+    SetShopItemsForSale(itemList);
+    ClearItemPurchases();
+    SetShopMenuCallback(EnableBothScriptContexts);
+}
+
+void CreateDecorationShop1Menu(u16 *itemList)
+{
+    CreateShopMenu(MART_TYPE_1);
+    SetShopItemsForSale(itemList);
+    SetShopMenuCallback(EnableBothScriptContexts);
+}
+
+void CreateDecorationShop2Menu(u16 *itemList)
+{
+    CreateShopMenu(MART_TYPE_2);
+    SetShopItemsForSale(itemList);
+    SetShopMenuCallback(EnableBothScriptContexts);
+}
+
+// no.
+__attribute__((naked))
+void sub_80B45B4(u8 taskId, u16 *list, int var3)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x10\n\
+    mov r9, r1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    mov r10, r2\n\
+    ldr r2, _080B4648 @ =gTasks\n\
+    lsls r1, r0, 2\n\
+    adds r1, r0\n\
+    lsls r1, 3\n\
+    adds r1, r2\n\
+    ldrh r0, [r1, 0x10]\n\
+    subs r0, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    ldrh r0, [r1, 0x12]\n\
+    subs r0, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    ldrh r4, [r1, 0xA]\n\
+    movs r2, 0xC\n\
+    ldrsh r0, [r1, r2]\n\
+    cmp r0, 0\n\
+    bne _080B4678\n\
+    movs r2, 0\n\
+    lsls r5, 16\n\
+    str r5, [sp, 0xC]\n\
+    lsls r0, r3, 16\n\
+    lsls r1, r4, 16\n\
+    asrs r0, 16\n\
+    str r0, [sp]\n\
+    asrs r1, 16\n\
+    str r1, [sp, 0x4]\n\
+    lsls r0, r1, 1\n\
+    mov r1, r9\n\
+    adds r7, r0, r1\n\
+_080B4608:\n\
+    movs r4, 0\n\
+    lsls r2, 16\n\
+    mov r8, r2\n\
+    asrs r0, r2, 16\n\
+    ldr r2, [sp]\n\
+    adds r6, r2, r0\n\
+_080B4614:\n\
+    ldr r0, [sp, 0xC]\n\
+    asrs r1, r0, 16\n\
+    lsls r4, 16\n\
+    asrs r0, r4, 16\n\
+    adds r5, r1, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridGetMetatileIdAt\n\
+    movs r2, 0\n\
+    ldrsh r1, [r7, r2]\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    cmp r1, r0\n\
+    bne _080B465C\n\
+    ldr r0, [sp, 0x4]\n\
+    cmp r0, 0x2\n\
+    beq _080B464C\n\
+    ldrh r0, [r7, 0x2]\n\
+    mov r2, r10\n\
+    orrs r2, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridSetMetatileIdAt\n\
+    b _080B465C\n\
+    .align 2, 0\n\
+_080B4648: .4byte gTasks\n\
+_080B464C:\n\
+    mov r1, r9\n\
+    ldrh r0, [r1]\n\
+    mov r2, r10\n\
+    orrs r2, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridSetMetatileIdAt\n\
+_080B465C:\n\
+    movs r2, 0x80\n\
+    lsls r2, 9\n\
+    adds r0, r4, r2\n\
+    lsrs r4, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x2\n\
+    ble _080B4614\n\
+    adds r0, r2, 0\n\
+    add r0, r8\n\
+    lsrs r2, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x2\n\
+    ble _080B4608\n\
+    b _080B4700\n\
+_080B4678:\n\
+    movs r2, 0\n\
+    lsls r5, 16\n\
+    str r5, [sp, 0xC]\n\
+    lsls r0, r3, 16\n\
+    lsls r1, r4, 16\n\
+    asrs r0, 16\n\
+    str r0, [sp, 0x8]\n\
+    asrs r7, r1, 16\n\
+_080B4688:\n\
+    movs r4, 0\n\
+    lsls r2, 16\n\
+    mov r8, r2\n\
+    asrs r0, r2, 16\n\
+    ldr r1, [sp, 0x8]\n\
+    adds r6, r1, r0\n\
+_080B4694:\n\
+    ldr r2, [sp, 0xC]\n\
+    asrs r1, r2, 16\n\
+    lsls r4, 16\n\
+    asrs r0, r4, 16\n\
+    adds r5, r1, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridGetMetatileIdAt\n\
+    movs r1, 0x2\n\
+    subs r1, r7\n\
+    lsls r1, 1\n\
+    add r1, r9\n\
+    movs r2, 0\n\
+    ldrsh r1, [r1, r2]\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    cmp r1, r0\n\
+    bne _080B46E6\n\
+    cmp r7, 0x2\n\
+    beq _080B46D6\n\
+    movs r0, 0x1\n\
+    subs r0, r7\n\
+    lsls r0, 1\n\
+    add r0, r9\n\
+    ldrh r0, [r0]\n\
+    mov r2, r10\n\
+    orrs r2, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridSetMetatileIdAt\n\
+    b _080B46E6\n\
+_080B46D6:\n\
+    mov r1, r9\n\
+    ldrh r0, [r1, 0x4]\n\
+    mov r2, r10\n\
+    orrs r2, r0\n\
+    adds r0, r5, 0\n\
+    adds r1, r6, 0\n\
+    bl MapGridSetMetatileIdAt\n\
+_080B46E6:\n\
+    movs r2, 0x80\n\
+    lsls r2, 9\n\
+    adds r0, r4, r2\n\
+    lsrs r4, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x2\n\
+    ble _080B4694\n\
+    adds r0, r2, 0\n\
+    add r0, r8\n\
+    lsrs r2, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x2\n\
+    ble _080B4688\n\
+_080B4700:\n\
+    add sp, 0x10\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided");
+}
+
+extern u16 gUnknown_083CC714[];
+extern u16 gUnknown_083CC71A[];
+extern u16 gUnknown_083CC720[];
+extern u16 gUnknown_083CC726[];
+extern u16 gUnknown_083CC72C[];
+extern u16 gUnknown_083CC732[];
+extern u16 gUnknown_083CC738[];
+
+void sub_80B4710(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    data[3] = 1;
+
+    switch(data[0])
+    {
+        case 0:
+            sub_80B45B4(taskId, gUnknown_083CC714, 0);
+            break;
+        case 1:
+            sub_80B45B4(taskId, gUnknown_083CC71A, 0);
+            break;
+        case 2:
+            sub_80B45B4(taskId, gUnknown_083CC720, 0xC00);
+            break;
+        case 3:
+            sub_80B45B4(taskId, gUnknown_083CC726, 0);
+            break;
+        case 4:
+            sub_80B45B4(taskId, gUnknown_083CC72C, 0xC00);
+            break;
+        case 5:
+            sub_80B45B4(taskId, gUnknown_083CC732, 0);
+            break;
+        case 6:
+            sub_80B45B4(taskId, gUnknown_083CC738, 0);
+            break;
+    }
+
+    data[0] = (data[0] + 1) & 7;
+    if(!data[0])
+    {
+        DrawWholeMapView();
+        data[1] = (data[1] + 1) % 3;
+        data[3] = 0;
+    }
+}
+
+u8 sub_80B47D8(u16 var)
+{
+    u8 taskId = CreateTask(sub_80B4710, 0);
+    s16 *data = gTasks[taskId].data;
+
+    PlayerGetDestCoords(&data[4], &data[5]);
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = var;
+    sub_80B4710(taskId);
+    return taskId;
+}
+
+void sub_80B4824(u8 var)
+{
+    gUnknown_02038731 = sub_80B47D8(var);
+}
+
+void sub_80B483C(void)
+{
+    DestroyTask(gUnknown_02038731);
+}
+
+bool8 sub_80B4850(void)
+{
+    if(gTasks[gUnknown_02038731].data[3] == 0 && gTasks[gUnknown_02038731].data[1] == 2)
+        return FALSE;
+    else
+        return TRUE;
+}
