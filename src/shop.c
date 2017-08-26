@@ -643,12 +643,12 @@ void sub_80B3A70(void)
 
 void sub_80B3AEC(u8 taskId)
 {
-    if(gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
         sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0); // huh???
         PlaySE(SE_SELECT);
 
-        if(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] == ITEM_POKE_BALL && gTasks[taskId].data[1] >= 10 && AddBagItem(ITEM_PREMIER_BALL, 1) == TRUE)
+        if (gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] == ITEM_POKE_BALL && gTasks[taskId].data[1] >= 10 && AddBagItem(ITEM_PREMIER_BALL, 1) == TRUE)
             DisplayItemMessageOnField(taskId, gOtherText_FreePremierBall, sub_80B4378, 0xC3E1);
         else
             sub_80B4378(taskId);
@@ -677,11 +677,11 @@ void sub_80B3BF4(u8 taskId)
     sub_80B379C();
     sub_80B3420();
 
-    if(IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+    if (IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
     {
-        if(gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0)
         {
-            if(AddBagItem(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gTasks[taskId].data[1]))
+            if (AddBagItem(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gTasks[taskId].data[1]))
             {
                 DisplayItemMessageOnField(taskId, gOtherText_HereYouGo, sub_80B3B80, 0xC3E1);
                 sub_80B4470(taskId);
@@ -691,9 +691,9 @@ void sub_80B3BF4(u8 taskId)
         }
         else // a normal mart is only type 0, so types 1 and 2 are decoration marts.
         {
-            if(IsThereStorageSpaceForDecoration(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]))
+            if (IsThereStorageSpaceForDecoration(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]))
             {
-                if(gMartInfo.martType == MART_TYPE_1)
+                if (gMartInfo.martType == MART_TYPE_1)
                     DisplayItemMessageOnField(taskId, gOtherText_HereYouGo2, sub_80B3B80, 0xC3E1);
                 else
                     DisplayItemMessageOnField(taskId, gOtherText_HereYouGo3, sub_80B3B80, 0xC3E1);
@@ -726,10 +726,10 @@ void sub_80B3D7C(u8 taskId)
 
 void sub_80B3DC8(u8 taskId)
 {
-    if(sub_80A52C4(taskId, gMartInfo.unkD) == TRUE)
+    if (sub_80A52C4(taskId, gMartInfo.unkD) == TRUE)
         sub_80B37F8(taskId);
 
-    if(gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
         gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)) * gTasks[taskId].data[1]; // set total cost of your purchase.
         MenuZeroFillWindowRect(0, 0xA, 0xD, 0xD);
@@ -742,7 +742,7 @@ void sub_80B3DC8(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe);
         DisplayItemMessageOnField(taskId, gStringVar4, sub_80B3D38, 0xC3E1);
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0);
         sub_80B4378(taskId);
@@ -758,7 +758,7 @@ void sub_80B3EFC(u8 taskId)
     sub_80B37F8(taskId);
 
     var = gSaveBlock1.money / (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1));
-    if(var > 99)
+    if (var > 99)
         gMartInfo.unkD = 99;
     else
         gMartInfo.unkD = var;
@@ -956,13 +956,13 @@ _080B40E4: .4byte 0x800000f0\n\
 
 void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
-        if((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP) // only up can be pressed
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP) // only up can be pressed
         {
-            if(gMartInfo.cursor == 0)
+            if (gMartInfo.cursor == 0)
             {
-                if(gMartInfo.choicesAbove == 0) // if there are no choices above, dont bother
+                if (gMartInfo.choicesAbove == 0) // if there are no choices above, dont bother
                     return;
 
                 PlaySE(SE_SELECT);
@@ -979,11 +979,11 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 sub_80B3A70();
             }
         }
-        else if((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN) // only down can be pressed
+        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN) // only down can be pressed
         {
-            if(gMartInfo.cursor == 7) // are you at the bottom of the menu?
+            if (gMartInfo.cursor == 7) // are you at the bottom of the menu?
             {
-                if(gMartInfo.choicesAbove + gMartInfo.cursor == gMartInfo.itemCount) // are you at cancel?
+                if (gMartInfo.choicesAbove + gMartInfo.cursor == gMartInfo.itemCount) // are you at cancel?
                     return;
 
                 PlaySE(SE_SELECT);
@@ -993,18 +993,18 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 sub_80B3A70();
                 sub_80B32A4();
             }
-            else if(gMartInfo.cursor != gMartInfo.itemCount)
+            else if (gMartInfo.cursor != gMartInfo.itemCount)
             {
                 PlaySE(SE_SELECT);
                 gMartInfo.cursor = MoveMenuCursor(1);
                 sub_80B3A70();
             }
         }
-        else if(gMain.newKeys & A_BUTTON)
+        else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
 
-            if(gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount) // did you not hit CANCEL?
+            if (gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount) // did you not hit CANCEL?
             {
                 PauseVerticalScrollIndicator(0);
                 PauseVerticalScrollIndicator(1);
@@ -1013,10 +1013,10 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 HandleDestroyMenuCursors();
                 MenuZeroFillWindowRect(0, 0xC, 0xD, 0x13);
 
-                if(gMartInfo.martType == MART_TYPE_0)
+                if (gMartInfo.martType == MART_TYPE_0)
                 {
                     gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)); // set 1x price
-                    if(!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+                    if (!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
                     {
                         DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1); // tail merge
                     }
@@ -1031,7 +1031,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 {
                     gMartTotalCost = gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].price;
 
-                    if(!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
+                    if (!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
                     {
                         DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, sub_80B3BD0, 0xC3E1); // tail merge
                     }
@@ -1040,7 +1040,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                         StringCopy(gStringVar1, gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].name);
                         ConvertIntToDecimalStringN(gStringVar2, gMartTotalCost, 0, 0x8);
 
-                        if(gMartInfo.martType == MART_TYPE_1)
+                        if (gMartInfo.martType == MART_TYPE_1)
                         {
                             StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe2);
                         }
@@ -1055,7 +1055,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
             else
                 sub_80B43F0(taskId);
         }
-        else if(gMain.newKeys & B_BUTTON) // go back to buy/sell/exit menu
+        else if (gMain.newKeys & B_BUTTON) // go back to buy/sell/exit menu
         {
             PlaySE(SE_SELECT);
             sub_80B43F0(taskId);
@@ -1086,7 +1086,7 @@ void sub_80B43F0(u8 taskId)
 
 void Task_ExitBuyMenu(u8 taskId)
 {
-    if(!gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         RemoveMoneyLabelObject(0, 0);
         BuyMenuFreeMemory();
@@ -1101,19 +1101,19 @@ void sub_80B4470(u8 taskId)
 {
     u16 i;
 
-    for(i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
-        if(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] != gUnknown_02038724[i].itemId || gUnknown_02038724[i].quantity == 0)
+        if (gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor] != gUnknown_02038724[i].itemId || gUnknown_02038724[i].quantity == 0)
             continue;
 
-        if(gTasks[taskId].data[1] + gUnknown_02038724[i].quantity > 255)
+        if (gTasks[taskId].data[1] + gUnknown_02038724[i].quantity > 255)
             gUnknown_02038724[i].quantity = 255;
         else
             gUnknown_02038724[i].quantity += gTasks[taskId].data[1];
         return;
     }
 
-    if(gUnknown_02038730 < 3)
+    if (gUnknown_02038730 < 3)
     {
         gUnknown_02038724[gUnknown_02038730].itemId = gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor];
         gUnknown_02038724[gUnknown_02038730].quantity = gTasks[taskId].data[1];
@@ -1447,7 +1447,7 @@ void sub_80B4710(u8 taskId)
 
     data[3] = 1;
 
-    switch(data[0])
+    switch (data[0])
     {
         case 0:
             sub_80B45B4(taskId, gUnknown_083CC714, 0);
@@ -1473,7 +1473,7 @@ void sub_80B4710(u8 taskId)
     }
 
     data[0] = (data[0] + 1) & 7;
-    if(!data[0])
+    if (!data[0])
     {
         DrawWholeMapView();
         data[1] = (data[1] + 1) % 3;
@@ -1506,7 +1506,7 @@ void sub_80B483C(void)
 
 bool8 sub_80B4850(void)
 {
-    if(gTasks[gUnknown_02038731].data[3] == 0 && gTasks[gUnknown_02038731].data[1] == 2)
+    if (gTasks[gUnknown_02038731].data[3] == 0 && gTasks[gUnknown_02038731].data[1] == 2)
         return FALSE;
     else
         return TRUE;
