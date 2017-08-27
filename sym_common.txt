@@ -117,20 +117,7 @@ gUnknown_03004824: @ 3004824
 gUnknown_03004828: @ 3004828
 	.space 0x8
 
-@ berry_blender
-
-gUnknown_03004830: @ 3004830
-	.space 0x4
-
-gUnknown_03004834: @ 3004834
-	.space 0xC
-
-gUnknown_03004840: @ 3004840
-	.space 0x14
-
-gUnknown_03004854: @ 3004854
-	.space 0x4
-
+	.include "scene/berry_blender.o"
 	.include "misc/rom4.o"
 	.include "field/fieldmap.o"
 	.include "field/field_camera.o"
@@ -287,40 +274,6 @@ gUnknown_03005F10: @ 3005F10
 gUnknown_03005F14: @ 3005F14
 	.space 0xC
 
-@ pokeblock_feed
-
-gUnknown_03005F20: @ 3005F20
-	.space 0x4
-
-gUnknown_03005F24: @ 3005F24
-	.space 0x4
-
-gUnknown_03005F28: @ 3005F28
-	.space 0x4
-
-gUnknown_03005F2C: @ 3005F2C
-	.space 0x4
-
-gUnknown_03005F30: @ 3005F30
-	.space 0x4
-
-gUnknown_03005F34: @ 3005F34
-	.space 0x8
-
-gUnknown_03005F3C: @ 3005F3C
-	.space 0x4
-
-gUnknown_03005F40: @ 3005F40
-	.space 0x10
-
-gUnknown_03005F50: @ 3005F50
-	.space 0x44
-
-gUnknown_03005F94: @ 3005F94
-	.space 0xC
-
-gUnknown_03005FA0: @ 3005FA0
-	.space 0x30
-
+	.include "pokemon/pokeblock_feed.o"
 	.include "libs/m4a_2.o"
 	.include "libs/agb_flash.o"

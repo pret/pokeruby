@@ -308,20 +308,7 @@ gUnknown_02029700: @ 2029700
 gUnknown_020297D8: @ 20297D8
 	.space 0x4
 
-@ berry_blender
-
-gUnknown_020297DC: @ 20297DC
-	.space 0x4
-
-gUnknown_020297E0: @ 20297E0
-	.space 0x4
-
-gUnknown_020297E4: @ 20297E4
-	.space 0x4
-
-gUnknown_020297E8: @ 20297E8
-	.space 0x4
-
+	.include "src/scene/berry_blender.o"
 	.include "src/scene/new_game.o"
 	.include "src/misc/rom4.o"
 	.include "src/field/fieldmap.o"
@@ -523,29 +510,7 @@ gScriptContestCategory: @ 203869C
 gScriptContestRank: @ 203869E
 	.space 0x2
 
-@ shop
-
-gUnknown_020386A0: @ 20386A0
-	.space 0x4
-
-gUnknown_020386A4: @ 20386A4
-	.space 0x4
-
-gUnknown_020386A8: @ 20386A8
-	.space 0x2
-
-gUnknown_020386AA: @ 20386AA
-	.space 0x7A
-
-gUnknown_02038724: @ 2038724
-	.space 0xC
-
-gUnknown_02038730: @ 2038730
-	.space 0x1
-
-gUnknown_02038731: @ 2038731
-	.space 0x3
-
+	.include "src/field/shop.o"
 	.include "src/field/money.o"
 
 @ record_mixing
@@ -668,12 +633,7 @@ gUnknown_0203927D: @ 203927D
 	.include "src/field/berry_tag_screen.o"
 	.include "src/engine/mystery_event_menu.o"
 	.include "src/engine/save_failed_screen.o"
-
-@ pokeblock_feed
-
-	.align 2
-gUnknown_02039350: @ 2039350
-	.space 0x8
+	.include "src/pokemon/pokeblock_feed.o"
 
 @ intro_credits_graphics
 
