@@ -55,10 +55,6 @@ extern u16 gUnknown_030041B8;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 word_2024E82;
-
-extern void * const gUnknown_081FAF4C[];
-extern const u8* const gBattleStringsTable[];
-
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gUnk_2009000[]; // won't match if I 'ewram' it
 extern bool8 gAffineAnimsDisabled;
@@ -70,6 +66,12 @@ extern u8 gBattleCommunication[];
 #define sEvoCursorPos        gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID   gBattleCommunication[2]
 
+extern const u8 gUnknown_08400C4A[];
+extern const u8 gUnknown_08400C60[];
+extern const u8 gUnknown_08400C8D[];
+extern void * const gUnknown_081FAF4C[];
+extern const u8* const gBattleStringsTable[];
+
 // this file's functions
 void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID);
 void Task_EvolutionScene(u8 taskID);
@@ -80,6 +82,16 @@ void HBlankCB_EvolutionScene(void);
 void CB2_EvolutionSceneUpdate(void);
 void CB2_TradeEvolutionSceneUpdate(void);
 void HBlankCB_TradeEvolutionScene(void);
+
+// const data
+static const u8 sUnknownShedinjaJpnString[] = _("ヌケニン");
+static const u8 sUnusedString0[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}");
+static const u8 sUnusedString1[] = _("▶\n ");
+static const u8 sUnusedString2[] = _("       \n▶");
+static const u8 sUnusedString3[] = _("       \n ");
+static const u8 sPadding[9] = {0};
+
+// code
 
 void CB2_BeginEvolutionScene(void)
 {
@@ -461,8 +473,6 @@ void CB2_TradeEvolutionSceneUpdate(void)
     RunTasks();
 }
 
-extern const u8 gUnknown_083F868C[];
-
 void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 {
     u32 data = 0;
@@ -499,13 +509,9 @@ void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
-                SetMonData(Shedinja, MON_DATA_NICKNAME, gUnknown_083F868C);
+                SetMonData(Shedinja, MON_DATA_NICKNAME, sUnknownShedinjaJpnString);
     }
 }
-
-extern const u8 gUnknown_08400C4A[];
-extern const u8 gUnknown_08400C60[];
-extern const u8 gUnknown_08400C8D[];
 
 void Task_EvolutionScene(u8 taskID)
 {
