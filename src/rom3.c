@@ -1060,7 +1060,7 @@ void EmitOpenBag(u8 a, u8 *b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void Emitcmd22(u8 a, u8 b, u8 c, u8 d, u8 *e)
+void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e)
 {
     int i;
 

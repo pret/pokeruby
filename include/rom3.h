@@ -32,7 +32,7 @@ void EmitPrintStringPlayerOnly(u8 a, u16 stringID);
 void Emitcmd18(u8 a, u8 b, u16 c);
 void Emitcmd20(u8 a, u8 b, u8 c, u8 *d);
 void EmitOpenBag(u8 a, u8 *b);
-void Emitcmd22(u8 a, u8 b, u8 c, u8 d, u8 *e);
+void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e);
 void Emitcmd23(u8 a);
 void EmitHealthBarUpdate(u8 a, u16 b);
 void EmitExpBarUpdate(u8 a, u8 b, u16 c);

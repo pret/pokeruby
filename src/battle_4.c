@@ -10205,7 +10205,7 @@ void sub_8022A3C(u8 unkown)
 {
     //BATTLE_STRUCT->unk16064[gActiveBank] = gBattlePartyID[gActiveBank];
     ewram[gActiveBank + 0x16064] = gBattlePartyID[gActiveBank];
-    Emitcmd22(0, 1, unkown, 0, BATTLE_STRUCT->unk1606C[gActiveBank]);
+    EmitChoosePokemon(0, 1, unkown, 0, BATTLE_STRUCT->unk1606C[gActiveBank]);
     MarkBufferBankForExecution(gActiveBank);
 }
 
@@ -11173,7 +11173,7 @@ _080231F8:\n\
     movs r0, 0\n\
     adds r1, r5, 0\n\
     movs r3, 0\n\
-    bl Emitcmd22\n\
+    bl EmitChoosePokemon\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
     ldr r0, [r6]\n\

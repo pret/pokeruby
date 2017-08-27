@@ -699,7 +699,7 @@ void EmitBallThrow(u8 a, u8 shakes);  //0xD
 //void EmitMoveAnimation(u8 a, u16 move, u8 turn, u16 power, s32 dmg, u8 happiness, void *disable_struct); //0xF
 void EmitPrintString(u8 a, u16 stringID);  //0x10
 //void EmitPrintStringPlayerOnly(u8 a, u16 stringID); //0x11
-void Emitcmd22(u8 a, u8 b, u8 c, u8 d, u8 *e); //0x16
+void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e); //0x16
 //void EmitHealthBarUpdate(u8 a, u16 b); //0x18; Had to declare the second arg as u16 because s16 wont match in atk0b
 //void EmitExpBarUpdate(u8 a, u8 b, u16 c); //0x19
 void EmitStatusIconUpdate(u8 a, u32 b, u32 c); //0x1A

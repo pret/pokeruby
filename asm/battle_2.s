@@ -573,7 +573,7 @@ _080127E0:
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x6
-	bl Emitcmd22
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012808: .4byte gActiveBank
@@ -624,7 +624,7 @@ _08012854:
 	movs r1, 0
 _0801286C:
 	movs r3, 0
-	bl Emitcmd22
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012874: .4byte gActionForBanks
@@ -643,7 +643,7 @@ _08012884:
 	movs r1, 0
 	movs r2, 0x6
 	movs r3, 0
-	bl Emitcmd22
+	bl EmitChoosePokemon
 _0801289E:
 	ldr r0, _080128A8 @ =gActiveBank
 	ldrb r0, [r0]
