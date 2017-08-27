@@ -466,7 +466,7 @@ SafariBufferExecCompleted: @ 812B7C0
 	movs r0, 0x2
 	movs r1, 0x4
 	mov r2, sp
-	bl dp01_prepare_buffer_wireless_probably
+	bl PrepareBufferDataTransferLink
 	ldr r1, _0812B810 @ =gBattleBufferA
 	ldrb r0, [r4]
 	lsls r0, 9
