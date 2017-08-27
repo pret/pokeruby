@@ -86,12 +86,12 @@ extern void oamt_set_x3A_32();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80105EC(struct Sprite *);
 extern s32 sub_803FC34(u16);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern void sub_80313A0(struct Sprite *);
 extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
-extern void sub_80318FC();
+extern void BattleLoadPlayerMonSprite();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
@@ -420,7 +420,7 @@ void sub_811E034(void)
 {
     if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
         gBattleBankFunc[gActiveBank] = sub_811E0A0;
     }
@@ -1111,7 +1111,7 @@ void LinkPartnerHandlecmd3(void)
 
 void LinkPartnerHandleLoadPokeSprite(void)
 {
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     GetMonSpriteTemplate_803C56C(
       GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
       GetBankIdentity(gActiveBank));
@@ -1131,7 +1131,7 @@ void LinkPartnerHandleSendOutPoke(void)
 {
     sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     sub_811F864(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattleBankFunc[gActiveBank] = sub_811E1BC;
 }
@@ -1181,7 +1181,7 @@ void sub_811FA5C(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -1214,7 +1214,7 @@ void LinkPartnerHandleTrainerThrow(void)
         xOffset = 0;
         gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
     }
-    sub_8031AF4(gender, gActiveBank);
+    LoadPlayerTrainerBankSprite(gender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gender, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -1247,7 +1247,7 @@ void LinkPartnerHandlecmd10(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4++;
     }
@@ -1322,7 +1322,7 @@ void sub_811FF30(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2 && !ewram17800[gActiveBank].unk0_3)
+        if (ewram17800[gActiveBank].substituteSprite && !ewram17800[gActiveBank].unk0_3)
         {
             ewram17800[gActiveBank].unk0_3 = 1;
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
@@ -1342,7 +1342,7 @@ void sub_811FF30(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBank].unk0_2) && r7 <= 1)
+            if ((ewram17800[gActiveBank].substituteSprite) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
                 ewram17800[gActiveBank].unk0_3 = 0;
@@ -1630,7 +1630,7 @@ void sub_812071C(u8 taskId)
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
         gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
     }
