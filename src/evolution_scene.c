@@ -54,7 +54,7 @@ extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B8;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
-extern u16 word_2024E82;
+extern u16 gMoveToLearn;
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gUnk_2009000[]; // won't match if I 'ewram' it
 extern bool8 gAffineAnimsDisabled;
@@ -99,19 +99,19 @@ void CB2_BeginEvolutionScene(void)
     RunTasks();
 }
 
-#define tState          data[0]
-#define tMonPtrHI       data[1]
-#define tMonPtrLO       data[2]
-#define tPreEvoSpecies  data[3]
-#define tPostEvoSpecies data[4]
-#define tCanStop        data[5] // in first fast data[5] only checks that
-#define tBits           data[5] // in the second task, it works as a bitfield
-#define tData6          data[6]
-#define tLearnMoveState data[8]
-#define tData9          data[9]
-#define tData10         data[10]
-#define tEvoWasStopped  data[11]
-#define tPartyID        data[12]
+#define tState              data[0]
+#define tMonPtrHI           data[1]
+#define tMonPtrLO           data[2]
+#define tPreEvoSpecies      data[3]
+#define tPostEvoSpecies     data[4]
+#define tCanStop            data[5] // in first fast data[5] only checks that
+#define tBits               data[5] // in the second task, it works as a bitfield
+#define tLearnsFirstMove    data[6]
+#define tLearnMoveState     data[8]
+#define tData9              data[9]
+#define tData10             data[10]
+#define tEvoWasStopped      data[11]
+#define tPartyID            data[12]
 
 #define TASK_BIT_CAN_STOP       0x1
 #define TASK_BIT_LEARN_MOVE     0x80
@@ -248,7 +248,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tMonPtrHI = (u32)(mon);
     gTasks[ID].tMonPtrLO = (u32)(mon) >> 0x10;
     gTasks[ID].tCanStop = canStopEvo;
-    gTasks[ID].tData6 = 1;
+    gTasks[ID].tLearnsFirstMove = TRUE;
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
@@ -448,7 +448,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gTasks[ID].tPostEvoSpecies = speciesToEvolve;
     gTasks[ID].tMonPtrHI = (u32)(mon);
     gTasks[ID].tMonPtrLO = (u32)(mon) >> 0x10;
-    gTasks[ID].tData6 = 1;
+    gTasks[ID].tLearnsFirstMove = TRUE;
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
@@ -638,14 +638,14 @@ void Task_EvolutionScene(u8 taskID)
     case 14: // check if it wants to learn a new move
         if (gUnknown_03004210.state == 0)
         {
-            var = sub_803B7C8(mon, gTasks[taskID].tData6);
+            var = MonTryLearningNewMove(mon, gTasks[taskID].tLearnsFirstMove);
             if (var != 0 && !gTasks[taskID].tEvoWasStopped)
             {
                 u8 text[20];
 
                 sub_8053E90();
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
-                gTasks[taskID].tData6 = 0;
+                gTasks[taskID].tLearnsFirstMove = FALSE;
                 gTasks[taskID].tLearnMoveState = 0;
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
@@ -705,12 +705,12 @@ void Task_EvolutionScene(u8 taskID)
             PlayFanfare(BGM_FANFA1);
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[3]);
             sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
-            gTasks[taskID].tData6 = 0x40;
+            gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
         break;
     case 20: // wait a bit and check if can learn another move
-        if (gUnknown_03004210.state == 0 && !IsSEPlaying() && --gTasks[taskID].tData6 == 0)
+        if (gUnknown_03004210.state == 0 && !IsSEPlaying() && --gTasks[taskID].tLearnsFirstMove == 0)
             gTasks[taskID].tState = 14;
         break;
     case 21: // try to learn a new move
@@ -797,7 +797,7 @@ void Task_EvolutionScene(u8 taskID)
             {
                 sub_809D9F0(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
-                            word_2024E82);
+                            gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -824,7 +824,7 @@ void Task_EvolutionScene(u8 taskID)
                         gBattleTextBuff2[3] = (move & 0xFF00) >> 8;
                         gBattleTextBuff2[4] = EOS;
                         RemoveMonPPBonus(mon, var);
-                        SetMonMoveSlot(mon, word_2024E82, var);
+                        SetMonMoveSlot(mon, gMoveToLearn, var);
                         StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[207]);
                         sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                         gTasks[taskID].tLearnMoveState++;
@@ -980,13 +980,13 @@ void Task_TradeEvolutionScene(u8 taskID)
     case 13:
         if (gUnknown_03004828->field_4.state == 0 && IsFanfareTaskInactive() == TRUE)
         {
-            var = sub_803B7C8(mon, gTasks[taskID].tData6);
+            var = MonTryLearningNewMove(mon, gTasks[taskID].tLearnsFirstMove);
             if (var != 0 && !gTasks[taskID].tEvoWasStopped)
             {
                 u8 text[20];
 
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
-                gTasks[taskID].tData6 = 0;
+                gTasks[taskID].tLearnsFirstMove = FALSE;
                 gTasks[taskID].tLearnMoveState = 0;
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
@@ -1019,12 +1019,12 @@ void Task_TradeEvolutionScene(u8 taskID)
             PlayFanfare(BGM_FANFA1);
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[3]);
             sub_8002EB0(&gUnknown_03004828->field_4, gDisplayedStringBattle, gUnknown_03004828->field_34, 2, 15);
-            gTasks[taskID].tData6 = 0x40;
+            gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
         break;
     case 16:
-        if (gUnknown_03004828->field_4.state == 0 && IsFanfareTaskInactive() == TRUE && --gTasks[taskID].tData6 == 0)
+        if (gUnknown_03004828->field_4.state == 0 && IsFanfareTaskInactive() == TRUE && --gTasks[taskID].tLearnsFirstMove == 0)
             gTasks[taskID].tState = 13;
         break;
     case 17:
@@ -1117,7 +1117,7 @@ void Task_TradeEvolutionScene(u8 taskID)
             {
                 sub_809D9F0(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
-                            word_2024E82);
+                            gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -1144,7 +1144,7 @@ void Task_TradeEvolutionScene(u8 taskID)
                         gBattleTextBuff2[3] = (move & 0xFF00) >> 8;
                         gBattleTextBuff2[4] = EOS;
                         RemoveMonPPBonus(mon, var);
-                        SetMonMoveSlot(mon, word_2024E82, var);
+                        SetMonMoveSlot(mon, gMoveToLearn, var);
                         StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[207]);
                         sub_8002EB0(&gUnknown_03004828->field_4, gDisplayedStringBattle, gUnknown_03004828->field_34, 2, 15);
                         gTasks[taskID].tLearnMoveState++;
@@ -1188,3 +1188,5 @@ void Task_TradeEvolutionScene(u8 taskID)
         break;
     }
 }
+
+

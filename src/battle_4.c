@@ -82,7 +82,7 @@ extern void (*gBattleMainFunc)(void);
 extern struct Window gUnknown_03004210;
 extern const u8 gUnknown_08400D7A[];
 extern u8 gPlayerPartyCount;
-extern u16 word_2024E82; //move to learn
+extern u16 gMoveToLearn; //move to learn
 extern const u8 gTrainerMoney[];
 extern u16 gRandomMove;
 extern u8* gBattleScriptsEffectsTable[];
@@ -129,7 +129,7 @@ u16 sub_803FBFC(u8 a);
 u8 GetBankByPlayerAI(u8 ID);
 void sub_8012258(u8);
 void sub_80157C4(u8 bank); //update sent pokes in battle
-//sub_803B7C8 teach poke a move
+//MonTryLearningNewMove teach poke a move
 u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
 void IncrementGameStat(u8 index);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
@@ -11460,9 +11460,9 @@ void atk59_learnmove_inbattle(void)
     u8* loc1 = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     u8* loc2 = BSScriptReadPtr(gBattlescriptCurrInstr + 5);
 
-    u16 ret = sub_803B7C8(&gPlayerParty[BATTLE_STRUCT->expGetterID], BSScriptRead8(gBattlescriptCurrInstr + 9));
+    u16 ret = MonTryLearningNewMove(&gPlayerParty[BATTLE_STRUCT->expGetterID], BSScriptRead8(gBattlescriptCurrInstr + 9));
     while (ret == 0xFFFE)
-        ret = sub_803B7C8(&gPlayerParty[BATTLE_STRUCT->expGetterID], 0);
+        ret = MonTryLearningNewMove(&gPlayerParty[BATTLE_STRUCT->expGetterID], 0);
 
     if (ret == 0)
     {
@@ -11549,7 +11549,7 @@ static void atk5A(void)
     case 2:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, word_2024E82);
+            sub_809D9F0(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
             BATTLE_STRUCT->atk5A_StateTracker++;
         }
         break;
@@ -11584,18 +11584,18 @@ static void atk5A(void)
                     }
                     ptr[0] = 0xFF;
                     RemoveMonPPBonus(&gPlayerParty[BATTLE_STRUCT->expGetterID], move_pos);
-                    SetMonMoveSlot(&gPlayerParty[BATTLE_STRUCT->expGetterID], word_2024E82, move_pos);
+                    SetMonMoveSlot(&gPlayerParty[BATTLE_STRUCT->expGetterID], gMoveToLearn, move_pos);
                     if (gBattlePartyID[0] == BATTLE_STRUCT->expGetterID && !(gBattleMons[0].status2 & STATUS2_TRANSFORMED)
                         && !(gDisableStructs[0].unk18_b & gBitTable[move_pos]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[0], move_pos);
-                        SetBattleMonMoveSlot(&gBattleMons[0], word_2024E82, move_pos);
+                        SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, move_pos);
                     }
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattlePartyID[2] == BATTLE_STRUCT->expGetterID && !(gBattleMons[2].status2 & STATUS2_TRANSFORMED)
                         && !(gDisableStructs[2].unk18_b & gBitTable[move_pos]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[2], move_pos);
-                        SetBattleMonMoveSlot(&gBattleMons[2], word_2024E82, move_pos);
+                        SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, move_pos);
                     }
                 }
             }
@@ -12653,8 +12653,8 @@ void sub_8024CEC(void)
 {
     gBattleTextBuff2[0] = 0xFD;
     gBattleTextBuff2[1] = 2;
-    gBattleTextBuff2[2] = (word_2024E82);
-    gBattleTextBuff2[3] = uBYTE1_16(word_2024E82);
+    gBattleTextBuff2[2] = (gMoveToLearn);
+    gBattleTextBuff2[3] = uBYTE1_16(gMoveToLearn);
     gBattleTextBuff2[4] = 0xFF;
 }
 
