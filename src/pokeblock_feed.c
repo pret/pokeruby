@@ -121,109 +121,109 @@ static const u8 sNatureToMonPokeblockAnim[][2] =
 static const s16 sMonPokeblockAnims[][10] =
 {
     // HARDY
-	{   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
-	{   0,   4,   0,  16,  24,   0,   0,   0,  12,   0},
-	{   0,   4,   0,  32,  32,   0,   0,   0,  16,   1},
+    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
+    {   0,   4,   0,  16,  24,   0,   0,   0,  12,   0},
+    {   0,   4,   0,  32,  32,   0,   0,   0,  16,   1},
 
-	// LONELY
-	{   0,   3,   6,   0,  48,   0,   0,   0,  24,   1},
+    // LONELY
+    {   0,   3,   6,   0,  48,   0,   0,   0,  24,   1},
 
-	// BRAVE
-	{  64,  16, -24,   0,  32,   0,   0,   0,   0,   1},
+    // BRAVE
+    {  64,  16, -24,   0,  32,   0,   0,   0,   0,   1},
 
-	// ADAMANT
-	{   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
-	{   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
-	{   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
-	{   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
-	{   0,   4, -16,   0,   4,   0,  16,   0,   0,   1},
+    // ADAMANT
+    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
+    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
+    {   0,   4,   8,   0,  16,   0,  -8,   0,   0,   0},
+    {   0,   0,   0,   0,  16,   0,   0,   0,   0,   0},
+    {   0,   4, -16,   0,   4,   0,  16,   0,   0,   1},
 
-	// NAUGHTY
-	{   0,   3,   6,   0,  12,   0,   0,   0,   6,   0},
-	{   0,   3,  -6,   0,  12,   0,   0,   0,   6,   0},
-	{   0,  16,  16,   0,  45,   1,   0,   0,   0,   1},
+    // NAUGHTY
+    {   0,   3,   6,   0,  12,   0,   0,   0,   6,   0},
+    {   0,   3,  -6,   0,  12,   0,   0,   0,   6,   0},
+    {   0,  16,  16,   0,  45,   1,   0,   0,   0,   1},
 
-	// BOLD
-	{   0,  16,   0,  24,  32,   0,   0,   0,  16,   0},
-	{   0,  16,   0,  23,  32,   0,   0,   0,  16,   1},
+    // BOLD
+    {   0,  16,   0,  24,  32,   0,   0,   0,  16,   0},
+    {   0,  16,   0,  23,  32,   0,   0,   0,  16,   1},
 
-	// DOCILE
-	{   0,   0,   0,   0,  80,   0,   0,   0,   0,   1},
+    // DOCILE
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   1},
 
-	// RELAXED
-	{   0,   2,   8,   0,  32,   0,   0,   0,   0,   0},
-	{   0,   2,  -8,   0,  32,   0,   0,   0,   0,   1},
+    // RELAXED
+    {   0,   2,   8,   0,  32,   0,   0,   0,   0,   0},
+    {   0,   2,  -8,   0,  32,   0,   0,   0,   0,   1},
 
-	// IMPISH
-	{   0,  32,   2,   1,  48,   1,   0,   0,  24,   1},
+    // IMPISH
+    {   0,  32,   2,   1,  48,   1,   0,   0,  24,   1},
 
-	// LAX
-	{   0,   2,  16,  16, 128,   0,   0,   0,   0,   1},
+    // LAX
+    {   0,   2,  16,  16, 128,   0,   0,   0,   0,   1},
 
-	// TIMID
-	{   0,   2,  -8,   0,  48,   0, -24,   0,   0,   0},
-	{   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-	{  64,  32,   2,   0,  36,   0,   0,   0,   0,   0},
-	{   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-	{   0,   2,   8,   0,  48,   0,  24,   0,   0,   1},
+    // TIMID
+    {   0,   2,  -8,   0,  48,   0, -24,   0,   0,   0},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
+    {  64,  32,   2,   0,  36,   0,   0,   0,   0,   0},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
+    {   0,   2,   8,   0,  48,   0,  24,   0,   0,   1},
 
-	// HASTY
-	{  64,  24,  16,   0,  32,   0,   0,   0,   0,   0},
-	{   0,  28,   2,   1,  32,   1,   0,   0,  16,   1},
+    // HASTY
+    {  64,  24,  16,   0,  32,   0,   0,   0,   0,   0},
+    {   0,  28,   2,   1,  32,   1,   0,   0,  16,   1},
 
-	// SERIOUS
-	{   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
+    // SERIOUS
+    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
 
-	// JOLLY
-	{  64,  16, -16,   2,  48,   0,   0,   0,  32,   1},
+    // JOLLY
+    {  64,  16, -16,   2,  48,   0,   0,   0,  32,   1},
 
-	// NAIVE
-	{   0,  12,  -8,   4,  24,   0,   8,   0,  12,   0},
-	{   0,  12,   8,   8,  24,   0, -16,   0,  12,   0},
-	{   0,  12,  -8,  16,  24,   0,  16,   0,  12,   0},
-	{   0,  12,   8,  28,  24,   0,  -8,   0,  12,   1},
+    // NAIVE
+    {   0,  12,  -8,   4,  24,   0,   8,   0,  12,   0},
+    {   0,  12,   8,   8,  24,   0, -16,   0,  12,   0},
+    {   0,  12,  -8,  16,  24,   0,  16,   0,  12,   0},
+    {   0,  12,   8,  28,  24,   0,  -8,   0,  12,   1},
 
-	// MODEST
-	{   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
-	{  64,  16,  -4,   0,  32,   0,   0,   0,   0,   0},
-	{   0,   0,   0,   0,   8,   0,   0,   0,   0,   1},
+    // MODEST
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   0},
+    {  64,  16,  -4,   0,  32,   0,   0,   0,   0,   0},
+    {   0,   0,   0,   0,   8,   0,   0,   0,   0,   1},
 
-	// MILD
-	{ 128,   4,   0,   8,  64,   0,   0,   0,   0,   1},
+    // MILD
+    { 128,   4,   0,   8,  64,   0,   0,   0,   0,   1},
 
-	// QUIET
-	{   0,   2,  16,   0,  48,   0,   0,   0,   0,   0},
-	{ 128,   2,  16,   0,  48,   0,   0,   0,   0,   1},
+    // QUIET
+    {   0,   2,  16,   0,  48,   0,   0,   0,   0,   0},
+    { 128,   2,  16,   0,  48,   0,   0,   0,   0,   1},
 
-	// BASHFUL
-	{   0,   2,  -4,   0,  48,   0, -48,   0,   0,   0},
-	{   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
-	{   0,   2,   8,   0,  24,   0,  48,   0,   0,   1},
+    // BASHFUL
+    {   0,   2,  -4,   0,  48,   0, -48,   0,   0,   0},
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
+    {   0,   2,   8,   0,  24,   0,  48,   0,   0,   1},
 
-	// RASH
-	{  64,   4,  64,  58,  52,   0, -88,   0,   0,   0},
-	{   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
-	{   0,  24,  80,   0,  32,   0,  88,   0,   0,   1},
+    // RASH
+    {  64,   4,  64,  58,  52,   0, -88,   0,   0,   0},
+    {   0,   0,   0,   0,  80,   0,   0,   0,   0,   0},
+    {   0,  24,  80,   0,  32,   0,  88,   0,   0,   1},
 
-	// CALM
-	{   0,   2,  16,   4,  64,   0,   0,   0,   0,   1},
+    // CALM
+    {   0,   2,  16,   4,  64,   0,   0,   0,   0,   1},
 
-	// GENTLE
-	{   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
+    // GENTLE
+    {   0,   0,   0,   0,  32,   0,   0,   0,   0,   1},
 
-	// SASSY
-	{   0,   0,   0,   0,  42,   0,   0,   0,   0,   1},
+    // SASSY
+    {   0,   0,   0,   0,  42,   0,   0,   0,   0,   1},
 
-	// CAREFUL
-	{   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
-	{   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
-	{   0,   4,   0,  12,  24,   0,   0,   0,  12,   0},
-	{   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
-	{   0,   4,   0,   4,  24,   0,   0,   0,  12,   1},
+    // CAREFUL
+    {   0,   4,   0,   8,  24,   0,   0,   0,  12,   0},
+    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
+    {   0,   4,   0,  12,  24,   0,   0,   0,  12,   0},
+    {   0,   0,   0,   0,  12,   0,   0,   0,   0,   0},
+    {   0,   4,   0,   4,  24,   0,   0,   0,  12,   1},
 
-	// QUIRKY
-	{   0,   4,  16,  12,  64,   0,   0,   0,   0,   0},
-	{   0,  -4,  16,  12,  64,   0,   0,   0,   0,   1},
+    // QUIRKY
+    {   0,   4,  16,  12,  64,   0,   0,   0,   0,   0},
+    {   0,  -4,  16,  12,  64,   0,   0,   0,   0,   1},
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411E90[] =
@@ -251,130 +251,130 @@ static const union AffineAnimCmd sSpriteAffineAnim_8411EC0[] =
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411EE8[] =
 {
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F08[] =
 {
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 16),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F30[] =
 {
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F50[] =
 {
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F78[] =
 {
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411F98[] =
 {
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 8),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411FC0[] =
 {
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 4),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 4),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8411FE0[] =
 {
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 4),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 24),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 4),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8412008[] =
 {
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 2),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 2),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8412028[] =
 {
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 2),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 24),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 2),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd *const sSpriteAffineAnimTable_8412050[] =
 {
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411EA0,
-	sSpriteAffineAnim_8411EE8,
-	sSpriteAffineAnim_8411F30,
-	sSpriteAffineAnim_8411F78,
-	sSpriteAffineAnim_8411FC0,
-	sSpriteAffineAnim_8412008,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411EC0,
-	sSpriteAffineAnim_8411F08,
-	sSpriteAffineAnim_8411F50,
-	sSpriteAffineAnim_8411F98,
-	sSpriteAffineAnim_8411FE0,
-	sSpriteAffineAnim_8412028,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
-	sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411EA0,
+    sSpriteAffineAnim_8411EE8,
+    sSpriteAffineAnim_8411F30,
+    sSpriteAffineAnim_8411F78,
+    sSpriteAffineAnim_8411FC0,
+    sSpriteAffineAnim_8412008,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411EC0,
+    sSpriteAffineAnim_8411F08,
+    sSpriteAffineAnim_8411F50,
+    sSpriteAffineAnim_8411F98,
+    sSpriteAffineAnim_8411FE0,
+    sSpriteAffineAnim_8412028,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
+    sSpriteAffineAnim_8411E90,
 };
 
 static const u8* const sPokeblocksPals[] =
 {
     gPokeblockRed_Pal,
-	gPokeblockBlue_Pal,
-	gPokeblockPink_Pal,
-	gPokeblockGreen_Pal,
-	gPokeblockYellow_Pal,
-	gPokeblockPurple_Pal,
-	gPokeblockIndigo_Pal,
-	gPokeblockBrown_Pal,
-	gPokeblockLiteBlue_Pal,
-	gPokeblockOlive_Pal,
-	gPokeblockGray_Pal,
-	gPokeblockBlack_Pal,
-	gPokeblockWhite_Pal,
-	gPokeblockGold_Pal
+    gPokeblockBlue_Pal,
+    gPokeblockPink_Pal,
+    gPokeblockGreen_Pal,
+    gPokeblockYellow_Pal,
+    gPokeblockPurple_Pal,
+    gPokeblockIndigo_Pal,
+    gPokeblockBrown_Pal,
+    gPokeblockLiteBlue_Pal,
+    gPokeblockOlive_Pal,
+    gPokeblockGray_Pal,
+    gPokeblockBlack_Pal,
+    gPokeblockWhite_Pal,
+    gPokeblockGold_Pal
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
@@ -391,31 +391,31 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_84120EC[] =
 static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
-	AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
-	AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_END
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd *const sSpriteAffineAnimTable_84121A0[] =
@@ -464,8 +464,8 @@ static const union AnimCmd *const sThrownPokeblockAnimTable[] =
 static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-	AFFINEANIMCMD_FRAME(-8, -8, 0, 1),
-	AFFINEANIMCMD_JUMP(1)
+    AFFINEANIMCMD_FRAME(-8, -8, 0, 1),
+    AFFINEANIMCMD_JUMP(1)
 };
 
 static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
