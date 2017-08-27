@@ -52,7 +52,7 @@ extern u8 gUnknown_0300434C[];
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern u8 GetBankIdentity(u8);
-extern void BattleLoadOpponentMonSprite(struct Pokemon *, u8);
+extern void sub_8031794(struct Pokemon *, u8);
 extern void sub_8037A74(void);
 extern void sub_8032984(u8, u16);
 extern void sub_8037E30(void);
@@ -98,7 +98,9 @@ extern u8 sub_8078874();
 extern u8 move_anim_start_t3();
 extern void sub_8037FD8(void);
 extern void sub_8037F34(void);
-extern void dp01_tbl4_exec_completed(void);
+extern void LinkOpponentBufferExecCompleted(void);
+
+// this file's functions
 
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8, u8 *);
 void sub_8038900(u8);
@@ -107,6 +109,130 @@ void sub_8039648(void);
 void sub_8039B64(void);
 void sub_803A2C4(u8);
 void sub_803A4E0(void);
+
+void LinkOpponentHandleGetAttributes(void);
+void LinkOpponentHandlecmd1(void);
+void LinkOpponentHandleSetAttributes(void);
+void LinkOpponentHandlecmd3(void);
+void LinkOpponentHandleLoadPokeSprite(void);
+void LinkOpponentHandleSendOutPoke(void);
+void LinkOpponentHandleReturnPokeToBall(void);
+void LinkOpponentHandleTrainerThrow(void);
+void LinkOpponentHandleTrainerSlide(void);
+void LinkOpponentHandleTrainerSlideBack(void);
+void LinkOpponentHandlecmd10(void);
+void LinkOpponentHandlecmd11(void);
+void LinkOpponentHandlecmd12(void);
+void LinkOpponentHandleBallThrow(void);
+void LinkOpponentHandlePuase(void);
+void LinkOpponentHandleMoveAnimation(void);
+void LinkOpponentHandlePrintString(void);
+void LinkOpponentHandlePrintStringPlayerOnly(void);
+void LinkOpponentHandlecmd18(void);
+void LinkOpponentHandlecmd19(void);
+void LinkOpponentHandlecmd20(void);
+void LinkOpponentHandleOpenBag(void);
+void LinkOpponentHandlecmd22(void);
+void LinkOpponentHandlecmd23(void);
+void LinkOpponentHandleHealthBarUpdate(void);
+void LinkOpponentHandleExpBarUpdate(void);
+void LinkOpponentHandleStatusIconUpdate(void);
+void LinkOpponentHandleStatusAnimation(void);
+void LinkOpponentHandleStatusXor(void);
+void LinkOpponentHandlecmd29(void);
+void LinkOpponentHandleDMATransfer(void);
+void LinkOpponentHandlecmd31(void);
+void LinkOpponentHandlecmd32(void);
+void LinkOpponentHandlecmd33(void);
+void LinkOpponentHandlecmd34(void);
+void LinkOpponentHandlecmd35(void);
+void LinkOpponentHandlecmd36(void);
+void LinkOpponentHandlecmd37(void);
+void LinkOpponentHandlecmd38(void);
+void LinkOpponentHandlecmd39(void);
+void LinkOpponentHandlecmd40(void);
+void LinkOpponentHandleHitAnimation(void);
+void LinkOpponentHandlecmd42(void);
+void LinkOpponentHandleEffectivenessSound(void);
+void LinkOpponentHandlecmd44(void);
+void LinkOpponentHandleFaintingCry(void);
+void LinkOpponentHandleIntroSlide(void);
+void LinkOpponentHandleTrainerBallThrow(void);
+void LinkOpponentHandlecmd48(void);
+void LinkOpponentHandlecmd49(void);
+void LinkOpponentHandlecmd50(void);
+void LinkOpponentHandleSpriteInvisibility(void);
+void LinkOpponentHandleBattleAnimation(void);
+void LinkOpponentHandleLinkStandbyMsg(void);
+void LinkOpponentHandleResetActionMoveSelection(void);
+void LinkOpponentHandlecmd55(void);
+void LinkOpponentHandlecmd56(void);
+
+// const data
+
+typedef void (*BattleBufferCmd) (void);
+const BattleBufferCmd gLinkOpponentBufferCommands[] =
+{
+    LinkOpponentHandleGetAttributes,
+	LinkOpponentHandlecmd1,
+	LinkOpponentHandleSetAttributes,
+	LinkOpponentHandlecmd3,
+	LinkOpponentHandleLoadPokeSprite,
+	LinkOpponentHandleSendOutPoke,
+	LinkOpponentHandleReturnPokeToBall,
+	LinkOpponentHandleTrainerThrow,
+	LinkOpponentHandleTrainerSlide,
+	LinkOpponentHandleTrainerSlideBack,
+	LinkOpponentHandlecmd10,
+	LinkOpponentHandlecmd11,
+	LinkOpponentHandlecmd12,
+	LinkOpponentHandleBallThrow,
+	LinkOpponentHandlePuase,
+	LinkOpponentHandleMoveAnimation,
+	LinkOpponentHandlePrintString,
+	LinkOpponentHandlePrintStringPlayerOnly,
+	LinkOpponentHandlecmd18,
+	LinkOpponentHandlecmd19,
+	LinkOpponentHandlecmd20,
+	LinkOpponentHandleOpenBag,
+	LinkOpponentHandlecmd22,
+	LinkOpponentHandlecmd23,
+	LinkOpponentHandleHealthBarUpdate,
+	LinkOpponentHandleExpBarUpdate,
+	LinkOpponentHandleStatusIconUpdate,
+	LinkOpponentHandleStatusAnimation,
+	LinkOpponentHandleStatusXor,
+	LinkOpponentHandlecmd29,
+	LinkOpponentHandleDMATransfer,
+	LinkOpponentHandlecmd31,
+	LinkOpponentHandlecmd32,
+	LinkOpponentHandlecmd33,
+	LinkOpponentHandlecmd34,
+	LinkOpponentHandlecmd35,
+	LinkOpponentHandlecmd36,
+	LinkOpponentHandlecmd37,
+	LinkOpponentHandlecmd38,
+	LinkOpponentHandlecmd39,
+	LinkOpponentHandlecmd40,
+	LinkOpponentHandleHitAnimation,
+	LinkOpponentHandlecmd42,
+	LinkOpponentHandleEffectivenessSound,
+	LinkOpponentHandlecmd44,
+	LinkOpponentHandleFaintingCry,
+	LinkOpponentHandleIntroSlide,
+	LinkOpponentHandleTrainerBallThrow,
+	LinkOpponentHandlecmd48,
+	LinkOpponentHandlecmd49,
+	LinkOpponentHandlecmd50,
+	LinkOpponentHandleSpriteInvisibility,
+	LinkOpponentHandleBattleAnimation,
+	LinkOpponentHandleLinkStandbyMsg,
+	LinkOpponentHandleResetActionMoveSelection,
+	LinkOpponentHandlecmd55,
+	LinkOpponentHandlecmd56
+};
+
+// code
 
 void LinkOpponentHandleGetAttributes(void)
 {
@@ -129,8 +255,8 @@ void LinkOpponentHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, buffer);
-    dp01_tbl4_exec_completed();
+    Emitcmd29(1, r6, buffer);
+    LinkOpponentBufferExecCompleted();
 }
 
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
@@ -438,12 +564,12 @@ u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
     return size;
 }
 
-void sub_803889C(void)
+void LinkOpponentHandlecmd1(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_80388A8(void)
+void LinkOpponentHandleSetAttributes(void)
 {
     u8 i;
     u8 r4;
@@ -462,7 +588,7 @@ void sub_80388A8(void)
             r4 >>= 1;
         }
     }
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
 void sub_8038900(u8 a)
@@ -681,7 +807,7 @@ void sub_8038900(u8 a)
     }
 }
 
-void sub_8039220(void)
+void LinkOpponentHandlecmd3(void)
 {
     u8 *dst;
     u8 i;
@@ -689,14 +815,14 @@ void sub_8039220(void)
     dst = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
         dst[i] = gBattleBufferA[gActiveBank][3 + i];
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039294(void)
+void LinkOpponentHandleLoadPokeSprite(void)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    sub_8031794(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -711,7 +837,7 @@ void sub_8039294(void)
     gBattleBankFunc[gActiveBank] = sub_8037A74;
 }
 
-void sub_80393E4(void)
+void LinkOpponentHandleSendOutPoke(void)
 {
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
     sub_8039430(gActiveBank, gBattleBufferA[gActiveBank][2]);
@@ -726,7 +852,7 @@ void sub_8039430(u8 a, u8 b)
     gBattlePartyID[a] = gBattleBufferA[a][1];
     species = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_SPECIES);
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
+    sub_8031794(&gEnemyParty[gBattlePartyID[a]], a);
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
     gObjectBankIDs[a] = CreateSprite(
       &gUnknown_02024E8C,
@@ -743,7 +869,7 @@ void sub_8039430(u8 a, u8 b)
     gSprites[gUnknown_0300434C[a]].data0 = sub_8046400(0, 0xFE);
 }
 
-void sub_80395B4(void)
+void LinkOpponentHandleReturnPokeToBall(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 0)
     {
@@ -756,7 +882,7 @@ void sub_80395B4(void)
         DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
         sub_8032A08(gActiveBank);
         sub_8043DB0(gHealthboxIDs[gActiveBank]);
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
 }
 
@@ -765,7 +891,7 @@ void sub_8039648(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].substituteSprite)
+        if (ewram17800[gActiveBank].unk0_2)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -780,7 +906,7 @@ void sub_8039648(void)
     }
 }
 
-void sub_80396D0(void)
+void LinkOpponentHandleTrainerThrow(void)
 {
     s16 xOffset;
     u32 gender;
@@ -814,12 +940,12 @@ void sub_80396D0(void)
     gBattleBankFunc[gActiveBank] = sub_803757C;
 }
 
-void sub_80398A4(void)
+void LinkOpponentHandleTrainerSlide(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_80398B0(void)
+void LinkOpponentHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
     gSprites[gObjectBankIDs[gActiveBank]].data0 = 35;
@@ -830,11 +956,11 @@ void sub_80398B0(void)
     gBattleBankFunc[gActiveBank] = sub_80375B4;
 }
 
-void sub_803995C(void)
+void LinkOpponentHandlecmd10(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].substituteSprite)
+        if (ewram17800[gActiveBank].unk0_2)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4++;
     }
@@ -847,27 +973,27 @@ void sub_803995C(void)
     }
 }
 
-void sub_8039A00(void)
+void LinkOpponentHandlecmd11(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039A0C(void)
+void LinkOpponentHandlecmd12(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039A18(void)
+void LinkOpponentHandleBallThrow(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039A24(void)
+void LinkOpponentHandlePuase(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039A30(void)
+void LinkOpponentHandleMoveAnimation(void)
 {
     if (!mplay_80342A4(gActiveBank))
     {
@@ -890,7 +1016,7 @@ void sub_8039A30(void)
         // Dead code. sub_8031720 always returns 0.
         if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
         {
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         }
         else
         {
@@ -909,7 +1035,7 @@ void sub_8039B64(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].substituteSprite && !ewram17800[gActiveBank].unk0_3)
+        if (ewram17800[gActiveBank].unk0_2 && !ewram17800[gActiveBank].unk0_3)
         {
             ewram17800[gActiveBank].unk0_3 = 1;
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
@@ -929,7 +1055,7 @@ void sub_8039B64(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBank].substituteSprite) && r7 <= 1)
+            if ((ewram17800[gActiveBank].unk0_2) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
                 ewram17800[gActiveBank].unk0_3 = 0;
@@ -945,13 +1071,13 @@ void sub_8039B64(void)
               gActiveBank,
               gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
             ewram17810[gActiveBank].unk4 = 0;
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         }
         break;
     }
 }
 
-void sub_8039CC8(void)
+void LinkOpponentHandlePrintString(void)
 {
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
@@ -960,42 +1086,42 @@ void sub_8039CC8(void)
     gBattleBankFunc[gActiveBank] = sub_8037C2C;
 }
 
-void sub_8039D2C(void)
+void LinkOpponentHandlePrintStringPlayerOnly(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D38(void)
+void LinkOpponentHandlecmd18(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D44(void)
+void LinkOpponentHandlecmd19(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D50(void)
+void LinkOpponentHandlecmd20(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D5C(void)
+void LinkOpponentHandleOpenBag(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D68(void)
+void LinkOpponentHandlecmd22(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D74(void)
+void LinkOpponentHandlecmd23(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039D80(void)
+void LinkOpponentHandleHealthBarUpdate(void)
 {
     s16 r7;
 
@@ -1017,12 +1143,12 @@ void sub_8039D80(void)
     gBattleBankFunc[gActiveBank] = sub_8037B24;
 }
 
-void sub_8039E70(void)
+void LinkOpponentHandleExpBarUpdate(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039E7C(void)
+void LinkOpponentHandleStatusIconUpdate(void)
 {
     if (mplay_80342A4(gActiveBank) == 0)
     {
@@ -1032,7 +1158,7 @@ void sub_8039E7C(void)
     }
 }
 
-void sub_8039EF0(void)
+void LinkOpponentHandleStatusAnimation(void)
 {
     if (mplay_80342A4(gActiveBank) == 0)
     {
@@ -1046,80 +1172,80 @@ void sub_8039EF0(void)
     }
 }
 
-void sub_8039F58(void)
+void LinkOpponentHandleStatusXor(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039F64(void)
+void LinkOpponentHandlecmd29(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039F70(void)
+void LinkOpponentHandleDMATransfer(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039F7C(void)
+void LinkOpponentHandlecmd31(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039F88(void)
+void LinkOpponentHandlecmd32(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039F94(void)
+void LinkOpponentHandlecmd33(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039FA0(void)
+void LinkOpponentHandlecmd34(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039FAC(void)
+void LinkOpponentHandlecmd35(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039FB8(void)
+void LinkOpponentHandlecmd36(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039FC4(void)
+void LinkOpponentHandlecmd37(void)
 {
     gUnknown_020238C8.unk0_0 = 0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_8039FE0(void)
+void LinkOpponentHandlecmd38(void)
 {
     gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A018(void)
+void LinkOpponentHandlecmd39(void)
 {
     gUnknown_020238C8.unk0_7 = 0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A030(void)
+void LinkOpponentHandlecmd40(void)
 {
     gUnknown_020238C8.unk0_7 ^= 1;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void dp01t_29_4_blink(void)
+void LinkOpponentHandleHitAnimation(void)
 {
     if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
     {
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
     else
     {
@@ -1130,12 +1256,12 @@ void dp01t_29_4_blink(void)
     }
 }
 
-void sub_803A0C8(void)
+void LinkOpponentHandlecmd42(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A0D4(void)
+void LinkOpponentHandleEffectivenessSound(void)
 {
     s8 pan;
 
@@ -1144,31 +1270,31 @@ void sub_803A0D4(void)
     else
         pan = 63;
     PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A118(void)
+void LinkOpponentHandlecmd44(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A148(void)
+void LinkOpponentHandleFaintingCry(void)
 {
     PlayCry3(
       GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
       25, 5);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void dp01t_2E_4_battle_intro(void)
+void LinkOpponentHandleIntroSlide(void)
 {
     sub_80E43C0(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A1B8(void)
+void LinkOpponentHandleTrainerBallThrow(void)
 {
     u8 taskId;
 
@@ -1219,11 +1345,11 @@ void sub_803A3A8(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_803A3DC(void)
+void LinkOpponentHandlecmd48(void)
 {
     if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
     {
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
         return;
     }
 
@@ -1256,33 +1382,33 @@ void sub_803A4E0(void)
     if (ewram17810[gActiveBank].unk5++ >= 93)
     {
         ewram17810[gActiveBank].unk5 = 0;
-        dp01_tbl4_exec_completed();
+        LinkOpponentBufferExecCompleted();
     }
 }
 
-void sub_803A520(void)
+void LinkOpponentHandlecmd49(void)
 {
     if (ewram17810[gActiveBank].unk0_0)
         gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A56C(void)
+void LinkOpponentHandlecmd50(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A578(void)
+void LinkOpponentHandleSpriteInvisibility(void)
 {
     if (sub_8078874(gActiveBank) != 0)
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);
     }
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void bx_exec_buffer_A_ch0_tbl4(void)
+void LinkOpponentHandleBattleAnimation(void)
 {
     if (mplay_80342A4(gActiveBank) == 0)
     {
@@ -1290,23 +1416,23 @@ void bx_exec_buffer_A_ch0_tbl4(void)
         u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
         if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
-            dp01_tbl4_exec_completed();
+            LinkOpponentBufferExecCompleted();
         else
             gBattleBankFunc[gActiveBank] = sub_8037FD8;
     }
 }
 
-void sub_803A640(void)
+void LinkOpponentHandleLinkStandbyMsg(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A64C(void)
+void LinkOpponentHandleResetActionMoveSelection(void)
 {
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
 }
 
-void sub_803A658(void)
+void LinkOpponentHandlecmd55(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 3)
         gBattleOutcome = gBattleBufferA[gActiveBank][1];
@@ -1314,10 +1440,10 @@ void sub_803A658(void)
         gBattleOutcome = gBattleBufferA[gActiveBank][1] ^ 3;
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
-    dp01_tbl4_exec_completed();
+    LinkOpponentBufferExecCompleted();
     gBattleBankFunc[gActiveBank] = sub_8037F34;
 }
 
-void nullsub_48(void)
+void LinkOpponentHandlecmd56(void)
 {
 }

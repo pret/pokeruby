@@ -689,17 +689,17 @@ extern u8 gBattleTextBuff1[];
 
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
-void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c); //0x1
+void Emitcmd1(u8 a, u8 b, u8 c); //0x1
 void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
-void EmitSwitchInAnim(u8 a, u8 b, u8 c); //0x5
+void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
-void EmitFaintAnimation(u8 a);  //0xA
-void EmitBallThrowAnim(u8 a, u8 shakes);  //0xD
+void Emitcmd10(u8 a);  //0xA
+void EmitBallThrow(u8 a, u8 shakes);  //0xD
 //void EmitMoveAnimation(u8 a, u16 move, u8 turn, u16 power, s32 dmg, u8 happiness, void *disable_struct); //0xF
 void EmitPrintString(u8 a, u16 stringID);  //0x10
 //void EmitPrintStringPlayerOnly(u8 a, u16 stringID); //0x11
-void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e); //0x16
+void Emitcmd22(u8 a, u8 b, u8 c, u8 d, u8 *e); //0x16
 //void EmitHealthBarUpdate(u8 a, u16 b); //0x18; Had to declare the second arg as u16 because s16 wont match in atk0b
 //void EmitExpBarUpdate(u8 a, u8 b, u16 c); //0x19
 void EmitStatusIconUpdate(u8 a, u32 b, u32 c); //0x1A
@@ -707,15 +707,15 @@ void EmitStatusAnimation(u8 a, u8 b, u32 c); //0x1B
 void EmitStatusXor(u8 a, u8 b); //0x1C
 void EmitHitAnimation(u8 a); //0x29
 void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
-void EmitPlaySound(u8 a, u16 sound);    //0x2C
+void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
-void EmitBattleIntroSlide(u8 a, u8 b); //0x2E
-void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c); //0x30
-void dp01_build_cmdbuf_x31_31_31_31(u8 a);  //0x31
+void EmitIntroSlide(u8 a, u8 b); //0x2E
+void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
+void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34
 void EmitResetActionMoveSelection(u8 a, u8 b); //0x36
-void dp01_build_cmdbuf_x37_a(u8 a, u8 b); //0x37
+void Emitcmd55(u8 a, u8 b); //0x37
 
 #define REQUEST_ALL_BATTLE      0x0
 #define REQUEST_SPECIES_BATTLE  0x1
