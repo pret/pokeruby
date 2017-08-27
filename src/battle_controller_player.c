@@ -346,7 +346,7 @@ void PlayerBufferExecCompleted(void)
     {
         u8 playerId = GetMultiplayerId();
 
-        dp01_prepare_buffer_wireless_probably(2, 4, &playerId);
+        PrepareBufferDataTransferLink(2, 4, &playerId);
         gBattleBufferA[gActiveBank][0] = 0x38;
     }
     else

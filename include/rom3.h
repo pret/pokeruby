@@ -10,7 +10,7 @@ void sub_800B9A8(void);
 void sub_800BA78(void);
 void sub_800BD54(void);
 void sub_800BF28(void);
-void dp01_prepare_buffer_wireless_probably(u8 a, u16, u8 *c);
+void PrepareBufferDataTransferLink(u8 a, u16, u8 *c);
 void sub_800C1A8(u8);
 void sub_800C35C(void);
 void sub_800C47C(u8);

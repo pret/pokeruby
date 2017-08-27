@@ -501,7 +501,7 @@ void LinkPartnerBufferExecCompleted(void)
     if (gBattleTypeFlags & 2)
     {
         multiplayerId = GetMultiplayerId();
-        dp01_prepare_buffer_wireless_probably(2, 4, &multiplayerId);
+        PrepareBufferDataTransferLink(2, 4, &multiplayerId);
         gBattleBufferA[gActiveBank][0] = 0x38;
     }
     else
