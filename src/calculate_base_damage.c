@@ -93,33 +93,30 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             && FlagGet(BADGE01_GET)
             && !GetBankSide(bankAtk))
             attack = (110 * attack) / 100;
-
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-        {
-            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                && gTrainerBattleOpponent != 1024
-                && FlagGet(BADGE05_GET)
-                && !GetBankSide(bankDef))
-                defense = (110 * defense) / 100;
-
-            if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-            {
-                if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                    && gTrainerBattleOpponent != 1024
-                    && FlagGet(BADGE07_GET)
-                    && !GetBankSide(bankAtk))
-                    spAttack = (110 * spAttack) / 100;
-
-                if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-                {
-                    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        && gTrainerBattleOpponent != 1024
-                        && FlagGet(BADGE07_GET)
-                        && !GetBankSide(bankDef))
-                        spDefense = (110 * spDefense) / 100;
-                }
-            }
-        }
+    }
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
+    {
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            && gTrainerBattleOpponent != 1024
+            && FlagGet(BADGE05_GET)
+            && !GetBankSide(bankDef))
+            defense = (110 * defense) / 100;
+    }
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
+    {
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            && gTrainerBattleOpponent != 1024
+            && FlagGet(BADGE07_GET)
+            && !GetBankSide(bankAtk))
+            spAttack = (110 * spAttack) / 100;
+    }
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
+    {
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            && gTrainerBattleOpponent != 1024
+            && FlagGet(BADGE07_GET)
+            && !GetBankSide(bankDef))
+            spDefense = (110 * spDefense) / 100;
     }
 
     for (i = 0; i < 17; i++)
